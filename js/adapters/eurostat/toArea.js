@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _ChartConfigFn = require("../../charts/ChartConfigFn");
 
 var _EuroStatFn = require("./EuroStatFn");
 
@@ -23,7 +21,7 @@ const toArea = {
       min
     } = (0, _EuroStatFn.crData)(json, option),
           _type = (seriaType || '').toLowerCase() || 'spline',
-          config = _ChartConfig.default.crAreaConfig({
+          config = (0, _ChartConfigFn.crAreaConfig)({
       seriaType: _type,
       seriaColor,
       seriaWidth
@@ -53,7 +51,7 @@ const toArea = {
       seriaColor,
       seriaWidth
     } = option;
-    return _ChartConfig.default.crSeria({
+    return (0, _ChartConfigFn.crSeriaConfig)({
       seriaType,
       seriaColor,
       seriaWidth,

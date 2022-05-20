@@ -1,4 +1,4 @@
-import {  
+import {
   findMinY,
   findMaxY,
   filterTrimZero
@@ -11,7 +11,12 @@ import {
   calcMinY,
   setYToPoints
 } from './ChartFn';
-import ChartConfig from './ChartConfig';
+import {
+  crAreaConfig
+} from './ChartConfigFn';
+import {
+  crTreeMapConfig
+} from './TreeMapConfigFn';
 import Factory from './ChartFactory';
 
 import SeriaBuilder from './SeriaBuilder';
@@ -22,40 +27,34 @@ const {
   fSubtitle,
   fTooltip
 } = Chart;
-const {
-  crAreaConfig,
-  crTreeMapConfig
-} = ChartConfig;
 
-const C = {
-  CATEGORIES_X_AXIS: {
-    type: "category",
-    categories: [],
-    opposite: false,
-    labels: {
-      y: 18
-    },
-    crosshair: undefined,
-    tickColor: "gray",
-    tickWidth: 3,
-    tickLength: 7,
-    tickPosition: "outside",
-    gridLineWidth: 0
-  },
-
-  CATEGORIES_Y_AXIS: {
-    lineWidth: 0,
-    tickLength: 0,
-    startOnTick: true,
-    endOnTick: true,
-    minPadding: 0.05,
-    maxPadding: 0.05,
-    plotLines: null,
-    labels: {
-      x: 3
-    }
+const CATEGORIES_X_AXIS = {
+  type: "category",
+  categories: [],
+  opposite: false,
+  crosshair: void 0,
+  tickColor: "gray",
+  tickWidth: 3,
+  tickLength: 7,
+  tickPosition: "outside",
+  gridLineWidth: 0,
+  labels: {
+    y: 18
   }
-};
+}
+, CATEGORIES_Y_AXIS = {
+  lineWidth: 0,
+  tickLength: 0,
+  startOnTick: true,
+  endOnTick: true,
+  minPadding: 0.05,
+  maxPadding: 0.05,
+  plotLines: null,
+  labels: {
+    x: 3
+  }
+}
+
 
 const _isObj = obj => obj && typeof obj === 'object'
 , _isStr = str => typeof str === 'string'
@@ -127,9 +126,9 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
   categoryConfig(categories=[]){
     this.config = crAreaConfig({ spacingTop: 25 })
-    const xAxis = {...C.CATEGORIES_X_AXIS, ...{ categories }}
+    const xAxis = {...CATEGORIES_X_AXIS, ...{ categories }}
     return this.add('xAxis', xAxis)
-      .add('yAxis', C.CATEGORIES_Y_AXIS);
+      .add('yAxis', CATEGORIES_Y_AXIS);
   },
   barOrColumnConfig(type, categories=[], option){
     const _crConfig = type === 'BAR'

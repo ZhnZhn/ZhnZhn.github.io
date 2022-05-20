@@ -1,7 +1,10 @@
 import { findMinY } from '../math/seriaFn';
 
 import Chart from './Chart';
-import ChartConfig from './ChartConfig';
+import {
+  crSeriaConfig,
+  getSeriaColorByIndex
+} from './ChartConfigFn';
 import { CONFIG_TREE_MAP } from './TreeMapConfigFn';
 
 const CONFIG_SERIA = {
@@ -42,11 +45,11 @@ const SeriaBuilder = {
 
   initSeria(option){
     this._type = 'S'
-    this.config = ChartConfig.crSeria(option)
+    this.config = crSeriaConfig(option)
     return this;
   },
   splineSeria(option){
-    return this.initSeria({ ...CONFIG_SERIA, ...option });
+    return this.initSeria({...CONFIG_SERIA, ...option});
   },
   _seria(CONFIG, tooltip, option){
     this._type = 'S'
@@ -83,7 +86,7 @@ const SeriaBuilder = {
     const _legend = [];
     points.forEach((data, index) => {
       const is = index<maxVisible ? true : false
-          , color = ChartConfig.getColor(index)
+          , color = getSeriaColorByIndex(index)
           , { seriaName } = data;
       _legend.push(_crLegendItem({
         index, color, name: seriaName, is

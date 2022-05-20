@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
@@ -9,7 +7,7 @@ var _tsIndicators = require("../math/tsIndicators");
 
 var _IndicatorConfigFn = require("./IndicatorConfigFn");
 
-var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
+var _ChartConfigFn = require("./ChartConfigFn");
 
 const _getD12 = chart => {
   const series = chart.series,
@@ -73,7 +71,7 @@ const _fCategoryCalc = (calc, name) => (chart, rc) => {
 };
 
 const _addToChartSeria = (chart, option) => {
-  const seria = _ChartConfig.default.crSeria(option),
+  const seria = (0, _ChartConfigFn.crSeriaConfig)(option),
         _seriaIns = chart.addSeries(seria, true, true);
 
   return (_seriaIns || {}).color;

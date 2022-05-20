@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _ChartConfigFn = require("../../charts/ChartConfigFn");
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
@@ -107,7 +107,7 @@ const _crSplineSeria = (_ref2, option) => {
     data,
     name
   } = _ref2;
-  return _assign(_ChartConfig.default.crSeria(), {
+  return _assign((0, _ChartConfigFn.crSeriaConfig)(), {
     data,
     name,
     type: 'spline',
@@ -166,7 +166,7 @@ const _crMacdSeries = (json, option) => {
     data: _arrs[1],
     name: MACD_S
   }, S_RED),
-        sHist = _assign(_ChartConfig.default.crSeria(), {
+        sHist = _assign((0, _ChartConfigFn.crSeriaConfig)(), {
     color: COLOR_BLUE_A,
     data: _arrs[2],
     name: MACD_H,

@@ -1,4 +1,4 @@
-import ChartConfig from '../../charts/ChartConfig';
+import { crSeriaConfig} from '../../charts/ChartConfigFn';
 import {
   toPointArr,
   crDataSource,
@@ -23,8 +23,9 @@ const toAreaYearly = {
       return config;
    },
 
-   createSeria: (json, option) => ChartConfig
-     .crSeria({ name: 'Empty Seria' })
+   createSeria: (json, option) => crSeriaConfig({
+     name: 'Empty Seria'
+   })
 };
 
 export default toAreaYearly

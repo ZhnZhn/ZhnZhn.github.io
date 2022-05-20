@@ -9,7 +9,7 @@ var _Color = _interopRequireDefault(require("../constants/Color"));
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
-var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
+var _ChartConfigFn = require("./ChartConfigFn");
 
 var _IndicatorConfigFn = require("./IndicatorConfigFn");
 
@@ -19,9 +19,6 @@ const {
   crType,
   fTooltip
 } = _Chart.default;
-const {
-  setSerieData
-} = _ChartConfig.default;
 
 const _crSeriaOption = (color, lineWidth) => ({
   type: 'line',
@@ -47,13 +44,13 @@ const ConfigStockSlice = {
   _setStockSerias(seriaType, lineWidth, dC, dH, dL, dO) {
     const config = this.config,
           type = crType(seriaType, 'area');
-    setSerieData(config, dC, 0, 'Close', {
+    (0, _ChartConfigFn.setSeriaDataTo)(config, dC, 0, 'Close', {
       type,
       lineWidth
     });
-    setSerieData(config, dH, 1, 'High', _crSeriaOption(_Color.default.S_HIGH, lineWidth));
-    setSerieData(config, dL, 2, 'Low', _crSeriaOption(_Color.default.S_LOW, lineWidth));
-    setSerieData(config, dO, 3, 'Open', _crSeriaOption(_Color.default.S_OPEN, lineWidth));
+    (0, _ChartConfigFn.setSeriaDataTo)(config, dH, 1, 'High', _crSeriaOption(_Color.default.S_HIGH, lineWidth));
+    (0, _ChartConfigFn.setSeriaDataTo)(config, dL, 2, 'Low', _crSeriaOption(_Color.default.S_LOW, lineWidth));
+    (0, _ChartConfigFn.setSeriaDataTo)(config, dO, 3, 'Open', _crSeriaOption(_Color.default.S_OPEN, lineWidth));
     return this;
   },
 

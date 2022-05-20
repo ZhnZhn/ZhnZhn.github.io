@@ -11,7 +11,9 @@ var _Chart = _interopRequireDefault(require("./Chart"));
 
 var _ChartFn = require("./ChartFn");
 
-var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
+var _ChartConfigFn = require("./ChartConfigFn");
+
+var _TreeMapConfigFn = require("./TreeMapConfigFn");
 
 var _ChartFactory = _interopRequireDefault(require("./ChartFactory"));
 
@@ -24,36 +26,30 @@ const {
   fSubtitle,
   fTooltip
 } = _Chart.default;
-const {
-  crAreaConfig,
-  crTreeMapConfig
-} = _ChartConfig.default;
-const C = {
-  CATEGORIES_X_AXIS: {
-    type: "category",
-    categories: [],
-    opposite: false,
-    labels: {
-      y: 18
-    },
-    crosshair: undefined,
-    tickColor: "gray",
-    tickWidth: 3,
-    tickLength: 7,
-    tickPosition: "outside",
-    gridLineWidth: 0
-  },
-  CATEGORIES_Y_AXIS: {
-    lineWidth: 0,
-    tickLength: 0,
-    startOnTick: true,
-    endOnTick: true,
-    minPadding: 0.05,
-    maxPadding: 0.05,
-    plotLines: null,
-    labels: {
-      x: 3
-    }
+const CATEGORIES_X_AXIS = {
+  type: "category",
+  categories: [],
+  opposite: false,
+  crosshair: void 0,
+  tickColor: "gray",
+  tickWidth: 3,
+  tickLength: 7,
+  tickPosition: "outside",
+  gridLineWidth: 0,
+  labels: {
+    y: 18
+  }
+},
+      CATEGORIES_Y_AXIS = {
+  lineWidth: 0,
+  tickLength: 0,
+  startOnTick: true,
+  endOnTick: true,
+  minPadding: 0.05,
+  maxPadding: 0.05,
+  plotLines: null,
+  labels: {
+    x: 3
   }
 };
 
@@ -127,7 +123,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
   },
 
   areaConfig(option) {
-    this.config = crAreaConfig(option);
+    this.config = (0, _ChartConfigFn.crAreaConfig)(option);
     return this;
   },
 
@@ -142,15 +138,15 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
       categories = [];
     }
 
-    this.config = crAreaConfig({
+    this.config = (0, _ChartConfigFn.crAreaConfig)({
       spacingTop: 25
     });
-    const xAxis = { ...C.CATEGORIES_X_AXIS,
+    const xAxis = { ...CATEGORIES_X_AXIS,
       ...{
         categories
       }
     };
-    return this.add('xAxis', xAxis).add('yAxis', C.CATEGORIES_Y_AXIS);
+    return this.add('xAxis', xAxis).add('yAxis', CATEGORIES_Y_AXIS);
   },
 
   barOrColumnConfig(type, categories, option) {
@@ -167,7 +163,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
   },
 
   treeMapConfig() {
-    this.config = crTreeMapConfig();
+    this.config = (0, _TreeMapConfigFn.crTreeMapConfig)();
     return this;
   },
 

@@ -1,4 +1,4 @@
-import ChartConfig from '../ChartConfig'
+import { crSeriaConfig} from '../ChartConfigFn';
 
 const _isArr = Array.isArray
 const _assign = Object.assign
@@ -64,7 +64,7 @@ const crYAxisSeria = (chartInst, options) => {
   } else if (options.type === 'columnrange') {
     return options;
   }
-  return ChartConfig.crSeria(options);
+  return crSeriaConfig(options);
 };
 
 export default crYAxisSeria

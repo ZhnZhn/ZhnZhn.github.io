@@ -1,4 +1,4 @@
-import ChartConfig from '../../charts/ChartConfig';
+import { crSeriaConfig } from '../../charts/ChartConfigFn';
 import Builder from '../../charts/ConfigBuilder';
 import { ymdToUTC } from './fnAdapter';
 
@@ -76,7 +76,7 @@ const _toDataArrs = ({dateKeys, value, max}, arrProp) => {
 }
 
 const _crSplineSeria = ({ data, name }, option) =>
-  _assign(ChartConfig.crSeria(), {
+  _assign(crSeriaConfig(), {
     data, name,
     type: 'spline',
     visible: true,
@@ -125,7 +125,7 @@ const _crMacdSeries = (json, option) => {
        data: _arrs[1],
        name: MACD_S
     }, S_RED)
-  , sHist = _assign(ChartConfig.crSeria(), {
+  , sHist = _assign(crSeriaConfig(), {
        color: COLOR_BLUE_A,
        data: _arrs[2],
        name: MACD_H,

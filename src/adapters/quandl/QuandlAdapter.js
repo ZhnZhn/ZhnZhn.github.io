@@ -11,7 +11,9 @@ import {
   CHT_SCATTER_UP,
   CHT_SCATTER_DOWN
 } from '../../constants/ChartType';
-import ChartConfig from '../../charts/ChartConfig';
+import {
+  crSeriaConfig
+} from '../../charts/ChartConfigFn';
 
 import { ymdToUTC, findMinY } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
@@ -61,10 +63,10 @@ const _toSeria = (json, option) => {
   const { value:chartId } = option
   , yPointIndex = getDataColumnIndex(json, option)
   , data = _crSeriaData(getData(json), yPointIndex);
-  return ChartConfig.crSeria({
-      name : chartId.substring(0,12),
-      data : data,
-      minY : findMinY(data)
+  return crSeriaConfig({
+      name: chartId.substring(0,12),
+      data: data,
+      minY: findMinY(data)
   });
 };
 

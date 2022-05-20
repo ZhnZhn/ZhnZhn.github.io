@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _ChartType = require("../../constants/ChartType");
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _ChartConfigFn = require("../../charts/ChartConfigFn");
 
 var _AdapterFn = require("../AdapterFn");
 
@@ -66,7 +66,7 @@ const _toSeria = (json, option) => {
         yPointIndex = (0, _QuandlFn.getDataColumnIndex)(json, option),
         data = _crSeriaData((0, _QuandlFn.getData)(json), yPointIndex);
 
-  return _ChartConfig.default.crSeria({
+  return (0, _ChartConfigFn.crSeriaConfig)({
     name: chartId.substring(0, 12),
     data: data,
     minY: (0, _AdapterFn.findMinY)(data)

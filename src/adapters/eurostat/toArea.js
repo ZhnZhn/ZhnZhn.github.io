@@ -1,4 +1,7 @@
-import ChartConfig from '../../charts/ChartConfig';
+import {
+  crSeriaConfig,
+  crAreaConfig
+} from '../../charts/ChartConfigFn';
 import {
   crData,
   setDataAndInfo,
@@ -16,7 +19,7 @@ const toArea = {
      } = option
      , { data, max, min } = crData(json, option)
      , _type = (seriaType || '').toLowerCase() || 'spline'
-     , config = ChartConfig.crAreaConfig({
+     , config = crAreaConfig({
          seriaType: _type,
          seriaColor, seriaWidth
        });
@@ -35,7 +38,7 @@ const toArea = {
        seriaWidth
      } = option;
 
-     return ChartConfig.crSeria({
+     return crSeriaConfig({
        seriaType,
        seriaColor,
        seriaWidth,

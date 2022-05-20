@@ -1,4 +1,7 @@
-import ChartConfig from '../../charts/ChartConfig'
+import {
+  getSeriaColorByIndex,
+  setSeriaDataTo
+} from '../../charts/ChartConfigFn';
 import Builder from '../../charts/ConfigBuilder'
 import {
   tooltipCategorySimple
@@ -70,7 +73,7 @@ const _addSeriaTo = ({
   isShow=false
 }) => {
     const { legend } = config.zhConfig
-    , _color = color || ChartConfig.getColor(i)
+    , _color = color || getSeriaColorByIndex(i)
     , _seriaColor = {
          color: _color,
          marker: _crMarker(_color)
@@ -81,7 +84,7 @@ const _addSeriaTo = ({
            : {...SPLINE_NOT_VISIBLE, ..._seriaColor}
          : null;
 
-    ChartConfig.setSerieData(
+    setSeriaDataTo(
       config, hm[name], i, name, _seriaOption
     )
     legend.push(

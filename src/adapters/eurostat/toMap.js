@@ -1,4 +1,6 @@
-import ChartConfig from '../../charts/ChartConfig';
+import {
+  crAreaConfig
+} from '../../charts/ChartConfigFn';
 import {
   crData,
   setDataAndInfo
@@ -19,7 +21,7 @@ const _addItemCaptionTo = (
 const toMap = {
   createConfig: (json, option) => {
     const { data } = crData(json)
-    , config = ChartConfig.crAreaConfig();
+    , config = crAreaConfig();
 
      _addItemCaptionTo(option)
      setDataAndInfo({ config, data, json, option });

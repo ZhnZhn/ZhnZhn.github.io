@@ -1,18 +1,20 @@
-
 import { render } from 'react-dom';
 
-import polyfill from './polyfill'
+import polyfill from './polyfill';
 import Raven from 'raven-js';
 
 import AppErc from './components/AppErc';
-import ChartConfig from './charts/ChartConfig';
+import { initChartConfig } from './charts/ChartConfigFn';
+
+const _isHighchartsWarning = str => typeof str === 'string'
+ && str.indexOf('Highcharts warning') !== -1;
 
 let consoleWarn = (console || {}).warn;
+
 const _clearHighchartsWarning = () => {
   if (consoleWarn) {
    console.warn = (...args) => {
-     if (typeof args[0] === 'string'
-         && args[0].indexOf('Highcharts warning') !== -1) {
+     if (_isHighchartsWarning(args[0])) {
        return;
      }
      consoleWarn(...args)
@@ -20,7 +22,7 @@ const _clearHighchartsWarning = () => {
   }
 };
 
-const _fnInitRaven = function(){
+const _initRaven = function(){
   /* eslint-disable no-undef */
   if (process.env.NODE_ENV === 'production'){
   /* eslint-enable no-undef */
@@ -38,7 +40,7 @@ const _fnInitRaven = function(){
   }
 }
 
-const _fnRenderApp = function(){
+const _renderApp = () => {
   const preloaderEl = document.getElementById('preloader')
   if (preloaderEl) {
      document.body.removeChild(document.getElementById('preloader'));
@@ -46,17 +48,17 @@ const _fnRenderApp = function(){
   render(<AppErc />, document.getElementById('app'));
 }
 
-const _fnLoading = function(){
+const _runLoadingApp = () => {
   const preloader = window.preloader;
   if (preloader && typeof preloader.hiding === 'function') {
       preloader.hiding();
-      setTimeout( _fnRenderApp, 100);
+      setTimeout(_renderApp, 100);
   } else {
-    _fnRenderApp()
+    _renderApp()
   }
 }
 
 polyfill();
-_fnInitRaven();
-ChartConfig.init();
-_fnLoading();
+_initRaven();
+initChartConfig();
+_runLoadingApp();

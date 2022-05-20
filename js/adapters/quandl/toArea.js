@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _ChartConfigFn = require("../../charts/ChartConfigFn");
 
 var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
@@ -50,7 +50,7 @@ const _addSeriesTo = (config, legendSeries) => {
       symbol,
       isSecondAxes
     } = legendSeries[i],
-          seria = _ChartConfig.default.crSeria({
+          seria = (0, _ChartConfigFn.crSeriaConfig)({
       name,
       data,
       color,
@@ -109,8 +109,7 @@ const toArea = (json, option) => {
     legendSeries,
     zhPoints
   } = (0, _crAreaData.default)(json, option);
-
-  let config = _ChartConfig.default.crAreaConfig({
+  let config = (0, _ChartConfigFn.crAreaConfig)({
     spacingTop: 25
   });
 

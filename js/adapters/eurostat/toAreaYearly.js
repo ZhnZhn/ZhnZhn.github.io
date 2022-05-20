@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _ChartConfigFn = require("../../charts/ChartConfigFn");
 
 var _EuroStatFn = require("./EuroStatFn");
 
@@ -34,7 +34,7 @@ const toAreaYearly = {
     });
     return config;
   },
-  createSeria: (json, option) => _ChartConfig.default.crSeria({
+  createSeria: (json, option) => (0, _ChartConfigFn.crSeriaConfig)({
     name: 'Empty Seria'
   })
 };

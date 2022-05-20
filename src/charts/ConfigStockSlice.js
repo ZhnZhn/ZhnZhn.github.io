@@ -1,7 +1,9 @@
 import COLOR from '../constants/Color';
 
 import Chart from './Chart';
-import ChartConfig from './ChartConfig';
+import {
+  setSeriaDataTo
+} from './ChartConfigFn';
 import {
   crMiniVolumeConfig,
   crMiniATHConfig,
@@ -14,7 +16,6 @@ import {
 } from './Tooltip';
 
 const { crType, fTooltip } = Chart;
-const { setSerieData } = ChartConfig;
 
 const _crSeriaOption = (
   color,
@@ -54,16 +55,16 @@ const ConfigStockSlice = {
   _setStockSerias(seriaType, lineWidth, dC, dH, dL, dO){
     const config = this.config
     , type = crType(seriaType, 'area');
-    setSerieData(config, dC, 0, 'Close', {
+    setSeriaDataTo(config, dC, 0, 'Close', {
       type, lineWidth
     })
-    setSerieData(config, dH, 1, 'High',
+    setSeriaDataTo(config, dH, 1, 'High',
       _crSeriaOption(COLOR.S_HIGH, lineWidth)
     )
-    setSerieData(config, dL, 2, 'Low',
+    setSeriaDataTo(config, dL, 2, 'Low',
       _crSeriaOption(COLOR.S_LOW, lineWidth)
     )
-    setSerieData(config, dO, 3, 'Open',
+    setSeriaDataTo(config, dO, 3, 'Open',
       _crSeriaOption(COLOR.S_OPEN, lineWidth)
     )
     return this;

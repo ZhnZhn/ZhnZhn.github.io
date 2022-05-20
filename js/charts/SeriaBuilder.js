@@ -9,7 +9,7 @@ var _seriaFn = require("../math/seriaFn");
 
 var _Chart = _interopRequireDefault(require("./Chart"));
 
-var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
+var _ChartConfigFn = require("./ChartConfigFn");
 
 var _TreeMapConfigFn = require("./TreeMapConfigFn");
 
@@ -67,7 +67,7 @@ const _addSeriesImpl = (to, series) => {
 const SeriaBuilder = {
   initSeria(option) {
     this._type = 'S';
-    this.config = _ChartConfig.default.crSeria(option);
+    this.config = (0, _ChartConfigFn.crSeriaConfig)(option);
     return this;
   },
 
@@ -122,7 +122,7 @@ const SeriaBuilder = {
     const _legend = [];
     points.forEach((data, index) => {
       const is = index < maxVisible ? true : false,
-            color = _ChartConfig.default.getColor(index),
+            color = (0, _ChartConfigFn.getSeriaColorByIndex)(index),
             {
         seriaName
       } = data;

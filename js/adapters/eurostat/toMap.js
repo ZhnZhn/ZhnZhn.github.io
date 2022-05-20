@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _ChartConfigFn = require("../../charts/ChartConfigFn");
 
 var _EuroStatFn = require("./EuroStatFn");
 
@@ -24,7 +22,7 @@ const toMap = {
     const {
       data
     } = (0, _EuroStatFn.crData)(json),
-          config = _ChartConfig.default.crAreaConfig();
+          config = (0, _ChartConfigFn.crAreaConfig)();
 
     _addItemCaptionTo(option);
 

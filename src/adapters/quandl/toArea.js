@@ -1,4 +1,7 @@
-import ChartConfig from '../../charts/ChartConfig';
+import {
+  crSeriaConfig,
+  crAreaConfig
+} from '../../charts/ChartConfigFn';
 import Chart from '../../charts/Chart';
 import ConfigBuilder from '../../charts/ConfigBuilder';
 import {
@@ -53,7 +56,7 @@ const _addSeriesTo = (
       symbol,
       isSecondAxes
     } = legendSeries[i]
-    , seria = ChartConfig.crSeria({
+    , seria = crSeriaConfig({
        name,
        data,
        color,
@@ -106,7 +109,7 @@ const toArea = (json, option) => {
      zhPoints
    } = crAreaData(json, option);
 
-   let config = ChartConfig.crAreaConfig({ spacingTop: 25 })
+   let config = crAreaConfig({ spacingTop: 25 })
    _assign(config.series[0], {
      data: seria,
      name: columnName

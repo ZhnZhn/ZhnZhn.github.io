@@ -11,7 +11,9 @@ import {
   crMfiConfig,
   crMomAthConfig
 } from './IndicatorConfigFn';
-import ChartConfig from './ChartConfig'
+import {
+  crSeriaConfig
+} from './ChartConfigFn';
 
 
 const _getD12 = chart => {
@@ -53,7 +55,7 @@ const _fCategoryCalc = (calc, name) => (chart, rc) => {
 };
 
 const _addToChartSeria = (chart, option) => {
-  const seria = ChartConfig.crSeria(option)
+  const seria = crSeriaConfig(option)
   , _seriaIns = chart.addSeries(seria, true, true);
   return (_seriaIns || {}).color;
 };
