@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _ChartType = require("../../constants/ChartType");
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _MarkerFn = require("../../charts/MarkerFn");
 
 var _Tooltip = require("../../charts/Tooltip");
 
@@ -59,7 +59,7 @@ const _crSeria = (arr, option) => {
     const date = p[0],
           v = p[1],
           _color = v >= 0 ? COLOR_PLUS : COLOR_MINUS,
-          _p = _ChartConfig.default.crMarkerExDividend(_color);
+          _p = (0, _MarkerFn.crMarkerExDividend)(_color);
 
     _updateLabelY(_p, seriaType);
 

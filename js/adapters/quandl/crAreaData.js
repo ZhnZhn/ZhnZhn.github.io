@@ -9,7 +9,7 @@ var _big = _interopRequireDefault(require("big.js"));
 
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _MarkerFn = require("../../charts/MarkerFn");
 
 var _ChartLegend = require("../../charts/ChartLegend");
 
@@ -80,7 +80,7 @@ const _addSplitRatio = (splitRationIndex, result) => {
     const x = dateUTC,
           splitRatio = (0, _AdapterFn.roundBy)(point[splitRationIndex]),
           price = point[yPointIndex];
-    dataSplitRatio.push(_assign(_ChartConfig.default.crMarkerSplitRatio(), {
+    dataSplitRatio.push(_assign((0, _MarkerFn.crMarkerSplitRatio)(), {
       x,
       splitRatio,
       price
@@ -102,7 +102,7 @@ const _addExDividend = (exDividendIndex, result) => {
     const x = dateUTC,
           exValue = point[exDividendIndex],
           price = point[yPointIndex],
-          marker = _assign(_ChartConfig.default.crMarkerExDividend(), {
+          marker = _assign((0, _MarkerFn.crMarkerExDividend)(), {
       x,
       exValue,
       price

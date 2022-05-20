@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _MarkerFn = require("../../charts/MarkerFn");
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
@@ -43,7 +43,7 @@ const _addDividendPointTo = (arr, dateMs, p) => {
         _exValue = _strDivident && parseFloat(_strDivident);
 
   if (_exValue) {
-    arr.push({ ..._ChartConfig.default.crMarkerExDividend(),
+    arr.push({ ...(0, _MarkerFn.crMarkerExDividend)(),
       ...{
         x: dateMs,
         exValue: _exValue,

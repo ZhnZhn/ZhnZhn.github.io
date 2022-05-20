@@ -3,7 +3,7 @@ import {
   CHT_SCATTER_DOWN
 } from '../../constants/ChartType';
 
-import ChartConfig from '../../charts/ChartConfig';
+import { crMarkerExDividend } from '../../charts/MarkerFn';
 import { tooltipExValue } from '../../charts/Tooltip';
 import Builder from '../../charts/ConfigBuilder';
 
@@ -56,7 +56,7 @@ const _crSeria = (
      const date = p[0]
      , v = p[1]
      , _color = v >= 0 ? COLOR_PLUS : COLOR_MINUS
-     , _p = ChartConfig.crMarkerExDividend(_color);
+     , _p = crMarkerExDividend(_color);
 
      _updateLabelY(_p, seriaType)
      return _assign(_p, {

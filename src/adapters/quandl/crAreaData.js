@@ -1,7 +1,10 @@
 import Big from 'big.js';
 
 import pipe from '../../utils/pipe';
-import ChartConfig from '../../charts/ChartConfig';
+import {
+  crMarkerExDividend,
+  crMarkerSplitRatio
+} from '../../charts/MarkerFn';
 import { crLegendConfig } from '../../charts/ChartLegend';
 
 import { roundBy } from '../AdapterFn';
@@ -73,7 +76,7 @@ const _addSplitRatio = (
     , splitRatio = roundBy(point[splitRationIndex])
     , price = point[yPointIndex];
 
-    dataSplitRatio.push(_assign(ChartConfig.crMarkerSplitRatio(), {x, splitRatio, price}));
+    dataSplitRatio.push(_assign(crMarkerSplitRatio(), {x, splitRatio, price}));
   }
   return result;
 };
@@ -94,7 +97,7 @@ const _addExDividend = (
            , exValue = point[exDividendIndex]
            , price = point[yPointIndex]
            , marker = _assign(
-                ChartConfig.crMarkerExDividend(),
+                crMarkerExDividend(),
                 { x, exValue, price }
              );
        if (!isPrevDateAfter(dataExDividend, x , 14)) {

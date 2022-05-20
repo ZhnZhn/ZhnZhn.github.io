@@ -1,14 +1,14 @@
 import COLOR from '../constants/Color';
 
 const _crMarker = (
-  color=COLOR.EX_DIVIDEND,
-  dataLabelsY=32
+  color,
+  formatterPointPropName
 ) => ({
   y: 0,
   exValue: 0.5,
   marker : {
     symbol: 'circle',
-    fillColor : color,
+    fillColor: color,
     lineColor: color,
     radius: 6,
     states: {
@@ -36,22 +36,15 @@ const _crMarker = (
     },
     crop: false,
     overflow: 'none',
-    y: dataLabelsY,
-    formatter : function(){
-      return this.point.exValue;
+    y: 32,
+    formatter: function(){
+      return this.point[formatterPointPropName];
     }
   }
 });
 
-const WithMarkers = {
-  crMarkerExDividend: _crMarker,
-  crMarkerSplitRatio: () => {
-    const point = _crMarker(COLOR.SPLIT_RATIO);
-    point.dataLabels.formatter = function() {
-      return this.point.splitRatio
-    };
-    return point;
-  }
-};
+export const crMarkerExDividend =
+  () => _crMarker(COLOR.EX_DIVIDEND, 'exValue')
 
-export default WithMarkers
+export const crMarkerSplitRatio =
+  () => _crMarker(COLOR.SPLIT_RATIO, 'splitRatio')

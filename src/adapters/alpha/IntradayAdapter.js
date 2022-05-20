@@ -1,5 +1,5 @@
-import ChartConfig from '../../charts/ChartConfig'
-import Builder from '../../charts/ConfigBuilder'
+import { crMarkerExDividend } from '../../charts/MarkerFn';
+import Builder from '../../charts/ConfigBuilder';
 import { crVolumePoint } from '../pointFn';
 import {
   crMarkerColor,
@@ -39,7 +39,7 @@ const _addDividendPointTo = (arr, dateMs, p) => {
   , _exValue = _strDivident && parseFloat(_strDivident);
   if (_exValue) {
     arr.push({
-      ...ChartConfig.crMarkerExDividend(), ...{
+      ...crMarkerExDividend(), ...{
          x: dateMs,
          exValue: _exValue,
          price: parseFloat(p[PN_ADJ_CLOSE])

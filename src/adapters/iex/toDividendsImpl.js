@@ -1,4 +1,6 @@
-import ChartConfig from '../../charts/ChartConfig';
+import {
+  crMarkerExDividend
+} from '../../charts/MarkerFn';
 import {
   tooltipExValue
 } from '../../charts/Tooltip';
@@ -13,7 +15,7 @@ const CAPTION = 'Dividends'
 , _isArr = Array.isArray
 , _assign = Object.assign
 , _crPoint = p => _assign(
-  ChartConfig.crMarkerExDividend(COLOR_MARKER, 0), {
+  crMarkerExDividend(COLOR_MARKER, 0), {
     x: ymdToUTC(p.paymentDate),
     exValue: toFloatOrEmpty(p.amount)
 });
