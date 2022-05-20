@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _seriaFn = require("../math/seriaFn");
 
-var _Chart = _interopRequireDefault(require("./Chart"));
+var _Chart = require("./Chart");
 
 var _ChartFn = require("./ChartFn");
 
@@ -21,11 +21,6 @@ var _SeriaBuilder = _interopRequireDefault(require("./SeriaBuilder"));
 
 var _ConfigStockSlice = _interopRequireDefault(require("./ConfigStockSlice"));
 
-const {
-  fTitle,
-  fSubtitle,
-  fTooltip
-} = _Chart.default;
 const CATEGORIES_X_AXIS = {
   type: "category",
   categories: [],
@@ -168,7 +163,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
   },
 
   addTitle(text) {
-    _assignTo(this.config, 'title', fTitle({
+    _assignTo(this.config, 'title', (0, _Chart.fTitle)({
       text
     }));
 
@@ -176,7 +171,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
   },
 
   addSubtitle(text) {
-    _assignTo(this.config, 'subtitle', fSubtitle({
+    _assignTo(this.config, 'subtitle', (0, _Chart.fSubtitle)({
       text
     }));
 
@@ -188,7 +183,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
   },
 
   addTooltip(tooltip) {
-    this.config.tooltip = fTooltip(tooltip);
+    this.config.tooltip = (0, _Chart.fTooltip)(tooltip);
     return this;
   },
 

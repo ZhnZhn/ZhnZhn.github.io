@@ -25,7 +25,7 @@ var _arrFn = require("../utils/arrFn");
 
 var _DateUtils = require("../utils/DateUtils");
 
-var _Chart = _interopRequireDefault(require("./Chart"));
+var _Chart = require("./Chart");
 
 const _isFn = fn => typeof fn === 'function',
       _isNumber = n => typeof n === 'number' && n - n === 0,
@@ -68,7 +68,7 @@ const _addSeries = _ref => {
 
   if (hasSecondYAxis) {
     _color = _crYAxisColor(chart);
-    chart.addAxis(_Chart.default.fSecondYAxis(label, _color));
+    chart.addAxis((0, _Chart.fSecondYAxis)(label, _color));
     series.yAxis = label;
     series.color = _color;
   }

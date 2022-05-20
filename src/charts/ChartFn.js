@@ -19,7 +19,7 @@ import formatAllNumber from '../utils/formatAllNumber';
 import { arrFactoryFindIndexByProp } from '../utils/arrFn';
 import { dmyToUTC } from '../utils/DateUtils';
 
-import Chart from './Chart';
+import { fSecondYAxis } from './Chart';
 
 
 const _isFn = fn => typeof fn === 'function'
@@ -59,7 +59,7 @@ const _addSeries = ({ chart, series, label, hasSecondYAxis }) => {
   let _color;
   if (hasSecondYAxis){
     _color = _crYAxisColor(chart)
-    chart.addAxis( Chart.fSecondYAxis(label, _color) )
+    chart.addAxis(fSecondYAxis(label, _color))
     series.yAxis = label
     series.color = _color
   }

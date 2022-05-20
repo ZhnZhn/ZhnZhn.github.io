@@ -13,7 +13,7 @@ var _ChartType = require("../../constants/ChartType");
 
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 
-var _Chart = _interopRequireDefault(require("../../charts/Chart"));
+var _Chart = require("../../charts/Chart");
 
 var _PieConfigFn = require("../../charts/PieConfigFn");
 
@@ -21,13 +21,9 @@ var _QuandlFn = require("./QuandlFn");
 
 var _fnStacked = require("./fnStacked");
 
-const _assign = Object.assign,
-      {
-  HEIGHT,
-  LEGEND_ROW_HEIGHT
-} = _Chart.default;
+const _assign = Object.assign;
 
-const _calcLegendHeight = length => length !== 0 ? HEIGHT + LEGEND_ROW_HEIGHT * (Math.ceil(length / 4) - 1) : HEIGHT;
+const _calcLegendHeight = length => length !== 0 ? _Chart.CHART_HEIGHT + _Chart.LEGEND_ROW_HEIGHT * (Math.ceil(length / 4) - 1) : _Chart.CHART_HEIGHT;
 
 const _addPercentToItem = (item, bTotal) => {
   const _bPercent = (0, _QuandlFn.crPercent)({

@@ -3,7 +3,6 @@ import DOMPurify from 'dompurify';
 
 import COLOR from '../constants/Color';
 import { tooltipValueTdmyIf } from './Tooltip';
-import MonoColorSlice from './MonoColorSlice';
 
 const merge = Highcharts.merge;
 const _isStr = str => typeof str === 'string';
@@ -59,84 +58,92 @@ const  _crTitle = title => _isStr(title)
     zIndex: 2
   } : void 0;
 
-const Chart = {
-  HEIGHT : 300,
-  MARGIN_RIGHT: 50,
-  STACKED_HEIGHT : 500,
-  LEGEND_ROW_HEIGHT : 32,
 
-  THEME_SPACING_TOP: 5,
-  SPACING_TOP : 20,
-  STACKED_SPACING_TOP : 25,
-  SPACING_BOTTOM : 24,
-  MARGIN_TOP : 60,
+export const CHART_HEIGHT = 300
+export const MARGIN_RIGHT = 50
+export const STACKED_HEIGHT = 500
+export const LEGEND_ROW_HEIGHT = 32
 
-  SEMIDONUT_TITLE_Y : 15,
-  SEMIDONUT_SUBTITLE_Y: 35,
+export const SPACING_TOP = 20
+export const STACKED_SPACING_TOP = 25
+export const SPACING_BOTTOM = 24
 
-  ...MonoColorSlice,
+export const SEMIDONUT_TITLE_Y = 15
+export const SEMIDONUT_SUBTITLE_Y = 35
 
-  crType(seriaType, dfType){
-    return seriaType && _isStr(seriaType)
-      ? seriaType.toLowerCase()
-      : dfType || 'spline';
-  },
+export const crType = (
+  seriaType,
+  dfType
+) => seriaType && _isStr(seriaType)
+  ? seriaType.toLowerCase()
+  : dfType || 'spline';
 
-  fCreditsRightBottom(option){
-    return merge(false, {
-       enabled: true,
-       position: {
-          align: 'right',
-          verticalAlign: 'bottom',
-          x: -10,
-          y: -5
-      }
-    }, option)
-  },
+export const fCreditsRightBottom = (
+  option
+) => merge(false, {
+   enabled: true,
+   position: {
+      align: 'right',
+      verticalAlign: 'bottom',
+      x: -10,
+      y: -5
+  }
+}, option)
 
-  setDefaultTitle(config, title, subtitle){
-    config.chart.spacingTop = Chart.STACKED_SPACING_TOP;
-    config.title = Chart.fTitle({ text: title });
-    config.subtitle = Chart.fSubtitle({ text: subtitle });
-  },
 
-  fTitle(option){
-    _sanitizeOptionText(option)
-    return merge(false, {
-       ...CAPTION_CONFIG,
-       y: -10
-    }, option)
-  },
-  fSubtitle(option){
-    _sanitizeOptionText(option)
-    return merge(false, {
-      ...CAPTION_CONFIG,
-      y: 10
-    }, option)
-  },
+export const fTitle = (option) => {
+  _sanitizeOptionText(option)
+  return merge(false, {
+     ...CAPTION_CONFIG,
+     y: -10
+  }, option)
+}
 
- fNavigation(){
-   return {
-     buttonOptions: {
-       y: 5
-     }
-   }
- },
+export const fSubtitle = (option) => {
+  _sanitizeOptionText(option)
+  return merge(false, {
+    ...CAPTION_CONFIG,
+    y: 10
+  }, option)
+}
 
-crAreaConfig({
+export const setDefaultTitle = (
+  config,
+  title,
+  subtitle
+) => {
+   config.chart.spacingTop = STACKED_SPACING_TOP;
+   config.title = fTitle({ text: title });
+   config.subtitle = fSubtitle({ text: subtitle });
+}
+
+export const fNavigation = () => ({
+  buttonOptions: {
+    y: 5
+  }
+})
+
+export const fTooltip = (
+  pointFormatter
+) => ({
+  pointFormatter,
+  headerFormat: ''
+})
+
+export const crAreaConfig = ({
   title='',
   seriaType,
   seriaColor,
   seriaWidth=1,
   spacingTop,
   isCrosshair
-}={}){
+}={}) => {
   return {
     zhSeries: {
       count: 0
     },
     chart: {
-      marginRight: Chart.MARGIN_RIGHT,
+      marginRight: MARGIN_RIGHT,
       spacingTop: spacingTop
     },
     title: _crTitle(title),
@@ -156,9 +163,9 @@ crAreaConfig({
     },
     series: [{
       turboThreshold: 20000,
-      type: Chart.crType(seriaType, 'area'),
+      type: crType(seriaType, 'area'),
       color: seriaColor,
-      tooltip: Chart.fTooltip(tooltipValueTdmyIf),
+      tooltip: fTooltip(tooltipValueTdmyIf),
       lineWidth: seriaWidth,
       states: {
         hover: {
@@ -167,148 +174,140 @@ crAreaConfig({
      }
     }]
   }
-},
+}
 
-fEventsMouseOver(fn){
-  return {
-    events: {
-      mouseOver: fn
-   }
+export const fEventsMouseOver = (
+  mouseOver
+) => ({
+  events: {
+    mouseOver
   }
-},
+})
 
-fTooltip(fnPointFormatter){
-  return {
-    pointFormatter: fnPointFormatter,
-    headerFormat: ''
-  }
-},
+export const fCrosshair = _crCrosshair
 
-fCrosshair: _crCrosshair,
-
-fPlotLine(color, text){
-    return {
-      id: text,
-      //value: void 0,
-      color: color,
-      dashStyle: 'solid',
-      width: 1,
-      zIndex: 4,
-      label: {
-        text: text,
-        verticalAlign: 'top',
-        style: {
-          color: color,
-          fontWeight: 'bold',
-          fontSize: 'medium'
-        }
+export const fPlotLine = (
+  color,
+  text
+) => ({
+   color,
+   id: text,
+   dashStyle: 'solid',
+   width: 1,
+   zIndex: 4,
+   label: {
+     text,
+     verticalAlign: 'top',
+     style: {
+       color,
+       fontWeight: 'bold',
+       fontSize: 'medium'
      }
    }
- },
+})
 
- fXAxisOpposite(option){
-    return merge(false, {
-      opposite: true,
-      tickLength: 0,
-      tickPosition: 'inside',
-      labels: {
-        y: -5
-      }
-    }, option)
-  },
 
-  fYAxisOpposite(option){
-    return merge(false, {
-       opposite: true,
-       title: {
-          text: ''
+export const fXAxisOpposite = (
+  option
+) => merge(false, {
+   opposite: true,
+   tickLength: 0,
+   tickPosition: 'inside',
+   labels: {
+     y: -5
+   }
+}, option)
+
+export const fYAxisOpposite = (
+  option
+) => merge(false, {
+   opposite: true,
+   title: {
+      text: ''
+   }
+}, option)
+
+export const fSecondYAxis = (
+  name,
+  color
+) => ({
+   //crosshair : fCrosshair(),
+   ...YAXIS_CONFIG,
+   id: name,
+   lineColor: color,
+   tickColor: color,
+   gridLineWidth: 0,
+   lineWidth: 2,
+   labels: {
+     style: {
+       color: color,
+       fontWeight: "bold",
+       fontSize: "14px"
+     }
+   }
+})
+
+export const fPlotOptionsArea = (
+  option
+) => merge(false, _crPlotOption(
+   COLOR.AREA_HOVER_LINE,
+   COLOR.AREA_MARKER_LINE
+), option || {});
+
+
+export const fPlotOptionsColumn = (
+  option
+) => merge(false, _crPlotOption(
+   COLOR.COLUMN_HOVER_LINE,
+   COLOR.COLUMN_MARKER_LINE
+), option)
+
+export const fPlotOptionsSeries = (
+  option
+) => merge(false, {
+   states: {
+     hover: {
+       halo: {
+         attributes: {
+           fill: COLOR.HALO_BASE
+         },
+         opacity: 0.35,
+         size: 16
        }
-    }, option)
-  },
-
-  fSecondYAxis(name, color){
-    return {
-      //crosshair : Chart.fCrosshair(),
-      ...YAXIS_CONFIG,
-      id: name,
-      gridLineWidth: 0,
-      lineWidth: 2,
-      lineColor: color,
-      tickColor: color,
-      labels: {
-        style: {
-          color: color,
-          fontWeight: "bold",
-          fontSize: "14px"
-        }
-      }
-    }
-  },
-
-  fPlotOptionsArea(option){
-    return merge(false, _crPlotOption(
-       COLOR.AREA_HOVER_LINE,
-       COLOR.AREA_MARKER_LINE
-     ), option || {});
-  },
-
-  fPlotOptionsColumn(option){
-    return merge(false, _crPlotOption(
-      COLOR.COLUMN_HOVER_LINE,
-      COLOR.COLUMN_MARKER_LINE
-    ), option)
-  },
-
-  fPlotOptionsSeries(option){
-    return merge(false, {
-      states: {
-        hover: {
-          halo: {
-            attributes: {
-              fill: COLOR.HALO_BASE
-            },
-            opacity: 0.35,
-            size: 16
-          }
-        }
-      }
-    }, option)
-  },
-
-  fLegend(option){
-    return merge(false, {
-       symbolHeight: 14,
-       symbolWidth: 14,
-       symbolRadius: 7,
-       useHTML: true,
-       itemStyle: {
-         ...FONT_STYLE,
-         color: COLOR.LEGEND_ITEM,
-         lineHeight: 1.5,
-         cursor: 'pointer'
-       }
-    }, option)
-  },
+     }
+   }
+}, option)
 
 
- fSeriaMarker({ color, symbol }){
-    return {
-      radius: 4,
-      symbol: symbol,
-      states: {
-        hover: {
-          fillColor: COLOR.MARKER_HOVER_FILL,
-          lineColor: COLOR.MARKER_HOVER_LINE,
-          lineWidth: 1,
-          lineWidthPlus: 0,
-          enabled: true,
-          radius: 2,
-          radiusPlus: 0
-        }
-      }
-    }
-  }
+export const fLegend = (
+  option
+) => merge(false, {
+   useHTML: true,
+   symbolHeight: 14,
+   symbolWidth: 14,
+   symbolRadius: 7,
+   itemStyle: {
+     ...FONT_STYLE,
+     color: COLOR.LEGEND_ITEM,
+     lineHeight: 1.5,
+     cursor: 'pointer'
+   }
+}, option)
 
-};
-
-export default Chart
+export const fSeriaMarker = (
+   symbol
+) => ({
+   symbol,
+   radius: 4,
+   states: {
+     hover: {
+       enabled: true,
+       fillColor: COLOR.MARKER_HOVER_FILL,
+       lineColor: COLOR.MARKER_HOVER_LINE,
+       lineWidth: 1,
+       lineWidthPlus: 0,
+       radius: 2,
+       radiusPlus: 0
+     }
+   }
+})

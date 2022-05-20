@@ -4,7 +4,11 @@ import {
   filterTrimZero
 } from '../math/seriaFn';
 
-import Chart from './Chart';
+import {
+  fTitle,
+  fSubtitle,
+  fTooltip
+} from './Chart';
 import {
   setPlotLinesMinMax,
   setPlotLinesDeltas,
@@ -21,12 +25,6 @@ import Factory from './ChartFactory';
 
 import SeriaBuilder from './SeriaBuilder';
 import ConfigStockSlice from './ConfigStockSlice';
-
-const {
-  fTitle,
-  fSubtitle,
-  fTooltip
-} = Chart;
 
 const CATEGORIES_X_AXIS = {
   type: "category",

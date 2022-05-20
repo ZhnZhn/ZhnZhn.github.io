@@ -1,6 +1,9 @@
 import COLOR from '../constants/Color';
 
-import Chart from './Chart';
+import {
+  crType,
+  fTooltip
+} from './Chart';
 import {
   setSeriaDataTo
 } from './ChartConfigFn';
@@ -14,8 +17,6 @@ import {
   tooltipSplitRatio,
   tooltipValueTdmyIf
 } from './Tooltip';
-
-const { crType, fTooltip } = Chart;
 
 const _crSeriaOption = (
   color,

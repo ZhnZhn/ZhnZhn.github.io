@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _ChartConfigFn = require("../../charts/ChartConfigFn");
 
-var _Chart = _interopRequireDefault(require("../../charts/Chart"));
+var _Chart = require("../../charts/Chart");
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
@@ -55,10 +55,7 @@ const _addSeriesTo = (config, legendSeries) => {
       data,
       color,
       visible: false,
-      marker: _Chart.default.fSeriaMarker({
-        color,
-        symbol
-      })
+      marker: (0, _Chart.fSeriaMarker)(symbol)
     });
 
     if (!isSecondAxes) {

@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.crTreeMapSeria = exports.crTreeMapConfig = exports.CONFIG_TREE_MAP = void 0;
 
-var _Chart = _interopRequireDefault(require("./Chart"));
+var _Chart = require("./Chart");
 
 var _Tooltip = require("./Tooltip");
 
@@ -36,7 +34,7 @@ const CONFIG_TREE_MAP = {
 exports.CONFIG_TREE_MAP = CONFIG_TREE_MAP;
 
 const crTreeMapConfig = () => ({
-  credits: _Chart.default.fCreditsRightBottom(),
+  credits: (0, _Chart.fCreditsRightBottom)(),
   chart: {
     type: 'treemap',
     spacingTop: 25,
@@ -44,9 +42,9 @@ const crTreeMapConfig = () => ({
     marginRight: 5,
     height: 500
   },
-  title: _Chart.default.fTitle(),
-  subtitle: _Chart.default.fSubtitle(),
-  tooltip: _Chart.default.fTooltip(_Tooltip.tooltipSparkTreeMap),
+  title: (0, _Chart.fTitle)(),
+  subtitle: (0, _Chart.fSubtitle)(),
+  tooltip: (0, _Chart.fTooltip)(_Tooltip.tooltipSparkTreeMap),
   zhSeries: {
     count: 0
   },

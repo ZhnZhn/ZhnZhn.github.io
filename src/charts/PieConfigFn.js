@@ -1,4 +1,13 @@
-import Chart from './Chart';
+import {
+  SEMIDONUT_TITLE_Y,
+  SEMIDONUT_SUBTITLE_Y,
+  fTitle,
+  fSubtitle,
+  fTooltip,
+  fNavigation,
+  fCreditsRightBottom,
+  fLegend
+} from './Chart';
 import { tooltipDonut } from './Tooltip';
 
 export const crPieConfig = () => ({
@@ -7,11 +16,11 @@ export const crPieConfig = () => ({
   },
   zhDetailCharts: [],
 
-  credits: Chart.fCreditsRightBottom(),
-  title: Chart.fTitle({ y:Chart.SEMIDONUT_TITLE_Y }),
-  subtitle: Chart.fSubtitle({ y:Chart.SEMIDONUT_SUBTITLE_Y }),
-  legend: Chart.fLegend(),
-  navigation: Chart.fNavigation()
+  credits: fCreditsRightBottom(),
+  title: fTitle({ y: SEMIDONUT_TITLE_Y }),
+  subtitle: fSubtitle({ y: SEMIDONUT_SUBTITLE_Y }),
+  legend: fLegend(),
+  navigation: fNavigation()
 })
 
 export const crInnerPieSeria = ({
@@ -67,5 +76,5 @@ export const crInnerPieSeria = ({
      distance: -5
    },
 
-   tooltip: Chart.fTooltip(tooltipDonut)
+   tooltip: fTooltip(tooltipDonut)
  })

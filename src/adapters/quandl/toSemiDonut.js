@@ -4,7 +4,10 @@ import { compareByY } from '../compareByFn';
 
 import { CHT_SEMI_DONUT } from '../../constants/ChartType';
 import formatAllNumber from '../../utils/formatAllNumber';
-import Chart from '../../charts/Chart';
+import {
+  CHART_HEIGHT,
+  LEGEND_ROW_HEIGHT
+} from '../../charts/Chart';
 import {
   crPieConfig,
   crInnerPieSeria,
@@ -22,13 +25,12 @@ import {
 } from './fnStacked';
 
 const _assign = Object.assign
-, { HEIGHT, LEGEND_ROW_HEIGHT } = Chart;
 
 const _calcLegendHeight = (
   length
 ) => length !== 0
-  ? HEIGHT + LEGEND_ROW_HEIGHT*(Math.ceil(length / 4) - 1)
-  : HEIGHT;
+  ? CHART_HEIGHT + LEGEND_ROW_HEIGHT*(Math.ceil(length / 4) - 1)
+  : CHART_HEIGHT;
 
 const _addPercentToItem = (
   item,

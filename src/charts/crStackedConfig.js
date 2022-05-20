@@ -1,12 +1,27 @@
-import Chart from './Chart';
+import {
+  STACKED_SPACING_TOP,
+  SPACING_BOTTOM,
+  STACKED_HEIGHT,
+  fPlotOptionsColumn,
+  fPlotOptionsArea,
+  fTitle,
+  fSubtitle,
+  fTooltip,
+  fCreditsRightBottom,
+  fCrosshair,
+  fXAxisOpposite,
+  fYAxisOpposite,
+  fPlotOptionsSeries,
+  fLegend
+} from './Chart';
 import { tooltipSparkStackedArea } from './Tooltip';
 
 const _crPlotOption = (
   type,
   stacking
 ) => type === 'column'
-  ? { column: Chart.fPlotOptionsColumn({ stacking }) }
-  : { area: Chart.fPlotOptionsArea({ stacking }) };
+  ? { column: fPlotOptionsColumn({ stacking }) }
+  : { area: fPlotOptionsArea({ stacking }) };
 
 const crStackedConfig = ({
   type='area',
@@ -18,32 +33,32 @@ const crStackedConfig = ({
   },
   zhDetailCharts: [],
 
-  credits: Chart.fCreditsRightBottom(),
+  credits: fCreditsRightBottom(),
   chart: {
     type: type,
-    spacingTop: Chart.STACKED_SPACING_TOP,
-    spacingBottom: Chart.SPACING_BOTTOM,
-    height: Chart.STACKED_HEIGHT,
+    spacingTop: STACKED_SPACING_TOP,
+    spacingBottom: SPACING_BOTTOM,
+    height: STACKED_HEIGHT,
     zoomType: 'xy'
   },
-  title: Chart.fTitle(),
-  subtitle: Chart.fSubtitle(),
-  tooltip: Chart.fTooltip(tooltipSparkStackedArea),
+  title: fTitle(),
+  subtitle: fSubtitle(),
+  tooltip: fTooltip(tooltipSparkStackedArea),
 
-  xAxis: Chart.fXAxisOpposite({
+  xAxis: fXAxisOpposite({
     type: "category",
     categories: categories,
     startOnTick: false,
     min: 1,
-    crosshair: Chart.fCrosshair()
+    crosshair: fCrosshair()
   }),
-  yAxis: Chart.fYAxisOpposite(),
+  yAxis: fYAxisOpposite(),
 
   plotOptions: {
      ..._crPlotOption(type, stacking),
-     series: Chart.fPlotOptionsSeries()
+     series: fPlotOptionsSeries()
  },
- legend: Chart.fLegend()
+ legend: fLegend()
 })
 
 export default crStackedConfig

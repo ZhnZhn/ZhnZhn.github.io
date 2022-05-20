@@ -1,6 +1,9 @@
 export { findMinY } from '../AdapterFn';
 
-import Chart from '../../charts/Chart';
+import {
+  fTooltip,
+  setDefaultTitle
+} from '../../charts/Chart';
 import {
   calcMinY,
   setPlotLinesMinMax
@@ -261,7 +264,7 @@ export const setDataAndInfo = ({
   option
 }) => {
   const { title, subtitle, seriaType } = option;
-  Chart.setDefaultTitle(config, title, subtitle);
+  setDefaultTitle(config, title, subtitle);
 
   config.zhConfig = _crZhConfig(option);
   config.info = _crDatasetInfo(json);
@@ -295,7 +298,7 @@ const _setCategories = ({
    _setZoomMinMaxTo(config, isNotZoomToMinMax, min)
 
    config.series[0].name = time
-   config.tooltip = Chart.fTooltip(tooltip)
+   config.tooltip = fTooltip(tooltip)
 
    config.zhConfig.itemCaption = _crItemCaption(option)
    config.zhConfig.itemTime = time
@@ -323,8 +326,7 @@ export const addToCategoryConfig = (
     _colorSeries(config)
 }
 
-export const crCategoryTooltip = () => Chart
-  .fTooltip(tooltipCategorySimple)
+export const crCategoryTooltip = () => fTooltip(tooltipCategorySimple)
 
 export const setLineExtrems = ({
   config,

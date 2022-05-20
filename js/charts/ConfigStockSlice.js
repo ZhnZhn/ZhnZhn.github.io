@@ -7,18 +7,13 @@ exports.default = void 0;
 
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
-var _Chart = _interopRequireDefault(require("./Chart"));
+var _Chart = require("./Chart");
 
 var _ChartConfigFn = require("./ChartConfigFn");
 
 var _IndicatorConfigFn = require("./IndicatorConfigFn");
 
 var _Tooltip = require("./Tooltip");
-
-const {
-  crType,
-  fTooltip
-} = _Chart.default;
 
 const _crSeriaOption = (color, lineWidth) => ({
   type: 'line',
@@ -35,7 +30,7 @@ const _crScatterSeria = (color, pointFormatter, data) => ({
   type: 'scatter',
   color,
   data,
-  tooltip: fTooltip(pointFormatter)
+  tooltip: (0, _Chart.fTooltip)(pointFormatter)
 }),
       _crDividendSeria = data => _crScatterSeria(_Color.default.EX_DIVIDEND, _Tooltip.tooltipExDividend, data),
       _crSplitRatioSeria = data => _crScatterSeria(_Color.default.SPLIT_RATIO, _Tooltip.tooltipSplitRatio, data);
@@ -43,7 +38,7 @@ const _crScatterSeria = (color, pointFormatter, data) => ({
 const ConfigStockSlice = {
   _setStockSerias(seriaType, lineWidth, dC, dH, dL, dO) {
     const config = this.config,
-          type = crType(seriaType, 'area');
+          type = (0, _Chart.crType)(seriaType, 'area');
     (0, _ChartConfigFn.setSeriaDataTo)(config, dC, 0, 'Close', {
       type,
       lineWidth

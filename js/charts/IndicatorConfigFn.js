@@ -9,7 +9,7 @@ var _dompurify = _interopRequireDefault(require("dompurify"));
 
 var _Tooltip = require("./Tooltip");
 
-var _Chart = _interopRequireDefault(require("./Chart"));
+var _Chart = require("./Chart");
 
 var _seriaFn = require("../math/seriaFn");
 
@@ -108,7 +108,7 @@ const _crLineSeria = (name, color, data) => ({
 const _crColumnSeria = option => _assign({
   type: "column",
   visible: true,
-  tooltip: _Chart.default.fTooltip(_Tooltip.tooltipValueDmy)
+  tooltip: (0, _Chart.fTooltip)(_Tooltip.tooltipValueDmy)
 }, option);
 
 function _Builder(config) {
@@ -172,7 +172,7 @@ const _crConfig = function (_temp) {
     title,
     chartOption
   } = _temp === void 0 ? {} : _temp;
-  return _Builder(_Chart.default.crAreaConfig({
+  return _Builder((0, _Chart.crAreaConfig)({
     title
   })).assignTo('navigation', {
     buttonOptions: {
@@ -211,7 +211,7 @@ const crMfiConfig = (id, title, data) => _Builder(_crConfig({
   color: COLOR_MFI,
   zhValueText: id,
   data: data,
-  point: _Chart.default.fEventsMouseOver(_handleMouseOver.default)
+  point: (0, _Chart.fEventsMouseOver)(_handleMouseOver.default)
 }).toConfig();
 
 exports.crMfiConfig = crMfiConfig;
@@ -237,7 +237,7 @@ const crMiniVolumeConfig = _ref => {
     data: dVolume,
     visible: !_hasColumn,
     name: "Spline",
-    point: _Chart.default.fEventsMouseOver(_handleMouseOver.default)
+    point: (0, _Chart.fEventsMouseOver)(_handleMouseOver.default)
   }).toConfig(),
         {
     series
@@ -259,7 +259,7 @@ const crMiniVolumeConfig = _ref => {
           brightness: 0.07
         }
       },
-      tooltip: tooltipColumn || _Chart.default.fTooltip(_Tooltip.tooltipVolumeTdmyIf)
+      tooltip: tooltipColumn || (0, _Chart.fTooltip)(_Tooltip.tooltipVolumeTdmyIf)
     });
     series.push(_crLineSeria('Median', COLOR_MEDIAN, (0, _seriaFn.median)(dVolume)));
     series.push(_crLineSeria('Mean', COLOR_MEAN, (0, _seriaFn.mean)(dVolume)));
@@ -288,7 +288,7 @@ const crMiniATHConfig = _ref2 => {
     minPointLength: 4,
     groupPadding: 0.1,
     data: data,
-    tooltip: _Chart.default.fTooltip(_Tooltip.tooltipAth)
+    tooltip: (0, _Chart.fTooltip)(_Tooltip.tooltipAth)
   }).toConfig();
 
   return {
@@ -317,7 +317,7 @@ const crMomAthConfig = _ref3 => {
         pointPadding: 0,
         groupPadding: 0,
         turboThreshold: 20000,
-        tooltip: _Chart.default.fTooltip(_Tooltip.tooltipValueDmy)
+        tooltip: (0, _Chart.fTooltip)(_Tooltip.tooltipValueDmy)
       }
     }
   }).assignTo('yAxis', {
@@ -366,7 +366,7 @@ const crMiniHLConfig = _ref4 => {
     color: COLOR_HIGH_LOW,
     fillColor: COLOR_HIGH_LOW,
     data: lowData,
-    tooltip: _Chart.default.fTooltip(_Tooltip.tooltipValueTdmyIf)
+    tooltip: (0, _Chart.fTooltip)(_Tooltip.tooltipValueTdmyIf)
   }).toConfig();
 
   return {

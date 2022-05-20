@@ -17,7 +17,7 @@ var _zhnHighcharts = _interopRequireDefault(require("./plugin/zhn-highcharts"));
 
 var _Color = _interopRequireDefault(require("../constants/Color"));
 
-var _Chart = _interopRequireDefault(require("./Chart"));
+var _Chart = require("./Chart");
 
 var _ChartFn = require("./ChartFn");
 
@@ -57,7 +57,7 @@ const setSeriaDataTo = (config, data, index, name, options) => {
     name,
     data
   }, restOptions, {
-    point: _Chart.default.fEventsMouseOver(_handleMouseOver.default)
+    point: (0, _Chart.fEventsMouseOver)(_handleMouseOver.default)
   });
 };
 
@@ -70,27 +70,18 @@ const getSeriaColorByIndex = seriaIndex => {
 
 exports.getSeriaColorByIndex = getSeriaColorByIndex;
 
-const crSeriaConfig = option => {
-  const {
+const crSeriaConfig = function (_temp) {
+  let {
     seriaType,
     seriaWidth,
     seriaColor,
-    //tp,
     ...restOption
-  } = option || {},
-        type = _Chart.default.crType(seriaType),
-        pointFormatter = _Tooltip.tooltipValueTdmyIf;
-  /*
-  , pointFormatter = tp && Tooltip[tp]
-      || tooltipValueTdmyIf;
-  */
-
-
+  } = _temp === void 0 ? {} : _temp;
   return {
-    type,
+    type: (0, _Chart.crType)(seriaType),
     lineWidth: seriaWidth != null ? seriaWidth : 1,
     color: seriaColor,
-    tooltip: _Chart.default.fTooltip(pointFormatter),
+    tooltip: (0, _Chart.fTooltip)(_Tooltip.tooltipValueTdmyIf),
     ...restOption
   };
 };
@@ -98,7 +89,7 @@ const crSeriaConfig = option => {
 exports.crSeriaConfig = crSeriaConfig;
 
 const crAreaConfig = options => {
-  const config = _merge(_Chart.default.crAreaConfig(options), {
+  const config = _merge((0, _Chart.crAreaConfig)(options), {
     chart: {
       zoomType: 'xy',
       xDeltaCrossLabel: 4,
@@ -107,7 +98,7 @@ const crAreaConfig = options => {
     zhDetailCharts: []
   });
 
-  config.xAxis = _assign(_Chart.default.fXAxisOpposite(config.xAxis), {
+  config.xAxis = _assign((0, _Chart.fXAxisOpposite)(config.xAxis), {
     events: {
       afterSetExtremes: _ChartFn.zoomIndicatorCharts
     }
@@ -124,7 +115,7 @@ const crAreaConfig = options => {
       afterSetExtremes: _ChartFn.afterSetExtremesYAxis
     }
   });
-  config.yAxis.plotLines = [_Chart.default.fPlotLine(_Color.default.HIGH, 'max'), _Chart.default.fPlotLine(_Color.default.LOW, 'min')];
+  config.yAxis.plotLines = [(0, _Chart.fPlotLine)(_Color.default.HIGH, 'max'), (0, _Chart.fPlotLine)(_Color.default.LOW, 'min')];
   return config;
 };
 

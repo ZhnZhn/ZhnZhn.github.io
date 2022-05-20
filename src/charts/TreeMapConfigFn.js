@@ -1,4 +1,9 @@
-import Chart from './Chart';
+import {
+  fTitle,
+  fSubtitle,
+  fTooltip,
+  fCreditsRightBottom
+} from './Chart';
 import { tooltipSparkTreeMap } from './Tooltip';
 
 export const CONFIG_TREE_MAP = {
@@ -27,7 +32,7 @@ export const CONFIG_TREE_MAP = {
 }
 
 export const crTreeMapConfig = () => ({
-  credits: Chart.fCreditsRightBottom(),
+  credits: fCreditsRightBottom(),
   chart: {
     type: 'treemap',
     spacingTop: 25,
@@ -35,9 +40,9 @@ export const crTreeMapConfig = () => ({
     marginRight: 5,
     height: 500
   },
-  title: Chart.fTitle(),
-  subtitle: Chart.fSubtitle(),
-  tooltip: Chart.fTooltip(tooltipSparkTreeMap),
+  title: fTitle(),
+  subtitle: fSubtitle(),
+  tooltip: fTooltip(tooltipSparkTreeMap),
   zhSeries: { count: 0 },
   zhDetailCharts: []
 })

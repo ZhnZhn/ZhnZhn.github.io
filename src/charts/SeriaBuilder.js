@@ -1,6 +1,6 @@
 import { findMinY } from '../math/seriaFn';
 
-import Chart from './Chart';
+import { fTooltip } from './Chart';
 import {
   crSeriaConfig,
   getSeriaColorByIndex
@@ -54,7 +54,7 @@ const SeriaBuilder = {
   _seria(CONFIG, tooltip, option){
     this._type = 'S'
     this.config = { ...CONFIG, ...option }
-    this.add('tooltip', Chart.fTooltip(tooltip))
+    this.add('tooltip', fTooltip(tooltip))
     return this;
   },
   treeMapSeria(tooltip, option){

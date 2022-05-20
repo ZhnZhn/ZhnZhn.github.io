@@ -1,11 +1,16 @@
 import DOMPurify from 'dompurify';
+
 import {
   tooltipValueDmy,
   tooltipValueTdmyIf,
   tooltipVolumeTdmyIf,
   tooltipAth
 } from './Tooltip';
-import Chart from './Chart';
+import {
+  crAreaConfig,
+  fTooltip,
+  fEventsMouseOver
+} from './Chart';
 import { median, mean } from '../math/seriaFn';
 import handleMouseOver from './handleMouseOver';
 import COLOR from '../constants/Color';
@@ -101,7 +106,7 @@ const _crLineSeria = (
 const _crColumnSeria = option => _assign({
    type: "column",
    visible: true,
-   tooltip: Chart.fTooltip(tooltipValueDmy)
+   tooltip: fTooltip(tooltipValueDmy)
  }, option);
 
 function _Builder(config) {
@@ -147,7 +152,7 @@ _Builder.prototype = _assign(_Builder.prototype, {
 const _crConfig = ({
   title,
   chartOption
-}={}) => _Builder(Chart.crAreaConfig({ title }))
+}={}) => _Builder(crAreaConfig({ title }))
   .assignTo('navigation', {
      buttonOptions: {
         y: 20
@@ -193,9 +198,7 @@ export const crMfiConfig = (
     color: COLOR_MFI,
     zhValueText: id,
     data: data,
-    point: Chart.fEventsMouseOver(
-       handleMouseOver
-     )
+    point: fEventsMouseOver(handleMouseOver)
   })
   .toConfig();
 
@@ -221,9 +224,7 @@ export const crMiniVolumeConfig = ({
        data: dVolume,
        visible: !_hasColumn,
        name: "Spline",
-       point: Chart.fEventsMouseOver(
-         handleMouseOver
-       )
+       point: fEventsMouseOver(handleMouseOver)
      })
      .toConfig()
   , { series } = config;
@@ -244,7 +245,7 @@ export const crMiniVolumeConfig = ({
           brightness: 0.07
         }
       },
-      tooltip: tooltipColumn || Chart.fTooltip(tooltipVolumeTdmyIf)
+      tooltip: tooltipColumn || fTooltip(tooltipVolumeTdmyIf)
     });
     series.push(_crLineSeria(
       'Median', COLOR_MEDIAN, median(dVolume)
@@ -274,7 +275,7 @@ export const crMiniATHConfig = ({
        minPointLength: 4,
        groupPadding: 0.1,
        data: data,
-       tooltip: Chart.fTooltip(tooltipAth)
+       tooltip: fTooltip(tooltipAth)
     })
     .toConfig();
   return {
@@ -300,7 +301,7 @@ export const crMomAthConfig = ({
         pointPadding: 0,
         groupPadding: 0,
         turboThreshold: 20000,
-        tooltip: Chart.fTooltip(tooltipValueDmy)
+        tooltip: fTooltip(tooltipValueDmy)
       }
     }
   })
@@ -351,7 +352,7 @@ export const crMiniHLConfig = ({
       color: COLOR_HIGH_LOW,
       fillColor: COLOR_HIGH_LOW,
       data: lowData,
-      tooltip: Chart.fTooltip(tooltipValueTdmyIf)
+      tooltip: fTooltip(tooltipValueTdmyIf)
     })
     .toConfig();
 

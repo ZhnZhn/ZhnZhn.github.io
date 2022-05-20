@@ -2,7 +2,7 @@ import {
   crSeriaConfig,
   crAreaConfig
 } from '../../charts/ChartConfigFn';
-import Chart from '../../charts/Chart';
+import { fSeriaMarker } from '../../charts/Chart';
 import ConfigBuilder from '../../charts/ConfigBuilder';
 import {
   valueMoving,
@@ -61,7 +61,7 @@ const _addSeriesTo = (
        data,
        color,
        visible: false,
-       marker: Chart.fSeriaMarker({ color, symbol })
+       marker: fSeriaMarker(symbol)
     });
 
     if (!isSecondAxes){

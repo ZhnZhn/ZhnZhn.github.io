@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.toPointArr = exports.setLineExtrems = exports.setInfo = exports.setDataAndInfo = exports.crLinkConf = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
 
@@ -9,7 +7,7 @@ var _AdapterFn = require("../AdapterFn");
 
 exports.findMinY = _AdapterFn.findMinY;
 
-var _Chart = _interopRequireDefault(require("../../charts/Chart"));
+var _Chart = require("../../charts/Chart");
 
 var _ChartFn = require("../../charts/ChartFn");
 
@@ -273,9 +271,7 @@ const setDataAndInfo = _ref3 => {
     subtitle,
     seriaType
   } = option;
-
-  _Chart.default.setDefaultTitle(config, title, subtitle);
-
+  (0, _Chart.setDefaultTitle)(config, title, subtitle);
   config.zhConfig = _crZhConfig(option);
   config.info = _crDatasetInfo(json);
 
@@ -324,7 +320,7 @@ const _setCategories = _ref6 => {
   _setZoomMinMaxTo(config, isNotZoomToMinMax, min);
 
   config.series[0].name = time;
-  config.tooltip = _Chart.default.fTooltip(tooltip);
+  config.tooltip = (0, _Chart.fTooltip)(tooltip);
   config.zhConfig.itemCaption = _crItemCaption(option);
   config.zhConfig.itemTime = time;
 
@@ -374,7 +370,7 @@ const addToCategoryConfig = (config, _ref7) => {
 
 exports.addToCategoryConfig = addToCategoryConfig;
 
-const crCategoryTooltip = () => _Chart.default.fTooltip(_Tooltip.tooltipCategorySimple);
+const crCategoryTooltip = () => (0, _Chart.fTooltip)(_Tooltip.tooltipCategorySimple);
 
 exports.crCategoryTooltip = crCategoryTooltip;
 

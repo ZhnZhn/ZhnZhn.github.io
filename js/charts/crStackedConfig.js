@@ -1,20 +1,18 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _Chart = _interopRequireDefault(require("./Chart"));
+var _Chart = require("./Chart");
 
 var _Tooltip = require("./Tooltip");
 
 const _crPlotOption = (type, stacking) => type === 'column' ? {
-  column: _Chart.default.fPlotOptionsColumn({
+  column: (0, _Chart.fPlotOptionsColumn)({
     stacking
   })
 } : {
-  area: _Chart.default.fPlotOptionsArea({
+  area: (0, _Chart.fPlotOptionsArea)({
     stacking
   })
 };
@@ -30,29 +28,29 @@ const crStackedConfig = _ref => {
       count: 0
     },
     zhDetailCharts: [],
-    credits: _Chart.default.fCreditsRightBottom(),
+    credits: (0, _Chart.fCreditsRightBottom)(),
     chart: {
       type: type,
-      spacingTop: _Chart.default.STACKED_SPACING_TOP,
-      spacingBottom: _Chart.default.SPACING_BOTTOM,
-      height: _Chart.default.STACKED_HEIGHT,
+      spacingTop: _Chart.STACKED_SPACING_TOP,
+      spacingBottom: _Chart.SPACING_BOTTOM,
+      height: _Chart.STACKED_HEIGHT,
       zoomType: 'xy'
     },
-    title: _Chart.default.fTitle(),
-    subtitle: _Chart.default.fSubtitle(),
-    tooltip: _Chart.default.fTooltip(_Tooltip.tooltipSparkStackedArea),
-    xAxis: _Chart.default.fXAxisOpposite({
+    title: (0, _Chart.fTitle)(),
+    subtitle: (0, _Chart.fSubtitle)(),
+    tooltip: (0, _Chart.fTooltip)(_Tooltip.tooltipSparkStackedArea),
+    xAxis: (0, _Chart.fXAxisOpposite)({
       type: "category",
       categories: categories,
       startOnTick: false,
       min: 1,
-      crosshair: _Chart.default.fCrosshair()
+      crosshair: (0, _Chart.fCrosshair)()
     }),
-    yAxis: _Chart.default.fYAxisOpposite(),
+    yAxis: (0, _Chart.fYAxisOpposite)(),
     plotOptions: { ..._crPlotOption(type, stacking),
-      series: _Chart.default.fPlotOptionsSeries()
+      series: (0, _Chart.fPlotOptionsSeries)()
     },
-    legend: _Chart.default.fLegend()
+    legend: (0, _Chart.fLegend)()
   };
 };
 

@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.crPieConfig = exports.crOuterPieSeria = exports.crInnerPieSeria = void 0;
 
-var _Chart = _interopRequireDefault(require("./Chart"));
+var _Chart = require("./Chart");
 
 var _Tooltip = require("./Tooltip");
 
@@ -14,15 +12,15 @@ const crPieConfig = () => ({
     count: 0
   },
   zhDetailCharts: [],
-  credits: _Chart.default.fCreditsRightBottom(),
-  title: _Chart.default.fTitle({
-    y: _Chart.default.SEMIDONUT_TITLE_Y
+  credits: (0, _Chart.fCreditsRightBottom)(),
+  title: (0, _Chart.fTitle)({
+    y: _Chart.SEMIDONUT_TITLE_Y
   }),
-  subtitle: _Chart.default.fSubtitle({
-    y: _Chart.default.SEMIDONUT_SUBTITLE_Y
+  subtitle: (0, _Chart.fSubtitle)({
+    y: _Chart.SEMIDONUT_SUBTITLE_Y
   }),
-  legend: _Chart.default.fLegend(),
-  navigation: _Chart.default.fNavigation()
+  legend: (0, _Chart.fLegend)(),
+  navigation: (0, _Chart.fNavigation)()
 });
 
 exports.crPieConfig = crPieConfig;
@@ -85,7 +83,7 @@ const crOuterPieSeria = _ref2 => {
       enabled: false,
       distance: -5
     },
-    tooltip: _Chart.default.fTooltip(_Tooltip.tooltipDonut)
+    tooltip: (0, _Chart.fTooltip)(_Tooltip.tooltipDonut)
   };
 };
 

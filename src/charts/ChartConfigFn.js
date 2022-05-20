@@ -11,7 +11,14 @@ import HighchartsZhn from './plugin/zhn-highcharts'
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 
 import COLOR from '../constants/Color';
-import Chart from './Chart';
+import {
+  crAreaConfig as _crAreaConfig,
+  fEventsMouseOver,
+  crType,
+  fTooltip,
+  fXAxisOpposite,
+  fPlotLine
+} from './Chart';
 import {
   zoomIndicatorCharts,
   afterSetExtremesYAxis
@@ -52,7 +59,7 @@ export const setSeriaDataTo = (
       name,
       data,
     }, restOptions, {
-      point: Chart.fEventsMouseOver(handleMouseOver)
+      point: fEventsMouseOver(handleMouseOver)
     })
 }
 
@@ -61,36 +68,24 @@ export const getSeriaColorByIndex = (seriaIndex) => {
   return colors[seriaIndex % colors.length];
 }
 
-export const crSeriaConfig = (
-  option
-) => {
-  const {
-    seriaType,
-    seriaWidth,
-    seriaColor,
-    //tp,
-    ...restOption
-  } = option || {}
-  , type = Chart.crType(seriaType)
-  , pointFormatter = tooltipValueTdmyIf
-  /*
-  , pointFormatter = tp && Tooltip[tp]
-      || tooltipValueTdmyIf;
-  */
-  return {
-    type,
-    lineWidth: seriaWidth ?? 1,
-    color: seriaColor,
-    tooltip: Chart.fTooltip(pointFormatter),
-    ...restOption
-  };
-}
+export const crSeriaConfig = ({
+  seriaType,
+  seriaWidth,
+  seriaColor,
+  ...restOption
+} = {}) => ({
+  type: crType(seriaType),
+  lineWidth: seriaWidth ?? 1,
+  color: seriaColor,
+  tooltip: fTooltip(tooltipValueTdmyIf),
+  ...restOption
+})
 
 export const crAreaConfig = (
   options
 ) => {
   const config = _merge(
-    Chart.crAreaConfig(options), {
+    _crAreaConfig(options), {
     chart: {
       zoomType: 'xy',
       xDeltaCrossLabel: 4,
@@ -99,7 +94,7 @@ export const crAreaConfig = (
     zhDetailCharts: []
   });
 
-  config.xAxis = _assign( Chart.fXAxisOpposite(config.xAxis), {
+  config.xAxis = _assign(fXAxisOpposite(config.xAxis), {
     events: {
       afterSetExtremes: zoomIndicatorCharts
     }
@@ -118,8 +113,8 @@ export const crAreaConfig = (
   })
 
   config.yAxis.plotLines = [
-    Chart.fPlotLine(COLOR.HIGH, 'max'),
-    Chart.fPlotLine(COLOR.LOW, 'min')
+    fPlotLine(COLOR.HIGH, 'max'),
+    fPlotLine(COLOR.LOW, 'min')
   ]
   return config;
 }

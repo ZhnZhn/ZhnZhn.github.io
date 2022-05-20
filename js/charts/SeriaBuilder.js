@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
 var _seriaFn = require("../math/seriaFn");
 
-var _Chart = _interopRequireDefault(require("./Chart"));
+var _Chart = require("./Chart");
 
 var _ChartConfigFn = require("./ChartConfigFn");
 
@@ -82,7 +80,7 @@ const SeriaBuilder = {
     this.config = { ...CONFIG,
       ...option
     };
-    this.add('tooltip', _Chart.default.fTooltip(tooltip));
+    this.add('tooltip', (0, _Chart.fTooltip)(tooltip));
     return this;
   },
 
