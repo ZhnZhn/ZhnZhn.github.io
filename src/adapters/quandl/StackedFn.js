@@ -7,8 +7,7 @@ import {
   CHT_STACKED_COLUMN,
   CHT_STACKED_COLUMN_PERCENT
 } from '../../constants/ChartType';
-
-import Chart from '../../charts/Chart';
+import { getMonoColor } from '../../charts/MonoColorFn';
 import {
   crStackedAreaSeria,
   crStackedColumnSeria
@@ -99,7 +98,7 @@ const _initSeries = ({
   chartType,
   fSeria
 }) => items.map((item, itemIndex)=>{
-    const color = Chart.getMonoColor(itemIndex)
+    const color = getMonoColor(itemIndex)
     , { name } = item;
     return fSeria({ name, color })
 });

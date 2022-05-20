@@ -3,7 +3,13 @@ import Big from 'big.js';
 import { compareByValue } from '../compareByFn';
 
 import { CHT_TREE_MAP } from '../../constants/ChartType';
-import Chart from '../../charts/Chart';
+import {
+  COLOR_PERIOD,
+  COLOR_BASE1,
+  COLOR_BASE2,
+  crMonoColor,
+  getMonoColor
+} from '../../charts/MonoColorFn';
 import {
   crTreeMapConfig,
   crTreeMapSeria
@@ -22,21 +28,13 @@ import {
   crZhConfig
 } from './fnStacked';
 
-const _assign = Object.assign
-, {
-   COLOR_PERIOD,
-   COLOR_BASE1,
-   COLOR_BASE2,
-   crMonoColor,
-   getMonoColor
- } = Chart;
+const _assign = Object.assign;
 
 const _crYearTotals = (
   jsonData,
   items
 ) => jsonData
   .map(year => calcTotal(year, items))
-
 
 const _crDataAndTotal = (
   jsonData=[],

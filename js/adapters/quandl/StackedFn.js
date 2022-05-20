@@ -11,7 +11,7 @@ var _compareByFn = require("../compareByFn");
 
 var _ChartType = require("../../constants/ChartType");
 
-var _Chart = _interopRequireDefault(require("../../charts/Chart"));
+var _MonoColorFn = require("../../charts/MonoColorFn");
 
 var _StackedConfigFn = require("../../charts/StackedConfigFn");
 
@@ -111,11 +111,10 @@ const _initSeries = _ref => {
     fSeria
   } = _ref;
   return items.map((item, itemIndex) => {
-    const color = _Chart.default.getMonoColor(itemIndex),
+    const color = (0, _MonoColorFn.getMonoColor)(itemIndex),
           {
       name
     } = item;
-
     return fSeria({
       name,
       color

@@ -11,7 +11,7 @@ var _compareByFn = require("../compareByFn");
 
 var _ChartType = require("../../constants/ChartType");
 
-var _Chart = _interopRequireDefault(require("../../charts/Chart"));
+var _MonoColorFn = require("../../charts/MonoColorFn");
 
 var _TreeMapConfigFn = require("../../charts/TreeMapConfigFn");
 
@@ -21,14 +21,7 @@ var _QuandlFn = require("./QuandlFn");
 
 var _fnStacked = require("./fnStacked");
 
-const _assign = Object.assign,
-      {
-  COLOR_PERIOD,
-  COLOR_BASE1,
-  COLOR_BASE2,
-  crMonoColor,
-  getMonoColor
-} = _Chart.default;
+const _assign = Object.assign;
 
 const _crYearTotals = (jsonData, items) => jsonData.map(year => (0, _StackedFn.calcTotal)(year, items));
 
@@ -120,19 +113,19 @@ const _calcLevelAndSetPercent = (data, bTotal) => {
 };
 
 const _setColorToPoint = (data, level60, level90) => {
-  const period = COLOR_PERIOD,
-        base1 = COLOR_BASE1,
-        base2 = COLOR_BASE2;
+  const period = _MonoColorFn.COLOR_PERIOD,
+        base1 = _MonoColorFn.COLOR_BASE1,
+        base2 = _MonoColorFn.COLOR_BASE2;
   let deltaColor;
   data.forEach((point, pointIndex) => {
     if (pointIndex < level60) {
       deltaColor = pointIndex * (period / level60);
-      point.color = crMonoColor(base1, deltaColor);
+      point.color = (0, _MonoColorFn.crMonoColor)(base1, deltaColor);
     } else if (pointIndex < level60 + level90) {
       deltaColor = (pointIndex - level60) * (period / level90);
-      point.color = crMonoColor(base2, deltaColor);
+      point.color = (0, _MonoColorFn.crMonoColor)(base2, deltaColor);
     } else {
-      point.color = getMonoColor(pointIndex - level60 - level90);
+      point.color = (0, _MonoColorFn.getMonoColor)(pointIndex - level60 - level90);
     }
   });
 };

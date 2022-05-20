@@ -1,6 +1,12 @@
 import JSONstat from 'jsonstat';
 
-import Chart from '../../charts/Chart';
+import {
+  COLOR_PERIOD,
+  COLOR_BASE1,
+  COLOR_BASE2,
+  crMonoColor,
+  getMonoColor
+} from '../../charts/MonoColorFn';
 import Builder from '../../charts/ConfigBuilder';
 import { tooltipTreeMap } from '../../charts/Tooltip';
 import {
@@ -145,21 +151,21 @@ const _addColor = (
   level60,
   level90
 ) => {
-  const period = Chart.COLOR_PERIOD
-  , base1 = Chart.COLOR_BASE1
-  , base2 = Chart.COLOR_BASE2;
+  const period = COLOR_PERIOD
+  , base1 = COLOR_BASE1
+  , base2 = COLOR_BASE2;
 
   const _level90 = level90 - level60;
   let deltaColor;
   data.forEach((point, pointIndex) => {
      if (pointIndex < level60){
        deltaColor = pointIndex * ( period / level60 );
-       point.color = Chart.crMonoColor(base1, deltaColor);
+       point.color = crMonoColor(base1, deltaColor);
      } else if ( pointIndex < level60+_level90 ) {
        deltaColor = (pointIndex-level60) * ( period / _level90 );
-       point.color = Chart.crMonoColor(base2, deltaColor);
+       point.color = crMonoColor(base2, deltaColor);
      } else {
-       point.color = Chart.getMonoColor(pointIndex-level60-_level90)
+       point.color = getMonoColor(pointIndex-level60-_level90)
      }
    })
 };
