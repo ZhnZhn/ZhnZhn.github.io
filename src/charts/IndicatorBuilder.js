@@ -1,4 +1,4 @@
-import {  
+import {
   categoryDiff,
   categoryRate,
   categoryRoc,
@@ -7,12 +7,12 @@ import {
   momAth,
   pby10
 } from '../math/tsIndicators';
-import ChartConfig from './ChartConfig';
-
-const {
+import {
   crMfiConfig,
   crMomAthConfig
-} = ChartConfig;
+} from './IndicatorConfigFn';
+import ChartConfig from './ChartConfig'
+
 
 const _getD12 = chart => {
   const series = chart.series

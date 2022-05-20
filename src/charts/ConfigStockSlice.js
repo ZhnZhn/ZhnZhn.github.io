@@ -3,18 +3,18 @@ import COLOR from '../constants/Color';
 import Chart from './Chart';
 import ChartConfig from './ChartConfig';
 import {
+  crMiniVolumeConfig,
+  crMiniATHConfig,
+  crMiniHLConfig
+} from './IndicatorConfigFn';
+import {
   tooltipExDividend,
   tooltipSplitRatio,
   tooltipValueTdmyIf
 } from './Tooltip';
 
 const { crType, fTooltip } = Chart;
-const {
-  setSerieData,
-  crMiniVolumeConfig,
-  crMiniATHConfig,
-  crMiniHLConfig
-} = ChartConfig;
+const { setSerieData } = ChartConfig;
 
 const _crSeriaOption = (
   color,

@@ -11,6 +11,8 @@ var _Chart = _interopRequireDefault(require("./Chart"));
 
 var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
+var _IndicatorConfigFn = require("./IndicatorConfigFn");
+
 var _Tooltip = require("./Tooltip");
 
 const {
@@ -18,10 +20,7 @@ const {
   fTooltip
 } = _Chart.default;
 const {
-  setSerieData,
-  crMiniVolumeConfig,
-  crMiniATHConfig,
-  crMiniHLConfig
+  setSerieData
 } = _ChartConfig.default;
 
 const _crSeriaOption = (color, lineWidth) => ({
@@ -109,21 +108,21 @@ const ConfigStockSlice = {
     const {
       dVolume
     } = option;
-    return this._addMini(dVolume, option, crMiniVolumeConfig);
+    return this._addMini(dVolume, option, _IndicatorConfigFn.crMiniVolumeConfig);
   },
 
   addMiniATH(option) {
     const {
       data
     } = option;
-    return this._addMini(data, option, crMiniATHConfig);
+    return this._addMini(data, option, _IndicatorConfigFn.crMiniATHConfig);
   },
 
   addMiniHL(option) {
     const {
       data
     } = option;
-    return this._addMini(data, option, crMiniHLConfig);
+    return this._addMini(data, option, _IndicatorConfigFn.crMiniHLConfig);
   }
 
 };

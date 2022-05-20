@@ -7,12 +7,9 @@ exports.default = void 0;
 
 var _tsIndicators = require("../math/tsIndicators");
 
-var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
+var _IndicatorConfigFn = require("./IndicatorConfigFn");
 
-const {
-  crMfiConfig,
-  crMomAthConfig
-} = _ChartConfig.default;
+var _ChartConfig = _interopRequireDefault(require("./ChartConfig"));
 
 const _getD12 = chart => {
   const series = chart.series,
@@ -131,11 +128,11 @@ const IndicatorBuilder = {
     const data = chart.options.zhPoints,
           [dataMfi, nNotFullPoint] = (0, _tsIndicators.mfi)(data, period),
           titleNotFullPoint = nNotFullPoint !== 0 ? ' Not Full Data HL:' + nNotFullPoint : '';
-    return crMfiConfig(id, id + titleNotFullPoint, dataMfi);
+    return (0, _IndicatorConfigFn.crMfiConfig)(id, id + titleNotFullPoint, dataMfi);
   },
   crMomAthConfig: chart => {
     const data = chart.options.zhPoints;
-    return crMomAthConfig((0, _tsIndicators.momAth)(data));
+    return (0, _IndicatorConfigFn.crMomAthConfig)((0, _tsIndicators.momAth)(data));
   }
 };
 var _default = IndicatorBuilder;
