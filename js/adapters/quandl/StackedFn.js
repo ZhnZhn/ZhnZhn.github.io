@@ -13,19 +13,15 @@ var _ChartType = require("../../constants/ChartType");
 
 var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _StackedConfigFn = require("../../charts/StackedConfigFn");
 
 var _QuandlFn = require("./QuandlFn");
 
-const {
-  crStackedAreaSeria,
-  crStackedColumnSeria
-} = _ChartConfig.default;
 const _rFactorySeria = {
-  [_ChartType.CHT_STACKED_AREA]: crStackedAreaSeria,
-  [_ChartType.CHT_STACKED_AREA_PERCENT]: crStackedAreaSeria,
-  [_ChartType.CHT_STACKED_COLUMN]: crStackedColumnSeria,
-  [_ChartType.CHT_STACKED_COLUMN_PERCENT]: crStackedColumnSeria
+  [_ChartType.CHT_STACKED_AREA]: _StackedConfigFn.crStackedAreaSeria,
+  [_ChartType.CHT_STACKED_AREA_PERCENT]: _StackedConfigFn.crStackedAreaSeria,
+  [_ChartType.CHT_STACKED_COLUMN]: _StackedConfigFn.crStackedColumnSeria,
+  [_ChartType.CHT_STACKED_COLUMN_PERCENT]: _StackedConfigFn.crStackedColumnSeria
 };
 
 const calcTotal = function (jsonData, items) {

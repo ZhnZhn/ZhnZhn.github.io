@@ -9,14 +9,12 @@ import {
 } from '../../constants/ChartType';
 
 import Chart from '../../charts/Chart';
-import ChartConfig from '../../charts/ChartConfig';
-
-import { crPercent } from './QuandlFn';
-
-const {
+import {
   crStackedAreaSeria,
   crStackedColumnSeria
-} = ChartConfig
+} from '../../charts/StackedConfigFn';
+
+import { crPercent } from './QuandlFn';
 
 const _rFactorySeria = {
   [CHT_STACKED_AREA]: crStackedAreaSeria,

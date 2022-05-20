@@ -27,10 +27,6 @@ var _ChartTheme = _interopRequireDefault(require("./ChartTheme"));
 
 var _handleMouseOver = _interopRequireDefault(require("./handleMouseOver"));
 
-var _WithStackedAreaConfig = _interopRequireDefault(require("./WithStackedAreaConfig"));
-
-var _WithStackedColumnConfig = _interopRequireDefault(require("./WithStackedColumnConfig"));
-
 var _WithTreeMapConfig = _interopRequireDefault(require("./WithTreeMapConfig"));
 
 //import HighchartsMore from 'highcharts/lib/highcharts-more';
@@ -39,9 +35,7 @@ var _WithTreeMapConfig = _interopRequireDefault(require("./WithTreeMapConfig"));
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 const _merge = _highcharts.default.merge;
 const _assign = Object.assign;
-const ChartConfig = { ..._WithStackedAreaConfig.default,
-  ..._WithStackedColumnConfig.default,
-  ..._WithTreeMapConfig.default,
+const ChartConfig = { ..._WithTreeMapConfig.default,
 
   init() {
     (0, _treemap.default)(_highcharts.default);

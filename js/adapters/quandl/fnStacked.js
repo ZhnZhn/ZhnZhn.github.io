@@ -7,17 +7,13 @@ exports.crZhConfig = exports.crValueMoving = exports.crConfigOption = exports.cr
 
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _StackedConfigFn = require("../../charts/StackedConfigFn");
 
 var _StackedFn = require("./StackedFn");
 
 var _QuandlFn = require("./QuandlFn");
 
-const _assign = Object.assign,
-      {
-  crStackedAreaConfig,
-  crStackedColumnConfig
-} = _ChartConfig.default;
+const _assign = Object.assign;
 
 const _setCaption = (config, option, stacking) => {
   const PERCENT = stacking === 'percent' ? ':PERCENT' : '';
@@ -86,7 +82,7 @@ const crConfig = _ref2 => {
     chartType,
     stacking
   }),
-        crConfig = type === 'column' ? crStackedColumnConfig : crStackedAreaConfig,
+        crConfig = type === 'column' ? _StackedConfigFn.crStackedColumnConfig : _StackedConfigFn.crStackedAreaConfig,
         config = crConfig({
     categories: stackedOption.categories,
     stacking

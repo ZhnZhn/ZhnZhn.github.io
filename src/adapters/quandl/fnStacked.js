@@ -1,5 +1,8 @@
 import formatAllNumber from '../../utils/formatAllNumber';
-import ChartConfig from '../../charts/ChartConfig';
+import {
+  crStackedAreaConfig,
+  crStackedColumnConfig
+} from '../../charts/StackedConfigFn';
 
 import { crStackedConfig } from './StackedFn';
 import {
@@ -9,12 +12,7 @@ import {
   crDatasetInfo
 } from './QuandlFn';
 
-const _assign = Object.assign
-, {
-  crStackedAreaConfig,
-  crStackedColumnConfig
-} = ChartConfig;
-
+const _assign = Object.assign;
 
 const _setCaption = (
   config,
