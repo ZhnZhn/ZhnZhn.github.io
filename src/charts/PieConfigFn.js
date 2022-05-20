@@ -1,22 +1,24 @@
 import Chart from './Chart';
 import { tooltipDonut } from './Tooltip';
 
-const WithPieConfig = {
+export const crPieConfig = () => ({
+  zhSeries: {
+    count: 0
+  },
+  zhDetailCharts: [],
 
- crPieConfig: () => ({
-    zhSeries: {
-       count: 0
-    },
-    zhDetailCharts: [],
+  credits: Chart.fCreditsRightBottom(),
+  title: Chart.fTitle({ y:Chart.SEMIDONUT_TITLE_Y }),
+  subtitle: Chart.fSubtitle({ y:Chart.SEMIDONUT_SUBTITLE_Y }),
+  legend: Chart.fLegend(),
+  navigation: Chart.fNavigation()
+})
 
-    credits: Chart.fCreditsRightBottom(),
-    title: Chart.fTitle({ y:Chart.SEMIDONUT_TITLE_Y }),
-    subtitle: Chart.fSubtitle({ y:Chart.SEMIDONUT_SUBTITLE_Y }),
-    legend: Chart.fLegend(),
-    navigation: Chart.fNavigation()
-}),
-
-crInnerPieSeria: ({center, year, bTotal}) => ({
+export const crInnerPieSeria = ({
+  center,
+  year,
+  bTotal
+}) => ({
     type: 'pie',
     borderColor: 'transparent',
     colors: ['transparent'],
@@ -39,11 +41,12 @@ crInnerPieSeria: ({center, year, bTotal}) => ({
         textShadow: 'none;'
       }
    }
- }),
+ })
 
- crOuterPieSeria: ({
-   center, data,
-   isDataLabels=false, isShowInLegend=false
+ export const crOuterPieSeria = ({
+   center,
+   data,
+   isShowInLegend=false
  })=> ({
    type: 'pie',
    colorByPoint: true,
@@ -60,12 +63,9 @@ crInnerPieSeria: ({center, year, bTotal}) => ({
    showInLegend: isShowInLegend,
    data: data,
    dataLabels: {
-     enabled: isDataLabels,
+     enabled: false,
      distance: -5
    },
 
    tooltip: Chart.fTooltip(tooltipDonut)
  })
-}
-
-export default WithPieConfig

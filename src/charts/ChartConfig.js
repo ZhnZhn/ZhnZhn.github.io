@@ -21,7 +21,6 @@ import { tooltipValueTdmyIf } from './Tooltip';
 import ChartTheme from './ChartTheme'
 import handleMouseOver from './handleMouseOver'
 
-import WithPie from './WithPieConfig';
 import WithStackedArea from './WithStackedAreaConfig';
 import WithStackedColumn from './WithStackedColumnConfig';
 import WithTreeMap from './WithTreeMapConfig';
@@ -30,7 +29,6 @@ const _merge = Highcharts.merge;
 const _assign = Object.assign;
 
 const ChartConfig = {
-  ...WithPie,
   ...WithStackedArea,
   ...WithStackedColumn,
   ...WithTreeMap,

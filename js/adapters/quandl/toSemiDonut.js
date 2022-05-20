@@ -15,18 +15,13 @@ var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumb
 
 var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _PieConfigFn = require("../../charts/PieConfigFn");
 
 var _QuandlFn = require("./QuandlFn");
 
 var _fnStacked = require("./fnStacked");
 
 const _assign = Object.assign,
-      {
-  crPieConfig,
-  crInnerPieSeria,
-  crOuterPieSeria
-} = _ChartConfig.default,
       {
   HEIGHT,
   LEGEND_ROW_HEIGHT
@@ -94,7 +89,7 @@ const _crYear = yearStr => yearStr ? yearStr.split('-')[0] : '';
 const _sortData = data => data.sort(_compareByFn.compareByY).reverse();
 
 const toSemiDonut = (json, option) => {
-  const config = crPieConfig(),
+  const config = (0, _PieConfigFn.crPieConfig)(),
         {
     sliceItems: items = [],
     value = ''
@@ -149,19 +144,19 @@ const toSemiDonut = (json, option) => {
     bTotal: _bTotal2
   });
 
-  config.series = [crInnerPieSeria({
+  config.series = [(0, _PieConfigFn.crInnerPieSeria)({
     center: ['20%', '80%'],
     year: _year1,
     bTotal: (0, _formatAllNumber.default)(_bTotal1)
-  }), crOuterPieSeria({
+  }), (0, _PieConfigFn.crOuterPieSeria)({
     center: ['20%', '80%'],
     data: _dataTop1,
     isShowInLegend: true
-  }), crInnerPieSeria({
+  }), (0, _PieConfigFn.crInnerPieSeria)({
     center: ['70%', '80%'],
     year: _year2,
     bTotal: (0, _formatAllNumber.default)(_bTotal2)
-  }), crOuterPieSeria({
+  }), (0, _PieConfigFn.crOuterPieSeria)({
     center: ['70%', '80%'],
     data: _dataTop2
   })];

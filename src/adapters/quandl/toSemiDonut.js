@@ -5,7 +5,11 @@ import { compareByY } from '../compareByFn';
 import { CHT_SEMI_DONUT } from '../../constants/ChartType';
 import formatAllNumber from '../../utils/formatAllNumber';
 import Chart from '../../charts/Chart';
-import ChartConfig from '../../charts/ChartConfig';
+import {
+  crPieConfig,
+  crInnerPieSeria,
+  crOuterPieSeria
+} from '../../charts/PieConfigFn';
 
 import {
   setTitleToConfig,
@@ -18,11 +22,6 @@ import {
 } from './fnStacked';
 
 const _assign = Object.assign
-, {
-    crPieConfig,
-    crInnerPieSeria,
-    crOuterPieSeria
-  } = ChartConfig
 , { HEIGHT, LEGEND_ROW_HEIGHT } = Chart;
 
 const _calcLegendHeight = (
