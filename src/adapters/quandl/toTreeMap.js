@@ -4,8 +4,10 @@ import { compareByValue } from '../compareByFn';
 
 import { CHT_TREE_MAP } from '../../constants/ChartType';
 import Chart from '../../charts/Chart';
-import ChartConfig from '../../charts/ChartConfig';
-
+import {
+  crTreeMapConfig,
+  crTreeMapSeria
+} from '../../charts/TreeMapConfigFn';
 import {
   calcTotal,
   crSparkData
@@ -27,11 +29,7 @@ const _assign = Object.assign
    COLOR_BASE2,
    crMonoColor,
    getMonoColor
- } = Chart
- , {
-   crTreeMapConfig,
-   crTreeMapSeria
- } = ChartConfig;
+ } = Chart;
 
 const _crYearTotals = (
   jsonData,

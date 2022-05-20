@@ -27,16 +27,13 @@ var _ChartTheme = _interopRequireDefault(require("./ChartTheme"));
 
 var _handleMouseOver = _interopRequireDefault(require("./handleMouseOver"));
 
-var _WithTreeMapConfig = _interopRequireDefault(require("./WithTreeMapConfig"));
-
 //import HighchartsMore from 'highcharts/lib/highcharts-more';
 //import HighchartsTreemap from 'highcharts/lib/modules/treemap';
 //import HighchartsExporting from 'highcharts/lib/modules/exporting';
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 const _merge = _highcharts.default.merge;
 const _assign = Object.assign;
-const ChartConfig = { ..._WithTreeMapConfig.default,
-
+const ChartConfig = {
   init() {
     (0, _treemap.default)(_highcharts.default);
     (0, _exporting.default)(_highcharts.default);

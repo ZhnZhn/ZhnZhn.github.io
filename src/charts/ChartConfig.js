@@ -21,13 +21,10 @@ import { tooltipValueTdmyIf } from './Tooltip';
 import ChartTheme from './ChartTheme'
 import handleMouseOver from './handleMouseOver'
 
-import WithTreeMap from './WithTreeMapConfig';
-
 const _merge = Highcharts.merge;
 const _assign = Object.assign;
 
 const ChartConfig = {
-  ...WithTreeMap,
 
   init(){
     HighchartsTreemap(Highcharts);

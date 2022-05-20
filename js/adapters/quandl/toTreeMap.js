@@ -13,7 +13,7 @@ var _ChartType = require("../../constants/ChartType");
 
 var _Chart = _interopRequireDefault(require("../../charts/Chart"));
 
-var _ChartConfig = _interopRequireDefault(require("../../charts/ChartConfig"));
+var _TreeMapConfigFn = require("../../charts/TreeMapConfigFn");
 
 var _StackedFn = require("./StackedFn");
 
@@ -28,11 +28,7 @@ const _assign = Object.assign,
   COLOR_BASE2,
   crMonoColor,
   getMonoColor
-} = _Chart.default,
-      {
-  crTreeMapConfig,
-  crTreeMapSeria
-} = _ChartConfig.default;
+} = _Chart.default;
 
 const _crYearTotals = (jsonData, items) => jsonData.map(year => (0, _StackedFn.calcTotal)(year, items));
 
@@ -142,7 +138,7 @@ const _setColorToPoint = (data, level60, level90) => {
 };
 
 const toTreeMap = (json, option) => {
-  const config = crTreeMapConfig(),
+  const config = (0, _TreeMapConfigFn.crTreeMapConfig)(),
         {
     sliceItems: items100 = [],
     value = ''
@@ -168,7 +164,7 @@ const toTreeMap = (json, option) => {
   (0, _QuandlFn.setTitleToConfig)(config, option);
 
   _assign(config, {
-    series: [crTreeMapSeria(data)],
+    series: [(0, _TreeMapConfigFn.crTreeMapSeria)(data)],
     valueMoving: (0, _fnStacked.crValueMoving)(bTotal, yearTitle, bPrevTotal, dateTo),
     zhConfig: (0, _fnStacked.crZhConfig)(option, id),
     info: (0, _QuandlFn.crDatasetInfo)(json)

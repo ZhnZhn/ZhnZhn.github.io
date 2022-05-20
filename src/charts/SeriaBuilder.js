@@ -2,42 +2,17 @@ import { findMinY } from '../math/seriaFn';
 
 import Chart from './Chart';
 import ChartConfig from './ChartConfig';
+import { CONFIG_TREE_MAP } from './TreeMapConfigFn';
 
-const C = {
-  SERIA: {
-     //type: 'spline',
-     visible: true,
-     marker: {
-       symbol: 'circle'
-     }
-  },
-  TREE_MAP: {
-        type : 'treemap',
-        layoutAlgorithm: 'squarified',
-        //layoutAlgorithm : 'sliceAndDice',
-        borderColor : 'gray',
-        dataLabels : {
-          align : 'left',
-          verticalAlign : 'top',
-          style : {
-            fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
-            fontSize: '14px',
-            fontWeight: 'bold',
-            color : 'black',
-            textShadow: 'none'
-          }
-        },
-        //data : data,
-        states : {
-          hover : {
-            borderColor : 'yellow',
-            brightness: 0
-          }
-        }
-    },
-    SCATTER: {
-      type: 'scatter'
-    }
+const CONFIG_SERIA = {
+   //type: 'spline',
+   visible: true,
+   marker: {
+    symbol: 'circle'
+   }
+}
+, CONFIG_SCATTER = {
+   type: 'scatter'
 };
 
 const _isArr = Array.isArray
@@ -71,7 +46,7 @@ const SeriaBuilder = {
     return this;
   },
   splineSeria(option){
-    return this.initSeria({ ...C.SERIA, ...option });
+    return this.initSeria({ ...CONFIG_SERIA, ...option });
   },
   _seria(CONFIG, tooltip, option){
     this._type = 'S'
@@ -80,10 +55,10 @@ const SeriaBuilder = {
     return this;
   },
   treeMapSeria(tooltip, option){
-    return this._seria(C.TREE_MAP, tooltip, option);
+    return this._seria(CONFIG_TREE_MAP, tooltip, option);
   },
   scatterSeria(tooltip, option){
-    return this._seria(C.SCATTER, tooltip, option);
+    return this._seria(CONFIG_SCATTER, tooltip, option);
   },
   stockSeria(id, data){
     return this
