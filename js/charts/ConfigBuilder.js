@@ -15,7 +15,7 @@ var _ChartConfigFn = require("./ChartConfigFn");
 
 var _TreeMapConfigFn = require("./TreeMapConfigFn");
 
-var _ChartFactory = _interopRequireDefault(require("./ChartFactory"));
+var _ChartFactory = require("./ChartFactory");
 
 var _SeriaBuilder = _interopRequireDefault(require("./SeriaBuilder"));
 
@@ -149,7 +149,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
       categories = [];
     }
 
-    const _crConfig = type === 'BAR' ? _ChartFactory.default.crBarConfig : _ChartFactory.default.crColumnConfig;
+    const _crConfig = type === 'BAR' ? _ChartFactory.crBarConfig : _ChartFactory.crColumnConfig;
 
     this.config = _crConfig(option);
     return this.add('xAxis', {

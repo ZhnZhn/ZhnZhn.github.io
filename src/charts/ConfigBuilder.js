@@ -21,7 +21,10 @@ import {
 import {
   crTreeMapConfig
 } from './TreeMapConfigFn';
-import Factory from './ChartFactory';
+import {
+  crBarConfig,
+  crColumnConfig
+} from './ChartFactory';
 
 import SeriaBuilder from './SeriaBuilder';
 import ConfigStockSlice from './ConfigStockSlice';
@@ -51,8 +54,7 @@ const CATEGORIES_X_AXIS = {
   labels: {
     x: 3
   }
-}
-
+};
 
 const _isObj = obj => obj && typeof obj === 'object'
 , _isStr = str => typeof str === 'string'
@@ -130,8 +132,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
   barOrColumnConfig(type, categories=[], option){
     const _crConfig = type === 'BAR'
-      ? Factory.crBarConfig
-      : Factory.crColumnConfig;
+      ? crBarConfig
+      : crColumnConfig;
     this.config = _crConfig(option)
     return this.add('xAxis', { categories });
   },
