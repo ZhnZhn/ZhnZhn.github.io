@@ -15,38 +15,48 @@ const S_TEXT = {
 , S_CAPTION_2 = { width: 100 }
 , S_INPUT = { width: 40 };
 
-const INIT = {
-  POIN_WIDTH: 1,
-  R1: 4,
-  R2: 0
-};
+const DF_POIN_WIDTH = 1
+, DF_R1 = 4
+, DF_R2 = 0;
 
 const SERIA_OPTION = {
   name: 'Range',
   type: 'columnrange',
   borderWidth: 0,
-  pointWidth: INIT.POIN_WIDTH
+  pointWidth: DF_POIN_WIDTH
 };
 
+// [n1,n2,fromIndex,toIndex]
 const _getNames = s => {
   const n1 = s[0].name, n2 = s[1].name;
   return n1 <= n2
-    ? { n1, n2, fromIndex: 0, toIndex: 1 }
-    : { n1: n2, n2: n1, fromIndex: 1, toIndex: 0 };
+    ? [n1, n2, 0, 1]
+    : [n2, n1, 1, 0];
 };
 
+const _getColor = (
+  series,
+  index
+) => series[index].color;
+
 const _setRadius = (value, seria) => {
-  const _ = seria.options;
-  _.marker.radius = value
-  seria.update(_, false)
+  const { options } = seria;
+  options.marker.radius = value
+  seria.update(options, false)
 }
 
-const _fHeValue = (propName, min, max) => function(v) {
+const _fHeValue = (
+  propName,
+  min,
+  max
+) => function(v) {
   const _ = parseInt(v, 10);
   if ( _>min && _<max) {
     this[propName] = v
   }
 }
+
+const _getValue = ref => ref.current.getValue();
 
 const _crSeriaOptions = (pointWidth) => ({
   ...SERIA_OPTION,
@@ -69,9 +79,9 @@ class ColumnRangeDialog extends Component {
     this._heWidth = _fHeValue('_pointWidth', -1, 7).bind(this)
     this._heRadius1 = _fHeValue('_r1', -1, 9).bind(this)
     this._heRadius2 = _fHeValue('_r2', -1, 9).bind(this)
-    this._r1 = INIT.R1
-    this._r2 = INIT.R1
-    this._pointWidth = INIT.POIN_WIDTH
+    this._r1 = DF_R1
+    this._r2 = DF_R2
+    this._pointWidth = DF_POIN_WIDTH
 
     this._refW = createRef()
     this._refR1 = createRef()
@@ -87,24 +97,32 @@ class ColumnRangeDialog extends Component {
   }
 
   _hAdd = () => {
-    const { _fromIndex, _toIndex, props } = this
-     const { data, onClose } = props
-     , { chart } = data
-     , _series = chart.series
-     , _s1 = _series[_fromIndex]
-     , _s2 = _series[_toIndex]
-     , _d = columnRange(_s1.data, _s2.data);
+    const {
+      _fromIndex,
+      _toIndex,
+      _color,
+      props
+    } = this
+    , {
+      data,
+      onClose
+    } = props
+    , { chart } = data
+    , _series = chart.series
+    , _s1 = _series[_fromIndex]
+    , _s2 = _series[_toIndex]
+    , _d = columnRange(_s1.data, _s2.data);
 
-     this._heWidth(this._refW.current.getValue())
-     this._heRadius1(this._refR1.current.getValue())
-     this._heRadius2(this._refR2.current.getValue())
+     this._heWidth(_getValue(this._refW))
+     this._heRadius1(_getValue(this._refR1))
+     this._heRadius2(_getValue(this._refR2))
 
      _setRadius(this._r1, _s1)
      _setRadius(this._r2, _s2)
 
      chart.zhAddSeriaToYAxis({
        data: _d,
-       color: this._color,
+       color: _color,
        yIndex: 0,
      }, _crSeriaOptions(this._pointWidth))
 
@@ -117,15 +135,21 @@ class ColumnRangeDialog extends Component {
   }
 
   render(){
-    const { isShow,
+    const {
+      isShow,
       data,
       onClose
     } = this.props
     , { chart } = data
-    , _s = chart.series
-    , { n1, n2, fromIndex, toIndex } = _getNames(_s)
-    , c1 = _s[fromIndex].color
-    , c2 = _s[toIndex].color;
+    , { series } = chart
+    , [
+      n1,
+      n2,
+      fromIndex,
+      toIndex
+    ] = _getNames(series)
+    , c1 = _getColor(series, fromIndex)
+    , c2 = _getColor(series, toIndex);
 
     this._fromIndex = fromIndex
     this._toIndex = toIndex
@@ -154,7 +178,7 @@ class ColumnRangeDialog extends Component {
              styleCaption={S_CAPTION_1}
              styleInput={S_INPUT}
              caption="Width"
-             initValue={INIT.POIN_WIDTH}
+             initValue={DF_POIN_WIDTH}
              maxLength={2}
              type="number"
              min={0}
@@ -169,7 +193,7 @@ class ColumnRangeDialog extends Component {
              styleCaption={{...S_CAPTION_2, ...{ color: c1 }}}
              styleInput={S_INPUT}
              caption={`R ${n1}`}
-             initValue={INIT.R1}
+             initValue={DF_R1}
              type="number"
              maxLength={2}
           />
@@ -179,7 +203,7 @@ class ColumnRangeDialog extends Component {
              styleCaption={{...S_CAPTION_2, ...{ color: c2 }}}
              styleInput={S_INPUT}
              caption={`R ${n2}`}
-             initValue={INIT.R2}
+             initValue={DF_R2}
              type="number"
              maxLength={2}
           />
