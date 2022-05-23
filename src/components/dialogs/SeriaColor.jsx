@@ -2,9 +2,9 @@ import { Component, createRef } from 'react';
 
 import CellColor from '../zhn-moleculs/CellColor';
 import BtCounter from './BtCounter';
+import ColorList from './ColorList';
 
 const C_TRANSPARENT = "transparent";
-const N_SHORT = 5;
 
 const COLORS1 = [
   '#8abb5d','#f7a35c','#795548','#f15c80','#f45b5b',
@@ -24,19 +24,16 @@ const CL_INPUT_COLOR = 'va-b'
   marginRight: 16
 }
 , S_TO_CELL = { margin: '0 12px' }
-, S_CELL = { marginRight: 4 };
 
-const _initColor = (props) => props.initColor || C_TRANSPARENT;
-const _hasLineWidth = (chartType) => {
-  const { value } = chartType || {};
-  if (!value
-    || value === 'SPLINE'
-    || value === 'LINE'
-  ) {
-    return true;
-  }
-  return false;
-};
+const _initColor = ({
+  initColor
+}) => initColor || C_TRANSPARENT;
+const _hasLineWidth = ({
+  value
+} = {}) => !value
+ || value === 'SPLINE'
+ || value === 'LINE'
+
 
 class SeriaColor extends Component {
   constructor(props){
@@ -66,21 +63,6 @@ class SeriaColor extends Component {
      }
   }
 
-  _renderColors = (colors, isLong) => {
-    const _max = isLong ? colors.length : N_SHORT;
-    return colors.map((c, i) => {
-      return i < _max ? (
-        <CellColor
-          key={c}
-          className={CL_INPUT_COLOR}
-          style={S_CELL}
-          color={c}
-          onClick={this._hClick}
-        />
-      ) : null ;
-    }).filter(Boolean);
-  }
-
   render(){
     const { isLong, chartType } = this.props
     , { color } = this.state
@@ -97,7 +79,11 @@ class SeriaColor extends Component {
             style={S_TO_CELL}
             onClick={this._hReset}
           />
-          {this._renderColors(COLORS1, isLong)}
+          <ColorList
+            isLong={isLong}
+            colors={COLORS1}
+            onClick={this._hClick}
+          />
         </div>
         <div style={_rowStyle}>
            <BtCounter
@@ -106,7 +92,11 @@ class SeriaColor extends Component {
               style={S_BT_COUNTER}
               title="Line Width"
             />
-          {this._renderColors(COLORS2, isLong)}
+            <ColorList
+              isLong={isLong}
+              colors={COLORS2}
+              onClick={this._hClick}
+            />
         </div>
       </div>
     );

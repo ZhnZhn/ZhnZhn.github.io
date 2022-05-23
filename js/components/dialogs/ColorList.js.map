@@ -1,0 +1,25 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/ColorList.js"
+ ],
+ "file": "../../../src/components/dialogs/ColorList.js",
+ "names": [
+  "N_SHORT",
+  "CL_INPUT_COLOR",
+  "S_CELL",
+  "marginRight",
+  "ColorList",
+  "isLong",
+  "colors",
+  "onClick",
+  "_max",
+  "length",
+  "map",
+  "color",
+  "i",
+  "filter",
+  "Boolean"
+ ],
+ "mappings": ";;;;;;;AAAA;;;;AAEA,MAAMA,OAAO,GAAG,CAAhB;AAAA,MACEC,cAAc,GAAG,MADnB;AAAA,MAEEC,MAAM,GAAG;AAAEC,EAAAA,WAAW,EAAE;AAAf,CAFX;;AAIA,MAAMC,SAAS,GAAG,QAIZ;AAAA,MAJa;AACjBC,IAAAA,MADiB;AAEjBC,IAAAA,MAFiB;AAGjBC,IAAAA;AAHiB,GAIb;;AACJ,QAAMC,IAAI,GAAGH,MAAM,GACfC,MAAM,CAACG,MADQ,GAEfT,OAFJ;;AAGA,SAAOM,MAAM,CAACI,GAAP,CAAW,CAACC,KAAD,EAAQC,CAAR,KAAcA,CAAC,GAAGJ,IAAJ,gBAC3B,qBAAC,kBAAD;AAEE,IAAA,SAAS,EAAEP,cAFb;AAGE,IAAA,KAAK,EAAEC,MAHT;AAIE,IAAA,KAAK,EAAES,KAJT;AAKE,IAAA,OAAO,EAAEJ;AALX,KACOI,KADP,CAD2B,GAQ5B,IARG,EASLE,MATK,CASEC,OATF,CAAP;AAUD,CAlBD;;eAoBeV,S"
+}
