@@ -1,6 +1,10 @@
-import { forwardRef, useRef, useImperativeHandle } from 'react';
+import {
+  forwardRef,
+  useRef,
+  useImperativeHandle
+} from 'react';
 
-import CL from './CL';
+import { CL_BT_ARROW } from './CL';
 
 const ANIMATION_CIRCLE = "circle infinite 1.25s linear"
 , BORDER_COLOR = "#1b75bb transparent transparent";
@@ -27,7 +31,7 @@ const ArrowCell = forwardRef(({
   return (
     <button
        ref={_refArrowCell}
-       className={CL.BT_ARROW}
+       className={CL_BT_ARROW}
        tabIndex="-1"
        onClick={onClick}
     >

@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
 var _react = require("react");
 
-var _CL = _interopRequireDefault(require("./CL"));
+var _CL = require("./CL");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -16,10 +14,12 @@ const ANIMATION_CIRCLE = "circle infinite 1.25s linear",
 
 const _getStyle = ref => ref.current.style;
 
-const ArrowCell = /*#__PURE__*/(0, _react.forwardRef)(({
-  arrowStyle,
-  onClick
-}, ref) => {
+const ArrowCell = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+  let {
+    arrowStyle,
+    onClick
+  } = _ref;
+
   const _refArrowCell = (0, _react.useRef)(),
         _refArrow = (0, _react.useRef)();
 
@@ -34,7 +34,7 @@ const ArrowCell = /*#__PURE__*/(0, _react.forwardRef)(({
   }), []);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     ref: _refArrowCell,
-    className: _CL.default.BT_ARROW,
+    className: _CL.CL_BT_ARROW,
     tabIndex: "-1",
     onClick: onClick,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {

@@ -1,18 +1,25 @@
 import { forwardRef } from 'react';
 
 import ButtonCircle2 from '../zhn/ButtonCircle2';
-import CL from './CL';
+import {
+  CL_FOOTER,
+  CL_NOT_SELECTED,
+  CL_FOOTER_INDEX,
+  CL_FOOTER_BTS,
+  CL_FOOTER_BT
+} from './CL';
 
 const OptionsFooter = forwardRef(({
   noFooterBts,
   indexActiveOption,
-  nFiltered, nAll,
+  nFiltered,
+  nAll,
   onStepDown,
   onStepUp,
   onClear
 }, ref) => (
-  <div className={`${CL.FOOTER} ${CL.NOT_SELECTED}`}>
-    <span className={CL.FOOTER_INDEX}>
+  <div className={`${CL_FOOTER} ${CL_NOT_SELECTED}`}>
+    <span className={CL_FOOTER_INDEX}>
       <span ref={ref}>
         {indexActiveOption}
       </span>
@@ -20,19 +27,19 @@ const OptionsFooter = forwardRef(({
          : {nFiltered}: {nAll}
       </span>
     </span>
-    {!noFooterBts && <span className={CL.FOOTER_BTS}>
+    {!noFooterBts && <span className={CL_FOOTER_BTS}>
       <ButtonCircle2
-         className={CL.FOOTER_BT}
+         className={CL_FOOTER_BT}
          caption="Dn"
          onClick={onStepDown}
       />
       <ButtonCircle2
-         className={CL.FOOTER_BT}
+         className={CL_FOOTER_BT}
          caption="Up"
          onClick={onStepUp}
       />
       <ButtonCircle2
-         className={CL.FOOTER_BT}
+         className={CL_FOOTER_BT}
          caption="CL"
          onClick={onClear}
       />

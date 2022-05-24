@@ -9,7 +9,17 @@ import ButtonCircle2 from '../zhn/ButtonCircle2';
 import ItemOptionDf from './ItemOptionDf'
 import OptionList from './OptionList'
 import OptionsFooter from './OptionsFooter'
-import CL from './CL'
+import {
+  CL_ROOT,
+  CL_INPUT,
+  CL_SPINNER,
+  CL_SPINNER_FAILED,
+  CL_INPUT_HR,
+  CL_OPTIONS,
+  CL_OPTIONS_DIV,
+  CL_OPTIONS_ROW,
+  CL_OPTIONS_ROW_ACTIVE
+} from './CL';
 
 const MAX_WITHOUT_ANIMATION = 800
 
@@ -30,7 +40,12 @@ const _crValue = str => str
   .replace(INPUT_PREFIX, '')
   .trim();
 
-const _crInputItem = (inputValue, { propCaption, isWithInput, maxInput }) => {
+const _crInputItem = (
+  inputValue, {
+  propCaption,
+  isWithInput,
+  maxInput
+}) => {
   const _inputValue = inputValue.substring(0, maxInput)
   , _caption = isWithInput
        ? `${INPUT_PREFIX} ${_inputValue}`
@@ -42,20 +57,33 @@ const _crInputItem = (inputValue, { propCaption, isWithInput, maxInput }) => {
   };
 };
 
-const _crWidthStyle = (width, style) => width
+const _crWidthStyle = (
+  width,
+  style
+) => width
   ? ((''+width).indexOf('%') !== -1)
-      ? { ...style, width: width }
-      : { ...style, width: width + 'px'}
+      ? {...style, width}
+      : {...style, width: width + 'px'}
   : null;
 
 
-const _crFooterIndex = ({ options, initialOptions }) => ({
-  _nFiltered: (options[0] && (options[0].value !== NO_RESULT))
-      ? options.length : 0,
-  _nAll: initialOptions ? initialOptions.length : 0
+const _crFooterIndex = ({
+  options,
+  initialOptions
+}) => ({
+  _nFiltered: options[0] && (options[0].value !== NO_RESULT)
+     ? options.length
+     : 0,
+  _nAll: initialOptions
+     ? initialOptions.length
+     : 0
 });
 
-const _crInitialStateFromProps = ({ optionName, optionNames, options }) => ({
+const _crInitialStateFromProps = ({
+  optionName,
+  optionNames,
+  options
+}) => ({
   value: '',
   isShowOption: false,
   initialOptions: options,
@@ -65,7 +93,11 @@ const _crInitialStateFromProps = ({ optionName, optionNames, options }) => ({
   isFocused: false
 });
 
-const _filterOptions = (options, value, pnCaption) => {
+const _filterOptions = (
+  options,
+  value,
+  pnCaption
+) => {
    const _value = value.toLowerCase();
    return options.filter(item => item[pnCaption]
      .toLowerCase()
@@ -73,7 +105,11 @@ const _filterOptions = (options, value, pnCaption) => {
    );
 }
 
-const _crFilterOptions = (options, token, props) => {
+const _crFilterOptions = (
+  options,
+  token,
+  props
+) => {
   const { propCaption } = props;
   const _arr = _filterOptions(options, token, propCaption);
   if (_arr.length === 0){
@@ -188,7 +224,7 @@ class InputSelect extends Component {
   _decorateCurrentComp = () => {
     const comp = this._getCurrentComp();
     if (comp){
-      comp.classList.add(CL.OPTIONS_ROW_ACTIVE);
+      comp.classList.add(CL_OPTIONS_ROW_ACTIVE);
       if (this.indexNode) {
         this.indexNode.textContent = this.indexActiveOption + 1
       }
@@ -198,7 +234,7 @@ class InputSelect extends Component {
   _undecorateCurrentComp = (comp) => {
      const _comp = comp || this._getCurrentComp();
      if (_comp){
-      _comp.classList.remove(CL.OPTIONS_ROW_ACTIVE);
+      _comp.classList.remove(CL_OPTIONS_ROW_ACTIVE);
      }
   }
 
@@ -419,7 +455,7 @@ class InputSelect extends Component {
         <OptionList
           options={options}
           refOptionNode={this._refOptionNode}
-          className={CL.OPTIONS_ROW}
+          className={CL_OPTIONS_ROW}
           selectedIndex={this.indexActiveOption}
           propCaption={propCaption}
           onClick={this._hClickItem}
@@ -440,14 +476,14 @@ class InputSelect extends Component {
 
     return (
         <div
-           className={CL.OPTIONS}
+           className={CL_OPTIONS}
            style={_rootWidthStyle}
            data-scrollable={true}
            tabIndex="-1"
          >
           <div
              ref={this._refOptionsComp}
-             className={CL.OPTIONS_DIV}
+             className={CL_OPTIONS_DIV}
              style={{...optionsStyle, ..._rootWidthStyle}}
              tabIndex="-1"
            >
@@ -503,7 +539,7 @@ class InputSelect extends Component {
       _placeholder = `Loading ${optionNames}...`;
       _afterInputEl = (
         <span
-          className={CL.SPINNER}
+          className={CL_SPINNER}
           data-loader="circle"
         />
       );
@@ -511,7 +547,7 @@ class InputSelect extends Component {
        _placeholder=`Loading ${optionNames} Failed`;
        _afterInputEl = (
          <ButtonCircle2
-           className={CL.SPINNER_FAILED}
+           className={CL_SPINNER_FAILED}
            dataLoader="circle-failed"
            onClick={onLoadOption}
          />
@@ -542,12 +578,12 @@ class InputSelect extends Component {
 
     return (
       <div
-        className={CL.ROOT}
+        className={CL_ROOT}
         style={_rootWidthStyle}
       >
         <input
            ref={this._refInput}
-           className={CL.INPUT}
+           className={CL_INPUT}
            type="text"
            name="select"
            autoComplete="off"
@@ -561,7 +597,7 @@ class InputSelect extends Component {
            {...this._touchHandlers}
         />
         {afterInputEl}
-        <hr className={CL.INPUT_HR} />
+        <hr className={CL_INPUT_HR} />
         {isShowOption && this.renderOptions()}
       </div>
     )

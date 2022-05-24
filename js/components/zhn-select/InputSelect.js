@@ -21,7 +21,7 @@ var _OptionList = _interopRequireDefault(require("./OptionList"));
 
 var _OptionsFooter = _interopRequireDefault(require("./OptionsFooter"));
 
-var _CL = _interopRequireDefault(require("./CL"));
+var _CL = require("./CL");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -47,11 +47,13 @@ const MAX_WITHOUT_ANIMATION = 800,
 
 const _crValue = str => str.replace(INPUT_PREFIX, '').trim();
 
-const _crInputItem = (inputValue, {
-  propCaption,
-  isWithInput,
-  maxInput
-}) => {
+const _crInputItem = (inputValue, _ref) => {
+  let {
+    propCaption,
+    isWithInput,
+    maxInput
+  } = _ref;
+
   const _inputValue = inputValue.substring(0, maxInput),
         _caption = isWithInput ? INPUT_PREFIX + " " + _inputValue : 'No results found';
 
@@ -63,32 +65,38 @@ const _crInputItem = (inputValue, {
 };
 
 const _crWidthStyle = (width, style) => width ? ('' + width).indexOf('%') !== -1 ? { ...style,
-  width: width
+  width
 } : { ...style,
   width: width + 'px'
 } : null;
 
-const _crFooterIndex = ({
-  options,
-  initialOptions
-}) => ({
-  _nFiltered: options[0] && options[0].value !== NO_RESULT ? options.length : 0,
-  _nAll: initialOptions ? initialOptions.length : 0
-});
+const _crFooterIndex = _ref2 => {
+  let {
+    options,
+    initialOptions
+  } = _ref2;
+  return {
+    _nFiltered: options[0] && options[0].value !== NO_RESULT ? options.length : 0,
+    _nAll: initialOptions ? initialOptions.length : 0
+  };
+};
 
-const _crInitialStateFromProps = ({
-  optionName,
-  optionNames,
-  options
-}) => ({
-  value: '',
-  isShowOption: false,
-  initialOptions: options,
-  options: options,
-  optionNames: optionNames || optionName || '',
-  isValidOptionListCache: false,
-  isFocused: false
-});
+const _crInitialStateFromProps = _ref3 => {
+  let {
+    optionName,
+    optionNames,
+    options
+  } = _ref3;
+  return {
+    value: '',
+    isShowOption: false,
+    initialOptions: options,
+    options: options,
+    optionNames: optionNames || optionName || '',
+    isValidOptionListCache: false,
+    isFocused: false
+  };
+};
 
 const _filterOptions = (options, value, pnCaption) => {
   const _value = value.toLowerCase();
@@ -164,7 +172,7 @@ class InputSelect extends _react.Component {
       const comp = this._getCurrentComp();
 
       if (comp) {
-        comp.classList.add(_CL.default.OPTIONS_ROW_ACTIVE);
+        comp.classList.add(_CL.CL_OPTIONS_ROW_ACTIVE);
 
         if (this.indexNode) {
           this.indexNode.textContent = this.indexActiveOption + 1;
@@ -178,7 +186,7 @@ class InputSelect extends _react.Component {
       const _comp = comp || this._getCurrentComp();
 
       if (_comp) {
-        _comp.classList.remove(_CL.default.OPTIONS_ROW_ACTIVE);
+        _comp.classList.remove(_CL.CL_OPTIONS_ROW_ACTIVE);
       }
     };
 
@@ -450,7 +458,7 @@ class InputSelect extends _react.Component {
         this.optionListCache = /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionList.default, {
           options: options,
           refOptionNode: this._refOptionNode,
-          className: _CL.default.OPTIONS_ROW,
+          className: _CL.CL_OPTIONS_ROW,
           selectedIndex: this.indexActiveOption,
           propCaption: propCaption,
           onClick: this._hClickItem,
@@ -479,13 +487,13 @@ class InputSelect extends _react.Component {
       } = _crFooterIndex(this.state);
 
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        className: _CL.default.OPTIONS,
+        className: _CL.CL_OPTIONS,
         style: _rootWidthStyle,
         "data-scrollable": true,
         tabIndex: "-1",
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           ref: this._refOptionsComp,
-          className: _CL.default.OPTIONS_DIV,
+          className: _CL.CL_OPTIONS_DIV,
           style: { ...optionsStyle,
             ..._rootWidthStyle
           },
@@ -543,13 +551,13 @@ class InputSelect extends _react.Component {
       } else if (isLoading) {
         _placeholder = "Loading " + optionNames + "...";
         _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          className: _CL.default.SPINNER,
+          className: _CL.CL_SPINNER,
           "data-loader": "circle"
         });
       } else if (isLoadingFailed) {
         _placeholder = "Loading " + optionNames + " Failed";
         _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
-          className: _CL.default.SPINNER_FAILED,
+          className: _CL.CL_SPINNER_FAILED,
           dataLoader: "circle-failed",
           onClick: onLoadOption
         });
@@ -643,11 +651,11 @@ class InputSelect extends _react.Component {
     } = this._crAfterInputEl();
 
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: _CL.default.ROOT,
+      className: _CL.CL_ROOT,
       style: _rootWidthStyle,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
         ref: this._refInput,
-        className: _CL.default.INPUT,
+        className: _CL.CL_INPUT,
         type: "text",
         name: "select",
         autoComplete: "off",
@@ -660,7 +668,7 @@ class InputSelect extends _react.Component {
         onKeyDown: this._hInputKeyDown,
         ...this._touchHandlers
       }), afterInputEl, /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
-        className: _CL.default.INPUT_HR
+        className: _CL.CL_INPUT_HR
       }), isShowOption && this.renderOptions()]
     });
   }

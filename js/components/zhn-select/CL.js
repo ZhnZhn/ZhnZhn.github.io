@@ -1,30 +1,41 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-var ROOT = 'zhn-select',
-    INPUT = ROOT + '__input',
-    SPINNER = ROOT + '__spinner',
-    OPTIONS = ROOT + '__options',
-    OPTIONS_ROW = ROOT + '__row',
-    FOOTER = ROOT + '__footer';
-var CL = {
-  ROOT: ROOT,
-  INPUT: INPUT,
-  INPUT_HR: INPUT + '__hr',
-  SPINNER: SPINNER,
-  SPINNER_FAILED: SPINNER + '--failed',
-  BT_ARROW: ROOT + '__bt-arrow',
-  OPTIONS: OPTIONS,
-  OPTIONS_DIV: OPTIONS + '__div',
-  OPTIONS_ROW: OPTIONS_ROW,
-  OPTIONS_ROW_ACTIVE: OPTIONS_ROW + '--active',
-  FOOTER: FOOTER,
-  FOOTER_INDEX: FOOTER + '__index',
-  FOOTER_BTS: FOOTER + '__bts',
-  FOOTER_BT: FOOTER + '__bt',
-  NOT_SELECTED: 'not-selected'
-};
-var _default = CL;
-exports["default"] = _default;
+exports.CL_SPINNER_FAILED = exports.CL_SPINNER = exports.CL_ROOT = exports.CL_OPTIONS_ROW_ACTIVE = exports.CL_OPTIONS_ROW = exports.CL_OPTIONS_DIV = exports.CL_OPTIONS = exports.CL_NOT_SELECTED = exports.CL_INPUT_HR = exports.CL_INPUT = exports.CL_FOOTER_INDEX = exports.CL_FOOTER_BTS = exports.CL_FOOTER_BT = exports.CL_FOOTER = exports.CL_BT_ARROW = void 0;
+const ROOT = 'zhn-select',
+      INPUT = ROOT + '__input',
+      SPINNER = ROOT + '__spinner',
+      OPTIONS = ROOT + '__options',
+      OPTIONS_ROW = ROOT + '__row',
+      FOOTER = ROOT + '__footer';
+const CL_ROOT = ROOT;
+exports.CL_ROOT = CL_ROOT;
+const CL_INPUT = INPUT;
+exports.CL_INPUT = CL_INPUT;
+const CL_INPUT_HR = INPUT + '__hr';
+exports.CL_INPUT_HR = CL_INPUT_HR;
+const CL_SPINNER = SPINNER;
+exports.CL_SPINNER = CL_SPINNER;
+const CL_SPINNER_FAILED = SPINNER + '--failed';
+exports.CL_SPINNER_FAILED = CL_SPINNER_FAILED;
+const CL_BT_ARROW = ROOT + '__bt-arrow';
+exports.CL_BT_ARROW = CL_BT_ARROW;
+const CL_OPTIONS = OPTIONS;
+exports.CL_OPTIONS = CL_OPTIONS;
+const CL_OPTIONS_DIV = OPTIONS + '__div';
+exports.CL_OPTIONS_DIV = CL_OPTIONS_DIV;
+const CL_OPTIONS_ROW = OPTIONS_ROW;
+exports.CL_OPTIONS_ROW = CL_OPTIONS_ROW;
+const CL_OPTIONS_ROW_ACTIVE = OPTIONS_ROW + '--active';
+exports.CL_OPTIONS_ROW_ACTIVE = CL_OPTIONS_ROW_ACTIVE;
+const CL_FOOTER = FOOTER;
+exports.CL_FOOTER = CL_FOOTER;
+const CL_FOOTER_INDEX = FOOTER + '__index';
+exports.CL_FOOTER_INDEX = CL_FOOTER_INDEX;
+const CL_FOOTER_BTS = FOOTER + '__bts';
+exports.CL_FOOTER_BTS = CL_FOOTER_BTS;
+const CL_FOOTER_BT = FOOTER + '__bt';
+exports.CL_FOOTER_BT = CL_FOOTER_BT;
+const CL_NOT_SELECTED = 'not-selected';
+exports.CL_NOT_SELECTED = CL_NOT_SELECTED;
 //# sourceMappingURL=CL.js.map
