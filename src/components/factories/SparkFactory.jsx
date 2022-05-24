@@ -25,44 +25,44 @@ S_BARS = {
   fillOpacity: "0.9"
 };
 
-const SparkFactory = {
-  createSparklines(data, pointIndex){
-     return (
-       <SparkView
-          height={45}
-          width={100}
-          svgHeight={45}
-          svgWidth={100}
-          data={data}
-       >
-          <Line color={C_YELLOW} />
-          <ReferenceLine
-             style={S_REF_LINE}
-             type="avg"
-          />
-          <Spots />
-          <Spot pointIndex={pointIndex} />
-       </SparkView>
-     );
-  },
-  createSparkbars(data, pointIndex){
-    return (
-      <SparkView
-         height={45}
-         width={100}
-         svgHeight={45}
-         svgWidth={100}
-         data={data}
-         min={0}
-         max={100}
-      >
-         <Bars
-            style={S_BARS}
-            pointIndex={pointIndex}
-         />
-      </SparkView>
-    );
-  }
-};
+export const crSparkLines = (
+  data,
+  pointIndex
+) => (
+   <SparkView
+     height={45}
+     width={100}
+     svgHeight={45}
+     svgWidth={100}
+     data={data}
+   >
+     <Line color={C_YELLOW} />
+     <ReferenceLine
+        style={S_REF_LINE}
+        type="avg"
+     />
+     <Spots />
+     <Spot pointIndex={pointIndex} />
+   </SparkView>
+);
 
-export default SparkFactory
+
+export const crSparkBars = (
+  data,
+  pointIndex
+) => (
+   <SparkView
+      height={45}
+      width={100}
+      svgHeight={45}
+      svgWidth={100}
+      data={data}
+      min={0}
+      max={100}
+   >
+      <Bars
+         style={S_BARS}
+         pointIndex={pointIndex}
+      />
+   </SparkView>
+);

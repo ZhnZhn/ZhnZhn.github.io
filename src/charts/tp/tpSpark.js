@@ -1,6 +1,9 @@
 import { render } from 'react-dom';
 
-import SparkFactory from '../../components/factories/SparkFactory';
+import {
+  crSparkLines,
+  crSparkBars
+} from '../../components/factories/SparkFactory';
 
 import {
   crHeader,
@@ -11,29 +14,28 @@ import {
 
 import { YEAR_COLOR } from './Colors';
 
-
 const SPARKLINES_SUFFIX_ID = 'sparklines'
-    , SPARKLINES_BAR_SUFFIX_ID = 'sparklines_bar'
-    , WIDTH_CHAR = 10
-    , WIDTH_VALUE = 54
-    , WIDTH_TOTAL = 50
-    , WIDTH_SPARK = 20 + 80 + 16;
+, SPARKLINES_BAR_SUFFIX_ID = 'sparklines_bar'
+, WIDTH_CHAR = 10
+, WIDTH_VALUE = 54
+, WIDTH_TOTAL = 50
+, WIDTH_SPARK = 20 + 80 + 16;
 
-const _fnCalcWidthSparkType4 = (
+const _calcWidthSparkType4 = (
   value,
   total
 ) => {
   const _width1 = WIDTH_VALUE + value.length*WIDTH_CHAR
   , _width2 = WIDTH_TOTAL + total.length*WIDTH_CHAR
-  , width = (_width1>_width2) ? _width1 : _width2
+  , width = _width1>_width2 ? _width1 : _width2
   , fullWidth = width + WIDTH_SPARK;
-  return {
+  return [
     fullWidth,
     width
-  };
+  ];
 }
 
-const _fnTooltipSparkType4 = ({
+const _crTooltipSparkType4 = ({
   fullWidth,
   width,
   year,
@@ -63,20 +65,23 @@ const _fnTooltipSparkType4 = ({
 }
 
 const _crSparkData = (point) => {
-  const { sparkvalues, sparkpercent } = point;
-  let  sparkLinesData = []
+  const {
+    sparkvalues,
+    sparkpercent
+  } = point;
+  let sparkLinesData = []
   , sparkBarsData = []
   , pointIndex;
 
   if (sparkvalues) {
     sparkLinesData = sparkvalues;
     sparkBarsData = sparkpercent;
-    pointIndex = (sparkvalues.length !== 0)
-       ? sparkvalues.length - 1
-       : 0 ;
+    pointIndex = sparkvalues.length === 0
+       ? 0
+       : sparkvalues.length - 1;
   } else {
     const seriesData = point.series.data;
-    seriesData.forEach((item, itemIndex) => {
+    seriesData.forEach(item => {
        sparkLinesData.push(item.y);
        sparkBarsData.push(item.percentage)
     })
@@ -91,15 +96,16 @@ const _crSparkData = (point) => {
 
 const _onAfterRender = function(id, point){
   setTimeout( function(){
-          addHideHandler(id, point)
-          const {
-                  sparkLinesData, sparkBarsData,
-                  pointIndex
-                } = _crSparkData(point)
-             , sparklines = SparkFactory.createSparklines(sparkLinesData, pointIndex)
-             , sparkbars = SparkFactory.createSparkbars(sparkBarsData, pointIndex);
-         render( sparklines, document.getElementById(`${id}_${SPARKLINES_SUFFIX_ID}`))
-         render( sparkbars, document.getElementById(`${id}_${SPARKLINES_BAR_SUFFIX_ID}`))
+     addHideHandler(id, point)
+     const {
+       sparkLinesData,
+       sparkBarsData,
+       pointIndex
+     } = _crSparkData(point)
+     , sparklines = crSparkLines(sparkLinesData, pointIndex)
+     , sparkbars = crSparkBars(sparkBarsData, pointIndex);
+     render(sparklines, document.getElementById(`${id}_${SPARKLINES_SUFFIX_ID}`))
+     render(sparkbars, document.getElementById(`${id}_${SPARKLINES_BAR_SUFFIX_ID}`))
   }, 1);
 }
 
@@ -115,10 +121,19 @@ const _crStackedArea = ({
     total=0
   } = point
   , _total = toNumberFormat(total)
-  , { fullWidth, width } = _fnCalcWidthSparkType4(value, _total);
+  , [
+    fullWidth,
+    width
+  ] = _calcWidthSparkType4(value, _total);
 
-  return crHeader(nameFull, id) + _fnTooltipSparkType4({
-    fullWidth, width, year: category, value, total: _total, percent, id
+  return crHeader(nameFull, id) + _crTooltipSparkType4({
+    id,
+    fullWidth,
+    width,
+    value,
+    percent,
+    year: category,
+    total: _total
   });
 }
 
@@ -135,10 +150,19 @@ const _crTreeMap = ({
   } = point
   , _value = toNumberFormat(value)
   , _total = toNumberFormat(total)
-  , { fullWidth, width } = _fnCalcWidthSparkType4(_value, _total);
+  , [
+    fullWidth,
+    width
+  ] = _calcWidthSparkType4(_value, _total);
 
-  return crHeader(nameFull, id) + _fnTooltipSparkType4({
-    fullWidth, width, year, value: _value, total: _total, percent, id
+  return crHeader(nameFull, id) + _crTooltipSparkType4({
+    id,
+    fullWidth,
+    width,
+    year,
+    percent,
+    value: _value,
+    total: _total
   })
 }
 

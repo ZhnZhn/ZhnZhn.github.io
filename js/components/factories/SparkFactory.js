@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.crSparkLines = exports.crSparkBars = void 0;
 
 var _Color = _interopRequireDefault(require("../styles/Color"));
 
@@ -31,42 +31,38 @@ const S_REF_LINE = {
   fill: C_YELLOW,
   fillOpacity: "0.9"
 };
-const SparkFactory = {
-  createSparklines(data, pointIndex) {
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(SparkView, {
-      height: 45,
-      width: 100,
-      svgHeight: 45,
-      svgWidth: 100,
-      data: data,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Line, {
-        color: C_YELLOW
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ReferenceLine, {
-        style: S_REF_LINE,
-        type: "avg"
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Spots, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(Spot, {
-        pointIndex: pointIndex
-      })]
-    });
-  },
 
-  createSparkbars(data, pointIndex) {
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(SparkView, {
-      height: 45,
-      width: 100,
-      svgHeight: 45,
-      svgWidth: 100,
-      data: data,
-      min: 0,
-      max: 100,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(Bars, {
-        style: S_BARS,
-        pointIndex: pointIndex
-      })
-    });
-  }
+const crSparkLines = (data, pointIndex) => /*#__PURE__*/(0, _jsxRuntime.jsxs)(SparkView, {
+  height: 45,
+  width: 100,
+  svgHeight: 45,
+  svgWidth: 100,
+  data: data,
+  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Line, {
+    color: C_YELLOW
+  }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ReferenceLine, {
+    style: S_REF_LINE,
+    type: "avg"
+  }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Spots, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(Spot, {
+    pointIndex: pointIndex
+  })]
+});
 
-};
-var _default = SparkFactory;
-exports.default = _default;
+exports.crSparkLines = crSparkLines;
+
+const crSparkBars = (data, pointIndex) => /*#__PURE__*/(0, _jsxRuntime.jsx)(SparkView, {
+  height: 45,
+  width: 100,
+  svgHeight: 45,
+  svgWidth: 100,
+  data: data,
+  min: 0,
+  max: 100,
+  children: /*#__PURE__*/(0, _jsxRuntime.jsx)(Bars, {
+    style: S_BARS,
+    pointIndex: pointIndex
+  })
+});
+
+exports.crSparkBars = crSparkBars;
 //# sourceMappingURL=SparkFactory.js.map

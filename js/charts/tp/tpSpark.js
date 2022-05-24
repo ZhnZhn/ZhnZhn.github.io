@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.sparkTreeMap = exports.sparkStackedArea = void 0;
 
 var _reactDom = require("react-dom");
 
-var _SparkFactory = _interopRequireDefault(require("../../components/factories/SparkFactory"));
+var _SparkFactory = require("../../components/factories/SparkFactory");
 
 var _tpFn = require("./tpFn");
 
@@ -20,19 +18,16 @@ const SPARKLINES_SUFFIX_ID = 'sparklines',
       WIDTH_TOTAL = 50,
       WIDTH_SPARK = 20 + 80 + 16;
 
-const _fnCalcWidthSparkType4 = (value, total) => {
+const _calcWidthSparkType4 = (value, total) => {
   const _width1 = WIDTH_VALUE + value.length * WIDTH_CHAR,
         _width2 = WIDTH_TOTAL + total.length * WIDTH_CHAR,
         width = _width1 > _width2 ? _width1 : _width2,
         fullWidth = width + WIDTH_SPARK;
 
-  return {
-    fullWidth,
-    width
-  };
+  return [fullWidth, width];
 };
 
-const _fnTooltipSparkType4 = _ref => {
+const _crTooltipSparkType4 = _ref => {
   let {
     fullWidth,
     width,
@@ -62,10 +57,10 @@ const _crSparkData = point => {
   if (sparkvalues) {
     sparkLinesData = sparkvalues;
     sparkBarsData = sparkpercent;
-    pointIndex = sparkvalues.length !== 0 ? sparkvalues.length - 1 : 0;
+    pointIndex = sparkvalues.length === 0 ? 0 : sparkvalues.length - 1;
   } else {
     const seriesData = point.series.data;
-    seriesData.forEach((item, itemIndex) => {
+    seriesData.forEach(item => {
       sparkLinesData.push(item.y);
       sparkBarsData.push(item.percentage);
     });
@@ -88,8 +83,8 @@ const _onAfterRender = function (id, point) {
       sparkBarsData,
       pointIndex
     } = _crSparkData(point),
-          sparklines = _SparkFactory.default.createSparklines(sparkLinesData, pointIndex),
-          sparkbars = _SparkFactory.default.createSparkbars(sparkBarsData, pointIndex);
+          sparklines = (0, _SparkFactory.crSparkLines)(sparkLinesData, pointIndex),
+          sparkbars = (0, _SparkFactory.crSparkBars)(sparkBarsData, pointIndex);
 
     (0, _reactDom.render)(sparklines, document.getElementById(id + "_" + SPARKLINES_SUFFIX_ID));
     (0, _reactDom.render)(sparkbars, document.getElementById(id + "_" + SPARKLINES_BAR_SUFFIX_ID));
@@ -110,19 +105,16 @@ const _crStackedArea = _ref2 => {
     total = 0
   } = point,
         _total = (0, _tpFn.toNumberFormat)(total),
-        {
-    fullWidth,
-    width
-  } = _fnCalcWidthSparkType4(value, _total);
+        [fullWidth, width] = _calcWidthSparkType4(value, _total);
 
-  return (0, _tpFn.crHeader)(nameFull, id) + _fnTooltipSparkType4({
+  return (0, _tpFn.crHeader)(nameFull, id) + _crTooltipSparkType4({
+    id,
     fullWidth,
     width,
-    year: category,
     value,
-    total: _total,
     percent,
-    id
+    year: category,
+    total: _total
   });
 };
 
@@ -141,19 +133,16 @@ const _crTreeMap = _ref3 => {
   } = point,
         _value = (0, _tpFn.toNumberFormat)(value),
         _total = (0, _tpFn.toNumberFormat)(total),
-        {
-    fullWidth,
-    width
-  } = _fnCalcWidthSparkType4(_value, _total);
+        [fullWidth, width] = _calcWidthSparkType4(_value, _total);
 
-  return (0, _tpFn.crHeader)(nameFull, id) + _fnTooltipSparkType4({
+  return (0, _tpFn.crHeader)(nameFull, id) + _crTooltipSparkType4({
+    id,
     fullWidth,
     width,
     year,
-    value: _value,
-    total: _total,
     percent,
-    id
+    value: _value,
+    total: _total
   });
 };
 
