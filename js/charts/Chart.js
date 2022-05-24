@@ -9,7 +9,7 @@ var _highcharts = _interopRequireDefault(require("highcharts"));
 
 var _dompurify = _interopRequireDefault(require("dompurify"));
 
-var _Color = _interopRequireDefault(require("../constants/Color"));
+var _Color = require("../constants/Color");
 
 var _Tooltip = require("./Tooltip");
 
@@ -28,8 +28,8 @@ const FONT_STYLE = {
   x: 25,
   style: { ...FONT_STYLE,
     stroke: 'transparent',
-    color: _Color.default.CHART_TITLE,
-    fill: _Color.default.CHART_TITLE
+    color: _Color.COLOR_CHART_TITLE,
+    fill: _Color.COLOR_CHART_TITLE
   }
 },
       YAXIS_CONFIG = {
@@ -73,7 +73,7 @@ const _crTitle = title => _isStr(title) ? {
   }
 
   return is ? {
-    color: _Color.default.CROSSHAIR,
+    color: _Color.COLOR_CROSSHAIR,
     width: 1,
     zIndex: 2
   } : void 0;
@@ -276,11 +276,11 @@ const fSecondYAxis = (name, color) => ({ //crosshair : fCrosshair(),
 
 exports.fSecondYAxis = fSecondYAxis;
 
-const fPlotOptionsArea = option => merge(false, _crPlotOption(_Color.default.AREA_HOVER_LINE, _Color.default.AREA_MARKER_LINE), option || {});
+const fPlotOptionsArea = option => merge(false, _crPlotOption(_Color.COLOR_AREA_HOVER_LINE, _Color.COLOR_AREA_MARKER_LINE), option || {});
 
 exports.fPlotOptionsArea = fPlotOptionsArea;
 
-const fPlotOptionsColumn = option => merge(false, _crPlotOption(_Color.default.COLUMN_HOVER_LINE, _Color.default.COLUMN_MARKER_LINE), option);
+const fPlotOptionsColumn = option => merge(false, _crPlotOption(_Color.COLOR_COLUMN_HOVER_LINE, _Color.COLOR_COLUMN_MARKER_LINE), option);
 
 exports.fPlotOptionsColumn = fPlotOptionsColumn;
 
@@ -289,7 +289,7 @@ const fPlotOptionsSeries = option => merge(false, {
     hover: {
       halo: {
         attributes: {
-          fill: _Color.default.HALO_BASE
+          fill: _Color.COLOR_HALO_BASE
         },
         opacity: 0.35,
         size: 16
@@ -306,7 +306,7 @@ const fLegend = option => merge(false, {
   symbolWidth: 14,
   symbolRadius: 7,
   itemStyle: { ...FONT_STYLE,
-    color: _Color.default.LEGEND_ITEM,
+    color: _Color.COLOR_LEGEND_ITEM,
     lineHeight: 1.5,
     cursor: 'pointer'
   }
@@ -320,8 +320,8 @@ const fSeriaMarker = symbol => ({
   states: {
     hover: {
       enabled: true,
-      fillColor: _Color.default.MARKER_HOVER_FILL,
-      lineColor: _Color.default.MARKER_HOVER_LINE,
+      fillColor: _Color.COLOR_MARKER_HOVER_FILL,
+      lineColor: _Color.COLOR_MARKER_HOVER_LINE,
       lineWidth: 1,
       lineWidthPlus: 0,
       radius: 2,

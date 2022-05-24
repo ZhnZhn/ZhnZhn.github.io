@@ -13,7 +13,12 @@ import {
 } from './Chart';
 import { median, mean } from '../math/seriaFn';
 import handleMouseOver from './handleMouseOver';
-import COLOR from '../constants/Color';
+import {
+  COLOR_CHART_TITLE,
+  COLOR_METRIC_TITLE,
+  COLOR_LEGEND_ITEM_HIDDEN,
+  COLOR_LEGEND_ITEM_HOVER
+} from '../constants/Color';
 
 const COLOR_MFI = "#90ed7d"
 , COLOR_MOM = '#f7a35c'
@@ -44,7 +49,7 @@ const _crHighLowData = data => {
 const _crTitle = (text) => ({
   text: DOMPurify.sanitize(text || ''),
   style: {
-    color: COLOR.METRIC_TITLE,
+    color: COLOR_METRIC_TITLE,
     fontSize: '16px',
     fontWeight: 'bold'
   },
@@ -74,14 +79,14 @@ const _crLegendVolume = (
    symbolRadius: 6,
 
    itemStyle: {
-     color: COLOR.CHART_TITLE,
+     color: COLOR_CHART_TITLE,
      fontSize: '16px'
    },
    itemHoverStyle: {
-     color: COLOR.LEGEND_ITEM_HOVER
+     color: COLOR_LEGEND_ITEM_HOVER
    },
    itemHiddenStyle: {
-     color: COLOR.LEGEND_ITEM_HIDDEN
+     color: COLOR_LEGEND_ITEM_HIDDEN
    }
   }
 }

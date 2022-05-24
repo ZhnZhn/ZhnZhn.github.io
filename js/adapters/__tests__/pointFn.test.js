@@ -1,10 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 var _pointFn = require("../pointFn");
 
-var _Color = _interopRequireDefault(require("../../constants/Color"));
+var _Color = require("../../constants/Color");
 
 describe('crVolumePoint', () => {
   const fn = _pointFn.crVolumePoint;
@@ -24,7 +22,7 @@ describe('crVolumePoint', () => {
     })).toEqual({
       x: _p.date,
       y: _p.volume,
-      color: _Color.default.GREEN,
+      color: _Color.COLOR_GREEN,
       _open: 1,
       _close: 2,
       ...option
@@ -36,7 +34,7 @@ describe('crVolumePoint', () => {
     })).toEqual({
       x: _p.date,
       y: _p.volume,
-      color: _Color.default.RED,
+      color: _Color.COLOR_RED,
       _open: 2,
       _close: 1,
       ...option
@@ -48,7 +46,7 @@ describe('crVolumePoint', () => {
     })).toEqual({
       x: _p.date,
       y: _p.volume,
-      color: _Color.default.GRAY,
+      color: _Color.COLOR_GREY,
       _open: 2,
       _close: 2,
       ...option
@@ -61,7 +59,7 @@ describe('crVolumePoint', () => {
     })).toEqual({
       x: _p.date,
       y: _p.volume,
-      color: _Color.default.GRAY,
+      color: _Color.COLOR_GREY,
       _open: null,
       _close: 2
     });
@@ -71,7 +69,7 @@ describe('crVolumePoint', () => {
     })).toEqual({
       x: _p.date,
       y: _p.volume,
-      color: _Color.default.GRAY,
+      color: _Color.COLOR_GREY,
       _open: void 0,
       _close: 2
     });
@@ -81,7 +79,7 @@ describe('crVolumePoint', () => {
     })).toEqual({
       x: _p.date,
       y: _p.volume,
-      color: _Color.default.GRAY,
+      color: _Color.COLOR_GREY,
       _open: 0,
       _close: 2
     });
@@ -91,7 +89,7 @@ describe('crVolumePoint', () => {
     })).toEqual({
       x: _p.date,
       y: _p.volume,
-      color: _Color.default.GRAY,
+      color: _Color.COLOR_GREY,
       _open: NaN,
       _close: 2
     });
@@ -113,7 +111,7 @@ describe('crAthPoint', () => {
       x: _p.date,
       y: 10,
       ..._upBy10,
-      color: _Color.default.GREEN
+      color: _Color.COLOR_GREEN
     });
     const _downBy10 = {
       close: 100,
@@ -125,7 +123,7 @@ describe('crAthPoint', () => {
       x: _p.date,
       y: 10,
       ..._downBy10,
-      color: _Color.default.RED
+      color: _Color.COLOR_RED
     });
     const _equal = {
       close: 100,
@@ -137,7 +135,7 @@ describe('crAthPoint', () => {
       x: _p.date,
       y: 0,
       ..._equal,
-      color: _Color.default.GRAY
+      color: _Color.COLOR_GREY
     });
   });
   it('should return point with y=0 for falsy prevClose', () => {
@@ -151,7 +149,7 @@ describe('crAthPoint', () => {
       x: _p.date,
       y: 0,
       ..._pUndef,
-      color: _Color.default.GRAY
+      color: _Color.COLOR_GREY
     });
     const _pNull = {
       close: null,
@@ -163,7 +161,7 @@ describe('crAthPoint', () => {
       x: _p.date,
       y: 0,
       ..._pNull,
-      color: _Color.default.GRAY
+      color: _Color.COLOR_GREY
     });
     const _pZero = {
       close: 0,
@@ -175,7 +173,7 @@ describe('crAthPoint', () => {
       x: _p.date,
       y: 0,
       ..._pZero,
-      color: _Color.default.GRAY
+      color: _Color.COLOR_GREY
     });
   });
   it('should return point with color=C.WHITE && open=Unknown for falsy open', () => {
@@ -187,7 +185,7 @@ describe('crAthPoint', () => {
       y: 0,
       close: 100,
       open: 'Unknown',
-      color: _Color.default.WHITE
+      color: _Color.COLOR_WHITE
     });
     expect(fn({ ..._p,
       close: 100,
@@ -197,7 +195,7 @@ describe('crAthPoint', () => {
       y: 0,
       close: 100,
       open: 'Unknown',
-      color: _Color.default.WHITE
+      color: _Color.COLOR_WHITE
     });
   });
 });

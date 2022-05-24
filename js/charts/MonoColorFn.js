@@ -7,12 +7,7 @@ exports.getMonoColor = exports.crMonoColor = exports.COLOR_PERIOD = exports.COLO
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
-var _Color = _interopRequireDefault(require("../constants/Color"));
-
-const {
-  MONO_BASE1,
-  MONO_BASE2
-} = _Color.default;
+var _Color = require("../constants/Color");
 
 const _crColor = (color, brighten, opacity) => _highcharts.default.Color(color).brighten(brighten).setOpacity(opacity).get();
 
@@ -28,8 +23,8 @@ const _addMonoColorsTo = (colors, base) => {
 
 const _crMonoColors = function (_temp) {
   let {
-    base1 = MONO_BASE1,
-    base2 = MONO_BASE2
+    base1 = _Color.COLOR_MONO_BASE1,
+    base2 = _Color.COLOR_MONO_BASE2
   } = _temp === void 0 ? {} : _temp;
   const colors = [];
 
@@ -46,14 +41,14 @@ const _COLOR_LOW_LEVEL = -3 / 7;
 
 const COLOR_PERIOD = 4 / 7;
 exports.COLOR_PERIOD = COLOR_PERIOD;
-const COLOR_BASE1 = MONO_BASE1;
+const COLOR_BASE1 = _Color.COLOR_MONO_BASE1;
 exports.COLOR_BASE1 = COLOR_BASE1;
-const COLOR_BASE2 = MONO_BASE2;
+const COLOR_BASE2 = _Color.COLOR_MONO_BASE2;
 exports.COLOR_BASE2 = COLOR_BASE2;
 
 const crMonoColor = function (base, deltaColor, opacity) {
   if (base === void 0) {
-    base = MONO_BASE1;
+    base = _Color.COLOR_MONO_BASE1;
   }
 
   if (deltaColor === void 0) {

@@ -2,7 +2,12 @@ import {
   legendItem,
   stockSeriesLegend
 } from '../legendFn';
-import C from '../../constants/Color'
+import {
+  COLOR_S_STOCK_CLOSE,
+  COLOR_S_HIGH,
+  COLOR_S_LOW,
+  COLOR_S_OPEN
+} from '../../constants/Color'
 
 describe('legendItem', ()=>{
   const fn = legendItem
@@ -24,10 +29,10 @@ describe('stockSeriesLegend', ()=>{
   const fn = stockSeriesLegend
   it('should create stock series legends', ()=>{
     expect(fn()).toEqual([
-     { index: 0, color: C.S_STOCK_CLOSE, name: 'Close', isVisible: true },
-     { index: 1, color: C.S_HIGH, name: 'High', isVisible: false },
-     { index: 2, color: C.S_LOW, name: 'Low', isVisible: false },
-     { index: 3, color: C.S_OPEN, name: 'Open', isVisible: false },
+     { index: 0, color: COLOR_S_STOCK_CLOSE, name: 'Close', isVisible: true },
+     { index: 1, color: COLOR_S_HIGH, name: 'High', isVisible: false },
+     { index: 2, color: COLOR_S_LOW, name: 'Low', isVisible: false },
+     { index: 3, color: COLOR_S_OPEN, name: 'Open', isVisible: false },
     ])
   })
 })

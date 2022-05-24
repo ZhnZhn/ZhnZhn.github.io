@@ -1,7 +1,18 @@
 import Highcharts from 'highcharts';
 import DOMPurify from 'dompurify';
 
-import COLOR from '../constants/Color';
+import {
+  COLOR_CHART_TITLE,
+  COLOR_CROSSHAIR,
+  COLOR_HALO_BASE,
+  COLOR_LEGEND_ITEM,
+  COLOR_AREA_HOVER_LINE,
+  COLOR_AREA_MARKER_LINE,
+  COLOR_COLUMN_HOVER_LINE,
+  COLOR_COLUMN_MARKER_LINE,
+  COLOR_MARKER_HOVER_LINE,
+  COLOR_MARKER_HOVER_FILL
+} from '../constants/Color';
 import { tooltipValueTdmyIf } from './Tooltip';
 
 const merge = Highcharts.merge;
@@ -18,8 +29,8 @@ const FONT_STYLE = {
   style: {
     ...FONT_STYLE,
     stroke: 'transparent',
-    color: COLOR.CHART_TITLE,
-    fill: COLOR.CHART_TITLE,
+    color: COLOR_CHART_TITLE,
+    fill: COLOR_CHART_TITLE,
   }
 }, YAXIS_CONFIG = {
   endOnTick: false,
@@ -53,7 +64,7 @@ const  _crTitle = title => _isStr(title)
   ? { text: DOMPurify.sanitize(title) }
   : _sanitizeOptionText(title)
 , _crCrosshair = (is=true) => is ? {
-    color: COLOR.CROSSHAIR,
+    color: COLOR_CROSSHAIR,
     width: 1,
     zIndex: 2
   } : void 0;
@@ -250,16 +261,16 @@ export const fSecondYAxis = (
 export const fPlotOptionsArea = (
   option
 ) => merge(false, _crPlotOption(
-   COLOR.AREA_HOVER_LINE,
-   COLOR.AREA_MARKER_LINE
+   COLOR_AREA_HOVER_LINE,
+   COLOR_AREA_MARKER_LINE
 ), option || {});
 
 
 export const fPlotOptionsColumn = (
   option
 ) => merge(false, _crPlotOption(
-   COLOR.COLUMN_HOVER_LINE,
-   COLOR.COLUMN_MARKER_LINE
+   COLOR_COLUMN_HOVER_LINE,
+   COLOR_COLUMN_MARKER_LINE
 ), option)
 
 export const fPlotOptionsSeries = (
@@ -269,7 +280,7 @@ export const fPlotOptionsSeries = (
      hover: {
        halo: {
          attributes: {
-           fill: COLOR.HALO_BASE
+           fill: COLOR_HALO_BASE
          },
          opacity: 0.35,
          size: 16
@@ -288,7 +299,7 @@ export const fLegend = (
    symbolRadius: 7,
    itemStyle: {
      ...FONT_STYLE,
-     color: COLOR.LEGEND_ITEM,
+     color: COLOR_LEGEND_ITEM,
      lineHeight: 1.5,
      cursor: 'pointer'
    }
@@ -302,8 +313,8 @@ export const fSeriaMarker = (
    states: {
      hover: {
        enabled: true,
-       fillColor: COLOR.MARKER_HOVER_FILL,
-       lineColor: COLOR.MARKER_HOVER_LINE,
+       fillColor: COLOR_MARKER_HOVER_FILL,
+       lineColor: COLOR_MARKER_HOVER_LINE,
        lineWidth: 1,
        lineWidthPlus: 0,
        radius: 2,

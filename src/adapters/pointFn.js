@@ -1,5 +1,10 @@
 import Big from 'big.js'
-import C from '../constants/Color'
+import {
+  COLOR_WHITE,
+  COLOR_GREY,
+  COLOR_GREEN,
+  COLOR_RED
+} from '../constants/Color'
 
 const _assign = Object.assign
 
@@ -11,10 +16,10 @@ export const crVolumePoint = ({
   option
 }) => {
   const _color = open && close>open
-    ? C.GREEN
+    ? COLOR_GREEN
     : open && close<open
-       ? C.RED
-       : C.GRAY;
+       ? COLOR_RED
+       : COLOR_GREY;
 
   return _assign({
     x: date,
@@ -38,10 +43,10 @@ export const crAthPoint = ({
     ? _bDelta.times(100).div(close).abs().toFixed(2)
     : Big('0.0')
   , _color = _bDelta.gt(0.0)
-    ? C.RED
+    ? COLOR_RED
     : !_bDelta.gte(0.0)
-        ? C.GREEN
-        : open ? C.GRAY : C.WHITE;
+        ? COLOR_GREEN
+        : open ? COLOR_GREY : COLOR_WHITE;
 
   return {
     x: date,

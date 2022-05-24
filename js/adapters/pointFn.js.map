@@ -1,1 +1,40 @@
-{"version":3,"sources":["../../src/adapters/pointFn.js"],"names":["_assign","Object","assign","crVolumePoint","date","open","close","volume","option","_color","C","GREEN","RED","GRAY","x","y","color","_open","_close","crAthPoint","_bDelta","minus","_bPercent","times","div","abs","toFixed","gt","gte","WHITE","parseFloat"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,MAAMA,OAAO,GAAGC,MAAM,CAACC,MAAvB;;AAEO,MAAMC,aAAa,GAAG,QAMvB;AAAA,MANwB;AAC5BC,IAAAA,IAD4B;AAE5BC,IAAAA,IAF4B;AAG5BC,IAAAA,KAH4B;AAI5BC,IAAAA,MAJ4B;AAK5BC,IAAAA;AAL4B,GAMxB;;AACJ,QAAMC,MAAM,GAAGJ,IAAI,IAAIC,KAAK,GAACD,IAAd,GACXK,eAAEC,KADS,GAEXN,IAAI,IAAIC,KAAK,GAACD,IAAd,GACGK,eAAEE,GADL,GAEGF,eAAEG,IAJT;;AAMA,SAAOb,OAAO,CAAC;AACbc,IAAAA,CAAC,EAAEV,IADU;AAEbW,IAAAA,CAAC,EAAER,MAFU;AAGbS,IAAAA,KAAK,EAAEP,MAHM;AAIbQ,IAAAA,KAAK,EAAEZ,IAJM;AAKba,IAAAA,MAAM,EAAEZ;AALK,GAAD,EAMXE,MANW,CAAd;AAOD,CApBM,C,CAsBP;;;;;AACO,MAAMW,UAAU,GAAG,SAIpB;AAAA,MAJqB;AACzBf,IAAAA,IADyB;AAEzBE,IAAAA,KAFyB;AAGzBD,IAAAA;AAHyB,GAIrB;;AACJ,QAAMe,OAAO,GAAIf,IAAI,IAAIC,KAAT,GACZ,kBAAIA,KAAJ,EAAWe,KAAX,CAAiBhB,IAAjB,CADY,GAEZ,kBAAI,KAAJ,CAFJ;AAAA,QAGEiB,SAAS,GAAGhB,KAAK,GACfc,OAAO,CAACG,KAAR,CAAc,GAAd,EAAmBC,GAAnB,CAAuBlB,KAAvB,EAA8BmB,GAA9B,GAAoCC,OAApC,CAA4C,CAA5C,CADe,GAEf,kBAAI,KAAJ,CALJ;AAAA,QAMEjB,MAAM,GAAGW,OAAO,CAACO,EAAR,CAAW,GAAX,IACPjB,eAAEE,GADK,GAEP,CAACQ,OAAO,CAACQ,GAAR,CAAY,GAAZ,CAAD,GACIlB,eAAEC,KADN,GAEIN,IAAI,GAAGK,eAAEG,IAAL,GAAYH,eAAEmB,KAV1B;;AAYA,SAAO;AACLf,IAAAA,CAAC,EAAEV,IADE;AAELW,IAAAA,CAAC,EAAEe,UAAU,CAACR,SAAD,CAFR;AAGLhB,IAAAA,KAAK,EAAEA,KAHF;AAILD,IAAAA,IAAI,EAAEA,IAAI,GAAGA,IAAH,GAAU,SAJf;AAKLW,IAAAA,KAAK,EAAEP;AALF,GAAP;AAOD,CAxBM","sourcesContent":["import Big from 'big.js'\r\nimport C from '../constants/Color'\r\n\r\nconst _assign = Object.assign\r\n\r\nexport const crVolumePoint = ({\r\n  date,\r\n  open,\r\n  close,\r\n  volume,\r\n  option\r\n}) => {\r\n  const _color = open && close>open\r\n    ? C.GREEN\r\n    : open && close<open\r\n       ? C.RED\r\n       : C.GRAY;\r\n\r\n  return _assign({\r\n    x: date,\r\n    y: volume,\r\n    color: _color,\r\n    _open: open,\r\n    _close: close\r\n  }, option);\r\n}\r\n\r\n//date, prevClose as close, open\r\nexport const crAthPoint = ({\r\n  date,\r\n  close,\r\n  open\r\n}) => {\r\n  const _bDelta = (open && close)\r\n    ? Big(close).minus(open)\r\n    : Big('0.0')\r\n  , _bPercent = close\r\n    ? _bDelta.times(100).div(close).abs().toFixed(2)\r\n    : Big('0.0')\r\n  , _color = _bDelta.gt(0.0)\r\n    ? C.RED\r\n    : !_bDelta.gte(0.0)\r\n        ? C.GREEN\r\n        : open ? C.GRAY : C.WHITE;\r\n\r\n  return {\r\n    x: date,\r\n    y: parseFloat(_bPercent),\r\n    close: close,\r\n    open: open ? open : 'Unknown',\r\n    color: _color\r\n  };\r\n}\r\n"],"file":"pointFn.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/adapters/pointFn.js"
+ ],
+ "file": "../../src/adapters/pointFn.js",
+ "names": [
+  "_assign",
+  "Object",
+  "assign",
+  "crVolumePoint",
+  "date",
+  "open",
+  "close",
+  "volume",
+  "option",
+  "_color",
+  "COLOR_GREEN",
+  "COLOR_RED",
+  "COLOR_GREY",
+  "x",
+  "y",
+  "color",
+  "_open",
+  "_close",
+  "crAthPoint",
+  "_bDelta",
+  "minus",
+  "_bPercent",
+  "times",
+  "div",
+  "abs",
+  "toFixed",
+  "gt",
+  "gte",
+  "COLOR_WHITE",
+  "parseFloat"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAOA,MAAMA,OAAO,GAAGC,MAAM,CAACC,MAAvB;;AAEO,MAAMC,aAAa,GAAG,QAMvB;AAAA,MANwB;AAC5BC,IAAAA,IAD4B;AAE5BC,IAAAA,IAF4B;AAG5BC,IAAAA,KAH4B;AAI5BC,IAAAA,MAJ4B;AAK5BC,IAAAA;AAL4B,GAMxB;;AACJ,QAAMC,MAAM,GAAGJ,IAAI,IAAIC,KAAK,GAACD,IAAd,GACXK,kBADW,GAEXL,IAAI,IAAIC,KAAK,GAACD,IAAd,GACGM,gBADH,GAEGC,iBAJP;;AAMA,SAAOZ,OAAO,CAAC;AACba,IAAAA,CAAC,EAAET,IADU;AAEbU,IAAAA,CAAC,EAAEP,MAFU;AAGbQ,IAAAA,KAAK,EAAEN,MAHM;AAIbO,IAAAA,KAAK,EAAEX,IAJM;AAKbY,IAAAA,MAAM,EAAEX;AALK,GAAD,EAMXE,MANW,CAAd;AAOD,CApBM,C,CAsBP;;;;;AACO,MAAMU,UAAU,GAAG,SAIpB;AAAA,MAJqB;AACzBd,IAAAA,IADyB;AAEzBE,IAAAA,KAFyB;AAGzBD,IAAAA;AAHyB,GAIrB;;AACJ,QAAMc,OAAO,GAAId,IAAI,IAAIC,KAAT,GACZ,kBAAIA,KAAJ,EAAWc,KAAX,CAAiBf,IAAjB,CADY,GAEZ,kBAAI,KAAJ,CAFJ;AAAA,QAGEgB,SAAS,GAAGf,KAAK,GACfa,OAAO,CAACG,KAAR,CAAc,GAAd,EAAmBC,GAAnB,CAAuBjB,KAAvB,EAA8BkB,GAA9B,GAAoCC,OAApC,CAA4C,CAA5C,CADe,GAEf,kBAAI,KAAJ,CALJ;AAAA,QAMEhB,MAAM,GAAGU,OAAO,CAACO,EAAR,CAAW,GAAX,IACPf,gBADO,GAEP,CAACQ,OAAO,CAACQ,GAAR,CAAY,GAAZ,CAAD,GACIjB,kBADJ,GAEIL,IAAI,GAAGO,iBAAH,GAAgBgB,kBAV5B;;AAYA,SAAO;AACLf,IAAAA,CAAC,EAAET,IADE;AAELU,IAAAA,CAAC,EAAEe,UAAU,CAACR,SAAD,CAFR;AAGLf,IAAAA,KAAK,EAAEA,KAHF;AAILD,IAAAA,IAAI,EAAEA,IAAI,GAAGA,IAAH,GAAU,SAJf;AAKLU,IAAAA,KAAK,EAAEN;AALF,GAAP;AAOD,CAxBM"
+}

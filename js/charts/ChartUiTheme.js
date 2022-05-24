@@ -7,7 +7,7 @@ exports.setChartTheme = void 0;
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
-var _Color = _interopRequireDefault(require("../constants/Color"));
+var _Color = require("../constants/Color");
 
 const _crAreaPlotOptions = (topColor, bottomColor) => ({
   plotOptions: {
@@ -26,9 +26,9 @@ const _crAreaPlotOptions = (topColor, bottomColor) => ({
 });
 
 const setChartTheme = isLighTheme => {
-  const bottomColor = isLighTheme ? _Color.default.PLOT_G3 : _Color.default.PLOT_G2;
+  const bottomColor = isLighTheme ? _Color.COLOR_PLOT_G3 : _Color.COLOR_PLOT_G2;
 
-  _highcharts.default.setOptions(_crAreaPlotOptions(_Color.default.PLOT_G1, bottomColor));
+  _highcharts.default.setOptions(_crAreaPlotOptions(_Color.COLOR_PLOT_G1, bottomColor));
 };
 
 exports.setChartTheme = setChartTheme;

@@ -1,4 +1,10 @@
-import COLOR from '../constants/Color';
+import {
+  COLOR_S_OPEN,
+  COLOR_S_HIGH,
+  COLOR_S_LOW,
+  COLOR_EX_DIVIDEND,
+  COLOR_SPLIT_RATIO
+} from '../constants/Color';
 
 import {
   crType,
@@ -42,12 +48,12 @@ const _crScatterSeria = (
   tooltip: fTooltip(pointFormatter),
 })
 , _crDividendSeria = (data) => _crScatterSeria(
-  COLOR.EX_DIVIDEND,
+  COLOR_EX_DIVIDEND,
   tooltipExDividend,
   data
 )
 , _crSplitRatioSeria = (data) => _crScatterSeria(
-  COLOR.SPLIT_RATIO,
+  COLOR_SPLIT_RATIO,
   tooltipSplitRatio,
   data
 );
@@ -60,13 +66,13 @@ const ConfigStockSlice = {
       type, lineWidth
     })
     setSeriaDataTo(config, dH, 1, 'High',
-      _crSeriaOption(COLOR.S_HIGH, lineWidth)
+      _crSeriaOption(COLOR_S_HIGH, lineWidth)
     )
     setSeriaDataTo(config, dL, 2, 'Low',
-      _crSeriaOption(COLOR.S_LOW, lineWidth)
+      _crSeriaOption(COLOR_S_LOW, lineWidth)
     )
     setSeriaDataTo(config, dO, 3, 'Open',
-      _crSeriaOption(COLOR.S_OPEN, lineWidth)
+      _crSeriaOption(COLOR_S_OPEN, lineWidth)
     )
     return this;
   },

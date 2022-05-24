@@ -2,7 +2,29 @@ import Highcharts from 'highcharts'
 
 import handleMouseOver from './handleMouseOver'
 
-import COLOR from '../constants/Color';
+import {
+  COLOR_CHART,
+  COLOR_TOOLTIP,
+  COLOR_ITEM,
+  COLOR_BG_TITLE,
+  COLOR_BG_ITEM_HOVER,
+  COLOR_TITLE_SHOW,
+  COLOR_HOVER,
+  COLOR_CHART_PRINT,
+  COLOR_PLOT_PRINT,
+  COLOR_AREA_FILL_PRINT,
+  COLOR_LINE_PRINT,
+  COLOR_GRID_LINE_PRINT,
+  COLOR_X_LINE,
+  COLOR_X_TICK,
+  COLOR_X_GRID_LINE,
+  COLOR_X_LABEL,
+  COLOR_Y_LABEL,
+  COLOR_Y_LINE,
+  COLOR_Y_TICK,
+  COLOR_Y_GRID_LINE
+} from '../constants/Color';
+
 import {
   HEIGHT,
   THEME_SPACING_TOP,
@@ -53,19 +75,19 @@ const ChartTheme = {
          y: 0
       },
       theme: {
-        fill: COLOR.BG_TITLE,
-        stroke: COLOR.BG_TITLE,
+        fill: COLOR_BG_TITLE,
+        stroke: COLOR_BG_TITLE,
         r: 4,
         style: {
-          color: COLOR.TITLE_SHOW
+          color: COLOR_TITLE_SHOW
         },
         states: {
           hover: {
-            fill: COLOR.BG_TITLE,
-            stroke: COLOR.HOVER,
+            fill: COLOR_BG_TITLE,
+            stroke: COLOR_HOVER,
             'stroke-width': 2,
             style: {
-              color: COLOR.HOVER
+              color: COLOR_HOVER
             }
           }
         }
@@ -102,8 +124,8 @@ const ChartTheme = {
     fallbackToExportServer : false,
     chartOptions : {
       chart : {
-        plotBackgroundColor: COLOR.PLOT_PRINT,
-        backgroundColor: COLOR.CHART_PRINT
+        plotBackgroundColor: COLOR_PLOT_PRINT,
+        backgroundColor: COLOR_CHART_PRINT
       },
       title : {
         x: 0,
@@ -115,18 +137,18 @@ const ChartTheme = {
       },
       plotOptions: {
         area: {
-          fillColor: COLOR.AREA_FILL_PRINT
+          fillColor: COLOR_AREA_FILL_PRINT
         }
       },
       xAxis : {
         lineWidth: 2,
-        lineColor: COLOR.LINE_PRINT,
-        gridLineColor: COLOR.GRID_LINE_PRINT
+        lineColor: COLOR_LINE_PRINT,
+        gridLineColor: COLOR_GRID_LINE_PRINT
       },
       yAxis : {
         lineWidth: 2,
-        lineColor: COLOR.LINE_PRINT,
-        gridLineColor: COLOR.GRID_LINE_PRINT
+        lineColor: COLOR_LINE_PRINT,
+        gridLineColor: COLOR_GRID_LINE_PRINT
       }
     }
   },
@@ -140,7 +162,7 @@ const ChartTheme = {
         states : {
           hover : {
             'stroke-width' : 2,
-            stroke : COLOR.HOVER
+            stroke : COLOR_HOVER
           }
         }
       }
@@ -148,22 +170,22 @@ const ChartTheme = {
     menuItemStyle : {
       'font-size' : '16px',
       'font-weight' : 'bold',
-       color : COLOR.ITEM,
+       color : COLOR_ITEM,
        'line-height' : '1.6',
        cursor : 'pointer'
     },
     menuItemHoverStyle : {
-      color : COLOR.HOVER,
-      background : COLOR.BG_ITEM_HOVER
+      color : COLOR_HOVER,
+      background : COLOR_BG_ITEM_HOVER
     },
     menuStyle : {
       position : 'relative',
       top : '8px',
       border : '2px solid',
-      'border-color' : COLOR.BG_TITLE,
+      'border-color' : COLOR_BG_TITLE,
       'border-radius' : '5px',
       'box-shadow': 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
-      background : COLOR.CHART
+      background : COLOR_CHART
     }
   },
   plotOptions: {
@@ -248,7 +270,7 @@ const ChartTheme = {
     followPointer : false,
     shared : false,
 
-    backgroundColor: COLOR.TOOLTIP,
+    backgroundColor: COLOR_TOOLTIP,
     borderWidth: 2,
     borderRadius: 10,
 
@@ -257,34 +279,34 @@ const ChartTheme = {
                  '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.y}</span><br/>'
   },
   xAxis: {
-    lineColor: COLOR.X_LINE,
+    lineColor: COLOR_X_LINE,
     lineWidth: 3,
-    tickColor: COLOR.X_TICK,
+    tickColor: COLOR_X_TICK,
     tickWidth: 3,
     tickLenght: 5,
-    gridLineColor: COLOR.X_GRID_LINE,
+    gridLineColor: COLOR_X_GRID_LINE,
     gridLineDashStyle: "Dot",
     //gridLineDashStyle: "ShortDashDotDot",
     gridLineWidth: 1,
     labels:{
       style: {
-        color: COLOR.X_LABEL,
+        color: COLOR_X_LABEL,
         fontWeight: "bold",
         fontSize: "15px"
       }
     }
   },
   yAxis: {
-      lineColor: COLOR.Y_LINE,
+      lineColor: COLOR_Y_LINE,
       lineWidth: 3,
-      tickColor: COLOR.Y_TICK,
+      tickColor: COLOR_Y_TICK,
       tickWidth: 3,
       tickLenght: 5,
-      gridLineColor: COLOR.Y_GRID_LINE,
+      gridLineColor: COLOR_Y_GRID_LINE,
       gridLineDashStyle: "Dot",
       labels: {
         style: {
-          color : COLOR.Y_LABEL,
+          color : COLOR_Y_LABEL,
           fontWeight: "bold",
           fontSize: "14px"
         }

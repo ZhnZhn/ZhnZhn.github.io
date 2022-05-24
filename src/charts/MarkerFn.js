@@ -1,4 +1,8 @@
-import COLOR from '../constants/Color';
+import {
+  COLOR_PLOT,
+  COLOR_EX_DIVIDEND,
+  COLOR_SPLIT_RATIO
+} from '../constants/Color';
 
 const _crMarker = (
   color,
@@ -14,7 +18,7 @@ const _crMarker = (
     states: {
       hover: {
         enable: true,
-        fillColor: COLOR.PLOT,
+        fillColor: COLOR_PLOT,
         lineColor: color,
         lineWidth: 2,
         radius: 6
@@ -44,7 +48,7 @@ const _crMarker = (
 });
 
 export const crMarkerExDividend =
-  () => _crMarker(COLOR.EX_DIVIDEND, 'exValue')
+  () => _crMarker(COLOR_EX_DIVIDEND, 'exValue')
 
 export const crMarkerSplitRatio =
-  () => _crMarker(COLOR.SPLIT_RATIO, 'splitRatio')
+  () => _crMarker(COLOR_SPLIT_RATIO, 'splitRatio')

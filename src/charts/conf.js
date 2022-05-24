@@ -1,6 +1,9 @@
 import Highcharts from 'highcharts';
 
-import COLOR from '../constants/Color';
+import {
+  COLOR_MONO_BASE1,
+  COLOR_MONO_BASE2
+} from '../constants/Color';
 
 const _addMonoColorsTo = (colors=[], base) => {
   let i;
@@ -24,8 +27,8 @@ export const CREDITS_COLOR = '#909090'
 export const CREDITS_URL = 'https://highcharts.com'
 
 export const fMonoPieColors = ({
-  base1=COLOR.MONO_BASE1,
-  base2=COLOR.MONO_BASE2
+  base1=COLOR_MONO_BASE1,
+  base2=COLOR_MONO_BASE2
 }={}) => {
   const colors = [];
   _addMonoColorsTo(colors, base1)

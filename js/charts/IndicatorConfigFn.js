@@ -15,7 +15,7 @@ var _seriaFn = require("../math/seriaFn");
 
 var _handleMouseOver = _interopRequireDefault(require("./handleMouseOver"));
 
-var _Color = _interopRequireDefault(require("../constants/Color"));
+var _Color = require("../constants/Color");
 
 const COLOR_MFI = "#90ed7d",
       COLOR_MOM = '#f7a35c',
@@ -51,7 +51,7 @@ const _crHighLowData = data => {
 const _crTitle = text => ({
   text: _dompurify.default.sanitize(text || ''),
   style: {
-    color: _Color.default.METRIC_TITLE,
+    color: _Color.COLOR_METRIC_TITLE,
     fontSize: '16px',
     fontWeight: 'bold'
   },
@@ -80,14 +80,14 @@ const _crLegendVolume = function (titleOrX) {
     symbolWidth: 12,
     symbolRadius: 6,
     itemStyle: {
-      color: _Color.default.CHART_TITLE,
+      color: _Color.COLOR_CHART_TITLE,
       fontSize: '16px'
     },
     itemHoverStyle: {
-      color: _Color.default.LEGEND_ITEM_HOVER
+      color: _Color.COLOR_LEGEND_ITEM_HOVER
     },
     itemHiddenStyle: {
-      color: _Color.default.LEGEND_ITEM_HIDDEN
+      color: _Color.COLOR_LEGEND_ITEM_HIDDEN
     }
   };
 };

@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _Color = _interopRequireDefault(require("../constants/Color"));
+var _Color = require("../constants/Color");
 
 var _Chart = require("./Chart");
 
@@ -32,8 +30,8 @@ const _crScatterSeria = (color, pointFormatter, data) => ({
   data,
   tooltip: (0, _Chart.fTooltip)(pointFormatter)
 }),
-      _crDividendSeria = data => _crScatterSeria(_Color.default.EX_DIVIDEND, _Tooltip.tooltipExDividend, data),
-      _crSplitRatioSeria = data => _crScatterSeria(_Color.default.SPLIT_RATIO, _Tooltip.tooltipSplitRatio, data);
+      _crDividendSeria = data => _crScatterSeria(_Color.COLOR_EX_DIVIDEND, _Tooltip.tooltipExDividend, data),
+      _crSplitRatioSeria = data => _crScatterSeria(_Color.COLOR_SPLIT_RATIO, _Tooltip.tooltipSplitRatio, data);
 
 const ConfigStockSlice = {
   _setStockSerias(seriaType, lineWidth, dC, dH, dL, dO) {
@@ -43,9 +41,9 @@ const ConfigStockSlice = {
       type,
       lineWidth
     });
-    (0, _ChartConfigFn.setSeriaDataTo)(config, dH, 1, 'High', _crSeriaOption(_Color.default.S_HIGH, lineWidth));
-    (0, _ChartConfigFn.setSeriaDataTo)(config, dL, 2, 'Low', _crSeriaOption(_Color.default.S_LOW, lineWidth));
-    (0, _ChartConfigFn.setSeriaDataTo)(config, dO, 3, 'Open', _crSeriaOption(_Color.default.S_OPEN, lineWidth));
+    (0, _ChartConfigFn.setSeriaDataTo)(config, dH, 1, 'High', _crSeriaOption(_Color.COLOR_S_HIGH, lineWidth));
+    (0, _ChartConfigFn.setSeriaDataTo)(config, dL, 2, 'Low', _crSeriaOption(_Color.COLOR_S_LOW, lineWidth));
+    (0, _ChartConfigFn.setSeriaDataTo)(config, dO, 3, 'Open', _crSeriaOption(_Color.COLOR_S_OPEN, lineWidth));
     return this;
   },
 

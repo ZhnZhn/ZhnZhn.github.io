@@ -1,7 +1,14 @@
 import Highcharts from 'highcharts';
-import COLOR from '../constants/Color';
+import {
+  COLOR_PLOT_G1,
+  COLOR_PLOT_G2,
+  COLOR_PLOT_G3
+} from '../constants/Color';
 
-const _crAreaPlotOptions = (topColor, bottomColor) => ({
+const _crAreaPlotOptions = (
+  topColor,
+  bottomColor
+) => ({
   plotOptions: {
      area: {
       fillColor: {
@@ -20,9 +27,9 @@ export const setChartTheme = (
   isLighTheme
 ) => {
   const bottomColor = isLighTheme
-    ? COLOR.PLOT_G3
-    : COLOR.PLOT_G2;
+    ? COLOR_PLOT_G3
+    : COLOR_PLOT_G2;
   Highcharts.setOptions(
-    _crAreaPlotOptions(COLOR.PLOT_G1, bottomColor)
+    _crAreaPlotOptions(COLOR_PLOT_G1, bottomColor)
   )
 }

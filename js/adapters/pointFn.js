@@ -7,7 +7,7 @@ exports.crVolumePoint = exports.crAthPoint = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
-var _Color = _interopRequireDefault(require("../constants/Color"));
+var _Color = require("../constants/Color");
 
 const _assign = Object.assign;
 
@@ -20,7 +20,7 @@ const crVolumePoint = _ref => {
     option
   } = _ref;
 
-  const _color = open && close > open ? _Color.default.GREEN : open && close < open ? _Color.default.RED : _Color.default.GRAY;
+  const _color = open && close > open ? _Color.COLOR_GREEN : open && close < open ? _Color.COLOR_RED : _Color.COLOR_GREY;
 
   return _assign({
     x: date,
@@ -43,7 +43,7 @@ const crAthPoint = _ref2 => {
 
   const _bDelta = open && close ? (0, _big.default)(close).minus(open) : (0, _big.default)('0.0'),
         _bPercent = close ? _bDelta.times(100).div(close).abs().toFixed(2) : (0, _big.default)('0.0'),
-        _color = _bDelta.gt(0.0) ? _Color.default.RED : !_bDelta.gte(0.0) ? _Color.default.GREEN : open ? _Color.default.GRAY : _Color.default.WHITE;
+        _color = _bDelta.gt(0.0) ? _Color.COLOR_RED : !_bDelta.gte(0.0) ? _Color.COLOR_GREEN : open ? _Color.COLOR_GREY : _Color.COLOR_WHITE;
 
   return {
     x: date,

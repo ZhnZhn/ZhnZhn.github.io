@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.crMarkerSplitRatio = exports.crMarkerExDividend = void 0;
 
-var _Color = _interopRequireDefault(require("../constants/Color"));
+var _Color = require("../constants/Color");
 
 const _crMarker = (color, formatterPointPropName) => ({
   y: 0,
@@ -18,7 +16,7 @@ const _crMarker = (color, formatterPointPropName) => ({
     states: {
       hover: {
         enable: true,
-        fillColor: _Color.default.PLOT,
+        fillColor: _Color.COLOR_PLOT,
         lineColor: color,
         lineWidth: 2,
         radius: 6
@@ -47,11 +45,11 @@ const _crMarker = (color, formatterPointPropName) => ({
   }
 });
 
-const crMarkerExDividend = () => _crMarker(_Color.default.EX_DIVIDEND, 'exValue');
+const crMarkerExDividend = () => _crMarker(_Color.COLOR_EX_DIVIDEND, 'exValue');
 
 exports.crMarkerExDividend = crMarkerExDividend;
 
-const crMarkerSplitRatio = () => _crMarker(_Color.default.SPLIT_RATIO, 'splitRatio');
+const crMarkerSplitRatio = () => _crMarker(_Color.COLOR_SPLIT_RATIO, 'splitRatio');
 
 exports.crMarkerSplitRatio = crMarkerSplitRatio;
 //# sourceMappingURL=MarkerFn.js.map

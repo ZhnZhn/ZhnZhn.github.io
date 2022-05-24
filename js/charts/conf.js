@@ -7,7 +7,7 @@ exports.fMonoPieColors = exports.THEME_SPACING_TOP = exports.SPACING_BOTTOM = ex
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
-var _Color = _interopRequireDefault(require("../constants/Color"));
+var _Color = require("../constants/Color");
 
 const _addMonoColorsTo = function (colors, base) {
   if (colors === void 0) {
@@ -37,8 +37,8 @@ exports.CREDITS_URL = CREDITS_URL;
 
 const fMonoPieColors = function (_temp) {
   let {
-    base1 = _Color.default.MONO_BASE1,
-    base2 = _Color.default.MONO_BASE2
+    base1 = _Color.COLOR_MONO_BASE1,
+    base2 = _Color.COLOR_MONO_BASE2
   } = _temp === void 0 ? {} : _temp;
   const colors = [];
 

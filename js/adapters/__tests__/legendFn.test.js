@@ -1,10 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 var _legendFn = require("../legendFn");
 
-var _Color = _interopRequireDefault(require("../../constants/Color"));
+var _Color = require("../../constants/Color");
 
 describe('legendItem', () => {
   const fn = _legendFn.legendItem;
@@ -30,22 +28,22 @@ describe('stockSeriesLegend', () => {
   it('should create stock series legends', () => {
     expect(fn()).toEqual([{
       index: 0,
-      color: _Color.default.S_STOCK_CLOSE,
+      color: _Color.COLOR_S_STOCK_CLOSE,
       name: 'Close',
       isVisible: true
     }, {
       index: 1,
-      color: _Color.default.S_HIGH,
+      color: _Color.COLOR_S_HIGH,
       name: 'High',
       isVisible: false
     }, {
       index: 2,
-      color: _Color.default.S_LOW,
+      color: _Color.COLOR_S_LOW,
       name: 'Low',
       isVisible: false
     }, {
       index: 3,
-      color: _Color.default.S_OPEN,
+      color: _Color.COLOR_S_OPEN,
       name: 'Open',
       isVisible: false
     }]);

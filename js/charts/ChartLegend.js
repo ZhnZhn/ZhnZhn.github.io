@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.crLegendConfig = void 0;
 
-var _Color = _interopRequireDefault(require("../constants/Color"));
+var _Color = require("../constants/Color");
 
 const OPEN = 'open',
       OPEN_INTEREST = 'open interest',
@@ -56,47 +54,47 @@ const crLegendConfig = columnName => {
 
   switch (columnName.toLowerCase()) {
     case OPEN:
-      return _assign(_conf, _crCs(_Color.default.S_OPEN));
+      return _assign(_conf, _crCs(_Color.COLOR_S_OPEN));
 
     case OPEN_INTEREST:
     case OPEN_INTEREST_2:
     case OPEN_INTEREST_3:
-      return _assign(_conf, _crCsa(_Color.default.S_OPEN_INTEREST, 'circle'));
+      return _assign(_conf, _crCsa(_Color.COLOR_S_OPEN_INTEREST, 'circle'));
 
     case HIGH:
-      return _assign(_conf, _crCs(_Color.default.S_HIGH));
+      return _assign(_conf, _crCs(_Color.COLOR_S_HIGH));
 
     case LOW:
-      return _assign(_conf, _crCs(_Color.default.S_LOW));
+      return _assign(_conf, _crCs(_Color.COLOR_S_LOW));
 
     case VOLUME:
-      return _assign(_conf, _crCsa(_Color.default.S_VOLUME));
+      return _assign(_conf, _crCsa(_Color.COLOR_S_VOLUME));
 
     case ADJ_CLOSE:
     case ADJ_CLOSE_2:
-      return _assign(_conf, _crCs(_Color.default.S_ADJ_CLOSE, 'diamond'));
+      return _assign(_conf, _crCs(_Color.COLOR_S_ADJ_CLOSE, 'diamond'));
 
     case CLOSE:
     case LAST:
-      return _assign(_conf, _crCs(_Color.default.S_CLOSE, 'diamond'));
+      return _assign(_conf, _crCs(_Color.COLOR_S_CLOSE, 'diamond'));
 
     case PRE_SETTLE:
-      return _assign(_conf, _crCs(_Color.default.S_PRE_SETTLE, 'diamond'));
+      return _assign(_conf, _crCs(_Color.COLOR_S_PRE_SETTLE, 'diamond'));
 
     case TURNOVER:
-      return _assign(_conf, _crCsa(_Color.default.S_TURNOVER));
+      return _assign(_conf, _crCsa(_Color.COLOR_S_TURNOVER));
 
     case TRADES:
-      return _assign(_conf, _crCsa(_Color.default.S_TRADES));
+      return _assign(_conf, _crCsa(_Color.COLOR_S_TRADES));
 
     case BALANCE:
-      return _assign(_conf, _crCs(_Color.default.S_BALANCE));
+      return _assign(_conf, _crCs(_Color.COLOR_S_BALANCE));
 
     case IMPORTS:
-      return _assign(_conf, _crCs(_Color.default.S_IMPORTS));
+      return _assign(_conf, _crCs(_Color.COLOR_S_IMPORTS));
 
     case EXPORTS:
-      return _assign(_conf, _crCs(_Color.default.S_EXPORTS));
+      return _assign(_conf, _crCs(_Color.COLOR_S_EXPORTS));
 
     default:
       return _assign(_conf, {

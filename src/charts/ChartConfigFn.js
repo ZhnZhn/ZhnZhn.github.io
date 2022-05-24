@@ -10,7 +10,10 @@ import HighchartsZhn from './plugin/zhn-highcharts'
 //import HighchartsExporting from 'highcharts/lib/modules/exporting';
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 
-import COLOR from '../constants/Color';
+import {
+  COLOR_HIGH,
+  COLOR_LOW
+} from '../constants/Color';
 import {
   crAreaConfig as _crAreaConfig,
   fEventsMouseOver,
@@ -113,8 +116,8 @@ export const crAreaConfig = (
   })
 
   config.yAxis.plotLines = [
-    fPlotLine(COLOR.HIGH, 'max'),
-    fPlotLine(COLOR.LOW, 'min')
+    fPlotLine(COLOR_HIGH, 'max'),
+    fPlotLine(COLOR_LOW, 'min')
   ]
   return config;
 }

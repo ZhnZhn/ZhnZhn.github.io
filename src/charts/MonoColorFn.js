@@ -1,11 +1,10 @@
 import Highcharts from 'highcharts';
 
-import COLOR from '../constants/Color';
+import {
+  COLOR_MONO_BASE1,
+  COLOR_MONO_BASE2
+} from '../constants/Color';
 
-const {
-  MONO_BASE1,
-  MONO_BASE2
-} = COLOR;
 
 const _crColor = (color, brighten, opacity) => Highcharts
   .Color(color)
@@ -23,8 +22,8 @@ const _addMonoColorsTo = (colors, base) => {
 };
 
 const _crMonoColors = function({
-  base1=MONO_BASE1,
-  base2=MONO_BASE2
+  base1=COLOR_MONO_BASE1,
+  base2=COLOR_MONO_BASE2
 }={}){
   const colors = [];
 
@@ -39,11 +38,11 @@ const _COLOR_LOW_LEVEL = -3/7;
 
 
 export const COLOR_PERIOD = 4/7
-export const COLOR_BASE1 = MONO_BASE1
-export const COLOR_BASE2 = MONO_BASE2
+export const COLOR_BASE1 = COLOR_MONO_BASE1
+export const COLOR_BASE2 = COLOR_MONO_BASE2
 
 export const crMonoColor = (
-  base=MONO_BASE1,
+  base=COLOR_MONO_BASE1,
   deltaColor=0,
   opacity=0.75
 ) => _crColor(

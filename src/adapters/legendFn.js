@@ -1,4 +1,9 @@
-import C from '../constants/Color';
+import {
+  COLOR_S_STOCK_CLOSE,
+  COLOR_S_HIGH,
+  COLOR_S_LOW,
+  COLOR_S_OPEN
+} from '../constants/Color';
 
 const _crItem = (
   index,
@@ -15,8 +20,8 @@ const _crItem = (
 export const legendItem = _crItem
 
 export const stockSeriesLegend = () => [
-  _crItem(0, C.S_STOCK_CLOSE, 'Close', true),
-  _crItem(1, C.S_HIGH, 'High'),
-  _crItem(2, C.S_LOW, 'Low'),
-  _crItem(3, C.S_OPEN, 'Open')
+  _crItem(0, COLOR_S_STOCK_CLOSE, 'Close', true),
+  _crItem(1, COLOR_S_HIGH, 'High'),
+  _crItem(2, COLOR_S_LOW, 'Low'),
+  _crItem(3, COLOR_S_OPEN, 'Open')
 ]

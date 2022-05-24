@@ -15,7 +15,7 @@ var _offlineExporting = _interopRequireDefault(require("highcharts/modules/offli
 
 var _zhnHighcharts = _interopRequireDefault(require("./plugin/zhn-highcharts"));
 
-var _Color = _interopRequireDefault(require("../constants/Color"));
+var _Color = require("../constants/Color");
 
 var _Chart = require("./Chart");
 
@@ -115,7 +115,7 @@ const crAreaConfig = options => {
       afterSetExtremes: _ChartFn.afterSetExtremesYAxis
     }
   });
-  config.yAxis.plotLines = [(0, _Chart.fPlotLine)(_Color.default.HIGH, 'max'), (0, _Chart.fPlotLine)(_Color.default.LOW, 'min')];
+  config.yAxis.plotLines = [(0, _Chart.fPlotLine)(_Color.COLOR_HIGH, 'max'), (0, _Chart.fPlotLine)(_Color.COLOR_LOW, 'min')];
   return config;
 };
 

@@ -1,1 +1,22 @@
-{"version":3,"sources":["../../src/adapters/legendFn.js"],"names":["_crItem","index","color","name","is","isVisible","legendItem","stockSeriesLegend","C","S_STOCK_CLOSE","S_HIGH","S_LOW","S_OPEN"],"mappings":";;;;;;;AAAA;;AAEA,MAAMA,OAAO,GAAG,UACdC,KADc,EAEdC,KAFc,EAGdC,IAHc,EAIdC,EAJc;AAAA,MAIdA,EAJc;AAIdA,IAAAA,EAJc,GAIX,KAJW;AAAA;;AAAA,SAKV;AACJH,IAAAA,KADI;AAEJC,IAAAA,KAFI;AAGJC,IAAAA,IAHI;AAIJE,IAAAA,SAAS,EAAED;AAJP,GALU;AAAA,CAAhB;;AAYO,MAAME,UAAU,GAAGN,OAAnB;;;AAEA,MAAMO,iBAAiB,GAAG,MAAM,CACrCP,OAAO,CAAC,CAAD,EAAIQ,eAAEC,aAAN,EAAqB,OAArB,EAA8B,IAA9B,CAD8B,EAErCT,OAAO,CAAC,CAAD,EAAIQ,eAAEE,MAAN,EAAc,MAAd,CAF8B,EAGrCV,OAAO,CAAC,CAAD,EAAIQ,eAAEG,KAAN,EAAa,KAAb,CAH8B,EAIrCX,OAAO,CAAC,CAAD,EAAIQ,eAAEI,MAAN,EAAc,MAAd,CAJ8B,CAAhC","sourcesContent":["import C from '../constants/Color';\r\n\r\nconst _crItem = (\r\n  index,\r\n  color,\r\n  name,\r\n  is=false\r\n) => ({\r\n  index,\r\n  color,\r\n  name,\r\n  isVisible: is\r\n});\r\n\r\nexport const legendItem = _crItem\r\n\r\nexport const stockSeriesLegend = () => [\r\n  _crItem(0, C.S_STOCK_CLOSE, 'Close', true),\r\n  _crItem(1, C.S_HIGH, 'High'),\r\n  _crItem(2, C.S_LOW, 'Low'),\r\n  _crItem(3, C.S_OPEN, 'Open')\r\n]\r\n"],"file":"legendFn.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/adapters/legendFn.js"
+ ],
+ "file": "../../src/adapters/legendFn.js",
+ "names": [
+  "_crItem",
+  "index",
+  "color",
+  "name",
+  "is",
+  "isVisible",
+  "legendItem",
+  "stockSeriesLegend",
+  "COLOR_S_STOCK_CLOSE",
+  "COLOR_S_HIGH",
+  "COLOR_S_LOW",
+  "COLOR_S_OPEN"
+ ],
+ "mappings": ";;;;;AAAA;;AAOA,MAAMA,OAAO,GAAG,UACdC,KADc,EAEdC,KAFc,EAGdC,IAHc,EAIdC,EAJc;AAAA,MAIdA,EAJc;AAIdA,IAAAA,EAJc,GAIX,KAJW;AAAA;;AAAA,SAKV;AACJH,IAAAA,KADI;AAEJC,IAAAA,KAFI;AAGJC,IAAAA,IAHI;AAIJE,IAAAA,SAAS,EAAED;AAJP,GALU;AAAA,CAAhB;;AAYO,MAAME,UAAU,GAAGN,OAAnB;;;AAEA,MAAMO,iBAAiB,GAAG,MAAM,CACrCP,OAAO,CAAC,CAAD,EAAIQ,0BAAJ,EAAyB,OAAzB,EAAkC,IAAlC,CAD8B,EAErCR,OAAO,CAAC,CAAD,EAAIS,mBAAJ,EAAkB,MAAlB,CAF8B,EAGrCT,OAAO,CAAC,CAAD,EAAIU,kBAAJ,EAAiB,KAAjB,CAH8B,EAIrCV,OAAO,CAAC,CAAD,EAAIW,mBAAJ,EAAkB,MAAlB,CAJ8B,CAAhC"
+}
