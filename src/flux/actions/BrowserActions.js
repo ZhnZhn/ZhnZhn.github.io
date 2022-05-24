@@ -1,18 +1,18 @@
 import Reflux from 'reflux-core';
 
-import Store from '../stores/ChartStore'
-import Factory from '../logic/Factory'
-import BrowserConfig from '../../constants/BrowserConfig'
+import Store from '../stores/ChartStore';
+import { crAsyncBrowser } from '../logic/Factory';
+import BrowserConfig from '../../constants/BrowserConfig';
 import {
   BT_QUANDL,
   BT_EUROSTAT,
   BT_WATCH_LIST
 } from '../../constants/BrowserType';
-import RouterModalDialog from '../../components/dialogs/RouterModalDialog'
-import RouterDialog from '../logic/RouterDialog'
+import RouterModalDialog from '../../components/dialogs/RouterModalDialog';
+import RouterDialog from '../logic/RouterDialog';
 
-import { fetchJson } from '../../utils/fnFetch'
-import onCatch from '../logic/onCatch'
+import { fetchJson } from '../../utils/fnFetch';
+import onCatch from '../logic/onCatch';
 
 export const BAT_SHOW_BROWSER_DYNAMIC = 'showBrowserDynamic'
 export const BAT_INIT_BROWSER_DYNAMIC = 'initBrowserDynamic'
@@ -34,24 +34,32 @@ const BA = Reflux.createActions({
   [BAT_UPDATE_WATCH_BROWSER] : {}
 });
 
-const _fnFetchSourceMenu = function({ json, option, onCompleted }){
-  const { browserType } = option;
-  onCompleted({ json, browserType });
-}
 const ERR_LOAD = "Failed to load browser."
 , ERR_FOUND = "Browser hasn't found."
-, ERR_ITEM = "Browser";
+, ERR_ITEM = "Browser"
+, _fetchSourceMenu = ({
+  json,
+  option,
+  onCompleted
+}) => {
+  const { browserType } = option;
+  onCompleted({ json, browserType });
+};
 
-const _crErr = (alertDescr, alertItemId) => ({
-  alertDescr, alertItemId
+const _crErr = (
+  alertDescr,
+  alertItemId
+) => ({
+  alertDescr,
+  alertItemId
 });
 
 BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function(option={}){
   const _option = typeof option === 'string'
-           ? { browserType: option }
-           : option
-      , { browserType:bT } = _option
-      , config = BrowserConfig[bT];
+    ? { browserType: option }
+    : option
+  , { browserType:bT } = _option
+  , config = BrowserConfig[bT];
   if (bT && config) {
     if (Store.getBrowserMenu(bT)) {
       this.done(_option)
@@ -60,7 +68,7 @@ BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function(option={}){
         RouterModalDialog.loadDialogs(bT),
         RouterDialog.loadDialogs(bT)
       ])
-      .then(() => Factory.crAsyncBrowser(config))
+      .then(() => crAsyncBrowser(config))
       .then(elBrowser => {
         this.init(elBrowser, config)
       })
@@ -75,12 +83,12 @@ BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function(option={}){
 
 BA[BAT_LOAD_BROWSER_DYNAMIC].listen(function(option){
   fetchJson({
+    option,
     uri: option.sourceMenuUrl,
-    option: option,
-    onFetch: _fnFetchSourceMenu,
+    onFetch: _fetchSourceMenu,
     onCompleted: this.completed,
-    onCatch: onCatch,
-    onFailed: this.failed
+    onFailed: this.failed,
+    onCatch
   })
 })
 
@@ -88,6 +96,5 @@ const _show = BA.showBrowserDynamic;
 BA.showQuandl = _show.bind(null, BT_QUANDL)
 BA.showEurostat = _show.bind(null, BT_EUROSTAT)
 BA.showWatch = _show.bind(null, BT_WATCH_LIST)
-
 
 export default BA

@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.crAsyncBrowser = void 0;
 
 var _react = require("react");
 
@@ -62,7 +62,7 @@ const _crBrowserDynamic = (Comp, option) => {
   return /*#__PURE__*/(0, _react.createElement)(Comp, {
     dfProps,
     key: browserType,
-    browserType: browserType,
+    browserType,
     store: _ChartStore.default,
     isInitShow: true,
     caption,
@@ -89,22 +89,19 @@ const STAT_ALL_TYPES = [_BrowserType.BT_SWEDEN_STAT_ALL, _BrowserType.BT_NORWAY_
 
 const _isStatAll = browserType => STAT_ALL_TYPES.indexOf(browserType) !== -1;
 
-const fBrowser = {
-  crAsyncBrowser(option) {
-    const bT = option.browserType;
+const crAsyncBrowser = option => {
+  const bT = option.browserType;
 
-    if (bT === _BrowserType.BT_WATCH_LIST) {
-      return _RouterBrowser.default[_BrowserType.BT_WATCH_LIST].then(_crBrowserWatchList);
-    }
-
-    if (_isStatAll(bT)) {
-      return _RouterBrowser.default.STAT_ALL.then(Comp => _crBrowserDynamic(Comp, option));
-    }
-
-    return Promise.resolve(_crBrowserDynamic(_RouterBrowser.default[bT] || _RouterBrowser.default.DEFAULT, option));
+  if (bT === _BrowserType.BT_WATCH_LIST) {
+    return _RouterBrowser.default[_BrowserType.BT_WATCH_LIST].then(_crBrowserWatchList);
   }
 
+  if (_isStatAll(bT)) {
+    return _RouterBrowser.default.STAT_ALL.then(Comp => _crBrowserDynamic(Comp, option));
+  }
+
+  return Promise.resolve(_crBrowserDynamic(_RouterBrowser.default[bT] || _RouterBrowser.default.DEFAULT, option));
 };
-var _default = fBrowser;
-exports.default = _default;
+
+exports.crAsyncBrowser = crAsyncBrowser;
 //# sourceMappingURL=fBrowser.js.map

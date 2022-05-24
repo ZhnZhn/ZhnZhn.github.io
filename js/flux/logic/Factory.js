@@ -3,7 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.crOptionDialog = exports.crDialog = exports.crAsyncBrowser = void 0;
+
+var _fBrowser = require("./fBrowser");
+
+exports.crAsyncBrowser = _fBrowser.crAsyncBrowser;
 
 var _react = require("react");
 
@@ -12,8 +16,6 @@ var _RouterDialog = _interopRequireDefault(require("./RouterDialog"));
 var _RouterLoadFn = _interopRequireDefault(require("./RouterLoadFn"));
 
 var _RouterFnValue = _interopRequireDefault(require("./RouterFnValue"));
-
-var _fBrowser = _interopRequireDefault(require("./fBrowser"));
 
 var _Msg = require("../../constants/Msg");
 
@@ -41,21 +43,14 @@ const {
       _initFromDate = (0, _DateUtils.getFromDate)(2),
       initToDate = (0, _DateUtils.getToDate)();
 
-const _crFnValue = (valueFn, valueFnPrefix) => {
-  return valueFn ? valueFnPrefix ? _RouterFnValue.default[valueFn].bind(null, valueFnPrefix) : _RouterFnValue.default[valueFn] : void 0;
-};
+const _crFnValue = (valueFn, valueFnPrefix) => valueFn ? valueFnPrefix ? _RouterFnValue.default[valueFn].bind(null, valueFnPrefix) : _RouterFnValue.default[valueFn] : void 0;
 
 const _crInitFromDate = _ref => {
   let {
     isFdw,
     nInitFromDate
   } = _ref;
-
-  if (isFdw && !isWideWidth) {
-    return _initFromDate;
-  }
-
-  return nInitFromDate ? (0, _DateUtils.getFromDate)(nInitFromDate) : _initFromDate;
+  return isFdw && !isWideWidth ? _initFromDate : nInitFromDate ? (0, _DateUtils.getFromDate)(nInitFromDate) : _initFromDate;
 };
 
 const _crDateProps = dialogProps => {
@@ -125,9 +120,10 @@ const _modifyDialogPropsByLoadId = (dialogProps, loadId) => {
       mapFrequency: mapFrequency || 'M'
     });
   }
-};
+}; //dialogType, browserType, conf
 
-const _crDialogComp = function (browserType, dialogConf) {
+
+const crDialog = (browserType, dialogConf) => {
   const {
     type: itemKey,
     dialogProps = {},
@@ -158,45 +154,37 @@ const _crDialogComp = function (browserType, dialogConf) {
 
   _modifyDialogPropsByLoadId(dialogProps, loadId);
 
-  return _RouterDialog.default.getDialog(_dialogType).then(Comp => {
-    return /*#__PURE__*/(0, _react.createElement)(Comp, {
-      key: itemKey,
-      caption: dialogCaption || menuTitle,
-      msgOnNotSelected: _Msg.NOT_SELECTED,
-      msgOnNotValidFormat: _Msg.NOT_VALID_FORMAT,
-      fnValue: _crFnValue(valueFn, valueFnPrefix),
-      //initFromDate, initToDate, onTestDate,
-      //errNotYmdOrEmpty, isYmdOrEmpty
-      ..._crDateProps(dialogProps),
-      onLoad,
-      onShow,
-      onClickInfo,
-      loadFn,
-      proxy,
-      getKey,
-      onError,
-      ...dialogProps
-    });
-  });
-};
+  return _RouterDialog.default.getDialog(_dialogType).then(Comp => /*#__PURE__*/(0, _react.createElement)(Comp, {
+    key: itemKey,
+    caption: dialogCaption || menuTitle,
+    msgOnNotSelected: _Msg.NOT_SELECTED,
+    msgOnNotValidFormat: _Msg.NOT_VALID_FORMAT,
+    fnValue: _crFnValue(valueFn, valueFnPrefix),
+    //initFromDate, initToDate, onTestDate,
+    //errNotYmdOrEmpty, isYmdOrEmpty
+    ..._crDateProps(dialogProps),
+    onLoad,
+    onShow,
+    onClickInfo,
+    loadFn,
+    proxy,
+    getKey,
+    onError,
+    ...dialogProps
+  }));
+}; //option
 
-const _crOptionDialogComp = function (option) {
-  const {
+
+exports.crDialog = crDialog;
+
+const crOptionDialog = _ref4 => {
+  let {
     dialogType
-  } = option;
-  return _RouterDialog.default.getDialog(dialogType).then(Comp => {
-    return /*#__PURE__*/(0, _react.createElement)(Comp, {
-      key: dialogType
-    });
-  });
+  } = _ref4;
+  return _RouterDialog.default.getDialog(dialogType).then(Comp => /*#__PURE__*/(0, _react.createElement)(Comp, {
+    key: dialogType
+  }));
 };
 
-const Factory = { ..._fBrowser.default,
-  //dialogType, browserType, conf
-  createDialog: _crDialogComp,
-  //option
-  createOptionDialog: _crOptionDialogComp
-};
-var _default = Factory;
-exports.default = _default;
+exports.crOptionDialog = crOptionDialog;
 //# sourceMappingURL=Factory.js.map

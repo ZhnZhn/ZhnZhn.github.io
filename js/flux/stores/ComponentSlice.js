@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
@@ -9,7 +7,7 @@ var _ComponentActions = require("../actions/ComponentActions");
 
 var _BrowserActions = require("../actions/BrowserActions");
 
-var _Factory = _interopRequireDefault(require("../logic/Factory"));
+var _Factory = require("../logic/Factory");
 
 var _ModalDialogType = require("../../constants/ModalDialogType");
 
@@ -28,7 +26,7 @@ const ItemDialogLogic = {
     } else {
       const _dialogConf = store.getDialogConf(dialogConfOr, type);
 
-      return _Factory.default.createDialog(browserType, _dialogConf).then(Comp => {
+      return (0, _Factory.crDialog)(browserType, _dialogConf).then(Comp => {
         slice[type] = true;
         return {
           key: type,
@@ -51,7 +49,7 @@ const ItemDialogLogic = {
       });
     } else {
       options.dialogType = type;
-      return _Factory.default.createOptionDialog(options).then(Comp => {
+      return (0, _Factory.crOptionDialog)(options).then(Comp => {
         slice[type] = true;
         return {
           key: type,

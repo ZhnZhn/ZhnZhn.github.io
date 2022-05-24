@@ -26,8 +26,9 @@ import RouterBrowser from './RouterBrowser';
 import RouterItemOption from '../../components/zhn-select/RouterItemOption';
 import RouterBrowserItem from '../../components/browser-items/RouterBrowserItem';
 
-
-const _crBrowserWatchList = (Comp) => createElement(Comp, {
+const _crBrowserWatchList = (
+  Comp
+) => createElement(Comp, {
    key: BT_WATCH_LIST,
    browserType: BT_WATCH_LIST,
    caption: "Watch List",
@@ -37,18 +38,27 @@ const _crBrowserWatchList = (Comp) => createElement(Comp, {
    updateAction: BAT_UPDATE_WATCH_BROWSER
 })
 
-const _crBrowserDynamic = (Comp, option) => {
+const _crBrowserDynamic = (
+  Comp,
+  option
+) => {
    const {
-         browserType, caption='Source Browser' , sourceMenuUrl,
-         chartContainerType,
-         modalDialogType, itemOptionType, itemType, descrUrl, dfProps
-       } = option
+     browserType,
+     caption='Source Browser' ,
+     sourceMenuUrl,
+     chartContainerType,
+     modalDialogType,
+     itemOptionType,
+     itemType,
+     descrUrl,
+     dfProps
+    } = option
     , ItemOptionComp = itemOptionType
-          ? RouterItemOption[itemOptionType] || RouterBrowserItem.DF
-          : RouterBrowserItem.DF
+        ? RouterItemOption[itemOptionType] || RouterBrowserItem.DF
+        : RouterBrowserItem.DF
     , ItemComp = itemType
-          ? RouterBrowserItem[itemType] || RouterBrowserItem.DEFAULT
-          : void 0
+        ? RouterBrowserItem[itemType] || RouterBrowserItem.DEFAULT
+        : void 0
     , onClickInfo = typeof ItemComp !== "undefined"
          ? CA.showDescription
          : void 0
@@ -63,7 +73,7 @@ const _crBrowserDynamic = (Comp, option) => {
    return createElement(Comp , {
      dfProps,
      key: browserType,
-     browserType: browserType,
+     browserType,
      store: ChartStore,
      isInitShow: true,
      caption,
@@ -90,24 +100,23 @@ const STAT_ALL_TYPES = [
 const _isStatAll = browserType => STAT_ALL_TYPES
   .indexOf(browserType) !== -1;
 
-const fBrowser = {
-  crAsyncBrowser(option) {
-    const bT = option.browserType;
-    if (bT === BT_WATCH_LIST) {
-      return RouterBrowser[BT_WATCH_LIST]
-        .then(_crBrowserWatchList);
-    }
-    if (_isStatAll(bT)) {
-      return RouterBrowser.STAT_ALL
-        .then(Comp => _crBrowserDynamic(Comp, option));
-    }
-    return Promise.resolve(
-       _crBrowserDynamic(
-         RouterBrowser[bT] || RouterBrowser.DEFAULT,
-         option
-       )
-    );
-  }
-};
 
-export default fBrowser
+export const crAsyncBrowser = (
+  option
+) => {
+  const bT = option.browserType;
+  if (bT === BT_WATCH_LIST) {
+    return RouterBrowser[BT_WATCH_LIST]
+      .then(_crBrowserWatchList);
+  }
+  if (_isStatAll(bT)) {
+    return RouterBrowser.STAT_ALL
+      .then(Comp => _crBrowserDynamic(Comp, option));
+  }
+  return Promise.resolve(
+     _crBrowserDynamic(
+       RouterBrowser[bT] || RouterBrowser.DEFAULT,
+       option
+     )
+  );
+}

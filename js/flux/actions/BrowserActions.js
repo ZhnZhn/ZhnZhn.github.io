@@ -9,7 +9,7 @@ var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
-var _Factory = _interopRequireDefault(require("../logic/Factory"));
+var _Factory = require("../logic/Factory");
 
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 
@@ -49,7 +49,10 @@ const BA = _refluxCore.default.createActions({
   [BAT_UPDATE_WATCH_BROWSER]: {}
 });
 
-const _fnFetchSourceMenu = function (_ref) {
+const ERR_LOAD = "Failed to load browser.",
+      ERR_FOUND = "Browser hasn't found.",
+      ERR_ITEM = "Browser",
+      _fetchSourceMenu = _ref => {
   let {
     json,
     option,
@@ -63,10 +66,6 @@ const _fnFetchSourceMenu = function (_ref) {
     browserType
   });
 };
-
-const ERR_LOAD = "Failed to load browser.",
-      ERR_FOUND = "Browser hasn't found.",
-      ERR_ITEM = "Browser";
 
 const _crErr = (alertDescr, alertItemId) => ({
   alertDescr,
@@ -90,7 +89,7 @@ BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function (option) {
     if (_ChartStore.default.getBrowserMenu(bT)) {
       this.done(_option);
     } else {
-      Promise.all([_RouterModalDialog.default.loadDialogs(bT), _RouterDialog.default.loadDialogs(bT)]).then(() => _Factory.default.crAsyncBrowser(config)).then(elBrowser => {
+      Promise.all([_RouterModalDialog.default.loadDialogs(bT), _RouterDialog.default.loadDialogs(bT)]).then(() => (0, _Factory.crAsyncBrowser)(config)).then(elBrowser => {
         this.init(elBrowser, config);
       }).catch(() => {
         this.failed({ ..._option,
@@ -106,12 +105,12 @@ BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function (option) {
 });
 BA[BAT_LOAD_BROWSER_DYNAMIC].listen(function (option) {
   (0, _fnFetch.fetchJson)({
+    option,
     uri: option.sourceMenuUrl,
-    option: option,
-    onFetch: _fnFetchSourceMenu,
+    onFetch: _fetchSourceMenu,
     onCompleted: this.completed,
-    onCatch: _onCatch.default,
-    onFailed: this.failed
+    onFailed: this.failed,
+    onCatch: _onCatch.default
   });
 });
 const _show = BA.showBrowserDynamic;

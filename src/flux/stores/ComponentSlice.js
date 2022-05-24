@@ -1,7 +1,10 @@
 
 import { ComponentActionTypes as CAT } from '../actions/ComponentActions';
 import { BAT_UPDATE_BROWSER_MENU } from '../actions/BrowserActions';
-import Factory from '../logic/Factory';
+import {
+  crDialog,
+  crOptionDialog
+} from '../logic/Factory';
 
 import {
   MDT_ALERT
@@ -15,7 +18,7 @@ const ItemDialogLogic = {
       return Promise.resolve({ key: type });
     } else {
       const _dialogConf = store.getDialogConf(dialogConfOr, type);
-      return Factory.createDialog(browserType, _dialogConf)
+      return crDialog(browserType, _dialogConf)
         .then(Comp => {
              slice[type] = true
              return { key:type, Comp };
@@ -29,7 +32,7 @@ const ItemDialogLogic = {
       return Promise.resolve({ key: type, data });
     } else {
       options.dialogType = type
-      return Factory.createOptionDialog(options)
+      return crOptionDialog(options)
          .then(Comp => {
              slice[type] = true
              return { key: type, Comp, data };
