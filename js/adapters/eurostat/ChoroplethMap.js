@@ -15,7 +15,7 @@ var _mathFn = require("../../math/mathFn");
 
 var _merge = _interopRequireDefault(require("../../utils/merge"));
 
-var _MapFactory = _interopRequireDefault(require("../../components/factories/MapFactory"));
+var _MapFactory = require("../../components/factories/MapFactory");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -151,21 +151,19 @@ const _crInfoControl = (L, mapId) => _assign(L.control(), {
 
   update(props) {
     if (props) {
-      const elInfo = _MapFactory.default.crInfo(props);
-
+      const elInfo = (0, _MapFactory.crInfo)(props);
       (0, _reactDom.render)(elInfo, _getElementById(this.idEl));
     }
   },
 
   updateCluster(cluster, color, from, to) {
     if (cluster) {
-      const elClusterInfo = _MapFactory.default.crClusterInfo({
+      const elClusterInfo = (0, _MapFactory.crClusterInfo)({
         cluster,
         color,
         from,
         to
       });
-
       (0, _reactDom.render)(elClusterInfo, _getElementById(this.idEl));
     }
   }

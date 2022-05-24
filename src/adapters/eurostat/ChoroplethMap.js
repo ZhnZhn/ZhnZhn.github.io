@@ -8,7 +8,10 @@ import clusterMaker from '../../math/k-means';
 import { toFixed } from '../../math/mathFn';
 import merge from '../../utils/merge';
 
-import MapFactory from '../../components/factories/MapFactory';
+import {
+  crInfo,
+  crClusterInfo
+} from '../../components/factories/MapFactory';
 
 const URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json'
 , NUMBER_OF_CLUSTERS = 6
@@ -137,13 +140,13 @@ const _crInfoControl = (L, mapId) => _assign(L.control(), {
   },
   update(props){
     if (props){
-      const elInfo = MapFactory.crInfo(props);
+      const elInfo = crInfo(props);
       render(elInfo, _getElementById(this.idEl))
     }
   },
   updateCluster(cluster, color, from, to){
     if (cluster){
-      const elClusterInfo = MapFactory.crClusterInfo({ cluster, color, from, to });
+      const elClusterInfo = crClusterInfo({ cluster, color, from, to });
       render(elClusterInfo, _getElementById(this.idEl))
     }
   }
