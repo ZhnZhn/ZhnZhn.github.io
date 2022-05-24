@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.crItemContainerEl = void 0;
 
 var _react = require("react");
 
@@ -41,37 +41,37 @@ const _crCaption = (dialogConf, browserType) => {
   return [dataSource, _caption].filter(Boolean).join(': ');
 };
 
-const fItemContainer = {
-  crItemContainerEl: ({
+const crItemContainerEl = _ref => {
+  let {
     browserType,
     dialogConf,
     store
-  }) => {
-    const {
-      type,
-      chartContainerComp,
-      contWidth
-    } = dialogConf || {},
-          Comp = chartContainerComp || _ChartContainer.default,
-          _type = type || _BrowserConfig.default[browserType].chartContainerType,
-          _caption = _crCaption(dialogConf, browserType);
+  } = _ref;
 
-    return /*#__PURE__*/(0, _react.createElement)(Comp, {
-      key: _type,
-      store: store,
-      caption: _caption,
-      chartType: _type,
-      browserType,
-      contWidth,
-      onSetActive: _ComponentActions.default.setActiveContainer,
-      onCloseContainer: _ComponentActions.default.closeChartContainer.bind(null, _type, browserType),
-      onSortBy: _ChartActions.default[_ChartActions.CHAT_SORT_BY].bind(null, _type),
-      updateMovingValues: _ChartActions.default[_ChartActions.CHAT_UPDATE_MOVING_VALUES].bind(null, _type),
-      onCloseItem: _ChartActions.default[_ChartActions.CHAT_CLOSE],
-      onRemoveAll: _ChartActions.default[_ChartActions.CHAT_REMOVE_ALL].bind(null, _type, browserType)
-    });
-  }
+  const {
+    type,
+    chartContainerComp,
+    contWidth
+  } = dialogConf || {},
+        Comp = chartContainerComp || _ChartContainer.default,
+        _type = type || _BrowserConfig.default[browserType].chartContainerType,
+        _caption = _crCaption(dialogConf, browserType);
+
+  return /*#__PURE__*/(0, _react.createElement)(Comp, {
+    key: _type,
+    caption: _caption,
+    chartType: _type,
+    store,
+    browserType,
+    contWidth,
+    onSetActive: _ComponentActions.default.setActiveContainer,
+    onCloseContainer: _ComponentActions.default.closeChartContainer.bind(null, _type, browserType),
+    onSortBy: _ChartActions.default[_ChartActions.CHAT_SORT_BY].bind(null, _type),
+    updateMovingValues: _ChartActions.default[_ChartActions.CHAT_UPDATE_MOVING_VALUES].bind(null, _type),
+    onCloseItem: _ChartActions.default[_ChartActions.CHAT_CLOSE],
+    onRemoveAll: _ChartActions.default[_ChartActions.CHAT_REMOVE_ALL].bind(null, _type, browserType)
+  });
 };
-var _default = fItemContainer;
-exports.default = _default;
+
+exports.crItemContainerEl = crItemContainerEl;
 //# sourceMappingURL=fItemContainer.js.map

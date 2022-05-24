@@ -1,4 +1,4 @@
-import { createElement } from 'react'
+import { createElement } from 'react';
 
 import ChartContainer from '../../components/zhn-containers/ChartContainer';
 import BrowserConfig from '../../constants/BrowserConfig';
@@ -13,7 +13,10 @@ import ChartActions, {
 
 const _isStr = str => typeof str === 'string';
 
-const _crCaption = (dialogConf, browserType) => {
+const _crCaption = (
+  dialogConf,
+  browserType
+) => {
   let _caption = dialogConf.contFullCaption
     || BrowserConfig[browserType].contFullCaption;
   if (_caption) {
@@ -21,41 +24,48 @@ const _crCaption = (dialogConf, browserType) => {
   }
 
   const {
-    contCaption, dialogCaption, menuTitle,
+    contCaption,
+    dialogCaption,
+    menuTitle,
     dialogProps
   } = dialogConf
-  , { dataSource= ''} = dialogProps || {};
+  , { dataSource= '' } = dialogProps || {};
 
   _caption = _isStr(contCaption)
-      ? contCaption
-      : dialogCaption || menuTitle || 'Item Container';
+     ? contCaption
+     : dialogCaption || menuTitle || 'Item Container';
   return [dataSource, _caption]
     .filter(Boolean)
     .join(': ');
 };
 
-const fItemContainer = {
-  crItemContainerEl: ({ browserType, dialogConf, store }) => {
-    const { type, chartContainerComp, contWidth } = dialogConf || {}
-    , Comp = chartContainerComp || ChartContainer
-    , _type = type || BrowserConfig[browserType].chartContainerType
-    , _caption = _crCaption(dialogConf, browserType);
+export const crItemContainerEl = ({
+  browserType,
+  dialogConf,
+  store
+}) => {
+  const {
+    type,
+    chartContainerComp,
+    contWidth
+  } = dialogConf || {}
+  , Comp = chartContainerComp || ChartContainer
+  , _type = type || BrowserConfig[browserType].chartContainerType
+  , _caption = _crCaption(dialogConf, browserType);
 
-    return createElement(Comp, {
-      key: _type,
-      store: store,
-      caption: _caption,
-      chartType: _type,
-      browserType, contWidth,
-      onSetActive: CA.setActiveContainer,
-      onCloseContainer: CA.closeChartContainer
-        .bind(null, _type, browserType),
-      onSortBy: ChartActions[CHAT_SORT_BY].bind(null, _type),
-      updateMovingValues: ChartActions[CHAT_UPDATE_MOVING_VALUES].bind(null, _type),
-      onCloseItem: ChartActions[CHAT_CLOSE],
-      onRemoveAll: ChartActions[CHAT_REMOVE_ALL].bind(null, _type, browserType)
-    });
-  }
-};
-
-export default fItemContainer
+  return createElement(Comp, {
+    key: _type,
+    caption: _caption,
+    chartType: _type,
+    store,
+    browserType,
+    contWidth,
+    onSetActive: CA.setActiveContainer,
+    onCloseContainer: CA.closeChartContainer
+      .bind(null, _type, browserType),
+    onSortBy: ChartActions[CHAT_SORT_BY].bind(null, _type),
+    updateMovingValues: ChartActions[CHAT_UPDATE_MOVING_VALUES].bind(null, _type),
+    onCloseItem: ChartActions[CHAT_CLOSE],
+    onRemoveAll: ChartActions[CHAT_REMOVE_ALL].bind(null, _type, browserType)
+  });
+}

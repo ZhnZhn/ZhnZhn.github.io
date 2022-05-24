@@ -17,15 +17,12 @@ var _ModalDialogType = require("../../../constants/ModalDialogType");
 
 var _ComponentActions = require("../../actions/ComponentActions");
 
-var _fItemContainer = _interopRequireDefault(require("../../logic/fItemContainer"));
+var _fItemContainer = require("../../logic/fItemContainer");
 
 var _getSlice = _interopRequireDefault(require("./getSlice"));
 
 var _fCompareBy = _interopRequireDefault(require("./fCompareBy"));
 
-const {
-  crItemContainerEl
-} = _fItemContainer.default;
 const _isArr = Array.isArray;
 
 const _isStr = str => typeof str === 'string';
@@ -67,7 +64,7 @@ const loadConfig = (slice, config, option, dialogConf, store) => {
     _initChartSlice(slice, chartType, config);
 
     return {
-      Comp: crItemContainerEl({
+      Comp: (0, _fItemContainer.crItemContainerEl)({
         browserType,
         dialogConf,
         store
@@ -92,7 +89,7 @@ const showChart = (slice, chartType, browserType, dialogConf, store) => {
     _initChartSlice(slice, chartType);
 
     return {
-      Comp: crItemContainerEl({
+      Comp: (0, _fItemContainer.crItemContainerEl)({
         browserType,
         dialogConf,
         store

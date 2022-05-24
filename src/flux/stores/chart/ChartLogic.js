@@ -11,17 +11,18 @@ import {
 } from '../../../constants/ModalDialogType';
 
 import { ComponentActionTypes as CAT } from '../../actions/ComponentActions';
-import fItemContainer from '../../logic/fItemContainer';
+import { crItemContainerEl } from '../../logic/fItemContainer';
 
 import getSlice from './getSlice';
 import fCompareBy from './fCompareBy';
 
-const { crItemContainerEl } = fItemContainer;
-
 const _isArr = Array.isArray;
 const _isStr = str => typeof str === 'string';
 
-const _isSecondDotCase = (series, { seriaType }) => seriaType === 'DOT_SET'
+const _isSecondDotCase = (
+  series, {
+  seriaType
+}) => seriaType === 'DOT_SET'
   && _isArr(series)
   && series[0].type === 'scatter'
   && series.length === 2;
