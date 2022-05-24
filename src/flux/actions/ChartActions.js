@@ -14,18 +14,19 @@ import {
 import ChartStore from '../stores/ChartStore';
 import SettingSlice from '../stores/SettingSlice';
 import LoadConfig from '../logic/LoadConfig';
-import LogicUtils from '../logic/LogicUtils';
+import { crKeyForConfig } from '../logic/LogicFn';
 
 import {
   LPAT_LOADING_COMPLETE,
   LPAT_LOADING_FAILED
-} from './LoadingProgressActions'
+} from './LoadingProgressActions';
 
 const ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found."
 , META_SUFFIX = '_Meta'
 , _fnNoop = () => {}
 , _isFn = fn => typeof fn === 'function'
-, _isUndef = v => typeof v === 'undefined';
+, _isUndef = v => typeof v === 'undefined'
+, _assign = Object.assign;
 
 export const CHAT_INIT_AND_SHOW = 'initAndShowChart'
 export const CHAT_SHOW = 'showChart'
@@ -47,9 +48,10 @@ export const CHAT_SORT_BY = 'sortBy'
 export const CHAT_REMOVE_ALL = 'removeAll'
 
 
-const _assign = Object.assign;
-
-const _cancelLoad = function(option, alertMsg){
+const _cancelLoad = function(
+  option,
+  alertMsg
+){
   setAlertMsg(option, alertMsg);
   this.failed(option);
 
@@ -60,13 +62,20 @@ const _cancelLoad = function(option, alertMsg){
   }
 };
 
-const _addBoolOptionTo = (options, propName) => {
+const _addBoolOptionTo = (
+  options,
+  propName
+) => {
   if (_isUndef(options[propName])) {
     options[propName] = ChartStore.isSetting(propName)
   }
 };
 
-const _addSettingsTo = (options, confItem, itemProps) => {
+const _addSettingsTo = (
+  options,
+  confItem,
+  itemProps
+) => {
   const { loadId } = options;
   _assign(options, confItem, itemProps, {
     apiKey: ChartStore.getKey(loadId),
@@ -129,13 +138,12 @@ const _checkMsgApiKey = ({
           ? ERR_PREMIUM_WITHOUT_KEY
           : '';
 
-
-const _checkProxy = ({ proxy, loadId }) => {
-  if (isProxyRequired(loadId) && !proxy) {
-    return withoutProxy(getApiTitle(loadId));
-  }
-  return '';
-};
+const _checkProxy = ({
+  proxy,
+  loadId
+}) => isProxyRequired(loadId) && !proxy
+  ? withoutProxy(getApiTitle(loadId))
+  : ''
 
 const _crMsgSetting = option =>
   _checkMsgApiKey(option) || _checkProxy(option);
@@ -143,7 +151,7 @@ const _crMsgSetting = option =>
 const _crMetaDataKey = key => key + META_SUFFIX;
 
 ChartActions[CHAT_LOAD].shouldEmit = function(confItem={}, option={}){
-  const _key = LogicUtils.createKeyForConfig(option)
+  const _key = crKeyForConfig(option)
   , { isLoadMeta } = option
   , key = isLoadMeta ? _crMetaDataKey(_key) : _key
   , _isDoublingLoad = this.isLoading && key === this.idLoading

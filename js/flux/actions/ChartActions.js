@@ -17,7 +17,7 @@ var _SettingSlice = _interopRequireDefault(require("../stores/SettingSlice"));
 
 var _LoadConfig = _interopRequireDefault(require("../logic/LoadConfig"));
 
-var _LogicUtils = _interopRequireDefault(require("../logic/LogicUtils"));
+var _LogicFn = require("../logic/LogicFn");
 
 var _LoadingProgressActions = require("./LoadingProgressActions");
 
@@ -25,7 +25,8 @@ const ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found.",
       META_SUFFIX = '_Meta',
       _fnNoop = () => {},
       _isFn = fn => typeof fn === 'function',
-      _isUndef = v => typeof v === 'undefined';
+      _isUndef = v => typeof v === 'undefined',
+      _assign = Object.assign;
 
 const CHAT_INIT_AND_SHOW = 'initAndShowChart';
 exports.CHAT_INIT_AND_SHOW = CHAT_INIT_AND_SHOW;
@@ -53,7 +54,6 @@ const CHAT_SORT_BY = 'sortBy';
 exports.CHAT_SORT_BY = CHAT_SORT_BY;
 const CHAT_REMOVE_ALL = 'removeAll';
 exports.CHAT_REMOVE_ALL = CHAT_REMOVE_ALL;
-const _assign = Object.assign;
 
 const _cancelLoad = function (option, alertMsg) {
   (0, _Msg.setAlertMsg)(option, alertMsg);
@@ -136,12 +136,7 @@ const _checkProxy = _ref2 => {
     proxy,
     loadId
   } = _ref2;
-
-  if (isProxyRequired(loadId) && !proxy) {
-    return (0, _Msg.withoutProxy)(getApiTitle(loadId));
-  }
-
-  return '';
+  return isProxyRequired(loadId) && !proxy ? (0, _Msg.withoutProxy)(getApiTitle(loadId)) : '';
 };
 
 const _crMsgSetting = option => _checkMsgApiKey(option) || _checkProxy(option);
@@ -157,7 +152,7 @@ ChartActions[CHAT_LOAD].shouldEmit = function (confItem, option) {
     option = {};
   }
 
-  const _key = _LogicUtils.default.createKeyForConfig(option),
+  const _key = (0, _LogicFn.crKeyForConfig)(option),
         {
     isLoadMeta
   } = option,
