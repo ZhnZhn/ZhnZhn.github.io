@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
-var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
+var _DialogStyles = require("../styles/DialogStyles");
 
 var _crModalDialog = _interopRequireDefault(require("./fns/crModalDialog"));
 
@@ -22,18 +22,19 @@ const S_CAPTION = {
   fontWeight: 'bold'
 },
       S_DESCR = {
-  color: 'gray',
+  color: 'grey',
   width: 400,
   paddingLeft: 10,
   lineHeight: 1.4,
   fontWeight: 'bold',
   whiteSpace: 'pre'
 };
-const InfoDialog = (0, _crModalDialog.default)(({
-  isShow,
-  data,
-  onClose
-}) => {
+const InfoDialog = (0, _crModalDialog.default)(_ref => {
+  let {
+    isShow,
+    data,
+    onClose
+  } = _ref;
   const {
     caption,
     descr
@@ -43,13 +44,13 @@ const InfoDialog = (0, _crModalDialog.default)(({
     isShow: isShow,
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: _DialogStyles.default.ROW,
+      style: _DialogStyles.S_DIALOG_ROW,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
         style: S_CAPTION,
         children: caption
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: _DialogStyles.default.ROW,
+      style: _DialogStyles.S_DIALOG_ROW,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
         style: S_DESCR,
         children: descr

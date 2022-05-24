@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
 import InputSecret from '../zhn/InputSecret';
-import STYLE from '../styles/DialogStyles';
+import { S_DIALOG_CAPTION } from '../styles/DialogStyles';
 
 const S_LABEL = {
   display: 'flex',
@@ -17,7 +17,7 @@ const RowSecret = forwardRef(({
   <form>
     <label style={S_LABEL}>
        {isTitle && title &&
-         <span style={{...STYLE.CAPTION, ...titleStyle}}>
+         <span style={{...S_DIALOG_CAPTION, ...titleStyle}}>
            {title}
          </span>
        }

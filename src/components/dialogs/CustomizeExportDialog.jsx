@@ -10,7 +10,9 @@ import {
 } from '../../charts/ChartExportConfig';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import STYLE from '../styles/DialogStyles';
+import {
+  S_DIALOG_ROW
+} from '../styles/DialogStyles';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import Button from './Button'
 
@@ -25,7 +27,7 @@ const _S_LABEL = {
   fontWeight: 'bold'
 }
 , S_ROW_WITH_TOP_GAP = {
-  ...STYLE.ROW,
+  ...S_DIALOG_ROW,
   ...{ marginTop: 10 }
 }
 , S_LABEL = {
@@ -175,7 +177,7 @@ const CustomizeExportDialog = memoIsShow(({
          buttons={_getRefValue(_refToolbarButtons)}
        />
        <ShowHide isShow={isShowDimension}>
-         <div style={STYLE.ROW}>
+         <div style={S_DIALOG_ROW}>
             <span style={S_LABEL}>Dimension:</span>
             <span style={S_LABEL_WIDTH}>Width:</span>
             <InputText
@@ -208,7 +210,7 @@ const CustomizeExportDialog = memoIsShow(({
              style={S_INPUT_TEXT}
            />
          </div>
-         <div style={STYLE.ROW}>
+         <div style={S_DIALOG_ROW}>
            <span style={S_LABEL}>Subtitle:</span>
            <InputText
              ref={_refInputSubtitle}

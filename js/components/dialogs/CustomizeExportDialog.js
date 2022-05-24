@@ -19,7 +19,7 @@ var _ChartExportConfig = require("../../charts/ChartExportConfig");
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
-var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
+var _DialogStyles = require("../styles/DialogStyles");
 
 var _ToolbarButtonCircle = _interopRequireDefault(require("./ToolbarButtonCircle"));
 
@@ -39,7 +39,7 @@ const _S_LABEL = {
   fontSize: '16px',
   fontWeight: 'bold'
 },
-      S_ROW_WITH_TOP_GAP = { ..._DialogStyles.default.ROW,
+      S_ROW_WITH_TOP_GAP = { ..._DialogStyles.S_DIALOG_ROW,
   ...{
     marginTop: 10
   }
@@ -184,7 +184,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: isShowDimension,
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        style: _DialogStyles.default.ROW,
+        style: _DialogStyles.S_DIALOG_ROW,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: S_LABEL,
           children: "Dimension:"
@@ -225,7 +225,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
           style: S_INPUT_TEXT
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        style: _DialogStyles.default.ROW,
+        style: _DialogStyles.S_DIALOG_ROW,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: S_LABEL,
           children: "Subtitle:"

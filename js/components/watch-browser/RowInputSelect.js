@@ -3,33 +3,31 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 
-var _DialogStyles = _interopRequireDefault(require("../styles/DialogStyles"));
+var _DialogStyles = require("../styles/DialogStyles");
+
+var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
-var S = {
-  CAPTION: (0, _extends2["default"])({}, _DialogStyles["default"].CAPTION, {
-    width: 120
-  })
+const S_CAPTION = { ..._DialogStyles.S_DIALOG_CAPTION,
+  width: 120
 };
 
-var RowInputSelect = function RowInputSelect(_ref) {
-  var caption = _ref.caption,
-      options = _ref.options,
-      onSelect = _ref.onSelect;
+const RowInputSelect = _ref => {
+  let {
+    caption,
+    options,
+    onSelect
+  } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: _DialogStyles["default"].ROW,
+    style: _DialogStyles.S_DIALOG_ROW,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: S.CAPTION,
+      style: S_CAPTION,
       children: caption
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect["default"], {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect.default, {
       width: "250",
       options: options,
       onSelect: onSelect
@@ -46,5 +44,5 @@ RowInputSelect.propTypes = {
 
 
 var _default = RowInputSelect;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=RowInputSelect.js.map

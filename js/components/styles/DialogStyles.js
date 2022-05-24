@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.crRowOcSelectStyle = exports.crRowLabelStyle = exports.S_VM_MSG_NUMBER = exports.S_VM_MSG = exports.S_VM_CONT = exports.S_DIALOG_ROW = exports.S_DIALOG_CAPTION = void 0;
 //Dialogs, DatesFragments
 const S_ROW = {
   display: 'flex',
@@ -32,63 +32,78 @@ const S_ROW = {
 },
       S_NONE = {
   display: 'none'
+}; //Dialogs, DatesFragments
+
+const S_DIALOG_CAPTION = { ...S_LABEL
 };
-const DialogStyles = {
-  //Dialogs, DatesFragments
-  ROW: { ...S_ROW
-  },
-  CAPTION: { ...S_LABEL
-  },
-  crRowLabelStyle: (isShowLabels = true, captionStyle) => {
-    const rowStyle = isShowLabels ? { ...S_ROW
-    } : { ...S_ROW,
-      ...S_ROW_SHORT
-    },
-          labelStyle = isShowLabels ? { ...S_LABEL,
-      ...captionStyle
-    } : { ...S_LABEL,
-      ...S_NONE
-    };
-    return {
-      rowStyle,
-      labelStyle
-    };
-  },
-  crRowOcSelectStyle: (isShowLabels = true, captionStyle) => {
-    const rowStyle = isShowLabels ? { ...S_ROW_OC
-    } : { ...S_ROW_OC,
-      ...S_ROW_OC_SHORT
-    },
-          labelStyle = isShowLabels ? { ...S_LABEL,
-      ...captionStyle
-    } : { ...S_LABEL,
-      ...S_NONE
-    };
-    return {
-      rowStyle,
-      labelStyle
-    };
-  },
-  //ValidationMessagesFragment
-  VM_CONT: {
-    paddingLeft: 10,
-    paddingTop: 5,
-    color: '#f44336'
-  },
-  VM_MSG_NUMBER: {
-    display: 'inline-block',
-    width: 22,
-    height: 22,
-    border: 'solid 2px #F44336',
-    borderRadius: '50%',
-    textAlign: 'center',
-    marginRight: 5
-  },
-  VM_MSG: {
-    //whiteSpace: 'pre',
-    fontWeight: 'bold'
+exports.S_DIALOG_CAPTION = S_DIALOG_CAPTION;
+const S_DIALOG_ROW = { ...S_ROW
+};
+exports.S_DIALOG_ROW = S_DIALOG_ROW;
+
+const crRowLabelStyle = function (isShowLabels, captionStyle) {
+  if (isShowLabels === void 0) {
+    isShowLabels = true;
   }
+
+  const rowStyle = isShowLabels ? { ...S_ROW
+  } : { ...S_ROW,
+    ...S_ROW_SHORT
+  },
+        labelStyle = isShowLabels ? { ...S_LABEL,
+    ...captionStyle
+  } : { ...S_LABEL,
+    ...S_NONE
+  };
+  return {
+    rowStyle,
+    labelStyle
+  };
 };
-var _default = DialogStyles;
-exports.default = _default;
+
+exports.crRowLabelStyle = crRowLabelStyle;
+
+const crRowOcSelectStyle = function (isShowLabels, captionStyle) {
+  if (isShowLabels === void 0) {
+    isShowLabels = true;
+  }
+
+  const rowStyle = isShowLabels ? { ...S_ROW_OC
+  } : { ...S_ROW_OC,
+    ...S_ROW_OC_SHORT
+  },
+        labelStyle = isShowLabels ? { ...S_LABEL,
+    ...captionStyle
+  } : { ...S_LABEL,
+    ...S_NONE
+  };
+  return {
+    rowStyle,
+    labelStyle
+  };
+}; //ValidationMessagesFragment
+
+
+exports.crRowOcSelectStyle = crRowOcSelectStyle;
+const S_VM_CONT = {
+  color: '#f44336',
+  paddingLeft: 10,
+  paddingTop: 5
+};
+exports.S_VM_CONT = S_VM_CONT;
+const S_VM_MSG_NUMBER = {
+  display: 'inline-block',
+  width: 22,
+  height: 22,
+  marginRight: 5,
+  textAlign: 'center',
+  border: 'solid 2px #F44336',
+  borderRadius: '50%'
+};
+exports.S_VM_MSG_NUMBER = S_VM_MSG_NUMBER;
+const S_VM_MSG = {
+  //whiteSpace: 'pre',
+  fontWeight: 'bold'
+};
+exports.S_VM_MSG = S_VM_MSG;
 //# sourceMappingURL=DialogStyles.js.map
