@@ -1,38 +1,42 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-var TransformFn = {
-  fromLevel3: function fromLevel3(data) {
-    if (data.length === 0) {
-      return [];
-    }
+exports.transformFromLevel3 = void 0;
 
-    var meta = data.meta,
-        caption = meta.caption,
-        level1 = meta.level1,
-        level2 = meta.level2,
-        level3 = meta.level3,
+const transformFromLevel3 = data => {
+  if (data.length === 0) {
+    return [];
+  }
+
+  const {
+    meta
+  } = data,
+        {
+    caption,
+    level1,
+    level2,
+    level3
+  } = meta,
         _options = [];
+  let industry, sector, item, i1, i2, i3;
 
-    for (var i1 = 0, l1 = data[level1].length; i1 < l1; i1++) {
-      var industry = data[level1][i1];
+  for (i1 = 0; i1 < data[level1].length; i1++) {
+    industry = data[level1][i1];
 
-      for (var i2 = 0, l2 = industry[level2].length; i2 < l2; i2++) {
-        var sector = industry[level2][i2];
+    for (i2 = 0; i2 < industry[level2].length; i2++) {
+      sector = industry[level2][i2];
 
-        for (var i3 = 0, l3 = sector[level3].length; i3 < l3; i3++) {
-          var item = sector[level3][i3];
-          item.topic = industry[caption] + "/" + sector[caption];
+      for (i3 = 0; i3 < sector[level3].length; i3++) {
+        item = sector[level3][i3];
+        item.topic = industry[caption] + "/" + sector[caption];
 
-          _options.push(item);
-        }
+        _options.push(item);
       }
     }
-
-    return _options;
   }
+
+  return _options;
 };
-var _default = TransformFn;
-exports["default"] = _default;
+
+exports.transformFromLevel3 = transformFromLevel3;
 //# sourceMappingURL=TransformFn.js.map

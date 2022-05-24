@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import memoEqual from '../hoc/memoEqual'
 
-import TransformFn from './TransformFn';
+import { transformFromLevel3 } from './TransformFn';
 import InputSelect from './InputSelect';
 
 const WrapperInputSearch = memoEqual(({
@@ -16,7 +16,7 @@ const WrapperInputSearch = memoEqual(({
   }, [onSelect])
   , { meta } = data || {}
   , { caption } = meta || {}
-  , _options = TransformFn.fromLevel3(data);
+  , _options = transformFromLevel3(data);
 
   return (
     <div style={style}>
