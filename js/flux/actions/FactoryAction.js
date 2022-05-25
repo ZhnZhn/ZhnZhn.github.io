@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _SeqActions = _interopRequireDefault(require("./SeqActions"));
 
-var _BrowserActions = _interopRequireDefault(require("./BrowserActions"));
+var _BrowserActions = require("./BrowserActions");
 
 var _ChartActions = _interopRequireWildcard(require("./ChartActions"));
 
@@ -20,7 +20,7 @@ const _crLoadQueryDynamic = option => {
     browserType
   } = option || {};
   return new _SeqActions.default([{
-    action: _BrowserActions.default.showBrowserDynamic,
+    action: _BrowserActions.BrowserActions.showBrowserDynamic,
     type: 'loadBrowserDynamicCompleted',
     typeFail: 'showBrowserDynamicFailed',
     args: [browserType]

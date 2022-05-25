@@ -1,12 +1,13 @@
 import { createElement } from 'react'
 
 import ChartStore from '../stores/ChartStore';
-
 import {
   ComponentActions
 } from '../actions/ComponentActions';
 import ChartActions, { CHAT_SHOW } from '../actions/ChartActions';
-import BA from '../actions/BrowserActions';
+import {
+  BrowserActions
+} from '../actions/BrowserActions';
 import {
   BAT_SHOW_BROWSER_DYNAMIC,
   BAT_LOAD_BROWSER_DYNAMIC_COMPLETED,
@@ -87,7 +88,7 @@ const _crBrowserDynamic = (
      loadedAction: BAT_LOAD_BROWSER_DYNAMIC_COMPLETED,
      failedAction: BAT_LOAD_BROWSER_FAILED,
      updateAction: BAT_UPDATE_BROWSER_MENU, //for Type
-     onLoadMenu: BA.loadBrowserDynamic.bind(null, { browserType, caption, sourceMenuUrl }),
+     onLoadMenu: BrowserActions.loadBrowserDynamic.bind(null, { browserType, caption, sourceMenuUrl }),
      onShowLoadDialog //for Type2
    });
  }

@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = exports.BAT_UPDATE_WATCH_BROWSER = exports.BAT_UPDATE_BROWSER_MENU = exports.BAT_SHOW_BROWSER_DYNAMIC = exports.BAT_LOAD_BROWSER_FAILED = exports.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED = exports.BAT_LOAD_BROWSER_DYNAMIC = exports.BAT_INIT_BROWSER_DYNAMIC = void 0;
+exports.BrowserActions = exports.BAT_UPDATE_WATCH_BROWSER = exports.BAT_UPDATE_BROWSER_MENU = exports.BAT_SHOW_BROWSER_DYNAMIC = exports.BAT_LOAD_BROWSER_FAILED = exports.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED = exports.BAT_LOAD_BROWSER_DYNAMIC = exports.BAT_INIT_BROWSER_DYNAMIC = void 0;
 
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
@@ -114,9 +114,11 @@ BA[BAT_LOAD_BROWSER_DYNAMIC].listen(function (option) {
   });
 });
 const _show = BA.showBrowserDynamic;
-BA.showQuandl = _show.bind(null, _BrowserType.BT_QUANDL);
-BA.showEurostat = _show.bind(null, _BrowserType.BT_EUROSTAT);
-BA.showWatch = _show.bind(null, _BrowserType.BT_WATCH_LIST);
-var _default = BA;
-exports.default = _default;
+Object.assign(BA, {
+  showQuandl: _show.bind(null, _BrowserType.BT_QUANDL),
+  showEurostat: _show.bind(null, _BrowserType.BT_EUROSTAT),
+  showWatch: _show.bind(null, _BrowserType.BT_WATCH_LIST)
+});
+const BrowserActions = BA;
+exports.BrowserActions = BrowserActions;
 //# sourceMappingURL=BrowserActions.js.map

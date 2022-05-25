@@ -1,6 +1,8 @@
 import LocalForage from 'localforage';
 
-import { BAT_UPDATE_WATCH_BROWSER } from '../actions/BrowserActions';
+import {
+  BAT_UPDATE_WATCH_BROWSER
+} from '../actions/BrowserActions';
 import {
   WAT_ADD_ITEM,
   WAT_EDIT_WATCH_COMPLETED,

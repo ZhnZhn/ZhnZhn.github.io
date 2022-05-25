@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
@@ -9,7 +7,7 @@ var _BrowserType = require("../../constants/BrowserType");
 
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 
-var _BrowserActions = _interopRequireDefault(require("../../flux/actions/BrowserActions"));
+var _BrowserActions = require("../../flux/actions/BrowserActions");
 
 const CL_ROW = 'row__pane-topic',
       CL_BR = CL_ROW + " item__browser",
@@ -20,7 +18,7 @@ const CL_ROW = 'row__pane-topic',
       CL_AB = CL_ROW + " item__about";
 
 const _fBD = id => () => {
-  _BrowserActions.default.showBrowserDynamic(id);
+  _BrowserActions.BrowserActions.showBrowserDynamic(id);
 };
 
 const _crSubMenuItem = (id, name) => ({

@@ -27,8 +27,10 @@ import {
 
 import {
   ComponentActions
-} from '../../flux/actions/ComponentActions'
-import BA from '../../flux/actions/BrowserActions'
+} from '../../flux/actions/ComponentActions';
+import {
+  BrowserActions
+} from '../../flux/actions/BrowserActions';
 
 const CL_ROW = 'row__pane-topic'
 , CL_BR = `${CL_ROW} item__browser`
@@ -39,7 +41,7 @@ const CL_ROW = 'row__pane-topic'
 , CL_AB = `${CL_ROW} item__about`;
 
 const _fBD = id => () => {
-  BA.showBrowserDynamic(id)
+  BrowserActions.showBrowserDynamic(id)
 };
 
 const _crSubMenuItem = (

@@ -2,7 +2,9 @@ import {
   CAT_CLOSE_DIALOG,
   ComponentActions
 } from '../../flux/actions/ComponentActions';
-import BA from '../../flux/actions/BrowserActions';
+import {
+  BrowserActions
+} from '../../flux/actions/BrowserActions';
 
 import {
   HK_TOPICS,
@@ -87,7 +89,7 @@ const HeaderBar = ({ showSettings }) => {
           caption="Quandl"
           title="Quandl Browser"
           hotKey={HK_QUANDL_BROWSER}
-          onClick={BA.showQuandl}
+          onClick={BrowserActions.showQuandl}
         />
         <FlatButton
           className={CL_EUROSTAT}
@@ -95,7 +97,7 @@ const HeaderBar = ({ showSettings }) => {
           caption="Eurostat"
           title="Eurostat Browser"
           hotKey={HK_EUROSTAT_BROWSER}
-          onClick={BA.showEurostat}
+          onClick={BrowserActions.showEurostat}
         />
         <FlatButton
            className={CL_WATCH}
@@ -103,7 +105,7 @@ const HeaderBar = ({ showSettings }) => {
            caption="Watch"
            title="Watch List Browser"
            hotKey={HK_WATCHLIST_BROWSER}
-           onClick={BA.showWatch}
+           onClick={BrowserActions.showWatch}
         />
         <HotBar
           btStyle={TS.BT_HOT}

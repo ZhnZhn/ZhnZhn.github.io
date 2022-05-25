@@ -1,6 +1,6 @@
 import ChartActions from './ChartActions';
 import { ComponentActions } from './ComponentActions';
-import BrowserActions from './BrowserActions';
+import { BrowserActions } from './BrowserActions';
 
 import { WatchActions } from './WatchActions';
 

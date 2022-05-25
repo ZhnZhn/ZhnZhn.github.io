@@ -6,7 +6,9 @@ import {
   CAT_CLOSE_CHART_CONTAINER_2,
   CAT_CHANGE_THEME
 } from '../actions/ComponentActions';
-import { BAT_UPDATE_BROWSER_MENU } from '../actions/BrowserActions';
+import {
+  BAT_UPDATE_BROWSER_MENU
+} from '../actions/BrowserActions';
 import {
   crDialog,
   crOptionDialog

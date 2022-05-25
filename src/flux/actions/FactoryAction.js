@@ -1,7 +1,6 @@
-
 import SeqActions from './SeqActions';
 
-import BrowserActions from './BrowserActions';
+import { BrowserActions } from './BrowserActions';
 import ChartActions, {
   CHAT_LOAD_BY_QUERY,
   CHAT_LOAD_COMPLETED

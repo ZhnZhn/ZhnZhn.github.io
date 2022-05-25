@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 
-var _BrowserActions = _interopRequireDefault(require("../../flux/actions/BrowserActions"));
+var _BrowserActions = require("../../flux/actions/BrowserActions");
 
 var _hotkeys = require("../hotkeys/hotkeys");
 
@@ -91,21 +91,21 @@ const HeaderBar = _ref => {
       caption: "Quandl",
       title: "Quandl Browser",
       hotKey: _hotkeys.HK_QUANDL_BROWSER,
-      onClick: _BrowserActions.default.showQuandl
+      onClick: _BrowserActions.BrowserActions.showQuandl
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
       className: CL_EUROSTAT,
       style: TS.BT,
       caption: "Eurostat",
       title: "Eurostat Browser",
       hotKey: _hotkeys.HK_EUROSTAT_BROWSER,
-      onClick: _BrowserActions.default.showEurostat
+      onClick: _BrowserActions.BrowserActions.showEurostat
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
       className: CL_WATCH,
       style: TS.BT,
       caption: "Watch",
       title: "Watch List Browser",
       hotKey: _hotkeys.HK_WATCHLIST_BROWSER,
-      onClick: _BrowserActions.default.showWatch
+      onClick: _BrowserActions.BrowserActions.showWatch
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotBar.default, {
       btStyle: TS.BT_HOT,
       closeDialogAction: _ComponentActions.CAT_CLOSE_DIALOG,

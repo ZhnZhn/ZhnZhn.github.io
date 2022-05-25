@@ -26,12 +26,12 @@ const BA = Reflux.createActions({
   [BAT_SHOW_BROWSER_DYNAMIC]: {
     children: ['done', 'init', 'failed']
   },
-  [BAT_INIT_BROWSER_DYNAMIC] : {},
-  [BAT_LOAD_BROWSER_DYNAMIC] : {
-    children : ['completed', 'failed']
+  [BAT_INIT_BROWSER_DYNAMIC]: {},
+  [BAT_LOAD_BROWSER_DYNAMIC]: {
+    children: ['completed', 'failed']
   },
 
-  [BAT_UPDATE_WATCH_BROWSER] : {}
+  [BAT_UPDATE_WATCH_BROWSER]: {}
 });
 
 const ERR_LOAD = "Failed to load browser."
@@ -93,8 +93,10 @@ BA[BAT_LOAD_BROWSER_DYNAMIC].listen(function(option){
 })
 
 const _show = BA.showBrowserDynamic;
-BA.showQuandl = _show.bind(null, BT_QUANDL)
-BA.showEurostat = _show.bind(null, BT_EUROSTAT)
-BA.showWatch = _show.bind(null, BT_WATCH_LIST)
+Object.assign(BA, {
+  showQuandl: _show.bind(null, BT_QUANDL),
+  showEurostat: _show.bind(null, BT_EUROSTAT),
+  showWatch: _show.bind(null, BT_WATCH_LIST)
+})
 
-export default BA
+export const BrowserActions = BA

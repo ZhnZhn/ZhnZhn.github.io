@@ -13,7 +13,7 @@ var _ComponentActions = require("../actions/ComponentActions");
 
 var _ChartActions = _interopRequireWildcard(require("../actions/ChartActions"));
 
-var _BrowserActions = _interopRequireWildcard(require("../actions/BrowserActions"));
+var _BrowserActions = require("../actions/BrowserActions");
 
 var _BrowserType = require("../../constants/BrowserType");
 
@@ -75,7 +75,7 @@ const _crBrowserDynamic = (Comp, option) => {
     failedAction: _BrowserActions.BAT_LOAD_BROWSER_FAILED,
     updateAction: _BrowserActions.BAT_UPDATE_BROWSER_MENU,
     //for Type
-    onLoadMenu: _BrowserActions.default.loadBrowserDynamic.bind(null, {
+    onLoadMenu: _BrowserActions.BrowserActions.loadBrowserDynamic.bind(null, {
       browserType,
       caption,
       sourceMenuUrl
