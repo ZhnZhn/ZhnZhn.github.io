@@ -9,49 +9,12 @@ var _BrowserActions = require("../actions/BrowserActions");
 
 var _ModalDialogType = require("../../constants/ModalDialogType");
 
+var _ContCheckBoxLogicFn = require("./comp/ContCheckBoxLogicFn");
+
 var _DialogLogicFn = require("./comp/DialogLogicFn");
 
 var _ItemCheckBoxLogicFn = require("./comp/ItemCheckBoxLogicFn");
 
-const ChbContLogic = {
-  _check(slice, checkBox) {
-    const _chb = slice.activeContChb;
-
-    if (_chb) {
-      _chb.setUnchecked();
-    }
-
-    slice.activeContChb = checkBox;
-  },
-
-  _uncheck(slice) {
-    slice.activeContChb = null;
-  },
-
-  toggle(slice, _ref) {
-    let {
-      isCheck,
-      checkBox
-    } = _ref;
-
-    if (isCheck) {
-      ChbContLogic._check(slice, checkBox);
-    } else {
-      ChbContLogic._uncheck(slice);
-    }
-  },
-
-  uncheckActive(slice, chartType) {
-    const _chb = slice.activeContChb;
-
-    if (_chb && _chb.chartType === chartType) {
-      _chb.setUnchecked();
-
-      slice.activeContChb = null;
-    }
-  }
-
-};
 const ComponentSlice = {
   dialogInit: {},
 
@@ -115,14 +78,14 @@ const ComponentSlice = {
   },
 
   onSetActiveContainer(isCheck, checkBox) {
-    ChbContLogic.toggle(this, {
+    (0, _ContCheckBoxLogicFn.toggleContCheckBox)(this, {
       isCheck,
       checkBox
     });
   },
 
   uncheckActiveContChb(chartType) {
-    ChbContLogic.uncheckActive(this, chartType);
+    (0, _ContCheckBoxLogicFn.uncheckActiveContCheckBox)(this, chartType);
   },
 
   isLoadToChart() {

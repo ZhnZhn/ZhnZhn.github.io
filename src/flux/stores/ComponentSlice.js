@@ -15,6 +15,10 @@ import {
 } from '../../constants/ModalDialogType';
 
 import {
+  toggleContCheckBox,
+  uncheckActiveContCheckBox
+} from './comp/ContCheckBoxLogicFn';
+import {
   showItemDialog,
   showOptionDialog
 } from './comp/DialogLogicFn';
@@ -22,35 +26,6 @@ import {
   toggleItemCheckBox,
   uncheckActiveItemCheckBox
 } from './comp/ItemCheckBoxLogicFn';
-
-const ChbContLogic = {
-  _check(slice, checkBox) {
-    const _chb = slice.activeContChb;
-    if (_chb) {
-      _chb.setUnchecked()
-    }
-    slice.activeContChb = checkBox
-  },
-  _uncheck(slice) {
-    slice.activeContChb = null
-  },
-
-  toggle(slice, { isCheck, checkBox }){
-    if (isCheck) {
-      ChbContLogic._check(slice, checkBox)
-    } else {
-      ChbContLogic._uncheck(slice)
-    }
-  },
-
-  uncheckActive(slice, chartType) {
-    const _chb = slice.activeContChb;
-    if (_chb && _chb.chartType === chartType) {
-      _chb.setUnchecked()
-      slice.activeContChb = null
-    }
-  }
-};
 
 const ComponentSlice = {
   dialogInit : {},
@@ -106,10 +81,10 @@ const ComponentSlice = {
     this.trigger(CAT_CLOSE_CHART_CONTAINER_2, chartType);
   },
   onSetActiveContainer(isCheck, checkBox){
-    ChbContLogic.toggle(this, { isCheck, checkBox })
+    toggleContCheckBox(this, { isCheck, checkBox })
   },
   uncheckActiveContChb(chartType){
-    ChbContLogic.uncheckActive(this, chartType)
+    uncheckActiveContCheckBox(this, chartType)
   },
 
   isLoadToChart(){
