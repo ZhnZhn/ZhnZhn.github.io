@@ -18,33 +18,10 @@ import {
   showItemDialog,
   showOptionDialog
 } from './comp/DialogLogicFn';
-
-const CheckBoxChartLogic = {
-  toggle(slice, options){
-    const { isCheck, checkBox, chart } = options;
-    if (isCheck){
-       const activeCheckbox = slice.activeCheckbox;
-       if (activeCheckbox && activeCheckbox !== checkBox){
-          activeCheckbox.setUnchecked()
-       }
-       slice.activeCheckbox = checkBox
-       slice.activeChart = chart
-    } else {
-      slice.activeCheckbox = null
-      slice.activeChart = null
-    }
-  },
-
-  uncheckActive(slice, chartType){
-    const activeCheckbox = slice.activeCheckbox;
-    if ( activeCheckbox &&
-     (!chartType || activeCheckbox.chartType === chartType) ){
-       activeCheckbox.setUnchecked()
-       slice.activeCheckbox = null
-       slice.activeChart = null
-    }
-  }
-};
+import {
+  toggleItemCheckBox,
+  uncheckActiveItemCheckBox
+} from './comp/ItemCheckBoxLogicFn';
 
 const ChbContLogic = {
   _check(slice, checkBox) {
@@ -146,10 +123,10 @@ const ComponentSlice = {
     return this.activeChart;
   },
   onSetActiveCheckbox(isCheck, checkBox, chart){
-    CheckBoxChartLogic.toggle(this, {isCheck, checkBox, chart})
+    toggleItemCheckBox(this, {isCheck, checkBox, chart})
   },
   uncheckActiveCheckbox(chartType){
-    CheckBoxChartLogic.uncheckActive(this, chartType)
+    uncheckActiveItemCheckBox(this, chartType)
   },
 
   onShowModalDialog(modalDialogType, option={}){

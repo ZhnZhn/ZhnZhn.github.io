@@ -11,40 +11,8 @@ var _ModalDialogType = require("../../constants/ModalDialogType");
 
 var _DialogLogicFn = require("./comp/DialogLogicFn");
 
-const CheckBoxChartLogic = {
-  toggle(slice, options) {
-    const {
-      isCheck,
-      checkBox,
-      chart
-    } = options;
+var _ItemCheckBoxLogicFn = require("./comp/ItemCheckBoxLogicFn");
 
-    if (isCheck) {
-      const activeCheckbox = slice.activeCheckbox;
-
-      if (activeCheckbox && activeCheckbox !== checkBox) {
-        activeCheckbox.setUnchecked();
-      }
-
-      slice.activeCheckbox = checkBox;
-      slice.activeChart = chart;
-    } else {
-      slice.activeCheckbox = null;
-      slice.activeChart = null;
-    }
-  },
-
-  uncheckActive(slice, chartType) {
-    const activeCheckbox = slice.activeCheckbox;
-
-    if (activeCheckbox && (!chartType || activeCheckbox.chartType === chartType)) {
-      activeCheckbox.setUnchecked();
-      slice.activeCheckbox = null;
-      slice.activeChart = null;
-    }
-  }
-
-};
 const ChbContLogic = {
   _check(slice, checkBox) {
     const _chb = slice.activeContChb;
@@ -170,7 +138,7 @@ const ComponentSlice = {
   },
 
   onSetActiveCheckbox(isCheck, checkBox, chart) {
-    CheckBoxChartLogic.toggle(this, {
+    (0, _ItemCheckBoxLogicFn.toggleItemCheckBox)(this, {
       isCheck,
       checkBox,
       chart
@@ -178,7 +146,7 @@ const ComponentSlice = {
   },
 
   uncheckActiveCheckbox(chartType) {
-    CheckBoxChartLogic.uncheckActive(this, chartType);
+    (0, _ItemCheckBoxLogicFn.uncheckActiveItemCheckBox)(this, chartType);
   },
 
   onShowModalDialog(modalDialogType, option) {
