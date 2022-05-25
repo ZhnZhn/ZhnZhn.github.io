@@ -1,4 +1,6 @@
-import ComponentActions from '../../flux/actions/ComponentActions'
+import {
+  ComponentActions
+} from '../../flux/actions/ComponentActions';
 
 const CONF = {
   dialogConf: true,
@@ -19,11 +21,11 @@ const _crDimUrl = ({
   id,
   proxy='',
   dfDimQuery=''
-}) => {
-  return `${proxy}${rootDimUrl || rootUrl}/${id}${dfDimQuery}`;
-};
+}) => `${proxy}${rootDimUrl || rootUrl}/${id}${dfDimQuery}`;
 
-const _crTitleAndCaption = (dfProps) => {
+const _crTitleAndCaption = (
+  dfProps
+) => {
   const _text = dfProps.text || ''
   , _caption = _text.length>35
        ? _text.substring(0, 35) + '...'
@@ -34,11 +36,18 @@ const _crTitleAndCaption = (dfProps) => {
   };
 };
 
-const factoryClickItem = (dfProps) => () => {
+const factoryClickItem = (
+  dfProps
+) => () => {
    const {
-     rootUrl, id, proxy,
-     bT, lT, dU,
-     noTime, dS
+     rootUrl,
+     id,
+     proxy,
+     bT,
+     lT,
+     dU,
+     noTime,
+     dS
    } = dfProps
    , _dimUrl = _crDimUrl(dfProps)
    , _conf = _assign({}, CONF, {

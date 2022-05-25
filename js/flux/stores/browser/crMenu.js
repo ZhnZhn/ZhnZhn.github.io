@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _ComponentActions = _interopRequireDefault(require("../../actions/ComponentActions"));
+var _ComponentActions = require("../../actions/ComponentActions");
 
 var _ChartActions = _interopRequireWildcard(require("../../actions/ChartActions"));
 
@@ -14,32 +12,42 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 const _crItemHandlers = (dT, bT) => ({
-  onClick: _ComponentActions.default.showDialog.bind(null, dT, bT),
+  onClick: _ComponentActions.ComponentActions.showDialog.bind(null, dT, bT),
   onBadgeClick: _ChartActions.default[_ChartActions.CHAT_SHOW].bind(null, dT, bT),
-  onBadgeClose: _ComponentActions.default.closeChartContainer2.bind(null, dT)
+  onBadgeClose: _ComponentActions.ComponentActions.closeChartContainer2.bind(null, dT)
 });
 
-const _crItem = (item, menuItems, browserType) => {
-  const {
+const _crItem = (_ref, menuItems, browserType) => {
+  let {
     id,
     isNew = false
-  } = item;
+  } = _ref;
   return {
-    id: id,
+    id,
     title: menuItems[id].menuTitle,
     isNew: isNew,
-    counter: 0,
     isOpen: false,
+    counter: 0,
     ..._crItemHandlers(id, browserType)
   };
 };
 
-const _crItems = (items = [], menuItems, browserType) => items.map(item => item.id ? _crItem(item, menuItems, browserType) : {
-  caption: item.caption,
-  items: _crItems(item.items, menuItems, browserType)
-});
+const _crItems = function (items, menuItems, browserType) {
+  if (items === void 0) {
+    items = [];
+  }
 
-const crMenu = (menu = [], menuItems, browserType) => {
+  return items.map(item => item.id ? _crItem(item, menuItems, browserType) : {
+    caption: item.caption,
+    items: _crItems(item.items, menuItems, browserType)
+  });
+};
+
+const crMenu = function (menu, menuItems, browserType) {
+  if (menu === void 0) {
+    menu = [];
+  }
+
   return menu.map(menuPart => {
     const {
       caption,

@@ -94,7 +94,7 @@ const About = () => {
   const [isShow, show, hide] = useBool(true),
         TS = useTheme(TH_ID);
   useListen(actionType => {
-    if (actionType === _ComponentActions.ComponentActionTypes.SHOW_ABOUT) {
+    if (actionType === _ComponentActions.CAT_SHOW_ABOUT) {
       show();
     } else if (_isHide(actionType)) {
       hide();

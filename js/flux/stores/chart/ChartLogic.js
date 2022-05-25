@@ -134,7 +134,7 @@ const scanPostAdded = (store, option) => {
   const chart = store.getActiveChart();
 
   if (chart && _isSecondDotCase(chart.series, option)) {
-    store.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, {
+    store.trigger(_ComponentActions.CAT_SHOW_MODAL_DIALOG, {
       modalDialogType: _ModalDialogType.MDT_COLUMN_RANGE,
       chart
     });

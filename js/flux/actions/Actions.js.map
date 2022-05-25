@@ -1,1 +1,15 @@
-{"version":3,"sources":["../../../src/flux/actions/Actions.js"],"names":["Actions","Chart","Component","Browser","Watch"],"mappings":";;;;;;;AAAA;;AACA;;AACA;;AAEA;;AAEA,IAAMA,OAAO,GAAG,CACdC,wBADc,EACPC,4BADO,EACIC,0BADJ,EAEdC,wBAFc,CAAhB;eAKeJ,O","sourcesContent":["import Chart from './ChartActions';\r\nimport Component from './ComponentActions';\r\nimport Browser from './BrowserActions';\r\n\r\nimport Watch from './WatchActions';\r\n\r\nconst Actions = [\r\n  Chart, Component, Browser,\r\n  Watch\r\n];\r\n\r\nexport default Actions\r\n"],"file":"Actions.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/actions/Actions.js"
+ ],
+ "file": "../../../src/flux/actions/Actions.js",
+ "names": [
+  "Actions",
+  "ChartActions",
+  "ComponentActions",
+  "BrowserActions",
+  "WatchActions"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AAEA;;AAEA,MAAMA,OAAO,GAAG,CACdC,qBADc,EAEdC,kCAFc,EAGdC,uBAHc,EAIdC,0BAJc,CAAhB;eAOeJ,O"
+}

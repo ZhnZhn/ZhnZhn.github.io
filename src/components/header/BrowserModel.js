@@ -25,7 +25,9 @@ import {
   BT_WORLD_BANK
 } from '../../constants/BrowserType';
 
-import CA from '../../flux/actions/ComponentActions'
+import {
+  ComponentActions
+} from '../../flux/actions/ComponentActions'
 import BA from '../../flux/actions/BrowserActions'
 
 const CL_ROW = 'row__pane-topic'
@@ -94,33 +96,30 @@ const PAGE_CONFIGS_01 = [
   [CL_ORG, 'World Bank', BT_WORLD_BANK]
 ];
 
-
-const crBrowserModel = () => {
-  return {
-    titleCl: CL_BR,
-    pageWidth: 235,
-    maxPages: 2,
-    initId: 'page_0',
-    page_0: [
-      _crSubMenuItem('page_01', 'Economics'),
-      _crSubMenuItem('page_02', 'Statistics Agencies'),
-      _crSubMenuItem('page_03', 'Stock Markets'),
-      _crSubMenuItem('page_04', 'World Organizations'),
-      _crMenuItem(CL_BR, 'Futures Markets', BT_FUTURES),
-      _crMenuItem(CL_BR, 'Blockchain', BT_BLOCKCHAIN),
-      _crMenuItem(CL_W, 'Watch List', BT_WATCH_LIST),
-      {
-        cn: CL_AB,
-        name: 'About',
-        onClick: CA.showAbout,
-        isClose: true
-      }
-    ],
-    page_01: _crMenuItems(PAGE_CONFIGS_01),
-    page_02: _crMenuItems(PAGE_CONFIGS_02),
-    page_03: _crMenuItems(PAGE_CONFIGS_03),
-    page_04: _crMenuItems(PAGE_CONFIGS_04)
-  };
-}
+const crBrowserModel = () => ({
+  titleCl: CL_BR,
+  pageWidth: 235,
+  maxPages: 2,
+  initId: 'page_0',
+  page_0: [
+    _crSubMenuItem('page_01', 'Economics'),
+    _crSubMenuItem('page_02', 'Statistics Agencies'),
+    _crSubMenuItem('page_03', 'Stock Markets'),
+    _crSubMenuItem('page_04', 'World Organizations'),
+    _crMenuItem(CL_BR, 'Futures Markets', BT_FUTURES),
+    _crMenuItem(CL_BR, 'Blockchain', BT_BLOCKCHAIN),
+    _crMenuItem(CL_W, 'Watch List', BT_WATCH_LIST),
+    {
+      cn: CL_AB,
+      name: 'About',
+      onClick: ComponentActions.showAbout,
+      isClose: true
+    }
+  ],
+  page_01: _crMenuItems(PAGE_CONFIGS_01),
+  page_02: _crMenuItems(PAGE_CONFIGS_02),
+  page_03: _crMenuItems(PAGE_CONFIGS_03),
+  page_04: _crMenuItems(PAGE_CONFIGS_04)
+})
 
 export default crBrowserModel

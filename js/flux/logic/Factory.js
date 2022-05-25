@@ -21,7 +21,7 @@ var _Msg = require("../../constants/Msg");
 
 var _LoadType = require("../../constants/LoadType");
 
-var _ComponentActions = _interopRequireDefault(require("../actions/ComponentActions"));
+var _ComponentActions = require("../actions/ComponentActions");
 
 var _ChartActions = _interopRequireWildcard(require("../actions/ChartActions"));
 
@@ -72,7 +72,7 @@ const _onError = function (alertDescr, alertCaption) {
     alertCaption = 'Request Error';
   }
 
-  _ComponentActions.default.showAlert({
+  _ComponentActions.ComponentActions.showAlert({
     alertDescr,
     alertCaption
   });
@@ -87,7 +87,7 @@ const _crClickAbout = _ref2 => {
 
   const _descrUrl = descr && rootUri ? rootUri + "/" + descr + ".html" : descrUrl;
 
-  return _descrUrl ? _ComponentActions.default.showDescription.bind(null, {
+  return _descrUrl ? _ComponentActions.ComponentActions.showDescription.bind(null, {
     descrUrl: _descrUrl
   }) : void 0;
 };

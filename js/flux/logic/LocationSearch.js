@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _ComponentActions = _interopRequireDefault(require("../actions/ComponentActions"));
+var _ComponentActions = require("../actions/ComponentActions");
 
 var _LocationQuery = _interopRequireDefault(require("./LocationQuery"));
 
@@ -37,7 +37,7 @@ const LocationSearch = {
     const options = _trSearchToOptions();
 
     if (options) {
-      _ComponentActions.default.showAsk({
+      _ComponentActions.ComponentActions.showAsk({
         options
       });
     }

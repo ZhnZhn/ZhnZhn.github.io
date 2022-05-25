@@ -11,7 +11,7 @@ var _ChartContainer = _interopRequireDefault(require("../../components/zhn-conta
 
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 
-var _ComponentActions = _interopRequireDefault(require("../actions/ComponentActions"));
+var _ComponentActions = require("../actions/ComponentActions");
 
 var _ChartActions = _interopRequireWildcard(require("../actions/ChartActions"));
 
@@ -64,8 +64,8 @@ const crItemContainerEl = _ref => {
     store,
     browserType,
     contWidth,
-    onSetActive: _ComponentActions.default.setActiveContainer,
-    onCloseContainer: _ComponentActions.default.closeChartContainer.bind(null, _type, browserType),
+    onSetActive: _ComponentActions.ComponentActions.setActiveContainer,
+    onCloseContainer: _ComponentActions.ComponentActions.closeChartContainer.bind(null, _type, browserType),
     onSortBy: _ChartActions.default[_ChartActions.CHAT_SORT_BY].bind(null, _type),
     updateMovingValues: _ChartActions.default[_ChartActions.CHAT_UPDATE_MOVING_VALUES].bind(null, _type),
     onCloseItem: _ChartActions.default[_ChartActions.CHAT_CLOSE],

@@ -11,7 +11,7 @@ var _LocationSearch = _interopRequireDefault(require("../flux/logic/LocationSear
 
 var _ChartStore = _interopRequireDefault(require("../flux/stores/ChartStore"));
 
-var _ComponentActions = _interopRequireWildcard(require("../flux/actions/ComponentActions"));
+var _ComponentActions = require("../flux/actions/ComponentActions");
 
 var _BrowserActions = require("../flux/actions/BrowserActions");
 
@@ -33,20 +33,16 @@ var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 const BUILD_DATE = '19-05-2022',
       CL_COMP_CONTAINER = "component-container";
 
-const showSettings = _ComponentActions.default.showSettings.bind(null, _ChartStore.default.exportSettingFn());
+const showSettings = _ComponentActions.ComponentActions.showSettings.bind(null, _ChartStore.default.exportSettingFn());
 
 const AppErc = () => {
   (0, _react.useEffect)(() => {
     _LocationSearch.default.load();
 
-    (0, _checkBuild.default)(BUILD_DATE, _ComponentActions.default.showReload);
+    (0, _checkBuild.default)(BUILD_DATE, _ComponentActions.ComponentActions.showReload);
   }, []);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_AppProvider.default, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_HeaderBar.default, {
@@ -55,8 +51,8 @@ const AppErc = () => {
       className: CL_COMP_CONTAINER,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContainer.default, {
         initBrowserAction: _BrowserActions.BAT_INIT_BROWSER_DYNAMIC,
-        showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
-        onCloseDialog: _ComponentActions.default.closeDialog
+        showDialogAction: _ComponentActions.CAT_SHOW_DIALOG,
+        onCloseDialog: _ComponentActions.ComponentActions.closeDialog
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
         addAction: _ChartActions.CHAT_INIT_AND_SHOW
       })]

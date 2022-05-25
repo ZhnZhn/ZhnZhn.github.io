@@ -3,7 +3,9 @@ import {
   crId
 } from '../../charts/ChartFn';
 
-import CA from '../../flux/actions/ComponentActions';
+import {
+  ComponentActions
+} from '../../flux/actions/ComponentActions';
 import ChartActions, {
   CHAT_TO_TOP,
   CHAT_COPY
@@ -18,32 +20,38 @@ import {
 
 import Item from '../items/Items';
 
-const _getIdKey = (config, index) => {
+const _getIdKey = (
+  config,
+  index
+) => {
   const { zhConfig } = config
   , { id, key } = zhConfig || {};
   return [id || `Id:${index}`, key || id || crId()];
 };
 
-
 const _fAddToWatch = (
   caption,
   config
-) => () => CA.showAddToWatch({ caption, config });
+) => () => ComponentActions
+ .showAddToWatch({
+   caption,
+   config
+ });
 
-const _fOnPasteToDialog = store => {
-  return toChart => CA.showPasteTo({
+const _fOnPasteToDialog = store => toChart =>
+  ComponentActions.showPasteTo({
     toChart,
     fromChart: store.getCopyFromChart()
   });
-};
 
-const _crAreaChart = function({
+
+const _crAreaChart = ({
   config,
   index,
   chartType,
   props,
   store
-}) {
+}) => {
   const [id, key] = _getIdKey(config, index);
   return (
     <Item.AreaChart
@@ -51,21 +59,24 @@ const _crAreaChart = function({
        chartType={chartType}
        caption={id}
        config={config}
-       onSetActive={CA.setActiveCheckbox}
+       onSetActive={ComponentActions.setActiveCheckbox}
        onAddToWatch={_fAddToWatch(id, config)}
        {...props}
        crValueMoving={crValueMoving}
        onToTop={ChartActions[CHAT_TO_TOP].bind(null, chartType, id)}
        onCopy={ChartActions[CHAT_COPY]}
        onPasteTo={_fOnPasteToDialog(store)}
-       onZoom={CA.zoom}
+       onZoom={ComponentActions.zoom}
     />
   );
 };
 
-const _crMapChart = function({
-  config, index, chartType, props
-}) {
+const _crMapChart = ({
+  config,
+  index,
+  chartType,
+  props
+}) => {
   const [id, key] = _getIdKey(config, index);
   return(
     <Item.MapChart

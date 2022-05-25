@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _ChartFn = require("../../charts/ChartFn");
 
-var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
+var _ComponentActions = require("../../flux/actions/ComponentActions");
 
 var _ChartActions = _interopRequireWildcard(require("../../flux/actions/ChartActions"));
 
@@ -32,19 +32,17 @@ const _getIdKey = (config, index) => {
   return [id || "Id:" + index, key || id || (0, _ChartFn.crId)()];
 };
 
-const _fAddToWatch = (caption, config) => () => _ComponentActions.default.showAddToWatch({
+const _fAddToWatch = (caption, config) => () => _ComponentActions.ComponentActions.showAddToWatch({
   caption,
   config
 });
 
-const _fOnPasteToDialog = store => {
-  return toChart => _ComponentActions.default.showPasteTo({
-    toChart,
-    fromChart: store.getCopyFromChart()
-  });
-};
+const _fOnPasteToDialog = store => toChart => _ComponentActions.ComponentActions.showPasteTo({
+  toChart,
+  fromChart: store.getCopyFromChart()
+});
 
-const _crAreaChart = function (_ref) {
+const _crAreaChart = _ref => {
   let {
     config,
     index,
@@ -59,18 +57,18 @@ const _crAreaChart = function (_ref) {
     chartType: chartType,
     caption: id,
     config: config,
-    onSetActive: _ComponentActions.default.setActiveCheckbox,
+    onSetActive: _ComponentActions.ComponentActions.setActiveCheckbox,
     onAddToWatch: _fAddToWatch(id, config),
     ...props,
     crValueMoving: _ChartFn.crValueMoving,
     onToTop: _ChartActions.default[_ChartActions.CHAT_TO_TOP].bind(null, chartType, id),
     onCopy: _ChartActions.default[_ChartActions.CHAT_COPY],
     onPasteTo: _fOnPasteToDialog(store),
-    onZoom: _ComponentActions.default.zoom
+    onZoom: _ComponentActions.ComponentActions.zoom
   }, key);
 };
 
-const _crMapChart = function (_ref2) {
+const _crMapChart = _ref2 => {
   let {
     config,
     index,

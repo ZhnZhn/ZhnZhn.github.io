@@ -14,7 +14,9 @@ import {
   LT_Q,
   LT_EU_STAT
 } from '../../constants/LoadType';
-import CA from '../actions/ComponentActions';
+import {
+  ComponentActions
+} from '../actions/ComponentActions';
 import ChartActions, {
   CHAT_LOAD,
   CHAT_SHOW
@@ -72,7 +74,10 @@ const _onError = (
   alertDescr,
   alertCaption='Request Error'
 ) => {
-  CA.showAlert({ alertDescr, alertCaption })
+  ComponentActions.showAlert({
+    alertDescr,
+    alertCaption
+  })
 };
 
 const _crClickAbout = ({
@@ -84,7 +89,7 @@ const _crClickAbout = ({
     ? `${rootUri}/${descr}.html`
     : descrUrl;
   return _descrUrl
-    ? CA.showDescription.bind(null, { descrUrl: _descrUrl })
+    ? ComponentActions.showDescription.bind(null, { descrUrl: _descrUrl })
     : void 0;
 };
 

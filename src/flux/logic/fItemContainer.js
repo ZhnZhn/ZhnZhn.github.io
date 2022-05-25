@@ -3,7 +3,9 @@ import { createElement } from 'react';
 import ChartContainer from '../../components/zhn-containers/ChartContainer';
 import BrowserConfig from '../../constants/BrowserConfig';
 
-import CA from '../actions/ComponentActions';
+import {
+  ComponentActions
+} from '../actions/ComponentActions';
 import ChartActions, {
   CHAT_SORT_BY,
   CHAT_UPDATE_MOVING_VALUES,
@@ -60,8 +62,8 @@ export const crItemContainerEl = ({
     store,
     browserType,
     contWidth,
-    onSetActive: CA.setActiveContainer,
-    onCloseContainer: CA.closeChartContainer
+    onSetActive: ComponentActions.setActiveContainer,
+    onCloseContainer: ComponentActions.closeChartContainer
       .bind(null, _type, browserType),
     onSortBy: ChartActions[CHAT_SORT_BY].bind(null, _type),
     updateMovingValues: ChartActions[CHAT_UPDATE_MOVING_VALUES].bind(null, _type),

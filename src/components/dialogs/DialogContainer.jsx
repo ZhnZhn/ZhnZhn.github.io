@@ -1,13 +1,23 @@
-import { useState, useCallback, createElement } from 'react';
+import {
+  useState,
+  useCallback,
+  createElement
+} from 'react';
 
 import useListen from '../hooks/useListen';
 
+import {
+  CAT_SHOW_MODAL_DIALOG
+} from '../../flux/actions/ComponentActions';
 import ModalDialogContainer from '../zhn-containers/ModalDialogContainer';
-import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
 
 import RouterModalDialog from './RouterModalDialog';
 
-const _setTypeTo = (prevState, type, option) => {
+const _setTypeTo = (
+  prevState,
+  type,
+  option
+) => {
     prevState.shows[type] = true
     prevState.data[type] = option
     prevState.isShow = true
@@ -48,7 +58,7 @@ const DialogContainer = () => {
      })
   }, [])
   , store = useListen((actionType, option) => {
-    if (actionType === CAT.SHOW_MODAL_DIALOG){
+    if (actionType === CAT_SHOW_MODAL_DIALOG){
       const type = option.modalDialogType
       , { inits } = state;
 

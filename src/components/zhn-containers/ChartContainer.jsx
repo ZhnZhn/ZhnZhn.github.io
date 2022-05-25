@@ -5,7 +5,9 @@ import {
   CHAT_LOAD_COMPLETED,
   CHAT_CLOSE
 } from '../../flux/actions/ChartActions';
-import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
+import {
+  CAT_CLOSE_CHART_CONTAINER_2
+} from '../../flux/actions/ComponentActions';
 
 import withTheme from '../hoc/withTheme';
 import has from '../has';
@@ -44,7 +46,7 @@ const CL_ROOT = "item-container"
 , S_INLINE = { display: 'inline-block' }
 , S_NONE = { display: 'none' };
 
-const COMP_ACTIONS = [
+const CHAT_ACTIONS = [
   CHAT_SHOW,
   CHAT_LOAD_COMPLETED,
   CHAT_CLOSE
@@ -138,13 +140,13 @@ class ChartContainer extends Component {
   }
   _onStore = (actionType, data) => {
      if ( this._isDataForContainer(data) ) {
-       if (_isInArray(COMP_ACTIONS, actionType)) {
+       if (_isInArray(CHAT_ACTIONS, actionType)) {
          if (actionType !== CHAT_CLOSE) {
            this._refSpComp.current.scrollTop = 0
            //this.spComp.scrollTop()
          }
          this.setState(data);
-       } else if (actionType === CAT.CLOSE_CHART_CONTAINER_2){
+       } else if (actionType === CAT_CLOSE_CHART_CONTAINER_2){
          this._hHide();
        }
      }

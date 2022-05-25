@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _ModalDialogType = require("../../constants/ModalDialogType");
 
-var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
+var _ComponentActions = require("../../flux/actions/ComponentActions");
 
 var _WatchActions = require("../../flux/actions/WatchActions");
 
@@ -208,15 +208,15 @@ let WatchBrowser = (0, _withWatchDnD.default)(_class = class WatchBrowser extend
   }
 
   _handlerEditGroup() {
-    _ComponentActions.default.showModalDialog(_ModalDialogType.MDT_EDIT_WATCH_GROUP);
+    _ComponentActions.ComponentActions.showModalDialog(_ModalDialogType.MDT_EDIT_WATCH_GROUP);
   }
 
   _handlerEditList() {
-    _ComponentActions.default.showModalDialog(_ModalDialogType.MDT_EDIT_WATCH_LIST);
+    _ComponentActions.ComponentActions.showModalDialog(_ModalDialogType.MDT_EDIT_WATCH_LIST);
   }
 
   _handlerClickItem(item) {
-    _ComponentActions.default.showModalDialog(_ModalDialogType.MDT_LOAD_ITEM, item);
+    _ComponentActions.ComponentActions.showModalDialog(_ModalDialogType.MDT_LOAD_ITEM, item);
   }
 
   _handlerRemoveItem(option, event) {

@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _ComponentActions = _interopRequireWildcard(require("../../flux/actions/ComponentActions"));
+var _ComponentActions = require("../../flux/actions/ComponentActions");
 
 var _BrowserActions = _interopRequireDefault(require("../../flux/actions/BrowserActions"));
 
@@ -28,10 +28,6 @@ var _LimitRemainingLabel = _interopRequireDefault(require("./LimitRemainingLabel
 var _BrowserModel = _interopRequireDefault(require("./BrowserModel"));
 
 var _jsxRuntime = require("react/jsx-runtime");
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 const {
   FlatButton,
@@ -112,8 +108,8 @@ const HeaderBar = _ref => {
       onClick: _BrowserActions.default.showWatch
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotBar.default, {
       btStyle: TS.BT_HOT,
-      closeDialogAction: _ComponentActions.ComponentActionTypes.CLOSE_DIALOG,
-      onShowDialog: _ComponentActions.default.showDialog
+      closeDialogAction: _ComponentActions.CAT_CLOSE_DIALOG,
+      onShowDialog: _ComponentActions.ComponentActions.showDialog
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_BTS_RIGHT,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
@@ -132,7 +128,7 @@ const HeaderBar = _ref => {
         title: "About Web Application ERC",
         hotKey: _hotkeys.HK_ABOUT,
         timeout: 0,
-        onClick: _ComponentActions.default.showAbout,
+        onClick: _ComponentActions.ComponentActions.showAbout,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgInfo, {
           style: S_SVG_BT
         })

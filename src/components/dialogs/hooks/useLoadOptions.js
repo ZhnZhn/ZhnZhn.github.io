@@ -1,8 +1,13 @@
-import { useState, useCallback, useRef, useEffect } from 'react'
+import {
+  useState,
+  useCallback,
+  useRef,
+  useEffect
+} from 'react'
 import useHasNotEqual from '../../hooks/useHasNotEqual'
 
 import { ERR_NETWORK } from '../../../constants/Msg';
-import CA from '../../../flux/actions/ComponentActions';
+import { ComponentActions } from '../../../flux/actions/ComponentActions';
 
 import crOptions from '../decorators/crOptions'
 
@@ -10,12 +15,16 @@ const _showMsgErr = (
   alertCaption,
   alertDescr
 ) => {
-  CA.showAlert({ alertCaption, alertDescr })
+  ComponentActions.showAlert({
+    alertCaption,
+    alertDescr
+  })
 };
 
 /*eslint-disable react-hooks/exhaustive-deps */
-const _useLoadingFailed = (setState) => useCallback(
- (errCaption, errDescription) => {
+const _useLoadingFailed = (
+  setState
+) => useCallback((errCaption, errDescription) => {
    if (errCaption && errDescription) {
      _showMsgErr(errCaption, errDescription)
    }
@@ -27,12 +36,18 @@ const _useLoadingFailed = (setState) => useCallback(
 //setState
 /*eslint-enable react-hooks/exhaustive-deps */
 
-const _useLoad = (refLoadId, setLoadingFailed, setState) => {
+const _useLoad = (
+  refLoadId,
+  setLoadingFailed,
+  setState
+) => {
   /*eslint-disable react-hooks/exhaustive-deps */
   const loadOptions = useCallback(option => {
     const {
-      uri, jsonProp,
-      retryServer=0, retryNetwork=1
+      uri,
+      jsonProp,
+      retryServer=0,
+      retryNetwork=1
     } = option;
     fetch(uri)
       .then(response => {
@@ -80,12 +95,19 @@ const _useLoad = (refLoadId, setLoadingFailed, setState) => {
   return loadOptions;
 };
 
-const _useIsReload = (isShow, isLoadingFailed) => {
+const _useIsReload = (
+  isShow,
+  isLoadingFailed
+) => {
   const _hasToggled = useHasNotEqual(isShow)
   return isShow && isLoadingFailed && _hasToggled;
 };
 
-const useLoadOptions = (isShow, uri, jsonProp) => {
+const useLoadOptions = (
+  isShow,
+  uri,
+  jsonProp
+) => {
   const [state, setState] = useState({
     options: [],
     isLoading: true,

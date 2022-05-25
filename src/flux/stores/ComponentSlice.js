@@ -1,5 +1,11 @@
-
-import { ComponentActionTypes as CAT } from '../actions/ComponentActions';
+import {
+  CAT_SHOW_ABOUT,
+  CAT_SHOW_DIALOG,
+  CAT_CLOSE_DIALOG,
+  CAT_SHOW_MODAL_DIALOG,
+  CAT_CLOSE_CHART_CONTAINER_2,
+  CAT_CHANGE_THEME
+} from '../actions/ComponentActions';
 import { BAT_UPDATE_BROWSER_MENU } from '../actions/BrowserActions';
 import {
   crDialog,
@@ -103,23 +109,23 @@ const ComponentSlice = {
 
   showAlertDialog(option={}){
     option.modalDialogType = MDT_ALERT;
-    this.trigger(CAT.SHOW_MODAL_DIALOG, option);
+    this.trigger(CAT_SHOW_MODAL_DIALOG, option);
   },
 
   onShowAbout(){
-    this.trigger(CAT.SHOW_ABOUT);
+    this.trigger(CAT_SHOW_ABOUT);
   },
 
   onShowDialog(type, browserType, dialogConfOr){
     ItemDialogLogic.showItemDialog(
       this.dialogInit, { type, browserType, dialogConfOr }, this
     ).then(r => {
-       this.trigger(CAT.SHOW_DIALOG, r)
+       this.trigger(CAT_SHOW_DIALOG, r)
     });
   },
 
   onCloseDialog(Comp) {
-    this.trigger(CAT.CLOSE_DIALOG, {
+    this.trigger(CAT_CLOSE_DIALOG, {
       type: Comp.key,
       caption: Comp.props.caption
     })
@@ -129,10 +135,10 @@ const ComponentSlice = {
     ItemDialogLogic.showOptionDialog(
       this.dialogInit, { type, data: option }
     ).then(r => {
-      this.trigger(CAT.SHOW_DIALOG, r)
+      this.trigger(CAT_SHOW_DIALOG, r)
     })
     .catch(err => {
-      this.trigger(CAT.SHOW_MODAL_DIALOG, {
+      this.trigger(CAT_SHOW_MODAL_DIALOG, {
         modalDialogType: 'alert',
         alertCaption: 'Failed Load',
         alertDescr: err.message
@@ -149,7 +155,7 @@ const ComponentSlice = {
     }
   },
   onCloseChartContainer2(chartType, browserType){
-    this.trigger(CAT.CLOSE_CHART_CONTAINER_2, chartType);
+    this.trigger(CAT_CLOSE_CHART_CONTAINER_2, chartType);
   },
   onSetActiveContainer(isCheck, checkBox){
     ChbContLogic.toggle(this, { isCheck, checkBox })
@@ -177,11 +183,11 @@ const ComponentSlice = {
 
   onShowModalDialog(modalDialogType, option={}){
     option.modalDialogType = modalDialogType;
-    this.trigger(CAT.SHOW_MODAL_DIALOG, option);
+    this.trigger(CAT_SHOW_MODAL_DIALOG, option);
   },
 
   onChangeTheme(themeName){
-    this.trigger(CAT.CHANGE_THEME, themeName)
+    this.trigger(CAT_CHANGE_THEME, themeName)
   }
 }
 

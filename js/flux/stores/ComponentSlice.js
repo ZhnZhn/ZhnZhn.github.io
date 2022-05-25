@@ -143,11 +143,11 @@ const ComponentSlice = {
     }
 
     option.modalDialogType = _ModalDialogType.MDT_ALERT;
-    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
+    this.trigger(_ComponentActions.CAT_SHOW_MODAL_DIALOG, option);
   },
 
   onShowAbout() {
-    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_ABOUT);
+    this.trigger(_ComponentActions.CAT_SHOW_ABOUT);
   },
 
   onShowDialog(type, browserType, dialogConfOr) {
@@ -156,12 +156,12 @@ const ComponentSlice = {
       browserType,
       dialogConfOr
     }, this).then(r => {
-      this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
+      this.trigger(_ComponentActions.CAT_SHOW_DIALOG, r);
     });
   },
 
   onCloseDialog(Comp) {
-    this.trigger(_ComponentActions.ComponentActionTypes.CLOSE_DIALOG, {
+    this.trigger(_ComponentActions.CAT_CLOSE_DIALOG, {
       type: Comp.key,
       caption: Comp.props.caption
     });
@@ -172,9 +172,9 @@ const ComponentSlice = {
       type,
       data: option
     }).then(r => {
-      this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
+      this.trigger(_ComponentActions.CAT_SHOW_DIALOG, r);
     }).catch(err => {
-      this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, {
+      this.trigger(_ComponentActions.CAT_SHOW_MODAL_DIALOG, {
         modalDialogType: 'alert',
         alertCaption: 'Failed Load',
         alertDescr: err.message
@@ -193,7 +193,7 @@ const ComponentSlice = {
   },
 
   onCloseChartContainer2(chartType, browserType) {
-    this.trigger(_ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2, chartType);
+    this.trigger(_ComponentActions.CAT_CLOSE_CHART_CONTAINER_2, chartType);
   },
 
   onSetActiveContainer(isCheck, checkBox) {
@@ -237,11 +237,11 @@ const ComponentSlice = {
     }
 
     option.modalDialogType = modalDialogType;
-    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
+    this.trigger(_ComponentActions.CAT_SHOW_MODAL_DIALOG, option);
   },
 
   onChangeTheme(themeName) {
-    this.trigger(_ComponentActions.ComponentActionTypes.CHANGE_THEME, themeName);
+    this.trigger(_ComponentActions.CAT_CHANGE_THEME, themeName);
   }
 
 };

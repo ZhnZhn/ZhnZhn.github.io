@@ -1,5 +1,8 @@
-import CA, { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions'
-import BA from '../../flux/actions/BrowserActions'
+import {
+  CAT_CLOSE_DIALOG,
+  ComponentActions
+} from '../../flux/actions/ComponentActions';
+import BA from '../../flux/actions/BrowserActions';
 
 import {
   HK_TOPICS,
@@ -8,17 +11,17 @@ import {
   HK_WATCHLIST_BROWSER,
   HK_SETTINGS,
   HK_ABOUT
-} from '../hotkeys/hotkeys'
+} from '../hotkeys/hotkeys';
 
-import use from '../hooks/use'
-import Comp from '../Comp'
+import use from '../hooks/use';
+import Comp from '../Comp';
 
-import ProgressLoading from './ProgressLoading'
-import AppLabel from './AppLabel'
-import IconLogoErc from './IconLogoErc'
-import HotBar from './HotBar'
-import LimitRemainingLabel from './LimitRemainingLabel'
-import crBrowserModel from './BrowserModel'
+import ProgressLoading from './ProgressLoading';
+import AppLabel from './AppLabel';
+import IconLogoErc from './IconLogoErc';
+import HotBar from './HotBar';
+import LimitRemainingLabel from './LimitRemainingLabel';
+import crBrowserModel from './BrowserModel';
 
 const {
   FlatButton,
@@ -104,8 +107,8 @@ const HeaderBar = ({ showSettings }) => {
         />
         <HotBar
           btStyle={TS.BT_HOT}
-          closeDialogAction={CAT.CLOSE_DIALOG}
-          onShowDialog={CA.showDialog}
+          closeDialogAction={CAT_CLOSE_DIALOG}
+          onShowDialog={ComponentActions.showDialog}
         />
         <div className={CL_BTS_RIGHT}>
           <LimitRemainingLabel />
@@ -125,7 +128,7 @@ const HeaderBar = ({ showSettings }) => {
              title="About Web Application ERC"
              hotKey={HK_ABOUT}
              timeout={0}
-             onClick={CA.showAbout}
+             onClick={ComponentActions.showAbout}
            >
              <SvgInfo style={S_SVG_BT} />
            </FlatButton>

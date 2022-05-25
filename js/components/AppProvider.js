@@ -24,7 +24,7 @@ const AppProvider = _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotKeysProvider.default, {
     is: ENABLE_HOT_KEYS,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ThemeProvider.default, {
-      actionChangeTheme: _ComponentActions.ComponentActionTypes.CHANGE_THEME,
+      actionChangeTheme: _ComponentActions.CAT_CHANGE_THEME,
       children: children
     })
   });

@@ -5,7 +5,7 @@ import {
   MDT_EDIT_WATCH_LIST,
   MDT_LOAD_ITEM
 } from '../../constants/ModalDialogType';
-import ComponentActions from '../../flux/actions/ComponentActions';
+import { ComponentActions } from '../../flux/actions/ComponentActions';
 import { WatchActions } from '../../flux/actions/WatchActions';
 
 import A from '../Comp'

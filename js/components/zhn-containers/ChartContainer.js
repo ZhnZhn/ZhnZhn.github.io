@@ -56,7 +56,7 @@ const CL_ROOT = "item-container",
       S_NONE = {
   display: 'none'
 };
-const COMP_ACTIONS = [_ChartActions.CHAT_SHOW, _ChartActions.CHAT_LOAD_COMPLETED, _ChartActions.CHAT_CLOSE];
+const CHAT_ACTIONS = [_ChartActions.CHAT_SHOW, _ChartActions.CHAT_LOAD_COMPLETED, _ChartActions.CHAT_CLOSE];
 
 const _isFn = fn => typeof fn === "function";
 
@@ -129,13 +129,13 @@ class ChartContainer extends _react.Component {
 
     this._onStore = (actionType, data) => {
       if (this._isDataForContainer(data)) {
-        if (_isInArray(COMP_ACTIONS, actionType)) {
+        if (_isInArray(CHAT_ACTIONS, actionType)) {
           if (actionType !== _ChartActions.CHAT_CLOSE) {
             this._refSpComp.current.scrollTop = 0; //this.spComp.scrollTop()
           }
 
           this.setState(data);
-        } else if (actionType === _ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2) {
+        } else if (actionType === _ComponentActions.CAT_CLOSE_CHART_CONTAINER_2) {
           this._hHide();
         }
       }
@@ -231,7 +231,7 @@ class ChartContainer extends _react.Component {
     this._fitToWidth = () => {
       const {
         style
-      } = this._refRootNode.current || {},
+      } = this._refRootElement.current || {},
             {
         width
       } = style || {};
@@ -253,7 +253,7 @@ class ChartContainer extends _react.Component {
       });
     };
 
-    this._refRootNode = /*#__PURE__*/(0, _react.createRef)();
+    this._refRootElement = /*#__PURE__*/(0, _react.createRef)();
     this._refSpComp = /*#__PURE__*/(0, _react.createRef)();
     this._refResize = /*#__PURE__*/(0, _react.createRef)();
     this.childMargin = CHILD_MARGIN;
@@ -311,7 +311,7 @@ class ChartContainer extends _react.Component {
           _className = (0, _crCn.default)(CL_ROOT, [isShow, CL_SHOW_CONT]);
 
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      ref: this._refRootNode,
+      ref: this._refRootElement,
       className: _className,
       style: { ...this._initialWidthStyle,
         ..._style,
@@ -342,7 +342,7 @@ class ChartContainer extends _react.Component {
           minWidth: this._MIN_WIDTH,
           maxWidth: MAX_WIDTH,
           step: STEP,
-          nodeRef: this._refRootNode,
+          elementRef: this._refRootElement,
           onResizeAfter: this._hResizeAfter
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {

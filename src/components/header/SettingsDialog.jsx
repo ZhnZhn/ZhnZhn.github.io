@@ -1,10 +1,16 @@
-import { useRef, useCallback, useMemo } from 'react';
+import {
+  useRef,
+  useCallback,
+  useMemo
+} from 'react';
 //import PropTypes from 'prop-types'
 
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 
-import Actions from '../../flux/actions/ComponentActions';
+import {
+  ComponentActions
+} from '../../flux/actions/ComponentActions';
 
 import has from '../has';
 import A from '../Comp';
@@ -16,15 +22,11 @@ const S_MODAL = {
   width: 380,
   height: 446,
   margin: '70px auto 0px'
-}, S_MODAL_SMALL = {
-  width: 295
-}, S_TITLE_API = {
-  width: 82
-}, S_TITLE_OPTION = {
-  width: 110
-}, S_BT = {
-  color: '#232f3b'
-};
+}
+, S_MODAL_SMALL = { width: 295 }
+, S_TITLE_API = { width: 82 }
+, S_TITLE_OPTION = { width: 110 }
+, S_BT = { color: '#232f3b' };
 
 const IS_WIDE_WIDTH = has.wideWidth()
 , CL_ROW = 'row__pane-topic not-selected'
@@ -97,7 +99,7 @@ const SettingsDialog = memoIsShow(({
             titleStyle={S_TITLE_OPTION}
             btStyle={S_BT}
             data={data}
-            onChangeTheme={Actions.changeTheme}
+            onChangeTheme={ComponentActions.changeTheme}
             onClose={_hClose}
           />
         </A.Tab>

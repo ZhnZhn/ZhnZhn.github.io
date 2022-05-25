@@ -7,9 +7,11 @@ exports.default = void 0;
 
 var _react = require("react");
 
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
+
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
-var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
+var _ComponentActions = require("../../flux/actions/ComponentActions");
 
 var _has = _interopRequireDefault(require("../has"));
 
@@ -66,13 +68,13 @@ const useMenuMore = () => {
   return [isShowLabels, menuModel];
 };
 
-const _isNotShouldRerender = (prevProps, nextProps) => prevProps.isShow === nextProps.isShow;
+const SettingsDialog = (0, _memoIsShow.default)(_ref => {
+  let {
+    isShow,
+    data,
+    onClose
+  } = _ref;
 
-const SettingsDialog = /*#__PURE__*/(0, _react.memo)(({
-  isShow,
-  data,
-  onClose
-}) => {
   const _refModalDialog = (0, _react.useRef)()
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
@@ -118,13 +120,13 @@ const SettingsDialog = /*#__PURE__*/(0, _react.memo)(({
           titleStyle: S_TITLE_OPTION,
           btStyle: S_BT,
           data: data,
-          onChangeTheme: _ComponentActions.default.changeTheme,
+          onChangeTheme: _ComponentActions.ComponentActions.changeTheme,
           onClose: _hClose
         })
       })]
     })
   });
-}, _isNotShouldRerender);
+});
 /*
 SettingsDialog.propTypes = {
   isShow: PropTypes.bool,

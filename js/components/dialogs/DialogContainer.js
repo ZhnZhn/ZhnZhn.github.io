@@ -9,9 +9,9 @@ var _react = require("react");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
-var _ModalDialogContainer = _interopRequireDefault(require("../zhn-containers/ModalDialogContainer"));
-
 var _ComponentActions = require("../../flux/actions/ComponentActions");
+
+var _ModalDialogContainer = _interopRequireDefault(require("../zhn-containers/ModalDialogContainer"));
 
 var _RouterModalDialog = _interopRequireDefault(require("./RouterModalDialog"));
 
@@ -70,7 +70,7 @@ const DialogContainer = () => {
     });
   }, []),
         store = (0, _useListen.default)((actionType, option) => {
-    if (actionType === _ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG) {
+    if (actionType === _ComponentActions.CAT_SHOW_MODAL_DIALOG) {
       const type = option.modalDialogType,
             {
         inits

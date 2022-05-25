@@ -9,8 +9,9 @@ export {
 import {
   MDT_COLUMN_RANGE
 } from '../../../constants/ModalDialogType';
-
-import { ComponentActionTypes as CAT } from '../../actions/ComponentActions';
+import {
+  CAT_SHOW_MODAL_DIALOG
+} from '../../actions/ComponentActions';
 import { crItemContainerEl } from '../../logic/fItemContainer';
 
 import getSlice from './getSlice';
@@ -121,7 +122,7 @@ export const scanPostAdded = (
 ) => {
   const chart = store.getActiveChart();
   if (chart && _isSecondDotCase(chart.series, option)) {
-    store.trigger(CAT.SHOW_MODAL_DIALOG, {
+    store.trigger(CAT_SHOW_MODAL_DIALOG, {
       modalDialogType: MDT_COLUMN_RANGE,
       chart
     });

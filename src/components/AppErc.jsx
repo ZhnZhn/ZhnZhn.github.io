@@ -4,7 +4,10 @@ import { useEffect } from 'react';
 import LocationSearch from '../flux/logic/LocationSearch';
 import ChartStore from '../flux/stores/ChartStore';
 
-import CA, { ComponentActionTypes as CAT } from '../flux/actions/ComponentActions';
+import {
+  CAT_SHOW_DIALOG,
+  ComponentActions
+} from '../flux/actions/ComponentActions';
 import { BAT_INIT_BROWSER_DYNAMIC } from '../flux/actions/BrowserActions';
 import { CHAT_INIT_AND_SHOW } from '../flux/actions/ChartActions';
 
@@ -20,14 +23,14 @@ import checkBuild from './checkBuild';
 const BUILD_DATE = '19-05-2022'
 , CL_COMP_CONTAINER = "component-container";
 
-const showSettings = CA.showSettings
+const showSettings = ComponentActions.showSettings
  .bind(null, ChartStore.exportSettingFn())
 
 const AppErc = () => {
 
   useEffect(()=>{
     LocationSearch.load();
-    checkBuild(BUILD_DATE, CA.showReload)
+    checkBuild(BUILD_DATE, ComponentActions.showReload)
   }, [])
 
   return (
@@ -36,8 +39,8 @@ const AppErc = () => {
       <div className={CL_COMP_CONTAINER}>
          <BrowserContainer
             initBrowserAction={BAT_INIT_BROWSER_DYNAMIC}
-            showDialogAction={CAT.SHOW_DIALOG}
-            onCloseDialog={CA.closeDialog}
+            showDialogAction={CAT_SHOW_DIALOG}
+            onCloseDialog={ComponentActions.closeDialog}
          />
          <About />
          <CompContainer addAction={CHAT_INIT_AND_SHOW} />

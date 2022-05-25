@@ -2,7 +2,9 @@ import { createElement } from 'react'
 
 import ChartStore from '../stores/ChartStore';
 
-import CA from '../actions/ComponentActions';
+import {
+  ComponentActions
+} from '../actions/ComponentActions';
 import ChartActions, { CHAT_SHOW } from '../actions/ChartActions';
 import BA from '../actions/BrowserActions';
 import {
@@ -60,11 +62,11 @@ const _crBrowserDynamic = (
         ? RouterBrowserItem[itemType] || RouterBrowserItem.DEFAULT
         : void 0
     , onClickInfo = typeof ItemComp !== "undefined"
-         ? CA.showDescription
+         ? ComponentActions.showDescription
          : void 0
     //for Type2
     , onShowLoadDialog = chartContainerType
-         ? item => CA.showModalDialog(modalDialogType, {
+         ? item => ComponentActions.showModalDialog(modalDialogType, {
              item, browserType, chartContainerType,
              onShow: ChartActions[CHAT_SHOW].bind(null, chartContainerType, browserType)
            })

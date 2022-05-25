@@ -11,12 +11,12 @@ var _useHasNotEqual = _interopRequireDefault(require("../../hooks/useHasNotEqual
 
 var _Msg = require("../../../constants/Msg");
 
-var _ComponentActions = _interopRequireDefault(require("../../../flux/actions/ComponentActions"));
+var _ComponentActions = require("../../../flux/actions/ComponentActions");
 
 var _crOptions = _interopRequireDefault(require("../decorators/crOptions"));
 
 const _showMsgErr = (alertCaption, alertDescr) => {
-  _ComponentActions.default.showAlert({
+  _ComponentActions.ComponentActions.showAlert({
     alertCaption,
     alertDescr
   });

@@ -1,19 +1,27 @@
-
-import CA from '../actions/ComponentActions';
+import {
+  ComponentActions
+} from '../actions/ComponentActions';
 import LocationQuery from './LocationQuery';
 
 const { crOptions } = LocationQuery;
 
-const ARR_B = [ 'UN', 'QE', 'FAO' ];
+const ARR_B = [
+  'UN',
+  'QE',
+  'FAO'
+];
 const ARR_C = [
   'SM_WIKI',
-  'SM_IEX_CHART_5Y','SM_IEX_CHART_2Y',
+  'SM_IEX_CHART_5Y',
+  'SM_IEX_CHART_2Y',
   'USAE_BLS_1',
   'BC_HD'
 ];
 
-const _isArrInclude = (arr, value) => arr
-  .indexOf(value) !== -1;
+const _isArrInclude = (
+  arr,
+  value
+) => arr.indexOf(value) !== -1;
 
 const _isQuery = (obj) => obj && obj.v
  && _isArrInclude(ARR_C, obj.cT)
@@ -34,7 +42,7 @@ const LocationSearch = {
   load: () => {
     const options = _trSearchToOptions();
     if (options) {
-      CA.showAsk({ options })
+      ComponentActions.showAsk({ options })
     }
   }
 };

@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
-var _ComponentActions = _interopRequireDefault(require("../actions/ComponentActions"));
+var _ComponentActions = require("../actions/ComponentActions");
 
 var _ChartActions = _interopRequireWildcard(require("../actions/ChartActions"));
 
@@ -51,9 +51,9 @@ const _crBrowserDynamic = (Comp, option) => {
   } = option,
         ItemOptionComp = itemOptionType ? _RouterItemOption.default[itemOptionType] || _RouterBrowserItem.default.DF : _RouterBrowserItem.default.DF,
         ItemComp = itemType ? _RouterBrowserItem.default[itemType] || _RouterBrowserItem.default.DEFAULT : void 0,
-        onClickInfo = typeof ItemComp !== "undefined" ? _ComponentActions.default.showDescription : void 0 //for Type2
+        onClickInfo = typeof ItemComp !== "undefined" ? _ComponentActions.ComponentActions.showDescription : void 0 //for Type2
   ,
-        onShowLoadDialog = chartContainerType ? item => _ComponentActions.default.showModalDialog(modalDialogType, {
+        onShowLoadDialog = chartContainerType ? item => _ComponentActions.ComponentActions.showModalDialog(modalDialogType, {
     item,
     browserType,
     chartContainerType,

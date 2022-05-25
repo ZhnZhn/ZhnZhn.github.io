@@ -1,6 +1,8 @@
 import use from '../hooks/use';
 
-import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
+import {
+  CAT_SHOW_ABOUT
+} from '../../flux/actions/ComponentActions';
 import {
   CHAT_INIT_AND_SHOW,
   CHAT_SHOW
@@ -61,7 +63,7 @@ const About = () => {
   , TS = useTheme(TH_ID);
 
   useListen(actionType => {
-    if (actionType === CAT.SHOW_ABOUT){
+    if (actionType === CAT_SHOW_ABOUT){
       show()
     } else if (_isHide(actionType)) {
       hide()

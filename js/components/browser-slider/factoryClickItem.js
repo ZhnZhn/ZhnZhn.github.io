@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _ComponentActions = _interopRequireDefault(require("../../flux/actions/ComponentActions"));
+var _ComponentActions = require("../../flux/actions/ComponentActions");
 
 const CONF = {
   dialogConf: true,
@@ -19,13 +17,14 @@ const CONF = {
 };
 const _assign = Object.assign;
 
-const _crDimUrl = ({
-  rootDimUrl,
-  rootUrl,
-  id,
-  proxy = '',
-  dfDimQuery = ''
-}) => {
+const _crDimUrl = _ref => {
+  let {
+    rootDimUrl,
+    rootUrl,
+    id,
+    proxy = '',
+    dfDimQuery = ''
+  } = _ref;
   return "" + proxy + (rootDimUrl || rootUrl) + "/" + id + dfDimQuery;
 };
 
@@ -69,7 +68,7 @@ const factoryClickItem = dfProps => () => {
     }
   });
 
-  _ComponentActions.default.showDialog(bT + "_" + id, bT, _conf);
+  _ComponentActions.ComponentActions.showDialog(bT + "_" + id, bT, _conf);
 };
 
 var _default = factoryClickItem;
