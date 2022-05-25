@@ -1,5 +1,4 @@
-
-import ItemFactory from '../factories/ItemFactory';
+import { crItem } from '../factories/ItemFactory';
 
 const ChartList = ({
   refChartFn,
@@ -15,7 +14,7 @@ const ChartList = ({
      .map((config, index) => {
        const { zhConfig, zhCompType } = config
        , { id } = zhConfig || {};
-       return ItemFactory.crItem({
+       return crItem({
          store,
          config, index,
          chartType,

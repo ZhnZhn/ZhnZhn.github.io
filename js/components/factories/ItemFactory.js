@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.crItem = void 0;
 
 var _ChartFn = require("../../charts/ChartFn");
 
@@ -101,21 +101,19 @@ const _rCrItem = {
   [_CompItemType.CIT_INFO_ITEM]: _fItem(_Items.default.InfoItem),
   [_CompItemType.CIT_TW_LIST]: _fItem(_Items.default.TwList)
 };
-const ItemFactory = {
-  /* { config, index, chartType, props, store } */
-  crItem(itemOptions) {
-    const {
-      config
-    } = itemOptions,
-          {
-      zhCompType
-    } = config || {},
-          _crItem = _rCrItem[zhCompType] || _rCrItem.DF;
+/* { config, index, chartType, props, store } */
 
-    return _crItem(itemOptions);
-  }
+const crItem = itemOptions => {
+  const {
+    config
+  } = itemOptions,
+        {
+    zhCompType
+  } = config || {},
+        _crItem = _rCrItem[zhCompType] || _rCrItem.DF;
 
+  return _crItem(itemOptions);
 };
-var _default = ItemFactory;
-exports.default = _default;
+
+exports.crItem = crItem;
 //# sourceMappingURL=ItemFactory.js.map

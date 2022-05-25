@@ -107,14 +107,10 @@ const _rCrItem = {
   [CIT_TW_LIST]: _fItem(Item.TwList)
 };
 
-const ItemFactory = {
-  /* { config, index, chartType, props, store } */
-  crItem(itemOptions){
-    const { config } = itemOptions
-    , { zhCompType } = config || {}
-    , _crItem = _rCrItem[zhCompType] || _rCrItem.DF;
-    return _crItem(itemOptions);
-  }
-};
-
-export default ItemFactory
+/* { config, index, chartType, props, store } */
+export const crItem = (itemOptions) => {
+  const { config } = itemOptions
+  , { zhCompType } = config || {}
+  , _crItem = _rCrItem[zhCompType] || _rCrItem.DF;
+  return _crItem(itemOptions);
+}
