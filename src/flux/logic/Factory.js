@@ -17,9 +17,10 @@ import {
 import {
   ComponentActions
 } from '../actions/ComponentActions';
-import ChartActions, {
+import {
   CHAT_LOAD,
-  CHAT_SHOW
+  CHAT_SHOW,
+  ChartActions
 } from '../actions/ChartActions';
 
 import {

@@ -11,7 +11,7 @@ var _DateUtils = require("../../utils/DateUtils");
 
 var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 
-var _ChartActions = _interopRequireWildcard(require("../../flux/actions/ChartActions"));
+var _ChartActions = require("../../flux/actions/ChartActions");
 
 var _LoadType = require("../../constants/LoadType");
 
@@ -28,10 +28,6 @@ var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorato
 var _jsxRuntime = require("react/jsx-runtime");
 
 var _dec, _class, _class2, _temp;
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 const S_DIALOG = {
   width: 365
@@ -120,7 +116,7 @@ let LoadItemDialog = (_dec = _Decorators.default.dialog, _dec(_class = (_temp = 
           ...itemConf
         };
 
-        _ChartActions.default[_ChartActions.CHAT_LOAD]({
+        _ChartActions.ChartActions[_ChartActions.CHAT_LOAD]({
           chartType: _LoadType.LT_WATCH_LIST,
           browserType: _BrowserType.BT_WATCH_LIST
         }, option);

@@ -23,17 +23,13 @@ var _LoadType = require("../../constants/LoadType");
 
 var _ComponentActions = require("../actions/ComponentActions");
 
-var _ChartActions = _interopRequireWildcard(require("../actions/ChartActions"));
+var _ChartActions = require("../actions/ChartActions");
 
 var _DateUtils = require("../../utils/DateUtils");
 
 var _has = _interopRequireDefault(require("../../components/has"));
 
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 const {
   isWideWidth
@@ -145,12 +141,12 @@ const crDialog = (browserType, dialogConf) => {
         proxy = isProxy ? _ChartStore.default.getProxy() : void 0,
         getKey = isGetKey && _ChartStore.default.getKey,
         onError = isGetKey && _onError,
-        onLoad = _ChartActions.default[_ChartActions.CHAT_LOAD].bind(null, {
+        onLoad = _ChartActions.ChartActions[_ChartActions.CHAT_LOAD].bind(null, {
     chartType: itemKey,
     browserType,
     dialogConf
   }),
-        onShow = _ChartActions.default[_ChartActions.CHAT_SHOW].bind(null, itemKey, browserType, dialogConf);
+        onShow = _ChartActions.ChartActions[_ChartActions.CHAT_SHOW].bind(null, itemKey, browserType, dialogConf);
 
   _modifyDialogPropsByLoadId(dialogProps, loadId);
 

@@ -1,10 +1,13 @@
-import { createElement } from 'react'
+import { createElement } from 'react';
 
 import ChartStore from '../stores/ChartStore';
 import {
   ComponentActions
 } from '../actions/ComponentActions';
-import ChartActions, { CHAT_SHOW } from '../actions/ChartActions';
+import {
+  CHAT_SHOW,
+  ChartActions
+} from '../actions/ChartActions';
 import {
   BrowserActions
 } from '../actions/BrowserActions';

@@ -1,7 +1,10 @@
 import {
   ComponentActions
 } from '../../actions/ComponentActions';
-import ChartActions, { CHAT_SHOW } from '../../actions/ChartActions';
+import { 
+  CHAT_SHOW,
+  ChartActions
+} from '../../actions/ChartActions';
 
 const _crItemHandlers = (
   dT,

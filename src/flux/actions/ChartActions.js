@@ -85,7 +85,7 @@ const _addSettingsTo = (
   _addBoolOptionTo(options, 'isNotZoomToMinMax')
 };
 
-const ChartActions =  Reflux.createActions({
+const CHA =  Reflux.createActions({
   [CHAT_LOAD]: {
      children: ['completed', 'added', 'failed'],
      isLoading: false,
@@ -111,11 +111,11 @@ const _isItemLoaded = actionType =>
 
 const _onChangeStore = actionType => {
   if (_isItemLoaded(actionType)) {
-    ChartActions[CHAT_LOAD].isLoading = false;
+    CHA[CHAT_LOAD].isLoading = false;
   }
 };
 
-ChartActions.onChangeStore = _onChangeStore
+CHA.onChangeStore = _onChangeStore
 
 const {
   isApiKeyRequired,
@@ -150,7 +150,7 @@ const _crMsgSetting = option =>
 
 const _crMetaDataKey = key => key + META_SUFFIX;
 
-ChartActions[CHAT_LOAD].shouldEmit = function(confItem={}, option={}){
+CHA[CHAT_LOAD].shouldEmit = function(confItem={}, option={}){
   const _key = crKeyForConfig(option)
   , { isLoadMeta } = option
   , key = isLoadMeta ? _crMetaDataKey(_key) : _key
@@ -174,7 +174,7 @@ ChartActions[CHAT_LOAD].shouldEmit = function(confItem={}, option={}){
     : true;
 }
 
-ChartActions[CHAT_LOAD].listen(function(confItem, option){
+CHA[CHAT_LOAD].listen(function(confItem, option){
   const { key, loadId='Q' } = option;
   this.isLoading = true;
   this.idLoading = key
@@ -185,7 +185,10 @@ ChartActions[CHAT_LOAD].listen(function(confItem, option){
 
 const SUBTITLE = 'Loaded from URL Query';
 const _addDialogPropsTo = option => {
-  const { chartType, browserType } = option
+  const {
+    chartType,
+    browserType
+  } = option
   , { dialogProps } = ChartStore
         .getSourceConfig(browserType, chartType) || {}
   , { dfProps } = dialogProps || {};
@@ -203,7 +206,7 @@ const _addDialogPropsTo = option => {
   }
 };
 
-ChartActions[CHAT_LOAD_BY_QUERY].listen(function(option){
+CHA[CHAT_LOAD_BY_QUERY].listen(function(option){
   _addDialogPropsTo(option)
   const { loadId } = option;
   option.proxy = ChartStore.getProxy(loadId)
@@ -221,4 +224,4 @@ ChartActions[CHAT_LOAD_BY_QUERY].listen(function(option){
   }
 })
 
-export default ChartActions
+export const ChartActions = CHA

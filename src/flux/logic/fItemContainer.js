@@ -6,11 +6,12 @@ import BrowserConfig from '../../constants/BrowserConfig';
 import {
   ComponentActions
 } from '../actions/ComponentActions';
-import ChartActions, {
+import {
   CHAT_SORT_BY,
   CHAT_UPDATE_MOVING_VALUES,
   CHAT_CLOSE,
-  CHAT_REMOVE_ALL
+  CHAT_REMOVE_ALL,
+  ChartActions
 } from '../actions/ChartActions';
 
 const _isStr = str => typeof str === 'string';

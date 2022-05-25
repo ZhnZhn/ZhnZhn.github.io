@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = exports.CHAT_UPDATE_MOVING_VALUES = exports.CHAT_TO_TOP = exports.CHAT_SORT_BY = exports.CHAT_SHOW = exports.CHAT_REMOVE_ALL = exports.CHAT_LOAD_FAILED = exports.CHAT_LOAD_COMPLETED = exports.CHAT_LOAD_BY_QUERY = exports.CHAT_LOAD_ADDED = exports.CHAT_LOAD = exports.CHAT_INIT_AND_SHOW = exports.CHAT_COPY = exports.CHAT_CLOSE = void 0;
+exports.ChartActions = exports.CHAT_UPDATE_MOVING_VALUES = exports.CHAT_TO_TOP = exports.CHAT_SORT_BY = exports.CHAT_SHOW = exports.CHAT_REMOVE_ALL = exports.CHAT_LOAD_FAILED = exports.CHAT_LOAD_COMPLETED = exports.CHAT_LOAD_BY_QUERY = exports.CHAT_LOAD_ADDED = exports.CHAT_LOAD = exports.CHAT_INIT_AND_SHOW = exports.CHAT_COPY = exports.CHAT_CLOSE = void 0;
 
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
@@ -87,7 +87,7 @@ const _addSettingsTo = (options, confItem, itemProps) => {
   _addBoolOptionTo(options, 'isNotZoomToMinMax');
 };
 
-const ChartActions = _refluxCore.default.createActions({
+const CHA = _refluxCore.default.createActions({
   [CHAT_LOAD]: {
     children: ['completed', 'added', 'failed'],
     isLoading: false,
@@ -110,11 +110,11 @@ const _isItemLoaded = actionType => actionType === _LoadingProgressActions.LPAT_
 
 const _onChangeStore = actionType => {
   if (_isItemLoaded(actionType)) {
-    ChartActions[CHAT_LOAD].isLoading = false;
+    CHA[CHAT_LOAD].isLoading = false;
   }
 };
 
-ChartActions.onChangeStore = _onChangeStore;
+CHA.onChangeStore = _onChangeStore;
 const {
   isApiKeyRequired,
   isProxyRequired,
@@ -143,7 +143,7 @@ const _crMsgSetting = option => _checkMsgApiKey(option) || _checkProxy(option);
 
 const _crMetaDataKey = key => key + META_SUFFIX;
 
-ChartActions[CHAT_LOAD].shouldEmit = function (confItem, option) {
+CHA[CHAT_LOAD].shouldEmit = function (confItem, option) {
   if (confItem === void 0) {
     confItem = {};
   }
@@ -171,7 +171,7 @@ ChartActions[CHAT_LOAD].shouldEmit = function (confItem, option) {
   return _alertMsg ? (this.cancelLoad(option, _alertMsg), false) : true;
 };
 
-ChartActions[CHAT_LOAD].listen(function (confItem, option) {
+CHA[CHAT_LOAD].listen(function (confItem, option) {
   const {
     key,
     loadId = 'Q'
@@ -209,7 +209,7 @@ const _addDialogPropsTo = option => {
   }
 };
 
-ChartActions[CHAT_LOAD_BY_QUERY].listen(function (option) {
+CHA[CHAT_LOAD_BY_QUERY].listen(function (option) {
   _addDialogPropsTo(option);
 
   const {
@@ -233,6 +233,6 @@ ChartActions[CHAT_LOAD_BY_QUERY].listen(function (option) {
     this.failed(option);
   }
 });
-var _default = ChartActions;
-exports.default = _default;
+const ChartActions = CHA;
+exports.ChartActions = ChartActions;
 //# sourceMappingURL=ChartActions.js.map

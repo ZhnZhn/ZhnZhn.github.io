@@ -1,7 +1,7 @@
 import Reflux from 'reflux-core';
 
 import Actions from '../actions/Actions'
-import ChartActions from '../actions/ChartActions';
+import { ChartActions } from '../actions/ChartActions';
 
 import ChartSlice from './ChartSlice';
 import BrowserSlice from './BrowserSlice';

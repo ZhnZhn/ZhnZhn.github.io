@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 
 import LocationSearch from '../flux/logic/LocationSearch';
@@ -8,8 +7,12 @@ import {
   CAT_SHOW_DIALOG,
   ComponentActions
 } from '../flux/actions/ComponentActions';
-import { BAT_INIT_BROWSER_DYNAMIC } from '../flux/actions/BrowserActions';
-import { CHAT_INIT_AND_SHOW } from '../flux/actions/ChartActions';
+import {
+  BAT_INIT_BROWSER_DYNAMIC
+} from '../flux/actions/BrowserActions';
+import {
+  CHAT_INIT_AND_SHOW
+} from '../flux/actions/ChartActions';
 
 import AppProvider from './AppProvider';
 import HeaderBar from './header/HeaderBar';

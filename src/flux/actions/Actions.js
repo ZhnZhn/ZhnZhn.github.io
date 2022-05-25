@@ -1,4 +1,4 @@
-import ChartActions from './ChartActions';
+import { ChartActions } from './ChartActions';
 import { ComponentActions } from './ComponentActions';
 import { BrowserActions } from './BrowserActions';
 

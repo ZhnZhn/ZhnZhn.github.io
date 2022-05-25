@@ -1,9 +1,11 @@
 import SeqActions from './SeqActions';
-
-import { BrowserActions } from './BrowserActions';
-import ChartActions, {
+import {
+  BrowserActions
+} from './BrowserActions';
+import {
   CHAT_LOAD_BY_QUERY,
-  CHAT_LOAD_COMPLETED
+  CHAT_LOAD_COMPLETED,
+  ChartActions
 } from './ChartActions';
 
 const _crLoadQueryDynamic = option => {

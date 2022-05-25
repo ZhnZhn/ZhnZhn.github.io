@@ -1,7 +1,10 @@
 import { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import ChartActions, { CHAT_LOAD } from '../../flux/actions/ChartActions';
+import { 
+  CHAT_LOAD,
+  ChartActions
+} from '../../flux/actions/ChartActions';
 
 import D from './DialogCell';
 import ModalDialog from '../zhn-moleculs/ModalDialog';

@@ -11,7 +11,7 @@ var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 
 var _ComponentActions = require("../actions/ComponentActions");
 
-var _ChartActions = _interopRequireWildcard(require("../actions/ChartActions"));
+var _ChartActions = require("../actions/ChartActions");
 
 var _BrowserActions = require("../actions/BrowserActions");
 
@@ -22,10 +22,6 @@ var _RouterBrowser = _interopRequireDefault(require("./RouterBrowser"));
 var _RouterItemOption = _interopRequireDefault(require("../../components/zhn-select/RouterItemOption"));
 
 var _RouterBrowserItem = _interopRequireDefault(require("../../components/browser-items/RouterBrowserItem"));
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 const _crBrowserWatchList = Comp => /*#__PURE__*/(0, _react.createElement)(Comp, {
   key: _BrowserType.BT_WATCH_LIST,
@@ -57,7 +53,7 @@ const _crBrowserDynamic = (Comp, option) => {
     item,
     browserType,
     chartContainerType,
-    onShow: _ChartActions.default[_ChartActions.CHAT_SHOW].bind(null, chartContainerType, browserType)
+    onShow: _ChartActions.ChartActions[_ChartActions.CHAT_SHOW].bind(null, chartContainerType, browserType)
   }) : void 0;
   return /*#__PURE__*/(0, _react.createElement)(Comp, {
     dfProps,

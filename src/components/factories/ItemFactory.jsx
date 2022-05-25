@@ -6,9 +6,10 @@ import {
 import {
   ComponentActions
 } from '../../flux/actions/ComponentActions';
-import ChartActions, {
+import {
   CHAT_TO_TOP,
-  CHAT_COPY
+  CHAT_COPY,
+  ChartActions
 } from '../../flux/actions/ChartActions';
 import {
   CIT_EUROSTAT_MAP,

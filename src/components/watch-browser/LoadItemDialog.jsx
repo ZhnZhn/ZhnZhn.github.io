@@ -7,14 +7,19 @@ import {
   isYmd,
   mlsToDmy
 } from '../../utils/DateUtils';
-import formatNumber from '../../utils/formatNumber'
+import formatNumber from '../../utils/formatNumber';
 
-import ChartActions, {CHAT_LOAD} from '../../flux/actions/ChartActions'
+import {
+  CHAT_LOAD,
+  ChartActions
+} from '../../flux/actions/ChartActions';
 import {
   LT_WL,
   LT_WATCH_LIST
- } from '../../constants/LoadType'
-import { BT_WATCH_LIST } from '../../constants/BrowserType';
+} from '../../constants/LoadType';
+import {
+  BT_WATCH_LIST
+} from '../../constants/BrowserType';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog'
 import D from '../dialogs/DialogCell'

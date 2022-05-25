@@ -9,7 +9,7 @@ var _refluxCore = _interopRequireDefault(require("reflux-core"));
 
 var _Actions = _interopRequireDefault(require("../actions/Actions"));
 
-var _ChartActions = _interopRequireDefault(require("../actions/ChartActions"));
+var _ChartActions = require("../actions/ChartActions");
 
 var _ChartSlice = _interopRequireDefault(require("./ChartSlice"));
 
@@ -32,7 +32,7 @@ const ChartStore = _refluxCore.default.createStore({
 
   init() {
     this.initWatchList();
-    this.listenLoadingProgress(_ChartActions.default.onChangeStore);
+    this.listenLoadingProgress(_ChartActions.ChartActions.onChangeStore);
   },
 
   ..._ChartSlice.default,
