@@ -13,6 +13,14 @@ var _Color = require("../constants/Color");
 
 var _conf = require("./conf");
 
+const _crAxisLabelStyle = (color, fontSize) => ({
+  style: {
+    color,
+    fontSize,
+    fontWeight: "bold"
+  }
+});
+
 const ChartTheme = {
   credits: {
     enabled: true,
@@ -248,35 +256,25 @@ const ChartTheme = {
     lineColor: _Color.COLOR_X_LINE,
     lineWidth: 3,
     tickColor: _Color.COLOR_X_TICK,
-    tickWidth: 3,
-    tickLenght: 5,
+    //tickWidth: 3,
+    //tickLenght: 5,
+    tickWidth: 0,
     gridLineColor: _Color.COLOR_X_GRID_LINE,
     gridLineDashStyle: "Dot",
     //gridLineDashStyle: "ShortDashDotDot",
     gridLineWidth: 1,
-    labels: {
-      style: {
-        color: _Color.COLOR_X_LABEL,
-        fontWeight: "bold",
-        fontSize: "15px"
-      }
-    }
+    labels: _crAxisLabelStyle(_Color.COLOR_X_LABEL, "15px")
   },
   yAxis: {
     lineColor: _Color.COLOR_Y_LINE,
     lineWidth: 3,
     tickColor: _Color.COLOR_Y_TICK,
-    tickWidth: 3,
-    tickLenght: 5,
+    //tickWidth: 3,
+    //tickLenght: 5,
+    tickWidth: 0,
     gridLineColor: _Color.COLOR_Y_GRID_LINE,
     gridLineDashStyle: "Dot",
-    labels: {
-      style: {
-        color: _Color.COLOR_Y_LABEL,
-        fontWeight: "bold",
-        fontSize: "14px"
-      }
-    }
+    labels: _crAxisLabelStyle(_Color.COLOR_Y_LABEL, "14px")
   }
 };
 var _default = ChartTheme;

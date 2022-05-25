@@ -35,6 +35,17 @@ import {
   fMonoPieColors
 } from './conf';
 
+const _crAxisLabelStyle = (
+  color,
+  fontSize
+) => ({
+  style: {
+    color,
+    fontSize,
+    fontWeight: "bold"
+  }
+});
+
 const ChartTheme = {
   credits: {
     enabled : true,
@@ -282,35 +293,25 @@ const ChartTheme = {
     lineColor: COLOR_X_LINE,
     lineWidth: 3,
     tickColor: COLOR_X_TICK,
-    tickWidth: 3,
-    tickLenght: 5,
+    //tickWidth: 3,
+    //tickLenght: 5,
+    tickWidth: 0,
     gridLineColor: COLOR_X_GRID_LINE,
     gridLineDashStyle: "Dot",
     //gridLineDashStyle: "ShortDashDotDot",
     gridLineWidth: 1,
-    labels:{
-      style: {
-        color: COLOR_X_LABEL,
-        fontWeight: "bold",
-        fontSize: "15px"
-      }
-    }
+    labels: _crAxisLabelStyle(COLOR_X_LABEL, "15px")
   },
   yAxis: {
       lineColor: COLOR_Y_LINE,
       lineWidth: 3,
       tickColor: COLOR_Y_TICK,
-      tickWidth: 3,
-      tickLenght: 5,
+      //tickWidth: 3,
+      //tickLenght: 5,
+      tickWidth: 0,
       gridLineColor: COLOR_Y_GRID_LINE,
       gridLineDashStyle: "Dot",
-      labels: {
-        style: {
-          color : COLOR_Y_LABEL,
-          fontWeight: "bold",
-          fontSize: "14px"
-        }
-      }
+      labels: _crAxisLabelStyle(COLOR_Y_LABEL, "14px")
   }
 };
 
