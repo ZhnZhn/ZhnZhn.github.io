@@ -188,13 +188,16 @@ const _crConfig = function (_temp) {
     spacingTop: 8,
     spacingBottom: 10,
     ...chartOption
+  }).assignTo('xAxis', {
+    labels: {
+      y: 16
+    }
   }).assignTo('yAxis', {
     startOnTick: true,
     endOnTick: true,
     tickPixelInterval: 60,
     offset: 4,
     lineWidth: 0,
-    tickLength: 0,
     labels: {
       x: 8,
       y: 5
