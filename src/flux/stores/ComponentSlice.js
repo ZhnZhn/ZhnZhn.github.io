@@ -9,46 +9,15 @@ import {
 import {
   BAT_UPDATE_BROWSER_MENU
 } from '../actions/BrowserActions';
-import {
-  crDialog,
-  crOptionDialog
-} from '../logic/Factory';
 
 import {
   MDT_ALERT
 } from '../../constants/ModalDialogType';
 
-const ItemDialogLogic = {
-
-  showItemDialog(slice, menuItemConf, store){
-    const { type, browserType, dialogConfOr } = menuItemConf;
-    if (slice[type]){
-      return Promise.resolve({ key: type });
-    } else {
-      const _dialogConf = store.getDialogConf(dialogConfOr, type);
-      return crDialog(browserType, _dialogConf)
-        .then(Comp => {
-             slice[type] = true
-             return { key:type, Comp };
-         });
-    }
-  },
-
-  showOptionDialog(slice, options){
-    const { type, data } = options;
-    if (slice[type]) {
-      return Promise.resolve({ key: type, data });
-    } else {
-      options.dialogType = type
-      return crOptionDialog(options)
-         .then(Comp => {
-             slice[type] = true
-             return { key: type, Comp, data };
-         })
-    }
-  }
-
-}
+import {
+  showItemDialog,
+  showOptionDialog
+} from './comp/DialogLogicFn';
 
 const CheckBoxChartLogic = {
   toggle(slice, options){
@@ -119,8 +88,8 @@ const ComponentSlice = {
   },
 
   onShowDialog(type, browserType, dialogConfOr){
-    ItemDialogLogic.showItemDialog(
-      this.dialogInit, { type, browserType, dialogConfOr }, this
+    showItemDialog(
+      this, this.dialogInit, { type, browserType, dialogConfOr }
     ).then(r => {
        this.trigger(CAT_SHOW_DIALOG, r)
     });
@@ -134,7 +103,7 @@ const ComponentSlice = {
   },
 
   onShowOptionDialog(type, option){
-    ItemDialogLogic.showOptionDialog(
+    showOptionDialog(
       this.dialogInit, { type, data: option }
     ).then(r => {
       this.trigger(CAT_SHOW_DIALOG, r)

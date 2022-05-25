@@ -7,60 +7,10 @@ var _ComponentActions = require("../actions/ComponentActions");
 
 var _BrowserActions = require("../actions/BrowserActions");
 
-var _Factory = require("../logic/Factory");
-
 var _ModalDialogType = require("../../constants/ModalDialogType");
 
-const ItemDialogLogic = {
-  showItemDialog(slice, menuItemConf, store) {
-    const {
-      type,
-      browserType,
-      dialogConfOr
-    } = menuItemConf;
+var _DialogLogicFn = require("./comp/DialogLogicFn");
 
-    if (slice[type]) {
-      return Promise.resolve({
-        key: type
-      });
-    } else {
-      const _dialogConf = store.getDialogConf(dialogConfOr, type);
-
-      return (0, _Factory.crDialog)(browserType, _dialogConf).then(Comp => {
-        slice[type] = true;
-        return {
-          key: type,
-          Comp
-        };
-      });
-    }
-  },
-
-  showOptionDialog(slice, options) {
-    const {
-      type,
-      data
-    } = options;
-
-    if (slice[type]) {
-      return Promise.resolve({
-        key: type,
-        data
-      });
-    } else {
-      options.dialogType = type;
-      return (0, _Factory.crOptionDialog)(options).then(Comp => {
-        slice[type] = true;
-        return {
-          key: type,
-          Comp,
-          data
-        };
-      });
-    }
-  }
-
-};
 const CheckBoxChartLogic = {
   toggle(slice, options) {
     const {
@@ -151,11 +101,11 @@ const ComponentSlice = {
   },
 
   onShowDialog(type, browserType, dialogConfOr) {
-    ItemDialogLogic.showItemDialog(this.dialogInit, {
+    (0, _DialogLogicFn.showItemDialog)(this, this.dialogInit, {
       type,
       browserType,
       dialogConfOr
-    }, this).then(r => {
+    }).then(r => {
       this.trigger(_ComponentActions.CAT_SHOW_DIALOG, r);
     });
   },
@@ -168,7 +118,7 @@ const ComponentSlice = {
   },
 
   onShowOptionDialog(type, option) {
-    ItemDialogLogic.showOptionDialog(this.dialogInit, {
+    (0, _DialogLogicFn.showOptionDialog)(this.dialogInit, {
       type,
       data: option
     }).then(r => {
