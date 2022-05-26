@@ -90,6 +90,7 @@
 
 .scroll-container-y {
   overflow-y: auto;
+  overflow-x: hidden;
   height: 90%;
   padding-right: 10px;
 }
