@@ -2,11 +2,11 @@ const DF_COLOR = '#8085e9';
 
 const _assign = Object.assign
 , _crPlotOption = (
-  color=DF_COLOR,
-  pointWidth
+  pointWidth,
+  { seriaColor=DF_COLOR } = {}
 ) => ({
-    color,
     pointWidth,
+    color: seriaColor ,
     minPointLength: 5,
     pointPadding: 0,
     borderWidth: 0,
@@ -14,18 +14,22 @@ const _assign = Object.assign
     shadow: false
 });
 
+const _crEmptyText = () => ({
+  text: ''
+});
+
 const _crCategoryConfig = () => ({
   chart: {
     panKey: void 0,
     panning: false,
   },
-  title: { text: '' },
-  subtitle: { text: '' },
+  title: _crEmptyText(),
+  subtitle: _crEmptyText(),
   xAxis: {
-    categories: [],
     type: "category",
+    categories: [],
     crosshair: true,
-    gridLineWidth : 0
+    gridLineWidth: 0
   },
   yAxis: {
     //min: 0,
@@ -34,23 +38,23 @@ const _crCategoryConfig = () => ({
     tickLength: 0,
     gridLineDashStyle: 'Dot',
     labels: { x: 3 },
-    title: { text: '' }
+    title: _crEmptyText()
   },
   legend: {
-    enabled : false,
+    enabled: false,
     align: 'right',
     verticalAlign: 'top',
     layout: 'horizontal',
-    x:  0,
+    x: 0,
     y: -25
   },
   plotOptions: {},
   series: [{ name: 'Column'}]
 })
 
-export const crColumnConfig = ({
-  seriaColor
-}={}) => {
+export const crColumnConfig = (
+  options
+) => {
   const config = _crCategoryConfig();
   _assign(config.chart, {
     type: "column",
@@ -58,14 +62,14 @@ export const crColumnConfig = ({
     marginBottom: 100,
   })
   _assign(config.plotOptions, {
-    column: _crPlotOption(seriaColor, 6),
+    column: _crPlotOption(6, options),
   })
   return config;
 }
 
-export const crBarConfig = ({
-  seriaColor
-}) =>  {
+export const crBarConfig = (
+  options
+) =>  {
   const config = _crCategoryConfig();
   _assign(config.chart, {
     type: 'bar',
@@ -79,7 +83,7 @@ export const crBarConfig = ({
     gridLineDashStyle: 'ShortDot'
   })
   _assign(config.plotOptions, {
-    bar: _crPlotOption(seriaColor, 4)
+    bar: _crPlotOption(4, options)
   })
 
   return config;

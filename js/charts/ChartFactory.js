@@ -5,14 +5,13 @@ exports.crColumnConfig = exports.crBarConfig = void 0;
 const DF_COLOR = '#8085e9';
 
 const _assign = Object.assign,
-      _crPlotOption = function (color, pointWidth) {
-  if (color === void 0) {
-    color = DF_COLOR;
-  }
-
+      _crPlotOption = function (pointWidth, _temp) {
+  let {
+    seriaColor = DF_COLOR
+  } = _temp === void 0 ? {} : _temp;
   return {
-    color,
     pointWidth,
+    color: seriaColor,
     minPointLength: 5,
     pointPadding: 0,
     borderWidth: 0,
@@ -21,20 +20,20 @@ const _assign = Object.assign,
   };
 };
 
+const _crEmptyText = () => ({
+  text: ''
+});
+
 const _crCategoryConfig = () => ({
   chart: {
     panKey: void 0,
     panning: false
   },
-  title: {
-    text: ''
-  },
-  subtitle: {
-    text: ''
-  },
+  title: _crEmptyText(),
+  subtitle: _crEmptyText(),
   xAxis: {
-    categories: [],
     type: "category",
+    categories: [],
     crosshair: true,
     gridLineWidth: 0
   },
@@ -47,9 +46,7 @@ const _crCategoryConfig = () => ({
     labels: {
       x: 3
     },
-    title: {
-      text: ''
-    }
+    title: _crEmptyText()
   },
   legend: {
     enabled: false,
@@ -65,11 +62,7 @@ const _crCategoryConfig = () => ({
   }]
 });
 
-const crColumnConfig = function (_temp) {
-  let {
-    seriaColor
-  } = _temp === void 0 ? {} : _temp;
-
+const crColumnConfig = options => {
   const config = _crCategoryConfig();
 
   _assign(config.chart, {
@@ -79,7 +72,7 @@ const crColumnConfig = function (_temp) {
   });
 
   _assign(config.plotOptions, {
-    column: _crPlotOption(seriaColor, 6)
+    column: _crPlotOption(6, options)
   });
 
   return config;
@@ -87,11 +80,7 @@ const crColumnConfig = function (_temp) {
 
 exports.crColumnConfig = crColumnConfig;
 
-const crBarConfig = _ref => {
-  let {
-    seriaColor
-  } = _ref;
-
+const crBarConfig = options => {
   const config = _crCategoryConfig();
 
   _assign(config.chart, {
@@ -111,7 +100,7 @@ const crBarConfig = _ref => {
   });
 
   _assign(config.plotOptions, {
-    bar: _crPlotOption(seriaColor, 4)
+    bar: _crPlotOption(4, options)
   });
 
   return config;
