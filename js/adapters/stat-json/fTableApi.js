@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
+var _LoadType = require("../../constants/LoadType");
+
 var _fnAdapter = require("./fnAdapter");
 
 var _crDfQuery = _interopRequireDefault(require("./crDfQuery"));
@@ -17,13 +19,13 @@ const _crErr = _fnAdapter.crError.bind(null, '');
 
 const _hmCrQuery = {
   DF: _crDfQuery.default,
-  SDN: _crSdnQuery.default,
-  SIR: _crSirQuery.default
+  [_LoadType.LT_SDN]: _crSdnQuery.default,
+  [_LoadType.LT_SIR]: _crSirQuery.default
 };
 
-const _crDfId = option => option.loadId === 'SDN' ? '' : '/' + option.dfId;
+const _crDfId = option => option.loadId === _LoadType.LT_SDN ? '' : '/' + option.dfId;
 
-const fTableApi = ROOT_URL => ({
+const fTableApi = rootUrl => ({
   getRequestUrl(option) {
     option.resErrStatus = [400];
 
@@ -33,7 +35,7 @@ const fTableApi = ROOT_URL => ({
 
     const _dfId = _crDfId(option);
 
-    return option.url = "" + (option.proxy || '') + ROOT_URL + _dfId;
+    return option.url = "" + (option.proxy || '') + rootUrl + _dfId;
   },
 
   crOptionFetch(option) {

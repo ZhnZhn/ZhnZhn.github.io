@@ -140,7 +140,7 @@ const BrowserConfig = {
       dU: './data/statistics-finland/statistics-finland.html',
       dS: 'Statistics Finland',
       noTime: true,
-      rootUrl: 'https://pxnet2.stat.fi/PXWeb/api/v1/en/StatFin'
+      rootUrl: 'https://statfin.stat.fi/PXWeb/api/v1/en/StatFin'
     }
   },
   [BT_DENMARK_STAT_ALL]: {

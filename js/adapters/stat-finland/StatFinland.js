@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _fStatJsonAdapter = _interopRequireDefault(require("../stat-json/fStatJsonAdapter"));
 
-const DATA_URL = 'https://pxnet2.stat.fi/PXWeb/api/v1/en/StatFin';
+const DATA_URL = 'https://statfin.stat.fi/PxWeb/api/v1/en/StatFin';
 const StatFinland = (0, _fStatJsonAdapter.default)(DATA_URL);
 var _default = StatFinland;
 exports.default = _default;

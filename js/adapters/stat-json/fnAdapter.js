@@ -35,7 +35,7 @@ const SEARCH_NST = {
   title: _crSearchTitle('Sweden')
 },
       SEARCH_SFL = {
-  url: 'http://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/',
+  url: 'https://statfin.stat.fi/PXWeb/pxweb/en/StatFin/',
   title: "Statistics Finland's PX-Web"
 },
       SEARCH_SDN = {
@@ -119,21 +119,21 @@ const _crDescr = (_ref3, option) => {
   return dfId && source ? "TableId: " + dfId + "<BR/>" + source + ": " + _date + "<BR/>" + _elSearchLink : _elSearchLink;
 };
 
-const _crItemCaption = option => {
-  const {
+const _crItemCaption = _ref4 => {
+  let {
     items,
     dfId = 'id'
-  } = option,
-        caption = items[0] ? items[0].caption : 'All Items';
+  } = _ref4;
+  const caption = items[0] ? items[0].caption : 'All Items';
   return dfId + "_" + caption;
 };
 
-const _crAreaMapSlice = option => {
-  const {
+const _crAreaMapSlice = _ref5 => {
+  let {
     items,
     dfTSlice
-  } = option,
-        mapSlice = {};
+  } = _ref5;
+  const mapSlice = {};
   items.forEach(item => {
     if (item.slice) {
       _assign(mapSlice, item.slice);
@@ -167,11 +167,11 @@ const _getTimeDimension = (ds, timeId, json) => {
   return times;
 };
 
-const _crDataSource = _ref4 => {
+const _crDataSource = _ref6 => {
   let {
     dataSource,
     dfId
-  } = _ref4;
+  } = _ref6;
   return dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? dataSource + " (" + dfId + ")" : dataSource;
 };
 

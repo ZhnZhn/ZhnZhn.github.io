@@ -33,7 +33,7 @@ const SEARCH_NST = {
   title: _crSearchTitle('Sweden')
 }
 , SEARCH_SFL = {
-  url: 'http://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/',
+  url: 'https://statfin.stat.fi/PXWeb/pxweb/en/StatFin/',
   title: "Statistics Finland's PX-Web"
 }
 , SEARCH_SDN = {
@@ -49,22 +49,34 @@ const MAX_SOURCE_ID_LENGTH = 9;
 
 const _assign = Object.assign;
 
-const _crSearchToken = (label) => {
+const _crSearchToken = (
+  label
+) => {
   const _arr = (label || '').toString().split(',');
   return _arr[0] || '';
 };
 
-const _crLink = ({url, title}, token='') => `<a class="native-link" href="${url}${token}">${title}</a>`;
+const _crLink = (
+  {url, title},
+  token=''
+) => `<a class="native-link" href="${url}${token}">${title}</a>`;
 
-const _crSflSearchToken = ({ dfId }) => {
+const _crSflSearchToken = ({
+  dfId
+}) => {
   const arr = (''+dfId).split('/')
   , id = arr.pop()
   , prefix = arr.join('__');
-  return prefix && id ? `StatFin__${prefix}/${id}` : '';
+  return prefix && id
+    ? `StatFin__${prefix}/${id}`
+    : '';
 };
 
-const _crSearchLink = (label, option) => {
-  const  _token = _crSearchToken(label);
+const _crSearchLink = (
+  label,
+  option
+) => {
+  const _token = _crSearchToken(label);
   switch(option.loadId){
     case 'NST': case 'NST_2':
       return _crLink(SEARCH_NST, _token);
@@ -81,7 +93,10 @@ const _crSearchLink = (label, option) => {
   }
 };
 
-const _crDescr = ({ updated, source, label }, option) => {
+const _crDescr = (
+  { updated, source, label },
+  option
+) => {
   const _date = (updated || '')
     .replace('T', ' ')
     .replace('Z', '')
@@ -93,17 +108,21 @@ const _crDescr = ({ updated, source, label }, option) => {
     : _elSearchLink;
 };
 
-const _crItemCaption = (option) => {
-  const { items, dfId='id'} = option
-       , caption =  items[0]
-            ? items[0].caption
-            : 'All Items';
+const _crItemCaption = ({
+  items,
+  dfId='id'
+}) => {
+  const caption =  items[0]
+    ? items[0].caption
+    : 'All Items';
   return `${dfId}_${caption}`;
 };
 
-const _crAreaMapSlice = (option) => {
-  const { items, dfTSlice } = option
-      , mapSlice = {};
+const _crAreaMapSlice = ({
+  items,
+  dfTSlice
+}) => {
+  const mapSlice = {};
   items.forEach(item => {
     if (item.slice) {
       _assign(mapSlice, item.slice)
@@ -112,8 +131,9 @@ const _crAreaMapSlice = (option) => {
   return _assign(mapSlice, dfTSlice);
 };
 
-
-const _getDimensionWithouTime = (ds) => {
+const _getDimensionWithouTime = (
+  ds
+) => {
   const _dim = ds.Dimension("Year")
    || ds.Dimension("Vuosi")
    || ds.Dimension("Vuosineljännes")
@@ -123,15 +143,21 @@ const _getDimensionWithouTime = (ds) => {
     : ["2019"];
 };
 
-
-const _crTimesFromDs = (json, timeId) => {
+const _crTimesFromDs = (
+  json,
+  timeId
+) => {
   const _dim = json.dimension[timeId]
   , label = ((_dim || {}).category || {}).label;
   return _keys(label)
     .map(k => label[k]);
 };
 
-const _getTimeDimension = (ds, timeId, json) => {
+const _getTimeDimension = (
+  ds,
+  timeId,
+  json
+) => {
   // SIR
   if (timeId && timeId.indexOf("TLIST(") !== -1) {
     return _crTimesFromDs(json, timeId)
@@ -144,13 +170,18 @@ const _getTimeDimension = (ds, timeId, json) => {
   return times;
 };
 
-const _crDataSource = ({ dataSource, dfId }) => dfId
+const _crDataSource = ({
+  dataSource,
+  dfId
+}) => dfId
  && (''+dfId).length < MAX_SOURCE_ID_LENGTH
    ? `${dataSource} (${dfId})`
    : dataSource;
 
 
-export const crTitle = (option) => {
+export const crTitle = (
+  option
+) => {
   switch(option.browserType){
     case 'NST':
     case 'NST_ALL':
@@ -163,15 +194,25 @@ export const crTitle = (option) => {
   }
 }
 
-export const crDsValuesTimes = (json, option) => {
+export const crDsValuesTimes = (
+  json,
+  option
+) => {
   const mapSlice = _crAreaMapSlice(option)
   , ds = JSONstat(json).Dataset(0)
   , values = ds.Data(mapSlice)
   , times = _getTimeDimension(ds, option.timeId, json);
-  return [ds, values, times];
+  return [
+    ds,
+    values,
+    times
+  ];
 }
 
-export const  crTid = (time, ds) => {
+export const crTid = (
+  time,
+  ds
+) => {
   if (time) {
     return time;
   }
@@ -179,12 +220,17 @@ export const  crTid = (time, ds) => {
   return tidIds[tidIds.length-1];
 }
 
-export const crInfo = (ds, option) => ({
+export const crInfo = (
+  ds,
+  option
+) => ({
   name: ds.label || '',
   description: _crDescr(ds, option)
 })
 
-export const crZhConfig = (option) => {
+export const crZhConfig = (
+  option
+) => {
   const {
     _itemKey,
     url,
@@ -215,12 +261,19 @@ export const crZhConfig = (option) => {
   };
 }
 
-export const crConfOption = (ds, option) => ({
+export const crConfOption = (
+  ds,
+  option
+) => ({
   info: crInfo(ds, option),
   zhConfig: crZhConfig(option)
 })
 
-export const crChartOption = (ds, data, option) => ({
+export const crChartOption = (
+  ds,
+  data,
+  option
+) => ({
   valueMoving: valueMoving(data),
   ...crConfOption(ds, option)
 })
