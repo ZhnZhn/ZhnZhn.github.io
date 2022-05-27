@@ -13,6 +13,7 @@ const ROOT = 'https://www.alphavantage.co/query',
       DF_TICKET = 'MSFT',
       DF_SIZE = 'compact',
       DF_PERIOD = '50',
+      DF_FN_ECONOMICS = "ECONOMICS",
       ERR_PROP = 'Error Message',
       REQ_ERROR = 'Request Error',
       _assign = Object.assign,
@@ -26,6 +27,21 @@ const _getOneTwo = _ref => {
   } = _ref;
   return _isArr(items) ? [(0, _fnAdapter.getValue)(items[0]), (0, _fnAdapter.getValue)(items[1])] //Stocks by Sectors case
   : [value || DF_TICKET, outputsize || DF_SIZE];
+};
+
+const _crEconomicsQuery = option => {
+  const {
+    items
+  } = option,
+        _item = items[0],
+        itemCaption = (0, _fnAdapter.getCaption)(_item),
+        value = (0, _fnAdapter.getValue)(_item);
+
+  _assign(option, {
+    itemCaption
+  });
+
+  return "function=" + value;
 };
 
 const _crSectorQuery = () => {};
@@ -51,9 +67,9 @@ const _crDailyQuery = option => {
   _assign(option, {
     ticket,
     outputsize,
-    interval: "Daily",
     title,
-    itemCaption: title
+    itemCaption: title,
+    interval: "Daily"
   });
 
   return "outputsize=" + outputsize + "&symbol=" + ticket;
@@ -116,9 +132,10 @@ const AlphaApi = {
       apiKey
     } = option,
           _crQuery = _routerQuery[dfFn] || _routerQuery.DF,
-          _queryParam = (0, _fnAdapter.joinBy)('&', "function=" + dfFn, _crQuery(option), "apikey=" + apiKey);
+          _queryParam = dfFn === DF_FN_ECONOMICS ? _crEconomicsQuery(option) : (0, _fnAdapter.joinBy)('&', "function=" + dfFn, _crQuery(option));
 
-    return ROOT + "?" + _queryParam;
+    option.apiKey = void 0;
+    return ROOT + "?" + _queryParam + "&apikey=" + apiKey;
   },
 
   checkResponse(json) {

@@ -10,23 +10,42 @@ const ROOT = 'https://www.alphavantage.co/query'
 , DF_TICKET = 'MSFT'
 , DF_SIZE = 'compact'
 , DF_PERIOD = '50'
+, DF_FN_ECONOMICS = "ECONOMICS"
 , ERR_PROP = 'Error Message'
 , REQ_ERROR = 'Request Error'
 
 , _assign = Object.assign
 , _isArr = Array.isArray;
 
+const _getOneTwo = ({
+  value,
+  outputsize,
+  items
+}) => _isArr(items)
+  ? [getValue(items[0]), getValue(items[1])]
+  //Stocks by Sectors case
+  : [value || DF_TICKET, outputsize || DF_SIZE];
 
-const _getOneTwo = ({ value, outputsize, items }) => {
-  return _isArr(items)
-    ? [getValue(items[0]), getValue(items[1])]
-    //Stocks by Sectors case
-    : [value || DF_TICKET, outputsize || DF_SIZE];
-};
+
+const _crEconomicsQuery = (
+  option
+) => {
+  const { items } = option
+  , _item = items[0]
+  , itemCaption = getCaption(_item)
+  , value = getValue(_item)
+  _assign(option, {
+    itemCaption
+  })
+  return `function=${value}`;
+}
 
 const _crSectorQuery = () => {};
 const _crIntradayQuery = option => {
-  const [ticket, interval] = _getOneTwo(option)
+  const [
+    ticket,
+    interval
+  ] = _getOneTwo(option)
   , title = `${ticket} (${interval})`;
   _assign(option, {
     ticket, interval,
@@ -35,16 +54,25 @@ const _crIntradayQuery = option => {
   return `interval=${interval}&symbol=${ticket}`;
 };
 const _crDailyQuery = option => {
-  const [ticket, outputsize] = _getOneTwo(option)
+  const [
+    ticket,
+    outputsize
+  ] = _getOneTwo(option)
   , title = `${ticket} (Daily)`;
   _assign(option, {
-     ticket, outputsize, interval: "Daily",
-     title, itemCaption: title
+     ticket,
+     outputsize,
+     title,
+     itemCaption: title,
+     interval: "Daily"
    })
   return `outputsize=${outputsize}&symbol=${ticket}`;
 };
 const _crIncomeQuery = option => {
-  const { items, itemCaption } = option
+  const {
+    items,
+    itemCaption
+  } = option
   , _symbol = getValue(items[0]);
   _assign(option, {
     itemCaption: itemCaption.replace(getCaption(items[0]), _symbol),
@@ -84,14 +112,20 @@ const _routerQuery = {
 
 const AlphaApi = {
   getRequestUrl(option) {
-    const { indicator='SMA', dfFn=indicator, apiKey } = option
+    const {
+      indicator='SMA',
+      dfFn=indicator,
+      apiKey
+    } = option
     , _crQuery = _routerQuery[dfFn] || _routerQuery.DF
-    , _queryParam = joinBy('&',
-        `function=${dfFn}`,
-        _crQuery(option),
-        `apikey=${apiKey}`
-    );
-    return `${ROOT}?${_queryParam}`;
+    , _queryParam = dfFn === DF_FN_ECONOMICS
+         ? _crEconomicsQuery(option)
+         : joinBy('&',
+             `function=${dfFn}`,
+             _crQuery(option)
+           );
+    option.apiKey = void 0
+    return `${ROOT}?${_queryParam}&apikey=${apiKey}`;
   },
 
   checkResponse(json){

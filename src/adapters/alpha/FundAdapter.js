@@ -5,24 +5,26 @@ import {
   _isNaN
 } from './fnAdapter';
 
-const crData = (json, option) => {
-  const { dfItem, dfPeriod } = option
-  , _pnReport = dfPeriod === 'A'
-       ? 'annualReports'
-       : 'quarterlyReports'
-  , _reports = json[_pnReport] || []
-  , _data = [];
+const crData = (
+  json,
+  { dfItem, dfPeriod }
+) => {
+  const _pnReport = dfPeriod === 'A'
+    ? 'annualReports'
+    : 'quarterlyReports';
 
-  _reports.forEach(item => {
-    const _y = parseInt(item[dfItem], 10)
-    if (!_isNaN(_y)) {
-      _data.push([ymdToUTC(item.fiscalDateEnding), _y])
-    }
-  })
-  return _data.sort(compareByDate);
-}
+  return (json[_pnReport] || [])
+    .reduce((arr, item) => {
+      const _y = parseInt(item[dfItem], 10);
+      if (!_isNaN(_y)) {
+        arr.push([ymdToUTC(item.fiscalDateEnding), _y])
+      }
+      return arr;
+    }, [])
+    .sort(compareByDate);
+};
 
-let _adapter
+let _adapter;
 const FundAdapter = () => _adapter
   || (_adapter = crAdapterType1({ crData }))
 

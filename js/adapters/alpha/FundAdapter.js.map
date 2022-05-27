@@ -1,1 +1,26 @@
-{"version":3,"sources":["../../../src/adapters/alpha/FundAdapter.js"],"names":["crData","json","option","dfItem","dfPeriod","_pnReport","_reports","_data","forEach","item","_y","parseInt","push","fiscalDateEnding","sort","compareByDate","_adapter","FundAdapter"],"mappings":";;;;;;;AAAA;;AACA;;AAMA,MAAMA,MAAM,GAAG,CAACC,IAAD,EAAOC,MAAP,KAAkB;AAC/B,QAAM;AAAEC,IAAAA,MAAF;AAAUC,IAAAA;AAAV,MAAuBF,MAA7B;AAAA,QACEG,SAAS,GAAGD,QAAQ,KAAK,GAAb,GACP,eADO,GAEP,kBAHP;AAAA,QAIEE,QAAQ,GAAGL,IAAI,CAACI,SAAD,CAAJ,IAAmB,EAJhC;AAAA,QAKEE,KAAK,GAAG,EALV;;AAOAD,EAAAA,QAAQ,CAACE,OAAT,CAAiBC,IAAI,IAAI;AACvB,UAAMC,EAAE,GAAGC,QAAQ,CAACF,IAAI,CAACN,MAAD,CAAL,EAAe,EAAf,CAAnB;;AACA,QAAI,CAAC,uBAAOO,EAAP,CAAL,EAAiB;AACfH,MAAAA,KAAK,CAACK,IAAN,CAAW,CAAC,yBAASH,IAAI,CAACI,gBAAd,CAAD,EAAkCH,EAAlC,CAAX;AACD;AACF,GALD;;AAMA,SAAOH,KAAK,CAACO,IAAN,CAAWC,wBAAX,CAAP;AACD,CAfD;;AAiBA,IAAIC,QAAJ;;AACA,MAAMC,WAAW,GAAG,MAAMD,QAAQ,KAC5BA,QAAQ,GAAG,4BAAe;AAAEhB,EAAAA;AAAF,CAAf,CADiB,CAAlC;;eAGeiB,W","sourcesContent":["import crAdapterType1 from '../crAdapterType1';\r\nimport {\r\n  ymdToUTC,\r\n  compareByDate,\r\n  _isNaN\r\n} from './fnAdapter';\r\n\r\nconst crData = (json, option) => {\r\n  const { dfItem, dfPeriod } = option\r\n  , _pnReport = dfPeriod === 'A'\r\n       ? 'annualReports'\r\n       : 'quarterlyReports'\r\n  , _reports = json[_pnReport] || []\r\n  , _data = [];\r\n\r\n  _reports.forEach(item => {\r\n    const _y = parseInt(item[dfItem], 10)\r\n    if (!_isNaN(_y)) {\r\n      _data.push([ymdToUTC(item.fiscalDateEnding), _y])\r\n    }\r\n  })\r\n  return _data.sort(compareByDate);\r\n}\r\n\r\nlet _adapter\r\nconst FundAdapter = () => _adapter\r\n  || (_adapter = crAdapterType1({ crData }))\r\n\r\nexport default FundAdapter\r\n"],"file":"FundAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/alpha/FundAdapter.js"
+ ],
+ "file": "../../../src/adapters/alpha/FundAdapter.js",
+ "names": [
+  "crData",
+  "json",
+  "dfItem",
+  "dfPeriod",
+  "_pnReport",
+  "reduce",
+  "arr",
+  "item",
+  "_y",
+  "parseInt",
+  "push",
+  "fiscalDateEnding",
+  "sort",
+  "compareByDate",
+  "_adapter",
+  "FundAdapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAMA,MAAMA,MAAM,GAAG,CACbC,IADa,WAGV;AAAA,MADH;AAAEC,IAAAA,MAAF;AAAUC,IAAAA;AAAV,GACG;;AACH,QAAMC,SAAS,GAAGD,QAAQ,KAAK,GAAb,GACd,eADc,GAEd,kBAFJ;;AAIA,SAAO,CAACF,IAAI,CAACG,SAAD,CAAJ,IAAmB,EAApB,EACJC,MADI,CACG,CAACC,GAAD,EAAMC,IAAN,KAAe;AACrB,UAAMC,EAAE,GAAGC,QAAQ,CAACF,IAAI,CAACL,MAAD,CAAL,EAAe,EAAf,CAAnB;;AACA,QAAI,CAAC,uBAAOM,EAAP,CAAL,EAAiB;AACfF,MAAAA,GAAG,CAACI,IAAJ,CAAS,CAAC,yBAASH,IAAI,CAACI,gBAAd,CAAD,EAAkCH,EAAlC,CAAT;AACD;;AACD,WAAOF,GAAP;AACD,GAPI,EAOF,EAPE,EAQJM,IARI,CAQCC,wBARD,CAAP;AASD,CAjBD;;AAmBA,IAAIC,QAAJ;;AACA,MAAMC,WAAW,GAAG,MAAMD,QAAQ,KAC5BA,QAAQ,GAAG,4BAAe;AAAEd,EAAAA;AAAF,CAAf,CADiB,CAAlC;;eAGee,W"
+}

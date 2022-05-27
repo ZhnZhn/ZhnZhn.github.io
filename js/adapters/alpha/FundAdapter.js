@@ -9,24 +9,23 @@ var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 
 var _fnAdapter = require("./fnAdapter");
 
-const crData = (json, option) => {
-  const {
+const crData = (json, _ref) => {
+  let {
     dfItem,
     dfPeriod
-  } = option,
-        _pnReport = dfPeriod === 'A' ? 'annualReports' : 'quarterlyReports',
-        _reports = json[_pnReport] || [],
-        _data = [];
+  } = _ref;
 
-  _reports.forEach(item => {
+  const _pnReport = dfPeriod === 'A' ? 'annualReports' : 'quarterlyReports';
+
+  return (json[_pnReport] || []).reduce((arr, item) => {
     const _y = parseInt(item[dfItem], 10);
 
     if (!(0, _fnAdapter._isNaN)(_y)) {
-      _data.push([(0, _fnAdapter.ymdToUTC)(item.fiscalDateEnding), _y]);
+      arr.push([(0, _fnAdapter.ymdToUTC)(item.fiscalDateEnding), _y]);
     }
-  });
 
-  return _data.sort(_fnAdapter.compareByDate);
+    return arr;
+  }, []).sort(_fnAdapter.compareByDate);
 };
 
 let _adapter;
