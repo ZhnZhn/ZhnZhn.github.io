@@ -1,18 +1,19 @@
-import { memo } from 'react'
-import DOMPurify from 'dompurify'
+import { memo } from 'react';
+import DOMPurify from 'dompurify';
 
-const DivHtml = memo(({ str, className, style }) => {
+const DivHtml = memo(({
+  str,
+  className,
+  style
+}) => {
   const __html = DOMPurify.sanitize(str);
-  if (!__html){
-    return null;
-  }
-  return (
+  return __html ? (
     <div
       className={className}
       style={style}
       dangerouslySetInnerHTML={{ __html }}
     />
-  );
+  ) : null;
 })
 DivHtml.isHtml = str => Boolean(DOMPurify.sanitize(str))
 

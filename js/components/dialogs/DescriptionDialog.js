@@ -3,164 +3,99 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
+
+var _useHasNotEqual = _interopRequireDefault(require("../hooks/useHasNotEqual"));
+
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 
 var _fnFetch = require("../../utils/fnFetch");
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
-var ModalDialog = _Comp["default"].ModalDialog,
-    Load = _Comp["default"].Load,
-    DivHtml = _Comp["default"].DivHtml;
-var DESCR_EMPTY = '<p class="descr__part">Description Empty for this Datasource</p>';
-var S = {
-  DIALOG: {
-    top: 54,
-    left: 20,
-    width: 'auto',
-    marginLeft: 0,
-    maxWidth: '89%'
-  },
-  DIV: {
-    padding: 16
-  }
+var _jsxRuntime = require("react/jsx-runtime");
+
+const {
+  ModalDialog,
+  Load,
+  DivHtml
+} = _Comp.default;
+const EMPTY_DESCR = '<p class="descr__part">Description empty</p>';
+const INITIAL_DESCR = '';
+const S_DIALOG = {
+  top: 54,
+  left: 20,
+  width: 'auto',
+  maxWidth: '89%',
+  marginLeft: 0
+},
+      S_DIV = {
+  padding: 16
 };
 
-var _isNewShow = function _isNewShow(prevProps, props) {
-  return prevProps !== props && prevProps.isShow !== props.isShow;
-};
+const _crState = (isLoading, isLoadFailed, errMsg, descrHtml) => ({
+  isLoading,
+  isLoadFailed,
+  errMsg,
+  descrHtml
+});
 
-var _isUpdateDescr = function _isUpdateDescr(prevProps, props, state) {
-  if (_isNewShow(prevProps, props) && props.isShow && state.isLoadFailed) {
-    return true;
-  }
+const DescriptionDialog = (0, _memoIsShow.default)(props => {
+  const {
+    isShow,
+    data,
+    onClose
+  } = props,
+        {
+    descrUrl
+  } = data || {},
+        [{
+    isLoading,
+    isLoadFailed,
+    errMsg,
+    descrHtml
+  }, setState] = (0, _react.useState)(() => _crState(false, false, '', INITIAL_DESCR)),
+        _isNextProps = (0, _useHasNotEqual.default)(props),
+        _isNextDescrUrl = (0, _useHasNotEqual.default)(descrUrl),
+        _isLoadDescr = !isLoading && isShow && descrUrl && (descrHtml === INITIAL_DESCR || _isNextDescrUrl || _isNextProps && isLoadFailed);
 
-  return _isNewShow(prevProps, props) && prevProps.data.descrUrl !== props.data.descrUrl;
-};
-
-var DescriptionDialog = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(DescriptionDialog, _Component);
-
-  function DescriptionDialog() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-    _this.state = {
-      isLoading: false,
-      isLoadFailed: false,
-      errMsg: '',
-      descrHtml: ''
-    };
-
-    _this._loadDescr = function (descrUrl) {
-      if (descrUrl === void 0) {
-        descrUrl = '';
-      }
-
-      if (descrUrl) {
-        _this.setState({
-          isLoading: true
-        }, function () {
-          return (0, _fnFetch.fetchTxt)({
-            uri: descrUrl,
-            onFetch: _this._setDescrHtml,
-            onCatch: _this._onFailed
-          });
-        });
-      } else {
-        _this._setDescrHtml();
-      }
-    };
-
-    _this._setDescrHtml = function (_temp) {
-      var _ref = _temp === void 0 ? {} : _temp,
-          _ref$json = _ref.json,
-          text = _ref$json === void 0 ? DESCR_EMPTY : _ref$json;
-
-      _this.setState({
-        isLoading: false,
-        isLoadFailed: false,
-        errMsg: '',
-        descrHtml: text
+  (0, _react.useEffect)(() => {
+    if (_isLoadDescr) {
+      setState(prevState => ({ ...prevState,
+        isLoading: true
+      }));
+      (0, _fnFetch.fetchTxt)({
+        uri: descrUrl,
+        onFetch: function (_temp) {
+          let {
+            json
+          } = _temp === void 0 ? {} : _temp;
+          return setState(_crState(false, false, '', json || EMPTY_DESCR));
+        },
+        onCatch: function (_temp2) {
+          let {
+            error
+          } = _temp2 === void 0 ? {} : _temp2;
+          return setState(_crState(false, true, error.message, EMPTY_DESCR));
+        }
       });
-    };
-
-    _this._onFailed = function (_temp2) {
-      var _ref2 = _temp2 === void 0 ? {} : _temp2,
-          error = _ref2.error;
-
-      _this.setState({
-        isLoading: false,
-        isLoadFailed: true,
-        errMsg: error.message
-      });
-    };
-
-    return _this;
-  }
-
-  var _proto = DescriptionDialog.prototype;
-
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
     }
-
-    return true;
-  };
-
-  _proto.componentDidMount = function componentDidMount() {
-    this._loadDescr(this.props.data.descrUrl);
-  };
-
-  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
-    if (_isUpdateDescr(prevProps, this.props, this.state)) {
-      var data = this.props.data,
-          descrUrl = data.descrUrl;
-
-      this._loadDescr(descrUrl);
-    }
-  };
-
-  _proto.render = function render() {
-    var _this$props = this.props,
-        isShow = _this$props.isShow,
-        onClose = _this$props.onClose,
-        _this$state = this.state,
-        isLoading = _this$state.isLoading,
-        isLoadFailed = _this$state.isLoadFailed,
-        errMsg = _this$state.errMsg,
-        descrHtml = _this$state.descrHtml;
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalDialog, {
-      caption: "About Datasource",
-      isShow: isShow,
-      style: S.DIALOG,
-      onClose: onClose,
-      children: isLoading ? /*#__PURE__*/(0, _jsxRuntime.jsx)(Load.Loading, {}) : isLoadFailed ? /*#__PURE__*/(0, _jsxRuntime.jsx)(Load.LoadFailed, {
-        errMsg: errMsg
-      }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(DivHtml, {
-        style: S.DIV,
-        str: descrHtml
-      })
-    });
-  };
-
-  return DescriptionDialog;
-}(_react.Component);
-
-DescriptionDialog.defaultProps = {
-  data: {}
-};
+  }, [_isLoadDescr, descrUrl]);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalDialog, {
+    caption: "About Datasource",
+    isShow: isShow,
+    style: S_DIALOG,
+    onClose: onClose,
+    children: isLoading ? /*#__PURE__*/(0, _jsxRuntime.jsx)(Load.Loading, {}) : isLoadFailed ? /*#__PURE__*/(0, _jsxRuntime.jsx)(Load.LoadFailed, {
+      errMsg: errMsg
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(DivHtml, {
+      style: S_DIV,
+      str: descrHtml
+    })
+  });
+});
 var _default = DescriptionDialog;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=DescriptionDialog.js.map

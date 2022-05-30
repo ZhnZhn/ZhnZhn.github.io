@@ -1,125 +1,96 @@
-import { Component } from 'react';
+import {
+  useState,
+  useEffect
+} from 'react';
+import useHasNotEqual from '../hooks/useHasNotEqual';
+import memoIsShow from '../hoc/memoIsShow';
 
 import { fetchTxt } from '../../utils/fnFetch';
-import Comp from '../Comp'
+import Comp from '../Comp';
 
 const { ModalDialog, Load, DivHtml } = Comp;
 
-const DESCR_EMPTY = '<p class="descr__part">Description Empty for this Datasource</p>';
-const S = {
-  DIALOG: {
-    top: 54,
-    left: 20,
-    width: 'auto',
-    marginLeft: 0,
-    maxWidth: '89%'
-  },
-  DIV: {
-    padding: 16
-  }
-};
+const EMPTY_DESCR = '<p class="descr__part">Description empty</p>';
+const INITIAL_DESCR = '';
+const S_DIALOG = {
+  top: 54,
+  left: 20,
+  width: 'auto',
+  maxWidth: '89%',
+  marginLeft: 0
+}
+, S_DIV = { padding: 16 };
 
-const _isNewShow = (prevProps, props ) => prevProps !== props
- && prevProps.isShow !== props.isShow;
+const _crState = (
+  isLoading,
+  isLoadFailed,
+  errMsg,
+  descrHtml
+) => ({
+  isLoading,
+  isLoadFailed,
+  errMsg,
+  descrHtml
+})
 
-const _isUpdateDescr = (
-  prevProps, props, state
-) => {
-  if (_isNewShow(prevProps, props)
-      && props.isShow
-      && state.isLoadFailed) {
-    return true;
-  }
-  return _isNewShow(prevProps, props)
-    && prevProps.data.descrUrl !== props.data.descrUrl;
-};
-
-class DescriptionDialog extends Component {
-  static defaultProps = {
-    data: {}
-  }
-
-  state = {
-    isLoading: false,
-    isLoadFailed: false,
-    errMsg: '',
-    descrHtml: '',
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (nextProps !== this.props
-      && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
-    return true;
-  }
-
-  componentDidMount(){
-    this._loadDescr(this.props.data.descrUrl)
-  }
-
-  componentDidUpdate(prevProps) {
-    if ( _isUpdateDescr(prevProps, this.props, this.state) ) {
-      const { data } = this.props
-      , { descrUrl } = data;
-      this._loadDescr(descrUrl)
-    }
-  }
-
-  _loadDescr = (descrUrl='') => {
-     if (descrUrl) {
-       this.setState({
-         isLoading: true
-       }, () => fetchTxt({
-         uri: descrUrl,
-         onFetch: this._setDescrHtml,
-         onCatch: this._onFailed
-       }))
-     } else {
-       this._setDescrHtml();
-     }
-  }
-  _setDescrHtml = ({ json:text=DESCR_EMPTY }={}) => {
-    this.setState({
-      isLoading: false,
-      isLoadFailed: false,
-      errMsg: '',
-      descrHtml: text
-    })
-  }
-  _onFailed = ({ error }={}) => {
-    this.setState({
-      isLoading: false,
-      isLoadFailed: true,
-      errMsg: error.message
-    })
-  }
-
-  render(){
-    const {
-      isShow,
-      onClose
-    } = this.props
-    , {
+const DescriptionDialog = memoIsShow((props) => {
+  const {
+    isShow,
+    data,
+    onClose
+  } = props
+  , { descrUrl } = data || {}
+  , [{
       isLoading,
       isLoadFailed,
       errMsg,
-      descrHtml
-    } = this.state;
-    return (
-       <ModalDialog
-         caption="About Datasource"
-         isShow={isShow}
-         style={S.DIALOG}
-         onClose={onClose}
-       >
-         {isLoading ? <Load.Loading />
-            : isLoadFailed ? <Load.LoadFailed errMsg={errMsg} />
-            : <DivHtml style={S.DIV} str={descrHtml} />
-         }
-       </ModalDialog>
-    );
-  }
-}
+      descrHtml },
+      setState
+  ] = useState(() => _crState(
+    false, false, '', INITIAL_DESCR
+  ))
+  , _isNextProps = useHasNotEqual(props)
+  , _isNextDescrUrl = useHasNotEqual(descrUrl)
+  , _isLoadDescr = !isLoading && isShow && descrUrl && (
+      descrHtml === INITIAL_DESCR
+      || _isNextDescrUrl
+      || _isNextProps && isLoadFailed
+  )
+
+  useEffect(() => {
+     if (_isLoadDescr) {
+        setState(prevState => ({
+          ...prevState,
+          isLoading: true
+        }))
+        fetchTxt({
+          uri: descrUrl,
+          onFetch: ({ json }={}) => setState(
+             _crState(false, false, '', json || EMPTY_DESCR)
+          ),
+          onCatch: ({ error }={}) => setState(
+            _crState(false, true, error.message, EMPTY_DESCR
+            )
+          )
+        })
+     }
+  }, [_isLoadDescr, descrUrl])
+
+  return (
+    <ModalDialog
+      caption="About Datasource"
+      isShow={isShow}
+      style={S_DIALOG}
+      onClose={onClose}
+    >
+      {isLoading
+         ? <Load.Loading />
+         : isLoadFailed
+             ? <Load.LoadFailed errMsg={errMsg} />
+             : <DivHtml style={S_DIV} str={descrHtml} />
+      }
+    </ModalDialog>
+  );
+})
 
 export default DescriptionDialog
