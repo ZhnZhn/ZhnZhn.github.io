@@ -10,24 +10,9 @@ var _isEmpty = _interopRequireDefault(require("../../utils/isEmpty"));
 var _fnAdapter = require("./fnAdapter");
 
 const ROOT = 'https://www.alphavantage.co/query',
-      DF_TICKET = 'MSFT',
-      DF_SIZE = 'compact',
-      DF_PERIOD = '50',
-      DF_FN_ECONOMICS = "ECONOMICS",
       ERR_PROP = 'Error Message',
       REQ_ERROR = 'Request Error',
-      _assign = Object.assign,
-      _isArr = Array.isArray;
-
-const _getOneTwo = _ref => {
-  let {
-    value,
-    outputsize,
-    items
-  } = _ref;
-  return _isArr(items) ? [(0, _fnAdapter.getValue)(items[0]), (0, _fnAdapter.getValue)(items[1])] //Stocks by Sectors case
-  : [value || DF_TICKET, outputsize || DF_SIZE];
-};
+      _assign = Object.assign;
 
 const _crEconomicsQuery = option => {
   const {
@@ -44,10 +29,47 @@ const _crEconomicsQuery = option => {
   return "function=" + value;
 };
 
+const _crFnSymbolQuery = (fnName, symbol) => "function=" + fnName + "&symbol=" + symbol;
+
+const _getInterval = intervalValue => {
+  const dfFn = intervalValue.split('&')[0],
+        dfT = (dfFn || '').replace('TIME_SERIES_', ''),
+        interval = dfT.split('_').map(token => (0, _fnAdapter.toUpperCaseFirst)(token.toLowerCase())).join(' ');
+  return [dfT, interval];
+};
+
+const _crEodQuery = option => {
+  const {
+    items
+  } = option,
+        [_stockItem, _intervalItem] = items,
+        ticket = (0, _fnAdapter.getValue)(_stockItem),
+        title = (0, _fnAdapter.getCaption)(_stockItem),
+        intervalValue = (0, _fnAdapter.getValue)(_intervalItem),
+        subtitle = (0, _fnAdapter.getCaption)(_intervalItem),
+        [dfT, interval] = _getInterval(intervalValue);
+
+  _assign(option, {
+    itemCaption: ticket,
+    ticket,
+    title,
+    subtitle,
+    dfT,
+    interval
+  });
+
+  return _crFnSymbolQuery(intervalValue, ticket);
+};
+
 const _crSectorQuery = () => {};
 
 const _crIntradayQuery = option => {
-  const [ticket, interval] = _getOneTwo(option),
+  const {
+    dfFn,
+    items
+  } = option,
+        ticket = (0, _fnAdapter.getValue)(items[0]),
+        interval = (0, _fnAdapter.getValue)(items[1]),
         title = ticket + " (" + interval + ")";
 
   _assign(option, {
@@ -57,28 +79,14 @@ const _crIntradayQuery = option => {
     itemCaption: title
   });
 
-  return "interval=" + interval + "&symbol=" + ticket;
-};
-
-const _crDailyQuery = option => {
-  const [ticket, outputsize] = _getOneTwo(option),
-        title = ticket + " (Daily)";
-
-  _assign(option, {
-    ticket,
-    outputsize,
-    title,
-    itemCaption: title,
-    interval: "Daily"
-  });
-
-  return "outputsize=" + outputsize + "&symbol=" + ticket;
+  return _crFnSymbolQuery(dfFn, ticket) + "&interval=" + interval;
 };
 
 const _crIncomeQuery = option => {
   const {
     items,
-    itemCaption
+    itemCaption,
+    dfFn
   } = option,
         _symbol = (0, _fnAdapter.getValue)(items[0]);
 
@@ -88,12 +96,13 @@ const _crIncomeQuery = option => {
     dfPeriod: (0, _fnAdapter.getValue)(items[2])
   });
 
-  return "symbol=" + _symbol;
+  return _crFnSymbolQuery(dfFn, _symbol);
 };
 
 const _crEarningQuery = option => {
   const {
-    items
+    items,
+    dfFn
   } = option,
         _symbol = (0, _fnAdapter.getValue)(items[0]);
 
@@ -102,23 +111,24 @@ const _crEarningQuery = option => {
     dfPeriod: (0, _fnAdapter.getValue)(items[1])
   });
 
-  return "symbol=" + _symbol;
+  return _crFnSymbolQuery(dfFn, _symbol);
 };
 
-const _crDfQuery = _ref2 => {
+const _crDfQuery = _ref => {
   let {
-    ticket = DF_TICKET,
-    period = DF_PERIOD
-  } = _ref2;
-  return "symbol=" + ticket + "&interval=daily&time_period=" + period + "&series_type=close";
+    ticket = 'MSFT',
+    period = 50,
+    indicator = 'SMA'
+  } = _ref;
+  return _crFnSymbolQuery(indicator, ticket) + "&interval=daily&time_period=" + period + "&series_type=close";
 };
 
 const _routerQuery = {
   DF: _crDfQuery,
+  ECONOMICS: _crEconomicsQuery,
+  [_fnAdapter.DF_FN_EOD]: _crEodQuery,
   SECTOR: _crSectorQuery,
   TIME_SERIES_INTRADAY: _crIntradayQuery,
-  TIME_SERIES_DAILY: _crDailyQuery,
-  TIME_SERIES_DAILY_ADJUSTED: _crDailyQuery,
   INCOME_STATEMENT: _crIncomeQuery,
   BALANCE_SHEET: _crIncomeQuery,
   CASH_FLOW: _crIncomeQuery,
@@ -127,12 +137,11 @@ const _routerQuery = {
 const AlphaApi = {
   getRequestUrl(option) {
     const {
-      indicator = 'SMA',
-      dfFn = indicator,
+      dfFn,
       apiKey
     } = option,
-          _crQuery = _routerQuery[dfFn] || _routerQuery.DF,
-          _queryParam = dfFn === DF_FN_ECONOMICS ? _crEconomicsQuery(option) : (0, _fnAdapter.joinBy)('&', "function=" + dfFn, _crQuery(option));
+          _crQuery = dfFn && _routerQuery[dfFn] || _routerQuery.DF,
+          _queryParam = _crQuery(option);
 
     option.apiKey = void 0;
     return ROOT + "?" + _queryParam + "&apikey=" + apiKey;

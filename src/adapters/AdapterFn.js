@@ -16,6 +16,7 @@ export {
   getYmdhmUTC,
   getYear,
   getCurrentYear,
+  getDaysFromYmd,
   monthIndex
 } from '../utils/DateUtils';
 import _toUpperCaseFirst from '../utils/toUpperCaseFirst'
@@ -54,6 +55,11 @@ const _fToFloatOr = dfValue => str => {
   const _v = parseFloat(str);
   return _isNaN(_v) ? dfValue : _v;
 };
+
+export const isTokenInStr = (
+  str,
+  token
+) => (str || '').indexOf(token) !== -1
 
 export const toTd = (mls) => _isNumber(mls)
   ? _toTd(mls)

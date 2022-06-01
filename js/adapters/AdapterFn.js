@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundBy = exports.numberFormat = exports.monthIndex = exports.mapIf = exports.joinBy = exports.isYNumber = exports.isNumberOrNull = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValue = exports.getFromDate = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.crZhConfig = exports.crValueMoving = exports._isNaN = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundBy = exports.numberFormat = exports.monthIndex = exports.mapIf = exports.joinBy = exports.isYNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.crZhConfig = exports.crValueMoving = exports._isNaN = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
@@ -25,6 +25,7 @@ exports.getFromDate = _DateUtils.getFromDate;
 exports.getYmdhmUTC = _DateUtils.getYmdhmUTC;
 exports.getYear = _DateUtils.getYear;
 exports.getCurrentYear = _DateUtils.getCurrentYear;
+exports.getDaysFromYmd = _DateUtils.getDaysFromYmd;
 exports.monthIndex = _DateUtils.monthIndex;
 
 var _toUpperCaseFirst2 = _interopRequireDefault(require("../utils/toUpperCaseFirst"));
@@ -43,7 +44,6 @@ var _DirectionType = require("../constants/DirectionType");
 
 var _getterPointFn = require("./getterPointFn");
 
-//import { Direction } from '../constants/Type'
 const _isNaN = Number.isNaN;
 exports._isNaN = _isNaN;
 const EMPTY = '';
@@ -64,6 +64,10 @@ const _fToFloatOr = dfValue => str => {
 
   return _isNaN(_v) ? dfValue : _v;
 };
+
+const isTokenInStr = (str, token) => (str || '').indexOf(token) !== -1;
+
+exports.isTokenInStr = isTokenInStr;
 
 const toTd = mls => _isNumber(mls) ? (0, _dateFormat.toTd)(mls) : '';
 

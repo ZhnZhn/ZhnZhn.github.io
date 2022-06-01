@@ -1,31 +1,16 @@
 import isEmpty from '../../utils/isEmpty';
 import {
+  DF_FN_EOD,
+  toUpperCaseFirst,
   crError,
   getValue,
-  getCaption,
-  joinBy
+  getCaption
 } from './fnAdapter';
 
 const ROOT = 'https://www.alphavantage.co/query'
-, DF_TICKET = 'MSFT'
-, DF_SIZE = 'compact'
-, DF_PERIOD = '50'
-, DF_FN_ECONOMICS = "ECONOMICS"
 , ERR_PROP = 'Error Message'
 , REQ_ERROR = 'Request Error'
-
-, _assign = Object.assign
-, _isArr = Array.isArray;
-
-const _getOneTwo = ({
-  value,
-  outputsize,
-  items
-}) => _isArr(items)
-  ? [getValue(items[0]), getValue(items[1])]
-  //Stocks by Sectors case
-  : [value || DF_TICKET, outputsize || DF_SIZE];
-
+, _assign = Object.assign;
 
 const _crEconomicsQuery = (
   option
@@ -40,38 +25,68 @@ const _crEconomicsQuery = (
   return `function=${value}`;
 }
 
-const _crSectorQuery = () => {};
-const _crIntradayQuery = option => {
-  const [
+const _crFnSymbolQuery = (
+  fnName,
+  symbol
+) => `function=${fnName}&symbol=${symbol}`;
+
+const _getInterval = intervalValue => {
+  const dfFn = intervalValue.split('&')[0]
+  , dfT = (dfFn || '').replace('TIME_SERIES_', '')
+  , interval = dfT
+     .split('_')
+     .map(token => toUpperCaseFirst(token.toLowerCase()))
+     .join(' ');
+  return [dfT, interval];
+}
+
+const _crEodQuery = option => {
+  const { items } = option
+  , [
+    _stockItem,
+    _intervalItem
+  ] = items
+  , ticket = getValue(_stockItem)
+  , title = getCaption(_stockItem)
+  , intervalValue = getValue(_intervalItem)
+  , subtitle = getCaption(_intervalItem)
+  , [dfT, interval] = _getInterval(intervalValue);
+
+  _assign(option, {
+    itemCaption: ticket,
     ticket,
+    title,
+    subtitle,
+    dfT,
     interval
-  ] = _getOneTwo(option)
+  })
+  return _crFnSymbolQuery(intervalValue, ticket);
+}
+
+const _crSectorQuery = () => {};
+
+const _crIntradayQuery = option => {
+  const {
+    dfFn,
+    items
+  } = option
+  , ticket = getValue(items[0])
+  , interval = getValue(items[1])
   , title = `${ticket} (${interval})`;
   _assign(option, {
-    ticket, interval,
-    title, itemCaption: title
-  })
-  return `interval=${interval}&symbol=${ticket}`;
-};
-const _crDailyQuery = option => {
-  const [
     ticket,
-    outputsize
-  ] = _getOneTwo(option)
-  , title = `${ticket} (Daily)`;
-  _assign(option, {
-     ticket,
-     outputsize,
-     title,
-     itemCaption: title,
-     interval: "Daily"
-   })
-  return `outputsize=${outputsize}&symbol=${ticket}`;
+    interval,
+    title,
+    itemCaption: title
+  })
+  return `${_crFnSymbolQuery(dfFn, ticket)}&interval=${interval}`;
 };
+
 const _crIncomeQuery = option => {
   const {
     items,
-    itemCaption
+    itemCaption,
+    dfFn
   } = option
   , _symbol = getValue(items[0]);
   _assign(option, {
@@ -79,29 +94,31 @@ const _crIncomeQuery = option => {
     dfItem: getValue(items[1]),
     dfPeriod: getValue(items[2])
   })
-  return `symbol=${_symbol}`;
+  return _crFnSymbolQuery(dfFn, _symbol);
 };
 const _crEarningQuery = option => {
-  const { items } = option
+  const { items, dfFn } = option
   , _symbol = getValue(items[0]);
   _assign(option, {
     itemCaption: _symbol,
     dfPeriod: getValue(items[1])
   })
-  return `symbol=${_symbol}`;
+  return _crFnSymbolQuery(dfFn, _symbol);
 };
 const _crDfQuery = ({
-  ticket=DF_TICKET,
-  period=DF_PERIOD
-}) => `symbol=${ticket}&interval=daily&time_period=${period}&series_type=close`;
+  ticket='MSFT',
+  period=50,
+  indicator='SMA'
+}) => `${_crFnSymbolQuery(indicator, ticket)}&interval=daily&time_period=${period}&series_type=close`;
 
 const _routerQuery = {
   DF: _crDfQuery,
+
+  ECONOMICS: _crEconomicsQuery,
+  [DF_FN_EOD]: _crEodQuery,
+
   SECTOR: _crSectorQuery,
   TIME_SERIES_INTRADAY: _crIntradayQuery,
-
-  TIME_SERIES_DAILY: _crDailyQuery,
-  TIME_SERIES_DAILY_ADJUSTED: _crDailyQuery,
 
   INCOME_STATEMENT: _crIncomeQuery,
   BALANCE_SHEET: _crIncomeQuery,
@@ -113,17 +130,13 @@ const _routerQuery = {
 const AlphaApi = {
   getRequestUrl(option) {
     const {
-      indicator='SMA',
-      dfFn=indicator,
+      dfFn,
       apiKey
     } = option
-    , _crQuery = _routerQuery[dfFn] || _routerQuery.DF
-    , _queryParam = dfFn === DF_FN_ECONOMICS
-         ? _crEconomicsQuery(option)
-         : joinBy('&',
-             `function=${dfFn}`,
-             _crQuery(option)
-           );
+    , _crQuery = (dfFn && _routerQuery[dfFn])
+        || _routerQuery.DF
+    , _queryParam = _crQuery(option);
+
     option.apiKey = void 0
     return `${ROOT}?${_queryParam}&apikey=${apiKey}`;
   },
