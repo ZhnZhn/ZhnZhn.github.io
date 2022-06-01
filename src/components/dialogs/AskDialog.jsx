@@ -1,6 +1,10 @@
-import { useRef, useCallback, useMemo } from 'react';
 //import PropTypes from "prop-types";
-import crModalDialog  from './fns/crModalDialog';
+import {
+  useRef,
+  useCallback,
+  useMemo
+} from 'react';
+import memoIsShow from '../hoc/memoIsShow';
 
 import Button from './Button'
 import ModalDialog from '../zhn-moleculs/ModalDialog';
@@ -40,7 +44,7 @@ const _getName = data => {
   return name || title || '';
 };
 
-const AskDialog = crModalDialog(({
+const AskDialog = memoIsShow(({
   isShow,
   data=_DF_DATA,
   onClose

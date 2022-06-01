@@ -1,38 +1,34 @@
 //import PropTypes from "prop-types";
-
+import memoIsShow from '../hoc/memoIsShow';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import crModalDialog from './fns/crModalDialog'
 
 const CL_ELL =  'ellipsis';
 
-const S = {
-  ROW_CAPTION: {
-    display: 'flex',
-    margin: 5,
-    lineHeight: 2,
-    fontSize: '18px',
-    fontWeight : 'bold'
-  },
-  CAPTION: {
-    display: 'inline-block',
-    color: '#f44336',
-    paddingLeft: 8,
-    paddingRight: 10
-  },
-  ITEM_ID: {
-    color: '#a487d4',
-    width: 140
-  },
-  DESCR: {
-    color: 'gray',
-    paddingLeft: 12,
-    paddingRight: 8,
-    lineHeight: 1.4,
-    fontWeight: 'bold',
-    whiteSpace: 'pre-line',
-    wordWrap: 'break-word'
-  }
-};
+const S_ROW_CAPTION = {
+  display: 'flex',
+  margin: 5,
+  lineHeight: 2,
+  fontSize: '18px',
+  fontWeight: 'bold'
+}
+, S_CAPTION = {
+  display: 'inline-block',
+  color: '#f44336',
+  padding: '0 10px 0 8px'
+}
+, S_ITEM_ID = {
+  color: '#a487d4',
+  width: 140
+}
+, S_DESCR = {
+  color: 'grey',
+  padding: '0 8px 0 12px',
+  lineHeight: 1.4,
+  fontWeight: 'bold',
+  whiteSpace: 'pre-line',
+  wordWrap: 'break-word'
+}
+
 
 /*
 AlertDialog.propTypes = {
@@ -46,7 +42,11 @@ AlertDialog.propTypes = {
 }
 */
 
-const AlertDialog = crModalDialog(({ isShow, data, onClose }) => {
+const AlertDialog = memoIsShow(({
+  isShow,
+  data,
+  onClose
+}) => {
    const {
      alertCaption='Item',
      alertItemId='',
@@ -59,19 +59,19 @@ const AlertDialog = crModalDialog(({ isShow, data, onClose }) => {
        isShow={isShow}
        onClose={onClose}
      >
-        <div style={S.ROW_CAPTION}>
-           <span style={S.CAPTION}>
+        <div style={S_ROW_CAPTION}>
+           <span style={S_CAPTION}>
              {_caption}
            </span>
            <span
              className={CL_ELL}
-             style={S.ITEM_ID}
+             style={S_ITEM_ID}
              title={alertItemId}
            >
              {alertItemId}
            </span>
         </div>
-        <p style={S.DESCR}>
+        <p style={S_DESCR}>
           {alertDescr}
         </p>
      </ModalDialog>

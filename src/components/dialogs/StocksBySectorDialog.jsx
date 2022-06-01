@@ -1,7 +1,7 @@
 import { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import { 
+import {
   CHAT_LOAD,
   ChartActions
 } from '../../flux/actions/ChartActions';
@@ -53,11 +53,10 @@ const SOURCE_OPTIONS = [
   {
     caption: 'Alpha Vantage: Daily (100)' ,
     value: 'AL',
+    route: 'TIME_SERIES_DAILY&outputsize=compact',
     dfProps: {
-      dfSubId: 'I',
-      dfFn: 'TIME_SERIES_DAILY',
-      interval: 'Daily',
-      outputsize: 'compact'
+      dfFn: 'EOD',
+      dfSubId: 'I'
     }
   },
   ...IEX_SOURCES
@@ -154,12 +153,21 @@ class StocksBySectorDialog extends Component {
     const { data, onClose } = this.props
     , { item, browserType, chartContainerType, dialogProps } = data
     , { id, text } = item || {}
-    , { caption, value, dfProps } = this._getDataSource();
+    , {
+      caption,
+      value,
+      route,
+      dfProps
+    } = this._getDataSource();
 
     ChartActions[CHAT_LOAD](
       {
         chartType: chartContainerType, browserType
       },{
+         items: [
+           {c: text, v: id},
+           {c: caption, v: route}
+         ],
          title: text,
          value: id,
          item: item,

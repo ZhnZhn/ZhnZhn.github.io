@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _crModalDialog = _interopRequireDefault(require("./fns/crModalDialog"));
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 
 var _Button = _interopRequireDefault(require("./Button"));
 
@@ -59,7 +59,7 @@ const _getName = data => {
   return name || title || '';
 };
 
-const AskDialog = (0, _crModalDialog.default)(_ref => {
+const AskDialog = (0, _memoIsShow.default)(_ref => {
   let {
     isShow,
     data = _DF_DATA,

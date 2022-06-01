@@ -5,18 +5,18 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
+
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
 var _DialogStyles = require("../styles/DialogStyles");
 
-var _crModalDialog = _interopRequireDefault(require("./fns/crModalDialog"));
-
 var _jsxRuntime = require("react/jsx-runtime");
 
 const S_CAPTION = {
+  color: '#a487d4',
   width: 400,
   paddingLeft: 10,
-  color: '#a487d4',
   lineHeight: 2,
   fontSize: '18px',
   fontWeight: 'bold'
@@ -29,7 +29,7 @@ const S_CAPTION = {
   fontWeight: 'bold',
   whiteSpace: 'pre'
 };
-const InfoDialog = (0, _crModalDialog.default)(_ref => {
+const InfoDialog = (0, _memoIsShow.default)(_ref => {
   let {
     isShow,
     data,
