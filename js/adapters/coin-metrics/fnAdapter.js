@@ -1,11 +1,15 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crError = exports.crData = exports.crConfOption = void 0;
+exports.getDaysFromYmd = exports.crError = exports.crData = exports.crConfOption = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
+exports.getDaysFromYmd = _AdapterFn.getDaysFromYmd;
+
 var _crFn = require("../crFn");
+
+exports.crError = _crFn.crError;
 
 const _crZhConfig = (option, data) => {
   const {
@@ -23,17 +27,18 @@ const _crZhConfig = (option, data) => {
   return _config;
 };
 
-const crError = _crFn.crError.bind(null, "Server Response");
-
-exports.crError = crError;
-
-const crData = json => json.metricData.series.map(_ref => {
+const crData = (json, _ref) => {
   let {
-    time,
-    values
+    metric
   } = _ref;
-  return [(0, _AdapterFn.ymdhmsToUTC)((time || '').replace('Z', ''), 'T'), parseFloat((values || [])[0])];
-});
+  return json.data.map(function (item) {
+    if (item === void 0) {
+      item = {};
+    }
+
+    return [(0, _AdapterFn.ymdhmsToUTC)((item.time || '').replace('Z', ''), 'T'), parseFloat(item[metric])];
+  });
+};
 
 exports.crData = crData;
 

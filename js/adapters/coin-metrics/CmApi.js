@@ -5,7 +5,7 @@ exports.default = void 0;
 
 var _fnAdapter = require("./fnAdapter");
 
-const URL = 'https://community-api.coinmetrics.io/v2';
+const URL = 'https://community-api.coinmetrics.io/v4';
 const _isArr = Array.isArray;
 const CmApi = {
   getRequestUrl(option) {
@@ -19,21 +19,18 @@ const CmApi = {
           {
       v: metric
     } = items[1],
-          _start = fromDate ? "&start=" + fromDate : '';
-
-    return URL + "/assets/" + assets.toLowerCase() + "/metricdata?metrics=" + metric + _start;
+          [_start, _pageSize] = fromDate ? ["&start_time=" + fromDate, (0, _fnAdapter.getDaysFromYmd)(fromDate)] : ['', 360];
+    option.metric = metric;
+    return URL + "/timeseries/asset-metrics/?assets=" + assets.toLowerCase() + "&metrics=" + metric + "&frequency=1d&page_size=" + _pageSize + _start;
   },
 
   checkResponse(json) {
     const {
-      metricData
-    } = json || {},
-          {
-      series
-    } = metricData || {};
+      data
+    } = json || {};
 
-    if (!_isArr(series)) {
-      throw (0, _fnAdapter.crError)();
+    if (!_isArr(data)) {
+      throw (0, _fnAdapter.crError)("Server Response");
     }
 
     return true;

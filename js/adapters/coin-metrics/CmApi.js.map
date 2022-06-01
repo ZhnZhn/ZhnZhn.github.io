@@ -1,1 +1,28 @@
-{"version":3,"sources":["../../../src/adapters/coin-metrics/CmApi.js"],"names":["URL","_isArr","Array","isArray","CmApi","getRequestUrl","option","items","fromDate","v","assets","metric","_start","toLowerCase","checkResponse","json","metricData","series"],"mappings":";;;;;AAAA;;AAEA,MAAMA,GAAG,GAAG,yCAAZ;AACA,MAAMC,MAAM,GAAGC,KAAK,CAACC,OAArB;AAEA,MAAMC,KAAK,GAAG;AACZC,EAAAA,aAAa,CAACC,MAAD,EAAQ;AACnB,UAAM;AAAEC,MAAAA,KAAK,GAAC,EAAR;AAAYC,MAAAA;AAAZ,QAAyBF,MAA/B;AAAA,UACE;AAAEG,MAAAA,CAAC,EAACC;AAAJ,QAAeH,KAAK,CAAC,CAAD,CADtB;AAAA,UAEE;AAAEE,MAAAA,CAAC,EAACE;AAAJ,QAAeJ,KAAK,CAAC,CAAD,CAFtB;AAAA,UAGEK,MAAM,GAAGJ,QAAQ,eAAaA,QAAb,GAA0B,EAH7C;;AAIA,WAAUR,GAAV,gBAAwBU,MAAM,CAACG,WAAP,EAAxB,4BAAmEF,MAAnE,GAA4EC,MAA5E;AACD,GAPW;;AASZE,EAAAA,aAAa,CAACC,IAAD,EAAM;AACjB,UAAM;AAAEC,MAAAA;AAAF,QAAiBD,IAAI,IAAI,EAA/B;AAAA,UACE;AAAEE,MAAAA;AAAF,QAAaD,UAAU,IAAI,EAD7B;;AAEA,QAAI,CAACf,MAAM,CAACgB,MAAD,CAAX,EAAqB;AACnB,YAAM,yBAAN;AACD;;AACD,WAAO,IAAP;AACD;;AAhBW,CAAd;eAmBeb,K","sourcesContent":["import { crError } from './fnAdapter';\r\n\r\nconst URL = 'https://community-api.coinmetrics.io/v2';\r\nconst _isArr = Array.isArray;\r\n\r\nconst CmApi = {\r\n  getRequestUrl(option){\r\n    const { items=[], fromDate } = option\r\n    , { v:assets } = items[0]\r\n    , { v:metric } = items[1]\r\n    , _start = fromDate ? `&start=${fromDate}` : '';\r\n    return `${URL}/assets/${assets.toLowerCase()}/metricdata?metrics=${metric}${_start}`\r\n  },\r\n\r\n  checkResponse(json){\r\n    const { metricData } = json || {}\r\n    , { series } = metricData || {};\r\n    if (!_isArr(series)) {\r\n      throw crError();\r\n    }\r\n    return true;\r\n  }\r\n};\r\n\r\nexport default CmApi\r\n"],"file":"CmApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-metrics/CmApi.js"
+ ],
+ "file": "../../../src/adapters/coin-metrics/CmApi.js",
+ "names": [
+  "URL",
+  "_isArr",
+  "Array",
+  "isArray",
+  "CmApi",
+  "getRequestUrl",
+  "option",
+  "items",
+  "fromDate",
+  "v",
+  "assets",
+  "metric",
+  "_start",
+  "_pageSize",
+  "toLowerCase",
+  "checkResponse",
+  "json",
+  "data"
+ ],
+ "mappings": ";;;;;AAAA;;AAKA,MAAMA,GAAG,GAAG,yCAAZ;AACA,MAAMC,MAAM,GAAGC,KAAK,CAACC,OAArB;AAEA,MAAMC,KAAK,GAAG;AACZC,EAAAA,aAAa,CAACC,MAAD,EAAQ;AACnB,UAAM;AACJC,MAAAA,KAAK,GAAC,EADF;AAEJC,MAAAA;AAFI,QAGFF,MAHJ;AAAA,UAIE;AAAEG,MAAAA,CAAC,EAACC;AAAJ,QAAeH,KAAK,CAAC,CAAD,CAJtB;AAAA,UAKE;AAAEE,MAAAA,CAAC,EAACE;AAAJ,QAAeJ,KAAK,CAAC,CAAD,CALtB;AAAA,UAME,CACEK,MADF,EAEEC,SAFF,IAGEL,QAAQ,GACR,kBAAgBA,QAAhB,EAA4B,+BAAeA,QAAf,CAA5B,CADQ,GAER,CAAC,EAAD,EAAK,GAAL,CAXJ;AAaAF,IAAAA,MAAM,CAACK,MAAP,GAAgBA,MAAhB;AACA,WAAUX,GAAV,0CAAkDU,MAAM,CAACI,WAAP,EAAlD,iBAAkFH,MAAlF,gCAAmHE,SAAnH,GAA+HD,MAA/H;AACD,GAjBW;;AAmBZG,EAAAA,aAAa,CAACC,IAAD,EAAM;AACjB,UAAM;AAAEC,MAAAA;AAAF,QAAWD,IAAI,IAAI,EAAzB;;AACA,QAAI,CAACf,MAAM,CAACgB,IAAD,CAAX,EAAmB;AACjB,YAAM,wBAAQ,iBAAR,CAAN;AACD;;AACD,WAAO,IAAP;AACD;;AAzBW,CAAd;eA4Beb,K"
+}

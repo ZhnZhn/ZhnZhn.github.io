@@ -1,9 +1,15 @@
+export {
+  getDaysFromYmd
+} from '../AdapterFn';
+export {
+  crError
+} from '../crFn';
+
 import {
   ymdhmsToUTC,
   crZhConfig
 } from '../AdapterFn';
 import {
-  crError as _crError,
   crItemConf,
   crValueConf
 } from '../crFn';
@@ -27,14 +33,13 @@ const _crZhConfig = (
 };
 
 
-export const crError = _crError.bind(null, "Server Response")
-
 export const crData = (
-  json
-) => json.metricData.series
-  .map(({ time, values }) => [
-     ymdhmsToUTC((time || '').replace('Z', ''), 'T'),
-     parseFloat((values || [])[0])
+  json,
+  { metric }
+) => json.data
+  .map((item={}) => [
+     ymdhmsToUTC((item.time || '').replace('Z', ''), 'T'),
+     parseFloat(item[metric])
   ]);
 
 export const crConfOption = (
