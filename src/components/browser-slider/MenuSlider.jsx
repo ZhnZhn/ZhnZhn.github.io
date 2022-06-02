@@ -8,22 +8,22 @@ import throttleOnce from '../../utils/throttleOnce';
 import fOnClickItem from './factoryClickItem';
 import loadItems from './loadItems';
 
-import Frame from './Frame';
 import PageList from './PageList';
 
+const PAGE_WIDTH = 300
 const S_ROOT = {
-  width: 300,
+  width: PAGE_WIDTH,
   overflow: 'hidden'
 }
 , S_PAGES = {
-  width: 1500,
+  width: 5*PAGE_WIDTH,
   overflowX: 'hidden',
   display: 'flex',
   flexFlow: 'row nowrap',
   alignItems: 'flex-start',
   transition: 'all 750ms ease-out'
 }
-, S_PAGE = { width: 300 };
+, S_PAGE = { width: PAGE_WIDTH };
 
 const _getRefValue = ref => ref.current;
 const _setRefValue = (
@@ -44,23 +44,29 @@ const _crPagesStyle = (
   refMenu,
   refDirection
 ) => {
-  let dX = '0';
   const _menuNode = _getRefValue(refMenu)
-  , _direction = _getRefValue(refDirection);
-  if (_direction !== 0 && _menuNode) {
-    const _prevInt = _getTranslateX(_menuNode);
-    dX = _direction === 1
-      ? _prevInt-300
-      : _prevInt+300
-    _setRefValue(refDirection, 0)
-  } else if (_direction === 0 && _menuNode) {
-    dX = _getTranslateX(_menuNode);
-  }
+  , _direction = _getRefValue(refDirection)
+  , dX = _direction !== 0 && _menuNode
+     ? (
+         _setRefValue(refDirection, 0),
+         _getTranslateX(_menuNode) - 1 * _direction * PAGE_WIDTH
+       )
+     : _direction === 0 && _menuNode
+          ? _getTranslateX(_menuNode)
+          : 0;
 
   return {
     ...S_PAGES,
     transform: `translateX(${dX}px)`
   };
+};
+
+const INITIAL_STATE = {
+  pageCurrent: 0,
+  pages: [{
+    id: "",
+    title: "Menu"
+  }]
 };
 
 const MenuSlider = ({
@@ -69,14 +75,12 @@ const MenuSlider = ({
 }) => {
   const _refMenu = useRef()
   , _refDirection = useRef(0)
-  , [state, setState] = useState({
-    pageCurrent: 0,
-    pages: []
-  })
-  , {
-    pageCurrent,
-    pages
-  } = state
+  , [{
+       pageCurrent,
+       pages
+    },
+    setState
+  ] = useState(INITIAL_STATE)
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hPrevPage = useCallback(throttleOnce((pageNumber) => {
        setState(prevState => {
@@ -94,53 +98,24 @@ const MenuSlider = ({
       title,
       pageNumber
     ) => {
-      const _addPageTo = (
-        pages,
-        id,
-        title
-      ) => {
-        pages.push((
-          <Frame
-            key={id}
-            id={id}
-            style={S_PAGE}
-            store={store}
-            title={title}
-            dfProps={dfProps}
-            onClickPrev={_hPrevPage}
-            onClickNext={_hNextPage}
-            loadItems={loadItems}
-            fOnClickItem={fOnClickItem}
-          />
-        ))
-      }
       setState(prevState => {
-        let { pageCurrent, pages } = prevState;
+        const { pageCurrent, pages } = prevState;
         if (pageNumber !== pageCurrent) {
           return prevState;
         }
-
-        if (pageNumber < pages.length) {
-          const _page = pages[pageNumber];
-          if (_page && _page.key !== id) {
-            if (pageNumber > 0) {
-              pages.splice(pageNumber)
-            } else {
-              pages = []
-            }
-            _addPageTo(pages, id, title)
-          }
-        } else {
-         _addPageTo(pages, id, title)
+        const _nextPageNumber = pageNumber + 1
+        , { id:_id } = pages[_nextPageNumber] || {};
+        if (id && _id !== id) {
+          pages.splice(_nextPageNumber)
+          pages.push({ id, title })
         }
-
         _setRefValue(_refDirection, 1)
         return {
           pages,
           pageCurrent: pageNumber + 1
         };
      })
-  }), [_hPrevPage, dfProps, store])
+  }), [_hPrevPage])
   /*eslint-enable react-hooks/exhaustive-deps */
   , _pagesStyle = _crPagesStyle(_refMenu, _refDirection);
 
@@ -150,20 +125,16 @@ const MenuSlider = ({
         ref={_refMenu}
         style={_pagesStyle}
       >
-        <Frame
-          style={S_PAGE}
-          title="Main Menu"
-          store={store}
-          dfProps={dfProps}
-          pageCurrent={pageCurrent}
-          pageNumber={0}
-          onClickNext={_hNextPage}
-          loadItems={loadItems}
-          fOnClickItem={fOnClickItem}
-        />
         <PageList
           pages={pages}
           pageCurrent={pageCurrent}
+          style={S_PAGE}
+          store={store}
+          dfProps={dfProps}
+          onClickPrev={_hPrevPage}
+          onClickNext={_hNextPage}
+          loadItems={loadItems}
+          fOnClickItem={fOnClickItem}
         />
       </div>
     </div>

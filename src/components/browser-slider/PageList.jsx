@@ -1,9 +1,17 @@
-import { cloneElement } from 'react'
+import Frame from './Frame';
 
-const PageList = ({ pages, pageCurrent }) => pages
- .map((page, index) => cloneElement(page, {
-     pageCurrent,
-     pageNumber: index + 1
-  }));
+const PageList = ({
+  pages,
+  onClickPrev,
+  ...restProps
+}) => pages.map((pageProps, index) => (
+  <Frame
+     {...restProps}
+     {...pageProps}
+     key={pageProps.id}
+     pageNumber={index}
+     onClickPrev={index === 0 ? void 0 : onClickPrev}
+  />
+))
 
 export default PageList

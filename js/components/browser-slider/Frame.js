@@ -36,19 +36,21 @@ const _fOnClick = (proxy, rootId, dfProps, pageNumber, onClickNext, fOnClickItem
   });
 };
 
-const Frame = ({
-  style,
-  store,
-  title,
-  id = '',
-  dfProps = {},
-  pageNumber,
-  pageCurrent,
-  onClickPrev,
-  onClickNext,
-  fOnClickItem,
-  loadItems
-}) => {
+const Frame = _ref => {
+  let {
+    style,
+    store,
+    title,
+    id = '',
+    dfProps = {},
+    pageNumber,
+    pageCurrent,
+    onClickPrev,
+    onClickNext,
+    fOnClickItem,
+    loadItems
+  } = _ref;
+
   const _refTitle = (0, _react.useRef)(),
         _refId = (0, _react.useRef)(),
         [state, setState] = (0, _react.useState)({}),
@@ -58,7 +60,7 @@ const Frame = ({
   } = state,
         proxy = _getProxy(store, dfProps),
         _fOnClickItem = (0, _react.useCallback)(_fOnClick.bind(null, proxy, id, dfProps, pageNumber, onClickNext, fOnClickItem), [proxy]),
-        _isTitle = title && onClickPrev,
+        _isTitle = pageNumber !== 0 && title && onClickPrev,
         _isFocusTitle = pageNumber === pageCurrent && (_isTitle || !_isTitle && model);
 
   (0, _react.useEffect)(() => {

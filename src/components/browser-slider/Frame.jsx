@@ -35,9 +35,11 @@ const _fOnClick = (
 const Frame = ({
   style,
   store,
-  title, id='',
+  title,
+  id='',
   dfProps={},
-  pageNumber, pageCurrent,
+  pageNumber,
+  pageCurrent,
   onClickPrev,
   onClickNext,
   fOnClickItem,
@@ -54,7 +56,8 @@ const Frame = ({
          onClickNext, fOnClickItem
        )
       , [proxy])
-  , _isTitle = title && onClickPrev
+  , _isTitle = pageNumber !== 0
+      && title && onClickPrev
   , _isFocusTitle = pageNumber === pageCurrent
       && (_isTitle || !_isTitle && model);
 
