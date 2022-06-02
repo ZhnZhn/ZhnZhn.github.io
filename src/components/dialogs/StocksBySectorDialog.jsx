@@ -1,5 +1,12 @@
-import { Component } from 'react';
-//import PropTypes from "prop-types";
+import {
+  useRef,
+  getRefValue
+} from '../uiApi';
+
+import memoIsShow from '../hoc/memoIsShow';
+import useToggle from '../hooks/useToggle';
+import useProperty from '../hooks/useProperty';
+import useEventCallback from '../hooks/useEventCallback';
 
 import {
   CHAT_LOAD,
@@ -35,7 +42,7 @@ const S_ROOT_NOT_LABELS = { width: 280 }
 , S_LINK_NOT_LABELS = { marginLeft: 8 };
 
 
-const IEX_SOURCES = [
+const IEX_CLOUD_DATA_FEEDS = [
   { a: '1 Month', b: '1m'},
   { a: '3 Months', b: '3m'},
   { a: '6 Months', b: '6m'},
@@ -47,193 +54,158 @@ const IEX_SOURCES = [
     dfType: 'chart',
     dfPeriod: b
   }
-}));
-
-const SOURCE_OPTIONS = [
-  {
-    caption: 'Alpha Vantage: Daily (100)' ,
-    value: 'AL',
-    route: 'TIME_SERIES_DAILY&outputsize=compact',
-    dfProps: {
-      dfFn: 'EOD',
-      dfSubId: 'I'
-    }
-  },
-  ...IEX_SOURCES
+}))
+, TS = 'TIME_SERIES'
+, AV_DATA_FEEDS = [
+  {c: 'Daily (100)', r: `${TS}_DAILY&outputsize=compact`},
+  {c: 'Weekly Adjusted', r: `${TS}_WEEKLY_ADJUSTED`},
+  {c: 'Monthly Adjusted', r: `${TS}_MONTHLY_ADJUSTED`},
+].map(({c, r})=>({
+  caption: `Alpha Vantage: ${c}`,
+  value: 'AL',
+  route: r,
+  dfProps: {
+    dfFn: 'EOD',
+    dfSubId: 'I'
+  }
+}))
+, DATA_SOURCE_OPTIONS = [
+  ...AV_DATA_FEEDS,
+  ...IEX_CLOUD_DATA_FEEDS
 ];
 
-const DF_SOURCE = SOURCE_OPTIONS[0];
-
+const DF_DATA_SOURCE = DATA_SOURCE_OPTIONS[0];
 const _isFn = fn => typeof fn === 'function';
-const _getItemId = props => ((props.data || {}).item || {}).id;
-const _createInitialState = props => ({
-  itemId: _getItemId(props),
-  isShowLink: false,
-});
 
-
-class StocksBySectorDialog extends Component {
-  /*
-   static propTypes = {
-     isShow: PropTypes.bool,
-     data: PropTypes.object,
-     store: PropTypes.object,
-     onClose: PropTypes.func
-   }
-  */
-
-   constructor(props){
-     super(props)
-
-     this.toolbarButtons =  [
-        {
-          caption: 'L',
-          title: 'Click to toggle labels',
-          onClick: this._hClickLabels
-        },{
-         caption: 'O',
-         title: 'Click to toggle options',
-         onClick: this._hClickLink
-       }
-     ]
-     this._commandButtons = [
-       <D.Button.Load
-         key="load"
-         onClick={this._hLoad}
-       />,
-       <D.Button.Show
-         key="show"
-         onClick={this._hShow}
-       />
-     ]
-     this.state = {
-       ..._createInitialState(props),
-       isShowLabels: true
-     }
-   }
-
-   static getDerivedStateFromProps(nextProps, prevState) {
-     if ( _getItemId(nextProps) !== prevState.itemId ) {
-       return _createInitialState(nextProps);
-     }
-     return null;
-   }
-
-   shouldComponentUpdate(nextProps, nextState){
-     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-       return false;
-     }
-     return true;
-   }
-
-   _hClickLabels = () => {
-     this.setState(prevState => ({
-      isShowLabels: !prevState.isShowLabels
-     }))
-   }
-  _hClickLink = () => {
-    this.setState(prevState => ({
-      isShowLink: !prevState.isShowLink
-    }))
-  }
-
-  _hShow = () => {
-    const { data } = this.props;
+const StocksBySectorDialog = memoIsShow(({
+  isShow,
+  data,
+  onClose
+}) => {
+  const [
+    isShowLabels,
+    toggleLabels
+  ] = useToggle(true)
+  , [
+    isShowLink,
+    toggleLink
+  ] = useToggle()
+  , _refToolbarButtons = useRef([{
+       caption: 'L',
+       title: 'Click to toggle labels',
+       onClick: toggleLabels
+     },{
+      caption: 'O',
+      title: 'Click to toggle options',
+      onClick: toggleLink
+   }])
+  , [
+    setDataSource,
+    getDataSource
+  ] = useProperty()
+  , _hShow = useEventCallback(()=>{
     if (data && _isFn(data.onShow)) {
       data.onShow()
     }
-  }
-
-  _hSelectDataSource = (item) => {
-    this._dataSource = item
-  }
-  _getDataSource = () => this._dataSource || DF_SOURCE
-
-  _hLoad = () => {
-    const { data, onClose } = this.props
-    , { item, browserType, chartContainerType, dialogProps } = data
+  })
+  , _hLoad = useEventCallback(() => {
+    const {
+      item,
+      browserType,
+      chartContainerType,
+      dialogProps
+    } = data || {}
     , { id, text } = item || {}
     , {
       caption,
       value,
       route,
       dfProps
-    } = this._getDataSource();
+    } = getDataSource() || DF_DATA_SOURCE;
 
-    ChartActions[CHAT_LOAD](
-      {
-        chartType: chartContainerType, browserType
-      },{
-         items: [
-           {c: text, v: id},
-           {c: caption, v: route}
-         ],
-         title: text,
-         value: id,
-         item: item,
-         loadId: value,
-         id: id,
-         _itemKey: `${id}_${value}`,
-         linkFn: 'NASDAQ',
-         dataSource: caption,
-         ...dialogProps,
-         ...dfProps
-       }
-    )
+    if (id) {
+      ChartActions[CHAT_LOAD](
+        {
+          chartType: chartContainerType,
+          browserType
+        },{
+           id,
+           item,
+           items: [
+             {c: text, v: id},
+             {c: caption, v: route}
+           ],
+           title: text,
+           value: id,
+           loadId: value,
+           _itemKey: `${id}_${value}`,
+           linkFn: 'NASDAQ',
+           dataSource: caption,
+           ...dialogProps,
+           ...dfProps
+         }
+      )
+    }
     onClose()
-  }
+  })
+  , _refCommandButtons = useRef([
+    <D.Button.Load
+      key="load"
+      onClick={_hLoad}
+    />,
+    <D.Button.Show
+      key="show"
+      onClick={_hShow}
+    />
+  ])
 
-  render(){
-    const { isShow, data, onClose } = this.props
-    , { item } = data || {}
-    , { text } = item || {}
-    , {
-        isShowLabels,
-        isShowLink,
-      } = this.state
-    , _style = isShowLabels
-         ? null
-         : S_ROOT_NOT_LABELS
-    , _linkStyle = isShowLabels
-         ? S_LINK
-         : {...S_LINK, ...S_LINK_NOT_LABELS};
+  const { item } = data || {}
+  , { text } = item || {}
+  , _style = isShowLabels
+       ? null
+       : S_ROOT_NOT_LABELS
+  , _linkStyle = isShowLabels
+       ? S_LINK
+       : {...S_LINK, ...S_LINK_NOT_LABELS};
 
-    return (
-      <ModalDialog
-         caption={text}
-         style={_style}
-         styleCaption={S_CAPTION}
-         isShow={isShow}
-         commandButtons={this._commandButtons}
-         onClose={onClose}
-      >
-        <D.ToolbarButtonCircle
-          buttons={this.toolbarButtons}
-        />
-        <D.RowInputSelect
-           isShowLabels={isShowLabels}
-           caption="Source"
-           placeholder={DF_SOURCE.caption}
-           options={SOURCE_OPTIONS}
-           onSelect={this._hSelectDataSource}
-        />
-        <D.ShowHide isShow={isShowLink} style={S_LINK_SHOW_HIDE}>
-          <div style={S_LINK_ROOT}>
-            {
-              isShowLabels && <span style={S_LINK_CAPTION}>
-                Link:
-              </span>
-            }
-            <NasdaqLink
-               style={_linkStyle}
-               item={item}
-               caption="NASDAQ"
-             />
-          </div>
-        </D.ShowHide>
-      </ModalDialog>
-    );
-  }
-}
+  return (
+    <ModalDialog
+       caption={text}
+       style={_style}
+       styleCaption={S_CAPTION}
+       isShow={isShow}
+       commandButtons={getRefValue(_refCommandButtons)}
+       onClose={onClose}
+    >
+      <D.ToolbarButtonCircle
+        buttons={getRefValue(_refToolbarButtons)}
+      />
+      <D.RowInputSelect
+         isShowLabels={isShowLabels}
+         caption="Source"
+         placeholder={DF_DATA_SOURCE.caption}
+         options={DATA_SOURCE_OPTIONS}
+         onSelect={setDataSource}
+      />
+      <D.ShowHide
+         isShow={isShowLink}
+         style={S_LINK_SHOW_HIDE}
+       >
+         <div style={S_LINK_ROOT}>
+           {
+             isShowLabels && <span style={S_LINK_CAPTION}>
+               Link:
+             </span>
+           }
+           <NasdaqLink
+              style={_linkStyle}
+              item={item}
+              caption="NASDAQ"
+            />
+         </div>
+      </D.ShowHide>
+    </ModalDialog>
+  );
+})
 
 export default StocksBySectorDialog

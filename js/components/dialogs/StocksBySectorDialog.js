@@ -5,7 +5,15 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
+
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
+
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+
+var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+
+var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
 
 var _ChartActions = require("../../flux/actions/ChartActions");
 
@@ -17,7 +25,6 @@ var _NasdaqLink = _interopRequireDefault(require("../native-links/NasdaqLink"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-//import PropTypes from "prop-types";
 const S_ROOT_NOT_LABELS = {
   width: 280
 },
@@ -49,7 +56,7 @@ const S_ROOT_NOT_LABELS = {
       S_LINK_NOT_LABELS = {
   marginLeft: 8
 };
-const IEX_SOURCES = [{
+const IEX_CLOUD_DATA_FEEDS = [{
   a: '1 Month',
   b: '1m'
 }, {
@@ -77,199 +84,155 @@ const IEX_SOURCES = [{
       dfPeriod: b
     }
   };
-});
-const SOURCE_OPTIONS = [{
-  caption: 'Alpha Vantage: Daily (100)',
-  value: 'AL',
-  dfProps: {
-    dfSubId: 'I',
-    dfFn: 'TIME_SERIES_DAILY',
-    interval: 'Daily',
-    outputsize: 'compact'
-  }
-}, ...IEX_SOURCES];
-const DF_SOURCE = SOURCE_OPTIONS[0];
+}),
+      TS = 'TIME_SERIES',
+      AV_DATA_FEEDS = [{
+  c: 'Daily (100)',
+  r: TS + "_DAILY&outputsize=compact"
+}, {
+  c: 'Weekly Adjusted',
+  r: TS + "_WEEKLY_ADJUSTED"
+}, {
+  c: 'Monthly Adjusted',
+  r: TS + "_MONTHLY_ADJUSTED"
+}].map(_ref2 => {
+  let {
+    c,
+    r
+  } = _ref2;
+  return {
+    caption: "Alpha Vantage: " + c,
+    value: 'AL',
+    route: r,
+    dfProps: {
+      dfFn: 'EOD',
+      dfSubId: 'I'
+    }
+  };
+}),
+      DATA_SOURCE_OPTIONS = [...AV_DATA_FEEDS, ...IEX_CLOUD_DATA_FEEDS];
+const DF_DATA_SOURCE = DATA_SOURCE_OPTIONS[0];
 
 const _isFn = fn => typeof fn === 'function';
 
-const _getItemId = props => ((props.data || {}).item || {}).id;
+const StocksBySectorDialog = (0, _memoIsShow.default)(_ref3 => {
+  let {
+    isShow,
+    data,
+    onClose
+  } = _ref3;
 
-const _createInitialState = props => ({
-  itemId: _getItemId(props),
-  isShowLink: false
-});
+  const [isShowLabels, toggleLabels] = (0, _useToggle.default)(true),
+        [isShowLink, toggleLink] = (0, _useToggle.default)(),
+        _refToolbarButtons = (0, _uiApi.useRef)([{
+    caption: 'L',
+    title: 'Click to toggle labels',
+    onClick: toggleLabels
+  }, {
+    caption: 'O',
+    title: 'Click to toggle options',
+    onClick: toggleLink
+  }]),
+        [setDataSource, getDataSource] = (0, _useProperty.default)(),
+        _hShow = (0, _useEventCallback.default)(() => {
+    if (data && _isFn(data.onShow)) {
+      data.onShow();
+    }
+  }),
+        _hLoad = (0, _useEventCallback.default)(() => {
+    const {
+      item,
+      browserType,
+      chartContainerType,
+      dialogProps
+    } = data || {},
+          {
+      id,
+      text
+    } = item || {},
+          {
+      caption,
+      value,
+      route,
+      dfProps
+    } = getDataSource() || DF_DATA_SOURCE;
 
-class StocksBySectorDialog extends _react.Component {
-  /*
-   static propTypes = {
-     isShow: PropTypes.bool,
-     data: PropTypes.object,
-     store: PropTypes.object,
-     onClose: PropTypes.func
-   }
-  */
-  constructor(props) {
-    super(props);
-
-    this._hClickLabels = () => {
-      this.setState(prevState => ({
-        isShowLabels: !prevState.isShowLabels
-      }));
-    };
-
-    this._hClickLink = () => {
-      this.setState(prevState => ({
-        isShowLink: !prevState.isShowLink
-      }));
-    };
-
-    this._hShow = () => {
-      const {
-        data
-      } = this.props;
-
-      if (data && _isFn(data.onShow)) {
-        data.onShow();
-      }
-    };
-
-    this._hSelectDataSource = item => {
-      this._dataSource = item;
-    };
-
-    this._getDataSource = () => this._dataSource || DF_SOURCE;
-
-    this._hLoad = () => {
-      const {
-        data,
-        onClose
-      } = this.props,
-            {
-        item,
-        browserType,
-        chartContainerType,
-        dialogProps
-      } = data,
-            {
-        id,
-        text
-      } = item || {},
-            {
-        caption,
-        value,
-        dfProps
-      } = this._getDataSource();
-
+    if (id) {
       _ChartActions.ChartActions[_ChartActions.CHAT_LOAD]({
         chartType: chartContainerType,
         browserType
       }, {
+        id,
+        item,
+        items: [{
+          c: text,
+          v: id
+        }, {
+          c: caption,
+          v: route
+        }],
         title: text,
         value: id,
-        item: item,
         loadId: value,
-        id: id,
         _itemKey: id + "_" + value,
         linkFn: 'NASDAQ',
         dataSource: caption,
         ...dialogProps,
         ...dfProps
       });
-
-      onClose();
-    };
-
-    this.toolbarButtons = [{
-      caption: 'L',
-      title: 'Click to toggle labels',
-      onClick: this._hClickLabels
-    }, {
-      caption: 'O',
-      title: 'Click to toggle options',
-      onClick: this._hClickLink
-    }];
-    this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Load, {
-      onClick: this._hLoad
-    }, "load"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Show, {
-      onClick: this._hShow
-    }, "show")];
-    this.state = { ..._createInitialState(props),
-      isShowLabels: true
-    };
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (_getItemId(nextProps) !== prevState.itemId) {
-      return _createInitialState(nextProps);
     }
 
-    return null;
-  }
+    onClose();
+  }),
+        _refCommandButtons = (0, _uiApi.useRef)([/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Load, {
+    onClick: _hLoad
+  }, "load"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Show, {
+    onClick: _hShow
+  }, "show")]);
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
+  const {
+    item
+  } = data || {},
+        {
+    text
+  } = item || {},
+        _style = isShowLabels ? null : S_ROOT_NOT_LABELS,
+        _linkStyle = isShowLabels ? S_LINK : { ...S_LINK,
+    ...S_LINK_NOT_LABELS
+  };
 
-    return true;
-  }
-
-  render() {
-    const {
-      isShow,
-      data,
-      onClose
-    } = this.props,
-          {
-      item
-    } = data || {},
-          {
-      text
-    } = item || {},
-          {
-      isShowLabels,
-      isShowLink
-    } = this.state,
-          _style = isShowLabels ? null : S_ROOT_NOT_LABELS,
-          _linkStyle = isShowLabels ? S_LINK : { ...S_LINK,
-      ...S_LINK_NOT_LABELS
-    };
-
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
-      caption: text,
-      style: _style,
-      styleCaption: S_CAPTION,
-      isShow: isShow,
-      commandButtons: this._commandButtons,
-      onClose: onClose,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ToolbarButtonCircle, {
-        buttons: this.toolbarButtons
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
-        isShowLabels: isShowLabels,
-        caption: "Source",
-        placeholder: DF_SOURCE.caption,
-        options: SOURCE_OPTIONS,
-        onSelect: this._hSelectDataSource
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-        isShow: isShowLink,
-        style: S_LINK_SHOW_HIDE,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-          style: S_LINK_ROOT,
-          children: [isShowLabels && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            style: S_LINK_CAPTION,
-            children: "Link:"
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_NasdaqLink.default, {
-            style: _linkStyle,
-            item: item,
-            caption: "NASDAQ"
-          })]
-        })
-      })]
-    });
-  }
-
-}
-
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
+    caption: text,
+    style: _style,
+    styleCaption: S_CAPTION,
+    isShow: isShow,
+    commandButtons: (0, _uiApi.getRefValue)(_refCommandButtons),
+    onClose: onClose,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ToolbarButtonCircle, {
+      buttons: (0, _uiApi.getRefValue)(_refToolbarButtons)
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+      isShowLabels: isShowLabels,
+      caption: "Source",
+      placeholder: DF_DATA_SOURCE.caption,
+      options: DATA_SOURCE_OPTIONS,
+      onSelect: setDataSource
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: isShowLink,
+      style: S_LINK_SHOW_HIDE,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        style: S_LINK_ROOT,
+        children: [isShowLabels && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          style: S_LINK_CAPTION,
+          children: "Link:"
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_NasdaqLink.default, {
+          style: _linkStyle,
+          item: item,
+          caption: "NASDAQ"
+        })]
+      })
+    })]
+  });
+});
 var _default = StocksBySectorDialog;
 exports.default = _default;
 //# sourceMappingURL=StocksBySectorDialog.js.map
