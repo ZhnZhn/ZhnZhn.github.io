@@ -3,9 +3,9 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
-const BrowserContext = /*#__PURE__*/(0, _react.createContext)();
+const BrowserContext = (0, _uiApi.createContext)();
 var _default = BrowserContext;
 exports.default = _default;
 //# sourceMappingURL=BrowserContext.js.map

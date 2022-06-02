@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _BrowserContext = _interopRequireDefault(require("./BrowserContext"));
 
@@ -16,15 +16,17 @@ var _jsxRuntime = require("react/jsx-runtime");
 const DF_MODEL = [];
 
 const useModel = model => {
-  const isMenuItem = (0, _react.useContext)(_BrowserContext.default);
-  return (0, _react.useMemo)(() => isMenuItem ? model.filter(isMenuItem) : model, [isMenuItem, model]);
+  const isMenuItem = (0, _uiApi.useContext)(_BrowserContext.default);
+  return (0, _uiApi.useMemo)(() => isMenuItem ? model.filter(isMenuItem) : model, [isMenuItem, model]);
 };
 
-const MenuList = /*#__PURE__*/(0, _react.memo)(({
-  refFirstItem,
-  model = DF_MODEL,
-  fOnClickItem
-}) => {
+const MenuList = (0, _uiApi.memo)(_ref => {
+  let {
+    refFirstItem,
+    model = DF_MODEL,
+    fOnClickItem
+  } = _ref;
+
   const _model = useModel(model);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {

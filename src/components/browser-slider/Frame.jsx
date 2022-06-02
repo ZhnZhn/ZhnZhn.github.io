@@ -1,4 +1,11 @@
-import { useRef, useState, useCallback, useEffect } from 'react'
+import {
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+  setRefValue,
+  getRefValue
+} from '../uiApi';
 
 import MenuTitle from './MenuTitle'
 import Page from './Page'
@@ -73,20 +80,20 @@ const Frame = ({
         .catch(err => setState({ errMsg: err.message }))
     }
     return () => {
-      clearTimeout(_refId.current)
-      _refTitle.current = null
+      clearTimeout(getRefValue(_refId))
+      setRefValue(_refTitle, null)
     }
   }, [])
 
   useEffect(() => {
     if (_isFocusTitle) {
-      clearTimeout(_refId.current);
-      _refId.current = setTimeout(()=>{
-          const _titleNode = _refTitle.current;
-          if (_titleNode) {
-           _titleNode.focus()
-          }
-      }, FOCUS_FIRST_MLS)
+      clearTimeout(getRefValue(_refId));
+      setRefValue(_refId, setTimeout(()=>{
+        const _titleNode = getRefValue(_refTitle);
+        if (_titleNode) {
+         _titleNode.focus()
+        }
+      }, FOCUS_FIRST_MLS))
     }
   }, [_isFocusTitle])
 

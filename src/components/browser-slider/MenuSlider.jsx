@@ -1,8 +1,10 @@
 import {
   useRef,
   useState,
-  useCallback
-} from 'react';
+  useCallback,
+  getRefValue,
+  setRefValue
+} from '../uiApi';
 
 import throttleOnce from '../../utils/throttleOnce';
 import fOnClickItem from './factoryClickItem';
@@ -25,12 +27,6 @@ const S_ROOT = {
 }
 , S_PAGE = { width: PAGE_WIDTH };
 
-const _getRefValue = ref => ref.current;
-const _setRefValue = (
-  ref,
-  value
-) => ref.current = value
-
 const _getTranslateX = (node) => {
   const _prevStr = node
     .style.transform
@@ -44,11 +40,11 @@ const _crPagesStyle = (
   refMenu,
   refDirection
 ) => {
-  const _menuNode = _getRefValue(refMenu)
-  , _direction = _getRefValue(refDirection)
+  const _menuNode = getRefValue(refMenu)
+  , _direction = getRefValue(refDirection)
   , dX = _direction !== 0 && _menuNode
      ? (
-         _setRefValue(refDirection, 0),
+         setRefValue(refDirection, 0),
          _getTranslateX(_menuNode) - 1 * _direction * PAGE_WIDTH
        )
      : _direction === 0 && _menuNode
@@ -87,7 +83,7 @@ const MenuSlider = ({
          const { pageCurrent } = prevState;
          return pageCurrent === 0 || pageCurrent !== pageNumber
            ? prevState
-           : _setRefValue(_refDirection, -1), {
+           : setRefValue(_refDirection, -1), {
               ...prevState,
               pageCurrent: pageNumber - 1
            };
@@ -109,7 +105,7 @@ const MenuSlider = ({
           pages.splice(_nextPageNumber)
           pages.push({ id, title })
         }
-        _setRefValue(_refDirection, 1)
+        setRefValue(_refDirection, 1)
         return {
           pages,
           pageCurrent: pageNumber + 1

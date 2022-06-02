@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
 
@@ -51,19 +51,19 @@ const Frame = _ref => {
     loadItems
   } = _ref;
 
-  const _refTitle = (0, _react.useRef)(),
-        _refId = (0, _react.useRef)(),
-        [state, setState] = (0, _react.useState)({}),
+  const _refTitle = (0, _uiApi.useRef)(),
+        _refId = (0, _uiApi.useRef)(),
+        [state, setState] = (0, _uiApi.useState)({}),
         {
     model,
     errMsg
   } = state,
         proxy = _getProxy(store, dfProps),
-        _fOnClickItem = (0, _react.useCallback)(_fOnClick.bind(null, proxy, id, dfProps, pageNumber, onClickNext, fOnClickItem), [proxy]),
+        _fOnClickItem = (0, _uiApi.useCallback)(_fOnClick.bind(null, proxy, id, dfProps, pageNumber, onClickNext, fOnClickItem), [proxy]),
         _isTitle = pageNumber !== 0 && title && onClickPrev,
         _isFocusTitle = pageNumber === pageCurrent && (_isTitle || !_isTitle && model);
 
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     if (title) {
       loadItems(proxy, dfProps, id).then(model => {
         const _nextState = _isArr(model) ? {
@@ -79,20 +79,20 @@ const Frame = _ref => {
     }
 
     return () => {
-      clearTimeout(_refId.current);
-      _refTitle.current = null;
+      clearTimeout((0, _uiApi.getRefValue)(_refId));
+      (0, _uiApi.setRefValue)(_refTitle, null);
     };
   }, []);
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     if (_isFocusTitle) {
-      clearTimeout(_refId.current);
-      _refId.current = setTimeout(() => {
-        const _titleNode = _refTitle.current;
+      clearTimeout((0, _uiApi.getRefValue)(_refId));
+      (0, _uiApi.setRefValue)(_refId, setTimeout(() => {
+        const _titleNode = (0, _uiApi.getRefValue)(_refTitle);
 
         if (_titleNode) {
           _titleNode.focus();
         }
-      }, FOCUS_FIRST_MLS);
+      }, FOCUS_FIRST_MLS));
     }
   }, [_isFocusTitle]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {

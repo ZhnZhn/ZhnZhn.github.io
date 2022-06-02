@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 
@@ -44,7 +44,7 @@ const S_BROWSER = {
       S_SCROLL_PANE = {
   height: '92%'
 };
-const BrowserSlider = /*#__PURE__*/(0, _react.memo)(props => {
+const BrowserSlider = (0, _uiApi.memo)(props => {
   const {
     isInitShow,
     caption,
@@ -57,7 +57,7 @@ const BrowserSlider = /*#__PURE__*/(0, _react.memo)(props => {
         [isFilterNotActive, toggleFilterNotActive] = (0, _useToggle.default)()
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _browserContext = (0, _react.useMemo)(() => (0, _fFilterNotActive.default)(isFilterNotActive, props.dfProps.lT), [isFilterNotActive]); //props.dfProps.lT
+        _browserContext = (0, _uiApi.useMemo)(() => (0, _fFilterNotActive.default)(isFilterNotActive, props.dfProps.lT), [isFilterNotActive]); //props.dfProps.lT
 
   /*eslint-enable react-hooks/exhaustive-deps */
 

@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _throttleOnce = _interopRequireDefault(require("../../utils/throttleOnce"));
 
@@ -34,10 +34,6 @@ const S_ROOT = {
   width: PAGE_WIDTH
 };
 
-const _getRefValue = ref => ref.current;
-
-const _setRefValue = (ref, value) => ref.current = value;
-
 const _getTranslateX = node => {
   const _prevStr = node.style.transform.substring(11).replace('px', '').replace(')', '');
 
@@ -45,9 +41,9 @@ const _getTranslateX = node => {
 };
 
 const _crPagesStyle = (refMenu, refDirection) => {
-  const _menuNode = _getRefValue(refMenu),
-        _direction = _getRefValue(refDirection),
-        dX = _direction !== 0 && _menuNode ? (_setRefValue(refDirection, 0), _getTranslateX(_menuNode) - 1 * _direction * PAGE_WIDTH) : _direction === 0 && _menuNode ? _getTranslateX(_menuNode) : 0;
+  const _menuNode = (0, _uiApi.getRefValue)(refMenu),
+        _direction = (0, _uiApi.getRefValue)(refDirection),
+        dX = _direction !== 0 && _menuNode ? ((0, _uiApi.setRefValue)(refDirection, 0), _getTranslateX(_menuNode) - 1 * _direction * PAGE_WIDTH) : _direction === 0 && _menuNode ? _getTranslateX(_menuNode) : 0;
 
   return { ...S_PAGES,
     transform: "translateX(" + dX + "px)"
@@ -68,25 +64,25 @@ const MenuSlider = _ref => {
     store
   } = _ref;
 
-  const _refMenu = (0, _react.useRef)(),
-        _refDirection = (0, _react.useRef)(0),
+  const _refMenu = (0, _uiApi.useRef)(),
+        _refDirection = (0, _uiApi.useRef)(0),
         [{
     pageCurrent,
     pages
-  }, setState] = (0, _react.useState)(INITIAL_STATE)
+  }, setState] = (0, _uiApi.useState)(INITIAL_STATE)
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _hPrevPage = (0, _react.useCallback)((0, _throttleOnce.default)(pageNumber => {
+        _hPrevPage = (0, _uiApi.useCallback)((0, _throttleOnce.default)(pageNumber => {
     setState(prevState => {
       const {
         pageCurrent
       } = prevState;
-      return pageCurrent === 0 || pageCurrent !== pageNumber ? prevState : _setRefValue(_refDirection, -1), { ...prevState,
+      return pageCurrent === 0 || pageCurrent !== pageNumber ? prevState : (0, _uiApi.setRefValue)(_refDirection, -1), { ...prevState,
         pageCurrent: pageNumber - 1
       };
     });
   }), []),
-        _hNextPage = (0, _react.useCallback)((0, _throttleOnce.default)((id, title, pageNumber) => {
+        _hNextPage = (0, _uiApi.useCallback)((0, _throttleOnce.default)((id, title, pageNumber) => {
     setState(prevState => {
       const {
         pageCurrent,
@@ -110,8 +106,7 @@ const MenuSlider = _ref => {
         });
       }
 
-      _setRefValue(_refDirection, 1);
-
+      (0, _uiApi.setRefValue)(_refDirection, 1);
       return {
         pages,
         pageCurrent: pageNumber + 1

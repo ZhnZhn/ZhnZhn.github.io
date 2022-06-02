@@ -1,4 +1,8 @@
-import { memo, useContext, useMemo } from 'react'
+import {
+  memo,
+  useContext,
+  useMemo
+} from '../uiApi';
 
 import BrowserContext from './BrowserContext';
 import MenuItem from './MenuItem';

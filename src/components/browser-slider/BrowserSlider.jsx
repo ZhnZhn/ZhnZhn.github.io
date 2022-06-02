@@ -1,4 +1,7 @@
-import { memo, useMemo } from 'react';
+import {
+  memo,
+  useMemo
+} from '../uiApi';
 
 import useBool from '../hooks/useBool';
 import useToggle from '../hooks/useToggle';
