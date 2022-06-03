@@ -1,86 +1,72 @@
-import { Component } from 'react'
+import {
+  useRef,
+  useCallback,
+  getRefValue
+} from '../uiApi';
 
-import D from '../dialogs/DialogCell'
-const { Decor, crMenuMore } = D
+import memoIsShow from '../hoc/memoIsShow';
+import useMenuMore from '../dialogs/hooks/useMenuMore';
+import useCommandButtons from '../dialogs/hooks/useCommandButtons';
+
+import D from '../dialogs/DialogCell';
 
 const S_DIALOG = { width: 300 }
 , S_ROW_TEXT = { paddingRight: 16 };
 
-
-@Decor.withToolbar
-@Decor.withLoad
-class AlphaIndicatorDialog extends Component {
-
-  constructor(props){
-    super(props)
-
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
+const AlphaSectorDialog = memoIsShow(({
+  isShow,
+  caption,
+  loadId,
+  dfSubId,
+  onLoad,
+  onShow,
+  onFront,
+  onClose,
+  onClickInfo
+}) => {
+  const [
+    isToolbar,
+    menuMoreModel
+  ] = useMenuMore(onClickInfo)
+  , _refToolbarButtons = useRef([{
+    caption: 'A',
+    title: 'About Datasouce',
+    onClick: onClickInfo
+  }])
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hLoad = useCallback(()=>{
+    onLoad({
+      loadId,
+      dfSubId,
+      indicator: 'SECTOR'
     })
+  }, [])
+  // onLoad, loadId, dfSubId
+  /*eslint-enable react-hooks/exhaustive-deps */
+  , _commandButtons = useCommandButtons(_hLoad)
 
-    this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true, noLabels: true }
-    )
-    this._commandButtons = this._crCommandsWithLoad(this)
+  return (
+    <D.DraggableDialog
+         isShow={isShow}
+         style={S_DIALOG}
+         caption={caption}
+         menuModel={menuMoreModel}
+         commandButtons={_commandButtons}
+         onShowChart={onShow}
+         onFront={onFront}
+         onClose={onClose}
+     >
+         <D.Toolbar
+            isShow={isToolbar}
+            buttons={getRefValue(_refToolbarButtons)}
+         />
+         <D.Row.Text
+           styleRoot={S_ROW_TEXT}
+           caption="AV:"
+           text="Sector Performances"
+         />
+    </D.DraggableDialog>
+  );
+})
 
-    this.state = {
-      isToolbar: true
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps){
-       if (this.props.isShow === nextProps.isShow){
-          return false;
-       }
-    }
-    return true;
-  }
-
-  _handleLoad = () => {
-    const { loadId, dfSubId, onLoad } = this.props;
-    const option = {
-      loadId, dfSubId,
-      indicator: 'SECTOR',
-    };
-    onLoad(option)
-  }
-
-  _handleClose = () => {
-    this.props.onClose()
-  }
-
-  render() {
-    const {
-            isShow, caption,
-            onShow, onFront
-          } = this.props
-        , { isToolbar } = this.state;
-
-    return (
-      <D.DraggableDialog
-           isShow={isShow}
-           style={S_DIALOG}
-           caption={caption}
-           menuModel={this._menuMore}
-           commandButtons={this._commandButtons}
-           onShowChart={onShow}
-           onFront={onFront}
-           onClose={this._handleClose}
-       >
-           <D.Toolbar
-              isShow={isToolbar}
-              buttons={this.toolbarButtons}
-           />
-           <D.Row.Text
-             styleRoot={S_ROW_TEXT}
-             caption="AV:"
-             text="Sector Performances"
-           />
-      </D.DraggableDialog>
-    );
-  }
-}
-
-export default AlphaIndicatorDialog
+export default AlphaSectorDialog

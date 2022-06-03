@@ -1,0 +1,14 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/hooks/useMenuMore.js"
+ ],
+ "file": "../../../../src/components/dialogs/hooks/useMenuMore.js",
+ "names": [
+  "useMenuMore",
+  "onAbout",
+  "isToolbar",
+  "toggleToolbar"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA;;AAEA,MAAMA,WAAW,GACfC,OADkB,IAEf;AACH,QAAM,CACJC,SADI,EAEJC,aAFI,IAGF,wBAAU,IAAV,CAHJ;AAIA,SAAO,CACLD,SADK,EAEL,yBAAW,MAAM,yBACfC,aADe,EAEfF,OAFe,CAAjB,CAFK,CAAP;AAOD,CAdD;;eAgBeD,W"
+}

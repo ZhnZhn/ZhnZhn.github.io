@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/hooks/crMenuMore.js"
+ ],
+ "file": "../../../../src/components/dialogs/hooks/crMenuMore.js",
+ "names": [
+  "CL_ROW",
+  "_crItem",
+  "name",
+  "onClick",
+  "cn",
+  "isClose",
+  "crMenuMore",
+  "onToggleToolbar",
+  "onAbout",
+  "titleCl",
+  "pageWidth",
+  "maxPages",
+  "p0"
+ ],
+ "mappings": ";;;;AAAA,MAAMA,MAAM,GAAG,8BAAf;;AAEA,MAAMC,OAAO,GAAG,CACdC,IADc,EAEdC,OAFc,MAGV;AACJD,EAAAA,IADI;AAEJC,EAAAA,OAFI;AAGJC,EAAAA,EAAE,EAAEJ,MAHA;AAIJK,EAAAA,OAAO,EAAE;AAJL,CAHU,CAAhB;;AAUA,MAAMC,UAAU,GAAG,CACjBC,eADiB,EAEjBC,OAFiB,MAGb;AACJC,EAAAA,OAAO,EAAET,MADL;AAEJU,EAAAA,SAAS,EAAE,GAFP;AAGJC,EAAAA,QAAQ,EAAE,CAHN;AAIJC,EAAAA,EAAE,EAAE,CACFX,OAAO,CAAC,gBAAD,EAAmBM,eAAnB,CADL,EAEFN,OAAO,CAAC,iBAAD,EAAoBO,OAApB,CAFL;AAJA,CAHa,CAAnB;;eAaeF,U"
+}
