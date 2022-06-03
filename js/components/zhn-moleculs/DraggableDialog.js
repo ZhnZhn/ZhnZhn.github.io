@@ -21,7 +21,7 @@ var _MenuMore = _interopRequireDefault(require("./MenuMore"));
 
 var _Interact = _interopRequireDefault(require("../../utils/Interact"));
 
-var _Dialog = _interopRequireDefault(require("./Dialog.Style"));
+var _Dialog = require("./Dialog.Style");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -50,22 +50,28 @@ const _isFn = fn => typeof fn === 'function';
 const CommandButtons = _ref => {
   let {
     buttons,
+    onLoad,
     onShow,
     onClose
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: _Dialog.default.COMMAND_DIV,
-    children: [buttons, _isFn(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+    style: _Dialog.S_COMMAND_DIV,
+    children: [buttons, _isFn(onLoad) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+      style: _Dialog.S_BT_LOAD,
+      caption: "Load",
+      title: "Load item",
+      onClick: onLoad
+    }, "load"), _isFn(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       timeout: 0,
-      style: _Dialog.default.BT,
+      style: _Dialog.S_BT,
       caption: "Show",
-      title: "Show Item Container",
+      title: "Show items",
       onClick: onShow
     }, "show"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       timeout: 0,
-      style: _Dialog.default.BT,
+      style: _Dialog.S_BT,
       caption: "Close",
-      title: "Close Draggable Dialog",
+      title: "Close dialog",
       onClick: onClose
     }, "close")]
   });
@@ -81,6 +87,7 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
     caption,
     children,
     commandButtons,
+    onLoad,
     onShowChart,
     onFront,
     onClose = FN_NOOP
@@ -91,7 +98,7 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
         [isMore, toggleIsMore] = useToggle(false),
         TS = useTheme(TH_ID),
         _className = (0, _crCn.default)(CL_DRAGGABLE_DIALOG, [isShow, CL_SHOWING]),
-        _styleShow = isShow ? _Dialog.default.SHOW : _Dialog.default.HIDE;
+        _styleShow = isShow ? _Dialog.S_SHOW : _Dialog.S_HIDE;
   /*eslint-disable react-hooks/exhaustive-deps */
 
 
@@ -113,7 +120,7 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
       "aria-hidden": !isShow,
       className: _className,
       style: { ...style,
-        ..._Dialog.default.ROOT_DIV,
+        ..._Dialog.S_ROOT_DIV,
         ...S_ROOT_DIV_DRAG,
         ..._styleShow,
         ...TS.ROOT,
@@ -122,7 +129,7 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
       onClick: onFront,
       onKeyDown: _hKeyDown,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        style: { ..._Dialog.default.CAPTION_DIV,
+        style: { ..._Dialog.S_CAPTION_DIV,
           ...TS.EL
         },
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
@@ -135,7 +142,7 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
           className: CL_NOT_SELECTED,
           children: caption
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose.default, {
-          style: _Dialog.default.SVG_CLOSE,
+          style: _Dialog.S_SVG_CLOSE,
           onClose: onClose
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
@@ -143,6 +150,7 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
         children: children
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
         buttons: commandButtons,
+        onLoad: onLoad,
         onShow: onShowChart,
         onClose: onClose
       })]
@@ -159,6 +167,7 @@ DraggableDialog.propTypes = {
     PropTypes.node
   ]),
   commandButtons: PropTypes.arrayOf(PropTypes.element),
+  onLoad: PropTypes.func,
   onShowChart: PropTypes.func,
   onFront: PropTypes.func,
   onClose: PropTypes.func

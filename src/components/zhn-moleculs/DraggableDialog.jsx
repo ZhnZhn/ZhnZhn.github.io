@@ -1,5 +1,9 @@
-import { forwardRef, useEffect } from 'react';
 //import PropTypes from "prop-types";
+import {
+  forwardRef,
+  useEffect
+} from 'react';
+
 import use from '../hooks/use';
 import useDialogFocus from './useDialogFocus';
 
@@ -19,6 +23,7 @@ import {
   S_CAPTION_DIV,
   S_COMMAND_DIV,
   S_BT,
+  S_BT_LOAD,
   S_SVG_CLOSE
 } from './Dialog.Style';
 
@@ -39,24 +44,35 @@ const TH_ID = 'DRAGGABLE_DIALOG'
   top: 30,
   left: 50,
   zIndex: 10
-}, S_CHILDREN_DIV = { cursor: 'default' };
+}
+, S_CHILDREN_DIV = { cursor: 'default' };
 
 const _isFn = fn => typeof fn === 'function';
 
 const CommandButtons = ({
   buttons,
+  onLoad,
   onShow,
   onClose
 }) => (
   <div style={S_COMMAND_DIV}>
     {buttons}
     {
+      _isFn(onLoad) && <FlatButton
+        key="load"
+        style={S_BT_LOAD}
+        caption="Load"
+        title="Load item"
+        onClick={onLoad}
+      />
+    }
+    {
       _isFn(onShow) && <FlatButton
         key="show"
         timeout={0}
         style={S_BT}
         caption="Show"
-        title="Show Item Container"
+        title="Show items"
         onClick={onShow}
       />
     }
@@ -65,7 +81,7 @@ const CommandButtons = ({
       timeout={0}
       style={S_BT}
       caption="Close"
-      title="Close Draggable Dialog"
+      title="Close dialog"
       onClick={onClose}
     />
   </div>
@@ -80,18 +96,27 @@ const DraggableDialog = forwardRef(({
   caption,
   children,
   commandButtons,
+  onLoad,
   onShowChart,
   onFront,
   onClose=FN_NOOP
 }, ref) => {
   const [
-    refRoot, refBtMore
+    refRoot,
+    refBtMore
   ] = useDialogFocus(ref, isShow)
   , _hKeyDown = useKeyEscape(onClose)
-  , [isMore, toggleIsMore] = useToggle(false)
+  , [
+    isMore,
+    toggleIsMore
+  ] = useToggle(false)
   , TS = useTheme(TH_ID)
-  , _className = crCn(CL_DRAGGABLE_DIALOG, [isShow, CL_SHOWING])
-  , _styleShow = isShow ? S_SHOW : S_HIDE;
+  , _className = crCn(
+      CL_DRAGGABLE_DIALOG,
+      [isShow, CL_SHOWING]
+    )
+  , _styleShow = isShow
+      ? S_SHOW : S_HIDE;
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(()=>{
@@ -139,9 +164,10 @@ const DraggableDialog = forwardRef(({
          {children}
       </div>
       <CommandButtons
-        buttons={commandButtons}
-        onShow={onShowChart}
-        onClose={onClose}
+         buttons={commandButtons}
+         onLoad={onLoad}
+         onShow={onShowChart}
+         onClose={onClose}
       />
     </div>
   );
@@ -157,6 +183,7 @@ DraggableDialog.propTypes = {
     PropTypes.node
   ]),
   commandButtons: PropTypes.arrayOf(PropTypes.element),
+  onLoad: PropTypes.func,
   onShowChart: PropTypes.func,
   onFront: PropTypes.func,
   onClose: PropTypes.func
