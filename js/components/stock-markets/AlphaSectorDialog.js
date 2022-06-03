@@ -13,8 +13,6 @@ var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"
 
 var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
 
-var _useCommandButtons = _interopRequireDefault(require("../dialogs/hooks/useCommandButtons"));
-
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
 var _jsxRuntime = require("react/jsx-runtime");
@@ -50,18 +48,17 @@ const AlphaSectorDialog = (0, _memoIsShow.default)(_ref => {
       dfSubId,
       indicator: 'SECTOR'
     });
-  }, []) // onLoad, loadId, dfSubId
+  }, []); // onLoad, loadId, dfSubId
 
   /*eslint-enable react-hooks/exhaustive-deps */
-  ,
-        _commandButtons = (0, _useCommandButtons.default)(_hLoad);
+
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
     style: S_DIALOG,
     caption: caption,
     menuModel: menuMoreModel,
-    commandButtons: _commandButtons,
+    onLoad: _hLoad,
     onShowChart: onShow,
     onFront: onFront,
     onClose: onClose,

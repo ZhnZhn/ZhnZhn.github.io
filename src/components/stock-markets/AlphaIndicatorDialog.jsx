@@ -1,37 +1,50 @@
-import { Component } from 'react'
+import {
+  useRef,
+  useCallback,
+  isInputValid,
+  getInputValue
+} from '../uiApi';
+
+import memoIsShow from '../hoc/memoIsShow';
+import useToggle from '../hooks/useToggle';
+import useProperty from '../hooks/useProperty';
+import useMenuMore from '../dialogs/hooks/useMenuMore';
+import useToolbar from '../dialogs/hooks/useToolbar';
 
 import D from '../dialogs/DialogCell'
-const { Decor, crMenuMore } = D
 
 const _isNaN = Number.isNaN;
 
-const DF = {
-  INDICATOR: 'SMA',
-  PERIOD: 30,
-  FOR_DAYS: 501
-};
-const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
+const DF_INDICATOR = 'SMA'
+, DF_PERIOD = 30
+, DF_FOR_DAYS = 501
+, INDICATOR_PLACEHOLDER = `Default: ${DF_INDICATOR} (${DF_PERIOD})`;
 
-const _testTicket = value => String(value).trim() === ''
-  ? false
-  : true;
+const _isValueBlank = value => (value+'')
+ .trim() === '';
 
-const _testInRangeOrEmpty = (min, max) => (value) => {
-  if (String(value).trim() === ''){
+const _testTicket = value => !_isValueBlank(value);
+
+const _testInRangeOrEmpty = (
+  min,
+  max
+) => (value) => {
+  if (_isValueBlank(value)) {
     return true;
   }
-  const n = parseInt(String(value).trim(), 10)  ;
-  if (!_isNaN(n) && n>min && n<max) {
-    return true;
-  } else {
-    return false;
-  }
+  const n = parseInt((value+'').trim(), 10);
+  return !_isNaN(n)
+    && n>min
+    && n<max;
 }
 
 const _testPeriod = _testInRangeOrEmpty(0, 201)
 const _testForDays = _testInRangeOrEmpty(250, 2500)
 
-const _crValue = (indicator, period) => {
+const _crValue = (
+  indicator,
+  period
+) => {
   switch(indicator) {
     case 'MACD': return 'MACD(12, 24, 9)';
     case 'STOCH': return 'STOCH(5, 3, 3, SMA)';
@@ -39,164 +52,136 @@ const _crValue = (indicator, period) => {
   }
 }
 
-@Decor.withToolbar
-@Decor.withLoad
-@Decor.withInitialState
-class AlphaIndicatorDialog extends Component {
+const _getInputValue = (
+  ref,
+  dfValue
+) => isInputValid(ref)
+  ? getInputValue(ref) || dfValue
+  : dfValue
 
-  constructor(props){
-    super(props)
+const AlphaIndicatorDialog = memoIsShow(({
+  isShow,
+  caption,
+  oneURI,
+  oneJsonProp,
+  oneCaption,
+  loadId,
+  onLoad,
+  onShow,
+  onFront,
+  onClose,
+  onClickInfo
+}) => {
+  const [
+    isToolbar,
+    menuMoreModel
+  ] = useMenuMore()
+  , [
+    isShowOptions,
+    toggleOptions
+  ] = useToggle()
+  , [
+    isShowLabels,
+    toggleLabels
+  ] = useToggle(true)
+  , _toolbarButtons = useToolbar({
+    toggleLabels,
+    toggleOptions,
+    onClickInfo
+  })
+  , _refTicket = useRef()
+  , _refPeriod = useRef()
+  , _refForDays = useRef()
+  , [
+    setIsSecondYAxis,
+    getIsSecondYAxis
+  ] = useProperty(false)
+  , [
+    setIndicator,
+    getIndicator
+  ] = useProperty()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hCheckSecondYAxis = useCallback(() => setIsSecondYAxis(true), [])
+  // setIsSecondYAxis
+  , _hUnCheckSecondYAxis = useCallback(() => setIsSecondYAxis(false), [])
+  // setIsSecondYAxis
+  , _hLoad = useCallback(()=>{
+     const period = _getInputValue(_refPeriod, DF_PERIOD)
+     , forDays = _getInputValue(_refForDays, DF_FOR_DAYS)
+     , ticket = _getInputValue(_refTicket)
+     , indicator = (getIndicator() || {}).value
+        || DF_INDICATOR;
+     onLoad({
+       loadId,
+       indicator,
+       ticket,
+       period,
+       forDays,
+       value: _crValue(indicator, period), //for label
+       hasSecondYAxis: getIsSecondYAxis()
+     })
+  }, [])
+  // loadId, onLoad, getIndicator, getIsSecondYAxis
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
-    })
-
-    this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true, isShowOptions: true }
-    )
-    this._commandButtons = this._crCommandsWithLoad(this)
-
-    this.state = {
-      ...this._isWithInitialState(),
-      isShowOptions: false
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps){
-       if (this.props.isShow === nextProps.isShow){
-          return false;
-       }
-    }
-    return true;
-  }
-
-  _handleSelectOne = (item) => {
-     this.indicator = item;
-  }
-
-  _handleLoad = () => {
-    const _period = (this.periodComp.isValid())
-             ? (this.periodComp.getValue() !== '')
-                 ? this.periodComp.getValue()
-                 : DF.PERIOD
-             : DF.PERIOD
-        , _forDays = (this.forDaysComp.isValid())
-             ? (this.forDaysComp.getValue() !== '')
-                   ? this.forDaysComp.getValue()
-                   : DF.FOR_DAYS
-             : DF.FOR_DAYS
-        , _ticket = (this.ticketComp.isValid())
-             ? this.ticketComp.getValue()
-             : undefined
-        , _indicator = this.indicator
-             ? this.indicator.value
-             : DF.INDICATOR;
-    const option = {
-      loadId: 'AL',
-      indicator: _indicator,
-      ticket: _ticket,
-      period: _period,
-      forDays: _forDays,
-      value: _crValue(_indicator, _period), //for label
-      hasSecondYAxis: this[HAS_SECOND_Y_AXIS]
-    }
-    this.props.onLoad(option)
-  }
-
-  _handleClose = () => {
-    //this._handleWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
-  }
-
-  _refTicket = (comp) => {
-    this.ticketComp = comp
-  }
-  _refPeriod = (comp) => {
-    this.periodComp = comp
-  }
-  _refForDays = (comp) => {
-    this.forDaysComp = comp
-  }
-  
-  _hCheckSecondYAxis = () => {
-    this[HAS_SECOND_Y_AXIS] = true
-  }
-  _hUnCheckSecondYAxis = () => {
-    this[HAS_SECOND_Y_AXIS] = false
-  }
-
-  render() {
-    const {
-            isShow, caption,
-            oneURI, oneJsonProp, oneCaption,
-            onShow, onFront
-          } = this.props
-        , {
-            isToolbar,
-            isShowLabels, isShowOptions
-          } = this.state;
-
-    return (
-      <D.DraggableDialog
-           isShow={isShow}
-           caption={caption}
-           menuModel={this._menuMore}
-           commandButtons={this._commandButtons}
-           onShowChart={onShow}
-           onFront={onFront}
-           onClose={this._handleClose}
-       >
-           <D.Toolbar
-              isShow={isToolbar}
-              buttons={this.toolbarButtons}
-           />
-           <D.SelectWithLoad
-             isShow={isShow}
-             isShowLabels={isShowLabels}
-             uri={oneURI}
-             jsonProp={oneJsonProp}
-             caption={oneCaption}
-             optionNames="Items"
-             onSelect={this._handleSelectOne}
-           />
-          <D.RowPattern
-            ref={this._refTicket}
-            isShowLabels={isShowLabels}
-            caption="Ticket"
-            placeholder="Nyse or Nasdaq Ticket"
-            onTest={_testTicket}
-            errorMsg="Not Empty"
-          />
-          <D.ShowHide isShow={isShowOptions}>
-            <D.RowPattern
-              ref={this._refPeriod}
-              isShowLabels={isShowLabels}
-              caption="Period"
-              placeholder={`Default: ${DF.PERIOD}`}
-              onTest={_testPeriod}
-              errorMsg="Number in range 1-200"
-            />
-            <D.RowPattern
-              ref={this._refForDays}
-              isShowLabels={isShowLabels}
-              caption="For Days"
-              placeholder={`Default: ${DF.FOR_DAYS} (2 Years)`}
-              onTest={_testForDays}
-              errorMsg="Number in range 250-2500"
-            />
-
-          </D.ShowHide>
-          <D.RowCheckBox
-            initValue={false}
-            caption="Add Seria with Second YAxis"
-            onCheck={this._hCheckSecondYAxis}
-            onUnCheck={this._hUnCheckSecondYAxis}
-          />
-      </D.DraggableDialog>
-    );
-  }
-}
+  return (
+    <D.DraggableDialog
+       isShow={isShow}
+       caption={caption}
+       menuModel={menuMoreModel}
+       onLoad={_hLoad}
+       onShowChart={onShow}
+       onFront={onFront}
+       onClose={onClose}
+    >
+      <D.Toolbar
+        isShow={isToolbar}
+        buttons={_toolbarButtons}
+      />
+      <D.RowPattern
+        ref={_refTicket}
+        isShowLabels={isShowLabels}
+        caption="Stock"
+        placeholder="Nyse or Nasdaq Symbol"
+        onTest={_testTicket}
+        errorMsg="Not Empty"
+      />
+      <D.SelectWithLoad
+        isShow={isShow}
+        isShowLabels={isShowLabels}
+        uri={oneURI}
+        jsonProp={oneJsonProp}
+        caption={oneCaption}
+        optionNames="Items"
+        placeholder={INDICATOR_PLACEHOLDER}
+        onSelect={setIndicator}
+      />
+      <D.ShowHide isShow={isShowOptions}>
+         <D.RowPattern
+           ref={_refPeriod}
+           isShowLabels={isShowLabels}
+           caption="Period"
+           placeholder={`Default: ${DF_PERIOD}`}
+           onTest={_testPeriod}
+           errorMsg="Number in range 1-200"
+        />
+        <D.RowPattern
+           ref={_refForDays}
+           isShowLabels={isShowLabels}
+           caption="For Days"
+           placeholder={`Default: ${DF_FOR_DAYS} (2 Years)`}
+           onTest={_testForDays}
+           errorMsg="Number in range 250-2500"
+        />
+      </D.ShowHide>
+      <D.RowCheckBox
+         initValue={false}
+         caption="Add Seria with Second YAxis"
+         onCheck={_hCheckSecondYAxis}
+         onUnCheck={_hUnCheckSecondYAxis}
+      />
+    </D.DraggableDialog>
+  );
+});
 
 export default AlphaIndicatorDialog

@@ -19,3 +19,17 @@ export const setRefValue = (
     ref.current = value
   }
 }
+
+export const isInputValid = ref => {
+  const inputComp = getRefValue(ref);
+  return inputComp
+    ? inputComp.isValid()
+    : false;
+}
+
+export const getInputValue = ref => {
+  const inputComp = getRefValue(ref);
+  return inputComp 
+    ? inputComp.getValue()
+    : void 0
+}

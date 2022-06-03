@@ -3,7 +3,6 @@ import { useCallback } from '../uiApi';
 import memoIsShow from '../hoc/memoIsShow';
 import useMenuMore from '../dialogs/hooks/useMenuMore';
 import useToolbar from '../dialogs/hooks/useToolbar';
-import useCommandButtons from '../dialogs/hooks/useCommandButtons';
 
 import D from '../dialogs/DialogCell';
 
@@ -36,28 +35,27 @@ const AlphaSectorDialog = memoIsShow(({
   }, [])
   // onLoad, loadId, dfSubId
   /*eslint-enable react-hooks/exhaustive-deps */
-  , _commandButtons = useCommandButtons(_hLoad)
 
   return (
     <D.DraggableDialog
-         isShow={isShow}
-         style={S_DIALOG}
-         caption={caption}
-         menuModel={menuMoreModel}
-         commandButtons={_commandButtons}
-         onShowChart={onShow}
-         onFront={onFront}
-         onClose={onClose}
-     >
-         <D.Toolbar
-            isShow={isToolbar}
-            buttons={_toolbarButtons}
-         />
-         <D.Row.Text
-           styleRoot={S_ROW_TEXT}
-           caption="AV:"
-           text="Sector Performances"
-         />
+      isShow={isShow}
+      style={S_DIALOG}
+      caption={caption}
+      menuModel={menuMoreModel}
+      onLoad={_hLoad}
+      onShowChart={onShow}
+      onFront={onFront}
+      onClose={onClose}
+    >
+      <D.Toolbar
+        isShow={isToolbar}
+        buttons={_toolbarButtons}
+      />
+      <D.Row.Text
+        styleRoot={S_ROW_TEXT}
+        caption="AV:"
+        text="Sector Performances"
+      />
     </D.DraggableDialog>
   );
 })

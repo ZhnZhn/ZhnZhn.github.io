@@ -12,20 +12,16 @@ const _crToolbarItem = (
 
 const useToolbar = ({
   toggleLabels,
+  toggleOptions,
   onClickInfo
-}) => useRefInit(() => {
-  const _arr = [];
-  if (toggleLabels) {
-    _arr.push(_crToolbarItem(
-       'L', 'Click to toggle input labels',
-       toggleLabels
-    ))
-  }
-  _arr.push(_crToolbarItem(
-    'A', 'About Datasouce',
-    onClickInfo
-  ))
-  return _arr;
-})
+}) => useRefInit(() => [
+  toggleLabels
+    ? _crToolbarItem('L', 'Click to toggle input labels', toggleLabels)
+    : void 0,
+  toggleOptions
+    ? _crToolbarItem('O', 'Click to toggle dialog options', toggleOptions)
+    : void 0,
+  _crToolbarItem('A', 'About Datasouce', onClickInfo)
+].filter(Boolean))
 
 export default useToolbar
