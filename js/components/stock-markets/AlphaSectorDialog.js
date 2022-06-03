@@ -11,6 +11,8 @@ var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
 
+var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
+
 var _useCommandButtons = _interopRequireDefault(require("../dialogs/hooks/useCommandButtons"));
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
@@ -37,11 +39,9 @@ const AlphaSectorDialog = (0, _memoIsShow.default)(_ref => {
   } = _ref;
 
   const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onClickInfo),
-        _refToolbarButtons = (0, _uiApi.useRef)([{
-    caption: 'A',
-    title: 'About Datasouce',
-    onClick: onClickInfo
-  }])
+        _toolbarButtons = (0, _useToolbar.default)({
+    onClickInfo
+  })
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
         _hLoad = (0, _uiApi.useCallback)(() => {
@@ -67,7 +67,7 @@ const AlphaSectorDialog = (0, _memoIsShow.default)(_ref => {
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,
-      buttons: (0, _uiApi.getRefValue)(_refToolbarButtons)
+      buttons: _toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Text, {
       styleRoot: S_ROW_TEXT,
       caption: "AV:",

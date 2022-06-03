@@ -1,96 +1,69 @@
-import { Component } from 'react'
+import memoIsShow from '../hoc/memoIsShow';
+import useToggle from '../hooks/useToggle';
+import useRefInit from '../hooks/useRefInit';
+import useMenuMore from '../dialogs/hooks/useMenuMore';
+import useToolbar from '../dialogs/hooks/useToolbar';
 
-import SearchAdapter from '../../adapters/alpha/SearchAdapter'
+import SearchAdapter from '../../adapters/alpha/SearchAdapter';
+import D from '../dialogs/DialogCell';
 
-import D from '../dialogs/DialogCell'
-const { Decor, crMenuMore } = D
+const ERR_DESCR = 'API key from Alpha Vantage is required'
+, ERR_CAPTION = "Without API Key";
 
-const C = {
-  ERR_DESCR: 'API key from Alpha Vantage is required',
-  ERR_CAPTION: "Without API Key"
-};
-
-@Decor.withToolbar
-@Decor.withInitialState
-class AlphaIntradayDialog extends Component {
-
-  constructor(props){
-    super(props)
-
-
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
-    })
-
-    this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true }
-    )
-
-    this._searchApi = {
-      ...SearchAdapter,
-      crUrlOptions: this._crUrlOptions,
-      onError: this.props.onError
-    }
-
-    this.state = {
-      ...this._isWithInitialState()
-    }
-  }
-
-  _crUrlOptions = () => {
-    const { getKey, loadId, onError } = this.props;
-    const apiKey = getKey(loadId);
-    if (!apiKey) {
-      onError(C.ERR_DESCR, C.ERR_CAPTION)
-      return void 0;
-    }
-    return { apiKey };
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps){
-       if (this.props.isShow === nextProps.isShow){
-          return false;
+const AlphaSearchDialog = memoIsShow(({
+  isShow,
+  caption,
+  getKey,
+  loadId,
+  onError,
+  onFront,
+  onClose,
+  onClickInfo
+}) => {
+  const [
+    isToolbar,
+    menuMoreModel
+  ] = useMenuMore(onClickInfo)
+  , [
+    isShowLabels,
+    toggleLabels
+  ] = useToggle(true)
+  , _toolbarButtons = useToolbar({
+    toggleLabels,
+    onClickInfo,
+  })
+  , _searchApi = useRefInit(() => ({
+     ...SearchAdapter,
+     onError,
+     crUrlOptions: () => {
+       const apiKey = getKey(loadId);
+       if (!apiKey) {
+         onError(ERR_DESCR, ERR_CAPTION)
+         return;
        }
-    }
-    return true;
-  }
+       return { apiKey };
+     }
+  }))
 
-  _handleClose = () => {
-    this.props.onClose();
-  }
+  return (
+    <D.DraggableDialog
+         isShow={isShow}
+         caption={caption}
+         menuModel={menuMoreModel}
+         onFront={onFront}
+         onClose={onClose}
+     >
+       <D.Toolbar
+          isShow={isToolbar}
+          buttons={_toolbarButtons}
+       />
+       <D.RowInputSearch
+         isShowLabels={isShowLabels}
+         caption="Token"
+         searchApi={_searchApi}
+       />
+    </D.DraggableDialog>
+  );
+})
 
-  render() {
-    const {
-      isShow, caption,
-      onFront,
-    } = this.props
-    , {
-      isToolbar,
-      isShowLabels
-    } = this.state;
-
-    return (
-      <D.DraggableDialog
-           isShow={isShow}
-           caption={caption}
-           menuModel={this._menuMore}
-           onFront={onFront}
-           onClose={this._handleClose}
-       >
-         <D.Toolbar
-            isShow={isToolbar}
-            buttons={this.toolbarButtons}
-         />
-         <D.RowInputSearch
-           isShowLabels={isShowLabels}
-           caption="Token"
-           searchApi={this._searchApi}
-         />
-      </D.DraggableDialog>
-    );
-  }
-}
-
-export default AlphaIntradayDialog
+export default AlphaSearchDialog

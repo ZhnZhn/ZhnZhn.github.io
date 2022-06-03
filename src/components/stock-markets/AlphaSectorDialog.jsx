@@ -1,11 +1,8 @@
-import {
-  useRef,
-  useCallback,
-  getRefValue
-} from '../uiApi';
+import { useCallback } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
 import useMenuMore from '../dialogs/hooks/useMenuMore';
+import useToolbar from '../dialogs/hooks/useToolbar';
 import useCommandButtons from '../dialogs/hooks/useCommandButtons';
 
 import D from '../dialogs/DialogCell';
@@ -28,11 +25,7 @@ const AlphaSectorDialog = memoIsShow(({
     isToolbar,
     menuMoreModel
   ] = useMenuMore(onClickInfo)
-  , _refToolbarButtons = useRef([{
-    caption: 'A',
-    title: 'About Datasouce',
-    onClick: onClickInfo
-  }])
+  , _toolbarButtons = useToolbar({ onClickInfo })
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hLoad = useCallback(()=>{
     onLoad({
@@ -58,7 +51,7 @@ const AlphaSectorDialog = memoIsShow(({
      >
          <D.Toolbar
             isShow={isToolbar}
-            buttons={getRefValue(_refToolbarButtons)}
+            buttons={_toolbarButtons}
          />
          <D.Row.Text
            styleRoot={S_ROW_TEXT}
