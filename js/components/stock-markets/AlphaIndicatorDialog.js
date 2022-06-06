@@ -11,6 +11,8 @@ var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
+var _useRefBool = _interopRequireDefault(require("../hooks/useRefBool"));
+
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
@@ -74,7 +76,7 @@ const AlphaIndicatorDialog = (0, _memoIsShow.default)(_ref => {
     onClickInfo
   } = _ref;
 
-  const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(),
+  const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onClickInfo),
         [isShowOptions, toggleOptions] = (0, _useToggle.default)(),
         [isShowLabels, toggleLabels] = (0, _useToggle.default)(true),
         _toolbarButtons = (0, _useToolbar.default)({
@@ -85,13 +87,9 @@ const AlphaIndicatorDialog = (0, _memoIsShow.default)(_ref => {
         _refTicket = (0, _uiApi.useRef)(),
         _refPeriod = (0, _uiApi.useRef)(),
         _refForDays = (0, _uiApi.useRef)(),
-        [setIsSecondYAxis, getIsSecondYAxis] = (0, _useProperty.default)(false),
+        [_refIsSecondYAxis, _hCheckSecondYAxis, _hUnCheckSecondYAxis] = (0, _useRefBool.default)(false),
         [setIndicator, getIndicator] = (0, _useProperty.default)()
   /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        _hCheckSecondYAxis = (0, _uiApi.useCallback)(() => setIsSecondYAxis(true), []) // setIsSecondYAxis
-  ,
-        _hUnCheckSecondYAxis = (0, _uiApi.useCallback)(() => setIsSecondYAxis(false), []) // setIsSecondYAxis
   ,
         _hLoad = (0, _uiApi.useCallback)(() => {
     const period = _getInputValue(_refPeriod, DF_PERIOD),
@@ -107,7 +105,7 @@ const AlphaIndicatorDialog = (0, _memoIsShow.default)(_ref => {
       forDays,
       value: _crValue(indicator, period),
       //for label
-      hasSecondYAxis: getIsSecondYAxis()
+      hasSecondYAxis: (0, _uiApi.getRefValue)(_refIsSecondYAxis)
     });
   }, []); // loadId, onLoad, getIndicator, getIsSecondYAxis
 

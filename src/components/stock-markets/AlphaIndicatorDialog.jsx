@@ -1,12 +1,14 @@
 import {
   useRef,
   useCallback,
+  getRefValue,
   isInputValid,
   getInputValue
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
+import useRefBool from '../hooks/useRefBool';
 import useProperty from '../hooks/useProperty';
 import useMenuMore from '../dialogs/hooks/useMenuMore';
 import useToolbar from '../dialogs/hooks/useToolbar';
@@ -75,7 +77,7 @@ const AlphaIndicatorDialog = memoIsShow(({
   const [
     isToolbar,
     menuMoreModel
-  ] = useMenuMore()
+  ] = useMenuMore(onClickInfo)
   , [
     isShowOptions,
     toggleOptions
@@ -93,18 +95,15 @@ const AlphaIndicatorDialog = memoIsShow(({
   , _refPeriod = useRef()
   , _refForDays = useRef()
   , [
-    setIsSecondYAxis,
-    getIsSecondYAxis
-  ] = useProperty(false)
+    _refIsSecondYAxis,
+    _hCheckSecondYAxis,
+    _hUnCheckSecondYAxis
+  ] = useRefBool(false)
   , [
     setIndicator,
     getIndicator
   ] = useProperty()
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hCheckSecondYAxis = useCallback(() => setIsSecondYAxis(true), [])
-  // setIsSecondYAxis
-  , _hUnCheckSecondYAxis = useCallback(() => setIsSecondYAxis(false), [])
-  // setIsSecondYAxis
   , _hLoad = useCallback(()=>{
      const period = _getInputValue(_refPeriod, DF_PERIOD)
      , forDays = _getInputValue(_refForDays, DF_FOR_DAYS)
@@ -118,7 +117,7 @@ const AlphaIndicatorDialog = memoIsShow(({
        period,
        forDays,
        value: _crValue(indicator, period), //for label
-       hasSecondYAxis: getIsSecondYAxis()
+       hasSecondYAxis: getRefValue(_refIsSecondYAxis)
      })
   }, [])
   // loadId, onLoad, getIndicator, getIsSecondYAxis
