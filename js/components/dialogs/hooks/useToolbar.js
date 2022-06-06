@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _useRefInit = _interopRequireDefault(require("../../hooks/useRefInit"));
 
+const CLICK_TO_TOGGLE = 'Click to toggle';
+
 const _crToolbarItem = (caption, title, onClick) => ({
   caption,
   title,
@@ -17,9 +19,11 @@ const useToolbar = _ref => {
   let {
     toggleLabels,
     toggleOptions,
+    toggleTransform,
+    toggleDate,
     onClickInfo
   } = _ref;
-  return (0, _useRefInit.default)(() => [toggleLabels ? _crToolbarItem('L', 'Click to toggle input labels', toggleLabels) : void 0, toggleOptions ? _crToolbarItem('O', 'Click to toggle dialog options', toggleOptions) : void 0, _crToolbarItem('A', 'About Datasouce', onClickInfo)].filter(Boolean));
+  return (0, _useRefInit.default)(() => [toggleLabels ? _crToolbarItem('L', CLICK_TO_TOGGLE + " input labels", toggleLabels) : void 0, toggleOptions ? _crToolbarItem('O', CLICK_TO_TOGGLE + " dialog options", toggleOptions) : void 0, toggleTransform ? _crToolbarItem('T', CLICK_TO_TOGGLE + " transform options", toggleTransform) : void 0, toggleDate ? _crToolbarItem('D', CLICK_TO_TOGGLE + " date input", toggleDate) : void 0, _crToolbarItem('A', 'About datasouce', onClickInfo)].filter(Boolean));
 };
 
 var _default = useToolbar;
