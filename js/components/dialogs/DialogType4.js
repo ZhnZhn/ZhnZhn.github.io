@@ -3,264 +3,155 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _uiApi = require("../uiApi");
 
-var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
-var _jsxRuntime = require("react/jsx-runtime.js");
+var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
-var _react = require("react");
+var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
+
+var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
+
+var _useValidationMessages = _interopRequireDefault(require("../dialogs/hooks/useValidationMessages"));
+
+var _crValidationMessages = _interopRequireDefault(require("../dialogs/hooks/crValidationMessages"));
+
+var _getFromToDates = _interopRequireDefault(require("../dialogs/hooks/getFromToDates"));
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
-var _dec, _class, _temp;
+var _jsxRuntime = require("react/jsx-runtime");
 
-var Decor = _DialogCell["default"].Decor,
-    crMenuMore = _DialogCell["default"].crMenuMore;
-var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
-var CAPTION_YAXIS = 'Add Seria with Second YAxis';
-var DialogType4 = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(DialogType4, _Component);
+const DialogType4 = (0, _memoIsShow.default)(props => {
+  const {
+    isShow,
+    noDate,
+    caption,
+    oneCaption,
+    oneNames,
+    oneURI,
+    oneJsonProp,
+    isWithOneInput,
+    twoCaption,
+    twoNames,
+    twoURI,
+    twoJsonProp,
+    isWithInputTwo,
+    threeCaption,
+    threeNames,
+    threeURI,
+    threeJsonProp,
+    isWithInputThree,
+    initFromDate,
+    initToDate,
+    msgOnNotSelected,
+    msgOnNotValidFormat,
+    onTestDate,
+    loadFn,
+    onLoad,
+    onShow,
+    onFront,
+    onClose,
+    onClickInfo
+  } = props,
+        [isToolbar, _menuMore] = (0, _useMenuMore.default)(onClickInfo),
+        [isShowLabels, toggleLabels] = (0, _useToggle.default)(true),
+        [isShowDate, toggleDate] = (0, _useToggle.default)(true),
+        _toolbarButtons = (0, _useToolbar.default)({
+    toggleLabels,
+    toggleDate: noDate ? void 0 : toggleDate,
+    onClickInfo
+  }),
+        [validationMessages, setValidationMessages, clearValidationMessages, _hClose] = (0, _useValidationMessages.default)(onClose),
+        [setOne, getOne] = (0, _useProperty.default)(),
+        [setTwo, getTwo] = (0, _useProperty.default)(),
+        [setThree, getThree] = (0, _useProperty.default)(),
+        _refDates = (0, _uiApi.useRef)()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _hLoad = (0, _uiApi.useCallback)(() => {
+    const one = getOne(),
+          two = getTwo(),
+          three = getThree(),
+          _configs = [[one, oneCaption], [two, twoCaption], threeURI ? [three, threeCaption] : void 0].filter(Boolean),
+          msgs = (0, _crValidationMessages.default)(_configs, msgOnNotSelected, _refDates);
 
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    caption: PropTypes.string,
-      oneCaption: PropTypes.string,
-    oneNames: PropTypes.string,
-    oneURI: PropTypes.string,
-    oneJsonProp: PropTypes.string,
-      twoCaption: PropTypes.string,
-    twoNames: PropTypes.string,
-    twoURI: PropTypes.string,
-    twoJsonProp: PropTypes.string,
-      noDate: PropTypes.bool,
-    noOptions: PropTypes.bool,
-      initFromDate: PropTypes.string,
-    initToDate: PropTypes.string,
-    msgOnNotValidFormat: PropTypes.func,
-    onTestDate: PropTypes.func,
-    onShow: PropTypes.func,
-      loadFn: PropTypes.func
-  }
-  */
-  function DialogType4(props) {
-    var _this;
-
-    _this = _Component.call(this, props) || this;
-
-    _this._handleSelectOne = function (one) {
-      _this.one = one;
-    };
-
-    _this._handleSelectTwo = function (two) {
-      _this.two = two;
-    };
-
-    _this._handleSelectThree = function (three) {
-      _this.three = three;
-    };
-
-    _this._handleLoad = function () {
-      _this._handleWithValidationLoad(_this._createValidationMessages(), _this._createLoadOption);
-    };
-
-    _this._createValidationMessages = function () {
-      var _this$props = _this.props,
-          oneCaption = _this$props.oneCaption,
-          twoCaption = _this$props.twoCaption,
-          threeURI = _this$props.threeURI,
-          threeCaption = _this$props.threeCaption,
-          msgOnNotSelected = _this$props.msgOnNotSelected;
-      var msg = [];
-
-      if (!_this.one) {
-        msg.push(msgOnNotSelected(oneCaption));
-      }
-
-      if (!_this.two) {
-        msg.push(msgOnNotSelected(twoCaption));
-      }
-
-      if (threeURI && !_this.three) {
-        msg.push(msgOnNotSelected(threeCaption));
-      }
-
-      if (_this.datesFragment) {
-        var _this$datesFragment$g = _this.datesFragment.getValidation(),
-            isValid = _this$datesFragment$g.isValid,
-            datesMsg = _this$datesFragment$g.datesMsg;
-
-        if (!isValid) {
-          msg = msg.concat(datesMsg);
-        }
-      }
-
-      msg.isValid = msg.length === 0 ? true : false;
-      return msg;
-    };
-
-    _this._createLoadOption = function () {
-      var _ref = _this.datesFragment ? _this.datesFragment.getValues() : {},
-          fromDate = _ref.fromDate,
-          toDate = _ref.toDate;
-
-      return _this.props.loadFn(_this.props, {
-        one: _this.one,
-        two: _this.two,
-        three: _this.three,
-        fromDate: fromDate,
-        toDate: toDate,
-        hasSecondYAxis: _this[HAS_SECOND_Y_AXIS]
-      });
-    };
-
-    _this._handleClose = function () {
-      _this._handleWithValidationClose();
-    };
-
-    _this._hCheckSecondYAxis = function () {
-      _this[HAS_SECOND_Y_AXIS] = true;
-    };
-
-    _this._hUnCheckSecondYAxis = function () {
-      _this[HAS_SECOND_Y_AXIS] = false;
-    };
-
-    _this._refDates = function (c) {
-      return _this.datesFragment = c;
-    };
-
-    _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
-      toggleToolBar: _this._toggleWithToolbar,
-      onAbout: _this._clickInfoWithToolbar
-    });
-    var noDate = props.noDate,
-        noOptions = props.noOptions;
-    _this.toolbarButtons = _this._createType2WithToolbar(props, {
-      noDate: noDate,
-      isShowOptions: !noOptions
-    });
-    _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
-    _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
-      isShowOptions: false
-    });
-    return _this;
-  }
-
-  var _proto = DialogType4.prototype;
-
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-    if (this.props !== nextProps) {
-      if (this.props.isShow === nextProps.isShow) {
-        return false;
-      }
+    if (msgs.length === 0) {
+      onLoad(loadFn(props, {
+        one,
+        two,
+        three,
+        ...(0, _getFromToDates.default)(_refDates)
+      }));
+      clearValidationMessages();
+    } else {
+      setValidationMessages(msgs);
     }
+  }, []); // props, oneCaption, twoCaption, threeCaption, threeURI, loadFn, onLoad
+  // getOne, getTwo, getThree
+  // clearValidationMessages, setValidationMessages
 
-    return true;
-  };
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  _proto.render = function render() {
-    var _this$props2 = this.props,
-        caption = _this$props2.caption,
-        isShow = _this$props2.isShow,
-        onShow = _this$props2.onShow,
-        onFront = _this$props2.onFront,
-        oneCaption = _this$props2.oneCaption,
-        oneNames = _this$props2.oneNames,
-        oneURI = _this$props2.oneURI,
-        oneJsonProp = _this$props2.oneJsonProp,
-        isWithOneInput = _this$props2.isWithOneInput,
-        twoCaption = _this$props2.twoCaption,
-        twoNames = _this$props2.twoNames,
-        twoURI = _this$props2.twoURI,
-        twoJsonProp = _this$props2.twoJsonProp,
-        isWithInputTwo = _this$props2.isWithInputTwo,
-        threeCaption = _this$props2.threeCaption,
-        threeNames = _this$props2.threeNames,
-        threeURI = _this$props2.threeURI,
-        threeJsonProp = _this$props2.threeJsonProp,
-        isWithInputThree = _this$props2.isWithInputThree,
-        initFromDate = _this$props2.initFromDate,
-        initToDate = _this$props2.initToDate,
-        msgOnNotValidFormat = _this$props2.msgOnNotValidFormat,
-        onTestDate = _this$props2.onTestDate,
-        noDate = _this$props2.noDate,
-        noOptions = _this$props2.noOptions,
-        _this$state = this.state,
-        isToolbar = _this$state.isToolbar,
-        isShowLabels = _this$state.isShowLabels,
-        isShowDate = _this$state.isShowDate,
-        isShowOptions = _this$state.isShowOptions,
-        validationMessages = _this$state.validationMessages;
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
+
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
+    isShow: isShow,
+    caption: caption,
+    menuModel: _menuMore,
+    onLoad: _hLoad,
+    onShowChart: onShow,
+    onFront: onFront,
+    onClose: _hClose,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
+      isShow: isToolbar,
+      buttons: _toolbarButtons
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
-      caption: caption,
-      menuModel: this._menuMore,
-      commandButtons: this._commandButtons,
-      onShowChart: onShow,
-      onFront: onFront,
-      onClose: this._handleClose,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
-        isShow: isToolbar,
-        buttons: this.toolbarButtons
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectWithLoad, {
-        isShow: isShow,
+      isShowLabels: isShowLabels,
+      isWithInput: isWithOneInput,
+      uri: oneURI,
+      jsonProp: oneJsonProp,
+      caption: oneCaption,
+      optionNames: oneNames,
+      onSelect: setOne
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
+      isShow: isShow,
+      isShowLabels: isShowLabels,
+      isWithInput: isWithInputTwo,
+      uri: twoURI,
+      jsonProp: twoJsonProp,
+      caption: twoCaption,
+      optionNames: twoNames,
+      onSelect: setTwo
+    }), threeURI && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
+      isShow: isShow,
+      isShowLabels: isShowLabels,
+      isWithInput: isWithInputThree,
+      uri: threeURI,
+      jsonProp: threeJsonProp,
+      caption: threeCaption,
+      optionNames: threeNames,
+      onSelect: setThree
+    }), noDate !== true && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: isShowDate,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.DatesFragment, {
+        ref: _refDates,
         isShowLabels: isShowLabels,
-        uri: oneURI,
-        jsonProp: oneJsonProp,
-        caption: oneCaption,
-        optionNames: oneNames,
-        isWithInput: isWithOneInput,
-        onSelect: this._handleSelectOne
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectWithLoad, {
-        isShow: isShow,
-        isShowLabels: isShowLabels,
-        uri: twoURI,
-        jsonProp: twoJsonProp,
-        caption: twoCaption,
-        optionNames: twoNames,
-        isWithInput: isWithInputTwo,
-        onSelect: this._handleSelectTwo
-      }), threeURI && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectWithLoad, {
-        isShow: isShow,
-        isShowLabels: isShowLabels,
-        uri: threeURI,
-        jsonProp: threeJsonProp,
-        caption: threeCaption,
-        optionNames: threeNames,
-        isWithInput: isWithInputThree,
-        onSelect: this._handleSelectThree
-      }), noDate !== true && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
-        isShow: isShowDate,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].DatesFragment, {
-          ref: this._refDates,
-          isShowLabels: isShowLabels,
-          initFromDate: initFromDate,
-          initToDate: initToDate,
-          msgOnNotValidFormat: msgOnNotValidFormat,
-          onTestDate: onTestDate
-        })
-      }), noOptions !== true && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
-        isShow: isShowOptions,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowCheckBox, {
-          initValue: false,
-          caption: CAPTION_YAXIS,
-          onCheck: this._hCheckSecondYAxis,
-          onUnCheck: this._hUnCheckSecondYAxis
-        })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
-        validationMessages: validationMessages
-      })]
-    });
-  };
-
-  return DialogType4;
-}(_react.Component), _temp)) || _class);
+        initFromDate: initFromDate,
+        initToDate: initToDate,
+        msgOnNotValidFormat: msgOnNotValidFormat,
+        onTestDate: onTestDate
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
+      validationMessages: validationMessages
+    })]
+  });
+});
 var _default = DialogType4;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=DialogType4.js.map
