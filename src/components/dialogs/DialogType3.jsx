@@ -70,8 +70,9 @@ const DialogType3 = memoIsShow((
   , [
     validationMessages,
     setValidationMessages,
-    clearValidationMessages
-  ] = useValidationMessages()
+    clearValidationMessages,
+    _hClose
+  ] = useValidationMessages(onClose)
   , _refDates = useRef()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hLoad = useCallback(() => {
@@ -95,11 +96,6 @@ const DialogType3 = memoIsShow((
   // getItem, msgOnNotSelected, oneCaption,
   // loadFn, onLoad
   // clearValidationMessages, setValidationMessages
-  , _hClose = useCallback(() => {
-    onClose()
-    clearValidationMessages()
-  }, [])
-  // onClose, clearValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
   , _oneURI = oneURI || optionURI;
 

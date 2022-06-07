@@ -61,7 +61,7 @@ const DialogType3 = (0, _memoIsShow.default)(props => {
     onClickInfo
   }),
         [setItem, getItem] = (0, _useProperty.default)(),
-        [validationMessages, setValidationMessages, clearValidationMessages] = (0, _useValidationMessages.default)(),
+        [validationMessages, setValidationMessages, clearValidationMessages, _hClose] = (0, _useValidationMessages.default)(onClose),
         _refDates = (0, _uiApi.useRef)()
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
@@ -81,11 +81,6 @@ const DialogType3 = (0, _memoIsShow.default)(props => {
   }, []) // getItem, msgOnNotSelected, oneCaption,
   // loadFn, onLoad
   // clearValidationMessages, setValidationMessages
-  ,
-        _hClose = (0, _uiApi.useCallback)(() => {
-    onClose();
-    clearValidationMessages();
-  }, []) // onClose, clearValidationMessages
 
   /*eslint-enable react-hooks/exhaustive-deps */
   ,

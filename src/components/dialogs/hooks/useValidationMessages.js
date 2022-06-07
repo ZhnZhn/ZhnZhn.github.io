@@ -3,7 +3,9 @@ import {
   useCallback
 } from '../../uiApi';
 
-const useValidationMessages = () => {
+const useValidationMessages = (
+  onClose
+) => {
   const [
     validationMessages,
     setValidationMessages
@@ -14,12 +16,20 @@ const useValidationMessages = () => {
          ? prevMsgs
          : []
      )
+  }, [])
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , hClose = useCallback(() => {
+    onClose()
+    clearValidationMessages()
   }, []);
+  // onClose, clearValidationMessages
+  /*eslint-enable react-hooks/exhaustive-deps */
 
   return [
     validationMessages,
     setValidationMessages,
-    clearValidationMessages
+    clearValidationMessages,
+    hClose
   ];
 }
 
