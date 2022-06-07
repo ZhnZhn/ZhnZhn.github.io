@@ -15,7 +15,6 @@ const _crToolbarItem = (
 const useToolbar = ({
   toggleLabels,
   toggleOptions,
-  toggleTransform,
   toggleDate,
   onClickInfo
 }) => useRefInit(() => [
@@ -24,9 +23,6 @@ const useToolbar = ({
     : void 0,
   toggleOptions
     ? _crToolbarItem('O', `${CLICK_TO_TOGGLE} dialog options`, toggleOptions)
-    : void 0,
-  toggleTransform
-    ? _crToolbarItem('T', `${CLICK_TO_TOGGLE} transform options`, toggleTransform)
     : void 0,
   toggleDate
     ? _crToolbarItem('D', `${CLICK_TO_TOGGLE} date input`, toggleDate)

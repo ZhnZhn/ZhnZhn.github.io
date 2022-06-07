@@ -1,4 +1,3 @@
-//import PropTypes from "prop-types";
 import {
   useRef,
   useCallback
@@ -11,31 +10,22 @@ import useProperty from '../hooks/useProperty';
 import useMenuMore from './hooks/useMenuMore';
 import useToolbar from './hooks/useToolbar';
 import useValidationMessages from './hooks/useValidationMessages';
-import checkAreDatesValid from './hooks/checkAreDatesValid';
+import crValidationMessages from './hooks/crValidationMessages';
 import getFromToDates from './hooks/getFromToDates';
 
 import D from './DialogCell'
-
-const TRANSFORM_OPTIONS = [
-  { caption: "NO EFFECT: z[t]=y[t]", value: "none" },
-  { caption: "ROW-ON-ROW CHANGE: z[t]=y[t]–y[t-1]", value: "diff" },
-  { caption: "ROW-ON-ROW % CHANGE: z[t]=(y[t]–y[t-1])/y[t-1]", value: "rdiff" },
-  { caption: "LATEST VALUE AS % INCREMENT: z[t]=(y[latest]–y[t])/y[t]", value: "rdiff_from" },
-  { caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100", value: "normalize" }
-];
 
 const DialogType3 = memoIsShow((
   props
 ) => {
   const {
     isShow,
-    isTransform,
     isWithInputStock,
     noDate,
 
     caption,
-    oneCaption,
     itemCaption='Stock',
+    oneCaption=itemCaption,
     oneURI,
     optionURI,
     optionsJsonProp,
@@ -65,27 +55,17 @@ const DialogType3 = memoIsShow((
     toggleLabels
   ] = useToggle(true)
   , [
-    isShowTransform,
-    toggleTransform
-  ] = useToggle()
-  , [
     isShowDate,
     toggleDate
   ] = useToggle(true)
   , _toolbarButtons = useToolbar({
     toggleLabels,
-    toggleTransform: isTransform
-       ? toggleTransform : void 0,
     toggleDate,
     onClickInfo
   })
   , [
     setItem,
     getItem
-  ] = useProperty()
-  , [
-    setTransform,
-    getTransform
   ] = useProperty()
   , [
     validationMessages,
@@ -95,29 +75,25 @@ const DialogType3 = memoIsShow((
   , _refDates = useRef()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hLoad = useCallback(() => {
-     const _crVm = () => {
-       const msgs = [];
-       if (!getItem()) {
-         msgs.push(msgOnNotSelected(oneCaption || itemCaption));
-       }
-       checkAreDatesValid(_refDates, msgs)
-       return msgs;
-     }
-     , _validationMessages = _crVm();
+     const one = getItem()
+     , _msgs = crValidationMessages(
+        [[one, oneCaption]],
+        msgOnNotSelected,
+        _refDates
+     );
 
-     if (_validationMessages.length === 0) {
+     if (_msgs.length === 0) {
        onLoad(loadFn(props, {
-          one: getItem(),
-          transform: getTransform(),
+          one,
           ...getFromToDates(_refDates)
        }))
        clearValidationMessages()
      } else {
-       setValidationMessages(_validationMessages)
+       setValidationMessages(_msgs)
      }
   }, [])
-  // getItem, msgOnNotSelected, oneCaption, itemCaption,
-  // getTransform, loadFn, onLoad
+  // getItem, msgOnNotSelected, oneCaption,
+  // loadFn, onLoad
   // clearValidationMessages, setValidationMessages
   , _hClose = useCallback(() => {
     onClose()
@@ -125,7 +101,6 @@ const DialogType3 = memoIsShow((
   }, [])
   // onClose, clearValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
-  , _oneCaption = oneCaption || itemCaption
   , _oneURI = oneURI || optionURI;
 
   return (
@@ -148,19 +123,11 @@ const DialogType3 = memoIsShow((
         placeholder={onePlaceholder}
         uri={_oneURI}
         jsonProp={optionsJsonProp}
-        caption={_oneCaption}
+        caption={oneCaption}
         optionNames={optionNames}
         isWithInput={isWithInputStock}
         onSelect={setItem}
       />
-      <D.ShowHide isShow={isShowTransform}>
-        <D.RowInputSelect
-          isShowLabels={isShowLabels}
-          caption="Transform"
-          options={TRANSFORM_OPTIONS}
-          onSelect={setTransform}
-        />
-      </D.ShowHide>
       {
         !noDate &&
         <D.ShowHide isShow={isShowDate}>
@@ -180,26 +147,5 @@ const DialogType3 = memoIsShow((
    </D.DraggableDialog>
   );
 })
-
-/*
-DialogType3.propTypes = {
-  isShow: PropTypes.bool,
-  caption: PropTypes.string,
-  itemCaption: PropTypes.string,
-  optionURI: PropTypes.string,
-  optionsJsonProp: PropTypes.string,
-  optionNames: PropTypes.string,
-  initFromDate: PropTypes.string,
-  initToDate: PropTypes.string,
-  msgOnNotValidFormat: PropTypes.func,
-  onTestDate: PropTypes.func,
-  onShow: PropTypes.func,
-
-  descrUrl: PropTypes.string,
-  isTransform: PropTypes.bool,
-  onClickInfo: PropTypes.func,
-  loadFn: PropTypes.func
-}
-*/
 
 export default DialogType3
