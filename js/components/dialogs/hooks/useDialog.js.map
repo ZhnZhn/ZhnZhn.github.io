@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/hooks/useDialog.js"
+ ],
+ "file": "../../../../src/components/dialogs/hooks/useDialog.js",
+ "names": [
+  "_isWideWidth",
+  "has",
+  "wideWidth",
+  "useDialog",
+  "onClickInfo",
+  "onClose",
+  "toolbarHandlers",
+  "isShowLabels",
+  "toggleLabels",
+  "isToolbar",
+  "menuMoreModel",
+  "toolbarButtons"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA;;AACA;;AACA;;AAEA,MAAMA,YAAY,GAAGC,aAAIC,SAAJ,EAArB;;AAEA,MAAMC,SAAS,GAAG,QAIZ;AAAA,MAJa;AACjBC,IAAAA,WADiB;AAEjBC,IAAAA,OAFiB;AAGjB,OAAGC;AAHc,GAIb;AACJ,QAAM,CACJC,YADI,EAEJC,YAFI,IAGF,wBAAUR,YAAV,CAHJ;AAAA,QAIE,CACAS,SADA,EAEAC,aAFA,IAGE,0BAAYN,WAAZ,CAPJ;AAAA,QAQEO,cAAc,GAAG,yBAAW,EAC5B,GAAGL,eADyB;AAE5BE,IAAAA,YAF4B;AAG5BJ,IAAAA;AAH4B,GAAX,CARnB;AAaA,SAAO,CACLK,SADK,EAELF,YAFK,EAGLG,aAHK,EAILC,cAJK,EAKL,GAAG,oCAAsBN,OAAtB,CALE,CAAP;AAOD,CAzBD;;eA2BeF,S"
+}

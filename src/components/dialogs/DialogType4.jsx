@@ -6,9 +6,7 @@ import {
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import useProperty from '../hooks/useProperty';
-import useMenuMore from '../dialogs/hooks/useMenuMore';
-import useToolbar from '../dialogs/hooks/useToolbar';
-import useValidationMessages from '../dialogs/hooks/useValidationMessages';
+import useDialog from '../dialogs/hooks/useDialog';
 import crValidationMessages from '../dialogs/hooks/crValidationMessages';
 import getFromToDates from '../dialogs/hooks/getFromToDates';
 
@@ -52,22 +50,23 @@ const DialogType4 = memoIsShow((
     onClickInfo
   } = props
   , [
-    isToolbar,
-    _menuMore
-  ] = useMenuMore(onClickInfo)
-  , [isShowLabels, toggleLabels] = useToggle(true)
-  , [isShowDate, toggleDate] = useToggle(true)
-  , _toolbarButtons = useToolbar({
-    toggleLabels,
-    toggleDate: noDate ? void 0 : toggleDate,
-    onClickInfo
-  })
+    isShowDate,
+    toggleDate
+  ] = useToggle(true)
   , [
+    isToolbar,
+    isShowLabels,
+    menuMoreModel,
+    toolbarButtons,
     validationMessages,
     setValidationMessages,
     clearValidationMessages,
-    _hClose
-  ] = useValidationMessages(onClose)
+    hClose
+  ] = useDialog({
+    onClickInfo,
+    onClose,
+    toggleDate: noDate ? void 0 : toggleDate
+  })
   , [setOne, getOne] = useProperty()
   , [setTwo, getTwo] = useProperty()
   , [setThree, getThree] = useProperty()
@@ -108,15 +107,15 @@ const DialogType4 = memoIsShow((
     <D.DraggableDialog
        isShow={isShow}
        caption={caption}
-       menuModel={_menuMore}
+       menuModel={menuMoreModel}
        onLoad={_hLoad}
        onShowChart={onShow}
        onFront={onFront}
-       onClose={_hClose}
+       onClose={hClose}
      >
         <D.Toolbar
           isShow={isToolbar}
-          buttons={_toolbarButtons}
+          buttons={toolbarButtons}
         />
         <D.SelectWithLoad
            isShow={isShow}

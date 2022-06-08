@@ -13,11 +13,7 @@ var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
-var _useMenuMore = _interopRequireDefault(require("./hooks/useMenuMore"));
-
-var _useToolbar = _interopRequireDefault(require("./hooks/useToolbar"));
-
-var _useValidationMessages = _interopRequireDefault(require("./hooks/useValidationMessages"));
+var _useDialog = _interopRequireDefault(require("./hooks/useDialog"));
 
 var _crValidationMessages = _interopRequireDefault(require("./hooks/crValidationMessages"));
 
@@ -52,16 +48,13 @@ const DialogType3 = (0, _memoIsShow.default)(props => {
     onClose,
     onClickInfo
   } = props,
-        [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onClickInfo),
-        [isShowLabels, toggleLabels] = (0, _useToggle.default)(true),
         [isShowDate, toggleDate] = (0, _useToggle.default)(true),
-        _toolbarButtons = (0, _useToolbar.default)({
-    toggleLabels,
-    toggleDate,
-    onClickInfo
+        [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
+    onClickInfo,
+    onClose,
+    toggleDate
   }),
         [setItem, getItem] = (0, _useProperty.default)(),
-        [validationMessages, setValidationMessages, clearValidationMessages, _hClose] = (0, _useValidationMessages.default)(onClose),
         _refDates = (0, _uiApi.useRef)()
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
@@ -93,10 +86,10 @@ const DialogType3 = (0, _memoIsShow.default)(props => {
     onLoad: _hLoad,
     onShowChart: onShow,
     onFront: onFront,
-    onClose: _hClose,
+    onClose: hClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,
-      buttons: _toolbarButtons
+      buttons: toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,

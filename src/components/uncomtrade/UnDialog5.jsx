@@ -7,9 +7,7 @@ import {
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import useProperty from '../hooks/useProperty';
-import useMenuMore from '../dialogs/hooks/useMenuMore';
-import useToolbar from '../dialogs/hooks/useToolbar';
-import useValidationMessages from '../dialogs/hooks/useValidationMessages';
+import useDialog from '../dialogs/hooks/useDialog';
 
 import D from '../dialogs/DialogCell';
 
@@ -50,21 +48,22 @@ const UnDialog5 = memoIsShow((
      onClickInfo
    } = props
    , [
-     isToolbar,
-     menuMoreModel
-   ] = useMenuMore(onClickInfo)
-   , [
-     isShowLabels,
-     toggleLabels
-   ] = useToggle(true)
-   , [
      isShowOptions,
      toggleOptions
    ] = useToggle(false)
-   , _toolbarButtons = useToolbar({
-     toggleLabels,
-     toggleOptions,
-     onClickInfo
+   , [
+     isToolbar,
+     isShowLabels,
+     menuMoreModel,
+     toolbarButtons,
+     validationMessages,
+     setValidationMessages,
+     clearValidationMessages,
+     hClose
+   ] = useDialog({
+     onClickInfo,
+     onClose,
+     toggleOptions
    })
    , _refGroupItem = useRef()
    , [
@@ -75,12 +74,6 @@ const UnDialog5 = memoIsShow((
      setTradeFlow,
      getTradeFlow
    ] = useProperty()
-   , [
-     validationMessages,
-     setValidationMessages,
-     clearValidationMessages,
-     _hClose
-   ] = useValidationMessages(onClose)
    /*eslint-disable react-hooks/exhaustive-deps */
    , _hLoad = useCallback(() => {
      const _groupItemInst = getRefValue(_refGroupItem)
@@ -114,11 +107,11 @@ const UnDialog5 = memoIsShow((
        onLoad={_hLoad}
        onShowChart={onShow}
        onFront={onFront}
-       onClose={_hClose}
+       onClose={hClose}
     >
       <D.Toolbar
          isShow={isToolbar}
-         buttons={_toolbarButtons}
+         buttons={toolbarButtons}
       />
       <D.SelectWithLoad
          isShow={isShow}

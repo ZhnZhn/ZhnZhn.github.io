@@ -13,11 +13,7 @@ var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
-var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
-
-var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
-
-var _useValidationMessages = _interopRequireDefault(require("../dialogs/hooks/useValidationMessages"));
+var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 
 var _crValidationMessages = _interopRequireDefault(require("../dialogs/hooks/crValidationMessages"));
 
@@ -59,15 +55,12 @@ const DialogType4 = (0, _memoIsShow.default)(props => {
     onClose,
     onClickInfo
   } = props,
-        [isToolbar, _menuMore] = (0, _useMenuMore.default)(onClickInfo),
-        [isShowLabels, toggleLabels] = (0, _useToggle.default)(true),
         [isShowDate, toggleDate] = (0, _useToggle.default)(true),
-        _toolbarButtons = (0, _useToolbar.default)({
-    toggleLabels,
-    toggleDate: noDate ? void 0 : toggleDate,
-    onClickInfo
+        [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
+    onClickInfo,
+    onClose,
+    toggleDate: noDate ? void 0 : toggleDate
   }),
-        [validationMessages, setValidationMessages, clearValidationMessages, _hClose] = (0, _useValidationMessages.default)(onClose),
         [setOne, getOne] = (0, _useProperty.default)(),
         [setTwo, getTwo] = (0, _useProperty.default)(),
         [setThree, getThree] = (0, _useProperty.default)(),
@@ -102,14 +95,14 @@ const DialogType4 = (0, _memoIsShow.default)(props => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
     caption: caption,
-    menuModel: _menuMore,
+    menuModel: menuMoreModel,
     onLoad: _hLoad,
     onShowChart: onShow,
     onFront: onFront,
-    onClose: _hClose,
+    onClose: hClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,
-      buttons: _toolbarButtons
+      buttons: toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,

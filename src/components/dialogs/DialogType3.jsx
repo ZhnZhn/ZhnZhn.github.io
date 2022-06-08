@@ -6,10 +6,7 @@ import {
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import useProperty from '../hooks/useProperty';
-
-import useMenuMore from './hooks/useMenuMore';
-import useToolbar from './hooks/useToolbar';
-import useValidationMessages from './hooks/useValidationMessages';
+import useDialog from './hooks/useDialog';
 import crValidationMessages from './hooks/crValidationMessages';
 import getFromToDates from './hooks/getFromToDates';
 
@@ -47,32 +44,27 @@ const DialogType3 = memoIsShow((
     onClickInfo
   } = props
   , [
-    isToolbar,
-    menuMoreModel
-  ] = useMenuMore(onClickInfo)
-  , [
-    isShowLabels,
-    toggleLabels
-  ] = useToggle(true)
-  , [
     isShowDate,
     toggleDate
   ] = useToggle(true)
-  , _toolbarButtons = useToolbar({
-    toggleLabels,
-    toggleDate,
-    onClickInfo
+  , [
+    isToolbar,
+    isShowLabels,
+    menuMoreModel,
+    toolbarButtons,
+    validationMessages,
+    setValidationMessages,
+    clearValidationMessages,
+    hClose
+  ] = useDialog({
+    onClickInfo,
+    onClose,
+    toggleDate
   })
   , [
     setItem,
     getItem
   ] = useProperty()
-  , [
-    validationMessages,
-    setValidationMessages,
-    clearValidationMessages,
-    _hClose
-  ] = useValidationMessages(onClose)
   , _refDates = useRef()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hLoad = useCallback(() => {
@@ -107,11 +99,11 @@ const DialogType3 = memoIsShow((
       onLoad={_hLoad}
       onShowChart={onShow}
       onFront={onFront}
-      onClose={_hClose}
+      onClose={hClose}
     >
       <D.Toolbar
         isShow={isToolbar}
-        buttons={_toolbarButtons}
+        buttons={toolbarButtons}
       />
       <D.SelectWithLoad
         isShow={isShow}
