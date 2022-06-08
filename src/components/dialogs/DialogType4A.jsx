@@ -1,148 +1,143 @@
-import { Component } from 'react';
+import {
+  useRef,
+  useCallback,
+  getRefValue
+} from '../uiApi';
 
-import D from './DialogCell'
-const { Decor, crMenuMore } = D
+import memoIsShow from '../hoc/memoIsShow';
+import useToggle from '../hooks/useToggle';
+import useRefBool from '../hooks/useRefBool';
+import useDialog from './hooks/useDialog';
+import checkAreDatesValid from './hooks/checkAreDatesValid';
 
-const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
+import D from './DialogCell';
 
-@Decor.dialog
-class DialogType4A extends Component {
+const INITIAL_IS_SECOND_YAXIS = false;
 
-  constructor(props){
-    super(props)
+const DialogType4A = memoIsShow((
+  props
+) => {
+  const {
+    isShow,
 
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
-    })
+    caption,
+    oneCaption,
+    oneURI,
+    oneJsonProp,
+    twoCaption,
+    msgOnNotSelected,
+    initFromDate,
+    initToDate,
+    msgOnNotValidFormat,
+    onTestDate,
 
-    this.toolbarButtons = this._createType2WithToolbar(
-      props, { isShowOptions: true }
-    )
+    loadFn,
+    onLoad,
 
-    this[HAS_SECOND_Y_AXIS] = false
-    this._commandButtons = this._crCommandsWithLoad(this)
-
-    this.state = {
-      ...this._isWithInitialState(),
-      isShowOptions: false
+    onShow,
+    onFront,
+    onClose,
+    onClickInfo
+  } = props
+  , [
+    isShowDate,
+    toggleDate
+  ] = useToggle(true)
+  , [
+    isShowOptions,
+    toggleOptions
+  ] = useToggle(false)
+  , [
+    isToolbar,
+    isShowLabels,
+    menuMoreModel,
+    toolbarButtons,
+    validationMessages,
+    setValidationMessages,
+    clearValidationMessages,
+    hClose
+  ] = useDialog({
+    onClickInfo,
+    onClose,
+    toggleDate,
+    toggleOptions
+  })
+  , [
+    refSecondYAxis,
+    hCheckSecondYAxis,
+    hUnCheckSecondYAxis
+  ] = useRefBool(INITIAL_IS_SECOND_YAXIS)
+  , _refDates = useRef()
+  , _refOneTwo = useRef()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hLoad = useCallback(() => {
+    const _oneTwoInst = getRefValue(_refOneTwo)
+    , { msg=[] } = _oneTwoInst.getValidation()
+    checkAreDatesValid(msg, _refDates)
+    if (msg.length === 0){
+      onLoad(loadFn(props, {
+        ..._oneTwoInst.getValues(),
+        ...getRefValue(_refDates).getValues(),
+        hasSecondYAxis: getRefValue(refSecondYAxis)
+      }))
+      clearValidationMessages()
+    } else {
+      setValidationMessages(msg)
     }
-  }
+  }, []);
+  // props, loadFn, onLoad,
+  // refSecondYAxis,
+  // setValidationMessages, clearValidationMessages
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps){
-       if (this.props.isShow === nextProps.isShow){
-          return false;
-       }
-    }
-    return true;
-  }
+  return (
+    <D.DraggableDialog
+       isShow={isShow}
+       caption={caption}
+       menuModel={menuMoreModel}
+       onLoad={_hLoad}
+       onShowChart={onShow}
+       onFront={onFront}
+       onClose={hClose}
+    >
+       <D.Toolbar
+         isShow={isToolbar}
+         buttons={toolbarButtons}
+       />
+       <D.SelectOneTwo
+         ref={_refOneTwo}
+         isShow={isShow}
+         isShowLabels={isShowLabels}
+         uri={oneURI}
+         oneCaption={oneCaption}
+         oneJsonProp={oneJsonProp}
+         twoCaption={twoCaption}
+         msgOnNotSelected={msgOnNotSelected}
+       />
 
-  _handleLoad = () => {
-    this._handleWithValidationLoad(
-      this._createValidationMessages(),
-      this._createLoadOption
-    );
-  }
-  _createValidationMessages = () => {
-     let msg = [];
-
-     const { isValid:isValid1, msg:msg1 } = this.oneTwo.getValidation();
-     if (!isValid1) { msg = msg.concat(msg1); }
-
-     const {isValid, datesMsg} = this.datesFragment.getValidation();
-     if (!isValid) { msg = msg.concat(datesMsg); }
-
-     msg.isValid = (msg.length === 0) ? true : false;
-     return msg;
-  }
-
-  _createLoadOption = () => {
-    const { one, two } = this.oneTwo.getValues()
-        , { fromDate, toDate } = this.datesFragment.getValues();
-    return this.props.loadFn(
-       this.props, {
-         one, two, fromDate, toDate,
-         hasSecondYAxis: this[HAS_SECOND_Y_AXIS]
-       }
-     );
-  }
-
-  _handleClose = () => {
-    this._handleWithValidationClose()
-  }
-  
-  _hCheckSecondYAxis = () => {
-    this[HAS_SECOND_Y_AXIS] = true
-  }
-  _hUnCheckSecondYAxis = () => {
-    this[HAS_SECOND_Y_AXIS] = false
-  }
-
-  _refOneTwo = c => this.oneTwo = c
-  _refDates = c => this.datesFragment = c
-
-  render(){
-    const {
-           caption, oneCaption, oneURI, oneJsonProp, twoCaption, msgOnNotSelected,
-           isShow, onShow, onFront,
-           initFromDate, initToDate, msgOnNotValidFormat, onTestDate
-          } = this.props
-        , {
-            isToolbar,
-            isShowLabels, isShowDate, isShowOptions,
-            validationMessages
-          } = this.state;
-
-    return(
-        <D.DraggableDialog
-           isShow={isShow}
-           caption={caption}
-           menuModel={this._menuMore}
-           commandButtons={this._commandButtons}
-           onShowChart={onShow}
-           onFront={onFront}
-           onClose={this._handleClose}
-         >
-             <D.Toolbar
-               isShow={isToolbar}
-               buttons={this.toolbarButtons}
-             />
-             <D.SelectOneTwo
-                 ref={this._refOneTwo}
-                 isShow={isShow}
-                 isShowLabels={isShowLabels}
-                 uri={oneURI}
-                 oneCaption={oneCaption}
-                 oneJsonProp={oneJsonProp}
-                 twoCaption={twoCaption}
-                 msgOnNotSelected={msgOnNotSelected}
-             />
-
-             <D.ShowHide isShow={isShowDate}>
-               <D.DatesFragment
-                 ref={this._refDates}
-                 isShowLabels={isShowLabels}
-                 initFromDate={initFromDate}
-                 initToDate={initToDate}
-                 msgOnNotValidFormat={msgOnNotValidFormat}
-                 onTestDate={onTestDate}
-               />
-             </D.ShowHide>
-             <D.ShowHide isShow={isShowOptions}>
-               <D.RowCheckBox
-                 initValue={false}
-                 caption="Add Seria with Second YAxis"
-                 onCheck={this._hCheckSecondYAxis}
-                 onUnCheck={this._hUnCheckSecondYAxis}
-               />
-             </D.ShowHide>
-             <D.ValidationMessages
-                 validationMessages={validationMessages}
-             />
-        </D.DraggableDialog>
-    );
-  }
-}
+       <D.ShowHide isShow={isShowDate}>
+         <D.DatesFragment
+           ref={_refDates}
+           isShowLabels={isShowLabels}
+           initFromDate={initFromDate}
+           initToDate={initToDate}
+           msgOnNotValidFormat={msgOnNotValidFormat}
+           onTestDate={onTestDate}
+         />
+       </D.ShowHide>
+       <D.ShowHide isShow={isShowOptions}>
+         <D.RowCheckBox
+           initValue={INITIAL_IS_SECOND_YAXIS}
+           caption="Add Seria with Second YAxis"
+           onCheck={hCheckSecondYAxis}
+           onUnCheck={hUnCheckSecondYAxis}
+         />
+       </D.ShowHide>
+       <D.ValidationMessages
+           validationMessages={validationMessages}
+       />
+    </D.DraggableDialog>
+  );
+});
 
 export default DialogType4A
