@@ -1,4 +1,15 @@
-import { Component } from 'react'
+import {
+  useRef,
+  useCallback,
+  getRefValue
+} from '../uiApi';
+
+import memoIsShow from '../hoc/memoIsShow';
+import useToggle from '../hooks/useToggle';
+import useProperty from '../hooks/useProperty';
+import useRefBool from '../hooks/useRefBool';
+import useDialog from './hooks/useDialog';
+import checkAreDatesValid from './hooks/checkAreDatesValid';
 
 import {
   CHT_AREA,
@@ -6,10 +17,9 @@ import {
   CHT_SCATTER_DOWN
 } from '../../constants/ChartType';
 
-import D from './DialogCell'
-const { Decor, crMenuMore } = D
+import D from './DialogCell';
 
-const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
+const INITIAL_IS_SECOND_YAXIS = false;
 
 const CHART_TYPE_OPTIONS = [
   { caption: 'Default: Area', value: CHT_AREA },
@@ -17,178 +27,175 @@ const CHART_TYPE_OPTIONS = [
   { caption: 'Scatter: Label Down', value: CHT_SCATTER_DOWN }
 ];
 
-@Decor.dialog
-class  DialogType5 extends Component {
+const DialogType5 = memoIsShow((
+  props
+) => {
+  const {
+    isShow,
+    isChartType,
 
-  constructor(props){
-    super(props)
+    caption,
+    oneCaption,
+    oneURI,
+    oneJsonProp,
+    twoCaption,
+    twoURI,
+    twoJsonProp,
+    threeCaption,
+    msgOnNotSelected,
+    initFromDate,
+    initToDate,
+    msgOnNotValidFormat,
+    onTestDate,
 
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
-    })
+    loadFn,
+    onLoad,
 
-    this.toolbarButtons = this._createType2WithToolbar(
-      props, { isShowOptions: true })
-    this._commandButtons = this._crCommandsWithLoad(this)
-
-    this.state = {
-      ...this._isWithInitialState(),
-      isShowDate: false,
-      isShowOptions: false
+    onShow,
+    onFront,
+    onClose,
+    onClickInfo
+  } = props
+  , [
+    isShowDate,
+    toggleDate
+  ] = useToggle(false)
+  , [
+    isShowOptions,
+    toggleOptions
+  ] = useToggle(false)
+  , [
+    isToolbar,
+    isShowLabels,
+    menuMoreModel,
+    toolbarButtons,
+    validationMessages,
+    setValidationMessages,
+    clearValidationMessages,
+    hClose
+  ] = useDialog({
+    onClickInfo,
+    onClose,
+    toggleDate,
+    toggleOptions
+  })
+  , [
+    refSecondYAxis,
+    hCheckSecondYAxis,
+    hUnCheckSecondYAxis
+  ] = useRefBool(INITIAL_IS_SECOND_YAXIS)
+  , [
+    setOne,
+    getOne
+  ] = useProperty()
+  , [
+    setChartType,
+    getChartType
+  ] = useProperty()
+  , _refDates = useRef()
+  , _refTwoThree = useRef()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hLoad = useCallback(() => {
+    const msgs = []
+    , one = getOne()
+    , _twoThreeInst = getRefValue(_refTwoThree)
+    , { msg=[] } = _twoThreeInst.getValidation();
+    if (!one) {
+      msgs.push(msgOnNotSelected(oneCaption));
     }
-  }
+    msgs.push(...msg)
+    checkAreDatesValid(msgs, _refDates)
 
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps){
-       if (this.props.isShow === nextProps.isShow){
-          return false;
-       }
+    if (msgs.length === 0){
+      const {
+        one:two,
+        two: three
+      } = _twoThreeInst.getValues()
+      , { value:seriaType } = getChartType() || {};
+      onLoad(loadFn(props, {
+        ...getRefValue(_refDates).getValues(),
+        one,
+        two,
+        three,
+        seriaType,
+        hasSecondYAxis: getRefValue(refSecondYAxis)
+      }))
+      clearValidationMessages()
+    } else {
+      setValidationMessages(msgs)
     }
-    return true;
-  }
+  }, []);
+  // props, loadFn, onLoad, oneCaption, msgOnNotSelected,
+  // refSecondYAxis, getChartType, getOne,
+  // clearValidationMessages, setValidationMessages
+  /*eslint-enable react-hooks/exhaustive-deps */
 
+  return (
+    <D.DraggableDialog
+       isShow={isShow}
+       caption={caption}
+       menuModel={menuMoreModel}
+       onLoad={_hLoad}
+       onShowChart={onShow}
+       onFront={onFront}
+       onClose={hClose}
+    >
+      <D.Toolbar
+         isShow={isToolbar}
+         buttons={toolbarButtons}
+      />
+      <D.SelectWithLoad
+         isShow={isShow}
+         isShowLabels={isShowLabels}
+         uri={oneURI}
+         jsonProp={oneJsonProp}
+         caption={oneCaption}
+         optionNames="Items"
+         onSelect={setOne}
+      />
+      <D.SelectOneTwo
+         ref={_refTwoThree}
+         isShow={isShow}
+         isShowLabels={isShowLabels}
+         uri={twoURI}
+         oneCaption={twoCaption}
+         oneJsonProp={twoJsonProp}
+         twoCaption={threeCaption}
+         msgOnNotSelected={msgOnNotSelected}
+      />
 
-  _handleSelectOne = (one) => {
-    this.one = one;
-  }
-
-  _handleLoad = () => {
-    this._handleWithValidationLoad(
-      this._createValidationMessages(),
-      this._createLoadOption
-    );
-  }
-  _createValidationMessages = () => {
-     const { oneCaption } = this.props;
-     let msg = [];
-
-     if (!this.one)    { msg.push(this.props.msgOnNotSelected(oneCaption));}
-
-     const { isValid:isValid1, msg:msg1 } = this.twoThree.getValidation();
-     if (!isValid1) { msg = msg.concat(msg1); }
-
-     const {isValid, datesMsg} = this.datesFragment.getValidation();
-     if (!isValid) { msg = msg.concat(datesMsg); }
-
-     msg.isValid = (msg.length === 0) ? true : false;
-     return msg;
-  }
-
-  _createLoadOption = () => {
-    const { one:two, two:three } = this.twoThree.getValues()
-        , { fromDate, toDate } = this.datesFragment.getValues()
-        , seriaType = this.chartType
-             ? this.chartType.value
-             : undefined;
-    return this.props.loadFn(
-      this.props, {
-      one : this.one, two, three, fromDate, toDate,
-      hasSecondYAxis: this[HAS_SECOND_Y_AXIS],
-      seriaType
-    });
-  }
-
-  _handleClose = () => {
-    this._handleWithValidationClose()
-  }
-
-  _hCheckSecondYAxis = () => {
-    this[HAS_SECOND_Y_AXIS] = true
-  }
-  _hUnCheckSecondYAxis = () => {
-    this[HAS_SECOND_Y_AXIS] = false
-  }
-
-  _handlerSelectChartType = (item) => {
-    this.chartType = item
-  }
-
-  _refTwoThree = c => this.twoThree = c
-  _refDates = c => this.datesFragment = c
-
-  render(){
-    const {
-           caption, isShow, onShow, onFront,
-           oneCaption, oneURI, oneJsonProp,
-           twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
-           initFromDate, initToDate, msgOnNotValidFormat, onTestDate,
-           isChartType
-          } = this.props
-        , {
-            isToolbar,
-            isShowLabels, isShowDate, isShowOptions,
-            validationMessages
-          } = this.state;
-
-    return(
-        <D.DraggableDialog
-             isShow={isShow}
-             caption={caption}
-             menuModel={this._menuMore}
-             commandButtons={this._commandButtons}
-             onShowChart={onShow}
-             onFront={onFront}
-             onClose={this._handleClose}
-         >
-             <D.Toolbar
-               isShow={isToolbar}
-               buttons={this.toolbarButtons}
-             />
-             <D.SelectWithLoad
-               isShow={isShow}
-               isShowLabels={isShowLabels}
-               uri={oneURI}
-               jsonProp={oneJsonProp}
-               caption={oneCaption}
-               optionNames="Items"
-               onSelect={this._handleSelectOne}
-             />
-
-             <D.SelectOneTwo
-                 ref={this._refTwoThree}
-                 isShow={isShow}
-                 isShowLabels={isShowLabels}
-                 uri={twoURI}
-                 oneCaption={twoCaption}
-                 oneJsonProp={twoJsonProp}
-                 twoCaption={threeCaption}
-                 msgOnNotSelected={msgOnNotSelected}
-             />
-
-             <D.ShowHide isShow={isShowDate}>
-               <D.DatesFragment
-                 ref={this._refDates}
-                 isShowLabels={isShowLabels}
-                 initFromDate={initFromDate}
-                 initToDate={initToDate}
-                 msgOnNotValidFormat={msgOnNotValidFormat}
-                 onTestDate={onTestDate}
-               />
-             </D.ShowHide>
-             <D.ShowHide isShow={isShowOptions}>
-               {
-                 isChartType &&
-                 <D.RowInputSelect
-                    isShowLabels={isShowLabels}
-                    caption="Chart Type:"
-                    options={CHART_TYPE_OPTIONS}
-                    onSelect={this._handlerSelectChartType}
-                 />
-               }
-               <D.RowCheckBox
-                 initValue={false}
-                 caption="Add Seria with Second YAxis"
-                 onCheck={this._hCheckSecondYAxis}
-                 onUnCheck={this._hUnCheckSecondYAxis}
-               />
-             </D.ShowHide>
-             <D.ValidationMessages
-                 validationMessages={validationMessages}
-             />
-        </D.DraggableDialog>
-    );
-  }
-}
+      <D.ShowHide isShow={isShowDate}>
+        <D.DatesFragment
+          ref={_refDates}
+          isShowLabels={isShowLabels}
+          initFromDate={initFromDate}
+          initToDate={initToDate}
+          msgOnNotValidFormat={msgOnNotValidFormat}
+          onTestDate={onTestDate}
+        />
+      </D.ShowHide>
+      <D.ShowHide isShow={isShowOptions}>
+        {
+          isChartType &&
+          <D.RowInputSelect
+             isShowLabels={isShowLabels}
+             caption="Chart Type:"
+             options={CHART_TYPE_OPTIONS}
+             onSelect={setChartType}
+          />
+        }
+        <D.RowCheckBox
+          initValue={INITIAL_IS_SECOND_YAXIS}
+          caption="Add Seria with Second YAxis"
+          onCheck={hCheckSecondYAxis}
+          onUnCheck={hUnCheckSecondYAxis}
+        />
+      </D.ShowHide>
+      <D.ValidationMessages
+          validationMessages={validationMessages}
+      />
+    </D.DraggableDialog>
+  );
+});
 
 export default DialogType5
