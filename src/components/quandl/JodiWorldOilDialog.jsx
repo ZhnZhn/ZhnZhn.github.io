@@ -1,204 +1,196 @@
-import { Component } from 'react';
+import {
+  useRef,
+  useCallback,
+  getRefValue
+} from '../uiApi';
+
+import memoIsShow from '../hoc/memoIsShow';
+import useToggle from '../hooks/useToggle';
+import useProperty from '../hooks/useProperty';
+import useDialog from '../dialogs/hooks/useDialog';
+import checkAreDatesValid from '../dialogs/hooks/checkAreDatesValid';
 
 import {
   CHT_AREA,
   CHT_YEARLY
 } from '../../constants/ChartType';
-import D from '../dialogs/DialogCell'
-const { Decor, crMenuMore } = D
+import D from '../dialogs/DialogCell';
 
-const unitOptions = [
-  { "caption" : "Thousand Barrels per day (kb/d)", "value" : "KD" },
-  { "caption" : "Thousand Barrels (kbbl)", "value" : "KB" },
-  { "caption" : "Thousand Kilolitres (kl)", "value" : "KL" },
-  { "caption" : "Thousand Metric Tons (kmt)", "value" : "KT" },
-  { "caption" : "Conversion factor barrels/ktons", "value" : "BK" }
-];
-
-const chartOptions = [
+const UNIT_OPTIONS = [
+  { caption: "Thousand Barrels per day (kb/d)", value: "KD" },
+  { caption: "Thousand Barrels (kbbl)", value: "KB" },
+  { caption: "Thousand Kilolitres (kl)", value: "KL" },
+  { caption: "Thousand Metric Tons (kmt)", value: "KT" },
+  { caption: "Conversion factor barrels/ktons", value: "BK" }
+]
+, DF_UNITS = UNIT_OPTIONS[0]
+, CHART_OPTIONS = [
   { caption: "AreaSpline", value: CHT_AREA },
   { caption: "Yearly by Month", value: CHT_YEARLY }
 ];
 
-@Decor.dialog
-class JodiWorldOilDialog extends Component {
+const JodiWorldOilDialog = memoIsShow(({
+  isShow,
 
-   constructor(props){
-     super(props)
+  caption,
+  oneCaption,
+  oneURI,
+  oneJsonProp,
+  parentCaption,
+  parentChildURI,
+  parentJsonProp,
+  childCaption,
+  msgOnNotSelected,
+  initFromDate,
+  initToDate,
+  msgOnNotValidFormat,
+  onTestDate,
 
-     //this.country = null
-     //this.product = null
-     //this.flow = null
-     //this.units = null
-     //this.chartType = undefined
+  dataColumn,
+  loadId,
+  dataSource,
 
-     this._menuMore = crMenuMore(this, {
-       toggleToolBar: this._toggleWithToolbar,
-       onAbout: this._clickInfoWithToolbar
-     })
+  fnValue,
+  onLoad,
 
-     this.toolbarButtons = this._createType2WithToolbar(
-       props, { isShowOptions: true }
-     )
+  onShow,
+  onFront,
+  onClose,
+  onClickInfo
+}) => {
+  const [
+    isShowDate,
+    toggleDate
+  ] = useToggle(false)
+  , [
+    isShowOptions,
+    toggleOptions
+  ] = useToggle(false)
+  , [
+    isToolbar,
+    isShowLabels,
+    menuMoreModel,
+    toolbarButtons,
+    validationMessages,
+    setValidationMessages,
+    clearValidationMessages,
+    hClose
+  ] = useDialog({
+    onClickInfo,
+    onClose,
+    toggleDate,
+    toggleOptions
+  })
+  , [setCountry, getCountry] = useProperty()
+  , [setUnits, getUnits] = useProperty()
+  , [setChartType, getChartType] = useProperty()
+  , _refProductFlow = useRef()
+  , _refDates = useRef()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hLoad = useCallback(() => {
+    const msgs = []
+    , country = getCountry()
+    , _productFlowInst = getRefValue(_refProductFlow)
+    , { msg=[] } = _productFlowInst.getValidation()
+    , units = getUnits() || DF_UNITS;
 
-     this._commandButtons = this._crCommandsWithLoad(this)
+    if (!country) {
+      msgs.push(msgOnNotSelected('Country'))
+    }
+    msgs.push(...msg)
+    checkAreDatesValid(msgs, _refDates)
 
-     this.state = {
-       ...this._isWithInitialState(),
-       isShowDate: false,
-       isShowOptions: false
-     }
-   }
+    if (msgs.length === 0) {
+      const _datesInst = getRefValue(_refDates)
+      , {
+        one:product,
+        two:flow
+      } = _productFlowInst.getValues()
+      , { value:seriaType } = getChartType() || {};
 
-   shouldComponentUpdate(nextProps, nextState){
-     if (this.props !== nextProps){
-        if (this.props.isShow === nextProps.isShow){
-           return false;
-        }
-     }
-     return true;
-   }
-
-   _hSelectCountry = (country) => {
-     this.country = country
-   }
-   _hSelectUnits = (units) => {
-     this.units = units
-   }
-   _hSelectChartType = (chartType) => {
-     this.chartType = chartType
-   }
-
-   _handleLoad = () => {
-     this._handleWithValidationLoad(
-       this._createValidationMessages(),
-       this._createLoadOption
-     );
-   }
-   _createValidationMessages = () => {
-     const { msgOnNotSelected } = this.props;
-     let msg = [];
-
-     if (!this.country) { msg.push(msgOnNotSelected('Country')); }
-
-     const { isValid:isValid1, msg:msg1 } = this.productFlow.getValidation();
-     if (!isValid1) { msg = msg.concat(msg1); }
-
-     if (!this.units) {
-       this.units = unitOptions[0];
-     }
-
-     const { isValid, datesMsg } = this.datesFragment.getValidation();
-     if (!isValid) { msg = msg.concat(datesMsg); }
-
-     msg.isValid = (msg.length === 0) ? true : false;
-     return msg;
-   }
-   _createLoadOption = () => {
-      const { one:product, two:flow } = this.productFlow.getValues()
-          , { fromDate, toDate } = this.datesFragment.getValues()
-          , seriaType = this.chartType
-              ? this.chartType.value
-              : void 0
-          , { fnValue, dataColumn, loadId, dataSource } = this.props;
-      return {
-        value : fnValue(this.country.value, product.value, flow.value, this.units.value),
-        title : `${this.country.caption}: ${product.caption}`,
-        subtitle : `${flow.caption}: ${this.units.caption}`,
-        fromDate, toDate,
-        dataColumn, seriaType, loadId,
+      onLoad({
+        ..._datesInst.getValues(),
+        value: fnValue(country.value, product.value, flow.value, units.value),
+        title: `${country.caption}: ${product.caption}`,
+        subtitle: `${flow.caption}: ${units.caption}`,
+        seriaType,
+        dataColumn,
+        loadId,
         dataSource
-      };
-   }
-   _handleClose = () => {
-     this._handleWithValidationClose()
-   }
+      })
+      clearValidationMessages()
+    } else {
+      setValidationMessages(msgs)
+    }
+  }, []);
+  // dataColumn, loadId, dataSource, msgOnNotSelected, fnValue, onLoad
+  // getCountry, getUnits, getChartType
+  // setValidationMessages, clearValidationMessages
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-   _refProductFlow = c => this.productFlow = c
-   _refDates = c => this.datesFragment = c
-
-   render(){
-     const {
-             caption, isShow, onShow, onFront,
-             oneCaption, oneURI, oneJsonProp,
-             parentCaption, parentChildURI, parentJsonProp, childCaption, msgOnNotSelected,
-             initFromDate, initToDate, msgOnNotValidFormat, onTestDate
-           } = this.props
-         , {
-             isToolbar,
-             isShowLabels,
-             isShowDate, isShowOptions,
-             validationMessages
-           } = this.state;
-
-     return (
-       <D.DraggableDialog
+  return (
+    <D.DraggableDialog
+      isShow={isShow}
+      caption={caption}
+      menuModel={menuMoreModel}
+      onLoad={_hLoad}
+      onShowChart={onShow}
+      onFront={onFront}
+      onClose={hClose}
+    >
+      <D.Toolbar
+        isShow={isToolbar}
+        buttons={toolbarButtons}
+      />
+      <D.SelectWithLoad
          isShow={isShow}
-         caption={caption}
-         menuModel={this._menuMore}
-         commandButtons={this._commandButtons}
-         onShowChart={onShow}
-         onFront={onFront}
-         onClose={this._handleClose}
-       >
-          <D.Toolbar
-            isShow={isToolbar}
-            buttons={this.toolbarButtons}
-          />
-
-          <D.SelectWithLoad
-             isShow={isShow}
-             isShowLabels={isShowLabels}
-             uri={oneURI}
-             jsonProp={oneJsonProp}
-             caption={oneCaption}
-             optionNames="Items"
-             onSelect={this._hSelectCountry}
-          />
-          <D.SelectOneTwo
-             ref={this._refProductFlow}
-             isShow={isShow}
-             isShowLabels={isShowLabels}
-             uri={parentChildURI}
-             oneCaption={parentCaption}
-             oneJsonProp={parentJsonProp}
-             twoCaption={childCaption}
-             msgOnNotSelected={msgOnNotSelected}
-          />
-          <D.RowInputSelect
-            isShowLabels={isShowLabels}
-            caption="Units"
-            options={unitOptions}
-            onSelect={this._hSelectUnits}
-          />
-
-          <D.ShowHide isShow={isShowDate}>
-            <D.DatesFragment
-              ref={this._refDates}
-              isShowLabels={isShowLabels}
-              initFromDate={initFromDate}
-              initToDate={initToDate}
-              msgOnNotValidFormat={msgOnNotValidFormat}
-              onTestDate={onTestDate}
-            />
-          </D.ShowHide>
-
-          <D.ShowHide isShow={isShowOptions}>
-            <D.RowInputSelect
-              isShowLabels={isShowLabels}
-              caption="Chart Type"
-              placeholder="Default: AreaSpline"
-              options={chartOptions}
-              onSelect={this._hSelectChartType}
-            />
-          </D.ShowHide>
-
-          <D.ValidationMessages
-              validationMessages={validationMessages}
-          />
-       </D.DraggableDialog>
-     );
-   }
-}
+         isShowLabels={isShowLabels}
+         uri={oneURI}
+         jsonProp={oneJsonProp}
+         caption={oneCaption}
+         optionNames="Items"
+         onSelect={setCountry}
+      />
+      <D.SelectOneTwo
+         ref={_refProductFlow}
+         isShow={isShow}
+         isShowLabels={isShowLabels}
+         uri={parentChildURI}
+         oneCaption={parentCaption}
+         oneJsonProp={parentJsonProp}
+         twoCaption={childCaption}
+         msgOnNotSelected={msgOnNotSelected}
+      />
+      <D.RowInputSelect
+        isShowLabels={isShowLabels}
+        caption="Units"
+        options={UNIT_OPTIONS}
+        onSelect={setUnits}
+      />
+      <D.ShowHide isShow={isShowDate}>
+        <D.DatesFragment
+          ref={_refDates}
+          isShowLabels={isShowLabels}
+          initFromDate={initFromDate}
+          initToDate={initToDate}
+          msgOnNotValidFormat={msgOnNotValidFormat}
+          onTestDate={onTestDate}
+        />
+      </D.ShowHide>
+      <D.ShowHide isShow={isShowOptions}>
+        <D.RowInputSelect
+          isShowLabels={isShowLabels}
+          caption="Chart Type"
+          placeholder="Default: AreaSpline"
+          options={CHART_OPTIONS}
+          onSelect={setChartType}
+        />
+      </D.ShowHide>
+      <D.ValidationMessages
+          validationMessages={validationMessages}
+      />
+    </D.DraggableDialog>
+  );
+});
 
 export default JodiWorldOilDialog
