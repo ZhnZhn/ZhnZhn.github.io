@@ -1,150 +1,148 @@
-import { Component, createRef } from 'react';
+import {
+  useRef,
+  useCallback,
+  getRefValue
+} from '../uiApi';
 
-import D from '../dialogs/DialogCell'
-const { Decor, crMenuMore } = D
+import memoIsShow from '../hoc/memoIsShow';
+import useProperty from '../hooks/useProperty';
+import useDialog from '../dialogs/hooks/useDialog';
 
-const typeOptions = [
+import D from '../dialogs/DialogCell';
+
+const TYPE_OPTIONS = [
   { caption: 'Continuous Contract #1', value: 1 },
   { caption: 'Continuous Contract #2', value: 2 },
   { caption: 'Continuous Contract #3', value: 3 },
   { caption: 'Continuous Contract #4', value: 4 },
   { caption: 'Continuous Contract #5', value: 5 }
-]
+];
 
-@Decor.dialog
-class FuturesWikiDialog extends Component {
-  constructor(props){
-    super(props)
-    //this.type = undefined
+const FuturesWikiDialog = memoIsShow((
+  props
+) => {
+  const {
+    isShow,
+    isFd,
 
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
-    })
+    caption,
+    futuresURI,
+    msgOnNotSelected,
+    msgOnNotValidFormat,
+    initFromDate,
+    isYmdOrEmpty,
+    errNotYmdOrEmpty,
 
-    this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true }
-    )
-    this._refExchangeItem = createRef()
-    this._refFromDate = createRef()
-    this._commandButtons = this._crCommandsWithLoad(this)
+    loadFn,
+    onLoad,
 
-    this.state = {
-      ...this._isWithInitialState()
+    onShow,
+    onFront,
+    onClose,
+    onClickInfo
+  } = props
+  , [
+    isToolbar,
+    isShowLabels,
+    menuMoreModel,
+    toolbarButtons,
+    validationMessages,
+    setValidationMessages,
+    clearValidationMessages,
+    hClose
+  ] = useDialog({
+    onClickInfo,
+    onClose
+  })
+  , [setType, getType] = useProperty()
+  , _refExchangeItem = useRef()
+  , _refFromDate = useRef()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hLoad = useCallback(() => {
+    const msgs = []
+    , _exchangeItemInst = getRefValue(_refExchangeItem)
+    , { msg=[] } = _exchangeItemInst.getValidation()
+    , type = getType()
+    , _fromDateInst = getRefValue(_refFromDate);
+
+    msgs.push(...msg)
+    if (!type) {
+      msgs.push(msgOnNotSelected('Type'))
     }
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps){
-       if (this.props.isShow === nextProps.isShow){
-          return false;
-       }
-    }
-    return true;
-  }
-
-  _handleSelectType = (type) => {
-    this.type = type
-  }
-
-  _handleLoad = () => {
-    this._handleWithValidationLoad(
-      this._createValidationMessages(),
-      this._createLoadOption
-    )
-  }
-  _createValidationMessages = () => {
-    const { msgOnNotSelected, msgOnNotValidFormat, isFd } = this.props
-    let   msg = [];
-
-    const { isValid:isValid1, msg:msg1 } = this._refExchangeItem.current.getValidation();
-    if (!isValid1) { msg = msg.concat(msg1); }
-
-    if (!this.type) { msg.push(msgOnNotSelected('Type')); }
-
-    if (isFd && !this._refFromDate.current.isValid()){
-      msg.push(msgOnNotValidFormat('From Date'));
+    if (isFd && !_fromDateInst.isValid()) {
+      msgs.push(msgOnNotValidFormat('From Date'))
     }
 
-    msg.isValid = msg.length === 0
-      ? true : false;
-    return msg;
-  }
-  _createLoadOption = () => {
-    const { one:exchange, two:item } = this._refExchangeItem.current.getValues()
-    , fromDate = this.props.isFd
-        ? this._refFromDate.current.getValue()
-        : void 0;
-    return this.props.loadFn(
-      this.props,
-      { exchange, item , type: this.type, fromDate }
-    );
-  }
+    if (msgs.length === 0){
+      const {
+        one:exchange,
+        two:item
+      } = _exchangeItemInst.getValues()
+      , fromDate = isFd
+          ? _fromDateInst.getValue()
+          : void 0;
+      onLoad(loadFn(props, {
+        exchange,
+        item,
+        type,
+        fromDate
+      }))
+      clearValidationMessages()
+    } else {
+      setValidationMessages(msgs)
+    }
+  }, []);
+  // props, onLoad, loadFn, isFd, msgOnNotSelected, msgOnNotValidFormat,
+  // getType,
+  // setValidationMessages, clearValidationMessages
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  _handleClose = () => {
-    this._handleWithValidationClose()
-  }
-
-  render(){
-    const {
-            isShow, caption, onShow, onFront,
-            futuresURI, msgOnNotSelected,
-            isFd, initFromDate, isYmdOrEmpty, errNotYmdOrEmpty
-          } = this.props
-        , {
-            isToolbar,
-            isShowLabels,
-            validationMessages
-          } = this.state;
-
-    return (
-      <D.DraggableDialog
+  return (
+    <D.DraggableDialog
+       isShow={isShow}
+       caption={caption}
+       menuModel={menuMoreModel}
+       onLoad={_hLoad}
+       onShowChart={onShow}
+       onFront={onFront}
+       onClose={hClose}
+    >
+      <D.Toolbar
+         isShow={isToolbar}
+         buttons={toolbarButtons}
+      />
+      <D.SelectOneTwo
+         ref={_refExchangeItem}
          isShow={isShow}
-         caption={caption}
-         menuModel={this._menuMore}
-         commandButtons={this._commandButtons}
-         onShowChart={onShow}
-         onFront={onFront}
-         onClose={this._handleClose}
-       >
-           <D.Toolbar
-              isShow={isToolbar}
-              buttons={this.toolbarButtons}
-           />
-           <D.SelectOneTwo
-               ref={this._refExchangeItem}
-               isShow={isShow}
-               isShowLabels={isShowLabels}
-               uri={futuresURI}
-               oneCaption="Exchange"
-               oneOptionNames="Exchanges"
-               oneJsonProp="futures"
-               twoCaption="Asset"
-               msgOnNotSelected={msgOnNotSelected}
-           />
-           <D.RowInputSelect
-              isShowLabels={isShowLabels}
-              caption="Type"
-              options={typeOptions}
-              onSelect={this._handleSelectType}
-           />
-           {
-             isFd &&
-             <D.RowDate
-                innerRef={this._refFromDate}
-                isShowLabels={isShowLabels}
-                title="From Date:"
-                initialValue={initFromDate}
-                errorMsg={errNotYmdOrEmpty}
-                onTest={isYmdOrEmpty}
-             />
-           }
-           <D.ValidationMessages
-              validationMessages={validationMessages}
-           />
-      </D.DraggableDialog>
-    );
-  }
-}
+         isShowLabels={isShowLabels}
+         uri={futuresURI}
+         oneCaption="Exchange"
+         oneOptionNames="Exchanges"
+         oneJsonProp="futures"
+         twoCaption="Asset"
+         msgOnNotSelected={msgOnNotSelected}
+      />
+      <D.RowInputSelect
+         isShowLabels={isShowLabels}
+         caption="Type"
+         options={TYPE_OPTIONS}
+         onSelect={setType}
+      />
+      { isFd &&
+        <D.RowDate
+           innerRef={_refFromDate}
+           isShowLabels={isShowLabels}
+           title="From Date:"
+           initialValue={initFromDate}
+           errorMsg={errNotYmdOrEmpty}
+           onTest={isYmdOrEmpty}
+        />
+      }
+      <D.ValidationMessages
+         validationMessages={validationMessages}
+      />
+    </D.DraggableDialog>
+  );
+})
 
 export default FuturesWikiDialog
