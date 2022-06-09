@@ -1,9 +1,16 @@
-import { Component, createRef } from 'react';
+import {
+  useRef,
+  useCallback,
+  getRefValue
+} from '../uiApi';
 
-import D from '../dialogs/DialogCell'
-const { Decor, crMenuMore } = D
+import memoIsShow from '../hoc/memoIsShow';
+import useProperty from '../hooks/useProperty';
+import useDialog from '../dialogs/hooks/useDialog';
 
-const yearOptions = [
+import D from '../dialogs/DialogCell';
+
+const YEAR_OPTIONS = [
   { caption: '2021', value: 2021 },
   { caption: '2020', value: 2020 },
   { caption: '2019', value: 2019 },
@@ -16,143 +23,134 @@ const yearOptions = [
   { caption: '2012', value: 2012 }
 ];
 
-@Decor.dialog
-class Futures3Dialog extends Component {
+const Futures3Dialog = memoIsShow((
+  props
+) => {
+  const {
+    isShow,
+    isFd,
 
-  constructor(props){
-    super(props)
-    //this.year = undefined
+    caption,
+    futuresURI,
+    msgOnNotSelected,
+    msgOnNotValidFormat,
+    initFromDate,
+    isYmdOrEmpty,
+    errNotYmdOrEmpty,
 
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
-    })
+    loadFn,
+    onLoad,
 
-    this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true }
-    )
-    this._refItemMonth = createRef()
-    this._refFromDate = createRef()
-    this._commandButtons = this._crCommandsWithLoad(this)
+    onShow,
+    onFront,
+    onClose,
+    onClickInfo
+  } = props
+  , [
+    isToolbar,
+    isShowLabels,
+    menuMoreModel,
+    toolbarButtons,
+    validationMessages,
+    setValidationMessages,
+    clearValidationMessages,
+    hClose
+  ] = useDialog({
+    onClickInfo,
+    onClose
+  })
+  , _refItemMonth = useRef()
+  , _refFromDate = useRef()
+  , [
+    setYear,
+    getYear
+  ] = useProperty()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hLoad = useCallback(() => {
+    const msgs = []
+    , _itemMonthInst = getRefValue(_refItemMonth)
+    , { msg=[] } = _itemMonthInst.getValidation()
+    , year = getYear()
+    , _fromDateInst = getRefValue(_refFromDate);
 
-    this.state = {
-      ...this._isWithInitialState()
+    msgs.push(...msg)
+    if (!year) {
+      msgs.push(msgOnNotSelected('Year'))
     }
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps){
-       if (this.props.isShow === nextProps.isShow){
-          return false;
-       }
-    }
-    return true;
-  }
-
-  _handleSelectYear = (year) => {
-    this.year = year
-  }
-
-  _handleLoad = () => {
-    this._handleWithValidationLoad(
-      this._createValidationMessages(),
-      this._createLoadOption
-    )
-  }
-
-  _createValidationMessages = () => {
-    const { msgOnNotSelected, msgOnNotValidFormat, isFd } = this.props
-    let   msg = [];
-
-    const { isValid:isValid1, msg:msg1 } = this._refItemMonth.current.getValidation();
-    if (!isValid1) { msg = msg.concat(msg1); }
-
-    if (!this.year) { msg.push(msgOnNotSelected('Year')); }
-
-    if (isFd && !this._refFromDate.current.isValid()){
-      msg.push(msgOnNotValidFormat('From Date'));
+    if (isFd && !_fromDateInst.isValid()){
+      msgs.push(msgOnNotValidFormat('From Date'));
     }
 
-    msg.isValid = msg.length === 0
-       ? true : false;
-    return msg;
-  }
+    if (msgs.length === 0) {
+      const {
+        one:item,
+        two:month
+      } = _itemMonthInst.getValues()
+      , fromDate = isFd
+          ? _fromDateInst.getValue()
+          : void 0;
+      onLoad(loadFn(props, {
+        item,
+        month,
+        year,
+        fromDate
+      }))
+      clearValidationMessages()
+    } else {
+      setValidationMessages(msgs)
+    }
+  }, []);
+  // props, isFd, loadFn, onLoad, msgOnNotSelected, msgOnNotValidFormat,
+  // getYear,
+  // clearValidationMessages, setValidationMessages
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  _createLoadOption = () => {
-    const { one:item, two:month } = this._refItemMonth.current.getValues()
-    , fromDate = this.props.isFd
-        ? this._refFromDate.current.getValue()
-        : void 0;
-    return this.props.loadFn(
-      this.props,
-      { item, month, year: this.year, fromDate }
-    );
-  }
-
-  _handleClose = () => {
-    this._handleWithValidationClose()
-  }
-
-  render(){
-    const {
-            isShow, caption, onShow, onFront,
-            futuresURI, msgOnNotSelected,
-            isFd, initFromDate, isYmdOrEmpty, errNotYmdOrEmpty
-          } = this.props
-        , {
-            isToolbar,
-            isShowLabels,
-            validationMessages
-          } = this.state;
-
-    return (
-      <D.DraggableDialog
-         isShow={isShow}
-         caption={caption}
-         menuModel={this._menuMore}
-         commandButtons={this._commandButtons}
-         onShowChart={onShow}
-         onFront={onFront}
-         onClose={this._handleClose}
-       >
-           <D.Toolbar
-              isShow={isToolbar}
-              buttons={this.toolbarButtons}
-           />
-           <D.SelectOneTwo
-               ref={this._refItemMonth}
-               isShow={isShow}
-               isShowLabels={isShowLabels}
-               uri={futuresURI}
-               oneCaption="Futures"
-               oneOptionNames="Futures"
-               oneJsonProp="futures"
-               twoCaption="Month"
-               msgOnNotSelected={msgOnNotSelected}
-           />
-           <D.RowInputSelect
-              isShowLabels={isShowLabels}
-              caption="Year"
-              options={yearOptions}
-              onSelect={this._handleSelectYear}
-           />
-           {
-              isFd &&
-              <D.RowDate
-                 innerRef={this._refFromDate}
-                 isShowLabels={isShowLabels}
-                 title="From Date:"
-                 initialValue={initFromDate}
-                 errorMsg={errNotYmdOrEmpty}
-                 onTest={isYmdOrEmpty}
-              />
-            }
-           <D.ValidationMessages
-              validationMessages={validationMessages}
-           />
-      </D.DraggableDialog>
-    );
-  }
-}
+  return (
+    <D.DraggableDialog
+       isShow={isShow}
+       caption={caption}
+       menuModel={menuMoreModel}
+       onLoad={_hLoad}
+       onShowChart={onShow}
+       onFront={onFront}
+       onClose={hClose}
+    >
+       <D.Toolbar
+          isShow={isToolbar}
+          buttons={toolbarButtons}
+       />
+       <D.SelectOneTwo
+          ref={_refItemMonth}
+          isShow={isShow}
+          isShowLabels={isShowLabels}
+          uri={futuresURI}
+          oneCaption="Futures"
+          oneOptionNames="Futures"
+          oneJsonProp="futures"
+          twoCaption="Month"
+          msgOnNotSelected={msgOnNotSelected}
+       />
+       <D.RowInputSelect
+          isShowLabels={isShowLabels}
+          caption="Year"
+          options={YEAR_OPTIONS}
+          onSelect={setYear}
+       />
+       {  isFd &&
+          <D.RowDate
+             innerRef={_refFromDate}
+             isShowLabels={isShowLabels}
+             title="From Date:"
+             initialValue={initFromDate}
+             errorMsg={errNotYmdOrEmpty}
+             onTest={isYmdOrEmpty}
+          />
+        }
+       <D.ValidationMessages
+          validationMessages={validationMessages}
+       />
+    </D.DraggableDialog>
+  );
+})
 
 export default Futures3Dialog
