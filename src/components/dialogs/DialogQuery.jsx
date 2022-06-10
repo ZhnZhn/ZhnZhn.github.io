@@ -1,10 +1,17 @@
-import { Component } from 'react';
-//import PropTypes from "prop-types";
+import {
+  useRef,
+  useState,
+  useCallback,
+  getRefValue
+} from '../uiApi';
+
+import memoIsShow from '../hoc/memoIsShow';
+import useToggle from '../hooks/useToggle';
+import useEventCallback from '../hooks/useEventCallback';
+import useDialog from './hooks/useDialog';
 
 import { crDialogChartOptions } from './ChartOptionsFn';
-import D from './DialogCell'
-
-const { Decor, crMenuMore } = D
+import D from './DialogCell';
 
 const ERR_MSG = 'Empty or Id format is not valid'
 , S_ID_CAPTION = { width: 85 }
@@ -14,145 +21,156 @@ const _isStrNotBlank = str => typeof str === 'string'
   && str.trim();
 
 const _testId = (value) => _isStrNotBlank(value)
-  && _isStrNotBlank(value.split('/')[2])
-  ? true : false;
+  && _isStrNotBlank(value.split('/')[2]);
 
-@Decor.withToolbar
-@Decor.withLoad
-class DialogQuery extends Component {
-  constructor(props){
-    super(props)
+const CHART_OPTIONS = crDialogChartOptions({
+  chartsType: 't2'
+});
 
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
-    })
-    const { noDate } = props;
-    this.toolbarButtons = this._createType2WithToolbar(
-       props, { noDate, isOptions: true }
-    )
-    this._chartOptions = crDialogChartOptions({ chartsType: 't2' })
-    this._commandButtons = this._crCommandsWithLoad(this)
+const DialogQuery = memoIsShow((
+  props
+) => {
+  const {
+    isShow,
+    noDate,
 
-    this.state = {
-       isToolbar: true,
-       isShowLabels: true,
-       isShowDate: true,
-       isOptions: false,
-       chartType: 'SPLINE'
-    }
-  }
+    caption,
+    oneCaption,
+    onePlaceholder,
+    initFromDate,
+    initToDate,
+    msgOnNotValidFormat,
+    onTestDate,
 
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps){
-       if (this.props.isShow === nextProps.isShow){
-          return false;
-       }
-    }
-    return true;
-  }
+    loadFn,
+    onLoad,
 
-  _hSelectChartType = (chartType) => {
-    this.setState({ chartType })
-  }
-  _onRegColor = (comp) => {
-    this.colorComp = comp
-  }
+    onShow,
+    onFront,
+    onClose,
+    onClickInfo
+  } = props
+  , [
+    chartType,
+    setChartType
+  ] = useState('SPLINE')
+  , [
+    isShowOptions,
+    toggleOptions
+  ] = useToggle(false)
+  , [
+    isShowDate,
+    toggleDate
+  ] = useToggle(true)
+  , [
+    isToolbar,
+    isShowLabels,
+    menuMoreModel,
+    toolbarButtons
+  ] = useDialog({
+    onClickInfo,
+    onClose,
+    toggleOptions,
+    toggleDate: noDate ? void 0 : toggleDate
+  })
+  , _refIdInput = useRef()
+  , _refDates = useRef()
+  , _refColorComp = useRef()
+  , _onRegColor = useCallback(comp => {
+    _refColorComp.current = comp
+  }, [])
+  , _refDialogOptions = useRef({
+    isNotZoomToMinMax: false,
+    isFilterZero: false
+  })
+  , toggleDialogOption = useCallback((propName, is) => {
+    _refDialogOptions.current[propName] = is
+  }, [])
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hideOptions = useCallback(() => {
+    toggleOptions(false)
+  }, [])
+  // toggleOption
+  /*eslint-enable react-hooks/exhaustive-deps */
+  , _hLoad = useEventCallback(() => {
+     const _idInputInst = getRefValue(_refIdInput)
+     if (_idInputInst && _idInputInst.isValid()){
+       const _value = _idInputInst.getValue()
+       , _colorCompInst = getRefValue(_refColorComp)
+       , {
+         seriaColor,
+         seriaWidth
+       } = _colorCompInst
+         ? _colorCompInst.getConf()
+         : {};
+       onLoad(loadFn(props, {
+         items: [{ c: _value, v: _value }],
+         dialogOptions: getRefValue(_refDialogOptions),
+         chartType,
+         seriaColor,
+         seriaWidth
+       }));
+     } else {
+       _idInputInst.showErrMsg()
+     }
+  });
 
-
-  _handleLoad = () => {
-    if (this._idInput) {
-      if (this._idInput.isValid()) {
-        const _value = this._idInput.getValue()
-        , { props, state, colorComp, dialogOptions } = this
-        , { onLoad, loadFn } = props
-        , { chartType } = state
-        , { seriaColor, seriaWidth } = colorComp
-            ? colorComp.getConf()
-            : {};
-        onLoad(loadFn(this.props, {
-          items: [{ c: _value, v: _value }],
-          chartType, seriaColor, seriaWidth,
-          dialogOptions
-        }));
-      } else {
-        this._idInput.showErrMsg()
-      }
-    }
-  }
-
-  _refIdInput = c => this._idInput = c
-  _refDates = c => this.datesFragment = c
-
-  render(){
-    const { caption, isShow,
-            onShow, onFront, onClose,
-            oneCaption, onePlaceholder,
-            noDate, initFromDate, initToDate,
-            msgOnNotValidFormat, onTestDate
-          } = this.props
-        , { isToolbar,
-            isShowLabels, isShowDate,
-            isOptions,
-            chartType
-          } = this.state;
-    return (
-      <D.DraggableDialog
-          isShow={isShow}
-          menuModel={this._menuMore}
-          caption={caption}
-          commandButtons={this._commandButtons}
-          onShowChart={onShow}
-          onFront={onFront}
-          onClose={onClose}
-      >
-        <D.Toolbar
-          isShow={isToolbar}
-          buttons={this.toolbarButtons}
-        />
-        <D.ModalOptions
-          isShow={isOptions}
-          toggleOption={this._toggleOptionWithToolbar}
-          onClose={this._hideOptionsWithToolbar}
-        />
-        <D.RowPattern
-          ref={this._refIdInput}
-          isShow={isShow}
-          isShowLabels={isShowLabels}
-          captionStyle={S_ID_CAPTION}
-          rootStyle={S_ID_ROOT}
-          placeholder={onePlaceholder}
-          caption={oneCaption}
-          onTest={_testId}
-          errorMsg={ERR_MSG}
-        />
-        <D.RowChartDate
-            chartType={chartType}
+  return (
+    <D.DraggableDialog
+      isShow={isShow}
+      menuModel={menuMoreModel}
+      caption={caption}
+      onLoad={_hLoad}
+      onShowChart={onShow}
+      onFront={onFront}
+      onClose={onClose}
+    >
+      <D.Toolbar
+        isShow={isToolbar}
+        buttons={toolbarButtons}
+      />
+      <D.ModalOptions
+        isShow={isShowOptions}
+        toggleOption={toggleDialogOption}
+        onClose={_hideOptions}
+      />
+      <D.RowPattern
+        ref={_refIdInput}
+        isShow={isShow}
+        isShowLabels={isShowLabels}
+        captionStyle={S_ID_CAPTION}
+        rootStyle={S_ID_ROOT}
+        placeholder={onePlaceholder}
+        caption={oneCaption}
+        onTest={_testId}
+        errorMsg={ERR_MSG}
+      />
+      <D.RowChartDate
+        chartType={chartType}
+        isShowLabels={isShowLabels}
+        isShowChart={true}
+        labelStyle={S_ID_CAPTION}
+        selectWidth={S_ID_ROOT.width}
+        chartOptions={CHART_OPTIONS}
+        onSelectChart={setChartType}
+        onRegColor={_onRegColor}
+        noDate={noDate}
+      />
+      {
+        !noDate &&
+        <D.ShowHide isShow={isShowDate}>
+          <D.DatesFragment
+            ref={_refDates}
             isShowLabels={isShowLabels}
-            isShowChart={true}
-            labelStyle={S_ID_CAPTION}
-            selectWidth={S_ID_ROOT.width}
-            chartOptions={this._chartOptions}
-            onSelectChart={this._hSelectChartType}
-            onRegColor={this._onRegColor}
-            noDate={noDate}
+            initFromDate={initFromDate}
+            initToDate={initToDate}
+            msgOnNotValidFormat={msgOnNotValidFormat}
+            onTestDate={onTestDate}
           />
-        {
-          !noDate &&
-          <D.ShowHide isShow={isShowDate}>
-            <D.DatesFragment
-               ref={this._refDates}
-               isShowLabels={isShowLabels}
-               initFromDate={initFromDate}
-               initToDate={initToDate}
-               msgOnNotValidFormat={msgOnNotValidFormat}
-               onTestDate={onTestDate}
-            />
-          </D.ShowHide>
-        }
-     </D.DraggableDialog>
-    );
-  }
-}
+        </D.ShowHide>
+      }
+   </D.DraggableDialog>
+  );
+});
 
 export default DialogQuery
