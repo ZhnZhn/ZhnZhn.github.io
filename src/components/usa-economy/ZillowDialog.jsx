@@ -1,222 +1,217 @@
-import { Component } from 'react'
+import {
+  useRef,
+  useCallback,
+  getRefValue
+} from '../uiApi';
 
-import D from '../dialogs/DialogCell'
-const { Decor, crMenuMore } = D
+import memoIsShow from '../hoc/memoIsShow';
+import useToggle from '../hooks/useToggle';
+import useProperty from '../hooks/useProperty';
+import useDialog from '../dialogs/hooks/useDialog';
+import checkAreDatesValid from '../dialogs/hooks/checkAreDatesValid';
+
+import D from '../dialogs/DialogCell';
 
 const DATA_NOTE = '*Data present not for all zip codes';
-
-const S = {
-  TIP: {
-    margin: 10,
-    marginTop: 16,
-    fontWeight: 'bold'
-  }
+const S_TIP = {
+  margin: 10,
+  marginTop: 16,
+  fontWeight: 'bold'
 };
 
 const _isFn = fn => typeof fn === 'function';
-const _isByZipCode = item => item && item.value === 'Z';
-
-const _loadFn = (props, options) => {
-  const { fnValue, dataColumn, loadId, dataSource } = props
-  , { one, two, three, fromDate, toDate, zipCode } = options
-  , _hasZipCode = _isByZipCode(two)
-  , _three = !_hasZipCode
-       ? three
-       : { value: zipCode, caption: zipCode }
-  , _value = _isFn(fnValue)
-       ? fnValue(one.value, two.value, _three.value)
-       : void 0;
-  return {
-    value: _value,
-    fromDate: fromDate,
-    toDate: toDate,
-    dataColumn: dataColumn,
-    loadId: loadId,
-    title: `${two.caption}: ${_three.caption}`,
-    subtitle: one.caption,
-    dataSource: dataSource,
-    isKeyFeature: _hasZipCode
-  };
-};
+const _isByZipCode = item => !!item
+  && item.value === 'Z';
 
 const _reZipCode = /^\d{5}$/;
 const _isZipCode = value => _reZipCode.test(value.trim());
 
-@Decor.dialog
-class  ZillowDialog extends Component {
+const ZillowDialog = memoIsShow(({
+  isShow,
 
-  constructor(props){
-    super(props)
+  caption,
+  oneCaption,
+  oneURI,
+  oneJsonProp,
+  twoCaption,
+  twoURI,
+  twoJsonProp,
+  threeCaption,
+  msgOnNotSelected,
+  initFromDate,
+  initToDate,
+  msgOnNotValidFormat,
+  onTestDate,
 
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
-    })
+  dataColumn,
+  loadId,
+  dataSource,
 
-    this.toolbarButtons = this._createType2WithToolbar(props)
-    this._commandButtons = this._crCommandsWithLoad(this)
+  fnValue,
+  onLoad,
 
-    this.state = {
-      ...this._isWithInitialState(),
-      isShowPattern: false
+  onShow,
+  onFront,
+  onClose,
+  onClickInfo
+}) => {
+  const [
+    isShowPattern,
+    togglePattern
+  ] = useToggle(false)
+  , [
+    isShowDate,
+    toggleDate
+  ] = useToggle(false)
+  , [
+    isToolbar,
+    isShowLabels,
+    menuMoreModel,
+    toolbarButtons,
+    validationMessages,
+    setValidationMessages,
+    clearValidationMessages,
+    hClose
+  ] = useDialog({
+    onClickInfo,
+    onClose,
+    toggleDate
+  })
+  , _refTypeCode = useRef()
+  , _refZip = useRef()
+  , _refDates = useRef()
+  , [
+    setMetric,
+    getMetric
+  ] = useProperty()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hSelectType = useCallback((type) => {
+    togglePattern(_isByZipCode(type))
+  }, [])
+  // togglePattern
+  , _hLoad = useCallback(() => {
+    const msgs = []
+    , metric = getMetric()
+    , _typeCodeInst = getRefValue(_refTypeCode)
+    , { one } = _typeCodeInst.getValues()
+    , _zipCodeInst = getRefValue(_refZip);
+
+    if (!metric) {
+      msgs.push(msgOnNotSelected(oneCaption));
     }
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps){
-       if (this.props.isShow === nextProps.isShow){
-          return false;
-       }
-    }
-    return true;
-  }
-
-  _hSelectMetric = (metric) => {
-    this.metric = metric;
-  }
-  _handleSelectType = (type) => {
-    if (_isByZipCode(type)){
-      this.setState({ isShowPattern: true })
-    } else {
-      this.setState({ isShowPattern: false })
-    }
-  }
-
-  _handleLoad = () => {
-    this._handleWithValidationLoad(
-      this._createValidationMessages(),
-      this._createLoadOption
-    );
-  }
-  _createValidationMessages = () => {
-     const { oneCaption } = this.props;
-     let msg = [];
-
-     if (!this.metric) {
-       msg.push(this.props.msgOnNotSelected(oneCaption));
-     }
-
-     const { one } = this.inputTypeCode.getValues()
-     if (_isByZipCode(one)) {
-       if (!this.inputZipCode.isValid()){
-         msg = msg.concat('Zip Code is not valid')
-       }
-     } else {
-       const { isValid:isValid1, msg:msg1 } = this.inputTypeCode.getValidation();
-       if (!isValid1) { msg = msg.concat(msg1); }
-     }
-
-     const {isValid, datesMsg} = this.datesFragment.getValidation();
-     if (!isValid) { msg = msg.concat(datesMsg); }
-
-     msg.isValid = msg.length === 0
-        ? true
-        : false;
-     return msg;
-  }
-
-  _createLoadOption = () => {
-    const { one:two, two:three } = this.inputTypeCode.getValues()
-        , { fromDate, toDate } = this.datesFragment.getValues()
-        , zipCode = this.inputZipCode.getValue();
-
-    return _loadFn(
-      this.props, {
-        one: this.metric,
-        two, three,
-        fromDate, toDate,
-        zipCode
+    if (_isByZipCode(one)) {
+      if (!_zipCodeInst.isValid()){
+        msgs.push('Zip Code is not valid')
       }
-    );
-  }
+    } else {
+      const { msg=[] } = _typeCodeInst.getValidation();
+      if (msg.length !== 0) {
+        msgs.push(...msg)
+      }
+    }
+    checkAreDatesValid(_refDates, msgs)
 
-  _handleClose = () => {
-    this._handleWithValidationClose()
-  }
+    if (msgs.length === 0) {
+      const {
+        one:two,
+        two:three
+      } = _typeCodeInst.getValues()
+      , zipCode = _zipCodeInst.getValue()
+      , _hasZipCode = _isByZipCode(two)
+      , _three = !_hasZipCode
+          ? three
+          : { value: zipCode, caption: zipCode }
+      , value = _isFn(fnValue)
+          ? fnValue(one.value, two.value, _three.value)
+          : void 0
+      , _datesInst = getRefValue(_refDates);
 
-  _refTypeCode = c => this.inputTypeCode = c
-  _refZip = n => this.inputZipCode = n
-  _refDates = c => this.datesFragment = c
+      onLoad({
+        ..._datesInst.getValues(),
+        title: `${two.caption}: ${_three.caption}`,
+        subtitle: one.caption,
+        isKeyFeature: _hasZipCode,
+        value,
+        dataColumn,
+        loadId,
+        dataSource
+      })
+      clearValidationMessages()
+    } else {
+      setValidationMessages(msgs)
+    }
+  }, []);
+  // oneCaption, msgOnNotSelected,
+  // fnValue, dataColumn, loadId, dataSource, onLoad,
+  // getMetric,
+  // clearValidationMessages, setValidationMessages
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  render(){
-    const {
-      caption, isShow, onShow, onFront,
-      oneCaption, oneURI, oneJsonProp,
-      twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
-      initFromDate, initToDate, msgOnNotValidFormat, onTestDate
-    } = this.props
-    , {
-      isToolbar,
-      isShowLabels, isShowDate, isShowPattern,
-      validationMessages
-    } = this.state;
-
-    return(
-        <D.DraggableDialog
-           isShow={isShow}
-           caption={caption}
-           menuModel={this._menuMore}
-           commandButtons={this._commandButtons}
-           onShowChart={onShow}
-           onFront={onFront}
-           onClose={this._handleClose}
-         >
-             <D.Toolbar
-                isShow={isToolbar}
-                buttons={this.toolbarButtons}
-             />
-             <D.SelectWithLoad
-               isShow={isShow}
-               isShowLabels={isShowLabels}
-               uri={oneURI}
-               jsonProp={oneJsonProp}
-               caption={oneCaption}
-               optionNames="Items"
-               onSelect={this._hSelectMetric}
-             />
-             <D.SelectOneTwo
-                 ref={this._refTypeCode}
-                 isShow={isShow}
-                 isShowLabels={isShowLabels}
-                 isHideTwo={isShowPattern}
-                 uri={twoURI}
-                 oneCaption={twoCaption}
-                 oneJsonProp={twoJsonProp}
-                 twoCaption={threeCaption}
-                 msgOnNotSelected={msgOnNotSelected}
-                 onSelectOne={this._handleSelectType}
-             />
-             <D.ShowHide isShow={isShowPattern}>
-                <D.RowPattern
-                  ref={this._refZip}
-                  isShowLabels={isShowLabels}
-                  caption="*Zip Code"
-                  placeholder="Zip Code, 5 Digits"
-                  onTest={_isZipCode}
-                  errorMsg="5 digits format is required"
-                />
-             </D.ShowHide>
-             <D.ShowHide isShow={isShowDate}>
-               <D.DatesFragment
-                 ref={this._refDates}
-                 isShowLabels={isShowLabels}
-                 initFromDate={initFromDate}
-                 initToDate={initToDate}
-                 msgOnNotValidFormat={msgOnNotValidFormat}
-                 onTestDate={onTestDate}
-               />
-             </D.ShowHide>
-             <D.ShowHide isShow={isShowPattern}>
-               <div style={S.TIP}>
-                 {DATA_NOTE}
-               </div>
-             </D.ShowHide>
-             <D.ValidationMessages
-                 validationMessages={validationMessages}
-             />
-        </D.DraggableDialog>
-    );
-  }
-}
+  return (
+    <D.DraggableDialog
+       isShow={isShow}
+       caption={caption}
+       menuModel={menuMoreModel}
+       onLoad={_hLoad}
+       onShowChart={onShow}
+       onFront={onFront}
+       onClose={hClose}
+    >
+      <D.Toolbar
+         isShow={isToolbar}
+         buttons={toolbarButtons}
+      />
+      <D.SelectWithLoad
+         isShow={isShow}
+         isShowLabels={isShowLabels}
+         uri={oneURI}
+         jsonProp={oneJsonProp}
+         caption={oneCaption}
+         optionNames="Items"
+         onSelect={setMetric}
+      />
+      <D.SelectOneTwo
+         ref={_refTypeCode}
+         isShow={isShow}
+         isShowLabels={isShowLabels}
+         isHideTwo={isShowPattern}
+         uri={twoURI}
+         oneCaption={twoCaption}
+         oneJsonProp={twoJsonProp}
+         twoCaption={threeCaption}
+         msgOnNotSelected={msgOnNotSelected}
+         onSelectOne={_hSelectType}
+      />
+      <D.ShowHide isShow={isShowPattern}>
+         <D.RowPattern
+            ref={_refZip}
+            isShowLabels={isShowLabels}
+            caption="*Zip Code"
+            placeholder="Zip Code, 5 Digits"
+            onTest={_isZipCode}
+            errorMsg="5 digits format is required"
+         />
+      </D.ShowHide>
+      <D.ShowHide isShow={isShowDate}>
+        <D.DatesFragment
+           ref={_refDates}
+           isShowLabels={isShowLabels}
+           initFromDate={initFromDate}
+           initToDate={initToDate}
+           msgOnNotValidFormat={msgOnNotValidFormat}
+           onTestDate={onTestDate}
+        />
+      </D.ShowHide>
+      <D.ShowHide isShow={isShowPattern}>
+        <div style={S_TIP}>
+          {DATA_NOTE}
+        </div>
+      </D.ShowHide>
+      <D.ValidationMessages
+         validationMessages={validationMessages}
+      />
+    </D.DraggableDialog>
+  );
+});
 
 export default ZillowDialog

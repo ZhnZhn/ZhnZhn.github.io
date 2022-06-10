@@ -3,290 +3,208 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _uiApi = require("../uiApi");
 
-var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 
-var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
-var _jsxRuntime = require("react/jsx-runtime.js");
+var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
-var _react = require("react");
+var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
+
+var _checkAreDatesValid = _interopRequireDefault(require("../dialogs/hooks/checkAreDatesValid"));
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _dec, _class, _temp;
+var _jsxRuntime = require("react/jsx-runtime");
 
-var Decor = _DialogCell["default"].Decor,
-    crMenuMore = _DialogCell["default"].crMenuMore;
-var DATA_NOTE = '*Data present not for all zip codes';
-var S = {
-  TIP: {
-    margin: 10,
-    marginTop: 16,
-    fontWeight: 'bold'
-  }
+const DATA_NOTE = '*Data present not for all zip codes';
+const S_TIP = {
+  margin: 10,
+  marginTop: 16,
+  fontWeight: 'bold'
 };
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
+const _isFn = fn => typeof fn === 'function';
 
-var _isByZipCode = function _isByZipCode(item) {
-  return item && item.value === 'Z';
-};
+const _isByZipCode = item => !!item && item.value === 'Z';
 
-var _loadFn = function _loadFn(props, options) {
-  var fnValue = props.fnValue,
-      dataColumn = props.dataColumn,
-      loadId = props.loadId,
-      dataSource = props.dataSource,
-      one = options.one,
-      two = options.two,
-      three = options.three,
-      fromDate = options.fromDate,
-      toDate = options.toDate,
-      zipCode = options.zipCode,
-      _hasZipCode = _isByZipCode(two),
-      _three = !_hasZipCode ? three : {
-    value: zipCode,
-    caption: zipCode
-  },
-      _value = _isFn(fnValue) ? fnValue(one.value, two.value, _three.value) : void 0;
+const _reZipCode = /^\d{5}$/;
 
-  return {
-    value: _value,
-    fromDate: fromDate,
-    toDate: toDate,
-    dataColumn: dataColumn,
-    loadId: loadId,
-    title: two.caption + ": " + _three.caption,
-    subtitle: one.caption,
-    dataSource: dataSource,
-    isKeyFeature: _hasZipCode
-  };
-};
+const _isZipCode = value => _reZipCode.test(value.trim());
 
-var _reZipCode = /^\d{5}$/;
+const ZillowDialog = (0, _memoIsShow.default)(_ref => {
+  let {
+    isShow,
+    caption,
+    oneCaption,
+    oneURI,
+    oneJsonProp,
+    twoCaption,
+    twoURI,
+    twoJsonProp,
+    threeCaption,
+    msgOnNotSelected,
+    initFromDate,
+    initToDate,
+    msgOnNotValidFormat,
+    onTestDate,
+    dataColumn,
+    loadId,
+    dataSource,
+    fnValue,
+    onLoad,
+    onShow,
+    onFront,
+    onClose,
+    onClickInfo
+  } = _ref;
 
-var _isZipCode = function _isZipCode(value) {
-  return _reZipCode.test(value.trim());
-};
+  const [isShowPattern, togglePattern] = (0, _useToggle.default)(false),
+        [isShowDate, toggleDate] = (0, _useToggle.default)(false),
+        [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
+    onClickInfo,
+    onClose,
+    toggleDate
+  }),
+        _refTypeCode = (0, _uiApi.useRef)(),
+        _refZip = (0, _uiApi.useRef)(),
+        _refDates = (0, _uiApi.useRef)(),
+        [setMetric, getMetric] = (0, _useProperty.default)()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _hSelectType = (0, _uiApi.useCallback)(type => {
+    togglePattern(_isByZipCode(type));
+  }, []) // togglePattern
+  ,
+        _hLoad = (0, _uiApi.useCallback)(() => {
+    const msgs = [],
+          metric = getMetric(),
+          _typeCodeInst = (0, _uiApi.getRefValue)(_refTypeCode),
+          {
+      one
+    } = _typeCodeInst.getValues(),
+          _zipCodeInst = (0, _uiApi.getRefValue)(_refZip);
 
-var ZillowDialog = (_dec = Decor.dialog, _dec(_class = (_temp = /*#__PURE__*/function (_Component) {
-  (0, _inheritsLoose2["default"])(ZillowDialog, _Component);
+    if (!metric) {
+      msgs.push(msgOnNotSelected(oneCaption));
+    }
 
-  function ZillowDialog(props) {
-    var _this;
-
-    _this = _Component.call(this, props) || this;
-
-    _this._hSelectMetric = function (metric) {
-      _this.metric = metric;
-    };
-
-    _this._handleSelectType = function (type) {
-      if (_isByZipCode(type)) {
-        _this.setState({
-          isShowPattern: true
-        });
-      } else {
-        _this.setState({
-          isShowPattern: false
-        });
+    if (_isByZipCode(one)) {
+      if (!_zipCodeInst.isValid()) {
+        msgs.push('Zip Code is not valid');
       }
-    };
+    } else {
+      const {
+        msg = []
+      } = _typeCodeInst.getValidation();
 
-    _this._handleLoad = function () {
-      _this._handleWithValidationLoad(_this._createValidationMessages(), _this._createLoadOption);
-    };
-
-    _this._createValidationMessages = function () {
-      var oneCaption = _this.props.oneCaption;
-      var msg = [];
-
-      if (!_this.metric) {
-        msg.push(_this.props.msgOnNotSelected(oneCaption));
-      }
-
-      var _this$inputTypeCode$g = _this.inputTypeCode.getValues(),
-          one = _this$inputTypeCode$g.one;
-
-      if (_isByZipCode(one)) {
-        if (!_this.inputZipCode.isValid()) {
-          msg = msg.concat('Zip Code is not valid');
-        }
-      } else {
-        var _this$inputTypeCode$g2 = _this.inputTypeCode.getValidation(),
-            isValid1 = _this$inputTypeCode$g2.isValid,
-            msg1 = _this$inputTypeCode$g2.msg;
-
-        if (!isValid1) {
-          msg = msg.concat(msg1);
-        }
-      }
-
-      var _this$datesFragment$g = _this.datesFragment.getValidation(),
-          isValid = _this$datesFragment$g.isValid,
-          datesMsg = _this$datesFragment$g.datesMsg;
-
-      if (!isValid) {
-        msg = msg.concat(datesMsg);
-      }
-
-      msg.isValid = msg.length === 0 ? true : false;
-      return msg;
-    };
-
-    _this._createLoadOption = function () {
-      var _this$inputTypeCode$g3 = _this.inputTypeCode.getValues(),
-          two = _this$inputTypeCode$g3.one,
-          three = _this$inputTypeCode$g3.two,
-          _this$datesFragment$g2 = _this.datesFragment.getValues(),
-          fromDate = _this$datesFragment$g2.fromDate,
-          toDate = _this$datesFragment$g2.toDate,
-          zipCode = _this.inputZipCode.getValue();
-
-      return _loadFn(_this.props, {
-        one: _this.metric,
-        two: two,
-        three: three,
-        fromDate: fromDate,
-        toDate: toDate,
-        zipCode: zipCode
-      });
-    };
-
-    _this._handleClose = function () {
-      _this._handleWithValidationClose();
-    };
-
-    _this._refTypeCode = function (c) {
-      return _this.inputTypeCode = c;
-    };
-
-    _this._refZip = function (n) {
-      return _this.inputZipCode = n;
-    };
-
-    _this._refDates = function (c) {
-      return _this.datesFragment = c;
-    };
-
-    _this._menuMore = crMenuMore((0, _assertThisInitialized2["default"])(_this), {
-      toggleToolBar: _this._toggleWithToolbar,
-      onAbout: _this._clickInfoWithToolbar
-    });
-    _this.toolbarButtons = _this._createType2WithToolbar(props);
-    _this._commandButtons = _this._crCommandsWithLoad((0, _assertThisInitialized2["default"])(_this));
-    _this.state = (0, _extends2["default"])({}, _this._isWithInitialState(), {
-      isShowPattern: false
-    });
-    return _this;
-  }
-
-  var _proto = ZillowDialog.prototype;
-
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-    if (this.props !== nextProps) {
-      if (this.props.isShow === nextProps.isShow) {
-        return false;
+      if (msg.length !== 0) {
+        msgs.push(...msg);
       }
     }
 
-    return true;
-  };
+    (0, _checkAreDatesValid.default)(_refDates, msgs);
 
-  _proto.render = function render() {
-    var _this$props = this.props,
-        caption = _this$props.caption,
-        isShow = _this$props.isShow,
-        onShow = _this$props.onShow,
-        onFront = _this$props.onFront,
-        oneCaption = _this$props.oneCaption,
-        oneURI = _this$props.oneURI,
-        oneJsonProp = _this$props.oneJsonProp,
-        twoCaption = _this$props.twoCaption,
-        twoURI = _this$props.twoURI,
-        twoJsonProp = _this$props.twoJsonProp,
-        threeCaption = _this$props.threeCaption,
-        msgOnNotSelected = _this$props.msgOnNotSelected,
-        initFromDate = _this$props.initFromDate,
-        initToDate = _this$props.initToDate,
-        msgOnNotValidFormat = _this$props.msgOnNotValidFormat,
-        onTestDate = _this$props.onTestDate,
-        _this$state = this.state,
-        isToolbar = _this$state.isToolbar,
-        isShowLabels = _this$state.isShowLabels,
-        isShowDate = _this$state.isShowDate,
-        isShowPattern = _this$state.isShowPattern,
-        validationMessages = _this$state.validationMessages;
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell["default"].DraggableDialog, {
+    if (msgs.length === 0) {
+      const {
+        one: two,
+        two: three
+      } = _typeCodeInst.getValues(),
+            zipCode = _zipCodeInst.getValue(),
+            _hasZipCode = _isByZipCode(two),
+            _three = !_hasZipCode ? three : {
+        value: zipCode,
+        caption: zipCode
+      },
+            value = _isFn(fnValue) ? fnValue(one.value, two.value, _three.value) : void 0,
+            _datesInst = (0, _uiApi.getRefValue)(_refDates);
+
+      onLoad({ ..._datesInst.getValues(),
+        title: two.caption + ": " + _three.caption,
+        subtitle: one.caption,
+        isKeyFeature: _hasZipCode,
+        value,
+        dataColumn,
+        loadId,
+        dataSource
+      });
+      clearValidationMessages();
+    } else {
+      setValidationMessages(msgs);
+    }
+  }, []); // oneCaption, msgOnNotSelected,
+  // fnValue, dataColumn, loadId, dataSource, onLoad,
+  // getMetric,
+  // clearValidationMessages, setValidationMessages
+
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
+    isShow: isShow,
+    caption: caption,
+    menuModel: menuMoreModel,
+    onLoad: _hLoad,
+    onShowChart: onShow,
+    onFront: onFront,
+    onClose: hClose,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
+      isShow: isToolbar,
+      buttons: toolbarButtons
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
-      caption: caption,
-      menuModel: this._menuMore,
-      commandButtons: this._commandButtons,
-      onShowChart: onShow,
-      onFront: onFront,
-      onClose: this._handleClose,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].Toolbar, {
-        isShow: isToolbar,
-        buttons: this.toolbarButtons
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectWithLoad, {
-        isShow: isShow,
+      isShowLabels: isShowLabels,
+      uri: oneURI,
+      jsonProp: oneJsonProp,
+      caption: oneCaption,
+      optionNames: "Items",
+      onSelect: setMetric
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectOneTwo, {
+      ref: _refTypeCode,
+      isShow: isShow,
+      isShowLabels: isShowLabels,
+      isHideTwo: isShowPattern,
+      uri: twoURI,
+      oneCaption: twoCaption,
+      oneJsonProp: twoJsonProp,
+      twoCaption: threeCaption,
+      msgOnNotSelected: msgOnNotSelected,
+      onSelectOne: _hSelectType
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: isShowPattern,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
+        ref: _refZip,
         isShowLabels: isShowLabels,
-        uri: oneURI,
-        jsonProp: oneJsonProp,
-        caption: oneCaption,
-        optionNames: "Items",
-        onSelect: this._hSelectMetric
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].SelectOneTwo, {
-        ref: this._refTypeCode,
-        isShow: isShow,
+        caption: "*Zip Code",
+        placeholder: "Zip Code, 5 Digits",
+        onTest: _isZipCode,
+        errorMsg: "5 digits format is required"
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: isShowDate,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.DatesFragment, {
+        ref: _refDates,
         isShowLabels: isShowLabels,
-        isHideTwo: isShowPattern,
-        uri: twoURI,
-        oneCaption: twoCaption,
-        oneJsonProp: twoJsonProp,
-        twoCaption: threeCaption,
-        msgOnNotSelected: msgOnNotSelected,
-        onSelectOne: this._handleSelectType
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
-        isShow: isShowPattern,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].RowPattern, {
-          ref: this._refZip,
-          isShowLabels: isShowLabels,
-          caption: "*Zip Code",
-          placeholder: "Zip Code, 5 Digits",
-          onTest: _isZipCode,
-          errorMsg: "5 digits format is required"
-        })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
-        isShow: isShowDate,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].DatesFragment, {
-          ref: this._refDates,
-          isShowLabels: isShowLabels,
-          initFromDate: initFromDate,
-          initToDate: initToDate,
-          msgOnNotValidFormat: msgOnNotValidFormat,
-          onTestDate: onTestDate
-        })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ShowHide, {
-        isShow: isShowPattern,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-          style: S.TIP,
-          children: DATA_NOTE
-        })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell["default"].ValidationMessages, {
-        validationMessages: validationMessages
-      })]
-    });
-  };
-
-  return ZillowDialog;
-}(_react.Component), _temp)) || _class);
+        initFromDate: initFromDate,
+        initToDate: initToDate,
+        msgOnNotValidFormat: msgOnNotValidFormat,
+        onTestDate: onTestDate
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: isShowPattern,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        style: S_TIP,
+        children: DATA_NOTE
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
+      validationMessages: validationMessages
+    })]
+  });
+});
 var _default = ZillowDialog;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ZillowDialog.js.map
