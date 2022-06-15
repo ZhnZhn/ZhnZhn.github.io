@@ -1,4 +1,19 @@
-import { Component } from 'react';
+import {
+  useState,
+  useRef,
+  useCallback,
+  useMemo,
+  getRefValue
+} from '../uiApi';
+
+import memoIsShow from '../hoc/memoIsShow';
+import useToggle from '../hooks/useToggle';
+import useRefInit from '../hooks/useRefInit';
+import useProperty from '../hooks/useProperty';
+import useEventCallback from '../hooks/useEventCallback';
+import useMenuMore from '../dialogs/hooks/useMenuMore';
+import useValidationMessages from '../dialogs/hooks/useValidationMessages';
+import crValidationMessages from '../dialogs/hooks/crValidationMessages';
 
 import {
   CHT_AREA,
@@ -11,14 +26,11 @@ import {
 } from '../../constants/ChartType';
 
 import D from '../dialogs/DialogCell'
-const { Decor, crMenuMore } = D
-
-const S_BT_ROOT = { color: 'rgb(35, 47, 59)' }
 
 
-const PLACEHOLDER_INITIAL = 'First Load Meta'
+const S_BT = { color: '#232f3b' }
+, PLACEHOLDER_INITIAL = 'First Load Meta'
 , PLACEHOLDER_SELECT = 'Select...'
-
 , FILTER_DEFAULT = 'Default Empty'
 , FILTER_IMPORT = 'Import - Trade (USD)'
 , FILTER_EXPORT = 'Export - Trade (USD)'
@@ -31,7 +43,7 @@ const PLACEHOLDER_INITIAL = 'First Load Meta'
 })
 
 , TRADE_FILTER_OPTIONS = [
-  { caption: 'Default : Empty Filter', value: FILTER_DEFAULT },
+  { caption: 'Default: Empty Filter', value: FILTER_DEFAULT },
   _crFilterItem(FILTER_IMPORT),
   _crFilterItem('Import - Weight (Kg)'),
   _crFilterItem(FILTER_EXPORT),
@@ -41,389 +53,362 @@ const PLACEHOLDER_INITIAL = 'First Load Meta'
 ]
 
 const CHART_TYPE_OPTIONS = [
-  { caption : 'Default : Area', value: CHT_AREA },
-  { caption : 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: CHT_SEMI_DONUT },
-  { caption : 'Stacked Area : Total Top90, On Recent Year', value: CHT_STACKED_AREA },
-  { caption : 'Stacked Area Percent : Total Top90, On Recent Year', value: CHT_STACKED_AREA_PERCENT },
-  { caption : 'Stacked Column : Total Top90, On Recent Year', value: CHT_STACKED_COLUMN },
-  { caption : 'Stacked Column Percent : Total Top90, On Recent Year', value: CHT_STACKED_COLUMN_PERCENT },
-  { caption : 'Tree Map : On Recent Year', value: CHT_TREE_MAP }
+  { caption: 'Default: Area', value: CHT_AREA },
+  { caption: 'Semi Donut: Total Top90, On Every Year: Recent 2 Years', value: CHT_SEMI_DONUT },
+  { caption: 'Stacked Area: Total Top90, On Recent Year', value: CHT_STACKED_AREA },
+  { caption: 'Stacked Area Percent: Total Top90, On Recent Year', value: CHT_STACKED_AREA_PERCENT },
+  { caption: 'Stacked Column: Total Top90, On Recent Year', value: CHT_STACKED_COLUMN },
+  { caption: 'Stacked Column Percent: Total Top90, On Recent Year', value: CHT_STACKED_COLUMN_PERCENT },
+  { caption: 'Tree Map: On Recent Year', value: CHT_TREE_MAP }
 ]
 
-@Decor.withToolbar
-@Decor.withValidationLoad
-@Decor.withInitialState
-class UNCommodityTradeDialog extends Component {
+const _fFilterBy = filterValue =>
+  item => item.caption.indexOf(filterValue) !== -1;
 
-  constructor(props){
-    super(props)
-    //this.country = null
-    //this.chapter = null
-    //this.tradeFilter = null
-    //this.subheading = null
-    //this.optionTrades = null
-    //this.chartType = null
+const _filterTrade = (
+  tradeFilter,
+  optionTrades
+) => {
+  let options;
+  if (tradeFilter && optionTrades){
+    const filterValue = tradeFilter.value;
+    if (filterValue !== FILTER_DEFAULT){
+      options = optionTrades.filter(_fFilterBy(filterValue))
+      if (filterValue === FILTER_IMPORT){
+         options = options.filter(_fFilterBy(FILTER_REIMPORT))
+      }
+      if (filterValue === FILTER_EXPORT){
+         options = options.filter(_fFilterBy(FILTER_REEXPORT))
+      }
+    }
+  }
+  return options || optionTrades;
+};
 
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
-    })
+const _crSliceItems = (
+  tradeFilter,
+  optionTrades
+) => {
+   const _filterLength = tradeFilter.value.length + 2;
+   return optionTrades.map(({value, caption}) => {
+      caption = caption.substring(0, (caption.length - _filterLength));
+      return {
+        caption,
+        value
+      };
+  });
+};
 
-    this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true }
-    )
-    this.toolbarButtons.push({
-        caption:'A', title: 'Toggle All Input',
-        onClick: this._handlerClickAll
-      },{
-        caption:'F', title: 'Toggle Filter Input',
-        onClick: this._handlerClickFilter
-      },{
-        caption:'D', title: 'Toggle Date Input',
-        onClick: this._handlerClickDate
-      },{
-        caption:'C', title: 'Toggle ChartType Input',
-        onClick: this._handlerClickChartType
-      })
-    this._commandButtons = [
-      <D.Button.Flat
-        key="meta"
-        rootStyle={S_BT_ROOT}
-        caption="Load Meta"
-        title="First Load Meta, then Load Item"
-        onClick={this._handlerLoadMeta}
-      />,
-      <D.Button.Load
-         key="load"
-         onClick={this._handlerLoadData}
-       />
+const _isNotCategoryChart = chartType =>
+ !chartType || chartType.value === CHT_AREA
+
+const CLICK_TO_TOGGLE = 'Click to toggle';
+
+const _crToolbarItem = (
+  caption,
+  title,
+  onClick
+) => ({
+  caption,
+  title,
+  onClick
+});
+
+const INITIAL_STATE = {
+  optionTrades: [],
+  placeholderTrade: PLACEHOLDER_INITIAL,
+  isLoadingTradeFailed: false,
+  isLoadingTrade: false
+};
+
+
+const UNCommodityTradeDialog = memoIsShow((
+  props
+) => {
+  const {
+    isShow,
+
+    countryURI,
+    countryJsonProp,
+    commodityURI,
+    commodityJsonProp,
+    initFromDate,
+    initToDate,
+    onTestDate,
+    msgOnNotValidFormat,
+    msgOnNotSelected,
+
+    dataColumn,
+    loadId,
+    dataSource,
+
+    fnValue,
+    onLoad,
+
+    onShow,
+    onFront,
+    onClose,
+    onClickInfo
+  } = props
+  , [
+    isToolbar,
+    _menuMore
+  ] = useMenuMore(onClickInfo)
+  , [isShowLabels, toggleLabels] = useToggle(true)
+  , [isShowFilter, toggleFilter] = useToggle(false)
+  , [isShowDate, toggleDate] = useToggle(false)
+  , [isShowChartType, toggleChartType] = useToggle(false)
+  , _toolbarButtons = useRefInit(() => [
+    _crToolbarItem('L', `${CLICK_TO_TOGGLE} input labels`, toggleLabels),
+    _crToolbarItem('F', `${CLICK_TO_TOGGLE} filter input`, toggleFilter),
+    _crToolbarItem('D', `${CLICK_TO_TOGGLE} date input`, toggleDate),
+    _crToolbarItem('C', `${CLICK_TO_TOGGLE} chart type input`, toggleChartType),
+    _crToolbarItem('A', 'About datasource', onClickInfo)
+  ])
+  , [
+    validationMessages,
+    setValidationMessages,
+    clearValidationMessages,
+  ] = useValidationMessages()
+  , [state, setState] = useState(INITIAL_STATE)
+  , {
+    isLoadingTrade,
+    isLoadingTradeFailed,
+    optionTrades,
+    placeholderTrade,
+  } = state
+  , [isShowSubheading, setIsShowSubheading] = useState(true)
+  , _refDates = useRef()
+  , [setCountry, getCountry] = useProperty()
+  , [setChapter, getChapter] = useProperty()
+  , [setTradeFilter, getTradeFilter] = useProperty()
+  , [setSubheading, getSubheading] = useProperty()
+  , [setOptionTrades, getOptionTrades] = useProperty()
+  , [setChartType, getChartType] = useProperty()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _initTrade = useCallback(() => {
+    setSubheading()
+    setOptionTrades()
+    setState(INITIAL_STATE)
+  }, [])
+  // setSubheading, setOptionTrades
+  , _hSelectCountry = useCallback((country) => {
+    setCountry(country)
+    _initTrade()
+  }, [])
+  // setCountry, _initTrade
+  , _hSelectChapter = useCallback((chapter) => {
+    setChapter(chapter)
+    _initTrade()
+  }, [])
+  // setChapter, _initTrade
+  , _hSelectChartType = useCallback(chartType => {
+    setChartType(chartType)
+    const _is = _isNotCategoryChart(chartType);
+    setIsShowSubheading(_is)
+    toggleFilter(!_is)
+  }, [])
+  // setChartType, toggleFilter
+  , _hLoadMeta = useCallback(() => {
+    const country = getCountry()
+    , chapter = getChapter()
+    , _configs = [
+      [country, 'Country'],
+      [chapter, 'Chapter']
     ]
-    this.state = {
-      ...this._isWithInitialState(),
-      isShowFilter: false,
-      isShowChartType: false,
-      isLoadingTrade: false,
-      isLoadingTradeFailed: false,
-      optionTrades: [],
-      placeholderTrade: PLACEHOLDER_INITIAL,
+    , msgs = crValidationMessages(_configs, msgOnNotSelected, _refDates)
+
+    if (msgs.length === 0){
+      onLoad({
+        ...getRefValue(_refDates).getValues(),
+        loadId,
+        isLoadMeta: true,
+        value: fnValue(chapter.value, country.value),
+        onLoad: (optionTrades) => {
+          setOptionTrades(optionTrades)
+          setState({
+            optionTrades: _filterTrade(
+              getTradeFilter(),
+              getOptionTrades()
+            ),
+            isLoadingTrade: false,
+            isLoadingTradeFailed: false,
+            placeholderTrade: PLACEHOLDER_SELECT
+          })
+        },
+        onCancel: () => setState(prevState => ({
+          ...prevState,
+          isLoadingTrade: false,
+          isLoadingTradeFailed: false,
+          placeholderTrade: PLACEHOLDER_SELECT
+        })),
+        onFailed: () => setState(prevState => ({
+          ...prevState,
+          isLoadingTrade: false,
+          isLoadingTradeFailed: true
+        }))
+      })
+
+      setState(prevState => ({
+        ...prevState,
+        isLoadingTrade: true
+      }))
+      clearValidationMessages()
+    } else {
+      setValidationMessages(msgs)
     }
-  }
+  }, [])
+  // onLoad, fnValue, loadId, msgOnNotSelected,
+  // getChapter, getCountry, getOptionTrades, getTradeFilter,
+  // clearValidationMessages, setValidationMessages
+  , _hLoadData = useEventCallback(() => {
+    const msgs = []
+    , chartType = getChartType()
+    , subheading = getSubheading()
+    , tradeFilter = getTradeFilter();
 
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps){
-       if (this.props.isShow === nextProps.isShow){
-          return false;
-       }
-    }
-    return true;
-  }
-
-  _initTrade = () => {
-    this.subheading = void 0
-    this.optionTrades = void 0
-    this.setState({
-      optionTrades: [],
-      placeholderTrade: PLACEHOLDER_INITIAL,
-      isLoadingTradeFailed : false
-    })
-  }
-
-  _filterTrade = () => {
-    let options;
-    if (this.tradeFilter && this.optionTrades){
-      const filterValue = this.tradeFilter.value;
-      if (filterValue !== FILTER_DEFAULT){
-        options = this.optionTrades.filter((item,index)=>{
-           return item.caption.indexOf(filterValue) !== -1;
-        })
-        if (filterValue === FILTER_IMPORT){
-           options = options.filter((item,index)=>{
-              return item.caption.indexOf(FILTER_REIMPORT) === -1;
-           })
-        }
-        if (filterValue === FILTER_EXPORT){
-           options = options.filter((item,index)=>{
-             return item.caption.indexOf(FILTER_REEXPORT) === -1;
-           })
-        }
-      } else {
-        options = this.optionTrades
+    if (_isNotCategoryChart(chartType)) {
+      if (!subheading)  {
+        msgs.push(msgOnNotSelected('Subheading'));
       }
     } else {
-      options = this.optionTrades
+      if (placeholderTrade === PLACEHOLDER_INITIAL){
+        msgs.push(PLACEHOLDER_INITIAL);
+      }
+      if (!tradeFilter) {
+        msgs.push(msgOnNotSelected('Trade Filter'));
+      }
     }
-    return options;
-  }
 
-  _handlerClickAll = () => {
-    const {
-      isShowFilter,
-      isShowDate,
-      isShowChartType
-    } = this.state
-    , _isShow = isShowFilter || isShowDate || isShowChartType
-        ? false : true;
-    this.setState({
-        isShowFilter : _isShow,
-        isShowDate : _isShow,
-        isShowChartType : _isShow
-      })
-  }
-  _handlerClickFilter = () => {
-    this.setState({ isShowFilter: !this.state.isShowFilter })
-  }
-  _handlerClickDate = () => {
-    this.setState({ isShowDate: !this.state.isShowDate })
-  }
-  _handlerClickChartType = () => {
-    this.setState({ isShowChartType: !this.state.isShowChartType })
-  }
-
-  _handlerSelectCountry = (country) => {
-    this.country = country
-    this._initTrade()
-  }
-  _handlerSelectChapter = (chapter) => {
-    this.chapter = chapter
-    this._initTrade()
-  }
-  _handlerSelectTradeFilter = (filter) => {
-     this.tradeFilter = filter
-     this.setState({ optionTrades: this._filterTrade() })
-  }
-  _handlerSelectTrade = (trade) => {
-    this.subheading = trade
-  }
-  _handlerSelectChartType = (chartType) => {
-    this.chartType = chartType
-  }
-  _handlerLoadMeta = () => {
-    this._handleWithValidationLoad(
-      this._createMetaValidationMessages(),
-      this._createLoadMetaOption,
-      this._loadMeta
-    );
-  }
-  _loadMeta = (option) => {
-    this.props.onLoad(option)
-    this.setState({ isLoadingTrade: true })
-  }
-  _createMetaValidationMessages = () => {
-     let msg = [];
-     if (!this.country)  { msg.push(this.props.msgOnNotSelected('Country'));}
-     if (!this.chapter)  { msg.push(this.props.msgOnNotSelected('Subheading'));}
-     const { isValid, datesMsg } = this.datesFragment.getValidation();
-     if (!isValid) { msg = msg.concat(datesMsg); }
-     msg.isValid = (msg.length === 0) ? true : false;
-     return msg;
-  }
-  _createLoadMetaOption = () => {
-    const { fromDate, toDate } = this.datesFragment.getValues()
-        , { loadId, fnValue } = this.props;
-    return {
-       value : fnValue(this.chapter.value, this.country.value),
-       fromDate: fromDate,
-       toDate: toDate,
-       isLoadMeta : true,
-       onLoad : this._setOptionTrades,
-       onCancel : this._loadMetaOptionCancel,
-       onFailed : this._loadMetaOptionFailed,
-       loadId : loadId
+    if (msgs.length === 0) {
+      const country = getCountry()
+      , chapter = getChapter()
+      , _dataColumn = subheading
+         ? subheading.value
+         : dataColumn
+      , _chartType = chartType
+         ? chartType.value
+         : CHT_AREA
+      , title = tradeFilter
+         ? `${country.caption}:${tradeFilter.caption}`
+         : `${country.caption}`
+      , sliceItems = _isNotCategoryChart(chartType)
+         ? void 0
+         : _crSliceItems(tradeFilter, optionTrades);
+        onLoad({
+          ...getRefValue(_refDates).getValues(),
+          value: fnValue(chapter.value, country.value),
+          dataColumn: _dataColumn,
+          seriaType: _chartType,
+          sliceItems,
+          title,
+          subtitle: chapter.caption,
+          loadId,
+          dataSource
+        })
+      clearValidationMessages()
+    } else {
+      setValidationMessages(msgs)
     }
-  }
-  _setOptionTrades = (optionTrades) => {
-    this.optionTrades = optionTrades
-    this.setState({
-      optionTrades: this._filterTrade(),
-      isLoadingTrade: false,
-      isLoadingTradeFailed: false,
-      placeholderTrade: PLACEHOLDER_SELECT
-    })
-  }
-  _loadMetaOptionCancel = () => {
-    this.setState({
-      isLoadingTrade: false,
-      isLoadingTradeFailed: false,
-      placeholderTrade: PLACEHOLDER_SELECT
-    })
-  }
-  _loadMetaOptionFailed = () => {
-    this.setState({
-      isLoadingTrade: false,
-      isLoadingTradeFailed: true
-    })
-  }
-  _handlerLoadData = () => {
-    this._handleWithValidationLoad(
-      this._createDataValidationMessages(),
-      this._createLoadDataOption
-    );
-  }
-  _createDataValidationMessages = () => {
-     let msg = [];
-     if ( !this.chartType || this.chartType.value === CHT_AREA){
-       if (!this.subheading)  {
-         msg.push(this.props.msgOnNotSelected('Subheading'));
-       }
-     } else {
-       const { placeholderTrade } = this.state;
-       if (placeholderTrade === PLACEHOLDER_INITIAL){
-         msg.push(PLACEHOLDER_INITIAL);
-       }
-       if (!this.tradeFilter) {
-         msg.push(this.props.msgOnNotSelected('Trade Filter'));
-       }
-     }
-     msg.isValid = (msg.length === 0) ? true : false;
-     return msg;
-  }
-  _createLoadDataOption = () => {
-    const { fromDate, toDate } = this.datesFragment.getValues()
-        , _dataColumn = this.subheading
-              ? this.subheading.value
-              : this.props.dataColumn
-        , { loadId, fnValue, dataSource } = this.props
-        , _chartType = this.chartType
-             ? this.chartType.value
-             : CHT_AREA
-        , _title = this.tradeFilter
-             ? `${this.country.caption}:${this.tradeFilter.caption}`
-             : `${this.country.caption}`
-        , _sliceItems = ( !(!this.chartType || this.chartType.value === CHT_AREA) )
-              ? this._createSpliceItems()
-              : void 0;
-    return {
-       value : fnValue(this.chapter.value, this.country.value),
-       fromDate: fromDate,
-       toDate: toDate,
-       dataColumn : _dataColumn,
-       seriaType : _chartType,
-       sliceItems : _sliceItems,
-       title : _title,
-       subtitle: this.chapter.caption,
-       loadId : loadId,
-       dataSource : dataSource
-    };
-  }
-  _createSpliceItems = () => {
-     const _filterLength = this.tradeFilter.value.length + 2;
-     return this.state.optionTrades.map((item, index) => {
-        let {value, caption} = item;
-        caption = caption.substring( 0, (caption.length - _filterLength) );
-        return { caption, value };
-    });
-  }
-  _handlerClose = () => {
-    this._handleWithValidationClose()
-  }
+  })
+  , _commandButtons = useMemo(() => [
+    <D.Button.Flat
+      key="meta"
+      style={S_BT}
+      caption="Load Meta"
+      title="First Load Meta, then Load Item"
+      onClick={_hLoadMeta}
+    />,
+    <D.Button.Load
+       key="load"
+       onClick={_hLoadData}
+     />
+  ], [])
+  // _hLoadMeta, _hLoadData
+  , _hClose = useCallback(() => {
+    onClose()
+    clearValidationMessages()
+  }, [])
+  // onClose, clearValidationMessages
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  _refDates = c => this.datesFragment = c
-
-  render(){
-    const {
-       isShow,
-       onShow,
-       onFront,
-       countryURI,
-       countryJsonProp,
-       commodityURI,
-       commodityJsonProp,
-       initFromDate,
-       initToDate,
-       msgOnNotValidFormat,
-       onTestDate
-      } = this.props
-    , {
-       isToolbar,
-       isShowLabels,
-       isShowFilter,
-       isShowDate,
-       isShowChartType,
-       isLoadingTrade,
-       isLoadingTradeFailed,
-       optionTrades,
-       placeholderTrade,
-       validationMessages
-     } = this.state;
-
-    return(
-        <D.DraggableDialog
-             isShow={isShow}
-             caption="United Nations Commodity Trade"
-             menuModel={this._menuMore}
-             commandButtons={this._commandButtons}
-             onShowChart={onShow}
-             onFront={onFront}
-             onClose={this._handlerClose}
-         >
-             <D.Toolbar
-               isShow={isToolbar}
-               buttons={this.toolbarButtons}
-             />
-
-             <D.SelectWithLoad
-               isShow={isShow}
-               isShowLabels={isShowLabels}
-               uri={countryURI}
-               jsonProp={countryJsonProp}
-               caption="Country:"
-               optionNames="Countries"
-               onSelect={this._handlerSelectCountry}
-             />
-             <D.SelectWithLoad
-               isShow={isShow}
-               isShowLabels={isShowLabels}
-               uri={commodityURI}
-               jsonProp={commodityJsonProp}
-               caption="Chapter:"
-               optionNames="Chapters"
-               onSelect={this._handlerSelectChapter}
-             />
-
-             <D.ShowHide isShow={isShowFilter}>
-               <D.RowInputSelect
-                 isShowLabels={isShowLabels}
-                 caption="Filter Trade:"
-                 options={TRADE_FILTER_OPTIONS}
-                 placeholder="Filter..."
-                 onSelect={this._handlerSelectTradeFilter}
-               />
-             </D.ShowHide>
-             <D.RowInputSelect
-               isShowLabels={isShowLabels}
-               caption="Subheading:"
-               options={optionTrades}
-               optionNames="Meta"
-               isLoading={isLoadingTrade}
-               isLoadingFailed={isLoadingTradeFailed}
-               placeholder={placeholderTrade}
-               onLoadOption={this._handlerLoadMeta}
-               onSelect={this._handlerSelectTrade}
-             />
-             <D.ShowHide isShow={isShowDate}>
-               <D.DatesFragment
-                   ref={this._refDates}
-                   isShowLabels={isShowLabels}
-                   initFromDate={initFromDate}
-                   initToDate={initToDate}
-                   msgOnNotValidFormat={msgOnNotValidFormat}
-                   onTestDate={onTestDate}
-               />
-             </D.ShowHide>
-             <D.ShowHide isShow={isShowChartType}>
-               <D.RowInputSelect
-                 isShowLabels={isShowLabels}
-                 caption="Chart Type:"
-                 options={CHART_TYPE_OPTIONS}
-                 onSelect={this._handlerSelectChartType}
-               />
-             </D.ShowHide>
-             <D.ValidationMessages
-                 validationMessages={validationMessages}
-             />
-        </D.DraggableDialog>
-    );
-  }
-}
+  return (
+    <D.DraggableDialog
+      isShow={isShow}
+      caption="United Nations Commodity Trade"
+      menuModel={_menuMore}
+      commandButtons={_commandButtons}
+      onShowChart={onShow}
+      onFront={onFront}
+      onClose={_hClose}
+   >
+      <D.Toolbar
+        isShow={isToolbar}
+        buttons={_toolbarButtons}
+      />
+      <D.SelectWithLoad
+        isShow={isShow}
+        isShowLabels={isShowLabels}
+        uri={countryURI}
+        jsonProp={countryJsonProp}
+        caption="Country:"
+        optionNames="Countries"
+        onSelect={_hSelectCountry}
+      />
+      <D.SelectWithLoad
+        isShow={isShow}
+        isShowLabels={isShowLabels}
+        uri={commodityURI}
+        jsonProp={commodityJsonProp}
+        caption="Chapter:"
+        optionNames="Chapters"
+        onSelect={_hSelectChapter}
+      />
+      <D.ShowHide isShow={isShowFilter}>
+        <D.RowInputSelect
+          isShowLabels={isShowLabels}
+          caption="Filter Trade:"
+          options={TRADE_FILTER_OPTIONS}
+          placeholder="Filter..."
+          onSelect={setTradeFilter}
+        />
+      </D.ShowHide>
+      <D.ShowHide isShow={isShowSubheading}>
+        <D.RowInputSelect
+          isShowLabels={isShowLabels}
+          caption="Subheading:"
+          options={optionTrades}
+          optionNames="Meta"
+          isLoading={isLoadingTrade}
+          isLoadingFailed={isLoadingTradeFailed}
+          placeholder={placeholderTrade}
+          onLoadOption={_hLoadMeta}
+          onSelect={setSubheading}
+        />
+      </D.ShowHide>
+      <D.ShowHide isShow={isShowDate}>
+        <D.DatesFragment
+          ref={_refDates}
+          isShowLabels={isShowLabels}
+          initFromDate={initFromDate}
+          initToDate={initToDate}
+          msgOnNotValidFormat={msgOnNotValidFormat}
+          onTestDate={onTestDate}
+        />
+      </D.ShowHide>
+      <D.ShowHide isShow={isShowChartType}>
+        <D.RowInputSelect
+          isShowLabels={isShowLabels}
+          caption="Chart Type:"
+          options={CHART_TYPE_OPTIONS}
+          onSelect={_hSelectChartType}
+        />
+      </D.ShowHide>
+      <D.ValidationMessages
+         validationMessages={validationMessages}
+      />
+    </D.DraggableDialog>
+  )
+})
 
 export default UNCommodityTradeDialog
