@@ -9,6 +9,7 @@ import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import useEventCallback from '../hooks/useEventCallback';
 import useDialog from './hooks/useDialog';
+import useDialogOptions from './hooks/useDialogOptions';
 
 import { crDialogChartOptions } from './ChartOptionsFn';
 import D from './DialogCell';
@@ -55,13 +56,16 @@ const DialogQuery = memoIsShow((
     setChartType
   ] = useState('SPLINE')
   , [
-    isShowOptions,
-    toggleOptions
-  ] = useToggle(false)
-  , [
     isShowDate,
     toggleDate
   ] = useToggle(true)
+  , [
+    refDialogOptions,
+    isShowOptions,
+    toggleOptions,
+    hideOptions,
+    toggleDialogOption
+  ] = useDialogOptions()
   , [
     isToolbar,
     isShowLabels,
@@ -79,19 +83,6 @@ const DialogQuery = memoIsShow((
   , _onRegColor = useCallback(comp => {
     _refColorComp.current = comp
   }, [])
-  , _refDialogOptions = useRef({
-    isNotZoomToMinMax: false,
-    isFilterZero: false
-  })
-  , toggleDialogOption = useCallback((propName, is) => {
-    _refDialogOptions.current[propName] = is
-  }, [])
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _hideOptions = useCallback(() => {
-    toggleOptions(false)
-  }, [])
-  // toggleOption
-  /*eslint-enable react-hooks/exhaustive-deps */
   , _hLoad = useEventCallback(() => {
      const _idInputInst = getRefValue(_refIdInput)
      if (_idInputInst && _idInputInst.isValid()){
@@ -105,7 +96,7 @@ const DialogQuery = memoIsShow((
          : {};
        onLoad(loadFn(props, {
          items: [{ c: _value, v: _value }],
-         dialogOptions: getRefValue(_refDialogOptions),
+         dialogOptions: getRefValue(refDialogOptions),
          chartType,
          seriaColor,
          seriaWidth
@@ -132,7 +123,7 @@ const DialogQuery = memoIsShow((
       <D.ModalOptions
         isShow={isShowOptions}
         toggleOption={toggleDialogOption}
-        onClose={_hideOptions}
+        onClose={hideOptions}
       />
       <D.RowPattern
         ref={_refIdInput}

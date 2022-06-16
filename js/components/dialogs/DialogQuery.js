@@ -15,6 +15,8 @@ var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallbac
 
 var _useDialog = _interopRequireDefault(require("./hooks/useDialog"));
 
+var _useDialogOptions = _interopRequireDefault(require("./hooks/useDialogOptions"));
+
 var _ChartOptionsFn = require("./ChartOptionsFn");
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
@@ -55,8 +57,8 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
     onClickInfo
   } = props,
         [chartType, setChartType] = (0, _uiApi.useState)('SPLINE'),
-        [isShowOptions, toggleOptions] = (0, _useToggle.default)(false),
         [isShowDate, toggleDate] = (0, _useToggle.default)(true),
+        [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
         [isToolbar, isShowLabels, menuMoreModel, toolbarButtons] = (0, _useDialog.default)({
     onClickInfo,
     onClose,
@@ -69,21 +71,6 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
         _onRegColor = (0, _uiApi.useCallback)(comp => {
     _refColorComp.current = comp;
   }, []),
-        _refDialogOptions = (0, _uiApi.useRef)({
-    isNotZoomToMinMax: false,
-    isFilterZero: false
-  }),
-        toggleDialogOption = (0, _uiApi.useCallback)((propName, is) => {
-    _refDialogOptions.current[propName] = is;
-  }, [])
-  /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        _hideOptions = (0, _uiApi.useCallback)(() => {
-    toggleOptions(false);
-  }, []) // toggleOption
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-  ,
         _hLoad = (0, _useEventCallback.default)(() => {
     const _idInputInst = (0, _uiApi.getRefValue)(_refIdInput);
 
@@ -100,7 +87,7 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
           c: _value,
           v: _value
         }],
-        dialogOptions: (0, _uiApi.getRefValue)(_refDialogOptions),
+        dialogOptions: (0, _uiApi.getRefValue)(refDialogOptions),
         chartType,
         seriaColor,
         seriaWidth
@@ -124,7 +111,7 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalOptions, {
       isShow: isShowOptions,
       toggleOption: toggleDialogOption,
-      onClose: _hideOptions
+      onClose: hideOptions
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
       ref: _refIdInput,
       isShow: isShow,
