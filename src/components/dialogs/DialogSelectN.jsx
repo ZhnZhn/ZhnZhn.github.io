@@ -137,7 +137,6 @@ class DialogSelectN extends Component {
 
     this._items = []
     this._titles = [ 0 ]
-    this._compSelect = {}
     //this.date = undefined;
 
     const {
@@ -280,12 +279,6 @@ class DialogSelectN extends Component {
         isCategory: isCategoryItem(chartType),
         fromDate: _getValidValue(this._refFromDate, ''),
         date: this._getDate()
-        /*
-        selectOptions: [
-          compSelect1.getOptions(),
-          compSelect2.getOptions()
-        ]
-        */
       }
     );
   }
@@ -316,10 +309,6 @@ class DialogSelectN extends Component {
       }
     }
   }
-  _refSelect = (id, comp) => {
-    this._compSelect[id] = comp
-  }
-
 
   render(){
     const {
@@ -396,7 +385,6 @@ class DialogSelectN extends Component {
              isShow={isShow}
              isShowLabels={isShowLabels}
              selectProps={selectProps}
-             refSelect={this._refSelect}
              isShowById={this._isShowById}
              hSelect={this._hSelect}
            />

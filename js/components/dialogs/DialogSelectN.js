@@ -204,13 +204,6 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp2 = _class2 = clas
         isCategory: (0, _ChartOptionsFn.isCategoryItem)(chartType),
         fromDate: _getValidValue(this._refFromDate, ''),
         date: this._getDate()
-        /*
-        selectOptions: [
-          compSelect1.getOptions(),
-          compSelect2.getOptions()
-        ]
-        */
-
       });
     };
 
@@ -237,13 +230,8 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp2 = _class2 = clas
       }
     };
 
-    this._refSelect = (id, comp) => {
-      this._compSelect[id] = comp;
-    };
-
     this._items = [];
-    this._titles = [0];
-    this._compSelect = {}; //this.date = undefined;
+    this._titles = [0]; //this.date = undefined;
 
     const {
       isOpt,
@@ -360,7 +348,6 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp2 = _class2 = clas
         isShow: isShow,
         isShowLabels: isShowLabels,
         selectProps: selectProps,
-        refSelect: this._refSelect,
         isShowById: this._isShowById,
         hSelect: this._hSelect
       }), _isRowFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
