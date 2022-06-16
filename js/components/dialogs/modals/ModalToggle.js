@@ -41,28 +41,31 @@ const TOGGLE_CHECKBOX_COLOR = '#1b75bb',
 
 const _crChbToggleInitValue = isRow => typeof isRow === 'boolean' ? isRow : true;
 
-const _crCheckBoxItem = (item, index, {
-  crIsId,
-  onToggle,
-  onCheckCaption,
-  onUnCheckCaption
-}) => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-  style: S_ROW,
-  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-    initValue: _crChbToggleInitValue(item.isRow),
-    style: S_CHB_TOGGLE,
-    checkedColor: TOGGLE_CHECKBOX_COLOR,
-    caption: item.caption,
-    captionStyle: S_CAPTION,
-    onToggle: () => onToggle(crIsId(item.id))
-  }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-    initValue: index === 0,
-    style: S_CHB_CAPTION,
-    checkedColor: CAPTION_CHECKBOX_COLOR,
-    onCheck: () => onCheckCaption(index),
-    onUnCheck: () => onUnCheckCaption(index)
-  })]
-}, item.id);
+const _crCheckBoxItem = (item, index, _ref) => {
+  let {
+    crIsId,
+    onToggle,
+    onCheckCaption,
+    onUnCheckCaption
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S_ROW,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
+      initValue: _crChbToggleInitValue(item.isRow),
+      style: S_CHB_TOGGLE,
+      checkedColor: TOGGLE_CHECKBOX_COLOR,
+      caption: item.caption,
+      captionStyle: S_CAPTION,
+      onToggle: () => onToggle(crIsId(item.id))
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
+      initValue: index === 0,
+      style: S_CHB_CAPTION,
+      checkedColor: CAPTION_CHECKBOX_COLOR,
+      onCheck: () => onCheckCaption(index),
+      onUnCheck: () => onUnCheckCaption(index)
+    })]
+  }, item.id);
+};
 /*eslint-disable react-hooks/exhaustive-deps */
 
 
@@ -71,26 +74,26 @@ const _useToggleByPropName = (onToggle, propName) => (0, _react.useCallback)(onT
 /*eslint-enable react-hooks/exhaustive-deps */
 
 
-const ModalToggle = ({
-  isShow,
-  style,
-  className = _Style.CL_POPUP_MENU,
-  selectProps,
-  isFd,
-  isShowFd,
-  isCh = true,
-  isShowDate,
-  isShowChart,
-  noForDate = false,
-  crIsId,
-  onToggle,
-  onCheckCaption,
-  onUnCheckCaption,
-  onClose
-}) => {
+const ModalToggle = _ref2 => {
+  let {
+    isShow,
+    style,
+    className = _Style.CL_POPUP_MENU,
+    selectProps,
+    isFd,
+    isShowFd,
+    isCh = true,
+    isShowDate,
+    isShowChart,
+    crIsId,
+    onToggle,
+    onCheckCaption,
+    onUnCheckCaption,
+    onClose
+  } = _ref2;
+
   const _toggleFd = _useToggleByPropName(onToggle, 'isShowFd'),
-        _toggleChart = _useToggleByPropName(onToggle, 'isShowChart'),
-        _toggleDate = _useToggleByPropName(onToggle, 'isShowDate');
+        _toggleChart = _useToggleByPropName(onToggle, 'isShowChart');
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
     isShow: isShow,
@@ -118,13 +121,7 @@ const ModalToggle = ({
       checkedColor: TOGGLE_CHECKBOX_COLOR,
       caption: "Chart",
       onToggle: _toggleChart
-    }, "isShowChart"), !noForDate && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-      value: isShowDate,
-      style: _Style.S_ROW_CHB,
-      checkedColor: TOGGLE_CHECKBOX_COLOR,
-      caption: "For Date",
-      onToggle: _toggleDate
-    }, "isForDate")]
+    }, "isShowChart")]
   });
 };
 

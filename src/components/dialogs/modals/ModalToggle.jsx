@@ -77,11 +77,14 @@ const _useToggleByPropName = (
 
 const ModalToggle = ({
   isShow,
-  style, className=CL_POPUP_MENU,
+  style,
+  className=CL_POPUP_MENU,
   selectProps,
-  isFd, isShowFd,
-  isCh=true, isShowDate, isShowChart,
-  noForDate=false,
+  isFd,
+  isShowFd,
+  isCh=true,
+  isShowDate,
+  isShowChart,
   crIsId,
   onToggle,
   onCheckCaption,
@@ -89,8 +92,7 @@ const ModalToggle = ({
   onClose
 }) => {
   const _toggleFd = _useToggleByPropName(onToggle, 'isShowFd')
-  , _toggleChart = _useToggleByPropName(onToggle, 'isShowChart')
-  , _toggleDate = _useToggleByPropName(onToggle, 'isShowDate');
+  , _toggleChart = _useToggleByPropName(onToggle, 'isShowChart');
 
   return (
   <ModalPopup
@@ -123,15 +125,6 @@ const ModalToggle = ({
         checkedColor={TOGGLE_CHECKBOX_COLOR}
         caption="Chart"
         onToggle={_toggleChart}
-      />
-    }
-    { !noForDate && <RowCheckBox
-        key="isForDate"
-        value={isShowDate}
-        style={S_ROW_CHB}
-        checkedColor={TOGGLE_CHECKBOX_COLOR}
-        caption="For Date"
-        onToggle={_toggleDate}
       />
     }
   </ModalPopup>

@@ -138,11 +138,8 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp2 = _class2 = clas
 
     this._hSelectChartType = chartType => {
       const _nextState = (0, _ChartOptionsFn.isCategoryItem)(chartType) ? {
-        isShowDate: true,
         isShowFd: false
-      } : {
-        isShowDate: false
-      };
+      } : {};
 
       this.setState({ ..._nextState,
         chartType
@@ -268,11 +265,10 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp2 = _class2 = clas
     this._crChartOptionsMem = (0, _memoizeOne.default)(_ChartOptionsFn.crChartOptions, _isEqualChartOptions);
     this._crDateConfigMem = (0, _memoizeOne.default)(crDateConfig);
     this.state = { ...this._isWithInitialState(),
-      isOptions: false,
       isToggle: false,
+      isOptions: false,
       isShowFd: false,
       isShowChart: true,
-      isShowDate: false,
       ..._crIsToggleInit(_selectProps),
       ..._getDfFrequencyConfig(_dfProps) //chartType
 
@@ -309,7 +305,6 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp2 = _class2 = clas
       isFd,
       isCh,
       noDate,
-      noForDate,
       initFromDate,
       errNotYmdOrEmpty,
       isYmdOrEmpty
@@ -322,7 +317,6 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp2 = _class2 = clas
       isShowLabels,
       isShowFd,
       isShowChart,
-      isShowDate,
       validationMessages,
       mapFrequency
     } = this.state,
@@ -333,7 +327,7 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp2 = _class2 = clas
     } = this._crDateConfig(),
           _isCategory = (0, _ChartOptionsFn.isCategoryItem)(chartType),
           _isRowFd = isFd && !_isCategory,
-          _noForDate = noForDate || !_isCategory;
+          _isShowDate = isShowChart && _isCategory;
 
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
       isShow: isShow,
@@ -352,13 +346,11 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp2 = _class2 = clas
         onClose: this._hideOptionsWithToolbar
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalToggle, {
         isShow: isToggle,
-        noForDate: _noForDate,
         selectProps: selectProps,
         isFd: _isRowFd,
         isShowFd: isShowFd,
         isCh: isCh,
         isShowChart: isShowChart,
-        isShowDate: isShowDate,
         crIsId: _crIsId,
         onToggle: this._toggleStateBy,
         onCheckCaption: this._checkCaptionBy,
@@ -389,7 +381,7 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp2 = _class2 = clas
         onSelectChart: this._hSelectChartType,
         onRegColor: this._onRegColor,
         noDate: noDate,
-        isShowDate: isShowDate,
+        isShowDate: _isShowDate,
         dateDefault: dateDefault,
         dateOptions: dateOptions,
         onSelecDate: this._hSelectDate

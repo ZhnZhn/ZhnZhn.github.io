@@ -72,6 +72,7 @@ const _crStateForTableItem = (
   , chartType = _isRequireChartOptionsUpdate(prevMf, mapFrequency)
       ? void 0
       : prevCht;
+
   return {
     mapFrequency,
     mapDateDf,
@@ -165,12 +166,12 @@ class DialogSelectN extends Component {
     this.state = {
       ...this._isWithInitialState(),
 
-      isOptions: false,
       isToggle: false,
+      isOptions: false,
 
       isShowFd: false,
       isShowChart: true,
-      isShowDate: false,
+
       ..._crIsToggleInit(selectProps),
       ..._getDfFrequencyConfig(dfProps)
       //chartType
@@ -217,8 +218,8 @@ class DialogSelectN extends Component {
 
   _hSelectChartType = (chartType) => {
     const _nextState = isCategoryItem(chartType)
-      ? { isShowDate: true, isShowFd: false }
-      : { isShowDate: false };
+      ? { isShowFd: false }
+      : { };
     this.setState({ ..._nextState, chartType })
   }
 
@@ -299,7 +300,9 @@ class DialogSelectN extends Component {
     if (item) {
       item.id = id
       if (id === TABLE_ID) {
-        const { dfProps } = this.props
+        const {
+          dfProps
+        } = this.props
         , {
           mapFrequency,
           chartType
@@ -329,7 +332,6 @@ class DialogSelectN extends Component {
       isFd,
       isCh,
       noDate,
-      noForDate,
       initFromDate,
       errNotYmdOrEmpty,
       isYmdOrEmpty
@@ -342,18 +344,21 @@ class DialogSelectN extends Component {
       isShowLabels,
       isShowFd,
       isShowChart,
-      isShowDate,
       validationMessages,
       mapFrequency
     } = this.state
-    , _chartOptions = this._crChartOptionsMem(selectProps, chartsType, mapFrequency)
+    , _chartOptions = this._crChartOptionsMem(
+       selectProps,
+       chartsType,
+       mapFrequency
+    )
     , {
       dateDefault,
       dateOptions
     } = this._crDateConfig()
     , _isCategory = isCategoryItem(chartType)
     , _isRowFd = isFd && !_isCategory
-    , _noForDate = noForDate || !_isCategory;
+    , _isShowDate = isShowChart && _isCategory;
 
     return(
       <D.DraggableDialog
@@ -376,13 +381,11 @@ class DialogSelectN extends Component {
            />
            <D.ModalToggle
              isShow={isToggle}
-             noForDate={_noForDate}
              selectProps={selectProps}
              isFd={_isRowFd}
              isShowFd={isShowFd}
              isCh={isCh}
              isShowChart={isShowChart}
-             isShowDate={isShowDate}
              crIsId={_crIsId}
              onToggle={this._toggleStateBy}
              onCheckCaption={this._checkCaptionBy}
@@ -416,7 +419,7 @@ class DialogSelectN extends Component {
                onSelectChart={this._hSelectChartType}
                onRegColor={this._onRegColor}
                noDate={noDate}
-               isShowDate={isShowDate}
+               isShowDate={_isShowDate}
                dateDefault={dateDefault}
                dateOptions={dateOptions}
                onSelecDate={this._hSelectDate}
