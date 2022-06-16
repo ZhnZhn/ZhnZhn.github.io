@@ -12,6 +12,7 @@ import useRefInit from '../hooks/useRefInit';
 import useProperty from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';
 import useMenuMore from '../dialogs/hooks/useMenuMore';
+import crToolbarItem from '../dialogs/hooks/crToolbarItem';
 import useValidationMessages from '../dialogs/hooks/useValidationMessages';
 import crValidationMessages from '../dialogs/hooks/crValidationMessages';
 
@@ -104,16 +105,6 @@ const _isNotCategoryChart = chartType =>
 
 const CLICK_TO_TOGGLE = 'Click to toggle';
 
-const _crToolbarItem = (
-  caption,
-  title,
-  onClick
-) => ({
-  caption,
-  title,
-  onClick
-});
-
 const INITIAL_STATE = {
   optionTrades: [],
   placeholderTrade: PLACEHOLDER_INITIAL,
@@ -159,11 +150,11 @@ const UNCommodityTradeDialog = memoIsShow((
   , [isShowDate, toggleDate] = useToggle(false)
   , [isShowChartType, toggleChartType] = useToggle(false)
   , _toolbarButtons = useRefInit(() => [
-    _crToolbarItem('L', `${CLICK_TO_TOGGLE} input labels`, toggleLabels),
-    _crToolbarItem('F', `${CLICK_TO_TOGGLE} filter input`, toggleFilter),
-    _crToolbarItem('D', `${CLICK_TO_TOGGLE} date input`, toggleDate),
-    _crToolbarItem('C', `${CLICK_TO_TOGGLE} chart type input`, toggleChartType),
-    _crToolbarItem('A', 'About datasource', onClickInfo)
+    crToolbarItem('L', `${CLICK_TO_TOGGLE} input labels`, toggleLabels),
+    crToolbarItem('F', `${CLICK_TO_TOGGLE} filter input`, toggleFilter),
+    crToolbarItem('D', `${CLICK_TO_TOGGLE} date input`, toggleDate),
+    crToolbarItem('C', `${CLICK_TO_TOGGLE} chart type input`, toggleChartType),
+    crToolbarItem('A', 'About datasource', onClickInfo)
   ])
   , [
     validationMessages,

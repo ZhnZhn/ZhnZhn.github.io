@@ -20,12 +20,12 @@ const _isRequireChartOptionsUpdate = (
 ) => prevMapFrequency !== nextMapFrequency
   && (prevMapFrequency === 'M' || nextMapFrequency === 'M');
 
-const _isEqualChartOptions = (nextArgs, prevArgs) => {
-  const _bool = nextArgs[0] === prevArgs[0]
-    && nextArgs[1] === prevArgs[1]
-    && !_isRequireChartOptionsUpdate(prevArgs[2], nextArgs[2]);
-  return _bool;
-};
+const _isEqualChartOptions = (
+  nextArgs,
+  prevArgs
+) => nextArgs[0] === prevArgs[0]
+  && nextArgs[1] === prevArgs[1]
+  && !_isRequireChartOptionsUpdate(prevArgs[2], nextArgs[2]);
 
 const _crIsId = id => `is${id}Select`;
 
@@ -37,31 +37,57 @@ const _crIsToggleInit = (selectProps) => {
   return _isToggleInit;
 };
 
-const _getDfFrequencyConfig = (props) => {
-  const { dfProps } = props
-  , {
-    mapFrequency=DF_MAP_FREQUENCY,
-    mapDateDf
-  } = dfProps || {};
-  return { mapFrequency, mapDateDf };
-};
+const _getDfFrequencyConfig = ({
+  mapFrequency=DF_MAP_FREQUENCY,
+  mapDateDf
+} = {}) => ({
+  mapFrequency,
+  mapDateDf
+});
 
-const _mergeFrequencyConfig = (props, item) => {
-  const { mapFrequency, mapDateDf } = _getDfFrequencyConfig(props);
+const _mergeFrequencyConfig = (
+  item,
+  dfProps
+) => {
+  const {
+    mapFrequency,
+    mapDateDf
+  } = _getDfFrequencyConfig(dfProps);
   return [
     item.mapFrequency || mapFrequency,
     item.mapDateDf || mapDateDf
   ];
 };
 
-const _crStateForTableItem = (comp, item) => {
-  const { props, state } = comp
-  , [mapFrequency, mapDateDf] = _mergeFrequencyConfig(props, item)
-  , { mapFrequency: prevMf, chartType: prevCht } = state
+const _crStateForTableItem = (
+  item,
+  dfProps,
+  prevMf,
+  prevCht
+) => {
+  const [
+    mapFrequency,
+    mapDateDf
+  ] = _mergeFrequencyConfig(item, dfProps)
   , chartType = _isRequireChartOptionsUpdate(prevMf, mapFrequency)
-      ? void 0 : prevCht;
-  return {mapFrequency, mapDateDf, chartType};
+      ? void 0
+      : prevCht;
+  return {
+    mapFrequency,
+    mapDateDf,
+    chartType
+  };
 };
+
+const _getValidValue = (
+  ref,
+  dfValue
+) => {
+  const _compInst = ref.current;
+  return  _compInst && _compInst.isValid()
+    ? _compInst.getValue()
+    : dfValue;
+}
 
 @Decor.dialog
 class DialogSelectN extends Component {
@@ -116,18 +142,26 @@ class DialogSelectN extends Component {
     this._compSelect = {}
     //this.date = undefined;
 
-    const { isOpt, isCh, isFd, isShowFd, selectProps } = props;
+    const {
+      isOpt,
+      isCh,
+      isFd,
+      isShowFd,
+      selectProps,
+      dfProps
+    } = props;
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
       onAbout: this._clickInfoWithToolbar
     })
     this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true, isOptions: isOpt || isCh,
-      isToggle: isFd || selectProps.length > 1
+      props, {
+        noDate: true,
+        isOptions: isOpt || isCh,
+        isToggle: isFd || selectProps.length > 1
     })
     this._refFromDate = createRef()
-    this._commandButtons = this._crCommandsWithLoad(this)
 
     this._crChartOptionsMem = memoizeOne(crChartOptions, _isEqualChartOptions)
     this._crDateConfigMem = memoizeOne(crDateConfig);
@@ -140,7 +174,7 @@ class DialogSelectN extends Component {
       isShowChart: true,
       isShowDate: false,
       ..._crIsToggleInit(selectProps),
-      ..._getDfFrequencyConfig(props)
+      ..._getDfFrequencyConfig(dfProps)
       //chartType
     }
   }
@@ -234,23 +268,19 @@ class DialogSelectN extends Component {
     , { chartType } = this.state
     , { seriaColor, seriaWidth } = colorComp
         ? colorComp.getConf()
-        : {}
-    , date = this._getDate()
-    , _isCategory = isCategoryItem(chartType)
-    , items = [...this._items]
-    , _compFd = this._refFromDate.current
-    , fromDate = _compFd && _compFd.isValid()
-       ? _compFd.getValue()
-       : '';
+        : {};
 
     return this.props.loadFn(
       this.props, {
-        items,
+        items: [...this._items],
         titles: this._titles,
         dialogOptions,
-        chartType, seriaColor, seriaWidth,
-        isCategory: _isCategory,
-        fromDate, date
+        chartType,
+        seriaColor,
+        seriaWidth,
+        isCategory: isCategoryItem(chartType),
+        fromDate: _getValidValue(this._refFromDate, ''),
+        date: this._getDate()
         /*
         selectOptions: [
           compSelect1.getOptions(),
@@ -271,7 +301,17 @@ class DialogSelectN extends Component {
     if (item) {
       item.id = id
       if (id === TABLE_ID) {
-        this.setState(_crStateForTableItem(this, item))
+        const { dfProps } = this.props
+        , {
+          mapFrequency,
+          chartType
+        } = this.state;
+        this.setState(_crStateForTableItem(
+          item,
+          dfProps,
+          mapFrequency,
+          chartType
+        ))
       }
     }
   }
@@ -282,24 +322,37 @@ class DialogSelectN extends Component {
 
   render(){
     const {
-      caption, isShow,
-      onShow, onFront,
-      selectProps, chartsType,
-      isFd, isCh, noDate, noForDate,
+      caption,
+      isShow,
+      onShow,
+      onFront,
+      selectProps,
+      chartsType,
+      isFd,
+      isCh,
+      noDate,
+      noForDate,
       initFromDate,
       errNotYmdOrEmpty,
       isYmdOrEmpty
     } = this.props
     , {
       chartType,
-      isToolbar, isOptions, isToggle,
+      isToolbar,
+      isOptions,
+      isToggle,
       isShowLabels,
-      isShowFd, isShowChart, isShowDate,
+      isShowFd,
+      isShowChart,
+      isShowDate,
       validationMessages,
       mapFrequency
     } = this.state
     , _chartOptions = this._crChartOptionsMem(selectProps, chartsType, mapFrequency)
-    , { dateDefault, dateOptions } = this._crDateConfig()
+    , {
+      dateDefault,
+      dateOptions
+    } = this._crDateConfig()
     , _isCategory = isCategoryItem(chartType)
     , _isRowFd = isFd && !_isCategory
     , _noForDate = noForDate || !_isCategory;
@@ -309,7 +362,7 @@ class DialogSelectN extends Component {
          isShow={isShow}
          caption={caption}
          menuModel={this._menuMore}
-         commandButtons={this._commandButtons}
+         onLoad={this._handleLoad}
          onShowChart={onShow}
          onFront={onFront}
          onClose={this._hClose}

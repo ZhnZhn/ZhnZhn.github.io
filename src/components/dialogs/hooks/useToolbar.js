@@ -1,16 +1,7 @@
 import useRefInit from '../../hooks/useRefInit';
+import crToolbarItem from './crToolbarItem';
 
 const CLICK_TO_TOGGLE = 'Click to toggle';
-
-const _crToolbarItem = (
-  caption,
-  title,
-  onClick
-) => ({
-  caption,
-  title,
-  onClick
-});
 
 const useToolbar = ({
   toggleLabels,
@@ -19,15 +10,15 @@ const useToolbar = ({
   onClickInfo
 }) => useRefInit(() => [
   toggleLabels
-    ? _crToolbarItem('L', `${CLICK_TO_TOGGLE} input labels`, toggleLabels)
+    ? crToolbarItem('L', `${CLICK_TO_TOGGLE} input labels`, toggleLabels)
     : void 0,
   toggleOptions
-    ? _crToolbarItem('O', `${CLICK_TO_TOGGLE} dialog options`, toggleOptions)
+    ? crToolbarItem('O', `${CLICK_TO_TOGGLE} dialog options`, toggleOptions)
     : void 0,
   toggleDate
-    ? _crToolbarItem('D', `${CLICK_TO_TOGGLE} date input`, toggleDate)
+    ? crToolbarItem('D', `${CLICK_TO_TOGGLE} date input`, toggleDate)
     : void 0,
-  _crToolbarItem('A', 'About datasouce', onClickInfo)
+  crToolbarItem('A', 'About datasouce', onClickInfo)
 ].filter(Boolean))
 
 export default useToolbar

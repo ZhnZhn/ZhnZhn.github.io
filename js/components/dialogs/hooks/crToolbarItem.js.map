@@ -1,0 +1,14 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/hooks/crToolbarItem.js"
+ ],
+ "file": "../../../../src/components/dialogs/hooks/crToolbarItem.js",
+ "names": [
+  "crToolbarItem",
+  "caption",
+  "title",
+  "onClick"
+ ],
+ "mappings": ";;;;;AACA,MAAMA,aAAa,GAAG,CACpBC,OADoB,EAEpBC,KAFoB,EAGpBC,OAHoB,MAIhB;AACJF,EAAAA,OADI;AAEJC,EAAAA,KAFI;AAGJC,EAAAA;AAHI,CAJgB,CAAtB;;eAUeH,a"
+}

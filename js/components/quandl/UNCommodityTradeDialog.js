@@ -19,6 +19,8 @@ var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallbac
 
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
 
+var _crToolbarItem = _interopRequireDefault(require("../dialogs/hooks/crToolbarItem"));
+
 var _useValidationMessages = _interopRequireDefault(require("../dialogs/hooks/useValidationMessages"));
 
 var _crValidationMessages = _interopRequireDefault(require("../dialogs/hooks/crValidationMessages"));
@@ -114,13 +116,6 @@ const _crSliceItems = (tradeFilter, optionTrades) => {
 const _isNotCategoryChart = chartType => !chartType || chartType.value === _ChartType.CHT_AREA;
 
 const CLICK_TO_TOGGLE = 'Click to toggle';
-
-const _crToolbarItem = (caption, title, onClick) => ({
-  caption,
-  title,
-  onClick
-});
-
 const INITIAL_STATE = {
   optionTrades: [],
   placeholderTrade: PLACEHOLDER_INITIAL,
@@ -154,7 +149,7 @@ const UNCommodityTradeDialog = (0, _memoIsShow.default)(props => {
         [isShowFilter, toggleFilter] = (0, _useToggle.default)(false),
         [isShowDate, toggleDate] = (0, _useToggle.default)(false),
         [isShowChartType, toggleChartType] = (0, _useToggle.default)(false),
-        _toolbarButtons = (0, _useRefInit.default)(() => [_crToolbarItem('L', CLICK_TO_TOGGLE + " input labels", toggleLabels), _crToolbarItem('F', CLICK_TO_TOGGLE + " filter input", toggleFilter), _crToolbarItem('D', CLICK_TO_TOGGLE + " date input", toggleDate), _crToolbarItem('C', CLICK_TO_TOGGLE + " chart type input", toggleChartType), _crToolbarItem('A', 'About datasource', onClickInfo)]),
+        _toolbarButtons = (0, _useRefInit.default)(() => [(0, _crToolbarItem.default)('L', CLICK_TO_TOGGLE + " input labels", toggleLabels), (0, _crToolbarItem.default)('F', CLICK_TO_TOGGLE + " filter input", toggleFilter), (0, _crToolbarItem.default)('D', CLICK_TO_TOGGLE + " date input", toggleDate), (0, _crToolbarItem.default)('C', CLICK_TO_TOGGLE + " chart type input", toggleChartType), (0, _crToolbarItem.default)('A', 'About datasource', onClickInfo)]),
         [validationMessages, setValidationMessages, clearValidationMessages] = (0, _useValidationMessages.default)(),
         [state, setState] = (0, _uiApi.useState)(INITIAL_STATE),
         {
