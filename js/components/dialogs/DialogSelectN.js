@@ -17,7 +17,7 @@ var _SelectList = _interopRequireDefault(require("./SelectList"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-var _dec, _class, _class2, _temp;
+var _dec, _class, _class2, _temp2;
 
 const {
   Decor,
@@ -30,11 +30,7 @@ const TABLE_ID = 'table';
 
 const _isRequireChartOptionsUpdate = (prevMapFrequency, nextMapFrequency) => prevMapFrequency !== nextMapFrequency && (prevMapFrequency === 'M' || nextMapFrequency === 'M');
 
-const _isEqualChartOptions = (nextArgs, prevArgs) => {
-  const _bool = nextArgs[0] === prevArgs[0] && nextArgs[1] === prevArgs[1] && !_isRequireChartOptionsUpdate(prevArgs[2], nextArgs[2]);
-
-  return _bool;
-};
+const _isEqualChartOptions = (nextArgs, prevArgs) => nextArgs[0] === prevArgs[0] && nextArgs[1] === prevArgs[1] && !_isRequireChartOptionsUpdate(prevArgs[2], nextArgs[2]);
 
 const _crIsId = id => "is" + id + "Select";
 
@@ -46,39 +42,28 @@ const _crIsToggleInit = selectProps => {
   return _isToggleInit;
 };
 
-const _getDfFrequencyConfig = props => {
-  const {
-    dfProps
-  } = props,
-        {
+const _getDfFrequencyConfig = function (_temp) {
+  let {
     mapFrequency = DF_MAP_FREQUENCY,
     mapDateDf
-  } = dfProps || {};
+  } = _temp === void 0 ? {} : _temp;
   return {
     mapFrequency,
     mapDateDf
   };
 };
 
-const _mergeFrequencyConfig = (props, item) => {
+const _mergeFrequencyConfig = (item, dfProps) => {
   const {
     mapFrequency,
     mapDateDf
-  } = _getDfFrequencyConfig(props);
+  } = _getDfFrequencyConfig(dfProps);
 
   return [item.mapFrequency || mapFrequency, item.mapDateDf || mapDateDf];
 };
 
-const _crStateForTableItem = (comp, item) => {
-  const {
-    props,
-    state
-  } = comp,
-        [mapFrequency, mapDateDf] = _mergeFrequencyConfig(props, item),
-        {
-    mapFrequency: prevMf,
-    chartType: prevCht
-  } = state,
+const _crStateForTableItem = (item, dfProps, prevMf, prevCht) => {
+  const [mapFrequency, mapDateDf] = _mergeFrequencyConfig(item, dfProps),
         chartType = _isRequireChartOptionsUpdate(prevMf, mapFrequency) ? void 0 : prevCht;
 
   return {
@@ -88,14 +73,18 @@ const _crStateForTableItem = (comp, item) => {
   };
 };
 
-let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class DialogSelectN extends _react.Component {
+const _getValidValue = (ref, dfValue) => {
+  const _compInst = ref.current;
+  return _compInst && _compInst.isValid() ? _compInst.getValue() : dfValue;
+};
+
+let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp2 = _class2 = class DialogSelectN extends _react.Component {
   /*
   static propTypes = {
+    isShow: PropTypes.bool,
     isOpt: PropTypes.bool,
     isCh: PropTypes.bool,
-    isShow: PropTypes.bool,
     isFd: PropTypes.bool,
-    isShowFd: PropTypes.bool,
     caption: PropTypes.string,
     selectProps: PropTypes.arrayOf(
        PropTypes.shape({
@@ -111,13 +100,13 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class
       mapDateDf: PropTypes.number,
     }),
     msgOnNotSelected: PropTypes.func,
-      onShow: PropTypes.func,
+      loadFn: PropTypes.func,
+    onLoad: PropTypes.func,
+    onShow: PropTypes.func,
     onFront: PropTypes.func,
-    loadFn: PropTypes.func,
+    onClose: PropTypes.func,
       descrUrl: PropTypes.string,
     onClickInfo: PropTypes.func,
-      onClose: PropTypes.func,
-    onLoad: PropTypes.func
   }
   */
   constructor(props) {
@@ -207,23 +196,17 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class
             {
         seriaColor,
         seriaWidth
-      } = colorComp ? colorComp.getConf() : {},
-            date = this._getDate(),
-            _isCategory = (0, _ChartOptionsFn.isCategoryItem)(chartType),
-            items = [...this._items],
-            _compFd = this._refFromDate.current,
-            fromDate = _compFd && _compFd.isValid() ? _compFd.getValue() : '';
-
+      } = colorComp ? colorComp.getConf() : {};
       return this.props.loadFn(this.props, {
-        items,
+        items: [...this._items],
         titles: this._titles,
         dialogOptions,
         chartType,
         seriaColor,
         seriaWidth,
-        isCategory: _isCategory,
-        fromDate,
-        date
+        isCategory: (0, _ChartOptionsFn.isCategoryItem)(chartType),
+        fromDate: _getValidValue(this._refFromDate, ''),
+        date: this._getDate()
         /*
         selectOptions: [
           compSelect1.getOptions(),
@@ -245,7 +228,14 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class
         item.id = id;
 
         if (id === TABLE_ID) {
-          this.setState(_crStateForTableItem(this, item));
+          const {
+            dfProps
+          } = this.props,
+                {
+            mapFrequency,
+            chartType
+          } = this.state;
+          this.setState(_crStateForTableItem(item, dfProps, mapFrequency, chartType));
         }
       }
     };
@@ -262,8 +252,8 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class
       isOpt,
       isCh,
       isFd,
-      isShowFd,
-      selectProps: _selectProps
+      selectProps: _selectProps,
+      dfProps: _dfProps
     } = props;
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -275,17 +265,16 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class
       isToggle: isFd || _selectProps.length > 1
     });
     this._refFromDate = /*#__PURE__*/(0, _react.createRef)();
-    this._commandButtons = this._crCommandsWithLoad(this);
     this._crChartOptionsMem = (0, _memoizeOne.default)(_ChartOptionsFn.crChartOptions, _isEqualChartOptions);
     this._crDateConfigMem = (0, _memoizeOne.default)(crDateConfig);
     this.state = { ...this._isWithInitialState(),
       isOptions: false,
       isToggle: false,
-      isShowFd: isShowFd,
+      isShowFd: false,
       isShowChart: true,
       isShowDate: false,
       ..._crIsToggleInit(_selectProps),
-      ..._getDfFrequencyConfig(props) //chartType
+      ..._getDfFrequencyConfig(_dfProps) //chartType
 
     };
   }
@@ -350,7 +339,7 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class
       isShow: isShow,
       caption: caption,
       menuModel: this._menuMore,
-      commandButtons: this._commandButtons,
+      onLoad: this._handleLoad,
       onShowChart: onShow,
       onFront: onFront,
       onClose: this._hClose,
@@ -412,10 +401,9 @@ let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp = _class2 = class
 
 }, _class2.defaultProps = {
   isCh: true,
-  isShowFd: true,
   selectProps: [],
   initFromDate: DF_INIT_FROM_DATE
-}, _temp)) || _class);
+}, _temp2)) || _class);
 var _default = DialogSelectN;
 exports.default = _default;
 //# sourceMappingURL=DialogSelectN.js.map

@@ -93,11 +93,10 @@ const _getValidValue = (
 class DialogSelectN extends Component {
   /*
   static propTypes = {
+    isShow: PropTypes.bool,
     isOpt: PropTypes.bool,
     isCh: PropTypes.bool,
-    isShow: PropTypes.bool,
     isFd: PropTypes.bool,
-    isShowFd: PropTypes.bool,
     caption: PropTypes.string,
     selectProps: PropTypes.arrayOf(
        PropTypes.shape({
@@ -115,21 +114,19 @@ class DialogSelectN extends Component {
     }),
     msgOnNotSelected: PropTypes.func,
 
+    loadFn: PropTypes.func,
+    onLoad: PropTypes.func,
     onShow: PropTypes.func,
     onFront: PropTypes.func,
-    loadFn: PropTypes.func,
+    onClose: PropTypes.func,
 
     descrUrl: PropTypes.string,
     onClickInfo: PropTypes.func,
-
-    onClose: PropTypes.func,
-    onLoad: PropTypes.func
   }
  */
 
  static defaultProps = {
    isCh: true,
-   isShowFd: true,
    selectProps: [],
    initFromDate: DF_INIT_FROM_DATE
  }
@@ -146,7 +143,6 @@ class DialogSelectN extends Component {
       isOpt,
       isCh,
       isFd,
-      isShowFd,
       selectProps,
       dfProps
     } = props;
@@ -168,9 +164,11 @@ class DialogSelectN extends Component {
 
     this.state = {
       ...this._isWithInitialState(),
+
       isOptions: false,
       isToggle: false,
-      isShowFd: isShowFd,
+
+      isShowFd: false,
       isShowChart: true,
       isShowDate: false,
       ..._crIsToggleInit(selectProps),
@@ -399,14 +397,14 @@ class DialogSelectN extends Component {
              isShowById={this._isShowById}
              hSelect={this._hSelect}
            />
-           {_isRowFd && <D.ShowHide isShow={isShowFd}>
+           { _isRowFd && <D.ShowHide isShow={isShowFd}>
                <D.RowDate
-                innerRef={this._refFromDate}
-                isShowLabels={isShowLabels}
-                title="From Date:"
-                initialValue={initFromDate}
-                errorMsg={errNotYmdOrEmpty}
-                onTest={isYmdOrEmpty}
+                 innerRef={this._refFromDate}
+                 isShowLabels={isShowLabels}
+                 title="From Date:"
+                 initialValue={initFromDate}
+                 errorMsg={errNotYmdOrEmpty}
+                 onTest={isYmdOrEmpty}
                />
              </D.ShowHide>
            }
