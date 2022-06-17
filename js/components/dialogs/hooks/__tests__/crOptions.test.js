@@ -4,33 +4,33 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _crOptions = _interopRequireDefault(require("../crOptions"));
 
-var CAPTION_OPTIONS = {
+const CAPTION_OPTIONS = {
   items: [{
     caption: 'Abc',
     value: 123
   }]
 },
-    C_OPTIONS = {
+      C_OPTIONS = {
   items: [{
     c: 'Abc',
     v: 123
   }]
 },
-    S_OPTIONS = {
+      S_OPTIONS = {
   items: [{
     c: 'Abc',
     v: 123,
     s: 'Abc'
   }]
 },
-    IS_CV_OPTIONS = {
+      IS_CV_OPTIONS = {
   isCv: true,
   items: [{
     c: 'Abc',
     v: 'Abc'
   }]
 },
-    IS_NBQ_OPTIONS = {
+      IS_NBQ_OPTIONS = {
   isNbq: true,
   items: [{
     n: 'Name1',
@@ -38,7 +38,7 @@ var CAPTION_OPTIONS = {
     q: ['q1', 'q2']
   }]
 },
-    IS_CP_OPTIONS = {
+      IS_CP_OPTIONS = {
   isCp: true,
   items: [{
     "c": "Title1 A B",
@@ -49,21 +49,21 @@ var CAPTION_OPTIONS = {
     id: "bbb-token"
   }]
 };
-describe('crOptions', function () {
-  var fn = _crOptions["default"];
-  test('should return propCaption undefined for item caption prop name', function () {
+describe('crOptions', () => {
+  const fn = _crOptions.default;
+  test('should return propCaption undefined for item caption prop name', () => {
     expect(fn(CAPTION_OPTIONS, 'items').propCaption).toBe(void 0);
   });
-  test('should return propCaption c for item c prop name', function () {
+  test('should return propCaption c for item c prop name', () => {
     expect(fn(C_OPTIONS, 'items').propCaption).toBe('c');
   });
-  test('should add item s value to c', function () {
+  test('should add item s value to c', () => {
     expect(fn(S_OPTIONS, 'items').items[0].c).toBe('Abc (Abc)');
   });
-  test('should return correct options for isCv case', function () {
+  test('should return correct options for isCv case', () => {
     expect(fn(IS_CV_OPTIONS, 'items').items[0].c).toBe('Abc (Abc)');
   });
-  test('should return correct options for isNbq case', function () {
+  test('should return correct options for isNbq case', () => {
     expect(fn(IS_NBQ_OPTIONS, 'items').items).toEqual([{
       "c": "Name1 (b1/q1)",
       s: "b1/q1"
@@ -72,7 +72,7 @@ describe('crOptions', function () {
       s: "b1/q2"
     }]);
   });
-  test('should return correct options for isCp case', function () {
+  test('should return correct options for isCp case', () => {
     expect(fn(IS_CP_OPTIONS, 'items').items).toEqual([{
       "c": "Title1 A B (AAA)",
       "v": "aaa-title1-a-b"

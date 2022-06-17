@@ -13,7 +13,7 @@ var _Msg = require("../../../constants/Msg");
 
 var _ComponentActions = require("../../../flux/actions/ComponentActions");
 
-var _crOptions = _interopRequireDefault(require("../decorators/crOptions"));
+var _crOptions = _interopRequireDefault(require("./crOptions"));
 
 const _showMsgErr = (alertCaption, alertDescr) => {
   _ComponentActions.ComponentActions.showAlert({

@@ -9,7 +9,7 @@ import useHasNotEqual from '../../hooks/useHasNotEqual'
 import { ERR_NETWORK } from '../../../constants/Msg';
 import { ComponentActions } from '../../../flux/actions/ComponentActions';
 
-import crOptions from '../decorators/crOptions'
+import crOptions from './crOptions'
 
 const _showMsgErr = (
   alertCaption,

@@ -1,14 +1,17 @@
-
 const _isArr = Array.isArray;
 
 const _crCvItems = arr => arr
  .map(({ c, v, ...restProps }) => ({
-    c: `${c} (${v})`, v, ...restProps
+    c: `${c} (${v})`,
+    v,
+    ...restProps
   }));
 
 const _crSItems = arr => arr
   .map(({ c, v, s }) => ({
-    c: `${c} (${s})`, v, s
+    c: `${c} (${s})`,
+    v,
+    s
   }));
 
 const _crNbqItems = arr => {
@@ -63,10 +66,16 @@ const _crPropCaption = arr => {
    }
 }
 
-const crOptions = (json, optionJsonProp) => {
+const crOptions = (
+  json,
+  optionJsonProp
+) => {
   const items = _crItems(json, optionJsonProp)
   , propCaption = _crPropCaption(items);
-  return { items, propCaption };
-}
+  return {
+    items,
+    propCaption
+  };
+};
 
 export default crOptions
