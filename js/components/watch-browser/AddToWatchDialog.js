@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _WatchActions = _interopRequireWildcard(require("../../flux/actions/WatchActions"));
+var _WatchActions = require("../../flux/actions/WatchActions");
 
 var _MsgWatch = require("../../constants/MsgWatch");
 
@@ -19,22 +19,10 @@ var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessa
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _withValidationLoad = _interopRequireDefault(require("../dialogs/decorators/withValidationLoad"));
-
 var _jsxRuntime = require("react/jsx-runtime");
 
-var _class;
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-const {
-  addItem
-} = _WatchActions.default,
-      actionCompleted = _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
-      actionFailed = _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
-      forActionType = _WatchActions.WatchActionTypes.ADD_ITEM,
+//import PropTypes from "prop-types";
+const addItem = _WatchActions.WatchActions[_WatchActions.WAT_ADD_ITEM],
       S_DIALOG = {
   width: 300
 },
@@ -43,7 +31,7 @@ const {
 },
       SELECT_WIDTH = "216";
 
-let AddToWatchDialog = (0, _withValidationLoad.default)(_class = class AddToWatchDialog extends _react.Component {
+class AddToWatchDialog extends _react.Component {
   /*
   static propTypes = {
     isShow  : PropTypes.bool,
@@ -60,7 +48,7 @@ let AddToWatchDialog = (0, _withValidationLoad.default)(_class = class AddToWatc
     super(props);
 
     this._onStore = (actionType, data) => {
-      if (actionType === actionCompleted && data.forActionType === forActionType) {
+      if (actionType === _WatchActions.WAT_EDIT_WATCH_COMPLETED && data.forActionType === _WatchActions.WAT_ADD_ITEM) {
         if (this.state.validationMessages.length > 0) {
           this.setState({
             validationMessages: []
@@ -68,7 +56,7 @@ let AddToWatchDialog = (0, _withValidationLoad.default)(_class = class AddToWatc
         }
 
         this.props.onClose();
-      } else if (actionType === actionFailed && data.forActionType === forActionType) {
+      } else if (actionType === _WatchActions.WAT_EDIT_WATCH_FAILED && data.forActionType === _WatchActions.WAT_ADD_ITEM) {
         this.setState({
           validationMessages: data.messages
         });
@@ -122,8 +110,16 @@ let AddToWatchDialog = (0, _withValidationLoad.default)(_class = class AddToWatc
           listCaption,
           config
         });
+
+        if (this.state.validationMessages.length > 0) {
+          this.setState({
+            validationMessages
+          });
+        }
       } else {
-        this._updateValidationMessages(validationMessages);
+        this.setState({
+          validationMessages
+        });
       }
     };
 
@@ -248,7 +244,7 @@ let AddToWatchDialog = (0, _withValidationLoad.default)(_class = class AddToWatc
     });
   }
 
-}) || _class;
+}
 
 var _default = AddToWatchDialog;
 exports.default = _default;

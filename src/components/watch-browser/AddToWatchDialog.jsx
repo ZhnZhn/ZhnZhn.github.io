@@ -16,14 +16,11 @@ import Button from './Button';
 import ValidationMessages from '../zhn/ValidationMessages';
 import D from '../dialogs/DialogCell'
 
-import withValidationLoad from '../dialogs/decorators/withValidationLoad';
-
 const addItem = WatchActions[WAT_ADD_ITEM]
 , S_DIALOG = { width: 300 }
 , S_CAPTION = { width: 70 }
 , SELECT_WIDTH = "216";
 
-@withValidationLoad
 class AddToWatchDialog extends Component {
   /*
   static propTypes = {
@@ -122,12 +119,15 @@ class AddToWatchDialog extends Component {
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
       const { data } = this.props
-          , { caption, config } = data
-          , { groupCaption, listCaption } = this;
+      , { caption, config } = data
+      , { groupCaption, listCaption } = this;
 
       addItem({ caption, groupCaption, listCaption, config })
+      if (this.state.validationMessages.length > 0){
+        this.setState({ validationMessages })
+      }
     } else {
-      this._updateValidationMessages(validationMessages)
+      this.setState({ validationMessages })
     }
   }
   _getValidationMessages = () => {
