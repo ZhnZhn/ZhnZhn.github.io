@@ -9,6 +9,8 @@ import {
 } from '../../utils/DateUtils';
 import formatNumber from '../../utils/formatNumber';
 
+import has from '../has';
+
 import {
   CHAT_LOAD,
   ChartActions
@@ -25,8 +27,6 @@ import ModalDialog from '../zhn-moleculs/ModalDialog'
 import D from '../dialogs/DialogCell'
 import ValidationMessages from '../zhn/ValidationMessages'
 
-import Decor from '../dialogs/decorators/Decorators'
-
 const S_DIALOG = { width: 365 }
 , S_DIALOG_SHORT = { width: 265 }
 , S_ITEM_TEXT = {
@@ -38,10 +38,8 @@ const S_DIALOG = { width: 365 }
   overflow: 'hidden'
 };
 
-
 const _crValue = (x='', y='') => (`${formatNumber(y)} ${mlsToDmy(x)}`).trim();
 
-@Decor.dialog
 class LoadItemDialog extends Component {
    /*
    static propTypes = {
@@ -70,9 +68,19 @@ class LoadItemDialog extends Component {
      } = props.data
      , isValue = !!itemConf.x;
 
-     this.toolbarButtons = this._createType2WithToolbar(props, {
-       isValue
-     })
+     this.toolbarButtons = [{
+         caption: 'L',
+         title: 'Click to toggle input labels',
+         onClick: this._toggleIsShowLabels
+       },{
+         caption: 'V',
+         title: 'Click to toggle row value',
+         onClick: this._toggleIsValue
+       },{
+         caption: 'D',
+         title: 'Click to toggle date input',
+         onClick: this._toggleIsShowDate
+     }]
 
      this._commandButtons = [
        <D.Button.Load
@@ -82,9 +90,13 @@ class LoadItemDialog extends Component {
      ]
 
     this.state = {
-       ...this._isWithInitialState(),
+       isToolbar: true,
+       isShowLabels: has.wideWidth(),
+       validationMessages: [],
+
        isShowDate: false,
        isValue,
+
        initFromDate: fromDate || getFromDate(2),
        initToDate: initToDate || getToDate(),
        onTestDate: onTestDate || isYmd
@@ -96,6 +108,27 @@ class LoadItemDialog extends Component {
        return false;
      }
      return true;
+   }
+
+   _toggleIsShowLabels = () => {
+     this.setState(prevState => ({
+       ...prevState,
+       isShowLabels: !prevState.isShowLabels
+     }))
+   }
+
+   _toggleIsValue = () => {
+     this.setState(prevState => ({
+       ...prevState,
+       isValue: !prevState.isValue
+     }))
+   }
+
+   _toggleIsShowDate = () => {
+     this.setState(prevState => ({
+       ...prevState,
+       isShowDate: !prevState.isShowDate
+     }))
    }
 
   _handleLoad = () => {
@@ -130,7 +163,13 @@ class LoadItemDialog extends Component {
       }, option);
       onClose()
     }
-    this._updateValidationMessages(validationMessages)
+    if (validationMessages.isValid){
+      if (this.state.validationMessages.length > 0){
+        this.setState({ validationMessages })
+      }
+    } else {
+      this.setState({ validationMessages })
+    }
   }
 
   _createValidationMessages = () => {
@@ -142,16 +181,16 @@ class LoadItemDialog extends Component {
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose(this._createValidationMessages)
     this.props.onClose()
+    this.setState({ validationMessages: []})
   }
 
   _refDates = c => this.datesFragment = c
 
   render(){
     const { isShow, data } = this.props
-    , { caption, itemConf={} } = data
-    , { dataSource, x, y } = itemConf
+    , { caption, itemConf } = data
+    , { dataSource, x, y } = itemConf || {}
     , {
         isShowLabels, isShowDate, isValue,
         initFromDate, initToDate,
@@ -188,11 +227,11 @@ class LoadItemDialog extends Component {
         </D.ShowHide>
         <D.ShowHide isShow={isShowDate}>
           <D.DatesFragment
-              ref={this._refDates}
-              isShowLabels={isShowLabels}
-              initFromDate={initFromDate}
-              initToDate={initToDate}
-              onTestDate={onTestDate}
+            ref={this._refDates}
+            isShowLabels={isShowLabels}
+            initFromDate={initFromDate}
+            initToDate={initToDate}
+            onTestDate={onTestDate}
           />
         </D.ShowHide>
         <D.Row.Text

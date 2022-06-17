@@ -11,6 +11,8 @@ var _DateUtils = require("../../utils/DateUtils");
 
 var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 
+var _has = _interopRequireDefault(require("../has"));
+
 var _ChartActions = require("../../flux/actions/ChartActions");
 
 var _LoadType = require("../../constants/LoadType");
@@ -23,12 +25,9 @@ var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
 var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
 
-var _Decorators = _interopRequireDefault(require("../dialogs/decorators/Decorators"));
-
 var _jsxRuntime = require("react/jsx-runtime");
 
-var _dec, _class, _class2, _temp;
-
+//import PropTypes from "prop-types";
 const S_DIALOG = {
   width: 365
 },
@@ -56,7 +55,7 @@ const _crValue = function (x, y) {
   return ((0, _formatNumber.default)(y) + " " + (0, _DateUtils.mlsToDmy)(x)).trim();
 };
 
-let LoadItemDialog = (_dec = _Decorators.default.dialog, _dec(_class = (_temp = _class2 = class LoadItemDialog extends _react.Component {
+class LoadItemDialog extends _react.Component {
   /*
   static propTypes = {
     isShow: PropTypes.bool,
@@ -71,6 +70,24 @@ let LoadItemDialog = (_dec = _Decorators.default.dialog, _dec(_class = (_temp = 
   */
   constructor(props) {
     super(props);
+
+    this._toggleIsShowLabels = () => {
+      this.setState(prevState => ({ ...prevState,
+        isShowLabels: !prevState.isShowLabels
+      }));
+    };
+
+    this._toggleIsValue = () => {
+      this.setState(prevState => ({ ...prevState,
+        isValue: !prevState.isValue
+      }));
+    };
+
+    this._toggleIsShowDate = () => {
+      this.setState(prevState => ({ ...prevState,
+        isShowDate: !prevState.isShowDate
+      }));
+    };
 
     this._handleLoad = () => {
       const validationMessages = this._createValidationMessages();
@@ -124,7 +141,17 @@ let LoadItemDialog = (_dec = _Decorators.default.dialog, _dec(_class = (_temp = 
         onClose();
       }
 
-      this._updateValidationMessages(validationMessages);
+      if (validationMessages.isValid) {
+        if (this.state.validationMessages.length > 0) {
+          this.setState({
+            validationMessages
+          });
+        }
+      } else {
+        this.setState({
+          validationMessages
+        });
+      }
     };
 
     this._createValidationMessages = () => {
@@ -143,9 +170,10 @@ let LoadItemDialog = (_dec = _Decorators.default.dialog, _dec(_class = (_temp = 
     };
 
     this._handleClose = () => {
-      this._handleWithValidationClose(this._createValidationMessages);
-
       this.props.onClose();
+      this.setState({
+        validationMessages: []
+      });
     };
 
     this._refDates = c => this.datesFragment = c;
@@ -157,13 +185,26 @@ let LoadItemDialog = (_dec = _Decorators.default.dialog, _dec(_class = (_temp = 
       itemConf: _itemConf = {}
     } = props.data,
           isValue = !!_itemConf.x;
-    this.toolbarButtons = this._createType2WithToolbar(props, {
-      isValue
-    });
+    this.toolbarButtons = [{
+      caption: 'L',
+      title: 'Click to toggle input labels',
+      onClick: this._toggleIsShowLabels
+    }, {
+      caption: 'V',
+      title: 'Click to toggle row value',
+      onClick: this._toggleIsValue
+    }, {
+      caption: 'D',
+      title: 'Click to toggle date input',
+      onClick: this._toggleIsShowDate
+    }];
     this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Load, {
       onClick: this._handleLoad
     }, "load")];
-    this.state = { ...this._isWithInitialState(),
+    this.state = {
+      isToolbar: true,
+      isShowLabels: _has.default.wideWidth(),
+      validationMessages: [],
       isShowDate: false,
       isValue,
       initFromDate: _fromDate || (0, _DateUtils.getFromDate)(2),
@@ -187,13 +228,13 @@ let LoadItemDialog = (_dec = _Decorators.default.dialog, _dec(_class = (_temp = 
     } = this.props,
           {
       caption,
-      itemConf = {}
+      itemConf
     } = data,
           {
       dataSource,
       x,
       y
-    } = itemConf,
+    } = itemConf || {},
           {
       isShowLabels,
       isShowDate,
@@ -248,9 +289,11 @@ let LoadItemDialog = (_dec = _Decorators.default.dialog, _dec(_class = (_temp = 
     });
   }
 
-}, _class2.defaultProps = {
+}
+
+LoadItemDialog.defaultProps = {
   data: {}
-}, _temp)) || _class);
+};
 var _default = LoadItemDialog;
 exports.default = _default;
 //# sourceMappingURL=LoadItemDialog.js.map
