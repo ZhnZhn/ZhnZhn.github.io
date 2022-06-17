@@ -5,8 +5,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
-
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
 
 var _ItemStack = _interopRequireDefault(require("../../zhn/ItemStack"));
@@ -66,13 +64,6 @@ const _crCheckBoxItem = (item, index, _ref) => {
     })]
   }, item.id);
 };
-/*eslint-disable react-hooks/exhaustive-deps */
-
-
-const _useToggleByPropName = (onToggle, propName) => (0, _react.useCallback)(onToggle.bind(null, propName), []); //onToggle, propName
-
-/*eslint-enable react-hooks/exhaustive-deps */
-
 
 const ModalToggle = _ref2 => {
   let {
@@ -82,19 +73,17 @@ const ModalToggle = _ref2 => {
     selectProps,
     isFd,
     isShowFd,
-    isCh = true,
+    isCh,
     isShowDate,
     isShowChart,
     crIsId,
     onToggle,
     onCheckCaption,
     onUnCheckCaption,
+    onToggleFd,
+    onToggleChart,
     onClose
   } = _ref2;
-
-  const _toggleFd = _useToggleByPropName(onToggle, 'isShowFd'),
-        _toggleChart = _useToggleByPropName(onToggle, 'isShowChart');
-
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
     isShow: isShow,
     style: { ..._Style.S_MODAL_POPUP,
@@ -114,13 +103,13 @@ const ModalToggle = _ref2 => {
       style: _Style.S_ROW_CHB,
       checkedColor: TOGGLE_CHECKBOX_COLOR,
       caption: "From Date",
-      onToggle: _toggleFd
-    }, "isShowFd"), isCh && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
+      onToggle: onToggleFd
+    }, "isShowFd"), isCh && onToggleChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       value: isShowChart,
       style: _Style.S_ROW_CHB,
       checkedColor: TOGGLE_CHECKBOX_COLOR,
       caption: "Chart",
-      onToggle: _toggleChart
+      onToggle: onToggleChart
     }, "isShowChart")]
   });
 };

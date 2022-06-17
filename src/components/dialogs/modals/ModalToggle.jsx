@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import ItemStack from '../../zhn/ItemStack';
 import RowCheckBox from '../rows/RowCheckBox';
@@ -64,17 +62,6 @@ const _crCheckBoxItem = (
   </div>
 );
 
-/*eslint-disable react-hooks/exhaustive-deps */
-const _useToggleByPropName = (
-  onToggle,
-  propName
-) => useCallback(
-  onToggle.bind(null, propName)
-, []);
-//onToggle, propName
-/*eslint-enable react-hooks/exhaustive-deps */
-
-
 const ModalToggle = ({
   isShow,
   style,
@@ -82,19 +69,17 @@ const ModalToggle = ({
   selectProps,
   isFd,
   isShowFd,
-  isCh=true,
+  isCh,
   isShowDate,
   isShowChart,
   crIsId,
   onToggle,
   onCheckCaption,
   onUnCheckCaption,
+  onToggleFd,
+  onToggleChart,
   onClose
-}) => {
-  const _toggleFd = _useToggleByPropName(onToggle, 'isShowFd')
-  , _toggleChart = _useToggleByPropName(onToggle, 'isShowChart');
-
-  return (
+}) => (
   <ModalPopup
     isShow={isShow}
     style={{...S_MODAL_POPUP, ...style}}
@@ -115,20 +100,20 @@ const ModalToggle = ({
         style={S_ROW_CHB}
         checkedColor={TOGGLE_CHECKBOX_COLOR}
         caption="From Date"
-        onToggle={_toggleFd}
+        onToggle={onToggleFd}
       />
     }
-    { isCh && <RowCheckBox
+    { isCh && onToggleChart && <RowCheckBox
         key="isShowChart"
         value={isShowChart}
         style={S_ROW_CHB}
         checkedColor={TOGGLE_CHECKBOX_COLOR}
         caption="Chart"
-        onToggle={_toggleChart}
+        onToggle={onToggleChart}
       />
     }
   </ModalPopup>
-  );
-}
+);
+
 
 export default ModalToggle

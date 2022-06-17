@@ -5,9 +5,23 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
-var _memoizeOne = _interopRequireDefault(require("memoize-one"));
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
+
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+
+var _useToggleState = _interopRequireDefault(require("../hooks/useToggleState"));
+
+var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+
+var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
+
+var _useDialog = _interopRequireDefault(require("./hooks/useDialog"));
+
+var _useDialogOptions = _interopRequireDefault(require("./hooks/useDialogOptions"));
+
+var _useTitles = _interopRequireDefault(require("./hooks/useTitles"));
 
 var _ChartOptionsFn = require("./ChartOptionsFn");
 
@@ -17,372 +31,251 @@ var _SelectList = _interopRequireDefault(require("./SelectList"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-var _dec, _class, _class2, _temp2;
-
+//import PropTypes from "prop-types";
 const {
-  Decor,
-  crMenuMore,
   crDateConfig
-} = _DialogCell.default;
-const DF_INIT_FROM_DATE = '2010-01-01';
-const DF_MAP_FREQUENCY = 'EMPTY';
-const TABLE_ID = 'table';
-
-const _isRequireChartOptionsUpdate = (prevMapFrequency, nextMapFrequency) => prevMapFrequency !== nextMapFrequency && (prevMapFrequency === 'M' || nextMapFrequency === 'M');
-
-const _isEqualChartOptions = (nextArgs, prevArgs) => nextArgs[0] === prevArgs[0] && nextArgs[1] === prevArgs[1] && !_isRequireChartOptionsUpdate(prevArgs[2], nextArgs[2]);
+} = _DialogCell.default,
+      DF_INIT_FROM_DATE = '2010-01-01',
+      DF_MAP_FREQUENCY = 'EMPTY',
+      DF_SELECT_PROPS = [],
+      TABLE_ID = 'table';
 
 const _crIsId = id => "is" + id + "Select";
 
-const _crIsToggleInit = selectProps => {
-  const _isToggleInit = {};
-  selectProps.forEach(item => {
-    _isToggleInit[_crIsId(item.id)] = true;
-  });
-  return _isToggleInit;
-};
+const _crIsToggleInit = selectProps => selectProps.reduce((toggleConfig, item) => {
+  toggleConfig[_crIsId(item.id)] = true;
+  return toggleConfig;
+}, {});
 
-const _getDfFrequencyConfig = function (_temp) {
-  let {
-    mapFrequency = DF_MAP_FREQUENCY,
-    mapDateDf
-  } = _temp === void 0 ? {} : _temp;
-  return {
-    mapFrequency,
-    mapDateDf
-  };
-};
-
-const _mergeFrequencyConfig = (item, dfProps) => {
-  const {
-    mapFrequency,
-    mapDateDf
-  } = _getDfFrequencyConfig(dfProps);
-
-  return [item.mapFrequency || mapFrequency, item.mapDateDf || mapDateDf];
-};
-
-const _crStateForTableItem = (item, dfProps, prevMf, prevCht) => {
-  const [mapFrequency, mapDateDf] = _mergeFrequencyConfig(item, dfProps),
-        chartType = _isRequireChartOptionsUpdate(prevMf, mapFrequency) ? void 0 : prevCht;
-
-  return {
-    mapFrequency,
-    mapDateDf,
-    chartType
-  };
-};
+const _isRequireUpdateChartConfig = (prevState, mapFrequency, mapDateDf) => prevState._mapFrequency !== mapFrequency || prevState._mapDateDf !== mapDateDf;
 
 const _getValidValue = (ref, dfValue) => {
-  const _compInst = ref.current;
+  const _compInst = (0, _uiApi.getRefValue)(ref);
+
   return _compInst && _compInst.isValid() ? _compInst.getValue() : dfValue;
 };
 
-let DialogSelectN = (_dec = Decor.dialog, _dec(_class = (_temp2 = _class2 = class DialogSelectN extends _react.Component {
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    isOpt: PropTypes.bool,
-    isCh: PropTypes.bool,
-    isFd: PropTypes.bool,
-    caption: PropTypes.string,
-    selectProps: PropTypes.arrayOf(
-       PropTypes.shape({
-          id: PropTypes.string,
-          caption: PropTypes.string,
-          uri: PropTypes.string,
-          jsonProp: PropTypes.string
-       })
-    ),
-      noDate: PropTypes.string,
-    dfProps: PropTypes.shape({
-      mapFrequency: PropTypes.oneOf(['M', 'Q', 'Y']),
-      mapDateDf: PropTypes.number,
-    }),
-    msgOnNotSelected: PropTypes.func,
-      loadFn: PropTypes.func,
-    onLoad: PropTypes.func,
-    onShow: PropTypes.func,
-    onFront: PropTypes.func,
-    onClose: PropTypes.func,
-      descrUrl: PropTypes.string,
-    onClickInfo: PropTypes.func,
-  }
-  */
-  constructor(props) {
-    super(props);
+const _getConf = comp => comp ? comp.getConf() : void 0;
 
-    this._crDateConfig = () => {
-      const {
-        mapFrequency,
-        mapDateDf
-      } = this.state;
-      return this._crDateConfigMem(mapFrequency, mapDateDf);
-    };
+const DialogSelectN = (0, _memoIsShow.default)(props => {
+  const {
+    isCh = true,
+    isShow,
+    isOpt,
+    isFd,
+    selectProps = DF_SELECT_PROPS,
+    dfProps,
+    chartsType,
+    msgOnNotSelected,
+    caption,
+    noDate,
+    initFromDate = DF_INIT_FROM_DATE,
+    errNotYmdOrEmpty,
+    isYmdOrEmpty,
+    loadFn,
+    onLoad,
+    onShow,
+    onFront,
+    onClose,
+    onClickInfo
+  } = props,
+        {
+    mapFrequency = DF_MAP_FREQUENCY,
+    mapDateDf
+  } = dfProps || {},
+        [isShowFd, toggleIsShowFd] = (0, _useToggle.default)(false),
+        [isShowChart, toggleIsShowChart] = (0, _useToggle.default)(true),
+        [chartConfig, setChartConfig] = (0, _uiApi.useState)({
+    _mapFrequency: mapFrequency,
+    _mapDateDf: mapDateDf,
+    chartType: void 0
+  }),
+        {
+    _mapFrequency,
+    _mapDateDf,
+    chartType
+  } = chartConfig,
+        _hSelectChartType = (0, _uiApi.useCallback)(chartType => {
+    setChartConfig(prevState => ({ ...prevState,
+      chartType
+    }));
 
-    this._isShowById = id => this.state[_crIsId(id)];
+    if ((0, _ChartOptionsFn.isCategoryItem)(chartType)) {
+      toggleIsShowFd(false);
+    }
+  }, [toggleIsShowFd]),
+        [isToggle, toggleInputs] = (0, _useToggle.default)(false),
+        _hideToggle = (0, _uiApi.useCallback)(() => {
+    toggleInputs(false);
+  }, [toggleInputs]),
+        [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
+        [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
+    onClickInfo,
+    onClose,
+    toggleInputs: isFd || selectProps.length > 1 ? toggleInputs : void 0,
+    toggleOptions: isOpt || isCh ? toggleOptions : void 0
+  }),
+        [_isShowConfig, _toggleStateBy] = (0, _useToggleState.default)(() => _crIsToggleInit(selectProps)),
+        _isShowById = (0, _uiApi.useCallback)(id => _isShowConfig[_crIsId(id)], [_isShowConfig]),
+        {
+    _chartOptions,
+    dateDefault,
+    dateOptions
+  } = (0, _uiApi.useMemo)(() => ({
+    _chartOptions: (0, _ChartOptionsFn.crChartOptions)(selectProps, chartsType, _mapFrequency),
+    ...crDateConfig(_mapFrequency, _mapDateDf)
+  }), [selectProps, chartsType, _mapFrequency, _mapDateDf]),
+        _refItems = (0, _uiApi.useRef)([]),
+        [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)(),
+        _refFromDate = (0, _uiApi.useRef)(),
+        [setDate, getDate] = (0, _useProperty.default)(),
+        _getDate = (0, _uiApi.useCallback)(() => (getDate() || {}).value || dateDefault, [dateDefault, getDate]),
+        [setColorComp, getColorComp] = (0, _useProperty.default)(),
+        _hSelect = (0, _uiApi.useCallback)((id, index, item) => {
+    (0, _uiApi.getRefValue)(_refItems)[index] = item;
 
-    this._toggleStateBy = propName => {
-      this.setState(prevState => ({
-        [propName]: !prevState[propName]
-      }));
-    };
+    if (item) {
+      item.id = id;
 
-    this._checkCaptionBy = index => {
-      this._titles.push(index);
-    };
+      if (id === TABLE_ID) {
+        const _mapFrequency = item.mapFrequency || mapFrequency,
+              _mapDateDf = item.mapDateDf || mapDateDf;
 
-    this._uncheckCaption = index => {
-      this._titles = this._titles.filter(v => v !== index);
-    };
-
-    this._hSelectChartType = chartType => {
-      const _nextState = (0, _ChartOptionsFn.isCategoryItem)(chartType) ? {
-        isShowFd: false
-      } : {};
-
-      this.setState({ ..._nextState,
-        chartType
-      });
-    };
-
-    this._onRegColor = comp => {
-      this.colorComp = comp;
-    };
-
-    this._hSelectDate = date => {
-      this.date = date;
-    };
-
-    this._getDate = () => (this.date || {}).value || this._crDateConfig().dateDefault;
-
-    this._handleLoad = () => {
-      this._handleWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
-    };
-
-    this._createValidationMessages = () => {
-      const {
-        msgOnNotSelected,
-        selectProps
-      } = this.props,
-            {
-        chartType
-      } = this.state,
-            _max = selectProps.length,
-            msg = [];
-      let i = (0, _ChartOptionsFn.isCategoryItem)(chartType) ? 1 : 0;
-
-      for (; i < _max; i++) {
-        if (!this._items[i]) {
-          msg.push(msgOnNotSelected(selectProps[i].caption));
-        }
+        setChartConfig(prevState => _isRequireUpdateChartConfig(prevState, _mapFrequency, _mapDateDf) ? (setDate(), {
+          _mapFrequency,
+          _mapDateDf,
+          chartType: void 0
+        }) : prevState);
       }
+    }
+  }, [mapFrequency, mapDateDf, setDate]),
+        _hLoad = (0, _useEventCallback.default)(() => {
+    const msgs = [],
+          _items = (0, _uiApi.getRefValue)(_refItems);
 
-      msg.isValid = msg.length === 0;
-      return msg;
-    };
+    let i = (0, _ChartOptionsFn.isCategoryItem)(chartType) ? 1 : 0;
 
-    this._createLoadOption = () => {
-      const {
-        colorComp,
-        dialogOptions
-      } = this,
-            {
-        chartType
-      } = this.state,
-            {
-        seriaColor,
-        seriaWidth
-      } = colorComp ? colorComp.getConf() : {};
-      return this.props.loadFn(this.props, {
-        items: [...this._items],
-        titles: this._titles,
-        dialogOptions,
-        chartType,
-        seriaColor,
-        seriaWidth,
+    for (; i < selectProps.length; i++) {
+      if (!_items[i]) {
+        msgs.push(msgOnNotSelected(selectProps[i].caption));
+      }
+    }
+
+    if (msgs.length === 0) {
+      onLoad(loadFn(props, { // seriaColor, seriaWidth
+        ..._getConf(getColorComp()),
+        items: [...(0, _uiApi.getRefValue)(_refItems)],
+        titles: (0, _uiApi.getRefValue)(refTitles),
+        dialogOptions: (0, _uiApi.getRefValue)(refDialogOptions),
         isCategory: (0, _ChartOptionsFn.isCategoryItem)(chartType),
-        fromDate: _getValidValue(this._refFromDate, ''),
-        date: this._getDate()
-      });
-    };
-
-    this._hClose = () => {
-      this._handleWithValidationClose();
-    };
-
-    this._hSelect = (id, index, item) => {
-      this._items[index] = item;
-
-      if (item) {
-        item.id = id;
-
-        if (id === TABLE_ID) {
-          const {
-            dfProps
-          } = this.props,
-                {
-            mapFrequency,
-            chartType
-          } = this.state;
-          this.setState(_crStateForTableItem(item, dfProps, mapFrequency, chartType));
-        }
-      }
-    };
-
-    this._items = [];
-    this._titles = [0]; //this.date = undefined;
-
-    const {
-      isOpt,
-      isCh,
-      isFd,
-      selectProps: _selectProps,
-      dfProps: _dfProps
-    } = props;
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
-    });
-    this.toolbarButtons = this._createType2WithToolbar(props, {
-      noDate: true,
-      isOptions: isOpt || isCh,
-      isToggle: isFd || _selectProps.length > 1
-    });
-    this._refFromDate = /*#__PURE__*/(0, _react.createRef)();
-    this._crChartOptionsMem = (0, _memoizeOne.default)(_ChartOptionsFn.crChartOptions, _isEqualChartOptions);
-    this._crDateConfigMem = (0, _memoizeOne.default)(crDateConfig);
-    this.state = { ...this._isWithInitialState(),
-      isToggle: false,
-      isOptions: false,
-      isShowFd: false,
-      isShowChart: true,
-      ..._crIsToggleInit(_selectProps),
-      ..._getDfFrequencyConfig(_dfProps) //chartType
-
-    };
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props !== nextProps && this.props.isShow === nextProps.isShow) {
-      return false;
+        fromDate: _getValidValue(_refFromDate, ''),
+        date: _getDate(),
+        chartType
+      }));
+      clearValidationMessages();
+    } else {
+      setValidationMessages(msgs);
     }
+  }),
+        _isCategory = (0, _ChartOptionsFn.isCategoryItem)(chartType),
+        _isRowFd = isFd && !_isCategory,
+        _isShowDate = isShowChart && _isCategory;
 
-    return true;
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const {
-      mapFrequency,
-      mapDateDf
-    } = this.state;
-
-    if (prevState.mapFrequency !== mapFrequency || prevState.mapDateDf !== mapDateDf) {
-      this.date = void 0;
-    }
-  }
-
-  render() {
-    const {
-      caption,
-      isShow,
-      onShow,
-      onFront,
-      selectProps,
-      chartsType,
-      isFd,
-      isCh,
-      noDate,
-      initFromDate,
-      errNotYmdOrEmpty,
-      isYmdOrEmpty
-    } = this.props,
-          {
-      chartType,
-      isToolbar,
-      isOptions,
-      isToggle,
-      isShowLabels,
-      isShowFd,
-      isShowChart,
-      validationMessages,
-      mapFrequency
-    } = this.state,
-          _chartOptions = this._crChartOptionsMem(selectProps, chartsType, mapFrequency),
-          {
-      dateDefault,
-      dateOptions
-    } = this._crDateConfig(),
-          _isCategory = (0, _ChartOptionsFn.isCategoryItem)(chartType),
-          _isRowFd = isFd && !_isCategory,
-          _isShowDate = isShowChart && _isCategory;
-
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
+    isShow: isShow,
+    caption: caption,
+    menuModel: menuMoreModel,
+    onLoad: _hLoad,
+    onShowChart: onShow,
+    onFront: onFront,
+    onClose: hClose,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
+      isShow: isToolbar,
+      buttons: toolbarButtons
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalOptions, {
+      isShow: isShowOptions,
+      toggleOption: toggleDialogOption,
+      onClose: hideOptions
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalToggle, {
+      isShow: isToggle,
+      selectProps: selectProps,
+      isFd: _isRowFd,
+      isShowFd: isShowFd,
+      isCh: isCh,
+      isShowChart: isShowChart,
+      crIsId: _crIsId,
+      onToggle: _toggleStateBy,
+      onCheckCaption: addTitleIndex,
+      onUnCheckCaption: removeTitleIndex,
+      onToggleFd: toggleIsShowFd,
+      onToggleChart: toggleIsShowChart,
+      onClose: _hideToggle
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectList.default, {
       isShow: isShow,
-      caption: caption,
-      menuModel: this._menuMore,
-      onLoad: this._handleLoad,
-      onShowChart: onShow,
-      onFront: onFront,
-      onClose: this._hClose,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
-        isShow: isToolbar,
-        buttons: this.toolbarButtons
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalOptions, {
-        isShow: isOptions,
-        toggleOption: this._toggleOptionWithToolbar,
-        onClose: this._hideOptionsWithToolbar
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalToggle, {
-        isShow: isToggle,
-        selectProps: selectProps,
-        isFd: _isRowFd,
-        isShowFd: isShowFd,
-        isCh: isCh,
-        isShowChart: isShowChart,
-        crIsId: _crIsId,
-        onToggle: this._toggleStateBy,
-        onCheckCaption: this._checkCaptionBy,
-        onUnCheckCaption: this._uncheckCaption,
-        onClose: this._hideToggleWithToolbar
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectList.default, {
-        isShow: isShow,
+      isShowLabels: isShowLabels,
+      selectProps: selectProps,
+      isShowById: _isShowById,
+      hSelect: _hSelect
+    }), _isRowFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: isShowFd,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowDate, {
+        innerRef: _refFromDate,
         isShowLabels: isShowLabels,
-        selectProps: selectProps,
-        isShowById: this._isShowById,
-        hSelect: this._hSelect
-      }), _isRowFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-        isShow: isShowFd,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowDate, {
-          innerRef: this._refFromDate,
-          isShowLabels: isShowLabels,
-          title: "From Date:",
-          initialValue: initFromDate,
-          errorMsg: errNotYmdOrEmpty,
-          onTest: isYmdOrEmpty
-        })
-      }), isCh && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
-        chartType: chartType,
-        isShowLabels: isShowLabels,
-        isShowChart: isShowChart,
-        chartOptions: _chartOptions,
-        onSelectChart: this._hSelectChartType,
-        onRegColor: this._onRegColor,
-        noDate: noDate,
-        isShowDate: _isShowDate,
-        dateDefault: dateDefault,
-        dateOptions: dateOptions,
-        onSelecDate: this._hSelectDate
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
-        validationMessages: validationMessages
-      })]
-    });
-  }
+        title: "From Date:",
+        initialValue: initFromDate,
+        errorMsg: errNotYmdOrEmpty,
+        onTest: isYmdOrEmpty
+      })
+    }), isCh && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
+      chartType: chartType,
+      isShowLabels: isShowLabels,
+      isShowChart: isShowChart,
+      chartOptions: _chartOptions,
+      onSelectChart: _hSelectChartType,
+      onRegColor: setColorComp,
+      noDate: noDate,
+      isShowDate: _isShowDate,
+      dateDefault: dateDefault,
+      dateOptions: dateOptions,
+      onSelecDate: setDate
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
+      validationMessages: validationMessages
+    })]
+  });
+});
+/*
+DialogSelectN.propTypes = {
+  isShow: PropTypes.bool,
+  isOpt: PropTypes.bool,
+  isCh: PropTypes.bool,
+  isFd: PropTypes.bool,
+  caption: PropTypes.string,
+  selectProps: PropTypes.arrayOf(
+     PropTypes.shape({
+        id: PropTypes.string,
+        caption: PropTypes.string,
+        uri: PropTypes.string,
+        jsonProp: PropTypes.string
+     })
+  ),
 
-}, _class2.defaultProps = {
-  isCh: true,
-  selectProps: [],
-  initFromDate: DF_INIT_FROM_DATE
-}, _temp2)) || _class);
+  noDate: PropTypes.string,
+  dfProps: PropTypes.shape({
+    mapFrequency: PropTypes.oneOf(['M', 'Q', 'Y']),
+    mapDateDf: PropTypes.number,
+  }),
+  msgOnNotSelected: PropTypes.func,
+
+  loadFn: PropTypes.func,
+  onLoad: PropTypes.func,
+
+  onShow: PropTypes.func,
+  onFront: PropTypes.func,
+  onClose: PropTypes.func,
+  onClickInfo: PropTypes.func,
+}
+*/
+
 var _default = DialogSelectN;
 exports.default = _default;
 //# sourceMappingURL=DialogSelectN.js.map

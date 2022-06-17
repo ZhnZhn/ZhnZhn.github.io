@@ -1,6 +1,20 @@
 //import PropTypes from "prop-types";
-import { Component, createRef } from 'react';
-import memoizeOne from 'memoize-one'
+import {
+  useRef,
+  useState,
+  useMemo,
+  useCallback,
+  getRefValue
+} from '../uiApi';
+
+import memoIsShow from '../hoc/memoIsShow';
+import useToggle from '../hooks/useToggle';
+import useToggleState from '../hooks/useToggleState';
+import useProperty from '../hooks/useProperty';
+import useEventCallback from '../hooks/useEventCallback';
+import useDialog from './hooks/useDialog';
+import useDialogOptions from './hooks/useDialogOptions';
+import useTitles from './hooks/useTitles';
 
 import {
   crChartOptions,
@@ -8,417 +22,331 @@ import {
 } from './ChartOptionsFn';
 import D from './DialogCell'
 import SelectList from './SelectList'
-const { Decor, crMenuMore, crDateConfig } = D
 
-const DF_INIT_FROM_DATE = '2010-01-01'
-const DF_MAP_FREQUENCY = 'EMPTY';
-const TABLE_ID = 'table';
-
-const _isRequireChartOptionsUpdate = (
-  prevMapFrequency,
-  nextMapFrequency
-) => prevMapFrequency !== nextMapFrequency
-  && (prevMapFrequency === 'M' || nextMapFrequency === 'M');
-
-const _isEqualChartOptions = (
-  nextArgs,
-  prevArgs
-) => nextArgs[0] === prevArgs[0]
-  && nextArgs[1] === prevArgs[1]
-  && !_isRequireChartOptionsUpdate(prevArgs[2], nextArgs[2]);
+const {
+  crDateConfig
+} = D
+, DF_INIT_FROM_DATE = '2010-01-01'
+, DF_MAP_FREQUENCY = 'EMPTY'
+, DF_SELECT_PROPS  = []
+, TABLE_ID = 'table';
 
 const _crIsId = id => `is${id}Select`;
 
-const _crIsToggleInit = (selectProps) => {
-  const _isToggleInit = {};
-  selectProps.forEach(item => {
-    _isToggleInit[_crIsId(item.id)] = true
-  })
-  return _isToggleInit;
-};
+const _crIsToggleInit = (
+  selectProps
+) => selectProps
+ .reduce((toggleConfig, item) => {
+    toggleConfig[_crIsId(item.id)] = true
+    return toggleConfig;
+ }, {});
 
-const _getDfFrequencyConfig = ({
-  mapFrequency=DF_MAP_FREQUENCY,
-  mapDateDf
-} = {}) => ({
+const _isRequireUpdateChartConfig = (
+  prevState,
   mapFrequency,
   mapDateDf
-});
-
-const _mergeFrequencyConfig = (
-  item,
-  dfProps
-) => {
-  const {
-    mapFrequency,
-    mapDateDf
-  } = _getDfFrequencyConfig(dfProps);
-  return [
-    item.mapFrequency || mapFrequency,
-    item.mapDateDf || mapDateDf
-  ];
-};
-
-const _crStateForTableItem = (
-  item,
-  dfProps,
-  prevMf,
-  prevCht
-) => {
-  const [
-    mapFrequency,
-    mapDateDf
-  ] = _mergeFrequencyConfig(item, dfProps)
-  , chartType = _isRequireChartOptionsUpdate(prevMf, mapFrequency)
-      ? void 0
-      : prevCht;
-
-  return {
-    mapFrequency,
-    mapDateDf,
-    chartType
-  };
-};
+) => prevState._mapFrequency !== mapFrequency
+  || prevState._mapDateDf !== mapDateDf;
 
 const _getValidValue = (
   ref,
   dfValue
 ) => {
-  const _compInst = ref.current;
+  const _compInst = getRefValue(ref);
   return  _compInst && _compInst.isValid()
     ? _compInst.getValue()
     : dfValue;
-}
+};
 
-@Decor.dialog
-class DialogSelectN extends Component {
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    isOpt: PropTypes.bool,
-    isCh: PropTypes.bool,
-    isFd: PropTypes.bool,
-    caption: PropTypes.string,
-    selectProps: PropTypes.arrayOf(
-       PropTypes.shape({
-          id: PropTypes.string,
-          caption: PropTypes.string,
-          uri: PropTypes.string,
-          jsonProp: PropTypes.string
-       })
-    ),
+const _getConf = comp => comp
+  ? comp.getConf()
+  : void 0;
 
-    noDate: PropTypes.string,
-    dfProps: PropTypes.shape({
-      mapFrequency: PropTypes.oneOf(['M', 'Q', 'Y']),
-      mapDateDf: PropTypes.number,
-    }),
-    msgOnNotSelected: PropTypes.func,
+const DialogSelectN = memoIsShow((
+  props
+) => {
+  const {
+    isCh=true,
+    isShow,
+    isOpt,
+    isFd,
+    selectProps=DF_SELECT_PROPS,
+    dfProps,
+    chartsType,
+    msgOnNotSelected,
 
-    loadFn: PropTypes.func,
-    onLoad: PropTypes.func,
-    onShow: PropTypes.func,
-    onFront: PropTypes.func,
-    onClose: PropTypes.func,
+    caption,
+    noDate,
+    initFromDate=DF_INIT_FROM_DATE,
+    errNotYmdOrEmpty,
+    isYmdOrEmpty,
 
-    descrUrl: PropTypes.string,
-    onClickInfo: PropTypes.func,
-  }
- */
+    loadFn,
+    onLoad,
 
- static defaultProps = {
-   isCh: true,
-   selectProps: [],
-   initFromDate: DF_INIT_FROM_DATE
- }
-
-  constructor(props){
-    super(props)
-
-    this._items = []
-    this._titles = [ 0 ]
-    //this.date = undefined;
-
-    const {
-      isOpt,
-      isCh,
-      isFd,
-      selectProps,
-      dfProps
-    } = props;
-
-    this._menuMore = crMenuMore(this, {
-      toggleToolBar: this._toggleWithToolbar,
-      onAbout: this._clickInfoWithToolbar
-    })
-    this.toolbarButtons = this._createType2WithToolbar(
-      props, {
-        noDate: true,
-        isOptions: isOpt || isCh,
-        isToggle: isFd || selectProps.length > 1
-    })
-    this._refFromDate = createRef()
-
-    this._crChartOptionsMem = memoizeOne(crChartOptions, _isEqualChartOptions)
-    this._crDateConfigMem = memoizeOne(crDateConfig);
-
-    this.state = {
-      ...this._isWithInitialState(),
-
-      isToggle: false,
-      isOptions: false,
-
-      isShowFd: false,
-      isShowChart: true,
-
-      ..._crIsToggleInit(selectProps),
-      ..._getDfFrequencyConfig(dfProps)
-      //chartType
-    }
-  }
-
-  _crDateConfig = () => {
-    const { mapFrequency, mapDateDf } = this.state;
-    return this._crDateConfigMem(mapFrequency, mapDateDf);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props !== nextProps
-        && this.props.isShow === nextProps.isShow) {
-      return false;
-    }
-    return true;
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { mapFrequency, mapDateDf } = this.state;
-    if (prevState.mapFrequency !== mapFrequency
-        || prevState.mapDateDf !== mapDateDf) {
-      this.date = void 0
-    }
-  }
-
-  _isShowById = id => this.state[_crIsId(id)]
-
-  _toggleStateBy = (propName) => {
-    this.setState(prevState => ({
-      [propName]: !prevState[propName]
+    onShow,
+    onFront,
+    onClose,
+    onClickInfo
+  } = props
+  , {
+    mapFrequency=DF_MAP_FREQUENCY,
+    mapDateDf
+  } = dfProps || {}
+  , [
+    isShowFd,
+    toggleIsShowFd
+  ] = useToggle(false)
+  , [
+    isShowChart,
+    toggleIsShowChart
+  ] = useToggle(true)
+  , [
+    chartConfig,
+    setChartConfig
+  ] = useState({
+    _mapFrequency: mapFrequency,
+    _mapDateDf: mapDateDf,
+    chartType: void 0
+  })
+  , {
+    _mapFrequency,
+    _mapDateDf,
+    chartType
+  } = chartConfig
+  , _hSelectChartType = useCallback(chartType => {
+    setChartConfig(prevState => ({
+      ...prevState,
+      chartType
     }))
-  }
-
-  _checkCaptionBy = (index) => {
-    this._titles.push(index)
-  }
-  _uncheckCaption = (index) => {
-     this._titles = this._titles
-       .filter(v => v !== index)
-  }
-
-
-  _hSelectChartType = (chartType) => {
-    const _nextState = isCategoryItem(chartType)
-      ? { isShowFd: false }
-      : { };
-    this.setState({ ..._nextState, chartType })
-  }
-
-  _onRegColor = (comp) => {
-    this.colorComp = comp
-  }
-
-  _hSelectDate = (date) => {
-    this.date = date;
-  }
-  _getDate = () => (this.date || {}).value
-     || this._crDateConfig().dateDefault
-
-  _handleLoad = () => {
-    this._handleWithValidationLoad(
-      this._createValidationMessages(),
-      this._createLoadOption
-    );
-  }
-  _createValidationMessages = () => {
-    const {
-      msgOnNotSelected,
-      selectProps
-    } = this.props
-    , { chartType } = this.state
-    , _max = selectProps.length
-    , msg = [];
-
-    let i = isCategoryItem(chartType) ? 1 : 0;
-    for( ; i<_max; i++) {
-      if (!this._items[i]) {
-        msg.push(msgOnNotSelected(selectProps[i].caption))
-      }
+    if (isCategoryItem(chartType)) {
+      toggleIsShowFd(false)
     }
-
-    msg.isValid = (msg.length === 0)
-    return msg;
-  }
-
-  _createLoadOption = () => {
-    const {
-      colorComp,
-      dialogOptions
-    } = this
-    , { chartType } = this.state
-    , { seriaColor, seriaWidth } = colorComp
-        ? colorComp.getConf()
-        : {};
-
-    return this.props.loadFn(
-      this.props, {
-        items: [...this._items],
-        titles: this._titles,
-        dialogOptions,
-        chartType,
-        seriaColor,
-        seriaWidth,
-        isCategory: isCategoryItem(chartType),
-        fromDate: _getValidValue(this._refFromDate, ''),
-        date: this._getDate()
-      }
-    );
-  }
-
-  _hClose = () => {
-    this._handleWithValidationClose()
-  }
-
-
-  _hSelect = (id, index, item) => {
-    this._items[index] = item
+  }, [toggleIsShowFd])
+  , [
+    isToggle,
+    toggleInputs
+  ] = useToggle(false)
+  , _hideToggle = useCallback(() => {
+    toggleInputs(false)
+  }, [toggleInputs])
+  , [
+    refDialogOptions,
+    isShowOptions,
+    toggleOptions,
+    hideOptions,
+    toggleDialogOption
+  ] = useDialogOptions()
+  , [
+    isToolbar,
+    isShowLabels,
+    menuMoreModel,
+    toolbarButtons,
+    validationMessages,
+    setValidationMessages,
+    clearValidationMessages,
+    hClose
+  ] = useDialog({
+    onClickInfo,
+    onClose,
+    toggleInputs: isFd || selectProps.length > 1
+       ? toggleInputs : void 0,
+    toggleOptions: isOpt || isCh
+       ? toggleOptions : void 0
+  })
+  , [
+    _isShowConfig,
+    _toggleStateBy
+  ] = useToggleState(() => _crIsToggleInit(selectProps))
+  , _isShowById = useCallback(id =>
+      _isShowConfig[_crIsId(id)],
+      [_isShowConfig]
+    )
+  , {
+    _chartOptions,
+    dateDefault,
+    dateOptions
+  } = useMemo(() => ({
+    _chartOptions: crChartOptions(selectProps, chartsType, _mapFrequency)
+    , ...crDateConfig(_mapFrequency, _mapDateDf)
+  }), [selectProps, chartsType, _mapFrequency, _mapDateDf])
+  , _refItems = useRef([])
+  , [
+    refTitles,
+    addTitleIndex,
+    removeTitleIndex
+  ] = useTitles()
+  , _refFromDate = useRef()
+  , [
+    setDate,
+    getDate
+  ] = useProperty()
+  , _getDate = useCallback(() => (getDate() || {}).value
+    || dateDefault
+  , [dateDefault, getDate])
+  , [
+    setColorComp,
+    getColorComp
+  ] = useProperty()
+  , _hSelect = useCallback((id, index, item) => {
+    getRefValue(_refItems)[index] = item
     if (item) {
       item.id = id
       if (id === TABLE_ID) {
-        const {
-          dfProps
-        } = this.props
-        , {
-          mapFrequency,
-          chartType
-        } = this.state;
-        this.setState(_crStateForTableItem(
-          item,
-          dfProps,
-          mapFrequency,
-          chartType
-        ))
+        const _mapFrequency = item.mapFrequency
+          || mapFrequency
+        , _mapDateDf = item.mapDateDf
+          || mapDateDf;
+        setChartConfig(prevState => _isRequireUpdateChartConfig(
+              prevState,
+              _mapFrequency,
+              _mapDateDf
+            )
+          ? (setDate(), {
+              _mapFrequency,
+              _mapDateDf,
+              chartType: void 0
+            })
+          : prevState
+        )
       }
     }
-  }
+  }, [mapFrequency, mapDateDf, setDate])
+  , _hLoad = useEventCallback(() => {
+      const msgs = []
+      , _items = getRefValue(_refItems);
+      let i = isCategoryItem(chartType) ? 1 : 0;
+      for(; i<selectProps.length; i++) {
+        if (!_items[i]) {
+          msgs.push(msgOnNotSelected(selectProps[i].caption))
+        }
+      }
 
-  render(){
-    const {
-      caption,
-      isShow,
-      onShow,
-      onFront,
-      selectProps,
-      chartsType,
-      isFd,
-      isCh,
-      noDate,
-      initFromDate,
-      errNotYmdOrEmpty,
-      isYmdOrEmpty
-    } = this.props
-    , {
-      chartType,
-      isToolbar,
-      isOptions,
-      isToggle,
-      isShowLabels,
-      isShowFd,
-      isShowChart,
-      validationMessages,
-      mapFrequency
-    } = this.state
-    , _chartOptions = this._crChartOptionsMem(
-       selectProps,
-       chartsType,
-       mapFrequency
-    )
-    , {
-      dateDefault,
-      dateOptions
-    } = this._crDateConfig()
-    , _isCategory = isCategoryItem(chartType)
-    , _isRowFd = isFd && !_isCategory
-    , _isShowDate = isShowChart && _isCategory;
+      if (msgs.length === 0) {
+        onLoad(loadFn(props, {
+          // seriaColor, seriaWidth
+          ..._getConf(getColorComp()),
+          items: [...getRefValue(_refItems)],
+          titles: getRefValue(refTitles),
+          dialogOptions: getRefValue(refDialogOptions),
+          isCategory: isCategoryItem(chartType),
+          fromDate: _getValidValue(_refFromDate, ''),
+          date: _getDate(),
+          chartType
+        }))
+        clearValidationMessages()
+      } else {
+        setValidationMessages(msgs)
+      }
+  })
+  , _isCategory = isCategoryItem(chartType)
+  , _isRowFd = isFd && !_isCategory
+  , _isShowDate = isShowChart && _isCategory;
 
-    return(
-      <D.DraggableDialog
-         isShow={isShow}
-         caption={caption}
-         menuModel={this._menuMore}
-         onLoad={this._handleLoad}
-         onShowChart={onShow}
-         onFront={onFront}
-         onClose={this._hClose}
-      >
-           <D.Toolbar
-             isShow={isToolbar}
-             buttons={this.toolbarButtons}
-           />
-           <D.ModalOptions
-             isShow={isOptions}
-             toggleOption={this._toggleOptionWithToolbar}
-             onClose={this._hideOptionsWithToolbar}
-           />
-           <D.ModalToggle
-             isShow={isToggle}
-             selectProps={selectProps}
-             isFd={_isRowFd}
-             isShowFd={isShowFd}
-             isCh={isCh}
-             isShowChart={isShowChart}
-             crIsId={_crIsId}
-             onToggle={this._toggleStateBy}
-             onCheckCaption={this._checkCaptionBy}
-             onUnCheckCaption={this._uncheckCaption}
-             onClose={this._hideToggleWithToolbar}
-           />
-           <SelectList
-             isShow={isShow}
-             isShowLabels={isShowLabels}
-             selectProps={selectProps}
-             isShowById={this._isShowById}
-             hSelect={this._hSelect}
-           />
-           { _isRowFd && <D.ShowHide isShow={isShowFd}>
-               <D.RowDate
-                 innerRef={this._refFromDate}
-                 isShowLabels={isShowLabels}
-                 title="From Date:"
-                 initialValue={initFromDate}
-                 errorMsg={errNotYmdOrEmpty}
-                 onTest={isYmdOrEmpty}
-               />
-             </D.ShowHide>
-           }
-           { isCh && <D.RowChartDate
-               chartType={chartType}
-               isShowLabels={isShowLabels}
-               isShowChart={isShowChart}
-               chartOptions={_chartOptions}
-               onSelectChart={this._hSelectChartType}
-               onRegColor={this._onRegColor}
-               noDate={noDate}
-               isShowDate={_isShowDate}
-               dateDefault={dateDefault}
-               dateOptions={dateOptions}
-               onSelecDate={this._hSelectDate}
-             />
-           }
-           <D.ValidationMessages
-               validationMessages={validationMessages}
-           />
-      </D.DraggableDialog>
-    );
-  }
+  return (
+    <D.DraggableDialog
+      isShow={isShow}
+      caption={caption}
+      menuModel={menuMoreModel}
+      onLoad={_hLoad}
+      onShowChart={onShow}
+      onFront={onFront}
+      onClose={hClose}
+   >
+      <D.Toolbar
+        isShow={isToolbar}
+        buttons={toolbarButtons}
+      />
+      <D.ModalOptions
+        isShow={isShowOptions}
+        toggleOption={toggleDialogOption}
+        onClose={hideOptions}
+      />
+      <D.ModalToggle
+        isShow={isToggle}
+        selectProps={selectProps}
+        isFd={_isRowFd}
+        isShowFd={isShowFd}
+        isCh={isCh}
+        isShowChart={isShowChart}
+        crIsId={_crIsId}
+        onToggle={_toggleStateBy}
+        onCheckCaption={addTitleIndex}
+        onUnCheckCaption={removeTitleIndex}
+        onToggleFd={toggleIsShowFd}
+        onToggleChart={toggleIsShowChart}
+        onClose={_hideToggle}
+      />
+      <SelectList
+        isShow={isShow}
+        isShowLabels={isShowLabels}
+        selectProps={selectProps}
+        isShowById={_isShowById}
+        hSelect={_hSelect}
+      />
+      { _isRowFd && <D.ShowHide isShow={isShowFd}>
+          <D.RowDate
+            innerRef={_refFromDate}
+            isShowLabels={isShowLabels}
+            title="From Date:"
+            initialValue={initFromDate}
+            errorMsg={errNotYmdOrEmpty}
+            onTest={isYmdOrEmpty}
+          />
+        </D.ShowHide>
+      }
+      { isCh && <D.RowChartDate
+          chartType={chartType}
+          isShowLabels={isShowLabels}
+          isShowChart={isShowChart}
+          chartOptions={_chartOptions}
+          onSelectChart={_hSelectChartType}
+          onRegColor={setColorComp}
+          noDate={noDate}
+          isShowDate={_isShowDate}
+          dateDefault={dateDefault}
+          dateOptions={dateOptions}
+          onSelecDate={setDate}
+        />
+      }
+      <D.ValidationMessages
+        validationMessages={validationMessages}
+      />
+    </D.DraggableDialog>
+  );
+})
+
+/*
+DialogSelectN.propTypes = {
+  isShow: PropTypes.bool,
+  isOpt: PropTypes.bool,
+  isCh: PropTypes.bool,
+  isFd: PropTypes.bool,
+  caption: PropTypes.string,
+  selectProps: PropTypes.arrayOf(
+     PropTypes.shape({
+        id: PropTypes.string,
+        caption: PropTypes.string,
+        uri: PropTypes.string,
+        jsonProp: PropTypes.string
+     })
+  ),
+
+  noDate: PropTypes.string,
+  dfProps: PropTypes.shape({
+    mapFrequency: PropTypes.oneOf(['M', 'Q', 'Y']),
+    mapDateDf: PropTypes.number,
+  }),
+  msgOnNotSelected: PropTypes.func,
+
+  loadFn: PropTypes.func,
+  onLoad: PropTypes.func,
+
+  onShow: PropTypes.func,
+  onFront: PropTypes.func,
+  onClose: PropTypes.func,
+  onClickInfo: PropTypes.func,
 }
+*/
 
 export default DialogSelectN

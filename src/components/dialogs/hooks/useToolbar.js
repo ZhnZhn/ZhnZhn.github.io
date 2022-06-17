@@ -5,12 +5,16 @@ const CLICK_TO_TOGGLE = 'Click to toggle';
 
 const useToolbar = ({
   toggleLabels,
+  toggleInputs,
   toggleOptions,
   toggleDate,
   onClickInfo
 }) => useRefInit(() => [
   toggleLabels
     ? crToolbarItem('L', `${CLICK_TO_TOGGLE} input labels`, toggleLabels)
+    : void 0,
+  toggleInputs
+    ? crToolbarItem('T', `${CLICK_TO_TOGGLE} inputs`, toggleInputs)
     : void 0,
   toggleOptions
     ? crToolbarItem('O', `${CLICK_TO_TOGGLE} dialog options`, toggleOptions)
