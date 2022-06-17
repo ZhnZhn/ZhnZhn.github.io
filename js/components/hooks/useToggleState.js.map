@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useToggleState.js"
+ ],
+ "file": "../../../src/components/hooks/useToggleState.js",
+ "names": [
+  "useToggleState",
+  "initialValue",
+  "toggleState",
+  "setToggleState",
+  "toggleByPropName",
+  "propName",
+  "prevState"
+ ],
+ "mappings": ";;;;;AAAA;;AAKA,MAAMA,cAAc,GAAGC,YAAY,IAAI;AACrC,QAAM,CACJC,WADI,EAEJC,cAFI,IAGF,qBAASF,YAAT,CAHJ;AAAA,QAIEG,gBAAgB,GAAG,wBAClBC,QAAQ,IAAIF,cAAc,CAACG,SAAS,KAAK,EACvC,GAAGA,SADoC;AAEvC,KAACD,QAAD,GAAY,CAACC,SAAS,CAACD,QAAD;AAFiB,GAAL,CAAV,CADR,EAKnB,EALmB,CAJrB;AAUA,SAAO,CACLH,WADK,EAELE,gBAFK,CAAP;AAID,CAfD;;eAiBeJ,c"
+}
