@@ -1,0 +1,19 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/hooks/useTitles.js"
+ ],
+ "file": "../../../../src/components/dialogs/hooks/useTitles.js",
+ "names": [
+  "useTitles",
+  "refTitles",
+  "addTitleIndex",
+  "index",
+  "push",
+  "removeTitleIndex",
+  "current",
+  "filter",
+  "v"
+ ],
+ "mappings": ";;;;;AAAA;;AAMA,MAAMA,SAAS,GAAG,MAAM;AACtB,QAAMC,SAAS,GAAG,mBAAO,CAAC,CAAD,CAAP,CAAlB;AAAA,QACEC,aAAa,GAAG,wBAAYC,KAAK,IAAI;AACrC,4BAAYF,SAAZ,EAAuBG,IAAvB,CAA4BD,KAA5B;AACD,GAFiB,EAEf,EAFe,CADlB;AAAA,QAIEE,gBAAgB,GAAG,wBAAYF,KAAK,IAAI;AACvCF,IAAAA,SAAS,CAACK,OAAV,GAAoB,wBAAYL,SAAZ,EACjBM,MADiB,CACVC,CAAC,IAAIA,CAAC,KAAKL,KADD,CAApB;AAEF,GAHoB,EAGlB,EAHkB,CAJrB;AAQA,SAAO,CACLF,SADK,EAELC,aAFK,EAGLG,gBAHK,CAAP;AAKD,CAdD;;eAgBeL,S"
+}
