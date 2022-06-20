@@ -55,8 +55,6 @@ const _getValidValue = (ref, dfValue) => {
   return _compInst && _compInst.isValid() ? _compInst.getValue() : dfValue;
 };
 
-const _getConf = comp => comp ? comp.getConf() : void 0;
-
 const DialogSelectN = (0, _memoIsShow.default)(props => {
   const {
     isCh = true,
@@ -130,7 +128,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
         _refFromDate = (0, _uiApi.useRef)(),
         [setDate, getDate] = (0, _useProperty.default)(),
         _getDate = (0, _uiApi.useCallback)(() => (getDate() || {}).value || dateDefault, [dateDefault, getDate]),
-        [setColorComp, getColorComp] = (0, _useProperty.default)(),
+        _refSeriaColor = (0, _uiApi.useRef)(),
         _hSelect = (0, _uiApi.useCallback)((id, index, item) => {
     (0, _uiApi.getRefValue)(_refItems)[index] = item;
 
@@ -163,7 +161,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
 
     if (msgs.length === 0) {
       onLoad(loadFn(props, { // seriaColor, seriaWidth
-        ..._getConf(getColorComp()),
+        ...(0, _uiApi.getInputValue)(_refSeriaColor),
         items: [...(0, _uiApi.getRefValue)(_refItems)],
         titles: (0, _uiApi.getRefValue)(refTitles),
         dialogOptions: (0, _uiApi.getRefValue)(refDialogOptions),
@@ -227,12 +225,12 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
         onTest: isYmdOrEmpty
       })
     }), isCh && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
+      refSeriaColor: _refSeriaColor,
       chartType: chartType,
       isShowLabels: isShowLabels,
       isShowChart: isShowChart,
       chartOptions: _chartOptions,
       onSelectChart: _hSelectChartType,
-      onRegColor: setColorComp,
       noDate: noDate,
       isShowDate: _isShowDate,
       dateDefault: dateDefault,

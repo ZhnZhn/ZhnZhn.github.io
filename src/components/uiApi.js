@@ -1,12 +1,14 @@
 export {
   createContext,
   memo,
+  forwardRef,
   useContext,
   useRef,
   useState,
   useCallback,
   useMemo,
-  useEffect
+  useEffect,
+  useImperativeHandle
 } from 'react';
 
 export const getRefValue = ref => (ref || {}).current
@@ -29,7 +31,7 @@ export const isInputValid = ref => {
 
 export const getInputValue = ref => {
   const inputComp = getRefValue(ref);
-  return inputComp 
+  return inputComp
     ? inputComp.getValue()
     : void 0
 }

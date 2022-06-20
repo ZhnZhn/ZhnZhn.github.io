@@ -5,26 +5,33 @@ import RowInputSelect from './RowInputSelect'
 const { ShowHide } = Comp
 
 const RowChartDate = ({
+  refSeriaColor,
   chartType,
   isShowLabels,
   labelStyle,
   selectWidth,
-  isShowChart, chartOptions,
-  onSelectChart, onRegColor,
-  isShowDate, noDate=false,
-  dateDefault, dateOptions, onSelecDate,
-  isDim, dimOptions, onSelecDim
+  isShowChart,
+  chartOptions,
+  onSelectChart,
+  isShowDate,
+  noDate=false,
+  dateDefault,
+  dateOptions,
+  onSelecDate,
+  isDim,
+  dimOptions,
+  onSelecDim
 }) => (
   <>
     <ShowHide isShow={isShowChart}>
       <RowChart
+        refSeriaColor={refSeriaColor}
         chartType={chartType}
         isShowLabels={isShowLabels}
         labelStyle={labelStyle}
         selectWidth={selectWidth}
         options={chartOptions}
         onSelectChart={onSelectChart}
-        onRegColor={onRegColor}
       />
     </ShowHide>
     {
@@ -32,7 +39,7 @@ const RowChartDate = ({
       <ShowHide isShow={isShowDate}>
         <RowInputSelect
            isShowLabels={isShowLabels}
-           caption="Dim"           
+           caption="Dim"
            options={dimOptions}
            onSelect={onSelecDim}
         />

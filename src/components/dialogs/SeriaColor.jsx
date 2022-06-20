@@ -1,4 +1,11 @@
-import { Component, createRef } from 'react';
+import {
+  forwardRef,
+  useState,
+  useRef,
+  useCallback,
+  useImperativeHandle,
+  getInputValue
+} from '../uiApi';
 
 import CellColor from '../zhn-moleculs/CellColor';
 import BtCounter from './BtCounter';
@@ -23,97 +30,79 @@ const CL_INPUT_COLOR = 'va-b'
   marginLeft: 14,
   marginRight: 16
 }
-, S_TO_CELL = { margin: '0 12px' }
+, S_TO_CELL = { margin: '0 12px' };
 
-const _initColor = ({
-  initColor
-}) => initColor || C_TRANSPARENT;
 const _hasLineWidth = ({
   value
 } = {}) => !value
  || value === 'SPLINE'
- || value === 'LINE'
+ || value === 'LINE';
 
-
-class SeriaColor extends Component {
-  constructor(props){
-    super(props)
-    this._refLineWidth = createRef()
-    this.state = {
-      color: _initColor(props)
+const SeriaColor = forwardRef(({
+  isLong,
+  initColor=C_TRANSPARENT,
+  chartType
+}, ref) => {
+  const [
+    color,
+    setColor
+  ] = useState(initColor)
+  , _hClick = useCallback(nextColor => {
+    if (nextColor) {
+      setColor(nextColor)
     }
-  }
+  }, [])
+  , _hReset = useCallback(() => {
+    setColor(initColor)
+  }, [initColor])
+  , _refLineWidth = useRef();
 
-  componentDidMount() {
-    const { onReg } = this.props;
-    if (typeof onReg === 'function'){
-      onReg(this)
-    }
-  }
-
-  _hReset = () => {
-    this.setState({
-      color: _initColor(this.props)
+  useImperativeHandle(ref, () => ({
+    getValue: () => ({
+       seriaColor: color !== C_TRANSPARENT
+          ? color
+          : void 0,
+       seriaWidth: _hasLineWidth(chartType)
+         ? getInputValue(_refLineWidth)
+         : void 0
     })
-  }
+  }), [color, chartType])
 
-  _hClick = (color) => {
-     if (color) {
-       this.setState({ color })
-     }
-  }
+  const _isLineWidth = _hasLineWidth(chartType)
+  , _rowStyle = _isLineWidth
+       ? S_ROW2
+       : {...S_ROW2, ...S_ROW2_PADDING };
 
-  render(){
-    const { isLong, chartType } = this.props
-    , { color } = this.state
-    , _isLineWidth = _hasLineWidth(chartType)
-    , _rowStyle = _isLineWidth
-         ? S_ROW2
-         : {...S_ROW2, ...S_ROW2_PADDING };
-    return (
-      <div style={S_ROOT}>
-        <div>
-          <CellColor
-            color={color}
-            className={CL_INPUT_COLOR}
-            style={S_TO_CELL}
-            onClick={this._hReset}
+  return (
+    <div style={S_ROOT}>
+      <div>
+        <CellColor
+          color={color}
+          className={CL_INPUT_COLOR}
+          style={S_TO_CELL}
+          onClick={_hReset}
+        />
+        <ColorList
+          isLong={isLong}
+          colors={COLORS1}
+          onClick={_hClick}
+        />
+      </div>
+      <div style={_rowStyle}>
+         <BtCounter
+            ref={_refLineWidth}
+            isShow={_isLineWidth}
+            style={S_BT_COUNTER}
+            title="Line Width"
           />
           <ColorList
             isLong={isLong}
-            colors={COLORS1}
-            onClick={this._hClick}
+            colors={COLORS2}
+            onClick={_hClick}
           />
-        </div>
-        <div style={_rowStyle}>
-           <BtCounter
-              ref={this._refLineWidth}
-              isShow={_isLineWidth}
-              style={S_BT_COUNTER}
-              title="Line Width"
-            />
-            <ColorList
-              isLong={isLong}
-              colors={COLORS2}
-              onClick={this._hClick}
-            />
-        </div>
       </div>
-    );
-  }
-
-  getConf(){
-    const { chartType } = this.props
-    , { color } = this.state;
-    return {
-      seriaColor: color !== C_TRANSPARENT
-         ? color
-         : void 0,
-      seriaWidth: _hasLineWidth(chartType)
-        ? this._refLineWidth.current?.getValue()
-        : void 0
-    };
-  }
-}
+    </div>
+  );
+});
 
 export default SeriaColor

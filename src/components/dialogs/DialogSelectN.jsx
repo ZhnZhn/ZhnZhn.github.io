@@ -4,7 +4,8 @@ import {
   useState,
   useMemo,
   useCallback,
-  getRefValue
+  getRefValue,
+  getInputValue
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
@@ -57,10 +58,6 @@ const _getValidValue = (
     ? _compInst.getValue()
     : dfValue;
 };
-
-const _getConf = comp => comp
-  ? comp.getConf()
-  : void 0;
 
 const DialogSelectN = memoIsShow((
   props
@@ -184,10 +181,7 @@ const DialogSelectN = memoIsShow((
   , _getDate = useCallback(() => (getDate() || {}).value
     || dateDefault
   , [dateDefault, getDate])
-  , [
-    setColorComp,
-    getColorComp
-  ] = useProperty()
+  , _refSeriaColor = useRef()
   , _hSelect = useCallback((id, index, item) => {
     getRefValue(_refItems)[index] = item
     if (item) {
@@ -225,7 +219,7 @@ const DialogSelectN = memoIsShow((
       if (msgs.length === 0) {
         onLoad(loadFn(props, {
           // seriaColor, seriaWidth
-          ..._getConf(getColorComp()),
+          ...getInputValue(_refSeriaColor),
           items: [...getRefValue(_refItems)],
           titles: getRefValue(refTitles),
           dialogOptions: getRefValue(refDialogOptions),
@@ -296,12 +290,12 @@ const DialogSelectN = memoIsShow((
         </D.ShowHide>
       }
       { isCh && <D.RowChartDate
+          refSeriaColor={_refSeriaColor}
           chartType={chartType}
           isShowLabels={isShowLabels}
           isShowChart={isShowChart}
           chartOptions={_chartOptions}
           onSelectChart={_hSelectChartType}
-          onRegColor={setColorComp}
           noDate={noDate}
           isShowDate={_isShowDate}
           dateDefault={dateDefault}

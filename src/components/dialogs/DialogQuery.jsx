@@ -1,8 +1,8 @@
 import {
   useRef,
   useState,
-  useCallback,
-  getRefValue
+  getRefValue,
+  getInputValue
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
@@ -79,27 +79,17 @@ const DialogQuery = memoIsShow((
   })
   , _refIdInput = useRef()
   , _refDates = useRef()
-  , _refColorComp = useRef()
-  , _onRegColor = useCallback(comp => {
-    _refColorComp.current = comp
-  }, [])
+  , _refSeriaColor = useRef()
   , _hLoad = useEventCallback(() => {
      const _idInputInst = getRefValue(_refIdInput)
      if (_idInputInst && _idInputInst.isValid()){
-       const _value = _idInputInst.getValue()
-       , _colorCompInst = getRefValue(_refColorComp)
-       , {
-         seriaColor,
-         seriaWidth
-       } = _colorCompInst
-         ? _colorCompInst.getConf()
-         : {};
+       const _value = _idInputInst.getValue();
        onLoad(loadFn(props, {
+         // seriaColor, seriaWidth
+         ...getInputValue(_refSeriaColor),
          items: [{ c: _value, v: _value }],
          dialogOptions: getRefValue(refDialogOptions),
-         chartType,
-         seriaColor,
-         seriaWidth
+         chartType
        }));
      } else {
        _idInputInst.showErrMsg()
@@ -137,6 +127,7 @@ const DialogQuery = memoIsShow((
         errorMsg={ERR_MSG}
       />
       <D.RowChartDate
+        refSeriaColor={_refSeriaColor}
         chartType={chartType}
         isShowLabels={isShowLabels}
         isShowChart={true}
@@ -144,7 +135,6 @@ const DialogQuery = memoIsShow((
         selectWidth={S_ID_ROOT.width}
         chartOptions={CHART_OPTIONS}
         onSelectChart={setChartType}
-        onRegColor={_onRegColor}
         noDate={noDate}
       />
       {

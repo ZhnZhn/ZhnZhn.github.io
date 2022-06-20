@@ -67,30 +67,21 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
   }),
         _refIdInput = (0, _uiApi.useRef)(),
         _refDates = (0, _uiApi.useRef)(),
-        _refColorComp = (0, _uiApi.useRef)(),
-        _onRegColor = (0, _uiApi.useCallback)(comp => {
-    _refColorComp.current = comp;
-  }, []),
+        _refSeriaColor = (0, _uiApi.useRef)(),
         _hLoad = (0, _useEventCallback.default)(() => {
     const _idInputInst = (0, _uiApi.getRefValue)(_refIdInput);
 
     if (_idInputInst && _idInputInst.isValid()) {
-      const _value = _idInputInst.getValue(),
-            _colorCompInst = (0, _uiApi.getRefValue)(_refColorComp),
-            {
-        seriaColor,
-        seriaWidth
-      } = _colorCompInst ? _colorCompInst.getConf() : {};
+      const _value = _idInputInst.getValue();
 
-      onLoad(loadFn(props, {
+      onLoad(loadFn(props, { // seriaColor, seriaWidth
+        ...(0, _uiApi.getInputValue)(_refSeriaColor),
         items: [{
           c: _value,
           v: _value
         }],
         dialogOptions: (0, _uiApi.getRefValue)(refDialogOptions),
-        chartType,
-        seriaColor,
-        seriaWidth
+        chartType
       }));
     } else {
       _idInputInst.showErrMsg();
@@ -123,6 +114,7 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
       onTest: _testId,
       errorMsg: ERR_MSG
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
+      refSeriaColor: _refSeriaColor,
       chartType: chartType,
       isShowLabels: isShowLabels,
       isShowChart: true,
@@ -130,7 +122,6 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
       selectWidth: S_ID_ROOT.width,
       chartOptions: CHART_OPTIONS,
       onSelectChart: setChartType,
-      onRegColor: _onRegColor,
       noDate: noDate
     }), !noDate && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isShowDate,

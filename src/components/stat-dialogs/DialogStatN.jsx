@@ -1,4 +1,10 @@
-import { memo, useCallback } from 'react';
+import {
+  memo,
+  useRef,
+  useCallback,
+  getRefValue,
+  getInputValue
+} from '../uiApi';
 
 import has from '../has';
 import { isCategoryItem } from '../dialogs/ChartOptionsFn';
@@ -79,7 +85,7 @@ const DialogStatN = memo((props) => {
   } = props;
   const _isDim = !props.dims && !props.notDim
   , [_refItems, _fSelectItem] = useRefByIndex()
-  , [_refColorComp, _onRegColor] = useRefSet()
+  , _refSeriaColor = useRef()
   , [_refDate, _hSelectDate] = useRefSet()
   , [_refDim, _hSelectDim] = useRefSet()
   , [
@@ -129,7 +135,7 @@ const DialogStatN = memo((props) => {
 
         const _isCategory = isCategoryItem(chartType)
         , { dim } = chartType || {}
-        , _addErrMsgTo = _fAddErrMsgTo(msg, msgOnNotSelected, configs, _refItems.current);
+        , _addErrMsgTo = _fAddErrMsgTo(msg, msgOnNotSelected, configs, getRefValue(_refItems));
 
         //For dims case and not category case
         if (!_isDim || !_isCategory) {
@@ -141,7 +147,7 @@ const DialogStatN = memo((props) => {
         }
         //For category case
         if (_isCategory) {
-          const _dimItem = _refDim.current;
+          const _dimItem = getRefValue(_refDim);
           if (!_dimItem) {
             msg.push("Dim isn't selected")
             return msg;
@@ -165,20 +171,21 @@ const DialogStatN = memo((props) => {
      _addDfValuesFrom(configs, _fSelectItem)
      const validationMessages = _crValidationMessages();
      if (validationMessages.length === 0){
-       const { seriaColor, seriaWidth } = _refColorComp.current
-          ? _refColorComp.current.getConf()
-          : {}
-       , dfC = _crDfC(props, _refDim.current)
-       , dfTitle = _crDfTitle(props, _refDim.current)
+       const dfC = _crDfC(props, getRefValue(_refDim))
+       , dfTitle = _crDfTitle(props, getRefValue(_refDim))
        , loadOpt = loadFn(
            {...props}, {
-           timeId, dfC, dfTitle,
-           time: (_refDate.current || dateDf).value,
-           dialogOptions: _refDialogOptions.current,
-           chartType, seriaColor, seriaWidth,
-           items: _refItems.current,
-           titles: _refTitles.current,
-           selectOptions: selectOptions
+           //seriaColor, seriaWidth
+           ...getInputValue(_refSeriaColor),
+           chartType,
+           timeId,
+           dfC,
+           dfTitle,
+           selectOptions,
+           time: (getRefValue(_refDate) || dateDf).value,
+           dialogOptions: getRefValue(_refDialogOptions),
+           items: getRefValue(_refItems),
+           titles: getRefValue(_refTitles)
          }
        );
        onLoad(loadOpt)
@@ -224,12 +231,12 @@ const DialogStatN = memo((props) => {
              />
        }
        <D.RowChartDate
+         refSeriaColor={_refSeriaColor}
          chartType={chartType}
          isShowLabels={isShowLabels}
          isShowChart={isShowChart}
          chartOptions={chartOptions}
          onSelectChart={_hSelectChartType}
-         onRegColor={_onRegColor}
          isShowDate={isShowDate}
          dateDefault={dateDf.caption}
          dateOptions={dateOptions}

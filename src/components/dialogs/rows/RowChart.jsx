@@ -2,14 +2,14 @@ import RowOcSelect from './RowOcSelect'
 import SeriaColor from '../SeriaColor'
 
 const RowChart = ({
+  refSeriaColor,
   chartType,
   isShowLabels,
   labelStyle,
   placeholder,
   selectWidth,
   options,
-  onSelectChart,
-  onRegColor
+  onSelectChart
 }) => (
   <RowOcSelect
     isShowLabels={isShowLabels}
@@ -21,9 +21,9 @@ const RowChart = ({
     onSelect={onSelectChart}
   >
     <SeriaColor
-      chartType={chartType}
+      ref={refSeriaColor}
       isLong={isShowLabels}
-      onReg={onRegColor}
+      chartType={chartType}
     />
   </RowOcSelect>
 );

@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _CellColor = _interopRequireDefault(require("../zhn-moleculs/CellColor"));
 
@@ -36,13 +36,6 @@ const CL_INPUT_COLOR = 'va-b',
   margin: '0 12px'
 };
 
-const _initColor = _ref => {
-  let {
-    initColor
-  } = _ref;
-  return initColor || C_TRANSPARENT;
-};
-
 const _hasLineWidth = function (_temp) {
   let {
     value
@@ -50,99 +43,64 @@ const _hasLineWidth = function (_temp) {
   return !value || value === 'SPLINE' || value === 'LINE';
 };
 
-class SeriaColor extends _react.Component {
-  constructor(props) {
-    super(props);
+const SeriaColor = (0, _uiApi.forwardRef)((_ref, ref) => {
+  let {
+    isLong,
+    initColor = C_TRANSPARENT,
+    chartType
+  } = _ref;
 
-    this._hReset = () => {
-      this.setState({
-        color: _initColor(this.props)
-      });
-    };
-
-    this._hClick = color => {
-      if (color) {
-        this.setState({
-          color
-        });
-      }
-    };
-
-    this._refLineWidth = /*#__PURE__*/(0, _react.createRef)();
-    this.state = {
-      color: _initColor(props)
-    };
-  }
-
-  componentDidMount() {
-    const {
-      onReg
-    } = this.props;
-
-    if (typeof onReg === 'function') {
-      onReg(this);
+  const [color, setColor] = (0, _uiApi.useState)(initColor),
+        _hClick = (0, _uiApi.useCallback)(nextColor => {
+    if (nextColor) {
+      setColor(nextColor);
     }
-  }
+  }, []),
+        _hReset = (0, _uiApi.useCallback)(() => {
+    setColor(initColor);
+  }, [initColor]),
+        _refLineWidth = (0, _uiApi.useRef)();
 
-  render() {
-    const {
-      isLong,
-      chartType
-    } = this.props,
-          {
-      color
-    } = this.state,
-          _isLineWidth = _hasLineWidth(chartType),
-          _rowStyle = _isLineWidth ? S_ROW2 : { ...S_ROW2,
-      ...S_ROW2_PADDING
-    };
-
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: S_ROOT,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor.default, {
-          color: color,
-          className: CL_INPUT_COLOR,
-          style: S_TO_CELL,
-          onClick: this._hReset
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ColorList.default, {
-          isLong: isLong,
-          colors: COLORS1,
-          onClick: this._hClick
-        })]
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        style: _rowStyle,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtCounter.default, {
-          ref: this._refLineWidth,
-          isShow: _isLineWidth,
-          style: S_BT_COUNTER,
-          title: "Line Width"
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ColorList.default, {
-          isLong: isLong,
-          colors: COLORS2,
-          onClick: this._hClick
-        })]
-      })]
-    });
-  }
-
-  getConf() {
-    var _this$_refLineWidth$c;
-
-    const {
-      chartType
-    } = this.props,
-          {
-      color
-    } = this.state;
-    return {
+  (0, _uiApi.useImperativeHandle)(ref, () => ({
+    getValue: () => ({
       seriaColor: color !== C_TRANSPARENT ? color : void 0,
-      seriaWidth: _hasLineWidth(chartType) ? (_this$_refLineWidth$c = this._refLineWidth.current) == null ? void 0 : _this$_refLineWidth$c.getValue() : void 0
-    };
-  }
+      seriaWidth: _hasLineWidth(chartType) ? (0, _uiApi.getInputValue)(_refLineWidth) : void 0
+    })
+  }), [color, chartType]);
 
-}
+  const _isLineWidth = _hasLineWidth(chartType),
+        _rowStyle = _isLineWidth ? S_ROW2 : { ...S_ROW2,
+    ...S_ROW2_PADDING
+  };
 
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S_ROOT,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor.default, {
+        color: color,
+        className: CL_INPUT_COLOR,
+        style: S_TO_CELL,
+        onClick: _hReset
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ColorList.default, {
+        isLong: isLong,
+        colors: COLORS1,
+        onClick: _hClick
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      style: _rowStyle,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtCounter.default, {
+        ref: _refLineWidth,
+        isShow: _isLineWidth,
+        style: S_BT_COUNTER,
+        title: "Line Width"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ColorList.default, {
+        isLong: isLong,
+        colors: COLORS2,
+        onClick: _hClick
+      })]
+    })]
+  });
+});
 var _default = SeriaColor;
 exports.default = _default;
 //# sourceMappingURL=SeriaColor.js.map

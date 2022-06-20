@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _has = _interopRequireDefault(require("../has"));
 
@@ -89,7 +89,7 @@ const _addDfValuesFrom = (configs, fSelectItem) => {
   });
 };
 
-const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
+const DialogStatN = (0, _uiApi.memo)(props => {
   const {
     isShow,
     caption,
@@ -108,7 +108,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
 
   const _isDim = !props.dims && !props.notDim,
         [_refItems, _fSelectItem] = (0, _useRefByIndex.default)(),
-        [_refColorComp, _onRegColor] = (0, _useRefSet.default)(),
+        _refSeriaColor = (0, _uiApi.useRef)(),
         [_refDate, _hSelectDate] = (0, _useRefSet.default)(),
         [_refDim, _hSelectDim] = (0, _useRefSet.default)(),
         [state, isLoading, isLoadFailed, validationMessages, setValidationMessages, setState] = (0, _useLoadDims.default)(props),
@@ -132,12 +132,12 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
         [_toolbarEl, toggleToolBar] = (0, _useToolbar.default)(_toggleLabels, _toggleInputs, _toggleOptions, onClickInfo)
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _hClose = (0, _react.useCallback)(() => {
+        _hClose = (0, _uiApi.useCallback)(() => {
     onClose();
     setValidationMessages([]);
   }, []) //onClose
   ,
-        _crValidationMessages = (0, _react.useCallback)(() => {
+        _crValidationMessages = (0, _uiApi.useCallback)(() => {
     const msg = [];
 
     if (isLoadFailed) {
@@ -154,7 +154,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
           {
       dim
     } = chartType || {},
-          _addErrMsgTo = _fAddErrMsgTo(msg, msgOnNotSelected, configs, _refItems.current); //For dims case and not category case
+          _addErrMsgTo = _fAddErrMsgTo(msg, msgOnNotSelected, configs, (0, _uiApi.getRefValue)(_refItems)); //For dims case and not category case
 
 
     if (!_isDim || !_isCategory) {
@@ -167,7 +167,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
 
 
     if (_isCategory) {
-      const _dimItem = _refDim.current;
+      const _dimItem = (0, _uiApi.getRefValue)(_refDim);
 
       if (!_dimItem) {
         msg.push("Dim isn't selected");
@@ -180,7 +180,7 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
     return msg;
   }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected]) //_refDim, _isDim
   ,
-        _hSelectChartType = (0, _react.useCallback)(chartType => {
+        _hSelectChartType = (0, _uiApi.useCallback)(chartType => {
     const _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(chartType) ? (_refDate.current = null, true) : false;
 
     (0, _updateStateIf.default)(setIsRow, 'isShowDate', _isShowDate);
@@ -191,31 +191,26 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
 
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _hLoad = (0, _react.useCallback)(() => {
+        _hLoad = (0, _uiApi.useCallback)(() => {
     _addDfValuesFrom(configs, _fSelectItem);
 
     const validationMessages = _crValidationMessages();
 
     if (validationMessages.length === 0) {
-      const {
-        seriaColor,
-        seriaWidth
-      } = _refColorComp.current ? _refColorComp.current.getConf() : {},
-            dfC = _crDfC(props, _refDim.current),
-            dfTitle = _crDfTitle(props, _refDim.current),
+      const dfC = _crDfC(props, (0, _uiApi.getRefValue)(_refDim)),
+            dfTitle = _crDfTitle(props, (0, _uiApi.getRefValue)(_refDim)),
             loadOpt = loadFn({ ...props
-      }, {
+      }, { //seriaColor, seriaWidth
+        ...(0, _uiApi.getInputValue)(_refSeriaColor),
+        chartType,
         timeId,
         dfC,
         dfTitle,
-        time: (_refDate.current || dateDf).value,
-        dialogOptions: _refDialogOptions.current,
-        chartType,
-        seriaColor,
-        seriaWidth,
-        items: _refItems.current,
-        titles: _refTitles.current,
-        selectOptions: selectOptions
+        selectOptions,
+        time: ((0, _uiApi.getRefValue)(_refDate) || dateDf).value,
+        dialogOptions: (0, _uiApi.getRefValue)(_refDialogOptions),
+        items: (0, _uiApi.getRefValue)(_refItems),
+        titles: (0, _uiApi.getRefValue)(_refTitles)
       });
 
       onLoad(loadOpt);
@@ -249,12 +244,12 @@ const DialogStatN = /*#__PURE__*/(0, _react.memo)(props => {
       isRow: isRow,
       fSelect: _fSelectItem
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
+      refSeriaColor: _refSeriaColor,
       chartType: chartType,
       isShowLabels: isShowLabels,
       isShowChart: isShowChart,
       chartOptions: chartOptions,
       onSelectChart: _hSelectChartType,
-      onRegColor: _onRegColor,
       isShowDate: isShowDate,
       dateDefault: dateDf.caption,
       dateOptions: dateOptions,
