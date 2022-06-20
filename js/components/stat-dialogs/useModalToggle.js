@@ -9,9 +9,9 @@ var _react = require("react");
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
-var _useRowToggle = _interopRequireDefault(require("./useRowToggle"));
+var _useTitles = _interopRequireDefault(require("../dialogs/hooks/useTitles"));
 
-var _useRefList = _interopRequireDefault(require("./useRefList"));
+var _useRowToggle = _interopRequireDefault(require("./useRowToggle"));
 
 var _useToggle = _interopRequireDefault(require("./useToggle2"));
 
@@ -26,7 +26,7 @@ const useModalToggle = configs => {
     isShowChart,
     isShowDate
   } = isRow,
-        [refTitles, checkCaptionBy, uncheckCaption] = (0, _useRefList.default)();
+        [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)();
   return [
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _react.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalToggle, {
@@ -36,8 +36,8 @@ const useModalToggle = configs => {
     isShowDate: isShowDate,
     crIsId: _crIsId.default,
     onToggle: toggleIsRow,
-    onCheckCaption: checkCaptionBy,
-    onUnCheckCaption: uncheckCaption,
+    onCheckCaption: addTitleIndex,
+    onUnCheckCaption: removeTitleIndex,
     onClose: hideInputs
   }), [isToggle, configs, isShowChart, isShowDate]) //toggleIsRow, checkCaptionBy, uncheckCaption, hideInputs
 

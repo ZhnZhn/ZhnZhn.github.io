@@ -1,16 +1,33 @@
 import { useMemo } from 'react';
 
 import D from '../dialogs/DialogCell';
+import useTitles from '../dialogs/hooks/useTitles';
 import useRowToggle from './useRowToggle';
-import useRefList from './useRefList';
 import useToggle2 from './useToggle2';
 import crIsId from './crIsId';
 
-const useModalToggle = (configs) => {
-  const [isToggle, toggleInputs, hideInputs] = useToggle2(false)
-  , [isRow, setIsRow, toggleIsRow] = useRowToggle(configs)
-  , { isShowChart, isShowDate } = isRow
-  , [refTitles, checkCaptionBy, uncheckCaption] = useRefList();
+const useModalToggle = (
+  configs
+) => {
+  const [
+    isToggle,
+    toggleInputs,
+    hideInputs
+  ] = useToggle2(false)
+  , [
+    isRow,
+    setIsRow,
+    toggleIsRow
+  ] = useRowToggle(configs)
+  , {
+    isShowChart,
+    isShowDate
+  } = isRow
+  , [
+    refTitles,
+    addTitleIndex,
+    removeTitleIndex
+  ] = useTitles();
 
   return [
     /*eslint-disable react-hooks/exhaustive-deps */
@@ -22,8 +39,8 @@ const useModalToggle = (configs) => {
         isShowDate={isShowDate}
         crIsId={crIsId}
         onToggle={toggleIsRow}
-        onCheckCaption={checkCaptionBy}
-        onUnCheckCaption={uncheckCaption}
+        onCheckCaption={addTitleIndex}
+        onUnCheckCaption={removeTitleIndex}
         onClose={hideInputs}
       />
     ), [isToggle, configs, isShowChart, isShowDate])
