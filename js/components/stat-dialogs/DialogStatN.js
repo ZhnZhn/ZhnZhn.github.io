@@ -19,6 +19,8 @@ var _Spinner = _interopRequireDefault(require("./Spinner"));
 
 var _crSelectItem = _interopRequireDefault(require("./crSelectItem"));
 
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
+
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
@@ -52,8 +54,7 @@ const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open 
   width: '100%'
 };
 
-const IS_SHOW_LABELS = _has.default.wideWidth(),
-      _arePropsEqual = (prevProps, props) => prevProps.isShow === props.isShow;
+const IS_SHOW_LABELS = _has.default.wideWidth();
 
 const _crDfC = (props, dim) => props.dfC || (dim || {}).value;
 
@@ -89,7 +90,7 @@ const _addDfValuesFrom = (configs, fSelectItem) => {
   });
 };
 
-const DialogStatN = (0, _uiApi.memo)(props => {
+const DialogStatN = (0, _memoIsShow.default)(props => {
   const {
     isShow,
     caption,
@@ -259,7 +260,7 @@ const DialogStatN = (0, _uiApi.memo)(props => {
       validationMessages: validationMessages
     })]
   });
-}, _arePropsEqual);
+});
 var _default = DialogStatN;
 exports.default = _default;
 //# sourceMappingURL=DialogStatN.js.map

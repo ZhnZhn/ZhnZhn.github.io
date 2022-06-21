@@ -1,5 +1,4 @@
 import {
-  memo,
   useRef,
   useCallback,
   getRefValue,
@@ -14,6 +13,7 @@ import D from '../dialogs/DialogCell';
 import Spinner from './Spinner';
 import crSelectItem from './crSelectItem';
 
+import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import useProperty from '../hooks/useProperty';
 import useRefByIndex from './useRefByIndex';
@@ -34,8 +34,6 @@ const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open 
 , S_DIV_LOADING = { height: 50, width: '100%' };
 
 const IS_SHOW_LABELS = has.wideWidth()
-, _arePropsEqual = (prevProps, props) =>
-  prevProps.isShow === props.isShow;
 
 const _crDfC = (props, dim) => props.dfC
   || (dim || {}).value;
@@ -64,7 +62,7 @@ const _addDfValuesFrom = (configs, fSelectItem) => {
   })
 };
 
-const DialogStatN = memo((props) => {
+const DialogStatN = memoIsShow((props) => {
   const {
     isShow,
     caption,
@@ -248,6 +246,6 @@ const DialogStatN = memo((props) => {
        />
     </D.DraggableDialog>
   );
-}, _arePropsEqual)
+})
 
 export default DialogStatN
