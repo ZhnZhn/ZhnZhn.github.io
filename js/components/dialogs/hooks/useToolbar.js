@@ -17,9 +17,9 @@ const useToolbar = _ref => {
     toggleInputs,
     toggleOptions,
     toggleDate,
-    onClickInfo
+    onAbout
   } = _ref;
-  return (0, _useRefInit.default)(() => [toggleLabels ? (0, _crToolbarItem.default)('L', CLICK_TO_TOGGLE + " input labels", toggleLabels) : void 0, toggleInputs ? (0, _crToolbarItem.default)('T', CLICK_TO_TOGGLE + " inputs", toggleInputs) : void 0, toggleOptions ? (0, _crToolbarItem.default)('O', CLICK_TO_TOGGLE + " dialog options", toggleOptions) : void 0, toggleDate ? (0, _crToolbarItem.default)('D', CLICK_TO_TOGGLE + " date input", toggleDate) : void 0, (0, _crToolbarItem.default)('A', 'About datasouce', onClickInfo)].filter(Boolean));
+  return (0, _useRefInit.default)(() => [toggleLabels ? (0, _crToolbarItem.default)('L', CLICK_TO_TOGGLE + " input labels", toggleLabels) : void 0, toggleInputs ? (0, _crToolbarItem.default)('T', CLICK_TO_TOGGLE + " inputs", toggleInputs) : void 0, toggleOptions ? (0, _crToolbarItem.default)('O', CLICK_TO_TOGGLE + " dialog options", toggleOptions) : void 0, toggleDate ? (0, _crToolbarItem.default)('D', CLICK_TO_TOGGLE + " date input", toggleDate) : void 0, (0, _crToolbarItem.default)('A', 'About datasouce', onAbout)].filter(Boolean));
 };
 
 var _default = useToolbar;

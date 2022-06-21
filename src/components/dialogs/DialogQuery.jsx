@@ -44,7 +44,7 @@ const DialogQuery = memoIsShow((
     onTestDate,
 
     toTopLayer,
-    onClickInfo,
+    onAbout,
 
     loadFn,
     onLoad,
@@ -72,7 +72,7 @@ const DialogQuery = memoIsShow((
     menuMoreModel,
     toolbarButtons
   ] = useDialog({
-    onClickInfo,
+    onAbout,
     onClose,
     toggleOptions,
     toggleDate: noDate ? void 0 : toggleDate

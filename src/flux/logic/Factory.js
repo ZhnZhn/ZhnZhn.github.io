@@ -143,7 +143,7 @@ export const crDialog = (
      isGetKey
    } = dialogProps
    , _dialogType = _getDialogType(dialogType, dialogProps)
-   , onClickInfo = _crClickAbout(dialogProps)
+   , onAbout = _crClickAbout(dialogProps)
    , loadFn = RouterLoadFn.getFn(loadFnType, _dialogType)
    , proxy = isProxy
         ? ChartStore.getProxy()
@@ -164,22 +164,22 @@ export const crDialog = (
     .getDialog(_dialogType)
     .then(Comp =>
        createElement(Comp, {
+          ...dialogProps,
+          //initFromDate, initToDate, onTestDate,
+          //errNotYmdOrEmpty, isYmdOrEmpty
+          ..._crDateProps(dialogProps),
           key: itemKey,
           caption: dialogCaption || menuTitle,
           msgOnNotSelected: NOT_SELECTED,
           msgOnNotValidFormat: NOT_VALID_FORMAT,
           fnValue: _crFnValue(valueFn, valueFnPrefix),
-          //initFromDate, initToDate, onTestDate,
-          //errNotYmdOrEmpty, isYmdOrEmpty
-          ..._crDateProps(dialogProps),
+          onAbout,
           onLoad,
           onShow,
-          onClickInfo,
           loadFn,
           proxy,
           getKey,
-          onError,
-          ...dialogProps
+          onError
        })
    );
 }

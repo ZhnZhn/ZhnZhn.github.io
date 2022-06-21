@@ -56,7 +56,7 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
     loadId,
     dataSource,
     toTopLayer,
-    onClickInfo,
+    onAbout,
     fnValue,
     onLoad,
     onShow,
@@ -66,7 +66,7 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
   const [isShowPattern, togglePattern] = (0, _useToggle.default)(false),
         [isShowDate, toggleDate] = (0, _useToggle.default)(false),
         [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
-    onClickInfo,
+    onAbout,
     onClose,
     toggleDate
   }),

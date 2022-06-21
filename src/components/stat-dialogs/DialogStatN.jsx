@@ -77,7 +77,7 @@ const DialogStatN = memo((props) => {
     msgOnNotSelected,
 
     toTopLayer,
-    onClickInfo,
+    onAbout,
 
     loadFn,
     onLoad,
@@ -115,7 +115,7 @@ const DialogStatN = memo((props) => {
       _toggleLabels,
       _toggleInputs,
       _toggleOptions,
-      onClickInfo
+      onAbout
    )
    /*eslint-disable react-hooks/exhaustive-deps */
    , _hClose = useCallback(() => {
@@ -200,7 +200,7 @@ const DialogStatN = memo((props) => {
   //loadFn, onLoad, props
   /*eslint-enable react-hooks/exhaustive-deps */
   , _commandButtons = useCommandButtons(_hLoad)
-  , _menuMore = useMenuMore(toggleToolBar, onClickInfo)
+  , _menuMore = useMenuMore(toggleToolBar, onAbout)
   , _spinnerStatus = crSpinnerStatus(isLoading, isLoadFailed);
 
   return (

@@ -136,7 +136,7 @@ const crDialog = (browserType, dialogConf) => {
     isGetKey
   } = dialogProps,
         _dialogType = _getDialogType(dialogType, dialogProps),
-        onClickInfo = _crClickAbout(dialogProps),
+        onAbout = _crClickAbout(dialogProps),
         loadFn = _RouterLoadFn.default.getFn(loadFnType, _dialogType),
         proxy = isProxy ? _ChartStore.default.getProxy() : void 0,
         getKey = isGetKey && _ChartStore.default.getKey,
@@ -150,23 +150,22 @@ const crDialog = (browserType, dialogConf) => {
 
   _modifyDialogPropsByLoadId(dialogProps, loadId);
 
-  return _RouterDialog.default.getDialog(_dialogType).then(Comp => /*#__PURE__*/(0, _react.createElement)(Comp, {
+  return _RouterDialog.default.getDialog(_dialogType).then(Comp => /*#__PURE__*/(0, _react.createElement)(Comp, { ...dialogProps,
+    //initFromDate, initToDate, onTestDate,
+    //errNotYmdOrEmpty, isYmdOrEmpty
+    ..._crDateProps(dialogProps),
     key: itemKey,
     caption: dialogCaption || menuTitle,
     msgOnNotSelected: _Msg.NOT_SELECTED,
     msgOnNotValidFormat: _Msg.NOT_VALID_FORMAT,
     fnValue: _crFnValue(valueFn, valueFnPrefix),
-    //initFromDate, initToDate, onTestDate,
-    //errNotYmdOrEmpty, isYmdOrEmpty
-    ..._crDateProps(dialogProps),
+    onAbout,
     onLoad,
     onShow,
-    onClickInfo,
     loadFn,
     proxy,
     getKey,
-    onError,
-    ...dialogProps
+    onError
   }));
 }; //option
 

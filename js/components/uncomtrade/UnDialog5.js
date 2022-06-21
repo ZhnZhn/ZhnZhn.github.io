@@ -93,7 +93,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     threeCaption,
     msgOnNotSelected,
     toTopLayer,
-    onClickInfo,
+    onAbout,
     loadFn,
     onLoad,
     onShow,
@@ -101,7 +101,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
   } = props,
         [isShowOptions, toggleOptions] = (0, _useToggle.default)(false),
         [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
-    onClickInfo,
+    onAbout,
     onClose,
     toggleOptions
   }),

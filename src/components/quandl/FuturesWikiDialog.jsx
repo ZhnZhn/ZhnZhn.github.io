@@ -34,7 +34,7 @@ const FuturesWikiDialog = memoIsShow((
     errNotYmdOrEmpty,
 
     toTopLayer,
-    onClickInfo,
+    onAbout,
 
     loadFn,
     onLoad,
@@ -51,7 +51,7 @@ const FuturesWikiDialog = memoIsShow((
     clearValidationMessages,
     hClose
   ] = useDialog({
-    onClickInfo,
+    onAbout,
     onClose
   })
   , [setType, getType] = useProperty()

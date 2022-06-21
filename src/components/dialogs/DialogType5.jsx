@@ -49,7 +49,7 @@ const DialogType5 = memoIsShow((
     onTestDate,
 
     toTopLayer,
-    onClickInfo,
+    onAbout,
 
     loadFn,
     onLoad,
@@ -74,7 +74,7 @@ const DialogType5 = memoIsShow((
     clearValidationMessages,
     hClose
   ] = useDialog({
-    onClickInfo,
+    onAbout,
     onClose,
     toggleDate,
     toggleOptions

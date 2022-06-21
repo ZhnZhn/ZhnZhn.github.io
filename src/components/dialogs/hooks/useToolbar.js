@@ -8,7 +8,7 @@ const useToolbar = ({
   toggleInputs,
   toggleOptions,
   toggleDate,
-  onClickInfo
+  onAbout
 }) => useRefInit(() => [
   toggleLabels
     ? crToolbarItem('L', `${CLICK_TO_TOGGLE} input labels`, toggleLabels)
@@ -22,7 +22,7 @@ const useToolbar = ({
   toggleDate
     ? crToolbarItem('D', `${CLICK_TO_TOGGLE} date input`, toggleDate)
     : void 0,
-  crToolbarItem('A', 'About datasouce', onClickInfo)
+  crToolbarItem('A', 'About datasouce', onAbout)
 ].filter(Boolean))
 
 export default useToolbar

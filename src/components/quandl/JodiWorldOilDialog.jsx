@@ -51,7 +51,7 @@ const JodiWorldOilDialog = memoIsShow(({
   dataSource,
 
   toTopLayer,
-  onClickInfo,
+  onAbout,
 
   fnValue,
   onLoad,
@@ -76,7 +76,7 @@ const JodiWorldOilDialog = memoIsShow(({
     clearValidationMessages,
     hClose
   ] = useDialog({
-    onClickInfo,
+    onAbout,
     onClose,
     toggleDate,
     toggleOptions

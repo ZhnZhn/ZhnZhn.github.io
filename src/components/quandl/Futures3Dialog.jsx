@@ -39,7 +39,7 @@ const Futures3Dialog = memoIsShow((
     errNotYmdOrEmpty,
 
     toTopLayer,
-    onClickInfo,
+    onAbout,
 
     loadFn,
     onLoad,
@@ -56,7 +56,7 @@ const Futures3Dialog = memoIsShow((
     clearValidationMessages,
     hClose
   ] = useDialog({
-    onClickInfo,
+    onAbout,
     onClose
   })
   , _refItemMonth = useRef()

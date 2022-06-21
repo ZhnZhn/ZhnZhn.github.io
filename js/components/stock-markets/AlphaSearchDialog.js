@@ -30,16 +30,16 @@ const AlphaSearchDialog = (0, _memoIsShow.default)(_ref => {
     getKey,
     loadId,
     toTopLayer,
-    onClickInfo,
+    onAbout,
     onError,
     onClose
   } = _ref;
 
-  const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onClickInfo),
+  const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
         [isShowLabels, toggleLabels] = (0, _useToggle.default)(true),
         _toolbarButtons = (0, _useToolbar.default)({
     toggleLabels,
-    onClickInfo
+    onAbout
   }),
         _searchApi = (0, _useRefInit.default)(() => ({ ..._SearchAdapter.default,
     onError,

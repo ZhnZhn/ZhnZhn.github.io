@@ -71,7 +71,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     errNotYmdOrEmpty,
     isYmdOrEmpty,
     toTopLayer,
-    onClickInfo,
+    onAbout,
     loadFn,
     onLoad,
     onShow,
@@ -108,7 +108,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
   }, [toggleInputs]),
         [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
         [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
-    onClickInfo,
+    onAbout,
     onClose,
     toggleInputs: isFd || selectProps.length > 1 ? toggleInputs : void 0,
     toggleOptions: isOpt || isCh ? toggleOptions : void 0

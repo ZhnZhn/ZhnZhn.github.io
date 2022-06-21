@@ -8,7 +8,7 @@ import useValidationMessages from './useValidationMessages';
 const _isWideWidth = has.wideWidth();
 
 const useDialog = ({
-  onClickInfo,
+  onAbout,
   onClose,
   ...toolbarHandlers
 }) => {
@@ -19,11 +19,11 @@ const useDialog = ({
   , [
     isToolbar,
     menuMoreModel
-  ] = useMenuMore(onClickInfo)
+  ] = useMenuMore(onAbout)
   , toolbarButtons = useToolbar({
     ...toolbarHandlers,
     toggleLabels,
-    onClickInfo
+    onAbout
   });
   return [
     isToolbar,

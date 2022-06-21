@@ -13,7 +13,7 @@ const AlphaSectorDialog = memoIsShow(({
   isShow,
   caption,
   toTopLayer,
-  onClickInfo,
+  onAbout,
   loadId,
   dfSubId,
   onLoad,
@@ -23,8 +23,8 @@ const AlphaSectorDialog = memoIsShow(({
   const [
     isToolbar,
     menuMoreModel
-  ] = useMenuMore(onClickInfo)
-  , _toolbarButtons = useToolbar({ onClickInfo })
+  ] = useMenuMore(onAbout)
+  , _toolbarButtons = useToolbar({ onAbout })
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hLoad = useCallback(()=>{
     onLoad({

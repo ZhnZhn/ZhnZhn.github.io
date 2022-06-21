@@ -19,15 +19,15 @@ const _isWideWidth = _has.default.wideWidth();
 
 const useDialog = _ref => {
   let {
-    onClickInfo,
+    onAbout,
     onClose,
     ...toolbarHandlers
   } = _ref;
   const [isShowLabels, toggleLabels] = (0, _useToggle.default)(_isWideWidth),
-        [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onClickInfo),
+        [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
         toolbarButtons = (0, _useToolbar.default)({ ...toolbarHandlers,
     toggleLabels,
-    onClickInfo
+    onAbout
   });
   return [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, ...(0, _useValidationMessages.default)(onClose)];
 };

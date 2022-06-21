@@ -17,7 +17,7 @@ const useToolbar = (
   _toggleLabels,
   _toggleInputs,
   _toggleOptions,
-  onClickInfo
+  onAbout
 ) => {
   const [isToolbar, toggleToolBar] = useToggle(true)
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -25,7 +25,7 @@ const useToolbar = (
     _crToolbarBt('L', 'Click to toggle input labels', _toggleLabels),
     _crToolbarBt('T', 'Toggle Inputs', _toggleInputs),
     _crToolbarBt('O', 'Chart Options', _toggleOptions),
-    _crToolbarBt('A', 'About Datasource', onClickInfo)
+    _crToolbarBt('A', 'About Datasource', onAbout)
   ], [])
   //_toggleLabels, _toggleInputs, _toggleOptions, onClickInfo
   /*eslint-enable react-hooks/exhaustive-deps */

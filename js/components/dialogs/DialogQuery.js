@@ -50,7 +50,7 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
     msgOnNotValidFormat,
     onTestDate,
     toTopLayer,
-    onClickInfo,
+    onAbout,
     loadFn,
     onLoad,
     onShow,
@@ -60,7 +60,7 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
         [isShowDate, toggleDate] = (0, _useToggle.default)(true),
         [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
         [isToolbar, isShowLabels, menuMoreModel, toolbarButtons] = (0, _useDialog.default)({
-    onClickInfo,
+    onAbout,
     onClose,
     toggleOptions,
     toggleDate: noDate ? void 0 : toggleDate

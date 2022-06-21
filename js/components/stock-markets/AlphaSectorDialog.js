@@ -28,7 +28,7 @@ const AlphaSectorDialog = (0, _memoIsShow.default)(_ref => {
     isShow,
     caption,
     toTopLayer,
-    onClickInfo,
+    onAbout,
     loadId,
     dfSubId,
     onLoad,
@@ -36,9 +36,9 @@ const AlphaSectorDialog = (0, _memoIsShow.default)(_ref => {
     onClose
   } = _ref;
 
-  const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onClickInfo),
+  const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
         _toolbarButtons = (0, _useToolbar.default)({
-    onClickInfo
+    onAbout
   })
   /*eslint-disable react-hooks/exhaustive-deps */
   ,

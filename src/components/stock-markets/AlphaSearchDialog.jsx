@@ -16,21 +16,21 @@ const AlphaSearchDialog = memoIsShow(({
   getKey,
   loadId,
   toTopLayer,
-  onClickInfo,
+  onAbout,
   onError,
   onClose
 }) => {
   const [
     isToolbar,
     menuMoreModel
-  ] = useMenuMore(onClickInfo)
+  ] = useMenuMore(onAbout)
   , [
     isShowLabels,
     toggleLabels
   ] = useToggle(true)
   , _toolbarButtons = useToolbar({
     toggleLabels,
-    onClickInfo,
+    onAbout,
   })
   , _searchApi = useRefInit(() => ({
      ...SearchAdapter,

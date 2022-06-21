@@ -40,7 +40,7 @@ const UnDialog5 = memoIsShow((
      msgOnNotSelected,
 
      toTopLayer,
-     onClickInfo,
+     onAbout,
 
      loadFn,
      onLoad,
@@ -61,7 +61,7 @@ const UnDialog5 = memoIsShow((
      clearValidationMessages,
      hClose
    ] = useDialog({
-     onClickInfo,
+     onAbout,
      onClose,
      toggleOptions
    })

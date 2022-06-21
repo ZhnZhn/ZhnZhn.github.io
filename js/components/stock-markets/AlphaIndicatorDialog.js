@@ -69,20 +69,20 @@ const AlphaIndicatorDialog = (0, _memoIsShow.default)(_ref => {
     oneJsonProp,
     oneCaption,
     toTopLayer,
-    onClickInfo,
+    onAbout,
     loadId,
     onLoad,
     onShow,
     onClose
   } = _ref;
 
-  const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onClickInfo),
+  const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
         [isShowOptions, toggleOptions] = (0, _useToggle.default)(),
         [isShowLabels, toggleLabels] = (0, _useToggle.default)(true),
         _toolbarButtons = (0, _useToolbar.default)({
     toggleLabels,
     toggleOptions,
-    onClickInfo
+    onAbout
   }),
         _refTicket = (0, _uiApi.useRef)(),
         _refPeriod = (0, _uiApi.useRef)(),

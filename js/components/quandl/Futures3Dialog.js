@@ -60,14 +60,14 @@ const Futures3Dialog = (0, _memoIsShow.default)(props => {
     isYmdOrEmpty,
     errNotYmdOrEmpty,
     toTopLayer,
-    onClickInfo,
+    onAbout,
     loadFn,
     onLoad,
     onShow,
     onClose
   } = props,
         [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
-    onClickInfo,
+    onAbout,
     onClose
   }),
         _refItemMonth = (0, _uiApi.useRef)(),

@@ -134,7 +134,7 @@ const UNCommodityTradeDialog = memoIsShow((
     dataSource,
 
     toTopLayer,
-    onClickInfo,
+    onAbout,
 
     fnValue,
     onLoad,
@@ -144,7 +144,7 @@ const UNCommodityTradeDialog = memoIsShow((
   , [
     isToolbar,
     _menuMore
-  ] = useMenuMore(onClickInfo)
+  ] = useMenuMore(onAbout)
   , [isShowLabels, toggleLabels] = useToggle(true)
   , [isShowFilter, toggleFilter] = useToggle(false)
   , [isShowDate, toggleDate] = useToggle(false)
@@ -154,7 +154,7 @@ const UNCommodityTradeDialog = memoIsShow((
     crToolbarItem('F', `${CLICK_TO_TOGGLE} filter input`, toggleFilter),
     crToolbarItem('D', `${CLICK_TO_TOGGLE} date input`, toggleDate),
     crToolbarItem('C', `${CLICK_TO_TOGGLE} chart type input`, toggleChartType),
-    crToolbarItem('A', 'About datasource', onClickInfo)
+    crToolbarItem('A', 'About datasource', onAbout)
   ])
   , [
     validationMessages,

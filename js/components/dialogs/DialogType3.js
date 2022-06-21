@@ -42,7 +42,7 @@ const DialogType3 = (0, _memoIsShow.default)(props => {
     initToDate,
     onTestDate,
     toTopLayer,
-    onClickInfo,
+    onAbout,
     loadFn,
     onLoad,
     onShow,
@@ -50,7 +50,7 @@ const DialogType3 = (0, _memoIsShow.default)(props => {
   } = props,
         [isShowDate, toggleDate] = (0, _useToggle.default)(true),
         [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
-    onClickInfo,
+    onAbout,
     onClose,
     toggleDate
   }),

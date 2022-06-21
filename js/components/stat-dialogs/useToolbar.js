@@ -19,11 +19,11 @@ const _crToolbarBt = (caption, title, onClick) => ({
   onClick
 });
 
-const useToolbar = (_toggleLabels, _toggleInputs, _toggleOptions, onClickInfo) => {
+const useToolbar = (_toggleLabels, _toggleInputs, _toggleOptions, onAbout) => {
   const [isToolbar, toggleToolBar] = (0, _useToggle.default)(true)
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _toolbarButtons = (0, _react.useMemo)(() => [_crToolbarBt('L', 'Click to toggle input labels', _toggleLabels), _crToolbarBt('T', 'Toggle Inputs', _toggleInputs), _crToolbarBt('O', 'Chart Options', _toggleOptions), _crToolbarBt('A', 'About Datasource', onClickInfo)], []); //_toggleLabels, _toggleInputs, _toggleOptions, onClickInfo
+        _toolbarButtons = (0, _react.useMemo)(() => [_crToolbarBt('L', 'Click to toggle input labels', _toggleLabels), _crToolbarBt('T', 'Toggle Inputs', _toggleInputs), _crToolbarBt('O', 'Chart Options', _toggleOptions), _crToolbarBt('A', 'About Datasource', onAbout)], []); //_toggleLabels, _toggleInputs, _toggleOptions, onClickInfo
 
   /*eslint-enable react-hooks/exhaustive-deps */
 

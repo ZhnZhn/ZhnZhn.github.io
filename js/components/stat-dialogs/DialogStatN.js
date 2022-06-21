@@ -99,7 +99,7 @@ const DialogStatN = (0, _uiApi.memo)(props => {
     //mapDateDf,
     msgOnNotSelected,
     toTopLayer,
-    onClickInfo,
+    onAbout,
     loadFn,
     onLoad,
     onShow,
@@ -129,7 +129,7 @@ const DialogStatN = (0, _uiApi.memo)(props => {
     isShowDate,
     isShowChart
   } = isRow,
-        [_toolbarEl, toggleToolBar] = (0, _useToolbar.default)(_toggleLabels, _toggleInputs, _toggleOptions, onClickInfo)
+        [_toolbarEl, toggleToolBar] = (0, _useToolbar.default)(_toggleLabels, _toggleInputs, _toggleOptions, onAbout)
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
         _hClose = (0, _uiApi.useCallback)(() => {
@@ -220,7 +220,7 @@ const DialogStatN = (0, _uiApi.memo)(props => {
   /*eslint-enable react-hooks/exhaustive-deps */
   ,
         _commandButtons = (0, _useCommandButtons.default)(_hLoad),
-        _menuMore = (0, _useMenuMore.default)(toggleToolBar, onClickInfo),
+        _menuMore = (0, _useMenuMore.default)(toggleToolBar, onAbout),
         _spinnerStatus = (0, _crSpinnerStatus.default)(isLoading, isLoadFailed);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {

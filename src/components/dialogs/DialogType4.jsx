@@ -42,7 +42,7 @@ const DialogType4 = memoIsShow((
     onTestDate,
 
     toTopLayer,
-    onClickInfo,
+    onAbout,
 
     loadFn,
     onLoad,
@@ -63,7 +63,7 @@ const DialogType4 = memoIsShow((
     clearValidationMessages,
     hClose
   ] = useDialog({
-    onClickInfo,
+    onAbout,
     onClose,
     toggleDate: noDate ? void 0 : toggleDate
   })
@@ -110,7 +110,7 @@ const DialogType4 = memoIsShow((
        menuModel={menuMoreModel}
        toTopLayer={toTopLayer}
        onLoad={_hLoad}
-       onShow={onShow}       
+       onShow={onShow}
        onClose={hClose}
      >
         <D.Toolbar

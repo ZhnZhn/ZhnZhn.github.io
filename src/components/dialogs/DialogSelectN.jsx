@@ -79,7 +79,7 @@ const DialogSelectN = memoIsShow((
     isYmdOrEmpty,
 
     toTopLayer,
-    onClickInfo,
+    onAbout,
 
     loadFn,
     onLoad,
@@ -144,7 +144,7 @@ const DialogSelectN = memoIsShow((
     clearValidationMessages,
     hClose
   ] = useDialog({
-    onClickInfo,
+    onAbout,
     onClose,
     toggleInputs: isFd || selectProps.length > 1
        ? toggleInputs : void 0,
@@ -244,7 +244,7 @@ const DialogSelectN = memoIsShow((
       menuModel={menuMoreModel}
       toTopLayer={toTopLayer}
       onLoad={_hLoad}
-      onShow={onShow}      
+      onShow={onShow}
       onClose={hClose}
    >
       <D.Toolbar

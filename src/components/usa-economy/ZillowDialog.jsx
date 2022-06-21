@@ -48,7 +48,7 @@ const ZillowDialog = memoIsShow(({
   dataSource,
 
   toTopLayer,
-  onClickInfo,
+  onAbout,
 
   fnValue,
   onLoad,
@@ -73,7 +73,7 @@ const ZillowDialog = memoIsShow(({
     clearValidationMessages,
     hClose
   ] = useDialog({
-    onClickInfo,
+    onAbout,
     onClose,
     toggleDate
   })

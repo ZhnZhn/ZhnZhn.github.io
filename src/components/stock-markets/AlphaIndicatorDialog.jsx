@@ -68,7 +68,7 @@ const AlphaIndicatorDialog = memoIsShow(({
   oneJsonProp,
   oneCaption,
   toTopLayer,
-  onClickInfo,
+  onAbout,
   loadId,
   onLoad,
   onShow,
@@ -77,7 +77,7 @@ const AlphaIndicatorDialog = memoIsShow(({
   const [
     isToolbar,
     menuMoreModel
-  ] = useMenuMore(onClickInfo)
+  ] = useMenuMore(onAbout)
   , [
     isShowOptions,
     toggleOptions
@@ -89,7 +89,7 @@ const AlphaIndicatorDialog = memoIsShow(({
   , _toolbarButtons = useToolbar({
     toggleLabels,
     toggleOptions,
-    onClickInfo
+    onAbout
   })
   , _refTicket = useRef()
   , _refPeriod = useRef()

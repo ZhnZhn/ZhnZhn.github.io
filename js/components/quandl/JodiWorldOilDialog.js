@@ -67,7 +67,7 @@ const JodiWorldOilDialog = (0, _memoIsShow.default)(_ref => {
     loadId,
     dataSource,
     toTopLayer,
-    onClickInfo,
+    onAbout,
     fnValue,
     onLoad,
     onShow,
@@ -77,7 +77,7 @@ const JodiWorldOilDialog = (0, _memoIsShow.default)(_ref => {
   const [isShowDate, toggleDate] = (0, _useToggle.default)(false),
         [isShowOptions, toggleOptions] = (0, _useToggle.default)(false),
         [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
-    onClickInfo,
+    onAbout,
     onClose,
     toggleDate,
     toggleOptions
