@@ -66,12 +66,12 @@ const JodiWorldOilDialog = (0, _memoIsShow.default)(_ref => {
     dataColumn,
     loadId,
     dataSource,
+    toTopLayer,
+    onClickInfo,
     fnValue,
     onLoad,
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = _ref;
 
   const [isShowDate, toggleDate] = (0, _useToggle.default)(false),
@@ -139,9 +139,9 @@ const JodiWorldOilDialog = (0, _memoIsShow.default)(_ref => {
     isShow: isShow,
     caption: caption,
     menuModel: menuMoreModel,
+    toTopLayer: toTopLayer,
     onLoad: _hLoad,
-    onShowChart: onShow,
-    onFront: onFront,
+    onShow: onShow,
     onClose: hClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,

@@ -67,12 +67,12 @@ const AlphaIndicatorDialog = memoIsShow(({
   oneURI,
   oneJsonProp,
   oneCaption,
+  toTopLayer,
+  onClickInfo,
   loadId,
   onLoad,
   onShow,
-  onFront,
-  onClose,
-  onClickInfo
+  onClose
 }) => {
   const [
     isToolbar,
@@ -128,9 +128,9 @@ const AlphaIndicatorDialog = memoIsShow(({
        isShow={isShow}
        caption={caption}
        menuModel={menuMoreModel}
+       toTopLayer={toTopLayer}
        onLoad={_hLoad}
-       onShowChart={onShow}
-       onFront={onFront}
+       onShow={onShow}
        onClose={onClose}
     >
       <D.Toolbar

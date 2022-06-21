@@ -43,13 +43,13 @@ const DialogQuery = memoIsShow((
     msgOnNotValidFormat,
     onTestDate,
 
+    toTopLayer,
+    onClickInfo,
+
     loadFn,
     onLoad,
-
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = props
   , [
     chartType,
@@ -101,9 +101,9 @@ const DialogQuery = memoIsShow((
       isShow={isShow}
       menuModel={menuMoreModel}
       caption={caption}
+      toTopLayer={toTopLayer}
       onLoad={_hLoad}
-      onShowChart={onShow}
-      onFront={onFront}
+      onShow={onShow}
       onClose={onClose}
     >
       <D.Toolbar

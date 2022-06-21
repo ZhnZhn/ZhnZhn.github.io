@@ -15,10 +15,10 @@ const AlphaSearchDialog = memoIsShow(({
   caption,
   getKey,
   loadId,
+  toTopLayer,
+  onClickInfo,
   onError,
-  onFront,
-  onClose,
-  onClickInfo
+  onClose
 }) => {
   const [
     isToolbar,
@@ -50,7 +50,7 @@ const AlphaSearchDialog = memoIsShow(({
          isShow={isShow}
          caption={caption}
          menuModel={menuMoreModel}
-         onFront={onFront}
+         toTopLayer={toTopLayer}
          onClose={onClose}
      >
        <D.Toolbar

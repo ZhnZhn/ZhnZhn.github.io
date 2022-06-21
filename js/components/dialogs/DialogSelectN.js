@@ -70,12 +70,12 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     initFromDate = DF_INIT_FROM_DATE,
     errNotYmdOrEmpty,
     isYmdOrEmpty,
+    toTopLayer,
+    onClickInfo,
     loadFn,
     onLoad,
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = props,
         {
     mapFrequency = DF_MAP_FREQUENCY,
@@ -183,9 +183,9 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     isShow: isShow,
     caption: caption,
     menuModel: menuMoreModel,
+    toTopLayer: toTopLayer,
     onLoad: _hLoad,
-    onShowChart: onShow,
-    onFront: onFront,
+    onShow: onShow,
     onClose: hClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,

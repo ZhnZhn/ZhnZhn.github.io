@@ -41,12 +41,12 @@ const DialogType3 = (0, _memoIsShow.default)(props => {
     initFromDate,
     initToDate,
     onTestDate,
+    toTopLayer,
+    onClickInfo,
     loadFn,
     onLoad,
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = props,
         [isShowDate, toggleDate] = (0, _useToggle.default)(true),
         [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
@@ -83,9 +83,9 @@ const DialogType3 = (0, _memoIsShow.default)(props => {
     isShow: isShow,
     menuModel: menuMoreModel,
     caption: caption,
+    toTopLayer: toTopLayer,
     onLoad: _hLoad,
-    onShowChart: onShow,
-    onFront: onFront,
+    onShow: onShow,
     onClose: hClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,

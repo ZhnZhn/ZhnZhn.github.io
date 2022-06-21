@@ -44,12 +44,12 @@ const FuturesWikiDialog = (0, _memoIsShow.default)(props => {
     initFromDate,
     isYmdOrEmpty,
     errNotYmdOrEmpty,
+    toTopLayer,
+    onClickInfo,
     loadFn,
     onLoad,
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = props,
         [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
     onClickInfo,
@@ -107,9 +107,9 @@ const FuturesWikiDialog = (0, _memoIsShow.default)(props => {
     isShow: isShow,
     caption: caption,
     menuModel: menuMoreModel,
+    toTopLayer: toTopLayer,
     onLoad: _hLoad,
-    onShowChart: onShow,
-    onFront: onFront,
+    onShow: onShow,
     onClose: hClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,

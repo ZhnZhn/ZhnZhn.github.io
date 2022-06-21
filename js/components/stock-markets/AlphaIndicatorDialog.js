@@ -68,12 +68,12 @@ const AlphaIndicatorDialog = (0, _memoIsShow.default)(_ref => {
     oneURI,
     oneJsonProp,
     oneCaption,
+    toTopLayer,
+    onClickInfo,
     loadId,
     onLoad,
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = _ref;
 
   const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onClickInfo),
@@ -116,9 +116,9 @@ const AlphaIndicatorDialog = (0, _memoIsShow.default)(_ref => {
     isShow: isShow,
     caption: caption,
     menuModel: menuMoreModel,
+    toTopLayer: toTopLayer,
     onLoad: _hLoad,
-    onShowChart: onShow,
-    onFront: onFront,
+    onShow: onShow,
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,

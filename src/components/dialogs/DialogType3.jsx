@@ -35,13 +35,13 @@ const DialogType3 = memoIsShow((
     initToDate,
     onTestDate,
 
+    toTopLayer,
+    onClickInfo,
+
     loadFn,
     onLoad,
-
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = props
   , [
     isShowDate,
@@ -96,9 +96,9 @@ const DialogType3 = memoIsShow((
       isShow={isShow}
       menuModel={menuMoreModel}
       caption={caption}
+      toTopLayer={toTopLayer}
       onLoad={_hLoad}
-      onShowChart={onShow}
-      onFront={onFront}
+      onShow={onShow}      
       onClose={hClose}
     >
       <D.Toolbar

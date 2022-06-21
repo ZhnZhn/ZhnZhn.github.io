@@ -133,13 +133,13 @@ const UNCommodityTradeDialog = memoIsShow((
     loadId,
     dataSource,
 
+    toTopLayer,
+    onClickInfo,
+
     fnValue,
     onLoad,
-
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = props
   , [
     isToolbar,
@@ -329,8 +329,8 @@ const UNCommodityTradeDialog = memoIsShow((
       caption="United Nations Commodity Trade"
       menuModel={_menuMore}
       commandButtons={_commandButtons}
-      onShowChart={onShow}
-      onFront={onFront}
+      toTopLayer={toTopLayer}
+      onShow={onShow}
       onClose={_hClose}
    >
       <D.Toolbar

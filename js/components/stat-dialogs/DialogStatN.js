@@ -93,16 +93,16 @@ const DialogStatN = (0, _uiApi.memo)(props => {
   const {
     isShow,
     caption,
-    onShow,
-    onFront,
-    loadFn,
-    onLoad,
     //dims,
     //chartsType,
     //mapFrequency:initialMf,
     //mapDateDf,
     msgOnNotSelected,
+    toTopLayer,
     onClickInfo,
+    loadFn,
+    onLoad,
+    onShow,
     onClose
   } = props;
 
@@ -228,8 +228,8 @@ const DialogStatN = (0, _uiApi.memo)(props => {
     caption: caption,
     menuModel: _menuMore,
     commandButtons: _commandButtons,
-    onShowChart: onShow,
-    onFront: onFront,
+    toTopLayer: toTopLayer,
+    onShow: onShow,
     onClose: _hClose,
     children: [_toolbarEl, _modalOptionsEl, _modalToggleEl, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.default, {
       status: _spinnerStatus

@@ -29,10 +29,10 @@ const AlphaSearchDialog = (0, _memoIsShow.default)(_ref => {
     caption,
     getKey,
     loadId,
+    toTopLayer,
+    onClickInfo,
     onError,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = _ref;
 
   const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onClickInfo),
@@ -61,7 +61,7 @@ const AlphaSearchDialog = (0, _memoIsShow.default)(_ref => {
     isShow: isShow,
     caption: caption,
     menuModel: menuMoreModel,
-    onFront: onFront,
+    toTopLayer: toTopLayer,
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,

@@ -53,12 +53,12 @@ const DialogType5 = (0, _memoIsShow.default)(props => {
     initToDate,
     msgOnNotValidFormat,
     onTestDate,
+    toTopLayer,
+    onClickInfo,
     loadFn,
     onLoad,
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = props,
         [isShowDate, toggleDate] = (0, _useToggle.default)(false),
         [isShowOptions, toggleOptions] = (0, _useToggle.default)(false),
@@ -121,9 +121,9 @@ const DialogType5 = (0, _memoIsShow.default)(props => {
     isShow: isShow,
     caption: caption,
     menuModel: menuMoreModel,
+    toTopLayer: toTopLayer,
     onLoad: _hLoad,
-    onShowChart: onShow,
-    onFront: onFront,
+    onShow: onShow,
     onClose: hClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,

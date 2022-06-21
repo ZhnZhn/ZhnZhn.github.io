@@ -38,8 +38,8 @@ const TH_ID = 'DRAGGABLE_DIALOG'
 , CL_DRAGGABLE_DIALOG = "draggable-dialog"
 , CL_SHOWING = 'show-popup'
 , CL_NOT_SELECTED = 'not-selected'
-
-, S_ROOT_DIV_DRAG = {
+, S_DIALOG_DIV = {
+  ...S_ROOT_DIV,
   position: 'absolute',
   top: 30,
   left: 50,
@@ -96,9 +96,9 @@ const DraggableDialog = forwardRef(({
   caption,
   children,
   commandButtons,
+  toTopLayer,
   onLoad,
-  onShowChart,
-  onFront,
+  onShow,
   onClose=FN_NOOP
 }, ref) => {
   const [
@@ -136,11 +136,12 @@ const DraggableDialog = forwardRef(({
       className={_className}
       style={{
         ...style,
-        ...S_ROOT_DIV, ...S_ROOT_DIV_DRAG,
+        ...S_DIALOG_DIV,
         ..._styleShow,
-        ...TS.ROOT, ...TS.EL_BORDER
+        ...TS.ROOT,
+        ...TS.EL_BORDER
       }}
-      onClick={onFront}
+      onClick={toTopLayer}
       onKeyDown={_hKeyDown}
      >
     {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
@@ -166,7 +167,7 @@ const DraggableDialog = forwardRef(({
       <CommandButtons
          buttons={commandButtons}
          onLoad={onLoad}
-         onShow={onShowChart}
+         onShow={onShow}
          onClose={onClose}
       />
     </div>
@@ -183,9 +184,9 @@ DraggableDialog.propTypes = {
     PropTypes.node
   ]),
   commandButtons: PropTypes.arrayOf(PropTypes.element),
+  toTopLayer: PropTypes.func,
   onLoad: PropTypes.func,
-  onShowChart: PropTypes.func,
-  onFront: PropTypes.func,
+  onShow: PropTypes.func,
   onClose: PropTypes.func
 }
 */

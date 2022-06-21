@@ -50,13 +50,13 @@ const JodiWorldOilDialog = memoIsShow(({
   loadId,
   dataSource,
 
+  toTopLayer,
+  onClickInfo,
+
   fnValue,
   onLoad,
-
   onShow,
-  onFront,
-  onClose,
-  onClickInfo
+  onClose
 }) => {
   const [
     isShowDate,
@@ -133,9 +133,9 @@ const JodiWorldOilDialog = memoIsShow(({
       isShow={isShow}
       caption={caption}
       menuModel={menuMoreModel}
+      toTopLayer={toTopLayer}
       onLoad={_hLoad}
-      onShowChart={onShow}
-      onFront={onFront}
+      onShow={onShow}
       onClose={hClose}
     >
       <D.Toolbar

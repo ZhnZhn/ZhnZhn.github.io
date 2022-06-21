@@ -1,4 +1,7 @@
-import { useState, cloneElement } from 'react';
+import {
+  useState,
+  cloneElement
+} from 'react';
 
 import useListen from '../hooks/useListen';
 
@@ -10,10 +13,12 @@ const S_ROOT = {
   //width: '98%'
 };
 
-
 const _isUndef = value => typeof value === 'undefined';
 
-const _findCompIndex = (arr, key) => {
+const _findCompIndex = (
+  arr,
+  key
+) => {
   for (let i=0; i<arr.length; i++){
     if (arr[i].key === key){
       return i;
@@ -22,7 +27,10 @@ const _findCompIndex = (arr, key) => {
   return;
 };
 
-const _doVisible = function(arr, keyValue){
+const _doVisible = (
+  arr,
+  keyValue
+) => {
   const _index = _findCompIndex(arr, keyValue) || 0;
   return [
     ...arr.slice(0, _index),
@@ -31,9 +39,13 @@ const _doVisible = function(arr, keyValue){
   ];
 };
 
-const _updateVisible = (state, key, maxDialog) => {
+const _updateVisible = (
+  state,
+  key,
+  maxDialog
+) => {
   const { hmIs, visibleDialogs } = state
-      , _keyIndex = visibleDialogs.indexOf(key);
+  , _keyIndex = visibleDialogs.indexOf(key);
   if (_keyIndex !== -1) {
     visibleDialogs.splice(_keyIndex, 1)
   }
@@ -45,14 +57,20 @@ const _updateVisible = (state, key, maxDialog) => {
   }
 };
 
-const _findCompByKey = (comps, key) => {
+const _findCompByKey = (
+  comps,
+  key
+) => {
   const index = _findCompIndex(comps, key);
   return _isUndef(index)
     ? void 0
     : comps[index];
 };
 
-const _filterArrByKey = (arr, key) => {
+const _filterArrByKey = (
+  arr,
+  key
+) => {
   arr.splice(arr.indexOf(key), 1)
 };
 
@@ -66,7 +84,7 @@ const _renderDialogs = (
         key: key,
         isShow: hmIs[key],
         optionData: hmData[key],
-        onFront: () => _hToTopLayer(key),
+        toTopLayer: () => _hToTopLayer(key),
         onClose: () => _hToggleDialog(key)
     });
 });
@@ -74,7 +92,7 @@ const _renderDialogs = (
 const NOOP = () => {};
 
 const DialogContainer = ({
-  maxDialog=3,  
+  maxDialog=3,
   showAction,
   onCloseDialog=NOOP
 }) => {

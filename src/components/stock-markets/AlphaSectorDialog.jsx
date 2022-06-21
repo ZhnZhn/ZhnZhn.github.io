@@ -12,13 +12,13 @@ const S_DIALOG = { width: 300 }
 const AlphaSectorDialog = memoIsShow(({
   isShow,
   caption,
+  toTopLayer,
+  onClickInfo,
   loadId,
   dfSubId,
   onLoad,
   onShow,
-  onFront,
-  onClose,
-  onClickInfo
+  onClose
 }) => {
   const [
     isToolbar,
@@ -42,9 +42,9 @@ const AlphaSectorDialog = memoIsShow(({
       style={S_DIALOG}
       caption={caption}
       menuModel={menuMoreModel}
+      toTopLayer={toTopLayer}
       onLoad={_hLoad}
-      onShowChart={onShow}
-      onFront={onFront}
+      onShow={onShow}
       onClose={onClose}
     >
       <D.Toolbar

@@ -27,13 +27,13 @@ const AlphaSectorDialog = (0, _memoIsShow.default)(_ref => {
   let {
     isShow,
     caption,
+    toTopLayer,
+    onClickInfo,
     loadId,
     dfSubId,
     onLoad,
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = _ref;
 
   const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onClickInfo),
@@ -58,9 +58,9 @@ const AlphaSectorDialog = (0, _memoIsShow.default)(_ref => {
     style: S_DIALOG,
     caption: caption,
     menuModel: menuMoreModel,
+    toTopLayer: toTopLayer,
     onLoad: _hLoad,
-    onShowChart: onShow,
-    onFront: onFront,
+    onShow: onShow,
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,

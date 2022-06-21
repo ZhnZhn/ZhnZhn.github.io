@@ -35,7 +35,7 @@ const TH_ID = 'DRAGGABLE_DIALOG',
       CL_DRAGGABLE_DIALOG = "draggable-dialog",
       CL_SHOWING = 'show-popup',
       CL_NOT_SELECTED = 'not-selected',
-      S_ROOT_DIV_DRAG = {
+      S_DIALOG_DIV = { ..._Dialog.S_ROOT_DIV,
   position: 'absolute',
   top: 30,
   left: 50,
@@ -87,9 +87,9 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
     caption,
     children,
     commandButtons,
+    toTopLayer,
     onLoad,
-    onShowChart,
-    onFront,
+    onShow,
     onClose = FN_NOOP
   } = _ref2;
 
@@ -120,13 +120,12 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
       "aria-hidden": !isShow,
       className: _className,
       style: { ...style,
-        ..._Dialog.S_ROOT_DIV,
-        ...S_ROOT_DIV_DRAG,
+        ...S_DIALOG_DIV,
         ..._styleShow,
         ...TS.ROOT,
         ...TS.EL_BORDER
       },
-      onClick: onFront,
+      onClick: toTopLayer,
       onKeyDown: _hKeyDown,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: { ..._Dialog.S_CAPTION_DIV,
@@ -151,7 +150,7 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
         buttons: commandButtons,
         onLoad: onLoad,
-        onShow: onShowChart,
+        onShow: onShow,
         onClose: onClose
       })]
     })
@@ -167,9 +166,9 @@ DraggableDialog.propTypes = {
     PropTypes.node
   ]),
   commandButtons: PropTypes.arrayOf(PropTypes.element),
+  toTopLayer: PropTypes.func,
   onLoad: PropTypes.func,
-  onShowChart: PropTypes.func,
-  onFront: PropTypes.func,
+  onShow: PropTypes.func,
   onClose: PropTypes.func
 }
 */

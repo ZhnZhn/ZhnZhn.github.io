@@ -39,13 +39,13 @@ const UnDialog5 = memoIsShow((
      threeCaption,
      msgOnNotSelected,
 
+     toTopLayer,
+     onClickInfo,
+
      loadFn,
      onLoad,
-
      onShow,
-     onFront,
-     onClose,
-     onClickInfo
+     onClose
    } = props
    , [
      isShowOptions,
@@ -104,9 +104,9 @@ const UnDialog5 = memoIsShow((
        isShow={isShow}
        caption={caption}
        menuModel={menuMoreModel}
+       toTopLayer={toTopLayer}
        onLoad={_hLoad}
-       onShowChart={onShow}
-       onFront={onFront}
+       onShow={onShow}
        onClose={hClose}
     >
       <D.Toolbar

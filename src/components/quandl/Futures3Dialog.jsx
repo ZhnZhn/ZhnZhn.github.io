@@ -38,13 +38,13 @@ const Futures3Dialog = memoIsShow((
     isYmdOrEmpty,
     errNotYmdOrEmpty,
 
+    toTopLayer,
+    onClickInfo,
+
     loadFn,
     onLoad,
-
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = props
   , [
     isToolbar,
@@ -110,9 +110,9 @@ const Futures3Dialog = memoIsShow((
        isShow={isShow}
        caption={caption}
        menuModel={menuMoreModel}
+       toTopLayer={toTopLayer}
        onLoad={_hLoad}
-       onShowChart={onShow}
-       onFront={onFront}
+       onShow={onShow}
        onClose={hClose}
     >
        <D.Toolbar

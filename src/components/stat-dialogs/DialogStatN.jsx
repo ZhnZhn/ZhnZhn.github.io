@@ -68,10 +68,6 @@ const DialogStatN = memo((props) => {
   const {
     isShow,
     caption,
-    onShow,
-    onFront,
-
-    loadFn, onLoad,
 
     //dims,
     //chartsType,
@@ -80,7 +76,12 @@ const DialogStatN = memo((props) => {
 
     msgOnNotSelected,
 
+    toTopLayer,
     onClickInfo,
+
+    loadFn,
+    onLoad,
+    onShow,
     onClose
   } = props;
   const _isDim = !props.dims && !props.notDim
@@ -208,8 +209,8 @@ const DialogStatN = memo((props) => {
        caption={caption}
        menuModel={_menuMore}
        commandButtons={_commandButtons}
-       onShowChart={onShow}
-       onFront={onFront}
+       toTopLayer={toTopLayer}
+       onShow={onShow}
        onClose={_hClose}
     >
        {_toolbarEl}

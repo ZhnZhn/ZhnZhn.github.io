@@ -49,12 +49,12 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
     initToDate,
     msgOnNotValidFormat,
     onTestDate,
+    toTopLayer,
+    onClickInfo,
     loadFn,
     onLoad,
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = props,
         [chartType, setChartType] = (0, _uiApi.useState)('SPLINE'),
         [isShowDate, toggleDate] = (0, _useToggle.default)(true),
@@ -92,9 +92,9 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
     isShow: isShow,
     menuModel: menuMoreModel,
     caption: caption,
+    toTopLayer: toTopLayer,
     onLoad: _hLoad,
-    onShowChart: onShow,
-    onFront: onFront,
+    onShow: onShow,
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,

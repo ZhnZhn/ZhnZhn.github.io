@@ -78,13 +78,13 @@ const DialogSelectN = memoIsShow((
     errNotYmdOrEmpty,
     isYmdOrEmpty,
 
+    toTopLayer,
+    onClickInfo,
+
     loadFn,
     onLoad,
-
     onShow,
-    onFront,
     onClose,
-    onClickInfo
   } = props
   , {
     mapFrequency=DF_MAP_FREQUENCY,
@@ -242,9 +242,9 @@ const DialogSelectN = memoIsShow((
       isShow={isShow}
       caption={caption}
       menuModel={menuMoreModel}
+      toTopLayer={toTopLayer}
       onLoad={_hLoad}
-      onShowChart={onShow}
-      onFront={onFront}
+      onShow={onShow}      
       onClose={hClose}
    >
       <D.Toolbar

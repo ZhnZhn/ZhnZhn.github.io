@@ -137,12 +137,12 @@ const UNCommodityTradeDialog = (0, _memoIsShow.default)(props => {
     dataColumn,
     loadId,
     dataSource,
+    toTopLayer,
+    onClickInfo,
     fnValue,
     onLoad,
     onShow,
-    onFront,
-    onClose,
-    onClickInfo
+    onClose
   } = props,
         [isToolbar, _menuMore] = (0, _useMenuMore.default)(onClickInfo),
         [isShowLabels, toggleLabels] = (0, _useToggle.default)(true),
@@ -301,8 +301,8 @@ const UNCommodityTradeDialog = (0, _memoIsShow.default)(props => {
     caption: "United Nations Commodity Trade",
     menuModel: _menuMore,
     commandButtons: _commandButtons,
-    onShowChart: onShow,
-    onFront: onFront,
+    toTopLayer: toTopLayer,
+    onShow: onShow,
     onClose: _hClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,
