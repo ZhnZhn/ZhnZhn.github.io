@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _useRefSet = _interopRequireDefault(require("../hooks/useRefSet"));
+var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
 var _useRefBool = _interopRequireDefault(require("../hooks/useRefBool"));
 
@@ -71,7 +71,7 @@ const SeriaRow = props => {
     name = ''
   } = seria,
         ref = (0, _react.useRef)(),
-        [_refToYAxis, _hSelectYAxis] = (0, _useRefSet.default)(),
+        [setYAxis, getYAxis] = (0, _useProperty.default)(),
         [_refIsChecked, _hCheck, _hUnCheck] = (0, _useRefBool.default)(false),
         [_color, _setColor] = (0, _react.useState)(() => color || DF_COLOR),
         [isShowPallete, _hOpenPallete, _hClosePalette] = (0, _useBool.default)(false),
@@ -90,7 +90,7 @@ const SeriaRow = props => {
       return {
         isChecked: _getRefValue(_refIsChecked),
         color: _color,
-        yIndex: (_getRefValue(_refToYAxis) || {}).value,
+        yIndex: (getYAxis() || {}).value,
         data,
         name
       };
@@ -107,8 +107,8 @@ const SeriaRow = props => {
   }, []); //compIndex, onReg, onUnReg
 
   (0, _react.useEffect)(() => {
-    _refToYAxis.current = void 0;
-  }, [props]); //_refToYAxis
+    setYAxis();
+  }, [props]); //setYAxis
 
   /*eslint-enable react-hooks/exhaustive-deps */
 
@@ -141,7 +141,7 @@ const SeriaRow = props => {
       optionsStyle: S_SELECT_OPTIONS,
       options: yAxisOptions,
       noFooterBts: true,
-      onSelect: _hSelectYAxis
+      onSelect: setYAxis
     })]
   });
 };

@@ -21,7 +21,7 @@ var _crSelectItem = _interopRequireDefault(require("./crSelectItem"));
 
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
-var _useRefSet = _interopRequireDefault(require("../hooks/useRefSet"));
+var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
 var _useRefByIndex = _interopRequireDefault(require("./useRefByIndex"));
 
@@ -109,8 +109,8 @@ const DialogStatN = (0, _uiApi.memo)(props => {
   const _isDim = !props.dims && !props.notDim,
         [_refItems, _fSelectItem] = (0, _useRefByIndex.default)(),
         _refSeriaColor = (0, _uiApi.useRef)(),
-        [_refDate, _hSelectDate] = (0, _useRefSet.default)(),
-        [_refDim, _hSelectDim] = (0, _useRefSet.default)(),
+        [setDate, getDate] = (0, _useProperty.default)(),
+        [setDim, getDim] = (0, _useProperty.default)(),
         [state, isLoading, isLoadFailed, validationMessages, setValidationMessages, setState] = (0, _useLoadDims.default)(props),
         {
     configs,
@@ -167,7 +167,7 @@ const DialogStatN = (0, _uiApi.memo)(props => {
 
 
     if (_isCategory) {
-      const _dimItem = (0, _uiApi.getRefValue)(_refDim);
+      const _dimItem = getDim();
 
       if (!_dimItem) {
         msg.push("Dim isn't selected");
@@ -178,14 +178,14 @@ const DialogStatN = (0, _uiApi.memo)(props => {
     }
 
     return msg;
-  }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected]) //_refDim, _isDim
+  }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected]) //getDim, _isDim
   ,
         _hSelectChartType = (0, _uiApi.useCallback)(chartType => {
-    const _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(chartType) ? (_refDate.current = null, true) : false;
+    const _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(chartType) ? (setDate(), true) : false;
 
     (0, _updateStateIf.default)(setIsRow, 'isShowDate', _isShowDate);
     (0, _updateStateIf.default)(setState, 'chartType', chartType);
-  }, []) //setIsRow, setState
+  }, []) //setDate, setIsRow, setState
 
   /*eslint-enable react-hooks/exhaustive-deps */
 
@@ -197,23 +197,21 @@ const DialogStatN = (0, _uiApi.memo)(props => {
     const validationMessages = _crValidationMessages();
 
     if (validationMessages.length === 0) {
-      const dfC = _crDfC(props, (0, _uiApi.getRefValue)(_refDim)),
-            dfTitle = _crDfTitle(props, (0, _uiApi.getRefValue)(_refDim)),
-            loadOpt = loadFn({ ...props
+      const _dimItem = getDim();
+
+      onLoad(loadFn({ ...props
       }, { //seriaColor, seriaWidth
         ...(0, _uiApi.getInputValue)(_refSeriaColor),
         chartType,
         timeId,
-        dfC,
-        dfTitle,
         selectOptions,
-        time: ((0, _uiApi.getRefValue)(_refDate) || dateDf).value,
+        dfC: _crDfC(props, _dimItem),
+        dfTitle: _crDfTitle(props, _dimItem),
+        time: (getDate() || dateDf).value,
         dialogOptions: (0, _uiApi.getRefValue)(_refDialogOptions),
         items: (0, _uiApi.getRefValue)(_refItems),
         titles: (0, _uiApi.getRefValue)(_refTitles)
-      });
-
-      onLoad(loadOpt);
+      }));
     }
 
     setValidationMessages(validationMessages);
@@ -253,10 +251,10 @@ const DialogStatN = (0, _uiApi.memo)(props => {
       isShowDate: isShowDate,
       dateDefault: dateDf.caption,
       dateOptions: dateOptions,
-      onSelecDate: _hSelectDate,
+      onSelecDate: setDate,
       isDim: _isDim,
       dimOptions: dimOptions,
-      onSelecDim: _hSelectDim
+      onSelecDim: setDim
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
       validationMessages: validationMessages
     })]

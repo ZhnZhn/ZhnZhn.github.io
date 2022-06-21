@@ -15,7 +15,7 @@ import Spinner from './Spinner';
 import crSelectItem from './crSelectItem';
 
 import useToggle from '../hooks/useToggle';
-import useRefSet from '../hooks/useRefSet';
+import useProperty from '../hooks/useProperty';
 import useRefByIndex from './useRefByIndex';
 import useToolbar from './useToolbar';
 import useMenuMore from './useMenuMore';
@@ -86,8 +86,8 @@ const DialogStatN = memo((props) => {
   const _isDim = !props.dims && !props.notDim
   , [_refItems, _fSelectItem] = useRefByIndex()
   , _refSeriaColor = useRef()
-  , [_refDate, _hSelectDate] = useRefSet()
-  , [_refDim, _hSelectDim] = useRefSet()
+  , [setDate, getDate] = useProperty()
+  , [setDim, getDim] = useProperty()
   , [
       state,
       isLoading,
@@ -147,7 +147,7 @@ const DialogStatN = memo((props) => {
         }
         //For category case
         if (_isCategory) {
-          const _dimItem = getRefValue(_refDim);
+          const _dimItem = getDim();
           if (!_dimItem) {
             msg.push("Dim isn't selected")
             return msg;
@@ -156,39 +156,36 @@ const DialogStatN = memo((props) => {
         }
         return msg;
    }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected])
-   //_refDim, _isDim
+   //getDim, _isDim
    , _hSelectChartType = useCallback(chartType => {
        const _isShowDate = isCategoryItem(chartType)
-         ? (_refDate.current = null, true)
+         ? (setDate(), true)
          : false;
        updateStateIf(setIsRow, 'isShowDate', _isShowDate)
        updateStateIf(setState, 'chartType', chartType)
    }, [])
-   //setIsRow, setState
+   //setDate, setIsRow, setState
    /*eslint-enable react-hooks/exhaustive-deps */
    /*eslint-disable react-hooks/exhaustive-deps */
    , _hLoad = useCallback(() => {
      _addDfValuesFrom(configs, _fSelectItem)
      const validationMessages = _crValidationMessages();
      if (validationMessages.length === 0){
-       const dfC = _crDfC(props, getRefValue(_refDim))
-       , dfTitle = _crDfTitle(props, getRefValue(_refDim))
-       , loadOpt = loadFn(
-           {...props}, {
-           //seriaColor, seriaWidth
-           ...getInputValue(_refSeriaColor),
-           chartType,
-           timeId,
-           dfC,
-           dfTitle,
-           selectOptions,
-           time: (getRefValue(_refDate) || dateDf).value,
-           dialogOptions: getRefValue(_refDialogOptions),
-           items: getRefValue(_refItems),
-           titles: getRefValue(_refTitles)
-         }
-       );
-       onLoad(loadOpt)
+       const _dimItem = getDim();
+       onLoad(loadFn(
+         {...props}, {
+         //seriaColor, seriaWidth
+         ...getInputValue(_refSeriaColor),
+         chartType,
+         timeId,
+         selectOptions,
+         dfC: _crDfC(props, _dimItem),
+         dfTitle: _crDfTitle(props, _dimItem),
+         time: (getDate() || dateDf).value,
+         dialogOptions: getRefValue(_refDialogOptions),
+         items: getRefValue(_refItems),
+         titles: getRefValue(_refTitles)
+      }))
     }
     setValidationMessages(validationMessages)
   }, [
@@ -240,10 +237,10 @@ const DialogStatN = memo((props) => {
          isShowDate={isShowDate}
          dateDefault={dateDf.caption}
          dateOptions={dateOptions}
-         onSelecDate={_hSelectDate}
+         onSelecDate={setDate}
          isDim={_isDim}
          dimOptions={dimOptions}
-         onSelecDim={_hSelectDim}
+         onSelecDim={setDim}
        />
        <D.ValidationMessages
            validationMessages={validationMessages}

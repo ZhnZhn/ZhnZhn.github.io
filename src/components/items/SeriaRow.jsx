@@ -1,9 +1,11 @@
 import {
-  useRef, useState,
-  useEffect, useImperativeHandle
+  useRef,
+  useState,
+  useEffect,
+  useImperativeHandle
 } from 'react'
 
-import useRefSet from '../hooks/useRefSet'
+import useProperty from '../hooks/useProperty'
 import useRefBool from '../hooks/useRefBool'
 import useBool from '../hooks/useBool'
 import useTheme from '../hooks/useTheme'
@@ -52,7 +54,7 @@ const SeriaRow = (props) => {
   } = props
   , { color, name='' } = seria
   , ref = useRef()
-  , [_refToYAxis, _hSelectYAxis] = useRefSet()
+  , [setYAxis, getYAxis] = useProperty()
   , [_refIsChecked, _hCheck, _hUnCheck] = useRefBool(false)
   , [_color, _setColor] = useState(() => color || DF_COLOR)
   , [isShowPallete, _hOpenPallete, _hClosePalette] = useBool(false)
@@ -66,7 +68,7 @@ const SeriaRow = (props) => {
       return {
         isChecked: _getRefValue(_refIsChecked),
         color: _color,
-        yIndex: (_getRefValue(_refToYAxis) || {}).value,
+        yIndex: (getYAxis() || {}).value,
         data, name
       };
     }
@@ -81,9 +83,9 @@ const SeriaRow = (props) => {
   }, [])
   //compIndex, onReg, onUnReg
   useEffect(() => {
-    _refToYAxis.current = void 0
+    setYAxis()
   }, [props])
-  //_refToYAxis
+  //setYAxis
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
@@ -120,7 +122,7 @@ const SeriaRow = (props) => {
         optionsStyle={S_SELECT_OPTIONS}
         options={yAxisOptions}
         noFooterBts={true}
-        onSelect={_hSelectYAxis}
+        onSelect={setYAxis}
       />
     </div>
   );
