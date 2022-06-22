@@ -96,6 +96,17 @@ export const filterTrimZero = (data) => {
   return data;
 }
 
+export const hasZeroOrLessValue = data => {
+  if (!_isArr(data)) { return false; }
+  const _getY = fGetY(data[0]);
+  for(let i=0; i<data.length; i++){
+    if (_getY(data[i]) <= 0) {
+      return true;
+    }
+  }
+  return false;
+}
+
 export const mean = (data) => {
   if (!isNotEmptyArr(data)){
     return [];

@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.normalize = exports.median = exports.mean = exports.growthRate = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.changesBetween = void 0;
+exports.normalize = exports.median = exports.mean = exports.hasZeroOrLessValue = exports.growthRate = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.changesBetween = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
@@ -123,6 +123,24 @@ const filterTrimZero = data => {
 };
 
 exports.filterTrimZero = filterTrimZero;
+
+const hasZeroOrLessValue = data => {
+  if (!_isArr(data)) {
+    return false;
+  }
+
+  const _getY = (0, _seriaHelperFn.fGetY)(data[0]);
+
+  for (let i = 0; i < data.length; i++) {
+    if (_getY(data[i]) <= 0) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+exports.hasZeroOrLessValue = hasZeroOrLessValue;
 
 const mean = data => {
   if (!(0, _seriaHelperFn.isNotEmptyArr)(data)) {

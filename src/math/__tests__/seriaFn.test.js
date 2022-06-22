@@ -5,6 +5,7 @@ import {
   findMinY,
   findMaxY,
   filterTrimZero,
+  hasZeroOrLessValue,
   mean,
   median
 } from '../seriaFn';
@@ -189,6 +190,22 @@ describe('filterTrimZero', ()=>{
     expect(fn()).toBe(undefined)
     expect(fn(null)).toBe(null)
     expect(fn([])).toEqual([])
+  })
+})
+
+describe('hasZeroOrLessValue', () => {
+  const fn = hasZeroOrLessValue;
+  test('should return boolean', () => {
+    expect(fn([[1,1],[2,2],[3, 0]])).toBe(true)
+    expect(fn([[1,1],[2,null],[3, 3]])).toBe(true)
+    expect(fn([[1,-1],[2,2],[3, 3]])).toBe(true)
+    expect(fn([[1,1],[2,2],[3, 3]])).toBe(false)
+
+    expect(fn([{y:0.1},{y:0.2},{y:-0.3}])).toBe(true)
+    expect(fn([{y:0.1},{y:0.2},{y:0.3}])).toBe(false)
+  })
+  test('should return false in edge case', () => {
+    expect(fn()).toBe(false)
   })
 })
 
