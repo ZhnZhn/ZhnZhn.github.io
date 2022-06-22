@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.setSeriaDataTo = exports.initChartConfig = exports.getSeriaColorByIndex = exports.crSeriaConfig = exports.crAreaConfig = void 0;
+exports.setSeriaDataTo = exports.isLineType = exports.initChartConfig = exports.getSeriaColorByIndex = exports.crSeriaConfig = exports.crAreaConfig = void 0;
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
@@ -120,4 +120,11 @@ const crAreaConfig = options => {
 };
 
 exports.crAreaConfig = crAreaConfig;
+
+const LINE_TYPES = ['spline', 'line', 'area'],
+      _isLineType = chartType => LINE_TYPES.indexOf(chartType) !== -1;
+
+const isLineType = config => _isLineType(((config.series || [])[0] || {}).type);
+
+exports.isLineType = isLineType;
 //# sourceMappingURL=ChartConfigFn.js.map

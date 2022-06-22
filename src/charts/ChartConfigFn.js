@@ -121,3 +121,17 @@ export const crAreaConfig = (
   ]
   return config;
 }
+
+const LINE_TYPES = [
+  'spline',
+  'line',
+  'area'
+]
+, _isLineType = chartType => LINE_TYPES
+    .indexOf(chartType) !== -1
+
+export const isLineType = (
+  config
+) => _isLineType(
+  ((config.series||[])[0]||{}).type
+)
