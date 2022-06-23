@@ -1,11 +1,7 @@
-import {
-  getSeriaColorByIndex,
-  setSeriaDataTo
-} from '../../charts/ChartConfigFn';
-import Builder from '../../charts/ConfigBuilder'
-import {
-  tooltipCategorySimple
-} from '../../charts/Tooltip'
+import { getSeriaColorByIndex } from '../../charts/ChartTheme';
+import { setSeriaDataTo } from '../../charts/ChartConfigFn';
+import Builder from '../../charts/ConfigBuilder';
+import { tooltipCategorySimple } from '../../charts/Tooltip';
 
 import { compareByValue } from '../compareByFn';
 import { legendItem } from '../legendFn'

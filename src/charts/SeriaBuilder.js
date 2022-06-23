@@ -1,10 +1,8 @@
 import { findMinY } from '../math/seriaFn';
 
 import { fTooltip } from './Chart';
-import {
-  crSeriaConfig,
-  getSeriaColorByIndex
-} from './ChartConfigFn';
+import { getSeriaColorByIndex } from './ChartTheme';
+import { crSeriaConfig } from './ChartConfigFn';
 import { CONFIG_TREE_MAP } from './TreeMapConfigFn';
 
 const CONFIG_SERIA = {

@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/__tests__/ChartTheme.test.js"
+ ],
+ "file": "../../../src/charts/__tests__/ChartTheme.test.js",
+ "names": [
+  "describe",
+  "fn",
+  "getSeriaColorByIndex",
+  "test",
+  "_firstColor",
+  "_secondColor",
+  "expect",
+  "toBe"
+ ],
+ "mappings": ";;AAAA;;AAIAA,QAAQ,CAAC,sBAAD,EAAyB,MAAM;AACrC,QAAMC,EAAE,GAAGC,gCAAX;AACAC,EAAAA,IAAI,CAAC,2CAAD,EAA8C,MAAM;AACtD,UAAMC,WAAW,GAAG,SAApB;AAAA,UACEC,YAAY,GAAG,SADjB;AAEAC,IAAAA,MAAM,CAACL,EAAE,CAAC,CAAD,CAAH,CAAN,CAAcM,IAAd,CAAmBH,WAAnB;AACAE,IAAAA,MAAM,CAACL,EAAE,CAAC,CAAD,CAAH,CAAN,CAAcM,IAAd,CAAmBF,YAAnB;AACAC,IAAAA,MAAM,CAACL,EAAE,CAAC,CAAD,CAAH,CAAN,CAAcM,IAAd,CAAmBH,WAAnB;AACAE,IAAAA,MAAM,CAACL,EAAE,CAAC,EAAD,CAAH,CAAN,CAAeM,IAAf,CAAoBF,YAApB;AACD,GAPG,CAAJ;AAQD,CAVO,CAAR"
+}

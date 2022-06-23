@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.getSeriaColorByIndex = exports.ChartTheme = void 0;
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
@@ -12,6 +12,13 @@ var _handleMouseOver = _interopRequireDefault(require("./handleMouseOver"));
 var _Color = require("../constants/Color");
 
 var _conf = require("./conf");
+
+const CHART_SERIES_COLORS = ['#7cb5ec', '#8abb5d', //'#90ed7d'
+'#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'];
+
+const getSeriaColorByIndex = seriaIndex => CHART_SERIES_COLORS[seriaIndex % CHART_SERIES_COLORS.length];
+
+exports.getSeriaColorByIndex = getSeriaColorByIndex;
 
 const _crAxisLabelStyle = (color, fontSize) => ({
   style: {
@@ -96,8 +103,7 @@ const ChartTheme = {
       textOverflow: 'ellipsis'
     }
   },
-  colors: ['#7cb5ec', '#8abb5d', //'#90ed7d'
-  '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'],
+  colors: CHART_SERIES_COLORS,
   labels: {
     items: []
   },
@@ -242,7 +248,7 @@ const ChartTheme = {
   tooltip: {
     useHTML: true,
     enabled: false,
-    //enabled : true,
+    //enabled: true,
     hideDelay: 100,
     followPointer: false,
     shared: false,
@@ -277,6 +283,5 @@ const ChartTheme = {
     labels: _crAxisLabelStyle(_Color.COLOR_Y_LABEL, "14px")
   }
 };
-var _default = ChartTheme;
-exports.default = _default;
+exports.ChartTheme = ChartTheme;
 //# sourceMappingURL=ChartTheme.js.map

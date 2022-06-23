@@ -7,6 +7,8 @@ var _seriaFn = require("../math/seriaFn");
 
 var _Chart = require("./Chart");
 
+var _ChartTheme = require("./ChartTheme");
+
 var _ChartConfigFn = require("./ChartConfigFn");
 
 var _TreeMapConfigFn = require("./TreeMapConfigFn");
@@ -120,7 +122,7 @@ const SeriaBuilder = {
     const _legend = [];
     points.forEach((data, index) => {
       const is = index < maxVisible ? true : false,
-            color = (0, _ChartConfigFn.getSeriaColorByIndex)(index),
+            color = (0, _ChartTheme.getSeriaColorByIndex)(index),
             {
         seriaName
       } = data;

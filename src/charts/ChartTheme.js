@@ -1,6 +1,6 @@
-import Highcharts from 'highcharts'
+import Highcharts from 'highcharts';
 
-import handleMouseOver from './handleMouseOver'
+import handleMouseOver from './handleMouseOver';
 
 import {
   COLOR_CHART,
@@ -35,6 +35,18 @@ import {
   fMonoPieColors
 } from './conf';
 
+const CHART_SERIES_COLORS = [
+  '#7cb5ec',
+  '#8abb5d', //'#90ed7d'
+  '#f7a35c',
+  '#8085e9', '#f15c80', '#e4d354',
+  '#2b908f', '#f45b5b', '#91e8e1'
+];
+
+export const getSeriaColorByIndex = (
+  seriaIndex
+) => CHART_SERIES_COLORS[seriaIndex % CHART_SERIES_COLORS.length]
+
 const _crAxisLabelStyle = (
   color,
   fontSize
@@ -46,16 +58,16 @@ const _crAxisLabelStyle = (
   }
 });
 
-const ChartTheme = {
+export const ChartTheme = {
   credits: {
-    enabled : true,
-    position : {
+    enabled: true,
+    position: {
         align: 'right',
         x: -25,
         verticalAlign: 'bottom',
         y: -5
     },
-    style : {
+    style: {
       fontSize: '11px',
       color: CREDITS_COLOR,
       fill: CREDITS_COLOR,
@@ -106,8 +118,8 @@ const ChartTheme = {
       relativeTo: 'chart'
     },
 
-    events : {
-      load : function(){
+    events: {
+      load: function(){
         this.zhTooltip = new Highcharts.Tooltip(this, this.options.tooltip);
         this.credits.element.onclick = function() {
            window.open(CREDITS_URL, '_blank');
@@ -121,28 +133,22 @@ const ChartTheme = {
       textOverflow: 'ellipsis'
     }
   },
-  colors: [
-           '#7cb5ec',
-           '#8abb5d', //'#90ed7d'
-           '#f7a35c',
-           '#8085e9', '#f15c80', '#e4d354',
-           '#2b908f', '#f45b5b', '#91e8e1'
-  ],
-  labels : {
-    items : []
+  colors: CHART_SERIES_COLORS,
+  labels: {
+    items: []
   },
-  exporting : {
-    fallbackToExportServer : false,
-    chartOptions : {
-      chart : {
+  exporting: {
+    fallbackToExportServer: false,
+    chartOptions: {
+      chart: {
         plotBackgroundColor: COLOR_PLOT_PRINT,
         backgroundColor: COLOR_CHART_PRINT
       },
-      title : {
+      title: {
         x: 0,
         y: 5
       },
-      subtitle : {
+      subtitle: {
         x: 0,
         y: 22
       },
@@ -151,52 +157,52 @@ const ChartTheme = {
           fillColor: COLOR_AREA_FILL_PRINT
         }
       },
-      xAxis : {
+      xAxis: {
         lineWidth: 2,
         lineColor: COLOR_LINE_PRINT,
         gridLineColor: COLOR_GRID_LINE_PRINT
       },
-      yAxis : {
+      yAxis: {
         lineWidth: 2,
         lineColor: COLOR_LINE_PRINT,
         gridLineColor: COLOR_GRID_LINE_PRINT
       }
     }
   },
-  navigation : {
-    buttonOptions : {
-      align : 'left',
+  navigation: {
+    buttonOptions: {
+      align: 'left',
       x: -10,
       y: -20,
-      theme : {
-        fill : 'transparent',
-        states : {
-          hover : {
-            'stroke-width' : 2,
-            stroke : COLOR_HOVER
+      theme: {
+        fill: 'transparent',
+        states: {
+          hover: {
+            'stroke-width': 2,
+            stroke: COLOR_HOVER
           }
         }
       }
     },
-    menuItemStyle : {
-      'font-size' : '16px',
-      'font-weight' : 'bold',
-       color : COLOR_ITEM,
-       'line-height' : '1.6',
-       cursor : 'pointer'
+    menuItemStyle: {
+      'font-size': '16px',
+      'font-weight': 'bold',
+       color: COLOR_ITEM,
+       'line-height': '1.6',
+       cursor: 'pointer'
     },
-    menuItemHoverStyle : {
-      color : COLOR_HOVER,
-      background : COLOR_BG_ITEM_HOVER
+    menuItemHoverStyle: {
+      color: COLOR_HOVER,
+      background: COLOR_BG_ITEM_HOVER
     },
-    menuStyle : {
-      position : 'relative',
-      top : '8px',
-      border : '2px solid',
-      'border-color' : COLOR_BG_TITLE,
-      'border-radius' : '5px',
+    menuStyle: {
+      position: 'relative',
+      top: '8px',
+      border: '2px solid',
+      'border-color': COLOR_BG_TITLE,
+      'border-radius': '5px',
       'box-shadow': 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
-      background : COLOR_CHART
+      background: COLOR_CHART
     }
   },
   plotOptions: {
@@ -229,7 +235,7 @@ const ChartTheme = {
       groupPadding: 0.1,
       pointPlacement: 0
     },
-    series : {
+    series: {
       turboThreshold: 0,
       marker: {
         radius: 3,
@@ -244,11 +250,11 @@ const ChartTheme = {
         }
       },
 
-      states : {
-        hover : {
-          halo : {
-            opacity : 0.35,
-            size : 16
+      states: {
+        hover: {
+          halo: {
+            opacity: 0.35,
+            size: 16
           }
         },
         inactive: {
@@ -256,9 +262,9 @@ const ChartTheme = {
         }
       },
 
-      stickyTracking : false,
-      events : {
-        click : function(event) {
+      stickyTracking: false,
+      events: {
+        click: function(event) {
           const tooltip = this.chart.zhTooltip;
 
           tooltip.options.enabled = true
@@ -274,12 +280,12 @@ const ChartTheme = {
     }
   },
   tooltip: {
-    useHTML : true,
-    enabled : false,
-    //enabled : true,
-    hideDelay : 100,
-    followPointer : false,
-    shared : false,
+    useHTML: true,
+    enabled: false,
+    //enabled: true,
+    hideDelay: 100,
+    followPointer: false,
+    shared: false,
 
     backgroundColor: COLOR_TOOLTIP,
     borderWidth: 2,
@@ -314,5 +320,3 @@ const ChartTheme = {
       labels: _crAxisLabelStyle(COLOR_Y_LABEL, "14px")
   }
 };
-
-export default ChartTheme

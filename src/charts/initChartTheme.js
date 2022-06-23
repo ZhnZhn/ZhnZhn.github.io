@@ -10,7 +10,7 @@ import HighchartsZhn from './plugin/zhn-highcharts';
 //import HighchartsExporting from 'highcharts/lib/modules/exporting';
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 
-import ChartTheme from './ChartTheme';
+import { ChartTheme } from './ChartTheme';
 
 const initChartTheme = () => {
   HighchartsTreemap(Highcharts)

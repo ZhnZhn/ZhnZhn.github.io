@@ -5,6 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.toConfig = exports.crChartId = void 0;
 
+var _ChartTheme = require("../../charts/ChartTheme");
+
 var _ChartConfigFn = require("../../charts/ChartConfigFn");
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
@@ -66,7 +68,7 @@ const _addSeriaTo = _ref => {
   const {
     legend
   } = config.zhConfig,
-        _color = color || (0, _ChartConfigFn.getSeriaColorByIndex)(i),
+        _color = color || (0, _ChartTheme.getSeriaColorByIndex)(i),
         _seriaColor = {
     color: _color,
     marker: _crMarker(_color)
