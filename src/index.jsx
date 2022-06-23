@@ -4,7 +4,7 @@ import polyfill from './polyfill';
 import Raven from 'raven-js';
 
 import AppErc from './components/AppErc';
-import { initChartConfig } from './charts/ChartConfigFn';
+import initChartTheme from './charts/initChartTheme';
 
 const _isHighchartsWarning = str => typeof str === 'string'
  && str.indexOf('Highcharts warning') !== -1;
@@ -60,5 +60,5 @@ const _runLoadingApp = () => {
 
 polyfill();
 _initRaven();
-initChartConfig();
+initChartTheme();
 _runLoadingApp();

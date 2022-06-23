@@ -10,25 +10,27 @@ var _ravenJs = _interopRequireDefault(require("raven-js"));
 
 var _AppErc = _interopRequireDefault(require("./components/AppErc"));
 
-var _ChartConfig = _interopRequireDefault(require("./charts/ChartConfig"));
+var _initChartTheme = _interopRequireDefault(require("./charts/initChartTheme"));
 
 var _jsxRuntime = require("react/jsx-runtime");
+
+const _isHighchartsWarning = str => typeof str === 'string' && str.indexOf('Highcharts warning') !== -1;
 
 let consoleWarn = (console || {}).warn;
 
 const _clearHighchartsWarning = () => {
   if (consoleWarn) {
-    console.warn = (...args) => {
-      if (typeof args[0] === 'string' && args[0].indexOf('Highcharts warning') !== -1) {
+    console.warn = function () {
+      if (_isHighchartsWarning(arguments.length <= 0 ? undefined : arguments[0])) {
         return;
       }
 
-      consoleWarn(...args);
+      consoleWarn(...arguments);
     };
   }
 };
 
-const _fnInitRaven = function () {
+const _initRaven = function () {
   /* eslint-disable no-undef */
   if (process.env.NODE_ENV === 'production') {
     /* eslint-enable no-undef */
@@ -42,7 +44,7 @@ const _fnInitRaven = function () {
   }
 };
 
-const _fnRenderApp = function () {
+const _renderApp = () => {
   const preloaderEl = document.getElementById('preloader');
 
   if (preloaderEl) {
@@ -52,22 +54,22 @@ const _fnRenderApp = function () {
   (0, _reactDom.render)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_AppErc.default, {}), document.getElementById('app'));
 };
 
-const _fnLoading = function () {
+const _runLoadingApp = () => {
   const preloader = window.preloader;
 
   if (preloader && typeof preloader.hiding === 'function') {
     preloader.hiding();
-    setTimeout(_fnRenderApp, 100);
+    setTimeout(_renderApp, 100);
   } else {
-    _fnRenderApp();
+    _renderApp();
   }
 };
 
 (0, _polyfill.default)();
 
-_fnInitRaven();
+_initRaven();
 
-_ChartConfig.default.init();
+(0, _initChartTheme.default)();
 
-_fnLoading();
+_runLoadingApp();
 //# sourceMappingURL=index.js.map
