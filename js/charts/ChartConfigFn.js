@@ -3,17 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.setSeriaDataTo = exports.isLineType = exports.initChartConfig = exports.getSeriaColorByIndex = exports.crSeriaConfig = exports.crAreaConfig = void 0;
+exports.setSeriaDataTo = exports.isLineType = exports.crSeriaConfig = exports.crAreaConfig = void 0;
 
-var _highcharts = _interopRequireDefault(require("highcharts"));
-
-var _treemap = _interopRequireDefault(require("highcharts/modules/treemap"));
-
-var _exporting = _interopRequireDefault(require("highcharts/modules/exporting"));
-
-var _offlineExporting = _interopRequireDefault(require("highcharts/modules/offline-exporting"));
-
-var _zhnHighcharts = _interopRequireDefault(require("./plugin/zhn-highcharts"));
+var _merge = _interopRequireDefault(require("../utils/merge"));
 
 var _Color = require("../constants/Color");
 
@@ -23,52 +15,29 @@ var _ChartFn = require("./ChartFn");
 
 var _Tooltip = require("./Tooltip");
 
-var _ChartTheme = _interopRequireDefault(require("./ChartTheme"));
-
 var _handleMouseOver = _interopRequireDefault(require("./handleMouseOver"));
 
-//import HighchartsMore from 'highcharts/lib/highcharts-more';
-//import HighchartsTreemap from 'highcharts/lib/modules/treemap';
-//import HighchartsExporting from 'highcharts/lib/modules/exporting';
-//import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
-const _merge = _highcharts.default.merge,
-      _assign = Object.assign;
+const _assign = Object.assign;
 
-const initChartConfig = () => {
-  (0, _treemap.default)(_highcharts.default);
-  (0, _exporting.default)(_highcharts.default);
-  (0, _offlineExporting.default)(_highcharts.default);
-  (0, _zhnHighcharts.default)(_highcharts.default);
+const LINE_TYPES = ['spline', 'line', 'area'],
+      _isLineType = chartType => LINE_TYPES.indexOf(chartType) !== -1;
 
-  _highcharts.default.setOptions(_ChartTheme.default);
-};
+const isLineType = config => _isLineType(((config.series || [])[0] || {}).type);
 
-exports.initChartConfig = initChartConfig;
+exports.isLineType = isLineType;
 
 const setSeriaDataTo = (config, data, index, name, options) => {
-  const {
-    type = 'area',
-    lineWidth = 1,
-    ...restOptions
-  } = options || {};
-  config.series[index] = _assign({
-    type,
-    lineWidth,
+  config.series[index] = {
+    type: 'area',
+    lineWidth: 1,
     name,
-    data
-  }, restOptions, {
+    data,
+    ...options,
     point: (0, _Chart.fEventsMouseOver)(_handleMouseOver.default)
-  });
+  };
 };
 
 exports.setSeriaDataTo = setSeriaDataTo;
-
-const getSeriaColorByIndex = seriaIndex => {
-  const colors = _ChartTheme.default.colors;
-  return colors[seriaIndex % colors.length];
-};
-
-exports.getSeriaColorByIndex = getSeriaColorByIndex;
 
 const crSeriaConfig = function (_temp) {
   let {
@@ -89,7 +58,7 @@ const crSeriaConfig = function (_temp) {
 exports.crSeriaConfig = crSeriaConfig;
 
 const crAreaConfig = options => {
-  const config = _merge((0, _Chart.crAreaConfig)(options), {
+  const config = (0, _merge.default)((0, _Chart.crAreaConfig)(options), {
     chart: {
       zoomType: 'xy',
       xDeltaCrossLabel: 4,
@@ -97,7 +66,6 @@ const crAreaConfig = options => {
     },
     zhDetailCharts: []
   });
-
   config.xAxis = _assign((0, _Chart.fXAxisOpposite)(config.xAxis), {
     events: {
       afterSetExtremes: _ChartFn.zoomIndicatorCharts
@@ -120,11 +88,4 @@ const crAreaConfig = options => {
 };
 
 exports.crAreaConfig = crAreaConfig;
-
-const LINE_TYPES = ['spline', 'line', 'area'],
-      _isLineType = chartType => LINE_TYPES.indexOf(chartType) !== -1;
-
-const isLineType = config => _isLineType(((config.series || [])[0] || {}).type);
-
-exports.isLineType = isLineType;
 //# sourceMappingURL=ChartConfigFn.js.map

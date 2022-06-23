@@ -1,15 +1,4 @@
-import Highcharts from 'highcharts';
-import HighchartsTreemap from 'highcharts/modules/treemap';
-import HighchartsExporting from 'highcharts/modules/exporting';
-import HighchartsOfflineExporting from 'highcharts/modules/offline-exporting';
-
-import HighchartsZhn from './plugin/zhn-highcharts'
-
-//import HighchartsMore from 'highcharts/lib/highcharts-more';
-//import HighchartsTreemap from 'highcharts/lib/modules/treemap';
-//import HighchartsExporting from 'highcharts/lib/modules/exporting';
-//import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
-
+import merge from '../utils/merge';
 import {
   COLOR_HIGH,
   COLOR_LOW
@@ -28,21 +17,23 @@ import {
 } from './ChartFn';
 import { tooltipValueTdmyIf } from './Tooltip';
 
-import ChartTheme from './ChartTheme';
 import handleMouseOver from './handleMouseOver';
 
-const _merge = Highcharts.merge
-, _assign = Object.assign;
+const _assign = Object.assign;
 
-export const initChartConfig = () => {
-  HighchartsTreemap(Highcharts);
-  HighchartsExporting(Highcharts);
-  HighchartsOfflineExporting(Highcharts);
+const LINE_TYPES = [
+  'spline',
+  'line',
+  'area'
+]
+, _isLineType = chartType => LINE_TYPES
+    .indexOf(chartType) !== -1
 
-  HighchartsZhn(Highcharts)
-
-  Highcharts.setOptions(ChartTheme);
-}
+export const isLineType = (
+  config
+) => _isLineType(
+  ((config.series||[])[0]||{}).type
+)
 
 export const setSeriaDataTo = (
   config,
@@ -51,24 +42,14 @@ export const setSeriaDataTo = (
   name,
   options
 ) => {
-    const {
-      type='area',
-      lineWidth=1,
-      ...restOptions
-    } = options || {};
-    config.series[index] = _assign({
-      type,
-      lineWidth,
-      name,
-      data,
-    }, restOptions, {
-      point: fEventsMouseOver(handleMouseOver)
-    })
-}
-
-export const getSeriaColorByIndex = (seriaIndex) => {
-  const colors = ChartTheme.colors;
-  return colors[seriaIndex % colors.length];
+  config.series[index] = {
+    type: 'area',
+    lineWidth: 1,
+    name,
+    data,
+    ...options,
+    point: fEventsMouseOver(handleMouseOver)
+  }
 }
 
 export const crSeriaConfig = ({
@@ -87,7 +68,7 @@ export const crSeriaConfig = ({
 export const crAreaConfig = (
   options
 ) => {
-  const config = _merge(
+  const config = merge(
     _crAreaConfig(options), {
     chart: {
       zoomType: 'xy',
@@ -121,17 +102,3 @@ export const crAreaConfig = (
   ]
   return config;
 }
-
-const LINE_TYPES = [
-  'spline',
-  'line',
-  'area'
-]
-, _isLineType = chartType => LINE_TYPES
-    .indexOf(chartType) !== -1
-
-export const isLineType = (
-  config
-) => _isLineType(
-  ((config.series||[])[0]||{}).type
-)
