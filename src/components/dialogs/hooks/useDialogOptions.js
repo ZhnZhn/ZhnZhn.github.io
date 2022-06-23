@@ -1,28 +1,29 @@
 import {
   useRef,
-  useCallback
+  useMemo
 } from '../../uiApi';
 
 import useToggle from '../../hooks/useToggle';
 
 const useDialogOptions = () => {
   const refDialogOptions = useRef({
-    isNotZoomToMinMax: false,
-    isFilterZero: false
+    //isNotZoomToMinMax: false,
+    //isFilterZero: false,
+    //isLogaritmic: false
   })
   , [
     isShowOptions,
     toggleOptions
   ] = useToggle(false)
-  , toggleDialogOption = useCallback((propName, is) => {
-    refDialogOptions.current[propName] = is
-  }, [])
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , hideOptions = useCallback(() => {
-    toggleOptions(false)
-  }, []);
-  // toggleOption
-  /*eslint-enable react-hooks/exhaustive-deps */
+  , [
+    hideOptions,
+    toggleDialogOption
+  ] = useMemo(() => [
+    () => { toggleOptions(false)},
+    (propName, is) => {
+      refDialogOptions.current[propName] = is
+    }
+  ], [toggleOptions]);
 
   return [
     refDialogOptions,

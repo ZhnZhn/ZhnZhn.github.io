@@ -1,7 +1,8 @@
 import {
   findMinY,
   findMaxY,
-  filterTrimZero
+  filterTrimZero,
+  hasZeroOrLessValue
 } from '../math/seriaFn';
 
 import {
@@ -16,7 +17,8 @@ import {
   setYToPoints
 } from './ChartFn';
 import {
-  crAreaConfig
+  crAreaConfig,
+  isLineType
 } from './ChartConfigFn';
 import {
   crTreeMapConfig
@@ -88,7 +90,6 @@ const _calcYAxisMin = (min, max, noZoom) => noZoom
   && min > 0
    ? 0
    : calcMinY(min, max);
-
 
 const ConfigBuilder = function(config={}) {
   if (!(this instanceof ConfigBuilder)){
@@ -205,13 +206,16 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       isNotZoomToMinMax,
       isDrawDeltaExtrems,
       isFilterZero,
-      minY, maxY
+      isLogarithmic,
+      minY,
+      maxY
     } = option
     , _data = isFilterZero ? filterTrimZero(data) : data
     , min = _findMinY(minY, _data)
     , max = _findMaxY(maxY, _data);
     return this._setMinMax(min, max, isNotZoomToMinMax)
-      ._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems);
+      ._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems)
+      ._setYAxisType(isLogarithmic, _data)
   },
 
 
@@ -242,6 +246,22 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       endOnTick: false,
       startOnTick: false
     });
+  },
+
+  _setYAxisType(isLogarithmic, data) {
+    if (isLogarithmic) {
+      if (!isLineType(this.config)
+          || hasZeroOrLessValue(data)) {
+        return this;
+      }
+      const { yAxis } = this.config
+      yAxis.type = 'logarithmic'
+      //yAxis.minorTickInterval = 0.1
+      if (yAxis.min <= 0) {
+        yAxis.min = null
+      }
+    }
+    return this;
   },
 
   _addScatterBottom(seria, name, min, max) {
@@ -277,7 +297,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
 
   toConfig(){
-    this._checkDataLength()
+    this._checkDataLength()  
     return this.config;
   }
 })

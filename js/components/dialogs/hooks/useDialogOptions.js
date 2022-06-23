@@ -10,22 +10,16 @@ var _uiApi = require("../../uiApi");
 var _useToggle = _interopRequireDefault(require("../../hooks/useToggle"));
 
 const useDialogOptions = () => {
-  const refDialogOptions = (0, _uiApi.useRef)({
-    isNotZoomToMinMax: false,
-    isFilterZero: false
+  const refDialogOptions = (0, _uiApi.useRef)({//isNotZoomToMinMax: false,
+    //isFilterZero: false,
+    //isLogaritmic: false
   }),
         [isShowOptions, toggleOptions] = (0, _useToggle.default)(false),
-        toggleDialogOption = (0, _uiApi.useCallback)((propName, is) => {
-    refDialogOptions.current[propName] = is;
-  }, [])
-  /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        hideOptions = (0, _uiApi.useCallback)(() => {
+        [hideOptions, toggleDialogOption] = (0, _uiApi.useMemo)(() => [() => {
     toggleOptions(false);
-  }, []); // toggleOption
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-
+  }, (propName, is) => {
+    refDialogOptions.current[propName] = is;
+  }], [toggleOptions]);
   return [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption];
 };
 

@@ -15,16 +15,17 @@ var _Style = require("./Style");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const ModalOptions = ({
-  isShow,
-  style,
-  className = _Style.CL_POPUP_MENU,
-  toggleOption,
-  onClose
-}) => {
-  const _toggleZoomMinMax = (0, _react.useCallback)(is => toggleOption('isNotZoomToMinMax', is), [toggleOption]),
-        _toggleFilterZero = (0, _react.useCallback)(is => toggleOption('isFilterZero', is), [toggleOption]);
+const PROP_NAMES = ['isNotZoomToMinMax', 'isFilterZero', 'isLogarithmic'];
 
+const ModalOptions = _ref => {
+  let {
+    isShow,
+    style,
+    className = _Style.CL_POPUP_MENU,
+    toggleOption,
+    onClose
+  } = _ref;
+  const [_toggleZoomMinMax, _toggleFilterZero, _toggleLogarithmic] = (0, _react.useMemo)(() => PROP_NAMES.map(propName => is => toggleOption(propName, is)), [toggleOption]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
     isShow: isShow,
     style: { ..._Style.S_MODAL_POPUP,
@@ -42,6 +43,11 @@ const ModalOptions = ({
       style: _Style.S_ROW_CHB,
       caption: "Filter Trim Zero Values",
       onToggle: _toggleFilterZero
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
+      initValue: false,
+      style: _Style.S_ROW_CHB,
+      caption: "Logarithmic Scale",
+      onToggle: _toggleLogarithmic
     })]
   });
 };

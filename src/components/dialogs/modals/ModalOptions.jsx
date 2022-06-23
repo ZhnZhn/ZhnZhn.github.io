@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import RowCheckBox from '../rows/RowCheckBox';
@@ -8,6 +8,12 @@ import {
   S_ROW_CHB
 } from './Style';
 
+const PROP_NAMES = [
+  'isNotZoomToMinMax',
+  'isFilterZero',
+  'isLogarithmic'
+];
+
 const ModalOptions = ({
   isShow,
   style,
@@ -15,12 +21,15 @@ const ModalOptions = ({
   toggleOption,
   onClose
 }) => {
-  const _toggleZoomMinMax = useCallback(
-    is => toggleOption('isNotZoomToMinMax', is),
-  [toggleOption])
-  , _toggleFilterZero = useCallback(
-    is => toggleOption('isFilterZero', is),
-  [toggleOption]);
+  const [
+    _toggleZoomMinMax,
+    _toggleFilterZero,
+    _toggleLogarithmic
+  ] = useMemo(() => PROP_NAMES
+       .map(propName =>
+          is => toggleOption(propName, is)
+       )
+  , [toggleOption]);
   return (
   <ModalPopup
     isShow={isShow}
@@ -39,6 +48,12 @@ const ModalOptions = ({
       style={S_ROW_CHB}
       caption="Filter Trim Zero Values"
       onToggle={_toggleFilterZero}
+    />
+    <RowCheckBox
+      initValue={false}
+      style={S_ROW_CHB}
+      caption="Logarithmic Scale"
+      onToggle={_toggleLogarithmic}
     />
   </ModalPopup>
  );

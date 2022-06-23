@@ -243,6 +243,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
       isNotZoomToMinMax,
       isDrawDeltaExtrems,
       isFilterZero,
+      isLogarithmic,
       minY,
       maxY
     } = option,
@@ -250,7 +251,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
           min = _findMinY(minY, _data),
           max = _findMaxY(maxY, _data);
 
-    return this._setMinMax(min, max, isNotZoomToMinMax)._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems);
+    return this._setMinMax(min, max, isNotZoomToMinMax)._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems)._setYAxisType(isLogarithmic);
   },
 
   _setMinMaxDeltas(min, max, data, isDrawDeltaExtrems) {
@@ -283,6 +284,21 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
       endOnTick: false,
       startOnTick: false
     });
+  },
+
+  _setYAxisType(isLogarithmic) {
+    if (isLogarithmic) {
+      const {
+        yAxis
+      } = this.config;
+      yAxis.type = 'logarithmic'; //yAxis.minorTickInterval = 0.1
+
+      if (yAxis.min <= 0) {
+        yAxis.min = null;
+      }
+    }
+
+    return this;
   },
 
   _addScatterBottom(seria, name, min, max) {
