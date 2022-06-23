@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _toArea = _interopRequireDefault(require("./toArea"));
+var _toSpline = _interopRequireDefault(require("./toSpline"));
 
 var _toAreaYearly = _interopRequireDefault(require("./toAreaYearly"));
 
@@ -15,9 +15,9 @@ var _toMap = _interopRequireDefault(require("./toMap"));
 
 const DF_TYPE = 'SPLINE';
 const _rToConfig = {
-  AREA: _toArea.default.createConfig,
-  SPLINE: _toArea.default.createConfig,
-  COLUMN: _toArea.default.createConfig,
+  AREA: _toSpline.default.createConfig,
+  SPLINE: _toSpline.default.createConfig,
+  COLUMN: _toSpline.default.createConfig,
   AREA_YEARLY: _toAreaYearly.default.createConfig,
   MAP: _toMap.default.createConfig,
   COLUMN_SET: _toCategory.default.createConfig,
@@ -26,9 +26,9 @@ const _rToConfig = {
   DOT_SET: _toCategory.default.createConfig
 };
 const _rToSeria = {
-  AREA: _toArea.default.createSeria,
-  SPLINE: _toArea.default.createSeria,
-  COLUMN: _toArea.default.createSeria,
+  AREA: _toSpline.default.createSeria,
+  SPLINE: _toSpline.default.createSeria,
+  COLUMN: _toSpline.default.createSeria,
   COLUMN_SET: _toCategory.default.createSeria,
   BAR_SET: _toCategory.default.createSeria,
   BAR_WITH_LABELS: _toCategory.default.createSeria,

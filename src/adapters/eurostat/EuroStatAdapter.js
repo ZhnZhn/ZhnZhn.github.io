@@ -1,13 +1,13 @@
-import toArea from './toArea';
+import toSpline from './toSpline';
 import toAreaYearly from './toAreaYearly'
 import toCategory from './toCategory'
 import toMap from './toMap';
 
 const DF_TYPE = 'SPLINE';
 const _rToConfig = {
-  AREA: toArea.createConfig,
-  SPLINE: toArea.createConfig,
-  COLUMN: toArea.createConfig,
+  AREA: toSpline.createConfig,
+  SPLINE: toSpline.createConfig,
+  COLUMN: toSpline.createConfig,
   AREA_YEARLY: toAreaYearly.createConfig,
   MAP: toMap.createConfig,
   COLUMN_SET: toCategory.createConfig,
@@ -17,9 +17,9 @@ const _rToConfig = {
 };
 
 const _rToSeria = {
-  AREA: toArea.createSeria,
-  SPLINE: toArea.createSeria,
-  COLUMN: toArea.createSeria,
+  AREA: toSpline.createSeria,
+  SPLINE: toSpline.createSeria,
+  COLUMN: toSpline.createSeria,
   COLUMN_SET: toCategory.createSeria,
   BAR_SET: toCategory.createSeria,
   BAR_WITH_LABELS: toCategory.createSeria,

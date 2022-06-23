@@ -19,9 +19,7 @@ const _addItemCaptionTo = option => {
 
 const toMap = {
   createConfig: (json, option) => {
-    const {
-      data
-    } = (0, _EuroStatFn.crData)(json),
+    const [data] = (0, _EuroStatFn.crData)(json),
           config = (0, _ChartConfigFn.crAreaConfig)();
 
     _addItemCaptionTo(option);

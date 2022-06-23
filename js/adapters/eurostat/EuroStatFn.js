@@ -1,15 +1,13 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toPointArr = exports.setLineExtrems = exports.setInfo = exports.setDataAndInfo = exports.crLinkConf = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
+exports.toPointArr = exports.setInfo = exports.setDataAndInfo = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
 exports.findMinY = _AdapterFn.findMinY;
 
 var _Chart = require("../../charts/Chart");
-
-var _ChartFn = require("../../charts/ChartFn");
 
 var _Tooltip = require("../../charts/Tooltip");
 
@@ -40,7 +38,7 @@ const _crDescr = extension => {
   return (_d + " " + _id + " " + _sub).trim();
 };
 
-const _crDatasetInfo = _ref => {
+const crDatasetInfo = _ref => {
   let {
     label,
     updated,
@@ -53,6 +51,8 @@ const _crDatasetInfo = _ref => {
     fromDate: '1996-01-30'
   };
 };
+
+exports.crDatasetInfo = crDatasetInfo;
 
 const _colorSeriaIn = (config, codes, color) => {
   const data = config.series[0].data;
@@ -71,8 +71,6 @@ const _colorSeriaNotIn = (config, codes, color) => {
     }
   });
 };
-
-const _isLineSeria = type => type && (type === 'AREA' || type === 'SPLINE');
 
 const _filterZeroCategories = (data, categories) => {
   const _data = [],
@@ -206,11 +204,7 @@ const crData = function (json, _temp) {
     data = (0, _AdapterFn.filterTrimZero)(data);
   }
 
-  return {
-    data,
-    max: (0, _AdapterFn.findMaxY)(data),
-    min: (0, _AdapterFn.findMinY)(data)
-  };
+  return [data, (0, _AdapterFn.findMinY)(data), (0, _AdapterFn.findMaxY)(data)];
 };
 
 exports.crData = crData;
@@ -237,7 +231,7 @@ const toPointArr = json => {
 
 exports.toPointArr = toPointArr;
 
-const _crZhConfig = option => {
+const crZhConfig = option => {
   const {
     key,
     itemCaption,
@@ -259,6 +253,8 @@ const _crZhConfig = option => {
   };
 };
 
+exports.crZhConfig = crZhConfig;
+
 const setDataAndInfo = _ref3 => {
   let {
     config,
@@ -268,17 +264,11 @@ const setDataAndInfo = _ref3 => {
   } = _ref3;
   const {
     title,
-    subtitle,
-    seriaType
+    subtitle
   } = option;
   (0, _Chart.setDefaultTitle)(config, title, subtitle);
-  config.zhConfig = _crZhConfig(option);
-  config.info = _crDatasetInfo(json);
-
-  if (_isLineSeria(seriaType)) {
-    config.valueMoving = (0, _AdapterFn.valueMoving)(data);
-  }
-
+  config.zhConfig = crZhConfig(option);
+  config.info = crDatasetInfo(json);
   config.series[0].data = data;
 };
 
@@ -290,7 +280,7 @@ const setInfo = _ref4 => {
     json,
     option
   } = _ref4;
-  config.info = _crDatasetInfo(json);
+  config.info = crDatasetInfo(json);
 };
 
 exports.setInfo = setInfo;
@@ -373,27 +363,6 @@ exports.addToCategoryConfig = addToCategoryConfig;
 const crCategoryTooltip = () => (0, _Chart.fTooltip)(_Tooltip.tooltipCategorySimple);
 
 exports.crCategoryTooltip = crCategoryTooltip;
-
-const setLineExtrems = _ref8 => {
-  let {
-    config,
-    max,
-    min,
-    isNotZoomToMinMax
-  } = _ref8;
-  const plotLines = config.yAxis.plotLines;
-  (0, _ChartFn.setPlotLinesMinMax)({
-    plotLines,
-    min,
-    max
-  });
-
-  if (!isNotZoomToMinMax) {
-    config.yAxis.min = (0, _ChartFn.calcMinY)(min, max);
-  }
-};
-
-exports.setLineExtrems = setLineExtrems;
 
 const crDataSource = dfProps => {
   const _ds = dfProps.dataSource,

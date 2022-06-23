@@ -11,7 +11,7 @@ var _ChartConfigFn = require("../../charts/ChartConfigFn");
 
 var _EuroStatFn = require("./EuroStatFn");
 
-const toArea = {
+const toSpline = {
   createConfig: (json, option) => {
     const {
       seriaType
@@ -51,6 +51,6 @@ const toArea = {
     });
   }
 };
-var _default = toArea;
+var _default = toSpline;
 exports.default = _default;
-//# sourceMappingURL=toArea.js.map
+//# sourceMappingURL=toSpline.js.map

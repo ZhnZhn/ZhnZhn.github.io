@@ -1,20 +1,17 @@
-export { findMinY } from '../AdapterFn';
+export {
+  findMinY
+} from '../AdapterFn';
 
 import {
   fTooltip,
   setDefaultTitle
 } from '../../charts/Chart';
 import {
-  calcMinY,
-  setPlotLinesMinMax
-} from '../../charts/ChartFn';
-import {
   tooltipCategorySimple,
   tooltipCategory
 } from '../../charts/Tooltip';
 
 import {
-  valueMoving,
   findMinY,
   findMaxY,
   filterTrimZero,
@@ -50,7 +47,7 @@ const _crDescr = (extension) => {
    return (`${_d} ${_id} ${_sub}`).trim();
 };
 
-const _crDatasetInfo = ({
+export const crDatasetInfo = ({
   label,
   updated,
   extension
@@ -86,9 +83,6 @@ const _colorSeriaNotIn = (
      }
   })
 };
-
-const _isLineSeria = type => type
-  && (type === 'AREA' || type === 'SPLINE');
 
 const _filterZeroCategories = (
   data,
@@ -203,11 +197,11 @@ export const crData = (
   if (isFilterZero) {
     data = filterTrimZero(data)
   }
-  return {
+  return [
     data,
-    max: findMaxY(data),
-    min: findMinY(data)
-  };
+    findMinY(data),
+    findMaxY(data)
+  ];
 }
 
 export const toPointArr = (
@@ -232,7 +226,7 @@ export const toPointArr = (
   return data;
 }
 
-const _crZhConfig = (option) => {
+export const crZhConfig = (option) => {
   const {
     key,
     itemCaption,
@@ -263,16 +257,11 @@ export const setDataAndInfo = ({
   json,
   option
 }) => {
-  const { title, subtitle, seriaType } = option;
+  const { title, subtitle } = option;
   setDefaultTitle(config, title, subtitle);
 
-  config.zhConfig = _crZhConfig(option);
-  config.info = _crDatasetInfo(json);
-
-  if (_isLineSeria(seriaType)){
-    config.valueMoving = valueMoving(data)
-  }
-
+  config.zhConfig = crZhConfig(option);
+  config.info = crDatasetInfo(json);
   config.series[0].data = data;
 }
 
@@ -281,7 +270,7 @@ export const setInfo = ({
   json,
   option
 }) => {
-  config.info = _crDatasetInfo(json);
+  config.info = crDatasetInfo(json);
 }
 
 const _crItemCaption = ({ title='EU' }) => title
@@ -327,20 +316,6 @@ export const addToCategoryConfig = (
 }
 
 export const crCategoryTooltip = () => fTooltip(tooltipCategorySimple)
-
-export const setLineExtrems = ({
-  config,
-  max,
-  min,
-  isNotZoomToMinMax
-}) => {
-  const plotLines = config.yAxis.plotLines;
-  setPlotLinesMinMax({ plotLines, min, max })
-
-  if (!isNotZoomToMinMax){
-    config.yAxis.min = calcMinY(min, max);
-  }
-}
 
 export const crDataSource = dfProps => {
   const _ds = dfProps.dataSource

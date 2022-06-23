@@ -20,7 +20,7 @@ const _addItemCaptionTo = (
 
 const toMap = {
   createConfig: (json, option) => {
-    const { data } = crData(json)
+    const [ data ] = crData(json)
     , config = crAreaConfig();
 
      _addItemCaptionTo(option)
