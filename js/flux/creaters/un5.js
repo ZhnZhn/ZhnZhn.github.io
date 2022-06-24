@@ -1,65 +1,55 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _createrFns = require("./createrFns");
 
-var C = {
-  DF_ONE: {
-    caption: 'All',
-    value: 'all'
-  },
-  COLLON: ': ',
-  DOTS: '...',
-  MAX_SUBTITLE: 60,
-  TRADE_FLOW: {
-    caption: 'Export Value',
-    value: {
-      rg: 2,
-      measure: "TradeValue"
-    }
-  }
+const MAX_SUBTITLE = 60;
+
+const _crTitle = (one, tradeFlow, tradePartner) => {
+  const _title = (0, _createrFns.getC)(one) + ': ' + (0, _createrFns.getC)(tradeFlow),
+        _tradePartnerCapion = (0, _createrFns.getC)(tradePartner);
+
+  return _tradePartnerCapion ? _title + " to " + _tradePartnerCapion : _title;
 };
 
-var createLoadOptions = function createLoadOptions(props, options) {
-  if (props === void 0) {
-    props = {};
-  }
+const _crSubtitle = three => {
+  const _threeCaption = (0, _createrFns.getC)(three);
 
-  if (options === void 0) {
-    options = {};
-  }
+  return _threeCaption.length > MAX_SUBTITLE ? _threeCaption.substring(0, MAX_SUBTITLE) + '...' : _threeCaption;
+};
 
-  var _props = props,
-      fnValue = _props.fnValue,
-      loadId = _props.loadId,
-      dataSource = _props.dataSource,
-      _options = options,
-      one = _options.one,
-      two = _options.two,
-      three = _options.three,
-      tradeFlow = _options.tradeFlow,
-      _one = one || C.DF_ONE,
-      _tradeFlow = tradeFlow || C.TRADE_FLOW,
-      _two = three.value ? three.value : two.value,
-      _value = typeof fnValue === 'function' ? fnValue(_one.value, _two) : undefined,
-      _title = _one.caption + C.COLLON + _tradeFlow.caption,
-      _subtitle = three.caption.length > C.MAX_SUBTITLE ? three.caption.substring(0, C.MAX_SUBTITLE) + C.DOTS : three.caption;
+const crLoadOptions = (props, options) => {
+  const {
+    fnValue,
+    loadId,
+    dataSource
+  } = props || {},
+        {
+    one,
+    two,
+    three,
+    tradeFlow,
+    tradePartner
+  } = options || {},
+        _oneValue = (0, _createrFns.getV)(one),
+        _two = (0, _createrFns.getV)(three) || (0, _createrFns.getV)(two),
+        _value = (0, _createrFns.isFn)(fnValue) ? fnValue(_oneValue, _two) : void 0;
 
-  return (0, _extends2["default"])({
+  return {
+    loadId,
+    dataSource,
     value: _value,
-    loadId: loadId,
-    title: _title,
-    subtitle: _subtitle,
-    dataSource: dataSource,
-    one: _one.value,
-    two: _two
-  }, _tradeFlow.value);
+    title: _crTitle(one, tradeFlow, tradePartner),
+    subtitle: _crSubtitle(three),
+    one: _oneValue,
+    two: _two,
+    ...(0, _createrFns.getV)(tradeFlow),
+    tp: (0, _createrFns.getV)(tradePartner)
+  };
 };
 
-var _default = createLoadOptions;
-exports["default"] = _default;
+var _default = crLoadOptions;
+exports.default = _default;
 //# sourceMappingURL=un5.js.map
