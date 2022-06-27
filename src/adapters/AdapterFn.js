@@ -99,7 +99,7 @@ export const valueMoving = (data, dfR) => {
   , bPrevValue = _crBigValueFrom(_pointPrev)
   , date = _crDmyFrom(_pointNow)
   , dateTo = _crDmyFrom(_pointPrev);
-
+  
   return  {
     ...crValueMoving({ bNowValue, bPrevValue, dfR }),
     valueTo: formatAllNumber(bPrevValue),

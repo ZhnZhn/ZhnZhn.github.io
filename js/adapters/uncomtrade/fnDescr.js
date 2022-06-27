@@ -7,9 +7,7 @@ var _crFn = require("../crFn");
 
 var _conf = require("./conf");
 
-const _isArr = Array.isArray,
-      _crWebsiteLink = _crFn.crItemLink.bind(null, "Website UN Comtrade Data", "https://comtrade.un.org/data/", "padding-bottom: 8px;"),
-      _crDatasetLink = _crFn.crItemLink.bind(null, "UN Comtrade Dataset Link"),
+const _crWebsiteLink = _crFn.crItemLink.bind(null, "Website UN Comtrade Data", "https://comtrade.un.org/data/", "padding-bottom: 8px;"),
       _crDescrText = _ref => {
   let {
     cmdDescE,
@@ -24,11 +22,8 @@ const _crDescr = json => {
   } = json,
         _firtsItem = dataset[0];
 
-  if (_isArr(dataset) && _firtsItem) {
-    let i = 0,
-        max = dataset.length;
-
-    for (; i < max; i++) {
+  if (_firtsItem) {
+    for (let i = 0; i < dataset.length; i++) {
       const _item = dataset[i];
 
       if (_item.TradeQuantity) {
@@ -42,7 +37,7 @@ const _crDescr = json => {
   return _conf.DESCR_EMPTY;
 };
 
-const toDescr = (json, option) => _crDescr(json) + _crWebsiteLink() + _crDatasetLink(option.nativeHref);
+const toDescr = (json, option) => _crDescr(json) + _crWebsiteLink();
 
 exports.toDescr = toDescr;
 //# sourceMappingURL=fnDescr.js.map

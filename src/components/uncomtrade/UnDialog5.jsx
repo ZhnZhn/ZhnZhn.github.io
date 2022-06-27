@@ -2,7 +2,7 @@ import {
   useRef,
   useCallback,
   getRefValue
-} from '../uiApi'
+} from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
@@ -10,19 +10,27 @@ import useProperty from '../hooks/useProperty';
 import useDialog from '../dialogs/hooks/useDialog';
 
 import D from '../dialogs/DialogCell';
+import ModalInputToggle from './ModalInputToggle';
 
 const TRADE_FLOW_OPTIONS = [
-  { caption: "Export Value", value: { rg: 2, measure: "TradeValue" } },
-  { caption: "Export Weight", value: { rg: 2, measure: "NetWeight" } },
-  { caption: "Export Quantity", value: { rg: 2, measure: "TradeQuantity" } },
-  { caption: "Export Average Value Per Weight", value: { rg: 2, measure: "avgPerWeight" } },
-  { caption: "Export Average Value Per Quantity", value: { rg: 2, measure: "avgPerQuantity" } },
-  { caption: "Import Value", value: { rg: 1, measure: "TradeValue" } },
-  { caption: "Import Weight", value: { rg: 1, measure: "NetWeight" } },
-  { caption: "Import Quantity", value: { rg: 1, measure: "TradeQuantity" } },
-  { caption: "Import Average Value Per Weight", value: { rg: 1, measure: "avgPerWeight" } },
-  { caption: "Import Average Value Per Quantity", value: { rg: 1, measure: "avgPerQuantity" } }
-];
+  { c: "Export Value", v: { rg: 2, measure: "TradeValue" } },
+  { c: "Export Weight", v: { rg: 2, measure: "NetWeight" } },
+  { c: "Export Quantity", v: { rg: 2, measure: "TradeQuantity" } },
+  { c: "Export Average Value Per Weight", v: { rg: 2, measure: "avgPerWeight" } },
+  { c: "Export Average Value Per Quantity", v: { rg: 2, measure: "avgPerQuantity" } },
+  { c: "Import Value", v: { rg: 1, measure: "TradeValue" } },
+  { c: "Import Weight", v: { rg: 1, measure: "NetWeight" } },
+  { c: "Import Quantity", v: { rg: 1, measure: "TradeQuantity" } },
+  { c: "Import Average Value Per Weight", v: { rg: 1, measure: "avgPerWeight" } },
+  { c: "Import Average Value Per Quantity", v: { rg: 1, measure: "avgPerQuantity" } }
+]
+, DF_TRADE_FLOW = TRADE_FLOW_OPTIONS[0]
+, DF_ONE = { c: 'All', v: 'all'}
+, FREQUENCY_OPTIONS = [
+  {c: "Annual",  v: "A"},
+  {c: "Monthly", v: "M"}
+]
+, DF_FREQ = FREQUENCY_OPTIONS[0];
 
 const UnDialog5 = memoIsShow((
   props
@@ -30,13 +38,9 @@ const UnDialog5 = memoIsShow((
    const {
      isShow,
      caption,
-     oneCaption,
      oneURI,
-     oneJsonProp,
-     twoCaption,
      twoURI,
-     twoJsonProp,
-     threeCaption,
+     tpURI,
      msgOnNotSelected,
 
      toTopLayer,
@@ -48,9 +52,12 @@ const UnDialog5 = memoIsShow((
      onClose
    } = props
    , [
-     isShowOptions,
-     toggleOptions
+     isShowToggle,
+     toggleInputs
    ] = useToggle(false)
+   , _hideToggle = useCallback(() => {
+     toggleInputs(false)
+   }, [toggleInputs])
    , [
      isToolbar,
      isShowLabels,
@@ -63,8 +70,12 @@ const UnDialog5 = memoIsShow((
    ] = useDialog({
      onAbout,
      onClose,
-     toggleOptions
+     toggleInputs
    })
+   , [isHeading, toggleHeading] = useToggle(true)
+   , [isPartner, togglePartner] = useToggle(false)
+   , [isFlow, toggleFlow] = useToggle(true)
+   , [isFreq, toggleFreq] = useToggle(false)
    , _refGroupItem = useRef()
    , [
      setOne,
@@ -74,20 +85,41 @@ const UnDialog5 = memoIsShow((
      setTradeFlow,
      getTradeFlow
    ] = useProperty()
+   , [
+     setTradePartner,
+     getTradePartner
+   ] = useProperty()
+   , [
+     setFreq,
+     getFreq
+   ] = useProperty()
    /*eslint-disable react-hooks/exhaustive-deps */
    , _hLoad = useCallback(() => {
      const _groupItemInst = getRefValue(_refGroupItem)
-     , { msg=[] } = _groupItemInst.getValidation();
+     , { msg=[] } = _groupItemInst.getValidation()
+     , one = getOne() || DF_ONE
+     , _oneValue = one.v
+     , tradePartner = getTradePartner()
+     , _tradePartnerValue = tradePartner && tradePartner.v
+     , freq = getFreq() || DF_FREQ;
+     if (_oneValue === 'all' && _tradePartnerValue === 'all') {
+       msg.push('Query All to All is too complex')
+     }
+     if (_oneValue === 'all' && freq.v === 'M') {
+       msg.push('Query All Monthly is too complex')
+     }
      if (msg.length === 0) {
        const {
          one:two,
          two:three
-       } = _groupItemInst.getValues();
+       } = _groupItemInst.getValues()
        onLoad(loadFn(props, {
-         one: getOne(),
+         one,
          two,
          three,
-         tradeFlow: getTradeFlow()
+         tradeFlow: getTradeFlow() || DF_TRADE_FLOW,
+         tradePartner,
+         freq
        }))
        clearValidationMessages()
      } else {
@@ -113,32 +145,62 @@ const UnDialog5 = memoIsShow((
          isShow={isToolbar}
          buttons={toolbarButtons}
       />
+      <ModalInputToggle
+        isShow={isShowToggle}
+        configs={[
+          ['Partner', isPartner, togglePartner],
+          ['Heading', isHeading, toggleHeading],
+          ['Trade Flow', isFlow, toggleFlow],
+          ['Frequency', isFreq, toggleFreq]
+        ]}
+        onClose={_hideToggle}
+      />
       <D.SelectWithLoad
          isShow={isShow}
          isShowLabels={isShowLabels}
          uri={oneURI}
-         jsonProp={oneJsonProp}
-         caption={oneCaption}
+         caption="Reporter"
          placeholder="Default: All"
          onSelect={setOne}
       />
-      <D.SelectOneTwo
-         ref={_refGroupItem}
-         isShow={isShow}
-         isShowLabels={isShowLabels}
-         uri={twoURI}
-         oneCaption={twoCaption}
-         oneJsonProp={twoJsonProp}
-         twoCaption={threeCaption}
-         msgOnNotSelected={msgOnNotSelected}
-      />
-      <D.ShowHide isShow={isShowOptions}>
+      <D.ShowHide isShow={isPartner}>
+        <D.SelectWithLoad
+           isShowLabels={isShowLabels}
+           uri={tpURI}
+           caption="Partner"
+           placeholder="Default: World"
+           onSelect={setTradePartner}
+        />
+      </D.ShowHide>
+      <D.ShowHide isShow={isHeading}>
+        <D.SelectOneTwo
+           ref={_refGroupItem}
+           isShow={isShow}
+           isShowLabels={isShowLabels}
+           uri={twoURI}
+           oneCaption="Heading"
+           twoCaption="Subheading"
+           msgOnNotSelected={msgOnNotSelected}
+        />
+      </D.ShowHide>
+      <D.ShowHide isShow={isFlow}>
         <D.RowInputSelect
           isShowLabels={isShowLabels}
           caption="Trade Flow"
           placeholder="Default: Export Value"
+          propCaption="c"
           options={TRADE_FLOW_OPTIONS}
           onSelect={setTradeFlow}
+        />
+      </D.ShowHide>
+      <D.ShowHide isShow={isFreq}>
+        <D.RowInputSelect
+          isShowLabels={isShowLabels}
+          caption="Frequency"
+          placeholder="Default: Annual"
+          propCaption="c"
+          options={FREQUENCY_OPTIONS}
+          onSelect={setFreq}
         />
       </D.ShowHide>
       <D.ValidationMessages

@@ -1,18 +1,18 @@
 import { crItemLink } from '../crFn';
 import { DESCR_EMPTY } from './conf';
 
-const _isArr = Array.isArray
-, _crWebsiteLink = crItemLink.bind(null, "Website UN Comtrade Data", "https://comtrade.un.org/data/", "padding-bottom: 8px;")
-, _crDatasetLink = crItemLink.bind(null, "UN Comtrade Dataset Link")
-
-, _crDescrText = ({ cmdDescE, qtDesc }) => cmdDescE + ', ' + qtDesc + '.';
+const _crWebsiteLink = crItemLink
+  .bind(null, "Website UN Comtrade Data", "https://comtrade.un.org/data/", "padding-bottom: 8px;")
+, _crDescrText = ({
+  cmdDescE,
+  qtDesc
+}) => cmdDescE + ', ' + qtDesc + '.';
 
 const _crDescr = json => {
   const { dataset } = json
   , _firtsItem = dataset[0];
-  if (_isArr(dataset) && _firtsItem){
-    let i=0, max=dataset.length;
-    for (; i<max; i++) {
+  if (_firtsItem) {
+    for (let i=0; i<dataset.length; i++) {
       const _item = dataset[i];
       if (_item.TradeQuantity) {
         return _crDescrText(_item);
@@ -28,6 +28,4 @@ const _crDescr = json => {
 export const toDescr = (
   json,
   option
-) => _crDescr(json)
-  + _crWebsiteLink()
-  + _crDatasetLink(option.nativeHref)
+) => _crDescr(json) + _crWebsiteLink()

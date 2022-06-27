@@ -1,7 +1,16 @@
+import {
+  ymdToUTC,
+  valueMoving
+} from '../AdapterFn';
+
 import { getSeriaColorByIndex } from '../../charts/ChartTheme';
 import { setSeriaDataTo } from '../../charts/ChartConfigFn';
 import Builder from '../../charts/ConfigBuilder';
-import { tooltipCategorySimple } from '../../charts/Tooltip';
+import { fTooltip } from '../../charts/Chart';
+import {
+  tooltipCategorySimple,
+  tooltipValueDmy
+} from '../../charts/Tooltip';
 
 import { compareByValue } from '../compareByFn';
 import { legendItem } from '../legendFn'
@@ -30,6 +39,16 @@ import {
 
 const _assign = Object.assign;
 
+export const crChartId = ({
+  value,
+  rg=2,
+  measure,
+  tp,
+  freq
+}) => [value, rg, measure, tp, freq]
+  .filter(Boolean)
+  .join("_");
+
 const _crInfo = (
   json,
   option
@@ -55,6 +74,7 @@ const _crZhConfig = (
     id: _id,
     key: _id,
     legend: [],
+    isWithoutIndicator: true,
     dataSource
   };
 }
@@ -108,18 +128,23 @@ const _addSeriesFromHmTo = ({
       })
 }
 
+const _compareByPeriod = (
+  a,
+  b
+) => (a || {}).period - (b || {}).period
+
 const _addSeriasTo = (
   config,
   json,
   option
 ) => {
   const { one, measure } = option
-  , { dataset=[] } = json
-  , pnCountry = (one === ALL)
+  , { dataset } = json
+  , pnCountry = one === ALL
      ? 'rtTitle'
      : void 0
   , { hm, categories } = toHmCategories({
-      dataset,
+      dataset: dataset.sort(_compareByPeriod),
       pnValue: measure,
       pnCountry
   });
@@ -165,11 +190,26 @@ const _crBaseConfig = (
       .toConfig();
 }
 
-export const crChartId = ({
-  value,
-  rg=2,
-  measure="A"
-}) => value + '_' + rg + '_' + measure;
+const _toMls = yyyymm => {
+  const _str = '' + yyyymm
+  , _ym = _str.length === 4
+      ? _str
+      : _str.substring(0,4) + '-' + _str.substring(4)
+  return ymdToUTC(_ym);
+}
+
+const _transformToDatetime = config => {
+  const { series }  = config
+  , { data } = series[0]
+  , _data = data.map(p => [_toMls(p.x), p.y]);
+  series[0].data = _data
+  series[0].type = 'spline'
+  config.xAxis.categories = void 0
+  config.xAxis.type = 'datetime'
+  config.tooltip = fTooltip(tooltipValueDmy)
+  config.valueMoving = valueMoving(_data)
+  config.zhConfig.isWithoutIndicator = false
+}
 
 export const toConfig = (
   json,
@@ -177,6 +217,8 @@ export const toConfig = (
 ) => {
   const config = _crBaseConfig(json, option);
   _addSeriasTo(config, json, option)
-
+  if ((config.series || []).length === 1) {
+    _transformToDatetime(config)
+  }
   return config;
 }

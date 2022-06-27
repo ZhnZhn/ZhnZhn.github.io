@@ -17,80 +17,91 @@ var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
+var _ModalInputToggle = _interopRequireDefault(require("./ModalInputToggle"));
+
 var _jsxRuntime = require("react/jsx-runtime");
 
 const TRADE_FLOW_OPTIONS = [{
-  caption: "Export Value",
-  value: {
+  c: "Export Value",
+  v: {
     rg: 2,
     measure: "TradeValue"
   }
 }, {
-  caption: "Export Weight",
-  value: {
+  c: "Export Weight",
+  v: {
     rg: 2,
     measure: "NetWeight"
   }
 }, {
-  caption: "Export Quantity",
-  value: {
+  c: "Export Quantity",
+  v: {
     rg: 2,
     measure: "TradeQuantity"
   }
 }, {
-  caption: "Export Average Value Per Weight",
-  value: {
+  c: "Export Average Value Per Weight",
+  v: {
     rg: 2,
     measure: "avgPerWeight"
   }
 }, {
-  caption: "Export Average Value Per Quantity",
-  value: {
+  c: "Export Average Value Per Quantity",
+  v: {
     rg: 2,
     measure: "avgPerQuantity"
   }
 }, {
-  caption: "Import Value",
-  value: {
+  c: "Import Value",
+  v: {
     rg: 1,
     measure: "TradeValue"
   }
 }, {
-  caption: "Import Weight",
-  value: {
+  c: "Import Weight",
+  v: {
     rg: 1,
     measure: "NetWeight"
   }
 }, {
-  caption: "Import Quantity",
-  value: {
+  c: "Import Quantity",
+  v: {
     rg: 1,
     measure: "TradeQuantity"
   }
 }, {
-  caption: "Import Average Value Per Weight",
-  value: {
+  c: "Import Average Value Per Weight",
+  v: {
     rg: 1,
     measure: "avgPerWeight"
   }
 }, {
-  caption: "Import Average Value Per Quantity",
-  value: {
+  c: "Import Average Value Per Quantity",
+  v: {
     rg: 1,
     measure: "avgPerQuantity"
   }
-}];
+}],
+      DF_TRADE_FLOW = TRADE_FLOW_OPTIONS[0],
+      DF_ONE = {
+  c: 'All',
+  v: 'all'
+},
+      FREQUENCY_OPTIONS = [{
+  c: "Annual",
+  v: "A"
+}, {
+  c: "Monthly",
+  v: "M"
+}],
+      DF_FREQ = FREQUENCY_OPTIONS[0];
 const UnDialog5 = (0, _memoIsShow.default)(props => {
   const {
     isShow,
     caption,
-    oneCaption,
     oneURI,
-    oneJsonProp,
-    twoCaption,
     twoURI,
-    twoJsonProp,
-    threeCaption,
+    tpURI,
     msgOnNotSelected,
     toTopLayer,
     onAbout,
@@ -99,22 +110,44 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     onShow,
     onClose
   } = props,
-        [isShowOptions, toggleOptions] = (0, _useToggle.default)(false),
+        [isShowToggle, toggleInputs] = (0, _useToggle.default)(false),
+        _hideToggle = (0, _uiApi.useCallback)(() => {
+    toggleInputs(false);
+  }, [toggleInputs]),
         [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
     onAbout,
     onClose,
-    toggleOptions
+    toggleInputs
   }),
+        [isHeading, toggleHeading] = (0, _useToggle.default)(true),
+        [isPartner, togglePartner] = (0, _useToggle.default)(false),
+        [isFlow, toggleFlow] = (0, _useToggle.default)(true),
+        [isFreq, toggleFreq] = (0, _useToggle.default)(false),
         _refGroupItem = (0, _uiApi.useRef)(),
         [setOne, getOne] = (0, _useProperty.default)(),
-        [setTradeFlow, getTradeFlow] = (0, _useProperty.default)()
+        [setTradeFlow, getTradeFlow] = (0, _useProperty.default)(),
+        [setTradePartner, getTradePartner] = (0, _useProperty.default)(),
+        [setFreq, getFreq] = (0, _useProperty.default)()
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
         _hLoad = (0, _uiApi.useCallback)(() => {
     const _groupItemInst = (0, _uiApi.getRefValue)(_refGroupItem),
           {
       msg = []
-    } = _groupItemInst.getValidation();
+    } = _groupItemInst.getValidation(),
+          one = getOne() || DF_ONE,
+          _oneValue = one.v,
+          tradePartner = getTradePartner(),
+          _tradePartnerValue = tradePartner && tradePartner.v,
+          freq = getFreq() || DF_FREQ;
+
+    if (_oneValue === 'all' && _tradePartnerValue === 'all') {
+      msg.push('Query All to All is too complex');
+    }
+
+    if (_oneValue === 'all' && freq.v === 'M') {
+      msg.push('Query All Monthly is too complex');
+    }
 
     if (msg.length === 0) {
       const {
@@ -123,10 +156,12 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
       } = _groupItemInst.getValues();
 
       onLoad(loadFn(props, {
-        one: getOne(),
+        one,
         two,
         three,
-        tradeFlow: getTradeFlow()
+        tradeFlow: getTradeFlow() || DF_TRADE_FLOW,
+        tradePartner,
+        freq
       }));
       clearValidationMessages();
     } else {
@@ -150,31 +185,56 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,
       buttons: toolbarButtons
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalInputToggle.default, {
+      isShow: isShowToggle,
+      configs: [['Partner', isPartner, togglePartner], ['Heading', isHeading, toggleHeading], ['Trade Flow', isFlow, toggleFlow], ['Frequency', isFreq, toggleFreq]],
+      onClose: _hideToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: oneURI,
-      jsonProp: oneJsonProp,
-      caption: oneCaption,
+      caption: "Reporter",
       placeholder: "Default: All",
       onSelect: setOne
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectOneTwo, {
-      ref: _refGroupItem,
-      isShow: isShow,
-      isShowLabels: isShowLabels,
-      uri: twoURI,
-      oneCaption: twoCaption,
-      oneJsonProp: twoJsonProp,
-      twoCaption: threeCaption,
-      msgOnNotSelected: msgOnNotSelected
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-      isShow: isShowOptions,
+      isShow: isPartner,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
+        isShowLabels: isShowLabels,
+        uri: tpURI,
+        caption: "Partner",
+        placeholder: "Default: World",
+        onSelect: setTradePartner
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: isHeading,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectOneTwo, {
+        ref: _refGroupItem,
+        isShow: isShow,
+        isShowLabels: isShowLabels,
+        uri: twoURI,
+        oneCaption: "Heading",
+        twoCaption: "Subheading",
+        msgOnNotSelected: msgOnNotSelected
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: isFlow,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
         isShowLabels: isShowLabels,
         caption: "Trade Flow",
         placeholder: "Default: Export Value",
+        propCaption: "c",
         options: TRADE_FLOW_OPTIONS,
         onSelect: setTradeFlow
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: isFreq,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+        isShowLabels: isShowLabels,
+        caption: "Frequency",
+        placeholder: "Default: Annual",
+        propCaption: "c",
+        options: FREQUENCY_OPTIONS,
+        onSelect: setFreq
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
       validationMessages: validationMessages
