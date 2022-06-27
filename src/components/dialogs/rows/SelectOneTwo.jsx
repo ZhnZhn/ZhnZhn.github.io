@@ -14,8 +14,10 @@ const SelectOneTwo = forwardRef(({
   isHideTwo=false,
   oneOptionNames='Items',
   msgOnNotSelected=DF_MSG_ON_NOT_SELECRED,
-  uri, oneJsonProp,
-  oneCaption, twoCaption,
+  uri,
+  oneJsonProp="items",
+  oneCaption,
+  twoCaption,
   onSelectOne=NOOP
 }, ref) => {
     const [state, loadOptions] = useLoadOptions(isShow, uri, oneJsonProp)
