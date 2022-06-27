@@ -4,13 +4,12 @@ import RowCheckBox from '../rows/RowCheckBox';
 import {
   CL_POPUP_MENU,
   S_MODAL_POPUP,
-  S_ROW_CHB
+  S_ROW_CHB,
+  TOGGLE_INPUT_CHECKBOX_COLOR,
+  TOGGLE_CAPTION_CHECKBOX_COLOR
 } from './Style';
 
-const TOGGLE_CHECKBOX_COLOR = '#1b75bb'
-, CAPTION_CHECKBOX_COLOR = '#a487d4'
-
-, S_ROW = {
+const S_ROW = {
   display: 'flex',
   justifyContent: 'space-between',
   paddingTop: 3
@@ -47,7 +46,7 @@ const _crCheckBoxItem = (
     <RowCheckBox
       initValue={_crChbToggleInitValue(item.isRow)}
       style={S_CHB_TOGGLE}
-      checkedColor={TOGGLE_CHECKBOX_COLOR}
+      checkedColor={TOGGLE_INPUT_CHECKBOX_COLOR}
       caption={item.caption}
       captionStyle={S_CAPTION}
       onToggle={() => onToggle(crIsId(item.id))}
@@ -55,7 +54,7 @@ const _crCheckBoxItem = (
     <RowCheckBox
       initValue={index === 0}
       style={S_CHB_CAPTION}
-      checkedColor={CAPTION_CHECKBOX_COLOR}
+      checkedColor={TOGGLE_CAPTION_CHECKBOX_COLOR}
       onCheck={() => onCheckCaption(index)}
       onUnCheck={() => onUnCheckCaption(index)}
     />
@@ -98,7 +97,7 @@ const ModalToggle = ({
         key="isShowFd"
         value={isShowFd}
         style={S_ROW_CHB}
-        checkedColor={TOGGLE_CHECKBOX_COLOR}
+        checkedColor={TOGGLE_INPUT_CHECKBOX_COLOR}
         caption="From Date"
         onToggle={onToggleFd}
       />
@@ -107,7 +106,7 @@ const ModalToggle = ({
         key="isShowChart"
         value={isShowChart}
         style={S_ROW_CHB}
-        checkedColor={TOGGLE_CHECKBOX_COLOR}
+        checkedColor={TOGGLE_INPUT_CHECKBOX_COLOR}
         caption="Chart"
         onToggle={onToggleChart}
       />
