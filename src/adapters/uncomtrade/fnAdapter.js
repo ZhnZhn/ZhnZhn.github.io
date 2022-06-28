@@ -53,7 +53,9 @@ const _crInfo = (
   json,
   option
 ) => ({
-  frequency: "Annual",
+  frequency: option.freq === 'M'
+    ? 'Monthly'
+    : 'Annual',
   description: toDescr(json, option),
 });
 
@@ -201,7 +203,7 @@ const _toMls = yyyymm => {
 const _transformToDatetime = config => {
   const { series }  = config
   , { data } = series[0]
-  , _data = data.map(p => [_toMls(p.x), p.y]);
+  , _data = (data || []).map(p => [_toMls(p.x), p.y]);
   series[0].data = _data
   series[0].type = 'spline'
   config.xAxis.categories = void 0

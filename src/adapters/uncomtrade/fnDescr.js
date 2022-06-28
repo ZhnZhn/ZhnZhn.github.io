@@ -6,7 +6,9 @@ const _crWebsiteLink = crItemLink
 , _crDescrText = ({
   cmdDescE,
   qtDesc
-}) => cmdDescE + ', ' + qtDesc + '.';
+}) => [cmdDescE, qtDesc]
+ .filter(Boolean)
+ .join(', ') + '.';
 
 const _crDescr = json => {
   const { dataset } = json

@@ -13,7 +13,7 @@ const _crWebsiteLink = _crFn.crItemLink.bind(null, "Website UN Comtrade Data", "
     cmdDescE,
     qtDesc
   } = _ref;
-  return cmdDescE + ', ' + qtDesc + '.';
+  return [cmdDescE, qtDesc].filter(Boolean).join(', ') + '.';
 };
 
 const _crDescr = json => {

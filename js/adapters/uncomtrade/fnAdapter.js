@@ -45,7 +45,7 @@ const crChartId = _ref => {
 exports.crChartId = crChartId;
 
 const _crInfo = (json, option) => ({
-  frequency: "Annual",
+  frequency: option.freq === 'M' ? 'Monthly' : 'Annual',
   description: (0, _fnDescr.toDescr)(json, option)
 });
 
@@ -197,7 +197,7 @@ const _transformToDatetime = config => {
         {
     data
   } = series[0],
-        _data = data.map(p => [_toMls(p.x), p.y]);
+        _data = (data || []).map(p => [_toMls(p.x), p.y]);
 
   series[0].data = _data;
   series[0].type = 'spline';
