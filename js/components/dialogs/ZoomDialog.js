@@ -5,7 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
+
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
+
+var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
 
 var _DateUtils = require("../../utils/DateUtils");
 
@@ -39,167 +43,129 @@ const _getMinYear = strDmy => strDmy.split('-')[2];
 
 const _crErrMsg = minYear => "DD-MM-YYYY format must be, min 01-01-" + minYear;
 
-class ZoomDialog extends _react.Component {
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    data: PropTypes.object,
-    onClose: PropTypes.func
-  }
-  */
-  constructor(props) {
-    super(props);
+const _crOnTestDate = from => {
+  const _minYear = _getMinYear(from);
 
-    this._getChart = () => {
+  return [//onTestDate
+  str => (0, _DateUtils.isDmy)(str, _minYear), // errMsgDateFrom
+  _crErrMsg(_minYear)];
+};
+
+const DF_DATA = {};
+/*eslint-disable react-hooks/exhaustive-deps */
+
+const _useZoom = (getChart, refDates) => {
+  const _hZoom = (0, _uiApi.useCallback)(() => {
+    const [chart, onClose] = getChart(),
+          _datesInst = (0, _uiApi.getRefValue)(refDates);
+
+    if (_isFn(chart.zhZoomX) && _datesInst.getValidation().isValid) {
       const {
-        data,
-        onClose
-      } = this.props,
-            {
-        chart = {}
-      } = data;
-      return {
-        chart,
-        onClose
-      };
-    };
+        fromDate,
+        toDate
+      } = _datesInst.getValues();
 
-    this._hZoom = () => {
-      const {
-        chart,
-        onClose
-      } = this._getChart();
-
-      if (_isFn(chart.zhZoomX) && this._dates.getValidation().isValid) {
-        const {
-          fromDate,
-          toDate
-        } = this._dates.getValues(),
-              from = (0, _DateUtils.dmyToUTC)(fromDate),
-              to = (0, _DateUtils.dmyToUTC)(toDate);
-
-        chart.zhZoomX({
-          from,
-          to
-        });
-      }
-
-      onClose();
-    };
-
-    this._hZoomBy = month => {
-      const {
-        chart
-      } = this._getChart();
-
-      if (_isFn(chart.zhZoomX)) {
-        const {
-          to
-        } = _getFromToDates(chart),
-              _fromMls = (0, _DateUtils.addToDmy)(to, month).getTime(),
-              _toMls = (0, _DateUtils.dmyToUTC)(to);
-
-        if (chart.zhZoomX({
-          from: _fromMls,
-          to: _toMls
-        })) {
-          this._dates.setFromTo((0, _DateUtils.mlsToDmy)(_fromMls), to);
-        }
-      }
-    };
-
-    this._hZoomYTD = () => {
-      const {
-        chart
-      } = this._getChart();
-
-      if (_isFn(chart.zhZoomX)) {
-        const {
-          to
-        } = _getFromToDates(chart),
-              _fromMls = (0, _DateUtils.getYTDfromDmy)(to),
-              _toMls = (0, _DateUtils.dmyToUTC)(to);
-
-        if (chart.zhZoomX({
-          from: _fromMls,
-          to: _toMls
-        })) {
-          this._dates.setFromTo((0, _DateUtils.mlsToDmy)(_fromMls), to);
-        }
-      }
-    };
-
-    this._refDates = c => this._dates = c;
-
-    this._hZoom1M = this._hZoomBy.bind(null, -1);
-    this._hZoom3M = this._hZoomBy.bind(null, -3);
-    this._hZoom6M = this._hZoomBy.bind(null, -6);
-    this._hZoom1Y = this._hZoomBy.bind(null, -12);
-    this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Flat, {
-      caption: "Zoom",
-      isPrimary: true,
-      onClick: this._hZoom
-    }, "zoom")];
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
+      chart.zhZoomX({
+        from: (0, _DateUtils.dmyToUTC)(fromDate),
+        to: (0, _DateUtils.dmyToUTC)(toDate)
+      });
     }
 
-    return true;
-  }
+    onClose();
+  }, []) // getChart, refDates
+  ,
+        _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Flat, {
+    caption: "Zoom",
+    isPrimary: true,
+    onClick: _hZoom
+  }, "zoom")], []); // _hZoom
 
-  render() {
+
+  return [_hZoom, _commandButtons];
+};
+/*eslint-enable react-hooks/exhaustive-deps */
+
+/*eslint-disable react-hooks/exhaustive-deps */
+
+
+const _useZoomBy = (getChart, refDates, month) => (0, _uiApi.useCallback)(() => {
+  const [chart] = getChart();
+
+  if (_isFn(chart.zhZoomX)) {
     const {
-      isShow,
-      data,
-      onClose
-    } = this.props,
-          {
-      chart = {}
-    } = data,
-          {
-      from,
       to
     } = _getFromToDates(chart),
-          _minYear = _getMinYear(from),
-          _onTestDate = str => (0, _DateUtils.isDmy)(str, _minYear),
-          _errMsgDateFrom = _crErrMsg(_minYear),
-          id = chart.zhGetId == null ? void 0 : chart.zhGetId(),
-          _isDaily = chart.zhIsDaily == null ? void 0 : chart.zhIsDaily();
+          _fromMls = month ? (0, _DateUtils.addToDmy)(to, month).getTime() : (0, _DateUtils.getYTDfromDmy)(to),
+          _toMls = (0, _DateUtils.dmyToUTC)(to);
 
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
-      caption: "Zoom Chart",
-      style: S_DIALOG,
-      isShow: isShow,
-      commandButtons: this._commandButtons,
-      onClose: onClose,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.DatesFragment, {
-        ref: this._refDates,
-        dateStyle: S_DATE,
-        placeholder: "DD-MM-YYYY",
-        initFromDate: from,
-        initToDate: to,
-        errMsg: _errMsgDateFrom,
-        isPeriodValid: _DateUtils.isDmyPeriod,
-        onTestDate: _onTestDate,
-        onEnter: this._hZoom
-      }, id), _isDaily && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ZoomDailyRow.default, {
-        onZoom1M: this._hZoom1M,
-        onZoom3M: this._hZoom3M,
-        onZoom6M: this._hZoom6M,
-        onZoomYTD: this._hZoomYTD,
-        onZoom1Y: this._hZoom1Y
-      })]
-    });
+    if (chart.zhZoomX({
+      from: _fromMls,
+      to: _toMls
+    })) {
+      (0, _uiApi.getRefValue)(refDates).setFromTo((0, _DateUtils.mlsToDmy)(_fromMls), to);
+    }
   }
+}, []); //getChart, refDates, month
 
-}
+/*eslint-enable react-hooks/exhaustive-deps */
 
-ZoomDialog.defaultProps = {
-  data: {}
-};
+
+const ZoomDialog = (0, _memoIsShow.default)(_ref => {
+  let {
+    isShow,
+    data = DF_DATA,
+    onClose
+  } = _ref;
+
+  const _refDates = (0, _uiApi.useRef)(),
+        _getChart = (0, _useEventCallback.default)(() => {
+    const {
+      chart = {}
+    } = data;
+    return [chart, onClose];
+  }),
+        [_hZoom, _commandButtons] = _useZoom(_getChart, _refDates),
+        _hZoom1M = _useZoomBy(_getChart, _refDates, -1),
+        _hZoom3M = _useZoomBy(_getChart, _refDates, -3),
+        _hZoom6M = _useZoomBy(_getChart, _refDates, -6),
+        _hZoom1Y = _useZoomBy(_getChart, _refDates, -12),
+        _hZoomYTD = _useZoomBy(_getChart, _refDates),
+        {
+    chart = {}
+  } = data,
+        {
+    from,
+    to
+  } = _getFromToDates(chart),
+        [_onTestDate, _errMsgDateFrom] = _crOnTestDate(from),
+        id = chart.zhGetId == null ? void 0 : chart.zhGetId(),
+        _isDaily = chart.zhIsDaily == null ? void 0 : chart.zhIsDaily();
+
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
+    caption: "Zoom Chart",
+    style: S_DIALOG,
+    isShow: isShow,
+    commandButtons: _commandButtons,
+    onClose: onClose,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.DatesFragment, {
+      ref: _refDates,
+      dateStyle: S_DATE,
+      placeholder: "DD-MM-YYYY",
+      initFromDate: from,
+      initToDate: to,
+      errMsg: _errMsgDateFrom,
+      isPeriodValid: _DateUtils.isDmyPeriod,
+      onTestDate: _onTestDate,
+      onEnter: _hZoom
+    }, id), _isDaily && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ZoomDailyRow.default, {
+      onZoom1M: _hZoom1M,
+      onZoom3M: _hZoom3M,
+      onZoom6M: _hZoom6M,
+      onZoomYTD: _hZoomYTD,
+      onZoom1Y: _hZoom1Y
+    })]
+  });
+});
 var _default = ZoomDialog;
 exports.default = _default;
 //# sourceMappingURL=ZoomDialog.js.map
