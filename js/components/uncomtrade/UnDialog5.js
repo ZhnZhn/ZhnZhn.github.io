@@ -15,6 +15,8 @@ var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 
+var _useInputToggle = _interopRequireDefault(require("./useInputToggle"));
+
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
 var _ModalInputToggle = _interopRequireDefault(require("./ModalInputToggle"));
@@ -110,10 +112,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     onShow,
     onClose
   } = props,
-        [isShowToggle, toggleInputs] = (0, _useToggle.default)(false),
-        _hideToggle = (0, _uiApi.useCallback)(() => {
-    toggleInputs(false);
-  }, [toggleInputs]),
+        [isShowToggle, toggleInputs, hideToggle] = (0, _useInputToggle.default)(),
         [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
     onAbout,
     onClose,
@@ -188,7 +187,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalInputToggle.default, {
       isShow: isShowToggle,
       configs: [['Partner', isPartner, togglePartner], ['Heading', isHeading, toggleHeading], ['Trade Flow', isFlow, toggleFlow], ['Frequency', isFreq, toggleFreq]],
-      onClose: _hideToggle
+      onClose: hideToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,

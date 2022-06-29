@@ -8,6 +8,7 @@ import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import useProperty from '../hooks/useProperty';
 import useDialog from '../dialogs/hooks/useDialog';
+import useInputToggle from './useInputToggle';
 
 import D from '../dialogs/DialogCell';
 import ModalInputToggle from './ModalInputToggle';
@@ -53,11 +54,9 @@ const UnDialog5 = memoIsShow((
    } = props
    , [
      isShowToggle,
-     toggleInputs
-   ] = useToggle(false)
-   , _hideToggle = useCallback(() => {
-     toggleInputs(false)
-   }, [toggleInputs])
+     toggleInputs,
+     hideToggle
+   ] = useInputToggle()
    , [
      isToolbar,
      isShowLabels,
@@ -153,7 +152,7 @@ const UnDialog5 = memoIsShow((
           ['Trade Flow', isFlow, toggleFlow],
           ['Frequency', isFreq, toggleFreq]
         ]}
-        onClose={_hideToggle}
+        onClose={hideToggle}
       />
       <D.SelectWithLoad
          isShow={isShow}
