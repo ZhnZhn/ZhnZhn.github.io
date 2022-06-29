@@ -11,8 +11,6 @@ var _MonoColorFn = require("../../charts/MonoColorFn");
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _Tooltip = require("../../charts/Tooltip");
-
 var _fnAdapter = require("./fnAdapter");
 
 const NUMBER_STYLE = 'style="color:#333;"',
@@ -172,7 +170,6 @@ const toTreeMap = {
       itemSlice,
       time,
       dfTSlice,
-      seriaType,
       isCluster,
       items = []
     } = option,
@@ -187,7 +184,6 @@ const toTreeMap = {
       ...dfTSlice
     }),
           _d1 = _crData(values, categories, Tid, option),
-          _c = _d1.map(item => item.c),
           data = _addPercent(_d1),
           [index1, index2] = _findLevelIndex(data, 60, 90);
 
@@ -195,11 +191,7 @@ const toTreeMap = {
       _addColor(data, index1, index2);
     }
 
-    const _seria = (0, _ConfigBuilder.default)().treeMapSeria(_Tooltip.tooltipTreeMap, {
-      data
-    }).toSeria();
-
-    const config = (0, _ConfigBuilder.default)().treeMapConfig(_c, seriaType).addCaption(_title, _subtitle).addSeries(_seria).add((0, _fnAdapter.crChartOption)(ds, Tid, option)).toConfig();
+    const config = (0, _ConfigBuilder.default)().treeMapConfig(data).addCaption(_title, _subtitle).add((0, _fnAdapter.crChartOption)(ds, Tid, option)).toConfig();
     return config;
   },
   fCrConfig: function (param, config) {

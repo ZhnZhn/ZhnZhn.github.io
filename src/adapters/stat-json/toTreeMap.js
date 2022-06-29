@@ -8,7 +8,6 @@ import {
   getMonoColor
 } from '../../charts/MonoColorFn';
 import Builder from '../../charts/ConfigBuilder';
-import { tooltipTreeMap } from '../../charts/Tooltip';
 import {
   crTitle,
   crTid,
@@ -198,7 +197,6 @@ const toTreeMap = {
        itemSlice,
        time,
        dfTSlice,
-       seriaType,
        isCluster,
        items=[]
     } = option
@@ -209,7 +207,6 @@ const toTreeMap = {
     , _subtitle = `${items[1].caption || ''}: ${Tid}`
     , values = ds.Data({ Tid, ...itemSlice, ...dfTSlice })
     , _d1 = _crData(values, categories, Tid, option )
-    , _c = _d1.map(item => item.c)
     , data = _addPercent(_d1)
     , [index1, index2] = _findLevelIndex(data, 60, 90);
 
@@ -217,15 +214,11 @@ const toTreeMap = {
       _addColor(data, index1, index2)
     }
 
-    const _seria = Builder()
-       .treeMapSeria(tooltipTreeMap, { data })
-       .toSeria();
     const config = Builder()
-       .treeMapConfig(_c, seriaType)
-       .addCaption(_title, _subtitle)
-       .addSeries(_seria)
-       .add(crChartOption(ds, Tid, option))
-       .toConfig();
+      .treeMapConfig(data)
+      .addCaption(_title, _subtitle)
+      .add(crChartOption(ds, Tid, option))
+      .toConfig();
 
     return config;
   },

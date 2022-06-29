@@ -11,6 +11,9 @@ import {
   fTooltip
 } from './Chart';
 import {
+  tooltipTreeMap
+} from './Tooltip';
+import {
   setPlotLinesMinMax,
   setPlotLinesDeltas,
   calcMinY,
@@ -138,9 +141,12 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     this.config = _crConfig(option)
     return this.add('xAxis', { categories });
   },
-  treeMapConfig(){
+  treeMapConfig(data){
     this.config = crTreeMapConfig()
-    return this;
+    return this.addSeries(ConfigBuilder()
+      .treeMapSeria(tooltipTreeMap, { data })
+      .toSeria()
+    );
   },
 
   addTitle(text) {
@@ -297,7 +303,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
 
   toConfig(){
-    this._checkDataLength()  
+    this._checkDataLength()
     return this.config;
   }
 })

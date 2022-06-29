@@ -9,6 +9,8 @@ var _seriaFn = require("../math/seriaFn");
 
 var _Chart = require("./Chart");
 
+var _Tooltip = require("./Tooltip");
+
 var _ChartFn = require("./ChartFn");
 
 var _ChartConfigFn = require("./ChartConfigFn");
@@ -157,9 +159,11 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
     });
   },
 
-  treeMapConfig() {
+  treeMapConfig(data) {
     this.config = (0, _TreeMapConfigFn.crTreeMapConfig)();
-    return this;
+    return this.addSeries(ConfigBuilder().treeMapSeria(_Tooltip.tooltipTreeMap, {
+      data
+    }).toSeria());
   },
 
   addTitle(text) {
@@ -251,7 +255,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
           min = _findMinY(minY, _data),
           max = _findMaxY(maxY, _data);
 
-    return this._setMinMax(min, max, isNotZoomToMinMax)._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems)._setYAxisType(isLogarithmic);
+    return this._setMinMax(min, max, isNotZoomToMinMax)._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems)._setYAxisType(isLogarithmic, _data);
   },
 
   _setMinMaxDeltas(min, max, data, isDrawDeltaExtrems) {
@@ -286,8 +290,12 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, { ..._SeriaBuilder.de
     });
   },
 
-  _setYAxisType(isLogarithmic) {
+  _setYAxisType(isLogarithmic, data) {
     if (isLogarithmic) {
+      if (!(0, _ChartConfigFn.isLineType)(this.config) || (0, _seriaFn.hasZeroOrLessValue)(data)) {
+        return this;
+      }
+
       const {
         yAxis
       } = this.config;
