@@ -2,10 +2,16 @@
 
 import OpenClose from '../zhn/OpenClose';
 import MenuItems from './MenuItems';
+import MenuItem from './MenuItem';
+
+const _isArr = Array.isArray;
 
 const S_OC_STYLE = {
   paddingRight: 12,
   whiteSpace: 'nowrap'
+}
+, S_MENU_ITEM = {
+  paddingLeft: 4
 };
 
 const MenuTopic = ({
@@ -13,11 +19,11 @@ const MenuTopic = ({
   openColor,
   caption,
   isInitOpen,
-  items
+  items,
+  ...restMenuItemProps
 }) => {
-  const _isClose = isInitOpen === true
-    ? false : true;
-  return (
+  const _isClose = !(isInitOpen === true);
+  return _isArr(items) ? (
     <OpenClose
        role="menuitem"
        isClose={_isClose}
@@ -28,6 +34,11 @@ const MenuTopic = ({
     >
        <MenuItems items={items} />
     </OpenClose>
+  ) : (
+    <MenuItem
+      {...restMenuItemProps}
+      style={S_MENU_ITEM}
+    />
   );
 };
 
@@ -47,7 +58,15 @@ MenuPart.propTypes = {
        onBadgeClick: PropTypes.func,
        onBadgeClose: PropTypes.func
      })
-  )
+  ),
+
+  isOpen: PropTypes.bool,
+  title: PropTypes.string,
+  counter: PropTypes.number,
+  isNew: PropTypes.bool,
+  onClick: PropTypes.func,
+  onBadgeClick: PropTypes.func,
+  onBadgeClose: PropTypes.func
 }
 */
 

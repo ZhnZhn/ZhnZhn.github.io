@@ -1,10 +1,12 @@
 import {
   ComponentActions
 } from '../../actions/ComponentActions';
-import { 
+import {
   CHAT_SHOW,
   ChartActions
 } from '../../actions/ChartActions';
+
+const _isArr = Array.isArray;
 
 const _crItemHandlers = (
   dT,
@@ -50,13 +52,14 @@ const crMenu = (
      caption,
      isInitOpen,
      items
-   } = menuPart
-   , _items = _crItems(items, menuItems, browserType)
-   return {
-     caption,
-     isInitOpen,
-     items: _items
-   };
+   } = menuPart;
+   return _isArr(items)
+    ? {
+        caption,
+        isInitOpen,
+        items: _crItems(items, menuItems, browserType)
+      }
+   : _crItem(menuPart, menuItems, browserType);
 })
 
 export default crMenu

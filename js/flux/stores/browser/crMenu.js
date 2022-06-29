@@ -7,6 +7,8 @@ var _ComponentActions = require("../../actions/ComponentActions");
 
 var _ChartActions = require("../../actions/ChartActions");
 
+const _isArr = Array.isArray;
+
 const _crItemHandlers = (dT, bT) => ({
   onClick: _ComponentActions.ComponentActions.showDialog.bind(null, dT, bT),
   onBadgeClick: _ChartActions.ChartActions[_ChartActions.CHAT_SHOW].bind(null, dT, bT),
@@ -49,14 +51,12 @@ const crMenu = function (menu, menuItems, browserType) {
       caption,
       isInitOpen,
       items
-    } = menuPart,
-          _items = _crItems(items, menuItems, browserType);
-
-    return {
+    } = menuPart;
+    return _isArr(items) ? {
       caption,
       isInitOpen,
-      items: _items
-    };
+      items: _crItems(items, menuItems, browserType)
+    } : _crItem(menuPart, menuItems, browserType);
   });
 };
 
