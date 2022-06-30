@@ -30,4 +30,6 @@ const _crDescr = json => {
 export const toDescr = (
   json,
   option
-) => _crDescr(json) + _crWebsiteLink()
+) => option.period 
+  ? option.subtitle + _crWebsiteLink()
+  : _crDescr(json) + _crWebsiteLink()

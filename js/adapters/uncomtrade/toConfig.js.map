@@ -1,0 +1,14 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/uncomtrade/toConfig.js"
+ ],
+ "file": "../../../src/adapters/uncomtrade/toConfig.js",
+ "names": [
+  "toConfig",
+  "json",
+  "option",
+  "two"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,QAAQ,GAAG,CACfC,IADe,EAEfC,MAFe,KAGZ;AACH,MAAIA,MAAM,CAACC,GAAP,KAAe,KAAnB,EAA0B;AACxB,WAAO,wBAAUF,IAAV,EAAgBC,MAAhB,CAAP;AACD;;AACD,SAAO,6BAAeD,IAAf,EAAqBC,MAArB,CAAP;AACD,CARD;;eAUeF,Q"
+}

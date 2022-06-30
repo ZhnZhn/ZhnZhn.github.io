@@ -1,7 +1,5 @@
-import {
-  crChartId,
-  toConfig
-} from './fnAdapter';
+import { crChartId } from './fnAdapter';
+import toConfig from './toConfig';
 
 const UnComtradeAdapter = {
   crKey: crChartId,

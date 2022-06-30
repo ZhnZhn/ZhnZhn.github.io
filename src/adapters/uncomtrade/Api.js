@@ -2,6 +2,7 @@ import { crError } from '../crFn';
 
 const PERIOD = 5
 , ALL = 'all'
+, DF_AGG_PERIOD = '2021'
   //rg=2 Export
   //H4
   //fmt=JSON&head=M
@@ -46,14 +47,18 @@ const _isAllPeriod = (
 let _shortTimePeriod;
 const _crTimePeriod = (
   one,
-  tp
-) => _isAllPeriod(one, tp)
-  ? 'ALL,all'
-  : _shortTimePeriod
-     || (_shortTimePeriod = _crPeriod(
-           (new Date()).getUTCFullYear(),
-           PERIOD)
-        );
+  tp,
+  two,
+  period
+) => two === 'AG2'
+  ? period || DF_AGG_PERIOD
+  : _isAllPeriod(one, tp)
+     ? 'ALL,all'
+     : _shortTimePeriod
+        || (_shortTimePeriod = _crPeriod(
+              (new Date()).getUTCFullYear(),
+              PERIOD)
+           );
 
 const _checkReq = (option) => {
   if (option._isTs) {
@@ -69,11 +74,12 @@ const UnComtradeApi = {
       two,
       rg=2,
       tp,
-      freq
+      freq,
+      period
     } = option
     , _query = _crQuery(freq)
     , _tp = tp || DF_TRADE_PARTNER
-    , _ps = _crTimePeriod(one, _tp)
+    , _ps = _crTimePeriod(one, _tp, two, period)
     , _queryTail = _crQueryTail(one, _tp, rg, two)
     , _max = _crMax(one, _tp);
 
