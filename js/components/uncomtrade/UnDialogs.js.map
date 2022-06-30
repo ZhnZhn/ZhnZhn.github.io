@@ -1,1 +1,13 @@
-{"version":3,"sources":["../../../src/components/uncomtrade/UnDialogs.js"],"names":["Dialogs","UnDialog5"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,OAAO,GAAG;AACdC,EAAAA,SAAS,EAATA;AADc,CAAhB;eAIeD,O","sourcesContent":["import UnDialog5 from './UnDialog5';\r\n\r\nconst Dialogs = {\r\n  UnDialog5\r\n};\r\n\r\nexport default Dialogs\r\n"],"file":"UnDialogs.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/uncomtrade/UnDialogs.js"
+ ],
+ "file": "../../../src/components/uncomtrade/UnDialogs.js",
+ "names": [
+  "Dialogs",
+  "UnDialog5",
+  "UnDialogAgg"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,OAAO,GAAG;AACdC,EAAAA,SAAS,EAATA,iBADc;AAEdC,EAAAA,WAAW,EAAXA;AAFc,CAAhB;eAKeF,O"
+}

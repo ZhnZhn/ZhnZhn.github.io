@@ -18,7 +18,7 @@ const noopFn = () => {};
 const _r = {
   BigMac: fnBigMac,
 
-  DEFAULT: fnType3,
+  DF: fnType3,
   DialogType3: fnType3,
   DialogType4: fnType4,
   DialogType4A: fnType4,
@@ -32,13 +32,14 @@ const _r = {
   DialogQuery: fnSelectN,
   DialogStatN: fnStatN,
 
-  UnDialog5: fnUn5
+  UnDialog5: fnUn5,
+  UnDialogAgg: fnUn5
 };
 
 const RouterLoadFn = {
   getFn : (loadFnType, dialogType) => loadFnType
     ? _r[loadFnType] || noopFn
-    : dialogType && _r[dialogType] || _r.DEFAULT     
+    : dialogType && _r[dialogType] || _r.DF
 };
 
 export default RouterLoadFn

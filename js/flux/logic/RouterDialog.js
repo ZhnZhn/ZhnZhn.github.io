@@ -18,7 +18,7 @@ const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
 
 const _router = {
-  DEFAULT: _Dialogs.default.Type3,
+  DF: _Dialogs.default.Type3,
   DialogSelectN: _Dialogs.default.SelectN,
   DialogType3: _Dialogs.default.Type3,
 
@@ -79,6 +79,10 @@ const _router = {
 
   get UnDialog5() {
     return this.getUN().then(D => D.UnDialog5);
+  },
+
+  get UnDialogAgg() {
+    return this.getUN().then(D => D.UnDialogAgg);
   },
 
   _loadSM() {
@@ -204,11 +208,7 @@ const _router = {
 };
 const RouterDialog = {
   getDialog(type) {
-    if (type && typeof _router[type] !== undefined) {
-      return Promise.resolve(_router[type]);
-    } else {
-      return Promise.resolve(_router['DEFAULT']);
-    }
+    return Promise.resolve(type && _router[type] || _router.DF);
   },
 
   loadDialogs(browserType) {

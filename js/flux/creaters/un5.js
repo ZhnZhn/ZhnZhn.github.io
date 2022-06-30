@@ -32,7 +32,8 @@ const crLoadOptions = (props, options) => {
     three,
     tradeFlow,
     tradePartner,
-    freq
+    freq,
+    period
   } = options || {},
         _oneValue = (0, _createrFns.getV)(one),
         _two = (0, _createrFns.getV)(three) || (0, _createrFns.getV)(two),
@@ -48,7 +49,8 @@ const crLoadOptions = (props, options) => {
     two: _two,
     ...(0, _createrFns.getV)(tradeFlow),
     tp: (0, _createrFns.getV)(tradePartner),
-    freq: (0, _createrFns.getV)(freq)
+    freq: (0, _createrFns.getV)(freq),
+    period: (0, _createrFns.getV)(period)
   };
 };
 
