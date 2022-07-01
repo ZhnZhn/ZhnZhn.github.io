@@ -15,7 +15,9 @@ const {
 
 const {
   crStyle,
-  useTheme, useToggle, useFnFocus
+  useTheme,
+  useToggle,
+  useFnFocus
 } = use;
 
 const TH_ID = 'ELEMENT';
@@ -54,8 +56,9 @@ S_CAPTION = {
   top: 4
 };
 
-
-const ItemTime = ({ itemTime }) => itemTime
+const ItemTime = ({
+  itemTime
+}) => itemTime
   ? <span className={CL_ITEM_TIME}>{itemTime}</span>
   : null;
 
@@ -65,7 +68,10 @@ const MenuMore = ({
   sliderStyle,
   onToggle
 }) => {
-  const [refBtSvg, toggleFocus] = useFnFocus(onToggle);
+  const [
+    refBtSvg,
+    toggleFocus
+  ] = useFnFocus(onToggle);
 
   if (!moreModel) return null;
   return (<>
@@ -88,13 +94,25 @@ const MenuMore = ({
 
 const Header = ({
   isOpen,
-  onCheck, onUnCheck,
-  itemCaption, itemTime, onToggle,
-  valueMoving, isAdminMode, crValueMoving, refVm,
+  onCheck,
+  onUnCheck,
+
+  itemCaption,
+  itemTime,
+  onToggle,
+
+  valueMoving,
+  isAdminMode,
+  crValueMoving,
+  refVm,
+
   moreModel,
   onClose
 }) => {
-  const [isMore, _toggleMore] = useToggle(false)
+  const [
+    isMore,
+    _toggleMore
+  ] = useToggle(false)
   , TS = useTheme(TH_ID)
   , _captionStyle = crStyle([
      S_CAPTION,
@@ -136,7 +154,7 @@ const Header = ({
               crValueMoving={crValueMoving}
             />
           : <ItemTime
-              itemType={itemTime}
+              itemTime={itemTime}
             />
       }
       <SvgClose

@@ -69,19 +69,23 @@ const CL_ITEM_HEADER = 'item-header',
   top: 4
 };
 
-const ItemTime = ({
-  itemTime
-}) => itemTime ? /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-  className: CL_ITEM_TIME,
-  children: itemTime
-}) : null;
+const ItemTime = _ref => {
+  let {
+    itemTime
+  } = _ref;
+  return itemTime ? /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    className: CL_ITEM_TIME,
+    children: itemTime
+  }) : null;
+};
 
-const MenuMore = ({
-  isMore,
-  moreModel,
-  sliderStyle,
-  onToggle
-}) => {
+const MenuMore = _ref2 => {
+  let {
+    isMore,
+    moreModel,
+    sliderStyle,
+    onToggle
+  } = _ref2;
   const [refBtSvg, toggleFocus] = useFnFocus(onToggle);
   if (!moreModel) return null;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
@@ -101,20 +105,22 @@ const MenuMore = ({
   });
 };
 
-const Header = ({
-  isOpen,
-  onCheck,
-  onUnCheck,
-  itemCaption,
-  itemTime,
-  onToggle,
-  valueMoving,
-  isAdminMode,
-  crValueMoving,
-  refVm,
-  moreModel,
-  onClose
-}) => {
+const Header = _ref3 => {
+  let {
+    isOpen,
+    onCheck,
+    onUnCheck,
+    itemCaption,
+    itemTime,
+    onToggle,
+    valueMoving,
+    isAdminMode,
+    crValueMoving,
+    refVm,
+    moreModel,
+    onClose
+  } = _ref3;
+
   const [isMore, _toggleMore] = useToggle(false),
         TS = useTheme(TH_ID),
         _captionStyle = crStyle([S_CAPTION, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH]),
@@ -146,7 +152,7 @@ const Header = ({
       initialVm: valueMoving,
       crValueMoving: crValueMoving
     }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemTime, {
-      itemType: itemTime
+      itemTime: itemTime
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgClose, {
       style: S_CLOSE,
       onClose: onClose
