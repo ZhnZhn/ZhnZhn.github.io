@@ -1,5 +1,6 @@
 import DOMPurify from 'dompurify';
 import Builder from '../../charts/ConfigBuilder';
+import { addColorsTo } from '../TreeMapFn';
 
 import {
   numberFormat,
@@ -20,6 +21,8 @@ const NUMBER_STYLE = 'style="color:#333;"'
   percent
 ) => `${label} <br/>
     <span ${NUMBER_STYLE}>${numberFormat(value)} (${percent}%)</span>`;
+
+const _compareByValue = (a, b) => b.value - a.value;
 
 const _crTreeMapData = json => {
   const data = [];
@@ -52,6 +55,8 @@ const _crTreeMapData = json => {
     )
     item._d = void 0
   })
+  data.sort(_compareByValue)
+  addColorsTo(data)
   return data;
 }
 

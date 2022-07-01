@@ -7,9 +7,9 @@ exports.default = void 0;
 
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
-var _MonoColorFn = require("../../charts/MonoColorFn");
-
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
+
+var _TreeMapFn = require("../TreeMapFn");
 
 var _fnAdapter = require("./fnAdapter");
 
@@ -43,53 +43,20 @@ const _fIsPoint = (dfT, hm, depth) => p => {
     return false;
   }
 
-  if (hm[p.label].d !== depth) {
+  if (p.label.split(' ')[0].length !== 2) {
     return false;
   }
+  /*
+  if ( hm[p.label].d !== depth) {
+    return false;
+  }
+  */
+
 
   return p.y !== null && p.y !== 0;
 };
 
-const _findLevelBy = (data, from, sum, stopSum) => {
-  const _maxIndex = data.length;
-
-  if (from >= _maxIndex) {
-    return {
-      index: _maxIndex,
-      sum
-    };
-  }
-
-  let index = _maxIndex,
-      i = from;
-
-  for (; i < _maxIndex; i++) {
-    sum += data[i].value;
-
-    if (sum >= stopSum) {
-      index = i;
-      break;
-    }
-  }
-
-  if (index < _maxIndex) {
-    index += 1;
-  }
-
-  return [index, sum];
-};
-
-const _findLevelIndex = (data, level1, level2) => {
-  const _t = data.reduce((acc, p) => acc + p.value, 0),
-        _v1 = _t / 100 * level1,
-        _v2 = _t / 100 * level2,
-        [index1, sum1] = _findLevelBy(data, 0, 0, _v1),
-        [index2] = _findLevelBy(data, index1, sum1, _v2);
-
-  return [index1, index2];
-};
-
-const _compareByValue = (a, b) => a.value - b.value;
+const _compareByValue = (a, b) => b.value - a.value;
 
 const _crCategory = (option, by, depth) => {
   const {
@@ -128,27 +95,6 @@ const _addPercent = data => {
   }));
 };
 
-const _addColor = (data, level60, level90) => {
-  const period = _MonoColorFn.COLOR_PERIOD,
-        base1 = _MonoColorFn.COLOR_BASE1,
-        base2 = _MonoColorFn.COLOR_BASE2;
-
-  const _level90 = level90 - level60;
-
-  let deltaColor;
-  data.forEach((point, pointIndex) => {
-    if (pointIndex < level60) {
-      deltaColor = pointIndex * (period / level60);
-      point.color = (0, _MonoColorFn.crMonoColor)(base1, deltaColor);
-    } else if (pointIndex < level60 + _level90) {
-      deltaColor = (pointIndex - level60) * (period / _level90);
-      point.color = (0, _MonoColorFn.crMonoColor)(base2, deltaColor);
-    } else {
-      point.color = (0, _MonoColorFn.getMonoColor)(pointIndex - level60 - _level90);
-    }
-  });
-};
-
 const _crData = (values, categories, Tid, option) => {
   const {
     selectOptions,
@@ -160,7 +106,7 @@ const _crData = (values, categories, Tid, option) => {
     return [];
   }
 
-  return values.map(_fCrTreeMapPoint(categories, Tid)).filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth)).sort(_compareByValue).reverse();
+  return values.map(_fCrTreeMapPoint(categories, Tid)).filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth)).sort(_compareByValue);
 };
 
 const toTreeMap = {
@@ -184,11 +130,10 @@ const toTreeMap = {
       ...dfTSlice
     }),
           _d1 = _crData(values, categories, Tid, option),
-          data = _addPercent(_d1),
-          [index1, index2] = _findLevelIndex(data, 60, 90);
+          data = _addPercent(_d1);
 
     if (isCluster) {
-      _addColor(data, index1, index2);
+      (0, _TreeMapFn.addColorsTo)(data);
     }
 
     const config = (0, _ConfigBuilder.default)().treeMapConfig(data).addCaption(_title, _subtitle).add((0, _fnAdapter.crChartOption)(ds, Tid, option)).toConfig();

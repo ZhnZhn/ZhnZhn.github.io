@@ -1,13 +1,9 @@
 import JSONstat from 'jsonstat';
+import Builder from '../../charts/ConfigBuilder';
 
 import {
-  COLOR_PERIOD,
-  COLOR_BASE1,
-  COLOR_BASE2,
-  crMonoColor,
-  getMonoColor
-} from '../../charts/MonoColorFn';
-import Builder from '../../charts/ConfigBuilder';
+  addColorsTo
+} from '../TreeMapFn';
 import {
   crTitle,
   crTid,
@@ -51,57 +47,18 @@ const _fIsPoint = (
    if (dfT && p.label === dfT) {
      return false;
    }
+   if (p.label.split(' ')[0].length !== 2) {
+     return false;
+   }
+   /*
    if ( hm[p.label].d !== depth) {
      return false;
    }
+   */
    return p.y !== null && p.y !== 0;
 };
 
-
-const _findLevelBy = (
-  data,
-  from,
-  sum,
-  stopSum
-) => {
-  const _maxIndex = data.length;
-  if ( from >= _maxIndex ){
-    return { index: _maxIndex, sum };
-  }
-
-  let index = _maxIndex, i = from;
-  for(;i<_maxIndex;i++){
-    sum +=data[i].value
-    if (sum>=stopSum) {
-      index = i;
-      break;
-    }
-  }
-
-  if (index < _maxIndex ){
-    index += 1
-  }
-  return [index, sum];
-};
-
-const _findLevelIndex = (
-  data,
-  level1,
-  level2
-) => {
-  const _t = data.reduce((acc, p) => acc + p.value, 0)
-  , _v1 = (_t/100)*level1
-  , _v2 = (_t/100)*level2
-  , [index1, sum1] = _findLevelBy(data, 0, 0, _v1)
-  , [index2] = _findLevelBy(data, index1, sum1, _v2);
-
-  return [
-    index1,
-    index2
-  ];
-};
-
-const _compareByValue = (a, b) => a.value - b.value;
+const _compareByValue = (a, b) => b.value - a.value;
 
 const _crCategory = (
   option,
@@ -145,30 +102,6 @@ const _addPercent = (
   }));
 };
 
-const _addColor = (
-  data,
-  level60,
-  level90
-) => {
-  const period = COLOR_PERIOD
-  , base1 = COLOR_BASE1
-  , base2 = COLOR_BASE2;
-
-  const _level90 = level90 - level60;
-  let deltaColor;
-  data.forEach((point, pointIndex) => {
-     if (pointIndex < level60){
-       deltaColor = pointIndex * ( period / level60 );
-       point.color = crMonoColor(base1, deltaColor);
-     } else if ( pointIndex < level60+_level90 ) {
-       deltaColor = (pointIndex-level60) * ( period / _level90 );
-       point.color = crMonoColor(base2, deltaColor);
-     } else {
-       point.color = getMonoColor(pointIndex-level60-_level90)
-     }
-   })
-};
-
 const _crData = (
   values,
   categories,
@@ -186,8 +119,7 @@ const _crData = (
   return values
     .map(_fCrTreeMapPoint(categories, Tid))
     .filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth))
-    .sort(_compareByValue)
-    .reverse();
+    .sort(_compareByValue);
 };
 
 const toTreeMap = {
@@ -208,10 +140,9 @@ const toTreeMap = {
     , values = ds.Data({ Tid, ...itemSlice, ...dfTSlice })
     , _d1 = _crData(values, categories, Tid, option )
     , data = _addPercent(_d1)
-    , [index1, index2] = _findLevelIndex(data, 60, 90);
 
     if (isCluster) {
-      _addColor(data, index1, index2)
+      addColorsTo(data)
     }
 
     const config = Builder()
