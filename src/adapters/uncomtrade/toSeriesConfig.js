@@ -135,7 +135,7 @@ const _addSeriasTo = (
     _addSeriesFromHmTo({ config, hm, fromIndex: 0 });
   }
 
-  const legend = config.zhConfig.legend;
+  const { legend } = config.zhConfig;
   config.zhConfig.legend = (one === ALL)
      ? toAllLegend(legend, hm, measure)
      : toWorldLegend(legend, hm)
@@ -144,7 +144,7 @@ const _addSeriasTo = (
   _assign(config.xAxis, { categories })
 }
 
-const _crBaseConfig = (
+const _crSeriesConfig = (
   json,
   option
 ) =>  {
@@ -160,7 +160,7 @@ const _crBaseConfig = (
    .addTooltip(tooltipCategorySimple)
    .add({
      info: crInfo(json, option),
-     zhConfig: crZhConfig(option)
+     zhConfig: crZhConfig(option, {isLegend: true})
    })
    .toConfig();
 }
@@ -191,7 +191,7 @@ const toSeriesConfig = (
   json,
   option
 ) => {
-  const config = _crBaseConfig(json, option);
+  const config = _crSeriesConfig(json, option);
   _addSeriasTo(config, json, option)
   if ((config.series || []).length === 1) {
     _transformToDatetime(config)

@@ -29,14 +29,21 @@ export const crInfo = (
 });
 
 export const crZhConfig = (
-  option
+  option,
+  { isLegend } = {}
 ) => {
-  const { dataSource } = option
+  const {
+    oneC,
+    period,
+    dataSource
+  } = option
   , _id = crChartId(option);
   return {
     id: _id,
     key: _id,
-    legend: [],
+    itemCaption: oneC,
+    itemTime: period,
+    legend: isLegend ? [] : void 0,
     isWithoutIndicator: true,
     dataSource
   };

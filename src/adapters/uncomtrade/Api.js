@@ -53,7 +53,7 @@ const _crTimePeriod = (
 ) => two === 'AG2'
   ? period || DF_AGG_PERIOD
   : _isAllPeriod(one, tp)
-     ? 'ALL,all'
+     ? 'ALL,all,All'
      : _shortTimePeriod
         || (_shortTimePeriod = _crPeriod(
               (new Date()).getUTCFullYear(),

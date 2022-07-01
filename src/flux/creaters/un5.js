@@ -6,15 +6,22 @@ import {
 
 const MAX_SUBTITLE = 60;
 
+const _crDirection = (
+  tradeFlowCaption
+) => tradeFlowCaption.indexOf('Export') !== -1
+  ? 'to'
+  : 'frome';
+
 const _crTitle = (
   one,
   tradeFlow,
   tradePartner
 ) => {
-  const _title = getC(one) + ': ' + getC(tradeFlow)
+  const _tradeFlowCaption = getC(tradeFlow)
+  , _title = getC(one) + ': ' + _tradeFlowCaption
   , _tradePartnerCapion = getC(tradePartner);
   return _tradePartnerCapion
-   ? `${_title} to ${_tradePartnerCapion}`
+   ? `${_title} ${_crDirection(_tradeFlowCaption)} ${_tradePartnerCapion}`
    : _title;
 };
 
@@ -55,6 +62,7 @@ const crLoadOptions = (
     value: _value,
     title: _crTitle(one, tradeFlow, tradePartner),
     subtitle: _crSubtitle(three),
+    oneC: getC(one),
     one: _oneValue,
     two: _two,
     ...getV(tradeFlow),
