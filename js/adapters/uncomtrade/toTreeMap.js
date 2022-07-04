@@ -5,15 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _dompurify = _interopRequireDefault(require("dompurify"));
+var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
 var _TreeMapFn = require("../TreeMapFn");
 
 var _fnAdapter = require("./fnAdapter");
-
-const _sanitize = _dompurify.default.sanitize;
 
 const _isNumber = n => typeof n === 'number' && n - n === 0;
 
@@ -31,9 +29,9 @@ const _crTreeMapData = json => {
       _total += value;
       data.push({
         value,
-        label: (cmdCode || '').length === 2 ? cmdCode : _sanitize(cmdCode),
-        _d: _sanitize(item.cmdDescE),
-        title: _isNumber(period) ? '' + period : _sanitize(period)
+        label: (cmdCode || '').length === 2 ? cmdCode : (0, _domSanitize.default)(cmdCode),
+        _d: (0, _domSanitize.default)(item.cmdDescE),
+        title: _isNumber(period) ? '' + period : (0, _domSanitize.default)(period)
       });
     }
   });

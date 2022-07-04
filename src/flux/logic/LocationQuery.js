@@ -1,10 +1,10 @@
-import DOMPurify from 'dompurify';
+import domSanitize from '../../utils/domSanitize'
 import { getToDate } from '../../utils/DateUtils';
 
 const _toOptions = params => {
   const _options = Object.create(null);
   params.forEach((value, key) => {
-    _options[key] = DOMPurify.sanitize(value)
+    _options[key] = domSanitize(value)
   })
   return _options;
 };

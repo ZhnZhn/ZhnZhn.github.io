@@ -5,15 +5,15 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _dompurify = _interopRequireDefault(require("dompurify"));
+var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
 
-var _DateUtils = _interopRequireDefault(require("../../utils/DateUtils"));
+var _DateUtils = require("../../utils/DateUtils");
 
 const _toOptions = params => {
   const _options = Object.create(null);
 
   params.forEach((value, key) => {
-    _options[key] = _dompurify.default.sanitize(value);
+    _options[key] = (0, _domSanitize.default)(value);
   });
   return _options;
 };
@@ -37,7 +37,7 @@ const crOptions = params => {
     chartType: cT,
     columnName: cN,
     fromDate: fD,
-    toDate: tD || _DateUtils.default.getToDate()
+    toDate: tD || (0, _DateUtils.getToDate)()
   };
 };
 

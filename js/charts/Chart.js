@@ -7,7 +7,7 @@ exports.setDefaultTitle = exports.fYAxisOpposite = exports.fXAxisOpposite = expo
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
-var _dompurify = _interopRequireDefault(require("dompurify"));
+var _domSanitize = _interopRequireDefault(require("../utils/domSanitize"));
 
 var _Color = require("../constants/Color");
 
@@ -58,14 +58,14 @@ const FONT_STYLE = {
 
 const _sanitizeOptionText = option => {
   if (option && typeof option === 'object') {
-    option.text = _dompurify.default.sanitize(option.text || '');
+    option.text = (0, _domSanitize.default)(option.text);
   }
 
   return option;
 };
 
 const _crTitle = title => _isStr(title) ? {
-  text: _dompurify.default.sanitize(title)
+  text: (0, _domSanitize.default)(title)
 } : _sanitizeOptionText(title),
       _crCrosshair = function (is) {
   if (is === void 0) {

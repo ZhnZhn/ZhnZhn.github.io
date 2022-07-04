@@ -1,12 +1,12 @@
 import { memo } from 'react';
-import DOMPurify from 'dompurify';
+import domSanitize from '../../utils/domSanitize';
 
 const DivHtml = memo(({
   str,
   className,
   style
 }) => {
-  const __html = DOMPurify.sanitize(str);
+  const __html = domSanitize(str);
   return __html ? (
     <div
       className={className}
@@ -15,6 +15,6 @@ const DivHtml = memo(({
     />
   ) : null;
 })
-DivHtml.isHtml = str => Boolean(DOMPurify.sanitize(str))
+DivHtml.isHtml = str => Boolean(domSanitize(str))
 
 export default DivHtml

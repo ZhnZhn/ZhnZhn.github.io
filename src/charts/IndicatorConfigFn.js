@@ -1,4 +1,4 @@
-import DOMPurify from 'dompurify';
+import domSanitize from '../utils/domSanitize';
 
 import {
   tooltipValueDmy,
@@ -47,7 +47,7 @@ const _crHighLowData = data => {
 };
 
 const _crTitle = (text) => ({
-  text: DOMPurify.sanitize(text || ''),
+  text: domSanitize(text),
   style: {
     color: COLOR_METRIC_TITLE,
     fontSize: '16px',

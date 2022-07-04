@@ -1,5 +1,5 @@
 import Highcharts from 'highcharts';
-import DOMPurify from 'dompurify';
+import domSanitize from '../utils/domSanitize';
 
 import {
   COLOR_CHART_TITLE,
@@ -55,13 +55,13 @@ const FONT_STYLE = {
 
 const _sanitizeOptionText = option => {
   if (option && typeof option === 'object') {
-    option.text = DOMPurify.sanitize(option.text || '')
+    option.text = domSanitize(option.text)
   }
   return option;
 };
 
 const  _crTitle = title => _isStr(title)
-  ? { text: DOMPurify.sanitize(title) }
+  ? { text: domSanitize(title) }
   : _sanitizeOptionText(title)
 , _crCrosshair = (is=true) => is ? {
     color: COLOR_CROSSHAIR,

@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
+var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
+
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
 var _TreeMapFn = require("../TreeMapFn");
@@ -16,13 +18,12 @@ var _fnAdapter = require("./fnAdapter");
 const _isArr = Array.isArray;
 
 const _fCrTreeMapPoint = (c, title) => (v, i) => {
-  const label = c.Category(i).label,
-        {
+  const {
     value
   } = v;
   return {
+    label: (0, _domSanitize.default)(c.Category(i).label),
     value,
-    label,
     title
   };
 };

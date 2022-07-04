@@ -1,4 +1,4 @@
-import DOMPurify from 'dompurify';
+import domSanitize from '../../utils/domSanitize';
 import Builder from '../../charts/ConfigBuilder';
 import {
   addColorsTo,
@@ -10,8 +10,6 @@ import {
   crInfo,
   crZhConfig
 } from './fnAdapter';
-
-const _sanitize = DOMPurify.sanitize;
 
 const _isNumber = n => typeof n === 'number'
   && n-n === 0;
@@ -31,11 +29,11 @@ const _crTreeMapData = json => {
         value,
         label: (cmdCode || '').length === 2
           ? cmdCode
-          : _sanitize(cmdCode),
-        _d: _sanitize(item.cmdDescE),
+          : domSanitize(cmdCode),
+        _d: domSanitize(item.cmdDescE),
         title: _isNumber(period)
           ? ''+period
-          : _sanitize(period)
+          : domSanitize(period)
       })
     }
   })

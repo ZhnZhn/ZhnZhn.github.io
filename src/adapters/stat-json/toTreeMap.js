@@ -1,4 +1,5 @@
 import JSONstat from 'jsonstat';
+import domSanitize from '../../utils/domSanitize';
 import Builder from '../../charts/ConfigBuilder';
 
 import {
@@ -18,11 +19,10 @@ const _fCrTreeMapPoint = (
   c,
   title
 ) => (v, i) => {
-   const label = c.Category(i).label
-   , { value } = v;
+   const { value } = v;
    return {
+     label: domSanitize(c.Category(i).label),
      value,
-     label,
      title
    };
 };

@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.crMomAthConfig = exports.crMiniVolumeConfig = exports.crMiniHLConfig = exports.crMiniATHConfig = exports.crMfiConfig = void 0;
 
-var _dompurify = _interopRequireDefault(require("dompurify"));
+var _domSanitize = _interopRequireDefault(require("../utils/domSanitize"));
 
 var _Tooltip = require("./Tooltip");
 
@@ -49,7 +49,7 @@ const _crHighLowData = data => {
 };
 
 const _crTitle = text => ({
-  text: _dompurify.default.sanitize(text || ''),
+  text: (0, _domSanitize.default)(text),
   style: {
     color: _Color.COLOR_METRIC_TITLE,
     fontSize: '16px',
