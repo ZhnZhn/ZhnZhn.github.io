@@ -37,12 +37,13 @@ const _findLevelBy = (
 
 const _findLevelIndex = (
   data,
+  total,
   level1,
   level2
 ) => {
-  const _t = data.reduce((acc, p) => acc + p.value, 0)
-  , _v1 = (_t/100)*level1
-  , _v2 = (_t/100)*level2
+  const _onePercent = total/100
+  , _v1 = _onePercent * level1
+  , _v2 = _onePercent * level2
   , [index1, sum1] = _findLevelBy(data, 0, 0, _v1)
   , [index2] = _findLevelBy(data, index1, sum1, _v2);
 
@@ -76,6 +77,7 @@ const _addColor = (
 
 export const addColorsTo = (
   data,
+  total,
   level1=60,
   level2=90
 ) => {
@@ -84,6 +86,7 @@ export const addColorsTo = (
     levelIndex2
   ] = _findLevelIndex(
     data,
+    total,
     level1,
     level2
   );

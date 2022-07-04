@@ -50,7 +50,7 @@ const _crTreeMapData = json => {
     item._d = void 0
   })
   data.sort(_compareByValue)
-  addColorsTo(data)
+  addColorsTo(data, _total)
   return data;
 }
 

@@ -87,11 +87,11 @@ const _addPercent = data => {
   const _total = data.reduce((acc, item) => acc + item.value, 0),
         _onePercent = _total / 100;
 
-  return data.map(p => {
+  return [data.map(p => {
     p.percent = (0, _fnAdapter.roundBy)(p.value / _onePercent);
     p.name = (0, _TreeMapFn.crPointName)(p.label, p.value, p.percent);
     return p;
-  });
+  }), _total];
 };
 
 const _crData = (values, categories, Tid, option) => {
@@ -129,10 +129,10 @@ const toTreeMap = {
       ...dfTSlice
     }),
           _d1 = _crData(values, categories, Tid, option),
-          data = _addPercent(_d1);
+          [data, total] = _addPercent(_d1);
 
     if (isCluster) {
-      (0, _TreeMapFn.addColorsTo)(data);
+      (0, _TreeMapFn.addColorsTo)(data, total);
     }
 
     const config = (0, _ConfigBuilder.default)().treeMapConfig(data).addCaption(_title, _subtitle).add((0, _fnAdapter.crChartOption)(ds, Tid, option)).toConfig();

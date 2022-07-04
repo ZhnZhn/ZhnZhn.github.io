@@ -46,7 +46,7 @@ const _crTreeMapData = json => {
     item._d = void 0;
   });
   data.sort(_compareByValue);
-  (0, _TreeMapFn.addColorsTo)(data);
+  (0, _TreeMapFn.addColorsTo)(data, _total);
   return data;
 };
 

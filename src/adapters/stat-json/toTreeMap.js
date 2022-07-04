@@ -92,11 +92,14 @@ const _addPercent = (
   const _total = data
     .reduce((acc, item) => acc + item.value, 0)
   , _onePercent = _total/100;
-  return data.map(p => {
-    p.percent = roundBy(p.value/_onePercent);
-    p.name = crPointName(p.label, p.value, p.percent)
-    return p;
-  });  
+  return [
+    data.map(p => {
+      p.percent = roundBy(p.value/_onePercent);
+      p.name = crPointName(p.label, p.value, p.percent)
+      return p;
+    }),
+    _total
+  ];
 };
 
 const _crData = (
@@ -136,10 +139,10 @@ const toTreeMap = {
     , _subtitle = `${items[1].caption || ''}: ${Tid}`
     , values = ds.Data({ Tid, ...itemSlice, ...dfTSlice })
     , _d1 = _crData(values, categories, Tid, option )
-    , data = _addPercent(_d1)
+    , [data, total] = _addPercent(_d1)
 
     if (isCluster) {
-      addColorsTo(data)
+      addColorsTo(data, total)
     }
 
     const config = Builder()
