@@ -2,20 +2,17 @@ import JSONstat from 'jsonstat';
 import Builder from '../../charts/ConfigBuilder';
 
 import {
-  addColorsTo
+  addColorsTo,
+  crPointName
 } from '../TreeMapFn';
 import {
   crTitle,
   crTid,
   crChartOption,
-  numberFormat,
   roundBy
 } from './fnAdapter';
 
-const NUMBER_STYLE = 'style="color:#333;"'
-, _isArr = Array.isArray
-, _crPointName = (label, value) => `${label} <br/>
-  <span ${NUMBER_STYLE}>${numberFormat(value)}</span>`;
+const _isArr = Array.isArray;
 
 const _fCrTreeMapPoint = (
   c,
@@ -24,7 +21,6 @@ const _fCrTreeMapPoint = (
    const label = c.Category(i).label
    , { value } = v;
    return {
-     name: _crPointName(label, value),
      value,
      label,
      title
@@ -96,10 +92,11 @@ const _addPercent = (
   const _total = data
     .reduce((acc, item) => acc + item.value, 0)
   , _onePercent = _total/100;
-  return data.map(p => ({
-    ...p,
-    percent: roundBy(p.value/_onePercent)
-  }));
+  return data.map(p => {
+    p.percent = roundBy(p.value/_onePercent);
+    p.name = crPointName(p.label, p.value, p.percent)
+    return p;
+  });  
 };
 
 const _crData = (

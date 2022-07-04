@@ -1,9 +1,11 @@
 "use strict";
 
 exports.__esModule = true;
-exports.addColorsTo = void 0;
+exports.crPointName = exports.addColorsTo = void 0;
 
 var _MonoColorFn = require("../charts/MonoColorFn");
+
+var _AdapterFn = require("./AdapterFn");
 
 const _findLevelBy = (data, from, sum, stopSum) => {
   const _maxIndex = data.length;
@@ -75,4 +77,9 @@ const addColorsTo = function (data, level1, level2) {
 };
 
 exports.addColorsTo = addColorsTo;
+const NUMBER_STYLE = 'style="color:#333;"';
+
+const crPointName = (label, value, percent) => label + " <br/>\n<span " + NUMBER_STYLE + ">" + (0, _AdapterFn.numberFormat)(value) + " (" + percent + "%)</span>";
+
+exports.crPointName = crPointName;
 //# sourceMappingURL=TreeMapFn.js.map

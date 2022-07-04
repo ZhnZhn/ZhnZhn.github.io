@@ -1,6 +1,5 @@
 export {
-  isYNumber,
-  numberFormat,
+  isYNumber,  
   roundBy,
   toUpperCaseFirst
 } from '../AdapterFn';

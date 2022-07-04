@@ -1,13 +1,12 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdToUTC = exports.valueMoving = exports.roundBy = exports.numberFormat = exports.crZhConfig = exports.crInfo = exports.crChartId = void 0;
+exports.ymdToUTC = exports.valueMoving = exports.roundBy = exports.crZhConfig = exports.crInfo = exports.crChartId = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.valueMoving = _AdapterFn.valueMoving;
-exports.numberFormat = _AdapterFn.numberFormat;
 exports.roundBy = _AdapterFn.roundBy;
 
 var _fnDescr = require("./fnDescr");
@@ -33,8 +32,14 @@ const crInfo = (json, option) => ({
 
 exports.crInfo = crInfo;
 
-const crZhConfig = option => {
+const crZhConfig = function (option, _temp) {
+  let {
+    isLegend
+  } = _temp === void 0 ? {} : _temp;
+
   const {
+    oneC,
+    period,
     dataSource
   } = option,
         _id = crChartId(option);
@@ -42,7 +47,9 @@ const crZhConfig = option => {
   return {
     id: _id,
     key: _id,
-    legend: [],
+    itemCaption: oneC,
+    itemTime: period,
+    legend: isLegend ? [] : void 0,
     isWithoutIndicator: true,
     dataSource
   };

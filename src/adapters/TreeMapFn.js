@@ -5,6 +5,10 @@ import {
   crMonoColor
 } from '../charts/MonoColorFn';
 
+import {
+  numberFormat
+} from './AdapterFn';
+
 const _findLevelBy = (
   data,
   from,
@@ -85,3 +89,11 @@ export const addColorsTo = (
   );
   _addColor(data, leveIndex1, levelIndex2)
 }
+
+const NUMBER_STYLE = 'style="color:#333;"'
+export const crPointName = (
+  label,
+  value,
+  percent
+) => `${label} <br/>
+<span ${NUMBER_STYLE}>${numberFormat(value)} (${percent}%)</span>`;

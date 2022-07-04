@@ -3,12 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.toUpperCaseFirst = exports.roundBy = exports.numberFormat = exports.isYNumber = exports.crZhConfig = exports.crTitle = exports.crTid = exports.crInfo = exports.crError = exports.crDsValuesTimes = exports.crConfOption = exports.crChartOption = void 0;
+exports.toUpperCaseFirst = exports.roundBy = exports.isYNumber = exports.crZhConfig = exports.crTitle = exports.crTid = exports.crInfo = exports.crError = exports.crDsValuesTimes = exports.crConfOption = exports.crChartOption = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
 exports.isYNumber = _AdapterFn.isYNumber;
-exports.numberFormat = _AdapterFn.numberFormat;
 exports.roundBy = _AdapterFn.roundBy;
 exports.toUpperCaseFirst = _AdapterFn.toUpperCaseFirst;
 

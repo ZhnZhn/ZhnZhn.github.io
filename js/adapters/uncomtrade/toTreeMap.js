@@ -17,9 +17,6 @@ const _sanitize = _dompurify.default.sanitize;
 
 const _isNumber = n => typeof n === 'number' && n - n === 0;
 
-const NUMBER_STYLE = 'style="color:#333;"',
-      _crPointName = (label, value, percent) => label + " <br/>\n    <span " + NUMBER_STYLE + ">" + (0, _fnAdapter.numberFormat)(value) + " (" + percent + "%)</span>";
-
 const _compareByValue = (a, b) => b.value - a.value;
 
 const _crTreeMapData = json => {
@@ -45,7 +42,7 @@ const _crTreeMapData = json => {
 
   data.forEach(item => {
     item.percent = (0, _fnAdapter.roundBy)(item.value / _onePercent);
-    item.name = _crPointName(item.label + ' ' + item._d, item.value, item.percent);
+    item.name = (0, _TreeMapFn.crPointName)(item.label + ' ' + item._d, item.value, item.percent);
     item._d = void 0;
   });
   data.sort(_compareByValue);

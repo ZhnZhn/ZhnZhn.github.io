@@ -13,9 +13,7 @@ var _TreeMapFn = require("../TreeMapFn");
 
 var _fnAdapter = require("./fnAdapter");
 
-const NUMBER_STYLE = 'style="color:#333;"',
-      _isArr = Array.isArray,
-      _crPointName = (label, value) => label + " <br/>\n  <span " + NUMBER_STYLE + ">" + (0, _fnAdapter.numberFormat)(value) + "</span>";
+const _isArr = Array.isArray;
 
 const _fCrTreeMapPoint = (c, title) => (v, i) => {
   const label = c.Category(i).label,
@@ -23,7 +21,6 @@ const _fCrTreeMapPoint = (c, title) => (v, i) => {
     value
   } = v;
   return {
-    name: _crPointName(label, value),
     value,
     label,
     title
@@ -90,9 +87,11 @@ const _addPercent = data => {
   const _total = data.reduce((acc, item) => acc + item.value, 0),
         _onePercent = _total / 100;
 
-  return data.map(p => ({ ...p,
-    percent: (0, _fnAdapter.roundBy)(p.value / _onePercent)
-  }));
+  return data.map(p => {
+    p.percent = (0, _fnAdapter.roundBy)(p.value / _onePercent);
+    p.name = (0, _TreeMapFn.crPointName)(p.label, p.value, p.percent);
+    return p;
+  });
 };
 
 const _crData = (values, categories, Tid, option) => {

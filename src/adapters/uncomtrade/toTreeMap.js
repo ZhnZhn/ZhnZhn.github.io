@@ -1,9 +1,11 @@
 import DOMPurify from 'dompurify';
 import Builder from '../../charts/ConfigBuilder';
-import { addColorsTo } from '../TreeMapFn';
+import {
+  addColorsTo,
+  crPointName
+} from '../TreeMapFn';
 
 import {
-  numberFormat,
   roundBy,
   crInfo,
   crZhConfig
@@ -13,14 +15,6 @@ const _sanitize = DOMPurify.sanitize;
 
 const _isNumber = n => typeof n === 'number'
   && n-n === 0;
-
-const NUMBER_STYLE = 'style="color:#333;"'
-, _crPointName = (
-  label,
-  value,
-  percent
-) => `${label} <br/>
-    <span ${NUMBER_STYLE}>${numberFormat(value)} (${percent}%)</span>`;
 
 const _compareByValue = (a, b) => b.value - a.value;
 
@@ -48,7 +42,7 @@ const _crTreeMapData = json => {
   const _onePercent = _total/100;
   data.forEach(item => {
     item.percent = roundBy(item.value/_onePercent)
-    item.name = _crPointName(
+    item.name = crPointName(
       item.label + ' ' + item._d,
       item.value,
       item.percent

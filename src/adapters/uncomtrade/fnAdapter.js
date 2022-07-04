@@ -1,7 +1,6 @@
 export {
   ymdToUTC,
   valueMoving,
-  numberFormat,
   roundBy
 } from '../AdapterFn';
 
