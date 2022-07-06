@@ -2,6 +2,9 @@
 
 exports.__esModule = true;
 exports.S_SVG_CLOSE = exports.S_SHOW = exports.S_ROOT_DIV = exports.S_HIDE = exports.S_COMMAND_DIV = exports.S_CAPTION_DIV = exports.S_BT_LOAD = exports.S_BT = void 0;
+
+var _GeneralStyles = require("../styles/GeneralStyles");
+
 const S_SHOW = {
   display: 'block'
 };
@@ -27,10 +30,8 @@ const S_CAPTION_DIV = {
   fontWeight: 500
 };
 exports.S_CAPTION_DIV = S_CAPTION_DIV;
-const S_COMMAND_DIV = {
-  margin: '8px 4px 10px 0',
-  cursor: 'default',
-  float: 'right'
+const S_COMMAND_DIV = { ..._GeneralStyles.S_FLEX_ROW_END,
+  margin: '8px 4px 10px 0'
 };
 exports.S_COMMAND_DIV = S_COMMAND_DIV;
 const S_BT = {

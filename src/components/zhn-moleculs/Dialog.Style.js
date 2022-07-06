@@ -1,3 +1,7 @@
+import {
+  S_FLEX_ROW_END
+} from '../styles/GeneralStyles';
+
 export const S_SHOW = { display: 'block' }
 
 export const S_HIDE = { display: 'none' }
@@ -20,9 +24,8 @@ export const S_CAPTION_DIV = {
 }
 
 export const S_COMMAND_DIV = {
-  margin: '8px 4px 10px 0',
-  cursor: 'default',
-  float: 'right',
+  ...S_FLEX_ROW_END,
+  margin: '8px 4px 10px 0'
 }
 
 export const S_BT = { color: '#1b2836' }

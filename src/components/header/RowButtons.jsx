@@ -1,7 +1,10 @@
+import {
+  S_FLEX_ROW_END
+} from '../styles/GeneralStyles';
 import FlatButton from '../zhn-m/FlatButton';
 
 const S_ROW = {
-  float: 'right',
+  ...S_FLEX_ROW_END,
   marginTop: 8,
   marginBottom: 10
 };
