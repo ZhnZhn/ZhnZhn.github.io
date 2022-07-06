@@ -6,7 +6,9 @@ import {
   changesBetween,
   normalize
 } from '../../math/seriaFn';
-import IndicatorBuilder from '../../charts/IndicatorBuilder'
+import {
+  crMomAthConfig
+} from '../../charts/IndicatorBuilder'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 
@@ -16,8 +18,6 @@ import RowSma from './RowSma'
 import RowMfi from './RowMfi'
 
 import { S_MODAL_MENU } from './ModalMenu.Style'
-
-const { crMomAthConfig } = IndicatorBuilder;
 
 const C_GROW = '#90ed7d'
 , MOM_ATH = 'MOM_ATH'

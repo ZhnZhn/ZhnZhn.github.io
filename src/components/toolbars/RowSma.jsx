@@ -1,31 +1,33 @@
-import { useRef, useState } from 'react';
-import useRefInit from '../hooks/useRefInit'
+import {
+  useRef,
+  useState
+} from 'react';
+import useRefInit from '../hooks/useRefInit';
 
-import RowType2 from './RowType2'
-import IndicatorBuilder from '../../charts/IndicatorBuilder';
-
-const {
+import {
   addSmaTo,
   removeSeriaFrom
- } = IndicatorBuilder;
+} from '../../charts/IndicatorBuilder';
+
+import RowType2 from './RowType2';
 
 const _isArray = Array.isArray;
 
-const SMA = {
-  MONTH: '12',
-  YEAR: '50'
-};
+const SMA_MONTH = '12'
+, SMA_YEAR = '50';
+
 const _findInitSma = (config) => {
   const _d = (((config || {}).series || [])[0] || {}).data;
   return !_isArray(_d)
     ? '0'
     : _d.length > 150
-         ? SMA.YEAR : SMA.MONTH;
+         ? SMA_YEAR : SMA_MONTH;
 };
 
-const _isInArrObjWithId = (arrObj, id) => {
-  return !!arrObj.find(obj => obj.id === id);
-};
+const _isInArrObjWithId = (
+  arrObj,
+  id
+) => !!arrObj.find(obj => obj.id === id);
 
 const _crId = period => `SMA(${period})`;
 

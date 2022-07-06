@@ -1,9 +1,13 @@
-import { useRef, useState } from 'react'
+import {
+  useRef,
+  useState
+} from 'react';
 
-import RowType2 from './RowType2'
-import IndicatorBuilder from '../../charts/IndicatorBuilder';
+import {
+  crMfiConfig
+} from '../../charts/IndicatorBuilder';
+import RowType2 from './RowType2';
 
-const { crMfiConfig } = IndicatorBuilder;
 
 const _isInArrObjWithId = (arrObj, id) => {
   return !!arrObj.find(obj => obj.id === id);

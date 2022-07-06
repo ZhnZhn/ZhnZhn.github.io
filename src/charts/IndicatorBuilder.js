@@ -8,8 +8,8 @@ import {
   pby10
 } from '../math/tsIndicators';
 import {
-  crMfiConfig,
-  crMomAthConfig
+  crMfiConfig as _crMfiConfig,
+  crMomAthConfig as _crMomAthConfig
 } from './IndicatorConfigFn';
 import {
   crSeriaConfig
@@ -39,7 +39,10 @@ const _hideFirstSecondSeries = chart => {
   _series[1].hide()
 };
 
-const _fCategoryCalc = (calc, name) => (chart, rc) => {
+const _fCategoryCalc = (
+  calc,
+  name
+) => (chart, rc) => {
   const { d1, d2, sc } = _getD12(chart);
   if (d2.length !== 0) {
     const data = calc(d1, d2, {rc, sc});
@@ -54,72 +57,98 @@ const _fCategoryCalc = (calc, name) => (chart, rc) => {
   return false;
 };
 
-const _addToChartSeria = (chart, option) => {
+const _addToChartSeria = (
+  chart,
+  option
+) => {
   const seria = crSeriaConfig(option)
   , _seriaIns = chart.addSeries(seria, true, true);
   return (_seriaIns || {}).color;
 };
 
-const IndicatorBuilder = {
-  removeSeriaFrom: (chart, zhValueText) => {
-     const series = chart.series;
-     for (let i=0, max=series.length; i<max; i++){
-       if (series[i].userOptions.zhValueText === zhValueText){
-         series[i].remove(true);
-         return true;
-       }
-     }
-     return false;
-  },
 
-  addCategoryRateTo: _fCategoryCalc(categoryRate, 'Rate S1/S2'),
-  addCategoryDiffTo: _fCategoryCalc(categoryDiff, 'Diff S1-S2'),
-  addCategoryRocTo: _fCategoryCalc(categoryRoc, 'ROC S1 from S2'),
-  powerBy10: (chart, power) => {
-    const seria = chart.series[0]
-    , name = seria.getName()
-    , [dataP, by] = pby10(seria.data, power);
-
-    seria.update({
-      data: dataP,
-      name: `${name}*${by}`
-    }, true)
-  },
-
-  addSmaTo: (chart, option) => {
-    const { id, period } = option
-    , data = chart.series[0].data
-    , dataSma = sma(data, period);
-
-    if (dataSma.length>0){
-      return _addToChartSeria(chart, {
-        zhValueText: id,
-        lineWidth: 2,
-        data: dataSma,
-        name: `SMA(${period})`
-      });
-    } else {
-      console.log('It seems, there are not enough data for SMA(' + period + ')')
-      return void 0;
+export const removeSeriaFrom = (
+  chart,
+  zhValueText
+) => {
+   const series = chart.series;
+   for (const seria of series){
+    if (seria.userOptions.zhValueText === zhValueText){
+      seria.remove(true);
+      return true;
     }
-  },
+   }
+   return false;
+}
 
-  crMfiConfig: (chart, period, id) => {
-    const data = chart.options.zhPoints
-    , [ dataMfi, nNotFullPoint ] = mfi(data, period)
-    , titleNotFullPoint = (nNotFullPoint !== 0)
-        ? ' Not Full Data HL:' + nNotFullPoint
-        : '';
-    return crMfiConfig(
-       id, id + titleNotFullPoint, dataMfi
-    );
-  },
+export const addCategoryRateTo = _fCategoryCalc(
+  categoryRate,
+  'Rate S1/S2'
+)
+export const addCategoryDiffTo = _fCategoryCalc(
+  categoryDiff,
+  'Diff S1-S2'
+)
+export const addCategoryRocTo = _fCategoryCalc(
+  categoryRoc,
+  'ROC S1 from S2'
+)
 
-  crMomAthConfig: (chart) => {
-    const data = chart.options.zhPoints;
-    return crMomAthConfig(momAth(data));
+export const powerBy10 = (
+  chart,
+  power
+) => {
+  const seria = chart.series[0]
+  , name = seria.getName()
+  , [dataP, by] = pby10(seria.data, power);
+
+  seria.update({
+    data: dataP,
+    name: `${name}*${by}`
+  }, true)
+}
+
+export const addSmaTo = (
+  chart,
+  option
+) => {
+  const { id, period } = option
+  , data = chart.series[0].data
+  , dataSma = sma(data, period);
+
+  if (dataSma.length>0){
+    return _addToChartSeria(chart, {
+      zhValueText: id,
+      lineWidth: 2,
+      data: dataSma,
+      name: `SMA(${period})`
+    });
+  } else {
+    console.log('It seems, there are not enough data for SMA(' + period + ')')
+    return void 0;
   }
+}
 
-};
+export const crMfiConfig = (
+  chart,
+  period,
+  id
+) => {
+  const data = chart.options.zhPoints
+  , [dataMfi, nNotFullPoint] = mfi(data, period)
+  , titleNotFullPoint = (nNotFullPoint !== 0)
+      ? ' Not Full Data HL:' + nNotFullPoint
+      : '';
+  return _crMfiConfig(
+     id,
+     id + titleNotFullPoint,
+     dataMfi
+  );
+}
 
-export default IndicatorBuilder
+export const crMomAthConfig = (
+  chart
+) => {
+  const data = chart.options.zhPoints;
+  return _crMomAthConfig(momAth(data));
+}

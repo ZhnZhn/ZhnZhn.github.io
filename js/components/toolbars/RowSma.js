@@ -3,82 +3,68 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
 
+var _IndicatorBuilder = require("../../charts/IndicatorBuilder");
+
 var _RowType = _interopRequireDefault(require("./RowType2"));
 
-var _IndicatorBuilder = _interopRequireDefault(require("../../charts/IndicatorBuilder"));
+var _jsxRuntime = require("react/jsx-runtime");
 
-var addSmaTo = _IndicatorBuilder["default"].addSmaTo,
-    removeSeriaFrom = _IndicatorBuilder["default"].removeSeriaFrom;
-var _isArray = Array.isArray;
-var SMA = {
-  MONTH: '12',
-  YEAR: '50'
+const _isArray = Array.isArray;
+const SMA_MONTH = '12',
+      SMA_YEAR = '50';
+
+const _findInitSma = config => {
+  const _d = (((config || {}).series || [])[0] || {}).data;
+  return !_isArray(_d) ? '0' : _d.length > 150 ? SMA_YEAR : SMA_MONTH;
 };
 
-var _findInitSma = function _findInitSma(config) {
-  var _d = (((config || {}).series || [])[0] || {}).data;
-  return !_isArray(_d) ? '0' : _d.length > 150 ? SMA.YEAR : SMA.MONTH;
-};
+const _isInArrObjWithId = (arrObj, id) => !!arrObj.find(obj => obj.id === id);
 
-var _isInArrObjWithId = function _isInArrObjWithId(arrObj, id) {
-  return !!arrObj.find(function (obj) {
-    return obj.id === id;
-  });
-};
+const _crId = period => "SMA(" + period + ")";
 
-var _crId = function _crId(period) {
-  return "SMA(" + period + ")";
-};
+const RowSma = _ref => {
+  let {
+    config,
+    getChart
+  } = _ref;
 
-var RowSma = function RowSma(_ref) {
-  var config = _ref.config,
-      getChart = _ref.getChart;
-
-  var _initialSma = (0, _useRefInit["default"])(function () {
-    return _findInitSma(config);
-  }),
-      _refPeriod = (0, _react.useRef)(),
-      _useState = (0, _react.useState)([]),
-      smaConfs = _useState[0],
-      setSmaConfs = _useState[1],
-      _onAddSma = function _onAddSma() {
-    var period = _refPeriod.current.getValue(),
-        id = _crId(period);
+  const _initialSma = (0, _useRefInit.default)(() => _findInitSma(config)),
+        _refPeriod = (0, _react.useRef)(),
+        [smaConfs, setSmaConfs] = (0, _react.useState)([]),
+        _onAddSma = () => {
+    const period = _refPeriod.current.getValue(),
+          id = _crId(period);
 
     if (!_isInArrObjWithId(smaConfs, id)) {
-      var chart = getChart(),
-          color = addSmaTo(chart, {
-        id: id,
-        period: period
+      const chart = getChart(),
+            color = (0, _IndicatorBuilder.addSmaTo)(chart, {
+        id,
+        period
       });
 
       if (color) {
-        setSmaConfs([].concat(smaConfs, [{
-          id: id,
-          color: color
-        }]));
+        setSmaConfs([...smaConfs, {
+          id,
+          color
+        }]);
       }
     }
   },
-      _onRemoveSma = function _onRemoveSma(id) {
-    var chart = getChart();
+        _onRemoveSma = id => {
+    const chart = getChart();
 
-    if (removeSeriaFrom(chart, id)) {
-      setSmaConfs(smaConfs.filter(function (d) {
-        return d.id !== id;
-      }));
+    if ((0, _IndicatorBuilder.removeSeriaFrom)(chart, id)) {
+      setSmaConfs(smaConfs.filter(d => d.id !== id));
     }
   };
 
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowType["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowType.default, {
     forwardRef: _refPeriod,
     caption: "SMA",
     initValue: _initialSma,
@@ -89,5 +75,5 @@ var RowSma = function RowSma(_ref) {
 };
 
 var _default = RowSma;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=RowSma.js.map

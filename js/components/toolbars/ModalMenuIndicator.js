@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _seriaFn = require("../../math/seriaFn");
 
-var _IndicatorBuilder = _interopRequireDefault(require("../../charts/IndicatorBuilder"));
+var _IndicatorBuilder = require("../../charts/IndicatorBuilder");
 
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
@@ -26,9 +26,6 @@ var _ModalMenu = require("./ModalMenu.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
-const {
-  crMomAthConfig
-} = _IndicatorBuilder.default;
 const C_GROW = '#90ed7d',
       MOM_ATH = 'MOM_ATH',
       S_PANE = {
@@ -92,7 +89,7 @@ class ModalMenuIndicator extends _react.Component {
 
     this._handleAddMomAth = () => {
       const chart = this.props.getChart(),
-            config = crMomAthConfig(chart);
+            config = (0, _IndicatorBuilder.crMomAthConfig)(chart);
 
       if (config) {
         this.props.onAddMfi(config, MOM_ATH);

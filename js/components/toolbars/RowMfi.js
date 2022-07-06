@@ -3,66 +3,56 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
+var _IndicatorBuilder = require("../../charts/IndicatorBuilder");
+
 var _RowType = _interopRequireDefault(require("./RowType2"));
 
-var _IndicatorBuilder = _interopRequireDefault(require("../../charts/IndicatorBuilder"));
+var _jsxRuntime = require("react/jsx-runtime");
 
-var crMfiConfig = _IndicatorBuilder["default"].crMfiConfig;
-
-var _isInArrObjWithId = function _isInArrObjWithId(arrObj, id) {
-  return !!arrObj.find(function (obj) {
-    return obj.id === id;
-  });
+const _isInArrObjWithId = (arrObj, id) => {
+  return !!arrObj.find(obj => obj.id === id);
 };
 
-var _crMfiConfig = function _crMfiConfig(id) {
-  return {
-    id: id,
-    color: '#90ed7d'
-  };
-};
+const _crMfiConfig = id => ({
+  id: id,
+  color: '#90ed7d'
+});
 
-var _crId = function _crId(period) {
-  return 'MFI(' + period + ')';
-};
+const _crId = period => 'MFI(' + period + ')';
 
-var RowMfi = function RowMfi(_ref) {
-  var getChart = _ref.getChart,
-      onAddMfi = _ref.onAddMfi,
-      onRemoveMfi = _ref.onRemoveMfi;
+const RowMfi = _ref => {
+  let {
+    getChart,
+    onAddMfi,
+    onRemoveMfi
+  } = _ref;
 
-  var _refPeriod = (0, _react.useRef)(),
-      _useState = (0, _react.useState)([]),
-      mfiConfs = _useState[0],
-      setMfiConfs = _useState[1],
-      _onAddMfi = function _onAddMfi() {
-    var _period = _refPeriod.current.getValue(),
-        _id = _crId(_period);
+  const _refPeriod = (0, _react.useRef)(),
+        [mfiConfs, setMfiConfs] = (0, _react.useState)([]),
+        _onAddMfi = () => {
+    const _period = _refPeriod.current.getValue(),
+          _id = _crId(_period);
 
     if (!_isInArrObjWithId(mfiConfs, _id)) {
-      var chart = getChart(),
-          config = crMfiConfig(chart, _period, _id);
+      const chart = getChart(),
+            config = (0, _IndicatorBuilder.crMfiConfig)(chart, _period, _id);
 
       if (config) {
         onAddMfi(config, _id);
-        setMfiConfs([].concat(mfiConfs, [_crMfiConfig(_id)]));
+        setMfiConfs([...mfiConfs, _crMfiConfig(_id)]);
       }
     }
   },
-      _onRemoveMfi = function _onRemoveMfi(id) {
+        _onRemoveMfi = id => {
     onRemoveMfi(id);
-    setMfiConfs(mfiConfs.filter(function (d) {
-      return d.id !== id;
-    }));
+    setMfiConfs(mfiConfs.filter(d => d.id !== id));
   };
 
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowType["default"], {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowType.default, {
     forwardRef: _refPeriod,
     caption: "MFI",
     initValue: 30,
@@ -73,5 +63,5 @@ var RowMfi = function RowMfi(_ref) {
 };
 
 var _default = RowMfi;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=RowMfi.js.map

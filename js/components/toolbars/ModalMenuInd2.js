@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
 
-var _IndicatorBuilder = _interopRequireDefault(require("../../charts/IndicatorBuilder"));
+var _IndicatorBuilder = require("../../charts/IndicatorBuilder");
 
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 
@@ -20,13 +20,6 @@ var _RowTypeA = _interopRequireDefault(require("./RowTypeA"));
 var _RowTypeB = _interopRequireDefault(require("./RowTypeB"));
 
 var _jsxRuntime = require("react/jsx-runtime");
-
-const {
-  addCategoryRateTo,
-  addCategoryDiffTo,
-  addCategoryRocTo,
-  powerBy10
-} = _IndicatorBuilder.default;
 
 const DF_POWER_BY_10 = 0,
       S_PANE = {
@@ -54,7 +47,7 @@ const ModalMenuInd2 = _ref => {
     const _by = parseFloat(_refPowerBy10.current.getValue());
 
     if (_isNumber(_by)) {
-      powerBy10(getChart(), _by);
+      (0, _IndicatorBuilder.powerBy10)(getChart(), _by);
       return true;
     }
   };
@@ -69,15 +62,15 @@ const ModalMenuInd2 = _ref => {
       style: S_PANE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeA.default, {
         caption: "Rate (S1/S2)",
-        mathFn: addCategoryRateTo,
+        mathFn: _IndicatorBuilder.addCategoryRateTo,
         getChart: getChart
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeA.default, {
         caption: "Diff (S1-S2)",
-        mathFn: addCategoryDiffTo,
+        mathFn: _IndicatorBuilder.addCategoryDiffTo,
         getChart: getChart
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeA.default, {
         caption: "ROC (S1 from S2)",
-        mathFn: addCategoryRocTo,
+        mathFn: _IndicatorBuilder.addCategoryRocTo,
         getChart: getChart
       }), _hasPowerBy10 && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeB.default, {
         forwardRef: _refPowerBy10,

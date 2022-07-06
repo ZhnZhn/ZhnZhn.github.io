@@ -1,19 +1,17 @@
 import { useRef } from 'react'
 import useRefInit from '../hooks/useRefInit'
-import IndicatorBuilder from '../../charts/IndicatorBuilder'
+import {
+  addCategoryRateTo,
+  addCategoryDiffTo,
+  addCategoryRocTo,
+  powerBy10
+} from '../../charts/IndicatorBuilder'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 import { S_MODAL_MENU } from './ModalMenu.Style'
 
 import RowTypeA from './RowTypeA'
 import RowTypeB from './RowTypeB'
-
-const {
-  addCategoryRateTo,
-  addCategoryDiffTo,
-  addCategoryRocTo,
-  powerBy10
-} = IndicatorBuilder;
 
 const DF_POWER_BY_10 = 0
 , S_PANE = { margin: '6px 10px 6px 6px' }
