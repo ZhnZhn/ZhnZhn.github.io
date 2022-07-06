@@ -1,72 +1,74 @@
 //import PropTypes from "prop-types";
-import { forwardRef, useState, useRef, useCallback, useEffect, useImperativeHandle } from 'react';
+import {
+  forwardRef,
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle
+} from 'react';
 
-import useInputKeyDown from './useInputKeyDown'
+import useInputKeyDown from './useInputKeyDown';
 
-import SvgClear from './SvgClear'
-import STYLE from './Input.Style';
+import SvgClear from './SvgClear';
+import ErrMsg from './ErrMsg';
+import {
+  S_ROW,
+  S_INPUT,
+  getIsValidColor
+} from './Input.Style';
 
-const S = {
-  INPUT: {
-    ...STYLE.INPUT,
-    width: 'calc(100% - 50px)',
-    paddingLeft: 0,
-    marginLeft: 10,
-    marginBottom: 5
-  },
-  INPUT_BORDER: {
-    borderBottomStyle: 'solid',
-    borderBottomWidth: 1
-  },
-  BT_CLEAR: {
-    float: 'right',
-    position: 'relative',
-    top: 4,
-    right: 7
-  }
+const S_INPUT_PATTERN = {
+  ...S_INPUT,
+  width: 'calc(100% - 50px)',
+  paddingLeft: 0,
+  marginLeft: 10,
+  marginBottom: 5
+}
+, S_INPUT_BORDER = {
+  borderBottomStyle: 'solid',
+  borderBottomWidth: 1
+}
+, S_BT_CLEAR = {
+  float: 'right',
+  position: 'relative',
+  top: 4,
+  right: 7
 };
 
-const ErrMsg = ({ msg }) => msg
- ? (<div style={STYLE.ERR_MSG}>
-     {msg}
-   </div>)
- : null;
-
 const _crInitialState = (initValue) => ({
-  initValue: initValue,
+  initValue,
   value: initValue,
   errorInput: void 0,
   isValid: true
 });
 
-const _getIsValidColor = isValid => isValid
- ? '#1b75bb'
- : '#f44336';
-
 const _crInputStyle = (isValid) => ({
-  ...S.INPUT_BORDER,
-  borderBottomColor: _getIsValidColor(isValid)
+  ...S_INPUT_BORDER,
+  borderBottomColor: getIsValidColor(isValid)
 });
 
 const _crBtClearStyle = (isValid) => ({
-  ...S.BT_CLEAR,
-  stroke: _getIsValidColor(isValid)
+  ...S_BT_CLEAR,
+  stroke: getIsValidColor(isValid)
 });
 
-
-const _onTest = () => true
-, _onClear = () => {};
+const DF_ON_TEST = () => true
+, DF_ON_CLEAR = () => {};
 
 const InputPattern = forwardRef(({
-  rootStyle, inputStyle,
+  rootStyle,
+  inputStyle,
   maxLength=64,
   initValue='',
   placeholder='Input Pattern',
+
   errorMsg,
-  onTest=_onTest,
+  onTest=DF_ON_TEST,
   onEnter,
+
   isClearBlank=false,
-  onClear=_onClear
+  onClear=DF_ON_CLEAR
 }, ref) => {
   const _refInput = useRef()
   , _refGetValue = useRef()
@@ -119,10 +121,10 @@ const InputPattern = forwardRef(({
   , _btClearStyle = _crBtClearStyle(isValid);
 
   return (
-    <div style={{...STYLE.ROOT, ...rootStyle}}>
+    <div style={{...S_ROW, ...rootStyle}}>
       <input
          type="text"
-         style={{...S.INPUT, ...inputStyle, ..._inputStyle }}
+         style={{...S_INPUT_PATTERN, ...inputStyle, ..._inputStyle }}
          ref={_refInput}
          name="text-date"
          //autoComplete="new-text-date"

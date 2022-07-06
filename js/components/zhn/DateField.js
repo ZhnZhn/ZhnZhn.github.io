@@ -3,65 +3,56 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 
-var _Input = _interopRequireDefault(require("./Input.Style"));
+var _Hr = _interopRequireDefault(require("./Hr"));
+
+var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
+
+var _Input = require("./Input.Style");
+
+var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
-var _initState = function _initState(value) {
-  return {
-    value: value,
-    errorInput: null,
-    isValid: true
-  };
-};
+const _initState = value => ({
+  value,
+  errorInput: null,
+  isValid: true
+});
 
-var _onTest = function _onTest() {
-  return true;
-};
+const DF_ON_TEST = () => true;
 
-var DateField = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
-  var style = _ref.style,
-      inputStyle = _ref.inputStyle,
-      _ref$initialValue = _ref.initialValue,
-      initialValue = _ref$initialValue === void 0 ? '' : _ref$initialValue,
-      _ref$placeholder = _ref.placeholder,
-      placeholder = _ref$placeholder === void 0 ? 'YYYY-MM-DD' : _ref$placeholder,
-      _ref$inputmode = _ref.inputmode,
-      inputmode = _ref$inputmode === void 0 ? 'numeric' : _ref$inputmode,
-      _ref$name = _ref.name,
-      name = _ref$name === void 0 ? 'text-date' : _ref$name,
-      _ref$maxLength = _ref.maxLength,
-      maxLength = _ref$maxLength === void 0 ? 10 : _ref$maxLength,
-      _ref$errorMsg = _ref.errorMsg,
-      errorMsg = _ref$errorMsg === void 0 ? null : _ref$errorMsg,
-      _ref$onTest = _ref.onTest,
-      onTest = _ref$onTest === void 0 ? _onTest : _ref$onTest,
-      onEnter = _ref.onEnter;
+const DateField = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+  let {
+    style,
+    inputStyle,
+    initialValue = '',
+    placeholder = 'YYYY-MM-DD',
+    inputmode = 'numeric',
+    name = 'text-date',
+    maxLength = 10,
+    errorMsg = null,
+    onTest = DF_ON_TEST,
+    onEnter
+  } = _ref;
 
-  var _refInput = (0, _react.useRef)(null),
-      _useState = (0, _react.useState)(function () {
-    return _initState(initialValue);
-  }),
-      state = _useState[0],
-      setState = _useState[1],
-      value = state.value,
-      errorInput = state.errorInput,
-      _isValid = state.isValid,
-      _hChangeValue = function _hChangeValue(event) {
-    var value = event.target.value;
+  const _refInput = (0, _react.useRef)(null),
+        [state, setState] = (0, _react.useState)(() => _initState(initialValue)),
+        {
+    value,
+    errorInput,
+    isValid
+  } = state,
+        _hChangeValue = event => {
+    const value = event.target.value;
 
     if (!onTest(value)) {
       setState({
-        value: value,
+        value,
         isValid: false,
         errorInput: null
       });
@@ -69,57 +60,46 @@ var DateField = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
       setState(_initState(value));
     }
   },
-      _hBlurValue = function _hBlurValue() {
+        _hBlurValue = () => {
     if (value !== initialValue && !onTest(value)) {
       setState({
-        value: value,
+        value,
         errorInput: errorMsg,
         isValid: false
       });
     } else {
       setState({
-        value: value,
+        value,
         errorInput: null,
         isValid: true
       });
     }
   },
-      _hKeyDown = (0, _useInputKeyDown["default"])({
-    onEnter: onEnter,
-    onDelete: function onDelete() {
-      return setState(_initState(initialValue));
-    }
+        _hKeyDown = (0, _useInputKeyDown.default)({
+    onEnter,
+    onDelete: () => setState(_initState(initialValue))
   }, [initialValue]);
 
-  (0, _react.useEffect)(function () {
-    return setState(_initState(initialValue));
-  }, [initialValue]);
-  (0, _react.useImperativeHandle)(ref, function () {
-    return {
-      getValue: function getValue() {
-        return value;
-      },
-      setValue: function setValue(value) {
-        if (onTest(value)) {
-          setState(_initState(value));
-        }
-      },
-      isValid: function isValid() {
-        return _isValid;
-      },
-      focus: function focus() {
-        return _refInput.current.focus();
+  (0, _react.useEffect)(() => setState(_initState(initialValue)), [initialValue]);
+  (0, _react.useImperativeHandle)(ref, () => ({
+    getValue: () => value,
+    setValue: value => {
+      if (onTest(value)) {
+        setState(_initState(value));
       }
-    };
-  }, [value, _isValid, onTest]);
-
-  var _styleHr = _isValid ? _Input["default"].HR_VALID : _Input["default"].HR_NOT_VALID;
-
+    },
+    isValid: () => isValid,
+    focus: () => _refInput.current.focus()
+  }), [value, isValid, onTest]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: (0, _extends2["default"])({}, _Input["default"].ROOT, style),
+    style: { ..._Input.S_ROW,
+      ...style
+    },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
       ref: _refInput,
-      style: (0, _extends2["default"])({}, _Input["default"].INPUT, inputStyle),
+      style: { ..._Input.S_INPUT,
+        ...inputStyle
+      },
       name: name,
       autoComplete: "off",
       autoCorrect: "off",
@@ -133,11 +113,10 @@ var DateField = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
       onChange: _hChangeValue,
       onBlur: _hBlurValue,
       onKeyDown: _hKeyDown
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
-      style: (0, _extends2["default"])({}, _Input["default"].HR, _styleHr)
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: _Input["default"].ERR_MSG,
-      children: errorInput
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Hr.default, {
+      isValid: isValid
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ErrMsg.default, {
+      msg: errorInput
     })]
   });
 });
@@ -156,5 +135,5 @@ var DateField = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
 */
 
 var _default = DateField;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=DateField.js.map

@@ -1,8 +1,20 @@
-import { forwardRef, useState, useRef, useEffect, useImperativeHandle } from 'react';
-import useInputKeyDown from './useInputKeyDown'
 //import PropTypes from "prop-types";
+import {
+  forwardRef,
+  useState,
+  useRef,
+  useEffect,
+  useImperativeHandle
+} from 'react';
+import useInputKeyDown from './useInputKeyDown'
 
-import STYLE from './Input.Style';
+import Hr from './Hr';
+import ErrMsg from './ErrMsg';
+
+import {
+  S_ROW,
+  S_INPUT
+} from './Input.Style';
 
 const _initState = (value) => ({
   value,
@@ -10,7 +22,7 @@ const _initState = (value) => ({
   isValid: true
 });
 
-const _onTest = () => true
+const DF_ON_TEST = () => true
 
 const DateField = forwardRef(({
   style, inputStyle,
@@ -20,7 +32,7 @@ const DateField = forwardRef(({
   name='text-date',
   maxLength=10,
   errorMsg=null,
-  onTest=_onTest,
+  onTest=DF_ON_TEST,
   onEnter
 }, ref) => {
   const _refInput = useRef(null)
@@ -61,14 +73,11 @@ const DateField = forwardRef(({
     focus: () => _refInput.current.focus()
   }), [value, isValid, onTest])
 
-  const _styleHr = isValid
-      ? STYLE.HR_VALID
-      : STYLE.HR_NOT_VALID;
   return (
-    <div style={{...STYLE.ROOT, ...style}}>
+    <div style={{...S_ROW, ...style}}>
       <input
          ref={_refInput}
-         style={{...STYLE.INPUT, ...inputStyle}}
+         style={{...S_INPUT, ...inputStyle}}
          name={name}
          autoComplete="off"
          autoCorrect="off"
@@ -83,10 +92,8 @@ const DateField = forwardRef(({
          onBlur={_hBlurValue}
          onKeyDown={_hKeyDown}
       />
-      <hr style={{...STYLE.HR, ..._styleHr}} />
-      <div style={STYLE.ERR_MSG}>
-        {errorInput}
-      </div>
+      <Hr isValid={isValid} />
+      <ErrMsg msg={errorInput} />
     </div>
   );
 })
