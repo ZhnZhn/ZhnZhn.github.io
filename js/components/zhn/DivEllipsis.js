@@ -7,7 +7,7 @@ var _GeneralStyles = require("../styles/GeneralStyles");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const EllipsisDiv = _ref => {
+const DivEllipsis = _ref => {
   let {
     style,
     text,
@@ -22,6 +22,6 @@ const EllipsisDiv = _ref => {
   });
 };
 
-var _default = EllipsisDiv;
+var _default = DivEllipsis;
 exports.default = _default;
-//# sourceMappingURL=EllipsisDiv.js.map
+//# sourceMappingURL=DivEllipsis.js.map

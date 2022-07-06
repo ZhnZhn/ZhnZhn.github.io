@@ -1,11 +1,11 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/zhn/EllipsisDiv.js"
+  "../../../src/components/zhn/DivEllipsis.js"
  ],
- "file": "../../../src/components/zhn/EllipsisDiv.js",
+ "file": "../../../src/components/zhn/DivEllipsis.js",
  "names": [
-  "EllipsisDiv",
+  "DivEllipsis",
   "style",
   "text",
   "title",

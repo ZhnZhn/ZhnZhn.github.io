@@ -2,7 +2,7 @@ import {
   S_ELLIPSIS
 } from '../styles/GeneralStyles';
 
-const EllipsisDiv = ({
+const DivEllipsis = ({
   style,
   text,
   title
@@ -12,4 +12,4 @@ const EllipsisDiv = ({
   </div>
 );
 
-export default EllipsisDiv
+export default DivEllipsis

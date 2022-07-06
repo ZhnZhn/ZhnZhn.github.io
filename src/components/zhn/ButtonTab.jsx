@@ -5,14 +5,16 @@ import crCn from '../zhn-utils/crCn';
 
 const TH_ID = 'ELEMENT';
 
-const CL_BT_TAB = 'not-selected button-tab'
-, CL_BT_TAB__SHOW = `${CL_BT_TAB} button-tab--show`
+const CL_BT_TAB = 'not-selected bt-tab'
+, CL_BT_TAB__SHOW = `${CL_BT_TAB} bt-tab--show`
 , CL_ARROW_DOWN = 'arrow-down';
 
 const ButtonTab = ({
   is=true,
-  isShow, isMenu,
-  className, style,
+  isShow,
+  isMenu,
+  className,
+  style,
   caption,
   onClick
 }) => {

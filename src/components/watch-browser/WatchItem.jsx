@@ -5,7 +5,7 @@ import {
 import isKeyEnter from '../zhn/isKeyEnter'
 
 import SvgClose from '../zhn/SvgClose';
-import EllipsisDiv from '../zhn/EllipsisDiv';
+import DivEllipsis from '../zhn/DivEllipsis';
 
 const S_ITEM_DIV = {
   position: 'relative',
@@ -75,7 +75,7 @@ const WatchItem = ({
        {..._dndOptions}
        onKeyUp={_hKeyUp}
      >
-       <EllipsisDiv
+       <DivEllipsis
          style={S_CAPTION}
          text={caption}
        />

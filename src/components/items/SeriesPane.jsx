@@ -6,7 +6,7 @@ import {
 } from 'react';
 
 import ScrollPane from '../zhn/ScrollPane';
-import EllipsisDiv from '../zhn/EllipsisDiv';
+import DivEllipsis from '../zhn/DivEllipsis';
 import SeriaRow from './SeriaRow';
 
 const S_TITLE = {
@@ -67,7 +67,7 @@ const PasteToTitle = ({
 }) => (
   <div style={S_TITLE}>
     <span>From Chart:&nbsp;</span>
-    <EllipsisDiv
+    <DivEllipsis
        style={S_CHART_ID}
        text={chartId}
     />

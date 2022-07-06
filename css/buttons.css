@@ -17,7 +17,7 @@
   outline: 0;
 }
 
-.button-tab {
+.bt-tab {
   position: absolute;
   z-index: 10;
   top: 0;
@@ -28,14 +28,13 @@
   padding: 3px 8px;
   border-radius: 0 0 8px 8px;
 }
-.button-tab:hover {
+.bt-tab:hover {
   color: #a487d4;
-  outline: 0;
 }
-.button-tab:focus {
+.bt-tab:focus {
   border-bottom: 2px solid #a487d4;
 }
-.button-tab--show {
+.bt-tab--show {
   color: #a487d4;
   font-weight: bold;
 }
@@ -52,7 +51,6 @@
 .bt-sub-item:hover {
   color: #a487d4;
   font-weight: bold;
-  outline: 0;
 }
 
 .arrow-down {
@@ -152,7 +150,6 @@
 .bt-flat {
   display: inline-block;
   text-decoration: none;
-  outline: none;
   font-weight: inherit;
   height: 36px;  
   text-align: center;
@@ -161,7 +158,6 @@
 }
 .bt-flat:hover,
 .bt-flat:focus {
-  outline: 0;
   /* background-color: rgba(220,220,220, 0.2); */
   background-color: rgba(120, 120, 120, 0.2);
 }

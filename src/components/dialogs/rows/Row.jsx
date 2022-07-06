@@ -1,4 +1,4 @@
-import EllipsisDiv from '../../zhn/EllipsisDiv';
+import DivEllipsis from '../../zhn/DivEllipsis';
 
 const S_ROOT_DIV = {
   margin: '5px 5px 5px 10px',
@@ -33,7 +33,7 @@ const Text = ({
       <div style={{...S_LABEL, ...styleCaption, ..._styleCaption}}>
         {caption}
       </div>
-      <EllipsisDiv
+      <DivEllipsis
         style={{...S_TEXT, ...styleText}}
         text={text}
       />

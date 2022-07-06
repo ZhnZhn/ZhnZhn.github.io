@@ -13,19 +13,20 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
 const TH_ID = 'ELEMENT';
-const CL_BT_TAB = 'not-selected button-tab',
-      CL_BT_TAB__SHOW = CL_BT_TAB + " button-tab--show",
+const CL_BT_TAB = 'not-selected bt-tab',
+      CL_BT_TAB__SHOW = CL_BT_TAB + " bt-tab--show",
       CL_ARROW_DOWN = 'arrow-down';
 
-const ButtonTab = ({
-  is = true,
-  isShow,
-  isMenu,
-  className,
-  style,
-  caption,
-  onClick
-}) => {
+const ButtonTab = _ref => {
+  let {
+    is = true,
+    isShow,
+    isMenu,
+    className,
+    style,
+    caption,
+    onClick
+  } = _ref;
   const TS = (0, _useTheme.default)(TH_ID);
 
   if (!is) {

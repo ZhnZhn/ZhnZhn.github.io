@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 
-var _EllipsisDiv = _interopRequireDefault(require("../zhn/EllipsisDiv"));
+var _DivEllipsis = _interopRequireDefault(require("../zhn/DivEllipsis"));
 
 var _SeriaRow = _interopRequireDefault(require("./SeriaRow"));
 
@@ -71,7 +71,7 @@ const PasteToTitle = _ref => {
     style: S_TITLE,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       children: "From Chart:\xA0"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_EllipsisDiv.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
       style: S_CHART_ID,
       text: chartId
     })]

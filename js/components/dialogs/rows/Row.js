@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _EllipsisDiv = _interopRequireDefault(require("../../zhn/EllipsisDiv"));
+var _DivEllipsis = _interopRequireDefault(require("../../zhn/DivEllipsis"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -53,7 +53,7 @@ const Text = _ref => {
         ..._styleCaption
       },
       children: caption
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_EllipsisDiv.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
       style: { ...S_TEXT,
         ...styleText
       },

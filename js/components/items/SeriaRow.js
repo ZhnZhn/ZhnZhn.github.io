@@ -25,7 +25,7 @@ var _ModalPalette = _interopRequireDefault(require("../zhn-moleculs/ModalPalette
 
 var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 
-var _EllipsisDiv = _interopRequireDefault(require("../zhn/EllipsisDiv"));
+var _DivEllipsis = _interopRequireDefault(require("../zhn/DivEllipsis"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -131,7 +131,7 @@ const SeriaRow = props => {
       checkedColor: TS.CHECKED_COLOR,
       onCheck: _hCheck,
       onUnCheck: _hUnCheck
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_EllipsisDiv.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
       style: S_TITLE,
       text: name
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor.default, {

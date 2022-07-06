@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
-var _EllipsisDiv = _interopRequireDefault(require("../zhn/EllipsisDiv"));
+var _DivEllipsis = _interopRequireDefault(require("../zhn/DivEllipsis"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -47,7 +47,7 @@ const Item = _ref => {
     style: S_ITEM,
     onClick: _hClick,
     onKeyDown: _hKeyDown,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_EllipsisDiv.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
       style: S_CAPTION,
       text: caption
     }), children]

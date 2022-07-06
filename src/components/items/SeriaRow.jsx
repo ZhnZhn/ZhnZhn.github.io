@@ -16,7 +16,7 @@ import SvgCheckBox from '../zhn/SvgCheckBox'
 import CellColor from '../zhn-moleculs/CellColor'
 import ModalPalette from '../zhn-moleculs/ModalPalette'
 import InputSelect from '../zhn-select/InputSelect'
-import EllipsisDiv from '../zhn/EllipsisDiv'
+import DivEllipsis from '../zhn/DivEllipsis'
 
 const TH_ID = 'ROW_CHECKBOX'
 , CHECKED_COLOR = '#1b2836'
@@ -107,7 +107,7 @@ const SeriaRow = (props) => {
         onCheck={_hCheck}
         onUnCheck={_hUnCheck}
       />
-      <EllipsisDiv
+      <DivEllipsis
          style={S_TITLE}
          text={name}
       />

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import useKeyEnter from '../hooks/useKeyEnter';
-import EllipsisDiv from '../zhn/EllipsisDiv';
+import DivEllipsis from '../zhn/DivEllipsis';
 
 const S_ITEM = {
    position: 'relative',
@@ -35,7 +35,7 @@ const Item = ({
       onClick={_hClick}
       onKeyDown={_hKeyDown}
     >
-      <EllipsisDiv
+      <DivEllipsis
         style={S_CAPTION}
         text={caption}
       />
