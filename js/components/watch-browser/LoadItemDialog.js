@@ -38,9 +38,7 @@ const S_DIALOG = {
   display: 'inline-block',
   maxWidth: 250,
   height: 32,
-  verticalAlign: 'middle',
-  textOverflow: 'ellipsis',
-  overflow: 'hidden'
+  verticalAlign: 'middle'
 };
 
 const _crValue = function (x, y) {

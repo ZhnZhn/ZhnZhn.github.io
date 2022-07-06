@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 import useKeyEnter from '../hooks/useKeyEnter';
+import { S_ELLIPSIS } from '../styles/GeneralStyles';
 
 const S_ITEM_DIV = {
    position: 'relative',
@@ -12,9 +13,7 @@ const S_ITEM_DIV = {
    display: 'inline-block',
    verticalAlign: 'middle',
    width: '100%',
-   whiteSpace: 'nowrap',
-   overflow: 'hidden',
-   textOverflow: 'ellipsis'
+   ...S_ELLIPSIS
 };
 
 

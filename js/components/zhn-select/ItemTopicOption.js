@@ -5,16 +5,16 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
+var _GeneralStyles = require("../styles/GeneralStyles");
+
 var _ItemOption = _interopRequireDefault(require("./ItemOption"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
 const S_TOPIC = {
+  color: '#a487d4',
   width: '100%',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  color: '#a487d4'
+  ..._GeneralStyles.S_ELLIPSIS
 };
 
 const ItemTopicOption = props => {

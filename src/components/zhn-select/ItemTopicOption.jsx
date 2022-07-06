@@ -1,11 +1,12 @@
+import {
+  S_ELLIPSIS
+} from '../styles/GeneralStyles';
 import ItemOption from './ItemOption';
 
 const S_TOPIC = {
+  color: '#a487d4',
   width: '100%',
-  whiteSpace : 'nowrap',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  color: '#a487d4'
+  ...S_ELLIPSIS
 };
 
 const ItemTopicOption = (props) => {

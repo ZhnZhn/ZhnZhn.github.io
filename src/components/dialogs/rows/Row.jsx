@@ -1,3 +1,6 @@
+import {
+  S_ELLIPSIS
+} from '../../styles/GeneralStyles';
 
 const S_ROOT_DIV = {
   margin: '5px 5px 5px 10px',
@@ -15,8 +18,7 @@ const S_ROOT_DIV = {
   maxWidth: 200,
   height: 32,
   verticalAlign: 'middle',
-  textOverflow: 'ellipsis',
-  overflow: 'hidden'
+  ...S_ELLIPSIS
 },
 S_NONE = { display: 'none' };
 
@@ -26,7 +28,8 @@ const Text = ({
   styleRoot, styleCaption, styleText
 }) => {
   if (!text) return null;
-  const _styleCaption = isShowLabels ? void 0 : S_NONE;
+  const _styleCaption = isShowLabels
+    ? void 0 : S_NONE;
   return (
     <div style={{...S_ROOT_DIV, ...styleRoot}}>
       <span style={{...S_LABEL_SPAN, ...styleCaption, ..._styleCaption}}>

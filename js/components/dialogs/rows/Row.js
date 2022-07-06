@@ -3,6 +3,8 @@
 exports.__esModule = true;
 exports.default = void 0;
 
+var _GeneralStyles = require("../../styles/GeneralStyles");
+
 var _jsxRuntime = require("react/jsx-runtime");
 
 const S_ROOT_DIV = {
@@ -23,21 +25,21 @@ const S_ROOT_DIV = {
   maxWidth: 200,
   height: 32,
   verticalAlign: 'middle',
-  textOverflow: 'ellipsis',
-  overflow: 'hidden'
+  ..._GeneralStyles.S_ELLIPSIS
 },
       S_NONE = {
   display: 'none'
 };
 
-const Text = ({
-  isShowLabels = true,
-  caption,
-  text,
-  styleRoot,
-  styleCaption,
-  styleText
-}) => {
+const Text = _ref => {
+  let {
+    isShowLabels = true,
+    caption,
+    text,
+    styleRoot,
+    styleCaption,
+    styleText
+  } = _ref;
   if (!text) return null;
 
   const _styleCaption = isShowLabels ? void 0 : S_NONE;

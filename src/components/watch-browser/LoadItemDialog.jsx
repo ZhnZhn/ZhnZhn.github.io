@@ -33,9 +33,7 @@ const S_DIALOG = { width: 365 }
   display: 'inline-block',
   maxWidth: 250,
   height: 32,
-  verticalAlign: 'middle',
-  textOverflow: 'ellipsis',
-  overflow: 'hidden'
+  verticalAlign: 'middle'
 };
 
 const _crValue = (x='', y='') => (`${formatNumber(y)} ${mlsToDmy(x)}`).trim();

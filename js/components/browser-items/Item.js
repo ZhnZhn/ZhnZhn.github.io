@@ -9,6 +9,8 @@ var _react = require("react");
 
 var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
+var _GeneralStyles = require("../styles/GeneralStyles");
+
 var _jsxRuntime = require("react/jsx-runtime");
 
 const S_ITEM_DIV = {
@@ -21,18 +23,18 @@ const S_ITEM_DIV = {
   display: 'inline-block',
   verticalAlign: 'middle',
   width: '100%',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis'
+  ..._GeneralStyles.S_ELLIPSIS
 };
 
-const Item = ({
-  caption,
-  className,
-  item,
-  onClickItem,
-  children
-}) => {
+const Item = _ref => {
+  let {
+    caption,
+    className,
+    item,
+    onClickItem,
+    children
+  } = _ref;
+
   /*eslint-disable react-hooks/exhaustive-deps*/
   const _hClick = (0, _react.useCallback)(() => onClickItem(item), []) //onClickItem, item
 

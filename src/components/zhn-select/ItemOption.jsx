@@ -1,16 +1,18 @@
+import {
+  S_ELLIPSIS
+} from '../styles/GeneralStyles';
+
 const S_CAPTION = {
   width: '100%',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis'
+  ...S_ELLIPSIS
 };
 
 const ItemOption = ({
-  item={},
+  item,
   propCaption
 }) => (
   <div style={S_CAPTION}>
-    {item[propCaption]}
+    {(item || {})[propCaption]}
   </div>
 );
 

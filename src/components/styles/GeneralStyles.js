@@ -4,3 +4,9 @@ export const S_FLEX_ROW_END = {
   justifyContent: 'flex-end',
   flexWrap: 'wrap'
 }
+
+export const S_ELLIPSIS = {
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis'
+}
