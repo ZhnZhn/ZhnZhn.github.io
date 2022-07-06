@@ -9,21 +9,19 @@ var _react = require("react");
 
 var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
-var _GeneralStyles = require("../styles/GeneralStyles");
+var _EllipsisDiv = _interopRequireDefault(require("../zhn/EllipsisDiv"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const S_ITEM_DIV = {
+const S_ITEM = {
   position: 'relative',
   minWidth: 350,
   padding: '5px 10px 5px 0',
   lineHeight: 1.4
 },
-      S_ITEM_SPAN = {
-  display: 'inline-block',
+      S_CAPTION = {
   verticalAlign: 'middle',
-  width: '100%',
-  ..._GeneralStyles.S_ELLIPSIS
+  width: '100%'
 };
 
 const Item = _ref => {
@@ -46,12 +44,12 @@ const Item = _ref => {
     role: "menuitem",
     tabIndex: "0",
     className: className,
-    style: S_ITEM_DIV,
+    style: S_ITEM,
     onClick: _hClick,
     onKeyDown: _hKeyDown,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: S_ITEM_SPAN,
-      children: caption
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_EllipsisDiv.default, {
+      style: S_CAPTION,
+      text: caption
     }), children]
   });
 };

@@ -9,18 +9,20 @@ var _react = require("react");
 
 var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 
+var _EllipsisDiv = _interopRequireDefault(require("../zhn/EllipsisDiv"));
+
 var _SeriaRow = _interopRequireDefault(require("./SeriaRow"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const CL_ELL = 'ellipsis',
-      S_TITLE = {
+const S_TITLE = {
   paddingBottom: 4,
   margin: '0 0 8px 16px',
   fontWeight: 'bold',
   borderBottom: '2px solid black'
 },
       S_CHART_ID = {
+  display: 'inline-block',
   color: '#a487d4',
   width: 200,
   verticalAlign: 'bottom'
@@ -69,10 +71,9 @@ const PasteToTitle = _ref => {
     style: S_TITLE,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       children: "From Chart:\xA0"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      className: CL_ELL,
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_EllipsisDiv.default, {
       style: S_CHART_ID,
-      children: chartId
+      text: chartId
     })]
   });
 };

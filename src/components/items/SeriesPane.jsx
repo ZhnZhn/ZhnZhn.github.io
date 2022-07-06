@@ -1,18 +1,21 @@
 import {
   forwardRef,
-  useRef, useCallback, useImperativeHandle
+  useRef,
+  useCallback,
+  useImperativeHandle
 } from 'react';
 
 import ScrollPane from '../zhn/ScrollPane';
+import EllipsisDiv from '../zhn/EllipsisDiv';
 import SeriaRow from './SeriaRow';
 
-const CL_ELL = 'ellipsis'
-, S_TITLE = {
+const S_TITLE = {
   paddingBottom: 4,
   margin: '0 0 8px 16px',
   fontWeight: 'bold',
   borderBottom: '2px solid black'
 }, S_CHART_ID = {
+  display: 'inline-block',
   color: '#a487d4',
   width: 200,
   verticalAlign: 'bottom'
@@ -43,7 +46,10 @@ const _getUserMinMax = fromChart => {
 };
 
 
-const _crOptionItem = (caption, value) => ({
+const _crOptionItem = (
+  caption,
+  value
+) => ({
   caption,
   value
 });
@@ -56,15 +62,15 @@ const _crYAxisOption = toChart => {
   return options;
 };
 
-const PasteToTitle = ({ chartId }) => (
+const PasteToTitle = ({
+  chartId
+}) => (
   <div style={S_TITLE}>
     <span>From Chart:&nbsp;</span>
-    <span
-       className={CL_ELL}
+    <EllipsisDiv
        style={S_CHART_ID}
-    >
-      {chartId}
-    </span>
+       text={chartId}
+    />
   </div>
 );
 

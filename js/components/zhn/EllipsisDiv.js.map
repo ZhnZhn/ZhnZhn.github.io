@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/EllipsisDiv.js"
+ ],
+ "file": "../../../src/components/zhn/EllipsisDiv.js",
+ "names": [
+  "EllipsisDiv",
+  "style",
+  "text",
+  "title",
+  "S_ELLIPSIS"
+ ],
+ "mappings": ";;;;;AAAA;;;;AAIA,MAAMA,WAAW,GAAG;AAAA,MAAC;AACnBC,IAAAA,KADmB;AAEnBC,IAAAA,IAFmB;AAGnBC,IAAAA;AAHmB,GAAD;AAAA,sBAKlB;AAAK,IAAA,KAAK,EAAE,EAAC,GAAGF,KAAJ;AAAW,SAAGG;AAAd,KAAZ;AAAuC,IAAA,KAAK,EAAED,KAA9C;AAAA,cACGD;AADH,IALkB;AAAA,CAApB;;eAUeF,W"
+}

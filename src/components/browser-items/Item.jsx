@@ -1,21 +1,18 @@
 import { useCallback } from 'react';
 
 import useKeyEnter from '../hooks/useKeyEnter';
-import { S_ELLIPSIS } from '../styles/GeneralStyles';
+import EllipsisDiv from '../zhn/EllipsisDiv';
 
-const S_ITEM_DIV = {
+const S_ITEM = {
    position: 'relative',
    minWidth: 350,
    padding: '5px 10px 5px 0',
    lineHeight: 1.4
 }
-, S_ITEM_SPAN = {
-   display: 'inline-block',
+, S_CAPTION = {
    verticalAlign: 'middle',
-   width: '100%',
-   ...S_ELLIPSIS
+   width: '100%'
 };
-
 
 const Item = ({
    caption,
@@ -34,13 +31,14 @@ const Item = ({
       role="menuitem"
       tabIndex="0"
       className={className}
-      style={S_ITEM_DIV}
+      style={S_ITEM}
       onClick={_hClick}
       onKeyDown={_hKeyDown}
     >
-      <span style={S_ITEM_SPAN}>
-        {caption}
-      </span>
+      <EllipsisDiv
+        style={S_CAPTION}
+        text={caption}
+      />
       {children}
    </div>
   );

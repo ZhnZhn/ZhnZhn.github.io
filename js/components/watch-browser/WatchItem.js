@@ -11,7 +11,7 @@ var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
 
 var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
 
-var _GeneralStyles = require("../styles/GeneralStyles");
+var _EllipsisDiv = _interopRequireDefault(require("../zhn/EllipsisDiv"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -21,13 +21,11 @@ const S_ITEM_DIV = {
   paddingTop: 5,
   paddingBottom: 5
 },
-      S_ITEM_SPAN = {
-  display: 'inline-block',
+      S_CAPTION = {
   width: '100%',
   maxWidth: 250,
   height: 28,
-  verticalAlign: 'middle',
-  ..._GeneralStyles.S_ELLIPSIS
+  verticalAlign: 'middle'
 },
       S_SVG_CLOSE = {
   position: 'absolute',
@@ -86,9 +84,9 @@ const WatchItem = _ref => {
     onClick: _hClick,
     ..._dndOptions,
     onKeyUp: _hKeyUp,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: S_ITEM_SPAN,
-      children: caption
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_EllipsisDiv.default, {
+      style: S_CAPTION,
+      text: caption
     }), _btClose]
   });
 };

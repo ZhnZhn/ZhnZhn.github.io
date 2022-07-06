@@ -1,9 +1,11 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports.default = void 0;
 
-var _GeneralStyles = require("../../styles/GeneralStyles");
+var _EllipsisDiv = _interopRequireDefault(require("../../zhn/EllipsisDiv"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -12,8 +14,7 @@ const S_ROOT_DIV = {
   lineHeight: 2,
   fontWeight: 'bold'
 },
-      S_LABEL_SPAN = {
-  display: 'inline-block',
+      S_LABEL = {
   color: '#1b75bb',
   width: 95,
   paddingRight: 5,
@@ -21,11 +22,9 @@ const S_ROOT_DIV = {
   fontSize: '16px'
 },
       S_TEXT = {
-  display: 'inline-block',
   maxWidth: 200,
   height: 32,
-  verticalAlign: 'middle',
-  ..._GeneralStyles.S_ELLIPSIS
+  verticalAlign: 'middle'
 },
       S_NONE = {
   display: 'none'
@@ -48,17 +47,17 @@ const Text = _ref => {
     style: { ...S_ROOT_DIV,
       ...styleRoot
     },
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: { ...S_LABEL_SPAN,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      style: { ...S_LABEL,
         ...styleCaption,
         ..._styleCaption
       },
       children: caption
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_EllipsisDiv.default, {
       style: { ...S_TEXT,
         ...styleText
       },
-      children: text
+      text: text
     })]
   });
 };

@@ -25,17 +25,19 @@ var _ModalPalette = _interopRequireDefault(require("../zhn-moleculs/ModalPalette
 
 var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 
+var _EllipsisDiv = _interopRequireDefault(require("../zhn/EllipsisDiv"));
+
 var _jsxRuntime = require("react/jsx-runtime");
 
 const TH_ID = 'ROW_CHECKBOX',
       CHECKED_COLOR = '#1b2836',
       DF_COLOR = '#7cb5ec',
-      CL_ELL = 'ellipsis',
       CL_INPUT_COLOR = 'p-r va-m',
       S_ROOT = {
   padding: '0 0 16px 16px'
 },
       S_TITLE = {
+  display: 'inline-block',
   color: '##1b75bb',
   width: 100,
   padding: '0 16px 0 4px',
@@ -57,6 +59,15 @@ const TH_ID = 'ROW_CHECKBOX',
 },
       FN_NOOP = () => {},
       _getRefValue = ref => ref.current;
+/*
+<span
+   className={CL_ELL}
+   style={S_TITLE}
+>
+  {name}
+</span>
+*/
+
 
 const SeriaRow = props => {
   const {
@@ -120,10 +131,9 @@ const SeriaRow = props => {
       checkedColor: TS.CHECKED_COLOR,
       onCheck: _hCheck,
       onUnCheck: _hUnCheck
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      className: CL_ELL,
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_EllipsisDiv.default, {
       style: S_TITLE,
-      children: name
+      text: name
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor.default, {
       className: CL_INPUT_COLOR,
       color: _color,

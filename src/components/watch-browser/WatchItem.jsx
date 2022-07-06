@@ -5,9 +5,7 @@ import {
 import isKeyEnter from '../zhn/isKeyEnter'
 
 import SvgClose from '../zhn/SvgClose';
-import {
-  S_ELLIPSIS
-} from '../styles/GeneralStyles';
+import EllipsisDiv from '../zhn/EllipsisDiv';
 
 const S_ITEM_DIV = {
   position: 'relative',
@@ -15,13 +13,11 @@ const S_ITEM_DIV = {
   paddingTop: 5,
   paddingBottom: 5
 }
-, S_ITEM_SPAN = {
-  display: 'inline-block',
+, S_CAPTION = {
   width: '100%',
   maxWidth: 250,
   height: 28,
   verticalAlign: 'middle',
-  ...S_ELLIPSIS
 }
 , S_SVG_CLOSE = {
   position: 'absolute',
@@ -33,9 +29,18 @@ const EMPTY_ITEM_CAPTION = 'Not Found';
 
 //onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
 const WatchItem = ({
-  item, className, isModeEdit, option,
-  onClick, onClose,
-  onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop
+  item,
+  className,
+  isModeEdit,
+  option,
+  onClick,
+  onClose,
+
+  onDragStart,
+  onDragEnter,
+  onDragOver,
+  onDragLeave,
+  onDrop
 }) => {
   const { caption=EMPTY_ITEM_CAPTION } = item || {}
   , _btClose = isModeEdit
@@ -70,9 +75,10 @@ const WatchItem = ({
        {..._dndOptions}
        onKeyUp={_hKeyUp}
      >
-       <span style={S_ITEM_SPAN}>
-         {caption}
-       </span>
+       <EllipsisDiv
+         style={S_CAPTION}
+         text={caption}
+       />
        {_btClose}
     </div>
   );

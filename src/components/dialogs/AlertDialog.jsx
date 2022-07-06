@@ -1,8 +1,7 @@
 //import PropTypes from "prop-types";
 import memoIsShow from '../hoc/memoIsShow';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-
-const CL_ELL =  'ellipsis';
+import EllipsisDiv from '../zhn/EllipsisDiv';
 
 const S_ROW_CAPTION = {
   display: 'flex',
@@ -17,6 +16,7 @@ const S_ROW_CAPTION = {
   padding: '0 10px 0 8px'
 }
 , S_ITEM_ID = {
+  display: 'inline-block',
   color: '#a487d4',
   width: 140
 }
@@ -63,13 +63,11 @@ const AlertDialog = memoIsShow(({
            <span style={S_CAPTION}>
              {_caption}
            </span>
-           <span
-             className={CL_ELL}
+           <EllipsisDiv
              style={S_ITEM_ID}
+             text={alertItemId}
              title={alertItemId}
-           >
-             {alertItemId}
-           </span>
+           />
         </div>
         <p style={S_DESCR}>
           {alertDescr}

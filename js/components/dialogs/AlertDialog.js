@@ -9,10 +9,11 @@ var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
+var _EllipsisDiv = _interopRequireDefault(require("../zhn/EllipsisDiv"));
+
 var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
-const CL_ELL = 'ellipsis';
 const S_ROW_CAPTION = {
   display: 'flex',
   margin: 5,
@@ -26,6 +27,7 @@ const S_ROW_CAPTION = {
   padding: '0 10px 0 8px'
 },
       S_ITEM_ID = {
+  display: 'inline-block',
   color: '#a487d4',
   width: 140
 },
@@ -72,11 +74,10 @@ const AlertDialog = (0, _memoIsShow.default)(_ref => {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
         style: S_CAPTION,
         children: _caption
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        className: CL_ELL,
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_EllipsisDiv.default, {
         style: S_ITEM_ID,
-        title: alertItemId,
-        children: alertItemId
+        text: alertItemId,
+        title: alertItemId
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
       style: S_DESCR,

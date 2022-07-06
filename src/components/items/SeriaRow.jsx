@@ -16,16 +16,17 @@ import SvgCheckBox from '../zhn/SvgCheckBox'
 import CellColor from '../zhn-moleculs/CellColor'
 import ModalPalette from '../zhn-moleculs/ModalPalette'
 import InputSelect from '../zhn-select/InputSelect'
+import EllipsisDiv from '../zhn/EllipsisDiv'
 
 const TH_ID = 'ROW_CHECKBOX'
 , CHECKED_COLOR = '#1b2836'
 , DF_COLOR = '#7cb5ec'
 
-, CL_ELL = 'ellipsis'
 , CL_INPUT_COLOR = 'p-r va-m'
 
 , S_ROOT = { padding: '0 0 16px 16px' }
 , S_TITLE = {
+  display: 'inline-block',
   color: '##1b75bb',
   width: 100,
   padding: '0 16px 0 4px',
@@ -43,6 +44,15 @@ const TH_ID = 'ROW_CHECKBOX'
 
 , FN_NOOP = () => {}
 , _getRefValue = ref => ref.current;
+
+/*
+<span
+   className={CL_ELL}
+   style={S_TITLE}
+>
+  {name}
+</span>
+*/
 
 const SeriaRow = (props) => {
   const {
@@ -97,12 +107,10 @@ const SeriaRow = (props) => {
         onCheck={_hCheck}
         onUnCheck={_hUnCheck}
       />
-      <span
-         className={CL_ELL}
+      <EllipsisDiv
          style={S_TITLE}
-      >
-        {name}
-      </span>
+         text={name}
+      />
       <CellColor
          className={CL_INPUT_COLOR}
          color={_color}
