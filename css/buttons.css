@@ -125,7 +125,6 @@
 }
 .bt__watch__bar:hover,
 .bt__watch__bar:focus {
-  outline: 0;
   color: #80c040;
   border-color: #80c040;
 }
