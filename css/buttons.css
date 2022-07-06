@@ -74,7 +74,7 @@
   /* stylelint-enable */
 }
 
-.button-circle {
+.bt-svg-circle {
   display: inline-block;
   position: relative;
   top: 4px;
@@ -85,9 +85,8 @@
   padding: 0;
   stroke: gray;
 }
-.button-circle:hover,
-.button-circle:focus {
-  outline: 0;
+.bt-svg-circle:hover,
+.bt-svg-circle:focus {
   border: 2px solid #a487d4;
   stroke: #a487d4;
 }
@@ -105,7 +104,6 @@
 }
 .bt-resize:focus,
 .bt-resize:hover {
-  outline: 0;
   border: 2px solid #a487d4;
   stroke: #a487d4;
 }

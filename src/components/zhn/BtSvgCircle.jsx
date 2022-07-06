@@ -1,6 +1,6 @@
 import Svg from './svg/Svg';
 
-const CL_BUTTON_CIRCLE = "button-circle";
+const CL_BT_SVG_CIRCLE = "bt-svg-circle";
 
 const BtSvgCircle = ({
   style,
@@ -8,7 +8,7 @@ const BtSvgCircle = ({
   children
 }) => (
   <button
-    className={CL_BUTTON_CIRCLE}
+    className={CL_BT_SVG_CIRCLE}
     style={style}
     onClick={onClick}
     >
