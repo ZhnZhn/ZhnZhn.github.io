@@ -3,83 +3,65 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
+exports.default = void 0;
 
 var _react = require("react");
 
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 
+var _Input = require("./Input.Style");
+
+var _jsxRuntime = require("react/jsx-runtime");
+
 //import PropTypes from "prop-types";
-var CL = {
-  NUMBER_RANGE: 'input-minmax-number'
+const CL_NUMBER_RANGE = 'input-minmax-number';
+const S_INPUT_TEXT = { ..._Input.S_INPUT,
+  display: 'inline',
+  width: 40,
+  paddingLeft: 5,
+  marginLeft: 5,
+  marginRight: 5,
+  height: 26,
+  backgroundColor: '#e1e1cb',
+  boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
 };
-var S = {
-  INPUT: {
-    display: 'inline',
-    background: 'transparent none repeat scroll 0 0',
-    border: 'medium none',
-    outline: 'medium none',
-    height: 26,
-    paddingLeft: 5,
-    color: 'green',
-    width: 40,
-    fontSize: '16px',
-    fontWeight: 'bold',
-    backgroundColor: '#e1e1cb',
-    marginLeft: 5,
-    marginRight: 5,
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
-  }
-};
-var C = {
-  BLANK: '',
-  TEXT: 'text'
-};
+const BLANK = '',
+      TEXT = 'text',
+      OFF = "off";
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
+const _isFn = fn => typeof fn === 'function';
 
-var _isNumber = function _isNumber(n) {
-  return typeof n === 'number';
-};
+const _isNumber = n => typeof n === 'number';
 
-var _initValue = function _initValue(initialValue) {
-  return initialValue != null ? initialValue : C.BLANK;
-};
+const _initValue = initialValue => initialValue != null ? initialValue : BLANK;
 
-var _isMinMaxNumber = function _isMinMaxNumber(_ref) {
-  var type = _ref.type,
-      min = _ref.min,
-      max = _ref.max;
+const _isMinMaxNumber = _ref => {
+  let {
+    type,
+    min,
+    max
+  } = _ref;
   return type === 'number' && _isNumber(min) && _isNumber(max);
 };
 
-var InputText = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref) {
-  var initValue = props.initValue,
-      style = props.style,
-      type = props.type,
-      spellCheck = props.spellCheck,
-      placeholder = props.placeholder,
-      _props$maxLength = props.maxLength,
-      maxLength = _props$maxLength === void 0 ? 125 : _props$maxLength,
-      min = props.min,
-      max = props.max,
-      step = props.step,
-      onChange = props.onChange,
-      onEnter = props.onEnter,
-      _useState = (0, _react.useState)(function () {
-    return _initValue(initValue);
-  }),
-      value = _useState[0],
-      setValue = _useState[1],
-      _refInput = (0, _react.useRef)(),
-      _hChange = function _hChange(event) {
-    var _value = event.target.value;
+const InputText = /*#__PURE__*/(0, _react.forwardRef)((props, ref) => {
+  const {
+    initValue,
+    style,
+    type,
+    spellCheck,
+    placeholder,
+    maxLength = 125,
+    min,
+    max,
+    step,
+    onChange,
+    onEnter
+  } = props,
+        [value, setValue] = (0, _react.useState)(() => _initValue(initValue)),
+        _refInput = (0, _react.useRef)(),
+        _hChange = event => {
+    const _value = event.target.value;
 
     if (_value.length <= maxLength) {
       setValue(_value);
@@ -89,40 +71,31 @@ var InputText = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref) {
       }
     }
   },
-      _hKeyDown = (0, _useInputKeyDown["default"])({
-    onEnter: onEnter,
-    onDelete: function onDelete() {
-      return setValue(C.BLANK);
-    }
+        _hKeyDown = (0, _useInputKeyDown.default)({
+    onEnter,
+    onDelete: () => setValue(BLANK)
   }, [onEnter]);
 
-  (0, _react.useEffect)(function () {
-    return setValue(_initValue(initValue));
-  }, [initValue]);
-  (0, _react.useImperativeHandle)(ref, function () {
-    return {
-      getValue: function getValue() {
-        return ('' + value).trim();
-      },
-      setValue: setValue,
-      focus: function focus() {
-        return _refInput.current.focus();
-      }
-    };
-  }, [value]);
+  (0, _react.useEffect)(() => setValue(_initValue(initValue)), [initValue]);
+  (0, _react.useImperativeHandle)(ref, () => ({
+    getValue: () => ('' + value).trim(),
+    setValue: setValue,
+    focus: () => _refInput.current.focus()
+  }), [value]);
 
-  var _autoCorrect = spellCheck ? "on" : "off",
-      _spellCheck = spellCheck ? "true" : "false",
-      _className = _isMinMaxNumber(props) ? CL.NUMBER_RANGE : void 0;
+  const [_autoCorrect, _spellCheck] = spellCheck ? ["on", "true"] : ["off", "false"],
+        _className = _isMinMaxNumber(props) ? CL_NUMBER_RANGE : void 0;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
     ref: _refInput,
     className: _className,
-    style: (0, _extends2["default"])({}, S.INPUT, style),
-    type: type || C.TEXT,
-    name: C.TEXT,
-    autoCapitalize: C.OFF,
-    autoComplete: C.OFF,
+    style: { ...S_INPUT_TEXT,
+      ...style
+    },
+    type: type || TEXT,
+    name: TEXT,
+    autoCapitalize: OFF,
+    autoComplete: OFF,
     autoCorrect: _autoCorrect,
     spellCheck: _spellCheck,
     translate: "false",
@@ -153,5 +126,5 @@ var InputText = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref) {
  */
 
 var _default = InputText;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=InputText.js.map

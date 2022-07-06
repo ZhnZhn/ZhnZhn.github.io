@@ -36,20 +36,21 @@ const S_ROOT = {
 },
       S_INPUT_TEXT = {
   width: 80,
-  margin: '0 8px 2px 5px',
-  boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+  margin: '0 8px 2px 5px'
 };
 
 const NOOP = () => {};
 
-const RowInputColor = ({
-  style,
-  captionStyle,
-  inputStyle,
-  caption,
-  initValue = DF_COLOR,
-  onEnter = NOOP
-}) => {
+const RowInputColor = _ref => {
+  let {
+    style,
+    captionStyle,
+    inputStyle,
+    caption,
+    initValue = DF_COLOR,
+    onEnter = NOOP
+  } = _ref;
+
   const _refCellColor = (0, _react.useRef)(),
         [value, setValue] = (0, _react.useState)(initValue),
         [isShowPallete, setIsShowPallette] = (0, _react.useState)(false),

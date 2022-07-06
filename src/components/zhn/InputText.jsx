@@ -1,53 +1,63 @@
-import { forwardRef, useState, useRef, useEffect, useImperativeHandle } from 'react';
-import useInputKeyDown from './useInputKeyDown'
 //import PropTypes from "prop-types";
+import {
+  forwardRef,
+  useState,
+  useRef,
+  useEffect,
+  useImperativeHandle
+} from 'react';
+import useInputKeyDown from './useInputKeyDown';
 
-const CL = {
-  NUMBER_RANGE: 'input-minmax-number'
+import {
+  S_INPUT
+} from './Input.Style';
+
+const CL_NUMBER_RANGE = 'input-minmax-number';
+
+const S_INPUT_TEXT = {
+   ...S_INPUT,
+   display: 'inline',
+   width: 40,
+   paddingLeft: 5,
+   marginLeft: 5,
+   marginRight: 5,
+   height: 26,
+   backgroundColor: '#e1e1cb',
+   boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
 };
 
-const S = {
-  INPUT: {
-    display: 'inline',
-    background: 'transparent none repeat scroll 0 0',
-    border: 'medium none',
-    outline: 'medium none',
-    height: 26,
-    paddingLeft: 5,
-    color: 'green',
-    width: 40,
-    fontSize: '16px',
-    fontWeight: 'bold',
-    backgroundColor: '#e1e1cb',
-    marginLeft: 5,
-    marginRight: 5,
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
-  }
-};
-
-const C = {
-  BLANK: '',
-  TEXT: 'text'
-};
+const BLANK = ''
+, TEXT = 'text'
+, OFF = "off";
 
 const _isFn = fn => typeof fn === 'function';
 const _isNumber = n => typeof n === 'number';
 
 const _initValue = initialValue => initialValue != null
-  ? initialValue : C.BLANK
+  ? initialValue
+  : BLANK
 
-const _isMinMaxNumber = ({ type, min, max }) => type === 'number'
+const _isMinMaxNumber = ({
+  type,
+  min,
+  max
+}) => type === 'number'
  && _isNumber(min)
  && _isNumber(max);
 
 const InputText = forwardRef((props, ref) => {
   const {
     initValue,
-    style, type,
-    spellCheck, placeholder,
+    style,
+    type,
+    spellCheck,
+    placeholder,
     maxLength=125,
-    min, max, step,
-    onChange, onEnter
+    min,
+    max,
+    step,
+    onChange,
+    onEnter
   } = props
   , [value, setValue] = useState(() => _initValue(initValue))
   , _refInput = useRef()
@@ -62,7 +72,7 @@ const InputText = forwardRef((props, ref) => {
     }
   , _hKeyDown = useInputKeyDown({
       onEnter,
-      onDelete: () => setValue(C.BLANK)
+      onDelete: () => setValue(BLANK)
   }, [onEnter]);
 
 
@@ -76,24 +86,24 @@ const InputText = forwardRef((props, ref) => {
     focus: () => _refInput.current.focus()
   }), [value])
 
-  const  _autoCorrect = spellCheck
-     ? "on"
-     : "off"
-  , _spellCheck = spellCheck
-       ? "true"
-       : "false"
+  const  [
+    _autoCorrect,
+    _spellCheck
+  ] = spellCheck
+    ? ["on", "true"]
+    : ["off", "false"]
   , _className = _isMinMaxNumber(props)
-       ? CL.NUMBER_RANGE
+       ? CL_NUMBER_RANGE
        : void 0;
   return (
     <input
       ref={_refInput}
       className={_className}
-      style={{ ...S.INPUT, ...style }}
-      type={type || C.TEXT}
-      name={C.TEXT}
-      autoCapitalize={C.OFF}
-      autoComplete={C.OFF}
+      style={{...S_INPUT_TEXT, ...style}}
+      type={type || TEXT}
+      name={TEXT}
+      autoCapitalize={OFF}
+      autoComplete={OFF}
       autoCorrect={_autoCorrect}
       spellCheck={_spellCheck}
       translate="false"

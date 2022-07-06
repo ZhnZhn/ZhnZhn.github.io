@@ -15,16 +15,18 @@ const S_ROOT = { padding: '6px 0 6px 6px' }
   fontWeight: 'bold'
 }
 , S_INPUT_TEXT = {
-  width: 220,
-  boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+  width: 220
 };
 
 const RowInputText = forwardRef((props, ref) => {
   const {
-    styleRoot, rootStyle,
-    captionStyle, styleCaption,
+    styleRoot,
+    rootStyle,
+    captionStyle,
+    styleCaption,
     caption='Input',
-    inputStyle, styleInput,
+    inputStyle,
+    styleInput,
     ...rest
   } = props
   , _rootStyle = rootStyle

@@ -27,8 +27,7 @@ const S_ROOT = {
   fontWeight: 'bold'
 },
       S_INPUT_TEXT = {
-  width: 220,
-  boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+  width: 220
 };
 const RowInputText = /*#__PURE__*/(0, _react.forwardRef)((props, ref) => {
   const {

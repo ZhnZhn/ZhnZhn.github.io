@@ -1,5 +1,10 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
 //import PropTypes from "prop-types";
+import {
+  useRef,
+  useState,
+  useCallback,
+  useEffect
+} from 'react';
 
 import Model from '../../constants/Model'
 import InputText from '../zhn/InputText'
@@ -13,19 +18,18 @@ const DF_COLOR = '#90ed7d';
 
 const S_ROOT = { padding: '6px 6px 6px 0' }
 , S_CAPTION = {
-    display: 'inline-block',
-    color: '#1b75bb',
-    textAlign: 'right',
-    width: 100,
-    paddingRight: 5,
-    fontSize: 16,
-    fontWeight: 'bold'
-  }
-  , S_INPUT_TEXT = {
-    width: 80,
-    margin: '0 8px 2px 5px',
-    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
-  };
+   display: 'inline-block',
+   color: '#1b75bb',
+   textAlign: 'right',
+   width: 100,
+   paddingRight: 5,
+   fontSize: 16,
+   fontWeight: 'bold'
+}
+, S_INPUT_TEXT = {
+  width: 80,
+  margin: '0 8px 2px 5px'
+};
 
 const NOOP = () => {};
 
