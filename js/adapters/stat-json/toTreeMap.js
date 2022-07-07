@@ -133,7 +133,10 @@ const toTreeMap = {
           [data, total] = _addPercent(_d1);
 
     if (isCluster) {
-      (0, _TreeMapFn.addColorsTo)(data, total);
+      (0, _TreeMapFn.addColorsTo)({
+        data,
+        total
+      });
     }
 
     const config = (0, _ConfigBuilder.default)().treeMapConfig(data).addCaption(_title, _subtitle).add((0, _fnAdapter.crChartOption)(ds, Tid, option)).toConfig();

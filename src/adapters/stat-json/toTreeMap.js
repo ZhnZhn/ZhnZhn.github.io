@@ -142,7 +142,7 @@ const toTreeMap = {
     , [data, total] = _addPercent(_d1)
 
     if (isCluster) {
-      addColorsTo(data, total)
+      addColorsTo({ data, total })
     }
 
     const config = Builder()

@@ -7,7 +7,7 @@ var _MonoColorFn = require("../charts/MonoColorFn");
 
 var _AdapterFn = require("./AdapterFn");
 
-const _findLevelBy = (data, from, sum, stopSum) => {
+const _findLevelBy = (data, from, sum, stopSum, propName) => {
   const _maxIndex = data.length;
 
   if (from >= _maxIndex) {
@@ -18,7 +18,7 @@ const _findLevelBy = (data, from, sum, stopSum) => {
       i = from;
 
   for (; i < _maxIndex; i++) {
-    sum += data[i].value;
+    sum += data[i][propName];
 
     if (sum >= stopSum) {
       index = i;
@@ -33,12 +33,12 @@ const _findLevelBy = (data, from, sum, stopSum) => {
   return [index, sum];
 };
 
-const _findLevelIndex = (data, total, level1, level2) => {
+const _findLevelIndex = (data, total, level1, level2, propName) => {
   const _onePercent = total / 100,
         _v1 = _onePercent * level1,
         _v2 = _onePercent * level2,
-        [index1, sum1] = _findLevelBy(data, 0, 0, _v1),
-        [index2] = _findLevelBy(data, index1, sum1, _v2);
+        [index1, sum1] = _findLevelBy(data, 0, 0, _v1, propName),
+        [index2] = _findLevelBy(data, index1, sum1, _v2, propName);
 
   return [index1, index2];
 };
@@ -62,16 +62,16 @@ const _addColor = (data, levelIndex1, levelIndex2) => {
   });
 };
 
-const addColorsTo = function (data, total, level1, level2) {
-  if (level1 === void 0) {
-    level1 = 60;
-  }
+const addColorsTo = _ref => {
+  let {
+    data,
+    total,
+    propName = "value",
+    level1 = 60,
+    level2 = 90
+  } = _ref;
 
-  if (level2 === void 0) {
-    level2 = 90;
-  }
-
-  const [leveIndex1, levelIndex2] = _findLevelIndex(data, total, level1, level2);
+  const [leveIndex1, levelIndex2] = _findLevelIndex(data, total, level1, level2, propName);
 
   _addColor(data, leveIndex1, levelIndex2);
 };

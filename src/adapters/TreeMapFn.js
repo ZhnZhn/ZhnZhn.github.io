@@ -13,7 +13,8 @@ const _findLevelBy = (
   data,
   from,
   sum,
-  stopSum
+  stopSum,
+  propName
 ) => {
   const _maxIndex = data.length;
   if ( from >= _maxIndex ){
@@ -22,7 +23,7 @@ const _findLevelBy = (
 
   let index = _maxIndex, i = from;
   for(;i<_maxIndex;i++){
-    sum +=data[i].value
+    sum +=data[i][propName]
     if (sum>=stopSum) {
       index = i;
       break;
@@ -39,13 +40,14 @@ const _findLevelIndex = (
   data,
   total,
   level1,
-  level2
+  level2,
+  propName
 ) => {
   const _onePercent = total/100
   , _v1 = _onePercent * level1
   , _v2 = _onePercent * level2
-  , [index1, sum1] = _findLevelBy(data, 0, 0, _v1)
-  , [index2] = _findLevelBy(data, index1, sum1, _v2);
+  , [index1, sum1] = _findLevelBy(data, 0, 0, _v1, propName)
+  , [index2] = _findLevelBy(data, index1, sum1, _v2, propName);
 
   return [
     index1,
@@ -75,12 +77,13 @@ const _addColor = (
    })
 };
 
-export const addColorsTo = (
+export const addColorsTo = ({
   data,
   total,
+  propName="value",
   level1=60,
   level2=90
-) => {
+}) => {
   const [
     leveIndex1,
     levelIndex2
@@ -88,7 +91,8 @@ export const addColorsTo = (
     data,
     total,
     level1,
-    level2
+    level2,
+    propName
   );
   _addColor(data, leveIndex1, levelIndex2)
 }
