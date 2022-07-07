@@ -27,6 +27,10 @@ const AGG_OPTIONS = [
   { c: "Export Value", v: { rg: 2, measure: "TradeValue" } },
   { c: "Import Value", v: { rg: 1, measure: "TradeValue" } },
 ]
+, CHART_OPTIONS = [
+  { c: "TreeMap (60, 90)", v: "TREE_MAP"},
+  { c: "Bar (60, 90)", v: "BAR"}
+]
 , DF_TRADE_FLOW = TRADE_FLOW_OPTIONS[0]
 , DF_PARTNER = {c: "World",  v: "0"}
 , DF_FREQ = {c: "Annual",  v: "A"};
@@ -68,15 +72,16 @@ const UnDialogAgg = memoIsShow((
     onClose,
     toggleInputs
   })
+  , [isFlow, toggleFlow] = useToggle(true)
   , [isPartner, togglePartner] = useToggle(false)
   , [isAggr, toggleAggr] = useToggle(true)
   , [isPeriod, togglePeriod] = useToggle(false)
-  , [isFlow, toggleFlow] = useToggle(true)
   , [setOne, getOne] = useProperty()
   , [setTradePartner, getTradePartner] = useProperty()
   , [setAggregation, getAggregation] = useProperty()
-  , [setPeriod, getPeriod] = useProperty()
   , [setTradeFlow, getTradeFlow] = useProperty()
+  , [setChart, getChart] = useProperty()
+  , [setPeriod, getPeriod] = useProperty()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _setAggregation = useCallback(item => {
     setAggregation(item)
@@ -103,6 +108,7 @@ const UnDialogAgg = memoIsShow((
         tradeFlow: getTradeFlow() || DF_TRADE_FLOW,
         tradePartner,
         period: getPeriod() || DF_PERIOD,
+        chart: getChart(),
         freq: DF_FREQ
       }))
       clearValidationMessages()
@@ -132,9 +138,9 @@ const UnDialogAgg = memoIsShow((
      <ModalInputToggle
        isShow={isShowToggle}
        configs={[
-         ['Partner', isPartner, togglePartner],
-         ['Aggregation', isAggr, toggleAggr],
          ['Trade Flow', isFlow, toggleFlow],
+         ['Partner', isPartner, togglePartner],
+         ['Aggregation', isAggr, toggleAggr]
        ]}
        onClose={hideToggle}
      />
@@ -145,6 +151,16 @@ const UnDialogAgg = memoIsShow((
         caption="Reporter"
         onSelect={setOne}
      />
+     <D.ShowHide isShow={isFlow}>
+        <D.RowInputSelect
+          isShowLabels={isShowLabels}
+          caption="Trade Flow"
+          placeholder="Default: Export Value"
+          propCaption="c"
+          options={TRADE_FLOW_OPTIONS}
+          onSelect={setTradeFlow}
+        />
+     </D.ShowHide>
      <D.ShowHide isShow={isPartner}>
        <D.SelectWithLoad
           isShowLabels={isShowLabels}
@@ -166,6 +182,14 @@ const UnDialogAgg = memoIsShow((
        <D.ShowHide isShow={isPeriod}>
          <D.RowInputSelect
            isShowLabels={isShowLabels}
+           caption="Chart"
+           placeholder="Default: TreeMap (60,90)"
+           propCaption="c"
+           options={CHART_OPTIONS}
+           onSelect={setChart}
+         />
+         <D.RowInputSelect
+           isShowLabels={isShowLabels}
            caption="Period"
            placeholder="Default: 2021"
            propCaption="c"
@@ -173,16 +197,6 @@ const UnDialogAgg = memoIsShow((
            onSelect={setPeriod}
          />
        </D.ShowHide>
-    </D.ShowHide>
-    <D.ShowHide isShow={isFlow}>
-       <D.RowInputSelect
-         isShowLabels={isShowLabels}
-         caption="Trade Flow"
-         placeholder="Default: Export Value"
-         propCaption="c"
-         options={TRADE_FLOW_OPTIONS}
-         onSelect={setTradeFlow}
-       />
      </D.ShowHide>
      <D.ValidationMessages
          validationMessages={validationMessages}

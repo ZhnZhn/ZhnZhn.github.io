@@ -7,11 +7,14 @@ var _createrFns = require("./createrFns");
 
 const MAX_SUBTITLE = 60;
 
+const _crDirection = tradeFlowCaption => tradeFlowCaption.indexOf('Export') !== -1 ? 'to' : 'frome';
+
 const _crTitle = (one, tradeFlow, tradePartner) => {
-  const _title = (0, _createrFns.getC)(one) + ': ' + (0, _createrFns.getC)(tradeFlow),
+  const _tradeFlowCaption = (0, _createrFns.getC)(tradeFlow),
+        _title = (0, _createrFns.getC)(one) + ': ' + _tradeFlowCaption,
         _tradePartnerCapion = (0, _createrFns.getC)(tradePartner);
 
-  return _tradePartnerCapion ? _title + " to " + _tradePartnerCapion : _title;
+  return _tradePartnerCapion ? _title + " " + _crDirection(_tradeFlowCaption) + " " + _tradePartnerCapion : _title;
 };
 
 const _crSubtitle = three => {
@@ -33,7 +36,8 @@ const crLoadOptions = (props, options) => {
     tradeFlow,
     tradePartner,
     freq,
-    period
+    period,
+    chart
   } = options || {},
         _oneValue = (0, _createrFns.getV)(one),
         _two = (0, _createrFns.getV)(three) || (0, _createrFns.getV)(two),
@@ -45,12 +49,14 @@ const crLoadOptions = (props, options) => {
     value: _value,
     title: _crTitle(one, tradeFlow, tradePartner),
     subtitle: _crSubtitle(three),
+    oneC: (0, _createrFns.getC)(one),
     one: _oneValue,
     two: _two,
     ...(0, _createrFns.getV)(tradeFlow),
     tp: (0, _createrFns.getV)(tradePartner),
     freq: (0, _createrFns.getV)(freq),
-    period: (0, _createrFns.getV)(period)
+    period: (0, _createrFns.getV)(period),
+    chart: (0, _createrFns.getV)(chart)
   };
 };
 

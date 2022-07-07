@@ -48,7 +48,8 @@ const crLoadOptions = (
     tradeFlow,
     tradePartner,
     freq,
-    period
+    period,
+    chart
   } = options || {}
   , _oneValue = getV(one)
   , _two = getV(three) || getV(two)
@@ -68,7 +69,8 @@ const crLoadOptions = (
     ...getV(tradeFlow),
     tp: getV(tradePartner),
     freq: getV(freq),
-    period: getV(period)
+    period: getV(period),
+    chart: getV(chart)
   };
 };
 

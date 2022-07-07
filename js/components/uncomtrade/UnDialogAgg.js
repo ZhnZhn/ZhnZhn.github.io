@@ -59,6 +59,13 @@ const AGG_OPTIONS = [{
     measure: "TradeValue"
   }
 }],
+      CHART_OPTIONS = [{
+  c: "TreeMap (60, 90)",
+  v: "TREE_MAP"
+}, {
+  c: "Bar (60, 90)",
+  v: "BAR"
+}],
       DF_TRADE_FLOW = TRADE_FLOW_OPTIONS[0],
       DF_PARTNER = {
   c: "World",
@@ -89,15 +96,16 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
     onClose,
     toggleInputs
   }),
+        [isFlow, toggleFlow] = (0, _useToggle.default)(true),
         [isPartner, togglePartner] = (0, _useToggle.default)(false),
         [isAggr, toggleAggr] = (0, _useToggle.default)(true),
         [isPeriod, togglePeriod] = (0, _useToggle.default)(false),
-        [isFlow, toggleFlow] = (0, _useToggle.default)(true),
         [setOne, getOne] = (0, _useProperty.default)(),
         [setTradePartner, getTradePartner] = (0, _useProperty.default)(),
         [setAggregation, getAggregation] = (0, _useProperty.default)(),
-        [setPeriod, getPeriod] = (0, _useProperty.default)(),
-        [setTradeFlow, getTradeFlow] = (0, _useProperty.default)()
+        [setTradeFlow, getTradeFlow] = (0, _useProperty.default)(),
+        [setChart, getChart] = (0, _useProperty.default)(),
+        [setPeriod, getPeriod] = (0, _useProperty.default)()
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
         _setAggregation = (0, _uiApi.useCallback)(item => {
@@ -132,6 +140,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         tradeFlow: getTradeFlow() || DF_TRADE_FLOW,
         tradePartner,
         period: getPeriod() || DF_PERIOD,
+        chart: getChart(),
         freq: DF_FREQ
       }));
       clearValidationMessages();
@@ -158,7 +167,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       buttons: toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalInputToggle.default, {
       isShow: isShowToggle,
-      configs: [['Partner', isPartner, togglePartner], ['Aggregation', isAggr, toggleAggr], ['Trade Flow', isFlow, toggleFlow]],
+      configs: [['Trade Flow', isFlow, toggleFlow], ['Partner', isPartner, togglePartner], ['Aggregation', isAggr, toggleAggr]],
       onClose: hideToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
@@ -166,6 +175,16 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       uri: oneURI,
       caption: "Reporter",
       onSelect: setOne
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: isFlow,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+        isShowLabels: isShowLabels,
+        caption: "Trade Flow",
+        placeholder: "Default: Export Value",
+        propCaption: "c",
+        options: TRADE_FLOW_OPTIONS,
+        onSelect: setTradeFlow
+      })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isPartner,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
@@ -184,27 +203,24 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         propCaption: "c",
         options: AGG_OPTIONS,
         onSelect: _setAggregation
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.ShowHide, {
         isShow: isPeriod,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+          isShowLabels: isShowLabels,
+          caption: "Chart",
+          placeholder: "Default: TreeMap (60,90)",
+          propCaption: "c",
+          options: CHART_OPTIONS,
+          onSelect: setChart
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
           isShowLabels: isShowLabels,
           caption: "Period",
           placeholder: "Default: 2021",
           propCaption: "c",
           options: PERIOD_OPTIONS,
           onSelect: setPeriod
-        })
+        })]
       })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-      isShow: isFlow,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
-        isShowLabels: isShowLabels,
-        caption: "Trade Flow",
-        placeholder: "Default: Export Value",
-        propCaption: "c",
-        options: TRADE_FLOW_OPTIONS,
-        onSelect: setTradeFlow
-      })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
       validationMessages: validationMessages
     })]
