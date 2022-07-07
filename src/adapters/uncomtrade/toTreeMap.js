@@ -1,4 +1,3 @@
-import domSanitize from '../../utils/domSanitize';
 import Builder from '../../charts/ConfigBuilder';
 import {
   addColorsTo,
@@ -6,38 +5,35 @@ import {
 } from '../TreeMapFn';
 
 import {
+  isPositiveNumber,
   roundBy,
+  getItemTradeValue,
+  getItemCmdCode,
+  getItemCmdDescE,
+  getItemPeriod,
+  crCategoryTitle,
   crInfo,
   crZhConfig
 } from './fnAdapter';
-
-const _isNumber = n => typeof n === 'number'
-  && n-n === 0;
 
 const _compareByValue = (a, b) => b.value - a.value;
 
 const _crTreeMapData = json => {
   const data = [];
-  let _total = 0;
+  let total = 0;
   json.dataset.forEach(item => {
-    const value = item.TradeValue
-    , cmdCode = item.cmdCode
-    , period = item.period;
-    if (_isNumber(value) && value > 0) {
-      _total += value
+    const value = getItemTradeValue(item);
+    if (isPositiveNumber(value)) {
+      total += value
       data.push({
         value,
-        label: (cmdCode || '').length === 2
-          ? cmdCode
-          : domSanitize(cmdCode),
-        _d: domSanitize(item.cmdDescE),
-        title: _isNumber(period)
-          ? ''+period
-          : domSanitize(period)
+        label: getItemCmdCode(item),
+        _d: getItemCmdDescE(item),
+        title: getItemPeriod(item)
       })
     }
   })
-  const _onePercent = _total/100;
+  const _onePercent = total/100;
   data.forEach(item => {
     item.percent = roundBy(item.value/_onePercent)
     item.name = crPointName(
@@ -48,16 +44,9 @@ const _crTreeMapData = json => {
     item._d = void 0
   })
   data.sort(_compareByValue)
-  addColorsTo(data, _total)
+  addColorsTo({ data, total })
   return data;
 }
-
-const _crTitle = ({
-  title,
-  period
-}) => [title, 'in', period]
- .filter(Boolean)
- .join(' ');
 
 const toTreeMap = (
   json,
@@ -66,7 +55,7 @@ const toTreeMap = (
   const config = Builder()
     .treeMapConfig(_crTreeMapData(json))
     .addCaption(
-       _crTitle(option),
+       crCategoryTitle(option),
        option.subtitle
     )
     .add({

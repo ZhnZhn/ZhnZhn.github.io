@@ -1,7 +1,9 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
-exports.ymdToUTC = exports.valueMoving = exports.roundBy = exports.crZhConfig = exports.crInfo = exports.crChartId = void 0;
+exports.ymdToUTC = exports.valueMoving = exports.roundBy = exports.isPositiveNumber = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.crZhConfig = exports.crInfo = exports.crChartId = exports.crCategoryTitle = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
@@ -9,9 +11,53 @@ exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.valueMoving = _AdapterFn.valueMoving;
 exports.roundBy = _AdapterFn.roundBy;
 
+var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
+
 var _fnDescr = require("./fnDescr");
 
-const crChartId = _ref => {
+const isNumber = n => typeof n === 'number' && n - n === 0;
+
+const isPositiveNumber = n => isNumber(n) && n > 0;
+
+exports.isPositiveNumber = isPositiveNumber;
+
+const getItemTradeValue = item => (item || {}).TradeValue;
+
+exports.getItemTradeValue = getItemTradeValue;
+
+const getItemCmdCode = item => {
+  const {
+    cmdCode
+  } = item || {};
+  return (cmdCode || '').length === 2 ? cmdCode : (0, _domSanitize.default)(cmdCode);
+};
+
+exports.getItemCmdCode = getItemCmdCode;
+
+const getItemCmdDescE = item => (0, _domSanitize.default)((item || {}).cmdDescE);
+
+exports.getItemCmdDescE = getItemCmdDescE;
+
+const getItemPeriod = item => {
+  const {
+    period
+  } = item || {};
+  return isNumber(period) ? '' + period : (0, _domSanitize.default)(period);
+};
+
+exports.getItemPeriod = getItemPeriod;
+
+const crCategoryTitle = _ref => {
+  let {
+    title,
+    period
+  } = _ref;
+  return [title, 'in', period].filter(Boolean).join(' ');
+};
+
+exports.crCategoryTitle = crCategoryTitle;
+
+const crChartId = _ref2 => {
   let {
     value,
     rg = 2,
@@ -19,7 +65,7 @@ const crChartId = _ref => {
     tp,
     freq,
     period
-  } = _ref;
+  } = _ref2;
   return [value, rg, measure, tp, freq, period].filter(Boolean).join("_");
 };
 

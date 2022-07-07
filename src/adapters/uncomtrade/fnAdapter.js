@@ -4,7 +4,41 @@ export {
   roundBy
 } from '../AdapterFn';
 
+import domSanitize from '../../utils/domSanitize';
 import { toDescr } from './fnDescr';
+
+const isNumber = n => typeof n === 'number'
+  && n-n === 0;
+
+export const isPositiveNumber = n =>
+  isNumber(n) && n > 0
+
+export const getItemTradeValue = item =>
+  (item || {}).TradeValue;
+
+export const getItemCmdCode = item => {
+  const {cmdCode} = item || {}
+  return (cmdCode || '').length === 2
+    ? cmdCode
+    : domSanitize(cmdCode)
+}
+
+export const getItemCmdDescE = item => 
+  domSanitize((item || {}).cmdDescE)
+
+export const getItemPeriod = item => {
+  const {period} = item || {}
+  return isNumber(period)
+    ? ''+period
+    : domSanitize(period)
+}
+
+export const crCategoryTitle = ({
+  title,
+  period
+}) => [title, 'in', period]
+  .filter(Boolean)
+  .join(' ');
 
 export const crChartId = ({
   value,
