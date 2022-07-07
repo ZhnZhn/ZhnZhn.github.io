@@ -64,9 +64,10 @@ const crChartId = _ref2 => {
     measure,
     tp,
     freq,
-    period
+    period,
+    chart
   } = _ref2;
-  return [value, rg, measure, tp, freq, period].filter(Boolean).join("_");
+  return [value, rg, measure, tp, freq, period, chart].filter(Boolean).join("_");
 };
 
 exports.crChartId = crChartId;

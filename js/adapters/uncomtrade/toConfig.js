@@ -7,11 +7,13 @@ exports.default = void 0;
 
 var _toTreeMap = _interopRequireDefault(require("./toTreeMap"));
 
+var _toCategory = _interopRequireDefault(require("./toCategory"));
+
 var _toSeriesConfig = _interopRequireDefault(require("./toSeriesConfig"));
 
 const toConfig = (json, option) => {
   if (option.two === 'AG2') {
-    return (0, _toTreeMap.default)(json, option);
+    return option.chart === 'BAR' ? (0, _toCategory.default)(json, option) : (0, _toTreeMap.default)(json, option);
   }
 
   return (0, _toSeriesConfig.default)(json, option);

@@ -23,7 +23,7 @@ export const getItemCmdCode = item => {
     : domSanitize(cmdCode)
 }
 
-export const getItemCmdDescE = item => 
+export const getItemCmdDescE = item =>
   domSanitize((item || {}).cmdDescE)
 
 export const getItemPeriod = item => {
@@ -46,8 +46,9 @@ export const crChartId = ({
   measure,
   tp,
   freq,
-  period
-}) => [value, rg, measure, tp, freq, period]
+  period,
+  chart
+}) => [value, rg, measure, tp, freq, period, chart]
   .filter(Boolean)
   .join("_");
 
