@@ -30,37 +30,18 @@ const _getCategories = chartInst => {
   return (_chartInst$userOption4 = chartInst == null ? void 0 : (_chartInst$userOption5 = chartInst.userOptions) == null ? void 0 : (_chartInst$userOption6 = _chartInst$userOption5.xAxis) == null ? void 0 : _chartInst$userOption6.categories) != null ? _chartInst$userOption4 : void 0;
 };
 
-const _crCategoriesHm = categories => {
-  const _hm = {};
-  let i = 0;
+const _crDataHm = data => data.reduce((hm, p) => {
+  hm[p.c] = p;
+  return hm;
+}, {});
 
-  for (; i < categories.length; i++) {
-    _hm[categories[i]] = i;
-  }
-
-  return _hm;
-};
-
-const _isNumber = n => typeof n === 'number';
-
-const _orderByHm = (data, hm, length) => {
-  const _data = new Array(length);
-
-  let item,
-      categoryIndex,
-      i = 0;
-
-  for (; i < data.length; i++) {
-    item = data[i];
-    categoryIndex = hm[item.c];
-
-    if (_isNumber(categoryIndex)) {
-      _data[categoryIndex] = item;
-    }
-  }
-
-  return _data;
-};
+const _crDataOrderedByCategories = (hmData, categories) => categories.reduce((data, category) => {
+  data.push(hmData[category] || {
+    c: category,
+    y: null
+  });
+  return data;
+}, []);
 
 const _trToCategory = (chartInst, data) => {
   const _categories = _getCategories(chartInst);
@@ -69,11 +50,9 @@ const _trToCategory = (chartInst, data) => {
     return data;
   }
 
-  const _hmCategories = _crCategoriesHm(_categories),
-        _length = _categories.length,
-        _data = _orderByHm(data, _hmCategories, _length);
+  const _hmData = _crDataHm(data);
 
-  return _data;
+  return _crDataOrderedByCategories(_hmData, _categories);
 };
 
 const crYAxisSeria = (chartInst, options) => {
