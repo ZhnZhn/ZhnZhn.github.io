@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.ymdToUTC = exports.valueMoving = exports.roundBy = exports.isPositiveNumber = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.crZhConfig = exports.crInfo = exports.crChartId = exports.crCategoryTitle = void 0;
+exports.ymdToUTC = exports.valueMoving = exports.roundBy = exports.isTotalByAll = exports.isPositiveNumber = exports.isNotNested = exports.getItemTradeValue = exports.getItemPtTitle = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.crZhConfig = exports.crInfo = exports.crChartId = exports.crCategoryTitle = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
@@ -21,6 +21,14 @@ const isPositiveNumber = n => isNumber(n) && n > 0;
 
 exports.isPositiveNumber = isPositiveNumber;
 
+const isTotalByAll = option => option.tp === 'all' && option.two === 'total';
+
+exports.isTotalByAll = isTotalByAll;
+
+const isNotNested = ptTitle => ptTitle.indexOf(', nes') === -1;
+
+exports.isNotNested = isNotNested;
+
 const getItemTradeValue = item => (item || {}).TradeValue;
 
 exports.getItemTradeValue = getItemTradeValue;
@@ -37,6 +45,10 @@ exports.getItemCmdCode = getItemCmdCode;
 const getItemCmdDescE = item => (0, _domSanitize.default)((item || {}).cmdDescE);
 
 exports.getItemCmdDescE = getItemCmdDescE;
+
+const getItemPtTitle = item => (0, _domSanitize.default)((item || {}).ptTitle);
+
+exports.getItemPtTitle = getItemPtTitle;
 
 const getItemPeriod = item => {
   const {

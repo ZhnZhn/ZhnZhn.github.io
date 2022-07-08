@@ -13,6 +13,12 @@ const isNumber = n => typeof n === 'number'
 export const isPositiveNumber = n =>
   isNumber(n) && n > 0
 
+export const isTotalByAll = option =>
+  option.tp === 'all' && option.two === 'total';
+
+export const isNotNested = ptTitle =>
+  ptTitle.indexOf(', nes') === -1;
+
 export const getItemTradeValue = item =>
   (item || {}).TradeValue;
 
@@ -25,6 +31,9 @@ export const getItemCmdCode = item => {
 
 export const getItemCmdDescE = item =>
   domSanitize((item || {}).cmdDescE)
+
+export const getItemPtTitle = item =>
+  domSanitize((item || {}).ptTitle)
 
 export const getItemPeriod = item => {
   const {period} = item || {}
