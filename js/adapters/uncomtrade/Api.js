@@ -5,6 +5,8 @@ exports.default = void 0;
 
 var _crFn = require("../crFn");
 
+var _fnAdapter = require("./fnAdapter");
+
 const PERIOD = 5,
       ALL = 'all',
       DF_AGG_PERIOD = '2021' //rg=2 Export
@@ -38,7 +40,10 @@ const _isAllPeriod = (one, tp) => one !== ALL & tp !== ALL;
 
 let _shortTimePeriod;
 
-const _crTimePeriod = (one, tp, two, period) => two === 'AG2' ? period || DF_AGG_PERIOD : _isAllPeriod(one, tp) ? 'ALL,all' : _shortTimePeriod || (_shortTimePeriod = _crPeriod(new Date().getUTCFullYear(), PERIOD));
+const _crTimePeriod = (one, tp, two, period) => two === 'AG2' || (0, _fnAdapter.isTotalByAll)({
+  tp,
+  two
+}) ? period || DF_AGG_PERIOD : _isAllPeriod(one, tp) ? 'ALL,all,All' : _shortTimePeriod || (_shortTimePeriod = _crPeriod(new Date().getUTCFullYear(), PERIOD));
 
 const _checkReq = option => {
   if (option._isTs) {

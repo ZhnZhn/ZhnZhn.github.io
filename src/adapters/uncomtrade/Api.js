@@ -1,4 +1,5 @@
 import { crError } from '../crFn';
+import { isTotalByAll } from './fnAdapter';
 
 const PERIOD = 5
 , ALL = 'all'
@@ -50,7 +51,7 @@ const _crTimePeriod = (
   tp,
   two,
   period
-) => two === 'AG2'
+) => two === 'AG2' || isTotalByAll({ tp, two })
   ? period || DF_AGG_PERIOD
   : _isAllPeriod(one, tp)
      ? 'ALL,all,All'

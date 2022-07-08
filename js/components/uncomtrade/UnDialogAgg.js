@@ -76,6 +76,10 @@ const AGG_OPTIONS = [{
   v: "A"
 };
 
+const _isPeriod = (tp, aggr) => !(tp.v !== 'all' && aggr.v === 'total');
+
+const _isAggrAll = (tp, aggr) => tp.v === 'all' && aggr.v !== 'total';
+
 const UnDialogAgg = (0, _memoIsShow.default)(props => {
   const {
     isShow,
@@ -97,7 +101,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
     toggleInputs
   }),
         [isFlow, toggleFlow] = (0, _useToggle.default)(true),
-        [isPartner, togglePartner] = (0, _useToggle.default)(false),
+        [isPartner, togglePartner] = (0, _useToggle.default)(true),
         [isAggr, toggleAggr] = (0, _useToggle.default)(true),
         [isPeriod, togglePeriod] = (0, _useToggle.default)(false),
         [setOne, getOne] = (0, _useProperty.default)(),
@@ -108,12 +112,14 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         [setPeriod, getPeriod] = (0, _useProperty.default)()
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
+        _setTradePartner = (0, _uiApi.useCallback)(item => {
+    setTradePartner(item);
+    togglePeriod(_isPeriod(item || DF_PARTNER, getAggregation() || DF_AGGREGATION));
+  }, []) // setTradePartner, togglePeriod
+  ,
         _setAggregation = (0, _uiApi.useCallback)(item => {
     setAggregation(item);
-
-    const _isPeriod = item && item.v !== DF_AGGREGATION.v;
-
-    togglePeriod(_isPeriod);
+    togglePeriod(_isPeriod(getTradePartner() || DF_PARTNER, item || DF_AGGREGATION));
   }, []) // setAggregation, togglePeriod
 
   /*eslint-enable react-hooks/exhaustive-deps */
@@ -123,20 +129,21 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         _hLoad = (0, _uiApi.useCallback)(() => {
     const one = getOne(),
           tradePartner = getTradePartner() || DF_PARTNER,
+          three = getAggregation() || DF_AGGREGATION,
           msgs = [];
 
     if (!one) {
       msgs.push(msgOnNotSelected('Reporter'));
     }
 
-    if (one && one.v === 'all' || tradePartner.v === 'all') {
+    if (one && one.v === 'all' || _isAggrAll(tradePartner, three)) {
       msgs.push('Query All is too complex');
     }
 
     if (msgs.length === 0) {
       onLoad(loadFn(props, {
         one,
-        three: getAggregation() || DF_AGGREGATION,
+        three,
         tradeFlow: getTradeFlow() || DF_TRADE_FLOW,
         tradePartner,
         period: getPeriod() || DF_PERIOD,
@@ -192,7 +199,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         uri: tpURI,
         caption: "Partner",
         placeholder: "Default: World",
-        onSelect: setTradePartner
+        onSelect: _setTradePartner
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.ShowHide, {
       isShow: isAggr,

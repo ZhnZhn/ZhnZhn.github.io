@@ -35,6 +35,16 @@ const AGG_OPTIONS = [
 , DF_PARTNER = {c: "World",  v: "0"}
 , DF_FREQ = {c: "Annual",  v: "A"};
 
+const _isPeriod = (
+  tp,
+  aggr
+) => !(tp.v !== 'all' && aggr.v === 'total');
+
+const _isAggrAll = (
+  tp,
+  aggr
+) => tp.v === 'all' &&  aggr.v !== 'total';
+
 const UnDialogAgg = memoIsShow((
   props
 ) => {
@@ -73,7 +83,7 @@ const UnDialogAgg = memoIsShow((
     toggleInputs
   })
   , [isFlow, toggleFlow] = useToggle(true)
-  , [isPartner, togglePartner] = useToggle(false)
+  , [isPartner, togglePartner] = useToggle(true)
   , [isAggr, toggleAggr] = useToggle(true)
   , [isPeriod, togglePeriod] = useToggle(false)
   , [setOne, getOne] = useProperty()
@@ -83,10 +93,20 @@ const UnDialogAgg = memoIsShow((
   , [setChart, getChart] = useProperty()
   , [setPeriod, getPeriod] = useProperty()
   /*eslint-disable react-hooks/exhaustive-deps */
+  , _setTradePartner = useCallback((item) => {
+    setTradePartner(item)
+    togglePeriod(_isPeriod(
+      item || DF_PARTNER,
+      getAggregation() || DF_AGGREGATION
+    ))
+  }, [])
+  // setTradePartner, togglePeriod
   , _setAggregation = useCallback(item => {
     setAggregation(item)
-    const _isPeriod = item && item.v !== DF_AGGREGATION.v
-    togglePeriod(_isPeriod)
+    togglePeriod(_isPeriod(
+      getTradePartner() || DF_PARTNER,
+      item || DF_AGGREGATION
+    ))
   }, [])
   // setAggregation, togglePeriod
   /*eslint-enable react-hooks/exhaustive-deps */
@@ -94,17 +114,19 @@ const UnDialogAgg = memoIsShow((
   , _hLoad = useCallback(() => {
     const one = getOne()
     , tradePartner = getTradePartner() || DF_PARTNER
+    , three = getAggregation() || DF_AGGREGATION
     , msgs = [];
     if (!one) {
       msgs.push(msgOnNotSelected('Reporter'))
     }
-    if (one && one.v === 'all' || tradePartner.v === 'all') {
+    if (one && one.v === 'all'
+        || _isAggrAll(tradePartner, three)) {
       msgs.push('Query All is too complex')
     }
     if (msgs.length === 0) {
       onLoad(loadFn(props, {
         one,
-        three: getAggregation() || DF_AGGREGATION,
+        three,
         tradeFlow: getTradeFlow() || DF_TRADE_FLOW,
         tradePartner,
         period: getPeriod() || DF_PERIOD,
@@ -167,7 +189,7 @@ const UnDialogAgg = memoIsShow((
           uri={tpURI}
           caption="Partner"
           placeholder="Default: World"
-          onSelect={setTradePartner}
+          onSelect={_setTradePartner}
        />
      </D.ShowHide>
      <D.ShowHide isShow={isAggr}>
