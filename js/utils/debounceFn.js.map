@@ -1,0 +1,19 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/debounceFn.js"
+ ],
+ "file": "../../src/utils/debounceFn.js",
+ "names": [
+  "debounceFn",
+  "fn",
+  "period",
+  "timeId",
+  "debounced",
+  "args",
+  "clearTimeout",
+  "setTimeout",
+  "cancel"
+ ],
+ "mappings": ";;;;;AACA,MAAMA,UAAU,GAAG,CACjBC,EADiB,EAEjBC,MAFiB,KAGd;AACH,MAAIC,MAAM,GAAG,IAAb;AACA,SAAO,SAASC,SAAT,GAA4B;AAAA,sCAANC,IAAM;AAANA,MAAAA,IAAM;AAAA;;AACjC,QAAIF,MAAJ,EAAY;AACVG,MAAAA,YAAY,CAACH,MAAD,CAAZ;AACD;;AACDA,IAAAA,MAAM,GAAGI,UAAU,CAAC,MAAM;AACxBN,MAAAA,EAAE,CAAC,GAAGI,IAAJ,CAAF;AACAF,MAAAA,MAAM,GAAG,IAAT;AACD,KAHkB,EAGhBD,MAHgB,CAAnB;;AAKAE,IAAAA,SAAS,CAACI,MAAV,GAAmB,YAAW;AAC5BF,MAAAA,YAAY,CAACH,MAAD,CAAZ;AACD,KAFD;AAGD,GAZD;AAaD,CAlBD;;eAoBeH,U"
+}

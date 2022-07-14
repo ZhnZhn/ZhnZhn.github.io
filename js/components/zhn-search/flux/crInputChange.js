@@ -3,42 +3,40 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _memoizeOne = _interopRequireDefault(require("memoize-one"));
 
-var _throttle = _interopRequireDefault(require("../../../utils/throttle"));
+var _debounceFn = _interopRequireDefault(require("../../../utils/debounceFn"));
 
-var DF_MS = 5000;
+const DF_MS = 5000;
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
+const _isFn = fn => typeof fn === 'function';
 
-var _isLoading = function _isLoading(value) {
-  return value && value.length > 1;
-};
+const _isValue = value => value && value.length > 1;
 
-var _crOptions = function _crOptions(api) {
-  return _isFn(api.crUrlOptions) ? api.crUrlOptions() : true;
-};
+const _crOptions = api => _isFn(api.crUrlOptions) ? api.crUrlOptions() : true;
 
-var _fetchUrl = function _fetchUrl(_ref) {
-  var api = _ref.api,
-      value = _ref.value,
-      options = _ref.options,
-      action = _ref.action;
-  return fetch(api.crUrl(value, options)).then(function (res) {
-    var status = res.status;
+const _fetchUrl = _ref => {
+  let {
+    api,
+    value,
+    options,
+    action
+  } = _ref;
+  return fetch(api.crUrl(value, options)).then(res => {
+    const {
+      status
+    } = res;
 
     if (status >= 200 && status < 400) {
       return res.json();
     } else {
       throw new Error('Respond status: ' + status);
     }
-  }).then(function (json) {
+  }).then(json => {
     action.loaded(api.crOptions(json));
-  })["catch"](function (err) {
+  }).catch(err => {
     action.loadingFailed();
 
     if (_isFn(api.onError)) {
@@ -49,35 +47,26 @@ var _fetchUrl = function _fetchUrl(_ref) {
   });
 };
 
-var _crInputChange = function _crInputChange(action, api, ms) {
-  if (ms === void 0) {
-    ms = DF_MS;
-  }
+const _crInputChange = (action, api, ms) => (0, _debounceFn.default)(value => {
+  if (_isValue(value)) {
+    action.loading();
 
-  return (0, _throttle["default"])(function (value) {
-    if (_isLoading(value)) {
-      action.loading();
+    const options = _crOptions(api);
 
-      var options = _crOptions(api);
-
-      if (!options) {
-        action.loadingFailed();
-      } else {
-        _fetchUrl({
-          api: api,
-          action: action,
-          value: value,
-          options: options
-        });
-      }
+    if (!options) {
+      action.loadingFailed();
+    } else {
+      _fetchUrl({
+        api,
+        action,
+        value,
+        options
+      });
     }
-  }, ms, {
-    trailing: true,
-    leading: false
-  });
-};
+  }
+}, ms || DF_MS);
 
-var _default = (0, _memoizeOne["default"])(_crInputChange);
+var _default = (0, _memoizeOne.default)(_crInputChange);
 
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=crInputChange.js.map

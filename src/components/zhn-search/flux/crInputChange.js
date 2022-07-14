@@ -1,18 +1,20 @@
-import memoizeOne from 'memoize-one'
-
-import throttle from '../../../utils/throttle'
+import memoizeOne from 'memoize-one';
+import debounceFn from '../../../utils/debounceFn';
 
 const DF_MS = 5000;
 
 const _isFn = fn => typeof fn === 'function';
 
-const _isLoading = value => value && value.length > 1;
+const _isValue = value => value && value.length > 1;
 const _crOptions = api => _isFn(api.crUrlOptions)
   ? api.crUrlOptions()
   : true;
 
 const _fetchUrl = ({
-  api, value, options, action
+  api,
+  value,
+  options,
+  action
 }) => fetch(api.crUrl(value, options))
   .then(res => {
     const { status } = res;
@@ -27,7 +29,7 @@ const _fetchUrl = ({
   })
   .catch(err => {
     action.loadingFailed()
-    if ( _isFn(api.onError)) {
+    if (_isFn(api.onError)) {
       api.onError(err.message)
     } else {
       console.log(err)
@@ -35,17 +37,24 @@ const _fetchUrl = ({
   })
 
 const _crInputChange = (
-  action, api, ms=DF_MS
-) => throttle( (value) => {
-  if ( _isLoading(value) ) {
+  action,
+  api,
+  ms
+) => debounceFn(value => {
+  if (_isValue(value)) {
     action.loading()
     const options = _crOptions(api)
     if (!options) {
       action.loadingFailed()
     } else {
-      _fetchUrl({ api, action, value, options })
+      _fetchUrl({
+        api,
+        action,
+        value,
+        options
+      })
     }
   }
-}, ms, { trailing: true, leading: false })
+}, ms || DF_MS)
 
 export default memoizeOne(_crInputChange)

@@ -1,1 +1,41 @@
-{"version":3,"sources":["../../../../src/components/zhn-search/flux/crInputChange.js"],"names":["DF_MS","_isFn","fn","_isLoading","value","length","_crOptions","api","crUrlOptions","_fetchUrl","options","action","fetch","crUrl","then","res","status","json","Error","loaded","crOptions","err","loadingFailed","onError","message","console","log","_crInputChange","ms","loading","trailing","leading"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,KAAK,GAAG,IAAd;;AAEA,IAAMC,KAAK,GAAG,SAARA,KAAQ,CAAAC,EAAE;AAAA,SAAI,OAAOA,EAAP,KAAc,UAAlB;AAAA,CAAhB;;AAEA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAAAC,KAAK;AAAA,SAAIA,KAAK,IAAIA,KAAK,CAACC,MAAN,GAAe,CAA5B;AAAA,CAAxB;;AACA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAAAC,GAAG;AAAA,SAAIN,KAAK,CAACM,GAAG,CAACC,YAAL,CAAL,GACtBD,GAAG,CAACC,YAAJ,EADsB,GAEtB,IAFkB;AAAA,CAAtB;;AAIA,IAAMC,SAAS,GAAG,SAAZA,SAAY;AAAA,MAChBF,GADgB,QAChBA,GADgB;AAAA,MACXH,KADW,QACXA,KADW;AAAA,MACJM,OADI,QACJA,OADI;AAAA,MACKC,MADL,QACKA,MADL;AAAA,SAEZC,KAAK,CAACL,GAAG,CAACM,KAAJ,CAAUT,KAAV,EAAiBM,OAAjB,CAAD,CAAL,CACHI,IADG,CACE,UAAAC,GAAG,EAAI;AAAA,QACHC,MADG,GACQD,GADR,CACHC,MADG;;AAEX,QAAKA,MAAM,IAAE,GAAR,IAAeA,MAAM,GAAC,GAA3B,EAAiC;AAC/B,aAAOD,GAAG,CAACE,IAAJ,EAAP;AACD,KAFD,MAEO;AACL,YAAM,IAAIC,KAAJ,CAAU,qBAAqBF,MAA/B,CAAN;AACD;AACF,GARG,EASHF,IATG,CASE,UAAAG,IAAI,EAAI;AACZN,IAAAA,MAAM,CAACQ,MAAP,CAAcZ,GAAG,CAACa,SAAJ,CAAcH,IAAd,CAAd;AACD,GAXG,WAYG,UAAAI,GAAG,EAAI;AACZV,IAAAA,MAAM,CAACW,aAAP;;AACA,QAAKrB,KAAK,CAACM,GAAG,CAACgB,OAAL,CAAV,EAAyB;AACvBhB,MAAAA,GAAG,CAACgB,OAAJ,CAAYF,GAAG,CAACG,OAAhB;AACD,KAFD,MAEO;AACLC,MAAAA,OAAO,CAACC,GAAR,CAAYL,GAAZ;AACD;AACF,GAnBG,CAFY;AAAA,CAAlB;;AAuBA,IAAMM,cAAc,GAAG,SAAjBA,cAAiB,CACrBhB,MADqB,EACbJ,GADa,EACRqB,EADQ;AAAA,MACRA,EADQ;AACRA,IAAAA,EADQ,GACL5B,KADK;AAAA;;AAAA,SAElB,0BAAU,UAACI,KAAD,EAAW;AACxB,QAAKD,UAAU,CAACC,KAAD,CAAf,EAAyB;AACvBO,MAAAA,MAAM,CAACkB,OAAP;;AACA,UAAMnB,OAAO,GAAGJ,UAAU,CAACC,GAAD,CAA1B;;AACA,UAAI,CAACG,OAAL,EAAc;AACZC,QAAAA,MAAM,CAACW,aAAP;AACD,OAFD,MAEO;AACLb,QAAAA,SAAS,CAAC;AAAEF,UAAAA,GAAG,EAAHA,GAAF;AAAOI,UAAAA,MAAM,EAANA,MAAP;AAAeP,UAAAA,KAAK,EAALA,KAAf;AAAsBM,UAAAA,OAAO,EAAPA;AAAtB,SAAD,CAAT;AACD;AACF;AACF,GAVI,EAUFkB,EAVE,EAUE;AAAEE,IAAAA,QAAQ,EAAE,IAAZ;AAAkBC,IAAAA,OAAO,EAAE;AAA3B,GAVF,CAFkB;AAAA,CAAvB;;eAce,4BAAWJ,cAAX,C","sourcesContent":["import memoizeOne from 'memoize-one'\r\n\r\nimport throttle from '../../../utils/throttle'\r\n\r\nconst DF_MS = 5000;\r\n\r\nconst _isFn = fn => typeof fn === 'function';\r\n\r\nconst _isLoading = value => value && value.length > 1;\r\nconst _crOptions = api => _isFn(api.crUrlOptions)\r\n  ? api.crUrlOptions()\r\n  : true;\r\n\r\nconst _fetchUrl = ({\r\n  api, value, options, action\r\n}) => fetch(api.crUrl(value, options))\r\n  .then(res => {\r\n    const { status } = res;\r\n    if ( status>=200 && status<400 ) {\r\n      return res.json();\r\n    } else {\r\n      throw new Error('Respond status: ' + status);\r\n    }\r\n  })\r\n  .then(json => {\r\n    action.loaded(api.crOptions(json))\r\n  })\r\n  .catch(err => {\r\n    action.loadingFailed()\r\n    if ( _isFn(api.onError)) {\r\n      api.onError(err.message)\r\n    } else {\r\n      console.log(err)\r\n    }\r\n  })\r\n\r\nconst _crInputChange = (\r\n  action, api, ms=DF_MS\r\n) => throttle( (value) => {\r\n  if ( _isLoading(value) ) {\r\n    action.loading()\r\n    const options = _crOptions(api)\r\n    if (!options) {\r\n      action.loadingFailed()\r\n    } else {\r\n      _fetchUrl({ api, action, value, options })\r\n    }\r\n  }\r\n}, ms, { trailing: true, leading: false })\r\n\r\nexport default memoizeOne(_crInputChange)\r\n"],"file":"crInputChange.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/zhn-search/flux/crInputChange.js"
+ ],
+ "file": "../../../../src/components/zhn-search/flux/crInputChange.js",
+ "names": [
+  "DF_MS",
+  "_isFn",
+  "fn",
+  "_isValue",
+  "value",
+  "length",
+  "_crOptions",
+  "api",
+  "crUrlOptions",
+  "_fetchUrl",
+  "options",
+  "action",
+  "fetch",
+  "crUrl",
+  "then",
+  "res",
+  "status",
+  "json",
+  "Error",
+  "loaded",
+  "crOptions",
+  "catch",
+  "err",
+  "loadingFailed",
+  "onError",
+  "message",
+  "console",
+  "log",
+  "_crInputChange",
+  "ms",
+  "loading"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,KAAK,GAAG,IAAd;;AAEA,MAAMC,KAAK,GAAGC,EAAE,IAAI,OAAOA,EAAP,KAAc,UAAlC;;AAEA,MAAMC,QAAQ,GAAGC,KAAK,IAAIA,KAAK,IAAIA,KAAK,CAACC,MAAN,GAAe,CAAlD;;AACA,MAAMC,UAAU,GAAGC,GAAG,IAAIN,KAAK,CAACM,GAAG,CAACC,YAAL,CAAL,GACtBD,GAAG,CAACC,YAAJ,EADsB,GAEtB,IAFJ;;AAIA,MAAMC,SAAS,GAAG;AAAA,MAAC;AACjBF,IAAAA,GADiB;AAEjBH,IAAAA,KAFiB;AAGjBM,IAAAA,OAHiB;AAIjBC,IAAAA;AAJiB,GAAD;AAAA,SAKZC,KAAK,CAACL,GAAG,CAACM,KAAJ,CAAUT,KAAV,EAAiBM,OAAjB,CAAD,CAAL,CACHI,IADG,CACEC,GAAG,IAAI;AACX,UAAM;AAAEC,MAAAA;AAAF,QAAaD,GAAnB;;AACA,QAAKC,MAAM,IAAE,GAAR,IAAeA,MAAM,GAAC,GAA3B,EAAiC;AAC/B,aAAOD,GAAG,CAACE,IAAJ,EAAP;AACD,KAFD,MAEO;AACL,YAAM,IAAIC,KAAJ,CAAU,qBAAqBF,MAA/B,CAAN;AACD;AACF,GARG,EASHF,IATG,CASEG,IAAI,IAAI;AACZN,IAAAA,MAAM,CAACQ,MAAP,CAAcZ,GAAG,CAACa,SAAJ,CAAcH,IAAd,CAAd;AACD,GAXG,EAYHI,KAZG,CAYGC,GAAG,IAAI;AACZX,IAAAA,MAAM,CAACY,aAAP;;AACA,QAAItB,KAAK,CAACM,GAAG,CAACiB,OAAL,CAAT,EAAwB;AACtBjB,MAAAA,GAAG,CAACiB,OAAJ,CAAYF,GAAG,CAACG,OAAhB;AACD,KAFD,MAEO;AACLC,MAAAA,OAAO,CAACC,GAAR,CAAYL,GAAZ;AACD;AACF,GAnBG,CALY;AAAA,CAAlB;;AA0BA,MAAMM,cAAc,GAAG,CACrBjB,MADqB,EAErBJ,GAFqB,EAGrBsB,EAHqB,KAIlB,yBAAWzB,KAAK,IAAI;AACvB,MAAID,QAAQ,CAACC,KAAD,CAAZ,EAAqB;AACnBO,IAAAA,MAAM,CAACmB,OAAP;;AACA,UAAMpB,OAAO,GAAGJ,UAAU,CAACC,GAAD,CAA1B;;AACA,QAAI,CAACG,OAAL,EAAc;AACZC,MAAAA,MAAM,CAACY,aAAP;AACD,KAFD,MAEO;AACLd,MAAAA,SAAS,CAAC;AACRF,QAAAA,GADQ;AAERI,QAAAA,MAFQ;AAGRP,QAAAA,KAHQ;AAIRM,QAAAA;AAJQ,OAAD,CAAT;AAMD;AACF;AACF,CAfI,EAeFmB,EAAE,IAAI7B,KAfJ,CAJL;;eAqBe,yBAAW4B,cAAX,C"
+}
