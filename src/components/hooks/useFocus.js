@@ -1,10 +1,16 @@
-import { useRef, useEffect } from 'react';
+import {
+  useRef,
+  useEffect,
+  focusRefElement
+} from '../uiApi';
 
-const useFocus = (isShow) => {
+const useFocus = (
+  isShow
+) => {
   const ref = useRef();
   useEffect(() => {
-    if (isShow && ref.current) {
-      ref.current.focus()
+    if (isShow) {
+      focusRefElement(ref)
     }
   }, [isShow])
   return ref;
