@@ -37,14 +37,14 @@ export const focusRefElement = (
 
 export const isInputValid = ref => {
   const inputComp = getRefValue(ref);
-  return inputComp
+  return inputComp && _isFn(inputComp.isValid)
     ? inputComp.isValid()
     : false;
 }
 
 export const getInputValue = ref => {
   const inputComp = getRefValue(ref);
-  return inputComp
+  return inputComp && _isFn(inputComp.getValue)
     ? inputComp.getValue()
     : void 0
 }
