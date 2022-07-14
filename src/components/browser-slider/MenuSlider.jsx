@@ -1,12 +1,11 @@
 import {
   useRef,
   useState,
-  useCallback,
   getRefValue,
   setRefValue
 } from '../uiApi';
 
-import throttleFn from '../../utils/throttleFn';
+import useThrottleCallback from '../hooks/useThrottleCallback';
 
 import fOnClickItem from './factoryClickItem';
 import loadItems from './loadItems';
@@ -78,8 +77,7 @@ const MenuSlider = ({
     },
     setState
   ] = useState(INITIAL_STATE)
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _hPrevPage = useCallback(throttleFn((pageNumber) => {
+  , _hPrevPage = useThrottleCallback(pageNumber => {
        setState(prevState => {
          const { pageCurrent } = prevState;
          return pageCurrent === 0 || pageCurrent !== pageNumber
@@ -89,8 +87,8 @@ const MenuSlider = ({
               pageCurrent: pageNumber - 1
            };
        })
-  }), [])
-  , _hNextPage = useCallback(throttleFn((
+  })
+  , _hNextPage = useThrottleCallback((
       id,
       title,
       pageNumber
@@ -112,8 +110,7 @@ const MenuSlider = ({
           pageCurrent: pageNumber + 1
         };
      })
-  }), [_hPrevPage])
-  /*eslint-enable react-hooks/exhaustive-deps */
+  }, [_hPrevPage])
   , _pagesStyle = _crPagesStyle(_refMenu, _refDirection);
 
   return (

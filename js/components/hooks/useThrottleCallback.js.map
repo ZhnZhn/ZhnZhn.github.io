@@ -1,0 +1,14 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useThrottleCallback.js"
+ ],
+ "file": "../../../src/components/hooks/useThrottleCallback.js",
+ "names": [
+  "useThrottleCallback",
+  "fn",
+  "deps",
+  "period"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA;AACA,MAAMA,mBAAmB,GAAG,CAC1BC,EAD0B,EAE1BC,IAF0B,EAG1BC,MAH0B,KAIvB,wBACH,yBAAWF,EAAX,EAAeE,MAAf,CADG,EAEHD,IAAI,IAAI,EAFL,CAJL;AAQA;;;eAEeF,mB"
+}

@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _uiApi = require("../uiApi");
 
-var _throttleFn = _interopRequireDefault(require("../../utils/throttleFn"));
+var _useThrottleCallback = _interopRequireDefault(require("../hooks/useThrottleCallback"));
 
 var _factoryClickItem = _interopRequireDefault(require("./factoryClickItem"));
 
@@ -69,10 +69,8 @@ const MenuSlider = _ref => {
         [{
     pageCurrent,
     pages
-  }, setState] = (0, _uiApi.useState)(INITIAL_STATE)
-  /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        _hPrevPage = (0, _uiApi.useCallback)((0, _throttleFn.default)(pageNumber => {
+  }, setState] = (0, _uiApi.useState)(INITIAL_STATE),
+        _hPrevPage = (0, _useThrottleCallback.default)(pageNumber => {
     setState(prevState => {
       const {
         pageCurrent
@@ -81,8 +79,8 @@ const MenuSlider = _ref => {
         pageCurrent: pageNumber - 1
       };
     });
-  }), []),
-        _hNextPage = (0, _uiApi.useCallback)((0, _throttleFn.default)((id, title, pageNumber) => {
+  }),
+        _hNextPage = (0, _useThrottleCallback.default)((id, title, pageNumber) => {
     setState(prevState => {
       const {
         pageCurrent,
@@ -112,9 +110,7 @@ const MenuSlider = _ref => {
         pageCurrent: pageNumber + 1
       };
     });
-  }), [_hPrevPage])
-  /*eslint-enable react-hooks/exhaustive-deps */
-  ,
+  }, [_hPrevPage]),
         _pagesStyle = _crPagesStyle(_refMenu, _refDirection);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {

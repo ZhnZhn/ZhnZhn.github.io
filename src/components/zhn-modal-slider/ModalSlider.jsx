@@ -1,10 +1,8 @@
 import {
-  useState,
-  useCallback
+  useState  
 } from 'react';
+import useThrottleCallback from '../hooks/useThrottleCallback';
 import useDidUpdate from '../hooks/useDidUpdate';
-
-import throttleFn from '../../utils/throttleFn';
 
 import ModalPane from '../zhn-moleculs/ModalPane';
 import ShowHide from '../zhn/ShowHide';
@@ -103,15 +101,17 @@ const ModalSlider = ({
      pageCurrent,
      pages
    } = state
-   /*eslint-disable react-hooks/exhaustive-deps */
-  , hPrevPage = useCallback(throttleFn((pageNumber) => {
+  , hPrevPage = useThrottleCallback(pageNumber => {
      setState(prevState => {
        prevState.pageCurrent = pageNumber - 1
        return {...prevState};
      })
-  }), [])
-
-  , hNextPage = useCallback(throttleFn((id, title, pageNumber)=>{
+  })
+  , hNextPage = useThrottleCallback((
+      id,
+      title,
+      pageNumber
+    ) => {
      setState(prevState => {
        const { pages } = prevState
        , _max = pages.length-1;
@@ -132,8 +132,7 @@ const ModalSlider = ({
        prevState.pageCurrent = pageNumber + 1
        return {...prevState};
      })
-  }), [model])
-  /*eslint-enable react-hooks/exhaustive-deps */
+  }, [model])
 
   useDidUpdate(
     () => setState(_initState(model)),

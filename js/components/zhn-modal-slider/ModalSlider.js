@@ -7,9 +7,9 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _useDidUpdate = _interopRequireDefault(require("../hooks/useDidUpdate"));
+var _useThrottleCallback = _interopRequireDefault(require("../hooks/useThrottleCallback"));
 
-var _throttleFn = _interopRequireDefault(require("../../utils/throttleFn"));
+var _useDidUpdate = _interopRequireDefault(require("../hooks/useDidUpdate"));
 
 var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
 
@@ -95,17 +95,15 @@ const ModalSlider = _ref => {
     pageStyle,
     pageCurrent,
     pages
-  } = state
-  /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        hPrevPage = (0, _react.useCallback)((0, _throttleFn.default)(pageNumber => {
+  } = state,
+        hPrevPage = (0, _useThrottleCallback.default)(pageNumber => {
     setState(prevState => {
       prevState.pageCurrent = pageNumber - 1;
       return { ...prevState
       };
     });
-  }), []),
-        hNextPage = (0, _react.useCallback)((0, _throttleFn.default)((id, title, pageNumber) => {
+  }),
+        hNextPage = (0, _useThrottleCallback.default)((id, title, pageNumber) => {
     setState(prevState => {
       const {
         pages
@@ -130,9 +128,7 @@ const ModalSlider = _ref => {
       return { ...prevState
       };
     });
-  }), [model]);
-  /*eslint-enable react-hooks/exhaustive-deps */
-
+  }, [model]);
   (0, _useDidUpdate.default)(() => setState(_initState(model)), [model]);
   const _showHideStyle = { ...style,
     ...S_SHOW_HIDE,
