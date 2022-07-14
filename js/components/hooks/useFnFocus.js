@@ -1,36 +1,25 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
 /*eslint-disable react-hooks/exhaustive-deps */
+const useFnFocus = fn => {
+  const _ref = (0, _uiApi.useRef)(null);
 
-
-var useFnFocus = function useFnFocus(fn) {
-  var _ref = (0, _react.useRef)(null);
-
-  (0, _react.useEffect)(function () {
-    return function () {
-      return _ref.current = null;
-    };
+  (0, _uiApi.useEffect)(() => {
+    return () => _ref.current = null;
   }, []);
-  return [_ref, (0, _react.useCallback)(function () {
+  return [_ref, (0, _uiApi.useCallback)(() => {
     fn();
-    var current = _ref.current;
-
-    if (current && _isFn(current.focus)) {
-      current.focus();
-    }
+    (0, _uiApi.focusRefElement)(_ref);
   }, [])];
 };
 /*eslint-enable react-hooks/exhaustive-deps */
 
 
 var _default = useFnFocus;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=useFnFocus.js.map

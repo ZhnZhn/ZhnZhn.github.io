@@ -1,6 +1,9 @@
-import { useRef, useEffect, useCallback } from 'react'
-
-const _isFn = fn => typeof fn === 'function';
+import { 
+  useRef,
+  useEffect,
+  useCallback,
+  focusRefElement
+} from '../uiApi';
 
 /*eslint-disable react-hooks/exhaustive-deps */
 const useFnFocus = (fn) => {
@@ -10,10 +13,7 @@ const useFnFocus = (fn) => {
     _ref,
     useCallback(() => {
       fn()
-      const { current } = _ref;
-      if (current && _isFn(current.focus)) {
-        current.focus()
-      }
+      focusRefElement(_ref)
     }, [])
   ]
 }

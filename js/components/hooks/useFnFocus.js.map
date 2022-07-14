@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../../src/components/hooks/useFnFocus.js"],"names":["_isFn","fn","useFnFocus","_ref","current","focus"],"mappings":";;;;;AAAA;;AAEA,IAAMA,KAAK,GAAG,SAARA,KAAQ,CAAAC,EAAE;AAAA,SAAI,OAAOA,EAAP,KAAc,UAAlB;AAAA,CAAhB;AAEA;;;AACA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAACD,EAAD,EAAQ;AACzB,MAAME,IAAI,GAAG,mBAAO,IAAP,CAAb;;AACA,wBAAU,YAAM;AAAE,WAAO;AAAA,aAAMA,IAAI,CAACC,OAAL,GAAe,IAArB;AAAA,KAAP;AAAkC,GAApD,EAAsD,EAAtD;AACA,SAAO,CACLD,IADK,EAEL,wBAAY,YAAM;AAChBF,IAAAA,EAAE;AADc,QAERG,OAFQ,GAEID,IAFJ,CAERC,OAFQ;;AAGhB,QAAIA,OAAO,IAAIJ,KAAK,CAACI,OAAO,CAACC,KAAT,CAApB,EAAqC;AACnCD,MAAAA,OAAO,CAACC,KAAR;AACD;AACF,GAND,EAMG,EANH,CAFK,CAAP;AAUD,CAbD;AAcA;;;eAEeH,U","sourcesContent":["import { useRef, useEffect, useCallback } from 'react'\r\n\r\nconst _isFn = fn => typeof fn === 'function';\r\n\r\n/*eslint-disable react-hooks/exhaustive-deps */\r\nconst useFnFocus = (fn) => {\r\n  const _ref = useRef(null)\r\n  useEffect(() => { return () => _ref.current = null }, [])\r\n  return [\r\n    _ref,\r\n    useCallback(() => {\r\n      fn()\r\n      const { current } = _ref;\r\n      if (current && _isFn(current.focus)) {\r\n        current.focus()\r\n      }\r\n    }, [])\r\n  ]\r\n}\r\n/*eslint-enable react-hooks/exhaustive-deps */\r\n\r\nexport default useFnFocus\r\n"],"file":"useFnFocus.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useFnFocus.js"
+ ],
+ "file": "../../../src/components/hooks/useFnFocus.js",
+ "names": [
+  "useFnFocus",
+  "fn",
+  "_ref",
+  "current"
+ ],
+ "mappings": ";;;;;AAAA;;AAOA;AACA,MAAMA,UAAU,GAAIC,EAAD,IAAQ;AACzB,QAAMC,IAAI,GAAG,mBAAO,IAAP,CAAb;;AACA,wBAAU,MAAM;AAAE,WAAO,MAAMA,IAAI,CAACC,OAAL,GAAe,IAA5B;AAAkC,GAApD,EAAsD,EAAtD;AACA,SAAO,CACLD,IADK,EAEL,wBAAY,MAAM;AAChBD,IAAAA,EAAE;AACF,gCAAgBC,IAAhB;AACD,GAHD,EAGG,EAHH,CAFK,CAAP;AAOD,CAVD;AAWA;;;eAEeF,U"
+}
