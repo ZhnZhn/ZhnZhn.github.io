@@ -3,9 +3,9 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
-const HotKeysContext = /*#__PURE__*/(0, _react.createContext)({});
+const HotKeysContext = (0, _uiApi.createContext)({});
 var _default = HotKeysContext;
 exports.default = _default;
 //# sourceMappingURL=HotKeysContext.js.map

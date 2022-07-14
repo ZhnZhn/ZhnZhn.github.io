@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _has = _interopRequireDefault(require("../has"));
 
@@ -14,11 +14,11 @@ var _HotKeysContext = _interopRequireDefault(require("./HotKeysContext"));
 const HAS_TOUCH = _has.default.touch;
 
 const useHotKey = (hotKey, onKeyDown, refBt) => {
-  const hmHotKeys = (0, _react.useContext)(_HotKeysContext.default),
-        ref = (0, _react.useRef)(null);
+  const hmHotKeys = (0, _uiApi.useContext)(_HotKeysContext.default),
+        ref = (0, _uiApi.useRef)(null);
   /*eslint-disable react-hooks/exhaustive-deps */
 
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     if (!HAS_TOUCH && hotKey) {
       hmHotKeys[hotKey] = [refBt || ref, onKeyDown];
       return () => hmHotKeys[hotKey] = void 0;

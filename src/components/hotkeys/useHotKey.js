@@ -1,11 +1,19 @@
-import { useContext, useRef, useEffect } from 'react';
+import {
+  useContext,
+  useRef,
+  useEffect
+} from '../uiApi';
 import has from '../has';
 
 import HotKeysContext from './HotKeysContext';
 
 const HAS_TOUCH = has.touch;
 
-const useHotKey = (hotKey, onKeyDown, refBt) => {
+const useHotKey = (
+  hotKey,
+  onKeyDown,
+  refBt
+) => {
   const hmHotKeys = useContext(HotKeysContext)
   , ref = useRef(null);
 

@@ -1,23 +1,24 @@
-import { useContext, useCallback, useEffect } from 'react';
+import {
+  useContext,
+  useCallback,
+  useEffect,
+  focusRefElement
+} from '../uiApi';
+
 import HotKeysContext from './HotKeysContext';
 
-const _fnNoop = () => void 0
+const FN_NOOP = () => void 0
 
-const _focusElementByRef = ref => {
-  const _el = (ref || {}).current;
-  if (_el && _el.focus) {
-    _el.focus()
-  }
-};
-
-const HotKeysHandler = ({ is }) => {
+const HotKeysHandler = ({ 
+  is
+}) => {
   const hmHotKeys = useContext(HotKeysContext)
-  , _hKeyDown = useCallback((event) => {
+  , _hKeyDown = useCallback(event => {
      if (event.altKey || event.metaKey) {
        const _handlerConfig = hmHotKeys[event.key]
        if (_handlerConfig) {
-          const [ref, onKeyDown=_fnNoop] = _handlerConfig
-          _focusElementByRef(ref)
+          const [ref, onKeyDown=FN_NOOP] = _handlerConfig
+          focusRefElement(ref)
           onKeyDown(event)
        }
      }
