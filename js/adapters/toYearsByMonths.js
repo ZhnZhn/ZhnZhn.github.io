@@ -398,7 +398,8 @@ const toMonthly = {
           legend = [_crItem('MIN', CONFIG_MIN), _crItem('MAX', CONFIG_MAX), prevItem, nowItem, avgItem],
           config = (0, _ConfigBuilder.default)().categoryConfig(CATEGORIES).addCaption(title, subtitle).addSeriaBy(0, minSeria).addSeriaBy(1, maxSeria).addSeriaBy(2, prevSeria).addSeriaBy(3, nowSeria).addSeriaBy(4, avgSeria).addTooltip(_Tooltip.tooltipCategorySimple).add({
       chart: {
-        marginTop: 45
+        marginTop: 45,
+        marginBottom: 38
       },
       zhConfig: _crZhConfig(option, {
         legend

@@ -358,7 +358,7 @@ const toMonthly = {
        .addSeriaBy(4, avgSeria)
        .addTooltip(tooltipCategorySimple)
        .add({
-         chart: { marginTop: 45 },
+         chart: { marginTop: 45, marginBottom: 38 },
          zhConfig: _crZhConfig(option, { legend }),
          valueMoving: _crValueMoving(nowSeria, prevSeria)
        })
