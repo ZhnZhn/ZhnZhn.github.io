@@ -73,7 +73,7 @@ const DialogType4A = memoIsShow((
   , _hLoad = useCallback(() => {
     const _oneTwoInst = getRefValue(_refOneTwo)
     , { msg=[] } = _oneTwoInst.getValidation()
-    checkAreDatesValid(msg, _refDates)
+    checkAreDatesValid(_refDates, msg)
     if (msg.length === 0){
       onLoad(loadFn(props, {
         ..._oneTwoInst.getValues(),

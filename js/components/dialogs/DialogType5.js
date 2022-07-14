@@ -88,7 +88,7 @@ const DialogType5 = (0, _memoIsShow.default)(props => {
     }
 
     msgs.push(...msg);
-    (0, _checkAreDatesValid.default)(msgs, _refDates);
+    (0, _checkAreDatesValid.default)(_refDates, msgs);
 
     if (msgs.length === 0) {
       const {

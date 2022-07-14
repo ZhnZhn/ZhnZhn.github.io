@@ -61,7 +61,7 @@ const DialogType4A = (0, _memoIsShow.default)(props => {
       msg = []
     } = _oneTwoInst.getValidation();
 
-    (0, _checkAreDatesValid.default)(msg, _refDates);
+    (0, _checkAreDatesValid.default)(_refDates, msg);
 
     if (msg.length === 0) {
       onLoad(loadFn(props, { ..._oneTwoInst.getValues(),

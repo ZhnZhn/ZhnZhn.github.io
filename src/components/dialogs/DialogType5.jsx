@@ -104,7 +104,7 @@ const DialogType5 = memoIsShow((
       msgs.push(msgOnNotSelected(oneCaption));
     }
     msgs.push(...msg)
-    checkAreDatesValid(msgs, _refDates)
+    checkAreDatesValid(_refDates, msgs)
 
     if (msgs.length === 0){
       const {
