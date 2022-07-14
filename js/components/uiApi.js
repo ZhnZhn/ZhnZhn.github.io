@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useState = exports.useRef = exports.useMemo = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.setRefValue = exports.memo = exports.isInputValid = exports.getRefValue = exports.getInputValue = exports.forwardRef = exports.createContext = void 0;
+exports.useState = exports.useRef = exports.useMemo = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.setRefValue = exports.memo = exports.isInputValid = exports.getRefValue = exports.getInputValue = exports.forwardRef = exports.focusRefElement = exports.createContext = void 0;
 
 var _react = require("react");
 
@@ -27,6 +27,18 @@ const setRefValue = (ref, value) => {
 };
 
 exports.setRefValue = setRefValue;
+
+const _isFn = fn => typeof fn === 'function';
+
+const focusRefElement = ref => {
+  const _el = getRefValue(ref);
+
+  if (_el && _isFn(_el.focus)) {
+    _el.focus();
+  }
+};
+
+exports.focusRefElement = focusRefElement;
 
 const isInputValid = ref => {
   const inputComp = getRefValue(ref);
