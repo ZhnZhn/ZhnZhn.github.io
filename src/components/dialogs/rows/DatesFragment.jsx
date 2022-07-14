@@ -1,4 +1,12 @@
-import { forwardRef, useRef, useImperativeHandle } from 'react';
+import {
+  forwardRef,
+  useRef,
+  useImperativeHandle,
+  setRefValue,
+  focusRefElement,
+  isInputValid,
+  getInputValue
+} from '../../uiApi';
 //import PropTypes from "prop-types";
 
 import DateField from '../../zhn/DateField';
@@ -10,10 +18,7 @@ const NEAR_ERR_MSG = "From Date is near that To Date";
 const _isPeriodValid = (from, to) => from<=to
 , _msgOnNotValidFormat = (item='Date') => `${item} is not in valid format`;
 
-const _getValue = ref => ref.current.getValue()
-, _getTrimValue = ref => _getValue(ref).trim()
-, _isValid = ref => ref.current.isValid()
-, _setValue = (ref, value) => ref.current.setValue(value);
+const _getTrimValue = ref => (getInputValue(ref) || '').trim();
 
 const DatesFragment = forwardRef(({
   isShowLabels=true,
@@ -35,16 +40,16 @@ const DatesFragment = forwardRef(({
 
   useImperativeHandle(ref, () => ({
     getValues: () => ({
-      fromDate: _getValue(_refFrom),
-      toDate: _getValue(_refTo)
+      fromDate: getInputValue(_refFrom),
+      toDate: getInputValue(_refTo)
     }),
     getValidation: () => {
       const datesMsg = [];
 
-      if (!_isValid(_refFrom)) {
+      if (!isInputValid(_refFrom)) {
         datesMsg.push(msgOnNotValidFormat('From Date'));
       }
-      if (!_isValid(_refTo)) {
+      if (!isInputValid(_refTo)) {
         datesMsg.push(msgOnNotValidFormat('To Date'));
       }
 
@@ -54,16 +59,14 @@ const DatesFragment = forwardRef(({
       )) {
         datesMsg.push(NEAR_ERR_MSG);
       }
-
-      if (datesMsg.length>0){
-        return { isValid: false, datesMsg };
-      }
-      return { isValid: true };
+      return datesMsg.length>0
+        ? { isValid: false, datesMsg }
+        : { isValid: true };
     },
-    focusInput: () => _refFrom.current.focus(),
+    focusInput: () => focusRefElement(_refFrom),
     setFromTo: (fromStr, toStr) => {
-      _setValue(_refFrom, fromStr)
-      _setValue(_refTo, toStr)
+      setRefValue(_refFrom, fromStr)
+      setRefValue(_refTo, toStr)
     }
   }), [isPeriodValid, msgOnNotValidFormat])
 

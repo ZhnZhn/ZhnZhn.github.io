@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../../uiApi");
 
 var _DateField = _interopRequireDefault(require("../../zhn/DateField"));
 
@@ -18,29 +18,34 @@ const FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
 const NEAR_ERR_MSG = "From Date is near that To Date";
 
 const _isPeriodValid = (from, to) => from <= to,
-      _msgOnNotValidFormat = (item = 'Date') => item + " is not in valid format";
+      _msgOnNotValidFormat = function (item) {
+  if (item === void 0) {
+    item = 'Date';
+  }
 
-const _getValue = ref => ref.current.getValue(),
-      _getTrimValue = ref => _getValue(ref).trim(),
-      _isValid = ref => ref.current.isValid(),
-      _setValue = (ref, value) => ref.current.setValue(value);
+  return item + " is not in valid format";
+};
 
-const DatesFragment = /*#__PURE__*/(0, _react.forwardRef)(({
-  isShowLabels = true,
-  placeholder,
-  fromCaption = 'From Date',
-  initFromDate,
-  toCaption = 'To Date',
-  initToDate,
-  dateStyle,
-  errMsg = FORMAT_ERR_MSG,
-  isPeriodValid = _isPeriodValid,
-  msgOnNotValidFormat = _msgOnNotValidFormat,
-  onTestDate,
-  onEnter
-}, ref) => {
-  const _refFrom = (0, _react.useRef)(),
-        _refTo = (0, _react.useRef)(),
+const _getTrimValue = ref => ((0, _uiApi.getInputValue)(ref) || '').trim();
+
+const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
+  let {
+    isShowLabels = true,
+    placeholder,
+    fromCaption = 'From Date',
+    initFromDate,
+    toCaption = 'To Date',
+    initToDate,
+    dateStyle,
+    errMsg = FORMAT_ERR_MSG,
+    isPeriodValid = _isPeriodValid,
+    msgOnNotValidFormat = _msgOnNotValidFormat,
+    onTestDate,
+    onEnter
+  } = _ref;
+
+  const _refFrom = (0, _uiApi.useRef)(),
+        _refTo = (0, _uiApi.useRef)(),
         {
     rowStyle,
     labelStyle
@@ -48,19 +53,19 @@ const DatesFragment = /*#__PURE__*/(0, _react.forwardRef)(({
     isShowLabels
   });
 
-  (0, _react.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValues: () => ({
-      fromDate: _getValue(_refFrom),
-      toDate: _getValue(_refTo)
+      fromDate: (0, _uiApi.getInputValue)(_refFrom),
+      toDate: (0, _uiApi.getInputValue)(_refTo)
     }),
     getValidation: () => {
       const datesMsg = [];
 
-      if (!_isValid(_refFrom)) {
+      if (!(0, _uiApi.isInputValid)(_refFrom)) {
         datesMsg.push(msgOnNotValidFormat('From Date'));
       }
 
-      if (!_isValid(_refTo)) {
+      if (!(0, _uiApi.isInputValid)(_refTo)) {
         datesMsg.push(msgOnNotValidFormat('To Date'));
       }
 
@@ -68,22 +73,17 @@ const DatesFragment = /*#__PURE__*/(0, _react.forwardRef)(({
         datesMsg.push(NEAR_ERR_MSG);
       }
 
-      if (datesMsg.length > 0) {
-        return {
-          isValid: false,
-          datesMsg
-        };
-      }
-
-      return {
+      return datesMsg.length > 0 ? {
+        isValid: false,
+        datesMsg
+      } : {
         isValid: true
       };
     },
-    focusInput: () => _refFrom.current.focus(),
+    focusInput: () => (0, _uiApi.focusRefElement)(_refFrom),
     setFromTo: (fromStr, toStr) => {
-      _setValue(_refFrom, fromStr);
-
-      _setValue(_refTo, toStr);
+      (0, _uiApi.setRefValue)(_refFrom, fromStr);
+      (0, _uiApi.setRefValue)(_refTo, toStr);
     }
   }), [isPeriodValid, msgOnNotValidFormat]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
