@@ -1,9 +1,10 @@
 //import PropTypes from "prop-types";
 
-import COLOR from '../styles/Color'
+import use from '../hooks/use';
+import COLOR from '../styles/Color';
+import crStyle from '../zhn-utils/crStyle';
 
-import use from '../hooks/use'
-import Comp from '../Comp'
+import Comp from '../Comp';
 import ValueMovingBadge from './ValueMovingBadge';
 
 const {
@@ -14,7 +15,6 @@ const {
 } = Comp;
 
 const {
-  crStyle,
   useTheme,
   useToggle,
   useFnFocus
@@ -114,11 +114,11 @@ const Header = ({
     _toggleMore
   ] = useToggle(false)
   , TS = useTheme(TH_ID)
-  , _captionStyle = crStyle([
+  , _captionStyle = crStyle(
      S_CAPTION,
      !isOpen && S_CAPTION_CLOSE,
      !valueMoving && S_CAPTION_WIDTH
-  ])
+  )
   , _btTitle = itemCaption.length > 15
       ? itemCaption : void 0;
 

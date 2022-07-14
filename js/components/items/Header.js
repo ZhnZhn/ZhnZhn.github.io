@@ -5,9 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
+var _use = _interopRequireDefault(require("../hooks/use"));
+
 var _Color = _interopRequireDefault(require("../styles/Color"));
 
-var _use = _interopRequireDefault(require("../hooks/use"));
+var _crStyle = _interopRequireDefault(require("../zhn-utils/crStyle"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
@@ -23,7 +25,6 @@ const {
   SvgClose
 } = _Comp.default;
 const {
-  crStyle,
   useTheme,
   useToggle,
   useFnFocus
@@ -123,7 +124,7 @@ const Header = _ref3 => {
 
   const [isMore, _toggleMore] = useToggle(false),
         TS = useTheme(TH_ID),
-        _captionStyle = crStyle([S_CAPTION, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH]),
+        _captionStyle = (0, _crStyle.default)(S_CAPTION, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH),
         _btTitle = itemCaption.length > 15 ? itemCaption : void 0;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {

@@ -5,8 +5,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _crStyle = _interopRequireDefault(require("./crStyle"));
-
 var _useFnFocus = _interopRequireDefault(require("./useFnFocus"));
 
 var _useListen = _interopRequireDefault(require("./useListen"));
@@ -26,7 +24,6 @@ var _useKeyEscape = _interopRequireDefault(require("./useKeyEscape"));
 var _useHasNotEqual = _interopRequireDefault(require("./useHasNotEqual"));
 
 const use = {
-  crStyle: _crStyle.default,
   useFnFocus: _useFnFocus.default,
   useListen: _useListen.default,
   useRefInit: _useRefInit.default,

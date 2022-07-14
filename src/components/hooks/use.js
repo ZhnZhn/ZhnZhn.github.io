@@ -1,4 +1,3 @@
-import crStyle from './crStyle'
 import useFnFocus from './useFnFocus'
 import useListen from './useListen'
 import useRefInit from './useRefInit'
@@ -10,7 +9,6 @@ import useKeyEscape from './useKeyEscape'
 import useHasNotEqual from './useHasNotEqual'
 
 const use = {
-  crStyle,
   useFnFocus,
   useListen,
   useRefInit,

@@ -1,7 +1,7 @@
 
 const _assign = Object.assign;
 
-const crStyle = arr => (arr||[])
+const crStyle = (...args) => args
  .reduce((style, itemStyle) => {
    if (itemStyle) {
      _assign(style, itemStyle)
