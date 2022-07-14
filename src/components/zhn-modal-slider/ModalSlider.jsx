@@ -4,7 +4,7 @@ import {
 } from 'react';
 import useDidUpdate from '../hooks/useDidUpdate';
 
-import throttleOnce from '../../utils/throttleOnce';
+import throttleFn from '../../utils/throttleFn';
 
 import ModalPane from '../zhn-moleculs/ModalPane';
 import ShowHide from '../zhn/ShowHide';
@@ -104,14 +104,14 @@ const ModalSlider = ({
      pages
    } = state
    /*eslint-disable react-hooks/exhaustive-deps */
-  , hPrevPage = useCallback(throttleOnce((pageNumber) => {
+  , hPrevPage = useCallback(throttleFn((pageNumber) => {
      setState(prevState => {
        prevState.pageCurrent = pageNumber - 1
        return {...prevState};
      })
   }), [])
 
-  , hNextPage = useCallback(throttleOnce((id, title, pageNumber)=>{
+  , hNextPage = useCallback(throttleFn((id, title, pageNumber)=>{
      setState(prevState => {
        const { pages } = prevState
        , _max = pages.length-1;

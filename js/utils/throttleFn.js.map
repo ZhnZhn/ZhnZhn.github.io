@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/throttleFn.js"
+ ],
+ "file": "../../src/utils/throttleFn.js",
+ "names": [
+  "DF_PERIOD",
+  "_getNowTime",
+  "Date",
+  "now",
+  "getTime",
+  "throttleFn",
+  "fn",
+  "period",
+  "prevTime",
+  "throttled",
+  "nowTime"
+ ],
+ "mappings": ";;;;AACA,MAAMA,SAAS,GAAG,GAAlB;;AAEA,MAAMC,WAAW,GAAGC,IAAI,CAACC,GAAL,KACf,MAAM,IAAID,IAAI,CAACE,OAAT,EADS,CAApB;;AAGA,MAAMC,UAAU,GAAG,UACjBC,EADiB,EAEjBC,MAFiB,EAGd;AAAA,MADHA,MACG;AADHA,IAAAA,MACG,GADIP,SACJ;AAAA;;AACF,MAAIQ,QAAQ,GAAG,CAAf;AACA,SAAO,SAASC,SAAT,GAA6B;AAClC,UAAMC,OAAO,GAAGT,WAAW,EAA3B;;AACA,QAAIS,OAAO,GAAGF,QAAV,GAAqBD,MAAzB,EAAiC;AAC/BC,MAAAA,QAAQ,GAAGE,OAAX;AACA,aAAOJ,EAAE,CAAC,YAAD,CAAT;AACD;AACF,GAND;AAOF,CAZD;;eAceD,U"
+}

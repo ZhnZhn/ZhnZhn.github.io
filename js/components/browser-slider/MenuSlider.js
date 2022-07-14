@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _uiApi = require("../uiApi");
 
-var _throttleOnce = _interopRequireDefault(require("../../utils/throttleOnce"));
+var _throttleFn = _interopRequireDefault(require("../../utils/throttleFn"));
 
 var _factoryClickItem = _interopRequireDefault(require("./factoryClickItem"));
 
@@ -72,7 +72,7 @@ const MenuSlider = _ref => {
   }, setState] = (0, _uiApi.useState)(INITIAL_STATE)
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _hPrevPage = (0, _uiApi.useCallback)((0, _throttleOnce.default)(pageNumber => {
+        _hPrevPage = (0, _uiApi.useCallback)((0, _throttleFn.default)(pageNumber => {
     setState(prevState => {
       const {
         pageCurrent
@@ -82,7 +82,7 @@ const MenuSlider = _ref => {
       };
     });
   }), []),
-        _hNextPage = (0, _uiApi.useCallback)((0, _throttleOnce.default)((id, title, pageNumber) => {
+        _hNextPage = (0, _uiApi.useCallback)((0, _throttleFn.default)((id, title, pageNumber) => {
     setState(prevState => {
       const {
         pageCurrent,
