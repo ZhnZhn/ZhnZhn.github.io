@@ -30,8 +30,8 @@ exports.setRefValue = setRefValue;
 
 const _isFn = fn => typeof fn === 'function';
 
-const focusRefElement = ref => {
-  const _el = getRefValue(ref);
+const focusRefElement = (ref1, ref2) => {
+  const _el = getRefValue(ref1) || getRefValue(ref2);
 
   if (_el && _isFn(_el.focus)) {
     _el.focus();

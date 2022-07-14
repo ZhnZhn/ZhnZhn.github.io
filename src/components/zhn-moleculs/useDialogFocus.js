@@ -1,25 +1,32 @@
-import { useRef, useCallback, useEffect, useImperativeHandle } from 'react';
-import focusNode from '../zhn-utils/focusNode';
+import {
+  useRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  getRefValue,
+  focusRefElement
+} from '../uiApi';
 
-const _getRefValue = ref => (ref || {}).current;
-
-const useDialogFocus = (ref, isShow) => {
+const useDialogFocus = (
+  ref,
+  isShow
+) => {
   const refRoot = useRef()
   , refBtMore = useRef()
   , _refPrevFocused = useRef()
   , _refIsShowPrev = useRef()
   , focus = useCallback(() => {
       _refPrevFocused.current = document.activeElement
-      focusNode(_getRefValue(refBtMore) || _getRefValue(refRoot))
+      focusRefElement(refBtMore, refRoot)
   }, [])
   , focusPrev = useCallback(()=>{
-      focusNode(_getRefValue(_refPrevFocused))
+      focusRefElement(_refPrevFocused)
       _refPrevFocused.current = null
   }, []);
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(()=>{
-    const _isPrevShow = _getRefValue(_refIsShowPrev);
+    const _isPrevShow = getRefValue(_refIsShowPrev);
     if (isShow && !_isPrevShow) {
       focus()
     } else if (!isShow && _isPrevShow) {
@@ -35,7 +42,7 @@ const useDialogFocus = (ref, isShow) => {
   //focus, focusPrev
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  return [refRoot, refBtMore ];
+  return [refRoot, refBtMore];
 };
 
 export default useDialogFocus

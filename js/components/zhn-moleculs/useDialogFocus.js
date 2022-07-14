@@ -1,34 +1,28 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
-
-var _focusNode = _interopRequireDefault(require("../zhn-utils/focusNode"));
-
-const _getRefValue = ref => (ref || {}).current;
+var _uiApi = require("../uiApi");
 
 const useDialogFocus = (ref, isShow) => {
-  const refRoot = (0, _react.useRef)(),
-        refBtMore = (0, _react.useRef)(),
-        _refPrevFocused = (0, _react.useRef)(),
-        _refIsShowPrev = (0, _react.useRef)(),
-        focus = (0, _react.useCallback)(() => {
+  const refRoot = (0, _uiApi.useRef)(),
+        refBtMore = (0, _uiApi.useRef)(),
+        _refPrevFocused = (0, _uiApi.useRef)(),
+        _refIsShowPrev = (0, _uiApi.useRef)(),
+        focus = (0, _uiApi.useCallback)(() => {
     _refPrevFocused.current = document.activeElement;
-    (0, _focusNode.default)(_getRefValue(refBtMore) || _getRefValue(refRoot));
+    (0, _uiApi.focusRefElement)(refBtMore, refRoot);
   }, []),
-        focusPrev = (0, _react.useCallback)(() => {
-    (0, _focusNode.default)(_getRefValue(_refPrevFocused));
+        focusPrev = (0, _uiApi.useCallback)(() => {
+    (0, _uiApi.focusRefElement)(_refPrevFocused);
     _refPrevFocused.current = null;
   }, []);
   /*eslint-disable react-hooks/exhaustive-deps */
 
 
-  (0, _react.useEffect)(() => {
-    const _isPrevShow = _getRefValue(_refIsShowPrev);
+  (0, _uiApi.useEffect)(() => {
+    const _isPrevShow = (0, _uiApi.getRefValue)(_refIsShowPrev);
 
     if (isShow && !_isPrevShow) {
       focus();
@@ -39,7 +33,7 @@ const useDialogFocus = (ref, isShow) => {
     _refIsShowPrev.current = isShow;
   }, [isShow]); //focus, focusPrev
 
-  (0, _react.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(ref, () => ({
     focus,
     focusPrev
   }), []); //focus, focusPrev
