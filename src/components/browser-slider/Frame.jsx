@@ -4,7 +4,8 @@ import {
   useCallback,
   useEffect,
   setRefValue,
-  getRefValue
+  getRefValue,
+  focusRefElement
 } from '../uiApi';
 
 import MenuTitle from './MenuTitle'
@@ -89,10 +90,7 @@ const Frame = ({
     if (_isFocusTitle) {
       clearTimeout(getRefValue(_refId));
       setRefValue(_refId, setTimeout(()=>{
-        const _titleNode = getRefValue(_refTitle);
-        if (_titleNode) {
-         _titleNode.focus()
-        }
+        focusRefElement(_refTitle)
       }, FOCUS_FIRST_MLS))
     }
   }, [_isFocusTitle])

@@ -87,11 +87,7 @@ const Frame = _ref => {
     if (_isFocusTitle) {
       clearTimeout((0, _uiApi.getRefValue)(_refId));
       (0, _uiApi.setRefValue)(_refId, setTimeout(() => {
-        const _titleNode = (0, _uiApi.getRefValue)(_refTitle);
-
-        if (_titleNode) {
-          _titleNode.focus();
-        }
+        (0, _uiApi.focusRefElement)(_refTitle);
       }, FOCUS_FIRST_MLS));
     }
   }, [_isFocusTitle]);
