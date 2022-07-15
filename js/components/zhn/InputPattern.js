@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 
@@ -53,7 +53,7 @@ const _crBtClearStyle = isValid => ({ ...S_BT_CLEAR,
 const DF_ON_TEST = () => true,
       DF_ON_CLEAR = () => {};
 
-const InputPattern = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+const InputPattern = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     rootStyle,
     inputStyle,
@@ -67,17 +67,19 @@ const InputPattern = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
     onClear = DF_ON_CLEAR
   } = _ref;
 
-  const _refInput = (0, _react.useRef)(),
-        _refGetValue = (0, _react.useRef)(),
-        _refIsValid = (0, _react.useRef)(),
-        [state, setState] = (0, _react.useState)(() => _crInitialState(initValue)),
+  const _refInput = (0, _uiApi.useRef)(),
+        _refGetValue = (0, _uiApi.useRef)(),
+        _refIsValid = (0, _uiApi.useRef)(),
+        [state, setState] = (0, _uiApi.useState)(() => _crInitialState(initValue)),
         {
     value,
     isValid,
     errorInput
   } = state,
-        _hChangeValue = (0, _react.useCallback)(event => {
-    const value = event.target.value;
+        _hChangeValue = (0, _uiApi.useCallback)(event => {
+    const {
+      value
+    } = event.target;
     setState(onTest(value) ? {
       value,
       isValid: true,
@@ -91,10 +93,9 @@ const InputPattern = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
     onEnter,
     onDelete: () => setState(_crInitialState(initValue))
   }, [initValue, onEnter]),
-        _hClear = (0, _react.useCallback)(() => {
+        _hClear = (0, _uiApi.useCallback)(() => {
     onClear();
-
-    _refInput.current.focus();
+    (0, _uiApi.focusRefElement)(_refInput);
 
     const _initValue = isClearBlank ? '' : initValue;
 
@@ -103,7 +104,7 @@ const InputPattern = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
   /*eslint-disable react-hooks/exhaustive-deps */
 
 
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     if (state.initValue !== initValue) {
       setState(_crInitialState(initValue));
     }
@@ -116,10 +117,10 @@ const InputPattern = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
 
   _refIsValid.current = () => onTest(value);
 
-  (0, _react.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValue: () => _refGetValue.current(),
     isValid: () => _refIsValid.current(),
-    focus: () => _refInput.current.focus(),
+    focus: () => (0, _uiApi.focusRefElement)(_refInput),
     showErrMsg: () => setState(prevState => ({ ...prevState,
       isValid: false,
       errorInput: errorMsg

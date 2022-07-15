@@ -5,8 +5,9 @@ import {
   useRef,
   useCallback,
   useEffect,
-  useImperativeHandle
-} from 'react';
+  useImperativeHandle,
+  focusRefElement
+} from '../uiApi';
 
 import useInputKeyDown from './useInputKeyDown';
 
@@ -73,10 +74,17 @@ const InputPattern = forwardRef(({
   const _refInput = useRef()
   , _refGetValue = useRef()
   , _refIsValid = useRef()
-  , [state, setState] = useState(() => _crInitialState(initValue))
-  , { value, isValid, errorInput } = state
+  , [
+    state,
+    setState
+  ] = useState(() => _crInitialState(initValue))
+  , {
+    value,
+    isValid,
+    errorInput
+  } = state
   , _hChangeValue = useCallback(event => {
-     const value = event.target.value;
+     const { value } = event.target;
      setState(onTest(value)
        ? { value, isValid: true, errorInput: void 0 }
        : { value, isValid: false }
@@ -88,7 +96,7 @@ const InputPattern = forwardRef(({
      }, [initValue, onEnter])
   , _hClear = useCallback(()=>{
        onClear()
-       _refInput.current.focus()
+       focusRefElement(_refInput)
        const _initValue = isClearBlank ? '' : initValue;
        setState(_crInitialState(_initValue))
     }, [initValue, onClear, isClearBlank]);
@@ -108,7 +116,7 @@ const InputPattern = forwardRef(({
   useImperativeHandle(ref, () => ({
     getValue: () => _refGetValue.current(),
     isValid: () =>_refIsValid.current(),
-    focus: () => _refInput.current.focus(),
+    focus: () => focusRefElement(_refInput),
     showErrMsg: () =>
       setState(prevState => ({
         ...prevState,
