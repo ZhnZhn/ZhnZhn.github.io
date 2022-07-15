@@ -62,6 +62,7 @@ export const COLOR_SPLIT_RATIO = '#f7a35c'
 
 export const COLOR_MONO_BASE1 = '#7cb5ec'
 export const COLOR_MONO_BASE2 = '#90ed7d'
+export const COLOR_MONO_BASE3 = P_SIREN
 
 export const COLOR_MARKER_HOVER = P_YELLOW
 export const COLOR_CROSSHAIR = P_YELLOW

@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.getMonoColor = exports.crMonoColor = exports.COLOR_PERIOD = exports.COLOR_BASE2 = exports.COLOR_BASE1 = void 0;
+exports.getMonoColor = exports.crMonoColor = exports.COLOR_PERIOD = exports.COLOR_BASE3 = exports.COLOR_BASE2 = exports.COLOR_BASE1 = void 0;
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
@@ -12,9 +12,7 @@ var _Color = require("../constants/Color");
 const _crColor = (color, brighten, opacity) => _highcharts.default.Color(color).brighten(brighten).setOpacity(opacity).get();
 
 const _addMonoColorsTo = (colors, base) => {
-  let i;
-
-  for (i = 0; i < 4; i++) {
+  for (let i = 0; i < 4; i++) {
     // Start out with a darkened base color (negative brighten), and end
     // up with a much brighter color
     colors.push(_crColor(base, (i - 3) / 7, 0.75));
@@ -45,6 +43,8 @@ const COLOR_BASE1 = _Color.COLOR_MONO_BASE1;
 exports.COLOR_BASE1 = COLOR_BASE1;
 const COLOR_BASE2 = _Color.COLOR_MONO_BASE2;
 exports.COLOR_BASE2 = COLOR_BASE2;
+const COLOR_BASE3 = _Color.COLOR_MONO_BASE3;
+exports.COLOR_BASE3 = COLOR_BASE3;
 
 const crMonoColor = function (base, deltaColor, opacity) {
   if (base === void 0) {
