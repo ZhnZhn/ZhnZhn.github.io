@@ -5,8 +5,6 @@ exports.crPointName = exports.addColorsTo = void 0;
 
 var _MonoColorFn = require("../charts/MonoColorFn");
 
-var _AdapterFn = require("./AdapterFn");
-
 const _findLevelBy = (data, from, sum, stopSum, propName) => {
   const _maxIndex = data.length;
 
@@ -57,7 +55,7 @@ const _addColor = (data, levelIndex1, levelIndex2) => {
       point.color = (0, _MonoColorFn.crMonoColor)(_MonoColorFn.COLOR_BASE2, deltaColor);
     } else {
       deltaColor = (pointIndex - levelIndex2) * (_MonoColorFn.COLOR_PERIOD / _numberOfPoints3);
-      point.color = (0, _MonoColorFn.crMonoColor)(_MonoColorFn.COLOR_BASE1, deltaColor);
+      point.color = (0, _MonoColorFn.crMonoColor)(_MonoColorFn.COLOR_BASE3, deltaColor);
     }
   });
 };
@@ -77,9 +75,9 @@ const addColorsTo = _ref => {
 };
 
 exports.addColorsTo = addColorsTo;
-const NUMBER_STYLE = 'style="color:#333;"';
+const NUMBER_STYLE = 'style="color:#fdb316;font-size:18px;"';
 
-const crPointName = (label, value, percent) => label + " <br/>\n<span " + NUMBER_STYLE + ">" + (0, _AdapterFn.numberFormat)(value) + " (" + percent + "%)</span>";
+const crPointName = (label, percent) => label + "<br/>\n<span " + NUMBER_STYLE + ">" + percent + "%</span>";
 
 exports.crPointName = crPointName;
 //# sourceMappingURL=TreeMapFn.js.map

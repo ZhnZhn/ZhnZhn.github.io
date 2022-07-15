@@ -95,7 +95,7 @@ const _addPercent = (
   return [
     data.map(p => {
       p.percent = roundBy(p.value/_onePercent);
-      p.name = crPointName(p.label, p.value, p.percent)
+      p.name = crPointName(p.label, p.percent)
       return p;
     }),
     _total

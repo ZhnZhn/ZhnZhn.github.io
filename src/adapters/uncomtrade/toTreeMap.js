@@ -31,7 +31,6 @@ const _addPercentAndColorToData = (
       item.percent = roundBy(item.value/_onePercent)
       item.name = crPointName(
         item.label,
-        item.value,
         item.percent
       )
     })

@@ -2,12 +2,9 @@ import {
   COLOR_PERIOD,
   COLOR_BASE1,
   COLOR_BASE2,
+  COLOR_BASE3,
   crMonoColor
 } from '../charts/MonoColorFn';
-
-import {
-  numberFormat
-} from './AdapterFn';
 
 const _findLevelBy = (
   data,
@@ -72,7 +69,7 @@ const _addColor = (
        point.color = crMonoColor(COLOR_BASE2, deltaColor);
      } else {
        deltaColor = (pointIndex - levelIndex2) * ( COLOR_PERIOD / _numberOfPoints3 )
-       point.color = crMonoColor(COLOR_BASE1, deltaColor)
+       point.color = crMonoColor(COLOR_BASE3, deltaColor)
      }
    })
 };
@@ -97,10 +94,9 @@ export const addColorsTo = ({
   _addColor(data, leveIndex1, levelIndex2)
 }
 
-const NUMBER_STYLE = 'style="color:#333;"'
+const NUMBER_STYLE = 'style="color:#fdb316;font-size:18px;"'
 export const crPointName = (
   label,
-  value,
   percent
-) => `${label} <br/>
-<span ${NUMBER_STYLE}>${numberFormat(value)} (${percent}%)</span>`;
+) => `${label}<br/>
+<span ${NUMBER_STYLE}>${percent}%</span>`;

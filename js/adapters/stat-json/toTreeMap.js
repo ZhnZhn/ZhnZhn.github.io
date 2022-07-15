@@ -90,7 +90,7 @@ const _addPercent = data => {
 
   return [data.map(p => {
     p.percent = (0, _fnAdapter.roundBy)(p.value / _onePercent);
-    p.name = (0, _TreeMapFn.crPointName)(p.label, p.value, p.percent);
+    p.name = (0, _TreeMapFn.crPointName)(p.label, p.percent);
     return p;
   }), _total];
 };
