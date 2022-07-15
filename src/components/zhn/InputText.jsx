@@ -4,8 +4,9 @@ import {
   useState,
   useRef,
   useEffect,
-  useImperativeHandle
-} from 'react';
+  useImperativeHandle,
+  focusRefElement
+} from '../uiApi';
 import useInputKeyDown from './useInputKeyDown';
 
 import {
@@ -62,11 +63,11 @@ const InputText = forwardRef((props, ref) => {
   , [value, setValue] = useState(() => _initValue(initValue))
   , _refInput = useRef()
   , _hChange = (event) => {
-      const _value = event.target.value;
-      if (_value.length <= maxLength) {
-        setValue(_value)
+      const { value } = event.target;
+      if (value.length <= maxLength) {
+        setValue(value)
         if (_isFn(onChange)) {
-          onChange(_value)
+          onChange(value)
         }
       }
     }
@@ -82,8 +83,8 @@ const InputText = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     getValue: () => (''+value).trim(),
-    setValue: setValue,
-    focus: () => _refInput.current.focus()
+    setValue,
+    focus: () => focusRefElement(_refInput)
   }), [value])
 
   const  [

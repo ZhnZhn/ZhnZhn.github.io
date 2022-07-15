@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 
@@ -44,7 +44,7 @@ const _isMinMaxNumber = _ref => {
   return type === 'number' && _isNumber(min) && _isNumber(max);
 };
 
-const InputText = /*#__PURE__*/(0, _react.forwardRef)((props, ref) => {
+const InputText = (0, _uiApi.forwardRef)((props, ref) => {
   const {
     initValue,
     style,
@@ -58,16 +58,18 @@ const InputText = /*#__PURE__*/(0, _react.forwardRef)((props, ref) => {
     onChange,
     onEnter
   } = props,
-        [value, setValue] = (0, _react.useState)(() => _initValue(initValue)),
-        _refInput = (0, _react.useRef)(),
+        [value, setValue] = (0, _uiApi.useState)(() => _initValue(initValue)),
+        _refInput = (0, _uiApi.useRef)(),
         _hChange = event => {
-    const _value = event.target.value;
+    const {
+      value
+    } = event.target;
 
-    if (_value.length <= maxLength) {
-      setValue(_value);
+    if (value.length <= maxLength) {
+      setValue(value);
 
       if (_isFn(onChange)) {
-        onChange(_value);
+        onChange(value);
       }
     }
   },
@@ -76,11 +78,11 @@ const InputText = /*#__PURE__*/(0, _react.forwardRef)((props, ref) => {
     onDelete: () => setValue(BLANK)
   }, [onEnter]);
 
-  (0, _react.useEffect)(() => setValue(_initValue(initValue)), [initValue]);
-  (0, _react.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useEffect)(() => setValue(_initValue(initValue)), [initValue]);
+  (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValue: () => ('' + value).trim(),
-    setValue: setValue,
-    focus: () => _refInput.current.focus()
+    setValue,
+    focus: () => (0, _uiApi.focusRefElement)(_refInput)
   }), [value]);
 
   const [_autoCorrect, _spellCheck] = spellCheck ? ["on", "true"] : ["off", "false"],
