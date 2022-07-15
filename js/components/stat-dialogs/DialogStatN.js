@@ -25,9 +25,9 @@ var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
-var _useRefByIndex = _interopRequireDefault(require("./useRefByIndex"));
+var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
 
-var _useToolbar = _interopRequireDefault(require("./useToolbar"));
+var _useRefByIndex = _interopRequireDefault(require("./useRefByIndex"));
 
 var _useMenuMore = _interopRequireDefault(require("./useMenuMore"));
 
@@ -123,14 +123,20 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     dateDf = {},
     timeId
   } = state,
-        [isShowLabels, _toggleLabels] = (0, _useToggle.default)(IS_SHOW_LABELS),
-        [_modalOptionsEl, _refDialogOptions, _toggleOptions] = (0, _useModalOptions.default)(),
-        [_modalToggleEl, _refTitles, isRow, setIsRow, _toggleInputs] = (0, _useModalToggle.default)(configs),
+        [isShowLabels, toggleLabels] = (0, _useToggle.default)(IS_SHOW_LABELS),
+        [_modalOptionsEl, _refDialogOptions, toggleOptions] = (0, _useModalOptions.default)(),
+        [_modalToggleEl, _refTitles, isRow, setIsRow, toggleInputs] = (0, _useModalToggle.default)(configs),
         {
     isShowDate,
     isShowChart
   } = isRow,
-        [_toolbarEl, toggleToolBar] = (0, _useToolbar.default)(_toggleLabels, _toggleInputs, _toggleOptions, onAbout)
+        [isToolbar, toggleToolBar] = (0, _useToggle.default)(true),
+        toolbarButtons = (0, _useToolbar.default)({
+    toggleLabels,
+    toggleInputs,
+    toggleOptions,
+    onAbout
+  })
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
         _hClose = (0, _uiApi.useCallback)(() => {
@@ -232,7 +238,10 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     toTopLayer: toTopLayer,
     onShow: onShow,
     onClose: _hClose,
-    children: [_toolbarEl, _modalOptionsEl, _modalToggleEl, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
+      isShow: isToolbar,
+      buttons: toolbarButtons
+    }), _modalOptionsEl, _modalToggleEl, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.default, {
       status: _spinnerStatus
     }), _spinnerStatus ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_DIV_LOADING

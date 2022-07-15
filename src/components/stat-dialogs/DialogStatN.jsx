@@ -16,8 +16,8 @@ import crSelectItem from './crSelectItem';
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import useProperty from '../hooks/useProperty';
+import useToolbar from '../dialogs/hooks/useToolbar';
 import useRefByIndex from './useRefByIndex';
-import useToolbar from './useToolbar';
 import useMenuMore from './useMenuMore';
 import useModalOptions from './useModalOptions';
 import useModalToggle from './useModalToggle';
@@ -43,8 +43,12 @@ const _crDfTitle = (props, dim) => {
   return dim.caption || "";
 };
 
-const _fAddErrMsgTo = (msg, msgOnNotSelected, configs, items) =>
- is => {
+const _fAddErrMsgTo = (
+  msg,
+  msgOnNotSelected,
+  configs,
+  items
+) => is => {
   configs.forEach((config, index) => {
     const { caption } = config;
     if (is(caption) && !items[index]){
@@ -53,7 +57,10 @@ const _fAddErrMsgTo = (msg, msgOnNotSelected, configs, items) =>
   })
 };
 
-const _addDfValuesFrom = (configs, fSelectItem) => {
+const _addDfValuesFrom = (
+  configs,
+  fSelectItem
+) => {
   configs.forEach((config, index) => {
     const { dfItem } = config;
     if (dfItem) {
@@ -105,16 +112,17 @@ const DialogStatN = memoIsShow((props) => {
       dateDf={},
       timeId,
    } = state
-  , [isShowLabels, _toggleLabels] = useToggle(IS_SHOW_LABELS)
-  , [_modalOptionsEl, _refDialogOptions, _toggleOptions] = useModalOptions()
-  , [_modalToggleEl, _refTitles, isRow, setIsRow, _toggleInputs] = useModalToggle(configs)
+  , [isShowLabels, toggleLabels] = useToggle(IS_SHOW_LABELS)
+  , [_modalOptionsEl, _refDialogOptions, toggleOptions] = useModalOptions()
+  , [_modalToggleEl, _refTitles, isRow, setIsRow, toggleInputs] = useModalToggle(configs)
   , {isShowDate, isShowChart} = isRow
-  , [_toolbarEl, toggleToolBar] = useToolbar(
-      _toggleLabels,
-      _toggleInputs,
-      _toggleOptions,
-      onAbout
-   )
+  , [isToolbar, toggleToolBar] = useToggle(true)
+  , toolbarButtons = useToolbar({
+     toggleLabels,
+     toggleInputs,
+     toggleOptions,
+     onAbout
+  })
    /*eslint-disable react-hooks/exhaustive-deps */
    , _hClose = useCallback(() => {
      onClose()
@@ -211,7 +219,10 @@ const DialogStatN = memoIsShow((props) => {
        onShow={onShow}
        onClose={_hClose}
     >
-       {_toolbarEl}
+      <D.Toolbar
+        isShow={isToolbar}
+        buttons={toolbarButtons}
+      />      
        {_modalOptionsEl}
        {_modalToggleEl}
        <Spinner status={_spinnerStatus} />
