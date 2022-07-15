@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _DateUtils = require("../../utils/DateUtils");
 
@@ -45,10 +45,10 @@ const S_MODAL_POPUP = {
   whiteSpace: 'nowrap'
 };
 
-const _isNotAdminMode = (isAdminMode, isDenyToChange) => {
+const _isCompareTo = (isAdminMode, isDenyToChange) => {
   const _isAdminMode = typeof isAdminMode == 'function' ? isAdminMode() : typeof isAdminMode == 'boolean' ? isAdminMode : false;
 
-  return !_isAdminMode || isDenyToChange;
+  return _isAdminMode && !isDenyToChange;
 };
 
 const RowValueDate = _ref => {
@@ -75,31 +75,22 @@ const ValueMovingModal = props => {
     isAdminMode,
     onClose
   } = props,
-        [msgDateTo, setMsgDateTo] = (0, _react.useState)(''),
-        _refInput = (0, _react.useRef)()
+        [msgDateTo, setMsgDateTo] = (0, _uiApi.useState)(''),
+        _refInput = (0, _uiApi.useRef)()
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _hEnterDate = (0, _react.useCallback)(dateTo => {
+        _hEnterDate = (0, _uiApi.useCallback)(dateTo => {
     if ((0, _DateUtils.isDmy)(dateTo)) {
-      if (updateDateTo(dateTo)) {
-        setMsgDateTo('');
-      } else {
-        setMsgDateTo("No data for " + dateTo);
-      }
+      setMsgDateTo(updateDateTo(dateTo) ? '' : "No data for " + dateTo);
     }
   }, []);
   /*eslint-disable react-hooks/exhaustive-deps */
 
 
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     if (isShow) {
-      if (_refInput.current) {
-        _refInput.current.focus();
-      }
-
-      if (msgDateTo) {
-        setMsgDateTo('');
-      }
+      (0, _uiApi.focusRefElement)(_refInput);
+      setMsgDateTo('');
     }
   }, [props]);
   const {
@@ -119,7 +110,7 @@ const ValueMovingModal = props => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(RowValueDate, {
       value: valueTo,
       date: dateTo
-    }), !_isNotAdminMode(isAdminMode, isDenyToChange) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivCompareTo.default, {
+    }), _isCompareTo(isAdminMode, isDenyToChange) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivCompareTo.default, {
       ref: _refInput,
       initialValue: dateTo,
       msgErr: msgDateTo,

@@ -1,4 +1,10 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
+import {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  focusRefElement
+} from '../uiApi';
 //import PropTypes from "prop-types";
 
 import { isDmy } from '../../utils/DateUtils';
@@ -32,23 +38,31 @@ const S_MODAL_POPUP = {
   whiteSpace: 'nowrap'
 };
 
-const _isNotAdminMode = (isAdminMode, isDenyToChange) => {
+const _isCompareTo = (
+  isAdminMode,
+  isDenyToChange
+) => {
   const _isAdminMode = typeof isAdminMode == 'function'
     ? isAdminMode()
     : typeof isAdminMode == 'boolean'
         ? isAdminMode
         : false;
-  return !_isAdminMode || isDenyToChange;
+  return _isAdminMode && !isDenyToChange;
 };
 
-const RowValueDate = ({ value, date }) => (
+const RowValueDate = ({
+  value,
+  date
+}) => (
   <div style={S_ROW}>
     <SpanValue value={formatAllNumber(value)} />
     <SpanDate date={date} style={S_DATE} />
   </div>
 );
 
-const ValueMovingModal = (props) => {
+const ValueMovingModal = (
+  props
+) => {
   const {
     isShow,
     updateDateTo,
@@ -56,28 +70,26 @@ const ValueMovingModal = (props) => {
     isAdminMode,
     onClose
   } = props
-  , [msgDateTo, setMsgDateTo] = useState('')
+  , [
+    msgDateTo,
+    setMsgDateTo
+  ] = useState('')
   , _refInput = useRef()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hEnterDate = useCallback(dateTo => {
     if (isDmy(dateTo)){
-      if (updateDateTo(dateTo)){
-        setMsgDateTo('')
-      } else {
-        setMsgDateTo(`No data for ${dateTo}`)
-      }
+      setMsgDateTo(updateDateTo(dateTo)
+         ? ''
+         : `No data for ${dateTo}`
+      )
     }
   }, []);
   /*eslint-disable react-hooks/exhaustive-deps */
 
   useEffect(()=>{
     if (isShow) {
-      if (_refInput.current) {
-        _refInput.current.focus()
-      }
-      if (msgDateTo) {
-        setMsgDateTo('')
-      }
+      focusRefElement(_refInput)
+      setMsgDateTo('')
     }
   }, [props])
 
@@ -97,7 +109,7 @@ const ValueMovingModal = (props) => {
     >
       <RowValueDate value={value} date={date} />
       <RowValueDate value={valueTo} date={dateTo} />
-      { !_isNotAdminMode(isAdminMode, isDenyToChange)
+      { _isCompareTo(isAdminMode, isDenyToChange)
         && <DivCompareTo
          ref={_refInput}
          initialValue={dateTo}
