@@ -22,7 +22,6 @@ import useMenuMore from './useMenuMore';
 import useModalOptions from './useModalOptions';
 import useModalToggle from './useModalToggle';
 import useLoadDims from './useLoadDims';
-import useCommandButtons from './useCommandButtons';
 
 import updateStateIf from './updateStateIf'
 import crSpinnerStatus from './crSpinnerStatus';
@@ -205,7 +204,6 @@ const DialogStatN = memoIsShow((props) => {
   ])
   //loadFn, onLoad, props
   /*eslint-enable react-hooks/exhaustive-deps */
-  , _commandButtons = useCommandButtons(_hLoad)
   , _menuMore = useMenuMore(toggleToolBar, onAbout)
   , _spinnerStatus = crSpinnerStatus(isLoading, isLoadFailed);
 
@@ -214,15 +212,15 @@ const DialogStatN = memoIsShow((props) => {
        isShow={isShow}
        caption={caption}
        menuModel={_menuMore}
-       commandButtons={_commandButtons}
        toTopLayer={toTopLayer}
+       onLoad={_hLoad}
        onShow={onShow}
        onClose={_hClose}
     >
       <D.Toolbar
         isShow={isToolbar}
         buttons={toolbarButtons}
-      />      
+      />
        {_modalOptionsEl}
        {_modalToggleEl}
        <Spinner status={_spinnerStatus} />

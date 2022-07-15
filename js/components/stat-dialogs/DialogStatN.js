@@ -37,8 +37,6 @@ var _useModalToggle = _interopRequireDefault(require("./useModalToggle"));
 
 var _useLoadDims = _interopRequireDefault(require("./useLoadDims"));
 
-var _useCommandButtons = _interopRequireDefault(require("./useCommandButtons"));
-
 var _updateStateIf = _interopRequireDefault(require("./updateStateIf"));
 
 var _crSpinnerStatus = _interopRequireDefault(require("./crSpinnerStatus"));
@@ -226,7 +224,6 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
 
   /*eslint-enable react-hooks/exhaustive-deps */
   ,
-        _commandButtons = (0, _useCommandButtons.default)(_hLoad),
         _menuMore = (0, _useMenuMore.default)(toggleToolBar, onAbout),
         _spinnerStatus = (0, _crSpinnerStatus.default)(isLoading, isLoadFailed);
 
@@ -234,8 +231,8 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     isShow: isShow,
     caption: caption,
     menuModel: _menuMore,
-    commandButtons: _commandButtons,
     toTopLayer: toTopLayer,
+    onLoad: _hLoad,
     onShow: onShow,
     onClose: _hClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
