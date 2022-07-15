@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
@@ -13,10 +13,11 @@ var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const CL_ROOT = 'zhn-search__options',
-      CL_OPTIONS = 'zhn-search__options__div',
-      CL_ITEM = 'zhn-search__row',
-      CL_FOOTER = 'zhn-search__footer',
+const SEARCH = 'zhn-search',
+      CL_ROOT = SEARCH + "__options",
+      CL_OPTIONS = SEARCH + "__options__div",
+      CL_ITEM = SEARCH + "__row",
+      CL_FOOTER = SEARCH + "__footer",
       S_OPTIONS = {
   width: 250
 },
@@ -31,28 +32,35 @@ const CL_ROOT = 'zhn-search__options',
   fontWeight: 'bold'
 };
 
-const BoldSpan = ({
-  text = ''
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-  style: S_BOLD,
-  children: text
-});
+const BoldSpan = _ref => {
+  let {
+    text = ''
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    style: S_BOLD,
+    children: text
+  });
+};
 
 const Delimeter = () => /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
   children: " - "
 });
 
-const Span = ({
-  text = ''
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-  children: text
-});
+const Span = _ref2 => {
+  let {
+    text = ''
+  } = _ref2;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    children: text
+  });
+};
 
-const Item = ({
-  item,
-  onClick,
-  onFocus
-}) => {
+const Item = _ref3 => {
+  let {
+    item,
+    onClick,
+    onFocus
+  } = _ref3;
   const {
     value,
     name,
@@ -78,34 +86,39 @@ const Item = ({
   });
 };
 
-const _crItem = (item, index, {
-  onClick,
-  onFocus
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(Item, {
-  item: item,
-  onClick: onClick.bind(null, item.value),
-  onFocus: onFocus.bind(null, index + 1)
-}, item.value + index);
+const _crItem = (item, index, _ref4) => {
+  let {
+    onClick,
+    onFocus
+  } = _ref4;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(Item, {
+    item: item,
+    onClick: onClick.bind(null, item.value),
+    onFocus: onFocus.bind(null, index + 1)
+  }, item.value + index);
+};
 
-const SearchOptions = ({
-  isShow,
-  options,
-  onClickItem
-}) => {
-  const refRecentItem = (0, _react.useRef)(),
-        [itemIndex, setItemIndex] = (0, _react.useState)(''),
+const SearchOptions = _ref5 => {
+  let {
+    isShow,
+    options,
+    onClickItem
+  } = _ref5;
+
+  const refRecentItem = (0, _uiApi.useRef)(),
+        [itemIndex, setItemIndex] = (0, _uiApi.useState)(''),
         _onFocusItem = (index, event) => {
     refRecentItem.current = event.target;
     setItemIndex(index);
   };
 
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     refRecentItem.current = null;
     setItemIndex('');
   }, [options]);
-  (0, _react.useEffect)(() => {
-    if (isShow && refRecentItem.current) {
-      refRecentItem.current.focus();
+  (0, _uiApi.useEffect)(() => {
+    if (isShow) {
+      (0, _uiApi.focusRefElement)(refRecentItem);
     }
   }, [isShow]);
 

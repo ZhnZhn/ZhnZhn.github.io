@@ -1,12 +1,18 @@
-import { useState, useRef, useEffect } from 'react';
+import {
+  useState,
+  useRef,
+  useEffect,
+  focusRefElement
+} from '../uiApi';
 
 import ShowHide from '../zhn/ShowHide';
 import ItemStack from '../zhn/ItemStack';
 
-const CL_ROOT = 'zhn-search__options'
-, CL_OPTIONS = 'zhn-search__options__div'
-, CL_ITEM = 'zhn-search__row'
-, CL_FOOTER = 'zhn-search__footer'
+const SEARCH = 'zhn-search'
+, CL_ROOT = `${SEARCH}__options`
+, CL_OPTIONS = `${SEARCH}__options__div`
+, CL_ITEM = `${SEARCH}__row`
+, CL_FOOTER = `${SEARCH}__footer`
 , S_OPTIONS = { width: 250 }
 , S_BOLD = { fontWeight: 'bold' }
 , S_FOOTER = {
@@ -26,7 +32,13 @@ const Item = ({
   onClick,
   onFocus
 }) => {
-  const { value, name, type, region, currency } = item;
+  const {
+    value,
+    name,
+    type,
+    region,
+    currency
+  } = item;
   return(
   <button
     className={CL_ITEM}
@@ -78,8 +90,8 @@ const SearchOptions = ({
     setItemIndex('')
   }, [options])
   useEffect(()=>{
-    if (isShow && refRecentItem.current) {
-      refRecentItem.current.focus()
+    if (isShow) {
+      focusRefElement(refRecentItem)
     }
   }, [isShow])
 
