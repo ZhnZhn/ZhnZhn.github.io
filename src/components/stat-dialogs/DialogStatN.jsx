@@ -17,9 +17,9 @@ import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import useProperty from '../hooks/useProperty';
 import useToolbar from '../dialogs/hooks/useToolbar';
+import useDialogOptions from '../dialogs/hooks/useDialogOptions';
 import useRefByIndex from './useRefByIndex';
 import useMenuMore from './useMenuMore';
-import useModalOptions from './useModalOptions';
 import useModalToggle from './useModalToggle';
 import useLoadDims from './useLoadDims';
 
@@ -112,10 +112,19 @@ const DialogStatN = memoIsShow((props) => {
       timeId,
    } = state
   , [isShowLabels, toggleLabels] = useToggle(IS_SHOW_LABELS)
-  , [_modalOptionsEl, _refDialogOptions, toggleOptions] = useModalOptions()
   , [_modalToggleEl, _refTitles, isRow, setIsRow, toggleInputs] = useModalToggle(configs)
   , {isShowDate, isShowChart} = isRow
-  , [isToolbar, toggleToolBar] = useToggle(true)
+  , [
+    refDialogOptions,
+    isShowOptions,
+    toggleOptions,
+    hideOptions,
+    toggleDialogOption
+  ] = useDialogOptions()
+  , [
+    isToolbar,
+    toggleToolBar
+  ] = useToggle(true)
   , toolbarButtons = useToolbar({
      toggleLabels,
      toggleInputs,
@@ -188,7 +197,7 @@ const DialogStatN = memoIsShow((props) => {
          dfC: _crDfC(props, _dimItem),
          dfTitle: _crDfTitle(props, _dimItem),
          time: (getDate() || dateDf).value,
-         dialogOptions: getRefValue(_refDialogOptions),
+         dialogOptions: getRefValue(refDialogOptions),
          items: getRefValue(_refItems),
          titles: getRefValue(_refTitles)
       }))
@@ -217,11 +226,15 @@ const DialogStatN = memoIsShow((props) => {
        onShow={onShow}
        onClose={_hClose}
     >
-      <D.Toolbar
-        isShow={isToolbar}
-        buttons={toolbarButtons}
-      />
-       {_modalOptionsEl}
+       <D.Toolbar
+         isShow={isToolbar}
+         buttons={toolbarButtons}
+       />
+       <D.ModalOptions
+         isShow={isShowOptions}
+         toggleOption={toggleDialogOption}
+         onClose={hideOptions}
+       />
        {_modalToggleEl}
        <Spinner status={_spinnerStatus} />
        {

@@ -27,11 +27,11 @@ var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
 var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
 
+var _useDialogOptions = _interopRequireDefault(require("../dialogs/hooks/useDialogOptions"));
+
 var _useRefByIndex = _interopRequireDefault(require("./useRefByIndex"));
 
 var _useMenuMore = _interopRequireDefault(require("./useMenuMore"));
-
-var _useModalOptions = _interopRequireDefault(require("./useModalOptions"));
 
 var _useModalToggle = _interopRequireDefault(require("./useModalToggle"));
 
@@ -122,12 +122,12 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     timeId
   } = state,
         [isShowLabels, toggleLabels] = (0, _useToggle.default)(IS_SHOW_LABELS),
-        [_modalOptionsEl, _refDialogOptions, toggleOptions] = (0, _useModalOptions.default)(),
         [_modalToggleEl, _refTitles, isRow, setIsRow, toggleInputs] = (0, _useModalToggle.default)(configs),
         {
     isShowDate,
     isShowChart
   } = isRow,
+        [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
         [isToolbar, toggleToolBar] = (0, _useToggle.default)(true),
         toolbarButtons = (0, _useToolbar.default)({
     toggleLabels,
@@ -213,7 +213,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
         dfC: _crDfC(props, _dimItem),
         dfTitle: _crDfTitle(props, _dimItem),
         time: (getDate() || dateDf).value,
-        dialogOptions: (0, _uiApi.getRefValue)(_refDialogOptions),
+        dialogOptions: (0, _uiApi.getRefValue)(refDialogOptions),
         items: (0, _uiApi.getRefValue)(_refItems),
         titles: (0, _uiApi.getRefValue)(_refTitles)
       }));
@@ -238,7 +238,11 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,
       buttons: toolbarButtons
-    }), _modalOptionsEl, _modalToggleEl, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalOptions, {
+      isShow: isShowOptions,
+      toggleOption: toggleDialogOption,
+      onClose: hideOptions
+    }), _modalToggleEl, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.default, {
       status: _spinnerStatus
     }), _spinnerStatus ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_DIV_LOADING
