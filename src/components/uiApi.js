@@ -5,6 +5,7 @@ export {
   useContext,
   useRef,
   useState,
+  useReducer,
   useCallback,
   useMemo,
   useEffect,

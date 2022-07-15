@@ -1,4 +1,10 @@
-import { useRef, useState, useReducer, useEffect, Fragment } from 'react'
+import {
+  useRef,
+  useState,
+  useReducer,
+  useEffect,
+  focusRefElement
+} from '../uiApi';
 
 import InputText from '../zhn/InputText'
 import SearchOptions from './SearchOptions'
@@ -17,7 +23,8 @@ const CL_INPUT_HR = 'zhn-search__input__hr'
   borderRadius: 14,
   background: 'none 0px 0px repeat scroll rgb(225, 225, 203)'
 }
-, S_ROOT_OPTIONS = {
+, S_ROOT_WITH_OPTIONS = {
+  ...S_ROOT,
   borderRadius: 0,
   borderTopLeftRadius: 5,
   borderTopRightRadius: 5
@@ -32,11 +39,13 @@ const CL_INPUT_HR = 'zhn-search__input__hr'
   boxShadow: 'none'
 };
 
-
 const _isHideOptions = keyCode => keyCode === 38
  || keyCode === 46
  || keyCode === 27;
-const _isShowOptions = (keyCode, options) => keyCode === 40
+const _isShowOptions = (
+  keyCode,
+  options
+) => keyCode === 40
  && options.length > 0;
 
 const InputSearch = ({
@@ -45,11 +54,19 @@ const InputSearch = ({
   crInputChange=crInputChangeDf
 }) => {
   const refInput = useRef()
-  , [inputKey, forceUpdate] = useState(0)
-  , [state, dispatch] = useReducer(reducer, initialState)
+  , [
+    inputKey,
+    forceUpdate
+  ] = useState(0)
+  , [
+    state,
+    dispatch
+  ] = useReducer(reducer, initialState)
   , {
-      isLoading, isLoadingFailed,
-      isOptions, options,
+      isLoading,
+      isLoadingFailed,
+      isOptions,
+      options,
       ticket
     } = state
   , action = crAction(dispatch)
@@ -70,22 +87,20 @@ const InputSearch = ({
     const { keyCode } = event;
     if (_isHideOptions(keyCode)) {
       action.hideOptions()
-      refInput.current.focus()
+      focusRefElement(refInput)
     } else if (_isShowOptions(keyCode, options)) {
       action.showOptions()
     }
   }
 
   useEffect(() => {
-    if (refInput.curent) {
-      refInput.current.focus()
-    }
+    focusRefElement(refInput)
   }, [inputKey])
 
   const onKeyDown = isSearch ? _onKeyDown : null
   , onInputChange = isSearch ? _onInputChange: null
   , _style = isOptions
-    ? {...S_ROOT, ...S_ROOT_OPTIONS}
+    ? S_ROOT_WITH_OPTIONS
     : S_ROOT;
 
   return (
@@ -103,7 +118,7 @@ const InputSearch = ({
         onEnter={_onEnter}
       />
       <hr className={CL_INPUT_HR} />
-      { isSearch && <Fragment>
+      { isSearch && <>
           <ToggleButton
             isLoading={isLoading}
             isLoadingFailed={isLoadingFailed}
@@ -116,7 +131,7 @@ const InputSearch = ({
              options={options}
              onClickItem={_onClickItem}
           />
-        </Fragment>
+        </>
       }
     </div>
   );

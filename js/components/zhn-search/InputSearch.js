@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 
@@ -31,7 +31,7 @@ const CL_INPUT_HR = 'zhn-search__input__hr',
   borderRadius: 14,
   background: 'none 0px 0px repeat scroll rgb(225, 225, 203)'
 },
-      S_ROOT_OPTIONS = {
+      S_ROOT_WITH_OPTIONS = { ...S_ROOT,
   borderRadius: 0,
   borderTopLeftRadius: 5,
   borderTopRightRadius: 5
@@ -50,14 +50,16 @@ const _isHideOptions = keyCode => keyCode === 38 || keyCode === 46 || keyCode ==
 
 const _isShowOptions = (keyCode, options) => keyCode === 40 && options.length > 0;
 
-const InputSearch = ({
-  isSearch = true,
-  searchApi,
-  crInputChange = _crInputChange.default
-}) => {
-  const refInput = (0, _react.useRef)(),
-        [inputKey, forceUpdate] = (0, _react.useState)(0),
-        [state, dispatch] = (0, _react.useReducer)(_reducer.default, _initialState.default),
+const InputSearch = _ref => {
+  let {
+    isSearch = true,
+    searchApi,
+    crInputChange = _crInputChange.default
+  } = _ref;
+
+  const refInput = (0, _uiApi.useRef)(),
+        [inputKey, forceUpdate] = (0, _uiApi.useState)(0),
+        [state, dispatch] = (0, _uiApi.useReducer)(_reducer.default, _initialState.default),
         {
     isLoading,
     isLoadingFailed,
@@ -86,23 +88,19 @@ const InputSearch = ({
 
     if (_isHideOptions(keyCode)) {
       action.hideOptions();
-      refInput.current.focus();
+      (0, _uiApi.focusRefElement)(refInput);
     } else if (_isShowOptions(keyCode, options)) {
       action.showOptions();
     }
   };
 
-  (0, _react.useEffect)(() => {
-    if (refInput.curent) {
-      refInput.current.focus();
-    }
+  (0, _uiApi.useEffect)(() => {
+    (0, _uiApi.focusRefElement)(refInput);
   }, [inputKey]);
 
   const onKeyDown = isSearch ? _onKeyDown : null,
         onInputChange = isSearch ? _onInputChange : null,
-        _style = isOptions ? { ...S_ROOT,
-    ...S_ROOT_OPTIONS
-  } : S_ROOT;
+        _style = isOptions ? S_ROOT_WITH_OPTIONS : S_ROOT;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: _style,
@@ -117,7 +115,7 @@ const InputSearch = ({
       onEnter: _onEnter
     }, inputKey), /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
       className: CL_INPUT_HR
-    }), isSearch && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_react.Fragment, {
+    }), isSearch && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ToggleButton.default, {
         isLoading: isLoading,
         isLoadingFailed: isLoadingFailed,
