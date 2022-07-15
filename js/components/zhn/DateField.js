@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 
@@ -26,7 +26,7 @@ const _initState = value => ({
 
 const DF_ON_TEST = () => true;
 
-const DateField = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+const DateField = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     style,
     inputStyle,
@@ -40,48 +40,45 @@ const DateField = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
     onEnter
   } = _ref;
 
-  const _refInput = (0, _react.useRef)(null),
-        [state, setState] = (0, _react.useState)(() => _initState(initialValue)),
+  const _refInput = (0, _uiApi.useRef)(null),
+        [state, setState] = (0, _uiApi.useState)(() => _initState(initialValue)),
         {
     value,
     errorInput,
     isValid
   } = state,
         _hChangeValue = event => {
-    const value = event.target.value;
+    const {
+      value
+    } = event.target,
+          _nextState = onTest(value) ? _initState(value) : {
+      value,
+      isValid: false,
+      errorInput: null
+    };
 
-    if (!onTest(value)) {
-      setState({
-        value,
-        isValid: false,
-        errorInput: null
-      });
-    } else {
-      setState(_initState(value));
-    }
+    setState(_nextState);
   },
         _hBlurValue = () => {
-    if (value !== initialValue && !onTest(value)) {
-      setState({
-        value,
-        errorInput: errorMsg,
-        isValid: false
-      });
-    } else {
-      setState({
-        value,
-        errorInput: null,
-        isValid: true
-      });
-    }
+    const _nextState = value !== initialValue && !onTest(value) ? {
+      value,
+      errorInput: errorMsg,
+      isValid: false
+    } : {
+      value,
+      errorInput: null,
+      isValid: true
+    };
+
+    setState(_nextState);
   },
         _hKeyDown = (0, _useInputKeyDown.default)({
     onEnter,
     onDelete: () => setState(_initState(initialValue))
   }, [initialValue]);
 
-  (0, _react.useEffect)(() => setState(_initState(initialValue)), [initialValue]);
-  (0, _react.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useEffect)(() => setState(_initState(initialValue)), [initialValue]);
+  (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValue: () => value,
     setValue: value => {
       if (onTest(value)) {
@@ -89,7 +86,7 @@ const DateField = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
       }
     },
     isValid: () => isValid,
-    focus: () => _refInput.current.focus()
+    focus: () => (0, _uiApi.focusRefElement)(_refInput)
   }), [value, isValid, onTest]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: { ..._Input.S_ROW,

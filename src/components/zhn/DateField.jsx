@@ -4,9 +4,10 @@ import {
   useState,
   useRef,
   useEffect,
-  useImperativeHandle
-} from 'react';
-import useInputKeyDown from './useInputKeyDown'
+  useImperativeHandle,
+  focusRefElement
+} from '../uiApi';
+import useInputKeyDown from './useInputKeyDown';
 
 import Hr from './Hr';
 import ErrMsg from './ErrMsg';
@@ -16,7 +17,9 @@ import {
   S_INPUT
 } from './Input.Style';
 
-const _initState = (value) => ({
+const _initState = (
+  value
+) => ({
   value,
   errorInput: null,
   isValid: true
@@ -25,7 +28,8 @@ const _initState = (value) => ({
 const DF_ON_TEST = () => true
 
 const DateField = forwardRef(({
-  style, inputStyle,
+  style,
+  inputStyle,
   initialValue='',
   placeholder='YYYY-MM-DD',
   inputmode='numeric',
@@ -36,22 +40,27 @@ const DateField = forwardRef(({
   onEnter
 }, ref) => {
   const _refInput = useRef(null)
-  , [state, setState] = useState(() => _initState(initialValue))
-  , { value, errorInput, isValid } = state
+  , [
+    state,
+    setState
+  ] = useState(() => _initState(initialValue))
+  , {
+    value,
+    errorInput,
+    isValid
+  } = state
   , _hChangeValue = (event) => {
-      const value = event.target.value;
-      if (!onTest(value)){
-        setState({ value, isValid: false, errorInput: null })
-      } else {
-        setState(_initState(value))
-      }
+      const { value } = event.target
+      , _nextState = onTest(value)
+          ? _initState(value)
+          : { value, isValid: false, errorInput: null };
+      setState(_nextState)
     }
   , _hBlurValue = () => {
-      if (value !== initialValue && !onTest(value)){
-        setState({ value, errorInput: errorMsg, isValid: false })
-      } else {
-        setState({ value, errorInput: null, isValid: true })
-      }
+      const _nextState = (value !== initialValue && !onTest(value))
+        ? { value, errorInput: errorMsg, isValid: false }
+        : { value, errorInput: null, isValid: true }
+      setState(_nextState)
     }
   , _hKeyDown = useInputKeyDown({
       onEnter,
@@ -70,7 +79,7 @@ const DateField = forwardRef(({
       }
     },
     isValid: () => isValid,
-    focus: () => _refInput.current.focus()
+    focus: () => focusRefElement(_refInput)
   }), [value, isValid, onTest])
 
   return (
