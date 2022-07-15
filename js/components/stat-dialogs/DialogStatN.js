@@ -25,13 +25,13 @@ var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
+var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
+
 var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
 
 var _useDialogOptions = _interopRequireDefault(require("../dialogs/hooks/useDialogOptions"));
 
 var _useRefByIndex = _interopRequireDefault(require("./useRefByIndex"));
-
-var _useMenuMore = _interopRequireDefault(require("./useMenuMore"));
 
 var _useModalToggle = _interopRequireDefault(require("./useModalToggle"));
 
@@ -127,8 +127,8 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     isShowDate,
     isShowChart
   } = isRow,
+        [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
         [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
-        [isToolbar, toggleToolBar] = (0, _useToggle.default)(true),
         toolbarButtons = (0, _useToolbar.default)({
     toggleLabels,
     toggleInputs,
@@ -224,13 +224,12 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
 
   /*eslint-enable react-hooks/exhaustive-deps */
   ,
-        _menuMore = (0, _useMenuMore.default)(toggleToolBar, onAbout),
         _spinnerStatus = (0, _crSpinnerStatus.default)(isLoading, isLoadFailed);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
     caption: caption,
-    menuModel: _menuMore,
+    menuModel: menuMoreModel,
     toTopLayer: toTopLayer,
     onLoad: _hLoad,
     onShow: onShow,

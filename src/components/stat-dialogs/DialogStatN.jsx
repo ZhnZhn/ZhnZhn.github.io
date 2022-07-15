@@ -16,10 +16,10 @@ import crSelectItem from './crSelectItem';
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import useProperty from '../hooks/useProperty';
+import useMenuMore from '../dialogs/hooks/useMenuMore';
 import useToolbar from '../dialogs/hooks/useToolbar';
 import useDialogOptions from '../dialogs/hooks/useDialogOptions';
 import useRefByIndex from './useRefByIndex';
-import useMenuMore from './useMenuMore';
 import useModalToggle from './useModalToggle';
 import useLoadDims from './useLoadDims';
 
@@ -115,16 +115,16 @@ const DialogStatN = memoIsShow((props) => {
   , [_modalToggleEl, _refTitles, isRow, setIsRow, toggleInputs] = useModalToggle(configs)
   , {isShowDate, isShowChart} = isRow
   , [
+    isToolbar,
+    menuMoreModel
+  ] = useMenuMore(onAbout)
+  , [
     refDialogOptions,
     isShowOptions,
     toggleOptions,
     hideOptions,
     toggleDialogOption
   ] = useDialogOptions()
-  , [
-    isToolbar,
-    toggleToolBar
-  ] = useToggle(true)
   , toolbarButtons = useToolbar({
      toggleLabels,
      toggleInputs,
@@ -213,14 +213,13 @@ const DialogStatN = memoIsShow((props) => {
   ])
   //loadFn, onLoad, props
   /*eslint-enable react-hooks/exhaustive-deps */
-  , _menuMore = useMenuMore(toggleToolBar, onAbout)
   , _spinnerStatus = crSpinnerStatus(isLoading, isLoadFailed);
 
   return (
     <D.DraggableDialog
        isShow={isShow}
        caption={caption}
-       menuModel={_menuMore}
+       menuModel={menuMoreModel}
        toTopLayer={toTopLayer}
        onLoad={_hLoad}
        onShow={onShow}
