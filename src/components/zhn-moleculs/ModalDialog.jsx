@@ -53,6 +53,7 @@ const CommandButtons = ({
           style={S_BT}
           caption="Close"
           title="Close Modal Dialog"
+          timeout={0}
           onClick={onClose}
         />
     }
@@ -75,13 +76,17 @@ const ModalDialog = forwardRef(({
   onClose=DF_ON_CLOSE
 }, ref) => {
   const [
-    refRoot, refBtMore
+    refRoot,
+    refBtMore
   ] = useDialogFocus(ref, isShow)
   , _hClick = useCallback(event => {
      event.stopPropagation()
   }, [])
   , _hKeyDown = useKeyEscape(onClose)
-  , [isMore, toggleIsMore] = useToggle(false)
+  , [
+    isMore,
+    toggleIsMore
+  ] = useToggle(false)
   , TS = useTheme(TH_ID)
   , _style = isShow ? S_SHOW : S_HIDE
   , _className = crCn(CL_MD, [isShow, CL_SHOWING]);

@@ -19,7 +19,7 @@ var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 
 var _MenuMore = _interopRequireDefault(require("./MenuMore"));
 
-var _Dialog = _interopRequireDefault(require("./Dialog.Style"));
+var _Dialog = require("./Dialog.Style");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -42,35 +42,41 @@ const TH_ID = 'MODAL_DIALOG',
   zIndex: 10
 };
 
-const CommandButtons = ({
-  commandButtons,
-  withoutClose,
-  onClose
-}) => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-  style: _Dialog.default.COMMAND_DIV,
-  children: [commandButtons, !withoutClose && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-    style: _Dialog.default.BT,
-    caption: "Close",
-    title: "Close Modal Dialog",
-    onClick: onClose
-  }, "close")]
-});
+const CommandButtons = _ref => {
+  let {
+    commandButtons,
+    withoutClose,
+    onClose
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: _Dialog.S_COMMAND_DIV,
+    children: [commandButtons, !withoutClose && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+      style: _Dialog.S_BT,
+      caption: "Close",
+      title: "Close Modal Dialog",
+      timeout: 0,
+      onClick: onClose
+    }, "close")]
+  });
+};
 
 const DF_ON_CLOSE = () => {};
 
-const ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(({
-  isShow,
-  style,
-  menuModel,
-  caption,
-  styleCaption,
-  commandButtons,
-  withoutClose,
-  isWithButton = true,
-  children,
-  timeout = 450,
-  onClose = DF_ON_CLOSE
-}, ref) => {
+const ModalDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
+  let {
+    isShow,
+    style,
+    menuModel,
+    caption,
+    styleCaption,
+    commandButtons,
+    withoutClose,
+    isWithButton = true,
+    children,
+    timeout = 450,
+    onClose = DF_ON_CLOSE
+  } = _ref2;
+
   const [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
         _hClick = (0, _react.useCallback)(event => {
     event.stopPropagation();
@@ -78,7 +84,7 @@ const ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(({
         _hKeyDown = useKeyEscape(onClose),
         [isMore, toggleIsMore] = useToggle(false),
         TS = useTheme(TH_ID),
-        _style = isShow ? _Dialog.default.SHOW : _Dialog.default.HIDE,
+        _style = isShow ? _Dialog.S_SHOW : _Dialog.S_HIDE,
         _className = (0, _crCn.default)(CL_MD, [isShow, CL_SHOWING]);
 
   return (
@@ -92,7 +98,7 @@ const ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(({
       "aria-label": caption,
       "aria-hidden": !isShow,
       className: _className,
-      style: { ..._Dialog.default.ROOT_DIV,
+      style: { ..._Dialog.S_ROOT_DIV,
         ...S_ROOT_DIV_MODAL,
         ...style,
         ..._style,
@@ -102,7 +108,7 @@ const ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(({
       onClick: _hClick,
       onKeyDown: _hKeyDown,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        style: { ..._Dialog.default.CAPTION_DIV,
+        style: { ..._Dialog.S_CAPTION_DIV,
           ...TS.EL
         },
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
@@ -115,7 +121,7 @@ const ModalDialog = /*#__PURE__*/(0, _react.forwardRef)(({
           style: styleCaption,
           children: caption
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose.default, {
-          style: _Dialog.default.SVG_CLOSE,
+          style: _Dialog.S_SVG_CLOSE,
           onClose: onClose
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
