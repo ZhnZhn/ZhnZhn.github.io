@@ -5,7 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
+
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
+
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _DateUtils = require("../../utils/DateUtils");
 
@@ -41,6 +45,8 @@ const S_DIALOG = {
   verticalAlign: 'middle'
 };
 
+const _isNumber = n => typeof n === 'number' && n - n === 0;
+
 const _crValue = function (x, y) {
   if (x === void 0) {
     x = '';
@@ -53,245 +59,173 @@ const _crValue = function (x, y) {
   return ((0, _formatNumber.default)(y) + " " + (0, _DateUtils.mlsToDmy)(x)).trim();
 };
 
-class LoadItemDialog extends _react.Component {
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    data: PropTypes.shape({
-      fromDate: PropTypes.string,
-      initToDate: PropTypes.string,
-      onTestDate: PropTypes.func
-    }),
-    store: PropTypes.object,
-    onClose: PropTypes.func
-  }
-  */
-  constructor(props) {
-    super(props);
+const HAS_WIDE_WIDTH = _has.default.wideWidth(),
+      DF_DATA = {},
+      DF_FROM_DATE = (0, _DateUtils.getFromDate)(2),
+      DF_TO_DATE = (0, _DateUtils.getToDate)();
 
-    this._toggleIsShowLabels = () => {
-      this.setState(prevState => ({ ...prevState,
-        isShowLabels: !prevState.isShowLabels
-      }));
-    };
+const LoadItemDialog = (0, _memoIsShow.default)(_ref => {
+  let {
+    isShow,
+    data = DF_DATA,
+    onClose
+  } = _ref;
 
-    this._toggleIsValue = () => {
-      this.setState(prevState => ({ ...prevState,
-        isValue: !prevState.isValue
-      }));
-    };
+  const _refDates = (0, _uiApi.useRef)(),
+        {
+    caption,
+    fromDate,
+    initToDate,
+    onTestDate,
+    itemConf
+  } = data,
+        {
+    dataSource,
+    x,
+    y
+  } = itemConf || {},
+        [isShowLabels, _toggleIsShowLabels] = (0, _useToggle.default)(HAS_WIDE_WIDTH),
+        [isValue, _toggleIsValue] = (0, _useToggle.default)(_isNumber(x)),
+        [isShowDate, _toggleIsShowDate] = (0, _useToggle.default)(),
+        _toolbarButtons = (0, _uiApi.getRefValue)((0, _uiApi.useRef)([{
+    caption: 'L',
+    title: 'Click to toggle input labels',
+    onClick: _toggleIsShowLabels
+  }, {
+    caption: 'V',
+    title: 'Click to toggle row value',
+    onClick: _toggleIsValue
+  }, {
+    caption: 'D',
+    title: 'Click to toggle date input',
+    onClick: _toggleIsShowDate
+  }])),
+        [validationMessages, setValidationMessages] = (0, _uiApi.useState)([]),
+        _hLoad = () => {
+    const _datesInst = (0, _uiApi.getRefValue)(_refDates),
+          {
+      isValid,
+      datesMsg
+    } = _datesInst.getValidation(),
+          _validationMessages = isValid ? [] : datesMsg;
 
-    this._toggleIsShowDate = () => {
-      this.setState(prevState => ({ ...prevState,
-        isShowDate: !prevState.isShowDate
-      }));
-    };
-
-    this._handleLoad = () => {
-      const validationMessages = this._createValidationMessages();
-
-      if (validationMessages.isValid) {
-        const {
-          data,
-          onClose
-        } = this.props,
-              {
-          id,
-          title,
-          subtitle,
-          caption,
-          columnName,
-          dataColumn,
-          seriaColumnNames,
-          itemConf = {}
-          /*
-          _itemKey, url, loadId,
-          optionFetch, items,
-          itemCaption, seriaType,
-          dataSource, dfId, timeId
-          */
-
-        } = data,
-              {
-          fromDate,
-          toDate
-        } = this.datesFragment.getValues(),
-              option = {
-          id,
-          title,
-          subtitle,
-          value: caption,
-          item: caption,
-          fromDate,
-          toDate,
-          columnName,
-          dataColumn,
-          seriaColumnNames,
-          loadId: itemConf.loadId || _LoadType.LT_WL,
-          ...itemConf
-        };
-
-        _ChartActions.ChartActions[_ChartActions.CHAT_LOAD]({
-          chartType: _LoadType.LT_WATCH_LIST,
-          browserType: _BrowserType.BT_WATCH_LIST
-        }, option);
-
-        onClose();
-      }
-
-      if (validationMessages.isValid) {
-        if (this.state.validationMessages.length > 0) {
-          this.setState({
-            validationMessages
-          });
-        }
-      } else {
-        this.setState({
-          validationMessages
-        });
-      }
-    };
-
-    this._createValidationMessages = () => {
-      let msg = [];
+    if (_validationMessages.length === 0) {
       const {
-        isValid,
-        datesMsg
-      } = this.datesFragment.getValidation();
+        id,
+        title,
+        subtitle,
+        caption,
+        columnName,
+        dataColumn,
+        seriaColumnNames,
+        itemConf = {} //_itemKey, url, loadId,
+        //optionFetch, items,
+        //itemCaption, seriaType,
+        //dataSource, dfId, timeId
 
-      if (!isValid) {
-        msg = msg.concat(datesMsg);
-      }
+      } = data,
+            {
+        fromDate,
+        toDate
+      } = _datesInst.getValues(),
+            option = {
+        id,
+        title,
+        subtitle,
+        value: caption,
+        item: caption,
+        fromDate,
+        toDate,
+        columnName,
+        dataColumn,
+        seriaColumnNames,
+        loadId: itemConf.loadId || _LoadType.LT_WL,
+        ...itemConf
+      };
 
-      msg.isValid = msg.length === 0 ? true : false;
-      return msg;
-    };
+      _ChartActions.ChartActions[_ChartActions.CHAT_LOAD]({
+        chartType: _LoadType.LT_WATCH_LIST,
+        browserType: _BrowserType.BT_WATCH_LIST
+      }, option);
 
-    this._handleClose = () => {
-      this.props.onClose();
-      this.setState({
-        validationMessages: []
-      });
-    };
-
-    this._refDates = c => this.datesFragment = c;
-
-    const {
-      fromDate: _fromDate,
-      initToDate,
-      onTestDate,
-      itemConf: _itemConf = {}
-    } = props.data,
-          isValue = !!_itemConf.x;
-    this.toolbarButtons = [{
-      caption: 'L',
-      title: 'Click to toggle input labels',
-      onClick: this._toggleIsShowLabels
-    }, {
-      caption: 'V',
-      title: 'Click to toggle row value',
-      onClick: this._toggleIsValue
-    }, {
-      caption: 'D',
-      title: 'Click to toggle date input',
-      onClick: this._toggleIsShowDate
-    }];
-    this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Load, {
-      onClick: this._handleLoad
-    }, "load")];
-    this.state = {
-      isToolbar: true,
-      isShowLabels: _has.default.wideWidth(),
-      validationMessages: [],
-      isShowDate: false,
-      isValue,
-      initFromDate: _fromDate || (0, _DateUtils.getFromDate)(2),
-      initToDate: initToDate || (0, _DateUtils.getToDate)(),
-      onTestDate: onTestDate || _DateUtils.isYmd
-    };
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
+      onClose();
+      setValidationMessages(prevVms => prevVms.length > 0 ? [] : prevVms);
+    } else {
+      setValidationMessages(_validationMessages);
     }
+  },
+        _commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Load, {
+    onClick: _hLoad
+  }, "load")],
+        _hClose = () => {
+    onClose();
+    setValidationMessages([]);
+  };
 
-    return true;
-  }
+  (0, _uiApi.useEffect)(() => {
+    _toggleIsValue(_isNumber(x));
+  }, [x, _toggleIsValue]);
 
-  render() {
-    const {
-      isShow,
-      data
-    } = this.props,
-          {
-      caption,
-      itemConf
-    } = data,
-          {
-      dataSource,
-      x,
-      y
-    } = itemConf || {},
-          {
-      isShowLabels,
-      isShowDate,
-      isValue,
-      initFromDate,
-      initToDate,
-      onTestDate,
-      validationMessages
-    } = this.state,
-          _style = isShowLabels ? S_DIALOG : S_DIALOG_SHORT,
-          _value = _crValue(x, y);
+  const _initFromDate = fromDate || DF_FROM_DATE,
+        _initToDate = initToDate || DF_TO_DATE,
+        _onTestDate = onTestDate || _DateUtils.isYmd,
+        _style = isShowLabels ? S_DIALOG : S_DIALOG_SHORT,
+        _value = _crValue(x, y);
 
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
-      style: _style,
-      isShow: isShow,
-      caption: "Load Item",
-      commandButtons: this._commandButtons,
-      onClose: this._handleClose,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
-        isShow: true,
-        buttons: this.toolbarButtons
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Text, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
+    style: _style,
+    isShow: isShow,
+    caption: "Load Item",
+    commandButtons: _commandButtons,
+    onClose: _hClose,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
+      isShow: true,
+      buttons: _toolbarButtons
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Text, {
+      isShowLabels: isShowLabels,
+      styleText: S_ITEM_TEXT,
+      caption: "Item:",
+      text: caption
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: isValue,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Text, {
         isShowLabels: isShowLabels,
         styleText: S_ITEM_TEXT,
-        caption: "Item:",
-        text: caption
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-        isShow: isValue,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Text, {
-          isShowLabels: isShowLabels,
-          styleText: S_ITEM_TEXT,
-          caption: "Value:",
-          text: _value
-        })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-        isShow: isShowDate,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.DatesFragment, {
-          ref: this._refDates,
-          isShowLabels: isShowLabels,
-          initFromDate: initFromDate,
-          initToDate: initToDate,
-          onTestDate: onTestDate
-        })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Text, {
+        caption: "Value:",
+        text: _value
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: isShowDate,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.DatesFragment, {
+        ref: _refDates,
         isShowLabels: isShowLabels,
-        styleText: S_ITEM_TEXT,
-        caption: "Source:",
-        text: dataSource
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationMessages.default, {
-        validationMessages: validationMessages
-      })]
-    });
-  }
-
+        initFromDate: _initFromDate,
+        initToDate: _initToDate,
+        onTestDate: _onTestDate
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Text, {
+      isShowLabels: isShowLabels,
+      styleText: S_ITEM_TEXT,
+      caption: "Source:",
+      text: dataSource
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationMessages.default, {
+      validationMessages: validationMessages
+    })]
+  });
+});
+/*
+LoadItemDialog.propTypes = {
+  isShow: PropTypes.bool,
+  data: PropTypes.shape({
+    fromDate: PropTypes.string,
+    initToDate: PropTypes.string,
+    onTestDate: PropTypes.func
+  }),
+  store: PropTypes.object,
+  onClose: PropTypes.func
 }
+*/
 
-LoadItemDialog.defaultProps = {
-  data: {}
-};
 var _default = LoadItemDialog;
 exports.default = _default;
 //# sourceMappingURL=LoadItemDialog.js.map
