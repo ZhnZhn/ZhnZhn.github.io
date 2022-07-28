@@ -31,7 +31,7 @@ const _addPercentAndColorToData = (
       item.percent = roundBy(item.value/_onePercent)
       item.name = crPointName(
         item.label,
-        item.percent
+        item.percent > 1 ? item.percent : ''
       )
     })
     data.sort(_compareByValue)

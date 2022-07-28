@@ -95,8 +95,14 @@ export const addColorsTo = ({
 }
 
 const NUMBER_STYLE = 'style="color:#fdb316;font-size:18px;"'
+, _isNumber = n => typeof n === 'number'
+ && n-n===0;
 export const crPointName = (
   label,
   percent
-) => `${label}<br/>
-<span ${NUMBER_STYLE}>${percent}%</span>`;
+) => {
+  const _percent = _isNumber(percent)
+    ? `<span ${NUMBER_STYLE}>${percent}%</span>`
+    : '';
+  return `${label}<br/>${_percent}`;
+}

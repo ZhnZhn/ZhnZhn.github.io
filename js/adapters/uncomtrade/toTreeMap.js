@@ -19,7 +19,7 @@ const _addPercentAndColorToData = (data, total) => {
 
     data.forEach(item => {
       item.percent = (0, _fnAdapter.roundBy)(item.value / _onePercent);
-      item.name = (0, _TreeMapFn.crPointName)(item.label, item.percent);
+      item.name = (0, _TreeMapFn.crPointName)(item.label, item.percent > 1 ? item.percent : '');
     });
     data.sort(_compareByValue);
     (0, _TreeMapFn.addColorsTo)({

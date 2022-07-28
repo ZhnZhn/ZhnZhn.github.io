@@ -75,9 +75,15 @@ const addColorsTo = _ref => {
 };
 
 exports.addColorsTo = addColorsTo;
-const NUMBER_STYLE = 'style="color:#fdb316;font-size:18px;"';
 
-const crPointName = (label, percent) => label + "<br/>\n<span " + NUMBER_STYLE + ">" + percent + "%</span>";
+const NUMBER_STYLE = 'style="color:#fdb316;font-size:18px;"',
+      _isNumber = n => typeof n === 'number' && n - n === 0;
+
+const crPointName = (label, percent) => {
+  const _percent = _isNumber(percent) ? "<span " + NUMBER_STYLE + ">" + percent + "%</span>" : '';
+
+  return label + "<br/>" + _percent;
+};
 
 exports.crPointName = crPointName;
 //# sourceMappingURL=TreeMapFn.js.map
