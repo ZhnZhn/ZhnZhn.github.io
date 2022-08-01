@@ -34,8 +34,13 @@ const _isArr = Array.isArray;
 
 const DP = [
   [Link.Quandl, '50'],
-  Link.DbNomics, Link.Eurostat, Link.UnComtrade, Link.WorldBank,
-  Link.Insee, Link.ONS,
+  Link.DbNomics,
+  Link.Eurostat,
+  Link.UnComtrade,
+  Link.FaoStat,
+  Link.WorldBank,
+  Link.Insee,
+  Link.ONS,
   Link.StatNorway, Link.StatSweden, Link.StatFinland, Link.StatDenmark, Link.StatIreland,
   [Link.Bsl, '25'],
   Link.CryptoCompare, Link.CoinGecko, Link.CoinMetrics,
@@ -48,11 +53,13 @@ const DP = [
   Link.Bea, [Link.Bsl, '500'], Link.Eia
 ]
 , DP_PR = [
-  Link.FaoStat,
   Link.Bitfinex
 ];
 
-const LinkPer = ({ Comp, per }) => (
+const LinkPer = ({
+  Comp,
+  per
+}) => (
   <>
     <Comp />
     <span style={S_BLACK}>
@@ -62,7 +69,9 @@ const LinkPer = ({ Comp, per }) => (
 );
 
 
-const LinkList = ({ list }) => list.map((CompOrConfig, index) => {
+const LinkList = ({
+  list
+}) => list.map((CompOrConfig, index) => {
   const _isConfig = _isArr(CompOrConfig)
   , _linkComp = _isConfig
       ? <LinkPer Comp={CompOrConfig[0]} per={CompOrConfig[1]} />
@@ -113,7 +122,7 @@ const DataProviders = ({ isClose }) => (
       </div>
       </OpenClose>
       <OpenClose
-        caption="(2) Required Local Http Proxy:"
+        caption="(1) Required Local Http Proxy:"
         style={S_OC_L2}
         openColor={OPEN_COLOR_L2}
         childStyle={S_CHILD_STYLE}

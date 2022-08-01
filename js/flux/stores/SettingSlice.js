@@ -7,7 +7,7 @@ var _LoadType = require("../../constants/LoadType");
 
 const _settings = {};
 const _withApiKey = [_LoadType.LT_AL, _LoadType.LT_IEX, _LoadType.LT_FMP, _LoadType.LT_INTR, _LoadType.LT_TW, _LoadType.LT_BEA, _LoadType.LT_EIA];
-const _withProxy = [_LoadType.LT_FAO, _LoadType.LT_BF];
+const _withProxy = [_LoadType.LT_BF];
 const _apiTitle = {
   DF: '',
   [_LoadType.LT_AL]: 'Alpha Vantage',

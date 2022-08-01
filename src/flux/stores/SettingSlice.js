@@ -20,7 +20,7 @@ const _withApiKey = [
   LT_BEA, LT_EIA
 ];
 const _withProxy = [
-  LT_FAO, LT_BF
+  LT_BF
 ];
 const _apiTitle = {
   DF: '',
@@ -32,7 +32,6 @@ const _apiTitle = {
   [LT_INTR]: 'Intrinio',
   [LT_TW]: 'Twelve Data',
 
-  [LT_FAO]: 'FAOSTAT',
   [LT_CRC]: 'CryptoCompare Information'
 };
 

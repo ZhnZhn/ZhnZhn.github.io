@@ -5,25 +5,13 @@ import {
   getValue
 } from './fnAdapter';
 
-const API_URL = 'http://fenixservices.fao.org/faostat/api/v1/en/data'
-, TAIL = 'area_cs=FAO&item_cs=FAO&show_codes=true&show_unit=true&show_flags=true&null_values=false&output_type=json'
-let _mem_year;
+import getMemoizedYear from './getMemoizedYear';
 
+const API_URL = 'https://fenixservices.fao.org/faostat/api/v1/en/data'
+, TAIL = 'area_cs=FAO&item_cs=FAO&show_codes=true&show_unit=true&show_flags=true&null_values=false&output_type=json'
 
 const _isArr = Array.isArray
 , _assign = Object.assign
-
-, _crMemYear = () => {
-  const year = (new Date()).getUTCFullYear()
-  , arr = [];
-  let i = 1980;
-  for(;i<year;i++){
-    arr.push(i)
-  }
-  return _mem_year = arr.join(',');
-}
-, _getMemYear = () => _mem_year || _crMemYear();
-
 
 const _isTitle = (
   qT
@@ -43,7 +31,6 @@ const FaoStatApi = {
   getRequestUrl(option){
     _checkReq(option)
     const {
-      proxy,
       items,
       dfElement,
       dfDomain='QC',
@@ -53,9 +40,9 @@ const FaoStatApi = {
     , _two = getValue(items[1])
     , _three = getValue(items[2])
     , _element = _three || dfElement
-    , _year = _getMemYear();
+    , _year = getMemoizedYear();
 
-    return `${proxy}${API_URL}/${dfDomain}?element=${_element}&area=${_one}&${dfItemName}=${_two}&year=${_year}&${TAIL}`;
+    return `${API_URL}/${dfDomain}?element=${_element}&area=${_one}&${dfItemName}=${_two}&year=${_year}&${TAIL}`;
   },
 
   checkResponse(json){
@@ -66,7 +53,12 @@ const FaoStatApi = {
   },
 
   addPropsTo(option){
-    const { qA, qI, qE, qT='' } = option
+    const {
+      qA,
+      qI,
+      qE,
+      qT=''
+    } = option
     , title = _isTitle(qT) ? qT : '';
     _assign(option, {
       items: [{v:qA},{v:qI},{v:qE}],
