@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/faostat/getMemoizedYear.js"
+ ],
+ "file": "../../../src/adapters/faostat/getMemoizedYear.js",
+ "names": [
+  "_memoized_year",
+  "_crYear",
+  "year",
+  "Date",
+  "getUTCFullYear",
+  "arr",
+  "i",
+  "push",
+  "join",
+  "getMemoizedYear"
+ ],
+ "mappings": ";;;;;AACA,IAAIA,cAAJ;;AACA,MAAMC,OAAO,GAAG,MAAM;AACpB,QAAMC,IAAI,GAAI,IAAIC,IAAJ,EAAD,CAAaC,cAAb,KAA8B,CAA3C;AAAA,QACEC,GAAG,GAAG,EADR;AAEA,MAAIC,CAAC,GAAG,IAAR;;AACA,SAAKA,CAAC,GAACJ,IAAP,EAAYI,CAAC,EAAb,EAAgB;AACdD,IAAAA,GAAG,CAACE,IAAJ,CAASD,CAAT;AACD;;AACD,SAAON,cAAc,GAAGK,GAAG,CAACG,IAAJ,CAAS,GAAT,CAAxB;AACD,CARD;AAAA,MASEC,eAAe,GAAG,MAAMT,cAAc,IAAIC,OAAO,EATnD;;eAWeQ,e"
+}
