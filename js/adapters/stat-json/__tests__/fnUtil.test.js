@@ -4,6 +4,13 @@ var _fnUtil = require("../fnUtil");
 
 describe('toUTC', () => {
   const fn = _fnUtil.toUTC;
+  test('should convert str in format YYYY MONTH  to mls UTC-0', () => {
+    expect(fn('2010 JANUARY')).toBe(Date.UTC(2010, 0, 30)); //2010-01-30
+
+    expect(fn('2010 FEBRUARY')).toBe(Date.UTC(2010, 1, 28)); //2010-02-28
+
+    expect(fn('2010 MARCH')).toBe(Date.UTC(2010, 2, 30)); //2010-03-30
+  });
   test('should convert str in format 2010M01D01 to mls UTC-0', () => {
     expect(fn('2010M01D01')).toBe(Date.UTC(2010, 0, 1)); //2010-01-01
 

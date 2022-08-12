@@ -27,11 +27,36 @@ const _fToUTC = monthPeriod => (delimeterChart, str) => {
 
 export const compose = _compose
 
+const _hmMonth = {
+  JANUARY: '01',
+  FEBRUARY: '02',
+  MARCH: '03',
+  APRIL: '04',
+  MAY: '05',
+  JUNE: '06',
+  JULY: '07',
+  AUGUST: '08',
+  SEPTEMBER: '09',
+  OCTOBER: '10',
+  NOVEMBER: '11',
+  DECEMBER: '12'
+};
+
 export const toUTC = (
   str,
   hasPerJanuary
 ) => {
-  str = str.toUpperCase()
+  str = str.toUpperCase().trim();
+  //YYYY MONTH (SIR)
+  const [
+    _year,
+    _month
+  ] = str.split(' ')
+  , _m = _month && _hmMonth[_month];
+  if (_m) {
+    return _toMonthUTC('M', `${_year}M${_m}`);
+  }
+
   const _isInclude = _fIsInclude(str);
   if (_isInclude('M')) {
     return _isInclude('D')
@@ -54,6 +79,6 @@ export const toYMD = (str) => {
   const ms = toUTC(str)
   , d = new Date(ms);
   return d.getUTCFullYear()
-    + "-" + ("0" + (d.getUTCMonth() + 1) ).slice(-2)
-    + "-" + ("0" + d.getUTCDate()).slice(-2);
+    + '-' + ('0' + (d.getUTCMonth() + 1) ).slice(-2)
+    + '-' + ('0' + d.getUTCDate()).slice(-2);
 }
