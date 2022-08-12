@@ -17,18 +17,19 @@ const _hmCrQuery = {
   [LT_SIR]: crSirQuery
 };
 
-const _crDfId = option => option.loadId === LT_SDN
-  ? ''
-  : '/'+option.dfId;
+const crUrlPathDf = option => '/'+option.dfId;
 
 const fTableApi = (
-  rootUrl
+  rootUrl,
+  crUrlPath=crUrlPathDf
 ) => ({
   getRequestUrl(option){
     option.resErrStatus = [400]
-    if (option.url) { return option.url; }
+    if (option.url) {
+      return option.url;
+    }
 
-    const _dfId = _crDfId(option);
+    const _dfId = crUrlPath(option);
     return (option.url = `${option.proxy || ''}${rootUrl}${_dfId}`);
   },
 

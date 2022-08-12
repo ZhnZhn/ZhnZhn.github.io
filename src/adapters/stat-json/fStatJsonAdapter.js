@@ -1,8 +1,14 @@
 import fTableApi from '../stat-json/fTableApi';
 import adapter from './StatJsonAdapter';
 
-const fStatJsonAdapter = url => {
-  const tableApi = fTableApi(url);
+const fStatJsonAdapter = (
+  rootUrl,
+  crUrlPath
+) => {
+  const tableApi = fTableApi(
+    rootUrl,
+    crUrlPath
+  );
   return {
     api: tableApi,
     optionFetch: tableApi.crOptionFetch,

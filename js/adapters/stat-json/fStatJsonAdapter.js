@@ -9,8 +9,8 @@ var _fTableApi = _interopRequireDefault(require("../stat-json/fTableApi"));
 
 var _StatJsonAdapter = _interopRequireDefault(require("./StatJsonAdapter"));
 
-const fStatJsonAdapter = url => {
-  const tableApi = (0, _fTableApi.default)(url);
+const fStatJsonAdapter = (rootUrl, crUrlPath) => {
+  const tableApi = (0, _fTableApi.default)(rootUrl, crUrlPath);
   return {
     api: tableApi,
     optionFetch: tableApi.crOptionFetch,

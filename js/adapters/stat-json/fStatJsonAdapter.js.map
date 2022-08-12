@@ -6,12 +6,13 @@
  "file": "../../../src/adapters/stat-json/fStatJsonAdapter.js",
  "names": [
   "fStatJsonAdapter",
-  "url",
+  "rootUrl",
+  "crUrlPath",
   "tableApi",
   "api",
   "optionFetch",
   "crOptionFetch",
   "adapter"
  ],
- "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,gBAAgB,GAAGC,GAAG,IAAI;AAC9B,QAAMC,QAAQ,GAAG,wBAAUD,GAAV,CAAjB;AACA,SAAO;AACLE,IAAAA,GAAG,EAAED,QADA;AAELE,IAAAA,WAAW,EAAEF,QAAQ,CAACG,aAFjB;AAGLC,IAAAA,OAAO,EAAPA;AAHK,GAAP;AAKD,CAPD;;eASeN,gB"
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,gBAAgB,GAAG,CACvBC,OADuB,EAEvBC,SAFuB,KAGpB;AACH,QAAMC,QAAQ,GAAG,wBACfF,OADe,EAEfC,SAFe,CAAjB;AAIA,SAAO;AACLE,IAAAA,GAAG,EAAED,QADA;AAELE,IAAAA,WAAW,EAAEF,QAAQ,CAACG,aAFjB;AAGLC,IAAAA,OAAO,EAAPA;AAHK,GAAP;AAKD,CAbD;;eAeeP,gB"
 }

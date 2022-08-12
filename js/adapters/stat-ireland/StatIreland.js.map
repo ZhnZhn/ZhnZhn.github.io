@@ -6,7 +6,13 @@
  "file": "../../../src/adapters/stat-ireland/StatIreland.js",
  "names": [
   "DATA_URL",
+  "_crUrlPath",
+  "option",
+  "dfId",
+  "_arr",
+  "split",
+  "length",
   "StatIreland"
  ],
- "mappings": ";;;;;;;AAAA;;AAEA,MAAMA,QAAQ,GAAG,sEAAjB;AACA,MAAMC,WAAW,GAAG,+BAAiBD,QAAjB,CAApB;eAEeC,W"
+ "mappings": ";;;;;;;AAAA;;AAEA,MAAMA,QAAQ,GAAG,uEAAjB;;AACA,MAAMC,UAAU,GACdC,MADiB,IAEd;AACH,QAAM;AAAEC,IAAAA;AAAF,MAAWD,MAAjB;AAAA,QACEE,IAAI,GAAGD,IAAI,CAACE,KAAL,CAAW,GAAX,CADT;;AAEA,SAAO,MAAMD,IAAI,CAACA,IAAI,CAACE,MAAL,GAAY,CAAb,CAAV,GAA4B,mBAAnC;AACD,CAND;;AAOA,MAAMC,WAAW,GAAG,+BAClBP,QADkB,EAElBC,UAFkB,CAApB;eAKeM,W"
 }

@@ -23,44 +23,50 @@ const _hmCrQuery = {
   [_LoadType.LT_SIR]: _crSirQuery.default
 };
 
-const _crDfId = option => option.loadId === _LoadType.LT_SDN ? '' : '/' + option.dfId;
+const crUrlPathDf = option => '/' + option.dfId;
 
-const fTableApi = rootUrl => ({
-  getRequestUrl(option) {
-    option.resErrStatus = [400];
-
-    if (option.url) {
-      return option.url;
-    }
-
-    const _dfId = _crDfId(option);
-
-    return option.url = "" + (option.proxy || '') + rootUrl + _dfId;
-  },
-
-  crOptionFetch(option) {
-    if (option.optionFetch) {
-      return option.optionFetch;
-    }
-
-    const _crQuery = _hmCrQuery[option.loadId] || _hmCrQuery.DF;
-
-    return option.optionFetch = _crQuery(option);
-  },
-
-  checkResponse(json) {
-    const {
-      error
-    } = json || {};
-
-    if (error) {
-      throw _crErr(error);
-    }
-
-    return true;
+const fTableApi = function (rootUrl, crUrlPath) {
+  if (crUrlPath === void 0) {
+    crUrlPath = crUrlPathDf;
   }
 
-});
+  return {
+    getRequestUrl(option) {
+      option.resErrStatus = [400];
+
+      if (option.url) {
+        return option.url;
+      }
+
+      const _dfId = crUrlPath(option);
+
+      return option.url = "" + (option.proxy || '') + rootUrl + _dfId;
+    },
+
+    crOptionFetch(option) {
+      if (option.optionFetch) {
+        return option.optionFetch;
+      }
+
+      const _crQuery = _hmCrQuery[option.loadId] || _hmCrQuery.DF;
+
+      return option.optionFetch = _crQuery(option);
+    },
+
+    checkResponse(json) {
+      const {
+        error
+      } = json || {};
+
+      if (error) {
+        throw _crErr(error);
+      }
+
+      return true;
+    }
+
+  };
+};
 
 var _default = fTableApi;
 exports.default = _default;

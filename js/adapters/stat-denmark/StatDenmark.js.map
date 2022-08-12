@@ -6,7 +6,8 @@
  "file": "../../../src/adapters/stat-denmark/StatDenmark.js",
  "names": [
   "DATA_URL",
+  "_crUrlPath",
   "StatDenmark"
  ],
- "mappings": ";;;;;;;AAAA;;AAEA,MAAMA,QAAQ,GAAG,iCAAjB;AACA,MAAMC,WAAW,GAAG,+BAAiBD,QAAjB,CAApB;eAEeC,W"
+ "mappings": ";;;;;;;AAAA;;AAEA,MAAMA,QAAQ,GAAG,iCAAjB;;AACA,MAAMC,UAAU,GAAG,MAAM,EAAzB;;AACA,MAAMC,WAAW,GAAG,+BAClBF,QADkB,EAElBC,UAFkB,CAApB;eAKeC,W"
 }
