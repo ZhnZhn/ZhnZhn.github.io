@@ -3,20 +3,13 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
-const _isBool = v => typeof v === 'boolean';
+const _isBool = v => typeof v === 'boolean',
+      _initState = initialValue => !!initialValue,
+      _reducer = (state, value) => _isBool(value) ? value : !state;
 
-const useToggle = initialValue => {
-  const [is, setIs] = (0, _react.useState)(() => !!initialValue);
-  return [is, (0, _react.useCallback)(v => {
-    if (_isBool(v)) {
-      setIs(v);
-    } else {
-      setIs(is => !is);
-    }
-  }, [])];
-};
+const useToggle = initialValue => (0, _uiApi.useReducer)(_reducer, initialValue, _initState);
 
 var _default = useToggle;
 exports.default = _default;
