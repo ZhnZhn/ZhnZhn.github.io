@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _useHasMounted = _interopRequireDefault(require("./useHasMounted"));
 
@@ -14,7 +14,7 @@ const useDidUpdate = (onDidUpdate, deps) => {
   /*eslint-disable react-hooks/exhaustive-deps */
 
 
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     if (!_hasMounted) {
       onDidUpdate();
     }

@@ -2,7 +2,7 @@ import {
   useRef,
   useLayoutEffect,
   useCallback
-} from 'react';
+} from '../uiApi';
 
 const useEventCallback = handler => {
   const ref = useRef(null);

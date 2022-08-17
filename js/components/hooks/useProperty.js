@@ -3,11 +3,11 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 const useProperty = initialValue => {
-  const ref = (0, _react.useRef)(initialValue);
-  return (0, _react.useMemo)(() => [//setValue
+  const ref = (0, _uiApi.useRef)(initialValue);
+  return (0, _uiApi.useMemo)(() => [//setValue
   v => {
     ref.current = v;
   }, //getValue

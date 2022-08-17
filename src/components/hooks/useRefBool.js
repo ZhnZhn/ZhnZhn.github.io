@@ -1,13 +1,17 @@
-import { useRef, useCallback } from 'react';
+import { 
+  useRef,
+  useMemo
+} from '../uiApi';
 
 const useRefBool = initialValue => {
   const ref = useRef(initialValue)
-  , setTrue = useCallback(() => {
-    ref.current = true
-  }, [])
-  , setFalse = useCallback(() => {
-    ref.current = false
-  }, []);
+  , [
+    setTrue,
+    setFalse
+  ] = useMemo(() => [
+    () => ref.current = true,
+    () => ref.current = false
+  ], []);
   return [ref, setTrue, setFalse];
 };
 

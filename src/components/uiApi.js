@@ -8,6 +8,7 @@ export {
   useReducer,
   useCallback,
   useMemo,
+  useLayoutEffect,
   useEffect,
   useImperativeHandle
 } from 'react';

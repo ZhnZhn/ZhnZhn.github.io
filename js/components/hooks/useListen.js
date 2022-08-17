@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _ChartStore = _interopRequireDefault(require("../../flux/stores/ChartStore"));
 
@@ -15,7 +15,7 @@ const useListen = function (onStore, propNameListen) {
     propNameListen = 'listen';
   }
 
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     const unsubscribe = _ChartStore.default[propNameListen](onStore);
 
     return unsubscribe;

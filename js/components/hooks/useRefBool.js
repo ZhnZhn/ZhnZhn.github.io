@@ -3,16 +3,11 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 const useRefBool = initialValue => {
-  const ref = (0, _react.useRef)(initialValue),
-        setTrue = (0, _react.useCallback)(() => {
-    ref.current = true;
-  }, []),
-        setFalse = (0, _react.useCallback)(() => {
-    ref.current = false;
-  }, []);
+  const ref = (0, _uiApi.useRef)(initialValue),
+        [setTrue, setFalse] = (0, _uiApi.useMemo)(() => [() => ref.current = true, () => ref.current = false], []);
   return [ref, setTrue, setFalse];
 };
 

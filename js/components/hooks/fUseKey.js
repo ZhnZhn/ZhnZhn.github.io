@@ -3,10 +3,10 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 /*eslint-disable react-hooks/exhaustive-deps */
-const fUseKey = isKey => (fn, deps) => (0, _react.useCallback)(event => {
+const fUseKey = isKey => (fn, deps) => (0, _uiApi.useCallback)(event => {
   if (isKey(event)) {
     event.preventDefault();
     event.stopPropagation();

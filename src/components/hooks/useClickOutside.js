@@ -1,18 +1,18 @@
 import {
   useRef,
   useCallback,
-  useEffect
-} from 'react';
-
-const _getRefValue = ref => ref.current;
+  useEffect,
+  getRefValue,
+  setRefValue
+} from '../uiApi';
 
 const _removeClickListener = (
   listener,
   ref
 ) => {
-  if (_getRefValue(ref)) {
+  if (getRefValue(ref)) {
     document.removeEventListener('click', listener, true);
-    ref.current = null
+    setRefValue(ref, null)
   }
 };
 
@@ -24,7 +24,7 @@ const useClickOutside = (
   , _refIs = useRef(null)
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hClickOutside = useCallback(event => {
-      const _el = _getRefValue(_ref);
+      const _el = getRefValue(_ref);
       if ( _el && _el.contains
         && !_el.contains(event.target)
       ){
@@ -36,9 +36,9 @@ const useClickOutside = (
   /*eslint-enable react-hooks/exhaustive-deps */
 
   useEffect(() => {
-    if (isShow && !_getRefValue(_refIs)) {
+    if (isShow && !getRefValue(_refIs)) {
       document.addEventListener('click', _hClickOutside, true)
-      _refIs.current = true
+      setRefValue(_refIs, true)      
     } else if (!isShow) {
       _removeClickListener(_hClickOutside, _refIs)
     }

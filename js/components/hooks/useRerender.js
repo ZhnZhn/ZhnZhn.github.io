@@ -3,11 +3,11 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 const _reducer = () => ({});
 
-const useRerender = () => (0, _react.useReducer)(_reducer)[1];
+const useRerender = () => (0, _uiApi.useReducer)(_reducer)[1];
 
 var _default = useRerender;
 exports.default = _default;

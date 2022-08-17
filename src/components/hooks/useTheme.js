@@ -1,6 +1,6 @@
-import { useContext } from 'react'
+import { useContext } from '../uiApi';
 
-import ThemeContext  from '../hoc/ThemeContext'
+import ThemeContext  from '../hoc/ThemeContext';
 
 const useTheme = themeId => useContext(ThemeContext)
  .getStyle(themeId);

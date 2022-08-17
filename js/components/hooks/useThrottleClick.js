@@ -3,11 +3,11 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
-var FN_NOOP = function FN_NOOP() {};
+const FN_NOOP = () => {};
 
-var useThrottleClick = function useThrottleClick(timeout, onClick) {
+const useThrottleClick = function (timeout, onClick) {
   if (timeout === void 0) {
     timeout = 0;
   }
@@ -16,16 +16,18 @@ var useThrottleClick = function useThrottleClick(timeout, onClick) {
     onClick = FN_NOOP;
   }
 
-  var _refTimeStamp = (0, _react.useRef)(null);
+  const _refTimeStamp = (0, _uiApi.useRef)(null);
 
-  return (0, _react.useCallback)(function (event) {
+  return (0, _uiApi.useCallback)(event => {
     if (timeout === 0) {
       onClick(event);
       return;
     }
 
-    var _timeStampPrev = _refTimeStamp.current,
-        timeStamp = event.timeStamp;
+    const _timeStampPrev = _refTimeStamp.current,
+          {
+      timeStamp
+    } = event;
 
     if (_timeStampPrev == null || timeStamp - _timeStampPrev > timeout) {
       onClick(event);

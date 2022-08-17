@@ -1,7 +1,7 @@
 import {
   useRef,
   useMemo
-} from 'react';
+} from '../uiApi';
 
 const useProperty = (
   initialValue

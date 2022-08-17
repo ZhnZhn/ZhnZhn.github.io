@@ -3,14 +3,14 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 const useEventCallback = handler => {
-  const ref = (0, _react.useRef)(null);
-  (0, _react.useLayoutEffect)(() => {
+  const ref = (0, _uiApi.useRef)(null);
+  (0, _uiApi.useLayoutEffect)(() => {
     ref.current = handler;
   });
-  return (0, _react.useCallback)(function () {
+  return (0, _uiApi.useCallback)(function () {
     const fn = ref.current;
     return fn(...arguments);
   }, []);

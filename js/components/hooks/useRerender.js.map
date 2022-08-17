@@ -1,1 +1,12 @@
-{"version":3,"sources":["../../../src/components/hooks/useRerender.js"],"names":["_reducer","useRerender"],"mappings":";;;;;AAAA;;AAEA,MAAMA,QAAQ,GAAG,OAAO,EAAP,CAAjB;;AACA,MAAMC,WAAW,GAAG,MAAM,uBAAWD,QAAX,EAAqB,CAArB,CAA1B;;eAEeC,W","sourcesContent":["import { useReducer } from 'react';\r\n\r\nconst _reducer = () => ({});\r\nconst useRerender = () => useReducer(_reducer)[1];\r\n\r\nexport default useRerender\r\n"],"file":"useRerender.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useRerender.js"
+ ],
+ "file": "../../../src/components/hooks/useRerender.js",
+ "names": [
+  "_reducer",
+  "useRerender"
+ ],
+ "mappings": ";;;;;AAAA;;AAEA,MAAMA,QAAQ,GAAG,OAAO,EAAP,CAAjB;;AACA,MAAMC,WAAW,GAAG,MAAM,uBAAWD,QAAX,EAAqB,CAArB,CAA1B;;eAEeC,W"
+}

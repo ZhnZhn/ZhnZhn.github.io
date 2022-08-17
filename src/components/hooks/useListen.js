@@ -1,8 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect } from '../uiApi';
 import store from '../../flux/stores/ChartStore';
 
 /*eslint-disable react-hooks/exhaustive-deps */
-const useListen = (onStore, propNameListen='listen') => {
+const useListen = (
+  onStore,
+  propNameListen='listen'
+) => {
   useEffect(() => {
     const unsubscribe = store[propNameListen](onStore)
     return unsubscribe;

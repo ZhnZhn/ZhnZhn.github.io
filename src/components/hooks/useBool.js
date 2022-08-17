@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from '../uiApi';
 
 const useBool = (initialValue) => {
   const [is, setIs] = useState(() => !!initialValue)

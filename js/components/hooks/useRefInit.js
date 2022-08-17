@@ -1,12 +1,12 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
-var useRefInit = function useRefInit(crValue) {
-  var ref = (0, _react.useRef)(null);
+const useRefInit = crValue => {
+  const ref = (0, _uiApi.useRef)(null);
 
   if (ref.current === null) {
     ref.current = crValue();
@@ -16,5 +16,5 @@ var useRefInit = function useRefInit(crValue) {
 };
 
 var _default = useRefInit;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=useRefInit.js.map

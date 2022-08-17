@@ -1,8 +1,8 @@
-import { useRef } from 'react'
+import { useRef } from '../uiApi';
 
 const useHasNotEqual = (value) => {
   const _ref = useRef(value)
-  , { current } = _ref;  
+  , { current } = _ref;
   _ref.current = value
   return !(current === value);
 };

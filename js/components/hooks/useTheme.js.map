@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../../src/components/hooks/useTheme.js"],"names":["useTheme","themeId","ThemeContext","getStyle"],"mappings":";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,QAAQ,GAAG,SAAXA,QAAW,CAAAC,OAAO;AAAA,SAAI,uBAAWC,wBAAX,EAC1BC,QAD0B,CACjBF,OADiB,CAAJ;AAAA,CAAxB;;eAGeD,Q","sourcesContent":["import { useContext } from 'react'\r\n\r\nimport ThemeContext  from '../hoc/ThemeContext'\r\n\r\nconst useTheme = themeId => useContext(ThemeContext)\r\n .getStyle(themeId);\r\n\r\nexport default useTheme\r\n"],"file":"useTheme.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useTheme.js"
+ ],
+ "file": "../../../src/components/hooks/useTheme.js",
+ "names": [
+  "useTheme",
+  "themeId",
+  "ThemeContext",
+  "getStyle"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AAEA,MAAMA,QAAQ,GAAGC,OAAO,IAAI,uBAAWC,qBAAX,EAC1BC,QAD0B,CACjBF,OADiB,CAA5B;;eAGeD,Q"
+}

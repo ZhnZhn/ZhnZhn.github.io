@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from '../uiApi';
 import useHasMounted from './useHasMounted';
 
 const useDidUpdate = (

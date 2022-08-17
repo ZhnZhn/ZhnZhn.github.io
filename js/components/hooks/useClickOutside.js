@@ -3,46 +3,50 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 const _removeClickListener = (listener, ref) => {
-  if (ref.current) {
+  if ((0, _uiApi.getRefValue)(ref)) {
     document.removeEventListener('click', listener, true);
-    ref.current = null;
+    (0, _uiApi.setRefValue)(ref, null);
   }
 };
-/*eslint-disable react-hooks/exhaustive-deps */
-
 
 const useClickOutside = (isShow, onClickOutside) => {
-  const _ref = (0, _react.useRef)(null),
-        _refIs = (0, _react.useRef)(null),
-        _hClickOutside = (0, _react.useCallback)(event => {
-    var _ref$current;
+  const _ref = (0, _uiApi.useRef)(null),
+        _refIs = (0, _uiApi.useRef)(null)
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _hClickOutside = (0, _uiApi.useCallback)(event => {
+    const _el = (0, _uiApi.getRefValue)(_ref);
 
-    if (_ref != null && (_ref$current = _ref.current) != null && _ref$current.contains && !_ref.current.contains(event.target)) {
+    if (_el && _el.contains && !_el.contains(event.target)) {
       event.stopPropagation();
       onClickOutside(event);
     }
   }, []); // onClickOutside
 
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  (0, _react.useEffect)(() => {
-    if (isShow && !_refIs.current) {
+
+  (0, _uiApi.useEffect)(() => {
+    if (isShow && !(0, _uiApi.getRefValue)(_refIs)) {
       document.addEventListener('click', _hClickOutside, true);
-      _refIs.current = true;
+      (0, _uiApi.setRefValue)(_refIs, true);
     } else if (!isShow) {
       _removeClickListener(_hClickOutside, _refIs);
     }
   });
-  (0, _react.useEffect)(() => {
+  /*eslint-disable react-hooks/exhaustive-deps */
+
+  (0, _uiApi.useEffect)(() => {
     return () => _removeClickListener(_hClickOutside, _refIs);
   }, []); // _hClickOutside
 
+  /*eslint-enable react-hooks/exhaustive-deps */
+
   return _ref;
 };
-/*eslint-enable react-hooks/exhaustive-deps */
-
 
 var _default = useClickOutside;
 exports.default = _default;
