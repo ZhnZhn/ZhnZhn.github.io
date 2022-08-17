@@ -99,7 +99,7 @@ export const valueMoving = (data, dfR) => {
   , bPrevValue = _crBigValueFrom(_pointPrev)
   , date = _crDmyFrom(_pointNow)
   , dateTo = _crDmyFrom(_pointPrev);
-  
+
   return  {
     ...crValueMoving({ bNowValue, bPrevValue, dfR }),
     valueTo: formatAllNumber(bPrevValue),
@@ -115,20 +115,6 @@ export const joinBy = (
   .join(delimeter)
 
 export const toUpperCaseFirst = _toUpperCaseFirst
-
-export const mapIf = (
-  arr,
-  crItem,
-  is
-) => {
-  const _items = [];
-  (arr || []).forEach(v => {
-    if (is(v)) {
-      _items.push(crItem(v))
-    }
-  })
-  return _items;
-}
 
 export const crZhConfig = ({
   _itemKey,

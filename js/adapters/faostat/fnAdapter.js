@@ -40,13 +40,13 @@ const _crPoint = _ref => {
         Tail = m !== 0 ? "-" + m : MM_DD;
   return {
     x: (0, _AdapterFn.ymdToUTC)('' + Year + Tail),
-    y: Value
+    y: parseFloat(Value)
   };
 };
 
-const _crHm = (json, prName) => {
+const _crHm = (data, prName) => {
   const hm = Object.create(null);
-  json.data.forEach(item => {
+  data.forEach(item => {
     const _itemKey = item[prName];
 
     if (!hm[_itemKey]) {
@@ -55,15 +55,6 @@ const _crHm = (json, prName) => {
     }
 
     hm[_itemKey].push(_crPoint(item));
-    /*
-     const { Area } = item
-     if (!hm[Area]) {
-       hm[Area] = []
-       hm[Area].seriaName = Area
-     }
-     hm[Area].push(_crPoint(item))
-     */
-
   });
   return hm;
 };
@@ -77,7 +68,6 @@ const _crRefLegend = hm => {
   for (propName in hm) {
     const _arr = hm[propName];
     legend.push({ ..._arr[_arr.length - 1],
-      //Area: propName
       listPn: propName
     });
   }
@@ -85,21 +75,19 @@ const _crRefLegend = hm => {
   return legend.filter(_AdapterFn.isYNumber).sort(_compareByY);
 };
 
-const _hmToPoints = (hm, arr) => arr.map(item => hm[item.listPn]); //.map(item => hm[item.Area]);
+const _hmToPoints = (hm, arr) => arr.map(item => hm[item.listPn]);
 
-
-const _crSeriesData = (json, prName) => {
-  const _hm = _crHm(json, prName),
+const _crSeriesData = (data, prName) => {
+  const _hm = _crHm(data, prName),
         _legend = _crRefLegend(_hm);
 
   return _hmToPoints(_hm, _legend);
 };
 
-const _isValueNumber = item => typeof item.Value === 'number';
+const _isNumber = v => typeof v === 'number' && v - v === 0,
+      _compareByX = (a, b) => a.x - b.x;
 
-const _compareByX = (a, b) => a.x - b.x;
-
-const _crSeriaData = (json, option) => (0, _AdapterFn.mapIf)(json.data, _crPoint, _isValueNumber).sort(_compareByX);
+const _crSeriaData = (data, option) => data.map(_crPoint).filter(p => _isNumber(p.y)).sort(_compareByX);
 
 const _isItemList = item => (0, _AdapterFn.getValue)(item).indexOf('>') !== -1;
 
@@ -107,14 +95,7 @@ const _getSeriesPropName = _ref2 => {
   let {
     items
   } = _ref2;
-
-  if (_isItemList(items[0])) {
-    return 'Area';
-  }
-
-  if (_isItemList(items[1])) {
-    return 'Item';
-  }
+  return _isItemList(items[0]) ? 'Area' : _isItemList(items[1]) ? 'Item' : void 0;
 };
 
 const _isListForList = _ref3 => {
@@ -175,9 +156,15 @@ const crSeriaData = _crSeriaData;
 exports.crSeriaData = crSeriaData;
 
 const toDataPoints = (json, option) => {
-  const _prName = _getSeriesPropName(option);
+  const _prName = _getSeriesPropName(option),
+        _itemCode = (0, _AdapterFn.getValue)(option.items[1]),
+        _data = (json.data || []).filter(item => {
+    const _itemCodeFao = (item['Item Code (FAO)'] || '').trim();
 
-  return _prName ? _crSeriesData(json, _prName) : _crSeriaData(json, option);
+    return _itemCodeFao ? _itemCodeFao === _itemCode : true;
+  });
+
+  return _prName ? _crSeriesData(_data, _prName) : _crSeriaData(_data, option);
 };
 
 exports.toDataPoints = toDataPoints;

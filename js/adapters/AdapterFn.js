@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundBy = exports.numberFormat = exports.monthIndex = exports.mapIf = exports.joinBy = exports.isYNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.crZhConfig = exports.crValueMoving = exports._isNaN = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundBy = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.crZhConfig = exports.crValueMoving = exports._isNaN = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
@@ -147,18 +147,6 @@ const joinBy = function (delimeter) {
 exports.joinBy = joinBy;
 const toUpperCaseFirst = _toUpperCaseFirst2.default;
 exports.toUpperCaseFirst = toUpperCaseFirst;
-
-const mapIf = (arr, crItem, is) => {
-  const _items = [];
-  (arr || []).forEach(v => {
-    if (is(v)) {
-      _items.push(crItem(v));
-    }
-  });
-  return _items;
-};
-
-exports.mapIf = mapIf;
 
 const crZhConfig = _ref2 => {
   let {

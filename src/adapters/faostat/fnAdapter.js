@@ -11,8 +11,7 @@ import {
   toUpperCaseFirst,
   monthIndex,
   ymdToUTC,
-  valueMoving,
-  mapIf
+  valueMoving
 } from '../AdapterFn';
 import { DATASET_EMPTY } from './fnDescr';
 
@@ -44,31 +43,23 @@ const _crPoint = ({
      : MM_DD;
   return {
     x: ymdToUTC('' + Year + Tail),
-    y: Value
+    y: parseFloat(Value)
   };
 };
 
 
 const _crHm = (
-  json,
+  data,
   prName
 ) => {
   const hm = Object.create(null);
-  json.data.forEach(item => {
+  data.forEach(item => {
     const _itemKey = item[prName];
     if (!hm[_itemKey]) {
       hm[_itemKey] = []
       hm[_itemKey].seriaName = _itemKey
     }
     hm[_itemKey].push(_crPoint(item))
-    /*
-     const { Area } = item
-     if (!hm[Area]) {
-       hm[Area] = []
-       hm[Area].seriaName = Area
-     }
-     hm[Area].push(_crPoint(item))
-     */
   })
   return hm;
 };
@@ -82,7 +73,6 @@ const _crRefLegend = (hm) => {
     const _arr = hm[propName];
     legend.push({
       ..._arr[_arr.length-1],
-      //Area: propName
       listPn: propName
     })
   }
@@ -91,42 +81,45 @@ const _crRefLegend = (hm) => {
     .sort(_compareByY);
 };
 
-const _hmToPoints = (hm, arr) => arr
+const _hmToPoints = (
+  hm,
+  arr
+) => arr
   .map(item => hm[item.listPn]);
-  //.map(item => hm[item.Area]);
 
 
 const _crSeriesData = (
-  json,
+  data,
   prName
 ) => {
-  const _hm = _crHm(json, prName)
+  const _hm = _crHm(data, prName)
   , _legend = _crRefLegend(_hm);
 
   return _hmToPoints(_hm, _legend);
 };
 
-const _isValueNumber = item => typeof item.Value === 'number';
-const _compareByX = (a, b) => a.x - b.x;
+const _isNumber = v => typeof v === 'number'
+ && v-v===0
+, _compareByX = (a, b) => a.x - b.x;
 
 const _crSeriaData = (
-  json,
+  data,
   option
-) => mapIf(json.data, _crPoint, _isValueNumber)
+) => data
+  .map(_crPoint)
+  .filter(p => _isNumber(p.y))
   .sort(_compareByX);
-
 
 const _isItemList = item => getValue(item)
   .indexOf('>') !== -1;
 
-const _getSeriesPropName = ({ items }) => {
-  if (_isItemList(items[0])) {
-    return 'Area';
-  }
-  if (_isItemList(items[1])) {
-    return 'Item';
-  }
-};
+const _getSeriesPropName = ({
+  items
+}) => _isItemList(items[0])
+  ? 'Area'
+  : _isItemList(items[1])
+     ? 'Item'
+     : void 0;
 
 const _isListForList = ({
   items
@@ -178,10 +171,17 @@ export const toDataPoints = (
   json,
   option
 ) => {
-  const _prName = _getSeriesPropName(option);
+  const _prName = _getSeriesPropName(option)
+  , _itemCode = getValue(option.items[1])
+  , _data = (json.data || []).filter(item => {
+    const _itemCodeFao = (item['Item Code (FAO)'] || '').trim();
+    return _itemCodeFao
+      ? _itemCodeFao === _itemCode
+      : true;
+  });
   return _prName
-    ? _crSeriesData(json, _prName)
-    : _crSeriaData(json, option);
+    ? _crSeriesData(_data, _prName)
+    : _crSeriaData(_data, option);
 }
 
 export const crZhConfig = (
