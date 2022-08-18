@@ -1,1 +1,19 @@
-{"version":3,"sources":["../../../src/utils/__tests__/DateUtilsWithMock.js"],"names":["describe","test","expect","toBe","DateUtilsWithMock","fn","getFromDate","Date","getDaysFromYmd"],"mappings":";;;;;;;AAAA;;AAMA;;AAEAA,QAAQ,CAAC,mBAAD,EAAsB,MAAI;AAChCC,EAAAA,IAAI,CAAC,EAAD,EAAK,MAAIC,MAAM,CAAC,EAAD,CAAN,CAAWC,IAAX,CAAgB,EAAhB,CAAT,CAAJ;AACD,CAFO,CAAR;;AAIA,MAAMC,iBAAiB,GAAG,MAAM;AAC9BJ,EAAAA,QAAQ,CAAC,aAAD,EAAgB,MAAI;AAC1B,UAAMK,EAAE,GAAGC,sBAAX,CAD0B,CAE1B;;AACA,oCAAkB,IAAlB,EAAuB,CAAvB,EAAyB,CAAzB,EAA2B,EAA3B,EAA8B,CAA9B,EAAgC,CAAhC;AAEAL,IAAAA,IAAI,CAAC,kDAAD,EAAqD,MAAK;AAC5DC,MAAAA,MAAM,CAACG,EAAE,CAAC,CAAD,EAAI,IAAIE,IAAJ,CAAS,YAAT,CAAJ,CAAH,CAAN,CAAsCJ,IAAtC,CAA2C,YAA3C;AACAD,MAAAA,MAAM,CAACG,EAAE,CAAC,KAAK,CAAN,EAAS,IAAIE,IAAJ,CAAS,YAAT,CAAT,CAAH,CAAN,CAA2CJ,IAA3C,CAAgD,YAAhD;AACD,KAHG,CAAJ;AAKAF,IAAAA,IAAI,CAAC,oDAAD,EAAuD,MAAM;AAC/DC,MAAAA,MAAM,CAAC,2BAAD,CAAN,CAAoBC,IAApB,CAAyB,YAAzB;AACD,KAFG,CAAJ;AAIAF,IAAAA,IAAI,CAAC,6DAAD,EAAgE,MAAI;AACtE,YAAMI,EAAE,GAAGG,yBAAX;AACAN,MAAAA,MAAM,CAACG,EAAE,CAAC,YAAD,CAAH,CAAN,CAAyBF,IAAzB,CAA8B,CAA9B;AACAD,MAAAA,MAAM,CAACG,EAAE,CAAC,YAAD,CAAH,CAAN,CAAyBF,IAAzB,CAA8B,CAA9B;AACAD,MAAAA,MAAM,CAACG,EAAE,CAAC,YAAD,CAAH,CAAN,CAAyBF,IAAzB,CAA8B,CAA9B;AACD,KALG,CAAJ;AAMD,GApBO,CAAR;AAqBD,CAtBD;;eAwBeC,iB","sourcesContent":["import {\r\n  getFromDate,\r\n  getToDate,\r\n  getDaysFromYmd\r\n} from '../DateUtils';\r\n\r\nimport mockDateBeforeAll from './mockDateBeforeAll'\r\n\r\ndescribe('DateUtilsWithMock', ()=>{\r\n  test('', ()=>expect('').toBe(''))\r\n})\r\n\r\nconst DateUtilsWithMock = () => {\r\n  describe('getFromDate', ()=>{\r\n    const fn = getFromDate\r\n    //2020-01-01 12:00:01\r\n    mockDateBeforeAll(2020,0,1,12,0,1)\r\n\r\n    test('should return str in format YYYY-MM-DD minusYear', ()=> {\r\n      expect(fn(2, new Date('2020-01-01'))).toBe('2018-01-01')\r\n      expect(fn(void 0, new Date('2020-01-01'))).toBe('2018-01-01')\r\n    })\r\n\r\n    test('getToDate should return current Date as YYYY-MM-DD', () => {\r\n      expect(getToDate()).toBe('2020-01-01')\r\n    })\r\n\r\n    test('getDaysFromYmd should return number of days to current Date', ()=>{\r\n      const fn = getDaysFromYmd\r\n      expect(fn('2020-01-01')).toBe(1)\r\n      expect(fn('2019-12-31')).toBe(2)\r\n      expect(fn('2019-12-30')).toBe(3)\r\n    })\r\n  })\r\n}\r\n\r\nexport default DateUtilsWithMock\r\n"],"file":"DateUtilsWithMock.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/utils/__tests__/DateUtilsWithMock.js"
+ ],
+ "file": "../../../src/utils/__tests__/DateUtilsWithMock.js",
+ "names": [
+  "describe",
+  "test",
+  "expect",
+  "toBe",
+  "DateUtilsWithMock",
+  "fn",
+  "getFromDate",
+  "Date",
+  "getDaysFromYmd"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAMA;;AAEAA,QAAQ,CAAC,mBAAD,EAAsB,MAAI;AAChCC,EAAAA,IAAI,CAAC,EAAD,EAAK,MAAIC,MAAM,CAAC,EAAD,CAAN,CAAWC,IAAX,CAAgB,EAAhB,CAAT,CAAJ;AACD,CAFO,CAAR;;AAIA,MAAMC,iBAAiB,GAAG,MAAM;AAC9BJ,EAAAA,QAAQ,CAAC,aAAD,EAAgB,MAAI;AAC1B,UAAMK,EAAE,GAAGC,sBAAX,CAD0B,CAE1B;;AACA,oCAAkB,IAAlB,EAAuB,CAAvB,EAAyB,CAAzB,EAA2B,EAA3B,EAA8B,CAA9B,EAAgC,CAAhC;AAEAL,IAAAA,IAAI,CAAC,kDAAD,EAAqD,MAAK;AAC5DC,MAAAA,MAAM,CAACG,EAAE,CAAC,CAAD,EAAI,IAAIE,IAAJ,CAAS,YAAT,CAAJ,CAAH,CAAN,CAAsCJ,IAAtC,CAA2C,YAA3C;AACAD,MAAAA,MAAM,CAACG,EAAE,CAAC,KAAK,CAAN,EAAS,IAAIE,IAAJ,CAAS,YAAT,CAAT,CAAH,CAAN,CAA2CJ,IAA3C,CAAgD,YAAhD;AACD,KAHG,CAAJ;AAKAF,IAAAA,IAAI,CAAC,oDAAD,EAAuD,MAAM;AAC/DC,MAAAA,MAAM,CAAC,2BAAD,CAAN,CAAoBC,IAApB,CAAyB,YAAzB;AACD,KAFG,CAAJ;AAIAF,IAAAA,IAAI,CAAC,6DAAD,EAAgE,MAAI;AACtE,YAAMI,EAAE,GAAGG,yBAAX;AACAN,MAAAA,MAAM,CAACG,EAAE,CAAC,YAAD,CAAH,CAAN,CAAyBF,IAAzB,CAA8B,CAA9B;AACAD,MAAAA,MAAM,CAACG,EAAE,CAAC,YAAD,CAAH,CAAN,CAAyBF,IAAzB,CAA8B,CAA9B;AACAD,MAAAA,MAAM,CAACG,EAAE,CAAC,YAAD,CAAH,CAAN,CAAyBF,IAAzB,CAA8B,CAA9B;AACD,KALG,CAAJ;AAMD,GApBO,CAAR;AAqBD,CAtBD;;eAwBeC,iB"
+}

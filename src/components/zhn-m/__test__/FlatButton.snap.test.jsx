@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+"use strict";
 import renderer from 'react-test-renderer'
 import FlatButton from '../FlatButton'
 

@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+"use strict";
 import domSanitize from '../domSanitize';
 
 describe("domSanitize", () => {

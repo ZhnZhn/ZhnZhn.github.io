@@ -4,18 +4,18 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _fCompareBy = _interopRequireDefault(require("../fCompareBy"));
 
-describe('fCompareBy', function () {
-  var fn = _fCompareBy["default"];
-  it('should create fn for comparing arr by index', function () {
-    var _compare = fn(0),
-        arr = [[3, 0], [4, 0], [2, 0], [2, 1], [1, 0]];
+describe('fCompareBy', () => {
+  const fn = _fCompareBy.default;
+  it('should create fn for comparing arr by index', () => {
+    const _compare = fn(0),
+          arr = [[3, 0], [4, 0], [2, 0], [2, 1], [1, 0]];
 
     expect(typeof fn).toBe('function');
     expect(arr.sort(_compare)).toEqual([[1, 0], [2, 0], [2, 1], [3, 0], [4, 0]]);
   });
-  it('should create fn for comparing by propName', function () {
-    var _compare = fn('y'),
-        arr = [{
+  it('should create fn for comparing by propName', () => {
+    const _compare = fn('y'),
+          arr = [{
       y: 3,
       x: 0
     }, {
