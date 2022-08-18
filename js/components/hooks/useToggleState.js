@@ -5,13 +5,13 @@ exports.default = void 0;
 
 var _uiApi = require("../uiApi");
 
-const useToggleState = initialValue => {
-  const [toggleState, setToggleState] = (0, _uiApi.useState)(initialValue),
-        toggleByPropName = (0, _uiApi.useCallback)(propName => setToggleState(prevState => ({ ...prevState,
-    [propName]: !prevState[propName]
-  })), []);
-  return [toggleState, toggleByPropName];
-};
+const _isFn = v => typeof v === 'function',
+      _initState = initialValue => _isFn(initialValue) ? initialValue() : initialValue,
+      _reducer = (state, propName) => ({ ...state,
+  [propName]: !state[propName]
+});
+
+const useToggleState = initialValue => (0, _uiApi.useReducer)(_reducer, initialValue || {}, _initState);
 
 var _default = useToggleState;
 exports.default = _default;

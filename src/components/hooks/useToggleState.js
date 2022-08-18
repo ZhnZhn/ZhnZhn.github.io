@@ -1,23 +1,25 @@
-import {
-  useState,
-  useCallback
-} from '../uiApi';
+import { useReducer } from '../uiApi';
 
-const useToggleState = initialValue => {
-  const [
-    toggleState,
-    setToggleState
-  ] = useState(initialValue)
-  , toggleByPropName = useCallback(
-     propName => setToggleState(prevState => ({
-       ...prevState,
-       [propName]: !prevState[propName]
-     }))
-  , []);
-  return [
-    toggleState,
-    toggleByPropName
-  ];
-};
+const _isFn = v => typeof v === 'function'
+, _initState = (
+  initialValue
+) => _isFn(initialValue)
+  ? initialValue()
+  : initialValue
+, _reducer = (
+  state,
+  propName
+) => ({
+  ...state,
+  [propName]: !state[propName]
+});
+
+const useToggleState = (
+  initialValue
+) => useReducer(
+  _reducer,
+  initialValue || {},
+  _initState
+);
 
 export default useToggleState
