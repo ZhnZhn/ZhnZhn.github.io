@@ -84,7 +84,7 @@ const DescriptionDialog = (0, _memoIsShow.default)(props => {
     }
   }, [_isLoadDescr, descrUrl]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalDialog, {
-    caption: "About Datasource",
+    caption: "About Data Source",
     isShow: isShow,
     style: S_DIALOG,
     onClose: onClose,

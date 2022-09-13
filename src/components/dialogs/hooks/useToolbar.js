@@ -22,7 +22,7 @@ const useToolbar = ({
   toggleDate
     ? crToolbarItem('D', `${CLICK_TO_TOGGLE} date input`, toggleDate)
     : void 0,
-  crToolbarItem('A', 'About datasouce', onAbout)
+  crToolbarItem('A', 'About data source', onAbout)
 ].filter(Boolean))
 
 export default useToolbar

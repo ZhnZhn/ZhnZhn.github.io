@@ -15,7 +15,7 @@ const crMenuMore = (onToggleToolbar, onAbout) => ({
   titleCl: CL_ROW,
   pageWidth: 175,
   maxPages: 1,
-  p0: [_crItem('Toggle Toolbar', onToggleToolbar), _crItem('About Datasouce', onAbout)]
+  p0: [_crItem('Toggle Toolbar', onToggleToolbar), _crItem('About Data Source', onAbout)]
 });
 
 var _default = crMenuMore;

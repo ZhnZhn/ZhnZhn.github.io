@@ -19,7 +19,7 @@ const crMenuMore = (
   maxPages: 1,
   p0: [
     _crItem('Toggle Toolbar', onToggleToolbar),
-    _crItem('About Datasouce', onAbout)
+    _crItem('About Data Source', onAbout)
   ]
 });
 

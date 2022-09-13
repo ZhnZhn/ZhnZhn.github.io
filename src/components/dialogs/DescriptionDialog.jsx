@@ -78,7 +78,7 @@ const DescriptionDialog = memoIsShow((props) => {
 
   return (
     <ModalDialog
-      caption="About Datasource"
+      caption="About Data Source"
       isShow={isShow}
       style={S_DIALOG}
       onClose={onClose}
