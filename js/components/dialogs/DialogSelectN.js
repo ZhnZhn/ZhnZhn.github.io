@@ -49,11 +49,7 @@ const _crIsToggleInit = selectProps => selectProps.reduce((toggleConfig, item) =
 
 const _isRequireUpdateChartConfig = (prevState, mapFrequency, mapDateDf) => prevState._mapFrequency !== mapFrequency || prevState._mapDateDf !== mapDateDf;
 
-const _getValidValue = (ref, dfValue) => {
-  const _compInst = (0, _uiApi.getRefValue)(ref);
-
-  return _compInst && _compInst.isValid() ? _compInst.getValue() : dfValue;
-};
+const _getValidValue = (ref, dfValue) => (0, _uiApi.isInputValid)(ref) ? (0, _uiApi.getInputValue)(ref) : dfValue;
 
 const DialogSelectN = (0, _memoIsShow.default)(props => {
   const {

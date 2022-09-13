@@ -4,6 +4,7 @@ import {
   useState,
   useMemo,
   useCallback,
+  isInputValid,
   getRefValue,
   getInputValue
 } from '../uiApi';
@@ -52,12 +53,10 @@ const _isRequireUpdateChartConfig = (
 const _getValidValue = (
   ref,
   dfValue
-) => {
-  const _compInst = getRefValue(ref);
-  return  _compInst && _compInst.isValid()
-    ? _compInst.getValue()
-    : dfValue;
-};
+) => isInputValid(ref)
+  ? getInputValue(ref)
+  : dfValue;
+
 
 const DialogSelectN = memoIsShow((
   props
