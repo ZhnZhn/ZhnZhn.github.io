@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-const CL_ROW = 'row__pane-topic not-selected';
+const CL_ROW = 'row__pane-topic';
 
 const _crItem = (name, onClick) => ({
   name,
@@ -13,7 +13,7 @@ const _crItem = (name, onClick) => ({
 
 const crMenuMore = (onToggleToolbar, onAbout) => ({
   titleCl: CL_ROW,
-  pageWidth: 175,
+  pageWidth: 185,
   maxPages: 1,
   p0: [_crItem('Toggle Toolbar', onToggleToolbar), _crItem('About Data Source', onAbout)]
 });

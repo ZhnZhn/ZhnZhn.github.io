@@ -1,4 +1,4 @@
-const CL_ROW = 'row__pane-topic not-selected'
+const CL_ROW = 'row__pane-topic';
 
 const _crItem = (
   name,
@@ -15,7 +15,7 @@ const crMenuMore = (
   onAbout
 ) => ({
   titleCl: CL_ROW,
-  pageWidth: 175,
+  pageWidth: 185,
   maxPages: 1,
   p0: [
     _crItem('Toggle Toolbar', onToggleToolbar),
