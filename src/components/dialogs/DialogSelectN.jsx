@@ -57,6 +57,27 @@ const _getValidValue = (
   ? getInputValue(ref)
   : dfValue;
 
+const _useDate = (
+  dateDefault
+) => {
+  const [
+    setDate,
+    getDate
+  ] = useProperty()
+
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _getDate = useCallback(
+      () => (getDate() || {}).value || dateDefault
+  , [dateDefault]);
+  // getDate
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+  return [
+    setDate,
+    _getDate
+  ];
+};
+
 
 const DialogSelectN = memoIsShow((
   props
@@ -175,11 +196,8 @@ const DialogSelectN = memoIsShow((
   , _refFromDate = useRef()
   , [
     setDate,
-    getDate
-  ] = useProperty()
-  , _getDate = useCallback(() => (getDate() || {}).value
-    || dateDefault
-  , [dateDefault, getDate])
+    _getDate
+  ] = _useDate(dateDefault)
   , _refSeriaColor = useRef()
   , _hSelect = useCallback((id, index, item) => {
     getRefValue(_refItems)[index] = item

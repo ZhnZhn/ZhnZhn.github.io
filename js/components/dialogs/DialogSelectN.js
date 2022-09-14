@@ -51,6 +51,18 @@ const _isRequireUpdateChartConfig = (prevState, mapFrequency, mapDateDf) => prev
 
 const _getValidValue = (ref, dfValue) => (0, _uiApi.isInputValid)(ref) ? (0, _uiApi.getInputValue)(ref) : dfValue;
 
+const _useDate = dateDefault => {
+  const [setDate, getDate] = (0, _useProperty.default)()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _getDate = (0, _uiApi.useCallback)(() => (getDate() || {}).value || dateDefault, [dateDefault]); // getDate
+
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+
+  return [setDate, _getDate];
+};
+
 const DialogSelectN = (0, _memoIsShow.default)(props => {
   const {
     isCh = true,
@@ -122,8 +134,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
         _refItems = (0, _uiApi.useRef)([]),
         [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)(),
         _refFromDate = (0, _uiApi.useRef)(),
-        [setDate, getDate] = (0, _useProperty.default)(),
-        _getDate = (0, _uiApi.useCallback)(() => (getDate() || {}).value || dateDefault, [dateDefault, getDate]),
+        [setDate, _getDate] = _useDate(dateDefault),
         _refSeriaColor = (0, _uiApi.useRef)(),
         _hSelect = (0, _uiApi.useCallback)((id, index, item) => {
     (0, _uiApi.getRefValue)(_refItems)[index] = item;
