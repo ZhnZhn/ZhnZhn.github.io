@@ -53,6 +53,11 @@ const BrowserConfig = {
     caption: 'DB Nomics',
     sourceMenuUrl: './data/db-nomics/source-menu.json'
   },
+  [_BrowserType.BT_ENERGY]: {
+    browserType: _BrowserType.BT_ENERGY,
+    caption: 'Energy',
+    sourceMenuUrl: './data/energy/source-menu.json'
+  },
   [_BrowserType.BT_BLOCKCHAIN]: {
     browserType: _BrowserType.BT_BLOCKCHAIN,
     caption: 'Blockchain',

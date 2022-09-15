@@ -20,6 +20,7 @@ import Eia from './eia/Eia'
 import Intrinio from './intrinio/Intrinio'
 import Quandl from './quandl/Quandl'
 import DbNomics from './db-nomics/DbNomics'
+import Ember from './ember/Ember'
 import Crc from './crypto-compare/Crc'
 import Cg from './coin-gecko/Cg'
 import Cm from './coin-metrics/Cm'
@@ -33,6 +34,7 @@ import Bt from './bitstamp/Bt'
 const RouterAdapter = {
   Quandl,
   DbNomics,
+  Ember,
   EuroStat,
   UnComtrade,
   FaoStat,

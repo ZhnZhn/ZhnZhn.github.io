@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.BT_WORLD_BANK = exports.BT_WATCH_LIST = exports.BT_US_ECONOMICS = exports.BT_UN_COMTRADE = exports.BT_UK_STATISTICS = exports.BT_SWEDEN_STAT_ALL = exports.BT_SWEDEN_STAT = exports.BT_STOCK_MARKETS = exports.BT_STOCKS_BY_SECTORS = exports.BT_QUANDL = exports.BT_PE = exports.BT_NYSE_STOCKS = exports.BT_NORWAY_STAT_ALL = exports.BT_NORWAY_STATISTICS = exports.BT_NASDAQ_STOCKS = exports.BT_IRELAND_STAT_ALL = exports.BT_FUTURES = exports.BT_FRANCE_STATISTICS = exports.BT_FINLAND_STAT_ALL = exports.BT_FGR = exports.BT_FAOSTAT = exports.BT_EUROSTAT = exports.BT_DENMARK_STAT_ALL = exports.BT_DB_NOMICS = exports.BT_BLOCKCHAIN = void 0;
+exports.BT_WORLD_BANK = exports.BT_WATCH_LIST = exports.BT_US_ECONOMICS = exports.BT_UN_COMTRADE = exports.BT_UK_STATISTICS = exports.BT_SWEDEN_STAT_ALL = exports.BT_SWEDEN_STAT = exports.BT_STOCK_MARKETS = exports.BT_STOCKS_BY_SECTORS = exports.BT_QUANDL = exports.BT_PE = exports.BT_NYSE_STOCKS = exports.BT_NORWAY_STAT_ALL = exports.BT_NORWAY_STATISTICS = exports.BT_NASDAQ_STOCKS = exports.BT_IRELAND_STAT_ALL = exports.BT_FUTURES = exports.BT_FRANCE_STATISTICS = exports.BT_FINLAND_STAT_ALL = exports.BT_FGR = exports.BT_FAOSTAT = exports.BT_EUROSTAT = exports.BT_ENERGY = exports.BT_DENMARK_STAT_ALL = exports.BT_DB_NOMICS = exports.BT_BLOCKCHAIN = void 0;
 const BT_STOCK_MARKETS = 'SM';
 exports.BT_STOCK_MARKETS = BT_STOCK_MARKETS;
 const BT_EUROSTAT = 'ES';
@@ -46,6 +46,8 @@ const BT_PE = 'PE';
 exports.BT_PE = BT_PE;
 const BT_US_ECONOMICS = 'USAE';
 exports.BT_US_ECONOMICS = BT_US_ECONOMICS;
+const BT_ENERGY = 'EN';
+exports.BT_ENERGY = BT_ENERGY;
 const BT_BLOCKCHAIN = 'BC';
 exports.BT_BLOCKCHAIN = BT_BLOCKCHAIN;
 const BT_FUTURES = 'FT';

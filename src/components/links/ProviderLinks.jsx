@@ -2,21 +2,21 @@ import Link from '../zhn/Link'
 
 const CL_LINK = "data-provider-link";
 
-const S = {
-  ORANGE: {
-    color: "#e05927"
-  },
-  DARK_GREEN: {
-    color: '#12323d'
-  },
-  COMPARE: {
-    color: '#49d87c'
-  }
+const S_ORANGE = {
+  color: "#e05927"
+}
+, S_DARK_GREEN = {
+  color: '#12323d'
+}
+, S_COMPARE = {
+  color: '#49d87c'
 };
 
+
 const LINK_CONFIGS = [
- ["Quandl", "https://www.quandl.com", S.ORANGE],
- ["DbNomics", "DB NOMICS", "https://db.nomics.world", S.DARK_GREEN],
+ ["Quandl", "https://www.quandl.com", S_ORANGE],
+ ["DbNomics", "DB NOMICS", "https://db.nomics.world", S_DARK_GREEN],
+ ["Ember", "https://ember-climate.org"],
  ["Iex", "IEX Cloud", "https://iexcloud.io"],
  ["Fmp", "Financial Modeling Prep", "https://financialmodelingprep.com"],
  ["Tw", "Twelve Data", "https://twelvedata.com"],
@@ -54,7 +54,7 @@ const Links = {
       href="https://www.cryptocompare.com"
       title="Crypto"
     >
-      <span style={S.COMPARE}>Compare</span>
+      <span style={S_COMPARE}>Compare</span>
     </Link>
   )
 };

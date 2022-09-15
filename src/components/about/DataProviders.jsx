@@ -35,6 +35,7 @@ const _isArr = Array.isArray;
 const DP = [
   [Link.Quandl, '50'],
   Link.DbNomics,
+  Link.Ember,
   Link.Eurostat,
   Link.UnComtrade,
   Link.FaoStat,
@@ -89,7 +90,7 @@ const LinkList = ({
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 29):"
+     caption="Data Providers (All 30):"
      childStyle={S_ROOT_CHILD}
   >
     <div>

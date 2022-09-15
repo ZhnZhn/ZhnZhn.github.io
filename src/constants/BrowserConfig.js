@@ -8,6 +8,7 @@ import {
   BT_WORLD_BANK,
   BT_QUANDL,
   BT_DB_NOMICS,
+  BT_ENERGY,
   BT_BLOCKCHAIN,
   BT_FUTURES,
   BT_FRANCE_STATISTICS,
@@ -74,6 +75,11 @@ const BrowserConfig = {
     browserType: BT_DB_NOMICS,
     caption: 'DB Nomics',
     sourceMenuUrl: './data/db-nomics/source-menu.json'
+  },
+  [BT_ENERGY]: {
+    browserType: BT_ENERGY,
+    caption: 'Energy',
+    sourceMenuUrl: './data/energy/source-menu.json'
   },
   [BT_BLOCKCHAIN]: {
     browserType: BT_BLOCKCHAIN,

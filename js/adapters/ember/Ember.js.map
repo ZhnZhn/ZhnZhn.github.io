@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/ember/Ember.js"
+ ],
+ "file": "../../../src/adapters/ember/Ember.js",
+ "names": [
+  "Ember",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,KAAK,GAAG;EACZC,GAAG,EAAHA,iBADY;EAEZC,OAAO,EAAPA;AAFY,CAAd;eAKeF,K"
+}

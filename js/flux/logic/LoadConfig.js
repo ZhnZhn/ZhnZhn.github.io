@@ -15,6 +15,7 @@ const LoadConfig = {
   [_LoadType.LT_Q]: _LoadImpl.default.Quandl,
   [_LoadType.LT_QCT]: _loadQuandlCommodityTrade.loadQuandlCommodityTrade,
   [_LoadType.LT_DBN]: _LoadImpl.default.DbNomics,
+  [_LoadType.LT_EMB]: _LoadImpl.default.Ember,
   [_LoadType.LT_AL]: _LoadImpl.default.AlphaVantage,
   [_LoadType.LT_IEX]: _LoadImpl.default.Iex,
   [_LoadType.LT_FMP]: _LoadImpl.default.Fmp,

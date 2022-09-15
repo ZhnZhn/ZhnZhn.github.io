@@ -7,6 +7,7 @@ import {
   BT_PE,
   BT_QUANDL,
   BT_US_ECONOMICS,
+  BT_ENERGY,
   BT_EUROSTAT,
   BT_FRANCE_STATISTICS,
   BT_UK_STATISTICS,
@@ -65,11 +66,14 @@ const _crMenuItem = (
   isClose: true
 })
 
-const _crMenuItems = (configs) => configs
+const _crMenuItems = (
+  configs
+) => configs
   .map(([cn, name, id]) => _crMenuItem(cn, name, id))
 
 const PAGE_CONFIGS_01 = [
   [CL_DBN, 'DB Nomics', BT_DB_NOMICS],
+  [CL_BR, 'Energy', BT_ENERGY],
   [CL_ORG, 'EU: FIGARO', BT_FGR],
   [CL_ORG, 'Euro Indicators / PEEIs', BT_PE],
   [CL_Q, 'Quandl', BT_QUANDL],

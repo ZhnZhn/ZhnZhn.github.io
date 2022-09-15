@@ -1,7 +1,8 @@
-import {  
+import {
   LT_Q,
   LT_QCT,
   LT_DBN,
+  LT_EMB,
   LT_AL,
   LT_IEX,
   LT_FMP,
@@ -41,6 +42,7 @@ const LoadConfig = {
   [LT_QCT]: loadQuandlCommodityTrade,
 
   [LT_DBN]: LoadImpl.DbNomics,
+  [LT_EMB]: LoadImpl.Ember,
 
   [LT_AL]: LoadImpl.AlphaVantage,
   [LT_IEX]: LoadImpl.Iex,
