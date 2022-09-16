@@ -33,7 +33,7 @@ const CL_NOTE_BR = "provider__note__br"
 const _isArr = Array.isArray;
 
 const DP = [
-  [Link.Quandl, '50'],
+  [Link.Ndl, '50'],
   Link.DbNomics,
   Link.Ember,
   Link.Eurostat,
@@ -48,7 +48,7 @@ const DP = [
   Link.CoinLore, Link.Coinpaprika, Link.Binance, Link.Bitstamp
 ]
 , DP_KEY = [
-  [Link.Quandl, '50 000'],
+  [Link.Ndl, '50 000'],
   Link.AlphaVantage, Link.Iex,
   Link.Fmp, Link.Tw, Link.Intrinio,
   Link.Bea, [Link.Bsl, '500'], Link.Eia

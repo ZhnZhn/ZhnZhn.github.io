@@ -1,21 +1,16 @@
 import Link from './Link';
 
-const ROOT_URI = 'https://www.quandl.com/data/'
-, DF_CAPTION = 'Quandl Data Link'
-, S_LINK = { color: '#e05927' };
+const ROOT_URI = 'https://data.nasdaq.com/data/'
+, DF_CAPTION = 'Nasdaq Data Link';
 
 const QuandlLink = ({
   linkId,
   caption=DF_CAPTION
-}) => {
-  if (!linkId) return null;
-
-  return (
-    <Link
-      style={S_LINK}
+}) => linkId ? (
+   <Link
       href={`${ROOT_URI}${linkId}`}
       caption={`${caption} ${linkId}`}
-    />)
-};
+   />
+  ) : null;
 
 export default QuandlLink

@@ -11,7 +11,7 @@ var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
 
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 
-var _LogoQuandl = _interopRequireDefault(require("./LogoQuandl"));
+var _NasdaqDataLinkLogo = _interopRequireDefault(require("./NasdaqDataLinkLogo"));
 
 var _LogoGitHub = _interopRequireDefault(require("./LogoGitHub"));
 
@@ -37,17 +37,20 @@ const LOGO_CONFS = [{
   href: 'http://www.fao.org/faostat/en/#data'
 }];
 
-const Logo = ({
-  className = CL_LOGO,
-  title,
-  caption,
-  ...rest
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
-  className: className,
-  title: title || caption,
-  ...rest,
-  children: caption
-});
+const Logo = _ref => {
+  let {
+    className = CL_LOGO,
+    title,
+    caption,
+    ...rest
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
+    className: className,
+    title: title || caption,
+    ...rest,
+    children: caption
+  });
+};
 
 const _crLogoItem = config => /*#__PURE__*/(0, _jsxRuntime.jsx)(Logo, { ...config
 }, config.caption);
@@ -58,7 +61,7 @@ const LogosBar = () => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_ROOT,
     style: TS.ROOT,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LogoQuandl.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_NasdaqDataLinkLogo.default, {
       className: CL_LI
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_LogoGitHub.default, {
       className: CL_LI,

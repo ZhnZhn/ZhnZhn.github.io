@@ -96,6 +96,7 @@ const crDatasetInfo = _ref4 => {
 };
 
 exports.crDatasetInfo = crDatasetInfo;
+const DATA_SOURCE = 'Nasdaq Data Link';
 
 const crZhConfig = option => {
   const {
@@ -111,7 +112,7 @@ const crZhConfig = option => {
     linkFn,
     dataSource
   } = option,
-        _dataSource = dataSource ? "Quandl: " + dataSource : 'Quandl',
+        _dataSource = (0, _AdapterFn.joinBy)(' ', DATA_SOURCE, dataSource),
         _itemCaption = _crItemCaption(option);
 
   return {

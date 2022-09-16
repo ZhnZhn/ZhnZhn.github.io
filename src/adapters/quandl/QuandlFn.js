@@ -2,6 +2,7 @@ export { valueMoving } from '../AdapterFn';
 
 import Big from 'big.js';
 
+import { joinBy } from '../AdapterFn';
 import formatAllNumber from '../../utils/formatAllNumber'
 import {
   calcPercent,
@@ -81,6 +82,8 @@ export const crDatasetInfo = ({
   };
 }
 
+const DATA_SOURCE = 'Nasdaq Data Link'
+
 export const crZhConfig = (option) => {
   const {
     item,
@@ -95,9 +98,7 @@ export const crZhConfig = (option) => {
     linkFn,
     dataSource
   } = option
-  , _dataSource = dataSource
-       ? `Quandl: ${dataSource}`
-       : 'Quandl'
+  , _dataSource = joinBy(' ', DATA_SOURCE, dataSource)
   , _itemCaption = _crItemCaption(option);
   return {
     item,

@@ -31,17 +31,15 @@
   color: #f1d600;
 }
 
-.logo-quandl {
-  display: inline-block;
-  width: 150px;
-  margin-right: 24px;
-  margin-left: 0;
-  padding: 14px 16px 10px;
-  stroke: #e95424;
-  fill: #e95424;
+.logo-ndl {
+  color: #b0b2b5;
+  width: 200px;
 }
-.logo-quandl:hover {
-  fill: #f1d600;
+.logo-ndl > svg {
+  transform: scale(0.9, 0.75);
+}
+.logo-ndl:hover {
+  color: #f1d600;
 }
 
 .logo-github {

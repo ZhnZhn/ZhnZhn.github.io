@@ -2,19 +2,15 @@ import Link from '../zhn/Link'
 
 const CL_LINK = "data-provider-link";
 
-const S_ORANGE = {
-  color: "#e05927"
-}
-, S_DARK_GREEN = {
+const S_DARK_GREEN = {
   color: '#12323d'
 }
 , S_COMPARE = {
   color: '#49d87c'
 };
 
-
 const LINK_CONFIGS = [
- ["Quandl", "https://www.quandl.com", S_ORANGE],
+ ["Ndl", "Nasdaq Data Link", "https://data.nasdaq.com/"],
  ["DbNomics", "DB NOMICS", "https://db.nomics.world", S_DARK_GREEN],
  ["Ember", "https://ember-climate.org"],
  ["Iex", "IEX Cloud", "https://iexcloud.io"],

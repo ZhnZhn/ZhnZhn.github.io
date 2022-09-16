@@ -68,7 +68,7 @@ const BrowserConfig = {
   },
   [BT_QUANDL]: {
     browserType: BT_QUANDL,
-    caption: 'Quandl',
+    caption: 'Nasdaq Data Link',
     sourceMenuUrl: './data/quandl/source-menu.json'
   },
   [BT_DB_NOMICS]: {

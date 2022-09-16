@@ -4,7 +4,7 @@ import ThemeContext  from '../hoc/ThemeContext';
 
 import ItemStack from '../zhn/ItemStack';
 
-import LogoQuandl from './LogoQuandl';
+import NasdaqDataLinkLogo from './NasdaqDataLinkLogo';
 import LogoGitHub from './LogoGitHub';
 import LogoReact from './LogoReact';
 import LogoHighcharts from './LogoHighcharts';
@@ -32,7 +32,8 @@ const LOGO_CONFS = [
 
 const Logo = ({
   className=CL_LOGO,
-  title, caption,
+  title,
+  caption,
   ...rest
 }) => (
   <a
@@ -53,7 +54,7 @@ const LogosBar = () => {
   , TS = theme.getStyle(TH_ID);
   return (
     <div className={CL_ROOT} style={TS.ROOT}>
-       <LogoQuandl
+       <NasdaqDataLinkLogo
          className={CL_LI}
        />
        <LogoGitHub

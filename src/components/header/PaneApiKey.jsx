@@ -1,6 +1,5 @@
-import { Component } from 'react'
-
 //import PropTypes from 'prop-types'
+import { Component } from 'react'
 
 import safeFn from '../../utils/safeFn'
 import ScrollPane from '../zhn/ScrollPane'
@@ -30,7 +29,7 @@ const CONF_SM_ARR = [
 ];
 
 const CONF_EC_ARR = [
-  ["Quandl","quandl","Quandl"],
+  ["NDL","quandl","Nasdaq Data Link"],
 ];
 
 const CONF_EC_USA_ARR = [

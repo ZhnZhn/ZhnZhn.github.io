@@ -9,22 +9,18 @@ var _Link = _interopRequireDefault(require("./Link"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const ROOT_URI = 'https://www.quandl.com/data/',
-      DF_CAPTION = 'Quandl Data Link',
-      S_LINK = {
-  color: '#e05927'
-};
+const ROOT_URI = 'https://data.nasdaq.com/data/',
+      DF_CAPTION = 'Nasdaq Data Link';
 
-const QuandlLink = ({
-  linkId,
-  caption = DF_CAPTION
-}) => {
-  if (!linkId) return null;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-    style: S_LINK,
+const QuandlLink = _ref => {
+  let {
+    linkId,
+    caption = DF_CAPTION
+  } = _ref;
+  return linkId ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
     href: "" + ROOT_URI + linkId,
     caption: caption + " " + linkId
-  });
+  }) : null;
 };
 
 var _default = QuandlLink;

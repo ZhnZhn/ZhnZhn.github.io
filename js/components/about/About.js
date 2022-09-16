@@ -196,11 +196,11 @@ const About = () => {
             style: S_MB_8EM,
             children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
               children: "For example, for loading data from\xA0"
-            }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks.default.Quandl, {}), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks.default.Ndl, {}), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
               children: ["\xA0without API Key exists some restriction on frequency and amount of queries (", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
                 style: S_BLUE_DARK,
                 children: "50 per day/1 at a time"
-              }), ") and can be deprecated, according to Quandl. With ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+              }), ") and can be deprecated, according to Nasdaq Data Link. With ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
                 style: S_BLACK,
                 children: "API Key"
               }), " it is possible to make (", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {

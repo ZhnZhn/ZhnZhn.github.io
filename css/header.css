@@ -45,7 +45,7 @@
 }
 
 @media screen and (max-width: 1100px) {
-  .header__bt-quandl {
+  .header__bt-ndl {
     display: none;
   }
   .header__bt-eurostat {

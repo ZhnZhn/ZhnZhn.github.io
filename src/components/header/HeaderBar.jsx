@@ -42,7 +42,7 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
 , CL_ICON = "header__icon-erc"
 , CL_LABEL = "header__app-label"
 , CL_TOPICS = "header__bt-topics"
-, CL_QUANDL = "header__bt-quandl"
+, CL_NDL = "header__bt-ndl"
 , CL_EUROSTAT = "header__bt-eurostat"
 , CL_WATCH = "header__bt-watch"
 , CL_BTS_RIGHT = "header__bts-right"
@@ -84,20 +84,20 @@ const HeaderBar = ({ showSettings }) => {
          onClick={_toggleTopics}
         />
         <FlatButton
-          className={CL_QUANDL}
-          style={TS.BT}
-          caption="Quandl"
-          title="Quandl Browser"
-          hotKey={HK_QUANDL_BROWSER}
-          onClick={BrowserActions.showQuandl}
-        />
-        <FlatButton
           className={CL_EUROSTAT}
           style={TS.BT}
           caption="Eurostat"
           title="Eurostat Browser"
           hotKey={HK_EUROSTAT_BROWSER}
           onClick={BrowserActions.showEurostat}
+        />
+        <FlatButton
+          className={CL_NDL}
+          style={TS.BT}
+          caption="NDL"
+          title="Nasdaq Data Link Browser"
+          hotKey={HK_QUANDL_BROWSER}
+          onClick={BrowserActions.showQuandl}
         />
         <FlatButton
            className={CL_WATCH}

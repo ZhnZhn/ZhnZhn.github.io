@@ -1,10 +1,8 @@
-import toLink from '../zhn/toLink'
+import toLink from '../zhn/toLink';
 
-const S = {
-  LINK: {
-    display: 'inline-block',
-    paddingTop: 4
-  }
+const S_LINK = {
+  display: 'inline-block',
+  paddingTop: 4
 };
 
 const Link = ({
@@ -15,7 +13,7 @@ const Link = ({
   caption='Native Link'
 }) => {
   const _href = toLink(href, isHttp)
-  , _style = {...S.LINK, ...style};
+  , _style = {...S_LINK, ...style};
   return _href ? (
     <a
       className={className}

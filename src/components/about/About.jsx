@@ -138,11 +138,11 @@ const About = () => {
             </p>
             <p style={S_MB_8EM}>
               <span>For example, for loading data from&nbsp;</span>
-              <Link.Quandl/>
+              <Link.Ndl/>
               <span>
               &nbsp;without API Key exists some restriction
               on frequency and amount of queries (<span style={S_BLUE_DARK}>50 per day/1 at a time</span>) and can be deprecated,
-              according to Quandl. With <span style={S_BLACK}>API Key</span> it is possible to make (<span style={S_BLUE_DARK}>50 000 per day/1 at a time</span>).
+              according to Nasdaq Data Link. With <span style={S_BLACK}>API Key</span> it is possible to make (<span style={S_BLUE_DARK}>50 000 per day/1 at a time</span>).
               It's free of charge to receive.
               </span>
             </p>
