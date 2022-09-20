@@ -4,7 +4,7 @@ import ThemeContext  from '../hoc/ThemeContext';
 
 import ItemStack from '../zhn/ItemStack';
 
-import NasdaqDataLinkLogo from './NasdaqDataLinkLogo';
+import LogoNasdaqDataLink from './LogoNasdaqDataLink';
 import LogoGitHub from './LogoGitHub';
 import LogoReact from './LogoReact';
 import LogoHighcharts from './LogoHighcharts';
@@ -54,7 +54,7 @@ const LogosBar = () => {
   , TS = theme.getStyle(TH_ID);
   return (
     <div className={CL_ROOT} style={TS.ROOT}>
-       <NasdaqDataLinkLogo
+       <LogoNasdaqDataLink
          className={CL_LI}
        />
        <LogoGitHub

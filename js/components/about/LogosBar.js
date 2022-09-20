@@ -11,7 +11,7 @@ var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
 
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 
-var _NasdaqDataLinkLogo = _interopRequireDefault(require("./NasdaqDataLinkLogo"));
+var _LogoNasdaqDataLink = _interopRequireDefault(require("./LogoNasdaqDataLink"));
 
 var _LogoGitHub = _interopRequireDefault(require("./LogoGitHub"));
 
@@ -61,7 +61,7 @@ const LogosBar = () => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_ROOT,
     style: TS.ROOT,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_NasdaqDataLinkLogo.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LogoNasdaqDataLink.default, {
       className: CL_LI
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_LogoGitHub.default, {
       className: CL_LI,
