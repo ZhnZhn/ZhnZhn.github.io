@@ -28,13 +28,13 @@ const TH_ID = 'LOGOS',
 const LOGO_CONFS = [{
   caption: 'eurostat',
   title: 'Eurostat',
-  href: 'http://ec.europa.eu/eurostat'
+  href: 'https://ec.europa.eu/eurostat'
 }, {
   caption: 'UN Comtrade',
   href: 'https://comtrade.un.org'
 }, {
   caption: 'FAOSTAT',
-  href: 'http://www.fao.org/faostat/en/#data'
+  href: 'https://www.fao.org/faostat/en/#data'
 }];
 
 const Logo = _ref => {
