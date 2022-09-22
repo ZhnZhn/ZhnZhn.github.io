@@ -25,35 +25,31 @@ const TH_ID = 'LOGOS',
       CL_ROOT = 'logo-container',
       CL_LI = 'logo-item',
       CL_LOGO = 'logo-item data-provider-logo';
-const LOGO_CONFS = [{
-  caption: 'eurostat',
-  title: 'Eurostat',
-  href: 'https://ec.europa.eu/eurostat'
-}, {
-  caption: 'UN Comtrade',
-  href: 'https://comtrade.un.org'
-}, {
-  caption: 'FAOSTAT',
-  href: 'https://www.fao.org/faostat/en/#data'
-}];
+const LOGO_CONFS = [['https://ec.europa.eu/eurostat', 'eurostat', 'Eurostat'], ['https://comtrade.un.org', 'UN Comtrade'], ['https://www.fao.org/faostat/en/#data', 'FAOSTAT']];
 
 const Logo = _ref => {
   let {
     className = CL_LOGO,
-    title,
+    href,
     caption,
-    ...rest
+    ariaLabel = caption
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
+    "aria-label": ariaLabel,
     className: className,
-    title: title || caption,
-    ...rest,
+    href: href,
     children: caption
   });
 };
 
-const _crLogoItem = config => /*#__PURE__*/(0, _jsxRuntime.jsx)(Logo, { ...config
-}, config.caption);
+const _crLogoItem = _ref2 => {
+  let [href, caption, ariaLabel] = _ref2;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(Logo, {
+    href: href,
+    caption: caption,
+    ariaLabel: ariaLabel
+  }, caption);
+};
 
 const LogosBar = () => {
   const theme = (0, _react.useContext)(_ThemeContext.default),

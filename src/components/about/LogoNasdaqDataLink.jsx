@@ -1,21 +1,25 @@
 import Svg100 from '../zhn/svg/Svg100';
 import crCn from '../zhn-utils/crCn';
+import { ARIA_HIDDEN_PROPS } from './StyleLogo';
 
 const CL_NDL = "logo-ndl"
 , NDL = "Nasdaq Data Link"
-, TITLE = `${NDL} Semi Logo`
 , HREF = "https://data.nasdaq.com";
 
 const LogoNasdaqDataLink = ({
+  ariaLabel=NDL,
   className
 }) => (
   <a
+     aria-label={ariaLabel}
      className={crCn(className, CL_NDL)}
-     title={TITLE}
      href={HREF}
   >
-  <Svg100 w="215" h="36">
-    <title>{TITLE}</title>
+  <Svg100
+    {...ARIA_HIDDEN_PROPS}
+    w="215"
+    h="36"
+  >
     <g
        stroke="none"
        strokeWidth="1"

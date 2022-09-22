@@ -9,27 +9,27 @@ var _Svg = _interopRequireDefault(require("../zhn/svg/Svg100"));
 
 var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
 
+var _StyleLogo = require("./StyleLogo");
+
 var _jsxRuntime = require("react/jsx-runtime");
 
 const CL_NDL = "logo-ndl",
       NDL = "Nasdaq Data Link",
-      TITLE = NDL + " Semi Logo",
       HREF = "https://data.nasdaq.com";
 
 const LogoNasdaqDataLink = _ref => {
   let {
+    ariaLabel = NDL,
     className
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
+    "aria-label": ariaLabel,
     className: (0, _crCn.default)(className, CL_NDL),
-    title: TITLE,
     href: HREF,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Svg.default, {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.default, { ..._StyleLogo.ARIA_HIDDEN_PROPS,
       w: "215",
       h: "36",
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("title", {
-        children: TITLE
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("g", {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("g", {
         stroke: "none",
         strokeWidth: "1",
         fill: "none",
@@ -49,7 +49,7 @@ const LogoNasdaqDataLink = _ref => {
           y: "23",
           children: NDL
         })]
-      })]
+      })
     })
   });
 };

@@ -16,37 +16,45 @@ const TH_ID = 'LOGOS'
 , CL_LOGO = 'logo-item data-provider-logo';
 
 const LOGO_CONFS = [
-  {
-    caption: 'eurostat',
-    title: 'Eurostat',
-    href: 'https://ec.europa.eu/eurostat'
-  },{
-    caption: 'UN Comtrade',
-    href: 'https://comtrade.un.org'
-  },{
-    caption: 'FAOSTAT',
-    href: 'https://www.fao.org/faostat/en/#data'
-  }
+  [
+    'https://ec.europa.eu/eurostat',
+    'eurostat',
+    'Eurostat'
+  ],[
+    'https://comtrade.un.org',
+    'UN Comtrade'
+  ],[
+    'https://www.fao.org/faostat/en/#data',
+    'FAOSTAT'
+  ]
 ];
-
 
 const Logo = ({
   className=CL_LOGO,
-  title,
+  href,
   caption,
-  ...rest
+  ariaLabel=caption
 }) => (
   <a
+    aria-label={ariaLabel}
     className={className}
-    title={title || caption}
-    {...rest}
+    href={href}
   >
    {caption}
   </a>
 );
 
-const _crLogoItem = config => (
-  <Logo key={config.caption} {...config} />
+const _crLogoItem = ([
+  href,
+  caption,
+  ariaLabel
+]) => (
+  <Logo
+    key={caption}
+    href={href}
+    caption={caption}
+    ariaLabel={ariaLabel}
+  />
 );
 
 const LogosBar = () => {

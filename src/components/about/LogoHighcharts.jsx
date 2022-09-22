@@ -1,24 +1,25 @@
 import Svg100 from '../zhn/svg/Svg100';
 import crCn from '../zhn-utils/crCn';
+import { LOGO_SVG_PROPS } from './StyleLogo';
 
 const CL_LOGO_HIGHCHARTS = 'logo-highcharts'
-, TITLE = 'Highcharts Logo'
+, DF_ARIA_LABEL = 'Highcharts'
 , HREF = 'https://www.highcharts.com';
 
-const IconHighcharts = ({ className }) => (
+const IconHighcharts = ({
+  ariaLabel=DF_ARIA_LABEL,
+  className
+}) => (
   <a
+     aria-label={ariaLabel}
      className={crCn(className, CL_LOGO_HIGHCHARTS)}
-     title={TITLE}
      href={HREF}
   >
     <Svg100
+       {...LOGO_SVG_PROPS}
        w="425.197"
        h="141.732"
-       fillRule="evenodd" clipRule="evenodd"
-       strokeLinejoin="round"
-       strokeMiterlimit="1.414"
     >
-       <title>{TITLE}</title>
        <path d="M138.475,69.712h-17.02v9.77c0,1.037-0.813,1.851-1.849,1.851c-1.037,0-1.85-0.813-1.85-1.851V57.725
          c0-1.037,0.813-1.852,1.85-1.852c1.036,0,1.849,0.813,1.849,1.852v8.436h17.02v-8.436c0-1.037,0.814-1.852,1.85-1.852
          c1.036,0,1.85,0.813,1.85,1.852v21.754c0,1.037-0.814,1.851-1.85,1.851c-1.036,0-1.85-0.813-1.85-1.851V69.712z"/>

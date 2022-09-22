@@ -1,22 +1,24 @@
 import Svg100 from '../zhn/svg/Svg100';
 import crCn from '../zhn-utils/crCn';
+import { LOGO_SVG_PROPS }  from './StyleLogo';
 
 const CL_LOGO_REACT = 'logo-react'
-, TITLE = 'React Logo'
+, DF_ARIA_LABEL = 'React'
 , HREF = 'https://reactjs.org';
 
-const LogoReact = ({ className }) => (
+const LogoReact = ({
+  ariaLabel=DF_ARIA_LABEL,
+  className
+}) => (
     <a
+       aria-label={DF_ARIA_LABEL}
        className={crCn(className, CL_LOGO_REACT)}
-       title={TITLE}
        href={HREF}
     >
     <Svg100
-      w="600" 
-      fillRule="evenodd" clipRule="evenodd"
-      strokeLinejoin="round"
+      {...LOGO_SVG_PROPS}
+      w="600"
     >
-        <title>{TITLE}</title>
         <circle cx="299.529" cy="299.628" r="50.167"/>
         <path fill="none" d="M299.529,197.628
   c67.356,0,129.928,9.665,177.107,25.907c56.844,19.569,91.794,49.233,91.794,76.093c0,27.991-37.041,59.503-98.083,79.728

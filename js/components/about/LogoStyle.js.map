@@ -1,0 +1,11 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/about/LogoStyle.js"
+ ],
+ "file": "../../../src/components/about/LogoStyle.js",
+ "names": [
+  "LOGO_SVG_PROPS"
+ ],
+ "mappings": ";;;;AAAO,MAAMA,cAAc,GAAG;EAC5B,eAAe;AADa,CAAvB"
+}
