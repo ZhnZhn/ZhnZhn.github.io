@@ -33,7 +33,7 @@ var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const BUILD_DATE = '16-09-2022',
+const BUILD_DATE = '22-09-2022',
       CL_COMP_CONTAINER = "component-container";
 
 const showSettings = _ComponentActions.ComponentActions.showSettings.bind(null, _ChartStore.default.exportSettingFn());
