@@ -5,6 +5,8 @@ exports.crPointName = exports.addColorsTo = void 0;
 
 var _MonoColorFn = require("../charts/MonoColorFn");
 
+var _CL = require("./CL");
+
 const _findLevelBy = (data, from, sum, stopSum, propName) => {
   const _maxIndex = data.length;
 
@@ -76,11 +78,10 @@ const addColorsTo = _ref => {
 
 exports.addColorsTo = addColorsTo;
 
-const NUMBER_STYLE = 'style="color:#fdb316;font-size:18px;"',
-      _isNumber = n => typeof n === 'number' && n - n === 0;
+const _isNumber = n => typeof n === 'number' && n - n === 0;
 
 const crPointName = (label, percent) => {
-  const _percent = _isNumber(percent) ? "<span " + NUMBER_STYLE + ">" + percent + "%</span>" : '';
+  const _percent = _isNumber(percent) ? "<span class=\"" + _CL.CL_TREE_MAP_PERCENT + "\">" + percent + "%</span>" : '';
 
   return label + "<br/>" + _percent;
 };

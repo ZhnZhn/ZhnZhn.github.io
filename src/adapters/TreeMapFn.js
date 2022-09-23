@@ -5,6 +5,7 @@ import {
   COLOR_BASE3,
   crMonoColor
 } from '../charts/MonoColorFn';
+import { CL_TREE_MAP_PERCENT } from './CL';
 
 const _findLevelBy = (
   data,
@@ -94,15 +95,14 @@ export const addColorsTo = ({
   _addColor(data, leveIndex1, levelIndex2)
 }
 
-const NUMBER_STYLE = 'style="color:#fdb316;font-size:18px;"'
-, _isNumber = n => typeof n === 'number'
+const _isNumber = n => typeof n === 'number'
  && n-n===0;
 export const crPointName = (
   label,
   percent
 ) => {
   const _percent = _isNumber(percent)
-    ? `<span ${NUMBER_STYLE}>${percent}%</span>`
+    ? `<span class="${CL_TREE_MAP_PERCENT}">${percent}%</span>`
     : '';
   return `${label}<br/>${_percent}`;
 }
