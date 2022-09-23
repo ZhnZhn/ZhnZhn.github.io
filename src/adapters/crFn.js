@@ -6,8 +6,9 @@ import {
 
 const { assign, create } = Object
 , _isArr = Array.isArray
-, _crPTag = style =>
-     style ? `<p style="${style}">` : '<p>';
+, _crPTag = className => className
+    ? `<p class="${className}">`
+    : '<p>';
 
 const DF_ERR_MESSAGE = 'No data available for request.'
 
@@ -28,8 +29,8 @@ export const crId = () => _crId().toUpperCase()
 export const crItemLink = (
   caption,
   itemUrl,
-  style
-) => `${_crPTag(style)}<a href="${itemUrl}">${caption}</a></p>`
+  className
+) => `${_crPTag(className)}<a href="${itemUrl}">${caption}</a></p>`
 
 const ITEM_CONF_PROP_NAMES = [
  'url',

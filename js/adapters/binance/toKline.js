@@ -11,6 +11,8 @@ var _crFn = require("../crFn");
 
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
 
+var _CL = require("../CL");
+
 const _crResearchLink = _crFn.crItemLink.bind(null, 'Binance Research');
 
 const _crTradeLink = _crFn.crItemLink.bind(null, 'Binance Trade Chart');
@@ -20,7 +22,7 @@ const _crDescription = _ref => {
     _researchLink,
     _tradeLink
   } = _ref;
-  return _crResearchLink(_researchLink, "padding-bottom: 8px;") + _crTradeLink(_tradeLink);
+  return _crResearchLink(_researchLink, _CL.CL_PB_8) + _crTradeLink(_tradeLink);
 };
 
 const _crInfo = option => ({

@@ -1,16 +1,18 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crItemLink = exports.crItemConf = exports.crId = exports.crHm = exports.crError = void 0;
+exports.crValueConf = exports.crItemLink = exports.crItemConf = exports.crId = exports.crHm = exports.crError = void 0;
 
 var _mathFn = require("../math/mathFn");
+
+var _getterPointFn = require("./getterPointFn");
 
 const {
   assign,
   create
 } = Object,
       _isArr = Array.isArray,
-      _crPTag = style => style ? "<p style=\"" + style + "\">" : '<p>';
+      _crPTag = className => className ? "<p class=\"" + className + "\">" : '<p>';
 
 const DF_ERR_MESSAGE = 'No data available for request.';
 
@@ -40,7 +42,7 @@ const crId = () => (0, _mathFn.crId)().toUpperCase();
 
 exports.crId = crId;
 
-const crItemLink = (caption, itemUrl, style) => _crPTag(style) + "<a href=\"" + itemUrl + "\">" + caption + "</a></p>";
+const crItemLink = (caption, itemUrl, className) => _crPTag(className) + "<a href=\"" + itemUrl + "\">" + caption + "</a></p>";
 
 exports.crItemLink = crItemLink;
 const ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
@@ -62,4 +64,14 @@ const crItemConf = option => {
 };
 
 exports.crItemConf = crItemConf;
+
+const crValueConf = data => {
+  const _p = data[data.length - 1];
+  return {
+    x: (0, _getterPointFn.getPointDate)(_p),
+    y: (0, _getterPointFn.getPointValue)(_p)
+  };
+};
+
+exports.crValueConf = crValueConf;
 //# sourceMappingURL=crFn.js.map

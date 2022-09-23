@@ -1,1 +1,46 @@
-{"version":3,"sources":["../../src/adapters/crFn.js"],"names":["assign","create","Object","_isArr","Array","isArray","_crPTag","style","DF_ERR_MESSAGE","crHm","obj","crError","errCaption","message","crId","toUpperCase","crItemLink","caption","itemUrl","ITEM_CONF_PROP_NAMES","crItemConf","option","_itemConf","_value","forEach","k","map"],"mappings":";;;;;AAAA;;AACA,MAAM;AAAEA,EAAAA,MAAF;AAAUC,EAAAA;AAAV,IAAqBC,MAA3B;AAAA,MACEC,MAAM,GAAGC,KAAK,CAACC,OADjB;AAAA,MAEEC,OAAO,GAAGC,KAAK,IACZA,KAAK,mBAAgBA,KAAhB,WAA4B,KAHtC;;AAKA,MAAMC,cAAc,GAAG,gCAAvB;;AAEO,MAAMC,IAAI,GAAGC,GAAG,IAAIV,MAAM,CAACC,MAAM,CAAC,IAAD,CAAP,EAAeS,GAAf,CAA1B;;;;AAEA,MAAMC,OAAO,GAAG,UACrBC,UADqB,EAErBC,OAFqB;AAAA,MACrBD,UADqB;AACrBA,IAAAA,UADqB,GACV,EADU;AAAA;;AAAA,MAErBC,OAFqB;AAErBA,IAAAA,OAFqB,GAEbL,cAFa;AAAA;;AAAA,SAGjB;AACJI,IAAAA,UADI;AAEJC,IAAAA;AAFI,GAHiB;AAAA,CAAhB,C,CASP;;;;;AACO,MAAMC,IAAI,GAAG,MAAM,oBAAQC,WAAR,EAAnB;;;;AAEA,MAAMC,UAAU,GAAG,CACxBC,OADwB,EAExBC,OAFwB,EAGxBX,KAHwB,KAIlBD,OAAO,CAACC,KAAD,CAJW,kBAIQW,OAJR,WAIoBD,OAJpB,aAAnB;;;AAMP,MAAME,oBAAoB,GAAG,CAC5B,KAD4B,EAE5B,QAF4B,EAG5B,OAH4B,EAI5B,UAJ4B,EAK5B,aAL4B,EAM5B,WAN4B,EAO5B,OAP4B,CAA7B;;AAUO,MAAMC,UAAU,GAAIC,MAAD,IAAY;AACpC,QAAMC,SAAS,GAAG,EAAlB;;AACA,MAAIC,MAAJ;;AACAJ,EAAAA,oBAAoB,CAACK,OAArB,CAA6BC,CAAC,IAAI;AAChCF,IAAAA,MAAM,GAAGF,MAAM,CAACI,CAAD,CAAf;;AACA,QAAIF,MAAM,IAAI,IAAd,EAAoB;AAClBD,MAAAA,SAAS,CAACG,CAAD,CAAT,GAAetB,MAAM,CAACoB,MAAD,CAAN,GACVA,MAAM,CAACG,GAAP,CAAWhB,GAAG,KAAK,EAAC,GAAGA;AAAJ,OAAL,CAAd,CADU,GAEVa,MAFL;AAGD;AACD,GAPF;AAQC,SAAOD,SAAP;AACF,CAZM","sourcesContent":["import { crId as _crId } from '../math/mathFn';\r\nconst { assign, create } = Object\r\n, _isArr = Array.isArray\r\n, _crPTag = style =>\r\n     style ? `<p style=\"${style}\">` : '<p>';\r\n\r\nconst DF_ERR_MESSAGE = 'No data available for request.'\r\n\r\nexport const crHm = obj => assign(create(null), obj)\r\n\r\nexport const crError = (\r\n  errCaption='',\r\n  message=DF_ERR_MESSAGE\r\n) => ({\r\n  errCaption,\r\n  message\r\n})\r\n\r\n\r\n// Quandl toScatter, Stat-Json\r\nexport const crId = () => _crId().toUpperCase()\r\n\r\nexport const crItemLink = (\r\n  caption,\r\n  itemUrl,\r\n  style\r\n) => `${_crPTag(style)}<a href=\"${itemUrl}\">${caption}</a></p>`\r\n\r\nconst ITEM_CONF_PROP_NAMES = [\r\n 'url',\r\n 'loadId',\r\n 'title',\r\n 'subtitle',\r\n 'itemCaption',\r\n 'seriaType',\r\n 'items'\r\n]\r\n\r\nexport const crItemConf = (option) => {\r\n  const _itemConf = {};\r\n  let _value;\r\n  ITEM_CONF_PROP_NAMES.forEach(k => {\r\n    _value = option[k]\r\n    if (_value != null) {\r\n      _itemConf[k] = _isArr(_value)\r\n         ? _value.map(obj => ({...obj}))\r\n         : _value\r\n    }\r\n   })\r\n   return _itemConf;\r\n}\r\n"],"file":"crFn.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/adapters/crFn.js"
+ ],
+ "file": "../../src/adapters/crFn.js",
+ "names": [
+  "assign",
+  "create",
+  "Object",
+  "_isArr",
+  "Array",
+  "isArray",
+  "_crPTag",
+  "className",
+  "DF_ERR_MESSAGE",
+  "crHm",
+  "obj",
+  "crError",
+  "errCaption",
+  "message",
+  "crId",
+  "_crId",
+  "toUpperCase",
+  "crItemLink",
+  "caption",
+  "itemUrl",
+  "ITEM_CONF_PROP_NAMES",
+  "crItemConf",
+  "option",
+  "_itemConf",
+  "_value",
+  "forEach",
+  "k",
+  "map",
+  "crValueConf",
+  "data",
+  "_p",
+  "length",
+  "x",
+  "getPointDate",
+  "y",
+  "getPointValue"
+ ],
+ "mappings": ";;;;;AAAA;;AACA;;AAKA,MAAM;EAAEA,MAAF;EAAUC;AAAV,IAAqBC,MAA3B;AAAA,MACEC,MAAM,GAAGC,KAAK,CAACC,OADjB;AAAA,MAEEC,OAAO,GAAGC,SAAS,IAAIA,SAAS,mBACfA,SADe,WAE5B,KAJN;;AAMA,MAAMC,cAAc,GAAG,gCAAvB;;AAEO,MAAMC,IAAI,GAAGC,GAAG,IAAIV,MAAM,CAACC,MAAM,CAAC,IAAD,CAAP,EAAeS,GAAf,CAA1B;;;;AAEA,MAAMC,OAAO,GAAG,UACrBC,UADqB,EAErBC,OAFqB;EAAA,IACrBD,UADqB;IACrBA,UADqB,GACV,EADU;EAAA;;EAAA,IAErBC,OAFqB;IAErBA,OAFqB,GAEbL,cAFa;EAAA;;EAAA,OAGjB;IACJI,UADI;IAEJC;EAFI,CAHiB;AAAA,CAAhB,C,CASP;;;;;AACO,MAAMC,IAAI,GAAG,MAAM,IAAAC,YAAA,IAAQC,WAAR,EAAnB;;;;AAEA,MAAMC,UAAU,GAAG,CACxBC,OADwB,EAExBC,OAFwB,EAGxBZ,SAHwB,KAIlBD,OAAO,CAACC,SAAD,CAJW,kBAIYY,OAJZ,WAIwBD,OAJxB,aAAnB;;;AAMP,MAAME,oBAAoB,GAAG,CAC5B,KAD4B,EAE5B,QAF4B,EAG5B,OAH4B,EAI5B,UAJ4B,EAK5B,aAL4B,EAM5B,WAN4B,EAO5B,OAP4B,CAA7B;;AAUO,MAAMC,UAAU,GAAIC,MAAD,IAAY;EACpC,MAAMC,SAAS,GAAG,EAAlB;;EACA,IAAIC,MAAJ;;EACAJ,oBAAoB,CAACK,OAArB,CAA6BC,CAAC,IAAI;IAChCF,MAAM,GAAGF,MAAM,CAACI,CAAD,CAAf;;IACA,IAAIF,MAAM,IAAI,IAAd,EAAoB;MAClBD,SAAS,CAACG,CAAD,CAAT,GAAevB,MAAM,CAACqB,MAAD,CAAN,GACVA,MAAM,CAACG,GAAP,CAAWjB,GAAG,KAAK,EAAC,GAAGA;MAAJ,CAAL,CAAd,CADU,GAEVc,MAFL;IAGD;EACD,CAPF;EAQC,OAAOD,SAAP;AACF,CAZM;;;;AAcA,MAAMK,WAAW,GAAGC,IAAI,IAAI;EACjC,MAAMC,EAAE,GAAGD,IAAI,CAACA,IAAI,CAACE,MAAL,GAAY,CAAb,CAAf;EACA,OAAO;IACLC,CAAC,EAAE,IAAAC,2BAAA,EAAaH,EAAb,CADE;IAELI,CAAC,EAAE,IAAAC,4BAAA,EAAcL,EAAd;EAFE,CAAP;AAID,CANM"
+}

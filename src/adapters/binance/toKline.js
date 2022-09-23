@@ -1,6 +1,7 @@
 import { crZhConfig } from '../AdapterFn';
 import { crItemLink } from '../crFn';
 import crAdapterOHLCV from '../crAdapterOHLCV';
+import { CL_PB_8 } from '../CL';
 
 const _crResearchLink = crItemLink
     .bind(null, 'Binance Research');
@@ -8,7 +9,7 @@ const _crTradeLink = crItemLink
     .bind(null, 'Binance Trade Chart');
 
 const _crDescription = ({ _researchLink, _tradeLink }) =>
- _crResearchLink(_researchLink, "padding-bottom: 8px;")
+ _crResearchLink(_researchLink, CL_PB_8)
  + _crTradeLink(_tradeLink);
 
 const _crInfo = (option) => ({

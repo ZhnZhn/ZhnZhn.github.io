@@ -2,7 +2,7 @@ import { crItemLink } from '../crFn';
 import { DESCR_EMPTY } from './conf';
 
 const _crWebsiteLink = crItemLink
-  .bind(null, "Website UN Comtrade Data", "https://comtrade.un.org/data/", "padding-bottom: 8px;")
+  .bind(null, "Website UN Comtrade Data", "https://comtrade.un.org/data/")
 , _crDescrText = ({
   cmdDescE,
   qtDesc
@@ -30,6 +30,6 @@ const _crDescr = json => {
 export const toDescr = (
   json,
   option
-) => option.period 
+) => option.period
   ? option.subtitle + _crWebsiteLink()
   : _crDescr(json) + _crWebsiteLink()
