@@ -1,4 +1,5 @@
 import { getCaption } from '../AdapterFn';
+import { CL_PT_4 } from '../CL';
 
 const CHART_URL = "https://www.eia.gov/opendata/embed.php?type=chart&series_id=";
 
@@ -37,7 +38,7 @@ const _crDescr = (s) => {
   <p>Source: ${source}</p>
   <p>Updated: ${updated ? updated.replace('T', ' '): ''}</p>
   <p>Id: ${series_id}</p>
-  <p><a href="${CHART_URL}${series_id}" style="padding-top: 4px;">EIA Chart</a></p>`;
+  <p><a href="${CHART_URL}${series_id}" class="${CL_PT_4}">EIA Chart</a></p>`;
 };
 
 const _crInfo = (json) => {

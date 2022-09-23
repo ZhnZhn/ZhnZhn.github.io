@@ -5,6 +5,8 @@ exports.crTitle = exports.crData = exports.crConfOption = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
+var _CL = require("../CL");
+
 const CHART_URL = "https://www.eia.gov/opendata/embed.php?type=chart&series_id=";
 
 const _toUTC = str => {
@@ -43,7 +45,7 @@ const _crDescr = s => {
     series_id = '',
     updated
   } = s;
-  return "<p>" + description + "</p>\n  <p>Units: " + units + "</p>\n  <p>Source: " + source + "</p>\n  <p>Updated: " + (updated ? updated.replace('T', ' ') : '') + "</p>\n  <p>Id: " + series_id + "</p>\n  <p><a href=\"" + CHART_URL + series_id + "\" style=\"padding-top: 4px;\">EIA Chart</a></p>";
+  return "<p>" + description + "</p>\n  <p>Units: " + units + "</p>\n  <p>Source: " + source + "</p>\n  <p>Updated: " + (updated ? updated.replace('T', ' ') : '') + "</p>\n  <p>Id: " + series_id + "</p>\n  <p><a href=\"" + CHART_URL + series_id + "\" class=\"" + _CL.CL_PT_4 + "\">EIA Chart</a></p>";
 };
 
 const _crInfo = json => {

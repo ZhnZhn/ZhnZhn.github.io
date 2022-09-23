@@ -5,8 +5,9 @@
  ],
  "file": "../../src/adapters/CL.js",
  "names": [
+  "CL_PT_4",
   "CL_PB_8",
   "CL_TREE_MAP_PERCENT"
  ],
- "mappings": ";;;;AAAO,MAAMA,OAAO,GAAG,MAAhB;;AAEA,MAAMC,mBAAmB,GAAG,YAA5B"
+ "mappings": ";;;;AAAO,MAAMA,OAAO,GAAG,MAAhB;;AACA,MAAMC,OAAO,GAAG,MAAhB;;AAEA,MAAMC,mBAAmB,GAAG,YAA5B"
 }
