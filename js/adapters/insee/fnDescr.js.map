@@ -1,1 +1,29 @@
-{"version":3,"sources":["../../../src/adapters/insee/fnDescr.js"],"names":["S","ROOT","TITLE","_crSpan","title","value","fnDescr","toInfo","info","strDom","forEach","seria","id","updatedOn","frequency","unitMeasure","unitMult","name","description"],"mappings":";;;;AACA,IAAMA,CAAC,GAAG;AACRC,EAAAA,IAAI,EAAE,iDADE;AAERC,EAAAA,KAAK,EAAE;AAFC,CAAV;;AAKA,IAAMC,OAAO,GAAG,SAAVA,OAAU,CAACC,KAAD,EAAQC,KAAR,EAAkB;AAChC,yBACSL,CAAC,CAACC,IADX,sBAEWD,CAAC,CAACE,KAFb,SAEsBE,KAFtB,mCAGWC,KAHX;AAMD,CAPD;;AASA,IAAMC,OAAO,GAAG;AACdC,EAAAA,MADc,kBACPC,IADO,EACDJ,KADC,EACK;AACjB,QAAIK,MAAM,GAAC,EAAX;AACAD,IAAAA,IAAI,CAACE,OAAL,CAAa,UAAAC,KAAK,EAAI;AAAA,UAEZP,KAFY,GAIVO,KAJU,CAEZP,KAFY;AAAA,UAELQ,EAFK,GAIVD,KAJU,CAELC,EAFK;AAAA,UAEDC,SAFC,GAIVF,KAJU,CAEDE,SAFC;AAAA,UAGZC,SAHY,GAIVH,KAJU,CAGZG,SAHY;AAAA,UAGDC,WAHC,GAIVJ,KAJU,CAGDI,WAHC;AAAA,UAGYC,QAHZ,GAIVL,KAJU,CAGYK,QAHZ;AAKpBP,MAAAA,MAAM,+CACwBL,KADxB,yCAGAD,OAAO,CAAC,QAAD,EAAWS,EAAX,CAHP,oBAIAT,OAAO,CAAC,WAAD,EAAcW,SAAd,CAJP,oBAKAX,OAAO,CAAC,WAAD,EAAcU,SAAd,CALP,mDAQAV,OAAO,CAAC,aAAD,EAAgBY,WAAhB,CARP,oBASAZ,OAAO,CAAC,UAAD,EAAaa,QAAb,CATP,wGAYoDJ,EAZpD,kEAAN;AAgBD,KArBD;AAsBA,WAAO;AACLK,MAAAA,IAAI,EAAEb,KADD;AAELc,MAAAA,WAAW,EAAET;AAFR,KAAP;AAID;AA7Ba,CAAhB;eAgCeH,O","sourcesContent":["\r\nconst S = {\r\n  ROOT: 'style=\"display:inline-block;padding-right:8px;\"',\r\n  TITLE: 'style=\"color:#1b75bb;\"'\r\n};\r\n\r\nconst _crSpan = (title, value) => {\r\n  return `\r\n   <span ${S.ROOT}>\r\n     <span ${S.TITLE}>${title}:&nbsp;</span>\r\n     <span>${value}</span>\r\n   </span>\r\n  `;\r\n};\r\n\r\nconst fnDescr = {\r\n  toInfo(info, title){\r\n    let strDom='';\r\n    info.forEach(seria => {\r\n      const {\r\n              title, id, updatedOn,\r\n              frequency, unitMeasure, unitMult\r\n            } = seria;\r\n      strDom += `\r\n        <div style=\"color:black;\">${title}</div>\r\n        <div>\r\n          ${_crSpan('IDBANK', id)}\r\n          ${_crSpan('Frequency', frequency)}\r\n          ${_crSpan('UpdatedOn', updatedOn)}\r\n        </div>\r\n        <div>\r\n          ${_crSpan('UnitMeasure', unitMeasure)}\r\n          ${_crSpan('UnitMult', unitMult)}\r\n        </div>\r\n        <div>\r\n          <a href=\"https://www.insee.fr/en/statistiques/serie/${id}\">INSEE Data Link</a>\r\n        </div>\r\n        <br/>\r\n      `\r\n    })\r\n    return {\r\n      name: title,\r\n      description: strDom\r\n    };\r\n  }\r\n}\r\n\r\nexport default fnDescr\r\n"],"file":"fnDescr.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/insee/fnDescr.js"
+ ],
+ "file": "../../../src/adapters/insee/fnDescr.js",
+ "names": [
+  "_crSpan",
+  "title",
+  "value",
+  "CL_PR_8",
+  "CL_DARK_BLUE",
+  "fnDescr",
+  "toInfo",
+  "info",
+  "_strDom",
+  "forEach",
+  "seria",
+  "id",
+  "updatedOn",
+  "frequency",
+  "unitMeasure",
+  "unitMult",
+  "CL_BLACK",
+  "name",
+  "description"
+ ],
+ "mappings": ";;;;;AAAA;;AAMA,MAAMA,OAAO,GAAG,CACdC,KADc,EAEdC,KAFc,2BAIAC,WAJA,6BAKCC,gBALD,WAKkBH,KALlB,gCAMNC,KANM,wBAAhB;;AAUA,MAAMG,OAAO,GAAG;EACdC,MAAM,CAACC,IAAD,EAAON,KAAP,EAAa;IACjB,IAAIO,OAAO,GAAC,EAAZ;IACAD,IAAI,CAACE,OAAL,CAAaC,KAAK,IAAI;MACpB,MAAM;QACJT,KADI;QAEJU,EAFI;QAGJC,SAHI;QAIJC,SAJI;QAKJC,WALI;QAMJC;MANI,IAOFL,KAPJ;MAQAF,OAAO,gCACSQ,YADT,WACsBf,KADtB,yCAGDD,OAAO,CAAC,QAAD,EAAWW,EAAX,CAHN,oBAIDX,OAAO,CAAC,WAAD,EAAca,SAAd,CAJN,oBAKDb,OAAO,CAAC,WAAD,EAAcY,SAAd,CALN,mDAQDZ,OAAO,CAAC,aAAD,EAAgBc,WAAhB,CARN,oBASDd,OAAO,CAAC,UAAD,EAAae,QAAb,CATN,wGAYmDJ,EAZnD,kEAAP;IAgBD,CAzBD;IA0BA,OAAO;MACLM,IAAI,EAAEhB,KADD;MAELiB,WAAW,EAAEV;IAFR,CAAP;EAID;;AAjCa,CAAhB;eAoCeH,O"
+}

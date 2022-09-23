@@ -1,28 +1,33 @@
+import {
+  CL_PR_8,
+  CL_BLACK,
+  CL_DARK_BLUE
+} from '../CL';
 
-const S = {
-  ROOT: 'style="display:inline-block;padding-right:8px;"',
-  TITLE: 'style="color:#1b75bb;"'
-};
-
-const _crSpan = (title, value) => {
-  return `
-   <span ${S.ROOT}>
-     <span ${S.TITLE}>${title}:&nbsp;</span>
-     <span>${value}</span>
-   </span>
-  `;
-};
+const _crSpan = (
+  title,
+  value
+) => `
+ <span class="${CL_PR_8}">
+  <span class="${CL_DARK_BLUE}">${title}:&nbsp;</span>
+  <span>${value}</span>
+ </span>
+`;
 
 const fnDescr = {
   toInfo(info, title){
-    let strDom='';
+    let _strDom='';
     info.forEach(seria => {
       const {
-              title, id, updatedOn,
-              frequency, unitMeasure, unitMult
-            } = seria;
-      strDom += `
-        <div style="color:black;">${title}</div>
+        title,
+        id,
+        updatedOn,
+        frequency,
+        unitMeasure,
+        unitMult
+      } = seria;
+      _strDom += `
+        <div class="${CL_BLACK}">${title}</div>
         <div>
           ${_crSpan('IDBANK', id)}
           ${_crSpan('Frequency', frequency)}
@@ -40,7 +45,7 @@ const fnDescr = {
     })
     return {
       name: title,
-      description: strDom
+      description: _strDom
     };
   }
 }
