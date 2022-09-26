@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/watch-browser/dnd-handlers/setTransferTo.js"
+ ],
+ "file": "../../../../src/components/watch-browser/dnd-handlers/setTransferTo.js",
+ "names": [
+  "_assign",
+  "Object",
+  "assign",
+  "setTransferTo",
+  "event",
+  "dragId",
+  "xType",
+  "dataTransfer",
+  "effectAllowed",
+  "dropEffect",
+  "setData",
+  "JSON",
+  "stringify"
+ ],
+ "mappings": ";;;;AACA,MAAMA,OAAO,GAAGC,MAAM,CAACC,MAAvB;;AAEA,MAAMC,aAAa,GAAG,QAIhB;EAAA,IAJiB;IACrBC,KADqB;IAErBC,MAFqB;IAGrBC;EAHqB,CAIjB;;EACJN,OAAO,CAACI,KAAK,CAACG,YAAP,EAAqB;IAC1BC,aAAa,EAAE,MADW;IAE1BC,UAAU,EAAE;EAFc,CAArB,CAAP,CAGGC,OAHH,CAIE,MAJF,EAKEC,IAAI,CAACC,SAAL,CAAe;IAACP,MAAD;IAASC;EAAT,CAAf,CALF;AAOD,CAZD;;eAceH,a"
+}

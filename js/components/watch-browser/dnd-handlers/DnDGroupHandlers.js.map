@@ -1,0 +1,36 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/watch-browser/dnd-handlers/DnDGroupHandlers.js"
+ ],
+ "file": "../../../../src/components/watch-browser/dnd-handlers/DnDGroupHandlers.js",
+ "names": [
+  "_crGroupId",
+  "caption",
+  "hDragStartGroup",
+  "fDragStart",
+  "DRAG",
+  "GROUP",
+  "hDropGroup",
+  "options",
+  "event",
+  "dropWithDnDStyle",
+  "xType",
+  "dragId",
+  "getTransferData",
+  "dropId",
+  "preventDefault",
+  "WatchActions",
+  "dragDropGroup",
+  "LIST",
+  "dragDropList",
+  "hDragEnterGroup",
+  "fDragEnter",
+  "C_GROUP_ENTER",
+  "hDragOverGroup",
+  "hDragOver",
+  "hDragLeaveGroup",
+  "hDragLeave"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;AAEA;;AAGA;;AAOA,MAAMA,UAAU,GAAG;EAAA,IAAC;IAAEC;EAAF,CAAD;EAAA,OAAoBA,OAApB;AAAA,CAAnB;;AAEO,MAAMC,eAAe,GAAG,IAAAC,uBAAA,EAC7B,CAACC,uBAAA,CAAKC,KAAN,CAD6B,EAE7BL,UAF6B,CAAxB;;;AAKA,MAAMM,UAAU,GAAG,EACxB;AACAC,OAFwB,EAGxBC,KAHwB,KAIrB;EACH,IAAAC,kCAAA,EAAiBD,KAAjB;;EACA,MAAM;IACJE,KADI;IAEJC;EAFI,IAGF,IAAAC,wBAAA,EAAgBJ,KAAhB,CAHJ;EAAA,MAIEK,MAAM,GAAGb,UAAU,CAACO,OAAD,CAJrB;;EAMA,IAAIG,KAAK,KAAKN,uBAAA,CAAKC,KAAnB,EAA0B;IACxB,IAAIM,MAAM,KAAKE,MAAf,EAAuB;MACrB;IACD,CAFD,MAEO;MACLL,KAAK,CAACM,cAAN;;MACAC,0BAAA,CAAaC,aAAb,CAA2B;QACzBL,MADyB;QAEzBE;MAFyB,CAA3B;IAID;EACF,CAVD,MAUO,IAAIH,KAAK,KAAKN,uBAAA,CAAKa,IAAnB,EAAyB;IAC9BT,KAAK,CAACM,cAAN;;IACAC,0BAAA,CAAaG,YAAb,CAA0B;MACxBP,MADwB;MAExBE;IAFwB,CAA1B;EAID;AACF,CA7BM;;;AA+BA,MAAMM,eAAe,GAAG,IAAAC,uBAAA,EAC7BhB,uBAAA,CAAKC,KADwB,EAE7BD,uBAAA,CAAKiB,aAFwB,CAAxB;;AAKA,MAAMC,cAAc,GAAGC,sBAAvB;;AACA,MAAMC,eAAe,GAAGC,uBAAxB"
+}

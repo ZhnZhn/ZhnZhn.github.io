@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/watch-browser/dnd-handlers/getTransferData.js"
+ ],
+ "file": "../../../../src/components/watch-browser/dnd-handlers/getTransferData.js",
+ "names": [
+  "getTransferData",
+  "event",
+  "JSON",
+  "parse",
+  "dataTransfer",
+  "getData"
+ ],
+ "mappings": ";;;;;AACA,MAAMA,eAAe,GAAGC,KAAK,IAAIC,IAAI,CACnCC,KAD+B,CACzBF,KAAK,CAACG,YAAN,CAAmBC,OAAnB,CAA2B,MAA3B,CADyB,CAAjC;;eAGeL,e"
+}

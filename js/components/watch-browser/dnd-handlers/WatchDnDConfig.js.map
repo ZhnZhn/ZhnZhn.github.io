@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/watch-browser/dnd-handlers/WatchDnDConfig.js"
+ ],
+ "file": "../../../../src/components/watch-browser/dnd-handlers/WatchDnDConfig.js",
+ "names": [
+  "C_GROUP_OPEN",
+  "C_LIST_OPEN",
+  "DRAG",
+  "GROUP",
+  "C_GROUP_ENTER",
+  "LIST",
+  "C_LIST_ENTER",
+  "ITEM"
+ ],
+ "mappings": ";;;;AAAA,MAAMA,YAAY,GAAG,SAArB;AAAA,MACEC,WAAW,GAAG,SADhB;AAAA,MAEEC,IAAI,GAAG;EACPC,KAAK,EAAE,OADA;EAEPC,aAAa,EAAEJ,YAFR;EAGPK,IAAI,EAAE,MAHC;EAIPC,YAAY,EAAEL,WAJP;EAKPM,IAAI,EAAE;AALC,CAFT;eAUeL,I"
+}
