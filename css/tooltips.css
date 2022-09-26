@@ -1,5 +1,6 @@
 
 .tp__header {
+  color: #fdb316;
   position: relative;
   height: 26px;
   padding: 4px 25px 0 5px;
@@ -14,15 +15,14 @@
 
 .tp__header__caption {
   display: inline-block;
-  color: #fdb316;
   max-width: 400px;
 }
 
 .tp__header__close {
+  color: #ed5813;
   display: inline-block;
   position: absolute;
   right: 5px;
-  color: #ed5813;
 }
 
 .tp__body {
@@ -46,9 +46,16 @@
   padding: 2px 0;
 }
 
+.tp__title {
+  color: #a487d4;
+}
+.tp__value {
+  color: #2f7ed8;
+}
+
 .tp__bt {
-  display: inline-block;
   color: #4caf50;
+  display: inline-block;
   padding: 2px 4px;
   border-radius: 2px;
   cursor: pointer;
