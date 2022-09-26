@@ -7,6 +7,8 @@ var _Chart = require("./Chart");
 
 var _Tooltip = require("./Tooltip");
 
+var _CL = require("./CL");
+
 const crPieConfig = () => ({
   zhSeries: {
     count: 0
@@ -41,7 +43,7 @@ const crInnerPieSeria = _ref => {
     startAngle: -90,
     endAngle: 90,
     data: [{
-      name: "<span style=\"color:#a487d4;\">" + year + "</span><br/>" + bTotal.toString(),
+      name: "<span class=\"" + _CL.CL_TP_TITLE + "\">" + year + "</span><br/>" + bTotal.toString(),
       y: 1
     }],
     dataLabels: {

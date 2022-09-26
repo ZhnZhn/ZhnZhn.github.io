@@ -10,18 +10,19 @@ import isSupportOptions from '../../utils/isSupportOptions';
 import { toNumberFormatAll } from '../ChartFn';
 
 import {
-  TITLE_COLOR,
   VALUE_COLOR
 } from './Colors';
 
-const CL_TP_HEADER = "tp__header not-selected"
-, CL_TP_CAPTION = "tp__header__caption text-clip"
-, CL_TP_BT_CLOSE = "tp__header__close"
-, CL_TP_ROW = "tp__row"
+import {
+  CL_TP_HEADER,
+  CL_TP_CAPTION,
+  CL_TP_BT_CLOSE,
+  CL_TP_ROW,
+  CL_TP_TITLE
+} from '../CL';
 
-, TITLE_STYLE = `style="color:${TITLE_COLOR};"`
-, FONT_STYLE = 'font-size:16px;font-weight:bold;'
-, VALUE_STYLE = 'padding-right:5px;'
+
+const VALUE_STYLE = 'padding-right:5px;'
 , STATUS_STYLE = 'padding-left:4px;'
 
 const _isFn = fn => typeof fn === 'function';
@@ -50,7 +51,7 @@ const _isValueEmpty = v => v === 'NoData'
 const _crSpanStyle = (
   color,
   tailStyle=''
-) => `style="color:${color};${FONT_STYLE}${tailStyle}"`;
+) => `style="color:${color};${tailStyle}"`;
 
 export const crSpan = (
   t,
@@ -64,7 +65,7 @@ export const crSpan = (
        ? `<span ${_crSpanStyle(color, STATUS_STYLE)}>(${status})</span>`
        : '';
   return `
-  <span ${TITLE_STYLE}>${_t}</span>
+  <span class="${CL_TP_TITLE}">${_t}</span>
   <span ${_vStyle}>${_v}</span>${_statusSpan}`;
 }
 

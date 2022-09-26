@@ -13,6 +13,8 @@ var _Color = require("../constants/Color");
 
 var _conf = require("./conf");
 
+var _CL = require("./CL");
+
 const CHART_SERIES_COLORS = ['#7cb5ec', '#8abb5d', //'#90ed7d'
 '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'];
 
@@ -255,8 +257,8 @@ const ChartTheme = {
     backgroundColor: _Color.COLOR_TOOLTIP,
     borderWidth: 2,
     borderRadius: 10,
-    headerFormat: '<span style="font-weight:bold;font-size: 12px; color:rgba(194,149,23,1);">{point.key}</span><br/>',
-    pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Value: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.y}</span><br/>'
+    headerFormat: "<span class=\"" + _CL.CL_TP_HEADER + "\">{point.key}</span><br/>'",
+    pointFormat: "<span class=\"" + _CL.CL_TP_TITLE + "\">Value: </span>" + ("<span class=\"" + _CL.CL_TP_VALUE + "\">{point.y}</span><br/>")
   },
   xAxis: {
     lineColor: _Color.COLOR_X_LINE,

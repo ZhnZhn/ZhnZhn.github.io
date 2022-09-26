@@ -9,6 +9,7 @@ import {
   fLegend
 } from './Chart';
 import { tooltipDonut } from './Tooltip';
+import { CL_TP_TITLE } from './CL';
 
 export const crPieConfig = () => ({
   zhSeries: {
@@ -37,7 +38,7 @@ export const crInnerPieSeria = ({
     startAngle: -90,
     endAngle: 90,
     data: [{
-     name: `<span style="color:#a487d4;">${year}</span><br/>${bTotal.toString()}`,
+     name: `<span class="${CL_TP_TITLE}">${year}</span><br/>${bTotal.toString()}`,
      y: 1
     }],
     dataLabels: {

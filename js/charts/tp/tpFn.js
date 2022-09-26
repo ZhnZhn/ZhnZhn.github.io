@@ -17,13 +17,9 @@ var _isSupportOptions = _interopRequireDefault(require("../../utils/isSupportOpt
 
 var _Colors = require("./Colors");
 
-const CL_TP_HEADER = "tp__header not-selected",
-      CL_TP_CAPTION = "tp__header__caption text-clip",
-      CL_TP_BT_CLOSE = "tp__header__close",
-      CL_TP_ROW = "tp__row",
-      TITLE_STYLE = "style=\"color:" + _Colors.TITLE_COLOR + ";\"",
-      FONT_STYLE = 'font-size:16px;font-weight:bold;',
-      VALUE_STYLE = 'padding-right:5px;',
+var _CL = require("../CL");
+
+const VALUE_STYLE = 'padding-right:5px;',
       STATUS_STYLE = 'padding-left:4px;';
 
 const _isFn = fn => typeof fn === 'function';
@@ -61,7 +57,7 @@ const _crSpanStyle = function (color, tailStyle) {
     tailStyle = '';
   }
 
-  return "style=\"color:" + color + ";" + FONT_STYLE + tailStyle + "\"";
+  return "style=\"color:" + color + ";" + tailStyle + "\"";
 };
 
 const crSpan = function (t, v, _temp) {
@@ -79,7 +75,7 @@ const crSpan = function (t, v, _temp) {
         _v = v !== null ? v : '',
         _statusSpan = status ? "<span " + _crSpanStyle(color, STATUS_STYLE) + ">(" + status + ")</span>" : '';
 
-  return "\n  <span " + TITLE_STYLE + ">" + _t + "</span>\n  <span " + _vStyle + ">" + _v + "</span>" + _statusSpan;
+  return "\n  <span class=\"" + _CL.CL_TP_TITLE + "\">" + _t + "</span>\n  <span " + _vStyle + ">" + _v + "</span>" + _statusSpan;
 };
 
 exports.crSpan = crSpan;
@@ -97,7 +93,7 @@ const crRow = function (t, v, option) {
     v = '';
   }
 
-  return "<div class=\"" + CL_TP_ROW + "\">" + crSpan(t, v, option) + "</div>";
+  return "<div class=\"" + _CL.CL_TP_ROW + "\">" + crSpan(t, v, option) + "</div>";
 };
 
 exports.crRow = crRow;
@@ -111,7 +107,7 @@ const crHeader = function (date, id, cssClass) {
     cssClass = '';
   }
 
-  return "<div id=\"" + id + "\" class=\"" + CL_TP_HEADER + " " + cssClass + "\">\n      <span class=\"" + CL_TP_CAPTION + "\">" + date + "</span>\n      <span class=\"" + CL_TP_BT_CLOSE + "\">X</span>\n    </div>";
+  return "<div id=\"" + id + "\" class=\"" + _CL.CL_TP_HEADER + " " + cssClass + "\">\n      <span class=\"" + _CL.CL_TP_CAPTION + "\">" + date + "</span>\n      <span class=\"" + _CL.CL_TP_BT_CLOSE + "\">X</span>\n    </div>";
 };
 
 exports.crHeader = crHeader;

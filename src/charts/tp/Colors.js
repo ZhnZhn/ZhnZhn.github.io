@@ -1,4 +1,3 @@
-export const TITLE_COLOR = '#a487d4';
 export const VALUE_COLOR = '#2f7ed8';
 export const YEAR_COLOR = '#fdb316';
 

@@ -35,6 +35,12 @@ import {
   fMonoPieColors
 } from './conf';
 
+import {
+  CL_TP_HEADER,
+  CL_TP_TITLE,
+  CL_TP_VALUE
+} from './CL';
+
 const CHART_SERIES_COLORS = [
   '#7cb5ec',
   '#8abb5d', //'#90ed7d'
@@ -291,9 +297,9 @@ export const ChartTheme = {
     borderWidth: 2,
     borderRadius: 10,
 
-    headerFormat: '<span style="font-weight:bold;font-size: 12px; color:rgba(194,149,23,1);">{point.key}</span><br/>',
-    pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Value: </span>'+
-                 '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.y}</span><br/>'
+    headerFormat: `<span class="${CL_TP_HEADER}">{point.key}</span><br/>'`,
+    pointFormat: `<span class="${CL_TP_TITLE}">Value: </span>`+
+                 `<span class="${CL_TP_VALUE}">{point.y}</span><br/>`
   },
   xAxis: {
     lineColor: COLOR_X_LINE,
