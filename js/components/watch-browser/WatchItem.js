@@ -5,9 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
+
+var _useDnDHandlers = _interopRequireDefault(require("../hooks/useDnDHandlers"));
 
 var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
 
@@ -17,9 +19,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 const S_ITEM_DIV = {
   position: 'relative',
-  paddingRight: 40,
-  paddingTop: 5,
-  paddingBottom: 5
+  padding: '5px 40px 5px 0'
 },
       S_CAPTION = {
   width: '100%',
@@ -32,49 +32,44 @@ const S_ITEM_DIV = {
   top: 10,
   right: 0
 };
-const EMPTY_ITEM_CAPTION = 'Not Found'; //onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
+const EMPTY_ITEM_CAPTION = 'Not Found';
 
-const WatchItem = _ref => {
-  let {
+const WatchItem = props => {
+  const {
     item,
     className,
-    isModeEdit,
-    option,
     onClick,
     onClose,
+    isDraggable,
+    option
+    /*
     onDragStart,
     onDragEnter,
     onDragOver,
     onDragLeave,
     onDrop
-  } = _ref;
+    */
 
-  const {
+  } = props,
+        {
     caption = EMPTY_ITEM_CAPTION
   } = item || {},
-        _btClose = isModeEdit ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose.default, {
+        _btClose = isDraggable ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose.default, {
     style: S_SVG_CLOSE,
     onClose: onClose.bind(null, option)
   }) : null
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _hClick = (0, _react.useCallback)(() => onClick(item), [item]) //onClick
+        _hClick = (0, _uiApi.useCallback)(() => onClick(item), [item]) //onClick
 
   /*eslint-enable react-hooks/exhaustive-deps */
   ,
-        _hKeyUp = (0, _react.useCallback)(evt => {
+        _hKeyUp = (0, _uiApi.useCallback)(evt => {
     if ((0, _isKeyEnter.default)(evt)) {
       _hClick();
     }
   }, [_hClick]),
-        _dndOptions = isModeEdit ? {
-    draggable: true,
-    onDragStart: onDragStart.bind(null, option),
-    onDrop: onDrop.bind(null, option),
-    onDragOver,
-    onDragEnter,
-    onDragLeave
-  } : void 0;
+        _dndOptions = (0, _useDnDHandlers.default)(props);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     role: "menuitem",

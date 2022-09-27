@@ -28,7 +28,7 @@ const WatchItems = ({
        <WatchItem
           key={caption}
           className={CL_WATCH_ITEM}
-          isModeEdit={isModeEdit}
+          isDraggable={isModeEdit}
           item={item}
           option={{
             groupCaption,

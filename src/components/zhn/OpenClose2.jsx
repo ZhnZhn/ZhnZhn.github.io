@@ -1,8 +1,9 @@
-import use from '../hooks/use';
+import useToggle from '../hooks/useToggle';
+import useKeyEnter from '../hooks/useKeyEnter';
+import useDnDHandlers from '../hooks/useDnDHandlers';
+
 import C from '../styles/Color';
 import Svg from './svg/Svg';
-
-const { useToggle, useKeyEnter } = use;
 
 const CL_SHOW = 'show-popup'
 , CL_NOT_SELECTED = 'not-selected zhn-oc'
@@ -28,45 +29,60 @@ const CL_SHOW = 'show-popup'
 , PATH_OPEN = "M 2,14 L 14,14 14,2 2,14"
 , PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
-const _crStyleConf = ({ isOpen, openColor, notSelectedStyle }) => isOpen
-  ? {
-     _pathV: PATH_OPEN,
-     _fillV: openColor,
-     _divStyle: S_BLOCK,
-     _expClass: `${CL_OC_EXP} ${CL_SHOW}`,
-     _notSelectedStyle: null
-    }
-  : {
-    _pathV: PATH_CLOSE,
-    _fillV: FILL_CLOSE_COLOR,
-    _divStyle: S_NONE,
-    _expClass: CL_OC_EXP,
-    _notSelectedStyle: notSelectedStyle
-  };
-
-const OpenClose2 = ({
-  isInitialOpen,
-  style, ocStyle, notSelectedStyle,
-  captionStyle, caption,
+const _crStyleConf = ({
+  isOpen,
   openColor,
-  isDraggable, option, onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop,
-  children
-}) => {
-  const [isOpen, toggleIsOpen] = useToggle(isInitialOpen)
+  notSelectedStyle
+}) => isOpen
+  //_pathV, _fillV, _divStyle, _expClass, _notSelectedStyle
+  ? [
+     PATH_OPEN,
+     openColor,
+     S_BLOCK,
+     `${CL_OC_EXP} ${CL_SHOW}`
+  ] : [
+     PATH_CLOSE,
+     FILL_CLOSE_COLOR,
+     S_NONE,
+     CL_OC_EXP,
+     notSelectedStyle
+  ];
+
+const OpenClose2 = (
+  props
+) => {
+  const {
+    isInitialOpen,
+    style,
+    ocStyle,
+    notSelectedStyle,
+    captionStyle,
+    caption,
+    openColor,
+    /*
+    isDraggable,
+    option,
+    onDragStart,
+    onDragEnter,
+    onDragOver,
+    onDragLeave,
+    onDrop,
+    */
+    children
+  } = props
+  , [
+    isOpen,
+    toggleIsOpen
+  ] = useToggle(isInitialOpen)
   , _hKeyDown = useKeyEnter(toggleIsOpen)
-  , _dragOption = isDraggable
-      ? {
-          draggable: true,
-          onDragStart: onDragStart.bind(null, option),
-          onDrop: onDrop.bind(null, option),
-          onDragEnter, onDragOver, onDragLeave
-        }
-      : void 0
-   , {
-      _pathV, _fillV,
-      _divStyle, _expClass,
+  , _dragOption = useDnDHandlers(props)
+  , [
+      _pathV,
+      _fillV,
+      _divStyle,
+      _expClass,
       _notSelectedStyle
-    } = _crStyleConf({ isOpen, openColor, notSelectedStyle });
+   ] = _crStyleConf({ isOpen, openColor, notSelectedStyle });
   return (
     <div style={style}>
       <div

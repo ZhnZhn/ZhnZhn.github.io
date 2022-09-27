@@ -5,7 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _use = _interopRequireDefault(require("../hooks/use"));
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+
+var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
+
+var _useDnDHandlers = _interopRequireDefault(require("../hooks/useDnDHandlers"));
 
 var _Color = _interopRequireDefault(require("../styles/Color"));
 
@@ -13,10 +17,6 @@ var _Svg = _interopRequireDefault(require("./svg/Svg"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const {
-  useToggle,
-  useKeyEnter
-} = _use.default;
 const CL_SHOW = 'show-popup',
       CL_NOT_SELECTED = 'not-selected zhn-oc',
       CL_OC_EXP = 'zhn-oc__exp',
@@ -42,58 +42,41 @@ const CL_SHOW = 'show-popup',
       PATH_OPEN = "M 2,14 L 14,14 14,2 2,14",
       PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
-const _crStyleConf = ({
-  isOpen,
-  openColor,
-  notSelectedStyle
-}) => isOpen ? {
-  _pathV: PATH_OPEN,
-  _fillV: openColor,
-  _divStyle: S_BLOCK,
-  _expClass: CL_OC_EXP + " " + CL_SHOW,
-  _notSelectedStyle: null
-} : {
-  _pathV: PATH_CLOSE,
-  _fillV: FILL_CLOSE_COLOR,
-  _divStyle: S_NONE,
-  _expClass: CL_OC_EXP,
-  _notSelectedStyle: notSelectedStyle
+const _crStyleConf = _ref => {
+  let {
+    isOpen,
+    openColor,
+    notSelectedStyle
+  } = _ref;
+  return isOpen //_pathV, _fillV, _divStyle, _expClass, _notSelectedStyle
+  ? [PATH_OPEN, openColor, S_BLOCK, CL_OC_EXP + " " + CL_SHOW] : [PATH_CLOSE, FILL_CLOSE_COLOR, S_NONE, CL_OC_EXP, notSelectedStyle];
 };
 
-const OpenClose2 = ({
-  isInitialOpen,
-  style,
-  ocStyle,
-  notSelectedStyle,
-  captionStyle,
-  caption,
-  openColor,
-  isDraggable,
-  option,
-  onDragStart,
-  onDragEnter,
-  onDragOver,
-  onDragLeave,
-  onDrop,
-  children
-}) => {
-  const [isOpen, toggleIsOpen] = useToggle(isInitialOpen),
-        _hKeyDown = useKeyEnter(toggleIsOpen),
-        _dragOption = isDraggable ? {
-    draggable: true,
-    onDragStart: onDragStart.bind(null, option),
-    onDrop: onDrop.bind(null, option),
+const OpenClose2 = props => {
+  const {
+    isInitialOpen,
+    style,
+    ocStyle,
+    notSelectedStyle,
+    captionStyle,
+    caption,
+    openColor,
+
+    /*
+    isDraggable,
+    option,
+    onDragStart,
     onDragEnter,
     onDragOver,
-    onDragLeave
-  } : void 0,
-        {
-    _pathV,
-    _fillV,
-    _divStyle,
-    _expClass,
-    _notSelectedStyle
-  } = _crStyleConf({
+    onDragLeave,
+    onDrop,
+    */
+    children
+  } = props,
+        [isOpen, toggleIsOpen] = (0, _useToggle.default)(isInitialOpen),
+        _hKeyDown = (0, _useKeyEnter.default)(toggleIsOpen),
+        _dragOption = (0, _useDnDHandlers.default)(props),
+        [_pathV, _fillV, _divStyle, _expClass, _notSelectedStyle] = _crStyleConf({
     isOpen,
     openColor,
     notSelectedStyle

@@ -1,17 +1,16 @@
 import {
   useCallback
-} from 'react';
+} from '../uiApi';
 
-import isKeyEnter from '../zhn/isKeyEnter'
+import isKeyEnter from '../zhn/isKeyEnter';
+import useDnDHandlers from '../hooks/useDnDHandlers';
 
 import SvgClose from '../zhn/SvgClose';
 import DivEllipsis from '../zhn/DivEllipsis';
 
 const S_ITEM_DIV = {
   position: 'relative',
-  paddingRight: 40,
-  paddingTop: 5,
-  paddingBottom: 5
+  padding: '5px 40px 5px 0'
 }
 , S_CAPTION = {
   width: '100%',
@@ -27,23 +26,27 @@ const S_ITEM_DIV = {
 
 const EMPTY_ITEM_CAPTION = 'Not Found';
 
-//onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
-const WatchItem = ({
-  item,
-  className,
-  isModeEdit,
-  option,
-  onClick,
-  onClose,
+const WatchItem = (props) => {
+  const {
+    item,
+    className,
+    onClick,
+    onClose,
 
-  onDragStart,
-  onDragEnter,
-  onDragOver,
-  onDragLeave,
-  onDrop
-}) => {
-  const { caption=EMPTY_ITEM_CAPTION } = item || {}
-  , _btClose = isModeEdit
+    isDraggable,
+    option,
+    /*
+    onDragStart,
+    onDragEnter,
+    onDragOver,
+    onDragLeave,
+    onDrop
+    */
+  } = props
+  , {
+    caption=EMPTY_ITEM_CAPTION
+  } = item || {}
+  , _btClose = isDraggable
      ? (<SvgClose
          style={S_SVG_CLOSE}
          onClose={onClose.bind(null, option)}
@@ -58,13 +61,8 @@ const WatchItem = ({
          _hClick()
        }
   }, [_hClick])
-  , _dndOptions = isModeEdit
-      ? {
-       draggable: true,
-       onDragStart: onDragStart.bind(null, option),
-       onDrop: onDrop.bind(null, option),
-       onDragOver, onDragEnter, onDragLeave
-      } : void 0;
+  , _dndOptions = useDnDHandlers(props);
+
  return (
      <div
        role="menuitem"
