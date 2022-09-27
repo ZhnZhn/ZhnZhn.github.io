@@ -19,3 +19,7 @@ export const removeWatchItem = (option, evt) => {
   evt.stopPropagation()
   WatchActions.removeItem(option)
 }
+
+export const saveWatchList = () => {
+  WatchActions.saveWatch()
+}

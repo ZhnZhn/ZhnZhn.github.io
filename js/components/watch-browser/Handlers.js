@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.showDialogWatchItem = exports.showDialogEditLists = exports.showDialogEditGroups = exports.removeWatchItem = void 0;
+exports.showDialogWatchItem = exports.showDialogEditLists = exports.showDialogEditGroups = exports.saveWatchList = exports.removeWatchItem = void 0;
 
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 
@@ -28,4 +28,10 @@ const removeWatchItem = (option, evt) => {
 };
 
 exports.removeWatchItem = removeWatchItem;
+
+const saveWatchList = () => {
+  _WatchActions.WatchActions.saveWatch();
+};
+
+exports.saveWatchList = saveWatchList;
 //# sourceMappingURL=Handlers.js.map
