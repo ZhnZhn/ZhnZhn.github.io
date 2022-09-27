@@ -1,0 +1,28 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/watch-browser/WatchGroups.js"
+ ],
+ "file": "../../../src/components/watch-browser/WatchGroups.js",
+ "names": [
+  "OpenClose2",
+  "Comp",
+  "_isArr",
+  "Array",
+  "isArray",
+  "S_GROUP_DIV",
+  "lineHeight",
+  "WatchGroups",
+  "isModeEdit",
+  "groups",
+  "map",
+  "caption",
+  "lists",
+  "hDragStartGroup",
+  "hDragEnterGroup",
+  "hDragOverGroup",
+  "hDragLeaveGroup",
+  "hDropGroup"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAQA;;AACA;;;;AAEA,MAAM;EAAEA;AAAF,IAAiBC,aAAvB;AAAA,MACEC,MAAM,GAAGC,KAAK,CAACC,OADjB;AAAA,MAEEC,WAAW,GAAG;EAAEC,UAAU,EAAE;AAAd,CAFhB;;AAIA,MAAMC,WAAW,GAAG;EAAA,IAAC;IACnBC,UADmB;IAEnBC;EAFmB,CAAD;EAAA,OAGdP,MAAM,CAACO,MAAD,CAAN,GAAiBA,MAAM,CAC1BC,GADoB,CAChB;IAAA,IAAC;MAACC,OAAD;MAAUC;IAAV,CAAD;IAAA,oBACD,qBAAC,UAAD;MAEG,KAAK,EAAEP,WAFV;MAGG,OAAO,EAAEM,OAHZ;MAIG,WAAW,EAAEH,UAJhB;MAKG,MAAM,EAAE;QAACG;MAAD,CALX;MAMG,WAAW,EAAEE,iCANhB;MAOG,WAAW,EAAEC,iCAPhB;MAQG,UAAU,EAAEC,gCARf;MASG,WAAW,EAAEC,iCAThB;MAUG,MAAM,EAAEC,4BAVX;MAAA,uBAYG,qBAAC,mBAAD;QACE,UAAU,EAAET,UADd;QAEE,YAAY,EAAEG,OAFhB;QAGE,KAAK,EAAEC;MAHT;IAZH,GACQD,OADR,CADC;EAAA,CADgB,CAAjB,GAoBC,IAvBa;AAAA,CAApB;;eAyBeJ,W"
+}
