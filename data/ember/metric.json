@@ -1,7 +1,7 @@
 {
  "items":[
    {"c":"Generation in TWh","v":"generation"},
-   {"c":"Capacity in GWh","v":"capacity"},
+   {"c":"Capacity in GW","v":"capacity"},
    {"c":"Share % of Total","v":"share"},
    {"c":"Emissions in Mt CO2","v":"emissions"}
  ]
