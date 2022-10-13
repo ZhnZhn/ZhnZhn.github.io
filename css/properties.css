@@ -1,20 +1,16 @@
 .not-selected {
-  -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome all / Safari all / Opera */
-  -khtml-user-select: none;    /* Konqueror */
-  -moz-user-select: none;      /* Firefox all */
-  -ms-user-select: none;       /* IE 10+ */
   user-select: none;           /* Likely future */
 }
 
 .gap-right::before {
-   content: '';
-   position: absolute;
-   right: 0;
-   top: 0;
-   width: 38px;
-   height: 100%;
-   background: inherit;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 38px;
+  height: 100%;
+  background: inherit;
 }
 
 .focusable:focus {
