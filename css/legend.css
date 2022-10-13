@@ -1,12 +1,9 @@
 .bt-item {
   display: inline-block;
-  border-width: 1px;
-  border-style: solid;
+  margin: 10px 0 0 12px;
+  padding: 3px 0;
+  border: 1px solid;
   border-radius: 10px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  margin-left: 12px;
-  margin-top: 10px;
   font-weight: normal;  
 }
 .bt-item:hover {
