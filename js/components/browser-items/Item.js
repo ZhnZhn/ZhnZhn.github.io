@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
@@ -34,7 +34,7 @@ const Item = _ref => {
   } = _ref;
 
   /*eslint-disable react-hooks/exhaustive-deps*/
-  const _hClick = (0, _react.useCallback)(() => onClickItem(item), []) //onClickItem, item
+  const _hClick = (0, _uiApi.useCallback)(() => onClickItem(item), []) //onClickItem, item
 
   /*eslint-enable react-hooks/exhaustive-deps*/
   ,
