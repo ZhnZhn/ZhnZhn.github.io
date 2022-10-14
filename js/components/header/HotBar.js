@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
 
@@ -16,6 +16,8 @@ var _has = _interopRequireDefault(require("../has"));
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
+
+var _react = require("react");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -52,20 +54,6 @@ const _calcMaxButtons = maxButtons => {
   }
 };
 
-const CleanButton = _ref => {
-  let {
-    is,
-    onClick
-  } = _ref;
-  return is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-    timeout: 0,
-    style: S_BT_CL,
-    caption: "CL",
-    title: "Clean Hot Bar",
-    onClick: onClick
-  }, "BT_CLEAN") : null;
-};
-
 const _crBtProps = function (index, caption) {
   if (caption === void 0) {
     caption = '';
@@ -80,11 +68,11 @@ const _crBtProps = function (index, caption) {
   };
 };
 
-const _crHotBtItem = (conf, index, _ref2) => {
+const _crHotBtItem = (conf, index, _ref) => {
   let {
     style,
     onShowDialog
-  } = _ref2;
+  } = _ref;
   return /*#__PURE__*/(0, _react.createElement)(_FlatButton.default, { ..._crBtProps(index, conf.caption),
     key: conf.type,
     timeout: 0,
@@ -93,17 +81,17 @@ const _crHotBtItem = (conf, index, _ref2) => {
   });
 };
 
-const HotBar = _ref3 => {
+const HotBar = _ref2 => {
   let {
     maxButtons = 5,
     btStyle,
     closeDialogAction,
     onShowDialog
-  } = _ref3;
+  } = _ref2;
 
   const _maxNumberOfBts = (0, _useRefInit.default)(() => _calcMaxButtons(maxButtons)),
-        [hotButtons, setHotButtons] = (0, _react.useState)([]),
-        _hClean = (0, _react.useCallback)(() => setHotButtons([]), []);
+        [hotButtons, setHotButtons] = (0, _uiApi.useState)([]),
+        _hClean = (0, _uiApi.useCallback)(() => setHotButtons([]), []);
 
   (0, _useListen.default)((actionType, conf) => {
     if (actionType === closeDialogAction) {
@@ -126,10 +114,13 @@ const HotBar = _ref3 => {
       crItem: _crHotBtItem,
       style: btStyle,
       onShowDialog: onShowDialog
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(CleanButton, {
-      is: hotButtons.length !== 0,
+    }), hotButtons.length !== 0 && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+      timeout: 0,
+      style: S_BT_CL,
+      caption: "CL",
+      title: "Clean Hot Bar",
       onClick: _hClean
-    })]
+    }, "BT_CLEAN")]
   });
 };
 

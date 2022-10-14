@@ -1,11 +1,14 @@
-import { useState, useCallback } from 'react'
+import { 
+  useState,
+  useCallback
+} from '../uiApi';
 
-import useRefInit from '../hooks/useRefInit'
-import useListen from '../hooks/useListen'
+import useRefInit from '../hooks/useRefInit';
+import useListen from '../hooks/useListen';
 
-import has from '../has'
-import ItemStack from '../zhn/ItemStack'
-import FlatButton from '../zhn-m/FlatButton'
+import has from '../has';
+import ItemStack from '../zhn/ItemStack';
+import FlatButton from '../zhn-m/FlatButton';
 
 const S_ROOT = { display: 'inline-block' }
 , S_BT_CL = { color: '#f44336' };
@@ -28,18 +31,10 @@ const _calcMaxButtons = (maxButtons) => {
   }
 };
 
-const CleanButton = ({ is, onClick }) => is
- ? <FlatButton
-      key="BT_CLEAN"
-      timeout={0}
-      style={S_BT_CL}
-      caption="CL"
-      title="Clean Hot Bar"
-      onClick={onClick}
-   />
- : null;
-
- const _crBtProps = (index, caption='') => {
+const _crBtProps = (
+  index,
+  caption=''
+) => {
    const _hotKey = has.touch
      ? ''
      : String(index+1);
@@ -48,16 +43,14 @@ const CleanButton = ({ is, onClick }) => is
      caption: _hotKey + caption.substring(0, 3),
      title: caption
    };
- };
-
+};
 
 const _crHotBtItem = (
-  conf,
-  index, {
-    style,
-    onShowDialog
-  }
-) => (
+   conf,
+   index, {
+   style,
+   onShowDialog
+}) => (
    <FlatButton
      {..._crBtProps(index, conf.caption)}
      key={conf.type}
@@ -65,16 +58,19 @@ const _crHotBtItem = (
      style={style}
      onClick={onShowDialog.bind(null, conf.type)}
    />
- );
+);
 
 const HotBar = ({
   maxButtons=5,
-  btStyle,  
+  btStyle,
   closeDialogAction,
   onShowDialog
 }) => {
   const _maxNumberOfBts = useRefInit(() => _calcMaxButtons(maxButtons))
-  , [hotButtons, setHotButtons] = useState([])
+  , [
+    hotButtons,
+    setHotButtons
+  ] = useState([])
   , _hClean = useCallback(() => setHotButtons([]), []);
 
   useListen((actionType, conf) => {
@@ -92,15 +88,19 @@ const HotBar = ({
   return (
     <div style={S_ROOT}>
       <ItemStack
-        items={hotButtons}
-        crItem={_crHotBtItem}
-        style={btStyle}
-        onShowDialog={onShowDialog}
+         items={hotButtons}
+         crItem={_crHotBtItem}
+         style={btStyle}
+         onShowDialog={onShowDialog}
       />
-      <CleanButton
-         is={hotButtons.length !== 0}
+      {hotButtons.length !== 0 && <FlatButton
+         key="BT_CLEAN"
+         timeout={0}
+         style={S_BT_CL}
+         caption="CL"
+         title="Clean Hot Bar"
          onClick={_hClean}
-      />
+      />}
     </div>
   );
 };
