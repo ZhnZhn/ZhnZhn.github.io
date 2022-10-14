@@ -51,7 +51,10 @@ const _useLoad = (
     } = option;
     fetch(uri)
       .then(response => {
-         const {status, statusText} = response;
+         const {
+           status,
+           statusText
+         } = response;
          if (status>=200 && status<400){
             return response.json();
          } else if (status>=400 && status<500){
@@ -60,7 +63,7 @@ const _useLoad = (
          } else if (status>=500 && status<600) {
            if (retryServer !== 0) {
              option.retryServer = retryServer - 1
-             refLoadId.current = setTimeout(loadOptions(option), 3E3)
+             //refLoadId.current = setTimeout(() => loadOptions(option), 3E3)
            } else {
              setLoadingFailed('Server Error:', status + ' ' + statusText)
            }
@@ -69,7 +72,10 @@ const _useLoad = (
       })
       .then(json => {
         if (json) {
-          const { items, propCaption } = crOptions(json, jsonProp);
+          const {
+            items,
+            propCaption
+          } = crOptions(json, jsonProp);
           setState({
             isLoading: false,
             isLoadingFailed: false,
@@ -80,13 +86,16 @@ const _useLoad = (
       })
       .catch((error) => {
         if (retryNetwork === 0){
-          const [errCaption, errDescription] = error instanceof TypeError
+          const [
+            errCaption,
+            errDescription
+          ] = error instanceof TypeError
             ? [ERR_NETWORK.caption,  ERR_NETWORK.descr]
             : [];
           setLoadingFailed(errCaption, errDescription)
         } else {
           option.retryNetwork = retryNetwork - 1;
-          refLoadId.current = setTimeout(loadOptions(option), 2E3);
+          refLoadId.current = setTimeout(() => loadOptions(option), 2E3);
         }
       })
   }, [])
@@ -108,7 +117,10 @@ const useLoadOptions = (
   uri,
   jsonProp
 ) => {
-  const [state, setState] = useState({
+  const [
+    state,
+    setState
+  ] = useState({
     options: [],
     isLoading: true,
     isLoadingFailed: false

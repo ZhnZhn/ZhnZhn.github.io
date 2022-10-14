@@ -60,8 +60,7 @@ const _useLoad = (refLoadId, setLoadingFailed, setState) => {
         return null;
       } else if (status >= 500 && status < 600) {
         if (retryServer !== 0) {
-          option.retryServer = retryServer - 1;
-          refLoadId.current = setTimeout(loadOptions(option), 3E3);
+          option.retryServer = retryServer - 1; //refLoadId.current = setTimeout(() => loadOptions(option), 3E3)
         } else {
           setLoadingFailed('Server Error:', status + ' ' + statusText);
         }
@@ -87,7 +86,7 @@ const _useLoad = (refLoadId, setLoadingFailed, setState) => {
         setLoadingFailed(errCaption, errDescription);
       } else {
         option.retryNetwork = retryNetwork - 1;
-        refLoadId.current = setTimeout(loadOptions(option), 2E3);
+        refLoadId.current = setTimeout(() => loadOptions(option), 2E3);
       }
     });
   }, []); //refLoadId, setLoadingFailed, setState
