@@ -1,11 +1,8 @@
-const C = {
-  //LIMIT_REMAINING: 'X-RateLimit-Remaining',
-  REQ_ERR: 'Request Error',
-  RESP_ERR: 'Response Error',
-
-  MSG_URI_EMPTY: "Item url isn't specified by adapter.",
-  MSG_400: '400: Bad request.',
-};
+//LIMIT_REMAINING: 'X-RateLimit-Remaining',
+const REQ_ERR = 'Request Error'
+, RESP_ERR = 'Response Error'
+, MSG_URI_EMPTY = "Item url isn't specified by adapter."
+, MSG_400 = '400: Bad request.';
 
 const HTTP_CODE_ERR_MSG = {
   403: '403: Forbidden.',
@@ -17,24 +14,35 @@ const HTTP_CODE_ERR_MSG = {
 const _isFn = fn => typeof fn === 'function'
 , _isArr = Array.isArray
 , _assign = Object.assign
-, _noop = () => {};
+, FN_NOOP = () => {};
 
-const _isInArrValue = (arr, value) => _isArr(arr)
-  && arr.indexOf(value) !== -1;
+const _isInArrValue = (
+  arr,
+  value
+) => _isArr(arr) && arr.indexOf(value) !== -1;
 
-const _crErr = (message, errCaption=C.REQ_ERR) => ({
+const _crErr = (
+  message,
+  errCaption=REQ_ERR
+) => ({
   errCaption,
   message
 });
 
-const _throwIfNotStatus = (errStatus, status, msg) => {
+const _throwIfNotStatus = (
+  errStatus,
+  status,
+  msg
+) => {
   if (!_isInArrValue(errStatus, status)) {
     throw _crErr(msg);
   }
 };
 
 const _promiseAll = ({
-  response, propName, status,
+  response,
+  propName,
+  status,
   getLimitRemaiming
 }) => {
   const headers = response.headers
@@ -51,42 +59,58 @@ const _promiseAll = ({
 };
 
 const _fFetch = (propName) => function({
-   uri, option={},
+   uri,
+   option={},
    optionFetch,
    getLimitRemaiming,
-   onCheckResponse=_noop,
-   onFetch, onCompleted,
-   onFailed, onCatch
+   onCheckResponse=FN_NOOP,
+   onFetch,
+   onCompleted,
+   onFailed,
+   onCatch
  }){
   if (!uri) {
     if (_isFn(onFailed)) {
       setTimeout(()=>onFailed(_assign(option, {
-        alertCaption: C.REQ_ERR,
-        alertDescr: C.MSG_URI_EMPTY
+        alertCaption: REQ_ERR,
+        alertDescr: MSG_URI_EMPTY
       })), 0)
     }
     return;
   }
   fetch(uri, optionFetch)
     .then(response => {
-      const { status, statusText, ok } = response
-          , { resErrStatus} = option;
+      const {
+        status,
+        statusText,
+        ok
+      } = response
+      , { resErrStatus} = option;
       if ((status>=200 && status<400) || ok) {
          return _promiseAll({
-           response, propName,
+           response,
+           propName,
            getLimitRemaiming
          });
       } else if (status === 400) {
-         _throwIfNotStatus(resErrStatus, status, C.MSG_400)
-         return _promiseAll({ response, propName, status });
+         _throwIfNotStatus(resErrStatus, status, MSG_400)
+         return _promiseAll({
+           response,
+           propName,
+           status
+         });
       //403,404,429,503
       } else if (HTTP_CODE_ERR_MSG[status]) {
         throw _crErr(HTTP_CODE_ERR_MSG[status]);
       } else if (status>400 && status<500){
          _throwIfNotStatus(resErrStatus, status, `${status}: ${statusText}`)
-         return _promiseAll({ response, propName, status });
+         return _promiseAll({
+           response,
+           propName,
+           status
+         });
       } else if (status>=500 && status<600){
-         throw _crErr(`${status}: ${statusText}`, C.RESP_ERR);
+         throw _crErr(`${status}: ${statusText}`, RESP_ERR);
       } else {
         return [void 0, {}, status];
       }
