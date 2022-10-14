@@ -1,17 +1,19 @@
-import { useState } from 'react';
-//import PropTypes from "prop-types";
-import useListen from '../hooks/useListen'
+import { useState } from '../uiApi';
+import useListen from '../hooks/useListen';
 
 import DialogContainer from '../zhn-containers/DialogContainer';
 
-const CL_ROOT = "hrz-container";
+const CL_HRZ_CONTAINER = "hrz-container";
 
 const BrowserContainer = ({
   initBrowserAction,
   showDialogAction,
   onCloseDialog
 }) => {
-  const [elBrowsers, setElBrowsers] = useState([]);
+  const [
+    elBrowsers,
+    setElBrowsers
+  ] = useState([]);
 
   useListen((actionType, elBrowser) => {
     if (actionType === initBrowserAction){
@@ -19,7 +21,7 @@ const BrowserContainer = ({
     }
   })
   return (
-    <div className={CL_ROOT}>
+    <div className={CL_HRZ_CONTAINER}>
        {elBrowsers}
        <DialogContainer
           maxDialog={3}
@@ -29,16 +31,5 @@ const BrowserContainer = ({
     </div>
   );
 }
-
-/*
-BrowserContainer.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func
-  }),
-  initBrowserAction: PropTypes.string,
-  showDialogAction: PropTypes.string,
-  onCloseDialog: PropTypes.func
-}
-*/
 
 export default BrowserContainer

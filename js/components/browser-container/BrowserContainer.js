@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
@@ -13,8 +13,7 @@ var _DialogContainer = _interopRequireDefault(require("../zhn-containers/DialogC
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-//import PropTypes from "prop-types";
-const CL_ROOT = "hrz-container";
+const CL_HRZ_CONTAINER = "hrz-container";
 
 const BrowserContainer = _ref => {
   let {
@@ -22,14 +21,14 @@ const BrowserContainer = _ref => {
     showDialogAction,
     onCloseDialog
   } = _ref;
-  const [elBrowsers, setElBrowsers] = (0, _react.useState)([]);
+  const [elBrowsers, setElBrowsers] = (0, _uiApi.useState)([]);
   (0, _useListen.default)((actionType, elBrowser) => {
     if (actionType === initBrowserAction) {
       setElBrowsers(arrEl => [elBrowser, ...arrEl]);
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    className: CL_ROOT,
+    className: CL_HRZ_CONTAINER,
     children: [elBrowsers, /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {
       maxDialog: 3,
       showAction: showDialogAction,
@@ -37,17 +36,6 @@ const BrowserContainer = _ref => {
     })]
   });
 };
-/*
-BrowserContainer.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func
-  }),
-  initBrowserAction: PropTypes.string,
-  showDialogAction: PropTypes.string,
-  onCloseDialog: PropTypes.func
-}
-*/
-
 
 var _default = BrowserContainer;
 exports.default = _default;
