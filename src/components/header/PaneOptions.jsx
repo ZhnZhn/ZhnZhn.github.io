@@ -1,9 +1,9 @@
 //import PropTypes from 'prop-types'
-import { useRef, useContext } from 'react'
-import Highcharts from 'highcharts'
+import { useRef, useContext } from '../uiApi';
+import Highcharts from 'highcharts';
 
 import ThemeContext  from '../hoc/ThemeContext'
-import safeFn from '../../utils/safeFn'
+import getFnByPropName from '../../utils/getFnByPropName';
 
 import D from '../dialogs/DialogCell'
 import FlatButton from '../zhn-m/FlatButton'
@@ -39,7 +39,7 @@ const _crHaloOption = (is=false) => ({
 
 const _useProxy = (data) => {
   const _refProxy = useRef()
-  , _setProxy = safeFn(data, SET_PROXY)
+  , _setProxy = getFnByPropName(data, SET_PROXY)
   , _proxy = data.getProxy();
   return [
     _refProxy,
@@ -67,23 +67,26 @@ const _useTheme = (onChangeTheme) => {
 
 const PaneOptions = ({
   isShowLabels,
-  titleStyle, btStyle,
+  titleStyle,
+  btStyle,
   data,
   onClose,
   onChangeTheme
 }) => {
   const [
     _refProxy,
-    _proxy, _setProxy,
-    _hSetProxy, _hClearProxy
+    _proxy,
+    _setProxy,
+    _hSetProxy,
+    _hClearProxy
   ] = _useProxy(data)
   , _hSelectTheme = _useTheme(onChangeTheme)
-  , _hMode = (fnName, mode) => safeFn(data, fnName)(mode)
+  , _hMode = (fnName, mode) => getFnByPropName(data, fnName)(mode)
   , _hSetHalo = is => Highcharts.setOptions(_crHaloOption(is));
 
-  const _isAdminMode = safeFn(data, MODE_ADMIN, false)()
-  , _isDrawDeltaExtrems = safeFn(data, MODE_DELTA, false)()
-  , _isNotZoomToMinMax = safeFn(data, MODE_ZOOM, false)();
+  const _isAdminMode = getFnByPropName(data, MODE_ADMIN, false)()
+  , _isDrawDeltaExtrems = getFnByPropName(data, MODE_DELTA, false)()
+  , _isNotZoomToMinMax = getFnByPropName(data, MODE_ZOOM, false)();
 
   return (
     <div>

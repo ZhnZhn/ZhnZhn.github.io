@@ -5,13 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _highcharts = _interopRequireDefault(require("highcharts"));
 
 var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
 
-var _safeFn = _interopRequireDefault(require("../../utils/safeFn"));
+var _getFnByPropName = _interopRequireDefault(require("../../utils/getFnByPropName"));
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
@@ -46,21 +46,27 @@ const MODE_ADMIN = 'isAdminMode';
 const MODE_DELTA = 'isDrawDeltaExtrems';
 const MODE_ZOOM = 'isNotZoomToMinMax';
 
-const _crHaloOption = (is = false) => ({
-  plotOptions: {
-    series: {
-      states: {
-        hover: {
-          enabled: is
+const _crHaloOption = function (is) {
+  if (is === void 0) {
+    is = false;
+  }
+
+  return {
+    plotOptions: {
+      series: {
+        states: {
+          hover: {
+            enabled: is
+          }
         }
       }
     }
-  }
-});
+  };
+};
 
 const _useProxy = data => {
-  const _refProxy = (0, _react.useRef)(),
-        _setProxy = (0, _safeFn.default)(data, SET_PROXY),
+  const _refProxy = (0, _uiApi.useRef)(),
+        _setProxy = (0, _getFnByPropName.default)(data, SET_PROXY),
         _proxy = data.getProxy();
 
   return [_refProxy, _proxy, _setProxy, () => {
@@ -73,7 +79,7 @@ const _useProxy = data => {
 };
 
 const _useTheme = onChangeTheme => {
-  const theme = (0, _react.useContext)(_ThemeContext.default);
+  const theme = (0, _uiApi.useContext)(_ThemeContext.default);
   return item => {
     if (item && theme.getThemeName() !== item.value) {
       theme.setThemeName(item.value);
@@ -82,22 +88,24 @@ const _useTheme = onChangeTheme => {
   };
 };
 
-const PaneOptions = ({
-  isShowLabels,
-  titleStyle,
-  btStyle,
-  data,
-  onClose,
-  onChangeTheme
-}) => {
+const PaneOptions = _ref => {
+  let {
+    isShowLabels,
+    titleStyle,
+    btStyle,
+    data,
+    onClose,
+    onChangeTheme
+  } = _ref;
+
   const [_refProxy, _proxy, _setProxy, _hSetProxy, _hClearProxy] = _useProxy(data),
         _hSelectTheme = _useTheme(onChangeTheme),
-        _hMode = (fnName, mode) => (0, _safeFn.default)(data, fnName)(mode),
+        _hMode = (fnName, mode) => (0, _getFnByPropName.default)(data, fnName)(mode),
         _hSetHalo = is => _highcharts.default.setOptions(_crHaloOption(is));
 
-  const _isAdminMode = (0, _safeFn.default)(data, MODE_ADMIN, false)(),
-        _isDrawDeltaExtrems = (0, _safeFn.default)(data, MODE_DELTA, false)(),
-        _isNotZoomToMinMax = (0, _safeFn.default)(data, MODE_ZOOM, false)();
+  const _isAdminMode = (0, _getFnByPropName.default)(data, MODE_ADMIN, false)(),
+        _isDrawDeltaExtrems = (0, _getFnByPropName.default)(data, MODE_DELTA, false)(),
+        _isNotZoomToMinMax = (0, _getFnByPropName.default)(data, MODE_ZOOM, false)();
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {

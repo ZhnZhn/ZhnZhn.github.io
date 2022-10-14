@@ -1,6 +1,6 @@
-import fn from '../safeFn'
+import fn from '../getFnByPropName';
 
-describe('safeFn', () => {
+describe('getFnByPropName', () => {
   const obj = {
     fn: () => {}
   }

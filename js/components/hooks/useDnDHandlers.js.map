@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useDnDHandlers.js"
+ ],
+ "file": "../../../src/components/hooks/useDnDHandlers.js",
+ "names": [
+  "useDnDHandlers",
+  "isDraggable",
+  "option",
+  "onDragStart",
+  "onDrop",
+  "onDragEnter",
+  "onDragOver",
+  "onDragLeave",
+  "draggable",
+  "bind"
+ ],
+ "mappings": ";;;;;AACA,MAAMA,cAAc,GAAG;EAAA,IAAC;IACtBC,WADsB;IAEtBC,MAFsB;IAGtBC,WAHsB;IAItBC,MAJsB;IAKtBC,WALsB;IAMtBC,UANsB;IAOtBC;EAPsB,CAAD;EAAA,OAQjBN,WAAW,GACb;IACEO,SAAS,EAAE,IADb;IAEEL,WAAW,EAAEA,WAAW,CAACM,IAAZ,CAAiB,IAAjB,EAAuBP,MAAvB,CAFf;IAGEE,MAAM,EAAEA,MAAM,CAACK,IAAP,CAAY,IAAZ,EAAkBP,MAAlB,CAHV;IAIEG,WAJF;IAKEC,UALF;IAMEC;EANF,CADa,GASb,KAAK,CAjBc;AAAA,CAAvB;;eAmBeP,c"
+}

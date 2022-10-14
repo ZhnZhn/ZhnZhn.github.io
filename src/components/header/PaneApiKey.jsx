@@ -1,7 +1,7 @@
 //import PropTypes from 'prop-types'
 import { Component } from 'react'
 
-import safeFn from '../../utils/safeFn'
+import getFnByPropName from '../../utils/getFnByPropName'
 import ScrollPane from '../zhn/ScrollPane'
 import OpenClose from '../zhn/OpenClose'
 import ItemStack from '../zhn/ItemStack'
@@ -80,7 +80,7 @@ class PaneApiKey extends Component {
     const { data } = props;
 
     for(let i = 1; i<MAX_KEY; i++){
-      this['_setKey'+i] = safeFn(data, 'key'+i)
+      this['_setKey'+i] = getFnByPropName(data, 'key'+i)
     }
   }
 

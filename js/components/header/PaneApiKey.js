@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _safeFn = _interopRequireDefault(require("../../utils/safeFn"));
+var _getFnByPropName = _interopRequireDefault(require("../../utils/getFnByPropName"));
 
 var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 
@@ -115,7 +115,7 @@ class PaneApiKey extends _react.Component {
     } = props;
 
     for (let i = 1; i < MAX_KEY; i++) {
-      this['_setKey' + i] = (0, _safeFn.default)(data, 'key' + i);
+      this['_setKey' + i] = (0, _getFnByPropName.default)(data, 'key' + i);
     }
   }
 
