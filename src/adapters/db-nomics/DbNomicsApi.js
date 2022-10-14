@@ -103,17 +103,16 @@ const _s123FnUrl = (option) => {
   return _crUrl(_seriaId, option);
 };
 
-//IMF WEO
-const _isIdWorldFrom2021Realease = (id, realease) =>
-  id === '001' && parseInt(realease.substring(0, 4), 10) > 2020;
 const _s3S12FnUrl = (option) => {
-  const { items, dfCode, subtitle } = option
+  const {
+    items,
+    dfCode,
+    subtitle
+  } = option
   , v1 = getValue(items[0])
   , v2 = getValue(items[1])
   , v3 = getValue(items[2])
-  //patch for World id 2021 realease
-  , _v1 = _isIdWorldFrom2021Realease(v1, v3) ? '1' : v1
-  , _seriaId = _crSeriaId(option, _v1, v2);
+  , _seriaId = _crSeriaId(option, v1, v2);
   _assign(option, {
     dfCode: `${dfCode}:${v3}`,
     subtitle: (subtitle || []).split(':')[0] || ''
