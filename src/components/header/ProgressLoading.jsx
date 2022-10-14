@@ -1,4 +1,6 @@
-import { memo, useState } from 'react';
+import { useState } from '../uiApi';
+
+import memoEqual from '../hoc/memoEqual';
 import useListen from '../hooks/useListen';
 
 import {
@@ -13,24 +15,34 @@ const COLOR_LOADING = '#2f7ed8'
 , COLOR_FAILED = '#ed5813'
 , COMPLETE_TIMEOUT_MLS = 450;
 
-const _crState = (completed, color) => [
+const _crState = (
+  completed,
+  color
+) => [
   completed,
   color
 ];
 
-const ProgressLoading = () => {
-  const [state, setState] = useState(
+const ProgressLoading = memoEqual(() => {
+  const [
+    state,
+    setState
+  ] = useState(
     ()=>_crState(0, COLOR_LOADING)
   )
-  , [completed, color] = state;
+  , [
+    completed,
+    color
+  ] = state;
 
   useListen(actionType => {
     if (actionType === LPAT_LOADING){
       setState(_crState(35, COLOR_LOADING))
     } else if (actionType === LPAT_LOADING_COMPLETE){
       setTimeout(
-        () => setState(_crState(100, COLOR_LOADING))
-      , COMPLETE_TIMEOUT_MLS)
+        () => setState(_crState(100, COLOR_LOADING)),
+        COMPLETE_TIMEOUT_MLS
+      )
     } else if (actionType === LPAT_LOADING_FAILED){
       setState(_crState(100, COLOR_FAILED))
     }
@@ -43,6 +55,6 @@ const ProgressLoading = () => {
        completed={completed}
     />
   );
-};
+});
 
-export default memo(ProgressLoading)
+export default ProgressLoading
