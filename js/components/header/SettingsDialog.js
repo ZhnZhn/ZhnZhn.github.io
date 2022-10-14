@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 
@@ -51,7 +51,7 @@ const useMenuMore = () => {
   const [isShowLabels, toggleLabels] = (0, _useToggle.default)(IS_WIDE_WIDTH)
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        menuModel = (0, _react.useMemo)(() => ({
+        menuModel = (0, _uiApi.useMemo)(() => ({
     titleCl: CL_ROW,
     pageWidth: 190,
     maxPages: 1,
@@ -75,10 +75,10 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
     onClose
   } = _ref;
 
-  const _refModalDialog = (0, _react.useRef)()
+  const _refModalDialog = (0, _uiApi.useRef)()
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _hClose = (0, _react.useCallback)(() => {
+        _hClose = (0, _uiApi.useCallback)(() => {
     onClose();
     const _compDialog = _refModalDialog.current;
 

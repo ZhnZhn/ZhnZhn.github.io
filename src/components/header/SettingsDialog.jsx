@@ -1,9 +1,9 @@
+//import PropTypes from 'prop-types'
 import {
   useRef,
   useCallback,
   useMemo
-} from 'react';
-//import PropTypes from 'prop-types'
+} from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
@@ -33,7 +33,10 @@ const IS_WIDE_WIDTH = has.wideWidth()
 , _isFn = fn => typeof fn === 'function';
 
 const useMenuMore = () => {
-  const [isShowLabels, toggleLabels] = useToggle(IS_WIDE_WIDTH)
+  const [
+    isShowLabels,
+    toggleLabels
+  ] = useToggle(IS_WIDE_WIDTH)
   /*eslint-disable react-hooks/exhaustive-deps */
   , menuModel = useMemo(() => ({
     titleCl: CL_ROW,
@@ -48,7 +51,10 @@ const useMenuMore = () => {
   }), [])
   //toggleLabels
   /*eslint-enable react-hooks/exhaustive-deps */
-  return [isShowLabels, menuModel];
+  return [
+    isShowLabels,
+    menuModel
+  ];
 };
 
 const SettingsDialog = memoIsShow(({
@@ -67,7 +73,10 @@ const SettingsDialog = memoIsShow(({
   }, [])
   // onClose
   /*eslint-enable react-hooks/exhaustive-deps */
-  , [isShowLabels, menuModel] = useMenuMore()
+  , [
+    isShowLabels,
+    menuModel
+  ] = useMenuMore()
   , _style = isShowLabels
       ? S_MODAL
       : {...S_MODAL, ...S_MODAL_SMALL}
