@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
@@ -20,7 +20,7 @@ const S_LABEL = {
 };
 
 const LimitRemainingLabel = () => {
-  const [value, setValue] = (0, _react.useState)('');
+  const [value, setValue] = (0, _uiApi.useState)('');
   (0, _useListen.default)(v => {
     if (v != null) {
       setValue(v);
