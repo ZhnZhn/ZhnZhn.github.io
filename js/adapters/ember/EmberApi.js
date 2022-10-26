@@ -2,16 +2,22 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+
+var _AdapterFn = require("../AdapterFn");
+
 const URL = './data/ember/annual';
-const _isArr = Array.isArray;
+const GENERAL_TOTAL_GEO = 'general-total';
+
+const _isTotalShare = (source, metric) => source === 'total' && metric === 'share';
+
 const EmberApi = {
   getRequestUrl(option) {
     const {
       items
     } = option,
-          geo = items[0].v,
-          source = items[1].v,
-          metric = items[2].v;
+          metric = items[1].v,
+          source = items[2].v,
+          geo = _isTotalShare(source, metric) ? GENERAL_TOTAL_GEO : items[0].v;
     return URL + "/" + metric + "/" + source + "/" + geo + ".json";
   },
 
@@ -19,7 +25,7 @@ const EmberApi = {
     const {
       data
     } = json || {};
-    return _isArr(data);
+    return (0, _AdapterFn.isArr)(data);
   }
 
 };

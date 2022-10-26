@@ -1,22 +1,29 @@
+import { isArr } from '../AdapterFn';
 
 const URL = './data/ember/annual';
+const GENERAL_TOTAL_GEO = 'general-total';
 
-const _isArr = Array.isArray;
+const _isTotalShare = (
+  source,
+  metric
+) => source === 'total' && metric === 'share';
 
 const EmberApi = {
   getRequestUrl(option){
     const {
       items
     } = option
-    , geo = items[0].v
-    , source = items[1].v
-    , metric = items[2].v;
+    , metric = items[1].v
+    , source = items[2].v
+    , geo = _isTotalShare(source, metric)
+       ? GENERAL_TOTAL_GEO
+       : items[0].v;
     return `${URL}/${metric}/${source}/${geo}.json`;
   },
 
   checkResponse(json){
     const { data } = json || {};
-    return _isArr(data);
+    return isArr(data);
   }
 };
 
