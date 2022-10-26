@@ -37,12 +37,13 @@ import {
 } from './getterPointFn';
 
 export const _isNaN = Number.isNaN
+export const isNumber = n => typeof n === 'number'
+  && (n - n) === 0;
+export const isNumberOrNull = v => isNumber(v) || v === null
 
 const EMPTY = '';
 
 const _isArr = Array.isArray
-, _isNumber = n => typeof n === 'number'
-    && (n - n) === 0;
 const _fIsNumber = (pn) => (p) => {
   return typeof p[pn] === 'number'
     && isFinite(p[pn]);
@@ -61,7 +62,7 @@ export const isTokenInStr = (
   token
 ) => (str || '').indexOf(token) !== -1
 
-export const toTd = (mls) => _isNumber(mls)
+export const toTd = (mls) => isNumber(mls)
   ? _toTd(mls)
   : ''
 
@@ -69,7 +70,6 @@ export const getCaption = getC
 export const getValue = getV
 
 export const numberFormat = formatAllNumber
-export const isNumberOrNull = v => _isNumber(v) || v === null
 export const isYNumber = _fIsNumber('y')
 export const toFloatOrEmpty = _fToFloatOr('')
 

@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundBy = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.crZhConfig = exports.crValueMoving = exports._isNaN = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundBy = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.crZhConfig = exports.crValueMoving = exports._isNaN = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
@@ -46,10 +46,16 @@ var _getterPointFn = require("./getterPointFn");
 
 const _isNaN = Number.isNaN;
 exports._isNaN = _isNaN;
-const EMPTY = '';
 
-const _isArr = Array.isArray,
-      _isNumber = n => typeof n === 'number' && n - n === 0;
+const isNumber = n => typeof n === 'number' && n - n === 0;
+
+exports.isNumber = isNumber;
+
+const isNumberOrNull = v => isNumber(v) || v === null;
+
+exports.isNumberOrNull = isNumberOrNull;
+const EMPTY = '';
+const _isArr = Array.isArray;
 
 const _fIsNumber = pn => p => {
   return typeof p[pn] === 'number' && isFinite(p[pn]);
@@ -69,7 +75,7 @@ const isTokenInStr = (str, token) => (str || '').indexOf(token) !== -1;
 
 exports.isTokenInStr = isTokenInStr;
 
-const toTd = mls => _isNumber(mls) ? (0, _dateFormat.toTd)(mls) : '';
+const toTd = mls => isNumber(mls) ? (0, _dateFormat.toTd)(mls) : '';
 
 exports.toTd = toTd;
 const getCaption = _getPropertyFn.getC;
@@ -78,10 +84,6 @@ const getValue = _getPropertyFn.getV;
 exports.getValue = getValue;
 const numberFormat = _formatAllNumber.default;
 exports.numberFormat = numberFormat;
-
-const isNumberOrNull = v => _isNumber(v) || v === null;
-
-exports.isNumberOrNull = isNumberOrNull;
 
 const isYNumber = _fIsNumber('y');
 
