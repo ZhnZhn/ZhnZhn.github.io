@@ -37,13 +37,13 @@ import {
 } from './getterPointFn';
 
 export const _isNaN = Number.isNaN
+export const isArr = Array.isArray
 export const isNumber = n => typeof n === 'number'
   && (n - n) === 0;
 export const isNumberOrNull = v => isNumber(v) || v === null
 
 const EMPTY = '';
 
-const _isArr = Array.isArray
 const _fIsNumber = (pn) => (p) => {
   return typeof p[pn] === 'number'
     && isFinite(p[pn]);
@@ -84,8 +84,11 @@ export const crValueMoving = ({
   dfR
 })
 
-export const valueMoving = (data, dfR) => {
-  if (!_isArr(data)) {
+export const valueMoving = (
+  data,
+  dfR
+) => {
+  if (!isArr(data)) {
     return {
       date: data,
       direction: DT_EMPTY
