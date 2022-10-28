@@ -5,10 +5,10 @@
  ],
  "file": "../../../src/adapters/stat-uk/OnsAdapter.js",
  "names": [
+  "OnsAdapter",
+  "crAdapterType1",
   "crData",
-  "fnAdapter",
-  "addConfOption",
-  "OnsAdapter"
+  "addConfOption"
  ],
- "mappings": ";;;;;;;AAAA;;AACA;;IAEQA,M,GAA0BC,qB,CAA1BD,M;IAAQE,a,GAAkBD,qB,CAAlBC,a;AAEhB,IAAMC,UAAU,GAAG,+BAAe;AAChCH,EAAAA,MAAM,EAANA,MADgC;AACxBE,EAAAA,aAAa,EAAbA;AADwB,CAAf,CAAnB;eAIeC,U"
+ "mappings": ";;;;;;;AAAA;;AACA;;AAKA,MAAMA,UAAU,GAAG,IAAAC,sBAAA,EAAe;EAChCC,MAAM,EAANA,iBADgC;EAEhCC,aAAa,EAAbA;AAFgC,CAAf,CAAnB;eAKeH,U"
 }

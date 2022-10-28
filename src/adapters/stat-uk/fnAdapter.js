@@ -1,14 +1,10 @@
 import {
   isNumber,
-  getValue,
   ymdToUTC,
   joinBy
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
-import {
-  crError,
-  crItemLink
-} from '../crFn';
+import { crItemLink } from '../crFn';
 
 const _crItemLink = crItemLink.bind(null, 'ONS Dataset Metadata');
 
@@ -25,14 +21,14 @@ const MONTH_HM = {
   Oct: '10',
   Nov: '11',
   Dec: '12'
-}
+};
 
 const QUARTER_HM = {
   q1: "03",
   q2: "06",
   q3: "09",
   q4: "12"
-}
+};
 
 const _getTimeObj = dimensions => (dimensions || {})
   .Time || {};
@@ -48,7 +44,10 @@ const _mmmYyToMls = str => {
 
 //2010-q1
 const _yyyyQqToMls = str => {
-  const [ _yyyy, _q='' ] = str && str.split('-') || []
+  const [
+    _yyyy,
+    _q=''
+  ] = str && str.split('-') || []
   , _mm = QUARTER_HM[_q.trim().toLowerCase()];
   return _yyyy && _mm
     ? ymdToUTC(`${_yyyy}-${_mm}`)
@@ -57,17 +56,24 @@ const _yyyyQqToMls = str => {
 
 const _fCrToMls = observations => {
   const _item = observations[0] || {}
-  , { href='' } = _getTimeObj(_item.dimensions)
-  return href.indexOf('yyyy-qq') !== -1
+  , { href } = _getTimeObj(_item.dimensions)
+  return (href || '').indexOf('yyyy-qq') !== -1
     ? _yyyyQqToMls
     : _mmmYyToMls;
 }
 
-const _crName = ({ unit_of_measure }, { title, subtitle }) =>
-  joinBy(': ', subtitle, title, unit_of_measure);
+const _crName = (
+ { unit_of_measure }, {
+   title,
+   subtitle
+}) => joinBy(': ', subtitle, title, unit_of_measure);
 
-const _crDescr = ({ links }) => {
-  const { href } = (links || {}).dataset_metadata || {};
+const _crDescr = ({
+  links
+}) => {
+  const {
+    href
+  } = (links || {}).dataset_metadata || {};
   return href ? _crItemLink(href) : '';
 }
 
@@ -80,30 +86,26 @@ const _crInfo = (
 })
 
 
-const fnAdapter = {
-  getValue,
-  crError,
-
-  crData: (json) => {
-    const _data = []
-    , { observations } = json
-    , _toMsl = _fCrToMls(observations);
-    let i=0;
-    for (;i<observations.length; i++){
-      const item = observations[i]
-      , { dimensions, observation } = item
-      , { id } = _getTimeObj(dimensions)
-      , _x = _toMsl(id)
-      , _y = parseFloat(observation)
-      if (isNumber(_x) && isNumber(_y)) {
-        _data.push([_x, _y])
-      }
-    }
-    return _data.sort(compareByDate);
-  },
-  addConfOption: (option, json) => ({
-    info: _crInfo(json, option)
-  })
+export const crData = (
+  json
+) => {
+  const { observations } = json
+  , _toMsl = _fCrToMls(observations);
+  return observations.reduce((_data, item) => {
+     const { dimensions, observation } = item
+     , { id } = _getTimeObj(dimensions)
+     , _x = _toMsl(id)
+     , _y = parseFloat(observation);
+     if (isNumber(_x) && isNumber(_y)) {
+       _data.push([_x, _y])
+     }
+     return _data;
+  }, []).sort(compareByDate);
 }
 
-export default fnAdapter
+export const addConfOption = (
+  option,
+  json
+) => ({
+  info: _crInfo(json, option)
+})

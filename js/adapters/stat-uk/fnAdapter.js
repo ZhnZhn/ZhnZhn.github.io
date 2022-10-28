@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.crData = exports.addConfOption = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
@@ -55,10 +55,10 @@ const _yyyyQqToMls = str => {
 const _fCrToMls = observations => {
   const _item = observations[0] || {},
         {
-    href = ''
+    href
   } = _getTimeObj(_item.dimensions);
 
-  return href.indexOf('yyyy-qq') !== -1 ? _yyyyQqToMls : _mmmYyToMls;
+  return (href || '').indexOf('yyyy-qq') !== -1 ? _yyyyQqToMls : _mmmYyToMls;
 };
 
 const _crName = (_ref, _ref2) => {
@@ -87,41 +87,36 @@ const _crInfo = (json, option) => ({
   description: _crDescr(json)
 });
 
-const fnAdapter = {
-  getValue: _AdapterFn.getValue,
-  crError: _crFn.crError,
-  crData: json => {
-    const _data = [],
+const crData = json => {
+  const {
+    observations
+  } = json,
+        _toMsl = _fCrToMls(observations);
+
+  return observations.reduce((_data, item) => {
+    const {
+      dimensions,
+      observation
+    } = item,
           {
-      observations
-    } = json,
-          _toMsl = _fCrToMls(observations);
+      id
+    } = _getTimeObj(dimensions),
+          _x = _toMsl(id),
+          _y = parseFloat(observation);
 
-    let i = 0;
-
-    for (; i < observations.length; i++) {
-      const item = observations[i],
-            {
-        dimensions,
-        observation
-      } = item,
-            {
-        id
-      } = _getTimeObj(dimensions),
-            _x = _toMsl(id),
-            _y = parseFloat(observation);
-
-      if ((0, _AdapterFn.isNumber)(_x) && (0, _AdapterFn.isNumber)(_y)) {
-        _data.push([_x, _y]);
-      }
+    if ((0, _AdapterFn.isNumber)(_x) && (0, _AdapterFn.isNumber)(_y)) {
+      _data.push([_x, _y]);
     }
 
-    return _data.sort(_compareByFn.compareByDate);
-  },
-  addConfOption: (option, json) => ({
-    info: _crInfo(json, option)
-  })
+    return _data;
+  }, []).sort(_compareByFn.compareByDate);
 };
-var _default = fnAdapter;
-exports.default = _default;
+
+exports.crData = crData;
+
+const addConfOption = (option, json) => ({
+  info: _crInfo(json, option)
+});
+
+exports.addConfOption = addConfOption;
 //# sourceMappingURL=fnAdapter.js.map

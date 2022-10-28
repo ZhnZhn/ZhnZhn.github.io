@@ -1,80 +1,85 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _AdapterFn = require("../AdapterFn");
 
-var getValue = _fnAdapter["default"].getValue,
-    crError = _fnAdapter["default"].crError;
-var C = {
-  ROOT: 'https://api.beta.ons.gov.uk/v1/datasets/',
-  EDT: '/editions/time-series/versions/',
-  OBS: '/observations?',
-  QUERY_TIME: '&time=*',
-  QUERY_TAIL: '&time=*&geography=K02000001'
-};
-var _isArr = Array.isArray;
+var _crFn = require("../crFn");
 
-var _crUrl = function _crUrl(item, vers) {
+const API_URL = 'https://api.beta.ons.gov.uk/v1/datasets/',
+      EDT = '/editions/time-series/versions/',
+      OBS = '/observations?',
+      QUERY_TIME = '&time=*',
+      QUERY_TAIL = '&time=*&geography=K02000001';
+
+const _crUrl = function (item, vers) {
   if (vers === void 0) {
     vers = 1;
   }
 
-  return C.ROOT + item + C.EDT + vers + C.OBS;
+  return API_URL + item + EDT + vers + OBS;
 };
 
-var _crTradeUrl = function _crTradeUrl(_ref) {
-  var items = _ref.items;
-  var v1 = getValue(items[0]),
-      v2 = getValue(items[1]),
-      v3 = getValue(items[2]);
-  return _crUrl('trade') + "countriesandterritories=" + v1 + "&standardindustrialtradeclassification=" + v2 + "&direction=" + v3 + C.QUERY_TAIL;
+const _crTradeUrl = _ref => {
+  let {
+    items
+  } = _ref;
+  const v1 = (0, _AdapterFn.getValue)(items[0]),
+        v2 = (0, _AdapterFn.getValue)(items[1]),
+        v3 = (0, _AdapterFn.getValue)(items[2]);
+  return _crUrl('trade') + "countriesandterritories=" + v1 + "&standardindustrialtradeclassification=" + v2 + "&direction=" + v3 + QUERY_TAIL;
 };
 
-var _crCpiUrl = function _crCpiUrl(_ref2) {
-  var items = _ref2.items;
-  var v1 = getValue(items[0]);
-  return _crUrl('cpih01') + "aggregate=" + v1 + C.QUERY_TAIL;
+const _crCpiUrl = _ref2 => {
+  let {
+    items
+  } = _ref2;
+  const v1 = (0, _AdapterFn.getValue)(items[0]);
+  return _crUrl('cpih01') + "aggregate=" + v1 + QUERY_TAIL;
 };
 
-var _crPhriUrl = function _crPhriUrl(_ref3) {
-  var items = _ref3.items;
-  var v1 = getValue(items[0]),
-      v2 = getValue(items[1]);
-  return _crUrl('index-private-housing-rental-prices') + "geography=" + v1 + "&indexandyearchange=" + v2 + C.QUERY_TIME;
+const _crPhriUrl = _ref3 => {
+  let {
+    items
+  } = _ref3;
+  const v1 = (0, _AdapterFn.getValue)(items[0]),
+        v2 = (0, _AdapterFn.getValue)(items[1]);
+  return _crUrl('index-private-housing-rental-prices') + "geography=" + v1 + "&indexandyearchange=" + v2 + QUERY_TIME;
 };
 
-var _crGdpUrl = function _crGdpUrl(_ref4) {
-  var items = _ref4.items;
-  var v1 = getValue(items[0]),
-      v2 = getValue(items[1]),
-      v3 = getValue(items[2]);
-  return _crUrl('regional-gdp-by-quarter') + "geography=" + v1 + "&unofficialstandardindustrialclassification=" + v2 + "&growthrate=" + v3 + "&prices=cvm" + C.QUERY_TIME;
+const _crGdpUrl = _ref4 => {
+  let {
+    items
+  } = _ref4;
+  const v1 = (0, _AdapterFn.getValue)(items[0]),
+        v2 = (0, _AdapterFn.getValue)(items[1]),
+        v3 = (0, _AdapterFn.getValue)(items[2]);
+  return _crUrl('regional-gdp-by-quarter') + "geography=" + v1 + "&unofficialstandardindustrialclassification=" + v2 + "&growthrate=" + v3 + "&prices=cvm" + QUERY_TIME;
 };
 
-var _rCrUrl = {
+const _rCrUrl = {
   '21': _crTradeUrl,
   '34': _crCpiUrl,
   '20': _crPhriUrl,
   '5': _crGdpUrl
 };
-var OnsApi = {
-  getRequestUrl: function getRequestUrl(option) {
+const OnsApi = {
+  getRequestUrl(option) {
     var _rCrUrl$option$dfV;
 
     return (_rCrUrl$option$dfV = _rCrUrl[option.dfV]) == null ? void 0 : _rCrUrl$option$dfV.call(_rCrUrl, option);
   },
-  checkResponse: function checkResponse(json) {
-    if (!(json && _isArr(json.observations))) {
-      throw crError();
+
+  checkResponse(json) {
+    if (!(json && (0, _AdapterFn.isArr)(json.observations))) {
+      throw (0, _crFn.crError)();
     }
 
     return true;
   }
+
 };
 var _default = OnsApi;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=OnsApi.js.map

@@ -1,46 +1,51 @@
-import fnAdapter from './fnAdapter';
+import {
+  isArr,
+  getValue
+} from '../AdapterFn';
+import { crError } from '../crFn';
 
-const {
-  getValue,
-  crError
-} = fnAdapter;
+const API_URL = 'https://api.beta.ons.gov.uk/v1/datasets/'
+, EDT = '/editions/time-series/versions/'
+, OBS = '/observations?'
+, QUERY_TIME = '&time=*'
+, QUERY_TAIL = '&time=*&geography=K02000001';
 
-const C = {
-  ROOT: 'https://api.beta.ons.gov.uk/v1/datasets/',
-  EDT: '/editions/time-series/versions/',
-  OBS: '/observations?',
-  QUERY_TIME: '&time=*',
-  QUERY_TAIL: '&time=*&geography=K02000001'
-};
+const _crUrl = (
+  item,
+  vers=1
+) => API_URL + item + EDT + vers + OBS;
 
-const _isArr = Array.isArray;
-
-
-const _crUrl = (item, vers=1) => C.ROOT+item+C.EDT+vers+C.OBS;
-
-const _crTradeUrl = ({ items }) => {
+const _crTradeUrl = ({
+  items
+}) => {
   const v1 = getValue(items[0])
   , v2 = getValue(items[1])
   , v3 = getValue(items[2]);
-  return `${_crUrl('trade')}countriesandterritories=${v1}&standardindustrialtradeclassification=${v2}&direction=${v3}${C.QUERY_TAIL}`;
+  return `${_crUrl('trade')}countriesandterritories=${v1}&standardindustrialtradeclassification=${v2}&direction=${v3}${QUERY_TAIL}`;
 }
 
-const _crCpiUrl = ({ items }) => {
+const _crCpiUrl = ({
+  items
+}) => {
   const v1 = getValue(items[0]);
-  return `${_crUrl('cpih01')}aggregate=${v1}${C.QUERY_TAIL}`;
+  return `${_crUrl('cpih01')}aggregate=${v1}${QUERY_TAIL}`;
 }
 
-const _crPhriUrl = ({ items }) => {
+const _crPhriUrl = ({
+  items
+}) => {
   const v1 = getValue(items[0])
   , v2 = getValue(items[1]);
-  return `${_crUrl('index-private-housing-rental-prices')}geography=${v1}&indexandyearchange=${v2}${C.QUERY_TIME}`;
+  return `${_crUrl('index-private-housing-rental-prices')}geography=${v1}&indexandyearchange=${v2}${QUERY_TIME}`;
 }
 
-const _crGdpUrl = ({ items }) => {
+const _crGdpUrl = ({
+  items
+}) => {
   const v1 = getValue(items[0])
   , v2 = getValue(items[1])
   , v3 = getValue(items[2]);
-  return `${_crUrl('regional-gdp-by-quarter')}geography=${v1}&unofficialstandardindustrialclassification=${v2}&growthrate=${v3}&prices=cvm${C.QUERY_TIME}`;
+  return `${_crUrl('regional-gdp-by-quarter')}geography=${v1}&unofficialstandardindustrialclassification=${v2}&growthrate=${v3}&prices=cvm${QUERY_TIME}`;
 }
 
 const _rCrUrl = {
@@ -48,7 +53,7 @@ const _rCrUrl = {
   '34': _crCpiUrl,
   '20': _crPhriUrl,
   '5': _crGdpUrl
-}
+};
 
 const OnsApi = {
   getRequestUrl(option){
@@ -56,11 +61,11 @@ const OnsApi = {
   },
 
   checkResponse(json){
-    if (!(json && _isArr(json.observations))) {
+    if (!(json && isArr(json.observations))) {
       throw crError();
     }
     return true;
   }
-}
+};
 
 export default OnsApi
