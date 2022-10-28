@@ -10,15 +10,15 @@ var _AdapterFn = require("../AdapterFn");
 exports.isYNumber = _AdapterFn.isYNumber;
 exports.roundBy = _AdapterFn.roundBy;
 exports.toUpperCaseFirst = _AdapterFn.toUpperCaseFirst;
+exports.crError = _AdapterFn.crError;
 
 var _crFn = require("../crFn");
 
-exports.crError = _crFn.crError;
 exports.crId = _crFn.crId;
 
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
-const _keys = Object.keys,
+const _getObjectKeys = Object.keys,
       _crTitle = country => "Statisctics " + country + ": All Items",
       TITLE_NST = _crTitle('Norway'),
       TITLE_SWS = _crTitle('Sweden');
@@ -46,7 +46,6 @@ const SEARCH_NST = {
   title: "CSO Ireland Web PxStat"
 };
 const MAX_SOURCE_ID_LENGTH = 9;
-const _assign = Object.assign;
 
 const _crSearchToken = label => {
   const _arr = (label || '').toString().split(',');
@@ -135,10 +134,10 @@ const _crAreaMapSlice = _ref5 => {
   const mapSlice = {};
   items.forEach(item => {
     if (item.slice) {
-      _assign(mapSlice, item.slice);
+      (0, _AdapterFn.assign)(mapSlice, item.slice);
     }
   });
-  return _assign(mapSlice, dfTSlice);
+  return (0, _AdapterFn.assign)(mapSlice, dfTSlice);
 };
 
 const _getDimensionWithouTime = ds => {
@@ -150,7 +149,7 @@ const _getDimensionWithouTime = ds => {
 const _crTimesFromDs = (json, timeId) => {
   const _dim = json.dimension[timeId],
         label = ((_dim || {}).category || {}).label;
-  return _keys(label).map(k => label[k]);
+  return _getObjectKeys(label).map(k => label[k]);
 };
 
 const _getTimeDimension = (ds, timeId, json) => {

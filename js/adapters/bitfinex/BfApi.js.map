@@ -1,1 +1,32 @@
-{"version":3,"sources":["../../../src/adapters/bitfinex/BfApi.js"],"names":["C","URL","_isArr","Array","isArray","_crDfUrl","option","proxy","items","v","pair","timeframe","limit","_crObUrl","len","_rCrUrl","DF","OB","BfApi","getRequestUrl","dfSubId","_crUrl","checkResponse","json"],"mappings":";;;;;AAAA;;AAEA,MAAMA,CAAC,GAAG;AACRC,EAAAA,GAAG,EAAE;AADG,CAAV;AAIA,MAAMC,MAAM,GAAGC,KAAK,CAACC,OAArB;;AAGA,MAAMC,QAAQ,GAAIC,MAAD,IAAY;AAC3B,QAAM;AAAEC,IAAAA,KAAF;AAASC,IAAAA,KAAK,GAAC;AAAf,MAAsBF,MAA5B;AAAA,QACE;AAACG,IAAAA,CAAC,EAACC;AAAH,MAAWF,KAAK,CAAC,CAAD,CADlB;AAAA,QAEE;AAACC,IAAAA,CAAC,EAACE;AAAH,MAAgBH,KAAK,CAAC,CAAD,CAFvB;AAAA,QAGE;AAACC,IAAAA,CAAC,EAACG;AAAH,MAAYJ,KAAK,CAAC,CAAD,CAHnB;AAIAF,EAAAA,MAAM,CAACK,SAAP,GAAmBA,SAAnB;AACA,cAAUJ,KAAV,GAAkBP,CAAC,CAACC,GAApB,uBAAyCU,SAAzC,UAAuDD,IAAvD,oBAA0EE,KAA1E;AACD,CAPD;;AASA,MAAMC,QAAQ,GAAIP,MAAD,IAAY;AAC3B,QAAM;AAAEC,IAAAA,KAAF;AAASC,IAAAA,KAAK,GAAC;AAAf,MAAsBF,MAA5B;AAAA,QACE;AAACG,IAAAA,CAAC,EAACC;AAAH,MAAWF,KAAK,CAAC,CAAD,CADlB;AAAA,QAEE;AAACC,IAAAA,CAAC,EAACK;AAAH,MAAUN,KAAK,CAAC,CAAD,CAFjB;AAGA,cAAUD,KAAV,GAAkBP,CAAC,CAACC,GAApB,eAAiCS,IAAjC,gBAAgDI,GAAhD;AACD,CALD;;AAQA,MAAMC,OAAO,GAAG;AACdC,EAAAA,EAAE,EAAEX,QADU;AAEdY,EAAAA,EAAE,EAAEJ;AAFU,CAAhB;AAKA,MAAMK,KAAK,GAAG;AACZC,EAAAA,aAAa,CAACb,MAAD,EAAQ;AACnB,UAAM;AAAEc,MAAAA;AAAF,QAAcd,MAApB;AAAA,UACEe,MAAM,GAAGD,OAAO,IAAIL,OAAO,CAACK,OAAD,CAAlB,IACJL,OAAO,CAACC,EAFf;;AAGA,WAAOK,MAAM,CAACf,MAAD,CAAb;AACD,GANW;;AAQZgB,EAAAA,aAAa,CAACC,IAAD,EAAOjB,MAAP,EAAc;AACzB,QAAI,CAACJ,MAAM,CAACqB,IAAD,CAAX,EAAmB;AACjB,YAAM,oBAAN;AACD;;AACD,WAAO,IAAP;AACD;;AAbW,CAAd;eAgBeL,K","sourcesContent":["import { crError } from '../crFn';\r\n\r\nconst C = {\r\n  URL: \"https://api-pub.bitfinex.com/v2\"\r\n};\r\n\r\nconst _isArr = Array.isArray;\r\n\r\n\r\nconst _crDfUrl = (option) => {\r\n  const { proxy, items=[] } = option\r\n  , {v:pair} = items[0]\r\n  , {v:timeframe} = items[1]\r\n  , {v:limit} = items[2];\r\n  option.timeframe = timeframe\r\n  return `${proxy}${C.URL}/candles/trade:${timeframe}:t${pair}/hist?limit=${limit}`\r\n};\r\n\r\nconst _crObUrl = (option) => {\r\n  const { proxy, items=[] } = option\r\n  , {v:pair} = items[0]\r\n  , {v:len} = items[1];\r\n  return `${proxy}${C.URL}/book/t${pair}/P0?len=${len}`\r\n};\r\n\r\n\r\nconst _rCrUrl = {\r\n  DF: _crDfUrl,\r\n  OB: _crObUrl\r\n};\r\n\r\nconst BfApi = {\r\n  getRequestUrl(option){\r\n    const { dfSubId } = option\r\n    , _crUrl = dfSubId && _rCrUrl[dfSubId]\r\n        || _rCrUrl.DF\r\n    return _crUrl(option);\r\n  },\r\n\r\n  checkResponse(json, option){\r\n    if (!_isArr(json)) {\r\n      throw crError();\r\n    }\r\n    return true;\r\n  }\r\n};\r\n\r\nexport default BfApi\r\n"],"file":"BfApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bitfinex/BfApi.js"
+ ],
+ "file": "../../../src/adapters/bitfinex/BfApi.js",
+ "names": [
+  "API_URL",
+  "_crDfUrl",
+  "option",
+  "proxy",
+  "items",
+  "v",
+  "pair",
+  "timeframe",
+  "limit",
+  "_crObUrl",
+  "len",
+  "_rCrUrl",
+  "DF",
+  "OB",
+  "BfApi",
+  "getRequestUrl",
+  "dfSubId",
+  "_crUrl",
+  "checkResponse",
+  "json",
+  "isArr",
+  "crError"
+ ],
+ "mappings": ";;;;;AAAA;;AAKA,MAAMA,OAAO,GAAG,iCAAhB;;AAEA,MAAMC,QAAQ,GACZC,MADe,IAEZ;EACH,MAAM;IAAEC,KAAF;IAASC,KAAK,GAAC;EAAf,IAAsBF,MAA5B;EAAA,MACE;IAACG,CAAC,EAACC;EAAH,IAAWF,KAAK,CAAC,CAAD,CADlB;EAAA,MAEE;IAACC,CAAC,EAACE;EAAH,IAAgBH,KAAK,CAAC,CAAD,CAFvB;EAAA,MAGE;IAACC,CAAC,EAACG;EAAH,IAAYJ,KAAK,CAAC,CAAD,CAHnB;EAIAF,MAAM,CAACK,SAAP,GAAmBA,SAAnB;EACA,YAAUJ,KAAV,GAAkBH,OAAlB,uBAA2CO,SAA3C,UAAyDD,IAAzD,oBAA4EE,KAA5E;AACD,CATD;;AAWA,MAAMC,QAAQ,GAAG,QAGX;EAAA,IAHY;IAChBN,KADgB;IAEhBC,KAAK,GAAC;EAFU,CAGZ;EACJ,MAAM;IAACC,CAAC,EAACC;EAAH,IAAWF,KAAK,CAAC,CAAD,CAAtB;EAAA,MACE;IAACC,CAAC,EAACK;EAAH,IAAUN,KAAK,CAAC,CAAD,CADjB;EAEA,YAAUD,KAAV,GAAkBH,OAAlB,eAAmCM,IAAnC,gBAAkDI,GAAlD;AACD,CAPD;;AASA,MAAMC,OAAO,GAAG;EACdC,EAAE,EAAEX,QADU;EAEdY,EAAE,EAAEJ;AAFU,CAAhB;AAKA,MAAMK,KAAK,GAAG;EACZC,aAAa,CAACb,MAAD,EAAQ;IACnB,MAAM;MAAEc;IAAF,IAAcd,MAApB;IAAA,MACEe,MAAM,GAAGD,OAAO,IAAIL,OAAO,CAACK,OAAD,CAAlB,IACJL,OAAO,CAACC,EAFf;;IAGA,OAAOK,MAAM,CAACf,MAAD,CAAb;EACD,CANW;;EAQZgB,aAAa,CAACC,IAAD,EAAOjB,MAAP,EAAc;IACzB,IAAI,CAAC,IAAAkB,gBAAA,EAAMD,IAAN,CAAL,EAAkB;MAChB,MAAM,IAAAE,kBAAA,GAAN;IACD;;IACD,OAAO,IAAP;EACD;;AAbW,CAAd;eAgBeP,K"
+}

@@ -5,8 +5,6 @@ exports.default = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
-var _crFn = require("../crFn");
-
 const API_URL = 'https://api.beta.ons.gov.uk/v1/datasets/',
       EDT = '/editions/time-series/versions/',
       OBS = '/observations?',
@@ -73,7 +71,7 @@ const OnsApi = {
 
   checkResponse(json) {
     if (!(json && (0, _AdapterFn.isArr)(json.observations))) {
-      throw (0, _crFn.crError)();
+      throw (0, _AdapterFn.crError)();
     }
 
     return true;

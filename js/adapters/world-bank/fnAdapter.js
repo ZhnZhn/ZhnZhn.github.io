@@ -3,13 +3,9 @@
 exports.__esModule = true;
 exports.getCi = exports.crError = exports.crData = exports.crConfOption = void 0;
 
-var _crFn = require("../crFn");
-
-exports.crError = _crFn.crError;
-
 var _AdapterFn = require("../AdapterFn");
 
-const _isArr = Array.isArray;
+exports.crError = _AdapterFn.crError;
 
 const _crInfo = _ref => {
   let {
@@ -38,7 +34,7 @@ exports.getCi = getCi;
 const crData = json => {
   const arrIn = json[1];
 
-  if (!_isArr(arrIn)) {
+  if (!(0, _AdapterFn.isArr)(arrIn)) {
     return [];
   }
 

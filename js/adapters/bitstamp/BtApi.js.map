@@ -1,1 +1,35 @@
-{"version":3,"sources":["../../../src/adapters/bitstamp/BtApi.js"],"names":["C","URL","_isArr","Array","isArray","_crDfUrl","option","items","v","pair","timeframe","limit","_crObUrl","_rCrUrl","DF","OB","BtApi","getRequestUrl","dfSubId","_crUrl","checkResponse","json","data","bids","asks","ohlc","c"],"mappings":";;;;;AAAA;;AAEA,MAAMA,CAAC,GAAG;AACTC,EAAAA,GAAG,EAAE;AADI,CAAV;AAIA,MAAMC,MAAM,GAAGC,KAAK,CAACC,OAArB;;AAEA,MAAMC,QAAQ,GAAGC,MAAM,IAAI;AACzB,QAAM;AAAEC,IAAAA,KAAK,GAAC;AAAR,MAAeD,MAArB;AAAA,QACE;AAACE,IAAAA,CAAC,EAACC;AAAH,MAAWF,KAAK,CAAC,CAAD,CADlB;AAAA,QAEE;AAACC,IAAAA,CAAC,EAACE;AAAH,MAAgBH,KAAK,CAAC,CAAD,CAFvB;AAAA,QAGE;AAACC,IAAAA,CAAC,EAACG;AAAH,MAAYJ,KAAK,CAAC,CAAD,CAHnB;AAIAD,EAAAA,MAAM,CAACI,SAAP,GAAmBA,SAAnB;AACA,SAAUV,CAAC,CAACC,GAAZ,cAAwBQ,IAAxB,cAAqCC,SAArC,eAAwDC,KAAxD;AACD,CAPD;;AASA,MAAMC,QAAQ,GAAGN,MAAM,IAAI;AACzB,QAAM;AAAEC,IAAAA,KAAK,GAAC;AAAR,MAAeD,MAArB;AAAA,QACE;AAACE,IAAAA,CAAC,EAACC;AAAH,MAAWF,KAAK,CAAC,CAAD,CADlB;AAEA,SAAUP,CAAC,CAACC,GAAZ,oBAA8BQ,IAA9B;AACD,CAJD;;AAMA,MAAMI,OAAO,GAAG;AACdC,EAAAA,EAAE,EAAET,QADU;AAEdU,EAAAA,EAAE,EAAEH;AAFU,CAAhB;AAKA,MAAMI,KAAK,GAAG;AACZC,EAAAA,aAAa,CAACX,MAAD,EAAQ;AACnB,UAAM;AAAEY,MAAAA;AAAF,QAAcZ,MAApB;AAAA,UACEa,MAAM,GAAGD,OAAO,IAAIL,OAAO,CAACK,OAAD,CAAlB,IACJL,OAAO,CAACC,EAFf;;AAGA,WAAOK,MAAM,CAACb,MAAD,CAAb;AACD,GANW;;AAQZc,EAAAA,aAAa,CAACC,IAAD,EAAOf,MAAP,EAAc;AACzB,UAAM;AAAEgB,MAAAA,IAAF;AAAQC,MAAAA,IAAR;AAAcC,MAAAA;AAAd,QAAuBH,IAAI,IAAI,EAArC;AAAA,UACE;AAAEI,MAAAA,IAAF;AAAQhB,MAAAA;AAAR,QAAiBa,IAAI,IAAI,EAD3B;AAAA,UAEE;AAAEf,MAAAA,KAAK,GAAC;AAAR,QAAeD,MAFjB;AAAA,UAGE;AAAEoB,MAAAA;AAAF,QAAQnB,KAAK,CAAC,CAAD,CAHf;;AAIA,QAAMmB,CAAC,KAAKjB,IAAN,IAAcP,MAAM,CAACuB,IAAD,CAArB,IACCvB,MAAM,CAACqB,IAAD,CAAN,IAAgBrB,MAAM,CAACsB,IAAD,CAD5B,EACsC;AACpC,aAAO,IAAP;AACD;;AACD,UAAM,oBAAN;AACD;;AAlBW,CAAd;eAqBeR,K","sourcesContent":["import { crError } from '../crFn';\r\n\r\nconst C = {\r\n URL: \"https://www.bitstamp.net/api/v2\"\r\n};\r\n\r\nconst _isArr = Array.isArray;\r\n\r\nconst _crDfUrl = option => {\r\n  const { items=[] } = option\r\n  , {v:pair} = items[0]\r\n  , {v:timeframe} = items[1]\r\n  , {v:limit} = items[2];\r\n  option.timeframe = timeframe\r\n  return `${C.URL}/ohlc/${pair}?step=${timeframe}&limit=${limit}`;\r\n};\r\n\r\nconst _crObUrl = option => {\r\n  const { items=[] } = option\r\n  , {v:pair} = items[0];\r\n  return `${C.URL}/order_book/${pair}?order=0`;\r\n};\r\n\r\nconst _rCrUrl = {\r\n  DF: _crDfUrl,\r\n  OB: _crObUrl\r\n};\r\n\r\nconst BtApi = {\r\n  getRequestUrl(option){\r\n    const { dfSubId } = option\r\n    , _crUrl = dfSubId && _rCrUrl[dfSubId]\r\n        || _rCrUrl.DF\r\n    return _crUrl(option);\r\n  },\r\n\r\n  checkResponse(json, option){\r\n    const { data, bids, asks } = json || {}\r\n    , { ohlc, pair } = data || {}\r\n    , { items=[] } = option\r\n    , { c } = items[0];\r\n    if ( (c === pair && _isArr(ohlc))\r\n      || (_isArr(bids) && _isArr(asks)) ) {\r\n      return true;\r\n    }\r\n    throw crError();\r\n  }\r\n};\r\n\r\nexport default BtApi\r\n"],"file":"BtApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bitstamp/BtApi.js"
+ ],
+ "file": "../../../src/adapters/bitstamp/BtApi.js",
+ "names": [
+  "API_URL",
+  "_crDfUrl",
+  "option",
+  "items",
+  "v",
+  "pair",
+  "timeframe",
+  "limit",
+  "_crObUrl",
+  "_rCrUrl",
+  "DF",
+  "OB",
+  "BtApi",
+  "getRequestUrl",
+  "dfSubId",
+  "_crUrl",
+  "checkResponse",
+  "json",
+  "data",
+  "bids",
+  "asks",
+  "ohlc",
+  "c",
+  "isArr",
+  "crError"
+ ],
+ "mappings": ";;;;;AAAA;;AAKA,MAAMA,OAAO,GAAG,iCAAhB;;AAEA,MAAMC,QAAQ,GAAGC,MAAM,IAAI;EACzB,MAAM;IAAEC,KAAK,GAAC;EAAR,IAAeD,MAArB;EAAA,MACE;IAACE,CAAC,EAACC;EAAH,IAAWF,KAAK,CAAC,CAAD,CADlB;EAAA,MAEE;IAACC,CAAC,EAACE;EAAH,IAAgBH,KAAK,CAAC,CAAD,CAFvB;EAAA,MAGE;IAACC,CAAC,EAACG;EAAH,IAAYJ,KAAK,CAAC,CAAD,CAHnB;EAIAD,MAAM,CAACI,SAAP,GAAmBA,SAAnB;EACA,OAAUN,OAAV,cAA0BK,IAA1B,cAAuCC,SAAvC,eAA0DC,KAA1D;AACD,CAPD;;AASA,MAAMC,QAAQ,GAAGN,MAAM,IAAI;EACzB,MAAM;IAAEC,KAAK,GAAC;EAAR,IAAeD,MAArB;EAAA,MACE;IAACE,CAAC,EAACC;EAAH,IAAWF,KAAK,CAAC,CAAD,CADlB;EAEA,OAAUH,OAAV,oBAAgCK,IAAhC;AACD,CAJD;;AAMA,MAAMI,OAAO,GAAG;EACdC,EAAE,EAAET,QADU;EAEdU,EAAE,EAAEH;AAFU,CAAhB;AAKA,MAAMI,KAAK,GAAG;EACZC,aAAa,CAACX,MAAD,EAAQ;IACnB,MAAM;MAAEY;IAAF,IAAcZ,MAApB;IAAA,MACEa,MAAM,GAAGD,OAAO,IAAIL,OAAO,CAACK,OAAD,CAAlB,IACJL,OAAO,CAACC,EAFf;;IAGA,OAAOK,MAAM,CAACb,MAAD,CAAb;EACD,CANW;;EAQZc,aAAa,CAACC,IAAD,EAAOf,MAAP,EAAc;IACzB,MAAM;MACJgB,IADI;MAEJC,IAFI;MAGJC;IAHI,IAIFH,IAAI,IAAI,EAJZ;IAAA,MAKE;MAAEI,IAAF;MAAQhB;IAAR,IAAiBa,IAAI,IAAI,EAL3B;IAAA,MAME;MAAEf,KAAK,GAAC;IAAR,IAAeD,MANjB;IAAA,MAOE;MAAEoB;IAAF,IAAQnB,KAAK,CAAC,CAAD,CAPf;;IAQA,IAAMmB,CAAC,KAAKjB,IAAN,IAAc,IAAAkB,gBAAA,EAAMF,IAAN,CAAf,IACC,IAAAE,gBAAA,EAAMJ,IAAN,KAAe,IAAAI,gBAAA,EAAMH,IAAN,CADrB,EACoC;MAClC,OAAO,IAAP;IACD;;IACD,MAAM,IAAAI,kBAAA,GAAN;EACD;;AAtBW,CAAd;eAyBeZ,K"
+}

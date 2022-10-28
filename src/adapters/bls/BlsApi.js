@@ -3,10 +3,10 @@ import {
   isNumber,
   getYear,
   getCurrentYear,
+  crError
 } from '../AdapterFn';
 import {
-  crHm,
-  crError
+  crHm
 } from '../crFn';
 
 const API_URL = 'https://api.bls.gov/publicAPI'

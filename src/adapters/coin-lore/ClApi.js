@@ -1,25 +1,24 @@
-import { crError } from '../crFn';
+import {
+  isArr,
+  crError
+} from '../AdapterFn';
 
-const C = {
-  URL: 'https://api.coinlore.net/api'
-};
-
-const _isArr = Array.isArray;
+const API_URL = 'https://api.coinlore.net/api';
 
 const ClApi = {
   getRequestUrl(option){
     const { items=[] } = option
     , { v:id } = items[0];
-    return `${C.URL}/exchange/?id=${id}`;
+    return `${API_URL}/exchange/?id=${id}`;
   },
+
   checkResponse(json, option){
     const { pairs } = json  || {};
-    if (_isArr(pairs)) {
+    if (isArr(pairs)) {
       return true;
     }
     throw crError();
   }
-
 };
 
 export default ClApi

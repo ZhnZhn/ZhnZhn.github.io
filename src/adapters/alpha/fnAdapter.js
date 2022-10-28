@@ -8,10 +8,10 @@ export {
   valueMoving,
   ymdToUTC,
   ymdhmsToUTC,
-  roundBy
+  roundBy,
+  crError
 } from '../AdapterFn';
 export { compareByDate } from '../compareByFn';
-export { crError } from '../crFn';
 
 import { valueMoving } from '../AdapterFn';
 import {

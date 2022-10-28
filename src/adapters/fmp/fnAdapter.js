@@ -2,10 +2,8 @@ export {
   getFromDate,
   getCaption,
   getValue,
-} from '../AdapterFn';
-export {
   crError
-} from '../crFn';
+} from '../AdapterFn';
 
 import {
   _isNaN,

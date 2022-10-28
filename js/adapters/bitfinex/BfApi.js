@@ -3,12 +3,9 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _crFn = require("../crFn");
+var _AdapterFn = require("../AdapterFn");
 
-const C = {
-  URL: "https://api-pub.bitfinex.com/v2"
-};
-const _isArr = Array.isArray;
+const API_URL = "https://api-pub.bitfinex.com/v2";
 
 const _crDfUrl = option => {
   const {
@@ -25,21 +22,21 @@ const _crDfUrl = option => {
     v: limit
   } = items[2];
   option.timeframe = timeframe;
-  return "" + proxy + C.URL + "/candles/trade:" + timeframe + ":t" + pair + "/hist?limit=" + limit;
+  return "" + proxy + API_URL + "/candles/trade:" + timeframe + ":t" + pair + "/hist?limit=" + limit;
 };
 
-const _crObUrl = option => {
-  const {
+const _crObUrl = _ref => {
+  let {
     proxy,
     items = []
-  } = option,
-        {
+  } = _ref;
+  const {
     v: pair
   } = items[0],
         {
     v: len
   } = items[1];
-  return "" + proxy + C.URL + "/book/t" + pair + "/P0?len=" + len;
+  return "" + proxy + API_URL + "/book/t" + pair + "/P0?len=" + len;
 };
 
 const _rCrUrl = {
@@ -57,8 +54,8 @@ const BfApi = {
   },
 
   checkResponse(json, option) {
-    if (!_isArr(json)) {
-      throw (0, _crFn.crError)();
+    if (!(0, _AdapterFn.isArr)(json)) {
+      throw (0, _AdapterFn.crError)();
     }
 
     return true;

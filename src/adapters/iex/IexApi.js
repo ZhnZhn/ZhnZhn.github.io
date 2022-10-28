@@ -1,45 +1,50 @@
-import { getValue } from '../AdapterFn'
-import { crError } from '../crFn';
-import IT from './ItemTypes'
+import { 
+  assign,
+  getValue,
+  crError
+} from '../AdapterFn';
+import IT from './ItemTypes';
 
-const C = {
-  BASE_URL: 'https://cloud.iexapis.com/stable/stock',
-  DF_SYMBOL: 'AAPL',
-  DF_PERIOD: '1m'
-};
-
-const _assign = Object.assign;
+const API_URL = 'https://cloud.iexapis.com/stable/stock'
+, DF_SYMBOL = 'AAPL'
+, DF_PERIOD = '1m';
 
 //company, stats: symbol/dfType
 const _crUrlType1 = option => {
   const { items=[], dfType } = option
   , value = getValue(items[0]);
   option.value = value
-  return `${C.BASE_URL}/${value}/${dfType}`;
+  return `${API_URL}/${value}/${dfType}`;
 };
 
 const _urlDividends = (option) => {
   const { items=[], dfPeriod } = option
   , value = getValue(items[0]);
   option.value = value
-  return `${C.BASE_URL}/${value}/dividends/${dfPeriod}`;
+  return `${API_URL}/${value}/dividends/${dfPeriod}`;
 };
 
 const _urlChart = (option) => {
-  const { items=[], one, two, value, dfPeriod } = option
+  const {
+    items=[],
+    one,
+    two,
+    value,
+    dfPeriod
+  } = option
   // one, two deprecated option remains for watch compatibility
   // value, dfPeriod for stock by sector
-  , symbol = one || value || getValue(items[0], { dfValue: C.DF_SYMBOL})
-  , period = two || dfPeriod || getValue(items[1], { dfValue: C.DF_PERIOD });
-  _assign(option, { symbol, period })
-  return `${C.BASE_URL}/${symbol}/chart/${period}`;
+  , symbol = one || value || getValue(items[0], { dfValue: DF_SYMBOL})
+  , period = two || dfPeriod || getValue(items[1], { dfValue: DF_PERIOD });
+  assign(option, { symbol, period })
+  return `${API_URL}/${symbol}/chart/${period}`;
 };
 
 const _crUrlMarketList = (option) => {
   const { items=[] } = option
   , value = getValue(items[0]);
   return {
-    url: `${C.BASE_URL}/market/list/${value}`,
+    url: `${API_URL}/market/list/${value}`,
     q: 'listLimit=20&displayPercent=true'
   };
 };

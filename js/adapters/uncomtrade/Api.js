@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _crFn = require("../crFn");
+var _AdapterFn = require("../AdapterFn");
 
 var _fnAdapter = require("./fnAdapter");
 
@@ -16,9 +16,7 @@ const PERIOD = 5,
       API_URL = 'https://comtrade.un.org/api/get',
       DF_RG = 2,
       DF_MEASURE = 'NetWeight',
-      DF_TRADE_PARTNER = '0',
-      _isArr = Array.isArray,
-      _assign = Object.assign;
+      DF_TRADE_PARTNER = '0';
 
 const _crQuery = freq => "type=C&freq=" + freq + "&px=HS";
 
@@ -73,11 +71,11 @@ const UnComtradeApi = {
   },
 
   checkResponse(json) {
-    if (json && _isArr(json.dataset)) {
+    if (json && (0, _AdapterFn.isArr)(json.dataset)) {
       return true;
     }
 
-    throw (0, _crFn.crError)();
+    throw (0, _AdapterFn.crError)();
   },
 
   addPropsTo(option) {
@@ -90,14 +88,13 @@ const UnComtradeApi = {
 
     if (!one) {
       const arr = v.substring(3).split('_');
-
-      _assign(option, {
+      (0, _AdapterFn.assign)(option, {
         one: arr[0],
         two: arr[1]
       });
     }
 
-    _assign(option, {
+    (0, _AdapterFn.assign)(option, {
       rg,
       measure
     });

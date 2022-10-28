@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getYmdhmUTC = exports.crPageConfig = exports.crItemLink = exports.crError = void 0;
+exports.getYmdhmUTC = exports.crPageConfig = exports.crItemLink = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
@@ -9,7 +9,6 @@ exports.getYmdhmUTC = _AdapterFn.getYmdhmUTC;
 
 var _crFn = require("../crFn");
 
-exports.crError = _crFn.crError;
 exports.crItemLink = _crFn.crItemLink;
 const DF_PAGE = 1,
       DF_PER_PAGE = 10,

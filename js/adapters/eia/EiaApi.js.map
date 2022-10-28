@@ -1,1 +1,47 @@
-{"version":3,"sources":["../../../src/adapters/eia/EiaApi.js"],"names":["C","URL","S_URL","MSG","ERR","NOT_EXIST","_getValue","obj","value","_crSeriaDf","option","sufix","items","_one","_two","_three","_sufix","_crSeriaPI2","prefix","_crSeriaPI321S","_rSeriaId","DF","pi2","pi231s","_crSeriaId","dfSeriaType","fn","EiaApi","getRequestUrl","apiKey","_seria_id","checkResponse","json","data","error","msgErr","_msgErr","indexOf","series"],"mappings":"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","sourcesContent":["import { crError } from '../crFn';\r\n\r\nconst C = {\r\n  URL: \"https://api.eia.gov/category/\",\r\n  S_URL: \"https://api.eia.gov/series/\"\r\n};\r\n\r\nconst MSG = {\r\n  ERR: 'invalid series_id.',\r\n  NOT_EXIST: 'Data for enetered parameters is not existed.'\r\n};\r\n\r\nconst _getValue = (obj) => {\r\n  return obj && obj.value\r\n   ? obj.value\r\n   : '';\r\n};\r\n\r\n\r\nconst _crSeriaDf = (option) => {\r\n  const {\r\n    sufix,\r\n    items=[]\r\n  } = option\r\n  , _one = _getValue(items[0])\r\n  , _two = _getValue(items[1])\r\n  , _three = _getValue(items[2])\r\n  , _sufix = _three || sufix || '' ;\r\n\r\n  return `${_two}${_one}${_sufix}`;\r\n};\r\nconst _crSeriaPI2 = (option) => {\r\n  const {\r\n    prefix,\r\n    items=[]\r\n  } = option\r\n  , _one = _getValue(items[0])\r\n  , _two = _getValue(items[1])\r\n  return `${prefix}${_one}${_two}`;\r\n};\r\nconst _crSeriaPI321S = (option) => {\r\n  const {\r\n    prefix,\r\n    items=[],\r\n    sufix\r\n  } = option\r\n  , _one = _getValue(items[0])\r\n  , _two = _getValue(items[1])\r\n  , _three = _getValue(items[2])\r\n  return `${prefix}${_three}-${_two}-${_one}${sufix}`;\r\n};\r\n\r\nconst _rSeriaId = {\r\n  DF: _crSeriaDf,\r\n  pi2: _crSeriaPI2,\r\n  pi231s: _crSeriaPI321S\r\n};\r\n\r\nconst _crSeriaId = (option) => {\r\n  const { dfSeriaType } = option\r\n  , fn = _rSeriaId[dfSeriaType] || _rSeriaId.DF;\r\n  return fn(option);\r\n}\r\n\r\nconst EiaApi = {\r\n  getRequestUrl(option){\r\n    const { apiKey } = option\r\n    , _seria_id = _crSeriaId(option);\r\n\r\n    return `${C.S_URL}?api_key=${apiKey}&series_id=${_seria_id}`;\r\n  },\r\n\r\n  checkResponse(json){\r\n    if (!json) {\r\n      throw crError();\r\n    }\r\n    const { data } = json\r\n    , { error:msgErr } = data || {};\r\n    if (msgErr) {\r\n      const _msgErr = msgErr.indexOf(MSG.ERR) !== -1\r\n        ? MSG.NOT_EXIST\r\n        : msgErr;\r\n      throw crError('', _msgErr);\r\n    }\r\n    if (!json.series || !json.series[0]) {\r\n      throw crError();\r\n    }\r\n    return true;\r\n  }\r\n};\r\n\r\nexport default EiaApi\r\n"],"file":"EiaApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/eia/EiaApi.js"
+ ],
+ "file": "../../../src/adapters/eia/EiaApi.js",
+ "names": [
+  "S_URL",
+  "MSG_ERR",
+  "MSG_ERR_NOT_EXIST",
+  "_getValue",
+  "obj",
+  "value",
+  "_crSeriaDf",
+  "option",
+  "sufix",
+  "items",
+  "_one",
+  "_two",
+  "_three",
+  "_sufix",
+  "_crSeriaPI2",
+  "prefix",
+  "_crSeriaPI321S",
+  "_rSeriaId",
+  "DF",
+  "pi2",
+  "pi231s",
+  "_crSeriaId",
+  "dfSeriaType",
+  "fn",
+  "EiaApi",
+  "getRequestUrl",
+  "apiKey",
+  "_seria_id",
+  "checkResponse",
+  "json",
+  "crError",
+  "data",
+  "error",
+  "msgErr",
+  "_msgErr",
+  "indexOf",
+  "series"
+ ],
+ "mappings": "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"
+}

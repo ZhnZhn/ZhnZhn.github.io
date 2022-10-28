@@ -6,10 +6,7 @@ exports.getValue = exports.crError = exports.crCaption = exports.crAddConfig = v
 var _AdapterFn = require("../AdapterFn");
 
 exports.getValue = _AdapterFn.getValue;
-
-var _crFn = require("../crFn");
-
-exports.crError = _crFn.crError;
+exports.crError = _AdapterFn.crError;
 
 const _joinBy = _AdapterFn.joinBy.bind(null, ': ');
 

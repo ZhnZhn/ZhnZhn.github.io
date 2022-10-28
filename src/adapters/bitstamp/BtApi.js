@@ -1,10 +1,9 @@
-import { crError } from '../crFn';
+import {
+  isArr,
+  crError
+} from '../AdapterFn';
 
-const C = {
- URL: "https://www.bitstamp.net/api/v2"
-};
-
-const _isArr = Array.isArray;
+const API_URL = "https://www.bitstamp.net/api/v2";
 
 const _crDfUrl = option => {
   const { items=[] } = option
@@ -12,13 +11,13 @@ const _crDfUrl = option => {
   , {v:timeframe} = items[1]
   , {v:limit} = items[2];
   option.timeframe = timeframe
-  return `${C.URL}/ohlc/${pair}?step=${timeframe}&limit=${limit}`;
+  return `${API_URL}/ohlc/${pair}?step=${timeframe}&limit=${limit}`;
 };
 
 const _crObUrl = option => {
   const { items=[] } = option
   , {v:pair} = items[0];
-  return `${C.URL}/order_book/${pair}?order=0`;
+  return `${API_URL}/order_book/${pair}?order=0`;
 };
 
 const _rCrUrl = {
@@ -35,12 +34,16 @@ const BtApi = {
   },
 
   checkResponse(json, option){
-    const { data, bids, asks } = json || {}
+    const {
+      data,
+      bids,
+      asks
+    } = json || {}
     , { ohlc, pair } = data || {}
     , { items=[] } = option
     , { c } = items[0];
-    if ( (c === pair && _isArr(ohlc))
-      || (_isArr(bids) && _isArr(asks)) ) {
+    if ( (c === pair && isArr(ohlc))
+      || (isArr(bids) && isArr(asks)) ) {
       return true;
     }
     throw crError();

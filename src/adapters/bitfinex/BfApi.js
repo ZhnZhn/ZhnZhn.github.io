@@ -1,28 +1,29 @@
-import { crError } from '../crFn';
+import {
+  isArr,
+  crError
+} from '../AdapterFn';
 
-const C = {
-  URL: "https://api-pub.bitfinex.com/v2"
-};
+const API_URL = "https://api-pub.bitfinex.com/v2";
 
-const _isArr = Array.isArray;
-
-
-const _crDfUrl = (option) => {
+const _crDfUrl = (
+  option
+) => {
   const { proxy, items=[] } = option
   , {v:pair} = items[0]
   , {v:timeframe} = items[1]
   , {v:limit} = items[2];
   option.timeframe = timeframe
-  return `${proxy}${C.URL}/candles/trade:${timeframe}:t${pair}/hist?limit=${limit}`
+  return `${proxy}${API_URL}/candles/trade:${timeframe}:t${pair}/hist?limit=${limit}`;
 };
 
-const _crObUrl = (option) => {
-  const { proxy, items=[] } = option
-  , {v:pair} = items[0]
+const _crObUrl = ({
+  proxy,
+  items=[]
+}) => {
+  const {v:pair} = items[0]
   , {v:len} = items[1];
-  return `${proxy}${C.URL}/book/t${pair}/P0?len=${len}`
+  return `${proxy}${API_URL}/book/t${pair}/P0?len=${len}`;
 };
-
 
 const _rCrUrl = {
   DF: _crDfUrl,
@@ -33,12 +34,12 @@ const BfApi = {
   getRequestUrl(option){
     const { dfSubId } = option
     , _crUrl = dfSubId && _rCrUrl[dfSubId]
-        || _rCrUrl.DF
+        || _rCrUrl.DF;
     return _crUrl(option);
   },
 
   checkResponse(json, option){
-    if (!_isArr(json)) {
+    if (!isArr(json)) {
       throw crError();
     }
     return true;

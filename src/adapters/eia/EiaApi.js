@@ -1,21 +1,13 @@
-import { crError } from '../crFn';
+import { crError } from '../AdapterFn';
 
-const C = {
-  URL: "https://api.eia.gov/category/",
-  S_URL: "https://api.eia.gov/series/"
-};
+const S_URL = "https://api.eia.gov/series/";
 
-const MSG = {
-  ERR: 'invalid series_id.',
-  NOT_EXIST: 'Data for enetered parameters is not existed.'
-};
+const MSG_ERR = 'invalid series_id.'
+, MSG_ERR_NOT_EXIST = 'Data for enetered parameters is not existed.';
 
-const _getValue = (obj) => {
-  return obj && obj.value
-   ? obj.value
-   : '';
-};
-
+const _getValue = (
+  obj
+) => obj && obj.value || '';
 
 const _crSeriaDf = (option) => {
   const {
@@ -25,7 +17,7 @@ const _crSeriaDf = (option) => {
   , _one = _getValue(items[0])
   , _two = _getValue(items[1])
   , _three = _getValue(items[2])
-  , _sufix = _three || sufix || '' ;
+  , _sufix = _three || sufix || '';
 
   return `${_two}${_one}${_sufix}`;
 };
@@ -35,7 +27,7 @@ const _crSeriaPI2 = (option) => {
     items=[]
   } = option
   , _one = _getValue(items[0])
-  , _two = _getValue(items[1])
+  , _two = _getValue(items[1]);
   return `${prefix}${_one}${_two}`;
 };
 const _crSeriaPI321S = (option) => {
@@ -46,7 +38,7 @@ const _crSeriaPI321S = (option) => {
   } = option
   , _one = _getValue(items[0])
   , _two = _getValue(items[1])
-  , _three = _getValue(items[2])
+  , _three = _getValue(items[2]);
   return `${prefix}${_three}-${_two}-${_one}${sufix}`;
 };
 
@@ -67,7 +59,7 @@ const EiaApi = {
     const { apiKey } = option
     , _seria_id = _crSeriaId(option);
 
-    return `${C.S_URL}?api_key=${apiKey}&series_id=${_seria_id}`;
+    return `${S_URL}?api_key=${apiKey}&series_id=${_seria_id}`;
   },
 
   checkResponse(json){
@@ -77,8 +69,8 @@ const EiaApi = {
     const { data } = json
     , { error:msgErr } = data || {};
     if (msgErr) {
-      const _msgErr = msgErr.indexOf(MSG.ERR) !== -1
-        ? MSG.NOT_EXIST
+      const _msgErr = msgErr.indexOf(MSG_ERR) !== -1
+        ? MSG_ERR_NOT_EXIST
         : msgErr;
       throw crError('', _msgErr);
     }

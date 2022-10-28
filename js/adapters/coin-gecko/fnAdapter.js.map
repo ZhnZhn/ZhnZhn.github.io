@@ -1,1 +1,25 @@
-{"version":3,"sources":["../../../src/adapters/coin-gecko/fnAdapter.js"],"names":["DF_PAGE","DF_PER_PAGE","DF_CURRENCY","_isInRange","v","min","max","crPageConfig","option","items","_page","page","_perPage","perPage"],"mappings":";;;;;AAAA;;;;AACA;;;;AAIA,MAAMA,OAAO,GAAG,CAAhB;AAAA,MACEC,WAAW,GAAG,EADhB;AAAA,MAEEC,WAAW,GAAG,KAFhB;;AAIA,MAAMC,UAAU,GAAG,CAACC,CAAD,EAAIC,GAAJ,EAASC,GAAT,KAAiBF,CAAC,GAACC,GAAF,IAASD,CAAC,GAACE,GAA/C;;AAEO,MAAMC,YAAY,GAAGC,MAAM,IAAI;AACpC,QAAM;AAAEC,IAAAA,KAAK,GAAC;AAAR,MAAeD,MAArB;AAAA,QACEE,KAAK,GAAG,yBAASD,KAAK,CAAC,CAAD,CAAd,CADV;AAAA,QAEEE,IAAI,GAAGR,UAAU,CAACO,KAAD,EAAQ,CAAR,EAAW,EAAX,CAAV,GACHA,KADG,GACKV,OAHd;AAAA,QAIEY,QAAQ,GAAG,yBAASH,KAAK,CAAC,CAAD,CAAd,CAJb;AAAA,QAKEI,OAAO,GAAGV,UAAU,CAACS,QAAD,EAAW,CAAX,EAAc,EAAd,CAAV,GACNA,QADM,GACKX,WANjB;;AAOA,SAAO,CACLU,IADK,EAELE,OAFK,EAGL,yBAASJ,KAAK,CAAC,CAAD,CAAd,KAAsBP,WAHjB,CAAP;AAKD,CAbM","sourcesContent":["export { getYmdhmUTC } from '../AdapterFn';\r\nexport { crError, crItemLink } from '../crFn';\r\n\r\nimport { getValue } from '../AdapterFn';\r\n\r\nconst DF_PAGE = 1\r\n, DF_PER_PAGE = 10\r\n, DF_CURRENCY = 'USD'\r\n\r\nconst _isInRange = (v, min, max) => v>min && v<max ;\r\n\r\nexport const crPageConfig = option => {\r\n  const { items=[] } = option\r\n  , _page = getValue(items[0])\r\n  , page = _isInRange(_page, 0, 11)\r\n      ? _page : DF_PAGE\r\n  , _perPage = getValue(items[1])\r\n  , perPage = _isInRange(_perPage, 9, 51)\r\n      ? _perPage : DF_PER_PAGE;\r\n  return [\r\n    page,\r\n    perPage,\r\n    getValue(items[2]) || DF_CURRENCY\r\n  ];\r\n}\r\n"],"file":"fnAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-gecko/fnAdapter.js"
+ ],
+ "file": "../../../src/adapters/coin-gecko/fnAdapter.js",
+ "names": [
+  "DF_PAGE",
+  "DF_PER_PAGE",
+  "DF_CURRENCY",
+  "_isInRange",
+  "v",
+  "min",
+  "max",
+  "crPageConfig",
+  "option",
+  "items",
+  "_page",
+  "getValue",
+  "page",
+  "_perPage",
+  "perPage"
+ ],
+ "mappings": ";;;;;AAAA;;;;AACA;;;AAIA,MAAMA,OAAO,GAAG,CAAhB;AAAA,MACEC,WAAW,GAAG,EADhB;AAAA,MAEEC,WAAW,GAAG,KAFhB;;AAIA,MAAMC,UAAU,GAAG,CAACC,CAAD,EAAIC,GAAJ,EAASC,GAAT,KAAiBF,CAAC,GAACC,GAAF,IAASD,CAAC,GAACE,GAA/C;;AAEO,MAAMC,YAAY,GAAGC,MAAM,IAAI;EACpC,MAAM;IAAEC,KAAK,GAAC;EAAR,IAAeD,MAArB;EAAA,MACEE,KAAK,GAAG,IAAAC,mBAAA,EAASF,KAAK,CAAC,CAAD,CAAd,CADV;EAAA,MAEEG,IAAI,GAAGT,UAAU,CAACO,KAAD,EAAQ,CAAR,EAAW,EAAX,CAAV,GACHA,KADG,GACKV,OAHd;EAAA,MAIEa,QAAQ,GAAG,IAAAF,mBAAA,EAASF,KAAK,CAAC,CAAD,CAAd,CAJb;EAAA,MAKEK,OAAO,GAAGX,UAAU,CAACU,QAAD,EAAW,CAAX,EAAc,EAAd,CAAV,GACNA,QADM,GACKZ,WANjB;;EAOA,OAAO,CACLW,IADK,EAELE,OAFK,EAGL,IAAAH,mBAAA,EAASF,KAAK,CAAC,CAAD,CAAd,KAAsBP,WAHjB,CAAP;AAKD,CAbM"
+}

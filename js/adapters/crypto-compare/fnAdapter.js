@@ -6,10 +6,7 @@ exports.getValue = exports.crError = exports.crData = exports.crConfOption = exp
 var _AdapterFn = require("../AdapterFn");
 
 exports.getValue = _AdapterFn.getValue;
-
-var _crFn = require("../crFn");
-
-exports.crError = _crFn.crError;
+exports.crError = _AdapterFn.crError;
 
 var _pointFn = require("../pointFn");
 

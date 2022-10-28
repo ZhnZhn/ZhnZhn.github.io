@@ -1,9 +1,7 @@
 export {
-  getDaysFromYmd
-} from '../AdapterFn';
-export {
+  getDaysFromYmd,
   crError
-} from '../crFn';
+} from '../AdapterFn';
 
 import {
   ymdhmsToUTC,

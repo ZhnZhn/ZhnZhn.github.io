@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundBy = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.crZhConfig = exports.crValueMoving = exports._isNaN = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundBy = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.assign = exports._isNaN = void 0;
 
 var _big = _interopRequireDefault(require("big.js"));
 
@@ -60,6 +60,8 @@ exports.isNumber = isNumber;
 const isNumberOrNull = v => isNumber(v) || v === null;
 
 exports.isNumberOrNull = isNumberOrNull;
+const assign = Object.assign;
+exports.assign = assign;
 const EMPTY = '';
 
 const _fIsNumber = pn => p => isTypeNumber(p[pn]) && isFinite(p[pn]);
@@ -95,6 +97,24 @@ exports.isYNumber = isYNumber;
 const toFloatOrEmpty = _fToFloatOr('');
 
 exports.toFloatOrEmpty = toFloatOrEmpty;
+const DF_ERR_MESSAGE = 'No data available for request.';
+
+const crError = function (errCaption, message) {
+  if (errCaption === void 0) {
+    errCaption = '';
+  }
+
+  if (message === void 0) {
+    message = DF_ERR_MESSAGE;
+  }
+
+  return {
+    errCaption,
+    message
+  };
+};
+
+exports.crError = crError;
 
 const crValueMoving = _ref => {
   let {

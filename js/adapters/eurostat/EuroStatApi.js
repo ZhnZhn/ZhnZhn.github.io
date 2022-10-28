@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _crFn = require("../crFn");
+var _AdapterFn = require("../AdapterFn");
 
 var _api = _interopRequireDefault(require("./api/api"));
 
@@ -31,7 +31,7 @@ const EuroStatApi = {
 
   checkResponse(json, option, status) {
     if (status === 400) {
-      throw (0, _crFn.crError)('', MSG_400);
+      throw (0, _AdapterFn.crError)('', MSG_400);
     }
 
     const {
@@ -44,7 +44,7 @@ const EuroStatApi = {
       } = error,
             _msgErr = label ? _crDetailMsg(label) : void 0;
 
-      throw (0, _crFn.crError)('', _msgErr);
+      throw (0, _AdapterFn.crError)('', _msgErr);
     }
 
     return true;

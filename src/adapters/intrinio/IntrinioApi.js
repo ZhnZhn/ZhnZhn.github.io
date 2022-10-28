@@ -1,10 +1,11 @@
-import { crError } from '../crFn';
+import { 
+  isArr,
+  crError
+} from '../AdapterFn';
 
-const C = {
-  URL: 'https://api.intrinio.com/historical_data',
-  TAIL: 'item=level',
-  RES_ERR_STATUS: [ 401 ]
-};
+const API_URL = 'https://api.intrinio.com/historical_data'
+, TAIL = 'item=level'
+, RES_ERR_STATUS = [ 401 ];
 
 const FRQ = {
   A: 'yearly',
@@ -36,19 +37,19 @@ const IntrinioApi = {
       value, fromDate, toDate, item={},
       one, two, three
     } = option;
-    option.resErrStatus = C.RES_ERR_STATUS
+    option.resErrStatus = RES_ERR_STATUS
 
     if (two && three) {
-      return `${C.URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&type=${three}`;
+      return `${API_URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&type=${three}`;
     }
 
     if (two) {
       //return `${C.URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&frequency=quarterly`;
-      return `${C.URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&type=QTR`;
+      return `${API_URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&type=QTR`;
     }
 
     const _frq = FRQ[item.frq] || FRQ.DF;
-    return `${C.URL}?identifier=${value}&start_date=${fromDate}&end_date=${toDate}&frequency=${_frq}&${C.TAIL}`;
+    return `${API_URL}?identifier=${value}&start_date=${fromDate}&end_date=${toDate}&frequency=${_frq}&${TAIL}`;
   },
 
   checkResponse(json){
@@ -57,7 +58,7 @@ const IntrinioApi = {
      throw crError(_err.human, _err.message);
     }
     return json
-      && Array.isArray(json.data);
+      && isArr(json.data);
   }
 };
 

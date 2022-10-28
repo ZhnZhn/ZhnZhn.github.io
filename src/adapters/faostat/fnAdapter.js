@@ -1,11 +1,12 @@
-export { crError } from '../crFn';
 export { toInfo } from './fnDescr';
 export {
   getValue,
-  findMinY
+  findMinY,
+  crError
 } from '../AdapterFn';
 
 import {
+  isArr,
   isNumber,
   isYNumber,
   getValue,
@@ -16,8 +17,7 @@ import {
 } from '../AdapterFn';
 import { DATASET_EMPTY } from './fnDescr';
 
-const _isArr = Array.isArray
-, BLANK = ' '
+const BLANK = ' '
 , MM_DD = '-12-31'
 , DF_TITLE = 'More about data on tab Info in Description';
 
@@ -198,7 +198,7 @@ export const crZhConfig = (
 
 export const crValueMoving = (
   points
-) => _isArr(points) && !_isArr(points[0])
+) => isArr(points) && !isArr(points[0])
   ? valueMoving(points)
   : void 0;
 

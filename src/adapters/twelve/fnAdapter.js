@@ -1,5 +1,7 @@
-export { getValue } from '../AdapterFn';
-export { crError } from '../crFn';
+export {
+  getValue,
+  crError
+} from '../AdapterFn';
 
 import {
   crZhConfig,

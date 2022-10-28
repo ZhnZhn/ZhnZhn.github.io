@@ -5,12 +5,12 @@ exports.default = void 0;
 
 var _DateUtils = require("../../utils/DateUtils");
 
+var _AdapterFn = require("../AdapterFn");
+
 var _fnAdapter = require("./fnAdapter");
 
 const API_URL = 'https://api.coingecko.com/api/v3',
-      PAGE_URL = 'https://www.coingecko.com/en/coins',
-      _assign = Object.assign,
-      _isArr = Array.isArray;
+      PAGE_URL = 'https://www.coingecko.com/en/coins';
 
 const _crDays = _ref => {
   let {
@@ -38,7 +38,7 @@ const _assignDf = option => {
         _vs = s + "/" + _currency,
         _days = _crDays(option);
 
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     itemCaption: _vs,
     title: c,
     subtitle: 'Values on 00:00 GMT',
@@ -50,8 +50,7 @@ const _assignDf = option => {
 
 const _assignMcl = option => {
   const [page, perPage, currency] = (0, _fnAdapter.crPageConfig)(option);
-
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     title: "By Market Cap Page: " + page + " (" + perPage + ")",
     _itemUrl: API_URL + "/coins/markets?order=market_cap_desc&page=" + page + "&per_page=" + perPage + "&vs_currency=" + currency + "&price_change_percentage=1h,7d,30d,1y"
   });
@@ -59,8 +58,7 @@ const _assignMcl = option => {
 
 const _assignEl = option => {
   const [page, perPage] = (0, _fnAdapter.crPageConfig)(option);
-
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     title: "By Exchages Page: " + page + " (" + perPage + ")",
     _itemUrl: API_URL + "/exchanges?page=" + page + "&per_page=" + perPage
   });
@@ -88,15 +86,15 @@ const CgApi = {
       dfSubId
     } = option;
 
-    if ((dfSubId === 'MCL' || dfSubId === 'EL') && _isArr(json) && json.length > 1) {
+    if ((dfSubId === 'MCL' || dfSubId === 'EL') && (0, _AdapterFn.isArr)(json) && json.length > 1) {
       return true;
     }
 
-    if (json && _isArr(json.prices)) {
+    if (json && (0, _AdapterFn.isArr)(json.prices)) {
       return true;
     }
 
-    throw (0, _fnAdapter.crError)();
+    throw (0, _AdapterFn.crError)();
   }
 
 };

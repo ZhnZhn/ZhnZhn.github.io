@@ -1,15 +1,16 @@
 export {
-  isYNumber,  
+  isYNumber,
   roundBy,
-  toUpperCaseFirst
+  toUpperCaseFirst,
+  crError,
 } from '../AdapterFn';
 export {
-  crError,
   crId
 } from '../crFn';
 
 import JSONstat from 'jsonstat';
 import {
+  assign,
   valueMoving
 } from '../AdapterFn';
 import {
@@ -17,7 +18,7 @@ import {
   crItemConf
 } from '../crFn';
 
-const _keys = Object.keys
+const _getObjectKeys = Object.keys
 , _crTitle = country => `Statisctics ${country}: All Items`
 , TITLE_NST = _crTitle('Norway')
 , TITLE_SWS = _crTitle('Sweden')
@@ -45,8 +46,6 @@ const SEARCH_NST = {
 };
 
 const MAX_SOURCE_ID_LENGTH = 9;
-
-const _assign = Object.assign;
 
 const _crSearchToken = (
   label
@@ -124,10 +123,10 @@ const _crAreaMapSlice = ({
   const mapSlice = {};
   items.forEach(item => {
     if (item.slice) {
-      _assign(mapSlice, item.slice)
+      assign(mapSlice, item.slice)
     }
   })
-  return _assign(mapSlice, dfTSlice);
+  return assign(mapSlice, dfTSlice);
 };
 
 const _getDimensionWithouTime = (
@@ -148,7 +147,7 @@ const _crTimesFromDs = (
 ) => {
   const _dim = json.dimension[timeId]
   , label = ((_dim || {}).category || {}).label;
-  return _keys(label)
+  return _getObjectKeys(label)
     .map(k => label[k]);
 };
 

@@ -1,4 +1,8 @@
-import { crError } from '../crFn';
+import {
+  isArr,
+  assign,
+  crError
+} from '../AdapterFn';
 import { isTotalByAll } from './fnAdapter';
 
 const PERIOD = 5
@@ -10,10 +14,7 @@ const PERIOD = 5
 , API_URL = 'https://comtrade.un.org/api/get'
 , DF_RG = 2
 , DF_MEASURE = 'NetWeight'
-, DF_TRADE_PARTNER = '0'
-
-, _isArr = Array.isArray
-, _assign = Object.assign;
+, DF_TRADE_PARTNER = '0';
 
 const _crQuery = freq => `type=C&freq=${freq}&px=HS`;
 const _crQueryTail = (
@@ -88,7 +89,7 @@ const UnComtradeApi = {
   },
 
   checkResponse(json){
-    if (json && _isArr(json.dataset)) {
+    if (json && isArr(json.dataset)) {
       return true;
     }
     throw crError();
@@ -104,13 +105,13 @@ const UnComtradeApi = {
 
     if (!one) {
       const arr = v.substring(3).split('_')
-      _assign(option, {
+      assign(option, {
         one: arr[0],
         two: arr[1]
       })
     }
 
-    _assign(option, { rg, measure })
+    assign(option, { rg, measure })
   }
 };
 

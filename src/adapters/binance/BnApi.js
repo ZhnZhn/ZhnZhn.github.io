@@ -1,13 +1,13 @@
-import { crError } from '../crFn';
+import {
+  isArr,
+  crError
+} from '../AdapterFn';
 
-const C = {
-  URL: 'https://api.binance.com/api/v3',
-  RESEARCH_URL: 'https://research.binance.com/en/projects',
-  TRADE_URL: 'https://binance.com/en/trade'
-};
+const API_URL = 'https://api.binance.com/api/v3'
+, RESEARCH_URL = 'https://research.binance.com/en/projects'
+, TRADE_URL = 'https://binance.com/en/trade';
 
-const _isArr = Array.isArray
-, REG_BLANKS = /\s/g;
+const REG_BLANKS = /\s/g;
 
 const _setLinks = (option, c, s='') => {
   const _toIndex = c.indexOf('(')
@@ -16,8 +16,8 @@ const _setLinks = (option, c, s='') => {
       .toLowerCase()
       .replace(REG_BLANKS, '-')
   , _s = s.replace('/', '_').toLowerCase();
-  option._researchLink = `${C.RESEARCH_URL}/${_caption}`
-  option._tradeLink = `${C.TRADE_URL}/${_s}`
+  option._researchLink = `${RESEARCH_URL}/${_caption}`
+  option._tradeLink = `${TRADE_URL}/${_s}`
 };
 
 const _crSymbol = (s='') => s.replace('/','');
@@ -30,7 +30,7 @@ const _crDfUrl = option => {
   , _symbol = _crSymbol(s);
 
   _setLinks(option, c, s)
-  return `${C.URL}/klines?symbol=${_symbol}&interval=${interval}&limit=${limit}`;
+  return `${API_URL}/klines?symbol=${_symbol}&interval=${interval}&limit=${limit}`;
 }
 
 const _crObUrl = option => {
@@ -38,7 +38,7 @@ const _crObUrl = option => {
   , { s } = items[0]
   , { v:limit } = items[1]
   , _symbol = _crSymbol(s);
-  return `${C.URL}/depth?symbol=${_symbol}&limit=${limit}`;
+  return `${API_URL}/depth?symbol=${_symbol}&limit=${limit}`;
 }
 
 const _rCrUrl = {
@@ -56,11 +56,11 @@ const BnApi = {
 
   checkResponse(json, option){
     const { dfSubId } = option
-    if (!dfSubId && _isArr(json)) {
+    if (!dfSubId && isArr(json)) {
       return true;
     }
     const { bids, asks } = json;
-    if (dfSubId === 'OB' && _isArr(bids) && _isArr(asks)) {
+    if (dfSubId === 'OB' && isArr(bids) && isArr(asks)) {
       return true;
     }
     throw crError();

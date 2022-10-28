@@ -1,11 +1,11 @@
 export { getYmdhmUTC } from '../AdapterFn';
-export { crError, crItemLink } from '../crFn';
+export { crItemLink } from '../crFn';
 
 import { getValue } from '../AdapterFn';
 
 const DF_PAGE = 1
 , DF_PER_PAGE = 10
-, DF_CURRENCY = 'USD'
+, DF_CURRENCY = 'USD';
 
 const _isInRange = (v, min, max) => v>min && v<max ;
 

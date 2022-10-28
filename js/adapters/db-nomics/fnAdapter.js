@@ -6,10 +6,9 @@ exports.getValue = exports.crTitle = exports.crError = exports.crData = exports.
 var _AdapterFn = require("../AdapterFn");
 
 exports.getValue = _AdapterFn.getValue;
+exports.crError = _AdapterFn.crError;
 
 var _crFn = require("../crFn");
-
-exports.crError = _crFn.crError;
 
 var _fnSelector = require("./fnSelector");
 

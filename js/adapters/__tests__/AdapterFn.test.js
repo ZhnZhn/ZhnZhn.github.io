@@ -322,4 +322,19 @@ describe('valueMoving', () => {
     });
   });
 });
+describe('crError', () => {
+  const fn = _AdapterFn.crError;
+  it('should create err obj', () => {
+    expect(fn('caption', 'msg')).toEqual({
+      errCaption: 'caption',
+      message: 'msg'
+    });
+  });
+  it('should replace void 0 values by default values', () => {
+    expect(fn()).toEqual({
+      errCaption: '',
+      message: 'No data available for request.'
+    });
+  });
+});
 //# sourceMappingURL=AdapterFn.test.js.map

@@ -3,20 +3,13 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _crFn = require("../crFn");
+var _AdapterFn = require("../AdapterFn");
 
-const C = {
-  URL: "https://api.eia.gov/category/",
-  S_URL: "https://api.eia.gov/series/"
-};
-const MSG = {
-  ERR: 'invalid series_id.',
-  NOT_EXIST: 'Data for enetered parameters is not existed.'
-};
+const S_URL = "https://api.eia.gov/series/";
+const MSG_ERR = 'invalid series_id.',
+      MSG_ERR_NOT_EXIST = 'Data for enetered parameters is not existed.';
 
-const _getValue = obj => {
-  return obj && obj.value ? obj.value : '';
-};
+const _getValue = obj => obj && obj.value || '';
 
 const _crSeriaDf = option => {
   const {
@@ -76,12 +69,12 @@ const EiaApi = {
     } = option,
           _seria_id = _crSeriaId(option);
 
-    return C.S_URL + "?api_key=" + apiKey + "&series_id=" + _seria_id;
+    return S_URL + "?api_key=" + apiKey + "&series_id=" + _seria_id;
   },
 
   checkResponse(json) {
     if (!json) {
-      throw (0, _crFn.crError)();
+      throw (0, _AdapterFn.crError)();
     }
 
     const {
@@ -92,13 +85,13 @@ const EiaApi = {
     } = data || {};
 
     if (msgErr) {
-      const _msgErr = msgErr.indexOf(MSG.ERR) !== -1 ? MSG.NOT_EXIST : msgErr;
+      const _msgErr = msgErr.indexOf(MSG_ERR) !== -1 ? MSG_ERR_NOT_EXIST : msgErr;
 
-      throw (0, _crFn.crError)('', _msgErr);
+      throw (0, _AdapterFn.crError)('', _msgErr);
     }
 
     if (!json.series || !json.series[0]) {
-      throw (0, _crFn.crError)();
+      throw (0, _AdapterFn.crError)();
     }
 
     return true;

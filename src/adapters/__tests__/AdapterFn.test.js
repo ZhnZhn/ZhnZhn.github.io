@@ -13,7 +13,8 @@ import {
   findMinY,
   findMaxY,
   joinBy,
-  valueMoving
+  valueMoving,
+  crError
 } from '../AdapterFn';
 import {
   DT_EMPTY,
@@ -252,6 +253,22 @@ describe('valueMoving', ()=>{
       valueTo: '0',
       date: '',
       dateTo: ''
+    })
+  })
+})
+
+describe('crError', ()=>{
+  const fn = crError
+  it('should create err obj', ()=>{
+    expect(fn('caption', 'msg')).toEqual({
+      errCaption: 'caption',
+      message: 'msg'
+    })
+  })
+  it('should replace void 0 values by default values', ()=>{
+    expect(fn()).toEqual({
+      errCaption: '',
+      message: 'No data available for request.'
     })
   })
 })

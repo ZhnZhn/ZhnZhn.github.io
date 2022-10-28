@@ -8,10 +8,9 @@ var _AdapterFn = require("../AdapterFn");
 exports.getValue = _AdapterFn.getValue;
 exports.joinBy = _AdapterFn.joinBy;
 exports.toUpperCaseFirst = _AdapterFn.toUpperCaseFirst;
+exports.crError = _AdapterFn.crError;
 
 var _crFn = require("../crFn");
-
-exports.crError = _crFn.crError;
 
 var _pointFn = require("../pointFn");
 

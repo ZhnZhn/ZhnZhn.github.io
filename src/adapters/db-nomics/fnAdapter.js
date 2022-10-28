@@ -1,9 +1,7 @@
 export {
-  getValue
-} from '../AdapterFn';
-export {
+  getValue,
   crError
-} from '../crFn';
+} from '../AdapterFn';
 
 import {
   isNumber,

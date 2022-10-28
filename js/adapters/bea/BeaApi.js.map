@@ -1,1 +1,44 @@
-{"version":3,"sources":["../../../src/adapters/bea/BeaApi.js"],"names":["URL","_isArr","Array","isArray","_assign","Object","assign","_setCaptionTo","option","title","subtitle","dfTitle","itemCaption","BeaApi","getRequestUrl","TableID","DataSetName","apiKey","ValueName","items","value","oneCaption","caption","_Frequncy","indexOf","checkResponse","json","BEAAPI","Results","Error","ResError","ErrorDetail","APIErrorCode","Description","APIErrorDescription","Data"],"mappings":";;;;;AAAA;;AAKA,MAAMA,GAAG,GAAG,iFAAZ;AAEA,MAAMC,MAAM,GAAGC,KAAK,CAACC,OAArB;AAAA,MACEC,OAAO,GAAGC,MAAM,CAACC,MADnB;;AAGA,MAAMC,aAAa,GAAGC,MAAM,IAAI;AAC9B,QAAM;AAAEC,IAAAA,KAAF;AAASC,IAAAA,QAAT;AAAmBC,IAAAA;AAAnB,MAA+BH,MAArC;;AACAJ,EAAAA,OAAO,CAACI,MAAD,EAAS;AACdI,IAAAA,WAAW,EAAEH,KADC;AAEdA,IAAAA,KAAK,EAAEE,OAFO;AAGdD,IAAAA,QAAQ,EAAE,uBAAO,GAAP,EAAYD,KAAZ,EAAmBC,QAAnB;AAHI,GAAT,CAAP;AAKD,CAPD;;AASA,MAAMG,MAAM,GAAG;AACbC,EAAAA,aAAa,CAACN,MAAD,EAAQ;AACnB,UAAM;AACJO,MAAAA,OADI;AAEJC,MAAAA,WAFI;AAGJC,MAAAA,MAHI;AAIJC,MAAAA,SAJI;AAKJC,MAAAA,KAAK,GAAC;AALF,QAMFX,MANJ;AAAA,UAOEY,KAAK,GAAGD,KAAK,CAAC,CAAD,CAAL,CAASC,KAPnB;AAAA,UAQEC,UAAU,GAAGF,KAAK,CAAC,CAAD,CAAL,CAASG,OARxB;AAAA,UASEC,SAAS,GAAGF,UAAU,CAACG,OAAX,CAAmB,OAAnB,MAAgC,CAAC,CAAjC,GACP,GADO,GACD,GAVb;;AAWAjB,IAAAA,aAAa,CAACC,MAAD,CAAb;;AACA,WAAUR,GAAV,SAAiBiB,MAAjB,iBAAmCF,OAAnC,qBAA0DC,WAA1D,mBAAmFO,SAAnF,SAAgGL,SAAhG,SAA6GE,KAA7G;AACD,GAfY;;AAiBbK,EAAAA,aAAa,CAACC,IAAD,EAAM;AACjB,UAAM;AAAEC,MAAAA;AAAF,QAAaD,IAAnB;AAAA,UACE;AAAEE,MAAAA,OAAO,GAAC,EAAV;AAAcC,MAAAA,KAAK,EAACC;AAApB,QAAiCH,MAAM,IAAI,EAD7C;;AAEA,QAAIG,QAAJ,EAAc;AACZ,YAAM;AAAEC,QAAAA;AAAF,UAAkBD,QAAxB;AACA,YAAM,wBACJA,QAAQ,CAACE,YADL,EAEJD,WAAW,CAACE,WAAZ,IACKH,QAAQ,CAACI,mBAHV,CAAN;AAKD;;AACD,QAAKN,OAAO,CAACC,KAAR,IAAiB,CAAC5B,MAAM,CAAC2B,OAAO,CAACO,IAAT,CAA7B,EAA8C;AAC5C,aAAO,yBAAP;AACD;;AACD,WAAO,IAAP;AACD;;AAhCY,CAAf;eAoCetB,M","sourcesContent":["import {\r\n  crError,\r\n  joinBy\r\n} from './fnAdapter';\r\n\r\nconst URL = 'https://apps.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID';\r\n\r\nconst _isArr = Array.isArray\r\n, _assign = Object.assign;\r\n\r\nconst _setCaptionTo = option => {\r\n  const { title, subtitle, dfTitle } = option;\r\n  _assign(option, {\r\n    itemCaption: title,\r\n    title: dfTitle,\r\n    subtitle: joinBy(':', title, subtitle)\r\n  })\r\n};\r\n\r\nconst BeaApi = {\r\n  getRequestUrl(option){\r\n    const {\r\n      TableID,\r\n      DataSetName,\r\n      apiKey,\r\n      ValueName,\r\n      items=[],\r\n    } = option\r\n    , value = items[0].value\r\n    , oneCaption = items[0].caption\r\n    , _Frequncy = oneCaption.indexOf('(A,Q)') === -1\r\n         ? 'A' : 'Q';\r\n    _setCaptionTo(option)\r\n    return `${URL}=${apiKey}&TableID=${TableID}&DataSetName=${DataSetName}&Frequency=${_Frequncy}&${ValueName}=${value}`;\r\n  },\r\n\r\n  checkResponse(json){\r\n    const { BEAAPI } = json\r\n    , { Results={}, Error:ResError } = BEAAPI || {};\r\n    if (ResError) {\r\n      const { ErrorDetail } = ResError;\r\n      throw crError(\r\n        ResError.APIErrorCode,\r\n        ErrorDetail.Description\r\n          || ResError.APIErrorDescription\r\n      );\r\n    }\r\n    if ( Results.Error || !_isArr(Results.Data) ) {\r\n      return crError();\r\n    }\r\n    return true;\r\n  }\r\n\r\n};\r\n\r\nexport default BeaApi\r\n"],"file":"BeaApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bea/BeaApi.js"
+ ],
+ "file": "../../../src/adapters/bea/BeaApi.js",
+ "names": [
+  "URL",
+  "_setCaptionTo",
+  "option",
+  "title",
+  "subtitle",
+  "dfTitle",
+  "assign",
+  "itemCaption",
+  "joinBy",
+  "BeaApi",
+  "getRequestUrl",
+  "TableID",
+  "DataSetName",
+  "apiKey",
+  "ValueName",
+  "items",
+  "value",
+  "oneCaption",
+  "caption",
+  "_Frequncy",
+  "indexOf",
+  "checkResponse",
+  "json",
+  "BEAAPI",
+  "Results",
+  "Error",
+  "ResError",
+  "ErrorDetail",
+  "crError",
+  "APIErrorCode",
+  "Description",
+  "APIErrorDescription",
+  "isArr",
+  "Data"
+ ],
+ "mappings": ";;;;;AAAA;;AAOA,MAAMA,GAAG,GAAG,iFAAZ;;AAEA,MAAMC,aAAa,GAAGC,MAAM,IAAI;EAC9B,MAAM;IACJC,KADI;IAEJC,QAFI;IAGJC;EAHI,IAIFH,MAJJ;EAKA,IAAAI,iBAAA,EAAOJ,MAAP,EAAe;IACbK,WAAW,EAAEJ,KADA;IAEbA,KAAK,EAAEE,OAFM;IAGbD,QAAQ,EAAE,IAAAI,iBAAA,EAAO,GAAP,EAAYL,KAAZ,EAAmBC,QAAnB;EAHG,CAAf;AAKD,CAXD;;AAaA,MAAMK,MAAM,GAAG;EACbC,aAAa,CAACR,MAAD,EAAQ;IACnB,MAAM;MACJS,OADI;MAEJC,WAFI;MAGJC,MAHI;MAIJC,SAJI;MAKJC,KAAK,GAAC;IALF,IAMFb,MANJ;IAAA,MAOEc,KAAK,GAAGD,KAAK,CAAC,CAAD,CAAL,CAASC,KAPnB;IAAA,MAQEC,UAAU,GAAGF,KAAK,CAAC,CAAD,CAAL,CAASG,OARxB;IAAA,MASEC,SAAS,GAAGF,UAAU,CAACG,OAAX,CAAmB,OAAnB,MAAgC,CAAC,CAAjC,GACP,GADO,GACD,GAVb;;IAWAnB,aAAa,CAACC,MAAD,CAAb;;IACA,OAAUF,GAAV,SAAiBa,MAAjB,iBAAmCF,OAAnC,qBAA0DC,WAA1D,mBAAmFO,SAAnF,SAAgGL,SAAhG,SAA6GE,KAA7G;EACD,CAfY;;EAiBbK,aAAa,CAACC,IAAD,EAAM;IACjB,MAAM;MAAEC;IAAF,IAAaD,IAAnB;IAAA,MACE;MACAE,OAAO,GAAC,EADR;MAEAC,KAAK,EAACC;IAFN,IAGEH,MAAM,IAAI,EAJd;;IAKA,IAAIG,QAAJ,EAAc;MACZ,MAAM;QAAEC;MAAF,IAAkBD,QAAxB;MACA,MAAM,IAAAE,kBAAA,EACJF,QAAQ,CAACG,YADL,EAEJF,WAAW,CAACG,WAAZ,IACKJ,QAAQ,CAACK,mBAHV,CAAN;IAKD;;IACD,IAAIP,OAAO,CAACC,KAAR,IAAiB,CAAC,IAAAO,gBAAA,EAAMR,OAAO,CAACS,IAAd,CAAtB,EAA2C;MACzC,OAAO,IAAAL,kBAAA,GAAP;IACD;;IACD,OAAO,IAAP;EACD;;AAnCY,CAAf;eAuCenB,M"
+}

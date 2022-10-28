@@ -1,1 +1,46 @@
-{"version":3,"sources":["../../../src/adapters/iex/IexApi.js"],"names":["C","BASE_URL","DF_SYMBOL","DF_PERIOD","_assign","Object","assign","_crUrlType1","option","items","dfType","value","_urlDividends","dfPeriod","_urlChart","one","two","symbol","dfValue","period","_crUrlMarketList","url","q","_rUrl","DF","IT","DIV","CHART","COM","STA","ML","IexApi","getRequestUrl","apiKey","_url","checkResponse","json"],"mappings":"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","sourcesContent":["import { getValue } from '../AdapterFn'\r\nimport { crError } from '../crFn';\r\nimport IT from './ItemTypes'\r\n\r\nconst C = {\r\n  BASE_URL: 'https://cloud.iexapis.com/stable/stock',\r\n  DF_SYMBOL: 'AAPL',\r\n  DF_PERIOD: '1m'\r\n};\r\n\r\nconst _assign = Object.assign;\r\n\r\n//company, stats: symbol/dfType\r\nconst _crUrlType1 = option => {\r\n  const { items=[], dfType } = option\r\n  , value = getValue(items[0]);\r\n  option.value = value\r\n  return `${C.BASE_URL}/${value}/${dfType}`;\r\n};\r\n\r\nconst _urlDividends = (option) => {\r\n  const { items=[], dfPeriod } = option\r\n  , value = getValue(items[0]);\r\n  option.value = value\r\n  return `${C.BASE_URL}/${value}/dividends/${dfPeriod}`;\r\n};\r\n\r\nconst _urlChart = (option) => {\r\n  const { items=[], one, two, value, dfPeriod } = option\r\n  // one, two deprecated option remains for watch compatibility\r\n  // value, dfPeriod for stock by sector\r\n  , symbol = one || value || getValue(items[0], { dfValue: C.DF_SYMBOL})\r\n  , period = two || dfPeriod || getValue(items[1], { dfValue: C.DF_PERIOD });\r\n  _assign(option, { symbol, period })\r\n  return `${C.BASE_URL}/${symbol}/chart/${period}`;\r\n};\r\n\r\nconst _crUrlMarketList = (option) => {\r\n  const { items=[] } = option\r\n  , value = getValue(items[0]);\r\n  return {\r\n    url: `${C.BASE_URL}/market/list/${value}`,\r\n    q: 'listLimit=20&displayPercent=true'\r\n  };\r\n};\r\n\r\nconst _rUrl = {\r\n  DF: _urlChart,\r\n  [IT.DIV]: _urlDividends,\r\n  [IT.CHART]: _urlChart,\r\n  [IT.COM]: _crUrlType1,\r\n  [IT.STA]: _crUrlType1,\r\n  [IT.ML]: _crUrlMarketList\r\n};\r\n\r\nconst IexApi = {\r\n  getRequestUrl(option){\r\n    const { dfType, apiKey } = option\r\n    , _url = (_rUrl[dfType] || _rUrl.DF)(option);\r\n    return _url.q\r\n      ? `${_url.url}?${_url.q}&token=${apiKey}`\r\n      : `${_url}?token=${apiKey}`;\r\n  },\r\n\r\n  checkResponse(json){\r\n    if (!json) {\r\n      throw crError();\r\n    }\r\n    return true;\r\n  }\r\n}\r\n\r\nexport default IexApi\r\n"],"file":"IexApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/iex/IexApi.js"
+ ],
+ "file": "../../../src/adapters/iex/IexApi.js",
+ "names": [
+  "API_URL",
+  "DF_SYMBOL",
+  "DF_PERIOD",
+  "_crUrlType1",
+  "option",
+  "items",
+  "dfType",
+  "value",
+  "getValue",
+  "_urlDividends",
+  "dfPeriod",
+  "_urlChart",
+  "one",
+  "two",
+  "symbol",
+  "dfValue",
+  "period",
+  "assign",
+  "_crUrlMarketList",
+  "url",
+  "q",
+  "_rUrl",
+  "DF",
+  "IT",
+  "DIV",
+  "CHART",
+  "COM",
+  "STA",
+  "ML",
+  "IexApi",
+  "getRequestUrl",
+  "apiKey",
+  "_url",
+  "checkResponse",
+  "json",
+  "crError"
+ ],
+ "mappings": ";;;;;;;AAAA;;AAKA;;AAEA,MAAMA,OAAO,GAAG,wCAAhB;AAAA,MACEC,SAAS,GAAG,MADd;AAAA,MAEEC,SAAS,GAAG,IAFd,C,CAIA;;AACA,MAAMC,WAAW,GAAGC,MAAM,IAAI;EAC5B,MAAM;IAAEC,KAAK,GAAC,EAAR;IAAYC;EAAZ,IAAuBF,MAA7B;EAAA,MACEG,KAAK,GAAG,IAAAC,mBAAA,EAASH,KAAK,CAAC,CAAD,CAAd,CADV;EAEAD,MAAM,CAACG,KAAP,GAAeA,KAAf;EACA,OAAUP,OAAV,SAAqBO,KAArB,SAA8BD,MAA9B;AACD,CALD;;AAOA,MAAMG,aAAa,GAAIL,MAAD,IAAY;EAChC,MAAM;IAAEC,KAAK,GAAC,EAAR;IAAYK;EAAZ,IAAyBN,MAA/B;EAAA,MACEG,KAAK,GAAG,IAAAC,mBAAA,EAASH,KAAK,CAAC,CAAD,CAAd,CADV;EAEAD,MAAM,CAACG,KAAP,GAAeA,KAAf;EACA,OAAUP,OAAV,SAAqBO,KAArB,mBAAwCG,QAAxC;AACD,CALD;;AAOA,MAAMC,SAAS,GAAIP,MAAD,IAAY;EAC5B,MAAM;IACJC,KAAK,GAAC,EADF;IAEJO,GAFI;IAGJC,GAHI;IAIJN,KAJI;IAKJG;EALI,IAMFN,MANJ,CAOA;EACA;EARA;EAAA,MASEU,MAAM,GAAGF,GAAG,IAAIL,KAAP,IAAgB,IAAAC,mBAAA,EAASH,KAAK,CAAC,CAAD,CAAd,EAAmB;IAAEU,OAAO,EAAEd;EAAX,CAAnB,CAT3B;EAAA,MAUEe,MAAM,GAAGH,GAAG,IAAIH,QAAP,IAAmB,IAAAF,mBAAA,EAASH,KAAK,CAAC,CAAD,CAAd,EAAmB;IAAEU,OAAO,EAAEb;EAAX,CAAnB,CAV9B;EAWA,IAAAe,iBAAA,EAAOb,MAAP,EAAe;IAAEU,MAAF;IAAUE;EAAV,CAAf;EACA,OAAUhB,OAAV,SAAqBc,MAArB,eAAqCE,MAArC;AACD,CAdD;;AAgBA,MAAME,gBAAgB,GAAId,MAAD,IAAY;EACnC,MAAM;IAAEC,KAAK,GAAC;EAAR,IAAeD,MAArB;EAAA,MACEG,KAAK,GAAG,IAAAC,mBAAA,EAASH,KAAK,CAAC,CAAD,CAAd,CADV;EAEA,OAAO;IACLc,GAAG,EAAKnB,OAAL,qBAA4BO,KAD1B;IAELa,CAAC,EAAE;EAFE,CAAP;AAID,CAPD;;AASA,MAAMC,KAAK,GAAG;EACZC,EAAE,EAAEX,SADQ;EAEZ,CAACY,kBAAA,CAAGC,GAAJ,GAAUf,aAFE;EAGZ,CAACc,kBAAA,CAAGE,KAAJ,GAAYd,SAHA;EAIZ,CAACY,kBAAA,CAAGG,GAAJ,GAAUvB,WAJE;EAKZ,CAACoB,kBAAA,CAAGI,GAAJ,GAAUxB,WALE;EAMZ,CAACoB,kBAAA,CAAGK,EAAJ,GAASV;AANG,CAAd;AASA,MAAMW,MAAM,GAAG;EACbC,aAAa,CAAC1B,MAAD,EAAQ;IACnB,MAAM;MAAEE,MAAF;MAAUyB;IAAV,IAAqB3B,MAA3B;IAAA,MACE4B,IAAI,GAAG,CAACX,KAAK,CAACf,MAAD,CAAL,IAAiBe,KAAK,CAACC,EAAxB,EAA4BlB,MAA5B,CADT;;IAEA,OAAO4B,IAAI,CAACZ,CAAL,GACAY,IAAI,CAACb,GADL,SACYa,IAAI,CAACZ,CADjB,eAC4BW,MAD5B,GAEAC,IAFA,eAEcD,MAFrB;EAGD,CAPY;;EASbE,aAAa,CAACC,IAAD,EAAM;IACjB,IAAI,CAACA,IAAL,EAAW;MACT,MAAM,IAAAC,kBAAA,GAAN;IACD;;IACD,OAAO,IAAP;EACD;;AAdY,CAAf;eAiBeN,M"
+}

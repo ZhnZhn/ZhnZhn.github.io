@@ -1,11 +1,9 @@
 export {
   getValue,
   joinBy,
-  toUpperCaseFirst
-} from '../AdapterFn';
-export {
+  toUpperCaseFirst,
   crError
-} from '../crFn';
+} from '../AdapterFn';
 
 import {
   getValue,

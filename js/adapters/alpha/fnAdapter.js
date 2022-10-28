@@ -15,14 +15,13 @@ exports.valueMoving = _AdapterFn.valueMoving;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.ymdhmsToUTC = _AdapterFn.ymdhmsToUTC;
 exports.roundBy = _AdapterFn.roundBy;
+exports.crError = _AdapterFn.crError;
 
 var _compareByFn = require("../compareByFn");
 
 exports.compareByDate = _compareByFn.compareByDate;
 
 var _crFn = require("../crFn");
-
-exports.crError = _crFn.crError;
 
 var _legendFn = require("../legendFn");
 

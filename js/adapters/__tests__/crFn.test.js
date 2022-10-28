@@ -2,21 +2,6 @@
 
 var _crFn = require("../crFn");
 
-describe('crError', () => {
-  const fn = _crFn.crError;
-  it('should create err obj', () => {
-    expect(fn('caption', 'msg')).toEqual({
-      errCaption: 'caption',
-      message: 'msg'
-    });
-  });
-  it('should replace void 0 values by default values', () => {
-    expect(fn()).toEqual({
-      errCaption: '',
-      message: 'No data available for request.'
-    });
-  });
-});
 describe('crHm', () => {
   it('should create object with null prototype', () => {
     const hm = (0, _crFn.crHm)();
@@ -41,6 +26,41 @@ describe('crItemConf', () => {
       itemCaption: void 0
     })).toEqual({
       title: 'title'
+    });
+  });
+});
+describe('crValueConf', () => {
+  const fn = _crFn.crValueConf;
+  it('should return {x, y} recent point from data', () => {
+    expect(fn([[3, 3], [1, 2]])).toEqual({
+      x: 1,
+      y: 2
+    });
+    expect(fn([{
+      x: 3,
+      y: 3
+    }, {
+      x: 1,
+      y: 2
+    }])).toEqual({
+      x: 1,
+      y: 2
+    });
+  });
+  it('should use str 0.0 for y not number', () => {
+    expect(fn([[3, 3], [1, null]])).toEqual({
+      x: 1,
+      y: '0.0'
+    });
+    expect(fn([{
+      x: 3,
+      y: 3
+    }, {
+      x: 1,
+      y: NaN
+    }])).toEqual({
+      x: 1,
+      y: '0.0'
     });
   });
 });

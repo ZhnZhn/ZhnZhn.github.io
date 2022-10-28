@@ -1,8 +1,9 @@
-export { crError } from '../crFn';
+export { crError } from '../AdapterFn';
 
-import { ymdToUTC } from '../AdapterFn';
-
-const _isArr = Array.isArray;
+import {
+  isArr,
+  ymdToUTC
+} from '../AdapterFn';
 
 const _crInfo = ({
   title,
@@ -24,7 +25,7 @@ export const getCi = _getCountryIndicator
 
 export const crData = (json) => {
    const arrIn = json[1];
-   if (!_isArr(arrIn)) {
+   if (!isArr(arrIn)) {
      return [];
    }
    const d = [];

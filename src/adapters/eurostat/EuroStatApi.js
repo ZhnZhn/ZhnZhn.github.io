@@ -1,4 +1,4 @@
-import { crError } from '../crFn';
+import { crError } from '../AdapterFn';
 import api from './api/api';
 
 const RES_ERR_STATUS = [400]

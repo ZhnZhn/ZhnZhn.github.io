@@ -7,16 +7,11 @@ exports.default = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
-var _crFn = require("../crFn");
-
 var _ItemTypes = _interopRequireDefault(require("./ItemTypes"));
 
-const C = {
-  BASE_URL: 'https://cloud.iexapis.com/stable/stock',
-  DF_SYMBOL: 'AAPL',
-  DF_PERIOD: '1m'
-};
-const _assign = Object.assign; //company, stats: symbol/dfType
+const API_URL = 'https://cloud.iexapis.com/stable/stock',
+      DF_SYMBOL = 'AAPL',
+      DF_PERIOD = '1m'; //company, stats: symbol/dfType
 
 const _crUrlType1 = option => {
   const {
@@ -25,7 +20,7 @@ const _crUrlType1 = option => {
   } = option,
         value = (0, _AdapterFn.getValue)(items[0]);
   option.value = value;
-  return C.BASE_URL + "/" + value + "/" + dfType;
+  return API_URL + "/" + value + "/" + dfType;
 };
 
 const _urlDividends = option => {
@@ -35,7 +30,7 @@ const _urlDividends = option => {
   } = option,
         value = (0, _AdapterFn.getValue)(items[0]);
   option.value = value;
-  return C.BASE_URL + "/" + value + "/dividends/" + dfPeriod;
+  return API_URL + "/" + value + "/dividends/" + dfPeriod;
 };
 
 const _urlChart = option => {
@@ -49,18 +44,16 @@ const _urlChart = option => {
   // value, dfPeriod for stock by sector
   ,
         symbol = one || value || (0, _AdapterFn.getValue)(items[0], {
-    dfValue: C.DF_SYMBOL
+    dfValue: DF_SYMBOL
   }),
         period = two || dfPeriod || (0, _AdapterFn.getValue)(items[1], {
-    dfValue: C.DF_PERIOD
+    dfValue: DF_PERIOD
   });
-
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     symbol,
     period
   });
-
-  return C.BASE_URL + "/" + symbol + "/chart/" + period;
+  return API_URL + "/" + symbol + "/chart/" + period;
 };
 
 const _crUrlMarketList = option => {
@@ -69,7 +62,7 @@ const _crUrlMarketList = option => {
   } = option,
         value = (0, _AdapterFn.getValue)(items[0]);
   return {
-    url: C.BASE_URL + "/market/list/" + value,
+    url: API_URL + "/market/list/" + value,
     q: 'listLimit=20&displayPercent=true'
   };
 };
@@ -95,7 +88,7 @@ const IexApi = {
 
   checkResponse(json) {
     if (!json) {
-      throw (0, _crFn.crError)();
+      throw (0, _AdapterFn.crError)();
     }
 
     return true;

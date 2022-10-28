@@ -1,12 +1,13 @@
 import { getDaysFromYmd } from '../../utils/DateUtils';
-import { crError, crPageConfig } from './fnAdapter';
+import { isArr, assign, crError } from '../AdapterFn';
+import { crPageConfig } from './fnAdapter';
 
 const API_URL = 'https://api.coingecko.com/api/v3'
-, PAGE_URL = 'https://www.coingecko.com/en/coins'
-, _assign = Object.assign
-, _isArr = Array.isArray;
+, PAGE_URL = 'https://www.coingecko.com/en/coins';
 
-const _crDays = ({ fromDate }) => {
+const _crDays = ({
+  fromDate
+}) => {
   const _d = getDaysFromYmd(fromDate);
   return _d > 90 ? _d : 91;
 };
@@ -19,7 +20,7 @@ const _assignDf = option => {
   , _vs = `${s}/${_currency}`
   , _days = _crDays(option);
 
-  _assign(option, {
+  assign(option, {
     itemCaption: _vs,
     title: c,
     subtitle: 'Values on 00:00 GMT',
@@ -36,7 +37,7 @@ const _assignMcl = option => {
     currency
   ] = crPageConfig(option);
 
-  _assign(option, {
+  assign(option, {
     title: `By Market Cap Page: ${page} (${perPage})`,
     _itemUrl: `${API_URL}/coins/markets?order=market_cap_desc&page=${page}&per_page=${perPage}&vs_currency=${currency}&price_change_percentage=1h,7d,30d,1y`
   })
@@ -47,7 +48,7 @@ const _assignEl = option => {
     page, perPage
   ] = crPageConfig(option);
 
-  _assign(option, {
+  assign(option, {
     title: `By Exchages Page: ${page} (${perPage})`,
     _itemUrl: `${API_URL}/exchanges?page=${page}&per_page=${perPage}`
   })
@@ -69,11 +70,11 @@ const CgApi = {
   checkResponse(json, option){
     const { dfSubId } = option
     if ( (dfSubId === 'MCL' || dfSubId === 'EL')
-        && _isArr(json)
+        && isArr(json)
         && json.length > 1) {
       return true;
     }
-    if (json && _isArr(json.prices)) {
+    if (json && isArr(json.prices)) {
       return true;
     }
     throw crError();

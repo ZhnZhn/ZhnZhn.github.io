@@ -10,18 +10,7 @@ const { assign, create } = Object
     ? `<p class="${className}">`
     : '<p>';
 
-const DF_ERR_MESSAGE = 'No data available for request.'
-
 export const crHm = obj => assign(create(null), obj)
-
-export const crError = (
-  errCaption='',
-  message=DF_ERR_MESSAGE
-) => ({
-  errCaption,
-  message
-})
-
 
 // Quandl toScatter, Stat-Json
 export const crId = () => _crId().toUpperCase()

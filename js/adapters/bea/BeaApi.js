@@ -3,11 +3,9 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _fnAdapter = require("./fnAdapter");
+var _AdapterFn = require("../AdapterFn");
 
 const URL = 'https://apps.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID';
-const _isArr = Array.isArray,
-      _assign = Object.assign;
 
 const _setCaptionTo = option => {
   const {
@@ -15,11 +13,10 @@ const _setCaptionTo = option => {
     subtitle,
     dfTitle
   } = option;
-
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     itemCaption: title,
     title: dfTitle,
-    subtitle: (0, _fnAdapter.joinBy)(':', title, subtitle)
+    subtitle: (0, _AdapterFn.joinBy)(':', title, subtitle)
   });
 };
 
@@ -54,11 +51,11 @@ const BeaApi = {
       const {
         ErrorDetail
       } = ResError;
-      throw (0, _fnAdapter.crError)(ResError.APIErrorCode, ErrorDetail.Description || ResError.APIErrorDescription);
+      throw (0, _AdapterFn.crError)(ResError.APIErrorCode, ErrorDetail.Description || ResError.APIErrorDescription);
     }
 
-    if (Results.Error || !_isArr(Results.Data)) {
-      return (0, _fnAdapter.crError)();
+    if (Results.Error || !(0, _AdapterFn.isArr)(Results.Data)) {
+      return (0, _AdapterFn.crError)();
     }
 
     return true;

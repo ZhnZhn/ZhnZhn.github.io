@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/adapters/__tests__/crFn.test.js"],"names":["describe","fn","crError","it","expect","toEqual","errCaption","message","hm","Object","getPrototypeOf","toBe","toString","valueOf","props","a","b","crItemConf","title","subtitle","itemCaption"],"mappings":";;AAAA;;AAMAA,QAAQ,CAAC,SAAD,EAAY,MAAI;AACtB,QAAMC,EAAE,GAAGC,aAAX;AACAC,EAAAA,EAAE,CAAC,uBAAD,EAA0B,MAAI;AAC9BC,IAAAA,MAAM,CAACH,EAAE,CAAC,SAAD,EAAY,KAAZ,CAAH,CAAN,CAA6BI,OAA7B,CAAqC;AACnCC,MAAAA,UAAU,EAAE,SADuB;AAEnCC,MAAAA,OAAO,EAAE;AAF0B,KAArC;AAID,GALC,CAAF;AAMAJ,EAAAA,EAAE,CAAC,gDAAD,EAAmD,MAAI;AACvDC,IAAAA,MAAM,CAACH,EAAE,EAAH,CAAN,CAAaI,OAAb,CAAqB;AACnBC,MAAAA,UAAU,EAAE,EADO;AAEnBC,MAAAA,OAAO,EAAE;AAFU,KAArB;AAID,GALC,CAAF;AAMD,CAdO,CAAR;AAgBAP,QAAQ,CAAC,MAAD,EAAS,MAAI;AACnBG,EAAAA,EAAE,CAAC,0CAAD,EAA6C,MAAI;AACjD,UAAMK,EAAE,GAAG,iBAAX;AACAJ,IAAAA,MAAM,CAACK,MAAM,CAACC,cAAP,CAAsBF,EAAtB,CAAD,CAAN,CAAkCG,IAAlC,CAAuC,IAAvC;AACAP,IAAAA,MAAM,CAACI,EAAE,CAACI,QAAJ,CAAN,CAAoBD,IAApB,CAAyB,KAAK,CAA9B;AACAP,IAAAA,MAAM,CAACI,EAAE,CAACK,OAAJ,CAAN,CAAmBF,IAAnB,CAAwB,KAAK,CAA7B;AACD,GALC,CAAF;AAMAR,EAAAA,EAAE,CAAC,2BAAD,EAA8B,MAAI;AAClC,UAAMW,KAAK,GAAG;AAAEC,MAAAA,CAAC,EAAE,GAAL;AAAUC,MAAAA,CAAC,EAAE;AAAb,KAAd;AACAZ,IAAAA,MAAM,CAAC,gBAAKU,KAAL,CAAD,CAAN,CAAoBT,OAApB,CAA4BS,KAA5B;AACD,GAHC,CAAF;AAID,CAXO,CAAR;AAaAd,QAAQ,CAAC,YAAD,EAAe,MAAI;AACzB,QAAMC,EAAE,GAAGgB,gBAAX;AACAd,EAAAA,EAAE,CAAC,kCAAD,EAAqC,MAAI;AACzCC,IAAAA,MAAM,CAACH,EAAE,CAAC;AACRiB,MAAAA,KAAK,EAAE,OADC;AAERC,MAAAA,QAAQ,EAAE,IAFF;AAGRC,MAAAA,WAAW,EAAE,KAAK;AAHV,KAAD,CAAH,CAAN,CAIIf,OAJJ,CAIY;AACVa,MAAAA,KAAK,EAAE;AADG,KAJZ;AAOD,GARC,CAAF;AASD,CAXO,CAAR","sourcesContent":["import {\r\n  crHm,\r\n  crError,\r\n  crItemConf\r\n} from '../crFn';\r\n\r\ndescribe('crError', ()=>{\r\n  const fn = crError\r\n  it('should create err obj', ()=>{\r\n    expect(fn('caption', 'msg')).toEqual({\r\n      errCaption: 'caption',\r\n      message: 'msg'\r\n    })\r\n  })\r\n  it('should replace void 0 values by default values', ()=>{\r\n    expect(fn()).toEqual({\r\n      errCaption: '',\r\n      message: 'No data available for request.'\r\n    })\r\n  })\r\n})\r\n\r\ndescribe('crHm', ()=>{\r\n  it('should create object with null prototype', ()=>{\r\n    const hm = crHm();\r\n    expect(Object.getPrototypeOf(hm)).toBe(null)\r\n    expect(hm.toString).toBe(void 0)\r\n    expect(hm.valueOf).toBe(void 0)\r\n  })\r\n  it('should add props from arg', ()=>{\r\n    const props = { a: 'a', b: 'b'};\r\n    expect(crHm(props)).toEqual(props)\r\n  })\r\n})\r\n\r\ndescribe('crItemConf', ()=>{\r\n  const fn = crItemConf\r\n  it('should create obj with item conf', ()=>{\r\n    expect(fn({\r\n      title: 'title',\r\n      subtitle: null,\r\n      itemCaption: void 0\r\n    })).toEqual({\r\n      title: 'title'\r\n    })\r\n  })\r\n})\r\n"],"file":"crFn.test.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/__tests__/crFn.test.js"
+ ],
+ "file": "../../../src/adapters/__tests__/crFn.test.js",
+ "names": [
+  "describe",
+  "it",
+  "hm",
+  "crHm",
+  "expect",
+  "Object",
+  "getPrototypeOf",
+  "toBe",
+  "toString",
+  "valueOf",
+  "props",
+  "a",
+  "b",
+  "toEqual",
+  "fn",
+  "crItemConf",
+  "title",
+  "subtitle",
+  "itemCaption",
+  "crValueConf",
+  "x",
+  "y",
+  "NaN"
+ ],
+ "mappings": ";;AAAA;;AAMAA,QAAQ,CAAC,MAAD,EAAS,MAAI;EACnBC,EAAE,CAAC,0CAAD,EAA6C,MAAI;IACjD,MAAMC,EAAE,GAAG,IAAAC,UAAA,GAAX;IACAC,MAAM,CAACC,MAAM,CAACC,cAAP,CAAsBJ,EAAtB,CAAD,CAAN,CAAkCK,IAAlC,CAAuC,IAAvC;IACAH,MAAM,CAACF,EAAE,CAACM,QAAJ,CAAN,CAAoBD,IAApB,CAAyB,KAAK,CAA9B;IACAH,MAAM,CAACF,EAAE,CAACO,OAAJ,CAAN,CAAmBF,IAAnB,CAAwB,KAAK,CAA7B;EACD,CALC,CAAF;EAMAN,EAAE,CAAC,2BAAD,EAA8B,MAAI;IAClC,MAAMS,KAAK,GAAG;MAAEC,CAAC,EAAE,GAAL;MAAUC,CAAC,EAAE;IAAb,CAAd;IACAR,MAAM,CAAC,IAAAD,UAAA,EAAKO,KAAL,CAAD,CAAN,CAAoBG,OAApB,CAA4BH,KAA5B;EACD,CAHC,CAAF;AAID,CAXO,CAAR;AAaAV,QAAQ,CAAC,YAAD,EAAe,MAAI;EACzB,MAAMc,EAAE,GAAGC,gBAAX;EACAd,EAAE,CAAC,kCAAD,EAAqC,MAAI;IACzCG,MAAM,CAACU,EAAE,CAAC;MACRE,KAAK,EAAE,OADC;MAERC,QAAQ,EAAE,IAFF;MAGRC,WAAW,EAAE,KAAK;IAHV,CAAD,CAAH,CAAN,CAIIL,OAJJ,CAIY;MACVG,KAAK,EAAE;IADG,CAJZ;EAOD,CARC,CAAF;AASD,CAXO,CAAR;AAaAhB,QAAQ,CAAC,aAAD,EAAgB,MAAI;EAC1B,MAAMc,EAAE,GAAGK,iBAAX;EACAlB,EAAE,CAAC,6CAAD,EAAgD,MAAI;IACpDG,MAAM,CAACU,EAAE,CAAC,CAAC,CAAC,CAAD,EAAI,CAAJ,CAAD,EAAS,CAAC,CAAD,EAAI,CAAJ,CAAT,CAAD,CAAH,CAAN,CAA6BD,OAA7B,CAAqC;MAAEO,CAAC,EAAE,CAAL;MAAQC,CAAC,EAAE;IAAX,CAArC;IACAjB,MAAM,CAACU,EAAE,CAAC,CAAC;MAACM,CAAC,EAAC,CAAH;MAAMC,CAAC,EAAC;IAAR,CAAD,EAAa;MAACD,CAAC,EAAC,CAAH;MAAMC,CAAC,EAAC;IAAR,CAAb,CAAD,CAAH,CAAN,CAAqCR,OAArC,CAA6C;MAAEO,CAAC,EAAE,CAAL;MAAQC,CAAC,EAAE;IAAX,CAA7C;EACD,CAHC,CAAF;EAIApB,EAAE,CAAC,qCAAD,EAAwC,MAAI;IAC5CG,MAAM,CAACU,EAAE,CAAC,CAAC,CAAC,CAAD,EAAI,CAAJ,CAAD,EAAS,CAAC,CAAD,EAAI,IAAJ,CAAT,CAAD,CAAH,CAAN,CAAgCD,OAAhC,CAAwC;MAAEO,CAAC,EAAE,CAAL;MAAQC,CAAC,EAAE;IAAX,CAAxC;IACAjB,MAAM,CAACU,EAAE,CAAC,CAAC;MAACM,CAAC,EAAC,CAAH;MAAMC,CAAC,EAAC;IAAR,CAAD,EAAa;MAACD,CAAC,EAAC,CAAH;MAAMC,CAAC,EAACC;IAAR,CAAb,CAAD,CAAH,CAAN,CAAuCT,OAAvC,CAA+C;MAAEO,CAAC,EAAE,CAAL;MAAQC,CAAC,EAAE;IAAX,CAA/C;EACD,CAHC,CAAF;AAID,CAVO,CAAR"
+}

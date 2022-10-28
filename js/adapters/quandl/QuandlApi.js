@@ -3,13 +3,11 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _crFn = require("../crFn");
+var _AdapterFn = require("../AdapterFn");
 
-const C = {
-  ROOT_URL: "https://www.quandl.com/api/v3/datasets/",
-  TABLE_URL: "https://www.quandl.com/api/v3/datatables/",
-  LIMIT_REMAINING: 'X-RateLimit-Remaining'
-};
+const API_URL = "https://www.quandl.com/api/v3/datasets/",
+      TABLE_URL = "https://www.quandl.com/api/v3/datatables/",
+      LIMIT_REMAINING = 'X-RateLimit-Remaining';
 
 const _addTo = (q, pN, pV) => {
   if (!pV) {
@@ -32,7 +30,7 @@ const _crSetUrl = option => {
   _q = _addTo(_q, 'trim_end', toDate);
   _q = _addTo(_q, 'transform', transform);
   _q = _addTo(_q, 'api_key', apiKey);
-  return "" + C.ROOT_URL + value + ".json?" + _q;
+  return "" + API_URL + value + ".json?" + _q;
 };
 
 const _crTableUrl = option => {
@@ -49,18 +47,18 @@ const _crTableUrl = option => {
     two
   } = value;
   option.key = option.value = one + "_" + two;
-  return "" + proxy + C.TABLE_URL + dfTable + ".json?ticker=" + one + "&api_key=" + apiKey + "&" + dfTail + "&qopts.columns=" + dfColumn + "," + two;
+  return "" + proxy + TABLE_URL + dfTable + ".json?ticker=" + one + "&api_key=" + apiKey + "&" + dfTail + "&qopts.columns=" + dfColumn + "," + two;
 };
 
 const _checkErr = err => {
   if (err) {
-    throw (0, _crFn.crError)('', err.message);
+    throw (0, _AdapterFn.crError)('', err.message);
   }
 };
 
 const _checkDataEmpty = (dataset, datatable) => {
   if (!dataset && !datatable) {
-    throw (0, _crFn.crError)();
+    throw (0, _AdapterFn.crError)();
   }
 };
 
@@ -72,7 +70,7 @@ const _checkDataset = dataset => {
   } = dataset;
 
   if (!data || data.length === 0) {
-    throw (0, _crFn.crError)('', "Result dataset for request is empty:\n        Newest Date: " + (newest_available_date || '') + "\n        Oldest Date: " + (oldest_available_date || ''));
+    throw (0, _AdapterFn.crError)('', "Result dataset for request is empty:\n        Newest Date: " + (newest_available_date || '') + "\n        Oldest Date: " + (oldest_available_date || ''));
   }
 };
 
@@ -86,7 +84,7 @@ const QuandlApi = {
   },
 
   // headers && headers.get existed
-  getLimitRemaiming: headers => headers.get(C.LIMIT_REMAINING),
+  getLimitRemaiming: headers => headers.get(LIMIT_REMAINING),
 
   checkResponse(json) {
     const {

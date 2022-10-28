@@ -1,16 +1,19 @@
 import {
-  crError,
-  joinBy
-} from './fnAdapter';
+  isArr,
+  assign,
+  joinBy,
+  crError
+} from '../AdapterFn';
 
 const URL = 'https://apps.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID';
 
-const _isArr = Array.isArray
-, _assign = Object.assign;
-
 const _setCaptionTo = option => {
-  const { title, subtitle, dfTitle } = option;
-  _assign(option, {
+  const {
+    title,
+    subtitle,
+    dfTitle
+  } = option;
+  assign(option, {
     itemCaption: title,
     title: dfTitle,
     subtitle: joinBy(':', title, subtitle)
@@ -36,7 +39,10 @@ const BeaApi = {
 
   checkResponse(json){
     const { BEAAPI } = json
-    , { Results={}, Error:ResError } = BEAAPI || {};
+    , {
+      Results={},
+      Error:ResError
+    } = BEAAPI || {};
     if (ResError) {
       const { ErrorDetail } = ResError;
       throw crError(
@@ -45,7 +51,7 @@ const BeaApi = {
           || ResError.APIErrorDescription
       );
     }
-    if ( Results.Error || !_isArr(Results.Data) ) {
+    if (Results.Error || !isArr(Results.Data)) {
       return crError();
     }
     return true;

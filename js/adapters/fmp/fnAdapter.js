@@ -8,12 +8,11 @@ var _AdapterFn = require("../AdapterFn");
 exports.getFromDate = _AdapterFn.getFromDate;
 exports.getCaption = _AdapterFn.getCaption;
 exports.getValue = _AdapterFn.getValue;
-
-var _crFn = require("../crFn");
-
-exports.crError = _crFn.crError;
+exports.crError = _AdapterFn.crError;
 
 var _compareByFn = require("../compareByFn");
+
+var _crFn = require("../crFn");
 
 const _assign = Object.assign;
 exports._assign = _assign;

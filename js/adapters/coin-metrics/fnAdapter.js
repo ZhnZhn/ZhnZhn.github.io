@@ -6,10 +6,9 @@ exports.getDaysFromYmd = exports.crError = exports.crData = exports.crConfOption
 var _AdapterFn = require("../AdapterFn");
 
 exports.getDaysFromYmd = _AdapterFn.getDaysFromYmd;
+exports.crError = _AdapterFn.crError;
 
 var _crFn = require("../crFn");
-
-exports.crError = _crFn.crError;
 
 const _crZhConfig = (option, data) => {
   const {

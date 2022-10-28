@@ -1,25 +1,26 @@
-export { joinBy } from '../AdapterFn';
-export { crError } from '../crFn';
-
 import {
   _isNaN,
+  isArr,
   ymdToUTC
 } from '../AdapterFn';
 
-const _isArr = Array.isArray
-, _getResults = json => json.BEAAPI.Results
-, _getData = Results => _isArr(Results)
+const _getResults = json => json.BEAAPI.Results
+, _getData = Results => isArr(Results)
     ? Results[0].Data
     : Results.Data
-, _getInfo = Results => _isArr(Results)
+, _getInfo = Results => isArr(Results)
     ? Results[0]
     : Results;
 
 const _crName = info => {
-  const { Statistic='', UTCProductionTime='' } = info
-      , t = UTCProductionTime.replace('T', ' ');
+  const {
+    Statistic='',
+    UTCProductionTime=''
+  } = info
+  , t = UTCProductionTime.replace('T', ' ');
   return `${Statistic}: ${t}`;
 };
+
 const _crDescr = info => {
   const { Notes=[] } = info
   , arr = Notes.map(note => {
@@ -41,7 +42,8 @@ const _crZhConfig = ({
   itemCaption,
   dataSource
 }) => ({
-  id: _itemKey, key: _itemKey,
+  id: _itemKey,
+  key: _itemKey,
   itemCaption,
   dataSource
 });
@@ -54,7 +56,11 @@ const MD = {
 };
 
 const _crUTC = (item) => {
-  const { Frequency, Year, Quarter } = item
+  const {
+    Frequency,
+    Year,
+    Quarter
+  } = item
   , md = Frequency === 'Q'
      ? MD[Quarter] || MD.DF
      : MD.DF;

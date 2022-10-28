@@ -3,12 +3,9 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _crFn = require("../crFn");
+var _AdapterFn = require("../AdapterFn");
 
-const C = {
-  URL: 'https://api.coinlore.net/api'
-};
-const _isArr = Array.isArray;
+const API_URL = 'https://api.coinlore.net/api';
 const ClApi = {
   getRequestUrl(option) {
     const {
@@ -17,7 +14,7 @@ const ClApi = {
           {
       v: id
     } = items[0];
-    return C.URL + "/exchange/?id=" + id;
+    return API_URL + "/exchange/?id=" + id;
   },
 
   checkResponse(json, option) {
@@ -25,11 +22,11 @@ const ClApi = {
       pairs
     } = json || {};
 
-    if (_isArr(pairs)) {
+    if ((0, _AdapterFn.isArr)(pairs)) {
       return true;
     }
 
-    throw (0, _crFn.crError)();
+    throw (0, _AdapterFn.crError)();
   }
 
 };

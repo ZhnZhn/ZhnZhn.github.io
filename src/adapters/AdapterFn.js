@@ -43,6 +43,8 @@ export const isNumber = n => isTypeNumber(n)
   && (n - n) === 0;
 export const isNumberOrNull = v => isNumber(v) || v === null
 
+export const assign = Object.assign
+
 const EMPTY = '';
 
 const _fIsNumber = (
@@ -72,6 +74,15 @@ export const getValue = getV
 export const numberFormat = formatAllNumber
 export const isYNumber = _fIsNumber('y')
 export const toFloatOrEmpty = _fToFloatOr('')
+
+const DF_ERR_MESSAGE = 'No data available for request.'
+export const crError = (
+  errCaption='',
+  message=DF_ERR_MESSAGE
+) => ({
+  errCaption,
+  message
+})
 
 export const crValueMoving = ({
   bNowValue=Big('0.0'),

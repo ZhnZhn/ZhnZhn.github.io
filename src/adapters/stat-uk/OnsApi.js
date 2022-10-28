@@ -1,8 +1,8 @@
 import {
   isArr,
-  getValue
+  getValue,
+  crError
 } from '../AdapterFn';
-import { crError } from '../crFn';
 
 const API_URL = 'https://api.beta.ons.gov.uk/v1/datasets/'
 , EDT = '/editions/time-series/versions/'

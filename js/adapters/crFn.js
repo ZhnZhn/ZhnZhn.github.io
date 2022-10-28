@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crValueConf = exports.crItemLink = exports.crItemConf = exports.crId = exports.crHm = exports.crError = void 0;
+exports.crValueConf = exports.crItemLink = exports.crItemConf = exports.crId = exports.crHm = void 0;
 
 var _mathFn = require("../math/mathFn");
 
@@ -14,29 +14,10 @@ const {
       _isArr = Array.isArray,
       _crPTag = className => className ? "<p class=\"" + className + "\">" : '<p>';
 
-const DF_ERR_MESSAGE = 'No data available for request.';
+const crHm = obj => assign(create(null), obj); // Quandl toScatter, Stat-Json
 
-const crHm = obj => assign(create(null), obj);
 
 exports.crHm = crHm;
-
-const crError = function (errCaption, message) {
-  if (errCaption === void 0) {
-    errCaption = '';
-  }
-
-  if (message === void 0) {
-    message = DF_ERR_MESSAGE;
-  }
-
-  return {
-    errCaption,
-    message
-  };
-}; // Quandl toScatter, Stat-Json
-
-
-exports.crError = crError;
 
 const crId = () => (0, _mathFn.crId)().toUpperCase();
 

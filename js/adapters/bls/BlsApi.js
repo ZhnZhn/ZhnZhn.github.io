@@ -125,7 +125,7 @@ const BlsApi = {
       return true;
     }
 
-    throw (0, _crFn.crError)('', message[0]);
+    throw (0, _AdapterFn.crError)('', message[0]);
   }
 
 };

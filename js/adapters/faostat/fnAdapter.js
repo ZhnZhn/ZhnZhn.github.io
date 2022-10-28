@@ -3,10 +3,6 @@
 exports.__esModule = true;
 exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.findMinY = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crSeriaData = exports.crId = exports.crError = void 0;
 
-var _crFn = require("../crFn");
-
-exports.crError = _crFn.crError;
-
 var _fnDescr = require("./fnDescr");
 
 exports.toInfo = _fnDescr.toInfo;
@@ -15,8 +11,8 @@ var _AdapterFn = require("../AdapterFn");
 
 exports.getValue = _AdapterFn.getValue;
 exports.findMinY = _AdapterFn.findMinY;
-const _isArr = Array.isArray,
-      BLANK = ' ',
+exports.crError = _AdapterFn.crError;
+const BLANK = ' ',
       MM_DD = '-12-31',
       DF_TITLE = 'More about data on tab Info in Description';
 
@@ -186,7 +182,7 @@ const crZhConfig = (id, _ref5) => {
 
 exports.crZhConfig = crZhConfig;
 
-const crValueMoving = points => _isArr(points) && !_isArr(points[0]) ? (0, _AdapterFn.valueMoving)(points) : void 0;
+const crValueMoving = points => (0, _AdapterFn.isArr)(points) && !(0, _AdapterFn.isArr)(points[0]) ? (0, _AdapterFn.valueMoving)(points) : void 0;
 
 exports.crValueMoving = crValueMoving;
 const isSeriesReq = _getSeriesPropName;

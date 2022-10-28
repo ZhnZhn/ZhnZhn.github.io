@@ -1,20 +1,13 @@
 "use strict";
 
 exports.__esModule = true;
-exports.joinBy = exports.crError = exports.crData = exports.crConfOption = void 0;
+exports.crData = exports.crConfOption = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
-exports.joinBy = _AdapterFn.joinBy;
-
-var _crFn = require("../crFn");
-
-exports.crError = _crFn.crError;
-
-const _isArr = Array.isArray,
-      _getResults = json => json.BEAAPI.Results,
-      _getData = Results => _isArr(Results) ? Results[0].Data : Results.Data,
-      _getInfo = Results => _isArr(Results) ? Results[0] : Results;
+const _getResults = json => json.BEAAPI.Results,
+      _getData = Results => (0, _AdapterFn.isArr)(Results) ? Results[0].Data : Results.Data,
+      _getInfo = Results => (0, _AdapterFn.isArr)(Results) ? Results[0] : Results;
 
 const _crName = info => {
   const {

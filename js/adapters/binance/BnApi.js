@@ -3,15 +3,12 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _crFn = require("../crFn");
+var _AdapterFn = require("../AdapterFn");
 
-const C = {
-  URL: 'https://api.binance.com/api/v3',
-  RESEARCH_URL: 'https://research.binance.com/en/projects',
-  TRADE_URL: 'https://binance.com/en/trade'
-};
-const _isArr = Array.isArray,
-      REG_BLANKS = /\s/g;
+const API_URL = 'https://api.binance.com/api/v3',
+      RESEARCH_URL = 'https://research.binance.com/en/projects',
+      TRADE_URL = 'https://binance.com/en/trade';
+const REG_BLANKS = /\s/g;
 
 const _setLinks = function (option, c, s) {
   if (s === void 0) {
@@ -22,8 +19,8 @@ const _setLinks = function (option, c, s) {
         _caption = c.substring(0, _toIndex).trim().toLowerCase().replace(REG_BLANKS, '-'),
         _s = s.replace('/', '_').toLowerCase();
 
-  option._researchLink = C.RESEARCH_URL + "/" + _caption;
-  option._tradeLink = C.TRADE_URL + "/" + _s;
+  option._researchLink = RESEARCH_URL + "/" + _caption;
+  option._tradeLink = TRADE_URL + "/" + _s;
 };
 
 const _crSymbol = function (s) {
@@ -52,7 +49,7 @@ const _crDfUrl = option => {
 
   _setLinks(option, c, s);
 
-  return C.URL + "/klines?symbol=" + _symbol + "&interval=" + interval + "&limit=" + limit;
+  return API_URL + "/klines?symbol=" + _symbol + "&interval=" + interval + "&limit=" + limit;
 };
 
 const _crObUrl = option => {
@@ -67,7 +64,7 @@ const _crObUrl = option => {
   } = items[1],
         _symbol = _crSymbol(s);
 
-  return C.URL + "/depth?symbol=" + _symbol + "&limit=" + limit;
+  return API_URL + "/depth?symbol=" + _symbol + "&limit=" + limit;
 };
 
 const _rCrUrl = {
@@ -90,7 +87,7 @@ const BnApi = {
       dfSubId
     } = option;
 
-    if (!dfSubId && _isArr(json)) {
+    if (!dfSubId && (0, _AdapterFn.isArr)(json)) {
       return true;
     }
 
@@ -99,11 +96,11 @@ const BnApi = {
       asks
     } = json;
 
-    if (dfSubId === 'OB' && _isArr(bids) && _isArr(asks)) {
+    if (dfSubId === 'OB' && (0, _AdapterFn.isArr)(bids) && (0, _AdapterFn.isArr)(asks)) {
       return true;
     }
 
-    throw (0, _crFn.crError)();
+    throw (0, _AdapterFn.crError)();
   }
 
 };
