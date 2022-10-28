@@ -1,35 +1,30 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.crSubtitle = exports.crData = exports.crConfigOption = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
 const FRED = 'FRED';
 
-const _crId = option => {
-  const {
+const _crId = _ref => {
+  let {
     value,
     two,
     three = ''
-  } = option;
+  } = _ref;
   return two ? value + "_" + two + "_" + three : value;
 };
 
 const _crLinkItem = option => {
   const {
     linkFn,
-    value = ''
+    value
   } = option;
-
-  if (linkFn === FRED) {
-    return {
-      id: value.replace('$', ''),
-      article: option.dfArticle
-    };
-  }
-
-  return value;
+  return linkFn === FRED ? {
+    id: (value || '').replace('$', ''),
+    article: option.dfArticle
+  } : value;
 };
 
 const _crZhConfig = option => {
@@ -51,45 +46,47 @@ const _crZhConfig = option => {
   };
 };
 
-const _crInfo = _ref => {
+const _crInfo = _ref2 => {
   let {
     title = ''
-  } = _ref;
+  } = _ref2;
   return {
     name: title
   };
 };
 
-const fnAdapter = {
-  crSubtitle: _ref2 => {
-    let {
-      subtitle = '',
-      threeCaption
-    } = _ref2;
-    return threeCaption ? subtitle + ", " + threeCaption : subtitle;
-  },
-  crData: json => {
-    const d = [];
-    json.data.forEach(p => {
-      const {
-        date,
-        value
-      } = p;
-
-      if ((0, _AdapterFn.isNumberOrNull)(value)) {
-        d.push({
-          x: (0, _AdapterFn.ymdToUTC)(date),
-          y: value
-        });
-      }
-    });
-    return d.reverse();
-  },
-  crConfigOption: option => ({
-    zhConfig: _crZhConfig(option),
-    info: _crInfo(option)
-  })
+const crSubtitle = _ref3 => {
+  let {
+    subtitle = '',
+    threeCaption
+  } = _ref3;
+  return threeCaption ? subtitle + ", " + threeCaption : subtitle;
 };
-var _default = fnAdapter;
-exports.default = _default;
+
+exports.crSubtitle = crSubtitle;
+
+const crData = json => json.data.reduce((_data, p) => {
+  const {
+    date,
+    value
+  } = p;
+
+  if ((0, _AdapterFn.isNumberOrNull)(value)) {
+    _data.push({
+      x: (0, _AdapterFn.ymdToUTC)(date),
+      y: value
+    });
+  }
+
+  return _data;
+}, []).reverse();
+
+exports.crData = crData;
+
+const crConfigOption = option => ({
+  zhConfig: _crZhConfig(option),
+  info: _crInfo(option)
+});
+
+exports.crConfigOption = crConfigOption;
 //# sourceMappingURL=fnAdapter.js.map
