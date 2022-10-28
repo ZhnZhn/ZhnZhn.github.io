@@ -5,6 +5,8 @@
 "use strict";
 import {
   ymdToUTC,
+  isTypeNumber,
+  isNumber,
   isYNumber,
   isNumberOrNull,
   toFloatOrEmpty,
@@ -69,6 +71,35 @@ describe('ymdToUTC', () => {
   })
 
 });
+
+describe('isTypeNumber', () => {
+  const fn = isTypeNumber;
+  test('should return true for type number value', () => {
+    expect(fn(0)).toBe(true)
+    expect(fn(1)).toBe(true)
+    expect(fn(0.123456789)).toBe(true)
+    expect(fn(NaN)).toBe(true)
+
+    expect(fn(new Number(1))).toBe(false)
+  })
+})
+
+describe('isNumber', () => {
+  const fn = isNumber;
+  test('should return true for number value', () => {
+    expect(fn(0)).toBe(true)
+    expect(fn(1)).toBe(true)
+    expect(fn(0.123456789)).toBe(true)
+
+    expect(fn(NaN)).toBe(false)
+    expect(fn(new Number(1))).toBe(false)
+    expect(fn('')).toBe(false)
+    expect(fn()).toBe(false)
+    expect(fn(null)).toBe(false)
+    expect(fn({})).toBe(false)
+    expect(fn([])).toBe(false)
+  })
+})
 
 describe('isYNumber', () => {
   const fn = isYNumber

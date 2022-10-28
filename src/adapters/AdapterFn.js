@@ -38,16 +38,16 @@ import {
 
 export const _isNaN = Number.isNaN
 export const isArr = Array.isArray
-export const isNumber = n => typeof n === 'number'
+export const isTypeNumber = n => typeof n === 'number'
+export const isNumber = n => isTypeNumber(n)
   && (n - n) === 0;
 export const isNumberOrNull = v => isNumber(v) || v === null
 
 const EMPTY = '';
 
-const _fIsNumber = (pn) => (p) => {
-  return typeof p[pn] === 'number'
-    && isFinite(p[pn]);
-}
+const _fIsNumber = (
+  pn
+) => (p) => isTypeNumber(p[pn]) && isFinite(p[pn]);
 
 const _crBigValueFrom = point => Big(getPointValue(point));
 const _crDmyFrom = point => mlsToDmy(getPointDate(point));

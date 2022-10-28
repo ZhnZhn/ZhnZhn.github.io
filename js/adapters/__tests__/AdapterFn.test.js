@@ -8,7 +8,6 @@ var _AdapterFn = require("../AdapterFn");
 
 var _DirectionType = require("../../constants/DirectionType");
 
-//import { Direction } from '../../constants/Type'
 const Y = [{
   in: '2017',
   r: 1514678400000,
@@ -97,6 +96,31 @@ describe('ymdToUTC', () => {
     YMD.forEach(d => {
       expect(fn(d.in)).toBe(d.r);
     });
+  });
+});
+describe('isTypeNumber', () => {
+  const fn = _AdapterFn.isTypeNumber;
+  test('should return true for type number value', () => {
+    expect(fn(0)).toBe(true);
+    expect(fn(1)).toBe(true);
+    expect(fn(0.123456789)).toBe(true);
+    expect(fn(NaN)).toBe(true);
+    expect(fn(new Number(1))).toBe(false);
+  });
+});
+describe('isNumber', () => {
+  const fn = _AdapterFn.isNumber;
+  test('should return true for number value', () => {
+    expect(fn(0)).toBe(true);
+    expect(fn(1)).toBe(true);
+    expect(fn(0.123456789)).toBe(true);
+    expect(fn(NaN)).toBe(false);
+    expect(fn(new Number(1))).toBe(false);
+    expect(fn('')).toBe(false);
+    expect(fn()).toBe(false);
+    expect(fn(null)).toBe(false);
+    expect(fn({})).toBe(false);
+    expect(fn([])).toBe(false);
   });
 });
 describe('isYNumber', () => {
