@@ -1,16 +1,15 @@
-
+import { isTypeNumber } from '../AdapterFn';
 import fns from './toFns'
 
 const { getValue, toStr, toPerc } = fns;
 const _isFn = fn => typeof fn === 'function';
-const _isNumber = n => typeof n === 'number';
 
 //const _crCompanyName = ({ companyName }) => companyName || '';
 const _crEarningsDate = ({ nextEarningsDate }) => nextEarningsDate
   ?  'nextEarningsDate: ' + nextEarningsDate
   :  '';
 const _fNameValue = propName =>
-  json => _isNumber(json[propName])
+  json => isTypeNumber(json[propName])
     ? propName + ': ' + toStr(json[propName])
     : '';
 const _crConfig = str => _isFn(str)

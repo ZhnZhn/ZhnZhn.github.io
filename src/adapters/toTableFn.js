@@ -1,11 +1,13 @@
 import {
+  isTypeNumber,
   numberFormat,
   roundBy
 } from './AdapterFn';
 
-const _isNumber = n => typeof n === 'number'
-, _replaceNaN = (n, str='') => n - n === 0
-    ? n : str;
+const _replaceNaN = (
+  n,
+  str=''
+) => n - n === 0 ? n : str;
 
 const _getCellValue = (r, h) => {
   const { pn, toN } = h
@@ -13,7 +15,7 @@ const _getCellValue = (r, h) => {
   , _toFixedBy = _isToNumber && toN[0]
   , _strV = r[pn];
   return _isToNumber
-    ? _isNumber(_toFixedBy)
+    ? isTypeNumber(_toFixedBy)
         ? roundBy(_strV, _toFixedBy)
         : _replaceNaN(parseFloat(_strV))
     : _strV;

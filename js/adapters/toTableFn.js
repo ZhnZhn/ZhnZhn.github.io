@@ -5,8 +5,7 @@ exports.crTableRows = exports.crTableConfig = void 0;
 
 var _AdapterFn = require("./AdapterFn");
 
-const _isNumber = n => typeof n === 'number',
-      _replaceNaN = function (n, str) {
+const _replaceNaN = function (n, str) {
   if (str === void 0) {
     str = '';
   }
@@ -23,7 +22,7 @@ const _getCellValue = (r, h) => {
         _toFixedBy = _isToNumber && toN[0],
         _strV = r[pn];
 
-  return _isToNumber ? _isNumber(_toFixedBy) ? (0, _AdapterFn.roundBy)(_strV, _toFixedBy) : _replaceNaN(parseFloat(_strV)) : _strV;
+  return _isToNumber ? (0, _AdapterFn.isTypeNumber)(_toFixedBy) ? (0, _AdapterFn.roundBy)(_strV, _toFixedBy) : _replaceNaN(parseFloat(_strV)) : _strV;
 };
 
 const crTableConfig = _ref => {

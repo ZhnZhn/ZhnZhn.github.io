@@ -2,8 +2,12 @@ export { valueMoving } from '../AdapterFn';
 
 import Big from 'big.js';
 
-import { joinBy } from '../AdapterFn';
-import formatAllNumber from '../../utils/formatAllNumber'
+import {
+  isArr,
+  isNumber,
+  joinBy
+} from '../AdapterFn';
+import formatAllNumber from '../../utils/formatAllNumber';
 import {
   calcPercent,
   crValueMoving as crVm
@@ -11,23 +15,28 @@ import {
 
 import { mlsToDmy } from '../../utils/DateUtils';
 
-const _isArr = Array.isArray;
 const _isStr = str => typeof str === 'string';
-const _isNumber = n => typeof n === 'number'
-  && (n - n === 0);
 
-const _crItemCaption = ({ dfItemCaption, items, itemCaption }) => _isNumber(dfItemCaption)
-  && _isArr(items) && items[dfItemCaption-1]
+const _crItemCaption = ({
+  dfItemCaption,
+  items,
+  itemCaption
+}) => isNumber(dfItemCaption)
+  && isArr(items) && items[dfItemCaption-1]
       ? items[dfItemCaption-1].caption || itemCaption
       : itemCaption;
 
-const _isStrEqTo = (str, strTo) => _isStr(str)
- && str.toLowerCase() === strTo;
+const _isStrEqTo = (
+  str,
+  strTo
+) => _isStr(str) && str.toLowerCase() === strTo;
 
- const _crLinkId = (database_code, dataset_code) =>
-   database_code && dataset_code
-     ? `${database_code}/${dataset_code}`
-     : void 0;
+const _crLinkId = (
+  database_code,
+  dataset_code
+) => database_code && dataset_code
+  ? `${database_code}/${dataset_code}`
+  : void 0;
 
 export const getData = ({
   dataset,
@@ -41,7 +50,7 @@ export const getColumnNames = ({
   datatable
 }) => dataset
  ? dataset.column_names || []
- : datatable && _isArr(datatable.columns)
+ : datatable && isArr(datatable.columns)
      ? datatable.columns.map(c => c.name)
      : []
 
@@ -61,7 +70,7 @@ export const isPrevDateAfter = (
 export const crDatasetInfo = ({
   dataset
 }) => {
-    const {
+   const {
      name,
      description,
      newest_available_date,
@@ -69,10 +78,10 @@ export const crDatasetInfo = ({
      frequency,
      database_code,
      dataset_code
-    } = dataset || {}
-    , linkId = _crLinkId(database_code, dataset_code);
+   } = dataset || {}
+   , linkId = _crLinkId(database_code, dataset_code);
 
-    return {
+   return {
      name,
      toDate: newest_available_date,
      fromDate: oldest_available_date,
@@ -82,9 +91,11 @@ export const crDatasetInfo = ({
   };
 }
 
-const DATA_SOURCE = 'Nasdaq Data Link'
+const DATA_SOURCE = 'Nasdaq Data Link';
 
-export const crZhConfig = (option) => {
+export const crZhConfig = (
+  option
+) => {
   const {
     item,
     title,
@@ -109,8 +120,10 @@ export const crZhConfig = (option) => {
     linkFn,
     itemConf: {
       _itemKey: id,
-      columnName, dataColumn,
-      fromDate, seriaColumnNames
+      columnName,
+      dataColumn,
+      fromDate,
+      seriaColumnNames
     },
     itemCaption: _itemCaption,
     dataSource: _dataSource
@@ -129,13 +142,13 @@ export const crValueMoving = ({
 })
 
 export const getRecentDate = (
-  seria=[],
+  seria,
   json
 ) => {
-  const len = seria.length
-  , { dataset={} } = json
-  , { frequency='' } = dataset
-  , mlsUTC = (len>0 && seria[len-1][0] && _isNumber(seria[len-1][0]) )
+  const len = (seria || []).length
+  , { dataset } = json
+  , { frequency='' } = dataset || {}
+  , mlsUTC = len>0 && seria[len-1][0] && isNumber(seria[len-1][0])
       ? seria[len-1][0]
       : '';
   return mlsUTC
@@ -149,7 +162,10 @@ export const setTitleToConfig = (
   config,
   option
 ) => {
-  const { title, subtitle } = option || {};
+  const {
+    title,
+    subtitle
+  } = option || {};
   config.title.text = title || '';
   config.subtitle.text = subtitle ? `${subtitle}:` : '';
 }
@@ -158,7 +174,7 @@ export const findColumnIndex = (
   obj,
   columnName=''
 ) => {
-  const column_names = _isArr(obj)
+  const column_names = isArr(obj)
     ? obj
     : getColumnNames(obj)
   , _columnName = columnName.toLowerCase();
@@ -177,7 +193,10 @@ export const getDataColumnIndex = (
   json,
   option
 ) => {
-  const { columnName, dataColumn } = option
+  const {
+    columnName,
+    dataColumn
+  } = option
   , _dataColumn = findColumnIndex(json, columnName);
   return _dataColumn || dataColumn || 1;
 }

@@ -3,6 +3,8 @@
 exports.__esModule = true;
 exports.crPointName = exports.addColorsTo = void 0;
 
+var _AdapterFn = require("./AdapterFn");
+
 var _MonoColorFn = require("../charts/MonoColorFn");
 
 var _CL = require("./CL");
@@ -78,10 +80,8 @@ const addColorsTo = _ref => {
 
 exports.addColorsTo = addColorsTo;
 
-const _isNumber = n => typeof n === 'number' && n - n === 0;
-
 const crPointName = (label, percent) => {
-  const _percent = _isNumber(percent) ? "<span class=\"" + _CL.CL_TREE_MAP_PERCENT + "\">" + percent + "%</span>" : '';
+  const _percent = (0, _AdapterFn.isNumber)(percent) ? "<span class=\"" + _CL.CL_TREE_MAP_PERCENT + "\">" + percent + "%</span>" : '';
 
   return label + "<br/>" + _percent;
 };

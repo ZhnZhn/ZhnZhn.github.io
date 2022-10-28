@@ -2,6 +2,7 @@ export { getValue } from '../AdapterFn';
 export { crError } from '../crFn';
 
 import {
+  isTypeNumber,
   roundBy,
   crZhConfig
 } from '../AdapterFn';
@@ -23,15 +24,14 @@ const _crInfo = ({
   name: itemCaption
 });
 
-const _isNumber = v => typeof v === 'number';
 
-const _isHLOC = (p) => _isNumber(p.open)
-  && _isNumber(p.high)
-  && _isNumber(p.low)
-  && _isNumber(p.close);
+const _isHLOC = (p) => isTypeNumber(p.open)
+  && isTypeNumber(p.high)
+  && isTypeNumber(p.low)
+  && isTypeNumber(p.close);
 
 const _addPointTo = (arr, d, value) => {
-  if (_isNumber(value)) {
+  if (isTypeNumber(value)) {
     //arr.push({ x: d, y: value })
     arr.push([d, value ])
   }
@@ -42,7 +42,7 @@ const _addColumnPointTo = (
   p,
   volume
 ) => {
-  if (_isNumber(volume)){
+  if (isTypeNumber(volume)){
     arr.push(
       crVolumePoint({
          date: date,
@@ -83,7 +83,7 @@ export const crData = (
   , dToVolume = []
   , dHL = [];
   json.Data.forEach(p => {
-    if (_isNumber(p.time)) {
+    if (isTypeNumber(p.time)) {
       const _date = p.time*1000;
       _addPointTo(data, _date, p.close)
       _addPointTo(dVolume, _date, p.volumefrom)

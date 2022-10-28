@@ -7,7 +7,10 @@ import {
 } from '../../charts/MarkerFn';
 import { crLegendConfig } from '../../charts/ChartLegend';
 
-import { roundBy } from '../AdapterFn';
+import {
+  isNumber,
+  roundBy
+} from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import {
   crVolumePoint,
@@ -34,8 +37,8 @@ import {
 
 const _assign = Object.assign
 , _isUndef = v => typeof v === 'undefined'
-, _notNull2 = (a, b) => a !== null && b !== null
-, _isNumber = n => typeof n === 'number' && n-n === 0;
+, _notNull2 = (a, b) => a !== null && b !== null;
+
 
 const _convertToUTC = (
   point,
@@ -52,15 +55,22 @@ const _checkExtrems = (
 ) => {
   const {point, yPointIndex, maxY, minY} = result
   , value = point[yPointIndex];
-  if (_isNumber(value)){
+  if (isNumber(value)){
     if (value>maxY) { result.maxY = value; }
     if (value<minY) { result.minY = value; }
   }
   return result;
 };
 
-const _addToSeria = (result) => {
-   const {seria, dateUTC, point, yPointIndex} = result;
+const _addToSeria = (
+  result
+) => {
+   const {
+     seria,
+     dateUTC,
+     point,
+     yPointIndex
+   } = result;
    seria.push([dateUTC, point[yPointIndex]]);
 
    return result;
@@ -70,7 +80,12 @@ const _addSplitRatio = (
   splitRationIndex,
   result
 ) => {
-  const { point, dateUTC, yPointIndex, dataSplitRatio } = result;
+  const {
+    point,
+    dateUTC,
+    yPointIndex,
+    dataSplitRatio
+  } = result;
   if (point[splitRationIndex] !== 1){
     const x = dateUTC
     , splitRatio = roundBy(point[splitRationIndex])

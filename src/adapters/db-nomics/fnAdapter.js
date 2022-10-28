@@ -6,6 +6,7 @@ export {
 } from '../crFn';
 
 import {
+  isNumber,
   joinBy,
   ymdToUTC,
 } from '../AdapterFn';
@@ -73,8 +74,6 @@ const _crInfo = (json, option) => ({
   description: _crDescr(json, option)
 })
 
-const _isNumber = n => typeof n === 'number'
- && n-n === 0;
 
 const _isQuarter = str => (""+str).indexOf("Q") !== -1;
 
@@ -114,7 +113,7 @@ export const crData = (json, option) => {
   let _arrPoint;
   for (let i=0; i<_len; i++){
     _arrPoint = crPoint(period[i], value[i]);
-    if (_arrPoint[0] > _xFrom && _isNumber(_arrPoint[1])) {
+    if (_arrPoint[0] > _xFrom && isNumber(_arrPoint[1])) {
       data.push(_arrPoint)
     }
   }

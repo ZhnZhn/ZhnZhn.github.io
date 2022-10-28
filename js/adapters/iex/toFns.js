@@ -10,9 +10,6 @@ var _AdapterFn = require("../AdapterFn");
 var _ItemTypes = _interopRequireDefault(require("./ItemTypes"));
 
 const _LOCALE = (navigator || {}).language;
-
-const _isNumber = n => typeof n === 'number';
-
 const _assign = Object.assign;
 
 const _calcScatterY = (chart, isMin) => {
@@ -27,8 +24,8 @@ const _calcScatterY = (chart, isMin) => {
 
 const toFns = {
   getValue: _AdapterFn.getValue,
-  toStr: n => _isNumber(n) ? n.toLocaleString(_LOCALE) : '',
-  toPerc: n => _isNumber(n) ? n.toLocaleString(_LOCALE, {
+  toStr: n => (0, _AdapterFn.isTypeNumber)(n) ? n.toLocaleString(_LOCALE) : '',
+  toPerc: n => (0, _AdapterFn.isTypeNumber)(n) ? n.toLocaleString(_LOCALE, {
     style: 'percent',
     minimumFractionDigits: 2
   }) : '',

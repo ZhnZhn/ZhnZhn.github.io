@@ -1,4 +1,5 @@
 import {
+  isTypeNumber,
   crZhConfig,
   roundBy
 } from '../AdapterFn';
@@ -8,8 +9,7 @@ const _crAddConfig = ({ option }) => ({
   zhConfig: crZhConfig(option)
 });
 
-const _isNumber = n => typeof n === 'number'
-, _compareByDate = (a, b) => a.date - b.date
+const _compareByDate = (a, b) => a.date - b.date
 , _roundBy = n => {
   if (n>-1 && n<1) { return n; }
   return roundBy(n, 2);
@@ -30,7 +30,7 @@ From Bitfinex Documentation
 const _crDataOHLCV = (json, option) => {
   const _data = [];
   json.forEach(arrItem => {
-    if (_isNumber(arrItem[0])) {
+    if (isTypeNumber(arrItem[0])) {
       _data.push({
          date: arrItem[0],
          open: _roundBy(arrItem[1]),

@@ -61,8 +61,6 @@ const _fCrToMls = observations => {
   return href.indexOf('yyyy-qq') !== -1 ? _yyyyQqToMls : _mmmYyToMls;
 };
 
-const _isNumber = n => typeof n === 'number' && n - n === 0;
-
 const _crName = (_ref, _ref2) => {
   let {
     unit_of_measure
@@ -113,7 +111,7 @@ const fnAdapter = {
             _x = _toMsl(id),
             _y = parseFloat(observation);
 
-      if (_isNumber(_x) && _isNumber(_y)) {
+      if ((0, _AdapterFn.isNumber)(_x) && (0, _AdapterFn.isNumber)(_y)) {
         _data.push([_x, _y]);
       }
     }

@@ -1,4 +1,5 @@
 import {
+  isNumber,
   getValue,
   ymdToUTC,
   joinBy
@@ -62,9 +63,6 @@ const _fCrToMls = observations => {
     : _mmmYyToMls;
 }
 
-const _isNumber = n => typeof n === 'number'
- && (n-n===0);
-
 const _crName = ({ unit_of_measure }, { title, subtitle }) =>
   joinBy(': ', subtitle, title, unit_of_measure);
 
@@ -73,7 +71,10 @@ const _crDescr = ({ links }) => {
   return href ? _crItemLink(href) : '';
 }
 
-const _crInfo = (json, option) => ({
+const _crInfo = (
+  json,
+  option
+) => ({
   name: _crName(json, option),
   description: _crDescr(json)
 })
@@ -94,7 +95,7 @@ const fnAdapter = {
       , { id } = _getTimeObj(dimensions)
       , _x = _toMsl(id)
       , _y = parseFloat(observation)
-      if (_isNumber(_x) && _isNumber(_y)) {
+      if (isNumber(_x) && isNumber(_y)) {
         _data.push([_x, _y])
       }
     }

@@ -1,3 +1,4 @@
+import { isNumber } from './AdapterFn';
 import {
   COLOR_PERIOD,
   COLOR_BASE1,
@@ -95,13 +96,11 @@ export const addColorsTo = ({
   _addColor(data, leveIndex1, levelIndex2)
 }
 
-const _isNumber = n => typeof n === 'number'
- && n-n===0;
 export const crPointName = (
   label,
   percent
 ) => {
-  const _percent = _isNumber(percent)
+  const _percent = isNumber(percent)
     ? `<span class="${CL_TREE_MAP_PERCENT}">${percent}%</span>`
     : '';
   return `${label}<br/>${_percent}`;

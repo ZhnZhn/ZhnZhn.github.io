@@ -84,10 +84,9 @@ const _crSeriesData = (data, prName) => {
   return _hmToPoints(_hm, _legend);
 };
 
-const _isNumber = v => typeof v === 'number' && v - v === 0,
-      _compareByX = (a, b) => a.x - b.x;
+const _compareByX = (a, b) => a.x - b.x;
 
-const _crSeriaData = (data, option) => data.map(_crPoint).filter(p => _isNumber(p.y)).sort(_compareByX);
+const _crSeriaData = (data, option) => data.map(_crPoint).filter(p => (0, _AdapterFn.isNumber)(p.y)).sort(_compareByX);
 
 const _isItemList = item => (0, _AdapterFn.getValue)(item).indexOf('>') !== -1;
 

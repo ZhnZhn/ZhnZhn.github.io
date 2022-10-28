@@ -6,6 +6,7 @@ export {
 } from '../AdapterFn';
 
 import {
+  isNumber,
   isYNumber,
   getValue,
   toUpperCaseFirst,
@@ -98,16 +99,14 @@ const _crSeriesData = (
   return _hmToPoints(_hm, _legend);
 };
 
-const _isNumber = v => typeof v === 'number'
- && v-v===0
-, _compareByX = (a, b) => a.x - b.x;
+const _compareByX = (a, b) => a.x - b.x;
 
 const _crSeriaData = (
   data,
   option
 ) => data
   .map(_crPoint)
-  .filter(p => _isNumber(p.y))
+  .filter(p => isNumber(p.y))
   .sort(_compareByX);
 
 const _isItemList = item => getValue(item)

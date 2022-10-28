@@ -1,15 +1,21 @@
+import {
+  isArr,
+  isNumber
+} from '../AdapterFn';
 import fnAdapter from './fnAdapter';
 
-const C = {
-  URL: 'https://api.bls.gov/publicAPI',
-  TS_DATA: 'timeseries/data',
-  NATIVE_URL: 'https://data.bls.gov/timeseries'
-};
+const API_URL = 'https://api.bls.gov/publicAPI'
+, TS_DATA = 'timeseries/data'
+, NATIVE_URL = 'https://data.bls.gov/timeseries';
 
-const _isArr = Array.isArray
-, _assign = Object.assign
-, { crHm, crError, getYear, getCurrentYear } = fnAdapter
-, _isNumber = n => typeof n === 'number' && n-n === 0;
+const _assign = Object.assign
+, {
+  crHm,
+  crError,
+  getYear,
+  getCurrentYear
+} = fnAdapter;
+
 
 const _crCuId = items =>
   `CU${items[2].v}R${items[1].v}${items[0].v}`;
@@ -18,7 +24,10 @@ const _hmCrId = crHm({
   CU: _crCuId
 });
 
-const _getSeriaId = ({ items=[], dfCode }) => {
+const _getSeriaId = ({
+  items=[], 
+  dfCode
+}) => {
   const _crId = _hmCrId[dfCode];
   return _crId
     ? _crId(items)
@@ -29,13 +38,16 @@ const _addNativeLinkTo = (option, seriaId) => {
   _assign(option, {
     linkItem: {
       caption: 'U.S. BLS Data Link',
-      href: `${C.NATIVE_URL}/${seriaId}`
+      href: `${NATIVE_URL}/${seriaId}`
     }
   })
 };
 
 
-const _crCuCaption = (dfTitle, items) => ({
+const _crCuCaption = (
+  dfTitle,
+  items
+) => ({
   title: `${dfTitle}, ${items[2].c}`,
   subtitle: `${items[1].c}: ${items[0].c}`
 });
@@ -76,7 +88,7 @@ const _crQueryPeriod = (queryKey, {fromDate}) => {
   if (!queryKey) { return ''; }
   const _startyear = parseInt(getYear(fromDate), 10)
   , _endyear = parseInt(getCurrentYear(), 10);
-  if (_isNumber(_startyear) && _isNumber(_endyear)
+  if (isNumber(_startyear) && isNumber(_endyear)
       && _endyear - _startyear < 21) {
     return `&startyear=${_startyear}&endyear=${_endyear}`;
   }
@@ -92,14 +104,14 @@ const BlsApi = {
     , _queryPeriod = _crQueryPeriod(_queryKey, option);
     _addNativeLinkTo(option, seriaId)
     _setCaptionTo(option)
-    return `${C.URL}/${_v}/${C.TS_DATA}/${seriaId}${_queryKey}${_queryPeriod}`;
+    return `${API_URL}/${_v}/${TS_DATA}/${seriaId}${_queryKey}${_queryPeriod}`;
   },
 
   checkResponse(json){
     const { Results, message=[] } = json || {}
     , { series } = Results || {}
     , _s = (series || [])[0];
-    if (_s && _isArr(_s.data)){
+    if (_s && isArr(_s.data)){
       return true;
     }
     throw crError('', message[0]);

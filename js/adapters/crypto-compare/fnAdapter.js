@@ -36,19 +36,17 @@ const _crInfo = _ref => {
   };
 };
 
-const _isNumber = v => typeof v === 'number';
-
-const _isHLOC = p => _isNumber(p.open) && _isNumber(p.high) && _isNumber(p.low) && _isNumber(p.close);
+const _isHLOC = p => (0, _AdapterFn.isTypeNumber)(p.open) && (0, _AdapterFn.isTypeNumber)(p.high) && (0, _AdapterFn.isTypeNumber)(p.low) && (0, _AdapterFn.isTypeNumber)(p.close);
 
 const _addPointTo = (arr, d, value) => {
-  if (_isNumber(value)) {
+  if ((0, _AdapterFn.isTypeNumber)(value)) {
     //arr.push({ x: d, y: value })
     arr.push([d, value]);
   }
 };
 
 const _addColumnPointTo = (arr, date, p, volume) => {
-  if (_isNumber(volume)) {
+  if ((0, _AdapterFn.isTypeNumber)(volume)) {
     arr.push((0, _pointFn.crVolumePoint)({
       date: date,
       open: p.open,
@@ -81,7 +79,7 @@ const crData = json => {
         dToVolume = [],
         dHL = [];
   json.Data.forEach(p => {
-    if (_isNumber(p.time)) {
+    if ((0, _AdapterFn.isTypeNumber)(p.time)) {
       const _date = p.time * 1000;
 
       _addPointTo(data, _date, p.close);

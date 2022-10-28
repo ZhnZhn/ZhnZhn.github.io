@@ -1,8 +1,10 @@
-import { getValue } from '../AdapterFn';
+import {
+  isTypeNumber,
+  getValue
+} from '../AdapterFn';
 import IT from './ItemTypes';
 
 const _LOCALE = (navigator || {}).language;
-const _isNumber = n => typeof n === 'number';
 const _assign = Object.assign;
 
 const _calcScatterY = (chart, isMin) => {
@@ -17,10 +19,10 @@ const _calcScatterY = (chart, isMin) => {
 const toFns = {
   getValue,
 
-  toStr: n => _isNumber(n)
+  toStr: n => isTypeNumber(n)
     ? n.toLocaleString(_LOCALE)
     : '',
-  toPerc: n => _isNumber(n)
+  toPerc: n => isTypeNumber(n)
      ? n.toLocaleString(_LOCALE, { style: 'percent', minimumFractionDigits: 2})
      : '',
 

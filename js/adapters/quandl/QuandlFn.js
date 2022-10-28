@@ -17,11 +17,7 @@ var _mathFn = require("../../math/mathFn");
 
 var _DateUtils = require("../../utils/DateUtils");
 
-const _isArr = Array.isArray;
-
 const _isStr = str => typeof str === 'string';
-
-const _isNumber = n => typeof n === 'number' && n - n === 0;
 
 const _crItemCaption = _ref => {
   let {
@@ -29,7 +25,7 @@ const _crItemCaption = _ref => {
     items,
     itemCaption
   } = _ref;
-  return _isNumber(dfItemCaption) && _isArr(items) && items[dfItemCaption - 1] ? items[dfItemCaption - 1].caption || itemCaption : itemCaption;
+  return (0, _AdapterFn.isNumber)(dfItemCaption) && (0, _AdapterFn.isArr)(items) && items[dfItemCaption - 1] ? items[dfItemCaption - 1].caption || itemCaption : itemCaption;
 };
 
 const _isStrEqTo = (str, strTo) => _isStr(str) && str.toLowerCase() === strTo;
@@ -51,7 +47,7 @@ const getColumnNames = _ref3 => {
     dataset,
     datatable
   } = _ref3;
-  return dataset ? dataset.column_names || [] : datatable && _isArr(datatable.columns) ? datatable.columns.map(c => c.name) : [];
+  return dataset ? dataset.column_names || [] : datatable && (0, _AdapterFn.isArr)(datatable.columns) ? datatable.columns.map(c => c.name) : [];
 };
 
 exports.getColumnNames = getColumnNames;
@@ -152,19 +148,15 @@ const crValueMoving = _ref5 => {
 
 exports.crValueMoving = crValueMoving;
 
-const getRecentDate = function (seria, json) {
-  if (seria === void 0) {
-    seria = [];
-  }
-
-  const len = seria.length,
+const getRecentDate = (seria, json) => {
+  const len = (seria || []).length,
         {
-    dataset = {}
+    dataset
   } = json,
         {
     frequency = ''
-  } = dataset,
-        mlsUTC = len > 0 && seria[len - 1][0] && _isNumber(seria[len - 1][0]) ? seria[len - 1][0] : '';
+  } = dataset || {},
+        mlsUTC = len > 0 && seria[len - 1][0] && (0, _AdapterFn.isNumber)(seria[len - 1][0]) ? seria[len - 1][0] : '';
   return mlsUTC ? frequency.toLowerCase() === 'annual' ? new Date(mlsUTC).getUTCFullYear() : (0, _DateUtils.mlsToDmy)(mlsUTC) : '';
 };
 
@@ -186,7 +178,7 @@ const findColumnIndex = function (obj, columnName) {
     columnName = '';
   }
 
-  const column_names = _isArr(obj) ? obj : getColumnNames(obj),
+  const column_names = (0, _AdapterFn.isArr)(obj) ? obj : getColumnNames(obj),
         _columnName = columnName.toLowerCase();
 
   if (_columnName && column_names) {

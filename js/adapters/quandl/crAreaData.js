@@ -25,8 +25,7 @@ var _C = require("./C");
 
 const _assign = Object.assign,
       _isUndef = v => typeof v === 'undefined',
-      _notNull2 = (a, b) => a !== null && b !== null,
-      _isNumber = n => typeof n === 'number' && n - n === 0;
+      _notNull2 = (a, b) => a !== null && b !== null;
 
 const _convertToUTC = (point, result) => {
   const arrDate = point[0].split('-');
@@ -44,7 +43,7 @@ const _checkExtrems = result => {
   } = result,
         value = point[yPointIndex];
 
-  if (_isNumber(value)) {
+  if ((0, _AdapterFn.isNumber)(value)) {
     if (value > maxY) {
       result.maxY = value;
     }

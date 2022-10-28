@@ -3,64 +3,58 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports["default"] = void 0;
+exports.default = void 0;
+
+var _AdapterFn = require("../AdapterFn");
 
 var _toFns = _interopRequireDefault(require("./toFns"));
 
-var getValue = _toFns["default"].getValue,
-    toStr = _toFns["default"].toStr,
-    toPerc = _toFns["default"].toPerc;
+const {
+  getValue,
+  toStr,
+  toPerc
+} = _toFns.default;
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
-
-var _isNumber = function _isNumber(n) {
-  return typeof n === 'number';
-}; //const _crCompanyName = ({ companyName }) => companyName || '';
+const _isFn = fn => typeof fn === 'function'; //const _crCompanyName = ({ companyName }) => companyName || '';
 
 
-var _crEarningsDate = function _crEarningsDate(_ref) {
-  var nextEarningsDate = _ref.nextEarningsDate;
+const _crEarningsDate = _ref => {
+  let {
+    nextEarningsDate
+  } = _ref;
   return nextEarningsDate ? 'nextEarningsDate: ' + nextEarningsDate : '';
 };
 
-var _fNameValue = function _fNameValue(propName) {
-  return function (json) {
-    return _isNumber(json[propName]) ? propName + ': ' + toStr(json[propName]) : '';
-  };
-};
+const _fNameValue = propName => json => (0, _AdapterFn.isTypeNumber)(json[propName]) ? propName + ': ' + toStr(json[propName]) : '';
 
-var _crConfig = function _crConfig(str) {
-  return _isFn(str) ? str : _fNameValue(str);
-};
+const _crConfig = str => _isFn(str) ? str : _fNameValue(str);
 
-var toStatsImpl = {
+const toStatsImpl = {
   CONFIGS: [//_crCompanyName,
   "sharesOutstanding", "float", "employees", "ttmEPS", // 12 month tralling
   "ttmDividendRate", "dividendYield", "peRatio", "beta", _crEarningsDate].map(_crConfig),
-  crCaption: function crCaption(_ref2, _ref3) {
-    var marketcap = _ref2.marketcap;
-    var items = _ref3.items;
+  crCaption: (_ref2, _ref3) => {
+    let {
+      marketcap
+    } = _ref2;
+    let {
+      items
+    } = _ref3;
     return getValue(items[0]) + ': ' + toStr(marketcap);
   },
-  crTokensName: function crTokensName(_ref4) {
-    var companyName = _ref4.companyName;
+  crTokensName: _ref4 => {
+    let {
+      companyName
+    } = _ref4;
     return companyName || '';
   },
-  crDescrName: function crDescrName() {
-    return 'ChangePercent';
-  },
-  crDescrStyle: function crDescrStyle() {
-    return {
-      fontWeight: 'bold',
-      whiteSpace: 'pre'
-    };
-  },
-  crDescr: function crDescr(json) {
-    return "  5Y: " + toPerc(json.year5ChangePercent) + "\n  2Y: " + toPerc(json.year2ChangePercent) + "\n  1Y: " + toPerc(json.year1ChangePercent) + "\n  YTD: " + toPerc(json.ytdChangePercent) + "\n\n  6M: " + toPerc(json.month6ChangePercent) + "\n  3M: " + toPerc(json.month3ChangePercent) + "\n  1M: " + toPerc(json.month1ChangePercent) + "\n  5D: " + toPerc(json.day5ChangePercent);
-  }
+  crDescrName: () => 'ChangePercent',
+  crDescrStyle: () => ({
+    fontWeight: 'bold',
+    whiteSpace: 'pre'
+  }),
+  crDescr: json => "  5Y: " + toPerc(json.year5ChangePercent) + "\n  2Y: " + toPerc(json.year2ChangePercent) + "\n  1Y: " + toPerc(json.year1ChangePercent) + "\n  YTD: " + toPerc(json.ytdChangePercent) + "\n\n  6M: " + toPerc(json.month6ChangePercent) + "\n  3M: " + toPerc(json.month3ChangePercent) + "\n  1M: " + toPerc(json.month1ChangePercent) + "\n  5D: " + toPerc(json.day5ChangePercent)
 };
 var _default = toStatsImpl;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=toStatsImpl.js.map

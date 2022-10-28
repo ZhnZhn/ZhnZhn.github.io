@@ -1,6 +1,6 @@
+import { isTypeNumber } from '../AdapterFn';
 import crAdapterOrderBook from '../crAdapterOrderBook';
 
-const _isNumber = n => typeof n === 'number';
 const _compareByPrice = (a, b) => a[0] - b[0];
 
 const crTitle = ({ items }) => items[0].c + ' P0';
@@ -18,7 +18,7 @@ if AMOUNT > 0 then bid else ask.
 const crOrderBook = json => {
   const asks = [], bids = [];
   json.forEach(arrItem => {
-    if (_isNumber(arrItem[0])) {
+    if (isTypeNumber(arrItem[0])) {
       if (arrItem[2] > 0) {
         bids.push([arrItem[0], arrItem[2], arrItem[1]])
       } else {

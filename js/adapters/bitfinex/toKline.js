@@ -18,8 +18,7 @@ const _crAddConfig = _ref => {
   };
 };
 
-const _isNumber = n => typeof n === 'number',
-      _compareByDate = (a, b) => a.date - b.date,
+const _compareByDate = (a, b) => a.date - b.date,
       _roundBy = n => {
   if (n > -1 && n < 1) {
     return n;
@@ -43,7 +42,7 @@ From Bitfinex Documentation
 const _crDataOHLCV = (json, option) => {
   const _data = [];
   json.forEach(arrItem => {
-    if (_isNumber(arrItem[0])) {
+    if ((0, _AdapterFn.isTypeNumber)(arrItem[0])) {
       _data.push({
         date: arrItem[0],
         open: _roundBy(arrItem[1]),

@@ -71,8 +71,6 @@ const _crInfo = (json, option) => ({
   description: _crDescr(json, option)
 });
 
-const _isNumber = n => typeof n === 'number' && n - n === 0;
-
 const _isQuarter = str => ("" + str).indexOf("Q") !== -1;
 
 const _isAnnualQuarter = period => !_isQuarter(period[0]) && _isQuarter(period[1]);
@@ -116,7 +114,7 @@ const crData = (json, option) => {
   for (let i = 0; i < _len; i++) {
     _arrPoint = crPoint(period[i], value[i]);
 
-    if (_arrPoint[0] > _xFrom && _isNumber(_arrPoint[1])) {
+    if (_arrPoint[0] > _xFrom && (0, _AdapterFn.isNumber)(_arrPoint[1])) {
       data.push(_arrPoint);
     }
   }
