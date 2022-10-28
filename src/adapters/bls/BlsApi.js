@@ -1,31 +1,30 @@
 import {
   isArr,
-  isNumber
+  isNumber,
+  getYear,
+  getCurrentYear,
 } from '../AdapterFn';
-import fnAdapter from './fnAdapter';
+import {
+  crHm,
+  crError
+} from '../crFn';
 
 const API_URL = 'https://api.bls.gov/publicAPI'
 , TS_DATA = 'timeseries/data'
 , NATIVE_URL = 'https://data.bls.gov/timeseries';
 
-const _assign = Object.assign
-, {
-  crHm,
-  crError,
-  getYear,
-  getCurrentYear
-} = fnAdapter;
+const _assign = Object.assign;
 
-
-const _crCuId = items =>
-  `CU${items[2].v}R${items[1].v}${items[0].v}`;
+const _crCuId = (
+  items
+) => `CU${items[2].v}R${items[1].v}${items[0].v}`;
 
 const _hmCrId = crHm({
   CU: _crCuId
 });
 
 const _getSeriaId = ({
-  items=[], 
+  items=[],
   dfCode
 }) => {
   const _crId = _hmCrId[dfCode];
@@ -34,7 +33,10 @@ const _getSeriaId = ({
     : items[0].v;
 };
 
-const _addNativeLinkTo = (option, seriaId) => {
+const _addNativeLinkTo = (
+  option,
+  seriaId
+) => {
   _assign(option, {
     linkItem: {
       caption: 'U.S. BLS Data Link',

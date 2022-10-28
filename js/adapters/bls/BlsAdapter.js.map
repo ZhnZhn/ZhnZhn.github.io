@@ -5,10 +5,10 @@
  ],
  "file": "../../../src/adapters/bls/BlsAdapter.js",
  "names": [
+  "BlsAdapter",
+  "crAdapterType1",
   "crData",
-  "fnAdapter",
-  "crConfOption",
-  "BlsAdapter"
+  "crConfOption"
  ],
- "mappings": ";;;;;;;AAAA;;AACA;;IAEQA,M,GAAyBC,qB,CAAzBD,M;IAAQE,Y,GAAiBD,qB,CAAjBC,Y;AAEhB,IAAMC,UAAU,GAAG,+BAAe;AAChCH,EAAAA,MAAM,EAANA,MADgC;AACxBE,EAAAA,YAAY,EAAZA;AADwB,CAAf,CAAnB;eAIeC,U"
+ "mappings": ";;;;;;;AAAA;;AACA;;AAKA,MAAMA,UAAU,GAAG,IAAAC,sBAAA,EAAe;EAChCC,MAAM,EAANA,iBADgC;EAEhCC,YAAY,EAAZA;AAFgC,CAAf,CAAnB;eAKeH,U"
 }

@@ -1,11 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.crData = exports.crConfOption = void 0;
 
 var _AdapterFn = require("../AdapterFn");
-
-var _crFn = require("../crFn");
 
 const _crZhConfig = _ref => {
   let {
@@ -35,36 +33,30 @@ const _crInfo = _ref2 => {
   };
 };
 
-const fnAdapter = {
-  crHm: _crFn.crHm,
-  crError: _crFn.crError,
-  getYear: _AdapterFn.getYear,
-  getCurrentYear: _AdapterFn.getCurrentYear,
-  crData: json => {
-    const data = json.Results.series[0].data,
-          _data = [];
-    data.forEach(p => {
-      const {
-        year,
-        period = '',
-        value
-      } = p,
-            _m = parseInt(('' + period).replace('M', ''), 10);
+const crData = json => json.Results.series[0].data.reduce((_data, p) => {
+  const {
+    year,
+    period = '',
+    value
+  } = p,
+        _m = parseInt(('' + period).replace('M', ''), 10);
 
-      if (typeof _m === 'number' && _m > 0 && _m < 13) {
-        _data.push({
-          x: (0, _AdapterFn.ymdToUTC)(year + "-" + _m),
-          y: parseFloat(value)
-        });
-      }
+  if ((0, _AdapterFn.isTypeNumber)(_m) && _m > 0 && _m < 13) {
+    _data.push({
+      x: (0, _AdapterFn.ymdToUTC)(year + "-" + _m),
+      y: parseFloat(value)
     });
-    return _data.reverse();
-  },
-  crConfOption: option => ({
-    zhConfig: _crZhConfig(option),
-    info: _crInfo(option)
-  })
-};
-var _default = fnAdapter;
-exports.default = _default;
+  }
+
+  return _data;
+}, []).reverse();
+
+exports.crData = crData;
+
+const crConfOption = option => ({
+  zhConfig: _crZhConfig(option),
+  info: _crInfo(option)
+});
+
+exports.crConfOption = crConfOption;
 //# sourceMappingURL=fnAdapter.js.map

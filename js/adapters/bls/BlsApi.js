@@ -1,28 +1,20 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
 
 var _AdapterFn = require("../AdapterFn");
 
-var _fnAdapter = _interopRequireDefault(require("./fnAdapter"));
+var _crFn = require("../crFn");
 
 const API_URL = 'https://api.bls.gov/publicAPI',
       TS_DATA = 'timeseries/data',
       NATIVE_URL = 'https://data.bls.gov/timeseries';
-const _assign = Object.assign,
-      {
-  crHm,
-  crError,
-  getYear,
-  getCurrentYear
-} = _fnAdapter.default;
+const _assign = Object.assign;
 
 const _crCuId = items => "CU" + items[2].v + "R" + items[1].v + items[0].v;
 
-const _hmCrId = crHm({
+const _hmCrId = (0, _crFn.crHm)({
   CU: _crCuId
 });
 
@@ -49,7 +41,7 @@ const _crCuCaption = (dfTitle, items) => ({
   subtitle: items[1].c + ": " + items[0].c
 });
 
-const _hmCrCaption = crHm({
+const _hmCrCaption = (0, _crFn.crHm)({
   CU: _crCuCaption
 });
 
@@ -95,8 +87,8 @@ const _crQueryPeriod = (queryKey, _ref4) => {
     return '';
   }
 
-  const _startyear = parseInt(getYear(fromDate), 10),
-        _endyear = parseInt(getCurrentYear(), 10);
+  const _startyear = parseInt((0, _AdapterFn.getYear)(fromDate), 10),
+        _endyear = parseInt((0, _AdapterFn.getCurrentYear)(), 10);
 
   if ((0, _AdapterFn.isNumber)(_startyear) && (0, _AdapterFn.isNumber)(_endyear) && _endyear - _startyear < 21) {
     return "&startyear=" + _startyear + "&endyear=" + _endyear;
@@ -133,7 +125,7 @@ const BlsApi = {
       return true;
     }
 
-    throw crError('', message[0]);
+    throw (0, _crFn.crError)('', message[0]);
   }
 
 };

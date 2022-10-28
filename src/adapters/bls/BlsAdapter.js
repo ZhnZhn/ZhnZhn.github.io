@@ -1,10 +1,12 @@
-import crAdapterType1 from '../crAdapterType1'
-import fnAdapter from './fnAdapter'
-
-const { crData, crConfOption } = fnAdapter;
+import crAdapterType1 from '../crAdapterType1';
+import {
+  crData,
+  crConfOption
+} from './fnAdapter';
 
 const BlsAdapter = crAdapterType1({
-  crData, crConfOption
+  crData,
+  crConfOption
 });
 
 export default BlsAdapter
