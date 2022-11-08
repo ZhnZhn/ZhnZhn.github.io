@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/adapters/crFromYearData.js"
+ ],
+ "file": "../../src/adapters/crFromYearData.js",
+ "names": [
+  "crFromYearData",
+  "json",
+  "option",
+  "fromYear",
+  "data",
+  "_fromYear",
+  "parseInt",
+  "isNumber",
+  "map",
+  "v",
+  "index",
+  "ymdToUTC"
+ ],
+ "mappings": ";;;;;AAAA;;AAKA,MAAMA,cAAc,GAAG,CACrBC,IADqB,EAErBC,MAFqB,KAGlB;EACH,MAAM;IACJC,QADI;IAEJC;EAFI,IAGFH,IAHJ;EAAA,MAIEI,SAAS,GAAGC,QAAQ,CAACH,QAAD,EAAW,EAAX,CAJtB;;EAKA,OAAO,IAAAI,mBAAA,EAASF,SAAT,IACHD,IAAI,CAACI,GAAL,CAAS,CAACC,CAAD,EAAIC,KAAJ,KAAc,CACrB,IAAAC,mBAAA,EAAUN,SAAS,GAAGK,KAAb,GAAoB,EAA7B,CADqB,EAErBD,CAFqB,CAAvB,CADG,GAKJ,EALH;AAMD,CAfD;;eAiBeT,c"
+}

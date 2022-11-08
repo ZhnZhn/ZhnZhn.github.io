@@ -5,20 +5,10 @@
  ],
  "file": "../../../src/adapters/ember/EmberAdapter.js",
  "names": [
-  "crData",
-  "json",
-  "option",
-  "fromYear",
-  "data",
-  "_fromYear",
-  "parseInt",
-  "isNumber",
-  "map",
-  "v",
-  "index",
-  "ymdToUTC",
   "EmberAdapter",
-  "crAdapterType1"
+  "crAdapterType1",
+  "crData",
+  "crFromYearData"
  ],
- "mappings": ";;;;;;;AAAA;;AAEA;;AAKA,MAAMA,MAAM,GAAG,CACbC,IADa,EAEbC,MAFa,KAGV;EACH,MAAM;IACJC,QADI;IAEJC;EAFI,IAGFH,IAHJ;EAAA,MAIEI,SAAS,GAAGC,QAAQ,CAACH,QAAD,EAAW,EAAX,CAJtB;;EAKA,OAAO,IAAAI,mBAAA,EAASF,SAAT,IACHD,IAAI,CAACI,GAAL,CAAS,CAACC,CAAD,EAAIC,KAAJ,KAAc,CACrB,IAAAC,mBAAA,EAAUN,SAAS,GAAGK,KAAb,GAAoB,EAA7B,CADqB,EAErBD,CAFqB,CAAvB,CADG,GAKJ,EALH;AAMD,CAfD;;AAiBA,MAAMG,YAAY,GAAG,IAAAC,sBAAA,EAAe;EAClCb;AADkC,CAAf,CAArB;eAIeY,Y"
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,YAAY,GAAG,IAAAC,sBAAA,EAAe;EAClCC,MAAM,EAAEC;AAD0B,CAAf,CAArB;eAIeH,Y"
 }
