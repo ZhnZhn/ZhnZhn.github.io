@@ -1,0 +1,14 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/irena/IrenaAdapter.js"
+ ],
+ "file": "../../../src/adapters/irena/IrenaAdapter.js",
+ "names": [
+  "IrenaAdapter",
+  "crAdapterType1",
+  "crData",
+  "crFromYearData"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,YAAY,GAAG,IAAAC,sBAAA,EAAe;EAClCC,MAAM,EAAEC;AAD0B,CAAf,CAArB;eAIeH,Y"
+}

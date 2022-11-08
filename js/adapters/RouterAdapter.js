@@ -49,6 +49,8 @@ var _DbNomics = _interopRequireDefault(require("./db-nomics/DbNomics"));
 
 var _Ember = _interopRequireDefault(require("./ember/Ember"));
 
+var _Irena = _interopRequireDefault(require("./irena/Irena"));
+
 var _Crc = _interopRequireDefault(require("./crypto-compare/Crc"));
 
 var _Cg = _interopRequireDefault(require("./coin-gecko/Cg"));
@@ -69,6 +71,7 @@ const RouterAdapter = {
   Quandl: _Quandl.default,
   DbNomics: _DbNomics.default,
   Ember: _Ember.default,
+  Irena: _Irena.default,
   EuroStat: _EuroStat.default,
   UnComtrade: _UnComtrade.default,
   FaoStat: _FaoStat.default,

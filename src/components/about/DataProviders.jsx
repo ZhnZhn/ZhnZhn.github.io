@@ -36,6 +36,7 @@ const DP = [
   [Link.Ndl, '50'],
   Link.DbNomics,
   Link.Ember,
+  Link.IRENA,
   Link.Eurostat,
   Link.UnComtrade,
   Link.FaoStat,
@@ -90,7 +91,7 @@ const LinkList = ({
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 30):"
+     caption="Data Providers (All 31):"
      childStyle={S_ROOT_CHILD}
   >
     <div>

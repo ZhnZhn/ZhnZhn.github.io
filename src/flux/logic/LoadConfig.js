@@ -3,6 +3,7 @@ import {
   LT_QCT,
   LT_DBN,
   LT_EMB,
+  LT_IRE,
   LT_AL,
   LT_IEX,
   LT_FMP,
@@ -43,6 +44,7 @@ const LoadConfig = {
 
   [LT_DBN]: LoadImpl.DbNomics,
   [LT_EMB]: LoadImpl.Ember,
+  [LT_IRE]: LoadImpl.Irena,
 
   [LT_AL]: LoadImpl.AlphaVantage,
   [LT_IEX]: LoadImpl.Iex,

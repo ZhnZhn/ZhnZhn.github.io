@@ -13,6 +13,7 @@ const LINK_CONFIGS = [
  ["Ndl", "Nasdaq Data Link", "https://data.nasdaq.com/"],
  ["DbNomics", "DB NOMICS", "https://db.nomics.world", S_DARK_GREEN],
  ["Ember", "https://ember-climate.org"],
+ ["IRENA", "https://www.irena.org"],
  ["Iex", "IEX Cloud", "https://iexcloud.io"],
  ["Fmp", "Financial Modeling Prep", "https://financialmodelingprep.com"],
  ["Tw", "Twelve Data", "https://twelvedata.com"],
