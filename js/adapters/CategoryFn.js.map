@@ -1,0 +1,30 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/adapters/CategoryFn.js"
+ ],
+ "file": "../../src/adapters/CategoryFn.js",
+ "names": [
+  "_isArr",
+  "Array",
+  "isArray",
+  "_addToHm",
+  "hm",
+  "p",
+  "c",
+  "arrangeSeriaByCategories",
+  "series",
+  "categories",
+  "_hmPoints",
+  "data",
+  "reduce",
+  "map",
+  "category",
+  "getCategories",
+  "chart",
+  "xAxis",
+  "isCategoryCase",
+  "config"
+ ],
+ "mappings": ";;;;AAAA,MAAMA,MAAM,GAAGC,KAAK,CAACC,OAArB;;AAEA,MAAMC,QAAQ,GAAG,CACfC,EADe,EAEfC,CAFe,MAGXD,EAAE,CAACC,CAAC,CAACC,CAAH,CAAF,GAAUD,CAAV,EAAaD,EAHF,CAAjB;;AAKO,MAAMG,wBAAwB,GAAG,CACtCC,MADsC,EAEtCC,UAFsC,KAGnC;EACH,MAAMC,SAAS,GAAG,CAACF,MAAM,CAACG,IAAP,IAAe,EAAhB,EACfC,MADe,CACRT,QADQ,EACE,EADF,CAAlB;;EAGAK,MAAM,CAACG,IAAP,GAAcF,UAAU,CACrBI,GADW,CACPC,QAAQ,IAAIJ,SAAS,CAACI,QAAD,CAAT,IAAuB,IAD5B,CAAd;EAEA,OAAON,MAAP;AACD,CAVM,C,CAYP;;;;;AACO,MAAMO,aAAa,GACxBC,KAD2B,IAExB,CAAC,CAACA,KAAK,CAACC,KAAN,IAAe,EAAhB,EAAoB,CAApB,KAA0B,EAA3B,EAA+BR,UAF7B;;;;AAIA,MAAMS,cAAc,GAAG,CAC5BC,MAD4B,EAE5BV,UAF4B,KAGzBT,MAAM,CAAC,CAACmB,MAAM,CAACF,KAAP,IAAc,EAAf,EAAmBR,UAApB,CAAN,IACAT,MAAM,CAACS,UAAD,CAJJ"
+}

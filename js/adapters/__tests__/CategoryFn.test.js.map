@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/__tests__/CategoryFn.test.js"
+ ],
+ "file": "../../../src/adapters/__tests__/CategoryFn.test.js",
+ "names": [
+  "describe",
+  "fn",
+  "arrangeSeriaByCategories",
+  "test",
+  "categories",
+  "seria",
+  "data",
+  "c",
+  "expect",
+  "toEqual"
+ ],
+ "mappings": ";;AAAA;;AAIAA,QAAQ,CAAC,0BAAD,EAA6B,MAAK;EACxC,MAAMC,EAAE,GAAGC,oCAAX;EACAC,IAAI,CAAC,yCAAD,EAA4C,MAAI;IAClD,MAAMC,UAAU,GAAG,CAAC,IAAD,EAAM,IAAN,EAAW,IAAX,CAAnB;IAAA,MACEC,KAAK,GAAG;MAAEC,IAAI,EAAE,CAChB;QAAC,KAAK;MAAN,CADgB,EACH;QAACC,CAAC,EAAE;MAAJ,CADG,EACQ;QAACA,CAAC,EAAE;MAAJ,CADR;IAAR,CADV;IAIAC,MAAM,CAACP,EAAE,CAACI,KAAD,EAAQD,UAAR,CAAH,CAAN,CAA8BK,OAA9B,CAAsC;MACpCH,IAAI,EAAE,CACJ;QAACC,CAAC,EAAE;MAAJ,CADI,EACO,IADP,EACa;QAACA,CAAC,EAAE;MAAJ,CADb;IAD8B,CAAtC;EAKD,CAVG,CAAJ;AAWD,CAbO,CAAR"
+}

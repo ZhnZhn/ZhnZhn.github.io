@@ -1,4 +1,6 @@
-import arrangeSeriaByCategories from '../arrangeSeriaByCategories'
+import {
+  arrangeSeriaByCategories
+} from '../CategoryFn';
 
 describe('arrangeSeriaByCategories', () =>{
   const fn = arrangeSeriaByCategories;

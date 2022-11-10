@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _arrangeSeriaByCategories = _interopRequireDefault(require("../arrangeSeriaByCategories"));
+var _CategoryFn = require("../CategoryFn");
 
 describe('arrangeSeriaByCategories', () => {
-  const fn = _arrangeSeriaByCategories.default;
+  const fn = _CategoryFn.arrangeSeriaByCategories;
   test('should arrange seria data by categories', () => {
     const categories = ['a1', 'a2', 'a3'],
           seria = {
@@ -26,4 +24,4 @@ describe('arrangeSeriaByCategories', () => {
     });
   });
 });
-//# sourceMappingURL=arrangeSeriaByCategories.test.js.map
+//# sourceMappingURL=CategoryFn.test.js.map
