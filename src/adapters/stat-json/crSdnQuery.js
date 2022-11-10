@@ -1,4 +1,4 @@
-import isCategory from './isCategory';
+import { isCategory } from '../CategoryFn';
 
 const _crVariable = (code, value) => ({
   code,

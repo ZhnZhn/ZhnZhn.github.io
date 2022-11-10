@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _isCategory = _interopRequireDefault(require("./isCategory"));
+var _CategoryFn = require("../CategoryFn");
 
 var _crArrQuery = _interopRequireDefault(require("./crArrQuery"));
 
@@ -29,7 +29,7 @@ const crDfArrQuery = option => {
     seriaType
   } = option;
 
-  if (dfC && (0, _isCategory.default)(seriaType)) {
+  if (dfC && (0, _CategoryFn.isCategory)(seriaType)) {
     const {
       time,
       timeId = 'Tid'

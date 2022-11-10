@@ -1,4 +1,4 @@
-import isCategory from './isCategory';
+import { isCategory } from '../CategoryFn';
 import crArrQuery from './crArrQuery';
 import crQueryItem from './crQueryItem';
 

@@ -1,5 +1,16 @@
 const _isArr = Array.isArray;
 
+export const isCategory = (
+  seriaType
+) => seriaType === "BAR_CLUSTER"
+ || seriaType === "BAR_SET"
+ || seriaType === "COLUMN_SET"
+ || seriaType === "COLUMN_CLUSTER"
+ || seriaType === "TREE_MAP"
+ || seriaType === "TREE_MAP_CLUSTER"
+ || seriaType === "TREE_MAP_2"
+ || seriaType === "TREE_MAP_2_CLUSTER";
+
 const _addToHm = (
   hm,
   p
