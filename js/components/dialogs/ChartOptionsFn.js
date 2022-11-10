@@ -63,7 +63,7 @@ const _crT2AE = (_, mapFrequency) => [..._crT2A(_, mapFrequency), ..._crT3All("D
 
 const _crT3 = _ref => {
   let [oneCaption] = _ref;
-  return [_crItem(['Default: Spline', SPLINE]), ..._crT3All(oneCaption)];
+  return [..._crT2(), ..._crT3All(oneCaption)];
 };
 
 const _crT3B = (_ref2, mapFrequency) => {

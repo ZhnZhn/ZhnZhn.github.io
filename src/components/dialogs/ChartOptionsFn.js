@@ -98,7 +98,7 @@ const _crT2AE = (_, mapFrequency) => [
 ];
 
 const _crT3 = ([oneCaption]) => [
-  _crItem(['Default: Spline', SPLINE]),
+  ..._crT2(),
   ..._crT3All(oneCaption)
 ];
 
