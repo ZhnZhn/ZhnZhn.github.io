@@ -7,17 +7,12 @@ exports.default = void 0;
 
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 
-var _kMeans = _interopRequireDefault(require("../../math/k-means"));
-
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
-
-var _Tooltip = require("../../charts/Tooltip");
+var _crCategoryConfig = _interopRequireDefault(require("../crCategoryConfig"));
 
 var _fnAdapter = require("./fnAdapter");
 
 const _assign = Object.assign,
       _isArr = Array.isArray;
-const COLORS = ['#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b', '#74c476'];
 
 const _fCrCategoryPoint = c => (v, i) => {
   const label = c.Category(i).label;
@@ -37,27 +32,6 @@ const _fIsCategoryPoint = dfT => p => {
 };
 
 const _compareByY = (a, b) => b.y - a.y;
-
-const _colorItems = (data, _clusters) => {
-  _clusters.forEach((cluster, colorIndex) => {
-    cluster.points.forEach(p => {
-      data[p.id].color = COLORS[colorIndex];
-    });
-  });
-};
-
-const _setClusters = data => {
-  if (data.length !== 0) {
-    const _points = data.map((item, index) => {
-      const arr = [item.y, 0];
-      arr.id = index;
-      return arr;
-    }),
-          _clusters = _kMeans.default.crUnarySortedCluster(_points);
-
-    _colorItems(data, _clusters);
-  }
-};
 
 const _crCategory = option => {
   const {
@@ -173,22 +147,9 @@ const toColumn = {
           _title = _crTitle(dfTitle, option),
           _subtitle = _crSubtitle(items, category),
           data = _crData(_values, _dimC, cTotal),
-          _c = data.map(item => item.c),
-          config = (0, _ConfigBuilder.default)().barOrColumnConfig(seriaType, _c).addCaption(_title, _subtitle).addTooltip(_Tooltip.tooltipCategory).add({
-      chart: {
-        spacingTop: 25
-      },
-      ...(0, _fnAdapter.crChartOption)(_ds, Tid, option)
-    }).toConfig();
+          config = (0, _crCategoryConfig.default)(_title, _subtitle, seriaType, seriaColor, data, isCluster);
 
-    if (isCluster) {
-      _setClusters(data);
-    }
-
-    _assign(config.series[0], {
-      color: seriaColor,
-      data: data
-    });
+    _assign(config, (0, _fnAdapter.crChartOption)(_ds, Tid, option));
 
     return config;
   }

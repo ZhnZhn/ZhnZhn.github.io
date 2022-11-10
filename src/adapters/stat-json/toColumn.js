@@ -1,8 +1,6 @@
 import JSONstat from 'jsonstat';
-import clusterMaker from '../../math/k-means';
+import crCategoryConfig from '../crCategoryConfig';
 
-import Builder from '../../charts/ConfigBuilder';
-import { tooltipCategory } from '../../charts/Tooltip';
 import {
   isYNumber,
   crTitle,
@@ -14,13 +12,6 @@ import {
 const _assign = Object.assign
 , _isArr = Array.isArray;
 
-const COLORS = [
-  '#9ecae1', '#6baed6',
-  '#4292c6', '#2171b5',
-  '#08519c', '#08306b',
-  '#74c476'
-];
-
 const _fCrCategoryPoint = (c) => (v, i) => {
   const label = c.Category(i).label;
   return {
@@ -29,6 +20,7 @@ const _fCrCategoryPoint = (c) => (v, i) => {
     c: label
   };
 };
+
 const _fIsCategoryPoint = (dfT) => (p) => {
   if (dfT && p.c === dfT) {
     return false;
@@ -37,26 +29,6 @@ const _fIsCategoryPoint = (dfT) => (p) => {
 };
 
 const _compareByY = (a, b) => b.y - a.y;
-
-const _colorItems = (data, _clusters) => {
-  _clusters.forEach((cluster, colorIndex) => {
-      cluster.points.forEach(p => {
-        data[p.id].color = COLORS[colorIndex]
-      })
-  })
-};
-
-const _setClusters = (data) => {
-  if (data.length !== 0) {
-    const _points = data.map((item, index) => {
-      const arr = [item.y, 0];
-      arr.id = index;
-      return arr;
-    })
-    , _clusters = clusterMaker.crUnarySortedCluster(_points);
-    _colorItems(data, _clusters)
-  }
-};
 
 const _crCategory = (option) => {
   const {
@@ -156,7 +128,8 @@ const toColumn = {
       timeId='Tid',
       dfTitle,
       dfTSlice,
-      seriaType, seriaColor,
+      seriaType,
+      seriaColor,
       isCluster,
       items=[],
     } = option
@@ -168,27 +141,18 @@ const toColumn = {
     , _title = _crTitle(dfTitle, option)
     , _subtitle = _crSubtitle(items, category)
     , data = _crData(_values, _dimC, cTotal)
-    , _c = data.map(item => item.c)
-    , config = Builder()
-       .barOrColumnConfig(seriaType, _c)
-       .addCaption(_title, _subtitle)
-       .addTooltip(tooltipCategory)
-       .add({
-         chart: { spacingTop: 25 },
-         ...crChartOption(_ds, Tid, option)
-        })
-       .toConfig();
+    , config = crCategoryConfig(
+       _title,
+       _subtitle,
+       seriaType,
+       seriaColor,
+       data,
+       isCluster
+     );
 
-    if (isCluster) {
-      _setClusters(data)
-    }
-    _assign(config.series[0], {
-      color: seriaColor,
-      data: data
-    })
+    _assign(config, crChartOption(_ds, Tid, option))
     return config;
   }
-
 };
 
 export default toColumn
