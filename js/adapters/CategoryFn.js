@@ -1,12 +1,16 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isCategoryCase = exports.isCategory = exports.getCategories = exports.arrangeSeriaByCategories = void 0;
+exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.getCategories = exports.arrangeSeriaByCategories = void 0;
 const _isArr = Array.isArray;
 
 const isCategory = seriaType => seriaType === "BAR_CLUSTER" || seriaType === "BAR_SET" || seriaType === "COLUMN_SET" || seriaType === "COLUMN_CLUSTER" || seriaType === "TREE_MAP" || seriaType === "TREE_MAP_CLUSTER" || seriaType === "TREE_MAP_2" || seriaType === "TREE_MAP_2_CLUSTER";
 
 exports.isCategory = isCategory;
+
+const isCategoryCluster = seriaType => (seriaType || '').indexOf('CLUSTER') !== -1;
+
+exports.isCategoryCluster = isCategoryCluster;
 
 const _addToHm = (hm, p) => (hm[p.c] = p, hm);
 

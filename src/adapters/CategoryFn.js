@@ -11,6 +11,10 @@ export const isCategory = (
  || seriaType === "TREE_MAP_2"
  || seriaType === "TREE_MAP_2_CLUSTER";
 
+ export const isCategoryCluster = (
+   seriaType
+ ) => (seriaType || '').indexOf('CLUSTER') !== -1
+
 const _addToHm = (
   hm,
   p
