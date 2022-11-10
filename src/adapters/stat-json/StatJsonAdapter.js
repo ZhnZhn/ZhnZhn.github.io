@@ -1,39 +1,20 @@
-import arrangeSeriaByCategories from './arrangeSeriaByCategories';
 import RouterConfig from './RouterConfig';
+import fToCategorySeries from '../fToCategorySeries';
 
-
-const _isArr = Array.isArray;
-
-const _crConfig = (json, option) => {
-  const { seriaType } = option
-  , crConfig = RouterConfig.getCrConfig(seriaType);
-  return crConfig(json, option);
+const _crConfig = (
+  json,
+  option
+) => {
+  const crConfig = RouterConfig
+    .getCrConfig((option||{}).seriaType);
+  return {
+    config: crConfig(json, option)
+  };
 };
 
-
-//chart?.xAxis?.[0]?.categories
-const _getCategories = chart =>
- ((chart.xAxis || [])[0] || {}).categories;
-const _isCategoryCase = (config, categories) =>
-  _isArr((config.xAxis||{}).categories)
-  && _isArr(categories);
-
 const StatJsonAdapter = {
-  toConfig(json, option) {
-     return {
-       config: _crConfig(json, option)
-     };
-  },
-
-  toSeries(json, option, chart) {
-     const config = _crConfig(json, option)
-     , seria = config.series[0]
-     , categories = _getCategories(chart);
-
-     return _isCategoryCase(config, categories)
-       ? arrangeSeriaByCategories(seria, categories)
-       : seria;
-  }
+  toConfig: _crConfig,
+  toSeries: fToCategorySeries(_crConfig)
 };
 
 export default StatJsonAdapter

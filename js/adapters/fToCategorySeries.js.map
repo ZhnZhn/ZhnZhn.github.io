@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/adapters/fToCategorySeries.js"
+ ],
+ "file": "../../src/adapters/fToCategorySeries.js",
+ "names": [
+  "fToCategorySeries",
+  "crConfig",
+  "json",
+  "option",
+  "chart",
+  "config",
+  "seria",
+  "series",
+  "categories",
+  "getCategories",
+  "isCategoryCase",
+  "arrangeSeriaByCategories"
+ ],
+ "mappings": ";;;;;AAAA;;AAMA,MAAMA,iBAAiB,GACrBC,QADwB,IAErB,CAACC,IAAD,EAAOC,MAAP,EAAeC,KAAf,KAAyB;EAC3B,MAAMC,MAAM,GAAGJ,QAAQ,CAACC,IAAD,EAAOC,MAAP,CAAR,CAAuBE,MAAtC;EAAA,MACEC,KAAK,GAAGD,MAAM,CAACE,MAAP,CAAc,CAAd,CADV;EAAA,MAEEC,UAAU,GAAG,IAAAC,yBAAA,EAAcL,KAAd,CAFf;EAIA,OAAO,IAAAM,0BAAA,EAAeL,MAAf,EAAuBG,UAAvB,IACH,IAAAG,oCAAA,EAAyBL,KAAzB,EAAgCE,UAAhC,CADG,GAEHF,KAFJ;AAGF,CAVD;;eAYeN,iB"
+}

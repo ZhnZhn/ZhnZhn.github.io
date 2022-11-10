@@ -5,41 +5,21 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _arrangeSeriaByCategories = _interopRequireDefault(require("./arrangeSeriaByCategories"));
-
 var _RouterConfig = _interopRequireDefault(require("./RouterConfig"));
 
-const _isArr = Array.isArray;
+var _fToCategorySeries = _interopRequireDefault(require("../fToCategorySeries"));
 
 const _crConfig = (json, option) => {
-  const {
-    seriaType
-  } = option,
-        crConfig = _RouterConfig.default.getCrConfig(seriaType);
+  const crConfig = _RouterConfig.default.getCrConfig((option || {}).seriaType);
 
-  return crConfig(json, option);
-}; //chart?.xAxis?.[0]?.categories
-
-
-const _getCategories = chart => ((chart.xAxis || [])[0] || {}).categories;
-
-const _isCategoryCase = (config, categories) => _isArr((config.xAxis || {}).categories) && _isArr(categories);
+  return {
+    config: crConfig(json, option)
+  };
+};
 
 const StatJsonAdapter = {
-  toConfig(json, option) {
-    return {
-      config: _crConfig(json, option)
-    };
-  },
-
-  toSeries(json, option, chart) {
-    const config = _crConfig(json, option),
-          seria = config.series[0],
-          categories = _getCategories(chart);
-
-    return _isCategoryCase(config, categories) ? (0, _arrangeSeriaByCategories.default)(seria, categories) : seria;
-  }
-
+  toConfig: _crConfig,
+  toSeries: (0, _fToCategorySeries.default)(_crConfig)
 };
 var _default = StatJsonAdapter;
 exports.default = _default;
