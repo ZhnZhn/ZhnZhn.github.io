@@ -1,8 +1,6 @@
 import clusterMaker from '../math/k-means';
 import Builder from '../charts/ConfigBuilder';
 
-const _assign = Object.assign;
-
 const COLORS = [
   '#9ecae1',
   '#6baed6',
@@ -24,13 +22,17 @@ const _colorItems = (
   })
 };
 
+const _crPoints = (
+  data
+) => data.map((item, index) => {
+  const _arrPoint = [item.y, 0];
+  _arrPoint.id = index;
+  return _arrPoint;
+});
+
 const _addClustersTo = (data) => {
   if (data.length !== 0) {
-    const _points = data.map((item, index) => {
-      const arr = [item.y, 0];
-      arr.id = index;
-      return arr;
-    })
+    const _points = _crPoints(data)
     , _clusters = clusterMaker.crUnarySortedCluster(_points);
     _colorItems(data, _clusters)
   }
@@ -49,19 +51,13 @@ const crCategoryConfig = (
   seriaColor,
   data,
   isCluster
-) => {
-  const _categories = _crCategories(data)
-  , config = Builder()
-     .barOrColumnConfig(seriaType, _categories)
-     .addCaption(title, subtitle)
-     .toConfig();
-
-  _assign(config.series[0], {
+) => Builder()
+  .barOrColumnConfig(seriaType, _crCategories(data))
+  .addCaption(title, subtitle)
+  .addSeriaBy(0, {
     color: seriaColor,
     data: isCluster ? _addClustersTo(data) : data
   })
-
-  return config;
-}
+  .toConfig();
 
 export default crCategoryConfig
