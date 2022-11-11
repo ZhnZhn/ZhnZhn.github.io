@@ -93,7 +93,8 @@ exports.crInfo = crInfo;
 
 const crZhConfig = function (option, _temp) {
   let {
-    isLegend
+    isLegend,
+    isWi = true
   } = _temp === void 0 ? {} : _temp;
 
   const {
@@ -109,7 +110,7 @@ const crZhConfig = function (option, _temp) {
     itemCaption: oneC,
     itemTime: period,
     legend: isLegend ? [] : void 0,
-    isWithoutIndicator: true,
+    isWithoutIndicator: isWi,
     dataSource
   };
 };

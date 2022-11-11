@@ -13,33 +13,28 @@ import {
   crZhConfig
 } from './fnAdapter';
 
-const _assign = Object.assign;
-
 const _crConfig = (
   json,
   option,
   data,
   categories
 ) => {
-  const title = crCategoryTitle(option)
-  , config = Builder()
-      .barOrColumnConfig('BAR', categories)
-      .addCaption(
-         title,
-         option.subtitle
-      )
-      .add({
-         info: crInfo(json, option),
-         zhConfig: crZhConfig(option)
-      })
-      .toConfig();
-
-  _assign(config.series[0], {
-     data: data,
-     name: title
-  })
-  config.zhConfig.isWithoutIndicator = false
-  return config;
+  const title = crCategoryTitle(option);
+  return Builder()
+    .barOrColumnConfig('BAR', categories)
+    .addCaption(
+       title,
+       option.subtitle
+    )
+    .add({
+       info: crInfo(json, option),
+       zhConfig: crZhConfig(option, { isWi: false })
+    })
+    .addSeriaBy(0, {
+      data: data,
+      name: title
+    })
+    .toConfig();
 }
 
 const URL_HS_CHAPTERS = './data/uncomtrade/hs-chapters.json';
