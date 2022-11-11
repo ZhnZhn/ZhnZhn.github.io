@@ -1,107 +1,100 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var S = {
-  TEXT: {
-    color: 'black',
-    'font-size': '16px',
-    'font-weight': 800
+exports.default = void 0;
+const S_TEXT = {
+  color: 'black',
+  'font-size': '16px',
+  'font-weight': 800
+},
+      S_INLINE = {
+  display: 'inline'
+},
+      S_NONE = {
+  display: 'none'
+},
+      CONFIG_HIDE = {
+  chart: {
+    spacingTop: 0,
+    marginTop: 18
   },
-  INLINE: {
-    display: 'inline'
+  exporting: {
+    enabled: false
   },
-  NONE: {
-    display: 'none'
-  }
-};
-var C = {
-  HIDE: {
-    chart: {
-      spacingTop: 0,
-      marginTop: 18
-    },
-    exporting: {
-      enabled: false
-    },
-    subtitle: {
-      style: {
-        display: 'none'
-      }
-    },
-    title: {
-      style: {
-        display: 'none'
-      }
+  subtitle: {
+    style: {
+      display: 'none'
     }
   },
-  SHOW: {
-    chart: {
-      spacingTop: 25,
-      marginTop: 70
-    },
-    exporting: {
-      enabled: true
-    },
-    subtitle: {
-      style: {
-        display: 'inline-block'
-      }
-    },
-    title: {
-      style: {
-        display: 'inline-block'
-      }
+  title: {
+    style: {
+      display: 'none'
     }
   }
-};
-var PN = {
-  TITLE: 'zhElTitle',
-  SUBTITLE: 'zhElSubtitle'
-};
+},
+      CONFIG_SHOW = {
+  chart: {
+    spacingTop: 25,
+    marginTop: 70
+  },
+  exporting: {
+    enabled: true
+  },
+  subtitle: {
+    style: {
+      display: 'inline-block'
+    }
+  },
+  title: {
+    style: {
+      display: 'inline-block'
+    }
+  }
+},
+      PN_TITLE = 'zhElTitle',
+      PN_SUBTITLE = 'zhElSubtitle';
 
-var _renderTextTo = function _renderTextTo(chart, objText, x, y, propName) {
-  var _el = chart[propName];
+const _renderTextTo = (chart, objText, x, y, propName) => {
+  const _el = chart[propName];
 
   if (_el && _el.css) {
-    _el.css((0, _extends2["default"])({}, S.INLINE));
+    _el.css({ ...S_INLINE
+    });
 
     return;
   }
 
-  var _ref = objText || {},
-      text = _ref.text;
+  const {
+    text
+  } = objText || {};
 
   if (text) {
-    chart[propName] = chart.renderer.text(text, x, y).css((0, _extends2["default"])({}, S.TEXT)).add();
+    chart[propName] = chart.renderer.text(text, x, y).css({ ...S_TEXT
+    }).add();
   }
 };
 
-var _hideEl = function _hideEl(chart, propName) {
-  var _el = chart[propName];
+const _hideEl = (chart, propName) => {
+  const _el = chart[propName];
 
   if (_el && _el.css) {
-    _el.css((0, _extends2["default"])({}, S.NONE));
+    _el.css({ ...S_NONE
+    });
   }
 };
 
-var zhCaption = function zhCaption(Chart) {
+const zhCaption = Chart => {
   Chart.prototype.zhHideCaption = function () {
     try {
-      var _height = this.chartHeight - 40;
+      const _height = this.chartHeight - 40;
 
-      this.update(C.HIDE, false);
+      this.update(CONFIG_HIDE, false);
       this.setSize(null, _height, true);
-      var _ = this.options;
+      const _ = this.options;
 
-      _renderTextTo(this, _.title, 40, 70, PN.TITLE);
+      _renderTextTo(this, _.title, 40, 70, PN_TITLE);
 
-      _renderTextTo(this, _.subtitle, 40, 90, PN.SUBTITLE);
+      _renderTextTo(this, _.subtitle, 40, 90, PN_SUBTITLE);
     } catch (err) {
       console.log(err.msg);
     }
@@ -109,14 +102,14 @@ var zhCaption = function zhCaption(Chart) {
 
   Chart.prototype.zhShowCaption = function () {
     try {
-      var _height = this.chartHeight + 40;
+      const _height = this.chartHeight + 40;
 
-      this.update(C.SHOW, false);
+      this.update(CONFIG_SHOW, false);
       this.setSize(null, _height, true);
 
-      _hideEl(this, PN.TITLE);
+      _hideEl(this, PN_TITLE);
 
-      _hideEl(this, PN.SUBTITLE);
+      _hideEl(this, PN_SUBTITLE);
     } catch (err) {
       console.log(err.msg);
     }
@@ -124,5 +117,5 @@ var zhCaption = function zhCaption(Chart) {
 };
 
 var _default = zhCaption;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=zhCaption.js.map
