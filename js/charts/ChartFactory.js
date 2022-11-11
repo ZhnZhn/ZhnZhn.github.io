@@ -10,20 +10,15 @@ var _Tooltip = require("./Tooltip");
 const DF_COLOR = '#8085e9';
 
 const _assign = Object.assign,
-      _crPlotOption = function (pointWidth, _temp) {
-  let {
-    seriaColor = DF_COLOR
-  } = _temp === void 0 ? {} : _temp;
-  return {
-    pointWidth,
-    color: seriaColor,
-    minPointLength: 5,
-    pointPadding: 0,
-    borderWidth: 0,
-    groupPadding: 0.2,
-    shadow: false
-  };
-};
+      _crPlotOption = pointWidth => ({
+  pointWidth,
+  color: DF_COLOR,
+  minPointLength: 5,
+  pointPadding: 0,
+  borderWidth: 0,
+  groupPadding: 0.2,
+  shadow: false
+});
 
 const _crEmptyText = () => ({
   text: ''
@@ -69,7 +64,7 @@ const _crCategoryConfig = () => ({
   }]
 });
 
-const crColumnConfig = options => {
+const crColumnConfig = () => {
   const config = _crCategoryConfig();
 
   _assign(config.chart, {
@@ -79,7 +74,7 @@ const crColumnConfig = options => {
   });
 
   _assign(config.plotOptions, {
-    column: _crPlotOption(6, options)
+    column: _crPlotOption(6)
   });
 
   return config;
@@ -87,7 +82,7 @@ const crColumnConfig = options => {
 
 exports.crColumnConfig = crColumnConfig;
 
-const crBarConfig = options => {
+const crBarConfig = () => {
   const config = _crCategoryConfig();
 
   _assign(config.chart, {
@@ -107,7 +102,7 @@ const crBarConfig = options => {
   });
 
   _assign(config.plotOptions, {
-    bar: _crPlotOption(4, options)
+    bar: _crPlotOption(4)
   });
 
   return config;

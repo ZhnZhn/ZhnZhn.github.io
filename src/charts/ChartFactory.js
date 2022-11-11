@@ -5,11 +5,10 @@ const DF_COLOR = '#8085e9';
 
 const _assign = Object.assign
 , _crPlotOption = (
-  pointWidth,
-  { seriaColor=DF_COLOR } = {}
+  pointWidth
 ) => ({
     pointWidth,
-    color: seriaColor ,
+    color: DF_COLOR,
     minPointLength: 5,
     pointPadding: 0,
     borderWidth: 0,
@@ -57,9 +56,7 @@ const _crCategoryConfig = () => ({
   series: [{ name: 'Column'}]
 })
 
-export const crColumnConfig = (
-  options
-) => {
+export const crColumnConfig = () => {
   const config = _crCategoryConfig();
   _assign(config.chart, {
     type: "column",
@@ -67,14 +64,12 @@ export const crColumnConfig = (
     marginBottom: 100,
   })
   _assign(config.plotOptions, {
-    column: _crPlotOption(6, options),
+    column: _crPlotOption(6)
   })
   return config;
 }
 
-export const crBarConfig = (
-  options
-) =>  {
+export const crBarConfig = () =>  {
   const config = _crCategoryConfig();
   _assign(config.chart, {
     type: 'bar',
@@ -88,7 +83,7 @@ export const crBarConfig = (
     gridLineDashStyle: 'ShortDot'
   })
   _assign(config.plotOptions, {
-    bar: _crPlotOption(4, options)
+    bar: _crPlotOption(4)
   })
 
   return config;

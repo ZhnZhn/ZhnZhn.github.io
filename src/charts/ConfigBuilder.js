@@ -134,11 +134,11 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this.add('xAxis', xAxis)
       .add('yAxis', CATEGORIES_Y_AXIS);
   },
-  barOrColumnConfig(type, categories=[], option){
+  barOrColumnConfig(type, categories=[]){
     const _crConfig = type === 'BAR'
       ? crBarConfig
       : crColumnConfig;
-    this.config = _crConfig(option)
+    this.config = _crConfig()
     return this.add('xAxis', { categories });
   },
   treeMapConfig(data){
