@@ -1,7 +1,5 @@
-import Builder from '../charts/ConfigBuilder';
-import { tooltipCategory } from '../charts/Tooltip';
-
 import clusterMaker from '../math/k-means';
+import Builder from '../charts/ConfigBuilder';
 
 const _assign = Object.assign;
 
@@ -26,7 +24,7 @@ const _colorItems = (
   })
 };
 
-const _setClustersTo = (data) => {
+const _addClustersTo = (data) => {
   if (data.length !== 0) {
     const _points = data.map((item, index) => {
       const arr = [item.y, 0];
@@ -36,6 +34,7 @@ const _setClustersTo = (data) => {
     , _clusters = clusterMaker.crUnarySortedCluster(_points);
     _colorItems(data, _clusters)
   }
+  return data;
 };
 
 const _crCategories = (
@@ -55,16 +54,11 @@ const crCategoryConfig = (
   , config = Builder()
      .barOrColumnConfig(seriaType, _categories)
      .addCaption(title, subtitle)
-     .addTooltip(tooltipCategory)
-     .add({ chart: { spacingTop: 25 } })
      .toConfig();
 
-  if (isCluster) {
-    _setClustersTo(data)
-  }
   _assign(config.series[0], {
     color: seriaColor,
-    data: data
+    data: isCluster ? _addClustersTo(data) : data
   })
 
   return config;

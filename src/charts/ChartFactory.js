@@ -1,3 +1,6 @@
+import { fTooltip } from './Chart';
+import { tooltipCategory } from './Tooltip';
+
 const DF_COLOR = '#8085e9';
 
 const _assign = Object.assign
@@ -22,9 +25,11 @@ const _crCategoryConfig = () => ({
   chart: {
     panKey: void 0,
     panning: false,
+    spacingTop: 25
   },
   title: _crEmptyText(),
   subtitle: _crEmptyText(),
+  tooltip: fTooltip(tooltipCategory),
   xAxis: {
     type: "category",
     categories: [],

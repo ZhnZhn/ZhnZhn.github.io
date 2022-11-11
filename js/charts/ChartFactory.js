@@ -2,6 +2,11 @@
 
 exports.__esModule = true;
 exports.crColumnConfig = exports.crBarConfig = void 0;
+
+var _Chart = require("./Chart");
+
+var _Tooltip = require("./Tooltip");
+
 const DF_COLOR = '#8085e9';
 
 const _assign = Object.assign,
@@ -27,10 +32,12 @@ const _crEmptyText = () => ({
 const _crCategoryConfig = () => ({
   chart: {
     panKey: void 0,
-    panning: false
+    panning: false,
+    spacingTop: 25
   },
   title: _crEmptyText(),
   subtitle: _crEmptyText(),
+  tooltip: (0, _Chart.fTooltip)(_Tooltip.tooltipCategory),
   xAxis: {
     type: "category",
     categories: [],

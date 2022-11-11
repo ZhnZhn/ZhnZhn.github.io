@@ -1,8 +1,5 @@
 import Builder from '../../charts/ConfigBuilder';
-import { tooltipCategory } from '../../charts/Tooltip';
-import {
-  addColorsTo
-} from '../TreeMapFn';
+import { addColorsTo } from '../TreeMapFn';
 
 import {
   isTotalByAll,
@@ -15,6 +12,8 @@ import {
   crInfo,
   crZhConfig
 } from './fnAdapter';
+
+const _assign = Object.assign;
 
 const _crConfig = (
   json,
@@ -29,16 +28,16 @@ const _crConfig = (
          title,
          option.subtitle
       )
-      .addTooltip(tooltipCategory)
       .add({
-         chart: { spacingTop: 25 },
          info: crInfo(json, option),
          zhConfig: crZhConfig(option)
       })
       .toConfig();
 
-  config.series[0].data = data
-  config.series[0].name = title
+  _assign(config.series[0], {
+     data: data,
+     name: title
+  })
   config.zhConfig.isWithoutIndicator = false
   return config;
 }

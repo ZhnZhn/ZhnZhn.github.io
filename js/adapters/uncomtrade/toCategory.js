@@ -7,23 +7,24 @@ exports.default = void 0;
 
 var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 
-var _Tooltip = require("../../charts/Tooltip");
-
 var _TreeMapFn = require("../TreeMapFn");
 
 var _fnAdapter = require("./fnAdapter");
 
+const _assign = Object.assign;
+
 const _crConfig = (json, option, data, categories) => {
   const title = (0, _fnAdapter.crCategoryTitle)(option),
-        config = (0, _ConfigBuilder.default)().barOrColumnConfig('BAR', categories).addCaption(title, option.subtitle).addTooltip(_Tooltip.tooltipCategory).add({
-    chart: {
-      spacingTop: 25
-    },
+        config = (0, _ConfigBuilder.default)().barOrColumnConfig('BAR', categories).addCaption(title, option.subtitle).add({
     info: (0, _fnAdapter.crInfo)(json, option),
     zhConfig: (0, _fnAdapter.crZhConfig)(option)
   }).toConfig();
-  config.series[0].data = data;
-  config.series[0].name = title;
+
+  _assign(config.series[0], {
+    data: data,
+    name: title
+  });
+
   config.zhConfig.isWithoutIndicator = false;
   return config;
 };

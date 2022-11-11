@@ -7,8 +7,7 @@ import {
   setDefaultTitle
 } from '../../charts/Chart';
 import {
-  tooltipCategorySimple,
-  tooltipCategory
+  tooltipCategorySimple
 } from '../../charts/Tooltip';
 
 import {
@@ -36,7 +35,8 @@ const C = {
   ]
 };
 
-const _getKeys = Object.keys;
+const _getObjectKeys = Object.keys
+, _assign = Object.assign;
 
 const _crDescr = (extension) => {
   const _ext = extension || {}
@@ -181,7 +181,7 @@ export const crData = (
     status
   } = _crTimeIndexAndValue(json)
   let data = [];
-  _getKeys(timeIndex).forEach(key => {
+  _getObjectKeys(timeIndex).forEach(key => {
      if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
        const _valueIndex = timeIndex[key]
        , y = value[_valueIndex];
@@ -213,7 +213,7 @@ export const toPointArr = (
     status
   } = _crTimeIndexAndValue(json)
   , data = [];
-  _getKeys(timeIndex).map((key) => {
+  _getObjectKeys(timeIndex).map((key) => {
      const _valueIndex = timeIndex[key]
      , y = value[_valueIndex];
      if ( y != null ){
@@ -279,19 +279,22 @@ const _setCategories = ({
   config,
   categories,
   min,
-  tooltip=tooltipCategory,
   option
 }) => {
-   const { time, isNotZoomToMinMax, seriaType } = option;
+   const {
+     time,
+     isNotZoomToMinMax,
+     seriaType
+   } = option;
    config.xAxis.categories = categories
    _setZoomMinMaxTo(config, isNotZoomToMinMax, min)
 
    config.series[0].name = time
-   config.tooltip = fTooltip(tooltip)
 
-   config.zhConfig.itemCaption = _crItemCaption(option)
-   config.zhConfig.itemTime = time
-
+   _assign(config.zhConfig, {
+     itemCaption: _crItemCaption(option),
+     itemTime: time
+   })
    _setHeightIfBarTo(config, seriaType, categories)
 }
 

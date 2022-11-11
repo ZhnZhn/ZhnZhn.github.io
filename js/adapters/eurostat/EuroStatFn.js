@@ -23,7 +23,8 @@ const C = {
   EA_CODES: ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19"],
   EU_MEMBER: ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"]
 };
-const _getKeys = Object.keys;
+const _getObjectKeys = Object.keys,
+      _assign = Object.assign;
 
 const _crDescr = extension => {
   const _ext = extension || {},
@@ -187,7 +188,7 @@ const crData = function (json, _temp) {
 
   let data = [];
 
-  _getKeys(timeIndex).forEach(key => {
+  _getObjectKeys(timeIndex).forEach(key => {
     if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
       const _valueIndex = timeIndex[key],
             y = value[_valueIndex];
@@ -217,7 +218,7 @@ const toPointArr = json => {
   } = _crTimeIndexAndValue(json),
         data = [];
 
-  _getKeys(timeIndex).map(key => {
+  _getObjectKeys(timeIndex).map(key => {
     const _valueIndex = timeIndex[key],
           y = value[_valueIndex];
 
@@ -297,7 +298,6 @@ const _setCategories = _ref6 => {
     config,
     categories,
     min,
-    tooltip = _Tooltip.tooltipCategory,
     option
   } = _ref6;
   const {
@@ -310,9 +310,11 @@ const _setCategories = _ref6 => {
   _setZoomMinMaxTo(config, isNotZoomToMinMax, min);
 
   config.series[0].name = time;
-  config.tooltip = (0, _Chart.fTooltip)(tooltip);
-  config.zhConfig.itemCaption = _crItemCaption(option);
-  config.zhConfig.itemTime = time;
+
+  _assign(config.zhConfig, {
+    itemCaption: _crItemCaption(option),
+    itemTime: time
+  });
 
   _setHeightIfBarTo(config, seriaType, categories);
 };
