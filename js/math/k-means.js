@@ -1,203 +1,153 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-var C = {
-  N: 6,
-  ITERATION: 100
-}; // convenience functions
+exports.default = void 0;
 
-var getterSetter = function getterSetter(initialValue, validator) {
-  var thingToGetSet = initialValue;
+const N = 6,
+      ITERATION = 100,
+      FN_TRUE = () => true; // convenience functions
 
-  var _fnIsValid = validator || function (val) {
-    return true;
-  };
+
+const getterSetter = function (initialValue, validator) {
+  let value = initialValue;
+
+  const _fnIsValid = validator || FN_TRUE;
 
   return function (newValue) {
-    if (typeof newValue === 'undefined') return thingToGetSet;
-    if (_fnIsValid(newValue)) thingToGetSet = newValue;
+    if (typeof newValue === 'undefined') {
+      return value;
+    }
+
+    if (_fnIsValid(newValue)) {
+      value = newValue;
+    }
   };
 };
 
-var sumOfSquareDiffs = function sumOfSquareDiffs(oneVector, anotherVector) {
-  var squareDiffs = oneVector.map(function (component, i) {
-    return Math.pow(component - anotherVector[i], 2);
-  });
-  return squareDiffs.reduce(function (a, b) {
-    return a + b;
-  }, 0);
-};
+const sumOfSquareDiffs = (oneVector, anotherVector) => oneVector.map((component, i) => Math.pow(component - anotherVector[i], 2)) //squareDiffs
+.reduce((a, b) => a + b, 0); //get array index with min value
 
-var mindex = function mindex(array) {
-  var min = array.reduce(function (a, b) {
-    return Math.min(a, b);
-  });
-  return array.indexOf(min);
-};
 
-var sumVectors = function sumVectors(a, b) {
-  return a.map(function (val, i) {
-    return val + b[i];
-  });
-};
+const mindex = arr => arr.reduce((r, v, index) => r[0] < v ? r : [v, index], [Infinity, -1])[1];
 
-var averageLocation = function averageLocation(points) {
-  var zeroVector = points[0].location().map(function () {
-    return 0;
-  }),
-      locations = points.map(function (point) {
-    return point.location();
-  }),
-      vectorSum = locations.reduce(function (a, b) {
-    return sumVectors(a, b);
-  }, zeroVector);
-  return vectorSum.map(function (val) {
-    return val / points.length;
-  });
+const sumVectors = (a, b) => a.map((val, i) => val + b[i]);
+
+const averageLocation = points => {
+  const zeroVector = points[0].location().map(() => 0),
+        locations = points.map(point => point.location()),
+        vectorSum = locations.reduce((a, b) => sumVectors(a, b), zeroVector);
+  return vectorSum.map(val => val / points.length);
 }; // objects
 
 
-var Point = function Point(location) {
-  var self = this;
+const Point = function (location) {
   this.location = getterSetter(location);
   this.label = getterSetter();
 
-  this.updateLabel = function (centroids) {
-    var distancesSquared = centroids.map(function (centroid) {
-      return sumOfSquareDiffs(self.location(), centroid.location());
-    });
-    self.label(mindex(distancesSquared));
+  this.updateLabel = centroids => {
+    const distancesSquared = centroids.map(centroid => sumOfSquareDiffs(this.location(), centroid.location()));
+    this.label(mindex(distancesSquared));
   };
 };
 
-var Centroid = function Centroid(initialLocation, label) {
-  var self = this;
+const Centroid = function (initialLocation, label) {
   this.location = getterSetter(initialLocation);
   this.label = getterSetter(label);
 
-  this.updateLocation = function (points) {
-    var pointsWithThisCentroid = points.filter(function (point) {
-      return point.label() == self.label();
-    });
-    if (pointsWithThisCentroid.length > 0) self.location(averageLocation(pointsWithThisCentroid));
+  this.updateLocation = points => {
+    const pointsWithThisCentroid = points.filter(point => point.label() == this.label());
+
+    if (pointsWithThisCentroid.length > 0) {
+      this.location(averageLocation(pointsWithThisCentroid));
+    }
   };
 };
 
-var kmeans = function kmeans(data, config) {
+const kmeans = function (data, config) {
   // default k
-  var k = config.k || Math.round(Math.sqrt(data.length / 2)),
-      iterations = config.iterations; // initialize point objects with data
+  const k = config.k || Math.round(Math.sqrt(data.length / 2)),
+        iterations = config.iterations; // initialize point objects with data
 
-  var points = data.map(function (vector) {
-    return new Point(vector);
-  }); // intialize centroids randomly
+  const points = data.map(vector => new Point(vector)); // intialize centroids randomly
 
-  var centroids = [];
-  var i;
+  const centroids = [];
+  let i;
 
   for (i = 0; i < k; i++) {
     centroids.push(new Centroid(points[i % points.length].location(), i));
   } // update labels and centroid locations until convergence
 
 
-  var iter;
+  let iter;
 
   for (iter = 0; iter < iterations; iter++) {
-    points.forEach(function (point) {
+    points.forEach(point => {
       point.updateLabel(centroids);
     });
-    centroids.forEach(function (centroid) {
+    centroids.forEach(centroid => {
       centroid.updateLocation(points);
     });
   } // return points and centroids
 
 
   return {
-    points: points,
-    centroids: centroids
+    points,
+    centroids
   };
-}; //fn for sort clusters
+}; //fns for sort clusters
 
 
-var compareUnaryCentroid = function compareUnaryCentroid(a, b) {
-  if (a.centroid[0] < b.centroid[0]) {
-    return -1;
-  }
+const compareUnaryCentroid = (a, b) => a.centroid[0] - b.centroid[0];
 
-  if (a.centroid[0] > b.centroid[0]) {
-    return 1;
-  }
+const compareUnaryPoint = (a, b) => a[0] - b[0];
 
-  if (a.centroid[0] === b.centroid[0]) {
-    return 0;
-  }
-};
+const _isValidValue = value => value % 1 == 0 & value > 0;
 
-var compareUnaryPoint = function compareUnaryPoint(a, b) {
-  if (a[0] < b[0]) {
-    return -1;
-  }
-
-  if (a[0] > b[0]) {
-    return 1;
-  }
-
-  if (a[0] === b[0]) {
-    return 0;
-  }
-};
-
-var clusterMaker = {
-  data: getterSetter([], function (arrayOfArrays) {
-    var n = arrayOfArrays[0].length;
-    return arrayOfArrays.map(function (array) {
-      return array.length == n;
-    }).reduce(function (boolA, boolB) {
-      return boolA & boolB;
-    }, true);
+const clusterMaker = {
+  k: getterSetter(void 0, _isValidValue),
+  iterations: getterSetter(10 ** 3, _isValidValue),
+  data: getterSetter([], arrayOfArrays => {
+    const n = arrayOfArrays[0].length;
+    return arrayOfArrays.map(array => array.length == n).reduce((boolA, boolB) => boolA & boolB, true);
   }),
-  clusters: function clusters() {
-    var pointsAndCentroids = kmeans(this.data(), {
+
+  clusters() {
+    const pointsAndCentroids = kmeans(this.data(), {
       k: this.k(),
       iterations: this.iterations()
     }),
-        points = pointsAndCentroids.points,
-        centroids = pointsAndCentroids.centroids;
-    return centroids.map(function (centroid) {
-      return {
-        centroid: centroid.location(),
-        points: points.filter(function (point) {
-          return point.label() == centroid.label();
-        }).map(function (point) {
-          return point.location();
-        })
-      };
-    });
+          points = pointsAndCentroids.points,
+          centroids = pointsAndCentroids.centroids;
+    return centroids.map(centroid => ({
+      centroid: centroid.location(),
+      points: points.reduce((arr, point) => {
+        if (point.label() == centroid.label()) {
+          arr.push(point.location());
+        }
+
+        return arr;
+      }, [])
+    }));
   },
-  k: getterSetter(undefined, function (value) {
-    return value % 1 == 0 & value > 0;
-  }),
-  iterations: getterSetter(Math.pow(10, 3), function (value) {
-    return value % 1 == 0 & value > 0;
-  }),
-  unarySortedClusters: function unarySortedClusters() {
-    return this.clusters().sort(compareUnaryCentroid).map(function (cluster) {
-      cluster.points = cluster.points.sort(compareUnaryPoint);
+
+  unarySortedClusters() {
+    return this.clusters().sort(compareUnaryCentroid).map(cluster => {
+      cluster.points.sort(compareUnaryPoint);
       return cluster;
     });
   },
-  crUnarySortedCluster: function crUnarySortedCluster(points, n, iteration) {
+
+  crUnarySortedCluster(points, n, iteration) {
     if (points === void 0) {
       points = [];
     }
 
     if (n === void 0) {
-      n = C.N;
+      n = N;
     }
 
     if (iteration === void 0) {
-      iteration = C.ITERATION;
+      iteration = ITERATION;
     }
 
     this.k(n);
@@ -205,7 +155,8 @@ var clusterMaker = {
     this.data(points);
     return this.unarySortedClusters();
   }
+
 };
 var _default = clusterMaker;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=k-means.js.map
