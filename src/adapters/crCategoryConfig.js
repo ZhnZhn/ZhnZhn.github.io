@@ -1,4 +1,4 @@
-import addColorClustersTo from '../math/addColorClustersTo';
+import addJenksColorTo from '../math/addJenksColorTo';
 import Builder from '../charts/ConfigBuilder';
 
 const _crCategories = (
@@ -18,7 +18,7 @@ const crCategoryConfig = (
   .addCaption(title, subtitle)
   .addSeriaBy(0, {
     color: seriaColor,
-    data: isCluster ? addColorClustersTo(data) : data
+    data: isCluster ? addJenksColorTo(data) : data
   })
   .toConfig();
 
