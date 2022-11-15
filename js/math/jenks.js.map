@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/math/jenks.js"
+ ],
+ "file": "../../src/math/jenks.js",
+ "names": [
+  "jenks",
+  "data",
+  "nClasses",
+  "length",
+  "slice",
+  "sort",
+  "a",
+  "b",
+  "matrices",
+  "jenksMatrices",
+  "lowerClassLimits",
+  "jenksBreaks"
+ ],
+ "mappings": ";;;;;;;AAAA;;AACA;;AAEA,SAASA,KAAT,CAAeC,IAAf,EAAqBC,QAArB,EAA+B;EAC7B,IAAIA,QAAQ,GAAGD,IAAI,CAACE,MAApB,EAA4B;IAC1B,OAAO,IAAP;EACD,CAH4B,CAK7B;EACA;;;EACAF,IAAI,GAAGA,IAAI,CACRG,KADI,GAEJC,IAFI,CAEC,CAACC,CAAD,EAAIC,CAAJ,KAAUD,CAAC,GAAGC,CAFf,CAAP,CAP6B,CAW7B;;EACA,MAAMC,QAAQ,GAAG,IAAAC,sBAAA,EAAcR,IAAd,EAAoBC,QAApB,CAAjB,CAZ6B,CAa7B;;EACA,MAAMQ,gBAAgB,GAAGF,QAAQ,CAACE,gBAAlC,CAd6B,CAgB7B;;EACA,OAAO,IAAAC,oBAAA,EAAYV,IAAZ,EAAkBS,gBAAlB,EAAoCR,QAApC,CAAP;AACD;;eAEcF,K"
+}
