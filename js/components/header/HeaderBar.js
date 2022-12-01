@@ -11,7 +11,11 @@ var _BrowserActions = require("../../flux/actions/BrowserActions");
 
 var _hotkeys = require("../hotkeys/hotkeys");
 
-var _use = _interopRequireDefault(require("../hooks/use"));
+var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
+
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+
+var _useFnFocus = _interopRequireDefault(require("../hooks/useFnFocus"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
@@ -35,11 +39,6 @@ const {
   SvgInfo,
   ModalSlider
 } = _Comp.default;
-const {
-  useTheme,
-  useToggle,
-  useFnFocus
-} = _use.default;
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
       CAPTION = "ERC v0.18.0",
       THEME_ID = 'HEADER_BAR',
@@ -63,9 +62,9 @@ const HeaderBar = _ref => {
   let {
     showSettings
   } = _ref;
-  const [isTopics, toggleTopics] = useToggle(false),
-        [refBt, _toggleTopics] = useFnFocus(toggleTopics),
-        TS = useTheme(THEME_ID);
+  const [isTopics, toggleTopics] = (0, _useToggle.default)(false),
+        [refBt, _toggleTopics] = (0, _useFnFocus.default)(toggleTopics),
+        TS = (0, _useTheme.default)(THEME_ID);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_HEADER,
     style: TS.ROOT,

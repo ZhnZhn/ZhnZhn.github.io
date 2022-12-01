@@ -5,9 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
-var _use = _interopRequireDefault(require("../hooks/use"));
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+
+var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
+
+var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
 
@@ -26,11 +30,6 @@ var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
-const {
-  useToggle,
-  useKeyEscape,
-  useTheme
-} = _use.default;
 const TH_ID = 'DRAGGABLE_DIALOG',
       CL_DRAGGABLE_DIALOG = "draggable-dialog",
       CL_SHOWING = 'show-popup',
@@ -79,7 +78,7 @@ const CommandButtons = _ref => {
 
 const FN_NOOP = () => {};
 
-const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
+const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
   let {
     isShow,
     style,
@@ -94,15 +93,15 @@ const DraggableDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
   } = _ref2;
 
   const [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
-        _hKeyDown = useKeyEscape(onClose),
-        [isMore, toggleIsMore] = useToggle(false),
-        TS = useTheme(TH_ID),
+        _hKeyDown = (0, _useKeyEscape.default)(onClose),
+        [isMore, toggleIsMore] = (0, _useToggle.default)(false),
+        TS = (0, _useTheme.default)(TH_ID),
         _className = (0, _crCn.default)(CL_DRAGGABLE_DIALOG, [isShow, CL_SHOWING]),
         _styleShow = isShow ? _Dialog.S_SHOW : _Dialog.S_HIDE;
   /*eslint-disable react-hooks/exhaustive-deps */
 
 
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     _Interact.default.makeDragable(refRoot.current);
   }, []); // refRoot
 

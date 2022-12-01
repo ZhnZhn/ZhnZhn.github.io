@@ -5,23 +5,19 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 
-var _use = _interopRequireDefault(require("../hooks/use"));
+var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
 var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
 
 var _Comp = _interopRequireDefault(require("../Comp"));
 
-var _MenuTopic = _interopRequireDefault(require("./MenuTopic"));
+var _MenuTopicList = _interopRequireDefault(require("./MenuTopicList"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
 const {
-  useBool,
-  useListen
-} = _use.default,
-      {
   Browser,
   BrowserCaption,
   ScrollPane,
@@ -45,9 +41,9 @@ const BrowserMenu = _ref => {
     onLoadMenu,
     children
   } = _ref;
-  const [isShow, showBrowser, hideBrowser] = useBool(isInitShow),
-        [isLoading, isLoaded, menu, setLoading, setLoaded, setFailed, updateMenu] = (0, _useLoadMenu.default)();
-  useListen((actionType, data) => {
+  const [isShow, showBrowser, hideBrowser] = (0, _useBool.default)(isInitShow),
+        [isLoading, menu, setLoaded, setFailed, updateMenu] = (0, _useLoadMenu.default)(isShow, onLoadMenu);
+  (0, _useListen.default)((actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {
         showBrowser();
@@ -60,16 +56,6 @@ const BrowserMenu = _ref => {
       setLoaded(data.menuItems);
     }
   });
-  /*eslint-disable react-hooks/exhaustive-deps */
-
-  (0, _react.useEffect)(() => {
-    if (!isLoaded && isShow) {
-      onLoadMenu();
-      setLoading();
-    }
-  }, [isLoaded, isShow]);
-  /*eslint-enable react-hooks/exhaustive-deps */
-
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
     isShow: isShow,
     style: S_BROWSER,
@@ -78,8 +64,9 @@ const BrowserMenu = _ref => {
       onClose: hideBrowser
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ScrollPane, {
       className: CL_SCROLL,
-      children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), menu.map((menuTopic, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopic.default, { ...menuTopic
-      }, index)), children]
+      children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopicList.default, {
+        menu: menu
+      }), children]
     })]
   });
 };

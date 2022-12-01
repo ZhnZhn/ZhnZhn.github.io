@@ -5,7 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _use = _interopRequireDefault(require("../hooks/use"));
+var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
+
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+
+var _useFnFocus = _interopRequireDefault(require("../hooks/useFnFocus"));
 
 var _Color = require("../styles/Color");
 
@@ -24,11 +28,6 @@ const {
   SvgCheckBox,
   SvgClose
 } = _Comp.default;
-const {
-  useTheme,
-  useToggle,
-  useFnFocus
-} = _use.default;
 const TH_ID = 'ELEMENT';
 const CL_ITEM_HEADER = 'item-header',
       CL_MORE = "popup-menu charts__menu-more",
@@ -87,7 +86,7 @@ const MenuMore = _ref2 => {
     sliderStyle,
     onToggle
   } = _ref2;
-  const [refBtSvg, toggleFocus] = useFnFocus(onToggle);
+  const [refBtSvg, toggleFocus] = (0, _useFnFocus.default)(onToggle);
   if (!moreModel) return null;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SvgMore, {
@@ -122,8 +121,8 @@ const Header = _ref3 => {
     onClose
   } = _ref3;
 
-  const [isMore, _toggleMore] = useToggle(false),
-        TS = useTheme(TH_ID),
+  const [isMore, _toggleMore] = (0, _useToggle.default)(false),
+        TS = (0, _useTheme.default)(TH_ID),
         _captionStyle = (0, _crStyle.default)(S_CAPTION, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH),
         _btTitle = itemCaption.length > 15 ? itemCaption : void 0;
 

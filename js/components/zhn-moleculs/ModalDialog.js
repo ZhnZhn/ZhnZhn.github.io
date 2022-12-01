@@ -5,9 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
-var _use = _interopRequireDefault(require("../hooks/use"));
+var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
+
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+
+var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
 
@@ -24,11 +28,6 @@ var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
-const {
-  useKeyEscape,
-  useToggle,
-  useTheme
-} = _use.default;
 const TH_ID = 'MODAL_DIALOG',
       CL_MD = 'modal-dialog',
       CL_SHOWING = 'show-popup',
@@ -62,7 +61,7 @@ const CommandButtons = _ref => {
 
 const DF_ON_CLOSE = () => {};
 
-const ModalDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
+const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
   let {
     isShow,
     style,
@@ -78,12 +77,12 @@ const ModalDialog = /*#__PURE__*/(0, _react.forwardRef)((_ref2, ref) => {
   } = _ref2;
 
   const [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
-        _hClick = (0, _react.useCallback)(event => {
+        _hClick = (0, _uiApi.useCallback)(event => {
     event.stopPropagation();
   }, []),
-        _hKeyDown = useKeyEscape(onClose),
-        [isMore, toggleIsMore] = useToggle(false),
-        TS = useTheme(TH_ID),
+        _hKeyDown = (0, _useKeyEscape.default)(onClose),
+        [isMore, toggleIsMore] = (0, _useToggle.default)(false),
+        TS = (0, _useTheme.default)(TH_ID),
         _style = isShow ? _Dialog.S_SHOW : _Dialog.S_HIDE,
         _className = (0, _crCn.default)(CL_MD, [isShow, CL_SHOWING]);
 

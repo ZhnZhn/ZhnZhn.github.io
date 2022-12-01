@@ -1,4 +1,6 @@
-import use from '../hooks/use';
+import useBool from '../hooks/useBool';
+import useListen from '../hooks/useListen';
+import useTheme from '../hooks/useTheme';
 
 import {
   CAT_SHOW_ABOUT
@@ -16,9 +18,6 @@ import DataProviders from './DataProviders';
 import StepTitle from './StepTitle';
 import Link from '../links/ProviderLinks';
 import LogosBar from './LogosBar';
-
-
-const { useBool, useListen, useTheme } = use;
 
 const TH_ID = 'ABOUT'
 
@@ -59,7 +58,11 @@ const _isHide = actionType =>
   || actionType === CHAT_SHOW;
 
 const About = () => {
-  const [isShow, show, hide] = useBool(true)
+  const [
+    isShow,
+    show,
+    hide
+  ] = useBool(true)
   , TS = useTheme(TH_ID);
 
   useListen(actionType => {

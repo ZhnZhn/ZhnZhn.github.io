@@ -2,9 +2,11 @@
 import {
   forwardRef,
   useEffect
-} from 'react';
+} from '../uiApi';
 
-import use from '../hooks/use';
+import useToggle from '../hooks/useToggle';
+import useKeyEscape from '../hooks/useKeyEscape';
+import useTheme from '../hooks/useTheme';
 import useDialogFocus from './useDialogFocus';
 
 import crCn from '../zhn-utils/crCn';
@@ -26,12 +28,6 @@ import {
   S_BT_LOAD,
   S_SVG_CLOSE
 } from './Dialog.Style';
-
-const {
-  useToggle,
-  useKeyEscape,
-  useTheme
-} = use;
 
 const TH_ID = 'DRAGGABLE_DIALOG'
 

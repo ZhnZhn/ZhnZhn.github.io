@@ -5,13 +5,15 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
+
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+
+var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
 var _SparklinesLazy = _interopRequireDefault(require("../zhn-lazy/SparklinesLazy"));
-
-var _use = _interopRequireDefault(require("../hooks/use"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -23,10 +25,6 @@ const {
   MaxLabel,
   MinLabel
 } = _SparklinesLazy.default;
-const {
-  useToggle,
-  useKeyEnter
-} = _use.default;
 const COLOR_MAX = "#8bc34a";
 const COLOR_MIN = "#f44336";
 const COLOR_EQUAL = 'black';
@@ -63,13 +61,15 @@ const S_CAPTION = {
   float: 'right'
 };
 
-const Caption = ({
-  color,
-  from,
-  to,
-  onClick
-}) => {
-  const _hKeyDown = useKeyEnter(onClick);
+const Caption = _ref => {
+  let {
+    color,
+    from,
+    to,
+    onClick
+  } = _ref;
+
+  const _hKeyDown = (0, _useKeyEnter.default)(onClick);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
     style: { ...S_CAPTION,
@@ -90,13 +90,15 @@ const Caption = ({
   });
 };
 
-const Item = ({
-  title,
-  value,
-  status,
-  onClick
-}) => {
-  const _hKeyDown = useKeyEnter(onClick),
+const Item = _ref2 => {
+  let {
+    title,
+    value,
+    status,
+    onClick
+  } = _ref2;
+
+  const _hKeyDown = (0, _useKeyEnter.default)(onClick),
         _value = status ? value + " (" + status + ")" : value;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -115,15 +117,17 @@ const Item = ({
   });
 };
 
-const ClusterItem = ({
-  point,
-  color,
-  index,
-  isShowRange
-}) => {
-  const _refData = (0, _react.useRef)(point.seria.data || []),
-        _refPointIndex = (0, _react.useRef)(_refData.current.length - 1),
-        [isShowChart, toggleIsShowChart] = useToggle(index < 3);
+const ClusterItem = _ref3 => {
+  let {
+    point,
+    color,
+    index,
+    isShowRange
+  } = _ref3;
+
+  const _refData = (0, _uiApi.useRef)(point.seria.data || []),
+        _refPointIndex = (0, _uiApi.useRef)(_refData.current.length - 1),
+        [isShowChart, toggleIsShowChart] = (0, _useToggle.default)(index < 3);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Item, {
@@ -175,11 +179,12 @@ const ClusterItem = ({
 */
 
 
-const Cluster = ({
-  cluster,
-  color,
-  isShowRange
-}) => {
+const Cluster = _ref4 => {
+  let {
+    cluster,
+    color,
+    isShowRange
+  } = _ref4;
   const points = cluster.points || [];
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     children: points.map((point, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(ClusterItem, {
@@ -203,13 +208,14 @@ Cluster.propTypes = {
 */
 
 
-const ClusterInfo = ({
-  cluster,
-  color,
-  from,
-  to
-}) => {
-  const [isShowRange, onClick] = useToggle(false);
+const ClusterInfo = _ref5 => {
+  let {
+    cluster,
+    color,
+    from,
+    to
+  } = _ref5;
+  const [isShowRange, onClick] = (0, _useToggle.default)(false);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Caption, {
       color,

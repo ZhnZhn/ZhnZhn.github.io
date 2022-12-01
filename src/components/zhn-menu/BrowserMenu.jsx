@@ -1,10 +1,11 @@
-import use from '../hooks/use'
-import useLoadMenu from './useLoadMenu'
-import Comp from '../Comp'
-import MenuTopicList from './MenuTopicList'
+import useBool from '../hooks/useBool';
+import useListen from '../hooks/useListen';
+import useLoadMenu from './useLoadMenu';
 
-const { useBool, useListen } = use
-, {
+import Comp from '../Comp';
+import MenuTopicList from './MenuTopicList';
+
+const {
   Browser,
   BrowserCaption,
   ScrollPane,

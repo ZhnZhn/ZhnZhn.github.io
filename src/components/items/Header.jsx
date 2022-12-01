@@ -1,6 +1,8 @@
 //import PropTypes from "prop-types";
+import useTheme from '../hooks/useTheme';
+import useToggle from '../hooks/useToggle';
+import useFnFocus from '../hooks/useFnFocus';
 
-import use from '../hooks/use';
 import { GREEN_COLOR } from '../styles/Color';
 import crStyle from '../zhn-utils/crStyle';
 
@@ -13,12 +15,6 @@ const {
   SvgCheckBox,
   SvgClose
 } = Comp;
-
-const {
-  useTheme,
-  useToggle,
-  useFnFocus
-} = use;
 
 const TH_ID = 'ELEMENT';
 

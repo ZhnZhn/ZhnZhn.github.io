@@ -1,17 +1,20 @@
-import { useMemo } from 'react';
+import { useMemo } from '../uiApi';
+import useBool from '../hooks/useBool';
+import useToggle from '../hooks/useToggle';
+import useListen from '../hooks/useListen';
+import useLoadMenu from './useLoadMenu';
 
-import use from '../hooks/use'
-import useLoadMenu from './useLoadMenu'
 import Comp from '../Comp'
 
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import WrapperInputSearch from '../zhn-select/WrapperInputSearch';
 import MenuItems2 from './MenuItems2';
 
-const { useBool, useToggle, useListen } = use
-, {
-  Browser, BrowserCaption,
-  ShowHide, ScrollPane,
+const {
+  Browser,
+  BrowserCaption,
+  ShowHide,
+  ScrollPane,
   SpinnerLoading
 } = Comp;
 

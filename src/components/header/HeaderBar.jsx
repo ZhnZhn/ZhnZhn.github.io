@@ -15,7 +15,10 @@ import {
   HK_ABOUT
 } from '../hotkeys/hotkeys';
 
-import use from '../hooks/use';
+import useTheme from '../hooks/useTheme';
+import useToggle from '../hooks/useToggle';
+import useFnFocus from '../hooks/useFnFocus';
+
 import Comp from '../Comp';
 
 import ProgressLoading from './ProgressLoading';
@@ -27,11 +30,10 @@ import crBrowserModel from './BrowserModel';
 
 const {
   FlatButton,
-  SvgSettings, SvgInfo,
+  SvgSettings,
+  SvgInfo,
   ModalSlider
 } = Comp;
-
-const { useTheme, useToggle, useFnFocus } = use;
 
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
 , CAPTION = "ERC v0.18.0"
@@ -56,9 +58,17 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
 
 , MODEL = crBrowserModel();
 
-const HeaderBar = ({ showSettings }) => {
-  const [isTopics, toggleTopics] = useToggle(false)
-  , [refBt, _toggleTopics] = useFnFocus(toggleTopics)
+const HeaderBar = ({
+  showSettings
+}) => {
+  const [
+    isTopics,
+    toggleTopics
+  ] = useToggle(false)
+  , [
+    refBt,
+    _toggleTopics
+  ] = useFnFocus(toggleTopics)
   , TS = useTheme(THEME_ID);
 
   return (

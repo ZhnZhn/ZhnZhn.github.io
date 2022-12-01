@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
+var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
+
 var _Svg = _interopRequireDefault(require("./svg/Svg"));
 
 var _OpenCloseStyle = require("./OpenCloseStyle");
@@ -36,7 +38,7 @@ const OpenClose = _ref => {
   } = _ref;
 
   const [isOpen, toggleIsOpen] = (0, _useToggle.default)(!isClose),
-        _hKeyDown = (0, _useToggle.default)(toggleIsOpen),
+        _hKeyDown = (0, _useKeyEnter.default)(toggleIsOpen),
         [_pathV, _fillV, _childCl, _childStyle] = _crConf(isOpen, openColor);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {

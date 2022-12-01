@@ -1,10 +1,10 @@
-import { useRef } from 'react'
 //import PropTypes from 'prop-types'
+import { useRef } from '../uiApi';
+import useToggle from '../hooks/useToggle';
+import useKeyEnter from '../hooks/useKeyEnter';
 
-import ShowHide from '../zhn/ShowHide'
-import SparklinesLazy from '../zhn-lazy/SparklinesLazy'
-
-import use from '../hooks/use'
+import ShowHide from '../zhn/ShowHide';
+import SparklinesLazy from '../zhn-lazy/SparklinesLazy';
 
 const {
   SparkView,
@@ -13,8 +13,6 @@ const {
   MaxLabel,
   MinLabel
 } = SparklinesLazy;
-
-const { useToggle, useKeyEnter } = use
 
 const COLOR_MAX = "#8bc34a";
 const COLOR_MIN = "#f44336";
@@ -48,8 +46,6 @@ S_ITEM_VALUE = {
   display: 'inline-block',
   float: 'right'
 };
-
-
 
 const Caption = ({
   color,

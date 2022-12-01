@@ -5,7 +5,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _use = _interopRequireDefault(require("../hooks/use"));
+var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+
+var _useListen = _interopRequireDefault(require("../hooks/useListen"));
+
+var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 
@@ -27,11 +31,6 @@ var _LogosBar = _interopRequireDefault(require("./LogosBar"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const {
-  useBool,
-  useListen,
-  useTheme
-} = _use.default;
 const TH_ID = 'ABOUT',
       CL_ABOUT = 'about-container',
       CL_SHOW_CONT = 'show-cont',
@@ -91,9 +90,9 @@ const TH_ID = 'ABOUT',
 const _isHide = actionType => actionType === _ChartActions.CHAT_INIT_AND_SHOW || actionType === _ChartActions.CHAT_SHOW;
 
 const About = () => {
-  const [isShow, show, hide] = useBool(true),
-        TS = useTheme(TH_ID);
-  useListen(actionType => {
+  const [isShow, show, hide] = (0, _useBool.default)(true),
+        TS = (0, _useTheme.default)(TH_ID);
+  (0, _useListen.default)(actionType => {
     if (actionType === _ComponentActions.CAT_SHOW_ABOUT) {
       show();
     } else if (_isHide(actionType)) {

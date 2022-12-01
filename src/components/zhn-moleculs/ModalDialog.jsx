@@ -1,7 +1,13 @@
-import { forwardRef, useCallback } from 'react';
 //import PropTypes from "prop-types";
-import use from '../hooks/use';
-import useDialogFocus from './useDialogFocus'
+import {
+  forwardRef,
+  useCallback
+} from '../uiApi';
+
+import useKeyEscape from '../hooks/useKeyEscape';
+import useToggle from '../hooks/useToggle';
+import useTheme from '../hooks/useTheme';
+import useDialogFocus from './useDialogFocus';
 
 import crCn from '../zhn-utils/crCn';
 
@@ -18,12 +24,6 @@ import {
   S_COMMAND_DIV,
   S_BT
 } from './Dialog.Style';
-
-const {
-  useKeyEscape,
-  useToggle,
-  useTheme
-} = use;
 
 const TH_ID = 'MODAL_DIALOG'
 
