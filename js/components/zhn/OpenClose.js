@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
-var _Color = _interopRequireDefault(require("../styles/Color"));
+var _Color = require("../styles/Color");
 
 var _Svg = _interopRequireDefault(require("./svg/Svg"));
 
@@ -22,7 +22,7 @@ const CL_ROOT = 'zhn-oc',
       CL_SHOW_POPUP = 'show-popup',
       CL_NOT_SELECTED = 'not-selected',
       CL_OC_EXP = 'zhn-oc__exp',
-      FILL_CLOSE_COLOR = _Color.default.BLANK,
+      FILL_CLOSE_COLOR = _Color.TRANSPARENT_COLOR,
       S_ROOT_DIV = {
   lineHeight: 2
 },
@@ -47,34 +47,39 @@ const CL_ROOT = 'zhn-oc',
       PATH_OPEN = "M 2,14 L 14,14 14,2 2,14",
       PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
-const _crConf = ({
-  isOpen,
-  openColor
-}) => isOpen ? {
-  _pathV: PATH_OPEN,
-  _fillV: openColor,
-  _childCl: CL_OC_EXP + " " + CL_SHOW_POPUP,
-  _childStyle: S_BLOCK
-} : {
-  _pathV: PATH_CLOSE,
-  _fillV: FILL_CLOSE_COLOR,
-  _childCl: CL_OC_EXP,
-  _childStyle: S_NONE
+const _crConf = _ref => {
+  let {
+    isOpen,
+    openColor
+  } = _ref;
+  return isOpen ? {
+    _pathV: PATH_OPEN,
+    _fillV: openColor,
+    _childCl: CL_OC_EXP + " " + CL_SHOW_POPUP,
+    _childStyle: S_BLOCK
+  } : {
+    _pathV: PATH_CLOSE,
+    _fillV: FILL_CLOSE_COLOR,
+    _childCl: CL_OC_EXP,
+    _childStyle: S_NONE
+  };
 };
 
-const OpenClose = ({
-  isClose = true,
-  role = 'button',
-  style,
-  rowStyle,
-  ocStyle,
-  caption,
-  captionStyle,
-  openColor,
-  CompAfter,
-  childStyle,
-  children
-}) => {
+const OpenClose = _ref2 => {
+  let {
+    isClose = true,
+    role = 'button',
+    style,
+    rowStyle,
+    ocStyle,
+    caption,
+    captionStyle,
+    openColor,
+    CompAfter,
+    childStyle,
+    children
+  } = _ref2;
+
   const [isOpen, toggleIsOpen] = useToggle(!isClose),
         _hKeyDown = useKeyEnter(toggleIsOpen),
         {

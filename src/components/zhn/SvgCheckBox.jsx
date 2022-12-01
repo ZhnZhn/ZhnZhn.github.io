@@ -3,7 +3,10 @@ import { useState, useMemo, useCallback } from 'react';
 import useRefInit from '../hooks/useRefInit';
 import useKeyEnter from '../hooks/useKeyEnter';
 
-import C from '../styles/Color';
+import {
+  TRANSPARENT_COLOR,
+  YELLOW_COLOR
+} from '../styles/Color';
 import Svg100 from './svg/Svg100';
 
 const CL_CHB = 'chb'
@@ -16,23 +19,26 @@ const SvgChecked = ({ stroke }) => (
       strokeWidth="2"
       strokeLinecap="round"
       stroke={stroke}
-      fill={C.BLANK}
+      fill={TRANSPARENT_COLOR}
   />
 );
 
 const _isBool = bool => typeof bool === 'boolean';
-const _noopFn = () => {};
+const FN_NOOP = () => {};
 
 const SvgCheckBox = ({
   initialValue,
   value,
   style,
   color,
-  checkedColor=C.YELLOW,
-  onCheck=_noopFn,
-  onUnCheck=_noopFn
+  checkedColor=YELLOW_COLOR,
+  onCheck=FN_NOOP,
+  onUnCheck=FN_NOOP
 }) => {
-  const [valueState, setValueState] = useState(() => _isBool(value) ? void 0: !!initialValue)
+  const [
+    valueState,
+    setValueState
+  ] = useState(() => _isBool(value) ? void 0: !!initialValue)
   , _isValueState = useRefInit(() => _isBool(valueState))
   , _value = _isValueState ? valueState : value
   , _comp = useMemo(() => ({
@@ -52,8 +58,12 @@ const SvgCheckBox = ({
   //_comp, _isValueState
   /*eslint-enable react-hooks/exhaustive-deps */
   , _hKeyDown = useKeyEnter(_hToggle, [_hToggle])
-  , _restStroke = _value ? color || C_GREY : C_GREY
-  , _restFill = _value ? color || C.BLANK : C.BLANK;
+  , [
+    _restStroke,
+    _restFill
+  ] = _value
+    ? [color || C_GREY, color || TRANSPARENT_COLOR ]
+    : [C_GREY, TRANSPARENT_COLOR];
 
   return (
     <div

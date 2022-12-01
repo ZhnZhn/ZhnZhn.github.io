@@ -11,7 +11,7 @@ var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
 
 var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
-var _Color = _interopRequireDefault(require("../styles/Color"));
+var _Color = require("../styles/Color");
 
 var _Svg = _interopRequireDefault(require("./svg/Svg100"));
 
@@ -24,29 +24,34 @@ const CL_CHB = 'chb',
 },
       C_GREY = "#777777";
 
-const SvgChecked = ({
-  stroke
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
-  d: "M 2,5 L 8,14 14,1",
-  strokeWidth: "2",
-  strokeLinecap: "round",
-  stroke: stroke,
-  fill: _Color.default.BLANK
-});
+const SvgChecked = _ref => {
+  let {
+    stroke
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+    d: "M 2,5 L 8,14 14,1",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    stroke: stroke,
+    fill: _Color.TRANSPARENT_COLOR
+  });
+};
 
 const _isBool = bool => typeof bool === 'boolean';
 
-const _noopFn = () => {};
+const FN_NOOP = () => {};
 
-const SvgCheckBox = ({
-  initialValue,
-  value,
-  style,
-  color,
-  checkedColor = _Color.default.YELLOW,
-  onCheck = _noopFn,
-  onUnCheck = _noopFn
-}) => {
+const SvgCheckBox = _ref2 => {
+  let {
+    initialValue,
+    value,
+    style,
+    color,
+    checkedColor = _Color.YELLOW_COLOR,
+    onCheck = FN_NOOP,
+    onUnCheck = FN_NOOP
+  } = _ref2;
+
   const [valueState, setValueState] = (0, _react.useState)(() => _isBool(value) ? void 0 : !!initialValue),
         _isValueState = (0, _useRefInit.default)(() => _isBool(valueState)),
         _value = _isValueState ? valueState : value,
@@ -70,8 +75,7 @@ const SvgCheckBox = ({
   /*eslint-enable react-hooks/exhaustive-deps */
   ,
         _hKeyDown = (0, _useKeyEnter.default)(_hToggle, [_hToggle]),
-        _restStroke = _value ? color || C_GREY : C_GREY,
-        _restFill = _value ? color || _Color.default.BLANK : _Color.default.BLANK;
+        [_restStroke, _restFill] = _value ? [color || C_GREY, color || _Color.TRANSPARENT_COLOR] : [C_GREY, _Color.TRANSPARENT_COLOR];
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     role: "checkbox",

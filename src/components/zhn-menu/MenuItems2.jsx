@@ -1,10 +1,10 @@
 import { memo } from 'react';
-import C from '../styles/Color'
+import { GREEN_COLOR } from '../styles/Color'
 import Comp from '../Comp'
 
 const { OpenClose2 } = Comp;
 
-const LIST_OPEN_COLOR = C.GREEN;
+const LIST_OPEN_COLOR = GREEN_COLOR;
 
 const MODEL_PROP = {
   CAPTION : 'caption',

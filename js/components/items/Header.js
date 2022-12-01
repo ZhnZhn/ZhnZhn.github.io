@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _use = _interopRequireDefault(require("../hooks/use"));
 
-var _Color = _interopRequireDefault(require("../styles/Color"));
+var _Color = require("../styles/Color");
 
 var _crStyle = _interopRequireDefault(require("../zhn-utils/crStyle"));
 
@@ -137,7 +137,7 @@ const Header = _ref3 => {
       onToggle: _toggleMore
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgCheckBox, {
       style: S_CHECK_BOX,
-      color: _Color.default.GREEN,
+      color: _Color.GREEN_COLOR,
       checkedColor: TS.ROOT.backgroundColor,
       onCheck: onCheck,
       onUnCheck: onUnCheck

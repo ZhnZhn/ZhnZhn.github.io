@@ -11,7 +11,7 @@ var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
 var _useDnDHandlers = _interopRequireDefault(require("../hooks/useDnDHandlers"));
 
-var _Color = _interopRequireDefault(require("../styles/Color"));
+var _Color = require("../styles/Color");
 
 var _Svg = _interopRequireDefault(require("./svg/Svg"));
 
@@ -20,7 +20,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 const CL_SHOW = 'show-popup',
       CL_NOT_SELECTED = 'not-selected zhn-oc',
       CL_OC_EXP = 'zhn-oc__exp',
-      FILL_CLOSE_COLOR = _Color.default.BLANK,
+      FILL_CLOSE_COLOR = _Color.TRANSPARENT_COLOR,
       S_SVG = {
   display: 'inline-block',
   position: 'relative',

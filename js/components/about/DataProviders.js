@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _Color = _interopRequireDefault(require("../styles/Color"));
+var _Color = require("../styles/Color");
 
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 
@@ -14,7 +14,7 @@ var _ProviderLinks = _interopRequireDefault(require("../links/ProviderLinks"));
 var _jsxRuntime = require("react/jsx-runtime");
 
 const CL_NOTE_BR = "provider__note__br",
-      OPEN_COLOR_L2 = _Color.default.GREEN,
+      OPEN_COLOR_L2 = _Color.GREEN_COLOR,
       S_ROOT_CHILD = {
   borderLeftStyle: 'solid',
   borderLeftWidth: 2,

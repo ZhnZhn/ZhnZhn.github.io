@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _Color = _interopRequireDefault(require("../styles/Color"));
+var _Color = require("../styles/Color");
 
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
@@ -18,53 +18,57 @@ var _SvgClose = _interopRequireDefault(require("./SvgClose"));
 var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from "prop-types";
-var TH_ID = 'ELEMENT';
-var CL_BR_CAPTION = 'br-caption text-clip gap-right',
-    CL_NOT_SELECTED = 'not-selected';
-var S_CAPTION = {
+const TH_ID = 'ELEMENT';
+const CL_BR_CAPTION = 'br-caption text-clip gap-right',
+      CL_NOT_SELECTED = 'not-selected';
+const S_CAPTION = {
   paddingRight: 8,
   fontSize: '18px',
   fontWeight: '500'
 },
-    S_CHECK_BOX = {
+      S_CHECK_BOX = {
   margin: '0 10px 0 6px'
 },
-    S_SVG_CLOSE = {
+      S_SVG_CLOSE = {
   position: 'absolute',
   top: 6,
   right: 0
 };
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
+const _isFn = fn => typeof fn === 'function';
 
-var BrowserCaption = function BrowserCaption(_ref) {
-  var style = _ref.style,
-      captionStyle = _ref.captionStyle,
-      caption = _ref.caption,
-      svgMoreStyle = _ref.svgMoreStyle,
-      children = _ref.children,
-      onMore = _ref.onMore,
-      onCheck = _ref.onCheck,
-      onUnCheck = _ref.onUnCheck,
-      onClose = _ref.onClose;
-  var TS = (0, _useTheme.default)(TH_ID);
+const BrowserCaption = _ref => {
+  let {
+    style,
+    captionStyle,
+    caption,
+    svgMoreStyle,
+    children,
+    onMore,
+    onCheck,
+    onUnCheck,
+    onClose
+  } = _ref;
+  const TS = (0, _useTheme.default)(TH_ID);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_BR_CAPTION,
-    style: Object.assign({}, style, TS.ROOT),
+    style: { ...style,
+      ...TS.ROOT
+    },
     children: [_isFn(onMore) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
       style: svgMoreStyle,
       onClick: onMore
     }), _isFn(onCheck) && _isFn(onUnCheck) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
       style: S_CHECK_BOX,
-      color: _Color.default.GREEN,
+      color: _Color.GREEN_COLOR,
       checkedColor: TS.ROOT.backgroundColor,
       onCheck: onCheck,
       onUnCheck: onUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       className: CL_NOT_SELECTED,
-      style: Object.assign({}, S_CAPTION, captionStyle),
+      style: { ...S_CAPTION,
+        ...captionStyle
+      },
       children: caption
     }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose.default, {
       style: S_SVG_CLOSE,

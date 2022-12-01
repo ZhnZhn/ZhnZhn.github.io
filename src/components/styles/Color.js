@@ -1,10 +1,4 @@
-const COLOR = {  
-  YELLOW: '#f1d600',
-  GREEN: '#80c040',
-  SIREN: '#a487d4',
-  TITLE: '#1b2836',
-  //BLANK: 'transparent',
-  BLANK: 'rgba(0, 0, 0, 0)'
-};
-
-export default COLOR
+export const YELLOW_COLOR = '#f1d600'
+export const GREEN_COLOR = '#80c040'
+//TRANSPARENT_COLOR = 'transparent',
+export const TRANSPARENT_COLOR = 'rgba(0, 0, 0, 0)'

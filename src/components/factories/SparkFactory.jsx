@@ -1,4 +1,6 @@
-import C from '../styles/Color';
+import {
+  YELLOW_COLOR
+} from '../styles/Color';
 
 import SparklinesLazy from '../zhn-lazy/SparklinesLazy';
 
@@ -11,8 +13,6 @@ const {
   Bars
 } = SparklinesLazy;
 
-const C_YELLOW = C.YELLOW;
-
 const S_REF_LINE = {
   stroke: 'red',
   strokeOpacity: .75,
@@ -21,7 +21,7 @@ const S_REF_LINE = {
 S_BARS = {
   stroke: "black",
   strokeWidth: "1",
-  fill: C_YELLOW,
+  fill: YELLOW_COLOR,
   fillOpacity: "0.9"
 };
 
@@ -36,7 +36,7 @@ export const crSparkLines = (
      svgWidth={100}
      data={data}
    >
-     <Line color={C_YELLOW} />
+     <Line color={YELLOW_COLOR} />
      <ReferenceLine
         style={S_REF_LINE}
         type="avg"

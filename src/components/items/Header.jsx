@@ -1,7 +1,7 @@
 //import PropTypes from "prop-types";
 
 import use from '../hooks/use';
-import COLOR from '../styles/Color';
+import { GREEN_COLOR } from '../styles/Color';
 import crStyle from '../zhn-utils/crStyle';
 
 import Comp from '../Comp';
@@ -132,7 +132,7 @@ const Header = ({
       />
       <SvgCheckBox
          style={S_CHECK_BOX}
-         color={COLOR.GREEN}
+         color={GREEN_COLOR}
          checkedColor={TS.ROOT.backgroundColor}
          onCheck={onCheck}
          onUnCheck={onUnCheck}

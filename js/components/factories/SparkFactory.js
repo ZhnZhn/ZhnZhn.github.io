@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.crSparkLines = exports.crSparkBars = void 0;
 
-var _Color = _interopRequireDefault(require("../styles/Color"));
+var _Color = require("../styles/Color");
 
 var _SparklinesLazy = _interopRequireDefault(require("../zhn-lazy/SparklinesLazy"));
 
@@ -19,7 +19,6 @@ const {
   ReferenceLine,
   Bars
 } = _SparklinesLazy.default;
-const C_YELLOW = _Color.default.YELLOW;
 const S_REF_LINE = {
   stroke: 'red',
   strokeOpacity: .75,
@@ -28,7 +27,7 @@ const S_REF_LINE = {
       S_BARS = {
   stroke: "black",
   strokeWidth: "1",
-  fill: C_YELLOW,
+  fill: _Color.YELLOW_COLOR,
   fillOpacity: "0.9"
 };
 
@@ -39,7 +38,7 @@ const crSparkLines = (data, pointIndex) => /*#__PURE__*/(0, _jsxRuntime.jsxs)(Sp
   svgWidth: 100,
   data: data,
   children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Line, {
-    color: C_YELLOW
+    color: _Color.YELLOW_COLOR
   }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ReferenceLine, {
     style: S_REF_LINE,
     type: "avg"

@@ -1,6 +1,6 @@
 //import PropTypes from 'prop-types'
 import use from '../hooks/use';
-import C from '../styles/Color';
+import { TRANSPARENT_COLOR } from '../styles/Color';
 import Svg from './svg/Svg';
 
 const { useToggle, useKeyEnter } = use
@@ -10,7 +10,7 @@ const CL_ROOT = 'zhn-oc'
 , CL_NOT_SELECTED = 'not-selected'
 , CL_OC_EXP = 'zhn-oc__exp'
 
-, FILL_CLOSE_COLOR = C.BLANK
+, FILL_CLOSE_COLOR = TRANSPARENT_COLOR
 
 , S_ROOT_DIV = { lineHeight: 2 }
 , S_SVG = {

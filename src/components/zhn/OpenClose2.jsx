@@ -2,14 +2,14 @@ import useToggle from '../hooks/useToggle';
 import useKeyEnter from '../hooks/useKeyEnter';
 import useDnDHandlers from '../hooks/useDnDHandlers';
 
-import C from '../styles/Color';
+import { TRANSPARENT_COLOR } from '../styles/Color';
 import Svg from './svg/Svg';
 
 const CL_SHOW = 'show-popup'
 , CL_NOT_SELECTED = 'not-selected zhn-oc'
 , CL_OC_EXP = 'zhn-oc__exp'
 
-, FILL_CLOSE_COLOR = C.BLANK
+, FILL_CLOSE_COLOR = TRANSPARENT_COLOR
 
 , S_SVG = {
   display: 'inline-block',

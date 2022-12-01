@@ -1,10 +1,12 @@
-import C from '../styles/Color'
+import {
+  GREEN_COLOR
+} from '../styles/Color';
 
 import OpenClose from '../zhn/OpenClose'
 import Link from '../links/ProviderLinks'
 
 const CL_NOTE_BR = "provider__note__br"
-, OPEN_COLOR_L2 = C.GREEN
+, OPEN_COLOR_L2 = GREEN_COLOR
 , S_ROOT_CHILD = {
   borderLeftStyle: 'solid',
   borderLeftWidth: 2,
