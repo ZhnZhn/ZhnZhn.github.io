@@ -5,67 +5,22 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _use = _interopRequireDefault(require("../hooks/use"));
-
-var _Color = require("../styles/Color");
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _Svg = _interopRequireDefault(require("./svg/Svg"));
+
+var _OpenCloseStyle = require("./OpenCloseStyle");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
 //import PropTypes from 'prop-types'
-const {
-  useToggle,
-  useKeyEnter
-} = _use.default;
-const CL_ROOT = 'zhn-oc',
-      CL_SHOW_POPUP = 'show-popup',
-      CL_NOT_SELECTED = 'not-selected',
-      CL_OC_EXP = 'zhn-oc__exp',
-      FILL_CLOSE_COLOR = _Color.TRANSPARENT_COLOR,
-      S_ROOT_DIV = {
+const S_ROOT_DIV = {
   lineHeight: 2
-},
-      S_SVG = {
-  display: 'inline-block',
-  position: 'relative',
-  top: 1,
-  marginLeft: 8
-},
-      S_CAPTION = {
-  paddingLeft: 4,
-  fontWeight: 'bold',
-  fontSize: '16px',
-  cursor: 'pointer'
-},
-      S_BLOCK = {
-  display: 'block'
-},
-      S_NONE = {
-  display: 'none'
-},
-      PATH_OPEN = "M 2,14 L 14,14 14,2 2,14",
-      PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
+}; //_pathV, _fillV, _childCl, _childStyle
 
-const _crConf = _ref => {
-  let {
-    isOpen,
-    openColor
-  } = _ref;
-  return isOpen ? {
-    _pathV: PATH_OPEN,
-    _fillV: openColor,
-    _childCl: CL_OC_EXP + " " + CL_SHOW_POPUP,
-    _childStyle: S_BLOCK
-  } : {
-    _pathV: PATH_CLOSE,
-    _fillV: FILL_CLOSE_COLOR,
-    _childCl: CL_OC_EXP,
-    _childStyle: S_NONE
-  };
-};
+const _crConf = (isOpen, openColor) => isOpen ? [_OpenCloseStyle.PATH_OPEN, openColor, _OpenCloseStyle.CL_OPEN_CLOSE_EXP + " " + _OpenCloseStyle.CL_SHOW_POPUP, _OpenCloseStyle.S_BLOCK] : [_OpenCloseStyle.PATH_CLOSE, _OpenCloseStyle.FILL_CLOSE_COLOR, _OpenCloseStyle.CL_OPEN_CLOSE_EXP, _OpenCloseStyle.S_NONE];
 
-const OpenClose = _ref2 => {
+const OpenClose = _ref => {
   let {
     isClose = true,
     role = 'button',
@@ -78,37 +33,29 @@ const OpenClose = _ref2 => {
     CompAfter,
     childStyle,
     children
-  } = _ref2;
+  } = _ref;
 
-  const [isOpen, toggleIsOpen] = useToggle(!isClose),
-        _hKeyDown = useKeyEnter(toggleIsOpen),
-        {
-    _pathV,
-    _fillV,
-    _childCl,
-    _childStyle
-  } = _crConf({
-    isOpen,
-    openColor
-  });
+  const [isOpen, toggleIsOpen] = (0, _useToggle.default)(!isClose),
+        _hKeyDown = (0, _useToggle.default)(toggleIsOpen),
+        [_pathV, _fillV, _childCl, _childStyle] = _crConf(isOpen, openColor);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: { ...S_ROOT_DIV,
       ...style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: CL_NOT_SELECTED,
+      className: _OpenCloseStyle.CL_NOT_SELECTED,
       style: rowStyle,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         tabIndex: "0",
         role: role,
-        className: CL_ROOT,
+        className: _OpenCloseStyle.CL_OPEN_CLOSE,
         style: ocStyle,
         onClick: toggleIsOpen,
         onKeyDown: _hKeyDown,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.default, {
           w: "16",
-          style: S_SVG,
+          style: _OpenCloseStyle.S_SVG,
           children: /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
             fill: _fillV,
             strokeWidth: "1",
@@ -116,7 +63,7 @@ const OpenClose = _ref2 => {
             d: _pathV
           })
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: { ...S_CAPTION,
+          style: { ..._OpenCloseStyle.S_CAPTION,
             ...captionStyle
           },
           children: caption
@@ -137,6 +84,7 @@ OpenClose.propTypes = {
   isClose: PropTypes.bool,
   role: PropTypes.string
   style: PropTypes.object,
+  rowStyle: PropTypes.object,
   ocStyle: PropTypes.object,
   caption: PropTypes.string,
   captionStyle: PropTypes.object,

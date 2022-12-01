@@ -1,71 +1,72 @@
 //import PropTypes from 'prop-types'
-import use from '../hooks/use';
-import { TRANSPARENT_COLOR } from '../styles/Color';
+import useToggle from '../hooks/useToggle';
+import useKeyEnter from '../hooks/useToggle';
 import Svg from './svg/Svg';
+import {
+  CL_OPEN_CLOSE,
+  CL_OPEN_CLOSE_EXP,
+  CL_SHOW_POPUP,
+  CL_NOT_SELECTED,
+  S_SVG,
+  S_CAPTION,
+  S_BLOCK,
+  S_NONE,
+  FILL_CLOSE_COLOR,
+  PATH_OPEN,
+  PATH_CLOSE
+} from './OpenCloseStyle';
 
-const { useToggle, useKeyEnter } = use
+const S_ROOT_DIV = { lineHeight: 2 };
 
-const CL_ROOT = 'zhn-oc'
-, CL_SHOW_POPUP = 'show-popup'
-, CL_NOT_SELECTED = 'not-selected'
-, CL_OC_EXP = 'zhn-oc__exp'
-
-, FILL_CLOSE_COLOR = TRANSPARENT_COLOR
-
-, S_ROOT_DIV = { lineHeight: 2 }
-, S_SVG = {
-  display: 'inline-block',
-  position: 'relative',
-  top: 1,
-  marginLeft: 8
-}
-, S_CAPTION = {
-  paddingLeft: 4,
-  fontWeight: 'bold',
-  fontSize: '16px',
-  cursor: 'pointer'
-}
-, S_BLOCK = { display: 'block' }
-, S_NONE = { display: 'none' }
-
-, PATH_OPEN = "M 2,14 L 14,14 14,2 2,14"
-, PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
-
-const _crConf = ({ isOpen, openColor }) => isOpen
-  ? {
-      _pathV: PATH_OPEN,
-      _fillV: openColor,
-      _childCl: `${CL_OC_EXP} ${CL_SHOW_POPUP}`,
-      _childStyle: S_BLOCK
-    }
-  : {
-      _pathV: PATH_CLOSE,
-      _fillV: FILL_CLOSE_COLOR,
-      _childCl: CL_OC_EXP,
-      _childStyle: S_NONE
-    };
+//_pathV, _fillV, _childCl, _childStyle
+const _crConf = (
+  isOpen,
+  openColor
+) => isOpen
+  ? [
+      PATH_OPEN,
+      openColor,
+      `${CL_OPEN_CLOSE_EXP} ${CL_SHOW_POPUP}`,
+      S_BLOCK
+    ]
+  : [
+      PATH_CLOSE,
+      FILL_CLOSE_COLOR,
+      CL_OPEN_CLOSE_EXP,
+      S_NONE
+    ];
 
 const OpenClose = ({
   isClose=true,
   role='button',
-  style, rowStyle, ocStyle,
-  caption, captionStyle,
+  style,
+  rowStyle,
+  ocStyle,
+  caption,
+  captionStyle,
   openColor,
-  CompAfter, childStyle, children
+  CompAfter,
+  childStyle,
+  children
 }) => {
-  const [isOpen, toggleIsOpen] = useToggle(!isClose)
+  const [
+    isOpen,
+    toggleIsOpen
+  ] = useToggle(!isClose)
   , _hKeyDown = useKeyEnter(toggleIsOpen)
-  , {
-     _pathV, _fillV,
-     _childCl, _childStyle
-   } = _crConf({ isOpen, openColor });
+  , [
+     _pathV,
+     _fillV,
+     _childCl,
+     _childStyle
+  ] = _crConf(isOpen, openColor);
   return (
     <div style={{...S_ROOT_DIV, ...style}}>
       <div className={CL_NOT_SELECTED} style={rowStyle}>
         <div
           tabIndex="0"
           role={role}
-          className={CL_ROOT}
+          className={CL_OPEN_CLOSE}
           style={ocStyle}
           onClick={toggleIsOpen}
           onKeyDown={_hKeyDown}
@@ -100,6 +101,7 @@ OpenClose.propTypes = {
   isClose: PropTypes.bool,
   role: PropTypes.string
   style: PropTypes.object,
+  rowStyle: PropTypes.object,
   ocStyle: PropTypes.object,
   caption: PropTypes.string,
   captionStyle: PropTypes.object,

@@ -11,46 +11,14 @@ var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 
 var _useDnDHandlers = _interopRequireDefault(require("../hooks/useDnDHandlers"));
 
-var _Color = require("../styles/Color");
-
 var _Svg = _interopRequireDefault(require("./svg/Svg"));
+
+var _OpenCloseStyle = require("./OpenCloseStyle");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const CL_SHOW = 'show-popup',
-      CL_NOT_SELECTED = 'not-selected zhn-oc',
-      CL_OC_EXP = 'zhn-oc__exp',
-      FILL_CLOSE_COLOR = _Color.TRANSPARENT_COLOR,
-      S_SVG = {
-  display: 'inline-block',
-  position: 'relative',
-  top: 1,
-  marginLeft: 8
-},
-      S_CAPTION = {
-  paddingLeft: 4,
-  fontWeight: 'bold',
-  fontSize: '16px',
-  cursor: 'pointer'
-},
-      S_BLOCK = {
-  display: 'block'
-},
-      S_NONE = {
-  display: 'none'
-},
-      PATH_OPEN = "M 2,14 L 14,14 14,2 2,14",
-      PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
-
-const _crStyleConf = _ref => {
-  let {
-    isOpen,
-    openColor,
-    notSelectedStyle
-  } = _ref;
-  return isOpen //_pathV, _fillV, _divStyle, _expClass, _notSelectedStyle
-  ? [PATH_OPEN, openColor, S_BLOCK, CL_OC_EXP + " " + CL_SHOW] : [PATH_CLOSE, FILL_CLOSE_COLOR, S_NONE, CL_OC_EXP, notSelectedStyle];
-};
+const _crStyleConf = (isOpen, openColor, notSelectedStyle) => isOpen //_pathV, _fillV, _divStyle, _expClass, _notSelectedStyle
+? [_OpenCloseStyle.PATH_OPEN, openColor, _OpenCloseStyle.S_BLOCK, _OpenCloseStyle.CL_OPEN_CLOSE_EXP + " " + _OpenCloseStyle.CL_SHOW_POPUP] : [_OpenCloseStyle.PATH_CLOSE, _OpenCloseStyle.FILL_CLOSE_COLOR, _OpenCloseStyle.S_NONE, _OpenCloseStyle.CL_OPEN_CLOSE_EXP, notSelectedStyle];
 
 const OpenClose2 = props => {
   const {
@@ -76,18 +44,15 @@ const OpenClose2 = props => {
         [isOpen, toggleIsOpen] = (0, _useToggle.default)(isInitialOpen),
         _hKeyDown = (0, _useKeyEnter.default)(toggleIsOpen),
         _dragOption = (0, _useDnDHandlers.default)(props),
-        [_pathV, _fillV, _divStyle, _expClass, _notSelectedStyle] = _crStyleConf({
-    isOpen,
-    openColor,
-    notSelectedStyle
-  });
+        [_pathV, _fillV, _divStyle, _expClass, _notSelectedStyle] = _crStyleConf(isOpen, openColor, notSelectedStyle);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    className: _OpenCloseStyle.CL_NOT_SELECTED,
     style: style,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       role: "menuitem",
       tabIndex: "0",
-      className: CL_NOT_SELECTED,
+      className: _OpenCloseStyle.CL_OPEN_CLOSE,
       style: { ...ocStyle,
         ..._notSelectedStyle
       },
@@ -96,7 +61,7 @@ const OpenClose2 = props => {
       ..._dragOption,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.default, {
         w: "16",
-        style: S_SVG,
+        style: _OpenCloseStyle.S_SVG,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
           d: _pathV,
           fill: _fillV,
@@ -104,7 +69,7 @@ const OpenClose2 = props => {
           stroke: openColor
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        style: { ...S_CAPTION,
+        style: { ..._OpenCloseStyle.S_CAPTION,
           ...captionStyle
         },
         children: caption
