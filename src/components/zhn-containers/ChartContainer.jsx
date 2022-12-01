@@ -1,4 +1,8 @@
-import { Component, createRef } from 'react';
+import {
+  Component,
+  createRef,
+  getRefElementStyle
+} from '../uiApi';
 
 import {
   CHAT_SHOW,
@@ -67,6 +71,12 @@ const _crFnByNameArgs = (ref, methodName, ...args) => () => {
   }
 };
 
+const _isDataForContainer = (
+  data,
+  chartType
+) => data === chartType ||
+  (data && data.chartType === chartType);
+
 class ChartContainer extends Component {
 
   static defaultProps = {
@@ -80,7 +90,6 @@ class ChartContainer extends Component {
     this._refSpComp = createRef()
     this._refResize = createRef()
 
-    this.childMargin = CHILD_MARGIN
     this._initWidthProperties(props)
     this._initHandlers(props)
 
@@ -106,7 +115,10 @@ class ChartContainer extends Component {
   }
 
   _initHandlers = (props) => {
-    const { onSortBy, onRemoveAll } = this.props
+    const {
+      onSortBy,
+      onRemoveAll
+    } = this.props
     , _refResize = this._refResize;
     this._HANDLERS = {
       onMinWidth: _crFnByNameArgs(_refResize, 'toWidth', this._MIN_WIDTH, true),
@@ -122,24 +134,23 @@ class ChartContainer extends Component {
   }
 
   componentDidMount(){
-    const { store, chartType } = this.props;
+    const {
+      store,
+      chartType
+    } = this.props;
     this.unsubscribe = store.listen(this._onStore);
-    const _initState = store.getConfigs(chartType)
-    if (_initState) {
-       this.setState(_initState);
+    const _initialConfigState = store.getConfigs(chartType)
+    if (_initialConfigState) {
+       this.setState(_initialConfigState);
     }
   }
   componentWillUnmount(){
     this.unsubscribe();
   }
 
-  _isDataForContainer = (data) => {
-    const { chartType } = this.props;
-    return data === chartType ||
-       (data && data.chartType === chartType);
-  }
   _onStore = (actionType, data) => {
-     if ( this._isDataForContainer(data) ) {
+     const { chartType } = this.props;
+     if (_isDataForContainer(data, chartType)) {
        if (_isInArray(CHAT_ACTIONS, actionType)) {
          if (actionType !== CHAT_CLOSE) {
            this._refSpComp.current.scrollTop = 0
@@ -154,8 +165,9 @@ class ChartContainer extends Component {
 
    _toggleChb = (isCheck, checkBox) => {
       const {
-        onSetActive,
-        chartType, browserType
+        chartType,
+        browserType,
+        onSetActive
       } = this.props;
       checkBox.chartType = chartType
       checkBox.browserType = browserType
@@ -163,8 +175,7 @@ class ChartContainer extends Component {
    }
 
    _hHide = () => {
-      const { chartType, browserType, onCloseContainer } = this.props;
-      onCloseContainer(chartType, browserType);
+      this.props.onCloseContainer()
       this.setState({ isShow: false });
    }
 
@@ -183,7 +194,7 @@ class ChartContainer extends Component {
    _hResizeAfter = (parentWidth) => {
      this._forEachItem(refItem => {
        if (_isFn(refItem.reflowChart)){
-         refItem.reflowChart(parentWidth - this.childMargin)
+         refItem.reflowChart(parentWidth - CHILD_MARGIN)
        }
      })
    }
@@ -222,8 +233,7 @@ class ChartContainer extends Component {
    _refChart = (index, comp) => this[_crItemRefPropName(index)] = comp
 
    _fitToWidth = () => {
-     const { style } = this._refRootElement.current || {}
-     , { width } = style || {};
+     const { width } = getRefElementStyle(this._refRootElement) || {};
      if (width) {
        this._hResizeAfter(parseInt(width, 10))
      }
@@ -238,8 +248,11 @@ class ChartContainer extends Component {
 
    render(){
      const  {
-       theme, caption,
-       chartType, browserType, onCloseItem,
+       theme,
+       caption,
+       chartType,
+       browserType,
+       onCloseItem,
        store
      } = this.props
      , TS = theme.getStyle(TH_ID)

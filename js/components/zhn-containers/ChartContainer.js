@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _ChartActions = require("../../flux/actions/ChartActions");
 
@@ -86,7 +86,9 @@ const _crFnByNameArgs = function (ref, methodName) {
   };
 };
 
-class ChartContainer extends _react.Component {
+const _isDataForContainer = (data, chartType) => data === chartType || data && data.chartType === chartType;
+
+class ChartContainer extends _uiApi.Component {
   constructor(_props) {
     super(_props);
 
@@ -120,15 +122,12 @@ class ChartContainer extends _react.Component {
       };
     };
 
-    this._isDataForContainer = data => {
+    this._onStore = (actionType, data) => {
       const {
         chartType
       } = this.props;
-      return data === chartType || data && data.chartType === chartType;
-    };
 
-    this._onStore = (actionType, data) => {
-      if (this._isDataForContainer(data)) {
+      if (_isDataForContainer(data, chartType)) {
         if (_isInArray(CHAT_ACTIONS, actionType)) {
           if (actionType !== _ChartActions.CHAT_CLOSE) {
             this._refSpComp.current.scrollTop = 0; //this.spComp.scrollTop()
@@ -143,9 +142,9 @@ class ChartContainer extends _react.Component {
 
     this._toggleChb = (isCheck, checkBox) => {
       const {
-        onSetActive,
         chartType,
-        browserType
+        browserType,
+        onSetActive
       } = this.props;
       checkBox.chartType = chartType;
       checkBox.browserType = browserType;
@@ -153,12 +152,7 @@ class ChartContainer extends _react.Component {
     };
 
     this._hHide = () => {
-      const {
-        chartType,
-        browserType,
-        onCloseContainer
-      } = this.props;
-      onCloseContainer(chartType, browserType);
+      this.props.onCloseContainer();
       this.setState({
         isShow: false
       });
@@ -184,7 +178,7 @@ class ChartContainer extends _react.Component {
     this._hResizeAfter = parentWidth => {
       this._forEachItem(refItem => {
         if (_isFn(refItem.reflowChart)) {
-          refItem.reflowChart(parentWidth - this.childMargin);
+          refItem.reflowChart(parentWidth - CHILD_MARGIN);
         }
       });
     };
@@ -230,11 +224,8 @@ class ChartContainer extends _react.Component {
 
     this._fitToWidth = () => {
       const {
-        style
-      } = this._refRootElement.current || {},
-            {
         width
-      } = style || {};
+      } = (0, _uiApi.getRefElementStyle)(this._refRootElement) || {};
 
       if (width) {
         this._hResizeAfter(parseInt(width, 10));
@@ -253,10 +244,9 @@ class ChartContainer extends _react.Component {
       });
     };
 
-    this._refRootElement = /*#__PURE__*/(0, _react.createRef)();
-    this._refSpComp = /*#__PURE__*/(0, _react.createRef)();
-    this._refResize = /*#__PURE__*/(0, _react.createRef)();
-    this.childMargin = CHILD_MARGIN;
+    this._refRootElement = (0, _uiApi.createRef)();
+    this._refSpComp = (0, _uiApi.createRef)();
+    this._refResize = (0, _uiApi.createRef)();
 
     this._initWidthProperties(_props);
 
@@ -277,10 +267,10 @@ class ChartContainer extends _react.Component {
     } = this.props;
     this.unsubscribe = store.listen(this._onStore);
 
-    const _initState = store.getConfigs(chartType);
+    const _initialConfigState = store.getConfigs(chartType);
 
-    if (_initState) {
-      this.setState(_initState);
+    if (_initialConfigState) {
+      this.setState(_initialConfigState);
     }
   }
 

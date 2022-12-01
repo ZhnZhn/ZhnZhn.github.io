@@ -1,10 +1,12 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.setRefValue = exports.memo = exports.isInputValid = exports.getRefValue = exports.getInputValue = exports.forwardRef = exports.focusRefElement = exports.createContext = void 0;
+exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.setRefValue = exports.memo = exports.isInputValid = exports.getRefValue = exports.getRefElementStyle = exports.getInputValue = exports.forwardRef = exports.focusRefElement = exports.createRef = exports.createContext = exports.Component = void 0;
 
 var _react = require("react");
 
+exports.Component = _react.Component;
+exports.createRef = _react.createRef;
 exports.createContext = _react.createContext;
 exports.memo = _react.memo;
 exports.forwardRef = _react.forwardRef;
@@ -18,6 +20,8 @@ exports.useLayoutEffect = _react.useLayoutEffect;
 exports.useEffect = _react.useEffect;
 exports.useImperativeHandle = _react.useImperativeHandle;
 
+const _isFn = fn => typeof fn === 'function';
+
 const getRefValue = ref => (ref || {}).current;
 
 exports.getRefValue = getRefValue;
@@ -30,7 +34,9 @@ const setRefValue = (ref, value) => {
 
 exports.setRefValue = setRefValue;
 
-const _isFn = fn => typeof fn === 'function';
+const getRefElementStyle = ref => (getRefValue(ref) || {}).style;
+
+exports.getRefElementStyle = getRefElementStyle;
 
 const focusRefElement = (ref1, ref2) => {
   const _el = getRefValue(ref1) || getRefValue(ref2);

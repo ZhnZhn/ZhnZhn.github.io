@@ -1,4 +1,7 @@
 export {
+  Component,
+  createRef,
+  
   createContext,
   memo,
   forwardRef,
@@ -13,7 +16,11 @@ export {
   useImperativeHandle
 } from 'react';
 
-export const getRefValue = ref => (ref || {}).current
+const _isFn = fn => typeof fn === 'function';
+
+export const getRefValue = (
+  ref
+) => (ref || {}).current
 
 export const setRefValue = (
   ref,
@@ -24,7 +31,9 @@ export const setRefValue = (
   }
 }
 
-const _isFn = fn => typeof fn === 'function';
+export const getRefElementStyle = (
+  ref
+) => (getRefValue(ref) || {}).style;
 
 export const focusRefElement = (
   ref1,
