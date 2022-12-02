@@ -1,11 +1,7 @@
-//import PropTypes from "prop-types";
-
 import useTheme from '../hooks/useTheme';
-import crCn from '../zhn-utils/crCn';
 
-const TH_ID = 'BROWSER';
-
-const CL_BROWSER = 'browser-container'
+const TH_ID = 'BROWSER'
+, CL_BROWSER = 'browser-container'
 , CL_SHOW = 'show-popup'
 , S_BLOCK = { display: 'block' }
 , S_NONE = { display: 'none' };
@@ -16,8 +12,12 @@ const Browser = ({
   children
 }) => {
   const TS = useTheme(TH_ID)
-  , _cn = crCn(CL_BROWSER, [isShow, CL_SHOW])
-  , _style = isShow ? S_BLOCK : S_NONE;
+  , [
+    _cn,
+    _style
+  ] = isShow
+    ? [`${CL_BROWSER} ${CL_SHOW}`, S_BLOCK]
+    : [CL_BROWSER, S_NONE];
 
   return (
     <div
@@ -27,18 +27,10 @@ const Browser = ({
          ...TS.ROOT,
          ..._style,
        }}
-     >
+    >
        {children}
     </div>
   );
 };
-
-/*
-Browser.propTypes = {
-  isShow: PropTypes.bool,
-  style: PropTypes.object,
-  children: PropTypes.node
-}
-*/
 
 export default Browser
