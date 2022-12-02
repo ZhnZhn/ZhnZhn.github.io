@@ -9,6 +9,8 @@ var _react = require("react");
 
 var _seriaFns = require("../../charts/seriaFns");
 
+var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
+
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
@@ -122,7 +124,7 @@ class ColumnRangeDialog extends _react.Component {
       this._color = color;
     };
 
-    this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Flat, {
+    this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "Yes, Connect",
       isPrimary: true,
       onClick: this._hAdd

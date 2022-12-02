@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.ButtonShow = exports.ButtonLoad = void 0;
 
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 
@@ -16,7 +16,7 @@ const S_LOAD = {
   color: '#232f3b'
 };
 
-const Load = _ref => {
+const ButtonLoad = _ref => {
   let {
     onClick
   } = _ref;
@@ -28,7 +28,9 @@ const Load = _ref => {
   });
 };
 
-const Show = _ref2 => {
+exports.ButtonLoad = ButtonLoad;
+
+const ButtonShow = _ref2 => {
   let {
     onClick
   } = _ref2;
@@ -40,10 +42,5 @@ const Show = _ref2 => {
   });
 };
 
-var _default = {
-  Load,
-  Show,
-  Flat: _FlatButton.default
-};
-exports.default = _default;
-//# sourceMappingURL=Button.js.map
+exports.ButtonShow = ButtonShow;
+//# sourceMappingURL=Buttons.js.map

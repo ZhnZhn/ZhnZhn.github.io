@@ -2,6 +2,7 @@ import { Component, createRef } from 'react'
 
 import { columnRange } from '../../charts/seriaFns';
 
+import FlatButton from '../zhn-m/FlatButton';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import D from './DialogCell'
 
@@ -69,7 +70,7 @@ class ColumnRangeDialog extends Component {
     super(props)
 
     this._commandButtons = [
-      <D.Button.Flat
+      <FlatButton
          key="yes"
          caption="Yes, Connect"
          isPrimary={true}

@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = require("react");
 
-var _Button = _interopRequireDefault(require("./Button"));
+var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
@@ -32,22 +32,24 @@ const S_MODAL = {
   color: '#232f3b'
 };
 
-const ReloadDialog = ({
-  isShow,
-  data,
-  onClose
-}) => {
+const ReloadDialog = _ref => {
+  let {
+    isShow,
+    data,
+    onClose
+  } = _ref;
+
   const _hReload = (0, _react.useCallback)(() => {
     document.cookie = "erc=1";
     window.location.reload(true);
   }, [])
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _commandButtons = (0, _react.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Flat, {
+        _commandButtons = (0, _react.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
     caption: "Yes, Reload",
     isPrimary: true,
     onClick: _hReload
-  }, "reload"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Flat, {
+  }, "reload"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
     style: S_CLOSE,
     caption: "No",
     onClick: onClose

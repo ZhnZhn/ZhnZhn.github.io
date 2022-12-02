@@ -19,6 +19,8 @@ var _ChartActions = require("../../flux/actions/ChartActions");
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 
+var _Buttons = require("./Buttons");
+
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
 var _NasdaqLink = _interopRequireDefault(require("../native-links/NasdaqLink"));
@@ -184,9 +186,9 @@ const StocksBySectorDialog = (0, _memoIsShow.default)(_ref3 => {
 
     onClose();
   }),
-        _refCommandButtons = (0, _uiApi.useRef)([/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Load, {
+        _refCommandButtons = (0, _uiApi.useRef)([/*#__PURE__*/(0, _jsxRuntime.jsx)(_Buttons.ButtonLoad, {
     onClick: _hLoad
-  }, "load"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Show, {
+  }, "load"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Buttons.ButtonShow, {
     onClick: _hShow
   }, "show")]);
 

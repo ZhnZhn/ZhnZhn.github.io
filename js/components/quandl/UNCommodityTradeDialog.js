@@ -27,7 +27,11 @@ var _crValidationMessages = _interopRequireDefault(require("../dialogs/hooks/crV
 
 var _ChartType = require("../../constants/ChartType");
 
+var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
+
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+
+var _Buttons = require("../dialogs/Buttons");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -279,12 +283,12 @@ const UNCommodityTradeDialog = (0, _memoIsShow.default)(props => {
       setValidationMessages(msgs);
     }
   }),
-        _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Flat, {
+        _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
     style: S_BT,
     caption: "Load Meta",
     title: "First Load Meta, then Load Item",
     onClick: _hLoadMeta
-  }, "meta"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Load, {
+  }, "meta"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Buttons.ButtonLoad, {
     onClick: _hLoadData
   }, "load")], []) // _hLoadMeta, _hLoadData
   ,

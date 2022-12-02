@@ -13,6 +13,8 @@ var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallbac
 
 var _DateUtils = require("../../utils/DateUtils");
 
+var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
+
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
@@ -74,7 +76,7 @@ const _useZoom = (getChart, refDates) => {
     onClose();
   }, []) // getChart, refDates
   ,
-        _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Flat, {
+        _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
     caption: "Zoom",
     isPrimary: true,
     onClick: _hZoom

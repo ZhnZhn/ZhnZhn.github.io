@@ -31,8 +31,6 @@ var _RowInputColor = _interopRequireDefault(require("./RowInputColor"));
 
 var _SelectWithLoad = _interopRequireDefault(require("./SelectWithLoad"));
 
-var _Button = _interopRequireDefault(require("./Button"));
-
 const DialogCell = {
   DraggableDialog: _DraggableDialog.default,
   ModalPopup: _ModalPopup.default,
@@ -43,7 +41,6 @@ const DialogCell = {
   RowInputText: _RowInputText.default,
   RowInputColor: _RowInputColor.default,
   SelectWithLoad: _SelectWithLoad.default,
-  Button: _Button.default,
   ..._Rows.default,
   ..._Modals.default,
   crDateConfig: _crDateConfig.default,

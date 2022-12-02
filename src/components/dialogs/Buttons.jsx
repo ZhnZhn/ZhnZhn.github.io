@@ -1,9 +1,11 @@
-import FlatButton from '../zhn-m/FlatButton'
+import FlatButton from '../zhn-m/FlatButton';
 
 const S_LOAD = { color: '#607d8b' }
 , S_SHOW = { color: '#232f3b' };
 
-const Load = ({ onClick }) => (
+export const ButtonLoad = ({
+  onClick
+}) => (
   <FlatButton
     style={S_LOAD}
     caption="Load"
@@ -12,7 +14,9 @@ const Load = ({ onClick }) => (
   />
 );
 
-const Show = ({ onClick }) => (
+export const ButtonShow = ({
+  onClick
+}) => (
   <FlatButton
     style={S_SHOW}
     caption="Show"
@@ -20,5 +24,3 @@ const Show = ({ onClick }) => (
     onClick={onClick}
   />
 );
-
-export default { Load, Show, Flat: FlatButton }

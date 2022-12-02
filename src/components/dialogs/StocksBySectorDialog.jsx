@@ -14,6 +14,10 @@ import {
 } from '../../flux/actions/ChartActions';
 
 import D from './DialogCell';
+import {
+  ButtonLoad,
+  ButtonShow
+} from './Buttons';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import NasdaqLink from '../native-links/NasdaqLink';
 
@@ -149,11 +153,11 @@ const StocksBySectorDialog = memoIsShow(({
     onClose()
   })
   , _refCommandButtons = useRef([
-    <D.Button.Load
+    <ButtonLoad
       key="load"
       onClick={_hLoad}
     />,
-    <D.Button.Show
+    <ButtonShow
       key="show"
       onClick={_hShow}
     />

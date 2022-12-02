@@ -6,7 +6,7 @@ import {
 } from 'react';
 import memoIsShow from '../hoc/memoIsShow';
 
-import Button from './Button'
+import FlatButton from '../zhn-m/FlatButton';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import MathCaptcha from '../zhn-moleculs/MathCaptcha';
 
@@ -36,7 +36,7 @@ S_DESCR = {
 }
 , S_CAPTCHA = { padding: '8px 8px 0 8px' };
 
-const _DF_DATA = {};
+const DF_DATA = {};
 
 const _getName = data => {
   const { options } = data
@@ -46,7 +46,7 @@ const _getName = data => {
 
 const AskDialog = memoIsShow(({
   isShow,
-  data=_DF_DATA,
+  data=DF_DATA,
   onClose
 }) => {
   const _refCaptcha = useRef()
@@ -60,13 +60,13 @@ const AskDialog = memoIsShow(({
       }
     }, [data, onClose])
  , _commandButtons = useMemo(() => [
-     <Button.Flat
+     <FlatButton
        key="k1"
        caption="Yes, Load"
        isPrimary={true}
        onClick={_hLoad}
      />,
-     <Button.Flat
+     <FlatButton
        key="k2"
        caption="No, Close"
        onClick={onClose}

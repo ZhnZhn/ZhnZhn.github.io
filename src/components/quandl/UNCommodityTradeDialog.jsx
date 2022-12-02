@@ -26,8 +26,9 @@ import {
   CHT_TREE_MAP
 } from '../../constants/ChartType';
 
-import D from '../dialogs/DialogCell'
-
+import FlatButton from '../zhn-m/FlatButton';
+import D from '../dialogs/DialogCell';
+import { ButtonLoad } from '../dialogs/Buttons';
 
 const S_BT = { color: '#232f3b' }
 , PLACEHOLDER_INITIAL = 'First Load Meta'
@@ -303,14 +304,14 @@ const UNCommodityTradeDialog = memoIsShow((
     }
   })
   , _commandButtons = useMemo(() => [
-    <D.Button.Flat
+    <FlatButton
       key="meta"
       style={S_BT}
       caption="Load Meta"
       title="First Load Meta, then Load Item"
       onClick={_hLoadMeta}
     />,
-    <D.Button.Load
+    <ButtonLoad
        key="load"
        onClick={_hLoadData}
      />

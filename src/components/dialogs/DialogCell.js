@@ -14,7 +14,6 @@ import Toolbar from './Toolbar'
 import RowInputText from './RowInputText'
 import RowInputColor from './RowInputColor'
 import SelectWithLoad from './SelectWithLoad'
-import Button from './Button'
 
 const DialogCell = {
   DraggableDialog,
@@ -27,7 +26,6 @@ const DialogCell = {
   RowInputText,
   RowInputColor,
   SelectWithLoad,
-  Button,
   ...Rows,
   ...Modals,
   crDateConfig,

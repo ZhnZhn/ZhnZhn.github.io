@@ -23,11 +23,11 @@ var _DialogStyles = require("../styles/DialogStyles");
 
 var _ToolbarButtonCircle = _interopRequireDefault(require("./ToolbarButtonCircle"));
 
-var _Button = _interopRequireDefault(require("./Button"));
-
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
+
+var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 
 var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 
@@ -161,7 +161,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     fn.apply(chart, [null, _customOption]);
     onClose();
   }),
-        _refCommandButtons = (0, _react.useRef)([/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Flat, {
+        _refCommandButtons = (0, _react.useRef)([/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
     caption: "Export",
     isPrimary: true,
     onClick: _hExport

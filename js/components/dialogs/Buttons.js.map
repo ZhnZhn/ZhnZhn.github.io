@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/Buttons.js"
+ ],
+ "file": "../../../src/components/dialogs/Buttons.js",
+ "names": [
+  "S_LOAD",
+  "color",
+  "S_SHOW",
+  "ButtonLoad",
+  "onClick",
+  "ButtonShow"
+ ],
+ "mappings": ";;;;;;;AAAA;;;;AAEA,MAAMA,MAAM,GAAG;EAAEC,KAAK,EAAE;AAAT,CAAf;AAAA,MACEC,MAAM,GAAG;EAAED,KAAK,EAAE;AAAT,CADX;;AAGO,MAAME,UAAU,GAAG;EAAA,IAAC;IACzBC;EADyB,CAAD;EAAA,oBAGxB,qBAAC,mBAAD;IACE,KAAK,EAAEJ,MADT;IAEE,OAAO,EAAC,MAFV;IAGE,KAAK,EAAC,wBAHR;IAIE,OAAO,EAAEI;EAJX,EAHwB;AAAA,CAAnB;;;;AAWA,MAAMC,UAAU,GAAG;EAAA,IAAC;IACzBD;EADyB,CAAD;EAAA,oBAGxB,qBAAC,mBAAD;IACE,KAAK,EAAEF,MADT;IAEE,OAAO,EAAC,MAFV;IAGE,KAAK,EAAC,qBAHR;IAIE,OAAO,EAAEE;EAJX,EAHwB;AAAA,CAAnB"
+}

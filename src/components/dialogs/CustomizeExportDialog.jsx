@@ -1,4 +1,7 @@
-import { useRef, useMemo } from 'react';
+import {
+  useRef,
+  useMemo
+} from 'react';
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import useRefInit from '../hooks/useRefInit';
@@ -10,14 +13,12 @@ import {
 } from '../../charts/ChartExportConfig';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import {
-  S_DIALOG_ROW
-} from '../styles/DialogStyles';
+import { S_DIALOG_ROW } from '../styles/DialogStyles';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
-import Button from './Button'
 
 import ShowHide from '../zhn/ShowHide';
 import InputText from '../zhn/InputText';
+import FlatButton from '../zhn-m/FlatButton';
 import InputSelect from '../zhn-select/InputSelect';
 
 const _S_LABEL = {
@@ -100,9 +101,18 @@ const CustomizeExportDialog = memoIsShow(({
   data=DF_DATA,
   onClose
 }) => {
-  const [isShowDimension, toggleDimension] = useToggle(true)
-  , [isShowTitle, toggleTitle] = useToggle(true)
-  , [isShowStyle, toggleStyle] = useToggle(true)
+  const [
+    isShowDimension,
+    toggleDimension
+  ] = useToggle(true)
+  , [
+    isShowTitle,
+    toggleTitle
+  ] = useToggle(true)
+  , [
+    isShowStyle,
+    toggleStyle
+  ] = useToggle(true)
   , _refExportStyle = useRef({})
   , _refToolbarButtons = useRef([
     { caption: 'D', onClick: toggleDimension },
@@ -150,7 +160,7 @@ const CustomizeExportDialog = memoIsShow(({
       onClose();
   })
   , _refCommandButtons = useRef([
-       <Button.Flat
+       <FlatButton
           key="export"
           caption="Export"
           isPrimary={true}

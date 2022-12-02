@@ -1,6 +1,9 @@
-import { useCallback, useMemo } from 'react';
+import {
+  useCallback,
+  useMemo
+} from 'react';
 
-import Button from './Button';
+import FlatButton from '../zhn-m/FlatButton';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 
 const S_MODAL = {
@@ -29,13 +32,13 @@ const ReloadDialog = ({
   }, [])
   /*eslint-disable react-hooks/exhaustive-deps */
   , _commandButtons = useMemo(()=>[
-      <Button.Flat
+      <FlatButton
         key="reload"
         caption="Yes, Reload"
         isPrimary={true}
         onClick={_hReload}
       />,
-      <Button.Flat
+      <FlatButton
         key="no"
         style={S_CLOSE}
         caption="No"

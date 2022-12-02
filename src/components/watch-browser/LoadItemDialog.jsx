@@ -33,6 +33,7 @@ import {
 
 import ModalDialog from '../zhn-moleculs/ModalDialog'
 import D from '../dialogs/DialogCell'
+import { ButtonLoad } from '../dialogs/Buttons';
 import ValidationMessages from '../zhn/ValidationMessages'
 
 const S_DIALOG = { width: 365 }
@@ -165,7 +166,7 @@ const LoadItemDialog = memoIsShow(({
     }
   }
   , _commandButtons = [
-     <D.Button.Load
+     <ButtonLoad
        key="load"
        onClick={_hLoad}
      />

@@ -9,7 +9,7 @@ var _react = require("react");
 
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 
-var _Button = _interopRequireDefault(require("./Button"));
+var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 
@@ -46,7 +46,7 @@ const MSG_PREFIX = "Would you like load item",
       S_CAPTCHA = {
   padding: '8px 8px 0 8px'
 };
-const _DF_DATA = {};
+const DF_DATA = {};
 
 const _getName = data => {
   const {
@@ -62,7 +62,7 @@ const _getName = data => {
 const AskDialog = (0, _memoIsShow.default)(_ref => {
   let {
     isShow,
-    data = _DF_DATA,
+    data = DF_DATA,
     onClose
   } = _ref;
 
@@ -78,11 +78,11 @@ const AskDialog = (0, _memoIsShow.default)(_ref => {
       onClose();
     }
   }, [data, onClose]),
-        _commandButtons = (0, _react.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Flat, {
+        _commandButtons = (0, _react.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
     caption: "Yes, Load",
     isPrimary: true,
     onClick: _hLoad
-  }, "k1"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Flat, {
+  }, "k1"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
     caption: "No, Close",
     onClick: onClose
   }, "k2")], [_hLoad, onClose]),

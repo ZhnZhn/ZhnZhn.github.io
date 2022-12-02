@@ -17,6 +17,7 @@ import {
   getYTDfromDmy
 } from '../../utils/DateUtils';
 
+import FlatButton from '../zhn-m/FlatButton';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import D from './DialogCell';
 import ZoomDailyRow from './ZoomDailyRow';
@@ -74,7 +75,7 @@ const _useZoom = (
   }, [])
   // getChart, refDates
   , _commandButtons = useMemo(() => [
-    <D.Button.Flat
+    <FlatButton
        key="zoom"
        caption="Zoom"
        isPrimary={true}
@@ -116,7 +117,7 @@ const _useZoomBy = (
 
 const ZoomDialog = memoIsShow(({
   isShow,
-  data= DF_DATA,
+  data=DF_DATA,
   onClose
 }) => {
   const _refDates = useRef()

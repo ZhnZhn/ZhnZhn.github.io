@@ -27,6 +27,8 @@ var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog")
 
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 
+var _Buttons = require("../dialogs/Buttons");
+
 var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
 
 var _jsxRuntime = require("react/jsx-runtime");
@@ -154,7 +156,7 @@ const LoadItemDialog = (0, _memoIsShow.default)(_ref => {
       setValidationMessages(_validationMessages);
     }
   },
-        _commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Button.Load, {
+        _commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Buttons.ButtonLoad, {
     onClick: _hLoad
   }, "load")],
         _hClose = () => {
