@@ -1,13 +1,11 @@
-import D from './DialogCell';
+import FlatButton from '../zhn-m/FlatButton';
 
-const S = {
-  PERIOD_BTS: {
-    paddingTop: 8,
-    paddingLeft: 8
-  },
-  BT: {
-    color: '#1b2836'
-  }
+const S_PERIOD_BTS = {
+  paddingTop: 8,
+  paddingLeft: 8
+},
+S_BT = {
+  color: '#1b2836'
 };
 
 const ZoomDailyRow = ({
@@ -17,34 +15,29 @@ const ZoomDailyRow = ({
   onZoomYTD,
   onZoom1Y
 }) => (
-<div style={S.PERIOD_BTS}>
-    <D.Button.Flat
-       rootStyle={S.BT}
-       key="1M"
+<div style={S_PERIOD_BTS}>
+    <FlatButton
+       style={S_BT}
        caption="1M"
        onClick={onZoom1M}
     />
-    <D.Button.Flat
-       rootStyle={S.BT}
-       key="3M"
+    <FlatButton
+       style={S_BT}
        caption="3M"
        onClick={onZoom3M}
     />
-    <D.Button.Flat
-       rootStyle={S.BT}
-       key="6M"
+    <FlatButton
+       style={S_BT}
        caption="6M"
        onClick={onZoom6M}
     />
-    <D.Button.Flat
-       rootStyle={S.BT}
-       key="YTD"
+    <FlatButton
+       style={S_BT}
        caption="YTD"
        onClick={onZoomYTD}
     />
-    <D.Button.Flat
-       rootStyle={S.BT}
-       key="1Y"
+    <FlatButton
+       style={S_BT}
        caption="1Y"
        onClick={onZoom1Y}
     />
