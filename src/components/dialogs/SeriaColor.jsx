@@ -1,25 +1,40 @@
 import {
   forwardRef,
-  useState,
   useRef,
-  useCallback,
+  useState,
+  useMemo,
   useImperativeHandle,
   getInputValue
 } from '../uiApi';
 
+import crStyle from '../zhn-utils/crStyle';
+
 import CellColor from '../zhn-moleculs/CellColor';
+import { TRANSPARENT_COLOR } from '../styles/Color';
 import BtCounter from './BtCounter';
 import ColorList from './ColorList';
 
-const C_TRANSPARENT = "transparent";
-
 const COLORS1 = [
-  '#8abb5d','#f7a35c','#795548','#f15c80','#f45b5b',
-  '#d2b772', '#dda0dd','#fffafa'
+  '#8abb5d',
+  '#f7a35c',
+  '#795548',
+  '#f15c80',
+  '#f45b5b',
+
+  '#d2b772',
+  '#dda0dd',
+  '#fffafa'
 ];
 const COLORS2 = [
-  '#f1d600','#008b8b','#2f7ed8','#673ab7','#000000',
-  '#607d8b','#7092be','#c3c3c3'
+  '#f1d600',
+  '#008b8b',
+  '#2f7ed8',
+  '#673ab7',
+  '#000000',
+
+  '#607d8b',
+  '#7092be',
+  '#c3c3c3'
 ];
 
 const CL_INPUT_COLOR = 'va-b'
@@ -40,26 +55,30 @@ const _hasLineWidth = ({
 
 const SeriaColor = forwardRef(({
   isLong,
-  initColor=C_TRANSPARENT,
   chartType
 }, ref) => {
-  const [
+  const _refLineWidth = useRef()
+  , [
     color,
     setColor
-  ] = useState(initColor)
-  , _hClick = useCallback(nextColor => {
-    if (nextColor) {
-      setColor(nextColor)
+  ] = useState(TRANSPARENT_COLOR)
+  , [
+    _hClick,
+    _hReset
+  ] = useMemo(() => [
+    (nextColor) => {
+      if (nextColor) {
+        setColor(nextColor)
+      }
+    },
+    () => {
+      setColor(TRANSPARENT_COLOR)
     }
-  }, [])
-  , _hReset = useCallback(() => {
-    setColor(initColor)
-  }, [initColor])
-  , _refLineWidth = useRef();
+  ], []);
 
   useImperativeHandle(ref, () => ({
     getValue: () => ({
-       seriaColor: color !== C_TRANSPARENT
+       seriaColor: color !== TRANSPARENT_COLOR
           ? color
           : void 0,
        seriaWidth: _hasLineWidth(chartType)
@@ -69,9 +88,10 @@ const SeriaColor = forwardRef(({
   }), [color, chartType])
 
   const _isLineWidth = _hasLineWidth(chartType)
-  , _rowStyle = _isLineWidth
-       ? S_ROW2
-       : {...S_ROW2, ...S_ROW2_PADDING };
+  , _rowStyle = crStyle(
+      S_ROW2,
+      !_isLineWidth && S_ROW2_PADDING
+    );
 
   return (
     <div style={S_ROOT}>

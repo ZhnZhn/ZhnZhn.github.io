@@ -7,7 +7,11 @@ exports.default = void 0;
 
 var _uiApi = require("../uiApi");
 
+var _crStyle = _interopRequireDefault(require("../zhn-utils/crStyle"));
+
 var _CellColor = _interopRequireDefault(require("../zhn-moleculs/CellColor"));
+
+var _Color = require("../styles/Color");
 
 var _BtCounter = _interopRequireDefault(require("./BtCounter"));
 
@@ -15,7 +19,6 @@ var _ColorList = _interopRequireDefault(require("./ColorList"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const C_TRANSPARENT = "transparent";
 const COLORS1 = ['#8abb5d', '#f7a35c', '#795548', '#f15c80', '#f45b5b', '#d2b772', '#dda0dd', '#fffafa'];
 const COLORS2 = ['#f1d600', '#008b8b', '#2f7ed8', '#673ab7', '#000000', '#607d8b', '#7092be', '#c3c3c3'];
 const CL_INPUT_COLOR = 'va-b',
@@ -46,32 +49,28 @@ const _hasLineWidth = function (_temp) {
 const SeriaColor = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     isLong,
-    initColor = C_TRANSPARENT,
     chartType
   } = _ref;
 
-  const [color, setColor] = (0, _uiApi.useState)(initColor),
-        _hClick = (0, _uiApi.useCallback)(nextColor => {
+  const _refLineWidth = (0, _uiApi.useRef)(),
+        [color, setColor] = (0, _uiApi.useState)(_Color.TRANSPARENT_COLOR),
+        [_hClick, _hReset] = (0, _uiApi.useMemo)(() => [nextColor => {
     if (nextColor) {
       setColor(nextColor);
     }
-  }, []),
-        _hReset = (0, _uiApi.useCallback)(() => {
-    setColor(initColor);
-  }, [initColor]),
-        _refLineWidth = (0, _uiApi.useRef)();
+  }, () => {
+    setColor(_Color.TRANSPARENT_COLOR);
+  }], []);
 
   (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValue: () => ({
-      seriaColor: color !== C_TRANSPARENT ? color : void 0,
+      seriaColor: color !== _Color.TRANSPARENT_COLOR ? color : void 0,
       seriaWidth: _hasLineWidth(chartType) ? (0, _uiApi.getInputValue)(_refLineWidth) : void 0
     })
   }), [color, chartType]);
 
   const _isLineWidth = _hasLineWidth(chartType),
-        _rowStyle = _isLineWidth ? S_ROW2 : { ...S_ROW2,
-    ...S_ROW2_PADDING
-  };
+        _rowStyle = (0, _crStyle.default)(S_ROW2, !_isLineWidth && S_ROW2_PADDING);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_ROOT,
