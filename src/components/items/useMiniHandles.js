@@ -1,23 +1,24 @@
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 
-const useMiniHandles = (getMainChart) => {
-  /*eslint-disable react-hooks/exhaustive-deps */
-  const _hLoadedMiniChart = useCallback((miniChart) => {
-    const mainChart = getMainChart()
+//_hLoadedMiniChart, _hUnLoadedMiniChart
+/*eslint-disable react-hooks/exhaustive-deps */
+const useMiniHandles = (
+  getMainChart
+) => useMemo(() => [
+  (miniChart) => {
+    const mainChart = getMainChart();
     if (mainChart) {
       mainChart.zhAddDetailChart(miniChart)
     }
-  }, [])
-  // getMainChart
-  , _hUnLoadedMiniChart = useCallback((miniChart) => {
-    const mainChart = getMainChart()
+  },
+  (miniChart) => {
+    const mainChart = getMainChart();
     if (mainChart) {
       mainChart.zhRemoveDetailChart(miniChart)
     }
-  }, []);
-  // getMainChart
-  /*eslint-enable react-hooks/exhaustive-deps */
-  return [_hLoadedMiniChart, _hUnLoadedMiniChart];
-};
+  }
+], []);
+// getMainChart
+/*eslint-enable react-hooks/exhaustive-deps */
 
 export default useMiniHandles
