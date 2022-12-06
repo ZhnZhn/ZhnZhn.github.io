@@ -201,16 +201,16 @@ const LoadItemDialog = memoIsShow(({
         isShow={true}
         buttons={_toolbarButtons}
       />
-      <D.Row.Text
+      <D.RowText
         isShowLabels={isShowLabels}
-        styleText={S_ITEM_TEXT}
+        textStyle={S_ITEM_TEXT}
         caption="Item:"
         text={caption}
       />
       <D.ShowHide isShow={isValue}>
-        <D.Row.Text
+        <D.RowText
           isShowLabels={isShowLabels}
-          styleText={S_ITEM_TEXT}
+          textStyle={S_ITEM_TEXT}
           caption="Value:"
           text={_value}
         />
@@ -224,9 +224,9 @@ const LoadItemDialog = memoIsShow(({
           onTestDate={_onTestDate}
         />
       </D.ShowHide>
-      <D.Row.Text
+      <D.RowText
         isShowLabels={isShowLabels}
-        styleText={S_ITEM_TEXT}
+        textStyle={S_ITEM_TEXT}
         caption="Source:"
         text={dataSource}
       />

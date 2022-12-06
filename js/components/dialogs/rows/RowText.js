@@ -9,7 +9,8 @@ var _DivEllipsis = _interopRequireDefault(require("../../zhn/DivEllipsis"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const S_ROOT_DIV = {
+const S_DIV = {
+  display: 'flex',
   margin: '5px 5px 5px 10px',
   lineHeight: 2,
   fontWeight: 'bold'
@@ -30,40 +31,38 @@ const S_ROOT_DIV = {
   display: 'none'
 };
 
-const Text = _ref => {
+const RowText = _ref => {
   let {
     isShowLabels = true,
     caption,
     text,
-    styleRoot,
-    styleCaption,
-    styleText
+    style,
+    captionStyle,
+    textStyle
   } = _ref;
   if (!text) return null;
 
-  const _styleCaption = isShowLabels ? void 0 : S_NONE;
+  const _captionStyle = isShowLabels ? void 0 : S_NONE;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: { ...S_ROOT_DIV,
-      ...styleRoot
+    style: { ...S_DIV,
+      ...style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: { ...S_LABEL,
-        ...styleCaption,
-        ..._styleCaption
+        ...captionStyle,
+        ..._captionStyle
       },
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
       style: { ...S_TEXT,
-        ...styleText
+        ...textStyle
       },
       text: text
     })]
   });
 };
 
-var _default = {
-  Text
-};
+var _default = RowText;
 exports.default = _default;
-//# sourceMappingURL=Row.js.map
+//# sourceMappingURL=RowText.js.map

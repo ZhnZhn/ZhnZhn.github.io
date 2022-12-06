@@ -65,8 +65,8 @@ const AlphaSectorDialog = (0, _memoIsShow.default)(_ref => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,
       buttons: _toolbarButtons
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Text, {
-      styleRoot: S_ROW_TEXT,
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowText, {
+      style: S_ROW_TEXT,
       caption: "AV:",
       text: "Sector Performances"
     })]

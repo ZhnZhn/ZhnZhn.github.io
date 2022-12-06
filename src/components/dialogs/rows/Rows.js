@@ -1,17 +1,15 @@
+import RowInputSelect from './RowInputSelect';
+import RowInputSearch from './RowInputSearch';
+import RowChart from './RowChart';
+import RowChartDate from './RowChartDate';
 
-
-import RowInputSelect from './RowInputSelect'
-import RowInputSearch from './RowInputSearch'
-import RowChart from './RowChart'
-import RowChartDate from './RowChartDate'
-
-import RowPattern from './RowPattern'
-import RowCheckBox from './RowCheckBox'
-import Row from './Row'
+import RowPattern from './RowPattern';
+import RowCheckBox from './RowCheckBox';
+import RowText from './RowText';
 import RowDate from './RowDate';
 
-import DatesFragment from './DatesFragment'
-import SelectOneTwo from './SelectOneTwo'
+import DatesFragment from './DatesFragment';
+import SelectOneTwo from './SelectOneTwo';
 
 const Rows = {
   RowInputSelect,
@@ -25,7 +23,7 @@ const Rows = {
   RowPattern,
   RowDate,
   RowCheckBox,
-  Row
+  RowText
 };
 
 export default Rows

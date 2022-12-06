@@ -51,8 +51,8 @@ const AlphaSectorDialog = memoIsShow(({
         isShow={isToolbar}
         buttons={_toolbarButtons}
       />
-      <D.Row.Text
-        styleRoot={S_ROW_TEXT}
+      <D.RowText
+        style={S_ROW_TEXT}
         caption="AV:"
         text="Sector Performances"
       />

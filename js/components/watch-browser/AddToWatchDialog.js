@@ -180,8 +180,8 @@ const AddToWatchDialog = (0, _memoIsShow.default)(props => {
     isShow: isShow,
     commandButtons: _commandButtons,
     onClose: _hClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Text, {
-      styleCaption: S_CAPTION,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowText, {
+      captionStyle: S_CAPTION,
       caption: "Item:",
       text: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {

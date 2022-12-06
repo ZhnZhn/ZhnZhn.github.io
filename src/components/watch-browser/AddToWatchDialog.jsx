@@ -196,8 +196,8 @@ const AddToWatchDialog = memoIsShow((
        commandButtons={_commandButtons}
        onClose={_hClose}
     >
-      <D.Row.Text
-        styleCaption={S_CAPTION}
+      <D.RowText
+        captionStyle={S_CAPTION}
         caption="Item:"
         text={caption}
       />

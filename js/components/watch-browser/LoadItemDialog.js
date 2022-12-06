@@ -183,16 +183,16 @@ const LoadItemDialog = (0, _memoIsShow.default)(_ref => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: true,
       buttons: _toolbarButtons
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Text, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowText, {
       isShowLabels: isShowLabels,
-      styleText: S_ITEM_TEXT,
+      textStyle: S_ITEM_TEXT,
       caption: "Item:",
       text: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isValue,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Text, {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowText, {
         isShowLabels: isShowLabels,
-        styleText: S_ITEM_TEXT,
+        textStyle: S_ITEM_TEXT,
         caption: "Value:",
         text: _value
       })
@@ -205,9 +205,9 @@ const LoadItemDialog = (0, _memoIsShow.default)(_ref => {
         initToDate: _initToDate,
         onTestDate: _onTestDate
       })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Row.Text, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowText, {
       isShowLabels: isShowLabels,
-      styleText: S_ITEM_TEXT,
+      textStyle: S_ITEM_TEXT,
       caption: "Source:",
       text: dataSource
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationMessages.default, {

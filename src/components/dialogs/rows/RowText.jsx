@@ -1,6 +1,7 @@
 import DivEllipsis from '../../zhn/DivEllipsis';
 
-const S_ROOT_DIV = {
+const S_DIV = {
+  display: 'flex',
   margin: '5px 5px 5px 10px',
   lineHeight: 2,
   fontWeight: 'bold'
@@ -14,31 +15,31 @@ const S_ROOT_DIV = {
   maxWidth: 200,
   height: 32,
   verticalAlign: 'middle',
-},
-S_NONE = { display: 'none' };
+}
+, S_NONE = { display: 'none' };
 
-const Text = ({
+const RowText = ({
   isShowLabels=true,
   caption,
   text,
-  styleRoot,
-  styleCaption,
-  styleText
+  style,
+  captionStyle,
+  textStyle
 }) => {
   if (!text) return null;
-  const _styleCaption = isShowLabels
+  const _captionStyle = isShowLabels
     ? void 0 : S_NONE;
   return (
-    <div style={{...S_ROOT_DIV, ...styleRoot}}>
-      <div style={{...S_LABEL, ...styleCaption, ..._styleCaption}}>
+    <div style={{...S_DIV, ...style}}>
+      <div style={{...S_LABEL, ...captionStyle, ..._captionStyle}}>
         {caption}
       </div>
       <DivEllipsis
-        style={{...S_TEXT, ...styleText}}
+        style={{...S_TEXT, ...textStyle}}
         text={text}
       />
     </div>
   );
 };
 
-export default { Text }
+export default RowText
