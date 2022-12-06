@@ -1,15 +1,20 @@
-import {
-  useState, useCallback, useMemo,
-  useEffect,
-  forwardRef, memo, useImperativeHandle
-} from 'react';
 //import PropTypes from "prop-types";
+import {
+  forwardRef,
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+  useImperativeHandle
+} from 'react';
 
+import memoEqual from '../hoc/memoEqual';
+
+import useProperty from '../hooks/useProperty';
 import useToggle from '../hooks/useToggle'
 import useBool from '../hooks/useBool'
 
 import useVm from './useVm'
-import useLoadChart from './useLoadChart'
 import useSetCheckBox from './useSetCheckBox'
 import useCaption from './useCaption'
 import useMiniConfigs from './useMiniConfigs'
@@ -56,13 +61,11 @@ const _arrangeConfigsBy = (
   }, {});
   return configIds.reduce((arrangedConfigs, id) => {
     arrangedConfigs.push(_hmConfigs[id])
-    return arrangedConfigs
+    return arrangedConfigs;
   }, []);
 };
 
-const _isNotShouldUpdate = () => true;
-
-const ChartItem = memo(forwardRef(({
+const ChartItem = memoEqual(forwardRef(({
   caption,
 
   config,
@@ -80,11 +83,11 @@ const ChartItem = memo(forwardRef(({
   crValueMoving,
   onToTop
 }, ref) => {
-  const [_refVm, compareTo] = useVm()
-  , [_hLoaded, getMainChart] = useLoadChart()
+  const [_refVm, compareTo] = useVm()  
+  , [_hLoaded, getMainChart] = useProperty()
   , [hasError, _hError] = useBool(false)
   , [isOpen, toggleOpen] = useToggle(true)
-  , [isShowLegend, toggleLegend] = useToggle(false)
+  , [isShowLegend, toggleLegend] = useToggle()
   , [isShowToolbar, toggleToolbar] = useToggle(true)
   , [onCheckItem, onUnCheckItem] = useSetCheckBox(getMainChart, chartType, onSetActive)
   , [loadMiniChart, unloadMiniChart] = useMiniHandles(getMainChart)
@@ -259,7 +262,7 @@ const ChartItem = memo(forwardRef(({
       </ShowHide>
     </div>
   );
-}), _isNotShouldUpdate);
+}));
 
 /*
 static propTypes = {
@@ -287,7 +290,7 @@ static propTypes = {
   onZoom: PropTypes.func,
   onCopy: PropTypes.func,
   onPasteTo: PropTypes.func,
-  onToTop: PropTypes.func  
+  onToTop: PropTypes.func
 }
 */
 
