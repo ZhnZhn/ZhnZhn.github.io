@@ -2,7 +2,6 @@
 import {
   forwardRef,
   useState,
-  useCallback,
   useMemo,
   useEffect,
   useImperativeHandle
@@ -11,8 +10,8 @@ import {
 import memoEqual from '../hoc/memoEqual';
 
 import useProperty from '../hooks/useProperty';
-import useToggle from '../hooks/useToggle'
-import useBool from '../hooks/useBool'
+import useToggle from '../hooks/useToggle';
+import useBool from '../hooks/useBool';
 
 import useVm from './useVm'
 import useSetCheckBox from './useSetCheckBox'
@@ -83,12 +82,15 @@ const ChartItem = memoEqual(forwardRef(({
   crValueMoving,
   onToTop
 }, ref) => {
-  const [_refVm, compareTo] = useVm()  
+  const [_refVm, compareTo] = useVm()
   , [_hLoaded, getMainChart] = useProperty()
-  , [hasError, _hError] = useBool(false)
+  , [hasError, _hError] = useBool()
+  , [isShowChart, showChart, hideChart] = useBool(true)
+  , isShowInfo = !isShowChart
   , [isOpen, toggleOpen] = useToggle(true)
   , [isShowLegend, toggleLegend] = useToggle()
   , [isShowToolbar, toggleToolbar] = useToggle(true)
+  , [itemCaption] = useState(() => _itemCaption || caption || '')
   , [onCheckItem, onUnCheckItem] = useSetCheckBox(getMainChart, chartType, onSetActive)
   , [loadMiniChart, unloadMiniChart] = useMiniHandles(getMainChart)
 
@@ -105,45 +107,41 @@ const ChartItem = memoEqual(forwardRef(({
       legend
     } = zhConfig || {}
   , [_dataSourceEl] = useDataSourceEl(dataSource)
-  , [itemCaption] = useState(() => _itemCaption || caption || '')
-
-  , _hToggleSeria = useCallback(item => {
-      getMainChart().zhToggleSeria(item.index)
-    }, [getMainChart])
-
-  , [isShowChart, showChart, hideChart] = useBool(true)
-  , isShowInfo = !isShowChart
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _hClickInfo = useCallback(() => {
-     hideChart()
-     toggleLegend(false)
-  }, [])
-  // hideChart, toggleLegend
-  /*eslint-enable react-hooks/exhaustive-deps */
-
   , [mfiConfigs, _addMfi, _removeMfi] = useMiniConfigs()
   , [miniTitles, _hMiniChart] = useMiniTitles()
   , isShowAbs = (miniTitles.length === 0)
+
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _crValueMoving = useCallback((prev, dateTo) =>
-       crValueMoving(getMainChart(), prev, dateTo)
-    , [])
+  , [
+    _hToggleSeria,
+    _hClickInfo,
+    _crValueMoving,
+    _moreModel
+  ] = useMemo(() => [
+    item => { getMainChart().zhToggleSeria(item.index) },
+    () => {
+      hideChart()
+      toggleLegend(false)
+    },
+    (prev, dateTo) => crValueMoving(getMainChart(), prev, dateTo),
+    () => crModelMore(
+      toggleToolbar,
+      onToTop,
+      hideCaption
+    )
+  ], [])
+  // getMainChart
+  // hideChart, toggleLegend
   // getMainChart, crValueMoving
+  // toggleToolbar, onToTop, hideCaption
   /*eslint-enable react-hooks/exhaustive-deps */
+
   , [isCaption, showCaption, hideCaption] = useCaption(getMainChart, toggleToolbar)
   , _zhMiniConfigs = useMemo(() => _arrangeConfigsBy(
        zhMiniConfigs,
        miniTitles,
        MINI_CONFIGS_ID_PN
     ), [zhMiniConfigs, miniTitles])
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _moreModel = useMemo(() => crModelMore(
-      toggleToolbar,
-      onToTop,
-      hideCaption
-    ), [])
-  // toggleToolbar, onToTop, hideCaption
-  /*eslint-enable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {

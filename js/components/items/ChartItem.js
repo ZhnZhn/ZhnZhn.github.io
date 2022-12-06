@@ -7,13 +7,15 @@ exports.default = void 0;
 
 var _react = require("react");
 
+var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
+
+var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 
 var _useVm = _interopRequireDefault(require("./useVm"));
-
-var _useLoadChart = _interopRequireDefault(require("./useLoadChart"));
 
 var _useSetCheckBox = _interopRequireDefault(require("./useSetCheckBox"));
 
@@ -80,9 +82,7 @@ const _arrangeConfigsBy = (configs, configIds, idPropName) => {
   }, []);
 };
 
-const _isNotShouldUpdate = () => true;
-
-const ChartItem = /*#__PURE__*/(0, _react.memo)( /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+const ChartItem = (0, _memoEqual.default)( /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
   let {
     caption,
     config,
@@ -99,11 +99,14 @@ const ChartItem = /*#__PURE__*/(0, _react.memo)( /*#__PURE__*/(0, _react.forward
     onToTop
   } = _ref;
   const [_refVm, compareTo] = (0, _useVm.default)(),
-        [_hLoaded, getMainChart] = (0, _useLoadChart.default)(),
-        [hasError, _hError] = (0, _useBool.default)(false),
+        [_hLoaded, getMainChart] = (0, _useProperty.default)(),
+        [hasError, _hError] = (0, _useBool.default)(),
+        [isShowChart, showChart, hideChart] = (0, _useBool.default)(true),
+        isShowInfo = !isShowChart,
         [isOpen, toggleOpen] = (0, _useToggle.default)(true),
-        [isShowLegend, toggleLegend] = (0, _useToggle.default)(false),
+        [isShowLegend, toggleLegend] = (0, _useToggle.default)(),
         [isShowToolbar, toggleToolbar] = (0, _useToggle.default)(true),
+        [itemCaption] = (0, _react.useState)(() => _itemCaption || caption || ''),
         [onCheckItem, onUnCheckItem] = (0, _useSetCheckBox.default)(getMainChart, chartType, onSetActive),
         [loadMiniChart, unloadMiniChart] = (0, _useMiniHandles.default)(getMainChart);
 
@@ -120,38 +123,25 @@ const ChartItem = /*#__PURE__*/(0, _react.memo)( /*#__PURE__*/(0, _react.forward
     legend
   } = zhConfig || {},
         [_dataSourceEl] = (0, _useDataSourceEl.default)(dataSource),
-        [itemCaption] = (0, _react.useState)(() => _itemCaption || caption || ''),
-        _hToggleSeria = (0, _react.useCallback)(item => {
-    getMainChart().zhToggleSeria(item.index);
-  }, [getMainChart]),
-        [isShowChart, showChart, hideChart] = (0, _useBool.default)(true),
-        isShowInfo = !isShowChart
-  /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        _hClickInfo = (0, _react.useCallback)(() => {
-    hideChart();
-    toggleLegend(false);
-  }, []) // hideChart, toggleLegend
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-  ,
         [mfiConfigs, _addMfi, _removeMfi] = (0, _useMiniConfigs.default)(),
         [miniTitles, _hMiniChart] = (0, _useMiniTitles.default)(),
         isShowAbs = miniTitles.length === 0
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _crValueMoving = (0, _react.useCallback)((prev, dateTo) => crValueMoving(getMainChart(), prev, dateTo), []) // getMainChart, crValueMoving
+        [_hToggleSeria, _hClickInfo, _crValueMoving, _moreModel] = (0, _react.useMemo)(() => [item => {
+    getMainChart().zhToggleSeria(item.index);
+  }, () => {
+    hideChart();
+    toggleLegend(false);
+  }, (prev, dateTo) => crValueMoving(getMainChart(), prev, dateTo), () => (0, _ChartItemMore.default)(toggleToolbar, onToTop, hideCaption)], []) // getMainChart
+  // hideChart, toggleLegend
+  // getMainChart, crValueMoving
+  // toggleToolbar, onToTop, hideCaption
 
   /*eslint-enable react-hooks/exhaustive-deps */
   ,
         [isCaption, showCaption, hideCaption] = (0, _useCaption.default)(getMainChart, toggleToolbar),
-        _zhMiniConfigs = (0, _react.useMemo)(() => _arrangeConfigsBy(zhMiniConfigs, miniTitles, MINI_CONFIGS_ID_PN), [zhMiniConfigs, miniTitles])
-  /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        _moreModel = (0, _react.useMemo)(() => (0, _ChartItemMore.default)(toggleToolbar, onToTop, hideCaption), []); // toggleToolbar, onToTop, hideCaption
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-
+        _zhMiniConfigs = (0, _react.useMemo)(() => _arrangeConfigsBy(zhMiniConfigs, miniTitles, MINI_CONFIGS_ID_PN), [zhMiniConfigs, miniTitles]);
   /*eslint-disable react-hooks/exhaustive-deps */
 
 
@@ -261,7 +251,7 @@ const ChartItem = /*#__PURE__*/(0, _react.memo)( /*#__PURE__*/(0, _react.forward
       })]
     })]
   });
-}), _isNotShouldUpdate);
+}));
 /*
 static propTypes = {
   caption: PropTypes.string,
@@ -288,7 +278,7 @@ static propTypes = {
   onZoom: PropTypes.func,
   onCopy: PropTypes.func,
   onPasteTo: PropTypes.func,
-  onToTop: PropTypes.func  
+  onToTop: PropTypes.func
 }
 */
 
