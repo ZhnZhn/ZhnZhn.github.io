@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.MapChartItem = void 0;
 
 var _uiApi = require("../uiApi");
 
@@ -187,6 +187,5 @@ MapChartItem.propTypes = {
 */
 
 
-var _default = MapChartItem;
-exports.default = _default;
+exports.MapChartItem = MapChartItem;
 //# sourceMappingURL=MapChartItem.js.map

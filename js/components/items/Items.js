@@ -1,29 +1,29 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports.default = void 0;
+exports.TwListItem = exports.TableItem = exports.MapChartItem = exports.InfoItem = exports.ChartItem = exports.AlphaPerfItem = void 0;
 
-var _ChartItem = _interopRequireDefault(require("./ChartItem"));
+var _ChartItem = require("./ChartItem");
 
-var _MapChartItem = _interopRequireDefault(require("./MapChartItem"));
+exports.ChartItem = _ChartItem.ChartItem;
 
-var _TableItem = _interopRequireDefault(require("./TableItem"));
+var _MapChartItem = require("./MapChartItem");
 
-var _AlphaPerfItem = _interopRequireDefault(require("./AlphaPerfItem"));
+exports.MapChartItem = _MapChartItem.MapChartItem;
 
-var _InfoItem = _interopRequireDefault(require("./InfoItem"));
+var _TableItem = require("./TableItem");
 
-var _TwList = _interopRequireDefault(require("./TwList"));
+exports.TableItem = _TableItem.TableItem;
 
-var _default = {
-  AreaChart: _ChartItem.default,
-  MapChart: _MapChartItem.default,
-  Table: _TableItem.default,
-  AlphaPerf: _AlphaPerfItem.default,
-  InfoItem: _InfoItem.default,
-  TwList: _TwList.default
-};
-exports.default = _default;
+var _AlphaPerfItem = require("./AlphaPerfItem");
+
+exports.AlphaPerfItem = _AlphaPerfItem.AlphaPerfItem;
+
+var _InfoItem = require("./InfoItem");
+
+exports.InfoItem = _InfoItem.InfoItem;
+
+var _TwListItem = require("./TwListItem");
+
+exports.TwListItem = _TwListItem.TwListItem;
 //# sourceMappingURL=Items.js.map

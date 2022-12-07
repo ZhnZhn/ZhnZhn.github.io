@@ -1,11 +1,11 @@
-import TableItem from './TableItem';
+import { TableItem } from './TableItem';
 
 const S_TH_MORE = {
   paddingLeft: 12,
   textAlign: 'left'
 };
 
-const AlphaPerfItem = ({
+export const AlphaPerfItem = ({
   config,
   onCloseItem
 }) => (
@@ -21,6 +21,4 @@ const AlphaPerfItem = ({
       onCloseItem={onCloseItem}
     />
   </>
-);
-
-export default AlphaPerfItem
+)

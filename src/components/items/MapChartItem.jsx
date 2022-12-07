@@ -57,7 +57,7 @@ const BtTabInfo = ({
 
 const _crMapId = caption => `map_${caption}`;
 
-const MapChartItem = ({
+export const MapChartItem = ({
   caption,
   config,
   onCloseItem
@@ -144,7 +144,7 @@ const MapChartItem = ({
        </A.ShowHide>
      </div>
    );
-};
+}
 
 /*
 MapChartItem.propTypes = {
@@ -160,5 +160,3 @@ MapChartItem.propTypes = {
   onCloseItem: PropTypes.func
 }
 */
-
-export default MapChartItem

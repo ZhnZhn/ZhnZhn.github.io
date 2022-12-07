@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.crItem = void 0;
 
@@ -13,7 +11,7 @@ var _ChartActions = require("../../flux/actions/ChartActions");
 
 var _CompItemType = require("../../constants/CompItemType");
 
-var _Items = _interopRequireDefault(require("../items/Items"));
+var _Items = require("../items/Items");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -49,7 +47,7 @@ const _crAreaChart = _ref => {
 
   const [id, key] = _getIdKey(config, index);
 
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items.default.AreaChart, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items.ChartItem, {
     chartType: chartType,
     caption: id,
     config: config,
@@ -74,7 +72,7 @@ const _crMapChart = _ref2 => {
 
   const [id, key] = _getIdKey(config, index);
 
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items.default.MapChart, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items.MapChartItem, {
     chartType: chartType,
     caption: id,
     config: config,
@@ -96,10 +94,10 @@ const _fItem = Comp => _ref3 => {
 const _rCrItem = {
   DF: _crAreaChart,
   [_CompItemType.CIT_EUROSTAT_MAP]: _crMapChart,
-  [_CompItemType.CIT_TABLE]: _fItem(_Items.default.Table),
-  [_CompItemType.CIT_ALPHA_PERF]: _fItem(_Items.default.AlphaPerf),
-  [_CompItemType.CIT_INFO_ITEM]: _fItem(_Items.default.InfoItem),
-  [_CompItemType.CIT_TW_LIST]: _fItem(_Items.default.TwList)
+  [_CompItemType.CIT_TABLE]: _fItem(_Items.TableItem),
+  [_CompItemType.CIT_ALPHA_PERF]: _fItem(_Items.AlphaPerfItem),
+  [_CompItemType.CIT_INFO_ITEM]: _fItem(_Items.InfoItem),
+  [_CompItemType.CIT_TW_LIST]: _fItem(_Items.TwListItem)
 };
 /* { config, index, chartType, props, store } */
 

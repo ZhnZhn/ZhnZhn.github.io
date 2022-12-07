@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.TwListItem = void 0;
 
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
@@ -98,7 +98,7 @@ const _crTwItem = item => /*#__PURE__*/(0, _jsxRuntime.jsx)(Twit, {
   item: item
 }, item.id);
 
-const TwList = _ref2 => {
+const TwListItem = _ref2 => {
   let {
     config,
     onCloseItem
@@ -126,6 +126,5 @@ const TwList = _ref2 => {
   });
 };
 
-var _default = TwList;
-exports.default = _default;
-//# sourceMappingURL=TwList.js.map
+exports.TwListItem = TwListItem;
+//# sourceMappingURL=TwListItem.js.map

@@ -18,7 +18,7 @@ const S_ROOT = { paddingBottom: 8 }
   fontSize: '11px'
 };
 
-const TableItem = ({
+export const TableItem = ({
   thMoreStyle,
   config,
   onCloseItem
@@ -64,6 +64,4 @@ const TableItem = ({
       </ShowHide>
     </div>
   );
-};
-
-export default TableItem
+}

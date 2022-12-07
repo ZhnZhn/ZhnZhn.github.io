@@ -64,7 +64,7 @@ const _arrangeConfigsBy = (
   }, []);
 };
 
-const ChartItem = memoEqual(forwardRef(({
+export const ChartItem = memoEqual(forwardRef(({
   caption,
 
   config,
@@ -261,7 +261,7 @@ const ChartItem = memoEqual(forwardRef(({
       </ShowHide>
     </div>
   );
-}));
+}))
 
 /*
 static propTypes = {
@@ -292,5 +292,3 @@ static propTypes = {
   onToTop: PropTypes.func
 }
 */
-
-export default ChartItem

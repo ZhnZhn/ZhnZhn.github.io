@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.InfoItem = void 0;
 
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
@@ -105,6 +105,5 @@ const InfoItem = _ref3 => {
   });
 };
 
-var _default = InfoItem;
-exports.default = _default;
+exports.InfoItem = InfoItem;
 //# sourceMappingURL=InfoItem.js.map

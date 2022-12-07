@@ -19,7 +19,14 @@ import {
   CIT_TW_LIST
 } from '../../constants/CompItemType';
 
-import Item from '../items/Items';
+import {
+  ChartItem,
+  MapChartItem,
+  TableItem,
+  AlphaPerfItem,
+  InfoItem,
+  TwListItem
+} from '../items/Items';
 
 const _getIdKey = (
   config,
@@ -55,7 +62,7 @@ const _crAreaChart = ({
 }) => {
   const [id, key] = _getIdKey(config, index);
   return (
-    <Item.AreaChart
+    <ChartItem
        key={key}
        chartType={chartType}
        caption={id}
@@ -80,7 +87,7 @@ const _crMapChart = ({
 }) => {
   const [id, key] = _getIdKey(config, index);
   return(
-    <Item.MapChart
+    <MapChartItem
        key={key}
        chartType={chartType}
        caption={id}
@@ -90,7 +97,10 @@ const _crMapChart = ({
   );
 };
 
-const _fItem = (Comp) => ({ config={}, props }) => (
+const _fItem = (Comp) => ({
+  config={},
+  props
+}) => (
   <Comp
     key={config.id}
     config={config}
@@ -101,10 +111,10 @@ const _fItem = (Comp) => ({ config={}, props }) => (
 const _rCrItem = {
   DF: _crAreaChart,
   [CIT_EUROSTAT_MAP]: _crMapChart,
-  [CIT_TABLE]: _fItem(Item.Table),
-  [CIT_ALPHA_PERF]: _fItem(Item.AlphaPerf),
-  [CIT_INFO_ITEM]: _fItem(Item.InfoItem),
-  [CIT_TW_LIST]: _fItem(Item.TwList)
+  [CIT_TABLE]: _fItem(TableItem),
+  [CIT_ALPHA_PERF]: _fItem(AlphaPerfItem),
+  [CIT_INFO_ITEM]: _fItem(InfoItem),
+  [CIT_TW_LIST]: _fItem(TwListItem)
 };
 
 /* { config, index, chartType, props, store } */

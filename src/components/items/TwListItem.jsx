@@ -64,7 +64,7 @@ const Twit = ({ item }) => {
 
 const _crTwItem = item => <Twit key={item.id} item={item} />;
 
-const TwList = ({
+export const TwListItem = ({
   config,
   onCloseItem
 }) => {
@@ -89,6 +89,4 @@ const TwList = ({
       </ShowHide>
     </div>
   );
-};
-
-export default TwList
+}

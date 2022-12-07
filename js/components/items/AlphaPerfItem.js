@@ -1,11 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports.default = void 0;
+exports.AlphaPerfItem = void 0;
 
-var _TableItem = _interopRequireDefault(require("./TableItem"));
+var _TableItem = require("./TableItem");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
@@ -20,11 +18,11 @@ const AlphaPerfItem = _ref => {
     onCloseItem
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_TableItem.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_TableItem.TableItem, {
       thMoreStyle: S_TH_MORE,
       config: config.m,
       onCloseItem: onCloseItem
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_TableItem.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_TableItem.TableItem, {
       thMoreStyle: S_TH_MORE,
       config: config.y,
       onCloseItem: onCloseItem
@@ -32,6 +30,5 @@ const AlphaPerfItem = _ref => {
   });
 };
 
-var _default = AlphaPerfItem;
-exports.default = _default;
+exports.AlphaPerfItem = AlphaPerfItem;
 //# sourceMappingURL=AlphaPerfItem.js.map

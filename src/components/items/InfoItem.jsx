@@ -49,7 +49,7 @@ const _crStackItem = (
     : <Descr key={_key} {...item} />
 };
 
-const InfoItem = ({
+export const InfoItem = ({
   config,
   onCloseItem
 }) => {
@@ -76,6 +76,4 @@ const InfoItem = ({
       </A.ShowHide>
     </div>
   );
-};
-
-export default InfoItem
+}

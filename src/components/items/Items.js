@@ -1,15 +1,6 @@
-import AreaChart from './ChartItem';
-import MapChart from './MapChartItem';
-import Table from './TableItem';
-import AlphaPerf from './AlphaPerfItem';
-import InfoItem from './InfoItem'
-import TwList from './TwList'
-
-export default {
-  AreaChart,
-  MapChart,
-  Table,
-  AlphaPerf,  
-  InfoItem,
-  TwList
-}
+export { ChartItem } from './ChartItem';
+export { MapChartItem } from './MapChartItem';
+export { TableItem } from './TableItem';
+export { AlphaPerfItem } from './AlphaPerfItem';
+export { InfoItem } from './InfoItem';
+export { TwListItem } from './TwListItem';
