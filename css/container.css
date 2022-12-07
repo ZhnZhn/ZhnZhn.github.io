@@ -216,14 +216,14 @@
 
 @media screen and (min-height: 570px) {
   .item-container,
-.browser-container,
-.about-container {
+  .browser-container,
+  .about-container {
     height: calc(100vh - 87px);
   }
 }
 @media screen and (max-width: 600px) {
   .browser-container,
-.item-container {
+  .item-container {
     margin-left: 8px;
   }
 }
