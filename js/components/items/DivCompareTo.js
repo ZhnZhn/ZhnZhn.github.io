@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _SpanLabel = _interopRequireDefault(require("../zhn-span/SpanLabel"));
 
@@ -30,7 +30,7 @@ const S_ROW_INPUT = {
   color: '#f44336',
   fontWeight: 'bold'
 };
-const DivCompareTo = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+const DivCompareTo = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     initialValue,
     msgErr,

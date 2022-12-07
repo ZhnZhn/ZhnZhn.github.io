@@ -60,7 +60,6 @@ const CL_ITEM_HEADER = 'item-header',
 },
       S_CAPTION_WIDTH = {
   width: void 0,
-  //maxWidth: 250,
   maxWidth: 'calc(100% - 60px)'
 },
       S_CLOSE = {
@@ -87,8 +86,7 @@ const MenuMore = _ref2 => {
     onToggle
   } = _ref2;
   const [refBtSvg, toggleFocus] = (0, _useFnFocus.default)(onToggle);
-  if (!moreModel) return null;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+  return moreModel ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SvgMore, {
       ref: refBtSvg,
       style: S_BT_MORE,
@@ -102,7 +100,7 @@ const MenuMore = _ref2 => {
       model: moreModel,
       onClose: toggleFocus
     })]
-  });
+  }) : null;
 };
 
 const Header = _ref3 => {

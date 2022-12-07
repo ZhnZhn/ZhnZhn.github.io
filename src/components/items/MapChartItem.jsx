@@ -1,5 +1,9 @@
-import { useState, useEffect } from 'react';
 //import PropTypes from "prop-types";
+import {
+  useState,
+  useEffect
+} from '../uiApi';
+
 import useToggle from '../hooks/useToggle';
 import useBool from '../hooks/useBool';
 
@@ -39,18 +43,17 @@ const ErrMsg = () => (
   </span>
 );
 
-
-const BtTabInfo = ({ isShow, onClick }) => {
-  if (!isShow) { return null; }
-  return (
-    <div style={S_TAB_DIV}>
-       <A.ButtonTab
-          caption="Info"
-          onClick={onClick}
-       />
-    </div>
-  );
-};
+const BtTabInfo = ({
+  isShow,
+  onClick
+}) => isShow ? (
+  <div style={S_TAB_DIV}>
+     <A.ButtonTab
+        caption="Info"
+        onClick={onClick}
+     />
+  </div>
+) : null;
 
 const _crMapId = caption => `map_${caption}`;
 
@@ -59,13 +62,34 @@ const MapChartItem = ({
   config,
   onCloseItem
  }) => {
-  const [state, setState] = useState({ isLoading: true, time: '' })
-  , { isLoading, time, isErr } = state
-  , [isOpen, toggleIsOpen] = useToggle(true)
-  , [isShowInfo, showInfo, hideInfo] = useBool();
+  const [
+    state,
+    setState
+  ] = useState({
+    isLoading: true,
+    time: ''
+  })
+  , {
+    isLoading,
+    time,
+    isErr
+  } = state
+  , [
+    isOpen,
+    toggleIsOpen
+  ] = useToggle(true)
+  , [
+    isShowInfo,
+    showInfo,
+    hideInfo
+  ] = useBool();
 
   useEffect(()=>{
-    const { json:jsonCube, zhMapSlice, zhDialog } = config
+    const {
+      json:jsonCube,
+      zhMapSlice,
+      zhDialog
+    } = config
     , { time } = zhDialog || {};
 
    /*eslint-disable react-hooks/exhaustive-deps */

@@ -5,9 +5,8 @@ import Link from '../native-links/Link';
 import ItemHeader from './ItemHeader';
 import FlexTokens from './FlexTokens';
 
-const _isArr = Array.isArray;
-
-const S_ROOT = { marginBottom: 10 }
+const _isArr = Array.isArray
+, S_ROOT = { marginBottom: 10 }
 , S_HEADER = { height: 33 }
 , S_CAPTION = { width: 'auto' }
 , S_INFO = { padding: '8px 8px 0 8px' }
@@ -16,7 +15,10 @@ const S_ROOT = { marginBottom: 10 }
   lineHeight: 1.8
 };
 
-const _crLinkItem = ({href, caption}) => (
+const _crLinkItem = ({
+  href,
+  caption
+}) => (
  <Link
     caption={`${caption}: ${href}`}
     href={href}
@@ -28,19 +30,19 @@ const Descr = ({
   caption="Decription",
   descr,
   links
-}) => {
-  if (!descr) return null;
-  return (
-    <A.OpenClose caption={caption}>
-      <div style={{...S_DESCR, ...style}}>
-        {descr}
-      </div>
-      <A.ItemList items={links} crItem={_crLinkItem} />
-    </A.OpenClose>
-  );
-};
+}) => descr ? (
+  <A.OpenClose caption={caption}>
+    <div style={{...S_DESCR, ...style}}>
+      {descr}
+    </div>
+    <A.ItemList items={links} crItem={_crLinkItem} />
+  </A.OpenClose>
+) : null;
 
-const _crStackItem = (item, index) => {
+const _crStackItem = (
+  item,
+  index
+) => {
   const _key = item.caption || index;
   return _isArr(item.tokens)
     ? <FlexTokens key={_key} {...item} />
@@ -51,8 +53,14 @@ const InfoItem = ({
   config,
   onCloseItem
 }) => {
-  const [isOpen, toggleIsOpen] = useToggle(true)
-  , { caption, items } = config || {};
+  const [
+    isOpen,
+    toggleIsOpen
+  ] = useToggle(true)
+  , {
+    caption,
+    items
+  } = config || {};
   return (
     <div style={S_ROOT}>
       <ItemHeader

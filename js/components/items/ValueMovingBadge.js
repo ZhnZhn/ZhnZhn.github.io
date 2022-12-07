@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _DirectionType = require("../../constants/DirectionType");
 
@@ -67,20 +67,20 @@ const DF_VALUE_MOVING = {
   direction: _DirectionType.DT_EQUAL,
   date: ''
 };
-const ValueMovingBadge = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     isAdminMode,
     initialVm = DF_VALUE_MOVING,
     crValueMoving
   } = _ref;
 
-  const [vm, setVm] = (0, _react.useState)(initialVm),
-        [isShowModal, setIsShowModal] = (0, _react.useState)(false),
-        _toggleModal = (0, _react.useCallback)(() => setIsShowModal(is => !is), []),
-        _closeModal = (0, _react.useCallback)(() => setIsShowModal(false), [])
+  const [vm, setVm] = (0, _uiApi.useState)(initialVm),
+        [isShowModal, setIsShowModal] = (0, _uiApi.useState)(false),
+        _toggleModal = (0, _uiApi.useCallback)(() => setIsShowModal(is => !is), []),
+        _closeModal = (0, _uiApi.useCallback)(() => setIsShowModal(false), [])
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _updateDateTo = (0, _react.useCallback)(dateTo => {
+        _updateDateTo = (0, _uiApi.useCallback)(dateTo => {
     const _vm = crValueMoving(vm, dateTo);
 
     if (_vm) {
@@ -94,7 +94,7 @@ const ValueMovingBadge = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
   /*eslint-enable react-hooks/exhaustive-deps */
 
 
-  (0, _react.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(ref, () => ({
     _updateDateTo
   }), [_updateDateTo]);
 

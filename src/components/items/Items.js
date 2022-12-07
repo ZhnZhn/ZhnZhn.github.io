@@ -6,8 +6,10 @@ import InfoItem from './InfoItem'
 import TwList from './TwList'
 
 export default {
-  AreaChart, MapChart,
-  Table, AlphaPerf,  
+  AreaChart,
+  MapChart,
+  Table,
+  AlphaPerf,  
   InfoItem,
   TwList
 }

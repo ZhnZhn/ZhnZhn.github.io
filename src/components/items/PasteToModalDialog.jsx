@@ -1,12 +1,15 @@
-import { useRef, useCallback, useMemo } from 'react'
-import memoIsShow from '../hoc/memoIsShow'
-import useProperty from '../hooks/useProperty'
+import {
+  useRef,
+  useCallback,
+  useMemo
+} from '../uiApi';
+import memoIsShow from '../hoc/memoIsShow';
+import useProperty from '../hooks/useProperty';
 
-import ModalDialog from '../zhn-moleculs/ModalDialog'
-import FlatButton from '../zhn-m/FlatButton'
+import ModalDialog from '../zhn-moleculs/ModalDialog';
+import FlatButton from '../zhn-m/FlatButton';
 
-import SeriesPane from './SeriesPane'
-
+import SeriesPane from './SeriesPane';
 const S_MODAL = {
   position: 'static',
   width: 365,
@@ -20,8 +23,14 @@ const S_MODAL = {
 
 const DF_DATA = {};
 
-const _usePasteTo = (data, onClose) => {
-  const [setToChart, getToChart] = useProperty();
+const _usePasteTo = (
+  data,
+  onClose
+) => {
+  const [
+    setToChart,
+    getToChart
+  ] = useProperty();
   setToChart(data.toChart)
 
   const _refCompSeries = useRef()
@@ -47,7 +56,11 @@ const _usePasteTo = (data, onClose) => {
       onClick={_hPasteTo}
     />), [_hPasteTo]);
 
-  return [getToChart(), _refCompSeries, _commandButtons];
+  return [
+    getToChart(),
+    _refCompSeries,
+    _commandButtons
+  ];
 };
 
 const PasteToModalDialog = memoIsShow(({
@@ -56,7 +69,9 @@ const PasteToModalDialog = memoIsShow(({
   onClose
 }) => {
   const [
-    toChart, refCompSeries, commandButtons
+    toChart,
+    refCompSeries,
+    commandButtons
   ] = _usePasteTo(data, onClose)
   , { fromChart } = data;
 

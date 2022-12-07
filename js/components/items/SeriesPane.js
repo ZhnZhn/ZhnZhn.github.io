@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 
@@ -99,28 +99,26 @@ const PasteToSeriaList = _ref2 => {
   });
 };
 
-const _getRefValue = ref => ref.current;
-
-const SeriesPane = /*#__PURE__*/(0, _react.forwardRef)((_ref3, ref) => {
+const SeriesPane = (0, _uiApi.forwardRef)((_ref3, ref) => {
   let {
     style,
     toChart,
     fromChart
   } = _ref3;
 
-  const _refSeries = (0, _react.useRef)([]),
-        _regSeriaRow = (0, _react.useCallback)((ref, compIndex) => {
+  const _refSeries = (0, _uiApi.useRef)([]),
+        _regSeriaRow = (0, _uiApi.useCallback)((ref, compIndex) => {
     _refSeries.current[compIndex] = ref;
   }, []),
-        _unregSeriaRow = (0, _react.useCallback)(compIndex => {
+        _unregSeriaRow = (0, _uiApi.useCallback)(compIndex => {
     _refSeries.current[compIndex] = null;
   }, []);
 
-  (0, _react.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValues: () => {
       const [userMin, userMax] = _getUserMinMax(fromChart);
 
-      return _getRefValue(_refSeries).filter(refRow => refRow !== null).map(refRow => refRow.current.getValue()).filter(config => config.isChecked).map(config => {
+      return (0, _uiApi.getRefValue)(_refSeries).filter(refRow => refRow !== null).map(refRow => refRow.current.getValue()).filter(config => config.isChecked).map(config => {
         config.userMin = userMin;
         config.userMax = userMax;
         return config;

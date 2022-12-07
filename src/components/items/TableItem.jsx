@@ -23,12 +23,18 @@ const TableItem = ({
   config,
   onCloseItem
 }) => {
-  const [isOpen, toggleIsOpen] = useToggle(true)
+  const [
+    isOpen,
+    toggleIsOpen
+  ] = useToggle(true)
   , {
-      id, title,
-      headers, rows,
+      id,
+      title,
+      headers,
+      rows,
       tableFn,
-      dataSource, dsStyle
+      dataSource,
+      dsStyle
     } = config
   , _gridId = `tb_${id}`;
   return (

@@ -30,10 +30,13 @@ const TH_ID = 'ELEMENT'
 
 function ItemHeader({
   isOpen,
-  style, captionStyle,
-  caption='', title,
+  style,
+  captionStyle,
+  caption='',
+  title,
   children,
-  onClick, onClose
+  onClick,
+  onClose
 }){
   const TS = useTheme(TH_ID)
   , _title = _crTitle(title, caption)

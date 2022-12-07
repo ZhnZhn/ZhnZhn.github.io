@@ -2,21 +2,22 @@ import {
   useRef,
   useState,
   useEffect,
-  useImperativeHandle
-} from 'react'
+  useImperativeHandle,
+  getRefValue
+} from '../uiApi';
 
-import useProperty from '../hooks/useProperty'
-import useRefBool from '../hooks/useRefBool'
-import useBool from '../hooks/useBool'
-import useTheme from '../hooks/useTheme'
+import useProperty from '../hooks/useProperty';
+import useRefBool from '../hooks/useRefBool';
+import useBool from '../hooks/useBool';
+import useTheme from '../hooks/useTheme';
 
-import Model from '../../constants/Model'
+import Model from '../../constants/Model';
 
-import SvgCheckBox from '../zhn/SvgCheckBox'
-import CellColor from '../zhn-moleculs/CellColor'
-import ModalPalette from '../zhn-moleculs/ModalPalette'
-import InputSelect from '../zhn-select/InputSelect'
-import DivEllipsis from '../zhn/DivEllipsis'
+import SvgCheckBox from '../zhn/SvgCheckBox';
+import CellColor from '../zhn-moleculs/CellColor';
+import ModalPalette from '../zhn-moleculs/ModalPalette';
+import InputSelect from '../zhn-select/InputSelect';
+import DivEllipsis from '../zhn/DivEllipsis';
 
 const TH_ID = 'ROW_CHECKBOX'
 , CHECKED_COLOR = '#1b2836'
@@ -42,17 +43,7 @@ const TH_ID = 'ROW_CHECKBOX'
    verticalAlign: 'middle'
 }, S_SELECT_OPTIONS = { minHeight: 100 }
 
-, FN_NOOP = () => {}
-, _getRefValue = ref => ref.current;
-
-/*
-<span
-   className={CL_ELL}
-   style={S_TITLE}
->
-  {name}
-</span>
-*/
+, FN_NOOP = () => {};
 
 const SeriaRow = (props) => {
   const {
@@ -76,7 +67,7 @@ const SeriaRow = (props) => {
       const { userOptions } = seria
       , { data, name } = userOptions || {};
       return {
-        isChecked: _getRefValue(_refIsChecked),
+        isChecked: getRefValue(_refIsChecked),
         color: _color,
         yIndex: (getYAxis() || {}).value,
         data, name

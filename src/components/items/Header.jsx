@@ -44,7 +44,6 @@ S_CAPTION = {
 }, S_CAPTION_CLOSE = { color: 'gray' }
 , S_CAPTION_WIDTH = {
   width: void 0,
-  //maxWidth: 250,
   maxWidth: 'calc(100% - 60px)'
 }, S_CLOSE = {
   position: 'absolute',
@@ -69,8 +68,7 @@ const MenuMore = ({
     toggleFocus
   ] = useFnFocus(onToggle);
 
-  if (!moreModel) return null;
-  return (<>
+  return moreModel ? (<>
       <SvgMore
         ref={refBtSvg}
         style={S_BT_MORE}
@@ -85,7 +83,7 @@ const MenuMore = ({
         model={moreModel}
         onClose={toggleFocus}
       />
-    </>);
+    </>) : null;
   }
 
 const Header = ({

@@ -29,13 +29,19 @@ const CL = 'twit'
 };
 
 const Twit = ({ item }) => {
-  const [isShow, toggleIsShow] = useToggle(true);
+  const [
+    isShow,
+    toggleIsShow
+  ] = useToggle(true);
+
   if (!isShow) { return null; }
   const {
-    user, date,
+    user,
+    date,
     link,
     text,
-    retweet, like
+    retweet,
+    like
   } = item
   , _link = toLink(link);
   return (
@@ -58,9 +64,18 @@ const Twit = ({ item }) => {
 
 const _crTwItem = item => <Twit key={item.id} item={item} />;
 
-const TwList = ({ config, onCloseItem }) => {
-  const { title, items } = config
-  , [isOpen, toggleIsOpen] = useToggle(true);
+const TwList = ({
+  config,
+  onCloseItem
+}) => {
+  const {
+    title,
+    items
+  } = config
+  , [
+    isOpen,
+    toggleIsOpen
+  ] = useToggle(true);
   return (
     <div style={S_TW_LIST}>
       <ItemHeader

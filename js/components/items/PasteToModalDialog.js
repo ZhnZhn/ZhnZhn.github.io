@@ -5,7 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
+
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
@@ -30,18 +32,14 @@ const S_MODAL = {
 };
 const DF_DATA = {};
 
-const _areEqual = (prevProps, {
-  isShow
-}) => prevProps.isShow === isShow;
-
 const _usePasteTo = (data, onClose) => {
   const [setToChart, getToChart] = (0, _useProperty.default)();
   setToChart(data.toChart);
 
-  const _refCompSeries = (0, _react.useRef)()
+  const _refCompSeries = (0, _uiApi.useRef)()
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        _hPasteTo = (0, _react.useCallback)(() => {
+        _hPasteTo = (0, _uiApi.useCallback)(() => {
     const _toChart = getToChart();
 
     if (_toChart) {
@@ -56,7 +54,7 @@ const _usePasteTo = (data, onClose) => {
 
   /*eslint-enable react-hooks/exhaustive-deps */
   ,
-        _commandButtons = (0, _react.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+        _commandButtons = (0, _uiApi.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
     caption: "Paste & Close",
     isPrimary: true,
     onClick: _hPasteTo
@@ -65,11 +63,13 @@ const _usePasteTo = (data, onClose) => {
   return [getToChart(), _refCompSeries, _commandButtons];
 };
 
-const PasteToModalDialog = /*#__PURE__*/(0, _react.memo)(({
-  isShow,
-  data = DF_DATA,
-  onClose
-}) => {
+const PasteToModalDialog = (0, _memoIsShow.default)(_ref => {
+  let {
+    isShow,
+    data = DF_DATA,
+    onClose
+  } = _ref;
+
   const [toChart, refCompSeries, commandButtons] = _usePasteTo(data, onClose),
         {
     fromChart
@@ -88,7 +88,7 @@ const PasteToModalDialog = /*#__PURE__*/(0, _react.memo)(({
       toChart: toChart
     })
   });
-}, _areEqual);
+});
 var _default = PasteToModalDialog;
 exports.default = _default;
 //# sourceMappingURL=PasteToModalDialog.js.map

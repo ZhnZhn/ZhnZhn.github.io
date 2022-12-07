@@ -2,8 +2,9 @@ import {
   forwardRef,
   useRef,
   useCallback,
-  useImperativeHandle
-} from 'react';
+  useImperativeHandle,
+  getRefValue
+} from '../uiApi';
 
 import ScrollPane from '../zhn/ScrollPane';
 import DivEllipsis from '../zhn/DivEllipsis';
@@ -99,8 +100,6 @@ const PasteToSeriaList = ({
  </div>
 );
 
-const _getRefValue = ref => ref.current;
-
 const SeriesPane = forwardRef(({
   style,
   toChart,
@@ -116,8 +115,11 @@ const SeriesPane = forwardRef(({
 
   useImperativeHandle(ref, () => ({
      getValues: () => {
-       const [userMin, userMax] = _getUserMinMax(fromChart);
-       return _getRefValue(_refSeries)
+       const [
+         userMin,
+         userMax
+       ] = _getUserMinMax(fromChart);
+       return getRefValue(_refSeries)
          .filter(refRow => refRow !== null )
          .map(refRow => refRow.current.getValue())
          .filter(config => config.isChecked)

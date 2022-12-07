@@ -17,8 +17,8 @@ var _FlexTokens = _interopRequireDefault(require("./FlexTokens"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const _isArr = Array.isArray;
-const S_ROOT = {
+const _isArr = Array.isArray,
+      S_ROOT = {
   marginBottom: 10
 },
       S_HEADER = {
@@ -35,22 +35,25 @@ const S_ROOT = {
   lineHeight: 1.8
 };
 
-const _crLinkItem = ({
-  href,
-  caption
-}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-  caption: caption + ": " + href,
-  href: href
-});
+const _crLinkItem = _ref => {
+  let {
+    href,
+    caption
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
+    caption: caption + ": " + href,
+    href: href
+  });
+};
 
-const Descr = ({
-  style,
-  caption = "Decription",
-  descr,
-  links
-}) => {
-  if (!descr) return null;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.OpenClose, {
+const Descr = _ref2 => {
+  let {
+    style,
+    caption = "Decription",
+    descr,
+    links
+  } = _ref2;
+  return descr ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.OpenClose, {
     caption: caption,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: { ...S_DESCR,
@@ -61,7 +64,7 @@ const Descr = ({
       items: links,
       crItem: _crLinkItem
     })]
-  });
+  }) : null;
 };
 
 const _crStackItem = (item, index) => {
@@ -72,10 +75,11 @@ const _crStackItem = (item, index) => {
   }, _key);
 };
 
-const InfoItem = ({
-  config,
-  onCloseItem
-}) => {
+const InfoItem = _ref3 => {
+  let {
+    config,
+    onCloseItem
+  } = _ref3;
   const [isOpen, toggleIsOpen] = (0, _useToggle.default)(true),
         {
     caption,

@@ -40,16 +40,18 @@ const TH_ID = 'ELEMENT',
       MAX_LENGTH = 45,
       _crTitle = (title, caption) => title || caption.length > MAX_LENGTH ? caption : void 0;
 
-function ItemHeader({
-  isOpen,
-  style,
-  captionStyle,
-  caption = '',
-  title,
-  children,
-  onClick,
-  onClose
-}) {
+function ItemHeader(_ref) {
+  let {
+    isOpen,
+    style,
+    captionStyle,
+    caption = '',
+    title,
+    children,
+    onClick,
+    onClose
+  } = _ref;
+
   const TS = (0, _useTheme.default)(TH_ID),
         _title = _crTitle(title, caption),
         _captionStyle = isOpen ? S_OPEN : S_CLOSE;

@@ -36,11 +36,13 @@ const S_ROOT = {
   fontSize: '11px'
 };
 
-const TableItem = ({
-  thMoreStyle,
-  config,
-  onCloseItem
-}) => {
+const TableItem = _ref => {
+  let {
+    thMoreStyle,
+    config,
+    onCloseItem
+  } = _ref;
+
   const [isOpen, toggleIsOpen] = (0, _useToggle.default)(true),
         {
     id,

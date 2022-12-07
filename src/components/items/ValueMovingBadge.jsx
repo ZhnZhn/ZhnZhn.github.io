@@ -1,10 +1,11 @@
+//import PropTypes from "prop-types";
 import {
   forwardRef,
   useState,
   useCallback,
   useImperativeHandle
-} from 'react';
-//import PropTypes from "prop-types";
+} from '../uiApi';
+
 import {
   DT_UP,
   DT_DOWN,
@@ -94,7 +95,9 @@ const ValueMovingBadge = forwardRef(({
   }), [_updateDateTo])
 
   const {
-     value, delta, percent,
+     value,
+     delta,
+     percent,
      direction,
      date
    } = vm

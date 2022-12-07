@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 
@@ -57,17 +57,7 @@ const TH_ID = 'ROW_CHECKBOX',
       S_SELECT_OPTIONS = {
   minHeight: 100
 },
-      FN_NOOP = () => {},
-      _getRefValue = ref => ref.current;
-/*
-<span
-   className={CL_ELL}
-   style={S_TITLE}
->
-  {name}
-</span>
-*/
-
+      FN_NOOP = () => {};
 
 const SeriaRow = props => {
   const {
@@ -81,15 +71,15 @@ const SeriaRow = props => {
     color,
     name = ''
   } = seria,
-        ref = (0, _react.useRef)(),
+        ref = (0, _uiApi.useRef)(),
         [setYAxis, getYAxis] = (0, _useProperty.default)(),
         [_refIsChecked, _hCheck, _hUnCheck] = (0, _useRefBool.default)(false),
-        [_color, _setColor] = (0, _react.useState)(() => color || DF_COLOR),
+        [_color, _setColor] = (0, _uiApi.useState)(() => color || DF_COLOR),
         [isShowPallete, _hOpenPallete, _hClosePalette] = (0, _useBool.default)(false),
         TS = (0, _useTheme.default)(TH_ID);
   /*eslint-disable react-hooks/exhaustive-deps */
 
-  (0, _react.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValue: () => {
       const {
         userOptions
@@ -99,7 +89,7 @@ const SeriaRow = props => {
         name
       } = userOptions || {};
       return {
-        isChecked: _getRefValue(_refIsChecked),
+        isChecked: (0, _uiApi.getRefValue)(_refIsChecked),
         color: _color,
         yIndex: (getYAxis() || {}).value,
         data,
@@ -112,12 +102,12 @@ const SeriaRow = props => {
 
   /*eslint-disable react-hooks/exhaustive-deps */
 
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     onReg(ref, compIndex);
     return () => onUnReg(compIndex);
   }, []); //compIndex, onReg, onUnReg
 
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     setYAxis();
   }, [props]); //setYAxis
 
