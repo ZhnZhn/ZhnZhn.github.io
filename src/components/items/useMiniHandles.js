@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo } from '../uiApi';
 
 //_hLoadedMiniChart, _hUnLoadedMiniChart
 /*eslint-disable react-hooks/exhaustive-deps */

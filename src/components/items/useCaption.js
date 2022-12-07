@@ -1,7 +1,12 @@
-import { useState, useCallback } from 'react';
+import {
+  useState,
+  useCallback
+} from '../uiApi';
 
-
-const useCaption = (getMainChart, toggleToolbar) => {
+const useCaption = (
+  getMainChart,
+  toggleToolbar
+) => {
   const [isCaption, setIsCapion] = useState(true)
   /*eslint-disable react-hooks/exhaustive-deps */
   , hideCaption = useCallback(() => {

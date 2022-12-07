@@ -3,15 +3,13 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
-const _crMiniTitles = (miniTitles, btTitle) => {
-  return miniTitles.indexOf(btTitle) === -1 ? [btTitle, ...miniTitles] : miniTitles.filter(t => t !== btTitle);
-};
+const _crMiniTitles = (miniTitles, btTitle) => miniTitles.indexOf(btTitle) === -1 ? [btTitle, ...miniTitles] : miniTitles.filter(t => t !== btTitle);
 
 const useMiniTitles = () => {
-  const [miniTitles, setMiniTitles] = (0, _react.useState)([]),
-        _hMiniChart = (0, _react.useCallback)(btTitle => {
+  const [miniTitles, setMiniTitles] = (0, _uiApi.useState)([]),
+        _hMiniChart = (0, _uiApi.useCallback)(btTitle => {
     setMiniTitles(prevState => _crMiniTitles(prevState, btTitle));
   }, []);
 

@@ -1,4 +1,7 @@
-import { useState, useCallback } from 'react';
+import {
+  useState,
+  useCallback
+} from '../uiApi';
 
 const S_DATA_SOURCE = {
   position: 'absolute',

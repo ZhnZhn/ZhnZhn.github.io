@@ -3,11 +3,11 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 const useMiniConfigs = () => {
-  const [miniConfigs, setMiniConfigs] = (0, _react.useState)([]),
-        addConfig = (0, _react.useCallback)((config, id) => {
+  const [miniConfigs, setMiniConfigs] = (0, _uiApi.useState)([]),
+        addConfig = (0, _uiApi.useCallback)((config, id) => {
     setMiniConfigs(prevState => {
       prevState.push({
         config,
@@ -16,7 +16,7 @@ const useMiniConfigs = () => {
       return [...prevState];
     });
   }, []),
-        removeConfig = (0, _react.useCallback)(id => {
+        removeConfig = (0, _uiApi.useCallback)(id => {
     setMiniConfigs(prevState => prevState.filter(c => c.id !== id));
   }, []);
   return [miniConfigs, addConfig, removeConfig];

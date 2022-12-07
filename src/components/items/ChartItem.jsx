@@ -5,7 +5,7 @@ import {
   useMemo,
   useEffect,
   useImperativeHandle
-} from 'react';
+} from '../uiApi';
 
 import memoEqual from '../hoc/memoEqual';
 
@@ -13,13 +13,13 @@ import useProperty from '../hooks/useProperty';
 import useToggle from '../hooks/useToggle';
 import useBool from '../hooks/useBool';
 
-import useVm from './useVm'
-import useSetCheckBox from './useSetCheckBox'
-import useCaption from './useCaption'
-import useMiniConfigs from './useMiniConfigs'
-import useMiniTitles from './useMiniTitles'
-import useMiniHandles from './useMiniHandles'
-import useDataSourceEl from './useDataSourceEl'
+import useVm from './useVm';
+import useSetCheckBox from './useSetCheckBox';
+import useCaption from './useCaption';
+import useMiniConfigs from './useMiniConfigs';
+import useMiniTitles from './useMiniTitles';
+import useMiniHandles from './useMiniHandles';
+import useDataSourceEl from './useDataSourceEl';
 
 import has from '../has';
 import Comp from '../Comp';
@@ -43,8 +43,8 @@ const CL_CHART_ITEM =  'chart-item'
   backgroundColor: 'transparent',
   height: 30
 }
-, S_SHOW_HIDE = { marginLeft: 8 }
-, S_WRAPPER = { marginTop: 6 };
+, S_ML_8 = { marginLeft: 8 }
+, S_MT_6 = { marginTop: 6 };
 
 const _isAnimateReflow = has.wideWidth()
 , MINI_CONFIGS_ID_PN = "btTitle";
@@ -82,18 +82,6 @@ const ChartItem = memoEqual(forwardRef(({
   crValueMoving,
   onToTop
 }, ref) => {
-  const [_refVm, compareTo] = useVm()
-  , [_hLoaded, getMainChart] = useProperty()
-  , [hasError, _hError] = useBool()
-  , [isShowChart, showChart, hideChart] = useBool(true)
-  , isShowInfo = !isShowChart
-  , [isOpen, toggleOpen] = useToggle(true)
-  , [isShowLegend, toggleLegend] = useToggle()
-  , [isShowToolbar, toggleToolbar] = useToggle(true)
-  , [itemCaption] = useState(() => _itemCaption || caption || '')
-  , [onCheckItem, onUnCheckItem] = useSetCheckBox(getMainChart, chartType, onSetActive)
-  , [loadMiniChart, unloadMiniChart] = useMiniHandles(getMainChart)
-
   const {
     zhConfig,
     valueMoving,
@@ -106,6 +94,18 @@ const ChartItem = memoEqual(forwardRef(({
       itemTime,
       legend
     } = zhConfig || {}
+  , [_refVm, compareTo] = useVm()
+  , [_hLoaded, getMainChart] = useProperty()
+  , [hasError, _hError] = useBool()
+  , [isShowChart, showChart, hideChart] = useBool(true)
+  , isShowInfo = !isShowChart
+  , [isOpen, toggleOpen] = useToggle(true)
+  , [isShowLegend, toggleLegend] = useToggle()
+  , [isShowToolbar, toggleToolbar] = useToggle(true)
+  , [itemCaption] = useState(() => _itemCaption || caption || '')
+  , [isCaption, showCaption, hideCaption] = useCaption(getMainChart, toggleToolbar)
+  , [onCheckItem, onUnCheckItem] = useSetCheckBox(getMainChart, chartType, onSetActive)
+  , [loadMiniChart, unloadMiniChart] = useMiniHandles(getMainChart)
   , [_dataSourceEl] = useDataSourceEl(dataSource)
   , [mfiConfigs, _addMfi, _removeMfi] = useMiniConfigs()
   , [miniTitles, _hMiniChart] = useMiniTitles()
@@ -118,7 +118,9 @@ const ChartItem = memoEqual(forwardRef(({
     _crValueMoving,
     _moreModel
   ] = useMemo(() => [
-    item => { getMainChart().zhToggleSeria(item.index) },
+    item => {
+      getMainChart().zhToggleSeria(item.index)
+    },
     () => {
       hideChart()
       toggleLegend(false)
@@ -136,7 +138,6 @@ const ChartItem = memoEqual(forwardRef(({
   // toggleToolbar, onToTop, hideCaption
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  , [isCaption, showCaption, hideCaption] = useCaption(getMainChart, toggleToolbar)
   , _zhMiniConfigs = useMemo(() => _arrangeConfigsBy(
        zhMiniConfigs,
        miniTitles,
@@ -188,7 +189,7 @@ const ChartItem = memoEqual(forwardRef(({
       <ShowHide
          isShow={isOpen}
          withoutAnimation={true}
-         style={S_SHOW_HIDE}
+         style={S_ML_8}
       >
          {isShowChart && <ShowHide
               isShow={isShowToolbar}
@@ -221,7 +222,7 @@ const ChartItem = memoEqual(forwardRef(({
             <ShowHide
               isShow={isShowChart}
               withoutAnimation={true}
-              style={S_WRAPPER}
+              style={S_MT_6}
             >
                <HighchartWrapper
                  config={config}

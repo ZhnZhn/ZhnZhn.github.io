@@ -3,12 +3,12 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 //_hLoadedMiniChart, _hUnLoadedMiniChart
 
 /*eslint-disable react-hooks/exhaustive-deps */
-const useMiniHandles = getMainChart => (0, _react.useMemo)(() => [miniChart => {
+const useMiniHandles = getMainChart => (0, _uiApi.useMemo)(() => [miniChart => {
   const mainChart = getMainChart();
 
   if (mainChart) {

@@ -1,22 +1,22 @@
-import { useCallback } from 'react';
+import { useMemo } from '../uiApi';
 
+/*eslint-disable react-hooks/exhaustive-deps */
+//onCheck, onUnCheck
 const useSetCheckBox = (
   getMainChart,
   chartType,
   onSetActive
-) => {
-  /*eslint-disable react-hooks/exhaustive-deps */
-  const onCheck = useCallback((checkBox) => {
+) => useMemo(() => [
+  (checkBox) => {
     checkBox.chartType = chartType
     onSetActive(true, checkBox, getMainChart())
-  }, [])
-  , onUnCheck = useCallback((checkBox) => {
+  },  
+  (checkBox) => {
     checkBox.chartType = chartType
     onSetActive(false, checkBox, getMainChart())
-  }, [])
-  // chartType, onSetActive, getMainChart
-  /*eslint-enable react-hooks/exhaustive-deps */
-  return [onCheck, onUnCheck];
-};
+  }
+], []);
+// chartType, onSetActive, getMainChart
+/*eslint-enable react-hooks/exhaustive-deps */
 
 export default useSetCheckBox

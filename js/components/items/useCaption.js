@@ -3,13 +3,13 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _uiApi = require("../uiApi");
 
 const useCaption = (getMainChart, toggleToolbar) => {
-  const [isCaption, setIsCapion] = (0, _react.useState)(true)
+  const [isCaption, setIsCapion] = (0, _uiApi.useState)(true)
   /*eslint-disable react-hooks/exhaustive-deps */
   ,
-        hideCaption = (0, _react.useCallback)(() => {
+        hideCaption = (0, _uiApi.useCallback)(() => {
     const _mainChart = getMainChart();
 
     if (_mainChart) {
@@ -20,7 +20,7 @@ const useCaption = (getMainChart, toggleToolbar) => {
     }
   }, []) // getMainChart, toggleToolbar
   ,
-        showCaption = (0, _react.useCallback)(() => {
+        showCaption = (0, _uiApi.useCallback)(() => {
     const _mainChart = getMainChart();
 
     if (_mainChart) {

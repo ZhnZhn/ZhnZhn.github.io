@@ -1,12 +1,15 @@
-import { useRef, useCallback } from 'react';
+import {
+  useRef,
+  useCallback
+} from '../uiApi';
 
 const useVm = () => {
   const refVm = useRef()
-  , compareTo = useCallback((dateTo) => {
+  , compareTo = useCallback(dateTo => {
     const { current } = refVm;
-    if (current) {
-      return current._updateDateTo(dateTo);
-    }
+    return current
+      ? current._updateDateTo(dateTo)
+      : void 0;
   }, []);
   return [refVm, compareTo];
 };
