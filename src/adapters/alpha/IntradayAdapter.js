@@ -8,7 +8,7 @@ import {
   crIntradayConfigOption
 } from './fnAdapter';
 
-const _getKeys = Object.keys;
+const _getObjectKeys = Object.keys;
 
 const _crSeriaOptions = ({
   isFilterZero,
@@ -57,16 +57,19 @@ const _isWeeklyOrMonthly = str =>
  isTokenInStr(str, 'Weekly')
  || isTokenInStr(str, 'Monthly');
 
+const TIME_SERIES = 'Time Series';
 const _getJsonDataPropName = ({
   interval
-}) => _isWeeklyOrMonthly(interval)
-  ? `${interval} Time Series`
-  : `Time Series (${interval})`;
+}) => interval === 'Daily Adjusted'
+  ? `${TIME_SERIES} (Daily)`
+  : _isWeeklyOrMonthly(interval)
+     ? `${interval} ${TIME_SERIES}`
+     : `${TIME_SERIES} (${interval})`;
 
 const _getObjValues = (
   json,
   option
-) => json[_getJsonDataPropName(option)];
+) => json[_getJsonDataPropName(option)]
 
 const _crSeriaData = (
   json,
@@ -74,7 +77,7 @@ const _crSeriaData = (
 ) => {
   const _objValues = _getObjValues(json, option)
   , _dateKeys = _objValues
-      ? _getKeys(_objValues).sort()
+      ? _getObjectKeys(_objValues).sort()
       : []
   , dC = []
   , dH = []

@@ -15,7 +15,7 @@ var _IntradayFns = require("../IntradayFns");
 
 var _fnAdapter = require("./fnAdapter");
 
-const _getKeys = Object.keys;
+const _getObjectKeys = Object.keys;
 
 const _crSeriaOptions = _ref => {
   let {
@@ -56,18 +56,20 @@ const _notZeros = (v1, v2) => v1 !== 0 && v2 !== 0;
 
 const _isWeeklyOrMonthly = str => (0, _fnAdapter.isTokenInStr)(str, 'Weekly') || (0, _fnAdapter.isTokenInStr)(str, 'Monthly');
 
+const TIME_SERIES = 'Time Series';
+
 const _getJsonDataPropName = _ref2 => {
   let {
     interval
   } = _ref2;
-  return _isWeeklyOrMonthly(interval) ? interval + " Time Series" : "Time Series (" + interval + ")";
+  return interval === 'Daily Adjusted' ? TIME_SERIES + " (Daily)" : _isWeeklyOrMonthly(interval) ? interval + " " + TIME_SERIES : TIME_SERIES + " (" + interval + ")";
 };
 
 const _getObjValues = (json, option) => json[_getJsonDataPropName(option)];
 
 const _crSeriaData = (json, option) => {
   const _objValues = _getObjValues(json, option),
-        _dateKeys = _objValues ? _getKeys(_objValues).sort() : [],
+        _dateKeys = _objValues ? _getObjectKeys(_objValues).sort() : [],
         dC = [],
         dH = [],
         dL = [],

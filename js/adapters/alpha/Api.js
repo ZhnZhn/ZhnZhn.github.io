@@ -11,6 +11,7 @@ var _fnAdapter = require("./fnAdapter");
 
 const ROOT = 'https://www.alphavantage.co/query',
       ERR_PROP = 'Error Message',
+      INFO_PROP = 'Information',
       REQ_ERROR = 'Request Error',
       _assign = Object.assign;
 
@@ -152,8 +153,10 @@ const AlphaApi = {
       throw (0, _fnAdapter.crError)();
     }
 
-    if (json[ERR_PROP]) {
-      throw (0, _fnAdapter.crError)(REQ_ERROR, json[ERR_PROP]);
+    const _msg = json[ERR_PROP] || json[INFO_PROP];
+
+    if (_msg) {
+      throw (0, _fnAdapter.crError)(REQ_ERROR, _msg);
     }
 
     return true;

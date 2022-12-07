@@ -9,6 +9,7 @@ import {
 
 const ROOT = 'https://www.alphavantage.co/query'
 , ERR_PROP = 'Error Message'
+, INFO_PROP = 'Information'
 , REQ_ERROR = 'Request Error'
 , _assign = Object.assign;
 
@@ -145,8 +146,9 @@ const AlphaApi = {
     if (isEmpty(json)) {
       throw crError();
     }
-    if (json[ERR_PROP]) {
-      throw crError(REQ_ERROR, json[ERR_PROP]);
+    const _msg = json[ERR_PROP] || json[INFO_PROP];
+    if (_msg) {
+      throw crError(REQ_ERROR, _msg);
     }
     return true;
   }
