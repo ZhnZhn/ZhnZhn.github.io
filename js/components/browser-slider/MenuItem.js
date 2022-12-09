@@ -13,11 +13,13 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 const CL_MENU_ITEM = 'menu-item';
 
-const MenuItem = ({
-  innerRef,
-  item,
-  onClick
-}) => {
+const MenuItem = _ref => {
+  let {
+    innerRef,
+    item,
+    onClick
+  } = _ref;
+
   const {
     text,
     type

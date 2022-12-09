@@ -4,9 +4,12 @@ exports.__esModule = true;
 exports.default = void 0;
 const _isArr = Array.isArray;
 
-const _isEmptyTables = ({
-  tables
-}) => _isArr(tables) && tables.length === 0;
+const _isEmptyTables = _ref => {
+  let {
+    tables
+  } = _ref;
+  return _isArr(tables) && tables.length === 0;
+};
 
 const _trJson = (json, id) => {
   const _json = [];

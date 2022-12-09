@@ -1,6 +1,6 @@
-import SpinnerLoading from '../zhn/SpinnerLoading'
-import MenuList from './MenuList'
-import ErrMsg from './ErrMsg'
+import SpinnerLoading from '../zhn/SpinnerLoading';
+import MenuList from './MenuList';
+import ErrMsg from './ErrMsg';
 
 const Page = ({
   refFirstItem,

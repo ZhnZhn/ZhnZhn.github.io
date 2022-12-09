@@ -15,10 +15,12 @@ var _Style = require("./Style");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const FOCUS_FIRST_MLS = 1000;
-const _isArr = Array.isArray;
+const _isArr = Array.isArray,
+      FOCUS_FIRST_MLS = 1000;
 
 const _getProxy = (store, dfProps) => store.getProxy(dfProps.lT);
+
+const _crId = (dfProps, rootId, id) => dfProps.lT === 'SDN' ? id || rootId : rootId ? rootId + "/" + id : id;
 
 const _fOnClick = (proxy, rootId, dfProps, pageNumber, onClickNext, fOnClickItem, item) => {
   const {
@@ -26,7 +28,7 @@ const _fOnClick = (proxy, rootId, dfProps, pageNumber, onClickNext, fOnClickItem
     id,
     type
   } = item,
-        _id = dfProps.lT === 'SDN' ? id || rootId : rootId ? rootId + "/" + id : id;
+        _id = _crId(dfProps, rootId, id);
 
   return type === 'l' ? onClickNext.bind(null, _id, text, pageNumber) : fOnClickItem({
     id: _id,
@@ -58,10 +60,16 @@ const Frame = _ref => {
     model,
     errMsg
   } = state,
-        proxy = _getProxy(store, dfProps),
-        _fOnClickItem = (0, _uiApi.useCallback)(_fOnClick.bind(null, proxy, id, dfProps, pageNumber, onClickNext, fOnClickItem), [proxy]),
+        proxy = _getProxy(store, dfProps)
+  /*eslint-disable react-hooks/exhaustive-deps */
+  ,
+        _fOnClickItem = (0, _uiApi.useCallback)(_fOnClick.bind(null, proxy, id, dfProps, pageNumber, onClickNext, fOnClickItem), [proxy])
+  /*eslint-enable react-hooks/exhaustive-deps */
+  ,
         _isTitle = pageNumber !== 0 && title && onClickPrev,
         _isFocusTitle = pageNumber === pageCurrent && (_isTitle || !_isTitle && model);
+  /*eslint-disable react-hooks/exhaustive-deps */
+
 
   (0, _uiApi.useEffect)(() => {
     if (title) {
@@ -83,6 +91,8 @@ const Frame = _ref => {
       (0, _uiApi.setRefValue)(_refTitle, null);
     };
   }, []);
+  /*eslint-enable react-hooks/exhaustive-deps */
+
   (0, _uiApi.useEffect)(() => {
     if (_isFocusTitle) {
       clearTimeout((0, _uiApi.getRefValue)(_refId));

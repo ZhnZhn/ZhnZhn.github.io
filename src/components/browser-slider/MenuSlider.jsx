@@ -27,10 +27,11 @@ const S_ROOT = {
 }
 , S_PAGE = { width: PAGE_WIDTH };
 
-const _getTranslateX = (node) => {
-  const _prevStr = node
+const _getTranslateX = (element) => {
+  const _prevStr = element
     .style.transform
-    .substring(11)
+    .trim()
+    .slice(11)
     .replace('px', '')
     .replace(')', '');
   return parseInt(_prevStr, 10);

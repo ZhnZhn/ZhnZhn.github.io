@@ -15,7 +15,11 @@ var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 
 var _fFilterNotActive = _interopRequireDefault(require("./fFilterNotActive"));
 
-var _Comp = _interopRequireDefault(require("../Comp"));
+var _Browser = _interopRequireDefault(require("../zhn/Browser"));
+
+var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
+
+var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 
 var _BrowserContext = _interopRequireDefault(require("./BrowserContext"));
 
@@ -25,8 +29,8 @@ var _MenuSlider = _interopRequireDefault(require("./MenuSlider"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const CL_SCROLL = 'scroll-container-y';
-const S_BROWSER = {
+const CL_SCROLL = 'scroll-container-y',
+      S_BROWSER = {
   paddingRight: 0
 },
       S_BR_CAPTION = {
@@ -50,9 +54,8 @@ const BrowserSlider = (0, _uiApi.memo)(props => {
     caption,
     browserType,
     showAction
-  } = props;
-
-  const [isShow, show, hide] = (0, _useBool.default)(isInitShow),
+  } = props,
+        [isShow, show, hide] = (0, _useBool.default)(isInitShow),
         [isMenuMore, toggleMenuMore] = (0, _useToggle.default)(),
         [isFilterNotActive, toggleFilterNotActive] = (0, _useToggle.default)()
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -69,21 +72,21 @@ const BrowserSlider = (0, _uiApi.memo)(props => {
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContext.default.Provider, {
     value: _browserContext,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.Browser, {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Browser.default, {
       isShow: isShow,
       style: S_BROWSER,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserMenuMore.default, {
         is: isMenuMore,
         toggleMenu: toggleMenuMore,
         toggleFilter: toggleFilterNotActive
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.BrowserCaption, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserCaption.default, {
         style: S_BR_CAPTION,
         caption: caption,
         captionStyle: S_CAPTION,
         svgMoreStyle: S_SVG_MORE,
         onMore: toggleMenuMore,
         onClose: hide
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ScrollPane.default, {
         className: CL_SCROLL,
         style: S_SCROLL_PANE,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuSlider.default, { ...props

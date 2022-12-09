@@ -32,14 +32,4 @@ const MenuTitle = ({
   );
 }
 
-/*
-MenuTitle.propTypes = {
-  innerRef: PropTypes.shape({
-    current: PropTypes.object
-  })
-  title: PropTypes.string,
-  onClick: PropTypes.func
-}
-*/
-
 export default MenuTitle

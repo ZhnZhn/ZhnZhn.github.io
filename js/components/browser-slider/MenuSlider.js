@@ -34,8 +34,8 @@ const S_ROOT = {
   width: PAGE_WIDTH
 };
 
-const _getTranslateX = node => {
-  const _prevStr = node.style.transform.substring(11).replace('px', '').replace(')', '');
+const _getTranslateX = element => {
+  const _prevStr = element.style.transform.trim().slice(11).replace('px', '').replace(')', '');
 
   return parseInt(_prevStr, 10);
 };

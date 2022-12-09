@@ -1,4 +1,3 @@
-
 const _isNumber = n => typeof n === 'number'
  && n - n === 0;
 
@@ -11,18 +10,19 @@ const _filterNotActive = item => {
     .trim()
     .slice(0, 4),
   10);
-  return !_isNumber(_yUpdated)
-    ? true
-    : _getCurrentYear() - _yUpdated < 3;
+  return _isNumber(_yUpdated)
+    ? _getCurrentYear() - _yUpdated < 3
+    : true;
 };
 
 const _filterSdn = item => item.active;
 
-const fFilterNotActive = (is, lT) => {
-  if (!is) {return; }
-  return lT === 'SDN'
-    ? _filterSdn
-    : _filterNotActive;
-};
+const fFilterNotActive = (
+  is,
+  lT
+) => is ? lT === 'SDN'
+  ? _filterSdn
+  : _filterNotActive
+: void 0;
 
 export default fFilterNotActive

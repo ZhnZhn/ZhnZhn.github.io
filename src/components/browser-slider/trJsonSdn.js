@@ -1,7 +1,9 @@
 
 const _isArr = Array.isArray;
 
-const _isEmptyTables = ({ tables }) => _isArr(tables)
+const _isEmptyTables = ({
+  tables
+}) => _isArr(tables)
   && tables.length === 0;
 
 const _trJson = (json, id) => {

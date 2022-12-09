@@ -14,8 +14,16 @@ const _hmTr = {
   SIR: trJsonSir
 };
 
-const loadItems = (proxy='', dfProps, id) => {
-  const { rootUrl, dfTi='', lT } = dfProps
+const loadItems = (
+  proxy='',
+  dfProps,
+  id
+) => {
+  const {
+    rootUrl,
+    dfTi='',
+    lT
+  } = dfProps
   , _url = `${proxy}${rootUrl}/${id}${dfTi}`;
   return fetch(_url, { cache: "default" })
     .then(res => res.json())

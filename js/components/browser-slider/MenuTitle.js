@@ -13,11 +13,13 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 const CL_MENU_ITEM = 'menu-item';
 
-const MenuTitle = ({
-  innerRef,
-  title,
-  onClick
-}) => {
+const MenuTitle = _ref => {
+  let {
+    innerRef,
+    title,
+    onClick
+  } = _ref;
+
   const _hKeyDown = (0, _useKeyEnter.default)(onClick);
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -34,16 +36,6 @@ const MenuTitle = ({
     })]
   });
 };
-/*
-MenuTitle.propTypes = {
-  innerRef: PropTypes.shape({
-    current: PropTypes.object
-  })
-  title: PropTypes.string,
-  onClick: PropTypes.func
-}
-*/
-
 
 var _default = MenuTitle;
 exports.default = _default;

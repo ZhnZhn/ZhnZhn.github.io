@@ -9,32 +9,35 @@ import useListen from '../hooks/useListen';
 
 import fFilterNotActive from './fFilterNotActive';
 
-import A from '../Comp';
+import Browser from '../zhn/Browser';
+import BrowserCaption from '../zhn/BrowserCaption';
+import ScrollPane from '../zhn/ScrollPane';
 import BrowserContext from './BrowserContext';
 import BrowserMenuMore from './BrowserMenuMore';
 import MenuSlider from './MenuSlider';
 
-const CL_SCROLL = 'scroll-container-y';
-
-const S_BROWSER = { paddingRight: 0 }
+const CL_SCROLL = 'scroll-container-y'
+, S_BROWSER = { paddingRight: 0 }
 , S_BR_CAPTION = { paddingLeft: 6 }
 , S_SVG_MORE = {
-  position: 'relative',
-  top: -4
+   position: 'relative',
+   top: -4
 }
 , S_CAPTION = {
-    position: 'relative',
-    top: -6,
-    paddingLeft: 4
-  }
+   position: 'relative',
+   top: -6,
+   paddingLeft: 4
+}
 , S_SCROLL_PANE = { height: '92%' };
 
 const BrowserSlider = memo((props) => {
   const {
-    isInitShow, caption,
-    browserType, showAction
+    isInitShow,
+    caption,
+    browserType,
+    showAction
   } = props
-  const [isShow, show, hide] = useBool(isInitShow)
+  , [isShow, show, hide] = useBool(isInitShow)
   , [isMenuMore, toggleMenuMore] = useToggle()
   , [isFilterNotActive, toggleFilterNotActive] = useToggle()
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -52,13 +55,13 @@ const BrowserSlider = memo((props) => {
 
   return (
     <BrowserContext.Provider value={_browserContext}>
-      <A.Browser isShow={isShow} style={S_BROWSER}>
+      <Browser isShow={isShow} style={S_BROWSER}>
         <BrowserMenuMore
-          is={isMenuMore}
-          toggleMenu={toggleMenuMore}
-          toggleFilter={toggleFilterNotActive}
+           is={isMenuMore}
+           toggleMenu={toggleMenuMore}
+           toggleFilter={toggleFilterNotActive}
         />
-        <A.BrowserCaption
+        <BrowserCaption
            style={S_BR_CAPTION}
            caption={caption}
            captionStyle={S_CAPTION}
@@ -66,13 +69,13 @@ const BrowserSlider = memo((props) => {
            onMore={toggleMenuMore}
            onClose={hide}
         />
-         <A.ScrollPane
+         <ScrollPane
            className={CL_SCROLL}
            style={S_SCROLL_PANE}
          >
            <MenuSlider {...props} />
-         </A.ScrollPane>
-      </A.Browser>
+         </ScrollPane>
+      </Browser>
     </BrowserContext.Provider>
   );
 })

@@ -12,18 +12,12 @@ const _getCurrentYear = () => _currentYear || (_currentYear = new Date().getUTCF
 const _filterNotActive = item => {
   const _yUpdated = parseInt(('' + item.updated).trim().slice(0, 4), 10);
 
-  return !_isNumber(_yUpdated) ? true : _getCurrentYear() - _yUpdated < 3;
+  return _isNumber(_yUpdated) ? _getCurrentYear() - _yUpdated < 3 : true;
 };
 
 const _filterSdn = item => item.active;
 
-const fFilterNotActive = (is, lT) => {
-  if (!is) {
-    return;
-  }
-
-  return lT === 'SDN' ? _filterSdn : _filterNotActive;
-};
+const fFilterNotActive = (is, lT) => is ? lT === 'SDN' ? _filterSdn : _filterNotActive : void 0;
 
 var _default = fFilterNotActive;
 exports.default = _default;

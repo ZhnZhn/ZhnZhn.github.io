@@ -7,8 +7,15 @@ import {
 
 const CL_MENU_ITEM = 'menu-item';
 
-const MenuItem = ({ innerRef, item, onClick }) => {
-  const { text, type } = item
+const MenuItem = ({
+  innerRef,
+  item,
+  onClick
+}) => {
+  const {
+    text,
+    type
+  } = item
   , _style = type === 'l'
       ? S_ITEM_L
       : S_ITEM_T

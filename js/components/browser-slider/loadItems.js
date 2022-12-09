@@ -22,7 +22,11 @@ const _hmTr = {
   SIR: _trJsonSir.default
 };
 
-const loadItems = (proxy = '', dfProps, id) => {
+const loadItems = function (proxy, dfProps, id) {
+  if (proxy === void 0) {
+    proxy = '';
+  }
+
   const {
     rootUrl,
     dfTi = '',

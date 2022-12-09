@@ -8,36 +8,50 @@ import {
   focusRefElement
 } from '../uiApi';
 
-import MenuTitle from './MenuTitle'
-import Page from './Page'
-import { S_FRAME } from './Style'
+import MenuTitle from './MenuTitle';
+import Page from './Page';
+import { S_FRAME } from './Style';
 
-const FOCUS_FIRST_MLS = 1000;
+const _isArr = Array.isArray
+, FOCUS_FIRST_MLS = 1000;
 
-const _isArr = Array.isArray;
+const _getProxy = (
+  store,
+  dfProps
+) => store.getProxy(dfProps.lT);
 
-const _getProxy = (store, dfProps) => store
- .getProxy(dfProps.lT);
+const _crId = (
+  dfProps,
+  rootId,
+  id
+) => dfProps.lT === 'SDN'
+  ? id || rootId
+  : rootId ? `${rootId}/${id}` : id;
 
 const _fOnClick = (
-  proxy, rootId,
-  dfProps, pageNumber,
-  onClickNext, fOnClickItem,
+  proxy,
+  rootId,
+  dfProps,
+  pageNumber,
+  onClickNext,
+  fOnClickItem,
   item
 ) => {
-  const { text, id, type } = item
-  , _id = dfProps.lT === 'SDN'
-     ? id || rootId
-     : rootId ? `${rootId}/${id}` : id;
+  const {
+    text,
+    id,
+    type
+  } = item
+  , _id = _crId(dfProps, rootId, id);
 
   return type === 'l'
-     ? onClickNext.bind(null, _id, text, pageNumber)
-     : fOnClickItem({
-         id: _id,
-         ...dfProps,
-         text,
-         proxy
-       });
+    ? onClickNext.bind(null, _id, text, pageNumber)
+    : fOnClickItem({
+        id: _id,
+        ...dfProps,
+        text,
+        proxy
+     });
 };
 
 const Frame = ({
@@ -58,17 +72,21 @@ const Frame = ({
   , [state, setState] = useState({})
   , { model, errMsg } = state
   , proxy = _getProxy(store, dfProps)
+  /*eslint-disable react-hooks/exhaustive-deps */
   , _fOnClickItem = useCallback(
       _fOnClick.bind(null,
          proxy, id, dfProps, pageNumber,
          onClickNext, fOnClickItem
        )
       , [proxy])
-  , _isTitle = pageNumber !== 0
-      && title && onClickPrev
-  , _isFocusTitle = pageNumber === pageCurrent
+  /*eslint-enable react-hooks/exhaustive-deps */
+  , _isTitle = (pageNumber !== 0)
+      && title
+      && onClickPrev
+  , _isFocusTitle = (pageNumber === pageCurrent)
       && (_isTitle || !_isTitle && model);
 
+  /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(()=>{
     if (title) {
       loadItems(proxy, dfProps, id)
@@ -78,13 +96,16 @@ const Frame = ({
             : { errMsg: 'Response is not array'};
           setState(_nextState)
         })
-        .catch(err => setState({ errMsg: err.message }))
+        .catch(err => setState({
+            errMsg: err.message
+        }))
     }
     return () => {
       clearTimeout(getRefValue(_refId))
       setRefValue(_refTitle, null)
     }
   }, [])
+  /*eslint-enable react-hooks/exhaustive-deps */
 
   useEffect(() => {
     if (_isFocusTitle) {

@@ -23,16 +23,19 @@ const _crDimUrl = ({
   dfDimQuery=''
 }) => `${proxy}${rootDimUrl || rootUrl}/${id}${dfDimQuery}`;
 
+const _crCaption = (
+  text
+) => text.length>35
+  ? text.slice(0, 35) + '...'
+  : text;
+
 const _crTitleAndCaption = (
   dfProps
 ) => {
-  const _text = dfProps.text || ''
-  , _caption = _text.length>35
-       ? _text.substring(0, 35) + '...'
-       : _text;
+  const _text = dfProps.text || '';
   return {
-    menuTitle: _text.substring(0, 27),
-    contFullCaption: `${dfProps.sP}: ${_caption}`
+    menuTitle: _text.slice(0, 27),
+    contFullCaption: `${dfProps.sP}: ${_crCaption(_text)}`
   };
 };
 
