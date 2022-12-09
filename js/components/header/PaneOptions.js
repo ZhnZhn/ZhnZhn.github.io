@@ -7,9 +7,9 @@ exports.default = void 0;
 
 var _uiApi = require("../uiApi");
 
-var _highcharts = _interopRequireDefault(require("highcharts"));
-
 var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
+
+var _setChartPointsHalo = _interopRequireDefault(require("../../charts/setChartPointsHalo"));
 
 var _getFnByPropName = _interopRequireDefault(require("../../utils/getFnByPropName"));
 
@@ -21,7 +21,6 @@ var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-//import PropTypes from 'prop-types'
 const S_MR_4 = {
   marginRight: 4
 },
@@ -46,24 +45,6 @@ const MODE_ADMIN = 'isAdminMode';
 const MODE_DELTA = 'isDrawDeltaExtrems';
 const MODE_ZOOM = 'isNotZoomToMinMax';
 
-const _crHaloOption = function (is) {
-  if (is === void 0) {
-    is = false;
-  }
-
-  return {
-    plotOptions: {
-      series: {
-        states: {
-          hover: {
-            enabled: is
-          }
-        }
-      }
-    }
-  };
-};
-
 const _useProxy = data => {
   const _refProxy = (0, _uiApi.useRef)(),
         _setProxy = (0, _getFnByPropName.default)(data, SET_PROXY),
@@ -81,12 +62,17 @@ const _useProxy = data => {
 const _useTheme = onChangeTheme => {
   const theme = (0, _uiApi.useContext)(_ThemeContext.default);
   return item => {
-    if (item && theme.getThemeName() !== item.value) {
-      theme.setThemeName(item.value);
-      onChangeTheme(item.value);
+    const _themeName = (item || {}).value;
+
+    if (_themeName && theme.getThemeName() !== _themeName) {
+      theme.setThemeName(_themeName);
+      onChangeTheme(_themeName);
     }
   };
 };
+
+const _removeChartPointsHalo = _setChartPointsHalo.default.bind(null, false),
+      _addChartPointsHalo = _setChartPointsHalo.default.bind(null, true);
 
 const PaneOptions = _ref => {
   let {
@@ -101,9 +87,7 @@ const PaneOptions = _ref => {
   const [_refProxy, _proxy, _setProxy, _hSetProxy, _hClearProxy] = _useProxy(data),
         _hSelectTheme = _useTheme(onChangeTheme),
         _hMode = (fnName, mode) => (0, _getFnByPropName.default)(data, fnName)(mode),
-        _hSetHalo = is => _highcharts.default.setOptions(_crHaloOption(is));
-
-  const _isAdminMode = (0, _getFnByPropName.default)(data, MODE_ADMIN, false)(),
+        _isAdminMode = (0, _getFnByPropName.default)(data, MODE_ADMIN, false)(),
         _isDrawDeltaExtrems = (0, _getFnByPropName.default)(data, MODE_DELTA, false)(),
         _isNotZoomToMinMax = (0, _getFnByPropName.default)(data, MODE_ZOOM, false)();
 
@@ -143,8 +127,8 @@ const PaneOptions = _ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox, {
       initValue: false,
       caption: "Without Points Halo",
-      onCheck: _hSetHalo.bind(null, false),
-      onUnCheck: _hSetHalo.bind(null, true)
+      onCheck: _removeChartPointsHalo,
+      onUnCheck: _addChartPointsHalo
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowButtons.default, {
       style: S_MR_12,
       btStyle: btStyle,
@@ -159,16 +143,6 @@ const PaneOptions = _ref => {
     })]
   });
 };
-/*
-PaneOptions.propTypes = {
-  titleStyle: PropTypes.object,
-  btStyle: PropTypes.object,
-  data: PropTypes.object,
-  onClose: PropTypes.func,
-  onChangeTheme: PropTypes.func
-}
-*/
-
 
 var _default = PaneOptions;
 exports.default = _default;

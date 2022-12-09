@@ -1,13 +1,16 @@
-//import PropTypes from 'prop-types'
-import { useRef, useContext } from '../uiApi';
-import Highcharts from 'highcharts';
+import {
+  useContext,
+  useRef
+} from '../uiApi';
 
-import ThemeContext  from '../hoc/ThemeContext'
+import ThemeContext  from '../hoc/ThemeContext';
+
+import setChartPointsHalo from '../../charts/setChartPointsHalo';
 import getFnByPropName from '../../utils/getFnByPropName';
 
-import D from '../dialogs/DialogCell'
-import FlatButton from '../zhn-m/FlatButton'
-import RowButtons from './RowButtons'
+import D from '../dialogs/DialogCell';
+import FlatButton from '../zhn-m/FlatButton';
+import RowButtons from './RowButtons';
 
 const S_MR_4 = { marginRight: 4 }
 , S_MR_12 = { marginRight: 12 };
@@ -19,23 +22,10 @@ const UI_THEME_OPTIONS = [
   { caption: 'Sand Light', value: 'SAND_L' }
 ];
 
-
-const SET_PROXY = 'setProxy'
+const SET_PROXY = 'setProxy';
 const MODE_ADMIN = 'isAdminMode';
 const MODE_DELTA = 'isDrawDeltaExtrems';
 const MODE_ZOOM = 'isNotZoomToMinMax';
-
-const _crHaloOption = (is=false) => ({
-  plotOptions: {
-    series: {
-      states: {
-        hover: {
-          enabled: is
-        }
-      }
-    }
-  }
-});
 
 const _useProxy = (data) => {
   const _refProxy = useRef()
@@ -58,12 +48,16 @@ const _useProxy = (data) => {
 const _useTheme = (onChangeTheme) => {
   const theme = useContext(ThemeContext);
   return item => {
-     if (item && theme.getThemeName() !== item.value) {
-       theme.setThemeName(item.value)
-       onChangeTheme(item.value)
+     const _themeName = (item || {}).value;
+     if (_themeName && theme.getThemeName() !== _themeName) {
+       theme.setThemeName(_themeName)
+       onChangeTheme(_themeName)
      }
   };
 };
+
+const _removeChartPointsHalo = setChartPointsHalo.bind(null, false)
+, _addChartPointsHalo = setChartPointsHalo.bind(null, true);
 
 const PaneOptions = ({
   isShowLabels,
@@ -82,9 +76,7 @@ const PaneOptions = ({
   ] = _useProxy(data)
   , _hSelectTheme = _useTheme(onChangeTheme)
   , _hMode = (fnName, mode) => getFnByPropName(data, fnName)(mode)
-  , _hSetHalo = is => Highcharts.setOptions(_crHaloOption(is));
-
-  const _isAdminMode = getFnByPropName(data, MODE_ADMIN, false)()
+  , _isAdminMode = getFnByPropName(data, MODE_ADMIN, false)()
   , _isDrawDeltaExtrems = getFnByPropName(data, MODE_DELTA, false)()
   , _isNotZoomToMinMax = getFnByPropName(data, MODE_ZOOM, false)();
 
@@ -130,8 +122,8 @@ const PaneOptions = ({
      <D.RowCheckBox
         initValue={false}
         caption="Without Points Halo"
-        onCheck={_hSetHalo.bind(null, false)}
-        onUnCheck={_hSetHalo.bind(null, true)}
+        onCheck={_removeChartPointsHalo}
+        onUnCheck={_addChartPointsHalo}
      />
      <RowButtons style={S_MR_12} btStyle={btStyle} onClose={onClose}>
        <FlatButton
@@ -143,15 +135,5 @@ const PaneOptions = ({
     </div>
   );
 }
-
-/*
-PaneOptions.propTypes = {
-  titleStyle: PropTypes.object,
-  btStyle: PropTypes.object,
-  data: PropTypes.object,
-  onClose: PropTypes.func,
-  onChangeTheme: PropTypes.func
-}
-*/
 
 export default PaneOptions
