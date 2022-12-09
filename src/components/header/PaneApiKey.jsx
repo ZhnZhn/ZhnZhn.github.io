@@ -16,7 +16,7 @@ const S_SCROLL_PANE = {
   height: 360,
   paddingRight: 10
 }
-, S_OC_CHILD = { paddingLeft: 8}
+, S_OC_CHILD = { paddingLeft: 8 }
 , S_ROW_BTS = { margLeft: 0 }
 , S_BT_SET = { margin: '0 2px' };
 
@@ -109,15 +109,14 @@ class PaneApiKey extends Component {
 
   render(){
     const {
-      isShow, isSelected,
+      isShow,
+      isSelected,
       isShowLabels,
-      titleStyle, btStyle,
+      titleStyle,
+      btStyle,
       onClose
     } = this.props;
-    if (!(isShow && isSelected)) {
-      return null;
-    }
-    return (
+    return (isShow && isSelected) ? (
       <ScrollPane style={S_SCROLL_PANE}>
         <OpenClose caption="Economics" childStyle={S_OC_CHILD}>
           <ItemStack
@@ -162,7 +161,7 @@ class PaneApiKey extends Component {
           />
         </RowButtons>
       </ScrollPane>
-    );
+    ) : null;
   }
 }
 

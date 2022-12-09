@@ -19,7 +19,10 @@ import useTheme from '../hooks/useTheme';
 import useToggle from '../hooks/useToggle';
 import useFnFocus from '../hooks/useFnFocus';
 
-import Comp from '../Comp';
+import FlatButton from '../zhn-m/FlatButton';
+import SvgSettings from '../zhn/svg/SvgSettings';
+import SvgInfo from '../zhn/svg/SvgInfo';
+import ModalSlider from '../zhn-modal-slider/ModalSlider';
 
 import ProgressLoading from './ProgressLoading';
 import AppLabel from './AppLabel';
@@ -27,13 +30,6 @@ import IconLogoErc from './IconLogoErc';
 import HotBar from './HotBar';
 import LimitRemainingLabel from './LimitRemainingLabel';
 import crBrowserModel from './BrowserModel';
-
-const {
-  FlatButton,
-  SvgSettings,
-  SvgInfo,
-  ModalSlider
-} = Comp;
 
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
 , CAPTION = "ERC v0.18.0"
@@ -64,7 +60,7 @@ const HeaderBar = ({
   const [
     isTopics,
     toggleTopics
-  ] = useToggle(false)
+  ] = useToggle()
   , [
     refBt,
     _toggleTopics
@@ -83,46 +79,46 @@ const HeaderBar = ({
           caption={CAPTION}
        />
        <FlatButton
-         refBt={refBt}
-         isArrow={true}
-         timeout={0}
-         className={CL_TOPICS}
-         style={TS.BT}
-         caption="Topics"
-         title="Click to open topics menu"
-         hotKey={HK_TOPICS}
-         onClick={_toggleTopics}
-        />
-        <FlatButton
+          refBt={refBt}
+          isArrow={true}
+          timeout={0}
+          className={CL_TOPICS}
+          style={TS.BT}
+          caption="Topics"
+          title="Click to open topics menu"
+          hotKey={HK_TOPICS}
+          onClick={_toggleTopics}
+       />
+       <FlatButton
           className={CL_EUROSTAT}
           style={TS.BT}
           caption="Eurostat"
           title="Eurostat Browser"
           hotKey={HK_EUROSTAT_BROWSER}
           onClick={BrowserActions.showEurostat}
-        />
-        <FlatButton
+       />
+       <FlatButton
           className={CL_NDL}
           style={TS.BT}
           caption="NDL"
           title="Nasdaq Data Link Browser"
           hotKey={HK_QUANDL_BROWSER}
           onClick={BrowserActions.showQuandl}
-        />
-        <FlatButton
-           className={CL_WATCH}
-           style={TS.BT}
-           caption="Watch"
-           title="Watch List Browser"
-           hotKey={HK_WATCHLIST_BROWSER}
-           onClick={BrowserActions.showWatch}
-        />
-        <HotBar
+       />
+       <FlatButton
+          className={CL_WATCH}
+          style={TS.BT}
+          caption="Watch"
+          title="Watch List Browser"
+          hotKey={HK_WATCHLIST_BROWSER}
+          onClick={BrowserActions.showWatch}
+       />
+       <HotBar
           btStyle={TS.BT_HOT}
           closeDialogAction={CAT_CLOSE_DIALOG}
           onShowDialog={ComponentActions.showDialog}
-        />
-        <div className={CL_BTS_RIGHT}>
+       />
+       <div className={CL_BTS_RIGHT}>
           <LimitRemainingLabel />
           <FlatButton
              style={TS.BT}
@@ -133,24 +129,24 @@ const HeaderBar = ({
              onClick={showSettings}
            >
              <SvgSettings style={S_SVG_BT} />
-           </FlatButton>
-           <FlatButton
+          </FlatButton>
+          <FlatButton
              className={CL_ABOUT}
              style={TS.BT}
              title="About Web Application ERC"
              hotKey={HK_ABOUT}
              timeout={0}
              onClick={ComponentActions.showAbout}
-           >
+          >
              <SvgInfo style={S_SVG_BT} />
-           </FlatButton>
+          </FlatButton>
         </div>
-         <ModalSlider
+        <ModalSlider
            isShow={isTopics}
            className={CL_BROWSER_MENU}
            model={MODEL}
            onClose={_toggleTopics}
-         />
+        />
     </div>
   );
 };

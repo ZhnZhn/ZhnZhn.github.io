@@ -7,13 +7,17 @@ import {
 
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
+import crStyle from '../zhn-utils/crStyle';
 
 import {
   ComponentActions
 } from '../../flux/actions/ComponentActions';
 
 import has from '../has';
-import A from '../Comp';
+
+import ModalDialog from '../zhn-moleculs/ModalDialog';
+import TabPane from '../zhn-tab/TabPane';
+import Tab from '../zhn-tab/Tab';
 import PaneApiKey from './PaneApiKey';
 import PaneOptions from './PaneOptions';
 
@@ -57,6 +61,15 @@ const useMenuMore = () => {
   ];
 };
 
+const _focusPrevRefCompInstance = (
+  refCompInstance
+) => {
+  const _compInst = refCompInstance.current;
+  if (_compInst && _isFn(_compInst.focusPrev)) {
+    _compInst.focusPrev()
+  }
+}
+
 const SettingsDialog = memoIsShow(({
   isShow,
   data,
@@ -66,10 +79,7 @@ const SettingsDialog = memoIsShow(({
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hClose = useCallback(() => {
     onClose()
-    const _compDialog = _refModalDialog.current;
-    if (_compDialog && _isFn(_compDialog.focusPrev)) {
-      _compDialog.focusPrev()
-    }
+    _focusPrevRefCompInstance(_refModalDialog)
   }, [])
   // onClose
   /*eslint-enable react-hooks/exhaustive-deps */
@@ -77,12 +87,13 @@ const SettingsDialog = memoIsShow(({
     isShowLabels,
     menuModel
   ] = useMenuMore()
-  , _style = isShowLabels
-      ? S_MODAL
-      : {...S_MODAL, ...S_MODAL_SMALL}
+  , _style = crStyle(
+    S_MODAL,
+    !isShowLabels &&  S_MODAL_SMALL
+  );
 
   return (
-    <A.ModalDialog
+    <ModalDialog
        ref={_refModalDialog}
        style={_style}
        caption="User Settings"
@@ -91,8 +102,8 @@ const SettingsDialog = memoIsShow(({
        isShow={isShow}
        onClose={_hClose}
     >
-      <A.TabPane>
-        <A.Tab title="ApiKeys">
+      <TabPane>
+        <Tab title="ApiKeys">
           <PaneApiKey
              isShow={isShow}
              isShowLabels={isShowLabels}
@@ -101,8 +112,8 @@ const SettingsDialog = memoIsShow(({
              data={data}
              onClose={_hClose}
            />
-        </A.Tab>
-        <A.Tab title="Options">
+        </Tab>
+        <Tab title="Options">
           <PaneOptions
             isShowLabels={isShowLabels}
             titleStyle={S_TITLE_OPTION}
@@ -111,9 +122,9 @@ const SettingsDialog = memoIsShow(({
             onChangeTheme={ComponentActions.changeTheme}
             onClose={_hClose}
           />
-        </A.Tab>
-      </A.TabPane>
-    </A.ModalDialog>
+        </Tab>
+      </TabPane>
+    </ModalDialog>
   );
 });
 

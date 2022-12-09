@@ -17,7 +17,13 @@ var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
 var _useFnFocus = _interopRequireDefault(require("../hooks/useFnFocus"));
 
-var _Comp = _interopRequireDefault(require("../Comp"));
+var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
+
+var _SvgSettings = _interopRequireDefault(require("../zhn/svg/SvgSettings"));
+
+var _SvgInfo = _interopRequireDefault(require("../zhn/svg/SvgInfo"));
+
+var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
 
 var _ProgressLoading = _interopRequireDefault(require("./ProgressLoading"));
 
@@ -33,12 +39,6 @@ var _BrowserModel = _interopRequireDefault(require("./BrowserModel"));
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const {
-  FlatButton,
-  SvgSettings,
-  SvgInfo,
-  ModalSlider
-} = _Comp.default;
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
       CAPTION = "ERC v0.18.0",
       THEME_ID = 'HEADER_BAR',
@@ -62,7 +62,7 @@ const HeaderBar = _ref => {
   let {
     showSettings
   } = _ref;
-  const [isTopics, toggleTopics] = (0, _useToggle.default)(false),
+  const [isTopics, toggleTopics] = (0, _useToggle.default)(),
         [refBt, _toggleTopics] = (0, _useFnFocus.default)(toggleTopics),
         TS = (0, _useTheme.default)(THEME_ID);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -74,7 +74,7 @@ const HeaderBar = _ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_AppLabel.default, {
       className: CL_LABEL,
       caption: CAPTION
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       refBt: refBt,
       isArrow: true,
       timeout: 0,
@@ -84,21 +84,21 @@ const HeaderBar = _ref => {
       title: "Click to open topics menu",
       hotKey: _hotkeys.HK_TOPICS,
       onClick: _toggleTopics
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       className: CL_EUROSTAT,
       style: TS.BT,
       caption: "Eurostat",
       title: "Eurostat Browser",
       hotKey: _hotkeys.HK_EUROSTAT_BROWSER,
       onClick: _BrowserActions.BrowserActions.showEurostat
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       className: CL_NDL,
       style: TS.BT,
       caption: "NDL",
       title: "Nasdaq Data Link Browser",
       hotKey: _hotkeys.HK_QUANDL_BROWSER,
       onClick: _BrowserActions.BrowserActions.showQuandl
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       className: CL_WATCH,
       style: TS.BT,
       caption: "Watch",
@@ -111,28 +111,28 @@ const HeaderBar = _ref => {
       onShowDialog: _ComponentActions.ComponentActions.showDialog
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_BTS_RIGHT,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
         style: TS.BT,
         isPrimary: true,
         title: "User Settings Dialog",
         hotKey: _hotkeys.HK_SETTINGS,
         timeout: 500,
         onClick: showSettings,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgSettings, {
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgSettings.default, {
           style: S_SVG_BT
         })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(FlatButton, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
         className: CL_ABOUT,
         style: TS.BT,
         title: "About Web Application ERC",
         hotKey: _hotkeys.HK_ABOUT,
         timeout: 0,
         onClick: _ComponentActions.ComponentActions.showAbout,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgInfo, {
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgInfo.default, {
           style: S_SVG_BT
         })
       })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalSlider, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.default, {
       isShow: isTopics,
       className: CL_BROWSER_MENU,
       model: MODEL,

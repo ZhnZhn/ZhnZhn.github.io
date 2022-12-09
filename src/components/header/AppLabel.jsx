@@ -1,4 +1,8 @@
-const AppLabel = ({ className, caption, title }) => (
+const AppLabel = ({
+  className,
+  caption,
+  title
+}) => (
   <span
      className={className}
      title={title}

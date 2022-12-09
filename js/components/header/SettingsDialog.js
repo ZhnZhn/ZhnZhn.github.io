@@ -11,11 +11,17 @@ var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 
+var _crStyle = _interopRequireDefault(require("../zhn-utils/crStyle"));
+
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 
 var _has = _interopRequireDefault(require("../has"));
 
-var _Comp = _interopRequireDefault(require("../Comp"));
+var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
+
+var _TabPane = _interopRequireDefault(require("../zhn-tab/TabPane"));
+
+var _Tab = _interopRequireDefault(require("../zhn-tab/Tab"));
 
 var _PaneApiKey = _interopRequireDefault(require("./PaneApiKey"));
 
@@ -68,6 +74,14 @@ const useMenuMore = () => {
   return [isShowLabels, menuModel];
 };
 
+const _focusPrevRefCompInstance = refCompInstance => {
+  const _compInst = refCompInstance.current;
+
+  if (_compInst && _isFn(_compInst.focusPrev)) {
+    _compInst.focusPrev();
+  }
+};
+
 const SettingsDialog = (0, _memoIsShow.default)(_ref => {
   let {
     isShow,
@@ -80,21 +94,16 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
   ,
         _hClose = (0, _uiApi.useCallback)(() => {
     onClose();
-    const _compDialog = _refModalDialog.current;
 
-    if (_compDialog && _isFn(_compDialog.focusPrev)) {
-      _compDialog.focusPrev();
-    }
+    _focusPrevRefCompInstance(_refModalDialog);
   }, []) // onClose
 
   /*eslint-enable react-hooks/exhaustive-deps */
   ,
         [isShowLabels, menuModel] = useMenuMore(),
-        _style = isShowLabels ? S_MODAL : { ...S_MODAL,
-    ...S_MODAL_SMALL
-  };
+        _style = (0, _crStyle.default)(S_MODAL, !isShowLabels && S_MODAL_SMALL);
 
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ModalDialog, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
     ref: _refModalDialog,
     style: _style,
     caption: "User Settings",
@@ -102,8 +111,8 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
     isWithButton: false,
     isShow: isShow,
     onClose: _hClose,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.TabPane, {
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.Tab, {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "ApiKeys",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneApiKey.default, {
           isShow: isShow,
@@ -113,7 +122,7 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
           data: data,
           onClose: _hClose
         })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.Tab, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "Options",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneOptions.default, {
           isShowLabels: isShowLabels,

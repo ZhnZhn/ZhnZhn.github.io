@@ -128,12 +128,7 @@ class PaneApiKey extends _react.Component {
       btStyle,
       onClose
     } = this.props;
-
-    if (!(isShow && isSelected)) {
-      return null;
-    }
-
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ScrollPane.default, {
+    return isShow && isSelected ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ScrollPane.default, {
       style: S_SCROLL_PANE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
         caption: "Economics",
@@ -184,7 +179,7 @@ class PaneApiKey extends _react.Component {
           onClick: this._hSetAll
         })]
       })]
-    });
+    }) : null;
   }
 
 }
