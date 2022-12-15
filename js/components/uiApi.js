@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.setRefValue = exports.memo = exports.isInputValid = exports.getRefValue = exports.getRefElementStyle = exports.getInputValue = exports.forwardRef = exports.focusRefElement = exports.createRef = exports.createContext = exports.Component = void 0;
+exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.setRefValue = exports.memo = exports.isInputValid = exports.getRefValue = exports.getRefElementStyle = exports.getInputValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.createRef = exports.createContext = exports.Component = void 0;
 
 var _react = require("react");
 
@@ -61,4 +61,18 @@ const getInputValue = ref => {
 };
 
 exports.getInputValue = getInputValue;
+
+const _getFirstTouches = touches => touches && touches[0] || {};
+
+const _getTouchClientX = touches => _getFirstTouches(touches).clientX;
+
+const _getTouchClientY = touches => _getFirstTouches(touches).clientY;
+
+const getClientX = evt => evt.clientX || _getTouchClientX(evt.targetTouches) || _getTouchClientX(evt.changedTouches) || 0;
+
+exports.getClientX = getClientX;
+
+const getClientY = evt => evt.clientY || _getTouchClientY(evt.targetTouches) || _getTouchClientY(evt.changedTouches) || 0;
+
+exports.getClientY = getClientY;
 //# sourceMappingURL=uiApi.js.map

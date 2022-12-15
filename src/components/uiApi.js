@@ -1,7 +1,7 @@
 export {
   Component,
   createRef,
-  
+
   createContext,
   memo,
   forwardRef,
@@ -59,3 +59,29 @@ export const getInputValue = ref => {
     ? inputComp.getValue()
     : void 0
 }
+
+const _getFirstTouches = (
+  touches
+) => (touches && touches[0]) || {};
+
+const _getTouchClientX = (
+  touches
+) => _getFirstTouches(touches).clientX;
+
+const _getTouchClientY = (
+  touches
+) => _getFirstTouches(touches).clientY;
+
+export const getClientX = (
+  evt
+) => evt.clientX
+  || _getTouchClientX(evt.targetTouches)
+  || _getTouchClientX(evt.changedTouches)
+  || 0;
+
+export const getClientY = (
+  evt
+) => evt.clientY
+  || _getTouchClientY(evt.targetTouches)
+  || _getTouchClientY(evt.changedTouches)
+  || 0;
