@@ -13,6 +13,8 @@ var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
 
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 
+var _useXYMovable = _interopRequireDefault(require("../hooks/useXYMovable"));
+
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
 
 var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
@@ -22,8 +24,6 @@ var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 
 var _MenuMore = _interopRequireDefault(require("./MenuMore"));
-
-var _Interact = _interopRequireDefault(require("../../utils/Interact"));
 
 var _Dialog = require("./Dialog.Style");
 
@@ -39,9 +39,6 @@ const TH_ID = 'DRAGGABLE_DIALOG',
   top: 30,
   left: 50,
   zIndex: 10
-},
-      S_CHILDREN_DIV = {
-  cursor: 'default'
 };
 
 const _isFn = fn => typeof fn === 'function';
@@ -98,15 +95,8 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
         TS = (0, _useTheme.default)(TH_ID),
         _className = (0, _crCn.default)(CL_DRAGGABLE_DIALOG, [isShow, CL_SHOWING]),
         _styleShow = isShow ? _Dialog.S_SHOW : _Dialog.S_HIDE;
-  /*eslint-disable react-hooks/exhaustive-deps */
 
-
-  (0, _uiApi.useEffect)(() => {
-    _Interact.default.makeDragable(refRoot.current);
-  }, []); // refRoot
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-
+  (0, _useXYMovable.default)(refRoot);
   return (
     /*#__PURE__*/
 
@@ -144,7 +134,6 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
           onClose: onClose
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        style: S_CHILDREN_DIV,
         children: children
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
         buttons: commandButtons,

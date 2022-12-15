@@ -1,12 +1,10 @@
 //import PropTypes from "prop-types";
-import {
-  forwardRef,
-  useEffect
-} from '../uiApi';
+import { forwardRef } from '../uiApi';
 
 import useToggle from '../hooks/useToggle';
 import useKeyEscape from '../hooks/useKeyEscape';
 import useTheme from '../hooks/useTheme';
+import useXYMovable from '../hooks/useXYMovable';
 import useDialogFocus from './useDialogFocus';
 
 import crCn from '../zhn-utils/crCn';
@@ -15,8 +13,6 @@ import SvgClose from '../zhn/SvgClose';
 import FlatButton from '../zhn-m/FlatButton';
 
 import MenuMore from './MenuMore';
-
-import Interact from '../../utils/Interact';
 
 import {
   S_SHOW,
@@ -40,8 +36,7 @@ const TH_ID = 'DRAGGABLE_DIALOG'
   top: 30,
   left: 50,
   zIndex: 10
-}
-, S_CHILDREN_DIV = { cursor: 'default' };
+};
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -112,14 +107,10 @@ const DraggableDialog = forwardRef(({
       [isShow, CL_SHOWING]
     )
   , _styleShow = isShow
-      ? S_SHOW : S_HIDE;
+      ? S_SHOW
+      : S_HIDE;
 
-  /*eslint-disable react-hooks/exhaustive-deps */
-  useEffect(()=>{
-    Interact.makeDragable(refRoot.current);
-  }, [])
-  // refRoot
-  /*eslint-enable react-hooks/exhaustive-deps */
+  useXYMovable(refRoot)
 
   return (
     /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
@@ -157,7 +148,7 @@ const DraggableDialog = forwardRef(({
            onClose={onClose}
         />
       </div>
-      <div style={S_CHILDREN_DIV}>
+      <div>
          {children}
       </div>
       <CommandButtons

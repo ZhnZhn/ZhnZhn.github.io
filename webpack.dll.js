@@ -11,7 +11,7 @@ module.exports = {
      lib: [            
             "react", "react-dom", "raven-js",
             "reflux-core",            
-            "big.js", "interactjs", 
+            "big.js",
             "localforage",            
             "dompurify",
             "highcharts",             
