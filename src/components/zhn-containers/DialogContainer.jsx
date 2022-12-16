@@ -1,7 +1,7 @@
 import {
   useState,
   cloneElement
-} from 'react';
+} from '../uiApi';
 
 import useListen from '../hooks/useListen';
 
@@ -89,12 +89,12 @@ const _renderDialogs = (
     });
 });
 
-const NOOP = () => {};
+const FN_NOOP = () => {};
 
 const DialogContainer = ({
   maxDialog=3,
   showAction,
-  onCloseDialog=NOOP
+  onCloseDialog=FN_NOOP
 }) => {
   const [state, setState] = useState({
     hmIs: {},

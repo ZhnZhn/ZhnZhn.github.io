@@ -1,5 +1,5 @@
-import { useState } from 'react';
 //import PropTypes from 'prop-types';
+import { useState } from '../uiApi';
 import useListen from '../hooks/useListen';
 
 const CL = "hrz-container";
@@ -8,7 +8,10 @@ const CompContainer = ({
   className=CL,
   addAction
 }) => {
-  const [containers, setContainers] = useState([]);
+  const [
+    containers,
+    setContainers
+  ] = useState([]);
 
   useListen((actionType, Comp) => {
     if (actionType === addAction) {

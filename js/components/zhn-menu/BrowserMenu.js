@@ -1,22 +1,14 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
-
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
-
 var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
-
 var _Comp = _interopRequireDefault(require("../Comp"));
-
 var _MenuTopicList = _interopRequireDefault(require("./MenuTopicList"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const {
   Browser,
   BrowserCaption,
@@ -24,10 +16,9 @@ const {
   SpinnerLoading
 } = _Comp.default;
 const CL_SCROLL = 'scroll-container-y scroll-menu',
-      S_BROWSER = {
-  paddingRight: 0
-};
-
+  S_BROWSER = {
+    paddingRight: 0
+  };
 const BrowserMenu = _ref => {
   let {
     isInitShow,
@@ -42,7 +33,7 @@ const BrowserMenu = _ref => {
     children
   } = _ref;
   const [isShow, showBrowser, hideBrowser] = (0, _useBool.default)(isInitShow),
-        [isLoading, menu, setLoaded, setFailed, updateMenu] = (0, _useLoadMenu.default)(isShow, onLoadMenu);
+    [isLoading, menu, setLoaded, setFailed, updateMenu] = (0, _useLoadMenu.default)(isShow, onLoadMenu);
   (0, _useListen.default)((actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {
@@ -70,7 +61,6 @@ const BrowserMenu = _ref => {
     })]
   });
 };
-
 var _default = BrowserMenu;
 exports.default = _default;
 //# sourceMappingURL=BrowserMenu.js.map

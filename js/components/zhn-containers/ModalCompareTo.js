@@ -1,22 +1,14 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _useFocus = _interopRequireDefault(require("../hooks/useFocus"));
-
 var _DateUtils = require("../../utils/DateUtils");
-
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
-
 var _DivCompareTo = _interopRequireDefault(require("../items/DivCompareTo"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const S_MODAL_POPUP = {
   position: 'absolute',
   top: 38,
@@ -30,25 +22,21 @@ const S_MODAL_POPUP = {
   boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
   cursor: 'auto'
 };
-
 const ModalCompareTo = _ref => {
   let {
     isShow,
     onCompareTo,
     onClose
   } = _ref;
-
   const _refInput = (0, _useFocus.default)(isShow),
-        [msgErr, setMsgErr] = (0, _react.useState)(''),
-        _onEnterDateTo = (0, _react.useCallback)(dateTo => {
-    if ((0, _DateUtils.isDmy)(dateTo)) {
-      const _r = onCompareTo(dateTo),
-            _msgErr = _r !== 0 ? "No " + _r + " data for " + dateTo : '';
-
-      setMsgErr(_msgErr);
-    }
-  }, [onCompareTo]);
-
+    [msgErr, setMsgErr] = (0, _uiApi.useState)(''),
+    _onEnterDateTo = (0, _uiApi.useCallback)(dateTo => {
+      if ((0, _DateUtils.isDmy)(dateTo)) {
+        const _r = onCompareTo(dateTo),
+          _msgErr = _r !== 0 ? "No " + _r + " data for " + dateTo : '';
+        setMsgErr(_msgErr);
+      }
+    }, [onCompareTo]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
     isShow: isShow,
     style: S_MODAL_POPUP,
@@ -61,7 +49,6 @@ const ModalCompareTo = _ref => {
     })
   });
 };
-
 var _default = ModalCompareTo;
 exports.default = _default;
 //# sourceMappingURL=ModalCompareTo.js.map
