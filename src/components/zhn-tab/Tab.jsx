@@ -1,8 +1,7 @@
-//import PropTypes from "prop-types";
 import crCn from '../zhn-utils/crCn';
 
 const CL_TAB = 'tab'
-, CL_TAB_SELECTED = 'tab--selected';
+, CL_TAB_SELECTED = `${CL_TAB}--selected`;
 
 const Tab = ({
   id,
@@ -10,10 +9,14 @@ const Tab = ({
   isSelected,
   onClick
 }) => {
-  const _cn = crCn(CL_TAB, [isSelected, CL_TAB_SELECTED]);
+  const _cn = crCn(
+    CL_TAB,
+    [isSelected, CL_TAB_SELECTED]
+  );
 
   return (
     <button
+       type="button"
        className={_cn}
        id={`tab-${id}`}
        role="tab"
@@ -25,15 +28,5 @@ const Tab = ({
     </button>
   );
 }
-
-/*
-Tab.propTypes = {
-  id: PropTypes.number,
-  title: PropTypes.string,
-  isSelected: PropTypes.bool,
-  onClick: PropTypes.func
-}
-*/
-
 
 export default Tab

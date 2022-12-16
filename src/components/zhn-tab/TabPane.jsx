@@ -1,7 +1,7 @@
 import {
   cloneElement,
   useState
-} from 'react';
+} from '../uiApi';
 
 const S_TABS = { margin: '5px 5px 10px 24px' }
 , S_COMPONENTS = {

@@ -2,62 +2,31 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _jsxRuntime = require("react/jsx-runtime");
-
-//import PropTypes from "prop-types";
 const S_TABS = {
-  marginTop: 5,
-  marginRight: 5,
-  marginBottom: 10,
-  marginLeft: 24
-},
-      S_BLOCK = {
-  display: 'block',
-  width: "100%",
-  height: "100%"
-},
-      S_NONE = {
-  display: 'none'
-},
-      S_COMPONENTS = {
-  width: "100%",
-  height: "100%"
-};
-
-const _renderTabs = (children, selectedTabIndex, hClickTab) => children.map((tab, index) => /*#__PURE__*/(0, _react.cloneElement)(tab, {
-  key: index,
-  id: index,
-  onClick: () => hClickTab(index),
-  isSelected: index === selectedTabIndex
-}));
-
-const _renderComponents = (children, selectedTabIndex) => children.map((tab, index) => {
-  const _isSelected = index === selectedTabIndex,
-        _divStyle = _isSelected ? S_BLOCK : S_NONE;
-
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    style: _divStyle,
-    role: "tabpanel",
-    id: "tabpanel-" + index,
-    "aria-labelledby": "tab-" + index,
-    children: /*#__PURE__*/(0, _react.cloneElement)(tab.props.children, {
-      isSelected: _isSelected
-    })
-  }, 'a' + index);
-});
-
-const TabPane = /*#__PURE__*/(0, _react.forwardRef)(({
-  width,
-  height,
-  children
-}, ref) => {
-  const [selectedTabIndex, setSelectedTabIndex] = (0, _react.useState)(0);
-  (0, _react.useImperativeHandle)(ref, () => ({
-    getSelectedTabIndex: () => selectedTabIndex
-  }), [selectedTabIndex]);
+    margin: '5px 5px 10px 24px'
+  },
+  S_COMPONENTS = {
+    width: "100%",
+    height: "100%"
+  },
+  S_BLOCK = {
+    display: 'block',
+    width: "100%",
+    height: "100%"
+  },
+  S_NONE = {
+    display: 'none'
+  };
+const TabPane = _ref => {
+  let {
+    width,
+    height,
+    children
+  } = _ref;
+  const [selectedTabIndex, setSelectedTabIndex] = (0, _uiApi.useState)(0),
+    _isSelectedTabIndex = index => index === selectedTabIndex;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       width,
@@ -65,21 +34,29 @@ const TabPane = /*#__PURE__*/(0, _react.forwardRef)(({
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_TABS,
-      children: _renderTabs(children, selectedTabIndex, setSelectedTabIndex)
+      children: children.map((tab, index) => (0, _uiApi.cloneElement)(tab, {
+        key: index,
+        id: index,
+        onClick: () => setSelectedTabIndex(index),
+        isSelected: _isSelectedTabIndex(index)
+      }))
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_COMPONENTS,
-      children: _renderComponents(children, selectedTabIndex)
+      children: children.map((tab, index) => {
+        const isSelected = _isSelectedTabIndex(index);
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          style: isSelected ? S_BLOCK : S_NONE,
+          role: "tabpanel",
+          id: "tabpanel-" + index,
+          "aria-labelledby": "tab-" + index,
+          children: (0, _uiApi.cloneElement)(tab.props.children, {
+            isSelected
+          })
+        }, index);
+      })
     })]
   });
-});
-/*
-TabPane.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
-  children: PropTypes.arrayOf(PropTypes.node)
-}
-*/
-
+};
 var _default = TabPane;
 exports.default = _default;
 //# sourceMappingURL=TabPane.js.map
