@@ -1,1 +1,32 @@
-{"version":3,"sources":["../../../src/components/zhn-menu/useLoadMenu.js"],"names":["LOADING","LOADED","FAILED","UPDATE","_crAction","type","menu","initialState","isLoaded","isLoading","_reducer","state","useLoadMenu","isShow","onLoadMenu","dispatch","setLoading","setFailed","setLoaded","updateMenu"],"mappings":";;;;;AAAA;;AAEA,MAAMA,OAAO,GAAG,GAAhB;AAAA,MACEC,MAAM,GAAG,GADX;AAAA,MAEEC,MAAM,GAAG,GAFX;AAAA,MAGEC,MAAM,GAAG,GAHX;AAAA,MAIEC,SAAS,GAAG,CAACC,IAAD,EAAOC,IAAP,MAAiB;AAAED,EAAAA,IAAF;AAAQC,EAAAA;AAAR,CAAjB,CAJd;AAAA,MAKEC,YAAY,GAAG;AACfC,EAAAA,QAAQ,EAAE,KADK;AAEfC,EAAAA,SAAS,EAAE,KAFI;AAGfH,EAAAA,IAAI,EAAE;AAHS,CALjB;;AAWA,MAAMI,QAAQ,GAAG,CAACC,KAAD,WAAyB;AAAA,MAAjB;AAACN,IAAAA,IAAD;AAAOC,IAAAA;AAAP,GAAiB;;AACxC,UAAOD,IAAP;AACE,SAAKL,OAAL;AAAc,aAAO,EAAE,GAAGW,KAAL;AAAYF,QAAAA,SAAS,EAAE;AAAvB,OAAP;;AACd,SAAKR,MAAL;AAAa,aAAO;AAClBQ,QAAAA,SAAS,EAAE,KADO;AAElBD,QAAAA,QAAQ,EAAE,IAFQ;AAGlBF,QAAAA;AAHkB,OAAP;;AAKb,SAAKJ,MAAL;AAAa,aAAO,EAAE,GAAGK;AAAL,OAAP;;AACb,SAAKJ,MAAL;AAAa,aAAO,EAAE,GAAGQ,KAAL;AAAYL,QAAAA;AAAZ,OAAP;;AACb;AAAS,aAAOK,KAAP;AATX;AAWD,CAZD;;AAcA,MAAMC,WAAW,GAAG,CAACC,MAAD,EAASC,UAAT,KAAwB;AACzC,QAAM,CAAC;AAACL,IAAAA,SAAD;AAAYD,IAAAA,QAAZ;AAAsBF,IAAAA;AAAtB,GAAD,EAA8BS,QAA9B,IAA0C,uBAAWL,QAAX,EAAqBH,YAArB,CAAhD;AAAA,QACES,UAAU,GAAG,MAAMD,QAAQ,CAACX,SAAS,CAACJ,OAAD,CAAV,CAD7B;AAAA,QAEEiB,SAAS,GAAG,MAAMF,QAAQ,CAACX,SAAS,CAACF,MAAD,CAAV,CAF5B;AAAA,QAGEgB,SAAS,GAAGZ,IAAI,IAAIS,QAAQ,CAACX,SAAS,CAACH,MAAD,EAASK,IAAT,CAAV,CAH9B;AAAA,QAIEa,UAAU,GAAGb,IAAI,IAAIS,QAAQ,CAACX,SAAS,CAACD,MAAD,EAASG,IAAT,CAAV,CAJ/B;AAMA;;;AACA,wBAAU,MAAI;AACZ,QAAI,CAACE,QAAD,IAAaK,MAAjB,EAAyB;AACvBC,MAAAA,UAAU;AACVE,MAAAA,UAAU;AACX;AACF,GALD,EAKG,CAACR,QAAD,EAAWK,MAAX,CALH,EARyC,CAczC;;AACA;;AAEA,SAAO,CACLJ,SADK,EAELH,IAFK,EAGLY,SAHK,EAILD,SAJK,EAKLE,UALK,CAAP;AAOF,CAxBD;;eA0BeP,W","sourcesContent":["import { useReducer, useEffect } from 'react';\r\n\r\nconst LOADING = 'a'\r\n, LOADED = 'b'\r\n, FAILED = 'c'\r\n, UPDATE = 'd'\r\n, _crAction = (type, menu) => ({ type, menu })\r\n, initialState = {\r\n  isLoaded: false,\r\n  isLoading: false,\r\n  menu: [],\r\n};\r\n\r\nconst _reducer = (state, {type, menu}) => {\r\n  switch(type){\r\n    case LOADING: return { ...state, isLoading: true };\r\n    case LOADED: return {\r\n      isLoading: false,\r\n      isLoaded: true,\r\n      menu\r\n    };\r\n    case FAILED: return { ...initialState };\r\n    case UPDATE: return { ...state, menu };\r\n    default: return state;\r\n  }\r\n};\r\n\r\nconst useLoadMenu = (isShow, onLoadMenu) => {\r\n   const [{isLoading, isLoaded, menu}, dispatch] = useReducer(_reducer, initialState)\r\n   , setLoading = () => dispatch(_crAction(LOADING))\r\n   , setFailed = () => dispatch(_crAction(FAILED))\r\n   , setLoaded = menu => dispatch(_crAction(LOADED, menu))\r\n   , updateMenu = menu => dispatch(_crAction(UPDATE, menu));\r\n\r\n   /*eslint-disable react-hooks/exhaustive-deps */\r\n   useEffect(()=>{\r\n     if (!isLoaded && isShow) {\r\n       onLoadMenu()\r\n       setLoading()\r\n     }\r\n   }, [isLoaded, isShow])\r\n   // onLoadMenu\r\n   /*eslint-enable react-hooks/exhaustive-deps */\r\n\r\n   return [\r\n     isLoading,\r\n     menu,\r\n     setLoaded,\r\n     setFailed,\r\n     updateMenu\r\n   ];\r\n};\r\n\r\nexport default useLoadMenu\r\n"],"file":"useLoadMenu.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-menu/useLoadMenu.js"
+ ],
+ "file": "../../../src/components/zhn-menu/useLoadMenu.js",
+ "names": [
+  "LOADING",
+  "LOADED",
+  "FAILED",
+  "UPDATE",
+  "_crAction",
+  "type",
+  "menu",
+  "initialState",
+  "isLoaded",
+  "isLoading",
+  "_reducer",
+  "state",
+  "useLoadMenu",
+  "isShow",
+  "onLoadMenu",
+  "dispatch",
+  "useReducer",
+  "setLoading",
+  "setFailed",
+  "setLoaded",
+  "updateMenu",
+  "useEffect"
+ ],
+ "mappings": ";;;;AAAA;AAKA,MAAMA,OAAO,GAAG,GAAG;EACjBC,MAAM,GAAG,GAAG;EACZC,MAAM,GAAG,GAAG;EACZC,MAAM,GAAG,GAAG;EACZC,SAAS,GAAG,CAACC,IAAI,EAAEC,IAAI,MAAM;IAAED,IAAI;IAAEC;EAAK,CAAC,CAAC;EAC5CC,YAAY,GAAG;IACfC,QAAQ,EAAE,KAAK;IACfC,SAAS,EAAE,KAAK;IAChBH,IAAI,EAAE;EACR,CAAC;AAED,MAAMI,QAAQ,GAAG,CACfC,KAAK,WAEF;EAAA,IADH;IAACN,IAAI;IAAEC;EAAI,CAAC;EAEZ,QAAOD,IAAI;IACT,KAAKL,OAAO;MAAE,OAAO;QAAE,GAAGW,KAAK;QAAEF,SAAS,EAAE;MAAK,CAAC;IAClD,KAAKR,MAAM;MAAE,OAAO;QAClBQ,SAAS,EAAE,KAAK;QAChBD,QAAQ,EAAE,IAAI;QACdF;MACF,CAAC;IACD,KAAKJ,MAAM;MAAE,OAAO;QAAE,GAAGK;MAAa,CAAC;IACvC,KAAKJ,MAAM;MAAE,OAAO;QAAE,GAAGQ,KAAK;QAAEL;MAAK,CAAC;IACtC;MAAS,OAAOK,KAAK;EAAC;AAE1B,CAAC;AAED,MAAMC,WAAW,GAAG,CAClBC,MAAM,EACNC,UAAU,KACP;EACF,MAAM,CAAC;MACLL,SAAS;MACTD,QAAQ;MACRF;IACF,CAAC,EAAES,QAAQ,CAAC,GAAG,IAAAC,iBAAU,EAACN,QAAQ,EAAEH,YAAY,CAAC;IAC/CU,UAAU,GAAG,MAAMF,QAAQ,CAACX,SAAS,CAACJ,OAAO,CAAC,CAAC;IAC/CkB,SAAS,GAAG,MAAMH,QAAQ,CAACX,SAAS,CAACF,MAAM,CAAC,CAAC;IAC7CiB,SAAS,GAAGb,IAAI,IAAIS,QAAQ,CAACX,SAAS,CAACH,MAAM,EAAEK,IAAI,CAAC,CAAC;IACrDc,UAAU,GAAGd,IAAI,IAAIS,QAAQ,CAACX,SAAS,CAACD,MAAM,EAAEG,IAAI,CAAC,CAAC;;EAExD;EACA,IAAAe,gBAAS,EAAC,MAAI;IACZ,IAAI,CAACb,QAAQ,IAAIK,MAAM,EAAE;MACvBC,UAAU,EAAE;MACZG,UAAU,EAAE;IACd;EACF,CAAC,EAAE,CAACT,QAAQ,EAAEK,MAAM,CAAC,CAAC;EACtB;EACA;;EAEA,OAAO,CACLJ,SAAS,EACTH,IAAI,EACJa,SAAS,EACTD,SAAS,EACTE,UAAU,CACX;AACJ,CAAC;AAAC,eAEaR,WAAW;AAAA"
+}

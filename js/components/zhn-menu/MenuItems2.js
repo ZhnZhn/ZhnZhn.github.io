@@ -1,18 +1,12 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _Color = require("../styles/Color");
-
 var _Comp = _interopRequireDefault(require("../Comp"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const {
   OpenClose2
 } = _Comp.default;
@@ -24,17 +18,16 @@ const MODEL_PROP = {
   ITEMS: 'items'
 };
 const S_GROUP_DIV = {
-  lineHeight: 2
-},
-      S_LIST_DIV = {
-  marginLeft: 8,
-  paddingLeft: 12,
-  lineHeight: 2,
-  borderLeftStyle: 'solid',
-  borderLeftWidth: 2,
-  borderLeftColor: 'inherit'
-};
-
+    lineHeight: 2
+  },
+  S_LIST_DIV = {
+    marginLeft: 8,
+    paddingLeft: 12,
+    lineHeight: 2,
+    borderLeftStyle: 'solid',
+    borderLeftWidth: 2,
+    borderLeftColor: 'inherit'
+  };
 const _renderLevel3 = (items, captionProp, props) => {
   const {
     itemClassName,
@@ -51,11 +44,10 @@ const _renderLevel3 = (items, captionProp, props) => {
     }, index);
   });
 };
-
 const _renderLevel2 = (lists, captionProp, itemsProp, props) => {
   return (lists || []).map((list, index) => {
     const caption = list[captionProp],
-          items = list[itemsProp];
+      items = list[itemsProp];
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(OpenClose2, {
       style: S_LIST_DIV,
       openColor: LIST_OPEN_COLOR,
@@ -64,29 +56,27 @@ const _renderLevel2 = (lists, captionProp, itemsProp, props) => {
     }, index);
   });
 };
-
 const _renderLevel1 = props => {
   const {
-    model
-  } = props,
-        {
-    meta
-  } = model || {},
-        {
-    caption,
-    level1,
-    level2,
-    level3
-  } = meta || {},
-        _captionProp = caption || MODEL_PROP.CAPTION,
-        _groupsProp = level1 || MODEL_PROP.GROUPS,
-        _listsProp = level2 || MODEL_PROP.LISTS,
-        _itemsProp = level3 || MODEL_PROP.ITEMS,
-        groups = model[_groupsProp] || [];
-
+      model
+    } = props,
+    {
+      meta
+    } = model || {},
+    {
+      caption,
+      level1,
+      level2,
+      level3
+    } = meta || {},
+    _captionProp = caption || MODEL_PROP.CAPTION,
+    _groupsProp = level1 || MODEL_PROP.GROUPS,
+    _listsProp = level2 || MODEL_PROP.LISTS,
+    _itemsProp = level3 || MODEL_PROP.ITEMS,
+    groups = model[_groupsProp] || [];
   return groups.map((group, index) => {
     const caption = group[_captionProp],
-          lists = group[_listsProp];
+      lists = group[_listsProp];
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(OpenClose2, {
       style: S_GROUP_DIV,
       caption: caption,
@@ -94,10 +84,8 @@ const _renderLevel1 = props => {
     }, index);
   });
 };
-
 const _areEqual = (prevProps, nextProps) => prevProps.model === nextProps.model;
-
-const MenuItems2 = /*#__PURE__*/(0, _react.memo)(props => /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+const MenuItems2 = (0, _uiApi.memo)(props => /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
   children: _renderLevel1(props)
 }), _areEqual);
 var _default = MenuItems2;

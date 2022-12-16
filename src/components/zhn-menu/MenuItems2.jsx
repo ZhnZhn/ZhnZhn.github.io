@@ -1,5 +1,6 @@
-import { memo } from 'react';
-import { GREEN_COLOR } from '../styles/Color'
+import { memo } from '../uiApi';
+
+import { GREEN_COLOR } from '../styles/Color';
 import Comp from '../Comp'
 
 const { OpenClose2 } = Comp;
@@ -23,8 +24,16 @@ const S_GROUP_DIV = { lineHeight: 2 }
   borderLeftColor: 'inherit',
 };
 
-const _renderLevel3 = (items, captionProp, props) => {
-  const { itemClassName, ItemComp, onClickItem } = props;
+const _renderLevel3 = (
+  items,
+  captionProp,
+  props
+) => {
+  const {
+    itemClassName,
+    ItemComp,
+    onClickItem
+  } = props;
   return (items || []).map((item, index) => {
     const caption = item[captionProp];
     return (
@@ -39,7 +48,12 @@ const _renderLevel3 = (items, captionProp, props) => {
   })
 }
 
-const _renderLevel2 = (lists, captionProp, itemsProp, props) => {
+const _renderLevel2 = (
+  lists,
+  captionProp,
+  itemsProp,
+  props
+) => {
   return (lists || []).map((list, index) => {
     const caption  = list[captionProp]
     , items = list[itemsProp];

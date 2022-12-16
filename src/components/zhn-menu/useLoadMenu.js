@@ -1,4 +1,7 @@
-import { useReducer, useEffect } from 'react';
+import { 
+  useReducer,
+  useEffect
+} from '../uiApi';
 
 const LOADING = 'a'
 , LOADED = 'b'
@@ -11,7 +14,10 @@ const LOADING = 'a'
   menu: [],
 };
 
-const _reducer = (state, {type, menu}) => {
+const _reducer = (
+  state,
+  {type, menu}
+) => {
   switch(type){
     case LOADING: return { ...state, isLoading: true };
     case LOADED: return {
@@ -25,8 +31,15 @@ const _reducer = (state, {type, menu}) => {
   }
 };
 
-const useLoadMenu = (isShow, onLoadMenu) => {
-   const [{isLoading, isLoaded, menu}, dispatch] = useReducer(_reducer, initialState)
+const useLoadMenu = (
+  isShow,
+  onLoadMenu
+) => {
+   const [{
+     isLoading,
+     isLoaded,
+     menu
+   }, dispatch] = useReducer(_reducer, initialState)
    , setLoading = () => dispatch(_crAction(LOADING))
    , setFailed = () => dispatch(_crAction(FAILED))
    , setLoaded = menu => dispatch(_crAction(LOADED, menu))
