@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _react = require("react");
+var _uiApi = require("../uiApi");
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 var _has = require("../has");
 var _mathFn = require("../../math/mathFn");
@@ -93,7 +93,6 @@ const _isNaN = Number.isNaN,
   _crLeftStyle = percent => ({
     left: percent + "%"
   }),
-  _getClienX = _has.HAS_TOUCH_EVENTS ? evt => (((evt || {}).touches || [])[0] || {}).clientX || 0 : evt => evt.clientX,
   _isUp = keyCode => keyCode === 39 || keyCode === 38,
   _isDown = keyCode => keyCode === 37 || keyCode === 40,
   _calcValueByKeyCode = (value, step, keyCode) => _isUp(keyCode) ? value + step : _isDown(keyCode) ? value - step : void 0,
@@ -101,7 +100,7 @@ const _isNaN = Number.isNaN,
   _getRefValue = ref => ref.current;
 const _useMouseDown = setValueFromPosition => {
   const [isDragged, setDraggedTrue, setDraggedFalse] = (0, _useBool.default)(false),
-    _refDragRunning = (0, _react.useRef)(false),
+    _refDragRunning = (0, _uiApi.useRef)(false),
     _hDragMouseMove = event => {
       if (_getRefValue(_refDragRunning)) {
         return;
@@ -136,9 +135,9 @@ const InputSlider = _ref => {
     max = 20,
     onChange = _FN_NOOP
   } = _ref;
-  const _refTrack = (0, _react.useRef)(),
+  const _refTrack = (0, _uiApi.useRef)(),
     [isHovered, setHoveredTrue, setHoveredFalse] = (0, _useBool.default)(false),
-    [value, setValue] = (0, _react.useState)(initialValue),
+    [value, setValue] = (0, _uiApi.useState)(initialValue),
     _updateValue = value => {
       const _value = _checkValueInMinMax(min, max, value);
       setValue(_value);
@@ -156,7 +155,7 @@ const InputSlider = _ref => {
     },
     _calcPositionFromEvent = evt => {
       const _trackOffset = _getRefValue(_refTrack).getBoundingClientRect()['left'];
-      return _isNumber(_trackOffset) ? _getClienX(evt) - _trackOffset : NaN;
+      return _isNumber(_trackOffset) ? (0, _uiApi.getClientX)(evt) - _trackOffset : NaN;
     },
     _setValueFromPosition = evt => {
       const positionMax = _getRefValue(_refTrack).clientWidth;

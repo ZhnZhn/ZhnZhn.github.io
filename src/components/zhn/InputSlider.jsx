@@ -1,8 +1,9 @@
 //import PropTypes from "prop-types";
 import {
   useRef,
-  useState
-} from 'react';
+  useState,
+  getClientX
+} from '../uiApi';
 
 import useBool from '../hooks/useBool';
 import { HAS_TOUCH_EVENTS } from '../has';
@@ -98,9 +99,6 @@ const _isNaN = Number.isNaN
 , _crLeftStyle = percent => ({
    left: `${percent}%`
 })
-, _getClienX = HAS_TOUCH_EVENTS
-  ? evt => (((evt || {}).touches || [])[0] || {}).clientX || 0
-  : evt => evt.clientX
 , _isUp = keyCode => keyCode === 39 || keyCode === 38
 , _isDown = keyCode => keyCode === 37 || keyCode === 40
 , _calcValueByKeyCode = (value, step, keyCode) => _isUp(keyCode)
@@ -166,7 +164,7 @@ const InputSlider = ({
   , _calcPositionFromEvent = (evt) => {
     const _trackOffset = _getRefValue(_refTrack).getBoundingClientRect()['left']
     return _isNumber(_trackOffset)
-      ? _getClienX(evt) - _trackOffset
+      ? getClientX(evt) - _trackOffset
       : NaN;
   }
   , _setValueFromPosition = (evt) => {
