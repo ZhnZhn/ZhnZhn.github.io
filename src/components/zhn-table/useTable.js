@@ -1,4 +1,7 @@
-import { useState, useCallback } from 'react';
+import { 
+  useState,
+  useCallback
+} from '../uiApi';
 
 import {
   factoryCompareBy,
@@ -10,7 +13,10 @@ const SORT_TO_UP = 'UP'
 , SORT_TO_DOWN = 'DOWN';
 
 export const useMenu = () => {
-  const [isMenuMore, _setIsMenuMore] = useState(false)
+  const [
+    isMenuMore,
+    _setIsMenuMore
+  ] = useState(false)
   , toggleMenuMore = useCallback((evt) => {
        evt.stopPropagation()
        _setIsMenuMore(is => !is)

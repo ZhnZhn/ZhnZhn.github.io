@@ -1,1 +1,42 @@
-{"version":3,"sources":["../../../src/components/zhn-table/useTable.js"],"names":["SORT_TO_UP","SORT_TO_DOWN","useMenu","isMenuMore","_setIsMenuMore","toggleMenuMore","evt","stopPropagation","is","useColumn","initialArr","arr","_setArr","hToggleBy","index","isHide","useSort","initialRows","state","_setRows","_rows","sortByPn","pn","sortBy","sortTo","_compBy","TOKEN_NAN","sort"],"mappings":";;;;;AAAA;;AAEA;;AAIA;;AAEA,MAAMA,UAAU,GAAG,IAAnB;AAAA,MACEC,YAAY,GAAG,MADjB;;AAGO,MAAMC,OAAO,GAAG,MAAM;AAC3B,QAAM,CAACC,UAAD,EAAaC,cAAb,IAA+B,qBAAS,KAAT,CAArC;AAAA,QACEC,cAAc,GAAG,wBAAaC,GAAD,IAAS;AACnCA,IAAAA,GAAG,CAACC,eAAJ;;AACAH,IAAAA,cAAc,CAACI,EAAE,IAAI,CAACA,EAAR,CAAd;AACD,GAHe,EAGb,EAHa,CADnB;AAKA,SAAO,CAACL,UAAD,EAAaE,cAAb,CAAP;AACD,CAPM;;;;AASA,MAAMI,SAAS,GAAIC,UAAD,IAAgB;AACvC,QAAM,CAACC,GAAD,EAAMC,OAAN,IAAiB,qBAASF,UAAU,IAAI,EAAvB,CAAvB;AAAA,QACEG,SAAS,GAAG,wBAAaC,KAAD,IAAW;AACjCF,IAAAA,OAAO,CAACD,GAAG,IAAI;AACbA,MAAAA,GAAG,CAACG,KAAD,CAAH,CAAWC,MAAX,GAAoB,CAACJ,GAAG,CAACG,KAAD,CAAH,CAAWC,MAAhC;AACA,aAAO,CAAC,GAAGJ,GAAJ,CAAP;AACD,KAHM,CAAP;AAID,GALW,EAKT,EALS,CADd;AAOA,SAAO,CAACA,GAAD,EAAME,SAAN,CAAP;AACD,CATM;;;;AAWA,MAAMG,OAAO,GAAIC,WAAD,IAAiB;AACtC,QAAM,CAACC,KAAD,EAAQC,QAAR,IAAoB,qBAAS;AAACC,IAAAA,KAAK,EAAEH,WAAW,IAAI;AAAvB,GAAT,CAA1B;AAAA,QACEI,QAAQ,GAAG,wBAAaC,EAAD,IAAQ;AAC7BH,IAAAA,QAAQ,CAAC,QAA+B;AAAA,UAA9B;AAAEC,QAAAA,KAAF;AAASG,QAAAA,MAAT;AAAiBC,QAAAA;AAAjB,OAA8B;;AACtC,YAAMC,OAAO,GAAG,sCAAiBC,gBAAjB,EAA4BJ,EAA5B,CAAhB;;AACA,UAAIA,EAAE,KAAKC,MAAP,IAAiBC,MAAM,KAAKxB,UAAhC,EAA4C;AAC1CoB,QAAAA,KAAK,GAAGA,KAAK,CAACO,IAAN,CAAW,wCAAmBL,EAAnB,EAAuBG,OAAvB,CAAX,CAAR;AACAD,QAAAA,MAAM,GAAGvB,YAAT;AACD,OAHD,MAGO;AACLmB,QAAAA,KAAK,GAAGA,KAAK,CAACO,IAAN,CAAWF,OAAX,CAAR;AACAD,QAAAA,MAAM,GAAGxB,UAAT;AACD;;AACD,aAAO;AAAEoB,QAAAA,KAAF;AAASI,QAAAA,MAAT;AAAiBD,QAAAA,MAAM,EAAED;AAAzB,OAAP;AACD,KAVO,CAAR;AAWD,GAZU,EAYR,EAZQ,CADb;AAcE,SAAO,CAACJ,KAAD,EAAQG,QAAR,CAAP;AACH,CAhBM","sourcesContent":["import { useState, useCallback } from 'react';\r\n\r\nimport {\r\n  factoryCompareBy,\r\n  factoryOpCompareBy\r\n} from './compareFactory';\r\nimport { TOKEN_NAN } from './Style';\r\n\r\nconst SORT_TO_UP = 'UP'\r\n, SORT_TO_DOWN = 'DOWN';\r\n\r\nexport const useMenu = () => {\r\n  const [isMenuMore, _setIsMenuMore] = useState(false)\r\n  , toggleMenuMore = useCallback((evt) => {\r\n       evt.stopPropagation()\r\n       _setIsMenuMore(is => !is)\r\n     }, [])\r\n  return [isMenuMore, toggleMenuMore];\r\n}\r\n\r\nexport const useColumn = (initialArr) => {\r\n  const [arr, _setArr] = useState(initialArr || [])\r\n  , hToggleBy = useCallback((index) => {\r\n      _setArr(arr => {\r\n        arr[index].isHide = !arr[index].isHide\r\n        return [...arr];\r\n      })\r\n    }, [])\r\n  return [arr, hToggleBy];\r\n}\r\n\r\nexport const useSort = (initialRows) => {\r\n  const [state, _setRows] = useState({_rows: initialRows || []})\r\n  , sortByPn = useCallback((pn) => {\r\n      _setRows(({ _rows, sortBy, sortTo }) => {\r\n        const _compBy = factoryCompareBy(TOKEN_NAN, pn)\r\n        if (pn === sortBy && sortTo === SORT_TO_UP) {\r\n          _rows = _rows.sort(factoryOpCompareBy(pn, _compBy))\r\n          sortTo = SORT_TO_DOWN\r\n        } else {\r\n          _rows = _rows.sort(_compBy)\r\n          sortTo = SORT_TO_UP\r\n        }\r\n        return { _rows, sortTo, sortBy: pn };\r\n      })\r\n    }, []);\r\n    return [state, sortByPn];\r\n}\r\n"],"file":"useTable.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-table/useTable.js"
+ ],
+ "file": "../../../src/components/zhn-table/useTable.js",
+ "names": [
+  "SORT_TO_UP",
+  "SORT_TO_DOWN",
+  "useMenu",
+  "isMenuMore",
+  "_setIsMenuMore",
+  "useState",
+  "toggleMenuMore",
+  "useCallback",
+  "evt",
+  "stopPropagation",
+  "is",
+  "useColumn",
+  "initialArr",
+  "arr",
+  "_setArr",
+  "hToggleBy",
+  "index",
+  "isHide",
+  "useSort",
+  "initialRows",
+  "state",
+  "_setRows",
+  "_rows",
+  "sortByPn",
+  "pn",
+  "sortBy",
+  "sortTo",
+  "_compBy",
+  "factoryCompareBy",
+  "TOKEN_NAN",
+  "sort",
+  "factoryOpCompareBy"
+ ],
+ "mappings": ";;;;AAAA;AAKA;AAIA;AAEA,MAAMA,UAAU,GAAG,IAAI;EACrBC,YAAY,GAAG,MAAM;AAEhB,MAAMC,OAAO,GAAG,MAAM;EAC3B,MAAM,CACJC,UAAU,EACVC,cAAc,CACf,GAAG,IAAAC,eAAQ,EAAC,KAAK,CAAC;IACjBC,cAAc,GAAG,IAAAC,kBAAW,EAAEC,GAAG,IAAK;MACnCA,GAAG,CAACC,eAAe,EAAE;MACrBL,cAAc,CAACM,EAAE,IAAI,CAACA,EAAE,CAAC;IAC3B,CAAC,EAAE,EAAE,CAAC;EACT,OAAO,CAACP,UAAU,EAAEG,cAAc,CAAC;AACrC,CAAC;AAAA;AAEM,MAAMK,SAAS,GAAIC,UAAU,IAAK;EACvC,MAAM,CAACC,GAAG,EAAEC,OAAO,CAAC,GAAG,IAAAT,eAAQ,EAACO,UAAU,IAAI,EAAE,CAAC;IAC/CG,SAAS,GAAG,IAAAR,kBAAW,EAAES,KAAK,IAAK;MACjCF,OAAO,CAACD,GAAG,IAAI;QACbA,GAAG,CAACG,KAAK,CAAC,CAACC,MAAM,GAAG,CAACJ,GAAG,CAACG,KAAK,CAAC,CAACC,MAAM;QACtC,OAAO,CAAC,GAAGJ,GAAG,CAAC;MACjB,CAAC,CAAC;IACJ,CAAC,EAAE,EAAE,CAAC;EACR,OAAO,CAACA,GAAG,EAAEE,SAAS,CAAC;AACzB,CAAC;AAAA;AAEM,MAAMG,OAAO,GAAIC,WAAW,IAAK;EACtC,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAG,IAAAhB,eAAQ,EAAC;MAACiB,KAAK,EAAEH,WAAW,IAAI;IAAE,CAAC,CAAC;IAC5DI,QAAQ,GAAG,IAAAhB,kBAAW,EAAEiB,EAAE,IAAK;MAC7BH,QAAQ,CAAC,QAA+B;QAAA,IAA9B;UAAEC,KAAK;UAAEG,MAAM;UAAEC;QAAO,CAAC;QACjC,MAAMC,OAAO,GAAG,IAAAC,gCAAgB,EAACC,gBAAS,EAAEL,EAAE,CAAC;QAC/C,IAAIA,EAAE,KAAKC,MAAM,IAAIC,MAAM,KAAK1B,UAAU,EAAE;UAC1CsB,KAAK,GAAGA,KAAK,CAACQ,IAAI,CAAC,IAAAC,kCAAkB,EAACP,EAAE,EAAEG,OAAO,CAAC,CAAC;UACnDD,MAAM,GAAGzB,YAAY;QACvB,CAAC,MAAM;UACLqB,KAAK,GAAGA,KAAK,CAACQ,IAAI,CAACH,OAAO,CAAC;UAC3BD,MAAM,GAAG1B,UAAU;QACrB;QACA,OAAO;UAAEsB,KAAK;UAAEI,MAAM;UAAED,MAAM,EAAED;QAAG,CAAC;MACtC,CAAC,CAAC;IACJ,CAAC,EAAE,EAAE,CAAC;EACN,OAAO,CAACJ,KAAK,EAAEG,QAAQ,CAAC;AAC5B,CAAC;AAAA"
+}
