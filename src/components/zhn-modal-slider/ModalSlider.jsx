@@ -1,6 +1,5 @@
-import {
-  useState  
-} from 'react';
+import { useState } from '../uiApi';
+
 import useThrottleCallback from '../hooks/useThrottleCallback';
 import useDidUpdate from '../hooks/useDidUpdate';
 

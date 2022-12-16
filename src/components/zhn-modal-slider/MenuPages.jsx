@@ -1,4 +1,4 @@
-import { cloneElement } from 'react';
+import { cloneElement } from '../uiApi';
 
 const MenuPages = ({
   isShow,
