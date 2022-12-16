@@ -5,7 +5,7 @@ import {
   getInputValue
 } from '../uiApi';
 
-import has from '../has';
+import { isWideWidth } from '../has';
 import { isCategoryItem } from '../dialogs/ChartOptionsFn';
 
 import ItemStack from '../zhn/ItemStack';
@@ -32,7 +32,7 @@ const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open 
 , MSG_DIMS_LOADING = "Dims is loading"
 , S_DIV_LOADING = { height: 50, width: '100%' };
 
-const IS_SHOW_LABELS = has.wideWidth()
+const IS_SHOW_LABELS = isWideWidth();
 
 const _crDfC = (props, dim) => props.dfC
   || (dim || {}).value;

@@ -10,7 +10,7 @@ import {
   CHAT_SHOW
 } from '../../flux/actions/ChartActions';
 
-import has from '../has';
+import { HAS_WIDE_WIDTH } from '../has';
 
 import A from '../Comp';
 import TwitterLink from './TwitterLink';
@@ -51,7 +51,7 @@ const TH_ID = 'ABOUT'
 , STEP_T3 = "Select params and enter query date in the opened up draggable Dialog"
 , STEP_T4 = "Click a button Load"
 
-, IS_CLOSE_PROVIDERS = !has.isWideWidth;
+, IS_CLOSE_PROVIDERS = !HAS_WIDE_WIDTH;
 
 const _isHide = actionType =>
   actionType === CHAT_INIT_AND_SHOW

@@ -13,7 +13,7 @@ import {
   ComponentActions
 } from '../../flux/actions/ComponentActions';
 
-import has from '../has';
+import { isWideWidth } from '../has';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import TabPane from '../zhn-tab/TabPane';
@@ -32,7 +32,7 @@ const S_MODAL = {
 , S_TITLE_OPTION = { width: 110 }
 , S_BT = { color: '#232f3b' };
 
-const IS_WIDE_WIDTH = has.wideWidth()
+const IS_WIDE_WIDTH = isWideWidth()
 , CL_ROW = 'row__pane-topic not-selected'
 , _isFn = fn => typeof fn === 'function';
 

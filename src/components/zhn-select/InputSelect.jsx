@@ -1,6 +1,10 @@
-import { Component, createRef } from 'react';
 //import PropTypes from 'prop-types'
-import has from '../has'
+import {
+  Component,
+  createRef
+} from 'react';
+
+import { HAS_TOUCH_EVENTS } from '../has';
 
 import ArrowCell from './ArrowCell';
 import SvgClear from '../zhn/SvgClear';
@@ -168,7 +172,7 @@ class InputSelect extends Component {
 
   constructor(props){
     super(props)
-    this._touchHandlers = has.touch
+    this._touchHandlers = HAS_TOUCH_EVENTS
       ? {
           onFocus: this._hFocus,
           onBlur: this._hBlur
@@ -586,7 +590,7 @@ class InputSelect extends Component {
            className={CL_INPUT}
            type="text"
            name="select"
-           autoComplete="off"
+           //autoComplete="off"
            autoCorrect="off"
            autoCapitalize="off"
            spellCheck={false}

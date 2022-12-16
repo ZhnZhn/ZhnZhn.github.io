@@ -1,97 +1,80 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
-
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
-
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
-
 var _ComponentActions = require("../../flux/actions/ComponentActions");
-
 var _ChartActions = require("../../flux/actions/ChartActions");
-
-var _has = _interopRequireDefault(require("../has"));
-
+var _has = require("../has");
 var _Comp = _interopRequireDefault(require("../Comp"));
-
 var _TwitterLink = _interopRequireDefault(require("./TwitterLink"));
-
 var _DataProviders = _interopRequireDefault(require("./DataProviders"));
-
 var _StepTitle = _interopRequireDefault(require("./StepTitle"));
-
 var _ProviderLinks = _interopRequireDefault(require("../links/ProviderLinks"));
-
 var _LogosBar = _interopRequireDefault(require("./LogosBar"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const TH_ID = 'ABOUT',
-      CL_ABOUT = 'about-container',
-      CL_SHOW_CONT = 'show-cont',
-      CL_SCROLL = 'scroll-container-y',
-      S_BROWSER_CAPTION = {
-  paddingTop: 6
-},
-      S_SCROLL_DIV = {
-  height: '94%'
-},
-      S_DIV_WRAPPER = {
-  paddingLeft: 12,
-  paddingRight: 5,
-  lineHeight: 1.4,
-  color: 'gray',
-  fontWeight: 'bold'
-},
-      S_LH_18 = {
-  lineHeight: 1.8
-},
-      S_LH_14 = {
-  lineHeight: 1.4
-},
-      S_MB_8EM = {
-  marginBottom: '0.8em'
-},
-      S_MB_6EM = {
-  marginBottom: '0.6em'
-},
-      S_MB_4 = {
-  marginBottom: 4
-},
-      S_MT_4 = {
-  marginTop: 4
-},
-      S_BT_TWITTER = {
-  marginLeft: 12
-},
-      S_GREEN = {
-  color: '#80c040'
-},
-      S_BLACK = {
-  color: 'black'
-},
-      S_BLUE_DARK = {
-  color: '#2f7ed8'
-},
-      S_RED = {
-  color: '#f44336'
-},
-      STEP_T1 = "Please, choose a data source Browser from Topics [t]",
-      STEP_T2 = "Next, choose a dataset menu item in the the opended up Browser",
-      STEP_T3 = "Select params and enter query date in the opened up draggable Dialog",
-      STEP_T4 = "Click a button Load",
-      IS_CLOSE_PROVIDERS = !_has.default.isWideWidth;
-
+  CL_ABOUT = 'about-container',
+  CL_SHOW_CONT = 'show-cont',
+  CL_SCROLL = 'scroll-container-y',
+  S_BROWSER_CAPTION = {
+    paddingTop: 6
+  },
+  S_SCROLL_DIV = {
+    height: '94%'
+  },
+  S_DIV_WRAPPER = {
+    paddingLeft: 12,
+    paddingRight: 5,
+    lineHeight: 1.4,
+    color: 'gray',
+    fontWeight: 'bold'
+  },
+  S_LH_18 = {
+    lineHeight: 1.8
+  },
+  S_LH_14 = {
+    lineHeight: 1.4
+  },
+  S_MB_8EM = {
+    marginBottom: '0.8em'
+  },
+  S_MB_6EM = {
+    marginBottom: '0.6em'
+  },
+  S_MB_4 = {
+    marginBottom: 4
+  },
+  S_MT_4 = {
+    marginTop: 4
+  },
+  S_BT_TWITTER = {
+    marginLeft: 12
+  },
+  S_GREEN = {
+    color: '#80c040'
+  },
+  S_BLACK = {
+    color: 'black'
+  },
+  S_BLUE_DARK = {
+    color: '#2f7ed8'
+  },
+  S_RED = {
+    color: '#f44336'
+  },
+  STEP_T1 = "Please, choose a data source Browser from Topics [t]",
+  STEP_T2 = "Next, choose a dataset menu item in the the opended up Browser",
+  STEP_T3 = "Select params and enter query date in the opened up draggable Dialog",
+  STEP_T4 = "Click a button Load",
+  IS_CLOSE_PROVIDERS = !_has.HAS_WIDE_WIDTH;
 const _isHide = actionType => actionType === _ChartActions.CHAT_INIT_AND_SHOW || actionType === _ChartActions.CHAT_SHOW;
-
 const About = () => {
   const [isShow, show, hide] = (0, _useBool.default)(true),
-        TS = (0, _useTheme.default)(TH_ID);
+    TS = (0, _useTheme.default)(TH_ID);
   (0, _useListen.default)(actionType => {
     if (actionType === _ComponentActions.CAT_SHOW_ABOUT) {
       show();
@@ -242,7 +225,6 @@ const About = () => {
     })]
   });
 };
-
 var _default = About;
 exports.default = _default;
 //# sourceMappingURL=About.js.map

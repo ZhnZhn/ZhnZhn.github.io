@@ -1,11 +1,10 @@
-
 import HotKeysProvider from './hotkeys/HotKeysProvider';
 import ThemeProvider from './styles/ThemeProvider';
 
 import { CAT_CHANGE_THEME } from '../flux/actions/ComponentActions';
-import has from './has';
+import { HAS_TOUCH_EVENTS } from './has';
 
-const ENABLE_HOT_KEYS = !has.touch;
+const ENABLE_HOT_KEYS = !HAS_TOUCH_EVENTS;
 
 const AppProvider = ({
   children

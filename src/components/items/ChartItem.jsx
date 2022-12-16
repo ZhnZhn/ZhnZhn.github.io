@@ -21,7 +21,7 @@ import useMiniTitles from './useMiniTitles';
 import useMiniHandles from './useMiniHandles';
 import useDataSourceEl from './useDataSourceEl';
 
-import has from '../has';
+import { isWideWidth } from '../has';
 import Comp from '../Comp';
 import ChartToolBar from '../toolbars/ChartToolBar';
 import crModelMore from './ChartItemMore';
@@ -37,7 +37,7 @@ const {
   HighchartWrapper
 } = Comp;
 
-const CL_CHART_ITEM =  'chart-item'
+const CL_CHART_ITEM = 'chart-item'
 , S_TAB_DIV = {
   position: 'relative',
   backgroundColor: 'transparent',
@@ -46,7 +46,7 @@ const CL_CHART_ITEM =  'chart-item'
 , S_ML_8 = { marginLeft: 8 }
 , S_MT_6 = { marginTop: 6 };
 
-const _isAnimateReflow = has.wideWidth()
+const _IS_ANIMATE_REFLOW = isWideWidth()
 , MINI_CONFIGS_ID_PN = "btTitle";
 
 const _arrangeConfigsBy = (
@@ -162,7 +162,7 @@ export const ChartItem = memoEqual(forwardRef(({
     reflowChart: (width) => {
       const mainChart = getMainChart();
       if (mainChart) {
-        mainChart.zhReflowCharts(_isAnimateReflow, width)
+        mainChart.zhReflowCharts(_IS_ANIMATE_REFLOW, width)
       }
     }
   }), [])

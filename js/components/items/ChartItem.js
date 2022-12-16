@@ -1,53 +1,31 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.ChartItem = void 0;
-
 var _uiApi = require("../uiApi");
-
 var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
-
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
-
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
-
 var _useVm = _interopRequireDefault(require("./useVm"));
-
 var _useSetCheckBox = _interopRequireDefault(require("./useSetCheckBox"));
-
 var _useCaption = _interopRequireDefault(require("./useCaption"));
-
 var _useMiniConfigs = _interopRequireDefault(require("./useMiniConfigs"));
-
 var _useMiniTitles = _interopRequireDefault(require("./useMiniTitles"));
-
 var _useMiniHandles = _interopRequireDefault(require("./useMiniHandles"));
-
 var _useDataSourceEl = _interopRequireDefault(require("./useDataSourceEl"));
-
-var _has = _interopRequireDefault(require("../has"));
-
+var _has = require("../has");
 var _Comp = _interopRequireDefault(require("../Comp"));
-
 var _ChartToolBar = _interopRequireDefault(require("../toolbars/ChartToolBar"));
-
 var _ChartItemMore = _interopRequireDefault(require("./ChartItemMore"));
-
 var _Header = _interopRequireDefault(require("./Header"));
-
 var _ChartLegend = _interopRequireDefault(require("./ChartLegend"));
-
 var _MiniCharts = _interopRequireDefault(require("./MiniCharts"));
-
 var _PanelDataInfo = _interopRequireDefault(require("./PanelDataInfo"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 //import PropTypes from "prop-types";
+
 const {
   ShowHide,
   ErrorBoundary,
@@ -55,33 +33,29 @@ const {
   HighchartWrapper
 } = _Comp.default;
 const CL_CHART_ITEM = 'chart-item',
-      S_TAB_DIV = {
-  position: 'relative',
-  backgroundColor: 'transparent',
-  height: 30
-},
-      S_ML_8 = {
-  marginLeft: 8
-},
-      S_MT_6 = {
-  marginTop: 6
-};
-
-const _isAnimateReflow = _has.default.wideWidth(),
-      MINI_CONFIGS_ID_PN = "btTitle";
-
+  S_TAB_DIV = {
+    position: 'relative',
+    backgroundColor: 'transparent',
+    height: 30
+  },
+  S_ML_8 = {
+    marginLeft: 8
+  },
+  S_MT_6 = {
+    marginTop: 6
+  };
+const _IS_ANIMATE_REFLOW = (0, _has.isWideWidth)(),
+  MINI_CONFIGS_ID_PN = "btTitle";
 const _arrangeConfigsBy = (configs, configIds, idPropName) => {
   const _hmConfigs = (configs || []).reduce((hm, config) => {
     hm[config[idPropName]] = config;
     return hm;
   }, {});
-
   return configIds.reduce((arrangedConfigs, id) => {
     arrangedConfigs.push(_hmConfigs[id]);
     return arrangedConfigs;
   }, []);
 };
-
 const ChartItem = (0, _memoEqual.default)((0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     caption,
@@ -98,78 +72,72 @@ const ChartItem = (0, _memoEqual.default)((0, _uiApi.forwardRef)((_ref, ref) => 
     crValueMoving,
     onToTop
   } = _ref;
-
   const {
-    zhConfig,
-    valueMoving,
-    info,
-    zhMiniConfigs
-  } = config || {},
-        {
-    dataSource,
-    itemCaption: _itemCaption,
-    itemTime,
-    legend
-  } = zhConfig || {},
-        [_refVm, compareTo] = (0, _useVm.default)(),
-        [_hLoaded, getMainChart] = (0, _useProperty.default)(),
-        [hasError, _hError] = (0, _useBool.default)(),
-        [isShowChart, showChart, hideChart] = (0, _useBool.default)(true),
-        isShowInfo = !isShowChart,
-        [isOpen, toggleOpen] = (0, _useToggle.default)(true),
-        [isShowLegend, toggleLegend] = (0, _useToggle.default)(),
-        [isShowToolbar, toggleToolbar] = (0, _useToggle.default)(true),
-        [itemCaption] = (0, _uiApi.useState)(() => _itemCaption || caption || ''),
-        [isCaption, showCaption, hideCaption] = (0, _useCaption.default)(getMainChart, toggleToolbar),
-        [onCheckItem, onUnCheckItem] = (0, _useSetCheckBox.default)(getMainChart, chartType, onSetActive),
-        [loadMiniChart, unloadMiniChart] = (0, _useMiniHandles.default)(getMainChart),
-        [_dataSourceEl] = (0, _useDataSourceEl.default)(dataSource),
-        [mfiConfigs, _addMfi, _removeMfi] = (0, _useMiniConfigs.default)(),
-        [miniTitles, _hMiniChart] = (0, _useMiniTitles.default)(),
-        isShowAbs = miniTitles.length === 0
+      zhConfig,
+      valueMoving,
+      info,
+      zhMiniConfigs
+    } = config || {},
+    {
+      dataSource,
+      itemCaption: _itemCaption,
+      itemTime,
+      legend
+    } = zhConfig || {},
+    [_refVm, compareTo] = (0, _useVm.default)(),
+    [_hLoaded, getMainChart] = (0, _useProperty.default)(),
+    [hasError, _hError] = (0, _useBool.default)(),
+    [isShowChart, showChart, hideChart] = (0, _useBool.default)(true),
+    isShowInfo = !isShowChart,
+    [isOpen, toggleOpen] = (0, _useToggle.default)(true),
+    [isShowLegend, toggleLegend] = (0, _useToggle.default)(),
+    [isShowToolbar, toggleToolbar] = (0, _useToggle.default)(true),
+    [itemCaption] = (0, _uiApi.useState)(() => _itemCaption || caption || ''),
+    [isCaption, showCaption, hideCaption] = (0, _useCaption.default)(getMainChart, toggleToolbar),
+    [onCheckItem, onUnCheckItem] = (0, _useSetCheckBox.default)(getMainChart, chartType, onSetActive),
+    [loadMiniChart, unloadMiniChart] = (0, _useMiniHandles.default)(getMainChart),
+    [_dataSourceEl] = (0, _useDataSourceEl.default)(dataSource),
+    [mfiConfigs, _addMfi, _removeMfi] = (0, _useMiniConfigs.default)(),
+    [miniTitles, _hMiniChart] = (0, _useMiniTitles.default)(),
+    isShowAbs = miniTitles.length === 0
+
+    /*eslint-disable react-hooks/exhaustive-deps */,
+    [_hToggleSeria, _hClickInfo, _crValueMoving, _moreModel] = (0, _uiApi.useMemo)(() => [item => {
+      getMainChart().zhToggleSeria(item.index);
+    }, () => {
+      hideChart();
+      toggleLegend(false);
+    }, (prev, dateTo) => crValueMoving(getMainChart(), prev, dateTo), () => (0, _ChartItemMore.default)(toggleToolbar, onToTop, hideCaption)], [])
+    // getMainChart
+    // hideChart, toggleLegend
+    // getMainChart, crValueMoving
+    // toggleToolbar, onToTop, hideCaption
+    /*eslint-enable react-hooks/exhaustive-deps */,
+    _zhMiniConfigs = (0, _uiApi.useMemo)(() => _arrangeConfigsBy(zhMiniConfigs, miniTitles, MINI_CONFIGS_ID_PN), [zhMiniConfigs, miniTitles]);
+
   /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        [_hToggleSeria, _hClickInfo, _crValueMoving, _moreModel] = (0, _uiApi.useMemo)(() => [item => {
-    getMainChart().zhToggleSeria(item.index);
-  }, () => {
-    hideChart();
-    toggleLegend(false);
-  }, (prev, dateTo) => crValueMoving(getMainChart(), prev, dateTo), () => (0, _ChartItemMore.default)(toggleToolbar, onToTop, hideCaption)], []) // getMainChart
-  // hideChart, toggleLegend
-  // getMainChart, crValueMoving
-  // toggleToolbar, onToTop, hideCaption
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-  ,
-        _zhMiniConfigs = (0, _uiApi.useMemo)(() => _arrangeConfigsBy(zhMiniConfigs, miniTitles, MINI_CONFIGS_ID_PN), [zhMiniConfigs, miniTitles]);
-  /*eslint-disable react-hooks/exhaustive-deps */
-
-
   (0, _uiApi.useEffect)(() => {
     const mainChart = getMainChart();
-
     if (mainChart) {
       mainChart.zhUpdateSpacing(isShowAbs);
     }
-  }, [isShowAbs]); // getMainChart
-
+  }, [isShowAbs]);
+  // getMainChart
   /*eslint-enable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
-
   (0, _uiApi.useImperativeHandle)(ref, () => ({
     compareTo,
     hideCaption,
     showCaption,
     reflowChart: width => {
       const mainChart = getMainChart();
-
       if (mainChart) {
-        mainChart.zhReflowCharts(_isAnimateReflow, width);
+        mainChart.zhReflowCharts(_IS_ANIMATE_REFLOW, width);
       }
     }
-  }), []); // compareTo, hideCaption, showCaption, getMainChart
-
+  }), []);
+  // compareTo, hideCaption, showCaption, getMainChart
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -252,6 +220,7 @@ const ChartItem = (0, _memoEqual.default)((0, _uiApi.forwardRef)((_ref, ref) => 
     })]
   });
 }));
+
 /*
 static propTypes = {
   caption: PropTypes.string,
@@ -281,6 +250,5 @@ static propTypes = {
   onToTop: PropTypes.func
 }
 */
-
 exports.ChartItem = ChartItem;
 //# sourceMappingURL=ChartItem.js.map

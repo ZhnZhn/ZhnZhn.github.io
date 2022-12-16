@@ -29,11 +29,10 @@ import {
   isYmd,
   isYmdOrEmpty
 } from '../../utils/DateUtils';
-import has from '../../components/has';
+import { HAS_WIDE_WIDTH } from '../../components/has';
 import ChartStore from '../stores/ChartStore';
 
-const { isWideWidth } = has
-, _isArr = Array.isArray
+const _isArr = Array.isArray
 , _assign = Object.assign
 , _initFromDate = getFromDate(2)
 , initToDate = getToDate();
@@ -50,7 +49,7 @@ const _crFnValue = (
 const _crInitFromDate = ({
   isFdw,
   nInitFromDate
-}) => isFdw && !isWideWidth
+}) => isFdw && !HAS_WIDE_WIDTH
   ? _initFromDate
   : nInitFromDate
      ? getFromDate(nInitFromDate)

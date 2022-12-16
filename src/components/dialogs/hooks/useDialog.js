@@ -1,11 +1,11 @@
 import useToggle from '../../hooks/useToggle';
-import has from '../../has';
+import { isWideWidth } from '../../has';
 
 import useMenuMore from './useMenuMore';
 import useToolbar from './useToolbar';
 import useValidationMessages from './useValidationMessages';
 
-const _isWideWidth = has.wideWidth();
+const _isWideWidth = isWideWidth();
 
 const useDialog = ({
   onAbout,

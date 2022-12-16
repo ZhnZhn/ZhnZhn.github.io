@@ -1,4 +1,4 @@
-import { 
+import {
   useState,
   useCallback
 } from '../uiApi';
@@ -6,7 +6,10 @@ import {
 import useRefInit from '../hooks/useRefInit';
 import useListen from '../hooks/useListen';
 
-import has from '../has';
+import {
+  STR_WIDTH,
+  HAS_TOUCH_EVENTS
+} from '../has';
 import ItemStack from '../zhn/ItemStack';
 import FlatButton from '../zhn-m/FlatButton';
 
@@ -23,7 +26,7 @@ const _isIn = (arr, type) => {
 }
 
 const _calcMaxButtons = (maxButtons) => {
-  switch(has.strWidth){
+  switch(STR_WIDTH){
     case '"W600"': return 3;
     case '"W500"': return 2;
     case '"W360"': return 1;
@@ -35,7 +38,7 @@ const _crBtProps = (
   index,
   caption=''
 ) => {
-   const _hotKey = has.touch
+   const _hotKey = HAS_TOUCH_EVENTS
      ? ''
      : String(index+1);
    return {

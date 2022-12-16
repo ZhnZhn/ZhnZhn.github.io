@@ -1,1 +1,29 @@
-{"version":3,"sources":["../../src/components/has.js"],"names":["INITIAL_WIDTH","_isInnerWidth","window","innerWidth","_strWidth","getComputedStyle","document","body","getPropertyValue","_isTouchable","documentElement","has","strWidth","isWideWidth","indexOf","touch","wideWidth","getWidth","initialWidth","initWidthStyle","minWidth","width"],"mappings":";;;;;AACA,IAAMA,aAAa,GAAG,GAAtB;AAAA,IACEC,aAAa,GAAG,SAAhBA,aAAgB;AAAA,SAAMC,MAAM,IAAIA,MAAM,CAACC,UAAvB;AAAA,CADlB;AAAA,IAEEC,SAAS,GAAGF,MAAM,IAAIA,MAAM,CACzBG,gBADmB,CACFC,QAAQ,CAACC,IADP,EACa,QADb,EAEnBC,gBAFmB,CAEF,SAFE,CAFxB;AAAA,IAKEC,YAAY,GAAG,SAAfA,YAAe;AAAA,SAAMH,QAAQ,IACxB,kBAAkBA,QAAQ,CAACI,eADjB;AAAA,CALjB;;AAQA,IAAMC,GAAG,GAAG;AACVC,EAAAA,QAAQ,EAAER,SADA;AAEVS,EAAAA,WAAW,EAAET,SAAS,CAACU,OAAV,CAAkB,GAAlB,MAA2B,CAAC,CAF/B;AAGVC,EAAAA,KAAK,EAAEN,YAAY,EAHT;AAIVO,EAAAA,SAAS,EAAE;AAAA,WAAMf,aAAa,KAC1BC,MAAM,CAACC,UAAP,GAAoB,GADM,GAE1B,IAFO;AAAA,GAJD;AAOVc,EAAAA,QAAQ,EAAE,kBAACC,YAAD;AAAA,QAACA,YAAD;AAACA,MAAAA,YAAD,GAAclB,aAAd;AAAA;;AAAA,WAAgCC,aAAa,KACnDC,MAAM,CAACC,UAAP,GAAoB,EAD+B,GAEnDe,YAFM;AAAA,GAPA;AAUVC,EAAAA,cAAc,EAAE,wBAACD,YAAD,EAA6BE,QAA7B,EAA4C;AAAA,QAA3CF,YAA2C;AAA3CA,MAAAA,YAA2C,GAA9BlB,aAA8B;AAAA;;AAAA,QAAfoB,QAAe;AAAfA,MAAAA,QAAe,GAAN,CAAM;AAAA;;AAC1D,QAAIT,GAAG,CAACK,SAAJ,EAAJ,EAAqB;AACnB,aAAO;AAAEK,QAAAA,KAAK,EAAEH;AAAT,OAAP;AACD;;AACD,QAAMG,KAAK,GAAGV,GAAG,CAACM,QAAJ,CAAaC,YAAb,CAAd;AACA,WAAOG,KAAK,GAAGD,QAAR,GACH;AAAEC,MAAAA,KAAK,EAALA;AAAF,KADG,GAEH;AAAEA,MAAAA,KAAK,EAAED;AAAT,KAFJ;AAGD;AAlBS,CAAZ;eAqBeT,G","sourcesContent":["\r\nconst INITIAL_WIDTH = 635\r\n, _isInnerWidth = () => window && window.innerWidth\r\n, _strWidth = window && window\r\n    .getComputedStyle(document.body, ':after')\r\n    .getPropertyValue('content')\r\n, _isTouchable = () => document\r\n    && 'ontouchstart' in document.documentElement;\r\n\r\nconst has = {\r\n  strWidth: _strWidth,\r\n  isWideWidth: _strWidth.indexOf('W') === -1,  \r\n  touch: _isTouchable(),\r\n  wideWidth: () => _isInnerWidth()\r\n    ? window.innerWidth > 700\r\n    : true,\r\n  getWidth: (initialWidth=INITIAL_WIDTH) => _isInnerWidth()\r\n    ? window.innerWidth - 16\r\n    : initialWidth,\r\n  initWidthStyle: (initialWidth=INITIAL_WIDTH, minWidth=0) => {\r\n    if (has.wideWidth()) {\r\n      return { width: initialWidth };\r\n    }\r\n    const width = has.getWidth(initialWidth);\r\n    return width > minWidth\r\n      ? { width }\r\n      : { width: minWidth };\r\n  }\r\n};\r\n\r\nexport default has\r\n"],"file":"has.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/components/has.js"
+ ],
+ "file": "../../src/components/has.js",
+ "names": [
+  "_INITIAL_WIDTH",
+  "_hasInnerWidth",
+  "window",
+  "innerWidth",
+  "STR_WIDTH",
+  "getComputedStyle",
+  "document",
+  "body",
+  "getPropertyValue",
+  "HAS_WIDE_WIDTH",
+  "indexOf",
+  "HAS_TOUCH_EVENTS",
+  "documentElement",
+  "isWideWidth",
+  "_getWidth",
+  "initialWidth",
+  "initWidthStyle",
+  "minWidth",
+  "width"
+ ],
+ "mappings": ";;;;AAAA,MAAMA,cAAc,GAAG,GAAG;EACxBC,cAAc,GAAGC,MAAM,IAAIA,MAAM,CAACC,UAAU;AAEvC,MAAMC,SAAS,GAAGF,MAAM,IAAIA,MAAM,CACpCG,gBAAgB,CAACC,QAAQ,CAACC,IAAI,EAAE,QAAQ,CAAC,CACzCC,gBAAgB,CAAC,SAAS,CAAC;AAAA;AAEzB,MAAMC,cAAc,GAAGL,SAAS,CAACM,OAAO,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC;AAAA;AAEpD,MAAMC,gBAAgB,GAAGL,QAAQ,IACjC,cAAc,IAAIA,QAAQ,CAACM,eAAe;AAAC;AAE3C,MAAMC,WAAW,GAAG,MAAMZ,cAAc,GAC3CC,MAAM,CAACC,UAAU,GAAG,GAAG,GACvB,IAAI;AAAA;AAER,MAAMW,SAAS,GAAG,UAChBC,YAAY;EAAA,IAAZA,YAAY;IAAZA,YAAY,GAACf,cAAc;EAAA;EAAA,OACxBC,cAAc,GACfC,MAAM,CAACC,UAAU,GAAG,EAAE,GACtBY,YAAY;AAAA;AAET,MAAMC,cAAc,GAAG,UAC5BD,YAAY,EACZE,QAAQ,EACL;EAAA,IAFHF,YAAY;IAAZA,YAAY,GAACf,cAAc;EAAA;EAAA,IAC3BiB,QAAQ;IAARA,QAAQ,GAAC,CAAC;EAAA;EAEV,IAAIJ,WAAW,EAAE,EAAE;IACjB,OAAO;MAAEK,KAAK,EAAEH;IAAa,CAAC;EAChC;EACA,MAAMG,KAAK,GAAGJ,SAAS,CAACC,YAAY,CAAC;EACrC,OAAOG,KAAK,GAAGD,QAAQ,GACnB;IAAEC;EAAM,CAAC,GACT;IAAEA,KAAK,EAAED;EAAS,CAAC;AACzB,CAAC;AAAA"
+}

@@ -14,7 +14,7 @@ import {
 } from '../../flux/actions/ComponentActions';
 
 import withTheme from '../hoc/withTheme';
-import has from '../has';
+import { initWidthStyle } from '../has';
 import crCn from '../zhn-utils/crCn';
 import crModelMore from './crModelMore';
 import A from '../Comp';
@@ -107,7 +107,7 @@ class ChartContainer extends Component {
 
     this._initialWidthStyle = _isContWidth(contWidth)
       ? { width: contWidth }
-      : has.initWidthStyle(INITIAL_WIDTH, MIN_WIDTH)
+      : initWidthStyle(INITIAL_WIDTH, MIN_WIDTH)
     this._INITIAL_WIDTH = this._initialWidthStyle.width
     this._MIN_WIDTH = this._INITIAL_WIDTH > MIN_WIDTH_WITH_TAB_MINI
       ? MIN_WIDTH_WITH_TAB_MINI

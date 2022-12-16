@@ -1,11 +1,14 @@
-import { useRef, useState } from 'react';
+//import PropTypes from "prop-types";
+import {
+  useRef,
+  useState
+} from 'react';
 
-import useBool from '../hooks/useBool'
-import has from '../has'
+import useBool from '../hooks/useBool';
+import { HAS_TOUCH_EVENTS } from '../has';
 import { roundBy } from '../../math/mathFn';
 
 import CircleInner from './CircleInner';
-//import PropTypes from "prop-types";
 
 const S_ROOT = {
   position: 'relative',
@@ -78,9 +81,8 @@ S_EMBER = {
 
 
 const _isNaN = Number.isNaN
-, _noopFn = () => {}
-, hasTouch = has.touch
-, [EVENT_NAME_MOVE, EVENT_NAME_UP] = hasTouch
+, _FN_NOOP = () => {}
+, [EVENT_NAME_MOVE, EVENT_NAME_UP] = HAS_TOUCH_EVENTS
     ? ['touchmove','touchend']
     : ['mousemove','mouseup']
 , _checkValueInMinMax = (min, max, value) => value > max
@@ -96,7 +98,7 @@ const _isNaN = Number.isNaN
 , _crLeftStyle = percent => ({
    left: `${percent}%`
 })
-, _getClienX = hasTouch
+, _getClienX = HAS_TOUCH_EVENTS
   ? evt => (((evt || {}).touches || [])[0] || {}).clientX || 0
   : evt => evt.clientX
 , _isUp = keyCode => keyCode === 39 || keyCode === 38
@@ -127,7 +129,7 @@ const _useMouseDown = (setValueFromPosition) => {
   },
   _hMouseDown = (event) => {
     // Cancel text selection
-    if (!hasTouch) {
+    if (!HAS_TOUCH_EVENTS) {
       event.preventDefault()
     }
     document.addEventListener(EVENT_NAME_MOVE, _hDragMouseMove)
@@ -142,7 +144,7 @@ const InputSlider = ({
   step=1,
   min=0,
   max=20,
-  onChange=_noopFn
+  onChange=_FN_NOOP
 }) => {
   const _refTrack = useRef()
   , [isHovered, setHoveredTrue, setHoveredFalse] = useBool(false)
@@ -187,7 +189,7 @@ const InputSlider = ({
   }
   , [isDragged, _hMouseDown] = _useMouseDown(_setValueFromPosition);
 
-  const [_sliderHandlers, _btHandlers] = hasTouch
+  const [_sliderHandlers, _btHandlers] = HAS_TOUCH_EVENTS
      ? [{onTouchStart: _hMouseDown}, void 0]
      : [{
          onMouseDown: _hMouseDown,

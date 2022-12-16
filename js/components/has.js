@@ -1,54 +1,41 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var INITIAL_WIDTH = 635,
-    _isInnerWidth = function _isInnerWidth() {
-  return window && window.innerWidth;
-},
-    _strWidth = window && window.getComputedStyle(document.body, ':after').getPropertyValue('content'),
-    _isTouchable = function _isTouchable() {
-  return document && 'ontouchstart' in document.documentElement;
+exports.isWideWidth = exports.initWidthStyle = exports.STR_WIDTH = exports.HAS_WIDE_WIDTH = exports.HAS_TOUCH_EVENTS = void 0;
+const _INITIAL_WIDTH = 635,
+  _hasInnerWidth = window && window.innerWidth;
+const STR_WIDTH = window && window.getComputedStyle(document.body, ':after').getPropertyValue('content');
+exports.STR_WIDTH = STR_WIDTH;
+const HAS_WIDE_WIDTH = STR_WIDTH.indexOf('W') === -1;
+exports.HAS_WIDE_WIDTH = HAS_WIDE_WIDTH;
+const HAS_TOUCH_EVENTS = document && 'ontouchstart' in document.documentElement;
+exports.HAS_TOUCH_EVENTS = HAS_TOUCH_EVENTS;
+const isWideWidth = () => _hasInnerWidth ? window.innerWidth > 700 : true;
+exports.isWideWidth = isWideWidth;
+const _getWidth = function (initialWidth) {
+  if (initialWidth === void 0) {
+    initialWidth = _INITIAL_WIDTH;
+  }
+  return _hasInnerWidth ? window.innerWidth - 16 : initialWidth;
 };
-
-var has = {
-  strWidth: _strWidth,
-  isWideWidth: _strWidth.indexOf('W') === -1,
-  touch: _isTouchable(),
-  wideWidth: function wideWidth() {
-    return _isInnerWidth() ? window.innerWidth > 700 : true;
-  },
-  getWidth: function getWidth(initialWidth) {
-    if (initialWidth === void 0) {
-      initialWidth = INITIAL_WIDTH;
-    }
-
-    return _isInnerWidth() ? window.innerWidth - 16 : initialWidth;
-  },
-  initWidthStyle: function initWidthStyle(initialWidth, minWidth) {
-    if (initialWidth === void 0) {
-      initialWidth = INITIAL_WIDTH;
-    }
-
-    if (minWidth === void 0) {
-      minWidth = 0;
-    }
-
-    if (has.wideWidth()) {
-      return {
-        width: initialWidth
-      };
-    }
-
-    var width = has.getWidth(initialWidth);
-    return width > minWidth ? {
-      width: width
-    } : {
-      width: minWidth
+const initWidthStyle = function (initialWidth, minWidth) {
+  if (initialWidth === void 0) {
+    initialWidth = _INITIAL_WIDTH;
+  }
+  if (minWidth === void 0) {
+    minWidth = 0;
+  }
+  if (isWideWidth()) {
+    return {
+      width: initialWidth
     };
   }
+  const width = _getWidth(initialWidth);
+  return width > minWidth ? {
+    width
+  } : {
+    width: minWidth
+  };
 };
-var _default = has;
-exports["default"] = _default;
+exports.initWidthStyle = initWidthStyle;
 //# sourceMappingURL=has.js.map

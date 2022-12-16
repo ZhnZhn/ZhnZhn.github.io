@@ -1,31 +1,34 @@
+const _INITIAL_WIDTH = 635
+, _hasInnerWidth = window && window.innerWidth;
 
-const INITIAL_WIDTH = 635
-, _isInnerWidth = () => window && window.innerWidth
-, _strWidth = window && window
+export const STR_WIDTH = window && window
     .getComputedStyle(document.body, ':after')
     .getPropertyValue('content')
-, _isTouchable = () => document
+
+export const HAS_WIDE_WIDTH = STR_WIDTH.indexOf('W') === -1
+
+export const HAS_TOUCH_EVENTS = document
     && 'ontouchstart' in document.documentElement;
 
-const has = {
-  strWidth: _strWidth,
-  isWideWidth: _strWidth.indexOf('W') === -1,  
-  touch: _isTouchable(),
-  wideWidth: () => _isInnerWidth()
-    ? window.innerWidth > 700
-    : true,
-  getWidth: (initialWidth=INITIAL_WIDTH) => _isInnerWidth()
-    ? window.innerWidth - 16
-    : initialWidth,
-  initWidthStyle: (initialWidth=INITIAL_WIDTH, minWidth=0) => {
-    if (has.wideWidth()) {
-      return { width: initialWidth };
-    }
-    const width = has.getWidth(initialWidth);
-    return width > minWidth
-      ? { width }
-      : { width: minWidth };
-  }
-};
+export const isWideWidth = () => _hasInnerWidth
+  ? window.innerWidth > 700
+  : true
 
-export default has
+const _getWidth = (
+  initialWidth=_INITIAL_WIDTH
+) => _hasInnerWidth
+  ? window.innerWidth - 16
+  : initialWidth
+
+export const initWidthStyle = (
+  initialWidth=_INITIAL_WIDTH,
+  minWidth=0
+) => {
+  if (isWideWidth()) {
+    return { width: initialWidth };
+  }
+  const width = _getWidth(initialWidth);
+  return width > minWidth
+    ? { width }
+    : { width: minWidth };
+}

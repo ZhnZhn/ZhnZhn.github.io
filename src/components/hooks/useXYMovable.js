@@ -5,12 +5,11 @@ import {
   getClientY
 } from '../uiApi';
 
-import has from '../has';
+import { HAS_TOUCH_EVENTS } from '../has';
 
 const _assign = Object.assign
 , _isArr = Array.isArray
 , _isFn = fn => typeof fn === 'function'
-, HAS_TOUCH_EVENTS = has.touch
 , [
   INIT_EVENT,
   MOVE_EVENT,

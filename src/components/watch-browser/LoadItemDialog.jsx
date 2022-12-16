@@ -17,7 +17,7 @@ import {
 } from '../../utils/DateUtils';
 import formatNumber from '../../utils/formatNumber';
 
-import has from '../has';
+import { isWideWidth } from '../has';
 
 import {
   CHAT_LOAD,
@@ -53,7 +53,7 @@ const _crValue = (
   y=''
 ) => (`${formatNumber(y)} ${mlsToDmy(x)}`).trim();
 
-const HAS_WIDE_WIDTH = has.wideWidth()
+const HAS_WIDE_WIDTH = isWideWidth()
 , DF_DATA = {}
 , DF_FROM_DATE = getFromDate(2)
 , DF_TO_DATE = getToDate();
