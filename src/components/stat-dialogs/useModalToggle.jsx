@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo } from '../uiApi';
 
 import D from '../dialogs/DialogCell';
 import useTitles from '../dialogs/hooks/useTitles';

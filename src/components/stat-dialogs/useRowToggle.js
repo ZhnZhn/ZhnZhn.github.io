@@ -1,4 +1,8 @@
-import { useState, useCallback, useEffect } from 'react';
+import {
+  useState,
+  useCallback,
+  useEffect
+} from '../uiApi';
 
 import crIsId from './crIsId';
 

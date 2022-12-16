@@ -1,4 +1,7 @@
-import { useRef, useCallback } from 'react';
+import {
+  useRef,
+  useCallback
+} from '../uiApi';
 
 const useRefByIndex = () => {
   const refItems = useRef([])
@@ -6,7 +9,7 @@ const useRefByIndex = () => {
       refItems.current[index] = item
          ? {...item}
          : void 0
-  }, []);  
+  }, []);
   return [refItems, fSelect];
 };
 

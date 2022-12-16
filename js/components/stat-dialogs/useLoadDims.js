@@ -1,29 +1,21 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _ChartOptionsFn = require("../dialogs/ChartOptionsFn");
-
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
-
 var _loadConfigs = _interopRequireDefault(require("./dimensions/loadConfigs"));
-
 var _usePreviousProps = _interopRequireDefault(require("./usePreviousProps"));
-
 const {
-  crDateConfig
-} = _DialogCell.default,
-      MAP_FREQUENCY_DF = 'M',
-      _crOptionItem = (caption, value) => ({
-  caption,
-  value
-});
-
+    crDateConfig
+  } = _DialogCell.default,
+  MAP_FREQUENCY_DF = 'M',
+  _crOptionItem = (caption, value) => ({
+    caption,
+    value
+  });
 const _loadDims = (_ref, _setConfigs) => {
   let {
     dims,
@@ -46,35 +38,28 @@ const _loadDims = (_ref, _setConfigs) => {
     });
   });
 };
-
 const _crLoadingState = () => ({
   isLoading: true,
   isLoadFailed: false
 });
-
 const _useIsLoadDims = (props, isLoadFailed) => {
   const prevProps = (0, _usePreviousProps.default)(props);
   return isLoadFailed && !prevProps.isShow && props.isShow;
 };
-
 const _crDateOptions = (configs, _mF, mapDateDf) => {
   const {
     dateOptions
   } = configs;
-
   if (dateOptions) {
     return [dateOptions, dateOptions[0]];
   }
-
   const {
     dateOptions: dO,
     dateDefault
   } = crDateConfig(_mF, mapDateDf);
   return [dO, _crOptionItem(dateDefault, dateDefault)];
 };
-
 const _crSelectOptions = configs => configs.map(config => config.options);
-
 const _crDimOptions = configs => {
   const _dimOptions = [];
   configs.forEach(config => {
@@ -84,86 +69,79 @@ const _crDimOptions = configs => {
   });
   return _dimOptions;
 };
-
 const useLoadDims = props => {
   const {
-    chartsType,
-    mapFrequency,
-    mapDateDf,
-    dfProps = {}
-  } = props,
-        _mapFrequency = dfProps.mapFrequency || mapFrequency || MAP_FREQUENCY_DF,
-        _mapDateDf = dfProps.mapDateDf || mapDateDf,
-        [{
-    isLoading,
-    isLoadFailed
-  }, setLoad] = (0, _react.useState)(_crLoadingState),
-        [validationMessages, setValidationMessages] = (0, _react.useState)([]),
-        [state, setState] = (0, _react.useState)(() => ({
-    configs: [],
-    selectOptions: [],
-    mapFrequency,
-    chartOptions: (0, _ChartOptionsFn.crDialogChartOptions)(props),
-    dateOptions: []
-  })),
-        _setConfigs = (0, _react.useCallback)(_ref2 => {
-    let {
-      configs,
-      timeId,
-      mapFrequency: mF,
-      errMsg
-    } = _ref2;
-
-    if (configs) {
-      const _mF = mF || _mapFrequency,
-            [dateOptions, dateDf] = _crDateOptions(configs, _mF, _mapDateDf);
-
-      setLoad({
-        isLoading: false,
-        isLoadFailed: false
-      });
-      setState({
-        timeId,
+      chartsType,
+      mapFrequency,
+      mapDateDf,
+      dfProps = {}
+    } = props,
+    _mapFrequency = dfProps.mapFrequency || mapFrequency || MAP_FREQUENCY_DF,
+    _mapDateDf = dfProps.mapDateDf || mapDateDf,
+    [{
+      isLoading,
+      isLoadFailed
+    }, setLoad] = (0, _uiApi.useState)(_crLoadingState),
+    [validationMessages, setValidationMessages] = (0, _uiApi.useState)([]),
+    [state, setState] = (0, _uiApi.useState)(() => ({
+      configs: [],
+      selectOptions: [],
+      mapFrequency,
+      chartOptions: (0, _ChartOptionsFn.crDialogChartOptions)(props),
+      dateOptions: []
+    })),
+    _setConfigs = (0, _uiApi.useCallback)(_ref2 => {
+      let {
         configs,
-        selectOptions: _crSelectOptions(configs),
-        mapFrequency: _mF,
-        dimOptions: _crDimOptions(configs),
-        chartOptions: (0, _ChartOptionsFn.crDialogChartOptions)({
+        timeId,
+        mapFrequency: mF,
+        errMsg
+      } = _ref2;
+      if (configs) {
+        const _mF = mF || _mapFrequency,
+          [dateOptions, dateDf] = _crDateOptions(configs, _mF, _mapDateDf);
+        setLoad({
+          isLoading: false,
+          isLoadFailed: false
+        });
+        setState({
+          timeId,
           configs,
-          chartsType,
-          mapFrequency: _mF
-        }),
-        dateOptions,
-        dateDf
-      });
-    } else {
-      setLoad({
-        isLoading: false,
-        isLoadFailed: true
-      });
-      setValidationMessages([errMsg]);
-    }
-  }, [chartsType, _mapFrequency, _mapDateDf]),
-        _isLoadDims = _useIsLoadDims(props, isLoadFailed);
+          selectOptions: _crSelectOptions(configs),
+          mapFrequency: _mF,
+          dimOptions: _crDimOptions(configs),
+          chartOptions: (0, _ChartOptionsFn.crDialogChartOptions)({
+            configs,
+            chartsType,
+            mapFrequency: _mF
+          }),
+          dateOptions,
+          dateDf
+        });
+      } else {
+        setLoad({
+          isLoading: false,
+          isLoadFailed: true
+        });
+        setValidationMessages([errMsg]);
+      }
+    }, [chartsType, _mapFrequency, _mapDateDf]),
+    _isLoadDims = _useIsLoadDims(props, isLoadFailed);
+
   /*eslint-disable react-hooks/exhaustive-deps */
-
-
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     _loadDims(props, _setConfigs);
-  }, []); //props, _setConfigs
-
+  }, []);
+  //props, _setConfigs
   /*eslint-enable react-hooks/exhaustive-deps */
-
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     if (_isLoadDims) {
       _loadDims(props, _setConfigs);
-
       setLoad(_crLoadingState);
     }
   }, [_isLoadDims, props, _setConfigs]);
   return [state, isLoading, isLoadFailed, validationMessages, setValidationMessages, setState];
 };
-
 var _default = useLoadDims;
 exports.default = _default;
 //# sourceMappingURL=useLoadDims.js.map

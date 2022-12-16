@@ -1,11 +1,21 @@
-import {useState, useCallback} from 'react';
+import {
+  useState,
+  useMemo
+} from '../uiApi';
 
-const useToggle2 = (initialValue) => {
-  const [is, setIs] = useState(initialValue)
+const useToggle2 = (
+  initialValue
+) => {
+  const [
+    is,
+    setIs
+  ] = useState(initialValue)
   return [
     is,
-    useCallback(() => setIs(is=>!is), []),
-    useCallback(() => setIs(false), [])
+    ...useMemo(() => [
+      () => setIs(is=>!is),
+      () => setIs(false)
+    ], [])
   ];
 };
 

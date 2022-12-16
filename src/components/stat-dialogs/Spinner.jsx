@@ -1,4 +1,7 @@
-import { useState, useEffect } from 'react';
+import {
+  useState,
+  useEffect
+} from '../uiApi';
 
 import { LOADING, FAILED } from './SpinnerStatus';
 

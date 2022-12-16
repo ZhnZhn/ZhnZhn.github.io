@@ -2,7 +2,7 @@ import {
   useState,
   useCallback,
   useEffect
-} from 'react';
+} from '../uiApi';
 
 import { crDialogChartOptions } from '../dialogs/ChartOptionsFn';
 import D from '../dialogs/DialogCell';
