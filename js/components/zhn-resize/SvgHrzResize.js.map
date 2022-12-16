@@ -1,1 +1,26 @@
-{"version":3,"sources":["../../../src/components/zhn-resize/SvgHrzResize.jsx"],"names":["S_ROOT_DIV","display","S_BT_LEFT","marginLeft","S_BT_RIGHT","transform","SvgHrzResize","props","ref","hStartResizeLeft","hStartResizeRight","hStopResize","hKdLeft","hKdRight"],"mappings":";;;;;;;AAAA;;AACA;;AAEA;;;;AAEA,MAAMA,UAAU,GAAG;AAAEC,EAAAA,OAAO,EAAE;AAAX,CAAnB;AAAA,MACEC,SAAS,GAAG;AAAEC,EAAAA,UAAU,EAAE;AAAd,CADd;AAAA,MAEEC,UAAU,GAAG;AACbD,EAAAA,UAAU,EAAE,EADC;AAEbE,EAAAA,SAAS,EAAE;AAFE,CAFf;AAOA,MAAMC,YAAY,gBAAG,uBAAW,CAC9BC,KAD8B,EAE9BC,GAF8B,KAG3B;AACH,QAAM,CACJC,gBADI,EAEJC,iBAFI,EAGJC,WAHI,EAIJC,OAJI,EAKJC,QALI,IAMF,+BAAiBN,KAAjB,EAAwBC,GAAxB,CANJ;AAOA,sBACE;AAAK,IAAA,KAAK,EAAER,UAAZ;AAAA,4BACE,qBAAC,iBAAD;AACE,MAAA,KAAK,EAAEE,SADT;AAEE,MAAA,KAAK,EAAC,0BAFR;AAGE,MAAA,WAAW,EAAEO,gBAHf;AAIE,MAAA,UAAU,EAAEE,WAJd;AAKE,MAAA,SAAS,EAAEC;AALb,MADF,eAQE,qBAAC,iBAAD;AACE,MAAA,KAAK,EAAER,UADT;AAEE,MAAA,KAAK,EAAC,2BAFR;AAGE,MAAA,WAAW,EAAEM,iBAHf;AAIE,MAAA,UAAU,EAAEC,WAJd;AAKE,MAAA,SAAS,EAAEE;AALb,MARF;AAAA,IADF;AAkBD,CA7BoB,CAArB;AA+BA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;eAEeP,Y","sourcesContent":["import { forwardRef } from 'react';\r\nimport useResizeElement from './useResizeElement';\r\n\r\nimport BtResize from './BtResize';\r\n\r\nconst S_ROOT_DIV = { display: 'inline-block' }\r\n, S_BT_LEFT = { marginLeft: 10 }\r\n, S_BT_RIGHT = {\r\n  marginLeft: 10,\r\n  transform: 'rotate(180deg)'\r\n};\r\n\r\nconst SvgHrzResize = forwardRef((\r\n  props,\r\n  ref\r\n) => {\r\n  const [\r\n    hStartResizeLeft,\r\n    hStartResizeRight,\r\n    hStopResize,\r\n    hKdLeft,\r\n    hKdRight\r\n  ] = useResizeElement(props, ref);\r\n  return (\r\n    <div style={S_ROOT_DIV}>\r\n      <BtResize\r\n        style={S_BT_LEFT}\r\n        title=\"Resize container to left\"\r\n        startResize={hStartResizeLeft}\r\n        stopResize={hStopResize}\r\n        onKeyDown={hKdLeft}\r\n      />\r\n      <BtResize\r\n        style={S_BT_RIGHT}\r\n        title=\"Resize container to right\"\r\n        startResize={hStartResizeRight}\r\n        stopResize={hStopResize}\r\n        onKeyDown={hKdRight}\r\n      />\r\n   </div>\r\n  );\r\n});\r\n\r\n/*\r\nSvgHrzResize.propTypes = {\r\n  nodeRef: PropTypes.ref,\r\n  initWidth: PropTypes.number,\r\n  minWidth: PropTypes.number,\r\n  maxWidth: PropTypes.number,\r\n  step: PropTypes.number,\r\n  onResizeAfter: PropTypes.func\r\n}\r\n*/\r\n\r\nexport default SvgHrzResize\r\n"],"file":"SvgHrzResize.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-resize/SvgHrzResize.js"
+ ],
+ "file": "../../../src/components/zhn-resize/SvgHrzResize.js",
+ "names": [
+  "S_ROOT_DIV",
+  "display",
+  "S_BT_LEFT",
+  "marginLeft",
+  "S_BT_RIGHT",
+  "transform",
+  "SvgHrzResize",
+  "forwardRef",
+  "props",
+  "ref",
+  "hStartResizeLeft",
+  "hStartResizeRight",
+  "hStopResize",
+  "hKdLeft",
+  "hKdRight",
+  "useResizeElement"
+ ],
+ "mappings": ";;;;;AAAA;AACA;AAEA;AAAkC;AAElC,MAAMA,UAAU,GAAG;IAAEC,OAAO,EAAE;EAAe,CAAC;EAC5CC,SAAS,GAAG;IAAEC,UAAU,EAAE;EAAG,CAAC;EAC9BC,UAAU,GAAG;IACbD,UAAU,EAAE,EAAE;IACdE,SAAS,EAAE;EACb,CAAC;AAED,MAAMC,YAAY,GAAG,IAAAC,iBAAU,EAAC,CAC9BC,KAAK,EACLC,GAAG,KACA;EACH,MAAM,CACJC,gBAAgB,EAChBC,iBAAiB,EACjBC,WAAW,EACXC,OAAO,EACPC,QAAQ,CACT,GAAG,IAAAC,yBAAgB,EAACP,KAAK,EAAEC,GAAG,CAAC;EAChC,oBACE;IAAK,KAAK,EAAET,UAAW;IAAA,wBACrB,qBAAC,iBAAQ;MACP,KAAK,EAAEE,SAAU;MACjB,KAAK,EAAC,0BAA0B;MAChC,WAAW,EAAEQ,gBAAiB;MAC9B,UAAU,EAAEE,WAAY;MACxB,SAAS,EAAEC;IAAQ,EACnB,eACF,qBAAC,iBAAQ;MACP,KAAK,EAAET,UAAW;MAClB,KAAK,EAAC,2BAA2B;MACjC,WAAW,EAAEO,iBAAkB;MAC/B,UAAU,EAAEC,WAAY;MACxB,SAAS,EAAEE;IAAS,EACpB;EAAA,EACC;AAET,CAAC,CAAC;;AAEF;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AATA,eAWeR,YAAY;AAAA"
+}

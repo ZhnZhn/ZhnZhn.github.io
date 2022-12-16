@@ -10,6 +10,7 @@ const BtResize = ({
   onKeyDown
 }) => (
   <button
+     type="button"
      className={CL_BT_RESIZE}
      style={style}
      title={title}

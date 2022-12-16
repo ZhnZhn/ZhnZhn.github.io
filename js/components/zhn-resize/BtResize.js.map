@@ -1,1 +1,17 @@
-{"version":3,"sources":["../../../src/components/zhn-resize/BtResize.jsx"],"names":["CL_BT_RESIZE","BtResize","style","title","startResize","stopResize","onKeyDown"],"mappings":";;;;;;;AAAA;;;;AAEA,MAAMA,YAAY,GAAG,wBAArB;;AAEA,MAAMC,QAAQ,GAAG;AAAA,MAAC;AAChBC,IAAAA,KADgB;AAEhBC,IAAAA,KAFgB;AAGhBC,IAAAA,WAHgB;AAIhBC,IAAAA,UAJgB;AAKhBC,IAAAA;AALgB,GAAD;AAAA,sBAOf;AACG,IAAA,SAAS,EAAEN,YADd;AAEG,IAAA,KAAK,EAAEE,KAFV;AAGG,IAAA,KAAK,EAAEC,KAHV;AAIG,IAAA,WAAW,EAAEC,WAJhB;AAKG,IAAA,SAAS,EAAEC,UALd;AAMG,IAAA,SAAS,EAAEC,SANd;AAOG,IAAA,YAAY,EAAEF,WAPjB;AAQG,IAAA,UAAU,EAAEC,UARf;AAAA,2BAUG,sBAAC,YAAD;AACE,MAAA,CAAC,EAAC,IADJ;AAEE,MAAA,WAAW,EAAC,GAFd;AAGE,MAAA,aAAa,EAAC,OAHhB;AAIE,MAAA,IAAI,EAAC,MAJP;AAAA,8BAMG;AAAM,QAAA,CAAC,EAAC;AAAR,QANH,eAOG;AAAM,QAAA,CAAC,EAAC;AAAR,QAPH;AAAA;AAVH,IAPe;AAAA,CAAjB;;eA6BeJ,Q","sourcesContent":["import Svg100 from '../zhn/svg/Svg100';\r\n\r\nconst CL_BT_RESIZE = \"bt-resize not-selected\";\r\n\r\nconst BtResize = ({\r\n  style,\r\n  title,\r\n  startResize,\r\n  stopResize,\r\n  onKeyDown\r\n}) => (\r\n  <button\r\n     className={CL_BT_RESIZE}\r\n     style={style}\r\n     title={title}\r\n     onMouseDown={startResize}\r\n     onMouseUp={stopResize}\r\n     onKeyDown={onKeyDown}\r\n     onTouchStart={startResize}\r\n     onTouchEnd={stopResize}\r\n  >\r\n     <Svg100\r\n       w=\"12\"\r\n       strokeWidth=\"2\"\r\n       strokeLinecap=\"round\"\r\n       fill=\"none\"\r\n     >\r\n        <path d=\"M 1,6 L 11,6\" />\r\n        <path d=\"M 6,2 L 1,6 6,10\" />\r\n     </Svg100>\r\n   </button>\r\n);\r\n\r\nexport default BtResize\r\n"],"file":"BtResize.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-resize/BtResize.js"
+ ],
+ "file": "../../../src/components/zhn-resize/BtResize.js",
+ "names": [
+  "CL_BT_RESIZE",
+  "BtResize",
+  "style",
+  "title",
+  "startResize",
+  "stopResize",
+  "onKeyDown"
+ ],
+ "mappings": ";;;;;AAAA;AAAuC;AAEvC,MAAMA,YAAY,GAAG,wBAAwB;AAE7C,MAAMC,QAAQ,GAAG;EAAA,IAAC;IAChBC,KAAK;IACLC,KAAK;IACLC,WAAW;IACXC,UAAU;IACVC;EACF,CAAC;EAAA,oBACC;IACG,IAAI,EAAC,QAAQ;IACb,SAAS,EAAEN,YAAa;IACxB,KAAK,EAAEE,KAAM;IACb,KAAK,EAAEC,KAAM;IACb,WAAW,EAAEC,WAAY;IACzB,SAAS,EAAEC,UAAW;IACtB,SAAS,EAAEC,SAAU;IACrB,YAAY,EAAEF,WAAY;IAC1B,UAAU,EAAEC,UAAW;IAAA,uBAEvB,sBAAC,YAAM;MACL,CAAC,EAAC,IAAI;MACN,WAAW,EAAC,GAAG;MACf,aAAa,EAAC,OAAO;MACrB,IAAI,EAAC,MAAM;MAAA,wBAEV;QAAM,CAAC,EAAC;MAAc,EAAG,eACzB;QAAM,CAAC,EAAC;MAAkB,EAAG;IAAA;EACvB,EACF;AAAA,CACX;AAAC,eAEaJ,QAAQ;AAAA"
+}

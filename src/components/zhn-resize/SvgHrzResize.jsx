@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef } from '../uiApi';
 import useResizeElement from './useResizeElement';
 
 import BtResize from './BtResize';

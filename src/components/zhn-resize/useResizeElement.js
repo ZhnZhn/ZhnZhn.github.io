@@ -1,10 +1,10 @@
 import {
   useEffect,
   useImperativeHandle
-} from 'react';
+} from '../uiApi';
 import useRefInit from '../hooks/useRefInit';
 
-import ResizeElementImpl from './ResizeElementImpl'
+import ResizeElementImpl from './ResizeElementImpl';
 
 const useResizeElement = (
   props,

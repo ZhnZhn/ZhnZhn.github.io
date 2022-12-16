@@ -1,16 +1,11 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _Svg = _interopRequireDefault(require("../zhn/svg/Svg100"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const CL_BT_RESIZE = "bt-resize not-selected";
-
 const BtResize = _ref => {
   let {
     style,
@@ -20,6 +15,7 @@ const BtResize = _ref => {
     onKeyDown
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+    type: "button",
     className: CL_BT_RESIZE,
     style: style,
     title: title,
@@ -41,7 +37,6 @@ const BtResize = _ref => {
     })
   });
 };
-
 var _default = BtResize;
 exports.default = _default;
 //# sourceMappingURL=BtResize.js.map
