@@ -1,15 +1,21 @@
-import { memo } from 'react'
+import { memo } from '../uiApi';
 
-import CellColor from './CellColor'
+import CellColor from './CellColor';
 
 const CL_INPUT_COLOR = "va-b"
 , S_PANE = { margin: 10 }
 , S_ROW = { width: 120 }
 , S_COLOR = { margin: 4 };
 
-const CellColorPane = memo(({ model, onClickCell }) => {
-
-   const { rows, cols, colors } = model
+const CellColorPane = memo(({
+  model,
+  onClickCell
+}) => {
+   const {
+     rows,
+     cols,
+     colors
+   } = model
    , _elRows = [];
 
    let r, c, _color, _idPrefix;

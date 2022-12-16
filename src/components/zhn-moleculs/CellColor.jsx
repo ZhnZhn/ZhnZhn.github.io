@@ -1,8 +1,8 @@
-import { forwardRef } from 'react';
+//import PropTypes from 'prop-types'
+import { forwardRef } from '../uiApi';
 
 import useKeyEnter from '../hooks/useKeyEnter';
 import crCn from '../zhn-utils/crCn';
-//import PropTypes from 'prop-types'
 
 const CL_INPUT_COLOR = 'input-color';
 

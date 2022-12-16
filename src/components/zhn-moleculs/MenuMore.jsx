@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef } from '../uiApi';
 
 import SvgMore from '../zhn/SvgMore';
 import ModalSlider from '../zhn-modal-slider/ModalSlider';
@@ -16,8 +16,7 @@ const MenuMore = forwardRef(({
   TS,
   toggle
 }, ref) => {
-  if (!menuModel) { return null; }
-  return (
+  return menuModel ? (
     <>
       <SvgMore
         ref={ref}
@@ -32,7 +31,7 @@ const MenuMore = forwardRef(({
         onClose={toggle}
       />
     </>
-  );
+  ) : null;
 });
 
 export default MenuMore

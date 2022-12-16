@@ -1,4 +1,9 @@
-import { forwardRef, useState, useCallback, useImperativeHandle } from 'react';
+import {
+  forwardRef,
+  useState,
+  useCallback,
+  useImperativeHandle
+} from '../uiApi';
 
 import InputSlider from '../zhn/InputSlider'
 
