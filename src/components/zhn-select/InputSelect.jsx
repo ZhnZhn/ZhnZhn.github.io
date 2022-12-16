@@ -2,7 +2,7 @@
 import {
   Component,
   createRef
-} from 'react';
+} from '../uiApi';
 
 import { HAS_TOUCH_EVENTS } from '../has';
 

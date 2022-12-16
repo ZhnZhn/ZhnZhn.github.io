@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback } from '../uiApi';
 import memoEqual from '../hoc/memoEqual'
 
 import { transformFromLevel3 } from './TransformFn';

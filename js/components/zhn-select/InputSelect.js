@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _react = require("react");
+var _uiApi = require("../uiApi");
 var _has = require("../has");
 var _ArrowCell = _interopRequireDefault(require("./ArrowCell"));
 var _SvgClear = _interopRequireDefault(require("../zhn/SvgClear"));
@@ -97,7 +97,7 @@ const _crFilterOptions = (options, token, props) => {
 };
 const _getCurrent = ref => ref.current;
 const _fnNoop = () => {};
-class InputSelect extends _react.Component {
+class InputSelect extends _uiApi.Component {
   /*
   static propTypes = {
      propCaption: PropTypes.string,
@@ -492,8 +492,8 @@ class InputSelect extends _react.Component {
       onBlur: this._hBlur
     } : void 0;
     this._initProperties();
-    this._refInput = /*#__PURE__*/(0, _react.createRef)();
-    this._refArrowCell = /*#__PURE__*/(0, _react.createRef)();
+    this._refInput = (0, _uiApi.createRef)();
+    this._refArrowCell = (0, _uiApi.createRef)();
     this.state = _crInitialStateFromProps(_props);
   }
   static getDerivedStateFromProps(props, state) {

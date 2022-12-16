@@ -1,15 +1,14 @@
 import {
   forwardRef,
   useRef,
-  useImperativeHandle
-} from 'react';
+  useImperativeHandle,
+  getRefElementStyle
+} from '../uiApi';
 
 import { CL_BT_ARROW } from './CL';
 
 const ANIMATION_CIRCLE = "circle infinite 1.25s linear"
 , BORDER_COLOR = "#1b75bb transparent transparent";
-
-const _getStyle = ref => ref.current.style;
 
 const ArrowCell = forwardRef(({
   arrowStyle,
@@ -20,11 +19,11 @@ const ArrowCell = forwardRef(({
 
   useImperativeHandle(ref, () => ({
     startAnimation: () => {
-      _getStyle(_refArrowCell).animation = ANIMATION_CIRCLE;
-      _getStyle(_refArrow).borderColor = BORDER_COLOR;
+      getRefElementStyle(_refArrowCell).animation = ANIMATION_CIRCLE;
+      getRefElementStyle(_refArrow).borderColor = BORDER_COLOR;
     },
     stopAnimation: () => {
-      _getStyle(_refArrowCell).animation = "";
+      getRefElementStyle(_refArrowCell).animation = "";
     }
   }), [])
 

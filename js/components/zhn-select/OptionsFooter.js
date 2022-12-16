@@ -1,19 +1,13 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle2"));
-
 var _CL = require("./CL");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
-const OptionsFooter = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+const OptionsFooter = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     noFooterBts,
     indexActiveOption,
