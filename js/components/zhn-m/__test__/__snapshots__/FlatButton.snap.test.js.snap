@@ -14,7 +14,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
     </span>
     <span
       style={
-        Object {
+        {
           "textDecoration": "underline",
         }
       }
@@ -33,7 +33,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary true 1`] = `
   className="bt-flat"
   onClick={[Function]}
   style={
-    Object {
+    {
       "color": "#607d8b",
     }
   }
@@ -47,7 +47,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary true 1`] = `
     </span>
     <span
       style={
-        Object {
+        {
           "textDecoration": "underline",
         }
       }
