@@ -51,6 +51,11 @@ const _getComposedPath = (
   ? evt.composedPath()
   : void 0;
 
+const _isExcludeElement = (
+  element
+) => element.tagName === 'BUTTON'
+  || element.dataset.scrollable
+
 const _isInitEvent = (
   evt,
   initialEvtClientX,
@@ -61,7 +66,7 @@ const _isInitEvent = (
   if (_isArr(_composedPath)) {
     for(let i=0; i<_composedPath.length; i++){
       const _el = _composedPath[i];
-      if (_el.tagName === 'BUTTON') {
+      if (_isExcludeElement(_el)) {
         return false;
       }
       if (_el === element) {

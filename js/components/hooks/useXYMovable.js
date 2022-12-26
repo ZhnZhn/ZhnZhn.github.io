@@ -22,12 +22,13 @@ const _crNextValue = (value, maxValue) => value > 0 ? value > maxValue ? maxValu
 const START_EVENT_GAP = 22;
 const _isValueInGapRange = (from, to, value) => value - from > START_EVENT_GAP && to - value > START_EVENT_GAP;
 const _getComposedPath = evt => _isFn(evt.composedPath) ? evt.composedPath() : void 0;
+const _isExcludeElement = element => element.tagName === 'BUTTON' || element.dataset.scrollable;
 const _isInitEvent = (evt, initialEvtClientX, initialEvtClientY, element) => {
   const _composedPath = _getComposedPath(evt);
   if (_isArr(_composedPath)) {
     for (let i = 0; i < _composedPath.length; i++) {
       const _el = _composedPath[i];
-      if (_el.tagName === 'BUTTON') {
+      if (_isExcludeElement(_el)) {
         return false;
       }
       if (_el === element) {
