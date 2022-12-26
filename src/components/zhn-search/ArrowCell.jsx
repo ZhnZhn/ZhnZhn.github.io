@@ -15,9 +15,10 @@ const ArrowCell = ({
   onClick
 }) => (
   <button
+     type="button"
+     tabIndex={tabIndex}
      className={CL_BT}
      style={S_ARROW_CELL}
-     tabIndex={tabIndex}
      onClick={onClick}>
     <span style={{...S_ARROW, ...arrowStyle}}/>
   </button>

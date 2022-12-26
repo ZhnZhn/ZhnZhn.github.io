@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef } from '../uiApi';
 import Svg from './svg/Svg';
 
 const CL_BT_MORE = 'bt-more';
@@ -9,6 +9,7 @@ const SvgMore = forwardRef(({
   onClick
 }, ref) => (
   <button
+    type="button"
     ref={ref}
     className={CL_BT_MORE}
     style={style}

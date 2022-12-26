@@ -1,6 +1,11 @@
-import { memo, useCallback } from 'react';
+import {
+  memo,
+  useCallback
+} from '../uiApi';
 
 import useToggle from '../hooks/useToggle';
+
+import Button from './Button';
 import ItemStack from './ItemStack';
 import LegendItem from './LegendItem';
 
@@ -17,19 +22,33 @@ const CL_SCROLL = "with-scroll"
 , S_LESS = { height: 'auto' }
 , S_DIV = { transform: 'scaleX(-1)' };
 
-const _crBtCaption = (isMore, len) => isMore
+const _crBtCaption = (
+  isMore,
+  len
+) => isMore
  ? `Less: ${MORE_MAX}`
  : `More: ${len - MORE_MAX}`;
 
-const BtMoreOrLess = ({ isMore, legend, onClick }) => {
+const BtMoreOrLess = ({
+  isMore,
+  legend,
+  onClick
+}) => {
   const _len = legend.length;
   return _len > MORE_MAX
-    ? (<button className={CL_BT_ML} onClick={onClick}>
+    ? (<Button
+          className={CL_BT_ML}
+          onClick={onClick}
+        >
         {_crBtCaption(isMore, _len)}
-      </button>) : null;
+      </Button>) : null;
 };
 
-const _crLegendItem = (item, index, onClickItem) => (
+const _crLegendItem = (
+  item,
+  index,
+  onClickItem
+) => (
   <LegendItem
     key={item.name + index}
     item={item}
@@ -37,8 +56,14 @@ const _crLegendItem = (item, index, onClickItem) => (
  />
 );
 
-const Legend = memo(({ legend=[], onClickItem }) => {
-  const [isMore, toggleIsMore] = useToggle(false)
+const Legend = memo(({
+  legend=[],
+  onClickItem
+}) => {
+  const [
+    isMore,
+    toggleIsMore
+  ] = useToggle(false)
   , _legendItems = isMore
        ? legend
        : legend.slice(0, MORE_MAX)

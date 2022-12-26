@@ -1,37 +1,30 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../uiApi");
-
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
-
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const SEARCH = 'zhn-search',
-      CL_ROOT = SEARCH + "__options",
-      CL_OPTIONS = SEARCH + "__options__div",
-      CL_ITEM = SEARCH + "__row",
-      CL_FOOTER = SEARCH + "__footer",
-      S_OPTIONS = {
-  width: 250
-},
-      S_BOLD = {
-  fontWeight: 'bold'
-},
-      S_FOOTER = {
-  color: 'black',
-  width: 250,
-  height: 32,
-  padding: '4px 0 4px 10px',
-  fontWeight: 'bold'
-};
-
+  CL_ROOT = SEARCH + "__options",
+  CL_OPTIONS = SEARCH + "__options__div",
+  CL_ITEM = SEARCH + "__row",
+  CL_FOOTER = SEARCH + "__footer",
+  S_OPTIONS = {
+    width: 250
+  },
+  S_BOLD = {
+    fontWeight: 'bold'
+  },
+  S_FOOTER = {
+    color: 'black',
+    width: 250,
+    height: 32,
+    padding: '4px 0 4px 10px',
+    fontWeight: 'bold'
+  };
 const BoldSpan = _ref => {
   let {
     text = ''
@@ -41,11 +34,9 @@ const BoldSpan = _ref => {
     children: text
   });
 };
-
 const Delimeter = () => /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
   children: " - "
 });
-
 const Span = _ref2 => {
   let {
     text = ''
@@ -54,7 +45,6 @@ const Span = _ref2 => {
     children: text
   });
 };
-
 const Item = _ref3 => {
   let {
     item,
@@ -69,6 +59,7 @@ const Item = _ref3 => {
     currency
   } = item;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+    type: "button",
     className: CL_ITEM,
     onClick: onClick,
     onFocus: onFocus,
@@ -85,7 +76,6 @@ const Item = _ref3 => {
     })]
   });
 };
-
 const _crItem = (item, index, _ref4) => {
   let {
     onClick,
@@ -97,21 +87,18 @@ const _crItem = (item, index, _ref4) => {
     onFocus: onFocus.bind(null, index + 1)
   }, item.value + index);
 };
-
 const SearchOptions = _ref5 => {
   let {
     isShow,
     options,
     onClickItem
   } = _ref5;
-
   const refRecentItem = (0, _uiApi.useRef)(),
-        [itemIndex, setItemIndex] = (0, _uiApi.useState)(''),
-        _onFocusItem = (index, event) => {
-    refRecentItem.current = event.target;
-    setItemIndex(index);
-  };
-
+    [itemIndex, setItemIndex] = (0, _uiApi.useState)(''),
+    _onFocusItem = (index, event) => {
+      refRecentItem.current = event.target;
+      setItemIndex(index);
+    };
   (0, _uiApi.useEffect)(() => {
     refRecentItem.current = null;
     setItemIndex('');
@@ -121,9 +108,7 @@ const SearchOptions = _ref5 => {
       (0, _uiApi.focusRefElement)(refRecentItem);
     }
   }, [isShow]);
-
   const _total = options.length || '';
-
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide.default, {
     isShow: isShow,
     className: CL_ROOT,
@@ -149,7 +134,6 @@ const SearchOptions = _ref5 => {
     })]
   });
 };
-
 var _default = SearchOptions;
 exports.default = _default;
 //# sourceMappingURL=SearchOptions.js.map

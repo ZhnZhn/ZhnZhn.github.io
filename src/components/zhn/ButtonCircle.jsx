@@ -1,4 +1,5 @@
 //import PropTypes from "prop-types";
+import Button from './Button';
 const CL_BT_CIRCLE = 'bt-circle bt-c1 not-selected';
 
 const ButtonCircle = ({
@@ -8,13 +9,13 @@ const ButtonCircle = ({
   title,
   onClick
 }) => (
-  <button
+  <Button
     className={className}
     style={style}
     title={title}
     onClick={onClick}
   ><div>{caption}</div>
-  </button>
+  </Button>
 );
 
 

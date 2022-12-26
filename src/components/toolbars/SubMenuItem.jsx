@@ -11,7 +11,10 @@ const SubMenuItem = memoEqual(({
   onClick,
   onClose
 }) => {
-  const [isActive, toggleIsAcive] = useToggle(initialIsActive)
+  const [
+    isActive,
+    toggleIsAcive
+  ] = useToggle(initialIsActive)
   , _hClick = () => {
     onClick()
     if (_isFn(onClose)) {
@@ -21,20 +24,16 @@ const SubMenuItem = memoEqual(({
     }
   };
 
-  if (!_isFn(onClick)){
-    return null;
-  }
-  const _style = isActive ? S_ACTIVE : null;
-
-  return (
+  return _isFn(onClick) ? (
     <button
+      type="button"
       className={CL}
-      style={_style}
+      style={isActive ? S_ACTIVE : null}
       onClick={_hClick}
     >
       {caption}
     </button>
-  );
+  ) : null;
 });
 
 export default SubMenuItem

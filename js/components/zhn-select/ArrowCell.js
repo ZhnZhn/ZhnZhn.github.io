@@ -24,9 +24,10 @@ const ArrowCell = (0, _uiApi.forwardRef)((_ref, ref) => {
     }
   }), []);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+    type: "button",
     ref: _refArrowCell,
-    className: _CL.CL_BT_ARROW,
     tabIndex: "-1",
+    className: _CL.CL_BT_ARROW,
     onClick: onClick,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       ref: _refArrow,

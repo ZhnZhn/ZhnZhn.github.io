@@ -29,9 +29,10 @@ const ArrowCell = forwardRef(({
 
   return (
     <button
+       type="button"
        ref={_refArrowCell}
-       className={CL_BT_ARROW}
        tabIndex="-1"
+       className={CL_BT_ARROW}
        onClick={onClick}
     >
       <span

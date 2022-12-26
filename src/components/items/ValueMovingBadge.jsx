@@ -12,13 +12,14 @@ import {
   DT_EQUAL
 } from '../../constants/DirectionType';
 
-import SvgDown from '../zhn/SvgDown'
-import SvgUp from '../zhn/SvgUp'
-import SvgEqual from '../zhn/SvgEqual'
+import Button from '../zhn/Button';
+import SvgDown from '../zhn/SvgDown';
+import SvgUp from '../zhn/SvgUp';
+import SvgEqual from '../zhn/SvgEqual';
 
-import SpanValue from '../zhn-span/SpanValue'
-import SpanDate from '../zhn-span/SpanDate'
-import ValueMovingModal from './ValueMovingModal'
+import SpanValue from '../zhn-span/SpanValue';
+import SpanDate from '../zhn-span/SpanDate';
+import ValueMovingModal from './ValueMovingModal';
 
 const CL_BT = 'bt';
 
@@ -73,8 +74,14 @@ const ValueMovingBadge = forwardRef(({
   initialVm=DF_VALUE_MOVING,
   crValueMoving
 }, ref) => {
-  const [vm, setVm] = useState(initialVm)
-  , [isShowModal, setIsShowModal] = useState(false)
+  const [
+    vm,
+    setVm
+  ] = useState(initialVm)
+  , [
+    isShowModal,
+    setIsShowModal
+  ] = useState(false)
   , _toggleModal = useCallback(() => setIsShowModal(is=>!is), [])
   , _closeModal = useCallback(() => setIsShowModal(false), [])
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -101,7 +108,10 @@ const ValueMovingBadge = forwardRef(({
      direction,
      date
    } = vm
-   , [_svgDirection, _dStyle] = _getDirection(direction)
+   , [
+     _svgDirection,
+     _dStyle
+   ] = _getDirection(direction)
    , _spanStyle = {...S_SPAN, ..._dStyle};
 
   return (
@@ -115,9 +125,12 @@ const ValueMovingBadge = forwardRef(({
          {delta}
        </span>
        <span style={S_W5} />
-       <button className={CL_BT} onClick={_toggleModal} >
+       <Button
+         className={CL_BT}
+         onClick={_toggleModal}
+       >
          <SpanDate style={S_DATE} date={date} />
-       </button>
+       </Button>
        {
          _svgDirection && <ValueMovingModal
             isShow={isShowModal}

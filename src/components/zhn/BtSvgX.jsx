@@ -1,3 +1,4 @@
+import Button from './Button';
 import SvgX from './svg/SvgX';
 
 const BtSvgX = ({
@@ -5,14 +6,14 @@ const BtSvgX = ({
    style,
    onClick
  }) => (
-   <button
-      tabIndex="-1"
-      className={className}
-      style={style}
-      onClick={onClick}
+   <Button
+     tabIndex="-1"
+     className={className}
+     style={style}
+     onClick={onClick}
    >
      <SvgX />
-   </button>
+   </Button>
 );
 
 export default BtSvgX

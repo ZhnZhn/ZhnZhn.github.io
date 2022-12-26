@@ -9,7 +9,10 @@ const CL_ARROW = "arrow-down"
 , CL_BT_FLAT_CAPTION = 'bt-flat__caption'
 , S_PRIMARY = { color: '#607d8b' };
 
-const _crTitle = (title, hotKey) => hotKey
+const _crTitle = (
+  title,
+  hotKey
+) => hotKey
   ? `${title} [${hotKey}]`
   : title;
 
@@ -31,10 +34,14 @@ const FlatButton = ({
   , _style = isPrimary
        ? {...style, ...S_PRIMARY}
        : style
-  , [_hotKey, _refBt] = useHotKey(hotKey, _hClick, refBt)
+  , [
+    _hotKey,
+    _refBt
+  ] = useHotKey(hotKey, _hClick, refBt)
   , _title = _crTitle(title, _hotKey);
   return (
     <button
+      type="button"
       ref={_refBt}
       className={_className}
       style={_style}

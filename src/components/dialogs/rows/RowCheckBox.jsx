@@ -1,7 +1,13 @@
-import { useState, useCallback } from 'react';
 //import PropTypes from "prop-types";
+import {
+  useState,
+  useCallback
+} from '../../uiApi';
+
 import useTheme from '../../hooks/useTheme';
 import useRefInit from '../../hooks/useRefInit';
+
+import Button from '../../zhn/Button';
 import SvgCheckBox from '../../zhn/SvgCheckBox';
 
 const CL = "bt-chb"
@@ -36,7 +42,10 @@ const RowCheckBox = ({
   onUnCheck,
   onToggle
 }) => {
-  const [valueState, setValueState] = useState(
+  const [
+    valueState,
+    setValueState
+  ] = useState(
     ()=>_isUndefined(value) ? !!initValue : void 0
   )
   , _isValueState = useRefInit(() => _isBool(valueState))
@@ -85,14 +94,14 @@ const RowCheckBox = ({
       />
       {
         caption && (
-          <button
-            className={CL}
+          <Button
             tabIndex="-1"
+            className={CL}
             style={{...S_CAPTION, ..._style}}
             onClick={_hToggle}
           >
             {caption}
-          </button>
+          </Button>
         )
       }
     </div>

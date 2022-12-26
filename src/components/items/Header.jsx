@@ -7,6 +7,7 @@ import { GREEN_COLOR } from '../styles/Color';
 import crStyle from '../zhn-utils/crStyle';
 
 import Comp from '../Comp';
+import Button from '../zhn/Button';
 import ValueMovingBadge from './ValueMovingBadge';
 
 const {
@@ -131,14 +132,14 @@ const Header = ({
          onCheck={onCheck}
          onUnCheck={onUnCheck}
       />
-      <button
+      <Button
          className={CL_CAPTION}
-         title={_btTitle}
          style={_captionStyle}
+         title={_btTitle}
          onClick={onToggle}
       >
          {itemCaption}
-      </button>
+      </Button>
       {
         valueMoving
           ? <ValueMovingBadge

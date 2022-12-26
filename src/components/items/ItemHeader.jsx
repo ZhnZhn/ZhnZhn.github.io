@@ -1,6 +1,7 @@
 import useTheme from '../hooks/useTheme';
 
 import A from '../Comp';
+import Button from '../zhn/Button';
 
 const TH_ID = 'ELEMENT'
 , CL_CAPTION = "not-selected text-clip bt-left bt"
@@ -49,7 +50,7 @@ function ItemHeader({
        ...style,
        ...TS.ROOT
      }}>
-      <button
+      <Button
          className={CL_CAPTION}
          style={{
            ...S_CAPTION,
@@ -60,7 +61,7 @@ function ItemHeader({
          onClick={onClick}
       >
          {caption}
-      </button>
+      </Button>
       {children}
       <A.SvgClose
          style={S_SVG_CLOSE}

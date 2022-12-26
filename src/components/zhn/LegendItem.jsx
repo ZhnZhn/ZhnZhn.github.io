@@ -1,5 +1,7 @@
 //import PropTypes from "prop-types";
-import useToggle from '../hooks/useToggle'
+import useToggle from '../hooks/useToggle';
+
+import Button from './Button';
 
 const CL = 'bt-item'
 , S_ITEM = {
@@ -31,22 +33,32 @@ const LegendItem = ({
   item,
   onClickItem
 }) => {
-  const { color, name, isVisible } = item ?? {}
-  , [is, toggleIs] = useToggle(isVisible)
-  , [btStyle, circleStyle] = _crStyles(is, color)
+  const {
+    color,
+    name,
+    isVisible
+  } = item ?? {}
+  , [
+    is,
+    toggleIs
+  ] = useToggle(isVisible)
+  , [
+    btStyle,
+    circleStyle
+  ] = _crStyles(is, color)
   , _hClick = () => {
       onClickItem(item);
       toggleIs();
   };
   return (
-    <button
+    <Button
        className={CL}
        style={btStyle}
        onClick={_hClick}
     >
       <span style={{...S_CIRCLE, ...circleStyle}} />
       <span style={S_ITEM}>{name}</span>
-   </button>
+   </Button>
   );
 }
 

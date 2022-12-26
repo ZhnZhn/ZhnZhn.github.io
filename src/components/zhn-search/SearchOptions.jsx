@@ -41,6 +41,7 @@ const Item = ({
   } = item;
   return(
   <button
+    type="button"
     className={CL_ITEM}
     onClick={onClick}
     onFocus={onFocus}

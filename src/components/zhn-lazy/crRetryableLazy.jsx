@@ -8,8 +8,15 @@ const S_LOADING = { color: '#2f7ed8'}
 const DfLoaderView = () => (
   <div style={S_LOADING}>Loading...</div>
 );
-const DfErrorRetryView = ({ retry }) => (
-  <button className={CL_BT} style={S_RETRY} onClick={retry}>
+const DfErrorRetryView = ({
+  retry
+}) => (
+  <button
+    type="button"
+    className={CL_BT}
+    style={S_RETRY}
+    onClick={retry}
+  >
     Retry
   </button>
 );
@@ -20,7 +27,11 @@ const crRetryableLazy = (
 	ErrorRetryView = DfErrorRetryView
 ) => {
 	const RetryableLazy = props => {
-    const [loading, retry, setLoadingFalse] = useBool(true)
+    const [
+      loading,
+      retry,
+      setLoadingFalse
+    ] = useBool(true)
     /*eslint-disable react-hooks/exhaustive-deps */
 		, LazyComponent = useMemo(() =>
        lazy(() => crLoadPromise()

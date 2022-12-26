@@ -4,11 +4,14 @@ const CL = 'bt-circle bt-c2 not-selected';
 
 const ButtonCircle2 = ({
   tabIndex,
-  className, style, dataLoader,
+  className,
+  style,
+  dataLoader,
   caption='',
   onClick
 }) => (
   <button
+     type="button"
      tabIndex={tabIndex}
      className={crCn(CL, className)}
      style={style}

@@ -1,4 +1,5 @@
 //import PropTypes from "prop-types";
+import Button from './Button';
 
 import useTheme from '../hooks/useTheme';
 import crCn from '../zhn-utils/crCn';
@@ -28,14 +29,14 @@ const ButtonTab = ({
   );
 
   return (
-    <button
+    <Button
       className={_cn}
       style={{...style, ...TS.BG}}
       onClick={onClick}
     >
        {caption}
        {isMenu && <span className={CL_ARROW_DOWN} />}
-    </button>
+    </Button>
   );
 };
 
