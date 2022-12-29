@@ -7,7 +7,9 @@ import zhnUtils from '../../_test-utils/zhn-test-utils';
 import SvgCheckBox from '../SvgCheckBox';
 
 const {
-  render, screen, act,
+  render,
+  screen,
+  act,
   fireClick,
   fireKeyDownEnter
 } = zhnUtils;

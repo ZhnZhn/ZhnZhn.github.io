@@ -1,1 +1,25 @@
-{"version":3,"sources":["../../../../src/components/hooks/__tests__/_factorySameFnForEmptyDeps.js"],"names":["describe","test","expect","toBe","factorySameFnForEmptyDeps","useHook","fn","jest","initialProps","result","rerender","_fn","current","toEqual"],"mappings":";;;;;AAAA;;AAEAA,QAAQ,CAAC,4BAAD,EAA+B,YAAI;AACzCC,EAAAA,IAAI,CAAC,EAAD,EAAK;AAAA,WAAMC,MAAM,CAAC,EAAD,CAAN,CAAWC,IAAX,CAAgB,EAAhB,CAAN;AAAA,GAAL,CAAJ;AACD,CAFO,CAAR;;AAIA,IAAMC,yBAAyB,GAAG,SAA5BA,yBAA4B,CAACC,OAAD;AAAA,SAAa,YAAM;AAC7C,QAAAC,EAAE,GAAGC,IAAI,CAACD,EAAL,EAAL;AAAA,sBAKF,4BAAW;AAAA,UAAGA,EAAH,QAAGA,EAAH;AAAA,aAAYD,OAAO,CAACC,EAAD,CAAnB;AAAA,KAAX,EAAoC;AACtCE,MAAAA,YAAY,EAAE;AAAEF,QAAAA,EAAE,EAAFA;AAAF;AADwB,KAApC,CALE;AAAA,QAGJG,MAHI,eAGJA,MAHI;AAAA,QAIJC,QAJI,eAIJA,QAJI,CAD6C,CAEnD;;;AAQA,QAAMC,GAAG,GAAGF,MAAM,CAACG,OAAnB;AACAV,IAAAA,MAAM,CAAC,OAAOS,GAAR,CAAN,CAAmBR,IAAnB,CAAwB,UAAxB,EAXmD,CAanD;AACA;;AACAO,IAAAA,QAAQ,CAAC;AAAEJ,MAAAA,EAAE,EAAFA;AAAF,KAAD,CAAR;AACAJ,IAAAA,MAAM,CAACS,GAAD,CAAN,CAAYE,OAAZ,CAAoBJ,MAAM,CAACG,OAA3B,EAhBmD,CAkBnD;;AACAF,IAAAA,QAAQ,CAAC;AAAEJ,MAAAA,EAAE,EAAEC,IAAI,CAACD,EAAL;AAAN,KAAD,CAAR;AACAJ,IAAAA,MAAM,CAACS,GAAD,CAAN,CAAYE,OAAZ,CAAoBJ,MAAM,CAACG,OAA3B,EApBmD,CAsBnD;;AACAF,IAAAA,QAAQ;AACRR,IAAAA,MAAM,CAACS,GAAD,CAAN,CAAYE,OAAZ,CAAoBJ,MAAM,CAACG,OAA3B;AACD,GAzBiC;AAAA,CAAlC;;eA2BeR,yB","sourcesContent":["import { renderHook } from '@testing-library/react-hooks'\r\n\r\ndescribe('_factorySameFnForEmptyDeps', ()=>{\r\n  test('', () => expect('').toBe(''))\r\n})\r\n\r\nconst factorySameFnForEmptyDeps = (useHook) => () => {\r\n  const fn = jest.fn()\r\n  //1 Test return type\r\n  , {\r\n    result,\r\n    rerender\r\n  } = renderHook(({ fn }) => useHook(fn), {\r\n    initialProps: { fn }\r\n  });\r\n\r\n  const _fn = result.current;\r\n  expect(typeof _fn).toBe('function')\r\n\r\n  //2 Test rerender\r\n  //2.1 With same fn\r\n  rerender({ fn })\r\n  expect(_fn).toEqual(result.current)\r\n\r\n  //2.2 With new fn\r\n  rerender({ fn: jest.fn() })\r\n  expect(_fn).toEqual(result.current)\r\n\r\n  //2.3 With empty fn\r\n  rerender()\r\n  expect(_fn).toEqual(result.current)\r\n}\r\n\r\nexport default factorySameFnForEmptyDeps\r\n"],"file":"_factorySameFnForEmptyDeps.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/hooks/__tests__/_factorySameFnForEmptyDeps.js"
+ ],
+ "file": "../../../../src/components/hooks/__tests__/_factorySameFnForEmptyDeps.js",
+ "names": [
+  "describe",
+  "test",
+  "expect",
+  "toBe",
+  "factorySameFnForEmptyDeps",
+  "useHook",
+  "fn",
+  "jest",
+  "result",
+  "rerender",
+  "renderHook",
+  "initialProps",
+  "_fn",
+  "current",
+  "toEqual"
+ ],
+ "mappings": ";;;;AAAA;AAEAA,QAAQ,CAAC,4BAA4B,EAAE,MAAI;EACzCC,IAAI,CAAC,EAAE,EAAE,MAAMC,MAAM,CAAC,EAAE,CAAC,CAACC,IAAI,CAAC,EAAE,CAAC,CAAC;AACrC,CAAC,CAAC;AAEF,MAAMC,yBAAyB,GAAIC,OAAO,IAAK,MAAM;EACnD,MAAMC,EAAE,GAAGC,IAAI,CAACD,EAAE;IAClB;IAAA;IACE;MACAE,MAAM;MACNC;IACF,CAAC,GAAG,IAAAC,iBAAU,EAAC;MAAA,IAAC;QAAEJ;MAAG,CAAC;MAAA,OAAKD,OAAO,CAACC,EAAE,CAAC;IAAA,GAAE;MACtCK,YAAY,EAAE;QAAEL;MAAG;IACrB,CAAC,CAAC;EAEF,MAAMM,GAAG,GAAGJ,MAAM,CAACK,OAAO;EAC1BX,MAAM,CAAC,OAAOU,GAAG,CAAC,CAACT,IAAI,CAAC,UAAU,CAAC;;EAEnC;EACA;EACAM,QAAQ,CAAC;IAAEH;EAAG,CAAC,CAAC;EAChBJ,MAAM,CAACU,GAAG,CAAC,CAACE,OAAO,CAACN,MAAM,CAACK,OAAO,CAAC;;EAEnC;EACAJ,QAAQ,CAAC;IAAEH,EAAE,EAAEC,IAAI,CAACD,EAAE;EAAG,CAAC,CAAC;EAC3BJ,MAAM,CAACU,GAAG,CAAC,CAACE,OAAO,CAACN,MAAM,CAACK,OAAO,CAAC;;EAEnC;EACAJ,QAAQ,CAAC,CAAC,CAAC,CAAC;EACZP,MAAM,CAACU,GAAG,CAAC,CAACE,OAAO,CAACN,MAAM,CAACK,OAAO,CAAC;AACrC,CAAC;AAAA,eAEcT,yBAAyB;AAAA"
+}

@@ -1,5 +1,5 @@
-import { renderHook } from '@testing-library/react-hooks'
-import useSelectItem from '../useSelectItem'
+import { renderHook } from '@testing-library/react';
+import useSelectItem from '../useSelectItem';
 
 const _getRef = result => result.current[0]
 const _getRefValue = result => _getRef(result).current

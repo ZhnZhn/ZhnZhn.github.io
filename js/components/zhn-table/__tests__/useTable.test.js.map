@@ -1,1 +1,43 @@
-{"version":3,"sources":["../../../../src/components/zhn-table/__tests__/useTable.test.js"],"names":["_getHookState","result","current","_getHookFn","_actFnByArgOne","fn","argOne","expectedResult","expect","toEqual","_testStateAndGetFn","hookFn","toBe","describe","test","headers","toggleByIndex","_actToggleByIndex","bind","isHide","rows","name","p","sortByPn","_rows","sortBy","sortTo","_actSortByPn","reverse"],"mappings":";;AAAA;;AACA;;AAKA,MAAMA,aAAa,GAAGC,MAAM,IAAIA,MAAM,CAACC,OAAP,CAAe,CAAf,CAAhC;;AACA,MAAMC,UAAU,GAAGF,MAAM,IAAIA,MAAM,CAACC,OAAP,CAAe,CAAf,CAA7B;;AACA,MAAME,cAAc,GAAG,CAACH,MAAD,EAASI,EAAT,EAAaC,MAAb,EAAqBC,cAArB,KAAwC;AAC7D,uBAAI,MAAIF,EAAE,CAACC,MAAD,CAAV;AACAE,EAAAA,MAAM,CAACR,aAAa,CAACC,MAAD,CAAd,CAAN,CAA8BQ,OAA9B,CAAsCF,cAAtC;AACAC,EAAAA,MAAM,CAACL,UAAU,CAACF,MAAD,CAAX,CAAN,CAA2BQ,OAA3B,CAAmCJ,EAAnC;AACD,CAJD;;AAKA,MAAMK,kBAAkB,GAAG,CAACT,MAAD,EAASM,cAAT,KAA4B;AACrD,QAAMI,MAAM,GAAGR,UAAU,CAACF,MAAD,CAAzB;;AACAO,EAAAA,MAAM,CAACR,aAAa,CAACC,MAAD,CAAd,CAAN,CAA8BQ,OAA9B,CAAsCF,cAAtC;AACAC,EAAAA,MAAM,CAAC,OAAOG,MAAR,CAAN,CAAsBC,IAAtB,CAA2B,UAA3B;AACA,SAAOD,MAAP;AACD,CALD;;AAOAE,QAAQ,CAAC,UAAD,EAAY,MAAI;AACtBC,EAAAA,IAAI,CAAC,iEAAD,EAAmE,MAAI;AACxE,UAAMC,OAAO,GAAG,CAAC,EAAD,EAAI,EAAJ,CAAhB;AAAA,UACE;AAACd,MAAAA;AAAD,QAAW,4BAAW,MAAI,yBAAUc,OAAV,CAAf,CADb;AAAA,UAEEC,aAAa,GAAGN,kBAAkB,CAACT,MAAD,EAASc,OAAT,CAFpC;;AAIA,UAAME,iBAAiB,GAAGb,cAAc,CAACc,IAAf,CAAoB,IAApB,EAA0BjB,MAA1B,EAAkCe,aAAlC,CAA1B;;AACAC,IAAAA,iBAAiB,CAAC,CAAD,EAAI,CAAC,EAAD,EAAI;AAACE,MAAAA,MAAM,EAAC;AAAR,KAAJ,CAAJ,CAAjB;;AACAF,IAAAA,iBAAiB,CAAC,CAAD,EAAI,CAAC,EAAD,EAAI;AAACE,MAAAA,MAAM,EAAC;AAAR,KAAJ,CAAJ,CAAjB;AACF,GARG,CAAJ;AAUAL,EAAAA,IAAI,CAAC,2CAAD,EAA6C,MAAI;AACnD,UAAMM,IAAI,GAAG,CACX;AAAEC,MAAAA,IAAI,EAAE,GAAR;AAAaC,MAAAA,CAAC,EAAE;AAAhB,KADW,EAEX;AAAED,MAAAA,IAAI,EAAE,GAAR;AAAaC,MAAAA,CAAC,EAAE;AAAhB,KAFW,CAAb;AAAA,UAIE;AAACrB,MAAAA;AAAD,QAAW,4BAAW,MAAI,uBAAQmB,IAAR,CAAf,CAJb;AAAA,UAKEG,QAAQ,GAAGb,kBAAkB,CAACT,MAAD,EAAS;AACtCuB,MAAAA,KAAK,EAAEJ,IAD+B;AACzBK,MAAAA,MAAM,EAAE,KAAK,CADY;AACTC,MAAAA,MAAM,EAAE,KAAK;AADJ,KAAT,CAL/B;;AASA,UAAMC,YAAY,GAAGvB,cAAc,CAACc,IAAf,CAAoB,IAApB,EAA0BjB,MAA1B,EAAkCsB,QAAlC,CAArB;;AAEAI,IAAAA,YAAY,CAAC,MAAD,EAAS;AACnBH,MAAAA,KAAK,EAAEJ,IADY;AACNK,MAAAA,MAAM,EAAE,MADF;AACUC,MAAAA,MAAM,EAAE;AADlB,KAAT,CAAZ;;AAGAC,IAAAA,YAAY,CAAC,MAAD,EAAS;AACnBH,MAAAA,KAAK,EAAEJ,IAAI,CAACQ,OAAL,EADY;AACIH,MAAAA,MAAM,EAAE,MADZ;AACoBC,MAAAA,MAAM,EAAE;AAD5B,KAAT,CAAZ;;AAGAC,IAAAA,YAAY,CAAC,GAAD,EAAM;AAChBH,MAAAA,KAAK,EAAEJ,IADS;AACHK,MAAAA,MAAM,EAAE,GADL;AACUC,MAAAA,MAAM,EAAE;AADlB,KAAN,CAAZ;;AAGAC,IAAAA,YAAY,CAAC,GAAD,EAAM;AAChBH,MAAAA,KAAK,EAAEJ,IAAI,CAACQ,OAAL,EADS;AACOH,MAAAA,MAAM,EAAE,GADf;AACoBC,MAAAA,MAAM,EAAE;AAD5B,KAAN,CAAZ;AAGD,GAxBG,CAAJ;AAyBD,CApCO,CAAR","sourcesContent":["import {renderHook, act} from '@testing-library/react-hooks';\r\nimport {\r\n  useColumn,\r\n  useSort\r\n} from '../useTable';\r\n\r\nconst _getHookState = result => result.current[0];\r\nconst _getHookFn = result => result.current[1];\r\nconst _actFnByArgOne = (result, fn, argOne, expectedResult) => {\r\n  act(()=>fn(argOne))\r\n  expect(_getHookState(result)).toEqual(expectedResult)\r\n  expect(_getHookFn(result)).toEqual(fn)\r\n};\r\nconst _testStateAndGetFn = (result, expectedResult) => {\r\n  const hookFn = _getHookFn(result);\r\n  expect(_getHookState(result)).toEqual(expectedResult)\r\n  expect(typeof hookFn).toBe('function')\r\n  return hookFn;\r\n};\r\n\r\ndescribe('useTable',()=>{\r\n  test('useColumn should toggle property isHide by index for arr of obj',()=>{\r\n     const headers = [{},{}]\r\n     , {result} = renderHook(()=>useColumn(headers))\r\n     , toggleByIndex = _testStateAndGetFn(result, headers);\r\n\r\n     const _actToggleByIndex = _actFnByArgOne.bind(null, result, toggleByIndex);\r\n     _actToggleByIndex(1, [{},{isHide:true}])\r\n     _actToggleByIndex(1, [{},{isHide:false}])\r\n  })\r\n\r\n  test('useSort should sort rows by property name',()=>{\r\n    const rows = [\r\n      { name: 'a', p: 1.1 },\r\n      { name: 'b', p: 1.2 }\r\n    ]\r\n    , {result} = renderHook(()=>useSort(rows))\r\n    , sortByPn = _testStateAndGetFn(result, {\r\n      _rows: rows, sortBy: void 0, sortTo: void 0\r\n    });\r\n\r\n    const _actSortByPn = _actFnByArgOne.bind(null, result, sortByPn);\r\n\r\n    _actSortByPn('name', {\r\n      _rows: rows, sortBy: 'name', sortTo: 'UP'\r\n    })\r\n    _actSortByPn('name', {\r\n      _rows: rows.reverse(), sortBy: 'name', sortTo: 'DOWN'\r\n    })\r\n    _actSortByPn('p', {\r\n      _rows: rows, sortBy: 'p', sortTo: 'UP'\r\n    })\r\n    _actSortByPn('p', {\r\n      _rows: rows.reverse(), sortBy: 'p', sortTo: 'DOWN'\r\n    })\r\n  })\r\n})\r\n"],"file":"useTable.test.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/zhn-table/__tests__/useTable.test.js"
+ ],
+ "file": "../../../../src/components/zhn-table/__tests__/useTable.test.js",
+ "names": [
+  "_getHookState",
+  "result",
+  "current",
+  "_getHookFn",
+  "_actFnByArgOne",
+  "fn",
+  "argOne",
+  "expectedResult",
+  "act",
+  "expect",
+  "toEqual",
+  "_testStateAndGetFn",
+  "hookFn",
+  "toBe",
+  "describe",
+  "test",
+  "headers",
+  "renderHook",
+  "useColumn",
+  "toggleByIndex",
+  "_actToggleByIndex",
+  "bind",
+  "isHide",
+  "rows",
+  "name",
+  "p",
+  "useSort",
+  "sortByPn",
+  "_rows",
+  "sortBy",
+  "sortTo",
+  "_actSortByPn",
+  "reverse"
+ ],
+ "mappings": "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"
+}

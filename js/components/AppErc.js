@@ -17,7 +17,7 @@ var _CompContainer = _interopRequireDefault(require("./zhn-containers/CompContai
 var _DialogContainer = _interopRequireDefault(require("./dialogs/DialogContainer"));
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 var _jsxRuntime = require("react/jsx-runtime");
-const BUILD_DATE = '26-12-2022',
+const BUILD_DATE = '29-12-2022',
   CL_COMP_CONTAINER = "component-container";
 const showSettings = _ComponentActions.ComponentActions.showSettings.bind(null, _ChartStore.default.exportSettingFn());
 const AppErc = () => {

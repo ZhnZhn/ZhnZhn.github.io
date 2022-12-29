@@ -10,9 +10,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
   <span
     className="bt-flat__caption"
   >
-    <span>
-      
-    </span>
+    <span />
     <span
       style={
         {
@@ -44,9 +42,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary true 1`] = `
   <span
     className="bt-flat__caption"
   >
-    <span>
-      
-    </span>
+    <span />
     <span
       style={
         {

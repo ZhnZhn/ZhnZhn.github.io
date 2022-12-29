@@ -1,5 +1,5 @@
-import { renderHook } from '@testing-library/react-hooks'
-import useHasNotEqual from '../useHasNotEqual'
+import { renderHook } from '@testing-library/react';
+import useHasNotEqual from '../useHasNotEqual';
 
 const _getHas = result => result.current;
 

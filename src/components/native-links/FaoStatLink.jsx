@@ -1,17 +1,19 @@
-import Link from './Link'
+import Link from './Link';
 
-const C = {
-  BASE: 'http://www.fao.org/faostat/en/#data/'
-};
+const DATA_URL = 'https://www.fao.org/faostat/en/#data/';
+const _isStr = v => typeof str === 'string';
 
-const FaoStatLink = ({ item }) => (
+const FaoStatLink = ({
+  item
+}) => (
   <Link
     isHttp={true}
-    href={item ? C.BASE + item : C.BASE}
+    href={_isStr(item)
+       ? DATA_URL + item
+       : DATA_URL
+    }
     caption="FAOSTAT Link"
   />
 );
-
-
 
 export default FaoStatLink

@@ -1,5 +1,5 @@
-import { renderHook } from '@testing-library/react-hooks'
-import useRefInit from '../useRefInit'
+import { renderHook } from '@testing-library/react';
+import useRefInit from '../useRefInit';
 
 const _getValue = result => result.current;
 

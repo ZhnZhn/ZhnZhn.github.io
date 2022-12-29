@@ -1,8 +1,10 @@
+import {
+  forwardRef,
+  useImperativeHandle
+} from '../uiApi';
+import useLoadOptions  from './hooks/useLoadOptions';
 
-import { forwardRef, useImperativeHandle } from 'react'
-import useLoadOptions  from './hooks/useLoadOptions'
-
-import RowInputSelect from './rows/RowInputSelect'
+import RowInputSelect from './rows/RowInputSelect';
 
 const SelectWithLoad = forwardRef(({
   isShow=true,
@@ -11,7 +13,10 @@ const SelectWithLoad = forwardRef(({
   uri,
   ...restProps
 }, ref) => {
-  const [state, loadOptions] = useLoadOptions(isShow, uri, jsonProp)
+  const [
+    state,
+    loadOptions
+  ] = useLoadOptions(isShow, uri, jsonProp)
   , { options } = state;
 
   useImperativeHandle(ref, () => ({

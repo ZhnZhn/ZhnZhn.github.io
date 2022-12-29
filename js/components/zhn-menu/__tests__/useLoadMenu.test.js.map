@@ -1,1 +1,32 @@
-{"version":3,"sources":["../../../../src/components/zhn-menu/__tests__/useLoadMenu.test.js"],"names":["_getIsLoading","result","current","_getMenu","_getSetLoaded","_getSetFailed","_getUpdateMenu","_expectResult","isLoading","menu","expect","toBe","toEqual","describe","test","_testResult","bind","caption","menuUpdate"],"mappings":";;;;AAAA;;AACA;;AAEA,MAAMA,aAAa,GAAGC,MAAM,IAAIA,MAAM,CAACC,OAAP,CAAe,CAAf,CAAhC;;AACA,MAAMC,QAAQ,GAAGF,MAAM,IAAIA,MAAM,CAACC,OAAP,CAAe,CAAf,CAA3B;;AAEA,MAAME,aAAa,GAAGH,MAAM,IAAIA,MAAM,CAACC,OAAP,CAAe,CAAf,CAAhC;;AACA,MAAMG,aAAa,GAAGJ,MAAM,IAAIA,MAAM,CAACC,OAAP,CAAe,CAAf,CAAhC;;AACA,MAAMI,cAAc,GAAGL,MAAM,IAAIA,MAAM,CAACC,OAAP,CAAe,CAAf,CAAjC;;AAEA,MAAMK,aAAa,GAAG,CAACN,MAAD,EAASO,SAAT,EAAoBC,IAApB,KAA6B;AACjD;AACEC,EAAAA,MAAM,CAACV,aAAa,CAACC,MAAD,CAAd,CAAN,CAA8BU,IAA9B,CAAmCH,SAAnC;AACAE,EAAAA,MAAM,CAACP,QAAQ,CAACF,MAAD,CAAT,CAAN,CAAyBW,OAAzB,CAAiCH,IAAjC,EAH+C,CAIjD;AACA;AACA;AACA;AACD,CARD;;AAUAI,QAAQ,CAAC,aAAD,EAAgB,MAAI;AAC1BC,EAAAA,IAAI,CAAC,2CAAD,EAA8C,MAAI;AACpD,UAAM;AAAEb,MAAAA;AAAF,QAAa,4BAAW,MAAM,0BAAY,KAAZ,EAAmB,MAAI,CAAE,CAAzB,CAAjB,CAAnB,CADoD,CAGpD;;AACA,UAAMc,WAAW,GAAGR,aAAa,CAACS,IAAd,CAAmB,IAAnB,EAAyBf,MAAzB,CAApB;;AACAc,IAAAA,WAAW,CAAC,KAAD,EAAQ,EAAR,CAAX,CALoD,CAOpD;;;AACA,yBAAIV,aAAa,CAACJ,MAAD,CAAjB;;AACAc,IAAAA,WAAW,CAAC,KAAD,EAAQ,EAAR,CAAX,CAToD,CAUpD;;;AACA,UAAMN,IAAI,GAAG,CAAC;AAACQ,MAAAA,OAAO,EAAE;AAAV,KAAD,CAAb;AACA,yBAAI,MAAMb,aAAa,CAACH,MAAD,CAAb,CAAsBQ,IAAtB,CAAV;;AACAM,IAAAA,WAAW,CAAC,KAAD,EAAQN,IAAR,CAAX,CAboD,CAcpD;;;AACA,UAAMS,UAAU,GAAG,CAAC;AAACD,MAAAA,OAAO,EAAE;AAAV,KAAD,CAAnB;AACA,yBAAI,MAAMX,cAAc,CAACL,MAAD,CAAd,CAAuBiB,UAAvB,CAAV;;AACAH,IAAAA,WAAW,CAAC,KAAD,EAAQG,UAAR,CAAX;AAED,GAnBG,CAAJ;AAoBD,CArBO,CAAR","sourcesContent":["import { renderHook, act } from '@testing-library/react-hooks'\r\nimport useLoadMenu from '../useLoadMenu'\r\n\r\nconst _getIsLoading = result => result.current[0]\r\nconst _getMenu = result => result.current[1]\r\n\r\nconst _getSetLoaded = result => result.current[2]\r\nconst _getSetFailed = result => result.current[3]\r\nconst _getUpdateMenu = result => result.current[4]\r\n\r\nconst _expectResult = (result, isLoading, menu) => {\r\n  //try {\r\n    expect(_getIsLoading(result)).toBe(isLoading)\r\n    expect(_getMenu(result)).toEqual(menu)\r\n  //} catch(error) {\r\n  //  Error.captureStackTrace(error, _expectResult)\r\n  //  throw error;\r\n  //}\r\n};\r\n\r\ndescribe('useLoadMenu', ()=>{\r\n  test('should return correct state after actions', ()=>{\r\n    const { result } = renderHook(() => useLoadMenu(false, ()=>{}))\r\n\r\n    //Init\r\n    const _testResult = _expectResult.bind(null, result)\r\n    _testResult(false, [])\r\n\r\n    //FAILED\r\n    act(_getSetFailed(result))\r\n    _testResult(false, [])\r\n    //LOADED\r\n    const menu = [{caption: 'Item1'}]\r\n    act(() => _getSetLoaded(result)(menu))\r\n    _testResult(false, menu)\r\n    //UPDATE\r\n    const menuUpdate = [{caption: 'Item2'}]\r\n    act(() => _getUpdateMenu(result)(menuUpdate))\r\n    _testResult(false, menuUpdate)\r\n\r\n  })\r\n})\r\n"],"file":"useLoadMenu.test.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/zhn-menu/__tests__/useLoadMenu.test.js"
+ ],
+ "file": "../../../../src/components/zhn-menu/__tests__/useLoadMenu.test.js",
+ "names": [
+  "_getIsLoading",
+  "result",
+  "current",
+  "_getMenu",
+  "_getSetLoaded",
+  "_getSetFailed",
+  "_getUpdateMenu",
+  "_expectResult",
+  "isLoading",
+  "menu",
+  "expect",
+  "toBe",
+  "toEqual",
+  "describe",
+  "test",
+  "renderHook",
+  "useLoadMenu",
+  "_testResult",
+  "bind",
+  "act",
+  "caption",
+  "menuUpdate"
+ ],
+ "mappings": ";;;AAAA;AAIA;AAEA,MAAMA,aAAa,GAAGC,MAAM,IAAIA,MAAM,CAACC,OAAO,CAAC,CAAC,CAAC;AACjD,MAAMC,QAAQ,GAAGF,MAAM,IAAIA,MAAM,CAACC,OAAO,CAAC,CAAC,CAAC;AAE5C,MAAME,aAAa,GAAGH,MAAM,IAAIA,MAAM,CAACC,OAAO,CAAC,CAAC,CAAC;AACjD,MAAMG,aAAa,GAAGJ,MAAM,IAAIA,MAAM,CAACC,OAAO,CAAC,CAAC,CAAC;AACjD,MAAMI,cAAc,GAAGL,MAAM,IAAIA,MAAM,CAACC,OAAO,CAAC,CAAC,CAAC;AAElD,MAAMK,aAAa,GAAG,CAACN,MAAM,EAAEO,SAAS,EAAEC,IAAI,KAAK;EACjD;EACEC,MAAM,CAACV,aAAa,CAACC,MAAM,CAAC,CAAC,CAACU,IAAI,CAACH,SAAS,CAAC;EAC7CE,MAAM,CAACP,QAAQ,CAACF,MAAM,CAAC,CAAC,CAACW,OAAO,CAACH,IAAI,CAAC;EACxC;EACA;EACA;EACA;AACF,CAAC;;AAEDI,QAAQ,CAAC,aAAa,EAAE,MAAI;EAC1BC,IAAI,CAAC,2CAA2C,EAAE,MAAI;IACpD,MAAM;MAAEb;IAAO,CAAC,GAAG,IAAAc,iBAAU,EAAC,MAAM,IAAAC,oBAAW,EAAC,KAAK,EAAE,MAAI,CAAC,CAAC,CAAC,CAAC;;IAE/D;IACA,MAAMC,WAAW,GAAGV,aAAa,CAACW,IAAI,CAAC,IAAI,EAAEjB,MAAM,CAAC;IACpDgB,WAAW,CAAC,KAAK,EAAE,EAAE,CAAC;;IAEtB;IACA,IAAAE,UAAG,EAACd,aAAa,CAACJ,MAAM,CAAC,CAAC;IAC1BgB,WAAW,CAAC,KAAK,EAAE,EAAE,CAAC;IACtB;IACA,MAAMR,IAAI,GAAG,CAAC;MAACW,OAAO,EAAE;IAAO,CAAC,CAAC;IACjC,IAAAD,UAAG,EAAC,MAAMf,aAAa,CAACH,MAAM,CAAC,CAACQ,IAAI,CAAC,CAAC;IACtCQ,WAAW,CAAC,KAAK,EAAER,IAAI,CAAC;IACxB;IACA,MAAMY,UAAU,GAAG,CAAC;MAACD,OAAO,EAAE;IAAO,CAAC,CAAC;IACvC,IAAAD,UAAG,EAAC,MAAMb,cAAc,CAACL,MAAM,CAAC,CAACoB,UAAU,CAAC,CAAC;IAC7CJ,WAAW,CAAC,KAAK,EAAEI,UAAU,CAAC;EAEhC,CAAC,CAAC;AACJ,CAAC,CAAC"
+}

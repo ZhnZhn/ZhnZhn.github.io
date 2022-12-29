@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react';
 
 describe('_factorySameFnForEmptyDeps', ()=>{
   test('', () => expect('').toBe(''))
@@ -27,7 +27,7 @@ const factorySameFnForEmptyDeps = (useHook) => () => {
   expect(_fn).toEqual(result.current)
 
   //2.3 With empty fn
-  rerender()
+  rerender({})
   expect(_fn).toEqual(result.current)
 }
 

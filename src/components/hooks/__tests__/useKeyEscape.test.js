@@ -1,7 +1,10 @@
-import {renderHook, act} from '@testing-library/react-hooks'
-import useKeyEscape from '../useKeyEscape'
+import {
+  renderHook,
+  act
+} from '@testing-library/react';
+import useKeyEscape from '../useKeyEscape';
 
-import factorySameFnForEmptyDeps from './_factorySameFnForEmptyDeps'
+import factorySameFnForEmptyDeps from './_factorySameFnForEmptyDeps';
 
 describe('useKeyEscape', ()=>{
   test('', ()=>{

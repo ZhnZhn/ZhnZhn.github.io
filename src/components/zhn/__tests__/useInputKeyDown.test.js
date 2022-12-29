@@ -1,5 +1,8 @@
-import {renderHook, act} from '@testing-library/react-hooks'
-import useInputKeyDown from '../useInputKeyDown'
+import {
+  renderHook,
+  act
+} from '@testing-library/react';
+import useInputKeyDown from '../useInputKeyDown';
 
 describe('useInputKeyDown', ()=>{
   test('should return handle for input KeyDown', ()=>{
@@ -7,11 +10,15 @@ describe('useInputKeyDown', ()=>{
     , onDelete = jest.fn();
     let initialValue = 'a';
 
-    const { result, rerender } = renderHook(
+    const {
+      result,
+      rerender
+    } = renderHook(
       ({ onEnter, onDelete, initialValue})=>useInputKeyDown({onEnter, onDelete}, [initialValue]),
       { initialProps: {
-       onEnter, onDelete,
-       initialValue
+         onEnter,
+         onDelete,
+         initialValue
       }}
     )
 
@@ -44,6 +51,6 @@ describe('useInputKeyDown', ()=>{
     //2.2 Test onEnter without fn
     act(() => result.current({ keyCode: 13 }))
     expect(onEnter).toHaveBeenCalledTimes(1)
-    
+
   })
 })

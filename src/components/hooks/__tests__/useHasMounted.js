@@ -1,5 +1,5 @@
-import { renderHook } from '@testing-library/react-hooks'
-import useHasMounted from '../useHasMounted'
+import { renderHook } from '@testing-library/react';
+import useHasMounted from '../useHasMounted';
 
 const _getHasMounted = result => result.current;
 

@@ -1,5 +1,8 @@
-import { renderHook, act } from '@testing-library/react-hooks'
-import useLoadMenu from '../useLoadMenu'
+import {
+  renderHook,
+  act
+} from '@testing-library/react';
+import useLoadMenu from '../useLoadMenu';
 
 const _getIsLoading = result => result.current[0]
 const _getMenu = result => result.current[1]

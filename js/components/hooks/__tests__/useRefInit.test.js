@@ -1,24 +1,16 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _reactHooks = require("@testing-library/react-hooks");
-
+var _react = require("@testing-library/react");
 var _useRefInit = _interopRequireDefault(require("../useRefInit"));
+const _getValue = result => result.current;
 
-var _getValue = function _getValue(result) {
-  return result.current;
-};
 /* eslint-disable react-hooks/rules-of-hooks */
-
-
-var _testRenderAndRerender = function _testRenderAndRerender(init, expectedValue) {
-  var _renderHook = (0, _reactHooks.renderHook)(function () {
-    return (0, _useRefInit["default"])(init);
-  }),
-      r1 = _renderHook.result,
-      rr1 = _renderHook.rerender;
-
+const _testRenderAndRerender = (init, expectedValue) => {
+  const {
+    result: r1,
+    rerender: rr1
+  } = (0, _react.renderHook)(() => (0, _useRefInit.default)(init));
   expect(_getValue(r1)).toBe(expectedValue);
   rr1();
   expect(_getValue(r1)).toBe(expectedValue);
@@ -26,20 +18,11 @@ var _testRenderAndRerender = function _testRenderAndRerender(init, expectedValue
 };
 /* eslint-enable react-hooks/rules-of-hooks */
 
-
-describe('useRefInit', function () {
-  test('should return computed by function value', function () {
-    _testRenderAndRerender(jest.fn(function () {
-      return false;
-    }), false);
-
-    _testRenderAndRerender(jest.fn(function () {
-      return true;
-    }), true);
-
-    _testRenderAndRerender(jest.fn(function () {
-      return '';
-    }), '');
+describe('useRefInit', () => {
+  test('should return computed by function value', () => {
+    _testRenderAndRerender(jest.fn(() => false), false);
+    _testRenderAndRerender(jest.fn(() => true), true);
+    _testRenderAndRerender(jest.fn(() => ''), '');
   });
 });
 //# sourceMappingURL=useRefInit.test.js.map

@@ -8,7 +8,9 @@ import DateField from '../DateField';
 
 const {
   createRef,
-  render, screen, act,
+  render,
+  screen,
+  act,
   fireChange,
   fireKeyDownEnter,
   fireKeyDownDelete

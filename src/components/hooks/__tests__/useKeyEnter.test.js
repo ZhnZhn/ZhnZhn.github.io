@@ -1,5 +1,8 @@
-import {renderHook, act} from '@testing-library/react-hooks'
-import useKeyEnter from '../useKeyEnter'
+import {
+  renderHook,
+  act
+} from '@testing-library/react';
+import useKeyEnter from '../useKeyEnter';
 
 import factorySameFnForEmptyDeps from './_factorySameFnForEmptyDeps'
 

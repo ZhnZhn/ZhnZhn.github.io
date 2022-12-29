@@ -8,7 +8,9 @@ import InputText from '../InputText';
 
 const {
   createRef,
-  render, screen, act,
+  render,
+  screen,
+  act,
   fireChange,
   fireKeyDownEnter,
   fireKeyDownDelete

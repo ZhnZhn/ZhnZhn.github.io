@@ -6,7 +6,8 @@
  "file": "../../../src/components/browser-container/SourceBrowserDynamic.js",
  "names": [
   "SourceBrowserDynamic",
+  "memoEqual",
   "props"
  ],
- "mappings": ";;;;;;;;;;;AAAA;;AACA;;AAEA,IAAMA,oBAAoB,GAAG,2BAC3B,UAACC,KAAD;AAAA,sBAAW,qBAAC,uBAAD,gCAAiBA,KAAjB,EAAX;AAAA,CAD2B,CAA7B;eAIeD,oB"
+ "mappings": ";;;;;AAAA;AACA;AAAiD;AAEjD,MAAMA,oBAAoB,GAAG,IAAAC,kBAAS,EACnCC,KAAK,iBAAK,qBAAC,oBAAW;EAAA,GAAKA;AAAK,EAAI,CACtC;AAAC,eAEaF,oBAAoB;AAAA"
 }

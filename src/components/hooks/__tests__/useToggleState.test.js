@@ -1,5 +1,8 @@
-import {renderHook, act} from '@testing-library/react-hooks'
-import useToggleState from '../useToggleState'
+import {
+  renderHook,
+  act
+} from '@testing-library/react';
+import useToggleState from '../useToggleState';
 
 const _getState = result => result.current[0]
 , _getToggle = result => result.current[1];

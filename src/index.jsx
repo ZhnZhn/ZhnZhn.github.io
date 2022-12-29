@@ -1,4 +1,4 @@
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import polyfill from './polyfill';
 import Raven from 'raven-js';
@@ -45,7 +45,8 @@ const _renderApp = () => {
   if (preloaderEl) {
      document.body.removeChild(document.getElementById('preloader'));
   }
-  render(<AppErc />, document.getElementById('app'));
+  createRoot(document.getElementById('app'))
+    .render(<AppErc />)
 }
 
 const _runLoadingApp = () => {

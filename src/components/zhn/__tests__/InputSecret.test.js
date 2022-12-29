@@ -8,7 +8,10 @@ import InputSecret from '../InputSecret';
 
 const {
   createRef,
-  render, screen, act,
+  render,
+  screen,
+  act,
+  waitFor,
   fireChange,
   fireKeyDownEnter,
   fireKeyDownDelete
@@ -33,7 +36,9 @@ describe('InputSecret', () =>{
     fireChange(input, _changeValue)
     input = await _findInput()
     expect(input).toHaveValue(_changeValue)
-    expect(input.hasAttribute('value')).toBe(false)
+    await waitFor(() => {
+      expect(input.hasAttribute('value')).toBe(false)
+    }, { timeout: 0 })
 
     //3 Test KeyDown handle
     //3.1 Test KeyDown Enter
@@ -56,8 +61,9 @@ describe('InputSecret', () =>{
     act(() => ref.current.clear())
     input = await _findInput()
     expect(input).toHaveValue('')
-    expect(input.hasAttribute('value')).toBe(false)
-
+    await waitFor(() => {
+      expect(input.hasAttribute('value')).toBe(false)
+    }, { timeout: 0 })
 
     //5 Test rerender without onEnter
     const _onEnterTimes = 2
@@ -69,7 +75,9 @@ describe('InputSecret', () =>{
     />)
     input = await _findInput()
     expect(input).toHaveValue(_changeValue)
-    expect(input.hasAttribute('value')).toBe(false)
+    await waitFor(() => {
+      expect(input.hasAttribute('value')).toBe(false)
+    }, { timeout: 0 })
     //5.2 Test KeyDown Enter
     fireKeyDownEnter(input)
     expect(onEnter).toHaveBeenCalledTimes(_onEnterTimes)
@@ -78,6 +86,5 @@ describe('InputSecret', () =>{
     input = await _findInput()
     expect(input).toHaveValue('')
     expect(onEnter).toHaveBeenCalledTimes(_onEnterTimes)
-
   })
 })

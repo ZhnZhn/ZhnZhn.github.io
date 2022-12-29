@@ -7,7 +7,8 @@ import zhnUtils from '../../../_test-utils/zhn-test-utils';
 import RowCheckBox from '../RowCheckBox';
 
 const {
-  render, screen,
+  render,
+  screen,
   wrapByUiThemeProvider,
   fireClick
 } = zhnUtils;

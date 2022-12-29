@@ -1,13 +1,19 @@
-import {renderHook, act} from '@testing-library/react-hooks'
-import useFnFocus from '../useFnFocus'
+import {
+  renderHook,
+  act
+} from '@testing-library/react';
+import useFnFocus from '../useFnFocus';
 
 const _getHookRef = result => result.current[0];
 const _getHookFn = result => result.current[1];
 
 const _actHookFn = (
-  result, hookFn,
-  fn, focus,
-  timesFn, timesFocus
+  result,
+  hookFn,
+  fn,
+  focus,
+  timesFn,
+  timesFocus
 ) => {
   act(hookFn)
   expect(_getHookFn(result)).toEqual(hookFn)

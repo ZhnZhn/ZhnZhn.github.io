@@ -1,5 +1,8 @@
-import { renderHook, act } from '@testing-library/react-hooks'
-import useBool from '../useBool'
+import {
+  renderHook,
+  act
+} from '@testing-library/react';
+import useBool from '../useBool';
 
 const _getIs = result => result.current[0]
 , _getSetTrue = result => result.current[1]
@@ -23,7 +26,7 @@ describe('useBool', ()=>{
   test('should use initialValue with default value false', ()=>{
     _testInitialValue(void 0, false)
     _testInitialValue(false, false)
-    _testInitialValue(true, true)            
+    _testInitialValue(true, true)
   })
 
   test('should return setTrue and setFalse function for setting vale', ()=>{

@@ -1,10 +1,13 @@
-import ShowHide from '../zhn/ShowHide'
-import ToolbarButtonCircle from './ToolbarButtonCircle'
+import ShowHide from '../zhn/ShowHide';
+import ToolbarButtonCircle from './ToolbarButtonCircle';
 
-const Toolbar = ({ isShow,  buttons }) => (
+const Toolbar = ({
+  isShow,
+  buttons
+}) => (
   <ShowHide isShow={isShow}>
     <ToolbarButtonCircle
-      buttons={buttons}
+       buttons={buttons}
     />
   </ShowHide>
 );

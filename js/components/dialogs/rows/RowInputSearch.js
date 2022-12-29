@@ -1,34 +1,28 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
-
+exports.default = void 0;
 var _InputSearch = _interopRequireDefault(require("../../zhn-search/InputSearch"));
-
-var _crRowOptions2 = _interopRequireDefault(require("./crRowOptions"));
-
-var RowInputSearch = function RowInputSearch(props) {
-  var _crRowOptions = (0, _crRowOptions2["default"])(props),
-      rowStyle = _crRowOptions.rowStyle,
-      labelStyle = _crRowOptions.labelStyle,
-      caption = _crRowOptions.caption,
-      options = _crRowOptions.options;
-
+var _crRowOptions = _interopRequireDefault(require("./crRowOptions"));
+var _jsxRuntime = require("react/jsx-runtime");
+const RowInputSearch = props => {
+  const {
+    rowStyle,
+    labelStyle,
+    caption,
+    options
+  } = (0, _crRowOptions.default)(props);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: rowStyle,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       style: labelStyle,
       children: caption
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSearch["default"], (0, _extends2["default"])({}, options))]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSearch.default, {
+      ...options
+    })]
   });
 };
-
 var _default = RowInputSearch;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=RowInputSearch.js.map

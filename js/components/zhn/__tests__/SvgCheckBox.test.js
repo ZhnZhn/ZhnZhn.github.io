@@ -4,166 +4,152 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _jsxRuntime = require("react/jsx-runtime.js");
-
 require("@testing-library/jest-dom");
-
 var _zhnTestUtils = _interopRequireDefault(require("../../_test-utils/zhn-test-utils"));
-
 var _SvgCheckBox = _interopRequireDefault(require("../SvgCheckBox"));
-
-var render = _zhnTestUtils["default"].render,
-    screen = _zhnTestUtils["default"].screen,
-    act = _zhnTestUtils["default"].act,
-    fireClick = _zhnTestUtils["default"].fireClick,
-    fireKeyDownEnter = _zhnTestUtils["default"].fireKeyDownEnter;
-
-var _crTestArtifacts = function _crTestArtifacts(onCheck, onUnCheck) {
-  var chb = screen.getByRole('checkbox'),
-      _testStyledFalseTimes = function _testStyledFalseTimes(times) {
-    if (times === void 0) {
-      times = 0;
-    }
-
-    expect(chb).toHaveAttribute('aria-checked', "false");
-    expect(onUnCheck).toHaveBeenCalledTimes(times);
-  },
-      _testStyledTrueTimes = function _testStyledTrueTimes(times) {
-    if (times === void 0) {
-      times = 0;
-    }
-
-    expect(chb).toHaveAttribute('aria-checked', "true");
-    expect(onCheck).toHaveBeenCalledTimes(times);
-  };
-
+var _jsxRuntime = require("react/jsx-runtime");
+const {
+  render,
+  screen,
+  act,
+  fireClick,
+  fireKeyDownEnter
+} = _zhnTestUtils.default;
+const _crTestArtifacts = (onCheck, onUnCheck) => {
+  const chb = screen.getByRole('checkbox'),
+    _testStyledFalseTimes = function (times) {
+      if (times === void 0) {
+        times = 0;
+      }
+      expect(chb).toHaveAttribute('aria-checked', "false");
+      expect(onUnCheck).toHaveBeenCalledTimes(times);
+    },
+    _testStyledTrueTimes = function (times) {
+      if (times === void 0) {
+        times = 0;
+      }
+      expect(chb).toHaveAttribute('aria-checked', "true");
+      expect(onCheck).toHaveBeenCalledTimes(times);
+    };
   return {
-    chb: chb,
-    _testStyledFalseTimes: _testStyledFalseTimes,
-    _testStyledTrueTimes: _testStyledTrueTimes
+    chb,
+    _testStyledFalseTimes,
+    _testStyledTrueTimes
   };
 };
+describe('SvgCheckBox', () => {
+  test('should render SvgCheckBox with initialValue and handlers', () => {
+    const initialValue = false,
+      checkedColor = '#222222',
+      onCheck = jest.fn(),
+      onUnCheck = jest.fn(),
+      props = {
+        initialValue,
+        checkedColor,
+        onCheck,
+        onUnCheck
+      },
+      {
+        rerender
+      } = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
+        ...props
+      })),
+      {
+        chb,
+        _testStyledFalseTimes,
+        _testStyledTrueTimes
+      } = _crTestArtifacts(onCheck, onUnCheck);
 
-describe('SvgCheckBox', function () {
-  test('should render SvgCheckBox with initialValue and handlers', function () {
-    var initialValue = false,
-        checkedColor = '#222222',
-        onCheck = jest.fn(),
-        onUnCheck = jest.fn(),
-        props = {
-      initialValue: initialValue,
-      checkedColor: checkedColor,
-      onCheck: onCheck,
-      onUnCheck: onUnCheck
-    },
-        _render = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], (0, _extends2["default"])({}, props))),
-        rerender = _render.rerender,
-        _crTestArtifacts2 = _crTestArtifacts(onCheck, onUnCheck),
-        chb = _crTestArtifacts2.chb,
-        _testStyledFalseTimes = _crTestArtifacts2._testStyledFalseTimes,
-        _testStyledTrueTimes = _crTestArtifacts2._testStyledTrueTimes; //1 Test initialValue
+    //1 Test initialValue
+    _testStyledFalseTimes(0);
 
-
-    _testStyledFalseTimes(0); //2 Click on checkbox
+    //2 Click on checkbox
     //2.1 From false
-
-
     fireClick(chb);
-
-    _testStyledTrueTimes(1); //2.2 From true
-
-
+    _testStyledTrueTimes(1);
+    //2.2 From true
     fireClick(chb);
-
-    _testStyledFalseTimes(1); //3 KeyDown on checkbox
-    //3.1 keyDown Enter from false
-
-
-    fireKeyDownEnter(chb);
-
-    _testStyledTrueTimes(2); //3.2 keyDown Enter from true
-
-
-    fireKeyDownEnter(chb);
-
-    _testStyledFalseTimes(2); //4 Handler args component interface
-    //4.1 Same componet interface object
-
-
-    expect(onCheck.mock.calls[0][0]).toBe(onUnCheck.mock.calls[1][0]);
-    expect(onCheck.mock.calls[1][0]).toBe(onUnCheck.mock.calls[1][0]); //4.2 Handler setUnchecked
-
-    fireClick(chb);
-
-    _testStyledTrueTimes(3);
-
-    act(function () {
-      onCheck.mock.calls[2][0].setUnchecked();
-    });
-
-    _testStyledFalseTimes(2); //5 Rerender with new initialValue
-
-
-    rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], (0, _extends2["default"])({}, props, {
-      initialValue: true
-    })));
-
-    _testStyledFalseTimes(2);
-  });
-  test('should use property booolean value and handlers', function () {
-    var value = false,
-        initValue = true,
-        checkedColor = '#222222',
-        onCheck = jest.fn(),
-        onUnCheck = jest.fn(),
-        props = {
-      value: value,
-      initValue: initValue,
-      checkedColor: checkedColor,
-      onCheck: onCheck,
-      onUnCheck: onUnCheck
-    },
-        _render2 = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], (0, _extends2["default"])({}, props))),
-        rerender = _render2.rerender,
-        _crTestArtifacts3 = _crTestArtifacts(onCheck, onUnCheck),
-        chb = _crTestArtifacts3.chb,
-        _testStyledFalseTimes = _crTestArtifacts3._testStyledFalseTimes,
-        _testStyledTrueTimes = _crTestArtifacts3._testStyledTrueTimes; //1 First render with value false
-
-
-    _testStyledFalseTimes(0); //2 Rerender with value true
-
-
-    rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], (0, _extends2["default"])({}, props, {
-      value: !value
-    })));
-
-    _testStyledTrueTimes(0); //3 Click on checkbox
-    //3.1 From true
-
-
-    fireClick(chb);
-
-    _testStyledTrueTimes(0);
-
-    expect(onUnCheck).toHaveBeenCalledTimes(1); //3.2 From false
-
-    rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], (0, _extends2["default"])({}, props, {
-      value: false
-    })));
-    fireClick(chb);
-
     _testStyledFalseTimes(1);
 
+    //3 KeyDown on checkbox
+    //3.1 keyDown Enter from false
+    fireKeyDownEnter(chb);
+    _testStyledTrueTimes(2);
+    //3.2 keyDown Enter from true
+    fireKeyDownEnter(chb);
+    _testStyledFalseTimes(2);
+
+    //4 Handler args component interface
+    //4.1 Same componet interface object
+    expect(onCheck.mock.calls[0][0]).toBe(onUnCheck.mock.calls[1][0]);
+    expect(onCheck.mock.calls[1][0]).toBe(onUnCheck.mock.calls[1][0]);
+    //4.2 Handler setUnchecked
+    fireClick(chb);
+    _testStyledTrueTimes(3);
+    act(() => {
+      onCheck.mock.calls[2][0].setUnchecked();
+    });
+    _testStyledFalseTimes(2);
+
+    //5 Rerender with new initialValue
+    rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
+      ...props,
+      initialValue: true
+    }));
+    _testStyledFalseTimes(2);
+  });
+  test('should use property booolean value and handlers', () => {
+    const value = false,
+      initValue = true,
+      checkedColor = '#222222',
+      onCheck = jest.fn(),
+      onUnCheck = jest.fn(),
+      props = {
+        value,
+        initValue,
+        checkedColor,
+        onCheck,
+        onUnCheck
+      },
+      {
+        rerender
+      } = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
+        ...props
+      })),
+      {
+        chb,
+        _testStyledFalseTimes,
+        _testStyledTrueTimes
+      } = _crTestArtifacts(onCheck, onUnCheck);
+
+    //1 First render with value false
+    _testStyledFalseTimes(0);
+    //2 Rerender with value true
+    rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
+      ...props,
+      value: !value
+    }));
+    _testStyledTrueTimes(0);
+
+    //3 Click on checkbox
+    //3.1 From true
+    fireClick(chb);
+    _testStyledTrueTimes(0);
+    expect(onUnCheck).toHaveBeenCalledTimes(1);
+    //3.2 From false
+    rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
+      ...props,
+      value: false
+    }));
+    fireClick(chb);
+    _testStyledFalseTimes(1);
     expect(onCheck).toHaveBeenCalledTimes(1);
   });
-  test('should call preventDefault on event handlers', function () {
-    render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox["default"], {}));
-    var chb = screen.getByRole('checkbox'); //In case preventDefault called fireEvent return false
+  test('should call preventDefault on event handlers', () => {
+    render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {}));
+    const chb = screen.getByRole('checkbox');
 
+    //In case preventDefault called fireEvent return false
     expect(fireClick(chb)).toBe(false);
     expect(fireKeyDownEnter(chb)).toBe(false);
   });

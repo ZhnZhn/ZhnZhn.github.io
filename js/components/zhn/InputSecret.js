@@ -1,17 +1,12 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
-
+exports.default = void 0;
 var _react = require("react");
-
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
-
-var S = {
+var _jsxRuntime = require("react/jsx-runtime");
+const S = {
   ROOT: {
     position: 'relative',
     display: 'inline-block',
@@ -30,55 +25,35 @@ var S = {
     fontWeight: 'bold'
   }
 };
-
-var _onEnter = function _onEnter() {};
-
-var InputSecret = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
-  var name = _ref.name,
-      placeholder = _ref.placeholder,
-      _ref$maxLength = _ref.maxLength,
-      maxLength = _ref$maxLength === void 0 ? "32" : _ref$maxLength,
-      _ref$onEnter = _ref.onEnter,
-      onEnter = _ref$onEnter === void 0 ? _onEnter : _ref$onEnter;
-
-  var _refInput = (0, _react.useRef)(),
-      _refEnter = (0, _react.useRef)(function () {
-    return '';
-  }),
-      _useState = (0, _react.useState)(''),
-      value = _useState[0],
-      setValue = _useState[1],
-      _hInputChange = (0, _react.useCallback)(function (event) {
-    setValue(event.target.value.trim());
-  }, []),
-      _hKeyDown = (0, _useInputKeyDown["default"])({
-    onEnter: function onEnter() {
-      return _refEnter.current();
-    },
-    onDelete: function onDelete() {
-      onEnter('');
-      setValue('');
-    }
-  }, [onEnter]);
-
-  _refEnter.current = function () {
-    return onEnter(value);
-  };
-
-  (0, _react.useImperativeHandle)(ref, function () {
-    return {
-      getValue: function getValue() {
-        return value;
-      },
-      clear: function clear() {
-        return setValue('');
+const _onEnter = () => {};
+const InputSecret = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+  let {
+    name,
+    placeholder,
+    maxLength = "32",
+    onEnter = _onEnter
+  } = _ref;
+  const _refInput = (0, _react.useRef)(),
+    _refEnter = (0, _react.useRef)(() => ''),
+    [value, setValue] = (0, _react.useState)(''),
+    _hInputChange = (0, _react.useCallback)(event => {
+      setValue(event.target.value.trim());
+    }, []),
+    _hKeyDown = (0, _useInputKeyDown.default)({
+      onEnter: () => _refEnter.current(),
+      onDelete: () => {
+        onEnter('');
+        setValue('');
       }
-    };
-  }, [value]);
-  (0, _react.useEffect)(function () {
-    setTimeout(function () {
-      var _input = _refInput.current;
-
+    }, [onEnter]);
+  _refEnter.current = () => onEnter(value);
+  (0, _react.useImperativeHandle)(ref, () => ({
+    getValue: () => value,
+    clear: () => setValue('')
+  }), [value]);
+  (0, _react.useEffect)(() => {
+    setTimeout(() => {
+      const _input = _refInput.current;
       if (_input && _input.hasAttribute('value')) {
         _input.removeAttribute('value');
       }
@@ -105,5 +80,5 @@ var InputSecret = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   });
 });
 var _default = InputSecret;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=InputSecret.js.map

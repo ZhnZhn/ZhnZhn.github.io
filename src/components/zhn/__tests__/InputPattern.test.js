@@ -8,7 +8,9 @@ import InputPattern from '../InputPattern';
 
 const {
   createRef,
-  render, screen, act,
+  render,
+  screen,
+  act,
   fireClick,
   fireType,
   fireKeyDownEnter,

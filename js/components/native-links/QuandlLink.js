@@ -1,17 +1,12 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _Link = _interopRequireDefault(require("./Link"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const ROOT_URI = 'https://data.nasdaq.com/data/',
-      DF_CAPTION = 'Nasdaq Data Link';
-
+  DF_CAPTION = 'Nasdaq Data Link';
 const QuandlLink = _ref => {
   let {
     linkId,
@@ -22,7 +17,6 @@ const QuandlLink = _ref => {
     caption: caption + " " + linkId
   }) : null;
 };
-
 var _default = QuandlLink;
 exports.default = _default;
 //# sourceMappingURL=QuandlLink.js.map
