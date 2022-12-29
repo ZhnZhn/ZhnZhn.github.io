@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/items/arrangeConfigsBy.js"
+ ],
+ "file": "../../../src/components/items/arrangeConfigsBy.js",
+ "names": [
+  "arrangeConfigsBy",
+  "configs",
+  "configIds",
+  "idPropName",
+  "_hmConfigs",
+  "reduce",
+  "hm",
+  "config",
+  "arrangedConfigs",
+  "id",
+  "push"
+ ],
+ "mappings": ";;;;AAAA,MAAMA,gBAAgB,GAAG,CACvBC,OAAO,EACPC,SAAS,EACTC,UAAU,KACP;EACH,MAAMC,UAAU,GAAG,CAACH,OAAO,IAAI,EAAE,EAC9BI,MAAM,CAAC,CAACC,EAAE,EAAEC,MAAM,KAAK;IACtBD,EAAE,CAACC,MAAM,CAACJ,UAAU,CAAC,CAAC,GAAGI,MAAM;IAC/B,OAAOD,EAAE;EACX,CAAC,EAAE,CAAC,CAAC,CAAC;EACR,OAAOJ,SAAS,CACbG,MAAM,CAAC,CAACG,eAAe,EAAEC,EAAE,KAAK;IAC/BD,eAAe,CAACE,IAAI,CAACN,UAAU,CAACK,EAAE,CAAC,CAAC;IACpC,OAAOD,eAAe;EAC1B,CAAC,EAAE,EAAE,CAAC;AACR,CAAC;AAAC,eAEaR,gBAAgB;AAAA"
+}

@@ -30,6 +30,8 @@ import ChartLegend from './ChartLegend';
 import MiniCharts from './MiniCharts';
 import PanelDataInfo from './PanelDataInfo';
 
+import arrangeConfigsBy from './arrangeConfigsBy';
+
 const {
   ShowHide,
   ErrorBoundary,
@@ -48,21 +50,6 @@ const CL_CHART_ITEM = 'chart-item'
 
 const _IS_ANIMATE_REFLOW = isWideWidth()
 , MINI_CONFIGS_ID_PN = "btTitle";
-
-const _arrangeConfigsBy = (
-  configs,
-  configIds,
-  idPropName
-) => {
-  const _hmConfigs = (configs || []).reduce((hm, config) => {
-    hm[config[idPropName]] = config
-    return hm;
-  }, {});
-  return configIds.reduce((arrangedConfigs, id) => {
-    arrangedConfigs.push(_hmConfigs[id])
-    return arrangedConfigs;
-  }, []);
-};
 
 export const ChartItem = memoEqual(forwardRef(({
   caption,
@@ -126,7 +113,7 @@ export const ChartItem = memoEqual(forwardRef(({
       toggleLegend(false)
     },
     (prev, dateTo) => crValueMoving(getMainChart(), prev, dateTo),
-    () => crModelMore(
+    crModelMore(
       toggleToolbar,
       onToTop,
       hideCaption
@@ -138,7 +125,7 @@ export const ChartItem = memoEqual(forwardRef(({
   // toggleToolbar, onToTop, hideCaption
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  , _zhMiniConfigs = useMemo(() => _arrangeConfigsBy(
+  , _zhMiniConfigs = useMemo(() => arrangeConfigsBy(
        zhMiniConfigs,
        miniTitles,
        MINI_CONFIGS_ID_PN

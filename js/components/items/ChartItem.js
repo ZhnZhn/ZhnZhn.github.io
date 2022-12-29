@@ -23,6 +23,7 @@ var _Header = _interopRequireDefault(require("./Header"));
 var _ChartLegend = _interopRequireDefault(require("./ChartLegend"));
 var _MiniCharts = _interopRequireDefault(require("./MiniCharts"));
 var _PanelDataInfo = _interopRequireDefault(require("./PanelDataInfo"));
+var _arrangeConfigsBy = _interopRequireDefault(require("./arrangeConfigsBy"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
@@ -46,16 +47,6 @@ const CL_CHART_ITEM = 'chart-item',
   };
 const _IS_ANIMATE_REFLOW = (0, _has.isWideWidth)(),
   MINI_CONFIGS_ID_PN = "btTitle";
-const _arrangeConfigsBy = (configs, configIds, idPropName) => {
-  const _hmConfigs = (configs || []).reduce((hm, config) => {
-    hm[config[idPropName]] = config;
-    return hm;
-  }, {});
-  return configIds.reduce((arrangedConfigs, id) => {
-    arrangedConfigs.push(_hmConfigs[id]);
-    return arrangedConfigs;
-  }, []);
-};
 const ChartItem = (0, _memoEqual.default)((0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     caption,
@@ -107,13 +98,13 @@ const ChartItem = (0, _memoEqual.default)((0, _uiApi.forwardRef)((_ref, ref) => 
     }, () => {
       hideChart();
       toggleLegend(false);
-    }, (prev, dateTo) => crValueMoving(getMainChart(), prev, dateTo), () => (0, _ChartItemMore.default)(toggleToolbar, onToTop, hideCaption)], [])
+    }, (prev, dateTo) => crValueMoving(getMainChart(), prev, dateTo), (0, _ChartItemMore.default)(toggleToolbar, onToTop, hideCaption)], [])
     // getMainChart
     // hideChart, toggleLegend
     // getMainChart, crValueMoving
     // toggleToolbar, onToTop, hideCaption
     /*eslint-enable react-hooks/exhaustive-deps */,
-    _zhMiniConfigs = (0, _uiApi.useMemo)(() => _arrangeConfigsBy(zhMiniConfigs, miniTitles, MINI_CONFIGS_ID_PN), [zhMiniConfigs, miniTitles]);
+    _zhMiniConfigs = (0, _uiApi.useMemo)(() => (0, _arrangeConfigsBy.default)(zhMiniConfigs, miniTitles, MINI_CONFIGS_ID_PN), [zhMiniConfigs, miniTitles]);
 
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
