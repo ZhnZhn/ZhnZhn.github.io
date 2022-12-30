@@ -1,61 +1,41 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _highcharts = _interopRequireDefault(require("highcharts"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const S_DIV = {
   position: 'relative',
   zIndex: 1
 };
-
 const _isFn = fn => typeof fn === 'function';
+const HighchartWrapper = _ref => {
+  let {
+    isShowAbs = true,
+    absComp = null,
+    config,
+    onLoaded,
+    onWillUnLoaded
+  } = _ref;
+  const _refChartElement = (0, _uiApi.useRef)();
 
-const HighchartWrapper = ({
-  isShowAbs = true,
-  absComp = null,
-  config,
-  onLoaded,
-  onWillUnLoaded
-}) => {
-  const _refChartNode = (0, _react.useRef)(),
-        _refChart = (0, _react.useRef)();
   /*eslint-disable react-hooks/exhaustive-deps */
-
-
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useLayoutEffect)(() => {
     if (!config) {
       throw new Error("Chart's config must be specified.");
     }
-
-    _refChart.current = new _highcharts.default.Chart(_refChartNode.current, config);
-    const {
-      current
-    } = _refChart;
-
-    if (current && _isFn(onLoaded)) {
-      onLoaded(current);
+    const _chartInstance = new _highcharts.default.Chart(_refChartElement.current, config);
+    if (_chartInstance && _isFn(onLoaded)) {
+      onLoaded(_chartInstance);
     }
-
     return () => {
-      const {
-        current
-      } = _refChart;
-
       if (_isFn(onWillUnLoaded)) {
-        onWillUnLoaded(current);
+        onWillUnLoaded(_chartInstance);
       }
-
-      if (current) {
-        current.destroy();
-        _refChart.current = null;
+      if (_chartInstance) {
+        _chartInstance.destroy();
       }
     };
   }, []);
@@ -64,11 +44,10 @@ const HighchartWrapper = ({
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_DIV,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      ref: _refChartNode
+      ref: _refChartElement
     }), isShowAbs && absComp]
   });
 };
-
 var _default = HighchartWrapper;
 exports.default = _default;
 //# sourceMappingURL=HighchartWrapper.js.map

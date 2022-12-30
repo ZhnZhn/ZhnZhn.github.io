@@ -1,4 +1,7 @@
-import { useRef, useEffect } from 'react';
+import {
+  useRef,
+  useLayoutEffect
+} from '../uiApi';
 import Highcharts from 'highcharts';
 
 const S_DIV = {
@@ -15,31 +18,28 @@ const HighchartWrapper = ({
   onLoaded,
   onWillUnLoaded
 }) => {
-  const _refChartNode = useRef()
-  , _refChart = useRef();
+  const _refChartElement = useRef();
 
   /*eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!config){
       throw new Error("Chart's config must be specified.");
     }
 
-    _refChart.current = new Highcharts.Chart(
-      _refChartNode.current, config
+    const _chartInstance = new Highcharts.Chart(
+      _refChartElement.current,
+      config
     );
-    const { current } = _refChart;
-    if (current && _isFn(onLoaded)){
-      onLoaded(current);
+    if (_chartInstance && _isFn(onLoaded)){
+      onLoaded(_chartInstance);
     }
 
     return () => {
-      const { current } = _refChart;
       if (_isFn(onWillUnLoaded)){
-        onWillUnLoaded(current);
+        onWillUnLoaded(_chartInstance);
       }
-      if (current) {
-        current.destroy()
-        _refChart.current = null
+      if (_chartInstance) {
+        _chartInstance.destroy()
       }
     }
   }, [])
@@ -47,7 +47,7 @@ const HighchartWrapper = ({
 
   return (
     <div style={S_DIV}>
-      <div ref={_refChartNode} />
+      <div ref={_refChartElement} />
       {isShowAbs && absComp}
     </div>
   );
