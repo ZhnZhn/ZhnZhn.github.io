@@ -1,14 +1,11 @@
-import {
-  useRef
-} from '../uiApi';
-
+import useInputData from './useInputData';
 import useThemeSelect from '../hooks/useThemeSelect';
-import getFnByPropName from '../../utils/getFnByPropName';
 
-import D from '../dialogs/DialogCell';
-import FlatButton from '../zhn-m/FlatButton';
-import RowButtons from './RowButtons';
+import RowPattern from '../dialogs/rows/RowPattern';
+import RowInputSelect from '../dialogs/rows/RowInputSelect';
 import OptionCheckBoxStack from './OptionCheckBoxStack';
+import RowButtons from './RowButtons';
+import FlatButton from '../zhn-m/FlatButton';
 
 const S_MR_4 = { marginRight: 4 }
 , S_MR_12 = { marginRight: 12 };
@@ -20,33 +17,10 @@ const UI_THEME_OPTIONS = [
   { caption: 'Sand Light', value: 'SAND_L' }
 ];
 
-const SET_PROXY = 'setProxy';
-const MODE_ADMIN = 'isAdminMode';
-const MODE_DELTA = 'isDrawDeltaExtrems';
-const MODE_ZOOM = 'isNotZoomToMinMax';
-
-const _useProxy = (data) => {
-  const _refProxy = useRef()
-  , _setProxy = getFnByPropName(data, SET_PROXY)
-  , _proxy = data.getProxy();
-  return [
-    _refProxy,
-    _proxy,
-    _setProxy,
-    () => {
-      const input = _refProxy.current;
-      if (!_setProxy(input.getValue())) {
-        input.showErrMsg()
-      }
-    },
-    () => _setProxy('')
-  ];
-}
-
 const CHECKBOX_CONFIGS = [
-  ["View in Admin Mode", MODE_ADMIN],
-  ["Draw Deltas to Min-Max", MODE_DELTA],
-  ["Not Zoom to Min-Max", MODE_ZOOM]
+  ['View in Admin Mode', 'isAdminMode'],
+  ['Draw Deltas to Min-Max', 'isDrawDeltaExtrems'],
+  ['Not Zoom to Min-Max', 'isNotZoomToMinMax']
 ];
 
 const PaneOptions = ({
@@ -63,35 +37,39 @@ const PaneOptions = ({
     _setProxy,
     _hSetProxy,
     _hClearProxy
-  ] = _useProxy(data)
+  ] = useInputData(data, 'setProxy')
   , _hSelectTheme = useThemeSelect(onChangeTheme);
 
   return (
     <div>
-      <D.RowPattern
-         ref={_refProxy}
-         isShowLabels={isShowLabels}
-         captionStyle={titleStyle}
-         caption="Proxy"
-         placeholder="Local Http Proxy Server"
-         initValue={_proxy}
-         onEnter={_setProxy}
-         isClearBlank={true}
-         onClear={_hClearProxy}
-         errorMsg="Should start with http://127.0.0.1"
+      <RowPattern
+        ref={_refProxy}
+        isShowLabels={isShowLabels}
+        captionStyle={titleStyle}
+        caption="Proxy"
+        placeholder="Local Http Proxy Server"
+        initValue={_proxy}
+        onEnter={_setProxy}
+        isClearBlank={true}
+        onClear={_hClearProxy}
+        errorMsg="Should start with http://127.0.0.1"
       />
-      <D.RowInputSelect
-         isShowLabels={isShowLabels}
-         caption="UI Theme"
-         captionStyle={titleStyle}
-         options={UI_THEME_OPTIONS}
-         onSelect={_hSelectTheme}
+      <RowInputSelect
+        isShowLabels={isShowLabels}
+        caption="UI Theme"
+        captionStyle={titleStyle}
+        options={UI_THEME_OPTIONS}
+        onSelect={_hSelectTheme}
       />
       <OptionCheckBoxStack
-         data={data}
-         configs={CHECKBOX_CONFIGS}
+        data={data}
+        configs={CHECKBOX_CONFIGS}
       />
-      <RowButtons style={S_MR_12} btStyle={btStyle} onClose={onClose}>
+      <RowButtons
+        style={S_MR_12}
+        btStyle={btStyle}
+        onClose={onClose}
+      >
         <FlatButton
           style={{...btStyle, ...S_MR_4}}
           caption="SET PROXY"

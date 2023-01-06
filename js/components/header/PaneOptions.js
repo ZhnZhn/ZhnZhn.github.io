@@ -3,13 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
+var _useInputData = _interopRequireDefault(require("./useInputData"));
 var _useThemeSelect = _interopRequireDefault(require("../hooks/useThemeSelect"));
-var _getFnByPropName = _interopRequireDefault(require("../../utils/getFnByPropName"));
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
-var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
-var _RowButtons = _interopRequireDefault(require("./RowButtons"));
+var _RowPattern = _interopRequireDefault(require("../dialogs/rows/RowPattern"));
+var _RowInputSelect = _interopRequireDefault(require("../dialogs/rows/RowInputSelect"));
 var _OptionCheckBoxStack = _interopRequireDefault(require("./OptionCheckBoxStack"));
+var _RowButtons = _interopRequireDefault(require("./RowButtons"));
+var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_MR_4 = {
     marginRight: 4
@@ -30,22 +30,7 @@ const UI_THEME_OPTIONS = [{
   caption: 'Sand Light',
   value: 'SAND_L'
 }];
-const SET_PROXY = 'setProxy';
-const MODE_ADMIN = 'isAdminMode';
-const MODE_DELTA = 'isDrawDeltaExtrems';
-const MODE_ZOOM = 'isNotZoomToMinMax';
-const _useProxy = data => {
-  const _refProxy = (0, _uiApi.useRef)(),
-    _setProxy = (0, _getFnByPropName.default)(data, SET_PROXY),
-    _proxy = data.getProxy();
-  return [_refProxy, _proxy, _setProxy, () => {
-    const input = _refProxy.current;
-    if (!_setProxy(input.getValue())) {
-      input.showErrMsg();
-    }
-  }, () => _setProxy('')];
-};
-const CHECKBOX_CONFIGS = [["View in Admin Mode", MODE_ADMIN], ["Draw Deltas to Min-Max", MODE_DELTA], ["Not Zoom to Min-Max", MODE_ZOOM]];
+const CHECKBOX_CONFIGS = [['View in Admin Mode', 'isAdminMode'], ['Draw Deltas to Min-Max', 'isDrawDeltaExtrems'], ['Not Zoom to Min-Max', 'isNotZoomToMinMax']];
 const PaneOptions = _ref => {
   let {
     isShowLabels,
@@ -55,10 +40,10 @@ const PaneOptions = _ref => {
     onClose,
     onChangeTheme
   } = _ref;
-  const [_refProxy, _proxy, _setProxy, _hSetProxy, _hClearProxy] = _useProxy(data),
+  const [_refProxy, _proxy, _setProxy, _hSetProxy, _hClearProxy] = (0, _useInputData.default)(data, 'setProxy'),
     _hSelectTheme = (0, _useThemeSelect.default)(onChangeTheme);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowPattern.default, {
       ref: _refProxy,
       isShowLabels: isShowLabels,
       captionStyle: titleStyle,
@@ -69,7 +54,7 @@ const PaneOptions = _ref => {
       isClearBlank: true,
       onClear: _hClearProxy,
       errorMsg: "Should start with http://127.0.0.1"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
       isShowLabels: isShowLabels,
       caption: "UI Theme",
       captionStyle: titleStyle,
