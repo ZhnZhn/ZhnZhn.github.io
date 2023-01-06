@@ -1,9 +1,8 @@
 import {
-  useContext,
   useRef
 } from '../uiApi';
 
-import ThemeContext  from '../hoc/ThemeContext';
+import useThemeSelect from '../hooks/useThemeSelect';
 import getFnByPropName from '../../utils/getFnByPropName';
 
 import D from '../dialogs/DialogCell';
@@ -44,18 +43,6 @@ const _useProxy = (data) => {
   ];
 }
 
-const _useTheme = (onChangeTheme) => {
-  const theme = useContext(ThemeContext);
-  return item => {
-     const _themeName = (item || {}).value;
-     if (_themeName && theme.getThemeName() !== _themeName) {
-       theme.setThemeName(_themeName)
-       onChangeTheme(_themeName)
-     }
-  };
-};
-
-
 const CHECKBOX_CONFIGS = [
   ["View in Admin Mode", MODE_ADMIN],
   ["Draw Deltas to Min-Max", MODE_DELTA],
@@ -77,7 +64,7 @@ const PaneOptions = ({
     _hSetProxy,
     _hClearProxy
   ] = _useProxy(data)
-  , _hSelectTheme = _useTheme(onChangeTheme);
+  , _hSelectTheme = useThemeSelect(onChangeTheme);
 
   return (
     <div>

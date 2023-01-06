@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
+var _useThemeSelect = _interopRequireDefault(require("../hooks/useThemeSelect"));
 var _getFnByPropName = _interopRequireDefault(require("../../utils/getFnByPropName"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
@@ -45,16 +45,6 @@ const _useProxy = data => {
     }
   }, () => _setProxy('')];
 };
-const _useTheme = onChangeTheme => {
-  const theme = (0, _uiApi.useContext)(_ThemeContext.default);
-  return item => {
-    const _themeName = (item || {}).value;
-    if (_themeName && theme.getThemeName() !== _themeName) {
-      theme.setThemeName(_themeName);
-      onChangeTheme(_themeName);
-    }
-  };
-};
 const CHECKBOX_CONFIGS = [["View in Admin Mode", MODE_ADMIN], ["Draw Deltas to Min-Max", MODE_DELTA], ["Not Zoom to Min-Max", MODE_ZOOM]];
 const PaneOptions = _ref => {
   let {
@@ -66,7 +56,7 @@ const PaneOptions = _ref => {
     onChangeTheme
   } = _ref;
   const [_refProxy, _proxy, _setProxy, _hSetProxy, _hClearProxy] = _useProxy(data),
-    _hSelectTheme = _useTheme(onChangeTheme);
+    _hSelectTheme = (0, _useThemeSelect.default)(onChangeTheme);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
       ref: _refProxy,
