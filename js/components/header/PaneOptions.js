@@ -9,6 +9,7 @@ var _getFnByPropName = _interopRequireDefault(require("../../utils/getFnByPropNa
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _RowButtons = _interopRequireDefault(require("./RowButtons"));
+var _OptionCheckBoxStack = _interopRequireDefault(require("./OptionCheckBoxStack"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_MR_4 = {
     marginRight: 4
@@ -54,6 +55,7 @@ const _useTheme = onChangeTheme => {
     }
   };
 };
+const CHECKBOX_CONFIGS = [["View in Admin Mode", MODE_ADMIN], ["Draw Deltas to Min-Max", MODE_DELTA], ["Not Zoom to Min-Max", MODE_ZOOM]];
 const PaneOptions = _ref => {
   let {
     isShowLabels,
@@ -64,11 +66,7 @@ const PaneOptions = _ref => {
     onChangeTheme
   } = _ref;
   const [_refProxy, _proxy, _setProxy, _hSetProxy, _hClearProxy] = _useProxy(data),
-    _hSelectTheme = _useTheme(onChangeTheme),
-    _hMode = (fnName, mode) => (0, _getFnByPropName.default)(data, fnName)(mode),
-    _isAdminMode = (0, _getFnByPropName.default)(data, MODE_ADMIN, false)(),
-    _isDrawDeltaExtrems = (0, _getFnByPropName.default)(data, MODE_DELTA, false)(),
-    _isNotZoomToMinMax = (0, _getFnByPropName.default)(data, MODE_ZOOM, false)();
+    _hSelectTheme = _useTheme(onChangeTheme);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
       ref: _refProxy,
@@ -87,21 +85,9 @@ const PaneOptions = _ref => {
       captionStyle: titleStyle,
       options: UI_THEME_OPTIONS,
       onSelect: _hSelectTheme
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox, {
-      initValue: _isAdminMode,
-      caption: "View in Admin Mode",
-      onCheck: _hMode.bind(null, MODE_ADMIN, true),
-      onUnCheck: _hMode.bind(null, MODE_ADMIN, false)
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox, {
-      initValue: _isDrawDeltaExtrems,
-      caption: "Draw Deltas to Min-Max",
-      onCheck: _hMode.bind(null, MODE_DELTA, true),
-      onUnCheck: _hMode.bind(null, MODE_DELTA, false)
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox, {
-      initValue: _isNotZoomToMinMax,
-      caption: "Not Zoom to Min-Max",
-      onCheck: _hMode.bind(null, MODE_ZOOM, true),
-      onUnCheck: _hMode.bind(null, MODE_ZOOM, false)
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionCheckBoxStack.default, {
+      data: data,
+      configs: CHECKBOX_CONFIGS
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowButtons.default, {
       style: S_MR_12,
       btStyle: btStyle,

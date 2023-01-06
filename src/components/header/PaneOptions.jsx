@@ -9,6 +9,7 @@ import getFnByPropName from '../../utils/getFnByPropName';
 import D from '../dialogs/DialogCell';
 import FlatButton from '../zhn-m/FlatButton';
 import RowButtons from './RowButtons';
+import OptionCheckBoxStack from './OptionCheckBoxStack';
 
 const S_MR_4 = { marginRight: 4 }
 , S_MR_12 = { marginRight: 12 };
@@ -54,6 +55,13 @@ const _useTheme = (onChangeTheme) => {
   };
 };
 
+
+const CHECKBOX_CONFIGS = [
+  ["View in Admin Mode", MODE_ADMIN],
+  ["Draw Deltas to Min-Max", MODE_DELTA],
+  ["Not Zoom to Min-Max", MODE_ZOOM]
+];
+
 const PaneOptions = ({
   isShowLabels,
   titleStyle,
@@ -69,11 +77,7 @@ const PaneOptions = ({
     _hSetProxy,
     _hClearProxy
   ] = _useProxy(data)
-  , _hSelectTheme = _useTheme(onChangeTheme)
-  , _hMode = (fnName, mode) => getFnByPropName(data, fnName)(mode)
-  , _isAdminMode = getFnByPropName(data, MODE_ADMIN, false)()
-  , _isDrawDeltaExtrems = getFnByPropName(data, MODE_DELTA, false)()
-  , _isNotZoomToMinMax = getFnByPropName(data, MODE_ZOOM, false)();
+  , _hSelectTheme = _useTheme(onChangeTheme);
 
   return (
     <div>
@@ -96,31 +100,17 @@ const PaneOptions = ({
          options={UI_THEME_OPTIONS}
          onSelect={_hSelectTheme}
       />
-     <D.RowCheckBox
-        initValue={_isAdminMode}
-        caption="View in Admin Mode"
-        onCheck={_hMode.bind(null, MODE_ADMIN, true)}
-        onUnCheck={_hMode.bind(null, MODE_ADMIN, false)}
-     />
-     <D.RowCheckBox
-        initValue={_isDrawDeltaExtrems}
-        caption="Draw Deltas to Min-Max"
-        onCheck={_hMode.bind(null, MODE_DELTA, true)}
-        onUnCheck={_hMode.bind(null, MODE_DELTA, false)}
-     />
-     <D.RowCheckBox
-        initValue={_isNotZoomToMinMax}
-        caption="Not Zoom to Min-Max"
-        onCheck={_hMode.bind(null, MODE_ZOOM, true)}
-        onUnCheck={_hMode.bind(null, MODE_ZOOM, false)}
-     />
-     <RowButtons style={S_MR_12} btStyle={btStyle} onClose={onClose}>
-       <FlatButton
-         style={{...btStyle, ...S_MR_4}}
-         caption="SET PROXY"
-         onClick={_hSetProxy}
-       />
-     </RowButtons>
+      <OptionCheckBoxStack
+         data={data}
+         configs={CHECKBOX_CONFIGS}
+      />
+      <RowButtons style={S_MR_12} btStyle={btStyle} onClose={onClose}>
+        <FlatButton
+          style={{...btStyle, ...S_MR_4}}
+          caption="SET PROXY"
+          onClick={_hSetProxy}
+        />
+      </RowButtons>
     </div>
   );
 }
