@@ -2,21 +2,14 @@ import ItemList from '../zhn/ItemList';
 import Link from './Link';
 
 const EUROSTAT_DATA = 'Eurostat Data'
-, HTTPS = 'https://'
-, EUROSTAT = 'eurostat'
-, HREF_TOKEN = 'ec.europa.eu'
-, _crExploreHref = dataset =>
-   `${HTTPS}appsso.${EUROSTAT}.${HREF_TOKEN}/nui/show.do?lang=en&dataset=${dataset}`
+, DATA_URL = 'https://ec.europa.eu/eurostat'
 , _crBrowserHref = dataset =>
-   `${HTTPS}${HREF_TOKEN}/${EUROSTAT}/databrowser/view/${dataset}/default/table?lang=en`
+   `${DATA_URL}/databrowser/view/${dataset}/default/table?lang=en`
 , _crDatabaseNodeHref = dataset =>
-   `${HTTPS}${HREF_TOKEN}/${EUROSTAT}/data/database?node_code=${dataset}`;
+   `${DATA_URL}/data/database?node_code=${dataset}`;
 
 const _crToolLinks = dataset => dataset
   ? [{
-      caption: `${EUROSTAT_DATA} Explore`,
-      href: _crExploreHref(dataset)
-    },{
       caption: `${EUROSTAT_DATA} Browser`,
       href: _crBrowserHref(dataset)
     },{
@@ -25,20 +18,25 @@ const _crToolLinks = dataset => dataset
     }]
   : [];
 
-const _crLinks = ({ href, dataset }) => {
+const _crLinks = ({
+  href,
+  dataset
+}) => {
   const _links = _crToolLinks(dataset);
-  return _links.length > 0 ? _links : void 0;
+  return _links.length > 0
+    ? _links
+    : void 0;
 };
 
 const _crLink = item => <Link {...item} />
 
-const EsLink = ({ item }) => {
-  if (!item) {
-    return null;
-  }
-  return (
-    <ItemList items={_crLinks(item)} crItem={_crLink} />
-  );
-};
+const EsLink = ({
+  item
+}) => item ? (
+  <ItemList
+    items={_crLinks(item)}
+    crItem={_crLink}
+  />
+) : null;
 
 export default EsLink

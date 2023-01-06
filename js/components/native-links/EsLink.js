@@ -7,16 +7,10 @@ var _ItemList = _interopRequireDefault(require("../zhn/ItemList"));
 var _Link = _interopRequireDefault(require("./Link"));
 var _jsxRuntime = require("react/jsx-runtime");
 const EUROSTAT_DATA = 'Eurostat Data',
-  HTTPS = 'https://',
-  EUROSTAT = 'eurostat',
-  HREF_TOKEN = 'ec.europa.eu',
-  _crExploreHref = dataset => HTTPS + "appsso." + EUROSTAT + "." + HREF_TOKEN + "/nui/show.do?lang=en&dataset=" + dataset,
-  _crBrowserHref = dataset => "" + HTTPS + HREF_TOKEN + "/" + EUROSTAT + "/databrowser/view/" + dataset + "/default/table?lang=en",
-  _crDatabaseNodeHref = dataset => "" + HTTPS + HREF_TOKEN + "/" + EUROSTAT + "/data/database?node_code=" + dataset;
+  DATA_URL = 'https://ec.europa.eu/eurostat',
+  _crBrowserHref = dataset => DATA_URL + "/databrowser/view/" + dataset + "/default/table?lang=en",
+  _crDatabaseNodeHref = dataset => DATA_URL + "/data/database?node_code=" + dataset;
 const _crToolLinks = dataset => dataset ? [{
-  caption: EUROSTAT_DATA + " Explore",
-  href: _crExploreHref(dataset)
-}, {
   caption: EUROSTAT_DATA + " Browser",
   href: _crBrowserHref(dataset)
 }, {
@@ -38,13 +32,10 @@ const EsLink = _ref2 => {
   let {
     item
   } = _ref2;
-  if (!item) {
-    return null;
-  }
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemList.default, {
+  return item ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemList.default, {
     items: _crLinks(item),
     crItem: _crLink
-  });
+  }) : null;
 };
 var _default = EsLink;
 exports.default = _default;
