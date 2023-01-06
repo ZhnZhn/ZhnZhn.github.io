@@ -20,7 +20,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 const S_MODAL = {
     position: 'static',
     width: 380,
-    height: 446,
+    maxHeight: 446,
     margin: '70px auto 0px'
   },
   S_MODAL_SMALL = {

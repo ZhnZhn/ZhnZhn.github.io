@@ -13,7 +13,7 @@ const MAX_KEY = 10;
 
 const S_SCROLL_PANE = {
   overflowY: 'auto',
-  height: 360,
+  maxHeight: 360,
   paddingRight: 10
 }
 , S_OC_CHILD = { paddingLeft: 8 }
@@ -21,7 +21,7 @@ const S_SCROLL_PANE = {
 , S_BT_SET = { margin: '0 2px' };
 
 const CONF_SM_ARR = [
-  ["Alpha", "alpha-vantage", "Alpha Vantage"],
+  ["AV", "alpha-vantage", "Alpha Vantage"],
   ["FMP","fmp","Financial Modeling Prep","32"],
   ["IEX","iex-cloud","IEX Cloud","35"],
   ["Intrinio","intrinio","Intrinio","32"],
