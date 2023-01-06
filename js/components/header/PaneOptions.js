@@ -1,32 +1,21 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../uiApi");
-
 var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
-
-var _setChartPointsHalo = _interopRequireDefault(require("../../charts/setChartPointsHalo"));
-
 var _getFnByPropName = _interopRequireDefault(require("../../utils/getFnByPropName"));
-
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
-
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
-
 var _RowButtons = _interopRequireDefault(require("./RowButtons"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const S_MR_4 = {
-  marginRight: 4
-},
-      S_MR_12 = {
-  marginRight: 12
-};
+    marginRight: 4
+  },
+  S_MR_12 = {
+    marginRight: 12
+  };
 const UI_THEME_OPTIONS = [{
   caption: 'Dark',
   value: 'GREY'
@@ -44,36 +33,27 @@ const SET_PROXY = 'setProxy';
 const MODE_ADMIN = 'isAdminMode';
 const MODE_DELTA = 'isDrawDeltaExtrems';
 const MODE_ZOOM = 'isNotZoomToMinMax';
-
 const _useProxy = data => {
   const _refProxy = (0, _uiApi.useRef)(),
-        _setProxy = (0, _getFnByPropName.default)(data, SET_PROXY),
-        _proxy = data.getProxy();
-
+    _setProxy = (0, _getFnByPropName.default)(data, SET_PROXY),
+    _proxy = data.getProxy();
   return [_refProxy, _proxy, _setProxy, () => {
     const input = _refProxy.current;
-
     if (!_setProxy(input.getValue())) {
       input.showErrMsg();
     }
   }, () => _setProxy('')];
 };
-
 const _useTheme = onChangeTheme => {
   const theme = (0, _uiApi.useContext)(_ThemeContext.default);
   return item => {
     const _themeName = (item || {}).value;
-
     if (_themeName && theme.getThemeName() !== _themeName) {
       theme.setThemeName(_themeName);
       onChangeTheme(_themeName);
     }
   };
 };
-
-const _removeChartPointsHalo = _setChartPointsHalo.default.bind(null, false),
-      _addChartPointsHalo = _setChartPointsHalo.default.bind(null, true);
-
 const PaneOptions = _ref => {
   let {
     isShowLabels,
@@ -83,14 +63,12 @@ const PaneOptions = _ref => {
     onClose,
     onChangeTheme
   } = _ref;
-
   const [_refProxy, _proxy, _setProxy, _hSetProxy, _hClearProxy] = _useProxy(data),
-        _hSelectTheme = _useTheme(onChangeTheme),
-        _hMode = (fnName, mode) => (0, _getFnByPropName.default)(data, fnName)(mode),
-        _isAdminMode = (0, _getFnByPropName.default)(data, MODE_ADMIN, false)(),
-        _isDrawDeltaExtrems = (0, _getFnByPropName.default)(data, MODE_DELTA, false)(),
-        _isNotZoomToMinMax = (0, _getFnByPropName.default)(data, MODE_ZOOM, false)();
-
+    _hSelectTheme = _useTheme(onChangeTheme),
+    _hMode = (fnName, mode) => (0, _getFnByPropName.default)(data, fnName)(mode),
+    _isAdminMode = (0, _getFnByPropName.default)(data, MODE_ADMIN, false)(),
+    _isDrawDeltaExtrems = (0, _getFnByPropName.default)(data, MODE_DELTA, false)(),
+    _isNotZoomToMinMax = (0, _getFnByPropName.default)(data, MODE_ZOOM, false)();
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
       ref: _refProxy,
@@ -124,17 +102,13 @@ const PaneOptions = _ref => {
       caption: "Not Zoom to Min-Max",
       onCheck: _hMode.bind(null, MODE_ZOOM, true),
       onUnCheck: _hMode.bind(null, MODE_ZOOM, false)
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox, {
-      initValue: false,
-      caption: "Without Points Halo",
-      onCheck: _removeChartPointsHalo,
-      onUnCheck: _addChartPointsHalo
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowButtons.default, {
       style: S_MR_12,
       btStyle: btStyle,
       onClose: onClose,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-        style: { ...btStyle,
+        style: {
+          ...btStyle,
           ...S_MR_4
         },
         caption: "SET PROXY",
@@ -143,7 +117,6 @@ const PaneOptions = _ref => {
     })]
   });
 };
-
 var _default = PaneOptions;
 exports.default = _default;
 //# sourceMappingURL=PaneOptions.js.map

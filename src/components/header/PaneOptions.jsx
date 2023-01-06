@@ -4,8 +4,6 @@ import {
 } from '../uiApi';
 
 import ThemeContext  from '../hoc/ThemeContext';
-
-import setChartPointsHalo from '../../charts/setChartPointsHalo';
 import getFnByPropName from '../../utils/getFnByPropName';
 
 import D from '../dialogs/DialogCell';
@@ -55,9 +53,6 @@ const _useTheme = (onChangeTheme) => {
      }
   };
 };
-
-const _removeChartPointsHalo = setChartPointsHalo.bind(null, false)
-, _addChartPointsHalo = setChartPointsHalo.bind(null, true);
 
 const PaneOptions = ({
   isShowLabels,
@@ -118,12 +113,6 @@ const PaneOptions = ({
         caption="Not Zoom to Min-Max"
         onCheck={_hMode.bind(null, MODE_ZOOM, true)}
         onUnCheck={_hMode.bind(null, MODE_ZOOM, false)}
-     />
-     <D.RowCheckBox
-        initValue={false}
-        caption="Without Points Halo"
-        onCheck={_removeChartPointsHalo}
-        onUnCheck={_addChartPointsHalo}
      />
      <RowButtons style={S_MR_12} btStyle={btStyle} onClose={onClose}>
        <FlatButton

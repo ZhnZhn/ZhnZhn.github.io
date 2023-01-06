@@ -1,27 +1,18 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.getSeriaColorByIndex = exports.ChartTheme = void 0;
-
 var _highcharts = _interopRequireDefault(require("highcharts"));
-
 var _handleMouseOver = _interopRequireDefault(require("./handleMouseOver"));
-
 var _Color = require("../constants/Color");
-
 var _conf = require("./conf");
-
 var _CL = require("./CL");
-
-const CHART_SERIES_COLORS = ['#7cb5ec', '#8abb5d', //'#90ed7d'
+const CHART_SERIES_COLORS = ['#7cb5ec', '#8abb5d',
+//'#90ed7d'
 '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'];
-
 const getSeriaColorByIndex = seriaIndex => CHART_SERIES_COLORS[seriaIndex % CHART_SERIES_COLORS.length];
-
 exports.getSeriaColorByIndex = getSeriaColorByIndex;
-
 const _crAxisLabelStyle = (color, fontSize) => ({
   style: {
     color,
@@ -29,7 +20,6 @@ const _crAxisLabelStyle = (color, fontSize) => ({
     fontWeight: "bold"
   }
 });
-
 const ChartTheme = {
   credits: {
     enabled: true,
@@ -92,7 +82,6 @@ const ChartTheme = {
     events: {
       load: function () {
         this.zhTooltip = new _highcharts.default.Tooltip(this, this.options.tooltip);
-
         this.credits.element.onclick = function () {
           window.open(_conf.CREDITS_URL, '_blank');
         };
@@ -223,10 +212,7 @@ const ChartTheme = {
       },
       states: {
         hover: {
-          halo: {
-            opacity: 0.35,
-            size: 16
-          }
+          enabled: false
         },
         inactive: {
           enabled: false

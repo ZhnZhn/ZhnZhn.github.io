@@ -258,10 +258,7 @@ export const ChartTheme = {
 
       states: {
         hover: {
-          halo: {
-            opacity: 0.35,
-            size: 16
-          }
+          enabled: false,
         },
         inactive: {
           enabled: false
