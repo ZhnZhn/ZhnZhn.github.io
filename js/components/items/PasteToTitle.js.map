@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/items/PasteToTitle.js"
+ ],
+ "file": "../../../src/components/items/PasteToTitle.js",
+ "names": [
+  "S_TITLE",
+  "paddingBottom",
+  "margin",
+  "fontWeight",
+  "borderBottom",
+  "S_CHART_ID",
+  "display",
+  "color",
+  "width",
+  "verticalAlign",
+  "PasteToTitle",
+  "chartId"
+ ],
+ "mappings": ";;;;;AAAA;AAA6C;AAE7C,MAAMA,OAAO,GAAG;IACdC,aAAa,EAAE,CAAC;IAChBC,MAAM,EAAE,cAAc;IACtBC,UAAU,EAAE,MAAM;IAClBC,YAAY,EAAE;EAChB,CAAC;EAAEC,UAAU,GAAG;IACdC,OAAO,EAAE,cAAc;IACvBC,KAAK,EAAE,SAAS;IAChBC,KAAK,EAAE,GAAG;IACVC,aAAa,EAAE;EACjB,CAAC;AAED,MAAMC,YAAY,GAAG;EAAA,IAAC;IACpBC;EACF,CAAC;EAAA,oBACC;IAAK,KAAK,EAAEX,OAAQ;IAAA,wBAClB;MAAA,UAAM;IAAiB,EAAO,eAC9B,qBAAC,oBAAW;MACT,KAAK,EAAEK,UAAW;MAClB,IAAI,EAAEM;IAAQ,EACf;EAAA,EACE;AAAA,CACP;AAAC,eAEaD,YAAY;AAAA"
+}
