@@ -20,31 +20,28 @@ import { crItemConf } from '../crFn';
 
 const COLOR_EU = "#0088ff"
 , COLOR_EA = "#ff5800"
-, COLOR_NOT_EU_MEMBER = '#8085e9';
-
-const C = {
-  EU_CODES: ["EU", "EU28", "EU27_2020", "G20", "Group of Twenty" ],
-  EA_CODES: ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19"],
-  EU_MEMBER: [
+, COLOR_NOT_EU_MEMBER = '#8085e9'
+, EU_CODES = ["EU", "EU28", "EU27_2020", "G20", "Group of Twenty" ]
+, EA_CODES = ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19"]
+, EU_MEMBER = [
     "Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus",
     "Czechia", "Denmark", "Estonia", "Finland", "France",
     "Germany", "Greece", "Hungary", "Ireland", "Italy",
     "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands",
     "Poland", "Portugal", "Romania", "Slovakia", "Slovenia",
     "Spain", "Sweden"
-  ]
-};
+  ];
 
 const _getObjectKeys = Object.keys
 , _assign = Object.assign;
 
 const _crDescr = (extension) => {
   const _ext = extension || {}
-    , { datasetId, subTitle } = _ext
-    , _id = `Dataset: ${datasetId}`
-    , _sub = subTitle ? `Metric: ${subTitle}` : ''
-    , _d = _ext.description || '';
-   return (`${_d} ${_id} ${_sub}`).trim();
+  , { datasetId, subTitle } = _ext
+  , _id = `Dataset: ${datasetId}`
+  , _sub = subTitle ? `Metric: ${subTitle}` : ''
+  , _d = _ext.description || '';
+  return (`${_d} ${_id} ${_sub}`).trim();
 };
 
 export const crDatasetInfo = ({
@@ -58,27 +55,19 @@ export const crDatasetInfo = ({
   fromDate: '1996-01-30'
 });
 
+const _fIsCode = codes => p => codes.indexOf(p.c) !== -1
+const _isEUCode = _fIsCode(EU_CODES)
+const _isEACode = _fIsCode(EA_CODES)
+const _isNotEUMember = p => EU_MEMBER.indexOf(p.c) === -1
+
 const _colorSeriaIn = (
   config,
-  codes,
+  isPredicate,
   color
 ) => {
   const data = config.series[0].data;
   data.forEach(p => {
-     if (codes.indexOf(p.c) !== -1 && !p.color) {
-       p.color = color
-     }
-  })
-};
-
-const _colorSeriaNotIn = (
-  config,
-  codes,
-  color
-) => {
-  const data = config.series[0].data;
-  data.forEach(p => {
-     if (codes.indexOf(p.c) === -1 && !p.color) {
+     if (!p.color && isPredicate(p)) {
        p.color = color
      }
   })
@@ -107,20 +96,28 @@ const _isYearOrMapFrequencyKey = (
   || mapFrequency === "Y"
   || key.indexOf(mapFrequency) !== -1;
 
-const _crPoint = (x, y, status) => status
-  && status !== ':' && status.length === 1
-   ? [ x, y, status ]
-   : [ x, y ];
+const _crPoint = (
+  x,
+  y,
+  status
+) => [
+  x,
+  y,
+  status && status !== ':' && status.length === 1
+    ? status
+    : void 0
+];
 
 const _setZoomMinMaxTo = (
   config,
   isNotZoomToMinMax,
   min
 ) => {
+  const yAxis = config.yAxis;
   if (isNotZoomToMinMax) {
-    config.yAxis.zhNotZoomToMinMax = true
+    yAxis.zhNotZoomToMinMax = true
   } else {
-    config.yAxis.min = min
+    yAxis.min = min
   }
 }
 const _setHeightIfBarTo = (
@@ -136,15 +133,25 @@ const _setHeightIfBarTo = (
   }
 };
 
-const _getTableId = ({ dfId, dfTable }) =>
-  dfId || dfTable;
+const _getTableId = ({
+  dfId,
+  dfTable
+}) => dfId || dfTable;
 
 const _crTimeIndexAndValue = (json) => {
-  const { dimension, value=[], status={} } = json
+  const {
+     dimension,
+     value,
+     status
+   } = json
   , { time } = dimension || {}
   , { category } = time || {}
   , { index:timeIndex=0 } = category || {};
-  return { timeIndex, value, status };
+  return [
+    timeIndex,
+    value || [],
+    status || {}
+  ];
 }
 
 const _convertToUTC = (str) => {
@@ -175,11 +182,11 @@ export const crData = (
   json,
   {mapFrequency, isFilterZero}={}
 ) => {
-  const {
+  const [
     timeIndex,
     value,
     status
-  } = _crTimeIndexAndValue(json)
+  ] = _crTimeIndexAndValue(json)
   let data = [];
   _getObjectKeys(timeIndex).forEach(key => {
      if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
@@ -207,11 +214,11 @@ export const crData = (
 export const toPointArr = (
   json
 ) => {
-  const {
+  const [
     timeIndex,
     value,
     status
-  } = _crTimeIndexAndValue(json)
+  ] = _crTimeIndexAndValue(json)
   , data = [];
   _getObjectKeys(timeIndex).map((key) => {
      const _valueIndex = timeIndex[key]
@@ -299,9 +306,9 @@ const _setCategories = ({
 }
 
 const _colorSeries = (config) => {
-  _colorSeriaIn(config, C.EU_CODES, COLOR_EU)
-  _colorSeriaIn(config, C.EA_CODES, COLOR_EA)
-  _colorSeriaNotIn(config, C.EU_MEMBER, COLOR_NOT_EU_MEMBER)
+  _colorSeriaIn(config, _isEUCode, COLOR_EU)
+  _colorSeriaIn(config, _isEACode, COLOR_EA)
+  _colorSeriaIn(config, _isNotEUMember, COLOR_NOT_EU_MEMBER)
 }
 
 export const addToCategoryConfig = (
