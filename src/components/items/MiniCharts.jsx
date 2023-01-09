@@ -1,8 +1,10 @@
-import A from '../Comp';
+import ShowHide from '../zhn/ShowHide';
+import HighchartWrapper from '../zhn/HighchartWrapper';
 
 const _isArr = Array.isArray
-, _isEmptyArr = arr =>
-    !_isArr(arr) || !arr.length;
+, _isNotEmptyArr = (
+  arr
+) => _isArr(arr) && arr.length > 0;
 
 const MiniCharts = ({
   withoutAnimation,
@@ -11,26 +13,23 @@ const MiniCharts = ({
   absComp,
   onLoaded,
   onWillUnLoaded
-}) => _isEmptyArr(configs) ? null
- : (<div>
+}) => _isNotEmptyArr(configs) ? (<>
       {configs.map(c => (
-        <A.ShowHide
+        <ShowHide
            key={c[idPropName]}
            isShow={true}
            withoutAnimation={withoutAnimation}
         >
-           <A.HighchartWrapper
+           <HighchartWrapper
               config={c.config}
               absComp={absComp}
               onLoaded={onLoaded}
               onWillUnLoaded={onWillUnLoaded}
            />
-         </A.ShowHide>
+         </ShowHide>
        ))}
-    </div>
-   );
-
-
+    </>
+  ) : null;
 
 /*
 MiniCharts.propTypes = {
