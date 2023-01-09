@@ -1,43 +1,29 @@
 import JSONstat from 'jsonstat';
 
 import { compareByValueId } from '../compareByFn';
-import Box from '../../utils/Box'
-
-const URL_ID_COUNTRY = './data/eurostat/id-country.json';
+import Box from '../../utils/Box';
+import {
+  fetchHmIdCountry,
+  getCountryById
+} from './fetchHmIdCountry';
 
 const _isArr = Array.isArray;
-
-let hmIdCountry = {};
-let isHmFetched = false;
-const _fetchHmIdCountry = () => !isHmFetched
-  ? fetch(URL_ID_COUNTRY)
-      .then(res => res.json())
-      .then(json => {
-         hmIdCountry = json.hm;
-         isHmFetched = true;
-         return hmIdCountry;
-      })
-      .catch((err) => { return hmIdCountry; })
-  : Promise.resolve(hmIdCountry);
-
-const _getCountryById = id => hmIdCountry[id] || id;
 
 const _combineToArr = (
   dGeo,
   sGeo,
   status={}
-) => {
-  const arr = [];
-  dGeo.forEach((id, index) => {
+) => dGeo
+  .reduce((arr, id, index) => {
     if (sGeo[index] != null && sGeo[index].value != null){
-      arr.push({ id,
+      arr.push({
+         id,
          value: sGeo[index].value,
          status: status[index]
       });
     }
-  })
-  return arr;
-}
+    return arr;
+  }, []);
 
 const _splitForConfig = (arr) => {
    const categories = []
@@ -46,7 +32,7 @@ const _splitForConfig = (arr) => {
    , min = Number.POSITIVE_INFINITY;
    arr.forEach((item) => {
      const { id, value, status } = item
-     , country = _getCountryById(id);
+     , country = getCountryById(id);
      categories.push(country);
      data.push({
        y: value,
@@ -75,7 +61,7 @@ const _combineToHm = (
   ids.forEach((id, index) => {
     const { value } = sGeo[index] || {};
     if (value != null){
-      hm[_getCountryById(id)] = value;
+      hm[getCountryById(id)] = value;
     }
   })
   return hm;
@@ -85,16 +71,18 @@ const _trHmToData = (
   hm,
   categories
 ) => categories
-  .map(id => ({ y: hm[id] || null, c: id }));
+  .map(id => ({
+    y: hm[id] || null,
+    c: id
+  }));
 
-const _isGeoSliceEmpty = sGeo => {
-  if (!_isArr(sGeo)) { return true; }
-  return sGeo
-   .filter(({ value }) => Boolean(value))
-   .length === 0
-      ? true
-      : false;
-};
+const _isGeoSliceEmpty = (
+  sGeo
+) => _isArr(sGeo)
+  ? sGeo
+     .filter(({ value }) => Boolean(value))
+     .length === 0
+  : true;
 
 export const createGeoSlice = (
   json,
@@ -151,7 +139,7 @@ export const trJsonToCategory = (
     dGeo,
     sGeo
   } = createGeoSlice(json, configSlice);
-  return _fetchHmIdCountry().then(() => {
+  return fetchHmIdCountry().then(() => {
      return Box(_combineToArr(dGeo.id, sGeo, json.status))
        .map(arr => arr.sort(compareByValueId))
        .fold(_splitForConfig);

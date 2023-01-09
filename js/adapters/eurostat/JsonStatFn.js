@@ -1,38 +1,18 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.trJsonToSeria = exports.trJsonToCategory = exports.createGeoSlice = exports.crGeoSeria = void 0;
-
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
-
 var _compareByFn = require("../compareByFn");
-
 var _Box = _interopRequireDefault(require("../../utils/Box"));
-
-const URL_ID_COUNTRY = './data/eurostat/id-country.json';
+var _fetchHmIdCountry = require("./fetchHmIdCountry");
 const _isArr = Array.isArray;
-let hmIdCountry = {};
-let isHmFetched = false;
-
-const _fetchHmIdCountry = () => !isHmFetched ? fetch(URL_ID_COUNTRY).then(res => res.json()).then(json => {
-  hmIdCountry = json.hm;
-  isHmFetched = true;
-  return hmIdCountry;
-}).catch(err => {
-  return hmIdCountry;
-}) : Promise.resolve(hmIdCountry);
-
-const _getCountryById = id => hmIdCountry[id] || id;
-
 const _combineToArr = function (dGeo, sGeo, status) {
   if (status === void 0) {
     status = {};
   }
-
-  const arr = [];
-  dGeo.forEach((id, index) => {
+  return dGeo.reduce((arr, id, index) => {
     if (sGeo[index] != null && sGeo[index].value != null) {
       arr.push({
         id,
@@ -40,23 +20,21 @@ const _combineToArr = function (dGeo, sGeo, status) {
         status: status[index]
       });
     }
-  });
-  return arr;
+    return arr;
+  }, []);
 };
-
 const _splitForConfig = arr => {
   const categories = [],
-        data = [];
+    data = [];
   let max = Number.NEGATIVE_INFINITY,
-      min = Number.POSITIVE_INFINITY;
+    min = Number.POSITIVE_INFINITY;
   arr.forEach(item => {
     const {
-      id,
-      value,
-      status
-    } = item,
-          country = _getCountryById(id);
-
+        id,
+        value,
+        status
+      } = item,
+      country = (0, _fetchHmIdCountry.getCountryById)(id);
     categories.push(country);
     data.push({
       y: value,
@@ -64,11 +42,9 @@ const _splitForConfig = arr => {
       id: country,
       status
     });
-
     if (value >= max) {
       max = value;
     }
-
     if (value <= min) {
       min = value;
     }
@@ -80,8 +56,8 @@ const _splitForConfig = arr => {
     max
   };
 };
-/***********************/
 
+/***********************/
 
 const _combineToHm = (ids, sGeo) => {
   const hm = {};
@@ -89,66 +65,56 @@ const _combineToHm = (ids, sGeo) => {
     const {
       value
     } = sGeo[index] || {};
-
     if (value != null) {
-      hm[_getCountryById(id)] = value;
+      hm[(0, _fetchHmIdCountry.getCountryById)(id)] = value;
     }
   });
   return hm;
 };
-
 const _trHmToData = (hm, categories) => categories.map(id => ({
   y: hm[id] || null,
   c: id
 }));
-
-const _isGeoSliceEmpty = sGeo => {
-  if (!_isArr(sGeo)) {
-    return true;
-  }
-
-  return sGeo.filter(_ref => {
-    let {
-      value
-    } = _ref;
-    return Boolean(value);
-  }).length === 0 ? true : false;
-};
-
+const _isGeoSliceEmpty = sGeo => _isArr(sGeo) ? sGeo.filter(_ref => {
+  let {
+    value
+  } = _ref;
+  return Boolean(value);
+}).length === 0 : true;
 const createGeoSlice = function (json, configSlice, dfTime) {
   if (configSlice === void 0) {
     configSlice = {};
   }
+  const ds = (0, _jsonstat.default)(json).Dataset(0);
 
-  const ds = (0, _jsonstat.default)(json).Dataset(0); // 1) Try create _sGeo with configSlice
-
+  // 1) Try create _sGeo with configSlice
   let time = configSlice.time,
-      _sGeo = ds.Data(configSlice); // 2) Try create _sGeo with configSlice and dfTime from dialog
+    _sGeo = ds.Data(configSlice);
 
-
+  // 2) Try create _sGeo with configSlice and dfTime from dialog
   if (dfTime && _isGeoSliceEmpty(_sGeo)) {
-    _sGeo = ds.Data({ ...configSlice,
+    _sGeo = ds.Data({
+      ...configSlice,
       ...{
         time: dfTime
       }
     });
     time = dfTime;
-  } // 3) Try create _sGeo with maxIndex time available in ds
+  }
 
-
+  // 3) Try create _sGeo with maxIndex time available in ds
   if (_isGeoSliceEmpty(_sGeo)) {
     const maxIndex = (ds.Dimension("time").id || []).length;
-
     if (maxIndex > 0) {
       time = ds.Dimension("time").id[maxIndex - 1];
-      _sGeo = ds.Data({ ...configSlice,
+      _sGeo = ds.Data({
+        ...configSlice,
         ...{
           time
         }
       });
     }
   }
-
   return {
     dGeo: ds.Dimension("geo") || {
       id: []
@@ -157,32 +123,26 @@ const createGeoSlice = function (json, configSlice, dfTime) {
     time
   };
 };
-
 exports.createGeoSlice = createGeoSlice;
-
 const crGeoSeria = (json, configSlice) => {
   const ds = (0, _jsonstat.default)(json).Dataset(0) || {},
-        data = ((ds.Data == null ? void 0 : ds.Data(configSlice)) || []).map(obj => obj.value).filter(value => value !== null);
+    data = ((ds.Data == null ? void 0 : ds.Data(configSlice)) || []).map(obj => obj.value).filter(value => value !== null);
   return {
     date: (ds.Dimension == null ? void 0 : ds.Dimension("time")) || {},
     data
   };
 };
-
 exports.crGeoSeria = crGeoSeria;
-
 const trJsonToCategory = (json, configSlice) => {
   const {
     dGeo,
     sGeo
   } = createGeoSlice(json, configSlice);
-  return _fetchHmIdCountry().then(() => {
+  return (0, _fetchHmIdCountry.fetchHmIdCountry)().then(() => {
     return (0, _Box.default)(_combineToArr(dGeo.id, sGeo, json.status)).map(arr => arr.sort(_compareByFn.compareByValueId)).fold(_splitForConfig);
   });
 };
-
 exports.trJsonToCategory = trJsonToCategory;
-
 const trJsonToSeria = (json, configSlice, categories) => {
   const {
     dGeo,
@@ -190,6 +150,5 @@ const trJsonToSeria = (json, configSlice, categories) => {
   } = createGeoSlice(json, configSlice);
   return (0, _Box.default)(_combineToHm(dGeo.id, sGeo)).fold(hm => _trHmToData(hm, categories));
 };
-
 exports.trJsonToSeria = trJsonToSeria;
 //# sourceMappingURL=JsonStatFn.js.map
