@@ -1,5 +1,9 @@
-import { useRef, useCallback } from 'react';
 //import PropTypes from "prop-types";
+import {
+  useRef,
+  useCallback,
+  getRefValue
+} from '../uiApi';
 
 import useToggle from '../hooks/useToggle';
 import useChartMethods from './useChartMethods';
@@ -10,8 +14,8 @@ import ModalMenuInd2 from './ModalMenuInd2'
 import ModalMenuFn from './ModalMenuFn'
 import ModalMenuMini from './ModalMenuMini'
 
-const CL_SCROLL = "with-scroll-x"
-, CL_BT_R = "with-scroll-x__bt-r"
+const CL_SCROLL_X = "with-scroll-x"
+, CL_BT_R = `${CL_SCROLL_X}__bt-r`
 
 , S_BT_IND = { left: 8 }
 , S_M_IND = {
@@ -42,11 +46,14 @@ const _isFn = fn => typeof fn === 'function';
 const _isNumber = n => typeof n === 'number';
 const _isArr = Array.isArray;
 
-const _isHrzScrollable = node  => node
+const _isHrzScrollable = node => node
   && node.scrollWidth > node.clientWidth;
 
-const _scrollNodeToLeft = (ref, left) => {
-  const node = ref.current;
+const _scrollNodeToLeft = (
+  ref,
+  left
+) => {
+  const node = getRefValue(ref);
   if (_isHrzScrollable(node)) {
    if (_isFn(node.scroll)) {
      node.scroll({ left, behavior: 'smooth'})
@@ -56,7 +63,7 @@ const _scrollNodeToLeft = (ref, left) => {
   }
 };
 
-const LINE_TYPES = [ 'area', 'spline', 'line' ];
+const LINE_TYPES = ['area', 'spline', 'line'];
 const _isColumnCategoryConfig = (
  { type, categories }={}
 ) => type === 'category' && _isArr(categories);
@@ -67,12 +74,14 @@ const _isIndicatorTab = ({ series, xAxis }, isWithoutIndicator) => !isWithoutInd
        || _isColumnCategoryConfig(xAxis)
      );
 
-const _crModalMenuStyle = (ref, left) => {
-  const node = ref.current
-  if (node && _isNumber(node.scrollLeft)) {
-    return { left: left - node.scrollLeft };
-  }
-  return void 0;
+const _crModalMenuStyle = (
+  ref,
+  left
+) => {
+  const node = getRefValue(ref);
+  return node && _isNumber(node.scrollLeft)
+    ? { left: left - node.scrollLeft }
+    : void 0;
 };
 
 const ChartToolbar = ({
@@ -97,8 +106,11 @@ const ChartToolbar = ({
       onZoomChart,
       onCopyChart,
       onPasteToChart
-    } = useChartMethods(getChart,
-      onZoom, onCopy, onPasteTo
+    } = useChartMethods(
+      getChart,
+      onZoom,
+      onCopy,
+      onPasteTo
     )
   , [isShowInd, toggleInd] = useToggle(false)
   , [isShowFn, toggleFn] = useToggle(false)
@@ -107,8 +119,16 @@ const ChartToolbar = ({
       _scrollNodeToLeft(_refToolbar, 0)
     }, []);
 
-  const { zhConfig, info, zhMiniConfigs } = config
-  , { isWithoutIndicator, itemConf, legend } = zhConfig || {}
+  const {
+    zhConfig,
+    info,
+    zhMiniConfigs
+  } = config
+  , {
+    isWithoutIndicator,
+    itemConf,
+    legend
+  } = zhConfig || {}
   , _modalMenuArr = [];
 
   const _btInfo = (<ButtonTab
@@ -121,7 +141,7 @@ const ChartToolbar = ({
     return (
       <div
          ref={_refToolbar}
-         className={CL_SCROLL}
+         className={CL_SCROLL_X}
          style={style}
       >
         {_btInfo}
@@ -220,7 +240,7 @@ const ChartToolbar = ({
       {_modalMenuArr}
       <div
          ref={_refToolbar}
-         className={CL_SCROLL}
+         className={CL_SCROLL_X}
          style={style}
       >
          {_btTabIndicator}
