@@ -10,7 +10,7 @@ var _BtCaption = _interopRequireDefault(require("./BtCaption"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_ARROW = "arrow-down",
   CL_BT_FLAT = 'bt-flat',
-  CL_BT_FLAT_CAPTION = 'bt-flat__caption',
+  CL_BT_FLAT_CAPTION = CL_BT_FLAT + "__caption",
   S_PRIMARY = {
     color: '#607d8b'
   };

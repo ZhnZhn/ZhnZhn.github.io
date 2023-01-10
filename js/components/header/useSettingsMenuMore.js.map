@@ -1,0 +1,27 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/header/useSettingsMenuMore.js"
+ ],
+ "file": "../../../src/components/header/useSettingsMenuMore.js",
+ "names": [
+  "IS_WIDE_WIDTH",
+  "isWideWidth",
+  "useSettingsMenuMore",
+  "CL_ROW",
+  "isShowLabels",
+  "toggleLabels",
+  "useToggle",
+  "menuModel",
+  "useMemo",
+  "titleCl",
+  "pageWidth",
+  "maxPages",
+  "p0",
+  "cn",
+  "onClick",
+  "name",
+  "isClose"
+ ],
+ "mappings": ";;;;;AAAA;AACA;AAEA;AAEA,MAAMA,aAAa,GAAG,IAAAC,gBAAW,GAAE;AAEnC,MAAMC,mBAAmB,GAAIC,MAAM,IAAK;EACtC,MAAM,CACJC,YAAY,EACZC,YAAY,CACb,GAAG,IAAAC,kBAAS,EAACN,aAAa;IAC3B;IACEO,SAAS,GAAG,IAAAC,cAAO,EAAC,OAAO;MAC3BC,OAAO,EAAEN,MAAM;MACfO,SAAS,EAAE,GAAG;MACdC,QAAQ,EAAE,CAAC;MACXC,EAAE,EAAE,CAAC;QACHC,EAAE,EAAEV,MAAM;QACVW,OAAO,EAAET,YAAY;QACrBU,IAAI,EAAE,qBAAqB;QAC3BC,OAAO,EAAE;MACX,CAAC;IACH,CAAC,CAAC,EAAE,EAAE,CAAC;EACP;EACA;EACA,OAAO,CACLZ,YAAY,EACZG,SAAS,CACV;AACH,CAAC;AAAC,eAEaL,mBAAmB;AAAA"
+}
