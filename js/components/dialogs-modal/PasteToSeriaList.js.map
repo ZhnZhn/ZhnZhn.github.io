@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs-modal/PasteToSeriaList.js"
+ ],
+ "file": "../../../src/components/dialogs-modal/PasteToSeriaList.js",
+ "names": [
+  "PasteToSeriaList",
+  "chartId",
+  "series",
+  "options",
+  "onReg",
+  "onUnReg",
+  "filter",
+  "seria",
+  "visible",
+  "map",
+  "index",
+  "name"
+ ],
+ "mappings": ";;;;;AAAA;AAAkC;AAElC,MAAMA,gBAAgB,GAAG;EAAA,IAAC;IACxBC,OAAO;IACPC,MAAM;IACNC,OAAO;IACPC,KAAK;IACLC;EACF,CAAC;EAAA,OAAK,CAACH,MAAM,IAAI,EAAE,EAChBI,MAAM,CAACC,KAAK,IAAIA,KAAK,IAAIA,KAAK,CAACC,OAAO,CAAC,CACvCC,GAAG,CAAC,CAACF,KAAK,EAAEG,KAAK,kBAChB,qBAAC,iBAAQ;IAEP,KAAK,EAAEH,KAAM;IACb,SAAS,EAAEG,KAAM;IACjB,YAAY,EAAEP,OAAQ;IACtB,KAAK,EAAEC,KAAM;IACb,OAAO,EAAEC;EAAQ,GALTJ,OAAO,UAAIM,KAAK,CAACI,IAAI,IAAI,EAAE,UAAID,KAAK,CAO/C,CAAC;AAAA;AAAC,eAEUV,gBAAgB;AAAA"
+}

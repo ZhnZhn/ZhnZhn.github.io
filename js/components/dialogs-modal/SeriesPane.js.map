@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/items/SeriesPane.js"
+  "../../../src/components/dialogs-modal/SeriesPane.js"
  ],
- "file": "../../../src/components/items/SeriesPane.js",
+ "file": "../../../src/components/dialogs-modal/SeriesPane.js",
  "names": [
   "SeriesPane",
   "forwardRef",

@@ -1,0 +1,29 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs-modal/usePasteTo.js"
+ ],
+ "file": "../../../src/components/dialogs-modal/usePasteTo.js",
+ "names": [
+  "usePasteTo",
+  "data",
+  "onClose",
+  "setToChart",
+  "getToChart",
+  "useProperty",
+  "toChart",
+  "_refCompSeries",
+  "useRef",
+  "_hPasteTo",
+  "useMemo",
+  "_toChart",
+  "_seriesInst",
+  "getRefValue",
+  "getValues",
+  "forEach",
+  "conf",
+  "zhAddSeriaToYAxis",
+  "_commandButtons"
+ ],
+ "mappings": ";;;;;AAAA;AAMA;AACA;AAA6C;AAE7C,MAAMA,UAAU,GAAG,CACjBC,IAAI,EACJC,OAAO,KACJ;EACH,MAAM,CACJC,UAAU,EACVC,UAAU,CACX,GAAG,IAAAC,oBAAW,GAAE;EACjBF,UAAU,CAACF,IAAI,CAACK,OAAO,CAAC;EAExB,MAAMC,cAAc,GAAG,IAAAC,aAAM;IAC7B;IACEC,SAAS,GAAG,IAAAC,cAAO,EAAC,MAAM,MAAM;MAChC,MAAMC,QAAQ,GAAGP,UAAU,EAAE;QAC3BQ,WAAW,GAAG,IAAAC,kBAAW,EAACN,cAAc,CAAC;MAC3C,IAAII,QAAQ,IAAIC,WAAW,EAAE;QAC3BA,WAAW,CACRE,SAAS,EAAE,CACXC,OAAO,CAACC,IAAI,IAAI;UACf;UACAL,QAAQ,CAACM,iBAAiB,CAACD,IAAI,CAAC;QAClC,CAAC,CAAC;MACN;MACAd,OAAO,EAAE;IACX,CAAC,EAAE,EAAE;IACL;IACA;IACEgB,eAAe,GAAG,IAAAR,cAAO,EAAC,mBAAO,qBAAC,mBAAU;MAE1C,OAAO,EAAC,eAAe;MACvB,SAAS,EAAE,IAAK;MAChB,OAAO,EAAED;IAAU,GAHf,OAAO,CAIV,EAAE,CAACA,SAAS,CAAC,CAAC;EAEnB,OAAO,CACLL,UAAU,EAAE,EACZG,cAAc,EACdW,eAAe,CAChB;AACH,CAAC;AAAC,eAEalB,UAAU;AAAA"
+}

@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/items/SeriesPaneFn.js"
+  "../../../src/components/dialogs-modal/SeriesPaneFn.js"
  ],
- "file": "../../../src/components/items/SeriesPaneFn.js",
+ "file": "../../../src/components/dialogs-modal/SeriesPaneFn.js",
  "names": [
   "getUserMinMax",
   "fromChart",

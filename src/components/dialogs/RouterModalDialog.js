@@ -32,7 +32,7 @@ import StocksBySectorDialog from './StocksBySectorDialog';
 import SettingsDialog from '../header/SettingsDialog';
 import AddToWatchDialog from '../watch-browser/AddToWatchDialog';
 
-import PasteToModalDialog from '../items/PasteToModalDialog'
+import PasteToModalDialog from '../dialogs-modal/PasteToModalDialog';
 
 const MSG_OFFLINE = 'It seems you are offline';
 

@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/items/PasteToTitle.js"
+  "../../../src/components/dialogs-modal/PasteToTitle.js"
  ],
- "file": "../../../src/components/items/PasteToTitle.js",
+ "file": "../../../src/components/dialogs-modal/PasteToTitle.js",
  "names": [
   "S_TITLE",
   "paddingBottom",

@@ -13,15 +13,13 @@ const PasteToSeriaList = _ref => {
     onReg,
     onUnReg
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
-    children: (series || []).filter(seria => seria.visible).map((seria, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriaRow.default, {
-      seria: seria,
-      compIndex: index,
-      yAxisOptions: options,
-      onReg: onReg,
-      onUnReg: onUnReg
-    }, chartId + "_" + (seria.name || '') + "_" + index))
-  });
+  return (series || []).filter(seria => seria && seria.visible).map((seria, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriaRow.default, {
+    seria: seria,
+    compIndex: index,
+    yAxisOptions: options,
+    onReg: onReg,
+    onUnReg: onUnReg
+  }, chartId + "_" + (seria.name || '') + "_" + index));
 };
 var _default = PasteToSeriaList;
 exports.default = _default;

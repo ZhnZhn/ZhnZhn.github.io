@@ -47,18 +47,35 @@ const TH_ID = 'ROW_CHECKBOX'
 
 const SeriaRow = (props) => {
   const {
-    seria={},
+    seria,
     yAxisOptions,
     compIndex,
     onReg=FN_NOOP,
     onUnReg=FN_NOOP
   } = props
-  , { color, name='' } = seria
+  , {
+    color,
+    name=''
+  } = seria
   , ref = useRef()
-  , [setYAxis, getYAxis] = useProperty()
-  , [_refIsChecked, _hCheck, _hUnCheck] = useRefBool(false)
-  , [_color, _setColor] = useState(() => color || DF_COLOR)
-  , [isShowPallete, _hOpenPallete, _hClosePalette] = useBool(false)
+  , [
+    setYAxis,
+    getYAxis
+  ] = useProperty()
+  , [
+    _refIsChecked,
+    _hCheck,
+    _hUnCheck
+  ] = useRefBool(false)
+  , [
+    _color,
+    _setColor
+  ] = useState(() => color || DF_COLOR)
+  , [
+    isShowPallete,
+    _hOpenPallete,
+    _hClosePalette
+  ] = useBool(false)
   , TS = useTheme(TH_ID);
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -70,7 +87,8 @@ const SeriaRow = (props) => {
         isChecked: getRefValue(_refIsChecked),
         color: _color,
         yIndex: (getYAxis() || {}).value,
-        data, name
+        data,
+        name
       };
     }
   }), [_color])
