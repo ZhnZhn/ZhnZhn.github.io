@@ -1,98 +1,78 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
-
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
-
 var _ChartExportConfig = require("../../charts/ChartExportConfig");
-
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
-
 var _DialogStyles = require("../styles/DialogStyles");
-
 var _ToolbarButtonCircle = _interopRequireDefault(require("./ToolbarButtonCircle"));
-
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
-
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
-
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
-
 var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const _S_LABEL = {
-  display: 'inline-block',
-  color: '#1b75bb',
-  fontSize: '16px',
-  fontWeight: 'bold'
-},
-      S_ROW_WITH_TOP_GAP = { ..._DialogStyles.S_DIALOG_ROW,
-  ...{
+    display: 'inline-block',
+    color: '#1b75bb',
+    fontSize: '16px',
+    fontWeight: 'bold'
+  },
+  S_ROW_WITH_TOP_GAP = {
+    ..._DialogStyles.S_DIALOG_ROW,
     marginTop: 10
-  }
-},
-      S_LABEL = { ..._S_LABEL,
-  width: 100,
-  paddingRight: 5,
-  textAlign: 'right'
-},
-      S_LABEL_WIDTH = { ..._S_LABEL,
-  padding: '0 5px 0 3px'
-},
-      S_LABEL_HEIGHT = { ...S_LABEL_WIDTH,
-  paddingLeft: 6
-},
-      S_INPUT_NUMBER = {
-  width: 60,
-  height: 30,
-  marginLeft: 0
-},
-      S_INPUT_TEXT = {
-  width: 250,
-  height: 30,
-  marginLeft: 0
-};
+  },
+  S_LABEL = {
+    ..._S_LABEL,
+    width: 100,
+    paddingRight: 5,
+    textAlign: 'right'
+  },
+  S_LABEL_WIDTH = {
+    ..._S_LABEL,
+    padding: '0 5px 0 3px'
+  },
+  S_LABEL_HEIGHT = {
+    ...S_LABEL_WIDTH,
+    paddingLeft: 6
+  },
+  S_INPUT_NUMBER = {
+    width: 60,
+    height: 30,
+    marginLeft: 0
+  },
+  S_INPUT_TEXT = {
+    width: 250,
+    height: 30,
+    marginLeft: 0
+  };
 const APP_HTML = 'Web app ERC https://zhnzhn.github.io',
-      DS_TOP_PADDING = 90,
-      DS_FONT_SIZE = '10px',
-      W_MIN = 351,
-      W_MAX = 2001,
-      H_MIN = 251,
-      H_MAX = 1001;
-
-const _getRefValue = ref => ref.current,
-      _getValue = ref => _getRefValue(ref).getValue(),
-      _inRange = (v, min, max) => v > min && v < max,
-      _getDimension = (_ref, width, height) => {
-  let {
-    chartWidth,
-    chartHeight
-  } = _ref;
-  return [_inRange(width, W_MIN, W_MAX) ? width : chartWidth, _inRange(height, H_MIN, H_MAX) ? height : chartHeight];
-};
-
+  DS_TOP_PADDING = 90,
+  DS_FONT_SIZE = '10px',
+  W_MIN = 351,
+  W_MAX = 2001,
+  H_MIN = 251,
+  H_MAX = 1001;
+const _isInRange = (v, min, max) => v > min && v < max,
+  _getDimension = (_ref, width, height) => {
+    let {
+      chartWidth,
+      chartHeight
+    } = _ref;
+    return [_isInRange(width, W_MIN, W_MAX) ? width : chartWidth, _isInRange(height, H_MIN, H_MAX) ? height : chartHeight];
+  };
 const _crItemLabel = function (html, top, fontSize) {
   if (top === void 0) {
     top = -70;
   }
-
   if (fontSize === void 0) {
     fontSize = '9px';
   }
-
   return {
     html,
     style: {
@@ -103,7 +83,6 @@ const _crItemLabel = function (html, top, fontSize) {
     }
   };
 };
-
 const DF_DATA = {};
 const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
   let {
@@ -111,76 +90,72 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     data = DF_DATA,
     onClose
   } = _ref2;
-
   const [isShowDimension, toggleDimension] = (0, _useToggle.default)(true),
-        [isShowTitle, toggleTitle] = (0, _useToggle.default)(true),
-        [isShowStyle, toggleStyle] = (0, _useToggle.default)(true),
-        _refExportStyle = (0, _react.useRef)({}),
-        _refToolbarButtons = (0, _react.useRef)([{
-    caption: 'D',
-    onClick: toggleDimension
-  }, {
-    caption: 'T',
-    onClick: toggleTitle
-  }, {
-    caption: 'S',
-    onClick: toggleStyle
-  }]),
-        _optionStyles = (0, _useRefInit.default)(() => (0, _ChartExportConfig.crExportStyleOptions)()),
-        _refInputWidth = (0, _react.useRef)(),
-        _refInputHeight = (0, _react.useRef)(),
-        _refInputTitle = (0, _react.useRef)(),
-        _refInputSubtitle = (0, _react.useRef)(),
-        _hSelectStyle = (0, _react.useMemo)(() => item => {
-    _refExportStyle.current = item && item.value || {};
-  }, []),
-        {
-    chart,
-    fn
-  } = data,
-        _hExport = (0, _useEventCallback.default)(() => {
-    var _chart$userOptions$zh, _chart$userOptions$zh2;
-
-    const [width, height] = _getDimension(chart, _getValue(_refInputWidth), _getValue(_refInputHeight)),
-          _customOption = (0, _ChartExportConfig.merge)(true, {
-      chart: {
-        width,
-        height
-      },
-      title: {
-        text: _getValue(_refInputTitle)
-      },
-      subtitle: {
-        text: _getValue(_refInputSubtitle)
-      },
-      labels: {
-        items: [_crItemLabel(APP_HTML), _crItemLabel("DataSource: " + ((_chart$userOptions$zh = (_chart$userOptions$zh2 = chart.userOptions.zhConfig) == null ? void 0 : _chart$userOptions$zh2.dataSource) != null ? _chart$userOptions$zh : ''), height - DS_TOP_PADDING, DS_FONT_SIZE)]
-      }
-    }, _getRefValue(_refExportStyle));
-
-    fn.apply(chart, [null, _customOption]);
-    onClose();
-  }),
-        _refCommandButtons = (0, _react.useRef)([/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-    caption: "Export",
-    isPrimary: true,
-    onClick: _hExport
-  }, "export")]);
-
+    [isShowTitle, toggleTitle] = (0, _useToggle.default)(true),
+    [isShowStyle, toggleStyle] = (0, _useToggle.default)(true),
+    _refExportStyle = (0, _uiApi.useRef)({}),
+    _refToolbarButtons = (0, _uiApi.useRef)([{
+      caption: 'D',
+      onClick: toggleDimension
+    }, {
+      caption: 'T',
+      onClick: toggleTitle
+    }, {
+      caption: 'S',
+      onClick: toggleStyle
+    }]),
+    _optionStyles = (0, _useRefInit.default)(() => (0, _ChartExportConfig.crExportStyleOptions)()),
+    _refInputWidth = (0, _uiApi.useRef)(),
+    _refInputHeight = (0, _uiApi.useRef)(),
+    _refInputTitle = (0, _uiApi.useRef)(),
+    _refInputSubtitle = (0, _uiApi.useRef)(),
+    _hSelectStyle = (0, _uiApi.useMemo)(() => item => {
+      (0, _uiApi.setRefValue)(_refExportStyle, item && item.value || {});
+    }, []),
+    {
+      chart,
+      fn
+    } = data,
+    _hExport = (0, _useEventCallback.default)(() => {
+      var _chart$userOptions$zh, _chart$userOptions$zh2;
+      const [width, height] = _getDimension(chart, (0, _uiApi.getInputValue)(_refInputWidth), (0, _uiApi.getInputValue)(_refInputHeight)),
+        _customOption = (0, _ChartExportConfig.merge)(true, {
+          chart: {
+            width,
+            height
+          },
+          title: {
+            text: (0, _uiApi.getInputValue)(_refInputTitle)
+          },
+          subtitle: {
+            text: (0, _uiApi.getInputValue)(_refInputSubtitle)
+          },
+          labels: {
+            items: [_crItemLabel(APP_HTML), _crItemLabel("DataSource: " + ((_chart$userOptions$zh = (_chart$userOptions$zh2 = chart.userOptions.zhConfig) == null ? void 0 : _chart$userOptions$zh2.dataSource) != null ? _chart$userOptions$zh : ''), height - DS_TOP_PADDING, DS_FONT_SIZE)]
+          }
+        }, (0, _uiApi.getRefValue)(_refExportStyle));
+      fn.apply(chart, [null, _customOption]);
+      onClose();
+    }),
+    _refCommandButtons = (0, _uiApi.useRef)([/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+      caption: "Export",
+      isPrimary: true,
+      onClick: _hExport
+    }, "export")]);
   const {
-    chartWidth,
-    chartHeight,
-    options
-  } = chart,
-        title = options.title.text,
-        subtitle = options.subtitle.text;
+      chartWidth,
+      chartHeight,
+      options
+    } = chart,
+    title = options.title.text,
+    subtitle = options.subtitle.text;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
     caption: "Customize Export Chart",
     isShow: isShow,
-    commandButtons: _getRefValue(_refCommandButtons),
+    commandButtons: (0, _uiApi.getRefValue)(_refCommandButtons),
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle.default, {
-      buttons: _getRefValue(_refToolbarButtons)
+      buttons: (0, _uiApi.getRefValue)(_refToolbarButtons)
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: isShowDimension,
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {

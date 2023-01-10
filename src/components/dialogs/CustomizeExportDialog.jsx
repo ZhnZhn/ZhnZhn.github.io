@@ -1,7 +1,11 @@
 import {
   useRef,
-  useMemo
-} from 'react';
+  useMemo,
+  getRefValue,
+  setRefValue,
+  getInputValue
+} from '../uiApi';
+
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import useRefInit from '../hooks/useRefInit';
@@ -29,7 +33,7 @@ const _S_LABEL = {
 }
 , S_ROW_WITH_TOP_GAP = {
   ...S_DIALOG_ROW,
-  ...{ marginTop: 10 }
+  marginTop: 10
 }
 , S_LABEL = {
   ..._S_LABEL,
@@ -64,18 +68,16 @@ const APP_HTML = 'Web app ERC https://zhnzhn.github.io'
 , H_MIN = 251
 , H_MAX = 1001;
 
-const _getRefValue = ref => ref.current
-, _getValue = ref => _getRefValue(ref).getValue()
-, _inRange = (v, min, max) => v>min && v<max
+const _isInRange = (v, min, max) => v>min && v<max
 , _getDimension = (
   { chartWidth, chartHeight },
   width,
   height
 ) => [
-  _inRange(width, W_MIN, W_MAX)
+  _isInRange(width, W_MIN, W_MAX)
      ? width
      : chartWidth,
-  _inRange(height, H_MIN, H_MAX)
+  _isInRange(height, H_MIN, H_MAX)
      ? height
      : chartHeight
 ];
@@ -126,24 +128,26 @@ const CustomizeExportDialog = memoIsShow(({
   , _refInputSubtitle = useRef()
 
   , _hSelectStyle = useMemo(() => (item) => {
-    _refExportStyle.current = item
-       && item.value || {};
+     setRefValue(
+       _refExportStyle,
+       item && item.value || {}
+     )
   }, [])
   , { chart, fn } = data
   , _hExport = useEventCallback(() => {
     const [width, height] = _getDimension(
       chart,
-      _getValue(_refInputWidth),
-      _getValue(_refInputHeight)
+      getInputValue(_refInputWidth),
+      getInputValue(_refInputHeight)
     )
     , _customOption = merge(
         true, {
           chart: { width, height },
           title: {
-            text: _getValue(_refInputTitle)
+            text: getInputValue(_refInputTitle)
           },
           subtitle: {
-            text: _getValue(_refInputSubtitle)
+            text: getInputValue(_refInputSubtitle)
           },
           labels: {
             items: [
@@ -154,7 +158,7 @@ const CustomizeExportDialog = memoIsShow(({
               )
             ]
           }
-        }, _getRefValue(_refExportStyle));
+        }, getRefValue(_refExportStyle));
 
       fn.apply(chart, [null, _customOption]);
       onClose();
@@ -180,11 +184,11 @@ const CustomizeExportDialog = memoIsShow(({
     <ModalDialog
       caption="Customize Export Chart"
       isShow={isShow}
-      commandButtons={_getRefValue(_refCommandButtons)}
+      commandButtons={getRefValue(_refCommandButtons)}
       onClose={onClose}
     >
        <ToolbarButtonCircle
-         buttons={_getRefValue(_refToolbarButtons)}
+         buttons={getRefValue(_refToolbarButtons)}
        />
        <ShowHide isShow={isShowDimension}>
          <div style={S_DIALOG_ROW}>
