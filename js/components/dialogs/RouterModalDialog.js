@@ -12,7 +12,6 @@ var _AlertDialog = _interopRequireDefault(require("./AlertDialog"));
 var _DescriptionDialog = _interopRequireDefault(require("./DescriptionDialog"));
 var _ColumnRangeDialog = _interopRequireDefault(require("./ColumnRangeDialog"));
 var _ZoomDialog = _interopRequireDefault(require("./ZoomDialog"));
-var _StocksBySectorDialog = _interopRequireDefault(require("./StocksBySectorDialog"));
 var _SettingsDialog = _interopRequireDefault(require("../header/SettingsDialog"));
 var _AddToWatchDialog = _interopRequireDefault(require("../watch-browser/AddToWatchDialog"));
 var _PasteToModalDialog = _interopRequireDefault(require("../dialogs-modal/PasteToModalDialog"));
@@ -26,12 +25,10 @@ const _router = {
   [_ModalDialogType.MDT_INFO]: _InfoDialog.default,
   [_ModalDialogType.MDT_ALERT]: _AlertDialog.default,
   [_ModalDialogType.MDT_DESCRIPTION]: _DescriptionDialog.default,
-  //[MDT_CUSTOMIZE_EXPORT]: CustomizeExportDialog,
   [_ModalDialogType.MDT_COLUMN_RANGE]: _ColumnRangeDialog.default,
   [_ModalDialogType.MDT_ZOOM]: _ZoomDialog.default,
   [_ModalDialogType.MDT_SETTINGS]: _SettingsDialog.default,
   [_ModalDialogType.MDT_ADD_TO_WATCH]: _AddToWatchDialog.default,
-  [_ModalDialogType.MDT_STOCKS_BY_SECTOR]: _StocksBySectorDialog.default,
   [_ModalDialogType.MDT_PASTE_TO]: _PasteToModalDialog.default,
   _loadGMD() {
     /*eslint-disable no-undef */
@@ -49,6 +46,9 @@ const _router = {
   },
   get [_ModalDialogType.MDT_CUSTOMIZE_EXPORT]() {
     return this.getGMD().then(D => D.CeDialog);
+  },
+  get [_ModalDialogType.MDT_STOCKS_BY_SECTOR]() {
+    return this.getGMD().then(D => D.SbsDialog);
   },
   _loadWL() {
     /*eslint-disable no-undef */

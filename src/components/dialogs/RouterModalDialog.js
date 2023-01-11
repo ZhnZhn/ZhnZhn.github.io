@@ -25,10 +25,8 @@ import ReloadDialog from './ReloadDialog';
 import InfoDialog from './InfoDialog';
 import AlertDialog from './AlertDialog';
 import DescriptionDialog from './DescriptionDialog';
-//import CustomizeExportDialog from './CustomizeExportDialog';
 import ColumnRangeDialog from './ColumnRangeDialog'
 import ZoomDialog from './ZoomDialog'
-import StocksBySectorDialog from './StocksBySectorDialog';
 import SettingsDialog from '../header/SettingsDialog';
 import AddToWatchDialog from '../watch-browser/AddToWatchDialog';
 
@@ -43,12 +41,10 @@ const _router = {
   [MDT_INFO]: InfoDialog,
   [MDT_ALERT]: AlertDialog,
   [MDT_DESCRIPTION]: DescriptionDialog,
-  //[MDT_CUSTOMIZE_EXPORT]: CustomizeExportDialog,
   [MDT_COLUMN_RANGE]: ColumnRangeDialog,
   [MDT_ZOOM]: ZoomDialog,
   [MDT_SETTINGS]: SettingsDialog,
   [MDT_ADD_TO_WATCH]: AddToWatchDialog,
-  [MDT_STOCKS_BY_SECTOR]: StocksBySectorDialog,
   [MDT_PASTE_TO]: PasteToModalDialog,
 
   _loadGMD(){
@@ -73,6 +69,9 @@ const _router = {
   },
   get [MDT_CUSTOMIZE_EXPORT]() {
     return this.getGMD().then(D => D.CeDialog);
+  },
+  get [MDT_STOCKS_BY_SECTOR]() {
+    return this.getGMD().then(D => D.SbsDialog);
   },
 
   _loadWL(){
