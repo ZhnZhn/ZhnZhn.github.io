@@ -3,7 +3,8 @@ import Link from './Link';
 const NASDAQ_BASE = 'https://www.nasdaq.com/symbol/'
 , CAPTION = 'NASDAQ Link';
 
-const _isObj = v => v && typeof item === 'object';
+const _isObj = v => v && typeof v === 'object';
+const _isStr = v => typeof v === 'string';
 
 const NasdaqLink = ({
   item={},
@@ -16,7 +17,7 @@ const NasdaqLink = ({
   } = _isObj(item)
       ? item
       : { value: item }
-  , _ticket = value
+  , _ticket = _isStr(value)
       ? value.trim()
       : text.split('-')[0].trim();
   return (
