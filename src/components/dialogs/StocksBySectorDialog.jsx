@@ -18,6 +18,7 @@ import {
   ButtonLoad,
   ButtonShow
 } from './Buttons';
+import ToolbarButtonCircle from '../zhn/ToolbarButtonCircle';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import NasdaqLink from '../native-links/NasdaqLink';
 
@@ -181,7 +182,7 @@ const StocksBySectorDialog = memoIsShow(({
        commandButtons={getRefValue(_refCommandButtons)}
        onClose={onClose}
     >
-      <D.ToolbarButtonCircle
+      <ToolbarButtonCircle
         buttons={getRefValue(_refToolbarButtons)}
       />
       <D.RowInputSelect

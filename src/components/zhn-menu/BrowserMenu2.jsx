@@ -6,7 +6,7 @@ import useLoadMenu from './useLoadMenu';
 
 import Comp from '../Comp'
 
-import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
+import ToolbarButtonCircle from '../zhn/ToolbarButtonCircle';
 import WrapperInputSearch from '../zhn-select/WrapperInputSearch';
 import MenuItems2 from './MenuItems2';
 

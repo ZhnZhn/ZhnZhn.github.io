@@ -1,5 +1,5 @@
 import ShowHide from '../zhn/ShowHide';
-import ToolbarButtonCircle from './ToolbarButtonCircle';
+import ToolbarButtonCircle from '../zhn/ToolbarButtonCircle';
 
 const Toolbar = ({
   isShow,

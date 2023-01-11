@@ -25,7 +25,7 @@ import ReloadDialog from './ReloadDialog';
 import InfoDialog from './InfoDialog';
 import AlertDialog from './AlertDialog';
 import DescriptionDialog from './DescriptionDialog';
-import CustomizeExportDialog from './CustomizeExportDialog';
+//import CustomizeExportDialog from './CustomizeExportDialog';
 import ColumnRangeDialog from './ColumnRangeDialog'
 import ZoomDialog from './ZoomDialog'
 import StocksBySectorDialog from './StocksBySectorDialog';
@@ -43,13 +43,37 @@ const _router = {
   [MDT_INFO]: InfoDialog,
   [MDT_ALERT]: AlertDialog,
   [MDT_DESCRIPTION]: DescriptionDialog,
-  [MDT_CUSTOMIZE_EXPORT]: CustomizeExportDialog,
+  //[MDT_CUSTOMIZE_EXPORT]: CustomizeExportDialog,
   [MDT_COLUMN_RANGE]: ColumnRangeDialog,
   [MDT_ZOOM]: ZoomDialog,
   [MDT_SETTINGS]: SettingsDialog,
   [MDT_ADD_TO_WATCH]: AddToWatchDialog,
   [MDT_STOCKS_BY_SECTOR]: StocksBySectorDialog,
   [MDT_PASTE_TO]: PasteToModalDialog,
+
+  _loadGMD(){
+    /*eslint-disable no-undef */
+    if (process.env.NODE_ENV === '_development') {
+      return import("js/components/dialogs-modal/GeneralModalDialogs.js")
+        .then(module => this.GMD = _resolve(module.default))
+        .catch(err => console.log(MSG_OFFLINE))
+   /*eslint-enable no-undef */
+    } else {
+     return import(
+          /* webpackChunkName: "general-modal-dialogs" */
+          /* webpackMode: "lazy" */
+          "../../components/dialogs-modal/GeneralModalDialogs"
+        )
+       .then(module => this.GMD = _resolve(module.default))
+       .catch(err => console.log(MSG_OFFLINE))
+     }
+  },
+  getGMD(){
+    return this.GMD || this._loadGMD();
+  },
+  get [MDT_CUSTOMIZE_EXPORT]() {
+    return this.getGMD().then(D => D.CeDialog);
+  },
 
   _loadWL(){
     /*eslint-disable no-undef */

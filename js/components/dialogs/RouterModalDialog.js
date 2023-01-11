@@ -10,7 +10,6 @@ var _ReloadDialog = _interopRequireDefault(require("./ReloadDialog"));
 var _InfoDialog = _interopRequireDefault(require("./InfoDialog"));
 var _AlertDialog = _interopRequireDefault(require("./AlertDialog"));
 var _DescriptionDialog = _interopRequireDefault(require("./DescriptionDialog"));
-var _CustomizeExportDialog = _interopRequireDefault(require("./CustomizeExportDialog"));
 var _ColumnRangeDialog = _interopRequireDefault(require("./ColumnRangeDialog"));
 var _ZoomDialog = _interopRequireDefault(require("./ZoomDialog"));
 var _StocksBySectorDialog = _interopRequireDefault(require("./StocksBySectorDialog"));
@@ -27,13 +26,30 @@ const _router = {
   [_ModalDialogType.MDT_INFO]: _InfoDialog.default,
   [_ModalDialogType.MDT_ALERT]: _AlertDialog.default,
   [_ModalDialogType.MDT_DESCRIPTION]: _DescriptionDialog.default,
-  [_ModalDialogType.MDT_CUSTOMIZE_EXPORT]: _CustomizeExportDialog.default,
+  //[MDT_CUSTOMIZE_EXPORT]: CustomizeExportDialog,
   [_ModalDialogType.MDT_COLUMN_RANGE]: _ColumnRangeDialog.default,
   [_ModalDialogType.MDT_ZOOM]: _ZoomDialog.default,
   [_ModalDialogType.MDT_SETTINGS]: _SettingsDialog.default,
   [_ModalDialogType.MDT_ADD_TO_WATCH]: _AddToWatchDialog.default,
   [_ModalDialogType.MDT_STOCKS_BY_SECTOR]: _StocksBySectorDialog.default,
   [_ModalDialogType.MDT_PASTE_TO]: _PasteToModalDialog.default,
+  _loadGMD() {
+    /*eslint-disable no-undef */
+    if (process.env.NODE_ENV === '_development') {
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/dialogs-modal/GeneralModalDialogs.js"))).then(module => this.GMD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      /*eslint-enable no-undef */
+    } else {
+      return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "general-modal-dialogs" */
+      /* webpackMode: "lazy" */
+      "../../components/dialogs-modal/GeneralModalDialogs"))).then(module => this.GMD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+    }
+  },
+  getGMD() {
+    return this.GMD || this._loadGMD();
+  },
+  get [_ModalDialogType.MDT_CUSTOMIZE_EXPORT]() {
+    return this.getGMD().then(D => D.CeDialog);
+  },
   _loadWL() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {

@@ -9,7 +9,6 @@ import ModalPopup from '../zhn-moleculs/ModalPopup'
 import ShowHide from '../zhn/ShowHide';
 import ValidationMessages from '../zhn/ValidationMessages'
 
-import ToolbarButtonCircle from './ToolbarButtonCircle'
 import Toolbar from './Toolbar'
 import RowInputText from './RowInputText'
 import RowInputColor from './RowInputColor'
@@ -21,7 +20,6 @@ const DialogCell = {
   ShowHide,
   ValidationMessages,
 
-  ToolbarButtonCircle,
   Toolbar,
   RowInputText,
   RowInputColor,

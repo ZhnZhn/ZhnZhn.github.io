@@ -1,6 +1,5 @@
-
-import ButtonCircle from '../zhn/ButtonCircle';
-import ItemStack from '../zhn/ItemStack';
+import ButtonCircle from './ButtonCircle';
+import ItemStack from './ItemStack';
 
 const S_TOOLBAR = {
   display: 'flex',
@@ -23,7 +22,9 @@ const _crButtonItem = ({
   />
 );
 
-const ToolbarButtonCircle = ({ buttons }) => (
+const ToolbarButtonCircle = ({
+  buttons
+}) => (
   <div style={S_TOOLBAR} role="toolbar">
     <ItemStack
        items={buttons}
