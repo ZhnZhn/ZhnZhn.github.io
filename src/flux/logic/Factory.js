@@ -1,7 +1,8 @@
 export { crAsyncBrowser } from './fBrowser';
 
-import { createElement } from 'react';
-import RouterDialog from './RouterDialog';
+import { createElement } from '../../components/uiApi';
+
+import { getDialog } from './RouterDialog';
 import RouterLoadFn from './RouterLoadFn';
 import RouterFnValue from './RouterFnValue';
 
@@ -159,8 +160,7 @@ export const crDialog = (
 
   _modifyDialogPropsByLoadId(dialogProps, loadId)
 
-  return RouterDialog
-    .getDialog(_dialogType)
+  return getDialog(_dialogType)
     .then(Comp =>
        createElement(Comp, {
           ...dialogProps,
@@ -186,8 +186,7 @@ export const crDialog = (
 //option
 export const crOptionDialog = ({
   dialogType
-}) => RouterDialog
-  .getDialog(dialogType)
+}) => getDialog(dialogType)
   .then(Comp =>
      createElement(Comp, {key: dialogType})
    );

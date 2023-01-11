@@ -11,7 +11,7 @@ import {
 } from '../../constants/BrowserType';
 
 import { loadModalDialogs } from '../../components/dialogs/RouterModalDialog';
-import RouterDialog from '../logic/RouterDialog';
+import { loadDialogs } from '../logic/RouterDialog';
 
 import { fetchJson } from '../../utils/fnFetch';
 import onCatch from '../logic/onCatch';
@@ -68,7 +68,7 @@ BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function(option={}){
     } else {
       Promise.all([
         loadModalDialogs(bT),
-        RouterDialog.loadDialogs(bT)
+        loadDialogs(bT)
       ])
       .then(() => crAsyncBrowser(config))
       .then(elBrowser => {

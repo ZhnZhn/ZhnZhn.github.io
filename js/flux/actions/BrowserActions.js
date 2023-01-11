@@ -9,7 +9,7 @@ var _Factory = require("../logic/Factory");
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 var _BrowserType = require("../../constants/BrowserType");
 var _RouterModalDialog = require("../../components/dialogs/RouterModalDialog");
-var _RouterDialog = _interopRequireDefault(require("../logic/RouterDialog"));
+var _RouterDialog = require("../logic/RouterDialog");
 var _fnFetch = require("../../utils/fnFetch");
 var _onCatch = _interopRequireDefault(require("../logic/onCatch"));
 const BAT_SHOW_BROWSER_DYNAMIC = 'showBrowserDynamic';
@@ -72,7 +72,7 @@ BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function (option) {
     if (_ChartStore.default.getBrowserMenu(bT)) {
       this.done(_option);
     } else {
-      Promise.all([(0, _RouterModalDialog.loadModalDialogs)(bT), _RouterDialog.default.loadDialogs(bT)]).then(() => (0, _Factory.crAsyncBrowser)(config)).then(elBrowser => {
+      Promise.all([(0, _RouterModalDialog.loadModalDialogs)(bT), (0, _RouterDialog.loadDialogs)(bT)]).then(() => (0, _Factory.crAsyncBrowser)(config)).then(elBrowser => {
         this.init(elBrowser, config);
       }).catch(() => {
         this.failed({

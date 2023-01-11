@@ -20,7 +20,8 @@ const _router = {
   _loadGD(){
     /*eslint-disable no-undef */
     if ( process.env.NODE_ENV === '_development' ) {
-      return this.GD = import("js/components/dialogs/GeneralDialogs.js")
+      //
+      return import("js/components/dialogs/GeneralDialogs.js")
         .then(module => this.GD = _resolve(module.default))
         .catch(err => console.log(MSG_OFFLINE));
    /*eslint-enable no-undef */
@@ -66,7 +67,8 @@ const _router = {
   _loadUN() {
      /*eslint-disable no-undef */
      if ( process.env.NODE_ENV === '_development' ) {
-       return this.UN = import("js/components/uncomtrade/UnDialogs.js")
+       //
+       return import("js/components/uncomtrade/UnDialogs.js")
          .then(module => this.UN = _resolve(module.default))
          .catch(err => console.log(MSG_OFFLINE));
     /*eslint-enable no-undef */
@@ -215,18 +217,15 @@ const _router = {
 
 }
 
-const RouterDialog = {
-  getDialog(type){
-    return Promise.resolve(
-      (type && _router[type])
-      || _router.DF
-    );
-  },
+export const getDialog = (
+  type
+) => _resolve(
+  (type && _router[type])
+  || _router.DF
+)
 
-  loadDialogs(browserType) {
-    _router.loadDialogs(browserType)
-  }
+export const loadDialogs = (
+  browserType
+) => {
+  _router.loadDialogs(browserType)
 }
-
-
-export default RouterDialog

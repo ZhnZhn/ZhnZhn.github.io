@@ -1,6 +1,7 @@
 export {
   Component,
   createRef,
+  createElement,
   cloneElement,
 
   createContext,

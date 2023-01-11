@@ -5,8 +5,8 @@ exports.__esModule = true;
 exports.crOptionDialog = exports.crDialog = exports.crAsyncBrowser = void 0;
 var _fBrowser = require("./fBrowser");
 exports.crAsyncBrowser = _fBrowser.crAsyncBrowser;
-var _react = require("react");
-var _RouterDialog = _interopRequireDefault(require("./RouterDialog"));
+var _uiApi = require("../../components/uiApi");
+var _RouterDialog = require("./RouterDialog");
 var _RouterLoadFn = _interopRequireDefault(require("./RouterLoadFn"));
 var _RouterFnValue = _interopRequireDefault(require("./RouterFnValue"));
 var _Msg = require("../../constants/Msg");
@@ -117,7 +117,7 @@ const crDialog = (browserType, dialogConf) => {
     }),
     onShow = _ChartActions.ChartActions[_ChartActions.CHAT_SHOW].bind(null, itemKey, browserType, dialogConf);
   _modifyDialogPropsByLoadId(dialogProps, loadId);
-  return _RouterDialog.default.getDialog(_dialogType).then(Comp => /*#__PURE__*/(0, _react.createElement)(Comp, {
+  return (0, _RouterDialog.getDialog)(_dialogType).then(Comp => (0, _uiApi.createElement)(Comp, {
     ...dialogProps,
     //initFromDate, initToDate, onTestDate,
     //errNotYmdOrEmpty, isYmdOrEmpty
@@ -143,7 +143,7 @@ const crOptionDialog = _ref4 => {
   let {
     dialogType
   } = _ref4;
-  return _RouterDialog.default.getDialog(dialogType).then(Comp => /*#__PURE__*/(0, _react.createElement)(Comp, {
+  return (0, _RouterDialog.getDialog)(dialogType).then(Comp => (0, _uiApi.createElement)(Comp, {
     key: dialogType
   }));
 };
