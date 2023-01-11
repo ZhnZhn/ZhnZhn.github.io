@@ -25,8 +25,7 @@ import ReloadDialog from './ReloadDialog';
 import InfoDialog from './InfoDialog';
 import AlertDialog from './AlertDialog';
 import DescriptionDialog from './DescriptionDialog';
-import ColumnRangeDialog from './ColumnRangeDialog'
-import ZoomDialog from './ZoomDialog'
+import ZoomDialog from './ZoomDialog';
 import SettingsDialog from '../header/SettingsDialog';
 import AddToWatchDialog from '../watch-browser/AddToWatchDialog';
 
@@ -41,7 +40,6 @@ const _router = {
   [MDT_INFO]: InfoDialog,
   [MDT_ALERT]: AlertDialog,
   [MDT_DESCRIPTION]: DescriptionDialog,
-  [MDT_COLUMN_RANGE]: ColumnRangeDialog,
   [MDT_ZOOM]: ZoomDialog,
   [MDT_SETTINGS]: SettingsDialog,
   [MDT_ADD_TO_WATCH]: AddToWatchDialog,
@@ -72,6 +70,9 @@ const _router = {
   },
   get [MDT_STOCKS_BY_SECTOR]() {
     return this.getGMD().then(D => D.SbsDialog);
+  },
+  get [MDT_COLUMN_RANGE]() {
+    return this.getGMD().then(D => D.CrDialog);
   },
 
   _loadWL(){

@@ -1,10 +1,15 @@
-import { Component, createRef } from 'react'
+import { 
+  Component,
+  createRef,
+  getInputValue
+} from '../uiApi';
 
 import { columnRange } from '../../charts/seriaFns';
 
-import FlatButton from '../zhn-m/FlatButton';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import D from './DialogCell'
+import FlatButton from '../zhn-m/FlatButton';
+import RowInputText from '../dialogs/RowInputText';
+import RowInputColor from '../dialogs/RowInputColor';
 
 const S_TEXT = {
   padding: '16px 0 0 16px',
@@ -29,7 +34,8 @@ const SERIA_OPTION = {
 
 // [n1,n2,fromIndex,toIndex]
 const _getNames = s => {
-  const n1 = s[0].name, n2 = s[1].name;
+  const n1 = s[0].name
+  , n2 = s[1].name;
   return n1 <= n2
     ? [n1, n2, 0, 1]
     : [n2, n1, 1, 0];
@@ -40,7 +46,10 @@ const _getColor = (
   index
 ) => series[index].color;
 
-const _setRadius = (value, seria) => {
+const _setRadius = (
+  value,
+  seria
+) => {
   const { options } = seria;
   options.marker.radius = value
   seria.update(options, false)
@@ -57,9 +66,9 @@ const _fHeValue = (
   }
 }
 
-const _getValue = ref => ref.current.getValue();
-
-const _crSeriaOptions = (pointWidth) => ({
+const _crSeriaOptions = (
+  pointWidth
+) => ({
   ...SERIA_OPTION,
   ...{ pointWidth }
 });
@@ -114,9 +123,9 @@ class ColumnRangeDialog extends Component {
     , _s2 = _series[_toIndex]
     , _d = columnRange(_s1.data, _s2.data);
 
-     this._heWidth(_getValue(this._refW))
-     this._heRadius1(_getValue(this._refR1))
-     this._heRadius2(_getValue(this._refR2))
+     this._heWidth(getInputValue(this._refW))
+     this._heRadius1(getInputValue(this._refR1))
+     this._heRadius2(getInputValue(this._refR2))
 
      _setRadius(this._r1, _s1)
      _setRadius(this._r2, _s2)
@@ -166,14 +175,14 @@ class ColumnRangeDialog extends Component {
           Connect dots series by column range?
         </div>
         <div style={S_ROW}>
-          <D.RowInputColor
+          <RowInputColor
             style={S_INLINE}
             captionStyle={S_CAPTION_1}
             caption="Color"
             initValue={c1}
             onEnter={this._heColor}
           />
-          <D.RowInputText
+          <RowInputText
              ref={this._refW}
              styleRoot={S_INLINE}
              styleCaption={S_CAPTION_1}
@@ -188,7 +197,7 @@ class ColumnRangeDialog extends Component {
           />
         </div>
         <div style={S_ROW}>
-          <D.RowInputText
+          <RowInputText
              ref={this._refR1}
              styleRoot={S_INLINE}
              styleCaption={{...S_CAPTION_2, ...{ color: c1 }}}
@@ -198,7 +207,7 @@ class ColumnRangeDialog extends Component {
              type="number"
              maxLength={2}
           />
-          <D.RowInputText
+          <RowInputText
              ref={this._refR2}
              styleRoot={S_INLINE}
              styleCaption={{...S_CAPTION_2, ...{ color: c2 }}}

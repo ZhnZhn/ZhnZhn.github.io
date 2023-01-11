@@ -10,7 +10,6 @@ var _ReloadDialog = _interopRequireDefault(require("./ReloadDialog"));
 var _InfoDialog = _interopRequireDefault(require("./InfoDialog"));
 var _AlertDialog = _interopRequireDefault(require("./AlertDialog"));
 var _DescriptionDialog = _interopRequireDefault(require("./DescriptionDialog"));
-var _ColumnRangeDialog = _interopRequireDefault(require("./ColumnRangeDialog"));
 var _ZoomDialog = _interopRequireDefault(require("./ZoomDialog"));
 var _SettingsDialog = _interopRequireDefault(require("../header/SettingsDialog"));
 var _AddToWatchDialog = _interopRequireDefault(require("../watch-browser/AddToWatchDialog"));
@@ -25,7 +24,6 @@ const _router = {
   [_ModalDialogType.MDT_INFO]: _InfoDialog.default,
   [_ModalDialogType.MDT_ALERT]: _AlertDialog.default,
   [_ModalDialogType.MDT_DESCRIPTION]: _DescriptionDialog.default,
-  [_ModalDialogType.MDT_COLUMN_RANGE]: _ColumnRangeDialog.default,
   [_ModalDialogType.MDT_ZOOM]: _ZoomDialog.default,
   [_ModalDialogType.MDT_SETTINGS]: _SettingsDialog.default,
   [_ModalDialogType.MDT_ADD_TO_WATCH]: _AddToWatchDialog.default,
@@ -49,6 +47,9 @@ const _router = {
   },
   get [_ModalDialogType.MDT_STOCKS_BY_SECTOR]() {
     return this.getGMD().then(D => D.SbsDialog);
+  },
+  get [_ModalDialogType.MDT_COLUMN_RANGE]() {
+    return this.getGMD().then(D => D.CrDialog);
   },
   _loadWL() {
     /*eslint-disable no-undef */
