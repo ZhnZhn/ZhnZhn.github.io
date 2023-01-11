@@ -1,7 +1,9 @@
 import CeDialog from './CustomizeExportDialog';
+import SbsDialog from './StocksBySectorDialog';
 
 const GeneralModalDialogs = {
-  CeDialog
+  CeDialog,
+  SbsDialog
 }
 
 export default GeneralModalDialogs

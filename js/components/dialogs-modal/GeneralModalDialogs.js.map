@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs-modal/GeneralModalDialogs.js"
+ ],
+ "file": "../../../src/components/dialogs-modal/GeneralModalDialogs.js",
+ "names": [
+  "GeneralModalDialogs",
+  "CeDialog",
+  "SbsDialog"
+ ],
+ "mappings": ";;;;;AAAA;AACA;AAEA,MAAMA,mBAAmB,GAAG;EAC1BC,QAAQ,EAARA,8BAAQ;EACRC,SAAS,EAATA;AACF,CAAC;AAAA,eAEcF,mBAAmB;AAAA"
+}
