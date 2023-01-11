@@ -10,8 +10,7 @@ import {
   CAT_SHOW_MODAL_DIALOG
 } from '../../flux/actions/ComponentActions';
 import ModalDialogContainer from '../zhn-containers/ModalDialogContainer';
-
-import RouterModalDialog from './RouterModalDialog';
+import { getModalDialog } from './RouterModalDialog';
 
 const _setTypeTo = (
   prevState,
@@ -70,7 +69,7 @@ const DialogContainer = () => {
             ))
           })
       } else {
-        RouterModalDialog.getDialog(type)
+        getModalDialog(type)
           .then(comp => setState(prevState => {
               prevState.dialogs.push({ type, comp })
               prevState.inits[type] = true

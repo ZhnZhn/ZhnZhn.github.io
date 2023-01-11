@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.default = void 0;
+exports.loadModalDialogs = exports.getModalDialog = void 0;
 var _BrowserType = require("../../constants/BrowserType");
 var _ModalDialogType = require("../../constants/ModalDialogType");
 var _AskDialog = _interopRequireDefault(require("./AskDialog"));
@@ -20,6 +20,7 @@ var _PasteToModalDialog = _interopRequireDefault(require("../dialogs-modal/Paste
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 const MSG_OFFLINE = 'It seems you are offline';
+const _resolve = Promise.resolve.bind(Promise);
 const _router = {
   [_ModalDialogType.MDT_ASK]: _AskDialog.default,
   [_ModalDialogType.MDT_RELOAD]: _ReloadDialog.default,
@@ -36,22 +37,25 @@ const _router = {
   _loadWL() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
-      this.WL = Promise.resolve().then(() => _interopRequireWildcard(require("js/components/watch-browser/ModalDialogs.js"))).then(module => module.default).catch(err => console.log(MSG_OFFLINE));
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/watch-browser/ModalDialogs.js"))).then(module => this.WL = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     } else {
-      this.WL = Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "watch-dialogs" */
+      return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "watch-dialogs" */
       /* webpackMode: "lazy" */
-      "../../components/watch-browser/ModalDialogs"))).then(module => module.default).catch(err => console.log(MSG_OFFLINE));
+      "../../components/watch-browser/ModalDialogs"))).then(module => this.WL = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
     }
   },
+  getWL() {
+    return this.WL || this._loadWL();
+  },
   get [_ModalDialogType.MDT_LOAD_ITEM]() {
-    return this.WL.then(D => D.LoadItem);
+    return this.getWL().then(D => D.LoadItem);
   },
   get [_ModalDialogType.MDT_EDIT_WATCH_GROUP]() {
-    return this.WL.then(D => D.EditGroup);
+    return this.getWL().then(D => D.EditGroup);
   },
   get [_ModalDialogType.MDT_EDIT_WATCH_LIST]() {
-    return this.WL.then(D => D.EditList);
+    return this.getWL().then(D => D.EditList);
   },
   loadDialogs(id) {
     switch (id) {
@@ -63,14 +67,10 @@ const _router = {
     }
   }
 };
-const RouterModalDialog = {
-  getDialog(id) {
-    return Promise.resolve(_router[id]);
-  },
-  loadDialogs(id) {
-    _router.loadDialogs(id);
-  }
+const getModalDialog = id => _resolve(_router[id]);
+exports.getModalDialog = getModalDialog;
+const loadModalDialogs = id => {
+  _router.loadDialogs(id);
 };
-var _default = RouterModalDialog;
-exports.default = _default;
+exports.loadModalDialogs = loadModalDialogs;
 //# sourceMappingURL=RouterModalDialog.js.map

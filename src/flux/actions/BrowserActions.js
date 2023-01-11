@@ -3,12 +3,14 @@ import Reflux from 'reflux-core';
 import Store from '../stores/ChartStore';
 import { crAsyncBrowser } from '../logic/Factory';
 import BrowserConfig from '../../constants/BrowserConfig';
+
 import {
   BT_QUANDL,
   BT_EUROSTAT,
   BT_WATCH_LIST
 } from '../../constants/BrowserType';
-import RouterModalDialog from '../../components/dialogs/RouterModalDialog';
+
+import { loadModalDialogs } from '../../components/dialogs/RouterModalDialog';
 import RouterDialog from '../logic/RouterDialog';
 
 import { fetchJson } from '../../utils/fnFetch';
@@ -65,7 +67,7 @@ BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function(option={}){
       this.done(_option)
     } else {
       Promise.all([
-        RouterModalDialog.loadDialogs(bT),
+        loadModalDialogs(bT),
         RouterDialog.loadDialogs(bT)
       ])
       .then(() => crAsyncBrowser(config))

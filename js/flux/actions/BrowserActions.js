@@ -1,28 +1,17 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.BrowserActions = exports.BAT_UPDATE_WATCH_BROWSER = exports.BAT_UPDATE_BROWSER_MENU = exports.BAT_SHOW_BROWSER_DYNAMIC = exports.BAT_LOAD_BROWSER_FAILED = exports.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED = exports.BAT_LOAD_BROWSER_DYNAMIC = exports.BAT_INIT_BROWSER_DYNAMIC = void 0;
-
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
-
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
-
 var _Factory = require("../logic/Factory");
-
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
-
 var _BrowserType = require("../../constants/BrowserType");
-
-var _RouterModalDialog = _interopRequireDefault(require("../../components/dialogs/RouterModalDialog"));
-
+var _RouterModalDialog = require("../../components/dialogs/RouterModalDialog");
 var _RouterDialog = _interopRequireDefault(require("../logic/RouterDialog"));
-
 var _fnFetch = require("../../utils/fnFetch");
-
 var _onCatch = _interopRequireDefault(require("../logic/onCatch"));
-
 const BAT_SHOW_BROWSER_DYNAMIC = 'showBrowserDynamic';
 exports.BAT_SHOW_BROWSER_DYNAMIC = BAT_SHOW_BROWSER_DYNAMIC;
 const BAT_INIT_BROWSER_DYNAMIC = 'initBrowserDynamic';
@@ -37,7 +26,6 @@ const BAT_UPDATE_WATCH_BROWSER = 'updateWatchBrowser';
 exports.BAT_UPDATE_WATCH_BROWSER = BAT_UPDATE_WATCH_BROWSER;
 const BAT_UPDATE_BROWSER_MENU = 'updateBrowserMenu';
 exports.BAT_UPDATE_BROWSER_MENU = BAT_UPDATE_BROWSER_MENU;
-
 const BA = _refluxCore.default.createActions({
   [BAT_SHOW_BROWSER_DYNAMIC]: {
     children: ['done', 'init', 'failed']
@@ -48,57 +36,54 @@ const BA = _refluxCore.default.createActions({
   },
   [BAT_UPDATE_WATCH_BROWSER]: {}
 });
-
 const ERR_LOAD = "Failed to load browser.",
-      ERR_FOUND = "Browser hasn't found.",
-      ERR_ITEM = "Browser",
-      _fetchSourceMenu = _ref => {
-  let {
-    json,
-    option,
-    onCompleted
-  } = _ref;
-  const {
-    browserType
-  } = option;
-  onCompleted({
-    json,
-    browserType
-  });
-};
-
+  ERR_FOUND = "Browser hasn't found.",
+  ERR_ITEM = "Browser",
+  _fetchSourceMenu = _ref => {
+    let {
+      json,
+      option,
+      onCompleted
+    } = _ref;
+    const {
+      browserType
+    } = option;
+    onCompleted({
+      json,
+      browserType
+    });
+  };
 const _crErr = (alertDescr, alertItemId) => ({
   alertDescr,
   alertItemId
 });
-
 BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function (option) {
   if (option === void 0) {
     option = {};
   }
-
   const _option = typeof option === 'string' ? {
-    browserType: option
-  } : option,
-        {
-    browserType: bT
-  } = _option,
-        config = _BrowserConfig.default[bT];
-
+      browserType: option
+    } : option,
+    {
+      browserType: bT
+    } = _option,
+    config = _BrowserConfig.default[bT];
   if (bT && config) {
     if (_ChartStore.default.getBrowserMenu(bT)) {
       this.done(_option);
     } else {
-      Promise.all([_RouterModalDialog.default.loadDialogs(bT), _RouterDialog.default.loadDialogs(bT)]).then(() => (0, _Factory.crAsyncBrowser)(config)).then(elBrowser => {
+      Promise.all([(0, _RouterModalDialog.loadModalDialogs)(bT), _RouterDialog.default.loadDialogs(bT)]).then(() => (0, _Factory.crAsyncBrowser)(config)).then(elBrowser => {
         this.init(elBrowser, config);
       }).catch(() => {
-        this.failed({ ..._option,
+        this.failed({
+          ..._option,
           ..._crErr(ERR_LOAD, config.caption)
         });
       });
     }
   } else {
-    this.failed({ ..._option,
+    this.failed({
+      ..._option,
       ..._crErr(ERR_FOUND, ERR_ITEM)
     });
   }
