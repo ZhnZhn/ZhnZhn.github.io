@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/isTypeFn.js"
+ ],
+ "file": "../../src/utils/isTypeFn.js",
+ "names": [
+  "isTypeNumber",
+  "n",
+  "isNaN",
+  "Number",
+  "isInt",
+  "isInteger",
+  "isStr",
+  "str",
+  "isUndef",
+  "v"
+ ],
+ "mappings": ";;;;AACO,MAAMA,YAAY,GAAGC,CAAC,IAAI,OAAOA,CAAC,KAAK,QAAQ;AAAA;AAC/C,MAAMC,KAAK,GAAGC,MAAM,CAACD,KAAK;AAAA;AAC1B,MAAME,KAAK,GAAGD,MAAM,CAACE,SAAS;AAAA;AAE9B,MAAMC,KAAK,GAAGC,GAAG,IAAI,OAAOA,GAAG,KAAK,QAAQ;AAAA;AAC5C,MAAMC,OAAO,GAAGC,CAAC,IAAI,OAAOA,CAAC,KAAK,WAAW;AAAA"
+}

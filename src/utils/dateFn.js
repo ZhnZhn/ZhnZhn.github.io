@@ -1,35 +1,36 @@
+import {
+  isTypeNumber,
+  isNaN,
+  isInt,
+  isStr,
+  isUndef
+} from './isTypeFn';
 
 const MIN_YEAR = 1990;
 const DF_FORECAST_DATE = 0;
 const DAY_IN_MLS = 1000*60*60*24;
 let _currentYear;
 
-const _isNumber = n => typeof n === 'number';
-const _isNaN = Number.isNaN;
-const _isInt = Number.isInteger;
-const _isStr = str => typeof str === 'string';
-const _isUndef = v => typeof v === 'undefined';
 const _pad2 = n => n<10 ? '0'+n : ''+n;
-
 const _toIntMonth = str => parseInt(str, 10)-1;
 const _splitDateStr = str => (str || '')
   .toString()
   .split('-');
 
-const _isLikelyQuarter = str => _isStr(str)
+const _isLikelyQuarter = str => isStr(str)
   && str[0].toUpperCase() === 'Q';
 
 const _notInIntervalStrict = (
   n,
   min,
   max
-) => _isNaN(n) || (n<min || n>max);
+) => isNaN(n) || (n<min || n>max);
 const _notInLengthMinMax = (
   str,
   length,
   min,
   max
-) => (_isStr(str) && str.length !== length)
+) => (isStr(str) && str.length !== length)
  || _notInIntervalStrict(parseInt(str, 10), min, max);
 
 const _isYmd = (
@@ -80,7 +81,7 @@ export const isYmd = (
   nForecastDate,
   minYear
 ) => {
-  if (!_isStr(str)) {
+  if (!isStr(str)) {
 	 return false;
 	}
 	const _str = str.trim();
@@ -118,7 +119,7 @@ export const getYmdhmUTC = (date) => {
 }
 
 export const mlsToDmy = (mlsUTC) => {
-	if ( !(_isNumber(mlsUTC) && isFinite(mlsUTC)) ) {
+	if ( !(isTypeNumber(mlsUTC) && isFinite(mlsUTC)) ) {
 		return '';
 	}
 	const d = new Date(mlsUTC);
@@ -164,13 +165,13 @@ export const ymdToUTC = (
 
   if (_len === 2 && mStr !== ''){
 	 const _m = parseInt(mStr, 10);
-	 if (!_isNaN(_m)) {
+	 if (!isNaN(_m)) {
 			const _d = _getDaysInYm(yearStr, _m);
 	    return Date.UTC(yearStr, _m - 1, _d);
 	 // YYYY-Q format
 	  } else if (_isLikelyQuarter(_arr[1])) {
 		  const _q = parseInt(_arr[1][1], 10);
-      if (_isNaN(_q)) { return _q; }
+      if (isNaN(_q)) { return _q; }
       const _d = _getDaysInYm(_arr[0], _q*3);
 			return Date.UTC( _arr[0], _q*3 - 1, _d);
 	 } else {
@@ -181,7 +182,7 @@ export const ymdToUTC = (
   if ( _len === 1) {
    const { y=0 } = option
    , _y = parseInt(yearStr, 10) - y;
-	 return !_isNaN(_y)
+	 return !isNaN(_y)
      ? Date.UTC(_y, 11, 31)
      : _y;
 	}
@@ -207,7 +208,7 @@ export const ymdhmsToUTC = (
 }
 
 export const getUTCTime = (ms) => {
-	if (!_isInt(ms)) {
+	if (!isInt(ms)) {
    return '';
   }
   const _d = new Date(ms);
@@ -218,7 +219,7 @@ export const addToDmy = (dmy, month) => {
 	 if (!isDmy(dmy))	{
 		 return new Date(0);
 	 }
-	 if (!_isInt(month))	{
+	 if (!isInt(month))	{
 		 return new Date(dmyToUTC(dmy));
 	 }
    const _to = new Date(dmyToUTC(dmy));
@@ -236,11 +237,11 @@ export const getDaysFromYmd = ymd => {
 }
 
 export const monthIndex = str => {
-  if (!_isStr(str)) {
+  if (!isStr(str)) {
    return -1;
   }
   const _monthIndex = MONTH_HP[String(str).toLowerCase()];
-  return _isUndef(_monthIndex)
+  return isUndef(_monthIndex)
    ? -1
    : _monthIndex;
 }
