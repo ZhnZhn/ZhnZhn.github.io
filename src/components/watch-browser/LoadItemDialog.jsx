@@ -14,7 +14,7 @@ import {
   getToDate,
   isYmd,
   mlsToDmy
-} from '../../utils/DateUtils';
+} from '../../utils/dateFn';
 import formatNumber from '../../utils/formatNumber';
 
 import { isWideWidth } from '../has';

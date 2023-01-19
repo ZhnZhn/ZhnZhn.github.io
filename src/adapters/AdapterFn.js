@@ -8,7 +8,7 @@ import {
   getV
 } from '../utils/getPropertyFn';
 
-import { mlsToDmy } from '../utils/DateUtils';
+import { mlsToDmy } from '../utils/dateFn';
 export {
   ymdToUTC,
   ymdhmsToUTC,
@@ -17,8 +17,9 @@ export {
   getYear,
   getCurrentYear,
   getDaysFromYmd,
+  mlsToDmy,
   monthIndex
-} from '../utils/DateUtils';
+} from '../utils/dateFn';
 import _toUpperCaseFirst from '../utils/toUpperCaseFirst'
 import { crValueMoving as _crVm } from '../math/mathFn'
 export {

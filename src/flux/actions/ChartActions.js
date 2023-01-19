@@ -1,6 +1,6 @@
 import Reflux from 'reflux-core';
 
-import { getFromDate } from '../../utils/DateUtils';
+import { getFromDate } from '../../utils/dateFn';
 import {
   setAlertMsg,
   ERR_ALREADY_EXIST,

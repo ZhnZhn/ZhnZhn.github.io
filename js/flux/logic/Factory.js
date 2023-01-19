@@ -13,30 +13,30 @@ var _Msg = require("../../constants/Msg");
 var _LoadType = require("../../constants/LoadType");
 var _ComponentActions = require("../actions/ComponentActions");
 var _ChartActions = require("../actions/ChartActions");
-var _DateUtils = require("../../utils/DateUtils");
+var _dateFn = require("../../utils/dateFn");
 var _has = require("../../components/has");
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 const _isArr = Array.isArray,
   _assign = Object.assign,
-  _initFromDate = (0, _DateUtils.getFromDate)(2),
-  initToDate = (0, _DateUtils.getToDate)();
+  _initFromDate = (0, _dateFn.getFromDate)(2),
+  initToDate = (0, _dateFn.getToDate)();
 const _crFnValue = (valueFn, valueFnPrefix) => valueFn ? valueFnPrefix ? _RouterFnValue.default[valueFn].bind(null, valueFnPrefix) : _RouterFnValue.default[valueFn] : void 0;
 const _crInitFromDate = _ref => {
   let {
     isFdw,
     nInitFromDate
   } = _ref;
-  return isFdw && !_has.HAS_WIDE_WIDTH ? _initFromDate : nInitFromDate ? (0, _DateUtils.getFromDate)(nInitFromDate) : _initFromDate;
+  return isFdw && !_has.HAS_WIDE_WIDTH ? _initFromDate : nInitFromDate ? (0, _dateFn.getFromDate)(nInitFromDate) : _initFromDate;
 };
 const _crDateProps = dialogProps => {
   const _props = dialogProps.isFd ? {
     errNotYmdOrEmpty: _Msg.YMD_DATE_OR_EMPTY,
-    isYmdOrEmpty: _DateUtils.isYmdOrEmpty
+    isYmdOrEmpty: _dateFn.isYmdOrEmpty
   } : void 0;
   return {
     initFromDate: _crInitFromDate(dialogProps),
     initToDate,
-    onTestDate: _DateUtils.isYmd,
+    onTestDate: _dateFn.isYmd,
     ..._props
   };
 };

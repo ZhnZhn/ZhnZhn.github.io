@@ -7,7 +7,7 @@ import {
   focusRefElement
 } from '../uiApi';
 
-import { isDmy } from '../../utils/DateUtils';
+import { isDmy } from '../../utils/dateFn';
 import formatAllNumber from '../../utils/formatAllNumber'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'

@@ -29,7 +29,7 @@ import {
   getToDate,
   isYmd,
   isYmdOrEmpty
-} from '../../utils/DateUtils';
+} from '../../utils/dateFn';
 import { HAS_WIDE_WIDTH } from '../../components/has';
 import ChartStore from '../stores/ChartStore';
 

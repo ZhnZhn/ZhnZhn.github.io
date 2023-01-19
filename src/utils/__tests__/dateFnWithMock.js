@@ -2,17 +2,17 @@ import {
   getFromDate,
   getToDate,
   getDaysFromYmd
-} from '../DateUtils';
+} from '../dateFn';
 
 import mockDateBeforeAll from './mockDateBeforeAll'
 
-describe('DateUtilsWithMock', ()=>{
+describe('dateFnWithMock', ()=>{
   test('', ()=>expect('').toBe(''))
 })
 
-const DateUtilsWithMock = () => {
+const dateFnWithMock = () => {
   describe('getFromDate', ()=>{
-    const fn = getFromDate
+    const fn = getFromDate;
     //2020-01-01 12:00:01
     mockDateBeforeAll(2020,0,1,12,0,1)
 
@@ -26,7 +26,7 @@ const DateUtilsWithMock = () => {
     })
 
     test('getDaysFromYmd should return number of days to current Date', ()=>{
-      const fn = getDaysFromYmd
+      const fn = getDaysFromYmd;
       expect(fn('2020-01-01')).toBe(1)
       expect(fn('2019-12-31')).toBe(2)
       expect(fn('2019-12-30')).toBe(3)
@@ -34,4 +34,4 @@ const DateUtilsWithMock = () => {
   })
 }
 
-export default DateUtilsWithMock
+export default dateFnWithMock

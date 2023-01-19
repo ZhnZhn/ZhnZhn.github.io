@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useFocus = _interopRequireDefault(require("../hooks/useFocus"));
-var _DateUtils = require("../../utils/DateUtils");
+var _dateFn = require("../../utils/dateFn");
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _DivCompareTo = _interopRequireDefault(require("../items/DivCompareTo"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -31,7 +31,7 @@ const ModalCompareTo = _ref => {
   const _refInput = (0, _useFocus.default)(isShow),
     [msgErr, setMsgErr] = (0, _uiApi.useState)(''),
     _onEnterDateTo = (0, _uiApi.useCallback)(dateTo => {
-      if ((0, _DateUtils.isDmy)(dateTo)) {
+      if ((0, _dateFn.isDmy)(dateTo)) {
         const _r = onCompareTo(dateTo),
           _msgErr = _r !== 0 ? "No " + _r + " data for " + dateTo : '';
         setMsgErr(_msgErr);
@@ -44,7 +44,7 @@ const ModalCompareTo = _ref => {
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivCompareTo.default, {
       ref: _refInput,
       msgErr: msgErr,
-      onTest: _DateUtils.isDmy,
+      onTest: _dateFn.isDmy,
       onEnter: _onEnterDateTo
     })
   });

@@ -1,5 +1,9 @@
-import { getDaysFromYmd } from '../../utils/DateUtils';
-import { isArr, assign, crError } from '../AdapterFn';
+import { 
+  isArr,
+  assign,
+  crError,
+  getDaysFromYmd
+} from '../AdapterFn';
 import { crPageConfig } from './fnAdapter';
 
 const API_URL = 'https://api.coingecko.com/api/v3'

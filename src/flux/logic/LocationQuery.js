@@ -1,5 +1,5 @@
 import domSanitize from '../../utils/domSanitize'
-import { getToDate } from '../../utils/DateUtils';
+import { getToDate } from '../../utils/dateFn';
 
 const _toOptions = params => {
   const _options = Object.create(null);

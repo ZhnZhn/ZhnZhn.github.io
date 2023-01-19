@@ -15,7 +15,7 @@ import {
   mlsToDmy,
   addToDmy,
   getYTDfromDmy
-} from '../../utils/DateUtils';
+} from '../../utils/dateFn';
 
 import FlatButton from '../zhn-m/FlatButton';
 import ModalDialog from '../zhn-moleculs/ModalDialog';

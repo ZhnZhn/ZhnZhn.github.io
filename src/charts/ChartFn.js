@@ -17,7 +17,7 @@ import formatNumber from '../utils/formatNumber';
 import formatAllNumber from '../utils/formatAllNumber';
 
 import { arrFactoryFindIndexByProp } from '../utils/arrFn';
-import { dmyToUTC } from '../utils/DateUtils';
+import { dmyToUTC } from '../utils/dateFn';
 
 import { fSecondYAxis } from './Chart';
 

@@ -4,7 +4,7 @@ import {
 } from '../uiApi';
 
 import useFocus from '../hooks/useFocus';
-import { isDmy } from '../../utils/DateUtils';
+import { isDmy } from '../../utils/dateFn';
 
 import ModalPopup from '../zhn-moleculs/ModalPopup';
 import DivCompareTo from '../items/DivCompareTo';

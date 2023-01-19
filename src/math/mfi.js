@@ -1,33 +1,46 @@
 import Big from 'big.js';
-import { ymdToUTC } from '../utils/DateUtils';
+import { ymdToUTC } from '../utils/dateFn';
 
 const _getPriceAndFlow = (point) => {
   const close = point[4]
   , high = point[2] || close
-  , low  = point[3] || close
-  , bTp = Big(high).plus(low).plus(close).div(3)
+  , low = point[3] || close
+  , bTp = Big(high)
+     .plus(low)
+     .plus(close)
+     .div(3)
   , bRmf = bTp.times(point[5])
-  , isFullData = (point[2] && point[3])
-       ? true : false;
-  return [bTp, bRmf, isFullData];
+  , isFullData = !!(point[2] && point[3]);
+  return [
+    bTp,
+    bRmf,
+    isFullData
+  ];
 };
 
 const _isNumber = n => typeof n === 'number'
   && n-n === 0;
 
-const _crMfiPoint = (p, y, isNegative, bTp, bRmf) => ({
-  x : _isNumber(p) ? p : ymdToUTC(p),
-  y : y,
-  isNegative : isNegative,
-  tp : parseFloat(bTp.toFixed(4)),
-  rmf : parseFloat(bRmf.toFixed(4))
+const _crMfiPoint = (
+  p,
+  y,
+  isNegative,
+  bTp,
+  bRmf
+) => ({
+  x: _isNumber(p) ? p : ymdToUTC(p),
+  y,
+  isNegative,
+  tp: parseFloat(bTp.toFixed(4)),
+  rmf: parseFloat(bRmf.toFixed(4))
 });
 
-const mfi = (data, period) => {
-
+const mfi = (
+  data,
+  period
+) => {
   const dataMfi = []
   , nPeriod = parseFloat(period) + 1;
-
   let bPositiveFlow = Big(0)
   , bNegativeFlow = Big('0.0001')
   , isNegative = false

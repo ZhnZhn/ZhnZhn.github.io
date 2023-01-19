@@ -1,4 +1,4 @@
-import { mlsToDmy } from '../../utils/DateUtils';
+import { mlsToDmy } from '../../utils/dateFn';
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 import SubMenuItem from './SubMenuItem'

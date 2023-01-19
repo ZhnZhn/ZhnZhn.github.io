@@ -1,20 +1,15 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _DateUtils = require("../DateUtils");
-
-var _DateUtilsWithMock = _interopRequireDefault(require("./DateUtilsWithMock"));
-
+var _dateFn = require("../dateFn");
+var _dateFnWithMock = _interopRequireDefault(require("./dateFnWithMock"));
 // DateUtils configuration consts
 const MIN_YEAR = 1990;
-
 const _compose = fns => fns.reduce((f, g) => function () {
   return f(g(...arguments));
 });
-
 describe('isYmd YYYY-MM-DD', () => {
-  const fn = _DateUtils.isYmd;
+  const fn = _dateFn.isYmd;
   test('should return true for valid YYYY-MM-DD', () => {
     expect(fn("2010-01-10")).toBe(true);
     expect(fn("2010-10-01")).toBe(true);
@@ -45,7 +40,7 @@ describe('isYmd YYYY-MM-DD', () => {
   });
 });
 describe('isYmdOrEmty YYYY-MM-DD', () => {
-  const fn = _DateUtils.isYmdOrEmpty;
+  const fn = _dateFn.isYmdOrEmpty;
   test('should return is valid date or empty', () => {
     expect(fn('')).toBe(true);
     expect(fn("2010-01-10")).toBe(true);
@@ -59,7 +54,7 @@ describe('isYmdOrEmty YYYY-MM-DD', () => {
   });
 });
 describe('isDmyPeriod', () => {
-  const fn = _DateUtils.isDmyPeriod;
+  const fn = _dateFn.isDmyPeriod;
   test('should return correct boolean', () => {
     expect(fn('01-01-2010', '02-01-2010')).toBe(true);
     expect(fn('01-01-2010', '01-01-2010')).toBe(true);
@@ -67,7 +62,7 @@ describe('isDmyPeriod', () => {
   });
 });
 describe('dmyToUTC', () => {
-  const fn = _DateUtils.dmyToUTC;
+  const fn = _dateFn.dmyToUTC;
   test('should return UTC from DD-MM-YYYY', () => {
     expect(fn("10-10-2010")).toBe(Date.UTC(2010, 9, 10));
     expect(fn("01-01-2010")).toBe(Date.UTC(2010, 0, 1));
@@ -80,7 +75,7 @@ describe('dmyToUTC', () => {
   });
 });
 describe('ymdToUTC', () => {
-  const fn = _DateUtils.ymdToUTC;
+  const fn = _dateFn.ymdToUTC;
   test('should return mls UTC-0 for str YYYY-MM-DD', () => {
     expect(fn('2010-01-01')).toBe(Date.UTC(2010, 0, 1));
   });
@@ -115,9 +110,10 @@ describe('ymdToUTC', () => {
   });
 });
 describe('ymdhmsToUTC', () => {
-  const fn = _DateUtils.ymdhmsToUTC //'2010-01-01 12:00:00'
-  ,
-        UTC_MLS = 1262347200000;
+  const fn = _dateFn.ymdhmsToUTC
+    //'2010-01-01 12:00:00'
+    ,
+    UTC_MLS = 1262347200000;
   test('should retun mls UTC for str date', () => {
     expect(fn('2010-01-01 12:00:00')).toBe(UTC_MLS);
   });
@@ -137,7 +133,7 @@ describe('ymdhmsToUTC', () => {
   });
 });
 describe('formatTo', () => {
-  const fn = _DateUtils.mlsToDmy;
+  const fn = _dateFn.mlsToDmy;
   const EMPTY = '';
   test('should format to DD-MM-YYYY from ms', () => {
     expect(fn(1514764800000)).toBe('01-01-2018');
@@ -156,7 +152,7 @@ describe('formatTo', () => {
   });
 });
 describe('isDmy', () => {
-  const fn = _DateUtils.isDmy;
+  const fn = _dateFn.isDmy;
   test('should return true for str in format DD-MM-YYY', () => {
     expect(fn('10-10-2000')).toBe(true);
     expect(fn('20-01-2000')).toBe(true);
@@ -184,7 +180,7 @@ describe('isDmy', () => {
   });
 });
 describe('getUTCTime', () => {
-  const fn = _DateUtils.getUTCTime;
+  const fn = _dateFn.getUTCTime;
   test('should return correct str from ms', () => {
     expect(fn(1547205009808)).toBe('11:10');
     expect(fn(1547204900008)).toBe('11:08');
@@ -198,9 +194,8 @@ describe('getUTCTime', () => {
   });
 });
 describe('addToDmy', () => {
-  const fn = _DateUtils.addToDmy,
-        _fn = _compose([_DateUtils.mlsToDmy, date => date.getTime(), _DateUtils.addToDmy]);
-
+  const fn = _dateFn.addToDmy,
+    _fn = _compose([_dateFn.mlsToDmy, date => date.getTime(), _dateFn.addToDmy]);
   test('should return Date instance', () => {
     expect(fn('01-02-2019', -1)).toBeInstanceOf(Date);
     expect(fn('01-02-2019', 1)).toBeInstanceOf(Date);
@@ -218,14 +213,14 @@ describe('addToDmy', () => {
   });
 });
 describe('getYTDfromDmy', () => {
-  const fn = _DateUtils.getYTDfromDmy;
+  const fn = _dateFn.getYTDfromDmy;
   test('should return mls to start of year', () => {
     expect(fn('01-01-2010')).toBe(Date.UTC(2010, 0, 1));
     expect(fn('02-01-2010')).toBe(Date.UTC(2010, 0, 1));
   });
 });
 describe('getYear', () => {
-  const fn = _DateUtils.getYear;
+  const fn = _dateFn.getYear;
   test('should return YYYY from YYYY-MM-DD', () => {
     expect(fn('2010-01-01')).toBe('2010');
   });
@@ -236,7 +231,7 @@ describe('getYear', () => {
   });
 });
 describe('monthIndex', () => {
-  const fn = _DateUtils.monthIndex;
+  const fn = _dateFn.monthIndex;
   it('should return month index from 0 from str', () => {
     expect(fn('january')).toBe(0);
     expect(fn('January')).toBe(0);
@@ -255,11 +250,11 @@ describe('monthIndex', () => {
   });
 });
 describe("getYmdhms", () => {
-  const fn = _DateUtils.getYmdhmUTC;
+  const fn = _dateFn.getYmdhmUTC;
   it("should return str in format YYYY-MM-DD HH:MM UTC", () => {
     expect(fn(new Date(Date.UTC(2010, 0, 1)))).toBe('2010-01-01 00:00 UTC');
     expect(fn(new Date(Date.UTC(2010, 0, 1, 1)))).toBe('2010-01-01 01:00 UTC');
   });
 });
-(0, _DateUtilsWithMock.default)();
-//# sourceMappingURL=DateUtils.test.js.map
+(0, _dateFnWithMock.default)();
+//# sourceMappingURL=dateFn.test.js.map

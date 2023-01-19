@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-var _DateUtils = require("../../utils/DateUtils");
+var _dateFn = require("../../utils/dateFn");
 var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 var _has = require("../has");
 var _ChartActions = require("../../flux/actions/ChartActions");
@@ -39,12 +39,12 @@ const _crValue = function (x, y) {
   if (y === void 0) {
     y = '';
   }
-  return ((0, _formatNumber.default)(y) + " " + (0, _DateUtils.mlsToDmy)(x)).trim();
+  return ((0, _formatNumber.default)(y) + " " + (0, _dateFn.mlsToDmy)(x)).trim();
 };
 const HAS_WIDE_WIDTH = (0, _has.isWideWidth)(),
   DF_DATA = {},
-  DF_FROM_DATE = (0, _DateUtils.getFromDate)(2),
-  DF_TO_DATE = (0, _DateUtils.getToDate)();
+  DF_FROM_DATE = (0, _dateFn.getFromDate)(2),
+  DF_TO_DATE = (0, _dateFn.getToDate)();
 const LoadItemDialog = (0, _memoIsShow.default)(_ref => {
   let {
     isShow,
@@ -144,7 +144,7 @@ const LoadItemDialog = (0, _memoIsShow.default)(_ref => {
   }, [x, _toggleIsValue]);
   const _initFromDate = fromDate || DF_FROM_DATE,
     _initToDate = initToDate || DF_TO_DATE,
-    _onTestDate = onTestDate || _DateUtils.isYmd,
+    _onTestDate = onTestDate || _dateFn.isYmd,
     _style = isShowLabels ? S_DIALOG : S_DIALOG_SHORT,
     _value = _crValue(x, y);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {

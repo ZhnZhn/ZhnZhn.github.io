@@ -13,9 +13,9 @@ import {
   getYear,
   monthIndex,
   getYmdhmUTC
-} from '../DateUtils';
+} from '../dateFn';
 
-import DateUtilsWithMock from './DateUtilsWithMock'
+import dateFnWithMock from './dateFnWithMock';
 
 // DateUtils configuration consts
 const MIN_YEAR = 1990;
@@ -291,4 +291,4 @@ describe("getYmdhms", ()=>{
 })
 
 
-DateUtilsWithMock()
+dateFnWithMock()
