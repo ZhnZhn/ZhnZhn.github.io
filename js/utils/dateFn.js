@@ -3,10 +3,12 @@
 exports.__esModule = true;
 exports.ymdhmsToUTC = exports.ymdToUTC = exports.monthIndex = exports.mlsToDmy = exports.isYmdOrEmpty = exports.isYmd = exports.isDmyPeriod = exports.isDmy = exports.getYmdhmUTC = exports.getYear = exports.getYTDfromDmy = exports.getUTCTime = exports.getToDate = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.dmyToUTC = exports.addToDmy = void 0;
 const MIN_YEAR = 1990;
+const DF_FORECAST_DATE = 0;
 const DAY_IN_MLS = 1000 * 60 * 60 * 24;
 let _currentYear;
 const _isNumber = n => typeof n === 'number';
 const _isNaN = Number.isNaN;
+const _isInt = Number.isInteger;
 const _isStr = str => typeof str === 'string';
 const _isUndef = v => typeof v === 'undefined';
 const _pad2 = n => n < 10 ? '0' + n : '' + n;
@@ -14,17 +16,16 @@ const _toIntMonth = str => parseInt(str, 10) - 1;
 const _splitDateStr = str => (str || '').toString().split('-');
 const _isLikelyQuarter = str => _isStr(str) && str[0].toUpperCase() === 'Q';
 const _notInIntervalStrict = (n, min, max) => _isNaN(n) || n < min || n > max;
-const _notInLengthMinMax = (str, length, min, max) => _isStr(str) && str.length !== length || _notInIntervalStrict(parseInt(str, 10), min, max) ? true : false;
-const _isYmd = function (yStr, mStr, dStr, _temp) {
-  let {
-    nForecastDate = 0,
-    minYear = MIN_YEAR
-  } = _temp === void 0 ? {} : _temp;
-  const _nowYear = new Date().getFullYear();
-  if (_notInLengthMinMax(yStr, 4, minYear, _nowYear + nForecastDate) || _notInLengthMinMax(mStr, 2, 1, 12) || _notInLengthMinMax(dStr, 2, 1, 31)) {
-    return false;
+const _notInLengthMinMax = (str, length, min, max) => _isStr(str) && str.length !== length || _notInIntervalStrict(parseInt(str, 10), min, max);
+const _isYmd = function (yStr, mStr, dStr, minYear, nForecastDate) {
+  if (minYear === void 0) {
+    minYear = MIN_YEAR;
   }
-  return true;
+  if (nForecastDate === void 0) {
+    nForecastDate = DF_FORECAST_DATE;
+  }
+  const _nowYear = new Date().getFullYear();
+  return !(_notInLengthMinMax(yStr, 4, minYear, _nowYear + nForecastDate) || _notInLengthMinMax(mStr, 2, 1, 12) || _notInLengthMinMax(dStr, 2, 1, 31));
 };
 const _getDaysInYm = (y, m) => new Date(y, m, 0).getDate();
 const _getTimeUTC = d => _pad2(d.getUTCHours()) + ":" + _pad2(d.getUTCMinutes());
@@ -45,13 +46,7 @@ const MONTH_HP = {
 };
 
 //YYYY-MM-DD valid format
-const isYmd = function (str, nForecastDate, minYear) {
-  if (nForecastDate === void 0) {
-    nForecastDate = 0;
-  }
-  if (minYear === void 0) {
-    minYear = MIN_YEAR;
-  }
+const isYmd = (str, nForecastDate, minYear) => {
   if (!_isStr(str)) {
     return false;
   }
@@ -60,13 +55,10 @@ const isYmd = function (str, nForecastDate, minYear) {
     return false;
   }
   const [y, m, d] = _str.split('-');
-  return _isYmd(y, m, d, {
-    nForecastDate,
-    minYear
-  });
+  return _isYmd(y, m, d, minYear, nForecastDate);
 };
 exports.isYmd = isYmd;
-const isYmdOrEmpty = str => str === '' ? true : isYmd(str);
+const isYmdOrEmpty = str => str === '' || isYmd(str);
 exports.isYmdOrEmpty = isYmdOrEmpty;
 const getFromDate = function (yearMinus) {
   if (yearMinus === void 0) {
@@ -107,14 +99,9 @@ const dmyToUTC = str => {
 exports.dmyToUTC = dmyToUTC;
 const isDmyPeriod = (from, to) => dmyToUTC(from) <= dmyToUTC(to);
 exports.isDmyPeriod = isDmyPeriod;
-const isDmy = function (str, minYear) {
-  if (minYear === void 0) {
-    minYear = MIN_YEAR;
-  }
+const isDmy = (str, minYear) => {
   const [d, m, y] = _splitDateStr(str);
-  return _isYmd(y, m, d, {
-    minYear
-  });
+  return _isYmd(y, m, d, minYear);
 };
 exports.isDmy = isDmy;
 const ymdToUTC = function (dateStr, option) {
@@ -165,7 +152,7 @@ const ymdhmsToUTC = function (dateStr, dtDelimeter) {
 };
 exports.ymdhmsToUTC = ymdhmsToUTC;
 const getUTCTime = ms => {
-  if (!Number.isInteger(ms)) {
+  if (!_isInt(ms)) {
     return '';
   }
   const _d = new Date(ms);
@@ -176,7 +163,7 @@ const addToDmy = (dmy, month) => {
   if (!isDmy(dmy)) {
     return new Date(0);
   }
-  if (!Number.isInteger(month)) {
+  if (!_isInt(month)) {
     return new Date(dmyToUTC(dmy));
   }
   const _to = new Date(dmyToUTC(dmy));
