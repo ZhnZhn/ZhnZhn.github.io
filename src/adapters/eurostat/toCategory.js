@@ -9,11 +9,16 @@ import {
   crCategoryTooltip
 } from './EuroStatFn';
 
-const _filterZeroIf = (data, is) => is
+const _filterZeroIf = (
+  data,
+  isFilter
+) => isFilter
   ? data.map(value => value === 0 ? null : value)
   : data;
 
-const _crScatterProps = (seriaColor)  => ({
+const _crScatterProps = (
+  seriaColor
+) => ({
   type: 'scatter',
   marker: {
     fillColor: seriaColor,
@@ -22,42 +27,72 @@ const _crScatterProps = (seriaColor)  => ({
   }
 });
 
-const toCategory = {
-  createConfig: (json, option) => {
-    const { zhMapSlice:configSlice } = option;
-    return trJsonToCategory(json, configSlice)
-       .then(({ categories, data, min }) => {
-          const config = FactoryChart.createConfig(option)
-          addToCategoryConfig(config, {
-            json, option, data, categories, min
-          })
-          return config;
-       });
-  },
-
-  createSeria: (json, option, chart) => {
-    const categories = chart.options.xAxis[0].categories;
-    const {
-        isFilterZero,
-        zhMapSlice:configSlice={},
-        time,
-        seriaColor,
-        seriaType
-      } = option
-    , data = trJsonToSeria(json, configSlice, categories)
-    , _data = _filterZeroIf(data, isFilterZero)
-    , _seriaProps = seriaType === 'DOT_SET'
-        ? _crScatterProps(seriaColor)
-        : void 0;
-    return {
-      minY: findMinY(data),
-      name: configSlice.time || time,
-      color: seriaColor,
-      data: _data,
-      tooltip: crCategoryTooltip(),
-      ..._seriaProps
-    };
-  }
+export const crCategoryConfig = (
+  json,
+  option
+) => {
+  const { zhMapSlice:configSlice } = option;
+  return trJsonToCategory(json, configSlice)
+    .then(({ categories, data, min }) => {
+      const config = FactoryChart.createConfig(option);
+      addToCategoryConfig(config, {
+        json,
+        option,
+        data,
+        categories,
+        min
+      })
+      return config;
+    });
 }
 
-export default toCategory
+const _crSeriaData = (
+  json,
+  configSlice,
+  categories,
+  isFilterZero
+) => {
+  const data = trJsonToSeria(
+    json,
+    configSlice,
+    categories
+  );
+  return _filterZeroIf(data, isFilterZero);
+}
+
+const _crSeriaProps = (
+  seriaType,
+  seriaColor
+) => seriaType === 'DOT_SET'
+  ? _crScatterProps(seriaColor)
+  : void 0;
+
+export const crCategorySeria = (
+  json,
+  option,
+  chart
+) => {
+  const categories = chart.options.xAxis[0].categories
+  , {
+     isFilterZero,
+     zhMapSlice:configSlice,
+     time,
+     seriaColor,
+     seriaType
+  } = option
+  , data = _crSeriaData(
+     json,
+     configSlice,
+     categories,
+     isFilterZero
+  );
+
+  return {
+    data,
+    minY: findMinY(data),
+    name: configSlice.time || time,
+    color: seriaColor,
+    tooltip: crCategoryTooltip(),
+    ..._crSeriaProps(seriaType, seriaColor)
+  };
+}

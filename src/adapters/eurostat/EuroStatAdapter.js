@@ -1,6 +1,9 @@
 import toSpline from './toSpline';
 import toAreaYearly from './toAreaYearly'
-import toCategory from './toCategory'
+import {
+  crCategoryConfig,
+  crCategorySeria
+} from './toCategory'
 import toMap from './toMap';
 
 const DF_TYPE = 'SPLINE';
@@ -10,23 +13,27 @@ const _rToConfig = {
   COLUMN: toSpline.createConfig,
   AREA_YEARLY: toAreaYearly.createConfig,
   MAP: toMap.createConfig,
-  COLUMN_SET: toCategory.createConfig,
-  BAR_SET: toCategory.createConfig,
-  BAR_WITH_LABELS: toCategory.createConfig,
-  DOT_SET: toCategory.createConfig
+  COLUMN_SET: crCategoryConfig,
+  BAR_SET: crCategoryConfig,
+  BAR_WITH_LABELS: crCategoryConfig,
+  DOT_SET: crCategoryConfig
 };
 
 const _rToSeria = {
   AREA: toSpline.createSeria,
   SPLINE: toSpline.createSeria,
   COLUMN: toSpline.createSeria,
-  COLUMN_SET: toCategory.createSeria,
-  BAR_SET: toCategory.createSeria,
-  BAR_WITH_LABELS: toCategory.createSeria,
-  DOT_SET: toCategory.createSeria
+  COLUMN_SET: crCategorySeria,
+  BAR_SET: crCategorySeria,
+  BAR_WITH_LABELS: crCategorySeria,
+  DOT_SET: crCategorySeria
 };
 
-const _checkSeriaType = (router, option, dfType=DF_TYPE) => {
+const _checkSeriaType = (
+  router,
+  option,
+  dfType=DF_TYPE
+) => {
   if (!option.seriaType || !router[option.seriaType]) {
     option.seriaType = dfType
   }
@@ -35,7 +42,10 @@ const _checkSeriaType = (router, option, dfType=DF_TYPE) => {
 const EuroStatAdapter = {
   toConfig(json, option){
     _checkSeriaType(_rToConfig, option)
-    const { seriaType, zhCompType } = option
+    const {
+      seriaType,
+      zhCompType
+    } = option
     , fnToConfig = _rToConfig[seriaType]
     , config = fnToConfig
        ? fnToConfig(json, option)
