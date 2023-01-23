@@ -1,7 +1,7 @@
 import JSONstat from 'jsonstat';
 
 import { compareByValueId } from '../compareByFn';
-import Box from '../../utils/Box';
+import pipe from '../../utils/pipe';
 import {
   fetchHmIdCountry,
   getCountryById
@@ -139,22 +139,25 @@ export const trJsonToCategory = (
     dGeo,
     sGeo
   } = createGeoSlice(json, configSlice);
-  return fetchHmIdCountry().then(() => {
-     return Box(_combineToArr(dGeo.id, sGeo, json.status))
-       .map(arr => arr.sort(compareByValueId))
-       .fold(_splitForConfig);
-     });
+  return fetchHmIdCountry()
+    .then(() => pipe(
+       _combineToArr(dGeo.id, sGeo, json.status),
+       arr => arr.sort(compareByValueId),
+       _splitForConfig
+    ));
 }
 
 export const trJsonToSeria = (
   json,
-  configSlice,
+  configSlice={},
   categories
 ) => {
-    const {
-      dGeo,
-      sGeo
-    } = createGeoSlice(json, configSlice);
-    return Box(_combineToHm(dGeo.id, sGeo))
-      .fold(hm => _trHmToData(hm, categories));
+  const {
+    dGeo,
+    sGeo
+  } = createGeoSlice(json, configSlice);
+  return pipe(
+    _combineToHm(dGeo.id, sGeo),
+    hm => _trHmToData(hm, categories)
+  );
 }

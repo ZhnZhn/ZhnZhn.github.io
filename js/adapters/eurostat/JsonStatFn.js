@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.trJsonToSeria = exports.trJsonToCategory = exports.createGeoSlice = exports.crGeoSeria = void 0;
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 var _compareByFn = require("../compareByFn");
-var _Box = _interopRequireDefault(require("../../utils/Box"));
+var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _fetchHmIdCountry = require("./fetchHmIdCountry");
 const _isArr = Array.isArray;
 const _combineToArr = function (dGeo, sGeo, status) {
@@ -138,17 +138,18 @@ const trJsonToCategory = (json, configSlice) => {
     dGeo,
     sGeo
   } = createGeoSlice(json, configSlice);
-  return (0, _fetchHmIdCountry.fetchHmIdCountry)().then(() => {
-    return (0, _Box.default)(_combineToArr(dGeo.id, sGeo, json.status)).map(arr => arr.sort(_compareByFn.compareByValueId)).fold(_splitForConfig);
-  });
+  return (0, _fetchHmIdCountry.fetchHmIdCountry)().then(() => (0, _pipe.default)(_combineToArr(dGeo.id, sGeo, json.status), arr => arr.sort(_compareByFn.compareByValueId), _splitForConfig));
 };
 exports.trJsonToCategory = trJsonToCategory;
-const trJsonToSeria = (json, configSlice, categories) => {
+const trJsonToSeria = function (json, configSlice, categories) {
+  if (configSlice === void 0) {
+    configSlice = {};
+  }
   const {
     dGeo,
     sGeo
   } = createGeoSlice(json, configSlice);
-  return (0, _Box.default)(_combineToHm(dGeo.id, sGeo)).fold(hm => _trHmToData(hm, categories));
+  return (0, _pipe.default)(_combineToHm(dGeo.id, sGeo), hm => _trHmToData(hm, categories));
 };
 exports.trJsonToSeria = trJsonToSeria;
 //# sourceMappingURL=JsonStatFn.js.map
