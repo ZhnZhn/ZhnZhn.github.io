@@ -1,6 +1,6 @@
 import Big from 'big.js';
 
-import pipe from '../../utils/pipe';
+import flow from '../../utils/flow';
 import {
   crMarkerExDividend,
   crMarkerSplitRatio
@@ -308,7 +308,7 @@ const _crPointFlow = (
     }
   }
 
-  return [pipe(...fnStep), result];
+  return [flow(...fnStep), result];
 };
 
 const crAreaData = (
