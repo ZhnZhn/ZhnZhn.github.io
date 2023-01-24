@@ -1,5 +1,13 @@
+import pipe from '../utils/pipe';
 import { valueMoving } from '../adapters/AdapterFn';
 import Builder from './ConfigBuilder';
+import {
+  crArea2Config,
+  fAddSeries,
+  fAddMinMax,
+  fAdd,
+  toConfig
+} from './configBuilderFn';
 
 const crConfigType1 = ({
   option,
@@ -10,7 +18,8 @@ const crConfigType1 = ({
     seriaType,
     seriaColor,
     seriaWidth,
-    title, subtitle
+    title,
+    subtitle
   } = option
   , seria = Builder()
       .splineSeria({
@@ -20,13 +29,14 @@ const crConfigType1 = ({
          data
       })
       .toSeria();
-  return Builder()
-    .area2Config(title, subtitle)
-    .addSeries(seria)
-    .addMinMax(data, option)
-    .add({valueMoving: valueMoving(data)})
-    .add(confOption)
-    .toConfig();
+  return pipe(
+    crArea2Config(title, subtitle),
+    fAddSeries(seria),
+    fAddMinMax(data, option),
+    fAdd({ valueMoving: valueMoving(data) }),
+    fAdd(confOption),
+    toConfig
+  );
 }
 
 crConfigType1.Builder = Builder

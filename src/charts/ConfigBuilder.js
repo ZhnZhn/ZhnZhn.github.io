@@ -1,14 +1,6 @@
 import {
-  findMinY,
-  filterTrimZero,
-  hasZeroOrLessValue
+  findMinY
 } from '../math/seriaFn';
-
-import {
-  isObj,
-  isStr,
-  isNotEmptyArr
-} from '../utils/isTypeFn';
 
 import {
   fTitle,
@@ -19,14 +11,11 @@ import {
   tooltipTreeMap
 } from './Tooltip';
 import {
-  setPlotLinesMinMax,
-  setPlotLinesDeltas,
   calcMinY,
   setYToPoints
 } from './ChartFn';
 import {
-  crAreaConfig,
-  isLineType
+  crAreaConfig
 } from './ChartConfigFn';
 import {
   crTreeMapConfig
@@ -40,12 +29,15 @@ import SeriaBuilder from './SeriaBuilder';
 import ConfigStockSlice from './ConfigStockSlice';
 
 import {
-  assignTo,
-  getYFromPoint,
-  findMinYData,
-  findMaxYData,
-  calcYAxisMin,
-  getFirstSeriaData
+  fAddCaption,
+  fAdd,
+  fAddMinMax,
+  fAddLegend,
+  toConfig
+} from './configBuilderFn';
+
+import {
+  assignTo
 } from './configBuilderHelpers';
 
 const CATEGORIES_X_AXIS = {
@@ -141,9 +133,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this;
   },
   addCaption(title, subtitle){
-    return this
-      .addTitle(title)
-      .addSubtitle(subtitle);
+    fAddCaption(title, subtitle)(this.config)
+    return this;
   },
 
   addTooltip(tooltip) {
@@ -152,14 +143,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
 
   add(propName, option){
-    if (isStr(propName)){
-      assignTo(this.config, propName, option)
-    } else if (isObj(propName)){
-      let _propName;
-      for (_propName in propName){
-        assignTo(this.config, _propName, propName[_propName])
-      }
-    }
+    fAdd(propName, option)(this.config)
     return this;
   },
 
@@ -185,71 +169,12 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
 
   addLegend(legend){
-    return isNotEmptyArr(legend)
-      ? this.add('zhConfig', { legend })
-      : this;
-  },
-
-  addMinMax(data, option){
-    const {
-      isNotZoomToMinMax,
-      isDrawDeltaExtrems,
-      isFilterZero,
-      isLogarithmic,
-      minY,
-      maxY
-    } = option
-    , _data = isFilterZero ? filterTrimZero(data) : data
-    , min = findMinYData(minY, _data)
-    , max = findMaxYData(maxY, _data);
-    return this._setMinMax(min, max, isNotZoomToMinMax)
-      ._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems)
-      ._setYAxisType(isLogarithmic, _data)
-  },
-
-
-  _setMinMaxDeltas(min, max, data, isDrawDeltaExtrems){
-    if (isDrawDeltaExtrems) {
-      const _recentIndex = data.length-1;
-      if (_recentIndex > 0) {
-        setPlotLinesDeltas({
-          plotLines: this.config.yAxis.plotLines,
-          min, max,
-          value: getYFromPoint(data[_recentIndex])
-        })
-      }
-    }
+    fAddLegend(legend)(this.config)
     return this;
   },
 
-
-  _setMinMax(min, max, noZoom){
-    setPlotLinesMinMax({
-      plotLines: this.config.yAxis.plotLines,
-      min, max
-    })
-    return this.add('yAxis', {
-      min: calcYAxisMin(min, max, noZoom),
-      maxPadding: 0.15,
-      minPadding: 0.15,
-      endOnTick: false,
-      startOnTick: false
-    });
-  },
-
-  _setYAxisType(isLogarithmic, data) {
-    if (isLogarithmic) {
-      if (!isLineType(this.config)
-          || hasZeroOrLessValue(data)) {
-        return this;
-      }
-      const { yAxis } = this.config
-      yAxis.type = 'logarithmic'
-      //yAxis.minorTickInterval = 0.1
-      if (yAxis.min <= 0) {
-        yAxis.min = null
-      }
-    }
+  addMinMax(data, option){
+    fAddMinMax(data, option)(this.config)
     return this;
   },
 
@@ -270,24 +195,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this;
   },
 
-  _disableAnimation(){
-    this.add({
-      chart: { animation: false },
-      plotOptions: { series: { animation: false }},
-      zhConfig: { withoutAnimation: true }
-    });
-  },
-
-  _checkDataLength(){
-    const data = getFirstSeriaData(this);
-    if (data.length > 3000){
-      this._disableAnimation()
-    }
-  },
-
   toConfig(){
-    this._checkDataLength()
-    return this.config;
+    return toConfig(this.config);
   }
 })
 

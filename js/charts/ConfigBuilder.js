@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _seriaFn = require("../math/seriaFn");
-var _isTypeFn = require("../utils/isTypeFn");
 var _Chart = require("./Chart");
 var _Tooltip = require("./Tooltip");
 var _ChartFn = require("./ChartFn");
@@ -13,6 +12,7 @@ var _TreeMapConfigFn = require("./TreeMapConfigFn");
 var _ChartFactory = require("./ChartFactory");
 var _SeriaBuilder = _interopRequireDefault(require("./SeriaBuilder"));
 var _ConfigStockSlice = _interopRequireDefault(require("./ConfigStockSlice"));
+var _configBuilderFn = require("./configBuilderFn");
 var _configBuilderHelpers = require("./configBuilderHelpers");
 const CATEGORIES_X_AXIS = {
     type: "category",
@@ -130,21 +130,15 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
     return this;
   },
   addCaption(title, subtitle) {
-    return this.addTitle(title).addSubtitle(subtitle);
+    (0, _configBuilderFn.fAddCaption)(title, subtitle)(this.config);
+    return this;
   },
   addTooltip(tooltip) {
     this.config.tooltip = (0, _Chart.fTooltip)(tooltip);
     return this;
   },
   add(propName, option) {
-    if ((0, _isTypeFn.isStr)(propName)) {
-      (0, _configBuilderHelpers.assignTo)(this.config, propName, option);
-    } else if ((0, _isTypeFn.isObj)(propName)) {
-      let _propName;
-      for (_propName in propName) {
-        (0, _configBuilderHelpers.assignTo)(this.config, _propName, propName[_propName]);
-      }
-    }
+    (0, _configBuilderFn.fAdd)(propName, option)(this.config);
     return this;
   },
   addZhMiniConfig(config) {
@@ -172,66 +166,11 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
     }) : this;
   },
   addLegend(legend) {
-    return (0, _isTypeFn.isNotEmptyArr)(legend) ? this.add('zhConfig', {
-      legend
-    }) : this;
-  },
-  addMinMax(data, option) {
-    const {
-        isNotZoomToMinMax,
-        isDrawDeltaExtrems,
-        isFilterZero,
-        isLogarithmic,
-        minY,
-        maxY
-      } = option,
-      _data = isFilterZero ? (0, _seriaFn.filterTrimZero)(data) : data,
-      min = (0, _configBuilderHelpers.findMinYData)(minY, _data),
-      max = (0, _configBuilderHelpers.findMaxYData)(maxY, _data);
-    return this._setMinMax(min, max, isNotZoomToMinMax)._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems)._setYAxisType(isLogarithmic, _data);
-  },
-  _setMinMaxDeltas(min, max, data, isDrawDeltaExtrems) {
-    if (isDrawDeltaExtrems) {
-      const _recentIndex = data.length - 1;
-      if (_recentIndex > 0) {
-        (0, _ChartFn.setPlotLinesDeltas)({
-          plotLines: this.config.yAxis.plotLines,
-          min,
-          max,
-          value: (0, _configBuilderHelpers.getYFromPoint)(data[_recentIndex])
-        });
-      }
-    }
+    (0, _configBuilderFn.fAddLegend)(legend)(this.config);
     return this;
   },
-  _setMinMax(min, max, noZoom) {
-    (0, _ChartFn.setPlotLinesMinMax)({
-      plotLines: this.config.yAxis.plotLines,
-      min,
-      max
-    });
-    return this.add('yAxis', {
-      min: (0, _configBuilderHelpers.calcYAxisMin)(min, max, noZoom),
-      maxPadding: 0.15,
-      minPadding: 0.15,
-      endOnTick: false,
-      startOnTick: false
-    });
-  },
-  _setYAxisType(isLogarithmic, data) {
-    if (isLogarithmic) {
-      if (!(0, _ChartConfigFn.isLineType)(this.config) || (0, _seriaFn.hasZeroOrLessValue)(data)) {
-        return this;
-      }
-      const {
-        yAxis
-      } = this.config;
-      yAxis.type = 'logarithmic';
-      //yAxis.minorTickInterval = 0.1
-      if (yAxis.min <= 0) {
-        yAxis.min = null;
-      }
-    }
+  addMinMax(data, option) {
+    (0, _configBuilderFn.fAddMinMax)(data, option)(this.config);
     return this;
   },
   _addScatterBottom(seria, name, min, max) {
@@ -256,30 +195,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
     }
     return this;
   },
-  _disableAnimation() {
-    this.add({
-      chart: {
-        animation: false
-      },
-      plotOptions: {
-        series: {
-          animation: false
-        }
-      },
-      zhConfig: {
-        withoutAnimation: true
-      }
-    });
-  },
-  _checkDataLength() {
-    const data = (0, _configBuilderHelpers.getFirstSeriaData)(this);
-    if (data.length > 3000) {
-      this._disableAnimation();
-    }
-  },
   toConfig() {
-    this._checkDataLength();
-    return this.config;
+    return (0, _configBuilderFn.toConfig)(this.config);
   }
 });
 var _default = ConfigBuilder;

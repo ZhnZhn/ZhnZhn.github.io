@@ -8,6 +8,7 @@ var _ChartTheme = require("./ChartTheme");
 var _ChartConfigFn = require("./ChartConfigFn");
 var _TreeMapConfigFn = require("./TreeMapConfigFn");
 var _seriaBuilderFn = require("./seriaBuilderFn");
+var _configBuilderFn = require("./configBuilderFn");
 const CONFIG_SERIA = {
     //type: 'spline',
     visible: true,
@@ -19,8 +20,7 @@ const CONFIG_SERIA = {
     type: 'scatter'
   };
 const _isArr = Array.isArray,
-  _assign = Object.assign,
-  _isObj = obj => obj && typeof obj === 'object';
+  _assign = Object.assign;
 const SeriaBuilder = {
   initSeria(option) {
     this._type = 'S';
@@ -120,15 +120,7 @@ const SeriaBuilder = {
     if (isWithoutLegend === void 0) {
       isWithoutLegend = false;
     }
-    const _to = _isArr(this.config.series) ? this.config.series : this.config.series = [];
-    if (_isArr(series)) {
-      const _legend = (0, _seriaBuilderFn.addSeriesImpl)(_to, series);
-      if (!isWithoutLegend) {
-        this.addLegend(_legend);
-      }
-    } else if (_isObj(series)) {
-      _to[0] = series;
-    }
+    (0, _configBuilderFn.fAddSeries)(series, isWithoutLegend)(this.config);
     return this;
   },
   toSeria() {

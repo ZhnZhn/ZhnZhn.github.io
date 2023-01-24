@@ -6,8 +6,10 @@ import { crSeriaConfig } from './ChartConfigFn';
 import { CONFIG_TREE_MAP } from './TreeMapConfigFn';
 import {
   crLegendItem,
-  addSeriesImpl
 } from './seriaBuilderFn';
+import {
+  fAddSeries
+} from './configBuilderFn';
 
 const CONFIG_SERIA = {
    //type: 'spline',
@@ -21,8 +23,7 @@ const CONFIG_SERIA = {
 };
 
 const _isArr = Array.isArray
-, _assign = Object.assign
-, _isObj = obj => obj && typeof obj === 'object';
+, _assign = Object.assign;
 
 const SeriaBuilder = {
 
@@ -116,17 +117,7 @@ const SeriaBuilder = {
   },
 
   addSeries(series, isWithoutLegend=false){
-    const _to =_isArr(this.config.series)
-       ? this.config.series
-       : this.config.series = [];
-    if (_isArr(series)){
-      const _legend = addSeriesImpl(_to, series);
-      if (!isWithoutLegend) {
-        this.addLegend(_legend)
-      }
-    } else if (_isObj(series)) {
-      _to[0] = series
-    }
+    fAddSeries(series, isWithoutLegend)(this.config)
     return this;
   },
 
