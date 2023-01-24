@@ -2,7 +2,9 @@ import {
   crSplineConfig,
   crSplineSeria
 } from './toSpline';
-import toAreaYearly from './toAreaYearly'
+import {
+  crAreaYearlyConfig
+} from './toAreaYearly';
 import {
   crCategoryConfig,
   crCategorySeria
@@ -15,7 +17,7 @@ const _rToConfig = {
   SPLINE: crSplineConfig,
   COLUMN: crSplineConfig,
 
-  AREA_YEARLY: toAreaYearly.createConfig,
+  AREA_YEARLY: crAreaYearlyConfig,
   MAP: toMap.createConfig,
 
   COLUMN_SET: crCategoryConfig,

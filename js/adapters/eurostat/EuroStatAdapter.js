@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _toSpline = require("./toSpline");
-var _toAreaYearly = _interopRequireDefault(require("./toAreaYearly"));
+var _toAreaYearly = require("./toAreaYearly");
 var _toCategory = require("./toCategory");
 var _toMap = _interopRequireDefault(require("./toMap"));
 const DF_TYPE = 'SPLINE';
@@ -12,7 +12,7 @@ const _rToConfig = {
   AREA: _toSpline.crSplineConfig,
   SPLINE: _toSpline.crSplineConfig,
   COLUMN: _toSpline.crSplineConfig,
-  AREA_YEARLY: _toAreaYearly.default.createConfig,
+  AREA_YEARLY: _toAreaYearly.crAreaYearlyConfig,
   MAP: _toMap.default.createConfig,
   COLUMN_SET: _toCategory.crCategoryConfig,
   BAR_SET: _toCategory.crCategoryConfig,
