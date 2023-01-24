@@ -4,6 +4,10 @@ import { fTooltip } from './Chart';
 import { getSeriaColorByIndex } from './ChartTheme';
 import { crSeriaConfig } from './ChartConfigFn';
 import { CONFIG_TREE_MAP } from './TreeMapConfigFn';
+import {
+  crLegendItem,
+  addSeriesImpl
+} from './seriaBuilderFn';
 
 const CONFIG_SERIA = {
    //type: 'spline',
@@ -19,25 +23,6 @@ const CONFIG_SERIA = {
 const _isArr = Array.isArray
 , _assign = Object.assign
 , _isObj = obj => obj && typeof obj === 'object';
-
-const _crLegendItem = ({ index, color, name='', is=false }) => ({
-  index, color, name,
-  isVisible: is
-});
-
-const _addSeriesImpl = (to, series) => {
-  const _legend = [];
-  series.forEach((seria, index) => {
-    const { color, zhValueText, name, visible } = seria;
-    to.push(seria)
-    _legend.push(_crLegendItem({
-       index, color,
-       name: zhValueText || name,
-       is: visible
-     }))
-  })
-  return _legend;
-}
 
 const SeriaBuilder = {
 
@@ -86,7 +71,7 @@ const SeriaBuilder = {
       const is = index<maxVisible ? true : false
           , color = getSeriaColorByIndex(index)
           , { seriaName } = data;
-      _legend.push(_crLegendItem({
+      _legend.push(crLegendItem({
         index, color, name: seriaName, is
       }))
       this.addSeriaBy(index, {
@@ -135,7 +120,7 @@ const SeriaBuilder = {
        ? this.config.series
        : this.config.series = [];
     if (_isArr(series)){
-      const _legend = _addSeriesImpl(_to, series);
+      const _legend = addSeriesImpl(_to, series);
       if (!isWithoutLegend) {
         this.addLegend(_legend)
       }
