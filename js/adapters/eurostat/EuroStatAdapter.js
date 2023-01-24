@@ -1,19 +1,18 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _toSpline = require("./toSpline");
 var _toAreaYearly = require("./toAreaYearly");
 var _toCategory = require("./toCategory");
-var _toMap = _interopRequireDefault(require("./toMap"));
+var _toMap = require("./toMap");
 const DF_TYPE = 'SPLINE';
 const _rToConfig = {
   AREA: _toSpline.crSplineConfig,
   SPLINE: _toSpline.crSplineConfig,
   COLUMN: _toSpline.crSplineConfig,
   AREA_YEARLY: _toAreaYearly.crAreaYearlyConfig,
-  MAP: _toMap.default.createConfig,
+  MAP: _toMap.crMapConfig,
   COLUMN_SET: _toCategory.crCategoryConfig,
   BAR_SET: _toCategory.crCategoryConfig,
   BAR_WITH_LABELS: _toCategory.crCategoryConfig,
@@ -32,7 +31,10 @@ const _checkSeriaType = function (router, option, dfType) {
   if (dfType === void 0) {
     dfType = DF_TYPE;
   }
-  if (!option.seriaType || !router[option.seriaType]) {
+  const {
+    seriaType
+  } = option;
+  if (!seriaType || !router[seriaType]) {
     option.seriaType = dfType;
   }
 };
@@ -43,8 +45,8 @@ const EuroStatAdapter = {
         seriaType,
         zhCompType
       } = option,
-      fnToConfig = _rToConfig[seriaType],
-      config = fnToConfig ? fnToConfig(json, option) : {};
+      _crConfig = _rToConfig[seriaType],
+      config = _crConfig ? _crConfig(json, option) : {};
     config.zhCompType = zhCompType;
     return {
       config
@@ -55,8 +57,8 @@ const EuroStatAdapter = {
     const {
         seriaType
       } = option,
-      fnToSeria = _rToSeria[seriaType],
-      seria = fnToSeria ? fnToSeria(json, option, chart) : void 0;
+      _crSeria = _rToSeria[seriaType],
+      seria = _crSeria ? _crSeria(json, option, chart) : void 0;
     return seria;
   }
 };

@@ -9,7 +9,9 @@ import {
   crCategoryConfig,
   crCategorySeria
 } from './toCategory'
-import toMap from './toMap';
+import {
+  crMapConfig
+} from './toMap';
 
 const DF_TYPE = 'SPLINE';
 const _rToConfig = {
@@ -18,7 +20,7 @@ const _rToConfig = {
   COLUMN: crSplineConfig,
 
   AREA_YEARLY: crAreaYearlyConfig,
-  MAP: toMap.createConfig,
+  MAP: crMapConfig,
 
   COLUMN_SET: crCategoryConfig,
   BAR_SET: crCategoryConfig,
@@ -42,7 +44,8 @@ const _checkSeriaType = (
   option,
   dfType=DF_TYPE
 ) => {
-  if (!option.seriaType || !router[option.seriaType]) {
+  const { seriaType } = option;
+  if (!seriaType || !router[seriaType]) {
     option.seriaType = dfType
   }
 };
@@ -54,9 +57,9 @@ const EuroStatAdapter = {
       seriaType,
       zhCompType
     } = option
-    , fnToConfig = _rToConfig[seriaType]
-    , config = fnToConfig
-       ? fnToConfig(json, option)
+    , _crConfig = _rToConfig[seriaType]
+    , config = _crConfig
+       ? _crConfig(json, option)
        : {} ;
 
     config.zhCompType = zhCompType
@@ -66,9 +69,9 @@ const EuroStatAdapter = {
   toSeries(json, option, chart){
     _checkSeriaType(_rToConfig, option)
     const { seriaType } = option
-    , fnToSeria = _rToSeria[seriaType]
-    , seria = fnToSeria
-       ? fnToSeria(json, option, chart)
+    , _crSeria = _rToSeria[seriaType]
+    , seria = _crSeria
+       ? _crSeria(json, option, chart)
        : void 0;
     return seria;
   }

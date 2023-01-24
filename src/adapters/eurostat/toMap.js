@@ -6,32 +6,33 @@ import {
   setDataAndInfo
 } from './EuroStatFn';
 
-const _assign = Object.assign
+const _assign = Object.assign;
 
 const _addItemCaptionTo = (
   option
 ) => {
-  const {
-    itemCaption,
-    subtitle
-  } = option;
-  option.itemCaption = itemCaption || subtitle
+  option.itemCaption = option.itemCaption
+    || option.subtitle
 };
 
-const toMap = {
-  createConfig: (json, option) => {
-    const [ data ] = crData(json)
-    , config = crAreaConfig();
+export const crMapConfig = (
+  json,
+  option
+) => {
+   const data = crData(json)[0]
+   , config = crAreaConfig();
 
-     _addItemCaptionTo(option)
-     setDataAndInfo({ config, data, json, option });
-     _assign(config, {
-       zhDialog: option,
-       json: json,
-       zhMapSlice: option.zhMapSlice
-     })
-     return config;
-  }
-};
-
-export default toMap
+   _addItemCaptionTo(option)
+   setDataAndInfo({
+      config,
+      data,
+      json,
+      option
+   });
+   _assign(config, {
+      zhDialog: option,
+      json: json,
+      zhMapSlice: option.zhMapSlice
+    })
+    return config;
+}
