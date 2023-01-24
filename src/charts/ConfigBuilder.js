@@ -1,6 +1,5 @@
 import {
   findMinY,
-  findMaxY,
   filterTrimZero,
   hasZeroOrLessValue
 } from '../math/seriaFn';
@@ -8,7 +7,6 @@ import {
 import {
   isObj,
   isStr,
-  isNumber,
   isNotEmptyArr
 } from '../utils/isTypeFn';
 
@@ -41,6 +39,15 @@ import {
 import SeriaBuilder from './SeriaBuilder';
 import ConfigStockSlice from './ConfigStockSlice';
 
+import {
+  assignTo,
+  getYFromPoint,
+  findMinYData,
+  findMaxYData,
+  calcYAxisMin,
+  getFirstSeriaData
+} from './configBuilderHelpers';
+
 const CATEGORIES_X_AXIS = {
   type: "category",
   categories: [],
@@ -68,31 +75,7 @@ const CATEGORIES_X_AXIS = {
   }
 };
 
-const _isArr = Array.isArray
-, _assign = Object.assign
-, _assignTo = (obj, propName, value) => {
-    obj[propName] = isObj(value) && !_isArr(value)
-      ? _assign(obj[propName] || {}, value)
-      : value
-};
-
-const _getY = (point) => _isArr(point)
- ? point[1]
- : point && point.y || 0;
-
-const _getData = obj => obj.config?.series?.[0].data
- || [];
-
-const _findMinY = (minY, data) => isNumber(minY)
-  ? minY
-  : findMinY(data);
-const _findMaxY = (maxY, data) => isNumber(maxY)
-  ? maxY
-  : findMaxY(data);
-const _calcYAxisMin = (min, max, noZoom) => noZoom
-  && min > 0
-   ? 0
-   : calcMinY(min, max);
+const _assign = Object.assign;
 
 const ConfigBuilder = function(config={}) {
   if (!(this instanceof ConfigBuilder)){
@@ -150,11 +133,11 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
 
   addTitle(text) {
-    _assignTo(this.config, 'title', fTitle({ text }))
+    assignTo(this.config, 'title', fTitle({ text }))
     return this;
   },
   addSubtitle(text) {
-    _assignTo(this.config, 'subtitle', fSubtitle({ text }))
+    assignTo(this.config, 'subtitle', fSubtitle({ text }))
     return this;
   },
   addCaption(title, subtitle){
@@ -170,11 +153,11 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
 
   add(propName, option){
     if (isStr(propName)){
-      _assignTo(this.config, propName, option)
+      assignTo(this.config, propName, option)
     } else if (isObj(propName)){
       let _propName;
       for (_propName in propName){
-        _assignTo(this.config, _propName, propName[_propName])
+        assignTo(this.config, _propName, propName[_propName])
       }
     }
     return this;
@@ -217,8 +200,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       maxY
     } = option
     , _data = isFilterZero ? filterTrimZero(data) : data
-    , min = _findMinY(minY, _data)
-    , max = _findMaxY(maxY, _data);
+    , min = findMinYData(minY, _data)
+    , max = findMaxYData(maxY, _data);
     return this._setMinMax(min, max, isNotZoomToMinMax)
       ._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems)
       ._setYAxisType(isLogarithmic, _data)
@@ -232,7 +215,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
         setPlotLinesDeltas({
           plotLines: this.config.yAxis.plotLines,
           min, max,
-          value: _getY(data[_recentIndex])
+          value: getYFromPoint(data[_recentIndex])
         })
       }
     }
@@ -246,7 +229,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       min, max
     })
     return this.add('yAxis', {
-      min: _calcYAxisMin(min, max, noZoom),
+      min: calcYAxisMin(min, max, noZoom),
       maxPadding: 0.15,
       minPadding: 0.15,
       endOnTick: false,
@@ -296,7 +279,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
 
   _checkDataLength(){
-    const data = _getData(this);
+    const data = getFirstSeriaData(this);
     if (data.length > 3000){
       this._disableAnimation()
     }

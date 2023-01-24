@@ -13,6 +13,7 @@ var _TreeMapConfigFn = require("./TreeMapConfigFn");
 var _ChartFactory = require("./ChartFactory");
 var _SeriaBuilder = _interopRequireDefault(require("./SeriaBuilder"));
 var _ConfigStockSlice = _interopRequireDefault(require("./ConfigStockSlice"));
+var _configBuilderHelpers = require("./configBuilderHelpers");
 const CATEGORIES_X_AXIS = {
     type: "category",
     categories: [],
@@ -39,19 +40,7 @@ const CATEGORIES_X_AXIS = {
       x: 3
     }
   };
-const _isArr = Array.isArray,
-  _assign = Object.assign,
-  _assignTo = (obj, propName, value) => {
-    obj[propName] = (0, _isTypeFn.isObj)(value) && !_isArr(value) ? _assign(obj[propName] || {}, value) : value;
-  };
-const _getY = point => _isArr(point) ? point[1] : point && point.y || 0;
-const _getData = obj => {
-  var _obj$config, _obj$config$series;
-  return ((_obj$config = obj.config) == null ? void 0 : (_obj$config$series = _obj$config.series) == null ? void 0 : _obj$config$series[0].data) || [];
-};
-const _findMinY = (minY, data) => (0, _isTypeFn.isNumber)(minY) ? minY : (0, _seriaFn.findMinY)(data);
-const _findMaxY = (maxY, data) => (0, _isTypeFn.isNumber)(maxY) ? maxY : (0, _seriaFn.findMaxY)(data);
-const _calcYAxisMin = (min, max, noZoom) => noZoom && min > 0 ? 0 : (0, _ChartFn.calcMinY)(min, max);
+const _assign = Object.assign;
 const ConfigBuilder = function (config) {
   if (config === void 0) {
     config = {};
@@ -129,13 +118,13 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
     }).toSeria());
   },
   addTitle(text) {
-    _assignTo(this.config, 'title', (0, _Chart.fTitle)({
+    (0, _configBuilderHelpers.assignTo)(this.config, 'title', (0, _Chart.fTitle)({
       text
     }));
     return this;
   },
   addSubtitle(text) {
-    _assignTo(this.config, 'subtitle', (0, _Chart.fSubtitle)({
+    (0, _configBuilderHelpers.assignTo)(this.config, 'subtitle', (0, _Chart.fSubtitle)({
       text
     }));
     return this;
@@ -149,11 +138,11 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
   },
   add(propName, option) {
     if ((0, _isTypeFn.isStr)(propName)) {
-      _assignTo(this.config, propName, option);
+      (0, _configBuilderHelpers.assignTo)(this.config, propName, option);
     } else if ((0, _isTypeFn.isObj)(propName)) {
       let _propName;
       for (_propName in propName) {
-        _assignTo(this.config, _propName, propName[_propName]);
+        (0, _configBuilderHelpers.assignTo)(this.config, _propName, propName[_propName]);
       }
     }
     return this;
@@ -197,8 +186,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
         maxY
       } = option,
       _data = isFilterZero ? (0, _seriaFn.filterTrimZero)(data) : data,
-      min = _findMinY(minY, _data),
-      max = _findMaxY(maxY, _data);
+      min = (0, _configBuilderHelpers.findMinYData)(minY, _data),
+      max = (0, _configBuilderHelpers.findMaxYData)(maxY, _data);
     return this._setMinMax(min, max, isNotZoomToMinMax)._setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems)._setYAxisType(isLogarithmic, _data);
   },
   _setMinMaxDeltas(min, max, data, isDrawDeltaExtrems) {
@@ -209,7 +198,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
           plotLines: this.config.yAxis.plotLines,
           min,
           max,
-          value: _getY(data[_recentIndex])
+          value: (0, _configBuilderHelpers.getYFromPoint)(data[_recentIndex])
         });
       }
     }
@@ -222,7 +211,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
       max
     });
     return this.add('yAxis', {
-      min: _calcYAxisMin(min, max, noZoom),
+      min: (0, _configBuilderHelpers.calcYAxisMin)(min, max, noZoom),
       maxPadding: 0.15,
       minPadding: 0.15,
       endOnTick: false,
@@ -283,7 +272,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
     });
   },
   _checkDataLength() {
-    const data = _getData(this);
+    const data = (0, _configBuilderHelpers.getFirstSeriaData)(this);
     if (data.length > 3000) {
       this._disableAnimation();
     }
