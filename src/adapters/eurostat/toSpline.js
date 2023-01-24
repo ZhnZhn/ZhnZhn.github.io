@@ -5,55 +5,60 @@ import {
 import {
   crData,
   crZhConfig,
-  crDatasetInfo,
-  findMinY
+  crDatasetInfo
 } from './EuroStatFn';
 
-const toSpline = {
-   createConfig: (json, option) => {
-     const {
-       seriaType
-     } = option
-     , [
-       data,
-       minY,
-       maxY
-     ] = crData(json, option)
-     , _type = (seriaType || '')
-         .toLowerCase() || 'spline';
+const DF_SERIA_TYPE = 'spline';
+const _crSeriaType = (
+  option,
+  dfSeriaType=DF_SERIA_TYPE
+) => (option.seriaType || dfSeriaType)
+   .toLowerCase();
 
-     option.seriaType = _type
-     option.minY = minY
-     option.maxY = maxY
+export const crSplineConfig = (
+  json,
+  option
+) => {
+   const [
+     data,
+     minY,
+     maxY
+   ] = crData(json, option);
 
-     return crConfigType1({
-       option,
-       data,
-       confOption: {
-         info: crDatasetInfo(json),
-         zhConfig: crZhConfig(option)
-       }
-    })
-   },
+   option.seriaType = _crSeriaType(option)
+   option.minY = minY
+   option.maxY = maxY
 
-   createSeria: (json, option) => {
-     const { data } = crData(json)
-     , {
-       itemCaption,
-       seriaType,
-       seriaColor,
-       seriaWidth
-     } = option;
+   return crConfigType1({
+     option,
+     data,
+     confOption: {
+       info: crDatasetInfo(json),
+       zhConfig: crZhConfig(option)
+     }
+   })
+}
 
-     return crSeriaConfig({
-       seriaType,
-       seriaColor,
-       seriaWidth,
-       data,
-       minY: findMinY(data),
-       name: itemCaption
-     });
-   }
-};
+export const crSplineSeria = (
+  json,
+  option
+) => {
+   const [
+     data,
+     minY
+   ] = crData(json)
+   , {
+     itemCaption,
+     seriaColor,
+     seriaWidth
+   } = option;
 
-export default toSpline
+   return crSeriaConfig({
+     name: itemCaption,
+     seriaType: _crSeriaType(option),
+     seriaColor,
+     seriaWidth,
+     data,
+     minY
+   });
+}

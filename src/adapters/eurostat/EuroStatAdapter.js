@@ -1,4 +1,7 @@
-import toSpline from './toSpline';
+import {
+  crSplineConfig,
+  crSplineSeria
+} from './toSpline';
 import toAreaYearly from './toAreaYearly'
 import {
   crCategoryConfig,
@@ -8,11 +11,13 @@ import toMap from './toMap';
 
 const DF_TYPE = 'SPLINE';
 const _rToConfig = {
-  AREA: toSpline.createConfig,
-  SPLINE: toSpline.createConfig,
-  COLUMN: toSpline.createConfig,
+  AREA: crSplineConfig,
+  SPLINE: crSplineConfig,
+  COLUMN: crSplineConfig,
+
   AREA_YEARLY: toAreaYearly.createConfig,
   MAP: toMap.createConfig,
+
   COLUMN_SET: crCategoryConfig,
   BAR_SET: crCategoryConfig,
   BAR_WITH_LABELS: crCategoryConfig,
@@ -20,9 +25,10 @@ const _rToConfig = {
 };
 
 const _rToSeria = {
-  AREA: toSpline.createSeria,
-  SPLINE: toSpline.createSeria,
-  COLUMN: toSpline.createSeria,
+  AREA: crSplineSeria,
+  SPLINE: crSplineSeria,
+  COLUMN: crSplineSeria,
+
   COLUMN_SET: crCategorySeria,
   BAR_SET: crCategorySeria,
   BAR_WITH_LABELS: crCategorySeria,
