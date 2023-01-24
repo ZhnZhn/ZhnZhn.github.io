@@ -22,7 +22,7 @@ import {
 } from './ChartFn';
 import {
   addSeriesImpl
-} from './seriaBuilderFn';
+} from './seriaBuilderHelpers';
 
 import {
   assignTo,

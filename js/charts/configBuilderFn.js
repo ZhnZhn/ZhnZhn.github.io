@@ -7,7 +7,7 @@ var _isTypeFn = require("../utils/isTypeFn");
 var _ChartConfigFn = require("./ChartConfigFn");
 var _Chart = require("./Chart");
 var _ChartFn = require("./ChartFn");
-var _seriaBuilderFn = require("./seriaBuilderFn");
+var _seriaBuilderHelpers = require("./seriaBuilderHelpers");
 var _configBuilderHelpers = require("./configBuilderHelpers");
 const _isArr = Array.isArray;
 const fAddCaption = (title, subtitle) => config => {
@@ -43,7 +43,7 @@ const fAddSeries = function (series, isWithoutLegend) {
   return config => {
     const _to = _isArr(config.series) ? config.series : config.series = [];
     if (_isArr(series)) {
-      const _legend = (0, _seriaBuilderFn.addSeriesImpl)(_to, series);
+      const _legend = (0, _seriaBuilderHelpers.addSeriesImpl)(_to, series);
       if (!isWithoutLegend) {
         fAddLegend(_legend)(config);
       }

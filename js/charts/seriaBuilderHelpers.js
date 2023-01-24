@@ -37,4 +37,4 @@ const addSeriesImpl = (to, series) => {
   return _legend;
 };
 exports.addSeriesImpl = addSeriesImpl;
-//# sourceMappingURL=seriaBuilderFn.js.map
+//# sourceMappingURL=seriaBuilderHelpers.js.map

@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../src/charts/seriaBuilderFn.js"
+  "../../src/charts/seriaBuilderHelpers.js"
  ],
- "file": "../../src/charts/seriaBuilderFn.js",
+ "file": "../../src/charts/seriaBuilderHelpers.js",
  "names": [
   "crLegendItem",
   "index",

@@ -24,7 +24,7 @@ export const addSeriesImpl = (
       visible
     } = seria;
     to.push(seria)
-    _legend.push(crLegendItem({      
+    _legend.push(crLegendItem({
        index,
        color,
        name: zhValueText || name,

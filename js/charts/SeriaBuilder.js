@@ -7,7 +7,7 @@ var _Chart = require("./Chart");
 var _ChartTheme = require("./ChartTheme");
 var _ChartConfigFn = require("./ChartConfigFn");
 var _TreeMapConfigFn = require("./TreeMapConfigFn");
-var _seriaBuilderFn = require("./seriaBuilderFn");
+var _seriaBuilderHelpers = require("./seriaBuilderHelpers");
 var _configBuilderFn = require("./configBuilderFn");
 const CONFIG_SERIA = {
     //type: 'spline',
@@ -76,7 +76,7 @@ const SeriaBuilder = {
         {
           seriaName
         } = data;
-      _legend.push((0, _seriaBuilderFn.crLegendItem)({
+      _legend.push((0, _seriaBuilderHelpers.crLegendItem)({
         index,
         color,
         name: seriaName,

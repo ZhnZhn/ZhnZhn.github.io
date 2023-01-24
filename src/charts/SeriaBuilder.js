@@ -6,7 +6,7 @@ import { crSeriaConfig } from './ChartConfigFn';
 import { CONFIG_TREE_MAP } from './TreeMapConfigFn';
 import {
   crLegendItem,
-} from './seriaBuilderFn';
+} from './seriaBuilderHelpers';
 import {
   fAddSeries
 } from './configBuilderFn';
