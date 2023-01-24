@@ -6,6 +6,13 @@ import {
 } from '../math/seriaFn';
 
 import {
+  isObj,
+  isStr,
+  isNumber,
+  isNotEmptyArr
+} from '../utils/isTypeFn';
+
+import {
   fTitle,
   fSubtitle,
   fTooltip
@@ -61,17 +68,10 @@ const CATEGORIES_X_AXIS = {
   }
 };
 
-const _isObj = obj => obj && typeof obj === 'object'
-, _isStr = str => typeof str === 'string'
-, _isNumber = n => typeof n === 'number'
-  && n - n === 0
-, _isNotEmptyArr = arr => _isArr(arr)
-  && arr.length > 0;
-
 const _isArr = Array.isArray
 , _assign = Object.assign
 , _assignTo = (obj, propName, value) => {
-    obj[propName] = _isObj(value) && !_isArr(value)
+    obj[propName] = isObj(value) && !_isArr(value)
       ? _assign(obj[propName] || {}, value)
       : value
 };
@@ -83,10 +83,10 @@ const _getY = (point) => _isArr(point)
 const _getData = obj => obj.config?.series?.[0].data
  || [];
 
-const _findMinY = (minY, data) => _isNumber(minY)
+const _findMinY = (minY, data) => isNumber(minY)
   ? minY
   : findMinY(data);
-const _findMaxY = (maxY, data) => _isNumber(maxY)
+const _findMaxY = (maxY, data) => isNumber(maxY)
   ? maxY
   : findMaxY(data);
 const _calcYAxisMin = (min, max, noZoom) => noZoom
@@ -169,9 +169,9 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
 
   add(propName, option){
-    if (_isStr(propName)){
+    if (isStr(propName)){
       _assignTo(this.config, propName, option)
-    } else if (_isObj(propName)){
+    } else if (isObj(propName)){
       let _propName;
       for (_propName in propName){
         _assignTo(this.config, _propName, propName[_propName])
@@ -202,7 +202,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
 
   addLegend(legend){
-    return _isNotEmptyArr(legend)
+    return isNotEmptyArr(legend)
       ? this.add('zhConfig', { legend })
       : this;
   },
