@@ -1,9 +1,12 @@
 import {
   isTypeNumber,
+  isNumber,
   isNaN,
   isInt,
   isStr,
-  isUndef
+  isUndef,
+  isObj,
+  isNotEmptyArr
 } from '../isTypeFn';
 
 describe('isTypeNumber',()=>{
@@ -17,6 +20,16 @@ describe('isTypeNumber',()=>{
     expect(fn(null)).toBe(false)
     expect(fn(void 0)).toBe(false)
     expect(fn(true)).toBe(false)
+  })
+})
+
+describe('isNumber',()=>{
+  const fn = isNumber;
+  test('should return true for number otherwise false',()=>{
+    expect(fn(-0.2)).toBe(true)
+    expect(fn(2)).toBe(true)
+
+    expect(fn(NaN)).toBe(false)
   })
 })
 
@@ -65,5 +78,26 @@ describe('isUndef',()=>{
 
     expect(fn(null)).toBe(false)
     expect(fn('')).toBe(false)
+  })
+})
+
+describe('isObj',()=>{
+  const fn = isObj;
+  test('should return true for object except null othewise false',()=>{
+    expect(fn({})).toBe(true)
+
+    expect(fn(null)).toBe(false)
+  })
+})
+
+describe('isNotEmptyArr',()=>{
+  const fn = isNotEmptyArr;
+  test('should return true for array with not zero length othewise false', ()=>{
+    expect(fn([''])).toBe(true)
+
+    expect(fn([])).toBe(false)
+    expect(fn({})).toBe(false)
+    expect(fn()).toBe(false)
+    expect(fn(null)).toBe(false)
   })
 })

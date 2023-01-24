@@ -13,6 +13,14 @@ describe('isTypeNumber', () => {
     expect(fn(true)).toBe(false);
   });
 });
+describe('isNumber', () => {
+  const fn = _isTypeFn.isNumber;
+  test('should return true for number otherwise false', () => {
+    expect(fn(-0.2)).toBe(true);
+    expect(fn(2)).toBe(true);
+    expect(fn(NaN)).toBe(false);
+  });
+});
 describe('isNaN', () => {
   const fn = _isTypeFn.isNaN;
   test('should return true for NaN value otherwise false', () => {
@@ -51,6 +59,23 @@ describe('isUndef', () => {
     expect(fn(void 0)).toBe(true);
     expect(fn(null)).toBe(false);
     expect(fn('')).toBe(false);
+  });
+});
+describe('isObj', () => {
+  const fn = _isTypeFn.isObj;
+  test('should return true for object except null othewise false', () => {
+    expect(fn({})).toBe(true);
+    expect(fn(null)).toBe(false);
+  });
+});
+describe('isNotEmptyArr', () => {
+  const fn = _isTypeFn.isNotEmptyArr;
+  test('should return true for array with not zero length othewise false', () => {
+    expect(fn([''])).toBe(true);
+    expect(fn([])).toBe(false);
+    expect(fn({})).toBe(false);
+    expect(fn()).toBe(false);
+    expect(fn(null)).toBe(false);
   });
 });
 //# sourceMappingURL=isTypeFn.test.js.map
