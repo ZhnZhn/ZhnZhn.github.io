@@ -1,1 +1,17 @@
-{"version":3,"sources":["../../src/utils/compose.js"],"names":["compose","fns","length","arg","reduce","a","b"],"mappings":";;;;;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AAEA,IAAMA,OAAO,GAAG,SAAVA,OAAU,GAAY;AAAA,oCAARC,GAAQ;AAARA,IAAAA,GAAQ;AAAA;;AAC1B,MAAIA,GAAG,CAACC,MAAJ,KAAe,CAAnB,EAAsB;AACpB,WAAO,UAAAC,GAAG;AAAA,aAAIA,GAAJ;AAAA,KAAV;AACD;;AACD,MAAIF,GAAG,CAACC,MAAJ,KAAe,CAAnB,EAAsB;AACpB,WAAOD,GAAG,CAAC,CAAD,CAAV;AACD;;AAED,SAAOA,GAAG,CAACG,MAAJ,CAAW,UAACC,CAAD,EAAIC,CAAJ;AAAA,WAAU;AAAA,aAAaD,CAAC,CAACC,CAAC,MAAD,mBAAD,CAAd;AAAA,KAAV;AAAA,GAAX,CAAP;AACD,CATD;;eAWeN,O","sourcesContent":["\r\n/**\r\n * from redux compose\r\n *\r\n * @param {...Function} fns The functions to compose.\r\n * @returns {Function} A function obtained by composing\r\n * the argument functions from right to left\r\n *\r\n * For example, compose(f, g, h) is identical to doing\r\n * (...args) => f(g(h(...args))).\r\n *\r\n */\r\n\r\nconst compose = (...fns) => {\r\n  if (fns.length === 0) {\r\n    return arg => arg;\r\n  }\r\n  if (fns.length === 1) {\r\n    return fns[0];\r\n  }\r\n\r\n  return fns.reduce((a, b) => (...args) => a(b(...args)));\r\n}\r\n\r\nexport default compose\r\n"],"file":"compose.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/compose.js"
+ ],
+ "file": "../../src/utils/compose.js",
+ "names": [
+  "compose",
+  "fns",
+  "length",
+  "arg",
+  "reduce",
+  "a",
+  "b"
+ ],
+ "mappings": ";;;;AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;AAEA,MAAMA,OAAO,GAAG;EAAA,kCACXC,GAAG;IAAHA,GAAG;EAAA;EAAA,OACHA,GAAG,CAACC,MAAM,KAAK,CAAC,GACjBC,GAAG,IAAIA,GAAG,GACVF,GAAG,CAACC,MAAM,KAAK,CAAC,GACbD,GAAG,CAAC,CAAC,CAAC,GACNA,GAAG,CAACG,MAAM,CAAC,CAACC,CAAC,EAAEC,CAAC,KAAK;IAAA,OAAaD,CAAC,CAACC,CAAC,CAAC,YAAO,CAAC,CAAC;EAAA,EAAC;AAAA;AAAC,eAEzCN,OAAO;AAAA"
+}
