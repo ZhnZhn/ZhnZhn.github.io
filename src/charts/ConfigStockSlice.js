@@ -1,42 +1,25 @@
 import {
-  COLOR_S_OPEN,
-  COLOR_S_HIGH,
-  COLOR_S_LOW,
   COLOR_EX_DIVIDEND,
   COLOR_SPLIT_RATIO
 } from '../constants/Color';
 
 import {
-  crType,
   fTooltip
 } from './Chart';
 import {
-  setSeriaDataTo
-} from './ChartConfigFn';
-import {
-  crMiniVolumeConfig,
-  crMiniATHConfig,
   crMiniHLConfig
 } from './IndicatorConfigFn';
 import {
   tooltipExDividend,
-  tooltipSplitRatio,
-  tooltipValueTdmyIf
+  tooltipSplitRatio
 } from './Tooltip';
 
-const _crSeriaOption = (
-  color,
-  lineWidth
-) => ({
-  type: 'line',
-  visible: false,
-  color,
-  lineWidth,
-  marker: {
-    radius: 3,
-    symbol: "circle"
-  }
-});
+import {
+  _fSetStockSerias,
+  crStockConfig,
+  fAddMiniVolume,
+  fAddMiniATH
+} from './stockBuilderFn';
 
 const _crScatterSeria = (
   color,
@@ -59,45 +42,15 @@ const _crScatterSeria = (
 );
 
 const ConfigStockSlice = {
-  _setStockSerias(seriaType, lineWidth, dC, dH, dL, dO){
-    const config = this.config
-    , type = crType(seriaType, 'area');
-    setSeriaDataTo(config, dC, 0, 'Close', {
-      type, lineWidth
-    })
-    setSeriaDataTo(config, dH, 1, 'High',
-      _crSeriaOption(COLOR_S_HIGH, lineWidth)
-    )
-    setSeriaDataTo(config, dL, 2, 'Low',
-      _crSeriaOption(COLOR_S_LOW, lineWidth)
-    )
-    setSeriaDataTo(config, dO, 3, 'Open',
-      _crSeriaOption(COLOR_S_OPEN, lineWidth)
-    )
+  //seriaType, lineWidth, dC, dH, dL, dO
+  _setStockSerias(...args){
+    _fSetStockSerias(...args)(this.config)
     return this;
   },
 
   stockConfig(id, option){
-    const {
-      isNotZoomToMinMax,
-      isDrawDeltaExtrems,
-      seriaType,
-      seriaWidth,
-      dC, dH, dL, dO,
-      minClose,
-      maxClose,
-      dVc, dV,
-      dATH
-    } = option;
-    return this.areaConfig({ spacingTop: 25 })
-      .addTooltip(tooltipValueTdmyIf)
-      .addMinMax(dC, {
-          minY: minClose, maxY: maxClose,
-          isNotZoomToMinMax, isDrawDeltaExtrems
-       })
-      .addMiniVolume({ id, dColumn: dVc, dVolume: dV })
-      .addMiniATH({ id, data: dATH })
-      ._setStockSerias(seriaType, seriaWidth, dC, dH, dL, dO);
+    this.config = crStockConfig(id, option)
+    return this;
   },
 
   //Used only by Alpha Vantage Daily Adjusted, Quandl EOD
@@ -112,12 +65,12 @@ const ConfigStockSlice = {
   },
 
   addMiniVolume(option){
-    const { dVolume } = option;
-    return this._addMini(dVolume, option, crMiniVolumeConfig);
+    fAddMiniVolume(option)(this.config)
+    return this;
   },
   addMiniATH(option){
-    const { data } = option;
-    return this._addMini(data, option, crMiniATHConfig);
+    fAddMiniATH(option)(this.config)
+    return this;
   },
   addMiniHL(option){
     const { data } = option;

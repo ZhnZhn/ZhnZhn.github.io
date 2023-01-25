@@ -1,12 +1,24 @@
+import pipe from '../utils/pipe';
+
+import { crStockConfig } from '../charts/stockBuilderFn';
+import {
+  fAddCaption,
+  fAdd,
+  toConfig
+} from '../charts/configBuilderFn';
 import Builder from '../charts/ConfigBuilder'
+
 import { valueMoving } from './AdapterFn'
 import { stockSeriesLegend } from './legendFn';
-import { toStockSeriesData } from './AdapterStockFn'
+import { toStockSeriesData } from './AdapterStockFn';
 
 const _crCaptionDf = ({
   title,
   subtitle
-}) => ({ title, subtitle })
+}) => ({
+  title,
+  subtitle
+})
 , _crIdDf = ({ _itemKey }) => _itemKey
 , _getArrDf = json => json
 , _crAddConfigDf = () => {};
@@ -27,22 +39,23 @@ const crAdapterOHLCV = ({
         toDate,
         seriaOption, option
       })
-    , { dC, dMfi } = dataOption
-    , config = Builder()
-        .stockConfig(id, dataOption)
-        .addCaption(title, subtitle)
-        .add({
-           valueMoving: valueMoving(dC),
-           ...crAddConfig({
-              json, option, data: dC,
-              id, title, subtitle
-           })
-         })
-         .add('zhConfig', { legend: stockSeriesLegend() })
-         .addZhPointsIf(dMfi)
-         .toConfig();
+    , { dC, dMfi } = dataOption;
 
-    return { config };
+    return {
+      config: pipe(
+        crStockConfig(id, dataOption),
+        fAddCaption(title, subtitle),
+        fAdd({
+          valueMoving: valueMoving(dC),
+          ...crAddConfig({
+             json, option, data: dC,
+             id, title, subtitle
+          }),
+          zhPoints: dMfi, zhIsMfi: true
+        }),
+        fAdd('zhConfig', { legend: stockSeriesLegend() }),
+        toConfig
+    )};
   },
 
   toSeries(json, option){
