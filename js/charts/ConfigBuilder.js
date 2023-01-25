@@ -82,9 +82,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
     return this;
   },
   area2Config(title, subtitle) {
-    return this.areaConfig({
-      spacingTop: 25
-    }).addCaption(title, subtitle).add('series', []);
+    this.config = (0, _configBuilderFn.crArea2Config)(title, subtitle);
+    return this;
   },
   categoryConfig(categories) {
     if (categories === void 0) {
@@ -134,24 +133,16 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
     return this;
   },
   addTooltip(tooltip) {
-    this.config.tooltip = (0, _Chart.fTooltip)(tooltip);
+    (0, _configBuilderFn.fAddTooltip)(tooltip)(this.config);
     return this;
   },
   add(propName, option) {
     (0, _configBuilderFn.fAdd)(propName, option)(this.config);
     return this;
   },
-  addZhMiniConfig(config) {
-    const _configs = this.config.zhMiniConfigs;
-    if (_configs) {
-      _configs.push(config);
-    } else {
-      this.config.zhMiniConfigs = [config];
-    }
-    return this;
-  },
   _addMini(data, option, crConfig) {
-    return data && data.length > 0 ? this.addZhMiniConfig(crConfig(option)) : this;
+    (0, _configBuilderFn._addMini)(data, option, crConfig, this.config);
+    return this;
   },
   addZhPointsIf(data, propName, is) {
     if (propName === void 0) {

@@ -14,7 +14,8 @@ import {
 } from './ChartConfigFn';
 import {
   fTitle,
-  fSubtitle
+  fSubtitle,
+  fTooltip
 } from './Chart';
 import {
   setPlotLinesMinMax,
@@ -59,6 +60,13 @@ export const fAdd = (
   return config;
 }
 
+export const fAddTooltip = (
+  tooltip
+) => config => {
+  config.tooltip = fTooltip(tooltip)
+  return config;
+}
+
 export const fAddLegend = (
   legend
 ) => config => isNotEmptyArr(legend)
@@ -82,6 +90,27 @@ export const fAddSeries = (
   }
   return config;
 }
+
+const _fAddZhMiniConfig = (
+  miniConfig
+) => config => {
+  const _configs = config.zhMiniConfigs;
+  if (_isArr(_configs)){
+    _configs.push(miniConfig)
+  } else {
+    config.zhMiniConfigs = [miniConfig]
+  }
+  return config;
+}
+
+export const _addMini = (
+  data,
+  option,
+  crConfig,
+  toConfig
+) => data && data.length > 0
+  ? _fAddZhMiniConfig(crConfig(option))(toConfig)
+  : toConfig;
 
 const _setMinMax = (
   min,

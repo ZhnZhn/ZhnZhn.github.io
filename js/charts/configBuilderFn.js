@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toConfig = exports.fAddSeries = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crArea2Config = void 0;
+exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crArea2Config = exports._addMini = void 0;
 var _seriaFn = require("../math/seriaFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _ChartConfigFn = require("./ChartConfigFn");
@@ -32,6 +32,11 @@ const fAdd = (propName, option) => config => {
   return config;
 };
 exports.fAdd = fAdd;
+const fAddTooltip = tooltip => config => {
+  config.tooltip = (0, _Chart.fTooltip)(tooltip);
+  return config;
+};
+exports.fAddTooltip = fAddTooltip;
 const fAddLegend = legend => config => (0, _isTypeFn.isNotEmptyArr)(legend) ? fAdd('zhConfig', {
   legend
 })(config) : config;
@@ -54,6 +59,17 @@ const fAddSeries = function (series, isWithoutLegend) {
   };
 };
 exports.fAddSeries = fAddSeries;
+const _fAddZhMiniConfig = miniConfig => config => {
+  const _configs = config.zhMiniConfigs;
+  if (_isArr(_configs)) {
+    _configs.push(miniConfig);
+  } else {
+    config.zhMiniConfigs = [miniConfig];
+  }
+  return config;
+};
+const _addMini = (data, option, crConfig, toConfig) => data && data.length > 0 ? _fAddZhMiniConfig(crConfig(option))(toConfig) : toConfig;
+exports._addMini = _addMini;
 const _setMinMax = (min, max, noZoom, config) => {
   (0, _ChartFn.setPlotLinesMinMax)({
     plotLines: config.yAxis.plotLines,

@@ -4,8 +4,7 @@ import {
 
 import {
   fTitle,
-  fSubtitle,
-  fTooltip
+  fSubtitle
 } from './Chart';
 import {
   tooltipTreeMap
@@ -29,10 +28,13 @@ import SeriaBuilder from './SeriaBuilder';
 import ConfigStockSlice from './ConfigStockSlice';
 
 import {
+  crArea2Config,
   fAddCaption,
   fAdd,
   fAddMinMax,
   fAddLegend,
+  fAddTooltip,
+  _addMini,
   toConfig
 } from './configBuilderFn';
 
@@ -99,9 +101,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this;
   },
   area2Config(title, subtitle){
-    return this.areaConfig({ spacingTop: 25 })
-      .addCaption(title, subtitle)
-      .add('series', []);
+    this.config = crArea2Config(title, subtitle);
+    return this;
   },
   categoryConfig(categories=[]){
     this.config = crAreaConfig({ spacingTop: 25 })
@@ -138,7 +139,7 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   },
 
   addTooltip(tooltip) {
-    this.config.tooltip = fTooltip(tooltip)
+    fAddTooltip(tooltip)(this.config)
     return this;
   },
 
@@ -147,19 +148,9 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this;
   },
 
-  addZhMiniConfig(config){
-    const _configs = this.config.zhMiniConfigs;
-    if (_configs){
-      _configs.push(config)
-    } else {
-      this.config.zhMiniConfigs = [config]
-    }
-    return this;
-  },
   _addMini(data, option, crConfig){
-    return data && data.length > 0
-      ? this.addZhMiniConfig(crConfig(option))
-      : this;
+    _addMini(data, option, crConfig, this.config)
+    return this;
   },
 
   addZhPointsIf(data, propName='zhIsMfi', is=true){
