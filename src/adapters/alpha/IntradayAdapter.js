@@ -1,5 +1,17 @@
+import pipe from '../../utils/pipe';
+
+import {
+  crStockConfig,
+  fAddDividend
+} from '../../charts/stockBuilderFn';
+import {
+  fAddCaption,
+  fAdd,
+  toConfig
+} from '../../charts/configBuilderFn';
 import { crMarkerExDividend } from '../../charts/MarkerFn';
 import Builder from '../../charts/ConfigBuilder';
+
 import { crVolumePoint } from '../pointFn';
 import { crMarkerColor } from '../IntradayFns';
 import {
@@ -154,6 +166,7 @@ const _crSeriaData = (
 
 const IntradayAdapter = {
   crKey: ({ _itemKey }) => _itemKey,
+
   toConfig(json, option){
     const {
       _itemKey,
@@ -169,21 +182,22 @@ const IntradayAdapter = {
       dDividend,
     } = _seriesData;
 
-    const config = Builder()
-      .stockConfig(_itemKey, {
-        ...option,
-        ..._seriesData
-      })
-      .addCaption(title, subtitle)
-      .add(crIntradayConfigOption({
-          id: _itemKey,
-          data: dC,
-          dataSource
-      }, option))
-      .addDividend(dDividend, minClose, maxClose)
-      .toConfig();
-
-    return { config };
+    return {
+      config: pipe(
+        crStockConfig(_itemKey, {
+          ...option,
+          ..._seriesData
+        }),
+        fAddCaption(title, subtitle),
+        fAdd(crIntradayConfigOption({
+            id: _itemKey,
+            data: dC,
+            dataSource
+        }, option)),
+        fAddDividend(dDividend, minClose, maxClose),
+        toConfig
+      )
+    };
   },
 
   toSeries(json, option){
