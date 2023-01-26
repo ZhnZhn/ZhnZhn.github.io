@@ -7,7 +7,6 @@ var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _stockBuilderFn = require("../../charts/stockBuilderFn");
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _MarkerFn = require("../../charts/MarkerFn");
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 var _pointFn = require("../pointFn");
 var _IntradayFns = require("../IntradayFns");
 var _fnAdapter = require("./fnAdapter");
@@ -168,7 +167,7 @@ const IntradayAdapter = {
     };
   },
   toSeries(json, option) {
-    return _ConfigBuilder.default.crSeria({
+    return (0, _configBuilderFn.crSeriaConfigFromAdapter)({
       adapter: IntradayAdapter,
       type: 'line',
       json,

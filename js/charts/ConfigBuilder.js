@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _seriaFn = require("../math/seriaFn");
 var _Chart = require("./Chart");
 var _Tooltip = require("./Tooltip");
 var _ChartConfigFn = require("./ChartConfigFn");
@@ -49,23 +48,7 @@ const ConfigBuilder = function (config) {
   }
   this.config = config;
 };
-ConfigBuilder.crSeria = _ref => {
-  let {
-    adapter,
-    json,
-    option,
-    type
-  } = _ref;
-  const {
-      config
-    } = adapter.toConfig(json, option),
-    _seria = config.series[0];
-  _seria.minY = (0, _seriaFn.findMinY)(_seria.data);
-  if (type) {
-    _seria.type = type;
-  }
-  return _seria;
-};
+ConfigBuilder.crSeria = _configBuilderFn.crSeriaConfigFromAdapter;
 ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
   ..._SeriaBuilder.default,
   ..._ConfigStockSlice.default,

@@ -1,5 +1,6 @@
 import {
   filterTrimZero,
+  findMinY,
   hasZeroOrLessValue
 } from '../math/seriaFn';
 import {
@@ -241,6 +242,21 @@ const _checkDataLength = (config) => {
 export const toConfig = (config) => {
   _checkDataLength(config)
   return config;
+}
+
+export const crSeriaConfigFromAdapter = ({
+  adapter,
+  json,
+  option,
+  type
+}) => {
+  const { config } = adapter.toConfig(json, option)
+  , _seria = config.series[0];
+  _seria.minY = findMinY(_seria.data)
+  if (type) {
+    _seria.type = type
+  }
+  return _seria;
 }
 
 export const crArea2Config = (

@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crSeriaConfigFromAdapter = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _seriaFn = require("../math/seriaFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _ChartConfigFn = require("./ChartConfigFn");
@@ -181,6 +181,24 @@ const toConfig = config => {
   return config;
 };
 exports.toConfig = toConfig;
+const crSeriaConfigFromAdapter = _ref => {
+  let {
+    adapter,
+    json,
+    option,
+    type
+  } = _ref;
+  const {
+      config
+    } = adapter.toConfig(json, option),
+    _seria = config.series[0];
+  _seria.minY = (0, _seriaFn.findMinY)(_seria.data);
+  if (type) {
+    _seria.type = type;
+  }
+  return _seria;
+};
+exports.crSeriaConfigFromAdapter = crSeriaConfigFromAdapter;
 const crArea2Config = (title, subtitle) => {
   const config = fAddCaption(title, subtitle)((0, _ChartConfigFn.crAreaConfig)({
     spacingTop: 25

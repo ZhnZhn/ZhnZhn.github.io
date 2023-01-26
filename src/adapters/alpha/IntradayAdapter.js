@@ -7,10 +7,10 @@ import {
 import {
   fAddCaption,
   fAdd,
-  toConfig
+  toConfig,
+  crSeriaConfigFromAdapter
 } from '../../charts/configBuilderFn';
 import { crMarkerExDividend } from '../../charts/MarkerFn';
-import Builder from '../../charts/ConfigBuilder';
 
 import { crVolumePoint } from '../pointFn';
 import { crMarkerColor } from '../IntradayFns';
@@ -201,7 +201,7 @@ const IntradayAdapter = {
   },
 
   toSeries(json, option){
-    return Builder.crSeria({
+    return crSeriaConfigFromAdapter({
       adapter: IntradayAdapter,
       type: 'line',
       json,

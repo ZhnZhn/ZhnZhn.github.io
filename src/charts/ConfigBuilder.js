@@ -1,8 +1,4 @@
 import {
-  findMinY
-} from '../math/seriaFn';
-
-import {
   fTitle,
   fSubtitle
 } from './Chart';
@@ -24,6 +20,7 @@ import SeriaBuilder from './SeriaBuilder';
 import ConfigStockSlice from './ConfigStockSlice';
 
 import {
+  crSeriaConfigFromAdapter,
   crArea2Config,
   fAddCaption,
   fAdd,
@@ -74,15 +71,7 @@ const ConfigBuilder = function(config={}) {
   this.config = config;
 };
 
-ConfigBuilder.crSeria = ({ adapter, json, option, type }) => {
-  const { config } = adapter.toConfig(json, option)
-  , _seria = config.series[0];
-  _seria.minY = findMinY(_seria.data)
-  if (type) {
-    _seria.type = type
-  }
-  return _seria;
-}
+ConfigBuilder.crSeria = crSeriaConfigFromAdapter
 
 ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
   ...SeriaBuilder,
