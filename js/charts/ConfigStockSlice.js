@@ -2,7 +2,6 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _IndicatorConfigFn = require("./IndicatorConfigFn");
 var _stockBuilderFn = require("./stockBuilderFn");
 const ConfigStockSlice = {
   //Used only by Alpha Vantage Daily Adjusted, Quandl EOD
@@ -24,10 +23,8 @@ const ConfigStockSlice = {
     return this;
   },
   addMiniHL(option) {
-    const {
-      data
-    } = option;
-    return this._addMini(data, option, _IndicatorConfigFn.crMiniHLConfig);
+    (0, _stockBuilderFn.fAddMiniHL)(option)(this.config);
+    return this;
   }
 };
 var _default = ConfigStockSlice;

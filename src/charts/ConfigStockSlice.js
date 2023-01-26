@@ -1,10 +1,7 @@
 import {
-  crMiniHLConfig
-} from './IndicatorConfigFn';
-
-import {
   fAddMiniVolume,
   fAddMiniATH,
+  fAddMiniHL,
   fAddDividend,
   fAddSplitRatio
 } from './stockBuilderFn';
@@ -30,8 +27,8 @@ const ConfigStockSlice = {
     return this;
   },
   addMiniHL(option){
-    const { data } = option;
-    return this._addMini(data, option, crMiniHLConfig);
+    fAddMiniHL(option)(this.config)
+    return this;
   }
 };
 

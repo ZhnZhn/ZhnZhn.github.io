@@ -24,7 +24,8 @@ import {
 
 import {
   crMiniVolumeConfig,
-  crMiniATHConfig
+  crMiniATHConfig,
+  crMiniHLConfig
 } from './IndicatorConfigFn';
 
 import {
@@ -69,6 +70,15 @@ export const fAddMiniATH = (
   option.data,
   option,
   crMiniATHConfig,
+  config
+);
+
+export const fAddMiniHL = (
+  option
+) => config => _addMini(
+  option.data,
+  option,
+  crMiniHLConfig,
   config
 );
 

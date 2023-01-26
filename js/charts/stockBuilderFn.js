@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.fAddSplitRatio = exports.fAddMiniVolume = exports.fAddMiniATH = exports.fAddDividend = exports.crStockConfig = exports._fSetStockSerias = void 0;
+exports.fAddSplitRatio = exports.fAddMiniVolume = exports.fAddMiniHL = exports.fAddMiniATH = exports.fAddDividend = exports.crStockConfig = exports._fSetStockSerias = void 0;
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _Color = require("../constants/Color");
 var _Chart = require("./Chart");
@@ -22,6 +22,8 @@ const fAddMiniVolume = option => config => (0, _configBuilderFn._addMini)(option
 exports.fAddMiniVolume = fAddMiniVolume;
 const fAddMiniATH = option => config => (0, _configBuilderFn._addMini)(option.data, option, _IndicatorConfigFn.crMiniATHConfig, config);
 exports.fAddMiniATH = fAddMiniATH;
+const fAddMiniHL = option => config => (0, _configBuilderFn._addMini)(option.data, option, _IndicatorConfigFn.crMiniHLConfig, config);
+exports.fAddMiniHL = fAddMiniHL;
 const fAddDividend = (data, min, max) => config => (0, _configBuilderFn._fAddScatterBottom)(_crDividendSeria(data), 'Dividend', min, max)(config);
 exports.fAddDividend = fAddDividend;
 const fAddSplitRatio = (data, min, max) => config => (0, _configBuilderFn._fAddScatterBottom)(_crSplitRatioSeria(data), 'Split Ratio', min, max)(config);
