@@ -7,9 +7,9 @@ import {
   fAddMinMax,
   fAddTooltip,
   fAdd,
-  toConfig
+  toConfig,
+  crSeriaConfig
 } from '../../charts/configBuilderFn';
-import Builder from '../../charts/ConfigBuilder';
 import {
   tooltipValueDmy
 } from '../../charts/Tooltip';
@@ -55,15 +55,15 @@ const FaoStatAdapter = {
   toSeries(json, option){
     const _data = crSeriaData(json, option)
     , { itemCaption } = option;
-    return Builder()
-      .initSeria()
-      .add({
+    return pipe(
+      crSeriaConfig(),
+      fAdd({
         data: _data,
         minY: findMinY(_data),
         name: itemCaption,
-        itemCaption: itemCaption
+        itemCaption
       })
-      .toSeria();
+    );
   }
 };
 

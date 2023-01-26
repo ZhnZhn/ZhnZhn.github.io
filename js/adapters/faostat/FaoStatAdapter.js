@@ -5,7 +5,6 @@ exports.__esModule = true;
 exports.default = void 0;
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
 var _Tooltip = require("../../charts/Tooltip");
 var _fnAdapter = require("./fnAdapter");
 const FaoStatAdapter = {
@@ -28,12 +27,12 @@ const FaoStatAdapter = {
       {
         itemCaption
       } = option;
-    return (0, _ConfigBuilder.default)().initSeria().add({
+    return (0, _pipe.default)((0, _configBuilderFn.crSeriaConfig)(), (0, _configBuilderFn.fAdd)({
       data: _data,
       minY: (0, _fnAdapter.findMinY)(_data),
       name: itemCaption,
-      itemCaption: itemCaption
-    }).toSeria();
+      itemCaption
+    }));
   }
 };
 var _default = FaoStatAdapter;

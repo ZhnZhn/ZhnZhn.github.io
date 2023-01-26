@@ -1,3 +1,5 @@
+export { crSeriaConfig } from './ChartConfigFn';
+
 import {
   filterTrimZero,
   findMinY,
