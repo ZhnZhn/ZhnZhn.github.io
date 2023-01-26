@@ -1,3 +1,14 @@
+import pipe from '../../utils/pipe';
+
+import {
+  crAreaConfig,
+  fAddCaption,
+  fAddPointsToConfig,
+  fAddMinMax,
+  fAddTooltip,
+  fAdd,
+  toConfig
+} from '../../charts/configBuilderFn';
 import Builder from '../../charts/ConfigBuilder';
 import {
   tooltipValueDmy
@@ -22,20 +33,23 @@ const FaoStatAdapter = {
     const _id = crId(option)
     , _title = crTitle(json, option)
     , _subtitle = crSubtitle(json, option)
-    , _points = toDataPoints(json, option)
-    , config = Builder()
-       .areaConfig({ spacingTop: 25 })
-       .addCaption(_title, _subtitle)
-       .addPoints(_id, _points)
-       .addMinMax(_points, option)
-       .addTooltip(tooltipValueDmy)
-       .add({
-         info: toInfo(json, _title, _subtitle),
-         valueMoving: crValueMoving(_points),
-         zhConfig: crZhConfig(_id, option)
-       })
-       .toConfig();
-    return { config };
+    , _points = toDataPoints(json, option);
+
+    return {
+      config: pipe(
+        crAreaConfig(),
+        fAddCaption(_title, _subtitle),
+        fAddPointsToConfig(_id, _points),
+        fAddMinMax(_points, option),
+        fAddTooltip(tooltipValueDmy),
+        fAdd({
+          info: toInfo(json, _title, _subtitle),
+          valueMoving: crValueMoving(_points),
+          zhConfig: crZhConfig(_id, option)
+        }),
+        toConfig
+      )
+    };
   },
 
   toSeries(json, option){
