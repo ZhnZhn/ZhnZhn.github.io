@@ -6,7 +6,6 @@ exports.default = void 0;
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _stockBuilderFn = require("../charts/stockBuilderFn");
 var _configBuilderFn = require("../charts/configBuilderFn");
-var _ConfigBuilder = _interopRequireDefault(require("../charts/ConfigBuilder"));
 var _AdapterFn = require("./AdapterFn");
 var _legendFn = require("./legendFn");
 var _AdapterStockFn = require("./AdapterStockFn");
@@ -85,7 +84,7 @@ const crAdapterOHLCV = _ref3 => {
           },
           option
         });
-      return (0, _ConfigBuilder.default)().stockSeria(id, data).toSeria();
+      return (0, _stockBuilderFn.crStockSeriaConfig)(id, data);
     }
   };
 };

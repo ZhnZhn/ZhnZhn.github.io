@@ -2,7 +2,6 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _seriaFn = require("../math/seriaFn");
 var _Chart = require("./Chart");
 var _ChartTheme = require("./ChartTheme");
 var _ChartConfigFn = require("./ChartConfigFn");
@@ -47,11 +46,6 @@ const SeriaBuilder = {
   },
   scatterSeria(tooltip, option) {
     return this._seria(CONFIG_SCATTER, tooltip, option);
-  },
-  stockSeria(id, data) {
-    return this.initSeria({
-      minY: (0, _seriaFn.findMinY)(data)
-    }).addPoints(id, data);
   },
   addSeriaBy(index, obj) {
     if (this.config.series[index]) {

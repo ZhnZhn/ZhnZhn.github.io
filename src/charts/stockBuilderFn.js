@@ -8,13 +8,16 @@ import {
   COLOR_SPLIT_RATIO
 } from '../constants/Color';
 
+import { findMinY } from '../math/seriaFn';
+
 import {
   crType,
   fTooltip
 } from './Chart';
 import {
   crAreaConfig,
-  setSeriaDataTo
+  setSeriaDataTo,
+  crSeriaConfig
 } from './ChartConfigFn';
 import {
   tooltipValueTdmyIf,
@@ -171,3 +174,12 @@ export const crStockConfig = (
      _fSetStockSerias(seriaType, seriaWidth, dC, dH, dL, dO)
   );
 }
+
+export const crStockSeriaConfig = (
+  id,
+  data
+) => crSeriaConfig({
+   data,
+   minY: findMinY(data),
+   zhValueText: id
+})

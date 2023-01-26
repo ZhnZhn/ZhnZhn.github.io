@@ -2,9 +2,10 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.fAddSplitRatio = exports.fAddMiniVolume = exports.fAddMiniHL = exports.fAddMiniATH = exports.fAddDividend = exports.crStockConfig = exports._fSetStockSerias = void 0;
+exports.fAddSplitRatio = exports.fAddMiniVolume = exports.fAddMiniHL = exports.fAddMiniATH = exports.fAddDividend = exports.crStockSeriaConfig = exports.crStockConfig = exports._fSetStockSerias = void 0;
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _Color = require("../constants/Color");
+var _seriaFn = require("../math/seriaFn");
 var _Chart = require("./Chart");
 var _ChartConfigFn = require("./ChartConfigFn");
 var _Tooltip = require("./Tooltip");
@@ -83,4 +84,10 @@ const crStockConfig = (id, option) => {
   }), _fSetStockSerias(seriaType, seriaWidth, dC, dH, dL, dO));
 };
 exports.crStockConfig = crStockConfig;
+const crStockSeriaConfig = (id, data) => (0, _ChartConfigFn.crSeriaConfig)({
+  data,
+  minY: (0, _seriaFn.findMinY)(data),
+  zhValueText: id
+});
+exports.crStockSeriaConfig = crStockSeriaConfig;
 //# sourceMappingURL=stockBuilderFn.js.map

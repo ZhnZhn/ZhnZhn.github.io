@@ -1,5 +1,3 @@
-import { findMinY } from '../math/seriaFn';
-
 import { fTooltip } from './Chart';
 import { getSeriaColorByIndex } from './ChartTheme';
 import { crSeriaConfig } from './ChartConfigFn';
@@ -46,11 +44,6 @@ const SeriaBuilder = {
   },
   scatterSeria(tooltip, option){
     return this._seria(CONFIG_SCATTER, tooltip, option);
-  },
-  stockSeria(id, data){
-    return this
-      .initSeria({ minY: findMinY(data) })
-      .addPoints(id, data);
   },
 
   addSeriaBy(index, obj) {

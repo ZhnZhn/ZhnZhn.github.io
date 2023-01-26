@@ -1,12 +1,14 @@
 import pipe from '../utils/pipe';
 
-import { crStockConfig } from '../charts/stockBuilderFn';
+import {
+  crStockConfig,
+  crStockSeriaConfig
+} from '../charts/stockBuilderFn';
 import {
   fAddCaption,
   fAdd,
   toConfig
 } from '../charts/configBuilderFn';
-import Builder from '../charts/ConfigBuilder'
 
 import { valueMoving } from './AdapterFn'
 import { stockSeriesLegend } from './legendFn';
@@ -65,10 +67,8 @@ const crAdapterOHLCV = ({
        toDate,
        seriaOption: { ...seriaOption, isAllSeries: false },
        option
-     });
-    return Builder()
-      .stockSeria(id, data)
-      .toSeria();
+    });
+    return crStockSeriaConfig(id, data);
   }
 })
 
