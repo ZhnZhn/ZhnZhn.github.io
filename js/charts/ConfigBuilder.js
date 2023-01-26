@@ -6,7 +6,6 @@ exports.default = void 0;
 var _seriaFn = require("../math/seriaFn");
 var _Chart = require("./Chart");
 var _Tooltip = require("./Tooltip");
-var _ChartFn = require("./ChartFn");
 var _ChartConfigFn = require("./ChartConfigFn");
 var _TreeMapConfigFn = require("./TreeMapConfigFn");
 var _ChartFactory = require("./ChartFactory");
@@ -162,28 +161,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
   },
   addMinMax(data, option) {
     (0, _configBuilderFn.fAddMinMax)(data, option)(this.config);
-    return this;
-  },
-  _addScatterBottom(seria, name, min, max) {
-    const {
-      data
-    } = seria;
-    if (data.length > 0) {
-      const {
-        series,
-        chart,
-        zhConfig
-      } = this.config;
-      (0, _ChartFn.setYToPoints)(data, (0, _ChartFn.calcMinY)(min, max));
-      seria.visible = false;
-      series.push(seria);
-      chart.spacingBottom = 40;
-      zhConfig.legend.push({
-        index: series.length - 1,
-        color: seria.color,
-        name: name
-      });
-    }
     return this;
   },
   toConfig() {

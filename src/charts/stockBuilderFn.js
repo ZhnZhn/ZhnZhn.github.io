@@ -3,19 +3,25 @@ import pipe from '../utils/pipe';
 import {
   COLOR_S_OPEN,
   COLOR_S_HIGH,
-  COLOR_S_LOW
+  COLOR_S_LOW,
+  COLOR_EX_DIVIDEND,
+  COLOR_SPLIT_RATIO
 } from '../constants/Color';
 
 import {
-  crType
+  crType,
+  fTooltip
 } from './Chart';
 import {
   crAreaConfig,
   setSeriaDataTo
 } from './ChartConfigFn';
 import {
-  tooltipValueTdmyIf
+  tooltipValueTdmyIf,
+  tooltipExDividend,
+  tooltipSplitRatio
 } from './Tooltip';
+
 import {
   crMiniVolumeConfig,
   crMiniATHConfig
@@ -24,8 +30,29 @@ import {
 import {
   fAddTooltip,
   fAddMinMax,
-  _addMini
+  _addMini,
+  _fAddScatterBottom
 } from './configBuilderFn';
+
+const _crScatterSeria = (
+  color,
+  pointFormatter,
+  data
+) => ({
+  type: 'scatter',
+  color, data,
+  tooltip: fTooltip(pointFormatter),
+})
+, _crDividendSeria = (data) => _crScatterSeria(
+  COLOR_EX_DIVIDEND,
+  tooltipExDividend,
+  data
+)
+, _crSplitRatioSeria = (data) => _crScatterSeria(
+  COLOR_SPLIT_RATIO,
+  tooltipSplitRatio,
+  data
+);
 
 export const fAddMiniVolume = (
   option
@@ -44,6 +71,28 @@ export const fAddMiniATH = (
   crMiniATHConfig,
   config
 );
+
+export const fAddDividend = (
+  data,
+  min,
+  max
+) => config => _fAddScatterBottom(
+   _crDividendSeria(data),
+   'Dividend',
+   min,
+   max
+)(config);
+
+export const fAddSplitRatio = (
+  data,
+  min,
+  max
+) => config => _fAddScatterBottom(
+  _crSplitRatioSeria(data),
+  'Split Ratio',
+  min,
+  max
+)(config);
 
 const _crSeriaOption = (
   color,

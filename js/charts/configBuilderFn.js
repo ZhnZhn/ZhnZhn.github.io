@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crArea2Config = exports._addMini = void 0;
+exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _seriaFn = require("../math/seriaFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _ChartConfigFn = require("./ChartConfigFn");
@@ -130,6 +130,29 @@ const fAddMinMax = (data, option) => config => {
   return config;
 };
 exports.fAddMinMax = fAddMinMax;
+const _fAddScatterBottom = (seria, name, min, max) => config => {
+  const {
+    data
+  } = seria;
+  if (data.length > 0) {
+    const {
+      series,
+      chart,
+      zhConfig
+    } = config;
+    (0, _ChartFn.setYToPoints)(data, (0, _ChartFn.calcMinY)(min, max));
+    seria.visible = false;
+    series.push(seria);
+    chart.spacingBottom = 40;
+    zhConfig.legend.push({
+      index: series.length - 1,
+      color: seria.color,
+      name
+    });
+  }
+  return config;
+};
+exports._fAddScatterBottom = _fAddScatterBottom;
 const _disableAnimation = config => {
   fAdd({
     chart: {

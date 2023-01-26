@@ -10,10 +10,6 @@ import {
   tooltipTreeMap
 } from './Tooltip';
 import {
-  calcMinY,
-  setYToPoints
-} from './ChartFn';
-import {
   crAreaConfig
 } from './ChartConfigFn';
 import {
@@ -166,23 +162,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
 
   addMinMax(data, option){
     fAddMinMax(data, option)(this.config)
-    return this;
-  },
-
-  _addScatterBottom(seria, name, min, max) {
-    const { data } = seria;
-    if (data.length > 0) {
-     const { series, chart, zhConfig } = this.config;
-     setYToPoints(data, calcMinY(min, max));
-     seria.visible = false
-     series.push(seria);
-     chart.spacingBottom = 40;
-     zhConfig.legend.push({
-       index: series.length - 1,
-       color: seria.color,
-       name: name
-     })
-    }
     return this;
   },
 

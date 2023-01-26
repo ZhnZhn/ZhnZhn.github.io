@@ -18,6 +18,8 @@ import {
   fTooltip
 } from './Chart';
 import {
+  calcMinY,
+  setYToPoints,
   setPlotLinesMinMax,
   setPlotLinesDeltas
 } from './ChartFn';
@@ -192,6 +194,32 @@ export const fAddMinMax = (
   _setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems, config);
   _setYAxisType(isLogarithmic, _data, config);
 
+  return config;
+}
+
+export const _fAddScatterBottom = (
+  seria,
+  name,
+  min,
+  max
+) => config => {
+  const { data } = seria;
+  if (data.length > 0) {
+   const {
+     series,
+     chart,
+     zhConfig
+   } = config;
+   setYToPoints(data, calcMinY(min, max));
+   seria.visible = false
+   series.push(seria);
+   chart.spacingBottom = 40;
+   zhConfig.legend.push({
+     index: series.length - 1,
+     color: seria.color,
+     name
+   })
+  }
   return config;
 }
 
