@@ -1,12 +1,9 @@
 import { fTooltip } from './Chart';
-import { getSeriaColorByIndex } from './ChartTheme';
 import { crSeriaConfig } from './ChartConfigFn';
 import { CONFIG_TREE_MAP } from './TreeMapConfigFn';
 import {
-  crLegendItem,
-} from './seriaBuilderHelpers';
-import {
-  fAddSeries
+  fAddSeries,
+  fAddSeriaBy
 } from './configBuilderFn';
 
 const CONFIG_SERIA = {
@@ -20,8 +17,6 @@ const CONFIG_SERIA = {
    type: 'scatter'
 };
 
-const _isArr = Array.isArray
-, _assign = Object.assign;
 
 const SeriaBuilder = {
 
@@ -47,11 +42,7 @@ const SeriaBuilder = {
   },
 
   addSeriaBy(index, obj) {
-    if (this.config.series[index]) {
-      _assign(this.config.series[index], obj)
-    } else {
-      this.config.series.push(obj)
-    }
+    fAddSeriaBy(index, obj)(this.config)
     return this;
   },
   addSeriaTo(index, seria) {
@@ -59,53 +50,12 @@ const SeriaBuilder = {
     return this;
   },
 
-  _addSeriaPoints(points, { maxVisible=6 }={}){
-    const _legend = [];
-    points.forEach((data, index) => {
-      const is = index<maxVisible ? true : false
-          , color = getSeriaColorByIndex(index)
-          , { seriaName } = data;
-      _legend.push(crLegendItem({
-        index, color, name: seriaName, is
-      }))
-      this.addSeriaBy(index, {
-           type: 'spline',
-           data: data,
-           name: seriaName,
-           zhValueText: seriaName,
-           visible: is
-        })
-    })
-    if (_legend.length !== 0){
-      this.addLegend(_legend);
-    }
-    return this;
-  },
-
-  _addPointsToConfig(points){
-    if (points[0]
-        && _isArr(points[0])
-        && points[0][0]
-        && typeof points[0][0] !== 'number'
-    ) {
-      this._addSeriaPoints(points)
-    } else {
-      this.addSeriaBy(0, {
-         type: 'spline',
-         data: points
-      });
-    }
-  },
-
+  //INSEE
   addPoints(id, points, text){
-    if (this._type !== 'S') {
-      this._addPointsToConfig(points)
-    } else {
-      this.add({
-        data: points,
-        zhValueText: text ? text : id
-      })
-    }
+    this.add({
+      data: points,
+      zhValueText: text ? text : id
+    })
     return this;
   },
 

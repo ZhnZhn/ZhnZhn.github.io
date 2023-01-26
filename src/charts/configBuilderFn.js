@@ -10,7 +10,7 @@ import {
 } from '../utils/isTypeFn';
 
 import {
-  crAreaConfig,
+  crAreaConfig as _crAreaConfig,
   isLineType
 } from './ChartConfigFn';
 import {
@@ -19,13 +19,17 @@ import {
   fTooltip
 } from './Chart';
 import {
+  getSeriaColorByIndex
+} from './ChartTheme';
+import {
   calcMinY,
   setYToPoints,
   setPlotLinesMinMax,
   setPlotLinesDeltas
 } from './ChartFn';
 import {
-  addSeriesImpl
+  addSeriesImpl,
+  crLegendItem
 } from './seriaBuilderHelpers';
 
 import {
@@ -37,7 +41,8 @@ import {
   getFirstSeriaData
 } from './configBuilderHelpers';
 
-const _isArr = Array.isArray;
+const _isArr = Array.isArray
+, _assign = Object.assign;
 
 export const fAddCaption = (
   title,
@@ -198,6 +203,62 @@ export const fAddMinMax = (
   return config;
 }
 
+/*************************************/
+/**********fAddPointsToConfig*********/
+
+export const fAddSeriaBy = (
+  index,
+  obj
+) => config => {
+  if (config.series[index]) {
+    _assign(config.series[index], obj)
+  } else {
+    config.series.push(obj)
+  }
+  return config;
+}
+
+const _fAddSeriaPoints = (
+  points,
+  { maxVisible=6 }={}
+) => config => {
+  const _legend = [];
+  points.forEach((data, index) => {
+    const is = index<maxVisible ? true : false
+    , color = getSeriaColorByIndex(index)
+    , { seriaName } = data;
+    _legend.push(crLegendItem({
+      index, color, name: seriaName, is
+    }))
+    fAddSeriaBy(index, {
+      type: 'spline',
+      data: data,
+      name: seriaName,
+      zhValueText: seriaName,
+      visible: is
+    })(config)
+  })
+  if (_legend.length !== 0){
+    fAddLegend(_legend)(config);
+  }
+  return config;
+}
+
+//FAOSTAT
+export const fAddPointsToConfig = (
+  points
+) => config => points[0]
+  && _isArr(points[0])
+  && points[0][0]
+  && typeof points[0][0] !== 'number'
+  ? _fAddSeriaPoints(points)(config)
+  : fAddSeriaBy(0, {
+      type: 'spline',
+      data: points
+    })(config);
+
+/*************************************/
+
 export const _fAddScatterBottom = (
   seria,
   name,
@@ -259,12 +320,16 @@ export const crSeriaConfigFromAdapter = ({
   return _seria;
 }
 
+export const crAreaConfig = () => _crAreaConfig({
+  spacingTop: 25
+})
+
 export const crArea2Config = (
   title,
   subtitle
 ) => {
   const config = fAddCaption(title, subtitle)(
-    crAreaConfig({ spacingTop: 25 })
+    crAreaConfig()
   );
   config.series = []
   return config;

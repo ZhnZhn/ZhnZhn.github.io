@@ -1,15 +1,17 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crSeriaConfigFromAdapter = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crSeriaConfigFromAdapter = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _seriaFn = require("../math/seriaFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _ChartConfigFn = require("./ChartConfigFn");
 var _Chart = require("./Chart");
+var _ChartTheme = require("./ChartTheme");
 var _ChartFn = require("./ChartFn");
 var _seriaBuilderHelpers = require("./seriaBuilderHelpers");
 var _configBuilderHelpers = require("./configBuilderHelpers");
-const _isArr = Array.isArray;
+const _isArr = Array.isArray,
+  _assign = Object.assign;
 const fAddCaption = (title, subtitle) => config => {
   config.title = (0, _Chart.fTitle)({
     text: title
@@ -129,7 +131,60 @@ const fAddMinMax = (data, option) => config => {
   _setYAxisType(isLogarithmic, _data, config);
   return config;
 };
+
+/*************************************/
+/**********fAddPointsToConfig*********/
 exports.fAddMinMax = fAddMinMax;
+const fAddSeriaBy = (index, obj) => config => {
+  if (config.series[index]) {
+    _assign(config.series[index], obj);
+  } else {
+    config.series.push(obj);
+  }
+  return config;
+};
+exports.fAddSeriaBy = fAddSeriaBy;
+const _fAddSeriaPoints = function (points, _temp) {
+  let {
+    maxVisible = 6
+  } = _temp === void 0 ? {} : _temp;
+  return config => {
+    const _legend = [];
+    points.forEach((data, index) => {
+      const is = index < maxVisible ? true : false,
+        color = (0, _ChartTheme.getSeriaColorByIndex)(index),
+        {
+          seriaName
+        } = data;
+      _legend.push((0, _seriaBuilderHelpers.crLegendItem)({
+        index,
+        color,
+        name: seriaName,
+        is
+      }));
+      fAddSeriaBy(index, {
+        type: 'spline',
+        data: data,
+        name: seriaName,
+        zhValueText: seriaName,
+        visible: is
+      })(config);
+    });
+    if (_legend.length !== 0) {
+      fAddLegend(_legend)(config);
+    }
+    return config;
+  };
+};
+
+//FAOSTAT
+const fAddPointsToConfig = points => config => points[0] && _isArr(points[0]) && points[0][0] && typeof points[0][0] !== 'number' ? _fAddSeriaPoints(points)(config) : fAddSeriaBy(0, {
+  type: 'spline',
+  data: points
+})(config);
+
+/*************************************/
+exports.fAddPointsToConfig = fAddPointsToConfig;
 const _fAddScatterBottom = (seria, name, min, max) => config => {
   const {
     data
@@ -199,10 +254,12 @@ const crSeriaConfigFromAdapter = _ref => {
   return _seria;
 };
 exports.crSeriaConfigFromAdapter = crSeriaConfigFromAdapter;
+const crAreaConfig = () => (0, _ChartConfigFn.crAreaConfig)({
+  spacingTop: 25
+});
+exports.crAreaConfig = crAreaConfig;
 const crArea2Config = (title, subtitle) => {
-  const config = fAddCaption(title, subtitle)((0, _ChartConfigFn.crAreaConfig)({
-    spacingTop: 25
-  }));
+  const config = fAddCaption(title, subtitle)(crAreaConfig());
   config.series = [];
   return config;
 };
