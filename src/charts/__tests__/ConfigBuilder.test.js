@@ -7,20 +7,6 @@ import ConfigBuilder from '../ConfigBuilder';
 
 
 describe('ConfigBuilder addCaption', ()=>{
-  test('should add title', ()=>{
-    const title = 'title'
-    , config = ConfigBuilder()
-       .addTitle(title)
-       .toConfig();
-    expect(config.title.text).toBe(title)
-  })
-  test('should add subtitle', ()=>{
-    const subtitle = 'subtitle'
-    , config = ConfigBuilder()
-       .addSubtitle(subtitle)
-       .toConfig();
-    expect(config.subtitle.text).toBe(subtitle)
-  })
   test('should add caption', ()=>{
     const title = 'title', subtitle = 'subtitle'
     , config = ConfigBuilder()

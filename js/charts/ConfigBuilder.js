@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _Chart = require("./Chart");
 var _Tooltip = require("./Tooltip");
 var _ChartConfigFn = require("./ChartConfigFn");
 var _TreeMapConfigFn = require("./TreeMapConfigFn");
@@ -11,7 +10,6 @@ var _ChartFactory = require("./ChartFactory");
 var _SeriaBuilder = _interopRequireDefault(require("./SeriaBuilder"));
 var _ConfigStockSlice = _interopRequireDefault(require("./ConfigStockSlice"));
 var _configBuilderFn = require("./configBuilderFn");
-var _configBuilderHelpers = require("./configBuilderHelpers");
 const CATEGORIES_X_AXIS = {
     type: "category",
     categories: [],
@@ -97,18 +95,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
     return this.addSeries(ConfigBuilder().treeMapSeria(_Tooltip.tooltipTreeMap, {
       data
     }).toSeria());
-  },
-  addTitle(text) {
-    (0, _configBuilderHelpers.assignTo)(this.config, 'title', (0, _Chart.fTitle)({
-      text
-    }));
-    return this;
-  },
-  addSubtitle(text) {
-    (0, _configBuilderHelpers.assignTo)(this.config, 'subtitle', (0, _Chart.fSubtitle)({
-      text
-    }));
-    return this;
   },
   addCaption(title, subtitle) {
     (0, _configBuilderFn.fAddCaption)(title, subtitle)(this.config);

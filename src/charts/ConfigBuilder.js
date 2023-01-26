@@ -1,8 +1,4 @@
 import {
-  fTitle,
-  fSubtitle
-} from './Chart';
-import {
   tooltipTreeMap
 } from './Tooltip';
 import {
@@ -30,10 +26,6 @@ import {
   _addMini,
   toConfig
 } from './configBuilderFn';
-
-import {
-  assignTo
-} from './configBuilderHelpers';
 
 const CATEGORIES_X_AXIS = {
   type: "category",
@@ -110,14 +102,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     );
   },
 
-  addTitle(text) {
-    assignTo(this.config, 'title', fTitle({ text }))
-    return this;
-  },
-  addSubtitle(text) {
-    assignTo(this.config, 'subtitle', fSubtitle({ text }))
-    return this;
-  },
   addCaption(title, subtitle){
     fAddCaption(title, subtitle)(this.config)
     return this;
