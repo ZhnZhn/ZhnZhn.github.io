@@ -39,7 +39,7 @@ const FaoStatAdapter = {
       config: pipe(
         crAreaConfig(),
         fAddCaption(_title, _subtitle),
-        fAddPointsToConfig(_id, _points),
+        fAddPointsToConfig(_points),
         fAddMinMax(_points, option),
         fAddTooltip(tooltipValueDmy),
         fAdd({
@@ -53,7 +53,8 @@ const FaoStatAdapter = {
   },
 
   toSeries(json, option){
-    const _data = crSeriaData(json, option)
+    const { data } = json
+    , _data = crSeriaData(data, option)
     , { itemCaption } = option;
     return pipe(
       crSeriaConfig(),

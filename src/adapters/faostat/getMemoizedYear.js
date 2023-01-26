@@ -1,7 +1,7 @@
 
 let _memoized_year;
 const _crYear = () => {
-  const year = (new Date()).getUTCFullYear()+1
+  const year = (new Date()).getUTCFullYear()
   , arr = [];
   let i = 1980;
   for(;i<year;i++){

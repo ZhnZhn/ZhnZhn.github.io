@@ -19,7 +19,8 @@ import { DATASET_EMPTY } from './fnDescr';
 
 const BLANK = ' '
 , MM_DD = '-12-31'
-, DF_TITLE = 'More about data on tab Info in Description';
+, DF_TITLE = 'More about data on tab Info in Description'
+, _isArr = Array.isArray;
 
 const _crUnit = (json) => {
   const { data } = json
@@ -104,10 +105,12 @@ const _compareByX = (a, b) => a.x - b.x;
 const _crSeriaData = (
   data,
   option
-) => data
-  .map(_crPoint)
-  .filter(p => isNumber(p.y))
-  .sort(_compareByX);
+) => _isArr(data)
+  ? data
+     .map(_crPoint)
+     .filter(p => isNumber(p.y))
+     .sort(_compareByX)
+  : [];
 
 const _isItemList = item => getValue(item)
   .indexOf('>') !== -1;
