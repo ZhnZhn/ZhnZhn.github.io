@@ -1,5 +1,13 @@
+import pipe from '../../utils/pipe';
+
+import {
+  crArea2Config,
+  fAddSeries,
+  fAdd,
+  toConfig
+} from '../../charts/configBuilderFn';
 import { crSeriaConfig } from '../../charts/ChartConfigFn';
-import Builder from '../../charts/ConfigBuilder';
+
 import { ymdToUTC } from './fnAdapter';
 
 const TWO_YEARS_DAYS = 501
@@ -194,21 +202,29 @@ const _toSeries = (json, option) => {
 
 const IndicatorAdapter = {
   crKey(option){
-    const { ticket, value } = option;
+    const {
+      ticket,
+      value
+    } = option;
     return (option.chartId = `${ticket}-${value}`);
   },
+
   toConfig(json, option) {
-    const { ticket, value, chartId } = option
-    //, _chartId = `${ticket}-${value}`
-    , _title = `${ticket}: ${value}`
-    , _series = _toSeries(json, option)
-    , config = Builder()
-        .area2Config(_title)
-        .addSeries(_series)
-        .add({ zhConfig: _crZhConfig(chartId) })
-        .toConfig();
+    const {
+      ticket,
+      value,
+      chartId
+    } = option;
+
     return {
-      config,
+      config: pipe(
+        //_title
+        crArea2Config(`${ticket}: ${value}`),
+        //_series
+        fAddSeries(_toSeries(json, option)),
+        fAdd({ zhConfig: _crZhConfig(chartId) }),
+        toConfig
+      ),
       isDrawDeltaExtrems: false,
       isNotZoomToMinMax: false
     };
