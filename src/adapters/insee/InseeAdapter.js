@@ -1,14 +1,14 @@
+import { crSeriaConfig } from '../../charts/configBuilderFn';
+import crConfigType1 from '../../charts/crConfigType1';
 
-import crConfigType1 from '../../charts/crConfigType1'
 import {
   ymdToUTC,
   findMinY
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
-import fnDescr from './fnDescr'
+import fnDescr from './fnDescr';
 
-const { Builder } = crConfigType1
-, _parser = new window.DOMParser()
+const _parser = new window.DOMParser()
 , _isNaN = Number.isNaN;
 
 //€
@@ -21,10 +21,15 @@ const _crZhConfig = id => ({
 
 const _toData = (str) => {
   const xml = _parser.parseFromString(str, 'text/xml')
-      , series = xml.getElementsByTagName('Series')
-      , data = [], info = [];
-  let i=0, max = series.length
-  , _seria, _getAttr, _v;
+  , series = xml.getElementsByTagName('Series')
+  , data = []
+  , info = [];
+
+  let i=0
+  , max = series.length
+  , _seria
+  , _getAttr
+  , _v;
 
   for(i; i<max; i++){
     _seria = series[i]
@@ -49,37 +54,47 @@ const _toData = (str) => {
     })
   }
 
-  return {
-    data: data.sort(compareByDate),
-    info: info
-  };
+  return [
+    data.sort(compareByDate),
+    info
+  ];
 }
 
-const _crConfigOption = ({value, title}, info) => ({
+const _crConfigOption = (
+  {value, title},
+  info
+) => ({
   info: fnDescr.toInfo(info, title),
   zhConfig: _crZhConfig(value)
 })
 
 const InseeAdapter = {
   toConfig(str, option) {
-    const { data, info } = _toData(str)
-    , confOption = _crConfigOption(option, info);
-
+    const [
+      data,
+      info
+    ] = _toData(str);
     return {
       config: crConfigType1({
-        option, data, confOption
+        option,
+        data,
+        confOption: _crConfigOption(option, info)
       })
-     };
+    };
   },
 
   toSeries(str, option) {
-     const { value, title, subtitle } = option
-     , _text = subtitle ? subtitle : title
-     , { data } = _toData(str);
-     return Builder()
-       .initSeria({ minY: findMinY })
-       .addPoints(value, data, _text)
-       .toSeria();
+     const {
+       value,
+       title,
+       subtitle
+     } = option
+     , data = _toData(str)[0];
+     return crSeriaConfig({
+        data,
+        minY: findMinY(data),
+        zhValueText: subtitle || title || value
+     });
   }
 }
 

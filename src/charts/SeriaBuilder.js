@@ -17,16 +17,11 @@ const CONFIG_SERIA = {
    type: 'scatter'
 };
 
-
 const SeriaBuilder = {
-
-  initSeria(option){
-    this._type = 'S'
-    this.config = crSeriaConfig(option)
-    return this;
-  },
   splineSeria(option){
-    return this.initSeria({...CONFIG_SERIA, ...option});
+    this._type = 'S'
+    this.config = crSeriaConfig({...CONFIG_SERIA, ...option})
+    return this;
   },
   _seria(CONFIG, tooltip, option){
     this._type = 'S'
@@ -47,15 +42,6 @@ const SeriaBuilder = {
   },
   addSeriaTo(index, seria) {
     this.config.series[index] = seria
-    return this;
-  },
-
-  //INSEE
-  addPoints(id, points, text){
-    this.add({
-      data: points,
-      zhValueText: text ? text : id
-    })
     return this;
   },
 
