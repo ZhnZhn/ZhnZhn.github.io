@@ -1,4 +1,5 @@
-import crConfigType1 from '../charts/crConfigType1'
+import crConfigType1 from '../charts/crConfigType1';
+import { crSeriaConfigFromAdapter } from '../charts/configBuilderFn';
 
 const { Builder } = crConfigType1
 , _isArr = Array.isArray
@@ -8,7 +9,8 @@ const { Builder } = crConfigType1
    itemCaption,
    dataSource,
 }) => ({
-  id: _itemKey, key: _itemKey,
+  id: _itemKey,
+  key: _itemKey,
   itemCaption,
   dataSource
 }), crConfOptionDf = (option) => ({
@@ -44,8 +46,10 @@ const crAdapterType1 = ({
       };
     },
     toSeries(json, option){
-      return Builder.crSeria({
-        adapter, json, option,
+      return crSeriaConfigFromAdapter({
+        adapter,
+        json,
+        option,
         type: 'spline'
       });
     }
