@@ -14,13 +14,11 @@ import ConfigStockSlice from './ConfigStockSlice';
 import {
   crSeriaConfigFromAdapter,
   crArea2Config,
-  crBarOrColumnConfig,
   fAddCaption,
   fAdd,
   fAddMinMax,
   fAddLegend,
   fAddTooltip,
-  _addMini,
   toConfig
 } from './configBuilderFn';
 
@@ -84,10 +82,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this.add('xAxis', xAxis)
       .add('yAxis', CATEGORIES_Y_AXIS);
   },
-  barOrColumnConfig(type, categories){
-    this.config = crBarOrColumnConfig(type, categories)
-    return this;
-  },
   treeMapConfig(data){
     this.config = crTreeMapConfig()
     return this.addSeries(ConfigBuilder()
@@ -108,11 +102,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
 
   add(propName, option){
     fAdd(propName, option)(this.config)
-    return this;
-  },
-
-  _addMini(data, option, crConfig){
-    _addMini(data, option, crConfig, this.config)
     return this;
   },
 

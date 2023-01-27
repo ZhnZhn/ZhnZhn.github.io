@@ -79,10 +79,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
     };
     return this.add('xAxis', xAxis).add('yAxis', CATEGORIES_Y_AXIS);
   },
-  barOrColumnConfig(type, categories) {
-    this.config = (0, _configBuilderFn.crBarOrColumnConfig)(type, categories);
-    return this;
-  },
   treeMapConfig(data) {
     this.config = (0, _TreeMapConfigFn.crTreeMapConfig)();
     return this.addSeries(ConfigBuilder().treeMapSeria(_Tooltip.tooltipTreeMap, {
@@ -99,10 +95,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
   },
   add(propName, option) {
     (0, _configBuilderFn.fAdd)(propName, option)(this.config);
-    return this;
-  },
-  _addMini(data, option, crConfig) {
-    (0, _configBuilderFn._addMini)(data, option, crConfig, this.config);
     return this;
   },
   addZhPointsIf(data, propName, is) {

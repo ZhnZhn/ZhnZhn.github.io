@@ -1,4 +1,11 @@
-import Builder from '../../charts/ConfigBuilder';
+import pipe from '../../utils/pipe';
+import {
+  crBarOrColumnConfig,
+  fAddCaption,
+  fAdd,
+  fAddSeriaBy,
+  toConfig
+} from '../../charts/configBuilderFn';
 import { addColorsTo } from '../TreeMapFn';
 
 import {
@@ -20,21 +27,22 @@ const _crConfig = (
   categories
 ) => {
   const title = crCategoryTitle(option);
-  return Builder()
-    .barOrColumnConfig('BAR', categories)
-    .addCaption(
-       title,
-       option.subtitle
-    )
-    .add({
-       info: crInfo(json, option),
-       zhConfig: crZhConfig(option, { isWi: false })
-    })
-    .addSeriaBy(0, {
+  return pipe(
+    crBarOrColumnConfig('BAR', categories),
+    fAddCaption(
+      title,
+      option.subtitle
+    ),
+    fAdd({
+      info: crInfo(json, option),
+      zhConfig: crZhConfig(option, { isWi: false })
+    }),
+    fAddSeriaBy(0, {
       data: data,
       name: title
-    })
-    .toConfig();
+    }),
+    toConfig
+  );
 }
 
 const URL_HS_CHAPTERS = './data/uncomtrade/hs-chapters.json';
