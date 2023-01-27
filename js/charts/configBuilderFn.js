@@ -1,15 +1,17 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crSeriaConfigFromAdapter = exports.crSeriaConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSeriaConfigFromAdapter = exports.crSeriaConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _ChartConfigFn = require("./ChartConfigFn");
 exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
 var _seriaFn = require("../math/seriaFn");
 var _isTypeFn = require("../utils/isTypeFn");
+var _TreeMapConfigFn = require("./TreeMapConfigFn");
 var _Chart = require("./Chart");
 var _ChartTheme = require("./ChartTheme");
 var _ChartFn = require("./ChartFn");
 var _ChartFactory = require("./ChartFactory");
+var _Tooltip = require("./Tooltip");
 var _seriaBuilderHelpers = require("./seriaBuilderHelpers");
 var _configBuilderHelpers = require("./configBuilderHelpers");
 const _isArr = Array.isArray,
@@ -278,4 +280,11 @@ const crBarOrColumnConfig = function (type, categories) {
   })(_crConfig());
 };
 exports.crBarOrColumnConfig = crBarOrColumnConfig;
+const crTreeMapConfig = data => {
+  const config = (0, _TreeMapConfigFn.crTreeMapConfig)(),
+    seria = (0, _TreeMapConfigFn.crTreeMapSeria)(data);
+  seria.tooltip = (0, _Chart.fTooltip)(_Tooltip.tooltipTreeMap);
+  return fAddSeries(seria)(config);
+};
+exports.crTreeMapConfig = crTreeMapConfig;
 //# sourceMappingURL=configBuilderFn.js.map

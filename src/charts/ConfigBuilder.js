@@ -1,12 +1,4 @@
-import {
-  tooltipTreeMap
-} from './Tooltip';
-import {
-  crAreaConfig
-} from './ChartConfigFn';
-import {
-  crTreeMapConfig
-} from './TreeMapConfigFn';
+import { crAreaConfig } from './ChartConfigFn';
 
 import SeriaBuilder from './SeriaBuilder';
 import ConfigStockSlice from './ConfigStockSlice';
@@ -14,6 +6,7 @@ import ConfigStockSlice from './ConfigStockSlice';
 import {
   crSeriaConfigFromAdapter,
   crArea2Config,
+  crTreeMapConfig,
   fAddCaption,
   fAdd,
   fAddMinMax,
@@ -83,11 +76,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
       .add('yAxis', CATEGORIES_Y_AXIS);
   },
   treeMapConfig(data){
-    this.config = crTreeMapConfig()
-    return this.addSeries(ConfigBuilder()
-      .treeMapSeria(tooltipTreeMap, { data })
-      .toSeria()
-    );
+    this.config = crTreeMapConfig(data);
+    return this;
   },
 
   addCaption(title, subtitle){

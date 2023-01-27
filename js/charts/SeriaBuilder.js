@@ -4,7 +4,6 @@ exports.__esModule = true;
 exports.default = void 0;
 var _Chart = require("./Chart");
 var _ChartConfigFn = require("./ChartConfigFn");
-var _TreeMapConfigFn = require("./TreeMapConfigFn");
 var _configBuilderFn = require("./configBuilderFn");
 const CONFIG_SERIA = {
     //type: 'spline',
@@ -33,9 +32,6 @@ const SeriaBuilder = {
     };
     this.add('tooltip', (0, _Chart.fTooltip)(tooltip));
     return this;
-  },
-  treeMapSeria(tooltip, option) {
-    return this._seria(_TreeMapConfigFn.CONFIG_TREE_MAP, tooltip, option);
   },
   scatterSeria(tooltip, option) {
     return this._seria(CONFIG_SCATTER, tooltip, option);

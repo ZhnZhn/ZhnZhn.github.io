@@ -16,6 +16,10 @@ import {
   isLineType
 } from './ChartConfigFn';
 import {
+  crTreeMapConfig as _crTreeMapConfig,
+  crTreeMapSeria
+} from './TreeMapConfigFn';
+import {
   fTitle,
   fSubtitle,
   fTooltip
@@ -33,6 +37,9 @@ import {
   crBarConfig,
   crColumnConfig
 } from './ChartFactory';
+import {
+  tooltipTreeMap
+} from './Tooltip';
 import {
   addSeriesImpl,
   crLegendItem
@@ -350,4 +357,13 @@ export const crBarOrColumnConfig = (
     ? crBarConfig
     : crColumnConfig;
   return fAdd('xAxis', { categories })(_crConfig());
+}
+
+export const crTreeMapConfig = (
+  data
+) => {
+  const config = _crTreeMapConfig()
+  , seria = crTreeMapSeria(data);
+  seria.tooltip = fTooltip(tooltipTreeMap)  
+  return fAddSeries(seria)(config);
 }

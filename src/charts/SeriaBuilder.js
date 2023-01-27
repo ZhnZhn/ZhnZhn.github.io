@@ -1,6 +1,5 @@
 import { fTooltip } from './Chart';
 import { crSeriaConfig } from './ChartConfigFn';
-import { CONFIG_TREE_MAP } from './TreeMapConfigFn';
 import {
   fAddSeries,
   fAddSeriaBy
@@ -28,9 +27,6 @@ const SeriaBuilder = {
     this.config = { ...CONFIG, ...option }
     this.add('tooltip', fTooltip(tooltip))
     return this;
-  },
-  treeMapSeria(tooltip, option){
-    return this._seria(CONFIG_TREE_MAP, tooltip, option);
   },
   scatterSeria(tooltip, option){
     return this._seria(CONFIG_SCATTER, tooltip, option);
