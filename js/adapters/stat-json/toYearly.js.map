@@ -1,1 +1,40 @@
-{"version":3,"sources":["../../../src/adapters/stat-json/toYearly.js"],"names":["_isArr","Array","isArray","_toData","values","times","_values","data","map","time","i","value","reverse","toYearly","crConfig","json","option","title","subtitle","ds","config","init","Yearly","toConfig","add","spacingTop","addCaption"],"mappings":";;;;;;;AAAA;;AACA;;AACA;;AAKA;;AAEA,MAAMA,MAAM,GAAGC,KAAK,CAACC,OAArB;;AAEA,MAAMC,OAAO,GAAG,CACdC,MADc,EAEdC,KAFc,KAGX;AACH,QAAMC,OAAO,GAAGN,MAAM,CAACI,MAAD,CAAN,GACZA,MADY,GAEZ,CAACA,MAAD,CAFJ;;AAGA,QAAMG,IAAI,GAAGF,KAAK,CAACG,GAAN,CAAU,CAACC,IAAD,EAAOC,CAAP,KAAc,CACnC,mBAAMD,IAAN,CADmC,EAEnCH,OAAO,CAACI,CAAD,CAAP,CAAWC,KAFwB,CAAxB,CAAb;AAKA,SAAOJ,IAAI,CAACK,OAAL,EAAP;AACD,CAbD;;AAeA,MAAMC,QAAQ,GAAG;AACfC,EAAAA,QAAQ,EAAC,CAACC,IAAD,EAAOC,MAAP,KAAkB;AACzB,UAAM;AAAEC,MAAAA,KAAK,GAAC,EAAR;AAAYC,MAAAA;AAAZ,QAAyBF,MAA/B;AAAA,UACE,CAAEG,EAAF,EAAMf,MAAN,EAAcC,KAAd,IAAwB,gCAAgBU,IAAhB,EAAsBC,MAAtB,CAD1B;AAAA,UAEET,IAAI,GAAGJ,OAAO,CAACC,MAAD,EAASC,KAAT,CAFhB;AAAA,UAGEe,MAAM,GAAG,8BACPC,IADO,CACFC,yBAAOC,QAAP,CAAgBhB,IAAhB,EAAsBS,MAAtB,CADE,EAEPQ,GAFO,CAEH,OAFG,EAEM;AAAEC,MAAAA,UAAU,EAAE;AAAd,KAFN,EAGPC,UAHO,CAGIT,KAHJ,EAGWC,QAHX,EAIPM,GAJO,CAIH,MAJG,EAIK,uBAAOL,EAAP,EAAWH,MAAX,CAJL,EAKPQ,GALO,CAKH,UALG,EAKS,2BAAWR,MAAX,CALT,EAMPO,QANO,EAHX;;AAWC,WAAOH,MAAP;AACF;AAdc,CAAjB;eAiBeP,Q","sourcesContent":["import ConfigBuilder from '../../charts/ConfigBuilder';\r\nimport Yearly from '../toYearsByMonths';\r\nimport {\r\n  crDsValuesTimes,\r\n  crInfo,\r\n  crZhConfig,\r\n} from './fnAdapter';\r\nimport { toYMD } from './fnUtil';\r\n\r\nconst _isArr = Array.isArray;\r\n\r\nconst _toData = (\r\n  values,\r\n  times\r\n) => {\r\n  const _values = _isArr(values)\r\n    ? values\r\n    : [values];\r\n  const data = times.map((time, i) => ([\r\n    toYMD(time),\r\n    _values[i].value\r\n  ]))\r\n\r\n  return data.reverse();\r\n};\r\n\r\nconst toYearly = {\r\n  crConfig:(json, option) => {\r\n    const { title='', subtitle } = option\r\n    , [ ds, values, times ] = crDsValuesTimes(json, option)\r\n    , data = _toData(values, times)\r\n    , config = ConfigBuilder()\r\n       .init(Yearly.toConfig(data, option))\r\n       .add('chart', { spacingTop: 25 })\r\n       .addCaption(title, subtitle)\r\n       .add('info', crInfo(ds, option))\r\n       .add('zhConfig', crZhConfig(option))\r\n       .toConfig();\r\n\r\n     return config;\r\n  }\r\n};\r\n\r\nexport default toYearly\r\n"],"file":"toYearly.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-json/toYearly.js"
+ ],
+ "file": "../../../src/adapters/stat-json/toYearly.js",
+ "names": [
+  "_isArr",
+  "Array",
+  "isArray",
+  "_toData",
+  "values",
+  "times",
+  "_values",
+  "data",
+  "map",
+  "time",
+  "i",
+  "toYMD",
+  "value",
+  "reverse",
+  "toYearly",
+  "crConfig",
+  "json",
+  "option",
+  "title",
+  "subtitle",
+  "ds",
+  "crDsValuesTimes",
+  "pipe",
+  "Yearly",
+  "toConfig",
+  "fAdd",
+  "spacingTop",
+  "fAddCaption",
+  "crInfo",
+  "crZhConfig"
+ ],
+ "mappings": ";;;;;AAAA;AACA;AAKA;AAEA;AAKA;AAEA,MAAMA,MAAM,GAAGC,KAAK,CAACC,OAAO;AAE5B,MAAMC,OAAO,GAAG,CACdC,MAAM,EACNC,KAAK,KACF;EACH,MAAMC,OAAO,GAAGN,MAAM,CAACI,MAAM,CAAC,GAC1BA,MAAM,GACN,CAACA,MAAM,CAAC;EACZ,MAAMG,IAAI,GAAGF,KAAK,CAACG,GAAG,CAAC,CAACC,IAAI,EAAEC,CAAC,KAAM,CACnC,IAAAC,aAAK,EAACF,IAAI,CAAC,EACXH,OAAO,CAACI,CAAC,CAAC,CAACE,KAAK,CAChB,CAAC;EAEH,OAAOL,IAAI,CAACM,OAAO,EAAE;AACvB,CAAC;AAED,MAAMC,QAAQ,GAAG;EACfC,QAAQ,EAAC,CAACC,IAAI,EAAEC,MAAM,KAAK;IACzB,MAAM;QACJC,KAAK,GAAC,EAAE;QACRC;MACF,CAAC,GAAGF,MAAM;MACR,CACAG,EAAE,EACFhB,MAAM,EACNC,KAAK,CACN,GAAG,IAAAgB,0BAAe,EAACL,IAAI,EAAEC,MAAM,CAAC;MAC/BV,IAAI,GAAGJ,OAAO,CAACC,MAAM,EAAEC,KAAK,CAAC;IAE9B,OAAO,IAAAiB,aAAI,EACTC,wBAAM,CAACC,QAAQ,CAACjB,IAAI,EAAEU,MAAM,CAAC,EAC7B,IAAAQ,qBAAI,EAAC,OAAO,EAAE;MAAEC,UAAU,EAAE;IAAG,CAAC,CAAC,EACjC,IAAAC,4BAAW,EAACT,KAAK,EAAEC,QAAQ,CAAC,EAC5B,IAAAM,qBAAI,EAAC,MAAM,EAAE,IAAAG,iBAAM,EAACR,EAAE,EAAEH,MAAM,CAAC,CAAC,EAChC,IAAAQ,qBAAI,EAAC,UAAU,EAAE,IAAAI,qBAAU,EAACZ,MAAM,CAAC,CAAC,EACpCO,yBAAQ,CACT;EACJ;AACF,CAAC;AAAC,eAEaV,QAAQ;AAAA"
+}

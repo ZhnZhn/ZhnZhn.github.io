@@ -1,5 +1,11 @@
-import ConfigBuilder from '../../charts/ConfigBuilder';
+import pipe from '../../utils/pipe';
+import {
+  fAddCaption,
+  fAdd,
+  toConfig
+} from '../../charts/configBuilderFn';
 import Yearly from '../toYearsByMonths';
+
 import {
   crDsValuesTimes,
   crInfo,
@@ -26,18 +32,25 @@ const _toData = (
 
 const toYearly = {
   crConfig:(json, option) => {
-    const { title='', subtitle } = option
-    , [ ds, values, times ] = crDsValuesTimes(json, option)
-    , data = _toData(values, times)
-    , config = ConfigBuilder()
-       .init(Yearly.toConfig(data, option))
-       .add('chart', { spacingTop: 25 })
-       .addCaption(title, subtitle)
-       .add('info', crInfo(ds, option))
-       .add('zhConfig', crZhConfig(option))
-       .toConfig();
+    const {
+      title='',
+      subtitle
+    } = option
+    , [
+      ds,
+      values,
+      times
+    ] = crDsValuesTimes(json, option)
+    , data = _toData(values, times);
 
-     return config;
+     return pipe(
+       Yearly.toConfig(data, option),
+       fAdd('chart', { spacingTop: 25 }),
+       fAddCaption(title, subtitle),
+       fAdd('info', crInfo(ds, option)),
+       fAdd('zhConfig', crZhConfig(option)),
+       toConfig
+     );
   }
 };
 

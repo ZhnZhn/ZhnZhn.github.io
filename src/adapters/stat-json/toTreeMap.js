@@ -7,7 +7,7 @@ import {
   fAddCaption,
   fAdd,
   toConfig
-} from '../../configBuilderFn';
+} from '../../charts/configBuilderFn';
 
 import {
   addColorsTo,
