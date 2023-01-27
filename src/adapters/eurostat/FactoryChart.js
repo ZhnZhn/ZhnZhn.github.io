@@ -1,4 +1,9 @@
-import Builder from '../../charts/ConfigBuilder';
+import pipe from '../../utils/pipe';
+import {
+  crBarOrColumnConfig,
+  fAdd,
+  toConfig
+} from '../../charts/configBuilderFn';
 
 const _assign = Object.assign;
 
@@ -72,24 +77,26 @@ const _crBarYAxis = () => ({
   labels: { x: 3 }
 })
 
-const _crColumnConfig = option => Builder()
- .barOrColumnConfig()
- .add({
-   legend: _crLegend(),
-   plotOptions: _crPlotOptionsColumn(option)
- })
- .toConfig();
+const _crColumnConfig = option => pipe(
+  crBarOrColumnConfig(),
+  fAdd({
+    legend: _crLegend(),
+    plotOptions: _crPlotOptionsColumn(option)
+  }),
+  toConfig
+);
 
 const _crBarConfig = (option) => {
-  const config = Builder()
-    .barOrColumnConfig('BAR')
-    .add({
+  const config = pipe(
+    crBarOrColumnConfig('BAR'),
+    fAdd({
       chart: {...BAR_CHART},
       yAxis: _crBarYAxis(),
       legend: _crLegend(28),
       plotOptions: _crPlotOptionsBar(option)
-    })
-    .toConfig();
+    }),
+    toConfig
+  );
 
   if (option.seriaType === 'BAR_WITH_LABELS') {
     config.plotOptions.bar.dataLabels = _crBarDataLabels()
@@ -99,13 +106,14 @@ const _crBarConfig = (option) => {
 
 const _crDotConfig = (option) => {
   const { seriaColor } = option;
-  const config = Builder()
-    .barOrColumnConfig()
-    .add({
+  const config = pipe(
+    crBarOrColumnConfig(),
+    fAdd({
       chart: {...SCATTER_CHART},
       legend: _crLegend(28)
-    })
-    .toConfig();
+    }),
+    toConfig
+  );
 
   _assign(config.series[0], {
     color: seriaColor,

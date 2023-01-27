@@ -1,22 +1,20 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
-
+var _pipe = _interopRequireDefault(require("../../utils/pipe"));
+var _configBuilderFn = require("../../charts/configBuilderFn");
 const _assign = Object.assign;
 const CHART_HEIGHT = {
   height: 600,
   marginTop: 75,
   marginBottom: 20
 };
-const BAR_CHART = { ...CHART_HEIGHT,
+const BAR_CHART = {
+  ...CHART_HEIGHT,
   type: 'bar'
 };
-
 const _crBarDataLabels = () => ({
   enabled: true,
   color: 'black',
@@ -27,17 +25,15 @@ const _crBarDataLabels = () => ({
     fontSize: '14px'
   }
 });
-
-const SCATTER_CHART = { ...CHART_HEIGHT,
+const SCATTER_CHART = {
+  ...CHART_HEIGHT,
   type: 'scatter',
   inverted: true
 };
-
 const _crLegend = function (y) {
   if (y === void 0) {
     y = 10;
   }
-
   return {
     y,
     x: 0,
@@ -47,7 +43,6 @@ const _crLegend = function (y) {
     layout: 'horizontal'
   };
 };
-
 const PLOT_OPTIONS = {
   minPointLength: 5,
   pointPadding: 0,
@@ -55,7 +50,6 @@ const PLOT_OPTIONS = {
   groupPadding: 0.2,
   shadow: false
 };
-
 const _crPlotOptionsColumn = _ref => {
   let {
     seriaColor
@@ -69,7 +63,6 @@ const _crPlotOptionsColumn = _ref => {
     }
   };
 };
-
 const _crPlotOptionsBar = _ref2 => {
   let {
     seriaColor
@@ -82,45 +75,40 @@ const _crPlotOptionsBar = _ref2 => {
     }
   };
 };
-
 const _crBarYAxis = () => ({
   opposite: true,
   labels: {
     x: 3
   }
 });
-
-const _crColumnConfig = option => (0, _ConfigBuilder.default)().barOrColumnConfig().add({
+const _crColumnConfig = option => (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)(), (0, _configBuilderFn.fAdd)({
   legend: _crLegend(),
   plotOptions: _crPlotOptionsColumn(option)
-}).toConfig();
-
+}), _configBuilderFn.toConfig);
 const _crBarConfig = option => {
-  const config = (0, _ConfigBuilder.default)().barOrColumnConfig('BAR').add({
-    chart: { ...BAR_CHART
+  const config = (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)('BAR'), (0, _configBuilderFn.fAdd)({
+    chart: {
+      ...BAR_CHART
     },
     yAxis: _crBarYAxis(),
     legend: _crLegend(28),
     plotOptions: _crPlotOptionsBar(option)
-  }).toConfig();
-
+  }), _configBuilderFn.toConfig);
   if (option.seriaType === 'BAR_WITH_LABELS') {
     config.plotOptions.bar.dataLabels = _crBarDataLabels();
   }
-
   return config;
 };
-
 const _crDotConfig = option => {
   const {
     seriaColor
   } = option;
-  const config = (0, _ConfigBuilder.default)().barOrColumnConfig().add({
-    chart: { ...SCATTER_CHART
+  const config = (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)(), (0, _configBuilderFn.fAdd)({
+    chart: {
+      ...SCATTER_CHART
     },
     legend: _crLegend(28)
-  }).toConfig();
-
+  }), _configBuilderFn.toConfig);
   _assign(config.series[0], {
     color: seriaColor,
     marker: {
@@ -128,10 +116,8 @@ const _crDotConfig = option => {
       radius: 5
     }
   });
-
   return config;
 };
-
 const _r = {
   COLUMN_SET: _crColumnConfig,
   BAR_SET: _crBarConfig,
@@ -141,10 +127,9 @@ const _r = {
 const FactoryChart = {
   createConfig: option => {
     const {
-      seriaType
-    } = option || {},
-          _crConfig = seriaType && _r[seriaType];
-
+        seriaType
+      } = option || {},
+      _crConfig = seriaType && _r[seriaType];
     return _crConfig ? _crConfig(option) : {};
   }
 };
