@@ -1,6 +1,13 @@
 import JSONstat from 'jsonstat';
+
 import domSanitize from '../../utils/domSanitize';
-import Builder from '../../charts/ConfigBuilder';
+import pipe from '../../utils/pipe';
+import {
+  crTreeMapConfig,
+  fAddCaption,
+  fAdd,
+  toConfig
+} from '../../configBuilderFn';
 
 import {
   addColorsTo,
@@ -145,13 +152,12 @@ const toTreeMap = {
       addColorsTo({ data, total })
     }
 
-    const config = Builder()
-      .treeMapConfig(data)
-      .addCaption(_title, _subtitle)
-      .add(crChartOption(ds, Tid, option))
-      .toConfig();
-
-    return config;
+    return pipe(
+      crTreeMapConfig(data),
+      fAddCaption(_title, _subtitle),
+      fAdd(crChartOption(ds, Tid, option)),
+      toConfig
+    );
   },
 
   fCrConfig: (param={}, config={}) => {

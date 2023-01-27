@@ -5,8 +5,7 @@ import ConfigStockSlice from './ConfigStockSlice';
 
 import {
   crSeriaConfigFromAdapter,
-  crArea2Config,
-  crTreeMapConfig,
+  crArea2Config,  
   fAddCaption,
   fAdd,
   fAddMinMax,
@@ -74,10 +73,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     const xAxis = {...CATEGORIES_X_AXIS, ...{ categories }}
     return this.add('xAxis', xAxis)
       .add('yAxis', CATEGORIES_Y_AXIS);
-  },
-  treeMapConfig(data){
-    this.config = crTreeMapConfig(data);
-    return this;
   },
 
   addCaption(title, subtitle){

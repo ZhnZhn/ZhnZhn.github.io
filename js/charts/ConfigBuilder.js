@@ -77,10 +77,6 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
     };
     return this.add('xAxis', xAxis).add('yAxis', CATEGORIES_Y_AXIS);
   },
-  treeMapConfig(data) {
-    this.config = (0, _configBuilderFn.crTreeMapConfig)(data);
-    return this;
-  },
   addCaption(title, subtitle) {
     (0, _configBuilderFn.fAddCaption)(title, subtitle)(this.config);
     return this;
