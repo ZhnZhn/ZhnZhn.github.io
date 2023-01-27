@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crSeriaConfigFromAdapter = exports.crSeriaConfig = exports.crBarOrColumnConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crSeriaConfigFromAdapter = exports.crSeriaConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _ChartConfigFn = require("./ChartConfigFn");
 exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
 var _seriaFn = require("../math/seriaFn");
@@ -256,6 +256,8 @@ const crSeriaConfigFromAdapter = _ref => {
   return _seria;
 };
 exports.crSeriaConfigFromAdapter = crSeriaConfigFromAdapter;
+const crAreaDfConfig = _ChartConfigFn.crAreaConfig;
+exports.crAreaDfConfig = crAreaDfConfig;
 const crAreaConfig = () => (0, _ChartConfigFn.crAreaConfig)({
   spacingTop: 25
 });

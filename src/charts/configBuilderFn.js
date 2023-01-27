@@ -326,6 +326,7 @@ export const crSeriaConfigFromAdapter = ({
   return _seria;
 }
 
+export const crAreaDfConfig = _crAreaConfig
 export const crAreaConfig = () => _crAreaConfig({
   spacingTop: 25
 })

@@ -1,5 +1,11 @@
-import Builder from '../../charts/ConfigBuilder';
-
+import pipe from '../../utils/pipe';
+import {
+  crAreaDfConfig,
+  fAdd,
+  fAddCaption,
+  fAddTooltip,
+  toConfig
+} from '../../charts/configBuilderFn';
 import { fTooltip } from '../../charts/Chart';
 import {
   tooltipCategorySimple,
@@ -147,22 +153,23 @@ const _addSeriasTo = (
 const _crSeriesConfig = (
   json,
   option
-) =>  {
+) => {
   const { title, subtitle } = option;
-  return Builder()
-   .areaConfig()
-   .add({
-     chart: S_CHART,
-     xAxis: X_AXIS,
-     yAxis: Y_AXIS
-   })
-   .addCaption(title, subtitle)
-   .addTooltip(tooltipCategorySimple)
-   .add({
-     info: crInfo(json, option),
-     zhConfig: crZhConfig(option, {isLegend: true})
-   })
-   .toConfig();
+  return pipe(
+    crAreaDfConfig(),
+    fAdd({
+      chart: S_CHART,
+      xAxis: X_AXIS,
+      yAxis: Y_AXIS
+    }),
+    fAddCaption(title, subtitle),
+    fAddTooltip(tooltipCategorySimple),
+    fAdd({
+      info: crInfo(json, option),
+      zhConfig: crZhConfig(option, {isLegend: true})
+    }),
+    toConfig
+  );
 }
 
 const _toMls = yyyymm => {
