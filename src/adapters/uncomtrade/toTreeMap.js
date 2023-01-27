@@ -1,4 +1,10 @@
-import Builder from '../../charts/ConfigBuilder';
+import pipe from '../../utils/pipe';
+import {
+  crTreeMapConfig,
+  fAddCaption,
+  fAdd,
+  toConfig
+} from '../../charts/configBuilderFn';
 import {
   addColorsTo,
   crPointName
@@ -89,19 +95,20 @@ const toTreeMap = (
 ) => {
   const data = isTotalByAll(option)
     ? _crDataByCountry(json)
-    : _crTreeMapData(json)
-  , config = Builder()
-     .treeMapConfig(data)
-     .addCaption(
-        crCategoryTitle(option),
-        option.subtitle
-     )
-     .add({
-        info: crInfo(json, option),
-        zhConfig: crZhConfig(option)
-     })
-     .toConfig();
-  return config;
+    : _crTreeMapData(json);
+
+  return pipe(
+    crTreeMapConfig(data),
+    fAddCaption(
+      crCategoryTitle(option),
+      option.subtitle
+    ),
+    fAdd({
+      info: crInfo(json, option),
+      zhConfig: crZhConfig(option)
+    }),
+    toConfig
+  );
 };
 
 export default toTreeMap
