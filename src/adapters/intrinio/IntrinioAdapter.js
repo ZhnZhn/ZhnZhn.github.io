@@ -1,11 +1,11 @@
 import crConfigType1 from '../../charts/crConfigType1';
+import { crSeriaConfigFromAdapter } from '../../charts/configBuilderFn';
+
 import {
   crSubtitle,
   crData,
   crConfigOption
 } from './fnAdapter';
-
-const { Builder } = crConfigType1;
 
 const IntrinioAdapter = {
   toConfig(json, option){
@@ -24,7 +24,7 @@ const IntrinioAdapter = {
   },
 
   toSeries(json, option){
-    return Builder.crSeria({
+    return crSeriaConfigFromAdapter({
       adapter: IntrinioAdapter,
       json,
       option
