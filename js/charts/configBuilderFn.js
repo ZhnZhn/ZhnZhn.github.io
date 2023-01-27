@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crSeriaConfigFromAdapter = exports.crSeriaConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crSeriaConfigFromAdapter = exports.crSeriaConfig = exports.crBarOrColumnConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _ChartConfigFn = require("./ChartConfigFn");
 exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
 var _seriaFn = require("../math/seriaFn");
@@ -9,6 +9,7 @@ var _isTypeFn = require("../utils/isTypeFn");
 var _Chart = require("./Chart");
 var _ChartTheme = require("./ChartTheme");
 var _ChartFn = require("./ChartFn");
+var _ChartFactory = require("./ChartFactory");
 var _seriaBuilderHelpers = require("./seriaBuilderHelpers");
 var _configBuilderHelpers = require("./configBuilderHelpers");
 const _isArr = Array.isArray,
@@ -265,4 +266,14 @@ const crArea2Config = (title, subtitle) => {
   return config;
 };
 exports.crArea2Config = crArea2Config;
+const crBarOrColumnConfig = function (type, categories) {
+  if (categories === void 0) {
+    categories = [];
+  }
+  const _crConfig = type === 'BAR' ? _ChartFactory.crBarConfig : _ChartFactory.crColumnConfig;
+  return fAdd('xAxis', {
+    categories
+  })(_crConfig());
+};
+exports.crBarOrColumnConfig = crBarOrColumnConfig;
 //# sourceMappingURL=configBuilderFn.js.map

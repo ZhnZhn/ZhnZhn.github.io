@@ -1,5 +1,12 @@
+import pipe from '../utils/pipe';
+import {
+  crBarOrColumnConfig,
+  fAddCaption,
+  fAddSeriaBy,
+  toConfig
+} from '../charts/configBuilderFn';
 import addJenksColorTo from '../math/addJenksColorTo';
-import Builder from '../charts/ConfigBuilder';
+
 
 const _crCategories = (
   data
@@ -13,13 +20,14 @@ const crCategoryConfig = (
   seriaColor,
   data,
   isCluster
-) => Builder()
-  .barOrColumnConfig(seriaType, _crCategories(data))
-  .addCaption(title, subtitle)
-  .addSeriaBy(0, {
+) => pipe(
+  crBarOrColumnConfig(seriaType, _crCategories(data)),
+  fAddCaption(title, subtitle),
+  fAddSeriaBy(0, {
     color: seriaColor,
     data: isCluster ? addJenksColorTo(data) : data
-  })
-  .toConfig();
+  }),
+  toConfig
+);
 
 export default crCategoryConfig

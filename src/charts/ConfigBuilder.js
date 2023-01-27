@@ -7,10 +7,6 @@ import {
 import {
   crTreeMapConfig
 } from './TreeMapConfigFn';
-import {
-  crBarConfig,
-  crColumnConfig
-} from './ChartFactory';
 
 import SeriaBuilder from './SeriaBuilder';
 import ConfigStockSlice from './ConfigStockSlice';
@@ -18,6 +14,7 @@ import ConfigStockSlice from './ConfigStockSlice';
 import {
   crSeriaConfigFromAdapter,
   crArea2Config,
+  crBarOrColumnConfig,
   fAddCaption,
   fAdd,
   fAddMinMax,
@@ -87,12 +84,9 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype , {
     return this.add('xAxis', xAxis)
       .add('yAxis', CATEGORIES_Y_AXIS);
   },
-  barOrColumnConfig(type, categories=[]){
-    const _crConfig = type === 'BAR'
-      ? crBarConfig
-      : crColumnConfig;
-    this.config = _crConfig()
-    return this.add('xAxis', { categories });
+  barOrColumnConfig(type, categories){
+    this.config = crBarOrColumnConfig(type, categories)
+    return this;
   },
   treeMapConfig(data){
     this.config = crTreeMapConfig()

@@ -30,6 +30,10 @@ import {
   setPlotLinesDeltas
 } from './ChartFn';
 import {
+  crBarConfig,
+  crColumnConfig
+} from './ChartFactory';
+import {
   addSeriesImpl,
   crLegendItem
 } from './seriaBuilderHelpers';
@@ -335,4 +339,14 @@ export const crArea2Config = (
   );
   config.series = []
   return config;
+}
+
+export const crBarOrColumnConfig = (
+  type,
+  categories=[]
+) => {
+  const _crConfig = type === 'BAR'
+    ? crBarConfig
+    : crColumnConfig;
+  return fAdd('xAxis', { categories })(_crConfig());
 }

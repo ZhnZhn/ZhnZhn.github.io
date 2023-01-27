@@ -6,7 +6,6 @@ exports.default = void 0;
 var _Tooltip = require("./Tooltip");
 var _ChartConfigFn = require("./ChartConfigFn");
 var _TreeMapConfigFn = require("./TreeMapConfigFn");
-var _ChartFactory = require("./ChartFactory");
 var _SeriaBuilder = _interopRequireDefault(require("./SeriaBuilder"));
 var _ConfigStockSlice = _interopRequireDefault(require("./ConfigStockSlice"));
 var _configBuilderFn = require("./configBuilderFn");
@@ -81,14 +80,8 @@ ConfigBuilder.prototype = _assign(ConfigBuilder.prototype, {
     return this.add('xAxis', xAxis).add('yAxis', CATEGORIES_Y_AXIS);
   },
   barOrColumnConfig(type, categories) {
-    if (categories === void 0) {
-      categories = [];
-    }
-    const _crConfig = type === 'BAR' ? _ChartFactory.crBarConfig : _ChartFactory.crColumnConfig;
-    this.config = _crConfig();
-    return this.add('xAxis', {
-      categories
-    });
+    this.config = (0, _configBuilderFn.crBarOrColumnConfig)(type, categories);
+    return this;
   },
   treeMapConfig(data) {
     this.config = (0, _TreeMapConfigFn.crTreeMapConfig)();
