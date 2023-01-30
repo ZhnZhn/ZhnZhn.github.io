@@ -1,5 +1,8 @@
 import Builder from '../charts/ConfigBuilder';
 import {
+  crSplineSeriaConfig
+} from '../charts/configBuilderFn';
+import {
   tooltipCategorySimple
 } from '../charts/Tooltip';
 import {
@@ -203,18 +206,16 @@ const _crRangeSeries = (data) => {
    })
 
   return [
-    Builder()
-      .splineSeria({
-         name: `Min ${_range}`,
-         data: _minData,
-         color: '#008b8b',
-         seriaWidth: 2,
-         tooltip: tooltipCategorySimple
-       })
-       .toSeria(),
+    crSplineSeriaConfig({
+       name: `Min ${_range}`,
+       data: _minData,
+       color: '#008b8b',
+       seriaWidth: 2,
+       tooltip: tooltipCategorySimple
+    }),
     _crSeria(`Max ${_range}`, {
-      data: _maxData,
-      color: '#008b8b'
+       data: _maxData,
+       color: '#008b8b'
     })
   ];
 }

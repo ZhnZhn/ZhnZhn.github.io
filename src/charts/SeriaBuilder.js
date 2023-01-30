@@ -1,27 +1,14 @@
 import { fTooltip } from './Chart';
-import { crSeriaConfig } from './ChartConfigFn';
 import {
   fAddSeries,
   fAddSeriaBy
 } from './configBuilderFn';
 
-const CONFIG_SERIA = {
-   //type: 'spline',
-   visible: true,
-   marker: {
-    symbol: 'circle'
-   }
-}
-, CONFIG_SCATTER = {
+const CONFIG_SCATTER = {
    type: 'scatter'
 };
 
 const SeriaBuilder = {
-  splineSeria(option){
-    this._type = 'S'
-    this.config = crSeriaConfig({...CONFIG_SERIA, ...option})
-    return this;
-  },
   _seria(CONFIG, tooltip, option){
     this._type = 'S'
     this.config = { ...CONFIG, ...option }

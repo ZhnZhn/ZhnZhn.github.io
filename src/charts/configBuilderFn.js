@@ -1,6 +1,10 @@
 export { crSeriaConfig } from './ChartConfigFn';
 
 import {
+  crSeriaConfig
+} from './ChartConfigFn';
+
+import {
   filterTrimZero,
   findMinY,
   hasZeroOrLessValue
@@ -364,6 +368,22 @@ export const crTreeMapConfig = (
 ) => {
   const config = _crTreeMapConfig()
   , seria = crTreeMapSeria(data);
-  seria.tooltip = fTooltip(tooltipTreeMap)  
+  seria.tooltip = fTooltip(tooltipTreeMap)
   return fAddSeries(seria)(config);
 }
+
+
+const CONFIG_SERIA = {
+   //type: 'spline',
+   visible: true,
+   marker: {
+    symbol: 'circle'
+   }
+}
+
+export const crSplineSeriaConfig = (
+  option
+) => crSeriaConfig({
+  ...CONFIG_SERIA,
+  ...option
+})

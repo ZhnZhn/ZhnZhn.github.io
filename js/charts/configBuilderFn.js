@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSeriaConfigFromAdapter = exports.crSeriaConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSeriaConfigFromAdapter = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _ChartConfigFn = require("./ChartConfigFn");
 exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
 var _seriaFn = require("../math/seriaFn");
@@ -287,4 +287,16 @@ const crTreeMapConfig = data => {
   return fAddSeries(seria)(config);
 };
 exports.crTreeMapConfig = crTreeMapConfig;
+const CONFIG_SERIA = {
+  //type: 'spline',
+  visible: true,
+  marker: {
+    symbol: 'circle'
+  }
+};
+const crSplineSeriaConfig = option => (0, _ChartConfigFn.crSeriaConfig)({
+  ...CONFIG_SERIA,
+  ...option
+});
+exports.crSplineSeriaConfig = crSplineSeriaConfig;
 //# sourceMappingURL=configBuilderFn.js.map

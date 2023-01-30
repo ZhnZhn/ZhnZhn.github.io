@@ -3,27 +3,11 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _Chart = require("./Chart");
-var _ChartConfigFn = require("./ChartConfigFn");
 var _configBuilderFn = require("./configBuilderFn");
-const CONFIG_SERIA = {
-    //type: 'spline',
-    visible: true,
-    marker: {
-      symbol: 'circle'
-    }
-  },
-  CONFIG_SCATTER = {
-    type: 'scatter'
-  };
+const CONFIG_SCATTER = {
+  type: 'scatter'
+};
 const SeriaBuilder = {
-  splineSeria(option) {
-    this._type = 'S';
-    this.config = (0, _ChartConfigFn.crSeriaConfig)({
-      ...CONFIG_SERIA,
-      ...option
-    });
-    return this;
-  },
   _seria(CONFIG, tooltip, option) {
     this._type = 'S';
     this.config = {
