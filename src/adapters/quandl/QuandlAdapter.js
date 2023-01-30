@@ -15,11 +15,16 @@ import {
   crSeriaConfig
 } from '../../charts/ChartConfigFn';
 
-import { ymdToUTC, findMinY } from '../AdapterFn';
-import { compareByDate } from '../compareByFn';
 import {
-    getData,
-    getDataColumnIndex
+  ymdToUTC,
+  findMinY
+} from '../AdapterFn';
+import {
+  compareByDate
+} from '../compareByFn';
+import {
+  getData,
+  getDataColumnIndex
 } from './QuandlFn';
 
 import toArea from './toArea';
@@ -27,18 +32,26 @@ import toSemiDonut from './toSemiDonut';
 import toStackedArea  from './toStackedArea';
 import toStackedColumn from './toStackedColumn';
 import toTreeMap from './toTreeMap';
-import toYearly from '../toYearsByMonths';
-import toScatter from './toScatter';
+import crYearlyConfig from '../toYearsByMonths';
+import {
+  toScatterConfig,
+  toScatterSeria
+} from './toScatter';
 
-const _fToConfig = builder => (json, option) => {
-  const data = getData(json);
-  return { config: builder.toConfig(data, option) };
-};
-const _fToSeria = builder => (json, option, chart) => {
-  const data = getData(json);
-  return builder.toSeria(data, option, chart);
-};
+const _fToConfig = crConfig => (
+  json,
+  option
+) => ({
+  config: crConfig(getData(json), option)
+});
 
+const _fToSeria = crSeria => (
+  json,
+  option,
+  chart
+) => crSeria(getData(json), option, chart);
+
+const _crScatterConfig = _fToConfig(toScatterConfig);
 const _rToConfig = {
   [CHT_AREA]: toArea,
   [CHT_SEMI_DONUT]: toSemiDonut,
@@ -47,19 +60,23 @@ const _rToConfig = {
   [CHT_STACKED_COLUMN]: toStackedColumn,
   [CHT_STACKED_COLUMN_PERCENT]: toStackedColumn,
   [CHT_TREE_MAP]: toTreeMap,
-  [CHT_YEARLY]: _fToConfig(toYearly),
-  [CHT_SCATTER]: _fToConfig(toScatter),
-  [CHT_SCATTER_UP]: _fToConfig(toScatter),
-  [CHT_SCATTER_DOWN]: _fToConfig(toScatter)
+  [CHT_YEARLY]: _fToConfig(crYearlyConfig),
+  [CHT_SCATTER]: _crScatterConfig,
+  [CHT_SCATTER_UP]: _crScatterConfig,
+  [CHT_SCATTER_DOWN]: _crScatterConfig
 };
 
-const _crSeriaData = (data, yIndex) => {
-  return data
-    .map(p => [ ymdToUTC(p[0]), p[yIndex] ])
-    .sort(compareByDate);
-};
+const _crSeriaData = (
+  data,
+  yIndex
+) => data
+  .map(p => [ ymdToUTC(p[0]), p[yIndex] ])
+  .sort(compareByDate);
 
-const _toSeria = (json, option) => {
+const _toSeria = (
+  json,
+  option
+) => {
   const { value:chartId } = option
   , yPointIndex = getDataColumnIndex(json, option)
   , data = _crSeriaData(getData(json), yPointIndex);
@@ -70,11 +87,12 @@ const _toSeria = (json, option) => {
   });
 };
 
+const _crScatterSeria = _fToSeria(toScatterSeria);
 const _rToSeria = {
   DF: _toSeria,
-  [CHT_SCATTER]: _fToSeria(toScatter),
-  [CHT_SCATTER_UP]: _fToSeria(toScatter),
-  [CHT_SCATTER_DOWN]: _fToSeria(toScatter)
+  [CHT_SCATTER]: _crScatterSeria,
+  [CHT_SCATTER_UP]: _crScatterSeria,
+  [CHT_SCATTER_DOWN]: _crScatterSeria
 };
 
 const QuandlAdapter = {

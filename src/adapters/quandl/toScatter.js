@@ -37,7 +37,6 @@ const _calcScatterY = (
     : max - 7*onePercent;
 }
 
-
 const _updateLabelY = (
   p,
   seriaType
@@ -90,23 +89,24 @@ const _getSeriaFrom = (
   return seria;
 }
 
-const toScatter = {
-
-  toConfig: (data, option) => {
-    const seria = _crSeria(data, option)
-    , config = Builder()
-       .areaConfig()
-       .add({ zhConfig: _crZhConfig(option) })
-       .toConfig();
-    config.series[0] = seria
-    return config;
-  },
-
-  toSeria: (data, option, chart) => {
-    const config = toScatter.toConfig(data, option);
-    return _getSeriaFrom(config, option, chart);
-  }
-
+export const toScatterConfig = (
+  data,
+  option
+) => {
+   const config = Builder()
+     .areaConfig()
+     .add({ zhConfig: _crZhConfig(option) })
+     .toConfig();
+   config.series[0] = _crSeria(data, option)
+   return config;
 }
 
-export default toScatter
+export const toScatterSeria = (
+  data,
+  option,
+  chart
+) => _getSeriaFrom(
+  toScatterConfig(data, option),
+  option,
+  chart
+);
