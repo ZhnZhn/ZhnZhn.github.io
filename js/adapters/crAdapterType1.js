@@ -5,10 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _crConfigType = _interopRequireDefault(require("../charts/crConfigType1"));
 var _configBuilderFn = require("../charts/configBuilderFn");
-const {
-    Builder
-  } = _crConfigType.default,
-  _isArr = Array.isArray,
+const _isArr = Array.isArray,
   _assign = Object.assign,
   _crZhConfig = _ref => {
     let {
@@ -41,7 +38,7 @@ const crAdapterType1 = _ref3 => {
     crConfOption = crConfOptionDf,
     addConfOption = NOP,
     trOption = NOP,
-    addConfig = IDENTITY
+    addToConfig = IDENTITY
   } = _ref3;
   const adapter = {
     crKey,
@@ -51,11 +48,11 @@ const crAdapterType1 = _ref3 => {
         confOption = _assign(crConfOption(option, json, _data), addConfOption(option, json));
       trOption(option, json);
       return {
-        config: addConfig(Builder((0, _crConfigType.default)({
+        config: addToConfig((0, _crConfigType.default)({
           option,
           data,
           confOption
-        })), json, option, _data).toConfig()
+        }), json, option, _data)
       };
     },
     toSeries(json, option) {

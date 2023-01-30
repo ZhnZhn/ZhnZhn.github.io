@@ -1,3 +1,7 @@
+import {
+  fAddMiniVolumes,
+  fAddMiniHL
+} from '../../charts/stockBuilderFn';
 import crAdapterType1 from '../crAdapterType1';
 import {
   _assign,
@@ -36,9 +40,14 @@ const _crBtTitleTo = (json, option) => {
   return tsym;
 };
 
-const _crMiniVolume = (title, dColumn, dVolume) => ({
+const _crMiniVolume = (
+  title,
+  dColumn,
+  dVolume
+) => ({
   btTitle: `Volume ${title}`,
-  dColumn, dVolume
+  dColumn,
+  dVolume
 });
 
 const trOption = (option, json) => {
@@ -50,7 +59,12 @@ const trOption = (option, json) => {
   })
 };
 
-const addConfig = (builder, json, option, data) => {
+const addToConfig = (
+  config,
+  json,
+  option,
+  data
+) => {
   const _btTitleTo = _crBtTitleTo(json, option)
   , { value } = option
   , {
@@ -58,17 +72,19 @@ const addConfig = (builder, json, option, data) => {
      dToVolume,
      dHL
   } = data;
-  return builder
-    .addMiniVolume(_crMiniVolume(value, dColumn, dVolume))
-    .addMiniVolume(_crMiniVolume(_btTitleTo, [], dToVolume))
-    .addMiniHL({ data: dHL })
+
+  fAddMiniVolumes([
+    _crMiniVolume(value, dColumn, dVolume),
+    _crMiniVolume(_btTitleTo, [], dToVolume)
+  ])(config)
+  return fAddMiniHL({ data: dHL })(config);
 };
 
 const toHdConfig = crAdapterType1({
   crData,
   crConfOption,
   trOption,
-  addConfig
+  addToConfig
 });
 
 export default toHdConfig

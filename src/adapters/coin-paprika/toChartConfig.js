@@ -1,3 +1,4 @@
+import { fAddMiniVolumes } from '../../charts/stockBuilderFn';
 import crAdapterType1 from '../crAdapterType1';
 import { crData, addConfOption } from './fnAdapter';
 
@@ -11,8 +12,8 @@ const _crMvOption = (
   dVolume, dColumn
 });
 
-const addConfig = (
-  builder,
+const addToConfig = (
+  config,
   json,
   option,
   data
@@ -22,17 +23,16 @@ const addConfig = (
     dColumn,
     dMarketCap
   } = data;
-  return builder
-    .addMiniVolume(
-      _crMvOption('Volume', dVolume, dColumn)
-    )
-    .addMiniVolume(
-      _crMvOption('Market Cap', dMarketCap)
-    );
+  return fAddMiniVolumes([
+    _crMvOption('Volume', dVolume, dColumn),
+    _crMvOption('Market Cap', dMarketCap)
+  ])(config);
 };
 
 const toChartConfig = crAdapterType1({
-  crData, addConfOption, addConfig
+  crData,
+  addConfOption,
+  addToConfig
 });
 
 export default toChartConfig

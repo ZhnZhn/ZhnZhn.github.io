@@ -30,7 +30,6 @@ const crConfigType1 = _ref => {
     valueMoving: (0, _AdapterFn.valueMoving)(data)
   }), (0, _configBuilderFn.fAdd)(confOption), _configBuilderFn.toConfig);
 };
-crConfigType1.Builder = _ConfigBuilder.default;
 var _default = crConfigType1;
 exports.default = _default;
 //# sourceMappingURL=crConfigType1.js.map

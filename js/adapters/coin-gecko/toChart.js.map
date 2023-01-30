@@ -1,1 +1,36 @@
-{"version":3,"sources":["../../../src/adapters/coin-gecko/toChart.js"],"names":["_crDescription","crItemLink","bind","_crInfo","title","_nativeUrl","name","description","_crMvOption","btTitle","currency","dVolume","crData","prices","addConfOption","option","info","addConfig","builder","json","total_volumes","market_caps","_currency","addMiniVolume","toChart"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,MAAMA,cAAc,GAAGC,sBACpBC,IADoB,CACf,IADe,EACT,YADS,CAAvB;;AAGA,MAAMC,OAAO,GAAG;AAAA,MAAC;AAAEC,IAAAA,KAAF;AAASC,IAAAA;AAAT,GAAD;AAAA,SAA4B;AAC1CC,IAAAA,IAAI,EAAEF,KADoC;AAE1CG,IAAAA,WAAW,EAAEP,cAAc,CAACK,UAAD;AAFe,GAA5B;AAAA,CAAhB;;AAKA,MAAMG,WAAW,GAAG,CAClBC,OADkB,EAElBC,QAFkB,EAGlBC,OAHkB,MAId;AACJF,EAAAA,OADI;AAEJL,EAAAA,KAAK,EAAKK,OAAL,SAAgBC,QAFjB;AAGJC,EAAAA;AAHI,CAJc,CAApB;;AAUA,MAAMC,MAAM,GAAG;AAAA,MAAC;AAAEC,IAAAA;AAAF,GAAD;AAAA,SAAgBA,MAAhB;AAAA,CAAf;AAAA,MACEC,aAAa,GAAIC,MAAD,KAAa;AAC5BC,EAAAA,IAAI,EAAEb,OAAO,CAACY,MAAD;AADe,CAAb,CADlB;AAAA,MAIEE,SAAS,GAAG,CAACC,OAAD,EAAUC,IAAV,EAAgBJ,MAAhB,KAA2B;AACtC,QAAM;AACJK,IAAAA,aADI;AAEJC,IAAAA;AAFI,MAGFF,IAHJ;AAAA,QAIE;AAAEG,IAAAA;AAAF,MAAgBP,MAJlB;AAKA,SAAOG,OAAO,CACZK,aADK,CACSf,WAAW,CACxB,QADwB,EACdc,SADc,EACHF,aADG,CADpB,EAILG,aAJK,CAISf,WAAW,CACxB,YADwB,EACVc,SADU,EACCD,WADD,CAJpB,CAAP;AAOF,CAjBD;;AAmBA,MAAMG,OAAO,GAAG,4BAAe;AAC7BZ,EAAAA,MAD6B;AAE7BE,EAAAA,aAF6B;AAG7BG,EAAAA;AAH6B,CAAf,CAAhB;eAMeO,O","sourcesContent":["import crAdapterType1 from '../crAdapterType1';\r\nimport { crItemLink } from './fnAdapter';\r\n\r\nconst _crDescription = crItemLink\r\n  .bind(null, 'Coin Gecko');\r\n\r\nconst _crInfo = ({ title, _nativeUrl }) => ({\r\n  name: title,\r\n  description: _crDescription(_nativeUrl)\r\n});\r\n\r\nconst _crMvOption = (\r\n  btTitle,\r\n  currency,\r\n  dVolume\r\n) => ({\r\n  btTitle,\r\n  title: `${btTitle} ${currency}`,\r\n  dVolume\r\n});\r\n\r\nconst crData = ({ prices }) => prices\r\n, addConfOption = (option) => ({\r\n   info: _crInfo(option)\r\n})\r\n, addConfig = (builder, json, option) => {\r\n   const {\r\n     total_volumes,\r\n     market_caps\r\n   } = json\r\n   , { _currency } = option;\r\n   return builder\r\n    .addMiniVolume(_crMvOption(\r\n      'Volume', _currency, total_volumes\r\n    ))\r\n    .addMiniVolume(_crMvOption(\r\n      'Market Cap', _currency, market_caps\r\n    ));\r\n};\r\n\r\nconst toChart = crAdapterType1({\r\n  crData,\r\n  addConfOption,\r\n  addConfig\r\n});\r\n\r\nexport default toChart\r\n"],"file":"toChart.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-gecko/toChart.js"
+ ],
+ "file": "../../../src/adapters/coin-gecko/toChart.js",
+ "names": [
+  "_crDescription",
+  "crItemLink",
+  "bind",
+  "_crInfo",
+  "title",
+  "_nativeUrl",
+  "name",
+  "description",
+  "_crMvOption",
+  "btTitle",
+  "currency",
+  "dVolume",
+  "crData",
+  "prices",
+  "addConfOption",
+  "option",
+  "info",
+  "addToConfig",
+  "config",
+  "json",
+  "total_volumes",
+  "market_caps",
+  "_currency",
+  "fAddMiniVolumes",
+  "toChart",
+  "crAdapterType1"
+ ],
+ "mappings": ";;;;;AAAA;AACA;AACA;AAEA,MAAMA,cAAc,GAAGC,qBAAU,CAC9BC,IAAI,CAAC,IAAI,EAAE,YAAY,CAAC;AAE3B,MAAMC,OAAO,GAAG;EAAA,IAAC;IAAEC,KAAK;IAAEC;EAAW,CAAC;EAAA,OAAM;IAC1CC,IAAI,EAAEF,KAAK;IACXG,WAAW,EAAEP,cAAc,CAACK,UAAU;EACxC,CAAC;AAAA,CAAC;AAEF,MAAMG,WAAW,GAAG,CAClBC,OAAO,EACPC,QAAQ,EACRC,OAAO,MACH;EACJF,OAAO;EACPL,KAAK,EAAKK,OAAO,SAAIC,QAAU;EAC/BC;AACF,CAAC,CAAC;AAEF,MAAMC,MAAM,GAAG;IAAA,IAAC;MAAEC;IAAO,CAAC;IAAA,OAAKA,MAAM;EAAA;EACnCC,aAAa,GAAIC,MAAM,KAAM;IAC5BC,IAAI,EAAEb,OAAO,CAACY,MAAM;EACvB,CAAC,CAAC;EACAE,WAAW,GAAG,CAACC,MAAM,EAAEC,IAAI,EAAEJ,MAAM,KAAK;IACvC,MAAM;QACJK,aAAa;QACbC;MACF,CAAC,GAAGF,IAAI;MACN;QAAEG;MAAU,CAAC,GAAGP,MAAM;IAExB,OAAO,IAAAQ,+BAAe,EAAC,CACrBf,WAAW,CAAC,QAAQ,EAAEc,SAAS,EAAEF,aAAa,CAAC,EAC/CZ,WAAW,CAAC,YAAY,EAAEc,SAAS,EAAED,WAAW,CAAC,CAClD,CAAC,CAACH,MAAM,CAAC;EACb,CAAC;AAED,MAAMM,OAAO,GAAG,IAAAC,sBAAc,EAAC;EAC7Bb,MAAM;EACNE,aAAa;EACbG;AACF,CAAC,CAAC;AAAC,eAEYO,OAAO;AAAA"
+}

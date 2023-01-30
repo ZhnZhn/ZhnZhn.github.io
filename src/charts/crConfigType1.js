@@ -39,6 +39,4 @@ const crConfigType1 = ({
   );
 }
 
-crConfigType1.Builder = Builder
-
 export default crConfigType1
