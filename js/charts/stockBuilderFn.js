@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.fAddSplitRatio = exports.fAddMiniVolume = exports.fAddMiniHL = exports.fAddMiniATH = exports.fAddDividend = exports.crStockSeriaConfig = exports.crStockConfig = exports._fSetStockSerias = void 0;
+exports.fAddSplitRatio = exports.fAddMiniVolumes = exports.fAddMiniVolume = exports.fAddMiniHL = exports.fAddMiniATH = exports.fAddDividend = exports.crStockSeriaConfig = exports.crStockConfig = exports._fSetStockSerias = void 0;
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _Color = require("../constants/Color");
 var _seriaFn = require("../math/seriaFn");
@@ -19,15 +19,22 @@ const _crScatterSeria = (color, pointFormatter, data) => ({
   }),
   _crDividendSeria = data => _crScatterSeria(_Color.COLOR_EX_DIVIDEND, _Tooltip.tooltipExDividend, data),
   _crSplitRatioSeria = data => _crScatterSeria(_Color.COLOR_SPLIT_RATIO, _Tooltip.tooltipSplitRatio, data);
-const fAddMiniVolume = option => config => (0, _configBuilderFn._addMini)(option.dVolume, option, _IndicatorConfigFn.crMiniVolumeConfig, config);
+const _factoryAddMini = (propName, crMiniConfig) => option => config => (0, _configBuilderFn._addMini)(option[propName], option, crMiniConfig, config);
+const fAddMiniVolume = _factoryAddMini('dVolume', _IndicatorConfigFn.crMiniVolumeConfig);
 exports.fAddMiniVolume = fAddMiniVolume;
-const fAddMiniATH = option => config => (0, _configBuilderFn._addMini)(option.data, option, _IndicatorConfigFn.crMiniATHConfig, config);
+const fAddMiniVolumes = arrOption => config => {
+  arrOption.forEach(option => fAddMiniVolume(option)(config));
+  return config;
+};
+exports.fAddMiniVolumes = fAddMiniVolumes;
+const fAddMiniATH = _factoryAddMini('data', _IndicatorConfigFn.crMiniATHConfig);
 exports.fAddMiniATH = fAddMiniATH;
-const fAddMiniHL = option => config => (0, _configBuilderFn._addMini)(option.data, option, _IndicatorConfigFn.crMiniHLConfig, config);
+const fAddMiniHL = _factoryAddMini('data', _IndicatorConfigFn.crMiniHLConfig);
 exports.fAddMiniHL = fAddMiniHL;
-const fAddDividend = (data, min, max) => config => (0, _configBuilderFn._fAddScatterBottom)(_crDividendSeria(data), 'Dividend', min, max)(config);
+const _factoryAddScatterBottom = (crSeria, seriaName) => (data, min, max) => config => (0, _configBuilderFn._fAddScatterBottom)(crSeria(data), seriaName, min, max)(config);
+const fAddDividend = _factoryAddScatterBottom(_crDividendSeria, 'Dividend');
 exports.fAddDividend = fAddDividend;
-const fAddSplitRatio = (data, min, max) => config => (0, _configBuilderFn._fAddScatterBottom)(_crSplitRatioSeria(data), 'Split Ratio', min, max)(config);
+const fAddSplitRatio = (0, _configBuilderFn._fAddScatterBottom)(_crSplitRatioSeria, 'Split Ratio');
 exports.fAddSplitRatio = fAddSplitRatio;
 const _crSeriaOption = (color, lineWidth) => ({
   type: 'line',

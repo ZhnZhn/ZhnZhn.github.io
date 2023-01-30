@@ -58,54 +58,59 @@ const _crScatterSeria = (
   data
 );
 
-export const fAddMiniVolume = (
-  option
-) => config => _addMini(
-  option.dVolume,
+const _factoryAddMini = (
+  propName,
+  crMiniConfig
+) => (option) => (config) => _addMini(
+  option[propName],
   option,
-  crMiniVolumeConfig,
+  crMiniConfig,
   config
 );
 
-export const fAddMiniATH = (
-  option
-) => config => _addMini(
-  option.data,
-  option,
-  crMiniATHConfig,
-  config
-);
+export const fAddMiniVolume = _factoryAddMini(
+  'dVolume',
+  crMiniVolumeConfig
+)
 
-export const fAddMiniHL = (
-  option
-) => config => _addMini(
-  option.data,
-  option,
-  crMiniHLConfig,
-  config
-);
+export const fAddMiniVolumes = (
+  arrOption
+) => config => {
+  arrOption.forEach(
+    option => fAddMiniVolume(option)(config)
+  )
+  return config;
+}
 
-export const fAddDividend = (
-  data,
+export const fAddMiniATH = _factoryAddMini(
+  'data',
+  crMiniATHConfig
+)
+
+export const fAddMiniHL = _factoryAddMini(
+  'data',
+  crMiniHLConfig
+)
+
+const _factoryAddScatterBottom = (
+  crSeria,
+  seriaName
+) => (data, min, max) => (config) => _fAddScatterBottom(
+  crSeria(data),
+  seriaName,
   min,
   max
-) => config => _fAddScatterBottom(
-   _crDividendSeria(data),
-   'Dividend',
-   min,
-   max
-)(config);
+)(config)
 
-export const fAddSplitRatio = (
-  data,
-  min,
-  max
-) => config => _fAddScatterBottom(
-  _crSplitRatioSeria(data),
-  'Split Ratio',
-  min,
-  max
-)(config);
+export const fAddDividend = _factoryAddScatterBottom(
+  _crDividendSeria,
+  'Dividend'
+)
+
+export const fAddSplitRatio = _fAddScatterBottom(
+  _crSplitRatioSeria,
+  'Split Ratio'
+)
 
 const _crSeriaOption = (
   color,
