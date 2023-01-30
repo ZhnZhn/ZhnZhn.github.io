@@ -4,7 +4,7 @@ import {
   crLinkConf,
   setInfo
 } from './EuroStatFn';
-import toYearly from '../toYearsByMonths';
+import crYearlyConfig from '../toYearsByMonths';
 
 export const crAreaYearlyConfig = (
   json,
@@ -15,7 +15,7 @@ export const crAreaYearlyConfig = (
      title,
      subtitle
    } = option
-   , config = toYearly.toConfig(
+   , config = crYearlyConfig(
        data, {
        title,
        subtitle,

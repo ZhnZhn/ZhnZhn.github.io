@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSeriaConfigFromAdapter = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSeriaConfigFromAdapter = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _ChartConfigFn = require("./ChartConfigFn");
 exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
 var _seriaFn = require("../math/seriaFn");
@@ -193,7 +193,7 @@ const _fAddScatterBottom = (seria, name, min, max) => config => {
   const {
     data
   } = seria;
-  if (data.length > 0) {
+  if (_isArr(data) && data.length > 0) {
     const {
       series,
       chart,
@@ -270,6 +270,42 @@ const crArea2Config = (title, subtitle) => {
   return config;
 };
 exports.crArea2Config = crArea2Config;
+const CATEGORIES_X_AXIS = {
+    type: "category",
+    categories: [],
+    opposite: false,
+    crosshair: void 0,
+    tickColor: "gray",
+    tickWidth: 3,
+    tickLength: 7,
+    tickPosition: "outside",
+    gridLineWidth: 0,
+    labels: {
+      y: 18
+    }
+  },
+  CATEGORIES_Y_AXIS = {
+    lineWidth: 0,
+    tickLength: 0,
+    startOnTick: true,
+    endOnTick: true,
+    minPadding: 0.05,
+    maxPadding: 0.05,
+    plotLines: null,
+    labels: {
+      x: 3
+    }
+  };
+const crCategoryConfig = (categories, title, subtitle) => fAdd({
+  xAxis: {
+    ...CATEGORIES_X_AXIS,
+    ...{
+      categories
+    }
+  },
+  yAxis: CATEGORIES_Y_AXIS
+})(crArea2Config(title, subtitle));
+exports.crCategoryConfig = crCategoryConfig;
 const crBarOrColumnConfig = function (type, categories) {
   if (categories === void 0) {
     categories = [];

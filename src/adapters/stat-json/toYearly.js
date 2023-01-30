@@ -4,7 +4,7 @@ import {
   fAdd,
   toConfig
 } from '../../charts/configBuilderFn';
-import Yearly from '../toYearsByMonths';
+import crYearlyConfig from '../toYearsByMonths';
 
 import {
   crDsValuesTimes,
@@ -44,7 +44,7 @@ const toYearly = {
     , data = _toData(values, times);
 
      return pipe(
-       Yearly.toConfig(data, option),
+       crYearlyConfig(data, option),
        fAdd('chart', { spacingTop: 25 }),
        fAddCaption(title, subtitle),
        fAdd('info', crInfo(ds, option)),

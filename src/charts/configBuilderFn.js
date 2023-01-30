@@ -283,7 +283,7 @@ export const _fAddScatterBottom = (
   max
 ) => config => {
   const { data } = seria;
-  if (data.length > 0) {
+  if (_isArr(data) && data.length > 0) {
    const {
      series,
      chart,
@@ -352,6 +352,44 @@ export const crArea2Config = (
   config.series = []
   return config;
 }
+
+
+const CATEGORIES_X_AXIS = {
+  type: "category",
+  categories: [],
+  opposite: false,
+  crosshair: void 0,
+  tickColor: "gray",
+  tickWidth: 3,
+  tickLength: 7,
+  tickPosition: "outside",
+  gridLineWidth: 0,
+  labels: {
+    y: 18
+  }
+}
+, CATEGORIES_Y_AXIS = {
+  lineWidth: 0,
+  tickLength: 0,
+  startOnTick: true,
+  endOnTick: true,
+  minPadding: 0.05,
+  maxPadding: 0.05,
+  plotLines: null,
+  labels: {
+    x: 3
+  }
+};
+
+export const crCategoryConfig = (
+  categories,
+  title,
+  subtitle
+) => fAdd({
+   xAxis: {...CATEGORIES_X_AXIS, ...{ categories }},
+   yAxis: CATEGORIES_Y_AXIS
+})(crArea2Config(title, subtitle))
+
 
 export const crBarOrColumnConfig = (
   type,

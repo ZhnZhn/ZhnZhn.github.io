@@ -11,7 +11,7 @@ const crAreaYearlyConfig = (json, option) => {
       title,
       subtitle
     } = option,
-    config = _toYearsByMonths.default.toConfig(data, {
+    config = (0, _toYearsByMonths.default)(data, {
       title,
       subtitle,
       itemCaption: title + ': ' + subtitle,

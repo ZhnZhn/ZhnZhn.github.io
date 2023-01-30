@@ -34,7 +34,7 @@ exports.fAddMiniHL = fAddMiniHL;
 const _factoryAddScatterBottom = (crSeria, seriaName) => (data, min, max) => config => (0, _configBuilderFn._fAddScatterBottom)(crSeria(data), seriaName, min, max)(config);
 const fAddDividend = _factoryAddScatterBottom(_crDividendSeria, 'Dividend');
 exports.fAddDividend = fAddDividend;
-const fAddSplitRatio = (0, _configBuilderFn._fAddScatterBottom)(_crSplitRatioSeria, 'Split Ratio');
+const fAddSplitRatio = _factoryAddScatterBottom(_crSplitRatioSeria, 'Split Ratio');
 exports.fAddSplitRatio = fAddSplitRatio;
 const _crSeriaOption = (color, lineWidth) => ({
   type: 'line',
@@ -74,9 +74,7 @@ const crStockConfig = (id, option) => {
     dV,
     dATH
   } = option;
-  return (0, _pipe.default)((0, _ChartConfigFn.crAreaConfig)({
-    spacingTop: 25
-  }), (0, _configBuilderFn.fAddTooltip)(_Tooltip.tooltipValueTdmyIf), (0, _configBuilderFn.fAddMinMax)(dC, {
+  return (0, _pipe.default)((0, _configBuilderFn.crAreaConfig)(), (0, _configBuilderFn.fAddTooltip)(_Tooltip.tooltipValueTdmyIf), (0, _configBuilderFn.fAddMinMax)(dC, {
     minY: minClose,
     maxY: maxClose,
     isNotZoomToMinMax,

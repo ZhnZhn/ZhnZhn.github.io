@@ -15,7 +15,6 @@ import {
   fTooltip
 } from './Chart';
 import {
-  crAreaConfig,
   setSeriaDataTo,
   crSeriaConfig
 } from './ChartConfigFn';
@@ -32,6 +31,7 @@ import {
 } from './IndicatorConfigFn';
 
 import {
+  crAreaConfig,
   fAddTooltip,
   fAddMinMax,
   _addMini,
@@ -107,7 +107,7 @@ export const fAddDividend = _factoryAddScatterBottom(
   'Dividend'
 )
 
-export const fAddSplitRatio = _fAddScatterBottom(
+export const fAddSplitRatio = _factoryAddScatterBottom(
   _crSplitRatioSeria,
   'Split Ratio'
 )
@@ -166,7 +166,7 @@ export const crStockConfig = (
     dATH
   } = option;
   return pipe(
-     crAreaConfig({ spacingTop: 25 }),
+     crAreaConfig(),
      fAddTooltip(tooltipValueTdmyIf),
      fAddMinMax(dC, {
         minY: minClose,

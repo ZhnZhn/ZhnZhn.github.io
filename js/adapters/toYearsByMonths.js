@@ -3,12 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _ConfigBuilder = _interopRequireDefault(require("../charts/ConfigBuilder"));
+var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _configBuilderFn = require("../charts/configBuilderFn");
 var _Tooltip = require("../charts/Tooltip");
 var _AdapterFn = require("./AdapterFn");
 const CATEGORIES = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-const CONFIG_NOW = {
+const MIN_MAX_COLOR = '#008b8b',
+  CONFIG_NOW = {
     index: 3,
     color: '#7cb5ec'
   },
@@ -20,14 +21,6 @@ const CONFIG_NOW = {
     index: 4,
     color: 'black',
     isVisible: false
-  },
-  CONFIG_MIN = {
-    index: 0,
-    color: '#008b8b'
-  },
-  CONFIG_MAX = {
-    index: 1,
-    color: '#008b8b'
   };
 const _getYear = str => str.split("-")[0];
 const _getMonth = str => str.split("-")[1];
@@ -44,19 +37,6 @@ const _crSeria = (name, _ref) => {
     data,
     color,
     visible: isVisible
-  };
-};
-const _crItem = (name, _ref2) => {
-  let {
-    index,
-    color,
-    isVisible = true
-  } = _ref2;
-  return {
-    name,
-    index,
-    color,
-    isVisible
   };
 };
 const _crPoint = item => ({
@@ -126,7 +106,7 @@ const _crSeriaData = function (data, i, year, crPoint) {
     arr: arr.reverse()
   };
 };
-const _crSeries = (data, seriaColor) => {
+const _crNowPrevSeries = (data, seriaColor) => {
   const firtsItem = data[0][0],
     _yearNow = _getYear(firtsItem),
     {
@@ -138,23 +118,18 @@ const _crSeries = (data, seriaColor) => {
     {
       arr: _dPrev
     } = _crSeriaData(data, i, _yearPrev);
-  return {
-    nowSeria: _crSeria(_yearNow, {
-      color: seriaColor,
-      ...CONFIG_NOW,
-      ...{
-        data: _dNow
-      }
-    }),
-    nowItem: _crItem(_yearNow, CONFIG_NOW),
-    prevSeria: _crSeria(_yearPrev, {
-      ...CONFIG_PREV,
-      ...{
-        data: _dPrev
-      }
-    }),
-    prevItem: _crItem(_yearPrev, CONFIG_PREV)
-  };
+  return [_crSeria(_yearNow, {
+    color: seriaColor,
+    ...CONFIG_NOW,
+    ...{
+      data: _dNow
+    }
+  }), _crSeria(_yearPrev, {
+    ...CONFIG_PREV,
+    ...{
+      data: _dPrev
+    }
+  })];
 };
 const _hmToSeriaData = (hm, crPoint) => CATEGORIES.map(key => crPoint(key, hm[key]));
 const _crBaseHm = () => CATEGORIES.reduce((hm, key) => {
@@ -196,14 +171,14 @@ const _crRangeSeries = data => {
     _data = _hmToSeriaData(hm, _crHighLowPoint);
   const _minData = [],
     _maxData = [];
-  _data.forEach(_ref3 => {
+  _data.forEach(_ref2 => {
     let {
       c,
       high,
       yHigh,
       low,
       yLow
-    } = _ref3;
+    } = _ref2;
     _minData.push({
       c,
       y: low,
@@ -218,12 +193,12 @@ const _crRangeSeries = data => {
   return [(0, _configBuilderFn.crSplineSeriaConfig)({
     name: "Min " + _range,
     data: _minData,
-    color: '#008b8b',
+    color: MIN_MAX_COLOR,
     seriaWidth: 2,
     tooltip: _Tooltip.tooltipCategorySimple
   }), _crSeria("Max " + _range, {
     data: _maxData,
-    color: '#008b8b'
+    color: MIN_MAX_COLOR
   })];
 };
 const _findStartYearIndex = (data, yearStop) => {
@@ -249,17 +224,14 @@ const _crAvgSeria = data => {
     _stopYear = isBreaked ? stopYear : _getYear(data[max - 1][0]),
     _data = _hmToSeriaData(hm, _crAvgPoint),
     name = "Avg " + _stopYear + ":" + fromYear;
-  return [_crSeria(name, {
+  return _crSeria(name, {
     ...CONFIG_AVG,
     ...{
       data: _data
     }
-  }), _crItem(name, CONFIG_AVG)];
+  });
 };
-const _crZhConfig = (option, _ref4) => {
-  let {
-    legend
-  } = _ref4;
+const _crZhConfig = option => {
   const {
       value,
       itemCaption,
@@ -273,7 +245,6 @@ const _crZhConfig = (option, _ref4) => {
     key: _id,
     itemCaption,
     isWithoutIndicator: true,
-    legend,
     dataSource,
     linkFn,
     item
@@ -327,36 +298,24 @@ const _checkIfEnoughData = data => {
     };
   }
 };
-const toMonthly = {
-  toConfig(data, option) {
-    _checkIfEnoughData(data);
-    const {
-        title,
-        subtitle,
-        seriaColor
-      } = option,
-      {
-        nowSeria,
-        nowItem,
-        prevSeria,
-        prevItem
-      } = _crSeries(data, seriaColor),
-      [minSeria, maxSeria] = _crRangeSeries(data),
-      [avgSeria, avgItem] = _crAvgSeria(data),
-      legend = [_crItem('MIN', CONFIG_MIN), _crItem('MAX', CONFIG_MAX), prevItem, nowItem, avgItem],
-      config = (0, _ConfigBuilder.default)().categoryConfig(CATEGORIES).addCaption(title, subtitle).addSeriaBy(0, minSeria).addSeriaBy(1, maxSeria).addSeriaBy(2, prevSeria).addSeriaBy(3, nowSeria).addSeriaBy(4, avgSeria).addTooltip(_Tooltip.tooltipCategorySimple).add({
-        chart: {
-          marginTop: 45,
-          marginBottom: 38
-        },
-        zhConfig: _crZhConfig(option, {
-          legend
-        }),
-        valueMoving: _crValueMoving(nowSeria, prevSeria)
-      }).toConfig();
-    return config;
-  }
+const crYearlyConfig = (data, option) => {
+  _checkIfEnoughData(data);
+  const {
+      title,
+      subtitle,
+      seriaColor
+    } = option,
+    [nowSeria, prevSeria] = _crNowPrevSeries(data, seriaColor),
+    [minSeria, maxSeria] = _crRangeSeries(data);
+  return (0, _pipe.default)((0, _configBuilderFn.crCategoryConfig)(CATEGORIES, title, subtitle), (0, _configBuilderFn.fAddSeries)([minSeria, maxSeria, prevSeria, nowSeria, _crAvgSeria(data)]), (0, _configBuilderFn.fAddTooltip)(_Tooltip.tooltipCategorySimple), (0, _configBuilderFn.fAdd)({
+    chart: {
+      marginTop: 45,
+      marginBottom: 38
+    },
+    zhConfig: _crZhConfig(option),
+    valueMoving: _crValueMoving(nowSeria, prevSeria)
+  }));
 };
-var _default = toMonthly;
+var _default = crYearlyConfig;
 exports.default = _default;
 //# sourceMappingURL=toYearsByMonths.js.map

@@ -22,7 +22,7 @@ const toYearly = {
       } = option,
       [ds, values, times] = (0, _fnAdapter.crDsValuesTimes)(json, option),
       data = _toData(values, times);
-    return (0, _pipe.default)(_toYearsByMonths.default.toConfig(data, option), (0, _configBuilderFn.fAdd)('chart', {
+    return (0, _pipe.default)((0, _toYearsByMonths.default)(data, option), (0, _configBuilderFn.fAdd)('chart', {
       spacingTop: 25
     }), (0, _configBuilderFn.fAddCaption)(title, subtitle), (0, _configBuilderFn.fAdd)('info', (0, _fnAdapter.crInfo)(ds, option)), (0, _configBuilderFn.fAdd)('zhConfig', (0, _fnAdapter.crZhConfig)(option)), _configBuilderFn.toConfig);
   }

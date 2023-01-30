@@ -1,4 +1,11 @@
-import Builder from '../charts/ConfigBuilder';
+import pipe from '../utils/pipe';
+import {
+  crCategoryConfig,
+  fAddSeries,
+  fAddTooltip,
+  fAdd
+} from '../charts/configBuilderFn';
+
 import {
   crSplineSeriaConfig
 } from '../charts/configBuilderFn';
@@ -16,7 +23,8 @@ const CATEGORIES = [
   '07', '08', '09', '10', '11', '12'
 ];
 
-const CONFIG_NOW = {
+const MIN_MAX_COLOR = '#008b8b'
+, CONFIG_NOW = {
   index: 3,
   color: '#7cb5ec'
 }
@@ -28,14 +36,6 @@ const CONFIG_NOW = {
   index: 4,
   color: 'black',
   isVisible: false
-}
-, CONFIG_MIN = {
-  index: 0,
-  color: '#008b8b'
-}
-, CONFIG_MAX = {
-  index: 1,
-  color: '#008b8b'
 };
 
 
@@ -51,15 +51,6 @@ const _crSeria = (
   data,
   color,
   visible: isVisible
-});
-const _crItem = (
-  name,
-  {index, color, isVisible=true}
-) => ({
-   name,
-   index,
-   color,
-   isVisible
 });
 
 const _crPoint = item => ({
@@ -125,7 +116,7 @@ const _crSeriaData = (
   return { i, arr: arr.reverse() };
 }
 
-const _crSeries = (
+const _crNowPrevSeries = (
   data,
   seriaColor
 ) => {
@@ -136,12 +127,10 @@ const _crSeries = (
   , _yearPrev = _getYear(prevItem)
   , { arr:_dPrev } = _crSeriaData(data, i, _yearPrev);
 
-  return {
-    nowSeria: _crSeria(_yearNow, { color: seriaColor, ...CONFIG_NOW, ...{data: _dNow} } ),
-    nowItem: _crItem(_yearNow, CONFIG_NOW),
-    prevSeria: _crSeria(_yearPrev, { ...CONFIG_PREV, ...{data: _dPrev} }),
-    prevItem: _crItem(_yearPrev, CONFIG_PREV)
-  };
+  return [
+    _crSeria(_yearNow, { color: seriaColor, ...CONFIG_NOW, ...{data: _dNow} } ),
+    _crSeria(_yearPrev, { ...CONFIG_PREV, ...{data: _dPrev} }),
+  ];
 }
 
 
@@ -209,13 +198,13 @@ const _crRangeSeries = (data) => {
     crSplineSeriaConfig({
        name: `Min ${_range}`,
        data: _minData,
-       color: '#008b8b',
+       color: MIN_MAX_COLOR,
        seriaWidth: 2,
        tooltip: tooltipCategorySimple
     }),
     _crSeria(`Max ${_range}`, {
        data: _maxData,
-       color: '#008b8b'
+       color: MIN_MAX_COLOR
     })
   ];
 }
@@ -247,15 +236,14 @@ const _crAvgSeria = (data) => {
   , _data = _hmToSeriaData(hm, _crAvgPoint)
   , name = `Avg ${_stopYear}:${fromYear}`;
 
-  return [
-    _crSeria(name, {...CONFIG_AVG, ...{data: _data}}),
-    _crItem(name, CONFIG_AVG),
-  ];
+  return _crSeria(
+    name,
+    {...CONFIG_AVG, ...{data: _data}}
+  );
 }
 
 const _crZhConfig = (
-  option,
-  { legend }
+  option
 ) => {
   const {
     value,
@@ -270,7 +258,6 @@ const _crZhConfig = (
     key: _id,
     itemCaption,
     isWithoutIndicator: true,
-    legend,
     dataSource,
     linkFn,
     item
@@ -326,47 +313,42 @@ const _checkIfEnoughData = data => {
   }
 };
 
-const toMonthly = {
-  toConfig(data, option) {
+
+const crYearlyConfig = (
+  data,
+  option
+) => {
     _checkIfEnoughData(data)
     const {
       title,
       subtitle,
       seriaColor
     } = option
-    , {
+    , [
       nowSeria,
-      nowItem,
-      prevSeria,
-      prevItem
-    } = _crSeries(data, seriaColor)
-    , [minSeria, maxSeria] = _crRangeSeries(data)
-    , [avgSeria, avgItem] = _crAvgSeria(data)
-    , legend = [
-       _crItem('MIN', CONFIG_MIN),
-       _crItem('MAX', CONFIG_MAX),
-       prevItem,
-       nowItem,
-       avgItem
-    ]
-    , config = Builder()
-       .categoryConfig(CATEGORIES)
-       .addCaption(title, subtitle)
-       .addSeriaBy(0, minSeria)
-       .addSeriaBy(1, maxSeria)
-       .addSeriaBy(2, prevSeria)
-       .addSeriaBy(3, nowSeria)
-       .addSeriaBy(4, avgSeria)
-       .addTooltip(tooltipCategorySimple)
-       .add({
-         chart: { marginTop: 45, marginBottom: 38 },
-         zhConfig: _crZhConfig(option, { legend }),
-         valueMoving: _crValueMoving(nowSeria, prevSeria)
-       })
-       .toConfig();
+      prevSeria
+    ] = _crNowPrevSeries(data, seriaColor)
+    , [
+      minSeria,
+      maxSeria
+    ] = _crRangeSeries(data);
 
-    return config;
+    return pipe(
+      crCategoryConfig(CATEGORIES, title, subtitle),
+      fAddSeries([
+        minSeria,
+        maxSeria,
+        prevSeria,
+        nowSeria,
+        _crAvgSeria(data)
+      ]),
+      fAddTooltip(tooltipCategorySimple),
+      fAdd({
+        chart: { marginTop: 45, marginBottom: 38 },
+        zhConfig: _crZhConfig(option),
+        valueMoving: _crValueMoving(nowSeria, prevSeria)
+      })
+    );
   }
-}
 
-export default toMonthly
+export default crYearlyConfig
