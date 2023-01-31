@@ -436,3 +436,12 @@ export const crSplineSeriaConfig = (
   ...CONFIG_SERIA,
   ...option
 })
+
+const CONFIG_SCATTER = { type: 'scatter' };
+export const crScatterSeriaConfig = (
+  tooltip,
+  option
+) => fAdd(
+    'tooltip',
+    fTooltip(tooltip)
+)({...CONFIG_SCATTER, ...option})

@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toConfig = exports.fSetSeriaBy = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSeriaConfigFromAdapter = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+exports.toConfig = exports.fSetSeriaBy = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSeriaConfigFromAdapter = exports.crScatterSeriaConfig = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _ChartConfigFn = require("./ChartConfigFn");
 exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
 var _seriaFn = require("../math/seriaFn");
@@ -341,4 +341,12 @@ const crSplineSeriaConfig = option => (0, _ChartConfigFn.crSeriaConfig)({
   ...option
 });
 exports.crSplineSeriaConfig = crSplineSeriaConfig;
+const CONFIG_SCATTER = {
+  type: 'scatter'
+};
+const crScatterSeriaConfig = (tooltip, option) => fAdd('tooltip', (0, _Chart.fTooltip)(tooltip))({
+  ...CONFIG_SCATTER,
+  ...option
+});
+exports.crScatterSeriaConfig = crScatterSeriaConfig;
 //# sourceMappingURL=configBuilderFn.js.map

@@ -4,7 +4,10 @@ import {
 import {
   tooltipExValue
 } from '../../charts/Tooltip';
-import Builder from '../../charts/ConfigBuilder';
+import {
+  crScatterSeriaConfig
+} from '../../charts/configBuilderFn';
+
 import {
   ymdToUTC,
   toFloatOrEmpty
@@ -33,9 +36,10 @@ const toDividendsImpl = {
     const data = _isArr(json)
       ? json.reverse().map(_crPoint)
       : [];
-    return Builder()
-      .scatterSeria(tooltipExValue, { data })
-      .toSeria();
+    return crScatterSeriaConfig(
+      tooltipExValue,
+      { data }
+    );
   }
 };
 
