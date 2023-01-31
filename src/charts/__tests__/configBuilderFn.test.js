@@ -3,15 +3,19 @@
  */
  //Highcharts from Chart require jsdom
 "use strict";
-import ConfigBuilder from '../ConfigBuilder';
 
+import {
+  fAddCaption,
+  fAdd
+} from '../configBuilderFn';
 
-describe('ConfigBuilder addCaption', ()=>{
+describe('fAddCaption',()=>{
+  const fn = fAddCaption;
   test('should add caption', ()=>{
-    const title = 'title', subtitle = 'subtitle'
-    , config = ConfigBuilder()
-        .addCaption(title, subtitle)
-        .toConfig()
+    const title = 'title'
+    , subtitle = 'subtitle'
+    , config = fn(title, subtitle)({});
+
     expect(config.title.text).toBe(title)
     expect(config.subtitle.text).toBe(subtitle)
   })
@@ -24,54 +28,52 @@ describe('ConfigBuilder addCaption', ()=>{
     , titleSanitized = "<a>title</a>"
     , subtitle = "<a href='#\";alert();\"'>subtitle</a>"
     , subtitleSanitized = "<a href=\"#&quot;;alert();&quot;\">subtitle</a>"
-    , config = ConfigBuilder()
-        .addCaption(title, subtitle)
-        .toConfig();
+    , config = fn(title, subtitle)({})
+
     expect(config.title.text).toBe(titleSanitized)
     expect(config.subtitle.text).toBe(subtitleSanitized)
   })
 })
 
-describe('ConfigBuilder add', ()=>{
+describe('fAdd', ()=>{
+  const fn = fAdd;
   test('should add option by new propName, value', ()=>{
-    const config = ConfigBuilder()
-      .add('abc', {a: 'a', b: 'b'})
-      .toConfig();
+    const config = fn(
+      'abc', {a: 'a', b: 'b'}
+    )({});
+
     expect(config.abc.a).toBe('a')
     expect(config.abc.b).toBe('b')
   })
   test('should add option by propName, value', () =>{
-    const config = ConfigBuilder(
-         {abc: {a: 1, b: 2, c: 3}}
-       )
-       .add('abc', {a: 'a', b: 'b'})
-       .toConfig();
-      expect(config.abc.a).toBe('a')
-      expect(config.abc.b).toBe('b')
-      expect(config.abc.c).toBe(3)
+    const config = fn(
+      'abc', {a: 'a', b: 'b'}
+    )({abc: {a: 1, b: 2, c: 3}});
+
+    expect(config.abc.a).toBe('a')
+    expect(config.abc.b).toBe('b')
+    expect(config.abc.c).toBe(3)
   })
 
   test('should add options by obj with new propName-value', ()=>{
-    const config = ConfigBuilder()
-      .add({
-         a: {aa: 'aa'},
-         b: {bb: 'bb'}
-       })
-      .toConfig();
+    const config = fn({
+      a: {aa: 'aa'},
+      b: {bb: 'bb'}
+    })({});
+
     expect(config.a.aa).toBe('aa')
     expect(config.b.bb).toBe('bb')
   })
   test('should add by option obj with propName-value', ()=>{
-    const config = ConfigBuilder({
+    const config = fn({
+      a: {aa: 'aa'},
+      b: {bb: 'bb'}
+    })({
       a: {aa: 11, a: 'a'},
       b: {bb: 22, b: 'b'},
       c: {cc: 33, c: 'c'}
-    })
-      .add({
-         a: {aa: 'aa'},
-         b: {bb: 'bb'}
-       })
-      .toConfig();
+    });
+
     expect(config.a.aa).toBe('aa')
     expect(config.a.a).toBe('a')
 
@@ -81,28 +83,33 @@ describe('ConfigBuilder add', ()=>{
     expect(config.c.cc).toBe(33)
     expect(config.c.c).toBe('c')
   })
-  test('should add by option obj array, string, boolean, number values', ()=>{
-     const data = ['a'], str = 'str', bool = true, n=10
-     , config = ConfigBuilder()
-        .add({
-          a: data,
-          b: str,
-          c: bool,
-          d: n
-        }).toConfig();
+  test('should add by option obj array, string, number, boolean values', ()=>{
+     const data = ['a']
+     , str = 'str'
+     , bool = true
+     , n=10
+     , config = fn({
+       a: data,
+       b: str,
+       c: bool,
+       d: n
+     })({});
+
      expect(config.a).toEqual(data)
      expect(config.b).toBe(str)
      expect(config.c).toBe(bool)
      expect(config.d).toBe(n)
   })
   test('should add array, string, number, boolean values', ()=>{
-     const data = ['a'], str = 'str', bool = true, n=10
-     , config = ConfigBuilder()
-        .add('a', data)
-        .add('b', str)
-        .add('c', bool)
-        .add('d', n)
-        .toConfig();
+     const data = ['a']
+     , str = 'str'
+     , bool = true
+     , n=10
+     , config1 = fn('a', data)({})
+     , config2 = fn('b', str)(config1)
+     , config3 = fn('c', bool)(config2)
+     , config = fn('d', n)(config3)
+
      expect(config.a).toEqual(data)
      expect(config.b).toBe(str)
      expect(config.c).toBe(bool)
