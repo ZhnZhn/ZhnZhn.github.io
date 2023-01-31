@@ -5,7 +5,14 @@ import {
 
 import { crMarkerExDividend } from '../../charts/MarkerFn';
 import { tooltipExValue } from '../../charts/Tooltip';
-import Builder from '../../charts/ConfigBuilder';
+
+import pipe from '../../utils/pipe';
+import {
+  crAreaDfConfig,
+  fSetSeriaBy,
+  fAdd,
+  toConfig
+} from '../../charts/configBuilderFn';
 
 import { ymdToUTC } from '../AdapterFn';
 import { crId } from '../crFn';
@@ -92,14 +99,12 @@ const _getSeriaFrom = (
 export const toScatterConfig = (
   data,
   option
-) => {
-   const config = Builder()
-     .areaConfig()
-     .add({ zhConfig: _crZhConfig(option) })
-     .toConfig();
-   config.series[0] = _crSeria(data, option)
-   return config;
-}
+) => pipe(
+   crAreaDfConfig(),
+   fSetSeriaBy(0, _crSeria(data, option)),
+   fAdd({ zhConfig: _crZhConfig(option) }),
+   toConfig
+);
 
 export const toScatterSeria = (
   data,

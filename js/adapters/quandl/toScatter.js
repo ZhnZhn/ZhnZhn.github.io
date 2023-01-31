@@ -6,7 +6,8 @@ exports.toScatterSeria = exports.toScatterConfig = void 0;
 var _ChartType = require("../../constants/ChartType");
 var _MarkerFn = require("../../charts/MarkerFn");
 var _Tooltip = require("../../charts/Tooltip");
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
+var _pipe = _interopRequireDefault(require("../../utils/pipe"));
+var _configBuilderFn = require("../../charts/configBuilderFn");
 var _AdapterFn = require("../AdapterFn");
 var _crFn = require("../crFn");
 const COLOR_PLUS = '#4caf50',
@@ -74,13 +75,9 @@ const _getSeriaFrom = (config, option, chart) => {
   seria.data = _d;
   return seria;
 };
-const toScatterConfig = (data, option) => {
-  const config = (0, _ConfigBuilder.default)().areaConfig().add({
-    zhConfig: _crZhConfig(option)
-  }).toConfig();
-  config.series[0] = _crSeria(data, option);
-  return config;
-};
+const toScatterConfig = (data, option) => (0, _pipe.default)((0, _configBuilderFn.crAreaDfConfig)(), (0, _configBuilderFn.fSetSeriaBy)(0, _crSeria(data, option)), (0, _configBuilderFn.fAdd)({
+  zhConfig: _crZhConfig(option)
+}), _configBuilderFn.toConfig);
 exports.toScatterConfig = toScatterConfig;
 const toScatterSeria = (data, option, chart) => _getSeriaFrom(toScatterConfig(data, option), option, chart);
 exports.toScatterSeria = toScatterSeria;
