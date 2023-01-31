@@ -1,6 +1,6 @@
 {
   "menu":[
-    { "caption": "Quandl",
+    { "caption": "Nasdaq Data Link",
       "items": [
           { "id": "FT_CHINA_FINANCE_FUTURE" },
           { "id": "FT_DCE_FUTURE" },
@@ -31,7 +31,7 @@
     "FT_CHINA_FINANCE_FUTURE": {
         "type": "FT_CHINA_FINANCE_FUTURE",
         "menuTitle": "China Finance FE",
-        "contFullCaption": "Quandl: China Finance Futures Exchange",
+        "contFullCaption": "NDL: China Finance Futures Exchange",
         "dialogType": "Futures3Dialog",
         "addProps": "FT_Q",
         "dialogProps": {
@@ -44,7 +44,7 @@
     "FT_DCE_FUTURE": {
         "type": "FT_DCE_FUTURE",
         "menuTitle": "Dalian CE",
-        "contFullCaption": "Quandl: Dalian Commodities Exchange Futures",
+        "contFullCaption": "NDL: Dalian Commodities Exchange Futures",
         "dialogType": "Futures3Dialog",
         "addProps": "FT_Q",
         "dialogProps": {
@@ -57,7 +57,7 @@
     "FT_ZCE_FUTURE": {
         "type": "FT_ZCE_FUTURE",
         "menuTitle": "Zhengzhou CE",
-        "contFullCaption": "Quandl: Zhengzhou Commodities Exchange Futures",
+        "contFullCaption": "NDL: Zhengzhou Commodities Exchange Futures",
         "dialogType": "Futures3Dialog",
         "addProps": "FT_Q",
         "dialogProps": {
@@ -70,7 +70,7 @@
     "FT_SHANGHAI_FUTURE": {
         "type": "FT_SHANGHAI_FUTURE",
         "menuTitle": "Shanghai FE",
-        "contFullCaption": "Quandl: Shanghai Futures Exchange",
+        "contFullCaption": "NDL: Shanghai Futures Exchange",
         "dialogType": "Futures3Dialog",
         "addProps": "FT_Q",
         "dialogProps": {
@@ -93,7 +93,7 @@
         "type": "FT_WIKI_FUTURE",
         "menuTitle": "Wiki Continuous",
         "dialogCaption": "Wiki Continuous Futures",
-        "contFullCaption": "Quandl: Wiki Continuous Futures",
+        "contFullCaption": "NDL: Wiki Continuous Futures",
         "dialogType": "FuturesWikiDialog",
         "addProps": "FT_Q",
         "dialogProps": {
