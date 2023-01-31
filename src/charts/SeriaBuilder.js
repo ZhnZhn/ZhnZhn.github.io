@@ -23,10 +23,6 @@ const SeriaBuilder = {
     fAddSeriaBy(index, obj)(this.config)
     return this;
   },
-  addSeriaTo(index, seria) {
-    this.config.series[index] = seria
-    return this;
-  },
 
   addSeries(series, isWithoutLegend=false){
     fAddSeries(series, isWithoutLegend)(this.config)

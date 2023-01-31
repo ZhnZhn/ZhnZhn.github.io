@@ -220,9 +220,6 @@ export const fAddMinMax = (
   return config;
 }
 
-/*************************************/
-/**********fAddPointsToConfig*********/
-
 export const fAddSeriaBy = (
   index,
   obj
@@ -234,6 +231,17 @@ export const fAddSeriaBy = (
   }
   return config;
 }
+
+export const fSetSeriaBy = (
+  seriaIndex,
+  seriaConfig
+) => config => {
+  config.series[seriaIndex] = seriaConfig
+  return config
+}
+
+/*************************************/
+/**********fAddPointsToConfig*********/
 
 const _fAddSeriaPoints = (
   points,
@@ -338,8 +346,11 @@ export const crSeriaConfigFromAdapter = ({
 }
 
 export const crAreaDfConfig = _crAreaConfig
-export const crAreaConfig = () => _crAreaConfig({
-  spacingTop: 25
+export const crAreaConfig = (
+  option
+) => _crAreaConfig({
+   spacingTop: 25,
+   ...option
 })
 
 export const crArea2Config = (

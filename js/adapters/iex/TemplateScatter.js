@@ -1,58 +1,52 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _ConfigBuilder = _interopRequireDefault(require("../../charts/ConfigBuilder"));
-
+exports.default = void 0;
+var _pipe = _interopRequireDefault(require("../../utils/pipe"));
+var _configBuilderFn = require("../../charts/configBuilderFn");
 var _toFns = _interopRequireDefault(require("./toFns"));
-
-var TITLE = "Source: IEX Cloud";
-
-var TemplateScatter = function TemplateScatter(impl) {
+const TITLE = "Source: IEX Cloud";
+const TemplateScatter = function (impl) {
   if (!(this instanceof TemplateScatter)) {
     return new TemplateScatter(impl);
   }
-
   this.impl = impl;
 };
-
 Object.assign(TemplateScatter.prototype, {
-  crKey: function crKey(option) {
+  crKey(option) {
     option.key = option.value;
     return option.value;
   },
-  toConfig: function toConfig(json, option) {
-    var _this$impl = this.impl,
-        crSubtitle = _this$impl.crSubtitle,
-        crSeria = _this$impl.crSeria,
-        config = (0, _ConfigBuilder["default"])().areaConfig({
-      spacingTop: 25,
-      isCrosshair: false
-    }).addCaption(TITLE, crSubtitle(option)).addSeriaTo(0, crSeria(json, option)).add({
-      zhConfig: _toFns["default"].crZhConfig(option)
-    }).toConfig();
+  toConfig(json, option) {
+    const {
+      crSubtitle,
+      crSeria
+    } = this.impl;
     return {
-      config: config
+      config: (0, _pipe.default)((0, _configBuilderFn.crAreaConfig)({
+        isCrosshair: false
+      }), (0, _configBuilderFn.fAddCaption)(TITLE, crSubtitle(option)), (0, _configBuilderFn.fSetSeriaBy)(0, crSeria(json, option)), (0, _configBuilderFn.fAdd)({
+        zhConfig: _toFns.default.crZhConfig(option)
+      }), _configBuilderFn.toConfig)
     };
   },
-  toSeries: function toSeries(json, option, chart) {
-    var _this$impl2 = this.impl,
-        caption = _this$impl2.caption,
-        color = _this$impl2.color,
-        crSeria = _this$impl2.crSeria,
-        seria = crSeria(json, option);
-    return _toFns["default"].crToSeria({
-      chart: chart,
-      seria: seria,
-      caption: caption,
-      color: color,
-      option: option
+  toSeries(json, option, chart) {
+    const {
+        caption,
+        color,
+        crSeria
+      } = this.impl,
+      seria = crSeria(json, option);
+    return _toFns.default.crToSeria({
+      chart,
+      seria,
+      caption,
+      color,
+      option
     });
   }
 });
 var _default = TemplateScatter;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=TemplateScatter.js.map

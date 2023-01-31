@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toConfig = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSeriaConfigFromAdapter = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+exports.toConfig = exports.fSetSeriaBy = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSeriaConfigFromAdapter = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _ChartConfigFn = require("./ChartConfigFn");
 exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
 var _seriaFn = require("../math/seriaFn");
@@ -135,9 +135,6 @@ const fAddMinMax = (data, option) => config => {
   _setYAxisType(isLogarithmic, _data, config);
   return config;
 };
-
-/*************************************/
-/**********fAddPointsToConfig*********/
 exports.fAddMinMax = fAddMinMax;
 const fAddSeriaBy = (index, obj) => config => {
   if (config.series[index]) {
@@ -148,6 +145,14 @@ const fAddSeriaBy = (index, obj) => config => {
   return config;
 };
 exports.fAddSeriaBy = fAddSeriaBy;
+const fSetSeriaBy = (seriaIndex, seriaConfig) => config => {
+  config.series[seriaIndex] = seriaConfig;
+  return config;
+};
+
+/*************************************/
+/**********fAddPointsToConfig*********/
+exports.fSetSeriaBy = fSetSeriaBy;
 const _fAddSeriaPoints = function (points, _temp) {
   let {
     maxVisible = 6
@@ -260,8 +265,9 @@ const crSeriaConfigFromAdapter = _ref => {
 exports.crSeriaConfigFromAdapter = crSeriaConfigFromAdapter;
 const crAreaDfConfig = _ChartConfigFn.crAreaConfig;
 exports.crAreaDfConfig = crAreaDfConfig;
-const crAreaConfig = () => (0, _ChartConfigFn.crAreaConfig)({
-  spacingTop: 25
+const crAreaConfig = option => (0, _ChartConfigFn.crAreaConfig)({
+  spacingTop: 25,
+  ...option
 });
 exports.crAreaConfig = crAreaConfig;
 const crArea2Config = (title, subtitle) => {
