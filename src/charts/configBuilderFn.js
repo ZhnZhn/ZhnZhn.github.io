@@ -220,7 +220,15 @@ export const fAddMinMax = (
   return config;
 }
 
-export const fAddSeriaBy = (
+export const fAddZhPoints = (
+  data,
+  propName='zhIsMfi'
+) => config => fAdd({
+   zhPoints: data,
+   [propName]: true
+})(config)
+
+  export const fAddSeriaBy = (
   index,
   obj
 ) => config => {

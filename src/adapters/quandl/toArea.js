@@ -1,16 +1,30 @@
-import {
-  crSeriaConfig,
-  crAreaConfig
-} from '../../charts/ChartConfigFn';
+import { crSeriaConfig } from '../../charts/ChartConfigFn';
 import { fSeriaMarker } from '../../charts/Chart';
-import ConfigBuilder from '../../charts/ConfigBuilder';
+
+import pipe from '../../utils/pipe';
+import {
+  crAreaConfig,
+  fAddCaption,
+  fAddMinMax,
+  fAdd,
+  fAddLegend,
+  fAddZhPoints,
+  toConfig
+} from '../../charts/configBuilderFn';
+import {
+  fAddDividend,
+  fAddSplitRatio,
+  fAddMiniVolume,
+  fAddMiniATH,
+  fAddMiniHL
+} from '../../charts/stockBuilderFn';
+
 import {
   valueMoving,
   getColumnNames,
   crZhConfig,
   crDatasetInfo
 } from './QuandlFn';
-
 import {
   OPEN,
   CLOSE,
@@ -109,42 +123,45 @@ const toArea = (json, option) => {
      zhPoints
    } = crAreaData(json, option);
 
-   let config = crAreaConfig({ spacingTop: 25 })
+   let config = crAreaConfig();
    _assign(config.series[0], {
      data: seria,
      name: columnName
    })
-
    const legend =  _addSeriesTo(config, legendSeries);
 
-   config = ConfigBuilder(config)
-     .addCaption(title, subtitle)
-     .addMinMax(seria, {
-        minY,
-        maxY,
-        isNotZoomToMinMax,
-        isDrawDeltaExtrems
-      })
-     .add({
-       valueMoving: valueMoving(seria, dfR),
-       zhConfig: crZhConfig(option),
-       info: crDatasetInfo(json)
-     })
-     .addZhPointsIf(zhPoints, 'zhIsMfi', _isMfi(columnNames))
-     .addZhPointsIf(zhPoints, 'zhIsMomAth', _isMomAth(columnNames))
-     .addLegend(legend)
-     .addDividend(dataExDividend, minY, maxY)
-     .addSplitRatio(dataSplitRatio, minY, maxY)
-     .addMiniVolume({
-       id: chartId,
-       dColumn: dataVolumeColumn,
-       dVolume: dataVolume
-     })
-     .addMiniATH({ id: chartId, data: dataATH })
-     .addMiniHL({ id: chartId, data: dataHighLow })
-     .toConfig();
-
-   return { config };
+   return {
+     config: pipe(
+        config,
+        fAddCaption(title, subtitle),
+        fAddMinMax(seria, {
+          minY,
+          maxY,
+          isNotZoomToMinMax,
+          isDrawDeltaExtrems
+        }),
+        fAdd({
+          valueMoving: valueMoving(seria, dfR),
+          zhConfig: crZhConfig(option),
+          info: crDatasetInfo(json)
+        }),
+        fAddLegend(legend),
+        fAddDividend(dataExDividend, minY, maxY),
+        fAddSplitRatio(dataSplitRatio, minY, maxY),
+        fAddMiniVolume({
+          id: chartId,
+          dColumn: dataVolumeColumn,
+          dVolume: dataVolume
+        }),
+        fAddMiniATH({ id: chartId, data: dataATH }),
+        fAddMiniHL({ id: chartId, data: dataHighLow }),
+        ...[
+          _isMfi(columnNames) && fAddZhPoints(zhPoints),
+          _isMomAth(columnNames) && fAddZhPoints(zhPoints, 'zhIsMomAth')
+        ].filter(Boolean),
+        toConfig
+     )
+   };
 };
 
 export default toArea

@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toConfig = exports.fSetSeriaBy = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSeriaConfigFromAdapter = exports.crScatterSeriaConfig = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+exports.toConfig = exports.fSetSeriaBy = exports.fAddZhPoints = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSeriaConfigFromAdapter = exports.crScatterSeriaConfig = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _ChartConfigFn = require("./ChartConfigFn");
 exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
 var _seriaFn = require("../math/seriaFn");
@@ -136,6 +136,16 @@ const fAddMinMax = (data, option) => config => {
   return config;
 };
 exports.fAddMinMax = fAddMinMax;
+const fAddZhPoints = function (data, propName) {
+  if (propName === void 0) {
+    propName = 'zhIsMfi';
+  }
+  return config => fAdd({
+    zhPoints: data,
+    [propName]: true
+  })(config);
+};
+exports.fAddZhPoints = fAddZhPoints;
 const fAddSeriaBy = (index, obj) => config => {
   if (config.series[index]) {
     _assign(config.series[index], obj);

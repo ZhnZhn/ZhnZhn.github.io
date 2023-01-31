@@ -7,6 +7,7 @@ import {
 import {
   fAddCaption,
   fAdd,
+  fAddZhPoints,
   toConfig
 } from '../charts/configBuilderFn';
 
@@ -52,9 +53,9 @@ const crAdapterOHLCV = ({
           ...crAddConfig({
              json, option, data: dC,
              id, title, subtitle
-          }),
-          zhPoints: dMfi, zhIsMfi: true
+          })
         }),
+        fAddZhPoints(dMfi),
         fAdd('zhConfig', { legend: stockSeriesLegend() }),
         toConfig
     )};

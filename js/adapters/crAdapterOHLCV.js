@@ -63,10 +63,8 @@ const crAdapterOHLCV = _ref3 => {
             id,
             title,
             subtitle
-          }),
-          zhPoints: dMfi,
-          zhIsMfi: true
-        }), (0, _configBuilderFn.fAdd)('zhConfig', {
+          })
+        }), (0, _configBuilderFn.fAddZhPoints)(dMfi), (0, _configBuilderFn.fAdd)('zhConfig', {
           legend: (0, _legendFn.stockSeriesLegend)()
         }), _configBuilderFn.toConfig)
       };
