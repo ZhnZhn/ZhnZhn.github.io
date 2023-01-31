@@ -7,7 +7,10 @@ import {
   toConfig
 } from '../../charts/configBuilderFn';
 
-import fns from './toFns';
+import {
+  crZhConfig,
+  crToSeria
+} from './toFns';
 
 const TITLE = "Source: IEX Cloud";
 
@@ -34,7 +37,7 @@ Object.assign(TemplateScatter.prototype, {
         crAreaConfig({ isCrosshair: false }),
         fAddCaption(TITLE, crSubtitle(option)),
         fSetSeriaBy(0, crSeria(json, option)),
-        fAdd({ zhConfig: fns.crZhConfig(option) }),
+        fAdd({ zhConfig: crZhConfig(option) }),
         toConfig
       )
     };
@@ -47,7 +50,7 @@ Object.assign(TemplateScatter.prototype, {
       crSeria
     } = this.impl
     , seria = crSeria(json, option);
-    return fns.crToSeria({
+    return crToSeria({
       chart,
       seria,
       caption,

@@ -1,1 +1,28 @@
-{"version":3,"sources":["../../../src/adapters/iex/toCompanyImpl.js"],"names":["toStr","fns","_crEmployees","employees","_crExchange","exchange","_crIssueType","issueType","toUpperCase","_crWebSite","website","replace","toCompanyImpl","CONFIGS","crCaption","companyName","symbol","crDesr","description"],"mappings":";;;;;;;AACA;;IAEQA,K,GAAUC,iB,CAAVD,K;;AAER,IAAME,YAAY,GAAG,SAAfA,YAAe;AAAA,MAAGC,SAAH,QAAGA,SAAH;AAAA,SAAmBH,KAAK,CAACG,SAAD,CAAxB;AAAA,CAArB;;AACA,IAAMC,WAAW,GAAG,SAAdA,WAAc;AAAA,MAAGC,QAAH,SAAGA,QAAH;AAAA,SAAkBA,QAAQ,KAAK,yBAAb,GAClC,MADkC,GAElCA,QAFgB;AAAA,CAApB;;AAGA,IAAMC,YAAY,GAAG,SAAfA,YAAe;AAAA,MAAGC,SAAH,SAAGA,SAAH;AAAA,SAAmB,CAACA,SAAS,IAAI,EAAd,EACrCC,WADqC,EAAnB;AAAA,CAArB;;AAEA,IAAMC,UAAU,GAAG,SAAbA,UAAa;AAAA,MAAGC,OAAH,SAAGA,OAAH;AAAA,SAAiB,CAACA,OAAO,IAAI,EAAZ,EACjCC,OADiC,CACzB,SADyB,EACd,EADc,CAAjB;AAAA,CAAnB;;AAGA,IAAMC,aAAa,GAAG;AACpBC,EAAAA,OAAO,EAAE,CACP,SADO,EAEP,MAFO,EAGP,OAHO,EAIPX,YAJO,EAKP,QALO,EAMP,UANO,EAOPE,WAPO,EAQPE,YARO,EASP,cATO,EAUPG,UAVO,CADW;AAapBK,EAAAA,SAAS,EAAE;AAAA,QAAGC,WAAH,SAAGA,WAAH;AAAA,QAAgBC,MAAhB,SAAgBA,MAAhB;AAAA,WAA6BD,WAAW,GAAG,GAAd,GAAoBC,MAAjD;AAAA,GAbS;AAcpBC,EAAAA,MAAM,EAAE;AAAA,QAAGC,WAAH,SAAGA,WAAH;AAAA,WAAqBA,WAAW,IAAI,EAApC;AAAA;AAdY,CAAtB;eAiBeN,a","sourcesContent":["\r\nimport fns from './toFns'\r\n\r\nconst { toStr } = fns;\r\n\r\nconst _crEmployees = ({ employees }) => toStr(employees);\r\nconst _crExchange = ({ exchange }) => exchange === 'New York Stock Exchange'\r\n  ? 'NYSE'\r\n  : exchange;\r\nconst _crIssueType = ({ issueType }) => (issueType || '')\r\n  .toUpperCase();\r\nconst _crWebSite = ({ website }) => (website || '')\r\n  .replace('http://', '');\r\n\r\nconst toCompanyImpl = {\r\n  CONFIGS: [\r\n    'country',\r\n    'city',\r\n    'state',\r\n    _crEmployees,\r\n    'sector',\r\n    'industry',\r\n    _crExchange,\r\n    _crIssueType,\r\n    'securityName',\r\n    _crWebSite\r\n  ],\r\n  crCaption: ({ companyName, symbol }) => companyName + ' ' + symbol,\r\n  crDesr: ({ description }) => description || ''\r\n};\r\n\r\nexport default toCompanyImpl\r\n"],"file":"toCompanyImpl.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/iex/toCompanyImpl.js"
+ ],
+ "file": "../../../src/adapters/iex/toCompanyImpl.js",
+ "names": [
+  "_crEmployees",
+  "employees",
+  "toStr",
+  "_crExchange",
+  "exchange",
+  "_crIssueType",
+  "issueType",
+  "toUpperCase",
+  "_crWebSite",
+  "website",
+  "replace",
+  "toCompanyImpl",
+  "CONFIGS",
+  "crCaption",
+  "companyName",
+  "symbol",
+  "crDesr",
+  "description"
+ ],
+ "mappings": ";;;;AAAA;AAEA,MAAMA,YAAY,GAAG;EAAA,IAAC;IACpBC;EACF,CAAC;EAAA,OAAK,IAAAC,YAAK,EAACD,SAAS,CAAC;AAAA;AACtB,MAAME,WAAW,GAAG;EAAA,IAAC;IACnBC;EACF,CAAC;EAAA,OAAKA,QAAQ,KAAK,yBAAyB,GACxC,MAAM,GACNA,QAAQ;AAAA;AACZ,MAAMC,YAAY,GAAG;EAAA,IAAC;IACpBC;EACF,CAAC;EAAA,OAAK,CAACA,SAAS,IAAI,EAAE,EAAEC,WAAW,EAAE;AAAA;AACrC,MAAMC,UAAU,GAAG;EAAA,IAAC;IAClBC;EACF,CAAC;EAAA,OAAK,CAACA,OAAO,IAAI,EAAE,EAAEC,OAAO,CAAC,SAAS,EAAE,EAAE,CAAC;AAAA;AAE5C,MAAMC,aAAa,GAAG;EACpBC,OAAO,EAAE,CACP,SAAS,EACT,MAAM,EACN,OAAO,EACPZ,YAAY,EACZ,QAAQ,EACR,UAAU,EACVG,WAAW,EACXE,YAAY,EACZ,cAAc,EACdG,UAAU,CACX;EACDK,SAAS,EAAE;IAAA,IAAC;MAAEC,WAAW;MAAEC;IAAO,CAAC;IAAA,OAAKD,WAAW,GAAG,GAAG,GAAGC,MAAM;EAAA;EAClEC,MAAM,EAAE;IAAA,IAAC;MAAEC;IAAY,CAAC;IAAA,OAAKA,WAAW,IAAI,EAAE;EAAA;AAChD,CAAC;AAAC,eAEaN,aAAa;AAAA"
+}

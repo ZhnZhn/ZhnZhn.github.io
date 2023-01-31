@@ -1,7 +1,10 @@
-import { isTypeNumber } from '../AdapterFn';
-import fns from './toFns'
+import {
+  isTypeNumber,
+  getValue,
+  toStr,
+  toPerc
+} from './toFns';
 
-const { getValue, toStr, toPerc } = fns;
 const _isFn = fn => typeof fn === 'function';
 
 //const _crCompanyName = ({ companyName }) => companyName || '';

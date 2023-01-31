@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
-var _toFns = _interopRequireDefault(require("./toFns"));
+var _toFns = require("./toFns");
 const TITLE = "Source: IEX Cloud";
 const TemplateScatter = function (impl) {
   if (!(this instanceof TemplateScatter)) {
@@ -27,7 +27,7 @@ Object.assign(TemplateScatter.prototype, {
       config: (0, _pipe.default)((0, _configBuilderFn.crAreaConfig)({
         isCrosshair: false
       }), (0, _configBuilderFn.fAddCaption)(TITLE, crSubtitle(option)), (0, _configBuilderFn.fSetSeriaBy)(0, crSeria(json, option)), (0, _configBuilderFn.fAdd)({
-        zhConfig: _toFns.default.crZhConfig(option)
+        zhConfig: (0, _toFns.crZhConfig)(option)
       }), _configBuilderFn.toConfig)
     };
   },
@@ -38,7 +38,7 @@ Object.assign(TemplateScatter.prototype, {
         crSeria
       } = this.impl,
       seria = crSeria(json, option);
-    return _toFns.default.crToSeria({
+    return (0, _toFns.crToSeria)({
       chart,
       seria,
       caption,

@@ -1,16 +1,19 @@
+import { toStr } from './toFns';
 
-import fns from './toFns'
-
-const { toStr } = fns;
-
-const _crEmployees = ({ employees }) => toStr(employees);
-const _crExchange = ({ exchange }) => exchange === 'New York Stock Exchange'
+const _crEmployees = ({
+  employees
+}) => toStr(employees);
+const _crExchange = ({
+  exchange
+}) => exchange === 'New York Stock Exchange'
   ? 'NYSE'
   : exchange;
-const _crIssueType = ({ issueType }) => (issueType || '')
-  .toUpperCase();
-const _crWebSite = ({ website }) => (website || '')
-  .replace('http://', '');
+const _crIssueType = ({
+  issueType
+}) => (issueType || '').toUpperCase();
+const _crWebSite = ({
+  website
+}) => (website || '').replace('http://', '');
 
 const toCompanyImpl = {
   CONFIGS: [
