@@ -9,7 +9,7 @@ var _seriaFn = require("../math/seriaFn");
 var _Chart = require("./Chart");
 var _ChartConfigFn = require("./ChartConfigFn");
 var _Tooltip = require("./Tooltip");
-var _IndicatorConfigFn = require("./IndicatorConfigFn");
+var _crMiniConfigFn = require("./crMiniConfigFn");
 var _configBuilderFn = require("./configBuilderFn");
 const _crScatterSeria = (color, pointFormatter, data) => ({
     type: 'scatter',
@@ -20,16 +20,16 @@ const _crScatterSeria = (color, pointFormatter, data) => ({
   _crDividendSeria = data => _crScatterSeria(_Color.COLOR_EX_DIVIDEND, _Tooltip.tooltipExDividend, data),
   _crSplitRatioSeria = data => _crScatterSeria(_Color.COLOR_SPLIT_RATIO, _Tooltip.tooltipSplitRatio, data);
 const _factoryAddMini = (propName, crMiniConfig) => option => config => (0, _configBuilderFn._addMini)(option[propName], option, crMiniConfig, config);
-const fAddMiniVolume = _factoryAddMini('dVolume', _IndicatorConfigFn.crMiniVolumeConfig);
+const fAddMiniVolume = _factoryAddMini('dVolume', _crMiniConfigFn.crMiniVolumeConfig);
 exports.fAddMiniVolume = fAddMiniVolume;
 const fAddMiniVolumes = arrOption => config => {
   arrOption.forEach(option => fAddMiniVolume(option)(config));
   return config;
 };
 exports.fAddMiniVolumes = fAddMiniVolumes;
-const fAddMiniATH = _factoryAddMini('data', _IndicatorConfigFn.crMiniATHConfig);
+const fAddMiniATH = _factoryAddMini('data', _crMiniConfigFn.crMiniATHConfig);
 exports.fAddMiniATH = fAddMiniATH;
-const fAddMiniHL = _factoryAddMini('data', _IndicatorConfigFn.crMiniHLConfig);
+const fAddMiniHL = _factoryAddMini('data', _crMiniConfigFn.crMiniHLConfig);
 exports.fAddMiniHL = fAddMiniHL;
 const _factoryAddScatterBottom = (crSeria, seriaName) => (data, min, max) => config => (0, _configBuilderFn._fAddScatterBottom)(crSeria(data), seriaName, min, max)(config);
 const fAddDividend = _factoryAddScatterBottom(_crDividendSeria, 'Dividend');

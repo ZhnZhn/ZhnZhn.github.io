@@ -28,7 +28,7 @@ import {
   crMiniVolumeConfig,
   crMiniATHConfig,
   crMiniHLConfig
-} from './IndicatorConfigFn';
+} from './crMiniConfigFn';
 
 import {
   crAreaConfig,

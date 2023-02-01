@@ -8,9 +8,9 @@ import {
   pby10
 } from '../math/tsIndicators';
 import {
-  crMfiConfig as _crMfiConfig,
-  crMomAthConfig as _crMomAthConfig
-} from './IndicatorConfigFn';
+  crMiniMfiConfig,
+  crMiniMomAthConfig
+} from './crMiniConfigFn';
 import {
   crSeriaConfig
 } from './ChartConfigFn';
@@ -139,7 +139,7 @@ export const crMfiConfig = (
   , titleNotFullPoint = (nNotFullPoint !== 0)
       ? ' Not Full Data HL:' + nNotFullPoint
       : '';
-  return _crMfiConfig(
+  return crMiniMfiConfig(
      id,
      id + titleNotFullPoint,
      dataMfi
@@ -150,5 +150,5 @@ export const crMomAthConfig = (
   chart
 ) => {
   const data = chart.options.zhPoints;
-  return _crMomAthConfig(momAth(data));
+  return crMiniMomAthConfig(momAth(data));
 }
