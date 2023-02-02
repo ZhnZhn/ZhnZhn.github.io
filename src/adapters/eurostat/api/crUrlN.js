@@ -86,7 +86,7 @@ const crUrlN = (options) => {
   _updateOptionsIf(seriaType, _items, options)
 
   return isCategory(seriaType)
-    ? crUrl(_dfTable, _q, `&${DF_TAIL}`)
+    ? crUrl(_dfTable, _q, DF_TAIL)
     : crUrl(_dfTable, _q);
 };
 

@@ -97,6 +97,7 @@ const DialogSelectN = memoIsShow((
     initFromDate=DF_INIT_FROM_DATE,
     errNotYmdOrEmpty,
     isYmdOrEmpty,
+    loadId,
 
     toTopLayer,
     onAbout,
@@ -185,8 +186,8 @@ const DialogSelectN = memoIsShow((
     dateOptions
   } = useMemo(() => ({
     _chartOptions: crChartOptions(selectProps, chartsType, _mapFrequency)
-    , ...crDateConfig(_mapFrequency, _mapDateDf)
-  }), [selectProps, chartsType, _mapFrequency, _mapDateDf])
+    , ...crDateConfig(_mapFrequency, _mapDateDf, loadId)
+  }), [selectProps, chartsType, _mapFrequency, _mapDateDf, loadId])
   , _refItems = useRef([])
   , [
     refTitles,

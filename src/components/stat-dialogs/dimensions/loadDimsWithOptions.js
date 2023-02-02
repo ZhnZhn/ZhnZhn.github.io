@@ -7,8 +7,8 @@ import loadJson from './loadJson';
 const _isArr = Array.isArray;
 
 const _isEs = (dimension, source) =>
-  dimension && source === 'Eurostat'
-
+  dimension && source === 'ESTAT'
+  
 const _isSdn = item => item
   && item.id && item.text
   && !_isArr(item.valueTexts)

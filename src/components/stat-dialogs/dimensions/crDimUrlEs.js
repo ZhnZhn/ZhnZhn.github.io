@@ -1,10 +1,9 @@
-
-const ES_BASE_META = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en";
+import { STAT_API_URL } from '../../../adapters/eurostat/api/apiFn';
 
 const _crMetaTime = mapFrequency => {
-  if (mapFrequency === 'M') { return '2019M01'; }
-  if (mapFrequency === 'S') { return '2019S1'; }
-  if (mapFrequency === 'Q') { return '2019Q1'; }
+  if (mapFrequency === 'M') { return '2019-01'; }
+  if (mapFrequency === 'S') { return '2019-S1'; }
+  if (mapFrequency === 'Q') { return '2019-Q1'; }
   return '2019';
 };
 
@@ -19,7 +18,7 @@ const crDimUrlEs = ({
   ].filter(Boolean).join('&')
   , _qT = _queryTail ? '?' + _queryTail : '';
 
-  return `${ES_BASE_META}/${dfId}${_qT}`;
+  return `${STAT_API_URL}/${dfId}${_qT}`;
 };
 
 export default crDimUrlEs

@@ -9,9 +9,9 @@ const CATEGORY_TYPES = [
   'DOT_SET'
 ];
 
-export const URL = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
-export const QUERY_TAIL = "&precision=1&sinceTimePeriod=1996M01"
-export const DF_TAIL = "precision=1"
+export const STAT_API_URL = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data"
+export const QUERY_TAIL = "&sinceTimePeriod=1996-01"
+export const DF_TAIL = ""
 
 export const isCategory = isInArrStr(CATEGORY_TYPES)
 export const isMap = seriaType => seriaType === 'MAP'
@@ -19,4 +19,4 @@ export const crUrl = (
   table,
   q,
   tail=QUERY_TAIL
-) => `${URL}${table}?${q}${tail}`
+) => `${STAT_API_URL}/${table}?${q}${tail}`

@@ -5,7 +5,7 @@
 "use strict";
 import api from '../EuroStatApi'
 import {
-  URL,
+  STAT_API_URL,
   QUERY_TAIL,
   DF_TAIL
 } from '../api/apiFn';
@@ -27,7 +27,7 @@ describe('getRequestUrl', ()=>{
         items: [...ITEMS]
       },
       url = api.getRequestUrl(options);
-      expect(url).toBe(`${URL}${DF_TABLE}?n1=v1&n2=v2${QUERY_TAIL}`)
+      expect(url).toBe(`${STAT_API_URL}/${DF_TABLE}?n1=v1&n2=v2${QUERY_TAIL}`)
   })
   test('should return valid url for crUrlN category chart', ()=>{
     const time = 2017;
@@ -39,7 +39,7 @@ describe('getRequestUrl', ()=>{
       time
     },
     url = api.getRequestUrl(options);
-    expect(url).toBe(`${URL}${DF_TABLE}?n1=v1&n2=v2&time=${time}&${DF_TAIL}`)
+    expect(url).toBe(`${STAT_API_URL}/${DF_TABLE}?n1=v1&n2=v2&time=${time}${DF_TAIL}`)
   })
 
 })

@@ -33,27 +33,70 @@ const COLOR_EU = "#0088ff"
   ];
 
 const _getObjectKeys = Object.keys
-, _assign = Object.assign;
+, _assign = Object.assign
+, _isStr = str => typeof str === 'string'
+, _isArr = Array.isArray;
 
-const _crDescr = (extension) => {
-  const _ext = extension || {}
-  , { datasetId, subTitle } = _ext
-  , _id = `Dataset: ${datasetId}`
+const _crDescr = (
+  updated,
+  extension
+) => {
+  const _updated = _isStr(updated)
+     ? `Updated: ${updated.replace('T', ' ')}`
+     : ''
+  , _ext = extension || {}
+  , { id, subTitle } = _ext
+  , _id = `Dataset: ${(id || '').toLowerCase()}`
   , _sub = subTitle ? `Metric: ${subTitle}` : ''
   , _d = _ext.description || '';
-  return (`${_d} ${_id} ${_sub}`).trim();
+  return (`<p>${_updated}</p><p>${_id}</p><p>${_d} ${_sub}</p>`);
 };
+
+const OBS_PERIOD_OVERALL_ = 'OBS_PERIOD_OVERALL_'
+, OLDEST_DATE = `${OBS_PERIOD_OVERALL_}OLDEST`
+, LATEST_DATE = `${OBS_PERIOD_OVERALL_}LATEST`;
+
+const _getObsOverallPeriods = (
+  extension
+) => {
+  const { annotation } = extension || {}
+  let _fromDate=''
+  , _toDate=''
+  , _annotationType
+  , i;
+  if (_isArr(annotation)) {
+    for(i = 0; i<annotation.length; i++) {
+      _annotationType = (annotation[i] || {}).type
+      if (_annotationType === OLDEST_DATE) {
+        _fromDate = annotation[i].title
+      }
+      if (_annotationType === LATEST_DATE) {
+        _toDate = annotation[i].title
+      }
+    }
+  }
+  return [
+    _fromDate,
+    _toDate
+  ];
+}
 
 export const crDatasetInfo = ({
   label,
   updated,
   extension
-}) => ({
-  name: label,
-  description: _crDescr(extension),
-  toDate: updated,
-  fromDate: '1996-01-30'
-});
+}) => {
+  const [
+    fromDate,
+    toDate
+  ] = _getObsOverallPeriods(extension);
+  return {
+    name: label,
+    description: _crDescr(updated, extension),
+    fromDate,
+    toDate
+  };
+}
 
 const _fIsCode = codes => p => codes.indexOf(p.c) !== -1
 const _isEUCode = _fIsCode(EU_CODES)
@@ -89,12 +132,15 @@ const _filterZeroCategories = (
   return { data: _data, categories };
 };
 
+
 const _isYearOrMapFrequencyKey = (
   key,
   mapFrequency
 ) => !mapFrequency
   || mapFrequency === "Y"
+  || mapFrequency === "M"
   || key.indexOf(mapFrequency) !== -1;
+
 
 const _crPoint = (
   x,
@@ -154,21 +200,23 @@ const _crTimeIndexAndValue = (json) => {
   ];
 }
 
+const _isNumber = n => typeof n === 'number'
+  && n-n === 0;
 const _convertToUTC = (str) => {
-  const _period = (str && str[4] || '').toUpperCase();
-  if (_period === 'M') {
-    const arrDate = str.split('M')
+  const _period = (str && str[5]);
+  if (_isNumber(parseInt(_period, 10))) {
+    const arrDate = str.split('-')
     , _month = parseInt(arrDate[1], 10)-1
     , _day = (_month === 1) ? 28 : 30;
     return Date.UTC(arrDate[0], _month, _day);
   }
   if (_period === 'Q'){
-    const arrDate = str.split('Q')
+    const arrDate = str.split('-Q')
     , _month = (parseInt(arrDate[1], 10)*3) - 1;
     return Date.UTC(arrDate[0], _month, 30);
   }
   if (_period === 'S') {
-    const _arrS = str.split('S');
+    const _arrS = str.split('-S');
     return _arrS[1] === '1'
       ? Date.UTC(_arrS[0], 5, 30)
       : Date.UTC(_arrS[0], 11, 31);
