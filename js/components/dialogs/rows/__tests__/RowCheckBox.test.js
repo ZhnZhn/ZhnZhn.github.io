@@ -12,7 +12,7 @@ const {
   render,
   screen,
   wrapByUiThemeProvider,
-  fireClick
+  setupUserEvent
 } = _zhnTestUtils.default;
 const _helperStyledFalse = (bt, chbox) => {
   expect(bt).toHaveStyle("color: grey");
@@ -35,7 +35,7 @@ const _crTestArtifacts = checkedColor => {
   };
 };
 describe('RowCheckBox', () => {
-  test('should render RowCheckBox with onToggle handler', () => {
+  test('should render RowCheckBox with onToggle handler', async () => {
     const initValue = false,
       caption = 'CheckBox',
       checkedColor = '#222222',
@@ -47,8 +47,9 @@ describe('RowCheckBox', () => {
         onToggle
       },
       {
+        user,
         rerender
-      } = render(wrapByUiThemeProvider( /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
+      } = setupUserEvent(wrapByUiThemeProvider( /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
         ...props
       }))),
       {
@@ -67,21 +68,21 @@ describe('RowCheckBox', () => {
 
     //2 Test click on buttom
     //2.1 From false
-    fireClick(bt);
+    await user.click(bt);
     _testStyledTrue();
     _testOnToggleCalled(1, true);
     //2.2 From true
-    fireClick(bt);
+    await user.click(bt);
     _testStyledFalse();
     _testOnToggleCalled(2, false);
 
     //3 Test click on checkbox
     //3.1 From false
-    fireClick(chbox);
+    await user.click(chbox);
     _testStyledTrue();
     _testOnToggleCalled(3, true);
     //3.2 From true
-    fireClick(chbox);
+    await user.click(chbox);
     _testStyledFalse();
     _testOnToggleCalled(4, false);
 
@@ -92,7 +93,7 @@ describe('RowCheckBox', () => {
     })));
     _testStyledFalse();
   });
-  test('should render RowCheckBox with onCheck, onUnCheck handlers', () => {
+  test('should render RowCheckBox with onCheck, onUnCheck handlers', async () => {
     const initValue = false,
       caption = 'CheckBox',
       checkedColor = '#222222',
@@ -108,8 +109,9 @@ describe('RowCheckBox', () => {
         onToggle
       },
       {
+        user,
         rerender
-      } = render(wrapByUiThemeProvider( /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
+      } = setupUserEvent(wrapByUiThemeProvider( /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
         ...props
       }))),
       {
@@ -129,21 +131,21 @@ describe('RowCheckBox', () => {
 
     //2 Test click on checkbox
     //2.1 From false
-    fireClick(chbox);
+    await user.click(chbox);
     _testStyledTrue();
     _testCalled(onCheck, 1);
     //2.2 From true
-    fireClick(chbox);
+    await user.click(chbox);
     _testStyledFalse();
     _testCalled(onUnCheck, 1);
 
     //3 Test click on button
     //3.1 From false
-    fireClick(bt);
+    await user.click(bt);
     _testStyledTrue();
     _testCalled(onCheck, 2);
     //3.2 From true
-    fireClick(bt);
+    await user.click(bt);
     _testStyledFalse();
     _testCalled(onUnCheck, 2);
 

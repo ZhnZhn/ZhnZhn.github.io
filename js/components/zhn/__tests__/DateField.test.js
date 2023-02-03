@@ -10,12 +10,11 @@ var _DateField = _interopRequireDefault(require("../DateField"));
 var _jsxRuntime = require("react/jsx-runtime");
 const {
   createRef,
-  render,
   screen,
   act,
-  fireChange,
-  fireKeyDownEnter,
-  fireKeyDownDelete
+  KEY_ENTER,
+  KEY_DELETE,
+  setupUserEvent
 } = _zhnTestUtils.default;
 describe("DateField", () => {
   const _findInput = () => screen.findByRole('textbox');
@@ -26,8 +25,9 @@ describe("DateField", () => {
       //1 Test render with initialValue
       ,
       {
+        user,
         rerender
-      } = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
+      } = setupUserEvent( /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
         ref: ref,
         initialValue: initialValue,
         onEnter: onEnter
@@ -38,18 +38,17 @@ describe("DateField", () => {
     //2 Test event handlers
     //2.1 onChange
     const _changeValue = '2020-01-01';
-    fireChange(input, _changeValue);
-    input = await _findInput();
+    await user.clear(input);
+    await user.type(input, _changeValue);
     expect(input).toHaveValue(_changeValue);
 
     //2.2 KeyDown Enter
-    fireKeyDownEnter(input);
+    await user.type(input, KEY_ENTER);
     expect(onEnter).toHaveBeenCalledTimes(1);
     expect(onEnter.mock.calls[0][0]).toBe(_changeValue);
 
     //2.3 KeyDown Delete
-    fireKeyDownDelete(input);
-    input = await _findInput();
+    await user.type(input, KEY_DELETE);
     expect(input).toHaveValue(initialValue);
 
     //3 Test ref implementation interface

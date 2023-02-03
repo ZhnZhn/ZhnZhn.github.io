@@ -10,9 +10,8 @@ var _TabPane = _interopRequireDefault(require("../TabPane"));
 var _Tab = _interopRequireDefault(require("../Tab"));
 var _jsxRuntime = require("react/jsx-runtime");
 const {
-  render,
   screen,
-  fireClick
+  setupUserEvent
 } = _zhnTestUtils.default;
 const CL_TAB = "tab";
 const CL_TAB_SELECTED = "tab tab--selected";
@@ -33,8 +32,10 @@ const Comp = _ref => {
 const _getTabs = screen => [screen.getByText("Tab1"), screen.getByText("Tab2")];
 const _getComps = screen => [screen.getByText("Comp1"), screen.getByText("Comp2")];
 describe('TabPane', () => {
-  test('should render TabPane and show-hide Comps by clicking on Tabs', () => {
-    render( /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
+  test('should render TabPane and show-hide Comps by clicking on Tabs', async () => {
+    const {
+      user
+    } = setupUserEvent( /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "Tab1",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
@@ -56,7 +57,9 @@ describe('TabPane', () => {
     expect(tab2).toHaveClass(CL_TAB);
     expect(comp2).not.toBeVisible();
     expect(comp2).not.toHaveStyle(SELECTED_STYLE);
-    fireClick(screen.getByText("Tab2"));
+
+    //fireClick(screen.getByText("Tab2"));
+    await user.click(screen.getByText("Tab2"));
     [tab1, tab2] = _getTabs(screen);
     [comp1, comp2] = _getComps(screen);
     expect(tab1).toHaveClass(CL_TAB);
@@ -65,7 +68,9 @@ describe('TabPane', () => {
     expect(tab2).toHaveClass(CL_TAB_SELECTED);
     expect(comp2).toBeVisible();
     expect(comp2).toHaveStyle(SELECTED_STYLE);
-    fireClick(screen.getByText("Tab1"));
+
+    //fireClick(screen.getByText("Tab1"));
+    await user.click(screen.getByText("Tab1"));
     [tab1, tab2] = _getTabs(screen);
     [comp1, comp2] = _getComps(screen);
     expect(tab1).toHaveClass(CL_TAB_SELECTED);

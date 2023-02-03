@@ -8,23 +8,25 @@ import InputText from '../InputText';
 
 const {
   createRef,
-  render,
   screen,
   act,
-  fireChange,
-  fireKeyDownEnter,
-  fireKeyDownDelete
+  KEY_ENTER,
+  KEY_DELETE,
+  setupUserEvent,
+  getFnParameter
 } = zhnUtils;
 
-describe("InputText", () => {
-  const _findInput = () => screen.findByRole('textbox');
+describe("InputText", () => {  
   test('should render InputText with event handlers and ref', async ()=>{
     const initValue = 'abc'
     , onEnter = jest.fn()
     , onChange = jest.fn()
     , ref = createRef()
     //1 Test render
-    , { rerender } = render(<InputText
+    , {
+      user,
+      rerender
+    } = setupUserEvent(<InputText
        ref={ref}
        initValue={initValue}
        onChange={onChange}
@@ -35,48 +37,44 @@ describe("InputText", () => {
 
     //2 Test event handlers
     //2.1 KeyDown Delete
-    fireKeyDownDelete(input)
-    input = await _findInput()
+    await user.type(input, KEY_DELETE);
     expect(input).toHaveValue('')
 
     //2.2 onChange
-    const _changeValue = 'abcd'
-    fireChange(input, _changeValue)
-    input = await _findInput()
+    const _changeValue = 'abcd';
+    await user.type(input, _changeValue);
     expect(input).toHaveValue(_changeValue)
-    expect(onChange).toHaveBeenCalledTimes(1)
-    expect(onChange.mock.calls[0][0]).toBe(_changeValue)
+    expect(onChange).toHaveBeenCalledTimes(_changeValue.length)
+    expect(getFnParameter(onChange)).toBe(_changeValue[0])
+    expect(getFnParameter(onChange, _changeValue.length-1)).toBe(_changeValue)
 
     //2.3 KeyDown Enter && onEnter
-    fireKeyDownEnter(input)
+    await user.type(input, KEY_ENTER);
     expect(onEnter).toHaveBeenCalledTimes(1)
-    expect(onEnter.mock.calls[0][0]).toBe(_changeValue)
+    expect(getFnParameter(onEnter)).toBe(_changeValue)
 
     //3 Test ref implementation interface
     //3.1
-     expect(ref.current.getValue()).toBe(_changeValue)
+    expect(ref.current.getValue()).toBe(_changeValue)
     //3.2
     act(() => ref.current.setValue('a'))
-    input = await _findInput()
     expect(input).toHaveValue('a')
     //3.3
     ref.current.focus()
     expect(input).toHaveFocus()
 
     //4 Test rerender with new initValue without optional handlers
-    const _initValue = "abcde"
+    const _initValue = "abcde";
     rerender(<InputText initValue={_initValue} />)
-    input = await _findInput()
     expect(input).toHaveValue(_initValue)
 
     //4.1 KeyDown Enter && onEnter
-    fireKeyDownEnter(input)
+    await user.type(input, KEY_ENTER);
     expect(onEnter).toHaveBeenCalledTimes(1)
 
     //4.2 onChange
-    fireChange(input, _changeValue)
-    input = await _findInput()
-    expect(input).toHaveValue(_changeValue)
-    expect(onChange).toHaveBeenCalledTimes(1)
+    await user.type(input, _changeValue);
+    expect(input).toHaveValue(_initValue + _changeValue)
+    expect(onChange).toHaveBeenCalledTimes(_changeValue.length)
   })
 })

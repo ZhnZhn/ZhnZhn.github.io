@@ -8,12 +8,11 @@ import DateField from '../DateField';
 
 const {
   createRef,
-  render,
   screen,
   act,
-  fireChange,
-  fireKeyDownEnter,
-  fireKeyDownDelete
+  KEY_ENTER,
+  KEY_DELETE,
+  setupUserEvent
 } = zhnUtils;
 
 describe("DateField", () => {
@@ -23,29 +22,31 @@ describe("DateField", () => {
     , ref = createRef()
     , initialValue="2010-01-01"
     //1 Test render with initialValue
-    , { rerender } = render(<DateField
+    , {
+      user,
+      rerender
+    } = setupUserEvent(<DateField
         ref={ref}
         initialValue={initialValue}
         onEnter={onEnter}
-      />)
+      />);
     let input = screen.getByRole('textbox')
     expect(input).toHaveValue(initialValue)
 
     //2 Test event handlers
     //2.1 onChange
     const _changeValue = '2020-01-01';
-    fireChange(input, _changeValue)
-    input = await _findInput()
+    await user.clear(input);
+    await user.type(input, _changeValue);
     expect(input).toHaveValue(_changeValue)
 
     //2.2 KeyDown Enter
-    fireKeyDownEnter(input)
+    await user.type(input, KEY_ENTER);
     expect(onEnter).toHaveBeenCalledTimes(1)
     expect(onEnter.mock.calls[0][0]).toBe(_changeValue)
 
     //2.3 KeyDown Delete
-    fireKeyDownDelete(input)
-    input = await _findInput()
+    await user.type(input, KEY_DELETE);
     expect(input).toHaveValue(initialValue)
 
     //3 Test ref implementation interface
@@ -63,9 +64,9 @@ describe("DateField", () => {
     expect(input).toHaveFocus()
 
     //4 Test rerender with new initialValue
-    const _rerenderValue = "2020-01-01"
+    const _rerenderValue = "2020-01-01";
     rerender(<DateField initialValue={_rerenderValue} />)
-    input = await _findInput()
+    input = await _findInput();
     expect(input).toHaveValue(_rerenderValue)
   })
 })

@@ -13,7 +13,9 @@ const {
   screen,
   act,
   fireClick,
-  fireKeyDownEnter
+  fireKeyDownEnter,
+  KEY_ENTER,
+  setupUserEvent
 } = _zhnTestUtils.default;
 const _crTestArtifacts = (onCheck, onUnCheck) => {
   const chb = screen.getByRole('checkbox'),
@@ -38,7 +40,7 @@ const _crTestArtifacts = (onCheck, onUnCheck) => {
   };
 };
 describe('SvgCheckBox', () => {
-  test('should render SvgCheckBox with initialValue and handlers', () => {
+  test('should render SvgCheckBox with initialValue and handlers', async () => {
     const initialValue = false,
       checkedColor = '#222222',
       onCheck = jest.fn(),
@@ -50,8 +52,9 @@ describe('SvgCheckBox', () => {
         onUnCheck
       },
       {
+        user,
         rerender
-      } = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
+      } = setupUserEvent( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
         ...props
       })),
       {
@@ -65,18 +68,18 @@ describe('SvgCheckBox', () => {
 
     //2 Click on checkbox
     //2.1 From false
-    fireClick(chb);
+    await user.click(chb);
     _testStyledTrueTimes(1);
     //2.2 From true
-    fireClick(chb);
+    await user.click(chb);
     _testStyledFalseTimes(1);
 
     //3 KeyDown on checkbox
     //3.1 keyDown Enter from false
-    fireKeyDownEnter(chb);
+    await user.type(chb, KEY_ENTER);
     _testStyledTrueTimes(2);
     //3.2 keyDown Enter from true
-    fireKeyDownEnter(chb);
+    await user.type(chb, KEY_ENTER);
     _testStyledFalseTimes(2);
 
     //4 Handler args component interface
@@ -84,7 +87,7 @@ describe('SvgCheckBox', () => {
     expect(onCheck.mock.calls[0][0]).toBe(onUnCheck.mock.calls[1][0]);
     expect(onCheck.mock.calls[1][0]).toBe(onUnCheck.mock.calls[1][0]);
     //4.2 Handler setUnchecked
-    fireClick(chb);
+    await user.click(chb);
     _testStyledTrueTimes(3);
     act(() => {
       onCheck.mock.calls[2][0].setUnchecked();
@@ -98,7 +101,7 @@ describe('SvgCheckBox', () => {
     }));
     _testStyledFalseTimes(2);
   });
-  test('should use property booolean value and handlers', () => {
+  test('should use property booolean value and handlers', async () => {
     const value = false,
       initValue = true,
       checkedColor = '#222222',
@@ -112,8 +115,9 @@ describe('SvgCheckBox', () => {
         onUnCheck
       },
       {
+        user,
         rerender
-      } = render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
+      } = setupUserEvent( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
         ...props
       })),
       {
@@ -133,7 +137,7 @@ describe('SvgCheckBox', () => {
 
     //3 Click on checkbox
     //3.1 From true
-    fireClick(chb);
+    await user.click(chb);
     _testStyledTrueTimes(0);
     expect(onUnCheck).toHaveBeenCalledTimes(1);
     //3.2 From false
@@ -141,11 +145,11 @@ describe('SvgCheckBox', () => {
       ...props,
       value: false
     }));
-    fireClick(chb);
+    await user.click(chb);
     _testStyledFalseTimes(1);
     expect(onCheck).toHaveBeenCalledTimes(1);
   });
-  test('should call preventDefault on event handlers', () => {
+  test('should call preventDefault on event handlers', async () => {
     render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {}));
     const chb = screen.getByRole('checkbox');
 

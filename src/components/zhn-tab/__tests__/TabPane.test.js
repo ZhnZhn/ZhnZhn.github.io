@@ -8,9 +8,8 @@ import TabPane from '../TabPane';
 import Tab from '../Tab';
 
 const {
-  render,
   screen,
-  fireClick,
+  setupUserEvent
 } = zhnUtils;
 
 const CL_TAB = "tab";
@@ -42,8 +41,8 @@ const _getComps = (screen) => [
 
 
 describe('TabPane', ()=>{
-  test('should render TabPane and show-hide Comps by clicking on Tabs', ()=>{
-    render(
+  test('should render TabPane and show-hide Comps by clicking on Tabs', async ()=>{
+    const { user } = setupUserEvent((
       <TabPane>
         <Tab title="Tab1">
           <Comp text="Comp1" />
@@ -52,7 +51,7 @@ describe('TabPane', ()=>{
           <Comp text="Comp2" />
         </Tab>
       </TabPane>
-    )
+    ))
     let tab1, tab2, comp1, comp2;
 
     [tab1, tab2] = _getTabs(screen);
@@ -65,7 +64,8 @@ describe('TabPane', ()=>{
     expect(comp2).not.toHaveStyle(SELECTED_STYLE)
 
 
-    fireClick(screen.getByText("Tab2"));
+    //fireClick(screen.getByText("Tab2"));
+    await user.click(screen.getByText("Tab2"));
     [tab1, tab2] = _getTabs(screen);
     [comp1, comp2] = _getComps(screen);
     expect(tab1).toHaveClass(CL_TAB)
@@ -75,7 +75,8 @@ describe('TabPane', ()=>{
     expect(comp2).toBeVisible()
     expect(comp2).toHaveStyle(SELECTED_STYLE)
 
-    fireClick(screen.getByText("Tab1"));
+    //fireClick(screen.getByText("Tab1"));
+    await user.click(screen.getByText("Tab1"));
     [tab1, tab2] = _getTabs(screen);
     [comp1, comp2] = _getComps(screen)
     expect(tab1).toHaveClass(CL_TAB_SELECTED)
