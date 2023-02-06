@@ -11,12 +11,15 @@ import {
 } from '../../charts/Tooltip';
 
 import {
+  isNumber,
   findMinY,
   findMaxY,
   filterTrimZero,
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import { crItemConf } from '../crFn';
+
+import convertToUTC from './convertToUTC';
 
 const COLOR_EU = "#0088ff"
 , COLOR_EA = "#ff5800"
@@ -141,7 +144,6 @@ const _isYearOrMapFrequencyKey = (
   || mapFrequency === "M"
   || key.indexOf(mapFrequency) !== -1;
 
-
 const _crPoint = (
   x,
   y,
@@ -200,32 +202,6 @@ const _crTimeIndexAndValue = (json) => {
   ];
 }
 
-const _isNumber = n => typeof n === 'number'
-  && n-n === 0;
-const _convertToUTC = (str) => {
-  const _period = (str && str[5]);
-  if (_isNumber(parseInt(_period, 10))) {
-    const arrDate = str.split('-')
-    , _month = parseInt(arrDate[1], 10)-1
-    , _day = (_month === 1) ? 28 : 30;
-    return Date.UTC(arrDate[0], _month, _day);
-  }
-  if (_period === 'Q'){
-    const arrDate = str.split('-Q')
-    , _month = (parseInt(arrDate[1], 10)*3) - 1;
-    return Date.UTC(arrDate[0], _month, 30);
-  }
-  if (_period === 'S') {
-    const _arrS = str.split('-S');
-    return _arrS[1] === '1'
-      ? Date.UTC(_arrS[0], 5, 30)
-      : Date.UTC(_arrS[0], 11, 31);
-  }
-  return parseInt(str, 10) > 1970
-    ? Date.UTC(str, 11, 31)
-    : Date.UTC(1970, 11, 31);
-}
-
 export const crData = (
   json,
   {mapFrequency, isFilterZero}={}
@@ -239,11 +215,13 @@ export const crData = (
   _getObjectKeys(timeIndex).forEach(key => {
      if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
        const _valueIndex = timeIndex[key]
-       , y = value[_valueIndex];
-       if (y != null){
+       , y = value[_valueIndex]
+       , x = convertToUTC(key);
+       if (y != null && isNumber(x)){
          data.push(_crPoint(
-           _convertToUTC(key),
-           y, status[_valueIndex]
+           x,
+           y,
+           status[_valueIndex]
          ));
        }
      }

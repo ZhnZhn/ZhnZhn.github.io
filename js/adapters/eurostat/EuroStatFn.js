@@ -1,5 +1,6 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.toPointArr = exports.setInfo = exports.setDataAndInfo = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
 var _AdapterFn = require("../AdapterFn");
@@ -8,6 +9,7 @@ var _Chart = require("../../charts/Chart");
 var _Tooltip = require("../../charts/Tooltip");
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
+var _convertToUTC = _interopRequireDefault(require("./convertToUTC"));
 const COLOR_EU = "#0088ff",
   COLOR_EA = "#ff5800",
   COLOR_NOT_EU_MEMBER = '#8085e9',
@@ -142,26 +144,6 @@ const _crTimeIndexAndValue = json => {
     } = category || {};
   return [timeIndex, value || [], status || {}];
 };
-const _isNumber = n => typeof n === 'number' && n - n === 0;
-const _convertToUTC = str => {
-  const _period = str && str[5];
-  if (_isNumber(parseInt(_period, 10))) {
-    const arrDate = str.split('-'),
-      _month = parseInt(arrDate[1], 10) - 1,
-      _day = _month === 1 ? 28 : 30;
-    return Date.UTC(arrDate[0], _month, _day);
-  }
-  if (_period === 'Q') {
-    const arrDate = str.split('-Q'),
-      _month = parseInt(arrDate[1], 10) * 3 - 1;
-    return Date.UTC(arrDate[0], _month, 30);
-  }
-  if (_period === 'S') {
-    const _arrS = str.split('-S');
-    return _arrS[1] === '1' ? Date.UTC(_arrS[0], 5, 30) : Date.UTC(_arrS[0], 11, 31);
-  }
-  return parseInt(str, 10) > 1970 ? Date.UTC(str, 11, 31) : Date.UTC(1970, 11, 31);
-};
 const crData = function (json, _temp) {
   let {
     mapFrequency,
@@ -172,9 +154,10 @@ const crData = function (json, _temp) {
   _getObjectKeys(timeIndex).forEach(key => {
     if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
       const _valueIndex = timeIndex[key],
-        y = value[_valueIndex];
-      if (y != null) {
-        data.push(_crPoint(_convertToUTC(key), y, status[_valueIndex]));
+        y = value[_valueIndex],
+        x = (0, _convertToUTC.default)(key);
+      if (y != null && (0, _AdapterFn.isNumber)(x)) {
+        data.push(_crPoint(x, y, status[_valueIndex]));
       }
     }
   });
