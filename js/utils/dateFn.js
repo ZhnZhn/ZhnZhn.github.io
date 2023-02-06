@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.monthIndex = exports.mlsToDmy = exports.isYmdOrEmpty = exports.isYmd = exports.isDmyPeriod = exports.isDmy = exports.getYmdhmUTC = exports.getYear = exports.getYTDfromDmy = exports.getUTCTime = exports.getToDate = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.dmyToUTC = exports.addToDmy = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.monthIndex = exports.mlsToDmy = exports.isYmdOrEmpty = exports.isYmd = exports.isDmyPeriod = exports.isDmy = exports.getYmdhmUTC = exports.getYear = exports.getYTDfromDmy = exports.getUTCTime = exports.getToDate = exports.getNumberOfDays = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.dmyToUTC = exports.addToDmy = void 0;
 var _isTypeFn = require("./isTypeFn");
 const MIN_YEAR = 1990;
 const DF_FORECAST_DATE = 0;
@@ -9,7 +9,7 @@ const DAY_IN_MLS = 1000 * 60 * 60 * 24;
 let _currentYear;
 const _pad2 = n => n < 10 ? '0' + n : '' + n;
 const _toIntMonth = str => parseInt(str, 10) - 1;
-const _splitDateStr = str => (str || '').toString().split('-');
+const _splitStrByDash = str => (0, _isTypeFn.isStr)(str) ? str.split('-') : [];
 const _isLikelyQuarter = str => (0, _isTypeFn.isStr)(str) && str[0].toUpperCase() === 'Q';
 const _notInIntervalStrict = (n, min, max) => (0, _isTypeFn.isNaN)(n) || n < min || n > max;
 const _notInLengthMinMax = (str, length, min, max) => (0, _isTypeFn.isStr)(str) && str.length !== length || _notInIntervalStrict(parseInt(str, 10), min, max);
@@ -23,7 +23,14 @@ const _isYmd = function (yStr, mStr, dStr, minYear, nForecastDate) {
   const _nowYear = new Date().getFullYear();
   return !(_notInLengthMinMax(yStr, 4, minYear, _nowYear + nForecastDate) || _notInLengthMinMax(mStr, 2, 1, 12) || _notInLengthMinMax(dStr, 2, 1, 31));
 };
-const _getDaysInYm = (y, m) => new Date(y, m, 0).getDate();
+
+/*
+const _getDaysInYm = (
+  y,
+  m
+) => (new Date(y, m, 0)).getDate();
+*/
+
 const _getTimeUTC = d => _pad2(d.getUTCHours()) + ":" + _pad2(d.getUTCMinutes());
 const _getYmdUTC = (d, yearMinus) => d.getUTCFullYear() - yearMinus + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + d.getUTCDate()).slice(-2);
 const MONTH_HP = {
@@ -68,7 +75,7 @@ const getToDate = () => getFromDate(0);
 
 //YYYY-MM-DD
 exports.getToDate = getToDate;
-const getYear = str => (str || '').split('-')[0];
+const getYear = str => (0, _isTypeFn.isStr)(str) ? str.slice(0, 4) : '';
 exports.getYear = getYear;
 const getCurrentYear = () => _currentYear ? _currentYear : _currentYear = getYear(getFromDate(0));
 exports.getCurrentYear = getCurrentYear;
@@ -89,22 +96,24 @@ const mlsToDmy = mlsUTC => {
 };
 exports.mlsToDmy = mlsToDmy;
 const dmyToUTC = str => {
-  const [d, m, y] = _splitDateStr(str);
+  const [d, m, y] = _splitStrByDash(str);
   return _isYmd(y, m, d) ? Date.UTC(y, _toIntMonth(m), d) : NaN;
 };
 exports.dmyToUTC = dmyToUTC;
 const isDmyPeriod = (from, to) => dmyToUTC(from) <= dmyToUTC(to);
 exports.isDmyPeriod = isDmyPeriod;
 const isDmy = (str, minYear) => {
-  const [d, m, y] = _splitDateStr(str);
+  const [d, m, y] = _splitStrByDash(str);
   return _isYmd(y, m, d, minYear);
 };
 exports.isDmy = isDmy;
+const getNumberOfDays = (year, month) => new Date(year, month, 0).getDate();
+exports.getNumberOfDays = getNumberOfDays;
 const ymdToUTC = function (dateStr, option) {
   if (option === void 0) {
     option = {};
   }
-  const _arr = _splitDateStr(dateStr),
+  const _arr = _splitStrByDash(dateStr),
     _len = _arr.length,
     [yearStr, mStr, dStr] = _arr;
   if (_len === 3) {
@@ -113,7 +122,7 @@ const ymdToUTC = function (dateStr, option) {
   if (_len === 2 && mStr !== '') {
     const _m = parseInt(mStr, 10);
     if (!(0, _isTypeFn.isNaN)(_m)) {
-      const _d = _getDaysInYm(yearStr, _m);
+      const _d = getNumberOfDays(yearStr, _m);
       return Date.UTC(yearStr, _m - 1, _d);
       // YYYY-Q format
     } else if (_isLikelyQuarter(_arr[1])) {
@@ -121,7 +130,7 @@ const ymdToUTC = function (dateStr, option) {
       if ((0, _isTypeFn.isNaN)(_q)) {
         return _q;
       }
-      const _d = _getDaysInYm(_arr[0], _q * 3);
+      const _d = getNumberOfDays(_arr[0], _q * 3);
       return Date.UTC(_arr[0], _q * 3 - 1, _d);
     } else {
       return _m;

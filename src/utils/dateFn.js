@@ -13,9 +13,11 @@ let _currentYear;
 
 const _pad2 = n => n<10 ? '0'+n : ''+n;
 const _toIntMonth = str => parseInt(str, 10)-1;
-const _splitDateStr = str => (str || '')
-  .toString()
-  .split('-');
+const _splitStrByDash = (
+  str
+) => isStr(str)
+  ? str.split('-')
+  : [];
 
 const _isLikelyQuarter = str => isStr(str)
   && str[0].toUpperCase() === 'Q';
@@ -47,10 +49,12 @@ const _isYmd = (
    || _notInLengthMinMax(dStr, 2, 1, 31));
 };
 
+/*
 const _getDaysInYm = (
   y,
   m
 ) => (new Date(y, m, 0)).getDate();
+*/
 
 const _getTimeUTC = d => `${_pad2(d.getUTCHours())}:${_pad2(d.getUTCMinutes())}`;
 const _getYmdUTC = (
@@ -107,7 +111,9 @@ export const getFromDate = (
 export const getToDate = () => getFromDate(0)
 
 //YYYY-MM-DD
-export const getYear = str => (str || '').split('-')[0]
+export const getYear = str => isStr(str)
+  ? str.slice(0,4)
+  : ''
 
 export const getCurrentYear = () => _currentYear
   ? _currentYear
@@ -132,7 +138,7 @@ export const mlsToDmy = (mlsUTC) => {
 }
 
 export const dmyToUTC = (str) => {
-	const [d, m, y] = _splitDateStr(str);
+	const [d, m, y] = _splitStrByDash(str);
   return _isYmd(y, m, d)
     ? Date.UTC(y, _toIntMonth(m), d)
     : NaN;
@@ -147,15 +153,20 @@ export const isDmy = (
   str,
   minYear
 ) => {
-	const [d, m, y] = _splitDateStr(str);
+	const [d, m, y] = _splitStrByDash(str);
 	return _isYmd(y, m, d, minYear);
 }
+
+export const getNumberOfDays = (
+  year,
+  month
+) => new Date(year, month, 0).getDate();
 
 export const ymdToUTC = (
   dateStr,
   option={}
 ) => {
-	const _arr = _splitDateStr(dateStr)
+	const _arr = _splitStrByDash(dateStr)
 	, _len = _arr.length
   , [yearStr, mStr, dStr] = _arr;
 
@@ -166,13 +177,13 @@ export const ymdToUTC = (
   if (_len === 2 && mStr !== ''){
 	 const _m = parseInt(mStr, 10);
 	 if (!isNaN(_m)) {
-			const _d = _getDaysInYm(yearStr, _m);
+			const _d = getNumberOfDays(yearStr, _m);
 	    return Date.UTC(yearStr, _m - 1, _d);
 	 // YYYY-Q format
 	  } else if (_isLikelyQuarter(_arr[1])) {
 		  const _q = parseInt(_arr[1][1], 10);
       if (isNaN(_q)) { return _q; }
-      const _d = _getDaysInYm(_arr[0], _q*3);
+      const _d = getNumberOfDays(_arr[0], _q*3);
 			return Date.UTC( _arr[0], _q*3 - 1, _d);
 	 } else {
 		 return _m;

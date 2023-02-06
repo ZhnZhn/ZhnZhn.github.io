@@ -230,6 +230,24 @@ describe('getYear', () => {
     expect(fn('')).toBe('');
   });
 });
+describe('getNumberOfDays', () => {
+  const fn = _dateFn.getNumberOfDays;
+  test('should return number of days by year, month', () => {
+    expect(fn(2011, 2)).toBe(28);
+    expect(fn(2012, 2)).toBe(29);
+    expect(fn('2011', 1)).toBe(31);
+    expect(fn(2011, '3')).toBe(31);
+    expect(fn('2011', '4')).toBe(30);
+    expect(fn(2011, 5)).toBe(31);
+    expect(fn(2011, 6)).toBe(30);
+    expect(fn(2011, 7)).toBe(31);
+    expect(fn(2012, 8)).toBe(31);
+    expect(fn(2012, 9)).toBe(30);
+    expect(fn(2012, 10)).toBe(31);
+    expect(fn(2012, 11)).toBe(30);
+    expect(fn(2012, 12)).toBe(31);
+  });
+});
 describe('monthIndex', () => {
   const fn = _dateFn.monthIndex;
   it('should return month index from 0 from str', () => {
