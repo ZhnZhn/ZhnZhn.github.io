@@ -108,26 +108,32 @@ export const powerBy10 = (
   }, true)
 }
 
-export const addSmaTo = (
+const _fAddTaTo = (
+  taName,
+  taFn
+) => (
   chart,
   option
 ) => {
-  const { id, period } = option
-  , data = chart.series[0].data
-  , dataSma = sma(data, period);
+ const {
+   id,
+   period
+ } = option
+ , _data = chart.series[0].data
+ , data = taFn(_data, period)
+ , name = `${taName}(${period})`;
 
-  if (dataSma.length>0){
-    return _addToChartSeria(chart, {
-      zhValueText: id,
-      lineWidth: 2,
-      data: dataSma,
-      name: `SMA(${period})`
-    });
-  } else {
-    console.log('It seems, there are not enough data for SMA(' + period + ')')
-    return void 0;
-  }
+ return data.length>0
+   ? _addToChartSeria(chart, {
+       zhValueText: id,
+       lineWidth: 2,
+       data: data,
+       name: name
+     })
+   : console.log('It seems, there are not enough data for ' + name);
 }
+
+export const addSmaTo = _fAddTaTo('SMA', sma)
 
 export const crMfiConfig = (
   chart,
