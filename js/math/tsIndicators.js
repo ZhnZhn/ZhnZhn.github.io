@@ -1,20 +1,15 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports.sma = exports.pby10 = exports.momAth = exports.mfi = exports.categoryRoc = exports.categoryRate = exports.categoryDiff = void 0;
-
+exports.sma = exports.rsi = exports.pby10 = exports.momAth = exports.mfi = exports.categoryRoc = exports.categoryRate = exports.categoryDiff = void 0;
 var _sma2 = _interopRequireDefault(require("./sma"));
-
 var _mfi2 = _interopRequireDefault(require("./mfi"));
-
 var _momAth2 = _interopRequireDefault(require("./momAth"));
-
 var _pby = _interopRequireDefault(require("./pby10"));
-
+var _rsi = require("./rsi");
+exports.rsi = _rsi.rsi;
 var _categoryFn = require("./categoryFn");
-
 exports.categoryDiff = _categoryFn.categoryDiff;
 exports.categoryRate = _categoryFn.categoryRate;
 exports.categoryRoc = _categoryFn.categoryRoc;

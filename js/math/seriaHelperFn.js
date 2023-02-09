@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.mergeToChartPoints = exports.isNumber = exports.isNotEmptyArr = exports.getZeroIndexFromEnd = exports.getZeroCountFromStart = exports.fGetY = exports.crPointGetter = exports.crDataArrays = void 0;
+var _mathFn = require("./mathFn");
 const _isArr = Array.isArray,
   _isNumber = n => typeof n === "number" && n - n === 0,
   _isUndef = v => typeof v === "undefined",
@@ -89,8 +90,8 @@ const crDataArrays = data => {
   return [_data, _dataX];
 };
 exports.crDataArrays = crDataArrays;
-const mergeToChartPoints = (dataX, values) => dataX.reduce((result, x, i) => {
-  result.push([x, values[i]]);
+const mergeToChartPoints = (dataX, values, by) => dataX.reduce((result, x, i) => {
+  result.push([x, (0, _mathFn.roundBy)(values[i], by)]);
   return result;
 }, []);
 exports.mergeToChartPoints = mergeToChartPoints;

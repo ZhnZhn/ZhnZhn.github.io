@@ -3,6 +3,8 @@ import _mfi from './mfi';
 import _momAth from './momAth';
 import _pby10 from './pby10';
 
+export { rsi } from './rsi';
+
 export {
   categoryDiff,
   categoryRate,

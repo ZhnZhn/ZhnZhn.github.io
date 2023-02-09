@@ -1,3 +1,5 @@
+import { roundBy } from './mathFn';
+
 const _isArr = Array.isArray
 , _isNumber = n => typeof n === "number"
   && (n-n === 0)
@@ -89,9 +91,13 @@ export const crDataArrays = (data) => {
 
 export const mergeToChartPoints = (
   dataX,
-  values
+  values,
+  by
 ) => dataX
  .reduce((result, x, i) => {
-    result.push([x, values[i]])
+    result.push([
+      x,
+      roundBy(values[i], by)
+    ])
     return result;
  }, []);
