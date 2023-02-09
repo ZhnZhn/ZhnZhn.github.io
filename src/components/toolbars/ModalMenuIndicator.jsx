@@ -15,6 +15,7 @@ import ModalPopup from '../zhn-moleculs/ModalPopup'
 import RowType1 from './RowType1'
 import RowPlusMinus from './RowPlusMinus'
 import RowSma from './RowSma'
+import RowRsi from './RowRsi'
 import RowMfi from './RowMfi'
 
 import { S_MODAL_MENU } from './ModalMenu.Style'
@@ -30,11 +31,9 @@ const _isFn = fn => typeof fn === 'function';
 
 const _isSeriaInst = (s) => s && _isFn(s.setVisible);
 
-const FNS = {
-  GR: ['ROC', 'isGrowthRate', C_GROW, growthRate, true],
-  CH: ['DIFF', 'isChanges', C_GROW, changesBetween, true],
-  NORM: ['NORM', 'isNormalize', C_GROW, normalize, false]
-};
+const FN_ROC = ['ROC', 'isGrowthRate', C_GROW, growthRate, true]
+, FN_DIFF = ['DIFF', 'isChanges', C_GROW, changesBetween, true]
+, FN_NORM = ['NORM', 'isNormalize', C_GROW, normalize, false];
 
 /*
 const DEF_GROWTH_RATE = (
@@ -85,21 +84,24 @@ class ModalMenuIndicator extends Component {
     const { config } = props;
     this._isMfi = !!config.zhIsMfi
     this._isMomAth = !!config.zhIsMomAth
+    const { btTitle } = (config.zhMiniConfigs || [])[0] || {};
+    this._isRsi = this._isMfi
+      || (btTitle || '').indexOf('Volume') !== -1
 
     this._addGrowRate = this._addSeriaBy
-     .bind(this, FNS.GR)
+     .bind(this, FN_ROC)
     this._removeGrowRate = this._hideSeriaBy
-     .bind(this, FNS.GR)
+     .bind(this, FN_ROC)
 
      this._addChanges = this._addSeriaBy
-      .bind(this, FNS.CH)
+      .bind(this, FN_DIFF)
      this._removeChanges = this._hideSeriaBy
-      .bind(this, FNS.CH)
+      .bind(this, FN_DIFF)
 
      this._addNormalize = this._addSeriaBy
-      .bind(this, FNS.NORM, {})
+      .bind(this, FN_NORM, {})
      this._removeNormalize = this._hideSeriaBy
-      .bind(this, FNS.NORM)
+      .bind(this, FN_NORM)
 
     this.state = {
       isGrowthRate: false,
@@ -167,9 +169,13 @@ class ModalMenuIndicator extends Component {
 
  render(){
     const {
-      isShow, style, config,
-      getChart, onClose,
-      onAddMfi, onRemoveMfi
+      isShow,
+      style,
+      config,
+      getChart,
+      onClose,
+      onAddMfi,
+      onRemoveMfi
     } = this.props
     , { zhConfig={} } = config
     , { isWithoutSma } = zhConfig
@@ -206,6 +212,11 @@ class ModalMenuIndicator extends Component {
             onPlus={this._addNormalize}
           />
           {!isWithoutSma && <RowSma
+              config={config}
+              getChart={getChart}
+            />
+          }
+          {this._isRsi && <RowRsi
               config={config}
               getChart={getChart}
             />

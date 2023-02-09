@@ -1,20 +1,17 @@
 import { addSmaTo } from '../../charts/IndicatorBuilder';
 import RowTaType1 from './RowTaType1';
+import { crInitialPeriod } from './helperFn';
 
-const _isArray = Array.isArray
-, SMA_MONTH = '12'
+const SMA_MONTH = '12'
 , SMA_YEAR = '50';
 
 const _crInitialSmaPeriod = (
   config
-) => {
-  const _d = (((config || {}).series || [])[0] || {}).data;
-  return !_isArray(_d)
-    ? '0'
-    : _d.length > 150
-         ? SMA_YEAR
-         : SMA_MONTH;
-};
+) => crInitialPeriod(
+  config,
+  SMA_MONTH,
+  SMA_YEAR
+);
 
 const RowSma = ({
   config,
