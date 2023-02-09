@@ -1,13 +1,17 @@
 
-//export function pointwise(operation: (...args: any[]) => any, ...serieses: Array<Array<number>>) {
 export const pointwise = (
-  operation,
+  mathOperation,
   ...serieses
 ) => {
-  let result = [];
-  for (let i = 0, len = serieses[0].length; i < len; i++) {
-    let iseries = (i) => serieses.map(x => x[i]);
-    result.push(operation(...iseries(i)));
+  let result = []
+  , _getSeriesValuesByIndex = (i) => serieses
+       .map(seria => seria[i])
+  , _len = serieses[0].length
+  , i;
+  for (i = 0; i < _len; i++) {
+    result.push(
+      mathOperation(..._getSeriesValuesByIndex(i))
+    );
   }
   return result;
 }

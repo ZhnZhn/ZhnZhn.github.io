@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/math/pointwise.js"
+ ],
+ "file": "../../src/math/pointwise.js",
+ "names": [
+  "pointwise",
+  "mathOperation",
+  "serieses",
+  "result",
+  "_getSeriesValuesByIndex",
+  "i",
+  "map",
+  "seria",
+  "_len",
+  "length",
+  "push"
+ ],
+ "mappings": ";;;;AACO,MAAMA,SAAS,GAAG,UACvBC,aAAa,EAEV;EAAA,mCADAC,QAAQ;IAARA,QAAQ;EAAA;EAEX,IAAIC,MAAM,GAAG,EAAE;IACbC,uBAAuB,GAAIC,CAAC,IAAKH,QAAQ,CACrCI,GAAG,CAACC,KAAK,IAAIA,KAAK,CAACF,CAAC,CAAC,CAAC;IAC1BG,IAAI,GAAGN,QAAQ,CAAC,CAAC,CAAC,CAACO,MAAM;IACzBJ,CAAC;EACH,KAAKA,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGG,IAAI,EAAEH,CAAC,EAAE,EAAE;IACzBF,MAAM,CAACO,IAAI,CACTT,aAAa,CAAC,GAAGG,uBAAuB,CAACC,CAAC,CAAC,CAAC,CAC7C;EACH;EACA,OAAOF,MAAM;AACf,CAAC;AAAA"
+}
