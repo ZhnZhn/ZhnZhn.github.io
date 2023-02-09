@@ -1,7 +1,6 @@
 "use strict";
 
 var _seriaHelperFn = require("../seriaHelperFn");
-
 describe("isNotEmptyArr", () => {
   const fn = _seriaHelperFn.isNotEmptyArr;
   test('should return true for arr with object', () => {
@@ -68,15 +67,15 @@ describe("fGetY", () => {
   const fn = _seriaHelperFn.fGetY;
   test("should return function for getting y for arr point", () => {
     const point = [1, 2],
-          getY = fn(point);
+      getY = fn(point);
     expect(typeof getY).toBe('function');
     expect(getY(point)).toBe(point[1]);
   });
   test("should return function for getting y for obj point", () => {
     const point = {
-      y: 2
-    },
-          getY = fn(point);
+        y: 2
+      },
+      getY = fn(point);
     expect(typeof getY).toBe('function');
     expect(getY(point)).toBe(point.y);
   });
@@ -118,6 +117,34 @@ describe('getZeroIndexFromEnd', () => {
       y: null
     }];
     expect(fn(dataObj, (0, _seriaHelperFn.fGetY)(dataObj[0]))).toBe(1);
+  });
+});
+describe('crDataArrays', () => {
+  const fn = _seriaHelperFn.crDataArrays;
+  test('should return array with data numbers and dataX values by chart data', () => {
+    expect(fn([[1, 10], [2, 20], [3, 30], [4, null], [5, void 0]])).toEqual([[10, 20, 30], [1, 2, 3]]);
+  });
+  expect(fn([{
+    x: 1,
+    y: 10
+  }, {
+    x: 2,
+    y: 20
+  }, {
+    x: 3,
+    y: 30
+  }, {
+    x: 4,
+    y: null
+  }, {
+    x: 5,
+    y: void 0
+  }])).toEqual([[10, 20, 30], [1, 2, 3]]);
+});
+describe('mergeToChartPoints', () => {
+  const fn = _seriaHelperFn.mergeToChartPoints;
+  test('should return array with chart points by dataX and values', () => {
+    expect(fn([1, 2, 3], [10, 20, 30])).toEqual([[1, 10], [2, 20], [3, 30]]);
   });
 });
 //# sourceMappingURL=seriaHelperFn.test.js.map

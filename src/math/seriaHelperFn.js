@@ -61,3 +61,37 @@ export const getZeroIndexFromEnd = (arr, getY) => {
   }
   return _zeroIndex;
 }
+
+/*************************************************/
+/***********TA*Series*Helpers*********************/
+
+export const crDataArrays = (data) => {
+  const {
+    getX,
+    getY
+  } = crPointGetter(data)
+  , _data = []
+  , _dataX = [];
+
+  data.forEach(p => {
+    const y = getY(p);
+    if (isNumber(y)) {
+      _data.push(y)
+      _dataX.push(getX(p))
+    }
+  })
+
+  return [
+    _data,
+    _dataX
+  ];
+}
+
+export const mergeToChartPoints = (
+  dataX,
+  values
+) => dataX
+ .reduce((result, x, i) => {
+    result.push([x, values[i]])
+    return result;
+ }, []);

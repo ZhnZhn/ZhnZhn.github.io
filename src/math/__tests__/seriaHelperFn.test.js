@@ -4,7 +4,10 @@ import {
   crPointGetter,
   fGetY,
   getZeroCountFromStart,
-  getZeroIndexFromEnd
+  getZeroIndexFromEnd,
+
+  crDataArrays,
+  mergeToChartPoints
 } from '../seriaHelperFn';
 
 describe("isNotEmptyArr", ()=>{
@@ -111,5 +114,50 @@ describe('getZeroIndexFromEnd', ()=>{
 
     const dataObj = [{x:-1, y:-1}, {x:1,y:0},{x:2,y:null}]
     expect(fn(dataObj, fGetY(dataObj[0]))).toBe(1)
+  })
+})
+
+describe('crDataArrays', ()=>{
+  const fn = crDataArrays;
+  test('should return array with data numbers and dataX values by chart data',()=>{
+    expect(
+      fn([
+        [1,10],
+        [2,20],
+        [3,30],
+        [4,null],
+        [5, void 0]
+      ])
+    ).toEqual([
+        [10,20,30],
+        [1,2,3]
+    ])
+  })
+
+  expect(
+    fn([
+      {x: 1, y: 10},
+      {x: 2, y: 20},
+      {x: 3, y: 30},
+      {x: 4, y: null},
+      {x: 5, y: void 0},
+    ])
+  ).toEqual([
+    [10,20,30],
+    [1,2,3]
+  ])
+})
+
+describe('mergeToChartPoints', ()=>{
+  const fn = mergeToChartPoints;
+  test('should return array with chart points by dataX and values', ()=>{
+    expect(fn(
+      [1,2,3],
+      [10,20,30]
+    )).toEqual([
+      [1,10],
+      [2,20],
+      [3,30]
+    ])
   })
 })
