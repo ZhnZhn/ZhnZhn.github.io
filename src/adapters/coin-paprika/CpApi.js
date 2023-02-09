@@ -1,18 +1,16 @@
-import { 
+import {
   crError,
   getCoinId
 } from './fnAdapter';
 
-const URL = 'https://api.coinpaprika.com/v1'
-, DF_SUBTITLE = 'Values on 23:59:59 UTC';
+const URL = 'https://api.coinpaprika.com/v1';
 
 const _isArr = Array.isArray;
 
 const _crUrlDf = option => {
   const { fromDate } = option
   , _coinId = getCoinId(option);
-  option.subtitle = DF_SUBTITLE
-  return `${URL}/coins/${_coinId}/ohlcv/historical?start=${fromDate}&limit=366`;
+  return `${URL}/tickers/${_coinId}/historical?start=${fromDate}&interval=1d`;
 };
 
 const _crUrlTw = option => {

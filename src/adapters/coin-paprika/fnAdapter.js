@@ -12,7 +12,6 @@ import {
 import {
   crItemLink
 } from '../crFn';
-import { crVolumePoint } from '../pointFn';
 
 const DF_ID = 'btc-bitcoin';
 const _getCoinId = ({ items=[] }) =>
@@ -29,44 +28,27 @@ export const getCoinId = _getCoinId
 
 export const crData = (arr) => {
   const data = []
-  , dColumn = []
   , dVolume = []
   , dMarketCap = [];
   arr.forEach(item => {
     const {
-      time_close,
-      close,
-      open,
-      low,
-      high,
-      volume,
+      timestamp,
+      price,
+      volume_24h,
       market_cap
     } = item
-    , _date = time_close
-        ? ymdToUTC(time_close.split('T')[0])
-        : void 0;
+    , _date = timestamp
+        ? ymdToUTC(timestamp.split('T')[0])
+        : 0;
     if (_date) {
-      data.push([_date, close])
-      dVolume.push([_date, volume])
-      dColumn.push(
-        crVolumePoint({
-           date: _date,
-           open,
-           close,
-           volume,
-           option: {
-              _high: high,
-              _low: low
-            }
-        })
-      )
+      data.push([_date, price])
+      dVolume.push([_date, volume_24h])
       dMarketCap.push([_date, market_cap])
     }
   })
   return {
     data,
     dVolume,
-    dColumn,
     dMarketCap
   };
 }

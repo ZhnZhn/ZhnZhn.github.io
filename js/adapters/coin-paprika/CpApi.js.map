@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/adapters/coin-paprika/CpApi.js"],"names":["URL","DF_SUBTITLE","_isArr","Array","isArray","_crUrlDf","option","fromDate","_coinId","subtitle","_crUrlTw","_crUrlCi","_rApi","DF","TW","CI","CpApi","getRequestUrl","dfSubId","_crUrl","_itemUrl","checkResponse","json"],"mappings":";;;;;AAAA;;AAKA,MAAMA,GAAG,GAAG,gCAAZ;AAAA,MACEC,WAAW,GAAG,wBADhB;AAGA,MAAMC,MAAM,GAAGC,KAAK,CAACC,OAArB;;AAEA,MAAMC,QAAQ,GAAGC,MAAM,IAAI;AACzB,QAAM;AAAEC,IAAAA;AAAF,MAAeD,MAArB;AAAA,QACEE,OAAO,GAAG,0BAAUF,MAAV,CADZ;;AAEAA,EAAAA,MAAM,CAACG,QAAP,GAAkBR,WAAlB;AACA,SAAUD,GAAV,eAAuBQ,OAAvB,gCAAyDD,QAAzD;AACD,CALD;;AAOA,MAAMG,QAAQ,GAAGJ,MAAM,IAAI;AACzB,QAAME,OAAO,GAAG,0BAAUF,MAAV,CAAhB;;AACA,SAAUN,GAAV,eAAuBQ,OAAvB;AACD,CAHD;;AAKA,MAAMG,QAAQ,GAAGL,MAAM,IAAI;AACzB,QAAME,OAAO,GAAG,0BAAUF,MAAV,CAAhB;;AACA,SAAUN,GAAV,eAAuBQ,OAAvB;AACD,CAHD;;AAKA,MAAMI,KAAK,GAAG;AACZC,EAAAA,EAAE,EAAER,QADQ;AAEZS,EAAAA,EAAE,EAAEJ,QAFQ;AAGZK,EAAAA,EAAE,EAAEJ;AAHQ,CAAd;AAMA,MAAMK,KAAK,GAAG;AACZC,EAAAA,aAAa,CAACX,MAAD,EAAQ;AACnB,UAAM;AAAEY,MAAAA;AAAF,QAAcZ,MAApB;AAAA,UACEa,MAAM,GAAGP,KAAK,CAACM,OAAD,CAAL,IAAkBN,KAAK,CAACC,EADnC;;AAEA,WAAQP,MAAM,CAACc,QAAP,GAAkBD,MAAM,CAACb,MAAD,CAAhC;AACD,GALW;;AAMZe,EAAAA,aAAa,CAACC,IAAD,EAAOhB,MAAP,EAAc;AACzB,UAAM;AAAEY,MAAAA;AAAF,QAAcZ,MAApB;;AACA,QAAIJ,MAAM,CAACoB,IAAD,CAAN,IAAiBJ,OAAO,KAAK,IAAZ,IAAoBI,IAAzC,EAAgD;AAC9C,aAAO,IAAP;AACD;;AACD,UAAM,yBAAN;AACD;;AAZW,CAAd;eAeeN,K","sourcesContent":["import { \r\n  crError,\r\n  getCoinId\r\n} from './fnAdapter';\r\n\r\nconst URL = 'https://api.coinpaprika.com/v1'\r\n, DF_SUBTITLE = 'Values on 23:59:59 UTC';\r\n\r\nconst _isArr = Array.isArray;\r\n\r\nconst _crUrlDf = option => {\r\n  const { fromDate } = option\r\n  , _coinId = getCoinId(option);\r\n  option.subtitle = DF_SUBTITLE\r\n  return `${URL}/coins/${_coinId}/ohlcv/historical?start=${fromDate}&limit=366`;\r\n};\r\n\r\nconst _crUrlTw = option => {\r\n  const _coinId = getCoinId(option);\r\n  return `${URL}/coins/${_coinId}/twitter`;\r\n};\r\n\r\nconst _crUrlCi = option => {\r\n  const _coinId = getCoinId(option);\r\n  return `${URL}/coins/${_coinId}`;\r\n};\r\n\r\nconst _rApi = {\r\n  DF: _crUrlDf,\r\n  TW: _crUrlTw,\r\n  CI: _crUrlCi\r\n};\r\n\r\nconst CpApi = {\r\n  getRequestUrl(option){\r\n    const { dfSubId } = option\r\n    , _crUrl = _rApi[dfSubId] || _rApi.DF;\r\n    return (option._itemUrl = _crUrl(option));\r\n  },\r\n  checkResponse(json, option){\r\n    const { dfSubId } = option;\r\n    if (_isArr(json) || (dfSubId === 'CI' && json)) {\r\n      return true;\r\n    }\r\n    throw crError();\r\n  }\r\n}\r\n\r\nexport default CpApi\r\n"],"file":"CpApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-paprika/CpApi.js"
+ ],
+ "file": "../../../src/adapters/coin-paprika/CpApi.js",
+ "names": [
+  "URL",
+  "_isArr",
+  "Array",
+  "isArray",
+  "_crUrlDf",
+  "option",
+  "fromDate",
+  "_coinId",
+  "getCoinId",
+  "_crUrlTw",
+  "_crUrlCi",
+  "_rApi",
+  "DF",
+  "TW",
+  "CI",
+  "CpApi",
+  "getRequestUrl",
+  "dfSubId",
+  "_crUrl",
+  "_itemUrl",
+  "checkResponse",
+  "json",
+  "crError"
+ ],
+ "mappings": ";;;;AAAA;AAKA,MAAMA,GAAG,GAAG,gCAAgC;AAE5C,MAAMC,MAAM,GAAGC,KAAK,CAACC,OAAO;AAE5B,MAAMC,QAAQ,GAAGC,MAAM,IAAI;EACzB,MAAM;MAAEC;IAAS,CAAC,GAAGD,MAAM;IACzBE,OAAO,GAAG,IAAAC,oBAAS,EAACH,MAAM,CAAC;EAC7B,OAAUL,GAAG,iBAAYO,OAAO,0BAAqBD,QAAQ;AAC/D,CAAC;AAED,MAAMG,QAAQ,GAAGJ,MAAM,IAAI;EACzB,MAAME,OAAO,GAAG,IAAAC,oBAAS,EAACH,MAAM,CAAC;EACjC,OAAUL,GAAG,eAAUO,OAAO;AAChC,CAAC;AAED,MAAMG,QAAQ,GAAGL,MAAM,IAAI;EACzB,MAAME,OAAO,GAAG,IAAAC,oBAAS,EAACH,MAAM,CAAC;EACjC,OAAUL,GAAG,eAAUO,OAAO;AAChC,CAAC;AAED,MAAMI,KAAK,GAAG;EACZC,EAAE,EAAER,QAAQ;EACZS,EAAE,EAAEJ,QAAQ;EACZK,EAAE,EAAEJ;AACN,CAAC;AAED,MAAMK,KAAK,GAAG;EACZC,aAAa,CAACX,MAAM,EAAC;IACnB,MAAM;QAAEY;MAAQ,CAAC,GAAGZ,MAAM;MACxBa,MAAM,GAAGP,KAAK,CAACM,OAAO,CAAC,IAAIN,KAAK,CAACC,EAAE;IACrC,OAAQP,MAAM,CAACc,QAAQ,GAAGD,MAAM,CAACb,MAAM,CAAC;EAC1C,CAAC;EACDe,aAAa,CAACC,IAAI,EAAEhB,MAAM,EAAC;IACzB,MAAM;MAAEY;IAAQ,CAAC,GAAGZ,MAAM;IAC1B,IAAIJ,MAAM,CAACoB,IAAI,CAAC,IAAKJ,OAAO,KAAK,IAAI,IAAII,IAAK,EAAE;MAC9C,OAAO,IAAI;IACb;IACA,MAAM,IAAAC,kBAAO,GAAE;EACjB;AACF,CAAC;AAAA,eAEcP,KAAK;AAAA"
+}
