@@ -21,12 +21,14 @@ const _isArr = Array.isArray,
   _initFromDate = (0, _dateFn.getFromDate)(2),
   initToDate = (0, _dateFn.getToDate)();
 const _crFnValue = (valueFn, valueFnPrefix) => valueFn ? valueFnPrefix ? _RouterFnValue.default[valueFn].bind(null, valueFnPrefix) : _RouterFnValue.default[valueFn] : void 0;
+const _crFromDate = nInitFromDate => nInitFromDate ? nInitFromDate === '1y+1d' //Coinpaprika
+? (0, _dateFn.addDaysToYmd)((0, _dateFn.getFromDate)(1), 1) : (0, _dateFn.getFromDate)(nInitFromDate) : _initFromDate;
 const _crInitFromDate = _ref => {
   let {
     isFdw,
     nInitFromDate
   } = _ref;
-  return isFdw && !_has.HAS_WIDE_WIDTH ? _initFromDate : nInitFromDate ? (0, _dateFn.getFromDate)(nInitFromDate) : _initFromDate;
+  return isFdw && !_has.HAS_WIDE_WIDTH ? _initFromDate : _crFromDate(nInitFromDate);
 };
 const _crDateProps = dialogProps => {
   const _props = dialogProps.isFd ? {

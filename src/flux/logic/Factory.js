@@ -28,7 +28,8 @@ import {
   getFromDate,
   getToDate,
   isYmd,
-  isYmdOrEmpty
+  isYmdOrEmpty,
+  addDaysToYmd
 } from '../../utils/dateFn';
 import { HAS_WIDE_WIDTH } from '../../components/has';
 import ChartStore from '../stores/ChartStore';
@@ -47,14 +48,20 @@ const _crFnValue = (
      : RouterFnValue[valueFn]
   : void 0;
 
+const _crFromDate = (
+  nInitFromDate,
+) => nInitFromDate
+  ? nInitFromDate === '1y+1d' //Coinpaprika
+     ? addDaysToYmd(getFromDate(1), 1)
+     : getFromDate(nInitFromDate)
+  : _initFromDate;
+
 const _crInitFromDate = ({
   isFdw,
   nInitFromDate
 }) => isFdw && !HAS_WIDE_WIDTH
   ? _initFromDate
-  : nInitFromDate
-     ? getFromDate(nInitFromDate)
-     : _initFromDate
+  : _crFromDate(nInitFromDate);
 
 const _crDateProps = (dialogProps) => {
   const _props = dialogProps.isFd
