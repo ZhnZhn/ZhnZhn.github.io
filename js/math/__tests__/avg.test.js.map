@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/math/__tests__/avg.test.js"
+ ],
+ "file": "../../../src/math/__tests__/avg.test.js",
+ "names": [
+  "describe",
+  "fn",
+  "avg",
+  "test",
+  "expect",
+  "toBe",
+  "NaN"
+ ],
+ "mappings": ";;AAAA;AAEAA,QAAQ,CAAC,KAAK,EAAC,MAAI;EACjB,MAAMC,EAAE,GAAGC,QAAG;EACdC,IAAI,CAAC,+DAA+D,EAAE,MAAI;IACxEC,MAAM,CAACH,EAAE,CAAC,CACR,QAAQ,EACR,QAAQ,EACR,QAAQ,CACT,CAAC,CAAC,CAACI,IAAI,CAAC,QAAQ,CAAC;EACpB,CAAC,CAAC;EAEFF,IAAI,CAAC,yCAAyC,EAAE,MAAI;IAClDC,MAAM,CAACH,EAAE,CAAC,EAAE,CAAC,CAAC,CAACI,IAAI,CAACC,GAAG,CAAC;EAC1B,CAAC,CAAC;AACJ,CAAC,CAAC"
+}

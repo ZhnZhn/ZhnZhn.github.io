@@ -1,10 +1,14 @@
-//export function avg(series: Array<number>) {
+import Big from 'big.js';
+
 export const avg = (
   series
 ) => {
-  let sum = 0, len = series.length;
-  for (let i = 0; i < len; i++) {
-    sum += series[i];
-  }
-  return sum / len;
+  const _len = series.length;
+  return _len
+   ? parseFloat(series
+      .reduce((bResult, value) => bResult.add(value), Big(0))
+      .div(_len)
+      .toFixed()
+      )
+   : NaN;
 }

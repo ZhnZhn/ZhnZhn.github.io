@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/math/avg.js"
+ ],
+ "file": "../../src/math/avg.js",
+ "names": [
+  "avg",
+  "series",
+  "_len",
+  "length",
+  "parseFloat",
+  "reduce",
+  "bResult",
+  "value",
+  "add",
+  "Big",
+  "div",
+  "toFixed",
+  "NaN"
+ ],
+ "mappings": ";;;;;AAAA;AAEO,MAAMA,GAAG,GACdC,MAAM,IACH;EACH,MAAMC,IAAI,GAAGD,MAAM,CAACE,MAAM;EAC1B,OAAOD,IAAI,GACRE,UAAU,CAACH,MAAM,CACfI,MAAM,CAAC,CAACC,OAAO,EAAEC,KAAK,KAAKD,OAAO,CAACE,GAAG,CAACD,KAAK,CAAC,EAAE,IAAAE,YAAG,EAAC,CAAC,CAAC,CAAC,CACtDC,GAAG,CAACR,IAAI,CAAC,CACTS,OAAO,EAAE,CACT,GACFC,GAAG;AACR,CAAC;AAAA"
+}
