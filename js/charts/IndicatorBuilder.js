@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.removeSeriaFrom = exports.powerBy10 = exports.crMomAthConfig = exports.crMfiConfig = exports.addSmaTo = exports.addCategoryRocTo = exports.addCategoryRateTo = exports.addCategoryDiffTo = void 0;
+exports.removeSeriaFrom = exports.powerBy10 = exports.crMomAthConfig = exports.crMfiConfig = exports.addSmaTo = exports.addRsiTo = exports.addCategoryRocTo = exports.addCategoryRateTo = exports.addCategoryDiffTo = void 0;
 var _tsIndicators = require("../math/tsIndicators");
 var _crMiniConfigFn = require("./crMiniConfigFn");
 var _ChartConfigFn = require("./ChartConfigFn");
@@ -87,23 +87,37 @@ const powerBy10 = (chart, power) => {
   }, true);
 };
 exports.powerBy10 = powerBy10;
-const _fAddTaTo = (taName, taFn) => (chart, option) => {
+const _fAddTaTo = (taName, taFn, yaxisOptions) => (chart, option) => {
   const {
       id,
       period
     } = option,
     _data = chart.series[0].data,
     data = taFn(_data, period),
-    name = taName + "(" + period + ")";
-  return data.length > 0 ? _addToChartSeria(chart, {
+    name = taName + "(" + period + ")",
+    seriaOption = {
+      zhValueText: id,
+      lineWidth: 2,
+      data: data,
+      name: name
+    };
+  return data.length > 0 ? yaxisOptions ? (chart.zhAddSeriaToYAxis({
+    name: taName,
+    data,
+    ...yaxisOptions
+  }, (0, _ChartConfigFn.crSeriaConfig)({
+    name,
     zhValueText: id,
-    lineWidth: 2,
-    data: data,
-    name: name
-  }) : console.log('It seems, there are not enough data for ' + name);
+    lineWidth: 2
+  })) || {}).color : _addToChartSeria(chart, seriaOption) : console.log('It seems, there are not enough data for ' + name);
 };
 const addSmaTo = _fAddTaTo('SMA', _tsIndicators.sma);
 exports.addSmaTo = addSmaTo;
+const addRsiTo = _fAddTaTo('RSI', _tsIndicators.rsi, {
+  min: 0,
+  max: 100
+});
+exports.addRsiTo = addRsiTo;
 const crMfiConfig = (chart, period, id) => {
   const data = chart.options.zhPoints,
     [dataMfi, nNotFullPoint] = (0, _tsIndicators.mfi)(data, period),

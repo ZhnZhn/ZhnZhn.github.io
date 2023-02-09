@@ -3,6 +3,7 @@ import {
   categoryRate,
   categoryRoc,
   sma,
+  rsi,
   mfi,
   momAth,
   pby10
@@ -66,7 +67,6 @@ const _addToChartSeria = (
   return (_seriaIns || {}).color;
 };
 
-
 export const removeSeriaFrom = (
   chart,
   zhValueText
@@ -110,7 +110,8 @@ export const powerBy10 = (
 
 const _fAddTaTo = (
   taName,
-  taFn
+  taFn,
+  yaxisOptions
 ) => (
   chart,
   option
@@ -121,19 +122,32 @@ const _fAddTaTo = (
  } = option
  , _data = chart.series[0].data
  , data = taFn(_data, period)
- , name = `${taName}(${period})`;
-
+ , name = `${taName}(${period})`
+ , seriaOption = {
+     zhValueText: id,
+     lineWidth: 2,
+     data: data,
+     name: name
+ };
  return data.length>0
-   ? _addToChartSeria(chart, {
-       zhValueText: id,
-       lineWidth: 2,
-       data: data,
-       name: name
-     })
+   ? yaxisOptions
+     ? (chart.zhAddSeriaToYAxis({
+          name: taName,
+          data,
+          ...yaxisOptions
+        },
+        crSeriaConfig({
+          name,
+          zhValueText: id,
+          lineWidth: 2
+        })
+      ) || {}).color
+     :_addToChartSeria(chart, seriaOption)
    : console.log('It seems, there are not enough data for ' + name);
 }
 
 export const addSmaTo = _fAddTaTo('SMA', sma)
+export const addRsiTo = _fAddTaTo('RSI', rsi, { min: 0, max: 100 })
 
 export const crMfiConfig = (
   chart,
