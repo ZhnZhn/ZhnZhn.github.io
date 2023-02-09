@@ -6,9 +6,11 @@ import {
   ymdToUTC,
   ymdhmsToUTC,
   mlsToDmy,
+  mlsToYmd,
   isDmy,
   getUTCTime,
   addToDmy,
+  addDaysToYmd,
   getYTDfromDmy,
   getYear,
   getNumberOfDays,
@@ -19,7 +21,10 @@ import {
 import dateFnWithMock from './dateFnWithMock';
 
 // DateUtils configuration consts
-const MIN_YEAR = 1990;
+const MIN_YEAR = 1990
+, UTC_MLS_2018_01_01 = 1514764800000
+, UTC_MLS_2018_01_10 = 1515542400000
+, UTC_MLS_2018_10_01 = 1538352000000;
 
 const _compose = fns => fns.reduce((f, g) => (...args) => f(g(...args)));
 
@@ -153,17 +158,37 @@ describe('ymdhmsToUTC', ()=> {
   })
 })
 
-describe('formatTo', ()=>{
+describe('mlsToDmy', ()=>{
   const fn = mlsToDmy;
   const EMPTY = '';
-  test('should format to DD-MM-YYYY from ms', ()=>{
-    expect(fn(1514764800000)).toBe('01-01-2018')
-    expect(fn(1515542400000)).toBe('10-01-2018')
-    expect(fn(1538352000000)).toBe('01-10-2018')
+  test('should format to DD-MM-YYYY from UTC mls', ()=>{
+    expect(fn(UTC_MLS_2018_01_01)).toBe('01-01-2018')
+    expect(fn(UTC_MLS_2018_01_10)).toBe('10-01-2018')
+    expect(fn(UTC_MLS_2018_10_01)).toBe('01-10-2018')
   })
   test('should format to empty string in edge case', ()=>{
     expect(fn(null)).toBe(EMPTY)
-    expect(fn(undefined)).toBe(EMPTY)
+    expect(fn()).toBe(EMPTY)
+    expect(fn({})).toBe(EMPTY)
+    expect(fn(NaN)).toBe(EMPTY)
+    expect(fn('')).toBe(EMPTY)
+    expect(fn('abc')).toBe(EMPTY)
+    expect(fn(()=>{})).toBe(EMPTY)
+    expect(fn(Number.MAX_SAFE_INTEGER)).toBe(EMPTY)
+  })
+})
+
+describe('mlsToYmd', ()=>{
+  const fn = mlsToYmd;
+  const EMPTY = '';
+  test('should format to YYYY-MM-DD from mls', ()=>{
+    expect(fn(UTC_MLS_2018_01_01)).toBe('2018-01-01')
+    expect(fn(UTC_MLS_2018_01_10)).toBe('2018-01-10')
+    expect(fn(UTC_MLS_2018_10_01)).toBe('2018-10-01')
+  })
+  test('should format to empty string in edge case', ()=>{
+    expect(fn(null)).toBe(EMPTY)
+    expect(fn()).toBe(EMPTY)
     expect(fn({})).toBe(EMPTY)
     expect(fn(NaN)).toBe(EMPTY)
     expect(fn('')).toBe(EMPTY)
@@ -241,8 +266,17 @@ describe('addToDmy', ()=>{
   })
 })
 
+describe('addDaysToYmd',()=>{
+  const fn = addDaysToYmd;
+  test('should return string in format YYYY-MM-DD with added number of days', ()=>{
+    expect(fn('2018-12-31', 1)).toBe('2019-01-01')
+    expect(fn('2019-01-01', 30)).toBe('2019-01-31')
+    expect(fn('2019-01-31', 1)).toBe('2019-02-01')
+  })
+})
+
 describe('getYTDfromDmy', ()=>{
-  const fn = getYTDfromDmy
+  const fn = getYTDfromDmy;
   test('should return mls to start of year', ()=>{
     expect(fn('01-01-2010')).toBe(Date.UTC(2010, 0, 1))
     expect(fn('02-01-2010')).toBe(Date.UTC(2010, 0, 1))

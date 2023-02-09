@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.monthIndex = exports.mlsToDmy = exports.isYmdOrEmpty = exports.isYmd = exports.isDmyPeriod = exports.isDmy = exports.getYmdhmUTC = exports.getYear = exports.getYTDfromDmy = exports.getUTCTime = exports.getToDate = exports.getNumberOfDays = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.dmyToUTC = exports.addToDmy = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.monthIndex = exports.mlsToYmd = exports.mlsToDmy = exports.isYmdOrEmpty = exports.isYmd = exports.isDmyPeriod = exports.isDmy = exports.getYmdhmUTC = exports.getYear = exports.getYTDfromDmy = exports.getUTCTime = exports.getToDate = exports.getNumberOfDays = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.dmyToUTC = exports.addToDmy = exports.addDaysToYmd = void 0;
 var _isTypeFn = require("./isTypeFn");
 const MIN_YEAR = 1990;
 const DF_FORECAST_DATE = 0;
@@ -23,14 +23,6 @@ const _isYmd = function (yStr, mStr, dStr, minYear, nForecastDate) {
   const _nowYear = new Date().getFullYear();
   return !(_notInLengthMinMax(yStr, 4, minYear, _nowYear + nForecastDate) || _notInLengthMinMax(mStr, 2, 1, 12) || _notInLengthMinMax(dStr, 2, 1, 31));
 };
-
-/*
-const _getDaysInYm = (
-  y,
-  m
-) => (new Date(y, m, 0)).getDate();
-*/
-
 const _getTimeUTC = d => _pad2(d.getUTCHours()) + ":" + _pad2(d.getUTCMinutes());
 const _getYmdUTC = (d, yearMinus) => d.getUTCFullYear() - yearMinus + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + d.getUTCDate()).slice(-2);
 const MONTH_HP = {
@@ -95,6 +87,15 @@ const mlsToDmy = mlsUTC => {
   return ("0" + d.getUTCDate()).slice(-2) + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + d.getUTCFullYear();
 };
 exports.mlsToDmy = mlsToDmy;
+const mlsToYmd = mlsUTC => {
+  const _dmy = mlsToDmy(mlsUTC);
+  if (_dmy) {
+    const [d, m, y] = _dmy.split('-');
+    return y + "-" + m + "-" + d;
+  }
+  return '';
+};
+exports.mlsToYmd = mlsToYmd;
 const dmyToUTC = str => {
   const [d, m, y] = _splitStrByDash(str);
   return _isYmd(y, m, d) ? Date.UTC(y, _toIntMonth(m), d) : NaN;
@@ -146,6 +147,9 @@ const ymdToUTC = function (dateStr, option) {
   return Date.UTC(yearStr, _toIntMonth(mStr), dStr);
 };
 exports.ymdToUTC = ymdToUTC;
+const MLS_IN_DAY = 24 * 60 * 60 * 1000;
+const addDaysToYmd = (ymd, numberOfDays) => isYmd(ymd) ? mlsToYmd(ymdToUTC(ymd) + numberOfDays * MLS_IN_DAY) : '';
+exports.addDaysToYmd = addDaysToYmd;
 const ymdhmsToUTC = function (dateStr, dtDelimeter) {
   if (dtDelimeter === void 0) {
     dtDelimeter = ' ';

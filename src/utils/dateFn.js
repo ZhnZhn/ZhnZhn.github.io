@@ -49,13 +49,6 @@ const _isYmd = (
    || _notInLengthMinMax(dStr, 2, 1, 31));
 };
 
-/*
-const _getDaysInYm = (
-  y,
-  m
-) => (new Date(y, m, 0)).getDate();
-*/
-
 const _getTimeUTC = d => `${_pad2(d.getUTCHours())}:${_pad2(d.getUTCMinutes())}`;
 const _getYmdUTC = (
   d,
@@ -137,6 +130,15 @@ export const mlsToDmy = (mlsUTC) => {
 	   + "-" + d.getUTCFullYear() ;
 }
 
+export const mlsToYmd = (mlsUTC) => {
+  const _dmy = mlsToDmy(mlsUTC);
+  if (_dmy) {
+    const [d, m, y] = _dmy.split('-');
+    return `${y}-${m}-${d}`;
+  }
+  return '';
+}
+
 export const dmyToUTC = (str) => {
 	const [d, m, y] = _splitStrByDash(str);
   return _isYmd(y, m, d)
@@ -200,6 +202,15 @@ export const ymdToUTC = (
 
   return Date.UTC(yearStr, _toIntMonth(mStr), dStr);
 }
+
+const MLS_IN_DAY = 24*60*60*1000;
+export const addDaysToYmd = (
+  ymd,
+  numberOfDays
+) => isYmd(ymd)
+  ? mlsToYmd(ymdToUTC(ymd) + numberOfDays*MLS_IN_DAY)
+  : '';
+
 
 export const ymdhmsToUTC = (
   dateStr,
