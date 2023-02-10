@@ -5,7 +5,6 @@ import fIndicatorCalc from './fIndicatorCalc';
 import diff from './diff';
 import roc from './roc';
 import {
-  isNotEmptyArr,
   isNumber,
   crPointGetter,
   fGetY,
@@ -16,25 +15,28 @@ import {
 const _isArr = Array.isArray
 , _isNaN = Number.isNaN;
 
-const _calcChanges = (yPrev, yNext) => {
-  if (!isNumber(yPrev) || !isNumber(yNext)) {
-    return null;
-  }
-  return diff(yNext, yPrev);
-};
+const _calcChanges = (
+  yPrev,
+  yNext
+) => !isNumber(yPrev) || !isNumber(yNext)
+  ? null
+  : diff(yNext, yPrev);
 
-
-const _fFindY = (initialValue, findY) => (data) => {
-  if (!isNotEmptyArr(data)){
+const _fFindY = (
+  initialValue,
+  findY
+) => (data) => {
+  const getY = crPointGetter(data)[1];
+  if (!getY) {
     return;
   }
-  let resultY = initialValue;
-  const { getY } = crPointGetter(data)
-  , _fn = (p, currentY) => {
-      const pointY = getY(p);
-      return findY(pointY, currentY);
+
+  const _fn = (p, currentY) => {
+    const pointY = getY(p);
+    return findY(pointY, currentY);
   };
-  let i = 0;
+  let resultY = initialValue
+  , i = 0;
   for (; i<data.length; i++){
     resultY = _fn(data[i], resultY)
   }
@@ -51,11 +53,12 @@ export const growthRate = fIndicatorCalc(roc)
 export const changesBetween = fIndicatorCalc(_calcChanges)
 
 export const normalize = (d) => {
-  if (!isNotEmptyArr(d)) {
+  const [getX, getY] = crPointGetter(d);
+  if (!getX) {
     return [];
   }
-  const { getX, getY } = crPointGetter(d)
-  , _y0 = getY(d[0]);
+
+  const _y0 = getY(d[0]);
   if ( !(isNumber(_y0) && _y0 !== 0) ) {
     return [];
   }
@@ -108,10 +111,11 @@ export const hasZeroOrLessValue = data => {
 }
 
 export const mean = (data) => {
-  if (!isNotEmptyArr(data)){
+  const [getX, getY] = crPointGetter(data);
+  if (!getX) {
     return [];
   }
-  const { getY, getX } = crPointGetter(data);
+
   let _sum = Big(0)
   , _numberOfPoints = 0
   , i = 0
@@ -135,10 +139,10 @@ export const mean = (data) => {
 }
 
 export const median = (data) => {
-  if (!isNotEmptyArr(data)){
+  const [getX, getY] = crPointGetter(data);
+  if (!getX) {
     return [];
   }
-  const { getY, getX } = crPointGetter(data);
 
   const _d = data
     .map(getY)

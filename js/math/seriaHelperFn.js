@@ -1,33 +1,27 @@
 "use strict";
 
 exports.__esModule = true;
-exports.mergeToChartPoints = exports.isNumber = exports.isNotEmptyArr = exports.getZeroIndexFromEnd = exports.getZeroCountFromStart = exports.fGetY = exports.crPointGetter = exports.crDataArrays = void 0;
+exports.mergeToChartPoints = exports.isNumber = exports.getZeroIndexFromEnd = exports.getZeroCountFromStart = exports.fGetY = exports.crPointGetter = exports.crDataArrays = void 0;
 var _mathFn = require("./mathFn");
 const _isArr = Array.isArray,
   _isNumber = n => typeof n === "number" && n - n === 0,
-  _isUndef = v => typeof v === "undefined",
   _isObj = obj => typeof obj === "object" && obj !== null;
-const isNotEmptyArr = arr => {
+const isNumber = _isNumber;
+exports.isNumber = isNumber;
+const _getDataPoint = arr => {
   if (!_isArr(arr)) {
-    return false;
+    return;
   }
   for (let i = 0; i < arr.length; i++) {
     if (_isObj(arr[i])) {
-      return true;
+      return arr[i];
     }
   }
-  return false;
+  return;
 };
-exports.isNotEmptyArr = isNotEmptyArr;
-const isNumber = _isNumber;
-exports.isNumber = isNumber;
 const crPointGetter = data => {
-  const getX = _isUndef(data[0].x) ? p => p[0] : p => p.x,
-    getY = _isUndef(data[0].y) ? p => p[1] : p => p.y;
-  return {
-    getX,
-    getY
-  };
+  const _dataPoint = _getDataPoint(data);
+  return _dataPoint ? _isArr(_dataPoint) ? [p => p[0], p => p[1]] : [p => p.x, p => p.y] : [];
 };
 exports.crPointGetter = crPointGetter;
 const fGetY = point => {
@@ -75,21 +69,18 @@ const getZeroIndexFromEnd = (arr, getY) => {
 exports.getZeroIndexFromEnd = getZeroIndexFromEnd;
 const crDataArrays = data => {
   const _data = [],
-    _dataX = [];
-  if (!isNotEmptyArr(data)) {
-    return [_data, _dataX];
+    _dataX = [],
+    [getX, getY] = crPointGetter(data);
+  let y;
+  if (getX) {
+    data.forEach(p => {
+      y = getY(p);
+      if (isNumber(y)) {
+        _data.push(y);
+        _dataX.push(getX(p));
+      }
+    });
   }
-  const {
-    getX,
-    getY
-  } = crPointGetter(data);
-  data.forEach(p => {
-    const y = getY(p);
-    if (isNumber(y)) {
-      _data.push(y);
-      _dataX.push(getX(p));
-    }
-  });
   return [_data, _dataX];
 };
 exports.crDataArrays = crDataArrays;

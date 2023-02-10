@@ -1,14 +1,18 @@
 import {
-  isNotEmptyArr,
   isNumber,
   crPointGetter
 } from './seriaHelperFn';
 
-const _crIndicatorData = (d, rt, calc) => {
+const _crIndicatorData = (
+  d,
+  rt,
+  calc,
+  getX,
+  getY
+) => {
   const _d = []
   , max = d.length
-  , prevStep = rt-1
-  , { getX, getY } = crPointGetter(d);
+  , prevStep = rt-1;
   let pPrev = d[0]
     , pNext
     , i=rt;
@@ -25,15 +29,16 @@ const _crIndicatorData = (d, rt, calc) => {
 
 
 const fIndicatorCalc = (calc) => (d, rt=1) => {
-  const _rt = parseInt(rt, 10);
-  if (!(isNotEmptyArr(d)
+  const [getX, getY] = crPointGetter(d)
+  , _rt = parseInt(rt, 10);
+  if (!(getX
         && isNumber(_rt)
         && _rt > 0
         && d.length > _rt )) {
     return [];
   }
 
-  return _crIndicatorData(d, _rt, calc);
+  return _crIndicatorData(d, _rt, calc, getX, getY);
 };
 
 export default fIndicatorCalc

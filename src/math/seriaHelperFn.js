@@ -3,28 +3,26 @@ import { roundBy } from './mathFn';
 const _isArr = Array.isArray
 , _isNumber = n => typeof n === "number"
   && (n-n === 0)
-, _isUndef = v => typeof v === "undefined"
 , _isObj = obj => typeof obj === "object"
   && obj !== null;
 
-export const isNotEmptyArr = arr => {
-  if (!_isArr(arr)) { return false; }
-  for (let i=0; i<arr.length; i++){
-    if (_isObj(arr[i])) { return true; }
-  }
-  return false;
-}
-
 export const isNumber = _isNumber
 
+const _getDataPoint = arr => {
+  if (!_isArr(arr)) { return; }
+  for (let i=0; i<arr.length; i++){
+    if (_isObj(arr[i])) { return arr[i]; }
+  }
+  return;
+}
+
 export const crPointGetter = data => {
-  const getX = _isUndef(data[0].x)
-    ? p => p[0]
-    : p => p.x
-  , getY = _isUndef(data[0].y)
-     ? p => p[1]
-     : p => p.y;
-  return { getX, getY };
+  const _dataPoint = _getDataPoint(data);
+  return _dataPoint
+    ? _isArr(_dataPoint)
+       ? [p => p[0], p => p[1]]
+       : [p => p.x, p => p.y]
+    : [];
 }
 
 export const fGetY = (point) => {
@@ -71,26 +69,22 @@ export const crDataArrays = (
   data
 ) => {
   const _data = []
-  , _dataX = [];
-
-  if (!isNotEmptyArr(data)) {
-    return [
-      _data,
-      _dataX
-    ];
-  }
-
-  const {
+  , _dataX = []
+  , [
     getX,
     getY
-  } = crPointGetter(data);
-  data.forEach(p => {
-    const y = getY(p);
-    if (isNumber(y)) {
-      _data.push(y)
-      _dataX.push(getX(p))
-    }
-  })
+  ] = crPointGetter(data);
+  let y;
+
+  if (getX) {
+    data.forEach(p => {
+      y = getY(p);
+      if (isNumber(y)) {
+        _data.push(y)
+        _dataX.push(getX(p))
+      }
+    })
+  }
 
   return [
     _data,

@@ -1,23 +1,6 @@
 "use strict";
 
 var _seriaHelperFn = require("../seriaHelperFn");
-describe("isNotEmptyArr", () => {
-  const fn = _seriaHelperFn.isNotEmptyArr;
-  test('should return true for arr with object', () => {
-    expect(fn([{}])).toBe(true);
-    expect(fn([[]])).toBe(true);
-  });
-  test('should return false for not arr and arr without object', () => {
-    expect(fn()).toBe(false);
-    expect(fn(null)).toBe(false);
-    expect(fn(() => {})).toBe(false);
-    expect(fn('str')).toBe(false);
-    expect(fn(1)).toBe(false);
-    expect(fn(true)).toBe(false);
-    expect(fn([])).toBe(false);
-    expect(fn([null, void 0, 'str', 1, true])).toBe(false);
-  });
-});
 describe("isNumber", () => {
   const fn = _seriaHelperFn.isNumber;
   test("should check is value number type", () => {
@@ -34,18 +17,23 @@ describe("isNumber", () => {
 });
 describe("crPointGetter", () => {
   const fn = _seriaHelperFn.crPointGetter;
-  test("should create getter for array points", () => {
+  test("should return array with two functions", () => {
+    const [getX1, getY1] = fn([{}]);
+    expect(typeof getX1).toBe('function');
+    expect(typeof getY1).toBe('function');
+    const [getX2, getY2] = fn([[]]);
+    expect(typeof getX2).toBe('function');
+    expect(typeof getY2).toBe('function');
+  });
+  test("should return array with getter for array points", () => {
     const _data = [[0, 0], [1, 1]];
-    const {
-      getX,
-      getY
-    } = fn(_data);
+    const [getX, getY] = fn(_data);
     expect(getX(_data[0])).toBe(0);
     expect(getY(_data[0])).toBe(0);
     expect(getX(_data[1])).toBe(1);
     expect(getY(_data[1])).toBe(1);
   });
-  test("should create getter for object points", () => {
+  test("should return array with getter for object points", () => {
     const _data = [{
       x: 0,
       y: 0
@@ -53,14 +41,21 @@ describe("crPointGetter", () => {
       x: 1,
       y: 1
     }];
-    const {
-      getX,
-      getY
-    } = fn(_data);
+    const [getX, getY] = fn(_data);
     expect(getX(_data[0])).toBe(0);
     expect(getY(_data[0])).toBe(0);
     expect(getX(_data[1])).toBe(1);
     expect(getY(_data[1])).toBe(1);
+  });
+  test('should return empty array in edge cases', () => {
+    expect(fn()).toEqual([]);
+    expect(fn(null)).toEqual([]);
+    expect(fn('str')).toEqual([]);
+    expect(fn(1)).toEqual([]);
+    expect(fn(true)).toEqual([]);
+    expect(fn(() => {})).toEqual([]);
+    expect(fn([])).toEqual([]);
+    expect(fn([null, void 0, 'str', 1, true])).toEqual([]);
   });
 });
 describe("fGetY", () => {
