@@ -1,39 +1,43 @@
 import Big from 'big.js';
 
 import {
-  isNotEmptyArr,
   isNumber,
-  crPointGetter
+  crDataArrays
 } from './seriaHelperFn';
 
-const sma = (data, period=1) => {
-  const dataSma = []
-  , _period = parseInt(period, 10) - 1;
-  if ( !(isNotEmptyArr(data)
-         && isNumber(_period)
-         && _period < data.length)) {
+const sma = (
+  data,
+  period=1
+) => {
+  const [
+    _data,
+    _dataX
+  ] = crDataArrays(data)
+  , _dataLength = _data.length
+  , _period = parseInt(period, 10) - 1
+  , dataSma = [];
+
+  if ( _dataLength === 0
+       || !isNumber(_period)
+       || _period > _dataLength) {
     return dataSma;
   }
-  if ( _period<=0 ){
+  if (_period<=0){
     return data;
   }
 
-  const { getX, getY } = crPointGetter(data)
-  , _data = data.filter(p => isNumber(getY(p)));
-  let bSum = Big('0.0')
-  , point, i=0;
-  for (; i<_data.length; i++){
-    point = _data[i]
-    if (i>=_period){
-       bSum = (i === _period)
-         ? bSum.plus(getY(point))
-         : bSum.plus(getY(point)).minus(getY(_data[i-period]));
-       dataSma.push([
-         getX(point),
-         parseFloat(bSum.div(period).toFixed(2))
-       ])
-    } else {
-      bSum = bSum.plus(getY(point));
+  let bSum = Big(0)
+  , i=0;
+  for (; i<_dataLength; i++){
+    bSum = bSum.plus(_data[i])
+    if (i>=_period) {
+      if (i !== _period) {
+        bSum = bSum.minus(_data[i-period])
+      }
+      dataSma.push([
+        _dataX[i],
+        parseFloat(bSum.div(period).toFixed(2))
+      ])
     }
   }
   return dataSma;

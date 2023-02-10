@@ -1,1 +1,31 @@
-{"version":3,"sources":["../../src/math/sma.js"],"names":["sma","data","period","dataSma","_period","parseInt","length","getX","getY","_data","filter","p","bSum","point","i","plus","minus","push","parseFloat","div","toFixed"],"mappings":";;;;;;;AAAA;;AAEA;;AAMA,MAAMA,GAAG,GAAG,UAACC,IAAD,EAAOC,MAAP,EAAoB;AAAA,MAAbA,MAAa;AAAbA,IAAAA,MAAa,GAAN,CAAM;AAAA;;AAC9B,QAAMC,OAAO,GAAG,EAAhB;AAAA,QACEC,OAAO,GAAGC,QAAQ,CAACH,MAAD,EAAS,EAAT,CAAR,GAAuB,CADnC;;AAEA,MAAK,EAAE,kCAAcD,IAAd,KACG,6BAASG,OAAT,CADH,IAEGA,OAAO,GAAGH,IAAI,CAACK,MAFpB,CAAL,EAEkC;AAChC,WAAOH,OAAP;AACD;;AACD,MAAKC,OAAO,IAAE,CAAd,EAAiB;AACf,WAAOH,IAAP;AACD;;AAED,QAAM;AAAEM,IAAAA,IAAF;AAAQC,IAAAA;AAAR,MAAiB,kCAAcP,IAAd,CAAvB;AAAA,QACEQ,KAAK,GAAGR,IAAI,CAACS,MAAL,CAAYC,CAAC,IAAI,6BAASH,IAAI,CAACG,CAAD,CAAb,CAAjB,CADV;;AAEA,MAAIC,IAAI,GAAG,kBAAI,KAAJ,CAAX;AAAA,MACEC,KADF;AAAA,MACSC,CAAC,GAAC,CADX;;AAEA,SAAOA,CAAC,GAACL,KAAK,CAACH,MAAf,EAAuBQ,CAAC,EAAxB,EAA2B;AACzBD,IAAAA,KAAK,GAAGJ,KAAK,CAACK,CAAD,CAAb;;AACA,QAAIA,CAAC,IAAEV,OAAP,EAAe;AACZQ,MAAAA,IAAI,GAAIE,CAAC,KAAKV,OAAP,GACHQ,IAAI,CAACG,IAAL,CAAUP,IAAI,CAACK,KAAD,CAAd,CADG,GAEHD,IAAI,CAACG,IAAL,CAAUP,IAAI,CAACK,KAAD,CAAd,EAAuBG,KAAvB,CAA6BR,IAAI,CAACC,KAAK,CAACK,CAAC,GAACZ,MAAH,CAAN,CAAjC,CAFJ;AAGAC,MAAAA,OAAO,CAACc,IAAR,CAAa,CACXV,IAAI,CAACM,KAAD,CADO,EAEXK,UAAU,CAACN,IAAI,CAACO,GAAL,CAASjB,MAAT,EAAiBkB,OAAjB,CAAyB,CAAzB,CAAD,CAFC,CAAb;AAIF,KARD,MAQO;AACLR,MAAAA,IAAI,GAAGA,IAAI,CAACG,IAAL,CAAUP,IAAI,CAACK,KAAD,CAAd,CAAP;AACD;AACF;;AACD,SAAOV,OAAP;AACD,CA/BD;;eAiCeH,G","sourcesContent":["import Big from 'big.js';\r\n\r\nimport {\r\n  isNotEmptyArr,\r\n  isNumber,\r\n  crPointGetter\r\n} from './seriaHelperFn';\r\n\r\nconst sma = (data, period=1) => {\r\n  const dataSma = []\r\n  , _period = parseInt(period, 10) - 1;\r\n  if ( !(isNotEmptyArr(data)\r\n         && isNumber(_period)\r\n         && _period < data.length)) {\r\n    return dataSma;\r\n  }\r\n  if ( _period<=0 ){\r\n    return data;\r\n  }\r\n\r\n  const { getX, getY } = crPointGetter(data)\r\n  , _data = data.filter(p => isNumber(getY(p)));\r\n  let bSum = Big('0.0')\r\n  , point, i=0;\r\n  for (; i<_data.length; i++){\r\n    point = _data[i]\r\n    if (i>=_period){\r\n       bSum = (i === _period)\r\n         ? bSum.plus(getY(point))\r\n         : bSum.plus(getY(point)).minus(getY(_data[i-period]));\r\n       dataSma.push([\r\n         getX(point),\r\n         parseFloat(bSum.div(period).toFixed(2))\r\n       ])\r\n    } else {\r\n      bSum = bSum.plus(getY(point));\r\n    }\r\n  }\r\n  return dataSma;\r\n};\r\n\r\nexport default sma\r\n"],"file":"sma.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/math/sma.js"
+ ],
+ "file": "../../src/math/sma.js",
+ "names": [
+  "sma",
+  "data",
+  "period",
+  "_data",
+  "_dataX",
+  "crDataArrays",
+  "_dataLength",
+  "length",
+  "_period",
+  "parseInt",
+  "dataSma",
+  "isNumber",
+  "bSum",
+  "Big",
+  "i",
+  "plus",
+  "minus",
+  "push",
+  "parseFloat",
+  "div",
+  "toFixed"
+ ],
+ "mappings": ";;;;;AAAA;AAEA;AAKA,MAAMA,GAAG,GAAG,UACVC,IAAI,EACJC,MAAM,EACH;EAAA,IADHA,MAAM;IAANA,MAAM,GAAC,CAAC;EAAA;EAER,MAAM,CACJC,KAAK,EACLC,MAAM,CACP,GAAG,IAAAC,2BAAY,EAACJ,IAAI,CAAC;IACpBK,WAAW,GAAGH,KAAK,CAACI,MAAM;IAC1BC,OAAO,GAAGC,QAAQ,CAACP,MAAM,EAAE,EAAE,CAAC,GAAG,CAAC;IAClCQ,OAAO,GAAG,EAAE;EAEd,IAAKJ,WAAW,KAAK,CAAC,IACd,CAAC,IAAAK,uBAAQ,EAACH,OAAO,CAAC,IAClBA,OAAO,GAAGF,WAAW,EAAE;IAC7B,OAAOI,OAAO;EAChB;EACA,IAAIF,OAAO,IAAE,CAAC,EAAC;IACb,OAAOP,IAAI;EACb;EAEA,IAAIW,IAAI,GAAG,IAAAC,YAAG,EAAC,CAAC,CAAC;IACfC,CAAC,GAAC,CAAC;EACL,OAAOA,CAAC,GAACR,WAAW,EAAEQ,CAAC,EAAE,EAAC;IACxBF,IAAI,GAAGA,IAAI,CAACG,IAAI,CAACZ,KAAK,CAACW,CAAC,CAAC,CAAC;IAC1B,IAAIA,CAAC,IAAEN,OAAO,EAAE;MACd,IAAIM,CAAC,KAAKN,OAAO,EAAE;QACjBI,IAAI,GAAGA,IAAI,CAACI,KAAK,CAACb,KAAK,CAACW,CAAC,GAACZ,MAAM,CAAC,CAAC;MACpC;MACAQ,OAAO,CAACO,IAAI,CAAC,CACXb,MAAM,CAACU,CAAC,CAAC,EACTI,UAAU,CAACN,IAAI,CAACO,GAAG,CAACjB,MAAM,CAAC,CAACkB,OAAO,CAAC,CAAC,CAAC,CAAC,CACxC,CAAC;IACJ;EACF;EACA,OAAOV,OAAO;AAChB,CAAC;AAAC,eAEaV,GAAG;AAAA"
+}
