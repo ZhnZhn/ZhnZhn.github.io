@@ -140,6 +140,14 @@ describe('crDataArrays', () => {
     x: 5,
     y: void 0
   }])).toEqual([[10, 20, 30], [1, 2, 3]]);
+  test('should return array with empty arrays for edge case', () => {
+    expect(fn()).toEqual([[], []]);
+    expect(fn(null)).toEqual([[], []]);
+    expect(fn('str')).toEqual([[], []]);
+    expect(fn(2)).toEqual([[], []]);
+    expect(fn(true)).toEqual([[], []]);
+    expect(fn([null, 'str', 2, false, void 0])).toEqual([[], []]);
+  });
 });
 describe('mergeToChartPoints', () => {
   const fn = _seriaHelperFn.mergeToChartPoints;

@@ -74,12 +74,15 @@ const getZeroIndexFromEnd = (arr, getY) => {
 /***********TA*Series*Helpers*********************/
 exports.getZeroIndexFromEnd = getZeroIndexFromEnd;
 const crDataArrays = data => {
-  const {
-      getX,
-      getY
-    } = crPointGetter(data),
-    _data = [],
+  const _data = [],
     _dataX = [];
+  if (!isNotEmptyArr(data)) {
+    return [_data, _dataX];
+  }
+  const {
+    getX,
+    getY
+  } = crPointGetter(data);
   data.forEach(p => {
     const y = getY(p);
     if (isNumber(y)) {
