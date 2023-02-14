@@ -8,7 +8,6 @@ import {
 const MOM_ATH = 'MOM_ATH';
 
 const useMomAth = (
-  isMomAth,
   getChart,
   onAddMfi,
   onRemoveMfi
@@ -22,7 +21,7 @@ const useMomAth = (
   , [
     _addMomAth,
     _removeMomAth
-  ] = useMemo(() => isMomAth ? [
+  ] = useMemo(() => [
     () => {
       const _chart = getChart()
       , _momAthConfig = crMomAthConfig(_chart);
@@ -35,7 +34,7 @@ const useMomAth = (
       onRemoveMfi(MOM_ATH)
       hideMomAth()
     }
-  ] : [], [isMomAth, getChart, onAddMfi, onRemoveMfi]);
+  ], [getChart, onAddMfi, onRemoveMfi]);
 
   return [
     _isMomAth,

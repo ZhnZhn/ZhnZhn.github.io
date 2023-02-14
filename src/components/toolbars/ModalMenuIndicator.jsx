@@ -8,16 +8,14 @@ import {
   normalize
 } from '../../math/seriaFn';
 
-import useAddSeriaBy from './useAddSeriaBy';
-import useMomAth from './useMomAth';
-
 import ModalPopup from '../zhn-moleculs/ModalPopup';
 
-import RowType1 from './RowType1';
-import RowPlusMinus from './RowPlusMinus';
+import RowFnType1 from './RowFnType1';
+import RowFnPlusMinus from './RowFnPlusMinus';
 import RowSma from './RowSma';
 import RowRsi from './RowRsi';
 import RowMfi from './RowMfi';
+import RowMomAth from './RowMomAth';
 
 import { S_MODAL_MENU } from './ModalMenu.Style';
 
@@ -49,21 +47,6 @@ const ModalMenuIndicator = ({
    onRemoveMfi
 }) => {
   const [
-    isChanges,
-    addChanges,
-    removeChanges
-  ] = useAddSeriaBy(FN_DIFF, getChart)
-  , [
-    isGrowthRate,
-    addGrowthRate,
-    removeGrowtRate
-  ] = useAddSeriaBy(FN_ROC, getChart)
-  , [
-    isNormalize,
-    addNormalize,
-    removeNormalize
-  ] = useAddSeriaBy(FN_NORM, getChart)
-  , [
     _isSma,
     _isMfi,
     _isMomAth,
@@ -78,17 +61,7 @@ const ModalMenuIndicator = ({
       !!config.zhIsMomAth,
       _isMfi || (btTitle || '').indexOf('Volume') !== -1
     ];
-  }, [config])
-  , [
-    isMomAth,
-    _addMomAth,
-    _removeMomAth
-  ] = useMomAth(
-     _isMomAth,
-     getChart,
-     onAddMfi,
-     onRemoveMfi
-  );
+  }, [config]);
 
   return (
     <ModalPopup
@@ -97,23 +70,20 @@ const ModalMenuIndicator = ({
       onClose={onClose}
     >
       <div style={S_PANE}>
-        <RowType1
-          is={isChanges}
-          caption="Changes Between"
-          onMinus={removeChanges}
-          onPlus={addChanges}
+        <RowFnType1
+           caption="Changes Between"
+           configArr={FN_DIFF}
+           getChart={getChart}
         />
-        <RowType1
-          is={isGrowthRate}
-          caption="Growth Rate"
-          onMinus={removeGrowtRate}
-          onPlus={addGrowthRate}
+        <RowFnType1
+           caption="Growth Rate"
+           configArr={FN_ROC}
+           getChart={getChart}
         />
-        <RowPlusMinus
-          is={isNormalize}
+        <RowFnPlusMinus
           caption={NORM_CAPTION_EL}
-          onMinus={removeNormalize}
-          onPlus={addNormalize}
+          configArr={FN_NORM}
+          getChart={getChart}
         />
         {_isSma && <RowSma
             config={config}
@@ -131,12 +101,11 @@ const ModalMenuIndicator = ({
             onRemoveMfi={onRemoveMfi}
          />
         }
-        {_isMomAth && <RowPlusMinus
-           is={isMomAth}
-           caption="MOM(1) & ATH"
-           onPlus={_addMomAth}
-           onMinus={_removeMomAth}
-         />
+        {_isMomAth && <RowMomAth
+             getChart={getChart}
+             onAddMfi={onAddMfi}
+             onRemoveMfi={onRemoveMfi}
+          />
         }
       </div>
     </ModalPopup>
