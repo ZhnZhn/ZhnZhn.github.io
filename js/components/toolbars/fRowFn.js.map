@@ -1,0 +1,19 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/toolbars/fRowFn.js"
+ ],
+ "file": "../../../src/components/toolbars/fRowFn.js",
+ "names": [
+  "fRowFn",
+  "Row",
+  "caption",
+  "configArr",
+  "getChart",
+  "isSeria",
+  "addSeria",
+  "removeSeria",
+  "useAddSeriaBy"
+ ],
+ "mappings": ";;;;;AAAA;AAA4C;AAE5C,MAAMA,MAAM,GAAGC,GAAG,IAAI,QAIhB;EAAA,IAJiB;IACrBC,OAAO;IACPC,SAAS;IACTC;EACF,CAAC;EACC,MAAM,CACJC,OAAO,EACPC,QAAQ,EACRC,WAAW,CACZ,GAAG,IAAAC,sBAAa,EAACL,SAAS,EAAEC,QAAQ,CAAC;EACtC,oBACE,qBAAC,GAAG;IACF,EAAE,EAAEC,OAAQ;IACZ,OAAO,EAAEH,OAAQ;IACjB,MAAM,EAAEI,QAAS;IACjB,OAAO,EAAEC;EAAY,EACrB;AAEN,CAAC;AAAA,eAEcP,MAAM;AAAA"
+}

@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/toolbars/RowFnPlusMinus.js"
+ ],
+ "file": "../../../src/components/toolbars/RowFnPlusMinus.js",
+ "names": [
+  "RowFnType1",
+  "fRowFn",
+  "RowPlusMinus"
+ ],
+ "mappings": ";;;;;AAAA;AACA;AAEA,MAAMA,UAAU,GAAG,IAAAC,eAAM,EAACC,qBAAY,CAAC;AAAC,eAEzBF,UAAU;AAAA"
+}
