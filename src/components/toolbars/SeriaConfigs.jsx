@@ -1,23 +1,19 @@
-import A from '../zhn/A';
+import SvgMinus from '../zhn/SvgMinus';
 
 const S_ROW = { paddingTop: 5 }
-, crSpanStyle = color => ({
-   color, paddingLeft: 8
+, _crSpanStyle = color => ({
+   color,
+   paddingLeft: 8
 });
 
-const SeriaConfigs = ({ 
+const SeriaConfigs = ({
   configs,
   onRemove
-}) => (
-  <div>
-  { configs.map(({ id, color }) => (
-      <div key={id} style={S_ROW}>
-        <A.SvgMinus onClick={onRemove.bind(null, id)} />
-        <span style={crSpanStyle(color)}>{id}</span>
-      </div>
-    ))
-  }
-  </div>
-);
+}) => configs.map(({ id, color }) => (
+   <div key={id} style={S_ROW}>
+     <SvgMinus onClick={() => onRemove(id)} />
+     <span style={_crSpanStyle(color)}>{id}</span>
+   </div>
+))
 
 export default SeriaConfigs
