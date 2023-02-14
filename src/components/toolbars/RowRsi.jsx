@@ -1,5 +1,6 @@
+import fRowTaType1 from './fRowTaType1';
+
 import { addRsiTo } from '../../charts/IndicatorBuilder';
-import RowTaType1 from './RowTaType1';
 import { crInitialPeriod } from './helperFn';
 
 const RSI_MONTH = '14'
@@ -13,17 +14,10 @@ const _crInitialRsiPeriod = (
   RSI_YEAR
 )
 
-const RowRsi = ({
-  config,
-  getChart
-}) => (
-  <RowTaType1
-    caption="RSI"
-    config={config}
-    getChart={getChart}
-    crInitialPeriod={_crInitialRsiPeriod}
-    addTaTo={addRsiTo}
-  />
+const RowRsi = fRowTaType1(
+  "RSI",
+  _crInitialRsiPeriod,
+  addRsiTo
 )
 
 export default RowRsi
