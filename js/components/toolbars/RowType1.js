@@ -1,83 +1,81 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
-
-var _A = _interopRequireDefault(require("../zhn/A"));
-
+var _SvgPlus = _interopRequireDefault(require("../zhn/SvgPlus"));
+var _SvgMinus = _interopRequireDefault(require("../zhn/SvgMinus"));
+var _InputText = _interopRequireDefault(require("../zhn/InputText"));
+var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _jsxRuntime = require("react/jsx-runtime");
-
 const DF_COLOR = '#2b908f',
-      OC_COLOR = 'black',
-      DF_PERIOD = 1,
-      DF_SERIA = 1,
-      S_ROOT_OC = {
-  lineHeight: 'unset',
-  paddingBottom: 4,
-  marginLeft: -8
-},
-      S_OC = {
-  display: 'inline-block',
-  height: 32,
-  paddingTop: 4,
-  width: 'auto',
-  paddingRight: 8
-},
-      S_CAPTION = {
-  color: OC_COLOR
-},
-      S_PERIOD_INPUT = {
-  width: 56,
-  marginRight: 12
-},
-      S_CAPTION_SERIA_INPUT = {
-  display: 'inline-block',
-  width: 85,
-  paddingLeft: 5,
-  color: 'black',
-  fontWeight: 'bold'
-},
-      S_SERIA_INPUT = {
-  width: 36
-},
-      S_ROW_2 = {
-  paddingBottom: 6
-},
-      S_VA_M = {
-  verticalAlign: 'middle'
-},
-      S_PL_6 = {
-  paddingLeft: 6
-},
-      S_PL_8 = {
-  paddingLeft: 8
-},
-      S_PL_10 = {
-  paddingLeft: 10
-},
-      S_INLINE = {
-  display: 'inline-block'
-},
-      crSpanStyle = color => ({
-  color,
-  paddingLeft: 8,
-  fontWeight: 'bold'
-}),
-      S1_COLUMN = { ...S_INLINE,
-  ...S_VA_M,
-  ...S_PL_10
-},
-      S1_ON_TOP = { ...S_INLINE,
-  ...S_VA_M,
-  ...S_PL_10
-};
-
+  OC_COLOR = 'black',
+  DF_PERIOD = 1,
+  DF_SERIA = 1,
+  S_ROOT_OC = {
+    paddingBottom: 4,
+    marginLeft: -8,
+    lineHeight: 'unset'
+  },
+  S_OC = {
+    display: 'inline-block',
+    width: 'auto',
+    height: 32,
+    paddingTop: 4,
+    paddingRight: 8
+  },
+  S_CAPTION = {
+    color: OC_COLOR
+  },
+  S_PERIOD_INPUT = {
+    width: 56,
+    marginRight: 12
+  },
+  S_CAPTION_SERIA_INPUT = {
+    display: 'inline-block',
+    color: 'black',
+    width: 85,
+    paddingLeft: 5,
+    fontWeight: 'bold'
+  },
+  S_SERIA_INPUT = {
+    width: 36
+  },
+  S_ROW_2 = {
+    paddingBottom: 6
+  },
+  S_VA_M = {
+    verticalAlign: 'middle'
+  },
+  S_PL_6 = {
+    paddingLeft: 6
+  },
+  S_PL_8 = {
+    paddingLeft: 8
+  },
+  S_PL_10 = {
+    paddingLeft: 10
+  },
+  S_INLINE = {
+    display: 'inline-block'
+  },
+  crSpanStyle = color => ({
+    color,
+    paddingLeft: 8,
+    fontWeight: 'bold'
+  }),
+  S1_COLUMN = {
+    ...S_INLINE,
+    ...S_VA_M,
+    ...S_PL_10
+  },
+  S1_ON_TOP = {
+    ...S_INLINE,
+    ...S_VA_M,
+    ...S_PL_10
+  };
 const InputPlus = _ref => {
   let {
     initValue,
@@ -85,7 +83,7 @@ const InputPlus = _ref => {
     onPlus
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.InputText, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
       style: S_PERIOD_INPUT,
       type: "number",
       initValue: initValue,
@@ -94,13 +92,12 @@ const InputPlus = _ref => {
       maxLength: 3,
       onChange: onChangePeriod,
       onEnter: onPlus
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.SvgPlus, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgPlus.default, {
       style: S_INLINE,
       onClick: onPlus
     })]
   });
 };
-
 const MinusPeriod = _ref2 => {
   let {
     color,
@@ -108,7 +105,7 @@ const MinusPeriod = _ref2 => {
     onMinus
   } = _ref2;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.SvgMinus, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMinus.default, {
       style: S_INLINE,
       onClick: onMinus
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
@@ -117,56 +114,43 @@ const MinusPeriod = _ref2 => {
     })]
   });
 };
-/*
-const Defenition = ({ Def }) => Def
- ? <div style={S.TEXT}>
-     {Def}
-   </div>
-: null;
-*/
-
-
-const _fChangeNumber = (ref, dfValue) => n => ref.current = parseInt(n, 10) || dfValue;
-
+const _fChangeNumber = (ref, dfValue) => n => (0, _uiApi.setRefValue)(ref, parseInt(n, 10) || dfValue);
 const RowType1 = _ref3 => {
   let {
     is,
     caption,
     dfColor = DF_COLOR,
-    //Def=null,
     onMinus,
     onPlus
   } = _ref3;
-
-  const _refColor = (0, _react.useRef)(dfColor),
-        _refPeriod = (0, _react.useRef)(DF_PERIOD),
-        _refSeriaType = (0, _react.useRef)('column'),
-        _refSeria = (0, _react.useRef)(DF_SERIA),
-        _refOnTop = (0, _react.useRef)(false),
-        _onColor = color => _refColor.current = color,
-        _onChangePeriod = _fChangeNumber(_refPeriod, DF_PERIOD),
-        _onToggleColumn = is => _refSeriaType.current = is ? 'column' : 'spline',
-        _onChangeSeria = _fChangeNumber(_refSeria, DF_SERIA),
-        _onToggleTop = is => _refOnTop.current = is,
-        _onPlus = () => onPlus({
-    s: _refSeria.current,
-    color: _refColor.current,
-    type: _refSeriaType.current,
-    zIndex: _refOnTop.current ? void 0 : -1
-  }, _refPeriod.current);
-
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.OpenClose, {
+  const _refColor = (0, _uiApi.useRef)(dfColor),
+    _refPeriod = (0, _uiApi.useRef)(DF_PERIOD),
+    _refSeriaType = (0, _uiApi.useRef)('column'),
+    _refSeria = (0, _uiApi.useRef)(DF_SERIA),
+    _refOnTop = (0, _uiApi.useRef)(false),
+    _onColor = color => (0, _uiApi.setRefValue)(_refColor, color),
+    _onChangePeriod = _fChangeNumber(_refPeriod, DF_PERIOD),
+    _onToggleColumn = is => (0, _uiApi.setRefValue)(_refSeriaType, is ? 'column' : 'spline'),
+    _onChangeSeria = _fChangeNumber(_refSeria, DF_SERIA),
+    _onToggleTop = is => (0, _uiApi.setRefValue)(_refOnTop, is),
+    _onPlus = () => onPlus({
+      s: (0, _uiApi.getRefValue)(_refSeria),
+      color: (0, _uiApi.getRefValue)(_refColor),
+      type: (0, _uiApi.getRefValue)(_refSeriaType),
+      zIndex: (0, _uiApi.getRefValue)(_refOnTop) ? void 0 : -1
+    }, (0, _uiApi.getRefValue)(_refPeriod));
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     caption: caption,
     style: S_ROOT_OC,
     ocStyle: S_OC,
     captionStyle: S_CAPTION,
     openColor: OC_COLOR,
     CompAfter: is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MinusPeriod, {
-      color: _refColor.current,
-      period: _refPeriod.current,
+      color: (0, _uiApi.getRefValue)(_refColor),
+      period: (0, _uiApi.getRefValue)(_refPeriod),
       onMinus: onMinus
     }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(InputPlus, {
-      initValue: _refPeriod.current,
+      initValue: (0, _uiApi.getRefValue)(_refPeriod),
       onChangePeriod: _onChangePeriod,
       onPlus: _onPlus
     }),
@@ -209,7 +193,6 @@ const RowType1 = _ref3 => {
     })
   });
 };
-
 var _default = RowType1;
 exports.default = _default;
 //# sourceMappingURL=RowType1.js.map

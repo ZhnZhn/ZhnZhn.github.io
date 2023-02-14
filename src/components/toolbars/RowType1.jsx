@@ -1,7 +1,15 @@
-import { useRef } from 'react';
+import {
+  useRef,
+  getRefValue,
+  setRefValue
+} from '../uiApi';
 
 import D from '../dialogs/DialogCell';
-import A from '../zhn/A';
+
+import SvgPlus from '../zhn/SvgPlus';
+import SvgMinus from '../zhn/SvgMinus';
+import InputText from '../zhn/InputText';
+import OpenClose from '../zhn/OpenClose';
 
 const DF_COLOR = '#2b908f'
 , OC_COLOR = 'black'
@@ -9,15 +17,15 @@ const DF_COLOR = '#2b908f'
 , DF_SERIA = 1
 
 , S_ROOT_OC = {
-  lineHeight: 'unset',
   paddingBottom: 4,
-  marginLeft: -8
+  marginLeft: -8,
+  lineHeight: 'unset'
 }
 , S_OC = {
   display: 'inline-block',
+  width: 'auto',
   height: 32,
   paddingTop: 4,
-  width: 'auto',
   paddingRight: 8
 }
 , S_CAPTION = { color: OC_COLOR }
@@ -27,9 +35,9 @@ const DF_COLOR = '#2b908f'
 }
 , S_CAPTION_SERIA_INPUT = {
   display: 'inline-block',
+  color: 'black',
   width: 85,
   paddingLeft: 5,
-  color: 'black',
   fontWeight: 'bold'
 }
 , S_SERIA_INPUT = { width: 36 }
@@ -62,7 +70,7 @@ const InputPlus = ({
   onPlus
 }) => (
   <>
-    <A.InputText
+    <InputText
       style={S_PERIOD_INPUT}
       type="number"
       initValue={initValue}
@@ -72,7 +80,7 @@ const InputPlus = ({
       onChange={onChangePeriod}
       onEnter={onPlus}
     />
-    <A.SvgPlus
+    <SvgPlus
       style={S_INLINE}
       onClick={onPlus}
     />
@@ -85,7 +93,7 @@ const MinusPeriod = ({
   onMinus
 }) => (
   <>
-    <A.SvgMinus
+    <SvgMinus
        style={S_INLINE}
        onClick={onMinus}
     />
@@ -95,22 +103,15 @@ const MinusPeriod = ({
   </>
 );
 
-/*
-const Defenition = ({ Def }) => Def
- ? <div style={S.TEXT}>
-     {Def}
-   </div>
-: null;
-*/
-
-const _fChangeNumber = (ref, dfValue) =>
-  n => ref.current = parseInt(n, 10) || dfValue;
+const _fChangeNumber = (
+  ref,
+  dfValue
+) => n => setRefValue(ref, parseInt(n, 10) || dfValue);
 
 const RowType1 = ({
   is,
   caption,
   dfColor=DF_COLOR,
-  //Def=null,
   onMinus,
   onPlus
 }) => {
@@ -119,20 +120,20 @@ const RowType1 = ({
   , _refSeriaType = useRef('column')
   , _refSeria = useRef(DF_SERIA)
   , _refOnTop = useRef(false)
-  , _onColor = color => _refColor.current = color
+  , _onColor = color => setRefValue(_refColor, color)
   , _onChangePeriod = _fChangeNumber(_refPeriod, DF_PERIOD)
-  , _onToggleColumn = is => _refSeriaType.current = is ? 'column' : 'spline'
+  , _onToggleColumn = is => setRefValue(_refSeriaType, is ? 'column' : 'spline')
   , _onChangeSeria = _fChangeNumber(_refSeria, DF_SERIA)
-  , _onToggleTop = is => _refOnTop.current = is
+  , _onToggleTop = is => setRefValue(_refOnTop, is)
   , _onPlus = () => onPlus({
-      s: _refSeria.current,
-      color: _refColor.current,
-      type: _refSeriaType.current,
-      zIndex: _refOnTop.current ? void 0 : -1
-     }, _refPeriod.current);
+      s: getRefValue(_refSeria),
+      color: getRefValue(_refColor),
+      type: getRefValue(_refSeriaType),
+      zIndex: getRefValue(_refOnTop) ? void 0 : -1
+    }, getRefValue(_refPeriod));
 
   return (
-  <A.OpenClose
+  <OpenClose
     caption={caption}
     style={S_ROOT_OC}
     ocStyle={S_OC}
@@ -140,14 +141,14 @@ const RowType1 = ({
     openColor={OC_COLOR}
     CompAfter={
       is ? <MinusPeriod
-              color={_refColor.current}
-              period={_refPeriod.current}
+              color={getRefValue(_refColor)}
+              period={getRefValue(_refPeriod)}
               onMinus={onMinus}
-            />
+           />
          : <InputPlus
-             initValue={_refPeriod.current}
-             onChangePeriod={_onChangePeriod}
-             onPlus={_onPlus}
+              initValue={getRefValue(_refPeriod)}
+              onChangePeriod={_onChangePeriod}
+              onPlus={_onPlus}
            />
     }
   >
@@ -188,9 +189,8 @@ const RowType1 = ({
           onToggle={_onToggleTop}
         />
        </div>
-       {/*<Defenition Def={Def} />*/}
     </div>
-  </A.OpenClose>
+  </OpenClose>
   );
 };
 
