@@ -14,6 +14,8 @@ import {
   CHAT_INIT_AND_SHOW
 } from '../flux/actions/ChartActions';
 
+import useHotKeysHandler from './hotkeys/useHotKeysHandler';
+
 import AppProvider from './AppProvider';
 import HeaderBar from './header/HeaderBar';
 import BrowserContainer from './browser-container/BrowserContainer';
@@ -35,6 +37,8 @@ const AppErc = () => {
     LocationSearch.load();
     checkBuild(BUILD_DATE, ComponentActions.showReload)
   }, [])
+
+  useHotKeysHandler()
 
   return (
     <AppProvider>

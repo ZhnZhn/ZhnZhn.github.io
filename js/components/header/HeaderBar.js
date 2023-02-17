@@ -1,70 +1,50 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _ComponentActions = require("../../flux/actions/ComponentActions");
-
 var _BrowserActions = require("../../flux/actions/BrowserActions");
-
 var _hotkeys = require("../hotkeys/hotkeys");
-
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
-
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-
 var _useFnFocus = _interopRequireDefault(require("../hooks/useFnFocus"));
-
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
-
 var _SvgSettings = _interopRequireDefault(require("../zhn/svg/SvgSettings"));
-
 var _SvgInfo = _interopRequireDefault(require("../zhn/svg/SvgInfo"));
-
 var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
-
 var _ProgressLoading = _interopRequireDefault(require("./ProgressLoading"));
-
 var _AppLabel = _interopRequireDefault(require("./AppLabel"));
-
 var _IconLogoErc = _interopRequireDefault(require("./IconLogoErc"));
-
 var _HotBar = _interopRequireDefault(require("./HotBar"));
-
 var _LimitRemainingLabel = _interopRequireDefault(require("./LimitRemainingLabel"));
-
 var _BrowserModel = _interopRequireDefault(require("./BrowserModel"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
-      CAPTION = "ERC v0.18.0",
-      THEME_ID = 'HEADER_BAR',
-      CL_HEADER = "header",
-      CL_ICON = "header__icon-erc",
-      CL_LABEL = "header__app-label",
-      CL_TOPICS = "header__bt-topics",
-      CL_NDL = "header__bt-ndl",
-      CL_EUROSTAT = "header__bt-eurostat",
-      CL_WATCH = "header__bt-watch",
-      CL_BTS_RIGHT = "header__bts-right",
-      CL_ABOUT = "header__bt-about",
-      CL_BROWSER_MENU = "popup-menu header__panel-browser",
-      S_SVG_BT = {
-  verticalAlign: 'middle',
-  margin: '0 8px 3px 8px'
-},
-      MODEL = (0, _BrowserModel.default)();
-
+  CAPTION = "ERC v0.18.0",
+  THEME_ID = 'HEADER_BAR',
+  CL_HEADER = "header",
+  CL_ICON = "header__icon-erc",
+  CL_LABEL = "header__app-label",
+  CL_TOPICS = "header__bt-topics",
+  CL_NDL = "header__bt-ndl",
+  CL_EUROSTAT = "header__bt-eurostat",
+  CL_WATCH = "header__bt-watch",
+  CL_BTS_RIGHT = "header__bts-right",
+  CL_ABOUT = "header__bt-about",
+  CL_BROWSER_MENU = "popup-menu header__panel-browser",
+  S_SVG_BT = {
+    verticalAlign: 'middle',
+    margin: '0 8px 3px 8px'
+  },
+  MODEL = (0, _BrowserModel.default)();
 const HeaderBar = _ref => {
   let {
     showSettings
   } = _ref;
   const [isTopics, toggleTopics] = (0, _useToggle.default)(),
-        [refBt, _toggleTopics] = (0, _useFnFocus.default)(toggleTopics),
-        TS = (0, _useTheme.default)(THEME_ID);
+    [refBt, _toggleTopics] = (0, _useFnFocus.default)(toggleTopics),
+    TS = (0, _useTheme.default)(THEME_ID);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_HEADER,
     style: TS.ROOT,
@@ -81,7 +61,7 @@ const HeaderBar = _ref => {
       className: CL_TOPICS,
       style: TS.BT,
       caption: "Topics",
-      title: "Click to open topics menu",
+      title: "Topics Menu",
       hotKey: _hotkeys.HK_TOPICS,
       onClick: _toggleTopics
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
@@ -96,7 +76,7 @@ const HeaderBar = _ref => {
       style: TS.BT,
       caption: "NDL",
       title: "Nasdaq Data Link Browser",
-      hotKey: _hotkeys.HK_QUANDL_BROWSER,
+      hotKey: _hotkeys.HK_NDL_BROWSER,
       onClick: _BrowserActions.BrowserActions.showQuandl
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       className: CL_WATCH,
@@ -140,7 +120,6 @@ const HeaderBar = _ref => {
     })]
   });
 };
-
 var _default = HeaderBar;
 exports.default = _default;
 //# sourceMappingURL=HeaderBar.js.map

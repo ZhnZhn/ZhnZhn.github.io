@@ -1,0 +1,19 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hotkeys/useHotKeysHandler.js"
+ ],
+ "file": "../../../src/components/hotkeys/useHotKeysHandler.js",
+ "names": [
+  "useHotKeysHandler",
+  "useEffect",
+  "HAS_HOT_KEYS",
+  "document",
+  "addEventListener",
+  "HOT_KEY_EVENT",
+  "onHotKey",
+  "clearHotKeys",
+  "removeEventListener"
+ ],
+ "mappings": ";;;;AAAA;AAIA;AAOA,MAAMA,iBAAiB,GAAG,MAAM;EAC9B,IAAAC,gBAAS,EAAC,MAAMC,uBAAY,IAEtBC,QAAQ,CAACC,gBAAgB,CAACC,wBAAa,EAAEC,mBAAQ,EAAE,KAAK,CAAC,EACzD,MAAM;IACJ,IAAAC,uBAAY,GAAE;IACdJ,QAAQ,CAACK,mBAAmB,CAACH,wBAAa,EAAEC,mBAAQ,EAAE,KAAK,CAAC;EAC9D,CAAC,IAEF,KAAK,CAAC,EACT,EAAE,CAAC;AACP,CAAC;AAAA,eAEcN,iBAAiB;AAAA"
+}

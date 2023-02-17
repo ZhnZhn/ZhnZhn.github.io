@@ -8,7 +8,7 @@ import {
 
 import {
   HK_TOPICS,
-  HK_QUANDL_BROWSER,
+  HK_NDL_BROWSER,
   HK_EUROSTAT_BROWSER,
   HK_WATCHLIST_BROWSER,
   HK_SETTINGS,
@@ -85,7 +85,7 @@ const HeaderBar = ({
           className={CL_TOPICS}
           style={TS.BT}
           caption="Topics"
-          title="Click to open topics menu"
+          title="Topics Menu"
           hotKey={HK_TOPICS}
           onClick={_toggleTopics}
        />
@@ -102,7 +102,7 @@ const HeaderBar = ({
           style={TS.BT}
           caption="NDL"
           title="Nasdaq Data Link Browser"
-          hotKey={HK_QUANDL_BROWSER}
+          hotKey={HK_NDL_BROWSER}
           onClick={BrowserActions.showQuandl}
        />
        <FlatButton

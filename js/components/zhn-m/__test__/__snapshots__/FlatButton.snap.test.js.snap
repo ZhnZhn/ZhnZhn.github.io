@@ -10,19 +10,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
   <span
     className="bt-flat__caption"
   >
-    <span />
-    <span
-      style={
-        {
-          "textDecoration": "underline",
-        }
-      }
-    >
-      L
-    </span>
-    <span>
-      oad
-    </span>
+    Load
   </span>
 </button>
 `;
@@ -42,19 +30,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary true 1`] = `
   <span
     className="bt-flat__caption"
   >
-    <span />
-    <span
-      style={
-        {
-          "textDecoration": "underline",
-        }
-      }
-    >
-      L
-    </span>
-    <span>
-      oad
-    </span>
+    Load
   </span>
 </button>
 `;

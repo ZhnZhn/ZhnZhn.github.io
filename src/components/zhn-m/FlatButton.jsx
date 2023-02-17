@@ -1,5 +1,5 @@
 import useThrottleClick from '../hooks/useThrottleClick';
-import useHotKey from '../hotkeys/useHotKey'
+import useHotKey from '../hotkeys/useHotKey';
 
 import crCn from '../zhn-utils/crCn';
 import BtCaption from './BtCaption';
@@ -7,13 +7,13 @@ import BtCaption from './BtCaption';
 const CL_ARROW = "arrow-down"
 , CL_BT_FLAT = 'bt-flat'
 , CL_BT_FLAT_CAPTION = `${CL_BT_FLAT}__caption`
-, S_PRIMARY = { color: '#607d8b' };
+, S_PRIMARY_COLOR = { color: '#607d8b' };
 
 const _crTitle = (
   title,
   hotKey
 ) => hotKey
-  ? `${title} [${hotKey}]`
+  ? `${title} [${hotKey.toLowerCase()}]`
   : title;
 
 const FlatButton = ({
@@ -32,7 +32,7 @@ const FlatButton = ({
   const _hClick = useThrottleClick(timeout, onClick)
   , _className = crCn(CL_BT_FLAT, className)
   , _style = isPrimary
-      ? {...style, ...S_PRIMARY}
+      ? {...style, ...S_PRIMARY_COLOR}
       : style
   , [
     _hotKey,

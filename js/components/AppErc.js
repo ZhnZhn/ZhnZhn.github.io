@@ -9,6 +9,7 @@ var _ChartStore = _interopRequireDefault(require("../flux/stores/ChartStore"));
 var _ComponentActions = require("../flux/actions/ComponentActions");
 var _BrowserActions = require("../flux/actions/BrowserActions");
 var _ChartActions = require("../flux/actions/ChartActions");
+var _useHotKeysHandler = _interopRequireDefault(require("./hotkeys/useHotKeysHandler"));
 var _AppProvider = _interopRequireDefault(require("./AppProvider"));
 var _HeaderBar = _interopRequireDefault(require("./header/HeaderBar"));
 var _BrowserContainer = _interopRequireDefault(require("./browser-container/BrowserContainer"));
@@ -25,6 +26,7 @@ const AppErc = () => {
     _LocationSearch.default.load();
     (0, _checkBuild.default)(BUILD_DATE, _ComponentActions.ComponentActions.showReload);
   }, []);
+  (0, _useHotKeysHandler.default)();
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_AppProvider.default, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_HeaderBar.default, {
       showSettings: showSettings

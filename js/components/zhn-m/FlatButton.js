@@ -11,10 +11,10 @@ var _jsxRuntime = require("react/jsx-runtime");
 const CL_ARROW = "arrow-down",
   CL_BT_FLAT = 'bt-flat',
   CL_BT_FLAT_CAPTION = CL_BT_FLAT + "__caption",
-  S_PRIMARY = {
+  S_PRIMARY_COLOR = {
     color: '#607d8b'
   };
-const _crTitle = (title, hotKey) => hotKey ? title + " [" + hotKey + "]" : title;
+const _crTitle = (title, hotKey) => hotKey ? title + " [" + hotKey.toLowerCase() + "]" : title;
 const FlatButton = _ref => {
   let {
     refBt,
@@ -33,7 +33,7 @@ const FlatButton = _ref => {
     _className = (0, _crCn.default)(CL_BT_FLAT, className),
     _style = isPrimary ? {
       ...style,
-      ...S_PRIMARY
+      ...S_PRIMARY_COLOR
     } : style,
     [_hotKey, _refBt] = (0, _useHotKey.default)(hotKey, _hClick, refBt),
     _title = _crTitle(title, _hotKey);

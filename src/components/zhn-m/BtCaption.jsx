@@ -1,21 +1,26 @@
-const S_ACCESS_KEY = { textDecoration: 'underline' };
+const S_HOT_KEY = { textDecoration: 'underline' };
 
-const _crHotKeyIndex = (hotKey, caption) => hotKey
-  ? caption.toLowerCase().indexOf(hotKey)
-  : -1;
+const _crCaption = (
+  hotKey,
+  caption
+) => {
+  const _hotKeyIndex = hotKey
+    ? caption
+        .toUpperCase()
+        .indexOf(hotKey)
+    : -1;
+  if (_hotKeyIndex === -1) {
+    return caption;
+  }
 
-const _crCaption = (hotKey, caption) => {
-  const index = _crHotKeyIndex(hotKey, caption);
-  if (index === -1) { return caption; }
-
-  const _before = caption.substring(0, index)
-  , _key = caption.substring(index, index+1)
-  , _after = caption.substring(index+1);
+  const _beforeToken = caption.slice(0, _hotKeyIndex)
+  , _hotKey = caption.slice(_hotKeyIndex, _hotKeyIndex+1)
+  , _afterToken = caption.slice(_hotKeyIndex+1);
   return (
     <>
-     <span>{_before}</span>
-     <span style={S_ACCESS_KEY}>{_key}</span>
-     <span>{_after}</span>
+     <span>{_beforeToken}</span>
+     <span style={S_HOT_KEY}>{_hotKey}</span>
+     <span>{_afterToken}</span>
     </>
   );
 };
@@ -25,15 +30,11 @@ const BtCaption = ({
   caption,
   hotKey,
   children
-}) => {
-  if (!caption) { return null; }
-
-  return (
-    <span className={className}>
-      {_crCaption(hotKey, caption)}
-      {children}
-    </span>
-  );
-};
+}) => caption ? (
+  <span className={className}>
+    {_crCaption(hotKey, caption)}
+    {children}
+  </span>
+) : null;
 
 export default BtCaption

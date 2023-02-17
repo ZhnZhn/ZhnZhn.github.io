@@ -1,34 +1,34 @@
 import {
-  useContext,
   useRef,
   useEffect
 } from '../uiApi';
-import { HAS_TOUCH_EVENTS } from '../has';
 
-import HotKeysContext from './HotKeysContext';
+import {
+  HAS_HOT_KEYS,
+  addHotKey,
+  removeHotKey
+} from './hm-hotkeys';
 
 const useHotKey = (
   hotKey,
   onKeyDown,
-  refBt
+  refEl
 ) => {
-  const hmHotKeys = useContext(HotKeysContext)
-  , ref = useRef(null);
-
+  const ref = useRef(null);
   /*eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
-    if (!HAS_TOUCH_EVENTS && hotKey) {
-      hmHotKeys[hotKey] = [refBt || ref, onKeyDown]
-      return () => hmHotKeys[hotKey] = void 0
-    }
-  }, [hotKey, onKeyDown])
-  // hmHotKeys
-  /*eslint-enable react-hooks/exhaustive-deps */
-
+  useEffect(() => HAS_HOT_KEYS && hotKey
+    ? (
+        addHotKey(hotKey, onKeyDown, refEl || ref),
+        () => removeHotKey(hotKey)
+      )
+    : void 0
+  , [])
+  //hotKey, onKeyDown, refEl
+  /*eslint-disable react-hooks/exhaustive-deps */
   return [
-    !HAS_TOUCH_EVENTS && hotKey ? hotKey : '',
-    refBt || ref
-  ]
-};
+    HAS_HOT_KEYS && hotKey ? hotKey : '',
+    refEl || ref
+  ];
+}
 
 export default useHotKey

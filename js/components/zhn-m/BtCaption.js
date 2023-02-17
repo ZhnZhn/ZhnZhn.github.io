@@ -2,38 +2,29 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
 var _jsxRuntime = require("react/jsx-runtime");
-
-const S_ACCESS_KEY = {
+const S_HOT_KEY = {
   textDecoration: 'underline'
 };
-
-const _crHotKeyIndex = (hotKey, caption) => hotKey ? caption.toLowerCase().indexOf(hotKey) : -1;
-
 const _crCaption = (hotKey, caption) => {
-  const index = _crHotKeyIndex(hotKey, caption);
-
-  if (index === -1) {
+  const _hotKeyIndex = hotKey ? caption.toUpperCase().indexOf(hotKey) : -1;
+  if (_hotKeyIndex === -1) {
     return caption;
   }
-
-  const _before = caption.substring(0, index),
-        _key = caption.substring(index, index + 1),
-        _after = caption.substring(index + 1);
-
+  const _beforeToken = caption.slice(0, _hotKeyIndex),
+    _hotKey = caption.slice(_hotKeyIndex, _hotKeyIndex + 1),
+    _afterToken = caption.slice(_hotKeyIndex + 1);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      children: _before
+      children: _beforeToken
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: S_ACCESS_KEY,
-      children: _key
+      style: S_HOT_KEY,
+      children: _hotKey
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      children: _after
+      children: _afterToken
     })]
   });
 };
-
 const BtCaption = _ref => {
   let {
     className,
@@ -41,17 +32,11 @@ const BtCaption = _ref => {
     hotKey,
     children
   } = _ref;
-
-  if (!caption) {
-    return null;
-  }
-
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+  return caption ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
     className: className,
     children: [_crCaption(hotKey, caption), children]
-  });
+  }) : null;
 };
-
 var _default = BtCaption;
 exports.default = _default;
 //# sourceMappingURL=BtCaption.js.map
