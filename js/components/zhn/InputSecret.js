@@ -3,17 +3,16 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _react = require("react");
+var _uiApi = require("../uiApi");
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 var _jsxRuntime = require("react/jsx-runtime");
-const S = {
-  ROOT: {
-    position: 'relative',
+const S_DIV = {
+    positio: 'relative',
     display: 'inline-block',
     width: 275,
     backgroundColor: '#e1e1cb'
   },
-  INPUT: {
+  S_INPUT = {
     color: 'green',
     width: '100%',
     height: 30,
@@ -23,21 +22,21 @@ const S = {
     outline: 'medium none',
     fontSize: '16px',
     fontWeight: 'bold'
-  }
-};
+  };
 const _onEnter = () => {};
-const InputSecret = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+const InputSecret = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     name,
     placeholder,
     maxLength = "32",
     onEnter = _onEnter
   } = _ref;
-  const _refInput = (0, _react.useRef)(),
-    _refEnter = (0, _react.useRef)(() => ''),
-    [value, setValue] = (0, _react.useState)(''),
-    _hInputChange = (0, _react.useCallback)(event => {
-      setValue(event.target.value.trim());
+  const _refInput = (0, _uiApi.useRef)(),
+    _refEnter = (0, _uiApi.useRef)(() => ''),
+    [value, setValue] = (0, _uiApi.useState)(''),
+    _hInputChange = (0, _uiApi.useCallback)(evt => {
+      (0, _uiApi.stopImmediatePropagation)(evt);
+      setValue(evt.target.value.trim());
     }, []),
     _hKeyDown = (0, _useInputKeyDown.default)({
       onEnter: () => _refEnter.current(),
@@ -47,11 +46,11 @@ const InputSecret = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
       }
     }, [onEnter]);
   _refEnter.current = () => onEnter(value);
-  (0, _react.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValue: () => value,
     clear: () => setValue('')
   }), [value]);
-  (0, _react.useEffect)(() => {
+  (0, _uiApi.useEffect)(() => {
     setTimeout(() => {
       const _input = _refInput.current;
       if (_input && _input.hasAttribute('value')) {
@@ -60,7 +59,7 @@ const InputSecret = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
     });
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: S.ROOT,
+    style: S_DIV,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
       hidden: true,
       autoComplete: "username",
@@ -68,7 +67,7 @@ const InputSecret = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
       readOnly: true
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
       ref: _refInput,
-      style: S.INPUT,
+      style: S_INPUT,
       type: "password",
       autoComplete: "current-password",
       placeholder: placeholder,

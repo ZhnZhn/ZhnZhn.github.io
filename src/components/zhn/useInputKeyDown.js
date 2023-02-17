@@ -1,20 +1,24 @@
-import { useCallback } from 'react'
-
-const _isFn = fn => typeof fn === 'function'
+import {
+  useCallback,
+  stopImmediatePropagation
+} from '../uiApi';
 
 /*eslint-disable react-hooks/exhaustive-deps*/
-const useInputKeyDown = ({onEnter, onDelete}, deps=[]) => useCallback((event) => {
-  const { code, keyCode } = event
-  , _code = code || keyCode;
+const useInputKeyDown = (
+  {onEnter, onDelete},
+  deps=[]
+) => useCallback(evt => {
+  stopImmediatePropagation(evt)
+  const _code = evt.code || evt.keyCode;
   switch(_code){
     case 'Delete': case 46:
     case 'Escape': case 27:
-       event.preventDefault()
+       evt.preventDefault()
        onDelete()
        break;
     case 'Enter': case 13:
-       if (_isFn(onEnter)) {
-         onEnter(event.target.value)
+       if (typeof onEnter === 'function') {
+         onEnter(evt.target.value)
        }
        break;
     default: return;

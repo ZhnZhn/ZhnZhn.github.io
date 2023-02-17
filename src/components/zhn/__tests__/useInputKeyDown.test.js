@@ -5,9 +5,17 @@ import {
 import useInputKeyDown from '../useInputKeyDown';
 
 describe('useInputKeyDown', ()=>{
-  test('should return handle for input KeyDown', ()=>{
+  test('should return handler for input KeyDown', ()=>{
     const onEnter = jest.fn()
-    , onDelete = jest.fn();
+    , onDelete = jest.fn()
+    , stopPropagation = jest.fn()
+    , stopImmediatePropagation = jest.fn()
+    , evt = {
+      stopPropagation,
+      nativeEvent: {
+        stopImmediatePropagation
+      }
+    };
     let initialValue = 'a';
 
     const {
@@ -27,20 +35,37 @@ describe('useInputKeyDown', ()=>{
     expect(typeof onKeyDown).toBe('function')
 
     //2.1 Test onEnter with event.target.value
-    act(() => onKeyDown({ keyCode: 13, target: { value: 'a'} }))
+    act(() => onKeyDown({
+      ...evt,
+      keyCode: 13,
+      target: { value: 'a'}
+    }))
     expect(onEnter).toHaveBeenCalledTimes(1)
     expect(onEnter.mock.calls[0][0]).toBe('a')
+    expect(stopPropagation).toHaveBeenCalledTimes(1)
+    expect(stopImmediatePropagation).toHaveBeenCalledTimes(1)
 
     //3.1 Test onDelete for Escape
     const preventDefault = jest.fn()
-    act(() => onKeyDown({ keyCode: 27, preventDefault }))
+    act(() => onKeyDown({
+      ...evt,
+      preventDefault,
+      keyCode: 27
+    }))
     expect(onDelete).toHaveBeenCalledTimes(1)
     expect(preventDefault).toHaveBeenCalledTimes(1)
+    expect(stopPropagation).toHaveBeenCalledTimes(2)
+    expect(stopImmediatePropagation).toHaveBeenCalledTimes(2)
     //3.2 Test onDelete for Delete
-    act(() => onKeyDown({ keyCode: 46, preventDefault }))
+    act(() => onKeyDown({
+      ...evt,
+      keyCode: 46,
+      preventDefault
+    }))
     expect(onDelete).toHaveBeenCalledTimes(2)
     expect(preventDefault).toHaveBeenCalledTimes(2)
-
+    expect(stopPropagation).toHaveBeenCalledTimes(3)
+    expect(stopImmediatePropagation).toHaveBeenCalledTimes(3)
 
     //4 Test rerender with new deps
     initialValue = 'b'
@@ -49,8 +74,13 @@ describe('useInputKeyDown', ()=>{
     expect(typeof result.current).toBe('function')
     expect(result.current).not.toBe(onKeyDown)
     //2.2 Test onEnter without fn
-    act(() => result.current({ keyCode: 13 }))
+    act(() => result.current({
+      ...evt,
+      keyCode: 13
+    }))
     expect(onEnter).toHaveBeenCalledTimes(1)
+    expect(stopPropagation).toHaveBeenCalledTimes(4)
+    expect(stopImmediatePropagation).toHaveBeenCalledTimes(4)
 
   })
 })

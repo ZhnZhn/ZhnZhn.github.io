@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.setRefValue = exports.memo = exports.isInputValid = exports.getRefValue = exports.getRefElementStyle = exports.getInputValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.Component = void 0;
+exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.stopImmediatePropagation = exports.setRefValue = exports.memo = exports.isInputValid = exports.getRefValue = exports.getRefElementStyle = exports.getInputValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.Component = void 0;
 var _react = require("react");
 exports.Component = _react.Component;
 exports.createRef = _react.createRef;
@@ -37,6 +37,11 @@ const focusRefElement = (ref1, ref2) => {
   }
 };
 exports.focusRefElement = focusRefElement;
+const stopImmediatePropagation = evt => {
+  evt.stopPropagation();
+  evt.nativeEvent.stopImmediatePropagation();
+};
+exports.stopImmediatePropagation = stopImmediatePropagation;
 const isInputValid = ref => {
   const inputComp = getRefValue(ref);
   return inputComp && _isFn(inputComp.isValid) ? inputComp.isValid() : false;

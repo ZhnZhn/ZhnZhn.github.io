@@ -1,1 +1,23 @@
-{"version":3,"sources":["../../../src/components/zhn/useInputKeyDown.js"],"names":["_isFn","fn","useInputKeyDown","deps","onEnter","onDelete","event","code","keyCode","_code","preventDefault","target","value"],"mappings":";;;;;AAAA;;AAEA,IAAMA,KAAK,GAAG,SAARA,KAAQ,CAAAC,EAAE;AAAA,SAAI,OAAOA,EAAP,KAAc,UAAlB;AAAA,CAAhB;AAEA;;;AACA,IAAMC,eAAe,GAAG,SAAlBA,eAAkB,OAAsBC,IAAtB;AAAA,MAAEC,OAAF,QAAEA,OAAF;AAAA,MAAWC,QAAX,QAAWA,QAAX;;AAAA,MAAsBF,IAAtB;AAAsBA,IAAAA,IAAtB,GAA2B,EAA3B;AAAA;;AAAA,SAAkC,wBAAY,UAACG,KAAD,EAAW;AAAA,QACvEC,IADuE,GACrDD,KADqD,CACvEC,IADuE;AAAA,QACjEC,OADiE,GACrDF,KADqD,CACjEE,OADiE;AAAA,QAE7EC,KAF6E,GAErEF,IAAI,IAAIC,OAF6D;;AAG/E,YAAOC,KAAP;AACE,WAAK,QAAL;AAAe,WAAK,EAAL;AACf,WAAK,QAAL;AAAe,WAAK,EAAL;AACZH,QAAAA,KAAK,CAACI,cAAN;AACAL,QAAAA,QAAQ;AACR;;AACH,WAAK,OAAL;AAAc,WAAK,EAAL;AACX,YAAIL,KAAK,CAACI,OAAD,CAAT,EAAoB;AAClBA,UAAAA,OAAO,CAACE,KAAK,CAACK,MAAN,CAAaC,KAAd,CAAP;AACD;;AACD;;AACH;AAAS;AAXX;AAaD,GAhByD,EAgBvDT,IAhBuD,CAAlC;AAAA,CAAxB;AAiBA;;;eAEeD,e","sourcesContent":["import { useCallback } from 'react'\r\n\r\nconst _isFn = fn => typeof fn === 'function'\r\n\r\n/*eslint-disable react-hooks/exhaustive-deps*/\r\nconst useInputKeyDown = ({onEnter, onDelete}, deps=[]) => useCallback((event) => {\r\n  const { code, keyCode } = event\r\n  , _code = code || keyCode;\r\n  switch(_code){\r\n    case 'Delete': case 46:\r\n    case 'Escape': case 27:\r\n       event.preventDefault()\r\n       onDelete()\r\n       break;\r\n    case 'Enter': case 13:\r\n       if (_isFn(onEnter)) {\r\n         onEnter(event.target.value)\r\n       }\r\n       break;\r\n    default: return;\r\n  }\r\n}, deps);\r\n/*eslint-enable react-hooks/exhaustive-deps*/\r\n\r\nexport default useInputKeyDown\r\n"],"file":"useInputKeyDown.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/useInputKeyDown.js"
+ ],
+ "file": "../../../src/components/zhn/useInputKeyDown.js",
+ "names": [
+  "useInputKeyDown",
+  "deps",
+  "onEnter",
+  "onDelete",
+  "useCallback",
+  "evt",
+  "stopImmediatePropagation",
+  "_code",
+  "code",
+  "keyCode",
+  "preventDefault",
+  "target",
+  "value"
+ ],
+ "mappings": ";;;;AAAA;AAKA;AACA,MAAMA,eAAe,GAAG,gBAEtBC,IAAI;EAAA,IADJ;IAACC,OAAO;IAAEC;EAAQ,CAAC;EAAA,IACnBF,IAAI;IAAJA,IAAI,GAAC,EAAE;EAAA;EAAA,OACJ,IAAAG,kBAAW,EAACC,GAAG,IAAI;IACtB,IAAAC,+BAAwB,EAACD,GAAG,CAAC;IAC7B,MAAME,KAAK,GAAGF,GAAG,CAACG,IAAI,IAAIH,GAAG,CAACI,OAAO;IACrC,QAAOF,KAAK;MACV,KAAK,QAAQ;MAAE,KAAK,EAAE;MACtB,KAAK,QAAQ;MAAE,KAAK,EAAE;QACnBF,GAAG,CAACK,cAAc,EAAE;QACpBP,QAAQ,EAAE;QACV;MACH,KAAK,OAAO;MAAE,KAAK,EAAE;QAClB,IAAI,OAAOD,OAAO,KAAK,UAAU,EAAE;UACjCA,OAAO,CAACG,GAAG,CAACM,MAAM,CAACC,KAAK,CAAC;QAC3B;QACA;MACH;QAAS;IAAO;EAEpB,CAAC,EAAEX,IAAI,CAAC;AAAA;AACR;AAAA,eAEeD,eAAe;AAAA"
+}

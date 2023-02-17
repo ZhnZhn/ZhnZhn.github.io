@@ -48,6 +48,11 @@ export const focusRefElement = (
   }
 }
 
+export const stopImmediatePropagation = (evt) => {
+  evt.stopPropagation()
+  evt.nativeEvent.stopImmediatePropagation()
+}
+
 export const isInputValid = ref => {
   const inputComp = getRefValue(ref);
   return inputComp && _isFn(inputComp.isValid)

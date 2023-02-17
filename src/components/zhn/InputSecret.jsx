@@ -1,26 +1,31 @@
-import { forwardRef, useRef, useState, useCallback, useEffect, useImperativeHandle } from 'react';
-import useInputKeyDown from './useInputKeyDown'
+import {
+  forwardRef,
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  stopImmediatePropagation
+} from '../uiApi';
 
-const S = {
-  ROOT: {
-    position: 'relative',
-    display: 'inline-block',
-    width: 275,
-    backgroundColor: '#e1e1cb'
-  },
-  INPUT: {
-    color: 'green',
-    width: '100%',
-    height: 30,
-    paddingLeft: 10,
-    background: 'transparent none repeat scroll 0 0',
-    border: 'medium none',
-    outline: 'medium none',
-    fontSize: '16px',
-    fontWeight: 'bold'
-  }
+import useInputKeyDown from './useInputKeyDown';
+
+const S_DIV = {
+  positio: 'relative',
+  display: 'inline-block',
+  width: 275,
+  backgroundColor: '#e1e1cb'
+}, S_INPUT = {
+  color: 'green',
+  width: '100%',
+  height: 30,
+  paddingLeft: 10,
+  background: 'transparent none repeat scroll 0 0',
+  border: 'medium none',
+  outline: 'medium none',
+  fontSize: '16px',
+  fontWeight: 'bold'
 };
-
 
 const _onEnter = () => {}
 
@@ -32,9 +37,13 @@ const InputSecret = forwardRef(({
 }, ref) => {
   const _refInput = useRef()
   , _refEnter = useRef(() => '')
-  , [value, setValue] = useState('')
-  , _hInputChange = useCallback(event => {
-    setValue(event.target.value.trim())
+  , [
+    value,
+    setValue
+  ] = useState('')
+  , _hInputChange = useCallback(evt => {
+    stopImmediatePropagation(evt)
+    setValue(evt.target.value.trim())
   }, [])
   , _hKeyDown = useInputKeyDown({
     onEnter: () => _refEnter.current(),
@@ -51,7 +60,6 @@ const InputSecret = forwardRef(({
     clear: () => setValue('')
   }), [value])
 
-
   useEffect(() => {
     setTimeout(() => {
       const _input = _refInput.current;
@@ -62,7 +70,7 @@ const InputSecret = forwardRef(({
   })
 
   return (
-    <div style={S.ROOT}>
+    <div style={S_DIV}>
       <input
          hidden={true}
          autoComplete="username"
@@ -71,7 +79,7 @@ const InputSecret = forwardRef(({
       />
       <input
          ref={_refInput}
-         style={S.INPUT}
+         style={S_INPUT}
          type="password"
          autoComplete="current-password"
          placeholder={placeholder}
