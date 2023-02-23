@@ -5,7 +5,6 @@ import {
   DT_DOWN,
   DT_EQUAL
 } from '../constants/DirectionType';
-import _crId from './crId';
 
 const fnEcho = value => value;
 
@@ -34,8 +33,7 @@ const _toBig = (bValue) => {
     return bValue;
   }
   try {
-    bValue = new Big(bValue)
-    return bValue;
+    return new Big(bValue);
   } catch(err) {
     return new Big(0);
   }
@@ -116,4 +114,8 @@ export const toFixedNumber = (value) => {
   }
 }
 
-export const crId = _crId
+export const crId = (prefix) => (
+  (prefix || '') +
+  Date.now().toString(36) +
+  Math.random().toString(36).slice(2, 9)
+)
