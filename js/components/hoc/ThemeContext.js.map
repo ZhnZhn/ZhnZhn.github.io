@@ -5,7 +5,13 @@
  ],
  "file": "../../../src/components/hoc/ThemeContext.js",
  "names": [
-  "ThemeContext"
+  "_uiApi",
+  "require",
+  "ThemeContext",
+  "createContext",
+  "_default",
+  "exports",
+  "default"
  ],
- "mappings": ";;;;;AAAA;;AAEA,IAAMA,YAAY,gBAAG,2BAArB;eAEeA,Y"
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAEA,MAAMC,YAAY,GAAG,IAAAC,oBAAa,GAAE;AAAC,IAAAC,QAAA,GAEtBF,YAAY;AAAAG,OAAA,CAAAC,OAAA,GAAAF,QAAA"
 }

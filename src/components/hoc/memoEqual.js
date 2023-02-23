@@ -1,10 +1,10 @@
-import { memo } from 'react'
+import { memo } from '../uiApi';
 
-const DF_ARE_EQUAL_PROPS = () => {};
+const DF_ARE_PROPS_EQUAL = () => true;
 
 const memoEqual = (
   Element,
-  areEqualProps=DF_ARE_EQUAL_PROPS
-) => memo(Element, areEqualProps);
+  arePropsEqual=DF_ARE_PROPS_EQUAL
+) => memo(Element, arePropsEqual);
 
 export default memoEqual

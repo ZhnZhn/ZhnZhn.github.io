@@ -1,4 +1,4 @@
-import ThemeContext from './ThemeContext'
+import ThemeContext from './ThemeContext';
 
 const withTheme = Wrapper => props => (
   <ThemeContext.Consumer>

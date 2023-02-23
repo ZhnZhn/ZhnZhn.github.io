@@ -1,9 +1,9 @@
-import { memo } from 'react';
+import { memo } from '../uiApi';
 
-const _isNotShouldRerender = (
+const _arePropsEqual = (
   prevProps,
   nextProps
 ) => prevProps.isShow === nextProps.isShow
-const memoIsShow = Comp => memo(Comp, _isNotShouldRerender)
+const memoIsShow = Comp => memo(Comp, _arePropsEqual)
 
 export default memoIsShow
