@@ -6,9 +6,8 @@ import {
   DT_EQUAL
 } from '../constants/DirectionType';
 
-const fnEcho = value => value;
-
-const MAX_TO_ROUND = '1000000';
+const MAX_TO_ROUND = 1000000;
+const FN_ECHO = value => value;
 
 const _isNumber = n => typeof n === 'number'
  && (n - n === 0);
@@ -19,14 +18,6 @@ const _formatedToBig = (v=0, dfR) => {
     ? _b.round(dfR)
     : _b;
 }
-
-const _roundBig = (bValue) => {
-  const _bValue = bValue.round(4);
-  return _bValue.gt(MAX_TO_ROUND)
-     ? bValue.toFixed(0)
-     : _bValue;
-};
-
 
 const _toBig = (bValue) => {
   if (bValue instanceof Big) {
@@ -39,19 +30,22 @@ const _toBig = (bValue) => {
   }
 };
 
-const _roundBy = (nOrStr, by=2) => {
+const _roundBig = (bValue) => {
+  const _bValue = bValue.round(4);
+  return _bValue.gt(MAX_TO_ROUND)
+     ? bValue.toFixed(0)
+     : _bValue;
+};
+
+export const roundBy = (nOrStr, by=2) => {
   if (nOrStr == null) {
     return null;
   }
   const _floatOrNaN = parseFloat(nOrStr);
-  if (_floatOrNaN - _floatOrNaN !== 0) {
-    return _floatOrNaN;
-  }
-  return parseFloat(Big(nOrStr).toFixed(by));
-};
-
-
-export const roundBy = _roundBy
+  return _floatOrNaN - _floatOrNaN === 0
+    ? parseFloat(Big(nOrStr).toFixed(by))
+    : _floatOrNaN;
+}
 
 export const calcPercent = ({
   bValue=Big(0),
@@ -64,10 +58,12 @@ export const calcPercent = ({
     : Big(0).toFixed(2);
 }
 
+const _toStr = (bValue) => bValue.toString();
+
 export const crValueMoving = ({
   nowValue,
   prevValue,
-  fnFormat=fnEcho,
+  fnFormat=FN_ECHO,
   dfR
 }={}) => {
   const bNowValue = _formatedToBig(nowValue, dfR)
@@ -84,12 +80,12 @@ export const crValueMoving = ({
   , _bDeltaAbs = _roundBig(_bDelta.abs());
 
   return {
-    value: fnFormat(_bNowValue).toString(),
-    _value: _bNowValue.toString(),
-    delta: fnFormat(_bDeltaAbs).toString(),
-    _deltaAbs: _bDeltaAbs.toString(),
-    percent: _bPercent.toString() + '%',
-    _percentAbs: _bPercent.toString(),
+    value: _toStr(fnFormat(_bNowValue)),
+    _value: _toStr(_bNowValue),
+    delta: _toStr(fnFormat(_bDeltaAbs)),
+    _deltaAbs: _toStr(_bDeltaAbs),
+    percent: _toStr(_bPercent) + '%',
+    _percentAbs: _toStr(_bPercent),
     direction: _direction
   };
 }
@@ -101,18 +97,16 @@ export const toFixed = (value) => {
     : parseFloat(bValue.toFixed(2));
 }
 
-export const toFixedNumber = (value) => {
-  if ( !_isNumber(value) ) {
-    return value;
-  }
-  if ( value<10 ) {
-    return _roundBy(value, 4);
-  } else if ( value<10000 ) {
-    return _roundBy(value, 2);
-  } else {
-    return _roundBy(value, 0);
-  }
-}
+export const toFixedNumber = (
+  value
+) => !_isNumber(value)
+  ? value
+  : roundBy(
+      value,
+      value<10 ? 4
+       : value<10000 ? 2
+          : 0
+  )
 
 export const crId = (prefix) => (
   (prefix || '') +

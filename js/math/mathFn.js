@@ -5,8 +5,8 @@ exports.__esModule = true;
 exports.toFixedNumber = exports.toFixed = exports.roundBy = exports.crValueMoving = exports.crId = exports.calcPercent = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _DirectionType = require("../constants/DirectionType");
-const fnEcho = value => value;
-const MAX_TO_ROUND = '1000000';
+const MAX_TO_ROUND = 1000000;
+const FN_ECHO = value => value;
 const _isNumber = n => typeof n === 'number' && n - n === 0;
 const _formatedToBig = function (v, dfR) {
   if (v === void 0) {
@@ -14,10 +14,6 @@ const _formatedToBig = function (v, dfR) {
   }
   const _b = (0, _big.default)(v.toString().replace(/\s/g, ''));
   return _isNumber(dfR) ? _b.round(dfR) : _b;
-};
-const _roundBig = bValue => {
-  const _bValue = bValue.round(4);
-  return _bValue.gt(MAX_TO_ROUND) ? bValue.toFixed(0) : _bValue;
 };
 const _toBig = bValue => {
   if (bValue instanceof _big.default) {
@@ -29,7 +25,11 @@ const _toBig = bValue => {
     return new _big.default(0);
   }
 };
-const _roundBy = function (nOrStr, by) {
+const _roundBig = bValue => {
+  const _bValue = bValue.round(4);
+  return _bValue.gt(MAX_TO_ROUND) ? bValue.toFixed(0) : _bValue;
+};
+const roundBy = function (nOrStr, by) {
   if (by === void 0) {
     by = 2;
   }
@@ -37,12 +37,8 @@ const _roundBy = function (nOrStr, by) {
     return null;
   }
   const _floatOrNaN = parseFloat(nOrStr);
-  if (_floatOrNaN - _floatOrNaN !== 0) {
-    return _floatOrNaN;
-  }
-  return parseFloat((0, _big.default)(nOrStr).toFixed(by));
+  return _floatOrNaN - _floatOrNaN === 0 ? parseFloat((0, _big.default)(nOrStr).toFixed(by)) : _floatOrNaN;
 };
-const roundBy = _roundBy;
 exports.roundBy = roundBy;
 const calcPercent = _ref => {
   let {
@@ -54,11 +50,12 @@ const calcPercent = _ref => {
   return !bTotal.eq((0, _big.default)(0)) ? bValue.times(100).div(bTotal).abs().toFixed(2) : (0, _big.default)(0).toFixed(2);
 };
 exports.calcPercent = calcPercent;
+const _toStr = bValue => bValue.toString();
 const crValueMoving = function (_temp) {
   let {
     nowValue,
     prevValue,
-    fnFormat = fnEcho,
+    fnFormat = FN_ECHO,
     dfR
   } = _temp === void 0 ? {} : _temp;
   const bNowValue = _formatedToBig(nowValue, dfR),
@@ -72,12 +69,12 @@ const crValueMoving = function (_temp) {
     _bNowValue = _roundBig(bNowValue),
     _bDeltaAbs = _roundBig(_bDelta.abs());
   return {
-    value: fnFormat(_bNowValue).toString(),
-    _value: _bNowValue.toString(),
-    delta: fnFormat(_bDeltaAbs).toString(),
-    _deltaAbs: _bDeltaAbs.toString(),
-    percent: _bPercent.toString() + '%',
-    _percentAbs: _bPercent.toString(),
+    value: _toStr(fnFormat(_bNowValue)),
+    _value: _toStr(_bNowValue),
+    delta: _toStr(fnFormat(_bDeltaAbs)),
+    _deltaAbs: _toStr(_bDeltaAbs),
+    percent: _toStr(_bPercent) + '%',
+    _percentAbs: _toStr(_bPercent),
     direction: _direction
   };
 };
@@ -87,18 +84,7 @@ const toFixed = value => {
   return bValue.gt('10') ? parseInt(bValue.toFixed(0), 10) : parseFloat(bValue.toFixed(2));
 };
 exports.toFixed = toFixed;
-const toFixedNumber = value => {
-  if (!_isNumber(value)) {
-    return value;
-  }
-  if (value < 10) {
-    return _roundBy(value, 4);
-  } else if (value < 10000) {
-    return _roundBy(value, 2);
-  } else {
-    return _roundBy(value, 0);
-  }
-};
+const toFixedNumber = value => !_isNumber(value) ? value : roundBy(value, value < 10 ? 4 : value < 10000 ? 2 : 0);
 exports.toFixedNumber = toFixedNumber;
 const crId = prefix => (prefix || '') + Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
 exports.crId = crId;
