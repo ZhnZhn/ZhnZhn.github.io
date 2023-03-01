@@ -1,8 +1,20 @@
 import {
-  Component,
-  createRef,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
   getRefElementStyle
 } from '../uiApi';
+
+import useBool from '../hooks/useBool';
+import useToggle from '../hooks/useToggle';
+import useListen from '../hooks/useListen';
+
+import useHmInstance from './useHmInstance';
+import useInitialWidth from './useInitialWidth';
+import useSetActiveCheckBox from './useSetActiveCheckBox';
+import useChartContainerStyle from './useChartContainerStyle';
 
 import {
   CHAT_SHOW,
@@ -13,25 +25,16 @@ import {
   CAT_CLOSE_CHART_CONTAINER_2
 } from '../../flux/actions/ComponentActions';
 
-import withTheme from '../hoc/withTheme';
-import { initWidthStyle } from '../has';
-import crCn from '../zhn-utils/crCn';
 import crModelMore from './crModelMore';
 import A from '../Comp';
 import ModalCompareTo from './ModalCompareTo';
 import ChartList from './ChartList';
 
-const TH_ID = 'CHART_CONTAINER';
-
-const CL_ROOT = "item-container"
-, CL_SCROLL = 'scroll-container-y scroll-items'
-, CL_SHOW_CONT = "show-cont"
+const CL_SCROLL = 'scroll-container-y scroll-items'
 , CL_MENU_MORE = "popup-menu charts__menu-more"
 
 , CHILD_MARGIN = 36
-, INITIAL_WIDTH = 635
-, MIN_WIDTH_WITH_TAB_MINI = 470
-, MIN_WIDTH = 365
+//, INITIAL_WIDTH = 635
 , MAX_WIDTH = 1200
 , STEP = 10
 
@@ -46,9 +49,7 @@ const CL_ROOT = "item-container"
 , S_CAPTION = {
   position: 'relative',
   top: -1
-}
-, S_INLINE = { display: 'inline-block' }
-, S_NONE = { display: 'none' };
+};
 
 const CHAT_ACTIONS = [
   CHAT_SHOW,
@@ -56,18 +57,21 @@ const CHAT_ACTIONS = [
   CHAT_CLOSE
 ];
 
+const _getObjectKeys = Object.keys;
 const _isFn = fn => typeof fn === "function";
-const _isInArray = (arr=[], value) => Boolean(~arr.indexOf(value))
+const _isInArray = (
+  arr=[],
+  value
+) => Boolean(~arr.indexOf(value))
 
-const _crItemRefPropName = index => 'chart' + index;
-
-const _isContWidth = contWidth => contWidth
- && contWidth <= INITIAL_WIDTH;
-
-const _crFnByNameArgs = (ref, methodName, ...args) => () => {
-  const _comp = ref.current;
-  if (_comp) {
-    _comp[methodName](...args)
+const _crFnByNameArgs = (
+  ref,
+  methodName,
+  ...args
+) => () => {
+  const _compInstance = ref.current;
+  if (_compInstance) {
+    _compInstance[methodName](...args)
   }
 };
 
@@ -77,254 +81,260 @@ const _isDataForContainer = (
 ) => data === chartType ||
   (data && data.chartType === chartType);
 
-class ChartContainer extends Component {
+const _forEachItem = (refHm, onItem) => {
+  const _hmInstances = refHm.current
+  , _propNames = _getObjectKeys(_hmInstances);
+  let _refInstance
+  , _numberOfInstance = 0;
+  _propNames.forEach(propName => {
+    _refInstance = _hmInstances[propName]
+    if (_refInstance) {
+      _numberOfInstance += 1
+      onItem(_refInstance)
+    }
+  })
+  return _numberOfInstance;
+}
 
-  static defaultProps = {
-    onSetActive: () => {}
+const _fReflowChartByRef = parentWidth => refItem => {
+  if (_isFn(refItem.reflowChart)){
+    refItem.reflowChart(parentWidth - CHILD_MARGIN)
   }
+};
 
-  constructor(props){
-    super(props);
-
-    this._refRootElement = createRef()
-    this._refSpComp = createRef()
-    this._refResize = createRef()
-
-    this._initWidthProperties(props)
-    this._initHandlers(props)
-
-    this._hSetActive = this._toggleChb.bind(this, true)
-    this._hSetNotActive = this._toggleChb.bind(this, false)
-
-    this.state = {
-      isMore: false,
-      isCompareTo: false
-    };
+const _showCaptionByRef = refItem => {
+  if (_isFn(refItem.showCaption)){
+    refItem.showCaption()
   }
+};
 
-  _initWidthProperties = (props) => {
-    const { contWidth } = props;
+const DF_ONS_SET_ACTIVE = () => {};
 
-    this._initialWidthStyle = _isContWidth(contWidth)
-      ? { width: contWidth }
-      : initWidthStyle(INITIAL_WIDTH, MIN_WIDTH)
-    this._INITIAL_WIDTH = this._initialWidthStyle.width
-    this._MIN_WIDTH = this._INITIAL_WIDTH > MIN_WIDTH_WITH_TAB_MINI
-      ? MIN_WIDTH_WITH_TAB_MINI
-      : MIN_WIDTH
-  }
+const ChartContainer = ({
+  store,
+  chartType,
+  browserType,
+  contWidth,
+  caption,
+  onSortBy,
+  onRemoveAll,
+  onCloseContainer,
+  onCloseItem,
+  onSetActive=DF_ONS_SET_ACTIVE,
+  updateMovingValues
+}) => {
+  const _refRootElement = useRef()
+  , _refSpComp = useRef()
+  , _refResize = useRef()
+  , [
+    _refHm,
+    _refChartFn
+  ] = useHmInstance()
+  , [
+    state,
+    setState
+  ] = useState(() => ({
+    isShow: false,
+    configs: [],
+    chartType
+  }))
+  , {
+    isShow,
+    configs
+  } = state
+  , [
+    isCompareTo,
+    _onCompareTo,
+    _closeCompareTo
+  ] = useBool()
+   /*eslint-disable react-hooks/exhaustive-deps */
+  , [
+    isMore,
+    _hToggleMore
+  ] = useToggle()
+  , _showMore = useCallback(() => {
+    _hToggleMore(true)
+  }, [])
+  // _hToggleMore
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  _initHandlers = (props) => {
-    const {
-      onSortBy,
-      onRemoveAll
-    } = this.props
-    , _refResize = this._refResize;
-    this._HANDLERS = {
-      onMinWidth: _crFnByNameArgs(_refResize, 'toWidth', this._MIN_WIDTH, true),
-      onInitWidth: _crFnByNameArgs(_refResize, 'toWidth', this._INITIAL_WIDTH, true),
+   /*eslint-disable react-hooks/exhaustive-deps */
+  , _hHide = useCallback(() => {
+      onCloseContainer()
+      setState(prevState => ({
+        ...prevState,
+        isShow: false
+      }))
+  }, [])
+  // onCloseContainer
+  /*eslint-enable react-hooks/exhaustive-deps */
+  
+  , [
+    _initialWidthStyle,
+    _INITIAL_WIDTH,
+    _MIN_WIDTH
+  ] = useInitialWidth(contWidth)
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hResizeAfter = useCallback(parentWidth => {
+     _forEachItem(_refHm, _fReflowChartByRef(parentWidth))
+  }, [])
+  // _refHm
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _fitToWidth = useCallback(() => {
+    const { width } = getRefElementStyle(_refRootElement) || {};
+    if (width) {
+      _hResizeAfter(parseInt(width, 10))
+    }
+  }, [])
+  //_hResizeAfter
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _onShowCaptions = useCallback(() => {
+    _forEachItem(_refHm, _showCaptionByRef)
+  }, [])
+  // refHm
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+  , _isAdminModeFn = _isFn(store.isAdminMode)
+       ? store.isAdminMode.bind(store)
+       : () => false
+  , _isAdminMode = _isAdminModeFn()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _modelMore = useMemo(() => crModelMore(_isAdminMode, {
+      onMinWidth: _crFnByNameArgs(_refResize, 'toWidth', _MIN_WIDTH, true),
+      onInitWidth: _crFnByNameArgs(_refResize, 'toWidth', _INITIAL_WIDTH, true),
       onPlusWidth: _crFnByNameArgs(_refResize, 'resizeBy', STEP),
       onMinusWidth: _crFnByNameArgs(_refResize, 'resizeBy', -STEP),
-      onFit: this._fitToWidth,
-      onShowCaptions: this._onShowCaptions,
+      onFit: _fitToWidth,
+      onShowCaptions: _onShowCaptions,
       onSortBy,
       onRemoveAll,
-      onCompareTo: this._onCompareTo
-    }
-  }
+      onCompareTo: _onCompareTo
+  }), [_isAdminMode])
+  // _INITIAL_WIDTH, _MIN_WIDTH
+  // _fitToWidth, _onCompareTo, _onShowCaptions
+  // onRemoveAll, onSortBy
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  componentDidMount(){
-    const {
-      store,
-      chartType
-    } = this.props;
-    this.unsubscribe = store.listen(this._onStore);
-    const _initialConfigState = store.getConfigs(chartType)
-    if (_initialConfigState) {
-       this.setState(_initialConfigState);
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _compareTo = useCallback(dateTo => {
+    const _arrR = []
+    , itemLength = _forEachItem(_refHm, refItem => {
+      if (_isFn(refItem.compareTo)){
+        _arrR.push(refItem.compareTo(dateTo))
+      }
+    })
+    const _r = itemLength - _arrR.filter(Boolean).length;
+    if (itemLength > 0 && _r === 0) {
+      updateMovingValues(_arrR)
     }
-  }
-  componentWillUnmount(){
-    this.unsubscribe();
-  }
+    return _r;
+  }, [])
+  // updateMovingValues
+  /*eslint-enable react-hooks/exhaustive-deps */
+  , [
+    _hSetActive,
+    _hSetNotActive
+  ] = useSetActiveCheckBox(
+    chartType,
+    browserType,
+    onSetActive
+  );
 
-  _onStore = (actionType, data) => {
-     const { chartType } = this.props;
+  /*eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    setState(prevState => ({
+      ...prevState,
+      ...store.getConfigs(chartType)
+    }))
+  }, [])
+  // store, chartType
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+  useListen((actionType, data) => {
      if (_isDataForContainer(data, chartType)) {
        if (_isInArray(CHAT_ACTIONS, actionType)) {
          if (actionType !== CHAT_CLOSE) {
-           this._refSpComp.current.scrollTop = 0
-           //this.spComp.scrollTop()
+           _refSpComp.current.scrollTop = 0
          }
-         this.setState(data);
+         setState(prevState => ({
+           ...prevState,
+           ...data
+         }));
        } else if (actionType === CAT_CLOSE_CHART_CONTAINER_2){
-         this._hHide();
+         _hHide();
        }
      }
-   }
+  })
 
-   _toggleChb = (isCheck, checkBox) => {
-      const {
-        chartType,
-        browserType,
-        onSetActive
-      } = this.props;
-      checkBox.chartType = chartType
-      checkBox.browserType = browserType
-      onSetActive(isCheck, checkBox)
-   }
+  const [
+    TS,
+    _style,
+    _className
+  ] = useChartContainerStyle(isShow);
 
-   _hHide = () => {
-      this.props.onCloseContainer()
-      this.setState({ isShow: false });
-   }
+  return (
+    <div
+       ref={_refRootElement}
+       className={_className}
+       style={{
+         ..._initialWidthStyle,
+         ..._style,
+         ...TS.ROOT
+       }}
+    >
+      <A.ModalSlider
+        isShow={isMore}
+        className={CL_MENU_MORE}
+        style={TS.EL_BORDER}
+        model={_modelMore}
+        onClose={_hToggleMore}
+      />
+      { _isAdminMode && <ModalCompareTo
+          isShow={isCompareTo}
+          onClose={_closeCompareTo}
+          onCompareTo={_compareTo}
+        />
+      }
+      <A.BrowserCaption
+         style={S_BR_CAPTION}
+         onMore={_showMore}
+         onCheck={_hSetActive}
+         onUnCheck={_hSetNotActive}
+         caption={caption}
+         captionStyle={S_CAPTION}
+         svgMoreStyle={S_SVG_MORE}
+         onClose={_hHide}
+      >
+         <A.SvgHrzResize
+           ref={_refResize}
+           initWidth={_INITIAL_WIDTH}
+           minWidth={_MIN_WIDTH}
+           maxWidth={MAX_WIDTH}
+           step={STEP}
+           elementRef={_refRootElement}
+           onResizeAfter={_hResizeAfter}
+         />
+      </A.BrowserCaption>
+      <A.ScrollPane
+         ref={_refSpComp}
+         className={CL_SCROLL}
+      >
+        <ChartList
+           refChartFn={_refChartFn}
+           isAdminMode={_isAdminModeFn}
+           configs={configs}
+           store={store}
+           chartType={chartType}
+           browserType={browserType}
+           onCloseItem={onCloseItem}
+        />
+      </A.ScrollPane>
+    </div>
+  );
+};
 
-   _forEachItem = (onItem) => {
-     const max = this.state.configs.length
-     let i=0, _refItem;
-     for (; i<max; i++) {
-        _refItem = this[_crItemRefPropName(i)]
-        if (_refItem){
-          onItem(_refItem)
-        }
-     }
-     return max;
-   }
-
-   _hResizeAfter = (parentWidth) => {
-     this._forEachItem(refItem => {
-       if (_isFn(refItem.reflowChart)){
-         refItem.reflowChart(parentWidth - CHILD_MARGIN)
-       }
-     })
-   }
-
-   _compareTo = (dateTo) => {
-     const _arrR = []
-     , itemLength = this._forEachItem(refItem => {
-       if (_isFn(refItem.compareTo)){
-         _arrR.push(refItem.compareTo(dateTo))
-       }
-     })
-     const _r = itemLength - _arrR.filter(Boolean).length;
-     if (itemLength > 0 && _r === 0) {
-       this.props.updateMovingValues(_arrR)
-     }
-     return _r;
-   }
-
-   _onShowCaptions = () => {
-     this._forEachItem(refItem => {
-       if (_isFn(refItem.showCaption)){
-         refItem.showCaption()
-       }
-     })
-   }
-
-   _showMore = () => {
-      this.setState({ isMore: true })
-   }
-   _hToggleMore = () => {
-     this.setState(prevState => ({
-       isMore: !prevState.isMore
-     }))
-   }
-
-   _refChart = (index, comp) => this[_crItemRefPropName(index)] = comp
-
-   _fitToWidth = () => {
-     const { width } = getRefElementStyle(this._refRootElement) || {};
-     if (width) {
-       this._hResizeAfter(parseInt(width, 10))
-     }
-   }
-
-   _onCompareTo = () => {
-     this.setState({ isCompareTo: true })
-   }
-   _closeCompareTo = () => {
-     this.setState({ isCompareTo: false })
-   }
-
-   render(){
-     const  {
-       theme,
-       caption,
-       chartType,
-       browserType,
-       onCloseItem,
-       store
-     } = this.props
-     , TS = theme.getStyle(TH_ID)
-     , _isAdminModeFn = _isFn(store.isAdminMode)
-          ? store.isAdminMode.bind(store)
-          : () => false
-     , _isAdminMode = store.isAdminMode?.() || false
-     , _modelMore = crModelMore(_isAdminMode, this._HANDLERS)
-     , { isShow, isMore, isCompareTo, configs } = this.state
-     , _style = isShow ? S_INLINE : S_NONE
-     , _className = crCn(CL_ROOT, [isShow, CL_SHOW_CONT]);
-
-     return(
-        <div
-           ref={this._refRootElement}
-           className={_className}
-           style={{
-             ...this._initialWidthStyle,
-             ..._style,
-             ...TS.ROOT
-           }}
-        >
-          <A.ModalSlider
-            isShow={isMore}
-            className={CL_MENU_MORE}
-            style={TS.EL_BORDER}
-            model={_modelMore}
-            onClose={this._hToggleMore}
-          />
-          { _isAdminMode && <ModalCompareTo
-              isShow={isCompareTo}
-              onClose={this._closeCompareTo}
-              onCompareTo={this._compareTo}
-            />
-          }
-          <A.BrowserCaption
-             style={S_BR_CAPTION}
-             onMore={this._showMore}
-             onCheck={this._hSetActive}
-             onUnCheck={this._hSetNotActive}
-             caption={caption}
-             captionStyle={S_CAPTION}
-             svgMoreStyle={S_SVG_MORE}
-             onClose={this._hHide}
-          >
-             <A.SvgHrzResize
-               ref={this._refResize}
-               initWidth={INITIAL_WIDTH}
-               minWidth={this._MIN_WIDTH}
-               maxWidth={MAX_WIDTH}
-               step={STEP}
-               elementRef={this._refRootElement}
-               onResizeAfter={this._hResizeAfter}
-             />
-          </A.BrowserCaption>
-          <A.ScrollPane
-             ref={this._refSpComp}
-             className={CL_SCROLL}
-          >
-            <ChartList
-               refChartFn={this._refChart}
-               isAdminMode={_isAdminModeFn}
-               configs={configs}
-               store={store}
-               chartType={chartType}
-               browserType={browserType}
-               onCloseItem={onCloseItem}
-            />
-          </A.ScrollPane>
-        </div>
-     )
-   }
-}
-
-export default withTheme(ChartContainer)
+export default ChartContainer
