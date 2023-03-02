@@ -7,14 +7,10 @@ const useSetActiveCheckBox = (
   onSetActive
 ) => useMemo(() => [
   (checkBox) => {
-    checkBox.chartType = chartType
-    checkBox.browserType = browserType
-    onSetActive(true, checkBox)
+    onSetActive(checkBox, true)
   },
-  (checkBox) => {
-    checkBox.chartType = chartType
-    checkBox.browserType = browserType
-    onSetActive(false, checkBox)
+  (checkBox) => {    
+    onSetActive(checkBox, false)
   }
 ], []);
 // chartType, browserType, onSetActive

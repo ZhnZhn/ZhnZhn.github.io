@@ -80,8 +80,10 @@ const ComponentSlice = {
   onCloseChartContainer2(chartType, browserType){
     this.trigger(CAT_CLOSE_CHART_CONTAINER_2, chartType);
   },
-  onSetActiveContainer(isCheck, checkBox){
-    toggleContCheckBox(this, { isCheck, checkBox })
+  onSetActiveContainer(chartType, browserType, checkBox, isCheck){
+    checkBox.chartType = chartType
+    checkBox.browserType = browserType
+    toggleContCheckBox(this, checkBox, isCheck)
   },
   uncheckActiveContChb(chartType){
     uncheckActiveContCheckBox(this, chartType)

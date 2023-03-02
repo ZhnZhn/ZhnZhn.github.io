@@ -4,6 +4,8 @@ import ChartContainer from '../../components/zhn-containers/ChartContainer';
 import BrowserConfig from '../../constants/BrowserConfig';
 
 import {
+  CAT_SET_ACTIVE_CONTAINER,
+  CAT_CLOSE_CHART_CONTAINER,
   ComponentActions
 } from '../actions/ComponentActions';
 import {
@@ -53,22 +55,26 @@ export const crItemContainerEl = ({
     contWidth
   } = dialogConf || {}
   , Comp = chartContainerComp || ChartContainer
-  , _type = type || BrowserConfig[browserType].chartContainerType
+  , _chartType = type || BrowserConfig[browserType].chartContainerType
   , _caption = _crCaption(dialogConf, browserType);
 
   return createElement(Comp, {
-    key: _type,
+    key: _chartType,
     caption: _caption,
-    chartType: _type,
+    chartType: _chartType,
     store,
     browserType,
     contWidth,
-    onSetActive: ComponentActions.setActiveContainer,
-    onCloseContainer: ComponentActions.closeChartContainer
-      .bind(null, _type, browserType),
-    onSortBy: ChartActions[CHAT_SORT_BY].bind(null, _type),
-    updateMovingValues: ChartActions[CHAT_UPDATE_MOVING_VALUES].bind(null, _type),
+    onSetActive: ComponentActions[CAT_SET_ACTIVE_CONTAINER]
+      .bind(null, _chartType, browserType),
+    onCloseContainer: ComponentActions[CAT_CLOSE_CHART_CONTAINER]
+      .bind(null, _chartType, browserType),
+    onSortBy: ChartActions[CHAT_SORT_BY]
+      .bind(null, _chartType),
+    updateMovingValues: ChartActions[CHAT_UPDATE_MOVING_VALUES]
+      .bind(null, _chartType),
     onCloseItem: ChartActions[CHAT_CLOSE],
-    onRemoveAll: ChartActions[CHAT_REMOVE_ALL].bind(null, _type, browserType)
+    onRemoveAll: ChartActions[CHAT_REMOVE_ALL]
+      .bind(null, _chartType, browserType)
   });
 }

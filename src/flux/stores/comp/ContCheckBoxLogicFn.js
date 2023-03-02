@@ -14,7 +14,8 @@ const _unsetActiveContCheckBox = (slice) => {
 
 export const toggleContCheckBox = (
   slice,
-  { isCheck, checkBox }
+  checkBox,
+  isCheck
 ) => {
     if (isCheck) {
       _setActiveContCheckBox(slice, checkBox)
