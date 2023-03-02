@@ -5,7 +5,10 @@ const Toolbar = ({
   isShow,
   buttons
 }) => (
-  <ShowHide isShow={isShow}>
+  <ShowHide
+    isShow={isShow}
+    withoutAnimation={true}
+  >
     <ToolbarButtonCircle
        buttons={buttons}
     />
