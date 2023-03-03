@@ -1,3 +1,6 @@
  :root {
-   --t-c: #1b2836; /*topic-color*/ 
+   --t-c: #1b2836; /*topic-color*/
+
+   --s-c1: #8bc34a; /*scrollbar color1*/
+   --s-c2: #1b2836; /*scrollbar color2*/
  }
