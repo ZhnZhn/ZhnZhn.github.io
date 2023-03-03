@@ -1,6 +1,6 @@
 
 .header {
-  display: table;
+  display: flex;
   position: relative;
   z-index: 1050;
   width: 100%;
@@ -41,7 +41,7 @@
   margin-left: 8px;
 }
 .header__bts-right {
-  float: right;
+  margin-left: auto;
 }
 
 @media screen and (max-width: 1100px) {
