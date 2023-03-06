@@ -176,17 +176,17 @@ const ChartContainer = _ref => {
 
     /*eslint-disable react-hooks/exhaustive-deps */,
     _compareTo = (0, _uiApi.useCallback)(dateTo => {
-      const _arrR = [],
-        itemLength = _forEachItem(_refHm, refItem => {
+      const _valueMoves = [],
+        itemsLength = _forEachItem(_refHm, refItem => {
           if (_isFn(refItem.compareTo)) {
-            _arrR.push(refItem.compareTo(dateTo));
+            _valueMoves.push(refItem.compareTo(dateTo));
           }
-        });
-      const _r = itemLength - _arrR.filter(Boolean).length;
-      if (itemLength > 0 && _r === 0) {
-        updateMovingValues(_arrR);
+        }),
+        _numberOfNotUpdatedValueMoves = itemsLength - _valueMoves.filter(Boolean).length;
+      if (itemsLength > 0 && _numberOfNotUpdatedValueMoves === 0) {
+        updateMovingValues(_valueMoves);
       }
-      return _r;
+      return _numberOfNotUpdatedValueMoves;
     }, [])
     // updateMovingValues
     /*eslint-enable react-hooks/exhaustive-deps */,

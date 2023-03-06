@@ -69,12 +69,7 @@ const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref, ref) => {
     /*eslint-disable react-hooks/exhaustive-deps */,
     _updateDateTo = (0, _uiApi.useCallback)(dateTo => {
       const _vm = crValueMoving(vm, dateTo);
-      if (_vm) {
-        setVm(_vm);
-        return true;
-      } else {
-        return false;
-      }
+      return _vm ? (setVm(_vm), _vm) : void 0;
     }, [vm]);
   //crValueMoving
   /*eslint-enable react-hooks/exhaustive-deps */
