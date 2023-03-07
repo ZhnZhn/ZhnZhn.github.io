@@ -19,7 +19,10 @@ import {
   getIsValidColor
 } from './Input.Style';
 
-const S_INPUT_PATTERN = {
+const S_FLEX = {
+  display: 'flex'
+}
+, S_INPUT_PATTERN = {
   ...S_INPUT,
   width: 'calc(100% - 50px)',
   paddingLeft: 0,
@@ -31,10 +34,7 @@ const S_INPUT_PATTERN = {
   borderBottomWidth: 1
 }
 , S_BT_CLEAR = {
-  float: 'right',
-  position: 'relative',
-  top: 4,
-  right: 7
+  margin: '5px 8px 0 auto'
 };
 
 const _crInitialState = (initValue) => ({
@@ -85,10 +85,12 @@ const InputPattern = forwardRef(({
   } = state
   , _hChangeValue = useCallback(event => {
      const { value } = event.target;
-     setState(onTest(value)
-       ? { value, isValid: true, errorInput: void 0 }
-       : { value, isValid: false }
-     )
+     setState(prevState => ({
+       ...prevState,
+       value,
+       errorInput: void 0,
+       isValid: onTest(value)
+     }))
     }, [onTest])
   , _hKeyDown = useInputKeyDown({
        onEnter,
@@ -97,8 +99,9 @@ const InputPattern = forwardRef(({
   , _hClear = useCallback(()=>{
        onClear()
        focusRefElement(_refInput)
-       const _initValue = isClearBlank ? '' : initValue;
-       setState(_crInitialState(_initValue))
+       setState(
+         _crInitialState(isClearBlank ? '' : initValue)
+       )
     }, [initValue, onClear, isClearBlank]);
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -130,29 +133,31 @@ const InputPattern = forwardRef(({
 
   return (
     <div style={{...S_ROW, ...rootStyle}}>
-      <input
-         type="text"
-         style={{...S_INPUT_PATTERN, ...inputStyle, ..._inputStyle }}
-         ref={_refInput}
-         name="text-date"
-         //autoComplete="new-text-date"
-         autoComplete="off"
-         autoCorrect="off"
-         autoCapitalize="off"
-         spellCheck={false}
-         placeholder={placeholder}
-         value={value}
-         maxLength={maxLength}
-         onChange={_hChangeValue}
-         onKeyDown={_hKeyDown}
-      />
-      { value || errorInput
-          ? <SvgClear
-               style={_btClearStyle}
-               onClick={_hClear}
-            />
-          : null
-      }
+      <div style={S_FLEX}>
+        <input
+           type="text"
+           style={{...S_INPUT_PATTERN, ...inputStyle, ..._inputStyle }}
+           ref={_refInput}
+           name="text-date"
+           //autoComplete="new-text-date"
+           autoComplete="off"
+           autoCorrect="off"
+           autoCapitalize="off"
+           spellCheck={false}
+           placeholder={placeholder}
+           value={value}
+           maxLength={maxLength}
+           onChange={_hChangeValue}
+           onKeyDown={_hKeyDown}
+        />
+        {value || errorInput
+            ? <SvgClear
+                 style={_btClearStyle}
+                 onClick={_hClear}
+              />
+            : null
+        }
+      </div>
       <ErrMsg msg={errorInput} />
     </div>
   );
