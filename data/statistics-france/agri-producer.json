@@ -1,0 +1,72 @@
+{ 
+  "groups":[
+    {"caption":"Cereals","value":"",
+     "columns":[
+       {"caption":"Barley for Miling", "value":"010538631"},
+       {"caption":"Malting Barley", "value":"010538632"},
+       {"caption":"Soft Wheat", "value":"010538633"},
+       {"caption":"Durum Wheat", "value":"010538634"},
+       {"caption":"Oats", "value":"010538635"},
+       {"caption":"Sorghum", "value":"010538636"},
+       {"caption":"Triticale", "value":"010538637"},
+       {"caption":"Maize", "value":"010538638"}
+    ]},
+   {"caption":"Potatoes","value":"",
+    "columns":[
+     {"caption":"Fresh Potatoes for Consumption", "value":"010538640"},
+     {"caption":"Potatoes for Winter Storage", "value":"010538642"},
+     {"caption":"New Potatoes", "value":"010538641"},
+     {"caption":"Firm-Fleshed Potatoes", "value":"010538643"},
+     {"caption":"Normal-Fleshed Potatoes", "value":"010538644"},
+     {"caption":"Potatoes for Starch", "value":"010538645"},
+     {"caption":"Potatoes for Industry", "value":"010538646"},
+     {"caption":"Seed Potatoes", "value":"010538679"}
+   ]},
+   {"caption":"Milk, Eggs","value":"",
+    "columns":[
+      {"caption":"Cows' Milk", "value":"010538716"},
+      {"caption":"Ewes' Milk", "value":"010538717"},
+      {"caption":"Goats' Milk", "value":"010538718"},
+      {"caption":"Eggs", "value":"010538719"}
+   ]},
+   {"caption":"Fruit","value":"",
+    "columns":[
+     {"caption":"Apricot", "value":"010538723"},
+     {"caption":"Banana", "value":"010538793"},
+     {"caption":"Cherry", "value":"010538724"},
+     {"caption":"Chestnuts", "value":"010538725"},
+     {"caption":"Strawberries", "value":"010538727"},
+     {"caption":"Raspberries", "value":"010538728"},
+     {"caption":"Kiwi Fruit", "value":"010538729"},
+     {"caption":"Walnuts", "value":"010538730"},
+     {"caption":"Nectarine", "value":"010538733"},
+     {"caption":"Pear", "value":"010538734"},
+     {"caption":"Apple", "value":"010538738"},
+     {"caption":"Plums", "value":"010538742"},     
+     {"caption":"Grapes", "value":"010538743"}
+    ]
+   },
+   {"caption":"Vegetable","value":"",  
+    "columns":[
+     {"caption":"Garlic", "value":"010538745"},
+     {"caption":"Asparagus", "value":"010538747"},
+     {"caption":"Beetroot", "value":"010538749"},
+     {"caption":"Carrot", "value":"010538750"},
+     {"caption":"Cucumbers", "value":"010538755"},
+     {"caption":"Shallot", "value":"010538757"},
+     {"caption":"Melon", "value":"010538760"},
+     {"caption":"Pumpkins", "value":"010538766"},
+     {"caption":"Radish", "value":"010538767"},
+     {"caption":"Tomatoes", "value":"010538777"}          
+   ]},
+   {"caption":"Flowers","value":"",  
+    "columns":[
+     {"caption":"Roses", "value":"010538658"},
+     {"caption":"Carnation", "value":"010538659"},
+     {"caption":"Tulip", "value":"010538660"},
+     {"caption":"Gladiolus", "value":"010538661"},
+     {"caption":"Chrysanthemum", "value":"010538662"}
+    
+   ]}
+  ]
+}

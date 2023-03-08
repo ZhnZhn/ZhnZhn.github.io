@@ -2,7 +2,7 @@
   "menu" : [
     {
       "caption" : "Economics",
-      "items" : [
+      "items" : [       
         { "id" : "FS_GDP" }
       ]
     },{
@@ -20,14 +20,13 @@
     },{
       "caption" : "Prices & Price Indices",
       "items" : [
-        { "id" : "FS_PRICE_AGRI" },
-        { "id" : "FS_PRICE_FOOD" },
+        { "id" : "FS_CPI" },
+        { "id" : "FS_PRICE_AGRI" },        
         { "id" : "FS_PRICE_RETAIL" }
       ]
     },{
       "caption" : "Society",
-      "items" : [
-        { "id" : "FS_CULTURE" },
+      "items" : [        
         { "id" : "FS_CAR_REGISTRATION" },
         { "id" : "FS_MIN_WAGE" }
       ]
@@ -50,6 +49,14 @@
         "valueFn" : "RTwo",
         "columnName" : "Value",
         "dataSource" : "INSEE"
+      }
+    },
+    "FS_CPI": {
+      "type": "FS_CPI",
+      "menuTitle": "CPI",
+      "addProps": "FS_SOCIETY",
+      "dialogProps": {
+        "optionURI": "./data/statistics-france/cpi.json"
       }
     },
     "FS_TRADE_PRODUCT": {
@@ -199,24 +206,14 @@
     },
     "FS_PRICE_AGRI" : {
       "type" : "FS_PRICE_AGRI",
-      "menuTitle" : "Agriculture Producer (base 2010)",
+      "menuTitle" : "Agriculture Producer (base 2015)",
       "dialogCaption" : "Agriculture Producer",
       "dialogType" : "DialogType4A",
       "addProps": "FS_PRICE",
       "dialogProps" : {
-        "oneURI" : "./data/statistics-france/agriculture-indices.json"
+        "oneURI" : "./data/statistics-france/agri-producer.json"
       }
-    },
-    "FS_PRICE_FOOD" : {
-      "type" : "FS_PRICE_FOOD",
-      "menuTitle" : "Wholesale Food (base 2005)",
-      "dialogCaption" : "Wholesale Food Price Indices",
-      "dialogType" : "DialogType4A",
-      "addProps": "FS_PRICE",
-      "dialogProps" : {
-        "oneURI" : "./data/statistics-france/wholesale-indices.json"
-      }
-    },
+    },    
     "FS_PRICE_RETAIL" : {
       "type" : "FS_PRICE_RETAIL",
       "menuTitle" : "Average Retail Prices",
@@ -241,16 +238,7 @@
         "columnName": "Value",
         "dataSource": "INSEE"
       }
-    },
-    "FS_CULTURE": {
-      "type": "FS_CULTURE",
-      "menuTitle": "Culture",
-      "dialogCaption": "Society, Culture",
-      "addProps": "FS_SOCIETY",
-      "dialogProps": {
-        "optionURI": "./data/statistics-france/society-culture.json"
-      }
-    },
+    },    
     "FS_CAR_REGISTRATION": {
       "type": "FS_CAR_REGISTRATION",
       "menuTitle": "Cars Registration",
