@@ -7,8 +7,8 @@ import useRefInit from '../hooks/useRefInit';
 import useListen from '../hooks/useListen';
 
 import {
-  STR_WIDTH,
-  HAS_TOUCH_EVENTS
+  HAS_TOUCH_EVENTS,
+  getWindowInnerWidth
 } from '../has';
 import ItemStack from '../zhn/ItemStack';
 import FlatButton from '../zhn-m/FlatButton';
@@ -25,13 +25,14 @@ const _isIn = (arr, type) => {
   return false;
 }
 
-const _calcMaxButtons = (maxButtons) => {
-  switch(STR_WIDTH){
-    case '"W600"': return 3;
-    case '"W500"': return 2;
-    case '"W360"': return 1;
-    default: return maxButtons;
-  }
+const _calcMaxButtons = (
+  maxButtons
+) => {
+  const _innerWidth = getWindowInnerWidth() || 601;
+  return _innerWidth>600 ? maxButtons
+    : _innerWidth>500 ? 3
+    : _innerWidth>360 ? 2
+    : 1;
 };
 
 const _crBtProps = (
@@ -69,7 +70,9 @@ const HotBar = ({
   closeDialogAction,
   onShowDialog
 }) => {
-  const _maxNumberOfBts = useRefInit(() => _calcMaxButtons(maxButtons))
+  const _maxNumberOfBts = useRefInit(
+    () => _calcMaxButtons(maxButtons)
+  )
   , [
     hotButtons,
     setHotButtons

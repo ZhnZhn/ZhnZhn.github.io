@@ -26,16 +26,8 @@ const _isIn = (arr, type) => {
   return false;
 };
 const _calcMaxButtons = maxButtons => {
-  switch (_has.STR_WIDTH) {
-    case '"W600"':
-      return 3;
-    case '"W500"':
-      return 2;
-    case '"W360"':
-      return 1;
-    default:
-      return maxButtons;
-  }
+  const _innerWidth = (0, _has.getWindowInnerWidth)() || 601;
+  return _innerWidth > 600 ? maxButtons : _innerWidth > 500 ? 3 : _innerWidth > 360 ? 2 : 1;
 };
 const _crBtProps = function (index, caption) {
   if (caption === void 0) {

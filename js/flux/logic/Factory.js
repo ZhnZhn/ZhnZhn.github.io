@@ -16,7 +16,8 @@ var _ChartActions = require("../actions/ChartActions");
 var _dateFn = require("../../utils/dateFn");
 var _has = require("../../components/has");
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
-const _isArr = Array.isArray,
+const HAS_WIDE_WIDTH = (0, _has.isWideWidth)(600),
+  _isArr = Array.isArray,
   _assign = Object.assign,
   _initFromDate = (0, _dateFn.getFromDate)(2),
   initToDate = (0, _dateFn.getToDate)();
@@ -28,7 +29,7 @@ const _crInitFromDate = _ref => {
     isFdw,
     nInitFromDate
   } = _ref;
-  return isFdw && !_has.HAS_WIDE_WIDTH ? _initFromDate : _crFromDate(nInitFromDate);
+  return isFdw && !HAS_WIDE_WIDTH ? _initFromDate : _crFromDate(nInitFromDate);
 };
 const _crDateProps = dialogProps => {
   const _props = dialogProps.isFd ? {

@@ -1,40 +1,30 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isWideWidth = exports.initWidthStyle = exports.STR_WIDTH = exports.HAS_WIDE_WIDTH = exports.HAS_TOUCH_EVENTS = void 0;
-const _INITIAL_WIDTH = 635,
-  _hasInnerWidth = window && window.innerWidth;
-const STR_WIDTH = window && window.getComputedStyle(document.body, ':after').getPropertyValue('content');
-exports.STR_WIDTH = STR_WIDTH;
-const HAS_WIDE_WIDTH = STR_WIDTH.indexOf('W') === -1;
-exports.HAS_WIDE_WIDTH = HAS_WIDE_WIDTH;
+exports.isWideWidth = exports.initWidthStyle = exports.getWindowInnerWidth = exports.HAS_TOUCH_EVENTS = void 0;
 const HAS_TOUCH_EVENTS = document && 'ontouchstart' in document.documentElement;
 exports.HAS_TOUCH_EVENTS = HAS_TOUCH_EVENTS;
-const isWideWidth = () => _hasInnerWidth ? window.innerWidth > 700 : true;
-exports.isWideWidth = isWideWidth;
-const _getWidth = function (initialWidth) {
-  if (initialWidth === void 0) {
-    initialWidth = _INITIAL_WIDTH;
+const getWindowInnerWidth = () => window && window.innerWidth;
+exports.getWindowInnerWidth = getWindowInnerWidth;
+const DF_WIDE_WIDTH = 700;
+const isWideWidth = function (wideWidth) {
+  if (wideWidth === void 0) {
+    wideWidth = DF_WIDE_WIDTH;
   }
-  return _hasInnerWidth ? window.innerWidth - 16 : initialWidth;
+  return (getWindowInnerWidth() || wideWidth + 1) > wideWidth;
 };
-const initWidthStyle = function (initialWidth, minWidth) {
-  if (initialWidth === void 0) {
-    initialWidth = _INITIAL_WIDTH;
-  }
-  if (minWidth === void 0) {
-    minWidth = 0;
-  }
+exports.isWideWidth = isWideWidth;
+const DF_SCROLL_WIDTH = 16;
+const _getWidth = initialWidth => (getWindowInnerWidth() || initialWidth + DF_SCROLL_WIDTH) - DF_SCROLL_WIDTH;
+const initWidthStyle = (initialWidth, minWidth) => {
   if (isWideWidth()) {
     return {
       width: initialWidth
     };
   }
   const width = _getWidth(initialWidth);
-  return width > minWidth ? {
-    width
-  } : {
-    width: minWidth
+  return {
+    width: width > minWidth ? width : minWidth
   };
 };
 exports.initWidthStyle = initWidthStyle;

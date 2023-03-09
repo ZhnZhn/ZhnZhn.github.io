@@ -70,7 +70,7 @@ const TH_ID = 'ABOUT',
   STEP_T2 = "Next, choose a dataset menu item in the the opended up Browser",
   STEP_T3 = "Select params and enter query date in the opened up draggable Dialog",
   STEP_T4 = "Click a button Load",
-  IS_CLOSE_PROVIDERS = !_has.HAS_WIDE_WIDTH;
+  IS_CLOSE_PROVIDERS = !(0, _has.isWideWidth)();
 const _isHide = actionType => actionType === _ChartActions.CHAT_INIT_AND_SHOW || actionType === _ChartActions.CHAT_SHOW;
 const About = () => {
   const [isShow, show, hide] = (0, _useBool.default)(true),

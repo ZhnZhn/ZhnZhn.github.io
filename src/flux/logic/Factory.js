@@ -31,10 +31,11 @@ import {
   isYmdOrEmpty,
   addDaysToYmd
 } from '../../utils/dateFn';
-import { HAS_WIDE_WIDTH } from '../../components/has';
+import { isWideWidth } from '../../components/has';
 import ChartStore from '../stores/ChartStore';
 
-const _isArr = Array.isArray
+const HAS_WIDE_WIDTH = isWideWidth(600)
+, _isArr = Array.isArray
 , _assign = Object.assign
 , _initFromDate = getFromDate(2)
 , initToDate = getToDate();
