@@ -6,7 +6,7 @@ import {
   findMinY
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
-import fnDescr from './fnDescr';
+import { crInfo } from './fnDescr';
 
 const _parser = new window.DOMParser()
 , _isNaN = Number.isNaN;
@@ -16,25 +16,35 @@ const _parser = new window.DOMParser()
 const _crZhConfig = id => ({
   id: id,
   key: id,
-  dataSource: "INSEE"
+  dataSource: 'INSEE'
 });
+
+const _crValueStatus = node => {
+  const _status = node.getAttribute('OBS_STATUS');
+  return _status
+    && _status.length === 1
+    && _status !== 'A'
+      ? _status.toLowerCase()
+      : void 0;
+};
 
 const _toData = (str) => {
   const xml = _parser.parseFromString(str, 'text/xml')
   , series = xml.getElementsByTagName('Series')
   , data = []
-  , info = [];
+  , seriesParams = [];
 
   let i=0
   , max = series.length
   , _seria
   , _getAttr
+  , _childNodes
   , _v;
 
   for(i; i<max; i++){
     _seria = series[i]
     _getAttr = _seria.getAttribute.bind(_seria)
-    info.push({
+    seriesParams.push({
       id: _getAttr('IDBANK'),
       title: _getAttr('TITLE_EN'),
       frequency: _getAttr('FREQ'),
@@ -42,13 +52,14 @@ const _toData = (str) => {
       unitMeasure: _getAttr('UNIT_MEASURE'),
       unitMult: _getAttr('UNIT_MULT')
     })
-
-    _seria.childNodes.forEach(node => {
+    _childNodes = _seria.childNodes || []
+    _childNodes.forEach(node => {
       _v = parseFloat(node.getAttribute('OBS_VALUE'))
       if (!_isNaN(_v)) {
         data.push([
           ymdToUTC(node.getAttribute('TIME_PERIOD')),
-          _v
+          _v,
+          _crValueStatus(node)
         ])
       }
     })
@@ -56,29 +67,33 @@ const _toData = (str) => {
 
   return [
     data.sort(compareByDate),
-    info
+    seriesParams
   ];
 }
 
 const _crConfigOption = (
-  {value, title},
-  info
+  option,
+  seriesParams
 ) => ({
-  info: fnDescr.toInfo(info, title),
-  zhConfig: _crZhConfig(value)
-})
+  info: crInfo(
+    option.title,
+    option.subtitle,
+    seriesParams
+  ),
+  zhConfig: _crZhConfig(option.value)
+});
 
 const InseeAdapter = {
   toConfig(str, option) {
     const [
       data,
-      info
+      seriesParams
     ] = _toData(str);
     return {
       config: crConfigType1({
         option,
         data,
-        confOption: _crConfigOption(option, info)
+        confOption: _crConfigOption(option, seriesParams)
       })
     };
   },

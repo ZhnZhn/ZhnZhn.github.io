@@ -1,15 +1,12 @@
-const C = {
-  ROOT: 'https://bdm.insee.fr/series/sdmx/data/SERIES_BDM/'
-};
+const DATA_URL = 'https://bdm.insee.fr/series/sdmx/data/SERIES_BDM';
 
 const InseeApi = {
   getRequestUrl(option) {
-    const { value, fromDate, toDate } = option;
-    return `${C.ROOT}${value}?startPeriod=${fromDate}&endPeriod=${toDate}`;
+    return `${DATA_URL}/${option.value}?startPeriod=${option.fromDate}&endPeriod=${option.toDate}`;
   },
-  checkResponse(str) {
+  checkResponse() {
     return true;
   }
-}
+};
 
 export default InseeApi

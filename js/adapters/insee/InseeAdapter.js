@@ -7,7 +7,7 @@ var _configBuilderFn = require("../../charts/configBuilderFn");
 var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
-var _fnDescr = _interopRequireDefault(require("./fnDescr"));
+var _fnDescr = require("./fnDescr");
 const _parser = new window.DOMParser(),
   _isNaN = Number.isNaN;
 
@@ -18,20 +18,25 @@ const _crZhConfig = id => ({
   key: id,
   dataSource: "INSEE"
 });
+const _crValueStatus = node => {
+  const _status = node.getAttribute('OBS_STATUS');
+  return _status && _status.length === 1 && _status !== 'A' ? _status.toLowerCase() : void 0;
+};
 const _toData = str => {
   const xml = _parser.parseFromString(str, 'text/xml'),
     series = xml.getElementsByTagName('Series'),
     data = [],
-    info = [];
+    seriesParams = [];
   let i = 0,
     max = series.length,
     _seria,
     _getAttr,
+    _childNodes,
     _v;
   for (i; i < max; i++) {
     _seria = series[i];
     _getAttr = _seria.getAttribute.bind(_seria);
-    info.push({
+    seriesParams.push({
       id: _getAttr('IDBANK'),
       title: _getAttr('TITLE_EN'),
       frequency: _getAttr('FREQ'),
@@ -39,33 +44,34 @@ const _toData = str => {
       unitMeasure: _getAttr('UNIT_MEASURE'),
       unitMult: _getAttr('UNIT_MULT')
     });
-    _seria.childNodes.forEach(node => {
+    _childNodes = _seria.childNodes || [];
+    _childNodes.forEach(node => {
       _v = parseFloat(node.getAttribute('OBS_VALUE'));
       if (!_isNaN(_v)) {
-        data.push([(0, _AdapterFn.ymdToUTC)(node.getAttribute('TIME_PERIOD')), _v]);
+        data.push([(0, _AdapterFn.ymdToUTC)(node.getAttribute('TIME_PERIOD')), _v, _crValueStatus(node)]);
       }
     });
   }
-  return [data.sort(_compareByFn.compareByDate), info];
+  return [data.sort(_compareByFn.compareByDate), seriesParams];
 };
-const _crConfigOption = (_ref, info) => {
+const _crConfigOption = (_ref, seriesParams) => {
   let {
     value,
     title
   } = _ref;
   return {
-    info: _fnDescr.default.toInfo(info, title),
+    info: (0, _fnDescr.crInfo)(title, seriesParams),
     zhConfig: _crZhConfig(value)
   };
 };
 const InseeAdapter = {
   toConfig(str, option) {
-    const [data, info] = _toData(str);
+    const [data, seriesParams] = _toData(str);
     return {
       config: (0, _crConfigType.default)({
         option,
         data,
-        confOption: _crConfigOption(option, info)
+        confOption: _crConfigOption(option, seriesParams)
       })
     };
   },
