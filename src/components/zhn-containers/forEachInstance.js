@@ -9,7 +9,7 @@ const forEachInstance = (
    .reduce((numberOfInstance, propName) => {
       const _refInstance = _hmInstances[propName];
       return _refInstance
-        ? (onInstance(_refInstance), numberOfInstance++)
+        ? (onInstance(_refInstance), ++numberOfInstance)
         : numberOfInstance;
    }, 0);
 };

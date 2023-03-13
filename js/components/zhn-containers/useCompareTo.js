@@ -1,0 +1,28 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+exports.__esModule = true;
+exports.default = void 0;
+var _uiApi = require("../uiApi");
+var _forEachInstance = _interopRequireDefault(require("./forEachInstance"));
+const _isFn = v => typeof v === 'function';
+
+/*eslint-disable react-hooks/exhaustive-deps */
+const useCompareTo = (refHm, updateMovingValues) => (0, _uiApi.useCallback)(dateTo => {
+  const _valueMoves = [],
+    itemsLength = (0, _forEachInstance.default)(refHm, refInst => {
+      if (_isFn(refInst.compareTo)) {
+        _valueMoves.push(refInst.compareTo(dateTo));
+      }
+    }),
+    _numberOfNotUpdatedValueMoves = itemsLength - _valueMoves.filter(Boolean).length;
+  if (itemsLength > 0 && _numberOfNotUpdatedValueMoves === 0) {
+    updateMovingValues(_valueMoves);
+  }
+  return _numberOfNotUpdatedValueMoves;
+}, []);
+// refHm, updateMovingValues
+/*eslint-enable react-hooks/exhaustive-deps */
+var _default = useCompareTo;
+exports.default = _default;
+//# sourceMappingURL=useCompareTo.js.map

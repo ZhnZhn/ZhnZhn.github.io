@@ -11,9 +11,11 @@ var _useHmInstance = _interopRequireDefault(require("./useHmInstance"));
 var _useInitialWidth = _interopRequireDefault(require("./useInitialWidth"));
 var _useSetActiveCheckBox = _interopRequireDefault(require("./useSetActiveCheckBox"));
 var _useChartContainerStyle = _interopRequireDefault(require("./useChartContainerStyle"));
+var _useCompareTo = _interopRequireDefault(require("./useCompareTo"));
 var _ChartActions = require("../../flux/actions/ChartActions");
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 var _crModelMore = _interopRequireDefault(require("./crModelMore"));
+var _forEachInstance = _interopRequireDefault(require("./forEachInstance"));
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _ModalCompareTo = _interopRequireDefault(require("./ModalCompareTo"));
 var _ChartList = _interopRequireDefault(require("./ChartList"));
@@ -38,7 +40,6 @@ const CL_SCROLL = 'scroll-container-y scroll-items',
     top: -1
   };
 const CHAT_ACTIONS = [_ChartActions.CHAT_SHOW, _ChartActions.CHAT_LOAD_COMPLETED, _ChartActions.CHAT_CLOSE];
-const _getObjectKeys = Object.keys;
 const _isFn = fn => typeof fn === "function";
 const _isInArray = function (arr, value) {
   if (arr === void 0) {
@@ -58,20 +59,6 @@ const _crFnByNameArgs = function (ref, methodName) {
   };
 };
 const _isDataForContainer = (data, chartType) => data === chartType || data && data.chartType === chartType;
-const _forEachItem = (refHm, onItem) => {
-  const _hmInstances = refHm.current,
-    _propNames = _getObjectKeys(_hmInstances);
-  let _refInstance,
-    _numberOfInstance = 0;
-  _propNames.forEach(propName => {
-    _refInstance = _hmInstances[propName];
-    if (_refInstance) {
-      _numberOfInstance += 1;
-      onItem(_refInstance);
-    }
-  });
-  return _numberOfInstance;
-};
 const _fReflowChartByRef = parentWidth => refItem => {
   if (_isFn(refItem.reflowChart)) {
     refItem.reflowChart(parentWidth - CHILD_MARGIN);
@@ -81,6 +68,12 @@ const _showCaptionByRef = refItem => {
   if (_isFn(refItem.showCaption)) {
     refItem.showCaption();
   }
+};
+const _crIsAdminModeFn = store => _isFn(store.isAdminMode) ? store.isAdminMode.bind(store) : () => false;
+const _hasBtsResize = (refEl, initialWidth, caption) => {
+  const _style = (0, _uiApi.getRefElementStyle)(refEl),
+    _widthEl = _style ? parseInt(_style.width, 10) || initialWidth : initialWidth;
+  return _widthEl > caption.length * 10 + 155;
 };
 const DF_ONS_SET_ACTIVE = () => {};
 const ChartContainer = _ref => {
@@ -110,52 +103,35 @@ const ChartContainer = _ref => {
       isShow,
       configs
     } = state,
-    [isCompareTo, _onCompareTo, _closeCompareTo] = (0, _useBool.default)()
-    /*eslint-disable react-hooks/exhaustive-deps */,
+    [isCompareTo, _onCompareTo, _closeCompareTo] = (0, _useBool.default)(),
     [isMore, _hToggleMore] = (0, _useToggle.default)(),
-    _showMore = (0, _uiApi.useCallback)(() => {
-      _hToggleMore(true);
-    }, [])
-    // _hToggleMore
-    /*eslint-enable react-hooks/exhaustive-deps */
-
+    [_initialWidthStyle, _INITIAL_WIDTH, _MIN_WIDTH] = (0, _useInitialWidth.default)(contWidth)
     /*eslint-disable react-hooks/exhaustive-deps */,
-    _hHide = (0, _uiApi.useCallback)(() => {
+    [_showMore, _hHide, _hResizeAfter, _onShowCaptions] = (0, _uiApi.useMemo)(() => [() => {
+      _hToggleMore(true);
+    }, () => {
       onCloseContainer();
       setState(prevState => ({
         ...prevState,
         isShow: false
       }));
-    }, [])
-    // onCloseContainer
-    /*eslint-enable react-hooks/exhaustive-deps */,
-    [_initialWidthStyle, _INITIAL_WIDTH, _MIN_WIDTH] = (0, _useInitialWidth.default)(contWidth)
-    /*eslint-disable react-hooks/exhaustive-deps */,
-    _hResizeAfter = (0, _uiApi.useCallback)(parentWidth => {
-      _forEachItem(_refHm, _fReflowChartByRef(parentWidth));
-    }, [])
+    }, parentWidth => {
+      (0, _forEachInstance.default)(_refHm, _fReflowChartByRef(parentWidth));
+    }, () => {
+      (0, _forEachInstance.default)(_refHm, _showCaptionByRef);
+    }], [])
+    // _hToggleMore, onCloseContainer
     // _refHm
-    /*eslint-enable react-hooks/exhaustive-deps */
-
-    /*eslint-disable react-hooks/exhaustive-deps */,
-    _fitToWidth = (0, _uiApi.useCallback)(() => {
+    /*eslint-enable react-hooks/exhaustive-deps */,
+    _fitToWidth = (0, _uiApi.useMemo)(() => () => {
       const {
         width
       } = (0, _uiApi.getRefElementStyle)(_refRootElement) || {};
       if (width) {
         _hResizeAfter(parseInt(width, 10));
       }
-    }, [])
-    //_hResizeAfter
-    /*eslint-enable react-hooks/exhaustive-deps */
-
-    /*eslint-disable react-hooks/exhaustive-deps */,
-    _onShowCaptions = (0, _uiApi.useCallback)(() => {
-      _forEachItem(_refHm, _showCaptionByRef);
-    }, [])
-    // refHm
-    /*eslint-enable react-hooks/exhaustive-deps */,
-    _isAdminModeFn = _isFn(store.isAdminMode) ? store.isAdminMode.bind(store) : () => false,
+    }, [_hResizeAfter]),
+    _isAdminModeFn = _crIsAdminModeFn(store),
     _isAdminMode = _isAdminModeFn()
     /*eslint-disable react-hooks/exhaustive-deps */,
     _modelMore = (0, _uiApi.useMemo)(() => (0, _crModelMore.default)(_isAdminMode, {
@@ -172,24 +148,8 @@ const ChartContainer = _ref => {
     // _INITIAL_WIDTH, _MIN_WIDTH
     // _fitToWidth, _onCompareTo, _onShowCaptions
     // onRemoveAll, onSortBy
-    /*eslint-enable react-hooks/exhaustive-deps */
-
-    /*eslint-disable react-hooks/exhaustive-deps */,
-    _compareTo = (0, _uiApi.useCallback)(dateTo => {
-      const _valueMoves = [],
-        itemsLength = _forEachItem(_refHm, refItem => {
-          if (_isFn(refItem.compareTo)) {
-            _valueMoves.push(refItem.compareTo(dateTo));
-          }
-        }),
-        _numberOfNotUpdatedValueMoves = itemsLength - _valueMoves.filter(Boolean).length;
-      if (itemsLength > 0 && _numberOfNotUpdatedValueMoves === 0) {
-        updateMovingValues(_valueMoves);
-      }
-      return _numberOfNotUpdatedValueMoves;
-    }, [])
-    // updateMovingValues
     /*eslint-enable react-hooks/exhaustive-deps */,
+    _compareTo = (0, _useCompareTo.default)(_refHm, updateMovingValues),
     [_hSetActive, _hSetNotActive] = (0, _useSetActiveCheckBox.default)(chartType, browserType, onSetActive);
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -247,6 +207,7 @@ const ChartContainer = _ref => {
       onClose: _hHide,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.SvgHrzResize, {
         ref: _refResize,
+        isBts: _hasBtsResize(_refRootElement, _INITIAL_WIDTH, caption),
         initWidth: _INITIAL_WIDTH,
         minWidth: _MIN_WIDTH,
         maxWidth: MAX_WIDTH,

@@ -1,7 +1,6 @@
 import {
   useRef,
   useState,
-  useCallback,
   useMemo,
   useEffect,
   getRefElementStyle
@@ -15,6 +14,7 @@ import useHmInstance from './useHmInstance';
 import useInitialWidth from './useInitialWidth';
 import useSetActiveCheckBox from './useSetActiveCheckBox';
 import useChartContainerStyle from './useChartContainerStyle';
+import useCompareTo from './useCompareTo';
 
 import {
   CHAT_SHOW,
@@ -26,9 +26,11 @@ import {
 } from '../../flux/actions/ComponentActions';
 
 import crModelMore from './crModelMore';
+import forEachInstance from './forEachInstance';
 import A from '../Comp';
 import ModalCompareTo from './ModalCompareTo';
 import ChartList from './ChartList';
+
 
 const CL_SCROLL = 'scroll-container-y scroll-items'
 , CL_MENU_MORE = "popup-menu charts__menu-more"
@@ -57,7 +59,6 @@ const CHAT_ACTIONS = [
   CHAT_CLOSE
 ];
 
-const _getObjectKeys = Object.keys;
 const _isFn = fn => typeof fn === "function";
 const _isInArray = (
   arr=[],
@@ -81,20 +82,6 @@ const _isDataForContainer = (
 ) => data === chartType ||
   (data && data.chartType === chartType);
 
-const _forEachItem = (refHm, onItem) => {
-  const _hmInstances = refHm.current
-  , _propNames = _getObjectKeys(_hmInstances);
-  let _refInstance
-  , _numberOfInstance = 0;
-  _propNames.forEach(propName => {
-    _refInstance = _hmInstances[propName]
-    if (_refInstance) {
-      _numberOfInstance += 1
-      onItem(_refInstance)
-    }
-  })
-  return _numberOfInstance;
-}
 
 const _fReflowChartByRef = parentWidth => refItem => {
   if (_isFn(refItem.reflowChart)){
@@ -108,7 +95,13 @@ const _showCaptionByRef = refItem => {
   }
 };
 
-const _isBtsResize = (
+const _crIsAdminModeFn = (
+  store
+) => _isFn(store.isAdminMode)
+  ? store.isAdminMode.bind(store)
+  : () => false;
+
+const _hasBtsResize = (
   refEl,
   initialWidth,
   caption
@@ -159,60 +152,50 @@ const ChartContainer = ({
     _onCompareTo,
     _closeCompareTo
   ] = useBool()
-   /*eslint-disable react-hooks/exhaustive-deps */
   , [
     isMore,
     _hToggleMore
   ] = useToggle()
-  , _showMore = useCallback(() => {
-    _hToggleMore(true)
-  }, [])
-  // _hToggleMore
-  /*eslint-enable react-hooks/exhaustive-deps */
-
-   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hHide = useCallback(() => {
-      onCloseContainer()
-      setState(prevState => ({
-        ...prevState,
-        isShow: false
-      }))
-  }, [])
-  // onCloseContainer
-  /*eslint-enable react-hooks/exhaustive-deps */
-
   , [
     _initialWidthStyle,
     _INITIAL_WIDTH,
     _MIN_WIDTH
   ] = useInitialWidth(contWidth)
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hResizeAfter = useCallback(parentWidth => {
-     _forEachItem(_refHm, _fReflowChartByRef(parentWidth))
-  }, [])
+  , [
+    _showMore,
+    _hHide,
+    _hResizeAfter,
+    _onShowCaptions
+  ] = useMemo(() => [
+    () => {
+      _hToggleMore(true)
+    },
+    () => {
+      onCloseContainer()
+      setState(prevState => ({
+        ...prevState,
+        isShow: false
+      }))
+    },
+    (parentWidth) => {
+      forEachInstance(_refHm, _fReflowChartByRef(parentWidth))
+    },
+    () => {
+      forEachInstance(_refHm, _showCaptionByRef)
+    }
+  ], [])
+  // _hToggleMore, onCloseContainer
   // _refHm
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _fitToWidth = useCallback(() => {
+  , _fitToWidth = useMemo(() => () => {
     const { width } = getRefElementStyle(_refRootElement) || {};
     if (width) {
       _hResizeAfter(parseInt(width, 10))
     }
-  }, [])
-  //_hResizeAfter
-  /*eslint-enable react-hooks/exhaustive-deps */
-
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _onShowCaptions = useCallback(() => {
-    _forEachItem(_refHm, _showCaptionByRef)
-  }, [])
-  // refHm
-  /*eslint-enable react-hooks/exhaustive-deps */
-
-  , _isAdminModeFn = _isFn(store.isAdminMode)
-       ? store.isAdminMode.bind(store)
-       : () => false
+  }, [_hResizeAfter])
+  , _isAdminModeFn = _crIsAdminModeFn(store)
   , _isAdminMode = _isAdminModeFn()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _modelMore = useMemo(() => crModelMore(_isAdminMode, {
@@ -231,29 +214,17 @@ const ChartContainer = ({
   // onRemoveAll, onSortBy
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _compareTo = useCallback(dateTo => {
-    const _valueMoves = []
-    , itemsLength = _forEachItem(_refHm, refItem => {
-      if (_isFn(refItem.compareTo)){
-        _valueMoves.push(refItem.compareTo(dateTo))
-      }
-    })
-    , _numberOfNotUpdatedValueMoves = itemsLength - _valueMoves.filter(Boolean).length;
-    if (itemsLength > 0 && _numberOfNotUpdatedValueMoves === 0) {
-      updateMovingValues(_valueMoves)
-    }
-    return _numberOfNotUpdatedValueMoves;
-  }, [])
-  // updateMovingValues
-  /*eslint-enable react-hooks/exhaustive-deps */
+  , _compareTo = useCompareTo(
+     _refHm,
+     updateMovingValues
+  )
   , [
-    _hSetActive,
-    _hSetNotActive
+     _hSetActive,
+     _hSetNotActive
   ] = useSetActiveCheckBox(
-    chartType,
-    browserType,
-    onSetActive
+     chartType,
+     browserType,
+     onSetActive
   );
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -323,7 +294,7 @@ const ChartContainer = ({
       >
          <A.SvgHrzResize
            ref={_refResize}
-           isBts={_isBtsResize(_refRootElement, _INITIAL_WIDTH, caption)}
+           isBts={_hasBtsResize(_refRootElement, _INITIAL_WIDTH, caption)}
            initWidth={_INITIAL_WIDTH}
            minWidth={_MIN_WIDTH}
            maxWidth={MAX_WIDTH}
