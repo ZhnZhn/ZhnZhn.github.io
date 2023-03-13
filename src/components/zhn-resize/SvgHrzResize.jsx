@@ -21,7 +21,7 @@ const SvgHrzResize = forwardRef((
     hKdLeft,
     hKdRight
   ] = useResizeElement(props, ref);
-  return (
+  return props.isBts ? (
     <div style={S_ROOT_DIV}>
       <BtResize
         style={S_BT_LEFT}
@@ -38,12 +38,13 @@ const SvgHrzResize = forwardRef((
         onKeyDown={hKdRight}
       />
    </div>
-  );
+ ) : null;
 });
 
 /*
 SvgHrzResize.propTypes = {
   nodeRef: PropTypes.ref,
+  isBts: PropTypes.bool,
   initWidth: PropTypes.number,
   minWidth: PropTypes.number,
   maxWidth: PropTypes.number,

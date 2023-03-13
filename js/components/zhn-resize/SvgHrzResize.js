@@ -19,7 +19,7 @@ const S_ROOT_DIV = {
   };
 const SvgHrzResize = (0, _uiApi.forwardRef)((props, ref) => {
   const [hStartResizeLeft, hStartResizeRight, hStopResize, hKdLeft, hKdRight] = (0, _useResizeElement.default)(props, ref);
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+  return props.isBts ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_ROOT_DIV,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtResize.default, {
       style: S_BT_LEFT,
@@ -34,12 +34,13 @@ const SvgHrzResize = (0, _uiApi.forwardRef)((props, ref) => {
       stopResize: hStopResize,
       onKeyDown: hKdRight
     })]
-  });
+  }) : null;
 });
 
 /*
 SvgHrzResize.propTypes = {
   nodeRef: PropTypes.ref,
+  isBts: PropTypes.bool,
   initWidth: PropTypes.number,
   minWidth: PropTypes.number,
   maxWidth: PropTypes.number,

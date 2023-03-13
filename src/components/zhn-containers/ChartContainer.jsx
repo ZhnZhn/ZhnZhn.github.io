@@ -108,6 +108,18 @@ const _showCaptionByRef = refItem => {
   }
 };
 
+const _isBtsResize = (
+  refEl,
+  initialWidth,
+  caption
+) => {
+  const _style = getRefElementStyle(refEl)
+  , _widthEl = _style
+     ? parseInt(_style.width, 10) || initialWidth
+     : initialWidth;
+  return _widthEl > caption.length * 10 + 155;
+};
+
 const DF_ONS_SET_ACTIVE = () => {};
 
 const ChartContainer = ({
@@ -228,7 +240,7 @@ const ChartContainer = ({
       }
     })
     , _numberOfNotUpdatedValueMoves = itemsLength - _valueMoves.filter(Boolean).length;
-    if (itemsLength > 0 && _numberOfNotUpdatedValueMoves === 0) {     
+    if (itemsLength > 0 && _numberOfNotUpdatedValueMoves === 0) {
       updateMovingValues(_valueMoves)
     }
     return _numberOfNotUpdatedValueMoves;
@@ -311,6 +323,7 @@ const ChartContainer = ({
       >
          <A.SvgHrzResize
            ref={_refResize}
+           isBts={_isBtsResize(_refRootElement, _INITIAL_WIDTH, caption)}
            initWidth={_INITIAL_WIDTH}
            minWidth={_MIN_WIDTH}
            maxWidth={MAX_WIDTH}
