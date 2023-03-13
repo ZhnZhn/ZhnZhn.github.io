@@ -1,3 +1,4 @@
+import { getRefElementStyle } from '../uiApi';
 import isKeyEnter from '../zhn/isKeyEnter';
 
 const _isFn = fn => typeof fn === 'function'
@@ -51,24 +52,22 @@ class ResizeElementImpl {
     }
   }
 
-  _getElementStyle = () => {
-    const { current } = this.elementRef || {}
-    , { style } = current || {};
-    return style || {};
+  _getStyle = () => {
+    return getRefElementStyle(this.elementRef) || {};
   }
 
-  _setElementWidth = (width) => {
-    this._getElementStyle().width = width + 'px';
+  _setWidth = (width) => {
+    this._getStyle().width = width + 'px';
   }
 
-  _getElementWidth = () => {
-    return parseInt(this._getElementStyle().width, 10)
+  _getWidth = () => {
+    return parseInt(this._getStyle().width, 10)
   }
 
   _onResizeAfter = () => {
     const { onResizeAfter } = this;
     if (_isFn(onResizeAfter)) {
-      onResizeAfter(this._getElementWidth());
+      onResizeAfter(this._getWidth());
     }
   }
 
@@ -77,14 +76,9 @@ class ResizeElementImpl {
   }
 
   toWidth = (width, isOnResizeAfter) => {
-    const {
-      minWidth,
-      maxWidth,
-      initWidth
-    } = this;
-    if (width >= minWidth && width <= maxWidth) {
-      this.delta = width - initWidth
-      this._setElementWidth(width)
+    if (width >= this.minWidth && width <= this.maxWidth) {
+      this.delta = width - this.initWidth
+      this._setWidth(width)
       if (isOnResizeAfter) {
         this._onResizeAfter()
       }
@@ -95,7 +89,7 @@ class ResizeElementImpl {
     if ( (step < 0 && this.delta > this.minDelta)
       || (step > 0 && this.delta < this.maxDelta) ) {
       this.delta += step;
-      this._setElementWidth(this.initWidth + this.delta)
+      this._setWidth(this.initWidth + this.delta)
     } else {
       this.hStopResize()
     }
@@ -123,7 +117,7 @@ class ResizeElementImpl {
   }
 
   _updateDelta = () => {
-    const w = parseInt(this._getElementStyle().width, 10);
+    const w = this._getWidth();
     if (!_isNaN(w)) {
       this.delta = w - this.initWidth
     }
