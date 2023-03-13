@@ -34,18 +34,18 @@ import crBrowserModel from './BrowserModel';
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
 , CAPTION = "ERC v0.18.0"
 
-, THEME_ID = 'HEADER_BAR'
+, THEME_ID = "HEADER_BAR"
 
 , CL_HEADER = "header"
-, CL_ICON = "header__icon-erc"
-, CL_LABEL = "header__app-label"
-, CL_TOPICS = "header__bt-topics"
-, CL_NDL = "header__bt-ndl"
-, CL_EUROSTAT = "header__bt-eurostat"
-, CL_WATCH = "header__bt-watch"
-, CL_BTS_RIGHT = "header__bts-right"
-, CL_ABOUT = "header__bt-about"
-, CL_BROWSER_MENU = "popup-menu header__panel-browser"
+, CL_ICON = `${CL_HEADER}__icon-erc`
+, CL_LABEL = `${CL_HEADER}__app-label`
+, PREFIX_CL_HEADER_BT = `${CL_HEADER}__bt`
+, CL_NDL = `${PREFIX_CL_HEADER_BT}-ndl`
+, CL_EUROSTAT = `${PREFIX_CL_HEADER_BT}-eurostat`
+, CL_WATCH = `${PREFIX_CL_HEADER_BT}-watch`
+, CL_BTS_RIGHT = `${PREFIX_CL_HEADER_BT}s-right`
+, CL_ABOUT = `${PREFIX_CL_HEADER_BT}-about`
+, CL_BROWSER_MENU = `popup-menu ${CL_HEADER}__panel-browser`
 
 , S_SVG_BT = {
   verticalAlign: 'middle',
@@ -82,7 +82,6 @@ const HeaderBar = ({
           refBt={refBt}
           isArrow={true}
           timeout={0}
-          className={CL_TOPICS}
           style={TS.BT}
           caption="Topics"
           title="Topics Menu"

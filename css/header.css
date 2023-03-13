@@ -1,12 +1,13 @@
 
 .header {
   display: flex;
+  gap: 4px;
   position: relative;
   z-index: 1050;
   width: 100%;
   min-width: 300px;
   padding: 8px 12px 4px;  
-  background-color: rgba(77, 77, 77, 1);
+  background-color: #4d4d4d;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
@@ -14,28 +15,22 @@
   display: inline-block;
   width: 32px;
   height: 32px;
-  cursor: default;
-  position: absolute;
-  top: 7px;
-  left: 12px;
+  margin-right: 10px; 
+  cursor: default;  
 }
 .header__app-label {
   display: inline-block;
   color: #80c040;
-  margin: 8px 0 0 35px;  
-  padding-left: 10px;
+  margin-top: 8px;  
   font-size: 16px;
   font-weight: bold;
 }
 .header__panel-browser {
   top: 45px;
-  left: 156px;
+  left: 152px;
   z-index: 1010;
 }
 
-.header__bt-topics {
-  margin-left: 8px;
-}
 .header__bts-right {
   margin-left: auto;
 }
@@ -50,24 +45,21 @@
 }
 
 @media screen and (max-width: 940px) {
+  .header__icon-erc {
+    margin-right: 4px;
+  }
   .header__app-label {
     display: none;
-  }
-  .header__bt-topics {
-    margin-left: 32px;
-  }
+  }  
   .header__panel-browser {
-    left: 12px;
+    left: 9px;
   }
 }
 
 @media screen and (max-width: 770px) {
   .header__icon-erc {
     display: none;
-  }
-  .header__bt-topics {
-    margin-left: 0;
-  }
+  }  
   .header__bt-watch {
     display: none;
   }
