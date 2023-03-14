@@ -1,42 +1,35 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
-
 var _ItemStack = _interopRequireDefault(require("../../zhn/ItemStack"));
-
 var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox"));
-
+var _RowCheckBox2 = _interopRequireDefault(require("../rows/RowCheckBox2"));
 var _Style = require("./Style");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const S_ROW = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  paddingTop: 3
-},
-      S_CAPTION = {
-  maxWidth: 150,
-  paddingBottom: 2,
-  textAlign: 'left',
-  verticalAlign: 'middle'
-},
-      S_CHB_TOGGLE = { ..._Style.S_ROW_CHB,
-  display: 'inline-block'
-},
-      S_CHB_CAPTION = {
-  display: 'inline-block',
-  paddingTop: 2,
-  paddingLeft: 40
-};
-
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingTop: 3
+  },
+  S_CAPTION = {
+    maxWidth: 150,
+    paddingBottom: 2,
+    textAlign: 'left',
+    verticalAlign: 'middle'
+  },
+  S_CHB_TOGGLE = {
+    ..._Style.S_ROW_CHB,
+    display: 'inline-block'
+  },
+  S_CHB_CAPTION = {
+    display: 'inline-block',
+    paddingTop: 2,
+    paddingLeft: 40
+  };
 const _crChbToggleInitValue = isRow => typeof isRow === 'boolean' ? isRow : true;
-
 const _crCheckBoxItem = (item, index, _ref) => {
   let {
     crIsId,
@@ -46,8 +39,8 @@ const _crCheckBoxItem = (item, index, _ref) => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_ROW,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-      initValue: _crChbToggleInitValue(item.isRow),
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox2.default, {
+      initialValue: _crChbToggleInitValue(item.isRow),
       style: S_CHB_TOGGLE,
       checkedColor: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
       caption: item.caption,
@@ -62,7 +55,6 @@ const _crCheckBoxItem = (item, index, _ref) => {
     })]
   }, item.id);
 };
-
 const ModalToggle = _ref2 => {
   let {
     isShow,
@@ -84,7 +76,8 @@ const ModalToggle = _ref2 => {
   } = _ref2;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
     isShow: isShow,
-    style: { ..._Style.S_MODAL_POPUP,
+    style: {
+      ..._Style.S_MODAL_POPUP,
       ...style
     },
     className: className,
@@ -111,7 +104,6 @@ const ModalToggle = _ref2 => {
     }, "isShowChart")]
   });
 };
-
 var _default = ModalToggle;
 exports.default = _default;
 //# sourceMappingURL=ModalToggle.js.map

@@ -1,6 +1,7 @@
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import ItemStack from '../../zhn/ItemStack';
 import RowCheckBox from '../rows/RowCheckBox';
+import RowCheckBox2 from '../rows/RowCheckBox2';
 import {
   CL_POPUP_MENU,
   S_MODAL_POPUP,
@@ -43,8 +44,8 @@ const _crCheckBoxItem = (
   }
 ) => (
   <div style={S_ROW} key={item.id}>
-    <RowCheckBox
-      initValue={_crChbToggleInitValue(item.isRow)}
+    <RowCheckBox2
+      initialValue={_crChbToggleInitValue(item.isRow)}
       style={S_CHB_TOGGLE}
       checkedColor={TOGGLE_INPUT_CHECKBOX_COLOR}
       caption={item.caption}
