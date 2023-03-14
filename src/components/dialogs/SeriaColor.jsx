@@ -7,7 +7,7 @@ import {
   getInputValue
 } from '../uiApi';
 
-import crStyle from '../zhn-utils/crStyle';
+import { crStyle2 } from '../zhn-utils/crStyle';
 
 import CellColor from '../zhn-moleculs/CellColor';
 import { TRANSPARENT_COLOR } from '../styles/Color';
@@ -88,7 +88,7 @@ const SeriaColor = forwardRef(({
   }), [color, chartType])
 
   const _isLineWidth = _hasLineWidth(chartType)
-  , _rowStyle = crStyle(
+  , _rowStyle = crStyle2(
       S_ROW2,
       !_isLineWidth && S_ROW2_PADDING
     );

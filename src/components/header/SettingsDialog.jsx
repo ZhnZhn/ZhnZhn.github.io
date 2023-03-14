@@ -1,7 +1,7 @@
 //import PropTypes from 'prop-types'
 import memoIsShow from '../hoc/memoIsShow';
 import useSettingsMenuMore from './useSettingsMenuMore';
-import crStyle from '../zhn-utils/crStyle';
+import { crStyle2 } from '../zhn-utils/crStyle';
 
 import {
   ComponentActions
@@ -35,7 +35,7 @@ const SettingsDialog = memoIsShow(({
     isShowLabels,
     menuModel
   ] = useSettingsMenuMore(CL_ROW)
-  , _style = crStyle(
+  , _style = crStyle2(
     S_MODAL,
     !isShowLabels &&  S_MODAL_SMALL
   );
