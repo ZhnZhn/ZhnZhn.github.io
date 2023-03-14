@@ -4,46 +4,22 @@ import {
   useCallback
 } from '../../uiApi';
 
-import useTheme from '../../hooks/useTheme';
 import useRefInit from '../../hooks/useRefInit';
-
-import Button from '../../zhn/Button';
-import SvgCheckBox from '../../zhn/SvgCheckBox';
-import { crStyle3 } from '../../zhn-utils/crStyle';
-
-const CL = "bt-chb"
-, TH_ID = 'ROW_CHECKBOX'
-, CHECKED_COLOR = '#1b2836'
-
-, S_ROOT = { padding: '6px 0 0 16px' }
-, S_CAPTION = {
-  display: 'inline-block',
-  color: 'grey',
-  paddingLeft: 12,
-  fontSize: '16px',
-  fontWeight: 'bold',
-  userSelect: 'none',
-  cursor: 'pointer'
-};
+import RowCheckBoxView from './RowCheckBoxView';
 
 const _isFn = fn => typeof fn == 'function'
 , _isUndefined = v => typeof v === 'undefined'
-, _isBool = bool => typeof bool === 'boolean'
+, _isBool = bool => typeof bool === 'boolean';
 
-, _crCheckedStyle = color => ({ color });
-
-const RowCheckBox = ({
-  style,
-  checkedColor=CHECKED_COLOR,
-  value,
-  initValue,
-  caption,
-  captionStyle,
-  onCheck,
-  onUnCheck,
-  onToggle
-}) => {
-  const [
+const RowCheckBox = (props) => {
+  const {
+    value,
+    initValue,
+    onCheck,
+    onUnCheck,
+    onToggle
+  } = props
+  , [
     valueState,
     setValueState
   ] = useState(
@@ -70,44 +46,18 @@ const RowCheckBox = ({
     if (_isValueState) {
       setValueState(false)
     }
-  }, [onUnCheck, onToggle, _isValueState])
-  , _hToggle = useCallback(() => {
-      if (_value) {
-        _hUnCheck()
-      } else {
-        _hCheck()
-      }
-  }, [_value, _hUnCheck, _hCheck])
-  , TS = useTheme(TH_ID);
-
-  const _captionStyle = crStyle3(
-    S_CAPTION,
-    captionStyle,
-    _value && _crCheckedStyle(checkedColor)
-  );
+  }, [onUnCheck, onToggle, _isValueState]);
 
   return (
-    <div style={{...S_ROOT, ...style}}>
-      <SvgCheckBox
-        value={_value}
-        color={checkedColor}
-        checkedColor={TS.CHECKED_COLOR}
-        onCheck={_hCheck}
-        onUnCheck={_hUnCheck}
-      />
-      {
-        caption && (
-          <Button
-            tabIndex="-1"
-            className={CL}
-            style={_captionStyle}
-            onClick={_hToggle}
-          >
-            {caption}
-          </Button>
-        )
-      }
-    </div>
+    <RowCheckBoxView
+      style={props.style}
+      caption={props.caption}
+      captionStyle={props.captionStyle}
+      checkedColor={props.checkedColor}
+      value={_value}
+      hCheck={_hCheck}
+      hUnCheck={_hUnCheck}
+    />
   );
 };
 
