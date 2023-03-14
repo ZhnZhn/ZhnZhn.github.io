@@ -1,22 +1,13 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
-
-var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox"));
-
+var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox2"));
 var _Style = require("./Style");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
-const PROP_NAMES = ['isNotZoomToMinMax', 'isFilterZero', 'isLogarithmic'];
-
+const ROW_CHECKBOX_CONFIGS = [["isNotZoomToMinMax", "Not Zoom to Min-Max"], ["isFilterZero", "Filter Trim Zero Values"], ["isLogarithmic", "Logarithmic Scale"]];
 const ModalOptions = _ref => {
   let {
     isShow,
@@ -25,33 +16,25 @@ const ModalOptions = _ref => {
     toggleOption,
     onClose
   } = _ref;
-  const [_toggleZoomMinMax, _toggleFilterZero, _toggleLogarithmic] = (0, _react.useMemo)(() => PROP_NAMES.map(propName => is => toggleOption(propName, is)), [toggleOption]);
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
     isShow: isShow,
-    style: { ..._Style.S_MODAL_POPUP,
+    style: {
+      ..._Style.S_MODAL_POPUP,
       ...style
     },
     className: className,
     onClose: onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-      initValue: false,
-      style: _Style.S_ROW_CHB,
-      caption: "Not Zoom to Min-Max",
-      onToggle: _toggleZoomMinMax
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-      initValue: false,
-      style: _Style.S_ROW_CHB,
-      caption: "Filter Trim Zero Values",
-      onToggle: _toggleFilterZero
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-      initValue: false,
-      style: _Style.S_ROW_CHB,
-      caption: "Logarithmic Scale",
-      onToggle: _toggleLogarithmic
-    })]
+    children: ROW_CHECKBOX_CONFIGS.map(_ref2 => {
+      let [id, caption] = _ref2;
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
+        style: _Style.S_ROW_CHB,
+        caption: caption,
+        onToggle: toggleOption,
+        id: id
+      }, id);
+    })
   });
 };
-
 var _default = ModalOptions;
 exports.default = _default;
 //# sourceMappingURL=ModalOptions.js.map

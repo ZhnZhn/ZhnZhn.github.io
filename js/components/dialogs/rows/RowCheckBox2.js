@@ -15,10 +15,10 @@ const RowCheckBox2 = props => {
     } = props,
     [_value, _setValue] = (0, _uiApi.useState)(() => !!props.initialValue),
     [_hCheck, _hUnCheck] = (0, _uiApi.useMemo)(() => [() => {
-      onToggle(id, true);
+      onToggle(true, id);
       _setValue(true);
     }, () => {
-      onToggle(id, false);
+      onToggle(false, id);
       _setValue(false);
     }], [onToggle, id]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBoxView.default, {

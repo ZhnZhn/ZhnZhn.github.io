@@ -22,11 +22,11 @@ const RowCheckBox2 = (props) => {
     _hUnCheck
   ] = useMemo(() => [
     () => {
-      onToggle(id, true)
+      onToggle(true, id)
       _setValue(true)
     },
     () => {
-      onToggle(id, false)
+      onToggle(false, id)
       _setValue(false)
     }
   ], [onToggle, id]);

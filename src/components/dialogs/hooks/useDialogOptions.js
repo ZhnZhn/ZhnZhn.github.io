@@ -20,7 +20,7 @@ const useDialogOptions = () => {
     toggleDialogOption
   ] = useMemo(() => [
     () => { toggleOptions(false)},
-    (propName, is) => {
+    (is, propName) => {
       refDialogOptions.current[propName] = is
     }
   ], [toggleOptions]);
