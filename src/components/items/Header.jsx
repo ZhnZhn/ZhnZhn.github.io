@@ -4,7 +4,7 @@ import useToggle from '../hooks/useToggle';
 import useFnFocus from '../hooks/useFnFocus';
 
 import { GREEN_COLOR } from '../styles/Color';
-import crStyle from '../zhn-utils/crStyle';
+import { crStyle3 } from '../zhn-utils/crStyle';
 
 import Comp from '../Comp';
 import Button from '../zhn/Button';
@@ -109,7 +109,7 @@ const Header = ({
     _toggleMore
   ] = useToggle(false)
   , TS = useTheme(TH_ID)
-  , _captionStyle = crStyle(
+  , _captionStyle = crStyle3(
      S_CAPTION,
      !isOpen && S_CAPTION_CLOSE,
      !valueMoving && S_CAPTION_WIDTH

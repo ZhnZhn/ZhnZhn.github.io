@@ -7,7 +7,7 @@ var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useFnFocus = _interopRequireDefault(require("../hooks/useFnFocus"));
 var _Color = require("../styles/Color");
-var _crStyle = _interopRequireDefault(require("../zhn-utils/crStyle"));
+var _crStyle = require("../zhn-utils/crStyle");
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _ValueMovingBadge = _interopRequireDefault(require("./ValueMovingBadge"));
@@ -109,7 +109,7 @@ const Header = _ref3 => {
   } = _ref3;
   const [isMore, _toggleMore] = (0, _useToggle.default)(false),
     TS = (0, _useTheme.default)(TH_ID),
-    _captionStyle = (0, _crStyle.default)(S_CAPTION, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH),
+    _captionStyle = (0, _crStyle.crStyle3)(S_CAPTION, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH),
     _btTitle = itemCaption.length > 15 ? itemCaption : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_ITEM_HEADER,
