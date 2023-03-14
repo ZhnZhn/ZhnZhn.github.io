@@ -34,11 +34,12 @@ import {
 } from '../../flux/actions/BrowserActions';
 
 const CL_ROW = 'row__pane-topic'
-, CL_BR = `${CL_ROW} item__browser`
-, CL_DBN = `${CL_ROW} item__dbnomics`
-, CL_ORG = `${CL_ROW} item__org`
-, CL_W = `${CL_ROW} item__watch`
-, CL_AB = `${CL_ROW} item__about`;
+, PREFIX_CL_ROW_ITEM = `${CL_ROW} item__`
+, CL_BR = `${PREFIX_CL_ROW_ITEM}browser`
+, CL_DBN = `${PREFIX_CL_ROW_ITEM}dbnomics`
+, CL_ORG = `${PREFIX_CL_ROW_ITEM}org`
+, CL_W = `${PREFIX_CL_ROW_ITEM}watch`
+, CL_AB = `${PREFIX_CL_ROW_ITEM}about`;
 
 const _fBD = id => () => {
   BrowserActions.showBrowserDynamic(id)
