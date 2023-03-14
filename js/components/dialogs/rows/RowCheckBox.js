@@ -8,6 +8,7 @@ var _useTheme = _interopRequireDefault(require("../../hooks/useTheme"));
 var _useRefInit = _interopRequireDefault(require("../../hooks/useRefInit"));
 var _Button = _interopRequireDefault(require("../../zhn/Button"));
 var _SvgCheckBox = _interopRequireDefault(require("../../zhn/SvgCheckBox"));
+var _crStyle = require("../../zhn-utils/crStyle");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
@@ -75,10 +76,7 @@ const RowCheckBox = _ref => {
       }
     }, [_value, _hUnCheck, _hCheck]),
     TS = (0, _useTheme.default)(TH_ID);
-  const _style = _value ? {
-    ...captionStyle,
-    ..._crCheckedStyle(checkedColor)
-  } : captionStyle;
+  const _captionStyle = (0, _crStyle.crStyle3)(S_CAPTION, captionStyle, _value && _crCheckedStyle(checkedColor));
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       ...S_ROOT,
@@ -93,10 +91,7 @@ const RowCheckBox = _ref => {
     }), caption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
       tabIndex: "-1",
       className: CL,
-      style: {
-        ...S_CAPTION,
-        ..._style
-      },
+      style: _captionStyle,
       onClick: _hToggle,
       children: caption
     })]

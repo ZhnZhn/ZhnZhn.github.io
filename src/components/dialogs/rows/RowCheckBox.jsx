@@ -9,6 +9,7 @@ import useRefInit from '../../hooks/useRefInit';
 
 import Button from '../../zhn/Button';
 import SvgCheckBox from '../../zhn/SvgCheckBox';
+import { crStyle3 } from '../../zhn-utils/crStyle';
 
 const CL = "bt-chb"
 , TH_ID = 'ROW_CHECKBOX'
@@ -79,9 +80,11 @@ const RowCheckBox = ({
   }, [_value, _hUnCheck, _hCheck])
   , TS = useTheme(TH_ID);
 
-  const _style = _value
-    ? {...captionStyle, ..._crCheckedStyle(checkedColor)}
-    : captionStyle;
+  const _captionStyle = crStyle3(
+    S_CAPTION,
+    captionStyle,
+    _value && _crCheckedStyle(checkedColor)
+  );
 
   return (
     <div style={{...S_ROOT, ...style}}>
@@ -97,7 +100,7 @@ const RowCheckBox = ({
           <Button
             tabIndex="-1"
             className={CL}
-            style={{...S_CAPTION, ..._style}}
+            style={_captionStyle}
             onClick={_hToggle}
           >
             {caption}
