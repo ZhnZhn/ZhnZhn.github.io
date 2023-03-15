@@ -10,6 +10,7 @@ const _crCaption = (
   ? caption.slice(0, MAX_LENGTH) + '.'
   : caption;
 
+// [rowStyle, labelStyle, caption, options]
 const crRowOptions = ({
   isShowLabels,
   captionStyle,
@@ -20,22 +21,17 @@ const crRowOptions = ({
   const _caption = _crCaption(caption)
   , _crRowStyle = isOc
       ? crRowOcSelectStyle
-      : crRowLabelStyle
-  , [
-    rowStyle,
-    labelStyle
-  ] = _crRowStyle(isShowLabels, captionStyle);
+      : crRowLabelStyle;
 
-  return {
-    rowStyle,
-    labelStyle,
-    caption: _caption,
-    options: {
+  return [
+    ..._crRowStyle(isShowLabels, captionStyle),
+    _caption,
+    {
       width,
       ...rest,
       optionName: isShowLabels ? '' : _caption
     }
-  };
+  ];
 };
 
 export default crRowOptions
