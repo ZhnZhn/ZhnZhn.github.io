@@ -1,12 +1,20 @@
+import {
+  forwardRef,
+  useRef,
+  useState,
+  useCallback,
+  useImperativeHandle,
+  getRefValue,
+  setRefValue
+} from '../../uiApi';
 
-import { useState, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
-import useLoadOptions  from '../hooks/useLoadOptions'
+import useLoadOptions  from '../hooks/useLoadOptions';
 
 import RowInputSelect from './RowInputSelect';
-import ShowHide from '../../zhn/ShowHide'
+import ShowHide from '../../zhn/ShowHide';
 
 const DF_MSG_ON_NOT_SELECRED = item => `${item} is not selected`;
-const NOOP = () => {};
+const FN_NOOP = () => {};
 
 const SelectOneTwo = forwardRef(({
   isShowLabels,
@@ -18,45 +26,59 @@ const SelectOneTwo = forwardRef(({
   oneJsonProp="items",
   oneCaption,
   twoCaption,
-  onSelectOne=NOOP
+  onSelectOne=FN_NOOP
 }, ref) => {
-    const [state, loadOptions] = useLoadOptions(isShow, uri, oneJsonProp)
-    , { isLoading, isLoadingFailed, options:oneOptions } = state
-    , [twoOptions, setTwoOptions] = useState([])
+    const [
+      state,
+      loadOptions
+    ] = useLoadOptions(
+      isShow,
+      uri, oneJsonProp
+    )
+    , {
+      isLoading,
+      isLoadingFailed,
+      options:oneOptions
+    } = state
+    , [
+      twoOptions,
+      setTwoOptions
+    ] = useState([])
     , _refOne = useRef(null)
     , _refTwo = useRef(null)
+    
     /*eslint-disable react-hooks/exhaustive-deps */
     , _hSelectOne = useCallback(one => {
-       _refOne.current = one;
-       _refTwo.current = null
+       setRefValue(_refOne, one)
+       setRefValue(_refTwo, null)
        setTwoOptions(one && one.columns || [])
        onSelectOne(one)
     }, [])
     //onSelectOne
     /*eslint-enable react-hooks/exhaustive-deps */
+
     , _hSelectTwo = useCallback(item => {
-       _refTwo.current = item
-    }, [])
+       setRefValue(_refTwo, item)
+    }, []);
 
     /*eslint-disable react-hooks/exhaustive-deps */
     useImperativeHandle(ref, ()=>({
       getValidation:() => {
          const msg = [];
-         if (!_refOne.current){
+         if (!getRefValue(_refOne)){
            msg.push(msgOnNotSelected(oneCaption));
          }
-         if (!_refTwo.current){
+         if (!getRefValue(_refTwo)){
            msg.push(msgOnNotSelected(twoCaption));
          }
 
-         if (msg.length>0){
-           return { isValid: false, msg };
-         }
-         return { isValid: true };
+         return msg.length>0
+           ? { isValid: false, msg }
+           : { isValid: true };
       },
       getValues: () => ({
-        one: _refOne.current,
-        two: _refTwo.current
+        one: getRefValue(_refOne),
+        two: getRefValue(_refTwo)
       })
     }), [])
    //oneCaption, twoCaption

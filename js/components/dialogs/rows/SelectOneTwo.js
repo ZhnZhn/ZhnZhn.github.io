@@ -1,25 +1,16 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../../uiApi");
 var _useLoadOptions = _interopRequireDefault(require("../hooks/useLoadOptions"));
-
 var _RowInputSelect = _interopRequireDefault(require("./RowInputSelect"));
-
 var _ShowHide = _interopRequireDefault(require("../../zhn/ShowHide"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const DF_MSG_ON_NOT_SELECRED = item => item + " is not selected";
-
-const NOOP = () => {};
-
-const SelectOneTwo = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
+const FN_NOOP = () => {};
+const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     isShowLabels,
     isShow = true,
@@ -30,64 +21,54 @@ const SelectOneTwo = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
     oneJsonProp = "items",
     oneCaption,
     twoCaption,
-    onSelectOne = NOOP
+    onSelectOne = FN_NOOP
   } = _ref;
-
   const [state, loadOptions] = (0, _useLoadOptions.default)(isShow, uri, oneJsonProp),
-        {
-    isLoading,
-    isLoadingFailed,
-    options: oneOptions
-  } = state,
-        [twoOptions, setTwoOptions] = (0, _react.useState)([]),
-        _refOne = (0, _react.useRef)(null),
-        _refTwo = (0, _react.useRef)(null)
+    {
+      isLoading,
+      isLoadingFailed,
+      options: oneOptions
+    } = state,
+    [twoOptions, setTwoOptions] = (0, _uiApi.useState)([]),
+    _refOne = (0, _uiApi.useRef)(null),
+    _refTwo = (0, _uiApi.useRef)(null)
+
+    /*eslint-disable react-hooks/exhaustive-deps */,
+    _hSelectOne = (0, _uiApi.useCallback)(one => {
+      (0, _uiApi.setRefValue)(_refOne, one);
+      (0, _uiApi.setRefValue)(_refTwo, null);
+      setTwoOptions(one && one.columns || []);
+      onSelectOne(one);
+    }, [])
+    //onSelectOne
+    /*eslint-enable react-hooks/exhaustive-deps */,
+    _hSelectTwo = (0, _uiApi.useCallback)(item => {
+      (0, _uiApi.setRefValue)(_refTwo, item);
+    }, []);
+
   /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        _hSelectOne = (0, _react.useCallback)(one => {
-    _refOne.current = one;
-    _refTwo.current = null;
-    setTwoOptions(one && one.columns || []);
-    onSelectOne(one);
-  }, []) //onSelectOne
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-  ,
-        _hSelectTwo = (0, _react.useCallback)(item => {
-    _refTwo.current = item;
-  }, []);
-  /*eslint-disable react-hooks/exhaustive-deps */
-
-
-  (0, _react.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValidation: () => {
       const msg = [];
-
-      if (!_refOne.current) {
+      if (!(0, _uiApi.getRefValue)(_refOne)) {
         msg.push(msgOnNotSelected(oneCaption));
       }
-
-      if (!_refTwo.current) {
+      if (!(0, _uiApi.getRefValue)(_refTwo)) {
         msg.push(msgOnNotSelected(twoCaption));
       }
-
-      if (msg.length > 0) {
-        return {
-          isValid: false,
-          msg
-        };
-      }
-
-      return {
+      return msg.length > 0 ? {
+        isValid: false,
+        msg
+      } : {
         isValid: true
       };
     },
     getValues: () => ({
-      one: _refOne.current,
-      two: _refTwo.current
+      one: (0, _uiApi.getRefValue)(_refOne),
+      two: (0, _uiApi.getRefValue)(_refTwo)
     })
-  }), []); //oneCaption, twoCaption
-
+  }), []);
+  //oneCaption, twoCaption
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
