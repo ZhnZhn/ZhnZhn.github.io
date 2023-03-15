@@ -163,7 +163,7 @@ const RowType1 = ({
         style={S1_COLUMN}
         caption="Column"
         captionStyle={S_PL_6}
-        checkedColor={OC_COLOR}
+        color={OC_COLOR}
         onToggle={_onToggleColumn}
       />
       <div style={S_ROW_2}>
@@ -184,7 +184,7 @@ const RowType1 = ({
           style={S1_ON_TOP}
           caption="OnTop"
           captionStyle={S_PL_6}
-          checkedColor={OC_COLOR}
+          color={OC_COLOR}
           onToggle={_onToggleTop}
         />
        </div>

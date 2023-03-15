@@ -63,7 +63,7 @@ RowCheckBox.propTypes = {
   style: PropTypes.object,
   caption: PropTypes.string,
   captionStyle: PropTypes.object,
-  checkedColor: PropTypes.string,
+  color: PropTypes.string,
 
   initValue: PropTypes.bool,
   value: PropTypes.bool,

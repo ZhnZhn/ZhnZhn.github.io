@@ -42,14 +42,14 @@ const _crCheckBoxItem = (item, index, _ref) => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox2.default, {
       initialValue: _crChbToggleInitValue(item.isRow),
       style: S_CHB_TOGGLE,
-      checkedColor: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
+      color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
       caption: item.caption,
       captionStyle: S_CAPTION,
       onToggle: () => onToggle(crIsId(item.id))
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       initValue: index === 0,
       style: S_CHB_CAPTION,
-      checkedColor: _Style.TOGGLE_CAPTION_CHECKBOX_COLOR,
+      color: _Style.TOGGLE_CAPTION_CHECKBOX_COLOR,
       onCheck: () => onCheckCaption(index),
       onUnCheck: () => onUnCheckCaption(index)
     })]
@@ -92,13 +92,13 @@ const ModalToggle = _ref2 => {
     }), isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       value: isShowFd,
       style: _Style.S_ROW_CHB,
-      checkedColor: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
+      color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
       caption: "From Date",
       onToggle: onToggleFd
     }, "isShowFd"), isCh && onToggleChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       value: isShowChart,
       style: _Style.S_ROW_CHB,
-      checkedColor: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
+      color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
       caption: "Chart",
       onToggle: onToggleChart
     }, "isShowChart")]

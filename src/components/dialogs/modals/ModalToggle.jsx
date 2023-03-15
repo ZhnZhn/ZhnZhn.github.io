@@ -47,7 +47,7 @@ const _crCheckBoxItem = (
     <RowCheckBox2
       initialValue={_crChbToggleInitValue(item.isRow)}
       style={S_CHB_TOGGLE}
-      checkedColor={TOGGLE_INPUT_CHECKBOX_COLOR}
+      color={TOGGLE_INPUT_CHECKBOX_COLOR}
       caption={item.caption}
       captionStyle={S_CAPTION}
       onToggle={() => onToggle(crIsId(item.id))}
@@ -55,7 +55,7 @@ const _crCheckBoxItem = (
     <RowCheckBox1
       initValue={index === 0}
       style={S_CHB_CAPTION}
-      checkedColor={TOGGLE_CAPTION_CHECKBOX_COLOR}
+      color={TOGGLE_CAPTION_CHECKBOX_COLOR}
       onCheck={() => onCheckCaption(index)}
       onUnCheck={() => onUnCheckCaption(index)}
     />
@@ -98,7 +98,7 @@ const ModalToggle = ({
         key="isShowFd"
         value={isShowFd}
         style={S_ROW_CHB}
-        checkedColor={TOGGLE_INPUT_CHECKBOX_COLOR}
+        color={TOGGLE_INPUT_CHECKBOX_COLOR}
         caption="From Date"
         onToggle={onToggleFd}
       />
@@ -107,7 +107,7 @@ const ModalToggle = ({
         key="isShowChart"
         value={isShowChart}
         style={S_ROW_CHB}
-        checkedColor={TOGGLE_INPUT_CHECKBOX_COLOR}
+        color={TOGGLE_INPUT_CHECKBOX_COLOR}
         caption="Chart"
         onToggle={onToggleChart}
       />

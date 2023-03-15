@@ -25,7 +25,7 @@ const ModalInputToggle = _ref => {
     onClose: onClose,
     children: (configs || []).map(config => /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       style: _Style.S_ROW_CHB,
-      checkedColor: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
+      color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
       caption: config[0],
       value: config[1],
       onToggle: config[2]

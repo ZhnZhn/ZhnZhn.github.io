@@ -9,7 +9,7 @@ var _SvgCheckBox = _interopRequireDefault(require("../../zhn/SvgCheckBox"));
 var _useRowCheckBox = _interopRequireDefault(require("./useRowCheckBox"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_BT_CHB = 'bt-chb',
-  CHECKED_COLOR = '#1b2836',
+  COLOR = '#1b2836',
   S_ROOT = {
     padding: '6px 0 0 16px'
   },
@@ -31,12 +31,12 @@ const RowCheckBoxView = _ref => {
     value,
     caption,
     captionStyle,
-    checkedColor = CHECKED_COLOR,
+    color = COLOR,
     hCheck,
     hUnCheck
   } = _ref;
   const [TS, _hToggle] = (0, _useRowCheckBox.default)(value, hCheck, hUnCheck),
-    _captionStyle = crCaptionStyle(captionStyle, checkedColor, value);
+    _captionStyle = crCaptionStyle(captionStyle, color, value);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       ...S_ROOT,
@@ -44,7 +44,7 @@ const RowCheckBoxView = _ref => {
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
       value: value,
-      color: checkedColor,
+      color: color,
       checkedColor: TS.CHECKED_COLOR,
       onCheck: hCheck,
       onUnCheck: hUnCheck

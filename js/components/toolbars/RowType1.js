@@ -165,7 +165,7 @@ const RowType1 = _ref3 => {
         style: S1_COLUMN,
         caption: "Column",
         captionStyle: S_PL_6,
-        checkedColor: OC_COLOR,
+        color: OC_COLOR,
         onToggle: _onToggleColumn
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: S_ROW_2,
@@ -185,7 +185,7 @@ const RowType1 = _ref3 => {
           style: S1_ON_TOP,
           caption: "OnTop",
           captionStyle: S_PL_6,
-          checkedColor: OC_COLOR,
+          color: OC_COLOR,
           onToggle: _onToggleTop
         })]
       })]

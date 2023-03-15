@@ -6,7 +6,7 @@ import SvgCheckBox from '../../zhn/SvgCheckBox';
 import useRowCheckBox from './useRowCheckBox';
 
 const CL_BT_CHB = 'bt-chb'
-, CHECKED_COLOR = '#1b2836'
+, COLOR = '#1b2836'
 
 , S_ROOT = { padding: '6px 0 0 16px' }
 , S_CAPTION = {
@@ -34,7 +34,7 @@ const RowCheckBoxView = ({
   value,
   caption,
   captionStyle,
-  checkedColor=CHECKED_COLOR,
+  color=COLOR,
   hCheck,
   hUnCheck
 }) => {
@@ -48,7 +48,7 @@ const RowCheckBoxView = ({
   )
   , _captionStyle = crCaptionStyle(
      captionStyle,
-     checkedColor,
+     color,
      value
   );
 
@@ -56,7 +56,7 @@ const RowCheckBoxView = ({
     <div style={{...S_ROOT, ...style}}>
       <SvgCheckBox
         value={value}
-        color={checkedColor}
+        color={color}
         checkedColor={TS.CHECKED_COLOR}
         onCheck={hCheck}
         onUnCheck={hUnCheck}

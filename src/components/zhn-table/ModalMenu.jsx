@@ -22,7 +22,7 @@ const _renderHeaders = (
     return (<D.RowCheckBox1
       key={h.name}
       style={S_ROW}
-      checkedColor="black"
+      color="black"
       caption={h.name}
       value={!h.isHide}
       onToggle={() => onToggle(index+1)}
@@ -46,7 +46,7 @@ const ModalMenu = ({
    >
      <D.RowCheckBox1
        style={S_ROW}
-       checkedColor="black"
+       color="black"
        caption="withStripLines"
        value={isGridLine}
        onToggle={onToggleGrid}

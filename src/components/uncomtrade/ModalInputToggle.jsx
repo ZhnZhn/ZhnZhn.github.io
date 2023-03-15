@@ -28,7 +28,7 @@ const ModalInputToggle = ({
       <RowCheckBox1
         key={config[0]}
         style={S_ROW_CHB}
-        checkedColor={TOGGLE_INPUT_CHECKBOX_COLOR}
+        color={TOGGLE_INPUT_CHECKBOX_COLOR}
         caption={config[0]}
         value={config[1]}
         onToggle={config[2]}

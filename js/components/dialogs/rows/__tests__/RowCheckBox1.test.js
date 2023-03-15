@@ -18,8 +18,8 @@ const _helperStyledFalse = (bt, chbox) => {
   expect(bt).toHaveStyle("color: grey");
   expect(chbox).toHaveAttribute('aria-checked', "false");
 };
-const _helperStyledTrue = (checkedColor, bt, chbox) => {
-  expect(bt).toHaveStyle("color: " + checkedColor);
+const _helperStyledTrue = (color, bt, chbox) => {
+  expect(bt).toHaveStyle("color: " + color);
   expect(chbox).toHaveAttribute('aria-checked', "true");
 };
 const _crTestArtifacts = checkedColor => {
@@ -38,11 +38,11 @@ describe('RowCheckBox1', () => {
   test('should render RowCheckBox1 with onToggle handler', async () => {
     const initValue = false,
       caption = 'CheckBox',
-      checkedColor = '#222222',
+      color = '#222222',
       onToggle = jest.fn(),
       props = {
         initValue,
-        checkedColor,
+        color,
         caption,
         onToggle
       },
@@ -57,7 +57,7 @@ describe('RowCheckBox1', () => {
         chbox,
         _testStyledFalse,
         _testStyledTrue
-      } = _crTestArtifacts(checkedColor),
+      } = _crTestArtifacts(color),
       _testOnToggleCalled = (times, argValue) => {
         expect(onToggle).toHaveBeenCalledTimes(times);
         expect(onToggle.mock.calls[times - 1][0]).toBe(argValue);
@@ -96,13 +96,13 @@ describe('RowCheckBox1', () => {
   test('should render RowCheckBox1 with onCheck, onUnCheck handlers', async () => {
     const initValue = false,
       caption = 'CheckBox',
-      checkedColor = '#222222',
+      color = '#222222',
       onCheck = jest.fn(),
       onUnCheck = jest.fn(),
       onToggle = jest.fn(),
       props = {
         initValue,
-        checkedColor,
+        color,
         caption,
         onCheck,
         onUnCheck,
@@ -119,7 +119,7 @@ describe('RowCheckBox1', () => {
         chbox,
         _testStyledFalse,
         _testStyledTrue
-      } = _crTestArtifacts(checkedColor),
+      } = _crTestArtifacts(color),
       _testCalled = (fn, times) => {
         expect(fn).toHaveBeenCalledTimes(times);
         expect(fn.mock.calls[times - 1][0]).toBe(void 0);

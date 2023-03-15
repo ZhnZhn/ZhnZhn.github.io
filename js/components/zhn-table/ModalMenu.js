@@ -22,7 +22,7 @@ const _renderHeaders = (headers, onToggle) => {
   return restHeader.map((h, index) => {
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox1, {
       style: S_ROW,
-      checkedColor: "black",
+      color: "black",
       caption: h.name,
       value: !h.isHide,
       onToggle: () => onToggle(index + 1)
@@ -45,7 +45,7 @@ const ModalMenu = _ref => {
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox1, {
       style: S_ROW,
-      checkedColor: "black",
+      color: "black",
       caption: "withStripLines",
       value: isGridLine,
       onToggle: onToggleGrid
