@@ -1,3 +1,7 @@
+import {
+  crStyle2
+} from '../zhn-utils/crStyle';
+
 //Dialogs, DatesFragments
 const S_ROW = {
   display: 'flex',
@@ -29,31 +33,35 @@ const S_ROW = {
 export const S_DIALOG_CAPTION = {...S_LABEL}
 export const S_DIALOG_ROW = {...S_ROW}
 
+//[rowStyle, labelStyle]
 export const crRowLabelStyle = (
   isShowLabels=true,
   captionStyle
-) => {
-  const rowStyle = isShowLabels
-     ? {...S_ROW}
-     : {...S_ROW, ...S_ROW_SHORT}
-  , labelStyle = isShowLabels
-     ? {...S_LABEL, ...captionStyle}
-     : {...S_LABEL, ...S_NONE};
-  return { rowStyle, labelStyle };
-}
+) => [
+  crStyle2(
+    {...S_ROW},
+    isShowLabels && S_ROW_SHORT
+  ),
+  crStyle2(
+    {...S_LABEL},
+    isShowLabels ? captionStyle : S_NONE
+  )
+];
 
+//[rowStyle, labelStyle]
 export const crRowOcSelectStyle = (
   isShowLabels=true,
   captionStyle
-) => {
-  const rowStyle = isShowLabels
-     ? {...S_ROW_OC}
-     : {...S_ROW_OC, ...S_ROW_OC_SHORT}
-  , labelStyle = isShowLabels
-     ? {...S_LABEL, ...captionStyle}
-     : {...S_LABEL, ...S_NONE};
-  return { rowStyle, labelStyle };
-}
+) => [
+  crStyle2(
+    {...S_ROW_OC},
+    isShowLabels && S_ROW_OC_SHORT
+  ),
+  crStyle2(
+    {...S_LABEL},
+    isShowLabels ? captionStyle : S_NONE
+  )
+];
 
 //ValidationMessagesFragment
 export const S_VM_CONT = {
