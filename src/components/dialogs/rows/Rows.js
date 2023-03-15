@@ -4,7 +4,8 @@ import RowChart from './RowChart';
 import RowChartDate from './RowChartDate';
 
 import RowPattern from './RowPattern';
-import RowCheckBox from './RowCheckBox';
+import RowCheckBox1 from './RowCheckBox1';
+import RowCheckBox2 from './RowCheckBox2';
 import RowText from './RowText';
 import RowDate from './RowDate';
 
@@ -22,7 +23,8 @@ const Rows = {
 
   RowPattern,
   RowDate,
-  RowCheckBox,
+  RowCheckBox1,
+  RowCheckBox2,
   RowText
 };
 

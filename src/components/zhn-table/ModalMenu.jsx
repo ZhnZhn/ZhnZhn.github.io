@@ -19,7 +19,7 @@ const _renderHeaders = (
   const [rank, ...restHeader] = headers;
   /*eslint-enable no-unused-vars*/
   return restHeader.map((h, index) => {
-    return (<D.RowCheckBox
+    return (<D.RowCheckBox1
       key={h.name}
       style={S_ROW}
       checkedColor="black"
@@ -44,7 +44,7 @@ const ModalMenu = ({
      isShow={isShow}
      onClose={onClose}
    >
-     <D.RowCheckBox
+     <D.RowCheckBox1
        style={S_ROW}
        checkedColor="black"
        caption="withStripLines"

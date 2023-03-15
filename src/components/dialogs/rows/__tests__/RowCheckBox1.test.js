@@ -4,7 +4,7 @@
 "use strict";
 import '@testing-library/jest-dom';
 import zhnUtils from '../../../_test-utils/zhn-test-utils';
-import RowCheckBox from '../RowCheckBox';
+import RowCheckBox1 from '../RowCheckBox1';
 
 const {
   render,
@@ -30,8 +30,8 @@ const _crTestArtifacts = (checkedColor) => {
   return { bt, chbox, _testStyledFalse, _testStyledTrue};
 };
 
-describe('RowCheckBox', ()=>{
-  test('should render RowCheckBox with onToggle handler', async ()=>{
+describe('RowCheckBox1', ()=>{
+  test('should render RowCheckBox1 with onToggle handler', async ()=>{
     const initValue = false
     , caption = 'CheckBox'
     , checkedColor = '#222222'
@@ -40,7 +40,7 @@ describe('RowCheckBox', ()=>{
     , {
       user,
       rerender
-    } = setupUserEvent(wrapByUiThemeProvider(<RowCheckBox {...props} />))
+    } = setupUserEvent(wrapByUiThemeProvider(<RowCheckBox1 {...props} />))
     , {
         bt, chbox, _testStyledFalse, _testStyledTrue
       } = _crTestArtifacts(checkedColor)
@@ -73,10 +73,10 @@ describe('RowCheckBox', ()=>{
     _testOnToggleCalled(4, false)
 
     //4 After parent rerender have previous value
-    rerender(wrapByUiThemeProvider(<RowCheckBox {...props} initValue={true} />))
+    rerender(wrapByUiThemeProvider(<RowCheckBox1 {...props} initValue={true} />))
     _testStyledFalse()
   })
-  test('should render RowCheckBox with onCheck, onUnCheck handlers', async ()=>{
+  test('should render RowCheckBox1 with onCheck, onUnCheck handlers', async ()=>{
     const initValue = false
     , caption = 'CheckBox'
     , checkedColor = '#222222'
@@ -90,7 +90,7 @@ describe('RowCheckBox', ()=>{
     , {
       user,
       rerender
-    } = setupUserEvent(wrapByUiThemeProvider(<RowCheckBox {...props} />))
+    } = setupUserEvent(wrapByUiThemeProvider(<RowCheckBox1 {...props} />))
     , {
         bt, chbox, _testStyledFalse, _testStyledTrue
       } = _crTestArtifacts(checkedColor)
@@ -124,12 +124,12 @@ describe('RowCheckBox', ()=>{
     _testCalled(onUnCheck, 2)
 
     //4 After parent rerender have previous value
-    rerender(wrapByUiThemeProvider(<RowCheckBox {...props} initValue={true} />))
+    rerender(wrapByUiThemeProvider(<RowCheckBox1 {...props} initValue={true} />))
     _testStyledFalse()
 
   })
   test('should not render button for empty caption',()=>{
-    const { rerender } = render(wrapByUiThemeProvider(<RowCheckBox />))
+    const { rerender } = render(wrapByUiThemeProvider(<RowCheckBox1 />))
     , _testToBeInDocument = () => {
       const chbox = screen.getByRole('checkbox')
       , bt = screen.queryByRole('button');
@@ -139,7 +139,7 @@ describe('RowCheckBox', ()=>{
 
     _testToBeInDocument()
 
-    rerender(wrapByUiThemeProvider(<RowCheckBox />))
+    rerender(wrapByUiThemeProvider(<RowCheckBox1 />))
     _testToBeInDocument()
   })
 })

@@ -12,15 +12,16 @@ var _jsxRuntime = require("react/jsx-runtime");
 const _isFn = fn => typeof fn == 'function',
   _isUndefined = v => typeof v === 'undefined',
   _isBool = bool => typeof bool === 'boolean';
-const RowCheckBox = props => {
-  const {
-      value,
-      initValue,
-      onCheck,
-      onUnCheck,
-      onToggle
-    } = props,
-    [valueState, setValueState] = (0, _uiApi.useState)(() => _isUndefined(value) ? !!initValue : void 0),
+const RowCheckBox1 = _ref => {
+  let {
+    value,
+    initValue,
+    onCheck,
+    onUnCheck,
+    onToggle,
+    ...restProps
+  } = _ref;
+  const [valueState, setValueState] = (0, _uiApi.useState)(() => _isUndefined(value) ? !!initValue : void 0),
     _isValueState = (0, _useRefInit.default)(() => _isBool(valueState)),
     _value = _isValueState ? valueState : value,
     _hCheck = (0, _uiApi.useCallback)(() => {
@@ -44,10 +45,7 @@ const RowCheckBox = props => {
       }
     }, [onUnCheck, onToggle, _isValueState]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBoxView.default, {
-    style: props.style,
-    caption: props.caption,
-    captionStyle: props.captionStyle,
-    checkedColor: props.checkedColor,
+    ...restProps,
     value: _value,
     hCheck: _hCheck,
     hUnCheck: _hUnCheck
@@ -57,16 +55,17 @@ const RowCheckBox = props => {
 /*
 RowCheckBox.propTypes = {
   style: PropTypes.object,
-  checkedColor: PropTypes.string,
-  initValue: PropTypes.bool,
-  value: PropTypes.bool,
   caption: PropTypes.string,
   captionStyle: PropTypes.object,
+  checkedColor: PropTypes.string,
+
+  initValue: PropTypes.bool,
+  value: PropTypes.bool,
   onCheck: PropTypes.func,
   onUnCheck: PropTypes.func,
   onToggle: PropTypes.func
 }
 */
-var _default = RowCheckBox;
+var _default = RowCheckBox1;
 exports.default = _default;
-//# sourceMappingURL=RowCheckBox.js.map
+//# sourceMappingURL=RowCheckBox1.js.map

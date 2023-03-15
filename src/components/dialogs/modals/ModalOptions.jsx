@@ -1,5 +1,5 @@
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
-import RowCheckBox from '../rows/RowCheckBox2';
+import RowCheckBox2 from '../rows/RowCheckBox2';
 import {
   CL_POPUP_MENU,
   S_MODAL_POPUP,
@@ -26,8 +26,8 @@ const ModalOptions = ({
     onClose={onClose}
   >
     {ROW_CHECKBOX_CONFIGS.map(([id, caption]) => (
-       <RowCheckBox
-          key={id}        
+       <RowCheckBox2
+          key={id}
           style={S_ROW_CHB}
           caption={caption}
           onToggle={toggleOption}

@@ -173,8 +173,7 @@ const AlphaIndicatorDialog = memoIsShow(({
            errorMsg="Number in range 250-2500"
         />
       </D.ShowHide>
-      <D.RowCheckBox
-         initValue={false}
+      <D.RowCheckBox1         
          caption="Add Seria with Second YAxis"
          onCheck={_hCheckSecondYAxis}
          onUnCheck={_hUnCheckSecondYAxis}

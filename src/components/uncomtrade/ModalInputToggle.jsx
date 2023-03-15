@@ -1,5 +1,5 @@
 import ModalPopup from '../zhn-moleculs/ModalPopup';
-import RowCheckBox from '../dialogs/rows/RowCheckBox';
+import RowCheckBox1 from '../dialogs/rows/RowCheckBox1';
 import {
   CL_POPUP_MENU,
   S_MODAL_POPUP,
@@ -25,7 +25,7 @@ const ModalInputToggle = ({
     onClose={onClose}
   >
     {(configs || []).map(config => (
-      <RowCheckBox
+      <RowCheckBox1
         key={config[0]}
         style={S_ROW_CHB}
         checkedColor={TOGGLE_INPUT_CHECKBOX_COLOR}

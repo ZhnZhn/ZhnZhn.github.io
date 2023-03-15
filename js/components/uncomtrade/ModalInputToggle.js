@@ -1,23 +1,17 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
-
-var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox"));
-
+var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox1"));
 var _Style = require("../dialogs/modals/Style");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
-const S_MODAL = { ..._Style.S_MODAL_POPUP,
+const S_MODAL = {
+  ..._Style.S_MODAL_POPUP,
   lineHeight: 1.6,
   padding: '6px 14px'
 };
-
 const ModalInputToggle = _ref => {
   let {
     isShow,
@@ -38,7 +32,6 @@ const ModalInputToggle = _ref => {
     }, config[0]))
   });
 };
-
 var _default = ModalInputToggle;
 exports.default = _default;
 //# sourceMappingURL=ModalInputToggle.js.map

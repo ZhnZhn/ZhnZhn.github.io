@@ -20,7 +20,7 @@ const _renderHeaders = (headers, onToggle) => {
   const [rank, ...restHeader] = headers;
   /*eslint-enable no-unused-vars*/
   return restHeader.map((h, index) => {
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox1, {
       style: S_ROW,
       checkedColor: "black",
       caption: h.name,
@@ -43,7 +43,7 @@ const ModalMenu = _ref => {
     style: style,
     isShow: isShow,
     onClose: onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox1, {
       style: S_ROW,
       checkedColor: "black",
       caption: "withStripLines",

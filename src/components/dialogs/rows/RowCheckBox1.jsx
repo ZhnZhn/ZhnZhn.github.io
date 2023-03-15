@@ -11,15 +11,15 @@ const _isFn = fn => typeof fn == 'function'
 , _isUndefined = v => typeof v === 'undefined'
 , _isBool = bool => typeof bool === 'boolean';
 
-const RowCheckBox = (props) => {
-  const {
-    value,
-    initValue,
-    onCheck,
-    onUnCheck,
-    onToggle
-  } = props
-  , [
+const RowCheckBox1 = ({
+  value,
+  initValue,
+  onCheck,
+  onUnCheck,
+  onToggle,
+  ...restProps
+}) => {
+  const [
     valueState,
     setValueState
   ] = useState(
@@ -50,10 +50,7 @@ const RowCheckBox = (props) => {
 
   return (
     <RowCheckBoxView
-      style={props.style}
-      caption={props.caption}
-      captionStyle={props.captionStyle}
-      checkedColor={props.checkedColor}
+      {...restProps}
       value={_value}
       hCheck={_hCheck}
       hUnCheck={_hUnCheck}
@@ -64,15 +61,16 @@ const RowCheckBox = (props) => {
 /*
 RowCheckBox.propTypes = {
   style: PropTypes.object,
-  checkedColor: PropTypes.string,
-  initValue: PropTypes.bool,
-  value: PropTypes.bool,
   caption: PropTypes.string,
   captionStyle: PropTypes.object,
+  checkedColor: PropTypes.string,
+
+  initValue: PropTypes.bool,
+  value: PropTypes.bool,
   onCheck: PropTypes.func,
   onUnCheck: PropTypes.func,
   onToggle: PropTypes.func
 }
 */
 
-export default RowCheckBox
+export default RowCheckBox1

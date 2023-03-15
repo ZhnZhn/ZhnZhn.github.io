@@ -6,16 +6,17 @@ import {
 
 import RowCheckBoxView from './RowCheckBoxView';
 
-const RowCheckBox2 = (props) => {
-  const {
-    onToggle,
-    id
-  } = props
-  , [
+const RowCheckBox2 = ({
+  initialValue,
+  onToggle,
+  id,
+  ...restProps
+}) => {
+  const [
     _value,
     _setValue
   ] = useState(
-    ()=>!!props.initialValue
+    ()=>!!initialValue
   )
   , [
     _hCheck,
@@ -33,10 +34,7 @@ const RowCheckBox2 = (props) => {
 
   return (
      <RowCheckBoxView
-       style={props.style}
-       caption={props.caption}
-       captionStyle={props.captionStyle}
-       checkedColor={props.checkedColor}
+       {...restProps}
        value={_value}
        hCheck={_hCheck}
        hUnCheck={_hUnCheck}
@@ -47,10 +45,11 @@ const RowCheckBox2 = (props) => {
 /*
 RowCheckBox.propTypes = {
   style: PropTypes.object,
-  checkedColor: PropTypes.string,
-  initialValue: PropTypes.bool,
   caption: PropTypes.string,
   captionStyle: PropTypes.object,
+  checkedColor: PropTypes.string,
+
+  initialValue: PropTypes.bool,
   onToggle: PropTypes.func
   id: PropTypes.string
 }

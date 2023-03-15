@@ -184,7 +184,7 @@ const DialogType5 = memoIsShow((
              onSelect={setChartType}
           />
         }
-        <D.RowCheckBox
+        <D.RowCheckBox1
           initValue={INITIAL_IS_SECOND_YAXIS}
           caption="Add Seria with Second YAxis"
           onCheck={hCheckSecondYAxis}

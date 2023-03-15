@@ -8,12 +8,14 @@ var _RowCheckBoxView = _interopRequireDefault(require("./RowCheckBoxView"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const RowCheckBox2 = props => {
-  const {
-      onToggle,
-      id
-    } = props,
-    [_value, _setValue] = (0, _uiApi.useState)(() => !!props.initialValue),
+const RowCheckBox2 = _ref => {
+  let {
+    initialValue,
+    onToggle,
+    id,
+    ...restProps
+  } = _ref;
+  const [_value, _setValue] = (0, _uiApi.useState)(() => !!initialValue),
     [_hCheck, _hUnCheck] = (0, _uiApi.useMemo)(() => [() => {
       onToggle(true, id);
       _setValue(true);
@@ -22,10 +24,7 @@ const RowCheckBox2 = props => {
       _setValue(false);
     }], [onToggle, id]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBoxView.default, {
-    style: props.style,
-    caption: props.caption,
-    captionStyle: props.captionStyle,
-    checkedColor: props.checkedColor,
+    ...restProps,
     value: _value,
     hCheck: _hCheck,
     hUnCheck: _hUnCheck
@@ -35,10 +34,11 @@ const RowCheckBox2 = props => {
 /*
 RowCheckBox.propTypes = {
   style: PropTypes.object,
-  checkedColor: PropTypes.string,
-  initialValue: PropTypes.bool,
   caption: PropTypes.string,
   captionStyle: PropTypes.object,
+  checkedColor: PropTypes.string,
+
+  initialValue: PropTypes.bool,
   onToggle: PropTypes.func
   id: PropTypes.string
 }

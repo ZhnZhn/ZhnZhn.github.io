@@ -1,6 +1,6 @@
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import ItemStack from '../../zhn/ItemStack';
-import RowCheckBox from '../rows/RowCheckBox';
+import RowCheckBox1 from '../rows/RowCheckBox1';
 import RowCheckBox2 from '../rows/RowCheckBox2';
 import {
   CL_POPUP_MENU,
@@ -52,7 +52,7 @@ const _crCheckBoxItem = (
       captionStyle={S_CAPTION}
       onToggle={() => onToggle(crIsId(item.id))}
     />
-    <RowCheckBox
+    <RowCheckBox1
       initValue={index === 0}
       style={S_CHB_CAPTION}
       checkedColor={TOGGLE_CAPTION_CHECKBOX_COLOR}
@@ -94,7 +94,7 @@ const ModalToggle = ({
       onCheckCaption={onCheckCaption}
       onUnCheckCaption={onUnCheckCaption}
     />
-    { isFd && <RowCheckBox
+    { isFd && <RowCheckBox1
         key="isShowFd"
         value={isShowFd}
         style={S_ROW_CHB}
@@ -103,7 +103,7 @@ const ModalToggle = ({
         onToggle={onToggleFd}
       />
     }
-    { isCh && onToggleChart && <RowCheckBox
+    { isCh && onToggleChart && <RowCheckBox1
         key="isShowChart"
         value={isShowChart}
         style={S_ROW_CHB}

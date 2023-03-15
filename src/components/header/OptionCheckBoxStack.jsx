@@ -1,5 +1,5 @@
 import getFnByPropName from '../../utils/getFnByPropName';
-import RowCheckBox from '../dialogs/rows/RowCheckBox';
+import RowCheckBox1 from '../dialogs/rows/RowCheckBox1';
 
 const OptionCheckBoxStack = ({
   data,
@@ -10,7 +10,7 @@ const OptionCheckBoxStack = ({
    mode
  ) => getFnByPropName(data, fnName)(mode);
  return configs.map(([caption, id]) => (
-    <RowCheckBox
+    <RowCheckBox1
       key={caption}
       initValue={getFnByPropName(data, id, false)()}
       caption={caption}
