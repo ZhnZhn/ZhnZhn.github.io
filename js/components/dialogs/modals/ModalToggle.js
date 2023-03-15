@@ -7,6 +7,7 @@ var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"
 var _ItemStack = _interopRequireDefault(require("../../zhn/ItemStack"));
 var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox1"));
 var _RowCheckBox2 = _interopRequireDefault(require("../rows/RowCheckBox2"));
+var _RowCheckBox3 = _interopRequireDefault(require("../rows/RowCheckBox3"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW = {
@@ -47,9 +48,9 @@ const _crCheckBoxItem = (item, index, _ref) => {
       captionStyle: S_CAPTION,
       onToggle: () => onToggle(crIsId(item.id))
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-      initValue: index === 0,
       style: S_CHB_CAPTION,
       color: _Style.TOGGLE_CAPTION_CHECKBOX_COLOR,
+      initialValue: index === 0,
       onCheck: () => onCheckCaption(index),
       onUnCheck: () => onUnCheckCaption(index)
     })]
@@ -89,17 +90,17 @@ const ModalToggle = _ref2 => {
       onToggle: onToggle,
       onCheckCaption: onCheckCaption,
       onUnCheckCaption: onUnCheckCaption
-    }), isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-      value: isShowFd,
+    }), isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox3.default, {
       style: _Style.S_ROW_CHB,
       color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
       caption: "From Date",
+      value: isShowFd,
       onToggle: onToggleFd
-    }, "isShowFd"), isCh && onToggleChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-      value: isShowChart,
+    }, "isShowFd"), isCh && onToggleChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox3.default, {
       style: _Style.S_ROW_CHB,
       color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
       caption: "Chart",
+      value: isShowChart,
       onToggle: onToggleChart
     }, "isShowChart")]
   });

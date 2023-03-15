@@ -1,5 +1,5 @@
 import ModalPopup from '../zhn-moleculs/ModalPopup';
-import D from '../dialogs/DialogCell';
+import RowCheckBox3 from '../dialogs/rows/RowCheckBox3';
 
 const S_ROW = {
   paddingLeft: 0,
@@ -18,8 +18,8 @@ const _renderHeaders = (
   /*eslint-disable no-unused-vars*/
   const [rank, ...restHeader] = headers;
   /*eslint-enable no-unused-vars*/
-  return restHeader.map((h, index) => {
-    return (<D.RowCheckBox1
+  return restHeader.map((h, index) => (
+    <RowCheckBox3
       key={h.name}
       style={S_ROW}
       color="black"
@@ -27,7 +27,7 @@ const _renderHeaders = (
       value={!h.isHide}
       onToggle={() => onToggle(index+1)}
     />
-  )})
+  ))
 }
 
 const ModalMenu = ({
@@ -44,7 +44,7 @@ const ModalMenu = ({
      isShow={isShow}
      onClose={onClose}
    >
-     <D.RowCheckBox1
+     <RowCheckBox3
        style={S_ROW}
        color="black"
        caption="withStripLines"

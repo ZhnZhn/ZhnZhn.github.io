@@ -127,8 +127,8 @@ const DialogType4A = memoIsShow((
        </D.ShowHide>
        <D.ShowHide isShow={isShowOptions}>
          <D.RowCheckBox1
-           initValue={INITIAL_IS_SECOND_YAXIS}
            caption="Add Seria with Second YAxis"
+           initialValue={INITIAL_IS_SECOND_YAXIS}           
            onCheck={hCheckSecondYAxis}
            onUnCheck={hUnCheckSecondYAxis}
          />

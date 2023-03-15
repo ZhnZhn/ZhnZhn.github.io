@@ -146,8 +146,8 @@ const DialogType5 = (0, _memoIsShow.default)(props => {
         options: CHART_TYPE_OPTIONS,
         onSelect: setChartType
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox1, {
-        initValue: INITIAL_IS_SECOND_YAXIS,
         caption: "Add Seria with Second YAxis",
+        initialValue: INITIAL_IS_SECOND_YAXIS,
         onCheck: hCheckSecondYAxis,
         onUnCheck: hUnCheckSecondYAxis
       })]

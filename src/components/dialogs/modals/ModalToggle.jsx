@@ -1,7 +1,10 @@
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import ItemStack from '../../zhn/ItemStack';
+
 import RowCheckBox1 from '../rows/RowCheckBox1';
 import RowCheckBox2 from '../rows/RowCheckBox2';
+import RowCheckBox3 from '../rows/RowCheckBox3';
+
 import {
   CL_POPUP_MENU,
   S_MODAL_POPUP,
@@ -52,10 +55,10 @@ const _crCheckBoxItem = (
       captionStyle={S_CAPTION}
       onToggle={() => onToggle(crIsId(item.id))}
     />
-    <RowCheckBox1
-      initValue={index === 0}
+    <RowCheckBox1      
       style={S_CHB_CAPTION}
       color={TOGGLE_CAPTION_CHECKBOX_COLOR}
+      initialValue={index === 0}
       onCheck={() => onCheckCaption(index)}
       onUnCheck={() => onUnCheckCaption(index)}
     />
@@ -94,21 +97,21 @@ const ModalToggle = ({
       onCheckCaption={onCheckCaption}
       onUnCheckCaption={onUnCheckCaption}
     />
-    { isFd && <RowCheckBox1
+    { isFd && <RowCheckBox3
         key="isShowFd"
-        value={isShowFd}
         style={S_ROW_CHB}
         color={TOGGLE_INPUT_CHECKBOX_COLOR}
         caption="From Date"
+        value={isShowFd}
         onToggle={onToggleFd}
       />
     }
-    { isCh && onToggleChart && <RowCheckBox1
+    { isCh && onToggleChart && <RowCheckBox3
         key="isShowChart"
-        value={isShowChart}
         style={S_ROW_CHB}
         color={TOGGLE_INPUT_CHECKBOX_COLOR}
         caption="Chart"
+        value={isShowChart}
         onToggle={onToggleChart}
       />
     }

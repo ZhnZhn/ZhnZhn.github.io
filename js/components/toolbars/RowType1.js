@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox2"));
 var _SvgPlus = _interopRequireDefault(require("../zhn/SvgPlus"));
 var _SvgMinus = _interopRequireDefault(require("../zhn/SvgMinus"));
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
@@ -160,12 +161,12 @@ const RowType1 = _ref3 => {
         style: S_INLINE,
         initValue: DF_COLOR,
         onEnter: _onColor
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox2, {
-        initialValue: true,
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
         style: S1_COLUMN,
         caption: "Column",
         captionStyle: S_PL_6,
         color: OC_COLOR,
+        initialValue: true,
         onToggle: _onToggleColumn
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: S_ROW_2,
@@ -181,7 +182,7 @@ const RowType1 = _ref3 => {
           maxLength: 1,
           onChange: _onChangeSeria,
           onEnter: _onPlus
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox2, {
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
           style: S1_ON_TOP,
           caption: "OnTop",
           captionStyle: S_PL_6,

@@ -5,6 +5,7 @@ import {
 } from '../uiApi';
 
 import D from '../dialogs/DialogCell';
+import RowCheckBox2 from '../dialogs/rows/RowCheckBox2';
 
 import SvgPlus from '../zhn/SvgPlus';
 import SvgMinus from '../zhn/SvgMinus';
@@ -158,12 +159,12 @@ const RowType1 = ({
         initValue={DF_COLOR}
         onEnter={_onColor}
       />
-      <D.RowCheckBox2
-        initialValue={true}
+      <RowCheckBox2
         style={S1_COLUMN}
         caption="Column"
         captionStyle={S_PL_6}
         color={OC_COLOR}
+        initialValue={true}
         onToggle={_onToggleColumn}
       />
       <div style={S_ROW_2}>
@@ -180,7 +181,7 @@ const RowType1 = ({
           onChange={_onChangeSeria}
           onEnter={_onPlus}
         />
-        <D.RowCheckBox2
+        <RowCheckBox2
           style={S1_ON_TOP}
           caption="OnTop"
           captionStyle={S_PL_6}

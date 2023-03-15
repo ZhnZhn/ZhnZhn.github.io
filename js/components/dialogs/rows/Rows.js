@@ -9,7 +9,6 @@ var _RowChart = _interopRequireDefault(require("./RowChart"));
 var _RowChartDate = _interopRequireDefault(require("./RowChartDate"));
 var _RowPattern = _interopRequireDefault(require("./RowPattern"));
 var _RowCheckBox = _interopRequireDefault(require("./RowCheckBox1"));
-var _RowCheckBox2 = _interopRequireDefault(require("./RowCheckBox2"));
 var _RowText = _interopRequireDefault(require("./RowText"));
 var _RowDate = _interopRequireDefault(require("./RowDate"));
 var _DatesFragment = _interopRequireDefault(require("./DatesFragment"));
@@ -24,7 +23,6 @@ const Rows = {
   RowPattern: _RowPattern.default,
   RowDate: _RowDate.default,
   RowCheckBox1: _RowCheckBox.default,
-  RowCheckBox2: _RowCheckBox2.default,
   RowText: _RowText.default
 };
 var _default = Rows;

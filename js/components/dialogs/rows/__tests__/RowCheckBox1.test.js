@@ -36,15 +36,13 @@ const _crTestArtifacts = checkedColor => {
 };
 describe('RowCheckBox1', () => {
   test('should render RowCheckBox1 with onToggle handler', async () => {
-    const initValue = false,
+    const initialValue = false,
       caption = 'CheckBox',
       color = '#222222',
-      onToggle = jest.fn(),
       props = {
-        initValue,
+        initialValue,
         color,
-        caption,
-        onToggle
+        caption
       },
       {
         user,
@@ -57,11 +55,7 @@ describe('RowCheckBox1', () => {
         chbox,
         _testStyledFalse,
         _testStyledTrue
-      } = _crTestArtifacts(color),
-      _testOnToggleCalled = (times, argValue) => {
-        expect(onToggle).toHaveBeenCalledTimes(times);
-        expect(onToggle.mock.calls[times - 1][0]).toBe(argValue);
-      };
+      } = _crTestArtifacts(color);
 
     //1 Test initial values
     _testStyledFalse();
@@ -70,43 +64,39 @@ describe('RowCheckBox1', () => {
     //2.1 From false
     await user.click(bt);
     _testStyledTrue();
-    _testOnToggleCalled(1, true);
+
     //2.2 From true
     await user.click(bt);
     _testStyledFalse();
-    _testOnToggleCalled(2, false);
 
     //3 Test click on checkbox
     //3.1 From false
     await user.click(chbox);
     _testStyledTrue();
-    _testOnToggleCalled(3, true);
+
     //3.2 From true
     await user.click(chbox);
     _testStyledFalse();
-    _testOnToggleCalled(4, false);
 
     //4 After parent rerender have previous value
     rerender(wrapByUiThemeProvider( /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       ...props,
-      initValue: true
+      initialValue: true
     })));
     _testStyledFalse();
   });
   test('should render RowCheckBox1 with onCheck, onUnCheck handlers', async () => {
-    const initValue = false,
+    const initialValue = false,
       caption = 'CheckBox',
       color = '#222222',
       onCheck = jest.fn(),
       onUnCheck = jest.fn(),
-      onToggle = jest.fn(),
       props = {
-        initValue,
+        initialValue,
         color,
         caption,
         onCheck,
-        onUnCheck,
-        onToggle
+        onUnCheck
       },
       {
         user,
@@ -123,7 +113,6 @@ describe('RowCheckBox1', () => {
       _testCalled = (fn, times) => {
         expect(fn).toHaveBeenCalledTimes(times);
         expect(fn.mock.calls[times - 1][0]).toBe(void 0);
-        expect(onToggle).toHaveBeenCalledTimes(0);
       };
 
     //1 Test initial values
@@ -152,7 +141,7 @@ describe('RowCheckBox1', () => {
     //4 After parent rerender have previous value
     rerender(wrapByUiThemeProvider( /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       ...props,
-      initValue: true
+      initialValue: true
     })));
     _testStyledFalse();
   });

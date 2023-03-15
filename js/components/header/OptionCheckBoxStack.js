@@ -15,8 +15,8 @@ const OptionCheckBoxStack = _ref => {
   return configs.map(_ref2 => {
     let [caption, id] = _ref2;
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-      initValue: (0, _getFnByPropName.default)(data, id, false)(),
       caption: caption,
+      initialValue: (0, _getFnByPropName.default)(data, id, false)(),
       onCheck: _hMode.bind(null, id, true),
       onUnCheck: _hMode.bind(null, id, false)
     }, caption);

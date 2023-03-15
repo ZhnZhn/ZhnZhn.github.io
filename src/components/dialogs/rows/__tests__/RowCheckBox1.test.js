@@ -13,41 +13,58 @@ const {
   setupUserEvent
 } = zhnUtils;
 
-const _helperStyledFalse = (bt, chbox) => {
+const _helperStyledFalse = (
+  bt,
+  chbox
+) => {
   expect(bt).toHaveStyle(`color: grey`)
   expect(chbox).toHaveAttribute('aria-checked', "false")
 }
-const _helperStyledTrue = (color, bt, chbox) => {
+const _helperStyledTrue = (
+  color,
+  bt,
+  chbox
+) => {
   expect(bt).toHaveStyle(`color: ${color}`)
   expect(chbox).toHaveAttribute('aria-checked', "true")
 };
 
-const _crTestArtifacts = (checkedColor) => {
+const _crTestArtifacts = (
+  checkedColor
+) => {
   const bt = screen.getByRole('button')
   , chbox = screen.getByRole('checkbox')
   , _testStyledFalse = _helperStyledFalse.bind(null, bt, chbox)
   , _testStyledTrue = _helperStyledTrue.bind(null, checkedColor, bt, chbox)
-  return { bt, chbox, _testStyledFalse, _testStyledTrue};
+  return {
+    bt,
+    chbox,
+    _testStyledFalse,
+    _testStyledTrue
+  };
 };
 
 describe('RowCheckBox1', ()=>{
   test('should render RowCheckBox1 with onToggle handler', async ()=>{
-    const initValue = false
+    const initialValue = false
     , caption = 'CheckBox'
     , color = '#222222'
-    , onToggle = jest.fn()
-    , props = { initValue, color, caption, onToggle }
+    , props = {
+       initialValue,
+       color,
+       caption
+    }
     , {
-      user,
-      rerender
+       user,
+       rerender
     } = setupUserEvent(wrapByUiThemeProvider(<RowCheckBox1 {...props} />))
     , {
-        bt, chbox, _testStyledFalse, _testStyledTrue
-      } = _crTestArtifacts(color)
-    , _testOnToggleCalled = (times, argValue) => {
-      expect(onToggle).toHaveBeenCalledTimes(times)
-      expect(onToggle.mock.calls[times-1][0]).toBe(argValue)
-    };
+        bt,
+        chbox,
+        _testStyledFalse,
+        _testStyledTrue
+    } = _crTestArtifacts(color)
+
 
     //1 Test initial values
     _testStyledFalse()
@@ -56,48 +73,50 @@ describe('RowCheckBox1', ()=>{
     //2.1 From false
     await user.click(bt);
     _testStyledTrue()
-    _testOnToggleCalled(1, true)
+
     //2.2 From true
     await user.click(bt);
     _testStyledFalse()
-    _testOnToggleCalled(2, false)
 
     //3 Test click on checkbox
     //3.1 From false
     await user.click(chbox);
     _testStyledTrue()
-    _testOnToggleCalled(3, true)
+
     //3.2 From true
     await user.click(chbox);
     _testStyledFalse()
-    _testOnToggleCalled(4, false)
 
     //4 After parent rerender have previous value
-    rerender(wrapByUiThemeProvider(<RowCheckBox1 {...props} initValue={true} />))
+    rerender(wrapByUiThemeProvider(<RowCheckBox1 {...props} initialValue={true} />))
     _testStyledFalse()
   })
   test('should render RowCheckBox1 with onCheck, onUnCheck handlers', async ()=>{
-    const initValue = false
+    const initialValue = false
     , caption = 'CheckBox'
     , color = '#222222'
     , onCheck = jest.fn()
     , onUnCheck = jest.fn()
-    , onToggle = jest.fn()
     , props = {
-       initValue, color, caption,
-       onCheck, onUnCheck, onToggle
+       initialValue,
+       color,
+       caption,
+       onCheck,
+       onUnCheck
     }
     , {
-      user,
-      rerender
+       user,
+       rerender
     } = setupUserEvent(wrapByUiThemeProvider(<RowCheckBox1 {...props} />))
     , {
-        bt, chbox, _testStyledFalse, _testStyledTrue
-      } = _crTestArtifacts(color)
+        bt,
+        chbox,
+        _testStyledFalse,
+        _testStyledTrue
+    } = _crTestArtifacts(color)
     , _testCalled = (fn, times) => {
       expect(fn).toHaveBeenCalledTimes(times)
       expect(fn.mock.calls[times-1][0]).toBe(void 0)
-      expect(onToggle).toHaveBeenCalledTimes(0)
     };
 
     //1 Test initial values
@@ -124,7 +143,7 @@ describe('RowCheckBox1', ()=>{
     _testCalled(onUnCheck, 2)
 
     //4 After parent rerender have previous value
-    rerender(wrapByUiThemeProvider(<RowCheckBox1 {...props} initValue={true} />))
+    rerender(wrapByUiThemeProvider(<RowCheckBox1 {...props} initialValue={true} />))
     _testStyledFalse()
 
   })

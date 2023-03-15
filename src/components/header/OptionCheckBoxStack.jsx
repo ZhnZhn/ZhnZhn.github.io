@@ -12,8 +12,8 @@ const OptionCheckBoxStack = ({
  return configs.map(([caption, id]) => (
     <RowCheckBox1
       key={caption}
-      initValue={getFnByPropName(data, id, false)()}
       caption={caption}
+      initialValue={getFnByPropName(data, id, false)()}
       onCheck={_hMode.bind(null, id, true)}
       onUnCheck={_hMode.bind(null, id, false)}
     />
