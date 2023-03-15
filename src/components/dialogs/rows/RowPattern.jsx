@@ -1,8 +1,7 @@
-import { forwardRef } from 'react';
-//import PropTypes from "prop-types";
+import { forwardRef } from '../../uiApi';
 
-import InputPattern from '../../zhn/InputPattern'
-import crRowStyle from './crRowStyle'
+import { crRowLabelStyle } from '../../styles/DialogStyles';
+import InputPattern from '../../zhn/InputPattern';
 
 const RowPattern = forwardRef(({
   isShowLabels,
@@ -10,9 +9,13 @@ const RowPattern = forwardRef(({
   caption,
   ...rest
 }, ref) => {
-    const {
-      rowStyle, labelStyle,
-    } = crRowStyle({ isShowLabels, captionStyle });
+    const [
+      rowStyle,
+      labelStyle,
+    ] = crRowLabelStyle(
+      isShowLabels,
+      captionStyle
+    );
     return (
       <div style={rowStyle}>
         <span style={labelStyle}>
@@ -25,13 +28,5 @@ const RowPattern = forwardRef(({
      </div>
     )
 })
-
-/*
-RowPattern.propTypes = {
-   isShowLabels: PropTypes.bool,
-   caption : PropTypes.string
-   captionStyle: PropTypes.object
-}
-*/
 
 export default RowPattern

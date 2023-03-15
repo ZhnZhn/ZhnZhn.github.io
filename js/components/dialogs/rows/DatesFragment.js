@@ -1,33 +1,24 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../../uiApi");
-
+var _DialogStyles = require("../../styles/DialogStyles");
 var _DateField = _interopRequireDefault(require("../../zhn/DateField"));
-
-var _crRowStyle = _interopRequireDefault(require("./crRowStyle"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 //import PropTypes from "prop-types";
+
 const FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
 const NEAR_ERR_MSG = "From Date is near that To Date";
-
 const _isPeriodValid = (from, to) => from <= to,
-      _msgOnNotValidFormat = function (item) {
-  if (item === void 0) {
-    item = 'Date';
-  }
-
-  return item + " is not in valid format";
-};
-
+  _msgOnNotValidFormat = function (item) {
+    if (item === void 0) {
+      item = 'Date';
+    }
+    return item + " is not in valid format";
+  };
 const _getTrimValue = ref => ((0, _uiApi.getInputValue)(ref) || '').trim();
-
 const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     isShowLabels = true,
@@ -43,16 +34,9 @@ const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
     onTestDate,
     onEnter
   } = _ref;
-
   const _refFrom = (0, _uiApi.useRef)(),
-        _refTo = (0, _uiApi.useRef)(),
-        {
-    rowStyle,
-    labelStyle
-  } = (0, _crRowStyle.default)({
-    isShowLabels
-  });
-
+    _refTo = (0, _uiApi.useRef)(),
+    [rowStyle, labelStyle] = (0, _DialogStyles.crRowLabelStyle)(isShowLabels);
   (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValues: () => ({
       fromDate: (0, _uiApi.getInputValue)(_refFrom),
@@ -60,19 +44,15 @@ const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
     }),
     getValidation: () => {
       const datesMsg = [];
-
       if (!(0, _uiApi.isInputValid)(_refFrom)) {
         datesMsg.push(msgOnNotValidFormat('From Date'));
       }
-
       if (!(0, _uiApi.isInputValid)(_refTo)) {
         datesMsg.push(msgOnNotValidFormat('To Date'));
       }
-
       if (datesMsg.length === 0 && !isPeriodValid(_getTrimValue(_refFrom), _getTrimValue(_refTo))) {
         datesMsg.push(NEAR_ERR_MSG);
       }
-
       return datesMsg.length > 0 ? {
         isValid: false,
         datesMsg
@@ -118,6 +98,7 @@ const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
     })]
   });
 });
+
 /*
 DatesFragment.propTypes = {
   isShowLabels: PropTypes.bool,
@@ -134,7 +115,6 @@ DatesFragment.propTypes = {
   onEnter: PropTypes.func
 }
 */
-
 var _default = DatesFragment;
 exports.default = _default;
 //# sourceMappingURL=DatesFragment.js.map

@@ -1,3 +1,4 @@
+//import PropTypes from "prop-types";
 import {
   forwardRef,
   useRef,
@@ -7,10 +8,11 @@ import {
   isInputValid,
   getInputValue
 } from '../../uiApi';
-//import PropTypes from "prop-types";
 
+import {
+  crRowLabelStyle
+} from '../../styles/DialogStyles';
 import DateField from '../../zhn/DateField';
-import crRowStyle from './crRowStyle'
 
 const FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
 const NEAR_ERR_MSG = "From Date is near that To Date";
@@ -36,7 +38,10 @@ const DatesFragment = forwardRef(({
 }, ref) => {
   const _refFrom = useRef()
   , _refTo = useRef()
-  , { rowStyle, labelStyle } = crRowStyle({ isShowLabels });
+  , [
+    rowStyle,
+    labelStyle
+  ] = crRowLabelStyle(isShowLabels);
 
   useImperativeHandle(ref, () => ({
     getValues: () => ({

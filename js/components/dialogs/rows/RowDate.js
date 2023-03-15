@@ -3,13 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _react = require("react");
+var _uiApi = require("../../uiApi");
+var _DialogStyles = require("../../styles/DialogStyles");
 var _DateField = _interopRequireDefault(require("../../zhn/DateField"));
-var _crRowStyle = _interopRequireDefault(require("./crRowStyle"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const _getCurrent = ref => ref.current;
 const RowDate = _ref => {
   let {
     innerRef,
@@ -19,16 +18,11 @@ const RowDate = _ref => {
     errorMsg,
     onTest
   } = _ref;
-  const _refDate = (0, _react.useRef)(null),
-    {
-      rowStyle,
-      labelStyle
-    } = (0, _crRowStyle.default)({
-      isShowLabels
-    });
-  (0, _react.useImperativeHandle)(innerRef, () => ({
-    getValue: () => _getCurrent(_refDate).getValue(),
-    isValid: () => _getCurrent(_refDate).isValid()
+  const _refDate = (0, _uiApi.useRef)(null),
+    [rowStyle, labelStyle] = (0, _DialogStyles.crRowLabelStyle)(isShowLabels);
+  (0, _uiApi.useImperativeHandle)(innerRef, () => ({
+    getValue: () => (0, _uiApi.getInputValue)(_refDate),
+    isValid: () => (0, _uiApi.isInputValid)(_refDate)
   }), []);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: rowStyle,
