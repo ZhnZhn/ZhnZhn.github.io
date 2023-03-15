@@ -1,8 +1,6 @@
-import Comp from '../../Comp'
-import RowChart from './RowChart'
-import RowInputSelect from './RowInputSelect'
-
-const { ShowHide } = Comp
+import ShowHide from '../../zhn/ShowHide';
+import RowChart from './RowChart';
+import RowInputSelect from './RowInputSelect';
 
 const RowChartDate = ({
   refSeriaColor,
