@@ -1,13 +1,21 @@
 import {
+  isCategoryItem
+} from '../../components/dialogs/ChartOptionsFn';
+import {
   crCaption,
   crItemKey
 } from './createrFns';
 
-const _toIds = ({ dfId }, items) => {
+const _getObjectKeys = Object.keys;
+
+const _toIds = (
+  { dfId },
+  items
+) => {
   const _arr = [dfId];
   items.forEach(({ slice, value }={}) => {
     if (slice) {
-      _arr.push(slice[Object.keys(slice)[0]])
+      _arr.push(slice[_getObjectKeys(slice)[0]])
     } else if (value) {
       //Eurostat case
       _arr.push(value)
@@ -38,8 +46,15 @@ const createLoadOptions = (
       seriaWidth,
       selectOptions
     } = options || {}
-  , { value:seriaType, compType: zhCompType } = chartType || {}
-  , { itemCaption, title, subtitle } = crCaption(items, titles)
+  , {
+    value:seriaType,
+    compType: zhCompType
+  } = chartType || {}
+  , {
+    itemCaption,
+    title,
+    subtitle
+  } = crCaption(items, titles)
   , _items = _toIds(dfProps, items)
   , _itemKey = crItemKey(_items, seriaType, time);
 
@@ -49,12 +64,18 @@ const createLoadOptions = (
     ...dfProps,
     ...dialogOptions,
     _itemKey,
-    itemCaption: dfTitle || itemCaption,
+    itemCaption: isCategoryItem(chartType)
+       ? dfTitle || itemCaption
+       : itemCaption,
     loadId,
-    title, subtitle,
-    seriaType, seriaColor, seriaWidth,
+    title,
+    subtitle,
+    seriaType,
+    seriaColor,
+    seriaWidth,
     zhCompType,
-    time, timeId,
+    time,
+    timeId,
     dataSource,
     items,
     selectOptions

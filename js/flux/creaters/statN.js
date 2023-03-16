@@ -2,9 +2,9 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
+var _ChartOptionsFn = require("../../components/dialogs/ChartOptionsFn");
 var _createrFns = require("./createrFns");
-
+const _getObjectKeys = Object.keys;
 const _toIds = (_ref, items) => {
   let {
     dfId
@@ -15,9 +15,8 @@ const _toIds = (_ref, items) => {
       slice,
       value
     } = _temp === void 0 ? {} : _temp;
-
     if (slice) {
-      _arr.push(slice[Object.keys(slice)[0]]);
+      _arr.push(slice[_getObjectKeys(slice)[0]]);
     } else if (value) {
       //Eurostat case
       _arr.push(value);
@@ -25,45 +24,43 @@ const _toIds = (_ref, items) => {
   });
   return _arr;
 };
-
 const createLoadOptions = (props, options) => {
   const {
-    loadId,
-    dataSource,
-    dfProps = {}
-  } = props || {},
-        {
-    timeId,
-    time,
-    dfC,
-    dfTitle,
-    items = [],
-    titles,
-    dialogOptions,
-    chartType,
-    seriaColor,
-    seriaWidth,
-    selectOptions
-  } = options || {},
-        {
-    value: seriaType,
-    compType: zhCompType
-  } = chartType || {},
-        {
-    itemCaption,
-    title,
-    subtitle
-  } = (0, _createrFns.crCaption)(items, titles),
-        _items = _toIds(dfProps, items),
-        _itemKey = (0, _createrFns.crItemKey)(_items, seriaType, time);
-
+      loadId,
+      dataSource,
+      dfProps = {}
+    } = props || {},
+    {
+      timeId,
+      time,
+      dfC,
+      dfTitle,
+      items = [],
+      titles,
+      dialogOptions,
+      chartType,
+      seriaColor,
+      seriaWidth,
+      selectOptions
+    } = options || {},
+    {
+      value: seriaType,
+      compType: zhCompType
+    } = chartType || {},
+    {
+      itemCaption,
+      title,
+      subtitle
+    } = (0, _createrFns.crCaption)(items, titles),
+    _items = _toIds(dfProps, items),
+    _itemKey = (0, _createrFns.crItemKey)(_items, seriaType, time);
   return {
     dfC,
     dfTitle,
     ...dfProps,
     ...dialogOptions,
     _itemKey,
-    itemCaption: dfTitle || itemCaption,
+    itemCaption: (0, _ChartOptionsFn.isCategoryItem)(chartType) ? dfTitle || itemCaption : itemCaption,
     loadId,
     title,
     subtitle,
@@ -78,7 +75,6 @@ const createLoadOptions = (props, options) => {
     selectOptions
   };
 };
-
 var _default = createLoadOptions;
 exports.default = _default;
 //# sourceMappingURL=statN.js.map
