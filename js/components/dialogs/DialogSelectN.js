@@ -146,14 +146,14 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
         onLoad(loadFn(props, {
           // seriaColor, seriaWidth
           ...(0, _uiApi.getInputValue)(_refSeriaColor),
+          chartType,
+          isCategory: (0, _ChartOptionsFn.isCategoryItem)(chartType),
           items: [...(0, _uiApi.getRefValue)(_refItems)],
           titles: (0, _uiApi.getRefValue)(refTitles),
           dialogOptions: (0, _uiApi.getRefValue)(refDialogOptions),
-          isCategory: (0, _ChartOptionsFn.isCategoryItem)(chartType),
           fromDate: _getValidValue(_refFromDate, ''),
           date: _getDate(),
-          _rt: _getRoundTo(),
-          chartType
+          _rt: _getRoundTo()
         }));
         clearValidationMessages();
       } else {
@@ -163,7 +163,6 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     _isCategory = (0, _ChartOptionsFn.isCategoryItem)(chartType),
     _isRowFd = isFd && !_isCategory,
     _isShowDate = isShowChart && _isCategory;
-  console.log(dfProps);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
     caption: caption,

@@ -2,7 +2,6 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _ChartOptionsFn = require("../../components/dialogs/ChartOptionsFn");
 var _createrFns = require("./createrFns");
 const _getObjectKeys = Object.keys;
 const _toIds = (_ref, items) => {
@@ -31,6 +30,7 @@ const createLoadOptions = (props, options) => {
       dfProps = {}
     } = props || {},
     {
+      isCategory,
       timeId,
       time,
       dfC,
@@ -48,7 +48,7 @@ const createLoadOptions = (props, options) => {
       value: seriaType,
       compType: zhCompType
     } = chartType || {},
-    [itemCaption, title, subtitle] = (0, _createrFns.crCaption)(items, titles),
+    [itemCaption, title, subtitle] = (0, _createrFns.crCaptions)(items, titles),
     _items = _toIds(dfProps, items),
     _itemKey = (0, _createrFns.crItemKey)(_items, seriaType, time);
   return {
@@ -58,7 +58,7 @@ const createLoadOptions = (props, options) => {
     ...dialogOptions,
     _itemKey,
     _rt: (0, _createrFns.crRoundTo)(_rt),
-    itemCaption: (0, _ChartOptionsFn.isCategoryItem)(chartType) ? dfTitle || itemCaption : itemCaption,
+    itemCaption: isCategory ? dfTitle || itemCaption : itemCaption,
     loadId,
     title,
     subtitle,

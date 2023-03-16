@@ -243,14 +243,14 @@ const DialogSelectN = memoIsShow((
         onLoad(loadFn(props, {
           // seriaColor, seriaWidth
           ...getInputValue(_refSeriaColor),
+          chartType,
+          isCategory: isCategoryItem(chartType),
           items: [...getRefValue(_refItems)],
           titles: getRefValue(refTitles),
-          dialogOptions: getRefValue(refDialogOptions),
-          isCategory: isCategoryItem(chartType),
+          dialogOptions: getRefValue(refDialogOptions),          
           fromDate: _getValidValue(_refFromDate, ''),
           date: _getDate(),
-          _rt: _getRoundTo(),
-          chartType
+          _rt: _getRoundTo()
         }))
         clearValidationMessages()
       } else {
@@ -261,7 +261,6 @@ const DialogSelectN = memoIsShow((
   , _isRowFd = isFd && !_isCategory
   , _isShowDate = isShowChart && _isCategory;
 
-  console.log(dfProps)
   return (
     <D.DraggableDialog
       isShow={isShow}

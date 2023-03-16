@@ -1,7 +1,4 @@
 import {
-  isCategoryItem
-} from '../../components/dialogs/ChartOptionsFn';
-import {
   crCaptions,
   crItemKey,
   crRoundTo
@@ -35,6 +32,7 @@ const createLoadOptions = (
     dfProps={}
   } = props || {}
   , {
+      isCategory,
       timeId,
       time,
       dfC,
@@ -67,7 +65,7 @@ const createLoadOptions = (
     ...dialogOptions,
     _itemKey,
     _rt: crRoundTo(_rt),
-    itemCaption: isCategoryItem(chartType)
+    itemCaption: isCategory
        ? dfTitle || itemCaption
        : itemCaption,
     loadId,

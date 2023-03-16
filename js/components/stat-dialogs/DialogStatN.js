@@ -172,6 +172,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
           chartType,
           timeId,
           selectOptions,
+          isCategory: (0, _ChartOptionsFn.isCategoryItem)(chartType),
           dfC: _crDfC(props, _dimItem),
           dfTitle: _crDfTitle(props, _dimItem),
           time: (getDate() || dateDf).value,

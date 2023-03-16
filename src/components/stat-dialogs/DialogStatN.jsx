@@ -203,6 +203,7 @@ const DialogStatN = memoIsShow((props) => {
          chartType,
          timeId,
          selectOptions,
+         isCategory: isCategoryItem(chartType),
          dfC: _crDfC(props, _dimItem),
          dfTitle: _crDfTitle(props, _dimItem),
          time: (getDate() || dateDf).value,
