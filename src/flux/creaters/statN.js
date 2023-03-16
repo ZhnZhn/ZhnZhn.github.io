@@ -3,7 +3,8 @@ import {
 } from '../../components/dialogs/ChartOptionsFn';
 import {
   crCaption,
-  crItemKey
+  crItemKey,
+  crRoundTo
 } from './createrFns';
 
 const _getObjectKeys = Object.keys;
@@ -44,7 +45,8 @@ const createLoadOptions = (
       chartType,
       seriaColor,
       seriaWidth,
-      selectOptions
+      selectOptions,
+      _rt
     } = options || {}
   , {
     value:seriaType,
@@ -64,6 +66,7 @@ const createLoadOptions = (
     ...dfProps,
     ...dialogOptions,
     _itemKey,
+    _rt: crRoundTo(_rt),
     itemCaption: isCategoryItem(chartType)
        ? dfTitle || itemCaption
        : itemCaption,

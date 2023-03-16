@@ -109,7 +109,8 @@ const DialogSelectN = memoIsShow((
   } = props
   , {
     mapFrequency=DF_MAP_FREQUENCY,
-    mapDateDf
+    mapDateDf,
+    dfRt
   } = dfProps || {}
   , [
     isShowFd,
@@ -194,6 +195,10 @@ const DialogSelectN = memoIsShow((
     addTitleIndex,
     removeTitleIndex
   ] = useTitles()
+  , [
+    _setRoundTo,
+    _getRoundTo
+  ] = useProperty(dfRt)
   , _refFromDate = useRef()
   , [
     setDate,
@@ -244,6 +249,7 @@ const DialogSelectN = memoIsShow((
           isCategory: isCategoryItem(chartType),
           fromDate: _getValidValue(_refFromDate, ''),
           date: _getDate(),
+          _rt: _getRoundTo(),
           chartType
         }))
         clearValidationMessages()
@@ -255,6 +261,7 @@ const DialogSelectN = memoIsShow((
   , _isRowFd = isFd && !_isCategory
   , _isShowDate = isShowChart && _isCategory;
 
+  console.log(dfProps)
   return (
     <D.DraggableDialog
       isShow={isShow}
@@ -271,6 +278,8 @@ const DialogSelectN = memoIsShow((
       />
       <D.ModalOptions
         isShow={isShowOptions}
+        dfRt={dfRt}
+        onRoundTo={_setRoundTo}
         toggleOption={toggleDialogOption}
         onClose={hideOptions}
       />
@@ -318,7 +327,7 @@ const DialogSelectN = memoIsShow((
           isShowDate={_isShowDate}
           dateDefault={dateDefault}
           dateOptions={dateOptions}
-          onSelecDate={setDate}
+          onSelectDate={setDate}
         />
       }
       <D.ValidationMessages

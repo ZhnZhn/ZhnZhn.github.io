@@ -78,7 +78,10 @@ const DialogStatN = memoIsShow((props) => {
     //mapFrequency:initialMf,
     //mapDateDf,
 
+    dfProps,
+
     msgOnNotSelected,
+
 
     toTopLayer,
     onAbout,
@@ -87,12 +90,19 @@ const DialogStatN = memoIsShow((props) => {
     onLoad,
     onShow,
     onClose
-  } = props;
+  } = props
+  , {
+    dfRt
+  } = dfProps || {};
   const _isDim = !props.dims && !props.notDim
   , [_refItems, _fSelectItem] = useRefByIndex()
   , _refSeriaColor = useRef()
   , [setDate, getDate] = useProperty()
   , [setDim, getDim] = useProperty()
+  , [
+    _setRoundTo,
+    _getRoundTo
+  ] = useProperty(dfRt)
   , [
       state,
       isLoading,
@@ -173,9 +183,8 @@ const DialogStatN = memoIsShow((props) => {
    }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected])
    //getDim, _isDim
    , _hSelectChartType = useCallback(chartType => {
-       const _isShowDate = isCategoryItem(chartType)
-         ? (setDate(), true)
-         : false;
+       const _isShowDate = isCategoryItem(chartType);
+
        updateStateIf(setIsRow, 'isShowDate', _isShowDate)
        updateStateIf(setState, 'chartType', chartType)
    }, [])
@@ -199,7 +208,8 @@ const DialogStatN = memoIsShow((props) => {
          time: (getDate() || dateDf).value,
          dialogOptions: getRefValue(refDialogOptions),
          items: getRefValue(_refItems),
-         titles: getRefValue(_refTitles)
+         titles: getRefValue(_refTitles),
+         _rt: _getRoundTo()
       }))
     }
     setValidationMessages(validationMessages)
@@ -231,6 +241,8 @@ const DialogStatN = memoIsShow((props) => {
        />
        <D.ModalOptions
          isShow={isShowOptions}
+         dfRt={dfRt}
+         onRoundTo={_setRoundTo}
          toggleOption={toggleDialogOption}
          onClose={hideOptions}
        />
@@ -257,10 +269,10 @@ const DialogStatN = memoIsShow((props) => {
          isShowDate={isShowDate}
          dateDefault={dateDf.caption}
          dateOptions={dateOptions}
-         onSelecDate={setDate}
+         onSelectDate={setDate}
          isDim={_isDim}
          dimOptions={dimOptions}
-         onSelecDim={setDim}
+         onSelectDim={setDim}
        />
        <D.ValidationMessages
            validationMessages={validationMessages}

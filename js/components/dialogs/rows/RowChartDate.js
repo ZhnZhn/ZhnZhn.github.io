@@ -21,10 +21,10 @@ const RowChartDate = _ref => {
     noDate = false,
     dateDefault,
     dateOptions,
-    onSelecDate,
+    onSelectDate,
     isDim,
     dimOptions,
-    onSelecDim
+    onSelectDim
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
@@ -44,7 +44,7 @@ const RowChartDate = _ref => {
         isShowLabels: isShowLabels,
         caption: "Dim",
         options: dimOptions,
-        onSelect: onSelecDim
+        onSelect: onSelectDim
       })
     }), !noDate && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: isShowDate,
@@ -53,7 +53,7 @@ const RowChartDate = _ref => {
         caption: "For Date",
         placeholder: dateDefault,
         options: dateOptions,
-        onSelect: onSelecDate
+        onSelect: onSelectDate
       })
     })]
   });

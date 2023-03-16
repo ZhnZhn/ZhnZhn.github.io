@@ -1,6 +1,7 @@
 import {
   crCaption,
   crItemKey,
+  crRoundTo,
   crAlertConf
 } from './createrFns';
 
@@ -54,7 +55,8 @@ const createLoadOptions = (
       seriaColor,
       seriaWidth,
       fromDate,
-      date
+      date,
+      _rt
     } = options || {}
   , {
       itemCaption,
@@ -73,6 +75,7 @@ const createLoadOptions = (
     ...dialogOptions,
     _type: TYPE,
     _itemKey: _itemKey,
+    _rt: crRoundTo(_rt),
     itemCaption,
     zhCompType: compType,
     fromDate,

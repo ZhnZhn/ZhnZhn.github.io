@@ -15,10 +15,10 @@ const RowChartDate = ({
   noDate=false,
   dateDefault,
   dateOptions,
-  onSelecDate,
+  onSelectDate,
   isDim,
   dimOptions,
-  onSelecDim
+  onSelectDim
 }) => (
   <>
     <ShowHide isShow={isShowChart}>
@@ -39,7 +39,7 @@ const RowChartDate = ({
            isShowLabels={isShowLabels}
            caption="Dim"
            options={dimOptions}
-           onSelect={onSelecDim}
+           onSelect={onSelectDim}
         />
       </ShowHide>
     }
@@ -51,7 +51,7 @@ const RowChartDate = ({
            caption="For Date"
            placeholder={dateDefault}
            options={dateOptions}
-           onSelect={onSelecDate}
+           onSelect={onSelectDate}
         />
       </ShowHide>
     }

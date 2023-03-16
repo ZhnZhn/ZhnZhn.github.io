@@ -18,12 +18,18 @@ const _join = arr => arr
  .filter(Boolean)
  .join(': ');
 
-const _crC = (title, subtitle) => ({
+const _crC = (
+  title,
+  subtitle
+) => ({
   title: title || subtitle,
   subtitle: title ? subtitle : void 0
 });
 
-const _crItemCaption = (items, titles) => {
+const _crItemCaption = (
+  items,
+  titles
+) => {
   if (!_isArr(titles) || titles.length === 0) {
     titles = [0]
   }
@@ -32,7 +38,9 @@ const _crItemCaption = (items, titles) => {
     .join(': ');
 };
 
-const _crCaptionItems = items => (items || [])
+const _crCaptionItems = (
+  items
+) => (items || [])
   .map(item => _getC(item));
 
 export const crItemKey = (
@@ -77,6 +85,15 @@ export const crCaption = (
     threeC,
     ..._crC(_title, _subtitle)
   };
+}
+
+export const crRoundTo = (
+  rt
+) => {
+  const _rt = parseInt(rt, 10);
+  return _rt>-1 && _rt<4
+    ? _rt
+    : void 0;
 }
 
 export const crAlertConf = (

@@ -59,26 +59,31 @@ const _addDfValuesFrom = (configs, fSelectItem) => {
 };
 const DialogStatN = (0, _memoIsShow.default)(props => {
   const {
-    isShow,
-    caption,
-    //dims,
-    //chartsType,
-    //mapFrequency:initialMf,
-    //mapDateDf,
+      isShow,
+      caption,
+      //dims,
+      //chartsType,
+      //mapFrequency:initialMf,
+      //mapDateDf,
 
-    msgOnNotSelected,
-    toTopLayer,
-    onAbout,
-    loadFn,
-    onLoad,
-    onShow,
-    onClose
-  } = props;
+      dfProps,
+      msgOnNotSelected,
+      toTopLayer,
+      onAbout,
+      loadFn,
+      onLoad,
+      onShow,
+      onClose
+    } = props,
+    {
+      dfRt
+    } = dfProps || {};
   const _isDim = !props.dims && !props.notDim,
     [_refItems, _fSelectItem] = (0, _useRefByIndex.default)(),
     _refSeriaColor = (0, _uiApi.useRef)(),
     [setDate, getDate] = (0, _useProperty.default)(),
     [setDim, getDim] = (0, _useProperty.default)(),
+    [_setRoundTo, _getRoundTo] = (0, _useProperty.default)(dfRt),
     [state, isLoading, isLoadFailed, validationMessages, setValidationMessages, setState] = (0, _useLoadDims.default)(props),
     {
       configs,
@@ -147,7 +152,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     //getDim, _isDim
     ,
     _hSelectChartType = (0, _uiApi.useCallback)(chartType => {
-      const _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(chartType) ? (setDate(), true) : false;
+      const _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(chartType);
       (0, _updateStateIf.default)(setIsRow, 'isShowDate', _isShowDate);
       (0, _updateStateIf.default)(setState, 'chartType', chartType);
     }, [])
@@ -172,7 +177,8 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
           time: (getDate() || dateDf).value,
           dialogOptions: (0, _uiApi.getRefValue)(refDialogOptions),
           items: (0, _uiApi.getRefValue)(_refItems),
-          titles: (0, _uiApi.getRefValue)(_refTitles)
+          titles: (0, _uiApi.getRefValue)(_refTitles),
+          _rt: _getRoundTo()
         }));
       }
       setValidationMessages(validationMessages);
@@ -193,6 +199,8 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       buttons: toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalOptions, {
       isShow: isShowOptions,
+      dfRt: dfRt,
+      onRoundTo: _setRoundTo,
       toggleOption: toggleDialogOption,
       onClose: hideOptions
     }), _modalToggleEl, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.default, {
@@ -215,10 +223,10 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       isShowDate: isShowDate,
       dateDefault: dateDf.caption,
       dateOptions: dateOptions,
-      onSelecDate: setDate,
+      onSelectDate: setDate,
       isDim: _isDim,
       dimOptions: dimOptions,
-      onSelecDim: setDim
+      onSelectDim: setDim
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
       validationMessages: validationMessages
     })]

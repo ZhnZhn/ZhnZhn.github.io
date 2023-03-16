@@ -41,7 +41,8 @@ const createLoadOptions = (props, options) => {
       chartType,
       seriaColor,
       seriaWidth,
-      selectOptions
+      selectOptions,
+      _rt
     } = options || {},
     {
       value: seriaType,
@@ -60,6 +61,7 @@ const createLoadOptions = (props, options) => {
     ...dfProps,
     ...dialogOptions,
     _itemKey,
+    _rt: (0, _createrFns.crRoundTo)(_rt),
     itemCaption: (0, _ChartOptionsFn.isCategoryItem)(chartType) ? dfTitle || itemCaption : itemCaption,
     loadId,
     title,

@@ -67,7 +67,8 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     } = props,
     {
       mapFrequency = DF_MAP_FREQUENCY,
-      mapDateDf
+      mapDateDf,
+      dfRt
     } = dfProps || {},
     [isShowFd, toggleIsShowFd] = (0, _useToggle.default)(false),
     [isShowChart, toggleIsShowChart] = (0, _useToggle.default)(true),
@@ -113,6 +114,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     }), [selectProps, chartsType, _mapFrequency, _mapDateDf, loadId]),
     _refItems = (0, _uiApi.useRef)([]),
     [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)(),
+    [_setRoundTo, _getRoundTo] = (0, _useProperty.default)(dfRt),
     _refFromDate = (0, _uiApi.useRef)(),
     [setDate, _getDate] = _useDate(dateDefault),
     _refSeriaColor = (0, _uiApi.useRef)(),
@@ -150,6 +152,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
           isCategory: (0, _ChartOptionsFn.isCategoryItem)(chartType),
           fromDate: _getValidValue(_refFromDate, ''),
           date: _getDate(),
+          _rt: _getRoundTo(),
           chartType
         }));
         clearValidationMessages();
@@ -160,6 +163,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     _isCategory = (0, _ChartOptionsFn.isCategoryItem)(chartType),
     _isRowFd = isFd && !_isCategory,
     _isShowDate = isShowChart && _isCategory;
+  console.log(dfProps);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
     caption: caption,
@@ -173,6 +177,8 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       buttons: toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalOptions, {
       isShow: isShowOptions,
+      dfRt: dfRt,
+      onRoundTo: _setRoundTo,
       toggleOption: toggleDialogOption,
       onClose: hideOptions
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalToggle, {
@@ -216,7 +222,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       isShowDate: _isShowDate,
       dateDefault: dateDefault,
       dateOptions: dateOptions,
-      onSelecDate: setDate
+      onSelectDate: setDate
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
       validationMessages: validationMessages
     })]
