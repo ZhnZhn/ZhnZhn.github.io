@@ -20,7 +20,7 @@ const S_CAPTION = {
 const MIN_RT = 0,
   MAX_RT = 3;
 const _isRt = rt => rt === '' || rt >= MIN_RT && rt <= MAX_RT;
-const ROW_CHECKBOX_CONFIGS = [["isNotZoomToMinMax", "Not Zoom to Min-Max"], ["isFilterZero", "Filter Trim Zero Values"], ["isLogarithmic", "Logarithmic Scale"]];
+const ROW_CHECKBOX_CONFIGS = [["isNotZoomToMinMax", "Not Zoom to Min-Max"], ["isFilterZero", "Filter-Trim Zeros"], ["isLogarithmic", "Logarithmic Scale"]];
 const ModalOptions = _ref => {
   let {
     isShow,
@@ -44,7 +44,7 @@ const ModalOptions = _ref => {
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: S_CAPTION,
-          children: "Round Values to"
+          children: "Round Decimals to"
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
           type: "number",
           initValue: dfRt,

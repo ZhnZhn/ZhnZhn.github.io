@@ -25,7 +25,7 @@ const _isRt = (
 
 const ROW_CHECKBOX_CONFIGS = [
   ["isNotZoomToMinMax", "Not Zoom to Min-Max"],
-  ["isFilterZero", "Filter Trim Zero Values"],
+  ["isFilterZero", "Filter-Trim Zeros"],
   ["isLogarithmic", "Logarithmic Scale"]
 ];
 
@@ -47,7 +47,7 @@ const ModalOptions = ({
     {/*eslint-disable jsx-a11y/label-has-associated-control*/}
     {onRoundTo && _isRt(dfRt) && <div style={S_DIV_INPUT}>
         <label>
-          <span style={S_CAPTION}>Round Values to</span>
+          <span style={S_CAPTION}>Round Decimals to</span>
           <InputText
             type="number"
             initValue={dfRt}
