@@ -2,7 +2,7 @@ import {
   isCategoryItem
 } from '../../components/dialogs/ChartOptionsFn';
 import {
-  crCaption,
+  crCaptions,
   crItemKey,
   crRoundTo
 } from './createrFns';
@@ -52,11 +52,11 @@ const createLoadOptions = (
     value:seriaType,
     compType: zhCompType
   } = chartType || {}
-  , {
+  , [
     itemCaption,
     title,
     subtitle
-  } = crCaption(items, titles)
+  ] = crCaptions(items, titles)
   , _items = _toIds(dfProps, items)
   , _itemKey = crItemKey(_items, seriaType, time);
 

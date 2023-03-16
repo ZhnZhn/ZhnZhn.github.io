@@ -16,16 +16,10 @@ const _findItemTable = items => {
       break;
     }
   }
-  return {
-    tableItem,
-    tableIndex
-  };
+  return [tableItem, tableIndex];
 };
 const _modifyIfItemTable = (_dfProps, items) => {
-  const {
-    tableItem,
-    tableIndex
-  } = _findItemTable(items);
+  const [tableItem, tableIndex] = _findItemTable(items);
   if (tableItem) {
     const {
       v: dfTable,
@@ -62,12 +56,7 @@ const createLoadOptions = (props, options) => {
       date,
       _rt
     } = options || {},
-    {
-      itemCaption,
-      threeC,
-      title,
-      subtitle
-    } = (0, _createrFns.crCaption)(items, titles),
+    [itemCaption, title, subtitle, threeC] = (0, _createrFns.crCaption)(items, titles),
     {
       value: seriaType,
       compType

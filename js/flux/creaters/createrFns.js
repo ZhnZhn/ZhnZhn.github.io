@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.isFn = exports.getV = exports.getC = exports.crRoundTo = exports.crItemKey = exports.crCaption = exports.crAlertConf = void 0;
+exports.isFn = exports.getV = exports.getC = exports.crRoundTo = exports.crItemKey = exports.crCaptions = exports.crAlertConf = void 0;
 var _getPropertyFn = require("../../utils/getPropertyFn");
 var _toUpperCaseFirst = _interopRequireDefault(require("../../utils/toUpperCaseFirst"));
 const getC = _getPropertyFn.getC;
@@ -14,10 +14,6 @@ exports.isFn = isFn;
 const _getC = item => (0, _toUpperCaseFirst.default)(item && item.sc || getC(item));
 const _isArr = Array.isArray;
 const _join = arr => arr.filter(Boolean).join(': ');
-const _crC = (title, subtitle) => ({
-  title: title || subtitle,
-  subtitle: title ? subtitle : void 0
-});
 const _crItemCaption = (items, titles) => {
   if (!_isArr(titles) || titles.length === 0) {
     titles = [0];
@@ -32,8 +28,10 @@ const crItemKey = function (items) {
   }
   return [_prefix, ...args].filter(Boolean).join('_');
 };
+
+//[itemCaption, title, subtitle, threeC]
 exports.crItemKey = crItemKey;
-const crCaption = (items, titles) => {
+const crCaptions = (items, titles) => {
   const itemCaption = _crItemCaption(items, titles),
     _items = items.filter(getC),
     [item1, item2, item3, item4, ...restItems] = _items,
@@ -51,13 +49,9 @@ const crCaption = (items, titles) => {
   } else if (twoC) {
     _subtitle = twoC;
   }
-  return {
-    itemCaption,
-    threeC,
-    ..._crC(_title, _subtitle)
-  };
+  return [itemCaption, _title || _subtitle, _title ? _subtitle : void 0, threeC];
 };
-exports.crCaption = crCaption;
+exports.crCaptions = crCaptions;
 const crRoundTo = rt => {
   const _rt = parseInt(rt, 10);
   return _rt > -1 && _rt < 4 ? _rt : void 0;

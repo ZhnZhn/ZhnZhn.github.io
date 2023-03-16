@@ -18,14 +18,6 @@ const _join = arr => arr
  .filter(Boolean)
  .join(': ');
 
-const _crC = (
-  title,
-  subtitle
-) => ({
-  title: title || subtitle,
-  subtitle: title ? subtitle : void 0
-});
-
 const _crItemCaption = (
   items,
   titles
@@ -58,13 +50,20 @@ export const crItemKey = (
    .join('_');
 }
 
-export const crCaption = (
+//[itemCaption, title, subtitle, threeC]
+export const crCaptions = (
   items,
   titles
 ) => {
   const itemCaption = _crItemCaption(items, titles)
   , _items = items.filter(getC)
-  , [item1, item2, item3, item4, ...restItems] = _items
+  , [
+    item1,
+    item2,
+    item3,
+    item4,
+    ...restItems
+  ] = _items
   , oneC = _getC(item1)
   , twoC = _getC(item2)
   , threeC = _getC(item3)
@@ -80,11 +79,12 @@ export const crCaption = (
     _subtitle = twoC
   }
 
-  return {
+  return [
     itemCaption,
+    _title || _subtitle,
+    _title ? _subtitle : void 0,
     threeC,
-    ..._crC(_title, _subtitle)
-  };
+  ];
 }
 
 export const crRoundTo = (

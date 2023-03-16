@@ -1,5 +1,5 @@
 import {
-  crCaption,
+  crCaptions,
   crItemKey,
   crRoundTo,
   crAlertConf
@@ -10,8 +10,12 @@ const TABLE_ID = 'table';
 
 const _assign = Object.assign;
 
-const _findItemTable = (items) => {
-  let tableItem, tableIndex, _item;
+const _findItemTable = (
+  items
+) => {
+  let tableItem
+  , tableIndex
+  , _item;
   for (let i=0; i<items.length;i++){
     _item = items[i]
     if (_item && _item.id === TABLE_ID) {
@@ -20,13 +24,26 @@ const _findItemTable = (items) => {
       break;
     }
   }
-  return { tableItem, tableIndex };
+  return [
+    tableItem,
+    tableIndex
+  ];
 };
 
-const _modifyIfItemTable = (_dfProps, items) => {
-  const { tableItem, tableIndex } = _findItemTable(items);
+const _modifyIfItemTable = (
+  _dfProps,
+  items
+) => {
+  const [
+    tableItem,
+    tableIndex
+  ] = _findItemTable(items);
   if (tableItem) {
-    const { v:dfTable, dfTail, mapFrequency } = tableItem
+    const {
+      v:dfTable,
+      dfTail,
+      mapFrequency
+    } = tableItem
     if (dfTable) {
       _assign(_dfProps, { dfTable, dfTail })
       if (mapFrequency) {
@@ -57,15 +74,23 @@ const createLoadOptions = (
       fromDate,
       date,
       _rt
-    } = options || {}
-  , {
+  } = options || {}
+  , [
       itemCaption,
-      threeC,
       title,
-      subtitle
-    } = crCaption(items, titles)
-  , { value:seriaType, compType } = chartType || {}
-  , _itemKey = crItemKey(items, seriaType, date, fromDate)
+      subtitle,
+      threeC,
+  ] = crCaptions(items, titles)
+  , {
+      value:seriaType,
+      compType
+  } = chartType || {}
+  , _itemKey = crItemKey(
+      items,
+      seriaType,
+      date,
+      fromDate
+    )
   , _dfProps = {...dfProps};
 
   _modifyIfItemTable(_dfProps, items)

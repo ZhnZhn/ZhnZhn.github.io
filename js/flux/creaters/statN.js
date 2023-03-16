@@ -48,11 +48,7 @@ const createLoadOptions = (props, options) => {
       value: seriaType,
       compType: zhCompType
     } = chartType || {},
-    {
-      itemCaption,
-      title,
-      subtitle
-    } = (0, _createrFns.crCaption)(items, titles),
+    [itemCaption, title, subtitle] = (0, _createrFns.crCaption)(items, titles),
     _items = _toIds(dfProps, items),
     _itemKey = (0, _createrFns.crItemKey)(_items, seriaType, time);
   return {
