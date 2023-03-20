@@ -1,0 +1,18 @@
+{
+  "items": [
+    { "c": "All Sectors", "v": "99"},
+    { "c": "Electric Power", "v": "98"},
+    { "c": "All Industrial", "v": "97"},
+    { "c": "All Commercial", "v": "96"},
+    { "c": "Independent Power Producers", "v": "94"},
+    { "c": "Coal Consumption", "v": "95"},
+    { "c": "Electric Power Sector Non-CHP", "v": "90"},
+    { "c": "Industrila CHP", "v": "7"},
+    { "c": "Industrial Non-CHP", "v": "6"},
+    { "c": "Commercial CHP", "v": "5"},
+    { "c": "Commercial Non-CHP", "v": "4"},
+    { "c": "IPP CHP", "v": "3"},
+    { "c": "IPP Non-CHP", "v": "2"},
+    { "c": "Electric Utility", "v": "1"}           
+  ]
+}

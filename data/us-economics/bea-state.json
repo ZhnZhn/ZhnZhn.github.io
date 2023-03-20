@@ -1,0 +1,8 @@
+{
+  "items": [
+    { "caption": "Oregon", "value": "OREGON" },
+    { "caption": "Florida", "value": "FLORIDA" },
+    { "caption": "Kentucky", "value": "KENTUCKY" },
+    { "caption": "Alabama", "value": "ALABAMA" }
+  ]
+}

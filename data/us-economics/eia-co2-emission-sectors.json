@@ -1,0 +1,10 @@
+{
+  "items": [
+    { "c": "Total of all sector CO2 emissions", "v": "TT" },
+    { "c": "Commercial CO2 emissions", "v": "CC" },
+    { "c": "Electric power CO2 emissions", "v": "EC" },
+    { "c": "Industrial CO2 emissions", "v": "IC" },
+    { "c": "Residential CO2 emissions", "v": "RC" },
+    { "c": "Transportation CO2 emissions", "v": "TC" }
+  ]
+}

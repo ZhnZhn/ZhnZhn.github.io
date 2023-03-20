@@ -1,0 +1,30 @@
+{
+ "items": [
+ { "c": "Imports - All Commodities", "v": "EIUIR"},
+ { "c": "Imports - Petroleum and Petroleum Products", "v": "EIUIR100"},
+ { "c": "All Imports Excluding Petroleum", "v": "EIUIREXPET"},
+ { "c": "All Imports Excluding Fuels", "v": "EIUIREXFUELS"},
+ { "c": "Exports - All Commodities", "v": "EIUIQ"},
+ { "c": "Exports - Agricultural Commodities", "v": "EIUIQAG"},
+ { "c": "Exports - Nonagricultural Commodities", "v": "EIUIQEXAG"},
+ { "c": "Locality of Origin - Industrialized Countries - All Commodities", "v": "EIUCOINDUSTOT"},
+ { "c": "Locality of Origin - Other Countries - All Commodities", "v": "EIUCOOTHERTOT"},
+ { "c": "Locality of Origin - Canada - All Commodities", "v": "EIUCOCANTOT"},
+ { "c": "Locality of Origin - European Union - All Commodities", "v": "EIUCOEECTOT"},
+ { "c": "Locality of Origin - France - All Commodities", "v": "EIUCOFRNTOT"},
+ { "c": "Locality of Origin - Germany - All Commodities", "v": "EIUCOGERTOT"},
+ { "c": "Locality of Origin - United Kingdom - All Commodities", "v": "EIUCOUKTOT"},
+ { "c": "Locality of Origin - Latin America - All Commodities", "v": "EIUCOLATTOT"},
+ { "c": "Locality of Origin - Mexico - All Commodities", "v": "EIUCOMEXTOT"},
+ { "c": "Locality of Origin - Pacific Rim - All Commodities", "v": "EIUCOPRIMTOT"},
+ { "c": "Locality of Origin - China - All Commodities", "v": "EIUCOCHNTOT"},
+ { "c": "Locality of Origin - Japan - All Commodities", "v": "EIUCOJPNTOT"},
+ { "c": "Locality of Origin - Asian Newly Industrialized Countries - All Commodities", "v": "EIUCOOASTOT"},
+ { "c": "Locality of Origin - Association of Southeast Asian Nations - All Commodities", "v": "EIUCOASEANTOT"},
+ { "c": "Locality of Origin - Asia Near East Countries - All Commodities", "v": "EIUCOASNRETOT"},
+ { "c": "Import Air Passenger Fares", "v": "EIUIV142"},
+ { "c": "Export Air Passenger Fares", "v": "EIUIH142"},
+ { "c": "Import Air Freight", "v": "EIUIV131"},
+ { "c": "Export Air Freight", "v": "EIUIH231"}
+  ]
+}

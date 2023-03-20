@@ -1,0 +1,10 @@
+{
+  "items": [
+    { "c": "All Sectors", "v": "ALL" },
+    { "c": "Residential", "v": "RES" },
+    { "c": "Commercial", "v": "COM" },
+    { "c": "Industrial", "v": "IND" },
+    { "c": "Transportation", "v": "TRA" },
+    { "c": "Other", "v": "OTH" }
+  ]
+}

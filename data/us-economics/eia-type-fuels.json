@@ -1,0 +1,56 @@
+{
+  "items": [
+    { "c": "All Fuels", "v": "ALL"},
+    { "c":"Anthracite Coal", "v": "ANT"},
+
+    { "c":"All Renewables", "v": "AOR"},
+
+    { "c":"Biomass (1)", "v": "BIO"},
+    { "c":"Bituminous Coal & Synthetic Coal", "v": "BIS"},
+    { "c":"Bituminous Coal", "v": "BIT"},
+    { "c":"Coal, Exluding Waste Coal", "v": "COL"},
+    { "c": "All Coal Products", "v": "COW" },
+
+    { "c":"Distillate Fuel Oil", "v": "DFO"},
+    { "c":"Estimated Small Scale Solar Photovoltaic", "v": "DPV"},
+
+    { "c":"Fossil Fuels", "v": "FOS"},    
+
+    { "c":"Geothermal", "v": "GEO"},    
+    { "c":"Hydro-Electric Pumped Storage", "v": "HPS"},    
+    { "c":"Conventional Hydroelectric", "v": "HYC"},    
+    { "c":"Landfill Gass", "v": "LFG"},    
+    { "c":"Lignite Coal", "v": "LIG"},    
+    { "c":"Municiapl Landfill Gass", "v": "MLG"},    
+    { "c":"Biogenic Municipal Solid Waste", "v": "MSB"},    
+    { "c":"Natural Gas", "v": "NG"},    
+    { "c":"Natural Gas & Other Gases", "v": "NGO"},    
+    { "c":"Nuclear", "v": "NUC"},
+    
+    { "c":"Biomass (2)", "v": "OB2"},    
+    { "c":"Biomass (3)", "v": "OBW"},    
+    { "c":"Other Gases", "v": "OOG"},    
+    { "c":"Other Renewables", "v": "ORW"},    
+    { "c":"Other", "v": "OTH"},    
+    { "c":"Petroleum Coke", "v": "PC"},    
+    { "c":"Petroluem Liquids", "v": "PEL"},    
+    { "c":"Petroluem", "v": "PET"},    
+    { "c":"Refined Coal", "v": "RC"},    
+    { "c":"Renewable", "v": "REN"},    
+    { "c":"Residual Fuel Oil", "v": "RFO"},    
+    { "c":"Solar Photovoltaic", "v": "SPV"},    
+    { "c":"Solar Thermal", "v": "STH"},    
+    { "c":"Subbituminous Coal", "v": "SUB"},    
+
+    { "c":"Solar", "v": "SUN"},    
+    { "c":"Estimated Total Solar Photovoltaic", "v": "TPV"},    
+    { "c":"Estimated Total Solar", "v": "TSN"},    
+    { "c":"Renewable Waste Products", "v": "WAS"},       
+    { "c":"Wind", "v": "WND"},    
+    { "c":"Offshore Wind Turbine", "v": "WNS"},    
+    { "c":"Onshore Wind Turbine", "v": "WNT"},    
+    { "c":"Waste Coal", "v": "WOC"},       
+    { "c":"Waste Oil & Other Oils", "v": "WOO"},    
+    { "c":"Wood & Wood Waste", "v": "WWW"}          
+  ]
+}

@@ -1,5 +1,5 @@
 //import PropTypes from 'prop-types'
-import { Component } from 'react'
+import { Component } from '../uiApi';
 
 import getFnByPropName from '../../utils/getFnByPropName'
 import ScrollPane from '../zhn/ScrollPane'
@@ -128,7 +128,7 @@ class PaneApiKey extends Component {
             comp={this}
           />
         </OpenClose>
-        <OpenClose caption="Economics USA" childStyle={S_OC_CHILD}>
+        <OpenClose caption="US Economics" childStyle={S_OC_CHILD}>
            <ItemStack
              items={CONF_EC_USA_ARR}
              crItem={_crPwdItem}

@@ -1,0 +1,8 @@
+{
+  "items": [
+    { "c": "Coal", "v": "CO" },
+    { "c": "Natural Gas", "v": "NG" },
+    { "c": "Petroleum", "v": "PE" },
+    { "c": "All Fuels", "v": "TO" }
+  ]
+}

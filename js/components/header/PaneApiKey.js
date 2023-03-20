@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _react = require("react");
+var _uiApi = require("../uiApi");
 var _getFnByPropName = _interopRequireDefault(require("../../utils/getFnByPropName"));
 var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
@@ -51,7 +51,7 @@ const _crPwdItem = (item, index, _ref) => {
     onEnter: comp['_setKey' + _i]
   }, item[0]);
 };
-class PaneApiKey extends _react.Component {
+class PaneApiKey extends _uiApi.Component {
   /*
   static propTypes = {
     isShow: PropTypes.bool,
@@ -115,7 +115,7 @@ class PaneApiKey extends _react.Component {
           comp: this
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
-        caption: "Economics USA",
+        caption: "US Economics",
         childStyle: S_OC_CHILD,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
           items: CONF_EC_USA_ARR,
