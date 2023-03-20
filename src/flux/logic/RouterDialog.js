@@ -101,7 +101,7 @@ const _router = {
     /*eslint-enable no-undef */
      }
      return import(
-         /* webpackChunkName: "alpha-dialogs" */
+         /* webpackChunkName: "av-dialogs" */
          /* webpackMode: "lazy" */
          "../../components/stock-markets/AlphaDialogs"
        )
@@ -144,59 +144,59 @@ const _router = {
     return this.getSD().then(D => D.StatN);
   },
 
-  _loadUSAE() {
+  _loadUS() {
      /*eslint-disable no-undef */
      if ( process.env.NODE_ENV === '_development' ) {
-       return import("js/components/usa-economy/UsaeDialogs.js")
-         .then(module => this.USAE = _resolve(module.default))
+       return import("js/components/us-economics/UsDialogs.js")
+         .then(module => this.US = _resolve(module.default))
          .catch(err => console.log(MSG_OFFLINE));
     /*eslint-enable no-undef */
     }
     return import(
-       /* webpackChunkName: "usa-economy-dialogs" */
+       /* webpackChunkName: "us-economics-dialogs" */
        /* webpackMode: "lazy" */
-        "../../components/usa-economy/UsaeDialogs"
+        "../../components/us-economics/UsDialogs"
        )
-      .then(module => this.USAE = _resolve(module.default))
+      .then(module => this.US = _resolve(module.default))
       .catch(err => console.log(MSG_OFFLINE));
   },
-  getUSAE(){
-    return this.USAE || this._loadUSAE();
+  getUS(){
+    return this.US || this._loadUS();
   },
   get ZillowDialog() {
-    return this.getUSAE().then(D => D.Zillow);
+    return this.getUS().then(D => D.Zillow);
   },
 
-  _loadQE() {
+  _loadNDL() {
      /*eslint-disable no-undef */
      if ( process.env.NODE_ENV === '_development' ) {
-       return import("js/components/quandl/QuandlDialogs.js")
-         .then(module => this.QE = _resolve(module.default))
+       return import("js/components/ndl/NdlDialogs.js")
+         .then(module => this.NDL = _resolve(module.default))
          .catch(err => console.log(MSG_OFFLINE));
     /*eslint-enable no-undef */
     }
     return import(
-       /* webpackChunkName: "quandl-dialogs" */
+       /* webpackChunkName: "ndl-dialogs" */
        /* webpackMode: "lazy" */
-        "../../components/quandl/QuandlDialogs"
+        "../../components/ndl/NdlDialogs"
        )
-      .then(module => this.QE = _resolve(module.default))
+      .then(module => this.NDL = _resolve(module.default))
       .catch(err => console.log(MSG_OFFLINE));
   },
-  getQE() {
-    return this.QE || this._loadQE();
+  getNDL() {
+    return this.NDL || this._loadNDL();
   },
   get UNCommodityTradeDialog() {
-    return this.getQE().then(D => D.UNCommodityTrade);
+    return this.getNDL().then(D => D.UNCommodityTrade);
   },
   get Futures3Dialog() {
-    return this.getQE().then(D => D.Futures3);
+    return this.getNDL().then(D => D.Futures3);
   },
   get FuturesWikiDialog() {
-    return this.getQE().then(D => D.FuturesWiki);
+    return this.getNDL().then(D => D.FuturesWiki);
   },
   get JodiWorldOilDialog() {
-    return this.getQE().then(D => D.JodiWorldOil);
+    return this.getNDL().then(D => D.JodiWorldOil);
   },
 
 
@@ -208,7 +208,7 @@ const _router = {
       case BT_SWEDEN_STAT:
          this._loadSD(); break;
       case BT_QUANDL:
-         this._loadQE(); break;
+         this._loadNDL(); break;
       case BT_UN_COMTRADE:
         this._loadUN(); break;
       default: return;

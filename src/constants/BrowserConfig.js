@@ -178,8 +178,8 @@ const BrowserConfig = {
   },
   [BT_US_ECONOMICS]: {
     browserType: BT_US_ECONOMICS,
-    caption: 'USA Economics',
-    sourceMenuUrl: './data/usa-economy/source-menu.json'
+    caption: 'US Economics',
+    sourceMenuUrl: './data/us-economics/source-menu.json'
   },
   [BT_NYSE_STOCKS]: {
     browserType: BT_NYSE_STOCKS,

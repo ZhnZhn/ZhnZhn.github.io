@@ -1,8 +1,0 @@
-{
-  "items": [
-    { "caption": "Coal", "value": "CO" },
-    { "caption": "Natural Gas", "value": "NG" },
-    { "caption": "Petroleum", "value": "PE" },
-    { "caption": "All Fuels", "value": "TO" }
-  ]
-}

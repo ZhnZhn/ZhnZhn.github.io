@@ -2,11 +2,8 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
 var _BrowserType = require("./BrowserType");
-
 var _ModalDialogType = require("./ModalDialogType");
-
 const BrowserConfig = {
   [_BrowserType.BT_STOCK_MARKETS]: {
     browserType: _BrowserType.BT_STOCK_MARKETS,
@@ -45,7 +42,7 @@ const BrowserConfig = {
   },
   [_BrowserType.BT_QUANDL]: {
     browserType: _BrowserType.BT_QUANDL,
-    caption: 'Quandl',
+    caption: 'Nasdaq Data Link',
     sourceMenuUrl: './data/quandl/source-menu.json'
   },
   [_BrowserType.BT_DB_NOMICS]: {
@@ -154,8 +151,8 @@ const BrowserConfig = {
   },
   [_BrowserType.BT_US_ECONOMICS]: {
     browserType: _BrowserType.BT_US_ECONOMICS,
-    caption: 'USA Economics',
-    sourceMenuUrl: './data/usa-economy/source-menu.json'
+    caption: 'US Economics',
+    sourceMenuUrl: './data/us-economics/source-menu.json'
   },
   [_BrowserType.BT_NYSE_STOCKS]: {
     browserType: _BrowserType.BT_NYSE_STOCKS,

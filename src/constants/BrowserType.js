@@ -24,7 +24,7 @@ export const BT_NASDAQ_STOCKS = 'NQS'
 export const BT_DB_NOMICS = 'DBN'
 export const BT_FGR = 'FGR'
 export const BT_PE = 'PE'
-export const BT_US_ECONOMICS = 'USAE'
+export const BT_US_ECONOMICS = 'US'
 export const BT_ENERGY = 'EN'
 
 export const BT_BLOCKCHAIN = 'BC'
