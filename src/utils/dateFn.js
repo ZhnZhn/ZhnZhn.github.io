@@ -165,10 +165,10 @@ export const getNumberOfDays = (
 ) => new Date(year, month, 0).getDate();
 
 export const ymdToUTC = (
-  dateStr,
+  dateStrOrNumberYYYY,
   option={}
 ) => {
-	const _arr = _splitStrByDash(dateStr)
+	const _arr = _splitStrByDash(dateStrOrNumberYYYY)
 	, _len = _arr.length
   , [yearStr, mStr, dStr] = _arr;
 
@@ -192,7 +192,7 @@ export const ymdToUTC = (
 	 }
 	}
 
-  if ( _len === 1) {
+  if (_len === 1) {
    const { y=0 } = option
    , _y = parseInt(yearStr, 10) - y;
 	 return !isNaN(_y)
@@ -200,7 +200,9 @@ export const ymdToUTC = (
      : _y;
 	}
 
-  return Date.UTC(yearStr, _toIntMonth(mStr), dStr);
+  return isTypeNumber(dateStrOrNumberYYYY)
+    ? Date.UTC(dateStrOrNumberYYYY, 11, 31)
+    : Date.UTC(yearStr, _toIntMonth(mStr), dStr);
 }
 
 const MLS_IN_DAY = 24*60*60*1000;

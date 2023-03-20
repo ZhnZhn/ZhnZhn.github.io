@@ -5,6 +5,7 @@ var _dateFn = require("../dateFn");
 var _dateFnWithMock = _interopRequireDefault(require("./dateFnWithMock"));
 // DateUtils configuration consts
 const MIN_YEAR = 1990,
+  UTC_MLS_2010_12_31 = 1293753600000,
   UTC_MLS_2018_01_01 = 1514764800000,
   UTC_MLS_2018_01_10 = 1515542400000,
   UTC_MLS_2018_10_01 = 1538352000000;
@@ -96,20 +97,25 @@ describe('ymdToUTC', () => {
     expect(fn('2010-QS')).toBe(NaN);
   });
   test('should return mls UTC-0 for str YYYY', () => {
-    expect(fn('2010')).toBe(Date.UTC(2010, 11, 31));
+    expect(fn('2010')).toBe(UTC_MLS_2010_12_31);
+  });
+  test('should return mls UTC-0 for number YYYY', () => {
+    expect(fn(2010)).toBe(UTC_MLS_2010_12_31);
   });
   test('should return NaN for YYYY edge case', () => {
     expect(fn('YYYY')).toBe(NaN);
+    expect(fn(10 ** 6)).toBe(NaN);
+    expect(fn(-(10 ** 6))).toBe(NaN);
   });
   test('should return mls UTC-0 for YYYY-MM-DD or NaN for more than 3 tokens', () => {
     expect(fn('2010-01-01-12:00')).toBe(Date.UTC(2010, 0, 1));
     expect(fn('2010-01-AA-12:00')).toBe(NaN);
   });
   test('should use option y for YYYY case', () => {
-    expect(fn("2010")).toBe(Date.UTC(2010, 11, 31));
-    expect(fn("2010", {
+    expect(fn("2010")).toBe(UTC_MLS_2010_12_31);
+    expect(fn("2011", {
       y: 1
-    })).toBe(Date.UTC(2010 - 1, 11, 31));
+    })).toBe(UTC_MLS_2010_12_31);
   });
 });
 describe('ymdhmsToUTC', () => {
