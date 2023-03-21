@@ -25,21 +25,22 @@ const CL_ITEM_HEADER = 'item-header',
   CL_MORE = "popup-menu charts__menu-more",
   CL_CAPTION = 'not-selected text-clip bt-left bt',
   CL_ITEM_TIME = 'item-time',
+  COLOR_SVG_MORE = '#777777',
   S_BT_MORE = {
     position: 'relative',
-    top: 3,
+    top: 4,
     left: 2
   },
   S_SVG_MORE = {
-    stroke: '#777777',
-    fill: '#777777'
+    stroke: COLOR_SVG_MORE,
+    fill: COLOR_SVG_MORE
   },
   S_MODAL_SLIDER = {
     display: 'inline-block'
   },
   S_CHECK_BOX = {
     position: 'relative',
-    top: 1,
+    top: 2,
     margin: '0 6px 0 8px'
   },
   S_CAPTION = {
@@ -48,7 +49,7 @@ const CL_ITEM_HEADER = 'item-header',
     padding: '4px 0 2px 4px'
   },
   S_CAPTION_CLOSE = {
-    color: 'gray'
+    color: 'grey'
   },
   S_CAPTION_WIDTH = {
     width: void 0,
@@ -57,7 +58,7 @@ const CL_ITEM_HEADER = 'item-header',
   S_CLOSE = {
     position: 'absolute',
     right: 0,
-    top: 4
+    top: 6
   };
 const ItemTime = _ref => {
   let {

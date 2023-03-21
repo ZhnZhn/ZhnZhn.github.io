@@ -18,6 +18,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 const CL_BT = 'bt';
 const S_ROOT = {
     position: 'relative',
+    top: 1,
     display: 'inline-block',
     marginLeft: 10
   },

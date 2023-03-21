@@ -25,6 +25,7 @@ const CL_BT = 'bt';
 
 const S_ROOT = {
   position: 'relative',
+  top: 1,
   display: 'inline-block',
   marginLeft: 10
 },
@@ -89,7 +90,7 @@ const ValueMovingBadge = forwardRef(({
      const _vm = crValueMoving(vm, dateTo);
      return _vm
        ? (setVm(_vm), _vm)
-       : void 0;     
+       : void 0;
   }, [vm])
   //crValueMoving
   /*eslint-enable react-hooks/exhaustive-deps */
