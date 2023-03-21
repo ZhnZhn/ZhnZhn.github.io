@@ -25,7 +25,7 @@ const CL_SCROLL = 'scroll-container-y'
 }
 , S_CAPTION = {
    position: 'relative',
-   top: -6,
+   top: -3,
    paddingLeft: 4
 }
 , S_SCROLL_PANE = { height: '92%' };
@@ -37,9 +37,19 @@ const BrowserSlider = memo((props) => {
     browserType,
     showAction
   } = props
-  , [isShow, show, hide] = useBool(isInitShow)
-  , [isMenuMore, toggleMenuMore] = useToggle()
-  , [isFilterNotActive, toggleFilterNotActive] = useToggle()
+  , [
+    isShow,
+    show,
+    hide
+  ] = useBool(isInitShow)
+  , [
+    isMenuMore,
+    toggleMenuMore
+  ] = useToggle()
+  , [
+    isFilterNotActive,
+    toggleFilterNotActive
+  ] = useToggle()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _browserContext = useMemo(
       () => fFilterNotActive(isFilterNotActive, props.dfProps.lT)

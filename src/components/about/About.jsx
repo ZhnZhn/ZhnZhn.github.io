@@ -25,7 +25,6 @@ const TH_ID = 'ABOUT'
 , CL_SHOW_CONT = 'show-cont'
 , CL_SCROLL = 'scroll-container-y'
 
-, S_BROWSER_CAPTION = { paddingTop: 6 }
 , S_SCROLL_DIV = { height: '94%' }
 , S_DIV_WRAPPER = {
   paddingLeft: 12,
@@ -81,7 +80,6 @@ const About = () => {
       animationClass={CL_SHOW_CONT}
     >
        <A.BrowserCaption
-          style={S_BROWSER_CAPTION}
           caption="About"
           onClose={hide}
        >

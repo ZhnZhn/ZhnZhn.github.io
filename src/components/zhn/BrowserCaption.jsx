@@ -9,15 +9,18 @@ import SvgClose from './SvgClose';
 
 const TH_ID = 'ELEMENT';
 
-const CL_BR_CAPTION = 'br-caption text-clip gap-right'
-, CL_NOT_SELECTED = 'not-selected';
+const CL_TEXT_CLIP = 'text-clip'
+, CL_BR_CAPTION = `br-caption ${CL_TEXT_CLIP} gap-right`
+, CL_CAPTION = `not-selected ${CL_TEXT_CLIP}`
 
-const S_CAPTION = {
+, S_CAPTION = {
   paddingRight: 8,
   fontSize: '18px',
   fontWeight: '500'
 },
 S_CHECK_BOX = {
+  position: 'relative',
+  top: -3,
   margin: '0 10px 0 6px'
 },
 S_SVG_CLOSE = {
@@ -64,7 +67,7 @@ const BrowserCaption = ({
         />
      }
      <span
-        className={CL_NOT_SELECTED}
+        className={CL_CAPTION}
         style={{...S_CAPTION, ...captionStyle}}
      >
        {caption}

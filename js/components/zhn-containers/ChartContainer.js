@@ -33,11 +33,14 @@ const CL_SCROLL = 'scroll-container-y scroll-items',
   },
   S_SVG_MORE = {
     position: 'relative',
-    top: 2
+    top: -1
   },
   S_CAPTION = {
+    paddingTop: 7
+  },
+  S_SVG_RESIZE = {
     position: 'relative',
-    top: -1
+    top: -3
   };
 const CHAT_ACTIONS = [_ChartActions.CHAT_SHOW, _ChartActions.CHAT_LOAD_COMPLETED, _ChartActions.CHAT_CLOSE];
 const _isFn = fn => typeof fn === "function";
@@ -208,6 +211,7 @@ const ChartContainer = _ref => {
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.SvgHrzResize, {
         ref: _refResize,
         isBts: _hasBtsResize(_refRootElement, _INITIAL_WIDTH, caption),
+        style: S_SVG_RESIZE,
         initWidth: _INITIAL_WIDTH,
         minWidth: _MIN_WIDTH,
         maxWidth: MAX_WIDTH,
