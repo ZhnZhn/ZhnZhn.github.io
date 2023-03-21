@@ -14,13 +14,16 @@ const S_ROOT_DIV = {
     marginLeft: 10
   },
   S_BT_RIGHT = {
-    marginLeft: 10,
+    ...S_BT_LEFT,
     transform: 'rotate(180deg)'
   };
 const SvgHrzResize = (0, _uiApi.forwardRef)((props, ref) => {
   const [hStartResizeLeft, hStartResizeRight, hStopResize, hKdLeft, hKdRight] = (0, _useResizeElement.default)(props, ref);
   return props.isBts ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: S_ROOT_DIV,
+    style: {
+      ...S_ROOT_DIV,
+      ...props.style
+    },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtResize.default, {
       style: S_BT_LEFT,
       title: "Resize container to left",

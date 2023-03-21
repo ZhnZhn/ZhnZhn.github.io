@@ -6,7 +6,7 @@ import BtResize from './BtResize';
 const S_ROOT_DIV = { display: 'inline-block' }
 , S_BT_LEFT = { marginLeft: 10 }
 , S_BT_RIGHT = {
-  marginLeft: 10,
+  ...S_BT_LEFT,
   transform: 'rotate(180deg)'
 };
 
@@ -22,7 +22,7 @@ const SvgHrzResize = forwardRef((
     hKdRight
   ] = useResizeElement(props, ref);
   return props.isBts ? (
-    <div style={S_ROOT_DIV}>
+    <div style={{...S_ROOT_DIV, ...props.style}}>
       <BtResize
         style={S_BT_LEFT}
         title="Resize container to left"
