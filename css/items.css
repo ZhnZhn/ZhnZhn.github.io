@@ -1,20 +1,18 @@
 
 .twit {
   width: 100%;
-  padding-top: 8px;  
-  padding-bottom: 6px;
+  padding: 8px 0 6px 0;
   line-height: 1.5;
   font-weight: bold;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
-  box-shadow: rgba(0, 0, 0, 0.6) 1px 4px;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  box-shadow: rgba(0, 0, 0, 0.6) 1px 4px;  
 }
 
 .twit > a {
   display: block;
+  color: black;  
   text-decoration: none;
-  color: black;
   border-bottom: 2px solid transparent;
 }
 

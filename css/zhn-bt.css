@@ -38,11 +38,7 @@
   border-radius: 2px;
   font-weight: bold;
 }
-.bt:hover {
-  outline: 0;
-}
 .bt:focus {
-  outline: 0;
   background: rgba(164, 164, 164, 0.3);
 }
 
@@ -59,7 +55,6 @@
   stroke: inherit;
 }
 .bt-more:hover,
-.bt-more:focus {
-  outline: 0;
+.bt-more:focus { 
   background: rgba(164, 164, 164, 0.3);
 }

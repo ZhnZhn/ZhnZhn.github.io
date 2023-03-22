@@ -3,13 +3,10 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-
-  /* -webkit-tap-highlight-color: transparent; */
+  -webkit-tap-highlight-color: rgba(0,0,0,0);  
 }
 
-html {
-  /* font-family: sans-serif; */
+html {  
   font-size: 100%;
   scroll-behavior: smooth;
 }
@@ -24,7 +21,7 @@ body {
   font-size: 1rem;
   */
   font-weight: 300;
-  background-color: gray;
+  background-color: grey;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -51,4 +48,9 @@ button::-moz-focus-inner {
 
 input {
   font-family: inherit;
+}
+
+a:focus-visible { 
+ outline: 2px solid #009ae5;
+ outline-offset: 3px; 
 }

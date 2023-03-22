@@ -13,11 +13,6 @@
   background: inherit;
 }
 
-.focusable:focus {
-  outline: 1px dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-}
-
 .text-clip {
   display: inline-block;
   white-space: nowrap;
@@ -34,4 +29,21 @@
 }
 .va-m {
   vertical-align: middle;
+}
+
+.pt-4 {
+  padding-top: 4px;
+}
+.pb-8 {
+  padding-bottom: 8px;
+}
+.pr-8 {
+  padding-right: 8px;
+}
+
+.black {
+  color: black;
+}
+.dark-blue {
+  color: #1b75bb;
 }
