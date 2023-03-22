@@ -11,7 +11,7 @@ const S_MODAL_POPUP = {
 };
 exports.S_MODAL_POPUP = S_MODAL_POPUP;
 const S_ROW_CHB = {
-  padding: '0 0 3px'
+  padding: '0 0 4px'
 };
 exports.S_ROW_CHB = S_ROW_CHB;
 const TOGGLE_INPUT_CHECKBOX_COLOR = '#1b75bb';

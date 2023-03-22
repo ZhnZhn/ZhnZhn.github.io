@@ -13,13 +13,11 @@ var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW = {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingTop: 3
+    padding: '3px 0 2px 0'
   },
   S_CAPTION = {
     maxWidth: 150,
-    paddingBottom: 2,
-    textAlign: 'left',
-    verticalAlign: 'middle'
+    textAlign: 'left'
   },
   S_CHB_TOGGLE = {
     ..._Style.S_ROW_CHB,
@@ -27,8 +25,7 @@ const S_ROW = {
   },
   S_CHB_CAPTION = {
     display: 'inline-block',
-    paddingTop: 2,
-    paddingLeft: 40
+    padding: '0 0 0 40px'
   };
 const _crChbToggleInitValue = isRow => typeof isRow === 'boolean' ? isRow : true;
 const _crCheckBoxItem = (item, index, _ref) => {

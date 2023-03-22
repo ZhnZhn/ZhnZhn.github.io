@@ -13,16 +13,7 @@ const CL_BT_CHB = 'bt-chb',
   S_ROOT = {
     padding: '6px 0 0 16px'
   },
-  S_CAPTION = {
-    display: 'inline-block',
-    color: 'grey',
-    paddingLeft: 12,
-    fontSize: '16px',
-    fontWeight: 'bold',
-    userSelect: 'none',
-    cursor: 'pointer'
-  },
-  crCaptionStyle = (captionStyle, checkedColor, value) => (0, _crStyle.crStyle3)(S_CAPTION, captionStyle, value && {
+  crCaptionStyle = (captionStyle, checkedColor, value) => (0, _crStyle.crStyle2)(captionStyle, value && {
     color: checkedColor
   });
 const RowCheckBoxView = _ref => {

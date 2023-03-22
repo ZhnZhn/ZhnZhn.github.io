@@ -16,13 +16,11 @@ import {
 const S_ROW = {
   display: 'flex',
   justifyContent: 'space-between',
-  paddingTop: 3
+  padding: '3px 0 2px 0'
 }
 , S_CAPTION = {
   maxWidth: 150,
-  paddingBottom: 2,
-  textAlign: 'left',
-  verticalAlign: 'middle'
+  textAlign: 'left'
 }
 , S_CHB_TOGGLE = {
   ...S_ROW_CHB,
@@ -30,8 +28,7 @@ const S_ROW = {
 }
 , S_CHB_CAPTION = {
   display: 'inline-block',
-  paddingTop: 2,
-  paddingLeft: 40
+  padding: '0 0 0 40px'
 };
 
 const _crChbToggleInitValue = isRow =>
@@ -55,7 +52,7 @@ const _crCheckBoxItem = (
       captionStyle={S_CAPTION}
       onToggle={() => onToggle(crIsId(item.id))}
     />
-    <RowCheckBox1      
+    <RowCheckBox1
       style={S_CHB_CAPTION}
       color={TOGGLE_CAPTION_CHECKBOX_COLOR}
       initialValue={index === 0}
