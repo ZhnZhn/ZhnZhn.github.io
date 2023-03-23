@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useToggleClose.js"
+ ],
+ "file": "../../../src/components/hooks/useToggleClose.js",
+ "names": [
+  "_uiApi",
+  "require",
+  "useToggleClose",
+  "initialValue",
+  "is",
+  "setIs",
+  "useState",
+  "useMemo",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAKA;AACA,MAAMC,cAAc,GAClBC,YAAY,IACT;EACH,MAAM,CACJC,EAAE,EACFC,KAAK,CACN,GAAG,IAAAC,eAAQ,EAAC,MAAM,CAAC,CAACH,YAAY,CAAC;EAElC,OAAO,CACLC,EAAE,EACF,GAAG,IAAAG,cAAO,EAAC,MAAM,CACf,MAAMF,KAAK,CAACD,EAAE,IAAI,CAACA,EAAE,CAAC,EACtB,MAAMC,KAAK,CAAC,KAAK,CAAC,CACnB,EAAE,EAAE,CAAC,CACP;AACH,CAAC;AAAC,IAAAG,QAAA,GAEaN,cAAc;AAAAO,OAAA,CAAAC,OAAA,GAAAF,QAAA"
+}

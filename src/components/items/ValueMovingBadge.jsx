@@ -6,6 +6,8 @@ import {
   useImperativeHandle
 } from '../uiApi';
 
+import useToggleClose from '../hooks/useToggleClose';
+
 import {
   DT_UP,
   DT_DOWN,
@@ -58,9 +60,10 @@ const _hmDirection = {
   [DT_EQUAL]: [<SvgEqual />, S_EQUAL]
 };
 
-const _getDirection = direction => _hmDirection[direction]
-  || _hmDirection.DF;
-
+const _getDirection = (
+  direction
+) => _hmDirection[direction]
+ || _hmDirection.DF;
 
 const DF_VALUE_MOVING = {
   value: 0,
@@ -81,10 +84,9 @@ const ValueMovingBadge = forwardRef(({
   ] = useState(initialVm)
   , [
     isShowModal,
-    setIsShowModal
-  ] = useState(false)
-  , _toggleModal = useCallback(() => setIsShowModal(is=>!is), [])
-  , _closeModal = useCallback(() => setIsShowModal(false), [])
+    _toggleModal,
+    _closeModal
+  ] = useToggleClose()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _updateDateTo = useCallback(dateTo => {
      const _vm = crValueMoving(vm, dateTo);
@@ -127,7 +129,10 @@ const ValueMovingBadge = forwardRef(({
          className={CL_BT}
          onClick={_toggleModal}
        >
-         <SpanDate style={S_DATE} date={date} />
+         <SpanDate
+            style={S_DATE} 
+            date={date}
+         />
        </Button>
        {
          _svgDirection && <ValueMovingModal

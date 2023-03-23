@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _useToggleClose = _interopRequireDefault(require("../hooks/useToggleClose"));
 var _DirectionType = require("../../constants/DirectionType");
 var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _SvgDown = _interopRequireDefault(require("../zhn/SvgDown"));
@@ -64,9 +65,7 @@ const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref, ref) => {
     crValueMoving
   } = _ref;
   const [vm, setVm] = (0, _uiApi.useState)(initialVm),
-    [isShowModal, setIsShowModal] = (0, _uiApi.useState)(false),
-    _toggleModal = (0, _uiApi.useCallback)(() => setIsShowModal(is => !is), []),
-    _closeModal = (0, _uiApi.useCallback)(() => setIsShowModal(false), [])
+    [isShowModal, _toggleModal, _closeModal] = (0, _useToggleClose.default)()
     /*eslint-disable react-hooks/exhaustive-deps */,
     _updateDateTo = (0, _uiApi.useCallback)(dateTo => {
       const _vm = crValueMoving(vm, dateTo);
