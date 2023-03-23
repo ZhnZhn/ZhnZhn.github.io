@@ -12,7 +12,7 @@ var _crIsId = _interopRequireDefault(require("./crIsId"));
 var _jsxRuntime = require("react/jsx-runtime");
 const useModalToggle = configs => {
   const [isToggle, toggleInputs, hideInputs] = (0, _useToggleClose.default)(),
-    [isRow, setIsRow, toggleIsRow] = (0, _useRowToggle.default)(configs),
+    [isRow, toggleIsRow] = (0, _useRowToggle.default)(configs),
     {
       isShowChart,
       isShowDate
@@ -31,7 +31,7 @@ const useModalToggle = configs => {
     onClose: hideInputs
   }), [isToggle, configs, isShowChart, isShowDate])
   //toggleIsRow, checkCaptionBy, uncheckCaption, hideInputs
-  /*eslint-enable react-hooks/exhaustive-deps */, refTitles, isRow, setIsRow, toggleInputs];
+  /*eslint-enable react-hooks/exhaustive-deps */, refTitles, isRow, toggleIsRow, toggleInputs];
 };
 var _default = useModalToggle;
 exports.default = _default;

@@ -95,10 +95,19 @@ const DialogStatN = memoIsShow((props) => {
     dfRt
   } = dfProps || {};
   const _isDim = !props.dims && !props.notDim
-  , [_refItems, _fSelectItem] = useRefByIndex()
+  , [
+    _refItems,
+    _fSelectItem
+  ] = useRefByIndex()
   , _refSeriaColor = useRef()
-  , [setDate, getDate] = useProperty()
-  , [setDim, getDim] = useProperty()
+  , [
+    setDate,
+    getDate
+  ] = useProperty()
+  , [
+    setDim,
+    getDim
+  ] = useProperty()
   , [
     _setRoundTo,
     _getRoundTo
@@ -121,9 +130,21 @@ const DialogStatN = memoIsShow((props) => {
       dateDf={},
       timeId,
    } = state
-  , [isShowLabels, toggleLabels] = useToggle(IS_SHOW_LABELS)
-  , [_modalToggleEl, _refTitles, isRow, setIsRow, toggleInputs] = useModalToggle(configs)
-  , {isShowDate, isShowChart} = isRow
+  , [
+    isShowLabels,
+    toggleLabels
+  ] = useToggle(IS_SHOW_LABELS)
+  , [
+    _modalToggleEl,
+    _refTitles,
+    isRow,
+    toggleIsRow,
+    toggleInputs
+  ] = useModalToggle(configs)
+  , {
+    isShowDate,
+    isShowChart
+  } = isRow
   , [
     isToolbar,
     menuMoreModel
@@ -183,12 +204,12 @@ const DialogStatN = memoIsShow((props) => {
    }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected])
    //getDim, _isDim
    , _hSelectChartType = useCallback(chartType => {
-       const _isShowDate = isCategoryItem(chartType);
-
-       updateStateIf(setIsRow, 'isShowDate', _isShowDate)
+       toggleIsRow({
+         isShowDate: isCategoryItem(chartType)
+       })
        updateStateIf(setState, 'chartType', chartType)
    }, [])
-   //setDate, setIsRow, setState
+   // toggleInputs, setState
    /*eslint-enable react-hooks/exhaustive-deps */
    /*eslint-disable react-hooks/exhaustive-deps */
    , _hLoad = useCallback(() => {

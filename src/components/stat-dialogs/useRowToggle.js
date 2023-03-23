@@ -1,36 +1,33 @@
-import {
-  useState,
-  useCallback,
-  useEffect
-} from '../uiApi';
+import { useEffect } from '../uiApi';
+
+import useToggleState from '../hooks/useToggleState';
 
 import crIsId from './crIsId';
 
-const useRowTogle = configs => {
-  const [isRow, setIsRow] = useState({ isShowChart: true, isShowDate: false})
-  , _toggleIsRow = useCallback(propName => {
-      setIsRow(is => {
-        is[propName] = !is[propName]
-        return {...is};
-      })
-  }, []);
+const useRowToggle = configs => {
+  const [
+    _isRow,
+    _toggleIsRow
+  ] = useToggleState({
+    isShowChart: true,
+    isShowDate: false
+  });
 
   useEffect(() => {
-    const _dfIs = {};
-    let _isDfItem = false;
-    configs.forEach(config => {
-      if (config.dfItem) {
-        _isDfItem = true
-        _dfIs[crIsId(config.id)] = true
-      }
-    })
-    setIsRow(is => _isDfItem
-      ? ({...is, ..._dfIs})
-      : is
-    )
-  }, [configs])
+    const _dfIs = configs
+      .reduce((_r, config) => {
+         if (config.dfItem) {
+           _r[crIsId(config.id)] = true
+         }
+         return _r;
+       }, {});
+    _toggleIsRow(_dfIs)
+  }, [configs, _toggleIsRow])
 
-  return [isRow, setIsRow, _toggleIsRow];
+  return [
+    _isRow,
+    _toggleIsRow
+  ];
 };
 
-export default useRowTogle
+export default useRowToggle

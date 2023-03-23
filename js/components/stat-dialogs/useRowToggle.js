@@ -4,36 +4,24 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _useToggleState = _interopRequireDefault(require("../hooks/useToggleState"));
 var _crIsId = _interopRequireDefault(require("./crIsId"));
-const useRowTogle = configs => {
-  const [isRow, setIsRow] = (0, _uiApi.useState)({
-      isShowChart: true,
-      isShowDate: false
-    }),
-    _toggleIsRow = (0, _uiApi.useCallback)(propName => {
-      setIsRow(is => {
-        is[propName] = !is[propName];
-        return {
-          ...is
-        };
-      });
-    }, []);
+const useRowToggle = configs => {
+  const [_isRow, _toggleIsRow] = (0, _useToggleState.default)({
+    isShowChart: true,
+    isShowDate: false
+  });
   (0, _uiApi.useEffect)(() => {
-    const _dfIs = {};
-    let _isDfItem = false;
-    configs.forEach(config => {
+    const _dfIs = configs.reduce((_r, config) => {
       if (config.dfItem) {
-        _isDfItem = true;
-        _dfIs[(0, _crIsId.default)(config.id)] = true;
+        _r[(0, _crIsId.default)(config.id)] = true;
       }
-    });
-    setIsRow(is => _isDfItem ? {
-      ...is,
-      ..._dfIs
-    } : is);
-  }, [configs]);
-  return [isRow, setIsRow, _toggleIsRow];
+      return _r;
+    }, {});
+    _toggleIsRow(_dfIs);
+  }, [configs, _toggleIsRow]);
+  return [_isRow, _toggleIsRow];
 };
-var _default = useRowTogle;
+var _default = useRowToggle;
 exports.default = _default;
 //# sourceMappingURL=useRowToggle.js.map

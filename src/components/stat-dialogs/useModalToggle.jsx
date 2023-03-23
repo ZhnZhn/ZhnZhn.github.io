@@ -17,7 +17,6 @@ const useModalToggle = (
   ] = useToggleClose()
   , [
     isRow,
-    setIsRow,
     toggleIsRow
   ] = useRowToggle(configs)
   , {
@@ -49,7 +48,7 @@ const useModalToggle = (
     /*eslint-enable react-hooks/exhaustive-deps */
     , refTitles
     , isRow
-    , setIsRow
+    , toggleIsRow
     , toggleInputs
   ];
 };

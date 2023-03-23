@@ -96,7 +96,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       timeId
     } = state,
     [isShowLabels, toggleLabels] = (0, _useToggle.default)(IS_SHOW_LABELS),
-    [_modalToggleEl, _refTitles, isRow, setIsRow, toggleInputs] = (0, _useModalToggle.default)(configs),
+    [_modalToggleEl, _refTitles, isRow, toggleIsRow, toggleInputs] = (0, _useModalToggle.default)(configs),
     {
       isShowDate,
       isShowChart
@@ -152,11 +152,12 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     //getDim, _isDim
     ,
     _hSelectChartType = (0, _uiApi.useCallback)(chartType => {
-      const _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(chartType);
-      (0, _updateStateIf.default)(setIsRow, 'isShowDate', _isShowDate);
+      toggleIsRow({
+        isShowDate: (0, _ChartOptionsFn.isCategoryItem)(chartType)
+      });
       (0, _updateStateIf.default)(setState, 'chartType', chartType);
     }, [])
-    //setDate, setIsRow, setState
+    // toggleInputs, setState
     /*eslint-enable react-hooks/exhaustive-deps */
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hLoad = (0, _uiApi.useCallback)(() => {
