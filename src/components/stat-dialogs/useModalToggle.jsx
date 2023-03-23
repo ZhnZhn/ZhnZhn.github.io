@@ -1,9 +1,10 @@
 import { useMemo } from '../uiApi';
 
-import D from '../dialogs/DialogCell';
+import useToggleClose from '../hooks/useToggleClose';
 import useTitles from '../dialogs/hooks/useTitles';
 import useRowToggle from './useRowToggle';
-import useToggle2 from './useToggle2';
+
+import D from '../dialogs/DialogCell';
 import crIsId from './crIsId';
 
 const useModalToggle = (
@@ -13,7 +14,7 @@ const useModalToggle = (
     isToggle,
     toggleInputs,
     hideInputs
-  ] = useToggle2(false)
+  ] = useToggleClose()
   , [
     isRow,
     setIsRow,
