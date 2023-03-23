@@ -1,5 +1,8 @@
+import { COLOR_DATE } from '../../constants/Color';
+
 const S = {
-  color: '#fdb316',
+  color: COLOR_DATE,
+  display: 'inline-block',
   fontWeight: 'bold'
 };
 

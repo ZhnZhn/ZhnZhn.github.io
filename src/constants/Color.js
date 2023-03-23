@@ -9,13 +9,15 @@ const P_HIGH = '#4caf50'
 , P_GREY = 'grey'
 , P_DARK_GREY = '#4d4d4d'
 , P_BLACK = 'black'
-, P_WHITE = 'white';
+, P_WHITE = 'white'
+, P_DATE = '#fdb316';
 
 export const COLOR_BLUE = P_BLUE
 export const COLOR_GREEN = "#80c040"
 export const COLOR_RED = P_RED
 export const COLOR_WHITE = "white"
 export const COLOR_GREY = '#607d8b'
+export const COLOR_DATE = P_DATE
 
 export const COLOR_CHART_PRINT = P_WHITE
 export const COLOR_PLOT_PRINT = P_WHITE
@@ -45,8 +47,8 @@ export const COLOR_METRIC_TITLE = P_SIREN
 
 export const COLOR_X_LINE = P_GREY
 export const COLOR_X_GRID_LINE = P_GREY
-export const COLOR_X_TICK = '#fdb316'
-export const COLOR_X_LABEL = '#fdb316'
+export const COLOR_X_TICK = P_DATE
+export const COLOR_X_LABEL = P_DATE
 export const COLOR_Y_LINE = P_GREY
 export const COLOR_Y_GRID_LINE = P_GREY
 export const COLOR_Y_TICK = P_BLUE

@@ -19,7 +19,6 @@ var _jsxRuntime = require("react/jsx-runtime");
 const CL_BT = 'bt';
 const S_ROOT = {
     position: 'relative',
-    top: 1,
     display: 'inline-block',
     marginLeft: 10
   },
@@ -32,7 +31,6 @@ const S_ROOT = {
     width: 5
   },
   S_DATE = {
-    display: 'inline-block',
     padding: '4px 5px 2px 5px'
   },
   S_UP = {

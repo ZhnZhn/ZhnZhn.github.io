@@ -33,7 +33,6 @@ const S_MODAL_POPUP = {
   justifyContent: 'space-between'
 }
 , S_DATE = {
-  display: 'inline-block',
   paddingLeft: 16,
   whiteSpace: 'nowrap'
 };

@@ -2,9 +2,11 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _Color = require("../../constants/Color");
 var _jsxRuntime = require("react/jsx-runtime");
 const S = {
-  color: '#fdb316',
+  color: _Color.COLOR_DATE,
+  display: 'inline-block',
   fontWeight: 'bold'
 };
 const SpanDate = _ref => {

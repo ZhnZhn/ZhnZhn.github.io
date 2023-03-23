@@ -27,7 +27,6 @@ const CL_BT = 'bt';
 
 const S_ROOT = {
   position: 'relative',
-  top: 1,
   display: 'inline-block',
   marginLeft: 10
 },
@@ -40,7 +39,6 @@ S_W5 = {
   width: 5
 },
 S_DATE = {
-  display: 'inline-block',
   padding: '4px 5px 2px 5px'
 },
 S_UP = {
