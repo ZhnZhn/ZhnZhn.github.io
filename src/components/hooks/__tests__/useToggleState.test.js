@@ -56,6 +56,50 @@ describe('useToggleState', () =>{
     expect(_getToggle(result)).toEqual(toggle)
   })
 
+  test('should update state by plain object with own boolean properties',()=>{
+    const initialState = {
+      prop1: true,
+      prop2: true
+    }
+    , [
+      result,
+      toggle
+    ] = _renderInitialTest(initialState, initialState);
+
+    act(() => toggle({ prop1: false, prop2: false }))
+    const _result1 = _getState(result)
+    expect(_result1).toEqual({
+      prop1: false,
+      prop2: false
+    })
+
+    act(() => toggle({ prop1: 'true', prop2: 1, prop3: true }))
+    expect(_getState(result)).toBe(_result1)
+
+    act(() => toggle({}))
+    expect(_getState(result)).toBe(_result1)
+
+    act(() => toggle(null))
+    expect(_getState(result)).toBe(_result1)
+
+    act(() => toggle())
+    expect(_getState(result)).toBe(_result1)
+
+    act(() => toggle(1))
+    expect(_getState(result)).toBe(_result1)
+
+    act(() => toggle(Object.create({ prop3: true})))
+    expect(_getState(result)).toBe(_result1)
+
+    act(() => toggle({ prop3: true }))
+    expect(_getState(result)).toEqual({
+      prop1: false,
+      prop2: false,
+      prop3: true
+    })
+
+  })
+
   test('should init empty object state by default', ()=>{
     _renderInitialTest(void 0, {});
   })
