@@ -3,7 +3,7 @@ import {
   useMemo
 } from '../../uiApi';
 
-import useToggle from '../../hooks/useToggle';
+import useToggleClose from '../../hooks/useToggleClose';
 
 const useDialogOptions = () => {
   const refDialogOptions = useRef({
@@ -13,17 +13,14 @@ const useDialogOptions = () => {
   })
   , [
     isShowOptions,
-    toggleOptions
-  ] = useToggle(false)
-  , [
-    hideOptions,
-    toggleDialogOption
-  ] = useMemo(() => [
-    () => { toggleOptions(false)},
+    toggleOptions,
+    hideOptions
+  ] = useToggleClose()
+  , toggleDialogOption = useMemo(() =>
     (is, propName) => {
       refDialogOptions.current[propName] = is
     }
-  ], [toggleOptions]);
+  , []);
 
   return [
     refDialogOptions,

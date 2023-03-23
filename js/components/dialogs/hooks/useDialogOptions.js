@@ -4,19 +4,17 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../../uiApi");
-var _useToggle = _interopRequireDefault(require("../../hooks/useToggle"));
+var _useToggleClose = _interopRequireDefault(require("../../hooks/useToggleClose"));
 const useDialogOptions = () => {
   const refDialogOptions = (0, _uiApi.useRef)({
       //isNotZoomToMinMax: false,
       //isFilterZero: false,
       //isLogaritmic: false
     }),
-    [isShowOptions, toggleOptions] = (0, _useToggle.default)(false),
-    [hideOptions, toggleDialogOption] = (0, _uiApi.useMemo)(() => [() => {
-      toggleOptions(false);
-    }, (is, propName) => {
+    [isShowOptions, toggleOptions, hideOptions] = (0, _useToggleClose.default)(),
+    toggleDialogOption = (0, _uiApi.useMemo)(() => (is, propName) => {
       refDialogOptions.current[propName] = is;
-    }], [toggleOptions]);
+    }, []);
   return [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption];
 };
 var _default = useDialogOptions;
