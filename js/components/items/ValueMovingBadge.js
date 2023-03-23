@@ -58,16 +58,26 @@ const DF_VALUE_MOVING = {
   direction: _DirectionType.DT_EQUAL,
   date: ''
 };
-const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref, ref) => {
+const _getStr = date => date || '',
+  _isYearly = date => _getStr(date).slice(0, 5) === '31-12',
+  _crDate = _ref => {
+    let {
+      date,
+      dateTo
+    } = _ref;
+    return _isYearly(date) && _isYearly(dateTo) ? _getStr(date).slice(6, 10) : date;
+  };
+const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref2, ref) => {
   let {
     isAdminMode,
     initialVm = DF_VALUE_MOVING,
     crValueMoving
-  } = _ref;
+  } = _ref2;
   const [vm, setVm] = (0, _uiApi.useState)(initialVm),
-    [isShowModal, _toggleModal, _closeModal] = (0, _useToggleClose.default)()
+    [isShowModal, _toggleModal, _closeModal] = (0, _useToggleClose.default)(),
+    _date = (0, _uiApi.useMemo)(() => _crDate(initialVm), [initialVm])
     /*eslint-disable react-hooks/exhaustive-deps */,
-    _updateDateTo = (0, _uiApi.useCallback)(dateTo => {
+    _updateDateTo = (0, _uiApi.useMemo)(() => dateTo => {
       const _vm = crValueMoving(vm, dateTo);
       return _vm ? (setVm(_vm), _vm) : void 0;
     }, [vm]);
@@ -81,8 +91,7 @@ const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref, ref) => {
       value,
       delta,
       percent,
-      direction,
-      date
+      direction
     } = vm,
     [_svgDirection, _dStyle] = _getDirection(direction),
     _spanStyle = {
@@ -106,7 +115,7 @@ const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref, ref) => {
       onClick: _toggleModal,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanDate.default, {
         style: S_DATE,
-        date: date
+        date: _date
       })
     }), _svgDirection && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingModal.default, {
       isShow: isShowModal,
@@ -125,9 +134,14 @@ ValueMovingBadge.propTypes = {
     delta: PropTypes.number,
     percent: PropTypes.number,
     direction: PropTypes.oneOf(
-      'up', 'down', 'equal', 'empty'
+      'up',
+      'down',
+      'equal',
+      'empty'
     ),
-    date: PropTypes.string
+    date: PropTypes.string,
+    valueTo: ?PropTypes.number,
+    dateTo: ?PropTypes.string
   }),
   isAdminMode: PropTypes.oneOfType([
     PropTypes.func,

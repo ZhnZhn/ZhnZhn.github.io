@@ -2,7 +2,7 @@
 import {
   forwardRef,
   useState,
-  useCallback,
+  useMemo,
   useImperativeHandle
 } from '../uiApi';
 
@@ -73,6 +73,17 @@ const DF_VALUE_MOVING = {
   date: ''
 };
 
+const _getStr = date => date || ''
+, _isYearly = (
+  date
+) => _getStr(date).slice(0, 5) === '31-12'
+, _crDate = ({
+   date,
+   dateTo
+}) => _isYearly(date) && _isYearly(dateTo)
+ ? _getStr(date).slice(6, 10)
+ : date;
+
 const ValueMovingBadge = forwardRef(({
   isAdminMode,
   initialVm=DF_VALUE_MOVING,
@@ -87,13 +98,17 @@ const ValueMovingBadge = forwardRef(({
     _toggleModal,
     _closeModal
   ] = useToggleClose()
+  , _date = useMemo(
+     () => _crDate(initialVm),
+     [initialVm]
+  )
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _updateDateTo = useCallback(dateTo => {
+  , _updateDateTo = useMemo(() => (dateTo) => {
      const _vm = crValueMoving(vm, dateTo);
      return _vm
        ? (setVm(_vm), _vm)
        : void 0;
-  }, [vm])
+  }, [vm]);
   //crValueMoving
   /*eslint-enable react-hooks/exhaustive-deps */
 
@@ -105,8 +120,7 @@ const ValueMovingBadge = forwardRef(({
      value,
      delta,
      percent,
-     direction,
-     date
+     direction
    } = vm
    , [
      _svgDirection,
@@ -130,8 +144,8 @@ const ValueMovingBadge = forwardRef(({
          onClick={_toggleModal}
        >
          <SpanDate
-            style={S_DATE} 
-            date={date}
+            style={S_DATE}
+            date={_date}
          />
        </Button>
        {
@@ -154,9 +168,14 @@ ValueMovingBadge.propTypes = {
     delta: PropTypes.number,
     percent: PropTypes.number,
     direction: PropTypes.oneOf(
-      'up', 'down', 'equal', 'empty'
+      'up',
+      'down',
+      'equal',
+      'empty'
     ),
-    date: PropTypes.string
+    date: PropTypes.string,
+    valueTo: ?PropTypes.number,
+    dateTo: ?PropTypes.string
   }),
   isAdminMode: PropTypes.oneOfType([
     PropTypes.func,
