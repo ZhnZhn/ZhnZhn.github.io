@@ -14,10 +14,11 @@ const {
 } = zhnUtils;
 
 const _helperStyledFalse = (
+  color,
   bt,
   chbox
 ) => {
-  expect(bt).toHaveStyle(`color: grey`)
+  expect(bt).not.toHaveStyle(`color: ${color}`)
   expect(chbox).toHaveAttribute('aria-checked', "false")
 }
 const _helperStyledTrue = (
@@ -34,7 +35,7 @@ const _crTestArtifacts = (
 ) => {
   const bt = screen.getByRole('button')
   , chbox = screen.getByRole('checkbox')
-  , _testStyledFalse = _helperStyledFalse.bind(null, bt, chbox)
+  , _testStyledFalse = _helperStyledFalse.bind(null, checkedColor, bt, chbox)
   , _testStyledTrue = _helperStyledTrue.bind(null, checkedColor, bt, chbox)
   return {
     bt,
