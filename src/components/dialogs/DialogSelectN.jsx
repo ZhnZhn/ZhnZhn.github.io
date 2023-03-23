@@ -11,6 +11,7 @@ import {
 
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
+import useToggleClose from '../hooks/useToggleClose';
 import useToggleState from '../hooks/useToggleState';
 import useProperty from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';
@@ -144,11 +145,9 @@ const DialogSelectN = memoIsShow((
   }, [toggleIsShowFd])
   , [
     isToggle,
-    toggleInputs
-  ] = useToggle(false)
-  , _hideToggle = useCallback(() => {
-    toggleInputs(false)
-  }, [toggleInputs])
+    toggleInputs,
+    _hideToggle
+  ] = useToggleClose()
   , [
     refDialogOptions,
     isShowOptions,
@@ -247,7 +246,7 @@ const DialogSelectN = memoIsShow((
           isCategory: isCategoryItem(chartType),
           items: [...getRefValue(_refItems)],
           titles: getRefValue(refTitles),
-          dialogOptions: getRefValue(refDialogOptions),          
+          dialogOptions: getRefValue(refDialogOptions),
           fromDate: _getValidValue(_refFromDate, ''),
           date: _getDate(),
           _rt: _getRoundTo()

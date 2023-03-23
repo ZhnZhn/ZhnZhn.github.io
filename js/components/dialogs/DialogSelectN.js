@@ -6,6 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggleClose = _interopRequireDefault(require("../hooks/useToggleClose"));
 var _useToggleState = _interopRequireDefault(require("../hooks/useToggleState"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
@@ -91,10 +92,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
         toggleIsShowFd(false);
       }
     }, [toggleIsShowFd]),
-    [isToggle, toggleInputs] = (0, _useToggle.default)(false),
-    _hideToggle = (0, _uiApi.useCallback)(() => {
-      toggleInputs(false);
-    }, [toggleInputs]),
+    [isToggle, toggleInputs, _hideToggle] = (0, _useToggleClose.default)(),
     [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
     [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
       onAbout,
