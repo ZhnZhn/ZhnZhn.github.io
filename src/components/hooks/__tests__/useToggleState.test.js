@@ -24,7 +24,10 @@ describe('useToggleState', () =>{
       prop1: true,
       prop2: true
     }
-    , [result, toggle] = _renderInitialTest(initialState, initialState);
+    , [
+      result,
+      toggle
+    ] = _renderInitialTest(initialState, initialState);
 
     act(() => toggle('prop1'))
     expect(_getState(result)).toEqual({
@@ -73,6 +76,12 @@ describe('useToggleState', () =>{
       prop2: false
     })
 
+    act(() => toggle({ prop1: false, prop2: false }))
+    expect(_getState(result)).toBe(_result1)
+
+    act(() => toggle(Object.create({ prop3: true })))
+    expect(_getState(result)).toBe(_result1)
+
     act(() => toggle({ prop1: 'true', prop2: 1, prop3: true }))
     expect(_getState(result)).toBe(_result1)
 
@@ -85,11 +94,11 @@ describe('useToggleState', () =>{
     act(() => toggle())
     expect(_getState(result)).toBe(_result1)
 
-    act(() => toggle(1))
+    act(() => toggle(0))
     expect(_getState(result)).toBe(_result1)
 
-    act(() => toggle(Object.create({ prop3: true})))
-    expect(_getState(result)).toBe(_result1)
+    act(() => toggle(true))
+    expect(_getState(result)).toBe(_result1)    
 
     act(() => toggle({ prop3: true }))
     expect(_getState(result)).toEqual({

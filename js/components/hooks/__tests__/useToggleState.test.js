@@ -67,6 +67,15 @@ describe('useToggleState', () => {
       prop2: false
     });
     (0, _react.act)(() => toggle({
+      prop1: false,
+      prop2: false
+    }));
+    expect(_getState(result)).toBe(_result1);
+    (0, _react.act)(() => toggle(Object.create({
+      prop3: true
+    })));
+    expect(_getState(result)).toBe(_result1);
+    (0, _react.act)(() => toggle({
       prop1: 'true',
       prop2: 1,
       prop3: true
@@ -78,11 +87,9 @@ describe('useToggleState', () => {
     expect(_getState(result)).toBe(_result1);
     (0, _react.act)(() => toggle());
     expect(_getState(result)).toBe(_result1);
-    (0, _react.act)(() => toggle(1));
+    (0, _react.act)(() => toggle(0));
     expect(_getState(result)).toBe(_result1);
-    (0, _react.act)(() => toggle(Object.create({
-      prop3: true
-    })));
+    (0, _react.act)(() => toggle(true));
     expect(_getState(result)).toBe(_result1);
     (0, _react.act)(() => toggle({
       prop3: true
