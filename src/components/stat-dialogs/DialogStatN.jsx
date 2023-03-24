@@ -1,5 +1,6 @@
 import {
   useRef,
+  useState,
   useCallback,
   getRefValue,
   getInputValue
@@ -23,7 +24,7 @@ import useRefByIndex from './useRefByIndex';
 import useModalToggle from './useModalToggle';
 import useLoadDims from './useLoadDims';
 
-import updateStateIf from './updateStateIf'
+//import updateStateIf from './updateStateIf'
 import crSpinnerStatus from './crSpinnerStatus';
 
 import { GEO_ENTITY } from './dimensions/EsConfig';
@@ -96,6 +97,10 @@ const DialogStatN = memoIsShow((props) => {
   } = dfProps || {};
   const _isDim = !props.dims && !props.notDim
   , [
+    chartType,
+    setChartType
+  ] = useState()
+  , [
     _refItems,
     _fSelectItem
   ] = useRefByIndex()
@@ -117,13 +122,11 @@ const DialogStatN = memoIsShow((props) => {
       isLoading,
       isLoadFailed,
       validationMessages,
-      setValidationMessages,
-      setState
+      setValidationMessages
   ] = useLoadDims(props)
   , {
       configs,
       selectOptions,
-      chartType,
       chartOptions,
       dimOptions,
       dateOptions,
@@ -207,7 +210,8 @@ const DialogStatN = memoIsShow((props) => {
        toggleIsRow({
          isShowDate: isCategoryItem(chartType)
        })
-       updateStateIf(setState, 'chartType', chartType)
+       setChartType(chartType)
+       //updateStateIf(setState, 'chartType', chartType)
    }, [])
    // toggleInputs, setState
    /*eslint-enable react-hooks/exhaustive-deps */

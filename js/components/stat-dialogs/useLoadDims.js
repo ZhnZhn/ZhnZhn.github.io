@@ -46,7 +46,7 @@ const _useIsLoadDims = (props, isLoadFailed) => {
   const prevProps = (0, _usePreviousProps.default)(props);
   return isLoadFailed && !prevProps.isShow && props.isShow;
 };
-const _crDateOptions = (configs, _mF, mapDateDf) => {
+const _crDateOptions = (configs, _mF, mapDateDf, loadId) => {
   const {
     dateOptions
   } = configs;
@@ -56,7 +56,7 @@ const _crDateOptions = (configs, _mF, mapDateDf) => {
   const {
     dateOptions: dO,
     dateDefault
-  } = crDateConfig(_mF, mapDateDf);
+  } = crDateConfig(_mF, mapDateDf, loadId);
   return [dO, _crOptionItem(dateDefault, dateDefault)];
 };
 const _crSelectOptions = configs => configs.map(config => config.options);
@@ -74,6 +74,7 @@ const useLoadDims = props => {
       chartsType,
       mapFrequency,
       mapDateDf,
+      loadId,
       dfProps = {}
     } = props,
     _mapFrequency = dfProps.mapFrequency || mapFrequency || MAP_FREQUENCY_DF,
@@ -99,7 +100,7 @@ const useLoadDims = props => {
       } = _ref2;
       if (configs) {
         const _mF = mF || _mapFrequency,
-          [dateOptions, dateDf] = _crDateOptions(configs, _mF, _mapDateDf);
+          [dateOptions, dateDf] = _crDateOptions(configs, _mF, _mapDateDf, loadId);
         setLoad({
           isLoading: false,
           isLoadFailed: false
@@ -125,7 +126,7 @@ const useLoadDims = props => {
         });
         setValidationMessages([errMsg]);
       }
-    }, [chartsType, _mapFrequency, _mapDateDf]),
+    }, [chartsType, _mapFrequency, _mapDateDf, loadId]),
     _isLoadDims = _useIsLoadDims(props, isLoadFailed);
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -140,7 +141,7 @@ const useLoadDims = props => {
       setLoad(_crLoadingState);
     }
   }, [_isLoadDims, props, _setConfigs]);
-  return [state, isLoading, isLoadFailed, validationMessages, setValidationMessages, setState];
+  return [state, isLoading, isLoadFailed, validationMessages, setValidationMessages];
 };
 var _default = useLoadDims;
 exports.default = _default;

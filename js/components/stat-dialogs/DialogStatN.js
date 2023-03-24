@@ -19,10 +19,11 @@ var _useDialogOptions = _interopRequireDefault(require("../dialogs/hooks/useDial
 var _useRefByIndex = _interopRequireDefault(require("./useRefByIndex"));
 var _useModalToggle = _interopRequireDefault(require("./useModalToggle"));
 var _useLoadDims = _interopRequireDefault(require("./useLoadDims"));
-var _updateStateIf = _interopRequireDefault(require("./updateStateIf"));
 var _crSpinnerStatus = _interopRequireDefault(require("./crSpinnerStatus"));
 var _EsConfig = require("./dimensions/EsConfig");
 var _jsxRuntime = require("react/jsx-runtime");
+//import updateStateIf from './updateStateIf'
+
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.",
   MSG_DIMS_LOADING = "Dims is loading",
   S_DIV_LOADING = {
@@ -79,16 +80,16 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       dfRt
     } = dfProps || {};
   const _isDim = !props.dims && !props.notDim,
+    [chartType, setChartType] = (0, _uiApi.useState)(),
     [_refItems, _fSelectItem] = (0, _useRefByIndex.default)(),
     _refSeriaColor = (0, _uiApi.useRef)(),
     [setDate, getDate] = (0, _useProperty.default)(),
     [setDim, getDim] = (0, _useProperty.default)(),
     [_setRoundTo, _getRoundTo] = (0, _useProperty.default)(dfRt),
-    [state, isLoading, isLoadFailed, validationMessages, setValidationMessages, setState] = (0, _useLoadDims.default)(props),
+    [state, isLoading, isLoadFailed, validationMessages, setValidationMessages] = (0, _useLoadDims.default)(props),
     {
       configs,
       selectOptions,
-      chartType,
       chartOptions,
       dimOptions,
       dateOptions,
@@ -155,7 +156,8 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       toggleIsRow({
         isShowDate: (0, _ChartOptionsFn.isCategoryItem)(chartType)
       });
-      (0, _updateStateIf.default)(setState, 'chartType', chartType);
+      setChartType(chartType);
+      //updateStateIf(setState, 'chartType', chartType)
     }, [])
     // toggleInputs, setState
     /*eslint-enable react-hooks/exhaustive-deps */

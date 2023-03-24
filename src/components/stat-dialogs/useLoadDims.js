@@ -92,9 +92,20 @@ const useLoadDims = (props) => {
      || MAP_FREQUENCY_DF
   , _mapDateDf = dfProps.mapDateDf
      || mapDateDf
-  , [{isLoading, isLoadFailed}, setLoad] = useState(_crLoadingState)
-  , [validationMessages, setValidationMessages] = useState([])
-  , [state, setState] = useState(()=>({
+  , [{
+       isLoading,
+       isLoadFailed
+     },
+     setLoad
+   ] = useState(_crLoadingState)
+  , [
+    validationMessages,
+    setValidationMessages
+  ] = useState([])
+  , [
+    state,
+    setState
+  ] = useState(()=>({
      configs: [],
      selectOptions: [],
      mapFrequency,
@@ -155,8 +166,7 @@ const useLoadDims = (props) => {
     isLoading,
     isLoadFailed,
     validationMessages,
-    setValidationMessages,
-    setState
+    setValidationMessages
   ];
 };
 
