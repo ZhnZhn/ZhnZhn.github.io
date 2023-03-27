@@ -3,6 +3,8 @@ import {
   useCallback
 } from '../../uiApi';
 
+const _isArr = Array.isArray;
+
 const useValidationMessages = (
   onClose
 ) => {
@@ -10,25 +12,26 @@ const useValidationMessages = (
     validationMessages,
     setValidationMessages
   ] = useState([])
-  , clearValidationMessages = useCallback(() => {
-    setValidationMessages(prevMsgs =>
-       prevMsgs.length === 0
-         ? prevMsgs
-         : []
-     )
+  , _setValidationMessages = useCallback(nextMsgs => {
+    if (_isArr(nextMsgs)) {
+      setValidationMessages(
+        prevMsgs => prevMsgs.length === 0 && nextMsgs.length === 0
+           ? prevMsgs
+           : nextMsgs
+      )
+    }
   }, [])
   /*eslint-disable react-hooks/exhaustive-deps */
   , hClose = useCallback(() => {
-    onClose()
-    clearValidationMessages()
+      onClose()
+      _setValidationMessages([])
   }, []);
-  // onClose, clearValidationMessages
+  // onClose, _setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return [
     validationMessages,
-    setValidationMessages,
-    clearValidationMessages,
+    _setValidationMessages,
     hClose
   ];
 }

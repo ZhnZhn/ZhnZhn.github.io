@@ -120,7 +120,6 @@ const DialogStatN = memoIsShow((props) => {
   , [
     validationMessages,
     setValidationMessages,
-    clearValidationMessages,
     _hClose
   ] = useValidationMessages(onClose)
   , [
@@ -227,10 +226,8 @@ const DialogStatN = memoIsShow((props) => {
          titles: getRefValue(_refTitles),
          _rt: _getRoundTo()
       }))
-      clearValidationMessages()
-    } else {
-      setValidationMessages(validationMessages)
     }
+    setValidationMessages(validationMessages)
   }, [
     _crValidationMessages,
     dateDf,

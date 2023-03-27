@@ -94,7 +94,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     }, [toggleIsShowFd]),
     [isToggle, toggleInputs, _hideToggle] = (0, _useToggleClose.default)(),
     [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
+    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
       onAbout,
       onClose,
       toggleInputs: isFd || selectProps.length > 1 ? toggleInputs : void 0,
@@ -153,10 +153,8 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
           date: _getDate(),
           _rt: _getRoundTo()
         }));
-        clearValidationMessages();
-      } else {
-        setValidationMessages(msgs);
       }
+      setValidationMessages(msgs);
     }),
     _isCategory = (0, _ChartOptionsFn.isCategoryItem)(chartType),
     _isRowFd = isFd && !_isCategory,

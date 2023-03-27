@@ -160,8 +160,8 @@ const UNCommodityTradeDialog = memoIsShow((
   , [
     validationMessages,
     setValidationMessages,
-    clearValidationMessages,
-  ] = useValidationMessages()
+    _hClose
+  ] = useValidationMessages(onClose)
   , [state, setState] = useState(INITIAL_STATE)
   , {
     isLoadingTrade,
@@ -240,19 +240,16 @@ const UNCommodityTradeDialog = memoIsShow((
           isLoadingTradeFailed: true
         }))
       })
-
       setState(prevState => ({
         ...prevState,
         isLoadingTrade: true
       }))
-      clearValidationMessages()
-    } else {
-      setValidationMessages(msgs)
     }
+    setValidationMessages(msgs)
   }, [])
   // onLoad, fnValue, loadId, msgOnNotSelected,
   // getChapter, getCountry, getOptionTrades, getTradeFilter,
-  // clearValidationMessages, setValidationMessages
+  // setValidationMessages
   , _hLoadData = useEventCallback(() => {
     const msgs = []
     , chartType = getChartType()
@@ -298,10 +295,8 @@ const UNCommodityTradeDialog = memoIsShow((
           loadId,
           dataSource
         })
-      clearValidationMessages()
-    } else {
-      setValidationMessages(msgs)
     }
+    setValidationMessages(msgs)
   })
   , _commandButtons = useMemo(() => [
     <FlatButton
@@ -317,11 +312,6 @@ const UNCommodityTradeDialog = memoIsShow((
      />
   ], [])
   // _hLoadMeta, _hLoadData
-  , _hClose = useCallback(() => {
-    onClose()
-    clearValidationMessages()
-  }, [])
-  // onClose, clearValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (

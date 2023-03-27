@@ -125,7 +125,7 @@ const UNCommodityTradeDialog = (0, _memoIsShow.default)(props => {
     [isShowDate, toggleDate] = (0, _useToggle.default)(false),
     [isShowChartType, toggleChartType] = (0, _useToggle.default)(false),
     _toolbarButtons = (0, _useRefInit.default)(() => [(0, _crToolbarItem.default)('L', CLICK_TO_TOGGLE + " input labels", toggleLabels), (0, _crToolbarItem.default)('F', CLICK_TO_TOGGLE + " filter input", toggleFilter), (0, _crToolbarItem.default)('D', CLICK_TO_TOGGLE + " date input", toggleDate), (0, _crToolbarItem.default)('C', CLICK_TO_TOGGLE + " chart type input", toggleChartType), (0, _crToolbarItem.default)('A', 'About datasource', onAbout)]),
-    [validationMessages, setValidationMessages, clearValidationMessages] = (0, _useValidationMessages.default)(),
+    [validationMessages, setValidationMessages, _hClose] = (0, _useValidationMessages.default)(onClose),
     [state, setState] = (0, _uiApi.useState)(INITIAL_STATE),
     {
       isLoadingTrade,
@@ -205,14 +205,12 @@ const UNCommodityTradeDialog = (0, _memoIsShow.default)(props => {
           ...prevState,
           isLoadingTrade: true
         }));
-        clearValidationMessages();
-      } else {
-        setValidationMessages(msgs);
       }
+      setValidationMessages(msgs);
     }, [])
     // onLoad, fnValue, loadId, msgOnNotSelected,
     // getChapter, getCountry, getOptionTrades, getTradeFilter,
-    // clearValidationMessages, setValidationMessages
+    // setValidationMessages
     ,
     _hLoadData = (0, _useEventCallback.default)(() => {
       const msgs = [],
@@ -249,10 +247,8 @@ const UNCommodityTradeDialog = (0, _memoIsShow.default)(props => {
           loadId,
           dataSource
         });
-        clearValidationMessages();
-      } else {
-        setValidationMessages(msgs);
       }
+      setValidationMessages(msgs);
     }),
     _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       style: S_BT,
@@ -261,14 +257,8 @@ const UNCommodityTradeDialog = (0, _memoIsShow.default)(props => {
       onClick: _hLoadMeta
     }, "meta"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Buttons.ButtonLoad, {
       onClick: _hLoadData
-    }, "load")], [])
-    // _hLoadMeta, _hLoadData
-    ,
-    _hClose = (0, _uiApi.useCallback)(() => {
-      onClose();
-      clearValidationMessages();
-    }, []);
-  // onClose, clearValidationMessages
+    }, "load")], []);
+  // _hLoadMeta, _hLoadData
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {

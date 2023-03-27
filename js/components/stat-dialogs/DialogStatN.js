@@ -85,7 +85,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     [setDate, getDate] = (0, _useProperty.default)(),
     [setDim, getDim] = (0, _useProperty.default)(),
     [_setRoundTo, _getRoundTo] = (0, _useProperty.default)(dfRt),
-    [validationMessages, setValidationMessages, clearValidationMessages, _hClose] = (0, _useValidationMessages.default)(onClose),
+    [validationMessages, setValidationMessages, _hClose] = (0, _useValidationMessages.default)(onClose),
     [state, isLoading, isLoadFailed] = (0, _useLoadDims.default)(props, setValidationMessages),
     {
       configs,
@@ -169,10 +169,8 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
           titles: (0, _uiApi.getRefValue)(_refTitles),
           _rt: _getRoundTo()
         }));
-        clearValidationMessages();
-      } else {
-        setValidationMessages(validationMessages);
       }
+      setValidationMessages(validationMessages);
     }, [_crValidationMessages, dateDf, timeId, chartType, configs, selectOptions])
     //loadFn, onLoad, props, clearValidationMessages, setValidationMessages
     /*eslint-enable react-hooks/exhaustive-deps */,

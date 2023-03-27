@@ -162,7 +162,6 @@ const DialogSelectN = memoIsShow((
     toolbarButtons,
     validationMessages,
     setValidationMessages,
-    clearValidationMessages,
     hClose
   ] = useDialog({
     onAbout,
@@ -251,10 +250,8 @@ const DialogSelectN = memoIsShow((
           date: _getDate(),
           _rt: _getRoundTo()
         }))
-        clearValidationMessages()
-      } else {
-        setValidationMessages(msgs)
       }
+      setValidationMessages(msgs)
   })
   , _isCategory = isCategoryItem(chartType)
   , _isRowFd = isFd && !_isCategory
