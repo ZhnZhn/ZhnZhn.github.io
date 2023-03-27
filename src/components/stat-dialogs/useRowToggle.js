@@ -9,8 +9,7 @@ const useRowToggle = configs => {
     _isRow,
     _toggleIsRow
   ] = useToggleState({
-    isShowChart: true,
-    isShowDate: false
+    isShowChart: true
   });
 
   useEffect(() => {

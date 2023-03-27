@@ -24,7 +24,6 @@ import useRefByIndex from './useRefByIndex';
 import useModalToggle from './useModalToggle';
 import useLoadDims from './useLoadDims';
 
-//import updateStateIf from './updateStateIf'
 import crSpinnerStatus from './crSpinnerStatus';
 
 import { GEO_ENTITY } from './dimensions/EsConfig';
@@ -141,11 +140,9 @@ const DialogStatN = memoIsShow((props) => {
     _modalToggleEl,
     _refTitles,
     isRow,
-    toggleIsRow,
     toggleInputs
   ] = useModalToggle(configs)
   , {
-    isShowDate,
     isShowChart
   } = isRow
   , [
@@ -206,15 +203,8 @@ const DialogStatN = memoIsShow((props) => {
         return msg;
    }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected])
    //getDim, _isDim
-   , _hSelectChartType = useCallback(chartType => {
-       toggleIsRow({
-         isShowDate: isCategoryItem(chartType)
-       })
-       setChartType(chartType)
-       //updateStateIf(setState, 'chartType', chartType)
-   }, [])
-   // toggleInputs, setState
    /*eslint-enable react-hooks/exhaustive-deps */
+
    /*eslint-disable react-hooks/exhaustive-deps */
    , _hLoad = useCallback(() => {
      _addDfValuesFrom(configs, _fSelectItem)
@@ -249,7 +239,8 @@ const DialogStatN = memoIsShow((props) => {
   ])
   //loadFn, onLoad, props
   /*eslint-enable react-hooks/exhaustive-deps */
-  , _spinnerStatus = crSpinnerStatus(isLoading, isLoadFailed);
+  , _spinnerStatus = crSpinnerStatus(isLoading, isLoadFailed)
+  , _isShowDate = isCategoryItem(chartType);
 
   return (
     <D.DraggableDialog
@@ -291,8 +282,8 @@ const DialogStatN = memoIsShow((props) => {
          isShowLabels={isShowLabels}
          isShowChart={isShowChart}
          chartOptions={chartOptions}
-         onSelectChart={_hSelectChartType}
-         isShowDate={isShowDate}
+         onSelectChart={setChartType}
+         isShowDate={_isShowDate}
          dateDefault={dateDf.caption}
          dateOptions={dateOptions}
          onSelectDate={setDate}

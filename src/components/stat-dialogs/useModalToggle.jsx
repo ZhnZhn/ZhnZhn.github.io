@@ -20,8 +20,7 @@ const useModalToggle = (
     toggleIsRow
   ] = useRowToggle(configs)
   , {
-    isShowChart,
-    isShowDate
+    isShowChart
   } = isRow
   , [
     refTitles,
@@ -36,19 +35,17 @@ const useModalToggle = (
         isShow={isToggle}
         selectProps={configs}
         isShowChart={isShowChart}
-        isShowDate={isShowDate}
         crIsId={crIsId}
         onToggle={toggleIsRow}
         onCheckCaption={addTitleIndex}
         onUnCheckCaption={removeTitleIndex}
         onClose={hideInputs}
       />
-    ), [isToggle, configs, isShowChart, isShowDate])
+    ), [isToggle, configs, isShowChart])
     //toggleIsRow, checkCaptionBy, uncheckCaption, hideInputs
     /*eslint-enable react-hooks/exhaustive-deps */
     , refTitles
     , isRow
-    , toggleIsRow
     , toggleInputs
   ];
 };

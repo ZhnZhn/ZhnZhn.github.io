@@ -70,7 +70,6 @@ const ModalToggle = ({
   isFd,
   isShowFd,
   isCh,
-  isShowDate,
   isShowChart,
   crIsId,
   onToggle,

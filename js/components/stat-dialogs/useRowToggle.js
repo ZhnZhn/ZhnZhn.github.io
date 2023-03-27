@@ -8,8 +8,7 @@ var _useToggleState = _interopRequireDefault(require("../hooks/useToggleState"))
 var _crIsId = _interopRequireDefault(require("./crIsId"));
 const useRowToggle = configs => {
   const [_isRow, _toggleIsRow] = (0, _useToggleState.default)({
-    isShowChart: true,
-    isShowDate: false
+    isShowChart: true
   });
   (0, _uiApi.useEffect)(() => {
     const _dfIs = configs.reduce((_r, config) => {

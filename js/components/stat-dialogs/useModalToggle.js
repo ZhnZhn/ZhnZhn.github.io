@@ -14,8 +14,7 @@ const useModalToggle = configs => {
   const [isToggle, toggleInputs, hideInputs] = (0, _useToggleClose.default)(),
     [isRow, toggleIsRow] = (0, _useRowToggle.default)(configs),
     {
-      isShowChart,
-      isShowDate
+      isShowChart
     } = isRow,
     [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)();
   return [/*eslint-disable react-hooks/exhaustive-deps */
@@ -23,15 +22,14 @@ const useModalToggle = configs => {
     isShow: isToggle,
     selectProps: configs,
     isShowChart: isShowChart,
-    isShowDate: isShowDate,
     crIsId: _crIsId.default,
     onToggle: toggleIsRow,
     onCheckCaption: addTitleIndex,
     onUnCheckCaption: removeTitleIndex,
     onClose: hideInputs
-  }), [isToggle, configs, isShowChart, isShowDate])
+  }), [isToggle, configs, isShowChart])
   //toggleIsRow, checkCaptionBy, uncheckCaption, hideInputs
-  /*eslint-enable react-hooks/exhaustive-deps */, refTitles, isRow, toggleIsRow, toggleInputs];
+  /*eslint-enable react-hooks/exhaustive-deps */, refTitles, isRow, toggleInputs];
 };
 var _default = useModalToggle;
 exports.default = _default;

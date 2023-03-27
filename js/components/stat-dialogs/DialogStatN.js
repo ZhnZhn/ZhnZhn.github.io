@@ -22,8 +22,6 @@ var _useLoadDims = _interopRequireDefault(require("./useLoadDims"));
 var _crSpinnerStatus = _interopRequireDefault(require("./crSpinnerStatus"));
 var _EsConfig = require("./dimensions/EsConfig");
 var _jsxRuntime = require("react/jsx-runtime");
-//import updateStateIf from './updateStateIf'
-
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.",
   MSG_DIMS_LOADING = "Dims is loading",
   S_DIV_LOADING = {
@@ -97,9 +95,8 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       timeId
     } = state,
     [isShowLabels, toggleLabels] = (0, _useToggle.default)(IS_SHOW_LABELS),
-    [_modalToggleEl, _refTitles, isRow, toggleIsRow, toggleInputs] = (0, _useModalToggle.default)(configs),
+    [_modalToggleEl, _refTitles, isRow, toggleInputs] = (0, _useModalToggle.default)(configs),
     {
-      isShowDate,
       isShowChart
     } = isRow,
     [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
@@ -151,16 +148,8 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       return msg;
     }, [isLoadFailed, isLoading, configs, chartType, msgOnNotSelected])
     //getDim, _isDim
-    ,
-    _hSelectChartType = (0, _uiApi.useCallback)(chartType => {
-      toggleIsRow({
-        isShowDate: (0, _ChartOptionsFn.isCategoryItem)(chartType)
-      });
-      setChartType(chartType);
-      //updateStateIf(setState, 'chartType', chartType)
-    }, [])
-    // toggleInputs, setState
     /*eslint-enable react-hooks/exhaustive-deps */
+
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hLoad = (0, _uiApi.useCallback)(() => {
       _addDfValuesFrom(configs, _fSelectItem);
@@ -189,7 +178,8 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     }, [_crValidationMessages, dateDf, timeId, chartType, configs, selectOptions])
     //loadFn, onLoad, props
     /*eslint-enable react-hooks/exhaustive-deps */,
-    _spinnerStatus = (0, _crSpinnerStatus.default)(isLoading, isLoadFailed);
+    _spinnerStatus = (0, _crSpinnerStatus.default)(isLoading, isLoadFailed),
+    _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(chartType);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
     caption: caption,
@@ -223,8 +213,8 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       isShowLabels: isShowLabels,
       isShowChart: isShowChart,
       chartOptions: chartOptions,
-      onSelectChart: _hSelectChartType,
-      isShowDate: isShowDate,
+      onSelectChart: setChartType,
+      isShowDate: _isShowDate,
       dateDefault: dateDf.caption,
       dateOptions: dateOptions,
       onSelectDate: setDate,

@@ -62,7 +62,6 @@ const ModalToggle = _ref2 => {
     isFd,
     isShowFd,
     isCh,
-    isShowDate,
     isShowChart,
     crIsId,
     onToggle,
