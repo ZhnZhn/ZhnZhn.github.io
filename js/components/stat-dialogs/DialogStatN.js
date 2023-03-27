@@ -13,6 +13,7 @@ var _crSelectItem = _interopRequireDefault(require("./crSelectItem"));
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useValidationMessages = _interopRequireDefault(require("../dialogs/hooks/useValidationMessages"));
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
 var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
 var _useDialogOptions = _interopRequireDefault(require("../dialogs/hooks/useDialogOptions"));
@@ -84,7 +85,8 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     [setDate, getDate] = (0, _useProperty.default)(),
     [setDim, getDim] = (0, _useProperty.default)(),
     [_setRoundTo, _getRoundTo] = (0, _useProperty.default)(dfRt),
-    [state, isLoading, isLoadFailed, validationMessages, setValidationMessages] = (0, _useLoadDims.default)(props),
+    [validationMessages, setValidationMessages, clearValidationMessages, _hClose] = (0, _useValidationMessages.default)(onClose),
+    [state, isLoading, isLoadFailed] = (0, _useLoadDims.default)(props, setValidationMessages),
     {
       configs,
       selectOptions,
@@ -108,12 +110,6 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       onAbout
     })
     /*eslint-disable react-hooks/exhaustive-deps */,
-    _hClose = (0, _uiApi.useCallback)(() => {
-      onClose();
-      setValidationMessages([]);
-    }, [])
-    //onClose
-    ,
     _crValidationMessages = (0, _uiApi.useCallback)(() => {
       const msg = [];
       if (isLoadFailed) {
@@ -173,10 +169,12 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
           titles: (0, _uiApi.getRefValue)(_refTitles),
           _rt: _getRoundTo()
         }));
+        clearValidationMessages();
+      } else {
+        setValidationMessages(validationMessages);
       }
-      setValidationMessages(validationMessages);
     }, [_crValidationMessages, dateDf, timeId, chartType, configs, selectOptions])
-    //loadFn, onLoad, props
+    //loadFn, onLoad, props, clearValidationMessages, setValidationMessages
     /*eslint-enable react-hooks/exhaustive-deps */,
     _spinnerStatus = (0, _crSpinnerStatus.default)(isLoading, isLoadFailed),
     _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(chartType);

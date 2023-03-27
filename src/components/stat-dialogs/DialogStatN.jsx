@@ -17,6 +17,7 @@ import crSelectItem from './crSelectItem';
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import useProperty from '../hooks/useProperty';
+import useValidationMessages from '../dialogs/hooks/useValidationMessages';
 import useMenuMore from '../dialogs/hooks/useMenuMore';
 import useToolbar from '../dialogs/hooks/useToolbar';
 import useDialogOptions from '../dialogs/hooks/useDialogOptions';
@@ -117,12 +118,16 @@ const DialogStatN = memoIsShow((props) => {
     _getRoundTo
   ] = useProperty(dfRt)
   , [
+    validationMessages,
+    setValidationMessages,
+    clearValidationMessages,
+    _hClose
+  ] = useValidationMessages(onClose)
+  , [
       state,
       isLoading,
-      isLoadFailed,
-      validationMessages,
-      setValidationMessages
-  ] = useLoadDims(props)
+      isLoadFailed
+  ] = useLoadDims(props, setValidationMessages)
   , {
       configs,
       selectOptions,
@@ -163,11 +168,6 @@ const DialogStatN = memoIsShow((props) => {
      onAbout
   })
    /*eslint-disable react-hooks/exhaustive-deps */
-   , _hClose = useCallback(() => {
-     onClose()
-     setValidationMessages([])
-   }, [])
-   //onClose
    , _crValidationMessages = useCallback(() => {
         const msg = [];
         if (isLoadFailed) {
@@ -227,8 +227,10 @@ const DialogStatN = memoIsShow((props) => {
          titles: getRefValue(_refTitles),
          _rt: _getRoundTo()
       }))
+      clearValidationMessages()
+    } else {
+      setValidationMessages(validationMessages)
     }
-    setValidationMessages(validationMessages)
   }, [
     _crValidationMessages,
     dateDf,
@@ -237,7 +239,7 @@ const DialogStatN = memoIsShow((props) => {
     configs,
     selectOptions
   ])
-  //loadFn, onLoad, props
+  //loadFn, onLoad, props, clearValidationMessages, setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
   , _spinnerStatus = crSpinnerStatus(isLoading, isLoadFailed)
   , _isShowDate = isCategoryItem(chartType);

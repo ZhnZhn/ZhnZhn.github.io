@@ -37,7 +37,10 @@ const _crLoadingState = () => ({
   isLoadFailed: false
 });
 
-const _useIsLoadDims = (props, isLoadFailed) => {
+const _useIsLoadDims = (
+  props,
+  isLoadFailed
+) => {
   const prevProps = usePreviousProps(props);
   return isLoadFailed
     && !prevProps.isShow
@@ -79,7 +82,10 @@ const _crDimOptions = configs => {
  return _dimOptions;
 };
 
-const useLoadDims = (props) => {
+const useLoadDims = (
+  props,
+  setValidationMessages
+) => {
   const {
     chartsType,
     mapFrequency,
@@ -98,10 +104,6 @@ const useLoadDims = (props) => {
      },
      setLoad
    ] = useState(_crLoadingState)
-  , [
-    validationMessages,
-    setValidationMessages
-  ] = useState([])
   , [
     state,
     setState
@@ -145,7 +147,7 @@ const useLoadDims = (props) => {
         })
         setValidationMessages([errMsg])
      }
-   }, [chartsType, _mapFrequency, _mapDateDf, loadId])
+   }, [chartsType, _mapFrequency, _mapDateDf, loadId, setValidationMessages])
    , _isLoadDims = _useIsLoadDims(props, isLoadFailed);
 
     /*eslint-disable react-hooks/exhaustive-deps */
@@ -164,9 +166,7 @@ const useLoadDims = (props) => {
   return [
     state,
     isLoading,
-    isLoadFailed,
-    validationMessages,
-    setValidationMessages
+    isLoadFailed
   ];
 };
 
