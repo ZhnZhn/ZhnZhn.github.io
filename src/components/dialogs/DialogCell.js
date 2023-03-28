@@ -1,5 +1,4 @@
 
-import crDateConfig from './fns/crDateConfig'
 import crMenuMore from './fns/crMenuMore'
 import Modals from './modals/Modals'
 import Rows from './rows/Rows'
@@ -26,7 +25,6 @@ const DialogCell = {
   SelectWithLoad,
   ...Rows,
   ...Modals,
-  crDateConfig,
   crMenuMore
 };
 

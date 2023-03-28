@@ -5,14 +5,16 @@ import {
 } from '../uiApi';
 
 import { crDialogChartOptions } from '../dialogs/ChartOptionsFn';
-import D from '../dialogs/DialogCell';
+import crDateConfig from '../dialogs/fns/crDateConfig';
 
 import loadConfigs from './dimensions/loadConfigs';
 import usePreviousProps from './usePreviousProps';
 
-const { crDateConfig } = D
-, MAP_FREQUENCY_DF = 'M'
-, _crOptionItem = (caption, value) => ({
+const MAP_FREQUENCY_DF = 'M'
+, _crOptionItem = (
+  caption,
+  value
+) => ({
   caption,
   value
 });
@@ -23,12 +25,21 @@ const _loadDims = ({
   baseMeta,
   loadId,
   mapFrequency,
-  dfProps,
+  dfProps
 }, _setConfigs) => {
-  loadConfigs({ dims, proxy, baseMeta, loadId, mapFrequency, ...dfProps })
+  loadConfigs({
+      dims,
+      proxy,
+      baseMeta,
+      loadId,
+      mapFrequency,
+      ...dfProps
+   })
    .then(_setConfigs)
    .catch(err => {
-     _setConfigs({ errMsg: err.message })
+      _setConfigs({
+         errMsg: err.message
+      })
    })
  };
 
@@ -55,14 +66,18 @@ const _crDateOptions = (
 ) => {
   const {dateOptions} = configs;
   if (dateOptions) {
-    return [dateOptions, dateOptions[0]];
+    return [
+      dateOptions,
+      dateOptions[0]
+    ];
   }
-  const {
-    dateOptions:dO,
+
+  const [
+    _dateOptions,
     dateDefault
-  } = crDateConfig(_mF, mapDateDf, loadId);
+  ] = crDateConfig(_mF, mapDateDf, loadId);
   return [
-    dO,
+    _dateOptions,
     _crOptionItem(dateDefault, dateDefault)
   ];
 };

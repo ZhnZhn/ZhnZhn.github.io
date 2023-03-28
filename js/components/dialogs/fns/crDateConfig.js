@@ -17,14 +17,13 @@ const _crDateOption = function (caption, value) {
   };
 };
 const _getDfDate = (dateOptions, dfIndex) => typeof dfIndex === 'number' ? (dateOptions[dfIndex] || {}).value || '' : '';
+
+// [dateOptions, dateDefault]
 const _crDateConfig = function (dateOptions, mapDateDf) {
   if (dateOptions === void 0) {
     dateOptions = [];
   }
-  return {
-    dateOptions,
-    dateDefault: _getDfDate(dateOptions, mapDateDf)
-  };
+  return [dateOptions, _getDfDate(dateOptions, mapDateDf)];
 };
 const _addYearMonthsTo = (dateOptions, y, delimeter) => {
   let m = new Date().getUTCMonth(),

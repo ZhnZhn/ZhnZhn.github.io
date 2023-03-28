@@ -21,13 +21,14 @@ const _getDfDate = (
   ? (dateOptions[dfIndex] || {}).value || ''
   : '';
 
+// [dateOptions, dateDefault]
 const _crDateConfig = (
   dateOptions=[],
   mapDateDf
-) => ({
+) => [
   dateOptions,
-  dateDefault: _getDfDate(dateOptions, mapDateDf)
-});
+  _getDfDate(dateOptions, mapDateDf)
+];
 
 const _addYearMonthsTo = (
   dateOptions,

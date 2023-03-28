@@ -73,7 +73,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     }, [])
     // setPropertyDate
     /*eslint-enable react-hooks/exhaustive-deps */,
-    [_chartOptions, dateDefault, dateOptions, setChartConfigFromItem] = (0, _useChartConfig.default)(selectProps, chartsType, loadId, dfProps, _onUpdateChartConfig),
+    [_chartOptions, dateOptions, dateDefault, setChartConfigFromItem] = (0, _useChartConfig.default)(selectProps, chartsType, loadId, dfProps, _onUpdateChartConfig),
     [isToggle, toggleInputs, _hideToggle] = (0, _useToggleClose.default)(),
     [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
     [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({

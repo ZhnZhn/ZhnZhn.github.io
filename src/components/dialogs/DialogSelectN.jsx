@@ -106,8 +106,8 @@ const DialogSelectN = memoIsShow((
 
   , [
     _chartOptions,
-    dateDefault,
     dateOptions,
+    dateDefault,
     setChartConfigFromItem
   ] = useChartConfig(
      selectProps,

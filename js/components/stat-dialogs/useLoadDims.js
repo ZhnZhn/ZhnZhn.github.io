@@ -5,13 +5,10 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _ChartOptionsFn = require("../dialogs/ChartOptionsFn");
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _crDateConfig = _interopRequireDefault(require("../dialogs/fns/crDateConfig"));
 var _loadConfigs = _interopRequireDefault(require("./dimensions/loadConfigs"));
 var _usePreviousProps = _interopRequireDefault(require("./usePreviousProps"));
-const {
-    crDateConfig
-  } = _DialogCell.default,
-  MAP_FREQUENCY_DF = 'M',
+const MAP_FREQUENCY_DF = 'M',
   _crOptionItem = (caption, value) => ({
     caption,
     value
@@ -53,11 +50,8 @@ const _crDateOptions = (configs, _mF, mapDateDf, loadId) => {
   if (dateOptions) {
     return [dateOptions, dateOptions[0]];
   }
-  const {
-    dateOptions: dO,
-    dateDefault
-  } = crDateConfig(_mF, mapDateDf, loadId);
-  return [dO, _crOptionItem(dateDefault, dateDefault)];
+  const [_dateOptions, dateDefault] = (0, _crDateConfig.default)(_mF, mapDateDf, loadId);
+  return [_dateOptions, _crOptionItem(dateDefault, dateDefault)];
 };
 const _crSelectOptions = configs => configs.map(config => config.options);
 const _crDimOptions = configs => {

@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _crDateConfig = _interopRequireDefault(require("./fns/crDateConfig"));
 var _crMenuMore = _interopRequireDefault(require("./fns/crMenuMore"));
 var _Modals = _interopRequireDefault(require("./modals/Modals"));
 var _Rows = _interopRequireDefault(require("./rows/Rows"));
@@ -26,7 +25,6 @@ const DialogCell = {
   SelectWithLoad: _SelectWithLoad.default,
   ..._Rows.default,
   ..._Modals.default,
-  crDateConfig: _crDateConfig.default,
   crMenuMore: _crMenuMore.default
 };
 var _default = DialogCell;

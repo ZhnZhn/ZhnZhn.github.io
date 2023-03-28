@@ -24,6 +24,7 @@ const _isRequireUpdateChartConfig = (
 ) => prevState._mapFrequency !== mapFrequency
  || prevState._mapDateDf !== mapDateDf;
 
+// [chartOptions, dateDefault, dateOptions, setChartConfigFromItem]
 const useChartConfig = (
   selectProps,
   chartsType,
@@ -45,47 +46,38 @@ const useChartConfig = (
   , {
     _mapFrequency,
     _mapDateDf
-  } = chartConfig
-  , {
-    chartOptions,
-    dateDefault,
-    dateOptions
-  } = useMemo(() => ({
-    chartOptions: crChartOptions(selectProps, chartsType, _mapFrequency),
-    ...crDateConfig(_mapFrequency, _mapDateDf, loadId)
-  }), [_mapFrequency, _mapDateDf, selectProps, chartsType, loadId])
-
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , setChartConfigFromItem = useMemo(() => (item) => {
-    const [
-      _mapFrequency,
-      _mapDateDf
-    ] = _getChartConfigFromItem(
-      item,
-      mapFrequency,
-      mapDateDf
-    );
-    setChartConfig(prevState => _isRequireUpdateChartConfig(
-          prevState,
-          _mapFrequency,
-          _mapDateDf
-        )
-      ? (onUpdateChartConfig(), {
-          _mapFrequency,
-          _mapDateDf
-        })
-      : prevState
-    )
-  }, []);
-  // mapFrequency, mapDateDf, onUpdateChartConfig
-  /*eslint-enable react-hooks/exhaustive-deps */
+  } = chartConfig;
 
   return [
-    chartOptions,
-    dateDefault,
-    dateOptions,
-    setChartConfigFromItem
+    ...useMemo(() => [
+      crChartOptions(selectProps, chartsType, _mapFrequency),
+      ...crDateConfig(_mapFrequency, _mapDateDf, loadId)
+    ], [_mapFrequency, _mapDateDf, selectProps, chartsType, loadId]),
+    /*eslint-disable react-hooks/exhaustive-deps */
+    useMemo(() => (item) => {
+      const [
+        _mapFrequency,
+        _mapDateDf
+      ] = _getChartConfigFromItem(
+        item,
+        mapFrequency,
+        mapDateDf
+      );
+      setChartConfig(prevState => _isRequireUpdateChartConfig(
+            prevState,
+            _mapFrequency,
+            _mapDateDf
+          )
+        ? (onUpdateChartConfig(), {
+            _mapFrequency,
+            _mapDateDf
+          })
+        : prevState
+      )
+    }, [])
+    // mapFrequency, mapDateDf, onUpdateChartConfig
+    /*eslint-enable react-hooks/exhaustive-deps */
   ];
-}
+};
 
 export default useChartConfig
