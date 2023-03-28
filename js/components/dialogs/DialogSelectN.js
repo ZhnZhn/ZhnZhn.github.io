@@ -13,17 +13,14 @@ var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallbac
 var _useDialog = _interopRequireDefault(require("./hooks/useDialog"));
 var _useDialogOptions = _interopRequireDefault(require("./hooks/useDialogOptions"));
 var _useTitles = _interopRequireDefault(require("./hooks/useTitles"));
+var _useChartConfig = _interopRequireDefault(require("./hooks/useChartConfig"));
 var _ChartOptionsFn = require("./ChartOptionsFn");
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 var _SelectList = _interopRequireDefault(require("./SelectList"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const {
-    crDateConfig
-  } = _DialogCell.default,
-  DF_INIT_FROM_DATE = '2010-01-01',
-  DF_MAP_FREQUENCY = 'EMPTY',
+const DF_INIT_FROM_DATE = '2010-01-01',
   DF_SELECT_PROPS = [],
   TABLE_ID = 'table';
 const _crIsId = id => "is" + id + "Select";
@@ -31,18 +28,7 @@ const _crIsToggleInit = selectProps => selectProps.reduce((toggleConfig, item) =
   toggleConfig[_crIsId(item.id)] = true;
   return toggleConfig;
 }, {});
-const _isRequireUpdateChartConfig = (prevState, mapFrequency, mapDateDf) => prevState._mapFrequency !== mapFrequency || prevState._mapDateDf !== mapDateDf;
-const _getValidValue = (ref, dfValue) => (0, _uiApi.isInputValid)(ref) ? (0, _uiApi.getInputValue)(ref) : dfValue;
-const _useDate = dateDefault => {
-  const [setDate, getDate] = (0, _useProperty.default)()
-
-    /*eslint-disable react-hooks/exhaustive-deps */,
-    _getDate = (0, _uiApi.useCallback)(() => (getDate() || {}).value || dateDefault, [dateDefault]);
-  // getDate
-  /*eslint-enable react-hooks/exhaustive-deps */
-
-  return [setDate, _getDate];
-};
+const _getItemValue = (item, dfValue) => (item || {}).value || dfValue;
 const DialogSelectN = (0, _memoIsShow.default)(props => {
   const {
       isCh = true,
@@ -67,31 +53,27 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       onClose
     } = props,
     {
-      mapFrequency = DF_MAP_FREQUENCY,
-      mapDateDf,
       dfRt
     } = dfProps || {},
-    [isShowFd, toggleIsShowFd] = (0, _useToggle.default)(false),
+    [isShowFd, toggleIsShowFd] = (0, _useToggle.default)(),
     [isShowChart, toggleIsShowChart] = (0, _useToggle.default)(true),
-    [chartConfig, setChartConfig] = (0, _uiApi.useState)({
-      _mapFrequency: mapFrequency,
-      _mapDateDf: mapDateDf,
-      chartType: void 0
-    }),
-    {
-      _mapFrequency,
-      _mapDateDf,
-      chartType
-    } = chartConfig,
+    [chartType, setChartType] = (0, _uiApi.useState)(),
     _hSelectChartType = (0, _uiApi.useCallback)(chartType => {
-      setChartConfig(prevState => ({
-        ...prevState,
-        chartType
-      }));
+      setChartType(chartType);
       if ((0, _ChartOptionsFn.isCategoryItem)(chartType)) {
         toggleIsShowFd(false);
       }
     }, [toggleIsShowFd]),
+    [setPropertyDate, getPropertyDate] = (0, _useProperty.default)()
+
+    /*eslint-disable react-hooks/exhaustive-deps */,
+    _onUpdateChartConfig = (0, _uiApi.useCallback)(() => {
+      setPropertyDate();
+      setChartType();
+    }, [])
+    // setPropertyDate
+    /*eslint-enable react-hooks/exhaustive-deps */,
+    [_chartOptions, dateDefault, dateOptions, setChartConfigFromItem] = (0, _useChartConfig.default)(selectProps, chartsType, loadId, dfProps, _onUpdateChartConfig),
     [isToggle, toggleInputs, _hideToggle] = (0, _useToggleClose.default)(),
     [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
     [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
@@ -102,35 +84,24 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     }),
     [_isShowConfig, _toggleStateBy] = (0, _useToggleState.default)(() => _crIsToggleInit(selectProps)),
     _isShowById = (0, _uiApi.useCallback)(id => _isShowConfig[_crIsId(id)], [_isShowConfig]),
-    {
-      _chartOptions,
-      dateDefault,
-      dateOptions
-    } = (0, _uiApi.useMemo)(() => ({
-      _chartOptions: (0, _ChartOptionsFn.crChartOptions)(selectProps, chartsType, _mapFrequency),
-      ...crDateConfig(_mapFrequency, _mapDateDf, loadId)
-    }), [selectProps, chartsType, _mapFrequency, _mapDateDf, loadId]),
     _refItems = (0, _uiApi.useRef)([]),
     [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)(),
-    [_setRoundTo, _getRoundTo] = (0, _useProperty.default)(dfRt),
+    [_setPropertyRoundTo, _getPropertyRoundTo] = (0, _useProperty.default)(dfRt),
     _refFromDate = (0, _uiApi.useRef)(),
-    [setDate, _getDate] = _useDate(dateDefault),
-    _refSeriaColor = (0, _uiApi.useRef)(),
+    _refSeriaColor = (0, _uiApi.useRef)()
+
+    /*eslint-disable react-hooks/exhaustive-deps */,
     _hSelect = (0, _uiApi.useCallback)((id, index, item) => {
       (0, _uiApi.getRefValue)(_refItems)[index] = item;
       if (item) {
         item.id = id;
         if (id === TABLE_ID) {
-          const _mapFrequency = item.mapFrequency || mapFrequency,
-            _mapDateDf = item.mapDateDf || mapDateDf;
-          setChartConfig(prevState => _isRequireUpdateChartConfig(prevState, _mapFrequency, _mapDateDf) ? (setDate(), {
-            _mapFrequency,
-            _mapDateDf,
-            chartType: void 0
-          }) : prevState);
+          setChartConfigFromItem(item);
         }
       }
-    }, [mapFrequency, mapDateDf, setDate]),
+    }, [])
+    // setChartConfigFromItem
+    /*eslint-enable react-hooks/exhaustive-deps */,
     _hLoad = (0, _useEventCallback.default)(() => {
       const msgs = [],
         _items = (0, _uiApi.getRefValue)(_refItems);
@@ -149,9 +120,9 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
           items: [...(0, _uiApi.getRefValue)(_refItems)],
           titles: (0, _uiApi.getRefValue)(refTitles),
           dialogOptions: (0, _uiApi.getRefValue)(refDialogOptions),
-          fromDate: _getValidValue(_refFromDate, ''),
-          date: _getDate(),
-          _rt: _getRoundTo()
+          fromDate: (0, _uiApi.getInputValidValue)(_refFromDate, ''),
+          date: _getItemValue(getPropertyDate(), dateDefault),
+          _rt: _getPropertyRoundTo()
         }));
       }
       setValidationMessages(msgs);
@@ -173,7 +144,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalOptions, {
       isShow: isShowOptions,
       dfRt: dfRt,
-      onRoundTo: _setRoundTo,
+      onRoundTo: _setPropertyRoundTo,
       toggleOption: toggleDialogOption,
       onClose: hideOptions
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalToggle, {
@@ -217,7 +188,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       isShowDate: _isShowDate,
       dateDefault: dateDefault,
       dateOptions: dateOptions,
-      onSelectDate: setDate
+      onSelectDate: setPropertyDate
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
       validationMessages: validationMessages
     })]

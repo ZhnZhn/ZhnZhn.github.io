@@ -2,11 +2,10 @@
 import {
   useRef,
   useState,
-  useMemo,
   useCallback,
-  isInputValid,
   getRefValue,
-  getInputValue
+  getInputValue,
+  getInputValidValue
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
@@ -18,19 +17,13 @@ import useEventCallback from '../hooks/useEventCallback';
 import useDialog from './hooks/useDialog';
 import useDialogOptions from './hooks/useDialogOptions';
 import useTitles from './hooks/useTitles';
+import useChartConfig from './hooks/useChartConfig';
 
-import {
-  crChartOptions,
-  isCategoryItem
-} from './ChartOptionsFn';
-import D from './DialogCell'
-import SelectList from './SelectList'
+import { isCategoryItem } from './ChartOptionsFn';
+import D from './DialogCell';
+import SelectList from './SelectList';
 
-const {
-  crDateConfig
-} = D
-, DF_INIT_FROM_DATE = '2010-01-01'
-, DF_MAP_FREQUENCY = 'EMPTY'
+const DF_INIT_FROM_DATE = '2010-01-01'
 , DF_SELECT_PROPS  = []
 , TABLE_ID = 'table';
 
@@ -44,41 +37,10 @@ const _crIsToggleInit = (
     return toggleConfig;
  }, {});
 
-const _isRequireUpdateChartConfig = (
-  prevState,
-  mapFrequency,
-  mapDateDf
-) => prevState._mapFrequency !== mapFrequency
-  || prevState._mapDateDf !== mapDateDf;
-
-const _getValidValue = (
-  ref,
+const _getItemValue = (
+  item,
   dfValue
-) => isInputValid(ref)
-  ? getInputValue(ref)
-  : dfValue;
-
-const _useDate = (
-  dateDefault
-) => {
-  const [
-    setDate,
-    getDate
-  ] = useProperty()
-
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _getDate = useCallback(
-      () => (getDate() || {}).value || dateDefault
-  , [dateDefault]);
-  // getDate
-  /*eslint-enable react-hooks/exhaustive-deps */
-
-  return [
-    setDate,
-    _getDate
-  ];
-};
-
+) => (item || {}).value || dfValue
 
 const DialogSelectN = memoIsShow((
   props
@@ -109,40 +71,51 @@ const DialogSelectN = memoIsShow((
     onClose,
   } = props
   , {
-    mapFrequency=DF_MAP_FREQUENCY,
-    mapDateDf,
     dfRt
   } = dfProps || {}
   , [
     isShowFd,
     toggleIsShowFd
-  ] = useToggle(false)
+  ] = useToggle()
   , [
     isShowChart,
     toggleIsShowChart
   ] = useToggle(true)
   , [
-    chartConfig,
-    setChartConfig
-  ] = useState({
-    _mapFrequency: mapFrequency,
-    _mapDateDf: mapDateDf,
-    chartType: void 0
-  })
-  , {
-    _mapFrequency,
-    _mapDateDf,
-    chartType
-  } = chartConfig
+    chartType,
+    setChartType
+  ] = useState()
   , _hSelectChartType = useCallback(chartType => {
-    setChartConfig(prevState => ({
-      ...prevState,
-      chartType
-    }))
-    if (isCategoryItem(chartType)) {
-      toggleIsShowFd(false)
-    }
+      setChartType(chartType)
+      if (isCategoryItem(chartType)) {
+        toggleIsShowFd(false)
+      }
   }, [toggleIsShowFd])
+  , [
+    setPropertyDate,
+    getPropertyDate
+  ] = useProperty()
+
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _onUpdateChartConfig = useCallback(() => {
+     setPropertyDate()
+     setChartType()
+  }, [])
+  // setPropertyDate
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+  , [
+    _chartOptions,
+    dateDefault,
+    dateOptions,
+    setChartConfigFromItem
+  ] = useChartConfig(
+     selectProps,
+     chartsType,
+     loadId,
+     dfProps,
+    _onUpdateChartConfig
+  )
   , [
     isToggle,
     toggleInputs,
@@ -179,14 +152,6 @@ const DialogSelectN = memoIsShow((
       _isShowConfig[_crIsId(id)],
       [_isShowConfig]
     )
-  , {
-    _chartOptions,
-    dateDefault,
-    dateOptions
-  } = useMemo(() => ({
-    _chartOptions: crChartOptions(selectProps, chartsType, _mapFrequency)
-    , ...crDateConfig(_mapFrequency, _mapDateDf, loadId)
-  }), [selectProps, chartsType, _mapFrequency, _mapDateDf, loadId])
   , _refItems = useRef([])
   , [
     refTitles,
@@ -194,39 +159,25 @@ const DialogSelectN = memoIsShow((
     removeTitleIndex
   ] = useTitles()
   , [
-    _setRoundTo,
-    _getRoundTo
+    _setPropertyRoundTo,
+    _getPropertyRoundTo
   ] = useProperty(dfRt)
   , _refFromDate = useRef()
-  , [
-    setDate,
-    _getDate
-  ] = _useDate(dateDefault)
   , _refSeriaColor = useRef()
+
+  /*eslint-disable react-hooks/exhaustive-deps */
   , _hSelect = useCallback((id, index, item) => {
-    getRefValue(_refItems)[index] = item
-    if (item) {
-      item.id = id
-      if (id === TABLE_ID) {
-        const _mapFrequency = item.mapFrequency
-          || mapFrequency
-        , _mapDateDf = item.mapDateDf
-          || mapDateDf;
-        setChartConfig(prevState => _isRequireUpdateChartConfig(
-              prevState,
-              _mapFrequency,
-              _mapDateDf
-            )
-          ? (setDate(), {
-              _mapFrequency,
-              _mapDateDf,
-              chartType: void 0
-            })
-          : prevState
-        )
-      }
-    }
-  }, [mapFrequency, mapDateDf, setDate])
+     getRefValue(_refItems)[index] = item
+     if (item) {
+       item.id = id
+       if (id === TABLE_ID) {
+         setChartConfigFromItem(item)
+       }
+     }
+  }, [])
+  // setChartConfigFromItem
+  /*eslint-enable react-hooks/exhaustive-deps */
+
   , _hLoad = useEventCallback(() => {
       const msgs = []
       , _items = getRefValue(_refItems);
@@ -246,9 +197,9 @@ const DialogSelectN = memoIsShow((
           items: [...getRefValue(_refItems)],
           titles: getRefValue(refTitles),
           dialogOptions: getRefValue(refDialogOptions),
-          fromDate: _getValidValue(_refFromDate, ''),
-          date: _getDate(),
-          _rt: _getRoundTo()
+          fromDate: getInputValidValue(_refFromDate, ''),
+          date: _getItemValue(getPropertyDate(), dateDefault),
+          _rt: _getPropertyRoundTo()
         }))
       }
       setValidationMessages(msgs)
@@ -274,7 +225,7 @@ const DialogSelectN = memoIsShow((
       <D.ModalOptions
         isShow={isShowOptions}
         dfRt={dfRt}
-        onRoundTo={_setRoundTo}
+        onRoundTo={_setPropertyRoundTo}
         toggleOption={toggleDialogOption}
         onClose={hideOptions}
       />
@@ -322,7 +273,7 @@ const DialogSelectN = memoIsShow((
           isShowDate={_isShowDate}
           dateDefault={dateDefault}
           dateOptions={dateOptions}
-          onSelectDate={setDate}
+          onSelectDate={setPropertyDate}
         />
       }
       <D.ValidationMessages
