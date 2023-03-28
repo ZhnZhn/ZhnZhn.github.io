@@ -38,7 +38,6 @@ const _crValue = (indicator, period) => {
       return indicator + " (" + period + ")";
   }
 };
-const _getInputValue = (ref, dfValue) => (0, _uiApi.isInputValid)(ref) ? (0, _uiApi.getInputValue)(ref) || dfValue : dfValue;
 const AlphaIndicatorDialog = (0, _memoIsShow.default)(_ref => {
   let {
     isShow,
@@ -68,9 +67,9 @@ const AlphaIndicatorDialog = (0, _memoIsShow.default)(_ref => {
     [setIndicator, getIndicator] = (0, _useProperty.default)()
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hLoad = (0, _uiApi.useCallback)(() => {
-      const period = _getInputValue(_refPeriod, DF_PERIOD),
-        forDays = _getInputValue(_refForDays, DF_FOR_DAYS),
-        ticket = _getInputValue(_refTicket),
+      const period = (0, _uiApi.getInputValidValue)(_refPeriod) || DF_PERIOD,
+        forDays = (0, _uiApi.getInputValidValue)(_refForDays) || DF_FOR_DAYS,
+        ticket = (0, _uiApi.getInputValidValue)(_refTicket),
         indicator = (getIndicator() || {}).value || DF_INDICATOR;
       onLoad({
         loadId,

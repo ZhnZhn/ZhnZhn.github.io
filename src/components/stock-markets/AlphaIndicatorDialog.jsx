@@ -2,8 +2,7 @@ import {
   useRef,
   useCallback,
   getRefValue,
-  isInputValid,
-  getInputValue
+  getInputValidValue
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
@@ -54,12 +53,6 @@ const _crValue = (
   }
 }
 
-const _getInputValue = (
-  ref,
-  dfValue
-) => isInputValid(ref)
-  ? getInputValue(ref) || dfValue
-  : dfValue
 
 const AlphaIndicatorDialog = memoIsShow(({
   isShow,
@@ -105,9 +98,9 @@ const AlphaIndicatorDialog = memoIsShow(({
   ] = useProperty()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hLoad = useCallback(()=>{
-     const period = _getInputValue(_refPeriod, DF_PERIOD)
-     , forDays = _getInputValue(_refForDays, DF_FOR_DAYS)
-     , ticket = _getInputValue(_refTicket)
+     const period = getInputValidValue(_refPeriod) || DF_PERIOD
+     , forDays = getInputValidValue(_refForDays) || DF_FOR_DAYS
+     , ticket = getInputValidValue(_refTicket)
      , indicator = (getIndicator() || {}).value
         || DF_INDICATOR;
      onLoad({
@@ -173,7 +166,7 @@ const AlphaIndicatorDialog = memoIsShow(({
            errorMsg="Number in range 250-2500"
         />
       </D.ShowHide>
-      <D.RowCheckBox1         
+      <D.RowCheckBox1
          caption="Add Seria with Second YAxis"
          onCheck={_hCheckSecondYAxis}
          onUnCheck={_hUnCheckSecondYAxis}

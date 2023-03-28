@@ -3,7 +3,8 @@ import {
   setRefValue,
   focusRefElement,
   isInputValid,
-  getInputValue
+  getInputValue,
+  getInputValidValue
 } from '../uiApi';
 
 describe("getRefValue", ()=>{
@@ -94,5 +95,45 @@ describe("getInputValue", ()=>{
     expect(fn({current: {
       getValue: () => 'value'
     }})).toBe('value')
+  })
+})
+
+describe('getInputValidValue', ()=>{
+  const fn = getInputValidValue;
+  test('should return from ref valid value or dfValue', ()=>{
+    const value = 'value'
+    , dfValue = 'dfValue';
+
+    expect(fn({ current: {
+      isValid: () => true,
+      getValue: () => value
+    }})).toBe(value)
+    expect(fn({ current: {
+      isValid: () => false
+    }}, dfValue)).toBe(dfValue)
+  })
+
+  test('should return dfValue in edge case of isValid', ()=>{
+    const dfValue = 'dfValue';
+
+    expect(fn(void 0, dfValue)).toBe(dfValue)
+    expect(fn(null, dfValue)).toBe(dfValue)
+    expect(fn({}, dfValue)).toBe(dfValue)
+    expect(fn({current: null}, dfValue)).toBe(dfValue)
+    expect(fn({current: {
+      isValid: true
+    }}, dfValue)).toBe(dfValue)
+  })
+
+  test('should return void 0 in edge case of getValue', ()=>{
+    const dfValue = 'dfValue';
+
+    expect(fn({current: {
+      isValid: () => true
+    }}, dfValue)).toBe(void 0)
+    expect(fn({current: {
+      isValid: () => true,
+      getValue: 'value'
+    }}, dfValue)).toBe(void 0)
   })
 })
