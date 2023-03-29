@@ -1,13 +1,11 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-describe('_menuData', function () {
-  test('', function () {
-    return expect('').toBe('');
-  });
+exports.default = void 0;
+describe('_menuData', () => {
+  test('', () => expect('').toBe(''));
 });
-var items = {
+const items = {
   B1: {
     dialogProps: {
       rootUri: './data/',
@@ -16,7 +14,7 @@ var items = {
     }
   },
   B2: {
-    "extends": 'B1',
+    extends: 'B1',
     dialogProps: {
       b2: 'b2',
       ba: 'b2',
@@ -24,7 +22,8 @@ var items = {
     }
   },
   B3: {
-    "extends": 'B2',
+    extends: 'B2',
+    dialogType: 'DialogTypeB3',
     dialogProps: {
       b3: 'b3',
       ba: 'ba',
@@ -64,10 +63,11 @@ var items = {
     }
   }
 };
-var result = {
+const result = {
   ID_TOPIC_1: {
     type: 'ID_TOPIC_1',
     addProps: 'B3',
+    dialogType: 'DialogTypeB3',
     dialogProps: {
       rootUri: './data/',
       b1: 'b1',
@@ -134,8 +134,8 @@ var result = {
   }
 };
 var _default = {
-  items: items,
-  result: result
+  items,
+  result
 };
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=_menuData.js.map

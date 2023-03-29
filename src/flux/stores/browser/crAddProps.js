@@ -31,13 +31,17 @@ const _crExtendsProps = (items, conf1) => {
   return _assignConfigTo({}, conf1, conf2);
 };
 
+// [dialogType, addProps]
 const crAddProps = (items, addPropsId) => {
   const _conf = items[addPropsId]
   , _extends = _conf.extends
   , initialProps = _isStr(_extends)
        ? _crExtendsProps(items, items[_extends])
        : {};
-  return _assignConfigTo(initialProps, _conf);
+  return [
+    _conf.dialogType,
+    _assignConfigTo(initialProps, _conf)
+  ];
 }
 
 export default crAddProps

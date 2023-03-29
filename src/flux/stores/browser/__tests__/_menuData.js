@@ -23,6 +23,7 @@ const items = {
   },
   B3: {
     extends: 'B2',
+    dialogType: 'DialogTypeB3',
     dialogProps: {
       b3: 'b3',
       ba: 'ba',
@@ -73,6 +74,7 @@ const result = {
   ID_TOPIC_1: {
       type: 'ID_TOPIC_1',
       addProps: 'B3',
+      dialogType: 'DialogTypeB3',
       dialogProps: {
         rootUri: './data/',
         b1: 'b1',
@@ -131,7 +133,7 @@ const result = {
     dialogProps: {
       rootUri: './data/',
       b1: 'b1',
-      ba: 'b1',      
+      ba: 'b1',
       dfProps: {
         dfT3: 'dfT3'
       }
