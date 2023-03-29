@@ -71,7 +71,6 @@ const DialogType5 = memoIsShow((
     toolbarButtons,
     validationMessages,
     setValidationMessages,
-    clearValidationMessages,
     hClose
   ] = useDialog({
     onAbout,
@@ -120,14 +119,12 @@ const DialogType5 = memoIsShow((
         seriaType,
         hasSecondYAxis: getRefValue(refSecondYAxis)
       }))
-      clearValidationMessages()
-    } else {
-      setValidationMessages(msgs)
     }
+    setValidationMessages(msgs)
   }, []);
   // props, loadFn, onLoad, oneCaption, msgOnNotSelected,
   // refSecondYAxis, getChartType, getOne,
-  // clearValidationMessages, setValidationMessages
+  // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
@@ -184,7 +181,7 @@ const DialogType5 = memoIsShow((
              onSelect={setChartType}
           />
         }
-        <D.RowCheckBox1          
+        <D.RowCheckBox1
           caption="Add Seria with Second YAxis"
           initialValue={INITIAL_IS_SECOND_YAXIS}
           onCheck={hCheckSecondYAxis}

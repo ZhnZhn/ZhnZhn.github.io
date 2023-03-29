@@ -49,7 +49,7 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
   } = _ref;
   const [isShowPattern, togglePattern] = (0, _useToggle.default)(false),
     [isShowDate, toggleDate] = (0, _useToggle.default)(false),
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
+    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
       onAbout,
       onClose,
       toggleDate
@@ -111,15 +111,13 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
           loadId,
           dataSource
         });
-        clearValidationMessages();
-      } else {
-        setValidationMessages(msgs);
       }
+      setValidationMessages(msgs);
     }, []);
   // oneCaption, msgOnNotSelected,
   // fnValue, dataColumn, loadId, dataSource, onLoad,
   // getMetric,
-  // clearValidationMessages, setValidationMessages
+  // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {

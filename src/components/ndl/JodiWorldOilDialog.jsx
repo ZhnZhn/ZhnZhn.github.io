@@ -73,7 +73,6 @@ const JodiWorldOilDialog = memoIsShow(({
     toolbarButtons,
     validationMessages,
     setValidationMessages,
-    clearValidationMessages,
     hClose
   ] = useDialog({
     onAbout,
@@ -118,14 +117,12 @@ const JodiWorldOilDialog = memoIsShow(({
         loadId,
         dataSource
       })
-      clearValidationMessages()
-    } else {
-      setValidationMessages(msgs)
     }
+    setValidationMessages(msgs)
   }, []);
   // dataColumn, loadId, dataSource, msgOnNotSelected, fnValue, onLoad
   // getCountry, getUnits, getChartType
-  // setValidationMessages, clearValidationMessages
+  // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (

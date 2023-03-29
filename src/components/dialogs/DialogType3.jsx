@@ -54,7 +54,6 @@ const DialogType3 = memoIsShow((
     toolbarButtons,
     validationMessages,
     setValidationMessages,
-    clearValidationMessages,
     hClose
   ] = useDialog({
     onAbout,
@@ -80,14 +79,12 @@ const DialogType3 = memoIsShow((
           one,
           ...getFromToDates(_refDates)
        }))
-       clearValidationMessages()
-     } else {
-       setValidationMessages(_msgs)
      }
+     setValidationMessages(_msgs)
   }, [])
   // getItem, msgOnNotSelected, oneCaption,
   // loadFn, onLoad
-  // clearValidationMessages, setValidationMessages
+  // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
   , _oneURI = oneURI || optionURI;
 

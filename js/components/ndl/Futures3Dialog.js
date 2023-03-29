@@ -58,7 +58,7 @@ const Futures3Dialog = (0, _memoIsShow.default)(props => {
       onShow,
       onClose
     } = props,
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
+    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
       onAbout,
       onClose
     }),
@@ -93,14 +93,12 @@ const Futures3Dialog = (0, _memoIsShow.default)(props => {
           year,
           fromDate
         }));
-        clearValidationMessages();
-      } else {
-        setValidationMessages(msgs);
       }
+      setValidationMessages(msgs);
     }, []);
   // props, isFd, loadFn, onLoad, msgOnNotSelected, msgOnNotValidFormat,
   // getYear,
-  // clearValidationMessages, setValidationMessages
+  // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {

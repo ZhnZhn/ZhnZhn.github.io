@@ -1,84 +1,67 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../uiApi");
-
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
-
 var _useDialog = _interopRequireDefault(require("./hooks/useDialog"));
-
 var _crValidationMessages = _interopRequireDefault(require("./hooks/crValidationMessages"));
-
 var _getFromToDates = _interopRequireDefault(require("./hooks/getFromToDates"));
-
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const DialogType3 = (0, _memoIsShow.default)(props => {
   const {
-    isShow,
-    isWithInputStock,
-    noDate,
-    caption,
-    itemCaption = 'Stock',
-    oneCaption = itemCaption,
-    oneURI,
-    optionURI,
-    optionsJsonProp,
-    optionNames = 'Stocks',
-    onePlaceholder,
-    msgOnNotSelected,
-    msgOnNotValidFormat,
-    initFromDate,
-    initToDate,
-    onTestDate,
-    toTopLayer,
-    onAbout,
-    loadFn,
-    onLoad,
-    onShow,
-    onClose
-  } = props,
-        [isShowDate, toggleDate] = (0, _useToggle.default)(true),
-        [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
-    onAbout,
-    onClose,
-    toggleDate
-  }),
-        [setItem, getItem] = (0, _useProperty.default)(),
-        _refDates = (0, _uiApi.useRef)()
-  /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        _hLoad = (0, _uiApi.useCallback)(() => {
-    const one = getItem(),
-          _msgs = (0, _crValidationMessages.default)([[one, oneCaption]], msgOnNotSelected, _refDates);
-
-    if (_msgs.length === 0) {
-      onLoad(loadFn(props, {
-        one,
-        ...(0, _getFromToDates.default)(_refDates)
-      }));
-      clearValidationMessages();
-    } else {
+      isShow,
+      isWithInputStock,
+      noDate,
+      caption,
+      itemCaption = 'Stock',
+      oneCaption = itemCaption,
+      oneURI,
+      optionURI,
+      optionsJsonProp,
+      optionNames = 'Stocks',
+      onePlaceholder,
+      msgOnNotSelected,
+      msgOnNotValidFormat,
+      initFromDate,
+      initToDate,
+      onTestDate,
+      toTopLayer,
+      onAbout,
+      loadFn,
+      onLoad,
+      onShow,
+      onClose
+    } = props,
+    [isShowDate, toggleDate] = (0, _useToggle.default)(true),
+    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
+      onAbout,
+      onClose,
+      toggleDate
+    }),
+    [setItem, getItem] = (0, _useProperty.default)(),
+    _refDates = (0, _uiApi.useRef)()
+    /*eslint-disable react-hooks/exhaustive-deps */,
+    _hLoad = (0, _uiApi.useCallback)(() => {
+      const one = getItem(),
+        _msgs = (0, _crValidationMessages.default)([[one, oneCaption]], msgOnNotSelected, _refDates);
+      if (_msgs.length === 0) {
+        onLoad(loadFn(props, {
+          one,
+          ...(0, _getFromToDates.default)(_refDates)
+        }));
+      }
       setValidationMessages(_msgs);
-    }
-  }, []) // getItem, msgOnNotSelected, oneCaption,
-  // loadFn, onLoad
-  // clearValidationMessages, setValidationMessages
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-  ,
-        _oneURI = oneURI || optionURI;
-
+    }, [])
+    // getItem, msgOnNotSelected, oneCaption,
+    // loadFn, onLoad
+    // setValidationMessages
+    /*eslint-enable react-hooks/exhaustive-deps */,
+    _oneURI = oneURI || optionURI;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
     menuModel: menuMoreModel,

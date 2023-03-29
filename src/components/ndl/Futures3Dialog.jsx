@@ -53,7 +53,6 @@ const Futures3Dialog = memoIsShow((
     toolbarButtons,
     validationMessages,
     setValidationMessages,
-    clearValidationMessages,
     hClose
   ] = useDialog({
     onAbout,
@@ -95,14 +94,12 @@ const Futures3Dialog = memoIsShow((
         year,
         fromDate
       }))
-      clearValidationMessages()
-    } else {
-      setValidationMessages(msgs)
     }
+    setValidationMessages(msgs)
   }, []);
   // props, isFd, loadFn, onLoad, msgOnNotSelected, msgOnNotValidFormat,
   // getYear,
-  // clearValidationMessages, setValidationMessages
+  // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (

@@ -64,7 +64,6 @@ const UnDialog5 = memoIsShow((
      toolbarButtons,
      validationMessages,
      setValidationMessages,
-     clearValidationMessages,
      hClose
    ] = useDialog({
      onAbout,
@@ -120,14 +119,12 @@ const UnDialog5 = memoIsShow((
          tradePartner,
          freq
        }))
-       clearValidationMessages()
-     } else {
-       setValidationMessages(msg)
      }
+     setValidationMessages(msg)
    }, [])
    // props, loadFn, onLoad,
    // getOne, getTradeFlow,
-   // clearValidationMessages, setValidationMessages
+   // setValidationMessages
    /*eslint-enable react-hooks/exhaustive-deps */
 
    return (

@@ -70,7 +70,6 @@ const ZillowDialog = memoIsShow(({
     toolbarButtons,
     validationMessages,
     setValidationMessages,
-    clearValidationMessages,
     hClose
   ] = useDialog({
     onAbout,
@@ -136,15 +135,13 @@ const ZillowDialog = memoIsShow(({
         loadId,
         dataSource
       })
-      clearValidationMessages()
-    } else {
-      setValidationMessages(msgs)
     }
+    setValidationMessages(msgs)
   }, []);
   // oneCaption, msgOnNotSelected,
   // fnValue, dataColumn, loadId, dataSource, onLoad,
   // getMetric,
-  // clearValidationMessages, setValidationMessages
+  // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (

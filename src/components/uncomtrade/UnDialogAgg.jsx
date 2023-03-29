@@ -75,7 +75,6 @@ const UnDialogAgg = memoIsShow((
     toolbarButtons,
     validationMessages,
     setValidationMessages,
-    clearValidationMessages,
     hClose
   ] = useDialog({
     onAbout,
@@ -133,10 +132,8 @@ const UnDialogAgg = memoIsShow((
         chart: getChart(),
         freq: DF_FREQ
       }))
-      clearValidationMessages()
-    } else {
-      setValidationMessages(msgs)
     }
+    setValidationMessages(msgs)    
   }, []);
   // props, loadFn, onLoad, msgOnNotSelected
   // getAggregation, getTradeFlow,

@@ -50,7 +50,7 @@ const DialogType5 = (0, _memoIsShow.default)(props => {
     } = props,
     [isShowDate, toggleDate] = (0, _useToggle.default)(false),
     [isShowOptions, toggleOptions] = (0, _useToggle.default)(false),
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
+    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
       onAbout,
       onClose,
       toggleDate,
@@ -90,14 +90,12 @@ const DialogType5 = (0, _memoIsShow.default)(props => {
           seriaType,
           hasSecondYAxis: (0, _uiApi.getRefValue)(refSecondYAxis)
         }));
-        clearValidationMessages();
-      } else {
-        setValidationMessages(msgs);
       }
+      setValidationMessages(msgs);
     }, []);
   // props, loadFn, onLoad, oneCaption, msgOnNotSelected,
   // refSecondYAxis, getChartType, getOne,
-  // clearValidationMessages, setValidationMessages
+  // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {

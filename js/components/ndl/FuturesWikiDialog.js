@@ -43,7 +43,7 @@ const FuturesWikiDialog = (0, _memoIsShow.default)(props => {
       onShow,
       onClose
     } = props,
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
+    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
       onAbout,
       onClose
     }),
@@ -78,14 +78,12 @@ const FuturesWikiDialog = (0, _memoIsShow.default)(props => {
           type,
           fromDate
         }));
-        clearValidationMessages();
-      } else {
-        setValidationMessages(msgs);
       }
+      setValidationMessages(msgs);
     }, []);
   // props, onLoad, loadFn, isFd, msgOnNotSelected, msgOnNotValidFormat,
   // getType,
-  // setValidationMessages, clearValidationMessages
+  // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {

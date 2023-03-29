@@ -48,7 +48,6 @@ const FuturesWikiDialog = memoIsShow((
     toolbarButtons,
     validationMessages,
     setValidationMessages,
-    clearValidationMessages,
     hClose
   ] = useDialog({
     onAbout,
@@ -87,14 +86,12 @@ const FuturesWikiDialog = memoIsShow((
         type,
         fromDate
       }))
-      clearValidationMessages()
-    } else {
-      setValidationMessages(msgs)
     }
+    setValidationMessages(msgs)
   }, []);
   // props, onLoad, loadFn, isFd, msgOnNotSelected, msgOnNotValidFormat,
   // getType,
-  // setValidationMessages, clearValidationMessages
+  // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (

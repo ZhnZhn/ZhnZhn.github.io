@@ -64,7 +64,7 @@ const JodiWorldOilDialog = (0, _memoIsShow.default)(_ref => {
   } = _ref;
   const [isShowDate, toggleDate] = (0, _useToggle.default)(false),
     [isShowOptions, toggleOptions] = (0, _useToggle.default)(false),
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, clearValidationMessages, hClose] = (0, _useDialog.default)({
+    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
       onAbout,
       onClose,
       toggleDate,
@@ -108,14 +108,12 @@ const JodiWorldOilDialog = (0, _memoIsShow.default)(_ref => {
           loadId,
           dataSource
         });
-        clearValidationMessages();
-      } else {
-        setValidationMessages(msgs);
       }
+      setValidationMessages(msgs);
     }, []);
   // dataColumn, loadId, dataSource, msgOnNotSelected, fnValue, onLoad
   // getCountry, getUnits, getChartType
-  // setValidationMessages, clearValidationMessages
+  // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
