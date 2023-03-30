@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _OpenClose = _interopRequireDefault(require("../../zhn/OpenClose"));
 var _InputSelect = _interopRequireDefault(require("../../zhn-select/InputSelect"));
-var _crRowOptions = _interopRequireDefault(require("./crRowOptions"));
+var _crRowProps = _interopRequireDefault(require("./crRowProps"));
 var _jsxRuntime = require("react/jsx-runtime");
 const C_OPEN = "#1b75bb",
   S_OC = {
@@ -23,9 +23,7 @@ const RowOcSelect = _ref => {
     children,
     ...restProps
   } = _ref;
-  const [rowStyle, labelStyle, caption, options] = (0, _crRowOptions.default)(restProps, {
-      isOc: true
-    }),
+  const [rowStyle, labelStyle, selectProps, caption] = (0, _crRowProps.default)(restProps),
     _ocStyle = {
       ...S_OC,
       ...labelStyle,
@@ -39,7 +37,7 @@ const RowOcSelect = _ref => {
     captionStyle: S_CAPTION,
     openColor: C_OPEN,
     CompAfter: /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect.default, {
-      ...options
+      ...selectProps
     }),
     children: children
   });

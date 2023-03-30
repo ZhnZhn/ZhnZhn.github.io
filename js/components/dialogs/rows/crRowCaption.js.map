@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/rows/crRowCaption.js"
+ ],
+ "file": "../../../../src/components/dialogs/rows/crRowCaption.js",
+ "names": [
+  "MAX_WORD_LENGTH",
+  "MAX_LONG_LENGTH",
+  "crRowCaption",
+  "caption",
+  "length",
+  "indexOf",
+  "slice",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,MAAMA,eAAe,GAAG,EAAE;EACxBC,eAAe,GAAG,EAAE;;AAEtB;AACA,MAAMC,YAAY,GAChBC,OAAO,IACJ,OAAOA,OAAO,KAAK,QAAQ,GAC5B,EAAE,GACFA,OAAO,CAACC,MAAM,GAAGJ,eAAe,IAAIG,OAAO,CAACE,OAAO,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,GAC3D,CACEF,OAAO,CAACG,KAAK,CAAC,CAAC,EAAEN,eAAe,CAAC,GAAG,GAAG,EACvCG,OAAO,CACR,GACDA,OAAO,CAACC,MAAM,GAAGH,eAAe,GAC7B,CACEE,OAAO,CAACG,KAAK,CAAC,CAAC,EAAEL,eAAe,CAAC,GAAG,KAAK,EACzCE,OAAO,CACR,GACD,CACEA,OAAO,CACR;AAAC,IAAAI,QAAA,GAEEL,YAAY;AAAAM,OAAA,CAAAC,OAAA,GAAAF,QAAA"
+}

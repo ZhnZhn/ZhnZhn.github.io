@@ -1,6 +1,4 @@
-import {
-  crStyle2
-} from '../zhn-utils/crStyle';
+import { crStyle2 } from '../zhn-utils/crStyle';
 
 //Dialogs, DatesFragments
 const S_ROW = {
@@ -8,26 +6,22 @@ const S_ROW = {
   alignItems: 'center',
   margin: 5
 }
-, S_ROW_SHORT = { margin: '5px 12px' }
-, S_ROW_OC = {
-  display: 'flex',
-  alignItems: 'center',
-  margin: 5
+, S_ROW_SHORT = {
+  margin: '5px 12px'
 }
-, S_ROW_OC_SHORT = { margin: '5px 12px' }
 , S_LABEL = {
-  color: '#1b75bb',
   display: 'inline-block',
-  //verticalAlign: 'top',
-  textAlign: 'right',
+  color: '#1b75bb',
   width: 100,
   paddingRight: 6,
+  textAlign: 'right',
   fontSize: '16px',
   fontWeight: 'bold',
   userSelect: 'none'
 }
-, S_NONE = { display: 'none' };
-
+, S_NONE = {
+  display: 'none'
+};
 
 //Dialogs, DatesFragments
 export const S_DIALOG_CAPTION = {...S_LABEL}
@@ -48,21 +42,6 @@ export const crRowLabelStyle = (
   )
 ];
 
-//[rowStyle, labelStyle]
-export const crRowOcSelectStyle = (
-  isShowLabels=true,
-  captionStyle
-) => [
-  crStyle2(
-    {...S_ROW_OC},
-    isShowLabels && S_ROW_OC_SHORT
-  ),
-  crStyle2(
-    {...S_LABEL},
-    isShowLabels ? captionStyle : S_NONE
-  )
-];
-
 //ValidationMessagesFragment
 export const S_VM_CONT = {
   color: '#f44336',
@@ -75,7 +54,7 @@ export const S_VM_MSG_NUMBER = {
   height: 22,
   marginRight: 5,
   textAlign: 'center',
-  border: 'solid 2px #F44336',
+  border: 'solid 2px #f44336',
   borderRadius: '50%'
 }
 export const S_VM_MSG = {

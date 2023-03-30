@@ -1,14 +1,18 @@
 import OpenClose from '../../zhn/OpenClose';
 import InputSelect from '../../zhn-select/InputSelect';
-import crRowOptions from './crRowOptions';
+import crRowProps from './crRowProps';
 
 const C_OPEN = "#1b75bb"
 , S_OC = {
    paddingTop: 6,
    height: 36
 }
-, S_OPEN_CLOSE = { lineHeight: 'unset' }
-, S_CAPTION = { color: C_OPEN };
+, S_OPEN_CLOSE = {
+  lineHeight: 'unset'
+}
+, S_CAPTION = {
+  color: C_OPEN
+};
 
 const RowOcSelect = ({
   children,
@@ -17,9 +21,9 @@ const RowOcSelect = ({
   const [
      rowStyle,
      labelStyle,
-     caption,
-     options
-  ] = crRowOptions(restProps, { isOc: true })
+     selectProps,
+     caption
+  ] = crRowProps(restProps)
   , _ocStyle = {
      ...S_OC,
      ...labelStyle,
@@ -34,7 +38,7 @@ const RowOcSelect = ({
        ocStyle={_ocStyle}
        captionStyle={S_CAPTION}
        openColor={C_OPEN}
-       CompAfter={<InputSelect {...options} />}
+       CompAfter={<InputSelect {...selectProps} />}
      >
       {children}
     </OpenClose>

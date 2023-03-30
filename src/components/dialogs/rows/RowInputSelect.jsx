@@ -1,20 +1,21 @@
 import InputSelect from '../../zhn-select/InputSelect';
-import crRowOptions from './crRowOptions';
+import crRowProps from './crRowProps';
 
 const RowInputSelect = (props) => {
   const [
     rowStyle,
     labelStyle,
+    selectProps,
     caption,
-    options
-  ] = crRowOptions(props);
+    title
+  ] = crRowProps(props);
 
   return (
      <div style={rowStyle}>
-        <span style={labelStyle}>
+        <span style={labelStyle} title={title}>
            {caption}
         </span>
-        <InputSelect {...options} />
+        <InputSelect {...selectProps} />
     </div>
   );
 };
