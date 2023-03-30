@@ -1,5 +1,5 @@
 const MAX_WORD_LENGTH = 11
-, MAX_LONG_LENGTH = 32;
+, MAX_LONG_LENGTH = 30;
 
 // [caption, title]
 const crRowCaption = (

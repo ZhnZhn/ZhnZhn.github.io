@@ -12,12 +12,12 @@ describe('crRowCaption',()=>{
     expect(_caption1).toBe('Abcdefghjk1.')
     expect(_title1).toBe(caption12)
 
-    const longCaption = 'A very long caption, more than 32 characters'
+    const longCaption = 'A very long caption, more than 30 characters'
     , [
       _caption2,
       _title2
     ] = fn(longCaption);
-    expect(_caption2).toBe(longCaption.slice(0, 32) + '...')
+    expect(_caption2).toBe(longCaption.slice(0, 30) + '...')
     expect(_title2).toBe(longCaption)
 
     const simpleCaption = 'Indicator'
