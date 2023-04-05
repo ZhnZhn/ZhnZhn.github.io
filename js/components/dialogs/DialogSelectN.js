@@ -17,18 +17,13 @@ var _useChartConfig = _interopRequireDefault(require("./hooks/useChartConfig"));
 var _ChartOptionsFn = require("./ChartOptionsFn");
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 var _SelectList = _interopRequireDefault(require("./SelectList"));
+var _dialogFn = require("./dialogFn");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
 const DF_INIT_FROM_DATE = '2010-01-01',
   DF_SELECT_PROPS = [],
   TABLE_ID = 'table';
-const _crIsId = id => "is" + id + "Select";
-const _crIsToggleInit = selectProps => selectProps.reduce((toggleConfig, item) => {
-  toggleConfig[_crIsId(item.id)] = true;
-  return toggleConfig;
-}, {});
-const _getItemValue = (item, dfValue) => (item || {}).value || dfValue;
 const DialogSelectN = (0, _memoIsShow.default)(props => {
   const {
       isCh = true,
@@ -82,8 +77,8 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       toggleInputs: isFd || selectProps.length > 1 ? toggleInputs : void 0,
       toggleOptions: isOpt || isCh ? toggleOptions : void 0
     }),
-    [_isShowConfig, _toggleStateBy] = (0, _useToggleState.default)(() => _crIsToggleInit(selectProps)),
-    _isShowById = (0, _uiApi.useCallback)(id => _isShowConfig[_crIsId(id)], [_isShowConfig]),
+    [_isShowConfig, _toggleStateBy] = (0, _useToggleState.default)(() => (0, _dialogFn.crIsToggleInit)(selectProps)),
+    _isShowById = (0, _uiApi.useCallback)(id => _isShowConfig[(0, _dialogFn.crIsId)(id)], [_isShowConfig]),
     _refItems = (0, _uiApi.useRef)([]),
     [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)(),
     [_setPropertyRoundTo, _getPropertyRoundTo] = (0, _useProperty.default)(dfRt),
@@ -121,7 +116,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
           titles: (0, _uiApi.getRefValue)(refTitles),
           dialogOptions: (0, _uiApi.getRefValue)(refDialogOptions),
           fromDate: (0, _uiApi.getInputValidValue)(_refFromDate, ''),
-          date: _getItemValue(getPropertyDate(), dateDefault),
+          date: (0, _dialogFn.getItemValue)(getPropertyDate()) || dateDefault,
           _rt: _getPropertyRoundTo()
         }));
       }
@@ -154,7 +149,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       isShowFd: isShowFd,
       isCh: isCh,
       isShowChart: isShowChart,
-      crIsId: _crIsId,
+      crIsId: _dialogFn.crIsId,
       onToggle: _toggleStateBy,
       onCheckCaption: addTitleIndex,
       onUnCheckCaption: removeTitleIndex,

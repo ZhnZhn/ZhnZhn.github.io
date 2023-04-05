@@ -23,24 +23,15 @@ import { isCategoryItem } from './ChartOptionsFn';
 import D from './DialogCell';
 import SelectList from './SelectList';
 
+import {
+  crIsId,
+  crIsToggleInit,
+  getItemValue
+} from './dialogFn';
+
 const DF_INIT_FROM_DATE = '2010-01-01'
 , DF_SELECT_PROPS  = []
 , TABLE_ID = 'table';
-
-const _crIsId = id => `is${id}Select`;
-
-const _crIsToggleInit = (
-  selectProps
-) => selectProps
- .reduce((toggleConfig, item) => {
-    toggleConfig[_crIsId(item.id)] = true
-    return toggleConfig;
- }, {});
-
-const _getItemValue = (
-  item,
-  dfValue
-) => (item || {}).value || dfValue
 
 const DialogSelectN = memoIsShow((
   props
@@ -140,16 +131,20 @@ const DialogSelectN = memoIsShow((
     onAbout,
     onClose,
     toggleInputs: isFd || selectProps.length > 1
-       ? toggleInputs : void 0,
+       ? toggleInputs
+       : void 0,
     toggleOptions: isOpt || isCh
-       ? toggleOptions : void 0
+       ? toggleOptions
+       : void 0
   })
   , [
     _isShowConfig,
     _toggleStateBy
-  ] = useToggleState(() => _crIsToggleInit(selectProps))
-  , _isShowById = useCallback(id =>
-      _isShowConfig[_crIsId(id)],
+  ] = useToggleState(
+     () => crIsToggleInit(selectProps)
+  )
+  , _isShowById = useCallback(
+      id => _isShowConfig[crIsId(id)],
       [_isShowConfig]
     )
   , _refItems = useRef([])
@@ -198,7 +193,7 @@ const DialogSelectN = memoIsShow((
           titles: getRefValue(refTitles),
           dialogOptions: getRefValue(refDialogOptions),
           fromDate: getInputValidValue(_refFromDate, ''),
-          date: _getItemValue(getPropertyDate(), dateDefault),
+          date: getItemValue(getPropertyDate()) || dateDefault,
           _rt: _getPropertyRoundTo()
         }))
       }
@@ -236,7 +231,7 @@ const DialogSelectN = memoIsShow((
         isShowFd={isShowFd}
         isCh={isCh}
         isShowChart={isShowChart}
-        crIsId={_crIsId}
+        crIsId={crIsId}
         onToggle={_toggleStateBy}
         onCheckCaption={addTitleIndex}
         onUnCheckCaption={removeTitleIndex}
