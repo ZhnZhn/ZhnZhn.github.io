@@ -11,8 +11,9 @@ const DF_FORECAST_DATE = 0;
 const DAY_IN_MLS = 1000*60*60*24;
 let _currentYear;
 
+const _parseIntBy10 = str => parseInt(str, 10);
 const _pad2 = n => n<10 ? '0'+n : ''+n;
-const _toIntMonth = str => parseInt(str, 10)-1;
+const _toIntMonth = str => _parseIntBy10(str) - 1;
 const _splitStrByDash = (
   str
 ) => isStr(str)
@@ -33,7 +34,7 @@ const _notInLengthMinMax = (
   min,
   max
 ) => (isStr(str) && str.length !== length)
- || _notInIntervalStrict(parseInt(str, 10), min, max);
+ || _notInIntervalStrict(_parseIntBy10(str), min, max);
 
 const _isYmd = (
   yStr,
@@ -177,13 +178,13 @@ export const ymdToUTC = (
 	}
 
   if (_len === 2 && mStr !== ''){
-	 const _m = parseInt(mStr, 10);
+	 const _m = _parseIntBy10(mStr);
 	 if (!isNaN(_m)) {
 			const _d = getNumberOfDays(yearStr, _m);
 	    return Date.UTC(yearStr, _m - 1, _d);
 	 // YYYY-Q format
 	  } else if (_isLikelyQuarter(_arr[1])) {
-		  const _q = parseInt(_arr[1][1], 10);
+		  const _q = _parseIntBy10(_arr[1][1]);
       if (isNaN(_q)) { return _q; }
       const _d = getNumberOfDays(_arr[0], _q*3);
 			return Date.UTC( _arr[0], _q*3 - 1, _d);
@@ -194,7 +195,7 @@ export const ymdToUTC = (
 
   if (_len === 1) {
    const { y=0 } = option
-   , _y = parseInt(yearStr, 10) - y;
+   , _y = _parseIntBy10(yearStr) - y;
 	 return !isNaN(_y)
      ? Date.UTC(_y, 11, 31)
      : _y;
@@ -269,3 +270,42 @@ export const monthIndex = str => {
    ? -1
    : _monthIndex;
 }
+
+const _getStr = date => date || ''
+, _getDateTokens = date => _getStr(date).split('-')
+
+, _isYearly = (
+  date
+) => _getStr(date).slice(0, 5) === '31-12'
+, _getDateAnnual = (
+  date,
+  dateTo
+) => _isYearly(date) && _isYearly(dateTo)
+  ? _getStr(date).slice(6, 10)
+  : ''
+
+, _isEndOfMonthDay = (
+  strDay
+) => strDay === '30' || strDay === '31'
+, _getDateQuarterly = (
+  date,
+  dateTo
+) => {
+  const [d1, m1, y1] = _getDateTokens(date)
+  , [d2, m2, y2] = _getDateTokens(dateTo)
+  , _intM1 = _parseIntBy10(m1)
+  , _mDiff = _intM1 - _parseIntBy10(m2)
+  , _yDiff = _parseIntBy10(y1) - _parseIntBy10(y2);
+  return (_intM1 % 3 === 0 && _isEndOfMonthDay(d1) && _isEndOfMonthDay(d2))
+    && ((_mDiff === 3 && _yDiff === 0) ||
+        (_mDiff === -9 && _yDiff === 1))
+   ? `Q${m1/3} ${y1}`
+   : '';
+};
+
+export const getDateFromVm = ({
+   date,
+   dateTo
+}) => _getDateAnnual(date, dateTo)
+ || _getDateQuarterly(date, dateTo)
+ || date;

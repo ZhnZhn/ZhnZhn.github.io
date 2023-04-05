@@ -310,5 +310,56 @@ describe("getYmdhms", () => {
     expect(fn(new Date(Date.UTC(2010, 0, 1, 1)))).toBe('2010-01-01 01:00 UTC');
   });
 });
+describe("getDateFromVm", () => {
+  const fn = _dateFn.getDateFromVm;
+  it("should return str year from annual valueMoving", () => {
+    expect(fn({
+      date: '31-12-2010',
+      dateTo: '31-12-2009'
+    })).toBe('2010');
+  });
+  it('should return str quarter date from quarterly valueMoving', () => {
+    expect(fn({
+      date: '31-03-2010',
+      dateTo: '31-12-2009'
+    })).toBe('Q1 2010');
+    expect(fn({
+      date: '31-12-2010',
+      dateTo: '31-09-2010'
+    })).toBe('Q4 2010');
+    expect(fn({
+      date: '31-12-2010',
+      dateTo: '30-09-2010'
+    })).toBe('Q4 2010');
+    expect(fn({
+      date: '31-12-2010',
+      dateTo: '19-09-2010'
+    })).toBe('31-12-2010');
+    expect(fn({
+      date: '31-11-2010',
+      dateTo: '30-08-2010'
+    })).toBe('31-11-2010');
+  });
+  it('should return otherwise property date of valueMoving', () => {
+    expect(fn({
+      date: '31-12-2010',
+      dateTo: '30-11-2010'
+    })).toBe('31-12-2010');
+    expect(fn({
+      date: '31-12-2010',
+      dateTo: '30-12-2010'
+    })).toBe('31-12-2010');
+  });
+  it('should return property date of valueMoving in edge cases', () => {
+    expect(fn({
+      date: '31-12-2010'
+    })).toBe('31-12-2010');
+    expect(fn({
+      date: '31-12-2010',
+      dateTo: null
+    })).toBe('31-12-2010');
+    expect(fn({})).toBe(void 0);
+  });
+});
 (0, _dateFnWithMock.default)();
 //# sourceMappingURL=dateFn.test.js.map
