@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useToggleClose = _interopRequireDefault(require("../hooks/useToggleClose"));
+var _dateFn = require("../../utils/dateFn");
 var _DirectionType = require("../../constants/DirectionType");
 var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _SvgDown = _interopRequireDefault(require("../zhn/SvgDown"));
@@ -56,24 +57,15 @@ const DF_VALUE_MOVING = {
   direction: _DirectionType.DT_EQUAL,
   date: ''
 };
-const _getStr = date => date || '',
-  _isYearly = date => _getStr(date).slice(0, 5) === '31-12',
-  _crDate = _ref => {
-    let {
-      date,
-      dateTo
-    } = _ref;
-    return _isYearly(date) && _isYearly(dateTo) ? _getStr(date).slice(6, 10) : date;
-  };
-const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref2, ref) => {
+const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     isAdminMode,
     initialVm = DF_VALUE_MOVING,
     crValueMoving
-  } = _ref2;
+  } = _ref;
   const [vm, setVm] = (0, _uiApi.useState)(initialVm),
     [isShowModal, _toggleModal, _closeModal] = (0, _useToggleClose.default)(),
-    _date = (0, _uiApi.useMemo)(() => _crDate(initialVm), [initialVm])
+    _date = (0, _uiApi.useMemo)(() => (0, _dateFn.getDateFromVm)(initialVm), [initialVm])
     /*eslint-disable react-hooks/exhaustive-deps */,
     _updateDateTo = (0, _uiApi.useMemo)(() => dateTo => {
       const _vm = crValueMoving(vm, dateTo);

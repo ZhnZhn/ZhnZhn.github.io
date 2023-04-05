@@ -7,6 +7,7 @@ import {
 } from '../uiApi';
 
 import useToggleClose from '../hooks/useToggleClose';
+import { getDateFromVm } from '../../utils/dateFn';
 
 import {
   DT_UP,
@@ -71,17 +72,6 @@ const DF_VALUE_MOVING = {
   date: ''
 };
 
-const _getStr = date => date || ''
-, _isYearly = (
-  date
-) => _getStr(date).slice(0, 5) === '31-12'
-, _crDate = ({
-   date,
-   dateTo
-}) => _isYearly(date) && _isYearly(dateTo)
- ? _getStr(date).slice(6, 10)
- : date;
-
 const ValueMovingBadge = forwardRef(({
   isAdminMode,
   initialVm=DF_VALUE_MOVING,
@@ -97,7 +87,7 @@ const ValueMovingBadge = forwardRef(({
     _closeModal
   ] = useToggleClose()
   , _date = useMemo(
-     () => _crDate(initialVm),
+     () => getDateFromVm(initialVm),
      [initialVm]
   )
   /*eslint-disable react-hooks/exhaustive-deps */
