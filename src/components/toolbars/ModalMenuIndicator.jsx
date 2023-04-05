@@ -1,23 +1,17 @@
 import {
-  useMemo
-} from '../uiApi';
-
-import {
   growthRate,
   changesBetween,
   normalize
 } from '../../math/seriaFn';
 
-import ModalPopup from '../zhn-moleculs/ModalPopup';
+import useModalMenuIndicators from './useModalMenuIndicators';
 
+import { INDICATOR_TYPE_1 } from './IndicatorType';
+import { S_MODAL_MENU } from './ModalMenu.Style';
+
+import ModalPopup from '../zhn-moleculs/ModalPopup';
 import RowFnType1 from './RowFnType1';
 import RowFnPlusMinus from './RowFnPlusMinus';
-import RowSma from './RowSma';
-import RowRsi from './RowRsi';
-import RowMfi from './RowMfi';
-import RowMomAth from './RowMomAth';
-
-import { S_MODAL_MENU } from './ModalMenu.Style';
 
 const C_GROW = '#90ed7d'
 , S_PANE = {
@@ -46,22 +40,7 @@ const ModalMenuIndicator = ({
    onAddMfi,
    onRemoveMfi
 }) => {
-  const [
-    _isSma,
-    _isMfi,
-    _isMomAth,
-    _isRsi
-  ] = useMemo(() => {
-    const { zhConfig } = config
-    , _isMfi = !!config.zhIsMfi
-    , { btTitle } = (config.zhMiniConfigs || [])[0] || {};
-    return [
-      !(zhConfig || {}).isWithoutSma,
-      _isMfi,
-      !!config.zhIsMomAth,
-      _isMfi || (btTitle || '').indexOf('Volume') !== -1
-    ];
-  }, [config]);
+  const indicatorConfigs = useModalMenuIndicators(config);
 
   return (
     <ModalPopup
@@ -85,31 +64,22 @@ const ModalMenuIndicator = ({
           configArr={FN_NORM}
           getChart={getChart}
         />
-        {_isSma && <RowSma
-            config={config}
-            getChart={getChart}
-          />
-        }
-        {_isRsi && <RowRsi
-            config={config}
-            getChart={getChart}
-          />
-        }
-        {_isMfi && <RowMfi
-            getChart={getChart}
-            onAddMfi={onAddMfi}
-            onRemoveMfi={onRemoveMfi}
-         />
-        }
-        {_isMomAth && <RowMomAth
-             getChart={getChart}
-             onAddMfi={onAddMfi}
-             onRemoveMfi={onRemoveMfi}
-          />
+        {
+          indicatorConfigs.map(([RowComp, key, type]) => {
+            const _restProps = type === INDICATOR_TYPE_1
+              ? { config }
+              : { onAddMfi, onRemoveMfi };
+            return (
+              <RowComp
+                {..._restProps}
+                key={key}
+                getChart={getChart}
+            />
+          )})
         }
       </div>
     </ModalPopup>
   );
-}
+};
 
 export default ModalMenuIndicator

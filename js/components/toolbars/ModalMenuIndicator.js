@@ -3,17 +3,15 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _seriaFn = require("../../math/seriaFn");
+var _useModalMenuIndicators = _interopRequireDefault(require("./useModalMenuIndicators"));
+var _IndicatorType = require("./IndicatorType");
+var _ModalMenu = require("./ModalMenu.Style");
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _RowFnType = _interopRequireDefault(require("./RowFnType1"));
 var _RowFnPlusMinus = _interopRequireDefault(require("./RowFnPlusMinus"));
-var _RowSma = _interopRequireDefault(require("./RowSma"));
-var _RowRsi = _interopRequireDefault(require("./RowRsi"));
-var _RowMfi = _interopRequireDefault(require("./RowMfi"));
-var _RowMomAth = _interopRequireDefault(require("./RowMomAth"));
-var _ModalMenu = require("./ModalMenu.Style");
 var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
 const C_GROW = '#90ed7d',
   S_PANE = {
     width: 265,
@@ -40,16 +38,7 @@ const ModalMenuIndicator = _ref => {
     onAddMfi,
     onRemoveMfi
   } = _ref;
-  const [_isSma, _isMfi, _isMomAth, _isRsi] = (0, _uiApi.useMemo)(() => {
-    const {
-        zhConfig
-      } = config,
-      _isMfi = !!config.zhIsMfi,
-      {
-        btTitle
-      } = (config.zhMiniConfigs || [])[0] || {};
-    return [!(zhConfig || {}).isWithoutSma, _isMfi, !!config.zhIsMomAth, _isMfi || (btTitle || '').indexOf('Volume') !== -1];
-  }, [config]);
+  const indicatorConfigs = (0, _useModalMenuIndicators.default)(config);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
     style: {
       ..._ModalMenu.S_MODAL_MENU,
@@ -71,20 +60,19 @@ const ModalMenuIndicator = _ref => {
         caption: NORM_CAPTION_EL,
         configArr: FN_NORM,
         getChart: getChart
-      }), _isSma && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSma.default, {
-        config: config,
-        getChart: getChart
-      }), _isRsi && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowRsi.default, {
-        config: config,
-        getChart: getChart
-      }), _isMfi && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowMfi.default, {
-        getChart: getChart,
-        onAddMfi: onAddMfi,
-        onRemoveMfi: onRemoveMfi
-      }), _isMomAth && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowMomAth.default, {
-        getChart: getChart,
-        onAddMfi: onAddMfi,
-        onRemoveMfi: onRemoveMfi
+      }), indicatorConfigs.map(_ref2 => {
+        let [RowComp, key, type] = _ref2;
+        const _restProps = type === _IndicatorType.INDICATOR_TYPE_1 ? {
+          config
+        } : {
+          onAddMfi,
+          onRemoveMfi
+        };
+        return /*#__PURE__*/(0, _react.createElement)(RowComp, {
+          ..._restProps,
+          key: key,
+          getChart: getChart
+        });
       })]
     })
   });
