@@ -1,4 +1,6 @@
 //import PropTypes from "prop-types";
+import { formatStrDate } from '../../utils/dateFn';
+
 import useTheme from '../hooks/useTheme';
 import useToggle from '../hooks/useToggle';
 import useFnFocus from '../hooks/useFnFocus';
@@ -53,7 +55,8 @@ S_CAPTION = {
 , S_CAPTION_WIDTH = {
   width: void 0,
   maxWidth: 'calc(100% - 60px)'
-}, S_CLOSE = {
+}
+, S_CLOSE = {
   position: 'absolute',
   right: 0,
   top: 6
@@ -62,7 +65,7 @@ S_CAPTION = {
 const ItemTime = ({
   itemTime
 }) => itemTime
-  ? <span className={CL_ITEM_TIME}>{itemTime}</span>
+  ? <span className={CL_ITEM_TIME}>{formatStrDate(itemTime)}</span>
   : null;
 
 const MenuMore = ({

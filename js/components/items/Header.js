@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _dateFn = require("../../utils/dateFn");
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useFnFocus = _interopRequireDefault(require("../hooks/useFnFocus"));
@@ -66,7 +67,7 @@ const ItemTime = _ref => {
   } = _ref;
   return itemTime ? /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
     className: CL_ITEM_TIME,
-    children: itemTime
+    children: (0, _dateFn.formatStrDate)(itemTime)
   }) : null;
 };
 const MenuMore = _ref2 => {

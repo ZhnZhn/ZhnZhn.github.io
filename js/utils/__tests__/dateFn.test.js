@@ -361,5 +361,15 @@ describe("getDateFromVm", () => {
     expect(fn({})).toBe(void 0);
   });
 });
+describe('formatStrDate', () => {
+  const fn = _dateFn.formatStrDate;
+  it('should format str date to quarterly format', () => {
+    expect(fn('2010-Q1')).toBe('Q1 2010');
+    expect(fn('2010-Q2')).toBe('Q2 2010');
+    expect(fn('2010')).toBe('2010');
+    expect(fn('2010-10')).toBe('2010-10');
+    expect(fn('2010-10-01')).toBe('2010-10-01');
+  });
+});
 (0, _dateFnWithMock.default)();
 //# sourceMappingURL=dateFn.test.js.map

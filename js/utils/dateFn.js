@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.monthIndex = exports.mlsToYmd = exports.mlsToDmy = exports.isYmdOrEmpty = exports.isYmd = exports.isDmyPeriod = exports.isDmy = exports.getYmdhmUTC = exports.getYear = exports.getYTDfromDmy = exports.getUTCTime = exports.getToDate = exports.getNumberOfDays = exports.getFromDate = exports.getDaysFromYmd = exports.getDateFromVm = exports.getCurrentYear = exports.dmyToUTC = exports.addToDmy = exports.addDaysToYmd = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.monthIndex = exports.mlsToYmd = exports.mlsToDmy = exports.isYmdOrEmpty = exports.isYmd = exports.isDmyPeriod = exports.isDmy = exports.getYmdhmUTC = exports.getYear = exports.getYTDfromDmy = exports.getUTCTime = exports.getToDate = exports.getNumberOfDays = exports.getFromDate = exports.getDaysFromYmd = exports.getDateFromVm = exports.getCurrentYear = exports.formatStrDate = exports.dmyToUTC = exports.addToDmy = exports.addDaysToYmd = void 0;
 var _isTypeFn = require("./isTypeFn");
 const MIN_YEAR = 1990;
 const DF_FORECAST_DATE = 0;
@@ -219,4 +219,6 @@ const getDateFromVm = _ref => {
   return _getDateAnnual(date, dateTo) || _getDateQuarterly(date, dateTo) || date;
 };
 exports.getDateFromVm = getDateFromVm;
+const formatStrDate = strDate => _getStr(strDate)[5] === 'Q' ? strDate.slice(5) + ' ' + strDate.slice(0, 4) : strDate;
+exports.formatStrDate = formatStrDate;
 //# sourceMappingURL=dateFn.js.map

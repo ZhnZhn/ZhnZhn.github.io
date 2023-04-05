@@ -309,3 +309,9 @@ export const getDateFromVm = ({
 }) => _getDateAnnual(date, dateTo)
  || _getDateQuarterly(date, dateTo)
  || date;
+
+ export const formatStrDate = (
+   strDate
+ ) => _getStr(strDate)[5] === 'Q'
+   ? strDate.slice(5) + ' ' + strDate.slice(0, 4)
+   : strDate
