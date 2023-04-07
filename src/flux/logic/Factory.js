@@ -95,7 +95,7 @@ const _crClickAbout = ({
   descrUrl
 }) => {
   const _descrUrl = descr && rootUri
-    ? `${rootUri}/${descr}.html`
+    ? `${rootUri}${descr}.html`
     : descrUrl;
   return _descrUrl
     ? ComponentActions.showDescription.bind(null, { descrUrl: _descrUrl })
