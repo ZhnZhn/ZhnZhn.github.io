@@ -8,7 +8,8 @@ import RowButtons from './RowButtons';
 import FlatButton from '../zhn-m/FlatButton';
 
 const S_MR_4 = { marginRight: 4 }
-, S_MR_12 = { marginRight: 12 };
+, S_MR_12 = { marginRight: 12 }
+, WITHOUT_LABELS_WIDTH = 275;
 
 const UI_THEME_OPTIONS = [
   { caption: 'Dark', value: 'GREY' },
@@ -22,6 +23,12 @@ const CHECKBOX_CONFIGS = [
   ['Draw Deltas to Min-Max', 'isDrawDeltaExtrems'],
   ['Not Zoom to Min-Max', 'isNotZoomToMinMax']
 ];
+
+const _crInputStyles = (
+  isShowLabels
+) => isShowLabels
+  ? []
+  : [WITHOUT_LABELS_WIDTH, {width: WITHOUT_LABELS_WIDTH}]
 
 const PaneOptions = ({
   isShowLabels,
@@ -38,13 +45,18 @@ const PaneOptions = ({
     _hSetProxy,
     _hClearProxy
   ] = useInputData(data, 'setProxy')
-  , _hSelectTheme = useThemeSelect(onChangeTheme);
+  , _hSelectTheme = useThemeSelect(onChangeTheme)
+  , [
+    _width,
+    _rowPatterStyle
+  ] = _crInputStyles(isShowLabels);
 
   return (
     <div>
       <RowPattern
         ref={_refProxy}
         isShowLabels={isShowLabels}
+        style={_rowPatterStyle}
         captionStyle={titleStyle}
         caption="Proxy"
         placeholder="Local Http Proxy Server"
@@ -56,6 +68,7 @@ const PaneOptions = ({
       />
       <RowInputSelect
         isShowLabels={isShowLabels}
+        width={_width}
         caption="UI Theme"
         captionStyle={titleStyle}
         options={UI_THEME_OPTIONS}

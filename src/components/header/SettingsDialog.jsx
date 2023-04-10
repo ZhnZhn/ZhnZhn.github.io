@@ -1,4 +1,3 @@
-//import PropTypes from 'prop-types'
 import memoIsShow from '../hoc/memoIsShow';
 import useSettingsMenuMore from './useSettingsMenuMore';
 import { crStyle2 } from '../zhn-utils/crStyle';
@@ -21,7 +20,7 @@ const S_MODAL = {
 }
 , S_MODAL_SMALL = { width: 295 }
 , S_TITLE_API = { width: 82 }
-, S_TITLE_OPTION = { width: 110 }
+, S_TITLE_OPTION = { width: 100 }
 , S_BT = { color: '#232f3b' };
 
 const CL_ROW = 'row__pane-topic not-selected';
@@ -74,17 +73,5 @@ const SettingsDialog = memoIsShow(({
     </ModalDialog>
   );
 });
-
-/*
-SettingsDialog.propTypes = {
-  isShow: PropTypes.bool,
-  data: PropTypes.shape({
-    setQuandlKey: PropTypes.func,
-    isAdminMode: PropTypes.func,
-    isDrawDeltaExtrems: PropTypes.func
-  }),
-  onClose: PropTypes.func
-}
-*/
 
 export default SettingsDialog

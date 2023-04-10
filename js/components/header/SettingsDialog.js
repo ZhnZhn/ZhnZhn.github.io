@@ -13,8 +13,6 @@ var _Tab = _interopRequireDefault(require("../zhn-tab/Tab"));
 var _PaneApiKey = _interopRequireDefault(require("./PaneApiKey"));
 var _PaneOptions = _interopRequireDefault(require("./PaneOptions"));
 var _jsxRuntime = require("react/jsx-runtime");
-//import PropTypes from 'prop-types'
-
 const S_MODAL = {
     position: 'static',
     width: 380,
@@ -28,7 +26,7 @@ const S_MODAL = {
     width: 82
   },
   S_TITLE_OPTION = {
-    width: 110
+    width: 100
   },
   S_BT = {
     color: '#232f3b'
@@ -74,18 +72,6 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
     })
   });
 });
-
-/*
-SettingsDialog.propTypes = {
-  isShow: PropTypes.bool,
-  data: PropTypes.shape({
-    setQuandlKey: PropTypes.func,
-    isAdminMode: PropTypes.func,
-    isDrawDeltaExtrems: PropTypes.func
-  }),
-  onClose: PropTypes.func
-}
-*/
 var _default = SettingsDialog;
 exports.default = _default;
 //# sourceMappingURL=SettingsDialog.js.map

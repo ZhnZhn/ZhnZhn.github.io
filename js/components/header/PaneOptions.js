@@ -16,7 +16,8 @@ const S_MR_4 = {
   },
   S_MR_12 = {
     marginRight: 12
-  };
+  },
+  WITHOUT_LABELS_WIDTH = 275;
 const UI_THEME_OPTIONS = [{
   caption: 'Dark',
   value: 'GREY'
@@ -31,6 +32,9 @@ const UI_THEME_OPTIONS = [{
   value: 'SAND_L'
 }];
 const CHECKBOX_CONFIGS = [['View in Admin Mode', 'isAdminMode'], ['Draw Deltas to Min-Max', 'isDrawDeltaExtrems'], ['Not Zoom to Min-Max', 'isNotZoomToMinMax']];
+const _crInputStyles = isShowLabels => isShowLabels ? [] : [WITHOUT_LABELS_WIDTH, {
+  width: WITHOUT_LABELS_WIDTH
+}];
 const PaneOptions = _ref => {
   let {
     isShowLabels,
@@ -41,11 +45,13 @@ const PaneOptions = _ref => {
     onChangeTheme
   } = _ref;
   const [_refProxy, _proxy, _setProxy, _hSetProxy, _hClearProxy] = (0, _useInputData.default)(data, 'setProxy'),
-    _hSelectTheme = (0, _useThemeSelect.default)(onChangeTheme);
+    _hSelectTheme = (0, _useThemeSelect.default)(onChangeTheme),
+    [_width, _rowPatterStyle] = _crInputStyles(isShowLabels);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowPattern.default, {
       ref: _refProxy,
       isShowLabels: isShowLabels,
+      style: _rowPatterStyle,
       captionStyle: titleStyle,
       caption: "Proxy",
       placeholder: "Local Http Proxy Server",
@@ -56,6 +62,7 @@ const PaneOptions = _ref => {
       errorMsg: "Should start with http://127.0.0.1"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
       isShowLabels: isShowLabels,
+      width: _width,
       caption: "UI Theme",
       captionStyle: titleStyle,
       options: UI_THEME_OPTIONS,
