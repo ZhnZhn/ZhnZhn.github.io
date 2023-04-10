@@ -10,18 +10,18 @@ var _RowCheckBox2 = _interopRequireDefault(require("../rows/RowCheckBox2"));
 var _RowCheckBox3 = _interopRequireDefault(require("../rows/RowCheckBox3"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const S_ROW = {
+const S_ROW_FLEX = {
+    ..._Style.S_ROW,
     display: 'flex',
-    justifyContent: 'space-between',
-    padding: '3px 0 2px 0'
+    justifyContent: 'space-between'
   },
   S_CAPTION = {
     maxWidth: 150,
     textAlign: 'left'
   },
   S_CHB_TOGGLE = {
-    ..._Style.S_ROW_CHB,
-    display: 'inline-block'
+    display: 'inline-block',
+    padding: void 0
   },
   S_CHB_CAPTION = {
     display: 'inline-block',
@@ -36,7 +36,7 @@ const _crCheckBoxItem = (item, index, _ref) => {
     onUnCheckCaption
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: S_ROW,
+    style: S_ROW_FLEX,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox2.default, {
       initialValue: _crChbToggleInitValue(item.isRow),
       style: S_CHB_TOGGLE,
@@ -87,13 +87,13 @@ const ModalToggle = _ref2 => {
       onCheckCaption: onCheckCaption,
       onUnCheckCaption: onUnCheckCaption
     }), isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox3.default, {
-      style: _Style.S_ROW_CHB,
+      style: _Style.S_ROW,
       color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
       caption: "From Date",
       value: isShowFd,
       onToggle: onToggleFd
     }, "isShowFd"), isCh && onToggleChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox3.default, {
-      style: _Style.S_ROW_CHB,
+      style: _Style.S_ROW,
       color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
       caption: "Chart",
       value: isShowChart,

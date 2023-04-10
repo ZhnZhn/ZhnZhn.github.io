@@ -8,31 +8,34 @@ import RowCheckBox3 from '../rows/RowCheckBox3';
 import {
   CL_POPUP_MENU,
   S_MODAL_POPUP,
-  S_ROW_CHB,
+  S_ROW,
   TOGGLE_INPUT_CHECKBOX_COLOR,
   TOGGLE_CAPTION_CHECKBOX_COLOR
 } from './Style';
 
-const S_ROW = {
+const S_ROW_FLEX = {
+  ...S_ROW,
   display: 'flex',
-  justifyContent: 'space-between',
-  padding: '3px 0 2px 0'
+  justifyContent: 'space-between'
 }
 , S_CAPTION = {
   maxWidth: 150,
   textAlign: 'left'
 }
 , S_CHB_TOGGLE = {
-  ...S_ROW_CHB,
-  display: 'inline-block'
+  display: 'inline-block',
+  padding: void 0
 }
 , S_CHB_CAPTION = {
   display: 'inline-block',
   padding: '0 0 0 40px'
 };
 
-const _crChbToggleInitValue = isRow =>
-  typeof isRow === 'boolean' ? isRow : true;
+const _crChbToggleInitValue = (
+  isRow
+) => typeof isRow === 'boolean'
+  ? isRow
+  : true;
 
 const _crCheckBoxItem = (
   item,
@@ -43,7 +46,7 @@ const _crCheckBoxItem = (
     onUnCheckCaption
   }
 ) => (
-  <div style={S_ROW} key={item.id}>
+  <div style={S_ROW_FLEX} key={item.id}>
     <RowCheckBox2
       initialValue={_crChbToggleInitValue(item.isRow)}
       style={S_CHB_TOGGLE}
@@ -95,7 +98,7 @@ const ModalToggle = ({
     />
     { isFd && <RowCheckBox3
         key="isShowFd"
-        style={S_ROW_CHB}
+        style={S_ROW}
         color={TOGGLE_INPUT_CHECKBOX_COLOR}
         caption="From Date"
         value={isShowFd}
@@ -104,7 +107,7 @@ const ModalToggle = ({
     }
     { isCh && onToggleChart && <RowCheckBox3
         key="isShowChart"
-        style={S_ROW_CHB}
+        style={S_ROW}
         color={TOGGLE_INPUT_CHECKBOX_COLOR}
         caption="Chart"
         value={isShowChart}

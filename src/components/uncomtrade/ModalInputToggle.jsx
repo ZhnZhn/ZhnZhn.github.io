@@ -3,15 +3,9 @@ import RowCheckBox3 from '../dialogs/rows/RowCheckBox3';
 import {
   CL_POPUP_MENU,
   S_MODAL_POPUP,
-  S_ROW_CHB,
+  S_ROW,
   TOGGLE_INPUT_CHECKBOX_COLOR
 } from '../dialogs/modals/Style';
-
-const S_MODAL = {
-  ...S_MODAL_POPUP,
-  lineHeight: 1.6,
-  padding: '6px 14px'
-};
 
 const ModalInputToggle = ({
   isShow,
@@ -21,13 +15,13 @@ const ModalInputToggle = ({
   <ModalPopup
     isShow={isShow}
     className={CL_POPUP_MENU}
-    style={S_MODAL}
+    style={S_MODAL_POPUP}
     onClose={onClose}
   >
     {(configs || []).map(config => (
       <RowCheckBox3
         key={config[0]}
-        style={S_ROW_CHB}
+        style={S_ROW}
         color={TOGGLE_INPUT_CHECKBOX_COLOR}
         caption={config[0]}
         value={config[1]}

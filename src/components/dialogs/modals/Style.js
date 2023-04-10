@@ -1,12 +1,12 @@
 export const CL_POPUP_MENU = 'popup-menu'
 
 export const S_MODAL_POPUP = {
-  left: 8,
+  left: 5,
   zIndex: 100,
-  padding: '4px 12px 12px'
+  padding: '6px 14px 10px 12px'
 }
-export const S_ROW_CHB = {
-  padding: '0 0 4px'
+export const S_ROW = {
+  padding: '3px 0 6px'
 }
 
 export const TOGGLE_INPUT_CHECKBOX_COLOR = '#1b75bb'

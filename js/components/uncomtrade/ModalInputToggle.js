@@ -7,11 +7,6 @@ var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox3"));
 var _Style = require("../dialogs/modals/Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const S_MODAL = {
-  ..._Style.S_MODAL_POPUP,
-  lineHeight: 1.6,
-  padding: '6px 14px'
-};
 const ModalInputToggle = _ref => {
   let {
     isShow,
@@ -21,10 +16,10 @@ const ModalInputToggle = _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
     isShow: isShow,
     className: _Style.CL_POPUP_MENU,
-    style: S_MODAL,
+    style: _Style.S_MODAL_POPUP,
     onClose: onClose,
     children: (configs || []).map(config => /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-      style: _Style.S_ROW_CHB,
+      style: _Style.S_ROW,
       color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
       caption: config[0],
       value: config[1],

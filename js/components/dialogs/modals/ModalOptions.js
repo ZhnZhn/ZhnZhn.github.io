@@ -59,10 +59,10 @@ const ModalOptions = _ref => {
     }), ROW_CHECKBOX_CONFIGS.map(_ref2 => {
       let [id, caption] = _ref2;
       return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-        style: _Style.S_ROW_CHB,
+        id: id,
+        style: _Style.S_ROW,
         caption: caption,
-        onToggle: toggleOption,
-        id: id
+        onToggle: toggleOption
       }, id);
     })]
   });

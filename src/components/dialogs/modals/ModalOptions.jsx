@@ -4,7 +4,7 @@ import RowCheckBox2 from '../rows/RowCheckBox2';
 import {
   CL_POPUP_MENU,
   S_MODAL_POPUP,
-  S_ROW_CHB
+  S_ROW
 } from './Style';
 
 const S_DIV_INPUT = {
@@ -65,10 +65,10 @@ const ModalOptions = ({
     {ROW_CHECKBOX_CONFIGS.map(([id, caption]) => (
        <RowCheckBox2
           key={id}
-          style={S_ROW_CHB}
+          id={id}
+          style={S_ROW}
           caption={caption}
           onToggle={toggleOption}
-          id={id}
        />
     ))}
   </ModalPopup>
