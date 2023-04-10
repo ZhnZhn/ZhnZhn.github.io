@@ -46,7 +46,7 @@ const DF_ON_TEST = () => true,
   DF_ON_CLEAR = () => {};
 const InputPattern = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
-    rootStyle,
+    style,
     inputStyle,
     maxLength = 64,
     initValue = '',
@@ -113,7 +113,7 @@ const InputPattern = (0, _uiApi.forwardRef)((_ref, ref) => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       ..._Input.S_ROW,
-      ...rootStyle
+      ...style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S_FLEX,
@@ -149,7 +149,7 @@ const InputPattern = (0, _uiApi.forwardRef)((_ref, ref) => {
 
 /*
 InputPattern.propTypes = {
-  rootStyle: PropTypes.object,
+  style: PropTypes.object,
   inputStyle: PropTypes.object,
   initValue: PropTypes.string,
   placeholder: PropTypes.string,

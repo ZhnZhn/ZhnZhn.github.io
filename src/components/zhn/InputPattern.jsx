@@ -58,7 +58,7 @@ const DF_ON_TEST = () => true
 , DF_ON_CLEAR = () => {};
 
 const InputPattern = forwardRef(({
-  rootStyle,
+  style,
   inputStyle,
   maxLength=64,
   initValue='',
@@ -132,7 +132,7 @@ const InputPattern = forwardRef(({
   , _btClearStyle = _crBtClearStyle(isValid);
 
   return (
-    <div style={{...S_ROW, ...rootStyle}}>
+    <div style={{...S_ROW, ...style}}>
       <div style={S_FLEX}>
         <input
            type="text"
@@ -165,7 +165,7 @@ const InputPattern = forwardRef(({
 
 /*
 InputPattern.propTypes = {
-  rootStyle: PropTypes.object,
+  style: PropTypes.object,
   inputStyle: PropTypes.object,
   initValue: PropTypes.string,
   placeholder: PropTypes.string,
