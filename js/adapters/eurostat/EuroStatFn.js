@@ -14,7 +14,7 @@ const COLOR_EU = "#0088ff",
   COLOR_EA = "#ff5800",
   COLOR_NOT_EU_MEMBER = '#8085e9',
   EU_CODES = ["EU", "EU28", "EU27_2020", "G20", "Group of Twenty"],
-  EA_CODES = ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19"],
+  EA_CODES = ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19", "EA20"],
   EU_MEMBER = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"];
 const _getObjectKeys = Object.keys,
   _assign = Object.assign,
@@ -93,13 +93,7 @@ const _filterZeroCategories = (data, categories) => {
       _arrC.push(p.c);
     }
   });
-  if (_arrC.length !== 0) {
-    categories = categories.filter(c => _arrC.indexOf(c) === -1);
-  }
-  return {
-    data: _data,
-    categories
-  };
+  return [_data, _arrC.length !== 0 ? categories.filter(c => _arrC.indexOf(c) === -1) : categories];
 };
 const _isYearOrMapFrequencyKey = (key, mapFrequency) => !mapFrequency || mapFrequency === "Y" || mapFrequency === "M" || key.indexOf(mapFrequency) !== -1;
 const _crPoint = (x, y, status) => [x, y, status && status !== ':' && status.length === 1 ? status : void 0];
@@ -113,11 +107,7 @@ const _setZoomMinMaxTo = (config, isNotZoomToMinMax, min) => {
 };
 const _setHeightIfBarTo = (config, seriaType, categories) => {
   if (seriaType === 'BAR_SET' || seriaType === 'BAR_WITH_LABELS') {
-    const {
-        height
-      } = config.chart,
-      _height = 100 + 17 * categories.length;
-    config.chart.height = _height < height ? _height : height;
+    config.chart.height = Math.min(100 + 17 * categories.length, config.chart.height);
   }
 };
 const _getTableId = _ref2 => {
@@ -169,16 +159,15 @@ const crData = function (json, _temp) {
 };
 exports.crData = crData;
 const toPointArr = json => {
-  const [timeIndex, value, status] = _crTimeIndexAndValue(json),
-    data = [];
-  _getObjectKeys(timeIndex).map(key => {
+  const [timeIndex, value, status] = _crTimeIndexAndValue(json);
+  return _getObjectKeys(timeIndex).reduce((_data, key) => {
     const _valueIndex = timeIndex[key],
       y = value[_valueIndex];
     if (y != null) {
-      data.push(_crPoint(key.replace('M', '-'), y, status[_valueIndex]));
+      _data.push(_crPoint(key.replace('M', '-'), y, status[_valueIndex]));
     }
-  });
-  return data;
+    return _data;
+  }, []);
 };
 exports.toPointArr = toPointArr;
 const crZhConfig = option => {
@@ -269,20 +258,16 @@ const addToCategoryConfig = (config, _ref7) => {
     categories,
     min
   } = _ref7;
-  if (option.isFilterZero) {
-    const _r = _filterZeroCategories(data, categories);
-    data = _r.data;
-    categories = _r.categories;
-  }
+  const [_data, _categories] = option.isFilterZero ? _filterZeroCategories(data, categories) : [data, categories];
   setDataAndInfo({
+    data: _data,
     config,
-    data,
     json,
     option
   });
   _setCategories({
+    categories: _categories,
     config,
-    categories,
     min,
     option
   });

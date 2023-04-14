@@ -25,7 +25,7 @@ const COLOR_EU = "#0088ff"
 , COLOR_EA = "#ff5800"
 , COLOR_NOT_EU_MEMBER = '#8085e9'
 , EU_CODES = ["EU", "EU28", "EU27_2020", "G20", "Group of Twenty" ]
-, EA_CODES = ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19"]
+, EA_CODES = ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19", "EA20"]
 , EU_MEMBER = [
     "Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus",
     "Czechia", "Denmark", "Estonia", "Finland", "France",
@@ -50,7 +50,9 @@ const _crDescr = (
   , _ext = extension || {}
   , { id, subTitle } = _ext
   , _id = `Dataset: ${(id || '').toLowerCase()}`
-  , _sub = subTitle ? `Metric: ${subTitle}` : ''
+  , _sub = subTitle
+      ? `Metric: ${subTitle}`
+      : ''
   , _d = _ext.description || '';
   return (`<p>${_updated}</p><p>${_id}</p><p>${_d} ${_sub}</p>`);
 };
@@ -123,16 +125,21 @@ const _filterZeroCategories = (
   data,
   categories
 ) => {
-  const _data = [], _arrC = [];
+  const _data = []
+  , _arrC = [];
   data.forEach(p => {
-    if (p.y !== 0) { _data.push(p) }
-    else { _arrC.push(p.c) }
+    if (p.y !== 0) {
+      _data.push(p)
+    } else {
+      _arrC.push(p.c)
+    }
   })
-  if (_arrC.length !== 0) {
-    categories = categories
-       .filter(c => _arrC.indexOf(c) === -1)
-  }
-  return { data: _data, categories };
+  return [
+    _data,
+    _arrC.length !== 0
+       ? categories.filter(c => _arrC.indexOf(c) === -1)
+       : categories
+  ];
 };
 
 
@@ -174,10 +181,10 @@ const _setHeightIfBarTo = (
   categories
 ) => {
   if (seriaType === 'BAR_SET' || seriaType === 'BAR_WITH_LABELS'){
-    const { height } = config.chart
-    , _height = 100 + 17*categories.length;
-    config.chart.height = _height < height
-       ? _height : height
+    config.chart.height = Math.min(
+      100 + 17*categories.length,
+      config.chart.height
+    )
   }
 };
 
@@ -244,19 +251,20 @@ export const toPointArr = (
     timeIndex,
     value,
     status
-  ] = _crTimeIndexAndValue(json)
-  , data = [];
-  _getObjectKeys(timeIndex).map((key) => {
-     const _valueIndex = timeIndex[key]
-     , y = value[_valueIndex];
-     if ( y != null ){
-       data.push(_crPoint(
-         key.replace('M', '-'),
-         y, status[_valueIndex]
-       ));
-     }
-  })
-  return data;
+  ] = _crTimeIndexAndValue(json);
+  return _getObjectKeys(timeIndex)
+    .reduce((_data, key) => {
+       const _valueIndex = timeIndex[key]
+       , y = value[_valueIndex];
+       if (y != null){
+         _data.push(_crPoint(
+             key.replace('M', '-'),
+             y,
+             status[_valueIndex]
+         ));
+       }
+       return _data;
+  }, []);
 }
 
 export const crZhConfig = (option) => {
@@ -341,13 +349,15 @@ export const addToCategoryConfig = (
   config,
   { json, option, data, categories, min }
 ) => {
-    if (option.isFilterZero) {
-      const _r = _filterZeroCategories(data, categories);
-      data = _r.data
-      categories = _r.categories
-    }
-    setDataAndInfo({ config, data, json, option })
-    _setCategories({ config, categories, min, option })
+    const [
+      _data,
+      _categories
+    ] = option.isFilterZero
+      ? _filterZeroCategories(data, categories)
+      : [data, categories];
+
+    setDataAndInfo({ data: _data, config, json, option })
+    _setCategories({ categories: _categories, config, min, option })
     _colorSeries(config)
 }
 
