@@ -13,11 +13,11 @@ const _fItemWithRatio = (
   , _points = hm[name]
   , _p = _points[_points.length-1]
   , _ratio = _p
-        ? ' ' + roundBy((_p.y/sum)*100, 1)+'%'
+        ? roundBy((_p.y/sum)*100, 1)+'%'
         : '';
   return {
      ...item,
-     name: name + _ratio
+     name: _ratio + ' ' + name
   };
 }
 
