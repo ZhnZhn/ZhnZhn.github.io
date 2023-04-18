@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.stopImmediatePropagation = exports.setRefValue = exports.memo = exports.isInputValid = exports.getRefValue = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.Component = void 0;
+exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.stopImmediatePropagation = exports.setRefValue = exports.memo = exports.isInputValid = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.Component = void 0;
 var _react = require("react");
 exports.Component = _react.Component;
 exports.createRef = _react.createRef;
@@ -54,6 +54,11 @@ const getInputValue = ref => {
 exports.getInputValue = getInputValue;
 const getInputValidValue = (ref, dfValue) => isInputValid(ref) ? getInputValue(ref) : dfValue;
 exports.getInputValidValue = getInputValidValue;
+const getRefOptions = ref => {
+  const _inst = getRefValue(ref);
+  return _inst && _isFn(_inst.getOptions) ? _inst.getOptions() : void 0;
+};
+exports.getRefOptions = getRefOptions;
 const _getFirstTouches = touches => touches && touches[0] || {};
 const _getTouchClientX = touches => _getFirstTouches(touches).clientX;
 const _getTouchClientY = touches => _getFirstTouches(touches).clientY;

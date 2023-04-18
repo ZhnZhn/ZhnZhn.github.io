@@ -74,6 +74,15 @@ export const getInputValidValue = (
   ? getInputValue(ref)
   : dfValue;
 
+export const getRefOptions = (
+  ref
+) => {
+  const _inst = getRefValue(ref)
+  return _inst && _isFn(_inst.getOptions)
+    ? _inst.getOptions()
+    : void 0
+};
+
 const _getFirstTouches = (
   touches
 ) => (touches && touches[0]) || {};
