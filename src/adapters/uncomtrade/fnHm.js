@@ -1,4 +1,5 @@
 import { roundBy } from '../AdapterFn';
+
 import {
   WORLD,
   NET_WEIGHT,
@@ -6,6 +7,10 @@ import {
   AVG_PER_Q,
   AVG_PER_W
 } from './conf';
+
+import {
+  getItemTradeValue
+} from './fnAdapter'
 
 const _crHm = () => Object.create(null);
 
@@ -38,11 +43,14 @@ const _crNetWeightPoint = _fCrPoint.bind(null, NET_WEIGHT)
 const _crQuantityPoint = _fCrPoint.bind(null, QUANTITY)
 
 
-const _fCrAvgPoint = (pn, item) => {
-  const { TradeValue } = item
+const _fCrAvgPoint = (
+  pn,
+  item
+) => {
+  const tradeValue = getItemTradeValue(item)
   , _v = item[pn]
-  , _y = _v && TradeValue != null
-       ? roundBy(TradeValue/_v, 2)
+  , _y = _v && tradeValue != null
+       ? roundBy(tradeValue/_v, 2)
        : void 0;
   return _crPoint(_y, _v);
 }
@@ -62,8 +70,9 @@ const _fPoint = pnValue => {
   const _crPoint = _rCrPoint[pnValue]
     || _rCrPoint.fDf(pnValue);
   return item => ({
-     isCategory: true,
-     x: item.period,
+     //isCategory: true,
+     name: item.period,
+     c: item.period,
      ..._crPoint(item)
   });
 };
@@ -96,8 +105,8 @@ export const toSeriaNames = (
 
 export const toHmCategories = ({
   dataset,
-  pnCountry='ptTitle',
-  pnValue='TradeValue'
+  pnCountry='partnerCode',
+  pnValue='primaryValue'
 }) => {
   const _hm = _crHm()
   , _category = _crHm()

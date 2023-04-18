@@ -1,7 +1,8 @@
 import {
   useRef,
   useCallback,
-  getRefValue
+  getRefValue,
+  getRefOptions
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
@@ -14,16 +15,16 @@ import D from '../dialogs/DialogCell';
 import ModalInputToggle from './ModalInputToggle';
 
 const TRADE_FLOW_OPTIONS = [
-  { c: "Export Value", v: { rg: 2, measure: "TradeValue" } },
-  { c: "Export Weight", v: { rg: 2, measure: "NetWeight" } },
-  { c: "Export Quantity", v: { rg: 2, measure: "TradeQuantity" } },
-  { c: "Export Average Value Per Weight", v: { rg: 2, measure: "avgPerWeight" } },
-  { c: "Export Average Value Per Quantity", v: { rg: 2, measure: "avgPerQuantity" } },
-  { c: "Import Value", v: { rg: 1, measure: "TradeValue" } },
-  { c: "Import Weight", v: { rg: 1, measure: "NetWeight" } },
-  { c: "Import Quantity", v: { rg: 1, measure: "TradeQuantity" } },
-  { c: "Import Average Value Per Weight", v: { rg: 1, measure: "avgPerWeight" } },
-  { c: "Import Average Value Per Quantity", v: { rg: 1, measure: "avgPerQuantity" } }
+  { c: "Export Value", v: { rg: 'X', measure: "primaryValue" } },
+  { c: "Export Weight", v: { rg: 'X', measure: "netWgt" } },
+  { c: "Export Quantity", v: { rg: 'X', measure: "qty" } },
+  { c: "Export Average Value Per Weight", v: { rg: 'X', measure: "avgPerWeight" } },
+  { c: "Export Average Value Per Quantity", v: { rg: 'X', measure: "avgPerQuantity" } },
+  { c: "Import Value", v: { rg: 'M', measure: "primaryValue" } },
+  { c: "Import Weight", v: { rg: 'M', measure: "netWgt" } },
+  { c: "Import Quantity", v: { rg: 'M', measure: "qty" } },
+  { c: "Import Average Value Per Weight", v: { rg: 'M', measure: "avgPerWeight" } },
+  { c: "Import Average Value Per Quantity", v: { rg: 'M', measure: "avgPerQuantity" } }
 ]
 , DF_TRADE_FLOW = TRADE_FLOW_OPTIONS[0]
 , DF_ONE = { c: 'All', v: 'all'}
@@ -73,7 +74,8 @@ const UnDialog5 = memoIsShow((
    , [isHeading, toggleHeading] = useToggle(true)
    , [isPartner, togglePartner] = useToggle(false)
    , [isFlow, toggleFlow] = useToggle(true)
-   , [isFreq, toggleFreq] = useToggle(false)
+   //, [isFreq, toggleFreq] = useToggle(false)
+   , _refTradePartner = useRef()
    , _refGroupItem = useRef()
    , [
      setOne,
@@ -87,10 +89,14 @@ const UnDialog5 = memoIsShow((
      setTradePartner,
      getTradePartner
    ] = useProperty()
+
+   /*eslint-disable no-unused-vars*/
    , [
      setFreq,
      getFreq
    ] = useProperty()
+   /*eslint-enable no-unused-vars*/
+
    /*eslint-disable react-hooks/exhaustive-deps */
    , _hLoad = useCallback(() => {
      const _groupItemInst = getRefValue(_refGroupItem)
@@ -117,7 +123,8 @@ const UnDialog5 = memoIsShow((
          three,
          tradeFlow: getTradeFlow() || DF_TRADE_FLOW,
          tradePartner,
-         freq
+         freq,
+         tradePartners: getRefOptions(_refTradePartner)
        }))
      }
      setValidationMessages(msg)
@@ -147,7 +154,7 @@ const UnDialog5 = memoIsShow((
           ['Partner', isPartner, togglePartner],
           ['Heading', isHeading, toggleHeading],
           ['Trade Flow', isFlow, toggleFlow],
-          ['Frequency', isFreq, toggleFreq]
+          /*['Frequency', isFreq, toggleFreq]*/
         ]}
         onClose={hideToggle}
       />
@@ -161,6 +168,7 @@ const UnDialog5 = memoIsShow((
       />
       <D.ShowHide isShow={isPartner}>
         <D.SelectWithLoad
+           ref={_refTradePartner}
            isShowLabels={isShowLabels}
            uri={tpURI}
            caption="Partner"
@@ -189,14 +197,14 @@ const UnDialog5 = memoIsShow((
           onSelect={setTradeFlow}
         />
       </D.ShowHide>
-      <D.ShowHide isShow={isFreq}>
+      <D.ShowHide isShow={false}>
         <D.RowInputSelect
           isShowLabels={isShowLabels}
           caption="Frequency"
           placeholder="Default: Annual"
           propCaption="c"
           options={FREQUENCY_OPTIONS}
-          onSelect={setFreq}
+          //onSelect={setFreq}
         />
       </D.ShowHide>
       <D.ValidationMessages

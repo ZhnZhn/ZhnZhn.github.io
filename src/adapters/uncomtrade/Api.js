@@ -3,69 +3,30 @@ import {
   assign,
   crError
 } from '../AdapterFn';
-import { isTotalByAll } from './fnAdapter';
 
-const PERIOD = 5
-, ALL = 'all'
-, DF_AGG_PERIOD = '2021'
-  //rg=2 Export
-  //H4
-  //fmt=JSON&head=M
-, API_URL = 'https://comtrade.un.org/api/get'
-, DF_RG = 2
-, DF_MEASURE = 'NetWeight'
-, DF_TRADE_PARTNER = '0';
-
-const _crQuery = freq => `type=C&freq=${freq}&px=HS`;
-const _crQueryTail = (
-  one,
-  tp,
-  rg,
-  two
-) => `r=${one}&p=${tp}&rg=${rg}&cc=${two}`;
-const _crMax = (
-  one,
-  tp
-) => one !== ALL && tp === DF_TRADE_PARTNER
-  ? 'max=502&'
-  : '';
-
-const _crPeriod = (
-  toYear,
-  period
-) => {
-  const arr = [];
-  for(let i=1; i<=period; i++) {
-    arr.push(toYear-i)
-  }
-  return arr.reverse().join(',');
-};
-
-const _isAllPeriod = (
-  one,
-  tp
-) => one !== ALL & tp !== ALL;
-
-let _shortTimePeriod;
-const _crTimePeriod = (
-  one,
-  tp,
-  two,
-  period
-) => two === 'AG2' || isTotalByAll({ tp, two })
-  ? period || DF_AGG_PERIOD
-  : _isAllPeriod(one, tp)
-     ? 'ALL,all,All'
-     : _shortTimePeriod
-        || (_shortTimePeriod = _crPeriod(
-              (new Date()).getUTCFullYear(),
-              PERIOD)
-           );
+const ALL = 'all'
+, API_URL_2 = 'https://comtradeapi.un.org/public/v1/preview/C'
+, DF_RG = 'X'
+, DF_MEASURE = 'primaryValue';
 
 const _checkReq = (option) => {
   if (option._isTs) {
     throw new Error('ERR_10');
   }
+};
+
+const _crReporterToTradePartnerQueryTail = (
+  tp
+) => {
+  const _tpCode = tp === ALL
+    ? ''
+    : tp || '0'
+  , _partnerCode = _tpCode
+      ? `&partnerCode=${_tpCode}&partner2Code=${_tpCode}`
+      : '';
+  return  _partnerCode
+    ? _partnerCode
+    : '&period=2022,2021,2020,2019,2018';
 };
 
 const UnComtradeApi = {
@@ -74,23 +35,39 @@ const UnComtradeApi = {
     const {
       one=ALL,
       two,
-      rg=2,
+      rg=DF_RG,
       tp,
       freq,
-      period
-    } = option
-    , _query = _crQuery(freq)
-    , _tp = tp || DF_TRADE_PARTNER
-    , _ps = _crTimePeriod(one, _tp, two, period)
-    , _queryTail = _crQueryTail(one, _tp, rg, two)
-    , _max = _crMax(one, _tp);
+      period,
+      proxy
+    } = option;
 
-    return `${API_URL}?${_max}${_query}&ps=${_ps}&${_queryTail}`;
+    if (two === 'TOTAL') {
+      return `${proxy}${API_URL_2}/A/HS?motCode=0&cmdCode=TOTAL&reporterCode=${one}&flowCode=${rg}&period=${period}`
+    }
+    if (two === 'AG2') {
+      return `${proxy}${API_URL_2}/A/HS?motCode=0&cmdCode=AG2&reporterCode=${one}&flowCode=${rg}&partnerCode=0&partner2Code=0&period=${period}`
+    }
+
+    // All Reporter to TradePartner (Default TradePartner: World)
+    if (one === ALL) {
+      const _tpCode = tp === ALL
+        ? '0'
+        : tp || '0';
+      return `${proxy}${API_URL_2}/${freq}/HS?motCode=0&cmdCode=${two}&flowCode=${rg}&partnerCode=${_tpCode}&partner2Code=${_tpCode}`;
+    }
+
+    // Reporter to TradePartner (Default TradePartner: All)
+    const _queryTail = _crReporterToTradePartnerQueryTail(tp);
+    return `${proxy}${API_URL_2}/${freq}/HS?motCode=0&cmdCode=${two}&reporterCode=${one}&flowCode=${rg}${_queryTail}`;
   },
 
   checkResponse(json){
-    if (json && isArr(json.dataset)) {
-      return true;
+    if (json) {
+      json.dataset = json.data
+      if (isArr(json.dataset)) {
+        return true;
+      }
     }
     throw crError();
   },

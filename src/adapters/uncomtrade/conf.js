@@ -1,15 +1,16 @@
 export const MAX_SHOW = 6
 
+export const WORLD_CODE = '0'
 export const WORLD = 'World'
 export const ALL = 'all'
 
-export const NET_WEIGHT = 'NetWeight'
-export const QUANTITY = 'TradeQuantity'
+export const NET_WEIGHT = 'netWgt'
+export const QUANTITY = 'qty'
 
 export const AVG_PER_W = 'avgPerWeight'
 export const AVG_PER_Q = 'avgPerQuantity'
 
-export const DESCR_EMPTY = 'Dataset is empty.'
+export const DESCR_EMPTY = ''
 export const WORLD_COLOR = '#7cb5ec'
 
 export const S_CHART = {

@@ -7,9 +7,10 @@ var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _TreeMapFn = require("../TreeMapFn");
 var _fnAdapter = require("./fnAdapter");
+var _conf = require("./conf");
 const _crConfig = (json, option, data, categories) => {
   const title = (0, _fnAdapter.crCategoryTitle)(option);
-  return (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)('BAR', categories), (0, _configBuilderFn.fAddCaption)(title, option.subtitle), (0, _configBuilderFn.fAdd)({
+  const config = (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)('BAR', categories), (0, _configBuilderFn.fAddCaption)(title, option.subtitle), (0, _configBuilderFn.fAdd)({
     info: (0, _fnAdapter.crInfo)(json, option),
     zhConfig: (0, _fnAdapter.crZhConfig)(option, {
       isWi: false
@@ -18,6 +19,8 @@ const _crConfig = (json, option, data, categories) => {
     data: data,
     name: title
   }), _configBuilderFn.toConfig);
+  console.log(config);
+  return config;
 };
 const URL_HS_CHAPTERS = './data/uncomtrade/hs-chapters.json';
 let _hmHs;
@@ -62,16 +65,17 @@ const _crAsyncData = json => _fetchHs().then(hmHs => _crHsData(json, hmHs));
 const _toCategoryByCountry = (json, option) => {
   const data = [];
   let totalWorld = 0,
-    total = 0;
+    total = 0,
+    _hm = (0, _fnAdapter.getHmTradePartners)(option.tradePartners);
   json.dataset.forEach(item => {
     const value = (0, _fnAdapter.getItemTradeValue)(item),
       ptTitle = (0, _fnAdapter.getItemPtTitle)(item);
-    if (ptTitle === "World") {
+    if (ptTitle === _conf.WORLD_CODE) {
       totalWorld = value;
     } else if ((0, _fnAdapter.isNotNested)(ptTitle) && (0, _fnAdapter.isPositiveNumber)(value)) {
       total += value;
       data.push({
-        c: ptTitle,
+        c: _hm[ptTitle] || ptTitle,
         y: value
       });
     }

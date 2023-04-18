@@ -1,4 +1,8 @@
-import { useCallback } from '../uiApi';
+import {
+  useRef,
+  useCallback,
+  getRefOptions
+} from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
@@ -10,22 +14,22 @@ import D from '../dialogs/DialogCell';
 import ModalInputToggle from './ModalInputToggle';
 
 const AGG_OPTIONS = [
-  {c: "Total", v: "total"},
+  {c: "Total of trade partners", v: "TOTAL"},
   {c: "All 2-digit HS commodities", v: "AG2"}
 ]
 , DF_AGGREGATION = AGG_OPTIONS[0]
 , PERIOD_OPTIONS = (() => {
   const arr = [];
   for (let i=0; i<22; i++) {
-    const _v = '' + (2021 - i);
+    const _v = '' + (2022 - i);
     arr.push({c: _v, v: _v})
   }
   return arr;
 })()
-, DF_PERIOD = PERIOD_OPTIONS[0]
+, DF_PERIOD = PERIOD_OPTIONS[1]
 , TRADE_FLOW_OPTIONS = [
-  { c: "Export Value", v: { rg: 2, measure: "TradeValue" } },
-  { c: "Import Value", v: { rg: 1, measure: "TradeValue" } },
+  { c: "Export Value", v: { rg: 'X', measure: "primaryValue" } },
+  { c: "Import Value", v: { rg: 'M', measure: "primaryValue" } },
 ]
 , CHART_OPTIONS = [
   { c: "TreeMap (60, 90)", v: "TREE_MAP"},
@@ -63,6 +67,7 @@ const UnDialogAgg = memoIsShow((
     onShow,
     onClose
   } = props
+  , _refTradePartner = useRef()
   , [
     isShowToggle,
     toggleInputs,
@@ -82,16 +87,24 @@ const UnDialogAgg = memoIsShow((
     toggleInputs
   })
   , [isFlow, toggleFlow] = useToggle(true)
-  , [isPartner, togglePartner] = useToggle(true)
-  , [isAggr, toggleAggr] = useToggle(true)
+  //, [isPartner, togglePartner] = useToggle(true)
+  //, [isAggr, toggleAggr] = useToggle(true)
+
+  /*eslint-disable no-unused-vars*/
   , [isPeriod, togglePeriod] = useToggle(false)
+  /*eslint-enable no-unused-vars*/
   , [setOne, getOne] = useProperty()
+
+  /*eslint-disable no-unused-vars*/
   , [setTradePartner, getTradePartner] = useProperty()
+  /*eslint-enable no-unused-vars*/
+
   , [setAggregation, getAggregation] = useProperty()
   , [setTradeFlow, getTradeFlow] = useProperty()
   , [setChart, getChart] = useProperty()
   , [setPeriod, getPeriod] = useProperty()
   /*eslint-disable react-hooks/exhaustive-deps */
+  /*
   , _setTradePartner = useCallback((item) => {
     setTradePartner(item)
     togglePeriod(_isPeriod(
@@ -99,6 +112,7 @@ const UnDialogAgg = memoIsShow((
       getAggregation() || DF_AGGREGATION
     ))
   }, [])
+  */
   // setTradePartner, togglePeriod
   , _setAggregation = useCallback(item => {
     setAggregation(item)
@@ -130,10 +144,11 @@ const UnDialogAgg = memoIsShow((
         tradePartner,
         period: getPeriod() || DF_PERIOD,
         chart: getChart(),
-        freq: DF_FREQ
+        freq: DF_FREQ,
+        tradePartners: getRefOptions(_refTradePartner)
       }))
     }
-    setValidationMessages(msgs)    
+    setValidationMessages(msgs)
   }, []);
   // props, loadFn, onLoad, msgOnNotSelected
   // getAggregation, getTradeFlow,
@@ -158,8 +173,8 @@ const UnDialogAgg = memoIsShow((
        isShow={isShowToggle}
        configs={[
          ['Trade Flow', isFlow, toggleFlow],
-         ['Partner', isPartner, togglePartner],
-         ['Aggregation', isAggr, toggleAggr]
+         /*['Partner', isPartner, togglePartner],*/
+         /*['Aggregation', isAggr, toggleAggr]*/
        ]}
        onClose={hideToggle}
      />
@@ -180,25 +195,26 @@ const UnDialogAgg = memoIsShow((
           onSelect={setTradeFlow}
         />
      </D.ShowHide>
-     <D.ShowHide isShow={isPartner}>
+     <D.ShowHide isShow={false}>
        <D.SelectWithLoad
+          ref={_refTradePartner}
           isShowLabels={isShowLabels}
           uri={tpURI}
           caption="Partner"
           placeholder="Default: World"
-          onSelect={_setTradePartner}
+          //onSelect={_setTradePartner}
        />
      </D.ShowHide>
-     <D.ShowHide isShow={isAggr}>
+     <D.ShowHide isShow={true}>
        <D.RowInputSelect
          isShowLabels={isShowLabels}
          caption="Aggregation"
-         placeholder="Default: Total"
+         placeholder="Default: Total of trade partners"
          propCaption="c"
          options={AGG_OPTIONS}
          onSelect={_setAggregation}
        />
-       <D.ShowHide isShow={isPeriod}>
+       <D.ShowHide isShow={true}>
          <D.RowInputSelect
            isShowLabels={isShowLabels}
            caption="Chart"

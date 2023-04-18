@@ -30,6 +30,7 @@ import {
 import {
   ymdToUTC,
   valueMoving,
+  getHmTradePartners,
   crInfo,
   crZhConfig
 } from './fnAdapter';
@@ -93,15 +94,17 @@ const _addSeriesFromHmTo = ({
     let i=fromIndex;
 
     toSeriaNames(hm, compareByValue)
-      .forEach(item => {
-         const name = item.name
-         _addSeriaTo({
-            config,
-            hm,
-            name, i,
-            isShow: i<MAX_SHOW
-          })
-         i++
+      .forEach((item, itemIndex) => {
+         if (itemIndex >= i) {
+           const name = item.name;
+           _addSeriaTo({
+              config,
+              hm,
+              name, i,
+              isShow: i<MAX_SHOW
+            })
+            i++
+        }
       })
 }
 
@@ -110,42 +113,65 @@ const _compareByPeriod = (
   b
 ) => (a || {}).period - (b || {}).period
 
+const _getObjectKeys = Object.keys;
+const _crHmObject = () => Object.create(null)
+
+const _crHmNames = (
+  hmData,
+  hmTradePartners
+) => {
+  return _getObjectKeys(hmData)
+   .reduce((_hm, tpKey) => {
+      _hm[hmTradePartners[tpKey] || tpKey] = hmData[tpKey]
+      return _hm;
+    }, _crHmObject());
+}
+
 const _addSeriasTo = (
   config,
   json,
   option
 ) => {
-  const { one, measure } = option
-  , { dataset } = json
+  const {
+    dataset
+  } = json
+  , {
+    one,
+    measure
+  } = option
   , pnCountry = one === ALL
-     ? 'rtTitle'
-     : void 0
-  , { hm, categories } = toHmCategories({
+     ? 'reporterCode'
+     : 'partnerCode'
+  , {
+    hm,
+    categories
+  } = toHmCategories({
       dataset: dataset.sort(_compareByPeriod),
       pnValue: measure,
       pnCountry
-  });
+  })
+  , _hmTradePartners = getHmTradePartners(option.tradePartners)
+  , _hm = _crHmNames(hm, _hmTradePartners)
 
-  if (hm[WORLD] && one !== ALL) {
+  if (_hm[WORLD] && one !== ALL) {
     _addSeriaTo({
        config,
-       hm,
+       hm: _hm,
        i: 0,
        name: WORLD,
        color: WORLD_COLOR,
        seriaOption: null,
        isShow: true
     })
-    _addSeriesFromHmTo({ config, hm, fromIndex: 1 });
+    _addSeriesFromHmTo({ config, hm: _hm, fromIndex: 1 });
   } else {
-    _addSeriesFromHmTo({ config, hm, fromIndex: 0 });
+    _addSeriesFromHmTo({ config, hm: _hm, fromIndex: 0 });
   }
 
   const { legend } = config.zhConfig;
   config.zhConfig.legend = (one === ALL)
-     ? toAllLegend(legend, hm, measure)
-     : toWorldLegend(legend, hm)
-
+     ? toAllLegend(legend, _hm, measure)
+     : toWorldLegend(legend, _hm)
 
   _assign(config.xAxis, { categories })
 }
@@ -183,7 +209,7 @@ const _toMls = yyyymm => {
 const _transformToDatetime = config => {
   const { series }  = config
   , { data } = series[0]
-  , _data = (data || []).map(p => [_toMls(p.x), p.y]);
+  , _data = (data || []).map(p => [_toMls(p.c), p.y]);
   series[0].data = _data
   series[0].type = 'spline'
   config.xAxis.categories = void 0

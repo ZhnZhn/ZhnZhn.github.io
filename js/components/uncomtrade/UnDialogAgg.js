@@ -13,8 +13,8 @@ var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _ModalInputToggle = _interopRequireDefault(require("./ModalInputToggle"));
 var _jsxRuntime = require("react/jsx-runtime");
 const AGG_OPTIONS = [{
-    c: "Total",
-    v: "total"
+    c: "Total of trade partners",
+    v: "TOTAL"
   }, {
     c: "All 2-digit HS commodities",
     v: "AG2"
@@ -23,7 +23,7 @@ const AGG_OPTIONS = [{
   PERIOD_OPTIONS = (() => {
     const arr = [];
     for (let i = 0; i < 22; i++) {
-      const _v = '' + (2021 - i);
+      const _v = '' + (2022 - i);
       arr.push({
         c: _v,
         v: _v
@@ -31,18 +31,18 @@ const AGG_OPTIONS = [{
     }
     return arr;
   })(),
-  DF_PERIOD = PERIOD_OPTIONS[0],
+  DF_PERIOD = PERIOD_OPTIONS[1],
   TRADE_FLOW_OPTIONS = [{
     c: "Export Value",
     v: {
-      rg: 2,
-      measure: "TradeValue"
+      rg: 'X',
+      measure: "primaryValue"
     }
   }, {
     c: "Import Value",
     v: {
-      rg: 1,
-      measure: "TradeValue"
+      rg: 'M',
+      measure: "primaryValue"
     }
   }],
   CHART_OPTIONS = [{
@@ -77,27 +77,39 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       onShow,
       onClose
     } = props,
+    _refTradePartner = (0, _uiApi.useRef)(),
     [isShowToggle, toggleInputs, hideToggle] = (0, _useInputToggle.default)(),
     [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
       onAbout,
       onClose,
       toggleInputs
     }),
-    [isFlow, toggleFlow] = (0, _useToggle.default)(true),
-    [isPartner, togglePartner] = (0, _useToggle.default)(true),
-    [isAggr, toggleAggr] = (0, _useToggle.default)(true),
-    [isPeriod, togglePeriod] = (0, _useToggle.default)(false),
-    [setOne, getOne] = (0, _useProperty.default)(),
-    [setTradePartner, getTradePartner] = (0, _useProperty.default)(),
+    [isFlow, toggleFlow] = (0, _useToggle.default)(true)
+    //, [isPartner, togglePartner] = useToggle(true)
+    //, [isAggr, toggleAggr] = useToggle(true)
+
+    /*eslint-disable no-unused-vars*/,
+    [isPeriod, togglePeriod] = (0, _useToggle.default)(false)
+    /*eslint-enable no-unused-vars*/,
+    [setOne, getOne] = (0, _useProperty.default)()
+
+    /*eslint-disable no-unused-vars*/,
+    [setTradePartner, getTradePartner] = (0, _useProperty.default)()
+    /*eslint-enable no-unused-vars*/,
     [setAggregation, getAggregation] = (0, _useProperty.default)(),
     [setTradeFlow, getTradeFlow] = (0, _useProperty.default)(),
     [setChart, getChart] = (0, _useProperty.default)(),
     [setPeriod, getPeriod] = (0, _useProperty.default)()
-    /*eslint-disable react-hooks/exhaustive-deps */,
-    _setTradePartner = (0, _uiApi.useCallback)(item => {
-      setTradePartner(item);
-      togglePeriod(_isPeriod(item || DF_PARTNER, getAggregation() || DF_AGGREGATION));
+    /*eslint-disable react-hooks/exhaustive-deps */
+    /*
+    , _setTradePartner = useCallback((item) => {
+      setTradePartner(item)
+      togglePeriod(_isPeriod(
+        item || DF_PARTNER,
+        getAggregation() || DF_AGGREGATION
+      ))
     }, [])
+    */
     // setTradePartner, togglePeriod
     ,
     _setAggregation = (0, _uiApi.useCallback)(item => {
@@ -126,7 +138,8 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
           tradePartner,
           period: getPeriod() || DF_PERIOD,
           chart: getChart(),
-          freq: DF_FREQ
+          freq: DF_FREQ,
+          tradePartners: (0, _uiApi.getRefOptions)(_refTradePartner)
         }));
       }
       setValidationMessages(msgs);
@@ -149,7 +162,10 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       buttons: toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalInputToggle.default, {
       isShow: isShowToggle,
-      configs: [['Trade Flow', isFlow, toggleFlow], ['Partner', isPartner, togglePartner], ['Aggregation', isAggr, toggleAggr]],
+      configs: [['Trade Flow', isFlow, toggleFlow]
+      /*['Partner', isPartner, togglePartner],*/
+      /*['Aggregation', isAggr, toggleAggr]*/],
+
       onClose: hideToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
@@ -168,25 +184,26 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         onSelect: setTradeFlow
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-      isShow: isPartner,
+      isShow: false,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
+        ref: _refTradePartner,
         isShowLabels: isShowLabels,
         uri: tpURI,
         caption: "Partner",
-        placeholder: "Default: World",
-        onSelect: _setTradePartner
+        placeholder: "Default: World"
+        //onSelect={_setTradePartner}
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.ShowHide, {
-      isShow: isAggr,
+      isShow: true,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
         isShowLabels: isShowLabels,
         caption: "Aggregation",
-        placeholder: "Default: Total",
+        placeholder: "Default: Total of trade partners",
         propCaption: "c",
         options: AGG_OPTIONS,
         onSelect: _setAggregation
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.ShowHide, {
-        isShow: isPeriod,
+        isShow: true,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
           isShowLabels: isShowLabels,
           caption: "Chart",

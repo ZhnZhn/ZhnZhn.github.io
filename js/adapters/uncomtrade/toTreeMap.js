@@ -7,6 +7,7 @@ var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _TreeMapFn = require("../TreeMapFn");
 var _fnAdapter = require("./fnAdapter");
+var _conf = require("./conf");
 const _compareByValue = (a, b) => b.value - a.value;
 const _addPercentAndColorToData = (data, total) => {
   if (total !== 0) {
@@ -41,20 +42,21 @@ const _crTreeMapData = json => {
   _addPercentAndColorToData(data, total);
   return data;
 };
-const _crDataByCountry = json => {
+const _crDataByCountry = (json, option) => {
   const data = [];
   let totalWorld = 0,
-    total = 0;
+    total = 0,
+    _hm = (0, _fnAdapter.getHmTradePartners)(option.tradePartners);
   json.dataset.forEach(item => {
-    const value = item.TradeValue,
+    const value = (0, _fnAdapter.getItemTradeValue)(item),
       ptTitle = (0, _fnAdapter.getItemPtTitle)(item);
-    if (ptTitle === "World") {
+    if (ptTitle === _conf.WORLD_CODE && (0, _fnAdapter.isSameTradePartnerCode)(item)) {
       totalWorld = value;
-    } else if ((0, _fnAdapter.isNotNested)(ptTitle) && (0, _fnAdapter.isPositiveNumber)(value)) {
+    } else if ((0, _fnAdapter.isNotNested)(ptTitle) && (0, _fnAdapter.isPositiveNumber)(value) && (0, _fnAdapter.isSameTradePartnerCode)(item)) {
       total += value;
       data.push({
         value,
-        label: ptTitle,
+        label: _hm[ptTitle] || ptTitle,
         title: (0, _fnAdapter.getItemPeriod)(item)
       });
     }
@@ -63,7 +65,7 @@ const _crDataByCountry = json => {
   return data;
 };
 const toTreeMap = (json, option) => {
-  const data = (0, _fnAdapter.isTotalByAll)(option) ? _crDataByCountry(json) : _crTreeMapData(json);
+  const data = (0, _fnAdapter.isTotalByAll)(option) ? _crDataByCountry(json, option) : _crTreeMapData(json);
   return (0, _pipe.default)((0, _configBuilderFn.crTreeMapConfig)(data), (0, _configBuilderFn.fAddCaption)((0, _fnAdapter.crCategoryTitle)(option), option.subtitle), (0, _configBuilderFn.fAdd)({
     info: (0, _fnAdapter.crInfo)(json, option),
     zhConfig: (0, _fnAdapter.crZhConfig)(option)

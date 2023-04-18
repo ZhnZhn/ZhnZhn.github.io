@@ -15,61 +15,61 @@ var _jsxRuntime = require("react/jsx-runtime");
 const TRADE_FLOW_OPTIONS = [{
     c: "Export Value",
     v: {
-      rg: 2,
-      measure: "TradeValue"
+      rg: 'X',
+      measure: "primaryValue"
     }
   }, {
     c: "Export Weight",
     v: {
-      rg: 2,
-      measure: "NetWeight"
+      rg: 'X',
+      measure: "netWgt"
     }
   }, {
     c: "Export Quantity",
     v: {
-      rg: 2,
-      measure: "TradeQuantity"
+      rg: 'X',
+      measure: "qty"
     }
   }, {
     c: "Export Average Value Per Weight",
     v: {
-      rg: 2,
+      rg: 'X',
       measure: "avgPerWeight"
     }
   }, {
     c: "Export Average Value Per Quantity",
     v: {
-      rg: 2,
+      rg: 'X',
       measure: "avgPerQuantity"
     }
   }, {
     c: "Import Value",
     v: {
-      rg: 1,
-      measure: "TradeValue"
+      rg: 'M',
+      measure: "primaryValue"
     }
   }, {
     c: "Import Weight",
     v: {
-      rg: 1,
-      measure: "NetWeight"
+      rg: 'M',
+      measure: "netWgt"
     }
   }, {
     c: "Import Quantity",
     v: {
-      rg: 1,
-      measure: "TradeQuantity"
+      rg: 'M',
+      measure: "qty"
     }
   }, {
     c: "Import Average Value Per Weight",
     v: {
-      rg: 1,
+      rg: 'M',
       measure: "avgPerWeight"
     }
   }, {
     c: "Import Average Value Per Quantity",
     v: {
-      rg: 1,
+      rg: 'M',
       measure: "avgPerQuantity"
     }
   }],
@@ -109,13 +109,19 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     }),
     [isHeading, toggleHeading] = (0, _useToggle.default)(true),
     [isPartner, togglePartner] = (0, _useToggle.default)(false),
-    [isFlow, toggleFlow] = (0, _useToggle.default)(true),
-    [isFreq, toggleFreq] = (0, _useToggle.default)(false),
+    [isFlow, toggleFlow] = (0, _useToggle.default)(true)
+    //, [isFreq, toggleFreq] = useToggle(false)
+    ,
+    _refTradePartner = (0, _uiApi.useRef)(),
     _refGroupItem = (0, _uiApi.useRef)(),
     [setOne, getOne] = (0, _useProperty.default)(),
     [setTradeFlow, getTradeFlow] = (0, _useProperty.default)(),
-    [setTradePartner, getTradePartner] = (0, _useProperty.default)(),
+    [setTradePartner, getTradePartner] = (0, _useProperty.default)()
+
+    /*eslint-disable no-unused-vars*/,
     [setFreq, getFreq] = (0, _useProperty.default)()
+    /*eslint-enable no-unused-vars*/
+
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hLoad = (0, _uiApi.useCallback)(() => {
       const _groupItemInst = (0, _uiApi.getRefValue)(_refGroupItem),
@@ -144,7 +150,8 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
           three,
           tradeFlow: getTradeFlow() || DF_TRADE_FLOW,
           tradePartner,
-          freq
+          freq,
+          tradePartners: (0, _uiApi.getRefOptions)(_refTradePartner)
         }));
       }
       setValidationMessages(msg);
@@ -167,7 +174,9 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
       buttons: toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalInputToggle.default, {
       isShow: isShowToggle,
-      configs: [['Partner', isPartner, togglePartner], ['Heading', isHeading, toggleHeading], ['Trade Flow', isFlow, toggleFlow], ['Frequency', isFreq, toggleFreq]],
+      configs: [['Partner', isPartner, togglePartner], ['Heading', isHeading, toggleHeading], ['Trade Flow', isFlow, toggleFlow]
+      /*['Frequency', isFreq, toggleFreq]*/],
+
       onClose: hideToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
@@ -179,6 +188,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isPartner,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
+        ref: _refTradePartner,
         isShowLabels: isShowLabels,
         uri: tpURI,
         caption: "Partner",
@@ -207,14 +217,14 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
         onSelect: setTradeFlow
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-      isShow: isFreq,
+      isShow: false,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
         isShowLabels: isShowLabels,
         caption: "Frequency",
         placeholder: "Default: Annual",
         propCaption: "c",
-        options: FREQUENCY_OPTIONS,
-        onSelect: setFreq
+        options: FREQUENCY_OPTIONS
+        //onSelect={setFreq}
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
       validationMessages: validationMessages

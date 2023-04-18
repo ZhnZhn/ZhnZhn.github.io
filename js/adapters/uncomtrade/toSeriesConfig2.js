@@ -98,7 +98,7 @@ const _addSeriasTo = (config, json, option) => {
       pnValue: measure,
       pnCountry
     }),
-    _hmTradePartners = (0, _fnAdapter.getHmTradePartners)(option.tradePartners),
+    _hmTradePartners = (0, _fnAdapter.getHmTradePartners)(option),
     _hm = _crHmNames(hm, _hmTradePartners);
   if (_hm[_conf.WORLD] && one !== _conf.ALL) {
     _addSeriaTo({
@@ -177,4 +177,4 @@ const toSeriesConfig = (json, option) => {
 };
 var _default = toSeriesConfig;
 exports.default = _default;
-//# sourceMappingURL=toSeriesConfig.js.map
+//# sourceMappingURL=toSeriesConfig2.js.map

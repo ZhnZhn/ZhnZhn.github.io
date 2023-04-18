@@ -11,7 +11,8 @@ import {
   LT_BF,
   LT_CRC,
   LT_BLS,
-  LT_WL
+  LT_WL,
+  LT_UN
 } from '../../constants/LoadType';
 
 const _settings = {};
@@ -20,7 +21,8 @@ const _withApiKey = [
   LT_BEA, LT_EIA
 ];
 const _withProxy = [
-  LT_BF
+  LT_BF,
+  LT_UN
 ];
 const _apiTitle = {
   DF: '',

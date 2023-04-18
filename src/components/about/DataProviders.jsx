@@ -40,7 +40,6 @@ const DP = [
   Link.Ember,
   Link.IRENA,
   Link.Eurostat,
-  Link.UnComtrade,
   Link.FaoStat,
   Link.WorldBank,
   Link.Insee,
@@ -57,6 +56,7 @@ const DP = [
   Link.Bea, [Link.Bsl, '500'], Link.Eia
 ]
 , DP_PR = [
+  Link.UnComtrade,
   Link.Bitfinex
 ];
 
@@ -126,7 +126,7 @@ const DataProviders = ({ isClose }) => (
       </div>
       </OpenClose>
       <OpenClose
-        caption="(1) Required Local Http Proxy:"
+        caption="(2) Required Local Http Proxy:"
         style={S_OC_L2}
         openColor={OPEN_COLOR_L2}
         childStyle={S_CHILD_STYLE}

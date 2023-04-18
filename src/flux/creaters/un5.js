@@ -10,7 +10,7 @@ const _crDirection = (
   tradeFlowCaption
 ) => tradeFlowCaption.indexOf('Export') !== -1
   ? 'to'
-  : 'frome';
+  : 'from';
 
 const _crTitle = (
   one,
@@ -49,7 +49,8 @@ const crLoadOptions = (
     tradePartner,
     freq,
     period,
-    chart
+    chart,
+    tradePartners
   } = options || {}
   , _oneValue = getV(one)
   , _two = getV(three) || getV(two)
@@ -70,7 +71,8 @@ const crLoadOptions = (
     tp: getV(tradePartner),
     freq: getV(freq),
     period: getV(period),
-    chart: getV(chart)
+    chart: getV(chart),
+    tradePartners
   };
 };
 

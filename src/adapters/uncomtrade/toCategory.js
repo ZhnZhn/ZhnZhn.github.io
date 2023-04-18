@@ -15,10 +15,14 @@ import {
   getItemTradeValue,
   getItemCmdCode,
   getItemPtTitle,
+  getHmTradePartners,
   crCategoryTitle,
   crInfo,
   crZhConfig
 } from './fnAdapter';
+import {
+  WORLD_CODE
+} from './conf';
 
 const _crConfig = (
   json,
@@ -27,7 +31,8 @@ const _crConfig = (
   categories
 ) => {
   const title = crCategoryTitle(option);
-  return pipe(
+
+  const config = pipe(
     crBarOrColumnConfig('BAR', categories),
     fAddCaption(
       title,
@@ -43,6 +48,8 @@ const _crConfig = (
     }),
     toConfig
   );
+  console.log(config)
+  return config;
 }
 
 const URL_HS_CHAPTERS = './data/uncomtrade/hs-chapters.json';
@@ -109,16 +116,17 @@ const _toCategoryByCountry = (
 ) => {
   const data = [];
   let totalWorld = 0
-  , total = 0;
+  , total = 0
+  , _hm = getHmTradePartners(option.tradePartners);
   json.dataset.forEach(item => {
     const value = getItemTradeValue(item)
-    , ptTitle = getItemPtTitle(item)
-    if (ptTitle === "World") {
+    , ptTitle = getItemPtTitle(item);
+    if (ptTitle === WORLD_CODE) {
       totalWorld = value
     } else if (isNotNested(ptTitle) && isPositiveNumber(value)) {
       total += value
       data.push({
-        c: ptTitle,
+        c: _hm[ptTitle] || ptTitle,
         y: value
       })
     }

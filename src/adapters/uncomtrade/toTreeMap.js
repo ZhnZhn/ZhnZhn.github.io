@@ -20,10 +20,15 @@ import {
   getItemCmdDescE,
   getItemPtTitle,
   getItemPeriod,
+  isSameTradePartnerCode,
+  getHmTradePartners,
   crCategoryTitle,
   crInfo,
   crZhConfig
 } from './fnAdapter';
+import {
+  WORLD_CODE
+} from './conf'
 
 const _compareByValue = (a, b) => b.value - a.value;
 
@@ -66,21 +71,23 @@ const _crTreeMapData = json => {
 }
 
 const _crDataByCountry = (
-  json
+  json,
+  option
 ) => {
   const data = [];
   let totalWorld = 0
-  , total = 0;
+  , total = 0
+  , _hm = getHmTradePartners(option.tradePartners);
   json.dataset.forEach(item => {
-    const value = item.TradeValue
+    const value = getItemTradeValue(item)
     , ptTitle = getItemPtTitle(item);
-    if (ptTitle === "World") {
+    if (ptTitle === WORLD_CODE && isSameTradePartnerCode(item)) {
       totalWorld = value
-    } else if (isNotNested(ptTitle) && isPositiveNumber(value)) {
+    } else if (isNotNested(ptTitle) && isPositiveNumber(value) && isSameTradePartnerCode(item)) {
       total += value
       data.push({
         value,
-        label: ptTitle,
+        label: _hm[ptTitle] || ptTitle,
         title: getItemPeriod(item)
       })
     }
@@ -94,7 +101,7 @@ const toTreeMap = (
   option
 ) => {
   const data = isTotalByAll(option)
-    ? _crDataByCountry(json)
+    ? _crDataByCountry(json, option)
     : _crTreeMapData(json);
 
   return pipe(

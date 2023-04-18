@@ -7,6 +7,8 @@ export {
 import domSanitize from '../../utils/domSanitize';
 import { toDescr } from './fnDescr';
 
+const _isArr = Array.isArray;
+const _crEmptyHmObject = () => Object.create(null);
 const isNumber = n => typeof n === 'number'
   && n-n === 0;
 
@@ -14,13 +16,13 @@ export const isPositiveNumber = n =>
   isNumber(n) && n > 0
 
 export const isTotalByAll = option =>
-  option.tp === 'all' && option.two === 'total';
+  option.two === 'TOTAL';
 
 export const isNotNested = ptTitle =>
   ptTitle.indexOf(', nes') === -1;
 
 export const getItemTradeValue = item =>
-  (item || {}).TradeValue;
+  (item || {}).primaryValue;
 
 export const getItemCmdCode = item => {
   const {cmdCode} = item || {}
@@ -32,14 +34,45 @@ export const getItemCmdCode = item => {
 export const getItemCmdDescE = item =>
   domSanitize((item || {}).cmdDescE)
 
-export const getItemPtTitle = item =>
-  domSanitize((item || {}).ptTitle)
+const _sanitizeNumber = (v) => isNumber(v)
+  ? ''+v
+  : domSanitize(v)
+
+export const getItemPtTitle = item => {
+  const { partnerCode } = item || {}
+  return _sanitizeNumber(partnerCode);
+}
 
 export const getItemPeriod = item => {
-  const {period} = item || {}
-  return isNumber(period)
-    ? ''+period
-    : domSanitize(period)
+  const { period } = item || {};
+  return _sanitizeNumber(period);
+}
+
+export const isSameTradePartnerCode = (
+  item
+) => item
+  && (item.partnerCode === item.partner2Code || item.partner2Code === 0);
+
+let _hmTradePartner;
+export const getHmTradePartners = (
+  tradePartners
+) => {
+  if (_hmTradePartner) {
+    return _hmTradePartner;
+  }
+
+  if (!_isArr(tradePartners)) {
+    return _crEmptyHmObject();
+  }
+
+  _hmTradePartner = tradePartners.reduce((hm, item) => {
+    if (item && item.v && item.v.length < 4
+        && item.c && item.c.indexOf(', nes') === -1) {
+      hm[item.v] = domSanitize(item.c)
+    }
+    return hm;
+  }, _crEmptyHmObject());
+  return _hmTradePartner;
 }
 
 export const crCategoryTitle = ({
