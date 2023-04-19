@@ -72,6 +72,7 @@ const ChartItem = (0, _memoEqual.default)((0, _uiApi.forwardRef)((_ref, ref) => 
     {
       dataSource,
       itemCaption: _itemCaption,
+      itemValue,
       itemTime,
       legend
     } = zhConfig || {},
@@ -137,6 +138,7 @@ const ChartItem = (0, _memoEqual.default)((0, _uiApi.forwardRef)((_ref, ref) => 
       isOpen: isOpen,
       isAdminMode: isAdminMode,
       itemCaption: itemCaption,
+      itemValue: itemValue,
       itemTime: itemTime,
       valueMoving: valueMoving,
       moreModel: _moreModel,

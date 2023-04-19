@@ -1,6 +1,4 @@
 //import PropTypes from "prop-types";
-import { formatStrDate } from '../../utils/dateFn';
-
 import useTheme from '../hooks/useTheme';
 import useToggle from '../hooks/useToggle';
 import useFnFocus from '../hooks/useFnFocus';
@@ -11,6 +9,7 @@ import { crStyle3 } from '../zhn-utils/crStyle';
 import Comp from '../Comp';
 import Button from '../zhn/Button';
 import ValueMovingBadge from './ValueMovingBadge';
+import ValueDate from './ValueDate';
 
 const {
   SvgMore,
@@ -24,7 +23,6 @@ const TH_ID = 'ELEMENT';
 const CL_ITEM_HEADER = 'item-header'
 , CL_MORE = "popup-menu charts__menu-more"
 , CL_CAPTION = 'not-selected text-clip bt-left bt'
-, CL_ITEM_TIME = 'item-time'
 , COLOR_SVG_MORE = '#777777'
 
 , S_BT_MORE = {
@@ -62,12 +60,6 @@ S_CAPTION = {
   top: 6
 };
 
-const ItemTime = ({
-  itemTime
-}) => itemTime
-  ? <span className={CL_ITEM_TIME}>{formatStrDate(itemTime)}</span>
-  : null;
-
 const MenuMore = ({
   isMore,
   moreModel,
@@ -103,6 +95,7 @@ const Header = ({
   onUnCheck,
 
   itemCaption,
+  itemValue,
   itemTime,
   onToggle,
 
@@ -159,8 +152,9 @@ const Header = ({
               initialVm={valueMoving}
               crValueMoving={crValueMoving}
             />
-          : <ItemTime
-              itemTime={itemTime}
+          : <ValueDate
+              value={itemValue}
+              strDate={itemTime}
             />
       }
       <SvgClose

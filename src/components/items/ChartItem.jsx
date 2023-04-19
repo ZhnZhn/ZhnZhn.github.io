@@ -78,7 +78,9 @@ export const ChartItem = memoEqual(forwardRef(({
   , {
       dataSource,
       itemCaption:_itemCaption,
+      itemValue,
       itemTime,
+
       legend
     } = zhConfig || {}
   , [_refVm, compareTo] = useVm()
@@ -162,6 +164,7 @@ export const ChartItem = memoEqual(forwardRef(({
           isOpen={isOpen}
           isAdminMode={isAdminMode}
           itemCaption={itemCaption}
+          itemValue={itemValue}
           itemTime={itemTime}
           valueMoving={valueMoving}
           moreModel={_moreModel}
