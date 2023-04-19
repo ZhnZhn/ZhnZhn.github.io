@@ -11,24 +11,20 @@ import { addColorsTo } from '../TreeMapFn';
 import {
   isTotalByAll,
   isPositiveNumber,
-  isNotNested,
   getItemTradeValue,
   getItemCmdCode,
-  getItemPtTitle,
-  getHmTradePartners,
+  crCategoryData,
   crCategoryTitle,
   crInfo,
   crZhConfig
 } from './fnAdapter';
-import {
-  WORLD_CODE
-} from './conf';
 
 const _crConfig = (
   json,
   option,
   data,
-  categories
+  categories,
+  itemValue
 ) => {
   const title = crCategoryTitle(option);
 
@@ -40,7 +36,7 @@ const _crConfig = (
     ),
     fAdd({
       info: crInfo(json, option),
-      zhConfig: crZhConfig(option, { isWi: false })
+      zhConfig: crZhConfig(option, { itemValue, isWi: false })
     }),
     fAddSeriaBy(0, {
       data: data,
@@ -48,7 +44,6 @@ const _crConfig = (
     }),
     toConfig
   );
-  console.log(config)
   return config;
 }
 
@@ -87,7 +82,7 @@ const _crHsData = (
   const isHs = !!hmHs
   , data = []
   let total = 0;
-  json.dataset.forEach(item => {
+  json.data.forEach(item => {
     const value = getItemTradeValue(item);
     if (isPositiveNumber(value)) {
       const cmdCode = getItemCmdCode(item)
@@ -102,7 +97,7 @@ const _crHsData = (
     }
   })
   const categories = _crCategoriesAndAddColors(data, total)
-  return [data, categories];
+  return [data, categories, total];
 }
 
 const _crAsyncData = (
@@ -110,33 +105,36 @@ const _crAsyncData = (
 ) => _fetchHs()
   .then(hmHs => _crHsData(json, hmHs));
 
+const _crCategoryDataPoint = (
+  value,
+  tradePartner
+) => ({
+  c: tradePartner,
+  y: value
+});
+
 const _toCategoryByCountry = (
   json,
   option
 ) => {
-  const data = [];
-  let totalWorld = 0
-  , total = 0
-  , _hm = getHmTradePartners(option.tradePartners);
-  json.dataset.forEach(item => {
-    const value = getItemTradeValue(item)
-    , ptTitle = getItemPtTitle(item);
-    if (ptTitle === WORLD_CODE) {
-      totalWorld = value
-    } else if (isNotNested(ptTitle) && isPositiveNumber(value)) {
-      total += value
-      data.push({
-        c: _hm[ptTitle] || ptTitle,
-        y: value
-      })
-    }
-  })
-  const categories = _crCategoriesAndAddColors(data, totalWorld || total);
+  const [
+    data,
+    totalOfWorld
+  ] = crCategoryData(
+    json,
+    option,
+    _crCategoryDataPoint
+  )
+  , categories = _crCategoriesAndAddColors(
+      data,
+      totalOfWorld
+    );
   return _crConfig(
     json,
     option,
     data,
-    categories
+    categories,
+    totalOfWorld
   );
 }
 
@@ -146,8 +144,8 @@ const toCategory = (
 ) => isTotalByAll(option)
  ? _toCategoryByCountry(json, option)
  : _crAsyncData(json)
-     .then(([data, categories]) =>
-       _crConfig(json, option, data, categories)
+     .then(([data, categories, total]) =>
+       _crConfig(json, option, data, categories, total)
       );
 
 export default toCategory

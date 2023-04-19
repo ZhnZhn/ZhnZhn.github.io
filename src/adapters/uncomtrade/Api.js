@@ -3,11 +3,15 @@ import {
   assign,
   crError
 } from '../AdapterFn';
+import {
+  isAggr
+} from './fnAdapter';
 
-const ALL = 'all'
-, API_URL_2 = 'https://comtradeapi.un.org/public/v1/preview/C'
+const API_URL = 'https://comtradeapi.un.org/public/v1/preview/C'
+, ALL = 'all'
 , DF_RG = 'X'
-, DF_MEASURE = 'primaryValue';
+, DF_MEASURE = 'primaryValue'
+, DF_MOT_AND_CUSTOMS_CODE = 'motCode=0&customsCode=C00';
 
 const _checkReq = (option) => {
   if (option._isTs) {
@@ -29,6 +33,14 @@ const _crReporterToTradePartnerQueryTail = (
     : '&period=2022,2021,2020,2019,2018';
 };
 
+const _crAggrTotalUrl = (
+  proxy,
+  reporterCode,
+  cmdCode,
+  flowCode,
+  period
+) => `${proxy}${API_URL}/A/HS?${DF_MOT_AND_CUSTOMS_CODE}&reporterCode=${reporterCode}&cmdCode=${cmdCode}&flowCode=${flowCode}&period=${period}&partner2Code=0`;
+
 const UnComtradeApi = {
   getRequestUrl(option){
     _checkReq(option)
@@ -43,10 +55,22 @@ const UnComtradeApi = {
     } = option;
 
     if (two === 'TOTAL') {
-      return `${proxy}${API_URL_2}/A/HS?motCode=0&cmdCode=TOTAL&reporterCode=${one}&flowCode=${rg}&period=${period}`
+      return _crAggrTotalUrl(
+        proxy,
+        one,
+        two,
+        rg,
+        period
+      );
     }
-    if (two === 'AG2') {
-      return `${proxy}${API_URL_2}/A/HS?motCode=0&cmdCode=AG2&reporterCode=${one}&flowCode=${rg}&partnerCode=0&partner2Code=0&period=${period}`
+    if (isAggr(two)) {
+      return _crAggrTotalUrl(
+        proxy,
+        one,
+        two,
+        rg,
+        period
+      ) + '&partnerCode=0';
     }
 
     // All Reporter to TradePartner (Default TradePartner: World)
@@ -54,20 +78,17 @@ const UnComtradeApi = {
       const _tpCode = tp === ALL
         ? '0'
         : tp || '0';
-      return `${proxy}${API_URL_2}/${freq}/HS?motCode=0&cmdCode=${two}&flowCode=${rg}&partnerCode=${_tpCode}&partner2Code=${_tpCode}`;
+      return `${proxy}${API_URL}/${freq}/HS?${DF_MOT_AND_CUSTOMS_CODE}&cmdCode=${two}&flowCode=${rg}&partnerCode=${_tpCode}&partner2Code=${_tpCode}`;
     }
 
     // Reporter to TradePartner (Default TradePartner: All)
     const _queryTail = _crReporterToTradePartnerQueryTail(tp);
-    return `${proxy}${API_URL_2}/${freq}/HS?motCode=0&cmdCode=${two}&reporterCode=${one}&flowCode=${rg}${_queryTail}`;
+    return `${proxy}${API_URL}/${freq}/HS?${DF_MOT_AND_CUSTOMS_CODE}&cmdCode=${two}&reporterCode=${one}&flowCode=${rg}${_queryTail}`;
   },
 
   checkResponse(json){
-    if (json) {
-      json.dataset = json.data
-      if (isArr(json.dataset)) {
-        return true;
-      }
+    if (json && isArr(json.data)) {
+      return true;      
     }
     throw crError();
   },

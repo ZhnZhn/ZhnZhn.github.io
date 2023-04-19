@@ -5,53 +5,59 @@ export {
 } from '../AdapterFn';
 
 import domSanitize from '../../utils/domSanitize';
+import formatNumber from '../../utils/formatNumber';
 import { toDescr } from './fnDescr';
+import { WORLD_CODE } from './conf';
 
-const _isArr = Array.isArray;
-const _crEmptyHmObject = () => Object.create(null);
-const isNumber = n => typeof n === 'number'
-  && n-n === 0;
+const _isArr = Array.isArray
+, _crEmptyHmObject = () => Object.create(null)
+, _isNumber = n => typeof n === 'number' && n-n === 0
+, _sanitizeNumber = (v) => _isNumber(v)
+   ? ''+v
+   : domSanitize(v);
 
-export const isPositiveNumber = n =>
-  isNumber(n) && n > 0
+export const isPositiveNumber = (
+  n
+) => _isNumber(n) && n > 0
 
-export const isTotalByAll = option =>
-  option.two === 'TOTAL';
+export const isAggr = (
+  v
+) => v === 'AG2'
 
-export const isNotNested = ptTitle =>
-  ptTitle.indexOf(', nes') === -1;
+export const isTotalByAll = (
+  option
+) => option.two === 'TOTAL';
 
-export const getItemTradeValue = item =>
-  (item || {}).primaryValue;
+export const getItemTradeValue = (
+  item
+) => Math.round((item || {}).primaryValue || 0) || 0;
 
-export const getItemCmdCode = item => {
-  const {cmdCode} = item || {}
-  return (cmdCode || '').length === 2
+export const getItemCmdCode = (
+  item
+) => {
+  const {cmdCode} = item || {};
+  return (cmdCode || '').length < 4
     ? cmdCode
-    : domSanitize(cmdCode)
+    : domSanitize(cmdCode);
 }
 
-export const getItemCmdDescE = item =>
-  domSanitize((item || {}).cmdDescE)
+export const getItemCmdDescE = (
+  item
+) => domSanitize((item || {}).cmdDescE)
 
-const _sanitizeNumber = (v) => isNumber(v)
-  ? ''+v
-  : domSanitize(v)
+const _getItemPartnerCode = (
+  item
+) => _sanitizeNumber((item || {}).partnerCode);
 
-export const getItemPtTitle = item => {
-  const { partnerCode } = item || {}
-  return _sanitizeNumber(partnerCode);
-}
+export const getItemPeriod = (
+  item
+) => _sanitizeNumber((item || {}).period)
 
-export const getItemPeriod = item => {
-  const { period } = item || {};
-  return _sanitizeNumber(period);
-}
-
-export const isSameTradePartnerCode = (
+const _isSameTradePartnerCode = (
   item
 ) => item
-  && (item.partnerCode === item.partner2Code || item.partner2Code === 0);
+  && (item.partnerCode === item.partner2Code
+  || item.partner2Code === 0);
 
 let _hmTradePartner;
 export const getHmTradePartners = (
@@ -73,6 +79,35 @@ export const getHmTradePartners = (
     return hm;
   }, _crEmptyHmObject());
   return _hmTradePartner;
+}
+
+export const crCategoryData = (
+  json,
+  option,
+  crDataPoint
+) => {
+  const data = []
+  , _hmTradePartners = getHmTradePartners(option.tradePartners);
+  let totalOfWorld = 0
+  , totalOfItems = 0;
+  json.data.forEach(item => {
+    const value = getItemTradeValue(item)
+    , partnerCode = _getItemPartnerCode(item);
+    if (partnerCode === WORLD_CODE && _isSameTradePartnerCode(item)) {
+      totalOfWorld = value
+    } else if (isPositiveNumber(value) && _isSameTradePartnerCode(item)) {
+      totalOfItems += value
+      data.push(crDataPoint(
+        value,
+        _hmTradePartners[partnerCode] || partnerCode,
+        item
+      ))
+    }
+   })
+   return [
+     data,
+     totalOfWorld || totalOfItems
+   ];
 }
 
 export const crCategoryTitle = ({
@@ -106,6 +141,7 @@ export const crInfo = (
 
 export const crZhConfig = (
   option, {
+   itemValue,
    isLegend,
    isWi = true
   } = {}
@@ -120,6 +156,7 @@ export const crZhConfig = (
     id: _id,
     key: _id,
     itemCaption: oneC,
+    itemValue: itemValue && formatNumber(itemValue),
     itemTime: period,
     legend: isLegend ? [] : void 0,
     isWithoutIndicator: isWi,

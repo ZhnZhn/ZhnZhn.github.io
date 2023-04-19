@@ -1,4 +1,7 @@
-import { isTotalByAll } from './fnAdapter';
+import {
+  isAggr,
+  isTotalByAll
+} from './fnAdapter';
 
 import toTreeMap from './toTreeMap';
 import toCategory from './toCategory';
@@ -8,7 +11,7 @@ const toConfig = (
   json,
   option
 ) => {
-  if (option.two === 'AG2' || isTotalByAll(option)) {
+  if (isAggr(option.two) || isTotalByAll(option)) {
     return option.chart === 'BAR'
       ? toCategory(json, option)
       : toTreeMap(json, option);

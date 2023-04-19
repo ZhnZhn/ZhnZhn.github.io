@@ -13,22 +13,16 @@ import {
 import {
   isPositiveNumber,
   isTotalByAll,
-  isNotNested,
   roundBy,
   getItemTradeValue,
   getItemCmdCode,
   getItemCmdDescE,
-  getItemPtTitle,
   getItemPeriod,
-  isSameTradePartnerCode,
-  getHmTradePartners,
+  crCategoryData,
   crCategoryTitle,
   crInfo,
   crZhConfig
 } from './fnAdapter';
-import {
-  WORLD_CODE
-} from './conf'
 
 const _compareByValue = (a, b) => b.value - a.value;
 
@@ -55,7 +49,7 @@ const _addPercentAndColorToData = (
 const _crTreeMapData = json => {
   const data = [];
   let total = 0;
-  json.dataset.forEach(item => {
+  json.data.forEach(item => {
     const value = getItemTradeValue(item);
     if (isPositiveNumber(value)) {
       total += value
@@ -67,40 +61,46 @@ const _crTreeMapData = json => {
     }
   })
   _addPercentAndColorToData(data, total)
-  return data;
+  return [data, total];
 }
+
+const _crCategoryDataPoint = (
+  value,
+  tradePartner,
+  item
+) => ({
+  value,
+  label: tradePartner,
+  title: getItemPeriod(item)
+});
 
 const _crDataByCountry = (
   json,
   option
 ) => {
-  const data = [];
-  let totalWorld = 0
-  , total = 0
-  , _hm = getHmTradePartners(option.tradePartners);
-  json.dataset.forEach(item => {
-    const value = getItemTradeValue(item)
-    , ptTitle = getItemPtTitle(item);
-    if (ptTitle === WORLD_CODE && isSameTradePartnerCode(item)) {
-      totalWorld = value
-    } else if (isNotNested(ptTitle) && isPositiveNumber(value) && isSameTradePartnerCode(item)) {
-      total += value
-      data.push({
-        value,
-        label: _hm[ptTitle] || ptTitle,
-        title: getItemPeriod(item)
-      })
-    }
-  })
-  _addPercentAndColorToData(data, totalWorld || total)
-  return data;
-}
+  const [
+    data,
+    totalOfWorld
+  ] = crCategoryData(
+    json,
+    option,
+    _crCategoryDataPoint
+  )
+  _addPercentAndColorToData(data, totalOfWorld)
+  return [
+    data,
+    totalOfWorld
+  ];
+};
 
 const toTreeMap = (
   json,
   option
 ) => {
-  const data = isTotalByAll(option)
+  const [
+    data,
+    itemValue
+  ] = isTotalByAll(option)
     ? _crDataByCountry(json, option)
     : _crTreeMapData(json);
 
@@ -112,7 +112,7 @@ const toTreeMap = (
     ),
     fAdd({
       info: crInfo(json, option),
-      zhConfig: crZhConfig(option)
+      zhConfig: crZhConfig(option, { itemValue })
     }),
     toConfig
   );

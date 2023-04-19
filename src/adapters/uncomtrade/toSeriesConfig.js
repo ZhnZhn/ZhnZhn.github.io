@@ -133,7 +133,7 @@ const _addSeriasTo = (
   option
 ) => {
   const {
-    dataset
+    data
   } = json
   , {
     one,
@@ -142,17 +142,17 @@ const _addSeriasTo = (
   , pnCountry = one === ALL
      ? 'reporterCode'
      : 'partnerCode'
-  , {
+  , [
     hm,
     categories
-  } = toHmCategories({
-      dataset: dataset.sort(_compareByPeriod),
-      pnValue: measure,
-      pnCountry
-  })
+  ] = toHmCategories(
+      data.sort(_compareByPeriod),
+      pnCountry,
+      measure
+  )
   , _hmTradePartners = getHmTradePartners(option.tradePartners)
   , _hm = _crHmNames(hm, _hmTradePartners)
-
+  
   if (_hm[WORLD] && one !== ALL) {
     _addSeriaTo({
        config,

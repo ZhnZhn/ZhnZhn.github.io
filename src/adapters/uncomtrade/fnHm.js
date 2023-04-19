@@ -103,11 +103,11 @@ export const toSeriaNames = (
     .reverse();
 }
 
-export const toHmCategories = ({
+export const toHmCategories = (
   dataset,
   pnCountry='partnerCode',
   pnValue='primaryValue'
-}) => {
+) => {
   const _hm = _crHm()
   , _category = _crHm()
   , _crPoint = _fPoint(pnValue);
@@ -129,8 +129,8 @@ export const toHmCategories = ({
       }
     }
   })
-  return {
-    categories: _toSortedArr(_category),
-    hm: _hm
-  };
+  return [
+    _hm,
+    _toSortedArr(_category),
+  ];
 }
