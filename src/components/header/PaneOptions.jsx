@@ -41,7 +41,6 @@ const PaneOptions = ({
   const [
     _refProxy,
     _proxy,
-    _setProxy,
     _hSetProxy,
     _hClearProxy
   ] = useInputData(data, 'setProxy')
@@ -61,7 +60,7 @@ const PaneOptions = ({
         caption="Proxy"
         placeholder="Local Http Proxy Server"
         initValue={_proxy}
-        onEnter={_setProxy}
+        onEnter={_hSetProxy}
         isClearBlank={true}
         onClear={_hClearProxy}
         errorMsg="Should start with http://127.0.0.1"

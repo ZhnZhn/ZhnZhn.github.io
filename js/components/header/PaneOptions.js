@@ -44,7 +44,7 @@ const PaneOptions = _ref => {
     onClose,
     onChangeTheme
   } = _ref;
-  const [_refProxy, _proxy, _setProxy, _hSetProxy, _hClearProxy] = (0, _useInputData.default)(data, 'setProxy'),
+  const [_refProxy, _proxy, _hSetProxy, _hClearProxy] = (0, _useInputData.default)(data, 'setProxy'),
     _hSelectTheme = (0, _useThemeSelect.default)(onChangeTheme),
     [_width, _rowPatterStyle] = _crInputStyles(isShowLabels);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -56,7 +56,7 @@ const PaneOptions = _ref => {
       caption: "Proxy",
       placeholder: "Local Http Proxy Server",
       initValue: _proxy,
-      onEnter: _setProxy,
+      onEnter: _hSetProxy,
       isClearBlank: true,
       onClear: _hClearProxy,
       errorMsg: "Should start with http://127.0.0.1"

@@ -11,7 +11,6 @@ const useInputData = (data, id) => {
   return [
     _refInput,
     _dataValue,
-    _setInput,
     () => {
       const _inputInst = getRefValue(_refInput);
       if (_inputInst && !_setInput(_inputInst.getValue())) {
