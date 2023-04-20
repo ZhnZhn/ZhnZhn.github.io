@@ -1,7 +1,6 @@
 import { roundBy } from '../AdapterFn';
 
 import {
-  WORLD,
   NET_WEIGHT,
   QUANTITY,
   AVG_PER_Q,
@@ -10,28 +9,38 @@ import {
 
 import {
   getItemTradeValue
-} from './fnAdapter'
+} from './fnAdapter';
 
+const _getObjectKeys = Object.keys;
 const _crHm = () => Object.create(null);
 
-const _toSortedArr = obj => {
-  const arr = [];
-  for (let propName in obj){
-    arr.push(obj[propName])
-  }
-  return arr.sort();
-};
+const DF_PN_COUNTRY = 'partnerCode';
+const DF_PN_VALUE = 'primaryValue';
 
-const _crPoint = (y, forSort) => ({
+const _toSortedArr = (
+  obj
+) => _getObjectKeys(obj)
+  .map(propName => obj[propName])
+  .sort();
+
+const _crPoint = (
   y,
-  forSort: forSort !== void 0
-    ? forSort : y
+  forSort
+) => ({
+  y,
+  forSort: forSort !== void 0 ? forSort : y
 });
 
-const _fCrValuePoint = pnValue =>
-   item => _crPoint(item[pnValue]);
+const _fCrValuePoint = (
+  pnValue
+) => pnValue === DF_PN_VALUE
+  ? item => _crPoint(getItemTradeValue(item))
+  : item => _crPoint(item[pnValue]);
 
-const _fCrPoint = (pn, item) => {
+const _fCrPoint = (
+  pn,
+  item
+) => {
   const _w = item[pn]
   , _y = _w !== 0
     ? _w
@@ -41,7 +50,6 @@ const _fCrPoint = (pn, item) => {
 
 const _crNetWeightPoint = _fCrPoint.bind(null, NET_WEIGHT)
 const _crQuantityPoint = _fCrPoint.bind(null, QUANTITY)
-
 
 const _fCrAvgPoint = (
   pn,
@@ -87,26 +95,18 @@ const _getRecentValueForSort = points => {
 export const toSeriaNames = (
   hm,
   compareBy
-) => {
-  const arr = [];
-  for (let propName in hm){
-    if (propName !== WORLD) {
-      const points = hm[propName];
-      arr.push({
-        value: _getRecentValueForSort(points),
-        name: propName
-      })
-    }
-  }
-  return arr
-    .sort(compareBy)
-    .reverse();
-}
+) => _getObjectKeys(hm)
+ .map(propName => ({
+   value: _getRecentValueForSort(hm[propName]),
+   name: propName
+ }))
+ .sort(compareBy)
+ .reverse()
 
 export const toHmCategories = (
   dataset,
-  pnCountry='partnerCode',
-  pnValue='primaryValue'
+  pnCountry=DF_PN_COUNTRY,
+  pnValue=DF_PN_VALUE
 ) => {
   const _hm = _crHm()
   , _category = _crHm()

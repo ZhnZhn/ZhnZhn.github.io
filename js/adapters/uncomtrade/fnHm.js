@@ -5,19 +5,16 @@ exports.toSeriaNames = exports.toHmCategories = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _conf = require("./conf");
 var _fnAdapter = require("./fnAdapter");
+const _getObjectKeys = Object.keys;
 const _crHm = () => Object.create(null);
-const _toSortedArr = obj => {
-  const arr = [];
-  for (let propName in obj) {
-    arr.push(obj[propName]);
-  }
-  return arr.sort();
-};
+const DF_PN_COUNTRY = 'partnerCode';
+const DF_PN_VALUE = 'primaryValue';
+const _toSortedArr = obj => _getObjectKeys(obj).map(propName => obj[propName]).sort();
 const _crPoint = (y, forSort) => ({
   y,
   forSort: forSort !== void 0 ? forSort : y
 });
-const _fCrValuePoint = pnValue => item => _crPoint(item[pnValue]);
+const _fCrValuePoint = pnValue => pnValue === DF_PN_VALUE ? item => _crPoint((0, _fnAdapter.getItemTradeValue)(item)) : item => _crPoint(item[pnValue]);
 const _fCrPoint = (pn, item) => {
   const _w = item[pn],
     _y = _w !== 0 ? _w : item.TradeValue ? void 0 : 0;
@@ -53,26 +50,18 @@ const _getRecentValueForSort = points => {
   const len = points && points.length;
   return len && len > 0 ? points[len - 1].forSort : void 0;
 };
-const toSeriaNames = (hm, compareBy) => {
-  const arr = [];
-  for (let propName in hm) {
-    if (propName !== _conf.WORLD) {
-      const points = hm[propName];
-      arr.push({
-        value: _getRecentValueForSort(points),
-        name: propName
-      });
-    }
-  }
-  return arr.sort(compareBy).reverse();
-};
+const toSeriaNames = (hm, compareBy) => _getObjectKeys(hm).map(propName => ({
+  value: _getRecentValueForSort(hm[propName]),
+  name: propName
+})).sort(compareBy).reverse();
 exports.toSeriaNames = toSeriaNames;
-const toHmCategories = _ref => {
-  let {
-    dataset,
-    pnCountry = 'partnerCode',
-    pnValue = 'primaryValue'
-  } = _ref;
+const toHmCategories = function (dataset, pnCountry, pnValue) {
+  if (pnCountry === void 0) {
+    pnCountry = DF_PN_COUNTRY;
+  }
+  if (pnValue === void 0) {
+    pnValue = DF_PN_VALUE;
+  }
   const _hm = _crHm(),
     _category = _crHm(),
     _crPoint = _fPoint(pnValue);
@@ -91,10 +80,7 @@ const toHmCategories = _ref => {
       }
     }
   });
-  return {
-    categories: _toSortedArr(_category),
-    hm: _hm
-  };
+  return [_hm, _toSortedArr(_category)];
 };
 exports.toHmCategories = toHmCategories;
 //# sourceMappingURL=fnHm.js.map
