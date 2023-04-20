@@ -28,6 +28,11 @@ export const isTotalByAll = (
   option
 ) => option.two === 'TOTAL';
 
+export const isAggrByTotalWorld = (
+  option
+) => isTotalByAll(option)
+  && (!option.tp || option.tp === '0')
+
 export const getItemTradeValue = (
   item
 ) => Math.round((item || {}).primaryValue || 0) || 0;
