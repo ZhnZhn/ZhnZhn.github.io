@@ -28,15 +28,30 @@ const _fGetIntStyleProperty = (
 , _getIntStyleTop = _fGetIntStyleProperty('top')
 , _getIntStyleLeft = _fGetIntStyleProperty('left');
 
-const VALUE_GAP = 8;
-const _crNextValue = (
+const ABSOLUTE_TOP = 70
+, MIN_VISIABLE_HEIGHT = 70
+, MIN_BOTTOM_GAP = ABSOLUTE_TOP + MIN_VISIABLE_HEIGHT;
+
+const _crMoveDoneTopValue = (
+  currentTop
+) => {
+  const _windowInnerHeght = window.innerHeight;
+  return currentTop < 0
+    ? 0
+    : _windowInnerHeght - currentTop < MIN_BOTTOM_GAP
+        ? _windowInnerHeght - MIN_BOTTOM_GAP
+        : currentTop;
+};
+
+const MIN_LEFT_GAP = 8;
+const _crMoveDoneLeftValue = (
   value,
   maxValue
 ) => value > 0
   ? value > maxValue
-    ? maxValue - 2*VALUE_GAP
+    ? maxValue - 2*MIN_LEFT_GAP
     : value
-  : VALUE_GAP;
+  : MIN_LEFT_GAP;
 
 const START_EVENT_GAP = 22
 const _isValueInGapRange = (
@@ -102,14 +117,11 @@ const useXYMovable = (
     function _moveDone () {
       const _prevTop = _getIntStyleTop(_elementStyle)
       , _prevLeft = _getIntStyleLeft(_elementStyle)
-      , _nextLeft = _crNextValue(
+      , _nextLeft = _crMoveDoneLeftValue(
           _prevLeft + _diffX,
           window.innerWidth - _element.clientWidth
         )
-      , _nextTop = _crNextValue(
-          _prevTop + _diffY,
-          window.innerHeight - _element.clientHeight
-        );
+      , _nextTop = _crMoveDoneTopValue(_prevTop + _diffY)
 
       _assign(_elementStyle, {
         top: `${_nextTop}px`,
