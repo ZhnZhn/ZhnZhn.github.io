@@ -5,12 +5,13 @@ const _getSetValue = result => result.current[0];
 const _getGetValue = result => result.current[1];
 
 describe('useProperty', ()=>{
-  test('should return constant setter and changing getter across rendering', ()=>{
+  test('should return constant setter and getter across rendering', ()=>{
     const initialValue = 'a'
+    , dfValue = 'dfValue'
     , {
       result,
       rerender
-    } = renderHook(()=>useProperty(initialValue));
+    } = renderHook(()=>useProperty(initialValue, dfValue));
 
     //1 Initial render and return value
     const _getValue1 = _getGetValue(result)
@@ -32,5 +33,9 @@ describe('useProperty', ()=>{
     //Setter and Getter value
     _setValue2('c')
     expect(_getValue2()).toBe('c')
+
+    //in case falsy value return dfValue
+    _setValue2()
+    expect(_getValue2()).toBe(dfValue)
   })
 })
