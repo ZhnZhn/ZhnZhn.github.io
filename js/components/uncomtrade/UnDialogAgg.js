@@ -9,11 +9,12 @@ var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _useInputToggle = _interopRequireDefault(require("./useInputToggle"));
+var _useToggleInputChart = _interopRequireDefault(require("./useToggleInputChart"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _ModalInputToggle = _interopRequireDefault(require("./ModalInputToggle"));
 var _jsxRuntime = require("react/jsx-runtime");
 const AGG_OPTIONS = [{
-    c: "Total of trade partners",
+    c: "Total of trade partner",
     v: "TOTAL"
   }, {
     c: "All 2-digit HS commodities",
@@ -61,7 +62,6 @@ const AGG_OPTIONS = [{
     c: "Annual",
     v: "A"
   };
-const _isPeriod = (tp, aggr) => !(tp.v !== 'all' && aggr.v === 'total');
 const _isAggrAll = (tp, aggr) => tp.v === 'all' && aggr.v !== 'total';
 const UnDialogAgg = (0, _memoIsShow.default)(props => {
   const {
@@ -84,45 +84,36 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       onClose,
       toggleInputs
     }),
-    [isFlow, toggleFlow] = (0, _useToggle.default)(true)
-    //, [isPartner, togglePartner] = useToggle(true)
+    [isFlow, toggleFlow] = (0, _useToggle.default)(true),
+    [isPartner, togglePartner] = (0, _useToggle.default)()
     //, [isAggr, toggleAggr] = useToggle(true)
-
-    /*eslint-disable no-unused-vars*/,
-    [isPeriod, togglePeriod] = (0, _useToggle.default)(false)
-    /*eslint-enable no-unused-vars*/,
-    [setOne, getOne] = (0, _useProperty.default)()
-
-    /*eslint-disable no-unused-vars*/,
-    [setTradePartner, getTradePartner] = (0, _useProperty.default)()
-    /*eslint-enable no-unused-vars*/,
-    [setAggregation, getAggregation] = (0, _useProperty.default)(),
-    [setTradeFlow, getTradeFlow] = (0, _useProperty.default)(),
+    ,
+    [setOne, getOne] = (0, _useProperty.default)(),
+    [setTradePartner, getTradePartner] = (0, _useProperty.default)(DF_PARTNER, DF_PARTNER),
+    [setAggregation, getAggregation] = (0, _useProperty.default)(DF_AGGREGATION, DF_AGGREGATION),
+    [isInputChart, toggleInputChart] = (0, _useToggleInputChart.default)(getTradePartner, getAggregation),
+    [setTradeFlow, getTradeFlow] = (0, _useProperty.default)(DF_TRADE_FLOW, DF_TRADE_FLOW),
     [setChart, getChart] = (0, _useProperty.default)(),
-    [setPeriod, getPeriod] = (0, _useProperty.default)()
-    /*eslint-disable react-hooks/exhaustive-deps */
-    /*
-    , _setTradePartner = useCallback((item) => {
-      setTradePartner(item)
-      togglePeriod(_isPeriod(
-        item || DF_PARTNER,
-        getAggregation() || DF_AGGREGATION
-      ))
+    [setPeriod, getPeriod] = (0, _useProperty.default)(DF_PERIOD, DF_PERIOD)
+    /*eslint-disable react-hooks/exhaustive-deps */,
+    _setTradePartner = (0, _uiApi.useCallback)(item => {
+      setTradePartner(item);
+      toggleInputChart();
     }, [])
-    */
-    // setTradePartner, togglePeriod
+    // setTradePartner, toggleInputChart
     ,
     _setAggregation = (0, _uiApi.useCallback)(item => {
       setAggregation(item);
-      togglePeriod(_isPeriod(getTradePartner() || DF_PARTNER, item || DF_AGGREGATION));
+      toggleInputChart();
     }, [])
-    // setAggregation, togglePeriod
+    // setAggregation, toggleInputChart
     /*eslint-enable react-hooks/exhaustive-deps */
+
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hLoad = (0, _uiApi.useCallback)(() => {
       const one = getOne(),
-        tradePartner = getTradePartner() || DF_PARTNER,
-        three = getAggregation() || DF_AGGREGATION,
+        tradePartner = getTradePartner(),
+        three = getAggregation(),
         msgs = [];
       if (!one) {
         msgs.push(msgOnNotSelected('Reporter'));
@@ -134,9 +125,9 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         onLoad(loadFn(props, {
           one,
           three,
-          tradeFlow: getTradeFlow() || DF_TRADE_FLOW,
+          tradeFlow: getTradeFlow(),
           tradePartner,
-          period: getPeriod() || DF_PERIOD,
+          period: getPeriod(),
           chart: getChart(),
           freq: DF_FREQ,
           tradePartners: (0, _uiApi.getRefOptions)(_refTradePartner)
@@ -162,8 +153,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       buttons: toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalInputToggle.default, {
       isShow: isShowToggle,
-      configs: [['Trade Flow', isFlow, toggleFlow]
-      /*['Partner', isPartner, togglePartner],*/
+      configs: [['Trade Flow', isFlow, toggleFlow], ['Partner', isPartner, togglePartner]
       /*['Aggregation', isAggr, toggleAggr]*/],
 
       onClose: hideToggle
@@ -184,26 +174,26 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         onSelect: setTradeFlow
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-      isShow: false,
+      isShow: isPartner,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
         ref: _refTradePartner,
         isShowLabels: isShowLabels,
         uri: tpURI,
         caption: "Partner",
-        placeholder: "Default: World"
-        //onSelect={_setTradePartner}
+        placeholder: "Default: World",
+        onSelect: _setTradePartner
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.ShowHide, {
       isShow: true,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
         isShowLabels: isShowLabels,
         caption: "Aggregation",
-        placeholder: "Default: Total of trade partners",
+        placeholder: "Default: Total of trade partner",
         propCaption: "c",
         options: AGG_OPTIONS,
         onSelect: _setAggregation
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.ShowHide, {
-        isShow: true,
+        isShow: isInputChart,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
           isShowLabels: isShowLabels,
           caption: "Chart",
