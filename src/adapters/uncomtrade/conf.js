@@ -1,7 +1,8 @@
 export const MAX_SHOW = 6
 
-export const WORLD_CODE = '0'
 export const WORLD = 'World'
+export const WORLD_CODE = '0'
+export const WORLD_ITEM_NAME = `${WORLD} (${WORLD_CODE})`
 export const ALL = 'all'
 
 export const NET_WEIGHT = 'netWgt'

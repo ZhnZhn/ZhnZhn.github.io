@@ -4,6 +4,7 @@ import {
   crError
 } from '../AdapterFn';
 import {
+  isAggrByTotalWorld,
   isAggr
 } from './fnAdapter';
 
@@ -19,6 +20,7 @@ const _checkReq = (option) => {
   }
 };
 
+const DF_QUERY_TAIL = '&period=2022,2021,2020,2019,2018&partner2Code=0';
 const _crReporterToTradePartnerQueryTail = (
   tp
 ) => {
@@ -26,11 +28,9 @@ const _crReporterToTradePartnerQueryTail = (
     ? ''
     : tp || '0'
   , _partnerCode = _tpCode
-      ? `&partnerCode=${_tpCode}&partner2Code=${_tpCode}`
+      ? `&partnerCode=${_tpCode}&partner2Code=0`
       : '';
-  return  _partnerCode
-    ? _partnerCode
-    : '&period=2022,2021,2020,2019,2018';
+  return _partnerCode || DF_QUERY_TAIL;
 };
 
 const _crAggrTotalUrl = (
@@ -54,7 +54,7 @@ const UnComtradeApi = {
       proxy
     } = option;
 
-    if (two === 'TOTAL') {
+    if (isAggrByTotalWorld(option)) {
       return _crAggrTotalUrl(
         proxy,
         one,
@@ -70,7 +70,7 @@ const UnComtradeApi = {
         two,
         rg,
         period
-      ) + '&partnerCode=0';
+      ) + `&partnerCode=${tp || 0}`;
     }
 
     // All Reporter to TradePartner (Default TradePartner: World)
@@ -88,7 +88,7 @@ const UnComtradeApi = {
 
   checkResponse(json){
     if (json && isArr(json.data)) {
-      return true;      
+      return true;
     }
     throw crError();
   },

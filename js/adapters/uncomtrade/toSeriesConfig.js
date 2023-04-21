@@ -16,6 +16,7 @@ var _fnLegend = require("./fnLegend");
 var _fnAdapter = require("./fnAdapter");
 var _conf = require("./conf");
 const _assign = Object.assign;
+const _getObjectKeys = Object.keys;
 const _crMarker = color => ({
   fillColor: color,
   lineColor: color,
@@ -73,39 +74,30 @@ const _addSeriesFromHmTo = _ref2 => {
   });
 };
 const _compareByPeriod = (a, b) => (a || {}).period - (b || {}).period;
-const _getObjectKeys = Object.keys;
-const _crHmObject = () => Object.create(null);
 const _crHmNames = (hmData, hmTradePartners) => {
   return _getObjectKeys(hmData).reduce((_hm, tpKey) => {
     _hm[hmTradePartners[tpKey] || tpKey] = hmData[tpKey];
     return _hm;
-  }, _crHmObject());
+  }, (0, _fnAdapter.crEmptyHmObject)());
 };
 const _addSeriasTo = (config, json, option) => {
   const {
-      dataset
+      data
     } = json,
     {
       one,
       measure
     } = option,
     pnCountry = one === _conf.ALL ? 'reporterCode' : 'partnerCode',
-    {
-      hm,
-      categories
-    } = (0, _fnHm.toHmCategories)({
-      dataset: dataset.sort(_compareByPeriod),
-      pnValue: measure,
-      pnCountry
-    }),
+    [hm, categories] = (0, _fnHm.toHmCategories)(data.sort(_compareByPeriod), pnCountry, measure),
     _hmTradePartners = (0, _fnAdapter.getHmTradePartners)(option.tradePartners),
     _hm = _crHmNames(hm, _hmTradePartners);
-  if (_hm[_conf.WORLD] && one !== _conf.ALL) {
+  if (_hm[_conf.WORLD_ITEM_NAME] && one !== _conf.ALL) {
     _addSeriaTo({
       config,
       hm: _hm,
       i: 0,
-      name: _conf.WORLD,
+      name: _conf.WORLD_ITEM_NAME,
       color: _conf.WORLD_COLOR,
       seriaOption: null,
       isShow: true

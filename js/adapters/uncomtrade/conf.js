@@ -1,13 +1,15 @@
 "use strict";
 
 exports.__esModule = true;
-exports.Y_AXIS = exports.X_AXIS = exports.WORLD_COLOR = exports.WORLD_CODE = exports.WORLD = exports.S_CHART = exports.SPLINE_NOT_VISIBLE = exports.SPLINE = exports.QUANTITY = exports.NET_WEIGHT = exports.MAX_SHOW = exports.DESCR_EMPTY = exports.AVG_PER_W = exports.AVG_PER_Q = exports.ALL = void 0;
+exports.Y_AXIS = exports.X_AXIS = exports.WORLD_ITEM_NAME = exports.WORLD_COLOR = exports.WORLD_CODE = exports.WORLD = exports.S_CHART = exports.SPLINE_NOT_VISIBLE = exports.SPLINE = exports.QUANTITY = exports.NET_WEIGHT = exports.MAX_SHOW = exports.DESCR_EMPTY = exports.AVG_PER_W = exports.AVG_PER_Q = exports.ALL = void 0;
 const MAX_SHOW = 6;
 exports.MAX_SHOW = MAX_SHOW;
-const WORLD_CODE = '0';
-exports.WORLD_CODE = WORLD_CODE;
 const WORLD = 'World';
 exports.WORLD = WORLD;
+const WORLD_CODE = '0';
+exports.WORLD_CODE = WORLD_CODE;
+const WORLD_ITEM_NAME = WORLD + " (" + WORLD_CODE + ")";
+exports.WORLD_ITEM_NAME = WORLD_ITEM_NAME;
 const ALL = 'all';
 exports.ALL = ALL;
 const NET_WEIGHT = 'netWgt';

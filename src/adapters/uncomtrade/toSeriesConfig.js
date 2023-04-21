@@ -31,6 +31,7 @@ import {
   ymdToUTC,
   valueMoving,
   getHmTradePartners,
+  crEmptyHmObject,
   crInfo,
   crZhConfig
 } from './fnAdapter';
@@ -38,7 +39,7 @@ import {
 import {
   MAX_SHOW,
   ALL,
-  WORLD,
+  WORLD_ITEM_NAME,
   WORLD_COLOR,
   SPLINE,
   SPLINE_NOT_VISIBLE,
@@ -47,7 +48,8 @@ import {
   Y_AXIS
 } from './conf';
 
-const _assign = Object.assign
+const _assign = Object.assign;
+const _getObjectKeys = Object.keys;
 
 const _crMarker = color => ({
   fillColor: color,
@@ -113,9 +115,6 @@ const _compareByPeriod = (
   b
 ) => (a || {}).period - (b || {}).period
 
-const _getObjectKeys = Object.keys;
-const _crHmObject = () => Object.create(null)
-
 const _crHmNames = (
   hmData,
   hmTradePartners
@@ -124,7 +123,7 @@ const _crHmNames = (
    .reduce((_hm, tpKey) => {
       _hm[hmTradePartners[tpKey] || tpKey] = hmData[tpKey]
       return _hm;
-    }, _crHmObject());
+    }, crEmptyHmObject());
 }
 
 const _addSeriasTo = (
@@ -152,13 +151,13 @@ const _addSeriasTo = (
   )
   , _hmTradePartners = getHmTradePartners(option.tradePartners)
   , _hm = _crHmNames(hm, _hmTradePartners)
-  
-  if (_hm[WORLD] && one !== ALL) {
+
+  if (_hm[WORLD_ITEM_NAME] && one !== ALL) {
     _addSeriaTo({
        config,
        hm: _hm,
        i: 0,
-       name: WORLD,
+       name: WORLD_ITEM_NAME,
        color: WORLD_COLOR,
        seriaOption: null,
        isShow: true

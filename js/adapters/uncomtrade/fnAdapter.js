@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdToUTC = exports.valueMoving = exports.roundBy = exports.isTotalByAll = exports.isPositiveNumber = exports.isAggrByTotalWorld = exports.isAggr = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = void 0;
+exports.ymdToUTC = exports.valueMoving = exports.roundBy = exports.isTotalByAll = exports.isPositiveNumber = exports.isAggrByTotalWorld = exports.isAggr = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.valueMoving = _AdapterFn.valueMoving;
@@ -12,9 +12,10 @@ var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 var _fnDescr = require("./fnDescr");
 var _conf = require("./conf");
 const _isArr = Array.isArray,
-  _crEmptyHmObject = () => Object.create(null),
   _isNumber = n => typeof n === 'number' && n - n === 0,
   _sanitizeNumber = v => _isNumber(v) ? '' + v : (0, _domSanitize.default)(v);
+const crEmptyHmObject = () => Object.create(null);
+exports.crEmptyHmObject = crEmptyHmObject;
 const isPositiveNumber = n => _isNumber(n) && n > 0;
 exports.isPositiveNumber = isPositiveNumber;
 const isAggr = v => v === 'AG2';
@@ -44,14 +45,14 @@ const getHmTradePartners = tradePartners => {
     return _hmTradePartner;
   }
   if (!_isArr(tradePartners)) {
-    return _crEmptyHmObject();
+    return crEmptyHmObject();
   }
   _hmTradePartner = tradePartners.reduce((hm, item) => {
     if (item && item.v && item.v.length < 4 && item.c && item.c.indexOf(', nes') === -1) {
       hm[item.v] = (0, _domSanitize.default)(item.c);
     }
     return hm;
-  }, _crEmptyHmObject());
+  }, crEmptyHmObject());
   return _hmTradePartner;
 };
 exports.getHmTradePartners = getHmTradePartners;

@@ -10,11 +10,12 @@ import { toDescr } from './fnDescr';
 import { WORLD_CODE } from './conf';
 
 const _isArr = Array.isArray
-, _crEmptyHmObject = () => Object.create(null)
 , _isNumber = n => typeof n === 'number' && n-n === 0
 , _sanitizeNumber = (v) => _isNumber(v)
    ? ''+v
    : domSanitize(v);
+
+export const crEmptyHmObject = () => Object.create(null)
 
 export const isPositiveNumber = (
   n
@@ -73,7 +74,7 @@ export const getHmTradePartners = (
   }
 
   if (!_isArr(tradePartners)) {
-    return _crEmptyHmObject();
+    return crEmptyHmObject();
   }
 
   _hmTradePartner = tradePartners.reduce((hm, item) => {
@@ -82,7 +83,7 @@ export const getHmTradePartners = (
       hm[item.v] = domSanitize(item.c)
     }
     return hm;
-  }, _crEmptyHmObject());
+  }, crEmptyHmObject());
   return _hmTradePartner;
 }
 
