@@ -33,6 +33,7 @@ export const isAggrByTotalWorld = (
   option
 ) => isTotalByAll(option)
   && (!option.tp || option.tp === '0')
+  && option.chart !== 'SPLINE'
 
 export const getItemTradeValue = (
   item

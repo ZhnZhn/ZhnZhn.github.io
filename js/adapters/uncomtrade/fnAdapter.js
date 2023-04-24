@@ -22,7 +22,7 @@ const isAggr = v => v === 'AG2';
 exports.isAggr = isAggr;
 const isTotalByAll = option => option.two === 'TOTAL';
 exports.isTotalByAll = isTotalByAll;
-const isAggrByTotalWorld = option => isTotalByAll(option) && (!option.tp || option.tp === '0');
+const isAggrByTotalWorld = option => isTotalByAll(option) && (!option.tp || option.tp === '0') && option.chart !== 'SPLINE';
 exports.isAggrByTotalWorld = isAggrByTotalWorld;
 const getItemTradeValue = item => Math.round((item || {}).primaryValue || 0) || 0;
 exports.getItemTradeValue = getItemTradeValue;
