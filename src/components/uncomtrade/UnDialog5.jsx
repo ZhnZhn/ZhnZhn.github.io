@@ -13,6 +13,7 @@ import useInputToggle from './useInputToggle';
 
 import D from '../dialogs/DialogCell';
 import ModalInputToggle from './ModalInputToggle';
+import { crInputSelectDfProps } from './dialogFn';
 
 const TRADE_FLOW_OPTIONS = [
   { c: "Export Value", v: { rg: 'X', measure: "primaryValue" } },
@@ -26,13 +27,22 @@ const TRADE_FLOW_OPTIONS = [
   { c: "Import Average Value Per Weight", v: { rg: 'M', measure: "avgPerWeight" } },
   { c: "Import Average Value Per Quantity", v: { rg: 'M', measure: "avgPerQuantity" } }
 ]
-, DF_TRADE_FLOW = TRADE_FLOW_OPTIONS[0]
-, DF_ONE = { c: 'All', v: 'all'}
+, [
+  DF_TRADE_FLOW,
+  TRADE_FLOW_PLACEHOLDER
+] = crInputSelectDfProps(TRADE_FLOW_OPTIONS)
+, [
+  DF_REPORTER = { c: 'All', v: 'all'},
+  REPORTER_PLACEHOLDER
+] = crInputSelectDfProps([{ c: 'All', v: 'all'}])
 , FREQUENCY_OPTIONS = [
   {c: "Annual",  v: "A"},
   {c: "Monthly", v: "M"}
 ]
-, DF_FREQ = FREQUENCY_OPTIONS[0];
+, [
+  DF_FREQ,
+  FREQUENCY_PLACEHOLDER
+] = crInputSelectDfProps(FREQUENCY_OPTIONS);
 
 const UnDialog5 = memoIsShow((
   props
@@ -101,7 +111,7 @@ const UnDialog5 = memoIsShow((
    , _hLoad = useCallback(() => {
      const _groupItemInst = getRefValue(_refGroupItem)
      , { msg=[] } = _groupItemInst.getValidation()
-     , one = getOne() || DF_ONE
+     , one = getOne() || DF_REPORTER
      , _oneValue = one.v
      , tradePartner = getTradePartner()
      , _tradePartnerValue = tradePartner && tradePartner.v
@@ -163,7 +173,7 @@ const UnDialog5 = memoIsShow((
          isShowLabels={isShowLabels}
          uri={oneURI}
          caption="Reporter"
-         placeholder="Default: All"
+         placeholder={REPORTER_PLACEHOLDER}
          onSelect={setOne}
       />
       <D.ShowHide isShow={isPartner}>
@@ -191,7 +201,7 @@ const UnDialog5 = memoIsShow((
         <D.RowInputSelect
           isShowLabels={isShowLabels}
           caption="Trade Flow"
-          placeholder="Default: Export Value"
+          placeholder={TRADE_FLOW_PLACEHOLDER}
           propCaption="c"
           options={TRADE_FLOW_OPTIONS}
           onSelect={setTradeFlow}
@@ -201,7 +211,7 @@ const UnDialog5 = memoIsShow((
         <D.RowInputSelect
           isShowLabels={isShowLabels}
           caption="Frequency"
-          placeholder="Default: Annual"
+          placeholder={FREQUENCY_PLACEHOLDER}
           propCaption="c"
           options={FREQUENCY_OPTIONS}
           //onSelect={setFreq}

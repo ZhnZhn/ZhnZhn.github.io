@@ -11,6 +11,7 @@ import useDialog from '../dialogs/hooks/useDialog';
 
 import useInputToggle from './useInputToggle';
 import useInputChart from './useInputChart';
+import { crInputSelectDfProps } from './dialogFn';
 
 import D from '../dialogs/DialogCell';
 import ModalInputToggle from './ModalInputToggle';
@@ -19,7 +20,10 @@ const AGG_OPTIONS = [
   {c: "Total of trade partner", v: "TOTAL"},
   {c: "All 2-digit HS commodities", v: "AG2"}
 ]
-, DF_AGGREGATION = AGG_OPTIONS[0]
+, [
+  DF_AGGREGATION,
+  AGGREGATION_PLACEHOLDER
+] = crInputSelectDfProps(AGG_OPTIONS)
 , PERIOD_OPTIONS = (() => {
   const arr = [];
   for (let i=0; i<22; i++) {
@@ -28,13 +32,22 @@ const AGG_OPTIONS = [
   }
   return arr;
 })()
-, DF_PERIOD = PERIOD_OPTIONS[1]
+, [
+  DF_PERIOD,
+  PERIOD_PLACEHOLDER
+] = crInputSelectDfProps(PERIOD_OPTIONS, 1)
 , TRADE_FLOW_OPTIONS = [
   { c: "Export Value", v: { rg: 'X', measure: "primaryValue" } },
   { c: "Import Value", v: { rg: 'M', measure: "primaryValue" } },
 ]
-, DF_TRADE_FLOW = TRADE_FLOW_OPTIONS[0]
-, DF_PARTNER = {c: "World",  v: "0"}
+, [
+  DF_TRADE_FLOW,
+  TRADE_FLOW_PLACEHOLDER
+] = crInputSelectDfProps(TRADE_FLOW_OPTIONS)
+, [
+  DF_PARTNER = {c: "World",  v: "0"},
+  PARTNER_PLACEHOLDER
+] = crInputSelectDfProps([{c: "World",  v: "0"}])
 , DF_FREQ = {c: "Annual",  v: "A"};
 
 const _isAggrAll = (
@@ -101,6 +114,7 @@ const UnDialogAgg = memoIsShow((
     getAggregation
   ] = useProperty(DF_AGGREGATION, DF_AGGREGATION)
   , [
+    CHART_PLACEHOLDER,
     isInputChart,
     isPeriod,
     toggleInputChart,
@@ -204,7 +218,7 @@ const UnDialogAgg = memoIsShow((
         <D.RowInputSelect
           isShowLabels={isShowLabels}
           caption="Trade Flow"
-          placeholder="Default: Export Value"
+          placeholder={TRADE_FLOW_PLACEHOLDER}
           propCaption="c"
           options={TRADE_FLOW_OPTIONS}
           onSelect={setTradeFlow}
@@ -216,7 +230,7 @@ const UnDialogAgg = memoIsShow((
           isShowLabels={isShowLabels}
           uri={tpURI}
           caption="Partner"
-          placeholder="Default: World"
+          placeholder={PARTNER_PLACEHOLDER}
           onSelect={_setTradePartner}
        />
      </D.ShowHide>
@@ -224,7 +238,7 @@ const UnDialogAgg = memoIsShow((
        <D.RowInputSelect
          isShowLabels={isShowLabels}
          caption="Aggregation"
-         placeholder="Default: Total of trade partner"
+         placeholder={AGGREGATION_PLACEHOLDER}
          propCaption="c"
          options={AGG_OPTIONS}
          onSelect={_setAggregation}
@@ -233,7 +247,7 @@ const UnDialogAgg = memoIsShow((
          <D.RowInputSelect
            isShowLabels={isShowLabels}
            caption="Chart"
-           placeholder="Default: TreeMap (60,90)"
+           placeholder={CHART_PLACEHOLDER}
            propCaption="c"
            options={chartOptions}
            onSelect={setChart}
@@ -242,7 +256,7 @@ const UnDialogAgg = memoIsShow((
             <D.RowInputSelect
               isShowLabels={isShowLabels}
               caption="Period"
-              placeholder="Default: 2021"
+              placeholder={PERIOD_PLACEHOLDER}
               propCaption="c"
               options={PERIOD_OPTIONS}
               onSelect={setPeriod}

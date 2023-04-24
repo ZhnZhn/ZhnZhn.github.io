@@ -5,6 +5,8 @@ import {
 
 import useProperty from '../hooks/useProperty';
 
+import { crInputSelectDfProps } from './dialogFn';
+
 const CHART_OPTIONS = [
   { c: "TreeMap (60, 90)", v: "TREE_MAP"},
   { c: "Bar (60, 90)", v: "BAR"}
@@ -13,7 +15,10 @@ const CHART_OPTIONS = [
   ...CHART_OPTIONS,
   { c: "Spline", v: 'SPLINE' }
 ]
-, DF_CHART = CHART_OPTIONS[0]
+, [
+  DF_CHART,
+  CHART_PLACEHOLDER
+] = crInputSelectDfProps(CHART_OPTIONS);
 
 const _isInputChart = (
   tp,
@@ -87,6 +92,7 @@ const useInputChart = (
   //getTradePartner, getTradeAggregaton
   /*eslint-enable react-hooks/exhaustive-deps */
   return [
+    CHART_PLACEHOLDER,
     isInputChart,
     isPeriod,
     toggleInputChart,

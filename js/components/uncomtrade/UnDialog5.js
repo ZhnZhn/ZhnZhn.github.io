@@ -11,6 +11,7 @@ var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _useInputToggle = _interopRequireDefault(require("./useInputToggle"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _ModalInputToggle = _interopRequireDefault(require("./ModalInputToggle"));
+var _dialogFn = require("./dialogFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const TRADE_FLOW_OPTIONS = [{
     c: "Export Value",
@@ -73,11 +74,14 @@ const TRADE_FLOW_OPTIONS = [{
       measure: "avgPerQuantity"
     }
   }],
-  DF_TRADE_FLOW = TRADE_FLOW_OPTIONS[0],
-  DF_ONE = {
+  [DF_TRADE_FLOW, TRADE_FLOW_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)(TRADE_FLOW_OPTIONS),
+  [DF_REPORTER = {
     c: 'All',
     v: 'all'
-  },
+  }, REPORTER_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)([{
+    c: 'All',
+    v: 'all'
+  }]),
   FREQUENCY_OPTIONS = [{
     c: "Annual",
     v: "A"
@@ -85,7 +89,7 @@ const TRADE_FLOW_OPTIONS = [{
     c: "Monthly",
     v: "M"
   }],
-  DF_FREQ = FREQUENCY_OPTIONS[0];
+  [DF_FREQ, FREQUENCY_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)(FREQUENCY_OPTIONS);
 const UnDialog5 = (0, _memoIsShow.default)(props => {
   const {
       isShow,
@@ -128,7 +132,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
         {
           msg = []
         } = _groupItemInst.getValidation(),
-        one = getOne() || DF_ONE,
+        one = getOne() || DF_REPORTER,
         _oneValue = one.v,
         tradePartner = getTradePartner(),
         _tradePartnerValue = tradePartner && tradePartner.v,
@@ -183,7 +187,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
       isShowLabels: isShowLabels,
       uri: oneURI,
       caption: "Reporter",
-      placeholder: "Default: All",
+      placeholder: REPORTER_PLACEHOLDER,
       onSelect: setOne
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isPartner,
@@ -211,7 +215,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
         isShowLabels: isShowLabels,
         caption: "Trade Flow",
-        placeholder: "Default: Export Value",
+        placeholder: TRADE_FLOW_PLACEHOLDER,
         propCaption: "c",
         options: TRADE_FLOW_OPTIONS,
         onSelect: setTradeFlow
@@ -221,7 +225,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
         isShowLabels: isShowLabels,
         caption: "Frequency",
-        placeholder: "Default: Annual",
+        placeholder: FREQUENCY_PLACEHOLDER,
         propCaption: "c",
         options: FREQUENCY_OPTIONS
         //onSelect={setFreq}

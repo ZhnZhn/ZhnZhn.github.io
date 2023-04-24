@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _dialogFn = require("./dialogFn");
 const CHART_OPTIONS = [{
     c: "TreeMap (60, 90)",
     v: "TREE_MAP"
@@ -16,7 +17,7 @@ const CHART_OPTIONS = [{
     c: "Spline",
     v: 'SPLINE'
   }],
-  DF_CHART = CHART_OPTIONS[0];
+  [DF_CHART, CHART_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)(CHART_OPTIONS);
 const _isInputChart = (tp, aggr) => !(tp.v !== '0' && aggr.v === 'TOTAL');
 const _crChartOptions = (tradePartner, tradeAggr) => tradePartner.v === "0" && tradeAggr.v === "TOTAL" ? WORLD_CASE_CHART_OPTIONS : CHART_OPTIONS;
 const _isPeriod = itemChart => !(itemChart && itemChart.v === 'SPLINE');
@@ -48,7 +49,7 @@ const useInputChart = (getTradePartner, getTradeAggregaton) => {
     }, []);
   //getTradePartner, getTradeAggregaton
   /*eslint-enable react-hooks/exhaustive-deps */
-  return [isInputChart, isPeriod, toggleInputChart, _setChart, getChart, chartOptions];
+  return [CHART_PLACEHOLDER, isInputChart, isPeriod, toggleInputChart, _setChart, getChart, chartOptions];
 };
 var _default = useInputChart;
 exports.default = _default;
