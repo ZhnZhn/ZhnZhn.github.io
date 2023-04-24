@@ -10,7 +10,7 @@ import useProperty from '../hooks/useProperty';
 import useDialog from '../dialogs/hooks/useDialog';
 
 import useInputToggle from './useInputToggle';
-import useToggleInputChart from './useToggleInputChart';
+import useInputChart from './useInputChart';
 
 import D from '../dialogs/DialogCell';
 import ModalInputToggle from './ModalInputToggle';
@@ -32,10 +32,6 @@ const AGG_OPTIONS = [
 , TRADE_FLOW_OPTIONS = [
   { c: "Export Value", v: { rg: 'X', measure: "primaryValue" } },
   { c: "Import Value", v: { rg: 'M', measure: "primaryValue" } },
-]
-, CHART_OPTIONS = [
-  { c: "TreeMap (60, 90)", v: "TREE_MAP"},
-  { c: "Bar (60, 90)", v: "BAR"}
 ]
 , DF_TRADE_FLOW = TRADE_FLOW_OPTIONS[0]
 , DF_PARTNER = {c: "World",  v: "0"}
@@ -106,8 +102,12 @@ const UnDialogAgg = memoIsShow((
   ] = useProperty(DF_AGGREGATION, DF_AGGREGATION)
   , [
     isInputChart,
-    toggleInputChart
-  ] = useToggleInputChart(
+    isPeriod,
+    toggleInputChart,
+    setChart,
+    getChart,
+    chartOptions
+  ] = useInputChart(
      getTradePartner,
      getAggregation
    )
@@ -118,7 +118,6 @@ const UnDialogAgg = memoIsShow((
       DF_TRADE_FLOW,
       DF_TRADE_FLOW
     )
-  , [setChart, getChart] = useProperty()
   , [
      setPeriod,
      getPeriod
@@ -236,17 +235,19 @@ const UnDialogAgg = memoIsShow((
            caption="Chart"
            placeholder="Default: TreeMap (60,90)"
            propCaption="c"
-           options={CHART_OPTIONS}
+           options={chartOptions}
            onSelect={setChart}
          />
-         <D.RowInputSelect
-           isShowLabels={isShowLabels}
-           caption="Period"
-           placeholder="Default: 2021"
-           propCaption="c"
-           options={PERIOD_OPTIONS}
-           onSelect={setPeriod}
-         />
+         <D.ShowHide isShow={isPeriod}>
+            <D.RowInputSelect
+              isShowLabels={isShowLabels}
+              caption="Period"
+              placeholder="Default: 2021"
+              propCaption="c"
+              options={PERIOD_OPTIONS}
+              onSelect={setPeriod}
+            />
+         </D.ShowHide>
        </D.ShowHide>
      </D.ShowHide>
      <D.ValidationMessages

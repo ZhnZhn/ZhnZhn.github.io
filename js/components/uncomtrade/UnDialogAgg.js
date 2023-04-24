@@ -9,7 +9,7 @@ var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _useInputToggle = _interopRequireDefault(require("./useInputToggle"));
-var _useToggleInputChart = _interopRequireDefault(require("./useToggleInputChart"));
+var _useInputChart = _interopRequireDefault(require("./useInputChart"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _ModalInputToggle = _interopRequireDefault(require("./ModalInputToggle"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -45,13 +45,6 @@ const AGG_OPTIONS = [{
       rg: 'M',
       measure: "primaryValue"
     }
-  }],
-  CHART_OPTIONS = [{
-    c: "TreeMap (60, 90)",
-    v: "TREE_MAP"
-  }, {
-    c: "Bar (60, 90)",
-    v: "BAR"
   }],
   DF_TRADE_FLOW = TRADE_FLOW_OPTIONS[0],
   DF_PARTNER = {
@@ -91,9 +84,8 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
     [setOne, getOne] = (0, _useProperty.default)(),
     [setTradePartner, getTradePartner] = (0, _useProperty.default)(DF_PARTNER, DF_PARTNER),
     [setAggregation, getAggregation] = (0, _useProperty.default)(DF_AGGREGATION, DF_AGGREGATION),
-    [isInputChart, toggleInputChart] = (0, _useToggleInputChart.default)(getTradePartner, getAggregation),
+    [isInputChart, isPeriod, toggleInputChart, setChart, getChart, chartOptions] = (0, _useInputChart.default)(getTradePartner, getAggregation),
     [setTradeFlow, getTradeFlow] = (0, _useProperty.default)(DF_TRADE_FLOW, DF_TRADE_FLOW),
-    [setChart, getChart] = (0, _useProperty.default)(),
     [setPeriod, getPeriod] = (0, _useProperty.default)(DF_PERIOD, DF_PERIOD)
     /*eslint-disable react-hooks/exhaustive-deps */,
     _setTradePartner = (0, _uiApi.useCallback)(item => {
@@ -199,15 +191,18 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
           caption: "Chart",
           placeholder: "Default: TreeMap (60,90)",
           propCaption: "c",
-          options: CHART_OPTIONS,
+          options: chartOptions,
           onSelect: setChart
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
-          isShowLabels: isShowLabels,
-          caption: "Period",
-          placeholder: "Default: 2021",
-          propCaption: "c",
-          options: PERIOD_OPTIONS,
-          onSelect: setPeriod
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+          isShow: isPeriod,
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+            isShowLabels: isShowLabels,
+            caption: "Period",
+            placeholder: "Default: 2021",
+            propCaption: "c",
+            options: PERIOD_OPTIONS,
+            onSelect: setPeriod
+          })
         })]
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
