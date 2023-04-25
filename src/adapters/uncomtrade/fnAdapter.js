@@ -16,18 +16,10 @@ const _isArr = Array.isArray
    : domSanitize(v);
 
 export const crEmptyHmObject = () => Object.create(null)
+export const isPositiveNumber = (n) => _isNumber(n) && n > 0
 
-export const isPositiveNumber = (
-  n
-) => _isNumber(n) && n > 0
-
-export const isAggr = (
-  v
-) => v === 'AG2'
-
-export const isTotalByAll = (
-  option
-) => option.two === 'TOTAL';
+export const isAggr = (v) => v === 'AG2'
+export const isTotalByAll = (option) => option.two === 'TOTAL';
 
 export const isAggrByTotalWorld = (
   option
@@ -52,17 +44,15 @@ export const getItemCmdDescE = (
   item
 ) => domSanitize((item || {}).cmdDescE)
 
-const _getItemPartnerCode = (
-  item
-) => _sanitizeNumber((item || {}).partnerCode);
+const _fGetItemNumberPropValueByName = (
+  propName
+) => (item) => _sanitizeNumber((item || {})[propName]);
 
-const _getItemReporterCode = (
-  item
-) => _sanitizeNumber((item || {}).reporterCode);
+const _getItemPartnerCode = _fGetItemNumberPropValueByName('partnerCode')
+const _getItemReporterCode = _fGetItemNumberPropValueByName('reporterCode')
 
-export const getItemPeriod = (
-  item
-) => _sanitizeNumber((item || {}).period)
+export const getItemPeriod = _fGetItemNumberPropValueByName('period')
+
 
 const _isSameTradePartnerCode = (
   item
@@ -83,8 +73,7 @@ export const getHmTradePartners = (
   }
 
   _hmTradePartner = tradePartners.reduce((hm, item) => {
-    if (item && item.v && item.v.length < 4
-        && item.c && item.c.indexOf(', nes') === -1) {
+    if (item && item.v && item.v.length < 4 && item.c) {
       hm[item.v] = domSanitize(item.c)
     }
     return hm;

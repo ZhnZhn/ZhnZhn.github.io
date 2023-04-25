@@ -35,9 +35,10 @@ const getItemCmdCode = item => {
 exports.getItemCmdCode = getItemCmdCode;
 const getItemCmdDescE = item => (0, _domSanitize.default)((item || {}).cmdDescE);
 exports.getItemCmdDescE = getItemCmdDescE;
-const _getItemPartnerCode = item => _sanitizeNumber((item || {}).partnerCode);
-const _getItemReporterCode = item => _sanitizeNumber((item || {}).reporterCode);
-const getItemPeriod = item => _sanitizeNumber((item || {}).period);
+const _fGetItemNumberPropValueByName = propName => item => _sanitizeNumber((item || {})[propName]);
+const _getItemPartnerCode = _fGetItemNumberPropValueByName('partnerCode');
+const _getItemReporterCode = _fGetItemNumberPropValueByName('reporterCode');
+const getItemPeriod = _fGetItemNumberPropValueByName('period');
 exports.getItemPeriod = getItemPeriod;
 const _isSameTradePartnerCode = item => item && (item.partnerCode === item.partner2Code || item.partner2Code === 0);
 let _hmTradePartner;
@@ -49,7 +50,7 @@ const getHmTradePartners = tradePartners => {
     return crEmptyHmObject();
   }
   _hmTradePartner = tradePartners.reduce((hm, item) => {
-    if (item && item.v && item.v.length < 4 && item.c && item.c.indexOf(', nes') === -1) {
+    if (item && item.v && item.v.length < 4 && item.c) {
       hm[item.v] = (0, _domSanitize.default)(item.c);
     }
     return hm;
