@@ -3,7 +3,6 @@ node_modules
 _start_server.bat
 _init_checkout.bat
 lint.txt
-lib-dev
 stats.json
 report.html
 out.txt
