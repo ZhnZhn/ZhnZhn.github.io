@@ -24,7 +24,10 @@ import {
   crZhConfig
 } from './fnAdapter';
 
-const _compareByValue = (a, b) => b.value - a.value;
+const _compareByValue = (
+  a,
+  b
+) => b.value - a.value;
 
 const _addPercentAndColorToData = (
   data,
@@ -64,15 +67,15 @@ const _crTreeMapData = json => {
   return [data, total];
 }
 
-const _crCategoryDataPoint = (
+const _crDataPoint = (
   value,
-  tradePartner,
+  label,
   item
 ) => ({
   value,
-  label: tradePartner,
+  label,
   title: getItemPeriod(item)
-});
+})
 
 const _crDataByCountry = (
   json,
@@ -84,7 +87,7 @@ const _crDataByCountry = (
   ] = crCategoryData(
     json,
     option,
-    _crCategoryDataPoint
+    _crDataPoint
   )
   _addPercentAndColorToData(data, totalOfWorld)
   return [
@@ -103,7 +106,6 @@ const toTreeMap = (
   ] = isTotalByAll(option)
     ? _crDataByCountry(json, option)
     : _crTreeMapData(json);
-
   return pipe(
     crTreeMapConfig(data),
     fAddCaption(

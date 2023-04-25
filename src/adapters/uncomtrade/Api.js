@@ -4,6 +4,7 @@ import {
   crError
 } from '../AdapterFn';
 import {
+  isAggrCalculatedCase,
   isAggrByTotalWorld,
   isAggr
 } from './fnAdapter';
@@ -33,13 +34,28 @@ const _crReporterToTradePartnerQueryTail = (
   return _partnerCode || DF_QUERY_TAIL;
 };
 
+
 const _crAggrTotalUrl = (
   proxy,
   reporterCode,
   cmdCode,
   flowCode,
-  period
-) => `${proxy}${API_URL}/A/HS?${DF_MOT_AND_CUSTOMS_CODE}&reporterCode=${reporterCode}&cmdCode=${cmdCode}&flowCode=${flowCode}&period=${period}&partner2Code=0`;
+  period,
+  tfType
+) => {
+  const _url = `${proxy}${API_URL}/A/HS?${DF_MOT_AND_CUSTOMS_CODE}&cmdCode=${cmdCode}&flowCode=${flowCode}&period=${period}&partner2Code=0`;
+  // t1: trade flow calculated cases and reporter World case
+  return isAggrCalculatedCase(reporterCode, tfType)
+    ? `${_url}&partnerCode=${reporterCode}`
+    : `${_url}&reporterCode=${reporterCode}`;
+};
+
+const _crCmdFlowUrl = (
+  proxy,
+  freq,
+  cmdCode,
+  flowCode
+) => `${proxy}${API_URL}/${freq}/HS?${DF_MOT_AND_CUSTOMS_CODE}&cmdCode=${cmdCode}&flowCode=${flowCode}`
 
 const UnComtradeApi = {
   getRequestUrl(option){
@@ -48,6 +64,7 @@ const UnComtradeApi = {
       one=ALL,
       two,
       rg=DF_RG,
+      tfType,
       tp,
       freq,
       period,
@@ -60,7 +77,8 @@ const UnComtradeApi = {
         one,
         two,
         rg,
-        period
+        period,
+        tfType
       );
     }
     if (isAggr(two)) {
@@ -69,8 +87,12 @@ const UnComtradeApi = {
         one,
         two,
         rg,
-        period
-      ) + `&partnerCode=${tp || 0}`;
+        period,
+        tfType
+      ) + (isAggrCalculatedCase(one, tfType)
+             ? ''
+             : `&partnerCode=${tp || 0}`
+          );
     }
 
     // All Reporter to TradePartner (Default TradePartner: World)
@@ -78,17 +100,20 @@ const UnComtradeApi = {
       const _tpCode = tp === ALL
         ? '0'
         : tp || '0';
-      return `${proxy}${API_URL}/${freq}/HS?${DF_MOT_AND_CUSTOMS_CODE}&cmdCode=${two}&flowCode=${rg}&partnerCode=${_tpCode}&partner2Code=${_tpCode}`;
+      return `${_crCmdFlowUrl(proxy, freq, two, rg)}&partnerCode=${_tpCode}&partner2Code=${_tpCode}`;
     }
 
     // Reporter to TradePartner (Default TradePartner: All)
-    const _queryTail = _crReporterToTradePartnerQueryTail(tp);
-    return `${proxy}${API_URL}/${freq}/HS?${DF_MOT_AND_CUSTOMS_CODE}&cmdCode=${two}&reporterCode=${one}&flowCode=${rg}${_queryTail}`;
+    const _reporterQuery = `reporterCode=${one}${_crReporterToTradePartnerQueryTail(tp)}`;
+    return `${_crCmdFlowUrl(proxy, freq, two, rg)}&${_reporterQuery}`;
   },
 
   checkResponse(json){
     if (json && isArr(json.data)) {
       return true;
+    }
+    if (json && json.error) {
+      throw crError('', json.error);
     }
     throw crError();
   },

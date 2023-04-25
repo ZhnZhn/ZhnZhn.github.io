@@ -105,13 +105,10 @@ const _crAsyncData = (
 ) => _fetchHs()
   .then(hmHs => _crHsData(json, hmHs));
 
-const _crCategoryDataPoint = (
-  value,
-  tradePartner
-) => ({
-  c: tradePartner,
-  y: value
-});
+const _crDataPoint = (
+  y,
+  c
+) => ({ y, c });
 
 const _toCategoryByCountry = (
   json,
@@ -123,7 +120,7 @@ const _toCategoryByCountry = (
   ] = crCategoryData(
     json,
     option,
-    _crCategoryDataPoint
+    _crDataPoint
   )
   , categories = _crCategoriesAndAddColors(
       data,
@@ -136,7 +133,7 @@ const _toCategoryByCountry = (
     categories,
     totalOfWorld
   );
-}
+};
 
 const toCategory = (
   json,

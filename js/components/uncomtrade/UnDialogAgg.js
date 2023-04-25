@@ -41,10 +41,24 @@ const AGG_OPTIONS = [{
       measure: "primaryValue"
     }
   }, {
+    c: "Calculated Export Value by Reporter Imports",
+    v: {
+      rg: 'M',
+      measure: "primaryValue",
+      tfType: 't1'
+    }
+  }, {
     c: "Import Value",
     v: {
       rg: 'M',
       measure: "primaryValue"
+    }
+  }, {
+    c: "Calculated Import Value by Reporter Exports",
+    v: {
+      rg: 'M',
+      measure: "primaryValue",
+      tfType: 't1'
     }
   }],
   [DF_TRADE_FLOW, TRADE_FLOW_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)(TRADE_FLOW_OPTIONS),
@@ -109,7 +123,9 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
     _hLoad = (0, _uiApi.useCallback)(() => {
       const one = getOne(),
         tradePartner = getTradePartner(),
+        tradeFlow = getTradeFlow(),
         three = getAggregation(),
+        chart = getChart(),
         msgs = [];
       if (!one) {
         msgs.push(msgOnNotSelected('Reporter'));
@@ -117,14 +133,20 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       if (one && one.v === 'all' || _isAggrAll(tradePartner, three)) {
         msgs.push('Query All is too complex');
       }
+      if (one && one.v === "0" && three.v === "AG2") {
+        msgs.push('Query World by AG2 is too complex');
+      }
+      if (tradeFlow.v.tfType === 't1' && (tradePartner.v !== "0" || chart.v === 'SPLINE')) {
+        msgs.push("Query trade flow calculated values is only for category charts of trade partner World");
+      }
       if (msgs.length === 0) {
         onLoad(loadFn(props, {
           one,
           three,
-          tradeFlow: getTradeFlow(),
+          tradeFlow,
           tradePartner,
           period: getPeriod(),
-          chart: getChart(),
+          chart,
           freq: DF_FREQ,
           tradePartners: (0, _uiApi.getRefOptions)(_refTradePartner)
         }));

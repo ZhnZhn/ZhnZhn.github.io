@@ -56,6 +56,10 @@ const _getItemPartnerCode = (
   item
 ) => _sanitizeNumber((item || {}).partnerCode);
 
+const _getItemReporterCode = (
+  item
+) => _sanitizeNumber((item || {}).reporterCode);
+
 export const getItemPeriod = (
   item
 ) => _sanitizeNumber((item || {}).period)
@@ -88,25 +92,65 @@ export const getHmTradePartners = (
   return _hmTradePartner;
 }
 
+
+const _getItemTradePartnerFromHm = (
+  hmTradePartners,
+  item
+) => {
+  const partnerCode = _getItemPartnerCode(item)
+  return hmTradePartners[partnerCode] || partnerCode;
+};
+const _getItemTradeReporterFromHm = (
+  hmTradePartners,
+  item
+) => {
+  const reporterCode = _getItemReporterCode(item)
+  return hmTradePartners[reporterCode] || reporterCode;
+};
+
+export const isAggrCalculatedCase = (
+  reporterCode,
+  tfType
+) => reporterCode === '0' || tfType === 't1';
+
+const _fCrCategoryDataPoint = (
+  option,
+  crDataPoint
+) => {
+  const _crCategory = isAggrCalculatedCase(option.one, option.tfType)
+    ? _getItemTradeReporterFromHm
+    : _getItemTradePartnerFromHm;
+  return (
+    value,
+    hmTradePartners,
+    item
+  ) => crDataPoint(
+    value,
+    _crCategory(hmTradePartners, item),
+    item
+  );
+};
+
 export const crCategoryData = (
   json,
   option,
   crDataPoint
 ) => {
   const data = []
-  , _hmTradePartners = getHmTradePartners(option.tradePartners);
+  , _hmTradePartners = getHmTradePartners(option.tradePartners)
+  , _crDataPoint = _fCrCategoryDataPoint(option, crDataPoint)
   let totalOfWorld = 0
   , totalOfItems = 0;
   json.data.forEach(item => {
     const value = getItemTradeValue(item)
     , partnerCode = _getItemPartnerCode(item);
-    if (partnerCode === WORLD_CODE && _isSameTradePartnerCode(item)) {
+    if (option.one !== WORLD_CODE && partnerCode === WORLD_CODE && _isSameTradePartnerCode(item)) {
       totalOfWorld = value
     } else if (isPositiveNumber(value) && _isSameTradePartnerCode(item)) {
       totalOfItems += value
-      data.push(crDataPoint(
+      data.push(_crDataPoint(
         value,
-        _hmTradePartners[partnerCode] || partnerCode,
+        _hmTradePartners,
         item
       ))
     }

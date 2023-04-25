@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdToUTC = exports.valueMoving = exports.roundBy = exports.isTotalByAll = exports.isPositiveNumber = exports.isAggrByTotalWorld = exports.isAggr = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = void 0;
+exports.ymdToUTC = exports.valueMoving = exports.roundBy = exports.isTotalByAll = exports.isPositiveNumber = exports.isAggrCalculatedCase = exports.isAggrByTotalWorld = exports.isAggr = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.valueMoving = _AdapterFn.valueMoving;
@@ -36,6 +36,7 @@ exports.getItemCmdCode = getItemCmdCode;
 const getItemCmdDescE = item => (0, _domSanitize.default)((item || {}).cmdDescE);
 exports.getItemCmdDescE = getItemCmdDescE;
 const _getItemPartnerCode = item => _sanitizeNumber((item || {}).partnerCode);
+const _getItemReporterCode = item => _sanitizeNumber((item || {}).reporterCode);
 const getItemPeriod = item => _sanitizeNumber((item || {}).period);
 exports.getItemPeriod = getItemPeriod;
 const _isSameTradePartnerCode = item => item && (item.partnerCode === item.partner2Code || item.partner2Code === 0);
@@ -56,19 +57,34 @@ const getHmTradePartners = tradePartners => {
   return _hmTradePartner;
 };
 exports.getHmTradePartners = getHmTradePartners;
+const _getItemTradePartnerFromHm = (hmTradePartners, item) => {
+  const partnerCode = _getItemPartnerCode(item);
+  return hmTradePartners[partnerCode] || partnerCode;
+};
+const _getItemTradeReporterFromHm = (hmTradePartners, item) => {
+  const reporterCode = _getItemReporterCode(item);
+  return hmTradePartners[reporterCode] || reporterCode;
+};
+const isAggrCalculatedCase = (reporterCode, tfType) => reporterCode === '0' || tfType === 't1';
+exports.isAggrCalculatedCase = isAggrCalculatedCase;
+const _fCrCategoryDataPoint = (option, crDataPoint) => {
+  const _crCategory = isAggrCalculatedCase(option.one, option.tfType) ? _getItemTradeReporterFromHm : _getItemTradePartnerFromHm;
+  return (value, hmTradePartners, item) => crDataPoint(value, _crCategory(hmTradePartners, item), item);
+};
 const crCategoryData = (json, option, crDataPoint) => {
   const data = [],
-    _hmTradePartners = getHmTradePartners(option.tradePartners);
+    _hmTradePartners = getHmTradePartners(option.tradePartners),
+    _crDataPoint = _fCrCategoryDataPoint(option, crDataPoint);
   let totalOfWorld = 0,
     totalOfItems = 0;
   json.data.forEach(item => {
     const value = getItemTradeValue(item),
       partnerCode = _getItemPartnerCode(item);
-    if (partnerCode === _conf.WORLD_CODE && _isSameTradePartnerCode(item)) {
+    if (option.one !== _conf.WORLD_CODE && partnerCode === _conf.WORLD_CODE && _isSameTradePartnerCode(item)) {
       totalOfWorld = value;
     } else if (isPositiveNumber(value) && _isSameTradePartnerCode(item)) {
       totalOfItems += value;
-      data.push(crDataPoint(value, _hmTradePartners[partnerCode] || partnerCode, item));
+      data.push(_crDataPoint(value, _hmTradePartners, item));
     }
   });
   return [data, totalOfWorld || totalOfItems];
