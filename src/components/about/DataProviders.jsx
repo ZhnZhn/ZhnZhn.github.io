@@ -35,7 +35,6 @@ const CL_NOTE_BR = "provider__note__br"
 const _isArr = Array.isArray;
 
 const DP = [
-  [Link.Ndl, '50'],
   Link.DbNomics,
   Link.Ember,
   Link.IRENA,
@@ -56,6 +55,7 @@ const DP = [
   Link.Bea, [Link.Bsl, '500'], Link.Eia
 ]
 , DP_PR = [
+  [Link.Ndl, '50'],
   Link.UnComtrade,
   Link.Bitfinex
 ];
@@ -90,6 +90,11 @@ const LinkList = ({
   );
 })
 
+const _crListCaption = (
+  items,
+  captionSuffix
+) => `(${items.length}) ${captionSuffix}:`
+
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
@@ -101,7 +106,7 @@ const DataProviders = ({ isClose }) => (
         <LinkList list={DP} />
       </p>
       <OpenClose
-        caption="(9) Required API Key:"
+        caption={_crListCaption(DP_KEY, 'Required API Key')}
         style={S_OC_L2}
         openColor={OPEN_COLOR_L2}
         childStyle={S_CHILD_STYLE}
@@ -126,7 +131,7 @@ const DataProviders = ({ isClose }) => (
       </div>
       </OpenClose>
       <OpenClose
-        caption="(2) Required Local Http Proxy:"
+        caption={_crListCaption(DP_PR, 'Required Local Http Proxy')}
         style={S_OC_L2}
         openColor={OPEN_COLOR_L2}
         childStyle={S_CHILD_STYLE}
