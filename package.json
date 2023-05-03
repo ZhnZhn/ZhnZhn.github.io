@@ -41,9 +41,9 @@
     "cryptocurrency-prices"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.21.0",
+    "@babel/runtime": "^7.21.5",
     "big.js": "^6.2.1",
-    "dompurify": "^2.3.10",
+    "dompurify": "^2.4.5",
     "highcharts": "^9.1.2",
     "jsonstat": "^0.12.4",
     "leaflet": "^1.3.4",
