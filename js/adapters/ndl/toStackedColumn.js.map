@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/ndl/toStackedColumn.js"
+ ],
+ "file": "../../../src/adapters/ndl/toStackedColumn.js",
+ "names": [
+  "_ChartType",
+  "require",
+  "_fnStacked",
+  "toStackedColumn",
+  "json",
+  "option",
+  "crConfig",
+  "type",
+  "percentType",
+  "CHT_STACKED_COLUMN_PERCENT",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAGA,IAAAC,UAAA,GAAAD,OAAA;AAGA,MAAME,eAAe,GAAGA,CACtBC,IAAI,EACJC,MAAM,KACH,IAAAC,mBAAQ,EAAC;EACXC,IAAI,EAAE,QAAQ;EACdC,WAAW,EAAEC,qCAA0B;EACvCL,IAAI;EACJC;AACH,CAAC,CAAC;AAAC,IAAAK,QAAA,GAEYP,eAAe;AAAAQ,OAAA,CAAAC,OAAA,GAAAF,QAAA"
+}

@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/ndl/Ndl.js"
+ ],
+ "file": "../../../src/adapters/ndl/Ndl.js",
+ "names": [
+  "_NdlApi",
+  "_interopRequireDefault",
+  "require",
+  "_NdlAdapter",
+  "Ndl",
+  "id",
+  "api",
+  "adapter",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,OAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,WAAA,GAAAF,sBAAA,CAAAC,OAAA;AAEA,MAAME,GAAG,GAAG;EACVC,EAAE,EAAE,GAAG;EACPC,GAAG,EAAHA,eAAG;EACHC,OAAO,EAAPA;AACF,CAAC;AAAC,IAAAC,QAAA,GAEaJ,GAAG;AAAAK,OAAA,CAAAC,OAAA,GAAAF,QAAA"
+}

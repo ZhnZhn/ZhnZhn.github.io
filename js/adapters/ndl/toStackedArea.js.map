@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/ndl/toStackedArea.js"
+ ],
+ "file": "../../../src/adapters/ndl/toStackedArea.js",
+ "names": [
+  "_ChartType",
+  "require",
+  "_fnStacked",
+  "toStackedArea",
+  "json",
+  "option",
+  "crConfig",
+  "percentType",
+  "CHT_STACKED_AREA_PERCENT",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AACA,IAAAC,UAAA,GAAAD,OAAA;AAEA,MAAME,aAAa,GAAGA,CACpBC,IAAI,EACJC,MAAM,KACH,IAAAC,mBAAQ,EAAC;EACZC,WAAW,EAAEC,mCAAwB;EACrCJ,IAAI;EACJC;AACF,CAAC,CAAC;AAAC,IAAAI,QAAA,GAEYN,aAAa;AAAAO,OAAA,CAAAC,OAAA,GAAAF,QAAA"
+}

@@ -21,6 +21,7 @@ const _withApiKey = [
   LT_BEA, LT_EIA
 ];
 const _withProxy = [
+  LT_Q,
   LT_BF,
   LT_UN
 ];

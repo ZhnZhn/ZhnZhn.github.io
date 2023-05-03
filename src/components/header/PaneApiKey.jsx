@@ -29,7 +29,7 @@ const CONF_SM_ARR = [
 ];
 
 const CONF_EC_ARR = [
-  ["NDL","quandl","Nasdaq Data Link"],
+  ["NDL","nasdaq-data-link","Nasdaq Data Link"],
 ];
 
 const CONF_EC_USA_ARR = [

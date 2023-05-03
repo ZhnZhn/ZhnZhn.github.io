@@ -30,7 +30,7 @@ const S_SCROLL_PANE = {
     margin: '0 2px'
   };
 const CONF_SM_ARR = [["AV", "alpha-vantage", "Alpha Vantage"], ["FMP", "fmp", "Financial Modeling Prep", "32"], ["IEX", "iex-cloud", "IEX Cloud", "35"], ["Intrinio", "intrinio", "Intrinio", "32"], ["Twelve", "twelve", "Twelve Data"]];
-const CONF_EC_ARR = [["NDL", "quandl", "Nasdaq Data Link"]];
+const CONF_EC_ARR = [["NDL", "nasdaq-data-link", "Nasdaq Data Link"]];
 const CONF_EC_USA_ARR = [["BEA", "bea", "BEA", "36"], ["BLS", "bls", "BLS", "32"], ["EIA", "eia", "EIA", "32"]];
 const _crPwdItem = (item, index, _ref) => {
   let {

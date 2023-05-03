@@ -1,21 +1,17 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _LoadType = require("../../constants/LoadType");
-
-var _loadQuandlCommodityTrade = require("./loadQuandlCommodityTrade");
-
+var _loadNdlCommodityTrade = require("./loadNdlCommodityTrade");
 var _LoadImpl = _interopRequireDefault(require("./LoadImpl"));
-
 const LoadConfig = {
-  [_LoadType.LT_Q]: _LoadImpl.default.Quandl,
-  [_LoadType.LT_QCT]: _loadQuandlCommodityTrade.loadQuandlCommodityTrade,
+  [_LoadType.LT_Q]: _LoadImpl.default.Ndl,
+  [_LoadType.LT_QCT]: _loadNdlCommodityTrade.loadNdlCommodityTrade,
   [_LoadType.LT_DBN]: _LoadImpl.default.DbNomics,
   [_LoadType.LT_EMB]: _LoadImpl.default.Ember,
+  [_LoadType.LT_IRE]: _LoadImpl.default.Irena,
   [_LoadType.LT_AL]: _LoadImpl.default.AlphaVantage,
   [_LoadType.LT_IEX]: _LoadImpl.default.Iex,
   [_LoadType.LT_FMP]: _LoadImpl.default.Fmp,
@@ -44,8 +40,8 @@ const LoadConfig = {
   [_LoadType.LT_UN]: _LoadImpl.default.UnComtrade,
   [_LoadType.LT_FAO]: _LoadImpl.default.FaoStat,
   [_LoadType.LT_WB]: _LoadImpl.default.WorldBank,
-  [_LoadType.LT_WATCH_LIST]: _LoadImpl.default.Quandl,
-  [_LoadType.LT_WL]: _LoadImpl.default.Quandl
+  [_LoadType.LT_WATCH_LIST]: _LoadImpl.default.Ndl,
+  [_LoadType.LT_WL]: _LoadImpl.default.Ndl
 };
 var _default = LoadConfig;
 exports.default = _default;

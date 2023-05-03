@@ -11,7 +11,7 @@ import LoadConfig from './LoadConfig';
 
 const _isFn = fn => typeof fn === 'function';
 
-const _crQuandlKey = ({
+const _crNdlKey = ({
   loadId,
   isLoadMeta,
   value,
@@ -41,7 +41,7 @@ export const crKeyForConfig = (option) => {
   const { loadId, _itemKey, id } = option;
   switch (loadId) {
     case LT_Q: case LT_QCT:
-      return _itemKey || _crQuandlKey(option);
+      return _itemKey || _crNdlKey(option);
     case LT_EU_STAT: case LT_EIA: case LT_WL:
       return _itemKey || id;
     default:

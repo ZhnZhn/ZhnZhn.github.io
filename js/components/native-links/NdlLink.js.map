@@ -1,0 +1,25 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/native-links/NdlLink.js"
+ ],
+ "file": "../../../src/components/native-links/NdlLink.js",
+ "names": [
+  "_Link",
+  "_interopRequireDefault",
+  "require",
+  "_jsxRuntime",
+  "ROOT_URI",
+  "DF_CAPTION",
+  "NdlLink",
+  "_ref",
+  "linkId",
+  "caption",
+  "jsx",
+  "default",
+  "href",
+  "_default",
+  "exports"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,KAAA,GAAAC,sBAAA,CAAAC,OAAA;AAA0B,IAAAC,WAAA,GAAAD,OAAA;AAE1B,MAAME,QAAQ,GAAG,+BAA+B;EAC9CC,UAAU,GAAG,kBAAkB;AAEjC,MAAMC,OAAO,GAAGC,IAAA;EAAA,IAAC;IACfC,MAAM;IACNC,OAAO,GAACJ;EACV,CAAC,GAAAE,IAAA;EAAA,OAAKC,MAAM,gBACT,IAAAL,WAAA,CAAAO,GAAA,EAACV,KAAA,CAAAW,OAAI;IACFC,IAAI,OAAKR,QAAQ,GAAGI,MAAS;IAC7BC,OAAO,EAAKA,OAAO,SAAID;EAAS,EACjC,GACC,IAAI;AAAA;AAAC,IAAAK,QAAA,GAEIP,OAAO;AAAAQ,OAAA,CAAAH,OAAA,GAAAE,QAAA"
+}

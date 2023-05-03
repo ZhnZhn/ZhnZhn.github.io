@@ -5,7 +5,7 @@ import { crAsyncBrowser } from '../logic/Factory';
 import BrowserConfig from '../../constants/BrowserConfig';
 
 import {
-  BT_QUANDL,
+  BT_NDL,
   BT_EUROSTAT,
   BT_WATCH_LIST
 } from '../../constants/BrowserType';
@@ -96,7 +96,7 @@ BA[BAT_LOAD_BROWSER_DYNAMIC].listen(function(option){
 
 const _show = BA.showBrowserDynamic;
 Object.assign(BA, {
-  showQuandl: _show.bind(null, BT_QUANDL),
+  showNdl: _show.bind(null, BT_NDL),
   showEurostat: _show.bind(null, BT_EUROSTAT),
   showWatch: _show.bind(null, BT_WATCH_LIST)
 })

@@ -1,6 +1,5 @@
-
 import DfLink from './DfLink'
-import QuandlLink from './QuandlLink'
+import NdlLink from './NdlLink'
 import EuronextLink from './EuronextLink'
 import NasdaqLink from './NasdaqLink'
 import LmeLink from './LmeLink'
@@ -11,9 +10,9 @@ import EsLink from './EsLink'
 
 const RouterNativeLink = {
   DF: DfLink,
-  QUANDL: QuandlLink,
-  EURONEXT: EuronextLink,
+  NDL: NdlLink,
   NASDAQ: NasdaqLink,
+  EURONEXT: EuronextLink,
   LME: LmeLink,
   FAO_STAT: FaoStatLink,
   FRED: FredLink,

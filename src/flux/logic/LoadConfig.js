@@ -35,12 +35,12 @@ import {
   LT_WATCH_LIST,
   LT_WL
 } from '../../constants/LoadType';
-import { loadQuandlCommodityTrade } from './loadQuandlCommodityTrade';
+import { loadNdlCommodityTrade } from './loadNdlCommodityTrade';
 import LoadImpl from './LoadImpl';
 
 const LoadConfig = {
-  [LT_Q]: LoadImpl.Quandl,
-  [LT_QCT]: loadQuandlCommodityTrade,
+  [LT_Q]: LoadImpl.Ndl,
+  [LT_QCT]: loadNdlCommodityTrade,
 
   [LT_DBN]: LoadImpl.DbNomics,
   [LT_EMB]: LoadImpl.Ember,
@@ -71,7 +71,7 @@ const LoadConfig = {
   [LT_CM]: LoadImpl.Cm,
   [LT_CP]: LoadImpl.Cp,
   [LT_CL]: LoadImpl.Cl,
-  [LT_BN]:  LoadImpl.Bn,
+  [LT_BN]: LoadImpl.Bn,
   [LT_BF]: LoadImpl.Bf,
   [LT_BT]: LoadImpl.Bt,
 
@@ -79,8 +79,8 @@ const LoadConfig = {
   [LT_FAO]: LoadImpl.FaoStat,
   [LT_WB]: LoadImpl.WorldBank,
 
-  [LT_WATCH_LIST]: LoadImpl.Quandl,
-  [LT_WL]: LoadImpl.Quandl
+  [LT_WATCH_LIST]: LoadImpl.Ndl,
+  [LT_WL]: LoadImpl.Ndl
 };
 
 export default LoadConfig

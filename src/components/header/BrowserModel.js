@@ -5,7 +5,7 @@ import {
   BT_DB_NOMICS,
   BT_FGR,
   BT_PE,
-  BT_QUANDL,
+  BT_NDL,
   BT_US_ECONOMICS,
   BT_ENERGY,
   BT_EUROSTAT,
@@ -76,7 +76,7 @@ const PAGE_CONFIGS_01 = [
   [CL_BR, 'Energy', BT_ENERGY],
   [CL_ORG, 'EU: FIGARO', BT_FGR],
   [CL_ORG, 'Euro Indicators / PEEIs', BT_PE],
-  [CL_ORG, 'Nasdaq Data Link', BT_QUANDL],
+  [CL_ORG, 'Nasdaq Data Link', BT_NDL],
   [CL_BR, 'US Economics', BT_US_ECONOMICS]
 ]
 , PAGE_CONFIGS_02 = [

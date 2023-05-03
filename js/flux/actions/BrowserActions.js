@@ -100,7 +100,7 @@ BA[BAT_LOAD_BROWSER_DYNAMIC].listen(function (option) {
 });
 const _show = BA.showBrowserDynamic;
 Object.assign(BA, {
-  showQuandl: _show.bind(null, _BrowserType.BT_QUANDL),
+  showNdl: _show.bind(null, _BrowserType.BT_NDL),
   showEurostat: _show.bind(null, _BrowserType.BT_EUROSTAT),
   showWatch: _show.bind(null, _BrowserType.BT_WATCH_LIST)
 });

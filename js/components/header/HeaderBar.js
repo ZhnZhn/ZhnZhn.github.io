@@ -76,7 +76,7 @@ const HeaderBar = _ref => {
       caption: "NDL",
       title: "Nasdaq Data Link Browser",
       hotKey: _hotkeys.HK_NDL_BROWSER,
-      onClick: _BrowserActions.BrowserActions.showQuandl
+      onClick: _BrowserActions.BrowserActions.showNdl
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       className: CL_WATCH,
       style: TS.BT,

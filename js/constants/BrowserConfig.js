@@ -40,10 +40,10 @@ const BrowserConfig = {
     caption: 'World Bank',
     sourceMenuUrl: './data/world-bank/source-menu.json'
   },
-  [_BrowserType.BT_QUANDL]: {
-    browserType: _BrowserType.BT_QUANDL,
+  [_BrowserType.BT_NDL]: {
+    browserType: _BrowserType.BT_NDL,
     caption: 'Nasdaq Data Link',
-    sourceMenuUrl: './data/quandl/source-menu.json'
+    sourceMenuUrl: './data/ndl/source-menu.json'
   },
   [_BrowserType.BT_DB_NOMICS]: {
     browserType: _BrowserType.BT_DB_NOMICS,

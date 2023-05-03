@@ -18,7 +18,7 @@ import Bea from './bea/Bea'
 import Bls from './bls/Bls'
 import Eia from './eia/Eia'
 import Intrinio from './intrinio/Intrinio'
-import Quandl from './quandl/Quandl'
+import Ndl from './ndl/Ndl'
 import DbNomics from './db-nomics/DbNomics'
 import Ember from './ember/Ember'
 import Irena from './irena/Irena'
@@ -33,7 +33,7 @@ import Bt from './bitstamp/Bt'
 
 
 const RouterAdapter = {
-  Quandl,
+  Ndl,
   DbNomics,
   Ember,
   Irena,

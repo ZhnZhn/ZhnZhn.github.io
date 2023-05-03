@@ -23,6 +23,8 @@ export const setAlertMsg = (
   option.alertDescr = descr;
 }
 
+const NDL = 'Nasdaq Data Link'
+
 export const NOT_SELECTED = (
   item
 ) => `${item} is not selected.`
@@ -45,11 +47,11 @@ export const ERR_DOUBLE_LOAD_META = _crMsg(
 )
 export const ERR_PREMIUM_WITHOUT_KEY = _crMsg(
   WITHOUT_API_KEY,
-  '403 : Forbidden\n\nYou have attempted to view a premium database in anonymous mode, i.e., without providing a Quandl key. Please register for a free Quandl account, and then enter your API in dialog SETTINGS [s].'
+  `403 : Forbidden\n\nYou have attempted to view a premium database in anonymous mode, i.e., without providing a ${NDL} key. Please register for a free ${NDL} account, and then enter your API in dialog SETTINGS [s].`
 )
 export const ERR_FEATURE_WITHOUT_KEY = _crMsg(
   WITHOUT_API_KEY,
-  `${_crForReqToken()} a Quandl API key is required. Please register for a free Quandl account, ${AND_THEN_ENTER_KEY}`
+  `${_crForReqToken()} a ${NDL} API key is required. Please register for a free ${NDL} account, ${AND_THEN_ENTER_KEY}`
 )
 export const withoutApiKey = (providerName) => _crMsg(
   WITHOUT_API_KEY,

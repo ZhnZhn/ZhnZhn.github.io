@@ -1,1 +1,42 @@
-{"version":3,"sources":["../../src/constants/Msg.js"],"names":["WITHOUT_API_KEY","_crForReqToken","providerName","filter","Boolean","join","AND_THEN_ENTER_KEY","_crMsg","caption","descr","setAlertMsg","option","msg","alertCaption","alertDescr","NOT_SELECTED","item","NOT_VALID_FORMAT","YMD_DATE_OR_EMPTY","ERR_ALREADY_EXIST","ERR_LOADING_IN_PROGRESS","ERR_DOUBLE_LOAD_META","ERR_PREMIUM_WITHOUT_KEY","ERR_FEATURE_WITHOUT_KEY","withoutApiKey","withoutProxy","ERR_TOO_MANY_REQUEST","ERR_NETWORK","ERR_10","token"],"mappings":";;;;AAAA,MAAMA,eAAe,GAAG,iBAAxB;;AAEA,MAAMC,cAAc,GAAIC,YAAD,IAAkB,CACtC,kBADsC,EAClBA,YADkB,EACJ,SADI,EAEvCC,MAFuC,CAEhCC,OAFgC,EAEvBC,IAFuB,CAElB,GAFkB,CAAzC;;AAIA,MAAMC,kBAAkB,GAAG,qDAA3B;;AAEA,MAAMC,MAAM,GAAG,CACbC,OADa,EAEbC,KAFa,MAGT;AACJD,EAAAA,OADI;AAEJC,EAAAA;AAFI,CAHS,CAAf;;AAQO,MAAMC,WAAW,GAAG,CACzBC,MADyB,EAEzBC,GAFyB,KAGtB;AACH,QAAM;AAACJ,IAAAA,OAAD;AAAUC,IAAAA;AAAV,MAAmBG,GAAzB;AACAD,EAAAA,MAAM,CAACE,YAAP,GAAsBL,OAAtB;AACAG,EAAAA,MAAM,CAACG,UAAP,GAAoBL,KAApB;AACD,CAPM;;;;AASA,MAAMM,YAAY,GACvBC,IAD0B,IAEpBA,IAFoB,sBAArB;;;;AAGA,MAAMC,gBAAgB,GAC3BD,IAD8B,IAExBA,IAFwB,6BAAzB;;;AAGA,MAAME,iBAAiB,GAAG,oCAA1B;;;AAEA,MAAMC,iBAAiB,GAAGZ,MAAM,CACrC,aADqC,EAErC,8FAFqC,CAAhC;;;;AAIA,MAAMa,uBAAuB,GAAGb,MAAM,CAC3C,2BAD2C,EAE3C,+GAF2C,CAAtC;;;;AAIA,MAAMc,oBAAoB,GAAGd,MAAM,CACxC,wBADwC,EAExC,mDAFwC,CAAnC;;;;AAIA,MAAMe,uBAAuB,GAAGf,MAAM,CAC3CP,eAD2C,EAE3C,sNAF2C,CAAtC;;;;AAIA,MAAMuB,uBAAuB,GAAGhB,MAAM,CAC3CP,eAD2C,EAExCC,cAAc,EAF0B,kFAEqDK,kBAFrD,CAAtC;;;;AAIA,MAAMkB,aAAa,GAAItB,YAAD,IAAkBK,MAAM,CACnDP,eADmD,EAEhDC,cAAc,EAFkC,WAE1BC,YAF0B,yDAEsCA,YAFtC,+CAE4FI,kBAF5F,CAA9C;;;;AAIA,MAAMmB,YAAY,GAAIvB,YAAD,IAAkBK,MAAM,CAClD,sBADkD,EAE/CN,cAAc,CAACC,YAAD,CAFiC,gFAA7C;;;;AAIA,MAAMwB,oBAAoB,GAAGnB,MAAM,CACxC,eADwC,EAExC,4DAFwC,CAAnC;;;;AAIA,MAAMoB,WAAW,GAAGpB,MAAM,CAC/B,eAD+B,EAE/B,mIAF+B,CAA1B;;;AAIA,MAAMqB,MAAM,GAAG,EACpB,GAAGrB,MAAM,CACP,oBADO,EAEP,mHAFO,CADW;AAKpBsB,EAAAA,KAAK,EAAE;AALa,CAAf","sourcesContent":["const WITHOUT_API_KEY = 'Without Api Key';\r\n\r\nconst _crForReqToken = (providerName) => [\r\n   'For this type of', providerName, 'request'\r\n].filter(Boolean).join(' ');\r\n\r\nconst AND_THEN_ENTER_KEY = 'and then enter your API key in dialog SETTINGS [s].';\r\n\r\nconst _crMsg = (\r\n  caption,\r\n  descr\r\n) => ({\r\n  caption,\r\n  descr\r\n})\r\n\r\nexport const setAlertMsg = (\r\n  option,\r\n  msg\r\n) => {\r\n  const {caption, descr} = msg;\r\n  option.alertCaption = caption;\r\n  option.alertDescr = descr;\r\n}\r\n\r\nexport const NOT_SELECTED = (\r\n  item\r\n) => `${item} is not selected.`\r\nexport const NOT_VALID_FORMAT = (\r\n  item\r\n) => `${item} is not in valid format.`\r\nexport const YMD_DATE_OR_EMPTY = \"YYYY-MM-DD format must be OR Empty\"\r\n\r\nexport const ERR_ALREADY_EXIST = _crMsg(\r\n  'Check Error',\r\n  'The chart for this code has already existed in a container. Please, close it and load again.'\r\n)\r\nexport const ERR_LOADING_IN_PROGRESS = _crMsg(\r\n  'Loading In Progress Error',\r\n  'Loading the chart for this item-code in progress.\\nIt seems several clicks on button Load repeatedly happend.'\r\n)\r\nexport const ERR_DOUBLE_LOAD_META = _crMsg(\r\n  'Double Load Meta Error',\r\n  'Meta data for this code already have been loaded.'\r\n)\r\nexport const ERR_PREMIUM_WITHOUT_KEY = _crMsg(\r\n  WITHOUT_API_KEY,\r\n  '403 : Forbidden\\n\\nYou have attempted to view a premium database in anonymous mode, i.e., without providing a Quandl key. Please register for a free Quandl account, and then enter your API in dialog SETTINGS [s].'\r\n)\r\nexport const ERR_FEATURE_WITHOUT_KEY = _crMsg(\r\n  WITHOUT_API_KEY,\r\n  `${_crForReqToken()} a Quandl API key is required. Please register for a free Quandl account, ${AND_THEN_ENTER_KEY}`\r\n)\r\nexport const withoutApiKey = (providerName) => _crMsg(\r\n  WITHOUT_API_KEY,\r\n  `${_crForReqToken()} a ${providerName} API key is required. Please register for a free ${providerName} account, more top button A in dialog, ${AND_THEN_ENTER_KEY}`\r\n)\r\nexport const withoutProxy = (providerName) => _crMsg(\r\n  'Without Proxy Server',\r\n  `${_crForReqToken(providerName)} local HTTP proxy server is required. Could be set in dialog SETTINGS [s].`\r\n)\r\nexport const ERR_TOO_MANY_REQUEST = _crMsg(\r\n  'Http Code 429',\r\n  'Too many request in a given amount of time (rate limiting)'\r\n)\r\nexport const ERR_NETWORK = _crMsg(\r\n  'Network Error',\r\n  'Network error is encountered. Failed to fetch. Maybe you are offline or a DNS lookup failure or a data provider does not respond.'\r\n)\r\nexport const ERR_10 = {\r\n  ..._crMsg(\r\n    'Not Allowed to Add',\r\n    \"This type of request isn't allowed to be added to selected chart. It can be loaded in his own chart or view item.\",\r\n  ),\r\n  token: 'ERR_10'\r\n}\r\n"],"file":"Msg.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/constants/Msg.js"
+ ],
+ "file": "../../src/constants/Msg.js",
+ "names": [
+  "WITHOUT_API_KEY",
+  "_crForReqToken",
+  "providerName",
+  "filter",
+  "Boolean",
+  "join",
+  "AND_THEN_ENTER_KEY",
+  "_crMsg",
+  "caption",
+  "descr",
+  "setAlertMsg",
+  "option",
+  "msg",
+  "alertCaption",
+  "alertDescr",
+  "exports",
+  "NDL",
+  "NOT_SELECTED",
+  "item",
+  "NOT_VALID_FORMAT",
+  "YMD_DATE_OR_EMPTY",
+  "ERR_ALREADY_EXIST",
+  "ERR_LOADING_IN_PROGRESS",
+  "ERR_DOUBLE_LOAD_META",
+  "ERR_PREMIUM_WITHOUT_KEY",
+  "ERR_FEATURE_WITHOUT_KEY",
+  "withoutApiKey",
+  "withoutProxy",
+  "ERR_TOO_MANY_REQUEST",
+  "ERR_NETWORK",
+  "ERR_10",
+  "token"
+ ],
+ "mappings": ";;;;AAAA,MAAMA,eAAe,GAAG,iBAAiB;AAEzC,MAAMC,cAAc,GAAIC,YAAY,IAAK,CACtC,kBAAkB,EAAEA,YAAY,EAAE,SAAS,CAC7C,CAACC,MAAM,CAACC,OAAO,CAAC,CAACC,IAAI,CAAC,GAAG,CAAC;AAE3B,MAAMC,kBAAkB,GAAG,qDAAqD;AAEhF,MAAMC,MAAM,GAAGA,CACbC,OAAO,EACPC,KAAK,MACD;EACJD,OAAO;EACPC;AACF,CAAC,CAAC;AAEK,MAAMC,WAAW,GAAGA,CACzBC,MAAM,EACNC,GAAG,KACA;EACH,MAAM;IAACJ,OAAO;IAAEC;EAAK,CAAC,GAAGG,GAAG;EAC5BD,MAAM,CAACE,YAAY,GAAGL,OAAO;EAC7BG,MAAM,CAACG,UAAU,GAAGL,KAAK;AAC3B,CAAC;AAAAM,OAAA,CAAAL,WAAA,GAAAA,WAAA;AAED,MAAMM,GAAG,GAAG,kBAAkB;AAEvB,MAAMC,YAAY,GACvBC,IAAI,IACEA,IAAI,sBAAmB;AAAAH,OAAA,CAAAE,YAAA,GAAAA,YAAA;AACxB,MAAME,gBAAgB,GAC3BD,IAAI,IACEA,IAAI,6BAA0B;AAAAH,OAAA,CAAAI,gBAAA,GAAAA,gBAAA;AAC/B,MAAMC,iBAAiB,GAAG,oCAAoC;AAAAL,OAAA,CAAAK,iBAAA,GAAAA,iBAAA;AAE9D,MAAMC,iBAAiB,GAAGd,MAAM,CACrC,aAAa,EACb,8FAA8F,CAC/F;AAAAQ,OAAA,CAAAM,iBAAA,GAAAA,iBAAA;AACM,MAAMC,uBAAuB,GAAGf,MAAM,CAC3C,2BAA2B,EAC3B,+GAA+G,CAChH;AAAAQ,OAAA,CAAAO,uBAAA,GAAAA,uBAAA;AACM,MAAMC,oBAAoB,GAAGhB,MAAM,CACxC,wBAAwB,EACxB,mDAAmD,CACpD;AAAAQ,OAAA,CAAAQ,oBAAA,GAAAA,oBAAA;AACM,MAAMC,uBAAuB,GAAGjB,MAAM,CAC3CP,eAAe,qHACkGgB,GAAG,yCAAoCA,GAAG,+DAC5J;AAAAD,OAAA,CAAAS,uBAAA,GAAAA,uBAAA;AACM,MAAMC,uBAAuB,GAAGlB,MAAM,CAC3CP,eAAe,EACZC,cAAc,EAAE,WAAMe,GAAG,yDAAoDA,GAAG,kBAAaV,kBAAkB,CACnH;AAAAS,OAAA,CAAAU,uBAAA,GAAAA,uBAAA;AACM,MAAMC,aAAa,GAAIxB,YAAY,IAAKK,MAAM,CACnDP,eAAe,EACZC,cAAc,EAAE,WAAMC,YAAY,yDAAoDA,YAAY,+CAA0CI,kBAAkB,CAClK;AAAAS,OAAA,CAAAW,aAAA,GAAAA,aAAA;AACM,MAAMC,YAAY,GAAIzB,YAAY,IAAKK,MAAM,CAClD,sBAAsB,EACnBN,cAAc,CAACC,YAAY,CAAC,gFAChC;AAAAa,OAAA,CAAAY,YAAA,GAAAA,YAAA;AACM,MAAMC,oBAAoB,GAAGrB,MAAM,CACxC,eAAe,EACf,4DAA4D,CAC7D;AAAAQ,OAAA,CAAAa,oBAAA,GAAAA,oBAAA;AACM,MAAMC,WAAW,GAAGtB,MAAM,CAC/B,eAAe,EACf,mIAAmI,CACpI;AAAAQ,OAAA,CAAAc,WAAA,GAAAA,WAAA;AACM,MAAMC,MAAM,GAAG;EACpB,GAAGvB,MAAM,CACP,oBAAoB,EACpB,mHAAmH,CACpH;EACDwB,KAAK,EAAE;AACT,CAAC;AAAAhB,OAAA,CAAAe,MAAA,GAAAA,MAAA"
+}

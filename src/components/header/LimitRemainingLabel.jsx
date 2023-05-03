@@ -13,7 +13,7 @@ const S_LABEL = {
 const LimitRemainingLabel = () => {
   const [value, setValue] = useState('');
 
-  useListen(v => {
+  useListen(v => {    
     if (v != null) {
       setValue(v)
     }

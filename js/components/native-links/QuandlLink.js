@@ -7,7 +7,7 @@ var _Link = _interopRequireDefault(require("./Link"));
 var _jsxRuntime = require("react/jsx-runtime");
 const ROOT_URI = 'https://data.nasdaq.com/data/',
   DF_CAPTION = 'Nasdaq Data Link';
-const QuandlLink = _ref => {
+const NdlLink = _ref => {
   let {
     linkId,
     caption = DF_CAPTION
@@ -17,6 +17,6 @@ const QuandlLink = _ref => {
     caption: caption + " " + linkId
   }) : null;
 };
-var _default = QuandlLink;
+var _default = NdlLink;
 exports.default = _default;
 //# sourceMappingURL=QuandlLink.js.map

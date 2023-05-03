@@ -102,7 +102,7 @@ const HeaderBar = ({
           caption="NDL"
           title="Nasdaq Data Link Browser"
           hotKey={HK_NDL_BROWSER}
-          onClick={BrowserActions.showQuandl}
+          onClick={BrowserActions.showNdl}
        />
        <FlatButton
           className={CL_WATCH}

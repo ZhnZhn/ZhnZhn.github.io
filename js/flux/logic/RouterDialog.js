@@ -163,7 +163,7 @@ const _router = {
       case _BrowserType.BT_SWEDEN_STAT:
         this._loadSD();
         break;
-      case _BrowserType.BT_QUANDL:
+      case _BrowserType.BT_NDL:
         this._loadNDL();
         break;
       case _BrowserType.BT_UN_COMTRADE:

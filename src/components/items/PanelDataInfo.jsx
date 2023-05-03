@@ -31,9 +31,9 @@ const CL_DESCR = 'info__descr'
   fontWeight: 'bold'
 };
 
-const _renderQuandlLink = (linkId) => {
+const _renderNdlLink = (linkId) => {
   if (!linkId) return null;
-  const Comp = RouterNativeLink['QUANDL'];
+  const Comp = RouterNativeLink['NDL'];
   return (<Comp linkId={linkId} />);
 };
 
@@ -96,7 +96,7 @@ const PanelDataInfo = ({
          text={frequency}
          textStyle={S_INFO_TEXT}
       />
-      {_renderQuandlLink(linkId)}
+      {_renderNdlLink(linkId)}
       { description && <A.OpenClose
            isClose={!_isShortDescr(description)}
            caption="Description"

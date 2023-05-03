@@ -2,7 +2,7 @@ import {
   BT_STOCK_MARKETS,
   BT_NORWAY_STATISTICS,
   BT_SWEDEN_STAT,
-  BT_QUANDL,
+  BT_NDL,
   BT_UN_COMTRADE
 } from '../../constants/BrowserType';
 
@@ -207,7 +207,7 @@ const _router = {
       case BT_NORWAY_STATISTICS:
       case BT_SWEDEN_STAT:
          this._loadSD(); break;
-      case BT_QUANDL:
+      case BT_NDL:
          this._loadNDL(); break;
       case BT_UN_COMTRADE:
         this._loadUN(); break;

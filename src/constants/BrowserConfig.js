@@ -6,7 +6,7 @@ import {
   BT_UN_COMTRADE,
   BT_FAOSTAT,
   BT_WORLD_BANK,
-  BT_QUANDL,
+  BT_NDL,
   BT_DB_NOMICS,
   BT_ENERGY,
   BT_BLOCKCHAIN,
@@ -66,10 +66,10 @@ const BrowserConfig = {
     caption: 'World Bank',
     sourceMenuUrl: './data/world-bank/source-menu.json'
   },
-  [BT_QUANDL]: {
-    browserType: BT_QUANDL,
+  [BT_NDL]: {
+    browserType: BT_NDL,
     caption: 'Nasdaq Data Link',
-    sourceMenuUrl: './data/quandl/source-menu.json'
+    sourceMenuUrl: './data/ndl/source-menu.json'
   },
   [BT_DB_NOMICS]: {
     browserType: BT_DB_NOMICS,

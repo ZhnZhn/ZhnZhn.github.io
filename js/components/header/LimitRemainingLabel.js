@@ -1,16 +1,11 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../uiApi");
-
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const S_LABEL = {
   display: 'inline-block',
   color: '#2f7ed8',
@@ -18,7 +13,6 @@ const S_LABEL = {
   fontSize: '16px',
   fontWeight: 'bold'
 };
-
 const LimitRemainingLabel = () => {
   const [value, setValue] = (0, _uiApi.useState)('');
   (0, _useListen.default)(v => {
@@ -31,7 +25,6 @@ const LimitRemainingLabel = () => {
     children: value
   });
 };
-
 var _default = LimitRemainingLabel;
 exports.default = _default;
 //# sourceMappingURL=LimitRemainingLabel.js.map

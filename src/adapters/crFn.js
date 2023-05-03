@@ -12,7 +12,7 @@ const { assign, create } = Object
 
 export const crHm = obj => assign(create(null), obj)
 
-// Quandl toScatter, Stat-Json
+// Ndl toScatter, Stat-Json
 export const crId = () => _crId().toUpperCase()
 
 export const crItemLink = (
