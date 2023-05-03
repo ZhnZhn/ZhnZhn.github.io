@@ -75,11 +75,11 @@ const NdlApi = {
   getLimitRemaiming: headers => headers.get(LIMIT_REMAINING),
   checkResponse(json) {
     const {
-      error,
+      quandl_error,
       dataset,
       datatable
     } = json;
-    _checkErr(error);
+    _checkErr(quandl_error);
     _checkDataEmpty(dataset, datatable);
     _checkDataset(dataset);
     return true;
