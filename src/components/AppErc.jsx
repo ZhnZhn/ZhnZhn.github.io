@@ -25,7 +25,7 @@ import DialogContainer from './dialogs/DialogContainer';
 
 import checkBuild from './checkBuild';
 
-const BUILD_DATE = '25-04-2023'
+const BUILD_DATE = '03-05-2023'
 , CL_COMP_CONTAINER = "component-container";
 
 const showSettings = ComponentActions.showSettings
