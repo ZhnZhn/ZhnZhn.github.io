@@ -1,94 +1,47 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
-
-var _react = require("react");
-
-var _useForceUpdate = _interopRequireDefault(require("../hooks/useForceUpdate"));
-
-var CL = "progress-line",
-    TM_PERIOD = 800,
-    T = {
-  WIDTH: 'width 350ms linear',
-  OPACITY: 'opacity 250ms linear'
-};
-
-var _crStyle = function _crStyle(backgroundColor, opacity, width, transition) {
-  return {
-    backgroundColor: backgroundColor,
-    width: width,
-    opacity: opacity,
-    transition: transition
-  };
-};
-
-var _getCurrent = function _getCurrent(ref) {
-  return ref.current;
-};
-
-var ProgressLine = function ProgressLine(_ref) {
-  var _ref$color = _ref.color,
-      color = _ref$color === void 0 ? '#2f7ed8' : _ref$color,
-      completed = _ref.completed;
-
-  var forceUpdate = (0, _useForceUpdate["default"])(),
-      _refWasCompleted = (0, _react.useRef)(false),
-      _refIdCompleted = (0, _react.useRef)(null),
-      _refWasOpacied = (0, _react.useRef)(false),
-      _refIdOpacied = (0, _react.useRef)(null);
-
-  (0, _react.useEffect)(function () {
-    if (_getCurrent(_refWasCompleted)) {
-      _refIdCompleted.current = setTimeout(forceUpdate, TM_PERIOD);
-    } else if (_getCurrent(_refWasOpacied)) {
-      _refIdOpacied.current = setTimeout(forceUpdate, TM_PERIOD);
+exports.default = void 0;
+var _uiApi = require("../uiApi");
+var _useRerender = _interopRequireDefault(require("../hooks/useRerender"));
+var _jsxRuntime = require("react/jsx-runtime");
+const CL = "progress-line",
+  DF_COLOR = '#2f7ed8',
+  TM_PERIOD = 800,
+  WIDTH_TRANSITION = 'width 350ms linear';
+const _crLineStyle = (backgroundColor, width, transition) => ({
+  backgroundColor,
+  width: width + '%',
+  transition,
+  opacity: 1
+});
+const _crCompleted = (completed, _refWasCompleted) => completed < 0 ? 0 : completed >= 100 ? ((0, _uiApi.setRefValue)(_refWasCompleted, true), 100) : completed;
+const _crStyle = (_refWasCompleted, color, completed) => (0, _uiApi.getRefValue)(_refWasCompleted) ? ((0, _uiApi.setRefValue)(_refWasCompleted, false), _crLineStyle(color, 0)) : _crLineStyle(color, _crCompleted(completed, _refWasCompleted), WIDTH_TRANSITION);
+const ProgressLine = _ref => {
+  let {
+    color = DF_COLOR,
+    completed
+  } = _ref;
+  const rerender = (0, _useRerender.default)(),
+    _refWasCompleted = (0, _uiApi.useRef)(false),
+    _refIdCompleted = (0, _uiApi.useRef)(null);
+  (0, _uiApi.useEffect)(() => {
+    if ((0, _uiApi.getRefValue)(_refWasCompleted)) {
+      (0, _uiApi.setRefValue)(_refIdCompleted, setTimeout(rerender, TM_PERIOD));
     }
   });
-  (0, _react.useEffect)(function () {
-    return function () {
-      clearTimeout(_getCurrent(_refIdCompleted));
-      clearTimeout(_getCurrent(_refIdOpacied));
+  (0, _uiApi.useEffect)(() => {
+    return () => {
+      clearTimeout((0, _uiApi.getRefValue)(_refIdCompleted));
     };
   }, []);
-
-  var _style;
-
-  if (_getCurrent(_refWasOpacied)) {
-    _style = _crStyle(color, 1, 0);
-    _refWasOpacied.current = false;
-  } else if (_getCurrent(_refWasCompleted)) {
-    _style = _crStyle(color, 0, '100%', T.OPACITY);
-    _refWasCompleted.current = false;
-    _refWasOpacied.current = true;
-  } else {
-    if (completed < 0) {
-      completed = 0;
-    } else if (completed >= 100) {
-      completed = 100;
-      _refWasCompleted.current = true;
-    }
-
-    _style = _crStyle(color, 1, completed + '%', T.WIDTH);
-  }
-
+  const _style = _crStyle(_refWasCompleted, color, completed);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: CL,
     style: _style
   });
 };
-/*
-ProgressLine.propTypes = {
-  color: PropTypes.string,
-  completed: PropTypes.number
-}
-*/
-
-
 var _default = ProgressLine;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=ProgressLine.js.map

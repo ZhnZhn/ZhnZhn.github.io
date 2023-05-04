@@ -50,7 +50,6 @@ const ProgressLoading = memoEqual(() => {
 
   return (
     <ProgressLine
-       height={3}
        color={color}
        completed={completed}
     />
