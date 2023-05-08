@@ -1,1 +1,1 @@
-{"geo":"Jamaica","code":"jam","type":"Solar PV On-Grid","value":"Capacity in MW","fromYear":"2000","data":[null,0.1,0.1,0.1,0.2,0.2,0.2,0.4,0.6,0.7,1,1.5,1.8,2.1,4.1,6.5,27.5,55.5,55.5,92.5,92.5,92.5]}
+{"geo":"Jamaica","code":"jam","type":"Solar PV On-Grid","value":"Capacity in MW","fromYear":"2000","data":[0,0.1,0.1,0.1,0.2,0.2,0.2,0.4,0.6,0.7,1,1.5,1.8,2.1,4.1,6.5,27.5,55.5,55.5,92.5,92.5,92.5,92.55]}
