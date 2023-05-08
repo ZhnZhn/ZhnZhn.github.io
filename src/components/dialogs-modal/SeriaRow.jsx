@@ -8,16 +8,18 @@ import {
 
 import useProperty from '../hooks/useProperty';
 import useRefBool from '../hooks/useRefBool';
-import useBool from '../hooks/useBool';
 import useTheme from '../hooks/useTheme';
 
 import Model from '../../constants/Model';
 
 import SvgCheckBox from '../zhn/SvgCheckBox';
-import CellColor from '../zhn-moleculs/CellColor';
-import ModalPalette from '../zhn-moleculs/ModalPalette';
+import InputColor from '../zhn-moleculs/InputColor';
 import InputSelect from '../zhn-select/InputSelect';
 import DivEllipsis from '../zhn/DivEllipsis';
+
+import {
+  S_FONT_BOLD_NON_SELECT
+} from '../styles/GeneralStyles';
 
 const TH_ID = 'ROW_CHECKBOX'
 , CHECKED_COLOR = '#1b2836'
@@ -25,23 +27,30 @@ const TH_ID = 'ROW_CHECKBOX'
 
 , CL_INPUT_COLOR = 'p-r va-m'
 
-, S_ROOT = { padding: '0 0 16px 16px' }
+, S_ROOT = {
+  padding: '0 0 16px 16px'
+}
+, _S_VALIGN_MIDDLE = {
+  verticalAlign: 'middle',
+}
 , S_TITLE = {
+  ..._S_VALIGN_MIDDLE,
+  ...S_FONT_BOLD_NON_SELECT,
   display: 'inline-block',
-  color: '##1b75bb',
+  color: 'black',
   width: 100,
   padding: '0 16px 0 4px',
-  verticalAlign: 'middle',
-  textAlign: 'right',
-  fontSize: '16px',
-  fontWeight: 'bold',
-  userSelect: 'none'
+  textAlign: 'right'
 }
-, S_CHECK_BOX = { verticalAlign: 'middle'}
+, S_CHECK_BOX = {
+  ..._S_VALIGN_MIDDLE
+}
 , S_SELECT = {
-   marginLeft: 24,
-   verticalAlign: 'middle'
-}, S_SELECT_OPTIONS = { minHeight: 100 }
+  ..._S_VALIGN_MIDDLE,
+  marginLeft: 24
+}, S_SELECT_OPTIONS = {
+  minHeight: 100
+}
 
 , FN_NOOP = () => {};
 
@@ -71,18 +80,18 @@ const SeriaRow = (props) => {
     _color,
     _setColor
   ] = useState(() => color || DF_COLOR)
-  , [
-    isShowPallete,
-    _hOpenPallete,
-    _hClosePalette
-  ] = useBool(false)
   , TS = useTheme(TH_ID);
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useImperativeHandle(ref, () => ({
     getValue: () => {
-      const { userOptions } = seria
-      , { data, name } = userOptions || {};
+      const {
+        userOptions
+      } = seria
+      , {
+        data,
+        name
+      } = userOptions || {};
       return {
         isChecked: getRefValue(_refIsChecked),
         color: _color,
@@ -117,24 +126,18 @@ const SeriaRow = (props) => {
         onUnCheck={_hUnCheck}
       />
       <DivEllipsis
-         style={S_TITLE}
-         text={name}
+        style={S_TITLE}
+        text={name}
       />
-      <CellColor
-         className={CL_INPUT_COLOR}
-         color={_color}
-         onClick={_hOpenPallete}
-      >
-        <ModalPalette
-           isShow={isShowPallete}
-           model={Model.palette}
-           onClickCell={_setColor}
-           onClose={_hClosePalette}
-        />
-      </CellColor>
+      <InputColor
+        className={CL_INPUT_COLOR}
+        model={Model.palette}
+        color={_color}
+        setColor={_setColor}
+      />
       <InputSelect
         placeholder="withYAxis"
-        width="150"
+        width="135"
         style={S_SELECT}
         optionsStyle={S_SELECT_OPTIONS}
         options={yAxisOptions}

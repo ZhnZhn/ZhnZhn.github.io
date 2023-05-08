@@ -6,14 +6,13 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useRefBool = _interopRequireDefault(require("../hooks/useRefBool"));
-var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _Model = _interopRequireDefault(require("../../constants/Model"));
 var _SvgCheckBox = _interopRequireDefault(require("../zhn/SvgCheckBox"));
-var _CellColor = _interopRequireDefault(require("../zhn-moleculs/CellColor"));
-var _ModalPalette = _interopRequireDefault(require("../zhn-moleculs/ModalPalette"));
+var _InputColor = _interopRequireDefault(require("../zhn-moleculs/InputColor"));
 var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 var _DivEllipsis = _interopRequireDefault(require("../zhn/DivEllipsis"));
+var _GeneralStyles = require("../styles/GeneralStyles");
 var _jsxRuntime = require("react/jsx-runtime");
 const TH_ID = 'ROW_CHECKBOX',
   CHECKED_COLOR = '#1b2836',
@@ -22,23 +21,24 @@ const TH_ID = 'ROW_CHECKBOX',
   S_ROOT = {
     padding: '0 0 16px 16px'
   },
+  _S_VALIGN_MIDDLE = {
+    verticalAlign: 'middle'
+  },
   S_TITLE = {
+    ..._S_VALIGN_MIDDLE,
+    ..._GeneralStyles.S_FONT_BOLD_NON_SELECT,
     display: 'inline-block',
-    color: '##1b75bb',
+    color: 'black',
     width: 100,
     padding: '0 16px 0 4px',
-    verticalAlign: 'middle',
-    textAlign: 'right',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    userSelect: 'none'
+    textAlign: 'right'
   },
   S_CHECK_BOX = {
-    verticalAlign: 'middle'
+    ..._S_VALIGN_MIDDLE
   },
   S_SELECT = {
-    marginLeft: 24,
-    verticalAlign: 'middle'
+    ..._S_VALIGN_MIDDLE,
+    marginLeft: 24
   },
   S_SELECT_OPTIONS = {
     minHeight: 100
@@ -60,7 +60,6 @@ const SeriaRow = props => {
     [setYAxis, getYAxis] = (0, _useProperty.default)(),
     [_refIsChecked, _hCheck, _hUnCheck] = (0, _useRefBool.default)(false),
     [_color, _setColor] = (0, _uiApi.useState)(() => color || DF_COLOR),
-    [isShowPallete, _hOpenPallete, _hClosePalette] = (0, _useBool.default)(false),
     TS = (0, _useTheme.default)(TH_ID);
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -108,19 +107,14 @@ const SeriaRow = props => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
       style: S_TITLE,
       text: name
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputColor.default, {
       className: CL_INPUT_COLOR,
+      model: _Model.default.palette,
       color: _color,
-      onClick: _hOpenPallete,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPalette.default, {
-        isShow: isShowPallete,
-        model: _Model.default.palette,
-        onClickCell: _setColor,
-        onClose: _hClosePalette
-      })
+      setColor: _setColor
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect.default, {
       placeholder: "withYAxis",
-      width: "150",
+      width: "135",
       style: S_SELECT,
       optionsStyle: S_SELECT_OPTIONS,
       options: yAxisOptions,
