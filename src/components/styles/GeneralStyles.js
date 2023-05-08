@@ -10,3 +10,9 @@ export const S_ELLIPSIS = {
   overflow: 'hidden',
   textOverflow: 'ellipsis'
 }
+
+export const S_FONT_BOLD_NON_SELECT = {
+  fontSize: '16px',
+  fontWeight: 'bold',
+  userSelect: 'none'
+}
