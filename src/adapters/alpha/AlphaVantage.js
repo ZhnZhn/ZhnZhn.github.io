@@ -16,7 +16,8 @@ const _rAdapter = {
   SR: SearchAdapter,
   F: FundAdapter,
   E: EarnAdapter,
-  EI: EconomicsAdapter
+  EI: EconomicsAdapter,
+  CM: EconomicsAdapter
 }
 , adapter = crAdapterRouter(_rAdapter, { isKey: true })
 , AlphaVantage = { api, adapter };

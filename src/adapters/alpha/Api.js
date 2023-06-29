@@ -26,6 +26,55 @@ const _crEconomicsQuery = (
   return `function=${value}`;
 }
 
+const ITEM_WTI = "WTI"
+, ITEM_NATURAL_GAS = "NATURAL_GAS";
+const _checkCommoditiesParams = (
+  item,
+  interval
+) => {
+  const itemId = getValue(item)
+  , itemCaption = getCaption(item)
+  , intervalId = getValue(interval)
+  , _intervalCaption = getCaption(interval);
+  if (((intervalId === "daily" || intervalId === "weekly")
+      && (itemId !== ITEM_WTI || itemId !== ITEM_NATURAL_GAS))
+   || ((itemId === ITEM_WTI || itemId === ITEM_NATURAL_GAS) 
+      && (intervalId === "annual" || intervalId === "quarterly"))
+  ) {
+    throw crError(REQ_ERROR, `Interval ${_intervalCaption} is absent for ${itemCaption}`);
+  }
+  return [
+    itemId,
+    itemCaption,
+    intervalId
+  ];
+}
+
+const _crCommoditiesQuery = (
+  option
+) => {
+  const {
+    items
+  } = option
+  , [
+    item,
+    interval
+  ] = items
+  , [
+    itemId,
+    itemCaption,
+    intervalId
+  ] = _checkCommoditiesParams(
+    item,
+    interval
+  );
+
+  _assign(option, {
+    itemCaption
+  })
+  return `function=${itemId}&interval=${intervalId}`;
+}
+
 const _crFnSymbolQuery = (
   fnName,
   symbol
@@ -115,7 +164,9 @@ const _crDfQuery = ({
 const _routerQuery = {
   DF: _crDfQuery,
 
+
   ECONOMICS: _crEconomicsQuery,
+  CM: _crCommoditiesQuery,
   [DF_FN_EOD]: _crEodQuery,
 
   SECTOR: _crSectorQuery,
