@@ -10,7 +10,7 @@ import {
   BT_DB_NOMICS,
   BT_ENERGY,
   BT_BLOCKCHAIN,
-  BT_FUTURES,
+  BT_COMMODITIES,
   BT_FRANCE_STATISTICS,
   BT_UK_STATISTICS,
   BT_NORWAY_STATISTICS,
@@ -86,10 +86,10 @@ const BrowserConfig = {
     caption: 'Blockchain',
     sourceMenuUrl: './data/blockchain/source-menu.json'
   },
-  [BT_FUTURES]: {
-    browserType: BT_FUTURES,
-    caption: 'Futures Markets',
-    sourceMenuUrl: './data/futures-markets/source-menu.json'
+  [BT_COMMODITIES]: {
+    browserType: BT_COMMODITIES,
+    caption: 'Commodities',
+    sourceMenuUrl: './data/commodities/source-menu.json'
   },
 
   [BT_FRANCE_STATISTICS]: {

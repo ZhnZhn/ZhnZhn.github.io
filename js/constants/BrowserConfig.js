@@ -60,10 +60,10 @@ const BrowserConfig = {
     caption: 'Blockchain',
     sourceMenuUrl: './data/blockchain/source-menu.json'
   },
-  [_BrowserType.BT_FUTURES]: {
-    browserType: _BrowserType.BT_FUTURES,
-    caption: 'Futures Markets',
-    sourceMenuUrl: './data/futures-markets/source-menu.json'
+  [_BrowserType.BT_COMMODITIES]: {
+    browserType: _BrowserType.BT_COMMODITIES,
+    caption: 'Commodities',
+    sourceMenuUrl: './data/commodities/source-menu.json'
   },
   [_BrowserType.BT_FRANCE_STATISTICS]: {
     browserType: _BrowserType.BT_FRANCE_STATISTICS,

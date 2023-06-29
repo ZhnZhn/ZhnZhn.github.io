@@ -28,6 +28,6 @@ export const BT_US_ECONOMICS = 'US'
 export const BT_ENERGY = 'EN'
 
 export const BT_BLOCKCHAIN = 'BC'
-export const BT_FUTURES = 'FT'
+export const BT_COMMODITIES = 'CM'
 
 export const BT_WATCH_LIST = 'WL'
