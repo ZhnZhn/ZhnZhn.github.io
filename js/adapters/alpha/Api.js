@@ -67,7 +67,6 @@ const _crEodQuery = option => {
   });
   return _crFnSymbolQuery(intervalValue, ticket);
 };
-const _crSectorQuery = () => {};
 const _crIntradayQuery = option => {
   const {
       dfFn,
@@ -123,7 +122,6 @@ const _routerQuery = {
   ECONOMICS: _crEconomicsQuery,
   CM: _crCommoditiesQuery,
   [_fnAdapter.DF_FN_EOD]: _crEodQuery,
-  SECTOR: _crSectorQuery,
   TIME_SERIES_INTRADAY: _crIntradayQuery,
   INCOME_STATEMENT: _crIncomeQuery,
   BALANCE_SHEET: _crIncomeQuery,

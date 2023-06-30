@@ -131,8 +131,6 @@ const _crEodQuery = option => {
   return _crFnSymbolQuery(intervalValue, ticket);
 }
 
-const _crSectorQuery = () => {};
-
 const _crIntradayQuery = option => {
   const {
     dfFn,
@@ -191,7 +189,6 @@ const _routerQuery = {
   CM: _crCommoditiesQuery,
   [DF_FN_EOD]: _crEodQuery,
 
-  SECTOR: _crSectorQuery,
   TIME_SERIES_INTRADAY: _crIntradayQuery,
 
   INCOME_STATEMENT: _crIncomeQuery,
