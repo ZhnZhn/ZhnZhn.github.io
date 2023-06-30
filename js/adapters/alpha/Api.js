@@ -21,12 +21,12 @@ const _crEconomicsQuery = option => {
   });
   return _crFunctionQuery(value);
 };
-const ITEM_WTI = "WTI",
-  ITEM_NATURAL_GAS = "NATURAL_GAS";
+const _isDailyInterval = (0, _fnAdapter.isInArrStr)(['daily', 'weekly']),
+  _isQuarterlyInterval = (0, _fnAdapter.isInArrStr)(['quarterly', 'annual']);
 const _checkCommoditiesParams = (item, interval) => {
   const [itemId, itemCaption] = (0, _fnAdapter.getValueCaption)(item),
     [intervalId, _intervalCaption] = (0, _fnAdapter.getValueCaption)(interval);
-  if ((intervalId === "daily" || intervalId === "weekly") && (itemId !== ITEM_WTI || itemId !== ITEM_NATURAL_GAS) || (itemId === ITEM_WTI || itemId === ITEM_NATURAL_GAS) && (intervalId === "annual" || intervalId === "quarterly")) {
+  if (!item.dw && _isDailyInterval(intervalId) || item.dw && _isQuarterlyInterval(intervalId)) {
     throw (0, _fnAdapter.crError)(REQ_ERROR, "Interval " + _intervalCaption + " is absent for " + itemCaption);
   }
   return [itemId, itemCaption, intervalId];

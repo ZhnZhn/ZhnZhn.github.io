@@ -1,4 +1,5 @@
 export {
+  isInArrStr,
   isTokenInStr,
   getValue,
   getCaption,

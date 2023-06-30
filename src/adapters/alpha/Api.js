@@ -1,6 +1,7 @@
 import isEmpty from '../../utils/isEmpty';
 import {
   DF_FN_EOD,
+  isInArrStr,
   toUpperCaseFirst,
   crError,
   getValue,
@@ -31,8 +32,15 @@ const _crEconomicsQuery = (
   return _crFunctionQuery(value);
 }
 
-const ITEM_WTI = "WTI"
-, ITEM_NATURAL_GAS = "NATURAL_GAS";
+const  _isDailyInterval = isInArrStr([
+  'daily',
+  'weekly'
+])
+, _isQuarterlyInterval = isInArrStr([
+  'quarterly',
+  'annual'
+]);
+
 const _checkCommoditiesParams = (
   item,
   interval
@@ -45,10 +53,8 @@ const _checkCommoditiesParams = (
     intervalId,
     _intervalCaption
   ] = getValueCaption(interval);
-  if (((intervalId === "daily" || intervalId === "weekly")
-      && (itemId !== ITEM_WTI || itemId !== ITEM_NATURAL_GAS))
-   || ((itemId === ITEM_WTI || itemId === ITEM_NATURAL_GAS)
-      && (intervalId === "annual" || intervalId === "quarterly"))
+  if ((!item.dw && _isDailyInterval(intervalId))
+   || (item.dw && _isQuarterlyInterval(intervalId))
   ) {
     throw crError(REQ_ERROR, `Interval ${_intervalCaption} is absent for ${itemCaption}`);
   }
