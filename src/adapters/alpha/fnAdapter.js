@@ -3,6 +3,7 @@ export {
   isTokenInStr,
   getValue,
   getCaption,
+  getValueCaption,
   toUpperCaseFirst,
   joinBy,
   valueMoving,

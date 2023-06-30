@@ -4,26 +4,31 @@ import {
   toUpperCaseFirst,
   crError,
   getValue,
-  getCaption
+  getCaption,
+  getValueCaption
 } from './fnAdapter';
 
 const ROOT = 'https://www.alphavantage.co/query'
 , ERR_PROP = 'Error Message'
 , INFO_PROP = 'Information'
 , REQ_ERROR = 'Request Error'
-, _assign = Object.assign;
+, _assign = Object.assign
+, _crFunctionQuery = value => `function=${value}`;
 
 const _crEconomicsQuery = (
   option
 ) => {
-  const { items } = option
-  , _item = items[0]
-  , itemCaption = getCaption(_item)
-  , value = getValue(_item)
+  const {
+    items
+  } = option
+  , [
+    value,
+    itemCaption
+  ] = getValueCaption(items[0]);
   _assign(option, {
     itemCaption
   })
-  return `function=${value}`;
+  return _crFunctionQuery(value);
 }
 
 const ITEM_WTI = "WTI"
@@ -32,13 +37,17 @@ const _checkCommoditiesParams = (
   item,
   interval
 ) => {
-  const itemId = getValue(item)
-  , itemCaption = getCaption(item)
-  , intervalId = getValue(interval)
-  , _intervalCaption = getCaption(interval);
+  const [
+    itemId,
+    itemCaption
+  ] = getValueCaption(item)
+  , [
+    intervalId,
+    _intervalCaption
+  ] = getValueCaption(interval);
   if (((intervalId === "daily" || intervalId === "weekly")
       && (itemId !== ITEM_WTI || itemId !== ITEM_NATURAL_GAS))
-   || ((itemId === ITEM_WTI || itemId === ITEM_NATURAL_GAS) 
+   || ((itemId === ITEM_WTI || itemId === ITEM_NATURAL_GAS)
       && (intervalId === "annual" || intervalId === "quarterly"))
   ) {
     throw crError(REQ_ERROR, `Interval ${_intervalCaption} is absent for ${itemCaption}`);
@@ -72,13 +81,13 @@ const _crCommoditiesQuery = (
   _assign(option, {
     itemCaption
   })
-  return `function=${itemId}&interval=${intervalId}`;
+  return `${_crFunctionQuery(itemId)}&interval=${intervalId}`;
 }
 
 const _crFnSymbolQuery = (
   fnName,
   symbol
-) => `function=${fnName}&symbol=${symbol}`;
+) => `${_crFunctionQuery(fnName)}&symbol=${symbol}`;
 
 const _getInterval = intervalValue => {
   const dfFn = intervalValue.split('&')[0]
@@ -91,16 +100,25 @@ const _getInterval = intervalValue => {
 }
 
 const _crEodQuery = option => {
-  const { items } = option
+  const {
+    items
+  } = option
   , [
     _stockItem,
     _intervalItem
   ] = items
-  , ticket = getValue(_stockItem)
-  , title = getCaption(_stockItem)
-  , intervalValue = getValue(_intervalItem)
-  , subtitle = getCaption(_intervalItem)
-  , [dfT, interval] = _getInterval(intervalValue);
+  , [
+    ticket,
+    title
+  ] = getValueCaption(_stockItem)
+  , [
+    intervalValue,
+    subtitle
+  ] = getValueCaption(_intervalItem)
+  , [
+    dfT,
+    interval
+  ] = _getInterval(intervalValue);
 
   _assign(option, {
     itemCaption: ticket,
@@ -146,8 +164,12 @@ const _crIncomeQuery = option => {
   })
   return _crFnSymbolQuery(dfFn, _symbol);
 };
+
 const _crEarningQuery = option => {
-  const { items, dfFn } = option
+  const {
+    items,
+    dfFn
+  } = option
   , _symbol = getValue(items[0]);
   _assign(option, {
     itemCaption: _symbol,
@@ -201,7 +223,6 @@ const AlphaApi = {
     if (_msg) {
       throw crError(REQ_ERROR, _msg);
     }
-    return true;
   }
 }
 

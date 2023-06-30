@@ -9,26 +9,23 @@ const ROOT = 'https://www.alphavantage.co/query',
   ERR_PROP = 'Error Message',
   INFO_PROP = 'Information',
   REQ_ERROR = 'Request Error',
-  _assign = Object.assign;
+  _assign = Object.assign,
+  _crFunctionQuery = value => "function=" + value;
 const _crEconomicsQuery = option => {
   const {
       items
     } = option,
-    _item = items[0],
-    itemCaption = (0, _fnAdapter.getCaption)(_item),
-    value = (0, _fnAdapter.getValue)(_item);
+    [value, itemCaption] = (0, _fnAdapter.getValueCaption)(items[0]);
   _assign(option, {
     itemCaption
   });
-  return "function=" + value;
+  return _crFunctionQuery(value);
 };
 const ITEM_WTI = "WTI",
   ITEM_NATURAL_GAS = "NATURAL_GAS";
 const _checkCommoditiesParams = (item, interval) => {
-  const itemId = (0, _fnAdapter.getValue)(item),
-    itemCaption = (0, _fnAdapter.getCaption)(item),
-    intervalId = (0, _fnAdapter.getValue)(interval),
-    _intervalCaption = (0, _fnAdapter.getCaption)(interval);
+  const [itemId, itemCaption] = (0, _fnAdapter.getValueCaption)(item),
+    [intervalId, _intervalCaption] = (0, _fnAdapter.getValueCaption)(interval);
   if ((intervalId === "daily" || intervalId === "weekly") && (itemId !== ITEM_WTI || itemId !== ITEM_NATURAL_GAS) || (itemId === ITEM_WTI || itemId === ITEM_NATURAL_GAS) && (intervalId === "annual" || intervalId === "quarterly")) {
     throw (0, _fnAdapter.crError)(REQ_ERROR, "Interval " + _intervalCaption + " is absent for " + itemCaption);
   }
@@ -43,9 +40,9 @@ const _crCommoditiesQuery = option => {
   _assign(option, {
     itemCaption
   });
-  return "function=" + itemId + "&interval=" + intervalId;
+  return _crFunctionQuery(itemId) + "&interval=" + intervalId;
 };
-const _crFnSymbolQuery = (fnName, symbol) => "function=" + fnName + "&symbol=" + symbol;
+const _crFnSymbolQuery = (fnName, symbol) => _crFunctionQuery(fnName) + "&symbol=" + symbol;
 const _getInterval = intervalValue => {
   const dfFn = intervalValue.split('&')[0],
     dfT = (dfFn || '').replace('TIME_SERIES_', ''),
@@ -57,10 +54,8 @@ const _crEodQuery = option => {
       items
     } = option,
     [_stockItem, _intervalItem] = items,
-    ticket = (0, _fnAdapter.getValue)(_stockItem),
-    title = (0, _fnAdapter.getCaption)(_stockItem),
-    intervalValue = (0, _fnAdapter.getValue)(_intervalItem),
-    subtitle = (0, _fnAdapter.getCaption)(_intervalItem),
+    [ticket, title] = (0, _fnAdapter.getValueCaption)(_stockItem),
+    [intervalValue, subtitle] = (0, _fnAdapter.getValueCaption)(_intervalItem),
     [dfT, interval] = _getInterval(intervalValue);
   _assign(option, {
     itemCaption: ticket,
@@ -154,7 +149,6 @@ const AlphaApi = {
     if (_msg) {
       throw (0, _fnAdapter.crError)(REQ_ERROR, _msg);
     }
-    return true;
   }
 };
 var _default = AlphaApi;
