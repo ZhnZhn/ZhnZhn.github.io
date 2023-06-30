@@ -28,7 +28,7 @@ import D from '../dialogs/DialogCell'
 const addItem = WatchActions[WAT_ADD_ITEM]
 , S_DIALOG = { width: 300 }
 , S_CAPTION = { width: 70 }
-, SELECT_WIDTH = "216";
+, SELECT_WIDTH = "202";
 
 const AddToWatchDialog = memoIsShow((
   props
