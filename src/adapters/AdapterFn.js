@@ -5,7 +5,8 @@ export { isInArrStr } from '../utils/arrFn';
 import formatAllNumber from '../utils/formatAllNumber';
 import {
   getC,
-  getV
+  getV,
+  getVc
 } from '../utils/getPropertyFn';
 
 import { mlsToDmy } from '../utils/dateFn';
@@ -71,6 +72,7 @@ export const toTd = (mls) => isNumber(mls)
 
 export const getCaption = getC
 export const getValue = getV
+export const getValueCaption = getVc
 
 export const numberFormat = formatAllNumber
 export const isYNumber = _fIsNumber('y')

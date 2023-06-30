@@ -1,6 +1,7 @@
 import {
   getC,
-  getV
+  getV,
+  getVc
 } from '../getPropertyFn';
 
 describe('getC', ()=> {
@@ -61,5 +62,25 @@ describe('getV', ()=>{
     expect(fn({}, option)).toBe('')
     expect(fn(void 0, option)).toBe('')
     expect(fn(null, option)).toBe('')
+  })
+})
+
+describe('getVc', () => {
+  const fn = getVc;
+  test('should return array with value, caption from item, options', () => {
+    expect(fn({ v: 'abc', c: 'Abc (A)'}))
+     .toEqual(['abc', 'Abc (A)'])
+    expect(fn({ value: 0, caption: 'Abc (A)'}))
+      .toEqual(['0', 'Abc (A)'])
+    expect(fn({ v: 'abc', c: 'Abc (A)'}, { isUpper: true }))
+      .toEqual(['ABC', 'Abc (A)'])
+      expect(fn({ c: 'Abc (A)'}, { dfValue: 'Df Value' }))
+        .toEqual(['Df Value', 'Abc (A)'])
+  })
+
+  test('shold return array with two empty strings in edge cases', () => {
+    expect(fn({})).toEqual(['', ''])
+    expect(fn(null)).toEqual(['', ''])
+    expect(fn(void 0)).toEqual(['', ''])
   })
 })
