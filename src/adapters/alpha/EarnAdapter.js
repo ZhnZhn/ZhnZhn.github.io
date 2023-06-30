@@ -1,25 +1,18 @@
 import crAdapterType1 from '../crAdapterType1';
-import {
-  ymdToUTC,
-  compareByDate,
-  roundBy,
-  _isNaN
-} from './fnAdapter';
+import { fCrData } from './fnAdapter';
+
+const _crData = fCrData(
+  'reportedEPS',
+  'fiscalDateEnding',
+  'round'
+);
 
 const crData = (json, option) => {
   const { dfPeriod } = option
   , _pnReport = dfPeriod === 'A'
        ? 'annualEarnings'
        : 'quarterlyEarnings'
-  , _reports = json[_pnReport] || []
-  , _data = [];
-  _reports.forEach(({ reportedEPS, fiscalDateEnding }) => {
-    const _y = roundBy(reportedEPS)
-    if (!_isNaN(_y)) {
-      _data.push([ymdToUTC(fiscalDateEnding), _y])
-    }
-  })
-  return _data.sort(compareByDate);
+  return _crData(json[_pnReport]);
 };
 
 let _adapter;

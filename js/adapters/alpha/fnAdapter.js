@@ -1,9 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.toUpperCaseFirst = exports.roundBy = exports.joinBy = exports.isTokenInStr = exports.getValueCaption = exports.getValue = exports.getCaption = exports.crIntradayConfigOption = exports.crError = exports.compareByDate = exports._isNaN = exports.DF_FN_EOD = void 0;
+exports.ymdhmsToUTC = exports.toUpperCaseFirst = exports.joinBy = exports.isTokenInStr = exports.getValueCaption = exports.getValue = exports.getCaption = exports.fCrData = exports.crIntradayConfigOption = exports.crError = exports.DF_FN_EOD = void 0;
 var _AdapterFn = require("../AdapterFn");
-exports._isNaN = _AdapterFn._isNaN;
 exports.isTokenInStr = _AdapterFn.isTokenInStr;
 exports.getValue = _AdapterFn.getValue;
 exports.getCaption = _AdapterFn.getCaption;
@@ -13,10 +12,8 @@ exports.joinBy = _AdapterFn.joinBy;
 exports.valueMoving = _AdapterFn.valueMoving;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.ymdhmsToUTC = _AdapterFn.ymdhmsToUTC;
-exports.roundBy = _AdapterFn.roundBy;
 exports.crError = _AdapterFn.crError;
 var _compareByFn = require("../compareByFn");
-exports.compareByDate = _compareByFn.compareByDate;
 var _crFn = require("../crFn");
 var _legendFn = require("../legendFn");
 const DF_FN_EOD = "EOD";
@@ -42,6 +39,20 @@ const _crItemConf = (_ref, option) => {
     dataSource
   } : void 0;
 };
+const fCrData = (paramNameY, paramNameX, yConfig) => data => {
+  const _crY = yConfig === '10' ? v => parseInt(v, 10) : yConfig === 'round' ? _AdapterFn.roundBy : parseFloat;
+  return (data || []).reduce(function (arr, item) {
+    if (item === void 0) {
+      item = {};
+    }
+    const _y = _crY(item[paramNameY]);
+    if (!(0, _AdapterFn._isNaN)(_y)) {
+      arr.push([(0, _AdapterFn.ymdToUTC)(item[paramNameX]), _y]);
+    }
+    return arr;
+  }, []).sort(_compareByFn.compareByDate);
+};
+exports.fCrData = fCrData;
 const _crZhConfig = (config, option) => {
   const {
       _itemKey,

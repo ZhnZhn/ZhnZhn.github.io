@@ -1,22 +1,11 @@
 import crAdapterType1 from '../crAdapterType1';
 import {
-  ymdToUTC,
-  compareByDate,
   joinBy,
-  _isNaN
+  fCrData
 } from './fnAdapter';
 
-const crData = (
-  { data }
-) => (data || [])
-  .reduce((arr, {value, date}={}) => {
-     const _y = parseFloat(value);
-     if (!_isNaN(_y)) {
-       arr.push([ymdToUTC(date), _y])
-     }
-     return arr;
-  }, [])
-  .sort(compareByDate);
+const _crData = fCrData('value', 'date')
+, crData = ({ data }) => _crData(data);
 
 const trOption = (
   option,

@@ -1,5 +1,4 @@
 export {
-  _isNaN,
   isTokenInStr,
   getValue,
   getCaption,
@@ -9,10 +8,15 @@ export {
   valueMoving,
   ymdToUTC,
   ymdhmsToUTC,
-  roundBy,
   crError
 } from '../AdapterFn';
-export { compareByDate } from '../compareByFn';
+
+import {
+  _isNaN,
+  roundBy,
+  ymdToUTC
+} from '../AdapterFn';
+import { compareByDate } from '../compareByFn';
 
 import { valueMoving } from '../AdapterFn';
 import {
@@ -46,6 +50,27 @@ const _crItemConf = (
      }
     : void 0;
 };
+
+export const fCrData = (
+  paramNameY,
+  paramNameX,
+  yConfig
+) => (data) => {
+  const _crY = yConfig === '10'
+    ? (v) => parseInt(v, 10)
+    : yConfig === 'round'
+       ? roundBy
+       : parseFloat;
+  return (data || [])
+    .reduce((arr, item={}) => {
+       const _y = _crY(item[paramNameY]);
+       if (!_isNaN(_y)) {
+         arr.push([ymdToUTC(item[paramNameX]), _y])
+       }
+       return arr;
+    }, [])
+    .sort(compareByDate);
+}
 
 const _crZhConfig = (
   config,

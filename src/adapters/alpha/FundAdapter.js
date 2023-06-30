@@ -1,28 +1,17 @@
 import crAdapterType1 from '../crAdapterType1';
-import {
-  ymdToUTC,
-  compareByDate,
-  _isNaN
-} from './fnAdapter';
+import { fCrData } from './fnAdapter';
 
 const crData = (
   json,
   { dfItem, dfPeriod }
-) => {
-  const _pnReport = dfPeriod === 'A'
-    ? 'annualReports'
-    : 'quarterlyReports';
-
-  return (json[_pnReport] || [])
-    .reduce((arr, item) => {
-      const _y = parseInt(item[dfItem], 10);
-      if (!_isNaN(_y)) {
-        arr.push([ymdToUTC(item.fiscalDateEnding), _y])
-      }
-      return arr;
-    }, [])
-    .sort(compareByDate);
-};
+) => fCrData(
+    dfItem,
+    'fiscalDateEnding',
+    '10'
+  )(json[dfPeriod === 'A'
+     ? 'annualReports'
+     : 'quarterlyReports']
+  );
 
 let _adapter;
 const FundAdapter = () => _adapter
