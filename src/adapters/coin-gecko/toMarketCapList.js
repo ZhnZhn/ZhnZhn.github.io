@@ -88,6 +88,7 @@ const toMarketCapList = {
       headers, rows,
       dataSource: _crDataSource(rows)
     });
+    console.log(config)
     return { config };
   }
 }

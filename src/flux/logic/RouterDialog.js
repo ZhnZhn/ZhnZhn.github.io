@@ -114,8 +114,8 @@ const _router = {
   get AlphaIndicatorDialog() {
     return this.getSM().then(D => D.Indicator);
   },
-  get AlphaSectorDialog() {
-    return this.getSM().then(D => D.Sector);
+  get AlphaTopDialog() {
+    return this.getSM().then(D => D.Top);
   },
   get AlphaSearchDialog() {
     return this.getSM().then(D => D.Search);

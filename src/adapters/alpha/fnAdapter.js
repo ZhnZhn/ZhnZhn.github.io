@@ -1,4 +1,5 @@
 export {
+  isArr,
   isInArrStr,
   isTokenInStr,
   getValue,
@@ -9,6 +10,8 @@ export {
   valueMoving,
   ymdToUTC,
   ymdhmsToUTC,
+  roundBy,
+  numberFormat,
   crError
 } from '../AdapterFn';
 

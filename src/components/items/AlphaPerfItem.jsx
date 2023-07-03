@@ -11,13 +11,21 @@ export const AlphaPerfItem = ({
 }) => (
   <>
     <TableItem
+      isInitialClose={true}
       thMoreStyle={S_TH_MORE}
       config={config.m}
       onCloseItem={onCloseItem}
     />
     <TableItem
+      isInitialClose={true}
       thMoreStyle={S_TH_MORE}
-      config={config.y}
+      config={config.g}
+      onCloseItem={onCloseItem}
+    />
+    <TableItem
+      isInitialClose={true}
+      thMoreStyle={S_TH_MORE}
+      config={config.l}
       onCloseItem={onCloseItem}
     />
   </>

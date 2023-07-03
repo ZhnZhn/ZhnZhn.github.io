@@ -1,11 +1,11 @@
 
-import Indicator from './AlphaIndicatorDialog'
-import Sector from './AlphaSectorDialog'
-import Search from './AlphaSearchDialog'
+import Indicator from './AlphaIndicatorDialog';
+import Top from './AlphaTopDialog';
+import Search from './AlphaSearchDialog';
 
 const AlphaDialog = {
-  Indicator, 
-  Sector,
+  Indicator,
+  Top,
   Search
 };
 

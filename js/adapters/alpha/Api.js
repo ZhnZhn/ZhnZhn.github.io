@@ -117,11 +117,13 @@ const _crDfQuery = _ref => {
   } = _ref;
   return _crFnSymbolQuery(indicator, ticket) + "&interval=daily&time_period=" + period + "&series_type=close";
 };
+const _crTopGlQuery = () => _crFunctionQuery('TOP_GAINERS_LOSERS');
 const _routerQuery = {
   DF: _crDfQuery,
   ECONOMICS: _crEconomicsQuery,
   CM: _crCommoditiesQuery,
   [_fnAdapter.DF_FN_EOD]: _crEodQuery,
+  GL: _crTopGlQuery,
   TIME_SERIES_INTRADAY: _crIntradayQuery,
   INCOME_STATEMENT: _crIncomeQuery,
   BALANCE_SHEET: _crIncomeQuery,

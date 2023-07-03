@@ -11,6 +11,7 @@ var _SearchAdapter = _interopRequireDefault(require("./SearchAdapter"));
 var _FundAdapter = _interopRequireDefault(require("./FundAdapter"));
 var _EarnAdapter = _interopRequireDefault(require("./EarnAdapter"));
 var _EconomicsAdapter = _interopRequireDefault(require("./EconomicsAdapter"));
+var _TopGainersLosersAdapter = _interopRequireDefault(require("./TopGainersLosersAdapter"));
 const _rAdapter = {
     DF: _IndicatorAdapter.default,
     I: _IntradayAdapter.default,
@@ -18,7 +19,8 @@ const _rAdapter = {
     F: _FundAdapter.default,
     E: _EarnAdapter.default,
     EI: _EconomicsAdapter.default,
-    CM: _EconomicsAdapter.default
+    CM: _EconomicsAdapter.default,
+    GL: _TopGainersLosersAdapter.default
   },
   adapter = (0, _crAdapterRouter.default)(_rAdapter, {
     isKey: true

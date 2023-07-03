@@ -187,6 +187,8 @@ const _crDfQuery = ({
   indicator='SMA'
 }) => `${_crFnSymbolQuery(indicator, ticket)}&interval=daily&time_period=${period}&series_type=close`;
 
+const _crTopGlQuery = () => _crFunctionQuery('TOP_GAINERS_LOSERS')
+
 const _routerQuery = {
   DF: _crDfQuery,
 
@@ -194,6 +196,7 @@ const _routerQuery = {
   ECONOMICS: _crEconomicsQuery,
   CM: _crCommoditiesQuery,
   [DF_FN_EOD]: _crEodQuery,
+  GL: _crTopGlQuery,
 
   TIME_SERIES_INTRADAY: _crIntradayQuery,
 

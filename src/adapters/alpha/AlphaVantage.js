@@ -7,6 +7,7 @@ import SearchAdapter from './SearchAdapter'
 import FundAdapter from './FundAdapter'
 import EarnAdapter from './EarnAdapter'
 import EconomicsAdapter from './EconomicsAdapter'
+import TopGainersLosersAdapter from './TopGainersLosersAdapter'
 
 const _rAdapter = {
   DF: IndicatorAdapter,
@@ -15,7 +16,8 @@ const _rAdapter = {
   F: FundAdapter,
   E: EarnAdapter,
   EI: EconomicsAdapter,
-  CM: EconomicsAdapter
+  CM: EconomicsAdapter,
+  GL: TopGainersLosersAdapter
 }
 , adapter = crAdapterRouter(_rAdapter, { isKey: true })
 , AlphaVantage = { api, adapter };

@@ -9,13 +9,12 @@ import D from '../dialogs/DialogCell';
 const S_DIALOG = { width: 300 }
 , S_ROW_TEXT = { paddingRight: 16 };
 
-const AlphaSectorDialog = memoIsShow(({
+const AlphaTopDialog = memoIsShow(({
   isShow,
   caption,
   toTopLayer,
   onAbout,
   loadId,
-  dfSubId,
   onLoad,
   onShow,
   onClose
@@ -29,11 +28,11 @@ const AlphaSectorDialog = memoIsShow(({
   , _hLoad = useCallback(()=>{
     onLoad({
       loadId,
-      dfSubId,
-      indicator: 'SECTOR'
+      dfSubId: 'GL',
+      dfFn: 'GL'
     })
   }, [])
-  // onLoad, loadId, dfSubId
+  // onLoad, loadId
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
@@ -54,10 +53,10 @@ const AlphaSectorDialog = memoIsShow(({
       <D.RowText
         style={S_ROW_TEXT}
         caption="AV:"
-        text="Sector Performances"
+        text="Top Gainers & Losers"
       />
     </D.DraggableDialog>
   );
 })
 
-export default AlphaSectorDialog
+export default AlphaTopDialog
