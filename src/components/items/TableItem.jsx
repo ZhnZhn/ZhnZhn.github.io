@@ -19,6 +19,7 @@ const S_ROOT = { paddingBottom: 8 }
 };
 
 export const TableItem = ({
+  isInitialClose,
   thMoreStyle,
   config,
   onCloseItem
@@ -26,7 +27,7 @@ export const TableItem = ({
   const [
     isOpen,
     toggleIsOpen
-  ] = useToggle(true)
+  ] = useToggle(!isInitialClose)
   , {
       id,
       title,
