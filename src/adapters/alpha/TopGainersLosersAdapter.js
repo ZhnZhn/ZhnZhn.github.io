@@ -1,48 +1,44 @@
 import {
+  crTableOptions
+} from '../toTableFn';
+
+import {
   isArr,
-  roundBy,
-  numberFormat
+  roundBy
 } from './fnAdapter';
 
 const ID = 'alp_perf'
 , DATA_SOURCE = 'Alpha Vantage'
 , S_DS = { paddingTop: 6 }
+, _crHeaderItem = (
+  name,
+  pn,
+  options
+) => ({
+  ...options,
+  name,
+  pn
+})
 , HEADERS = [
-  {
-    name: 'Ticker',
-    pn: 'id'
-  },{
-    name: 'Price',
-    pn: 'p'
-  },{
-    name: '1d Amount',
-    pn: 'cha',
-    isHide: true
-  },{
-    name: '1d %',
-    pn: 'chp',
-    isR: true
-  },{
-    isF: true,
-    name: 'Volume',
-    pn: 'v',
-    style: { fontWeight: 'bold' },
-  }
+  _crHeaderItem('Ticker', 'id'),
+  _crHeaderItem('Price', 'p'),
+  _crHeaderItem('1d Amount', 'cha', { isHide: true }),
+  _crHeaderItem('1d %', 'chp', { isR: true }),
+  _crHeaderItem('Volume', 'v', { isF: true, style: { fontWeight: 'bold' }})
 ]
 , _crTableOptions = (
   id,
   title,
   rows
 ) => ({
-  id,
-  title,
-  rows,
-  headers: [...HEADERS],
-  dataSource: DATA_SOURCE,
-  dsStyle: S_DS,
-  tableFn: {
-    numberFormat
-  }
+  ...crTableOptions(
+    id,
+    title,
+    [...HEADERS],
+    rows,
+    DATA_SOURCE,
+  ),
+  dsStyle: S_DS
 });
 
 const _roundBy2 = (

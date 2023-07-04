@@ -1,30 +1,36 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crTableRows = exports.crTableConfig = void 0;
-
+exports.crTableRows = exports.crTableOptions = exports.crTableConfig = void 0;
 var _AdapterFn = require("./AdapterFn");
-
 const _replaceNaN = function (n, str) {
   if (str === void 0) {
     str = '';
   }
-
   return n - n === 0 ? n : str;
 };
-
 const _getCellValue = (r, h) => {
   const {
-    pn,
-    toN
-  } = h,
-        _isToNumber = !!toN,
-        _toFixedBy = _isToNumber && toN[0],
-        _strV = r[pn];
-
+      pn,
+      toN
+    } = h,
+    _isToNumber = !!toN,
+    _toFixedBy = _isToNumber && toN[0],
+    _strV = r[pn];
   return _isToNumber ? (0, _AdapterFn.isTypeNumber)(_toFixedBy) ? (0, _AdapterFn.roundBy)(_strV, _toFixedBy) : _replaceNaN(parseFloat(_strV)) : _strV;
 };
-
+const crTableOptions = (id, title, headers, rows, dataSource, fns) => ({
+  id,
+  title,
+  headers,
+  rows,
+  dataSource,
+  tableFn: {
+    numberFormat: _AdapterFn.numberFormat,
+    ...fns
+  }
+});
+exports.crTableOptions = crTableOptions;
 const crTableConfig = _ref => {
   let {
     id,
@@ -35,15 +41,7 @@ const crTableConfig = _ref => {
     fns
   } = _ref;
   return {
-    id,
-    title,
-    headers,
-    tableFn: {
-      numberFormat: _AdapterFn.numberFormat,
-      ...fns
-    },
-    rows,
-    dataSource,
+    ...crTableOptions(id, title, headers, rows, dataSource, fns),
     zhCompType: 'TABLE',
     zhConfig: {
       id: id,
@@ -51,22 +49,17 @@ const crTableConfig = _ref => {
     }
   };
 };
-
 exports.crTableConfig = crTableConfig;
-
 const crTableRows = function (headers, rows, idPropName) {
   if (headers === void 0) {
     headers = [];
   }
-
   if (rows === void 0) {
     rows = [];
   }
-
   if (idPropName === void 0) {
     idPropName = 'id';
   }
-
   return rows.map((r, rIndex) => {
     headers.forEach(h => {
       r[h.pn] = _getCellValue(r, h);
@@ -75,6 +68,5 @@ const crTableRows = function (headers, rows, idPropName) {
     return r;
   });
 };
-
 exports.crTableRows = crTableRows;
 //# sourceMappingURL=toTableFn.js.map

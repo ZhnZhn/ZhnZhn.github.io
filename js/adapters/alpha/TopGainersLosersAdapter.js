@@ -2,44 +2,31 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _toTableFn = require("../toTableFn");
 var _fnAdapter = require("./fnAdapter");
 const ID = 'alp_perf',
   DATA_SOURCE = 'Alpha Vantage',
   S_DS = {
     paddingTop: 6
   },
-  HEADERS = [{
-    name: 'Ticker',
-    pn: 'id'
-  }, {
-    name: 'Price',
-    pn: 'p'
-  }, {
-    name: '1d Amount',
-    pn: 'cha',
+  _crHeaderItem = (name, pn, options) => ({
+    ...options,
+    name,
+    pn
+  }),
+  HEADERS = [_crHeaderItem('Ticker', 'id'), _crHeaderItem('Price', 'p'), _crHeaderItem('1d Amount', 'cha', {
     isHide: true
-  }, {
-    name: '1d %',
-    pn: 'chp',
+  }), _crHeaderItem('1d %', 'chp', {
     isR: true
-  }, {
+  }), _crHeaderItem('Volume', 'v', {
     isF: true,
-    name: 'Volume',
-    pn: 'v',
     style: {
       fontWeight: 'bold'
     }
-  }],
+  })],
   _crTableOptions = (id, title, rows) => ({
-    id,
-    title,
-    rows,
-    headers: [...HEADERS],
-    dataSource: DATA_SOURCE,
-    dsStyle: S_DS,
-    tableFn: {
-      numberFormat: _fnAdapter.numberFormat
-    }
+    ...(0, _toTableFn.crTableOptions)(id, title, [...HEADERS], rows, DATA_SOURCE),
+    dsStyle: S_DS
   });
 const _roundBy2 = str => (0, _fnAdapter.roundBy)(parseFloat(str), 2);
 const _crRows = rows => (0, _fnAdapter.isArr)(rows) ? rows.map(item => ({

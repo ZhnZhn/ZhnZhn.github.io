@@ -21,6 +21,25 @@ const _getCellValue = (r, h) => {
     : _strV;
 };
 
+export const crTableOptions = (
+  id,
+  title,
+  headers,
+  rows,
+  dataSource,
+  fns
+) => ({
+  id,
+  title,
+  headers,
+  rows,
+  dataSource,
+  tableFn: {
+    numberFormat,
+    ...fns
+  }
+})
+
 export const crTableConfig = ({
   id,
   title,
@@ -29,15 +48,14 @@ export const crTableConfig = ({
   dataSource,
   fns
 }) => ({
-  id,
-  title,
-  headers,
-  tableFn: {
-    numberFormat,
-    ...fns
-  },
-  rows,
-  dataSource,
+  ...crTableOptions(
+    id,
+    title,
+    headers,
+    rows,
+    dataSource,
+    fns
+  ),
   zhCompType: 'TABLE',
   zhConfig: {
     id: id, key: id

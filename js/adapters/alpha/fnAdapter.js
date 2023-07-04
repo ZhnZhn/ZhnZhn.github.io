@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.toUpperCaseFirst = exports.numberFormat = exports.joinBy = exports.isTokenInStr = exports.isInArrStr = exports.isArr = exports.getValueCaption = exports.getValue = exports.getCaption = exports.fCrData = exports.crIntradayConfigOption = exports.crError = exports.DF_FN_EOD = void 0;
+exports.ymdhmsToUTC = exports.toUpperCaseFirst = exports.joinBy = exports.isTokenInStr = exports.isInArrStr = exports.isArr = exports.getValueCaption = exports.getValue = exports.getCaption = exports.fCrData = exports.crIntradayConfigOption = exports.crError = exports.DF_FN_EOD = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isArr = _AdapterFn.isArr;
 exports.isInArrStr = _AdapterFn.isInArrStr;
@@ -15,7 +15,6 @@ exports.valueMoving = _AdapterFn.valueMoving;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.ymdhmsToUTC = _AdapterFn.ymdhmsToUTC;
 exports.roundBy = _AdapterFn.roundBy;
-exports.numberFormat = _AdapterFn.numberFormat;
 exports.crError = _AdapterFn.crError;
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");

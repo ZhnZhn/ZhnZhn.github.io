@@ -11,7 +11,6 @@ export {
   ymdToUTC,
   ymdhmsToUTC,
   roundBy,
-  numberFormat,
   crError
 } from '../AdapterFn';
 
