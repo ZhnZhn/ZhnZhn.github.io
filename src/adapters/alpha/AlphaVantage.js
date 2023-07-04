@@ -8,6 +8,7 @@ import FundAdapter from './FundAdapter'
 import EarnAdapter from './EarnAdapter'
 import EconomicsAdapter from './EconomicsAdapter'
 import TopGainersLosersAdapter from './TopGainersLosersAdapter'
+import CryptocurrencyAdapter from './CryptocurrencyAdapter'
 
 const _rAdapter = {
   DF: IndicatorAdapter,
@@ -17,7 +18,8 @@ const _rAdapter = {
   E: EarnAdapter,
   EI: EconomicsAdapter,
   CM: EconomicsAdapter,
-  GL: TopGainersLosersAdapter
+  GL: TopGainersLosersAdapter,
+  CR: CryptocurrencyAdapter
 }
 , adapter = crAdapterRouter(_rAdapter, { isKey: true })
 , AlphaVantage = { api, adapter };

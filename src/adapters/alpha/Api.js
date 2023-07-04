@@ -189,9 +189,22 @@ const _crDfQuery = ({
 
 const _crTopGlQuery = () => _crFunctionQuery('TOP_GAINERS_LOSERS')
 
+const _crCrQuery = (
+  option
+) => {
+  const { items } = option
+  , symbol = getValue(items[0])
+  , market = getValue(items[1]);
+  _assign(option, {
+    itemCaption: `${symbol}/${market}`
+  })
+  return `${_crFunctionQuery('DIGITAL_CURRENCY_DAILY')}&symbol=${symbol}&market=${market}`;
+};
+
 const _routerQuery = {
   DF: _crDfQuery,
 
+  CR: _crCrQuery,
 
   ECONOMICS: _crEconomicsQuery,
   CM: _crCommoditiesQuery,

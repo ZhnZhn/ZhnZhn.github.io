@@ -118,8 +118,20 @@ const _crDfQuery = _ref => {
   return _crFnSymbolQuery(indicator, ticket) + "&interval=daily&time_period=" + period + "&series_type=close";
 };
 const _crTopGlQuery = () => _crFunctionQuery('TOP_GAINERS_LOSERS');
+const _crCrQuery = option => {
+  const {
+      items
+    } = option,
+    symbol = (0, _fnAdapter.getValue)(items[0]),
+    market = (0, _fnAdapter.getValue)(items[1]);
+  _assign(option, {
+    itemCaption: symbol + "/" + market
+  });
+  return _crFunctionQuery('DIGITAL_CURRENCY_DAILY') + "&symbol=" + symbol + "&market=" + market;
+};
 const _routerQuery = {
   DF: _crDfQuery,
+  CR: _crCrQuery,
   ECONOMICS: _crEconomicsQuery,
   CM: _crCommoditiesQuery,
   [_fnAdapter.DF_FN_EOD]: _crEodQuery,
