@@ -4,82 +4,29 @@ exports.__esModule = true;
 exports.default = void 0;
 var _BrowserType = require("./BrowserType");
 var _ModalDialogType = require("./ModalDialogType");
+const _crSourceMenuUrl = token => "./data/" + token + "/source-menu.json",
+  _crBrowserItem = (browserType, caption, token) => ({
+    browserType,
+    caption,
+    sourceMenuUrl: _crSourceMenuUrl(token)
+  });
 const BrowserConfig = {
-  [_BrowserType.BT_STOCK_MARKETS]: {
-    browserType: _BrowserType.BT_STOCK_MARKETS,
-    caption: 'Stock Markets',
-    sourceMenuUrl: './data/stock-markets/source-menu.json'
-  },
-  [_BrowserType.BT_EUROSTAT]: {
-    browserType: _BrowserType.BT_EUROSTAT,
-    caption: 'Eurostat Statistics',
-    sourceMenuUrl: './data/eurostat/source-menu.json'
-  },
-  [_BrowserType.BT_FGR]: {
-    browserType: _BrowserType.BT_FGR,
-    caption: 'Eurostat: FIGARO',
-    sourceMenuUrl: './data/figaro/source-menu.json'
-  },
-  [_BrowserType.BT_PE]: {
-    browserType: _BrowserType.BT_PE,
-    caption: 'Euro Indicators / PEEIs',
-    sourceMenuUrl: './data/peeis/source-menu.json'
-  },
-  [_BrowserType.BT_UN_COMTRADE]: {
-    browserType: _BrowserType.BT_UN_COMTRADE,
-    caption: 'UN Comtrade',
-    sourceMenuUrl: './data/uncomtrade/source-menu.json'
-  },
-  [_BrowserType.BT_FAOSTAT]: {
-    browserType: _BrowserType.BT_FAOSTAT,
-    caption: 'FAOSTAT',
-    sourceMenuUrl: './data/faostat/source-menu.json'
-  },
-  [_BrowserType.BT_WORLD_BANK]: {
-    browserType: _BrowserType.BT_WORLD_BANK,
-    caption: 'World Bank',
-    sourceMenuUrl: './data/world-bank/source-menu.json'
-  },
-  [_BrowserType.BT_NDL]: {
-    browserType: _BrowserType.BT_NDL,
-    caption: 'Nasdaq Data Link',
-    sourceMenuUrl: './data/ndl/source-menu.json'
-  },
-  [_BrowserType.BT_DB_NOMICS]: {
-    browserType: _BrowserType.BT_DB_NOMICS,
-    caption: 'DB Nomics',
-    sourceMenuUrl: './data/db-nomics/source-menu.json'
-  },
-  [_BrowserType.BT_ENERGY]: {
-    browserType: _BrowserType.BT_ENERGY,
-    caption: 'Energy',
-    sourceMenuUrl: './data/energy/source-menu.json'
-  },
-  [_BrowserType.BT_BLOCKCHAIN]: {
-    browserType: _BrowserType.BT_BLOCKCHAIN,
-    caption: 'Blockchain',
-    sourceMenuUrl: './data/blockchain/source-menu.json'
-  },
-  [_BrowserType.BT_COMMODITIES]: {
-    browserType: _BrowserType.BT_COMMODITIES,
-    caption: 'Commodities',
-    sourceMenuUrl: './data/commodities/source-menu.json'
-  },
-  [_BrowserType.BT_FRANCE_STATISTICS]: {
-    browserType: _BrowserType.BT_FRANCE_STATISTICS,
-    caption: 'Insee: France Statistics',
-    sourceMenuUrl: './data/statistics-france/source-menu.json'
-  },
-  [_BrowserType.BT_UK_STATISTICS]: {
-    browserType: _BrowserType.BT_UK_STATISTICS,
-    caption: 'ONS: UK Statistics',
-    sourceMenuUrl: './data/statistics-uk/source-menu.json'
-  },
-  [_BrowserType.BT_NORWAY_STATISTICS]: {
-    browserType: _BrowserType.BT_NORWAY_STATISTICS,
-    caption: 'Statistics Norway',
-    sourceMenuUrl: './data/statistics-norway/source-menu.json'
-  },
+  [_BrowserType.BT_STOCK_MARKETS]: _crBrowserItem(_BrowserType.BT_STOCK_MARKETS, 'Stock Markets', 'stock-markets'),
+  [_BrowserType.BT_EUROSTAT]: _crBrowserItem(_BrowserType.BT_EUROSTAT, 'Eurostat Statistics', 'eurostat'),
+  [_BrowserType.BT_FGR]: _crBrowserItem(_BrowserType.BT_FGR, 'Eurostat: FIGARO', 'figaro'),
+  [_BrowserType.BT_PE]: _crBrowserItem(_BrowserType.BT_PE, 'Euro Indicators / PEEIs', 'peeis'),
+  [_BrowserType.BT_UN_COMTRADE]: _crBrowserItem(_BrowserType.BT_UN_COMTRADE, 'UN Comtrade', 'uncomtrade'),
+  [_BrowserType.BT_FAOSTAT]: _crBrowserItem(_BrowserType.BT_FAOSTAT, 'FAOSTAT', 'faostat'),
+  [_BrowserType.BT_WORLD_BANK]: _crBrowserItem(_BrowserType.BT_WORLD_BANK, 'World Bank', 'world-bank'),
+  [_BrowserType.BT_NDL]: _crBrowserItem(_BrowserType.BT_NDL, 'Nasdaq Data Link', 'ndl'),
+  [_BrowserType.BT_DB_NOMICS]: _crBrowserItem(_BrowserType.BT_DB_NOMICS, 'DB Nomics', 'db-nomics'),
+  [_BrowserType.BT_ENERGY]: _crBrowserItem(_BrowserType.BT_ENERGY, 'Energy', 'energy'),
+  [_BrowserType.BT_BLOCKCHAIN]: _crBrowserItem(_BrowserType.BT_BLOCKCHAIN, 'Blockchain', 'blockchain'),
+  [_BrowserType.BT_COMMODITIES]: _crBrowserItem(_BrowserType.BT_COMMODITIES, 'Commodities', 'commodities'),
+  [_BrowserType.BT_CURRENCY]: _crBrowserItem(_BrowserType.BT_CURRENCY, 'Currency', 'currency'),
+  [_BrowserType.BT_FRANCE_STATISTICS]: _crBrowserItem(_BrowserType.BT_FRANCE_STATISTICS, 'Insee: France Statistics', 'statistics-france'),
+  [_BrowserType.BT_UK_STATISTICS]: _crBrowserItem(_BrowserType.BT_UK_STATISTICS, 'ONS: UK Statistics', 'statistics-uk'),
+  [_BrowserType.BT_NORWAY_STATISTICS]: _crBrowserItem(_BrowserType.BT_NORWAY_STATISTICS, 'Statistics Norway', 'statistics-norway'),
   [_BrowserType.BT_NORWAY_STAT_ALL]: {
     browserType: _BrowserType.BT_NORWAY_STAT_ALL,
     caption: 'Statistics Norway All',
@@ -92,11 +39,7 @@ const BrowserConfig = {
       rootUrl: 'https://data.ssb.no/api/v0/en/table'
     }
   },
-  [_BrowserType.BT_SWEDEN_STAT]: {
-    browserType: _BrowserType.BT_SWEDEN_STAT,
-    caption: 'Statistics Sweden',
-    sourceMenuUrl: './data/statistics-sweden/source-menu.json'
-  },
+  [_BrowserType.BT_SWEDEN_STAT]: _crBrowserItem(_BrowserType.BT_SWEDEN_STAT, 'Statistics Sweden', 'statistics-sweden'),
   [_BrowserType.BT_SWEDEN_STAT_ALL]: {
     browserType: _BrowserType.BT_SWEDEN_STAT_ALL,
     caption: 'Statistics Sweden All',
@@ -149,11 +92,7 @@ const BrowserConfig = {
       rootUrl: 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'
     }
   },
-  [_BrowserType.BT_US_ECONOMICS]: {
-    browserType: _BrowserType.BT_US_ECONOMICS,
-    caption: 'US Economics',
-    sourceMenuUrl: './data/us-economics/source-menu.json'
-  },
+  [_BrowserType.BT_US_ECONOMICS]: _crBrowserItem(_BrowserType.BT_US_ECONOMICS, 'US Economics', 'us-economics'),
   [_BrowserType.BT_NYSE_STOCKS]: {
     browserType: _BrowserType.BT_NYSE_STOCKS,
     caption: 'NYSE by Sectors',

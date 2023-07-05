@@ -1,6 +1,7 @@
 import {
   BT_BLOCKCHAIN,
   BT_COMMODITIES,
+  BT_CURRENCY,
   BT_WATCH_LIST,
   BT_DB_NOMICS,
   BT_FGR,
@@ -114,6 +115,7 @@ const crBrowserModel = () => ({
     _crSubMenuItem('page_04', 'World Organizations'),
     _crMenuItem(CL_BR, 'Blockchain', BT_BLOCKCHAIN),
     _crMenuItem(CL_BR, 'Commodities', BT_COMMODITIES),
+    _crMenuItem(CL_BR, 'Currency', BT_CURRENCY),
     _crMenuItem(CL_W, 'Watch List', BT_WATCH_LIST),
     {
       cn: CL_AB,

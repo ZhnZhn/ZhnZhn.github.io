@@ -40,7 +40,7 @@ const crBrowserModel = () => ({
   pageWidth: 235,
   maxPages: 2,
   initId: 'page_0',
-  page_0: [_crSubMenuItem('page_01', 'Economics'), _crSubMenuItem('page_02', 'Statistics Agencies'), _crSubMenuItem('page_03', 'Stock Markets'), _crSubMenuItem('page_04', 'World Organizations'), _crMenuItem(CL_BR, 'Blockchain', _BrowserType.BT_BLOCKCHAIN), _crMenuItem(CL_BR, 'Commodities', _BrowserType.BT_COMMODITIES), _crMenuItem(CL_W, 'Watch List', _BrowserType.BT_WATCH_LIST), {
+  page_0: [_crSubMenuItem('page_01', 'Economics'), _crSubMenuItem('page_02', 'Statistics Agencies'), _crSubMenuItem('page_03', 'Stock Markets'), _crSubMenuItem('page_04', 'World Organizations'), _crMenuItem(CL_BR, 'Blockchain', _BrowserType.BT_BLOCKCHAIN), _crMenuItem(CL_BR, 'Commodities', _BrowserType.BT_COMMODITIES), _crMenuItem(CL_BR, 'Currency', _BrowserType.BT_CURRENCY), _crMenuItem(CL_W, 'Watch List', _BrowserType.BT_WATCH_LIST), {
     cn: CL_AB,
     name: 'About',
     onClick: _ComponentActions.ComponentActions.showAbout,
