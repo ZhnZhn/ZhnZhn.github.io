@@ -97,7 +97,7 @@ const BrowserConfig = {
   ),
   [BT_BLOCKCHAIN]: _crBrowserItem(
     BT_BLOCKCHAIN,
-    'Blockchain',
+    'Blockchains',
     'blockchain'
   ),
   [BT_COMMODITIES]: _crBrowserItem(
@@ -107,7 +107,7 @@ const BrowserConfig = {
   ),
   [BT_CURRENCY]: _crBrowserItem(
     BT_CURRENCY,
-    'Currency',
+    'Currencies',
     'currency'
   ),
 
