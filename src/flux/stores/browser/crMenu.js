@@ -6,7 +6,11 @@ import {
   ChartActions
 } from '../../actions/ChartActions';
 
-const _isArr = Array.isArray;
+const _isArr = Array.isArray
+, _isBool = v => typeof v === 'boolean'
+, _getBoolProperty = property => _isBool(property)
+   ? property
+   : void 0;
 
 const _crItemHandlers = (
   dT,
@@ -38,6 +42,7 @@ const _crItems = (
 ) => items.map(item => item.id
   ? _crItem(item, menuItems, browserType)
   : {
+    isInitOpen: _getBoolProperty(item.isInitOpen),
     caption: item.caption,
     items: _crItems(item.items, menuItems, browserType)
   }
@@ -47,19 +52,18 @@ const crMenu = (
   menu=[],
   menuItems,
   browserType
-) => menu.map(menuPart => {
-   const {
-     caption,
-     isInitOpen,
-     items
-   } = menuPart;
-   return _isArr(items)
+) => menu
+ .map(menuPart => _isArr(menuPart.items)
     ? {
-        caption,
-        isInitOpen,
-        items: _crItems(items, menuItems, browserType)
+        caption: menuPart.caption,
+        isInitOpen: _getBoolProperty(menuPart.isInitOpen),
+        items: _crItems(
+          menuPart.items,
+          menuItems,
+          browserType
+        )
       }
-   : _crItem(menuPart, menuItems, browserType);
-})
+   : _crItem(menuPart, menuItems, browserType)
+);
 
 export default crMenu
