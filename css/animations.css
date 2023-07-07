@@ -8,24 +8,26 @@
   100% { background-color: rgba(0, 0, 0, 0.35); }
 }
 
-.show-popup {  
-  transform-origin: top;
-  backface-visibility: hidden;  
-  animation: showing-popup 400ms ease-out;
-  /* animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); */
+.show-popup{
+  transform-origin: 50% 0;
+  animation: showing-popup 300ms ease-in;
 }
 
-@keyframes showing-popup {
-  from {
+@keyframes showing-popup{
+  0% {
     opacity: 0;
     transform: scaleY(0);
   }
-
-  to {
+  20% {
+    opacity: 0;
+    transform: scaleY(1);
+  }
+  100% {
     opacity: 1;
     transform: scaleY(1);
   }
 }
+
 
 .show-cont {
   animation: showing-cont 400ms ease-out;
