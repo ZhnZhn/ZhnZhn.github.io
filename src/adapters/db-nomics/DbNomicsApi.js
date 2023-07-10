@@ -15,26 +15,44 @@ const _crUrlImpl = (
   dfProvider,
   dfCode,
   seriaId
-) => (!dfProvider || !dfCode || !seriaId)
-  ? `${URL}?series_ids=${DF_ID}&${TAIL}`
-  : `${URL}?series_ids=${dfProvider}/${dfCode}/${seriaId}&${TAIL}`;
+) => {
+  const _seriesId = !dfProvider || !seriaId
+    ? `${DF_ID}`
+    : !dfCode
+       ? `${dfProvider}/${seriaId}`
+       : `${dfProvider}/${dfCode}/${seriaId}`
+  return `${URL}?series_ids=${_seriesId}&${TAIL}`;
+}
 
-const _crUrl = (seriaId, option) => {
-  const { dfProvider, dfCode } = option;
+const _crUrl = (
+  seriaId,
+  option
+) => {
+  const {
+    dfProvider,
+    dfCode
+  } = option;
   option.seriaId = seriaId
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
 
-const _dfFnUrl = option => _isArr(option.items)
+const _dfFnUrl = (
+  option
+) => _isArr(option.items)
   ? _crUrl(getValue(option.items[0]), option)
   : _crUrl('', option);
 
-const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
+const _crIdUrl = (
+  option,
+  dfProvider,
+  dfCode,
+  seriaId
+) => {
   _assign(option, {seriaId, dfProvider, dfCode})
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
 
-const _trimStr = (str='') => str.trim();
+const _trimStr = str => (str||'').trim();
 const _idFnUrl = (option) => {
   const { items } = option
   , value = getValue(items[0])
@@ -46,7 +64,10 @@ const _idFnUrl = (option) => {
   );
 };
 
-const _crSeriaId = ({ dfPrefix, dfSufix }, ...args) => [
+const _crSeriaId = ({
+  dfPrefix,
+  dfSufix
+}, ...args) => [
   dfPrefix,
   ...args,
   dfSufix
@@ -62,7 +83,11 @@ const _s1FnUrl = (option) => {
 };
 
 const _s21FnUrl = (option) => {
-  const { items, df1Prefix, df2Prefix } = option
+  const {
+    items,
+    df1Prefix,
+    df2Prefix
+  } = option
   , _seriaId = _crSeriaId(option,
     df1Prefix,
     getValue(items[1]),
@@ -72,7 +97,11 @@ const _s21FnUrl = (option) => {
   return _crUrl(_seriaId, option);
 };
 const _s12FnUrl = (option) => {
-  const { items, df1Prefix, df2Prefix } = option
+  const {
+    items,
+    df1Prefix,
+    df2Prefix
+  } = option
   , _seriaId = _crSeriaId(option,
     df1Prefix,
     getValue(items[0]),
@@ -83,7 +112,10 @@ const _s12FnUrl = (option) => {
 };
 
 const _s123BFnUrl = (option) => {
-  const { items, df2Prefix } = option
+  const {
+    items,
+    df2Prefix
+  } = option
   , _seriaId = _crSeriaId(option,
     getValue(items[0]),
     df2Prefix,
@@ -136,8 +168,12 @@ const DbNomicsApi = {
     if (option.url) {
       return option.url;
     }
-    const { dfFnUrl } = option
-    , _crUrl = _rFnUrl[dfFnUrl] || _rFnUrl.DF;
+
+    const {
+      dfFnUrl
+    } = option
+    , _crUrl = (dfFnUrl && _rFnUrl[dfFnUrl])
+      || _rFnUrl.DF;
     return (option.url = _crUrl(option));
   },
 
@@ -145,13 +181,13 @@ const DbNomicsApi = {
     if (json && _isArr(json.errors)) {
       throw _crErr(json.errors[0].message);
     }
-    const docs = json && json.series && json.series.docs;
-    if (!_isArr(docs) || !docs[0]
+    const docs = ((json || {}).series || {}).docs;
+    if (!_isArr(docs)
+      || !docs[0]
       || !_isArr(docs[0].period)
       || !_isArr(docs[0].value)) {
       throw _crErr();
     }
-    return true;
   }
 };
 
