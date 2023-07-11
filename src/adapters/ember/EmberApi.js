@@ -1,30 +1,26 @@
-import { isArr } from '../AdapterFn';
+import {
+  isArr,
+  crError
+} from '../AdapterFn';
 
-const URL = './data/ember/annual';
-const GENERAL_TOTAL_GEO = 'general-total';
-
-const _isTotalShare = (
-  source,
-  metric
-) => source === 'total' && metric === 'share';
+const URL = 'https://ember-data-api-scg3n.ondigitalocean.app/ember/generation_yearly.json'
+, QUERY_TAIL = '&_shape=array';
 
 const EmberApi = {
-  getRequestUrl(option){
+  getRequestUrl(options) {
     const {
       items
-    } = option
-    , metric = items[1].v
-    , source = items[2].v
-    , geo = _isTotalShare(source, metric)
-       ? GENERAL_TOTAL_GEO
-       : items[0].v;
-    return `${URL}/${metric}/${source}/${geo}.json`;
+    } = options
+    , geo = items[0].c
+
+    return `${URL}?country_or_region__exact=${geo}&${QUERY_TAIL}`;
   },
 
-  checkResponse(json){
-    const { data } = json || {};
-    return isArr(data);
+  checkResponse(json) {
+    if (!isArr(json)) {
+      throw crError('', 'There are no data');
+    }
   }
-};
+}
 
 export default EmberApi

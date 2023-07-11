@@ -2,32 +2,22 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
 var _AdapterFn = require("../AdapterFn");
-
-const URL = './data/ember/annual';
-const GENERAL_TOTAL_GEO = 'general-total';
-
-const _isTotalShare = (source, metric) => source === 'total' && metric === 'share';
-
+const URL = 'https://ember-data-api-scg3n.ondigitalocean.app/ember/generation_yearly.json',
+  QUERY_TAIL = '&_shape=array';
 const EmberApi = {
-  getRequestUrl(option) {
+  getRequestUrl(options) {
     const {
-      items
-    } = option,
-          metric = items[1].v,
-          source = items[2].v,
-          geo = _isTotalShare(source, metric) ? GENERAL_TOTAL_GEO : items[0].v;
-    return URL + "/" + metric + "/" + source + "/" + geo + ".json";
+        items
+      } = options,
+      geo = items[0].c;
+    return URL + "?country_or_region__exact=" + geo + "&" + QUERY_TAIL;
   },
-
   checkResponse(json) {
-    const {
-      data
-    } = json || {};
-    return (0, _AdapterFn.isArr)(data);
+    if (!(0, _AdapterFn.isArr)(json)) {
+      throw (0, _AdapterFn.crError)('', 'There are no data');
+    }
   }
-
 };
 var _default = EmberApi;
 exports.default = _default;

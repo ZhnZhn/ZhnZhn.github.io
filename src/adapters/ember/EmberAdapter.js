@@ -1,8 +1,59 @@
 import crAdapterType1 from '../crAdapterType1';
-import crFromYearData from '../crFromYearData';
+import { ymdToUTC } from '../AdapterFn';
+
+const SOURCE_TOTAL = 'Total'
+, SOURCE_FOSSIL = 'Fossil'
+, SOURCE_CLEAN = 'Clean'
+, _getObjectKeys = Object.keys
+, _compareByDate = (a, b) => a[0] - b[0]
+, _crTotalData = (
+  json,
+  metric
+) => {
+  const _hm = json.reduce((hm, item) => {
+    if (item.variable === SOURCE_FOSSIL
+      || item.variable === SOURCE_CLEAN
+    ) {
+      const _pn = ''+item.year;
+      hm[_pn] = (hm[_pn] || 0) + item[metric]
+    }
+    return hm;
+  }, {});
+  return _getObjectKeys(_hm).map(key => [
+    ymdToUTC(parseInt(key, 10)),
+    _hm[key]
+  ]);
+}
+, _crSourceData = (
+  json,
+  metric,
+  source
+) => json.reduce((data, item) => {
+  if (item.variable === source) {
+    data.push([
+      ymdToUTC(item.year),
+      item[metric]
+    ])
+  }
+  return data;
+}, []);
+
+const crData = (
+  json,
+  options
+) => {
+  const { items } = options
+  , metric = items[1].v
+  , source = items[2].v
+  , data = source === SOURCE_TOTAL
+     ? _crTotalData(json, metric)
+     : _crSourceData(json, metric, source);
+
+  return data.sort(_compareByDate);
+};
 
 const EmberAdapter = crAdapterType1({
-  crData: crFromYearData
+  crData
 });
 
 export default EmberAdapter

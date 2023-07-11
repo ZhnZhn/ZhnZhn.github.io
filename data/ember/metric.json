@@ -1,1 +1,1 @@
-{"items":[{"c":"Capacity in GW","v":"capacity"},{"c":"Generation in TWh","v":"generation"},{"c":"Share of Total Generation in %","v":"share"},{"c":"Emissions in Mt CO2","v":"emissions"}]}
+{"items":[{"c":"Capacity in GW","v":"capacity_gw"},{"c":"Generation in TWh","v":"generation_twh"},{"c":"Share of Total Generation in %","v":"share_of_generation_pct"},{"c":"Emissions in Mt CO2","v":"emissions_mtco2"}]}
