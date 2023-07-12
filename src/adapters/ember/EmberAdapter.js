@@ -1,11 +1,17 @@
 import crAdapterType1 from '../crAdapterType1';
-import { ymdToUTC } from '../AdapterFn';
+import {
+  compareByDate
+} from '../compareByFn';
 
-const SOURCE_TOTAL = 'Total'
-, SOURCE_FOSSIL = 'Fossil'
+import {
+  ymdToUTC,
+  getValue,
+  isTotalData
+} from './fnAdapter';
+
+const SOURCE_FOSSIL = 'Fossil'
 , SOURCE_CLEAN = 'Clean'
 , _getObjectKeys = Object.keys
-, _compareByDate = (a, b) => a[0] - b[0]
 , _crTotalData = (
   json,
   metric
@@ -42,14 +48,16 @@ const crData = (
   json,
   options
 ) => {
-  const { items } = options
-  , metric = items[1].v
-  , source = items[2].v
-  , data = source === SOURCE_TOTAL
+  const {
+    items
+  } = options
+  , metric = getValue(items[1])
+  , source = getValue(items[2])
+  , data = isTotalData(source)
      ? _crTotalData(json, metric)
      : _crSourceData(json, metric, source);
 
-  return data.sort(_compareByDate);
+  return data.sort(compareByDate);
 };
 
 const EmberAdapter = crAdapterType1({
