@@ -10,13 +10,13 @@
   min-height: 200px;
   //height: calc(100vh + 36px);
   max-height: calc(100vh + 36px);
+  margin-left: 10px;
+  padding: 0;
 }
 
 .item-container {
-    @include base-cont();
-    padding: 0;
-    width: 635px;
-    margin-left: 16px;
+    @include base-cont();  
+    width: 635px; 
 }
 .item-container:last-child {
   margin-right: 8px;
@@ -27,7 +27,6 @@
   padding: 0 3px 35px 0;
   min-width: 270px;
   max-width: 400px;
-  margin-left: 10px;
 }
 .br-caption {
   position: relative;
@@ -42,11 +41,9 @@
 
 .about-container {
   @include base-cont();
-  padding: 0;
   padding-bottom: 35px;
   min-width: 300px;
   max-width: 660px;
-  margin-left: 16px;
 }
 
 @media screen and (min-height: 570px) {
@@ -59,6 +56,7 @@
 
 @media screen and (max-width: 600px) {
   .browser-container,
+  .about-container
   .item-container {
     margin-left: 8px;
   }
