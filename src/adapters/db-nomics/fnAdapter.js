@@ -31,11 +31,11 @@ const _crId = ({
 }) =>  joinBy('/', dfProvider, dfCode, seriaId);
 
 const _crItemLink = crItemLink
-  .bind(null, 'DB Nomics Chart');
+  .bind(null, 'DBnomics Chart');
 const _crUpdatedDate = json => {
   const _date = getIndexedAt(json).split('T')[0];
   return _date
-    ? `<p>Updated by DB Nomics on ${_date}</p>`
+    ? `<p>Updated by DBnomics on ${_date}</p>`
     : '';
 };
 const _crDescr = (json, option) => {

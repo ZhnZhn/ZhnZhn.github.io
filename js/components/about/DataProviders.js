@@ -46,7 +46,7 @@ const CL_NOTE_BR = "provider__note__br",
     color: 'black'
   };
 const _isArr = Array.isArray;
-const DP = [_ProviderLinks.default.DbNomics, _ProviderLinks.default.Ember, _ProviderLinks.default.IRENA, _ProviderLinks.default.Eurostat, _ProviderLinks.default.FaoStat, _ProviderLinks.default.WorldBank, _ProviderLinks.default.Insee, _ProviderLinks.default.ONS, _ProviderLinks.default.StatNorway, _ProviderLinks.default.StatSweden, _ProviderLinks.default.StatFinland, _ProviderLinks.default.StatDenmark, _ProviderLinks.default.StatIreland, [_ProviderLinks.default.Bsl, '25'], _ProviderLinks.default.CryptoCompare, _ProviderLinks.default.CoinGecko, _ProviderLinks.default.CoinMetrics, _ProviderLinks.default.CoinLore, _ProviderLinks.default.Coinpaprika, _ProviderLinks.default.Binance, _ProviderLinks.default.Bitstamp],
+const DP = [_ProviderLinks.default.DBnomics, _ProviderLinks.default.Ember, _ProviderLinks.default.IRENA, _ProviderLinks.default.Eurostat, _ProviderLinks.default.FaoStat, _ProviderLinks.default.WorldBank, _ProviderLinks.default.Insee, _ProviderLinks.default.ONS, _ProviderLinks.default.StatNorway, _ProviderLinks.default.StatSweden, _ProviderLinks.default.StatFinland, _ProviderLinks.default.StatDenmark, _ProviderLinks.default.StatIreland, [_ProviderLinks.default.Bsl, '25'], _ProviderLinks.default.CryptoCompare, _ProviderLinks.default.CoinGecko, _ProviderLinks.default.CoinMetrics, _ProviderLinks.default.CoinLore, _ProviderLinks.default.Coinpaprika, _ProviderLinks.default.Binance, _ProviderLinks.default.Bitstamp],
   DP_KEY = [[_ProviderLinks.default.Ndl, '50 000'], _ProviderLinks.default.AlphaVantage, _ProviderLinks.default.Iex, _ProviderLinks.default.Fmp, _ProviderLinks.default.Tw, _ProviderLinks.default.Intrinio, _ProviderLinks.default.Bea, [_ProviderLinks.default.Bsl, '500'], _ProviderLinks.default.Eia],
   DP_PR = [[_ProviderLinks.default.Ndl, '50'], _ProviderLinks.default.UnComtrade, _ProviderLinks.default.Bitfinex];
 const LinkPer = _ref => {
@@ -144,7 +144,7 @@ const DataProviders = _ref3 => {
             children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
               style: S_BLACK,
               children: "Note:\xA0"
-            }), "Local Http Proxy is required for CORS Http API services.\xA0", /*#__PURE__*/(0, _jsxRuntime.jsx)("br", {
+            }), "Local Http Proxy is required for data APIs without CORS.\xA0", /*#__PURE__*/(0, _jsxRuntime.jsx)("br", {
               className: CL_NOTE_BR
             }), "Could be set in ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
               style: S_SETTINGS,

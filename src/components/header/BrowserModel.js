@@ -37,7 +37,6 @@ import {
 const CL_ROW = 'row__pane-topic'
 , PREFIX_CL_ROW_ITEM = `${CL_ROW} item__`
 , CL_BR = `${PREFIX_CL_ROW_ITEM}browser`
-, CL_DBN = `${PREFIX_CL_ROW_ITEM}dbnomics`
 , CL_ORG = `${PREFIX_CL_ROW_ITEM}org`
 , CL_W = `${PREFIX_CL_ROW_ITEM}watch`
 , CL_AB = `${PREFIX_CL_ROW_ITEM}about`;
@@ -73,7 +72,7 @@ const _crMenuItems = (
   .map(([cn, name, id]) => _crMenuItem(cn, name, id))
 
 const PAGE_CONFIGS_01 = [
-  [CL_DBN, 'DB Nomics', BT_DB_NOMICS],
+  [CL_ORG, 'DBnomics', BT_DB_NOMICS],
   [CL_BR, 'Energy', BT_ENERGY],
   [CL_ORG, 'EU: FIGARO', BT_FGR],
   [CL_ORG, 'Euro Indicators / PEEIs', BT_PE],

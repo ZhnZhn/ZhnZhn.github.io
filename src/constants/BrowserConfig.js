@@ -87,7 +87,7 @@ const BrowserConfig = {
   ),
   [BT_DB_NOMICS]: _crBrowserItem(
     BT_DB_NOMICS,
-    'DB Nomics',
+    'DBnomics',
     'db-nomics'
   ),
   [BT_ENERGY]: _crBrowserItem(

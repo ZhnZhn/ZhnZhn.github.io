@@ -35,7 +35,7 @@ const CL_NOTE_BR = "provider__note__br"
 const _isArr = Array.isArray;
 
 const DP = [
-  Link.DbNomics,
+  Link.DBnomics,
   Link.Ember,
   Link.IRENA,
   Link.Eurostat,
@@ -142,7 +142,7 @@ const DataProviders = ({ isClose }) => (
         <div style={S_NOTE}>
           <p>
             <span style={S_BLACK}>Note:&nbsp;</span>
-            Local Http Proxy is required for CORS Http API services.&nbsp;
+            Local Http Proxy is required for data APIs without CORS.&nbsp;
             <br className={CL_NOTE_BR} />
             Could be set in <span style={S_SETTINGS}>SETTINGS&nbsp;[s]</span>.
           </p>
