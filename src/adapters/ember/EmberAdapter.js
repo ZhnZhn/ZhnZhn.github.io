@@ -13,6 +13,7 @@ const SOURCE_FOSSIL = 'Fossil'
 , SOURCE_CLEAN = 'Clean'
 , _getObjectKeys = Object.keys
 , _crTotalData = (
+  pnDate,
   json,
   metric
 ) => {
@@ -20,24 +21,25 @@ const SOURCE_FOSSIL = 'Fossil'
     if (item.variable === SOURCE_FOSSIL
       || item.variable === SOURCE_CLEAN
     ) {
-      const _pn = ''+item.year;
+      const _pn = ''+item[pnDate];
       hm[_pn] = (hm[_pn] || 0) + item[metric]
     }
     return hm;
   }, {});
-  return _getObjectKeys(_hm).map(key => [
-    ymdToUTC(parseInt(key, 10)),
+  return _getObjectKeys(_hm).map(key => [    
+    ymdToUTC(key),
     _hm[key]
   ]);
 }
 , _crSourceData = (
+  pnDate,
   json,
   metric,
   source
 ) => json.reduce((data, item) => {
   if (item.variable === source) {
     data.push([
-      ymdToUTC(item.year),
+      ymdToUTC(item[pnDate]),
       item[metric]
     ])
   }
@@ -49,13 +51,14 @@ const crData = (
   options
 ) => {
   const {
-    items
+    items,
+    pnDate
   } = options
   , metric = getValue(items[1])
   , source = getValue(items[2])
   , data = isTotalData(source)
-     ? _crTotalData(json, metric)
-     : _crSourceData(json, metric, source);
+     ? _crTotalData(pnDate, json, metric)
+     : _crSourceData(pnDate, json, metric, source);
 
   return data.sort(compareByDate);
 };
