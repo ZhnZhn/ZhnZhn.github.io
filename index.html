@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-KW515ar0K74KYuF3IIAQSEq72Ic84RLeyzhOShcCgXA='; style-src 'self' 'unsafe-inline'; img-src 'self' blob: 'self'; frame-src 'none'; child-src 'none';">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: 'self'; frame-src 'none'; child-src 'none';">
   <meta name="application-name" content="webapperc">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="Web app ERC (Economic RESTful Client) designed to help get the most out of economic statistics, uses data from various sources and displays them as charts. These can then be exported into various formats.">
@@ -21,27 +21,7 @@
   <link rel="icon" href="/css/favicon.png" sizes="32x32" type="image/png">
   <link rel="manifest" href="manifest.webmanifest">
   <base target="_blank">
-
-  <script>
-    const preloader = (function(n){
-      const hm = Object.create(null)
-      , _getEl = function(id){
-        if (!hm[id]){hm[id] = document.getElementById(id);}
-        return hm[id];
-      }
-      , _setStyle = function(id,n,v){
-         const el = _getEl(id);
-         if (el) {el.style[n]=v;}
-         return;
-      };
-      return {
-        hiding:function(){
-          _setStyle('preloader','opacity',0.5);
-        }
-      };
-    })(4);
-  </script>  
-
+  
   <style>
   [data-loader='circle']
   {
@@ -150,9 +130,9 @@
       </div>
    </noscript>
  
-  <script src="app/runtime_11c3029466c3ae481bad.js" defer></script>    
-  <script src="app/lib_2e6dd1577ce4ec35f679.js" defer></script> 
-  <script src="app/erc_80dc4ec8a1abc3846577.js" defer></script>    
+   <script src="app/runtime_11c3029466c3ae481bad.js" defer></script>    
+   <script src="app/lib_6858e1e3bf1a9951bc18.js" defer></script> 
+   <script src="app/erc_3ac46b14aa53ce4fea8a.js" defer></script>    
 
 </body>
 </html>
