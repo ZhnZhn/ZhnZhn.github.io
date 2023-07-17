@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.crStackedConfig = exports.crSparkData = exports.calcTotal = void 0;
 var _big = _interopRequireDefault(require("big.js"));
-var _compareByFn = require("../compareByFn");
 var _ChartType = require("../../constants/ChartType");
 var _MonoColorFn = require("../../charts/MonoColorFn");
 var _StackedConfigFn = require("../../charts/StackedConfigFn");
@@ -54,9 +53,8 @@ const _crReferenceDataAndTotal = (jsonData, items) => {
       _bTotal = _bTotal.plus(y);
     }
   });
-  _data.sort(_compareByFn.compareByY).reverse();
   return {
-    referenceData: _data,
+    referenceData: (0, _NdlFn.sortDescByPnY)(_data),
     bTotal: _bTotal
   };
 };

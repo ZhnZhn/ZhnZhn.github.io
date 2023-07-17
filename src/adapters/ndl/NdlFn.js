@@ -1,4 +1,5 @@
 export { valueMoving } from '../AdapterFn';
+export { sortDescByPnY } from '../compareByFn'
 
 import Big from 'big.js';
 
@@ -8,6 +9,7 @@ import {
   joinBy,
   mlsToDmy
 } from '../AdapterFn';
+
 import formatAllNumber from '../../utils/formatAllNumber';
 import {
   calcPercent,
@@ -36,6 +38,7 @@ const _crLinkId = (
 ) => database_code && dataset_code
   ? `${database_code}/${dataset_code}`
   : void 0;
+
 
 export const getData = ({
   dataset,

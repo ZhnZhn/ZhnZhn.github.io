@@ -2,9 +2,11 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.valueMoving = exports.setTitleToConfig = exports.isPrevDateAfter = exports.getRecentDate = exports.getDataColumnIndex = exports.getData = exports.getColumnNames = exports.findColumnIndex = exports.crZhConfig = exports.crValueMoving = exports.crPercent = exports.crDatasetInfo = void 0;
+exports.valueMoving = exports.sortDescByPnY = exports.setTitleToConfig = exports.isPrevDateAfter = exports.getRecentDate = exports.getDataColumnIndex = exports.getData = exports.getColumnNames = exports.findColumnIndex = exports.crZhConfig = exports.crValueMoving = exports.crPercent = exports.crDatasetInfo = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.valueMoving = _AdapterFn.valueMoving;
+var _compareByFn = require("../compareByFn");
+exports.sortDescByPnY = _compareByFn.sortDescByPnY;
 var _big = _interopRequireDefault(require("big.js"));
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 var _mathFn = require("../../math/mathFn");

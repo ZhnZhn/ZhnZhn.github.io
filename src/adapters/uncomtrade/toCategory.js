@@ -7,10 +7,7 @@ import {
   toConfig
 } from '../../charts/configBuilderFn';
 import { addColorsTo } from '../TreeMapFn';
-import {
-  compareByY,
-  sortDescBy
-} from '../compareByFn';
+import { sortDescByPnY } from '../compareByFn';
 
 import {
   isTotalByAll,
@@ -72,7 +69,7 @@ const _crCategoriesAndAddColors = (
   data,
   total
 ) => {
-  sortDescBy(compareByY, data)
+  sortDescByPnY(data)  
   addColorsTo({ data, total, propName: "y" })
   return data.map(p => p.c);
 }

@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _big = _interopRequireDefault(require("big.js"));
-var _compareByFn = require("../compareByFn");
 var _ChartType = require("../../constants/ChartType");
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 var _Chart = require("../../charts/Chart");
@@ -58,7 +57,6 @@ const _createTopDonutData = _ref => {
   return arr;
 };
 const _crYear = yearStr => yearStr ? yearStr.split('-')[0] : '';
-const _sortData = data => data.sort(_compareByFn.compareByY).reverse();
 const toSemiDonut = (json, option) => {
   const config = (0, _PieConfigFn.crPieConfig)(),
     {
@@ -98,11 +96,11 @@ const toSemiDonut = (json, option) => {
   });
   const _dataTop1 = _createTopDonutData({
     isPercent: true,
-    data: _sortData(_data1),
+    data: (0, _NdlFn.sortDescByPnY)(_data1),
     bTotal: _bTotal1
   });
   const _dataTop2 = _createTopDonutData({
-    data: _sortData(_data2),
+    data: (0, _NdlFn.sortDescByPnY)(_data2),
     bTotal: _bTotal2
   });
   config.series = [(0, _PieConfigFn.crInnerPieSeria)({

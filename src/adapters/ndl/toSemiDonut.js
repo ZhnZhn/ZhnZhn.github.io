@@ -1,7 +1,5 @@
 import Big from 'big.js';
 
-import { compareByY } from '../compareByFn';
-
 import { CHT_SEMI_DONUT } from '../../constants/ChartType';
 import formatAllNumber from '../../utils/formatAllNumber';
 import {
@@ -17,7 +15,8 @@ import {
 import {
   setTitleToConfig,
   crDatasetInfo,
-  crPercent
+  crPercent,
+  sortDescByPnY
 } from './NdlFn';
 import {
   crValueMoving,
@@ -81,8 +80,6 @@ const _createTopDonutData = ({
 const _crYear = yearStr =>  yearStr
   ? yearStr.split('-')[0]
   : '';
-const _sortData = data => data
- .sort(compareByY).reverse();
 
 const toSemiDonut = (json, option) => {
    const config = crPieConfig()
@@ -116,11 +113,11 @@ const toSemiDonut = (json, option) => {
 
    const _dataTop1 = _createTopDonutData({
      isPercent: true,
-     data: _sortData(_data1),
+     data: sortDescByPnY(_data1),
      bTotal: _bTotal1,
   });
    const _dataTop2 = _createTopDonutData({
-     data: _sortData(_data2),
+     data: sortDescByPnY(_data2),
      bTotal: _bTotal2
    });
 

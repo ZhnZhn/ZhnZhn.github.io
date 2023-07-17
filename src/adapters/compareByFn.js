@@ -2,7 +2,7 @@ import fCompareBy from '../utils/fCompareBy';
 import fCompareByTwoProps from '../utils/fCompareByTwoProps';
 
 export const compareByDate = fCompareBy(0)
-, compareByY = fCompareBy('y')
+, compareByPnY = fCompareBy('y')
 , compareByValue = fCompareBy('value')
 , compareByValueId = fCompareByTwoProps('value', 'id')
 
@@ -10,3 +10,7 @@ export const compareByDate = fCompareBy(0)
   compareBy,
   data
 ) => data.sort(compareBy).reverse()
+, sortDescByPnY = data => sortDescBy(
+  compareByPnY,
+  data
+)

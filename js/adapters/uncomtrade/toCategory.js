@@ -33,7 +33,7 @@ const _fetchHs = () => _hmHs ? Promise.resolve(_hmHs) : fetch(URL_HS_CHAPTERS).t
   return _hmHs = (json || {}).hm;
 }).catch(() => void 0);
 const _crCategoriesAndAddColors = (data, total) => {
-  (0, _compareByFn.sortDescBy)(_compareByFn.compareByY, data);
+  (0, _compareByFn.sortDescByPnY)(data);
   (0, _TreeMapFn.addColorsTo)({
     data,
     total,

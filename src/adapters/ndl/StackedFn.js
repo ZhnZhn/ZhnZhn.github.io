@@ -1,6 +1,5 @@
 import Big from 'big.js';
 
-import { compareByY } from '../compareByFn';
 import {
   CHT_STACKED_AREA,
   CHT_STACKED_AREA_PERCENT,
@@ -13,7 +12,10 @@ import {
   crStackedColumnSeria
 } from '../../charts/StackedConfigFn';
 
-import { crPercent } from './NdlFn';
+import {
+  crPercent,
+  sortDescByPnY
+} from './NdlFn';
 
 const _rFactorySeria = {
   [CHT_STACKED_AREA]: crStackedAreaSeria,
@@ -61,10 +63,8 @@ const _crReferenceDataAndTotal = (
     }
   });
 
-  _data.sort(compareByY).reverse()
-
   return {
-    referenceData: _data,
+    referenceData: sortDescByPnY(_data),
     bTotal: _bTotal
   };
 }
