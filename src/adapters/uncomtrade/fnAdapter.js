@@ -3,6 +3,9 @@ export {
   valueMoving,
   roundBy
 } from '../AdapterFn';
+export {
+  sortDescByPnValue
+} from '../compareByFn';
 
 import domSanitize from '../../utils/domSanitize';
 import formatNumber from '../../utils/formatNumber';

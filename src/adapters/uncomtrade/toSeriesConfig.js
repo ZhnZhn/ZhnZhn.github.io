@@ -15,7 +15,6 @@ import {
 import { getSeriaColorByIndex } from '../../charts/ChartTheme';
 import { setSeriaDataTo } from '../../charts/ChartConfigFn';
 
-import { compareByValue } from '../compareByFn';
 import { legendItem } from '../legendFn'
 
 import {
@@ -95,7 +94,7 @@ const _addSeriesFromHmTo = ({
  }) => {
     let i=fromIndex;
 
-    toSeriaNames(hm, compareByValue)
+    toSeriaNames(hm)
       .forEach((item, itemIndex) => {
          if (itemIndex >= i) {
            const name = item.name;

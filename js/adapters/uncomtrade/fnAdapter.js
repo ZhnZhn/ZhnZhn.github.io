@@ -2,11 +2,13 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdToUTC = exports.valueMoving = exports.roundBy = exports.isTotalByAll = exports.isPositiveNumber = exports.isAggrCalculatedCase = exports.isAggrByTotalWorld = exports.isAggr = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = void 0;
+exports.ymdToUTC = exports.valueMoving = exports.sortDescByPnValue = exports.roundBy = exports.isTotalByAll = exports.isPositiveNumber = exports.isAggrCalculatedCase = exports.isAggrByTotalWorld = exports.isAggr = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.valueMoving = _AdapterFn.valueMoving;
 exports.roundBy = _AdapterFn.roundBy;
+var _compareByFn = require("../compareByFn");
+exports.sortDescByPnValue = _compareByFn.sortDescByPnValue;
 var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
 var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 var _fnDescr = require("./fnDescr");

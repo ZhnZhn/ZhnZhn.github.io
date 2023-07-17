@@ -48,9 +48,8 @@ const _crDataAndTotal = function (jsonData, items, bYearTotals) {
       });
     }
   });
-  data.sort(_compareByFn.compareByValue).reverse();
   return {
-    data,
+    data: (0, _compareByFn.sortDescByPnValue)(data),
     bTotal
   };
 };

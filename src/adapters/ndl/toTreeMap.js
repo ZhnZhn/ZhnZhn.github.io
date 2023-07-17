@@ -1,6 +1,6 @@
 import Big from 'big.js';
 
-import { compareByValue } from '../compareByFn';
+import { sortDescByPnValue } from '../compareByFn';
 
 import { CHT_TREE_MAP } from '../../constants/ChartType';
 import {
@@ -65,10 +65,11 @@ const _crDataAndTotal = (
         });
     }
   });
-
-  data.sort(compareByValue).reverse();
-
-  return { data, bTotal };
+    
+  return {
+    data: sortDescByPnValue(data),
+    bTotal
+  };
 }
 
 const _calcLevelAndSetPercent = (

@@ -9,7 +9,6 @@ var _Chart = require("../../charts/Chart");
 var _Tooltip = require("../../charts/Tooltip");
 var _ChartTheme = require("../../charts/ChartTheme");
 var _ChartConfigFn = require("../../charts/ChartConfigFn");
-var _compareByFn = require("../compareByFn");
 var _legendFn = require("../legendFn");
 var _fnHm = require("./fnHm");
 var _fnLegend = require("./fnLegend");
@@ -59,7 +58,7 @@ const _addSeriesFromHmTo = _ref2 => {
     fromIndex
   } = _ref2;
   let i = fromIndex;
-  (0, _fnHm.toSeriaNames)(hm, _compareByFn.compareByValue).forEach((item, itemIndex) => {
+  (0, _fnHm.toSeriaNames)(hm).forEach((item, itemIndex) => {
     if (itemIndex >= i) {
       const name = item.name;
       _addSeriaTo({
