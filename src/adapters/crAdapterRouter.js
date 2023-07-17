@@ -1,18 +1,38 @@
 
 const _isFn = fn => typeof fn === 'function';
 
-const getAdapter = (rAdapter, option) => {
-  const { _pn='dfSubId' } = rAdapter
-  , routeId = option[_pn]
-  , adapter = routeId && rAdapter[routeId]
+const _getDfRoute = (
+  option,
+  rAdapter
+) => {
+  const {
+    _pn='dfSubId'
+  } = rAdapter
+  , routeId = option[_pn];
+  return routeId && rAdapter[routeId]
      || rAdapter.DF;
-  return _isFn(adapter)
-    ? adapter()
-    : adapter;
+}
+
+const _fGetAdapter = (
+  getRoute=_getDfRoute,
+  rAdapter
+) => (option) => {
+  const routeAdapter = getRoute(option, rAdapter)
+  return _isFn(routeAdapter)
+    ? routeAdapter()
+    : routeAdapter;
 };
 
-const crAdapterRouter = (rAdapter, { isKey, crDfKey } = {}) => {
-  const _getAdapter = getAdapter.bind(null, rAdapter);
+const crAdapterRouter = (
+  rAdapter, {
+  getRoute,
+  isKey,
+  crDfKey
+} = {}) => {
+  const _getAdapter = _fGetAdapter(
+    getRoute,
+    rAdapter
+  );
   const _adapter = {
     crKey: isKey || crDfKey
       ? (option) => {
