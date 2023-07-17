@@ -6,8 +6,8 @@ exports.default = void 0;
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _TreeMapFn = require("../TreeMapFn");
+var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
-const _compareByValue = (a, b) => b.value - a.value;
 const _addPercentAndColorToData = (data, total) => {
   if (total !== 0) {
     const _onePercent = total / 100;
@@ -15,7 +15,7 @@ const _addPercentAndColorToData = (data, total) => {
       item.percent = (0, _fnAdapter.roundBy)(item.value / _onePercent);
       item.name = (0, _TreeMapFn.crPointName)(item.label, item.percent > 1 ? item.percent : '');
     });
-    data.sort(_compareByValue);
+    data.sort(_compareByFn.compareByValue).reverse();
     (0, _TreeMapFn.addColorsTo)({
       data,
       total

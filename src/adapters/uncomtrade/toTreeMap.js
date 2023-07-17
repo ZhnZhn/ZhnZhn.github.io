@@ -9,6 +9,9 @@ import {
   addColorsTo,
   crPointName
 } from '../TreeMapFn';
+import {
+  compareByValue
+} from '../compareByFn';
 
 import {
   isPositiveNumber,
@@ -24,11 +27,6 @@ import {
   crZhConfig
 } from './fnAdapter';
 
-const _compareByValue = (
-  a,
-  b
-) => b.value - a.value;
-
 const _addPercentAndColorToData = (
   data,
   total
@@ -42,7 +40,7 @@ const _addPercentAndColorToData = (
         item.percent > 1 ? item.percent : ''
       )
     })
-    data.sort(_compareByValue)
+    data.sort(compareByValue).reverse()
     addColorsTo({ data, total })
   } else {
     data = []
