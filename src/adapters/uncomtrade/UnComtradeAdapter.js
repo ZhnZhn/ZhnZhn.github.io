@@ -1,17 +1,10 @@
 import { crChartId } from './fnAdapter';
-import toConfig from './toConfig';
+import getRoute from './toConfig';
+import crAdapterRouter from '../crAdapterRouter';
 
-const UnComtradeAdapter = {
-  crKey: crChartId,
-
-  toConfig(json, option){
-    return {
-       config: toConfig(json, option)
-       //isDrawDeltaExtrems: false,
-       //isNotZoomToMinMax: false
-    };
-  }
-
-};
+const UnComtradeAdapter = crAdapterRouter(void 0, {
+  getRoute,
+  crDfKey: crChartId
+});
 
 export default UnComtradeAdapter

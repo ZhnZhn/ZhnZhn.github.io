@@ -7,16 +7,23 @@ import toTreeMap from './toTreeMap';
 import toCategory from './toCategory';
 import toSeriesConfig from './toSeriesConfig';
 
+const _fToConfig = (
+  toConfig
+) => (json, option) => ({
+  config: toConfig(json, option)
+});
+
 const toConfig = (
-  json,
   option
 ) => {
-  if (isAggr(option.two) || isAggrByTotalWorld(option)) {
-    return option.chart === 'BAR'
-      ? toCategory(json, option)
-      : toTreeMap(json, option);
-  }
-  return toSeriesConfig(json, option);
+  const toConfig = isAggr(option.two) || isAggrByTotalWorld(option)
+    ? option.chart === 'BAR'
+        ? toCategory
+        : toTreeMap
+    : toSeriesConfig;
+  return {
+    toConfig: _fToConfig(toConfig)
+  };
 }
 
 export default toConfig

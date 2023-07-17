@@ -5,13 +5,19 @@
  ],
  "file": "../../../src/adapters/uncomtrade/UnComtradeAdapter.js",
  "names": [
+  "_fnAdapter",
+  "require",
+  "_toConfig",
+  "_interopRequireDefault",
+  "_crAdapterRouter",
   "UnComtradeAdapter",
-  "crKey",
+  "crAdapterRouter",
+  "getRoute",
+  "crDfKey",
   "crChartId",
-  "toConfig",
-  "json",
-  "option",
-  "config"
+  "_default",
+  "exports",
+  "default"
  ],
- "mappings": ";;;;;;;AAAA;;AACA;;AAEA,MAAMA,iBAAiB,GAAG;AACxBC,EAAAA,KAAK,EAAEC,oBADiB;;AAGxBC,EAAAA,QAAQ,CAACC,IAAD,EAAOC,MAAP,EAAc;AACpB,WAAO;AACJC,MAAAA,MAAM,EAAE,uBAASF,IAAT,EAAeC,MAAf,CADJ,CAEJ;AACA;;AAHI,KAAP;AAKD;;AATuB,CAA1B;eAaeL,iB"
+ "mappings": ";;;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AACA,IAAAC,SAAA,GAAAC,sBAAA,CAAAF,OAAA;AACA,IAAAG,gBAAA,GAAAD,sBAAA,CAAAF,OAAA;AAEA,MAAMI,iBAAiB,GAAG,IAAAC,wBAAe,EAAC,KAAK,CAAC,EAAE;EAChDC,QAAQ,EAARA,iBAAQ;EACRC,OAAO,EAAEC;AACX,CAAC,CAAC;AAAC,IAAAC,QAAA,GAEYL,iBAAiB;AAAAM,OAAA,CAAAC,OAAA,GAAAF,QAAA"
 }
