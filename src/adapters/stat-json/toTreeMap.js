@@ -14,6 +14,9 @@ import {
   crPointName
 } from '../TreeMapFn';
 import {
+  sortDescByPnValue
+} from '../compareByFn';
+import {
   crTitle,
   crTid,
   crChartOption,
@@ -60,8 +63,6 @@ const _fIsPoint = (
    */
    return p.y !== null && p.y !== 0;
 };
-
-const _compareByValue = (a, b) => b.value - a.value;
 
 const _crCategory = (
   option,
@@ -120,13 +121,11 @@ const _crData = (
     depth,
     cTotal
   } = option;
-  if (!_isArr(values)) {
-    return [];
-  }
-  return values
+
+  return _isArr(values) ? sortDescByPnValue(values
     .map(_fCrTreeMapPoint(categories, Tid))
     .filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth))
-    .sort(_compareByValue);
+  ) : [];
 };
 
 const toTreeMap = {

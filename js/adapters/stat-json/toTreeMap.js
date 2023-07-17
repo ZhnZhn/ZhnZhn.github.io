@@ -8,6 +8,7 @@ var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _TreeMapFn = require("../TreeMapFn");
+var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
 const _isArr = Array.isArray;
 const _fCrTreeMapPoint = (c, title) => (v, i) => {
@@ -41,7 +42,6 @@ const _fIsPoint = (dfT, hm, depth) => p => {
   */
   return p.y !== null && p.y !== 0;
 };
-const _compareByValue = (a, b) => b.value - a.value;
 const _crCategory = (option, by, depth) => {
   const {
     items = [],
@@ -82,10 +82,7 @@ const _crData = (values, categories, Tid, option) => {
     depth,
     cTotal
   } = option;
-  if (!_isArr(values)) {
-    return [];
-  }
-  return values.map(_fCrTreeMapPoint(categories, Tid)).filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth)).sort(_compareByValue);
+  return _isArr(values) ? (0, _compareByFn.sortDescByPnValue)(values.map(_fCrTreeMapPoint(categories, Tid)).filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth))) : [];
 };
 const toTreeMap = {
   crConfig: (json, option) => {
