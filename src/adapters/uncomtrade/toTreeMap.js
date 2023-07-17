@@ -10,7 +10,8 @@ import {
   crPointName
 } from '../TreeMapFn';
 import {
-  compareByValue
+  compareByValue,
+  sortDescBy
 } from '../compareByFn';
 
 import {
@@ -40,7 +41,7 @@ const _addPercentAndColorToData = (
         item.percent > 1 ? item.percent : ''
       )
     })
-    data.sort(compareByValue).reverse()
+    sortDescBy(compareByValue, data)  
     addColorsTo({ data, total })
   } else {
     data = []

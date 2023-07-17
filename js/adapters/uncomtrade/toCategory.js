@@ -6,6 +6,7 @@ exports.default = void 0;
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _TreeMapFn = require("../TreeMapFn");
+var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
 const _crConfig = (json, option, data, categories, itemValue) => {
   const title = (0, _fnAdapter.crCategoryTitle)(option);
@@ -31,9 +32,8 @@ const _fetchHs = () => _hmHs ? Promise.resolve(_hmHs) : fetch(URL_HS_CHAPTERS).t
 }).then(json => {
   return _hmHs = (json || {}).hm;
 }).catch(() => void 0);
-const _compareByY = (a, b) => b.y - a.y;
 const _crCategoriesAndAddColors = (data, total) => {
-  data.sort(_compareByY);
+  (0, _compareByFn.sortDescBy)(_compareByFn.compareByY, data);
   (0, _TreeMapFn.addColorsTo)({
     data,
     total,

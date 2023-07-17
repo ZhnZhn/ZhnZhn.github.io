@@ -1,4 +1,5 @@
 import { roundBy } from '../AdapterFn';
+import { sortDescBy } from '../compareByFn';
 
 import {
   NET_WEIGHT,
@@ -95,13 +96,14 @@ const _getRecentValueForSort = points => {
 export const toSeriaNames = (
   hm,
   compareBy
-) => _getObjectKeys(hm)
- .map(propName => ({
-   value: _getRecentValueForSort(hm[propName]),
-   name: propName
- }))
- .sort(compareBy)
- .reverse()
+) => sortDescBy(
+  compareBy,
+  _getObjectKeys(hm)
+    .map(propName => ({
+      value: _getRecentValueForSort(hm[propName]),
+      name: propName
+    }))
+ ) 
 
 export const toHmCategories = (
   dataset,
