@@ -1,14 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var fCompareBy = function fCompareBy(by) {
-  return function (arrOrObjA, arrOrObjB) {
-    if (arrOrObjA[by] < arrOrObjB[by]) return -1;else if (arrOrObjA[by] === arrOrObjB[by]) return 0;else return 1;
-  };
-};
-
+exports.default = void 0;
+const fCompareBy = by => (arrOrObjA, arrOrObjB) => (arrOrObjA || {})[by] < (arrOrObjB || {})[by] ? -1 : (arrOrObjA || {})[by] === (arrOrObjB || {})[by] ? 0 : 1;
 var _default = fCompareBy;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=fCompareBy.js.map
