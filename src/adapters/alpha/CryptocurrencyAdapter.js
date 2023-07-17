@@ -1,4 +1,5 @@
 import crAdapterType1 from '../crAdapterType1';
+import { compareByDate } from '../compareByFn';
 import {
   getValue,
   ymdToUTC
@@ -7,8 +8,7 @@ import {
 const _getObjectKeys = Object.keys
 , _crPnClose = (
   option
-) => `4a. close (${getValue(option.items[1])})`
-, _compareByY = (a, b) => a[0] - b[0];
+) => `4a. close (${getValue(option.items[1])})`;
 
 const crData = (
   json,
@@ -21,7 +21,7 @@ const crData = (
         ymdToUTC(k),
         parseFloat(_objData[k][_pnClose])
      ])
-     .sort(_compareByY) : [];
+     .sort(compareByDate) : [];
 };
 
 let _adapter;
