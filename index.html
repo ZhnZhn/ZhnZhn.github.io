@@ -22,34 +22,18 @@
   <link rel="manifest" href="manifest.webmanifest">
   <base target="_blank">
   
-  <style>
-  [data-loader='circle']
-  {
-    width: 2.5em;
-    height: 2.5em;
-   -webkit-animation: circle infinite 1.25s linear;
-      -moz-animation: circle infinite 0.75s linear;
-        -o-animation: circle infinite 1.25s linear;
-           animation: circle infinite 1.25s linear;
-   border: 3px solid #2f7ed8;
-   border-top-color: transparent;
-   border-radius: 100%;
- }
-@-webkit-keyframes circle
-{ 100% {
-  -webkit-transform: rotate(360deg);
-          transform: rotate(360deg);
-} }
-@-moz-keyframes circle
-{ 100% { transform: rotate(360deg);}}
-@-o-keyframes circle
-{ 100% {
-  -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-} }
-@keyframes circle
-{ 100% {transform: rotate(360deg);}}
-
+<style>
+[data-loader='circle'] {
+  width: 2.5em;
+  height: 2.5em;   
+  animation: circle infinite 1.25s linear;
+  border: 3px solid #2f7ed8;
+  border-top-color: transparent;
+  border-radius: 100%;
+}
+@keyframes circle { 
+ 100% {transform: rotate(360deg);}
+}
 .wrapper {
   margin: 0 auto;
   margin-top: 3em;
@@ -68,10 +52,10 @@
   margin: 0.5em auto;
 }
 .wrapper__descr {
-   margin-top: 1em;
-   font-family: "Roboto", "Arial", "Lato", sans-serif;
-   font-size: 1em;
-   font-weight: bold;
+  margin-top: 1em;
+  font-family: "Roboto", "Arial", "Lato", sans-serif;
+  font-size: 1em;
+  font-weight: bold;
 }
 .wrapper__msg {
   color: gray;
@@ -83,6 +67,7 @@
 }
 </style>
 
+  <link as="image/svg+xml" href="css/sprite.svg">
   <link rel="stylesheet" href="css/app-c01b3bb2bd.min.css">    
 
 </head>
@@ -130,9 +115,9 @@
       </div>
    </noscript>
  
-   <script src="app/runtime_11c3029466c3ae481bad.js" defer></script>    
-   <script src="app/lib_6858e1e3bf1a9951bc18.js" defer></script> 
-   <script src="app/erc_3ac46b14aa53ce4fea8a.js" defer></script>    
+  <script src="app/runtime_620a7f73ef480953a749.js" defer></script>    
+  <script src="app/lib_6858e1e3bf1a9951bc18.js" defer></script> 
+  <script src="app/erc_61cc2c72ae1abc27f7f0.js" defer></script>    
 
 </body>
 </html>
