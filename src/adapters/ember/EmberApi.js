@@ -1,4 +1,5 @@
 import {
+  isCategory,
   isArr,
   crError,
   getCaption,
@@ -36,7 +37,7 @@ const _crUrl = (
    sourceQuery
  ] = _crQueryParams(items);
 
-  return `${API_URL}/${pathToken}?country_or_region__exact=${geo}&${QUERY_TAIL}${sourceQuery}`;
+  return `${API_URL}/${pathToken}?country_or_region__exact=${geo}${QUERY_TAIL}${sourceQuery}`;
 }
 
 const EmberApi = {
@@ -46,6 +47,11 @@ const EmberApi = {
     options.pnDate = _isMonthlyRoute
       ? 'date'
       : 'year';
+
+    if (isCategory(options.seriaType)) {
+      const _sourceQuery = _crQueryParams(options.items)[1];
+      return `${API_URL}/${YEARLY_JSON}?year__exact=${options.time}${QUERY_TAIL}${_sourceQuery}`;
+    }
 
     return _isMonthlyRoute
       ? `${_crUrl(MONTHLY_JSON, options)}&date__gte=${options.fromDate}`
