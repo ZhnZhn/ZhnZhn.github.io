@@ -1,32 +1,33 @@
 import crAdapterType1 from '../crAdapterType1';
+import crAdapterRouter from '../crAdapterRouter';
 import {
   compareByDate
 } from '../compareByFn';
+import toCategoryAdapter from './toCategoryAdapter';
 
 import {
+  isTotalVariable,
+  isCategory,
   ymdToUTC,
   getValue,
+  reduceToHmBy,
   isTotalData
 } from './fnAdapter';
 
-const SOURCE_FOSSIL = 'Fossil'
-, SOURCE_CLEAN = 'Clean'
-, _getObjectKeys = Object.keys
+const _getObjectKeys = Object.keys
 , _crTotalData = (
   pnDate,
   json,
   metric
 ) => {
-  const _hm = json.reduce((hm, item) => {
-    if (item.variable === SOURCE_FOSSIL
-      || item.variable === SOURCE_CLEAN
-    ) {
+  const _hm = reduceToHmBy((hm, item) => {
+    if (isTotalVariable(item)) {
       const _pn = ''+item[pnDate];
       hm[_pn] = (hm[_pn] || 0) + item[metric]
     }
     return hm;
-  }, {});
-  return _getObjectKeys(_hm).map(key => [    
+  }, json);
+  return _getObjectKeys(_hm).map(key => [
     ymdToUTC(key),
     _hm[key]
   ]);
@@ -63,8 +64,14 @@ const crData = (
   return data.sort(compareByDate);
 };
 
-const EmberAdapter = crAdapterType1({
-  crData
-});
+const toLineAdapter = crAdapterType1({ crData });
+
+const getRoute = (
+  option
+) => isCategory(option.seriaType)
+  ? toCategoryAdapter
+  : toLineAdapter
+
+const EmberAdapter = crAdapterRouter(void 0, { getRoute })
 
 export default EmberAdapter
