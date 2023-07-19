@@ -1,6 +1,5 @@
 export {
-  isCategory,
-  isCategoryCluster
+  isCategory
 } from '../CategoryFn';
 export {
   isArr,

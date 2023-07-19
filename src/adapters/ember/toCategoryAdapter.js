@@ -1,9 +1,9 @@
 import domSanitize from '../../utils/domSanitize';
-import crCategoryConfig from '../crCategoryConfig';
-import fToCategorySeries from '../fToCategorySeries';
+
+import crAdapterCategory from '../crAdapterCategory';
 import { sortDescByPnY } from '../compareByFn';
+
 import {
-  isCategoryCluster,
   isTotalVariable,
   isTotalData,
   getCountryName,
@@ -12,17 +12,15 @@ import {
   roundBy
 } from './fnAdapter';
 
-const _getObjectKeys = Object.keys;
-
-const _crCategoryPoint = (
+const _getObjectKeys = Object.keys
+, _crCategoryPoint = (
   y,
   n
 ) => {
   const c = domSanitize(n);
   return { y, name: c, c };
 }
-
-const _crTotalData = (
+, _crTotalData = (
   json,
   pnMetric
 ) => {
@@ -38,9 +36,8 @@ const _crTotalData = (
       roundBy(hm[k], 2),
       k
     ));
-};
-
-const _crData = (
+}
+, _crSourceData = (
   json,
   pnMetric
 ) => json.reduce((data, item) => {
@@ -53,48 +50,19 @@ const _crData = (
   }
   return data;
 }, [])
-
-const toCategoryAdapter = {
-  toConfig: (json, option) => {
-    const {
-      title,
-      subtitle,
-      seriaType,
-      seriaColor,
-      _itemKey,
-      time,
-      dataSource,
-      items
-    } = option
-    , pnMetric = getValue(items[1])
-    , source = getValue(items[2])
-    , data = isTotalData(source)
-       ? _crTotalData(json, pnMetric)
-       : _crData(json, pnMetric)
-
-    , _arrSeriaType = seriaType.split('_')
-    , config = crCategoryConfig(
-        subtitle,
-        title,
-        _arrSeriaType[0],
-        seriaColor,
-        sortDescByPnY(data),
-        isCategoryCluster(seriaType)
-    );
-
-    config.zhConfig = {
-      id: _itemKey,
-      key: _itemKey,
-      itemCaption: `${subtitle}: ${title}`,
-      itemTime: time,
-      dataSource
-    }
-    return { config };
-  }
+, _crData = (
+  json,
+  options
+) => {
+  const { items } = options
+  , pnMetric = getValue(items[1])
+  , source = getValue(items[2]);
+  return sortDescByPnY(
+    isTotalData(source)
+      ? _crTotalData(json, pnMetric)
+      : _crSourceData(json, pnMetric)
+  );
 }
-
-toCategoryAdapter.toSeries = fToCategorySeries(
-  toCategoryAdapter.toConfig
-)
+, toCategoryAdapter = crAdapterCategory(_crData);
 
 export default toCategoryAdapter
