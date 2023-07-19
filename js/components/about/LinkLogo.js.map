@@ -1,0 +1,27 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/about/LinkLogo.js"
+ ],
+ "file": "../../../src/components/about/LinkLogo.js",
+ "names": [
+  "_toLink",
+  "_interopRequireDefault",
+  "require",
+  "_jsxRuntime",
+  "CL_LOGO",
+  "LinkLogo",
+  "_ref",
+  "className",
+  "href",
+  "caption",
+  "ariaLabel",
+  "jsx",
+  "toLink",
+  "children",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,OAAA,GAAAC,sBAAA,CAAAC,OAAA;AAAmC,IAAAC,WAAA,GAAAD,OAAA;AAEnC,MAAME,OAAO,GAAG,8BAA8B;AAE9C,MAAMC,QAAQ,GAAGC,IAAA;EAAA,IAAC;IAChBC,SAAS,GAACH,OAAO;IACjBI,IAAI;IACJC,OAAO;IACPC,SAAS,GAACD;EACZ,CAAC,GAAAH,IAAA;EAAA,oBACC,IAAAH,WAAA,CAAAQ,GAAA;IACE,cAAYD,SAAU;IACtBH,SAAS,EAAEA,SAAU;IACrBC,IAAI,EAAE,IAAAI,eAAM,EAACJ,IAAI,CAAE;IAAAK,QAAA,EAEnBJ;EAAO,CACN,CAAC;AAAA,CACL;AAAC,IAAAK,QAAA,GAEaT,QAAQ;AAAAU,OAAA,CAAAC,OAAA,GAAAF,QAAA"
+}
