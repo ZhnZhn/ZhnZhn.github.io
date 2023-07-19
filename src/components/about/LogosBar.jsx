@@ -1,21 +1,47 @@
-import { useContext } from 'react';
-
+import { useContext } from '../uiApi';
 import ThemeContext  from '../hoc/ThemeContext';
 
 import ItemStack from '../zhn/ItemStack';
-
-import LogoNasdaqDataLink from './LogoNasdaqDataLink';
-import LogoGitHub from './LogoGitHub';
-import LogoReact from './LogoReact';
-import LogoHighcharts from './LogoHighcharts';
+import LinkSvgLogo from './LinkSvgLogo';
+import LinkLogo from './LinkLogo';
 
 const TH_ID = 'LOGOS'
-
 , CL_ROOT = 'logo-container'
-, CL_LI = 'logo-item'
-, CL_LOGO = 'logo-item data-provider-logo';
+, LOGO_SVG_PROPS = {
+  fillRule: "evenodd",
+  clipRule: "evenodd",
+  strokeLinejoin: "round",
+  strokeMiterlimit: "1.414"
+};
 
-const LOGO_CONFS = [
+const LINK_SVG_LOGO_CONFS = [
+  [
+    'Nasdaq Data Link',
+    'logo-ndl',
+    'https://data.nasdaq.com',
+    'NDLSemi',
+    {w: '215', h: '36'}
+  ],[
+    'GitHub Repository',
+    'logo-github',
+    'https://github.com/ZhnZhn/ZhnZhn.github.io',
+    'GitHub',
+    {...LOGO_SVG_PROPS, w: '16'}
+  ],[
+    'React',
+    'logo-react',
+    'https://reactjs.org',
+    'React',
+    {...LOGO_SVG_PROPS, w: '600'}
+  ],[
+    'Highcharts',
+    'logo-highcharts',
+    'https://www.highcharts.com',
+    'Highcharts',
+    {...LOGO_SVG_PROPS, w: '425.197', h: '141.732'}
+  ]
+]
+, LINK_LOGO_CONFS = [
   [
     'https://ec.europa.eu/eurostat',
     'eurostat',
@@ -29,27 +55,29 @@ const LOGO_CONFS = [
   ]
 ];
 
-const Logo = ({
-  className=CL_LOGO,
+const _crLinkSvgLogo = ([
+  ariaLabel,
+  className,
   href,
-  caption,
-  ariaLabel=caption
-}) => (
-  <a
-    aria-label={ariaLabel}
+  id,
+  svgProps
+]) => (
+  <LinkSvgLogo
+    key={id}
+    ariaLabel={ariaLabel}
     className={className}
     href={href}
-  >
-   {caption}
-  </a>
+    id={id}
+    svgProps={svgProps}
+  />
 );
 
-const _crLogoItem = ([
+const _crLinkLogo = ([
   href,
   caption,
   ariaLabel
 ]) => (
-  <Logo
+  <LinkLogo
     key={caption}
     href={href}
     caption={caption}
@@ -62,22 +90,14 @@ const LogosBar = () => {
   , TS = theme.getStyle(TH_ID);
   return (
     <div className={CL_ROOT} style={TS.ROOT}>
-       <LogoNasdaqDataLink
-         className={CL_LI}
-       />
-       <LogoGitHub
-         className={CL_LI}
-         href="https://github.com/ZhnZhn/ZhnZhn.github.io" />
-       <LogoReact
-          className={CL_LI}
-        />
-       <LogoHighcharts
-         className={CL_LI}
+       <ItemStack
+         items={LINK_SVG_LOGO_CONFS}
+         crItem={_crLinkSvgLogo}
        />
        <ItemStack
-          items={LOGO_CONFS}
-          crItem={_crLogoItem}
-        />
+         items={LINK_LOGO_CONFS}
+         crItem={_crLinkLogo}
+       />
     </div>
   );
 };
