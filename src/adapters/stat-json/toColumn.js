@@ -1,4 +1,6 @@
 import JSONstat from 'jsonstat';
+
+import { crCategoryPoint } from '../CategoryFn';
 import crCategoryConfig from '../crCategoryConfig';
 
 import {
@@ -12,21 +14,19 @@ import {
 const _assign = Object.assign
 , _isArr = Array.isArray;
 
-const _fCrCategoryPoint = (c) => (v, i) => {
-  const label = c.Category(i).label;
-  return {
-    y: v.value,
-    name: label,
-    c: label
-  };
-};
+const _fCrCategoryPoint = (
+  c
+) => (v, i) => crCategoryPoint(
+  v.value,
+  c.Category(i).label
+);
 
-const _fIsCategoryPoint = (dfT) => (p) => {
-  if (dfT && p.c === dfT) {
-    return false;
-  }
-  return isYNumber(p) && p.y !== 0;
-};
+const _fIsCategoryPoint = (
+  dfT
+) => (p) => dfT && p.c === dfT
+  ? false
+  : isYNumber(p) && p.y !== 0;
+
 
 const _compareByY = (a, b) => b.y - a.y;
 

@@ -1,3 +1,5 @@
+import domSanitize from '../utils/domSanitize';
+
 const _isArr = Array.isArray;
 
 export const isCategory = (
@@ -42,3 +44,11 @@ export const isCategoryCase = (
   categories
 ) => _isArr((config.xAxis||{}).categories)
   && _isArr(categories);
+
+export const crCategoryPoint = (
+  y,
+  n
+) => {
+  const c = domSanitize(n);
+  return { y, name: c, c };
+}

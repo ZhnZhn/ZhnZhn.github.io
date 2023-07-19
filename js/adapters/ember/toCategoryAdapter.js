@@ -3,19 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
-var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"));
+var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
+var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"));
 var _fnAdapter = require("./fnAdapter");
 const _getObjectKeys = Object.keys,
-  _crCategoryPoint = (y, n) => {
-    const c = (0, _domSanitize.default)(n);
-    return {
-      y,
-      name: c,
-      c
-    };
-  },
   _crTotalData = (json, pnMetric) => {
     const hm = (0, _fnAdapter.reduceToHmBy)((_hm, item) => {
       const c = (0, _fnAdapter.getCountryName)(item);
@@ -24,12 +16,12 @@ const _getObjectKeys = Object.keys,
       }
       return _hm;
     }, json);
-    return _getObjectKeys(hm).map(k => _crCategoryPoint((0, _fnAdapter.roundBy)(hm[k], 2), k));
+    return _getObjectKeys(hm).map(k => (0, _CategoryFn.crCategoryPoint)((0, _fnAdapter.roundBy)(hm[k], 2), k));
   },
   _crSourceData = (json, pnMetric) => json.reduce((data, item) => {
     const c = (0, _fnAdapter.getCountryName)(item);
     if (c) {
-      data.push(_crCategoryPoint(item[pnMetric], c));
+      data.push((0, _CategoryFn.crCategoryPoint)(item[pnMetric], c));
     }
     return data;
   }, []),

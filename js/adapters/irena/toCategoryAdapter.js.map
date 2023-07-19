@@ -5,22 +5,21 @@
  ],
  "file": "../../../src/adapters/irena/toCategoryAdapter.js",
  "names": [
+  "_CategoryFn",
+  "require",
   "_crAdapterCategory",
   "_interopRequireDefault",
-  "require",
   "_crData",
   "json",
   "data",
   "map",
   "arrP",
-  "y",
-  "name",
-  "c",
+  "crCategoryPoint",
   "toCategoryAdapter",
   "crAdapterCategory",
   "_default",
   "exports",
   "default"
  ],
- "mappings": ";;;;;AAAA,IAAAA,kBAAA,GAAAC,sBAAA,CAAAC,OAAA;AAEA,MAAMC,OAAO,GACXC,IAAI,IACDA,IAAI,CAACC,IAAI,CAACC,GAAG,CAACC,IAAI,KAAK;IAC1BC,CAAC,EAAED,IAAI,CAAC,CAAC,CAAC;IACVE,IAAI,EAAEF,IAAI,CAAC,CAAC,CAAC;IACbG,CAAC,EAAEH,IAAI,CAAC,CAAC;EACX,CAAC,CAAC,CAAC;EACDI,iBAAiB,GAAG,IAAAC,0BAAiB,EAACT,OAAO,CAAC;AAAA,IAAAU,QAAA,GAEjCF,iBAAiB;AAAAG,OAAA,CAAAC,OAAA,GAAAF,QAAA"
+ "mappings": ";;;;;AAAA,IAAAA,WAAA,GAAAC,OAAA;AACA,IAAAC,kBAAA,GAAAC,sBAAA,CAAAF,OAAA;AAEA,MAAMG,OAAO,GACXC,IAAI,IACDA,IAAI,CAACC,IAAI,CACZC,GAAG,CAACC,IAAI,IAAI,IAAAC,2BAAe,EAC1BD,IAAI,CAAC,CAAC,CAAC,EACPA,IAAI,CAAC,CAAC,CACR,CAAC,CAAC;EACDE,iBAAiB,GAAG,IAAAC,0BAAiB,EAACP,OAAO,CAAC;AAAA,IAAAQ,QAAA,GAEjCF,iBAAiB;AAAAG,OAAA,CAAAC,OAAA,GAAAF,QAAA"
 }

@@ -1,7 +1,6 @@
-import domSanitize from '../../utils/domSanitize';
-
-import crAdapterCategory from '../crAdapterCategory';
+import { crCategoryPoint } from '../CategoryFn';
 import { sortDescByPnY } from '../compareByFn';
+import crAdapterCategory from '../crAdapterCategory';
 
 import {
   isTotalVariable,
@@ -13,13 +12,6 @@ import {
 } from './fnAdapter';
 
 const _getObjectKeys = Object.keys
-, _crCategoryPoint = (
-  y,
-  n
-) => {
-  const c = domSanitize(n);
-  return { y, name: c, c };
-}
 , _crTotalData = (
   json,
   pnMetric
@@ -32,7 +24,7 @@ const _getObjectKeys = Object.keys
     return _hm;
   }, json);
   return _getObjectKeys(hm)
-    .map(k => _crCategoryPoint(
+    .map(k => crCategoryPoint(
       roundBy(hm[k], 2),
       k
     ));
@@ -43,7 +35,7 @@ const _getObjectKeys = Object.keys
 ) => json.reduce((data, item) => {
   const c = getCountryName(item)
   if (c) {
-    data.push(_crCategoryPoint(
+    data.push(crCategoryPoint(
       item[pnMetric],
       c
     ))
