@@ -2,17 +2,15 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 const _isArr = Array.isArray;
-const ItemStack = /*#__PURE__*/(0, _react.memo)(({
-  items,
-  crItem,
-  ...restProps
-}) => {
-  if (!_isArr(items)) return null;
-  return items.map((item, index) => crItem(item, index, restProps));
+const ItemStack = (0, _uiApi.memo)(_ref => {
+  let {
+    items,
+    crItem,
+    ...restProps
+  } = _ref;
+  return _isArr(items) ? items.map((item, index) => crItem(item, index, restProps)) : null;
 });
 var _default = ItemStack;
 exports.default = _default;
