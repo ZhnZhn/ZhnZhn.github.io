@@ -1,5 +1,10 @@
-import { memo, Children, cloneElement } from 'react';
 //import PropTypes from 'prop-types';
+import {
+  memo,
+  Children,
+  cloneElement
+} from '../uiApi';
+
 import Line from './Line';
 import Bars from './Bars';
 import Spots from './Spots';
@@ -74,8 +79,11 @@ static propTypes = {
 
 export default {
   SparkView,
-  Line, Bars,
-  Spots, Spot,
+  Line,
+  Bars,
+  Spots,
+  Spot,
   ReferenceLine,
-  MinLabel, MaxLabel
+  MinLabel,
+  MaxLabel
 }
