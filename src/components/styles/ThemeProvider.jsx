@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from '../uiApi';
 import useListen from '../hooks/useListen';
 
 import ThemeContext from '../hoc/ThemeContext';
@@ -8,7 +8,10 @@ const ThemeProvider = ({
   actionChangeTheme,
   children
 }) => {
-  const [theme, setTheme] = useState(initialTheme);
+  const [
+    theme,
+    setTheme
+  ] = useState(initialTheme);
 
   useListen((actionType, themeName) => {
     if (actionType === actionChangeTheme) {
