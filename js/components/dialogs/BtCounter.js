@@ -1,29 +1,24 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
-const BtCounter = /*#__PURE__*/(0, _react.forwardRef)(({
-  isShow,
-  style,
-  title,
-  initialValue = 1,
-  maxValue = 4
-}, ref) => {
-  const [value, setValue] = (0, _react.useState)(initialValue),
-        _onClick = (0, _react.useCallback)(() => {
-    setValue(v => v < maxValue ? v + 1 : initialValue);
-  }, [maxValue, initialValue]);
-
-  (0, _react.useImperativeHandle)(ref, () => ({
+const BtCounter = (0, _uiApi.forwardRef)((_ref, ref) => {
+  let {
+    isShow,
+    style,
+    title,
+    initialValue = 1,
+    maxValue = 4
+  } = _ref;
+  const [value, setValue] = (0, _uiApi.useState)(initialValue),
+    _onClick = (0, _uiApi.useCallback)(() => {
+      setValue(v => v < maxValue ? v + 1 : initialValue);
+    }, [maxValue, initialValue]);
+  (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValue: () => value
   }), [value]);
   return isShow ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {

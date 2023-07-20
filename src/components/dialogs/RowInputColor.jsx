@@ -4,7 +4,7 @@ import {
   useState,
   useCallback,
   useEffect
-} from 'react';
+} from '../uiApi';
 
 import Model from '../../constants/Model'
 import InputText from '../zhn/InputText'
@@ -42,8 +42,14 @@ const RowInputColor = ({
   onEnter=NOOP
 }) => {
   const _refCellColor = useRef()
-  , [value, setValue] = useState(initValue)
-  , [isShowPallete, setIsShowPallette] = useState(false)
+  , [
+    value,
+    setValue
+  ] = useState(initValue)
+  , [
+    isShowPallete,
+    setIsShowPallette
+  ] = useState(false)
   , _hEnter = useCallback(value => {
       onEnter(value)
       setValue(value)
@@ -57,7 +63,10 @@ const RowInputColor = ({
       setIsShowPallette(false)
    }, []);
 
-  useEffect(()=>setValue(initValue), [initValue])
+  useEffect(
+    () => setValue(initValue), 
+    [initValue]
+  )
 
   const _caption = crCaption(caption);
 

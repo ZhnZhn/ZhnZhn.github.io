@@ -1,18 +1,19 @@
 import {
   useState,
   useEffect
-} from 'react';
+} from '../uiApi';
 import useHasNotEqual from '../hooks/useHasNotEqual';
 import memoIsShow from '../hoc/memoIsShow';
 
 import { fetchTxt } from '../../utils/fnFetch';
-import Comp from '../Comp';
 
-const { ModalDialog, Load, DivHtml } = Comp;
+import ModalDialog from '../zhn-moleculs/ModalDialog';
+import DivHtml from '../zhn/DivHtml';
+import Load from '../zhn/Load';
 
-const EMPTY_DESCR = '<p class="descr__part">Description empty</p>';
-const INITIAL_DESCR = '';
-const S_DIALOG = {
+const EMPTY_DESCR = '<p class="descr__part">Description empty</p>'
+, INITIAL_DESCR = ''
+, S_DIALOG = {
   top: 54,
   left: 20,
   width: 'auto',
@@ -47,7 +48,10 @@ const DescriptionDialog = memoIsShow((props) => {
       descrHtml },
       setState
   ] = useState(() => _crState(
-    false, false, '', INITIAL_DESCR
+    false,
+    false,
+    '',
+    INITIAL_DESCR
   ))
   , _isNextProps = useHasNotEqual(props)
   , _isNextDescrUrl = useHasNotEqual(descrUrl)

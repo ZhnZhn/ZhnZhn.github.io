@@ -1,4 +1,9 @@
-import { forwardRef, useState, useCallback, useImperativeHandle } from 'react';
+import {
+  forwardRef,
+  useState,
+  useCallback,
+  useImperativeHandle
+} from '../uiApi';
 
 import ButtonCircle from '../zhn/ButtonCircle';
 
@@ -9,12 +14,15 @@ const BtCounter = forwardRef(({
   initialValue=1,
   maxValue=4,
 }, ref) => {
-  const [value, setValue] = useState(initialValue)
+  const [
+    value,
+    setValue
+  ] = useState(initialValue)
   , _onClick = useCallback(() => {
      setValue(v => v < maxValue
         ? v + 1
         : initialValue
-     )      
+     )
    }, [maxValue, initialValue]);
 
   useImperativeHandle(ref, () => ({

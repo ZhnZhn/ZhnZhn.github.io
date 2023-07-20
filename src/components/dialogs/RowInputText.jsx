@@ -1,5 +1,5 @@
 //import PropTypes from "prop-types";
-import { forwardRef } from 'react';
+import { forwardRef } from '../uiApi';
 
 import InputText from '../zhn/InputText';
 import crCaption from './fns/crCaption';

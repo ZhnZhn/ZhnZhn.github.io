@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef } from '../uiApi';
 
 import InputSecret from '../zhn/InputSecret';
 import { S_DIALOG_CAPTION } from '../styles/DialogStyles';

@@ -3,7 +3,7 @@ import {
   useRef,
   useCallback,
   useMemo
-} from 'react';
+} from '../uiApi';
 import memoIsShow from '../hoc/memoIsShow';
 
 import FlatButton from '../zhn-m/FlatButton';

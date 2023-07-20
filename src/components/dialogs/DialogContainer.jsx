@@ -2,7 +2,7 @@ import {
   useState,
   useCallback,
   createElement
-} from 'react';
+} from '../uiApi';
 
 import useListen from '../hooks/useListen';
 
@@ -39,7 +39,10 @@ const _renderDialogs = (
 
 
 const DialogContainer = () => {
-  const [state, setState] = useState({
+  const [
+    state,
+    setState
+  ] = useState({
     isShow: false,
     inits: {},
     shows: {},
@@ -47,7 +50,10 @@ const DialogContainer = () => {
     dialogs: [],
     currentDialog: null
   })
-  , { isShow, currentDialog } = state
+  , {
+    isShow,
+    currentDialog
+  } = state
   , _hClose = useCallback(type => {
      setState(prevState => {
        prevState.shows[type] = false

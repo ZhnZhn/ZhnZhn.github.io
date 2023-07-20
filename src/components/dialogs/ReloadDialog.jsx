@@ -1,7 +1,7 @@
 import {
   useCallback,
   useMemo
-} from 'react';
+} from '../uiApi';
 
 import FlatButton from '../zhn-m/FlatButton';
 import ModalDialog from '../zhn-moleculs/ModalDialog';

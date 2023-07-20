@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _react = require("react");
+var _uiApi = require("../uiApi");
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 var _ModalDialogContainer = _interopRequireDefault(require("../zhn-containers/ModalDialogContainer"));
@@ -29,7 +29,7 @@ const _renderDialogs = (store, _ref, _handleClose) => {
       type,
       comp
     } = _ref2;
-    return /*#__PURE__*/(0, _react.createElement)(comp, {
+    return (0, _uiApi.createElement)(comp, {
       key: type,
       isShow: shows[type],
       data: data[type],
@@ -39,7 +39,7 @@ const _renderDialogs = (store, _ref, _handleClose) => {
   });
 };
 const DialogContainer = () => {
-  const [state, setState] = (0, _react.useState)({
+  const [state, setState] = (0, _uiApi.useState)({
       isShow: false,
       inits: {},
       shows: {},
@@ -51,7 +51,7 @@ const DialogContainer = () => {
       isShow,
       currentDialog
     } = state,
-    _hClose = (0, _react.useCallback)(type => {
+    _hClose = (0, _uiApi.useCallback)(type => {
       setState(prevState => {
         prevState.shows[type] = false;
         prevState.isShow = false;
