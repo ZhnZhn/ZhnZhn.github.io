@@ -2,42 +2,31 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 const FN_NOOP = () => {};
-
-class ErrorBoundary extends _react.Component {
+class ErrorBoundary extends _uiApi.Component {
   constructor() {
     super(...arguments);
     this.state = {
       hasError: false
     };
   }
-
   static getDerivedStateFromError(error) {
     return {
       hasError: true
     };
   }
-
   componentDidCatch(error, errMsg) {
     this.props.onError();
   }
-
   render() {
     const {
-      hasError
-    } = this.state,
-          {
       FallbackComp,
       children
     } = this.props;
-    return hasError ? FallbackComp : children;
+    return this.state.hasError ? FallbackComp : children;
   }
-
 }
-
 ErrorBoundary.defaultProps = {
   onError: FN_NOOP
 };

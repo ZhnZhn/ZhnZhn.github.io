@@ -1,15 +1,18 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.stopImmediatePropagation = exports.setRefValue = exports.memo = exports.isInputValid = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.Component = void 0;
+exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.stopImmediatePropagation = exports.setRefValue = exports.memo = exports.lazy = exports.isInputValid = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.Suspense = exports.Component = exports.Children = void 0;
 var _react = require("react");
+exports.Suspense = _react.Suspense;
+exports.lazy = _react.lazy;
 exports.Component = _react.Component;
+exports.Children = _react.Children;
 exports.createRef = _react.createRef;
 exports.createElement = _react.createElement;
 exports.cloneElement = _react.cloneElement;
-exports.createContext = _react.createContext;
 exports.memo = _react.memo;
 exports.forwardRef = _react.forwardRef;
+exports.createContext = _react.createContext;
 exports.useContext = _react.useContext;
 exports.useRef = _react.useRef;
 exports.useState = _react.useState;

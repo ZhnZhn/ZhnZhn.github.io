@@ -1,4 +1,9 @@
-import { lazy, useMemo, Suspense } from 'react';
+import {
+  useMemo,
+  Suspense,
+  lazy
+} from '../uiApi';
+
 import useBool from '../hooks/useBool';
 
 const S_LOADING = { color: '#2f7ed8'}
@@ -38,8 +43,8 @@ const crRetryableLazy = (
          .catch(() => {
             setLoadingFalse()
 					    return {
-              default: () => <ErrorRetryView retry={retry} />
-            };
+                default: () => <ErrorRetryView retry={retry} />
+              };
 					})
 			 ), [loading]);
     // crLoadPromise, retry

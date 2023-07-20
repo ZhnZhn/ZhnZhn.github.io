@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo } from '../uiApi';
 import domSanitize from '../../utils/domSanitize';
 
 const DivHtml = memo(({

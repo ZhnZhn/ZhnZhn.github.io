@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _react = require("react");
+var _uiApi = require("../uiApi");
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_LOADING = {
@@ -39,7 +39,7 @@ const crRetryableLazy = function (crLoadPromise, LoaderView, ErrorRetryView) {
   const RetryableLazy = props => {
     const [loading, retry, setLoadingFalse] = (0, _useBool.default)(true)
       /*eslint-disable react-hooks/exhaustive-deps */,
-      LazyComponent = (0, _react.useMemo)(() => /*#__PURE__*/(0, _react.lazy)(() => crLoadPromise().catch(() => {
+      LazyComponent = (0, _uiApi.useMemo)(() => (0, _uiApi.lazy)(() => crLoadPromise().catch(() => {
         setLoadingFalse();
         return {
           default: () => /*#__PURE__*/(0, _jsxRuntime.jsx)(ErrorRetryView, {
@@ -50,7 +50,7 @@ const crRetryableLazy = function (crLoadPromise, LoaderView, ErrorRetryView) {
     // crLoadPromise, retry
     /*eslint-enable react-hooks/exhaustive-deps */
 
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_react.Suspense, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.Suspense, {
       fallback: /*#__PURE__*/(0, _jsxRuntime.jsx)(LoaderView, {}),
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(LazyComponent, {
         ...props

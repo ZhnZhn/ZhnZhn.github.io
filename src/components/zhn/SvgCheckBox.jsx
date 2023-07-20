@@ -1,5 +1,10 @@
-import { useState, useMemo, useCallback } from 'react';
 //import PropTypes from "prop-types";
+import {
+  useState,
+  useMemo,
+  useCallback
+} from '../uiApi';
+
 import useRefInit from '../hooks/useRefInit';
 import useKeyEnter from '../hooks/useKeyEnter';
 
@@ -38,9 +43,13 @@ const SvgCheckBox = ({
   const [
     valueState,
     setValueState
-  ] = useState(() => _isBool(value) ? void 0: !!initialValue)
+  ] = useState(
+    () => _isBool(value) ? void 0: !!initialValue
+  )
   , _isValueState = useRefInit(() => _isBool(valueState))
-  , _value = _isValueState ? valueState : value
+  , _value = _isValueState
+     ? valueState
+     : value
   , _comp = useMemo(() => ({
      setUnchecked: () => setValueState(false)
   }), [])

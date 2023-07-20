@@ -1,12 +1,16 @@
 export {
+  Suspense,
+  lazy,
+
   Component,
+  Children,
   createRef,
   createElement,
   cloneElement,
-
-  createContext,
   memo,
+
   forwardRef,
+  createContext,
   useContext,
   useRef,
   useState,

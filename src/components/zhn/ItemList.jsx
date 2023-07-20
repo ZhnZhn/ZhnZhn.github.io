@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo } from '../uiApi';
 
 const _isArr = Array.isArray
 , UL_STYLE = { listStyle: 'none' }
@@ -8,9 +8,7 @@ const ItemList = memo(({
   items,
   crKey=_crKeyDf,
   crItem
-}) => {
-  if (!_isArr(items)) return null;
-  return (
+}) => _isArr(items) ? (
     <ul style={UL_STYLE}>
       {items.map((item, index) => (
         <li key={crKey(item, index)}>
@@ -18,7 +16,7 @@ const ItemList = memo(({
         </li>
       ))}
     </ul>
-  );
-});
+  ) : null
+);
 
 export default ItemList

@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component } from '../uiApi';
 
 const FN_NOOP = () => {};
 
@@ -18,9 +18,11 @@ class ErrorBoundary extends Component {
   }
 
   render(){
-    const { hasError } = this.state
-    , { FallbackComp, children } = this.props;
-    return hasError
+    const {
+      FallbackComp,
+      children
+    } = this.props;
+    return this.state.hasError
       ? FallbackComp
       : children;
   }
