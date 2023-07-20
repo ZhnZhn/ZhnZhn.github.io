@@ -1,27 +1,21 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _A = _interopRequireDefault(require("../zhn/A"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const S_CAPTION = {
-  display: 'inline-block',
-  color: 'black',
-  width: 120,
-  fontWeight: 'bold'
-},
-      S_INPUT_TEXT = {
-  width: 46,
-  marginRight: 12
-};
-
+    display: 'inline-block',
+    color: 'black',
+    width: 120,
+    fontWeight: 'bold'
+  },
+  S_INPUT_TEXT = {
+    width: 46,
+    marginRight: 12
+  };
 const RowTypeB = _ref => {
   let {
     forwardRef,
@@ -32,12 +26,10 @@ const RowTypeB = _ref => {
     maxLength,
     onAdd
   } = _ref;
-
-  const [isPlus, setIsPlus] = (0, _react.useState)(true),
-        _onAdd = isPlus ? () => {
-    setIsPlus(!onAdd());
-  } : void 0;
-
+  const [isPlus, setIsPlus] = (0, _uiApi.useState)(true),
+    _onAdd = isPlus ? () => {
+      setIsPlus(!onAdd());
+    } : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       style: S_CAPTION,
@@ -56,7 +48,6 @@ const RowTypeB = _ref => {
     })]
   });
 };
-
 var _default = RowTypeB;
 exports.default = _default;
 //# sourceMappingURL=RowTypeB.js.map

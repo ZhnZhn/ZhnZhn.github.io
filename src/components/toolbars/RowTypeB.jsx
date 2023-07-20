@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from '../uiApi';
 import A from '../zhn/A';
 
 const S_CAPTION = {
@@ -16,10 +16,15 @@ const RowTypeB = ({
   forwardRef,
   caption,
   initValue,
-  min, max, maxLength,
+  min,
+  max,
+  maxLength,
   onAdd
 }) => {
-  const [isPlus, setIsPlus] = useState(true)
+  const [
+    isPlus,
+    setIsPlus
+  ] = useState(true)
   , _onAdd = isPlus ? () => {
      setIsPlus(!onAdd())
   } : void 0;

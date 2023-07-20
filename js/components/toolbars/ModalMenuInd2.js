@@ -1,37 +1,25 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
-
 var _IndicatorBuilder = require("../../charts/IndicatorBuilder");
-
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
-
 var _ModalMenu = require("./ModalMenu.Style");
-
 var _RowTypeA = _interopRequireDefault(require("./RowTypeA"));
-
 var _RowTypeB = _interopRequireDefault(require("./RowTypeB"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const DF_POWER_BY_10 = 0,
-      S_PANE = {
-  margin: '6px 10px 6px 6px'
-},
-      _isNumber = n => typeof n === 'number' && n - n === 0,
-      _isPowerBy = config => {
-  var _config$plotOptions, _config$plotOptions$b, _config$plotOptions$b2;
-
-  return !(config != null && (_config$plotOptions = config.plotOptions) != null && (_config$plotOptions$b = _config$plotOptions.bar) != null && (_config$plotOptions$b2 = _config$plotOptions$b.dataLabels) != null && _config$plotOptions$b2.enabled);
-};
-
+  S_PANE = {
+    margin: '6px 10px 6px 6px'
+  },
+  _isNumber = n => typeof n === 'number' && n - n === 0,
+  _isPowerBy = config => {
+    var _config$plotOptions;
+    return !(config != null && (_config$plotOptions = config.plotOptions) != null && (_config$plotOptions = _config$plotOptions.bar) != null && (_config$plotOptions = _config$plotOptions.dataLabels) != null && _config$plotOptions.enabled);
+  };
 const ModalMenuInd2 = _ref => {
   let {
     style,
@@ -40,20 +28,18 @@ const ModalMenuInd2 = _ref => {
     getChart,
     config
   } = _ref;
-
   const _hasPowerBy10 = (0, _useRefInit.default)(() => _isPowerBy(config)),
-        _refPowerBy10 = (0, _react.useRef)(DF_POWER_BY_10),
-        _onPowerBy10 = () => {
-    const _by = parseFloat(_refPowerBy10.current.getValue());
-
-    if (_isNumber(_by)) {
-      (0, _IndicatorBuilder.powerBy10)(getChart(), _by);
-      return true;
-    }
-  };
-
+    _refPowerBy10 = (0, _uiApi.useRef)(DF_POWER_BY_10),
+    _onPowerBy10 = () => {
+      const _by = parseFloat(_refPowerBy10.current.getValue());
+      if (_isNumber(_by)) {
+        (0, _IndicatorBuilder.powerBy10)(getChart(), _by);
+        return true;
+      }
+    };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
-    style: { ..._ModalMenu.S_MODAL_MENU,
+    style: {
+      ..._ModalMenu.S_MODAL_MENU,
       ...style
     },
     isShow: isShow,
@@ -84,7 +70,6 @@ const ModalMenuInd2 = _ref => {
     })
   });
 };
-
 var _default = ModalMenuInd2;
 exports.default = _default;
 //# sourceMappingURL=ModalMenuInd2.js.map

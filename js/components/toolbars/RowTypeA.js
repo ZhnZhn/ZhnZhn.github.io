@@ -1,55 +1,45 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
-
 var _A = _interopRequireDefault(require("../zhn/A"));
-
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const DF_COLOR = '#2b908f',
-      OC_COLOR = 'black',
-      S_ROOT_OC = {
-  lineHeight: 'unset',
-  paddingBottom: 4,
-  marginLeft: -8
-},
-      S_OC = {
-  display: 'inline-block',
-  height: 32,
-  paddingTop: 4,
-  width: 'auto',
-  paddingRight: 8,
-  marginRight: 6
-},
-      S_CAPTION = {
-  color: OC_COLOR
-},
-      S_INPUT_COLOR = {
-  paddingLeft: 10
-};
-
-const _useRowTypeA = (mathFn, getChart, dfColor) => {
-  const [is, setIs] = (0, _react.useState)(false),
-        [setColor, getColor] = (0, _useProperty.default)(dfColor),
-        _onPlus = () => {
-    setIs(mathFn(getChart(), getColor()));
+  OC_COLOR = 'black',
+  S_ROOT_OC = {
+    lineHeight: 'unset',
+    paddingBottom: 4,
+    marginLeft: -8
   },
-        compAfter = is ? null : /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.SvgPlus, {
-    onClick: _onPlus
-  });
-
+  S_OC = {
+    display: 'inline-block',
+    height: 32,
+    paddingTop: 4,
+    width: 'auto',
+    paddingRight: 8,
+    marginRight: 6
+  },
+  S_CAPTION = {
+    color: OC_COLOR
+  },
+  S_INPUT_COLOR = {
+    paddingLeft: 10
+  };
+const _useRowTypeA = (mathFn, getChart, dfColor) => {
+  const [is, setIs] = (0, _uiApi.useState)(false),
+    [setColor, getColor] = (0, _useProperty.default)(dfColor),
+    _onPlus = () => {
+      setIs(mathFn(getChart(), getColor()));
+    },
+    compAfter = is ? null : /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.SvgPlus, {
+      onClick: _onPlus
+    });
   return [compAfter, setColor];
 };
-
 const RowTypeA = _ref => {
   let {
     caption,
@@ -57,9 +47,7 @@ const RowTypeA = _ref => {
     mathFn,
     getChart
   } = _ref;
-
   const [compAfter, onColor] = _useRowTypeA(mathFn, getChart, dfColor);
-
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.OpenClose, {
     caption: caption,
     style: S_ROOT_OC,
@@ -74,7 +62,6 @@ const RowTypeA = _ref => {
     })
   });
 };
-
 var _default = RowTypeA;
 exports.default = _default;
 //# sourceMappingURL=RowTypeA.js.map

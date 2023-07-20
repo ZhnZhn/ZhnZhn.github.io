@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef } from '../uiApi';
 import useRefInit from '../hooks/useRefInit'
 import {
   addCategoryRateTo,

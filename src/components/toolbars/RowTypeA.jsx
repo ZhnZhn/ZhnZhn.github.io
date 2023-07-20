@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from '../uiApi';
 import useProperty from '../hooks/useProperty';
 
 import A from '../zhn/A';
@@ -29,8 +29,14 @@ const _useRowTypeA = (
   getChart,
   dfColor
 ) => {
-  const [is, setIs] = useState(false)
-  , [setColor, getColor] = useProperty(dfColor)
+  const [
+    is,
+    setIs
+  ] = useState(false)
+  , [
+    setColor,
+    getColor
+  ] = useProperty(dfColor)
   , _onPlus = () => {
      setIs(mathFn(getChart(), getColor()))
   }
@@ -48,8 +54,13 @@ const RowTypeA = ({
   getChart
 }) => {
   const [
-    compAfter, onColor
-  ] = _useRowTypeA(mathFn, getChart, dfColor);
+    compAfter,
+    onColor
+  ] = _useRowTypeA(
+    mathFn,
+    getChart,
+    dfColor
+  );
 
   return (
     <A.OpenClose
