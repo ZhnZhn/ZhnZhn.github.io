@@ -1,28 +1,51 @@
 //import PropTypes from "prop-types";
-import { useState, useRef, useCallback, useMemo } from 'react';
-import useListen from '../hooks/useListen'
-import useInputText from './hooks/useInputText'
+import {
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+  getInputValue
+} from '../uiApi';
 
-import A from './Atoms'
+import useListen from '../hooks/useListen';
+import useInputText from './hooks/useInputText';
+
+import A from './Atoms';
 
 const ListEditPane = ({
   store,
-  onRename, msgOnIsEmptyName, msgOnNotSelect,
-  actionCompleted, actionFailed, forActionType,
+  onRename,
+  msgOnIsEmptyName,
+  msgOnNotSelect,
+  actionCompleted,
+  actionFailed,
+  forActionType,
   onClose
 }) => {
-  const [groupOptions, setGroupOptions] = useState(()=>store.getWatchGroups())
-  , [validationMessages, setValidationMessages] = useState([])
+  const [
+    groupOptions,
+    setGroupOptions
+  ] = useState(() => store.getWatchGroups())
+  , [
+    validationMessages,
+    setValidationMessages
+  ] = useState([])
   , _refSelectGroupList = useRef()
-  , [_refInputText, _hClear] = useInputText(setValidationMessages)
+  , [
+    _refInputText,
+    _hClear
+  ] = useInputText(setValidationMessages)
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hRename = useCallback(()=>{
-    const { captionGroup, captionList } = _refSelectGroupList.current.getValue()
-    , captionListTo = _refInputText.current.getValue();
+    const {
+      captionGroup,
+      captionList
+    } = getInputValue(_refSelectGroupList) || {}
+    , captionListTo = getInputValue(_refInputText);
     if (captionGroup && captionList && captionListTo){
       onRename({
         captionGroup,
-        captionListFrom : captionList,
+        captionListFrom: captionList,
         captionListTo
       })
     } else {

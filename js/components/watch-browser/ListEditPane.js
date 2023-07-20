@@ -1,21 +1,15 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
-
 var _useInputText = _interopRequireDefault(require("./hooks/useInputText"));
-
 var _Atoms = _interopRequireDefault(require("./Atoms"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 //import PropTypes from "prop-types";
+
 const ListEditPane = _ref => {
   let {
     store,
@@ -27,59 +21,49 @@ const ListEditPane = _ref => {
     forActionType,
     onClose
   } = _ref;
-
-  const [groupOptions, setGroupOptions] = (0, _react.useState)(() => store.getWatchGroups()),
-        [validationMessages, setValidationMessages] = (0, _react.useState)([]),
-        _refSelectGroupList = (0, _react.useRef)(),
-        [_refInputText, _hClear] = (0, _useInputText.default)(setValidationMessages)
-  /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        _hRename = (0, _react.useCallback)(() => {
-    const {
-      captionGroup,
-      captionList
-    } = _refSelectGroupList.current.getValue(),
-          captionListTo = _refInputText.current.getValue();
-
-    if (captionGroup && captionList && captionListTo) {
-      onRename({
-        captionGroup,
-        captionListFrom: captionList,
-        captionListTo
-      });
-    } else {
-      const msg = [];
-
-      if (!captionGroup) {
-        msg.push(msgOnNotSelect('Group'));
+  const [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => store.getWatchGroups()),
+    [validationMessages, setValidationMessages] = (0, _uiApi.useState)([]),
+    _refSelectGroupList = (0, _uiApi.useRef)(),
+    [_refInputText, _hClear] = (0, _useInputText.default)(setValidationMessages)
+    /*eslint-disable react-hooks/exhaustive-deps */,
+    _hRename = (0, _uiApi.useCallback)(() => {
+      const {
+          captionGroup,
+          captionList
+        } = (0, _uiApi.getInputValue)(_refSelectGroupList) || {},
+        captionListTo = (0, _uiApi.getInputValue)(_refInputText);
+      if (captionGroup && captionList && captionListTo) {
+        onRename({
+          captionGroup,
+          captionListFrom: captionList,
+          captionListTo
+        });
+      } else {
+        const msg = [];
+        if (!captionGroup) {
+          msg.push(msgOnNotSelect('Group'));
+        }
+        if (!captionList) {
+          msg.push(msgOnNotSelect('List From'));
+        }
+        if (!captionListTo) {
+          msg.push(msgOnIsEmptyName('List To'));
+        }
+        setValidationMessages(msg);
       }
-
-      if (!captionList) {
-        msg.push(msgOnNotSelect('List From'));
-      }
-
-      if (!captionListTo) {
-        msg.push(msgOnIsEmptyName('List To'));
-      }
-
-      setValidationMessages(msg);
-    }
-  }, []) //onRename, msgOnNotSelect, msgOnIsEmptyName
-
-  /*eslint-enable react-hooks/exhaustive-deps */
-  ,
-        _primaryBt = (0, _react.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.Button.Primary, {
-    caption: "Edit",
-    title: "Edit List Name",
-    onClick: _hRename
-  }), [_hRename]);
-
+    }, [])
+    //onRename, msgOnNotSelect, msgOnIsEmptyName
+    /*eslint-enable react-hooks/exhaustive-deps */,
+    _primaryBt = (0, _uiApi.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.Button.Primary, {
+      caption: "Edit",
+      title: "Edit List Name",
+      onClick: _hRename
+    }), [_hRename]);
   (0, _useListen.default)((actionType, data) => {
     if (actionType === actionCompleted) {
       if (data.forActionType === forActionType) {
         _hClear();
       }
-
       setGroupOptions(store.getWatchGroups());
     } else if (actionType === actionFailed && data.forActionType === forActionType) {
       setValidationMessages(data.messages);
@@ -104,6 +88,7 @@ const ListEditPane = _ref => {
     })]
   });
 };
+
 /*
 ListEditPane.propTypes = {
   store: PropTypes.shape({
@@ -121,8 +106,6 @@ ListEditPane.propTypes = {
   onClose: PropTypes.func
 }
 */
-
-
 var _default = ListEditPane;
 exports.default = _default;
 //# sourceMappingURL=ListEditPane.js.map

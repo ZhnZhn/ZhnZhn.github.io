@@ -1,29 +1,49 @@
 //import PropTypes from "prop-types";
-import { useRef, useState, useCallback, useImperativeHandle, useEffect, forwardRef } from 'react';
-import useProperty from '../hooks/useProperty'
-import useSelectItem from './hooks/useSelectItem'
+import {
+  forwardRef,
+  useRef,
+  useState,
+  useCallback,
+  useImperativeHandle,
+  useEffect,
+  setRefValue,
+  getRefValue
+} from '../uiApi';
+
+import useProperty from '../hooks/useProperty';
+import useSelectItem from './hooks/useSelectItem';
 
 import RowInputSelect from './RowInputSelect';
 
 const SelectGroupList = forwardRef((props, ref) => {
-  const [_setPrevProps, _getPrevProps] = useProperty(props)
+  const [
+    _setPrevProps,
+    _getPrevProps
+  ] = useProperty(props)
   , {
     store,
-    groupCaption, groupOptions,
+    groupCaption,
+    groupOptions,
     listCaption
   } = props
   , _refGroupCaption = useRef()
-  , [_refListCaption, _hSelectList] = useSelectItem()
-  , [listOptions, setListOptions] = useState([])
+  , [
+    _refListCaption,
+    _hSelectList
+  ] = useSelectItem()
+  , [
+    listOptions,
+    setListOptions
+  ] = useState([])
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hSelectGroup = useCallback(item => {
       const { caption } = item || {}
       if (item && caption){
-        _refGroupCaption.current = caption;
-        _refListCaption.current = null
+        setRefValue(_refGroupCaption, caption)
+        setRefValue(_refListCaption, null)
         setListOptions(item.lists || [])
       } else {
-        _refGroupCaption.current = null
+        setRefValue(_refGroupCaption, null)
       }
   }, [])
   //_refListCaption
@@ -35,13 +55,13 @@ const SelectGroupList = forwardRef((props, ref) => {
     const _prevProps = _getPrevProps();
     if (_prevProps !== props) {
      if (_prevProps.groupOptions !== groupOptions) {
-       _refGroupCaption.current = null
-       _refListCaption.current = null
+       setRefValue(_refGroupCaption, null)
+       setRefValue(_refListCaption, null)
        setListOptions([])
-     } else if (_refGroupCaption.current) {
+     } else if (getRefValue(_refGroupCaption)) {
        const _listOptions = store.getWatchListsByGroup(_refGroupCaption.current);
        if (_listOptions !== listOptions) {
-         _refListCaption.current = null
+         setRefValue(_refListCaption, null)
          setListOptions(_listOptions)
        }
      }
@@ -54,8 +74,8 @@ const SelectGroupList = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, ()=>({
     getValue: () => ({
-      captionGroup: _refGroupCaption.current,
-      captionList: _refListCaption.current
+      captionGroup: getRefValue(_refGroupCaption),
+      captionList: getRefValue(_refListCaption)
     })
   }))
 

@@ -1,26 +1,49 @@
-import { useState, useCallback, useMemo } from 'react';
-import useListen from '../hooks/useListen'
-import useSelectItem from './hooks/useSelectItem'
-import useInputText from './hooks/useInputText'
 //import PropTypes from "prop-types";
+import {
+  useState,
+  useCallback,
+  useMemo,
+  getRefValue,
+  getInputValue
+} from '../uiApi';
 
-import A from './Atoms'
+import useListen from '../hooks/useListen';
+import useSelectItem from './hooks/useSelectItem';
+import useInputText from './hooks/useInputText';
+
+import A from './Atoms';
 
 const ListCreatePane = ({
   store,
-  onCreate, msgOnNotSelect, msgOnIsEmptyName,
-  actionCompleted, actionFailed, forActionType,
+  onCreate,
+  msgOnNotSelect,
+  msgOnIsEmptyName,
+  actionCompleted,
+  actionFailed,
+  forActionType,
   onClose
 }) => {
-  const [groupOptions, setGroupOptions] = useState(()=>store.getWatchGroups())
-  , [validationMessages, setValidationMessages] = useState([])
-  , [_refInputText, _hClear] = useInputText(setValidationMessages)
-  , [_refCaptionGroup, _hSelectGroup] = useSelectItem()
+  const [
+    groupOptions,
+    setGroupOptions
+  ] = useState(() => store.getWatchGroups())
+  , [
+    validationMessages,
+    setValidationMessages
+  ] = useState([])
+  , [
+    _refInputText,
+    _hClear
+  ] = useInputText(setValidationMessages)
+  , [
+    _refCaptionGroup,
+    _hSelectGroup
+  ] = useSelectItem()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hCreate = useCallback(() => {
-      const captionList = _refInputText.current.getValue()
-      , captionGroup = _refCaptionGroup.current;
-      if (captionGroup && captionList){
+      const captionList = getInputValue(_refInputText)
+      , captionGroup = getRefValue(_refCaptionGroup);
+      if (captionGroup && captionList) {
         onCreate({ captionGroup, captionList })
       } else {
         const msg = [];

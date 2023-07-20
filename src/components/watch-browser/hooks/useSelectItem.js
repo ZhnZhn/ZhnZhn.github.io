@@ -1,12 +1,18 @@
-import {useRef, useCallback} from 'react'
+import {
+  useRef,
+  useCallback,
+  setRefValue
+} from '../../uiApi';
 
 const useSelectItem = () => {
   const ref = useRef()
   , _hSelect = useCallback(item => {
-    const { caption } = item || {};
-    ref.current = caption
-  },[])
+    setRefValue(
+      ref,
+      (item || {}).caption
+    )    
+  }, [])
   return [ref, _hSelect];
-}
+};
 
 export default useSelectItem

@@ -1,23 +1,17 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _react = require("react");
-
+var _uiApi = require("../uiApi");
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
-
 var _Atoms = _interopRequireDefault(require("./Atoms"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 //import PropTypes from "prop-types";
+
 const _usePrimaryBt = (refInput, setState, onCreate, msgOnIsEmptyName) => {
   const _hCreate = () => {
-    const caption = refInput.current.getValue();
-
+    const caption = (0, _uiApi.getInputValue)(refInput);
     if (caption) {
       onCreate({
         caption
@@ -27,14 +21,12 @@ const _usePrimaryBt = (refInput, setState, onCreate, msgOnIsEmptyName) => {
       setState([msgOnIsEmptyName('Group')]);
     }
   };
-
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.Button.Primary, {
     caption: "Create",
     title: "Create New Group",
     onClick: _hCreate
   });
 };
-
 const GroupAddPane = _ref => {
   let {
     //store,
@@ -45,16 +37,13 @@ const GroupAddPane = _ref => {
     msgOnIsEmptyName,
     onClose
   } = _ref;
-
-  const _refInput = (0, _react.useRef)(),
-        [validationMessages, setState] = (0, _react.useState)([]),
-        _primaryBt = _usePrimaryBt(_refInput, setState, onCreate, msgOnIsEmptyName),
-        _hClear = () => {
-    _refInput.current.setValue('');
-
-    setState([]);
-  };
-
+  const _refInput = (0, _uiApi.useRef)(),
+    [validationMessages, setState] = (0, _uiApi.useState)([]),
+    _primaryBt = _usePrimaryBt(_refInput, setState, onCreate, msgOnIsEmptyName),
+    _hClear = () => {
+      _refInput.current.setValue('');
+      setState([]);
+    };
   (0, _useListen.default)((actionType, data) => {
     if (actionType === actionCompleted && data.forActionType === forActionType) {
       _hClear();
@@ -75,6 +64,7 @@ const GroupAddPane = _ref => {
     })]
   });
 };
+
 /*
 GroupAddPane.propTypes = {
   store: PropTypes.shape({
@@ -88,8 +78,6 @@ GroupAddPane.propTypes = {
   onClose: PropTypes.func
 }
 */
-
-
 var _default = GroupAddPane;
 exports.default = _default;
 //# sourceMappingURL=GroupAddPane.js.map

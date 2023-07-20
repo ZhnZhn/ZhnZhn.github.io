@@ -1,12 +1,21 @@
-import { useRef, useState } from 'react'
 //import PropTypes from "prop-types";
-import useListen from '../hooks/useListen'
+import {
+  useRef,
+  useState,
+  getInputValue
+} from '../uiApi';
+import useListen from '../hooks/useListen';
 
-import A from './Atoms'
+import A from './Atoms';
 
-const _usePrimaryBt = (refInput, setState, onCreate, msgOnIsEmptyName) => {
+const _usePrimaryBt = (
+  refInput,
+  setState,
+  onCreate,
+  msgOnIsEmptyName
+) => {
   const _hCreate = () => {
-     const caption = refInput.current.getValue();
+     const caption = getInputValue(refInput);
      if (caption){
        onCreate({ caption })
      } else {
@@ -14,22 +23,34 @@ const _usePrimaryBt = (refInput, setState, onCreate, msgOnIsEmptyName) => {
        setState([msgOnIsEmptyName('Group')])
      }
   };
-  return (<A.Button.Primary
+  return (
+    <A.Button.Primary
        caption="Create"
        title="Create New Group"
        onClick={_hCreate}
-  />);
+    />);
 }
 
 const GroupAddPane = ({
   //store,
-  actionCompleted, actionFailed, forActionType,
-  onCreate, msgOnIsEmptyName,
+  actionCompleted,
+  actionFailed,
+  forActionType,
+  onCreate,
+  msgOnIsEmptyName,
   onClose
 }) => {
   const _refInput = useRef()
-  , [validationMessages, setState] = useState([])
-  , _primaryBt = _usePrimaryBt(_refInput, setState, onCreate, msgOnIsEmptyName)
+  , [
+    validationMessages,
+    setState
+  ] = useState([])
+  , _primaryBt = _usePrimaryBt(
+     _refInput,
+     setState,
+     onCreate,
+     msgOnIsEmptyName
+  )
   , _hClear = () => {
       _refInput.current.setValue('')
       setState([])

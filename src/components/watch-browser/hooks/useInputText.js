@@ -1,18 +1,22 @@
-import {useRef, useCallback} from 'react'
+import {
+  useRef,
+  useCallback,
+  getRefValue
+} from '../../uiApi';
 
 const useInputText = (setValidationMessages) => {
-  const ref = useRef()
+  const refInput = useRef()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hClear = useCallback(() => {
-    const { current } = ref;
-    if (current) {
-      current.setValue('')
+    const _inputInst = getRefValue(refInput);
+    if (_inputInst) {
+      _inputInst.setValue('')
       setValidationMessages([])
     }
   }, []);
   //setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
-  return [ref, _hClear];
+  return [refInput, _hClear];
 };
 
 export default useInputText

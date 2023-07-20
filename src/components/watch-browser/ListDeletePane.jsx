@@ -1,22 +1,43 @@
 //import PropTypes from "prop-types";
-import { useState, useRef, useCallback, useMemo } from 'react';
-import useListen from '../hooks/useListen'
+import {
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+  getInputValue
+} from '../uiApi';
 
-import A from './Atoms'
+import useListen from '../hooks/useListen';
+
+import A from './Atoms';
 
 const ListDeletePane = ({
   store,
-  actionCompleted, forActionType,
-  onDelete, msgOnNotSelect,
+  actionCompleted,
+  forActionType,
+  onDelete,
+  msgOnNotSelect,
   onClose
 }) => {
-  const [groupOptions, setGroupOptions] = useState(()=>store.getWatchGroups())
-  , [validationMessages, setValidationMessages] = useState([])
+  const [
+    groupOptions,
+    setGroupOptions
+  ] = useState(() => store.getWatchGroups())
+  , [
+    validationMessages,
+    setValidationMessages
+  ] = useState([])
   , _refSelectGroupList = useRef()
-  , _hClear = useCallback(()=>setValidationMessages([]), [])
+  , _hClear = useCallback(
+    () => setValidationMessages([]),
+    []
+  )
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hDelete = useCallback(()=>{
-    const { captionGroup, captionList } = _refSelectGroupList.current.getValue();
+    const {
+      captionGroup,
+      captionList
+    } = getInputValue(_refSelectGroupList) || {};
     if (captionGroup && captionList){
       onDelete({ captionGroup, captionList })
     } else {
