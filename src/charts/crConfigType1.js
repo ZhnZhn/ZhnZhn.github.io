@@ -1,5 +1,5 @@
-
 import pipe from '../utils/pipe';
+
 import {
   isArr,
   isNumber,
@@ -7,15 +7,13 @@ import {
   valueMoving
 } from '../adapters/AdapterFn';
 import {
-  crSplineSeriaConfig,
-  crArea2Config,
-  fAddSeries,
+  crSplineConfig,
   fAddMinMax,
   fAdd,
   toConfig
 } from './configBuilderFn';
 
-const ifCaseRoundByData = (
+const ifCaseRoundBy = (
   rt,
   data
 ) => {
@@ -32,24 +30,13 @@ const crConfigType1 = ({
   confOption
 }) => {
   const {
-    seriaType,
-    seriaColor,
-    seriaWidth,
-    title,
-    subtitle,
     _rt
   } = option;
 
-  ifCaseRoundByData(_rt, data)
+  ifCaseRoundBy(_rt, data)
 
   return pipe(
-    crArea2Config(title, subtitle),
-    fAddSeries(crSplineSeriaConfig({
-      seriaType,
-      seriaColor,
-      seriaWidth,
-      data
-    })),
+    crSplineConfig(data, option),
     fAddMinMax(data, option),
     fAdd({ valueMoving: valueMoving(data, _rt) }),
     fAdd(confOption),
