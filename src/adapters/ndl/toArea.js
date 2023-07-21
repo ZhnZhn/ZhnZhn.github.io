@@ -4,6 +4,7 @@ import { fSeriaMarker } from '../../charts/Chart';
 import pipe from '../../utils/pipe';
 import {
   crAreaConfig,
+  crSplineConfig,
   fAddCaption,
   fAddMinMax,
   fAdd,
@@ -35,6 +36,7 @@ import {
 } from './C';
 import crAreaData from './crAreaData';
 
+const _isArr = Array.isArray
 const _assign = Object.assign;
 const _isMfi = names => names[2] === HIGH
   && names[3] === LOW
@@ -44,21 +46,36 @@ const _isMfi = names => names[2] === HIGH
 const _isMomAth = names => names[1] === OPEN
   && names[4] === CLOSE;
 
+const _crLegendItem = (
+  name,
+  index,
+  color,
+  isVisible
+) => ({
+  name,
+  index,
+  color,
+  isVisible
+});
+
 const _addSeriesTo = (
   config,
-  legendSeries
+  legendSeries,
+  seriaColor
 ) => {
-  if (!legendSeries) { return; }
+  if (!legendSeries) {
+    return;
+  }
 
   const legend = [];
 
   if (config.series.length !== 0){
-     legend.push({
-        name: config.series[0].name,
-        index: 0,
-        color: COLOR_BLUE,
-        isVisible : true
-    });
+     legend.push(_crLegendItem(
+       config.series[0].name,
+       0,
+       seriaColor || COLOR_BLUE,
+       true
+     ));
   }
 
   let i=0, max=legendSeries.length;
@@ -80,21 +97,13 @@ const _addSeriesTo = (
 
     if (!isSecondAxes){
       config.series.push(seria);
-      legend.push({
+      legend.push(_crLegendItem(
         name,
+        config.series.length - 1,
         color,
-        index: config.series.length - 1,
-        isVisible: false
-      });
-    } /*else {
-       legend.push({
-          name : name,
-          color : color,
-          isVisible : false,
-          isSecondAxes : true,
-          seria : seria
-        });
-     }*/
+        false
+      ));
+    }
   }
 
   return legend;
@@ -105,9 +114,11 @@ const toArea = (json, option) => {
    , {
      columnName,
      value:chartId,
-     isDrawDeltaExtrems, isNotZoomToMinMax,
+     isDrawDeltaExtrems,
+     isNotZoomToMinMax,
      dfR,
-     title, subtitle
+     title,
+     subtitle
    } = option
    , {
      seria,
@@ -123,12 +134,21 @@ const toArea = (json, option) => {
      zhPoints
    } = crAreaData(json, option);
 
-   let config = crAreaConfig();
+   const config = _isArr(option.items)
+     ? crSplineConfig(seria, option)
+     : crAreaConfig();
+
    _assign(config.series[0], {
      data: seria,
      name: columnName
    })
-   const legend =  _addSeriesTo(config, legendSeries);
+
+
+   const legend =  _addSeriesTo(
+     config,
+     legendSeries,
+     option.seriaColor
+   );
 
    return {
      config: pipe(

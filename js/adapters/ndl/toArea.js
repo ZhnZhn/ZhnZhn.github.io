@@ -11,21 +11,23 @@ var _stockBuilderFn = require("../../charts/stockBuilderFn");
 var _NdlFn = require("./NdlFn");
 var _C = require("./C");
 var _crAreaData = _interopRequireDefault(require("./crAreaData"));
+const _isArr = Array.isArray;
 const _assign = Object.assign;
 const _isMfi = names => names[2] === _C.HIGH && names[3] === _C.LOW && names[4] === _C.CLOSE && names[5] === _C.VOLUME;
 const _isMomAth = names => names[1] === _C.OPEN && names[4] === _C.CLOSE;
-const _addSeriesTo = (config, legendSeries) => {
+const _crLegendItem = (name, index, color, isVisible) => ({
+  name,
+  index,
+  color,
+  isVisible
+});
+const _addSeriesTo = (config, legendSeries, seriaColor) => {
   if (!legendSeries) {
     return;
   }
   const legend = [];
   if (config.series.length !== 0) {
-    legend.push({
-      name: config.series[0].name,
-      index: 0,
-      color: _C.COLOR_BLUE,
-      isVisible: true
-    });
+    legend.push(_crLegendItem(config.series[0].name, 0, seriaColor || _C.COLOR_BLUE, true));
   }
   let i = 0,
     max = legendSeries.length;
@@ -46,23 +48,9 @@ const _addSeriesTo = (config, legendSeries) => {
       });
     if (!isSecondAxes) {
       config.series.push(seria);
-      legend.push({
-        name,
-        color,
-        index: config.series.length - 1,
-        isVisible: false
-      });
-    } /*else {
-       legend.push({
-          name : name,
-          color : color,
-          isVisible : false,
-          isSecondAxes : true,
-          seria : seria
-        });
-      }*/
+      legend.push(_crLegendItem(name, config.series.length - 1, color, false));
+    }
   }
-
   return legend;
 };
 const toArea = (json, option) => {
@@ -89,12 +77,12 @@ const toArea = (json, option) => {
       legendSeries,
       zhPoints
     } = (0, _crAreaData.default)(json, option);
-  let config = (0, _configBuilderFn.crAreaConfig)();
+  const config = _isArr(option.items) ? (0, _configBuilderFn.crSplineConfig)(seria, option) : (0, _configBuilderFn.crAreaConfig)();
   _assign(config.series[0], {
     data: seria,
     name: columnName
   });
-  const legend = _addSeriesTo(config, legendSeries);
+  const legend = _addSeriesTo(config, legendSeries, option.seriaColor);
   return {
     config: (0, _pipe.default)(config, (0, _configBuilderFn.fAddCaption)(title, subtitle), (0, _configBuilderFn.fAddMinMax)(seria, {
       minY,
