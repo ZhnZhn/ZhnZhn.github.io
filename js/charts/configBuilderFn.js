@@ -1,9 +1,11 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toConfig = exports.fSetSeriaBy = exports.fAddZhPoints = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSeriaConfigFromAdapter = exports.crScatterSeriaConfig = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+exports.toConfig = exports.fSetSeriaBy = exports.fAddZhPoints = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSplineConfig = exports.crSeriaConfigFromAdapter = exports.crScatterSeriaConfig = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _ChartConfigFn = require("./ChartConfigFn");
 exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
+var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _seriaFn = require("../math/seriaFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _TreeMapConfigFn = require("./TreeMapConfigFn");
@@ -359,4 +361,18 @@ const crScatterSeriaConfig = (tooltip, option) => fAdd('tooltip', (0, _Chart.fTo
   ...option
 });
 exports.crScatterSeriaConfig = crScatterSeriaConfig;
+const crSplineConfig = (data, option) => {
+  const {
+    seriaType,
+    seriaColor,
+    seriaWidth
+  } = option;
+  return (0, _pipe.default)(crArea2Config(option.title, option.subtitle), fAddSeries(crSplineSeriaConfig({
+    seriaType,
+    seriaColor,
+    seriaWidth,
+    data
+  })), toConfig);
+};
+exports.crSplineConfig = crSplineConfig;
 //# sourceMappingURL=configBuilderFn.js.map

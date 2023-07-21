@@ -1,5 +1,6 @@
 export { crSeriaConfig } from './ChartConfigFn';
 
+import pipe from '../utils/pipe';
 import {
   crSeriaConfig
 } from './ChartConfigFn';
@@ -453,3 +454,24 @@ export const crScatterSeriaConfig = (
     'tooltip',
     fTooltip(tooltip)
 )({...CONFIG_SCATTER, ...option})
+
+export const crSplineConfig = (
+  data,
+  option
+) => {
+  const {
+    seriaType,
+    seriaColor,
+    seriaWidth,
+  } = option;
+  return pipe(
+    crArea2Config(option.title, option.subtitle),
+    fAddSeries(crSplineSeriaConfig({
+      seriaType,
+      seriaColor,
+      seriaWidth,
+      data
+    })),
+    toConfig
+  );
+}
