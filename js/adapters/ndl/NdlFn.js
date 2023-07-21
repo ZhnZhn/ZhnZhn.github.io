@@ -74,6 +74,7 @@ const DATA_SOURCE = 'Nasdaq Data Link';
 const crZhConfig = option => {
   const {
       item,
+      items,
       title,
       subtitle = '',
       value: id,
@@ -88,7 +89,7 @@ const crZhConfig = option => {
     _dataSource = (0, _AdapterFn.joinBy)(' ', DATA_SOURCE, dataSource),
     _itemCaption = _crItemCaption(option);
   return {
-    item,
+    item: (0, _AdapterFn.isArr)(items) ? items[0] : item,
     title,
     subtitle,
     id,

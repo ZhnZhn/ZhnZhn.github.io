@@ -1,5 +1,8 @@
 import {
   CHT_AREA,
+  CHT_SPLINE,
+  CHT_LINE,
+  CHT_COLUMN,
   CHT_SEMI_DONUT,
   CHT_STACKED_AREA,
   CHT_STACKED_AREA_PERCENT,
@@ -54,6 +57,9 @@ const _fToSeria = crSeria => (
 const _crScatterConfig = _fToConfig(toScatterConfig);
 const _rToConfig = {
   [CHT_AREA]: toArea,
+  [CHT_SPLINE]: toArea,
+  [CHT_LINE]: toArea,
+  [CHT_COLUMN]: toArea,
   [CHT_SEMI_DONUT]: toSemiDonut,
   [CHT_STACKED_AREA]: toStackedArea,
   [CHT_STACKED_AREA_PERCENT]: toStackedArea,

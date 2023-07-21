@@ -3,15 +3,23 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
-const API_URL = "https://data.nasdaq.com/api/v3/datasets/",
-  TABLE_URL = "https://data.nasdaq.com/api/v3/datatables/",
-  LIMIT_REMAINING = 'X-RateLimit-Remaining';
-const _addTo = (q, pN, pV) => {
-  if (!pV) {
-    return q || '';
-  }
-  return q ? q + "&" + pN + "=" + pV : pN + "=" + pV;
+const API_V3 = 'https://data.nasdaq.com/api/v3',
+  SET_URL = API_V3 + "/datasets/",
+  TABLE_URL = API_V3 + "/datatables/",
+  LIMIT_REMAINING = 'X-RateLimit-Remaining',
+  _isArr = Array.isArray;
+const _crSetUrl2 = option => {
+  const {
+      proxy,
+      items,
+      fromDate,
+      apiKey,
+      dfDbId
+    } = option,
+    id = (0, _AdapterFn.getValue)(items[0]);
+  return "" + proxy + SET_URL + dfDbId + "/" + id + ".json?sort_order=asc&api_key=" + apiKey + "&trim_start=" + (fromDate || '');
 };
+const _addTo = (q, pN, pV) => pV ? q ? q + "&" + pN + "=" + pV : pN + "=" + pV : q || '';
 const _crSetUrl = option => {
   const {
     proxy,
@@ -26,7 +34,7 @@ const _crSetUrl = option => {
   _q = _addTo(_q, 'trim_end', toDate);
   _q = _addTo(_q, 'transform', transform);
   _q = _addTo(_q, 'api_key', apiKey);
-  return "" + proxy + API_URL + value + ".json?" + _q;
+  return "" + proxy + SET_URL + value + ".json?" + _q;
 };
 const _crTableUrl = option => {
   const {
@@ -59,17 +67,14 @@ const _checkDataset = dataset => {
     data,
     newest_available_date,
     oldest_available_date
-  } = dataset;
-  if (!data || data.length === 0) {
+  } = dataset || {};
+  if (!_isArr(data) || data.length === 0) {
     throw (0, _AdapterFn.crError)('', "Result dataset for request is empty:\n        Newest Date: " + (newest_available_date || '') + "\n        Oldest Date: " + (oldest_available_date || ''));
   }
 };
 const NdlApi = {
   getRequestUrl(option) {
-    if (option === void 0) {
-      option = {};
-    }
-    return !option.dfTable ? _crSetUrl(option) : _crTableUrl(option);
+    return option.items ? _crSetUrl2(option) : option.dfTable ? _crTableUrl(option) : _crSetUrl(option);
   },
   // headers && headers.get existed
   getLimitRemaiming: headers => headers.get(LIMIT_REMAINING),
@@ -78,11 +83,10 @@ const NdlApi = {
       quandl_error,
       dataset,
       datatable
-    } = json;
+    } = json || {};
     _checkErr(quandl_error);
     _checkDataEmpty(dataset, datatable);
     _checkDataset(dataset);
-    return true;
   }
 };
 var _default = NdlApi;

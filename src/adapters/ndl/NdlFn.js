@@ -100,6 +100,7 @@ export const crZhConfig = (
 ) => {
   const {
     item,
+    items,
     title,
     subtitle='',
     value:id,
@@ -114,7 +115,9 @@ export const crZhConfig = (
   , _dataSource = joinBy(' ', DATA_SOURCE, dataSource)
   , _itemCaption = _crItemCaption(option);
   return {
-    item,
+    item: isArr(items)
+      ? items[0]
+      : item,
     title,
     subtitle,
     id,
