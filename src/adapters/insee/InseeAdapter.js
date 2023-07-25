@@ -13,9 +13,13 @@ const _parser = new window.DOMParser()
 
 //€
 
-const _crZhConfig = id => ({
+const _crZhConfig = (
+  id,
+  caption
+) => ({
   id: id,
   key: id,
+  itemCaption: caption,
   dataSource: 'INSEE'
 });
 
@@ -80,7 +84,10 @@ const _crConfigOption = (
     option.subtitle,
     seriesParams
   ),
-  zhConfig: _crZhConfig(option.value)
+  zhConfig: _crZhConfig(
+    option._itemKey || option.value,
+    option.value
+  )
 });
 
 const InseeAdapter = {

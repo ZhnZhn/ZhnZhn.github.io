@@ -1,12 +1,1 @@
-{
- "items":[
-    {"c":"All Items","v":"001759970"},
-    {"c":"Food","v":"001759963"},
-    {"c":"- Fresh Food","v":"001759964"}, 
-    {"c":"- Other Food Products","v":"001759965"},
-    {"c":"Tobacco","v":"001759969"},
-    {"c":"Energy","v":"001759967"},
-    {"c":"Services","v":"001759968"},
-    {"c":"Manufactured Products","v":"001759966"}
-  ]
-}
+{"items":[{"c":"All Items","v":"001759970"},{"c":"Food","v":"001759963"},{"c":"- Fresh Food","v":"001759964"},{"c":"- Other Food Products","v":"001759965"},{"c":"Tobacco","v":"001759969"},{"c":"Energy","v":"001759967"},{"c":"Services","v":"001759968"},{"c":"Manufactured Products","v":"001759966"}]}
