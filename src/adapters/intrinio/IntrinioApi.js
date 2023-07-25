@@ -1,5 +1,6 @@
-import { 
+import {
   isArr,
+  getValue,
   crError
 } from '../AdapterFn';
 
@@ -16,11 +17,16 @@ const FRQ = {
   DF: 'monthly'
 };
 
-const _getErr = (json) => json
-  && Array.isArray(json.errors)
-  && json.errors[0]
-   ? json.errors[0]
-   : void 0;
+const _getErr = (
+  json
+) => json
+  && isArr(json.errors)
+  && json.errors[0];
+
+const _crUrl = (
+  identifier,
+  fromDate
+) => `${API_URL}?identifier=${identifier}&start_date=${fromDate}`;
 
 const IntrinioApi = {
   crOptionFetch(option){
@@ -34,31 +40,41 @@ const IntrinioApi = {
 
   getRequestUrl(option){
     const {
-      value, fromDate, toDate, item={},
-      one, two, three
+      fromDate,
+      toDate,
+      one,
+      two,
+      three='QTR',
+      items
     } = option;
+    let {
+      value,
+      item={}
+    } = option;
+
     option.resErrStatus = RES_ERR_STATUS
 
-    if (two && three) {
-      return `${API_URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&type=${three}`;
+    if (two) {
+      return `${_crUrl(one, fromDate)}&item=${two}&end_date=${toDate}&type=${three}`
     }
 
-    if (two) {
-      //return `${C.URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&frequency=quarterly`;
-      return `${API_URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&type=QTR`;
+    if (isArr(items)) {
+      option.item = item = items[0]
+      option.value = value = getValue(item)
     }
 
     const _frq = FRQ[item.frq] || FRQ.DF;
-    return `${API_URL}?identifier=${value}&start_date=${fromDate}&end_date=${toDate}&frequency=${_frq}&${TAIL}`;
+    return `${_crUrl(value, fromDate)}&frequency=${_frq}&${TAIL}`;
   },
 
   checkResponse(json){
-    const _err = _getErr(json);
-    if (_err) {
-     throw crError(_err.human, _err.message);
+    const _jsonErr = _getErr(json);
+    if (_jsonErr) {
+      throw crError(_jsonErr.human, _jsonErr.message);
     }
-    return json
-      && isArr(json.data);
+    if (!isArr(json.data)) {
+      throw crError();
+    }
   }
 };
 

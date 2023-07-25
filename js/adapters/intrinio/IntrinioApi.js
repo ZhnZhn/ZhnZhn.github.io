@@ -2,12 +2,10 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
 var _AdapterFn = require("../AdapterFn");
-
 const API_URL = 'https://api.intrinio.com/historical_data',
-      TAIL = 'item=level',
-      RES_ERR_STATUS = [401];
+  TAIL = 'item=level',
+  RES_ERR_STATUS = [401];
 const FRQ = {
   A: 'yearly',
   Q: 'quarterly',
@@ -16,9 +14,8 @@ const FRQ = {
   M: 'monthly',
   DF: 'monthly'
 };
-
-const _getErr = json => json && Array.isArray(json.errors) && json.errors[0] ? json.errors[0] : void 0;
-
+const _getErr = json => json && (0, _AdapterFn.isArr)(json.errors) && json.errors[0];
+const _crUrl = (identifier, fromDate) => API_URL + "?identifier=" + identifier + "&start_date=" + fromDate;
 const IntrinioApi = {
   crOptionFetch(option) {
     const {
@@ -30,43 +27,39 @@ const IntrinioApi = {
       }
     };
   },
-
   getRequestUrl(option) {
     const {
-      value,
       fromDate,
       toDate,
-      item = {},
       one,
       two,
-      three
+      three = 'QTR',
+      items
+    } = option;
+    let {
+      value,
+      item = {}
     } = option;
     option.resErrStatus = RES_ERR_STATUS;
-
-    if (two && three) {
-      return API_URL + "?identifier=" + one + "&item=" + two + "&start_date=" + fromDate + "&end_date=" + toDate + "&type=" + three;
-    }
-
     if (two) {
-      //return `${C.URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&frequency=quarterly`;
-      return API_URL + "?identifier=" + one + "&item=" + two + "&start_date=" + fromDate + "&end_date=" + toDate + "&type=QTR";
+      return _crUrl(one, fromDate) + "&item=" + two + "&end_date=" + toDate + "&type=" + three;
     }
-
+    if ((0, _AdapterFn.isArr)(items)) {
+      option.item = item = items[0];
+      option.value = value = (0, _AdapterFn.getValue)(item);
+    }
     const _frq = FRQ[item.frq] || FRQ.DF;
-
-    return API_URL + "?identifier=" + value + "&start_date=" + fromDate + "&end_date=" + toDate + "&frequency=" + _frq + "&" + TAIL;
+    return _crUrl(value, fromDate) + "&frequency=" + _frq + "&" + TAIL;
   },
-
   checkResponse(json) {
-    const _err = _getErr(json);
-
-    if (_err) {
-      throw (0, _AdapterFn.crError)(_err.human, _err.message);
+    const _jsonErr = _getErr(json);
+    if (_jsonErr) {
+      throw (0, _AdapterFn.crError)(_jsonErr.human, _jsonErr.message);
     }
-
-    return json && (0, _AdapterFn.isArr)(json.data);
+    if (!(0, _AdapterFn.isArr)(json.data)) {
+      throw (0, _AdapterFn.crError)();
+    }
   }
-
 };
 var _default = IntrinioApi;
 exports.default = _default;

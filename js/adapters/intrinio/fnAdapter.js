@@ -2,20 +2,17 @@
 
 exports.__esModule = true;
 exports.crSubtitle = exports.crData = exports.crConfigOption = void 0;
-
 var _AdapterFn = require("../AdapterFn");
-
 const FRED = 'FRED';
-
 const _crId = _ref => {
   let {
     value,
     two,
-    three = ''
+    three = '',
+    _itemKey
   } = _ref;
-  return two ? value + "_" + two + "_" + three : value;
+  return _itemKey || (two ? value + "_" + two + "_" + three : value);
 };
-
 const _crLinkItem = option => {
   const {
     linkFn,
@@ -26,16 +23,14 @@ const _crLinkItem = option => {
     article: option.dfArticle
   } : value;
 };
-
 const _crZhConfig = option => {
   const {
-    title = '',
-    dataSource,
-    linkFn
-  } = option,
-        item = _crLinkItem(option),
-        id = _crId(option);
-
+      title = '',
+      dataSource,
+      linkFn
+    } = option,
+    item = _crLinkItem(option),
+    id = _crId(option);
   return {
     id: id,
     key: id,
@@ -45,7 +40,6 @@ const _crZhConfig = option => {
     dataSource
   };
 };
-
 const _crInfo = _ref2 => {
   let {
     title = ''
@@ -54,7 +48,6 @@ const _crInfo = _ref2 => {
     name: title
   };
 };
-
 const crSubtitle = _ref3 => {
   let {
     subtitle = '',
@@ -62,31 +55,24 @@ const crSubtitle = _ref3 => {
   } = _ref3;
   return threeCaption ? subtitle + ", " + threeCaption : subtitle;
 };
-
 exports.crSubtitle = crSubtitle;
-
 const crData = json => json.data.reduce((_data, p) => {
   const {
     date,
     value
   } = p;
-
   if ((0, _AdapterFn.isNumberOrNull)(value)) {
     _data.push({
       x: (0, _AdapterFn.ymdToUTC)(date),
       y: value
     });
   }
-
   return _data;
 }, []).reverse();
-
 exports.crData = crData;
-
 const crConfigOption = option => ({
   zhConfig: _crZhConfig(option),
   info: _crInfo(option)
 });
-
 exports.crConfigOption = crConfigOption;
 //# sourceMappingURL=fnAdapter.js.map

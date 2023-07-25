@@ -8,10 +8,13 @@ const FRED = 'FRED';
 const _crId = ({
   value,
   two,
-  three=''
-}) => two
-  ? `${value}_${two}_${three}`
-  : value;
+  three='',
+  _itemKey
+}) => _itemKey
+  || (two
+       ? `${value}_${two}_${three}`
+       : value
+    );
 
 const _crLinkItem = (
   option
