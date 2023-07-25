@@ -4,15 +4,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.loadDialogs = exports.getDialog = void 0;
 var _BrowserType = require("../../constants/BrowserType");
-var _Dialogs = _interopRequireDefault(require("../../components/dialogs/Dialogs"));
+var _DialogSelectN = _interopRequireDefault(require("../../components/dialogs/DialogSelectN"));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
 const _router = {
-  DF: _Dialogs.default.Type3,
-  DialogSelectN: _Dialogs.default.SelectN,
-  DialogType3: _Dialogs.default.Type3,
+  DF: _DialogSelectN.default,
+  DialogSelectN: _DialogSelectN.default,
   _loadGD() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {

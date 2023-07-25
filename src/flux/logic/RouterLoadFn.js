@@ -1,8 +1,6 @@
-
 import fnSelectN from '../creaters/selectN'
 import fnStatN from '../creaters/statN'
 
-import fnType3 from '../creaters/type3'
 import fnType4 from '../creaters/type4'
 import fnType5 from '../creaters/type5'
 
@@ -18,8 +16,7 @@ const noopFn = () => {};
 const _r = {
   BigMac: fnBigMac,
 
-  DF: fnType3,
-  DialogType3: fnType3,
+  DF: fnSelectN,
   DialogType4: fnType4,
   DialogType4A: fnType4,
   DialogType5: fnType5,

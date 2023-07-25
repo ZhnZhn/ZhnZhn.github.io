@@ -6,16 +6,14 @@ import {
   BT_UN_COMTRADE
 } from '../../constants/BrowserType';
 
-import D from '../../components/dialogs/Dialogs';
+import DialogSelectN from '../../components/dialogs/DialogSelectN';
 
 const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
 
 const _router = {
-  DF: D.Type3,
-
-  DialogSelectN: D.SelectN,
-  DialogType3: D.Type3,
+  DF: DialogSelectN,
+  DialogSelectN: DialogSelectN,
 
   _loadGD(){
     /*eslint-disable no-undef */
