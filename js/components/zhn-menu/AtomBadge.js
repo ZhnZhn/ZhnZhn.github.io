@@ -12,34 +12,37 @@ const TH_ID = 'ELEMENT',
   S_BADGE_OPEN = {
     color: '#a487d4'
   };
-const MenuBadge = _ref => {
+const AtomBadge = _ref => {
   let {
-    isOpen,
-    counter,
-    onClick,
-    onBadgeClose
+    atomBadge,
+    onOpen,
+    onClose
   } = _ref;
-  const _hClick = (0, _uiApi.useCallback)(event => {
-      event.stopPropagation();
-      if (!isOpen) {
-        onClick();
+  const {
+      is,
+      value
+    } = atomBadge.useAtomValue(),
+    _hClick = (0, _uiApi.useCallback)(evt => {
+      evt.stopPropagation();
+      if (is) {
+        onClose();
       } else {
-        onBadgeClose();
+        onOpen();
       }
-    }, [isOpen, onClick, onBadgeClose]),
+    }, [is, onOpen, onClose]),
     TS = (0, _useTheme.default)(TH_ID),
-    _btStyle = isOpen ? S_BADGE_OPEN : null;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
+    _btStyle = is ? S_BADGE_OPEN : null;
+  return value === 0 ? null : /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
     tabIndex: "-1",
     className: CL,
     style: {
       ..._btStyle,
       ...TS.BG
     },
-    caption: counter,
+    caption: value,
     onClick: _hClick
   });
 };
-var _default = MenuBadge;
+var _default = AtomBadge;
 exports.default = _default;
-//# sourceMappingURL=MenuBadge.js.map
+//# sourceMappingURL=AtomBadge.js.map

@@ -7,33 +7,36 @@ const TH_ID = 'ELEMENT'
 , CL = "menu__badge"
 , S_BADGE_OPEN = { color: '#a487d4' };
 
-const MenuBadge = ({
-  isOpen,
-  counter,
-  onClick,
-  onBadgeClose
+const AtomBadge = ({
+  atomBadge,
+  onOpen,
+  onClose
 }) => {
-  const _hClick = useCallback(event => {
-    event.stopPropagation();
-    if (!isOpen){
-      onClick();
+  const {
+    is,
+    value
+  } = atomBadge.useAtomValue()
+  , _hClick = useCallback(evt => {
+    evt.stopPropagation();
+    if (is){
+      onClose();
     } else {
-      onBadgeClose();
+      onOpen();
     }
-  }, [isOpen, onClick, onBadgeClose])
+  }, [is, onOpen, onClose])
   , TS = useTheme(TH_ID)
-  , _btStyle = isOpen
-        ? S_BADGE_OPEN
-        : null;
-  return (
+  , _btStyle = is
+       ? S_BADGE_OPEN
+       : null;
+  return value === 0 ? null : (
     <ButtonCircle2
       tabIndex="-1"
       className={CL}
       style={{..._btStyle, ...TS.BG}}
-      caption={counter}
+      caption={value}
       onClick={_hClick}
     />
   );
 };
 
-export default MenuBadge
+export default AtomBadge

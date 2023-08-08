@@ -1,16 +1,15 @@
 import useKeyEnter from '../hooks/useKeyEnter';
 
 import LabelNew from './LabelNew';
-import MenuBadge from './MenuBadge';
+import AtomBadge from './AtomBadge';
 
 const CL_ROW = "row__topic not-selected";
 
 const MenuItem = ({
   isNew,
-  isOpen,
   style,
   title,
-  counter,
+  atomBadge,
   onBadgeClick,
   onBadgeClose,
   onClick
@@ -26,14 +25,11 @@ const MenuItem = ({
       onKeyDown={_hKeyDown}
    >
      {title}
-     {counter !== 0
-        ? <MenuBadge
-           counter={counter}
-           isOpen={isOpen}
-           onClick={onBadgeClick}
-           onBadgeClose={onBadgeClose}
-        />
-        : null
+     {atomBadge != null && <AtomBadge
+          atomBadge={atomBadge}
+          onOpen={onBadgeClick}
+          onClose={onBadgeClose}
+       />
      }
      {isNew ? <LabelNew /> : null}
   </div>
