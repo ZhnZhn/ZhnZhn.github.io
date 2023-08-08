@@ -17,28 +17,21 @@ export const initBrowserMenu = (
   slice,
   option
 ) => {
-  const { json, browserType } = option
-  , { menu, items, df } = json
+  const {
+    json,
+    browserType
+  } = option
+  , {
+    menu,
+    items,
+    df
+  } = json
   , elMenu = crMenu(menu, items, browserType);
 
   addDialogPropsTo(items, df);
   slice.routeDialog[browserType] = items;
   slice.browserMenu[browserType] = elMenu;
   return elMenu;
-}
-
-export const setIsOpen = (
-  value,
-  appMenu,
-  bT,
-  cT
-) => {
-  if (isWithItemCounter(bT)) {
-    const item = findItem(appMenu[bT], cT);
-    if (item) {
-      item.isOpen = value;
-    }
-  }
 }
 
 const _findItemCounter = (
@@ -49,26 +42,32 @@ const _findItemCounter = (
   ? findItem(appMenu[bT], cT)
   : void 0;
 
-export const plusCounter = (
+const _fEditItem = (edit) => (
   value,
   appMenu,
   bT,
   cT
 ) => {
   const item = _findItemCounter(appMenu, bT, cT);
-  if (item){
-    item.counter += value;
-    item.isOpen = true;
+  if (item) {
+    edit(item, value)
   }
 }
 
-export const resetCounter = (
-  appMenu,
-  bT,
-  cT
-) => {
-  const item = _findItemCounter(appMenu, bT, cT);
-  if (item) {
-    item.counter = 0
-  }
-}
+const _editIsOpen = (item, value) => {
+  item.isOpen = value
+};
+export const setIsOpen = _fEditItem(_editIsOpen)
+
+
+const _editPlusCounter = (item, value) => {
+  item.counter += value;
+  item.isOpen = true;
+};
+export const plusCounter = _fEditItem(_editPlusCounter)
+
+const _editResetCounter = (item, value) => {
+  item.counter = value
+};
+export const resetCounter = _fEditItem(_editResetCounter)
+  .bind(null, 0)
