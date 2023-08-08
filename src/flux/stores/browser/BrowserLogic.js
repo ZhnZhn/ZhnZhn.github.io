@@ -2,7 +2,7 @@ import BrowserConfig from '../../../constants/BrowserConfig';
 
 import crMenu from './crMenu';
 import addDialogPropsTo from './addDialogPropsTo';
-import findItem from './findItem';
+import findItemSetValue from './findItem';
 
 export const isWithItemCounter = (
   browserType
@@ -34,12 +34,12 @@ export const initBrowserMenu = (
   return elMenu;
 }
 
-const _findItemCounter = (
+const _findItemSetValue = (
   appMenu,
   bT,
   cT
 ) => isWithItemCounter(bT)
-  ? findItem(appMenu[bT], cT)
+  ? findItemSetValue(appMenu[bT], cT)
   : void 0;
 
 const _fEditItem = (edit) => (
@@ -48,26 +48,34 @@ const _fEditItem = (edit) => (
   bT,
   cT
 ) => {
-  const item = _findItemCounter(appMenu, bT, cT);
-  if (item) {
-    edit(item, value)
+  const setValue = _findItemSetValue(appMenu, bT, cT);
+  if (setValue) {
+    edit(setValue, value)
   }
 }
 
-const _editIsOpen = (item, value) => {
-  item.isOpen = value
+const _editIsOpen = (setValue, value) => {
+  setValue(prev => ({
+    ...prev,
+    is: value
+  }))
 };
 export const setIsOpen = _fEditItem(_editIsOpen)
 
 
-const _editPlusCounter = (item, value) => {
-  item.counter += value;
-  item.isOpen = true;
+const _editPlusCounter = (setValue, value) => {
+  setValue(prev => ({
+    value: prev.value + value,
+    is: true
+  }))
 };
 export const plusCounter = _fEditItem(_editPlusCounter)
 
-const _editResetCounter = (item, value) => {
-  item.counter = value
+const _editResetCounter = (setValue, value) => {
+  setValue(prev => ({
+    ...prev,
+    value
+  }))
 };
 export const resetCounter = _fEditItem(_editResetCounter)
   .bind(null, 0)

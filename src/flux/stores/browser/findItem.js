@@ -37,4 +37,9 @@ const findItem = (
   }
 };
 
-export default memoizeOne(findItem)
+const findItemSetValue = (
+  menu,
+  chartType
+) => ((findItem(menu, chartType) || {}).atomBadge || {}).setValue
+
+export default memoizeOne(findItemSetValue)

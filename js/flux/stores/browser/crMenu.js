@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _storeApi = require("../../storeApi");
 var _ComponentActions = require("../../actions/ComponentActions");
 var _ChartActions = require("../../actions/ChartActions");
 const _isArr = Array.isArray,
@@ -21,8 +22,10 @@ const _crItem = (_ref, menuItems, browserType) => {
     id,
     title: menuItems[id].menuTitle,
     isNew: isNew,
-    isOpen: false,
-    counter: 0,
+    atomBadge: (0, _storeApi.atom)({
+      is: false,
+      value: 0
+    }),
     ..._crItemHandlers(id, browserType)
   };
 };

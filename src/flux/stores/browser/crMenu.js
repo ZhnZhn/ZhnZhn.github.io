@@ -1,3 +1,5 @@
+import { atom } from '../../storeApi';
+
 import {
   ComponentActions
 } from '../../actions/ComponentActions';
@@ -29,8 +31,7 @@ const _crItem = (
   id,
   title: menuItems[id].menuTitle,
   isNew: isNew,
-  isOpen: false,
-  counter: 0,
+  atomBadge: atom({ is: false, value: 0 }),  
   ..._crItemHandlers(id, browserType)
 })
 

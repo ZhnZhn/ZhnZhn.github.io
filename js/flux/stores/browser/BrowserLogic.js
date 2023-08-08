@@ -29,26 +29,34 @@ const initBrowserMenu = (slice, option) => {
   return elMenu;
 };
 exports.initBrowserMenu = initBrowserMenu;
-const _findItemCounter = (appMenu, bT, cT) => isWithItemCounter(bT) ? (0, _findItem.default)(appMenu[bT], cT) : void 0;
+const _findItemSetValue = (appMenu, bT, cT) => isWithItemCounter(bT) ? (0, _findItem.default)(appMenu[bT], cT) : void 0;
 const _fEditItem = edit => (value, appMenu, bT, cT) => {
-  const item = _findItemCounter(appMenu, bT, cT);
-  if (item) {
-    edit(item, value);
+  const setValue = _findItemSetValue(appMenu, bT, cT);
+  if (setValue) {
+    edit(setValue, value);
   }
 };
-const _editIsOpen = (item, value) => {
-  item.isOpen = value;
+const _editIsOpen = (setValue, value) => {
+  setValue(prev => ({
+    ...prev,
+    is: value
+  }));
 };
 const setIsOpen = _fEditItem(_editIsOpen);
 exports.setIsOpen = setIsOpen;
-const _editPlusCounter = (item, value) => {
-  item.counter += value;
-  item.isOpen = true;
+const _editPlusCounter = (setValue, value) => {
+  setValue(prev => ({
+    value: prev.value + value,
+    is: true
+  }));
 };
 const plusCounter = _fEditItem(_editPlusCounter);
 exports.plusCounter = plusCounter;
-const _editResetCounter = (item, value) => {
-  item.counter = value;
+const _editResetCounter = (setValue, value) => {
+  setValue(prev => ({
+    ...prev,
+    value
+  }));
 };
 const resetCounter = _fEditItem(_editResetCounter).bind(null, 0);
 exports.resetCounter = resetCounter;

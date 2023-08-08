@@ -6,9 +6,6 @@ import {
   CAT_CLOSE_CHART_CONTAINER_2,
   CAT_CHANGE_THEME
 } from '../actions/ComponentActions';
-import {
-  BAT_UPDATE_BROWSER_MENU
-} from '../actions/BrowserActions';
 
 import {
   MDT_ALERT
@@ -72,10 +69,7 @@ const ComponentSlice = {
   onCloseChartContainer(chartType, browserType){
     this.uncheckActiveContChb(chartType);
     this.uncheckActiveCheckbox(chartType);
-    if(this.isWithItemCounter(browserType)){
-      this.setMenuItemClose(chartType, browserType);
-      this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
-    }
+    this.setMenuItemClose(chartType, browserType);
   },
   onCloseChartContainer2(chartType, browserType){
     this.trigger(CAT_CLOSE_CHART_CONTAINER_2, chartType);

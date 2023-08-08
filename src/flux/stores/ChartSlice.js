@@ -9,9 +9,6 @@ import {
   CHAT_SHOW,
   CHAT_CLOSE
 } from '../actions/ChartActions';
-import {
-  BAT_UPDATE_BROWSER_MENU
-} from '../actions/BrowserActions';
 
 import {
   isChartExist,
@@ -26,7 +23,6 @@ import {
   scanPostAdded,
   setAlertItemIdTo
 } from './chart/ChartLogic';
-
 
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 const _logErrorToConsole = function({
@@ -84,7 +80,6 @@ const ChartSlice = {
       }
       this.triggerLoadingProgress(LPAT_LOADING_COMPLETE)
       this.triggerLimitRemaining(limitRemaining);
-      this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
   },
   onLoadItemAdded(option={}){
      this.triggerLoadingProgress(LPAT_LOADING_COMPLETE)
@@ -118,7 +113,6 @@ const ChartSlice = {
     } else {
       this.trigger(CHAT_INIT_AND_SHOW, Comp)
     }
-    this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
   },
 
   resetActiveChart(id){
@@ -132,15 +126,15 @@ const ChartSlice = {
 
   onCloseChart(chartType, browserType, chartId){
     const {
-            chartSlice, isRemoved
-          } = removeConfig(this.charts, chartType, chartId)
+      chartSlice,
+      isRemoved
+    } = removeConfig(this.charts, chartType, chartId);
 
     if (isRemoved) {
       this.resetActiveChart(chartId)
       this.minusMenuItemCounter(chartType, browserType);
 
       this.trigger(CHAT_CLOSE, chartSlice);
-      this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
     }
   },
 
@@ -169,7 +163,6 @@ const ChartSlice = {
     this.resetMenuItemCounter(chartType, browserType)
     this.uncheckActiveCheckbox()
     this.trigger(CHAT_SHOW, chartSlice);
-    this.trigger(BAT_UPDATE_BROWSER_MENU, browserType);
   }
 
 };

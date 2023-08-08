@@ -3,7 +3,6 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _ComponentActions = require("../actions/ComponentActions");
-var _BrowserActions = require("../actions/BrowserActions");
 var _ModalDialogType = require("../../constants/ModalDialogType");
 var _ContCheckBoxLogicFn = require("./comp/ContCheckBoxLogicFn");
 var _DialogLogicFn = require("./comp/DialogLogicFn");
@@ -52,10 +51,7 @@ const ComponentSlice = {
   onCloseChartContainer(chartType, browserType) {
     this.uncheckActiveContChb(chartType);
     this.uncheckActiveCheckbox(chartType);
-    if (this.isWithItemCounter(browserType)) {
-      this.setMenuItemClose(chartType, browserType);
-      this.trigger(_BrowserActions.BAT_UPDATE_BROWSER_MENU, browserType);
-    }
+    this.setMenuItemClose(chartType, browserType);
   },
   onCloseChartContainer2(chartType, browserType) {
     this.trigger(_ComponentActions.CAT_CLOSE_CHART_CONTAINER_2, chartType);
