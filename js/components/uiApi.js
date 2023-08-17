@@ -62,11 +62,15 @@ const getRefOptions = ref => {
   return _inst && _isFn(_inst.getOptions) ? _inst.getOptions() : void 0;
 };
 exports.getRefOptions = getRefOptions;
-const _getFirstTouches = touches => touches && touches[0] || {};
-const _getTouchClientX = touches => _getFirstTouches(touches).clientX;
-const _getTouchClientY = touches => _getFirstTouches(touches).clientY;
-const getClientX = evt => evt.clientX || _getTouchClientX(evt.targetTouches) || _getTouchClientX(evt.changedTouches) || 0;
+const _getFirstTouches = touches => touches && touches[0] || {},
+  CLIENT_X = 'clientX',
+  CLIENT_Y = 'clientY',
+  _fGetTouch = propName => touches => _getFirstTouches(touches)[propName],
+  _getTouchClientX = _fGetTouch(CLIENT_X),
+  _getTouchClientY = _fGetTouch(CLIENT_Y),
+  _fGetEvt = (propName, getTouch) => evt => evt[propName] || getTouch(evt.targetTouches) || getTouch(evt.changedTouches) || 0;
+const getClientX = _fGetEvt(CLIENT_X, _getTouchClientX);
 exports.getClientX = getClientX;
-const getClientY = evt => evt.clientY || _getTouchClientY(evt.targetTouches) || _getTouchClientY(evt.changedTouches) || 0;
+const getClientY = _fGetEvt(CLIENT_Y, _getTouchClientY);
 exports.getClientY = getClientY;
 //# sourceMappingURL=uiApi.js.map

@@ -89,26 +89,20 @@ export const getRefOptions = (
 
 const _getFirstTouches = (
   touches
-) => (touches && touches[0]) || {};
-
-const _getTouchClientX = (
+) => (touches && touches[0]) || {}
+, CLIENT_X = 'clientX'
+, CLIENT_Y = 'clientY'
+, _fGetTouch = (propName) => (
   touches
-) => _getFirstTouches(touches).clientX;
-
-const _getTouchClientY = (
-  touches
-) => _getFirstTouches(touches).clientY;
-
-export const getClientX = (
+) => _getFirstTouches(touches)[propName]
+, _getTouchClientX = _fGetTouch(CLIENT_X)
+, _getTouchClientY = _fGetTouch(CLIENT_Y)
+, _fGetEvt = (propName, getTouch) => (
   evt
-) => evt.clientX
-  || _getTouchClientX(evt.targetTouches)
-  || _getTouchClientX(evt.changedTouches)
+) => evt[propName]
+  || getTouch(evt.targetTouches)
+  || getTouch(evt.changedTouches)
   || 0;
 
-export const getClientY = (
-  evt
-) => evt.clientY
-  || _getTouchClientY(evt.targetTouches)
-  || _getTouchClientY(evt.changedTouches)
-  || 0;
+export const getClientX = _fGetEvt(CLIENT_X, _getTouchClientX)
+export const getClientY = _fGetEvt(CLIENT_Y, _getTouchClientY)
