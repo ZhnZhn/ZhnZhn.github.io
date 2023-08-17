@@ -59,8 +59,16 @@ const EmberApi = {
       : YEAR;
 
     if (isCategory(options.seriaType)) {
-      const _sourceQuery = _crQueryParams(options.items)[1];
-      return `${API_URL}/${YEARLY_JSON}?${_crExactProperty(YEAR, options.time)}${QUERY_TAIL}${_sourceQuery}`;
+      if (_isMonthlyRoute) {
+        options.time = options.time + '-01'
+      }
+      const _sourceQuery = _crQueryParams(options.items)[1]
+      , _queryTail = `${QUERY_TAIL}${_sourceQuery}`
+      , _date = options.time;
+
+      return _isMonthlyRoute
+        ? `${API_URL}/${MONTHLY_JSON}?${_crExactProperty(DATE, _date)}${_queryTail}`
+        : `${API_URL}/${YEARLY_JSON}?${_crExactProperty(YEAR, _date)}${_queryTail}`;
     }
 
     return _isMonthlyRoute
