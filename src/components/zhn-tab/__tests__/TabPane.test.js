@@ -7,13 +7,16 @@ import zhnUtils from '../../_test-utils/zhn-test-utils';
 import TabPane from '../TabPane';
 import Tab from '../Tab';
 
+import {
+  CL_TAB,
+  CL_TAB_SELECTED
+} from '../tabPaneFn';
+
 const {
   screen,
   setupUserEvent
 } = zhnUtils;
 
-const CL_TAB = "tab";
-const CL_TAB_SELECTED = "tab tab--selected";
 const SELECTED_STYLE = "font-weight: bold";
 
 const Comp = ({

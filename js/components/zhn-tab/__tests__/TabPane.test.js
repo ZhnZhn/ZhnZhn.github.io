@@ -8,13 +8,12 @@ require("@testing-library/jest-dom");
 var _zhnTestUtils = _interopRequireDefault(require("../../_test-utils/zhn-test-utils"));
 var _TabPane = _interopRequireDefault(require("../TabPane"));
 var _Tab = _interopRequireDefault(require("../Tab"));
+var _tabPaneFn = require("../tabPaneFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const {
   screen,
   setupUserEvent
 } = _zhnTestUtils.default;
-const CL_TAB = "tab";
-const CL_TAB_SELECTED = "tab tab--selected";
 const SELECTED_STYLE = "font-weight: bold";
 const Comp = _ref => {
   let {
@@ -51,10 +50,10 @@ describe('TabPane', () => {
     let tab1, tab2, comp1, comp2;
     [tab1, tab2] = _getTabs(screen);
     [comp1, comp2] = _getComps(screen);
-    expect(tab1).toHaveClass(CL_TAB_SELECTED);
+    expect(tab1).toHaveClass(_tabPaneFn.CL_TAB_SELECTED);
     expect(comp1).toBeVisible();
     expect(comp1).toHaveStyle(SELECTED_STYLE);
-    expect(tab2).toHaveClass(CL_TAB);
+    expect(tab2).toHaveClass(_tabPaneFn.CL_TAB);
     expect(comp2).not.toBeVisible();
     expect(comp2).not.toHaveStyle(SELECTED_STYLE);
 
@@ -62,10 +61,10 @@ describe('TabPane', () => {
     await user.click(screen.getByText("Tab2"));
     [tab1, tab2] = _getTabs(screen);
     [comp1, comp2] = _getComps(screen);
-    expect(tab1).toHaveClass(CL_TAB);
+    expect(tab1).toHaveClass(_tabPaneFn.CL_TAB);
     expect(comp1).not.toBeVisible();
     expect(comp1).not.toHaveStyle(SELECTED_STYLE);
-    expect(tab2).toHaveClass(CL_TAB_SELECTED);
+    expect(tab2).toHaveClass(_tabPaneFn.CL_TAB_SELECTED);
     expect(comp2).toBeVisible();
     expect(comp2).toHaveStyle(SELECTED_STYLE);
 
@@ -73,10 +72,10 @@ describe('TabPane', () => {
     await user.click(screen.getByText("Tab1"));
     [tab1, tab2] = _getTabs(screen);
     [comp1, comp2] = _getComps(screen);
-    expect(tab1).toHaveClass(CL_TAB_SELECTED);
+    expect(tab1).toHaveClass(_tabPaneFn.CL_TAB_SELECTED);
     expect(comp1).toBeVisible();
     expect(comp1).toHaveStyle(SELECTED_STYLE);
-    expect(tab2).toHaveClass(CL_TAB);
+    expect(tab2).toHaveClass(_tabPaneFn.CL_TAB);
     expect(comp2).not.toBeVisible();
     expect(comp2).not.toHaveStyle(SELECTED_STYLE);
   });

@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _tabPaneFn = require("./tabPaneFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_TABS = {
     margin: '5px 5px 10px 24px'
@@ -28,11 +29,10 @@ const TabPane = (0, _uiApi.memo)(_ref => {
   } = _ref;
   const [selectedTabIndex, setSelectedTabIndex] = (0, _uiApi.useState)(0),
     _isSelectedTabIndex = index => index === selectedTabIndex,
-    _childrenLength = children.length,
     _hKeyDown = (index, evt) => {
       const _focusTabByIndex = tabIndex => {
-        const _nextIndex = _crNextId(tabIndex, _childrenLength);
-        (0, _uiApi.focusElementById)("tab-" + _nextIndex);
+        const _nextIndex = _crNextId(tabIndex, children.length);
+        (0, _uiApi.focusElementById)((0, _tabPaneFn.crTabId)(_nextIndex));
         setSelectedTabIndex(_nextIndex);
       };
       const {
@@ -66,8 +66,8 @@ const TabPane = (0, _uiApi.memo)(_ref => {
         return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           style: isSelected ? S_BLOCK : S_NONE,
           role: "tabpanel",
-          id: "tabpanel-" + index,
-          "aria-labelledby": "tab-" + index,
+          id: (0, _tabPaneFn.crTabPanelId)(index),
+          "aria-labelledby": (0, _tabPaneFn.crTabId)(index),
           children: (0, _uiApi.cloneElement)(tab.props.children, {
             isSelected
           })

@@ -5,7 +5,14 @@ import {
   focusElementById
 } from '../uiApi';
 
-const S_TABS = { margin: '5px 5px 10px 24px' }
+import {
+  crTabId,
+  crTabPanelId
+} from './tabPaneFn';
+
+const S_TABS = {
+  margin: '5px 5px 10px 24px'
+}
 , S_COMPONENTS = {
   width: "100%",
   height: "100%"
@@ -15,7 +22,9 @@ const S_TABS = { margin: '5px 5px 10px 24px' }
   width: "100%",
   height: "100%"
 }
-, S_NONE = { display: 'none' };
+, S_NONE = {
+  display: 'none'
+};
 
 const _crNextId = (
   id,
@@ -38,11 +47,13 @@ const TabPane = memo(({
   , _isSelectedTabIndex = (index) =>
       index === selectedTabIndex
 
-  , _childrenLength = children.length
   , _hKeyDown = (index, evt) => {
       const _focusTabByIndex = (tabIndex) => {
-        const _nextIndex = _crNextId(tabIndex, _childrenLength);
-        focusElementById(`tab-${_nextIndex}`)
+        const _nextIndex = _crNextId(
+          tabIndex,
+          children.length
+        );
+        focusElementById(crTabId(_nextIndex))
         setSelectedTabIndex(_nextIndex)
       }
 
@@ -74,8 +85,8 @@ const TabPane = memo(({
                   key={index}
                   style={isSelected ? S_BLOCK : S_NONE}
                   role="tabpanel"
-                  id={`tabpanel-${index}`}
-                  aria-labelledby={`tab-${index}`}
+                  id={crTabPanelId(index)}
+                  aria-labelledby={crTabId(index)}
                 >
                    {cloneElement(tab.props.children, {
                      isSelected

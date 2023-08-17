@@ -1,7 +1,11 @@
 import { crCn } from '../styleFn';
 
-const CL_TAB = 'tab'
-, CL_TAB_SELECTED = `${CL_TAB}--selected`;
+import {
+  CL_TAB,
+  CL_TAB_SELECTED,
+  crTabId,
+  crTabPanelId
+} from './tabPaneFn';
 
 const Tab = ({
   id,
@@ -16,11 +20,11 @@ const Tab = ({
       CL_TAB,
       [isSelected, CL_TAB_SELECTED]
     )}
-    id={`tab-${id}`}
+    id={crTabId(id)}
     role="tab"
     tabIndex={isSelected ? '0' : '-1'}
     aria-selected={isSelected}
-    aria-controls={`tabpanel-${id}`}
+    aria-controls={crTabPanelId(id)}
     onClick={onClick}
     onKeyDown={onKeyDown}
   >
