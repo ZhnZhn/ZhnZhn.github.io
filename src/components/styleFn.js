@@ -17,6 +17,7 @@ export const crCn = (
 
 export const CL_SHOW_POPUP = 'show-popup'
 export const S_BLOCK = { display: 'block' }
+export const S_INLINE = { display: 'inline-block' }
 export const S_NONE = { display: 'none' }
 
 export const crShowHide = (
@@ -26,7 +27,10 @@ export const crShowHide = (
   animationClassName
 ) => is
   ? [
-      crCn(className, [!withoutAnimation, animationClassName || CL_SHOW_POPUP]),
+      crCn(
+        className,
+        [!withoutAnimation, animationClassName || CL_SHOW_POPUP]
+      ),
       S_BLOCK
     ]
   : [

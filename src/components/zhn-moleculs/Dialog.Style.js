@@ -2,10 +2,6 @@ import {
   S_FLEX_ROW_END
 } from '../styles/GeneralStyles';
 
-export const S_SHOW = { display: 'block' }
-
-export const S_HIDE = { display: 'none' }
-
 export const S_ROOT_DIV = {
    backgroundColor: '#4d4d4d',
    border: 'solid 2px #1b2836',

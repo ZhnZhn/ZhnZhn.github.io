@@ -1,46 +1,31 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../uiApi");
-
+var _styleFn = require("../styleFn");
 var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
-
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
-
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
-
-var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
-
 var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
-
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
-
 var _MenuMore = _interopRequireDefault(require("./MenuMore"));
-
 var _Dialog = require("./Dialog.Style");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
-//import PropTypes from "prop-types";
 const TH_ID = 'MODAL_DIALOG',
-      CL_MD = 'modal-dialog',
-      CL_SHOWING = 'show-popup',
-      S_ROOT_DIV_MODAL = {
-  display: 'block',
-  position: 'absolute',
-  top: '20%',
-  left: '50%',
-  width: 380,
-  marginLeft: -190,
-  zIndex: 10
-};
-
+  CL_MD = 'modal-dialog',
+  S_ROOT_DIV_MODAL = {
+    ..._Dialog.S_ROOT_DIV,
+    display: 'block',
+    position: 'absolute',
+    top: '20%',
+    left: '50%',
+    width: 380,
+    marginLeft: -190,
+    zIndex: 10
+  };
 const CommandButtons = _ref => {
   let {
     commandButtons,
@@ -58,9 +43,10 @@ const CommandButtons = _ref => {
     }, "close")]
   });
 };
-
 const DF_ON_CLOSE = () => {};
-
+const _hClickDialog = evt => {
+  evt.stopPropagation();
+};
 const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
   let {
     isShow,
@@ -75,20 +61,13 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
     timeout = 450,
     onClose = DF_ON_CLOSE
   } = _ref2;
-
   const [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
-        _hClick = (0, _uiApi.useCallback)(event => {
-    event.stopPropagation();
-  }, []),
-        _hKeyDown = (0, _useKeyEscape.default)(onClose),
-        [isMore, toggleIsMore] = (0, _useToggle.default)(false),
-        TS = (0, _useTheme.default)(TH_ID),
-        _style = isShow ? _Dialog.S_SHOW : _Dialog.S_HIDE,
-        _className = (0, _crCn.default)(CL_MD, [isShow, CL_SHOWING]);
-
+    _hKeyDown = (0, _useKeyEscape.default)(onClose),
+    [isMore, toggleIsMore] = (0, _useToggle.default)(false),
+    TS = (0, _useTheme.default)(TH_ID),
+    [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_MD);
   return (
     /*#__PURE__*/
-
     /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
     (0, _jsxRuntime.jsxs)("div", {
       ref: refRoot,
@@ -97,17 +76,18 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
       "aria-label": caption,
       "aria-hidden": !isShow,
       className: _className,
-      style: { ..._Dialog.S_ROOT_DIV,
+      style: {
         ...S_ROOT_DIV_MODAL,
         ...style,
-        ..._style,
+        ..._showHideStyle,
         ...TS.ROOT,
         ...TS.EL_BORDER
       },
-      onClick: _hClick,
+      onClick: _hClickDialog,
       onKeyDown: _hKeyDown,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        style: { ..._Dialog.S_CAPTION_DIV,
+        style: {
+          ..._Dialog.S_CAPTION_DIV,
           ...TS.EL
         },
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
@@ -133,20 +113,6 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
     })
   );
 });
-/*
- ModalDialog.propTypes = {
-   isShow: PropTypes.bool,
-   isWithButton: PropTypes.bool,
-   withoutClose: PropTypes.bool,
-   style: PropTypes.object,
-   caption: PropTypes.string,
-   styleCaption: PropTypes.object,
-   timeout: PropTypes.number,
-   commandButtons: PropTypes.arrayOf(PropTypes.element),
-   onClose: PropTypes.func
- }
- */
-
 var _default = ModalDialog;
 exports.default = _default;
 //# sourceMappingURL=ModalDialog.js.map

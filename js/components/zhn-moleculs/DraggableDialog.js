@@ -1,48 +1,31 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../uiApi");
-
+var _styleFn = require("../styleFn");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-
 var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
-
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
-
 var _useXYMovable = _interopRequireDefault(require("../hooks/useXYMovable"));
-
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
-
-var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
-
 var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
-
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
-
 var _MenuMore = _interopRequireDefault(require("./MenuMore"));
-
 var _Dialog = require("./Dialog.Style");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
-//import PropTypes from "prop-types";
 const TH_ID = 'DRAGGABLE_DIALOG',
-      CL_DRAGGABLE_DIALOG = "draggable-dialog",
-      CL_SHOWING = 'show-popup',
-      CL_NOT_SELECTED = 'not-selected',
-      S_DIALOG_DIV = { ..._Dialog.S_ROOT_DIV,
-  position: 'absolute',
-  top: 30,
-  left: 50,
-  zIndex: 10
-};
-
+  CL_DRAGGABLE_DIALOG = "draggable-dialog",
+  CL_NOT_SELECTED = 'not-selected',
+  S_DIALOG_DIV = {
+    ..._Dialog.S_ROOT_DIV,
+    position: 'absolute',
+    top: 30,
+    left: 50,
+    zIndex: 10
+  };
 const _isFn = fn => typeof fn === 'function';
-
 const CommandButtons = _ref => {
   let {
     buttons,
@@ -72,9 +55,7 @@ const CommandButtons = _ref => {
     }, "close")]
   });
 };
-
 const FN_NOOP = () => {};
-
 const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
   let {
     isShow,
@@ -88,18 +69,14 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
     onShow,
     onClose = FN_NOOP
   } = _ref2;
-
   const [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
-        _hKeyDown = (0, _useKeyEscape.default)(onClose),
-        [isMore, toggleIsMore] = (0, _useToggle.default)(false),
-        TS = (0, _useTheme.default)(TH_ID),
-        _className = (0, _crCn.default)(CL_DRAGGABLE_DIALOG, [isShow, CL_SHOWING]),
-        _styleShow = isShow ? _Dialog.S_SHOW : _Dialog.S_HIDE;
-
+    _hKeyDown = (0, _useKeyEscape.default)(onClose),
+    [isMore, toggleIsMore] = (0, _useToggle.default)(false),
+    TS = (0, _useTheme.default)(TH_ID),
+    [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_DRAGGABLE_DIALOG);
   (0, _useXYMovable.default)(refRoot);
   return (
     /*#__PURE__*/
-
     /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
     (0, _jsxRuntime.jsxs)("div", {
       ref: refRoot,
@@ -108,16 +85,18 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
       "aria-label": caption,
       "aria-hidden": !isShow,
       className: _className,
-      style: { ...style,
+      style: {
+        ...style,
         ...S_DIALOG_DIV,
-        ..._styleShow,
+        ..._showHideStyle,
         ...TS.ROOT,
         ...TS.EL_BORDER
       },
       onClick: toTopLayer,
       onKeyDown: _hKeyDown,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        style: { ..._Dialog.S_CAPTION_DIV,
+        style: {
+          ..._Dialog.S_CAPTION_DIV,
           ...TS.EL
         },
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
@@ -144,23 +123,6 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
     })
   );
 });
-/*
-DraggableDialog.propTypes = {
-  isShow: PropTypes.bool,
-  menuModel: PropTypes.object,
-  caption: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
-  commandButtons: PropTypes.arrayOf(PropTypes.element),
-  toTopLayer: PropTypes.func,
-  onLoad: PropTypes.func,
-  onShow: PropTypes.func,
-  onClose: PropTypes.func
-}
-*/
-
 var _default = DraggableDialog;
 exports.default = _default;
 //# sourceMappingURL=DraggableDialog.js.map

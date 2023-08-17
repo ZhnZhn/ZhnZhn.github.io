@@ -1,6 +1,6 @@
-import crCn from '../zhn-utils/crCn';
+import { crCn } from '../styleFn';
 
-const CL = 'bt-circle bt-c2 not-selected';
+const CL_BT_C2 = 'bt-circle bt-c2 not-selected';
 
 const ButtonCircle2 = ({
   tabIndex,
@@ -13,7 +13,7 @@ const ButtonCircle2 = ({
   <button
      type="button"
      tabIndex={tabIndex}
-     className={crCn(CL, className)}
+     className={crCn(CL_BT_C2, className)}
      style={style}
      data-loader={dataLoader}
      onClick={onClick}

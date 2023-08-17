@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crShowHide = exports.crCn = exports.S_NONE = exports.S_BLOCK = exports.CL_SHOW_POPUP = void 0;
+exports.crShowHide = exports.crCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_SHOW_POPUP = void 0;
 const _isArr = Array.isArray;
 const _getCn = arrOrStr => _isArr(arrOrStr) ? arrOrStr[0] ? arrOrStr[1] : '' : arrOrStr || '';
 const crCn = (arrOrStr1, arrOrStr2) => {
@@ -16,6 +16,10 @@ const S_BLOCK = {
   display: 'block'
 };
 exports.S_BLOCK = S_BLOCK;
+const S_INLINE = {
+  display: 'inline-block'
+};
+exports.S_INLINE = S_INLINE;
 const S_NONE = {
   display: 'none'
 };

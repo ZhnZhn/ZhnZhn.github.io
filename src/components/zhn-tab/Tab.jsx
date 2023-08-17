@@ -1,4 +1,4 @@
-import crCn from '../zhn-utils/crCn';
+import { crCn } from '../styleFn';
 
 const CL_TAB = 'tab'
 , CL_TAB_SELECTED = `${CL_TAB}--selected`;

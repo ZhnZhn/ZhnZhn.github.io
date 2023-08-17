@@ -3,9 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _useThrottleClick = _interopRequireDefault(require("../hooks/useThrottleClick"));
 var _useHotKey = _interopRequireDefault(require("../hotkeys/useHotKey"));
-var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
 var _BtCaption = _interopRequireDefault(require("./BtCaption"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_ARROW = "arrow-down",
@@ -30,7 +30,7 @@ const FlatButton = _ref => {
     onClick
   } = _ref;
   const _hClick = (0, _useThrottleClick.default)(timeout, onClick),
-    _className = (0, _crCn.default)(CL_BT_FLAT, className),
+    _className = (0, _styleFn.crCn)(CL_BT_FLAT, className),
     _style = isPrimary ? {
       ...style,
       ...S_PRIMARY_COLOR

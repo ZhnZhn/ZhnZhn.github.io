@@ -1,8 +1,7 @@
-//import PropTypes from 'prop-types'
 import { forwardRef } from '../uiApi';
+import { crCn } from '../styleFn';
 
 import useKeyEnter from '../hooks/useKeyEnter';
-import crCn from '../zhn-utils/crCn';
 
 const CL_INPUT_COLOR = 'input-color';
 
@@ -18,7 +17,7 @@ const CellColor = forwardRef(({
       ? { backgroundColor: color }
       : void 0
   , _onClick = onClick
-     ? (event) => onClick(color, event)
+     ? evt => onClick(color, evt)
      : void 0
   , _onKeyEnter = useKeyEnter(_onClick, [_onClick]);
   return (
@@ -35,14 +34,5 @@ const CellColor = forwardRef(({
     </span>
   );
 })
-
-/*
-CellColor.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-  color: PropTypes.string,
-  onClick: PropTypes.func
-}
-*/
 
 export default CellColor

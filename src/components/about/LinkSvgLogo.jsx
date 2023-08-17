@@ -1,4 +1,4 @@
-import crCn from '../zhn-utils/crCn';
+import { crCn } from '../styleFn';
 
 import toLink from '../zhn/toLink';
 import Svg100 from '../zhn/svg/Svg100';

@@ -1,8 +1,7 @@
-//import PropTypes from "prop-types";
-import Button from './Button';
+import { crCn } from '../styleFn';
 
 import useTheme from '../hooks/useTheme';
-import crCn from '../zhn-utils/crCn';
+import Button from './Button';
 
 const TH_ID = 'ELEMENT';
 
@@ -19,25 +18,20 @@ const ButtonTab = ({
   caption,
   onClick
 }) => {
-  const TS = useTheme(TH_ID)
-
-  if (!is) { return null; }
-
-  const _cn = crCn(
-    isShow ? CL_BT_TAB__SHOW : CL_BT_TAB,
-    className
-  );
-
-  return (
+  const TS = useTheme(TH_ID);
+  return is ? (
     <Button
-      className={_cn}
+      className={crCn(
+        isShow ? CL_BT_TAB__SHOW : CL_BT_TAB,
+        className
+      )}
       style={{...style, ...TS.BG}}
       onClick={onClick}
     >
        {caption}
        {isMenu && <span className={CL_ARROW_DOWN} />}
     </Button>
-  );
+  ) : null;
 };
 
 export default ButtonTab

@@ -1,11 +1,10 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
+var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL = 'bt-circle bt-c2 not-selected';
+const CL_BT_C2 = 'bt-circle bt-c2 not-selected';
 const ButtonCircle2 = _ref => {
   let {
     tabIndex,
@@ -18,7 +17,7 @@ const ButtonCircle2 = _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     type: "button",
     tabIndex: tabIndex,
-    className: (0, _crCn.default)(CL, className),
+    className: (0, _styleFn.crCn)(CL_BT_C2, className),
     style: style,
     "data-loader": dataLoader,
     onClick: onClick,

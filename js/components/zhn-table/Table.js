@@ -1,27 +1,18 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
+var _styleFn = require("../styleFn");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-
 var _useTable = require("./useTable");
-
-var _crCn = _interopRequireDefault(require("../zhn-utils/crCn"));
-
 var _ModalMenu = _interopRequireDefault(require("./ModalMenu"));
-
 var _TableHead = _interopRequireDefault(require("./TableHead"));
-
 var _TableBody = _interopRequireDefault(require("./TableBody"));
-
 var _Style = require("./Style");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 //import PropTypes from "prop-types";
+
 const Table = _ref => {
   let {
     className,
@@ -31,17 +22,15 @@ const Table = _ref => {
     headers,
     tableFn
   } = _ref;
-
   const [isGridLine, toogleGridLine] = (0, _useToggle.default)(true),
-        [isMenuMore, toggleMenuMore] = (0, _useTable.useMenu)(),
-        [_headers, toggleColumn] = (0, _useTable.useColumn)(headers),
-        [{
-    _rows,
-    sortBy,
-    sortTo
-  }, sortByPn] = (0, _useTable.useSort)(rows),
-        _tableCn = (0, _crCn.default)([isGridLine, _Style.CL_GRID], className);
-
+    [isMenuMore, toggleMenuMore] = (0, _useTable.useMenu)(),
+    [_headers, toggleColumn] = (0, _useTable.useColumn)(headers),
+    [{
+      _rows,
+      sortBy,
+      sortTo
+    }, sortByPn] = (0, _useTable.useSort)(rows),
+    _tableCn = (0, _styleFn.crCn)([isGridLine, _Style.CL_GRID], className);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: _Style.S_WRAPPER_DIV,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenu.default, {
@@ -73,6 +62,7 @@ const Table = _ref => {
     })]
   });
 };
+
 /*
 Table.propTypes = {
   className: PropTypes.string,
@@ -100,8 +90,6 @@ Table.propTypes = {
   })
 }
 */
-
-
 var _default = Table;
 exports.default = _default;
 //# sourceMappingURL=Table.js.map

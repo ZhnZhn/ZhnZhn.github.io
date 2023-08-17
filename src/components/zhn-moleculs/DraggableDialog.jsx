@@ -1,5 +1,5 @@
-//import PropTypes from "prop-types";
 import { forwardRef } from '../uiApi';
+import { crShowHide } from '../styleFn';
 
 import useToggle from '../hooks/useToggle';
 import useKeyEscape from '../hooks/useKeyEscape';
@@ -7,16 +7,12 @@ import useTheme from '../hooks/useTheme';
 import useXYMovable from '../hooks/useXYMovable';
 import useDialogFocus from './useDialogFocus';
 
-import crCn from '../zhn-utils/crCn';
-
 import SvgClose from '../zhn/SvgClose';
 import FlatButton from '../zhn-m/FlatButton';
 
 import MenuMore from './MenuMore';
 
 import {
-  S_SHOW,
-  S_HIDE,
   S_ROOT_DIV,
   S_CAPTION_DIV,
   S_COMMAND_DIV,
@@ -28,7 +24,6 @@ import {
 const TH_ID = 'DRAGGABLE_DIALOG'
 
 , CL_DRAGGABLE_DIALOG = "draggable-dialog"
-, CL_SHOWING = 'show-popup'
 , CL_NOT_SELECTED = 'not-selected'
 , S_DIALOG_DIV = {
   ...S_ROOT_DIV,
@@ -102,13 +97,13 @@ const DraggableDialog = forwardRef(({
     toggleIsMore
   ] = useToggle(false)
   , TS = useTheme(TH_ID)
-  , _className = crCn(
-      CL_DRAGGABLE_DIALOG,
-      [isShow, CL_SHOWING]
-    )
-  , _styleShow = isShow
-      ? S_SHOW
-      : S_HIDE;
+  , [
+    _className,
+    _showHideStyle
+  ] = crShowHide(
+    isShow,
+    CL_DRAGGABLE_DIALOG
+  );
 
   useXYMovable(refRoot)
 
@@ -124,7 +119,7 @@ const DraggableDialog = forwardRef(({
       style={{
         ...style,
         ...S_DIALOG_DIV,
-        ..._styleShow,
+        ..._showHideStyle,
         ...TS.ROOT,
         ...TS.EL_BORDER
       }}
@@ -160,22 +155,5 @@ const DraggableDialog = forwardRef(({
     </div>
   );
 })
-
-/*
-DraggableDialog.propTypes = {
-  isShow: PropTypes.bool,
-  menuModel: PropTypes.object,
-  caption: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
-  commandButtons: PropTypes.arrayOf(PropTypes.element),
-  toTopLayer: PropTypes.func,
-  onLoad: PropTypes.func,
-  onShow: PropTypes.func,
-  onClose: PropTypes.func
-}
-*/
 
 export default DraggableDialog

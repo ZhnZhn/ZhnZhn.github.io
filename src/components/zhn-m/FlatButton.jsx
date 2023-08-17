@@ -1,7 +1,8 @@
+import { crCn } from '../styleFn';
+
 import useThrottleClick from '../hooks/useThrottleClick';
 import useHotKey from '../hotkeys/useHotKey';
 
-import crCn from '../zhn-utils/crCn';
 import BtCaption from './BtCaption';
 
 const CL_ARROW = "arrow-down"

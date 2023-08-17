@@ -1,23 +1,16 @@
-//import PropTypes from "prop-types";
-import {
-  forwardRef,
-  useCallback
-} from '../uiApi';
+import { forwardRef } from '../uiApi';
+import { crShowHide } from '../styleFn';
 
 import useKeyEscape from '../hooks/useKeyEscape';
 import useToggle from '../hooks/useToggle';
 import useTheme from '../hooks/useTheme';
 import useDialogFocus from './useDialogFocus';
 
-import crCn from '../zhn-utils/crCn';
-
 import SvgClose from '../zhn/SvgClose';
 import FlatButton from '../zhn-m/FlatButton';
 import MenuMore from './MenuMore';
 
 import {
-  S_SHOW,
-  S_HIDE,
   S_ROOT_DIV,
   S_CAPTION_DIV,
   S_SVG_CLOSE,
@@ -26,11 +19,9 @@ import {
 } from './Dialog.Style';
 
 const TH_ID = 'MODAL_DIALOG'
-
 , CL_MD = 'modal-dialog'
-, CL_SHOWING = 'show-popup'
-
 , S_ROOT_DIV_MODAL = {
+  ...S_ROOT_DIV,
   display: 'block',
   position: 'absolute',
   top: '20%',
@@ -61,6 +52,9 @@ const CommandButtons = ({
 );
 
 const DF_ON_CLOSE = () => {};
+const _hClickDialog = evt => {
+  evt.stopPropagation()
+}
 
 const ModalDialog = forwardRef(({
   isShow,
@@ -78,18 +72,23 @@ const ModalDialog = forwardRef(({
   const [
     refRoot,
     refBtMore
-  ] = useDialogFocus(ref, isShow)
-  , _hClick = useCallback(event => {
-     event.stopPropagation()
-  }, [])
+  ] = useDialogFocus(
+    ref,
+    isShow
+  )
   , _hKeyDown = useKeyEscape(onClose)
   , [
     isMore,
     toggleIsMore
   ] = useToggle(false)
   , TS = useTheme(TH_ID)
-  , _style = isShow ? S_SHOW : S_HIDE
-  , _className = crCn(CL_MD, [isShow, CL_SHOWING]);
+  , [
+    _className,
+    _showHideStyle
+  ] = crShowHide(
+    isShow,
+    CL_MD
+  );
 
   return (
     /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
@@ -101,11 +100,13 @@ const ModalDialog = forwardRef(({
         aria-hidden={!isShow}
         className={_className}
         style={{
-          ...S_ROOT_DIV, ...S_ROOT_DIV_MODAL,
-          ...style, ..._style,
-          ...TS.ROOT, ...TS.EL_BORDER
+          ...S_ROOT_DIV_MODAL,
+          ...style,
+          ..._showHideStyle,
+          ...TS.ROOT,
+          ...TS.EL_BORDER
         }}
-        onClick={_hClick}
+        onClick={_hClickDialog}
         onKeyDown={_hKeyDown}
      >
      {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
@@ -136,19 +137,5 @@ const ModalDialog = forwardRef(({
     </div>
   );
 });
-
-/*
- ModalDialog.propTypes = {
-   isShow: PropTypes.bool,
-   isWithButton: PropTypes.bool,
-   withoutClose: PropTypes.bool,
-   style: PropTypes.object,
-   caption: PropTypes.string,
-   styleCaption: PropTypes.object,
-   timeout: PropTypes.number,
-   commandButtons: PropTypes.arrayOf(PropTypes.element),
-   onClose: PropTypes.func
- }
- */
 
 export default ModalDialog

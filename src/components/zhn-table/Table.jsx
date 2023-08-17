@@ -1,12 +1,12 @@
 //import PropTypes from "prop-types";
+import { crCn } from '../styleFn';
+
 import useToggle from '../hooks/useToggle';
 import {
   useMenu,
   useColumn,
   useSort
 } from './useTable';
-
-import crCn from '../zhn-utils/crCn';
 
 import ModalMenu from './ModalMenu';
 import TableHead from './TableHead';
