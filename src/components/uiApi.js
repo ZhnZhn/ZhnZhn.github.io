@@ -41,15 +41,30 @@ export const getRefElementStyle = (
   ref
 ) => (getRefValue(ref) || {}).style;
 
+const _focusHtmlElement = (
+  element
+) => {
+  if (element && _isFn(element.focus)) {
+    element.focus()
+  }
+}
+
 export const focusRefElement = (
   ref1,
   ref2
 ) => {
-  const _el = getRefValue(ref1)
-    || getRefValue(ref2);
-  if (_el && _isFn(_el.focus)) {
-    _el.focus()
-  }
+  _focusHtmlElement(
+     getRefValue(ref1)
+     || getRefValue(ref2)
+  )
+}
+
+export const focusElementById = (
+  id
+) => {
+  _focusHtmlElement(
+    document.getElementById(id)
+  )
 }
 
 export const stopImmediatePropagation = (evt) => {

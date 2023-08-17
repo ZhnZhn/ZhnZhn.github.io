@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.stopImmediatePropagation = exports.setRefValue = exports.memo = exports.lazy = exports.isInputValid = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.Suspense = exports.Component = exports.Children = void 0;
+exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.stopImmediatePropagation = exports.setRefValue = exports.memo = exports.lazy = exports.isInputValid = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.focusElementById = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.Suspense = exports.Component = exports.Children = void 0;
 var _react = require("react");
 exports.Suspense = _react.Suspense;
 exports.lazy = _react.lazy;
@@ -33,13 +33,19 @@ const setRefValue = (ref, value) => {
 exports.setRefValue = setRefValue;
 const getRefElementStyle = ref => (getRefValue(ref) || {}).style;
 exports.getRefElementStyle = getRefElementStyle;
-const focusRefElement = (ref1, ref2) => {
-  const _el = getRefValue(ref1) || getRefValue(ref2);
-  if (_el && _isFn(_el.focus)) {
-    _el.focus();
+const _focusHtmlElement = element => {
+  if (element && _isFn(element.focus)) {
+    element.focus();
   }
 };
+const focusRefElement = (ref1, ref2) => {
+  _focusHtmlElement(getRefValue(ref1) || getRefValue(ref2));
+};
 exports.focusRefElement = focusRefElement;
+const focusElementById = id => {
+  _focusHtmlElement(document.getElementById(id));
+};
+exports.focusElementById = focusElementById;
 const stopImmediatePropagation = evt => {
   evt.stopPropagation();
   evt.nativeEvent.stopImmediatePropagation();
