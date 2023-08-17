@@ -2,11 +2,11 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _LoadType = require("../../../constants/LoadType");
 const YEAR_MAX = 12,
   BI_YEAR_MAX = 24,
   Q_YEAR_MAX = 4,
   M_YEAR_MAX = 3;
-const _isEstat = loadId => loadId === 'EU_STAT';
 const _crDateOption = function (caption, value) {
   if (value === void 0) {
     value = caption;
@@ -61,7 +61,7 @@ const _crYearMonthConfig = function (loadId, mapDateDf) {
   }
   const dateOptions = [],
     y = new Date().getUTCFullYear(),
-    _delimeter = _isEstat(loadId) ? '-' : 'M';
+    _delimeter = (0, _LoadType.isEstat)(loadId) || (0, _LoadType.isEmber)(loadId) ? '-' : 'M';
   for (let i = 0; i < M_YEAR_MAX; i++) {
     _addYearMonthsTo(dateOptions, y - i, _delimeter);
   }
@@ -73,7 +73,7 @@ const _crYearQuarterConfig = function (loadId, mapDateDf, delimeter) {
   }
   const dateOptions = [],
     y = new Date().getUTCFullYear(),
-    _delimeter = _isEstat(loadId) ? '-' + delimeter : delimeter;
+    _delimeter = (0, _LoadType.isEstat)(loadId) ? '-' + delimeter : delimeter;
   for (let i = 0; i < Q_YEAR_MAX; i++) {
     _addYearQuartesTo(dateOptions, y - i, _delimeter);
   }
@@ -84,7 +84,7 @@ const _crYearBiAnnualConfig = function (loadId, mapDateDf) {
     mapDateDf = 3;
   }
   const dateOptions = [],
-    _delimeter = _isEstat(loadId) ? '-S' : 'S';
+    _delimeter = (0, _LoadType.isEstat)(loadId) ? '-S' : 'S';
   let y = new Date().getUTCFullYear();
   for (let i = 0; i < BI_YEAR_MAX; i++) {
     dateOptions.push(_crDateOption("" + y + _delimeter + "2"), _crDateOption("" + y + _delimeter + "1"));

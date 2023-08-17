@@ -33,3 +33,6 @@ export const LT_BF = 'BF'
 export const LT_BT = 'BT'
 export const LT_WL = 'WL'
 export const LT_WATCH_LIST = 'WL_WATCH_LIST'
+
+export const isEstat = loadId => loadId === LT_EU_STAT
+export const isEmber = loadId => loadId === LT_EMB

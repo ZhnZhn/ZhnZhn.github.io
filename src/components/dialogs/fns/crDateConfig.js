@@ -1,10 +1,12 @@
+import {
+  isEstat,
+  isEmber
+} from '../../../constants/LoadType';
 
 const YEAR_MAX = 12
 , BI_YEAR_MAX = 24
 , Q_YEAR_MAX = 4
 , M_YEAR_MAX = 3;
-
-const _isEstat = loadId => loadId === 'EU_STAT'
 
 const _crDateOption = (
   caption,
@@ -76,7 +78,7 @@ const _crYearMonthConfig = (
 ) => {
 	const dateOptions = []
   , y = (new Date()).getUTCFullYear()
-  , _delimeter = _isEstat(loadId)
+  , _delimeter = isEstat(loadId) || isEmber(loadId)
       ? '-'
       : 'M';
   for(let i=0; i<M_YEAR_MAX; i++){
@@ -92,7 +94,7 @@ const _crYearQuarterConfig = (
 ) => {
 	const dateOptions = []
   , y = (new Date()).getUTCFullYear()
-  , _delimeter = _isEstat(loadId)
+  , _delimeter = isEstat(loadId)
      ? '-'+delimeter
      : delimeter;
   for(let i=0; i<Q_YEAR_MAX; i++){
@@ -107,7 +109,7 @@ const _crYearBiAnnualConfig = (
   mapDateDf=3
 ) => {
   const dateOptions = []
-  , _delimeter = _isEstat(loadId)
+  , _delimeter = isEstat(loadId)
        ? '-S'
        : 'S';
   let y = (new Date()).getUTCFullYear();
