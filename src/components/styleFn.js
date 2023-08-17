@@ -14,3 +14,21 @@ export const crCn = (
     ? _cl2 ? `${_cl1} ${_cl2}` : _cl1
     : _cl2 || void 0 ;
 }
+
+const CL_SHOW_POPUP = 'show-popup'
+, S_BLOCK = { display: 'block' }
+, S_NONE = { display: 'none' };
+export const crShowHide = (
+  is,
+  className,
+  withoutAnimation,
+  animationClassName
+) => is
+  ? [
+      crCn(className, [!withoutAnimation, animationClassName || CL_SHOW_POPUP]),
+      S_BLOCK
+    ]
+  : [
+      className,
+      S_NONE
+    ]
