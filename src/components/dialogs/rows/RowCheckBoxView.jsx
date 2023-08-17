@@ -1,4 +1,4 @@
-import { crStyle2 } from '../../zhn-utils/crStyle';
+import { crStyle2 } from '../../styleFn';
 
 import Button from '../../zhn/Button';
 import SvgCheckBox from '../../zhn/SvgCheckBox';

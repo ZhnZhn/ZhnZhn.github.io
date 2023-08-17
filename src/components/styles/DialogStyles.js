@@ -1,4 +1,4 @@
-import { crStyle2 } from '../zhn-utils/crStyle';
+import { crStyle2 } from '../styleFn';
 
 //Dialogs, DatesFragments
 const S_ROW = {

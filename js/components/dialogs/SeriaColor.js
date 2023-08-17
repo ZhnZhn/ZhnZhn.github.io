@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _crStyle = require("../zhn-utils/crStyle");
+var _styleFn = require("../styleFn");
 var _CellColor = _interopRequireDefault(require("../zhn-moleculs/CellColor"));
 var _Color = require("../styles/Color");
 var _BtCounter = _interopRequireDefault(require("./BtCounter"));
@@ -56,7 +56,7 @@ const SeriaColor = (0, _uiApi.forwardRef)((_ref, ref) => {
     })
   }), [color, chartType]);
   const _isLineWidth = _hasLineWidth(chartType),
-    _rowStyle = (0, _crStyle.crStyle2)(S_ROW2, !_isLineWidth && S_ROW2_PADDING);
+    _rowStyle = (0, _styleFn.crStyle2)(S_ROW2, !_isLineWidth && S_ROW2_PADDING);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {

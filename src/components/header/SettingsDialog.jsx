@@ -1,6 +1,6 @@
+import { crStyle2 } from '../styleFn';
 import memoIsShow from '../hoc/memoIsShow';
 import useSettingsMenuMore from './useSettingsMenuMore';
-import { crStyle2 } from '../zhn-utils/crStyle';
 
 import {
   ComponentActions

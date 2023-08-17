@@ -3,9 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useSettingsMenuMore = _interopRequireDefault(require("./useSettingsMenuMore"));
-var _crStyle = require("../zhn-utils/crStyle");
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _TabPane = _interopRequireDefault(require("../zhn-tab/TabPane"));
@@ -39,7 +39,7 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
     onClose
   } = _ref;
   const [isShowLabels, menuModel] = (0, _useSettingsMenuMore.default)(CL_ROW),
-    _style = (0, _crStyle.crStyle2)(S_MODAL, !isShowLabels && S_MODAL_SMALL);
+    _style = (0, _styleFn.crStyle2)(S_MODAL, !isShowLabels && S_MODAL_SMALL);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
     style: _style,
     caption: "User Settings",

@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.crRowLabelStyle = exports.S_VM_MSG_NUMBER = exports.S_VM_MSG = exports.S_VM_CONT = exports.S_DIALOG_ROW = exports.S_DIALOG_CAPTION = void 0;
-var _crStyle = require("../zhn-utils/crStyle");
+var _styleFn = require("../styleFn");
 //Dialogs, DatesFragments
 const S_ROW = {
     display: 'flex',
@@ -41,9 +41,9 @@ const crRowLabelStyle = function (isShowLabels, captionStyle) {
   if (isShowLabels === void 0) {
     isShowLabels = true;
   }
-  return [(0, _crStyle.crStyle2)({
+  return [(0, _styleFn.crStyle2)({
     ...S_ROW
-  }, isShowLabels && S_ROW_SHORT), (0, _crStyle.crStyle2)({
+  }, isShowLabels && S_ROW_SHORT), (0, _styleFn.crStyle2)({
     ...S_LABEL
   }, isShowLabels ? captionStyle : S_NONE)];
 };

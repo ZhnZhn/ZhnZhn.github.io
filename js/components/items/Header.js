@@ -3,15 +3,15 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _dateFn = require("../../utils/dateFn");
+var _styleFn = require("../styleFn");
 var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useFnFocus = _interopRequireDefault(require("../hooks/useFnFocus"));
 var _Color = require("../styles/Color");
-var _crStyle = require("../zhn-utils/crStyle");
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _ValueMovingBadge = _interopRequireDefault(require("./ValueMovingBadge"));
+var _ValueDate = _interopRequireDefault(require("./ValueDate"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
@@ -25,7 +25,6 @@ const TH_ID = 'ELEMENT';
 const CL_ITEM_HEADER = 'item-header',
   CL_MORE = "popup-menu charts__menu-more",
   CL_CAPTION = 'not-selected text-clip bt-left bt',
-  CL_ITEM_TIME = 'item-time',
   COLOR_SVG_MORE = '#777777',
   S_BT_MORE = {
     position: 'relative',
@@ -61,22 +60,13 @@ const CL_ITEM_HEADER = 'item-header',
     right: 0,
     top: 6
   };
-const ItemTime = _ref => {
-  let {
-    itemTime
-  } = _ref;
-  return itemTime ? /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-    className: CL_ITEM_TIME,
-    children: (0, _dateFn.formatStrDate)(itemTime)
-  }) : null;
-};
-const MenuMore = _ref2 => {
+const MenuMore = _ref => {
   let {
     isMore,
     moreModel,
     sliderStyle,
     onToggle
-  } = _ref2;
+  } = _ref;
   const [refBtSvg, toggleFocus] = (0, _useFnFocus.default)(onToggle);
   return moreModel ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SvgMore, {
@@ -94,12 +84,13 @@ const MenuMore = _ref2 => {
     })]
   }) : null;
 };
-const Header = _ref3 => {
+const Header = _ref2 => {
   let {
     isOpen,
     onCheck,
     onUnCheck,
     itemCaption,
+    itemValue,
     itemTime,
     onToggle,
     valueMoving,
@@ -108,10 +99,10 @@ const Header = _ref3 => {
     refVm,
     moreModel,
     onClose
-  } = _ref3;
+  } = _ref2;
   const [isMore, _toggleMore] = (0, _useToggle.default)(false),
     TS = (0, _useTheme.default)(TH_ID),
-    _captionStyle = (0, _crStyle.crStyle3)(S_CAPTION, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH),
+    _captionStyle = (0, _styleFn.crStyle3)(S_CAPTION, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH),
     _btTitle = itemCaption.length > 15 ? itemCaption : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_ITEM_HEADER,
@@ -138,8 +129,9 @@ const Header = _ref3 => {
       isAdminMode: isAdminMode,
       initialVm: valueMoving,
       crValueMoving: crValueMoving
-    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemTime, {
-      itemTime: itemTime
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueDate.default, {
+      value: itemValue,
+      strDate: itemTime
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgClose, {
       style: S_CLOSE,
       onClose: onClose

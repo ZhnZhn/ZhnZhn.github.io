@@ -7,7 +7,7 @@ import {
   getInputValue
 } from '../uiApi';
 
-import { crStyle2 } from '../zhn-utils/crStyle';
+import { crStyle2 } from '../styleFn';
 
 import CellColor from '../zhn-moleculs/CellColor';
 import { TRANSPARENT_COLOR } from '../styles/Color';

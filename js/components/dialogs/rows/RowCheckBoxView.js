@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _crStyle = require("../../zhn-utils/crStyle");
+var _styleFn = require("../../styleFn");
 var _Button = _interopRequireDefault(require("../../zhn/Button"));
 var _SvgCheckBox = _interopRequireDefault(require("../../zhn/SvgCheckBox"));
 var _useRowCheckBox = _interopRequireDefault(require("./useRowCheckBox"));
@@ -13,7 +13,7 @@ const CL_BT_CHB = 'bt-chb',
   S_ROOT = {
     padding: '6px 0 0 16px'
   },
-  crCaptionStyle = (captionStyle, checkedColor, value) => (0, _crStyle.crStyle2)(captionStyle, value && {
+  crCaptionStyle = (captionStyle, checkedColor, value) => (0, _styleFn.crStyle2)(captionStyle, value && {
     color: checkedColor
   });
 const RowCheckBoxView = _ref => {
