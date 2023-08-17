@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crShowHide = exports.crCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_SHOW_POPUP = void 0;
+exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_SHOW_POPUP = void 0;
 const _isArr = Array.isArray;
 const _getCn = arrOrStr => _isArr(arrOrStr) ? arrOrStr[0] ? arrOrStr[1] : '' : arrOrStr || '';
 const crCn = (arrOrStr1, arrOrStr2) => {
@@ -26,4 +26,11 @@ const S_NONE = {
 exports.S_NONE = S_NONE;
 const crShowHide = (is, className, withoutAnimation, animationClassName) => is ? [crCn(className, [!withoutAnimation, animationClassName || CL_SHOW_POPUP]), S_BLOCK] : [className, S_NONE];
 exports.crShowHide = crShowHide;
+const crStyle2 = (style1, style2) => style2 ? {
+  ...style1,
+  ...style2
+} : style1;
+exports.crStyle2 = crStyle2;
+const crStyle3 = (style1, style2, style3) => crStyle2(crStyle2(style1, style2), style3);
+exports.crStyle3 = crStyle3;
 //# sourceMappingURL=styleFn.js.map
