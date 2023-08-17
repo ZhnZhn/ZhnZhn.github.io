@@ -6,11 +6,7 @@ import {
   toConfig
 } from '../charts/configBuilderFn';
 import addJenksColorTo from '../math/addJenksColorTo';
-
-
-const _crCategories = (
-  data
-) => data.map(item => item.c);
+import { crCategories } from './CategoryFn';
 
 //data = [{ y, name, c}]
 const crCategoryConfig = (
@@ -21,11 +17,13 @@ const crCategoryConfig = (
   data,
   isCluster
 ) => pipe(
-  crBarOrColumnConfig(seriaType, _crCategories(data)),
+  crBarOrColumnConfig(seriaType, crCategories(data)),
   fAddCaption(title, subtitle),
   fAddSeriaBy(0, {
     color: seriaColor,
-    data: isCluster ? addJenksColorTo(data) : data
+    data: isCluster
+      ? addJenksColorTo(data)
+      : data
   }),
   toConfig
 );

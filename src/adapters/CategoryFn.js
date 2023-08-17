@@ -45,6 +45,10 @@ export const isCategoryCase = (
 ) => _isArr((config.xAxis||{}).categories)
   && _isArr(categories);
 
+export const crCategories = (
+  data
+) => data.map(item => domSanitize(item.c));
+
 export const crCategoryPoint = (
   y,
   n
