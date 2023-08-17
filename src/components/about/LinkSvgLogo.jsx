@@ -1,6 +1,6 @@
+import { toHref } from '../uiApi';
 import { crCn } from '../styleFn';
 
-import toLink from '../zhn/toLink';
 import Svg100 from '../zhn/svg/Svg100';
 import UseLogoById from './UseLogoById';
 
@@ -16,7 +16,7 @@ const LinkSvgLogo = ({
   <a
     aria-label={ariaLabel}
     className={crCn(CL_LI, className)}
-    href={toLink(href)}
+    href={toHref(href)}
   >
     <Svg100
       {...svgProps}

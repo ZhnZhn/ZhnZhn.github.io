@@ -1,4 +1,4 @@
-import toLink from '../zhn/toLink';
+import { toHref } from '../uiApi';
 
 const CL_LOGO = 'logo-item data-provider-logo';
 
@@ -11,7 +11,7 @@ const LinkLogo = ({
   <a
     aria-label={ariaLabel}
     className={className}
-    href={toLink(href)}
+    href={toHref(href)}
   >
    {caption}
   </a>

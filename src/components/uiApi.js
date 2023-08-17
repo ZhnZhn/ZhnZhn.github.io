@@ -121,3 +121,12 @@ const _getFirstTouches = (
 
 export const getClientX = _fGetEvt(CLIENT_X, _getTouchClientX)
 export const getClientY = _fGetEvt(CLIENT_Y, _getTouchClientY)
+
+export const toHref = (href, isHttp) => {
+  const protocol = (href || '')
+   .split('://')[0];
+  return protocol === 'https'
+     || ( isHttp && protocol === 'http')
+   ? href
+   : void 0;
+};

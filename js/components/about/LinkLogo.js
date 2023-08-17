@@ -1,9 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _toLink = _interopRequireDefault(require("../zhn/toLink"));
+var _uiApi = require("../uiApi");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_LOGO = 'logo-item data-provider-logo';
 const LinkLogo = _ref => {
@@ -16,7 +15,7 @@ const LinkLogo = _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
     "aria-label": ariaLabel,
     className: className,
-    href: (0, _toLink.default)(href),
+    href: (0, _uiApi.toHref)(href),
     children: caption
   });
 };

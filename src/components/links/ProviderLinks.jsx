@@ -7,7 +7,7 @@ const S_COMPARE = {
 };
 
 const LINK_CONFIGS = [
- ["Ndl", "Nasdaq Data Link", "https://data.nasdaq.com/"],
+ ["Ndl", "Nasdaq Data Link", "https://data.nasdaq.com"],
  ["DBnomics", "https://db.nomics.world"],
  ["Ember", "https://ember-climate.org"],
  ["IRENA", "https://www.irena.org"],
@@ -18,8 +18,8 @@ const LINK_CONFIGS = [
  ["Eurostat", "https://ec.europa.eu/eurostat/"],
  ["UnComtrade", "UN Comtrade", "https://comtrade.un.org"],
  ["WorldBank","World Bank", "https://data.worldbank.org"],
- ["FaoStat","FAOSTAT", "http://www.fao.org/faostat/en/#data"],
- ["Bea","U.S. Bureau of Economic Analysis", "https://www.bea.gov/index.htm"],
+ ["FaoStat","FAOSTAT", "https://www.fao.org/faostat/en/#data"],
+ ["Bea","U.S. Bureau of Economic Analysis", "https://www.bea.gov"],
  ["Bsl","U.S. Bureau of Labor Statistics", "https://www.bls.gov/home.htm"],
  ["Eia","U.S. EIA", "https://www.eia.gov"],
  ["Intrinio", "https://intrinio.com"],

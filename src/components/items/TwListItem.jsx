@@ -1,9 +1,10 @@
+import { toHref } from '../uiApi';
 import useToggle from '../hooks/useToggle';
+
 import Comp from '../Comp';
 import ItemHeader from './ItemHeader';
 
 const {
-  toLink,
   ShowHide,
   ItemStack,
   SvgClose
@@ -42,16 +43,15 @@ const Twit = ({ item }) => {
     text,
     retweet,
     like
-  } = item
-  , _link = toLink(link);
+  } = item;
   return (
-    <div className={CL} href={_link}>
+    <div className={CL}>
       <div style={S_ROW_TITLE}>
         <span>{`${user} `}</span>
         <span>{date}</span>
         <SvgClose style={S_BT_CLOSE} onClose={toggleIsShow} />
       </div>
-      <a href={_link}>
+      <a href={toHref(link)}>
         <div style={S_PL_16}>{text}</div>
       </a>
       <div style={S_ROW}>

@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.stopImmediatePropagation = exports.setRefValue = exports.memo = exports.lazy = exports.isInputValid = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.focusElementById = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.Suspense = exports.Component = exports.Children = void 0;
+exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.setRefValue = exports.memo = exports.lazy = exports.isInputValid = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.focusElementById = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.Suspense = exports.Component = exports.Children = void 0;
 var _react = require("react");
 exports.Suspense = _react.Suspense;
 exports.lazy = _react.lazy;
@@ -79,4 +79,9 @@ const getClientX = _fGetEvt(CLIENT_X, _getTouchClientX);
 exports.getClientX = getClientX;
 const getClientY = _fGetEvt(CLIENT_Y, _getTouchClientY);
 exports.getClientY = getClientY;
+const toHref = (href, isHttp) => {
+  const protocol = (href || '').split('://')[0];
+  return protocol === 'https' || isHttp && protocol === 'http' ? href : void 0;
+};
+exports.toHref = toHref;
 //# sourceMappingURL=uiApi.js.map

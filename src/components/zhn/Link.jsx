@@ -1,4 +1,6 @@
-const Link = ({ 
+import { toHref } from '../uiApi';
+
+const Link = ({
   className='link',
   style,
   title,
@@ -9,7 +11,7 @@ const Link = ({
    target="_blank"
    className={className}
    style={style}
-   href={href}
+   href={toHref(href)}
  >
     {title}
     {children}

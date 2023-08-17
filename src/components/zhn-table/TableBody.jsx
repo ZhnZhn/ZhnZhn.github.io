@@ -1,4 +1,4 @@
-import toLink from '../zhn/toLink'
+import { toHref } from '../uiApi';
 import {
   crTdStyle,
   toFormatValue
@@ -17,7 +17,7 @@ const _crLinkEl = (id, title, fn) => {
   return (
     <a
       className={CL_LINK}
-      href={toLink(_href)}
+      href={toHref(_href)}
     >
       {title}
     </a>

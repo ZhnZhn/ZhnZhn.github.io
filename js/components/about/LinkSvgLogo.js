@@ -3,8 +3,8 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _toLink = _interopRequireDefault(require("../zhn/toLink"));
 var _Svg = _interopRequireDefault(require("../zhn/svg/Svg100"));
 var _UseLogoById = _interopRequireDefault(require("./UseLogoById"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -20,7 +20,7 @@ const LinkSvgLogo = _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
     "aria-label": ariaLabel,
     className: (0, _styleFn.crCn)(CL_LI, className),
-    href: (0, _toLink.default)(href),
+    href: (0, _uiApi.toHref)(href),
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.default, {
       ...svgProps,
       "aria-hidden": "true",

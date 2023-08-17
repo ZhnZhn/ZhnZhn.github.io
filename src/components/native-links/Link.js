@@ -1,4 +1,4 @@
-import toLink from '../zhn/toLink';
+import { toHref } from '../uiApi';
 
 const S_LINK = {
   display: 'inline-block',
@@ -12,7 +12,7 @@ const Link = ({
   href,
   caption='Native Link'
 }) => {
-  const _href = toLink(href, isHttp)
+  const _href = toHref(href, isHttp)
   , _style = {...S_LINK, ...style};
   return _href ? (
     <a

@@ -23,7 +23,6 @@ import MsgRenderErr from './MsgRenderErr'
 import HighchartWrapper from './HighchartWrapper'
 import ErrorBoundary from './ErrorBoundary'
 
-import toLink from './toLink'
 
 const A = {
   ...SvgIcons,
@@ -49,8 +48,7 @@ const A = {
   SvgClose,
   MsgRenderErr,
   HighchartWrapper,
-  ErrorBoundary,
-  toLink
+  ErrorBoundary
 };
 
 export default A
