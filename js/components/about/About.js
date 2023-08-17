@@ -90,7 +90,7 @@ const About = () => {
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TwitterLink.default, {
         style: S_BT_TWITTER,
         account: "webapperc",
-        title: "Twitter page @wepapperc with chart examples"
+        title: "Twitter / X page @webapperc with chart examples"
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {
       className: CL_SCROLL,

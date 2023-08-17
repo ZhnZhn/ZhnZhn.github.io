@@ -86,7 +86,7 @@ const About = () => {
          <TwitterLink
             style={S_BT_TWITTER}
             account="webapperc"
-            title="Twitter page @wepapperc with chart examples"
+            title="Twitter / X page @webapperc with chart examples"
          />
        </A.BrowserCaption>
 
