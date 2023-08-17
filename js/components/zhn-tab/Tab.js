@@ -11,17 +11,19 @@ const Tab = _ref => {
     id,
     title,
     isSelected,
-    onClick
+    onClick,
+    onKeyDown
   } = _ref;
-  const _cn = (0, _styleFn.crCn)(CL_TAB, [isSelected, CL_TAB_SELECTED]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     type: "button",
-    className: _cn,
+    className: (0, _styleFn.crCn)(CL_TAB, [isSelected, CL_TAB_SELECTED]),
     id: "tab-" + id,
     role: "tab",
+    tabIndex: isSelected ? '0' : '-1',
     "aria-selected": isSelected,
     "aria-controls": "tabpanel-" + id,
     onClick: onClick,
+    onKeyDown: onKeyDown,
     children: title
   });
 };

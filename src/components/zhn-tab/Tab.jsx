@@ -7,26 +7,25 @@ const Tab = ({
   id,
   title,
   isSelected,
-  onClick
-}) => {
-  const _cn = crCn(
-    CL_TAB,
-    [isSelected, CL_TAB_SELECTED]
-  );
-
-  return (
-    <button
-       type="button"
-       className={_cn}
-       id={`tab-${id}`}
-       role="tab"
-       aria-selected={isSelected}
-       aria-controls={`tabpanel-${id}`}
-       onClick={onClick}
-    >
-       {title}
-    </button>
-  );
-}
+  onClick,
+  onKeyDown
+}) => (
+  <button
+    type="button"
+    className={crCn(
+      CL_TAB,
+      [isSelected, CL_TAB_SELECTED]
+    )}
+    id={`tab-${id}`}
+    role="tab"
+    tabIndex={isSelected ? '0' : '-1'}
+    aria-selected={isSelected}
+    aria-controls={`tabpanel-${id}`}
+    onClick={onClick}
+    onKeyDown={onKeyDown}
+  >
+    {title}
+  </button>
+);
 
 export default Tab

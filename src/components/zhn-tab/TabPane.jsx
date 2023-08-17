@@ -1,6 +1,8 @@
 import {
+  memo,
   cloneElement,
-  useState
+  useState,
+  focusElementById
 } from '../uiApi';
 
 const S_TABS = { margin: '5px 5px 10px 24px' }
@@ -13,10 +15,18 @@ const S_TABS = { margin: '5px 5px 10px 24px' }
   width: "100%",
   height: "100%"
 }
-, S_NONE = { display: 'none'};
+, S_NONE = { display: 'none' };
 
+const _crNextId = (
+  id,
+  childrenLength
+) => id === -1
+  ? childrenLength - 1
+  : id === childrenLength
+      ? 0
+      : id;
 
-const TabPane = ({
+const TabPane = memo(({
   width,
   height,
   children
@@ -25,8 +35,25 @@ const TabPane = ({
     selectedTabIndex,
     setSelectedTabIndex
   ] = useState(0)
-  , _isSelectedTabIndex = index =>
-      index === selectedTabIndex;
+  , _isSelectedTabIndex = (index) =>
+      index === selectedTabIndex
+
+  , _childrenLength = children.length
+  , _hKeyDown = (index, evt) => {
+      const _focusTabByIndex = (tabIndex) => {
+        const _nextIndex = _crNextId(tabIndex, _childrenLength);
+        focusElementById(`tab-${_nextIndex}`)
+        setSelectedTabIndex(_nextIndex)
+      }
+
+      const { keyCode } = evt;
+      if (keyCode === 39) {
+        _focusTabByIndex(index + 1)
+      }
+      if (keyCode === 37) {
+        _focusTabByIndex(index - 1)
+      }
+  };
 
   return (
     <div style={{ width, height }}>
@@ -34,8 +61,9 @@ const TabPane = ({
          {children.map((tab, index) => cloneElement(tab, {
              key: index,
              id: index,
+             isSelected: _isSelectedTabIndex(index),
              onClick: () => setSelectedTabIndex(index),
-             isSelected: _isSelectedTabIndex(index)
+             onKeyDown: (evt) => _hKeyDown(index, evt)
           }))}
       </div>
       <div style={S_COMPONENTS}>
@@ -58,6 +86,6 @@ const TabPane = ({
       </div>
     </div>
   );
-};
+});
 
 export default TabPane

@@ -19,14 +19,32 @@ const S_TABS = {
   S_NONE = {
     display: 'none'
   };
-const TabPane = _ref => {
+const _crNextId = (id, childrenLength) => id === -1 ? childrenLength - 1 : id === childrenLength ? 0 : id;
+const TabPane = (0, _uiApi.memo)(_ref => {
   let {
     width,
     height,
     children
   } = _ref;
   const [selectedTabIndex, setSelectedTabIndex] = (0, _uiApi.useState)(0),
-    _isSelectedTabIndex = index => index === selectedTabIndex;
+    _isSelectedTabIndex = index => index === selectedTabIndex,
+    _childrenLength = children.length,
+    _hKeyDown = (index, evt) => {
+      const _focusTabByIndex = tabIndex => {
+        const _nextIndex = _crNextId(tabIndex, _childrenLength);
+        (0, _uiApi.focusElementById)("tab-" + _nextIndex);
+        setSelectedTabIndex(_nextIndex);
+      };
+      const {
+        keyCode
+      } = evt;
+      if (keyCode === 39) {
+        _focusTabByIndex(index + 1);
+      }
+      if (keyCode === 37) {
+        _focusTabByIndex(index - 1);
+      }
+    };
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       width,
@@ -37,8 +55,9 @@ const TabPane = _ref => {
       children: children.map((tab, index) => (0, _uiApi.cloneElement)(tab, {
         key: index,
         id: index,
+        isSelected: _isSelectedTabIndex(index),
         onClick: () => setSelectedTabIndex(index),
-        isSelected: _isSelectedTabIndex(index)
+        onKeyDown: evt => _hKeyDown(index, evt)
       }))
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_COMPONENTS,
@@ -56,7 +75,7 @@ const TabPane = _ref => {
       })
     })]
   });
-};
+});
 var _default = TabPane;
 exports.default = _default;
 //# sourceMappingURL=TabPane.js.map
