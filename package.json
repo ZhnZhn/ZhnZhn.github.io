@@ -1,7 +1,7 @@
 {
   "name": "web-app-erc",
   "version": "0.18.0",
-  "description": "ERC: Economic RESTful Client",
+  "description": "Web app ERC (Economic RESTful Client)",
   "main": "index.js",
   "scripts": {
     "dev": "webpack serve --config webpack.dev.js",
