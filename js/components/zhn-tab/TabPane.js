@@ -40,9 +40,11 @@ const TabPane = (0, _uiApi.memo)(_ref => {
         keyCode
       } = evt;
       if (keyCode === 39) {
+        (0, _uiApi.stopDefaultFor)(evt);
         _focusTabByIndex(index + 1);
       }
       if (keyCode === 37) {
+        (0, _uiApi.stopDefaultFor)(evt);
         _focusTabByIndex(index - 1);
       }
     };

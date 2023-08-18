@@ -72,6 +72,11 @@ export const stopImmediatePropagation = (evt) => {
   evt.nativeEvent.stopImmediatePropagation()
 }
 
+export const stopDefaultFor = (evt) => {
+  evt.stopPropagation()
+  evt.preventDefault()
+}
+
 export const isInputValid = ref => {
   const inputComp = getRefValue(ref);
   return inputComp && _isFn(inputComp.isValid)

@@ -2,7 +2,8 @@ import {
   memo,
   cloneElement,
   useState,
-  focusElementById
+  focusElementById,
+  stopDefaultFor
 } from '../uiApi';
 
 import {
@@ -61,9 +62,11 @@ const TabPane = memo(({
 
       const { keyCode } = evt;
       if (keyCode === 39) {
+        stopDefaultFor(evt)
         _focusTabByIndex(index + 1)
       }
       if (keyCode === 37) {
+        stopDefaultFor(evt)
         _focusTabByIndex(index - 1)
       }
   };
