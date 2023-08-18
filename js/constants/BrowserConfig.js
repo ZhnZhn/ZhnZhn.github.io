@@ -92,7 +92,7 @@ const BrowserConfig = {
       rootUrl: 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'
     }
   },
-  [_BrowserType.BT_US_ECONOMICS]: _crBrowserItem(_BrowserType.BT_US_ECONOMICS, 'US Economics', 'us-economics'),
+  [_BrowserType.BT_US_ECONOMICS]: _crBrowserItem(_BrowserType.BT_US_ECONOMICS, 'U.S. Economics', 'us-economics'),
   [_BrowserType.BT_NYSE_STOCKS]: {
     browserType: _BrowserType.BT_NYSE_STOCKS,
     caption: 'NYSE by Sectors',

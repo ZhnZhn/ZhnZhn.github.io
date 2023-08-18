@@ -77,7 +77,7 @@ const PAGE_CONFIGS_01 = [
   [CL_ORG, 'EU: FIGARO', BT_FGR],
   [CL_ORG, 'Euro Indicators / PEEIs', BT_PE],
   [CL_ORG, 'Nasdaq Data Link', BT_NDL],
-  [CL_BR, 'US Economics', BT_US_ECONOMICS]
+  [CL_BR, 'U.S. Economics', BT_US_ECONOMICS]
 ]
 , PAGE_CONFIGS_02 = [
   [CL_ORG, 'Eurostat', BT_EUROSTAT],

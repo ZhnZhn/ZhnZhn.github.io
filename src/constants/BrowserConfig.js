@@ -197,7 +197,7 @@ const BrowserConfig = {
   },
   [BT_US_ECONOMICS]: _crBrowserItem(
     BT_US_ECONOMICS,
-    'US Economics',
+    'U.S. Economics',
     'us-economics'
   ),
   [BT_NYSE_STOCKS]: {

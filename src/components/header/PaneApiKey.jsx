@@ -128,7 +128,7 @@ class PaneApiKey extends Component {
             comp={this}
           />
         </OpenClose>
-        <OpenClose caption="US Economics" childStyle={S_OC_CHILD}>
+        <OpenClose caption="U.S. Economics" childStyle={S_OC_CHILD}>
            <ItemStack
              items={CONF_EC_USA_ARR}
              crItem={_crPwdItem}

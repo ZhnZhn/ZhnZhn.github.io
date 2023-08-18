@@ -115,7 +115,7 @@ class PaneApiKey extends _uiApi.Component {
           comp: this
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
-        caption: "US Economics",
+        caption: "U.S. Economics",
         childStyle: S_OC_CHILD,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
           items: CONF_EC_USA_ARR,
