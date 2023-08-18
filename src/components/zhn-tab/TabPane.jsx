@@ -6,6 +6,7 @@ import {
 } from '../uiApi';
 
 import {
+  crTabCn,
   crTabId,
   crTabPanelId
 } from './tabPaneFn';
@@ -36,6 +37,7 @@ const _crNextId = (
       : id;
 
 const TabPane = memo(({
+  id,
   width,
   height,
   children
@@ -53,7 +55,7 @@ const TabPane = memo(({
           tabIndex,
           children.length
         );
-        focusElementById(crTabId(_nextIndex))
+        focusElementById(crTabId(id, _nextIndex))
         setSelectedTabIndex(_nextIndex)
       }
 
@@ -69,13 +71,18 @@ const TabPane = memo(({
   return (
     <div style={{ width, height }}>
       <div style={S_TABS}>
-         {children.map((tab, index) => cloneElement(tab, {
-             key: index,
-             id: index,
-             isSelected: _isSelectedTabIndex(index),
-             onClick: () => setSelectedTabIndex(index),
-             onKeyDown: (evt) => _hKeyDown(index, evt)
-          }))}
+         {children.map((tab, index) => {
+            const isSelected = _isSelectedTabIndex(index);
+            return cloneElement(tab, {
+              key: index,
+              isSelected,
+              tabId: crTabId(id, index),
+              tabPanelId: crTabPanelId(id, index),
+              className: crTabCn(isSelected),
+              onClick: () => setSelectedTabIndex(index),
+              onKeyDown: (evt) => _hKeyDown(index, evt)
+           });
+        })}
       </div>
       <div style={S_COMPONENTS}>
          {children.map((tab, index) => {
@@ -85,8 +92,8 @@ const TabPane = memo(({
                   key={index}
                   style={isSelected ? S_BLOCK : S_NONE}
                   role="tabpanel"
-                  id={crTabPanelId(index)}
-                  aria-labelledby={crTabId(index)}
+                  id={crTabPanelId(id, index)}
+                  aria-labelledby={crTabId(id, index)}
                 >
                    {cloneElement(tab.props.children, {
                      isSelected

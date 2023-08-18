@@ -36,7 +36,7 @@ const EditListDialog = memoIsShow(({
      isWithButton={false}
      onClose={onClose}
   >
-    <TabPane width={380} >
+    <TabPane id="eld" width={380} >
        <Tab title="Create">
          <ListCreatePane
             store={store}

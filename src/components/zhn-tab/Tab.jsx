@@ -1,14 +1,7 @@
-import { crCn } from '../styleFn';
-
-import {
-  CL_TAB,
-  CL_TAB_SELECTED,
-  crTabId,
-  crTabPanelId
-} from './tabPaneFn';
-
 const Tab = ({
-  id,
+  className,
+  tabId,
+  tabPanelId,
   title,
   isSelected,
   onClick,
@@ -16,15 +9,12 @@ const Tab = ({
 }) => (
   <button
     type="button"
-    className={crCn(
-      CL_TAB,
-      [isSelected, CL_TAB_SELECTED]
-    )}
-    id={crTabId(id)}
     role="tab"
+    className={className}
+    id={tabId}
     tabIndex={isSelected ? '0' : '-1'}
     aria-selected={isSelected}
-    aria-controls={crTabPanelId(id)}
+    aria-controls={tabPanelId}
     onClick={onClick}
     onKeyDown={onKeyDown}
   >

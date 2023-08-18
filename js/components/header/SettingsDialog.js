@@ -48,6 +48,7 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
     isShow: isShow,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
+      id: "sd",
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "ApiKeys",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneApiKey.default, {

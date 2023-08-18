@@ -48,7 +48,7 @@ const SettingsDialog = memoIsShow(({
        isShow={isShow}
        onClose={onClose}
     >
-      <TabPane>
+      <TabPane id="sd">
         <Tab title="ApiKeys">
           <PaneApiKey
              isShow={isShow}

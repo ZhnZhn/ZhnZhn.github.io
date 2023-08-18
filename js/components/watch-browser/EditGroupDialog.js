@@ -1,33 +1,21 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-
 var _WatchActions = require("../../flux/actions/WatchActions");
-
 var _MsgWatch = require("../../constants/MsgWatch");
-
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
-
 var _TabPane = _interopRequireDefault(require("../zhn-tab/TabPane"));
-
 var _Tab = _interopRequireDefault(require("../zhn-tab/Tab"));
-
 var _GroupAddPane = _interopRequireDefault(require("./GroupAddPane"));
-
 var _GroupEditPane = _interopRequireDefault(require("./GroupEditPane"));
-
 var _GroupDeletePane = _interopRequireDefault(require("./GroupDeletePane"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const addGroup = _WatchActions.WatchActions[_WatchActions.WAT_ADD_GROUP],
-      renameGroup = _WatchActions.WatchActions[_WatchActions.WAT_RENAME_GROUP],
-      deleteGroup = _WatchActions.WatchActions[_WatchActions.WAT_DELETE_GROUP];
+  renameGroup = _WatchActions.WatchActions[_WatchActions.WAT_RENAME_GROUP],
+  deleteGroup = _WatchActions.WatchActions[_WatchActions.WAT_DELETE_GROUP];
 const EditGroupDialog = (0, _memoIsShow.default)(_ref => {
   let {
     isShow,
@@ -40,6 +28,7 @@ const EditGroupDialog = (0, _memoIsShow.default)(_ref => {
     isWithButton: false,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
+      id: "egd",
       width: 380,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "Create",

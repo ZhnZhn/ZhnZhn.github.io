@@ -23,6 +23,7 @@ const S_TABS = {
 const _crNextId = (id, childrenLength) => id === -1 ? childrenLength - 1 : id === childrenLength ? 0 : id;
 const TabPane = (0, _uiApi.memo)(_ref => {
   let {
+    id,
     width,
     height,
     children
@@ -32,7 +33,7 @@ const TabPane = (0, _uiApi.memo)(_ref => {
     _hKeyDown = (index, evt) => {
       const _focusTabByIndex = tabIndex => {
         const _nextIndex = _crNextId(tabIndex, children.length);
-        (0, _uiApi.focusElementById)((0, _tabPaneFn.crTabId)(_nextIndex));
+        (0, _uiApi.focusElementById)((0, _tabPaneFn.crTabId)(id, _nextIndex));
         setSelectedTabIndex(_nextIndex);
       };
       const {
@@ -52,13 +53,18 @@ const TabPane = (0, _uiApi.memo)(_ref => {
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_TABS,
-      children: children.map((tab, index) => (0, _uiApi.cloneElement)(tab, {
-        key: index,
-        id: index,
-        isSelected: _isSelectedTabIndex(index),
-        onClick: () => setSelectedTabIndex(index),
-        onKeyDown: evt => _hKeyDown(index, evt)
-      }))
+      children: children.map((tab, index) => {
+        const isSelected = _isSelectedTabIndex(index);
+        return (0, _uiApi.cloneElement)(tab, {
+          key: index,
+          isSelected,
+          tabId: (0, _tabPaneFn.crTabId)(id, index),
+          tabPanelId: (0, _tabPaneFn.crTabPanelId)(id, index),
+          className: (0, _tabPaneFn.crTabCn)(isSelected),
+          onClick: () => setSelectedTabIndex(index),
+          onKeyDown: evt => _hKeyDown(index, evt)
+        });
+      })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_COMPONENTS,
       children: children.map((tab, index) => {
@@ -66,8 +72,8 @@ const TabPane = (0, _uiApi.memo)(_ref => {
         return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           style: isSelected ? S_BLOCK : S_NONE,
           role: "tabpanel",
-          id: (0, _tabPaneFn.crTabPanelId)(index),
-          "aria-labelledby": (0, _tabPaneFn.crTabId)(index),
+          id: (0, _tabPaneFn.crTabPanelId)(id, index),
+          "aria-labelledby": (0, _tabPaneFn.crTabId)(id, index),
           children: (0, _uiApi.cloneElement)(tab.props.children, {
             isSelected
           })

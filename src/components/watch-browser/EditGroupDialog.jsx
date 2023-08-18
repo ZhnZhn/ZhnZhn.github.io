@@ -36,7 +36,7 @@ const EditGroupDialog = memoIsShow(({
      isWithButton={false}
      onClose={onClose}
   >
-    <TabPane width={380} >
+    <TabPane id="egd" width={380} >
        <Tab title="Create">
          <GroupAddPane
             store={store}
