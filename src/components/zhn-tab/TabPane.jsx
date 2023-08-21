@@ -1,5 +1,4 @@
 import {
-  memo,
   cloneElement,
   useState,
   focusElementById,
@@ -11,6 +10,8 @@ import {
   crTabId,
   crTabPanelId
 } from './tabPaneFn';
+
+const _isBool = v => typeof v === 'boolean';
 
 const S_TABS = {
   margin: '5px 5px 10px 24px'
@@ -37,11 +38,13 @@ const _crNextId = (
       ? 0
       : id;
 
-const TabPane = memo(({
+const TabPane = ({
   id,
+  isShow,
   width,
   height,
-  children
+  children,
+  ...restTapPanelProps
 }) => {
   const [
     selectedTabIndex,
@@ -89,17 +92,20 @@ const TabPane = memo(({
       </div>
       <div style={S_COMPONENTS}>
          {children.map((tab, index) => {
-             const isSelected = _isSelectedTabIndex(index);
+             const _isSelected = _isSelectedTabIndex(index);
              return (
                 <div
                   key={index}
-                  style={isSelected ? S_BLOCK : S_NONE}
+                  style={_isSelected ? S_BLOCK : S_NONE}
                   role="tabpanel"
                   id={crTabPanelId(id, index)}
                   aria-labelledby={crTabId(id, index)}
                 >
                    {cloneElement(tab.props.children, {
-                     isSelected
+                     isVisible: _isBool(isShow)
+                       ? isShow && _isSelected
+                       : _isSelected,
+                     ...restTapPanelProps
                    })}
                 </div>
              );
@@ -107,6 +113,6 @@ const TabPane = memo(({
       </div>
     </div>
   );
-});
+}
 
 export default TabPane

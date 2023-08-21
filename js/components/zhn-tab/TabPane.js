@@ -5,6 +5,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _tabPaneFn = require("./tabPaneFn");
 var _jsxRuntime = require("react/jsx-runtime");
+const _isBool = v => typeof v === 'boolean';
 const S_TABS = {
     margin: '5px 5px 10px 24px'
   },
@@ -21,12 +22,14 @@ const S_TABS = {
     display: 'none'
   };
 const _crNextId = (id, childrenLength) => id === -1 ? childrenLength - 1 : id === childrenLength ? 0 : id;
-const TabPane = (0, _uiApi.memo)(_ref => {
+const TabPane = _ref => {
   let {
     id,
+    isShow,
     width,
     height,
-    children
+    children,
+    ...restTapPanelProps
   } = _ref;
   const [selectedTabIndex, setSelectedTabIndex] = (0, _uiApi.useState)(0),
     _isSelectedTabIndex = index => index === selectedTabIndex,
@@ -70,20 +73,21 @@ const TabPane = (0, _uiApi.memo)(_ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_COMPONENTS,
       children: children.map((tab, index) => {
-        const isSelected = _isSelectedTabIndex(index);
+        const _isSelected = _isSelectedTabIndex(index);
         return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-          style: isSelected ? S_BLOCK : S_NONE,
+          style: _isSelected ? S_BLOCK : S_NONE,
           role: "tabpanel",
           id: (0, _tabPaneFn.crTabPanelId)(id, index),
           "aria-labelledby": (0, _tabPaneFn.crTabId)(id, index),
           children: (0, _uiApi.cloneElement)(tab.props.children, {
-            isSelected
+            isVisible: _isBool(isShow) ? isShow && _isSelected : _isSelected,
+            ...restTapPanelProps
           })
         }, index);
       })
     })]
   });
-});
+};
 var _default = TabPane;
 exports.default = _default;
 //# sourceMappingURL=TabPane.js.map
