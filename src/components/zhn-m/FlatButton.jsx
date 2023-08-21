@@ -1,4 +1,7 @@
-import { crCn } from '../styleFn';
+import {
+  crCn,
+  crStyle2
+} from '../styleFn';
 
 import useThrottleClick from '../hooks/useThrottleClick';
 import useHotKey from '../hotkeys/useHotKey';
@@ -32,9 +35,10 @@ const FlatButton = ({
 }) => {
   const _hClick = useThrottleClick(timeout, onClick)
   , _className = crCn(CL_BT_FLAT, className)
-  , _style = isPrimary
-      ? {...style, ...S_PRIMARY_COLOR}
-      : style
+  , _style = crStyle2(
+    style,
+    isPrimary && S_PRIMARY_COLOR
+  )
   , [
     _hotKey,
     _refBt

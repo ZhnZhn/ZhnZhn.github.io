@@ -31,10 +31,7 @@ const FlatButton = _ref => {
   } = _ref;
   const _hClick = (0, _useThrottleClick.default)(timeout, onClick),
     _className = (0, _styleFn.crCn)(CL_BT_FLAT, className),
-    _style = isPrimary ? {
-      ...style,
-      ...S_PRIMARY_COLOR
-    } : style,
+    _style = (0, _styleFn.crStyle2)(style, isPrimary && S_PRIMARY_COLOR),
     [_hotKey, _refBt] = (0, _useHotKey.default)(hotKey, _hClick, refBt),
     _title = _crTitle(title, _hotKey);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
