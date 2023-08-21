@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useRefFocus.js"
+ ],
+ "file": "../../../src/components/hooks/useRefFocus.js",
+ "names": [
+  "_uiApi",
+  "require",
+  "useRefFocus",
+  "refFocusElement",
+  "useRef",
+  "setRefFocusElement",
+  "useCallback",
+  "el",
+  "setRefValue",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAMA,MAAMC,WAAW,GAAGA,CAAA,KAAM;EACzB,MAAMC,eAAe,GAAG,IAAAC,aAAM,EAAC,CAAC;IAC9BC,kBAAkB,GAAG,IAAAC,kBAAW,EAACC,EAAE,IAAI;MACrC,IAAAC,kBAAW,EAACL,eAAe,EAAEI,EAAE,CAAC;IACpC,CAAC,EAAE,EAAE,CAAC;EACN,OAAO,CACLJ,eAAe,EACfE,kBAAkB,CACnB;AACF,CAAC;AAAA,IAAAI,QAAA,GAEcP,WAAW;AAAAQ,OAAA,CAAAC,OAAA,GAAAF,QAAA"
+}
