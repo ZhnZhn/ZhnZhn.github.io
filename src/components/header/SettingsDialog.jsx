@@ -1,5 +1,6 @@
 import { crStyle2 } from '../styleFn';
 import memoIsShow from '../hoc/memoIsShow';
+import useRefFocus from '../hooks/useRefFocus';
 import useSettingsMenuMore from './useSettingsMenuMore';
 
 import {
@@ -31,16 +32,21 @@ const SettingsDialog = memoIsShow(({
   onClose
 }) => {
   const [
+    refFocusLast,
+    setRefFocusLast
+  ] = useRefFocus()
+  , [
     isShowLabels,
     menuModel
   ] = useSettingsMenuMore(CL_ROW)
   , _style = crStyle2(
     S_MODAL,
-    !isShowLabels &&  S_MODAL_SMALL
+    !isShowLabels && S_MODAL_SMALL
   );
 
   return (
     <ModalDialog
+       refFocusLast={refFocusLast}
        style={_style}
        caption="User Settings"
        menuModel={menuModel}
@@ -48,25 +54,24 @@ const SettingsDialog = memoIsShow(({
        isShow={isShow}
        onClose={onClose}
     >
-      <TabPane id="sd">
+      <TabPane
+         id="sd"
+         isShow={isShow}
+         setRefFocusLast={setRefFocusLast}
+         isShowLabels={isShowLabels}
+         btStyle={S_BT}
+         data={data}
+         onClose={onClose}
+      >
         <Tab title="ApiKeys">
           <PaneApiKey
-             isShow={isShow}
-             isShowLabels={isShowLabels}
              titleStyle={S_TITLE_API}
-             btStyle={S_BT}
-             data={data}
-             onClose={onClose}
            />
         </Tab>
         <Tab title="Options">
           <PaneOptions
-            isShowLabels={isShowLabels}
-            titleStyle={S_TITLE_OPTION}
-            btStyle={S_BT}
-            data={data}
-            onChangeTheme={ComponentActions.changeTheme}
-            onClose={onClose}
+             titleStyle={S_TITLE_OPTION}
+             onChangeTheme={ComponentActions.changeTheme}
           />
         </Tab>
       </TabPane>

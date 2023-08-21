@@ -31,11 +31,13 @@ const _crInputStyles = (
   : [WITHOUT_LABELS_WIDTH, {width: WITHOUT_LABELS_WIDTH}]
 
 const PaneOptions = ({
+  isVisible,
   isShowLabels,
   titleStyle,
   btStyle,
   data,
   onClose,
+  setRefFocusLast,
   onChangeTheme
 }) => {
   const [
@@ -81,6 +83,10 @@ const PaneOptions = ({
         style={S_MR_12}
         btStyle={btStyle}
         onClose={onClose}
+        setRefFocusLast={isVisible
+          ? setRefFocusLast
+          : void 0
+        }
       >
         <FlatButton
           style={{...btStyle, ...S_MR_4}}

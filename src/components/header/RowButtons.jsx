@@ -11,13 +11,15 @@ const S_ROW = {
 
 const RowButtons = ({
   style,
-  btStyle,
-  onClose,
   children,
+  setRefFocusLast,
+  btStyle,
+  onClose
 }) => (
  <div style={{...S_ROW, ...style}}>
    {children}
    <FlatButton
+     refBt={setRefFocusLast}
      style={btStyle}
      caption="Close"
      onClick={onClose}

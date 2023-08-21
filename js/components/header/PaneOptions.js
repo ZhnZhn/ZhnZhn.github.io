@@ -37,11 +37,13 @@ const _crInputStyles = isShowLabels => isShowLabels ? [] : [WITHOUT_LABELS_WIDTH
 }];
 const PaneOptions = _ref => {
   let {
+    isVisible,
     isShowLabels,
     titleStyle,
     btStyle,
     data,
     onClose,
+    setRefFocusLast,
     onChangeTheme
   } = _ref;
   const [_refProxy, _proxy, _hSetProxy, _hClearProxy] = (0, _useInputData.default)(data, 'setProxy'),
@@ -74,6 +76,7 @@ const PaneOptions = _ref => {
       style: S_MR_12,
       btStyle: btStyle,
       onClose: onClose,
+      setRefFocusLast: isVisible ? setRefFocusLast : void 0,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
         style: {
           ...btStyle,

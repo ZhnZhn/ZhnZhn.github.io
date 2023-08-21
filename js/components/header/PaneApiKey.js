@@ -54,8 +54,7 @@ const _crPwdItem = (item, index, _ref) => {
 class PaneApiKey extends _uiApi.Component {
   /*
   static propTypes = {
-    isShow: PropTypes.bool,
-    isSelected: PropTypes.bool,
+    isVisible: PropTypes.bool,
     titleStyle: PropTypes.object,
     btStyle: PropTypes.object,
     data: PropTypes.object,
@@ -94,14 +93,14 @@ class PaneApiKey extends _uiApi.Component {
   }
   render() {
     const {
-      isShow,
-      isSelected,
+      isVisible,
       isShowLabels,
       titleStyle,
       btStyle,
-      onClose
+      onClose,
+      setRefFocusLast
     } = this.props;
-    return isShow && isSelected ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ScrollPane.default, {
+    return isVisible ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ScrollPane.default, {
       style: S_SCROLL_PANE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
         caption: "Economics",
@@ -140,6 +139,7 @@ class PaneApiKey extends _uiApi.Component {
         style: S_ROW_BTS,
         btStyle: btStyle,
         onClose: onClose,
+        setRefFocusLast: setRefFocusLast,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
           style: btStyle,
           caption: "CLEAR ALL",

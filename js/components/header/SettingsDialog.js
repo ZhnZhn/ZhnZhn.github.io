@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
+var _useRefFocus = _interopRequireDefault(require("../hooks/useRefFocus"));
 var _useSettingsMenuMore = _interopRequireDefault(require("./useSettingsMenuMore"));
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
@@ -38,9 +39,11 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
     data,
     onClose
   } = _ref;
-  const [isShowLabels, menuModel] = (0, _useSettingsMenuMore.default)(CL_ROW),
+  const [refFocusLast, setRefFocusLast] = (0, _useRefFocus.default)(),
+    [isShowLabels, menuModel] = (0, _useSettingsMenuMore.default)(CL_ROW),
     _style = (0, _styleFn.crStyle2)(S_MODAL, !isShowLabels && S_MODAL_SMALL);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
+    refFocusLast: refFocusLast,
     style: _style,
     caption: "User Settings",
     menuModel: menuModel,
@@ -49,25 +52,22 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
       id: "sd",
+      isShow: isShow,
+      setRefFocusLast: setRefFocusLast,
+      isShowLabels: isShowLabels,
+      btStyle: S_BT,
+      data: data,
+      onClose: onClose,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "ApiKeys",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneApiKey.default, {
-          isShow: isShow,
-          isShowLabels: isShowLabels,
-          titleStyle: S_TITLE_API,
-          btStyle: S_BT,
-          data: data,
-          onClose: onClose
+          titleStyle: S_TITLE_API
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "Options",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneOptions.default, {
-          isShowLabels: isShowLabels,
           titleStyle: S_TITLE_OPTION,
-          btStyle: S_BT,
-          data: data,
-          onChangeTheme: _ComponentActions.ComponentActions.changeTheme,
-          onClose: onClose
+          onChangeTheme: _ComponentActions.ComponentActions.changeTheme
         })
       })]
     })
