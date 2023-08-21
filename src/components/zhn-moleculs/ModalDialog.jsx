@@ -1,4 +1,8 @@
-import { forwardRef } from '../uiApi';
+import {
+  forwardRef,
+  useRef
+} from '../uiApi';
+
 import { crShowHide } from '../styleFn';
 
 import useKeyEscape from '../hooks/useKeyEscape';
@@ -8,6 +12,7 @@ import useDialogFocus from './useDialogFocus';
 
 import SvgClose from '../zhn/SvgClose';
 import FlatButton from '../zhn-m/FlatButton';
+import FocusTrap from './FocusTrap';
 import MenuMore from './MenuMore';
 
 import {
@@ -32,31 +37,35 @@ const TH_ID = 'MODAL_DIALOG'
 };
 
 const CommandButtons = ({
+  refBtClose,
   commandButtons,
   withoutClose,
   onClose
 }) => (
   <div style={S_COMMAND_DIV}>
     {commandButtons}
-    { !withoutClose &&
-        <FlatButton
-          key="close"
-          style={S_BT}
-          caption="Close"
-          title="Close Modal Dialog"
-          timeout={0}
-          onClick={onClose}
-        />
+    {!withoutClose &&
+       <FlatButton
+         key="close"
+         refBt={refBtClose}
+         style={S_BT}
+         caption="Close"
+         title="Close Modal Dialog"
+         timeout={0}
+         onClick={onClose}
+       />
     }
   </div>
 );
 
-const DF_ON_CLOSE = () => {};
+const FN_NOOP = () => {};
 const _hClickDialog = evt => {
   evt.stopPropagation()
 }
 
 const ModalDialog = forwardRef(({
+  refFocusFirts,
+  refFocusLast,
   isShow,
   style,
   menuModel,
@@ -67,9 +76,10 @@ const ModalDialog = forwardRef(({
   isWithButton=true,
   children,
   timeout=450,
-  onClose=DF_ON_CLOSE
+  onClose=FN_NOOP
 }, ref) => {
-  const [
+  const refBtClose = useRef()
+  , [
     refRoot,
     refBtMore
   ] = useDialogFocus(
@@ -91,7 +101,13 @@ const ModalDialog = forwardRef(({
   );
 
   return (
-    /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
+    <FocusTrap
+      refEl={refRoot}
+      refFirst={refFocusFirts || refBtMore}
+      refLast={refFocusLast || refBtClose}
+      style={_showHideStyle}
+    >
+    {/*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/}
      <div
         ref={refRoot}
         role="dialog"
@@ -130,11 +146,16 @@ const ModalDialog = forwardRef(({
            {children}
          </div>
          {isWithButton && <CommandButtons
+            refBtClose={!withoutClose && isShow
+              ? refBtClose
+              : void 0
+            }
             commandButtons={commandButtons}
             withoutClose={withoutClose}
             onClose={onClose}
          />}
     </div>
+    </FocusTrap>
   );
 });
 

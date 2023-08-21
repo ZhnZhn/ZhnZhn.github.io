@@ -11,6 +11,7 @@ var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
 var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
+var _FocusTrap = _interopRequireDefault(require("./FocusTrap"));
 var _MenuMore = _interopRequireDefault(require("./MenuMore"));
 var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -28,6 +29,7 @@ const TH_ID = 'MODAL_DIALOG',
   };
 const CommandButtons = _ref => {
   let {
+    refBtClose,
     commandButtons,
     withoutClose,
     onClose
@@ -35,6 +37,7 @@ const CommandButtons = _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: _Dialog.S_COMMAND_DIV,
     children: [commandButtons, !withoutClose && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+      refBt: refBtClose,
       style: _Dialog.S_BT,
       caption: "Close",
       title: "Close Modal Dialog",
@@ -43,12 +46,14 @@ const CommandButtons = _ref => {
     }, "close")]
   });
 };
-const DF_ON_CLOSE = () => {};
+const FN_NOOP = () => {};
 const _hClickDialog = evt => {
   evt.stopPropagation();
 };
 const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
   let {
+    refFocusFirts,
+    refFocusLast,
     isShow,
     style,
     menuModel,
@@ -59,17 +64,20 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
     isWithButton = true,
     children,
     timeout = 450,
-    onClose = DF_ON_CLOSE
+    onClose = FN_NOOP
   } = _ref2;
-  const [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
+  const refBtClose = (0, _uiApi.useRef)(),
+    [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
     _hKeyDown = (0, _useKeyEscape.default)(onClose),
     [isMore, toggleIsMore] = (0, _useToggle.default)(false),
     TS = (0, _useTheme.default)(TH_ID),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_MD);
-  return (
-    /*#__PURE__*/
-    /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
-    (0, _jsxRuntime.jsxs)("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FocusTrap.default, {
+    refEl: refRoot,
+    refFirst: refFocusFirts || refBtMore,
+    refLast: refFocusLast || refBtClose,
+    style: _showHideStyle,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       ref: refRoot,
       role: "dialog",
       tabIndex: "-1",
@@ -106,12 +114,13 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         children: children
       }), isWithButton && /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
+        refBtClose: !withoutClose && isShow ? refBtClose : void 0,
         commandButtons: commandButtons,
         withoutClose: withoutClose,
         onClose: onClose
       })]
     })
-  );
+  });
 });
 var _default = ModalDialog;
 exports.default = _default;
