@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/watch-browser/paneFn.js"
+ ],
+ "file": "../../../src/components/watch-browser/paneFn.js",
+ "names": [
+  "getRefFocusLast",
+  "props",
+  "isVisible",
+  "setRefFocusLast",
+  "exports"
+ ],
+ "mappings": ";;;;AAAO,MAAMA,eAAe,GAC1BC,KAAK,IACFA,KAAK,CAACC,SAAS,GAChBD,KAAK,CAACE,eAAe,GACrB,KAAK,CAAC;AAAAC,OAAA,CAAAJ,eAAA,GAAAA,eAAA"
+}
