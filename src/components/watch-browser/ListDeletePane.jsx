@@ -10,16 +10,18 @@ import {
 import useListen from '../hooks/useListen';
 
 import A from './Atoms';
+import { getRefFocusLast } from './paneFn';
 
-const ListDeletePane = ({
-  store,
-  actionCompleted,
-  forActionType,
-  onDelete,
-  msgOnNotSelect,
-  onClose
-}) => {
-  const [
+const ListDeletePane = (props) => {
+  const {
+    store,
+    actionCompleted,
+    forActionType,
+    onDelete,
+    msgOnNotSelect,
+    onClose    
+  } = props
+  , [
     groupOptions,
     setGroupOptions
   ] = useState(() => store.getWatchGroups())
@@ -80,6 +82,7 @@ const ListDeletePane = ({
           validationMessages={validationMessages}
        />
        <A.RowButtons
+         refBtClose={getRefFocusLast(props)}
          Primary={_primaryBt}
          onClear={_hClear}
          onClose={onClose}

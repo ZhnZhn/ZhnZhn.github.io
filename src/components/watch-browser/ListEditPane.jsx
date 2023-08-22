@@ -11,18 +11,20 @@ import useListen from '../hooks/useListen';
 import useInputText from './hooks/useInputText';
 
 import A from './Atoms';
+import { getRefFocusLast } from './paneFn';
 
-const ListEditPane = ({
-  store,
-  onRename,
-  msgOnIsEmptyName,
-  msgOnNotSelect,
-  actionCompleted,
-  actionFailed,
-  forActionType,
-  onClose
-}) => {
-  const [
+const ListEditPane = (props) => {
+  const {
+    store,
+    onRename,
+    msgOnIsEmptyName,
+    msgOnNotSelect,
+    actionCompleted,
+    actionFailed,
+    forActionType,
+    onClose
+  } = props
+  , [
     groupOptions,
     setGroupOptions
   ] = useState(() => store.getWatchGroups())
@@ -95,6 +97,7 @@ const ListEditPane = ({
          validationMessages={validationMessages}
        />
        <A.RowButtons
+          refBtClose={getRefFocusLast(props)}
           Primary={_primaryBt}
           onClear={_hClear}
           onClose={onClose}

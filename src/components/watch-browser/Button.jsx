@@ -11,8 +11,12 @@ const Clear = ({ onClick }) => (
   />
 )
 
-const Close = ({ onClick }) => (
+const Close = ({
+  refBt,
+  onClick
+}) => (
   <FlatButton
+    refBt={refBt}
     style={S_BT}
     caption="Close"
     title="Close Dialog"

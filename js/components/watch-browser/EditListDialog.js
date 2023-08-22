@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
+var _useRefFocus = _interopRequireDefault(require("../hooks/useRefFocus"));
 var _WatchActions = require("../../flux/actions/WatchActions");
 var _MsgWatch = require("../../constants/MsgWatch");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
@@ -22,7 +23,9 @@ const EditListDialog = (0, _memoIsShow.default)(_ref => {
     store,
     onClose
   } = _ref;
+  const [refFocusLast, setRefFocusLast] = (0, _useRefFocus.default)();
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
+    refFocusLast: refFocusLast,
     caption: "Watch Lists Edit",
     isShow: isShow,
     isWithButton: false,
@@ -36,6 +39,7 @@ const EditListDialog = (0, _memoIsShow.default)(_ref => {
       msgOnNotSelect: _MsgWatch.notSelected,
       msgOnIsEmptyName: _MsgWatch.emptyName,
       onClose: onClose,
+      setRefFocusLast: setRefFocusLast,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "Create",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListCreatePane.default, {

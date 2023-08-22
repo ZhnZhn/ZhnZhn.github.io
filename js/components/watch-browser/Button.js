@@ -21,9 +21,11 @@ const Clear = _ref => {
 };
 const Close = _ref2 => {
   let {
+    refBt,
     onClick
   } = _ref2;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+    refBt: refBt,
     style: S_BT,
     caption: "Close",
     title: "Close Dialog",

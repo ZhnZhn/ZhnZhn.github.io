@@ -10,6 +10,7 @@ const S_COMMAND_DIV = {
 }
 
 const RowButtons = ({
+  refBtClose,
   Primary,
   withoutClear,
   onClear,
@@ -23,6 +24,7 @@ const RowButtons = ({
       />
     }
     <Button.Close
+       refBt={refBtClose}
        onClick={onClose}
     />
   </div>

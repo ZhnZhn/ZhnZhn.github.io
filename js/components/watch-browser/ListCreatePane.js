@@ -8,21 +8,22 @@ var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _useSelectItem = _interopRequireDefault(require("./hooks/useSelectItem"));
 var _useInputText = _interopRequireDefault(require("./hooks/useInputText"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
+var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const ListCreatePane = _ref => {
-  let {
-    store,
-    onCreate,
-    msgOnNotSelect,
-    msgOnIsEmptyName,
-    actionCompleted,
-    actionFailed,
-    forActionType,
-    onClose
-  } = _ref;
-  const [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => store.getWatchGroups()),
+const ListCreatePane = props => {
+  const {
+      store,
+      onCreate,
+      msgOnNotSelect,
+      msgOnIsEmptyName,
+      actionCompleted,
+      actionFailed,
+      forActionType,
+      onClose
+    } = props,
+    [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => store.getWatchGroups()),
     [validationMessages, setValidationMessages] = (0, _uiApi.useState)([]),
     [_refInputText, _hClear] = (0, _useInputText.default)(setValidationMessages),
     [_refCaptionGroup, _hSelectGroup] = (0, _useSelectItem.default)()
@@ -74,6 +75,7 @@ const ListCreatePane = _ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.ValidationMessages, {
       validationMessages: validationMessages
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
+      refBtClose: (0, _paneFn.getRefFocusLast)(props),
       Primary: _primaryBt,
       onClear: _hClear,
       onClose: onClose

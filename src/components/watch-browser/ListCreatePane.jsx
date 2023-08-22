@@ -12,18 +12,20 @@ import useSelectItem from './hooks/useSelectItem';
 import useInputText from './hooks/useInputText';
 
 import A from './Atoms';
+import { getRefFocusLast } from './paneFn';
 
-const ListCreatePane = ({
-  store,
-  onCreate,
-  msgOnNotSelect,
-  msgOnIsEmptyName,
-  actionCompleted,
-  actionFailed,
-  forActionType,
-  onClose
-}) => {
-  const [
+const ListCreatePane = (props) => {
+  const {
+    store,
+    onCreate,
+    msgOnNotSelect,
+    msgOnIsEmptyName,
+    actionCompleted,
+    actionFailed,
+    forActionType,
+    onClose,
+  } = props
+  , [
     groupOptions,
     setGroupOptions
   ] = useState(() => store.getWatchGroups())
@@ -89,6 +91,7 @@ const ListCreatePane = ({
         validationMessages={validationMessages}
       />
       <A.RowButtons
+         refBtClose={getRefFocusLast(props)}
          Primary={_primaryBt}
          onClear={_hClear}
          onClose={onClose}

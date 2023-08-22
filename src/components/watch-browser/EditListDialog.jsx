@@ -1,4 +1,5 @@
 import memoIsShow from '../hoc/memoIsShow';
+import useRefFocus from '../hooks/useRefFocus';
 
 import {
   WAT_EDIT_WATCH_COMPLETED,
@@ -29,8 +30,14 @@ const EditListDialog = memoIsShow(({
   isShow,
   store,
   onClose
-}) =>(
+}) => {
+  const [
+    refFocusLast,
+    setRefFocusLast
+  ] = useRefFocus();
+  return (
   <ModalDialog
+     refFocusLast={refFocusLast}
      caption="Watch Lists Edit"
      isShow={isShow}
      isWithButton={false}
@@ -45,6 +52,7 @@ const EditListDialog = memoIsShow(({
       msgOnNotSelect={notSelected}
       msgOnIsEmptyName={emptyName}
       onClose={onClose}
+      setRefFocusLast={setRefFocusLast}
     >
        <Tab title="Create">
          <ListCreatePane
@@ -66,6 +74,7 @@ const EditListDialog = memoIsShow(({
        </Tab>
     </TabPane>
   </ModalDialog>
-));
+)
+});
 
 export default EditListDialog
