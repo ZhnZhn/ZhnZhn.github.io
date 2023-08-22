@@ -7,23 +7,25 @@ import {
   getInputValue
 } from '../uiApi';
 
-import useListen from '../hooks/useListen'
-import useSelectItem from './hooks/useSelectItem'
-import useInputText from './hooks/useInputText'
+import useListen from '../hooks/useListen';
+import useSelectItem from './hooks/useSelectItem';
+import useInputText from './hooks/useInputText';
 
-import A from './Atoms'
+import A from './Atoms';
+import { getRefFocusLast } from './paneFn';
 
-const GroupEditPane = ({
-  store,
-  actionCompleted,
-  actionFailed,
-  forActionType,
-  onRename,
-  msgOnNotSelect,
-  msgOnIsEmptyName,
-  onClose
-}) => {
-  const [
+const GroupEditPane = (props) => {
+  const {
+    store,
+    actionCompleted,
+    actionFailed,
+    forActionType,
+    onRename,
+    msgOnNotSelect,
+    msgOnIsEmptyName,
+    onClose
+  } = props
+  , [
     groupOptions,
     setGroupOptions
   ] = useState(() => store.getWatchGroups())
@@ -93,6 +95,7 @@ const GroupEditPane = ({
          validationMessages={validationMessages}
       />
       <A.RowButtons
+         refBtClose={getRefFocusLast(props)}
          Primary={_primaryBt}
          onClear={_hClear}
          onClose={onClose}

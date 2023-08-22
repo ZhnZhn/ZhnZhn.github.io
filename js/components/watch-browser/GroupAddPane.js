@@ -6,6 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
+var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
@@ -27,17 +28,16 @@ const _usePrimaryBt = (refInput, setState, onCreate, msgOnIsEmptyName) => {
     onClick: _hCreate
   });
 };
-const GroupAddPane = _ref => {
-  let {
-    //store,
-    actionCompleted,
-    actionFailed,
-    forActionType,
-    onCreate,
-    msgOnIsEmptyName,
-    onClose
-  } = _ref;
-  const _refInput = (0, _uiApi.useRef)(),
+const GroupAddPane = props => {
+  const {
+      actionCompleted,
+      actionFailed,
+      forActionType,
+      onCreate,
+      msgOnIsEmptyName,
+      onClose
+    } = props,
+    _refInput = (0, _uiApi.useRef)(),
     [validationMessages, setState] = (0, _uiApi.useState)([]),
     _primaryBt = _usePrimaryBt(_refInput, setState, onCreate, msgOnIsEmptyName),
     _hClear = () => {
@@ -58,6 +58,7 @@ const GroupAddPane = _ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.ValidationMessages, {
       validationMessages: validationMessages
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
+      refBtClose: (0, _paneFn.getRefFocusLast)(props),
       Primary: _primaryBt,
       onClear: _hClear,
       onClose: onClose

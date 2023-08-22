@@ -7,7 +7,9 @@ import {
 } from '../uiApi';
 import useListen from '../hooks/useListen';
 
-import A from './Atoms'
+import A from './Atoms';
+import { getRefFocusLast } from './paneFn';
+
 
 const UPDATE = 'a'
 , VALIDATION_ERR = 'b'
@@ -82,15 +84,15 @@ const _usePrimaryBt = (
   />);
 }
 
-const GroupDeletePane = ({
-  store,
-  actionCompleted,
-  forActionType,
-  onDelete,
-  msgOnNotSelect,
-  onClose
-}) => {
-  const _refCaption = useRef(null)
+const GroupDeletePane = (props) => {
+  const {
+    store,
+    actionCompleted,
+    onDelete,
+    msgOnNotSelect,
+    onClose
+  } = props
+  , _refCaption = useRef(null)
   , [
     groups,
     errs,
@@ -129,6 +131,7 @@ const GroupDeletePane = ({
         validationMessages={errs}
       />
       <A.RowButtons
+        refBtClose={getRefFocusLast(props)}
         Primary={_primaryBt}
         withoutClear={true}
         onClose={onClose}

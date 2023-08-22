@@ -7,6 +7,7 @@ import {
 import useListen from '../hooks/useListen';
 
 import A from './Atoms';
+import { getRefFocusLast } from './paneFn'
 
 const _usePrimaryBt = (
   refInput,
@@ -31,16 +32,16 @@ const _usePrimaryBt = (
     />);
 }
 
-const GroupAddPane = ({
-  //store,
-  actionCompleted,
-  actionFailed,
-  forActionType,
-  onCreate,
-  msgOnIsEmptyName,
-  onClose
-}) => {
-  const _refInput = useRef()
+const GroupAddPane = (props) => {
+  const {
+    actionCompleted,
+    actionFailed,
+    forActionType,
+    onCreate,
+    msgOnIsEmptyName,
+    onClose
+} = props
+  , _refInput = useRef()
   , [
     validationMessages,
     setState
@@ -74,6 +75,7 @@ const GroupAddPane = ({
          validationMessages={validationMessages}
        />
        <A.RowButtons
+          refBtClose={getRefFocusLast(props)}
           Primary={_primaryBt}
           onClear={_hClear}
           onClose={onClose}

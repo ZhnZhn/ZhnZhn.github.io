@@ -6,6 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
+var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
@@ -64,16 +65,15 @@ const _usePrimaryBt = (refCaption, onDelete, setErrs) => {
     onClick: _hDeleteGroup
   });
 };
-const GroupDeletePane = _ref2 => {
-  let {
-    store,
-    actionCompleted,
-    forActionType,
-    onDelete,
-    msgOnNotSelect,
-    onClose
-  } = _ref2;
-  const _refCaption = (0, _uiApi.useRef)(null),
+const GroupDeletePane = props => {
+  const {
+      store,
+      actionCompleted,
+      onDelete,
+      msgOnNotSelect,
+      onClose
+    } = props,
+    _refCaption = (0, _uiApi.useRef)(null),
     [groups, errs, updateGroups, setErrs] = _useReducer(store, msgOnNotSelect),
     _primaryBt = _usePrimaryBt(_refCaption, onDelete, setErrs),
     _hSelectGroup = item => {
@@ -92,6 +92,7 @@ const GroupDeletePane = _ref2 => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.ValidationMessages, {
       validationMessages: errs
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
+      refBtClose: (0, _paneFn.getRefFocusLast)(props),
       Primary: _primaryBt,
       withoutClear: true,
       onClose: onClose
