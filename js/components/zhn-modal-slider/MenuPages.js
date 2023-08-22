@@ -14,9 +14,8 @@ const MenuPages = _ref => {
     onClose
   } = _ref;
   return pages.map((Page, index) => (0, _uiApi.cloneElement)(Page, {
-    isShow,
-    pageCurrent,
     style,
+    isVisible: isShow && index + 1 === pageCurrent,
     pageNumber: index + 1,
     onNextPage: index === 0 ? onNextPage : void 0,
     onPrevPage: index !== 0 ? onPrevPage : void 0,
