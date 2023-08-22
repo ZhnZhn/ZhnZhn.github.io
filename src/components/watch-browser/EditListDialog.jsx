@@ -36,40 +36,32 @@ const EditListDialog = memoIsShow(({
      isWithButton={false}
      onClose={onClose}
   >
-    <TabPane id="eld" width={380} >
+    <TabPane
+      id="eld"
+      width={380}
+      store={store}
+      actionCompleted={WAT_EDIT_WATCH_COMPLETED}
+      actionFailed={WAT_EDIT_WATCH_FAILED}
+      msgOnNotSelect={notSelected}
+      msgOnIsEmptyName={emptyName}
+      onClose={onClose}
+    >
        <Tab title="Create">
          <ListCreatePane
-            store={store}
-            actionCompleted={WAT_EDIT_WATCH_COMPLETED}
-            actionFailed={WAT_EDIT_WATCH_FAILED}
             forActionType={WAT_CREATE_LIST}
-            msgOnNotSelect={notSelected}
-            msgOnIsEmptyName={emptyName}
             onCreate={createList}
-            onClose={onClose}
           />
        </Tab>
        <Tab title="Rename">
          <ListEditPane
-            store={store}
-            actionCompleted={WAT_EDIT_WATCH_COMPLETED}
-            actionFailed={WAT_EDIT_WATCH_FAILED}
             forActionType={WAT_RENAME_LIST}
-            msgOnNotSelect={notSelected}
-            msgOnIsEmptyName={emptyName}
             onRename={renameList}
-            onClose={onClose}
          />
        </Tab>
        <Tab title="Delete">
          <ListDeletePane
-            store={store}
-            actionCompleted={WAT_EDIT_WATCH_COMPLETED}
-            actionFailed={WAT_EDIT_WATCH_FAILED}
             forActionType={WAT_DELETE_LIST}
-            msgOnNotSelect={notSelected}
             onDelete={deleteList}
-            onClose={onClose}
          />
        </Tab>
     </TabPane>

@@ -30,40 +30,29 @@ const EditListDialog = (0, _memoIsShow.default)(_ref => {
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
       id: "eld",
       width: 380,
+      store: store,
+      actionCompleted: _WatchActions.WAT_EDIT_WATCH_COMPLETED,
+      actionFailed: _WatchActions.WAT_EDIT_WATCH_FAILED,
+      msgOnNotSelect: _MsgWatch.notSelected,
+      msgOnIsEmptyName: _MsgWatch.emptyName,
+      onClose: onClose,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "Create",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListCreatePane.default, {
-          store: store,
-          actionCompleted: _WatchActions.WAT_EDIT_WATCH_COMPLETED,
-          actionFailed: _WatchActions.WAT_EDIT_WATCH_FAILED,
           forActionType: _WatchActions.WAT_CREATE_LIST,
-          msgOnNotSelect: _MsgWatch.notSelected,
-          msgOnIsEmptyName: _MsgWatch.emptyName,
-          onCreate: createList,
-          onClose: onClose
+          onCreate: createList
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "Rename",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListEditPane.default, {
-          store: store,
-          actionCompleted: _WatchActions.WAT_EDIT_WATCH_COMPLETED,
-          actionFailed: _WatchActions.WAT_EDIT_WATCH_FAILED,
           forActionType: _WatchActions.WAT_RENAME_LIST,
-          msgOnNotSelect: _MsgWatch.notSelected,
-          msgOnIsEmptyName: _MsgWatch.emptyName,
-          onRename: renameList,
-          onClose: onClose
+          onRename: renameList
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "Delete",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ListDeletePane.default, {
-          store: store,
-          actionCompleted: _WatchActions.WAT_EDIT_WATCH_COMPLETED,
-          actionFailed: _WatchActions.WAT_EDIT_WATCH_FAILED,
           forActionType: _WatchActions.WAT_DELETE_LIST,
-          msgOnNotSelect: _MsgWatch.notSelected,
-          onDelete: deleteList,
-          onClose: onClose
+          onDelete: deleteList
         })
       })]
     })
