@@ -30,38 +30,29 @@ const EditGroupDialog = (0, _memoIsShow.default)(_ref => {
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
       id: "egd",
       width: 380,
+      store: store,
+      actionCompleted: _WatchActions.WAT_EDIT_WATCH_COMPLETED,
+      actionFailed: _WatchActions.WAT_EDIT_WATCH_FAILED,
+      msgOnNotSelect: _MsgWatch.notSelected,
+      msgOnIsEmptyName: _MsgWatch.emptyName,
+      onClose: onClose,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "Create",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_GroupAddPane.default, {
-          store: store,
-          actionCompleted: _WatchActions.WAT_EDIT_WATCH_COMPLETED,
-          actionFailed: _WatchActions.WAT_EDIT_WATCH_FAILED,
           forActionType: _WatchActions.WAT_ADD_GROUP,
-          msgOnIsEmptyName: _MsgWatch.emptyName,
-          onCreate: addGroup,
-          onClose: onClose
+          onCreate: addGroup
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "Rename",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_GroupEditPane.default, {
-          store: store,
-          actionCompleted: _WatchActions.WAT_EDIT_WATCH_COMPLETED,
-          actionFailed: _WatchActions.WAT_EDIT_WATCH_FAILED,
           forActionType: _WatchActions.WAT_RENAME_GROUP,
-          msgOnNotSelect: _MsgWatch.notSelected,
-          msgOnIsEmptyName: _MsgWatch.emptyName,
-          onRename: renameGroup,
-          onClose: onClose
+          onRename: renameGroup
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
         title: "Delete",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_GroupDeletePane.default, {
-          store: store,
-          actionCompleted: _WatchActions.WAT_EDIT_WATCH_COMPLETED,
           forActionType: _WatchActions.WAT_DELETE_GROUP,
-          msgOnNotSelect: _MsgWatch.notSelected,
-          onDelete: deleteGroup,
-          onClose: onClose
+          onDelete: deleteGroup
         })
       })]
     })
