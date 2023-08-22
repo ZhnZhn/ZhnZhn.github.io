@@ -1,28 +1,21 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../uiApi");
-
+var _useAsyncFocusRefIf = _interopRequireDefault(require("../hooks/useAsyncFocusRefIf"));
 var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
-
 var _MenuItemList = _interopRequireDefault(require("./MenuItemList"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const DF_ITEMS = [];
-
 const MenuPage = _ref => {
   let {
-    isShow,
+    isVisible,
     style,
     title,
     titleCl,
     itemCl,
-    pageCurrent,
     pageNumber,
     items = DF_ITEMS,
     onNextPage,
@@ -30,19 +23,12 @@ const MenuPage = _ref => {
     onClose,
     children
   } = _ref;
-
   const _refTitle = (0, _uiApi.useRef)(),
-        _refFirst = (0, _uiApi.useRef)(),
-        _hClickTitle = (0, _uiApi.useCallback)(() => {
-    onPrevPage(pageNumber);
-  }, [onPrevPage, pageNumber]),
-        _isFocus = pageCurrent === pageNumber && isShow;
-
-  (0, _uiApi.useEffect)(() => {
-    if (_isFocus) {
-      setTimeout(() => (0, _uiApi.focusRefElement)(_refTitle, _refFirst), 1000);
-    }
-  });
+    _refFirst = (0, _uiApi.useRef)(),
+    _hClickTitle = (0, _uiApi.useCallback)(() => {
+      onPrevPage(pageNumber);
+    }, [onPrevPage, pageNumber]);
+  (0, _useAsyncFocusRefIf.default)(isVisible, _refTitle, _refFirst);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: style,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTitle.default, {
@@ -60,6 +46,7 @@ const MenuPage = _ref => {
     }), children]
   });
 };
+
 /*
 MenuPage.propTypes = {
   isShow: PropTypes.bool,
@@ -84,8 +71,6 @@ MenuPage.propTypes = {
   onClose: PropTypes.func
 }
 */
-
-
 var _default = MenuPage;
 exports.default = _default;
 //# sourceMappingURL=MenuPage.js.map

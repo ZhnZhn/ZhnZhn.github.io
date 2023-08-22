@@ -1,9 +1,9 @@
 import {
   useRef,
-  useCallback,
-  useEffect,
-  focusRefElement
+  useCallback
 } from '../uiApi';
+
+import useAsyncFocusRefIf from '../hooks/useAsyncFocusRefIf';
 
 import MenuTitle from './MenuTitle';
 import MenuItemList from './MenuItemList';
@@ -11,12 +11,11 @@ import MenuItemList from './MenuItemList';
 const DF_ITEMS = [];
 
 const MenuPage = ({
-  isShow,
+  isVisible,
   style,
   title,
   titleCl,
   itemCl,
-  pageCurrent,
   pageNumber,
   items=DF_ITEMS,
   onNextPage,
@@ -28,19 +27,15 @@ const MenuPage = ({
   , _refFirst = useRef()
   , _hClickTitle = useCallback(() => {
       onPrevPage(pageNumber)
-  }, [onPrevPage, pageNumber])
-  , _isFocus = (pageCurrent === pageNumber) && isShow;
+  }, [onPrevPage, pageNumber]);
 
- useEffect(() => {
-   if (_isFocus) {
-     setTimeout(
-       () => focusRefElement(_refTitle, _refFirst),
-       1000
-     )
-   }
- })
+  useAsyncFocusRefIf(
+    isVisible,
+    _refTitle,
+    _refFirst
+  );
 
- return (
+  return (
     <div style={style}>
       <MenuTitle
         ref={_refTitle}
