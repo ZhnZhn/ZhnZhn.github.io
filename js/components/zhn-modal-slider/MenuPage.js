@@ -24,11 +24,11 @@ const MenuPage = _ref => {
     children
   } = _ref;
   const _refTitle = (0, _uiApi.useRef)(),
-    _refFirst = (0, _uiApi.useRef)(),
+    _refFirstItem = (0, _uiApi.useRef)(),
     _hClickTitle = (0, _uiApi.useCallback)(() => {
       onPrevPage(pageNumber);
     }, [onPrevPage, pageNumber]);
-  (0, _useAsyncFocusRefIf.default)(isVisible, _refTitle, _refFirst);
+  (0, _useAsyncFocusRefIf.default)(isVisible, _refTitle, _refFirstItem);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: style,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTitle.default, {
@@ -37,7 +37,7 @@ const MenuPage = _ref => {
       title: title,
       onClick: _hClickTitle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItemList.default, {
-      ref: _refFirst,
+      refFirst: _refFirstItem,
       items: items,
       itemCl: itemCl || titleCl,
       pageNumber: pageNumber,

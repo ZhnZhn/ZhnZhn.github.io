@@ -24,7 +24,7 @@ const MenuPage = ({
   children
 }) => {
   const _refTitle = useRef()
-  , _refFirst = useRef()
+  , _refFirstItem = useRef()
   , _hClickTitle = useCallback(() => {
       onPrevPage(pageNumber)
   }, [onPrevPage, pageNumber]);
@@ -32,7 +32,7 @@ const MenuPage = ({
   useAsyncFocusRefIf(
     isVisible,
     _refTitle,
-    _refFirst
+    _refFirstItem
   );
 
   return (
@@ -44,7 +44,7 @@ const MenuPage = ({
         onClick={_hClickTitle}
       />
       <MenuItemList
-        ref={_refFirst}
+        refFirst={_refFirstItem}
         items={items}
         itemCl={itemCl || titleCl}
         pageNumber={pageNumber}

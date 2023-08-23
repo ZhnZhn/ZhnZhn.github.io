@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _MenuAriaItem = _interopRequireDefault(require("./MenuAriaItem"));
 var _jsxRuntime = require("react/jsx-runtime");
 const SUB_MENU = 'sub',
@@ -19,34 +18,35 @@ const SUB_MENU = 'sub',
     padding: '1px 16px 1px 0px',
     fontWeight: 'bold'
   };
-const _fClick = _ref2 => {
+const _fClick = _ref => {
   let {
     isClose,
     onClick,
     onClose
-  } = _ref2;
+  } = _ref;
   return typeof onClick === 'function' ? isClose ? () => {
     onClick();
     onClose();
   } : onClick : void 0;
 };
-const NextPageArrow = _ref3 => {
+const NextPageArrow = _ref2 => {
   let {
     type
-  } = _ref3;
+  } = _ref2;
   return type === SUB_MENU ? /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
     style: S_NEXT_PAGE,
     children: ">"
   }) : null;
 };
-const MenuItemList = (0, _uiApi.forwardRef)((_ref4, ref) => {
+const MenuItemList = _ref3 => {
   let {
+    refFirst,
     items,
     itemCl,
     pageNumber,
     onNextPage,
     onClose
-  } = _ref4;
+  } = _ref3;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
     children: items.map((item, index) => {
       const {
@@ -61,10 +61,9 @@ const MenuItemList = (0, _uiApi.forwardRef)((_ref4, ref) => {
           isClose,
           onClick,
           onClose
-        }),
-        _ref = index === 0 ? ref : void 0;
+        });
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_MenuAriaItem.default, {
-        ref: _ref,
+        ref: index === 0 ? refFirst : void 0,
         className: cn || itemCl,
         style: S_ITEM,
         onClick: _onClick,
@@ -76,7 +75,7 @@ const MenuItemList = (0, _uiApi.forwardRef)((_ref4, ref) => {
       }, name);
     })
   });
-});
+};
 
 /*
 MenuItemList.propTypes = {
