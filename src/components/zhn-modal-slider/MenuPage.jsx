@@ -3,8 +3,11 @@ import {
   useCallback
 } from '../uiApi';
 
-import useAsyncFocusRefIf from '../hooks/useAsyncFocusRefIf';
+import useItemsFocusTrap from '../hooks/useItemsFocusTrap';
+import useGetRefValue2 from '../hooks/useGetRefValue2';
+import useAsyncFocusIf from '../hooks/useAsyncFocusIf';
 
+import FocusTrap from '../zhn-moleculs/FocusTrap';
 import MenuTitle from './MenuTitle';
 import MenuItemList from './MenuItemList';
 
@@ -24,46 +27,57 @@ const MenuPage = ({
   children
 }) => {
   const _refTitle = useRef()
-  , _refFirstItem = useRef()
+  , [
+    _getRefFocus,
+    _refLastItem,
+    _refFirstItem
+  ] = useItemsFocusTrap(items)
+  , _getFocusFirstItem = useGetRefValue2(
+    _refTitle,
+    _refFirstItem
+  )
   , _hClickTitle = useCallback(() => {
       onPrevPage(pageNumber)
   }, [onPrevPage, pageNumber]);
 
-  useAsyncFocusRefIf(
+  useAsyncFocusIf(
     isVisible,
-    _refTitle,
-    _refFirstItem
+    _getFocusFirstItem
   );
 
   return (
     <div style={style}>
-      <MenuTitle
-        ref={_refTitle}
-        titleCl={titleCl}
-        title={title}
-        onClick={_hClickTitle}
-      />
-      <MenuItemList
-        refFirst={_refFirstItem}
-        items={items}
-        itemCl={itemCl || titleCl}
-        pageNumber={pageNumber}
-        onNextPage={onNextPage}
-        onClose={onClose}
-      />
-      {children}
+      <FocusTrap
+        refFirst={_getFocusFirstItem}
+        refLast={_refLastItem}
+      >
+        <MenuTitle
+          ref={_refTitle}
+          titleCl={titleCl}
+          title={title}
+          onClick={_hClickTitle}
+        />
+        <MenuItemList
+          getRefFocus={_getRefFocus}
+          items={items}
+          itemCl={itemCl || titleCl}
+          pageNumber={pageNumber}
+          onNextPage={onNextPage}
+          onClose={onClose}
+        />
+        {children}
+      </FocusTrap>
     </div>
   );
 }
 
 /*
 MenuPage.propTypes = {
-  isShow: PropTypes.bool,
+  isVisible: PropTypes.bool,
   style: PropTypes.object,
   title: PropTypes.string,
   titleCl: PropTypes.string,
   itemCl: PropTypes.string,
-  pageCurrent: PropTypes.number,
   pageNumber: PropTypes.number,
   items: PropTypes.arrayOf(
      PropTypes.shapeOf({

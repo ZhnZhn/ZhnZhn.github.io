@@ -24,15 +24,16 @@ const _fClick = ({
       : onClick
   : void 0;
 
-const NextPageArrow = ({ type }) =>
-  type === SUB_MENU ? (
-    <span style={S_NEXT_PAGE}>
-        >
-    </span>
+const NextPageArrow = ({
+  type
+}) => type === SUB_MENU ? (
+   <span style={S_NEXT_PAGE}>
+       >
+   </span>
   ) : null;
 
 const MenuItemList = ({
-  refFirst,
+  getRefFocus,
   items,
   itemCl,
   pageNumber,
@@ -55,7 +56,7 @@ const MenuItemList = ({
      return (
        <MenuAriaItem
          key={name}
-         ref={index === 0 ? refFirst : void 0}
+         ref={getRefFocus(index)}
          className={cn || itemCl}
          style={S_ITEM}
          onClick={_onClick}
@@ -67,7 +68,6 @@ const MenuItemList = ({
     })}
   </>
 );
-
 
 /*
 MenuItemList.propTypes = {
