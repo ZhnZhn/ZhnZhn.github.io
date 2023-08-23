@@ -3,16 +3,16 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-const useAsyncFocusRefIf = (is, ref1, ref2, mls) => {
+const useAsyncFocusIf = (is, getFocusElement, mls) => {
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
     if (is) {
-      setTimeout(() => (0, _uiApi.focusRefElement)(ref1, ref2), mls || 1000);
+      setTimeout(() => (0, _uiApi.focusRefElement)(getFocusElement), mls || 1000);
     }
   }, [is]);
-  // ref1, ref2, mls
+  // getFocusElement, mls
   /*eslint-enable react-hooks/exhaustive-deps */
 };
-var _default = useAsyncFocusRefIf;
+var _default = useAsyncFocusIf;
 exports.default = _default;
-//# sourceMappingURL=useAsyncFocusRefIf.js.map
+//# sourceMappingURL=useAsyncFocusIf.js.map

@@ -3,23 +3,22 @@ import {
   focusRefElement
 } from '../uiApi';
 
-const useAsyncFocusRefIf = (
+const useAsyncFocusIf = (
   is,
-  ref1,
-  ref2,
+  getFocusElement,
   mls
 ) => {
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (is) {
       setTimeout(
-        () => focusRefElement(ref1, ref2),
+        () => focusRefElement(getFocusElement),
         mls || 1000
       )
     }
   }, [is])
-  // ref1, ref2, mls
+  // getFocusElement, mls
   /*eslint-enable react-hooks/exhaustive-deps */
 }
 
-export default useAsyncFocusRefIf
+export default useAsyncFocusIf
