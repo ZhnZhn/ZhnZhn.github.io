@@ -1,0 +1,36 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useItemsFocusTrap.js"
+ ],
+ "file": "../../../src/components/hooks/useItemsFocusTrap.js",
+ "names": [
+  "_uiApi",
+  "require",
+  "_getFocusRefImpl",
+  "refFirst",
+  "refLast",
+  "lastIndex",
+  "index",
+  "_isArr",
+  "Array",
+  "isArray",
+  "useItemsFocusTrap",
+  "items",
+  "ref1",
+  "ref2",
+  "_ref1",
+  "useRef",
+  "_ref2",
+  "_refFirstItem",
+  "_refLastItem",
+  "_getFocusRef",
+  "useMemo",
+  "_lastIndex",
+  "length",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAKA,MAAMC,gBAAgB,GAAGA,CACvBC,QAAQ,EACRC,OAAO,EACPC,SAAS,EACTC,KAAK,KACFA,KAAK,KAAK,CAAC,GACbH,QAAQ,GACRG,KAAK,KAAKD,SAAS,GAChBD,OAAO,GACP,KAAK,CAAC;AAEZ,MAAMG,MAAM,GAAGC,KAAK,CAACC,OAAO;AAE5B,MAAMC,iBAAiB,GAAGA,CACxBC,KAAK,EACLC,IAAI,EACJC,IAAI,KACD;EACH,MAAMC,KAAK,GAAG,IAAAC,aAAM,EAAC,CAAC;IACpBC,KAAK,GAAG,IAAAD,aAAM,EAAC,CAAC;IAChBE,aAAa,GAAGL,IAAI,IAAIE,KAAK;IAC7BI,YAAY,GAAGL,IAAI,IAAIG,KAAK;IAC5BG,YAAY,GAAG,IAAAC,cAAO,EAAC,MACvBb,MAAM,CAACI,KAAK,CAAC,GAAIL,KAAK,IAAK;MAC3B,MAAMe,UAAU,GAAGV,KAAK,CAACW,MAAM,GAAG,CAAC;MACnC,OAAOpB,gBAAgB,CACrBe,aAAa,EACbC,YAAY,EACZG,UAAU,EACVf,KACF,CAAC;IACH,CAAC,GAAG,KAAK,CAAC,EAAE,CAACK,KAAK,EAAEM,aAAa,EAAEC,YAAY,CAAC,CAAC;EACjD,OAAO,CACLC,YAAY,EACZD,YAAY,EACZD,aAAa,CACd;AACH,CAAC;AAAA,IAAAM,QAAA,GAEcb,iBAAiB;AAAAc,OAAA,CAAAC,OAAA,GAAAF,QAAA"
+}
