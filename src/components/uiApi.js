@@ -52,13 +52,19 @@ const _focusHtmlElement = (
   }
 }
 
+const _getValueFromFnOrRef = (
+  refOrFn
+) => _isFn(refOrFn)
+  ? refOrFn()
+  : getRefValue(refOrFn)
+
 export const focusRefElement = (
-  ref1,
-  ref2
+  fnOrRef1,
+  fnOrRef2
 ) => {
   _focusHtmlElement(
-     getRefValue(ref1)
-     || getRefValue(ref2)
+     _getValueFromFnOrRef(fnOrRef1)
+     || _getValueFromFnOrRef(fnOrRef2)
   )
 }
 

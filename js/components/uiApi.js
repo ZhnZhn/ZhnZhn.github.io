@@ -40,8 +40,9 @@ const _focusHtmlElement = element => {
     element.focus();
   }
 };
-const focusRefElement = (ref1, ref2) => {
-  _focusHtmlElement(getRefValue(ref1) || getRefValue(ref2));
+const _getValueFromFnOrRef = refOrFn => _isFn(refOrFn) ? refOrFn() : getRefValue(refOrFn);
+const focusRefElement = (fnOrRef1, fnOrRef2) => {
+  _focusHtmlElement(_getValueFromFnOrRef(fnOrRef1) || _getValueFromFnOrRef(fnOrRef2));
 };
 exports.focusRefElement = focusRefElement;
 const focusElementById = id => {
