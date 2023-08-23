@@ -1,3 +1,5 @@
+export { bindTo } from '../utils/bindTo';
+
 export {
   Suspense,
   lazy,
@@ -21,6 +23,7 @@ export {
   useEffect,
   useImperativeHandle
 } from 'react';
+
 
 const _isFn = fn => typeof fn === 'function';
 
