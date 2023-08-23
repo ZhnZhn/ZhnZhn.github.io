@@ -1,3 +1,5 @@
+import { bindTo } from '../uiApi';
+
 import MenuAriaItem from './MenuAriaItem';
 
 const SUB_MENU = 'sub'
@@ -48,7 +50,7 @@ const MenuItemList = ({
        onClick
      } = item
      , _onClick = type === SUB_MENU
-         ? onNextPage.bind(null, id, name, pageNumber)
+         ? bindTo(onNextPage, id, name, pageNumber)
          : _fClick({ isClose, onClick, onClose });
      return (
        <MenuAriaItem
