@@ -35,6 +35,11 @@
   margin-left: auto;
 }
 
+.bt-hot {
+  color: #c0c0c0;
+  color: var(--bh-c, #c0c0c0);
+}
+
 @media screen and (max-width: 1100px) {
   .header__bt-ndl {
     display: none;

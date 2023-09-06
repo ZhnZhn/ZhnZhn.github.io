@@ -11,7 +11,8 @@ var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _react = require("react");
 var _jsxRuntime = require("react/jsx-runtime");
-const S_ROOT = {
+const CL_BT_HOT = "bt-hot",
+  S_ROOT = {
     display: 'inline-block'
   },
   S_BT_CL = {
@@ -42,21 +43,19 @@ const _crBtProps = function (index, caption) {
 };
 const _crHotBtItem = (conf, index, _ref) => {
   let {
-    style,
     onShowDialog
   } = _ref;
   return /*#__PURE__*/(0, _react.createElement)(_FlatButton.default, {
     ..._crBtProps(index, conf.caption),
     key: conf.type,
     timeout: 0,
-    style: style,
+    className: CL_BT_HOT,
     onClick: onShowDialog.bind(null, conf.type)
   });
 };
 const HotBar = _ref2 => {
   let {
     maxButtons = 5,
-    btStyle,
     closeDialogAction,
     onShowDialog
   } = _ref2;
@@ -80,7 +79,6 @@ const HotBar = _ref2 => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
       items: hotButtons,
       crItem: _crHotBtItem,
-      style: btStyle,
       onShowDialog: onShowDialog
     }), hotButtons.length !== 0 && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       timeout: 0,

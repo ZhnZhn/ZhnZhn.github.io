@@ -13,7 +13,8 @@ import {
 import ItemStack from '../zhn/ItemStack';
 import FlatButton from '../zhn-m/FlatButton';
 
-const S_ROOT = { display: 'inline-block' }
+const CL_BT_HOT = "bt-hot"
+, S_ROOT = { display: 'inline-block' }
 , S_BT_CL = { color: '#f44336' };
 
 const _isIn = (arr, type) => {
@@ -52,21 +53,19 @@ const _crBtProps = (
 const _crHotBtItem = (
    conf,
    index, {
-   style,
    onShowDialog
 }) => (
    <FlatButton
      {..._crBtProps(index, conf.caption)}
      key={conf.type}
      timeout={0}
-     style={style}
+     className={CL_BT_HOT}
      onClick={onShowDialog.bind(null, conf.type)}
    />
 );
 
 const HotBar = ({
   maxButtons=5,
-  btStyle,
   closeDialogAction,
   onShowDialog
 }) => {
@@ -96,7 +95,6 @@ const HotBar = ({
       <ItemStack
          items={hotButtons}
          crItem={_crHotBtItem}
-         style={btStyle}
          onShowDialog={onShowDialog}
       />
       {hotButtons.length !== 0 && <FlatButton

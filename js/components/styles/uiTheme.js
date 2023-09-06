@@ -9,37 +9,38 @@ const EL_BG_GREY = '#1b2836';
 const DF_T_C = EL_BG_GREY;
 const DF_S_C1 = '#8bc34a';
 const DF_S_C2 = DF_T_C;
+const DF_BH_C = '#c0c0c0';
 const P_GREY = {
   BG_BODY: '#5f5f5f',
   BG: '#4d4d4d',
-  BT_HOT_C: '#c0c0c0',
   EL_BG: EL_BG_GREY,
   EL_C: 'silver',
   't-c': EL_BG_GREY,
   's-c1': DF_S_C1,
-  's-c2': DF_S_C2
+  's-c2': DF_S_C2,
+  'bh-c': DF_BH_C
 };
 const EL_BG_WHITE = '#bcd8f5';
 const P_WHITE = {
   BG_BODY: '#e1e1e1',
   BG: '#ebf1f5',
-  BT_HOT_C: '#c0c0c0',
   EL_BG: EL_BG_WHITE,
   EL_C: '#212020',
   't-c': '#1b75bb',
   's-c1': DF_S_C1,
-  's-c2': EL_BG_WHITE
+  's-c2': EL_BG_WHITE,
+  'bh-c': DF_BH_C
 };
 const EL_BG_SAND_L = '#64473d';
 const SAND_L_P = {
   BG_BODY: '#9e9e9e',
   BG: '#e8e0cb',
-  BT_HOT_C: '#5b5b5b',
   EL_BG: EL_BG_SAND_L,
   EL_C: 'silver',
   't-c': '#785133',
   's-c1': DF_S_C1,
-  's-c2': EL_BG_SAND_L
+  's-c2': EL_BG_SAND_L,
+  'bh-c': '#5b5b5b'
 };
 const P_SAND_L = {
   ...SAND_L_P
@@ -53,13 +54,12 @@ const P_SAND = {
 };
 const CSS_RULE = {
   BG: {},
-  BT_HOT: {},
   EL: {},
   EL_BORDER: {},
   EL_BG: {},
   CL_SCROLL: 'scroll'
 };
-const CUSTOM_CSS_PROPERTY_CONFIGS = [["t-c", DF_T_C], ["s-c1", DF_S_C1], ["s-c2", DF_S_C2]];
+const CUSTOM_CSS_PROPERTY_CONFIGS = [["t-c", DF_T_C], ["s-c1", DF_S_C1], ["s-c2", DF_S_C2], ["bh-c", DF_BH_C]];
 const _assign = Object.assign;
 const _setStyle = (conf, P) => {
   const _style = document.body.style;
@@ -88,12 +88,7 @@ const _crEl = (conf, P) => {
     backgroundColor: P.EL_BG
   });
 };
-const _crHotBt = (conf, P) => {
-  _assign(conf.BT_HOT, {
-    color: P.BT_HOT_C
-  });
-};
-const _FN_STYLES = [_crBg, _crEl, _crHotBt, _setStyle];
+const _FN_STYLES = [_crBg, _crEl, _setStyle];
 const _setStyleTo = (conf, pallete) => {
   _FN_STYLES.forEach(fn => fn(conf, pallete));
 };
