@@ -4,7 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_BROWSER = (0, _styleFn.crContainerCl)('browser-container'),
+const CL_BROWSER = (0, _styleFn.crBsContainerCl)('browser-container'),
   CL_SHOW = 'show-popup',
   S_BLOCK = {
     display: 'block'

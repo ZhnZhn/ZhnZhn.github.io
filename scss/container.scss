@@ -2,26 +2,15 @@
 
 @import 'container-all';
 
-@mixin base-cont {
-  position: relative;  
-  border-radius: 4px;
-  box-shadow: 1px 4px 6px 1px rgba(0,0,0,0.6);
-  min-height: 200px; 
-  max-height: calc(100vh + 36px);
-  margin-left: 10px;
-  padding: 0;
-}
 
-.item-container {
-    @include base-cont();  
-    width: 635px; 
+.item-container {    
+  width: 635px; 
 }
 .item-container:last-child {
   margin-right: 8px;
 }
 
-.browser-container {
-  @include base-cont();
+.browser-container {  
   padding: 0 3px 35px 0;
   min-width: 270px;
   max-width: 400px;
@@ -37,8 +26,7 @@
   border-top-right-radius: 4px;
 }
 
-.about-container {
-  @include base-cont();
+.about-container {  
   padding-bottom: 35px;
   min-width: 300px;
   max-width: 660px;
@@ -54,7 +42,7 @@
 
 @media screen and (max-width: 600px) {
   .browser-container,
-  .about-container
+  .about-container,
   .item-container {
     margin-left: 8px;
   }
