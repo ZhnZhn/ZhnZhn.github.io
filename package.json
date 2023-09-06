@@ -41,7 +41,7 @@
     "cryptocurrency-prices"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.22.11",
+    "@babel/runtime": "^7.22.15",
     "big.js": "^6.2.1",
     "dompurify": "^3.0.5",
     "highcharts": "^9.1.2",
@@ -55,12 +55,12 @@
     "reflux-core": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.10",
-    "@babel/core": "^7.22.11",
-    "@babel/eslint-parser": "^7.22.11",
-    "@babel/plugin-transform-runtime": "^7.22.10",
-    "@babel/preset-env": "^7.22.10",
-    "@babel/preset-react": "^7.22.5",
+    "@babel/cli": "^7.22.15",
+    "@babel/core": "^7.22.15",
+    "@babel/eslint-parser": "^7.22.15",
+    "@babel/plugin-transform-runtime": "^7.22.15",
+    "@babel/preset-env": "^7.22.15",
+    "@babel/preset-react": "^7.22.15",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
@@ -79,7 +79,7 @@
     "sass": "^1.66.1",
     "terser-webpack-plugin": "^5.3.9",
     "webpack": "^5.88.2",
-    "webpack-bundle-analyzer": "^4.9.0",
+    "webpack-bundle-analyzer": "^4.9.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
