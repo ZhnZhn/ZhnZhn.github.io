@@ -1,4 +1,5 @@
 import {
+  bindTo,
   useState,
   useCallback
 } from '../uiApi';
@@ -45,7 +46,7 @@ const _crBtProps = (
      : String(index+1);
    return {
      hotKey: _hotKey || void 0,
-     caption: _hotKey + caption.substring(0, 3),
+     caption: _hotKey + caption.slice(0, 3),
      title: caption
    };
 };
@@ -60,7 +61,7 @@ const _crHotBtItem = (
      key={conf.type}
      timeout={0}
      className={CL_BT_HOT}
-     onClick={onShowDialog.bind(null, conf.type)}
+     onClick={bindTo(onShowDialog, conf.type)}
    />
 );
 

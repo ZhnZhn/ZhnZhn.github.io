@@ -37,7 +37,7 @@ const _crBtProps = function (index, caption) {
   const _hotKey = _has.HAS_TOUCH_EVENTS ? '' : String(index + 1);
   return {
     hotKey: _hotKey || void 0,
-    caption: _hotKey + caption.substring(0, 3),
+    caption: _hotKey + caption.slice(0, 3),
     title: caption
   };
 };
@@ -50,7 +50,7 @@ const _crHotBtItem = (conf, index, _ref) => {
     key: conf.type,
     timeout: 0,
     className: CL_BT_HOT,
-    onClick: onShowDialog.bind(null, conf.type)
+    onClick: (0, _uiApi.bindTo)(onShowDialog, conf.type)
   });
 };
 const HotBar = _ref2 => {
