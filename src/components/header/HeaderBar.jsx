@@ -7,6 +7,10 @@ import {
 } from '../../flux/actions/BrowserActions';
 
 import {
+  crContainerCl
+} from '../styleFn';
+
+import {
   HK_TOPICS,
   HK_NDL_BROWSER,
   HK_EUROSTAT_BROWSER,
@@ -15,7 +19,6 @@ import {
   HK_ABOUT
 } from '../hotkeys/hotkeys';
 
-import useTheme from '../hooks/useTheme';
 import useToggle from '../hooks/useToggle';
 import useFnFocus from '../hooks/useFnFocus';
 
@@ -34,9 +37,8 @@ import crBrowserModel from './BrowserModel';
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
 , CAPTION = "ERC v0.18.0"
 
-, THEME_ID = "HEADER_BAR"
-
 , CL_HEADER = "header"
+, CL_HEADER_BAR = crContainerCl(CL_HEADER)
 , CL_ICON = `${CL_HEADER}__icon-erc`
 , CL_LABEL = `${CL_HEADER}__app-label`
 , CL_HEADER_BT = `${CL_HEADER}__bt`
@@ -64,11 +66,10 @@ const HeaderBar = ({
   , [
     refBt,
     _toggleTopics
-  ] = useFnFocus(toggleTopics)
-  , TS = useTheme(THEME_ID);
+  ] = useFnFocus(toggleTopics);
 
   return (
-    <div className={CL_HEADER} style={TS.ROOT} >
+    <div className={CL_HEADER_BAR}>
        <ProgressLoading />
        <IconLogoErc
           className={CL_ICON}

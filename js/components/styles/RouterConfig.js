@@ -1,23 +1,14 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
-
+exports.default = void 0;
 var _ConfigGeneral = _interopRequireDefault(require("./ConfigGeneral"));
-
-var _ConfigHeaderBar = _interopRequireDefault(require("./ConfigHeaderBar"));
-
 var _ConfigElement = _interopRequireDefault(require("./ConfigElement"));
-
 var _ConfigRowCheckBox = _interopRequireDefault(require("./ConfigRowCheckBox"));
-
 var _ConfigLogos = _interopRequireDefault(require("./ConfigLogos"));
-
-var router = {
-  DF: _ConfigGeneral["default"],
-
+const router = {
+  DF: _ConfigGeneral.default,
   /*
   ABOUT: General,
   BROWSER: General,
@@ -27,16 +18,18 @@ var router = {
   CHART_CONTAINER: General,
   SCROLL_PANE: General,
   */
-  HEADER_BAR: _ConfigHeaderBar["default"],
 
+  ELEMENT: _ConfigElement.default,
   /*
-    BrowserCaption, ButtonTab, MenuBadge, Tab,
+    BrowserCaption,
+    ButtonTab,
+    MenuBadge,
+    Tab,
     ModalPopup
   */
-  ELEMENT: _ConfigElement["default"],
-  ROW_CHECKBOX: _ConfigRowCheckBox["default"],
-  LOGOS: _ConfigLogos["default"]
+  ROW_CHECKBOX: _ConfigRowCheckBox.default,
+  LOGOS: _ConfigLogos.default
 };
 var _default = router;
-exports["default"] = _default;
+exports.default = _default;
 //# sourceMappingURL=RouterConfig.js.map

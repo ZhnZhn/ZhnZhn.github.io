@@ -5,8 +5,8 @@ exports.__esModule = true;
 exports.default = void 0;
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 var _BrowserActions = require("../../flux/actions/BrowserActions");
+var _styleFn = require("../styleFn");
 var _hotkeys = require("../hotkeys/hotkeys");
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useFnFocus = _interopRequireDefault(require("../hooks/useFnFocus"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
@@ -22,8 +22,8 @@ var _BrowserModel = _interopRequireDefault(require("./BrowserModel"));
 var _jsxRuntime = require("react/jsx-runtime");
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
   CAPTION = "ERC v0.18.0",
-  THEME_ID = "HEADER_BAR",
   CL_HEADER = "header",
+  CL_HEADER_BAR = (0, _styleFn.crContainerCl)(CL_HEADER),
   CL_ICON = CL_HEADER + "__icon-erc",
   CL_LABEL = CL_HEADER + "__app-label",
   CL_HEADER_BT = CL_HEADER + "__bt",
@@ -43,11 +43,9 @@ const HeaderBar = _ref => {
     showSettings
   } = _ref;
   const [isTopics, toggleTopics] = (0, _useToggle.default)(),
-    [refBt, _toggleTopics] = (0, _useFnFocus.default)(toggleTopics),
-    TS = (0, _useTheme.default)(THEME_ID);
+    [refBt, _toggleTopics] = (0, _useFnFocus.default)(toggleTopics);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    className: CL_HEADER,
-    style: TS.ROOT,
+    className: CL_HEADER_BAR,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProgressLoading.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_IconLogoErc.default, {
       className: CL_ICON,
       title: LOGO_TITLE

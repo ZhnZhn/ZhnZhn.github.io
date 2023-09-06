@@ -1,5 +1,4 @@
 import General from './ConfigGeneral'
-import HeaderBar from './ConfigHeaderBar'
 
 import Element from './ConfigElement'
 import RowCheckBox from './ConfigRowCheckBox'
@@ -16,13 +15,16 @@ const router = {
   CHART_CONTAINER: General,
   SCROLL_PANE: General,
   */
-  HEADER_BAR: HeaderBar,
-  /*
-    BrowserCaption, ButtonTab, MenuBadge, Tab,
-    ModalPopup
-  */
+
 
   ELEMENT: Element,
+  /*
+    BrowserCaption,
+    ButtonTab,
+    MenuBadge,
+    Tab,
+    ModalPopup
+  */
   ROW_CHECKBOX: RowCheckBox,
   LOGOS: Logos
 };
