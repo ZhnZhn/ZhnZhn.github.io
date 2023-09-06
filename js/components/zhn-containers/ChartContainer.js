@@ -186,8 +186,7 @@ const ChartContainer = _ref => {
     className: _className,
     style: {
       ..._initialWidthStyle,
-      ..._style,
-      ...TS.ROOT
+      ..._style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ModalSlider, {
       isShow: isMore,

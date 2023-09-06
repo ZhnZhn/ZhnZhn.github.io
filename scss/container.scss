@@ -3,12 +3,10 @@
 @import 'container-all';
 
 @mixin base-cont {
-  position: relative;
-  background-color: #4d4d4d;
+  position: relative;  
   border-radius: 4px;
   box-shadow: 1px 4px 6px 1px rgba(0,0,0,0.6);
-  min-height: 200px;
-  //height: calc(100vh + 36px);
+  min-height: 200px; 
   max-height: calc(100vh + 36px);
   margin-left: 10px;
   padding: 0;

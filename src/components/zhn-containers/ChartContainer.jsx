@@ -269,8 +269,7 @@ const ChartContainer = ({
        className={_className}
        style={{
          ..._initialWidthStyle,
-         ..._style,
-         ...TS.ROOT
+         ..._style         
        }}
     >
       <A.ModalSlider
