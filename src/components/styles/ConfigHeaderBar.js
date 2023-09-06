@@ -1,13 +1,6 @@
-const S = {
-  BT: {
-    color: '#1b2836'
-  }
-};
-
 const styleConfig = {
-  createStyle: (CSS_RULE, themeName) => {
+  createStyle: (CSS_RULE) => {
     return {
-      ...S,
       ROOT: {
         ...CSS_RULE.BG
       },

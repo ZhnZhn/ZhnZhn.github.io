@@ -26,12 +26,12 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
   CL_HEADER = "header",
   CL_ICON = CL_HEADER + "__icon-erc",
   CL_LABEL = CL_HEADER + "__app-label",
-  PREFIX_CL_HEADER_BT = CL_HEADER + "__bt",
-  CL_NDL = PREFIX_CL_HEADER_BT + "-ndl",
-  CL_EUROSTAT = PREFIX_CL_HEADER_BT + "-eurostat",
-  CL_WATCH = PREFIX_CL_HEADER_BT + "-watch",
-  CL_BTS_RIGHT = PREFIX_CL_HEADER_BT + "s-right",
-  CL_ABOUT = PREFIX_CL_HEADER_BT + "-about",
+  CL_HEADER_BT = CL_HEADER + "__bt",
+  CL_NDL = CL_HEADER_BT + " hbt-ndl",
+  CL_EUROSTAT = CL_HEADER_BT + " hbt-eurostat",
+  CL_WATCH = CL_HEADER_BT + " hbt-watch",
+  CL_ABOUT = CL_HEADER_BT + " hbt-about",
+  CL_BTS_RIGHT = CL_HEADER_BT + "s-right",
   CL_BROWSER_MENU = "popup-menu " + CL_HEADER + "__panel-browser",
   S_SVG_BT = {
     verticalAlign: 'middle',
@@ -58,40 +58,35 @@ const HeaderBar = _ref => {
       refBt: refBt,
       isArrow: true,
       timeout: 0,
-      style: TS.BT,
+      className: CL_HEADER_BT,
       caption: "Topics",
       title: "Topics Menu",
       hotKey: _hotkeys.HK_TOPICS,
       onClick: _toggleTopics
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       className: CL_EUROSTAT,
-      style: TS.BT,
       caption: "Eurostat",
       title: "Eurostat Browser",
       hotKey: _hotkeys.HK_EUROSTAT_BROWSER,
       onClick: _BrowserActions.BrowserActions.showEurostat
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       className: CL_NDL,
-      style: TS.BT,
       caption: "NDL",
       title: "Nasdaq Data Link Browser",
       hotKey: _hotkeys.HK_NDL_BROWSER,
       onClick: _BrowserActions.BrowserActions.showNdl
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       className: CL_WATCH,
-      style: TS.BT,
       caption: "Watch",
       title: "Watch List Browser",
       hotKey: _hotkeys.HK_WATCHLIST_BROWSER,
       onClick: _BrowserActions.BrowserActions.showWatch
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotBar.default, {
-      btStyle: TS.BT_HOT,
       closeDialogAction: _ComponentActions.CAT_CLOSE_DIALOG,
       onShowDialog: _ComponentActions.ComponentActions.showDialog
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_BTS_RIGHT,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-        style: TS.BT,
         isPrimary: true,
         title: "User Settings Dialog",
         hotKey: _hotkeys.HK_SETTINGS,
@@ -102,7 +97,6 @@ const HeaderBar = _ref => {
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
         className: CL_ABOUT,
-        style: TS.BT,
         title: "About Web Application ERC",
         hotKey: _hotkeys.HK_ABOUT,
         timeout: 0,

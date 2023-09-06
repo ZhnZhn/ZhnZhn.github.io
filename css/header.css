@@ -35,16 +35,21 @@
   margin-left: auto;
 }
 
+.header__bt {
+  color: #1b2836;
+}
+
 .bt-hot {
   color: #c0c0c0;
   color: var(--bh-c, #c0c0c0);
 }
 
+
 @media screen and (max-width: 1100px) {
-  .header__bt-ndl {
+  .hbt-ndl {
     display: none;
   }
-  .header__bt-eurostat {
+  .hbt-eurostat {
     display: none;
   }
 }
@@ -65,7 +70,7 @@
   .header__icon-erc {
     display: none;
   }  
-  .header__bt-watch {
+  .hbt-watch {
     display: none;
   }
 }
@@ -78,7 +83,7 @@
   .provider__note__br {
     display: none;
   }
-  .header__bt-about {
+  .hbt-about {
     display: none;
   }
 }
