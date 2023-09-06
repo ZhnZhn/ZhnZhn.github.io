@@ -1,7 +1,6 @@
-import useTheme from '../hooks/useTheme';
+import { crContainerCl } from '../styleFn';
 
-const TH_ID = 'BROWSER'
-, CL_BROWSER = 'browser-container'
+const CL_BROWSER = crContainerCl('browser-container')
 , CL_SHOW = 'show-popup'
 , S_BLOCK = { display: 'block' }
 , S_NONE = { display: 'none' };
@@ -11,8 +10,7 @@ const Browser = ({
   style,
   children
 }) => {
-  const TS = useTheme(TH_ID)
-  , [
+  const [
     _cn,
     _style
   ] = isShow
@@ -24,7 +22,6 @@ const Browser = ({
        className={_cn}
        style={{
          ...style,
-         ...TS.ROOT,
          ..._style,
        }}
     >
