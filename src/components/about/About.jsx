@@ -1,6 +1,8 @@
+import { isWideWidth } from '../has';
+import { crContainerCl } from '../styleFn';
+
 import useBool from '../hooks/useBool';
 import useListen from '../hooks/useListen';
-import useTheme from '../hooks/useTheme';
 
 import {
   CAT_SHOW_ABOUT
@@ -10,8 +12,6 @@ import {
   CHAT_SHOW
 } from '../../flux/actions/ChartActions';
 
-import { isWideWidth } from '../has';
-
 import A from '../Comp';
 import TwitterLink from './TwitterLink';
 import DataProviders from './DataProviders';
@@ -19,9 +19,7 @@ import StepTitle from './StepTitle';
 import Link from '../links/ProviderLinks';
 import LogosBar from './LogosBar';
 
-const TH_ID = 'ABOUT'
-
-, CL_ABOUT = 'about-container'
+const CL_ABOUT = crContainerCl('about-container')
 , CL_SHOW_CONT = 'show-cont'
 , CL_SCROLL = 'scroll-container-y'
 
@@ -61,8 +59,7 @@ const About = () => {
     isShow,
     show,
     hide
-  ] = useBool(true)
-  , TS = useTheme(TH_ID);
+  ] = useBool(true);
 
   useListen(actionType => {
     if (actionType === CAT_SHOW_ABOUT){
@@ -74,9 +71,8 @@ const About = () => {
 
   return (
     <A.ShowHide
-      className={CL_ABOUT}
-      style={TS.ROOT}
       isShow={isShow}
+      className={CL_ABOUT}
       animationClass={CL_SHOW_CONT}
     >
        <A.BrowserCaption

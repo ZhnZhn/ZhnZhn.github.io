@@ -7,7 +7,6 @@ import Logos from './ConfigLogos'
 const router = {
   DF: General,
   /*
-  ABOUT: General,
   BROWSER: General,
   DRAGGABLE_DIALOG: General,
   MODAL_DIALOG: General,

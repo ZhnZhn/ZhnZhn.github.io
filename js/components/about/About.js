@@ -3,12 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _has = require("../has");
+var _styleFn = require("../styleFn");
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 var _ChartActions = require("../../flux/actions/ChartActions");
-var _has = require("../has");
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _TwitterLink = _interopRequireDefault(require("./TwitterLink"));
 var _DataProviders = _interopRequireDefault(require("./DataProviders"));
@@ -16,8 +16,7 @@ var _StepTitle = _interopRequireDefault(require("./StepTitle"));
 var _ProviderLinks = _interopRequireDefault(require("../links/ProviderLinks"));
 var _LogosBar = _interopRequireDefault(require("./LogosBar"));
 var _jsxRuntime = require("react/jsx-runtime");
-const TH_ID = 'ABOUT',
-  CL_ABOUT = 'about-container',
+const CL_ABOUT = (0, _styleFn.crContainerCl)('about-container'),
   CL_SHOW_CONT = 'show-cont',
   CL_SCROLL = 'scroll-container-y',
   S_SCROLL_DIV = {
@@ -70,8 +69,7 @@ const TH_ID = 'ABOUT',
   IS_CLOSE_PROVIDERS = !(0, _has.isWideWidth)();
 const _isHide = actionType => actionType === _ChartActions.CHAT_INIT_AND_SHOW || actionType === _ChartActions.CHAT_SHOW;
 const About = () => {
-  const [isShow, show, hide] = (0, _useBool.default)(true),
-    TS = (0, _useTheme.default)(TH_ID);
+  const [isShow, show, hide] = (0, _useBool.default)(true);
   (0, _useListen.default)(actionType => {
     if (actionType === _ComponentActions.CAT_SHOW_ABOUT) {
       show();
@@ -80,9 +78,8 @@ const About = () => {
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.ShowHide, {
-    className: CL_ABOUT,
-    style: TS.ROOT,
     isShow: isShow,
+    className: CL_ABOUT,
     animationClass: CL_SHOW_CONT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.BrowserCaption, {
       caption: "About",
