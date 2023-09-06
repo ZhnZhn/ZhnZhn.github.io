@@ -7,6 +7,7 @@ const DF_T_C = EL_BG_GREY;
 const DF_S_C1 = '#8bc34a';
 const DF_S_C2 = DF_T_C;
 
+const DF_C_BG = '#4d4d4d';
 const DF_BH_C = '#c0c0c0';
 
 const P_GREY = {
@@ -20,6 +21,7 @@ const P_GREY = {
   's-c1': DF_S_C1,
   's-c2': DF_S_C2,
 
+  'c-bg': DF_C_BG,
   'bh-c': DF_BH_C
 };
 
@@ -35,6 +37,7 @@ const P_WHITE = {
   's-c1': DF_S_C1,
   's-c2': EL_BG_WHITE,
 
+  'c-bg': '#ebf1f5',
   'bh-c': DF_BH_C
 }
 
@@ -50,6 +53,7 @@ const SAND_L_P = {
   's-c1': DF_S_C1,
   's-c2': EL_BG_SAND_L,
 
+  'c-bg': '#e8e0cb',
   'bh-c': '#5b5b5b'
 }
 const P_SAND_L = {
@@ -61,6 +65,7 @@ const P_SAND = {
   BG: '#e6d5a9',
   EL_BG: EL_BG_SAND,
 
+  'c-bg': '#e6d5a9',
   's-c2': EL_BG_SAND
 };
 
@@ -78,6 +83,7 @@ const CUSTOM_CSS_PROPERTY_CONFIGS = [
   ["t-c", DF_T_C],
   ["s-c1", DF_S_C1],
   ["s-c2", DF_S_C2],
+  ["c-bg", DF_C_BG],
   ["bh-c", DF_BH_C]
 ]
 
