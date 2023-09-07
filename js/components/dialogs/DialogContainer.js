@@ -34,7 +34,7 @@ const _renderDialogs = (store, _ref, _handleClose) => {
       isShow: shows[type],
       data: data[type],
       store: store,
-      onClose: _handleClose.bind(null, type)
+      onClose: (0, _uiApi.bindTo)(_handleClose, type)
     });
   });
 };
@@ -85,7 +85,7 @@ const DialogContainer = () => {
     });
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialogContainer.default, {
     isShow: isShow,
-    onClose: _hClose.bind(null, currentDialog),
+    onClose: (0, _uiApi.bindTo)(_hClose, currentDialog),
     children: _renderDialogs(store, state, _hClose)
   });
 };

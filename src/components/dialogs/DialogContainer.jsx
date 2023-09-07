@@ -1,4 +1,5 @@
 import {
+  bindTo,
   useState,
   useCallback,
   createElement
@@ -34,7 +35,7 @@ const _renderDialogs = (
      isShow: shows[type],
      data: data[type],
      store: store,
-     onClose: _handleClose.bind(null, type)
+     onClose: bindTo(_handleClose, type)
 }));
 
 
@@ -91,7 +92,7 @@ const DialogContainer = () => {
   return (
     <ModalDialogContainer
        isShow={isShow}
-       onClose={_hClose.bind(null, currentDialog)}
+       onClose={bindTo(_hClose, currentDialog)}
     >
        {_renderDialogs(store, state, _hClose)}
    </ModalDialogContainer>
