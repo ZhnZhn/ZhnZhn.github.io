@@ -1,4 +1,7 @@
-import { useEffect } from './uiApi';
+import {
+  bindTo,
+  useEffect
+} from './uiApi';
 
 import LocationSearch from '../flux/logic/LocationSearch';
 import ChartStore from '../flux/stores/ChartStore';
@@ -25,11 +28,13 @@ import DialogContainer from './dialogs/DialogContainer';
 
 import checkBuild from './checkBuild';
 
-const BUILD_DATE = '29-08-2023'
+const BUILD_DATE = '07-09-2023'
 , CL_COMP_CONTAINER = "component-container";
 
-const showSettings = ComponentActions.showSettings
- .bind(null, ChartStore.exportSettingFn())
+const showSettings = bindTo(
+  ComponentActions.showSettings,
+  ChartStore.exportSettingFn()
+);
 
 const AppErc = () => {
 

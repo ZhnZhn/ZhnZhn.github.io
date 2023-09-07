@@ -18,9 +18,9 @@ var _CompContainer = _interopRequireDefault(require("./zhn-containers/CompContai
 var _DialogContainer = _interopRequireDefault(require("./dialogs/DialogContainer"));
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 var _jsxRuntime = require("react/jsx-runtime");
-const BUILD_DATE = '29-08-2023',
+const BUILD_DATE = '07-09-2023',
   CL_COMP_CONTAINER = "component-container";
-const showSettings = _ComponentActions.ComponentActions.showSettings.bind(null, _ChartStore.default.exportSettingFn());
+const showSettings = (0, _uiApi.bindTo)(_ComponentActions.ComponentActions.showSettings, _ChartStore.default.exportSettingFn());
 const AppErc = () => {
   (0, _uiApi.useEffect)(() => {
     _LocationSearch.default.load();
