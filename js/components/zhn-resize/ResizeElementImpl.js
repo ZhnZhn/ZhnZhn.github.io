@@ -124,8 +124,8 @@ class ResizeElementImpl {
     this.maxDelta = maxWidth - initWidth;
     this.delta = 0;
     _initResizeProperties(this);
-    this.hStartResizeLeft = this._startResize.bind(null, this._resizeLeft);
-    this.hStartResizeRight = this._startResize.bind(null, this._resizeRight);
+    this.hStartResizeLeft = (0, _uiApi.bindTo)(this._startResize, this._resizeLeft);
+    this.hStartResizeRight = (0, _uiApi.bindTo)(this._startResize, this._resizeRight);
   }
 }
 var _default = ResizeElementImpl;
