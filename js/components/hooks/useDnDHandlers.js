@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
+var _uiApi = require("../uiApi");
 const useDnDHandlers = _ref => {
   let {
     isDraggable,
@@ -15,14 +15,13 @@ const useDnDHandlers = _ref => {
   } = _ref;
   return isDraggable ? {
     draggable: true,
-    onDragStart: onDragStart.bind(null, option),
-    onDrop: onDrop.bind(null, option),
+    onDragStart: (0, _uiApi.bindTo)(onDragStart, option),
+    onDrop: (0, _uiApi.bindTo)(onDrop, option),
     onDragEnter,
     onDragOver,
     onDragLeave
   } : void 0;
 };
-
 var _default = useDnDHandlers;
 exports.default = _default;
 //# sourceMappingURL=useDnDHandlers.js.map
