@@ -37,7 +37,7 @@ const CellColorPane = (0, _uiApi.memo)(_ref => {
         className: CL_INPUT_COLOR,
         style: S_COLOR,
         color: _color,
-        onClick: onClickCell.bind(null, _color)
+        onClick: (0, _uiApi.bindTo)(onClickCell, _color)
       }, _color));
     }
     _elRows.push( /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {

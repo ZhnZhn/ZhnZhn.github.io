@@ -1,4 +1,7 @@
-import { memo } from '../uiApi';
+import {
+  bindTo,
+  memo
+} from '../uiApi';
 
 import CellColor from './CellColor';
 
@@ -30,7 +33,7 @@ const CellColorPane = memo(({
            className={CL_INPUT_COLOR}
            style={S_COLOR}
            color={_color}
-           onClick={onClickCell.bind(null, _color)}
+           onClick={bindTo(onClickCell, _color)}
          />
        ))
      }
