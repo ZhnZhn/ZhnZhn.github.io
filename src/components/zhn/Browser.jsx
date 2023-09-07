@@ -1,9 +1,9 @@
-import { crBsContainerCn } from '../styleFn';
+import {
+  crBsContainerCn,
+  crShowHide
+} from '../styleFn';
 
-const CL_BROWSER = crBsContainerCn('browser-container')
-, CL_SHOW = 'show-popup'
-, S_BLOCK = { display: 'block' }
-, S_NONE = { display: 'none' };
+const CL_BROWSER = crBsContainerCn('browser-container');
 
 const Browser = ({
   isShow,
@@ -13,16 +13,14 @@ const Browser = ({
   const [
     _cn,
     _style
-  ] = isShow
-    ? [`${CL_BROWSER} ${CL_SHOW}`, S_BLOCK]
-    : [CL_BROWSER, S_NONE];
+  ] = crShowHide(isShow, CL_BROWSER);
 
   return (
     <div
        className={_cn}
        style={{
          ...style,
-         ..._style,
+         ..._style
        }}
     >
        {children}
