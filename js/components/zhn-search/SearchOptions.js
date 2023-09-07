@@ -83,8 +83,8 @@ const _crItem = (item, index, _ref4) => {
   } = _ref4;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(Item, {
     item: item,
-    onClick: onClick.bind(null, item.value),
-    onFocus: onFocus.bind(null, index + 1)
+    onClick: (0, _uiApi.bindTo)(onClick, item.value),
+    onFocus: (0, _uiApi.bindTo)(onFocus, index + 1)
   }, item.value + index);
 };
 const SearchOptions = _ref5 => {
@@ -95,12 +95,12 @@ const SearchOptions = _ref5 => {
   } = _ref5;
   const refRecentItem = (0, _uiApi.useRef)(),
     [itemIndex, setItemIndex] = (0, _uiApi.useState)(''),
-    _onFocusItem = (index, event) => {
-      refRecentItem.current = event.target;
+    _onFocusItem = (index, evt) => {
+      (0, _uiApi.setRefValue)(refRecentItem, evt.target);
       setItemIndex(index);
     };
   (0, _uiApi.useEffect)(() => {
-    refRecentItem.current = null;
+    (0, _uiApi.setRefValue)(refRecentItem, null);
     setItemIndex('');
   }, [options]);
   (0, _uiApi.useEffect)(() => {

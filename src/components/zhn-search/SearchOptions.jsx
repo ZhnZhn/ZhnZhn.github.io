@@ -1,7 +1,9 @@
 import {
+  bindTo,
   useState,
   useRef,
   useEffect,
+  setRefValue,
   focusRefElement
 } from '../uiApi';
 
@@ -69,8 +71,8 @@ const _crItem = (
   <Item
     key={item.value+index}
     item={item}
-    onClick={onClick.bind(null, item.value)}
-    onFocus={onFocus.bind(null, index+1)}
+    onClick={bindTo(onClick, item.value)}
+    onFocus={bindTo(onFocus, index+1)}
   />
 );
 
@@ -81,13 +83,13 @@ const SearchOptions = ({
 }) => {
   const refRecentItem = useRef()
   , [itemIndex, setItemIndex] = useState('')
-  , _onFocusItem = (index, event) => {
-    refRecentItem.current = event.target
+  , _onFocusItem = (index, evt) => {
+    setRefValue(refRecentItem, evt.target)
     setItemIndex(index)
   };
 
   useEffect(()=>{
-    refRecentItem.current = null
+    setRefValue(refRecentItem, null)
     setItemIndex('')
   }, [options])
   useEffect(()=>{
