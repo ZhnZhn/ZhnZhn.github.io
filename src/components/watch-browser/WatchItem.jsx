@@ -1,4 +1,5 @@
 import {
+  bindTo,
   useCallback
 } from '../uiApi';
 
@@ -49,7 +50,7 @@ const WatchItem = (props) => {
   , _btClose = isDraggable
      ? (<SvgClose
          style={S_SVG_CLOSE}
-         onClose={onClose.bind(null, option)}
+         onClose={bindTo(onClose, option)}
        />)
      : null
   /*eslint-disable react-hooks/exhaustive-deps */
