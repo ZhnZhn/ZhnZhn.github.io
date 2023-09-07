@@ -1,4 +1,5 @@
 import memoizeOne from 'memoize-one';
+import { bindTo } from '../uiApi';
 
 const CL_ROW = 'row__pane-topic not-selected';
 
@@ -20,8 +21,10 @@ const P0 = [
 ];
 
 const _crModelMore = (isAdminMode, {
-  onMinWidth, onInitWidth,
-  onPlusWidth, onMinusWidth,
+  onMinWidth,
+  onInitWidth,
+  onPlusWidth,
+  onMinusWidth,
   onFit,
   onShowCaptions,
   onRemoveAll,
@@ -42,9 +45,9 @@ const _crModelMore = (isAdminMode, {
     p0: P0,
     p1: p1,
     p2: [
-      _crItem('Value', onSortBy.bind(null, '_value')),
-      _crItem('Percent', onSortBy.bind(null, '_percentAbs')),
-      _crItem('Delta', onSortBy.bind(null, '_deltaAbs')),
+      _crItem('Value', bindTo(onSortBy, '_value')),
+      _crItem('Percent', bindTo(onSortBy, '_percentAbs')),
+      _crItem('Delta', bindTo(onSortBy, '_deltaAbs')),
       _crItem('Reverse', onSortBy)
     ],
     p3: [
