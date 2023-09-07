@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _getFnByPropName = _interopRequireDefault(require("../../utils/getFnByPropName"));
 var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox1"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -17,8 +18,8 @@ const OptionCheckBoxStack = _ref => {
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       caption: caption,
       initialValue: (0, _getFnByPropName.default)(data, id, false)(),
-      onCheck: _hMode.bind(null, id, true),
-      onUnCheck: _hMode.bind(null, id, false)
+      onCheck: (0, _uiApi.bindTo)(_hMode, id, true),
+      onUnCheck: (0, _uiApi.bindTo)(_hMode, id, false)
     }, caption);
   });
 };

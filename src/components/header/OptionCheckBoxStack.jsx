@@ -1,3 +1,5 @@
+import { bindTo } from '../uiApi';
+
 import getFnByPropName from '../../utils/getFnByPropName';
 import RowCheckBox1 from '../dialogs/rows/RowCheckBox1';
 
@@ -14,8 +16,8 @@ const OptionCheckBoxStack = ({
       key={caption}
       caption={caption}
       initialValue={getFnByPropName(data, id, false)()}
-      onCheck={_hMode.bind(null, id, true)}
-      onUnCheck={_hMode.bind(null, id, false)}
+      onCheck={bindTo(_hMode, id, true)}
+      onUnCheck={bindTo(_hMode, id, false)}
     />
  ));
 }
