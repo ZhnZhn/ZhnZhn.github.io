@@ -54,10 +54,10 @@ export const crStyle3 = (
   style3
 )
 
-export const crContainerCl = (
+export const crContainerCn = (
   className
 ) => crCn(className, 'c-bg')
 
-export const crBsContainerCl = (
+export const crBsContainerCn = (
   className
-) => crContainerCl(crCn('bs-cont', className))
+) => crContainerCn(crCn('bs-cont', className))

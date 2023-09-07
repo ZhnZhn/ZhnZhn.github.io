@@ -1,10 +1,10 @@
 //import PropTypes from 'prop-types'
+import { crContainerCn } from '../styleFn';
 
-import useTheme from '../hooks/useTheme';
 import useClickOutside from '../hooks/useClickOutside';
 import useKeyEscape from '../hooks/useKeyEscape';
 
-const TH_ID = 'MODAL_PANE';
+const CL_MODAL_PANE = crContainerCn();
 
 const ModalPane = ({
   isShow,
@@ -15,12 +15,13 @@ const ModalPane = ({
   const _refNode = useClickOutside(isShow, onClose)
   , _hKeyEscape = useKeyEscape(onClose)
   , _hKeyDown = isShow ? _hKeyEscape : void 0
-  , TS = useTheme(TH_ID);
   return (
     <div
        role="presentation"
+       aria-hidden={!isShow}
        ref={_refNode}
-       style={{...style, ...TS.ROOT}}
+       className={CL_MODAL_PANE}
+       style={style}      
        onKeyDown={_hKeyDown}
     >
       {children}

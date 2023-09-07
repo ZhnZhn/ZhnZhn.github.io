@@ -1,6 +1,6 @@
-import { crBsContainerCl } from '../styleFn';
+import { crBsContainerCn } from '../styleFn';
 
-const CL_BROWSER = crBsContainerCl('browser-container')
+const CL_BROWSER = crBsContainerCn('browser-container')
 , CL_SHOW = 'show-popup'
 , S_BLOCK = { display: 'block' }
 , S_NONE = { display: 'none' };

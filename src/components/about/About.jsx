@@ -1,5 +1,5 @@
 import { isWideWidth } from '../has';
-import { crBsContainerCl } from '../styleFn';
+import { crBsContainerCn } from '../styleFn';
 
 import useBool from '../hooks/useBool';
 import useListen from '../hooks/useListen';
@@ -19,7 +19,7 @@ import StepTitle from './StepTitle';
 import Link from '../links/ProviderLinks';
 import LogosBar from './LogosBar';
 
-const CL_ABOUT = crBsContainerCl('about-container')
+const CL_ABOUT = crBsContainerCn('about-container')
 , CL_SHOW_CONT = 'show-cont'
 , CL_SCROLL = 'scroll-container-y'
 

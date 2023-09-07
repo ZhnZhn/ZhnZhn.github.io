@@ -7,7 +7,7 @@ import {
 } from '../../flux/actions/BrowserActions';
 
 import {
-  crContainerCl
+  crContainerCn
 } from '../styleFn';
 
 import {
@@ -38,7 +38,7 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
 , CAPTION = "ERC v0.18.0"
 
 , CL_HEADER = "header"
-, CL_HEADER_BAR = crContainerCl(CL_HEADER)
+, CL_HEADER_BAR = crContainerCn(CL_HEADER)
 , CL_ICON = `${CL_HEADER}__icon-erc`
 , CL_LABEL = `${CL_HEADER}__app-label`
 , CL_HEADER_BT = `${CL_HEADER}__bt`

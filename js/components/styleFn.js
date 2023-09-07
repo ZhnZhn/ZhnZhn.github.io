@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crContainerCl = exports.crCn = exports.crBsContainerCl = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_SHOW_POPUP = void 0;
+exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crContainerCn = exports.crCn = exports.crBsContainerCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_SHOW_POPUP = void 0;
 const _isArr = Array.isArray;
 const _getCn = arrOrStr => _isArr(arrOrStr) ? arrOrStr[0] ? arrOrStr[1] : '' : arrOrStr || '';
 const crCn = (arrOrStr1, arrOrStr2) => {
@@ -33,8 +33,8 @@ const crStyle2 = (style1, style2) => style2 ? {
 exports.crStyle2 = crStyle2;
 const crStyle3 = (style1, style2, style3) => crStyle2(crStyle2(style1, style2), style3);
 exports.crStyle3 = crStyle3;
-const crContainerCl = className => crCn(className, 'c-bg');
-exports.crContainerCl = crContainerCl;
-const crBsContainerCl = className => crContainerCl(crCn('bs-cont', className));
-exports.crBsContainerCl = crBsContainerCl;
+const crContainerCn = className => crCn(className, 'c-bg');
+exports.crContainerCn = crContainerCn;
+const crBsContainerCn = className => crContainerCn(crCn('bs-cont', className));
+exports.crBsContainerCn = crBsContainerCn;
 //# sourceMappingURL=styleFn.js.map

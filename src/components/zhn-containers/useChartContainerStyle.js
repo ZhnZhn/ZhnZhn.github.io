@@ -2,12 +2,12 @@ import {
   S_INLINE,
   S_NONE,
   crCn,
-  crBsContainerCl
+  crBsContainerCn
 } from '../styleFn';
 import useTheme from '../hooks/useTheme';
 
 const TH_ID = 'CHART_CONTAINER'
-, CL_ROOT = crBsContainerCl("item-container")
+, CL_ROOT = crBsContainerCn("item-container")
 , CL_SHOW_CONT = "show-cont";
 
 const useChartContainerStyle = (

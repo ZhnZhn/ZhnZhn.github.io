@@ -1,21 +1,15 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
-
+var _styleFn = require("../styleFn");
 var _useClickOutside = _interopRequireDefault(require("../hooks/useClickOutside"));
-
 var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 //import PropTypes from 'prop-types'
-const TH_ID = 'MODAL_PANE';
 
+const CL_MODAL_PANE = (0, _styleFn.crContainerCn)();
 const ModalPane = _ref => {
   let {
     isShow,
@@ -23,22 +17,20 @@ const ModalPane = _ref => {
     children,
     onClose
   } = _ref;
-
   const _refNode = (0, _useClickOutside.default)(isShow, onClose),
-        _hKeyEscape = (0, _useKeyEscape.default)(onClose),
-        _hKeyDown = isShow ? _hKeyEscape : void 0,
-        TS = (0, _useTheme.default)(TH_ID);
-
+    _hKeyEscape = (0, _useKeyEscape.default)(onClose),
+    _hKeyDown = isShow ? _hKeyEscape : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     role: "presentation",
+    "aria-hidden": !isShow,
     ref: _refNode,
-    style: { ...style,
-      ...TS.ROOT
-    },
+    className: CL_MODAL_PANE,
+    style: style,
     onKeyDown: _hKeyDown,
     children: children
   });
 };
+
 /*
 ModalPane.propTypes = {
  className: PropTypes.string,
@@ -47,8 +39,6 @@ ModalPane.propTypes = {
  onClose: PropTypes.func
 }
 */
-
-
 var _default = ModalPane;
 exports.default = _default;
 //# sourceMappingURL=ModalPane.js.map
