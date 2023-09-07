@@ -3,14 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
-var _ThemeContext = _interopRequireDefault(require("../hoc/ThemeContext"));
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 var _LinkSvgLogo = _interopRequireDefault(require("./LinkSvgLogo"));
 var _LinkLogo = _interopRequireDefault(require("./LinkLogo"));
 var _jsxRuntime = require("react/jsx-runtime");
-const TH_ID = 'LOGOS',
-  CL_ROOT = 'logo-container',
+const CL_ROOT = 'logo-container',
   LOGO_SVG_PROPS = {
     fillRule: "evenodd",
     clipRule: "evenodd",
@@ -50,21 +47,16 @@ const _crLinkLogo = _ref2 => {
     ariaLabel: ariaLabel
   }, caption);
 };
-const LogosBar = () => {
-  const theme = (0, _uiApi.useContext)(_ThemeContext.default),
-    TS = theme.getStyle(TH_ID);
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    className: CL_ROOT,
-    style: TS.ROOT,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
-      items: LINK_SVG_LOGO_CONFS,
-      crItem: _crLinkSvgLogo
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
-      items: LINK_LOGO_CONFS,
-      crItem: _crLinkLogo
-    })]
-  });
-};
+const LogosBar = () => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+  className: CL_ROOT,
+  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
+    items: LINK_SVG_LOGO_CONFS,
+    crItem: _crLinkSvgLogo
+  }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
+    items: LINK_LOGO_CONFS,
+    crItem: _crLinkLogo
+  })]
+});
 var _default = LogosBar;
 exports.default = _default;
 //# sourceMappingURL=LogosBar.js.map

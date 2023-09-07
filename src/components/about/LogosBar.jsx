@@ -1,12 +1,8 @@
-import { useContext } from '../uiApi';
-import ThemeContext  from '../hoc/ThemeContext';
-
 import ItemStack from '../zhn/ItemStack';
 import LinkSvgLogo from './LinkSvgLogo';
 import LinkLogo from './LinkLogo';
 
-const TH_ID = 'LOGOS'
-, CL_ROOT = 'logo-container'
+const CL_ROOT = 'logo-container'
 , LOGO_SVG_PROPS = {
   fillRule: "evenodd",
   clipRule: "evenodd",
@@ -85,21 +81,17 @@ const _crLinkLogo = ([
   />
 );
 
-const LogosBar = () => {
-  const theme = useContext(ThemeContext)
-  , TS = theme.getStyle(TH_ID);
-  return (
-    <div className={CL_ROOT} style={TS.ROOT}>
-       <ItemStack
-         items={LINK_SVG_LOGO_CONFS}
-         crItem={_crLinkSvgLogo}
-       />
-       <ItemStack
-         items={LINK_LOGO_CONFS}
-         crItem={_crLinkLogo}
-       />
-    </div>
-  );
-};
+const LogosBar = () => (
+  <div className={CL_ROOT} >
+     <ItemStack
+       items={LINK_SVG_LOGO_CONFS}
+       crItem={_crLinkSvgLogo}
+     />
+     <ItemStack
+       items={LINK_LOGO_CONFS}
+       crItem={_crLinkLogo}
+     />
+  </div>
+);
 
 export default LogosBar

@@ -1,11 +1,12 @@
  :root {
-   --t-c: #1b2836; /*topic-color*/
+   --t-c: #1b2836;   /*topic-color*/
 
-   --s-c1: #8bc34a; /*scrollbar color1*/
-   --s-c2: #1b2836; /*scrollbar color2*/
+   --s-c1: #8bc34a;  /*scrollbar color1*/
+   --s-c2: #1b2836;  /*scrollbar color2*/
 
-   --c-bg: #4d4d4d; /*Component container background-color*/
-   --bh-c: #c0c0c0; /*Hot FlatButton color*/
+   --c-bg: #4d4d4d;  /*Component container background-color, LogosBar fill*/
+   --lb-bc: #1b2836; /*LogosBar border-color*/
+   --bh-c: #c0c0c0;  /*Hot FlatButton color*/
  }
 
  .c-bg {

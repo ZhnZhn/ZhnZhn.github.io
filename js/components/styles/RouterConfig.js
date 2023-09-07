@@ -6,12 +6,9 @@ exports.default = void 0;
 var _ConfigGeneral = _interopRequireDefault(require("./ConfigGeneral"));
 var _ConfigElement = _interopRequireDefault(require("./ConfigElement"));
 var _ConfigRowCheckBox = _interopRequireDefault(require("./ConfigRowCheckBox"));
-var _ConfigLogos = _interopRequireDefault(require("./ConfigLogos"));
 const router = {
   DF: _ConfigGeneral.default,
   /*
-  ABOUT: General,
-  BROWSER: General,
   DRAGGABLE_DIALOG: General,
   MODAL_DIALOG: General,
   MODAL_PANE: General,
@@ -27,8 +24,7 @@ const router = {
     Tab,
     ModalPopup
   */
-  ROW_CHECKBOX: _ConfigRowCheckBox.default,
-  LOGOS: _ConfigLogos.default
+  ROW_CHECKBOX: _ConfigRowCheckBox.default
 };
 var _default = router;
 exports.default = _default;

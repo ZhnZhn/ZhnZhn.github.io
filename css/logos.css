@@ -12,6 +12,10 @@
   justify-content: center;
   text-align: center;
   padding: 4px 0 8px 0;
+  border-color: #1b2836;
+  border-color: var(--lb-bc, #1b2836);
+  fill: #4d4d4d;
+  fill: var(--c-bg, #4d4d4d);
 }
 
 .logo-item {

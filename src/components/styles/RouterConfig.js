@@ -2,7 +2,6 @@ import General from './ConfigGeneral'
 
 import Element from './ConfigElement'
 import RowCheckBox from './ConfigRowCheckBox'
-import Logos from './ConfigLogos'
 
 const router = {
   DF: General,
@@ -23,8 +22,7 @@ const router = {
     Tab,
     ModalPopup
   */
-  ROW_CHECKBOX: RowCheckBox,
-  LOGOS: Logos
+  ROW_CHECKBOX: RowCheckBox
 };
 
 export default router
