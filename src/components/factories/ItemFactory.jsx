@@ -1,4 +1,8 @@
 import {
+  bindTo
+} from '../uiApi';
+
+import {
   crValueMoving,
   crId
 } from '../../charts/ChartFn';
@@ -71,7 +75,7 @@ const _crAreaChart = ({
        onAddToWatch={_fAddToWatch(id, config)}
        {...props}
        crValueMoving={crValueMoving}
-       onToTop={ChartActions[CHAT_TO_TOP].bind(null, chartType, id)}
+       onToTop={bindTo(ChartActions[CHAT_TO_TOP], chartType, id)}
        onCopy={ChartActions[CHAT_COPY]}
        onPasteTo={_fOnPasteToDialog(store)}
        onZoom={ComponentActions.zoom}
