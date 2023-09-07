@@ -1,3 +1,4 @@
+import { bindTo } from '../uiApi';
 import { crItem } from '../factories/ItemFactory';
 
 const ChartList = ({
@@ -22,7 +23,7 @@ const ChartList = ({
            isAdminMode,
            ref: zhCompType
              ? void 0
-             : refChartFn.bind(null, index),
+             : bindTo(refChartFn, index),
            onCloseItem: () => onCloseItem(chartType, browserType, id)
          }
       });
