@@ -1,4 +1,5 @@
 import {
+  bindTo,
   useRef,
   useState,
   useCallback,
@@ -45,7 +46,7 @@ const _fOnClick = (
   , _id = _crId(dfProps, rootId, id);
 
   return type === 'l'
-    ? onClickNext.bind(null, _id, text, pageNumber)
+    ? bindTo(onClickNext, _id, text, pageNumber)
     : fOnClickItem({
         id: _id,
         ...dfProps,
@@ -74,10 +75,11 @@ const Frame = ({
   , proxy = _getProxy(store, dfProps)
   /*eslint-disable react-hooks/exhaustive-deps */
   , _fOnClickItem = useCallback(
-      _fOnClick.bind(null,
-         proxy, id, dfProps, pageNumber,
-         onClickNext, fOnClickItem
-       )
+      bindTo(
+        _fOnClick,
+        proxy, id, dfProps, pageNumber,
+        onClickNext, fOnClickItem
+      )
       , [proxy])
   /*eslint-enable react-hooks/exhaustive-deps */
   , _isTitle = (pageNumber !== 0)
@@ -121,7 +123,7 @@ const Frame = ({
       { _isTitle && <MenuTitle
           innerRef={_refTitle}
           title={title}
-          onClick={onClickPrev.bind(null, pageNumber)}
+          onClick={bindTo(onClickPrev, pageNumber)}
         />
       }
       <Page

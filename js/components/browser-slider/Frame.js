@@ -1,43 +1,31 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../uiApi");
-
 var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
-
 var _Page = _interopRequireDefault(require("./Page"));
-
 var _Style = require("./Style");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const _isArr = Array.isArray,
-      FOCUS_FIRST_MLS = 1000;
-
+  FOCUS_FIRST_MLS = 1000;
 const _getProxy = (store, dfProps) => store.getProxy(dfProps.lT);
-
 const _crId = (dfProps, rootId, id) => dfProps.lT === 'SDN' ? id || rootId : rootId ? rootId + "/" + id : id;
-
 const _fOnClick = (proxy, rootId, dfProps, pageNumber, onClickNext, fOnClickItem, item) => {
   const {
-    text,
-    id,
-    type
-  } = item,
-        _id = _crId(dfProps, rootId, id);
-
-  return type === 'l' ? onClickNext.bind(null, _id, text, pageNumber) : fOnClickItem({
+      text,
+      id,
+      type
+    } = item,
+    _id = _crId(dfProps, rootId, id);
+  return type === 'l' ? (0, _uiApi.bindTo)(onClickNext, _id, text, pageNumber) : fOnClickItem({
     id: _id,
     ...dfProps,
     text,
     proxy
   });
 };
-
 const Frame = _ref => {
   let {
     style,
@@ -52,25 +40,21 @@ const Frame = _ref => {
     fOnClickItem,
     loadItems
   } = _ref;
-
   const _refTitle = (0, _uiApi.useRef)(),
-        _refId = (0, _uiApi.useRef)(),
-        [state, setState] = (0, _uiApi.useState)({}),
-        {
-    model,
-    errMsg
-  } = state,
-        proxy = _getProxy(store, dfProps)
-  /*eslint-disable react-hooks/exhaustive-deps */
-  ,
-        _fOnClickItem = (0, _uiApi.useCallback)(_fOnClick.bind(null, proxy, id, dfProps, pageNumber, onClickNext, fOnClickItem), [proxy])
-  /*eslint-enable react-hooks/exhaustive-deps */
-  ,
-        _isTitle = pageNumber !== 0 && title && onClickPrev,
-        _isFocusTitle = pageNumber === pageCurrent && (_isTitle || !_isTitle && model);
-  /*eslint-disable react-hooks/exhaustive-deps */
+    _refId = (0, _uiApi.useRef)(),
+    [state, setState] = (0, _uiApi.useState)({}),
+    {
+      model,
+      errMsg
+    } = state,
+    proxy = _getProxy(store, dfProps)
+    /*eslint-disable react-hooks/exhaustive-deps */,
+    _fOnClickItem = (0, _uiApi.useCallback)((0, _uiApi.bindTo)(_fOnClick, proxy, id, dfProps, pageNumber, onClickNext, fOnClickItem), [proxy])
+    /*eslint-enable react-hooks/exhaustive-deps */,
+    _isTitle = pageNumber !== 0 && title && onClickPrev,
+    _isFocusTitle = pageNumber === pageCurrent && (_isTitle || !_isTitle && model);
 
-
+  /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
     if (title) {
       loadItems(proxy, dfProps, id).then(model => {
@@ -79,13 +63,11 @@ const Frame = _ref => {
         } : {
           errMsg: 'Response is not array'
         };
-
         setState(_nextState);
       }).catch(err => setState({
         errMsg: err.message
       }));
     }
-
     return () => {
       clearTimeout((0, _uiApi.getRefValue)(_refId));
       (0, _uiApi.setRefValue)(_refTitle, null);
@@ -102,13 +84,14 @@ const Frame = _ref => {
     }
   }, [_isFocusTitle]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: { ..._Style.S_FRAME,
+    style: {
+      ..._Style.S_FRAME,
       ...style
     },
     children: [_isTitle && /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTitle.default, {
       innerRef: _refTitle,
       title: title,
-      onClick: onClickPrev.bind(null, pageNumber)
+      onClick: (0, _uiApi.bindTo)(onClickPrev, pageNumber)
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Page.default, {
       refFirstItem: !_isTitle ? _refTitle : void 0,
       model: model,
@@ -117,7 +100,6 @@ const Frame = _ref => {
     })]
   });
 };
-
 var _default = Frame;
 exports.default = _default;
 //# sourceMappingURL=Frame.js.map
