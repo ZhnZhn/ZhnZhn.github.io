@@ -1,7 +1,7 @@
 import General from './ConfigGeneral'
 
 import Element from './ConfigElement'
-import RowCheckBox from './ConfigRowCheckBox'
+
 
 const router = {
   DF: General,
@@ -13,7 +13,6 @@ const router = {
   SCROLL_PANE: General,
   */
 
-
   ELEMENT: Element,
   /*
     BrowserCaption,
@@ -22,7 +21,6 @@ const router = {
     Tab,
     ModalPopup
   */
-  ROW_CHECKBOX: RowCheckBox
 };
 
 export default router

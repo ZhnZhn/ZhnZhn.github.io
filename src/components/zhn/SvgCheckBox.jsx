@@ -9,21 +9,23 @@ import useRefInit from '../hooks/useRefInit';
 import useKeyEnter from '../hooks/useKeyEnter';
 
 import {
-  TRANSPARENT_COLOR,
-  YELLOW_COLOR
+  TRANSPARENT_COLOR
 } from '../styles/Color';
 import Svg100 from './svg/Svg100';
 
 const CL_CHB = 'chb'
+, CL_CHB_CHECKED = 'chb-checked'
 , S_SVG = { display: 'inline-block' }
 , C_GREY = "#777777";
 
-const SvgChecked = ({ stroke }) => (
+const SvgChecked = ({
+  className
+}) => (
   <path
+      className={className}
       d="M 2,5 L 8,14 14,1"
       strokeWidth="2"
       strokeLinecap="round"
-      stroke={stroke}
       fill={TRANSPARENT_COLOR}
   />
 );
@@ -36,7 +38,7 @@ const SvgCheckBox = ({
   value,
   style,
   color,
-  checkedColor=YELLOW_COLOR,
+  cnChecked=CL_CHB_CHECKED,
   onCheck=FN_NOOP,
   onUnCheck=FN_NOOP
 }) => {
@@ -97,7 +99,7 @@ const SvgCheckBox = ({
            fill={_restFill}
         />
         { _value
-           ? <SvgChecked stroke={checkedColor} />
+           ? <SvgChecked className={cnChecked} />
            : null
         }
       </Svg100>
@@ -111,7 +113,7 @@ SvgCheckBox.propTypes = {
   value: PropTypes.bool,
   style: PropTypes.object,
   color: PropTypes.string,
-  checkedColor: PropTypes.string,
+  cnChecked: PropTypes.string,
   onCheck: PropTypes.func,
   onUnCheck: PropTypes.func
 }

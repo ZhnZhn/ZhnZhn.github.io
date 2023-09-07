@@ -5,7 +5,6 @@ exports.__esModule = true;
 exports.default = void 0;
 var _ConfigGeneral = _interopRequireDefault(require("./ConfigGeneral"));
 var _ConfigElement = _interopRequireDefault(require("./ConfigElement"));
-var _ConfigRowCheckBox = _interopRequireDefault(require("./ConfigRowCheckBox"));
 const router = {
   DF: _ConfigGeneral.default,
   /*
@@ -16,7 +15,7 @@ const router = {
   SCROLL_PANE: General,
   */
 
-  ELEMENT: _ConfigElement.default,
+  ELEMENT: _ConfigElement.default
   /*
     BrowserCaption,
     ButtonTab,
@@ -24,7 +23,6 @@ const router = {
     Tab,
     ModalPopup
   */
-  ROW_CHECKBOX: _ConfigRowCheckBox.default
 };
 var _default = router;
 exports.default = _default;

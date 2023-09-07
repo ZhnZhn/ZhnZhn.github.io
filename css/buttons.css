@@ -15,6 +15,11 @@
   outline: 0;
 }
 
+.chb-checked {
+  stroke: #4d4d4d;
+  stroke: var(--c-bg, #4d4d4d);
+}
+
 .bt-chb {
   position: relative;
   top: -2px;

@@ -12,19 +12,20 @@ var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
 const CL_CHB = 'chb',
+  CL_CHB_CHECKED = 'chb-checked',
   S_SVG = {
     display: 'inline-block'
   },
   C_GREY = "#777777";
 const SvgChecked = _ref => {
   let {
-    stroke
+    className
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+    className: className,
     d: "M 2,5 L 8,14 14,1",
     strokeWidth: "2",
     strokeLinecap: "round",
-    stroke: stroke,
     fill: _Color.TRANSPARENT_COLOR
   });
 };
@@ -36,7 +37,7 @@ const SvgCheckBox = _ref2 => {
     value,
     style,
     color,
-    checkedColor = _Color.YELLOW_COLOR,
+    cnChecked = CL_CHB_CHECKED,
     onCheck = FN_NOOP,
     onUnCheck = FN_NOOP
   } = _ref2;
@@ -82,7 +83,7 @@ const SvgCheckBox = _ref2 => {
         stroke: _restStroke,
         fill: _restFill
       }), _value ? /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgChecked, {
-        stroke: checkedColor
+        className: cnChecked
       }) : null]
     })
   });
@@ -94,7 +95,7 @@ SvgCheckBox.propTypes = {
   value: PropTypes.bool,
   style: PropTypes.object,
   color: PropTypes.string,
-  checkedColor: PropTypes.string,
+  cnChecked: PropTypes.string,
   onCheck: PropTypes.func,
   onUnCheck: PropTypes.func
 }

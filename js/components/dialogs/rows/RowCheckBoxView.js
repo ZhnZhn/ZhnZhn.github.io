@@ -3,19 +3,16 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../../uiApi");
 var _styleFn = require("../../styleFn");
 var _Button = _interopRequireDefault(require("../../zhn/Button"));
 var _SvgCheckBox = _interopRequireDefault(require("../../zhn/SvgCheckBox"));
-var _useRowCheckBox = _interopRequireDefault(require("./useRowCheckBox"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_BT_CHB = 'bt-chb',
   COLOR = '#1b2836',
   S_ROOT = {
     padding: '6px 0 0 16px'
-  },
-  crCaptionStyle = (captionStyle, checkedColor, value) => (0, _styleFn.crStyle2)(captionStyle, value && {
-    color: checkedColor
-  });
+  };
 const RowCheckBoxView = _ref => {
   let {
     style,
@@ -26,8 +23,16 @@ const RowCheckBoxView = _ref => {
     hCheck,
     hUnCheck
   } = _ref;
-  const [TS, _hToggle] = (0, _useRowCheckBox.default)(value, hCheck, hUnCheck),
-    _captionStyle = crCaptionStyle(captionStyle, color, value);
+  const _hToggle = (0, _uiApi.useCallback)(() => {
+      if (value) {
+        hUnCheck();
+      } else {
+        hCheck();
+      }
+    }, [value, hCheck, hUnCheck]),
+    _captionStyle = (0, _styleFn.crStyle2)(captionStyle, value && {
+      color
+    });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       ...S_ROOT,
@@ -36,7 +41,6 @@ const RowCheckBoxView = _ref => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
       value: value,
       color: color,
-      checkedColor: TS.CHECKED_COLOR,
       onCheck: hCheck,
       onUnCheck: hUnCheck
     }), caption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
