@@ -1,23 +1,12 @@
-import ModalPopup from '../zhn-moleculs/ModalPopup'
-import SubMenuItem from './SubMenuItem'
+import { bindTo } from '../uiApi';
+
+import ModalPopup from '../zhn-moleculs/ModalPopup';
+import SubMenuItem from './SubMenuItem';
 
 import {
   S_MODAL_MENU,
   S_MODAL_MENU_PANE
-} from './ModalMenu.Style'
-
-const _renderItems = (
-  configs,
-  onClickItem
-) => (configs || [])
- .map(({btTitle}) => (
-     <SubMenuItem
-       key={btTitle}
-       caption={btTitle}
-       onClick={onClickItem.bind(null, btTitle)}
-     />
- ));
-
+} from './ModalMenu.Style';
 
 const ModalMenuMini = ({
   isShow,
@@ -32,7 +21,15 @@ const ModalMenuMini = ({
     onClose={onClose}
   >
     <div style={S_MODAL_MENU_PANE}>
-      {_renderItems(configs, onClickItem)}
+      {
+        (configs || []).map(({ btTitle }) => (
+             <SubMenuItem
+               key={btTitle}
+               caption={btTitle}
+               onClick={bindTo(onClickItem, btTitle)}
+             />
+         ))
+      }
     </div>
   </ModalPopup>
 );
