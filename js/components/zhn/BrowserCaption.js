@@ -4,16 +4,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _Color = require("../styles/Color");
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _SvgMore = _interopRequireDefault(require("./SvgMore"));
 var _SvgCheckBox = _interopRequireDefault(require("./SvgCheckBox"));
 var _SvgClose = _interopRequireDefault(require("./SvgClose"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const TH_ID = 'ELEMENT';
 const CL_TEXT_CLIP = 'text-clip',
-  CL_BR_CAPTION = "br-caption " + CL_TEXT_CLIP + " gap-right",
+  CL_BR_CAPTION = "br-caption " + CL_TEXT_CLIP + " gap-right el",
   CL_CAPTION = "not-selected " + CL_TEXT_CLIP,
   S_CAPTION = {
     paddingRight: 8,
@@ -43,20 +41,15 @@ const BrowserCaption = _ref => {
     onUnCheck,
     onClose
   } = _ref;
-  const TS = (0, _useTheme.default)(TH_ID);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_BR_CAPTION,
-    style: {
-      ...style,
-      ...TS.ROOT
-    },
+    style: style,
     children: [_isFn(onMore) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
       style: svgMoreStyle,
       onClick: onMore
     }), _isFn(onCheck) && _isFn(onUnCheck) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
       style: S_CHECK_BOX,
       color: _Color.GREEN_COLOR,
-      checkedColor: TS.ROOT.backgroundColor,
       onCheck: onCheck,
       onUnCheck: onUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
@@ -72,6 +65,7 @@ const BrowserCaption = _ref => {
     })]
   });
 };
+
 /*
 BrowserCaption.propTypes = {
   caption: PropTypes.string,

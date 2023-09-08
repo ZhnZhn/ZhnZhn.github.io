@@ -1,9 +1,8 @@
 import Element from './ConfigElement';
 
-const router = {  
+const router = {
   ELEMENT: Element,
   /*
-    BrowserCaption,
     ButtonTab,
     MenuBadge,
     Tab,

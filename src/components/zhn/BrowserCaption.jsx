@@ -2,15 +2,12 @@
 
 import { GREEN_COLOR } from '../styles/Color';
 
-import useTheme from '../hooks/useTheme';
 import SvgMore from './SvgMore';
 import SvgCheckBox from './SvgCheckBox';
 import SvgClose from './SvgClose';
 
-const TH_ID = 'ELEMENT';
-
 const CL_TEXT_CLIP = 'text-clip'
-, CL_BR_CAPTION = `br-caption ${CL_TEXT_CLIP} gap-right`
+, CL_BR_CAPTION = `br-caption ${CL_TEXT_CLIP} gap-right el`
 , CL_CAPTION = `not-selected ${CL_TEXT_CLIP}`
 
 , S_CAPTION = {
@@ -29,7 +26,6 @@ S_SVG_CLOSE = {
   right: 0
 };
 
-
 const _isFn = fn => typeof fn === 'function';
 
 const BrowserCaption = ({
@@ -42,12 +38,10 @@ const BrowserCaption = ({
   onCheck,
   onUnCheck,
   onClose
-}) => {
-  const TS = useTheme(TH_ID);
-  return (
+}) => (
   <div
     className={CL_BR_CAPTION}
-    style={{...style, ...TS.ROOT}}
+    style={style}
   >
      {
        _isFn(onMore) &&
@@ -57,11 +51,10 @@ const BrowserCaption = ({
        />
      }
      {
-        (_isFn(onCheck) && _isFn(onUnCheck)) &&
+        _isFn(onCheck) && _isFn(onUnCheck) &&
         <SvgCheckBox
            style={S_CHECK_BOX}
            color={GREEN_COLOR}
-           checkedColor={TS.ROOT.backgroundColor}
            onCheck={onCheck}
            onUnCheck={onUnCheck}
         />
@@ -78,8 +71,8 @@ const BrowserCaption = ({
       onClose={onClose}
     />
   </div>
-  );
-}
+);
+
 /*
 BrowserCaption.propTypes = {
   caption: PropTypes.string,
