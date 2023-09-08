@@ -1,6 +1,13 @@
 //import PropTypes from "prop-types";
+import {
+  crBtCircleHfCn,
+  crBtCircleCn
+} from '../styleFn';
 import Button from './Button';
-const CL_BT_CIRCLE = 'bt-circle bt-c1 not-selected';
+
+const CL_BT_CIRCLE = crBtCircleCn(
+  crBtCircleHfCn("bt-c1")
+);
 
 const ButtonCircle = ({
   className=CL_BT_CIRCLE,
@@ -14,7 +21,7 @@ const ButtonCircle = ({
     style={style}
     title={title}
     onClick={onClick}
-  ><div>{caption}</div>
+  >{caption}
   </Button>
 );
 

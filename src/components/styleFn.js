@@ -86,3 +86,11 @@ export const crElementCn = (
 export const crElementBgCn = (
   className
 ) => crCn(className, CL_EL_BG)
+
+export const crBtCircleHfCn = (
+  className
+) => crCn(className, "bt-circle-hf")
+
+export const crBtCircleCn = (
+  className
+) => `bt-circle ${className} not-selected`

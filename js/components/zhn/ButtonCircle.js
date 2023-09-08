@@ -3,11 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _Button = _interopRequireDefault(require("./Button"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const CL_BT_CIRCLE = 'bt-circle bt-c1 not-selected';
+const CL_BT_CIRCLE = (0, _styleFn.crBtCircleCn)((0, _styleFn.crBtCircleHfCn)("bt-c1"));
 const ButtonCircle = _ref => {
   let {
     className = CL_BT_CIRCLE,
@@ -21,9 +22,7 @@ const ButtonCircle = _ref => {
     style: style,
     title: title,
     onClick: onClick,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      children: caption
-    })
+    children: caption
   });
 };
 

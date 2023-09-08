@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crScrollYCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCn = exports.crBsContainerCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_SHOW_POPUP = void 0;
+exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crScrollYCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_SHOW_POPUP = void 0;
 const _isArr = Array.isArray;
 const _getCn = arrOrStr => _isArr(arrOrStr) ? arrOrStr[0] ? arrOrStr[1] : '' : arrOrStr || '';
 const crCn = (arrOrStr1, arrOrStr2) => {
@@ -50,4 +50,8 @@ const crElementCn = className => crCn(className, "el-c " + CL_EL_BG);
 exports.crElementCn = crElementCn;
 const crElementBgCn = className => crCn(className, CL_EL_BG);
 exports.crElementBgCn = crElementBgCn;
+const crBtCircleHfCn = className => crCn(className, "bt-circle-hf");
+exports.crBtCircleHfCn = crBtCircleHfCn;
+const crBtCircleCn = className => "bt-circle " + className + " not-selected";
+exports.crBtCircleCn = crBtCircleCn;
 //# sourceMappingURL=styleFn.js.map

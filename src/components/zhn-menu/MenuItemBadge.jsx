@@ -1,13 +1,12 @@
 import { useCallback } from '../uiApi';
+import { crElementBgCn } from '../styleFn';
 
-import useTheme from '../hooks/useTheme';
 import ButtonCircle2 from '../zhn/ButtonCircle2';
 
-const TH_ID = 'ELEMENT'
-, CL = "menu__badge"
-, S_BADGE_OPEN = { color: '#a487d4' };
+const CL_MENU_BADGE = crElementBgCn("menu__badge")
+, S_ITEM_OPEN = { color: '#a487d4'};
 
-const AtomBadge = ({
+const MenuItemBadge = ({
   atomBadge,
   onOpen,
   onClose
@@ -23,20 +22,16 @@ const AtomBadge = ({
     } else {
       onOpen();
     }
-  }, [is, onOpen, onClose])
-  , TS = useTheme(TH_ID)
-  , _btStyle = is
-       ? S_BADGE_OPEN
-       : null;
+  }, [is, onOpen, onClose]);
   return value === 0 ? null : (
     <ButtonCircle2
       tabIndex="-1"
-      className={CL}
-      style={{..._btStyle, ...TS.BG}}
+      className={CL_MENU_BADGE}
+      style={is ? S_ITEM_OPEN : void 0}
       caption={value}
       onClick={_hClick}
     />
   );
 };
 
-export default AtomBadge
+export default MenuItemBadge

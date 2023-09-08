@@ -2,12 +2,13 @@
 
 exports.__esModule = true;
 exports.CL_SPINNER_FAILED = exports.CL_SPINNER = exports.CL_ROOT = exports.CL_OPTIONS_ROW_ACTIVE = exports.CL_OPTIONS_ROW = exports.CL_OPTIONS_DIV = exports.CL_OPTIONS = exports.CL_NOT_SELECTED = exports.CL_INPUT_HR = exports.CL_INPUT = exports.CL_FOOTER_INDEX = exports.CL_FOOTER_BTS = exports.CL_FOOTER_BT = exports.CL_FOOTER = exports.CL_BT_ARROW = void 0;
+var _styleFn = require("../styleFn");
 const ROOT = 'zhn-select',
-      INPUT = ROOT + '__input',
-      SPINNER = ROOT + '__spinner',
-      OPTIONS = ROOT + '__options',
-      OPTIONS_ROW = ROOT + '__row',
-      FOOTER = ROOT + '__footer';
+  INPUT = ROOT + '__input',
+  SPINNER = ROOT + '__spinner',
+  OPTIONS = ROOT + '__options',
+  OPTIONS_ROW = ROOT + '__row',
+  FOOTER = ROOT + '__footer';
 const CL_ROOT = ROOT;
 exports.CL_ROOT = CL_ROOT;
 const CL_INPUT = INPUT;
@@ -34,7 +35,7 @@ const CL_FOOTER_INDEX = FOOTER + '__index';
 exports.CL_FOOTER_INDEX = CL_FOOTER_INDEX;
 const CL_FOOTER_BTS = FOOTER + '__bts';
 exports.CL_FOOTER_BTS = CL_FOOTER_BTS;
-const CL_FOOTER_BT = FOOTER + '__bt';
+const CL_FOOTER_BT = (0, _styleFn.crBtCircleHfCn)(FOOTER + '__bt');
 exports.CL_FOOTER_BT = CL_FOOTER_BT;
 const CL_NOT_SELECTED = 'not-selected';
 exports.CL_NOT_SELECTED = CL_NOT_SELECTED;

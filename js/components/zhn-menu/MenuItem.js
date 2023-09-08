@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 var _LabelNew = _interopRequireDefault(require("./LabelNew"));
-var _AtomBadge = _interopRequireDefault(require("./AtomBadge"));
+var _MenuItemBadge = _interopRequireDefault(require("./MenuItemBadge"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_ROW = "row__topic not-selected";
 const MenuItem = _ref => {
@@ -26,7 +26,7 @@ const MenuItem = _ref => {
     style: style,
     onClick: onClick,
     onKeyDown: _hKeyDown,
-    children: [title, atomBadge != null && /*#__PURE__*/(0, _jsxRuntime.jsx)(_AtomBadge.default, {
+    children: [title, atomBadge != null && /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItemBadge.default, {
       atomBadge: atomBadge,
       onOpen: onBadgeClick,
       onClose: onBadgeClose

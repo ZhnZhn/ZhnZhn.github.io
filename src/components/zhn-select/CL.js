@@ -1,3 +1,5 @@
+import { crBtCircleHfCn } from '../styleFn';
+
 const ROOT = 'zhn-select'
 , INPUT = ROOT + '__input'
 , SPINNER = ROOT + '__spinner'
@@ -21,6 +23,6 @@ export const CL_OPTIONS_ROW_ACTIVE = OPTIONS_ROW + '--active'
 export const CL_FOOTER = FOOTER
 export const CL_FOOTER_INDEX = FOOTER + '__index'
 export const CL_FOOTER_BTS = FOOTER + '__bts'
-export const CL_FOOTER_BT = FOOTER + '__bt'
+export const CL_FOOTER_BT = crBtCircleHfCn(FOOTER + '__bt')
 
 export const CL_NOT_SELECTED = 'not-selected'

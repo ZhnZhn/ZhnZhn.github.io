@@ -1,6 +1,9 @@
-import { crCn } from '../styleFn';
+import {
+  crCn,
+  crBtCircleCn
+} from '../styleFn';
 
-const CL_BT_C2 = 'bt-circle bt-c2 not-selected';
+const CL_BT_C2 = crBtCircleCn("bt-c2");
 
 const ButtonCircle2 = ({
   tabIndex,
@@ -18,9 +21,7 @@ const ButtonCircle2 = ({
      data-loader={dataLoader}
      onClick={onClick}
   >
-    <div>
-      {caption}
-    </div>
+    {caption}
   </button>
 );
 

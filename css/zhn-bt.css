@@ -2,35 +2,30 @@
 /*general button circle */
 .bt-circle {
   display: inline-block;
-  border-radius: 50%;  
-  width: 26px;
-  height: 26px;
-  text-align: center;
-  background-color: transparent;
-  transition: background-color 200ms ease-out;
+  border-radius: 50%;     
+  text-align: center;  
   box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
 }
-.bt-circle:hover,
-.bt-circle:focus {
+.bt-circle-hf:hover,
+.bt-circle-hf:focus {
   background-color: rgba(0, 0, 0, 0.3);
   box-shadow: 0 5px 6px 0 rgba(0,0,0,0.3), 0 4px 15px 0 rgba(0,0,0,0.2);
 }
-
-.bt-circle > div {
-  display: inline-block;  
-}
-
 
 /* button circle customizations */
 .bt-c1 {
   color: #80c040;
   border: 2px solid #80c040;
+  width: 26px;
+  height: 26px;
+  background-color: transparent;
+  transition: background-color 200ms ease-out;
 }
+
 .bt-c2 {
   background-color: #949ab4;
   width: 32px;
   height: 32px;
-  text-align: center;
   font-weight: bold;
 }
 
