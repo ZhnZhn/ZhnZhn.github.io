@@ -4,16 +4,13 @@ import {
   crCn,
   crBsContainerCn
 } from '../styleFn';
-import useTheme from '../hooks/useTheme';
 
-const TH_ID = 'CHART_CONTAINER'
-, CL_ROOT = crBsContainerCn("item-container")
+const CL_ROOT = crBsContainerCn("item-container")
 , CL_SHOW_CONT = "show-cont";
 
-const useChartContainerStyle = (
+const crChartContainerStyle = (
   isShow
 ) => [
-  useTheme(TH_ID),
   isShow ? S_INLINE : S_NONE,
   crCn(
     CL_ROOT,
@@ -21,4 +18,4 @@ const useChartContainerStyle = (
   )
 ];
 
-export default useChartContainerStyle
+export default crChartContainerStyle

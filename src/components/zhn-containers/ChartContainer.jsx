@@ -17,8 +17,9 @@ import useListen from '../hooks/useListen';
 import useHmInstance from './useHmInstance';
 import useInitialWidth from './useInitialWidth';
 import useSetActiveCheckBox from './useSetActiveCheckBox';
-import useChartContainerStyle from './useChartContainerStyle';
 import useCompareTo from './useCompareTo';
+
+import crChartContainerStyle from './crChartContainerStyle';
 
 import {
   CHAT_SHOW,
@@ -37,7 +38,7 @@ import ChartList from './ChartList';
 
 
 const CL_SCROLL_ITEMS = crScrollYCn('scroll-items')
-, CL_MENU_MORE = "popup-menu charts__menu-more"
+, CL_MENU_MORE = "popup-menu charts__menu-more el-b"
 
 , CHILD_MARGIN = 36
 //, INITIAL_WIDTH = 635
@@ -262,10 +263,9 @@ const ChartContainer = ({
   })
 
   const [
-    TS,
     _style,
     _className
-  ] = useChartContainerStyle(isShow);
+  ] = crChartContainerStyle(isShow);
 
   return (
     <div
@@ -279,7 +279,7 @@ const ChartContainer = ({
       <A.ModalSlider
         isShow={isMore}
         className={CL_MENU_MORE}
-        style={TS.EL_BORDER}
+        //style={TS.EL_BORDER}
         model={_modelMore}
         onClose={_hToggleMore}
       />

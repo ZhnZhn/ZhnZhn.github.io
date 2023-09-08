@@ -11,8 +11,8 @@ var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _useHmInstance = _interopRequireDefault(require("./useHmInstance"));
 var _useInitialWidth = _interopRequireDefault(require("./useInitialWidth"));
 var _useSetActiveCheckBox = _interopRequireDefault(require("./useSetActiveCheckBox"));
-var _useChartContainerStyle = _interopRequireDefault(require("./useChartContainerStyle"));
 var _useCompareTo = _interopRequireDefault(require("./useCompareTo"));
+var _crChartContainerStyle = _interopRequireDefault(require("./crChartContainerStyle"));
 var _ChartActions = require("../../flux/actions/ChartActions");
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 var _crModelMore = _interopRequireDefault(require("./crModelMore"));
@@ -22,7 +22,7 @@ var _ModalCompareTo = _interopRequireDefault(require("./ModalCompareTo"));
 var _ChartList = _interopRequireDefault(require("./ChartList"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_SCROLL_ITEMS = (0, _styleFn.crScrollYCn)('scroll-items'),
-  CL_MENU_MORE = "popup-menu charts__menu-more",
+  CL_MENU_MORE = "popup-menu charts__menu-more el-b",
   CHILD_MARGIN = 36
   //, INITIAL_WIDTH = 635
   ,
@@ -181,7 +181,7 @@ const ChartContainer = _ref => {
       }
     }
   });
-  const [TS, _style, _className] = (0, _useChartContainerStyle.default)(isShow);
+  const [_style, _className] = (0, _crChartContainerStyle.default)(isShow);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     ref: _refRootElement,
     className: _className,
@@ -191,8 +191,9 @@ const ChartContainer = _ref => {
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ModalSlider, {
       isShow: isMore,
-      className: CL_MENU_MORE,
-      style: TS.EL_BORDER,
+      className: CL_MENU_MORE
+      //style={TS.EL_BORDER}
+      ,
       model: _modelMore,
       onClose: _hToggleMore
     }), _isAdminMode && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalCompareTo.default, {

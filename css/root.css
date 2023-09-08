@@ -19,10 +19,18 @@
  
    /*Hot FlatButton color*/
    --bh-c: #c0c0c0;
+
+   /*Element background-color*/
+   --el-bg: #1b2836;
  }
 
  .c-bg {
    background-color: #4d4d4d;
    background-color: var(--c-bg, #4d4d4d); 
+ }
+
+ .el-b {
+   border: 2px solid #1b2836;
+   border: 2px solid var(--el-bg, #1b2836);
  }
            

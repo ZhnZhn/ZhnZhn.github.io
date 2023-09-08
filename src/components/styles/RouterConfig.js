@@ -8,7 +8,6 @@ const router = {
   /*
   DRAGGABLE_DIALOG: General,
   MODAL_DIALOG: General,
-  CHART_CONTAINER: General,  
   */
 
   ELEMENT: Element,
