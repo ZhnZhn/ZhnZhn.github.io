@@ -9,6 +9,7 @@ const Button = _ref => {
     className,
     style,
     title,
+    dataLoader,
     onClick,
     children
   } = _ref;
@@ -18,6 +19,7 @@ const Button = _ref => {
     className: className,
     style: style,
     title: title,
+    "data-loader": dataLoader,
     onClick: onClick,
     children: children
   });

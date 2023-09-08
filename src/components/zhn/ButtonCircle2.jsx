@@ -3,26 +3,20 @@ import {
   crBtCircleCn
 } from '../styleFn';
 
+import ButtonCircle from './ButtonCircle';
+
 const CL_BT_C2 = crBtCircleCn("bt-c2");
 
 const ButtonCircle2 = ({
-  tabIndex,
   className,
-  style,
-  dataLoader,
   caption='',
-  onClick
+  ...restProps
 }) => (
-  <button
-     type="button"
-     tabIndex={tabIndex}
+  <ButtonCircle
+     {...restProps}
+     caption={caption}
      className={crCn(CL_BT_C2, className)}
-     style={style}
-     data-loader={dataLoader}
-     onClick={onClick}
-  >
-    {caption}
-  </button>
+  />
 );
 
 export default ButtonCircle2

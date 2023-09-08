@@ -11,17 +11,14 @@ const CL_BT_CIRCLE = crBtCircleCn(
 
 const ButtonCircle = ({
   className=CL_BT_CIRCLE,
-  style,
   caption,
-  title,
-  onClick
+  ...restProps
 }) => (
   <Button
+    {...restProps}
     className={className}
-    style={style}
-    title={title}
-    onClick={onClick}
-  >{caption}
+  >
+    {caption}
   </Button>
 );
 

@@ -4,6 +4,7 @@ const Button = ({
   className,
   style,
   title,
+  dataLoader,
   onClick,
   children
 }) => (
@@ -13,6 +14,7 @@ const Button = ({
     className={className}
     style={style}
     title={title}
+    data-loader={dataLoader}
     onClick={onClick}
   >
     {children}

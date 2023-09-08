@@ -12,16 +12,12 @@ const CL_BT_CIRCLE = (0, _styleFn.crBtCircleCn)((0, _styleFn.crBtCircleHfCn)("bt
 const ButtonCircle = _ref => {
   let {
     className = CL_BT_CIRCLE,
-    style,
     caption,
-    title,
-    onClick
+    ...restProps
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+    ...restProps,
     className: className,
-    style: style,
-    title: title,
-    onClick: onClick,
     children: caption
   });
 };
