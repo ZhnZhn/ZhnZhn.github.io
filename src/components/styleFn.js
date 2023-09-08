@@ -54,23 +54,30 @@ export const crStyle3 = (
   style3
 )
 
+const CL_C_BG = "c-bg"
 export const crContainerCn = (
   className
-) => crCn(className, 'c-bg')
+) => crCn(className, CL_C_BG)
 
 export const crBsContainerCn = (
   className
-) => crContainerCn(crCn('bs-cont', className))
+) => crContainerCn(crCn("bs-cont", className))
 
 
 export const crScrollYCn = (
   className
-) => crCn('scroll-container-y', className)
+) => crCn("scroll-container-y", className)
 
 export const crDialogCn = (
   className
-) => crCn(className, 'c-bg el-b')
+) => crCn(className, `${CL_C_BG} el-b`)
 
+
+const CL_EL_BG = "el-bg";
 export const crElementCn = (
   className
-) => crCn(className, 'el-c el-bg')
+) => crCn(className, `el-c ${CL_EL_BG}`)
+
+export const crElementBgCn = (
+  className
+) => crCn(className, CL_EL_BG)

@@ -4,13 +4,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _Button = _interopRequireDefault(require("./Button"));
 var _jsxRuntime = require("react/jsx-runtime");
-const TH_ID = 'ELEMENT';
-const CL_BT_TAB = 'not-selected bt-tab',
+const CL_BT_TAB = (0, _styleFn.crElementBgCn)("not-selected bt-tab"),
   CL_BT_TAB__SHOW = CL_BT_TAB + " bt-tab--show",
-  CL_ARROW_DOWN = 'arrow-down';
+  CL_ARROW_DOWN = "arrow-down";
 const ButtonTab = _ref => {
   let {
     is = true,
@@ -21,13 +19,9 @@ const ButtonTab = _ref => {
     caption,
     onClick
   } = _ref;
-  const TS = (0, _useTheme.default)(TH_ID);
   return is ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Button.default, {
     className: (0, _styleFn.crCn)(isShow ? CL_BT_TAB__SHOW : CL_BT_TAB, className),
-    style: {
-      ...style,
-      ...TS.BG
-    },
+    style: style,
     onClick: onClick,
     children: [caption, isMenu && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       className: CL_ARROW_DOWN
