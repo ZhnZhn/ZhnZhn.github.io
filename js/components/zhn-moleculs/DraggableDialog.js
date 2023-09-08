@@ -16,8 +16,8 @@ var _MenuMore = _interopRequireDefault(require("./MenuMore"));
 var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const TH_ID = 'DRAGGABLE_DIALOG',
-  CL_DRAGGABLE_DIALOG = "draggable-dialog",
-  CL_NOT_SELECTED = 'not-selected',
+  CL_DRAGGABLE_DIALOG = (0, _styleFn.crDialogCn)("draggable-dialog"),
+  CL_NOT_SELECTED = "not-selected",
   S_DIALOG_DIV = {
     ..._Dialog.S_ROOT_DIV,
     position: 'absolute',
@@ -88,9 +88,7 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
       style: {
         ...style,
         ...S_DIALOG_DIV,
-        ..._showHideStyle,
-        ...TS.ROOT,
-        ...TS.EL_BORDER
+        ..._showHideStyle
       },
       onClick: toTopLayer,
       onKeyDown: _hKeyDown,

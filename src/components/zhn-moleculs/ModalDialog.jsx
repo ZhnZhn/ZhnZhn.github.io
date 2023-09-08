@@ -3,7 +3,10 @@ import {
   useRef
 } from '../uiApi';
 
-import { crShowHide } from '../styleFn';
+import {
+  crDialogCn,
+  crShowHide
+} from '../styleFn';
 
 import useKeyEscape from '../hooks/useKeyEscape';
 import useToggle from '../hooks/useToggle';
@@ -24,7 +27,7 @@ import {
 } from './Dialog.Style';
 
 const TH_ID = 'MODAL_DIALOG'
-, CL_MD = 'modal-dialog'
+, CL_MODAL_DIALOG = crDialogCn('modal-dialog')
 , S_ROOT_DIV_MODAL = {
   ...S_ROOT_DIV,
   display: 'block',
@@ -97,7 +100,7 @@ const ModalDialog = forwardRef(({
     _showHideStyle
   ] = crShowHide(
     isShow,
-    CL_MD
+    CL_MODAL_DIALOG
   );
 
   return (
@@ -118,9 +121,7 @@ const ModalDialog = forwardRef(({
         style={{
           ...S_ROOT_DIV_MODAL,
           ...style,
-          ..._showHideStyle,
-          ...TS.ROOT,
-          ...TS.EL_BORDER
+          ..._showHideStyle
         }}
         onClick={_hClickDialog}
         onKeyDown={_hKeyDown}

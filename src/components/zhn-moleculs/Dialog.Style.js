@@ -2,9 +2,7 @@ import {
   S_FLEX_ROW_END
 } from '../styles/GeneralStyles';
 
-export const S_ROOT_DIV = {
-   backgroundColor: '#4d4d4d',
-   border: 'solid 2px #1b2836',
+export const S_ROOT_DIV = {   
    borderRadius: 5,
    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 6px',
 }

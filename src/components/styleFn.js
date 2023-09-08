@@ -66,3 +66,7 @@ export const crBsContainerCn = (
 export const crScrollYCn = (
   className
 ) => crCn('scroll-container-y', className)
+
+export const crDialogCn = (
+  className
+) => crCn(className, 'c-bg el-b')

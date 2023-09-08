@@ -16,7 +16,7 @@ var _MenuMore = _interopRequireDefault(require("./MenuMore"));
 var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const TH_ID = 'MODAL_DIALOG',
-  CL_MD = 'modal-dialog',
+  CL_MODAL_DIALOG = (0, _styleFn.crDialogCn)('modal-dialog'),
   S_ROOT_DIV_MODAL = {
     ..._Dialog.S_ROOT_DIV,
     display: 'block',
@@ -71,7 +71,7 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
     _hKeyDown = (0, _useKeyEscape.default)(onClose),
     [isMore, toggleIsMore] = (0, _useToggle.default)(false),
     TS = (0, _useTheme.default)(TH_ID),
-    [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_MD);
+    [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_MODAL_DIALOG);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FocusTrap.default, {
     refEl: refRoot,
     refFirst: refFocusFirts || refBtMore,
@@ -87,9 +87,7 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
       style: {
         ...S_ROOT_DIV_MODAL,
         ...style,
-        ..._showHideStyle,
-        ...TS.ROOT,
-        ...TS.EL_BORDER
+        ..._showHideStyle
       },
       onClick: _hClickDialog,
       onKeyDown: _hKeyDown,

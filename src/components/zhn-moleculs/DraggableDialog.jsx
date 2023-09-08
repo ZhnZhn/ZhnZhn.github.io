@@ -1,5 +1,8 @@
 import { forwardRef } from '../uiApi';
-import { crShowHide } from '../styleFn';
+import {
+  crDialogCn,
+  crShowHide
+} from '../styleFn';
 
 import useToggle from '../hooks/useToggle';
 import useKeyEscape from '../hooks/useKeyEscape';
@@ -23,8 +26,8 @@ import {
 
 const TH_ID = 'DRAGGABLE_DIALOG'
 
-, CL_DRAGGABLE_DIALOG = "draggable-dialog"
-, CL_NOT_SELECTED = 'not-selected'
+, CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
+, CL_NOT_SELECTED = "not-selected"
 , S_DIALOG_DIV = {
   ...S_ROOT_DIV,
   position: 'absolute',
@@ -119,9 +122,7 @@ const DraggableDialog = forwardRef(({
       style={{
         ...style,
         ...S_DIALOG_DIV,
-        ..._showHideStyle,
-        ...TS.ROOT,
-        ...TS.EL_BORDER
+        ..._showHideStyle                
       }}
       onClick={toTopLayer}
       onKeyDown={_hKeyDown}
