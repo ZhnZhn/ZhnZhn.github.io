@@ -7,11 +7,8 @@ var _ConfigElement = _interopRequireDefault(require("./ConfigElement"));
 const router = {
   ELEMENT: _ConfigElement.default
   /*
-    BrowserCaption,
-    ButtonTab,
     MenuBadge,
-    Tab,
-    ModalPopup
+    Tab
   */
 };
 var _default = router;

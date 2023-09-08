@@ -1,8 +1,7 @@
-import useTheme from '../hooks/useTheme';
+import { crElementBorderCn } from '../styleFn';
+
 import ShowHide from '../zhn/ShowHide';
 import ModalPane from './ModalPane';
-
-const TH_ID = 'ELEMENT';
 
 const ModalPopup = ({
   isShow,
@@ -10,22 +9,19 @@ const ModalPopup = ({
   style,
   children,
   onClose
-}) => {
-  const TS = useTheme(TH_ID);
-  return (
-    <ModalPane
+}) => (
+  <ModalPane
+    isShow={isShow}
+    onClose={onClose}
+  >
+    <ShowHide
+      className={crElementBorderCn(className)}
+      style={style}
       isShow={isShow}
-      onClose={onClose}
     >
-      <ShowHide
-        className={className}
-        style={{ ...style, ...TS.BORDER}}
-        isShow={isShow}
-      >
-        {children}
-      </ShowHide>
-    </ModalPane>
-  );
-};
+      {children}
+    </ShowHide>
+  </ModalPane>
+);
 
 export default ModalPopup

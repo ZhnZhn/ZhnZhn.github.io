@@ -68,10 +68,15 @@ export const crScrollYCn = (
   className
 ) => crCn("scroll-container-y", className)
 
+
+const CL_EL_B = "el-b";
 export const crDialogCn = (
   className
-) => crCn(className, `${CL_C_BG} el-b`)
+) => crCn(className, `${CL_C_BG} ${CL_EL_B}`)
 
+export const crElementBorderCn = (
+  className
+) => crCn(className, CL_EL_B)
 
 const CL_EL_BG = "el-bg";
 export const crElementCn = (

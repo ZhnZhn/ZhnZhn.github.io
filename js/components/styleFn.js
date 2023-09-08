@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crScrollYCn = exports.crElementCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCn = exports.crBsContainerCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_SHOW_POPUP = void 0;
+exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crScrollYCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCn = exports.crBsContainerCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_SHOW_POPUP = void 0;
 const _isArr = Array.isArray;
 const _getCn = arrOrStr => _isArr(arrOrStr) ? arrOrStr[0] ? arrOrStr[1] : '' : arrOrStr || '';
 const crCn = (arrOrStr1, arrOrStr2) => {
@@ -40,8 +40,11 @@ const crBsContainerCn = className => crContainerCn(crCn("bs-cont", className));
 exports.crBsContainerCn = crBsContainerCn;
 const crScrollYCn = className => crCn("scroll-container-y", className);
 exports.crScrollYCn = crScrollYCn;
-const crDialogCn = className => crCn(className, CL_C_BG + " el-b");
+const CL_EL_B = "el-b";
+const crDialogCn = className => crCn(className, CL_C_BG + " " + CL_EL_B);
 exports.crDialogCn = crDialogCn;
+const crElementBorderCn = className => crCn(className, CL_EL_B);
+exports.crElementBorderCn = crElementBorderCn;
 const CL_EL_BG = "el-bg";
 const crElementCn = className => crCn(className, "el-c " + CL_EL_BG);
 exports.crElementCn = crElementCn;
