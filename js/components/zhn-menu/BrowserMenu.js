@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
@@ -15,7 +16,7 @@ const {
   ScrollPane,
   SpinnerLoading
 } = _Comp.default;
-const CL_SCROLL = 'scroll-container-y scroll-menu',
+const CL_SCROLL_MENU = (0, _styleFn.crScrollYCn)('scroll-menu'),
   S_BROWSER = {
     paddingRight: 0
   };
@@ -54,7 +55,7 @@ const BrowserMenu = _ref => {
       caption: caption,
       onClose: hideBrowser
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ScrollPane, {
-      className: CL_SCROLL,
+      className: CL_SCROLL_MENU,
       children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopicList.default, {
         menu: menu
       }), children]

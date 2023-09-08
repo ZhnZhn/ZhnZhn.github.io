@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
@@ -15,7 +16,7 @@ var _BrowserContext = _interopRequireDefault(require("./BrowserContext"));
 var _BrowserMenuMore = _interopRequireDefault(require("./BrowserMenuMore"));
 var _MenuSlider = _interopRequireDefault(require("./MenuSlider"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_SCROLL = 'scroll-container-y',
+const CL_SCROLL_Y = (0, _styleFn.crScrollYCn)(),
   S_BROWSER = {
     paddingRight: 0
   },
@@ -71,7 +72,7 @@ const BrowserSlider = (0, _uiApi.memo)(props => {
         onMore: toggleMenuMore,
         onClose: hide
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ScrollPane.default, {
-        className: CL_SCROLL,
+        className: CL_SCROLL_Y,
         style: S_SCROLL_PANE,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuSlider.default, {
           ...props

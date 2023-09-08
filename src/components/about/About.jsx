@@ -1,5 +1,8 @@
 import { isWideWidth } from '../has';
-import { crBsContainerCn } from '../styleFn';
+import {
+  crBsContainerCn,
+  crScrollYCn
+} from '../styleFn';
 
 import useBool from '../hooks/useBool';
 import useListen from '../hooks/useListen';
@@ -21,7 +24,7 @@ import LogosBar from './LogosBar';
 
 const CL_ABOUT = crBsContainerCn('about-container')
 , CL_SHOW_CONT = 'show-cont'
-, CL_SCROLL = 'scroll-container-y'
+, CL_SCROLL_Y = crScrollYCn()
 
 , S_SCROLL_DIV = { height: '94%' }
 , S_DIV_WRAPPER = {
@@ -87,7 +90,7 @@ const About = () => {
        </A.BrowserCaption>
 
        <A.ScrollPane
-         className={CL_SCROLL}
+         className={CL_SCROLL_Y}
          style={S_SCROLL_DIV}
        >
          <div style={S_DIV_WRAPPER}>

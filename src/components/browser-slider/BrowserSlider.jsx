@@ -3,6 +3,8 @@ import {
   useMemo
 } from '../uiApi';
 
+import { crScrollYCn } from '../styleFn'
+
 import useBool from '../hooks/useBool';
 import useToggle from '../hooks/useToggle';
 import useListen from '../hooks/useListen';
@@ -16,7 +18,7 @@ import BrowserContext from './BrowserContext';
 import BrowserMenuMore from './BrowserMenuMore';
 import MenuSlider from './MenuSlider';
 
-const CL_SCROLL = 'scroll-container-y'
+const CL_SCROLL_Y = crScrollYCn()
 , S_BROWSER = { paddingRight: 0 }
 , S_BR_CAPTION = { paddingLeft: 6 }
 , S_SVG_MORE = {
@@ -80,7 +82,7 @@ const BrowserSlider = memo((props) => {
            onClose={hide}
         />
          <ScrollPane
-           className={CL_SCROLL}
+           className={CL_SCROLL_Y}
            style={S_SCROLL_PANE}
          >
            <MenuSlider {...props} />

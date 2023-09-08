@@ -61,3 +61,8 @@ export const crContainerCn = (
 export const crBsContainerCn = (
   className
 ) => crContainerCn(crCn('bs-cont', className))
+
+
+export const crScrollYCn = (
+  className
+) => crCn('scroll-container-y', className)

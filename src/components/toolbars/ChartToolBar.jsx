@@ -14,8 +14,8 @@ import ModalMenuInd2 from './ModalMenuInd2'
 import ModalMenuFn from './ModalMenuFn'
 import ModalMenuMini from './ModalMenuMini'
 
-const CL_SCROLL_X = "with-scroll-x"
-, CL_BT_R = `${CL_SCROLL_X}__bt-r`
+const CL_WITH_SCROLL_X = "with-scroll-x"
+, CL_BT_R = `${CL_WITH_SCROLL_X}__bt-r`
 
 , S_BT_IND = { left: 8 }
 , S_M_IND = {
@@ -141,7 +141,7 @@ const ChartToolbar = ({
     return (
       <div
          ref={_refToolbar}
-         className={CL_SCROLL_X}
+         className={CL_WITH_SCROLL_X}
          style={style}
       >
         {_btInfo}
@@ -240,7 +240,7 @@ const ChartToolbar = ({
       {_modalMenuArr}
       <div
          ref={_refToolbar}
-         className={CL_SCROLL_X}
+         className={CL_WITH_SCROLL_X}
          style={style}
       >
          {_btTabIndicator}

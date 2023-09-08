@@ -1,6 +1,5 @@
-import {
-  useState
-} from '../uiApi';
+import { useState } from '../uiApi';
+import { crScrollYCn } from '../styleFn';
 
 import useToggle from '../hooks/useToggle';
 import useBool from '../hooks/useBool';
@@ -16,7 +15,7 @@ import A from '../Comp';
 import EditBar from './EditBar';
 import WatchGroups from './WatchGroups';
 
-const CL_SCROLL = 'scroll-container-y scroll-watch'
+const CL_SCROLL_WATCH = crScrollYCn('scroll-watch')
 , S_BROWSER = { paddingRight: 0 }
 , S_BT_CIRCLE = {
   position: 'relative',
@@ -81,7 +80,7 @@ const WatchBrowser = ({
          onClickGroup={showDialogEditGroups}
          onClickList={showDialogEditLists}
       />
-      <A.ScrollPane className={CL_SCROLL}>
+      <A.ScrollPane className={CL_SCROLL_WATCH}>
         <WatchGroups
            isModeEdit={isModeEdit}
            groups={groups}

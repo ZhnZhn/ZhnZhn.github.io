@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
@@ -20,7 +21,7 @@ var _Comp = _interopRequireDefault(require("../Comp"));
 var _ModalCompareTo = _interopRequireDefault(require("./ModalCompareTo"));
 var _ChartList = _interopRequireDefault(require("./ChartList"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_SCROLL = 'scroll-container-y scroll-items',
+const CL_SCROLL_ITEMS = (0, _styleFn.crScrollYCn)('scroll-items'),
   CL_MENU_MORE = "popup-menu charts__menu-more",
   CHILD_MARGIN = 36
   //, INITIAL_WIDTH = 635
@@ -220,7 +221,7 @@ const ChartContainer = _ref => {
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {
       ref: _refSpComp,
-      className: CL_SCROLL,
+      className: CL_SCROLL_ITEMS,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartList.default, {
         refChartFn: _refChartFn,
         isAdminMode: _isAdminModeFn,

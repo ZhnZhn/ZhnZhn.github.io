@@ -18,7 +18,7 @@ var _LogosBar = _interopRequireDefault(require("./LogosBar"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_ABOUT = (0, _styleFn.crBsContainerCn)('about-container'),
   CL_SHOW_CONT = 'show-cont',
-  CL_SCROLL = 'scroll-container-y',
+  CL_SCROLL_Y = (0, _styleFn.crScrollYCn)(),
   S_SCROLL_DIV = {
     height: '94%'
   },
@@ -90,7 +90,7 @@ const About = () => {
         title: "Twitter / X page @webapperc with chart examples"
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {
-      className: CL_SCROLL,
+      className: CL_SCROLL_Y,
       style: S_SCROLL_DIV,
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: S_DIV_WRAPPER,

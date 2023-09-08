@@ -6,6 +6,10 @@ import {
   getRefElementStyle
 } from '../uiApi';
 
+import {
+  crScrollYCn
+} from '../styleFn';
+
 import useBool from '../hooks/useBool';
 import useToggle from '../hooks/useToggle';
 import useListen from '../hooks/useListen';
@@ -32,7 +36,7 @@ import ModalCompareTo from './ModalCompareTo';
 import ChartList from './ChartList';
 
 
-const CL_SCROLL = 'scroll-container-y scroll-items'
+const CL_SCROLL_ITEMS = crScrollYCn('scroll-items')
 , CL_MENU_MORE = "popup-menu charts__menu-more"
 
 , CHILD_MARGIN = 36
@@ -269,7 +273,7 @@ const ChartContainer = ({
        className={_className}
        style={{
          ..._initialWidthStyle,
-         ..._style         
+         ..._style
        }}
     >
       <A.ModalSlider
@@ -309,7 +313,7 @@ const ChartContainer = ({
       </A.BrowserCaption>
       <A.ScrollPane
          ref={_refSpComp}
-         className={CL_SCROLL}
+         className={CL_SCROLL_ITEMS}
       >
         <ChartList
            refChartFn={_refChartFn}

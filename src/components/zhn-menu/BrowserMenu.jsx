@@ -1,3 +1,5 @@
+import { crScrollYCn } from '../styleFn';
+
 import useBool from '../hooks/useBool';
 import useListen from '../hooks/useListen';
 import useLoadMenu from './useLoadMenu';
@@ -12,7 +14,7 @@ const {
   SpinnerLoading
 } = Comp;
 
-const CL_SCROLL = 'scroll-container-y scroll-menu'
+const CL_SCROLL_MENU = crScrollYCn('scroll-menu')
 , S_BROWSER = { paddingRight: 0 };
 
 const BrowserMenu = ({
@@ -64,7 +66,7 @@ const BrowserMenu = ({
          caption={caption}
          onClose={hideBrowser}
       />
-      <ScrollPane className={CL_SCROLL}>
+      <ScrollPane className={CL_SCROLL_MENU}>
          {isLoading && <SpinnerLoading />}
          <MenuTopicList menu={menu} />
          {children}
