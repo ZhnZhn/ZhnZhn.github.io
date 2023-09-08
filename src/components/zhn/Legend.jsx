@@ -3,13 +3,15 @@ import {
   useCallback
 } from '../uiApi';
 
+import { crStyle2 } from '../styleFn';
+
 import useToggle from '../hooks/useToggle';
 
 import Button from './Button';
 import ItemStack from './ItemStack';
 import LegendItem from './LegendItem';
 
-const CL_SCROLL = "with-scroll"
+const CL_WITH_SCROLL = "with-scroll"
 , CL_BT_ML = "bt-ml"
 , MORE_MAX = 12
 , S_MORE = {
@@ -64,17 +66,18 @@ const Legend = memo(({
     isMore,
     toggleIsMore
   ] = useToggle(false)
-  , _legendItems = isMore
-       ? legend
-       : legend.slice(0, MORE_MAX)
   , _crStackItem = useCallback((item, index) =>
       _crLegendItem(item, index, onClickItem)
   , [onClickItem])
-  , _style = isMore
-       ? S_MORE
-       : {...S_MORE, ...S_LESS};
+  , _legendItems = isMore
+       ? legend
+       : legend.slice(0, MORE_MAX)
+  , _style = crStyle2(
+      S_MORE,
+      !isMore && S_LESS
+  );
   return (
-    <div className={CL_SCROLL} style={_style}>
+    <div className={CL_WITH_SCROLL} style={_style}>
       <div style={S_DIV}>
         <ItemStack
            items={_legendItems}

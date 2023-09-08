@@ -4,12 +4,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _Button = _interopRequireDefault(require("./Button"));
 var _ItemStack = _interopRequireDefault(require("./ItemStack"));
 var _LegendItem = _interopRequireDefault(require("./LegendItem"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_SCROLL = "with-scroll",
+const CL_WITH_SCROLL = "with-scroll",
   CL_BT_ML = "bt-ml",
   MORE_MAX = 12,
   S_MORE = {
@@ -49,14 +50,11 @@ const Legend = (0, _uiApi.memo)(_ref2 => {
     onClickItem
   } = _ref2;
   const [isMore, toggleIsMore] = (0, _useToggle.default)(false),
-    _legendItems = isMore ? legend : legend.slice(0, MORE_MAX),
     _crStackItem = (0, _uiApi.useCallback)((item, index) => _crLegendItem(item, index, onClickItem), [onClickItem]),
-    _style = isMore ? S_MORE : {
-      ...S_MORE,
-      ...S_LESS
-    };
+    _legendItems = isMore ? legend : legend.slice(0, MORE_MAX),
+    _style = (0, _styleFn.crStyle2)(S_MORE, !isMore && S_LESS);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    className: CL_SCROLL,
+    className: CL_WITH_SCROLL,
     style: _style,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S_DIV,
