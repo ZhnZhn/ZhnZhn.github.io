@@ -79,9 +79,7 @@ const CSS_RULE = {
 
   EL: {},
   EL_BORDER: {},
-  EL_BG: {},
-
-  CL_SCROLL: 'scroll'
+  EL_BG: {}
 };
 
 const CUSTOM_CSS_PROPERTY_CONFIGS = [

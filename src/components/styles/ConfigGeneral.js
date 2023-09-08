@@ -3,8 +3,7 @@ const styleConfig = {
   //style: void 0,
 
   createStyle: (CSS_RULE) => {
-    return {
-      CL_SCROLL: CSS_RULE.CL_SCROLL,
+    return {      
       ROOT: {
         ...CSS_RULE.BG
       },

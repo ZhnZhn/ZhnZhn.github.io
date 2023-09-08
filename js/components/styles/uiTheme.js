@@ -66,8 +66,7 @@ const CSS_RULE = {
   BG: {},
   EL: {},
   EL_BORDER: {},
-  EL_BG: {},
-  CL_SCROLL: 'scroll'
+  EL_BG: {}
 };
 const CUSTOM_CSS_PROPERTY_CONFIGS = [["t-c", DF_T_C], ["s-c1", DF_S_C1], ["s-c2", DF_S_C2], ["c-bg", DF_C_BG], ["bh-c", DF_BH_C], ["lb-bc", DF_LB_BC]];
 const _assign = Object.assign;
