@@ -8,7 +8,6 @@ import {
 
 import useProperty from '../hooks/useProperty';
 import useRefBool from '../hooks/useRefBool';
-import useTheme from '../hooks/useTheme';
 
 import Model from '../../constants/Model';
 
@@ -21,8 +20,7 @@ import {
   S_FONT_BOLD_NON_SELECT
 } from '../styles/GeneralStyles';
 
-const TH_ID = 'ROW_CHECKBOX'
-, CHECKED_COLOR = '#1b2836'
+const CHECKED_COLOR = '#1b2836'
 , DF_COLOR = '#7cb5ec'
 
 , CL_INPUT_COLOR = 'p-r va-m'
@@ -79,8 +77,7 @@ const SeriaRow = (props) => {
   , [
     _color,
     _setColor
-  ] = useState(() => color || DF_COLOR)
-  , TS = useTheme(TH_ID);
+  ] = useState(() => color || DF_COLOR);
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useImperativeHandle(ref, () => ({
@@ -121,7 +118,6 @@ const SeriaRow = (props) => {
       <SvgCheckBox
         style={S_CHECK_BOX}
         color={CHECKED_COLOR}
-        checkedColor={TS.CHECKED_COLOR}
         onCheck={_hCheck}
         onUnCheck={_hUnCheck}
       />

@@ -1,7 +1,10 @@
 //import PropTypes from "prop-types";
-import { crStyle3 } from '../styleFn';
+import {
+  crStyle3,
+  crElementCn,
+  crElementBorderCn
+} from '../styleFn';
 
-import useTheme from '../hooks/useTheme';
 import useToggle from '../hooks/useToggle';
 import useFnFocus from '../hooks/useFnFocus';
 
@@ -19,12 +22,10 @@ const {
   SvgClose
 } = Comp;
 
-const TH_ID = 'ELEMENT';
-
-const CL_ITEM_HEADER = 'item-header'
-, CL_MORE = "popup-menu charts__menu-more"
-, CL_CAPTION = 'not-selected text-clip bt-left bt'
-, COLOR_SVG_MORE = '#777777'
+const CL_ITEM_HEADER = crElementCn("item-header")
+, CL_CHARTS_MENU_MORE = crElementBorderCn("popup-menu charts__menu-more")
+, CL_CAPTION = "not-selected text-clip bt-left bt"
+, COLOR_SVG_MORE = "#777777"
 
 , S_BT_MORE = {
   position: 'relative',
@@ -64,7 +65,6 @@ S_CAPTION = {
 const MenuMore = ({
   isMore,
   moreModel,
-  sliderStyle,
   onToggle
 }) => {
   const [
@@ -82,8 +82,7 @@ const MenuMore = ({
       <ModalSlider
         isShow={isMore}
         rootStyle={S_MODAL_SLIDER}
-        className={CL_MORE}
-        style={sliderStyle}
+        className={CL_CHARTS_MENU_MORE}
         model={moreModel}
         onClose={toggleFocus}
       />
@@ -112,7 +111,6 @@ const Header = ({
     isMore,
     _toggleMore
   ] = useToggle(false)
-  , TS = useTheme(TH_ID)
   , _captionStyle = crStyle3(
      S_CAPTION,
      !isOpen && S_CAPTION_CLOSE,
@@ -123,17 +121,15 @@ const Header = ({
       : void 0;
 
   return (
-    <div className={CL_ITEM_HEADER} style={TS.ROOT}>
+    <div className={CL_ITEM_HEADER}>
       <MenuMore
         isMore={isMore}
         moreModel={moreModel}
-        sliderStyle={TS.BORDER}
         onToggle={_toggleMore}
       />
       <SvgCheckBox
          style={S_CHECK_BOX}
          color={GREEN_COLOR}
-         checkedColor={TS.ROOT.backgroundColor}
          onCheck={onCheck}
          onUnCheck={onUnCheck}
       />

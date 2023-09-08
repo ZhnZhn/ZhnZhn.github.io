@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useFnFocus = _interopRequireDefault(require("../hooks/useFnFocus"));
 var _Color = require("../styles/Color");
@@ -21,11 +20,10 @@ const {
   SvgCheckBox,
   SvgClose
 } = _Comp.default;
-const TH_ID = 'ELEMENT';
-const CL_ITEM_HEADER = 'item-header',
-  CL_MORE = "popup-menu charts__menu-more",
-  CL_CAPTION = 'not-selected text-clip bt-left bt',
-  COLOR_SVG_MORE = '#777777',
+const CL_ITEM_HEADER = (0, _styleFn.crElementCn)("item-header"),
+  CL_CHARTS_MENU_MORE = (0, _styleFn.crElementBorderCn)("popup-menu charts__menu-more"),
+  CL_CAPTION = "not-selected text-clip bt-left bt",
+  COLOR_SVG_MORE = "#777777",
   S_BT_MORE = {
     position: 'relative',
     top: 4,
@@ -64,7 +62,6 @@ const MenuMore = _ref => {
   let {
     isMore,
     moreModel,
-    sliderStyle,
     onToggle
   } = _ref;
   const [refBtSvg, toggleFocus] = (0, _useFnFocus.default)(onToggle);
@@ -77,8 +74,7 @@ const MenuMore = _ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalSlider, {
       isShow: isMore,
       rootStyle: S_MODAL_SLIDER,
-      className: CL_MORE,
-      style: sliderStyle,
+      className: CL_CHARTS_MENU_MORE,
       model: moreModel,
       onClose: toggleFocus
     })]
@@ -101,21 +97,17 @@ const Header = _ref2 => {
     onClose
   } = _ref2;
   const [isMore, _toggleMore] = (0, _useToggle.default)(false),
-    TS = (0, _useTheme.default)(TH_ID),
     _captionStyle = (0, _styleFn.crStyle3)(S_CAPTION, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH),
     _btTitle = itemCaption.length > 15 ? itemCaption : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_ITEM_HEADER,
-    style: TS.ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(MenuMore, {
       isMore: isMore,
       moreModel: moreModel,
-      sliderStyle: TS.BORDER,
       onToggle: _toggleMore
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgCheckBox, {
       style: S_CHECK_BOX,
       color: _Color.GREEN_COLOR,
-      checkedColor: TS.ROOT.backgroundColor,
       onCheck: onCheck,
       onUnCheck: onUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {

@@ -6,7 +6,6 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useRefBool = _interopRequireDefault(require("../hooks/useRefBool"));
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _Model = _interopRequireDefault(require("../../constants/Model"));
 var _SvgCheckBox = _interopRequireDefault(require("../zhn/SvgCheckBox"));
 var _InputColor = _interopRequireDefault(require("../zhn-moleculs/InputColor"));
@@ -14,8 +13,7 @@ var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 var _DivEllipsis = _interopRequireDefault(require("../zhn/DivEllipsis"));
 var _GeneralStyles = require("../styles/GeneralStyles");
 var _jsxRuntime = require("react/jsx-runtime");
-const TH_ID = 'ROW_CHECKBOX',
-  CHECKED_COLOR = '#1b2836',
+const CHECKED_COLOR = '#1b2836',
   DF_COLOR = '#7cb5ec',
   CL_INPUT_COLOR = 'p-r va-m',
   S_ROOT = {
@@ -59,8 +57,7 @@ const SeriaRow = props => {
     ref = (0, _uiApi.useRef)(),
     [setYAxis, getYAxis] = (0, _useProperty.default)(),
     [_refIsChecked, _hCheck, _hUnCheck] = (0, _useRefBool.default)(false),
-    [_color, _setColor] = (0, _uiApi.useState)(() => color || DF_COLOR),
-    TS = (0, _useTheme.default)(TH_ID);
+    [_color, _setColor] = (0, _uiApi.useState)(() => color || DF_COLOR);
 
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useImperativeHandle)(ref, () => ({
@@ -101,7 +98,6 @@ const SeriaRow = props => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
       style: S_CHECK_BOX,
       color: CHECKED_COLOR,
-      checkedColor: TS.CHECKED_COLOR,
       onCheck: _hCheck,
       onUnCheck: _hUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {

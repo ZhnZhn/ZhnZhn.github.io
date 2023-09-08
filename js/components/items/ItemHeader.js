@@ -3,11 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
+var _styleFn = require("../styleFn");
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _jsxRuntime = require("react/jsx-runtime");
-const TH_ID = 'ELEMENT',
+const CL_ITEM_HEADER = (0, _styleFn.crElementCn)(),
   CL_CAPTION = "not-selected text-clip bt-left bt",
   S_ROOT = {
     position: 'relative',
@@ -46,14 +46,13 @@ function ItemHeader(_ref) {
     onClick,
     onClose
   } = _ref;
-  const TS = (0, _useTheme.default)(TH_ID),
-    _title = _crTitle(title, caption),
+  const _title = _crTitle(title, caption),
     _captionStyle = isOpen ? S_OPEN : S_CLOSE;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    className: CL_ITEM_HEADER,
     style: {
       ...S_ROOT,
-      ...style,
-      ...TS.ROOT
+      ...style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
       className: CL_CAPTION,

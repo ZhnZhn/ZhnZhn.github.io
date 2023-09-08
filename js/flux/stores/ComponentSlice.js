@@ -90,9 +90,6 @@ const ComponentSlice = {
     }
     option.modalDialogType = modalDialogType;
     this.trigger(_ComponentActions.CAT_SHOW_MODAL_DIALOG, option);
-  },
-  onChangeTheme(themeName) {
-    this.trigger(_ComponentActions.CAT_CHANGE_THEME, themeName);
   }
 };
 var _default = ComponentSlice;

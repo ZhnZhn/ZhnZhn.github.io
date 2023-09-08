@@ -1,14 +1,10 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports.ComponentActions = exports.CAT_SHOW_OPTION_DIALOG = exports.CAT_SHOW_MODAL_DIALOG = exports.CAT_SHOW_DIALOG = exports.CAT_SHOW_ABOUT = exports.CAT_SET_ACTIVE_CONTAINER = exports.CAT_SET_ACTIVE_CHECKBOX = exports.CAT_CLOSE_DIALOG = exports.CAT_CLOSE_CHART_CONTAINER_2 = exports.CAT_CLOSE_CHART_CONTAINER = exports.CAT_CHANGE_THEME = void 0;
-
+exports.ComponentActions = exports.CAT_SHOW_OPTION_DIALOG = exports.CAT_SHOW_MODAL_DIALOG = exports.CAT_SHOW_DIALOG = exports.CAT_SHOW_ABOUT = exports.CAT_SET_ACTIVE_CONTAINER = exports.CAT_SET_ACTIVE_CHECKBOX = exports.CAT_CLOSE_DIALOG = exports.CAT_CLOSE_CHART_CONTAINER_2 = exports.CAT_CLOSE_CHART_CONTAINER = void 0;
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
-
 var _ModalDialogType = require("../../constants/ModalDialogType");
-
 const CAT_SHOW_ABOUT = 'showAbout';
 exports.CAT_SHOW_ABOUT = CAT_SHOW_ABOUT;
 const CAT_SHOW_DIALOG = 'showDialog';
@@ -27,9 +23,6 @@ const CAT_SET_ACTIVE_CHECKBOX = 'setActiveCheckbox';
 exports.CAT_SET_ACTIVE_CHECKBOX = CAT_SET_ACTIVE_CHECKBOX;
 const CAT_SHOW_MODAL_DIALOG = 'showModalDialog';
 exports.CAT_SHOW_MODAL_DIALOG = CAT_SHOW_MODAL_DIALOG;
-const CAT_CHANGE_THEME = 'changeTheme';
-exports.CAT_CHANGE_THEME = CAT_CHANGE_THEME;
-
 const CA = _refluxCore.default.createActions({
   [CAT_SHOW_ABOUT]: {},
   [CAT_SHOW_DIALOG]: {},
@@ -39,10 +32,8 @@ const CA = _refluxCore.default.createActions({
   [CAT_CLOSE_CHART_CONTAINER_2]: {},
   [CAT_SET_ACTIVE_CONTAINER]: {},
   [CAT_SET_ACTIVE_CHECKBOX]: {},
-  [CAT_SHOW_MODAL_DIALOG]: {},
-  [CAT_CHANGE_THEME]: {}
+  [CAT_SHOW_MODAL_DIALOG]: {}
 });
-
 const _showMd = CA.showModalDialog;
 Object.assign(CA, {
   showDescription: _showMd.bind(null, _ModalDialogType.MDT_DESCRIPTION),

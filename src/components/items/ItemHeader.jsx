@@ -1,9 +1,9 @@
-import useTheme from '../hooks/useTheme';
+import { crElementCn } from '../styleFn';
 
 import A from '../Comp';
 import Button from '../zhn/Button';
 
-const TH_ID = 'ELEMENT'
+const CL_ITEM_HEADER = crElementCn()
 , CL_CAPTION = "not-selected text-clip bt-left bt"
 , S_ROOT = {
   position: 'relative',
@@ -39,17 +39,15 @@ function ItemHeader({
   onClick,
   onClose
 }){
-  const TS = useTheme(TH_ID)
-  , _title = _crTitle(title, caption)
+  const _title = _crTitle(title, caption)
   , _captionStyle = isOpen
       ? S_OPEN
       : S_CLOSE;
   return (
-    <div style={{
-       ...S_ROOT,
-       ...style,
-       ...TS.ROOT
-     }}>
+    <div
+      className={CL_ITEM_HEADER}
+      style={{...S_ROOT, ...style}}
+    >
       <Button
          className={CL_CAPTION}
          style={{

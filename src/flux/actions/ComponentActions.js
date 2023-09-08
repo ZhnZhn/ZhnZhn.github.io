@@ -24,7 +24,6 @@ export const CAT_SET_ACTIVE_CONTAINER = 'setActiveContainer'
 export const CAT_SET_ACTIVE_CHECKBOX = 'setActiveCheckbox'
 
 export const CAT_SHOW_MODAL_DIALOG = 'showModalDialog'
-export const CAT_CHANGE_THEME = 'changeTheme'
 
 const CA = Reflux.createActions({
   [CAT_SHOW_ABOUT]: {},
@@ -37,9 +36,7 @@ const CA = Reflux.createActions({
   [CAT_SET_ACTIVE_CONTAINER]: {},
   [CAT_SET_ACTIVE_CHECKBOX]: {},
 
-  [CAT_SHOW_MODAL_DIALOG]: {},
-
-  [CAT_CHANGE_THEME]: {}
+  [CAT_SHOW_MODAL_DIALOG]: {}
 });
 
 const _showMd = CA.showModalDialog;

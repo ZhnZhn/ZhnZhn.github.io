@@ -3,8 +3,7 @@ import {
   CAT_SHOW_DIALOG,
   CAT_CLOSE_DIALOG,
   CAT_SHOW_MODAL_DIALOG,
-  CAT_CLOSE_CHART_CONTAINER_2,
-  CAT_CHANGE_THEME
+  CAT_CLOSE_CHART_CONTAINER_2
 } from '../actions/ComponentActions';
 
 import {
@@ -103,10 +102,6 @@ const ComponentSlice = {
   onShowModalDialog(modalDialogType, option={}){
     option.modalDialogType = modalDialogType;
     this.trigger(CAT_SHOW_MODAL_DIALOG, option);
-  },
-
-  onChangeTheme(themeName){
-    this.trigger(CAT_CHANGE_THEME, themeName)
   }
 }
 

@@ -19,7 +19,6 @@ import {
 
 import useHotKeysHandler from './hotkeys/useHotKeysHandler';
 
-import AppProvider from './AppProvider';
 import HeaderBar from './header/HeaderBar';
 import BrowserContainer from './browser-container/BrowserContainer';
 import About from './about/About';
@@ -46,7 +45,7 @@ const AppErc = () => {
   useHotKeysHandler()
 
   return (
-    <AppProvider>
+     <>
       <HeaderBar showSettings={showSettings} />
       <div className={CL_COMP_CONTAINER}>
          <BrowserContainer
@@ -58,7 +57,7 @@ const AppErc = () => {
          <CompContainer addAction={CHAT_INIT_AND_SHOW} />
        </div>
        <DialogContainer />
-    </AppProvider>
+    </>
   );
 };
 
