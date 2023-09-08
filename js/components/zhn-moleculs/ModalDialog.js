@@ -7,7 +7,6 @@ var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
 var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
@@ -15,8 +14,8 @@ var _FocusTrap = _interopRequireDefault(require("./FocusTrap"));
 var _MenuMore = _interopRequireDefault(require("./MenuMore"));
 var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const TH_ID = 'MODAL_DIALOG',
-  CL_MODAL_DIALOG = (0, _styleFn.crDialogCn)('modal-dialog'),
+const CL_MODAL_DIALOG = (0, _styleFn.crDialogCn)('modal-dialog'),
+  CL_EL = "el",
   S_ROOT_DIV_MODAL = {
     ..._Dialog.S_ROOT_DIV,
     display: 'block',
@@ -70,7 +69,6 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
     [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
     _hKeyDown = (0, _useKeyEscape.default)(onClose),
     [isMore, toggleIsMore] = (0, _useToggle.default)(false),
-    TS = (0, _useTheme.default)(TH_ID),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_MODAL_DIALOG);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FocusTrap.default, {
     refEl: refRoot,
@@ -92,15 +90,12 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
       onClick: _hClickDialog,
       onKeyDown: _hKeyDown,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        style: {
-          ..._Dialog.S_CAPTION_DIV,
-          ...TS.EL
-        },
+        className: CL_EL,
+        style: _Dialog.S_CAPTION_DIV,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
           ref: refBtMore,
           isMore: isMore,
           menuModel: menuModel,
-          TS: TS,
           toggle: toggleIsMore
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: styleCaption,

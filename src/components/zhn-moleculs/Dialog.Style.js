@@ -2,15 +2,13 @@ import {
   S_FLEX_ROW_END
 } from '../styles/GeneralStyles';
 
-export const S_ROOT_DIV = {   
+export const S_ROOT_DIV = {
    borderRadius: 5,
    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 6px',
 }
 
 export const S_CAPTION_DIV = {
-  position: 'relative',
-  color: '#c0c0c0',
-  backgroundColor: '#1b2836',
+  position: 'relative',  
   padding: '5px 35px 5px 16px',
   textAlign: 'center',
   fontSize: '18px',

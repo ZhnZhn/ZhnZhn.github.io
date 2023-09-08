@@ -6,7 +6,6 @@ import {
 
 import useToggle from '../hooks/useToggle';
 import useKeyEscape from '../hooks/useKeyEscape';
-import useTheme from '../hooks/useTheme';
 import useXYMovable from '../hooks/useXYMovable';
 import useDialogFocus from './useDialogFocus';
 
@@ -24,10 +23,9 @@ import {
   S_SVG_CLOSE
 } from './Dialog.Style';
 
-const TH_ID = 'DRAGGABLE_DIALOG'
-
-, CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
+const CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
 , CL_NOT_SELECTED = "not-selected"
+, CL_EL = "el"
 , S_DIALOG_DIV = {
   ...S_ROOT_DIV,
   position: 'absolute',
@@ -99,7 +97,6 @@ const DraggableDialog = forwardRef(({
     isMore,
     toggleIsMore
   ] = useToggle(false)
-  , TS = useTheme(TH_ID)
   , [
     _className,
     _showHideStyle
@@ -122,18 +119,17 @@ const DraggableDialog = forwardRef(({
       style={{
         ...style,
         ...S_DIALOG_DIV,
-        ..._showHideStyle                
+        ..._showHideStyle
       }}
       onClick={toTopLayer}
       onKeyDown={_hKeyDown}
      >
     {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
-      <div style={{...S_CAPTION_DIV, ...TS.EL}}>
+      <div className={CL_EL} style={S_CAPTION_DIV}>
         <MenuMore
           ref={refBtMore}
           isMore={isMore}
           menuModel={menuModel}
-          TS={TS}
           toggle={toggleIsMore}
         />
         <span className={CL_NOT_SELECTED}>

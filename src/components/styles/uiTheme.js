@@ -12,6 +12,7 @@ const DF_BH_C = '#c0c0c0';
 const DF_LB_BC = '#1b2836'
 
 const DF_EL_BG = EL_BG_GREY
+const DF_EL_C = 'silver'
 
 const P_GREY = {
   BG_BODY: '#5f5f5f',
@@ -28,7 +29,8 @@ const P_GREY = {
   'bh-c': DF_BH_C,
   'lb-bc': DF_LB_BC,
 
-  'el-bg': DF_EL_BG
+  'el-bg': DF_EL_BG,
+  'el-c': DF_EL_C
 };
 
 const EL_BG_WHITE = '#bcd8f5';
@@ -48,7 +50,8 @@ const P_WHITE = {
   'bh-c': DF_BH_C,
   'lb-bc': LB_BC_LIGHT,
 
-  'el-bg': EL_BG_WHITE
+  'el-bg': EL_BG_WHITE,
+  'el-c': '#212020'
 }
 
 const EL_BG_SAND_L = '#64473d'
@@ -67,7 +70,8 @@ const SAND_L_P = {
   'bh-c': '#5b5b5b',
   'lb-bc': LB_BC_LIGHT,
 
-  'el-bg': EL_BG_SAND_L
+  'el-bg': EL_BG_SAND_L,
+  'el-c': 'silver'
 }
 const P_SAND_L = {
   ...SAND_L_P
@@ -96,10 +100,13 @@ const CUSTOM_CSS_PROPERTY_CONFIGS = [
   ["t-c", DF_T_C],
   ["s-c1", DF_S_C1],
   ["s-c2", DF_S_C2],
+  
   ["c-bg", DF_C_BG],
   ["bh-c", DF_BH_C],
   ["lb-bc", DF_LB_BC],
-  ["el-bg", DF_EL_BG]
+
+  ["el-bg", DF_EL_BG],
+  ["el-c", DF_EL_C]
 ]
 
 const _assign = Object.assign;

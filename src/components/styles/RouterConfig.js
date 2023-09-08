@@ -1,15 +1,6 @@
-import General from './ConfigGeneral'
+import Element from './ConfigElement';
 
-import Element from './ConfigElement'
-
-
-const router = {
-  DF: General,
-  /*
-  DRAGGABLE_DIALOG: General,
-  MODAL_DIALOG: General,
-  */
-
+const router = {  
   ELEMENT: Element,
   /*
     BrowserCaption,

@@ -10,7 +10,6 @@ import {
 
 import useKeyEscape from '../hooks/useKeyEscape';
 import useToggle from '../hooks/useToggle';
-import useTheme from '../hooks/useTheme';
 import useDialogFocus from './useDialogFocus';
 
 import SvgClose from '../zhn/SvgClose';
@@ -26,8 +25,8 @@ import {
   S_BT
 } from './Dialog.Style';
 
-const TH_ID = 'MODAL_DIALOG'
-, CL_MODAL_DIALOG = crDialogCn('modal-dialog')
+const CL_MODAL_DIALOG = crDialogCn('modal-dialog')
+, CL_EL = "el"
 , S_ROOT_DIV_MODAL = {
   ...S_ROOT_DIV,
   display: 'block',
@@ -94,7 +93,6 @@ const ModalDialog = forwardRef(({
     isMore,
     toggleIsMore
   ] = useToggle(false)
-  , TS = useTheme(TH_ID)
   , [
     _className,
     _showHideStyle
@@ -127,12 +125,11 @@ const ModalDialog = forwardRef(({
         onKeyDown={_hKeyDown}
      >
      {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
-         <div style={{...S_CAPTION_DIV, ...TS.EL}}>
+         <div className={CL_EL} style={S_CAPTION_DIV}>
            <MenuMore
              ref={refBtMore}
              isMore={isMore}
              menuModel={menuModel}
-             TS={TS}
              toggle={toggleIsMore}
            />
             <span style={styleCaption}>

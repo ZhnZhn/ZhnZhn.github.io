@@ -5,18 +5,15 @@
  ],
  "file": "../../../src/components/styles/RouterConfig.js",
  "names": [
-  "_ConfigGeneral",
+  "_ConfigElement",
   "_interopRequireDefault",
   "require",
-  "_ConfigElement",
   "router",
-  "DF",
-  "General",
   "ELEMENT",
   "Element",
   "_default",
   "exports",
   "default"
  ],
- "mappings": ";;;;;AAAA,IAAAA,cAAA,GAAAC,sBAAA,CAAAC,OAAA;AAEA,IAAAC,cAAA,GAAAF,sBAAA,CAAAC,OAAA;AAGA,MAAME,MAAM,GAAG;EACbC,EAAE,EAAEC,sBAAO;EACX;AACF;AACA;AACA;AACA;AACA;;EAEEC,OAAO,EAAEC;EACT;AACF;AACA;AACA;AACA;AACA;AACA;AACA,CAAC;AAAC,IAAAC,QAAA,GAEaL,MAAM;AAAAM,OAAA,CAAAC,OAAA,GAAAF,QAAA"
+ "mappings": ";;;;;AAAA,IAAAA,cAAA,GAAAC,sBAAA,CAAAC,OAAA;AAEA,MAAMC,MAAM,GAAG;EACbC,OAAO,EAAEC;EACT;AACF;AACA;AACA;AACA;AACA;AACA;AACA,CAAC;AAAC,IAAAC,QAAA,GAEaH,MAAM;AAAAI,OAAA,CAAAC,OAAA,GAAAF,QAAA"
 }

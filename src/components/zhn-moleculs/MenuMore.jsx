@@ -3,7 +3,7 @@ import { forwardRef } from '../uiApi';
 import SvgMore from '../zhn/SvgMore';
 import ModalSlider from '../zhn-modal-slider/ModalSlider';
 
-const CL_MENU_MORE = 'popup-menu dialog__menu-more'
+const CL_MENU_MORE = 'popup-menu dialog__menu-more el-b'
 , S_BT_MORE = {
   position: 'absolute',
   top: 1,
@@ -13,7 +13,6 @@ const CL_MENU_MORE = 'popup-menu dialog__menu-more'
 const MenuMore = forwardRef(({
   isMore,
   menuModel,
-  TS,
   toggle
 }, ref) => {
   return menuModel ? (
@@ -25,8 +24,7 @@ const MenuMore = forwardRef(({
       />
       <ModalSlider
         isShow={isMore}
-        className={CL_MENU_MORE}
-        style={TS.EL_BORDER}
+        className={CL_MENU_MORE}        
         model={menuModel}
         onClose={toggle}
       />

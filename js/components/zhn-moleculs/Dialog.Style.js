@@ -10,8 +10,6 @@ const S_ROOT_DIV = {
 exports.S_ROOT_DIV = S_ROOT_DIV;
 const S_CAPTION_DIV = {
   position: 'relative',
-  color: '#c0c0c0',
-  backgroundColor: '#1b2836',
   padding: '5px 35px 5px 16px',
   textAlign: 'center',
   fontSize: '18px',

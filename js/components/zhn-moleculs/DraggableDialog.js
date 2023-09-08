@@ -7,7 +7,6 @@ var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
-var _useTheme = _interopRequireDefault(require("../hooks/useTheme"));
 var _useXYMovable = _interopRequireDefault(require("../hooks/useXYMovable"));
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
 var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
@@ -15,9 +14,9 @@ var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _MenuMore = _interopRequireDefault(require("./MenuMore"));
 var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const TH_ID = 'DRAGGABLE_DIALOG',
-  CL_DRAGGABLE_DIALOG = (0, _styleFn.crDialogCn)("draggable-dialog"),
+const CL_DRAGGABLE_DIALOG = (0, _styleFn.crDialogCn)("draggable-dialog"),
   CL_NOT_SELECTED = "not-selected",
+  CL_EL = "el",
   S_DIALOG_DIV = {
     ..._Dialog.S_ROOT_DIV,
     position: 'absolute',
@@ -72,7 +71,6 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
   const [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
     _hKeyDown = (0, _useKeyEscape.default)(onClose),
     [isMore, toggleIsMore] = (0, _useToggle.default)(false),
-    TS = (0, _useTheme.default)(TH_ID),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_DRAGGABLE_DIALOG);
   (0, _useXYMovable.default)(refRoot);
   return (
@@ -93,15 +91,12 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
       onClick: toTopLayer,
       onKeyDown: _hKeyDown,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        style: {
-          ..._Dialog.S_CAPTION_DIV,
-          ...TS.EL
-        },
+        className: CL_EL,
+        style: _Dialog.S_CAPTION_DIV,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
           ref: refBtMore,
           isMore: isMore,
           menuModel: menuModel,
-          TS: TS,
           toggle: toggleIsMore
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           className: CL_NOT_SELECTED,

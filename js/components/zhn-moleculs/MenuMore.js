@@ -7,7 +7,7 @@ var _uiApi = require("../uiApi");
 var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
 var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_MENU_MORE = 'popup-menu dialog__menu-more',
+const CL_MENU_MORE = 'popup-menu dialog__menu-more el-b',
   S_BT_MORE = {
     position: 'absolute',
     top: 1,
@@ -17,7 +17,6 @@ const MenuMore = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     isMore,
     menuModel,
-    TS,
     toggle
   } = _ref;
   return menuModel ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
@@ -28,7 +27,6 @@ const MenuMore = (0, _uiApi.forwardRef)((_ref, ref) => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.default, {
       isShow: isMore,
       className: CL_MENU_MORE,
-      style: TS.EL_BORDER,
       model: menuModel,
       onClose: toggle
     })]
