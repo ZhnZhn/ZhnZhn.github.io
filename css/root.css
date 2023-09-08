@@ -31,10 +31,7 @@
    background-color: var(--c-bg, #4d4d4d); 
  }
 
- .el {
-   background-color: #1b2836;
-   background-color: var(--el-bg, #1b2836);
-
+ .el-c {   
    color: silver;
    color: var(--el-c, silver);
 
@@ -44,6 +41,11 @@
    stroke: silver;
    stroke: var(--el-c, silver);
  } 
+
+ .el-bg {
+   background-color: #1b2836;
+   background-color: var(--el-bg, #1b2836);
+ }
 
  .el-b {
    border: 2px solid #1b2836;

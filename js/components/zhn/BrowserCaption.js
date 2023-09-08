@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _Color = require("../styles/Color");
 var _SvgMore = _interopRequireDefault(require("./SvgMore"));
 var _SvgCheckBox = _interopRequireDefault(require("./SvgCheckBox"));
@@ -11,7 +12,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
 const CL_TEXT_CLIP = 'text-clip',
-  CL_BR_CAPTION = "br-caption " + CL_TEXT_CLIP + " gap-right el",
+  CL_BR_CAPTION = (0, _styleFn.crElementCn)("br-caption " + CL_TEXT_CLIP + " gap-right"),
   CL_CAPTION = "not-selected " + CL_TEXT_CLIP,
   S_CAPTION = {
     paddingRight: 8,

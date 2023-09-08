@@ -15,7 +15,7 @@ var _MenuMore = _interopRequireDefault(require("./MenuMore"));
 var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_MODAL_DIALOG = (0, _styleFn.crDialogCn)('modal-dialog'),
-  CL_EL = "el",
+  CL_EL = (0, _styleFn.crElementCn)(),
   S_ROOT_DIV_MODAL = {
     ..._Dialog.S_ROOT_DIV,
     display: 'block',

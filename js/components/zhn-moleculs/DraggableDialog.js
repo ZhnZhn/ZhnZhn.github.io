@@ -16,7 +16,7 @@ var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_DRAGGABLE_DIALOG = (0, _styleFn.crDialogCn)("draggable-dialog"),
   CL_NOT_SELECTED = "not-selected",
-  CL_EL = "el",
+  CL_EL = (0, _styleFn.crElementCn)(),
   S_DIALOG_DIV = {
     ..._Dialog.S_ROOT_DIV,
     position: 'absolute',

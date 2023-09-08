@@ -5,7 +5,8 @@ import {
 
 import {
   crDialogCn,
-  crShowHide
+  crShowHide,
+  crElementCn
 } from '../styleFn';
 
 import useKeyEscape from '../hooks/useKeyEscape';
@@ -26,7 +27,7 @@ import {
 } from './Dialog.Style';
 
 const CL_MODAL_DIALOG = crDialogCn('modal-dialog')
-, CL_EL = "el"
+, CL_EL = crElementCn()
 , S_ROOT_DIV_MODAL = {
   ...S_ROOT_DIV,
   display: 'block',

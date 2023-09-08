@@ -1,7 +1,8 @@
 import { forwardRef } from '../uiApi';
 import {
   crDialogCn,
-  crShowHide
+  crShowHide,
+  crElementCn
 } from '../styleFn';
 
 import useToggle from '../hooks/useToggle';
@@ -25,7 +26,7 @@ import {
 
 const CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
 , CL_NOT_SELECTED = "not-selected"
-, CL_EL = "el"
+, CL_EL = crElementCn()
 , S_DIALOG_DIV = {
   ...S_ROOT_DIV,
   position: 'absolute',

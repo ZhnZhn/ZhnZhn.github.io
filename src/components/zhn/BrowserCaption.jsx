@@ -1,4 +1,5 @@
 //import PropTypes from "prop-types";
+import { crElementCn } from '../styleFn'
 
 import { GREEN_COLOR } from '../styles/Color';
 
@@ -7,7 +8,7 @@ import SvgCheckBox from './SvgCheckBox';
 import SvgClose from './SvgClose';
 
 const CL_TEXT_CLIP = 'text-clip'
-, CL_BR_CAPTION = `br-caption ${CL_TEXT_CLIP} gap-right el`
+, CL_BR_CAPTION = crElementCn(`br-caption ${CL_TEXT_CLIP} gap-right`)
 , CL_CAPTION = `not-selected ${CL_TEXT_CLIP}`
 
 , S_CAPTION = {

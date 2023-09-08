@@ -70,3 +70,7 @@ export const crScrollYCn = (
 export const crDialogCn = (
   className
 ) => crCn(className, 'c-bg el-b')
+
+export const crElementCn = (
+  className
+) => crCn(className, 'el-c el-bg')

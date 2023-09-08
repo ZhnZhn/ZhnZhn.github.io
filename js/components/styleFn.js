@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crScrollYCn = exports.crDialogCn = exports.crContainerCn = exports.crCn = exports.crBsContainerCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_SHOW_POPUP = void 0;
+exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crScrollYCn = exports.crElementCn = exports.crDialogCn = exports.crContainerCn = exports.crCn = exports.crBsContainerCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_SHOW_POPUP = void 0;
 const _isArr = Array.isArray;
 const _getCn = arrOrStr => _isArr(arrOrStr) ? arrOrStr[0] ? arrOrStr[1] : '' : arrOrStr || '';
 const crCn = (arrOrStr1, arrOrStr2) => {
@@ -41,4 +41,6 @@ const crScrollYCn = className => crCn('scroll-container-y', className);
 exports.crScrollYCn = crScrollYCn;
 const crDialogCn = className => crCn(className, 'c-bg el-b');
 exports.crDialogCn = crDialogCn;
+const crElementCn = className => crCn(className, 'el-c el-bg');
+exports.crElementCn = crElementCn;
 //# sourceMappingURL=styleFn.js.map
