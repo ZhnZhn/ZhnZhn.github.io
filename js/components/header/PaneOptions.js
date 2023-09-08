@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _useInputData = _interopRequireDefault(require("./useInputData"));
-var _useThemeSelect = _interopRequireDefault(require("../hooks/useThemeSelect"));
 var _RowPattern = _interopRequireDefault(require("../dialogs/rows/RowPattern"));
 var _RowInputSelect = _interopRequireDefault(require("../dialogs/rows/RowInputSelect"));
 var _OptionCheckBoxStack = _interopRequireDefault(require("./OptionCheckBoxStack"));
@@ -47,7 +46,6 @@ const PaneOptions = _ref => {
     onChangeTheme
   } = _ref;
   const [_refProxy, _proxy, _hSetProxy, _hClearProxy] = (0, _useInputData.default)(data, 'setProxy'),
-    _hSelectTheme = (0, _useThemeSelect.default)(onChangeTheme),
     [_width, _rowPatterStyle] = _crInputStyles(isShowLabels);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowPattern.default, {
@@ -68,7 +66,7 @@ const PaneOptions = _ref => {
       caption: "UI Theme",
       captionStyle: titleStyle,
       options: UI_THEME_OPTIONS,
-      onSelect: _hSelectTheme
+      onSelect: onChangeTheme
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionCheckBoxStack.default, {
       data: data,
       configs: CHECKBOX_CONFIGS

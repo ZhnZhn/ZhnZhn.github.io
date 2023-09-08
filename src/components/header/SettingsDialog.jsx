@@ -1,11 +1,10 @@
 import { crStyle2 } from '../styleFn';
 import memoIsShow from '../hoc/memoIsShow';
 import useRefFocus from '../hooks/useRefFocus';
+
 import useSettingsMenuMore from './useSettingsMenuMore';
 
-import {
-  ComponentActions
-} from '../../flux/actions/ComponentActions';
+import { setUiTheme } from '../styles/uiTheme';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import TabPane from '../zhn-tab/TabPane';
@@ -71,7 +70,7 @@ const SettingsDialog = memoIsShow(({
         <Tab title="Options">
           <PaneOptions
              titleStyle={S_TITLE_OPTION}
-             onChangeTheme={ComponentActions.changeTheme}
+             onChangeTheme={setUiTheme}
           />
         </Tab>
       </TabPane>

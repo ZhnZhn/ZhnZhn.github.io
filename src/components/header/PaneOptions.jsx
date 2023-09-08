@@ -1,5 +1,4 @@
 import useInputData from './useInputData';
-import useThemeSelect from '../hooks/useThemeSelect';
 
 import RowPattern from '../dialogs/rows/RowPattern';
 import RowInputSelect from '../dialogs/rows/RowInputSelect';
@@ -46,7 +45,6 @@ const PaneOptions = ({
     _hSetProxy,
     _hClearProxy
   ] = useInputData(data, 'setProxy')
-  , _hSelectTheme = useThemeSelect(onChangeTheme)
   , [
     _width,
     _rowPatterStyle
@@ -73,7 +71,7 @@ const PaneOptions = ({
         caption="UI Theme"
         captionStyle={titleStyle}
         options={UI_THEME_OPTIONS}
-        onSelect={_hSelectTheme}
+        onSelect={onChangeTheme}
       />
       <OptionCheckBoxStack
         data={data}

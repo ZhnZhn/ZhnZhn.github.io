@@ -1,5 +1,4 @@
 import { setChartTheme } from '../../charts/ChartUiTheme';
-import routerConfig from './RouterConfig';
 
 const EL_BG_GREY = '#1b2836';
 
@@ -16,10 +15,6 @@ const DF_EL_C = 'silver'
 
 const P_GREY = {
   BG_BODY: '#5f5f5f',
-  BG: '#4d4d4d',
-
-  EL_BG: EL_BG_GREY,
-  EL_C: 'silver',
 
   't-c': EL_BG_GREY,
   's-c1': DF_S_C1,
@@ -37,10 +32,6 @@ const EL_BG_WHITE = '#bcd8f5';
 const LB_BC_LIGHT = 'grey'
 const P_WHITE = {
   BG_BODY: '#e1e1e1',
-  BG: '#ebf1f5',
-
-  EL_BG: EL_BG_WHITE,
-  EL_C: '#212020',
 
   't-c': '#1b75bb',
   's-c1': DF_S_C1,
@@ -54,13 +45,9 @@ const P_WHITE = {
   'el-c': '#212020'
 }
 
-const EL_BG_SAND_L = '#64473d'
+const EL_BG_SAND_L = '#64473d';
 const SAND_L_P = {
   BG_BODY: '#9e9e9e',
-  BG: '#e8e0cb',
-
-  EL_BG: EL_BG_SAND_L,
-  EL_C: 'silver',
 
   't-c': '#785133',
   's-c1': DF_S_C1,
@@ -80,7 +67,6 @@ const EL_BG_SAND = '#463222';
 const P_SAND = {
   ...SAND_L_P,
   BG: '#e6d5a9',
-  EL_BG: EL_BG_SAND,
 
   'c-bg': '#e6d5a9',
   's-c2': EL_BG_SAND,
@@ -88,19 +74,11 @@ const P_SAND = {
   'el-bg': EL_BG_SAND
 };
 
-const CSS_RULE = {
-  BG: {},
-
-  EL: {},
-  EL_BORDER: {},
-  EL_BG: {}
-};
-
 const CUSTOM_CSS_PROPERTY_CONFIGS = [
   ["t-c", DF_T_C],
   ["s-c1", DF_S_C1],
   ["s-c2", DF_S_C2],
-  
+
   ["c-bg", DF_C_BG],
   ["bh-c", DF_BH_C],
   ["lb-bc", DF_LB_BC],
@@ -109,8 +87,7 @@ const CUSTOM_CSS_PROPERTY_CONFIGS = [
   ["el-c", DF_EL_C]
 ]
 
-const _assign = Object.assign;
-const _setStyle = (conf, P) => {
+const _setCssPropertiesFrom = (P) => {
   const _style = document.body.style;
   _style.backgroundColor = P.BG_BODY
   CUSTOM_CSS_PROPERTY_CONFIGS.forEach(([propName, dfValue]) => {
@@ -119,34 +96,6 @@ const _setStyle = (conf, P) => {
        P[propName] || dfValue
     )
   })
-};
-const _crBg = (conf, P) => {
-  _assign(conf.BG, {
-    backgroundColor: P.BG
-  })
-}
-const _crEl = (conf, P) => {
-  _assign(conf.EL, {
-    backgroundColor: P.EL_BG,
-    color: P.EL_C,
-    fill: P.EL_C,
-    stroke: P.EL_C
-  })
-  _assign(conf.EL_BORDER, {
-    border: `2px solid ${P.EL_BG}`
-  })
-  _assign(conf.EL_BG, {
-    backgroundColor: P.EL_BG,
-  })
-}
-
-const _FN_STYLES = [
-  _crBg,
-  _crEl,
-  _setStyle
-];
-const _setStyleTo = (conf, pallete) => {
-  _FN_STYLES.forEach(fn => fn(conf, pallete))
 };
 
 const HP_THEME = {
@@ -164,7 +113,7 @@ const _crThemeConfig = (
 const _setTheme = (
   themeName
 ) => {
-  _setStyleTo(CSS_RULE, _crThemeConfig(themeName))
+  _setCssPropertiesFrom(_crThemeConfig(themeName))
 };
 
 const uiTheme = {
@@ -181,17 +130,16 @@ const uiTheme = {
       : DF_THEME_ID
     _setTheme(this.themeName)
     setChartTheme(themeId !== DF_THEME_ID)
-  },
-  getStyle(id){
-    const config = routerConfig[id] || routerConfig.DF;
-    if (this.themeName !== config.themeName){
-      config.style = config.createStyle(CSS_RULE, this.themeName)
-      config.themeName = this.themeName
-    }
-    return config.style;
   }
 };
 
 uiTheme._init()
 
-export default uiTheme
+export const setUiTheme = (
+  item
+) => {
+  const _themeName = (item || {}).value;
+  if (uiTheme.getThemeName() !== _themeName) {
+    uiTheme.setThemeName(_themeName)
+  }
+}

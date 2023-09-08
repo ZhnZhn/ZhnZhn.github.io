@@ -7,7 +7,7 @@ var _styleFn = require("../styleFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useRefFocus = _interopRequireDefault(require("../hooks/useRefFocus"));
 var _useSettingsMenuMore = _interopRequireDefault(require("./useSettingsMenuMore"));
-var _ComponentActions = require("../../flux/actions/ComponentActions");
+var _uiTheme = require("../styles/uiTheme");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _TabPane = _interopRequireDefault(require("../zhn-tab/TabPane"));
 var _Tab = _interopRequireDefault(require("../zhn-tab/Tab"));
@@ -67,7 +67,7 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
         title: "Options",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneOptions.default, {
           titleStyle: S_TITLE_OPTION,
-          onChangeTheme: _ComponentActions.ComponentActions.changeTheme
+          onChangeTheme: _uiTheme.setUiTheme
         })
       })]
     })
