@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggleMenuMore = _interopRequireDefault(require("../hooks/useToggleMenuMore"));
 var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
 var _useXYMovable = _interopRequireDefault(require("../hooks/useXYMovable"));
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
@@ -70,7 +70,7 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
   } = _ref2;
   const [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
     _hKeyDown = (0, _useKeyEscape.default)(onClose),
-    [isMore, toggleIsMore] = (0, _useToggle.default)(false),
+    [isMenuMore, toggleIsMenuMore] = (0, _useToggleMenuMore.default)(refBtMore),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_DRAGGABLE_DIALOG);
   (0, _useXYMovable.default)(refRoot);
   return (
@@ -95,9 +95,9 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
         style: _Dialog.S_CAPTION_DIV,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
           ref: refBtMore,
-          isMore: isMore,
+          isMore: isMenuMore,
           menuModel: menuModel,
-          toggle: toggleIsMore
+          toggle: toggleIsMenuMore
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           className: CL_NOT_SELECTED,
           children: caption
