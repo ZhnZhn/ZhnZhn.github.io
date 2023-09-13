@@ -37,6 +37,7 @@ const _crConf = (
     ];
 
 const OpenClose = ({
+  refItem,
   isClose=true,
   role='button',
   style,
@@ -64,6 +65,7 @@ const OpenClose = ({
     <div style={{...S_ROOT_DIV, ...style}}>
       <div className={CL_NOT_SELECTED} style={rowStyle}>
         <div
+          ref={refItem}
           tabIndex="0"
           role={role}
           className={CL_OPEN_CLOSE}

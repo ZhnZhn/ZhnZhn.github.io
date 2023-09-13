@@ -10,6 +10,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 const CL_ROW = "row__topic not-selected";
 const MenuItem = _ref => {
   let {
+    refItem,
     isNew,
     style,
     title,
@@ -20,6 +21,7 @@ const MenuItem = _ref => {
   } = _ref;
   const _hKeyDown = (0, _useKeyEnter.default)(onClick);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    ref: refItem,
     tabIndex: "0",
     role: "menuitem",
     className: CL_ROW,

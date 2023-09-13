@@ -15,6 +15,7 @@ const S_OC_STYLE = {
 };
 
 const MenuTopic = ({
+  refFirstItem,
   style,
   openColor,
   caption,
@@ -25,6 +26,7 @@ const MenuTopic = ({
   const _isClose = !(isInitOpen === true);
   return _isArr(items) ? (
     <OpenClose
+       refItem={refFirstItem}
        role="menuitem"
        isClose={_isClose}
        style={style}
@@ -38,6 +40,7 @@ const MenuTopic = ({
     <MenuItem
       {...restMenuItemProps}
       style={S_MENU_ITEM}
+      refItem={refFirstItem}
     />
   );
 };

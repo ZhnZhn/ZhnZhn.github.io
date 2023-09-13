@@ -3,6 +3,7 @@ import { crScrollYCn } from '../styleFn';
 import useBool from '../hooks/useBool';
 import useListen from '../hooks/useListen';
 import useLoadMenu from './useLoadMenu';
+import useBrowserMenu from './useBrowserMenu'
 
 import Comp from '../Comp';
 import MenuTopicList from './MenuTopicList';
@@ -40,7 +41,11 @@ const BrowserMenu = ({
     setLoaded,
     setFailed,
     updateMenu
-  ] = useLoadMenu(isShow, onLoadMenu);
+  ] = useLoadMenu(isShow, onLoadMenu)
+  , refFirstItem = useBrowserMenu(
+     isShow,
+     menu
+  );
 
   useListen((actionType, data) => {
     if (data === browserType) {
@@ -51,7 +56,8 @@ const BrowserMenu = ({
       } else if (actionType === failedAction) {
         setFailed()
       }
-    } else if (data?.browserType === browserType
+    } else if (data
+        && data.browserType === browserType
         && actionType === loadedAction) {
         setLoaded(data.menuItems)
     }
@@ -68,7 +74,10 @@ const BrowserMenu = ({
       />
       <ScrollPane className={CL_SCROLL_MENU}>
          {isLoading && <SpinnerLoading />}
-         <MenuTopicList menu={menu} />
+         <MenuTopicList
+            menu={menu}
+            refFirstItem={refFirstItem}
+         />
          {children}
       </ScrollPane>
     </Browser>

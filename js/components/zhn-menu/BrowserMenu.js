@@ -7,6 +7,7 @@ var _styleFn = require("../styleFn");
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
+var _useBrowserMenu = _interopRequireDefault(require("./useBrowserMenu"));
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _MenuTopicList = _interopRequireDefault(require("./MenuTopicList"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -34,7 +35,8 @@ const BrowserMenu = _ref => {
     children
   } = _ref;
   const [isShow, showBrowser, hideBrowser] = (0, _useBool.default)(isInitShow),
-    [isLoading, menu, setLoaded, setFailed, updateMenu] = (0, _useLoadMenu.default)(isShow, onLoadMenu);
+    [isLoading, menu, setLoaded, setFailed, updateMenu] = (0, _useLoadMenu.default)(isShow, onLoadMenu),
+    refFirstItem = (0, _useBrowserMenu.default)(isShow, menu);
   (0, _useListen.default)((actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {
@@ -44,7 +46,7 @@ const BrowserMenu = _ref => {
       } else if (actionType === failedAction) {
         setFailed();
       }
-    } else if ((data == null ? void 0 : data.browserType) === browserType && actionType === loadedAction) {
+    } else if (data && data.browserType === browserType && actionType === loadedAction) {
       setLoaded(data.menuItems);
     }
   });
@@ -57,7 +59,8 @@ const BrowserMenu = _ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ScrollPane, {
       className: CL_SCROLL_MENU,
       children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopicList.default, {
-        menu: menu
+        menu: menu,
+        refFirstItem: refFirstItem
       }), children]
     })]
   });

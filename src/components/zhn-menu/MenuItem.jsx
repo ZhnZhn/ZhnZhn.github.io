@@ -6,6 +6,7 @@ import MenuItemBadge from './MenuItemBadge';
 const CL_ROW = "row__topic not-selected";
 
 const MenuItem = ({
+  refItem,
   isNew,
   style,
   title,
@@ -17,6 +18,7 @@ const MenuItem = ({
   const _hKeyDown = useKeyEnter(onClick);
   return (
   <div
+      ref={refItem}
       tabIndex="0"
       role="menuitem"
       className={CL_ROW}
