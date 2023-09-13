@@ -40,7 +40,7 @@ const _crInputItem = (inputValue, _ref) => {
     isWithInput,
     maxInput
   } = _ref;
-  const _inputValue = inputValue.substring(0, maxInput),
+  const _inputValue = inputValue.slice(0, maxInput),
     _caption = isWithInput ? INPUT_PREFIX + " " + _inputValue : 'No results found';
   return {
     [propCaption]: _caption,
@@ -95,37 +95,8 @@ const _crFilterOptions = (options, token, props) => {
   }
   return _arr;
 };
-const _getCurrent = ref => ref.current;
-const _fnNoop = () => {};
+const FN_NOOP = () => {};
 class InputSelect extends _uiApi.Component {
-  /*
-  static propTypes = {
-     propCaption: PropTypes.string,
-     ItemOptionComp: PropTypes.element,
-     width: PropTypes.string,
-     style: PropTypes.object,
-     optionsStyle: PropTypes.object,
-     isShowOptionAnim: PropTypes.bool,
-     options: PropTypes.arrayOf(PropTypes.shape({
-        caption: PropTypes.string,
-        value: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.number
-        ])
-     })),
-     optionName: PropTypes.string,
-     optionNames: PropTypes.string,
-     placeholder: PropTypes.string,
-     isWithInput: PropTypes.bool,
-     prefixInput: PropTypes.string
-       isLoading: PropTypes.bool,
-     isLoadingFailed: PropTypes.bool,
-     noFooterBts: PropTypes.bool
-       onSelect: PropTypes.func,
-     onLoadOption: PropTypes.func
-  }
-  */
-
   constructor(_props) {
     super(_props);
     this._initProperties = () => {
@@ -202,11 +173,11 @@ class InputSelect extends _uiApi.Component {
     };
     this._startAfterInputAnimation = () => {
       if (this.state.options.length > MAX_WITHOUT_ANIMATION) {
-        _getCurrent(this._refArrowCell).startAnimation();
+        (0, _uiApi.getRefValue)(this._refArrowCell).startAnimation();
       }
     };
     this._stopAfterInputAnimation = () => {
-      _getCurrent(this._refArrowCell).stopAnimation();
+      (0, _uiApi.getRefValue)(this._refArrowCell).stopAnimation();
     };
     this._setShowOptions = () => {
       this.setState({
@@ -561,9 +532,36 @@ class InputSelect extends _uiApi.Component {
     });
   }
   focusInput() {
-    _getCurrent(this._refInput).focus();
+    (0, _uiApi.focusRefElement)(this._refInput);
   }
 }
+/*
+static propTypes = {
+   propCaption: PropTypes.string,
+   ItemOptionComp: PropTypes.element,
+   width: PropTypes.string,
+   style: PropTypes.object,
+   optionsStyle: PropTypes.object,
+   isShowOptionAnim: PropTypes.bool,
+   options: PropTypes.arrayOf(PropTypes.shape({
+      caption: PropTypes.string,
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+      ])
+   })),
+   optionName: PropTypes.string,
+   optionNames: PropTypes.string,
+   placeholder: PropTypes.string,
+   isWithInput: PropTypes.bool,
+   prefixInput: PropTypes.string
+     isLoading: PropTypes.bool,
+   isLoadingFailed: PropTypes.bool,
+   noFooterBts: PropTypes.bool
+     onSelect: PropTypes.func,
+   onLoadOption: PropTypes.func
+}
+*/
 InputSelect.defaultProps = {
   propCaption: 'caption',
   ItemOptionComp: _ItemOptionDf.default,
@@ -574,8 +572,8 @@ InputSelect.defaultProps = {
   maxInput: 10,
   regInput: /[A-Za-z0-9()^ ]/,
   //prefixInput: 'From Input:',
-  onSelect: _fnNoop,
-  onLoadOption: _fnNoop
+  onSelect: FN_NOOP,
+  onLoadOption: FN_NOOP
 };
 var _default = InputSelect;
 exports.default = _default;

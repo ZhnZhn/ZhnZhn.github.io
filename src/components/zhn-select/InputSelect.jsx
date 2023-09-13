@@ -1,7 +1,9 @@
 //import PropTypes from 'prop-types'
 import {
   Component,
-  createRef
+  createRef,
+  getRefValue,
+  focusRefElement
 } from '../uiApi';
 
 import { HAS_TOUCH_EVENTS } from '../has';
@@ -50,7 +52,7 @@ const _crInputItem = (
   isWithInput,
   maxInput
 }) => {
-  const _inputValue = inputValue.substring(0, maxInput)
+  const _inputValue = inputValue.slice(0, maxInput)
   , _caption = isWithInput
        ? `${INPUT_PREFIX} ${_inputValue}`
        : 'No results found';
@@ -122,8 +124,7 @@ const _crFilterOptions = (
   return _arr;
 }
 
-const _getCurrent = ref => ref.current;
-const _fnNoop = () => {};
+const FN_NOOP = () => {};
 
 class InputSelect extends Component {
   /*
@@ -166,8 +167,8 @@ class InputSelect extends Component {
     maxInput: 10,
     regInput: /[A-Za-z0-9()^ ]/,
     //prefixInput: 'From Input:',
-    onSelect: _fnNoop,
-    onLoadOption: _fnNoop
+    onSelect: FN_NOOP,
+    onLoadOption: FN_NOOP
   }
 
   constructor(props){
@@ -292,11 +293,11 @@ class InputSelect extends Component {
 
   _startAfterInputAnimation = () => {
     if (this.state.options.length>MAX_WITHOUT_ANIMATION){
-      _getCurrent(this._refArrowCell).startAnimation()
+      getRefValue(this._refArrowCell).startAnimation()
     }
   }
   _stopAfterInputAnimation = () => {
-    _getCurrent(this._refArrowCell).stopAnimation()
+    getRefValue(this._refArrowCell).stopAnimation()
   }
   _setShowOptions = () => {
     this.setState(
@@ -614,7 +615,7 @@ class InputSelect extends Component {
   }
 
   focusInput(){
-    _getCurrent(this._refInput).focus()
+    focusRefElement(this._refInput)
   }
 
 }
