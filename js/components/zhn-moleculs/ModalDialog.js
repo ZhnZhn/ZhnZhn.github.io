@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useMenuMore = _interopRequireDefault(require("../hooks/useMenuMore"));
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
 var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
@@ -66,13 +66,13 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
     onClose = FN_NOOP
   } = _ref2;
   const refBtClose = (0, _uiApi.useRef)(),
-    [refRoot, refBtMore] = (0, _useDialogFocus.default)(ref, isShow),
+    [refBtMenuMore, isMenuMore, toggleMenuMore] = (0, _useMenuMore.default)(),
+    refRoot = (0, _useDialogFocus.default)(isShow, ref, refBtMenuMore),
     _hKeyDown = (0, _useKeyEscape.default)(onClose),
-    [isMore, toggleIsMore] = (0, _useToggle.default)(false),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_MODAL_DIALOG);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FocusTrap.default, {
     refEl: refRoot,
-    refFirst: refFocusFirts || refBtMore,
+    refFirst: refFocusFirts || refBtMenuMore,
     refLast: refFocusLast || refBtClose,
     style: _showHideStyle,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -93,10 +93,10 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
         className: CL_EL,
         style: _Dialog.S_CAPTION_DIV,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
-          ref: refBtMore,
-          isMore: isMore,
+          ref: refBtMenuMore,
+          isMore: isMenuMore,
           menuModel: menuModel,
-          toggle: toggleIsMore
+          toggle: toggleMenuMore
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: styleCaption,
           children: caption

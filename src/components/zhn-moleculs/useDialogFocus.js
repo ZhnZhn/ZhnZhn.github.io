@@ -4,24 +4,28 @@ import {
   useEffect,
   useImperativeHandle,
   getRefValue,
+  setRefValue,
   focusRefElement
 } from '../uiApi';
 
 const useDialogFocus = (
+  isShow,
   ref,
-  isShow
+  refBtMenuMore
 ) => {
   const refRoot = useRef()
-  , refBtMore = useRef()
   , _refPrevFocused = useRef()
   , _refIsShowPrev = useRef()
+  /*eslint-disable react-hooks/exhaustive-deps */
   , focus = useCallback(() => {
-      _refPrevFocused.current = document.activeElement
-      focusRefElement(refBtMore, refRoot)
+      setRefValue(_refPrevFocused, document.activeElement)
+      focusRefElement(refBtMenuMore, refRoot)
   }, [])
+  // refBtMenuMore
+  /*eslint-enable react-hooks/exhaustive-deps */
   , focusPrev = useCallback(()=>{
       focusRefElement(_refPrevFocused)
-      _refPrevFocused.current = null
+      setRefValue(_refPrevFocused, null)
   }, []);
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -32,7 +36,7 @@ const useDialogFocus = (
     } else if (!isShow && _isPrevShow) {
       focusPrev()
     }
-    _refIsShowPrev.current = isShow
+    setRefValue(_refIsShowPrev, isShow)    
   }, [isShow])
   //focus, focusPrev
   useImperativeHandle(ref, () => ({
@@ -42,7 +46,7 @@ const useDialogFocus = (
   //focus, focusPrev
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  return [refRoot, refBtMore];
+  return refRoot;
 };
 
 export default useDialogFocus

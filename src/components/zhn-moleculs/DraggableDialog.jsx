@@ -5,7 +5,7 @@ import {
   crElementCn
 } from '../styleFn';
 
-import useToggleMenuMore from '../hooks/useToggleMenuMore';
+import useMenuMore from '../hooks/useMenuMore';
 import useKeyEscape from '../hooks/useKeyEscape';
 import useXYMovable from '../hooks/useXYMovable';
 import useDialogFocus from './useDialogFocus';
@@ -90,14 +90,16 @@ const DraggableDialog = forwardRef(({
   onClose=FN_NOOP
 }, ref) => {
   const [
-    refRoot,
-    refBtMore
-  ] = useDialogFocus(ref, isShow)
-  , _hKeyDown = useKeyEscape(onClose)
-  , [
+    refBtMenuMore,
     isMenuMore,
-    toggleIsMenuMore
-  ] = useToggleMenuMore(refBtMore)
+    toggleMenuMore
+  ] = useMenuMore()
+  , refRoot = useDialogFocus(
+     isShow,
+     ref,
+     refBtMenuMore
+  )
+  , _hKeyDown = useKeyEscape(onClose)
   , [
     _className,
     _showHideStyle
@@ -128,10 +130,10 @@ const DraggableDialog = forwardRef(({
     {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
       <div className={CL_EL} style={S_CAPTION_DIV}>
         <MenuMore
-          ref={refBtMore}
+          ref={refBtMenuMore}
           isMore={isMenuMore}
           menuModel={menuModel}
-          toggle={toggleIsMenuMore}
+          toggle={toggleMenuMore}
         />
         <span className={CL_NOT_SELECTED}>
           {caption}

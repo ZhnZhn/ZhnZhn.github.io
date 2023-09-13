@@ -10,7 +10,7 @@ import {
 } from '../styleFn';
 
 import useKeyEscape from '../hooks/useKeyEscape';
-import useToggle from '../hooks/useToggle';
+import useMenuMore from '../hooks/useMenuMore';
 import useDialogFocus from './useDialogFocus';
 
 import SvgClose from '../zhn/SvgClose';
@@ -83,17 +83,16 @@ const ModalDialog = forwardRef(({
 }, ref) => {
   const refBtClose = useRef()
   , [
-    refRoot,
-    refBtMore
-  ] = useDialogFocus(
-    ref,
-    isShow
+    refBtMenuMore,
+    isMenuMore,
+    toggleMenuMore
+  ] = useMenuMore()
+  , refRoot = useDialogFocus(
+     isShow,
+     ref,
+     refBtMenuMore
   )
   , _hKeyDown = useKeyEscape(onClose)
-  , [
-    isMore,
-    toggleIsMore
-  ] = useToggle(false)
   , [
     _className,
     _showHideStyle
@@ -105,7 +104,7 @@ const ModalDialog = forwardRef(({
   return (
     <FocusTrap
       refEl={refRoot}
-      refFirst={refFocusFirts || refBtMore}
+      refFirst={refFocusFirts || refBtMenuMore}
       refLast={refFocusLast || refBtClose}
       style={_showHideStyle}
     >
@@ -128,10 +127,10 @@ const ModalDialog = forwardRef(({
      {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
          <div className={CL_EL} style={S_CAPTION_DIV}>
            <MenuMore
-             ref={refBtMore}
-             isMore={isMore}
+             ref={refBtMenuMore}
+             isMore={isMenuMore}
              menuModel={menuModel}
-             toggle={toggleIsMore}
+             toggle={toggleMenuMore}
            />
             <span style={styleCaption}>
               {caption}
