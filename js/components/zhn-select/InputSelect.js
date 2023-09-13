@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _has = require("../has");
 var _ArrowCell = _interopRequireDefault(require("./ArrowCell"));
 var _SvgClear = _interopRequireDefault(require("../zhn/SvgClear"));
@@ -18,12 +19,6 @@ var _jsxRuntime = require("react/jsx-runtime");
 const MAX_WITHOUT_ANIMATION = 800,
   INPUT_PREFIX = 'From input:',
   NO_RESULT = 'noresult',
-  S_BLOCK = {
-    display: 'block'
-  },
-  S_NONE = {
-    display: 'none'
-  },
   S_ARROW_SHOW = {
     borderColor: '#1b75bb transparent transparent'
   },
@@ -358,7 +353,7 @@ class InputSelect extends _uiApi.Component {
           isShowOption
         } = this.state,
         _optionListEl = this._crOptionListWithCache(),
-        _styleOptions = isShowOption ? S_BLOCK : S_NONE,
+        _styleOptions = isShowOption ? _styleFn.S_BLOCK : _styleFn.S_NONE,
         _rootWidthStyle = _crWidthStyle(width, _styleOptions),
         {
           _nFiltered,

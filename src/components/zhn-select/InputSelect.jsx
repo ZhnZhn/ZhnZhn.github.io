@@ -6,6 +6,11 @@ import {
   focusRefElement
 } from '../uiApi';
 
+import {
+  S_NONE,
+  S_BLOCK
+} from '../styleFn';
+
 import { HAS_TOUCH_EVENTS } from '../has';
 
 import ArrowCell from './ArrowCell';
@@ -32,9 +37,9 @@ const MAX_WITHOUT_ANIMATION = 800
 , INPUT_PREFIX = 'From input:'
 , NO_RESULT = 'noresult'
 
-, S_BLOCK = { display: 'block'}
-, S_NONE = { display: 'none' }
-, S_ARROW_SHOW = { borderColor: '#1b75bb transparent transparent' }
+, S_ARROW_SHOW = {
+  borderColor: '#1b75bb transparent transparent'
+}
 , S_SVG_CLEAR = {
   position: 'absolute',
   top: 5,
