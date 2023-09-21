@@ -18,9 +18,9 @@ const SELECTED_STYLE = "font-weight: bold";
 const Comp = _ref => {
   let {
     text,
-    isSelected
+    isVisible
   } = _ref;
-  const style = isSelected ? {
+  const style = isVisible ? {
     fontWeight: 'bold '
   } : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {

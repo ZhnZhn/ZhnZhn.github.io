@@ -21,9 +21,9 @@ const SELECTED_STYLE = "font-weight: bold";
 
 const Comp = ({
   text,
-  isSelected
+  isVisible
 }) => {
-  const style = isSelected
+  const style = isVisible
     ? { fontWeight: 'bold '}
     : void 0;
   return (
