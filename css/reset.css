@@ -12,16 +12,19 @@ html {
 }
 
 body {
+  background-color: #5f5f5f;
+  background-color: var(--b-bg, #5f5f5f);
+
+
   font-family: Roboto, Arial, Lato, sans-serif;
 
   /*
-
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-weight: 400;
   font-size: 1rem;
   */
-  font-weight: 300;
-  background-color: grey;
+
+  font-weight: 300;  
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -1,4 +1,7 @@
  :root {
+   /*body tag backgroun-color*/
+   --b-bg: #5f5f5f;
+
    /*topic-color*/
    --t-c: #1b2836;   
 
