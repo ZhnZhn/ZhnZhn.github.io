@@ -40,7 +40,7 @@
     "cryptocurrency-prices"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.22.15",
+    "@babel/runtime": "^7.23.1",
     "big.js": "^6.2.1",
     "dompurify": "^3.0.5",
     "highcharts": "^9.1.2",
@@ -54,8 +54,8 @@
     "reflux-core": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.15",
-    "@babel/core": "^7.22.20",
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.0",
     "@babel/eslint-parser": "^7.22.15",
     "@babel/plugin-transform-runtime": "^7.22.15",
     "@babel/preset-env": "^7.22.20",
