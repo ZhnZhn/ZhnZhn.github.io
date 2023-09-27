@@ -9,6 +9,7 @@ const S_COMPARE = {
 const LINK_CONFIGS = [
  ["Ndl", "Nasdaq Data Link", "https://data.nasdaq.com"],
  ["DBnomics", "https://db.nomics.world"],
+ ["EI", "Energy Institute", "https://www.energyinst.org"],
  ["Ember", "https://ember-climate.org"],
  ["IRENA", "https://www.irena.org"],
  ["Iex", "IEX Cloud", "https://iexcloud.io"],

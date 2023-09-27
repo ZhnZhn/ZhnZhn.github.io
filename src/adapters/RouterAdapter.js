@@ -20,6 +20,7 @@ import Eia from './eia/Eia'
 import Intrinio from './intrinio/Intrinio'
 import Ndl from './ndl/Ndl'
 import DbNomics from './db-nomics/DbNomics'
+import Ei from './ei/Ei'
 import Ember from './ember/Ember'
 import Irena from './irena/Irena'
 import Crc from './crypto-compare/Crc'
@@ -35,6 +36,7 @@ import Bt from './bitstamp/Bt'
 const RouterAdapter = {
   Ndl,
   DbNomics,
+  Ei,
   Ember,
   Irena,
   EuroStat,

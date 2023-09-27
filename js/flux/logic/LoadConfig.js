@@ -10,6 +10,7 @@ const LoadConfig = {
   [_LoadType.LT_Q]: _LoadImpl.default.Ndl,
   [_LoadType.LT_QCT]: _loadNdlCommodityTrade.loadNdlCommodityTrade,
   [_LoadType.LT_DBN]: _LoadImpl.default.DbNomics,
+  [_LoadType.LT_EI]: _LoadImpl.default.Ei,
   [_LoadType.LT_EMB]: _LoadImpl.default.Ember,
   [_LoadType.LT_IRE]: _LoadImpl.default.Irena,
   [_LoadType.LT_AL]: _LoadImpl.default.AlphaVantage,
@@ -43,6 +44,5 @@ const LoadConfig = {
   [_LoadType.LT_WATCH_LIST]: _LoadImpl.default.Ndl,
   [_LoadType.LT_WL]: _LoadImpl.default.Ndl
 };
-var _default = LoadConfig;
-exports.default = _default;
+var _default = exports.default = LoadConfig;
 //# sourceMappingURL=LoadConfig.js.map

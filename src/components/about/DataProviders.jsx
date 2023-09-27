@@ -36,6 +36,7 @@ const _isArr = Array.isArray;
 
 const DP = [
   Link.DBnomics,
+  Link.EI,
   Link.Ember,
   Link.IRENA,
   Link.Eurostat,
@@ -98,7 +99,7 @@ const _crListCaption = (
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 31):"
+     caption="Data Providers (All 32):"
      childStyle={S_ROOT_CHILD}
   >
     <div>

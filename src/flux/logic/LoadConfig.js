@@ -2,6 +2,7 @@ import {
   LT_Q,
   LT_QCT,
   LT_DBN,
+  LT_EI,
   LT_EMB,
   LT_IRE,
   LT_AL,
@@ -42,7 +43,9 @@ const LoadConfig = {
   [LT_Q]: LoadImpl.Ndl,
   [LT_QCT]: loadNdlCommodityTrade,
 
+
   [LT_DBN]: LoadImpl.DbNomics,
+  [LT_EI]: LoadImpl.Ei,
   [LT_EMB]: LoadImpl.Ember,
   [LT_IRE]: LoadImpl.Irena,
 
