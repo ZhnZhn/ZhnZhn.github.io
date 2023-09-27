@@ -1,0 +1,9 @@
+{"items":[  
+  {"c":"Oil consumption in 1k barrels per day (KBPD)","v":"oil-consumption-kbd"},
+  {"c":"Oil consumption in million metric tons (Mmt)","v":"oil-consumption-mt"},
+  {"c":"Oil consumption in exajoules (EJ)","v":"oil-consumption-ej"},
+
+  {"c":"Oil production in 1k barrels per day (KBPD)","v":"oil-production-kbd"},
+  {"c":"Oil production in million metric tons (Mmt)","v":"oil-production-mt"}
+ ]
+}
