@@ -17,7 +17,7 @@ var _CompContainer = _interopRequireDefault(require("./zhn-containers/CompContai
 var _DialogContainer = _interopRequireDefault(require("./dialogs/DialogContainer"));
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 var _jsxRuntime = require("react/jsx-runtime");
-const BUILD_DATE = '21-09-2023',
+const BUILD_DATE = '27-09-2023',
   CL_COMP_CONTAINER = "component-container";
 const showSettings = (0, _uiApi.bindTo)(_ComponentActions.ComponentActions.showSettings, _ChartStore.default.exportSettingFn());
 const AppErc = () => {
@@ -41,6 +41,5 @@ const AppErc = () => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {})]
   });
 };
-var _default = AppErc;
-exports.default = _default;
+var _default = exports.default = AppErc;
 //# sourceMappingURL=AppErc.js.map
