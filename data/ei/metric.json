@@ -1,15 +1,24 @@
-{"items":[  
+{"items":[    
+  {"c":"Primary energy consumption in exajoules (EJ)","v":"primary-energy-consumption-ej"},
+  {"c":"Primary energy consumption in gigajoule per capita (GJPC)","v":"primary-energy-consumption-gjpc"},
   {"c":"Coal consumption in exajoules (EJ)","v":"coal-consumption-ej"},
   {"c":"Coal production in exajoules (EJ)","v":"coal-production-ej"},
-  {"c":"Coal production in million tons (Mt)","v":"coal-production-mt"},
+  {"c":"Coal production in million tons (Mt)","v":"coal-production-mt"},  
   {"c":"Natural gas consumption in exajoules (EJ)","v":"natural-gas-consumption-ej"},
   {"c":"Natural gas consumption in million cubic meters (Bcm)","v":"natural-gas-consumption-bcm"},
   {"c":"Natural gas production in exajoules (EJ)","v":"natural-gas-production-ej"},
   {"c":"Natural gas production in million cubic meters (Bcm)","v":"natural-gas-production-bcm"},
-  {"c":"Oil consumption in 1k barrels per day (KBPD)","v":"oil-consumption-kbd"},
-  {"c":"Oil consumption in million metric tons (Mmt)","v":"oil-consumption-mt"},
   {"c":"Oil consumption in exajoules (EJ)","v":"oil-consumption-ej"},
+  {"c":"Oil consumption in 1k barrels per day (KBPD)","v":"oil-consumption-kbd"},
+  {"c":"Oil consumption in million metric tons (Mmt)","v":"oil-consumption-mt"},  
   {"c":"Oil production in 1k barrels per day (KBPD)","v":"oil-production-kbd"},
-  {"c":"Oil production in million metric tons (Mmt)","v":"oil-production-mt"}
+  {"c":"Oil production in million metric tons (Mmt)","v":"oil-production-mt"},
+  {"c":"Carbon dioxide emissions from energy in Mt of CO2","v":"co2-combust-mtco2"},
+  {"c":"Carbon dioxide emissions in Mt of CO2 per EJ energy","v":"co2-combust-per-ej"}, 
+  {"c":"Nuclear energy consumption in exajoules (EJ)","v":"nuclear-energy-ej"},
+  {"c":"Hydroelectricity consumption in exajoules (EJ)","v":"hydro-ej"},
+  {"c":"Renewables energy consumption in exajoules (EJ)","v":"renewables-ej"},  
+  {"c":"Solar energy consumption in exajoules (EJ)","v":"solar-ej"},
+  {"c":"Wind energy consumption in exajoules (EJ)","v":"wind-ej"}
  ]
 }
