@@ -1,4 +1,5 @@
 import { isArr } from '../AdapterFn';
+import { isCategory } from '../CategoryFn';
 
 const DATA_URL = './data/ei';
 
@@ -18,9 +19,18 @@ const _crLineUrl = (
   return `${_crApiUrl(option)}/${geo}.json`;
 };
 
+const _crCategoryUrl = (
+  option
+) => {
+  const { time } = option;
+  return `${_crApiUrl(option)}/by-geo-${time}.json`;
+}
+
 const IrenaApi = {
   getRequestUrl(option){
-    return _crLineUrl(option);
+    return isCategory(option.seriaType)
+      ? _crCategoryUrl(option)
+      : _crLineUrl(option);
   },
 
   checkResponse(json){

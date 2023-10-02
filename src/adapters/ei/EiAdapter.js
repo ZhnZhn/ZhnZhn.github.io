@@ -1,3 +1,5 @@
+import { isCategory } from '../CategoryFn';
+
 import {
   isNumber,
   ymdToUTC
@@ -6,6 +8,7 @@ import {
 import crAdapterType1 from '../crAdapterType1';
 import crFromYearData from '../crFromYearData';
 import crAdapterRouter from '../crAdapterRouter';
+import toCategoryAdapter from '../toCategoryAdapter';
 
 const toLineAdapter = crAdapterType1({
   crData: (json, option) => {
@@ -19,7 +22,9 @@ const toLineAdapter = crAdapterType1({
 })
 , getRoute = (
   option
-) => toLineAdapter
+) => isCategory(option.seriaType)
+  ? toCategoryAdapter
+  : toLineAdapter
 , IrenaAdapter = crAdapterRouter(void 0, { getRoute })
 
 export default IrenaAdapter

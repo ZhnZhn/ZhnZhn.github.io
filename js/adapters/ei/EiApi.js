@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
+var _CategoryFn = require("../CategoryFn");
 const DATA_URL = './data/ei';
 const _crApiUrl = option => {
   const {
@@ -18,9 +19,15 @@ const _crLineUrl = option => {
     geo = items[0].v;
   return _crApiUrl(option) + "/" + geo + ".json";
 };
+const _crCategoryUrl = option => {
+  const {
+    time
+  } = option;
+  return _crApiUrl(option) + "/by-geo-" + time + ".json";
+};
 const IrenaApi = {
   getRequestUrl(option) {
-    return _crLineUrl(option);
+    return (0, _CategoryFn.isCategory)(option.seriaType) ? _crCategoryUrl(option) : _crLineUrl(option);
   },
   checkResponse(json) {
     const {
