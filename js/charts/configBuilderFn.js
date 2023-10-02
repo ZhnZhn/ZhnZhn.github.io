@@ -20,11 +20,13 @@ const _isArr = Array.isArray,
   _assign = Object.assign;
 const fAddCaption = (title, subtitle) => config => {
   config.title = (0, _Chart.fTitle)({
-    text: title
+    text: title || subtitle
   });
-  config.subtitle = (0, _Chart.fSubtitle)({
-    text: subtitle
-  });
+  if (title && subtitle) {
+    config.subtitle = (0, _Chart.fSubtitle)({
+      text: subtitle
+    });
+  }
   return config;
 };
 exports.fAddCaption = fAddCaption;
@@ -275,8 +277,7 @@ const crSeriaConfigFromAdapter = _ref => {
   return _seria;
 };
 exports.crSeriaConfigFromAdapter = crSeriaConfigFromAdapter;
-const crAreaDfConfig = _ChartConfigFn.crAreaConfig;
-exports.crAreaDfConfig = crAreaDfConfig;
+const crAreaDfConfig = exports.crAreaDfConfig = _ChartConfigFn.crAreaConfig;
 const crAreaConfig = option => (0, _ChartConfigFn.crAreaConfig)({
   spacingTop: 25,
   ...option

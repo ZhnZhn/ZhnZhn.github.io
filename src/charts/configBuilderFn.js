@@ -66,8 +66,10 @@ export const fAddCaption = (
   title,
   subtitle
 ) => config => {
-  config.title = fTitle({ text: title })
-  config.subtitle = fSubtitle({ text: subtitle })
+  config.title = fTitle({ text: title || subtitle })
+  if (title && subtitle) {
+    config.subtitle = fSubtitle({ text: subtitle })
+  }
   return config;
 }
 
