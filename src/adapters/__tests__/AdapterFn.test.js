@@ -14,7 +14,8 @@ import {
   findMaxY,
   joinBy,
   valueMoving,
-  crError
+  crError,
+  fCrValue
 } from '../AdapterFn';
 import {
   DT_EMPTY,
@@ -270,5 +271,25 @@ describe('crError', ()=>{
       errCaption: '',
       message: 'No data available for request.'
     })
+  })
+})
+
+describe('fCrValue', ()=>{
+  const fn = fCrValue;
+  it('should return function that create value depend on option property _rt', () => {
+    const _crEchoValue = fn({});
+    expect(typeof _crEchoValue).toBe("function")
+    expect(_crEchoValue(1.554)).toBe(1.554)
+    expect(_crEchoValue(1.555)).toBe(1.555)
+
+    const _crRoundByValue = fn({_rt: 2});
+    expect(typeof _crRoundByValue).toBe("function")
+    expect(_crRoundByValue(1.554, 2)).toBe(1.55)
+    expect(_crRoundByValue(1.555, 2)).toBe(1.56)
+
+    const _crEchoValue2 = fn({_rt: "2"});
+    expect(typeof _crEchoValue2).toBe("function")
+    expect(_crEchoValue2(1.554)).toBe(1.554)
+    expect(_crEchoValue2(1.555)).toBe(1.555)
   })
 })

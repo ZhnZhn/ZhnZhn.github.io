@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundBy = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.assign = exports._isNaN = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.assign = exports._isNaN = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _dateFormat = require("../charts/dateFormat");
 var _arrFn = require("../utils/arrFn");
@@ -28,18 +28,15 @@ exports.findMaxY = _seriaFn.findMaxY;
 exports.filterTrimZero = _seriaFn.filterTrimZero;
 var _DirectionType = require("../constants/DirectionType");
 var _getterPointFn = require("./getterPointFn");
-const _isNaN = Number.isNaN;
-exports._isNaN = _isNaN;
-const isArr = Array.isArray;
-exports.isArr = isArr;
+const _isNaN = exports._isNaN = Number.isNaN;
+const isArr = exports.isArr = Array.isArray;
 const isTypeNumber = n => typeof n === 'number';
 exports.isTypeNumber = isTypeNumber;
 const isNumber = n => isTypeNumber(n) && n - n === 0;
 exports.isNumber = isNumber;
 const isNumberOrNull = v => isNumber(v) || v === null;
 exports.isNumberOrNull = isNumberOrNull;
-const assign = Object.assign;
-exports.assign = assign;
+const assign = exports.assign = Object.assign;
 const EMPTY = '';
 const _fIsNumber = pn => p => isTypeNumber(p[pn]) && isFinite(p[pn]);
 const _crBigValueFrom = point => (0, _big.default)((0, _getterPointFn.getPointValue)(point));
@@ -52,18 +49,12 @@ const isTokenInStr = (str, token) => (str || '').indexOf(token) !== -1;
 exports.isTokenInStr = isTokenInStr;
 const toTd = mls => isNumber(mls) ? (0, _dateFormat.toTd)(mls) : '';
 exports.toTd = toTd;
-const getCaption = _getPropertyFn.getC;
-exports.getCaption = getCaption;
-const getValue = _getPropertyFn.getV;
-exports.getValue = getValue;
-const getValueCaption = _getPropertyFn.getVc;
-exports.getValueCaption = getValueCaption;
-const numberFormat = _formatAllNumber.default;
-exports.numberFormat = numberFormat;
-const isYNumber = _fIsNumber('y');
-exports.isYNumber = isYNumber;
-const toFloatOrEmpty = _fToFloatOr('');
-exports.toFloatOrEmpty = toFloatOrEmpty;
+const getCaption = exports.getCaption = _getPropertyFn.getC;
+const getValue = exports.getValue = _getPropertyFn.getV;
+const getValueCaption = exports.getValueCaption = _getPropertyFn.getVc;
+const numberFormat = exports.numberFormat = _formatAllNumber.default;
+const isYNumber = exports.isYNumber = _fIsNumber('y');
+const toFloatOrEmpty = exports.toFloatOrEmpty = _fToFloatOr('');
 const DF_ERR_MESSAGE = 'No data available for request.';
 const crError = function (errCaption, message) {
   if (errCaption === void 0) {
@@ -125,8 +116,12 @@ const joinBy = function (delimeter) {
   return restItems.filter(Boolean).join(delimeter);
 };
 exports.joinBy = joinBy;
-const toUpperCaseFirst = _toUpperCaseFirst2.default;
-exports.toUpperCaseFirst = toUpperCaseFirst;
+const fCrValue = option => {
+  const _rt = option._rt;
+  return isNumber(_rt) ? v => (0, _mathFn.roundBy)(v, _rt) : v => v;
+};
+exports.fCrValue = fCrValue;
+const toUpperCaseFirst = exports.toUpperCaseFirst = _toUpperCaseFirst2.default;
 const crZhConfig = _ref2 => {
   let {
     _itemKey,

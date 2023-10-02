@@ -5,9 +5,7 @@
 "use strict";
 
 var _AdapterFn = require("../AdapterFn");
-
 var _DirectionType = require("../../constants/DirectionType");
-
 const Y = [{
   in: '2017',
   r: 1514678400000,
@@ -24,8 +22,9 @@ const Y = [{
   in: '2000',
   r: 978220800000,
   d: '31-12-2000'
-}]; //Date.UTC(y, m-1, d)
+}];
 
+//Date.UTC(y, m-1, d)
 const YM = [{
   in: '2017-12',
   r: 1514678400000,
@@ -335,6 +334,27 @@ describe('crError', () => {
       errCaption: '',
       message: 'No data available for request.'
     });
+  });
+});
+describe('fCrValue', () => {
+  const fn = _AdapterFn.fCrValue;
+  it('should return function that create value depend on option property _rt', () => {
+    const _crEchoValue = fn({});
+    expect(typeof _crEchoValue).toBe("function");
+    expect(_crEchoValue(1.554)).toBe(1.554);
+    expect(_crEchoValue(1.555)).toBe(1.555);
+    const _crRoundByValue = fn({
+      _rt: 2
+    });
+    expect(typeof _crRoundByValue).toBe("function");
+    expect(_crRoundByValue(1.554, 2)).toBe(1.55);
+    expect(_crRoundByValue(1.555, 2)).toBe(1.56);
+    const _crEchoValue2 = fn({
+      _rt: "2"
+    });
+    expect(typeof _crEchoValue2).toBe("function");
+    expect(_crEchoValue2(1.554)).toBe(1.554);
+    expect(_crEchoValue2(1.555)).toBe(1.555);
   });
 });
 //# sourceMappingURL=AdapterFn.test.js.map

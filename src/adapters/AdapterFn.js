@@ -23,9 +23,10 @@ export {
 } from '../utils/dateFn';
 import _toUpperCaseFirst from '../utils/toUpperCaseFirst'
 import { crValueMoving as _crVm } from '../math/mathFn'
-export {
-  roundBy
-} from '../math/mathFn'
+
+import { roundBy } from '../math/mathFn';
+export { roundBy } from '../math/mathFn';
+
 export {
   findMinY,
   findMaxY,
@@ -130,6 +131,15 @@ export const joinBy = (
 ) => restItems
   .filter(Boolean)
   .join(delimeter)
+
+export const fCrValue = (
+  option
+) => {
+  const _rt = option._rt;
+  return isNumber(_rt)
+    ? v => roundBy(v, _rt)
+    : v => v;
+}
 
 export const toUpperCaseFirst = _toUpperCaseFirst
 
