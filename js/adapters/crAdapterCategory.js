@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _AdapterFn = require("./AdapterFn");
 var _CategoryFn = require("./CategoryFn");
 var _crCategoryConfig = _interopRequireDefault(require("./crCategoryConfig"));
 var _fToCategorySeries = _interopRequireDefault(require("./fToCategorySeries"));
@@ -24,7 +25,7 @@ const crAdapterCategory = crData => {
       config.zhConfig = {
         id: _itemKey,
         key: _itemKey,
-        itemCaption: subtitle + ": " + title,
+        itemCaption: (0, _AdapterFn.joinBy)(': ', subtitle, title),
         itemTime: time,
         dataSource
       };
@@ -36,6 +37,5 @@ const crAdapterCategory = crData => {
   adapter.toSeries = (0, _fToCategorySeries.default)(adapter.toConfig);
   return adapter;
 };
-var _default = crAdapterCategory;
-exports.default = _default;
+var _default = exports.default = crAdapterCategory;
 //# sourceMappingURL=crAdapterCategory.js.map

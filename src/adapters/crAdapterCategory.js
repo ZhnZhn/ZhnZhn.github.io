@@ -1,3 +1,4 @@
+import { joinBy } from './AdapterFn';
 import { isCategoryCluster } from './CategoryFn';
 import crCategoryConfig from './crCategoryConfig';
 import fToCategorySeries from './fToCategorySeries';
@@ -30,7 +31,7 @@ const crAdapterCategory = (
       config.zhConfig = {
         id: _itemKey,
         key: _itemKey,
-        itemCaption: `${subtitle}: ${title}`,
+        itemCaption: joinBy(': ', subtitle, title),
         itemTime: time,
         dataSource
       }
