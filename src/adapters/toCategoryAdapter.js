@@ -1,5 +1,5 @@
-import { crCategoryPoint } from '../CategoryFn';
-import crAdapterCategory from '../crAdapterCategory';
+import { crCategoryPoint } from './CategoryFn';
+import crAdapterCategory from './crAdapterCategory';
 
 const _crData = (
   json
