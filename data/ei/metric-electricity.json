@@ -6,6 +6,7 @@
   {"c":"Hydroelectricity generation in TWh","v":"electricity-by-hydro-twh"},
   {"c":"Electricity generation by renewables in TWh","v":"electricity-by-renewables-twh"},
   {"c":"Electricity generation by other in TWh","v":"electricity-by-other-twh"},
-  {"c":"Total electricity generation in TWh","v":"electricity-by-total-twh"}
+  {"c":"Total electricity generation in TWh","v":"electricity-by-total-twh"},
+  {"c":"Electricity generation by solar in TWh","v":"electricity-by-solar-twh"}
  ]
 }
