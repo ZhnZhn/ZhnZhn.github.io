@@ -27,7 +27,7 @@ import DialogContainer from './dialogs/DialogContainer';
 
 import checkBuild from './checkBuild';
 
-const BUILD_DATE = '02-10-2023'
+const BUILD_DATE = '03-10-2023'
 , CL_COMP_CONTAINER = "component-container";
 
 const showSettings = bindTo(
@@ -37,7 +37,7 @@ const showSettings = bindTo(
 
 const AppErc = () => {
 
-  useEffect(()=>{
+  useEffect(() => {
     LocationSearch.load();
     checkBuild(BUILD_DATE, ComponentActions.showReload)
   }, [])
