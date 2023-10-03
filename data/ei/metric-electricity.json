@@ -4,6 +4,8 @@
   {"c":"Electricity generation by natural gas in TWh","v":"electricity-by-natural-gas-twh"},
   {"c":"Electricity generation by nuclear energy in TWh","v":"electricity-by-nuclear-energy-twh"},
   {"c":"Hydroelectricity generation in TWh","v":"electricity-by-hydro-twh"},
-  {"c":"Electricity generation by renewables in TWh","v":"electricity-by-renewables-twh"}
+  {"c":"Electricity generation by renewables in TWh","v":"electricity-by-renewables-twh"},
+  {"c":"Electricity generation by other in TWh","v":"electricity-by-other-twh"},
+  {"c":"Total electricity generation in TWh","v":"electricity-by-total-twh"}
  ]
 }
