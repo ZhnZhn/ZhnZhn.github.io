@@ -1,6 +1,7 @@
 {"items":[      
   {"c":"Electricity generation by oil in TWh","v":"electricity-by-oil-twh"},
   {"c":"Electricity generation by coal in TWh","v":"electricity-by-coal-twh"},
-  {"c":"Electricity generation by natural gas in TWh","v":"electricity-by-natural-gas-twh"}
+  {"c":"Electricity generation by natural gas in TWh","v":"electricity-by-natural-gas-twh"},
+  {"c":"Electricity generation by nuclear energy in TWh","v":"electricity-by-nuclear-energy-twh"}
  ]
 }
