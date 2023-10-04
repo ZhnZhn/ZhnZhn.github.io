@@ -1,4 +1,7 @@
-import { isCategory } from '../CategoryFn';
+import {
+  isTreeMap,
+  isCategory
+} from '../CategoryFn';
 
 import {
   isNumber,
@@ -9,6 +12,8 @@ import crAdapterType1 from '../crAdapterType1';
 import crFromYearData from '../crFromYearData';
 import crAdapterRouter from '../crAdapterRouter';
 import toCategoryAdapter from '../toCategoryAdapter';
+
+import toTreeMapAdapter from './toTreeMapAdapter';
 
 const toLineAdapter = crAdapterType1({
   crData: (json, option) => {
@@ -22,9 +27,11 @@ const toLineAdapter = crAdapterType1({
 })
 , getRoute = (
   option
-) => isCategory(option.seriaType)
-  ? toCategoryAdapter
-  : toLineAdapter
+) => isTreeMap(option.seriaType)
+  ? toTreeMapAdapter
+  : isCategory(option.seriaType)
+     ? toCategoryAdapter
+     : toLineAdapter
 , IrenaAdapter = crAdapterRouter(void 0, { getRoute })
 
 export default IrenaAdapter

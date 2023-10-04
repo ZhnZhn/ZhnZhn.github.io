@@ -1,5 +1,8 @@
 import { isArr } from '../AdapterFn';
-import { isCategory } from '../CategoryFn';
+import {
+  isTreeMap,
+  isCategory
+} from '../CategoryFn';
 
 const DATA_URL = './data/ei';
 
@@ -26,11 +29,30 @@ const _crCategoryUrl = (
   return `${_crApiUrl(option)}/by-geo-${time}.json`;
 }
 
+const _crTreeMapUrl = (option) => {
+  const {
+    items,
+    time,
+    dfTmToken
+  } = option
+  , geo = items[0].v;
+
+  if (time !== '2022') {
+    throw {
+      message: "TreeMap only available for 2022"
+    };
+  }
+
+  return `${DATA_URL}/${dfTmToken}-tm/${geo}-${time}.json`;
+}
+
 const IrenaApi = {
   getRequestUrl(option){
-    return isCategory(option.seriaType)
-      ? _crCategoryUrl(option)
-      : _crLineUrl(option);
+    return isTreeMap(option.seriaType)
+      ? _crTreeMapUrl(option)
+      :  isCategory(option.seriaType)
+          ? _crCategoryUrl(option)
+          : _crLineUrl(option);
   },
 
   checkResponse(json){

@@ -25,9 +25,23 @@ const _crCategoryUrl = option => {
   } = option;
   return _crApiUrl(option) + "/by-geo-" + time + ".json";
 };
+const _crTreeMapUrl = option => {
+  const {
+      items,
+      time,
+      dfTmToken
+    } = option,
+    geo = items[0].v;
+  if (time !== '2022') {
+    throw {
+      message: "TreeMap only available for 2022"
+    };
+  }
+  return DATA_URL + "/" + dfTmToken + "-tm/" + geo + "-" + time + ".json";
+};
 const IrenaApi = {
   getRequestUrl(option) {
-    return (0, _CategoryFn.isCategory)(option.seriaType) ? _crCategoryUrl(option) : _crLineUrl(option);
+    return (0, _CategoryFn.isTreeMap)(option.seriaType) ? _crTreeMapUrl(option) : (0, _CategoryFn.isCategory)(option.seriaType) ? _crCategoryUrl(option) : _crLineUrl(option);
   },
   checkResponse(json) {
     const {

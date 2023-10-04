@@ -9,6 +9,7 @@ var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 var _crFromYearData = _interopRequireDefault(require("../crFromYearData"));
 var _crAdapterRouter = _interopRequireDefault(require("../crAdapterRouter"));
 var _toCategoryAdapter = _interopRequireDefault(require("../toCategoryAdapter"));
+var _toTreeMapAdapter = _interopRequireDefault(require("./toTreeMapAdapter"));
 const toLineAdapter = (0, _crAdapterType.default)({
     crData: (json, option) => {
       const _data = (0, _crFromYearData.default)(json, option),
@@ -17,7 +18,7 @@ const toLineAdapter = (0, _crAdapterType.default)({
       return (0, _AdapterFn.isNumber)(_fromDateUTC) ? _data.filter(p => p[0] > _fromDateUTC) : _data;
     }
   }),
-  getRoute = option => (0, _CategoryFn.isCategory)(option.seriaType) ? _toCategoryAdapter.default : toLineAdapter,
+  getRoute = option => (0, _CategoryFn.isTreeMap)(option.seriaType) ? _toTreeMapAdapter.default : (0, _CategoryFn.isCategory)(option.seriaType) ? _toCategoryAdapter.default : toLineAdapter,
   IrenaAdapter = (0, _crAdapterRouter.default)(void 0, {
     getRoute
   });
