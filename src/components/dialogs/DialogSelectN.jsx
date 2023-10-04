@@ -26,12 +26,14 @@ import SelectList from './SelectList';
 import {
   crIsId,
   crIsToggleInit,
-  getItemValue
+  getItemValue,
+  crMsgs
 } from './dialogFn';
 
 const DF_INIT_FROM_DATE = '2010-01-01'
 , DF_SELECT_PROPS  = []
 , TABLE_ID = 'table';
+
 
 const DialogSelectN = memoIsShow((
   props
@@ -174,14 +176,12 @@ const DialogSelectN = memoIsShow((
   /*eslint-enable react-hooks/exhaustive-deps */
 
   , _hLoad = useEventCallback(() => {
-      const msgs = []
-      , _items = getRefValue(_refItems);
-      let i = isCategoryItem(chartType) ? 1 : 0;
-      for(; i<selectProps.length; i++) {
-        if (!_items[i]) {
-          msgs.push(msgOnNotSelected(selectProps[i].caption))
-        }
-      }
+      const msgs = crMsgs(
+        chartType,
+        getRefValue(_refItems),
+        selectProps,
+        msgOnNotSelected
+      );
 
       if (msgs.length === 0) {
         onLoad(loadFn(props, {

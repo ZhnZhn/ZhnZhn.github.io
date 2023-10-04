@@ -98,14 +98,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     // setChartConfigFromItem
     /*eslint-enable react-hooks/exhaustive-deps */,
     _hLoad = (0, _useEventCallback.default)(() => {
-      const msgs = [],
-        _items = (0, _uiApi.getRefValue)(_refItems);
-      let i = (0, _ChartOptionsFn.isCategoryItem)(chartType) ? 1 : 0;
-      for (; i < selectProps.length; i++) {
-        if (!_items[i]) {
-          msgs.push(msgOnNotSelected(selectProps[i].caption));
-        }
-      }
+      const msgs = (0, _dialogFn.crMsgs)(chartType, (0, _uiApi.getRefValue)(_refItems), selectProps, msgOnNotSelected);
       if (msgs.length === 0) {
         onLoad(loadFn(props, {
           // seriaColor, seriaWidth
@@ -222,6 +215,5 @@ DialogSelectN.propTypes = {
   onClickInfo: PropTypes.func,
 }
 */
-var _default = DialogSelectN;
-exports.default = _default;
+var _default = exports.default = DialogSelectN;
 //# sourceMappingURL=DialogSelectN.js.map
