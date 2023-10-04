@@ -1,6 +1,10 @@
 import toPlural from '../../utils/toPlural';
 import { CIT_EUROSTAT_MAP } from '../../constants/CompItemType';
 
+import {
+  TYPE_T3AB
+} from './ChartOptionsTypes'
+
 const _isArr = Array.isArray
 , AREA = 'AREA'
 , AREA_YEARLY = 'AREA_YEARLY'
@@ -33,7 +37,8 @@ const _crItem = confArr => ({
   caption: confArr[0],
   value: confArr[1],
   dim: confArr[2],
-  compType: confArr[3]
+  compType: confArr[3],
+  id: confArr[4]
 });
 const _crItems = arr => arr.map(_crItem);
 
@@ -108,11 +113,20 @@ const _crT3B = ([oneCaption], mapFrequency) => [
   ..._crT3All(oneCaption)
 ].filter(Boolean);
 
+const _crTreeMapItem = (
+  caption,
+  id
+) => _crItem([`TreeMap: By ${caption}`, TREE_MAP, caption, void 0, id]);
 
 const _crT3A = ([oneCaption]) => [
   ..._crT3([oneCaption]),
-  _crItem([`TreeMap: By ${oneCaption}`, TREE_MAP, oneCaption]),
+  _crTreeMapItem(oneCaption),
   _crItem([`TreeMap: By ${oneCaption}: Cluster`, TREE_MAP_CLUSTER, oneCaption])
+];
+
+const _crT3AB = ([oneCaption, twoCaption]) => [
+  ..._crT3([oneCaption]),
+  _crTreeMapItem(twoCaption, TYPE_T3AB)
 ];
 
 const _crT3A2 = ([oneCaption]) => [
@@ -132,6 +146,7 @@ const _r = {
   t3b: _crT3B,
   t3a: _crT3A,
   t3a2: _crT3A2,
+  [TYPE_T3AB]: _crT3AB,
   df3: _crDF3
 };
 
