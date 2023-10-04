@@ -2,10 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.getCategories = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
+exports.isTreeMap = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.getCategories = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
 var _domSanitize = _interopRequireDefault(require("../utils/domSanitize"));
 const _isArr = Array.isArray;
-const isCategory = seriaType => seriaType === "BAR_CLUSTER" || seriaType === "BAR_SET" || seriaType === "COLUMN_SET" || seriaType === "COLUMN_CLUSTER" || seriaType === "TREE_MAP" || seriaType === "TREE_MAP_CLUSTER" || seriaType === "TREE_MAP_2" || seriaType === "TREE_MAP_2_CLUSTER";
+const isTreeMap = seriaType => seriaType === "TREE_MAP" || seriaType === "TREE_MAP_CLUSTER" || seriaType === "TREE_MAP_2" || seriaType === "TREE_MAP_2_CLUSTER";
+exports.isTreeMap = isTreeMap;
+const isCategory = seriaType => seriaType === "BAR_CLUSTER" || seriaType === "BAR_SET" || seriaType === "COLUMN_SET" || seriaType === "COLUMN_CLUSTER" || isTreeMap(seriaType);
 exports.isCategory = isCategory;
 const isCategoryCluster = seriaType => (seriaType || '').indexOf('CLUSTER') !== -1;
 exports.isCategoryCluster = isCategoryCluster;

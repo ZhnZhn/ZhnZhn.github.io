@@ -2,18 +2,22 @@ import domSanitize from '../utils/domSanitize';
 
 const _isArr = Array.isArray;
 
+export const isTreeMap = (
+  seriaType
+) => seriaType === "TREE_MAP"
+ || seriaType === "TREE_MAP_CLUSTER"
+ || seriaType === "TREE_MAP_2"
+ || seriaType === "TREE_MAP_2_CLUSTER"
+
 export const isCategory = (
   seriaType
 ) => seriaType === "BAR_CLUSTER"
  || seriaType === "BAR_SET"
  || seriaType === "COLUMN_SET"
  || seriaType === "COLUMN_CLUSTER"
- || seriaType === "TREE_MAP"
- || seriaType === "TREE_MAP_CLUSTER"
- || seriaType === "TREE_MAP_2"
- || seriaType === "TREE_MAP_2_CLUSTER";
+ || isTreeMap(seriaType)
 
- export const isCategoryCluster = (
+export const isCategoryCluster = (
    seriaType
  ) => (seriaType || '').indexOf('CLUSTER') !== -1
 
