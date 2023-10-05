@@ -14,9 +14,10 @@ exports.crIsToggleInit = crIsToggleInit;
 const getItemValue = item => (item || {}).value;
 exports.getItemValue = getItemValue;
 const _geSelectPropsCaption = (selectProps, index) => selectProps[index].caption;
+const _isChartTypeT3AB = chartType => chartType && chartType.id === _ChartOptionsTypes.TYPE_T3AB;
 const crMsgs = (chartType, items, selectProps, msgOnNotSelected) => {
   const msgs = [];
-  if (chartType.id === _ChartOptionsTypes.TYPE_T3AB) {
+  if (_isChartTypeT3AB(chartType)) {
     if (!items[0]) {
       msgs.push(msgOnNotSelected(_geSelectPropsCaption(selectProps, 0)));
     }
