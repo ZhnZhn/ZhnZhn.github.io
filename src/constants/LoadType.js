@@ -1,9 +1,10 @@
 export const LT_Q = 'Q'
+export const LT_QCT = 'QCT'
+
 export const LT_AL = 'AL'
 export const LT_IEX = 'IEX'
 export const LT_FMP = 'FMP'
 export const LT_TW = 'TW'
-export const LT_QCT = 'QCT'
 export const LT_DBN = 'DBN'
 export const LT_EI = 'EI'
 export const LT_EMB = 'EMB'

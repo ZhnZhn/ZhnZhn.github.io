@@ -1,5 +1,6 @@
 import {
   LT_Q,
+  LT_QCT,
   LT_AL,
   LT_IEX,
   LT_FMP,
@@ -22,6 +23,7 @@ const _withApiKey = [
 ];
 const _withProxy = [
   LT_Q,
+  LT_QCT,
   LT_BF,
   LT_UN
 ];
@@ -88,7 +90,7 @@ const SettingSlice = {
     }
   },
 
-  getProxy(loadId){
+  getProxy(loadId){    
     return _withProxy.indexOf(loadId) === -1
        ? ''
        : this.setting.proxy;
