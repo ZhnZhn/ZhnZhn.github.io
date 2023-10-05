@@ -18,7 +18,7 @@ const S_TIP = {
   fontWeight: 'bold'
 };
 const _isFn = fn => typeof fn === 'function';
-const _isByZipCode = item => !!item && item.value === 'Z';
+const _isByZipCode = item => !!item && item.v === 'Z';
 const _reZipCode = /^\d{5}$/;
 const _isZipCode = value => _reZipCode.test(value.trim());
 const ZillowDialog = (0, _memoIsShow.default)(_ref => {
@@ -39,6 +39,7 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
     onTestDate,
     dataColumn,
     loadId,
+    dfTable,
     dataSource,
     toTopLayer,
     onAbout,
@@ -96,19 +97,21 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
           zipCode = _zipCodeInst.getValue(),
           _hasZipCode = _isByZipCode(two),
           _three = !_hasZipCode ? three : {
-            value: zipCode,
-            caption: zipCode
+            v: zipCode,
+            c: zipCode
           },
-          value = _isFn(fnValue) ? fnValue(one.value, two.value, _three.value) : void 0,
+          value = _isFn(fnValue) ? fnValue(metric.v, two.v, _three.v) : void 0,
           _datesInst = (0, _uiApi.getRefValue)(_refDates);
         onLoad({
           ..._datesInst.getValues(),
-          title: two.caption + ": " + _three.caption,
-          subtitle: one.caption,
+          title: two.c + ": " + _three.c,
+          subtitle: metric.c,
+          itemCaption: _three.c,
           isKeyFeature: _hasZipCode,
           value,
           dataColumn,
           loadId,
+          dfTable,
           dataSource
         });
       }
@@ -148,6 +151,7 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
       oneCaption: twoCaption,
       oneJsonProp: twoJsonProp,
       twoCaption: threeCaption,
+      propCaption: "c",
       msgOnNotSelected: msgOnNotSelected,
       onSelectOne: _hSelectType
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
@@ -181,6 +185,5 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
     })]
   });
 });
-var _default = ZillowDialog;
-exports.default = _default;
+var _default = exports.default = ZillowDialog;
 //# sourceMappingURL=ZillowDialog.js.map

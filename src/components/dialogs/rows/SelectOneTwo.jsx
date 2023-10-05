@@ -26,6 +26,7 @@ const SelectOneTwo = forwardRef(({
   oneJsonProp="items",
   oneCaption,
   twoCaption,
+  propCaption,
   onSelectOne=FN_NOOP
 }, ref) => {
     const [
@@ -46,7 +47,7 @@ const SelectOneTwo = forwardRef(({
     ] = useState([])
     , _refOne = useRef(null)
     , _refTwo = useRef(null)
-    
+
     /*eslint-disable react-hooks/exhaustive-deps */
     , _hSelectOne = useCallback(one => {
        setRefValue(_refOne, one)
@@ -91,6 +92,7 @@ const SelectOneTwo = forwardRef(({
            caption={oneCaption}
            options={oneOptions}
            optionNames={oneOptionNames}
+           propCaption={propCaption}
            isLoading={isLoading}
            isLoadingFailed={isLoadingFailed}
            onLoadOption={loadOptions}
@@ -101,6 +103,7 @@ const SelectOneTwo = forwardRef(({
              isShowLabels={isShowLabels}
              caption={twoCaption}
              options={twoOptions}
+             propCaption={propCaption}
              onSelect={_hSelectTwo}
            />
          </ShowHide>

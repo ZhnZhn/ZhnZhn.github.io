@@ -21,6 +21,7 @@ const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
     oneJsonProp = "items",
     oneCaption,
     twoCaption,
+    propCaption,
     onSelectOne = FN_NOOP
   } = _ref;
   const [state, loadOptions] = (0, _useLoadOptions.default)(isShow, uri, oneJsonProp),
@@ -77,6 +78,7 @@ const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
       caption: oneCaption,
       options: oneOptions,
       optionNames: oneOptionNames,
+      propCaption: propCaption,
       isLoading: isLoading,
       isLoadingFailed: isLoadingFailed,
       onLoadOption: loadOptions,
@@ -87,11 +89,11 @@ const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
         isShowLabels: isShowLabels,
         caption: twoCaption,
         options: twoOptions,
+        propCaption: propCaption,
         onSelect: _hSelectTwo
       })
     })]
   });
 });
-var _default = SelectOneTwo;
-exports.default = _default;
+var _default = exports.default = SelectOneTwo;
 //# sourceMappingURL=SelectOneTwo.js.map
