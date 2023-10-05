@@ -38,13 +38,17 @@ const _crSetUrl = option => {
 };
 const _crTableUrl = option => {
   const {
-    proxy,
-    dfTable,
-    value,
-    apiKey
-  } = option;
-  option.key = value;
-  return "" + proxy + TABLE_URL + dfTable + ".json?" + value + "&api_key=" + apiKey;
+      proxy,
+      dfTable,
+      dfFromDate,
+      value,
+      key,
+      fromDate,
+      apiKey
+    } = option,
+    _dateQuery = dfFromDate && fromDate ? "&date.gte=" + fromDate : '';
+  option.key = key || value;
+  return "" + proxy + TABLE_URL + dfTable + ".json?" + (value || '') + "&api_key=" + apiKey + _dateQuery;
 };
 const _checkErr = err => {
   if (err) {
@@ -68,7 +72,7 @@ const _checkDataset = (dataset, datatable) => {
 };
 const NdlApi = {
   getRequestUrl(option) {
-    return option.items && !option.value ? _crSetUrl2(option) : option.dfTable ? _crTableUrl(option) : _crSetUrl(option);
+    return option.dfTable ? _crTableUrl(option) : option.items && !option.value ? _crSetUrl2(option) : _crSetUrl(option);
   },
   // headers && headers.get existed
   getLimitRemaiming: headers => headers.get(LIMIT_REMAINING),

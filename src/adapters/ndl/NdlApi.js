@@ -57,11 +57,17 @@ const _crTableUrl = (
   const {
     proxy,
     dfTable,
+    dfFromDate,
     value,
+    key,
+    fromDate,
     apiKey
   } = option
-  option.key = value
-  return `${proxy}${TABLE_URL}${dfTable}.json?${value}&api_key=${apiKey}`;
+  , _dateQuery = dfFromDate && fromDate
+     ? `&date.gte=${fromDate}`
+     : '';
+  option.key = key || value
+  return `${proxy}${TABLE_URL}${dfTable}.json?${value || ''}&api_key=${apiKey}${_dateQuery}`;
 };
 
 const _checkErr = (err) => {
@@ -100,10 +106,10 @@ const _checkDataset = (
 const NdlApi = {
 
   getRequestUrl(option) {
-    return option.items && !option.value
-      ? _crSetUrl2(option)
-      : option.dfTable
-         ? _crTableUrl(option)
+    return option.dfTable
+      ? _crTableUrl(option)
+      : option.items && !option.value
+         ? _crSetUrl2(option)
          : _crSetUrl(option);
   },
 
