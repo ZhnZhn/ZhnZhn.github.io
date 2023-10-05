@@ -21,12 +21,19 @@ const _crItemCaption = _ref => {
 };
 const _isStrEqTo = (str, strTo) => _isStr(str) && str.toLowerCase() === strTo;
 const _crLinkId = (database_code, dataset_code) => database_code && dataset_code ? database_code + "/" + dataset_code : void 0;
+const _getData = obj => obj.data || [];
 const getData = _ref2 => {
   let {
     dataset,
     datatable
   } = _ref2;
-  return (dataset || {}).data || (datatable || {}).data || [];
+  if (dataset) {
+    return _getData(dataset);
+  }
+  if (datatable) {
+    return _getData(datatable).map(arrItem => [arrItem[arrItem.length - 2], arrItem[arrItem.length - 1]]);
+  }
+  return [];
 };
 exports.getData = getData;
 const getColumnNames = _ref3 => {
@@ -107,8 +114,7 @@ const crZhConfig = option => {
   };
 };
 exports.crZhConfig = crZhConfig;
-const crPercent = _mathFn.calcPercent;
-exports.crPercent = crPercent;
+const crPercent = exports.crPercent = _mathFn.calcPercent;
 const crValueMoving = _ref5 => {
   let {
     bNowValue = (0, _big.default)('0.0'),

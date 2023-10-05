@@ -40,12 +40,23 @@ const _crLinkId = (
   : void 0;
 
 
+const _getData = obj => obj.data || [];
+
 export const getData = ({
   dataset,
   datatable
-}) => (dataset || {}).data
-  || (datatable || {}).data
-  || [];
+}) => {
+  if (dataset) {
+    return _getData(dataset);
+  }
+  if (datatable) {
+    return _getData(datatable).map(arrItem => [
+      arrItem[arrItem.length - 2],
+      arrItem[arrItem.length - 1]
+    ]);
+  }
+  return [];
+};
 
 export const getColumnNames = ({
   dataset,

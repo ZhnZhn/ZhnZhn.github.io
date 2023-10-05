@@ -51,24 +51,17 @@ const _crSetUrl = (
   return `${proxy}${SET_URL}${value}.json?${_q}`;
 };
 
-
 const _crTableUrl = (
   option
 ) => {
   const {
     proxy,
     dfTable,
-    dfTail,
-    dfColumn,
     value,
     apiKey
   } = option
-  , {
-    one,
-    two
-  } = value;
-  option.key = (option.value = `${one}_${two}`);
-  return `${proxy}${TABLE_URL}${dfTable}.json?ticker=${one}&api_key=${apiKey}&${dfTail}&qopts.columns=${dfColumn},${two}`;
+  option.key = value
+  return `${proxy}${TABLE_URL}${dfTable}.json?${value}&api_key=${apiKey}`;
 };
 
 const _checkErr = (err) => {
@@ -87,13 +80,14 @@ const _checkDataEmpty = (
 };
 
 const _checkDataset = (
-  dataset
+  dataset,
+  datatable
 ) => {
   const {
     data,
     newest_available_date,
     oldest_available_date
-  } = dataset || {};
+  } = dataset || datatable || {};
   if (!_isArr(data) || data.length === 0 ) {
     throw crError('',
        `Result dataset for request is empty:
@@ -106,7 +100,7 @@ const _checkDataset = (
 const NdlApi = {
 
   getRequestUrl(option) {
-    return option.items
+    return option.items && !option.value
       ? _crSetUrl2(option)
       : option.dfTable
          ? _crTableUrl(option)
@@ -125,7 +119,7 @@ const NdlApi = {
 
     _checkErr(quandl_error)
     _checkDataEmpty(dataset, datatable)
-    _checkDataset(dataset)
+    _checkDataset(dataset, datatable)
   }
 }
 

@@ -38,19 +38,13 @@ const _crSetUrl = option => {
 };
 const _crTableUrl = option => {
   const {
-      proxy,
-      dfTable,
-      dfTail,
-      dfColumn,
-      value,
-      apiKey
-    } = option,
-    {
-      one,
-      two
-    } = value;
-  option.key = option.value = one + "_" + two;
-  return "" + proxy + TABLE_URL + dfTable + ".json?ticker=" + one + "&api_key=" + apiKey + "&" + dfTail + "&qopts.columns=" + dfColumn + "," + two;
+    proxy,
+    dfTable,
+    value,
+    apiKey
+  } = option;
+  option.key = value;
+  return "" + proxy + TABLE_URL + dfTable + ".json?" + value + "&api_key=" + apiKey;
 };
 const _checkErr = err => {
   if (err) {
@@ -62,19 +56,19 @@ const _checkDataEmpty = (dataset, datatable) => {
     throw (0, _AdapterFn.crError)();
   }
 };
-const _checkDataset = dataset => {
+const _checkDataset = (dataset, datatable) => {
   const {
     data,
     newest_available_date,
     oldest_available_date
-  } = dataset || {};
+  } = dataset || datatable || {};
   if (!_isArr(data) || data.length === 0) {
     throw (0, _AdapterFn.crError)('', "Result dataset for request is empty:\n        Newest Date: " + (newest_available_date || '') + "\n        Oldest Date: " + (oldest_available_date || ''));
   }
 };
 const NdlApi = {
   getRequestUrl(option) {
-    return option.items ? _crSetUrl2(option) : option.dfTable ? _crTableUrl(option) : _crSetUrl(option);
+    return option.items && !option.value ? _crSetUrl2(option) : option.dfTable ? _crTableUrl(option) : _crSetUrl(option);
   },
   // headers && headers.get existed
   getLimitRemaiming: headers => headers.get(LIMIT_REMAINING),
@@ -86,9 +80,8 @@ const NdlApi = {
     } = json || {};
     _checkErr(quandl_error);
     _checkDataEmpty(dataset, datatable);
-    _checkDataset(dataset);
+    _checkDataset(dataset, datatable);
   }
 };
-var _default = NdlApi;
-exports.default = _default;
+var _default = exports.default = NdlApi;
 //# sourceMappingURL=NdlApi.js.map
