@@ -100,7 +100,7 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
             v: zipCode,
             c: zipCode
           },
-          value = _isFn(fnValue) ? fnValue(metric.v, two.v, _three.v) : void 0,
+          value = _isFn(fnValue) ? fnValue(metric.v, _three.v) : void 0,
           _datesInst = (0, _uiApi.getRefValue)(_refDates);
         onLoad({
           ..._datesInst.getValues(),
