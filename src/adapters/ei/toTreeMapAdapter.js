@@ -29,6 +29,12 @@ const _crTotal = (
   data
 ) => data.reduce(_sumByValue, 0);
 
+const _crItemValue = (
+  total
+) => total
+  ? formatNumber(roundBy(total, total > 100 ? 0 : 2))
+  : '';
+
 const _crColor = (
   label
 ) => label === "Coal"
@@ -60,12 +66,6 @@ const _crData = (
     };
   });
 }
-
-const _crItemValue = (
-  total
-) => total
-  ? formatNumber(roundBy(total, total > 10 ? 0 : 2))
-  : '';
 
 const toTreeMapAdapter = () => {
   const adapter = {

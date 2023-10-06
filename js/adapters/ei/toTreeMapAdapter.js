@@ -13,6 +13,7 @@ const COLOR_FOSSIL_FUEL = "#658fb9",
   COLOR_NOT_FOSSIL_FUEL = "#6ea3d7";
 const _sumByValue = (total, item) => total + item.value;
 const _crTotal = data => data.reduce(_sumByValue, 0);
+const _crItemValue = total => total ? (0, _formatNumber.default)((0, _AdapterFn.roundBy)(total, total > 100 ? 0 : 2)) : '';
 const _crColor = label => label === "Coal" || label === "Natural gas" || label === "Oil" ? COLOR_FOSSIL_FUEL : COLOR_NOT_FOSSIL_FUEL;
 const _crData = (title, data, total) => {
   const _onePercent = total / 100,
@@ -33,7 +34,6 @@ const _crData = (title, data, total) => {
     };
   });
 };
-const _crItemValue = total => total ? (0, _formatNumber.default)((0, _AdapterFn.roundBy)(total, total > 10 ? 0 : 2)) : '';
 const toTreeMapAdapter = () => {
   const adapter = {
     toConfig: (json, option) => {
