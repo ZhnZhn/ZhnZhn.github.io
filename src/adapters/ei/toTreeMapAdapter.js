@@ -25,6 +25,10 @@ const _sumByValue = (
   item
 ) => total + item.value;
 
+const _crTotal = (
+  data
+) => data.reduce(_sumByValue, 0);
+
 const _crColor = (
   label
 ) => label === "Coal"
@@ -33,22 +37,19 @@ const _crColor = (
  ? COLOR_FOSSIL_FUEL
  : COLOR_NOT_FOSSIL_FUEL;
 
-const _crTotal = (
-  data
-) => data.reduce(_sumByValue, 0)
-
 const _crData = (
   title,
   data,
   total
 ) => {
-  const _onePercent = total/100;
+  const _onePercent = total/100
+  , _rt = _onePercent > 1 ? 0 : 2;
   return data.map(item => {
     const {
       value,
       label
     } = item
-    , _value = roundBy(value, 0)
+    , _value = roundBy(value, _rt)
     , _percent = roundBy(value/_onePercent, 0);
     return {
       color: _crColor(label),
@@ -60,19 +61,27 @@ const _crData = (
   });
 }
 
+const _crItemValue = (
+  total
+) => total
+  ? formatNumber(roundBy(total, total > 10 ? 0 : 2))
+  : '';
 
 const toTreeMapAdapter = () => {
   const adapter = {
     toConfig: (json, option) => {
       const {
+        data
+      } = json
+      , {
         _itemKey,
         title,
         dfTmTitle
       } = option
-      , total = _crTotal(json.data);
+      , total = _crTotal(data);
 
       return { config: pipe(
-        crTreeMapConfig(_crData(title, json.data, total)),
+        crTreeMapConfig(_crData(title, data, total)),
         fAddCaption(
           title,
           dfTmTitle
@@ -83,7 +92,7 @@ const toTreeMapAdapter = () => {
             key: _itemKey,
             itemCaption: title,
             itemTime: option.time,
-            itemValue: total ? formatNumber(roundBy(total, 0)) : '',
+            itemValue: _crItemValue(total),
             dataSource: option.dataSource
           }
         }),
