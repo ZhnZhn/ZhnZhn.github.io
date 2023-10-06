@@ -13,10 +13,10 @@
   {"c":"Oil consumption in million metric tons (Mmt)","v":"oil-consumption-mt"},  
   {"c":"Oil production in 1k barrels per day (KBPD)","v":"oil-production-kbd"},
   {"c":"Oil production in million metric tons (Mmt)","v":"oil-production-mt"},  
-  {"c":"Nuclear energy consumption in exajoules (EJ)","v":"nuclear-energy-ej"},
-  {"c":"Hydroelectricity consumption in exajoules (EJ)","v":"hydro-ej"},
-  {"c":"Renewables energy consumption in exajoules (EJ)","v":"renewables-ej"},  
-  {"c":"Solar energy consumption in exajoules (EJ)","v":"solar-ej"},
-  {"c":"Wind energy consumption in exajoules (EJ)","v":"wind-ej"}
+  {"c":"Nuclear energy consumption in EJ, on input-equivalent basis","v":"nuclear-energy-ej"},
+  {"c":"Hydroelectricity consumption in EJ, on input-equivalent basis","v":"hydro-ej"},
+  {"c":"Renewables energy consumption in EJ, on input-equivalent basis","v":"renewables-ej"},  
+  {"c":"Solar energy consumption in EJ, on input-equivalent basis","v":"solar-ej"},
+  {"c":"Wind energy consumption in EJ, on input-equivalent basis","v":"wind-ej"}
  ]
 }
