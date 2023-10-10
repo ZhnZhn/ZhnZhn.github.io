@@ -10,7 +10,8 @@ import {
 } from '../../charts/configBuilderFn';
 
 import {
-  roundBy
+  roundBy,
+  joinBy
 } from '../AdapterFn';
 
 import {
@@ -19,6 +20,18 @@ import {
 
 const COLOR_FOSSIL_FUEL = "#658fb9"
 , COLOR_NOT_FOSSIL_FUEL = "#6ea3d7";
+
+const _isFossilFuel = (
+  label
+) => label === "Coal"
+ || label === "Natural gas"
+ || label === "Oil";
+
+const _crColor = (
+   label
+) => _isFossilFuel(label)
+  ? COLOR_FOSSIL_FUEL
+  : COLOR_NOT_FOSSIL_FUEL;
 
 const _sumByValue = (
   total,
@@ -35,13 +48,6 @@ const _crItemValue = (
   ? formatNumber(roundBy(total, total > 100 ? 0 : 2))
   : '';
 
-const _crColor = (
-  label
-) => label === "Coal"
- || label === "Natural gas"
- || label === "Oil"
- ? COLOR_FOSSIL_FUEL
- : COLOR_NOT_FOSSIL_FUEL;
 
 const _crData = (
   title,
@@ -67,6 +73,32 @@ const _crData = (
   });
 }
 
+const _crTotalToken = (
+  title,
+  value,
+  onePercent
+) => `${title} ${_crItemValue(value)} (${roundBy(value/onePercent, 0)}%)`
+
+const _crCaption = (
+  json,
+  option,
+  total
+) => {
+  const _arrTotal = json.data.reduce((arrTotal, {label, value}) => {
+    arrTotal[_isFossilFuel(label) ? 0 : 1] += value
+    return arrTotal;
+  }, [0, 0])
+  , _onePercent = total/100
+  , _titleF = _crTotalToken("Fossil Fuels", _arrTotal[0], _onePercent)
+  , _titleNf =  _crTotalToken('Not Fossil Fuels', _arrTotal[1], _onePercent);
+  return [
+    joinBy(": ", option.title, option.dfTmTitle),
+    _arrTotal[0] > _arrTotal[1]
+       ? `${_titleF}, ${_titleNf}`
+       : `${_titleNf}, ${_titleF}`
+  ];
+}
+
 const toTreeMapAdapter = () => {
   const adapter = {
     toConfig: (json, option) => {
@@ -75,16 +107,19 @@ const toTreeMapAdapter = () => {
       } = json
       , {
         _itemKey,
-        title,
-        dfTmTitle
+        title
       } = option
-      , total = _crTotal(data);
+      , total = _crTotal(data)
+      , [
+        captionTitle,
+        captionSubtitle
+      ] = _crCaption(json, option, total);
 
       return { config: pipe(
         crTreeMapConfig(_crData(title, data, total)),
         fAddCaption(
-          title,
-          dfTmTitle
+          captionTitle,
+          captionSubtitle
         ),
         fAdd({
           zhConfig: {
