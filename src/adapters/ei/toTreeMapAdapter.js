@@ -10,6 +10,7 @@ import {
 } from '../../charts/configBuilderFn';
 
 import {
+  isNumber,
   roundBy,
   joinBy
 } from '../AdapterFn';
@@ -33,64 +34,152 @@ const _crColor = (
   ? COLOR_FOSSIL_FUEL
   : COLOR_NOT_FOSSIL_FUEL;
 
-const _sumByValue = (
+const _fSumBy = (propName) => (
   total,
   item
-) => total + item.value;
-
-const _crTotal = (
+) => total + item[propName]
+, _sumByValue = _fSumBy('value')
+, _sumByPerc = _fSumBy('_perc')
+, _fCrTotal = (sumBy) => (
   data
-) => data.reduce(_sumByValue, 0);
+) => data.reduce(sumBy, 0)
+, _crTotalValue = _fCrTotal(_sumByValue)
+, _crTotalPerc = _fCrTotal(_sumByPerc);
 
-const _crItemValue = (
-  total
-) => total
-  ? formatNumber(roundBy(total, total > 100 ? 0 : 2))
-  : '';
-
-
-const _crData = (
-  title,
-  data,
-  total
+const _crTotalConfig = (
+  data
 ) => {
-  const _onePercent = total/100
-  , _rt = _onePercent > 1 ? 0 : 2;
+  const total = _crTotalValue(data)
+  , onePercent = total/100
+  , _totalRt = onePercent > 1 ? 0 : 2
+  , _total = roundBy(total, _totalRt)
+  , _onePercent = _total/100;
+  return [
+    _total,
+    _totalRt,
+    _onePercent
+  ];
+};
+
+const _crItemRt = (
+  value,
+  rt
+) => value >= 10
+  ? rt
+  : value >= 0.01
+      ? 2
+      : value >= 0.0001
+          ? 4
+          : 6;
+
+const _crValue = (
+  value,
+  totalRt
+) => roundBy(value, _crItemRt(value, totalRt));
+
+const _crDataImpl = (
+  data,
+  option,
+  totalRt,
+  onePercent,
+  percRt
+) => {
+  const { title } = option;
   return data.map(item => {
     const {
       value,
       label
     } = item
-    , _value = roundBy(value, _rt)
-    , _percent = roundBy(value/_onePercent, 0);
+    , _value = _crValue(value, totalRt)
+    , _percent = roundBy(value/onePercent, percRt);
     return {
       color: _crColor(label),
       value: _value,
+      _value: value,
+      _perc: _percent,
       title: domSanitize(title),
+      _label: domSanitize(label),
       label: domSanitize(`${label} (${_percent}%)`),
       name: domSanitize(`${label}<br/><span class="${CL_TREE_MAP_PERCENT_BLACK}">${formatNumber(_value)} (${_percent}%)</span>`)
     };
   });
 }
 
+const _crData = (
+  ...args
+) => {
+  const _data = _crDataImpl(...args, 0);
+  return _crTotalPerc(_data) === 100
+    ? _data
+    : _crDataImpl(...args, 1);
+};
+
 const _crTotalToken = (
   title,
   value,
-  onePercent
-) => `${title} ${_crItemValue(value)} (${roundBy(value/onePercent, 0)}%)`
+  perc
+) => `${title} ${formatNumber(value)} (${perc}%)`
+
+const _crSubTotalRt = (
+  value,
+  rt
+) => isNumber(rt)
+  ? _crItemRt(value, rt)
+  : 0;
+
+const _crRoundedSubTotal = (
+  v1,
+  v2,
+  total,
+  totalRt
+) => {
+  const _rtFf = _crSubTotalRt(v1, totalRt)
+  , _rtNff = _crSubTotalRt(v2, totalRt)
+  , _ffTotal = roundBy(v1, _rtFf)
+  , _nffTotal = roundBy(v2, _rtNff);
+  return _ffTotal + _nffTotal > total
+    ? [
+        roundBy(v1, _rtFf + 1),
+        roundBy(v2, _rtNff + 1)
+      ]
+    : [
+      _ffTotal,
+      _nffTotal
+    ];
+};
 
 const _crCaption = (
-  json,
+  data,
   option,
-  total
+  total,
+  totalRt,
+  onePercent
 ) => {
-  const _arrTotal = json.data.reduce((arrTotal, {label, value}) => {
-    arrTotal[_isFossilFuel(label) ? 0 : 1] += value
-    return arrTotal;
+  const _arrTotal = data
+    .reduce((arrTotal, {_label, _value}) => {
+       const _isFf = _isFossilFuel(_label);
+       arrTotal[_isFf ? 0 : 1] += _value
+       return arrTotal;
   }, [0, 0])
-  , _onePercent = total/100
-  , _titleF = _crTotalToken("Fossil Fuels", _arrTotal[0], _onePercent)
-  , _titleNf =  _crTotalToken('Not Fossil Fuels', _arrTotal[1], _onePercent);
+  , [
+    ffTotal,
+    nffTotal
+  ] = _crRoundedSubTotal(
+    _arrTotal[0],
+    _arrTotal[1],
+    total,
+    totalRt
+  )
+  , [
+    ffPerc,
+    nffPerc
+  ] = _crRoundedSubTotal(
+    ffTotal/onePercent,
+    nffTotal/onePercent,
+    100
+  )
+  , _titleF = _crTotalToken("Fossil Fuels", ffTotal, ffPerc)
+  , _titleNf =  _crTotalToken('Not Fossil Fuels', nffTotal, nffPerc);
   return [
     joinBy(": ", option.title, option.dfTmTitle),
     _arrTotal[0] > _arrTotal[1]
@@ -99,24 +188,41 @@ const _crCaption = (
   ];
 }
 
+const _getData = (
+  json
+) => (json || {}).data || [];
+
 const toTreeMapAdapter = () => {
   const adapter = {
     toConfig: (json, option) => {
-      const {
-        data
-      } = json
+      const data = _getData(json)
       , {
-        _itemKey,
-        title
+        _itemKey
       } = option
-      , total = _crTotal(data)
+      , [
+        _total,
+        _totalRt,
+        _onePercent
+      ] = _crTotalConfig(data)
+      , _data = _crData(
+        data,
+        option,
+        _totalRt,
+        _onePercent
+      )
       , [
         captionTitle,
         captionSubtitle
-      ] = _crCaption(json, option, total);
+      ] = _crCaption(
+        _data,
+        option,
+        _total,
+        _totalRt,
+        _onePercent
+      );
 
       return { config: pipe(
-        crTreeMapConfig(_crData(title, data, total)),
+        crTreeMapConfig(_data),
         fAddCaption(
           captionTitle,
           captionSubtitle
@@ -125,9 +231,9 @@ const toTreeMapAdapter = () => {
           zhConfig: {
             id: _itemKey,
             key: _itemKey,
-            itemCaption: title,
+            itemCaption: option.title,
             itemTime: option.time,
-            itemValue: _crItemValue(total),
+            itemValue: formatNumber(_total),
             dataSource: option.dataSource
           }
         }),
