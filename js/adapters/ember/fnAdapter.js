@@ -13,15 +13,14 @@ exports.roundBy = _AdapterFn.roundBy;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 const getCountryName = item => item.country_code ? item.country_or_region || '' : '';
 exports.getCountryName = getCountryName;
-const _getItems = options => options.items;
-const getGeoCaption = options => (0, _AdapterFn.getCaption)(_getItems(options)[0]);
-exports.getGeoCaption = getGeoCaption;
-const getSourceValue = options => (0, _AdapterFn.getValue)(_getItems(options)[1]);
-exports.getSourceValue = getSourceValue;
-const getMetricCaption = options => (0, _AdapterFn.getCaption)(_getItems(options)[2]);
-exports.getMetricCaption = getMetricCaption;
-const getMetricValue = options => (0, _AdapterFn.getValue)(_getItems(options)[2]);
-exports.getMetricValue = getMetricValue;
+const _getItems = options => options.items,
+  _fGetItemsBy = fn => itemIndex => options => fn(_getItems(options)[itemIndex]),
+  _fGetItemsCaptionBy = _fGetItemsBy(_AdapterFn.getCaption),
+  _fGetItemsValueBy = _fGetItemsBy(_AdapterFn.getValue);
+const getGeoCaption = exports.getGeoCaption = _fGetItemsCaptionBy(0);
+const getSourceValue = exports.getSourceValue = _fGetItemsValueBy(1);
+const getMetricCaption = exports.getMetricCaption = _fGetItemsCaptionBy(2);
+const getMetricValue = exports.getMetricValue = _fGetItemsValueBy(2);
 const SOURCE_TOTAL = 'Total';
 const isTotalData = source => source === SOURCE_TOTAL;
 exports.isTotalData = isTotalData;

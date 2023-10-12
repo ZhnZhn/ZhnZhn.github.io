@@ -21,22 +21,17 @@ export const getCountryName = (
   ? item.country_or_region || ''
   : ''
 
-const _getItems = options => options.items;
-export const getGeoCaption = (
-  options
-) => getCaption(_getItems(options)[0])
+const _getItems = options => options.items
+, _fGetItemsBy = (fn) => (
+  itemIndex
+) => (options) => fn(_getItems(options)[itemIndex])
+, _fGetItemsCaptionBy = _fGetItemsBy(getCaption)
+, _fGetItemsValueBy = _fGetItemsBy(getValue);
 
-export const getSourceValue = (
-  options
-) => getValue(_getItems(options)[1])
-
-export const getMetricCaption = (
-  options
-) => getCaption(_getItems(options)[2])
-export const getMetricValue = (
-  options
-) => getValue(_getItems(options)[2])
-
+export const getGeoCaption = _fGetItemsCaptionBy(0)
+export const getSourceValue = _fGetItemsValueBy(1)
+export const getMetricCaption = _fGetItemsCaptionBy(2)
+export const getMetricValue = _fGetItemsValueBy(2)
 
 const SOURCE_TOTAL = 'Total';
 export const isTotalData = (
