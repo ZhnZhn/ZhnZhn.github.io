@@ -127,6 +127,10 @@ const _crSubTotalRt = (
   : 0;
 
 const _crSubValue = v => isNumber(v) ? v : 0;
+const _isZeroValueCase = (
+  v,
+  sum
+) => sum === 0 && v !== 0;
 export const crRoundedSubTotal = (
   v1,
   v2,
@@ -140,13 +144,15 @@ export const crRoundedSubTotal = (
   , _sum1 = roundBy(_v1, _rt1)
   , _sum2 = roundBy(_v2, _rt2);
   return _sum1 + _sum2 > total
+    || _isZeroValueCase(_v1, _sum1)
+    || _isZeroValueCase(_v2, _sum2)
     ? [
-        roundBy(_v1, _rt1 + 1),
-        roundBy(_v2, _rt2 + 1)
-      ]
+      roundBy(_v1, _rt1 + 1),
+      roundBy(_v2, _rt2 + 1)
+    ]
     : [
-      _sum1,
-      _sum2
+    _sum1,
+    _sum2
     ];
 };
 

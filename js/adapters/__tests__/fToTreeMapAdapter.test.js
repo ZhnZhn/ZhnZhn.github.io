@@ -14,7 +14,7 @@ describe("crRoundedSubTotal", () => {
 
     //SAU-2022 the EI Primary energy consumption in EJ
     expect(fn(11.488093727999999, 0.007856192, 11.5, 2)).toEqual([11.49, 0.0079]);
-    expect(fn(99.91304347826086, 0.06869565217391305, 100)).toEqual([100, 0]);
+    expect(fn(99.91304347826086, 0.06869565217391305, 100)).toEqual([99.9, 0.1]);
 
     //WLD-2022 the EI Primary energy consumption in EJ
     expect(fn(494.0520245, 109.98362934, 604, 0)).toEqual([494, 110]);
