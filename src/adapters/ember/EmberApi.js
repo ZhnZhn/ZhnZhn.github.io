@@ -3,8 +3,9 @@ import {
   isCategory,
   isArr,
   crError,
-  getCaption,
-  getValue,
+  getGeoCaption,
+  getMetricCaption,
+  getSourceValue,
   isTotalData
 } from './fnAdapter';
 
@@ -22,11 +23,11 @@ const _fCrProperty = (suffix) => (
 
 // geo, _sourceQuery
 const _crQueryParams = (
-  items
+  options
 ) => {
-  const source = getValue(items[1]);
+  const source = getSourceValue(options);
   return [
-    getCaption(items[0]),
+    getGeoCaption(options),
     isTotalData(source)
       ? ''
       : `&${_crExactProperty('variable', source)}`
@@ -37,13 +38,10 @@ const _crUrl = (
   pathToken,
   options
 ) => {
-  const {
-    items
-  } = options
-  , [
+  const [
     geo,
     sourceQuery
-  ] = _crQueryParams(items);
+  ] = _crQueryParams(options);
 
   return `${API_URL}/${pathToken}?${_crExactProperty('country_or_region', geo)}${QUERY_TAIL}${sourceQuery}`;
 }
@@ -58,7 +56,7 @@ const _crCategoryUrl = (
   if (isMonthlyRoute) {
     options.time = options.time + '-01'
   }
-  const _sourceQuery = _crQueryParams(options.items)[1]
+  const _sourceQuery = _crQueryParams(options)[1]
   , _queryTail = `${QUERY_TAIL}${_sourceQuery}`
   , _date = options.time;
 
@@ -72,8 +70,8 @@ const _crTreeMapUrl = (
   options
 ) => {
   const _date = options.time
-  , geo = _crQueryParams(options.items)[0];
-  options.dfTmTitle = getCaption(options.items[2])
+  , geo = _crQueryParams(options)[0];
+  options.dfTmTitle = getMetricCaption(options)
   return `${API_URL}/${YEARLY_JSON}?${_crExactProperty(YEAR, _date)}&${_crExactProperty('country_or_region', geo)}${QUERY_TAIL}`;
 }
 

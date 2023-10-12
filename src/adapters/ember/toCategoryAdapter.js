@@ -7,7 +7,8 @@ import {
   isTotalData,
   getCountryName,
   reduceToHmBy,
-  getValue,
+  getSourceValue,
+  getMetricValue,
   roundBy
 } from './fnAdapter';
 
@@ -46,9 +47,8 @@ const _getObjectKeys = Object.keys
   json,
   options
 ) => {
-  const { items } = options
-  , pnMetric = getValue(items[1])
-  , source = getValue(items[2]);
+  const source = getSourceValue(options)
+  , pnMetric = getMetricValue(options);
   return sortDescByPnY(
     isTotalData(source)
       ? _crTotalData(json, pnMetric)

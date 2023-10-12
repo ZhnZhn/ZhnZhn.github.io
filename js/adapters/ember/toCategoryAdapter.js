@@ -26,14 +26,10 @@ const _getObjectKeys = Object.keys,
     return data;
   }, []),
   _crData = (json, options) => {
-    const {
-        items
-      } = options,
-      pnMetric = (0, _fnAdapter.getValue)(items[1]),
-      source = (0, _fnAdapter.getValue)(items[2]);
+    const source = (0, _fnAdapter.getSourceValue)(options),
+      pnMetric = (0, _fnAdapter.getMetricValue)(options);
     return (0, _compareByFn.sortDescByPnY)((0, _fnAdapter.isTotalData)(source) ? _crTotalData(json, pnMetric) : _crSourceData(json, pnMetric));
   },
   toCategoryAdapter = (0, _crAdapterCategory.default)(_crData);
-var _default = toCategoryAdapter;
-exports.default = _default;
+var _default = exports.default = toCategoryAdapter;
 //# sourceMappingURL=toCategoryAdapter.js.map
