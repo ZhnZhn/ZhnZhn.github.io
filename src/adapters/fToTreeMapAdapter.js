@@ -126,24 +126,27 @@ const _crSubTotalRt = (
   ? _crItemRt(value, rt)
   : 0;
 
+const _crSubValue = v => isNumber(v) ? v : 0;
 export const crRoundedSubTotal = (
   v1,
   v2,
   total,
   totalRt
 ) => {
-  const _rtFf = _crSubTotalRt(v1, totalRt)
-  , _rtNff = _crSubTotalRt(v2, totalRt)
-  , _ffTotal = roundBy(v1, _rtFf)
-  , _nffTotal = roundBy(v2, _rtNff);
-  return _ffTotal + _nffTotal > total
+  const _v1 = _crSubValue(v1)
+  , _v2 = _crSubValue(v2)
+  , _rt1 = _crSubTotalRt(_v1, totalRt)
+  , _rt2 = _crSubTotalRt(_v2, totalRt)
+  , _sum1 = roundBy(_v1, _rt1)
+  , _sum2 = roundBy(_v2, _rt2);
+  return _sum1 + _sum2 > total
     ? [
-        roundBy(v1, _rtFf + 1),
-        roundBy(v2, _rtNff + 1)
+        roundBy(_v1, _rt1 + 1),
+        roundBy(_v2, _rt2 + 1)
       ]
     : [
-      _ffTotal,
-      _nffTotal
+      _sum1,
+      _sum2
     ];
 };
 
@@ -221,6 +224,7 @@ export const fToTreeMapAdapter = (
         _totalRt,
         _onePercent
       );
+
       return { config: pipe(
         crTreeMapConfig(_data),
         fAddCaption(

@@ -59,12 +59,15 @@ const _crData = function () {
 };
 const _crTotalToken = (title, value, perc) => title + " " + (0, _formatNumber.default)(value, true) + " (" + perc + "%)";
 const _crSubTotalRt = (value, rt) => (0, _AdapterFn.isNumber)(rt) ? _crItemRt(value, rt) : 0;
+const _crSubValue = v => (0, _AdapterFn.isNumber)(v) ? v : 0;
 const crRoundedSubTotal = (v1, v2, total, totalRt) => {
-  const _rtFf = _crSubTotalRt(v1, totalRt),
-    _rtNff = _crSubTotalRt(v2, totalRt),
-    _ffTotal = (0, _AdapterFn.roundBy)(v1, _rtFf),
-    _nffTotal = (0, _AdapterFn.roundBy)(v2, _rtNff);
-  return _ffTotal + _nffTotal > total ? [(0, _AdapterFn.roundBy)(v1, _rtFf + 1), (0, _AdapterFn.roundBy)(v2, _rtNff + 1)] : [_ffTotal, _nffTotal];
+  const _v1 = _crSubValue(v1),
+    _v2 = _crSubValue(v2),
+    _rt1 = _crSubTotalRt(_v1, totalRt),
+    _rt2 = _crSubTotalRt(_v2, totalRt),
+    _sum1 = (0, _AdapterFn.roundBy)(_v1, _rt1),
+    _sum2 = (0, _AdapterFn.roundBy)(_v2, _rt2);
+  return _sum1 + _sum2 > total ? [(0, _AdapterFn.roundBy)(_v1, _rt1 + 1), (0, _AdapterFn.roundBy)(_v2, _rt2 + 1)] : [_sum1, _sum2];
 };
 exports.crRoundedSubTotal = crRoundedSubTotal;
 const _crCaption = (data, option, total, totalRt, onePercent) => {
