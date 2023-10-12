@@ -24,28 +24,47 @@ const _isChartTypeT3AB = (
   chartType
 ) => chartType && chartType.id === TYPE_T3AB;
 
+const _isItemDf = () => true
+
+const _crMsgs = (
+  items,
+  selectProps,
+  msgOnNotSelected,
+  fromIndex,
+  isItem = _isItemDf
+) => {
+  const msgs = [];
+  let i = fromIndex;
+  for(; i<selectProps.length; i++) {
+    if (isItem(i) && !items[i]) {
+      msgs.push(msgOnNotSelected(
+        _geSelectPropsCaption(selectProps, i))
+      )
+    }
+  }
+  return msgs;
+}
+
 export const crMsgs = (
   chartType,
   items,
   selectProps,
   msgOnNotSelected
 ) => {
-  const msgs = [];
   if (_isChartTypeT3AB(chartType)) {
-    if (!items[0]) {
-      msgs.push(msgOnNotSelected(
-        _geSelectPropsCaption(selectProps, 0)
-      ))
-    }
+    return _crMsgs(
+      items,
+      selectProps,
+      msgOnNotSelected,
+      0,
+      i => i !== 1
+    )
   } else {
-    let i = isCategoryItem(chartType) ? 1 : 0;
-    for(; i<selectProps.length; i++) {
-      if (!items[i]) {
-        msgs.push(msgOnNotSelected(
-          _geSelectPropsCaption(selectProps, i))
-        )
-      }
-    }
+    return _crMsgs(
+      items,
+      selectProps,
+      msgOnNotSelected,
+      isCategoryItem(chartType) ? 1 : 0
+    )
   }
-  return msgs;
 }
