@@ -30,41 +30,29 @@ const _crMsgs = (
   items,
   selectProps,
   msgOnNotSelected,
-  fromIndex,
   isItem = _isItemDf
-) => {
-  const msgs = [];
-  let i = fromIndex;
-  for(; i<selectProps.length; i++) {
+) => selectProps
+ .reduce((msgs, _, i) => {
     if (isItem(i) && !items[i]) {
       msgs.push(msgOnNotSelected(
         _geSelectPropsCaption(selectProps, i))
       )
     }
-  }
-  return msgs;
-}
+    return msgs;
+  }, []);
 
 export const crMsgs = (
   chartType,
   items,
   selectProps,
   msgOnNotSelected
-) => {
-  if (_isChartTypeT3AB(chartType)) {
-    return _crMsgs(
-      items,
-      selectProps,
-      msgOnNotSelected,
-      0,
-      i => i !== 1
-    )
-  } else {
-    return _crMsgs(
-      items,
-      selectProps,
-      msgOnNotSelected,
-      isCategoryItem(chartType) ? 1 : 0
-    )
-  }
-}
+) => _crMsgs(
+  items,
+  selectProps,
+  msgOnNotSelected,
+  _isChartTypeT3AB(chartType)
+    ? i => i !== 1
+    : isCategoryItem(chartType)
+       ? i => i !== 0
+       : void 0
+)
