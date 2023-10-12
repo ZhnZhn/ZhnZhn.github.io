@@ -6,9 +6,17 @@ const _isNumber = n => typeof n === 'number'
 const _isNumberInRange = (v, min, max) => v > min
  && v < max;
 
-const _crPrecision = value => {
+const _findPrecision = (
+  value
+) => {
   const _strDecimal = (''+value).split('.')[1]
-  , _len = _strDecimal ? _strDecimal.length : 0;
+  return _strDecimal
+    ? _strDecimal.length
+    : 0;
+}
+
+const _crPrecision = value => {
+  const _len = _findPrecision(value);
   if (_isNumberInRange(value, -1, 1)) {
     return _len < 5 ? _len : 4;
   }
@@ -17,14 +25,16 @@ const _crPrecision = value => {
     : 0;
 }
 
-const formatNumber = function(value){
+const formatNumber = (value, isSamePrecision) => {
   if (!_isNumber(value)) {
     return '0.00';
   }
   if (_isNumberInRange(value, -0.01, 0.01)) {
     return ''+value;
   }
-  const _decimal = _crPrecision(value);
+  const _decimal = isSamePrecision
+    ? _findPrecision(value)
+    : _crPrecision(value);
   return Highcharts
     .numberFormat(value, _decimal, '.', ' ');
 };

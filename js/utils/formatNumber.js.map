@@ -1,1 +1,34 @@
-{"version":3,"sources":["../../src/utils/formatNumber.js"],"names":["_isNumber","n","_isNumberInRange","v","min","max","_crPrecision","value","_strDecimal","split","_len","length","formatNumber","_decimal","Highcharts","numberFormat"],"mappings":";;;;;;;AAAA;;AAEA,IAAMA,SAAS,GAAG,SAAZA,SAAY,CAAAC,CAAC;AAAA,SAAI,OAAOA,CAAP,KAAa,QAAb,IAClBA,CAAC,GAAGA,CAAJ,KAAU,CADI;AAAA,CAAnB;;AAGA,IAAMC,gBAAgB,GAAG,SAAnBA,gBAAmB,CAACC,CAAD,EAAIC,GAAJ,EAASC,GAAT;AAAA,SAAiBF,CAAC,GAAGC,GAAJ,IACtCD,CAAC,GAAGE,GADiB;AAAA,CAAzB;;AAGA,IAAMC,YAAY,GAAG,SAAfA,YAAe,CAAAC,KAAK,EAAI;AAC5B,MAAMC,WAAW,GAAG,CAAC,KAAGD,KAAJ,EAAWE,KAAX,CAAiB,GAAjB,EAAsB,CAAtB,CAApB;AAAA,MACEC,IAAI,GAAGF,WAAW,GAAGA,WAAW,CAACG,MAAf,GAAwB,CAD5C;;AAEA,MAAIT,gBAAgB,CAACK,KAAD,EAAQ,CAAC,CAAT,EAAY,CAAZ,CAApB,EAAoC;AAClC,WAAOG,IAAI,GAAG,CAAP,GAAWA,IAAX,GAAkB,CAAzB;AACD;;AACD,SAAOR,gBAAgB,CAACK,KAAD,EAAQ,CAAC,MAAT,EAAiB,MAAjB,CAAhB,GACHG,IAAI,GAAG,CAAP,GAAWA,IAAX,GAAkB,CADf,GAEH,CAFJ;AAGD,CATD;;AAWA,IAAME,YAAY,GAAG,SAAfA,YAAe,CAASL,KAAT,EAAe;AAClC,MAAI,CAACP,SAAS,CAACO,KAAD,CAAd,EAAuB;AACrB,WAAO,MAAP;AACD;;AACD,MAAIL,gBAAgB,CAACK,KAAD,EAAQ,CAAC,IAAT,EAAe,IAAf,CAApB,EAA0C;AACxC,WAAO,KAAGA,KAAV;AACD;;AACD,MAAMM,QAAQ,GAAGP,YAAY,CAACC,KAAD,CAA7B;;AACA,SAAOO,uBACJC,YADI,CACSR,KADT,EACgBM,QADhB,EAC0B,GAD1B,EAC+B,GAD/B,CAAP;AAED,CAVD;;eAYeD,Y","sourcesContent":["import Highcharts from 'highcharts'\r\n\r\nconst _isNumber = n => typeof n === 'number'\r\n && (n - n === 0);\r\n\r\nconst _isNumberInRange = (v, min, max) => v > min\r\n && v < max;\r\n\r\nconst _crPrecision = value => {\r\n  const _strDecimal = (''+value).split('.')[1]\r\n  , _len = _strDecimal ? _strDecimal.length : 0;\r\n  if (_isNumberInRange(value, -1, 1)) {\r\n    return _len < 5 ? _len : 4;\r\n  }\r\n  return _isNumberInRange(value, -100000, 100000)\r\n    ? _len < 3 ? _len : 2\r\n    : 0;\r\n}\r\n\r\nconst formatNumber = function(value){\r\n  if (!_isNumber(value)) {\r\n    return '0.00';\r\n  }\r\n  if (_isNumberInRange(value, -0.01, 0.01)) {\r\n    return ''+value;\r\n  }\r\n  const _decimal = _crPrecision(value);\r\n  return Highcharts\r\n    .numberFormat(value, _decimal, '.', ' ');\r\n};\r\n\r\nexport default formatNumber\r\n"],"file":"formatNumber.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/formatNumber.js"
+ ],
+ "file": "../../src/utils/formatNumber.js",
+ "names": [
+  "_highcharts",
+  "_interopRequireDefault",
+  "require",
+  "_isNumber",
+  "n",
+  "_isNumberInRange",
+  "v",
+  "min",
+  "max",
+  "_findPrecision",
+  "value",
+  "_strDecimal",
+  "split",
+  "length",
+  "_crPrecision",
+  "_len",
+  "formatNumber",
+  "isSamePrecision",
+  "_decimal",
+  "Highcharts",
+  "numberFormat",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,WAAA,GAAAC,sBAAA,CAAAC,OAAA;AAEA,MAAMC,SAAS,GAAGC,CAAC,IAAI,OAAOA,CAAC,KAAK,QAAQ,IACvCA,CAAC,GAAGA,CAAC,KAAK,CAAE;AAEjB,MAAMC,gBAAgB,GAAGA,CAACC,CAAC,EAAEC,GAAG,EAAEC,GAAG,KAAKF,CAAC,GAAGC,GAAG,IAC7CD,CAAC,GAAGE,GAAG;AAEX,MAAMC,cAAc,GAClBC,KAAK,IACF;EACH,MAAMC,WAAW,GAAG,CAAC,EAAE,GAACD,KAAK,EAAEE,KAAK,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;EAC5C,OAAOD,WAAW,GACdA,WAAW,CAACE,MAAM,GAClB,CAAC;AACP,CAAC;AAED,MAAMC,YAAY,GAAGJ,KAAK,IAAI;EAC5B,MAAMK,IAAI,GAAGN,cAAc,CAACC,KAAK,CAAC;EAClC,IAAIL,gBAAgB,CAACK,KAAK,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE;IAClC,OAAOK,IAAI,GAAG,CAAC,GAAGA,IAAI,GAAG,CAAC;EAC5B;EACA,OAAOV,gBAAgB,CAACK,KAAK,EAAE,CAAC,MAAM,EAAE,MAAM,CAAC,GAC3CK,IAAI,GAAG,CAAC,GAAGA,IAAI,GAAG,CAAC,GACnB,CAAC;AACP,CAAC;AAED,MAAMC,YAAY,GAAGA,CAACN,KAAK,EAAEO,eAAe,KAAK;EAC/C,IAAI,CAACd,SAAS,CAACO,KAAK,CAAC,EAAE;IACrB,OAAO,MAAM;EACf;EACA,IAAIL,gBAAgB,CAACK,KAAK,EAAE,CAAC,IAAI,EAAE,IAAI,CAAC,EAAE;IACxC,OAAO,EAAE,GAACA,KAAK;EACjB;EACA,MAAMQ,QAAQ,GAAGD,eAAe,GAC5BR,cAAc,CAACC,KAAK,CAAC,GACrBI,YAAY,CAACJ,KAAK,CAAC;EACvB,OAAOS,mBAAU,CACdC,YAAY,CAACV,KAAK,EAAEQ,QAAQ,EAAE,GAAG,EAAE,GAAG,CAAC;AAC5C,CAAC;AAAC,IAAAG,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaP,YAAY"
+}
