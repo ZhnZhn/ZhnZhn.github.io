@@ -13,7 +13,7 @@ const _fCrProperty = suffix => (name, value) => name + "__" + suffix + "=" + val
 
 // geo, _sourceQuery
 const _crQueryParams = items => {
-  const source = (0, _fnAdapter.getValue)(items[2]);
+  const source = (0, _fnAdapter.getValue)(items[1]);
   return [(0, _fnAdapter.getCaption)(items[0]), (0, _fnAdapter.isTotalData)(source) ? '' : "&" + _crExactProperty('variable', source)];
 };
 const _crUrl = (pathToken, options) => {
@@ -25,20 +25,26 @@ const _crUrl = (pathToken, options) => {
 };
 const DATE = 'date',
   YEAR = 'year';
+const _crCategoryUrl = (isMonthlyRoute, options) => {
+  if (isMonthlyRoute) {
+    options.time = options.time + '-01';
+  }
+  const _sourceQuery = _crQueryParams(options.items)[1],
+    _queryTail = "" + QUERY_TAIL + _sourceQuery,
+    _date = options.time;
+  return isMonthlyRoute ? API_URL + "/" + MONTHLY_JSON + "?" + _crExactProperty(DATE, _date) + _queryTail : API_URL + "/" + YEARLY_JSON + "?" + _crExactProperty(YEAR, _date) + _queryTail;
+};
+const _crTreeMapUrl = (isMonthlyRoute, options) => {
+  const _date = options.time,
+    geo = _crQueryParams(options.items)[0];
+  options.dfTmTitle = (0, _fnAdapter.getCaption)(options.items[2]);
+  return API_URL + "/" + YEARLY_JSON + "?" + _crExactProperty(YEAR, _date) + "&" + _crExactProperty('country_or_region', geo) + QUERY_TAIL;
+};
 const EmberApi = {
   getRequestUrl(options) {
     const _isMonthlyRoute = options.dfRId === 'M';
     options.pnDate = _isMonthlyRoute ? DATE : YEAR;
-    if ((0, _fnAdapter.isCategory)(options.seriaType)) {
-      if (_isMonthlyRoute) {
-        options.time = options.time + '-01';
-      }
-      const _sourceQuery = _crQueryParams(options.items)[1],
-        _queryTail = "" + QUERY_TAIL + _sourceQuery,
-        _date = options.time;
-      return _isMonthlyRoute ? API_URL + "/" + MONTHLY_JSON + "?" + _crExactProperty(DATE, _date) + _queryTail : API_URL + "/" + YEARLY_JSON + "?" + _crExactProperty(YEAR, _date) + _queryTail;
-    }
-    return _isMonthlyRoute ? _crUrl(MONTHLY_JSON, options) + "&" + _crGteProperty(DATE, options.fromDate) : _crUrl(YEARLY_JSON, options);
+    return (0, _fnAdapter.isTreeMap)(options.seriaType) ? _crTreeMapUrl(_isMonthlyRoute, options) : (0, _fnAdapter.isCategory)(options.seriaType) ? _crCategoryUrl(_isMonthlyRoute, options) : _isMonthlyRoute ? _crUrl(MONTHLY_JSON, options) + "&" + _crGteProperty(DATE, options.fromDate) : _crUrl(YEARLY_JSON, options);
   },
   checkResponse(json) {
     if (!(0, _fnAdapter.isArr)(json)) {
@@ -46,6 +52,5 @@ const EmberApi = {
     }
   }
 };
-var _default = EmberApi;
-exports.default = _default;
+var _default = exports.default = EmberApi;
 //# sourceMappingURL=EmberApi.js.map

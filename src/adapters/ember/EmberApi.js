@@ -1,4 +1,5 @@
 import {
+  isTreeMap,
   isCategory,
   isArr,
   crError,
@@ -23,7 +24,7 @@ const _fCrProperty = (suffix) => (
 const _crQueryParams = (
   items
 ) => {
-  const source = getValue(items[2]);
+  const source = getValue(items[1]);
   return [
     getCaption(items[0]),
     isTotalData(source)
@@ -41,14 +42,40 @@ const _crUrl = (
   } = options
   , [
     geo,
-   sourceQuery
- ] = _crQueryParams(items);
+    sourceQuery
+  ] = _crQueryParams(items);
 
   return `${API_URL}/${pathToken}?${_crExactProperty('country_or_region', geo)}${QUERY_TAIL}${sourceQuery}`;
 }
 
 const DATE = 'date'
 , YEAR = 'year';
+
+const _crCategoryUrl = (
+  isMonthlyRoute,
+  options
+) => {
+  if (isMonthlyRoute) {
+    options.time = options.time + '-01'
+  }
+  const _sourceQuery = _crQueryParams(options.items)[1]
+  , _queryTail = `${QUERY_TAIL}${_sourceQuery}`
+  , _date = options.time;
+
+  return isMonthlyRoute
+    ? `${API_URL}/${MONTHLY_JSON}?${_crExactProperty(DATE, _date)}${_queryTail}`
+    : `${API_URL}/${YEARLY_JSON}?${_crExactProperty(YEAR, _date)}${_queryTail}`;
+}
+
+const _crTreeMapUrl = (
+  isMonthlyRoute,
+  options
+) => {
+  const _date = options.time
+  , geo = _crQueryParams(options.items)[0];
+  options.dfTmTitle = getCaption(options.items[2])
+  return `${API_URL}/${YEARLY_JSON}?${_crExactProperty(YEAR, _date)}&${_crExactProperty('country_or_region', geo)}${QUERY_TAIL}`;
+}
 
 const EmberApi = {
   getRequestUrl(options) {
@@ -58,22 +85,13 @@ const EmberApi = {
       ? DATE
       : YEAR;
 
-    if (isCategory(options.seriaType)) {
-      if (_isMonthlyRoute) {
-        options.time = options.time + '-01'
-      }
-      const _sourceQuery = _crQueryParams(options.items)[1]
-      , _queryTail = `${QUERY_TAIL}${_sourceQuery}`
-      , _date = options.time;
-
-      return _isMonthlyRoute
-        ? `${API_URL}/${MONTHLY_JSON}?${_crExactProperty(DATE, _date)}${_queryTail}`
-        : `${API_URL}/${YEARLY_JSON}?${_crExactProperty(YEAR, _date)}${_queryTail}`;
-    }
-
-    return _isMonthlyRoute
-      ? `${_crUrl(MONTHLY_JSON, options)}&${_crGteProperty(DATE, options.fromDate)}`
-      : _crUrl(YEARLY_JSON, options);
+    return isTreeMap(options.seriaType)
+      ? _crTreeMapUrl(_isMonthlyRoute, options)
+      : isCategory(options.seriaType)
+         ? _crCategoryUrl(_isMonthlyRoute, options)
+         : _isMonthlyRoute
+            ? `${_crUrl(MONTHLY_JSON, options)}&${_crGteProperty(DATE, options.fromDate)}`
+            : _crUrl(YEARLY_JSON, options);
   },
 
   checkResponse(json) {
