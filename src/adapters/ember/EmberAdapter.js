@@ -4,12 +4,15 @@ import {
   compareByDate
 } from '../compareByFn';
 import toCategoryAdapter from './toCategoryAdapter';
+import crToTreeMapAdapter from './crToTreeMapAdapter';
 
 import {
   isTotalVariable,
+  isTreeMap,
   isCategory,
   ymdToUTC,
-  getValue,
+  getSourceValue,
+  getMetricValue,
   reduceToHmBy,
   isTotalData
 } from './fnAdapter';
@@ -52,11 +55,10 @@ const crData = (
   options
 ) => {
   const {
-    items,
     pnDate
   } = options
-  , metric = getValue(items[1])
-  , source = getValue(items[2])
+  , source = getSourceValue(options)
+  , metric = getMetricValue(options)
   , data = isTotalData(source)
      ? _crTotalData(pnDate, json, metric)
      : _crSourceData(pnDate, json, metric, source);
@@ -68,9 +70,15 @@ const toLineAdapter = crAdapterType1({ crData });
 
 const getRoute = (
   option
-) => isCategory(option.seriaType)
-  ? toCategoryAdapter
-  : toLineAdapter
+) => {
+  const _seriaType = option.seriaType;
+  return isTreeMap(_seriaType)
+    ? crToTreeMapAdapter(option)
+    : isCategory(_seriaType)
+       ? toCategoryAdapter
+       : toLineAdapter;
+};
+
 
 const EmberAdapter = crAdapterRouter(void 0, { getRoute })
 
