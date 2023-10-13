@@ -7,6 +7,7 @@
   {"c":"Hydroelectricity gross generation in TWh","v":"electricity-by-hydro-twh"},  
   {"c":"Hydroelectricity net generation in TWh","v":"electricity-by-hydro-net-twh"},
   {"c":"Electricity gross generation by renewables in TWh","v":"electricity-by-renewables-twh"},
+  {"c":"Electricity net generation by renewables in TWh","v":"electricity-by-renewables-net-twh"},
   {"c":"Electricity gross generation by other in TWh","v":"electricity-by-other-twh"},
   {"c":"Electricity gross generation by total in TWh","v":"electricity-by-total-twh"},
   {"c":"Total electricity gross generation in TWh","v":"electricity-total-twh"},
