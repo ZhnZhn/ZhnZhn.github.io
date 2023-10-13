@@ -12,6 +12,7 @@
   {"c":"Total electricity gross generation in TWh","v":"electricity-total-twh"},
   {"c":"Electricity gross generation by solar in TWh","v":"electricity-by-solar-twh"},
   {"c":"Electricity net generation by solar in TWh","v":"electricity-by-solar-net-twh"},
-  {"c":"Electricity gross generation by wind in TWh","v":"electricity-by-wind-twh"}
+  {"c":"Electricity gross generation by wind in TWh","v":"electricity-by-wind-twh"},
+  {"c":"Electricity net generation by wind in TWh","v":"electricity-by-wind-net-twh"}
  ]
 }
