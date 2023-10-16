@@ -13,6 +13,8 @@
   {"c":"Oil consumption in million metric tons (Mmt)","v":"oil-consumption-mt"},  
   {"c":"Oil production in 1k barrels per day (KBPD)","v":"oil-production-kbd"},
   {"c":"Oil production in million metric tons (Mmt)","v":"oil-production-mt"},  
+  {"c":"Refining capacity in 1k barrels per day (KBPD)", "v":"refining-capacity-kbd"},
+  {"c":"Refinary throughput in 1k barrels per day (KBPD)", "v":"refinary-throughput-kbd"},
   {"c":"Nuclear energy consumption in EJ, on input-equivalent basis","v":"nuclear-energy-ej"},
   {"c":"Hydroelectricity consumption in EJ, on input-equivalent basis","v":"hydro-ej"},
   {"c":"Renewables energy consumption in EJ, on input-equivalent basis","v":"renewables-ej"},  
