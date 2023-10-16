@@ -1,0 +1,12 @@
+{"items":[
+   {"c": "Oil consumption in 1k barrels per day (KBPD)","v":"oil-consumption-kbd"},
+   {"c": "Light dist. consumption in 1k barrels per day (KBPD)", "v": "oil-product-light-dist-kbd"},
+   {"c": "Gasoline consumption in 1k barrels per day (KBPD)", "v": "oil-product-gasoline-kbd"},
+   {"c": "Naphtha consumption in 1k barrels per day (KBPD)", "v": "oil-product-naphtha-kbd"},
+   {"c": "Middle dist. consumption in 1k barrels per day (KBPD)", "v": "oil-product-middle-dist-kbd"},
+   {"c": "Diesel/gasoil consumption in 1k barrels per day (KBPD)", "v": "oil-product-diesel-gasoil-kbd"},
+   {"c": "Kerosene consumption in 1k barrels per day (KBPD)", "v": "oil-product-kerosene-kbd"},
+   {"c": "Other oil consumption in 1k barrels per day (KBPD)", "v": "oil-product-other-oil-kbd"},
+   {"c": "Fuel oil consumption in 1k barrels per day (KBPD)", "v": "oil-product-fuel-oil-kbd"},
+   {"c": "LPG consumption in 1k barrels per day (KBPD)", "v": "lpg-consumption-kbd"}             
+]}
