@@ -1,1 +1,1 @@
-{"items":[{"v":"4141901","c":"Band D1 : Consumption < 20 GJ"},{"v":"4141902","c":"Band D2 : 20 GJ < Consumption < 200 GJ"},{"v":"4141903","c":"Band D3 : Consumption > 200 GJ"}]}
+{"items":[{"v":"GJ_LT20","c":"Consumption less than 20 GJ - band D1"},{"v":"GJ20-199","c":"Consumption from 20 GJ to 199 GJ - band D2"},{"v":"GJ_GE200","c":"Consumption 200 GJ or over - band D3"}]}
