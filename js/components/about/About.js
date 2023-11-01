@@ -13,12 +13,14 @@ var _Comp = _interopRequireDefault(require("../Comp"));
 var _TwitterLink = _interopRequireDefault(require("./TwitterLink"));
 var _DataProviders = _interopRequireDefault(require("./DataProviders"));
 var _StepTitle = _interopRequireDefault(require("./StepTitle"));
+var _SpanBlack = _interopRequireDefault(require("./SpanBlack"));
 var _ProviderLinks = _interopRequireDefault(require("../links/ProviderLinks"));
 var _LogosBar = _interopRequireDefault(require("./LogosBar"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_ABOUT = (0, _styleFn.crBsContainerCn)('about-container'),
-  CL_SHOW_CONT = 'show-cont',
+const CL_ABOUT = (0, _styleFn.crBsContainerCn)("about-container"),
+  CL_SHOW_CONT = "show-cont",
   CL_SCROLL_Y = (0, _styleFn.crScrollYCn)(),
+  CL_BLACK = "black",
   S_SCROLL_DIV = {
     height: '94%'
   },
@@ -52,10 +54,9 @@ const CL_ABOUT = (0, _styleFn.crBsContainerCn)('about-container'),
   },
   S_GREEN = {
     color: '#80c040'
-  },
-  S_BLACK = {
-    color: 'black'
-  },
+  }
+  //, S_BLACK = { color: 'black' }
+  ,
   S_BLUE_DARK = {
     color: '#2f7ed8'
   },
@@ -105,7 +106,7 @@ const About = () => {
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DataProviders.default, {
           isClose: IS_CLOSE_PROVIDERS
         }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-          style: S_BLACK,
+          className: CL_BLACK,
           children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitle.default, {
             step: "1",
             title: STEP_T1
@@ -131,14 +132,11 @@ const About = () => {
             style: S_RED,
             children: "Attention:\xA0"
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
-            children: ["For one item from ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            children: ["For one item from ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "Dialog"
-            }), " can be only one ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            }), " can be only one ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "Chart item"
-            }), " in a container. More information about a dataset can be found on a ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            }), " in a container. More information about a dataset can be found on a ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "tab Info of Chart item."
             })]
           })]
@@ -148,23 +146,18 @@ const About = () => {
           ocStyle: S_LH_18,
           children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
             style: S_MB_8EM,
-            children: ["After clicking a ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            children: ["After clicking a ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "button Show"
-            }), " in a Dialog will be an opened up ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            }), " in a Dialog will be an opened up ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "Chart container"
-            }), " with charts or empty. After closing a ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            }), " with charts or empty. After closing a ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "Chart container"
-            }), " all charts remains. In one time max three ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            }), " all charts remains. In one time max three ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "Dialogs"
             }), " can be opened."]
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
             style: S_MB_8EM,
-            children: ["Some open and private data providers require user's ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            children: ["Some open and private data providers require user's ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "API Key"
             }), "."]
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
@@ -175,8 +168,7 @@ const About = () => {
               children: ["\xA0without API Key exists some restriction on frequency and amount of queries (", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
                 style: S_BLUE_DARK,
                 children: "50 per day/1 at a time"
-              }), ") and can be deprecated, according to Nasdaq Data Link. With ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-                style: S_BLACK,
+              }), ") and can be deprecated, according to Nasdaq Data Link. With ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
                 children: "API Key"
               }), " it is possible to make (", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
                 style: S_BLUE_DARK,
@@ -185,32 +177,26 @@ const About = () => {
             })]
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
             style: S_MB_8EM,
-            children: ["Data providers API Keys can be set on the ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            children: ["Data providers API Keys can be set on the ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "tab ApiKeys, dialog Settings [s]"
             }), "."]
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
             style: S_MB_8EM,
-            children: ["Also for loading data from data providers with HTTP protocol required ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            children: ["Also for loading data from data providers with HTTP protocol required ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "HTTPS proxy server"
-            }), ", by default settled in the ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            }), ", by default settled in the ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "tab Options, dialog Settings [s]"
             }), "."]
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
             style: S_MB_8EM,
-            children: ["There is three UI theme in the web app ERC: ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            children: ["There is three UI theme in the web app ERC: ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "Dark, Light, and Sand"
-            }), " can be set on ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              style: S_BLACK,
+            }), " can be set on ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
               children: "tab Options, dialog Settings [s]"
             }), ". All user's settings keep in browser's memory only for a current web session."]
           })]
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_LogosBar.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            style: S_BLACK,
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
             children: "*Logos Fair Use."
           })
         })]
@@ -218,6 +204,5 @@ const About = () => {
     })]
   });
 };
-var _default = About;
-exports.default = _default;
+var _default = exports.default = About;
 //# sourceMappingURL=About.js.map

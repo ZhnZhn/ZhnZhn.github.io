@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/about/SpanBlack.js"
+ ],
+ "file": "../../../src/components/about/SpanBlack.js",
+ "names": [
+  "_styleFn",
+  "require",
+  "_jsxRuntime",
+  "SpanBlack",
+  "_ref",
+  "children",
+  "jsx",
+  "className",
+  "CL_BLACK",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,QAAA,GAAAC,OAAA;AAAsC,IAAAC,WAAA,GAAAD,OAAA;AAEtC,MAAME,SAAS,GAAGC,IAAA;EAAA,IAAC;IACjBC;EACF,CAAC,GAAAD,IAAA;EAAA,oBAAK,IAAAF,WAAA,CAAAI,GAAA;IAAMC,SAAS,EAAEC,iBAAS;IAAAH,QAAA,EAAEA;EAAQ,CAAO,CAAC;AAAA;AAAA,IAAAI,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEnCR,SAAS"
+}

@@ -15,10 +15,11 @@ export const crCn = (
     : _cl2 || void 0 ;
 }
 
-export const CL_SHOW_POPUP = 'show-popup'
-export const S_BLOCK = { display: 'block' }
-export const S_INLINE = { display: 'inline-block' }
-export const S_NONE = { display: 'none' }
+export const CL_SHOW_POPUP = "show-popup"
+export const CL_BLACK = "black"
+export const S_BLOCK = { display: "block" }
+export const S_INLINE = { display: "inline-block" }
+export const S_NONE = { display: "none" }
 
 export const crShowHide = (
   is,

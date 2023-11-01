@@ -4,6 +4,7 @@ import {
 
 import OpenClose from '../zhn/OpenClose'
 import Link from '../links/ProviderLinks'
+import SpanBlack from './SpanBlack'
 
 const CL_NOTE_BR = "provider__note__br"
 , OPEN_COLOR_L2 = GREEN_COLOR
@@ -30,7 +31,6 @@ const CL_NOTE_BR = "provider__note__br"
 }
 , S_MAX_WIDTH = { maxWidth: 450 }
 , S_SETTINGS = { color: '#607d8b' }
-, S_BLACK = { color: 'black' };
 
 const _isArr = Array.isArray;
 
@@ -67,9 +67,9 @@ const LinkPer = ({
 }) => (
   <>
     <Comp />
-    <span style={S_BLACK}>
-       &nbsp;({per})
-    </span>
+    <SpanBlack>
+      &nbsp;({per})
+    </SpanBlack>
   </>
 );
 
@@ -117,7 +117,7 @@ const DataProviders = ({ isClose }) => (
       </p>
       <div style={S_NOTE}>
         <p>
-          <span style={S_BLACK}>Note:&nbsp;</span>
+          <SpanBlack>Note:&nbsp;</SpanBlack>
           User API key from data provider required for request.&nbsp;
           <br className={CL_NOTE_BR} />
           Can be set in <span style={S_SETTINGS}>SETTINGS&nbsp;[s]</span>.
@@ -125,7 +125,7 @@ const DataProviders = ({ isClose }) => (
       </div>
       <div style={S_NOTE}>
         <p style={S_MAX_WIDTH}>
-          <span style={S_BLACK}>Note:&nbsp;</span>
+          <SpanBlack>Note:&nbsp;</SpanBlack>
           This product uses the Bureau of Economic Analysis (BEA)
           Data API but is not endorsed or certified by BEA.
         </p>
@@ -142,7 +142,7 @@ const DataProviders = ({ isClose }) => (
         </p>
         <div style={S_NOTE}>
           <p>
-            <span style={S_BLACK}>Note:&nbsp;</span>
+            <SpanBlack>Note:&nbsp;</SpanBlack>
             Local Http Proxy is required for data APIs without CORS.&nbsp;
             <br className={CL_NOTE_BR} />
             Could be set in <span style={S_SETTINGS}>SETTINGS&nbsp;[s]</span>.
