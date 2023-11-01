@@ -20,8 +20,7 @@ const S_MODAL = {
 }
 , S_MODAL_SMALL = { width: 295 }
 , S_TITLE_API = { width: 82 }
-, S_TITLE_OPTION = { width: 100 }
-, S_BT = { color: '#232f3b' };
+, S_TITLE_OPTION = { width: 100 };
 
 const CL_ROW = 'row__pane-topic not-selected';
 
@@ -58,7 +57,6 @@ const SettingsDialog = memoIsShow(({
          isShow={isShow}
          setRefFocusLast={setRefFocusLast}
          isShowLabels={isShowLabels}
-         btStyle={S_BT}
          data={data}
          onClose={onClose}
       >

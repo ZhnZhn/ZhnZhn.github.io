@@ -8,7 +8,7 @@ export const S_ROOT_DIV = {
 }
 
 export const S_CAPTION_DIV = {
-  position: 'relative',  
+  position: 'relative',
   padding: '5px 35px 5px 16px',
   textAlign: 'center',
   fontSize: '18px',
@@ -20,7 +20,6 @@ export const S_COMMAND_DIV = {
   margin: '8px 4px 10px 0'
 }
 
-export const S_BT = { color: '#1b2836' }
 export const S_BT_LOAD = { color: '#607d8b' }
 
 export const S_SVG_CLOSE = {

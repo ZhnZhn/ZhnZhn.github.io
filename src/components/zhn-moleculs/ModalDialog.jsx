@@ -22,8 +22,7 @@ import {
   S_ROOT_DIV,
   S_CAPTION_DIV,
   S_SVG_CLOSE,
-  S_COMMAND_DIV,
-  S_BT
+  S_COMMAND_DIV
 } from './Dialog.Style';
 
 const CL_MODAL_DIALOG = crDialogCn('modal-dialog')
@@ -51,7 +50,6 @@ const CommandButtons = ({
        <FlatButton
          key="close"
          refBt={refBtClose}
-         style={S_BT}
          caption="Close"
          title="Close Modal Dialog"
          timeout={0}

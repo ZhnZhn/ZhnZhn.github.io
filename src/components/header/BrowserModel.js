@@ -38,8 +38,7 @@ const CL_ROW = 'row__pane-topic'
 , PREFIX_CL_ROW_ITEM = `${CL_ROW} item__`
 , CL_BR = `${PREFIX_CL_ROW_ITEM}browser`
 , CL_ORG = `${PREFIX_CL_ROW_ITEM}org`
-, CL_W = `${PREFIX_CL_ROW_ITEM}watch`
-, CL_AB = `${PREFIX_CL_ROW_ITEM}about`;
+, CL_W = `${PREFIX_CL_ROW_ITEM}watch`;
 
 const _fBD = id => () => {
   BrowserActions.showBrowserDynamic(id)
@@ -117,7 +116,7 @@ const crBrowserModel = () => ({
     _crMenuItem(CL_BR, 'Currencies', BT_CURRENCY),
     _crMenuItem(CL_W, 'Watch List', BT_WATCH_LIST),
     {
-      cn: CL_AB,
+      cn: CL_BR,
       name: 'About',
       onClick: ComponentActions.showAbout,
       isClose: true

@@ -28,9 +28,6 @@ const S_MODAL = {
   },
   S_TITLE_OPTION = {
     width: 100
-  },
-  S_BT = {
-    color: '#232f3b'
   };
 const CL_ROW = 'row__pane-topic not-selected';
 const SettingsDialog = (0, _memoIsShow.default)(_ref => {
@@ -55,7 +52,6 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
       isShow: isShow,
       setRefFocusLast: setRefFocusLast,
       isShowLabels: isShowLabels,
-      btStyle: S_BT,
       data: data,
       onClose: onClose,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tab.default, {
@@ -73,6 +69,5 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
     })
   });
 });
-var _default = SettingsDialog;
-exports.default = _default;
+var _default = exports.default = SettingsDialog;
 //# sourceMappingURL=SettingsDialog.js.map

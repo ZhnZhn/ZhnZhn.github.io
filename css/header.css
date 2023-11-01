@@ -35,10 +35,6 @@
   margin-left: auto;
 }
 
-.header__bt {
-  color: #1b2836;
-}
-
 .bt-hot {
   color: #c0c0c0;
   color: var(--bh-c, #c0c0c0);

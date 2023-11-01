@@ -41,13 +41,11 @@ const CommandButtons = _ref => {
       onClick: onLoad
     }, "load"), _isFn(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       timeout: 0,
-      style: _Dialog.S_BT,
       caption: "Show",
       title: "Show items",
       onClick: onShow
     }, "show"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       timeout: 0,
-      style: _Dialog.S_BT,
       caption: "Close",
       title: "Close dialog",
       onClick: onClose
@@ -116,6 +114,5 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
     })
   );
 });
-var _default = DraggableDialog;
-exports.default = _default;
+var _default = exports.default = DraggableDialog;
 //# sourceMappingURL=DraggableDialog.js.map

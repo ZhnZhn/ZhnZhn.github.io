@@ -19,7 +19,6 @@ import {
   S_ROOT_DIV,
   S_CAPTION_DIV,
   S_COMMAND_DIV,
-  S_BT,
   S_BT_LOAD,
   S_SVG_CLOSE
 } from './Dialog.Style';
@@ -58,7 +57,6 @@ const CommandButtons = ({
       _isFn(onShow) && <FlatButton
         key="show"
         timeout={0}
-        style={S_BT}
         caption="Show"
         title="Show items"
         onClick={onShow}
@@ -67,7 +65,6 @@ const CommandButtons = ({
     <FlatButton
       key="close"
       timeout={0}
-      style={S_BT}
       caption="Close"
       title="Close dialog"
       onClick={onClose}

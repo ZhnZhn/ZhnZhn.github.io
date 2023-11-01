@@ -93,6 +93,7 @@
 
 .item__browser {
   color: #1b2836;
+  color: var(--btf-c, #1b2836);
 }
 
 .item__org {
@@ -101,10 +102,6 @@
 
 .item__watch {
   color: #80c040;
-}
-
-.item__about {
-  color: #1b2836;
 }
 
 .menu__badge {

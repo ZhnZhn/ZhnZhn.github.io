@@ -24,15 +24,14 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
   CAPTION = "ERC v0.18.0",
   CL_HEADER = "header",
   CL_HEADER_BAR = (0, _styleFn.crContainerCn)(CL_HEADER),
-  CL_ICON = CL_HEADER + "__icon-erc",
-  CL_LABEL = CL_HEADER + "__app-label",
-  CL_HEADER_BT = CL_HEADER + "__bt",
-  CL_NDL = CL_HEADER_BT + " hbt-ndl",
-  CL_EUROSTAT = CL_HEADER_BT + " hbt-eurostat",
-  CL_WATCH = CL_HEADER_BT + " hbt-watch",
-  CL_ABOUT = CL_HEADER_BT + " hbt-about",
-  CL_BTS_RIGHT = CL_HEADER_BT + "s-right",
-  CL_BROWSER_MENU = "popup-menu " + CL_HEADER + "__panel-browser",
+  CL_ICON = `${CL_HEADER}__icon-erc`,
+  CL_LABEL = `${CL_HEADER}__app-label`,
+  CL_NDL = "hbt-ndl",
+  CL_EUROSTAT = "hbt-eurostat",
+  CL_WATCH = "hbt-watch",
+  CL_ABOUT = "hbt-about",
+  CL_BTS_RIGHT = `${CL_HEADER}__bts-right`,
+  CL_BROWSER_MENU = `popup-menu ${CL_HEADER}__panel-browser`,
   S_SVG_BT = {
     verticalAlign: 'middle',
     margin: '0 8px 3px 8px'
@@ -56,7 +55,6 @@ const HeaderBar = _ref => {
       refBt: refBt,
       isArrow: true,
       timeout: 0,
-      className: CL_HEADER_BT,
       caption: "Topics",
       title: "Topics Menu",
       hotKey: _hotkeys.HK_TOPICS,
@@ -111,6 +109,5 @@ const HeaderBar = _ref => {
     })]
   });
 };
-var _default = HeaderBar;
-exports.default = _default;
+var _default = exports.default = HeaderBar;
 //# sourceMappingURL=HeaderBar.js.map

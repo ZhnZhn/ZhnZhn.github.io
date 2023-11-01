@@ -27,6 +27,9 @@
    --el-bg: #1b2836;
    /*Element color (dialogs)*/
    --el-c: silver;
+
+   /*Button flat color*/   
+   --btf-c: #1b2836;
  }
 
            

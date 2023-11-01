@@ -37,7 +37,6 @@ const CommandButtons = _ref => {
     style: _Dialog.S_COMMAND_DIV,
     children: [commandButtons, !withoutClose && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       refBt: refBtClose,
-      style: _Dialog.S_BT,
       caption: "Close",
       title: "Close Modal Dialog",
       timeout: 0,
@@ -115,6 +114,5 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
     })
   });
 });
-var _default = ModalDialog;
-exports.default = _default;
+var _default = exports.default = ModalDialog;
 //# sourceMappingURL=ModalDialog.js.map

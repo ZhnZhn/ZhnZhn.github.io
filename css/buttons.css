@@ -161,6 +161,9 @@
 }
 
 .bt-flat {
+  color: #607d8b;
+  color: var(--btf-c, #607d8b);
+
   display: inline-block;
   text-decoration: none;
   font-weight: inherit;
