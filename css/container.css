@@ -25,10 +25,12 @@
 }
 
 .row__topic {
+  color: black;
+  color: var(--c-bl, black);
+ 
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  color: black;
+  justify-content: space-between; 
   line-height: 2;
   padding-left: 8px;
   border-left: 4px solid transparent;
