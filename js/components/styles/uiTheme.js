@@ -23,71 +23,56 @@ const PROPERTY_B_BG = "b-bg",
   PROPERTY_LB_BC = "lb-bc",
   PROPERTY_EL_BG = "el-bg",
   PROPERTY_EL_C = "el-c";
-const P_GREY = {
-  [PROPERTY_B_BG]: DF_B_BG,
-  [PROPERTY_T_C]: COLOR_DARK_BLUE,
-  [PROPERTY_S_C1]: DF_S_C1,
-  [PROPERTY_S_C2]: DF_S_C2,
-  [PROPERTY_C_BG]: DF_C_BG,
-  [PROPERTY_BH_C]: DF_BH_C,
-  [PROPERTY_LB_BC]: DF_LB_BC,
-  [PROPERTY_EL_BG]: DF_EL_BG,
-  [PROPERTY_EL_C]: DF_EL_C
-};
-const EL_BG_WHITE = "#bcd8f5";
-const LB_BC_LIGHT = "grey";
-const P_WHITE = {
-  [PROPERTY_B_BG]: "#e1e1e1",
-  [PROPERTY_T_C]: "#1b75bb",
-  [PROPERTY_S_C1]: DF_S_C1,
-  [PROPERTY_S_C2]: EL_BG_WHITE,
-  [PROPERTY_C_BG]: "#ebf1f5",
-  [PROPERTY_BH_C]: DF_BH_C,
-  [PROPERTY_LB_BC]: LB_BC_LIGHT,
-  [PROPERTY_EL_BG]: EL_BG_WHITE,
-  [PROPERTY_EL_C]: "#212020"
-};
+const PALETTE_KEYS = [PROPERTY_B_BG, PROPERTY_T_C, PROPERTY_S_C1, PROPERTY_S_C2, PROPERTY_C_BG, PROPERTY_BH_C, PROPERTY_LB_BC, PROPERTY_EL_BG, PROPERTY_EL_C];
+const _crPalette = values => PALETTE_KEYS.reduce((p, key, index) => {
+  p[key] = values[index];
+  return p;
+}, {});
+const P_GREY_VALUES = [DF_B_BG, DF_T_C, DF_S_C1, DF_S_C2, DF_C_BG, DF_BH_C, DF_LB_BC, DF_EL_BG, DF_EL_C];
+const EL_BG_WHITE = "#bcd8f5",
+  LB_BC_LIGHT = "grey";
+const P_WHITE_VALUES = ["#e1e1e1", "#1b75bb", DF_S_C1, EL_BG_WHITE, "#ebf1f5", DF_BH_C, LB_BC_LIGHT, EL_BG_WHITE, "#212020"];
 const EL_BG_SAND_L = "#64473d";
-const SAND_L_P = {
-  [PROPERTY_B_BG]: "#9e9e9e",
-  [PROPERTY_T_C]: "#785133",
-  [PROPERTY_S_C1]: DF_S_C1,
-  [PROPERTY_S_C2]: EL_BG_SAND_L,
-  [PROPERTY_C_BG]: "#e8e0cb",
-  [PROPERTY_BH_C]: "#5b5b5b",
-  [PROPERTY_LB_BC]: LB_BC_LIGHT,
-  [PROPERTY_EL_BG]: EL_BG_SAND_L,
-  [PROPERTY_EL_C]: COLOR_SILVER
-};
-const P_SAND_L = {
-  ...SAND_L_P
+const P_SAND_L_VALUES = ["#9e9e9e", "#785133", DF_S_C1, EL_BG_SAND_L, "#e8e0cb", "#5b5b5b", LB_BC_LIGHT, EL_BG_SAND_L, COLOR_SILVER];
+const DF_THEME_ID = "GREY";
+const PALETTE_VALUES = {
+  GREY: P_GREY_VALUES,
+  WHITE: P_WHITE_VALUES,
+  SAND: P_SAND_L_VALUES,
+  SAND_L: P_SAND_L_VALUES
 };
 const EL_BG_SAND = "#463222";
-const P_SAND = {
-  ...SAND_L_P,
-  [PROPERTY_S_C2]: EL_BG_SAND,
-  [PROPERTY_C_BG]: "#e6d5a9",
-  [PROPERTY_EL_BG]: EL_BG_SAND
+const PALETTE_CHANGES = {
+  SAND: {
+    [PROPERTY_S_C2]: EL_BG_SAND,
+    [PROPERTY_C_BG]: "#e6d5a9",
+    [PROPERTY_EL_BG]: EL_BG_SAND
+  }
 };
-const CUSTOM_CSS_PROPERTY_CONFIGS = [[PROPERTY_B_BG, DF_B_BG], [PROPERTY_T_C, DF_T_C], [PROPERTY_S_C1, DF_S_C1], [PROPERTY_S_C2, DF_S_C2], [PROPERTY_C_BG, DF_C_BG], [PROPERTY_BH_C, DF_BH_C], [PROPERTY_LB_BC, DF_LB_BC], [PROPERTY_EL_BG, DF_EL_BG], [PROPERTY_EL_C, DF_EL_C]];
+const PALETTE = {
+  [DF_THEME_ID]: _crPalette(PALETTE_VALUES[DF_THEME_ID]),
+  getPalette(uiThemeId) {
+    if (!this[uiThemeId]) {
+      const _paletteValues = PALETTE_VALUES[uiThemeId];
+      if (!_paletteValues) {
+        return this[DF_THEME_ID];
+      }
+      this[uiThemeId] = {
+        ..._crPalette(PALETTE_VALUES[uiThemeId]),
+        ...(PALETTE_CHANGES[uiThemeId] || void 0)
+      };
+    }
+    return this[uiThemeId];
+  }
+};
 const _setCssPropertiesFrom = P => {
-  const _style = document.body.style;
-  CUSTOM_CSS_PROPERTY_CONFIGS.forEach(_ref => {
-    let [propName, dfValue] = _ref;
-    _style.setProperty('--' + propName, P[propName] || dfValue);
+  const _style = document.body.style,
+    _dfPaletteValues = PALETTE_VALUES[DF_THEME_ID];
+  PALETTE_KEYS.forEach((propName, index) => {
+    _style.setProperty('--' + propName, P[propName] || _dfPaletteValues[index]);
   });
 };
-const HP_THEME = {
-  GREY: P_GREY,
-  WHITE: P_WHITE,
-  SAND: P_SAND,
-  SAND_L: P_SAND_L
-};
-const DF_THEME_ID = "GREY";
-const _crThemeConfig = themeName => HP_THEME[themeName] || HP_THEME[DF_THEME_ID];
-const _setTheme = themeName => {
-  _setCssPropertiesFrom(_crThemeConfig(themeName));
-};
+const _crThemeName = themeId => PALETTE_VALUES[themeId] ? themeId : DF_THEME_ID;
 const uiTheme = {
   themeName: DF_THEME_ID,
   _init() {
@@ -97,8 +82,8 @@ const uiTheme = {
     return this.themeName;
   },
   setThemeName(themeId) {
-    this.themeName = HP_THEME[themeId] ? themeId : DF_THEME_ID;
-    _setTheme(this.themeName);
+    this.themeName = _crThemeName(themeId);
+    _setCssPropertiesFrom(PALETTE.getPalette(this.themeName));
     (0, _ChartUiTheme.setChartTheme)(themeId !== DF_THEME_ID);
   }
 };
