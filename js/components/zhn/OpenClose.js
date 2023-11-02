@@ -15,12 +15,13 @@ const S_ROOT_DIV = {
 };
 
 //_pathV, _fillV, _childCl, _childStyle
-const _crConf = (isOpen, openColor) => isOpen ? [_OpenCloseStyle.PATH_OPEN, openColor, _OpenCloseStyle.CL_OPEN_CLOSE_EXP + " " + _OpenCloseStyle.CL_SHOW_POPUP, _OpenCloseStyle.S_BLOCK] : [_OpenCloseStyle.PATH_CLOSE, _OpenCloseStyle.FILL_CLOSE_COLOR, _OpenCloseStyle.CL_OPEN_CLOSE_EXP, _OpenCloseStyle.S_NONE];
+const _crConf = (isOpen, openColor) => isOpen ? [_OpenCloseStyle.PATH_OPEN, openColor, `${_OpenCloseStyle.CL_OPEN_CLOSE_EXP} ${_OpenCloseStyle.CL_SHOW_POPUP}`, _OpenCloseStyle.S_BLOCK] : [_OpenCloseStyle.PATH_CLOSE, _OpenCloseStyle.FILL_CLOSE_COLOR, _OpenCloseStyle.CL_OPEN_CLOSE_EXP, _OpenCloseStyle.S_NONE];
 const OpenClose = _ref => {
   let {
     refItem,
     isClose = true,
     role = 'button',
+    className,
     style,
     rowStyle,
     ocStyle,
@@ -46,7 +47,7 @@ const OpenClose = _ref => {
         ref: refItem,
         tabIndex: "0",
         role: role,
-        className: _OpenCloseStyle.CL_OPEN_CLOSE,
+        className: className || _OpenCloseStyle.CL_OPEN_CLOSE,
         style: ocStyle,
         onClick: toggleIsOpen,
         onKeyDown: _hKeyDown,
@@ -93,6 +94,5 @@ OpenClose.propTypes = {
   childStyle: PropTypes.object,
 }
 */
-var _default = OpenClose;
-exports.default = _default;
+var _default = exports.default = OpenClose;
 //# sourceMappingURL=OpenClose.js.map

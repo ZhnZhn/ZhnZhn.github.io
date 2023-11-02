@@ -40,6 +40,7 @@ const OpenClose = ({
   refItem,
   isClose=true,
   role='button',
+  className,
   style,
   rowStyle,
   ocStyle,
@@ -68,7 +69,7 @@ const OpenClose = ({
           ref={refItem}
           tabIndex="0"
           role={role}
-          className={CL_OPEN_CLOSE}
+          className={className || CL_OPEN_CLOSE}
           style={ocStyle}
           onClick={toggleIsOpen}
           onKeyDown={_hKeyDown}
