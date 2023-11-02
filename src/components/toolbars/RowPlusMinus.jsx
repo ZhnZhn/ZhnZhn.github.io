@@ -1,8 +1,8 @@
 import A from '../zhn/A';
+import SpanBlack from '../zhn/SpanBlack';
 
 const S_CAPTION = {
   display: 'inline-block',
-  color: 'black',
   padding: '0 8px 6px 0',
   fontWeight: 'bold'
 };
@@ -15,9 +15,9 @@ const RowPlusMinus = ({
   onPlus
 }) => (
   <div>
-    <span style={{...S_CAPTION, ...styleCaption}}>
+    <SpanBlack style={{...S_CAPTION, ...styleCaption}}>
        {caption}
-    </span>
+    </SpanBlack>
     {
       is ? <A.SvgMinus onClick={onMinus} />
          : <A.SvgPlus onClick={onPlus} />

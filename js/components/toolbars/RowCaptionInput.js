@@ -1,25 +1,20 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _A = _interopRequireDefault(require("../zhn/A"));
-
+var _SpanBlack = _interopRequireDefault(require("../zhn/SpanBlack"));
 var _jsxRuntime = require("react/jsx-runtime");
-
 const S_CAPTION = {
-  display: 'inline-block',
-  color: 'black',
-  width: 48,
-  fontWeight: 'bold'
-},
-      S_INPUT_TEXT = {
-  width: 56,
-  marginRight: 12
-};
-
+    display: 'inline-block',
+    width: 48,
+    fontWeight: 'bold'
+  },
+  S_INPUT_TEXT = {
+    width: 56,
+    marginRight: 12
+  };
 const RowCaptionInput = _ref => {
   let {
     caption,
@@ -29,7 +24,7 @@ const RowCaptionInput = _ref => {
     onAdd
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
       style: S_CAPTION,
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.InputText, {
@@ -44,7 +39,5 @@ const RowCaptionInput = _ref => {
     })]
   });
 };
-
-var _default = RowCaptionInput;
-exports.default = _default;
+var _default = exports.default = RowCaptionInput;
 //# sourceMappingURL=RowCaptionInput.js.map

@@ -5,10 +5,10 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _A = _interopRequireDefault(require("../zhn/A"));
+var _SpanBlack = _interopRequireDefault(require("../zhn/SpanBlack"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_CAPTION = {
     display: 'inline-block',
-    color: 'black',
     width: 120,
     fontWeight: 'bold'
   },
@@ -31,7 +31,7 @@ const RowTypeB = _ref => {
       setIsPlus(!onAdd());
     } : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
       style: S_CAPTION,
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.InputText, {
@@ -48,6 +48,5 @@ const RowTypeB = _ref => {
     })]
   });
 };
-var _default = RowTypeB;
-exports.default = _default;
+var _default = exports.default = RowTypeB;
 //# sourceMappingURL=RowTypeB.js.map

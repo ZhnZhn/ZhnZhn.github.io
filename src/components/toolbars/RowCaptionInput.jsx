@@ -1,8 +1,8 @@
 import A from '../zhn/A';
+import SpanBlack from '../zhn/SpanBlack';
 
 const S_CAPTION = {
   display: 'inline-block',
-  color: 'black',
   width: 48,
   fontWeight: 'bold',
 },
@@ -19,7 +19,7 @@ const RowCaptionInput = ({
   onAdd
 }) => (
   <div>
-    <span style={S_CAPTION}>{caption}</span>
+    <SpanBlack style={S_CAPTION}>{caption}</SpanBlack>
     <A.InputText
        ref={forwardRef}
        type="number"

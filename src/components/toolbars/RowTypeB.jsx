@@ -1,11 +1,11 @@
 import { useState } from '../uiApi';
 import A from '../zhn/A';
+import SpanBlack from '../zhn/SpanBlack';
 
 const S_CAPTION = {
   display: 'inline-block',
-  color: 'black',
   width: 120,
-  fontWeight: 'bold',
+  fontWeight: 'bold'
 }
 , S_INPUT_TEXT = {
   width: 46,
@@ -30,9 +30,10 @@ const RowTypeB = ({
   } : void 0;
   return (
     <div>
-      <span style={S_CAPTION}>
+
+      <SpanBlack style={S_CAPTION}>
         {caption}
-      </span>
+      </SpanBlack>
       <A.InputText
          ref={forwardRef}
          type="number"
