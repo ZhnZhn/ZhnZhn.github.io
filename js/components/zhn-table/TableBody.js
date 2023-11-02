@@ -62,7 +62,7 @@ const _renderRows = props => {
         if (h.isHide) {
           return null;
         }
-        const _key = _rId + "_" + hIndex,
+        const _key = `${_rId}_${hIndex}`,
           _style = _crTdStyle(r, h),
           _elOrTitle = _crTdElOrTitle(r, h, numberFormat, valueToHref);
         return /*#__PURE__*/(0, _jsxRuntime.jsx)("td", {
@@ -81,8 +81,8 @@ const _renderRows = props => {
   });
 };
 const TableBody = props => /*#__PURE__*/(0, _jsxRuntime.jsx)("tbody", {
+  className: _Style.CL_BLACK,
   children: _renderRows(props)
 });
-var _default = TableBody;
-exports.default = _default;
+var _default = exports.default = TableBody;
 //# sourceMappingURL=TableBody.js.map

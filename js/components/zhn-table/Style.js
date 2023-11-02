@@ -1,8 +1,10 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crSvgMoreStyle = exports.crNaNStyle = exports.TOKEN_NAN = exports.S_WRAPPER_DIV = exports.S_UP = exports.S_TH_UP = exports.S_TH_MORE_SPAN = exports.S_TH_DOWN = exports.S_THEAD = exports.S_TH = exports.S_TD = exports.S_TABLE = exports.S_MENU_MORE = exports.S_DOWN = exports.S_BT_SVG_MORE = exports.CL_LINK = exports.CL_GRID = void 0;
+exports.crSvgMoreStyle = exports.crNaNStyle = exports.TOKEN_NAN = exports.S_WRAPPER_DIV = exports.S_UP = exports.S_TH_UP = exports.S_TH_MORE_SPAN = exports.S_TH_DOWN = exports.S_THEAD = exports.S_TH = exports.S_TD = exports.S_TABLE = exports.S_MENU_MORE = exports.S_DOWN = exports.S_BT_SVG_MORE = exports.CL_LINK = exports.CL_GRID = exports.CL_BLACK = void 0;
 var _styleFn = require("../styleFn");
+exports.CL_BLACK = _styleFn.CL_BLACK;
+exports.getColorBlack = _styleFn.getColorBlack;
 const TOKEN_NAN = exports.TOKEN_NAN = '―';
 const CL_LINK = exports.CL_LINK = "native-link";
 const CL_GRID = exports.CL_GRID = "grid";

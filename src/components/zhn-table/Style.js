@@ -1,3 +1,4 @@
+export { CL_BLACK, getColorBlack } from '../styleFn';
 import { getColorBlack } from '../styleFn';
 
 export const TOKEN_NAN = '―'

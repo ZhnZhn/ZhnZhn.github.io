@@ -91,6 +91,7 @@ const TableHead = props => {
     }
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("thead", {
+    className: _Style.CL_BLACK,
     style: _Style.S_THEAD,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("tr", {
       children: _renderHeader(props, _hThKeyEnter)

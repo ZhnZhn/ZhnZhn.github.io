@@ -5,7 +5,8 @@ import {
 } from './tableFn';
 import {
   CL_LINK,
-  S_TD
+  S_TD,
+  CL_BLACK
 } from './Style'
 
 const _isFn = fn => typeof fn === 'function';
@@ -31,7 +32,11 @@ const _crTdStyle = (r, h) => {
   , _tdStyle = crTdStyle({ v, isR })
   ,  tdStyle  = (r.style || {})[pn];
 
-  return {...style, ..._tdStyle, ...tdStyle};
+  return {
+    ...style,
+    ..._tdStyle,
+    ...tdStyle
+  };
 }
 const _crTdElOrTitle = (r, h, numberFormat, valueToHref) => {
   const { pn, isHref } = h
@@ -78,7 +83,7 @@ const _renderRows = (props) => {
 }
 
 const TableBody = (props) => (
-  <tbody>
+  <tbody className={CL_BLACK}>
     {_renderRows(props)}
   </tbody>
 );

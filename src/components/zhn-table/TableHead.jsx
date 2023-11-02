@@ -3,6 +3,7 @@ import SvgMore from '../zhn/SvgMore'
 
 import { crAppearance } from './tableFn';
 import {
+  CL_BLACK,
   S_THEAD,
   S_TH,
   S_BT_SVG_MORE,
@@ -87,7 +88,7 @@ const TableHead = (props) => {
     }
   }
   return (
-    <thead style={S_THEAD}>
+    <thead className={CL_BLACK} style={S_THEAD}>
        <tr>
          {_renderHeader(props, _hThKeyEnter)}
        </tr>
