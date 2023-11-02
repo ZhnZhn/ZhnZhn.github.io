@@ -150,7 +150,7 @@
 }
 
 .grid tr:nth-child(odd) {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(128, 128, 128, 0.1);
 }
 
 .bs-cont {
