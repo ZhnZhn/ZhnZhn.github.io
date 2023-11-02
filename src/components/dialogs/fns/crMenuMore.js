@@ -1,11 +1,18 @@
-const CL_ROW = 'row__pane-topic not-selected'
+import { CL_ROW_PANE_TOPIC } from '../../styleFn';
 
-const _addItemTo = (arr, comp, { name, onClick, isClose }) => {
+const _addItemTo = (
+  arr,
+  comp, {
+  name,
+  onClick,
+  isClose
+}) => {
   if (onClick) {
     arr.push({
-      cn: CL_ROW,
+      cn: CL_ROW_PANE_TOPIC,
       onClick: onClick.bind(comp),
-      name, isClose
+      name,
+      isClose
    })
   }
 };
@@ -27,11 +34,11 @@ const crMenuMore = (comp, {
   })
 
   return {
-      titleCl: CL_ROW,
-      pageWidth: 175,
-      maxPages: 1,
-      p0: p0
-    };
-  }
+     titleCl: CL_ROW_PANE_TOPIC,
+     pageWidth: 175,
+     maxPages: 1,
+     p0: p0
+  };
+};
 
 export default crMenuMore

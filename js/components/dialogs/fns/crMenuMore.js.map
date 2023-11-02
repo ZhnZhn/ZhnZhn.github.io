@@ -1,1 +1,34 @@
-{"version":3,"sources":["../../../../src/components/dialogs/fns/crMenuMore.js"],"names":["CL_ROW","_addItemTo","arr","comp","name","onClick","isClose","push","cn","bind","crMenuMore","toggleToolBar","onAbout","p0","titleCl","pageWidth","maxPages"],"mappings":";;;;AAAA,IAAMA,MAAM,GAAG,8BAAf;;AAEA,IAAMC,UAAU,GAAG,SAAbA,UAAa,CAACC,GAAD,EAAMC,IAAN,QAA2C;AAAA,MAA7BC,IAA6B,QAA7BA,IAA6B;AAAA,MAAvBC,OAAuB,QAAvBA,OAAuB;AAAA,MAAdC,OAAc,QAAdA,OAAc;;AAC5D,MAAID,OAAJ,EAAa;AACXH,IAAAA,GAAG,CAACK,IAAJ,CAAS;AACPC,MAAAA,EAAE,EAAER,MADG;AAEPK,MAAAA,OAAO,EAAEA,OAAO,CAACI,IAAR,CAAaN,IAAb,CAFF;AAGPC,MAAAA,IAAI,EAAJA,IAHO;AAGDE,MAAAA,OAAO,EAAPA;AAHC,KAAT;AAKD;AACF,CARD;;AAUA,IAAMI,UAAU,GAAG,SAAbA,UAAa,CAACP,IAAD,SAGb;AAAA,MAFJQ,aAEI,SAFJA,aAEI;AAAA,MADJC,OACI,SADJA,OACI;AACJ,MAAMC,EAAE,GAAG,EAAX;;AACAZ,EAAAA,UAAU,CAACY,EAAD,EAAKV,IAAL,EAAW;AACnBC,IAAAA,IAAI,EAAE,gBADa;AAEnBC,IAAAA,OAAO,EAAEM,aAFU;AAGnBL,IAAAA,OAAO,EAAE;AAHU,GAAX,CAAV;;AAKAL,EAAAA,UAAU,CAACY,EAAD,EAAKV,IAAL,EAAW;AACnBC,IAAAA,IAAI,EAAE,kBADa;AAEnBC,IAAAA,OAAO,EAAEO,OAFU;AAGnBN,IAAAA,OAAO,EAAE;AAHU,GAAX,CAAV;;AAMA,SAAO;AACHQ,IAAAA,OAAO,EAAEd,MADN;AAEHe,IAAAA,SAAS,EAAE,GAFR;AAGHC,IAAAA,QAAQ,EAAE,CAHP;AAIHH,IAAAA,EAAE,EAAEA;AAJD,GAAP;AAMC,CAtBH;;eAwBeH,U","sourcesContent":["const CL_ROW = 'row__pane-topic not-selected'\r\n\r\nconst _addItemTo = (arr, comp, { name, onClick, isClose }) => {\r\n  if (onClick) {\r\n    arr.push({\r\n      cn: CL_ROW,\r\n      onClick: onClick.bind(comp),\r\n      name, isClose\r\n   })\r\n  }\r\n};\r\n\r\nconst crMenuMore = (comp, {\r\n  toggleToolBar,\r\n  onAbout\r\n}) => {\r\n  const p0 = [];\r\n  _addItemTo(p0, comp, {\r\n    name: 'Toggle ToolBar',\r\n    onClick: toggleToolBar,\r\n    isClose: true\r\n  })\r\n  _addItemTo(p0, comp, {\r\n    name: 'About Datasource',\r\n    onClick: onAbout,\r\n    isClose: true\r\n  })\r\n\r\n  return {\r\n      titleCl: CL_ROW,\r\n      pageWidth: 175,\r\n      maxPages: 1,\r\n      p0: p0\r\n    };\r\n  }\r\n\r\nexport default crMenuMore\r\n"],"file":"crMenuMore.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/fns/crMenuMore.js"
+ ],
+ "file": "../../../../src/components/dialogs/fns/crMenuMore.js",
+ "names": [
+  "_styleFn",
+  "require",
+  "_addItemTo",
+  "arr",
+  "comp",
+  "_ref",
+  "name",
+  "onClick",
+  "isClose",
+  "push",
+  "cn",
+  "CL_ROW_PANE_TOPIC",
+  "bind",
+  "crMenuMore",
+  "_ref2",
+  "toggleToolBar",
+  "onAbout",
+  "p0",
+  "titleCl",
+  "pageWidth",
+  "maxPages",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,QAAA,GAAAC,OAAA;AAEA,MAAMC,UAAU,GAAGA,CACjBC,GAAG,EACHC,IAAI,EAAAC,IAAA,KAIA;EAAA,IAJE;IACNC,IAAI;IACJC,OAAO;IACPC;EACF,CAAC,GAAAH,IAAA;EACC,IAAIE,OAAO,EAAE;IACXJ,GAAG,CAACM,IAAI,CAAC;MACPC,EAAE,EAAEC,0BAAiB;MACrBJ,OAAO,EAAEA,OAAO,CAACK,IAAI,CAACR,IAAI,CAAC;MAC3BE,IAAI;MACJE;IACH,CAAC,CAAC;EACH;AACF,CAAC;AAED,MAAMK,UAAU,GAAGA,CAACT,IAAI,EAAAU,KAAA,KAGlB;EAAA,IAHoB;IACxBC,aAAa;IACbC;EACF,CAAC,GAAAF,KAAA;EACC,MAAMG,EAAE,GAAG,EAAE;EACbf,UAAU,CAACe,EAAE,EAAEb,IAAI,EAAE;IACnBE,IAAI,EAAE,gBAAgB;IACtBC,OAAO,EAAEQ,aAAa;IACtBP,OAAO,EAAE;EACX,CAAC,CAAC;EACFN,UAAU,CAACe,EAAE,EAAEb,IAAI,EAAE;IACnBE,IAAI,EAAE,kBAAkB;IACxBC,OAAO,EAAES,OAAO;IAChBR,OAAO,EAAE;EACX,CAAC,CAAC;EAEF,OAAO;IACJU,OAAO,EAAEP,0BAAiB;IAC1BQ,SAAS,EAAE,GAAG;IACdC,QAAQ,EAAE,CAAC;IACXH,EAAE,EAAEA;EACP,CAAC;AACH,CAAC;AAAC,IAAAI,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaV,UAAU"
+}
