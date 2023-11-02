@@ -1,4 +1,6 @@
 import { useMemo } from '../uiApi';
+import { CL_ROW_TYPE2_TOPIC } from '../styleFn';
+
 import useBool from '../hooks/useBool';
 import useToggle from '../hooks/useToggle';
 import useListen from '../hooks/useListen';
@@ -21,7 +23,7 @@ const {
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
 , CL_BROWSER = "scroll-browser-by"
 , CL_BROWSER_WITH_SEARCH = "scroll-browser-by--search"
-, CL_ROW_ITEM = 'row__type2-topic not-selected'
+//, CL_ROW_ITEM = 'row__type2-topic not-selected'
 
 , S_BROWSER = {
   paddingRight: 0,
@@ -125,7 +127,7 @@ const BrowserMenu2 = ({
          <MenuItems2
             model={menu}
             ItemComp={ItemComp}
-            itemClassName={CL_ROW_ITEM}
+            itemClassName={CL_ROW_TYPE2_TOPIC}
             onClickItem={onShowLoadDialog}
          />
          {children}

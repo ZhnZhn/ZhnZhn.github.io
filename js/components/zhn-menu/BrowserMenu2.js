@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
@@ -22,8 +23,9 @@ const {
 } = _Comp.default;
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name",
   CL_BROWSER = "scroll-browser-by",
-  CL_BROWSER_WITH_SEARCH = "scroll-browser-by--search",
-  CL_ROW_ITEM = 'row__type2-topic not-selected',
+  CL_BROWSER_WITH_SEARCH = "scroll-browser-by--search"
+  //, CL_ROW_ITEM = 'row__type2-topic not-selected'
+  ,
   S_BROWSER = {
     paddingRight: 0,
     paddingBottom: 4,
@@ -110,12 +112,11 @@ const BrowserMenu2 = _ref => {
       children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItems.default, {
         model: menu,
         ItemComp: ItemComp,
-        itemClassName: CL_ROW_ITEM,
+        itemClassName: _styleFn.CL_ROW_TYPE2_TOPIC,
         onClickItem: onShowLoadDialog
       }), children]
     })]
   });
 };
-var _default = BrowserMenu2;
-exports.default = _default;
+var _default = exports.default = BrowserMenu2;
 //# sourceMappingURL=BrowserMenu2.js.map
