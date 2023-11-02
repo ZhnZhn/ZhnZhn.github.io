@@ -1,27 +1,19 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
-
 var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
-
 var _tableFn = require("./tableFn");
-
 var _Style = require("./Style");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const C = {
   UP: 'UP',
   DOWN: 'DOWN',
   ASC: 'ascending',
   DESC: 'descending'
 };
-
 const ThMore = _ref => {
   let {
     name,
@@ -30,7 +22,7 @@ const ThMore = _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
       style: _Style.S_BT_SVG_MORE,
-      svgStyle: _Style.S_SVG_MORE,
+      svgStyle: (0, _Style.crSvgMoreStyle)(),
       onClick: onMenuMore
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       style: _Style.S_TH_MORE_SPAN,
@@ -38,7 +30,6 @@ const ThMore = _ref => {
     })]
   });
 };
-
 const _renderHeader = (props, _hThKeyDown) => {
   const {
     gridId,
@@ -53,32 +44,32 @@ const _renderHeader = (props, _hThKeyDown) => {
     if (h.isHide) {
       return null;
     }
-
     const {
-      name,
-      pn
-    } = h,
-          {
-      style,
-      ariaSort,
-      ariaLabel
-    } = (0, _tableFn.crAppearance)({
-      C,
-      pn,
-      name,
-      sortBy,
-      sortTo
-    }),
-          _nameOrEl = hIndex === 0 ? /*#__PURE__*/(0, _jsxRuntime.jsx)(ThMore, {
-      name: name,
-      onMenuMore: onMenuMore
-    }) : name,
-          _thStyle = hIndex === 0 ? { ...thMoreStyle,
-      ...style
-    } : style;
-
+        name,
+        pn
+      } = h,
+      {
+        style,
+        ariaSort,
+        ariaLabel
+      } = (0, _tableFn.crAppearance)({
+        C,
+        pn,
+        name,
+        sortBy,
+        sortTo
+      }),
+      _nameOrEl = hIndex === 0 ? /*#__PURE__*/(0, _jsxRuntime.jsx)(ThMore, {
+        name: name,
+        onMenuMore: onMenuMore
+      }) : name,
+      _thStyle = hIndex === 0 ? {
+        ...thMoreStyle,
+        ...style
+      } : style;
     return /*#__PURE__*/(0, _jsxRuntime.jsx)("th", {
-      style: { ..._Style.S_TH,
+      style: {
+        ..._Style.S_TH,
         ..._thStyle
       },
       rowSpan: "1",
@@ -93,14 +84,12 @@ const _renderHeader = (props, _hThKeyDown) => {
     }, h.name);
   }).filter(Boolean);
 };
-
 const TableHead = props => {
   const _hThKeyEnter = (evt, pn) => {
     if ((0, _isKeyEnter.default)(evt)) {
-      props == null ? void 0 : props.onSort(pn);
+      props?.onSort(pn);
     }
   };
-
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("thead", {
     style: _Style.S_THEAD,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("tr", {
@@ -108,6 +97,7 @@ const TableHead = props => {
     })
   });
 };
+
 /*
 TableHead.propTypes = {
   gridId: PropTypes.string,
@@ -129,8 +119,5 @@ TableHead.propTypes = {
   onMenuMore: PropTypes.func
 }
 */
-
-
-var _default = TableHead;
-exports.default = _default;
+var _default = exports.default = TableHead;
 //# sourceMappingURL=TableHead.js.map

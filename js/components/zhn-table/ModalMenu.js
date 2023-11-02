@@ -5,16 +5,17 @@ exports.__esModule = true;
 exports.default = void 0;
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox3"));
+var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW = {
     paddingLeft: 0,
     paddingBottom: 4
   },
-  S_HR = {
-    borderColor: 'black',
+  _crHrStyle = () => ({
+    borderColor: (0, _styleFn.getColorBlack)(),
     marginTop: 2,
     marginBottom: 2
-  };
+  });
 const _renderHeaders = (headers, onToggle) => {
   /*eslint-disable no-unused-vars*/
   const [rank, ...restHeader] = headers;
@@ -48,10 +49,9 @@ const ModalMenu = _ref => {
       value: isGridLine,
       onToggle: onToggleGrid
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
-      style: S_HR
+      style: _crHrStyle
     }), _renderHeaders(headers, onToggle)]
   });
 };
-var _default = ModalMenu;
-exports.default = _default;
+var _default = exports.default = ModalMenu;
 //# sourceMappingURL=ModalMenu.js.map

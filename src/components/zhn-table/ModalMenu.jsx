@@ -1,15 +1,16 @@
 import ModalPopup from '../zhn-moleculs/ModalPopup';
 import RowCheckBox3 from '../dialogs/rows/RowCheckBox3';
+import { getColorBlack } from '../styleFn';
 
 const S_ROW = {
   paddingLeft: 0,
   paddingBottom: 4
 }
-, S_HR = {
-  borderColor: 'black',
+, _crHrStyle = () => ({
+  borderColor: getColorBlack(),
   marginTop: 2,
   marginBottom: 2
-};
+});
 
 const _renderHeaders = (
   headers,
@@ -51,7 +52,7 @@ const ModalMenu = ({
        value={isGridLine}
        onToggle={onToggleGrid}
      />
-     <hr style={S_HR} />
+     <hr style={_crHrStyle} />
      {_renderHeaders(headers, onToggle)}
   </ModalPopup>
 );

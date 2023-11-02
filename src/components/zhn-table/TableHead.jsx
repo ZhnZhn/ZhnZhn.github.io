@@ -6,7 +6,7 @@ import {
   S_THEAD,
   S_TH,
   S_BT_SVG_MORE,
-  S_SVG_MORE,
+  crSvgMoreStyle,
   S_TH_MORE_SPAN
 } from './Style';
 
@@ -22,7 +22,7 @@ const ThMore = ({ name, onMenuMore }) => (
   <>
     <SvgMore
        style={S_BT_SVG_MORE}
-       svgStyle={S_SVG_MORE}
+       svgStyle={crSvgMoreStyle()}
        onClick={onMenuMore}
     />
     <span style={S_TH_MORE_SPAN}>
@@ -33,8 +33,13 @@ const ThMore = ({ name, onMenuMore }) => (
 
 const _renderHeader = (props, _hThKeyDown) => {
   const {
-    gridId, thMoreStyle, headers,
-    sortBy, sortTo, onSort, onMenuMore
+    gridId,
+    thMoreStyle,
+    headers,
+    sortBy,
+    sortTo,
+    onSort,
+    onMenuMore
   } = props;
   return headers.map((h, hIndex) => {
     if (h.isHide) {

@@ -2,28 +2,26 @@ import {
   TOKEN_NAN,
   S_UP,
   S_DOWN,
-  S_NAN,
+  crNaNStyle,
   S_TH_UP,
   S_TH_DOWN
 } from './Style';
 
 const _isNotNumber = v => Number.isNaN(v) || v == null;
 
-const _crThAriaLabel = (name, order) => {
-  return `${name}: activate to sort column ${order}`;
-};
+const _crThAriaLabel = (
+  name,
+  order
+) => `${name}: activate to sort column ${order}`
 
-export const crTdStyle = ({ v, isR }) => {
-   let style;
-   if (isR) {
-     if (_isNotNumber(v)) {
-       style = S_NAN
-     } else {
-       style = v > 0 ? S_UP : S_DOWN;
-     }
-   }
-   return style;
-}
+export const crTdStyle = ({
+  v,
+  isR
+}) => isR
+  ? _isNotNumber(v)
+       ? crNaNStyle()
+       : v > 0 ? S_UP : S_DOWN
+  : void 0;
 
 export const toFormatValue = ({ h, v, fn }) => {
   if (h.isR && _isNotNumber(v)) {

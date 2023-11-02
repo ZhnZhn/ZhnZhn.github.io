@@ -1,3 +1,5 @@
+import { getColorBlack } from '../styleFn';
+
 export const TOKEN_NAN = '―'
 export const CL_LINK = "native-link"
 export const CL_GRID = "grid"
@@ -31,10 +33,14 @@ export const S_BT_SVG_MORE = {
   top: 2,
   marginRight: 4
 }
-export const S_SVG_MORE = {
-  fill: 'black',
-  stroke: 'black'
-}
+export const crSvgMoreStyle = () => ({
+  fill: getColorBlack(),
+  stroke: getColorBlack()
+})
+export const crNaNStyle = () => ({
+  color: getColorBlack(),
+  fontWeight: 'bold'
+})
 
 export const S_MENU_MORE = {
   position: 'absolute',
@@ -61,9 +67,5 @@ export const S_UP = {
 }
 export const S_DOWN = {
   color: '#f44336',
-  fontWeight: 'bold'
-}
-export const S_NAN = {
-  color: 'black',
   fontWeight: 'bold'
 }

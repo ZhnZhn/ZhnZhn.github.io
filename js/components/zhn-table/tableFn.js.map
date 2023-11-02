@@ -1,1 +1,46 @@
-{"version":3,"sources":["../../../src/components/zhn-table/tableFn.js"],"names":["_isNotNumber","v","Number","isNaN","_crThAriaLabel","name","order","crTdStyle","isR","style","S_NAN","S_UP","S_DOWN","toFormatValue","h","fn","TOKEN_NAN","isF","crAppearance","C","pn","sortBy","sortTo","ariaSort","ariaLabel","UP","S_TH_UP","DESC","ASC","S_TH_DOWN"],"mappings":";;;;;AAAA;;AASA,MAAMA,YAAY,GAAGC,CAAC,IAAIC,MAAM,CAACC,KAAP,CAAaF,CAAb,KAAmBA,CAAC,IAAI,IAAlD;;AAEA,MAAMG,cAAc,GAAG,CAACC,IAAD,EAAOC,KAAP,KAAiB;AACtC,SAAUD,IAAV,kCAA2CC,KAA3C;AACD,CAFD;;AAIO,MAAMC,SAAS,GAAG,QAAgB;AAAA,MAAf;AAAEN,IAAAA,CAAF;AAAKO,IAAAA;AAAL,GAAe;AACtC,MAAIC,KAAJ;;AACA,MAAID,GAAJ,EAAS;AACP,QAAIR,YAAY,CAACC,CAAD,CAAhB,EAAqB;AACnBQ,MAAAA,KAAK,GAAGC,YAAR;AACD,KAFD,MAEO;AACLD,MAAAA,KAAK,GAAGR,CAAC,GAAG,CAAJ,GAAQU,WAAR,GAAeC,aAAvB;AACD;AACF;;AACD,SAAOH,KAAP;AACF,CAVM;;;;AAYA,MAAMI,aAAa,GAAG,SAAkB;AAAA,MAAjB;AAAEC,IAAAA,CAAF;AAAKb,IAAAA,CAAL;AAAQc,IAAAA;AAAR,GAAiB;;AAC7C,MAAID,CAAC,CAACN,GAAF,IAASR,YAAY,CAACC,CAAD,CAAzB,EAA8B;AAC5B,WAAOe,gBAAP;AACD;;AACD,MAAIF,CAAC,CAACG,GAAF,IAAS,OAAOF,EAAP,KAAc,UAA3B,EAAuC;AACrC,WAAOA,EAAE,CAACd,CAAD,CAAT;AACD;;AACD,SAAOA,CAAP;AACD,CARM;;;;AAUA,MAAMiB,YAAY,GAAG,SAAqC;AAAA,MAApC;AAAEC,IAAAA,CAAF;AAAKC,IAAAA,EAAL;AAASf,IAAAA,IAAT;AAAegB,IAAAA,MAAf;AAAuBC,IAAAA;AAAvB,GAAoC;AAC/D,MAAIb,KAAJ,EAAWc,QAAX,EAAqBC,SAArB;;AACA,MAAIJ,EAAE,KAAKC,MAAX,EAAmB;AAClB,QAAIC,MAAM,KAAKH,CAAC,CAACM,EAAjB,EAAqB;AACpBhB,MAAAA,KAAK,GAAGiB,cAAR;AACAH,MAAAA,QAAQ,GAAGJ,CAAC,CAACQ,IAAb;AACAH,MAAAA,SAAS,GAAGpB,cAAc,CAACC,IAAD,EAAOc,CAAC,CAACS,GAAT,CAA1B;AACA,KAJD,MAIO;AACLnB,MAAAA,KAAK,GAAGoB,gBAAR;AACAN,MAAAA,QAAQ,GAAGJ,CAAC,CAACS,GAAb;AACAJ,MAAAA,SAAS,GAAGpB,cAAc,CAACC,IAAD,EAAOc,CAAC,CAACQ,IAAT,CAA1B;AACD;AACD,GAVD,MAUO;AACLH,IAAAA,SAAS,GAAGpB,cAAc,CAACC,IAAD,EAAOc,CAAC,CAACS,GAAT,CAA1B;AACD;;AACD,SAAO;AAAEnB,IAAAA,KAAF;AAASc,IAAAA,QAAT;AAAmBC,IAAAA;AAAnB,GAAP;AACD,CAhBM","sourcesContent":["import {\r\n  TOKEN_NAN,\r\n  S_UP,\r\n  S_DOWN,\r\n  S_NAN,\r\n  S_TH_UP,\r\n  S_TH_DOWN\r\n} from './Style';\r\n\r\nconst _isNotNumber = v => Number.isNaN(v) || v == null;\r\n\r\nconst _crThAriaLabel = (name, order) => {\r\n  return `${name}: activate to sort column ${order}`;\r\n};\r\n\r\nexport const crTdStyle = ({ v, isR }) => {\r\n   let style;\r\n   if (isR) {\r\n     if (_isNotNumber(v)) {\r\n       style = S_NAN\r\n     } else {\r\n       style = v > 0 ? S_UP : S_DOWN;\r\n     }\r\n   }\r\n   return style;\r\n}\r\n\r\nexport const toFormatValue = ({ h, v, fn }) => {\r\n  if (h.isR && _isNotNumber(v)) {\r\n    return TOKEN_NAN;\r\n  }\r\n  if (h.isF && typeof fn === 'function') {\r\n    return fn(v);\r\n  }\r\n  return v;\r\n}\r\n\r\nexport const crAppearance = ({ C, pn, name, sortBy, sortTo }) => {\r\n  let style, ariaSort, ariaLabel;\r\n  if (pn === sortBy) {\r\n   if (sortTo === C.UP) {\r\n    style = S_TH_UP\r\n    ariaSort = C.DESC\r\n    ariaLabel = _crThAriaLabel(name, C.ASC)\r\n   } else {\r\n     style = S_TH_DOWN\r\n     ariaSort = C.ASC\r\n     ariaLabel = _crThAriaLabel(name, C.DESC)\r\n   }\r\n  } else {\r\n    ariaLabel = _crThAriaLabel(name, C.ASC)\r\n  }\r\n  return { style, ariaSort, ariaLabel };\r\n}\r\n"],"file":"tableFn.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-table/tableFn.js"
+ ],
+ "file": "../../../src/components/zhn-table/tableFn.js",
+ "names": [
+  "_Style",
+  "require",
+  "_isNotNumber",
+  "v",
+  "Number",
+  "isNaN",
+  "_crThAriaLabel",
+  "name",
+  "order",
+  "crTdStyle",
+  "_ref",
+  "isR",
+  "crNaNStyle",
+  "S_UP",
+  "S_DOWN",
+  "exports",
+  "toFormatValue",
+  "_ref2",
+  "h",
+  "fn",
+  "TOKEN_NAN",
+  "isF",
+  "crAppearance",
+  "_ref3",
+  "C",
+  "pn",
+  "sortBy",
+  "sortTo",
+  "style",
+  "ariaSort",
+  "ariaLabel",
+  "UP",
+  "S_TH_UP",
+  "DESC",
+  "ASC",
+  "S_TH_DOWN"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AASA,MAAMC,YAAY,GAAGC,CAAC,IAAIC,MAAM,CAACC,KAAK,CAACF,CAAC,CAAC,IAAIA,CAAC,IAAI,IAAI;AAEtD,MAAMG,cAAc,GAAGA,CACrBC,IAAI,EACJC,KAAK,KACD,GAAED,IAAK,6BAA4BC,KAAM,EAAC;AAEzC,MAAMC,SAAS,GAAGC,IAAA;EAAA,IAAC;IACxBP,CAAC;IACDQ;EACF,CAAC,GAAAD,IAAA;EAAA,OAAKC,GAAG,GACLT,YAAY,CAACC,CAAC,CAAC,GACV,IAAAS,iBAAU,EAAC,CAAC,GACZT,CAAC,GAAG,CAAC,GAAGU,WAAI,GAAGC,aAAM,GAC1B,KAAK,CAAC;AAAA;AAACC,OAAA,CAAAN,SAAA,GAAAA,SAAA;AAEJ,MAAMO,aAAa,GAAGC,KAAA,IAAkB;EAAA,IAAjB;IAAEC,CAAC;IAAEf,CAAC;IAAEgB;EAAG,CAAC,GAAAF,KAAA;EACxC,IAAIC,CAAC,CAACP,GAAG,IAAIT,YAAY,CAACC,CAAC,CAAC,EAAE;IAC5B,OAAOiB,gBAAS;EAClB;EACA,IAAIF,CAAC,CAACG,GAAG,IAAI,OAAOF,EAAE,KAAK,UAAU,EAAE;IACrC,OAAOA,EAAE,CAAChB,CAAC,CAAC;EACd;EACA,OAAOA,CAAC;AACV,CAAC;AAAAY,OAAA,CAAAC,aAAA,GAAAA,aAAA;AAEM,MAAMM,YAAY,GAAGC,KAAA,IAAqC;EAAA,IAApC;IAAEC,CAAC;IAAEC,EAAE;IAAElB,IAAI;IAAEmB,MAAM;IAAEC;EAAO,CAAC,GAAAJ,KAAA;EAC1D,IAAIK,KAAK,EAAEC,QAAQ,EAAEC,SAAS;EAC9B,IAAIL,EAAE,KAAKC,MAAM,EAAE;IAClB,IAAIC,MAAM,KAAKH,CAAC,CAACO,EAAE,EAAE;MACpBH,KAAK,GAAGI,cAAO;MACfH,QAAQ,GAAGL,CAAC,CAACS,IAAI;MACjBH,SAAS,GAAGxB,cAAc,CAACC,IAAI,EAAEiB,CAAC,CAACU,GAAG,CAAC;IACxC,CAAC,MAAM;MACLN,KAAK,GAAGO,gBAAS;MACjBN,QAAQ,GAAGL,CAAC,CAACU,GAAG;MAChBJ,SAAS,GAAGxB,cAAc,CAACC,IAAI,EAAEiB,CAAC,CAACS,IAAI,CAAC;IAC1C;EACD,CAAC,MAAM;IACLH,SAAS,GAAGxB,cAAc,CAACC,IAAI,EAAEiB,CAAC,CAACU,GAAG,CAAC;EACzC;EACA,OAAO;IAAEN,KAAK;IAAEC,QAAQ;IAAEC;EAAU,CAAC;AACvC,CAAC;AAAAf,OAAA,CAAAO,YAAA,GAAAA,YAAA"
+}
