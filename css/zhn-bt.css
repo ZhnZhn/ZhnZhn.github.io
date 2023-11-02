@@ -8,7 +8,9 @@
 }
 .bt-circle-hf:hover,
 .bt-circle-hf:focus {
-  background-color: rgba(0, 0, 0, 0.3);
+  color: var(--btf-c, #1b2836) !important;
+  border-color: var(--btf-c, #1b2836) !important;
+  background-color: rgba(128, 128, 128, 0.3);
   box-shadow: 0 5px 6px 0 rgba(0,0,0,0.3), 0 4px 15px 0 rgba(0,0,0,0.2);
 }
 
@@ -34,7 +36,7 @@
   font-weight: bold;
 }
 .bt:focus {
-  background: rgba(164, 164, 164, 0.3);
+  background: rgba(128, 128, 128, 0.3);
 }
 
 .bt-left {
@@ -51,5 +53,5 @@
 }
 .bt-more:hover,
 .bt-more:focus { 
-  background: rgba(164, 164, 164, 0.3);
+  background: rgba(128, 128, 128, 0.3);
 }

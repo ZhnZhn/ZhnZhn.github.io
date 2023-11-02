@@ -23,5 +23,5 @@
 .bt-ml:hover,
 .bt-ml:focus {
   outline: 0;
-  background-color: rgba(120, 120, 120, 0.2);
+  background-color: rgba(128, 128, 128, 0.3);
 }

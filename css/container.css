@@ -46,13 +46,12 @@
 
 .row__topic:focus,
 .row__topic:active {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(128, 128, 128, 0.3);
   outline: none;
 }
 
 .row__pane-topic {
   line-height: 2.2;
-  color: black;
   font-size: 16px;
   font-weight: bold;
   padding-left: 16px;
@@ -68,12 +67,11 @@
 }
 
 .row__pane-topic:focus {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(128, 128, 128, 0.3);
 }
 
-.row__type2-topic {
+.row__type2-topic {  
   line-height: 2;
-  color: black;
   font-size: 16px;
   font-weight: bold;
   padding-left: 4px;
@@ -89,7 +87,7 @@
 
 .row__type2-topic:focus,
 .row__type2-topic:active {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(128, 128, 128, 0.3);
   outline: 0;
 }
 
@@ -143,7 +141,7 @@
 
 .bt-svg-clear:hover,
 .bt-svg-clear:focus {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(128, 128, 128, 0.3);
   outline: none;
 }
 

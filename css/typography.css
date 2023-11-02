@@ -17,11 +17,12 @@
 
 .descr-datasource h1 {
   color: black;
+  color: var(--c-bl, black);
   font-size: 18px;
   font-weight: normal;
 }
 .descr-datasource p {
-  color: gray;
+  color: grey;
   font-size: 16px;
   font-weight: bold;
   line-height: 1.4;
@@ -29,6 +30,7 @@
 }
 .descr-datasource span {
   color: black;
+  color: var(--c-bl, black);
 }
 
 /* Provider Links */

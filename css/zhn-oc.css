@@ -10,10 +10,22 @@
   width: 100%;
   cursor: pointer;
 }
+.zhn-oc-black {
+  color: black;
+  fill: black;
+  stroke: black;
+  color: var(--c-bl, black);
+  fill: var(--c-bl, black);
+  stroke: var(--c-bl, black);
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+
 .zhn-oc:focus,
 .zhn-oc:active {
   outline: none;
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(128, 128, 128, 0.3);
 }
 
 .zhn-oc__exp {

@@ -15,9 +15,18 @@
 }
 
 .highcharts-text-outline {
+  color: black;
+  color: var(--c-bl, black);
   fill: transparent;
   stroke: transparent;
-  color: black;
+}
+
+.highcharts-title,
+.highcharts-subtitle {
+  color: black !important;
+  color: var(--c-bl, black) !important;
+  fill: black !important;
+  fill: var(--c-bl, black) !important;
 }
 
 /*

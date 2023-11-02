@@ -174,8 +174,7 @@
 }
 .bt-flat:hover,
 .bt-flat:focus {
-  /* background-color: rgba(220,220,220, 0.2); */
-  background-color: rgba(120, 120, 120, 0.2);
+  background-color: rgba(128, 128, 128, 0.3);
 }
 
 .bt-flat__caption {
@@ -188,6 +187,9 @@
 }
 
 .menu-item {
+  color: #1b2836;
+  color: var(--mi-c, #1b2836);
+
   outline: none;
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   background-color: rgba(0, 0, 0, 0);
@@ -197,5 +199,5 @@
   border-bottom: 2px solid #1b75bb;
 }
 .menu-item:hover {
-  background-color: rgba(140, 140, 140, 0.3);
+  background-color: rgba(128, 128, 128, 0.3);
 }

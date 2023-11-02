@@ -10,7 +10,7 @@
   cursor: pointer;
 }
 .tp__header:hover {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(128, 128, 128, 0.3);
 }
 
 .tp__header__caption {
@@ -62,5 +62,5 @@
   pointer-events: visible;
 }
 .tp__bt:hover {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(128, 128, 128, 0.3);
 }

@@ -31,7 +31,9 @@
    /*Button flat color*/   
    --btf-c: #1b2836;
    /*Color black*/
-   --c-bl: "black"
+   --c-bl: black;
+  /*menu-item color*/
+  --mi-c: #1b2836;
  }
 
            
