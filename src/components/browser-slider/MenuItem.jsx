@@ -1,11 +1,10 @@
 import useKeyEnter from '../hooks/useKeyEnter';
 
 import {
+  CL_MENU_ITEM,
   S_ITEM_L,
-  S_ITEM_T
+  crItemTStyle
 } from './Style';
-
-const CL_MENU_ITEM = 'menu-item';
 
 const MenuItem = ({
   innerRef,
@@ -18,7 +17,7 @@ const MenuItem = ({
   } = item
   , _style = type === 'l'
       ? S_ITEM_L
-      : S_ITEM_T
+      : crItemTStyle()
   , _hKeyDown = useKeyEnter(onClick, [onClick]);
 
   return (

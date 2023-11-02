@@ -1,11 +1,10 @@
 import useKeyEnter from '../hooks/useKeyEnter';
 
 import {
+  CL_MENU_ITEM,
   S_TITLE,
   S_TITLE_ARROW
 } from './Style';
-
-const CL_MENU_ITEM = 'menu-item';
 
 const MenuTitle = ({
   innerRef,

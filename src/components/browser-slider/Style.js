@@ -1,3 +1,6 @@
+import { getColorBlack } from '../styles/uiTheme';
+
+export const CL_MENU_ITEM = 'menu-item';
 
 export const S_FRAME = {
   fontWeight: 'bold',
@@ -22,15 +25,17 @@ export const S_TITLE_ARROW = {
   left: 16
 }
 
-export const S_ITEM_L = {
-  color: '#1b2836',
+const _S_ITEM = {
   padding: 8,
-  paddingLeft: 12,
   cursor: 'pointer'
 }
 
-export const S_ITEM_T = {
-  color: 'black',
-  padding: 8,
-  cursor: 'pointer'
+export const S_ITEM_L = {
+  ..._S_ITEM,
+  paddingLeft: 12,
 }
+
+export const crItemTStyle = () => ({
+  ..._S_ITEM,
+  color: getColorBlack()
+})
