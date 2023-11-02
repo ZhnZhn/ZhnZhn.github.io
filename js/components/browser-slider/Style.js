@@ -1,9 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crItemTStyle = exports.S_TITLE_ARROW = exports.S_TITLE = exports.S_MSG_ERR = exports.S_ITEM_L = exports.S_FRAME = exports.CL_MENU_ITEM = void 0;
+exports.getMenuItemStyle = exports.S_TITLE_ARROW = exports.S_TITLE = exports.S_MSG_ERR = exports.S_FRAME = exports.CL_MENU_ITEM = void 0;
 var _styleFn = require("../styleFn");
-const CL_MENU_ITEM = exports.CL_MENU_ITEM = 'menu-item';
+const CL_MENU_ITEM = exports.CL_MENU_ITEM = "menu-item";
 const S_FRAME = exports.S_FRAME = {
   fontWeight: 'bold',
   fontSize: '16px'
@@ -14,7 +14,7 @@ const S_MSG_ERR = exports.S_MSG_ERR = {
 };
 const S_TITLE = exports.S_TITLE = {
   position: 'relative',
-  color: 'silver',
+  color: "#607d8b",
   padding: '8px 0 4px 32px',
   cursor: 'pointer'
 };
@@ -23,17 +23,15 @@ const S_TITLE_ARROW = exports.S_TITLE_ARROW = {
   top: 8,
   left: 16
 };
-const _S_ITEM = {
-  padding: 8,
-  cursor: 'pointer'
-};
-const S_ITEM_L = exports.S_ITEM_L = {
-  ..._S_ITEM,
-  paddingLeft: 12
-};
-const crItemTStyle = () => ({
-  ..._S_ITEM,
-  color: (0, _styleFn.getColorBlack)()
-});
-exports.crItemTStyle = crItemTStyle;
+const _CL_MENU_ITEM_BLACK = `${CL_MENU_ITEM} ${_styleFn.CL_BLACK}`,
+  _S_ITEM_T = {
+    padding: 8,
+    cursor: 'pointer'
+  },
+  _S_ITEM_L = {
+    ..._S_ITEM_T,
+    paddingLeft: 12
+  };
+const getMenuItemStyle = type => type === 'l' ? [CL_MENU_ITEM, _S_ITEM_L] : [_CL_MENU_ITEM_BLACK, _S_ITEM_T];
+exports.getMenuItemStyle = getMenuItemStyle;
 //# sourceMappingURL=Style.js.map

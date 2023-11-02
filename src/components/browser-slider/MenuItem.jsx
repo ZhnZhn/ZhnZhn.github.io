@@ -1,10 +1,6 @@
 import useKeyEnter from '../hooks/useKeyEnter';
 
-import {
-  CL_MENU_ITEM,
-  S_ITEM_L,
-  crItemTStyle
-} from './Style';
+import { getMenuItemStyle } from './Style';
 
 const MenuItem = ({
   innerRef,
@@ -15,15 +11,16 @@ const MenuItem = ({
     text,
     type
   } = item
-  , _style = type === 'l'
-      ? S_ITEM_L
-      : crItemTStyle()
+  , [
+    _className,
+    _style
+  ] = getMenuItemStyle(type)
   , _hKeyDown = useKeyEnter(onClick, [onClick]);
 
   return (
     <div
       ref={innerRef}
-      className={CL_MENU_ITEM}
+      className={_className}
       style={_style}
       tabIndex="0"
       role="menuitem"

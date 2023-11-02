@@ -16,11 +16,11 @@ const MenuItem = _ref => {
       text,
       type
     } = item,
-    _style = type === 'l' ? _Style.S_ITEM_L : (0, _Style.crItemTStyle)(),
+    [_className, _style] = (0, _Style.getMenuItemStyle)(type),
     _hKeyDown = (0, _useKeyEnter.default)(onClick, [onClick]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: innerRef,
-    className: _Style.CL_MENU_ITEM,
+    className: _className,
     style: _style,
     tabIndex: "0",
     role: "menuitem",

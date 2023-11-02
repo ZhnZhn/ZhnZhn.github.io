@@ -1,6 +1,6 @@
-import { getColorBlack } from '../styleFn';
+import { CL_BLACK } from '../styleFn';
 
-export const CL_MENU_ITEM = 'menu-item';
+export const CL_MENU_ITEM = "menu-item";
 
 export const S_FRAME = {
   fontWeight: 'bold',
@@ -14,7 +14,7 @@ export const S_MSG_ERR = {
 
 export const S_TITLE = {
   position: 'relative',
-  color: 'silver',
+  color: "#607d8b",
   padding: '8px 0 4px 32px',
   cursor: 'pointer'
 }
@@ -25,17 +25,18 @@ export const S_TITLE_ARROW = {
   left: 16
 }
 
-const _S_ITEM = {
+const _CL_MENU_ITEM_BLACK = `${CL_MENU_ITEM} ${CL_BLACK}`
+, _S_ITEM_T = {
   padding: 8,
   cursor: 'pointer'
 }
-
-export const S_ITEM_L = {
-  ..._S_ITEM,
+, _S_ITEM_L = {
+  ..._S_ITEM_T,
   paddingLeft: 12,
-}
+};
 
-export const crItemTStyle = () => ({
-  ..._S_ITEM,
-  color: getColorBlack()
-})
+export const getMenuItemStyle = (
+  type
+) => type === 'l'
+  ? [CL_MENU_ITEM, _S_ITEM_L]
+  : [_CL_MENU_ITEM_BLACK, _S_ITEM_T]
