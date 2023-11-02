@@ -6,6 +6,11 @@ import {
   getRefValue
 } from '../uiApi';
 
+import {
+  S_COLOR_BLACK,
+  getColorBlack
+} from '../styleFn';
+
 import useProperty from '../hooks/useProperty';
 import useRefBool from '../hooks/useRefBool';
 
@@ -20,26 +25,23 @@ import {
   S_FONT_BOLD_NON_SELECT
 } from '../styles/GeneralStyles';
 
-const CHECKED_COLOR = '#1b2836'
-, DF_COLOR = '#7cb5ec'
-
+const DF_COLOR = '#7cb5ec'
 , CL_INPUT_COLOR = 'p-r va-m'
-
 , S_ROOT = {
   padding: '0 0 16px 16px'
 }
 , _S_VALIGN_MIDDLE = {
   verticalAlign: 'middle',
 }
-, S_TITLE = {
+, _crTitleStyle = () => ({
   ..._S_VALIGN_MIDDLE,
   ...S_FONT_BOLD_NON_SELECT,
+  ...S_COLOR_BLACK,
   display: 'inline-block',
-  color: 'black',
   width: 100,
   padding: '0 16px 0 4px',
   textAlign: 'right'
-}
+})
 , S_CHECK_BOX = {
   ..._S_VALIGN_MIDDLE
 }
@@ -117,12 +119,12 @@ const SeriaRow = (props) => {
     <div style={S_ROOT}>
       <SvgCheckBox
         style={S_CHECK_BOX}
-        color={CHECKED_COLOR}
+        color={getColorBlack()}
         onCheck={_hCheck}
         onUnCheck={_hUnCheck}
       />
       <DivEllipsis
-        style={S_TITLE}
+        style={_crTitleStyle()}
         text={name}
       />
       <InputColor

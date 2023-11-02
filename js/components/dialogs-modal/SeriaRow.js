@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useRefBool = _interopRequireDefault(require("../hooks/useRefBool"));
 var _Model = _interopRequireDefault(require("../../constants/Model"));
@@ -13,8 +14,7 @@ var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 var _DivEllipsis = _interopRequireDefault(require("../zhn/DivEllipsis"));
 var _GeneralStyles = require("../styles/GeneralStyles");
 var _jsxRuntime = require("react/jsx-runtime");
-const CHECKED_COLOR = '#1b2836',
-  DF_COLOR = '#7cb5ec',
+const DF_COLOR = '#7cb5ec',
   CL_INPUT_COLOR = 'p-r va-m',
   S_ROOT = {
     padding: '0 0 16px 16px'
@@ -22,15 +22,15 @@ const CHECKED_COLOR = '#1b2836',
   _S_VALIGN_MIDDLE = {
     verticalAlign: 'middle'
   },
-  S_TITLE = {
+  _crTitleStyle = () => ({
     ..._S_VALIGN_MIDDLE,
     ..._GeneralStyles.S_FONT_BOLD_NON_SELECT,
+    ..._styleFn.S_COLOR_BLACK,
     display: 'inline-block',
-    color: 'black',
     width: 100,
     padding: '0 16px 0 4px',
     textAlign: 'right'
-  },
+  }),
   S_CHECK_BOX = {
     ..._S_VALIGN_MIDDLE
   },
@@ -97,11 +97,11 @@ const SeriaRow = props => {
     style: S_ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
       style: S_CHECK_BOX,
-      color: CHECKED_COLOR,
+      color: (0, _styleFn.getColorBlack)(),
       onCheck: _hCheck,
       onUnCheck: _hUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
-      style: S_TITLE,
+      style: _crTitleStyle(),
       text: name
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputColor.default, {
       className: CL_INPUT_COLOR,
@@ -119,6 +119,5 @@ const SeriaRow = props => {
     })]
   });
 };
-var _default = SeriaRow;
-exports.default = _default;
+var _default = exports.default = SeriaRow;
 //# sourceMappingURL=SeriaRow.js.map
