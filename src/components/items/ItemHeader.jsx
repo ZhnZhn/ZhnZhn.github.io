@@ -7,7 +7,6 @@ const CL_ITEM_HEADER = crElementCn()
 , CL_CAPTION = "not-selected text-clip bt-left bt"
 , S_ROOT = {
   position: 'relative',
-  backgroundColor: '#1b2836',
   height: 'auto',
   width: '100%',
   padding: '6px 42px 6px 10px',
