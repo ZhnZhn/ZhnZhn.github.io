@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox2"));
 var _SvgPlus = _interopRequireDefault(require("../zhn/SvgPlus"));
@@ -12,7 +13,6 @@ var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_COLOR = '#2b908f',
-  OC_COLOR = 'black',
   DF_PERIOD = 1,
   DF_SERIA = 1,
   S_ROOT_OC = {
@@ -27,19 +27,9 @@ const DF_COLOR = '#2b908f',
     paddingTop: 4,
     paddingRight: 8
   },
-  S_CAPTION = {
-    color: OC_COLOR
-  },
   S_PERIOD_INPUT = {
     width: 56,
     marginRight: 12
-  },
-  S_CAPTION_SERIA_INPUT = {
-    display: 'inline-block',
-    color: 'black',
-    width: 85,
-    paddingLeft: 5,
-    fontWeight: 'bold'
   },
   S_SERIA_INPUT = {
     width: 36
@@ -62,6 +52,13 @@ const DF_COLOR = '#2b908f',
   S_INLINE = {
     display: 'inline-block'
   },
+  _crCaptionStyle = () => ({
+    ..._styleFn.S_COLOR_BLACK,
+    display: 'inline-block',
+    width: 85,
+    paddingLeft: 5,
+    fontWeight: 'bold'
+  }),
   crSpanStyle = color => ({
     color,
     paddingLeft: 8,
@@ -139,13 +136,13 @@ const RowType1 = _ref3 => {
       color: (0, _uiApi.getRefValue)(_refColor),
       type: (0, _uiApi.getRefValue)(_refSeriaType),
       zIndex: (0, _uiApi.getRefValue)(_refOnTop) ? void 0 : -1
-    }, (0, _uiApi.getRefValue)(_refPeriod));
+    }, (0, _uiApi.getRefValue)(_refPeriod)),
+    _colorBlack = (0, _styleFn.getColorBlack)();
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     caption: caption,
+    className: _styleFn.CL_OC_BLACK,
     style: S_ROOT_OC,
     ocStyle: S_OC,
-    captionStyle: S_CAPTION,
-    openColor: OC_COLOR,
     CompAfter: is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MinusPeriod, {
       color: (0, _uiApi.getRefValue)(_refColor),
       period: (0, _uiApi.getRefValue)(_refPeriod),
@@ -165,7 +162,7 @@ const RowType1 = _ref3 => {
         style: S1_COLUMN,
         caption: "Column",
         captionStyle: S_PL_6,
-        color: OC_COLOR,
+        color: _colorBlack,
         initialValue: true,
         onToggle: _onToggleColumn
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -173,7 +170,7 @@ const RowType1 = _ref3 => {
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputText, {
           rootStyle: S_INLINE,
           caption: "For Seria",
-          captionStyle: S_CAPTION_SERIA_INPUT,
+          captionStyle: _crCaptionStyle(),
           style: S_SERIA_INPUT,
           type: "number",
           initValue: 1,
@@ -186,13 +183,12 @@ const RowType1 = _ref3 => {
           style: S1_ON_TOP,
           caption: "OnTop",
           captionStyle: S_PL_6,
-          color: OC_COLOR,
+          color: _colorBlack,
           onToggle: _onToggleTop
         })]
       })]
     })
   });
 };
-var _default = RowType1;
-exports.default = _default;
+var _default = exports.default = RowType1;
 //# sourceMappingURL=RowType1.js.map

@@ -3,6 +3,11 @@ import {
   getRefValue,
   setRefValue
 } from '../uiApi';
+import {
+  CL_OC_BLACK,
+  S_COLOR_BLACK,
+  getColorBlack
+} from '../styleFn';
 
 import D from '../dialogs/DialogCell';
 import RowCheckBox2 from '../dialogs/rows/RowCheckBox2';
@@ -13,7 +18,7 @@ import InputText from '../zhn/InputText';
 import OpenClose from '../zhn/OpenClose';
 
 const DF_COLOR = '#2b908f'
-, OC_COLOR = 'black'
+
 , DF_PERIOD = 1
 , DF_SERIA = 1
 
@@ -29,17 +34,9 @@ const DF_COLOR = '#2b908f'
   paddingTop: 4,
   paddingRight: 8
 }
-, S_CAPTION = { color: OC_COLOR }
 , S_PERIOD_INPUT = {
   width: 56,
   marginRight: 12
-}
-, S_CAPTION_SERIA_INPUT = {
-  display: 'inline-block',
-  color: 'black',
-  width: 85,
-  paddingLeft: 5,
-  fontWeight: 'bold'
 }
 , S_SERIA_INPUT = { width: 36 }
 , S_ROW_2 = { paddingBottom: 6 }
@@ -48,6 +45,13 @@ const DF_COLOR = '#2b908f'
 , S_PL_8 = { paddingLeft: 8 }
 , S_PL_10 = { paddingLeft: 10 }
 , S_INLINE = { display: 'inline-block' }
+, _crCaptionStyle = () => ({
+    ...S_COLOR_BLACK,
+    display: 'inline-block',
+    width: 85,
+    paddingLeft: 5,
+    fontWeight: 'bold'
+})
 , crSpanStyle = color => ({
   color,
   paddingLeft: 8,
@@ -131,15 +135,15 @@ const RowType1 = ({
       color: getRefValue(_refColor),
       type: getRefValue(_refSeriaType),
       zIndex: getRefValue(_refOnTop) ? void 0 : -1
-    }, getRefValue(_refPeriod));
+    }, getRefValue(_refPeriod))
+  , _colorBlack = getColorBlack();
 
   return (
   <OpenClose
     caption={caption}
+    className={CL_OC_BLACK}
     style={S_ROOT_OC}
     ocStyle={S_OC}
-    captionStyle={S_CAPTION}
-    openColor={OC_COLOR}
     CompAfter={
       is ? <MinusPeriod
               color={getRefValue(_refColor)}
@@ -163,7 +167,7 @@ const RowType1 = ({
         style={S1_COLUMN}
         caption="Column"
         captionStyle={S_PL_6}
-        color={OC_COLOR}
+        color={_colorBlack}
         initialValue={true}
         onToggle={_onToggleColumn}
       />
@@ -171,7 +175,7 @@ const RowType1 = ({
         <D.RowInputText
           rootStyle={S_INLINE}
           caption="For Seria"
-          captionStyle={S_CAPTION_SERIA_INPUT}
+          captionStyle={_crCaptionStyle()}
           style={S_SERIA_INPUT}
           type="number"
           initValue={1}
@@ -185,7 +189,7 @@ const RowType1 = ({
           style={S1_ON_TOP}
           caption="OnTop"
           captionStyle={S_PL_6}
-          color={OC_COLOR}
+          color={_colorBlack}
           onToggle={_onToggleTop}
         />
        </div>
