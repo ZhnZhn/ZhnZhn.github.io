@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _memoizeOne = _interopRequireDefault(require("memoize-one"));
 var _uiApi = require("../uiApi");
-const CL_ROW = 'row__pane-topic not-selected';
+var _styleFn = require("../styleFn");
 const _crSubItem = (id, name) => ({
   type: 'sub',
   id,
@@ -43,7 +43,7 @@ const _crModelMore = (isAdminMode, _ref) => {
     p1.push(_crItem('CompareTo', onCompareTo));
   }
   return {
-    titleCl: CL_ROW,
+    titleCl: _styleFn.CL_ROW_PANE_TOPIC,
     pageWidth: 180,
     maxPages: 2,
     p0: P0,
@@ -53,6 +53,5 @@ const _crModelMore = (isAdminMode, _ref) => {
   };
 };
 const crModelMore = (0, _memoizeOne.default)(_crModelMore);
-var _default = crModelMore;
-exports.default = _default;
+var _default = exports.default = crModelMore;
 //# sourceMappingURL=crModelMore.js.map

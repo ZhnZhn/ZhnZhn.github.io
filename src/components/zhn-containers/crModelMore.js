@@ -1,7 +1,6 @@
 import memoizeOne from 'memoize-one';
 import { bindTo } from '../uiApi';
-
-const CL_ROW = 'row__pane-topic not-selected';
+import { CL_ROW_PANE_TOPIC } from '../styleFn';
 
 const _crSubItem = (id, name) => ({
   type: 'sub',
@@ -39,7 +38,7 @@ const _crModelMore = (isAdminMode, {
     p1.push(_crItem('CompareTo', onCompareTo))
   }
   return {
-    titleCl: CL_ROW,
+    titleCl: CL_ROW_PANE_TOPIC,
     pageWidth: 180,
     maxPages: 2,
     p0: P0,
