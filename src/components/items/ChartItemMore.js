@@ -1,4 +1,4 @@
-const CL_ROW = 'row__pane-topic not-selected';
+import { CL_ROW_PANE_TOPIC } from '../styleFn';
 
 const _crItem = (
   name,
@@ -14,7 +14,7 @@ const crModel = (
   onToTop,
   hideCaption
 ) => ({
-    titleCl: CL_ROW,
+    titleCl: CL_ROW_PANE_TOPIC,
     pageWidth: 150,
     maxPages: 1,
     p0: [
