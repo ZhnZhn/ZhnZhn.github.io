@@ -3,10 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _Color = require("../styles/Color");
-var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _ProviderLinks = _interopRequireDefault(require("../links/ProviderLinks"));
-var _SpanBlack = _interopRequireDefault(require("./SpanBlack"));
+var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
+var _SpanBlack = _interopRequireDefault(require("../zhn/SpanBlack"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_NOTE_BR = "provider__note__br",
   OPEN_COLOR_L2 = _Color.GREEN_COLOR,
@@ -20,7 +21,7 @@ const CL_NOTE_BR = "provider__note__br",
     paddingTop: 6,
     lineHeight: 1.8
   },
-  S_CHILD_STYLE = {
+  S_PL_4 = {
     paddingLeft: 4
   },
   S_PT_4 = {
@@ -63,18 +64,13 @@ const LinkList = _ref2 => {
     list
   } = _ref2;
   return list.map((CompOrConfig, index) => {
-    const _isConfig = _isArr(CompOrConfig),
-      _linkComp = _isConfig ? /*#__PURE__*/(0, _jsxRuntime.jsx)(LinkPer, {
+    const _isConfig = _isArr(CompOrConfig);
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      style: (0, _styleFn.crStyle2)(S_PROVIDER, _isConfig && S_PR_4),
+      children: _isConfig ? /*#__PURE__*/(0, _jsxRuntime.jsx)(LinkPer, {
         Comp: CompOrConfig[0],
         per: CompOrConfig[1]
-      }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(CompOrConfig, {}),
-      style = _isConfig ? {
-        ...S_PROVIDER,
-        ...S_PR_4
-      } : S_PROVIDER;
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: style,
-      children: _linkComp
+      }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(CompOrConfig, {})
     }, index);
   });
 };
@@ -96,7 +92,7 @@ const DataProviders = _ref3 => {
         caption: _crListCaption(DP_KEY, 'Required API Key'),
         style: S_OC_L2,
         openColor: OPEN_COLOR_L2,
-        childStyle: S_CHILD_STYLE,
+        childStyle: S_PL_4,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
           style: S_PT_4,
           children: /*#__PURE__*/(0, _jsxRuntime.jsx)(LinkList, {
@@ -127,7 +123,7 @@ const DataProviders = _ref3 => {
         caption: _crListCaption(DP_PR, 'Required Local Http Proxy'),
         style: S_OC_L2,
         openColor: OPEN_COLOR_L2,
-        childStyle: S_CHILD_STYLE,
+        childStyle: S_PL_4,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
           style: S_PT_4,
           children: /*#__PURE__*/(0, _jsxRuntime.jsx)(LinkList, {

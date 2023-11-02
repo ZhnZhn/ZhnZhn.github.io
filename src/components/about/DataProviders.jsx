@@ -1,10 +1,9 @@
-import {
-  GREEN_COLOR
-} from '../styles/Color';
+import { crStyle2 } from '../styleFn';
+import { GREEN_COLOR } from '../styles/Color';
 
-import OpenClose from '../zhn/OpenClose'
-import Link from '../links/ProviderLinks'
-import SpanBlack from './SpanBlack'
+import Link from '../links/ProviderLinks';
+import OpenClose from '../zhn/OpenClose';
+import SpanBlack from '../zhn/SpanBlack';
 
 const CL_NOTE_BR = "provider__note__br"
 , OPEN_COLOR_L2 = GREEN_COLOR
@@ -18,7 +17,7 @@ const CL_NOTE_BR = "provider__note__br"
   paddingTop: 6,
   lineHeight: 1.8
 }
-, S_CHILD_STYLE = { paddingLeft: 4 }
+, S_PL_4 = { paddingLeft: 4 }
 , S_PT_4 = { paddingTop: 4 }
 , S_PROVIDER = {
   display: 'inline-block',
@@ -30,7 +29,7 @@ const CL_NOTE_BR = "provider__note__br"
   lineHeight: 1.4
 }
 , S_MAX_WIDTH = { maxWidth: 450 }
-, S_SETTINGS = { color: '#607d8b' }
+, S_SETTINGS = { color: '#607d8b' };
 
 const _isArr = Array.isArray;
 
@@ -77,16 +76,16 @@ const LinkPer = ({
 const LinkList = ({
   list
 }) => list.map((CompOrConfig, index) => {
-  const _isConfig = _isArr(CompOrConfig)
-  , _linkComp = _isConfig
-      ? <LinkPer Comp={CompOrConfig[0]} per={CompOrConfig[1]} />
-      : <CompOrConfig />
-  , style = _isConfig
-      ? {...S_PROVIDER, ...S_PR_4}
-      : S_PROVIDER
+  const _isConfig = _isArr(CompOrConfig);
   return (
-    <span style={style} key={index}>
-      {_linkComp}
+    <span
+       key={index}
+       style={crStyle2(S_PROVIDER, _isConfig && S_PR_4)}
+    >
+      {_isConfig
+          ? <LinkPer Comp={CompOrConfig[0]} per={CompOrConfig[1]} />
+          : <CompOrConfig />
+      }
     </span>
   );
 })
@@ -110,7 +109,7 @@ const DataProviders = ({ isClose }) => (
         caption={_crListCaption(DP_KEY, 'Required API Key')}
         style={S_OC_L2}
         openColor={OPEN_COLOR_L2}
-        childStyle={S_CHILD_STYLE}
+        childStyle={S_PL_4}
       >
       <p style={S_PT_4}>
         <LinkList list={DP_KEY} />
@@ -135,7 +134,7 @@ const DataProviders = ({ isClose }) => (
         caption={_crListCaption(DP_PR, 'Required Local Http Proxy')}
         style={S_OC_L2}
         openColor={OPEN_COLOR_L2}
-        childStyle={S_CHILD_STYLE}
+        childStyle={S_PL_4}
       >
         <p style={S_PT_4}>
           <LinkList list={DP_PR} />
