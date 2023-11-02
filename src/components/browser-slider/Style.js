@@ -1,4 +1,4 @@
-import { getColorBlack } from '../styles/uiTheme';
+import { getColorBlack } from '../styleFn';
 
 export const CL_MENU_ITEM = 'menu-item';
 

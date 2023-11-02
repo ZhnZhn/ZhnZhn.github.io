@@ -5,7 +5,7 @@
  ],
  "file": "../../../../src/components/dialogs/modals/ModalOptions.js",
  "names": [
-  "_uiTheme",
+  "_styleFn",
   "require",
   "_ModalPopup",
   "_interopRequireDefault",

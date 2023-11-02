@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiTheme = require("../../styles/uiTheme");
+var _styleFn = require("../../styleFn");
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
 var _InputText = _interopRequireDefault(require("../../zhn/InputText"));
 var _SpanBlack = _interopRequireDefault(require("../../zhn/SpanBlack"));
@@ -32,7 +32,7 @@ const ModalOptions = _ref => {
     toggleOption,
     onClose
   } = _ref;
-  const _colorBlack = (0, _uiTheme.getColorBlack)();
+  const _colorBlack = (0, _styleFn.getColorBlack)();
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
     isShow: isShow,
     style: {

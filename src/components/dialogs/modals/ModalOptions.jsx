@@ -1,4 +1,4 @@
-import { getColorBlack } from '../../styles/uiTheme';
+import { getColorBlack } from '../../styleFn';
 
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import InputText from '../../zhn/InputText';

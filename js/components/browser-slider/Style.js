@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.crItemTStyle = exports.S_TITLE_ARROW = exports.S_TITLE = exports.S_MSG_ERR = exports.S_ITEM_L = exports.S_FRAME = exports.CL_MENU_ITEM = void 0;
-var _uiTheme = require("../styles/uiTheme");
+var _styleFn = require("../styleFn");
 const CL_MENU_ITEM = exports.CL_MENU_ITEM = 'menu-item';
 const S_FRAME = exports.S_FRAME = {
   fontWeight: 'bold',
@@ -33,7 +33,7 @@ const S_ITEM_L = exports.S_ITEM_L = {
 };
 const crItemTStyle = () => ({
   ..._S_ITEM,
-  color: (0, _uiTheme.getColorBlack)()
+  color: (0, _styleFn.getColorBlack)()
 });
 exports.crItemTStyle = crItemTStyle;
 //# sourceMappingURL=Style.js.map

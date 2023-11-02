@@ -1,4 +1,5 @@
 import DivEllipsis from '../../zhn/DivEllipsis';
+import { S_COLOR_BLACK } from '../../styleFn';
 
 const S_DIV = {
   display: 'flex',
@@ -25,21 +26,24 @@ const RowText = ({
   style,
   captionStyle,
   textStyle
-}) => {
-  if (!text) return null;
-  const _captionStyle = isShowLabels
-    ? void 0 : S_NONE;
-  return (
-    <div style={{...S_DIV, ...style}}>
-      <div style={{...S_LABEL, ...captionStyle, ..._captionStyle}}>
-        {caption}
-      </div>
-      <DivEllipsis
-        style={{...S_TEXT, ...textStyle}}
-        text={text}
-      />
+}) => text ? (
+  <div style={{...S_DIV, ...style}}>
+    <div style={{
+      ...S_LABEL,
+      ...captionStyle,
+      ...(isShowLabels ? void 0 : S_NONE)
+    }}>
+      {caption}
     </div>
-  );
-};
+    <DivEllipsis
+      style={{
+        ...S_COLOR_BLACK,
+        ...S_TEXT,
+        ...textStyle
+      }}
+      text={text}
+    />
+  </div>
+) : null;
 
 export default RowText
