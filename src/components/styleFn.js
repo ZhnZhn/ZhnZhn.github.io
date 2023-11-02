@@ -1,3 +1,8 @@
+export {
+  S_COLOR_BLACK,
+  getColorBlack
+} from './styles/uiTheme';
+
 const _isArr = Array.isArray;
 
 const _getCn = (arrOrStr) => _isArr(arrOrStr)
@@ -17,6 +22,13 @@ export const crCn = (
 
 export const CL_SHOW_POPUP = "show-popup"
 export const CL_BLACK = "black"
+export const CL_NOT_SELECTED = "not-selected"
+
+const _crRowCn = className => `${className} ${CL_BLACK} ${CL_NOT_SELECTED}`
+export const CL_ROW_PANE_TOPIC = _crRowCn("row__pane-topic")
+export const CL_ROW_TYPE2_TOPIC = _crRowCn("row__type2-topic")
+export const CL_OC_BLACK = "zhn-oc-black"
+
 export const S_BLOCK = { display: "block" }
 export const S_INLINE = { display: "inline-block" }
 export const S_NONE = { display: "none" }
