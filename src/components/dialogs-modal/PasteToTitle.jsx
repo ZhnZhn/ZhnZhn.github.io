@@ -1,4 +1,5 @@
 import DivEllipsis from '../zhn/DivEllipsis';
+import SpanBlack from '../zhn/SpanBlack';
 
 const S_TITLE = {
   paddingBottom: 4,
@@ -16,7 +17,7 @@ const PasteToTitle = ({
   chartId
 }) => (
   <div style={S_TITLE}>
-    <span>From Chart:&nbsp;</span>
+    <SpanBlack>From Chart:&nbsp;</SpanBlack>
     <DivEllipsis
        style={S_CHART_ID}
        text={chartId}
