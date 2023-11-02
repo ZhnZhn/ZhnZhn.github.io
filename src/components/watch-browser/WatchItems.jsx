@@ -1,3 +1,5 @@
+import { CL_ROW_TYPE2_TOPIC } from '../styleFn';
+
 import {
   showDialogWatchItem,
   removeWatchItem
@@ -13,8 +15,7 @@ import {
 
 import WatchItem from './WatchItem';
 
-const _isArr = Array.isArray
-, CL_WATCH_ITEM = 'row__type2-topic not-selected';
+const _isArr = Array.isArray;
 
 const WatchItems = ({
   isModeEdit,
@@ -27,7 +28,7 @@ const WatchItems = ({
     return (
        <WatchItem
           key={caption}
-          className={CL_WATCH_ITEM}
+          className={CL_ROW_TYPE2_TOPIC}
           isDraggable={isModeEdit}
           item={item}
           option={{
