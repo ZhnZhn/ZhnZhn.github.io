@@ -1,6 +1,9 @@
+import { useCallback } from '../uiApi';
 import { crStyle2 } from '../styleFn';
+
 import memoIsShow from '../hoc/memoIsShow';
 import useRefFocus from '../hooks/useRefFocus';
+import useRerender from '../hooks/useRerender';
 
 import useSettingsMenuMore from './useSettingsMenuMore';
 
@@ -12,6 +15,8 @@ import Tab from '../zhn-tab/Tab';
 import PaneApiKey from './PaneApiKey';
 import PaneOptions from './PaneOptions';
 
+import { CL_ROW_PANE_TOPIC } from '../styleFn';
+
 const S_MODAL = {
   position: 'static',
   width: 380,
@@ -22,8 +27,6 @@ const S_MODAL = {
 , S_TITLE_API = { width: 82 }
 , S_TITLE_OPTION = { width: 100 };
 
-const CL_ROW = 'row__pane-topic not-selected';
-
 const SettingsDialog = memoIsShow(({
   isShow,
   data,
@@ -33,10 +36,18 @@ const SettingsDialog = memoIsShow(({
     refFocusLast,
     setRefFocusLast
   ] = useRefFocus()
+  , rerender = useRerender()
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _setUiTheme = useCallback(item => {
+    setUiTheme(item)
+    rerender()
+  }, [])
+  // rerender
+  /*eslint-enable react-hooks/exhaustive-deps */
   , [
     isShowLabels,
     menuModel
-  ] = useSettingsMenuMore(CL_ROW)
+  ] = useSettingsMenuMore(CL_ROW_PANE_TOPIC)
   , _style = crStyle2(
     S_MODAL,
     !isShowLabels && S_MODAL_SMALL
@@ -68,7 +79,7 @@ const SettingsDialog = memoIsShow(({
         <Tab title="Options">
           <PaneOptions
              titleStyle={S_TITLE_OPTION}
-             onChangeTheme={setUiTheme}
+             onChangeTheme={_setUiTheme}
           />
         </Tab>
       </TabPane>

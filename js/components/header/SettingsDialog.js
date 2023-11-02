@@ -3,9 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useRefFocus = _interopRequireDefault(require("../hooks/useRefFocus"));
+var _useRerender = _interopRequireDefault(require("../hooks/useRerender"));
 var _useSettingsMenuMore = _interopRequireDefault(require("./useSettingsMenuMore"));
 var _uiTheme = require("../styles/uiTheme");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
@@ -29,7 +31,6 @@ const S_MODAL = {
   S_TITLE_OPTION = {
     width: 100
   };
-const CL_ROW = 'row__pane-topic not-selected';
 const SettingsDialog = (0, _memoIsShow.default)(_ref => {
   let {
     isShow,
@@ -37,7 +38,15 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
     onClose
   } = _ref;
   const [refFocusLast, setRefFocusLast] = (0, _useRefFocus.default)(),
-    [isShowLabels, menuModel] = (0, _useSettingsMenuMore.default)(CL_ROW),
+    rerender = (0, _useRerender.default)()
+    /*eslint-disable react-hooks/exhaustive-deps */,
+    _setUiTheme = (0, _uiApi.useCallback)(item => {
+      (0, _uiTheme.setUiTheme)(item);
+      rerender();
+    }, [])
+    // rerender
+    /*eslint-enable react-hooks/exhaustive-deps */,
+    [isShowLabels, menuModel] = (0, _useSettingsMenuMore.default)(_styleFn.CL_ROW_PANE_TOPIC),
     _style = (0, _styleFn.crStyle2)(S_MODAL, !isShowLabels && S_MODAL_SMALL);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
     refFocusLast: refFocusLast,
@@ -63,7 +72,7 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
         title: "Options",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneOptions.default, {
           titleStyle: S_TITLE_OPTION,
-          onChangeTheme: _uiTheme.setUiTheme
+          onChangeTheme: _setUiTheme
         })
       })]
     })
