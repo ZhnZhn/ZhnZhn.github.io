@@ -5,9 +5,9 @@ exports.__esModule = true;
 exports.default = void 0;
 var _RouterNativeLink = _interopRequireDefault(require("../native-links/RouterNativeLink"));
 var _Comp = _interopRequireDefault(require("../Comp"));
+var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_DESCR = 'info__descr',
-  C_DESCR_OPEN = '#1b2836',
   S_ROOT = {
     position: 'relative',
     padding: '34px 20px 0 8px'
@@ -32,16 +32,16 @@ const CL_DESCR = 'info__descr',
     textAlign: 'right',
     fontWeight: 'bold'
   },
-  S_INFO_TEXT = {
-    color: 'black',
+  _crTextStyle = () => ({
+    ..._styleFn.S_COLOR_BLACK,
     fontWeight: 'bold',
     textTransform: 'capitalize'
-  },
+  }),
   S_DESCR_INFO = {
     lineHeight: 1.7
   },
   S_DESCR_TEXT = {
-    color: 'gray',
+    color: 'grey',
     fontWeight: 'bold'
   };
 const _renderNdlLink = linkId => {
@@ -77,7 +77,8 @@ const PanelDataInfo = _ref => {
       item,
       linkFn
     } = zhInfo || {},
-    _style = isShow ? S_SHOW : S_HIDE;
+    _style = isShow ? S_SHOW : S_HIDE,
+    _textStyle = _crTextStyle();
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       ...S_ROOT,
@@ -89,27 +90,28 @@ const PanelDataInfo = _ref => {
       onClick: onClickChart
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
       text: name,
-      textStyle: S_INFO_TEXT
+      textStyle: _textStyle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
       caption: "From Date",
       captionStyle: S_INFO_CAPTION,
       text: fromDate,
-      textStyle: S_INFO_TEXT
+      textStyle: _textStyle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
       style: S_TO_DATE_INFO,
       caption: "To Date",
       captionStyle: S_INFO_CAPTION,
       text: toDate,
-      textStyle: S_INFO_TEXT
+      textStyle: _textStyle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
       caption: "Frequency",
       captionStyle: S_INFO_CAPTION,
       text: frequency,
-      textStyle: S_INFO_TEXT
+      textStyle: _textStyle
     }), _renderNdlLink(linkId), description && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.OpenClose, {
       isClose: !_isShortDescr(description),
-      caption: "Description",
-      openColor: C_DESCR_OPEN,
+      caption: "Description"
+      //openColor={C_DESCR_OPEN}
+      ,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
         style: S_DESCR_INFO,
         isHtml: true,
@@ -120,6 +122,5 @@ const PanelDataInfo = _ref => {
     }), _renderNativeLink(linkFn, item)]
   });
 };
-var _default = PanelDataInfo;
-exports.default = _default;
+var _default = exports.default = PanelDataInfo;
 //# sourceMappingURL=PanelDataInfo.js.map

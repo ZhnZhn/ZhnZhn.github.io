@@ -1,9 +1,9 @@
 import RouterNativeLink from '../native-links/RouterNativeLink';
 
 import A from '../Comp';
+import { S_COLOR_BLACK } from '../styleFn';
 
 const CL_DESCR = 'info__descr'
-, C_DESCR_OPEN = '#1b2836'
 , S_ROOT = {
   position: 'relative',
   padding: '34px 20px 0 8px'
@@ -20,14 +20,14 @@ const CL_DESCR = 'info__descr'
   textAlign: 'right',
   fontWeight: 'bold'
 }
-, S_INFO_TEXT = {
-  color: 'black',
+, _crTextStyle = () => ({
+  ...S_COLOR_BLACK,
   fontWeight: 'bold',
   textTransform: 'capitalize'
-}
+})
 , S_DESCR_INFO = { lineHeight: 1.7 }
 , S_DESCR_TEXT = {
-  color: 'gray',
+  color: 'grey',
   fontWeight: 'bold'
 };
 
@@ -64,7 +64,8 @@ const PanelDataInfo = ({
     description
   } = info || {}
  , { item, linkFn } = zhInfo || {}
- , _style = isShow ? S_SHOW : S_HIDE;
+ , _style = isShow ? S_SHOW : S_HIDE
+ , _textStyle = _crTextStyle();
 
   return (
     <div style={{...S_ROOT, ..._style}}>
@@ -75,32 +76,32 @@ const PanelDataInfo = ({
       />
       <A.InfoPart
          text={name}
-         textStyle={S_INFO_TEXT}
+         textStyle={_textStyle}
       />
       <A.InfoPart
          caption="From Date"
          captionStyle={S_INFO_CAPTION}
          text={fromDate}
-         textStyle={S_INFO_TEXT}
+         textStyle={_textStyle}
       />
       <A.InfoPart
          style={S_TO_DATE_INFO}
          caption="To Date"
          captionStyle={S_INFO_CAPTION}
          text={toDate}
-         textStyle={S_INFO_TEXT}
+         textStyle={_textStyle}
       />
       <A.InfoPart
          caption="Frequency"
          captionStyle={S_INFO_CAPTION}
          text={frequency}
-         textStyle={S_INFO_TEXT}
+         textStyle={_textStyle}
       />
       {_renderNdlLink(linkId)}
       { description && <A.OpenClose
            isClose={!_isShortDescr(description)}
            caption="Description"
-           openColor={C_DESCR_OPEN}
+           //openColor={C_DESCR_OPEN}
           >
             <A.InfoPart
                style={S_DESCR_INFO}
