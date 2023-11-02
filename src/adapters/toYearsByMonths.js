@@ -13,6 +13,7 @@ import {
   tooltipCategorySimple
 } from '../charts/Tooltip';
 import {
+  getColorBlack,
   crValueMoving,
   roundBy,
   numberFormat
@@ -32,11 +33,11 @@ const MIN_MAX_COLOR = '#008b8b'
   index: 2,
   color: '#f45b5b'
 }
-, CONFIG_AVG = {
+, _crConfigAvg = () => ({
   index: 4,
-  color: 'black',
+  color: getColorBlack(),
   isVisible: false
-};
+});
 
 
 const _getYear = str => str.split("-")[0];
@@ -238,7 +239,7 @@ const _crAvgSeria = (data) => {
 
   return _crSeria(
     name,
-    {...CONFIG_AVG, ...{data: _data}}
+    {..._crConfigAvg(), ...{data: _data}}
   );
 }
 

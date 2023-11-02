@@ -4,6 +4,7 @@ import {
   fAdd,
   toConfig
 } from '../../charts/configBuilderFn';
+import { getColorBlack } from './EuroStatFn';
 
 const _assign = Object.assign;
 
@@ -19,7 +20,7 @@ const BAR_CHART = {
 };
 const _crBarDataLabels = () => ({
   enabled: true,
-  color: 'black',
+  color: getColorBlack(),
   crop: false,
   overflow: 'allow',
   zIndex: 10,

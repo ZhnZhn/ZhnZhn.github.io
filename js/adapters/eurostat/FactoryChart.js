@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
+var _EuroStatFn = require("./EuroStatFn");
 const _assign = Object.assign;
 const CHART_HEIGHT = {
   height: 600,
@@ -17,7 +18,7 @@ const BAR_CHART = {
 };
 const _crBarDataLabels = () => ({
   enabled: true,
-  color: 'black',
+  color: (0, _EuroStatFn.getColorBlack)(),
   crop: false,
   overflow: 'allow',
   zIndex: 10,
@@ -133,6 +134,5 @@ const FactoryChart = {
     return _crConfig ? _crConfig(option) : {};
   }
 };
-var _default = FactoryChart;
-exports.default = _default;
+var _default = exports.default = FactoryChart;
 //# sourceMappingURL=FactoryChart.js.map

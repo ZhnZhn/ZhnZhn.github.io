@@ -1,8 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.toUpperCaseFirst = exports.joinBy = exports.isTokenInStr = exports.isInArrStr = exports.isArr = exports.getValueCaption = exports.getValue = exports.getCaption = exports.fCrData = exports.crIntradayConfigOption = exports.crError = exports.DF_FN_EOD = void 0;
+exports.ymdhmsToUTC = exports.toUpperCaseFirst = exports.joinBy = exports.isTokenInStr = exports.isInArrStr = exports.isArr = exports.getValueCaption = exports.getValue = exports.getColorBlack = exports.getCaption = exports.fCrData = exports.crIntradayConfigOption = exports.crError = exports.DF_FN_EOD = void 0;
 var _AdapterFn = require("../AdapterFn");
+exports.getColorBlack = _AdapterFn.getColorBlack;
 exports.isArr = _AdapterFn.isArr;
 exports.isInArrStr = _AdapterFn.isInArrStr;
 exports.isTokenInStr = _AdapterFn.isTokenInStr;
@@ -19,8 +20,7 @@ exports.crError = _AdapterFn.crError;
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
 var _legendFn = require("../legendFn");
-const DF_FN_EOD = "EOD";
-exports.DF_FN_EOD = DF_FN_EOD;
+const DF_FN_EOD = exports.DF_FN_EOD = "EOD";
 const _crItemConf = (_ref, option) => {
   let {
     data

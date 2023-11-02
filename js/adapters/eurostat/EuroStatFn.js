@@ -2,8 +2,9 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toPointArr = exports.setInfo = exports.setDataAndInfo = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
+exports.toPointArr = exports.setInfo = exports.setDataAndInfo = exports.getColorBlack = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
 var _AdapterFn = require("../AdapterFn");
+exports.getColorBlack = _AdapterFn.getColorBlack;
 exports.findMinY = _AdapterFn.findMinY;
 var _Chart = require("../../charts/Chart");
 var _Tooltip = require("../../charts/Tooltip");
@@ -21,20 +22,20 @@ const _getObjectKeys = Object.keys,
   _isStr = str => typeof str === 'string',
   _isArr = Array.isArray;
 const _crDescr = (updated, extension) => {
-  const _updated = _isStr(updated) ? "Updated: " + updated.replace('T', ' ') : '',
+  const _updated = _isStr(updated) ? `Updated: ${updated.replace('T', ' ')}` : '',
     _ext = extension || {},
     {
       id,
       subTitle
     } = _ext,
-    _id = "Dataset: " + (id || '').toLowerCase(),
-    _sub = subTitle ? "Metric: " + subTitle : '',
+    _id = `Dataset: ${(id || '').toLowerCase()}`,
+    _sub = subTitle ? `Metric: ${subTitle}` : '',
     _d = _ext.description || '';
-  return "<p>" + _updated + "</p><p>" + _id + "</p><p>" + _d + " " + _sub + "</p>";
+  return `<p>${_updated}</p><p>${_id}</p><p>${_d} ${_sub}</p>`;
 };
 const OBS_PERIOD_OVERALL_ = 'OBS_PERIOD_OVERALL_',
-  OLDEST_DATE = OBS_PERIOD_OVERALL_ + "OLDEST",
-  LATEST_DATE = OBS_PERIOD_OVERALL_ + "LATEST";
+  OLDEST_DATE = `${OBS_PERIOD_OVERALL_}OLDEST`,
+  LATEST_DATE = `${OBS_PERIOD_OVERALL_}LATEST`;
 const _getObsOverallPeriods = extension => {
   const {
     annotation
@@ -279,7 +280,7 @@ exports.crCategoryTooltip = crCategoryTooltip;
 const crDataSource = dfProps => {
   const _ds = dfProps.dataSource,
     _prefix = _ds && _ds.indexOf('Eurostat') !== -1 ? _ds : 'Eurostat';
-  return _prefix + " (" + (_getTableId(dfProps) || '') + ")";
+  return `${_prefix} (${_getTableId(dfProps) || ''})`;
 };
 exports.crDataSource = crDataSource;
 const crLinkConf = dfProps => ({

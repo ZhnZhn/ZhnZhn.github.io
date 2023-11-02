@@ -19,8 +19,8 @@ const TWO_YEARS_DAYS = 501,
   BBANDS_U = 'Real Upper Band',
   BBANDS_M = 'Real Middle Band',
   BBANDS_L = 'Real Lower Band',
-  S_BLACK = {
-    color: 'black'
+  _crColorBlackStyle = {
+    color: (0, _fnAdapter.getColorBlack)()
   },
   S_RED = {
     color: '#f44336'
@@ -53,7 +53,7 @@ const _crValue = (json, option) => {
       forDays = TWO_YEARS_DAYS
     } = option,
     _indicator = _crValuePropName(indicator),
-    value = json[TA + " " + _indicator],
+    value = json[`${TA} ${_indicator}`],
     dateKeys = value ? Object.keys(value).sort().reverse() : [],
     _len = dateKeys.length,
     max = _len < forDays ? _len - 1 : forDays;
@@ -136,7 +136,7 @@ const _crMacdSeries = (json, option) => {
     sMcad = _crSplineSeria({
       data: _arrs[0],
       name: MACD
-    }, S_BLACK),
+    }, _crColorBlackStyle()),
     sSignal = _crSplineSeria({
       data: _arrs[1],
       name: MACD_S
@@ -200,7 +200,7 @@ const IndicatorAdapter = {
       ticket,
       value
     } = option;
-    return option.chartId = ticket + "-" + value;
+    return option.chartId = `${ticket}-${value}`;
   },
   toConfig(json, option) {
     const {
@@ -211,7 +211,7 @@ const IndicatorAdapter = {
     return {
       config: (0, _pipe.default)(
       //_title
-      (0, _configBuilderFn.crArea2Config)(ticket + ": " + value),
+      (0, _configBuilderFn.crArea2Config)(`${ticket}: ${value}`),
       //_series
       (0, _configBuilderFn.fAddSeries)(_toSeries(json, option)), (0, _configBuilderFn.fAdd)({
         zhConfig: _crZhConfig(chartId)
@@ -222,6 +222,5 @@ const IndicatorAdapter = {
   },
   toSeries: _toSeries
 };
-var _default = IndicatorAdapter;
-exports.default = _default;
+var _default = exports.default = IndicatorAdapter;
 //# sourceMappingURL=IndicatorAdapter.js.map

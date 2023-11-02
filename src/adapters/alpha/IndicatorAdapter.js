@@ -8,7 +8,10 @@ import {
 } from '../../charts/configBuilderFn';
 import { crSeriaConfig } from '../../charts/ChartConfigFn';
 
-import { ymdToUTC } from './fnAdapter';
+import {
+  getColorBlack,
+  ymdToUTC
+} from './fnAdapter';
 
 const TWO_YEARS_DAYS = 501
 , TA = 'Technical Analysis:'
@@ -25,7 +28,7 @@ const TWO_YEARS_DAYS = 501
 , BBANDS_M = 'Real Middle Band'
 , BBANDS_L = 'Real Lower Band'
 
-, S_BLACK = { color: 'black' }
+, _crColorBlackStyle = { color: getColorBlack() }
 , S_RED = { color: '#f44336' }
 , S_BLUE = { color: 'rgb(47, 126, 216)' }
 , COLOR_BLUE_A = 'rgba(47, 126, 216, 0.75)'
@@ -128,7 +131,7 @@ const _crMacdSeries = (json, option) => {
   , sMcad = _crSplineSeria({
        data: _arrs[0],
        name: MACD
-    }, S_BLACK)
+    }, _crColorBlackStyle())
   , sSignal = _crSplineSeria({
        data: _arrs[1],
        name: MACD_S

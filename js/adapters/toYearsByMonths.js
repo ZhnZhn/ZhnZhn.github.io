@@ -17,11 +17,11 @@ const MIN_MAX_COLOR = '#008b8b',
     index: 2,
     color: '#f45b5b'
   },
-  CONFIG_AVG = {
+  _crConfigAvg = () => ({
     index: 4,
-    color: 'black',
+    color: (0, _AdapterFn.getColorBlack)(),
     isVisible: false
-  };
+  });
 const _getYear = str => str.split("-")[0];
 const _getMonth = str => str.split("-")[1];
 const _crSeria = (name, _ref) => {
@@ -167,7 +167,7 @@ const _crRangeSeries = data => {
     } = _crMonthHm(0, data, stopYear, _crValueYearPoint),
     max = data.length,
     _stopYear = isBreaked ? stopYear : _getYear(data[max - 1][0]),
-    _range = _stopYear + ":" + refYear,
+    _range = `${_stopYear}:${refYear}`,
     _data = _hmToSeriaData(hm, _crHighLowPoint);
   const _minData = [],
     _maxData = [];
@@ -191,12 +191,12 @@ const _crRangeSeries = data => {
     });
   });
   return [(0, _configBuilderFn.crSplineSeriaConfig)({
-    name: "Min " + _range,
+    name: `Min ${_range}`,
     data: _minData,
     color: MIN_MAX_COLOR,
     seriaWidth: 2,
     tooltip: _Tooltip.tooltipCategorySimple
-  }), _crSeria("Max " + _range, {
+  }), _crSeria(`Max ${_range}`, {
     data: _maxData,
     color: MIN_MAX_COLOR
   })];
@@ -223,9 +223,9 @@ const _crAvgSeria = data => {
     } = _crMonthHm(startIndex, data, stopYear),
     _stopYear = isBreaked ? stopYear : _getYear(data[max - 1][0]),
     _data = _hmToSeriaData(hm, _crAvgPoint),
-    name = "Avg " + _stopYear + ":" + fromYear;
+    name = `Avg ${_stopYear}:${fromYear}`;
   return _crSeria(name, {
-    ...CONFIG_AVG,
+    ..._crConfigAvg(),
     ...{
       data: _data
     }
@@ -261,7 +261,7 @@ const _crValueAndDate = (seria, index) => {
     } = data[index];
   return {
     value,
-    date: c + "-" + name
+    date: `${c}-${name}`
   };
 };
 const _crValueMoving = (nowSeria, prevSeria) => {
@@ -290,11 +290,11 @@ const _crValueMoving = (nowSeria, prevSeria) => {
   };
 };
 const _checkIfEnoughData = data => {
-  const _len = data == null ? void 0 : data.length;
+  const _len = data?.length;
   if (_len <= 12) {
     throw {
       errCaption: "Data Error",
-      message: "Not enough data for chart (" + _len + ")"
+      message: `Not enough data for chart (${_len})`
     };
   }
 };
@@ -316,6 +316,5 @@ const crYearlyConfig = (data, option) => {
     valueMoving: _crValueMoving(nowSeria, prevSeria)
   }));
 };
-var _default = crYearlyConfig;
-exports.default = _default;
+var _default = exports.default = crYearlyConfig;
 //# sourceMappingURL=toYearsByMonths.js.map

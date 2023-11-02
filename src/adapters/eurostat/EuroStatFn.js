@@ -1,4 +1,5 @@
 export {
+  getColorBlack,
   findMinY
 } from '../AdapterFn';
 
