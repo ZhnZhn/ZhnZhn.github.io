@@ -3,8 +3,10 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiTheme = require("../../styles/uiTheme");
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
 var _InputText = _interopRequireDefault(require("../../zhn/InputText"));
+var _SpanBlack = _interopRequireDefault(require("../../zhn/SpanBlack"));
 var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox2"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -13,7 +15,6 @@ const S_DIV_INPUT = {
 };
 const S_CAPTION = {
   paddingRight: 4,
-  color: 'black',
   fontSize: '16px',
   fontWeight: 'bold'
 };
@@ -31,6 +32,7 @@ const ModalOptions = _ref => {
     toggleOption,
     onClose
   } = _ref;
+  const _colorBlack = (0, _uiTheme.getColorBlack)();
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
     isShow: isShow,
     style: {
@@ -42,7 +44,7 @@ const ModalOptions = _ref => {
     children: [onRoundTo && _isRt(dfRt) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_DIV_INPUT,
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
           style: S_CAPTION,
           children: "Round Decimals to"
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
@@ -61,12 +63,12 @@ const ModalOptions = _ref => {
       return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
         id: id,
         style: _Style.S_ROW,
+        color: _colorBlack,
         caption: caption,
         onToggle: toggleOption
       }, id);
     })]
   });
 };
-var _default = ModalOptions;
-exports.default = _default;
+var _default = exports.default = ModalOptions;
 //# sourceMappingURL=ModalOptions.js.map
