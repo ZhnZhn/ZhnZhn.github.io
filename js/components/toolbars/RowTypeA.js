@@ -4,12 +4,12 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _A = _interopRequireDefault(require("../zhn/A"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_COLOR = '#2b908f',
-  OC_COLOR = 'black',
   S_ROOT_OC = {
     lineHeight: 'unset',
     paddingBottom: 4,
@@ -22,9 +22,6 @@ const DF_COLOR = '#2b908f',
     width: 'auto',
     paddingRight: 8,
     marginRight: 6
-  },
-  S_CAPTION = {
-    color: OC_COLOR
   },
   S_INPUT_COLOR = {
     paddingLeft: 10
@@ -50,10 +47,9 @@ const RowTypeA = _ref => {
   const [compAfter, onColor] = _useRowTypeA(mathFn, getChart, dfColor);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.OpenClose, {
     caption: caption,
+    className: _styleFn.CL_OC_BLACK,
     style: S_ROOT_OC,
     ocStyle: S_OC,
-    captionStyle: S_CAPTION,
-    openColor: OC_COLOR,
     CompAfter: compAfter,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputColor, {
       style: S_INPUT_COLOR,
@@ -62,6 +58,5 @@ const RowTypeA = _ref => {
     })
   });
 };
-var _default = RowTypeA;
-exports.default = _default;
+var _default = exports.default = RowTypeA;
 //# sourceMappingURL=RowTypeA.js.map

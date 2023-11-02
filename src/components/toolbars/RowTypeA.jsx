@@ -1,12 +1,12 @@
 import { useState } from '../uiApi';
+import { CL_OC_BLACK } from '../styleFn';
+
 import useProperty from '../hooks/useProperty';
 
 import A from '../zhn/A';
 import D from '../dialogs/DialogCell';
 
 const DF_COLOR = '#2b908f'
-, OC_COLOR = 'black'
-
 , S_ROOT_OC = {
   lineHeight: 'unset',
   paddingBottom: 4,
@@ -20,9 +20,7 @@ const DF_COLOR = '#2b908f'
   paddingRight: 8,
   marginRight: 6
 }
-, S_CAPTION = { color: OC_COLOR }
 , S_INPUT_COLOR = { paddingLeft: 10 };
-
 
 const _useRowTypeA = (
   mathFn,
@@ -65,10 +63,9 @@ const RowTypeA = ({
   return (
     <A.OpenClose
       caption={caption}
+      className={CL_OC_BLACK}
       style={S_ROOT_OC}
       ocStyle={S_OC}
-      captionStyle={S_CAPTION}
-      openColor={OC_COLOR}
       CompAfter={compAfter}
     >
       <D.RowInputColor
