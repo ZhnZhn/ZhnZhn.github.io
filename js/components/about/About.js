@@ -13,7 +13,7 @@ var _Comp = _interopRequireDefault(require("../Comp"));
 var _TwitterLink = _interopRequireDefault(require("./TwitterLink"));
 var _DataProviders = _interopRequireDefault(require("./DataProviders"));
 var _StepTitle = _interopRequireDefault(require("./StepTitle"));
-var _SpanBlack = _interopRequireDefault(require("./SpanBlack"));
+var _SpanBlack = _interopRequireDefault(require("../zhn/SpanBlack"));
 var _ProviderLinks = _interopRequireDefault(require("../links/ProviderLinks"));
 var _LogosBar = _interopRequireDefault(require("./LogosBar"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -54,9 +54,7 @@ const CL_ABOUT = (0, _styleFn.crBsContainerCn)("about-container"),
   },
   S_GREEN = {
     color: '#80c040'
-  }
-  //, S_BLACK = { color: 'black' }
-  ,
+  },
   S_BLUE_DARK = {
     color: '#2f7ed8'
   },

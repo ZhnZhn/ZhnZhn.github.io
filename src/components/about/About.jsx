@@ -19,7 +19,7 @@ import A from '../Comp';
 import TwitterLink from './TwitterLink';
 import DataProviders from './DataProviders';
 import StepTitle from './StepTitle';
-import SpanBlack from './SpanBlack';
+import SpanBlack from '../zhn/SpanBlack';
 import Link from '../links/ProviderLinks';
 import LogosBar from './LogosBar';
 
@@ -44,7 +44,6 @@ const CL_ABOUT = crBsContainerCn("about-container")
 , S_MT_4 = { marginTop: 4 }
 , S_BT_TWITTER = { marginLeft: 12 }
 , S_GREEN = { color: '#80c040' }
-//, S_BLACK = { color: 'black' }
 , S_BLUE_DARK = { color: '#2f7ed8' }
 , S_RED = { color: '#f44336' }
 
