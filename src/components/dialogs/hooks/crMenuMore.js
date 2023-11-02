@@ -1,4 +1,4 @@
-const CL_ROW = 'row__pane-topic';
+import { CL_ROW_PANE_TOPIC } from '../../styleFn';
 
 const _crItem = (
   name,
@@ -6,7 +6,7 @@ const _crItem = (
 ) => ({
   name,
   onClick,
-  cn: CL_ROW,
+  cn: CL_ROW_PANE_TOPIC,
   isClose: true
 });
 
@@ -14,7 +14,7 @@ const crMenuMore = (
   onToggleToolbar,
   onAbout
 ) => ({
-  titleCl: CL_ROW,
+  titleCl: CL_ROW_PANE_TOPIC,
   pageWidth: 185,
   maxPages: 1,
   p0: [
