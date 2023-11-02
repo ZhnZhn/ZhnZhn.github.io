@@ -20,7 +20,7 @@ const _crAxisLabelStyle = (color, fontSize) => ({
     fontWeight: "bold"
   }
 });
-const ChartTheme = {
+const ChartTheme = exports.ChartTheme = {
   credits: {
     enabled: true,
     position: {
@@ -243,8 +243,8 @@ const ChartTheme = {
     backgroundColor: _Color.COLOR_TOOLTIP,
     borderWidth: 2,
     borderRadius: 10,
-    headerFormat: "<span class=\"" + _CL.CL_TP_HEADER + "\">{point.key}</span><br/>'",
-    pointFormat: "<span class=\"" + _CL.CL_TP_TITLE + "\">Value: </span>" + ("<span class=\"" + _CL.CL_TP_VALUE + "\">{point.y}</span><br/>")
+    headerFormat: `<span class="${_CL.CL_TP_HEADER}">{point.key}</span><br/>'`,
+    pointFormat: `<span class="${_CL.CL_TP_TITLE}">Value: </span>` + `<span class="${_CL.CL_TP_VALUE}">{point.y}</span><br/>`
   },
   xAxis: {
     lineColor: _Color.COLOR_X_LINE,
@@ -271,5 +271,4 @@ const ChartTheme = {
     labels: _crAxisLabelStyle(_Color.COLOR_Y_LABEL, "14px")
   }
 };
-exports.ChartTheme = ChartTheme;
 //# sourceMappingURL=ChartTheme.js.map

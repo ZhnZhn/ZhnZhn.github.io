@@ -1,26 +1,21 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.crStackedColumnSeria = exports.crStackedColumnConfig = exports.crStackedAreaSeria = exports.crStackedAreaConfig = void 0;
-
+var _ChartFn = require("./ChartFn");
 var _crStackedConfig = _interopRequireDefault(require("./crStackedConfig"));
-
-const crStackedAreaConfig = _crStackedConfig.default;
-exports.crStackedAreaConfig = crStackedAreaConfig;
-
-const crStackedColumnConfig = props => (0, _crStackedConfig.default)({ ...props,
+const crStackedAreaConfig = exports.crStackedAreaConfig = _crStackedConfig.default;
+const crStackedColumnConfig = props => (0, _crStackedConfig.default)({
+  ...props,
   type: 'column'
 });
-
 exports.crStackedColumnConfig = crStackedColumnConfig;
-
 const crStackedAreaSeria = _ref => {
   let {
     name,
     data = [],
-    color = 'gray'
+    color = 'grey'
   } = _ref;
   return {
     name,
@@ -34,9 +29,7 @@ const crStackedAreaSeria = _ref => {
     }
   };
 };
-
 exports.crStackedAreaSeria = crStackedAreaSeria;
-
 const crStackedColumnSeria = _ref2 => {
   let {
     name,
@@ -59,7 +52,7 @@ const crStackedColumnSeria = _ref2 => {
     dataLabels: {
       enabled: false,
       format: '{point.percent}',
-      color: 'black',
+      color: (0, _ChartFn.getColorBlack)(),
       style: {
         textShadow: 'none'
       }
@@ -72,6 +65,5 @@ const crStackedColumnSeria = _ref2 => {
     }
   };
 };
-
 exports.crStackedColumnSeria = crStackedColumnSeria;
 //# sourceMappingURL=StackedConfigFn.js.map

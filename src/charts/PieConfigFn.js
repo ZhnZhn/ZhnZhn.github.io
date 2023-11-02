@@ -1,3 +1,5 @@
+import { getColorBlack } from './ChartFn';
+
 import {
   SEMIDONUT_TITLE_Y,
   SEMIDONUT_SUBTITLE_Y,
@@ -47,7 +49,7 @@ export const crInnerPieSeria = ({
       style: {
         fontWeight: 'bold',
         fontSize: '18px',
-        color: 'black',
+        color: getColorBlack(),
         textShadow: 'none;'
       }
    }

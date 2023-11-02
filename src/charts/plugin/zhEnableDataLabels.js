@@ -1,13 +1,14 @@
+import { getColorBlack } from '../ChartFn';
 
-const DATA_LABELS = {
+const _crDataLabelsConfig = () => ({
   enabled: true,
-  color: 'black',
+  color: getColorBlack(),
   crop: false,
   overflow: 'allow',
   style: {
     fontSize: 14
   }
-};
+})
 
 const  zhEnableDataLabels = function(
   seriaType='columnrange',
@@ -19,7 +20,7 @@ const  zhEnableDataLabels = function(
         [seriaType]: {
           dataLabels: {
             ...options,
-            ...DATA_LABELS
+            ..._crDataLabelsConfig()
           }
         }
       }

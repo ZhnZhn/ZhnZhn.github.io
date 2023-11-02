@@ -2,17 +2,15 @@
 
 exports.__esModule = true;
 exports.crTreeMapSeria = exports.crTreeMapConfig = exports.CONFIG_TREE_MAP = void 0;
-
+var _ChartFn = require("./ChartFn");
 var _Chart = require("./Chart");
-
 var _Tooltip = require("./Tooltip");
-
-const CONFIG_TREE_MAP = {
+const CONFIG_TREE_MAP = exports.CONFIG_TREE_MAP = {
   //data : data,
   type: 'treemap',
   layoutAlgorithm: 'squarified',
   //layoutAlgorithm : 'sliceAndDice',
-  borderColor: 'gray',
+  borderColor: 'grey',
   dataLabels: {
     align: 'left',
     verticalAlign: 'top',
@@ -20,7 +18,7 @@ const CONFIG_TREE_MAP = {
       fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
       fontSize: '14px',
       fontWeight: 'bold',
-      color: 'black',
+      color: (0, _ChartFn.getColorBlack)(),
       textShadow: 'none'
     }
   },
@@ -31,8 +29,6 @@ const CONFIG_TREE_MAP = {
     }
   }
 };
-exports.CONFIG_TREE_MAP = CONFIG_TREE_MAP;
-
 const crTreeMapConfig = () => ({
   credits: (0, _Chart.fCreditsRightBottom)(),
   chart: {
@@ -50,12 +46,10 @@ const crTreeMapConfig = () => ({
   },
   zhDetailCharts: []
 });
-
 exports.crTreeMapConfig = crTreeMapConfig;
-
-const crTreeMapSeria = data => ({ ...CONFIG_TREE_MAP,
+const crTreeMapSeria = data => ({
+  ...CONFIG_TREE_MAP,
   data
 });
-
 exports.crTreeMapSeria = crTreeMapSeria;
 //# sourceMappingURL=TreeMapConfigFn.js.map

@@ -2,7 +2,10 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.zoomIndicatorCharts = exports.toTdmyIf = exports.toTdmy = exports.toNumberFormatAll = exports.toNumberFormat = exports.toDmy = exports.setYToPoints = exports.setPlotLinesMinMax = exports.setPlotLinesDeltas = exports.crValueMoving = exports.crTpId = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = void 0;
+exports.zoomIndicatorCharts = exports.toTdmyIf = exports.toTdmy = exports.toNumberFormatAll = exports.toNumberFormat = exports.toDmy = exports.setYToPoints = exports.setPlotLinesMinMax = exports.setPlotLinesDeltas = exports.getColorBlack = exports.crValueMoving = exports.crTpId = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = exports.S_COLOR_BLACK = void 0;
+var _styleFn = require("../components/styleFn");
+exports.S_COLOR_BLACK = _styleFn.S_COLOR_BLACK;
+exports.getColorBlack = _styleFn.getColorBlack;
 var _dateFormat = require("./dateFormat");
 exports.toDmy = _dateFormat.toDmy;
 exports.toTdmy = _dateFormat.toTdmy;
@@ -93,12 +96,11 @@ const _renderSeriesLabel = (chart, labelText, x, y, color) => chart.renderer.tex
   'font-weight': 800
 }).add();
 const _getMinMaxFromSeries = (series, options) => {
-  var _options$yAxis;
   const {
       minY,
       maxY
     } = series || {},
-    _optionYAxis = options == null ? void 0 : (_options$yAxis = options.yAxis) == null ? void 0 : _options$yAxis[0],
+    _optionYAxis = options?.yAxis?.[0],
     {
       min,
       max
@@ -108,14 +110,13 @@ const _getMinMaxFromSeries = (series, options) => {
   return [_isNumber(_min) ? _min : null, _isNumber(_max) ? _max : null];
 };
 const _updateYAxisMinMax = (_ref2, options) => {
-  var _chart$yAxis;
   let {
     hasSecondYAxis,
     series,
     chart
   } = _ref2;
-  const _yAxis = chart == null ? void 0 : (_chart$yAxis = chart.yAxis) == null ? void 0 : _chart$yAxis[0];
-  if (!hasSecondYAxis && _isFn(_yAxis == null ? void 0 : _yAxis.update)) {
+  const _yAxis = chart?.yAxis?.[0];
+  if (!hasSecondYAxis && _isFn(_yAxis?.update)) {
     const [min, max] = _getMinMaxFromSeries(series, options);
     _yAxis.setExtremes(min, max, true);
   }
@@ -127,10 +128,10 @@ const _setPlotLine = function (plotLine, value, delta) {
   }
   if (plotLine) {
     plotLine.value = value;
-    plotLine.label.text = "" + _formatNumber(value) + delta;
+    plotLine.label.text = `${_formatNumber(value)}${delta}`;
   }
 };
-const _crDelta = perToValue => "\xA0\xA0\u0394 " + perToValue + "%",
+const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`,
   _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10),
   _calcPerTo = (bFrom, bValue, bTotal) => (0, _mathFn.calcPercent)({
     bValue: bFrom.minus(bValue),
@@ -197,10 +198,8 @@ const crValueMoving = (chart, prev, dateTo) => {
   }) : void 0;
 };
 exports.crValueMoving = crValueMoving;
-const toNumberFormat = _formatNumber2.default;
-exports.toNumberFormat = toNumberFormat;
-const toNumberFormatAll = _formatAllNumber.default;
-exports.toNumberFormatAll = toNumberFormatAll;
+const toNumberFormat = exports.toNumberFormat = _formatNumber2.default;
+const toNumberFormatAll = exports.toNumberFormatAll = _formatAllNumber.default;
 const crTpId = () => (0, _mathFn.crId)('TP_');
 exports.crTpId = crTpId;
 const setPlotLinesMinMax = _ref4 => {

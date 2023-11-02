@@ -1,3 +1,5 @@
+import { getColorBlack } from './ChartFn';
+
 import crStackedConfig from './crStackedConfig';
 
 export const crStackedAreaConfig = crStackedConfig
@@ -7,7 +9,7 @@ export const crStackedColumnConfig =
 export const crStackedAreaSeria = ({
   name,
   data=[],
-  color='gray'
+  color='grey'
 }) => ({
   name,
   data,
@@ -40,7 +42,7 @@ export const crStackedColumnSeria = ({
     dataLabels: {
       enabled: false,
       format: '{point.percent}',
-      color: 'black',
+      color: getColorBlack(),
       style: {
         textShadow: 'none'
       }

@@ -1,9 +1,10 @@
+import { getColorBlack } from '../ChartFn';
 
-const S_TEXT = {
-  color: 'black',
+const _crTextStyle = () => ({
+  color: getColorBlack(),
   'font-size': '16px',
   'font-weight': 800
-}
+})
 , S_INLINE = {
   display: 'inline'
 }
@@ -47,8 +48,9 @@ const _renderTextTo = (
   }
   const { text } = objText || {};
   if (text) {
-    chart[propName] = chart.renderer.text(text, x, y)
-      .css({...S_TEXT})
+    chart[propName] = chart.renderer
+      .text(text, x, y)
+      .css(_crTextStyle())
       .add()
   }
 };

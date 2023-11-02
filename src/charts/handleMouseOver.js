@@ -1,6 +1,14 @@
 import formatNumber from '../utils/formatNumber';
+
 import { formatDate } from './dateFormat';
 import calcYAxisOffset from './calcYAxisOffset';
+import { S_COLOR_BLACK } from './ChartFn';
+
+const _crCssLabel = () => ({
+  ...S_COLOR_BLACK,
+  fontWeight: 'bold',
+  fontSize: '14px'
+});
 
 const C = {
   DATE_PATTERN : '%d-%m-%Y',
@@ -8,12 +16,6 @@ const C = {
 
   ATTR_LABEL : {
     zIndex : 100
-  },
-  CSS_LABEL : {
-    //color: '#f1d600',
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: '14px'
   },
 
   CL_DX: -4,
@@ -75,7 +77,7 @@ const _crCrossLabel = (chart, text, x, y) => chart
  .renderer
  .text(text, x, y)
  .attr(C.ATTR_LABEL)
- .css(C.CSS_LABEL)
+ .css(_crCssLabel())
  .add();
 
 const handleMouserOverPoint = function(event){

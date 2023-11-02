@@ -2,13 +2,10 @@
 
 exports.__esModule = true;
 exports.crPieConfig = exports.crOuterPieSeria = exports.crInnerPieSeria = void 0;
-
+var _ChartFn = require("./ChartFn");
 var _Chart = require("./Chart");
-
 var _Tooltip = require("./Tooltip");
-
 var _CL = require("./CL");
-
 const crPieConfig = () => ({
   zhSeries: {
     count: 0
@@ -24,9 +21,7 @@ const crPieConfig = () => ({
   legend: (0, _Chart.fLegend)(),
   navigation: (0, _Chart.fNavigation)()
 });
-
 exports.crPieConfig = crPieConfig;
-
 const crInnerPieSeria = _ref => {
   let {
     center,
@@ -43,7 +38,7 @@ const crInnerPieSeria = _ref => {
     startAngle: -90,
     endAngle: 90,
     data: [{
-      name: "<span class=\"" + _CL.CL_TP_TITLE + "\">" + year + "</span><br/>" + bTotal.toString(),
+      name: `<span class="${_CL.CL_TP_TITLE}">${year}</span><br/>${bTotal.toString()}`,
       y: 1
     }],
     dataLabels: {
@@ -52,15 +47,13 @@ const crInnerPieSeria = _ref => {
       style: {
         fontWeight: 'bold',
         fontSize: '18px',
-        color: 'black',
+        color: (0, _ChartFn.getColorBlack)(),
         textShadow: 'none;'
       }
     }
   };
 };
-
 exports.crInnerPieSeria = crInnerPieSeria;
-
 const crOuterPieSeria = _ref2 => {
   let {
     center,
@@ -88,6 +81,5 @@ const crOuterPieSeria = _ref2 => {
     tooltip: (0, _Chart.fTooltip)(_Tooltip.tooltipDonut)
   };
 };
-
 exports.crOuterPieSeria = crOuterPieSeria;
 //# sourceMappingURL=PieConfigFn.js.map

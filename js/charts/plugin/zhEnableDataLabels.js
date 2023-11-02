@@ -1,40 +1,35 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var DATA_LABELS = {
+exports.default = void 0;
+var _ChartFn = require("../ChartFn");
+const _crDataLabelsConfig = () => ({
   enabled: true,
-  color: 'black',
+  color: (0, _ChartFn.getColorBlack)(),
   crop: false,
   overflow: 'allow',
   style: {
     fontSize: 14
   }
-};
-
-var zhEnableDataLabels = function zhEnableDataLabels(seriaType, options) {
+});
+const zhEnableDataLabels = function (seriaType, options) {
   if (seriaType === void 0) {
     seriaType = 'columnrange';
   }
-
   try {
-    var _plotOptions;
-
     this.update({
-      plotOptions: (_plotOptions = {}, _plotOptions[seriaType] = {
-        dataLabels: (0, _extends2["default"])({}, options, DATA_LABELS)
-      }, _plotOptions)
+      plotOptions: {
+        [seriaType]: {
+          dataLabels: {
+            ...options,
+            ..._crDataLabelsConfig()
+          }
+        }
+      }
     });
   } catch (err) {
     console.log(err);
   }
 };
-
-var _default = zhEnableDataLabels;
-exports["default"] = _default;
+var _default = exports.default = zhEnableDataLabels;
 //# sourceMappingURL=zhEnableDataLabels.js.map

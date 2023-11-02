@@ -1,3 +1,5 @@
+import { getColorBlack } from './ChartFn';
+
 import {
   fTitle,
   fSubtitle,
@@ -11,7 +13,7 @@ export const CONFIG_TREE_MAP = {
   type: 'treemap',
   layoutAlgorithm: 'squarified',
   //layoutAlgorithm : 'sliceAndDice',
-  borderColor: 'gray',
+  borderColor: 'grey',
   dataLabels: {
     align: 'left',
     verticalAlign: 'top',
@@ -19,7 +21,7 @@ export const CONFIG_TREE_MAP = {
       fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
       fontSize: '14px',
       fontWeight: 'bold',
-      color: 'black',
+      color: getColorBlack(),
       textShadow: 'none'
     }
   },
