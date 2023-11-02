@@ -29,6 +29,9 @@ const UI_THEME_OPTIONS = [{
 }, {
   caption: 'Sand Light',
   value: 'SAND_L'
+}, {
+  caption: 'Black',
+  value: 'BLACK'
 }];
 const CHECKBOX_CONFIGS = [['View in Admin Mode', 'isAdminMode'], ['Draw Deltas to Min-Max', 'isDrawDeltaExtrems'], ['Not Zoom to Min-Max', 'isNotZoomToMinMax']];
 const _crInputStyles = isShowLabels => isShowLabels ? [] : [WITHOUT_LABELS_WIDTH, {
@@ -86,6 +89,5 @@ const PaneOptions = _ref => {
     })]
   });
 };
-var _default = PaneOptions;
-exports.default = _default;
+var _default = exports.default = PaneOptions;
 //# sourceMappingURL=PaneOptions.js.map

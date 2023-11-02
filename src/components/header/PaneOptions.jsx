@@ -14,7 +14,8 @@ const UI_THEME_OPTIONS = [
   { caption: 'Dark', value: 'GREY' },
   { caption: 'Light', value: 'WHITE' },
   { caption: 'Sand', value: 'SAND' },
-  { caption: 'Sand Light', value: 'SAND_L' }
+  { caption: 'Sand Light', value: 'SAND_L' },
+  { caption: 'Black', value: 'BLACK' }
 ];
 
 const CHECKBOX_CONFIGS = [
