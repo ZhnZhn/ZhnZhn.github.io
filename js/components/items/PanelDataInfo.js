@@ -12,12 +12,6 @@ const CL_DESCR = 'info__descr',
     position: 'relative',
     padding: '34px 20px 0 8px'
   },
-  S_SHOW = {
-    display: 'block'
-  },
-  S_HIDE = {
-    display: 'none'
-  },
   S_BT_CAPTION = {
     left: 286
   },
@@ -32,11 +26,10 @@ const CL_DESCR = 'info__descr',
     textAlign: 'right',
     fontWeight: 'bold'
   },
-  _crTextStyle = () => ({
-    ..._styleFn.S_COLOR_BLACK,
+  S_TEXT = {
     fontWeight: 'bold',
     textTransform: 'capitalize'
-  }),
+  },
   S_DESCR_INFO = {
     lineHeight: 1.7
   },
@@ -44,6 +37,21 @@ const CL_DESCR = 'info__descr',
     color: 'grey',
     fontWeight: 'bold'
   };
+const InfoPartWithStyle = _ref => {
+  let {
+    c,
+    t,
+    s
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
+    style: s,
+    caption: c,
+    captionStyle: S_INFO_CAPTION,
+    textCn: _styleFn.CL_BLACK,
+    textStyle: S_TEXT,
+    text: t
+  });
+};
 const _renderNdlLink = linkId => {
   if (!linkId) return null;
   const Comp = _RouterNativeLink.default['NDL'];
@@ -58,13 +66,13 @@ const _renderNativeLink = (linkFn, item) => {
   }) : null;
 };
 const _isShortDescr = descr => descr && descr.length < 200;
-const PanelDataInfo = _ref => {
+const PanelDataInfo = _ref2 => {
   let {
     isShow,
     info,
     zhInfo,
     onClickChart
-  } = _ref;
+  } = _ref2;
   const {
       name,
       toDate,
@@ -77,8 +85,7 @@ const PanelDataInfo = _ref => {
       item,
       linkFn
     } = zhInfo || {},
-    _style = isShow ? S_SHOW : S_HIDE,
-    _textStyle = _crTextStyle();
+    _style = isShow ? _styleFn.S_BLOCK : _styleFn.S_NONE;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       ...S_ROOT,
@@ -88,30 +95,21 @@ const PanelDataInfo = _ref => {
       style: S_BT_CAPTION,
       caption: "Chart",
       onClick: onClickChart
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
-      text: name,
-      textStyle: _textStyle
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
-      caption: "From Date",
-      captionStyle: S_INFO_CAPTION,
-      text: fromDate,
-      textStyle: _textStyle
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
-      style: S_TO_DATE_INFO,
-      caption: "To Date",
-      captionStyle: S_INFO_CAPTION,
-      text: toDate,
-      textStyle: _textStyle
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
-      caption: "Frequency",
-      captionStyle: S_INFO_CAPTION,
-      text: frequency,
-      textStyle: _textStyle
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoPartWithStyle, {
+      t: name
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoPartWithStyle, {
+      c: "From Date",
+      t: fromDate
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoPartWithStyle, {
+      c: "To Date",
+      t: toDate,
+      s: S_TO_DATE_INFO
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoPartWithStyle, {
+      c: "Frequency",
+      t: frequency
     }), _renderNdlLink(linkId), description && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.OpenClose, {
       isClose: !_isShortDescr(description),
-      caption: "Description"
-      //openColor={C_DESCR_OPEN}
-      ,
+      caption: "Description",
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.InfoPart, {
         style: S_DESCR_INFO,
         isHtml: true,
