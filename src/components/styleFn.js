@@ -1,7 +1,4 @@
-export {
-  S_COLOR_BLACK,
-  getColorBlack
-} from './styles/uiTheme';
+export { getColorBlack } from './styles/uiTheme';
 
 const _isArr = Array.isArray;
 
@@ -22,7 +19,10 @@ export const crCn = (
 
 export const CL_SHOW_POPUP = "show-popup"
 export const CL_BLACK = "black"
+export const CL_CHB_BLACK = "chb-bl"
 export const CL_NOT_SELECTED = "not-selected"
+export const CL_TEXT_ELLIPSIS= "text-ellipsis"
+export const CL_WIDTH_100_PERCENT = "w-100"
 
 const _crRowCn = className => `${className} ${CL_BLACK} ${CL_NOT_SELECTED}`
 export const CL_ROW_PANE_TOPIC = _crRowCn("row__pane-topic")

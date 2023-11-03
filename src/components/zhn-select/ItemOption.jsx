@@ -1,17 +1,10 @@
-import {
-  S_ELLIPSIS
-} from '../styles/GeneralStyles';
-
-const S_CAPTION = {
-  width: '100%',
-  ...S_ELLIPSIS
-};
+import { CL_ITEM_OPTION } from './CL';
 
 const ItemOption = ({
   item,
   propCaption
 }) => (
-  <div style={S_CAPTION}>
+  <div className={CL_ITEM_OPTION}>
     {(item || {})[propCaption]}
   </div>
 );

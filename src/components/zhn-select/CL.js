@@ -1,4 +1,16 @@
-import { crBtCircleHfCn } from '../styleFn';
+export { CL_NOT_SELECTED } from '../styleFn';
+
+import {
+  CL_TEXT_ELLIPSIS,
+  CL_WIDTH_100_PERCENT,
+  crCn,
+  crBtCircleHfCn
+} from '../styleFn';
+
+export const CL_ITEM_OPTION = crCn(
+  CL_TEXT_ELLIPSIS,
+  CL_WIDTH_100_PERCENT
+);
 
 const ROOT = 'zhn-select'
 , INPUT = ROOT + '__input'
@@ -24,5 +36,3 @@ export const CL_FOOTER = FOOTER
 export const CL_FOOTER_INDEX = FOOTER + '__index'
 export const CL_FOOTER_BTS = FOOTER + '__bts'
 export const CL_FOOTER_BT = crBtCircleHfCn(FOOTER + '__bt')
-
-export const CL_NOT_SELECTED = 'not-selected'

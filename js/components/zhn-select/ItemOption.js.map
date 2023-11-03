@@ -5,12 +5,20 @@
  ],
  "file": "../../../src/components/zhn-select/ItemOption.js",
  "names": [
-  "S_CAPTION",
-  "width",
-  "S_ELLIPSIS",
+  "_CL",
+  "require",
+  "_jsxRuntime",
   "ItemOption",
+  "_ref",
   "item",
-  "propCaption"
+  "propCaption",
+  "jsx",
+  "className",
+  "CL_ITEM_OPTION",
+  "children",
+  "_default",
+  "exports",
+  "default"
  ],
- "mappings": ";;;;;AAAA;;;;AAIA,MAAMA,SAAS,GAAG;AAChBC,EAAAA,KAAK,EAAE,MADS;AAEhB,KAAGC;AAFa,CAAlB;;AAKA,MAAMC,UAAU,GAAG;AAAA,MAAC;AAClBC,IAAAA,IADkB;AAElBC,IAAAA;AAFkB,GAAD;AAAA,sBAIjB;AAAK,IAAA,KAAK,EAAEL,SAAZ;AAAA,cACG,CAACI,IAAI,IAAI,EAAT,EAAaC,WAAb;AADH,IAJiB;AAAA,CAAnB;;eASeF,U"
+ "mappings": ";;;;AAAA,IAAAA,GAAA,GAAAC,OAAA;AAAsC,IAAAC,WAAA,GAAAD,OAAA;AAEtC,MAAME,UAAU,GAAGC,IAAA;EAAA,IAAC;IAClBC,IAAI;IACJC;EACF,CAAC,GAAAF,IAAA;EAAA,oBACC,IAAAF,WAAA,CAAAK,GAAA;IAAKC,SAAS,EAAEC,kBAAe;IAAAC,QAAA,EAC5B,CAACL,IAAI,IAAI,CAAC,CAAC,EAAEC,WAAW;EAAC,CACvB,CAAC;AAAA,CACP;AAAC,IAAAK,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaV,UAAU"
 }

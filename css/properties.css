@@ -20,6 +20,12 @@
   overflow: hidden;
 }
 
+.text-ellipsis {
+  white-space: nowrap; 
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .p-r {
   position: relative;
 }
@@ -41,9 +47,13 @@
   padding-right: 8px;
 }
 
+.w-100 {
+  width: 100%;
+}
+
 .black {
-  color: black;
-  color: var(--c-bl, black);
+  color: #1b2836;
+  color: var(--c-bl, #1b2836);
 }
 .dark-blue {
   color: #1b75bb;
