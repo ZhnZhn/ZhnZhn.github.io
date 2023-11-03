@@ -1,4 +1,7 @@
-import { getColorBlack } from '../../styleFn';
+import {
+  CL_CHB_BLACK,
+  CL_BLACK
+} from '../../styleFn';
 
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import InputText from '../../zhn/InputText';
@@ -39,45 +42,43 @@ const ModalOptions = ({
   onRoundTo,
   toggleOption,
   onClose
-}) => {
-  const _colorBlack = getColorBlack();
-  return (
-    <ModalPopup
-      isShow={isShow}
-      style={{...S_MODAL_POPUP, ...style}}
-      className={className}
-      onClose={onClose}
-    >
-      {/*eslint-disable jsx-a11y/label-has-associated-control*/}
-      {onRoundTo && _isRt(dfRt) && <div style={S_DIV_INPUT}>
-          <label>
-            <SpanBlack style={S_CAPTION}>Round Decimals to</SpanBlack>
-            <InputText
-              type="number"
-              initValue={dfRt}
-              min={MIN_RT}
-              max={MAX_RT}
-              step={1}
-              maxLength={2}
-              onChange={onRoundTo}
-              onEnter={onClose}
-            />
-          </label>
-        </div>
-      }
-      {/*eslint-enable jsx-a11y/label-has-associated-control*/}
-      {ROW_CHECKBOX_CONFIGS.map(([id, caption]) => (
-         <RowCheckBox2
-            key={id}
-            id={id}
-            style={S_ROW}
-            color={_colorBlack}
-            caption={caption}
-            onToggle={toggleOption}
-         />
-      ))}
-    </ModalPopup>
-  );
-};
+}) => (
+  <ModalPopup
+    isShow={isShow}
+    style={{...S_MODAL_POPUP, ...style}}
+    className={className}
+    onClose={onClose}
+  >
+    {/*eslint-disable jsx-a11y/label-has-associated-control*/}
+    {onRoundTo && _isRt(dfRt) && <div style={S_DIV_INPUT}>
+        <label>
+          <SpanBlack style={S_CAPTION}>Round Decimals to</SpanBlack>
+          <InputText
+            type="number"
+            initValue={dfRt}
+            min={MIN_RT}
+            max={MAX_RT}
+            step={1}
+            maxLength={2}
+            onChange={onRoundTo}
+            onEnter={onClose}
+          />
+        </label>
+      </div>
+    }
+    {/*eslint-enable jsx-a11y/label-has-associated-control*/}
+    {ROW_CHECKBOX_CONFIGS.map(([id, caption]) => (
+       <RowCheckBox2
+          key={id}
+          id={id}
+          style={S_ROW}
+          chbCn={CL_CHB_BLACK}
+          btCn={CL_BLACK}
+          caption={caption}
+          onToggle={toggleOption}
+       />
+    ))}
+  </ModalPopup>
+);
 
 export default ModalOptions

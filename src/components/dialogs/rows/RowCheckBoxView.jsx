@@ -1,5 +1,5 @@
 import { useCallback } from '../../uiApi';
-import { crStyle2 } from '../../styleFn';
+import { crCn, crStyle2 } from '../../styleFn';
 
 import Button from '../../zhn/Button';
 import SvgCheckBox from '../../zhn/SvgCheckBox';
@@ -11,6 +11,8 @@ const CL_BT_CHB = 'bt-chb'
 };
 
 const RowCheckBoxView = ({
+  chbCn,
+  btCn,
   style,
   value,
   caption,
@@ -26,15 +28,17 @@ const RowCheckBoxView = ({
        hCheck()
      }
    }, [value, hCheck, hUnCheck])
+  , _btCn = value ? btCn : void 0
   , _captionStyle = crStyle2(
      captionStyle,
-     value && { color }
+     !_btCn && value && { color }
   );
-  
+
   return (
     <div style={{...S_ROOT, ...style}}>
       <SvgCheckBox
         value={value}
+        className={chbCn}
         color={color}
         onCheck={hCheck}
         onUnCheck={hUnCheck}
@@ -43,7 +47,7 @@ const RowCheckBoxView = ({
         caption && (
           <Button
             tabIndex="-1"
-            className={CL_BT_CHB}
+            className={crCn(CL_BT_CHB, _btCn)}
             style={_captionStyle}
             onClick={_hToggle}
           >

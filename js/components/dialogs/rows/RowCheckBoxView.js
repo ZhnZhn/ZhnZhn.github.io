@@ -15,6 +15,8 @@ const CL_BT_CHB = 'bt-chb',
   };
 const RowCheckBoxView = _ref => {
   let {
+    chbCn,
+    btCn,
     style,
     value,
     caption,
@@ -30,7 +32,8 @@ const RowCheckBoxView = _ref => {
         hCheck();
       }
     }, [value, hCheck, hUnCheck]),
-    _captionStyle = (0, _styleFn.crStyle2)(captionStyle, value && {
+    _btCn = value ? btCn : void 0,
+    _captionStyle = (0, _styleFn.crStyle2)(captionStyle, !_btCn && value && {
       color
     });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -40,18 +43,18 @@ const RowCheckBoxView = _ref => {
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
       value: value,
+      className: chbCn,
       color: color,
       onCheck: hCheck,
       onUnCheck: hUnCheck
     }), caption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
       tabIndex: "-1",
-      className: CL_BT_CHB,
+      className: (0, _styleFn.crCn)(CL_BT_CHB, _btCn),
       style: _captionStyle,
       onClick: _hToggle,
       children: caption
     })]
   });
 };
-var _default = RowCheckBoxView;
-exports.default = _default;
+var _default = exports.default = RowCheckBoxView;
 //# sourceMappingURL=RowCheckBoxView.js.map

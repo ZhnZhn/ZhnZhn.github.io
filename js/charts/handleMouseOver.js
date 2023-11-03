@@ -8,7 +8,7 @@ var _dateFormat = require("./dateFormat");
 var _calcYAxisOffset = _interopRequireDefault(require("./calcYAxisOffset"));
 var _ChartFn = require("./ChartFn");
 const _crCssLabel = () => ({
-  ..._ChartFn.S_COLOR_BLACK,
+  color: (0, _ChartFn.getColorBlack)(),
   fontWeight: 'bold',
   fontSize: '14px'
 });

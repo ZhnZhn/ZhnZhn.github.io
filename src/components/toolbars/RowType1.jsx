@@ -5,8 +5,8 @@ import {
 } from '../uiApi';
 import {
   CL_OC_BLACK,
-  S_COLOR_BLACK,
-  getColorBlack
+  CL_CHB_BLACK,
+  CL_BLACK
 } from '../styleFn';
 
 import D from '../dialogs/DialogCell';
@@ -45,13 +45,12 @@ const DF_COLOR = '#2b908f'
 , S_PL_8 = { paddingLeft: 8 }
 , S_PL_10 = { paddingLeft: 10 }
 , S_INLINE = { display: 'inline-block' }
-, _crCaptionStyle = () => ({
-    ...S_COLOR_BLACK,
-    display: 'inline-block',
-    width: 85,
-    paddingLeft: 5,
-    fontWeight: 'bold'
-})
+, S_CAPTION_STYLE = {
+   display: 'inline-block',
+   width: 85,
+   paddingLeft: 5,
+   fontWeight: 'bold'
+}
 , crSpanStyle = color => ({
   color,
   paddingLeft: 8,
@@ -67,7 +66,6 @@ const DF_COLOR = '#2b908f'
    ...S_VA_M,
    ...S_PL_10
 };
-
 
 const InputPlus = ({
   initValue,
@@ -135,8 +133,7 @@ const RowType1 = ({
       color: getRefValue(_refColor),
       type: getRefValue(_refSeriaType),
       zIndex: getRefValue(_refOnTop) ? void 0 : -1
-    }, getRefValue(_refPeriod))
-  , _colorBlack = getColorBlack();
+    }, getRefValue(_refPeriod));
 
   return (
   <OpenClose
@@ -167,7 +164,8 @@ const RowType1 = ({
         style={S1_COLUMN}
         caption="Column"
         captionStyle={S_PL_6}
-        color={_colorBlack}
+        chbCn={CL_CHB_BLACK}
+        btCn={CL_BLACK}
         initialValue={true}
         onToggle={_onToggleColumn}
       />
@@ -175,7 +173,8 @@ const RowType1 = ({
         <D.RowInputText
           rootStyle={S_INLINE}
           caption="For Seria"
-          captionStyle={_crCaptionStyle()}
+          captionCn={CL_BLACK}
+          captionStyle={S_CAPTION_STYLE}
           style={S_SERIA_INPUT}
           type="number"
           initValue={1}
@@ -189,7 +188,8 @@ const RowType1 = ({
           style={S1_ON_TOP}
           caption="OnTop"
           captionStyle={S_PL_6}
-          color={_colorBlack}
+          chbCn={CL_CHB_BLACK}
+          btCn={CL_BLACK}
           onToggle={_onToggleTop}
         />
        </div>

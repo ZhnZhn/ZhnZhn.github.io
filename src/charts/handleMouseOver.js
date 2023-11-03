@@ -2,10 +2,10 @@ import formatNumber from '../utils/formatNumber';
 
 import { formatDate } from './dateFormat';
 import calcYAxisOffset from './calcYAxisOffset';
-import { S_COLOR_BLACK } from './ChartFn';
+import { getColorBlack } from './ChartFn';
 
 const _crCssLabel = () => ({
-  ...S_COLOR_BLACK,
+  color: getColorBlack(),
   fontWeight: 'bold',
   fontSize: '14px'
 });

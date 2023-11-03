@@ -2,9 +2,8 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.zoomIndicatorCharts = exports.toTdmyIf = exports.toTdmy = exports.toNumberFormatAll = exports.toNumberFormat = exports.toDmy = exports.setYToPoints = exports.setPlotLinesMinMax = exports.setPlotLinesDeltas = exports.getColorBlack = exports.crValueMoving = exports.crTpId = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = exports.S_COLOR_BLACK = void 0;
+exports.zoomIndicatorCharts = exports.toTdmyIf = exports.toTdmy = exports.toNumberFormatAll = exports.toNumberFormat = exports.toDmy = exports.setYToPoints = exports.setPlotLinesMinMax = exports.setPlotLinesDeltas = exports.getColorBlack = exports.crValueMoving = exports.crTpId = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = void 0;
 var _styleFn = require("../components/styleFn");
-exports.S_COLOR_BLACK = _styleFn.S_COLOR_BLACK;
 exports.getColorBlack = _styleFn.getColorBlack;
 var _dateFormat = require("./dateFormat");
 exports.toDmy = _dateFormat.toDmy;

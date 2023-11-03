@@ -49,8 +49,8 @@ const RowText = _ref => {
       },
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
+      className: _styleFn.CL_BLACK,
       style: {
-        ..._styleFn.S_COLOR_BLACK,
         ...S_TEXT,
         ...textStyle
       },

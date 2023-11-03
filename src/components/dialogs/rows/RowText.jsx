@@ -1,5 +1,5 @@
 import DivEllipsis from '../../zhn/DivEllipsis';
-import { S_COLOR_BLACK } from '../../styleFn';
+import { CL_BLACK } from '../../styleFn';
 
 const S_DIV = {
   display: 'flex',
@@ -36,8 +36,8 @@ const RowText = ({
       {caption}
     </div>
     <DivEllipsis
+      className={CL_BLACK}
       style={{
-        ...S_COLOR_BLACK,
         ...S_TEXT,
         ...textStyle
       }}

@@ -214,10 +214,8 @@ const uiTheme = {
 
 uiTheme._init()
 
-export const S_COLOR_BLACK = {
-  color: "black"
-}
-export const getColorBlack = () => S_COLOR_BLACK.color
+let _colorBlack = "black";
+export const getColorBlack = () => _colorBlack
 
 export const setUiTheme = (
   item
@@ -226,8 +224,7 @@ export const setUiTheme = (
   if (uiTheme.getThemeName() !== _themeName) {
     uiTheme.setThemeName(_themeName)
 
-    S_COLOR_BLACK.color = PALETTE
-     .getPalette(
+    _colorBlack = PALETTE.getPalette(
         uiTheme.getThemeName()
      )[PROPERTY_COLOR_BLACK]
   }

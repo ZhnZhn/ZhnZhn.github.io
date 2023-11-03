@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.setUiTheme = exports.getColorBlack = exports.S_COLOR_BLACK = void 0;
+exports.setUiTheme = exports.getColorBlack = void 0;
 var _ChartUiTheme = require("../../charts/ChartUiTheme");
 const COLOR_SILVER = "silver",
   COLOR_DARK_BLUE = "#1b2836",
@@ -110,16 +110,14 @@ const uiTheme = {
   }
 };
 uiTheme._init();
-const S_COLOR_BLACK = exports.S_COLOR_BLACK = {
-  color: "black"
-};
-const getColorBlack = () => S_COLOR_BLACK.color;
+let _colorBlack = "black";
+const getColorBlack = () => _colorBlack;
 exports.getColorBlack = getColorBlack;
 const setUiTheme = item => {
   const _themeName = (item || {}).value;
   if (uiTheme.getThemeName() !== _themeName) {
     uiTheme.setThemeName(_themeName);
-    S_COLOR_BLACK.color = PALETTE.getPalette(uiTheme.getThemeName())[PROPERTY_COLOR_BLACK];
+    _colorBlack = PALETTE.getPalette(uiTheme.getThemeName())[PROPERTY_COLOR_BLACK];
   }
 };
 exports.setUiTheme = setUiTheme;

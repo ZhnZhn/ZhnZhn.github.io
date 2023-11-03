@@ -28,6 +28,7 @@ const RowInputText = (0, _uiApi.forwardRef)((props, ref) => {
   const {
       styleRoot,
       rootStyle,
+      captionCn,
       captionStyle,
       styleCaption,
       caption = 'Input',
@@ -52,6 +53,7 @@ const RowInputText = (0, _uiApi.forwardRef)((props, ref) => {
     style: _rootStyle,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: captionCn,
         style: _captionStyle,
         children: _caption
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
@@ -73,6 +75,5 @@ RowInputText.propTypes= {
   onEnter: PropTypes.func
 }
 */
-var _default = RowInputText;
-exports.default = _default;
+var _default = exports.default = RowInputText;
 //# sourceMappingURL=RowInputText.js.map

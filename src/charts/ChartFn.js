@@ -1,7 +1,4 @@
-export {
-  S_COLOR_BLACK,
-  getColorBlack
-} from '../components/styleFn';
+export { getColorBlack } from '../components/styleFn';
 
 export {
   toDmy,

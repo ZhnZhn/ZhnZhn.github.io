@@ -22,15 +22,14 @@ const DF_COLOR = '#7cb5ec',
   _S_VALIGN_MIDDLE = {
     verticalAlign: 'middle'
   },
-  _crTitleStyle = () => ({
+  S_TITLE_STYLE = {
     ..._S_VALIGN_MIDDLE,
     ..._GeneralStyles.S_FONT_BOLD_NON_SELECT,
-    ..._styleFn.S_COLOR_BLACK,
     display: 'inline-block',
     width: 100,
     padding: '0 16px 0 4px',
     textAlign: 'right'
-  }),
+  },
   S_CHECK_BOX = {
     ..._S_VALIGN_MIDDLE
   },
@@ -96,12 +95,13 @@ const SeriaRow = props => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
+      className: _styleFn.CL_CHB_BLACK,
       style: S_CHECK_BOX,
-      color: (0, _styleFn.getColorBlack)(),
       onCheck: _hCheck,
       onUnCheck: _hUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
-      style: _crTitleStyle(),
+      className: _styleFn.CL_BLACK,
+      style: S_TITLE_STYLE,
       text: name
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputColor.default, {
       className: CL_INPUT_COLOR,

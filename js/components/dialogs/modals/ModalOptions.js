@@ -32,7 +32,6 @@ const ModalOptions = _ref => {
     toggleOption,
     onClose
   } = _ref;
-  const _colorBlack = (0, _styleFn.getColorBlack)();
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
     isShow: isShow,
     style: {
@@ -63,7 +62,8 @@ const ModalOptions = _ref => {
       return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
         id: id,
         style: _Style.S_ROW,
-        color: _colorBlack,
+        chbCn: _styleFn.CL_CHB_BLACK,
+        btCn: _styleFn.CL_BLACK,
         caption: caption,
         onToggle: toggleOption
       }, id);

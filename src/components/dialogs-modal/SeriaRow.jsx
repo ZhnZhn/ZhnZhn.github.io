@@ -7,8 +7,8 @@ import {
 } from '../uiApi';
 
 import {
-  S_COLOR_BLACK,
-  getColorBlack
+  CL_CHB_BLACK,
+  CL_BLACK
 } from '../styleFn';
 
 import useProperty from '../hooks/useProperty';
@@ -33,22 +33,22 @@ const DF_COLOR = '#7cb5ec'
 , _S_VALIGN_MIDDLE = {
   verticalAlign: 'middle',
 }
-, _crTitleStyle = () => ({
+, S_TITLE_STYLE = {
   ..._S_VALIGN_MIDDLE,
   ...S_FONT_BOLD_NON_SELECT,
-  ...S_COLOR_BLACK,
   display: 'inline-block',
   width: 100,
   padding: '0 16px 0 4px',
   textAlign: 'right'
-})
+}
 , S_CHECK_BOX = {
   ..._S_VALIGN_MIDDLE
 }
 , S_SELECT = {
   ..._S_VALIGN_MIDDLE,
   marginLeft: 24
-}, S_SELECT_OPTIONS = {
+}
+, S_SELECT_OPTIONS = {
   minHeight: 100
 }
 
@@ -118,13 +118,14 @@ const SeriaRow = (props) => {
   return (
     <div style={S_ROOT}>
       <SvgCheckBox
+        className={CL_CHB_BLACK}
         style={S_CHECK_BOX}
-        color={getColorBlack()}
         onCheck={_hCheck}
         onUnCheck={_hUnCheck}
       />
       <DivEllipsis
-        style={_crTitleStyle()}
+        className={CL_BLACK}
+        style={S_TITLE_STYLE}
         text={name}
       />
       <InputColor

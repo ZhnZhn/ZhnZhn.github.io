@@ -43,6 +43,5 @@ RowCheckBox.propTypes = {
   id: PropTypes.string
 }
 */
-var _default = RowCheckBox2;
-exports.default = _default;
+var _default = exports.default = RowCheckBox2;
 //# sourceMappingURL=RowCheckBox2.js.map

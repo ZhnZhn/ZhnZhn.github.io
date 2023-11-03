@@ -22,6 +22,7 @@ const RowInputText = forwardRef((props, ref) => {
   const {
     styleRoot,
     rootStyle,
+    captionCn,
     captionStyle,
     styleCaption,
     caption='Input',
@@ -39,7 +40,7 @@ const RowInputText = forwardRef((props, ref) => {
   return (
     <div style={_rootStyle}>
       <label>
-        <span style={_captionStyle}>
+        <span className={captionCn} style={_captionStyle}>
           {_caption}
         </span>
         <InputText

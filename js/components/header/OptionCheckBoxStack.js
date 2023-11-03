@@ -13,14 +13,14 @@ const OptionCheckBoxStack = _ref => {
     data,
     configs
   } = _ref;
-  const _hMode = (fnName, mode) => (0, _getFnByPropName.default)(data, fnName)(mode),
-    _colorBlack = (0, _styleFn.getColorBlack)();
+  const _hMode = (fnName, mode) => (0, _getFnByPropName.default)(data, fnName)(mode);
   return configs.map(_ref2 => {
     let [caption, id] = _ref2;
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       caption: caption,
       initialValue: (0, _getFnByPropName.default)(data, id, false)(),
-      color: _colorBlack,
+      chbCn: _styleFn.CL_CHB_BLACK,
+      btCn: _styleFn.CL_BLACK,
       onCheck: (0, _uiApi.bindTo)(_hMode, id, true),
       onUnCheck: (0, _uiApi.bindTo)(_hMode, id, false)
     }, caption);

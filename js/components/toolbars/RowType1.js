@@ -52,13 +52,12 @@ const DF_COLOR = '#2b908f',
   S_INLINE = {
     display: 'inline-block'
   },
-  _crCaptionStyle = () => ({
-    ..._styleFn.S_COLOR_BLACK,
+  S_CAPTION_STYLE = {
     display: 'inline-block',
     width: 85,
     paddingLeft: 5,
     fontWeight: 'bold'
-  }),
+  },
   crSpanStyle = color => ({
     color,
     paddingLeft: 8,
@@ -136,8 +135,7 @@ const RowType1 = _ref3 => {
       color: (0, _uiApi.getRefValue)(_refColor),
       type: (0, _uiApi.getRefValue)(_refSeriaType),
       zIndex: (0, _uiApi.getRefValue)(_refOnTop) ? void 0 : -1
-    }, (0, _uiApi.getRefValue)(_refPeriod)),
-    _colorBlack = (0, _styleFn.getColorBlack)();
+    }, (0, _uiApi.getRefValue)(_refPeriod));
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     caption: caption,
     className: _styleFn.CL_OC_BLACK,
@@ -162,7 +160,8 @@ const RowType1 = _ref3 => {
         style: S1_COLUMN,
         caption: "Column",
         captionStyle: S_PL_6,
-        color: _colorBlack,
+        chbCn: _styleFn.CL_CHB_BLACK,
+        btCn: _styleFn.CL_BLACK,
         initialValue: true,
         onToggle: _onToggleColumn
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -170,7 +169,8 @@ const RowType1 = _ref3 => {
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputText, {
           rootStyle: S_INLINE,
           caption: "For Seria",
-          captionStyle: _crCaptionStyle(),
+          captionCn: _styleFn.CL_BLACK,
+          captionStyle: S_CAPTION_STYLE,
           style: S_SERIA_INPUT,
           type: "number",
           initValue: 1,
@@ -183,7 +183,8 @@ const RowType1 = _ref3 => {
           style: S1_ON_TOP,
           caption: "OnTop",
           captionStyle: S_PL_6,
-          color: _colorBlack,
+          chbCn: _styleFn.CL_CHB_BLACK,
+          btCn: _styleFn.CL_BLACK,
           onToggle: _onToggleTop
         })]
       })]
