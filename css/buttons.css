@@ -20,6 +20,13 @@
   stroke: var(--c-bg, #4d4d4d);
 }
 
+.chb-bl {
+  stroke: #1b2836;
+  stroke: var(--c-bl, #1b2836);
+  fill: #1b2836;
+  fill: var(--c-bl, #1b2836);
+}
+
 .bt-chb {
   position: relative;
   top: -2px;
