@@ -1,13 +1,19 @@
-import {
-  S_ELLIPSIS
-} from '../styles/GeneralStyles';
+import { 
+  CL_TEXT_ELLIPSIS,
+  crCn
+} from '../styleFn';
 
 const DivEllipsis = ({
+  className,
   style,
   text,
   title
 }) => (
-  <div style={{...style, ...S_ELLIPSIS}} title={title}>
+  <div
+    className={crCn(CL_TEXT_ELLIPSIS, className)}
+    style={style}
+    title={title}
+  >
     {text}
   </div>
 );

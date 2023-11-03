@@ -2,26 +2,21 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
-var _GeneralStyles = require("../styles/GeneralStyles");
-
+var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
-
 const DivEllipsis = _ref => {
   let {
+    className,
     style,
     text,
     title
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    style: { ...style,
-      ..._GeneralStyles.S_ELLIPSIS
-    },
+    className: (0, _styleFn.crCn)(_styleFn.CL_TEXT_ELLIPSIS, className),
+    style: style,
     title: title,
     children: text
   });
 };
-
-var _default = DivEllipsis;
-exports.default = _default;
+var _default = exports.default = DivEllipsis;
 //# sourceMappingURL=DivEllipsis.js.map
