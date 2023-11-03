@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
 var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
 var _Color = require("../styles/Color");
@@ -35,6 +36,7 @@ const SvgCheckBox = _ref2 => {
   let {
     initialValue,
     value,
+    className,
     style,
     color,
     cnChecked = CL_CHB_CHECKED,
@@ -59,14 +61,15 @@ const SvgCheckBox = _ref2 => {
     //_comp, _isValueState
     /*eslint-enable react-hooks/exhaustive-deps */,
     _hKeyDown = (0, _useKeyEnter.default)(_hToggle, [_hToggle]),
-    [_restStroke, _restFill] = _value ? [color || C_GREY, color || _Color.TRANSPARENT_COLOR] : [C_GREY, _Color.TRANSPARENT_COLOR];
+    _className = _value ? className : void 0,
+    [_restStroke, _restFill] = _className ? [] : _value ? [color || C_GREY, color || _Color.TRANSPARENT_COLOR] : [C_GREY, _Color.TRANSPARENT_COLOR];
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     role: "checkbox",
     tabIndex: "0",
     "aria-checked": _value
     //aria-labelledby
     ,
-    className: CL_CHB,
+    className: (0, _styleFn.crCn)(CL_CHB, _className),
     style: style,
     onClick: _hToggle,
     onKeyDown: _hKeyDown,
@@ -100,6 +103,5 @@ SvgCheckBox.propTypes = {
   onUnCheck: PropTypes.func
 }
 */
-var _default = SvgCheckBox;
-exports.default = _default;
+var _default = exports.default = SvgCheckBox;
 //# sourceMappingURL=SvgCheckBox.js.map

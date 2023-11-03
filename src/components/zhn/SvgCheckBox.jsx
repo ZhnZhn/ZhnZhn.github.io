@@ -4,6 +4,7 @@ import {
   useMemo,
   useCallback
 } from '../uiApi';
+import { crCn } from '../styleFn';
 
 import useRefInit from '../hooks/useRefInit';
 import useKeyEnter from '../hooks/useKeyEnter';
@@ -36,6 +37,7 @@ const FN_NOOP = () => {};
 const SvgCheckBox = ({
   initialValue,
   value,
+  className,
   style,
   color,
   cnChecked=CL_CHB_CHECKED,
@@ -69,12 +71,17 @@ const SvgCheckBox = ({
   //_comp, _isValueState
   /*eslint-enable react-hooks/exhaustive-deps */
   , _hKeyDown = useKeyEnter(_hToggle, [_hToggle])
+  , _className = _value
+      ? className
+      : void 0
   , [
     _restStroke,
     _restFill
-  ] = _value
-    ? [color || C_GREY, color || TRANSPARENT_COLOR ]
-    : [C_GREY, TRANSPARENT_COLOR];
+  ] = _className
+    ? []
+    : _value
+        ? [color || C_GREY, color || TRANSPARENT_COLOR ]
+        : [C_GREY, TRANSPARENT_COLOR];
 
   return (
     <div
@@ -82,7 +89,7 @@ const SvgCheckBox = ({
        tabIndex="0"
        aria-checked={_value}
        //aria-labelledby
-       className={CL_CHB}
+       className={crCn(CL_CHB, _className)}
        style={style}
        onClick={_hToggle}
        onKeyDown={_hKeyDown}
