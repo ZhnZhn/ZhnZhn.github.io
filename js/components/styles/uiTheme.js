@@ -5,25 +5,17 @@ exports.setUiTheme = exports.getColorBlack = void 0;
 var _paletteFn = require("./paletteFn");
 exports.getColorBlack = _paletteFn.getColorBlack;
 var _ChartUiTheme = require("../../charts/ChartUiTheme");
-const uiTheme = {
-  uiThemeId: _paletteFn.DF_THEME_ID,
-  _init() {
-    this.setUiThemeId(_paletteFn.DF_THEME_ID);
-  },
-  getUiThemeId() {
-    return this.uiThemeId;
-  },
-  setUiThemeId(uiThemeId) {
-    this.uiThemeId = (0, _paletteFn.crUiThemeId)(uiThemeId);
-    (0, _paletteFn.setUiPalette)(this.uiThemeId);
-    (0, _ChartUiTheme.setChartTheme)(uiThemeId !== _paletteFn.DF_THEME_ID);
-  }
+let _uiThemeId;
+const _setUiThemeImpl = uiThemeId => {
+  _uiThemeId = (0, _paletteFn.crUiThemeId)(uiThemeId);
+  (0, _paletteFn.setUiPalette)(_uiThemeId);
+  (0, _ChartUiTheme.setChartTheme)(_uiThemeId !== _paletteFn.DF_THEME_ID);
 };
-uiTheme._init();
+_setUiThemeImpl(_paletteFn.DF_THEME_ID);
 const setUiTheme = item => {
-  const _uiThemeId = (item || {}).value;
-  if (uiTheme.getUiThemeId() !== _uiThemeId) {
-    uiTheme.setUiThemeId(_uiThemeId);
+  const _nextUiThemeId = (item || {}).value;
+  if (_uiThemeId !== _nextUiThemeId) {
+    _setUiThemeImpl(_nextUiThemeId);
   }
 };
 exports.setUiTheme = setUiTheme;
