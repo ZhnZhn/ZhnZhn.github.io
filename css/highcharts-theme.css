@@ -15,18 +15,26 @@
 }
 
 .highcharts-text-outline {
-  color: black;
-  color: var(--c-bl, black);
+  color: grey;
+  color: var(--c-bl, grey);
   fill: transparent;
   stroke: transparent;
 }
 
 .highcharts-title,
 .highcharts-subtitle {
-  color: black !important;
-  color: var(--c-bl, black) !important;
-  fill: black !important;
-  fill: var(--c-bl, black) !important;
+  color: grey !important;
+  color: var(--c-bl, grey) !important;
+  fill: grey !important;
+  fill: var(--c-bl, grey) !important;
+}
+
+.hc-gl {  
+  fill: grey;
+  fill: var(--c-bl, grey);
+
+  font-size: 14px;
+  font-weight: bold;
 }
 
 /*

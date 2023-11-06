@@ -6,24 +6,18 @@ exports.default = void 0;
 var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
 var _dateFormat = require("./dateFormat");
 var _calcYAxisOffset = _interopRequireDefault(require("./calcYAxisOffset"));
-var _ChartFn = require("./ChartFn");
-const _crCssLabel = () => ({
-  color: (0, _ChartFn.getColorBlack)(),
-  fontWeight: 'bold',
-  fontSize: '14px'
-});
-const C = {
-  DATE_PATTERN: '%d-%m-%Y',
-  DATE_EMPTY: '01-01-1970',
-  ATTR_LABEL: {
+var _CL = require("./CL");
+const STR_DATE_PATTERN = "%d-%m-%Y",
+  STR_DATE_EMPTY = "01-01-1970",
+  ATTR_LABEL = {
     zIndex: 100
   },
-  CL_DX: -4,
-  CL_DY: -1,
-  DX_CATEGORY: 40,
-  DY_CATEGORY: 32,
-  DX_Y_AXIS: 10
-};
+  X_DX = -10,
+  X_DY = 1,
+  Y_DX = -4,
+  Y_DY = -1,
+  DX_CATEGORY = 40,
+  DY_CATEGORY = 32;
 const _crDelta = function (chart, dX, dY) {
   if (dX === void 0) {
     dX = 0;
@@ -41,32 +35,28 @@ const _crDelta = function (chart, dX, dY) {
   };
 };
 const _crCrossParam = (point, chart) => {
-  const _d = (0, _dateFormat.formatDate)(C.DATE_PATTERN, point.x);
+  const _d = (0, _dateFormat.formatDate)(STR_DATE_PATTERN, point.x);
   return {
     y: point.y,
-    date: _d !== C.DATE_EMPTY ? _d : '',
+    date: _d !== STR_DATE_EMPTY ? _d : '',
     ..._crDelta(chart)
   };
 };
 const _crCategoryCrossParam = (point, chart) => ({
   y: (0, _formatNumber.default)(point.y),
   date: point.x,
-  ..._crDelta(chart, C.DX_CATEGORY, C.DY_CATEGORY)
+  ..._crDelta(chart, DX_CATEGORY, DY_CATEGORY)
 });
 const _isCrossParam = point => !point.isCategory || point.c;
 const _getCrCrossParam = point => _isCrossParam(point) ? _crCrossParam : _crCategoryCrossParam;
 const _crXCrossLabelX = (chart, plotX) => {
   const _yAxisOffset = (0, _calcYAxisOffset.default)(chart);
-  return _yAxisOffset ? plotX + _yAxisOffset - C.DX_Y_AXIS : plotX;
+  return _yAxisOffset ? plotX + _yAxisOffset + X_DX : plotX;
 };
-const _crXCrossLabelY = (chart, dY) => chart.plotTop - dY;
-const _crYCrossLabelX = (chart, dX) => {
-  return chart.yAxis[0].width + chart.plotLeft + dX + C.CL_DX;
-};
-const _crYCrossLabelY = (chart, plotY) => {
-  return plotY + chart.plotTop + C.CL_DY;
-};
-const _crCrossLabel = (chart, text, x, y) => chart.renderer.text(text, x, y).attr(C.ATTR_LABEL).css(_crCssLabel()).add();
+const _crXCrossLabelY = (chart, dY) => chart.plotTop - dY + X_DY;
+const _crYCrossLabelX = (chart, dX) => chart.yAxis[0].width + chart.plotLeft + dX + Y_DX;
+const _crYCrossLabelY = (chart, plotY) => plotY + chart.plotTop + Y_DY;
+const _crCrossLabel = (chart, text, x, y) => chart.renderer.text(text, x, y).attr(ATTR_LABEL).addClass(_CL.CL_HC_GL).add();
 const handleMouserOverPoint = function (event) {
   const {
       plotX,

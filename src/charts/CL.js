@@ -1,8 +1,13 @@
-const _CL_TP_HEADER = "tp__header";
+import { CL_NOT_SELECTED } from '../components/styleFn';
 
-export const CL_TP_HEADER = `${_CL_TP_HEADER} not-selected`
+const _TP_PREFIX = "tp__"
+, _CL_TP_HEADER = `${_TP_PREFIX}header`;
+
+export const CL_TP_HEADER = `${_CL_TP_HEADER} ${CL_NOT_SELECTED}`
 export const CL_TP_CAPTION = `${_CL_TP_HEADER}__caption text-clip`
 export const CL_TP_BT_CLOSE = `${_CL_TP_HEADER}__close`
-export const CL_TP_ROW = "tp__row"
-export const CL_TP_TITLE = "tp__title"
-export const CL_TP_VALUE = "tp__value"
+export const CL_TP_ROW = `${_TP_PREFIX}row`
+export const CL_TP_TITLE = `${_TP_PREFIX}title`
+export const CL_TP_VALUE = `${_TP_PREFIX}value`
+
+export const CL_HC_GL = "hc-gl"
