@@ -25,12 +25,10 @@
    /*Element color (dialogs)*/
    --el-c: silver;
 
-   /*Button flat color*/   
+   /*Button flat color, open close color, menu item color*/   
    --btf-c: #1b2836;
    /*Color black*/
-   --c-bl: black;
-  /*menu-item color*/
-  --mi-c: #1b2836;
+   --c-bl: black;  
  }
 
            
