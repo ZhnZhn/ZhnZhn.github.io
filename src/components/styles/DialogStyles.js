@@ -1,4 +1,8 @@
-import { crStyle2 } from '../styleFn';
+import { 
+  S_INLINE,
+  S_NONE,
+  crStyle2
+} from '../styleFn';
 
 //Dialogs, DatesFragments
 const S_ROW = {
@@ -10,7 +14,7 @@ const S_ROW = {
   margin: '5px 12px'
 }
 , S_LABEL = {
-  display: 'inline-block',
+  ...S_INLINE,
   color: '#1b75bb',
   width: 100,
   paddingRight: 6,
@@ -18,9 +22,6 @@ const S_ROW = {
   fontSize: '16px',
   fontWeight: 'bold',
   userSelect: 'none'
-}
-, S_NONE = {
-  display: 'none'
 };
 
 //Dialogs, DatesFragments
@@ -49,7 +50,7 @@ export const S_VM_CONT = {
   paddingTop: 5
 }
 export const S_VM_MSG_NUMBER = {
-  display: 'inline-block',
+  ...S_INLINE,
   width: 22,
   height: 22,
   marginRight: 5,
