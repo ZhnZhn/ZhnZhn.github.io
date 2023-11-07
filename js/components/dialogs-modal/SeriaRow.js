@@ -12,10 +12,10 @@ var _SvgCheckBox = _interopRequireDefault(require("../zhn/SvgCheckBox"));
 var _InputColor = _interopRequireDefault(require("../zhn-moleculs/InputColor"));
 var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 var _DivEllipsis = _interopRequireDefault(require("../zhn/DivEllipsis"));
-var _GeneralStyles = require("../styles/GeneralStyles");
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_COLOR = '#7cb5ec',
   CL_INPUT_COLOR = 'p-r va-m',
+  CL_SERIE_TITLE = (0, _styleFn.crCn)(_styleFn.CL_BLACK, _styleFn.CL_NOT_SELECTED),
   S_ROOT = {
     padding: '0 0 16px 16px'
   },
@@ -24,11 +24,12 @@ const DF_COLOR = '#7cb5ec',
   },
   S_TITLE_STYLE = {
     ..._S_VALIGN_MIDDLE,
-    ..._GeneralStyles.S_FONT_BOLD_NON_SELECT,
     display: 'inline-block',
     width: 100,
     padding: '0 16px 0 4px',
-    textAlign: 'right'
+    textAlign: 'right',
+    fontSize: '16px',
+    fontWeight: 'bold'
   },
   S_CHECK_BOX = {
     ..._S_VALIGN_MIDDLE
@@ -100,7 +101,7 @@ const SeriaRow = props => {
       onCheck: _hCheck,
       onUnCheck: _hUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
-      className: _styleFn.CL_BLACK,
+      className: CL_SERIE_TITLE,
       style: S_TITLE_STYLE,
       text: name
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputColor.default, {

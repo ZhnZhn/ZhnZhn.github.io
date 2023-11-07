@@ -8,7 +8,9 @@ import {
 
 import {
   CL_CHB_BLACK,
-  CL_BLACK
+  CL_BLACK,
+  CL_NOT_SELECTED,
+  crCn
 } from '../styleFn';
 
 import useProperty from '../hooks/useProperty';
@@ -21,12 +23,9 @@ import InputColor from '../zhn-moleculs/InputColor';
 import InputSelect from '../zhn-select/InputSelect';
 import DivEllipsis from '../zhn/DivEllipsis';
 
-import {
-  S_FONT_BOLD_NON_SELECT
-} from '../styles/GeneralStyles';
-
 const DF_COLOR = '#7cb5ec'
 , CL_INPUT_COLOR = 'p-r va-m'
+, CL_SERIE_TITLE = crCn(CL_BLACK, CL_NOT_SELECTED)
 , S_ROOT = {
   padding: '0 0 16px 16px'
 }
@@ -35,11 +34,12 @@ const DF_COLOR = '#7cb5ec'
 }
 , S_TITLE_STYLE = {
   ..._S_VALIGN_MIDDLE,
-  ...S_FONT_BOLD_NON_SELECT,
   display: 'inline-block',
   width: 100,
   padding: '0 16px 0 4px',
-  textAlign: 'right'
+  textAlign: 'right',
+  fontSize: '16px',
+  fontWeight: 'bold'
 }
 , S_CHECK_BOX = {
   ..._S_VALIGN_MIDDLE
@@ -124,7 +124,7 @@ const SeriaRow = (props) => {
         onUnCheck={_hUnCheck}
       />
       <DivEllipsis
-        className={CL_BLACK}
+        className={CL_SERIE_TITLE}
         style={S_TITLE_STYLE}
         text={name}
       />
