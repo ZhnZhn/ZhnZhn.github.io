@@ -6,9 +6,8 @@ const COLOR_SILVER = "silver"
 
 const DF_B_BG = "#5f5f5f";
 
-const DF_T_C = COLOR_DARK_BLUE;
 const DF_S_C1 = "#8bc34a";
-const DF_S_C2 = DF_T_C;
+const DF_S_C2 = COLOR_DARK_BLUE;
 
 const DF_C_BG = "#4d4d4d";
 const DF_BH_C = "#c0c0c0";
@@ -23,7 +22,6 @@ const DF_MENU_ITEM_COLOR = COLOR_DARK_BLUE;
 
 const PROPERTY_B_BG = "b-bg"
 
-, PROPERTY_T_C = "t-c"
 , PROPERTY_S_C1 = "s-c1"
 , PROPERTY_S_C2 = "s-c2"
 
@@ -41,7 +39,6 @@ const PROPERTY_B_BG = "b-bg"
 const PALETTE_KEYS = [
   PROPERTY_B_BG,
 
-  PROPERTY_T_C,
   PROPERTY_S_C1,
   PROPERTY_S_C2,
 
@@ -60,7 +57,6 @@ const PALETTE_KEYS = [
 const P_GREY_VALUES = [
   DF_B_BG,
 
-  DF_T_C,
   DF_S_C1,
   DF_S_C2,
 
@@ -76,13 +72,12 @@ const P_GREY_VALUES = [
   DF_MENU_ITEM_COLOR
 ];
 
-const T_C_WHITE = COLOR_DARK_CYAN
+const BTF_C_WHITE = COLOR_DARK_CYAN
 , EL_BG_WHITE = "#bcd8f5"
 , LB_BC_LIGHT = COLOR_GREY;
 const P_WHITE_VALUES = [
   "#e1e1e1",
 
-  T_C_WHITE,
   DF_S_C1,
   EL_BG_WHITE,
 
@@ -93,17 +88,16 @@ const P_WHITE_VALUES = [
   EL_BG_WHITE,
   "#212020",
 
-  T_C_WHITE,
+  BTF_C_WHITE,
   DF_C_BLACK,
   DF_MENU_ITEM_COLOR
 ];
 
-const T_C_SAND = "#785133"
+const BTF_C_SAND = "#785133"
 , EL_BG_SAND_L = "#64473d";
 const P_SAND_L_VALUES = [
   "#9e9e9e",
 
-  T_C_SAND,
   DF_S_C1,
   EL_BG_SAND_L,
 
@@ -114,7 +108,7 @@ const P_SAND_L_VALUES = [
   EL_BG_SAND_L,
   COLOR_SILVER,
 
-  T_C_SAND,
+  BTF_C_SAND,
   DF_C_BLACK,
   DF_MENU_ITEM_COLOR
 ];
@@ -133,7 +127,6 @@ const BTF_C_BLACK = COLOR_DARK_CYAN;
 const PALETTE_CHANGES = {
   BLACK: {
     [PROPERTY_B_BG]: "#202328",
-    [PROPERTY_T_C]: BTF_C_BLACK,
 
     [PROPERTY_C_BG]: COLOR_BLACK,
     [PROPERTY_EL_BG]: "#292e37",

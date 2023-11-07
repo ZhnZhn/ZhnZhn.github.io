@@ -3,9 +3,10 @@
   color: #1b2836;
   fill: #1b2836;
   stroke: #1b2836;
-  color: var(--t-c, #1b2836);
-  fill: var(--t-c, #1b2836);
-  stroke: var(--t-c, #1b2836);
+  color: var(--btf-c, #1b2836);
+  fill: var(--btf-c, #1b2836);
+  stroke: var(--btf-c, #1b2836);
+
   display: inline-block;
   width: 100%;
   cursor: pointer;
@@ -30,5 +31,5 @@
 
 .zhn-oc__exp {
   border-color: #1b2836;
-  border-color: var(--t-c, #1b2836);
+  border-color: var(--btf-c, #1b2836);
 }
