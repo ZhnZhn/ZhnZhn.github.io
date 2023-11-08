@@ -16,9 +16,11 @@ import {
 } from '../../constants/DirectionType';
 
 import Button from '../zhn/Button';
-import SvgDown from '../zhn/SvgDown';
-import SvgUp from '../zhn/SvgUp';
-import SvgEqual from '../zhn/SvgEqual';
+import {
+  SvgDown,
+  SvgEqual,
+  SvgUp
+} from '../zhn/SvgMove';
 
 import SpanValue from '../zhn-span/SpanValue';
 import SpanDate from '../zhn-span/SpanDate';

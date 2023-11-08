@@ -8,9 +8,7 @@ var _useToggleClose = _interopRequireDefault(require("../hooks/useToggleClose"))
 var _dateFn = require("../../utils/dateFn");
 var _DirectionType = require("../../constants/DirectionType");
 var _Button = _interopRequireDefault(require("../zhn/Button"));
-var _SvgDown = _interopRequireDefault(require("../zhn/SvgDown"));
-var _SvgUp = _interopRequireDefault(require("../zhn/SvgUp"));
-var _SvgEqual = _interopRequireDefault(require("../zhn/SvgEqual"));
+var _SvgMove = require("../zhn/SvgMove");
 var _SpanValue = _interopRequireDefault(require("../zhn-span/SpanValue"));
 var _SpanDate = _interopRequireDefault(require("../zhn-span/SpanDate"));
 var _ValueMovingModal = _interopRequireDefault(require("./ValueMovingModal"));
@@ -45,9 +43,9 @@ const S_ROOT = {
   };
 const _hmDirection = {
   DF: [null],
-  [_DirectionType.DT_DOWN]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgDown.default, {}), S_DOWN],
-  [_DirectionType.DT_UP]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgUp.default, {}), S_UP],
-  [_DirectionType.DT_EQUAL]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgEqual.default, {}), S_EQUAL]
+  [_DirectionType.DT_DOWN]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMove.SvgDown, {}), S_DOWN],
+  [_DirectionType.DT_UP]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMove.SvgUp, {}), S_UP],
+  [_DirectionType.DT_EQUAL]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMove.SvgEqual, {}), S_EQUAL]
 };
 const _getDirection = direction => _hmDirection[direction] || _hmDirection.DF;
 const DF_VALUE_MOVING = {
@@ -140,6 +138,5 @@ ValueMovingBadge.propTypes = {
   crValueMoving: PropTypes.func,
 }
 */
-var _default = ValueMovingBadge;
-exports.default = _default;
+var _default = exports.default = ValueMovingBadge;
 //# sourceMappingURL=ValueMovingBadge.js.map
