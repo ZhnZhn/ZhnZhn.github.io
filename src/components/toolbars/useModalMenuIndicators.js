@@ -5,8 +5,11 @@ import {
   INDICATOR_TYPE_2
 } from './IndicatorType';
 
-import RowSma from './RowSma';
-import RowRsi from './RowRsi';
+import {
+  RowSma,
+  RowRsi
+} from './fRowTaType1';
+
 import RowMfi from './RowMfi';
 import RowMomAth from './RowMomAth';
 
