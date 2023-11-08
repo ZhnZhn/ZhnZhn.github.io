@@ -14,7 +14,7 @@ import {
 import { HAS_TOUCH_EVENTS } from '../has';
 
 import ArrowCell from './ArrowCell';
-import SvgClear from '../zhn/SvgClear';
+import { BtSvgClear } from '../zhn/BtSvgX'
 
 import ButtonCircle2 from '../zhn/ButtonCircle2';
 import ItemOptionDf from './ItemOptionDf'
@@ -529,7 +529,7 @@ class InputSelect extends Component {
     if (!isLoading && !isLoadingFailed){
        if (isFocused && value) {
          _afterInputEl = (
-            <SvgClear
+            <BtSvgClear
                style={S_SVG_CLEAR}
                onClick={this._hClear}
             />

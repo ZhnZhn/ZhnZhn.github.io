@@ -7,11 +7,11 @@ var _uiApi = require("../uiApi");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _ItemHeader = _interopRequireDefault(require("./ItemHeader"));
+var _BtSvgX = require("../zhn/BtSvgX");
 var _jsxRuntime = require("react/jsx-runtime");
 const {
   ShowHide,
-  ItemStack,
-  SvgClose
+  ItemStack
 } = _Comp.default;
 const CL = 'twit',
   S_TW_LIST = {
@@ -58,12 +58,12 @@ const Twit = _ref => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S_ROW_TITLE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        children: user + " "
+        children: `${user} `
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
         children: date
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgClose, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
         style: S_BT_CLOSE,
-        onClose: toggleIsShow
+        onClick: toggleIsShow
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
       href: (0, _uiApi.toHref)(link),
@@ -74,9 +74,9 @@ const Twit = _ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S_ROW,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        children: "Retweets " + retweet + " "
+        children: `Retweets ${retweet} `
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        children: "Likes " + like
+        children: `Likes ${like}`
       })]
     })]
   });

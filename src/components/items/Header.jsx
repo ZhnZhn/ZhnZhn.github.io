@@ -12,14 +12,14 @@ import { GREEN_COLOR } from '../styles/Color';
 
 import Comp from '../Comp';
 import Button from '../zhn/Button';
+import { BtSvgClose } from '../zhn/BtSvgX';
 import ValueMovingBadge from './ValueMovingBadge';
 import ValueDate from './ValueDate';
 
 const {
   SvgMore,
   ModalSlider,
-  SvgCheckBox,
-  SvgClose
+  SvgCheckBox
 } = Comp;
 
 const CL_ITEM_HEADER = crElementCn("item-header")
@@ -154,9 +154,9 @@ const Header = ({
               strDate={itemTime}
             />
       }
-      <SvgClose
+      <BtSvgClose
         style={S_CLOSE}
-        onClose={onClose}
+        onClick={onClose}
       />
     </div>
   );

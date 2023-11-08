@@ -13,7 +13,7 @@ import useKeyEscape from '../hooks/useKeyEscape';
 import useMenuMore from '../hooks/useMenuMore';
 import useDialogFocus from './useDialogFocus';
 
-import SvgClose from '../zhn/SvgClose';
+import { BtSvgClose } from '../zhn/BtSvgX';
 import FlatButton from '../zhn-m/FlatButton';
 import FocusTrap from './FocusTrap';
 import MenuMore from './MenuMore';
@@ -133,9 +133,9 @@ const ModalDialog = forwardRef(({
             <span style={styleCaption}>
               {caption}
             </span>
-            <SvgClose
+            <BtSvgClose
               style={S_SVG_CLOSE}
-              onClose={onClose}
+              onClick={onClose}
             />
          </div>
          <div>

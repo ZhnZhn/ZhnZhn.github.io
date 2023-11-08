@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
 var _useDnDHandlers = _interopRequireDefault(require("../hooks/useDnDHandlers"));
-var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
+var _BtSvgX = require("../zhn/BtSvgX");
 var _DivEllipsis = _interopRequireDefault(require("../zhn/DivEllipsis"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ITEM_DIV = {
@@ -44,9 +44,9 @@ const WatchItem = props => {
     {
       caption = EMPTY_ITEM_CAPTION
     } = item || {},
-    _btClose = isDraggable ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose.default, {
+    _btClose = isDraggable ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
       style: S_SVG_CLOSE,
-      onClose: (0, _uiApi.bindTo)(onClose, option)
+      onClick: (0, _uiApi.bindTo)(onClose, option)
     }) : null
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hClick = (0, _uiApi.useCallback)(() => onClick(item), [item])
@@ -72,6 +72,5 @@ const WatchItem = props => {
     }), _btClose]
   });
 };
-var _default = WatchItem;
-exports.default = _default;
+var _default = exports.default = WatchItem;
 //# sourceMappingURL=WatchItem.js.map

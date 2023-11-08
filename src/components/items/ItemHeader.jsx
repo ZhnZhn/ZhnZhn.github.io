@@ -1,7 +1,7 @@
 import { crElementCn } from '../styleFn';
 
-import A from '../Comp';
 import Button from '../zhn/Button';
+import { BtSvgClose } from '../zhn/BtSvgX';
 
 const CL_ITEM_HEADER = crElementCn()
 , CL_CAPTION = "not-selected text-clip bt-left bt"
@@ -60,9 +60,9 @@ function ItemHeader({
          {caption}
       </Button>
       {children}
-      <A.SvgClose
+      <BtSvgClose
          style={S_SVG_CLOSE}
-         onClose={onClose}
+         onClick={onClose}
        />
     </div>
   );

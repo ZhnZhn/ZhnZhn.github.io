@@ -6,7 +6,7 @@ import {
 import isKeyEnter from '../zhn/isKeyEnter';
 import useDnDHandlers from '../hooks/useDnDHandlers';
 
-import SvgClose from '../zhn/SvgClose';
+import { BtSvgClose } from '../zhn/BtSvgX';
 import DivEllipsis from '../zhn/DivEllipsis';
 
 const S_ITEM_DIV = {
@@ -48,9 +48,9 @@ const WatchItem = (props) => {
     caption=EMPTY_ITEM_CAPTION
   } = item || {}
   , _btClose = isDraggable
-     ? (<SvgClose
+     ? (<BtSvgClose
          style={S_SVG_CLOSE}
-         onClose={bindTo(onClose, option)}
+         onClick={bindTo(onClose, option)}
        />)
      : null
   /*eslint-disable react-hooks/exhaustive-deps */

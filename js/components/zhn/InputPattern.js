@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
-var _SvgClear = _interopRequireDefault(require("./SvgClear"));
+var _BtSvgX = require("./BtSvgX");
 var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
 var _Input = require("./Input.Style");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -137,7 +137,7 @@ const InputPattern = (0, _uiApi.forwardRef)((_ref, ref) => {
         maxLength: maxLength,
         onChange: _hChangeValue,
         onKeyDown: _hKeyDown
-      }), value || errorInput ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClear.default, {
+      }), value || errorInput ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClear, {
         style: _btClearStyle,
         onClick: _hClear
       }) : null]
@@ -163,6 +163,5 @@ InputPattern.propTypes = {
   onClear: PropTypes.func
 }
 */
-var _default = InputPattern;
-exports.default = _default;
+var _default = exports.default = InputPattern;
 //# sourceMappingURL=InputPattern.js.map

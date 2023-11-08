@@ -5,7 +5,7 @@ import { GREEN_COLOR } from '../styles/Color';
 
 import SvgMore from './SvgMore';
 import SvgCheckBox from './SvgCheckBox';
-import SvgClose from './SvgClose';
+import { BtSvgClose } from './BtSvgX';
 
 const CL_TEXT_CLIP = 'text-clip'
 , CL_BR_CAPTION = crElementCn(`br-caption ${CL_TEXT_CLIP} gap-right`)
@@ -67,9 +67,9 @@ const BrowserCaption = ({
        {caption}
     </span>
     {children}
-    <SvgClose
+    <BtSvgClose
       style={S_SVG_CLOSE}
-      onClose={onClose}
+      onClick={onClose}
     />
   </div>
 );

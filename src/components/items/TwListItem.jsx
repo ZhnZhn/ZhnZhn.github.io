@@ -3,11 +3,11 @@ import useToggle from '../hooks/useToggle';
 
 import Comp from '../Comp';
 import ItemHeader from './ItemHeader';
+import { BtSvgClose } from '../zhn/BtSvgX';
 
 const {
   ShowHide,
-  ItemStack,
-  SvgClose
+  ItemStack
 } = Comp;
 
 const CL = 'twit'
@@ -49,7 +49,7 @@ const Twit = ({ item }) => {
       <div style={S_ROW_TITLE}>
         <span>{`${user} `}</span>
         <span>{date}</span>
-        <SvgClose style={S_BT_CLOSE} onClose={toggleIsShow} />
+        <BtSvgClose style={S_BT_CLOSE} onClick={toggleIsShow} />
       </div>
       <a href={toHref(link)}>
         <div style={S_PL_16}>{text}</div>

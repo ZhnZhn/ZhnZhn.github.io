@@ -2,13 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.default = void 0;
+exports.BtSvgClose = exports.BtSvgClear = void 0;
 var _Button = _interopRequireDefault(require("./Button"));
 var _SvgX = _interopRequireDefault(require("./svg/SvgX"));
 var _jsxRuntime = require("react/jsx-runtime");
-const BtSvgX = _ref => {
+const _fBtSvgX = className => _ref => {
   let {
-    className,
     style,
     onClick
   } = _ref;
@@ -20,6 +19,9 @@ const BtSvgX = _ref => {
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgX.default, {})
   });
 };
-var _default = BtSvgX;
-exports.default = _default;
+const BT_SVG = "bt-svg",
+  CL_BT_SVG_CLEAR = `${BT_SVG}-clear`,
+  CL_BT_SVG_CLOSE = `${BT_SVG}-close`;
+const BtSvgClear = exports.BtSvgClear = _fBtSvgX(CL_BT_SVG_CLEAR);
+const BtSvgClose = exports.BtSvgClose = _fBtSvgX(CL_BT_SVG_CLOSE);
 //# sourceMappingURL=BtSvgX.js.map

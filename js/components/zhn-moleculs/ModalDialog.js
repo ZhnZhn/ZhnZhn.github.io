@@ -8,7 +8,7 @@ var _styleFn = require("../styleFn");
 var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
 var _useMenuMore = _interopRequireDefault(require("../hooks/useMenuMore"));
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
-var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
+var _BtSvgX = require("../zhn/BtSvgX");
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _FocusTrap = _interopRequireDefault(require("./FocusTrap"));
 var _MenuMore = _interopRequireDefault(require("./MenuMore"));
@@ -99,9 +99,9 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: styleCaption,
           children: caption
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose.default, {
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
           style: _Dialog.S_SVG_CLOSE,
-          onClose: onClose
+          onClick: onClose
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         children: children

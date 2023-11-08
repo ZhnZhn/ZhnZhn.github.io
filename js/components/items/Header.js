@@ -9,6 +9,7 @@ var _useFnFocus = _interopRequireDefault(require("../hooks/useFnFocus"));
 var _Color = require("../styles/Color");
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _Button = _interopRequireDefault(require("../zhn/Button"));
+var _BtSvgX = require("../zhn/BtSvgX");
 var _ValueMovingBadge = _interopRequireDefault(require("./ValueMovingBadge"));
 var _ValueDate = _interopRequireDefault(require("./ValueDate"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -17,8 +18,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 const {
   SvgMore,
   ModalSlider,
-  SvgCheckBox,
-  SvgClose
+  SvgCheckBox
 } = _Comp.default;
 const CL_ITEM_HEADER = (0, _styleFn.crElementCn)("item-header"),
   CL_CHARTS_MENU_MORE = (0, _styleFn.crElementBorderCn)("popup-menu charts__menu-more"),
@@ -124,9 +124,9 @@ const Header = _ref2 => {
     }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueDate.default, {
       value: itemValue,
       strDate: itemTime
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgClose, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
       style: S_CLOSE,
-      onClose: onClose
+      onClick: onClose
     })]
   });
 };
@@ -150,6 +150,5 @@ Header.propTypes = {
   onClose : PropTypes.func.isRequired
 }
 */
-var _default = Header;
-exports.default = _default;
+var _default = exports.default = Header;
 //# sourceMappingURL=Header.js.map

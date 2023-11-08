@@ -10,7 +10,7 @@ import useKeyEscape from '../hooks/useKeyEscape';
 import useXYMovable from '../hooks/useXYMovable';
 import useDialogFocus from './useDialogFocus';
 
-import SvgClose from '../zhn/SvgClose';
+import { BtSvgClose } from '../zhn/BtSvgX';
 import FlatButton from '../zhn-m/FlatButton';
 
 import MenuMore from './MenuMore';
@@ -135,9 +135,9 @@ const DraggableDialog = forwardRef(({
         <span className={CL_NOT_SELECTED}>
           {caption}
         </span>
-        <SvgClose
+        <BtSvgClose
            style={S_SVG_CLOSE}
-           onClose={onClose}
+           onClick={onClose}
         />
       </div>
       <div>

@@ -9,7 +9,7 @@ var _useMenuMore = _interopRequireDefault(require("../hooks/useMenuMore"));
 var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
 var _useXYMovable = _interopRequireDefault(require("../hooks/useXYMovable"));
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
-var _SvgClose = _interopRequireDefault(require("../zhn/SvgClose"));
+var _BtSvgX = require("../zhn/BtSvgX");
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _MenuMore = _interopRequireDefault(require("./MenuMore"));
 var _Dialog = require("./Dialog.Style");
@@ -99,9 +99,9 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           className: CL_NOT_SELECTED,
           children: caption
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose.default, {
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
           style: _Dialog.S_SVG_CLOSE,
-          onClose: onClose
+          onClick: onClose
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         children: children

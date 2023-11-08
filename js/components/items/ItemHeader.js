@@ -4,8 +4,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
-var _Comp = _interopRequireDefault(require("../Comp"));
 var _Button = _interopRequireDefault(require("../zhn/Button"));
+var _BtSvgX = require("../zhn/BtSvgX");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_ITEM_HEADER = (0, _styleFn.crElementCn)(),
   CL_CAPTION = "not-selected text-clip bt-left bt",
@@ -63,9 +63,9 @@ function ItemHeader(_ref) {
       title: _title,
       onClick: onClick,
       children: caption
-    }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.SvgClose, {
+    }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
       style: S_SVG_CLOSE,
-      onClose: onClose
+      onClick: onClose
     })]
   });
 }

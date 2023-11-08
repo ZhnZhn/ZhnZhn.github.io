@@ -7,13 +7,13 @@ var _styleFn = require("../styleFn");
 var _Color = require("../styles/Color");
 var _SvgMore = _interopRequireDefault(require("./SvgMore"));
 var _SvgCheckBox = _interopRequireDefault(require("./SvgCheckBox"));
-var _SvgClose = _interopRequireDefault(require("./SvgClose"));
+var _BtSvgX = require("./BtSvgX");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
 const CL_TEXT_CLIP = 'text-clip',
-  CL_BR_CAPTION = (0, _styleFn.crElementCn)("br-caption " + CL_TEXT_CLIP + " gap-right"),
-  CL_CAPTION = "not-selected " + CL_TEXT_CLIP,
+  CL_BR_CAPTION = (0, _styleFn.crElementCn)(`br-caption ${CL_TEXT_CLIP} gap-right`),
+  CL_CAPTION = `not-selected ${CL_TEXT_CLIP}`,
   S_CAPTION = {
     paddingRight: 8,
     fontSize: '18px',
@@ -60,9 +60,9 @@ const BrowserCaption = _ref => {
         ...captionStyle
       },
       children: caption
-    }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgClose.default, {
+    }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
       style: S_SVG_CLOSE,
-      onClose: onClose
+      onClick: onClose
     })]
   });
 };
@@ -78,6 +78,5 @@ BrowserCaption.propTypes = {
   onClose: PropTypes.func
 }
 */
-var _default = BrowserCaption;
-exports.default = _default;
+var _default = exports.default = BrowserCaption;
 //# sourceMappingURL=BrowserCaption.js.map

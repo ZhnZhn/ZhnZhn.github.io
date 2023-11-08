@@ -23,7 +23,6 @@ var _SvgCheckBox = _interopRequireDefault(require("./SvgCheckBox"));
 var _SvgPlus = _interopRequireDefault(require("./SvgPlus"));
 var _SvgMinus = _interopRequireDefault(require("./SvgMinus"));
 var _SvgMore = _interopRequireDefault(require("./SvgMore"));
-var _SvgClose = _interopRequireDefault(require("./SvgClose"));
 var _MsgRenderErr = _interopRequireDefault(require("./MsgRenderErr"));
 var _HighchartWrapper = _interopRequireDefault(require("./HighchartWrapper"));
 var _ErrorBoundary = _interopRequireDefault(require("./ErrorBoundary"));
@@ -48,11 +47,9 @@ const A = {
   SvgPlus: _SvgPlus.default,
   SvgMinus: _SvgMinus.default,
   SvgMore: _SvgMore.default,
-  SvgClose: _SvgClose.default,
   MsgRenderErr: _MsgRenderErr.default,
   HighchartWrapper: _HighchartWrapper.default,
   ErrorBoundary: _ErrorBoundary.default
 };
-var _default = A;
-exports.default = _default;
+var _default = exports.default = A;
 //# sourceMappingURL=A.js.map

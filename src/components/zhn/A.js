@@ -18,7 +18,6 @@ import SvgCheckBox from './SvgCheckBox'
 import SvgPlus from './SvgPlus'
 import SvgMinus from './SvgMinus'
 import SvgMore from './SvgMore'
-import SvgClose from './SvgClose'
 import MsgRenderErr from './MsgRenderErr'
 import HighchartWrapper from './HighchartWrapper'
 import ErrorBoundary from './ErrorBoundary'
@@ -45,7 +44,6 @@ const A = {
   SvgPlus,
   SvgMinus,
   SvgMore,
-  SvgClose,
   MsgRenderErr,
   HighchartWrapper,
   ErrorBoundary

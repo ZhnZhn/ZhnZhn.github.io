@@ -11,7 +11,7 @@ import {
 
 import useInputKeyDown from './useInputKeyDown';
 
-import SvgClear from './SvgClear';
+import { BtSvgClear } from './BtSvgX';
 import ErrMsg from './ErrMsg';
 import {
   S_ROW,
@@ -151,7 +151,7 @@ const InputPattern = forwardRef(({
            onKeyDown={_hKeyDown}
         />
         {value || errorInput
-            ? <SvgClear
+            ? <BtSvgClear
                  style={_btClearStyle}
                  onClick={_hClear}
               />
