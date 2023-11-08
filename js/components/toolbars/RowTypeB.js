@@ -4,7 +4,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _A = _interopRequireDefault(require("../zhn/A"));
+var _InputText = _interopRequireDefault(require("../zhn/InputText"));
+var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _SpanBlack = _interopRequireDefault(require("../zhn/SpanBlack"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_CAPTION = {
@@ -34,7 +35,7 @@ const RowTypeB = _ref => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
       style: S_CAPTION,
       children: caption
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.InputText, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
       ref: forwardRef,
       type: "number",
       style: S_INPUT_TEXT,
@@ -43,7 +44,7 @@ const RowTypeB = _ref => {
       min: min,
       max: max,
       onEnter: _onAdd
-    }), isPlus && /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.SvgPlus, {
+    }), isPlus && /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgPlus, {
       onClick: _onAdd
     })]
   });

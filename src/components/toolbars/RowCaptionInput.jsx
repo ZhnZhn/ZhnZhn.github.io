@@ -1,4 +1,5 @@
-import A from '../zhn/A';
+import InputText from '../zhn/InputText';
+import { SvgPlus } from '../zhn/BtSvgCircle';
 import SpanBlack from '../zhn/SpanBlack';
 
 const S_CAPTION = {
@@ -20,7 +21,7 @@ const RowCaptionInput = ({
 }) => (
   <div>
     <SpanBlack style={S_CAPTION}>{caption}</SpanBlack>
-    <A.InputText
+    <InputText
        ref={forwardRef}
        type="number"
        style={S_INPUT_TEXT}
@@ -28,7 +29,7 @@ const RowCaptionInput = ({
        maxLength={maxLength}
        onEnter={onAdd}
     />
-    <A.SvgPlus onClick={onAdd} />
+    <SvgPlus onClick={onAdd} />
   </div>
 );
 

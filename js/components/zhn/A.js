@@ -20,8 +20,6 @@ var _OpenClose = _interopRequireDefault(require("./OpenClose"));
 var _OpenClose2 = _interopRequireDefault(require("./OpenClose2"));
 var _ShowHide = _interopRequireDefault(require("./ShowHide"));
 var _SvgCheckBox = _interopRequireDefault(require("./SvgCheckBox"));
-var _SvgPlus = _interopRequireDefault(require("./SvgPlus"));
-var _SvgMinus = _interopRequireDefault(require("./SvgMinus"));
 var _SvgMore = _interopRequireDefault(require("./SvgMore"));
 var _MsgRenderErr = _interopRequireDefault(require("./MsgRenderErr"));
 var _HighchartWrapper = _interopRequireDefault(require("./HighchartWrapper"));
@@ -44,8 +42,6 @@ const A = {
   OpenClose2: _OpenClose2.default,
   ShowHide: _ShowHide.default,
   SvgCheckBox: _SvgCheckBox.default,
-  SvgPlus: _SvgPlus.default,
-  SvgMinus: _SvgMinus.default,
   SvgMore: _SvgMore.default,
   MsgRenderErr: _MsgRenderErr.default,
   HighchartWrapper: _HighchartWrapper.default,

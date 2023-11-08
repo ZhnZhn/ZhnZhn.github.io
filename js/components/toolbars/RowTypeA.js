@@ -6,7 +6,8 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
-var _A = _interopRequireDefault(require("../zhn/A"));
+var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
+var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_COLOR = '#2b908f',
@@ -32,7 +33,7 @@ const _useRowTypeA = (mathFn, getChart, dfColor) => {
     _onPlus = () => {
       setIs(mathFn(getChart(), getColor()));
     },
-    compAfter = is ? null : /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.SvgPlus, {
+    compAfter = is ? null : /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgPlus, {
       onClick: _onPlus
     });
   return [compAfter, setColor];
@@ -45,7 +46,7 @@ const RowTypeA = _ref => {
     getChart
   } = _ref;
   const [compAfter, onColor] = _useRowTypeA(mathFn, getChart, dfColor);
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.OpenClose, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     caption: caption,
     className: _styleFn.CL_OC_BLACK,
     style: S_ROOT_OC,

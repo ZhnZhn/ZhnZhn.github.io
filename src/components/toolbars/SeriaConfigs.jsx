@@ -1,4 +1,4 @@
-import SvgMinus from '../zhn/SvgMinus';
+import { SvgMinus } from '../zhn/BtSvgCircle';
 
 const S_ROW = { paddingTop: 5 }
 , _crSpanStyle = color => ({

@@ -15,13 +15,10 @@ import OpenClose from './OpenClose'
 import OpenClose2 from './OpenClose2'
 import ShowHide from './ShowHide'
 import SvgCheckBox from './SvgCheckBox'
-import SvgPlus from './SvgPlus'
-import SvgMinus from './SvgMinus'
 import SvgMore from './SvgMore'
 import MsgRenderErr from './MsgRenderErr'
 import HighchartWrapper from './HighchartWrapper'
 import ErrorBoundary from './ErrorBoundary'
-
 
 const A = {
   ...SvgIcons,
@@ -41,8 +38,6 @@ const A = {
   OpenClose2,
   ShowHide,
   SvgCheckBox,
-  SvgPlus,
-  SvgMinus,
   SvgMore,
   MsgRenderErr,
   HighchartWrapper,

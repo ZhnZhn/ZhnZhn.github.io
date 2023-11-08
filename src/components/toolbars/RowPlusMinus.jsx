@@ -1,4 +1,7 @@
-import A from '../zhn/A';
+import {
+  SvgPlus,
+  SvgMinus
+} from '../zhn/BtSvgCircle';
 import SpanBlack from '../zhn/SpanBlack';
 
 const S_CAPTION = {
@@ -19,8 +22,8 @@ const RowPlusMinus = ({
        {caption}
     </SpanBlack>
     {
-      is ? <A.SvgMinus onClick={onMinus} />
-         : <A.SvgPlus onClick={onPlus} />
+      is ? <SvgMinus onClick={onMinus} />
+         : <SvgPlus onClick={onPlus} />
     }
   </div>
 );

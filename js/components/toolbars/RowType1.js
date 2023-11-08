@@ -7,8 +7,7 @@ var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox2"));
-var _SvgPlus = _interopRequireDefault(require("../zhn/SvgPlus"));
-var _SvgMinus = _interopRequireDefault(require("../zhn/SvgMinus"));
+var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -89,7 +88,7 @@ const InputPlus = _ref => {
       maxLength: 3,
       onChange: onChangePeriod,
       onEnter: onPlus
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgPlus.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgPlus, {
       style: S_INLINE,
       onClick: onPlus
     })]
@@ -102,7 +101,7 @@ const MinusPeriod = _ref2 => {
     onMinus
   } = _ref2;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMinus.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgMinus, {
       style: S_INLINE,
       onClick: onMinus
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {

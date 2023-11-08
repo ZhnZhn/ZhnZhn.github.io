@@ -1,5 +1,7 @@
 import { useState } from '../uiApi';
-import A from '../zhn/A';
+
+import InputText from '../zhn/InputText';
+import { SvgPlus } from '../zhn/BtSvgCircle';
 import SpanBlack from '../zhn/SpanBlack';
 
 const S_CAPTION = {
@@ -30,11 +32,10 @@ const RowTypeB = ({
   } : void 0;
   return (
     <div>
-
       <SpanBlack style={S_CAPTION}>
         {caption}
       </SpanBlack>
-      <A.InputText
+      <InputText
          ref={forwardRef}
          type="number"
          style={S_INPUT_TEXT}
@@ -44,7 +45,7 @@ const RowTypeB = ({
          max={max}
          onEnter={_onAdd}
       />
-      {isPlus && <A.SvgPlus onClick={_onAdd} />}
+      {isPlus && <SvgPlus onClick={_onAdd} />}
     </div>
   );
 };

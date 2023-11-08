@@ -1,9 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _SvgMinus = _interopRequireDefault(require("../zhn/SvgMinus"));
+var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW = {
     paddingTop: 5
@@ -24,7 +23,7 @@ const SeriaConfigs = _ref => {
     } = _ref2;
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S_ROW,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMinus.default, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgMinus, {
         onClick: () => onRemove(id)
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
         style: _crSpanStyle(color),
@@ -33,6 +32,5 @@ const SeriaConfigs = _ref => {
     }, id);
   });
 };
-var _default = SeriaConfigs;
-exports.default = _default;
+var _default = exports.default = SeriaConfigs;
 //# sourceMappingURL=SeriaConfigs.js.map

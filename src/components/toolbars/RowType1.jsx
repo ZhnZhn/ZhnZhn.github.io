@@ -12,8 +12,10 @@ import {
 import D from '../dialogs/DialogCell';
 import RowCheckBox2 from '../dialogs/rows/RowCheckBox2';
 
-import SvgPlus from '../zhn/SvgPlus';
-import SvgMinus from '../zhn/SvgMinus';
+import {
+  SvgMinus,
+  SvgPlus
+} from '../zhn/BtSvgCircle';
 import InputText from '../zhn/InputText';
 import OpenClose from '../zhn/OpenClose';
 

@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _A = _interopRequireDefault(require("../zhn/A"));
+var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _SpanBlack = _interopRequireDefault(require("../zhn/SpanBlack"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_CAPTION = {
@@ -26,9 +26,9 @@ const RowPlusMinus = _ref => {
         ...styleCaption
       },
       children: caption
-    }), is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.SvgMinus, {
+    }), is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgMinus, {
       onClick: onMinus
-    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.SvgPlus, {
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgPlus, {
       onClick: onPlus
     })]
   });
