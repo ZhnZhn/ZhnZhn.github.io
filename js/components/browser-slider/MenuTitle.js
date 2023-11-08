@@ -1,9 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
+var _fUseKey = require("../hooks/fUseKey");
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const MenuTitle = _ref => {
@@ -12,7 +11,7 @@ const MenuTitle = _ref => {
     title,
     onClick
   } = _ref;
-  const _hKeyDown = (0, _useKeyEnter.default)(onClick);
+  const _hKeyDown = (0, _fUseKey.useKeyEnter)(onClick);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     ref: innerRef,
     className: _Style.CL_MENU_ITEM,

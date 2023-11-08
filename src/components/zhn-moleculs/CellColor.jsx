@@ -1,7 +1,7 @@
 import { forwardRef } from '../uiApi';
 import { crCn } from '../styleFn';
 
-import useKeyEnter from '../hooks/useKeyEnter';
+import { useKeyEnter } from '../hooks/fUseKey';
 
 const CL_INPUT_COLOR = 'input-color';
 

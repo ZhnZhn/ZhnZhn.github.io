@@ -1,7 +1,7 @@
 //import PropTypes from 'prop-types'
 import { useRef } from '../uiApi';
 import useToggle from '../hooks/useToggle';
-import useKeyEnter from '../hooks/useKeyEnter';
+import { useKeyEnter } from '../hooks/fUseKey';
 
 import ShowHide from '../zhn/ShowHide';
 import SparklinesLazy from '../zhn-lazy/SparklinesLazy';

@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
+var _fUseKey = require("../hooks/fUseKey");
 var _useMenuMore = _interopRequireDefault(require("../hooks/useMenuMore"));
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
 var _BtSvgX = require("../zhn/BtSvgX");
@@ -67,7 +67,7 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
   const refBtClose = (0, _uiApi.useRef)(),
     [refBtMenuMore, isMenuMore, toggleMenuMore] = (0, _useMenuMore.default)(),
     refRoot = (0, _useDialogFocus.default)(isShow, ref, refBtMenuMore),
-    _hKeyDown = (0, _useKeyEscape.default)(onClose),
+    _hKeyDown = (0, _fUseKey.useKeyEscape)(onClose),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_MODAL_DIALOG);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FocusTrap.default, {
     refEl: refRoot,

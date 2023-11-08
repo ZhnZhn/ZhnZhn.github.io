@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useMenuMore = _interopRequireDefault(require("../hooks/useMenuMore"));
-var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
+var _fUseKey = require("../hooks/fUseKey");
 var _useXYMovable = _interopRequireDefault(require("../hooks/useXYMovable"));
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
 var _BtSvgX = require("../zhn/BtSvgX");
@@ -68,7 +68,7 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
   } = _ref2;
   const [refBtMenuMore, isMenuMore, toggleMenuMore] = (0, _useMenuMore.default)(),
     refRoot = (0, _useDialogFocus.default)(isShow, ref, refBtMenuMore),
-    _hKeyDown = (0, _useKeyEscape.default)(onClose),
+    _hKeyDown = (0, _fUseKey.useKeyEscape)(onClose),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_DRAGGABLE_DIALOG);
   (0, _useXYMovable.default)(refRoot);
   return (

@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 var _react = require("@testing-library/react");
-var _useKeyEnter = _interopRequireDefault(require("../useKeyEnter"));
+var _fUseKey = require("../fUseKey");
 var _factorySameFnForEmptyDeps = _interopRequireDefault(require("./_factorySameFnForEmptyDeps"));
 const _crKeyEvent = keyCode => ({
   keyCode,
@@ -21,7 +21,7 @@ describe('useKeyEnter', () => {
         let {
           onEnter
         } = _ref;
-        return (0, _useKeyEnter.default)(onEnter, [onEnter]);
+        return (0, _fUseKey.useKeyEnter)(onEnter, [onEnter]);
       }, {
         initialProps: {
           onEnter
@@ -65,6 +65,6 @@ describe('useKeyEnter', () => {
     });
     expect(_onKeyEnter).not.toEqual(result.current);
   });
-  test('should return same fn in case of empty deps', (0, _factorySameFnForEmptyDeps.default)(_useKeyEnter.default));
+  test('should return same fn in case of empty deps', (0, _factorySameFnForEmptyDeps.default)(_fUseKey.useKeyEnter));
 });
 //# sourceMappingURL=useKeyEnter.test.js.map

@@ -1,6 +1,6 @@
 import { forwardRef } from '../uiApi';
 
-import useKeyEnter from '../hooks/useKeyEnter';
+import { useKeyEnter } from '../hooks/fUseKey';
 
 const MenuAriaItem = forwardRef(({
   className,

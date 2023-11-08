@@ -2,7 +2,7 @@
 import { crContainerCn } from '../styleFn';
 
 import useClickOutside from '../hooks/useClickOutside';
-import useKeyEscape from '../hooks/useKeyEscape';
+import { useKeyEscape } from '../hooks/fUseKey';
 
 const CL_MODAL_PANE = crContainerCn();
 
@@ -21,7 +21,7 @@ const ModalPane = ({
        aria-hidden={!isShow}
        ref={_refNode}
        className={CL_MODAL_PANE}
-       style={style}      
+       style={style}
        onKeyDown={_hKeyDown}
     >
       {children}

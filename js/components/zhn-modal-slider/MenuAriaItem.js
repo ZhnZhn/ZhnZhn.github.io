@@ -1,10 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
+var _fUseKey = require("../hooks/fUseKey");
 var _jsxRuntime = require("react/jsx-runtime");
 const MenuAriaItem = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
@@ -13,7 +12,7 @@ const MenuAriaItem = (0, _uiApi.forwardRef)((_ref, ref) => {
     children,
     onClick
   } = _ref;
-  const _hKeyDown = (0, _useKeyEnter.default)(onClick);
+  const _hKeyDown = (0, _fUseKey.useKeyEnter)(onClick);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: ref,
     className: className,
@@ -25,6 +24,5 @@ const MenuAriaItem = (0, _uiApi.forwardRef)((_ref, ref) => {
     children: children
   });
 });
-var _default = MenuAriaItem;
-exports.default = _default;
+var _default = exports.default = MenuAriaItem;
 //# sourceMappingURL=MenuAriaItem.js.map

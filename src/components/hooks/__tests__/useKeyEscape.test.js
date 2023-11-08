@@ -2,7 +2,7 @@ import {
   renderHook,
   act
 } from '@testing-library/react';
-import useKeyEscape from '../useKeyEscape';
+import { useKeyEscape } from '../fUseKey';
 
 import factorySameFnForEmptyDeps from './_factorySameFnForEmptyDeps';
 

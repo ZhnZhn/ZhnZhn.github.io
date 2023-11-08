@@ -6,7 +6,7 @@ import {
 } from '../styleFn';
 
 import useMenuMore from '../hooks/useMenuMore';
-import useKeyEscape from '../hooks/useKeyEscape';
+import { useKeyEscape } from '../hooks/fUseKey';
 import useXYMovable from '../hooks/useXYMovable';
 import useDialogFocus from './useDialogFocus';
 

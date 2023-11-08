@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
+var _fUseKey = require("../hooks/fUseKey");
 var _LabelNew = _interopRequireDefault(require("./LabelNew"));
 var _MenuItemBadge = _interopRequireDefault(require("./MenuItemBadge"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -19,7 +19,7 @@ const MenuItem = _ref => {
     onBadgeClose,
     onClick
   } = _ref;
-  const _hKeyDown = (0, _useKeyEnter.default)(onClick);
+  const _hKeyDown = (0, _fUseKey.useKeyEnter)(onClick);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     ref: refItem,
     tabIndex: "0",
@@ -35,6 +35,5 @@ const MenuItem = _ref => {
     }), isNew ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_LabelNew.default, {}) : null]
   });
 };
-var _default = MenuItem;
-exports.default = _default;
+var _default = exports.default = MenuItem;
 //# sourceMappingURL=MenuItem.js.map

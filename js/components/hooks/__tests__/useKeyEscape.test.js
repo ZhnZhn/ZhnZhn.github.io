@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 var _react = require("@testing-library/react");
-var _useKeyEscape = _interopRequireDefault(require("../useKeyEscape"));
+var _fUseKey = require("../fUseKey");
 var _factorySameFnForEmptyDeps = _interopRequireDefault(require("./_factorySameFnForEmptyDeps"));
 describe('useKeyEscape', () => {
   test('', () => {
@@ -16,7 +16,7 @@ describe('useKeyEscape', () => {
         let {
           onEscape
         } = _ref;
-        return (0, _useKeyEscape.default)(onEscape, [onEscape]);
+        return (0, _fUseKey.useKeyEscape)(onEscape, [onEscape]);
       }, {
         initialProps: {
           onEscape
@@ -59,6 +59,6 @@ describe('useKeyEscape', () => {
     });
     expect(_onKeyEscape).not.toEqual(result.current);
   });
-  test('should return same fn in case of empty deps', (0, _factorySameFnForEmptyDeps.default)(_useKeyEscape.default));
+  test('should return same fn in case of empty deps', (0, _factorySameFnForEmptyDeps.default)(_fUseKey.useKeyEscape));
 });
 //# sourceMappingURL=useKeyEscape.test.js.map

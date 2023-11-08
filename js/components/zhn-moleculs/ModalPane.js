@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
 var _useClickOutside = _interopRequireDefault(require("../hooks/useClickOutside"));
-var _useKeyEscape = _interopRequireDefault(require("../hooks/useKeyEscape"));
+var _fUseKey = require("../hooks/fUseKey");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from 'prop-types'
 
@@ -18,7 +18,7 @@ const ModalPane = _ref => {
     onClose
   } = _ref;
   const _refNode = (0, _useClickOutside.default)(isShow, onClose),
-    _hKeyEscape = (0, _useKeyEscape.default)(onClose),
+    _hKeyEscape = (0, _fUseKey.useKeyEscape)(onClose),
     _hKeyDown = isShow ? _hKeyEscape : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     role: "presentation",
@@ -39,6 +39,5 @@ ModalPane.propTypes = {
  onClose: PropTypes.func
 }
 */
-var _default = ModalPane;
-exports.default = _default;
+var _default = exports.default = ModalPane;
 //# sourceMappingURL=ModalPane.js.map

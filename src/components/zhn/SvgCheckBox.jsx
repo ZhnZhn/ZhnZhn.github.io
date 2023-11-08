@@ -7,7 +7,7 @@ import {
 import { crCn } from '../styleFn';
 
 import useRefInit from '../hooks/useRefInit';
-import useKeyEnter from '../hooks/useKeyEnter';
+import { useKeyEnter } from '../hooks/fUseKey';
 
 import {
   TRANSPARENT_COLOR

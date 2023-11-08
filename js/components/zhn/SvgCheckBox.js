@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
-var _useKeyEnter = _interopRequireDefault(require("../hooks/useKeyEnter"));
+var _fUseKey = require("../hooks/fUseKey");
 var _Color = require("../styles/Color");
 var _Svg = _interopRequireDefault(require("./svg/Svg100"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -60,7 +60,7 @@ const SvgCheckBox = _ref2 => {
     }, [_value, onCheck, onUnCheck])
     //_comp, _isValueState
     /*eslint-enable react-hooks/exhaustive-deps */,
-    _hKeyDown = (0, _useKeyEnter.default)(_hToggle, [_hToggle]),
+    _hKeyDown = (0, _fUseKey.useKeyEnter)(_hToggle, [_hToggle]),
     _className = _value ? className : void 0,
     [_restStroke, _restFill] = _className ? [] : _value ? [color || C_GREY, color || _Color.TRANSPARENT_COLOR] : [C_GREY, _Color.TRANSPARENT_COLOR];
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {

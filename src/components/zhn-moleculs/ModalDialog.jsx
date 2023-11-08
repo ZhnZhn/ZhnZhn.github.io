@@ -9,7 +9,7 @@ import {
   crElementCn
 } from '../styleFn';
 
-import useKeyEscape from '../hooks/useKeyEscape';
+import { useKeyEscape } from '../hooks/fUseKey';
 import useMenuMore from '../hooks/useMenuMore';
 import useDialogFocus from './useDialogFocus';
 
