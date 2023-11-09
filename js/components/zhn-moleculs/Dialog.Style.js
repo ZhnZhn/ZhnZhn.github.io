@@ -22,9 +22,6 @@ const S_BT_LOAD = exports.S_BT_LOAD = {
   color: '#607d8b'
 };
 const S_SVG_CLOSE = exports.S_SVG_CLOSE = {
-  position: 'absolute',
-  top: 4,
-  right: 0,
-  marginRight: 6
+  top: 4
 };
 //# sourceMappingURL=Dialog.Style.js.map

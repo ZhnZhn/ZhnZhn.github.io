@@ -52,11 +52,6 @@ const CL_ITEM_HEADER = (0, _styleFn.crElementCn)("item-header"),
   S_CAPTION_WIDTH = {
     width: void 0,
     maxWidth: 'calc(100% - 60px)'
-  },
-  S_CLOSE = {
-    position: 'absolute',
-    right: 0,
-    top: 6
   };
 const MenuMore = _ref => {
   let {
@@ -125,7 +120,6 @@ const Header = _ref2 => {
       value: itemValue,
       strDate: itemTime
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
-      style: S_CLOSE,
       onClick: onClose
     })]
   });

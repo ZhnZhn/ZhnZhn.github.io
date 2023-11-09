@@ -28,8 +28,6 @@ const CL_ITEM_HEADER = (0, _styleFn.crElementCn)(),
     color: 'gray'
   },
   S_SVG_CLOSE = {
-    position: 'absolute',
-    right: 0,
     top: 4
   },
   MAX_LENGTH = 45,

@@ -29,13 +29,12 @@ const CL = 'twit',
     paddingLeft: 16,
     lineHeight: 1.8
   },
-  S_BT_CLOSE = {
-    position: 'absolute',
-    right: 0
-  },
   S_ROW = {
     color: 'gray',
     paddingLeft: 16
+  },
+  S_SVG_CLOSE = {
+    top: 4
   };
 const Twit = _ref => {
   let {
@@ -62,7 +61,7 @@ const Twit = _ref => {
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
         children: date
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
-        style: S_BT_CLOSE,
+        style: S_SVG_CLOSE,
         onClick: toggleIsShow
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {

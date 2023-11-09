@@ -23,11 +23,6 @@ const CL_TEXT_CLIP = 'text-clip',
     position: 'relative',
     top: -3,
     margin: '0 10px 0 6px'
-  },
-  S_SVG_CLOSE = {
-    position: 'absolute',
-    top: 6,
-    right: 0
   };
 const _isFn = fn => typeof fn === 'function';
 const BrowserCaption = _ref => {
@@ -61,7 +56,6 @@ const BrowserCaption = _ref => {
       },
       children: caption
     }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
-      style: S_SVG_CLOSE,
       onClick: onClose
     })]
   });

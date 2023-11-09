@@ -18,8 +18,6 @@ const CL_ITEM_HEADER = crElementCn()
 }, S_OPEN = { color: '#a487d4' }
 , S_CLOSE = { color: 'gray' }
 , S_SVG_CLOSE = {
-  position: 'absolute',
-  right: 0,
   top: 4
 }
 , MAX_LENGTH = 45

@@ -55,11 +55,6 @@ S_CAPTION = {
 , S_CAPTION_WIDTH = {
   width: void 0,
   maxWidth: 'calc(100% - 60px)'
-}
-, S_CLOSE = {
-  position: 'absolute',
-  right: 0,
-  top: 6
 };
 
 const MenuMore = ({
@@ -155,7 +150,6 @@ const Header = ({
             />
       }
       <BtSvgClose
-        style={S_CLOSE}
         onClick={onClose}
       />
     </div>

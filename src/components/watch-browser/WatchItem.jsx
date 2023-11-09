@@ -20,9 +20,7 @@ const S_ITEM_DIV = {
   verticalAlign: 'middle',
 }
 , S_SVG_CLOSE = {
-  position: 'absolute',
-  top: 10,
-  right: 0
+  top: 8
 };
 
 const EMPTY_ITEM_CAPTION = 'Not Found';

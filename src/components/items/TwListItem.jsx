@@ -20,13 +20,12 @@ const CL = 'twit'
   paddingLeft: 16,
   lineHeight: 1.8,
 }
-, S_BT_CLOSE = {
-  position: 'absolute',
-  right: 0
-}
 , S_ROW = {
   color: 'gray',
   paddingLeft: 16
+}
+, S_SVG_CLOSE = {
+  top: 4
 };
 
 const Twit = ({ item }) => {
@@ -49,7 +48,7 @@ const Twit = ({ item }) => {
       <div style={S_ROW_TITLE}>
         <span>{`${user} `}</span>
         <span>{date}</span>
-        <BtSvgClose style={S_BT_CLOSE} onClick={toggleIsShow} />
+        <BtSvgClose style={S_SVG_CLOSE} onClick={toggleIsShow} />
       </div>
       <a href={toHref(link)}>
         <div style={S_PL_16}>{text}</div>

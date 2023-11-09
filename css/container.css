@@ -113,11 +113,14 @@
 }
 
 .bt-svg-close {
+  position: absolute;
+  top: 6px;
+  right: 0;
   display: inline-block;
   width: 24px;
   height: 24px;
   padding: 2px;
-  margin-right: 10px;
+  margin-right: 6px;
   stroke: #f44336; 
   will-change: transform;
   transform-origin: center center;

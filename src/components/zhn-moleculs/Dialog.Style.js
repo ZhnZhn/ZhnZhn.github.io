@@ -23,8 +23,5 @@ export const S_COMMAND_DIV = {
 export const S_BT_LOAD = { color: '#607d8b' }
 
 export const S_SVG_CLOSE = {
-  position: 'absolute',
-  top: 4,
-  right: 0,
-  marginRight: 6
+  top: 4
 }

@@ -20,11 +20,6 @@ S_CHECK_BOX = {
   position: 'relative',
   top: -3,
   margin: '0 10px 0 6px'
-},
-S_SVG_CLOSE = {
-  position: 'absolute',
-  top: 6,
-  right: 0
 };
 
 const _isFn = fn => typeof fn === 'function';
@@ -68,7 +63,6 @@ const BrowserCaption = ({
     </span>
     {children}
     <BtSvgClose
-      style={S_SVG_CLOSE}
       onClick={onClose}
     />
   </div>
