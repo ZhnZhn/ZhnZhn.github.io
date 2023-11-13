@@ -1,4 +1,5 @@
 import {
+  isArr,
   assign,
   crError,
   getValue,
@@ -10,8 +11,7 @@ const URL = 'https://api.db.nomics.world/v22/series'
 , TAIL = 'observations=1&format=json&metadata=false'
 , DF_ID = 'ECB/EXR/A.USD.EUR.SP00.A';
 
-const _isArr = Array.isArray
-, _crErr = crError.bind(null, '');
+const _crErr = crError.bind(null, '');
 
 const _crUrlImpl = (
   dfProvider,
@@ -38,7 +38,7 @@ const _crUrl = (
 
 const _dfFnUrl = (
   option
-) => _isArr(option.items)
+) => isArr(option.items)
   ? _crUrl(getValue(option.items[0]), option)
   : _crUrl('', option);
 
@@ -122,31 +122,22 @@ const _crValuesS1 = ({
 ]
 , _s123BFnUrl = _fCrUrl(_crValuesS123B)
 
-, _crValuesS123 = ({
-  items
-}) => [
-  getValue(items[0]),
-  getValue(items[1]),
-  getValue(items[2])
-]
+, _crValuesS123 = ({ items }) => _crValuesS123B({ items })
 , _s123FnUrl = _fCrUrl(_crValuesS123);
 
-const _s3S12FnUrl = (option) => {
+const _crValues3S12 = ({ items }) => _crValuesS12({ items })
+, _s3S12FnUrl = (option) => {
   const {
     items,
     dfCode,
     subtitle
-  } = option
-  , v1 = getValue(items[0])
-  , v2 = getValue(items[1])
-  , v3 = getValue(items[2])
-  , _seriaId = _crSeriaId(option, [v1, v2]);
+  } = option;
   assign(option, {
-    dfCode: `${dfCode}:${v3}`,
-    subtitle: (subtitle || []).split(':')[0] || ''
+    dfCode: `${dfCode}:${getValue(items[2])}`,
+    subtitle: (subtitle || "").split(':')[0] || ''
   })
-  return _crUrl(_seriaId, option);
-}
+  return _fCrUrl(_crValues3S12)(option);
+};
 
 const _rFnUrl = {
   DF: _dfFnUrl,
@@ -175,14 +166,15 @@ const DbNomicsApi = {
 
   checkResponse(json){
     const { errors } = json || {};
-    if (_isArr(errors)) {
+    if (isArr(errors)) {
       throw _crErr((errors[0] || {}).message);
     }
-    const docs = getDocs(json);
-    if (!_isArr(docs)
-      || !docs[0]
-      || !_isArr(docs[0].period)
-      || !_isArr(docs[0].value)) {
+
+    const docs = getDocs(json)
+    , _ts = isArr(docs) ? docs[0] : '';
+    if (!_ts
+      || !isArr(_ts.period)
+      || !isArr(_ts.value)) {
       throw _crErr();
     }
   }

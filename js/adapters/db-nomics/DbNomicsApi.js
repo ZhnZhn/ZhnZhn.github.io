@@ -6,8 +6,7 @@ var _fnAdapter = require("./fnAdapter");
 const URL = 'https://api.db.nomics.world/v22/series',
   TAIL = 'observations=1&format=json&metadata=false',
   DF_ID = 'ECB/EXR/A.USD.EUR.SP00.A';
-const _isArr = Array.isArray,
-  _crErr = _fnAdapter.crError.bind(null, '');
+const _crErr = _fnAdapter.crError.bind(null, '');
 const _crUrlImpl = (dfProvider, dfCode, seriaId) => {
   const _seriesId = dfProvider && seriaId ? (0, _fnAdapter.joinBy)('/', dfProvider, dfCode, seriaId) : `${DF_ID}`;
   return `${URL}?series_ids=${_seriesId}&${TAIL}`;
@@ -20,7 +19,7 @@ const _crUrl = (seriaId, option) => {
   option.seriaId = seriaId;
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
-const _dfFnUrl = option => _isArr(option.items) ? _crUrl((0, _fnAdapter.getValue)(option.items[0]), option) : _crUrl('', option);
+const _dfFnUrl = option => (0, _fnAdapter.isArr)(option.items) ? _crUrl((0, _fnAdapter.getValue)(option.items[0]), option) : _crUrl('', option);
 const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
   (0, _fnAdapter.assign)(option, {
     seriaId,
@@ -83,25 +82,31 @@ const _crValuesS1 = _ref2 => {
     let {
       items
     } = _ref6;
-    return [(0, _fnAdapter.getValue)(items[0]), (0, _fnAdapter.getValue)(items[1]), (0, _fnAdapter.getValue)(items[2])];
+    return _crValuesS123B({
+      items
+    });
   },
   _s123FnUrl = _fCrUrl(_crValuesS123);
-const _s3S12FnUrl = option => {
-  const {
+const _crValues3S12 = _ref7 => {
+    let {
+      items
+    } = _ref7;
+    return _crValuesS12({
+      items
+    });
+  },
+  _s3S12FnUrl = option => {
+    const {
       items,
       dfCode,
       subtitle
-    } = option,
-    v1 = (0, _fnAdapter.getValue)(items[0]),
-    v2 = (0, _fnAdapter.getValue)(items[1]),
-    v3 = (0, _fnAdapter.getValue)(items[2]),
-    _seriaId = _crSeriaId(option, [v1, v2]);
-  (0, _fnAdapter.assign)(option, {
-    dfCode: `${dfCode}:${v3}`,
-    subtitle: (subtitle || []).split(':')[0] || ''
-  });
-  return _crUrl(_seriaId, option);
-};
+    } = option;
+    (0, _fnAdapter.assign)(option, {
+      dfCode: `${dfCode}:${(0, _fnAdapter.getValue)(items[2])}`,
+      subtitle: (subtitle || "").split(':')[0] || ''
+    });
+    return _fCrUrl(_crValues3S12)(option);
+  };
 const _rFnUrl = {
   DF: _dfFnUrl,
   id: _idFnUrl,
@@ -127,11 +132,12 @@ const DbNomicsApi = {
     const {
       errors
     } = json || {};
-    if (_isArr(errors)) {
+    if ((0, _fnAdapter.isArr)(errors)) {
       throw _crErr((errors[0] || {}).message);
     }
-    const docs = (0, _fnAdapter.getDocs)(json);
-    if (!_isArr(docs) || !docs[0] || !_isArr(docs[0].period) || !_isArr(docs[0].value)) {
+    const docs = (0, _fnAdapter.getDocs)(json),
+      _ts = (0, _fnAdapter.isArr)(docs) ? docs[0] : '';
+    if (!_ts || !(0, _fnAdapter.isArr)(_ts.period) || !(0, _fnAdapter.isArr)(_ts.value)) {
       throw _crErr();
     }
   }

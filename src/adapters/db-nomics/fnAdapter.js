@@ -1,4 +1,5 @@
 export {
+  isArr,
   assign,
   getValue,
   crError,

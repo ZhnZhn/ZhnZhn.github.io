@@ -1,8 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getValue = exports.getDocs = exports.crTitle = exports.crError = exports.crData = exports.crConfOption = exports.assign = void 0;
+exports.isArr = exports.getValue = exports.getDocs = exports.crTitle = exports.crError = exports.crData = exports.crConfOption = exports.assign = void 0;
 var _AdapterFn = require("../AdapterFn");
+exports.isArr = _AdapterFn.isArr;
 exports.assign = _AdapterFn.assign;
 exports.getValue = _AdapterFn.getValue;
 exports.crError = _AdapterFn.crError;
