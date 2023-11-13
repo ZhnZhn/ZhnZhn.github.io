@@ -5,10 +5,10 @@ exports.getValue = exports.crTitle = exports.crError = exports.crData = exports.
 var _AdapterFn = require("../AdapterFn");
 exports.getValue = _AdapterFn.getValue;
 exports.crError = _AdapterFn.crError;
+exports.joinBy = _AdapterFn.joinBy;
 var _crFn = require("../crFn");
 var _fnSelector = require("./fnSelector");
-const _assign = Object.assign;
-exports._assign = _assign;
+const _assign = exports._assign = Object.assign;
 const CHART_URL = 'https://db.nomics.world',
   SUBT_MAX = 60;
 const _crId = _ref => {
@@ -22,11 +22,13 @@ const _crId = _ref => {
 const _crItemLink = _crFn.crItemLink.bind(null, 'DBnomics Chart');
 const _crUpdatedDate = json => {
   const _date = (0, _fnSelector.getIndexedAt)(json).split('T')[0];
-  return _date ? "<p>Updated by DBnomics on " + _date + "</p>" : '';
+  return _date ? `<p>Updated by DBnomics on ${_date}</p>` : '';
 };
 const _crDescr = (json, option) => {
   const _id = _crId(option);
-  return "<p>SeriaId: " + _id + "</p>\n   " + _crUpdatedDate(json) + "\n   " + _crItemLink(CHART_URL + '/' + _id);
+  return `<p>SeriaId: ${_id}</p>
+   ${_crUpdatedDate(json)}
+   ${_crItemLink(CHART_URL + '/' + _id)}`;
 };
 const _crZhConfig = option => {
   const {

@@ -9,7 +9,7 @@ const URL = 'https://api.db.nomics.world/v22/series',
 const _isArr = Array.isArray,
   _crErr = _fnAdapter.crError.bind(null, '');
 const _crUrlImpl = (dfProvider, dfCode, seriaId) => {
-  const _seriesId = !dfProvider || !seriaId ? `${DF_ID}` : !dfCode ? `${dfProvider}/${seriaId}` : `${dfProvider}/${dfCode}/${seriaId}`;
+  const _seriesId = dfProvider && seriaId ? (0, _fnAdapter.joinBy)('/', dfProvider, dfCode, seriaId) : `${DF_ID}`;
   return `${URL}?series_ids=${_seriesId}&${TAIL}`;
 };
 const _crUrl = (seriaId, option) => {
@@ -43,7 +43,7 @@ const _crSeriaId = (_ref, values) => {
     dfPrefix,
     dfSufix
   } = _ref;
-  return [dfPrefix, ...values, dfSufix].filter(Boolean).join('.');
+  return (0, _fnAdapter.joinBy)('.', dfPrefix, ...values, dfSufix);
 };
 const _fCrUrl = crValues => option => _crUrl(_crSeriaId(option, crValues(option)), option);
 const _crValuesS1 = _ref2 => {

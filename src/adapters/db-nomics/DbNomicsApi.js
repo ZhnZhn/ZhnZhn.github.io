@@ -1,7 +1,8 @@
 import {
   _assign,
   crError,
-  getValue
+  getValue,
+  joinBy
 } from './fnAdapter';
 
 const URL = 'https://api.db.nomics.world/v22/series'
@@ -16,11 +17,9 @@ const _crUrlImpl = (
   dfCode,
   seriaId
 ) => {
-  const _seriesId = !dfProvider || !seriaId
-    ? `${DF_ID}`
-    : !dfCode
-       ? `${dfProvider}/${seriaId}`
-       : `${dfProvider}/${dfCode}/${seriaId}`
+  const _seriesId = dfProvider && seriaId
+    ? joinBy('/', dfProvider, dfCode, seriaId)
+    : `${DF_ID}`        
   return `${URL}?series_ids=${_seriesId}&${TAIL}`;
 }
 
@@ -67,12 +66,11 @@ const _idFnUrl = (option) => {
 const _crSeriaId = ({
   dfPrefix,
   dfSufix
-}, values) => [
+}, values) => joinBy('.',
   dfPrefix,
   ...values,
   dfSufix
-].filter(Boolean)
- .join('.');
+);
 
 const _fCrUrl = (
   crValues

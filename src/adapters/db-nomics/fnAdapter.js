@@ -1,6 +1,7 @@
 export {
   getValue,
-  crError
+  crError,
+  joinBy
 } from '../AdapterFn';
 
 import {
