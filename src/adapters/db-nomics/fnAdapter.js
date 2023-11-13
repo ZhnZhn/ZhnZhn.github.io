@@ -100,23 +100,29 @@ export const crTitle = (
   };
 }
 
-export const crData = (json, option) => {
+export const crData = (
+  json,
+  option
+) => {
   const { fromDate } = option
-  , data = []
-  , _xFrom = fromDate ? ymdToUTC(fromDate) : 0
-  , { period, value } = getPeriodAndValue(json)
+  , _xFrom = fromDate
+    ? ymdToUTC(fromDate)
+    : 0
+  , [
+    period,
+    value
+  ] = getPeriodAndValue(json)
   , crPoint = _isAnnualQuarter(period)
      ? _crAqPoint
      : _crPoint
-  , _len = period.length;
   let _arrPoint;
-  for (let i=0; i<_len; i++){
-    _arrPoint = crPoint(period[i], value[i]);
+  return period.reduce((_data, periodItem, index) => {
+    _arrPoint = crPoint(periodItem, value[index]);
     if (_arrPoint[0] > _xFrom && isNumber(_arrPoint[1])) {
-      data.push(_arrPoint)
+      _data.push(_arrPoint)
     }
-  }
-  return data;
+    return _data;
+  }, []);
 }
 
 export const crConfOption = (

@@ -1,1 +1,22 @@
-{"version":3,"sources":["../../../src/adapters/db-nomics/fnSelector.js"],"names":["_getDocs","json","series","docs","_getByPropName","propName","_fGetByPropName","getPeriodAndValue","period","value","getTitle","getSubtitle","getIndexedAt"],"mappings":";;;;;AACA,MAAMA,QAAQ,GAAGC,IAAI,IACnB,CAAC,CAACA,IAAI,IAAI,EAAT,EAAaC,MAAb,IAAuB,EAAxB,EAA4BC,IAA5B,IAAoC,EADtC;;AAEA,MAAMC,cAAc,GAAG,CAACH,IAAD,EAAOI,QAAP,KACrBL,QAAQ,CAACC,IAAD,CAAR,CAAe,CAAf,EAAkBI,QAAlB,KAA+B,EADjC;;AAGA,MAAMC,eAAe,GAAGD,QAAQ,IAC9BJ,IAAI,IAAIG,cAAc,CAACH,IAAD,EAAOI,QAAP,CADxB;;AAIO,MAAME,iBAAiB,GAAGN,IAAI,KAAK;AACxCO,EAAAA,MAAM,EAAEJ,cAAc,CAACH,IAAD,EAAO,QAAP,CAAd,IAAkC,EADF;AAExCQ,EAAAA,KAAK,EAAEL,cAAc,CAACH,IAAD,EAAO,OAAP;AAFmB,CAAL,CAA9B;;;;AAIA,MAAMS,QAAQ,GAAGJ,eAAe,CAAC,cAAD,CAAhC;;;;AACA,MAAMK,WAAW,GAAGL,eAAe,CAAC,aAAD,CAAnC;;;;AACA,MAAMM,YAAY,GAAGN,eAAe,CAAC,YAAD,CAApC","sourcesContent":["\r\nconst _getDocs = json =>\r\n  ((json || {}).series || {}).docs || {};\r\nconst _getByPropName = (json, propName) =>\r\n  _getDocs(json)[0][propName] || '';\r\n\r\nconst _fGetByPropName = propName =>\r\n  json => _getByPropName(json, propName);\r\n\r\n\r\nexport const getPeriodAndValue = json => ({\r\n  period: _getByPropName(json, 'period') || [],\r\n  value: _getByPropName(json, 'value')\r\n})\r\nexport const getTitle = _fGetByPropName('dataset_name')\r\nexport const getSubtitle = _fGetByPropName('series_name')\r\nexport const getIndexedAt = _fGetByPropName('indexed_at')\r\n"],"file":"fnSelector.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/db-nomics/fnSelector.js"
+ ],
+ "file": "../../../src/adapters/db-nomics/fnSelector.js",
+ "names": [
+  "_getDocs",
+  "json",
+  "series",
+  "docs",
+  "_getByPropName",
+  "propName",
+  "_fGetByPropName",
+  "getPeriodAndValue",
+  "exports",
+  "getTitle",
+  "getSubtitle",
+  "getIndexedAt"
+ ],
+ "mappings": ";;;;AACA,MAAMA,QAAQ,GAAGC,IAAI,IACnB,CAAC,CAACA,IAAI,IAAI,CAAC,CAAC,EAAEC,MAAM,IAAI,CAAC,CAAC,EAAEC,IAAI,IAAI,CAAC,CAAC;AACxC,MAAMC,cAAc,GAAGA,CAACH,IAAI,EAAEI,QAAQ,KACpCL,QAAQ,CAACC,IAAI,CAAC,CAAC,CAAC,CAAC,CAACI,QAAQ,CAAC,IAAI,EAAE;AAEnC,MAAMC,eAAe,GAAGD,QAAQ,IAC9BJ,IAAI,IAAIG,cAAc,CAACH,IAAI,EAAEI,QAAQ,CAAC;AAGjC,MAAME,iBAAiB,GAAGN,IAAI,IAAI,CACvCG,cAAc,CAACH,IAAI,EAAE,QAAQ,CAAC,EAC9BG,cAAc,CAACH,IAAI,EAAE,OAAO,CAAC,CAC9B;AAAAO,OAAA,CAAAD,iBAAA,GAAAA,iBAAA;AACM,MAAME,QAAQ,GAAAD,OAAA,CAAAC,QAAA,GAAGH,eAAe,CAAC,cAAc,CAAC;AAChD,MAAMI,WAAW,GAAAF,OAAA,CAAAE,WAAA,GAAGJ,eAAe,CAAC,aAAa,CAAC;AAClD,MAAMK,YAAY,GAAAH,OAAA,CAAAG,YAAA,GAAGL,eAAe,CAAC,YAAY,CAAC"
+}

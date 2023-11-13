@@ -8,10 +8,10 @@ const _fGetByPropName = propName =>
   json => _getByPropName(json, propName);
 
 
-export const getPeriodAndValue = json => ({
-  period: _getByPropName(json, 'period') || [],
-  value: _getByPropName(json, 'value')
-})
+export const getPeriodAndValue = json => [
+  _getByPropName(json, 'period'),
+  _getByPropName(json, 'value')
+]
 export const getTitle = _fGetByPropName('dataset_name')
 export const getSubtitle = _fGetByPropName('series_name')
 export const getIndexedAt = _fGetByPropName('indexed_at')

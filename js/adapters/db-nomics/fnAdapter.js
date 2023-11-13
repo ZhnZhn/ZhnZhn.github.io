@@ -80,22 +80,17 @@ const crData = (json, option) => {
   const {
       fromDate
     } = option,
-    data = [],
     _xFrom = fromDate ? (0, _AdapterFn.ymdToUTC)(fromDate) : 0,
-    {
-      period,
-      value
-    } = (0, _fnSelector.getPeriodAndValue)(json),
-    crPoint = _isAnnualQuarter(period) ? _crAqPoint : _crPoint,
-    _len = period.length;
+    [period, value] = (0, _fnSelector.getPeriodAndValue)(json),
+    crPoint = _isAnnualQuarter(period) ? _crAqPoint : _crPoint;
   let _arrPoint;
-  for (let i = 0; i < _len; i++) {
-    _arrPoint = crPoint(period[i], value[i]);
+  return period.reduce((_data, periodItem, index) => {
+    _arrPoint = crPoint(periodItem, value[index]);
     if (_arrPoint[0] > _xFrom && (0, _AdapterFn.isNumber)(_arrPoint[1])) {
-      data.push(_arrPoint);
+      _data.push(_arrPoint);
     }
-  }
-  return data;
+    return _data;
+  }, []);
 };
 exports.crData = crData;
 const crConfOption = (option, json) => ({
