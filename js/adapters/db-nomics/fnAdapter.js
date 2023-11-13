@@ -1,14 +1,14 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getValue = exports.getDocs = exports.crTitle = exports.crError = exports.crData = exports.crConfOption = exports._assign = void 0;
+exports.getValue = exports.getDocs = exports.crTitle = exports.crError = exports.crData = exports.crConfOption = exports.assign = void 0;
 var _AdapterFn = require("../AdapterFn");
+exports.assign = _AdapterFn.assign;
 exports.getValue = _AdapterFn.getValue;
 exports.crError = _AdapterFn.crError;
 exports.joinBy = _AdapterFn.joinBy;
 var _crFn = require("../crFn");
 var _fnSelector = require("./fnSelector");
-const _assign = exports._assign = Object.assign;
 const CHART_URL = 'https://db.nomics.world',
   SUBT_MAX = 60;
 const getDocs = json => ((json || {}).series || {}).docs || {};
@@ -34,21 +34,21 @@ const _crDescr = (json, option) => {
 };
 const _crZhConfig = option => {
   const {
-      dataSource,
-      _itemKey,
-      dfProvider,
-      dfCode,
-      seriaId,
-      title
-    } = option,
-    _id = _itemKey;
-  return {
-    id: _id,
-    key: _id,
-    itemCaption: title,
     dataSource,
+    _itemKey,
+    dfProvider,
+    dfCode,
+    seriaId,
+    title
+  } = option;
+  return {
+    ...(0, _AdapterFn.crZhConfig)({
+      itemCaption: title,
+      _itemKey,
+      dataSource
+    }),
     itemConf: {
-      _itemKey: _id,
+      _itemKey,
       ...(0, _crFn.crItemConf)(option),
       dataSource,
       dfProvider,
@@ -61,7 +61,7 @@ const _crInfo = (json, option) => ({
   name: (0, _fnSelector.getSubtitle)(json),
   description: _crDescr(json, option)
 });
-const _isQuarter = str => ("" + str).indexOf("Q") !== -1;
+const _isQuarter = str => (0, _AdapterFn.isTokenInStr)(str, "Q");
 const _isAnnualQuarter = period => !_isQuarter(period[0]) && _isQuarter(period[1]);
 const _crPoint = (date, y) => [(0, _AdapterFn.ymdToUTC)(date), y];
 const _crAqPoint = (date, y) => _isQuarter(date) ? _crPoint(date, y) : [];
@@ -70,11 +70,10 @@ const crTitle = (_ref2, json) => {
     title,
     subtitle
   } = _ref2;
-  const _ = (0, _fnSelector.getSubtitle)(json),
-    _subtitle = _.length > SUBT_MAX ? (0, _AdapterFn.joinBy)(': ', title, subtitle) : _;
+  const _subtitle = (0, _fnSelector.getSubtitle)(json);
   return {
     title: (0, _fnSelector.getTitle)(json),
-    subtitle: _subtitle
+    subtitle: _subtitle.length > SUBT_MAX ? (0, _AdapterFn.joinBy)(': ', title, subtitle) : _subtitle
   };
 };
 exports.crTitle = crTitle;

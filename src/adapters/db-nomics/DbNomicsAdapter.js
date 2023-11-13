@@ -1,6 +1,6 @@
 import crAdapterType1 from '../crAdapterType1';
 import {
-  _assign,
+  assign,
   crData,
   crTitle,
   crConfOption
@@ -10,7 +10,7 @@ const trOption = (
   option,
   json
 ) => {
-   _assign(option, crTitle(option, json))
+   assign(option, crTitle(option, json))
 };
 
 const DbNomicsAdapter = crAdapterType1({

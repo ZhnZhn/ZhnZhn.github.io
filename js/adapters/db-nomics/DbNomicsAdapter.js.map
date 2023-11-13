@@ -1,1 +1,26 @@
-{"version":3,"sources":["../../../src/adapters/db-nomics/DbNomicsAdapter.js"],"names":["trOption","option","json","DbNomicsAdapter","crData","crConfOption"],"mappings":";;;;;;;AAAA;;AACA;;AAOA,MAAMA,QAAQ,GAAG,CACfC,MADe,EAEfC,IAFe,KAGZ;AACF,0BAAQD,MAAR,EAAgB,wBAAQA,MAAR,EAAgBC,IAAhB,CAAhB;AACF,CALD;;AAOA,MAAMC,eAAe,GAAG,4BAAe;AACrCC,EAAAA,MAAM,EAANA,iBADqC;AAErCC,EAAAA,YAAY,EAAZA,uBAFqC;AAGrCL,EAAAA;AAHqC,CAAf,CAAxB;eAMeG,e","sourcesContent":["import crAdapterType1 from '../crAdapterType1';\r\nimport {\r\n  _assign,\r\n  crData,\r\n  crTitle,\r\n  crConfOption\r\n} from './fnAdapter';\r\n\r\nconst trOption = (\r\n  option,\r\n  json\r\n) => {\r\n   _assign(option, crTitle(option, json))\r\n};\r\n\r\nconst DbNomicsAdapter = crAdapterType1({\r\n  crData,\r\n  crConfOption,\r\n  trOption\r\n});\r\n\r\nexport default DbNomicsAdapter\r\n"],"file":"DbNomicsAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/db-nomics/DbNomicsAdapter.js"
+ ],
+ "file": "../../../src/adapters/db-nomics/DbNomicsAdapter.js",
+ "names": [
+  "_crAdapterType",
+  "_interopRequireDefault",
+  "require",
+  "_fnAdapter",
+  "trOption",
+  "option",
+  "json",
+  "assign",
+  "crTitle",
+  "DbNomicsAdapter",
+  "crAdapterType1",
+  "crData",
+  "crConfOption",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,cAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,UAAA,GAAAD,OAAA;AAOA,MAAME,QAAQ,GAAGA,CACfC,MAAM,EACNC,IAAI,KACD;EACF,IAAAC,iBAAM,EAACF,MAAM,EAAE,IAAAG,kBAAO,EAACH,MAAM,EAAEC,IAAI,CAAC,CAAC;AACxC,CAAC;AAED,MAAMG,eAAe,GAAG,IAAAC,sBAAc,EAAC;EACrCC,MAAM,EAANA,iBAAM;EACNC,YAAY,EAAZA,uBAAY;EACZR;AACF,CAAC,CAAC;AAAC,IAAAS,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYN,eAAe"
+}

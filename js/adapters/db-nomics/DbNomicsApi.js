@@ -22,7 +22,7 @@ const _crUrl = (seriaId, option) => {
 };
 const _dfFnUrl = option => _isArr(option.items) ? _crUrl((0, _fnAdapter.getValue)(option.items[0]), option) : _crUrl('', option);
 const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
-  (0, _fnAdapter._assign)(option, {
+  (0, _fnAdapter.assign)(option, {
     seriaId,
     dfProvider,
     dfCode
@@ -96,7 +96,7 @@ const _s3S12FnUrl = option => {
     v2 = (0, _fnAdapter.getValue)(items[1]),
     v3 = (0, _fnAdapter.getValue)(items[2]),
     _seriaId = _crSeriaId(option, [v1, v2]);
-  (0, _fnAdapter._assign)(option, {
+  (0, _fnAdapter.assign)(option, {
     dfCode: `${dfCode}:${v3}`,
     subtitle: (subtitle || []).split(':')[0] || ''
   });

@@ -1,4 +1,5 @@
 export {
+  assign,
   getValue,
   crError,
   joinBy
@@ -6,6 +7,8 @@ export {
 
 import {
   isNumber,
+  isTokenInStr,
+  crZhConfig,
   joinBy,
   ymdToUTC,
 } from '../AdapterFn';
@@ -19,8 +22,6 @@ import {
   getSubtitle,
   getIndexedAt
 } from './fnSelector';
-
-export const _assign = Object.assign
 
 const CHART_URL = 'https://db.nomics.world'
 , SUBT_MAX = 60;
@@ -58,32 +59,39 @@ const _crZhConfig = (option) => {
     dfCode,
     seriaId,
     title
-  } = option
-  , _id = _itemKey;
+  } = option;
   return {
-    id: _id, key: _id,
-    itemCaption: title,
-    dataSource,
+    ...crZhConfig({
+      itemCaption: title,
+      _itemKey,
+      dataSource
+    }),
     itemConf: {
-       _itemKey: _id,
+       _itemKey,
        ...crItemConf(option),
        dataSource,
-       dfProvider, dfCode, seriaId
+       dfProvider,
+       dfCode,
+       seriaId
     }
-  }
+  };
 };
-const _crInfo = (json, option) => ({
+
+const _crInfo = (
+  json,
+  option
+) => ({
   name: getSubtitle(json),
   description: _crDescr(json, option)
 })
 
+const _isQuarter = str => isTokenInStr(str, "Q");
 
-const _isQuarter = str => (""+str).indexOf("Q") !== -1;
+const _isAnnualQuarter = (
+  period
+) => !_isQuarter(period[0]) && _isQuarter(period[1]);
 
-const _isAnnualQuarter = period =>
-  !_isQuarter(period[0]) && _isQuarter(period[1]);
-
-const _crPoint = (date, y) => ([ymdToUTC(date), y]);
+const _crPoint = (date, y) => [ymdToUTC(date), y];
 
 const _crAqPoint = (date, y) => _isQuarter(date)
   ? _crPoint(date, y)
@@ -94,13 +102,12 @@ export const crTitle = (
   { title, subtitle },
   json
 ) => {
-  const _ = getSubtitle(json)
-  , _subtitle = _.length > SUBT_MAX
-       ? joinBy(': ', title, subtitle)
-       : _;
+  const _subtitle = getSubtitle(json);
   return {
     title: getTitle(json),
-    subtitle: _subtitle
+    subtitle: _subtitle.length > SUBT_MAX
+      ? joinBy(': ', title, subtitle)
+      : _subtitle
   };
 }
 
@@ -110,15 +117,16 @@ export const crData = (
 ) => {
   const { fromDate } = option
   , _xFrom = fromDate
-    ? ymdToUTC(fromDate)
-    : 0
+     ? ymdToUTC(fromDate)
+     : 0
   , [
-    period,
-    value
+     period,
+     value
   ] = getPeriodAndValue(json)
   , crPoint = _isAnnualQuarter(period)
      ? _crAqPoint
-     : _crPoint
+     : _crPoint;
+
   let _arrPoint;
   return period.reduce((_data, periodItem, index) => {
     _arrPoint = crPoint(periodItem, value[index]);

@@ -1,5 +1,5 @@
 import {
-  _assign,
+  assign,
   crError,
   getValue,
   getDocs,
@@ -48,7 +48,7 @@ const _crIdUrl = (
   dfCode,
   seriaId
 ) => {
-  _assign(option, {seriaId, dfProvider, dfCode})
+  assign(option, {seriaId, dfProvider, dfCode})
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
 
@@ -141,7 +141,7 @@ const _s3S12FnUrl = (option) => {
   , v2 = getValue(items[1])
   , v3 = getValue(items[2])
   , _seriaId = _crSeriaId(option, [v1, v2]);
-  _assign(option, {
+  assign(option, {
     dfCode: `${dfCode}:${v3}`,
     subtitle: (subtitle || []).split(':')[0] || ''
   })
