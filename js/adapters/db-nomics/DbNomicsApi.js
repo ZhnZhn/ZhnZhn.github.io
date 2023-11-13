@@ -9,8 +9,8 @@ const URL = 'https://api.db.nomics.world/v22/series',
 const _isArr = Array.isArray,
   _crErr = _fnAdapter.crError.bind(null, '');
 const _crUrlImpl = (dfProvider, dfCode, seriaId) => {
-  const _seriesId = !dfProvider || !seriaId ? "" + DF_ID : !dfCode ? dfProvider + "/" + seriaId : dfProvider + "/" + dfCode + "/" + seriaId;
-  return URL + "?series_ids=" + _seriesId + "&" + TAIL;
+  const _seriesId = !dfProvider || !seriaId ? `${DF_ID}` : !dfCode ? `${dfProvider}/${seriaId}` : `${dfProvider}/${dfCode}/${seriaId}`;
+  return `${URL}?series_ids=${_seriesId}&${TAIL}`;
 };
 const _crUrl = (seriaId, option) => {
   const {
@@ -38,56 +38,54 @@ const _idFnUrl = option => {
     arr = value.split('/');
   return _crIdUrl(option, _trimStr(arr[0]), _trimStr(arr[1]), _trimStr(arr[2]));
 };
-const _crSeriaId = function (_ref) {
+const _crSeriaId = (_ref, values) => {
   let {
     dfPrefix,
     dfSufix
   } = _ref;
-  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    args[_key - 1] = arguments[_key];
-  }
-  return [dfPrefix, ...args, dfSufix].filter(Boolean).join('.');
+  return [dfPrefix, ...values, dfSufix].filter(Boolean).join('.');
 };
-const _s1FnUrl = option => {
-  const {
+const _fCrUrl = crValues => option => _crUrl(_crSeriaId(option, crValues(option)), option);
+const _crValuesS1 = _ref2 => {
+    let {
       items
-    } = option,
-    _seriaId = _crSeriaId(option, (0, _fnAdapter.getValue)(items[0]));
-  return _crUrl(_seriaId, option);
-};
-const _s21FnUrl = option => {
-  const {
+    } = _ref2;
+    return [(0, _fnAdapter.getValue)(items[0])];
+  },
+  _s1FnUrl = _fCrUrl(_crValuesS1),
+  _crValuesS21 = _ref3 => {
+    let {
       items,
       df1Prefix,
       df2Prefix
-    } = option,
-    _seriaId = _crSeriaId(option, df1Prefix, (0, _fnAdapter.getValue)(items[1]), df2Prefix, (0, _fnAdapter.getValue)(items[0]));
-  return _crUrl(_seriaId, option);
-};
-const _s12FnUrl = option => {
-  const {
+    } = _ref3;
+    return [df1Prefix, (0, _fnAdapter.getValue)(items[1]), df2Prefix, (0, _fnAdapter.getValue)(items[0])];
+  },
+  _s21FnUrl = _fCrUrl(_crValuesS21),
+  _crValuesS12 = _ref4 => {
+    let {
       items,
       df1Prefix,
       df2Prefix
-    } = option,
-    _seriaId = _crSeriaId(option, df1Prefix, (0, _fnAdapter.getValue)(items[0]), df2Prefix, (0, _fnAdapter.getValue)(items[1]));
-  return _crUrl(_seriaId, option);
-};
-const _s123BFnUrl = option => {
-  const {
+    } = _ref4;
+    return [df1Prefix, (0, _fnAdapter.getValue)(items[0]), df2Prefix, (0, _fnAdapter.getValue)(items[1])];
+  },
+  _s12FnUrl = _fCrUrl(_crValuesS12),
+  _crValuesS123B = _ref5 => {
+    let {
       items,
       df2Prefix
-    } = option,
-    _seriaId = _crSeriaId(option, (0, _fnAdapter.getValue)(items[0]), df2Prefix, (0, _fnAdapter.getValue)(items[1]), (0, _fnAdapter.getValue)(items[2]));
-  return _crUrl(_seriaId, option);
-};
-const _s123FnUrl = option => {
-  const {
+    } = _ref5;
+    return [(0, _fnAdapter.getValue)(items[0]), df2Prefix, (0, _fnAdapter.getValue)(items[1]), (0, _fnAdapter.getValue)(items[2])];
+  },
+  _s123BFnUrl = _fCrUrl(_crValuesS123B),
+  _crValuesS123 = _ref6 => {
+    let {
       items
-    } = option,
-    _seriaId = _crSeriaId(option, (0, _fnAdapter.getValue)(items[0]), (0, _fnAdapter.getValue)(items[1]), (0, _fnAdapter.getValue)(items[2]));
-  return _crUrl(_seriaId, option);
-};
+    } = _ref6;
+    return [(0, _fnAdapter.getValue)(items[0]), (0, _fnAdapter.getValue)(items[1]), (0, _fnAdapter.getValue)(items[2])];
+  },
+  _s123FnUrl = _fCrUrl(_crValuesS123);
 const _s3S12FnUrl = option => {
   const {
       items,
@@ -97,9 +95,9 @@ const _s3S12FnUrl = option => {
     v1 = (0, _fnAdapter.getValue)(items[0]),
     v2 = (0, _fnAdapter.getValue)(items[1]),
     v3 = (0, _fnAdapter.getValue)(items[2]),
-    _seriaId = _crSeriaId(option, v1, v2);
+    _seriaId = _crSeriaId(option, [v1, v2]);
   (0, _fnAdapter._assign)(option, {
-    dfCode: dfCode + ":" + v3,
+    dfCode: `${dfCode}:${v3}`,
     subtitle: (subtitle || []).split(':')[0] || ''
   });
   return _crUrl(_seriaId, option);
@@ -126,15 +124,18 @@ const DbNomicsApi = {
     return option.url = _crUrl(option);
   },
   checkResponse(json) {
-    if (json && _isArr(json.errors)) {
-      throw _crErr(json.errors[0].message);
+    const {
+      errors,
+      series
+    } = json || {};
+    if (_isArr(errors)) {
+      throw _crErr((errors[0] || {}).message);
     }
-    const docs = ((json || {}).series || {}).docs;
+    const docs = (series || {}).docs;
     if (!_isArr(docs) || !docs[0] || !_isArr(docs[0].period) || !_isArr(docs[0].value)) {
       throw _crErr();
     }
   }
 };
-var _default = DbNomicsApi;
-exports.default = _default;
+var _default = exports.default = DbNomicsApi;
 //# sourceMappingURL=DbNomicsApi.js.map
