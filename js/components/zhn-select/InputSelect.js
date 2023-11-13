@@ -456,8 +456,6 @@ class InputSelect extends _uiApi.Component {
         indexActiveOption: this.indexActiveOption,
         nAll: _nAll,
         nFiltered: _nFiltered,
-        onStepUp: this._stepUpOption,
-        onStepDown: this._stepDownOption,
         onClear: this._hClear
       })]
     });

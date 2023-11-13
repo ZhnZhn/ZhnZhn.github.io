@@ -14,8 +14,6 @@ const OptionsFooter = forwardRef(({
   indexActiveOption,
   nFiltered,
   nAll,
-  onStepDown,
-  onStepUp,
   onClear
 }, ref) => (
   <div className={`${CL_FOOTER} ${CL_NOT_SELECTED}`}>
@@ -28,16 +26,6 @@ const OptionsFooter = forwardRef(({
       </span>
     </span>
     {!noFooterBts && <span className={CL_FOOTER_BTS}>
-      <ButtonCircle2
-         className={CL_FOOTER_BT}
-         caption="Dn"
-         onClick={onStepDown}
-      />
-      <ButtonCircle2
-         className={CL_FOOTER_BT}
-         caption="Up"
-         onClick={onStepUp}
-      />
       <ButtonCircle2
          className={CL_FOOTER_BT}
          caption="CL"
