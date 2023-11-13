@@ -125,13 +125,12 @@ const DbNomicsApi = {
   },
   checkResponse(json) {
     const {
-      errors,
-      series
+      errors
     } = json || {};
     if (_isArr(errors)) {
       throw _crErr((errors[0] || {}).message);
     }
-    const docs = (series || {}).docs;
+    const docs = (0, _fnAdapter.getDocs)(json);
     if (!_isArr(docs) || !docs[0] || !_isArr(docs[0].period) || !_isArr(docs[0].value)) {
       throw _crErr();
     }

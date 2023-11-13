@@ -2,6 +2,7 @@ import {
   _assign,
   crError,
   getValue,
+  getDocs,
   joinBy
 } from './fnAdapter';
 
@@ -19,7 +20,7 @@ const _crUrlImpl = (
 ) => {
   const _seriesId = dfProvider && seriaId
     ? joinBy('/', dfProvider, dfCode, seriaId)
-    : `${DF_ID}`        
+    : `${DF_ID}`
   return `${URL}?series_ids=${_seriesId}&${TAIL}`;
 }
 
@@ -173,14 +174,11 @@ const DbNomicsApi = {
   },
 
   checkResponse(json){
-    const {
-      errors,
-      series
-    } = json || {}
+    const { errors } = json || {};
     if (_isArr(errors)) {
       throw _crErr((errors[0] || {}).message);
     }
-    const docs = (series || {}).docs;
+    const docs = getDocs(json);
     if (!_isArr(docs)
       || !docs[0]
       || !_isArr(docs[0].period)

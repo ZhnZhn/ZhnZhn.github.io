@@ -25,6 +25,10 @@ export const _assign = Object.assign
 const CHART_URL = 'https://db.nomics.world'
 , SUBT_MAX = 60;
 
+export const getDocs = (
+  json
+) => ((json || {}).series || {}).docs || {};
+
 const _crId = ({
   dfProvider,
   dfCode,

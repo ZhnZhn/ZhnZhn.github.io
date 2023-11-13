@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getValue = exports.crTitle = exports.crError = exports.crData = exports.crConfOption = exports._assign = void 0;
+exports.getValue = exports.getDocs = exports.crTitle = exports.crError = exports.crData = exports.crConfOption = exports._assign = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.getValue = _AdapterFn.getValue;
 exports.crError = _AdapterFn.crError;
@@ -11,6 +11,8 @@ var _fnSelector = require("./fnSelector");
 const _assign = exports._assign = Object.assign;
 const CHART_URL = 'https://db.nomics.world',
   SUBT_MAX = 60;
+const getDocs = json => ((json || {}).series || {}).docs || {};
+exports.getDocs = getDocs;
 const _crId = _ref => {
   let {
     dfProvider,
