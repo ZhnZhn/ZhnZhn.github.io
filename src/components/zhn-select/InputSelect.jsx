@@ -92,6 +92,13 @@ const _crFilterOptions = (
   return _arr;
 }
 
+const _calcDeltaTop = (
+  comp,
+  optionsComp
+) => comp && optionsComp
+  ? comp.offsetTop - optionsComp.scrollTop
+  : void 0;
+
 const FN_NOOP = () => {};
 
 class InputSelect extends Component {
@@ -205,24 +212,19 @@ class InputSelect extends Component {
       _comp.classList.remove(CL_OPTIONS_ROW_ACTIVE);
      }
   }
-
-  _calcDeltaTop = (comp) => {
-    return comp && this.optionsComp
-      ? comp.offsetTop - this.optionsComp.scrollTop
-      : void 0;
-  }
-
+  
   _makeVisible = comp => {
     if (comp){
       if (this.indexActiveOption === 0){
         return;
       }
-      const deltaTop = this._calcDeltaTop(comp);
+      const _optionsComp = this.optionsComp
+      , deltaTop = _calcDeltaTop(comp, _optionsComp);
       if (deltaTop > 70){
-        this.optionsComp.scrollTop += deltaTop - 70;
+        _optionsComp.scrollTop += deltaTop - 70;
       }
       if (deltaTop < 0){
-        this.optionsComp.scrollTop = 0;
+        _optionsComp.scrollTop = 0;
       }
     }
   }
@@ -258,9 +260,10 @@ class InputSelect extends Component {
       ? (delta) => delta > 70
       : (delta) => delta < 70
     , comp = this._decorateCurrentComp()
-    , deltaTop = this._calcDeltaTop(comp);
+    , _optionsComp = this.optionsComp
+    , deltaTop = _calcDeltaTop(comp, _optionsComp);
     if (fnPredicate(deltaTop)){
-       this.optionsComp.scrollTop += deltaTop - 70;
+       _optionsComp.scrollTop += deltaTop - 70;
     }
   }
 
