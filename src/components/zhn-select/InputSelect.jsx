@@ -99,6 +99,25 @@ const _calcDeltaTop = (
   ? comp.offsetTop - optionsComp.scrollTop
   : void 0;
 
+const _makeVisible = (
+  comp,
+  indexActive,
+  optionsComp
+) => {
+  if (comp){
+    if (indexActive === 0){
+      return;
+    }
+    const deltaTop = _calcDeltaTop(comp, optionsComp);
+    if (deltaTop > 70){
+      optionsComp.scrollTop += deltaTop - 70;
+    }
+    if (deltaTop < 0){
+      optionsComp.scrollTop = 0;
+    }
+  }
+}
+
 const FN_NOOP = () => {};
 
 class InputSelect extends Component {
@@ -179,7 +198,11 @@ class InputSelect extends Component {
     if (isShowOption){
       const comp = this._decorateCurrentComp();
       if (!prevState.isShowOption) {
-        this._makeVisible(comp)
+        _makeVisible(
+          comp,
+          this.indexActiveOption,
+          this.optionsComp
+        )
       }
     }
   }
@@ -212,23 +235,7 @@ class InputSelect extends Component {
       _comp.classList.remove(CL_OPTIONS_ROW_ACTIVE);
      }
   }
-  
-  _makeVisible = comp => {
-    if (comp){
-      if (this.indexActiveOption === 0){
-        return;
-      }
-      const _optionsComp = this.optionsComp
-      , deltaTop = _calcDeltaTop(comp, _optionsComp);
-      if (deltaTop > 70){
-        _optionsComp.scrollTop += deltaTop - 70;
-      }
-      if (deltaTop < 0){
-        _optionsComp.scrollTop = 0;
-      }
-    }
-  }
-
+    
   _hInputChange = (event) => {
     const { isWithInput, regInput } = this.props
     , token = event.target.value

@@ -60,6 +60,20 @@ const _crFilterOptions = (options, token, props) => {
   return _arr;
 };
 const _calcDeltaTop = (comp, optionsComp) => comp && optionsComp ? comp.offsetTop - optionsComp.scrollTop : void 0;
+const _makeVisible = (comp, indexActive, optionsComp) => {
+  if (comp) {
+    if (indexActive === 0) {
+      return;
+    }
+    const deltaTop = _calcDeltaTop(comp, optionsComp);
+    if (deltaTop > 70) {
+      optionsComp.scrollTop += deltaTop - 70;
+    }
+    if (deltaTop < 0) {
+      optionsComp.scrollTop = 0;
+    }
+  }
+};
 const FN_NOOP = () => {};
 class InputSelect extends _uiApi.Component {
   /*
@@ -131,7 +145,7 @@ class InputSelect extends _uiApi.Component {
     if (isShowOption) {
       const comp = this._decorateCurrentComp();
       if (!prevState.isShowOption) {
-        this._makeVisible(comp);
+        _makeVisible(comp, this.indexActiveOption, this.optionsComp);
       }
     }
   }
@@ -159,21 +173,6 @@ class InputSelect extends _uiApi.Component {
     const _comp = comp || this._getCurrentComp();
     if (_comp) {
       _comp.classList.remove(_CL.CL_OPTIONS_ROW_ACTIVE);
-    }
-  };
-  _makeVisible = comp => {
-    if (comp) {
-      if (this.indexActiveOption === 0) {
-        return;
-      }
-      const _optionsComp = this.optionsComp,
-        deltaTop = _calcDeltaTop(comp, _optionsComp);
-      if (deltaTop > 70) {
-        _optionsComp.scrollTop += deltaTop - 70;
-      }
-      if (deltaTop < 0) {
-        _optionsComp.scrollTop = 0;
-      }
     }
   };
   _hInputChange = event => {
