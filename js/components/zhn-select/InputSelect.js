@@ -9,12 +9,12 @@ var _crAfterInputEl = _interopRequireDefault(require("./crAfterInputEl"));
 var _InputSelectFn = require("./InputSelectFn");
 var _ItemOptionDf = _interopRequireDefault(require("./ItemOptionDf"));
 var _OptionsView = _interopRequireDefault(require("./OptionsView"));
-var _OptionList = _interopRequireDefault(require("./OptionList"));
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from 'prop-types'
 
-const INPUT_PREFIX = 'From input:';
+const INPUT_PREFIX = 'From input:',
+  DF_OPTIONS = [];
 const _crValue = str => str.replace(INPUT_PREFIX, '').trim();
 const _crInputItem = (inputValue, _ref) => {
   let {
@@ -34,12 +34,13 @@ const _crInitialStateFromProps = _ref2 => {
   let {
     options
   } = _ref2;
+  const _options = options || DF_OPTIONS;
   return {
     value: '',
     isShowOption: false,
-    initialOptions: options,
-    options: options,
-    isValidOptionListCache: false,
+    initialOptions: _options,
+    options: _options,
+    nAll: _options.length,
     isFocused: false
   };
 };
@@ -89,7 +90,6 @@ class InputSelect extends _uiApi.Component {
   static defaultProps = {
     propCaption: 'caption',
     ItemOptionComp: _ItemOptionDf.default,
-    options: [],
     optionName: '',
     isWithInput: false,
     maxInput: 10,
@@ -114,10 +114,7 @@ class InputSelect extends _uiApi.Component {
   };
   static getDerivedStateFromProps(props, state) {
     //Init state for new options from props
-    if (props.options !== state.initialOptions) {
-      return _crInitialStateFromProps(props);
-    }
-    return null;
+    return props.options !== state.initialOptions ? _crInitialStateFromProps(props) : null;
   }
   componentDidUpdate(prevProps, prevState) {
     const {
@@ -202,7 +199,6 @@ class InputSelect extends _uiApi.Component {
       this.setState({
         value: token,
         isShowOption: true,
-        isValidOptionListCache: false,
         options: _crFilterOptions(_options, token, this.props)
       });
     }
@@ -277,8 +273,7 @@ class InputSelect extends _uiApi.Component {
           if (_value) {
             this.setState({
               value: _crValue(_value),
-              isShowOption: false,
-              isValidOptionListCache: true
+              isShowOption: false
             });
             this._selectItem(item);
           }
@@ -338,28 +333,6 @@ class InputSelect extends _uiApi.Component {
   _refOptionsComp = c => this.optionsComp = c;
   _refOptionNode = (n, index) => this[`v${index}`] = n;
   _refIndexNode = n => this.indexNode = n;
-  _crOptionListWithCache = () => {
-    const {
-        propCaption,
-        ItemOptionComp
-      } = this.props,
-      {
-        options,
-        isValidOptionListCache
-      } = this.state;
-    if (options && !isValidOptionListCache) {
-      this.optionListCache = /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionList.default, {
-        options: options,
-        refOptionNode: this._refOptionNode,
-        className: _CL.CL_OPTIONS_ROW,
-        selectedIndex: this.indexActiveOption,
-        propCaption: propCaption,
-        onClick: this._hClickItem,
-        ItemComp: ItemOptionComp
-      });
-    }
-    return this.optionListCache;
-  };
   _hClear = () => {
     this.clearInput();
     this.focusInput();
@@ -379,6 +352,8 @@ class InputSelect extends _uiApi.Component {
     const {
         style,
         width,
+        propCaption,
+        ItemOptionComp,
         optionsStyle,
         noFooterBts
       } = this.props,
@@ -387,7 +362,7 @@ class InputSelect extends _uiApi.Component {
         isFocused,
         value,
         options,
-        initialOptions
+        nAll
       } = this.state,
       _rootWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, style),
       [afterInputEl, placeholder] = (0, _crAfterInputEl.default)(this.props, isFocused && value, isShowOption, this._hClear, this._hToggleOptions);
@@ -412,16 +387,19 @@ class InputSelect extends _uiApi.Component {
       }), afterInputEl, /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
         className: _CL.CL_INPUT_HR
       }), isShowOption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsView.default, {
+        propCaption: propCaption,
         optionsStyle: optionsStyle,
         width: width,
         noFooterBts: noFooterBts,
+        ItemOptionComp: ItemOptionComp,
         isShowOption: isShowOption,
         options: options,
-        initialOptions: initialOptions,
-        optionListEl: this._crOptionListWithCache(),
+        nAll: nAll,
         refOptionsComp: this._refOptionsComp,
+        refOptionNode: this._refOptionNode,
         refIndexNode: this._refIndexNode,
         indexActive: this.indexActiveOption,
+        onClickItem: this._hClickItem,
         onClear: this._hClear
       })]
     });

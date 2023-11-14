@@ -3,33 +3,46 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _InputSelectFn = require("./InputSelectFn");
+var _OptionList = _interopRequireDefault(require("./OptionList"));
 var _OptionsFooter = _interopRequireDefault(require("./OptionsFooter"));
 var _styleFn = require("../styleFn");
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
-const _crFooterIndex = (options, initialOptions) => [
-//_nFiltered
-options[0] && options[0].value !== _InputSelectFn.NO_RESULT ? options.length : 0,
-// _nAll
-initialOptions ? initialOptions.length : 0];
+const _crFooterIndex = options => options[0] && options[0].value !== _InputSelectFn.NO_RESULT ? options.length : 0;
 const OptionsView = _ref => {
   let {
     optionsStyle,
     width,
+    propCaption,
+    ItemOptionComp,
     noFooterBts,
     isShowOption,
     options,
-    initialOptions,
-    optionListEl,
+    nAll,
     refOptionsComp,
+    refOptionNode,
     refIndexNode,
     indexActive,
+    onClickItem,
     onClear
   } = _ref;
-  const _styleOptions = isShowOption ? _styleFn.S_BLOCK : _styleFn.S_NONE,
+  /*eslint-disable react-hooks/exhaustive-deps */
+  const _optionListEl = (0, _uiApi.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionList.default, {
+      options: options,
+      refOptionNode: refOptionNode,
+      className: _CL.CL_OPTIONS_ROW,
+      selectedIndex: indexActive,
+      propCaption: propCaption,
+      onClick: onClickItem,
+      ItemComp: ItemOptionComp
+    }), [options])
+    // indexActive
+    /*eslint-enable react-hooks/exhaustive-deps */,
+    _styleOptions = isShowOption ? _styleFn.S_BLOCK : _styleFn.S_NONE,
     _rootWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, _styleOptions),
-    [_nFiltered, _nAll] = _crFooterIndex(options, initialOptions);
+    _nFiltered = _crFooterIndex(options);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: _CL.CL_OPTIONS,
     style: _rootWidthStyle,
@@ -43,12 +56,12 @@ const OptionsView = _ref => {
         ..._rootWidthStyle
       },
       tabIndex: "-1",
-      children: optionListEl
+      children: _optionListEl
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsFooter.default, {
       ref: refIndexNode,
       noFooterBts: noFooterBts,
       indexActiveOption: indexActive,
-      nAll: _nAll,
+      nAll: nAll,
       nFiltered: _nFiltered,
       onClear: onClear
     })]

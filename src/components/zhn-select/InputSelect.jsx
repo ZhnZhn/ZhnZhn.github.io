@@ -14,17 +14,16 @@ import {
 } from './InputSelectFn';
 import ItemOptionDf from './ItemOptionDf';
 import OptionsView from './OptionsView';
-import OptionList from './OptionList';
 
 import {
   CL_ROOT,
   CL_INPUT,
   CL_INPUT_HR,
-  CL_OPTIONS_ROW,
   CL_OPTIONS_ROW_ACTIVE
 } from './CL';
 
-const INPUT_PREFIX = 'From input:';
+const INPUT_PREFIX = 'From input:'
+, DF_OPTIONS = [];
 
 const _crValue = str => str
   .replace(INPUT_PREFIX, '')
@@ -49,14 +48,19 @@ const _crInputItem = (
 
 const _crInitialStateFromProps = ({
   options
-}) => ({
-  value: '',
-  isShowOption: false,
-  initialOptions: options,
-  options: options,
-  isValidOptionListCache: false,
-  isFocused: false
-});
+}) => {
+  const _options = options || DF_OPTIONS;
+  return {
+    value: '',
+    isShowOption: false,
+
+    initialOptions: _options,
+    options: _options,
+    nAll: _options.length,
+
+    isFocused: false
+  };
+}
 
 const _filterOptions = (
   options,
@@ -118,7 +122,6 @@ class InputSelect extends Component {
   static defaultProps = {
     propCaption: 'caption',
     ItemOptionComp: ItemOptionDf,
-    options: [],
     optionName: '',
     isWithInput: false,
     maxInput: 10,
@@ -149,10 +152,9 @@ class InputSelect extends Component {
 
   static getDerivedStateFromProps(props, state){
      //Init state for new options from props
-     if (props.options !== state.initialOptions) {
-       return _crInitialStateFromProps(props);
-     }
-     return null;
+     return props.options !== state.initialOptions
+       ? _crInitialStateFromProps(props)
+       : null;
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -241,7 +243,6 @@ class InputSelect extends Component {
       this.setState({
         value: token,
         isShowOption: true,
-        isValidOptionListCache: false,
         options: _crFilterOptions(_options, token, this.props)
       })
     }
@@ -324,7 +325,6 @@ class InputSelect extends Component {
            this.setState({
              value: _crValue(_value),
              isShowOption: false,
-             isValidOptionListCache: true
            });
            this._selectItem(item)
          }
@@ -377,32 +377,6 @@ class InputSelect extends Component {
   _refOptionNode = (n, index) => this[`v${index}`] = n
   _refIndexNode = n => this.indexNode = n
 
-  _crOptionListWithCache = () => {
-    const {
-      propCaption,
-      ItemOptionComp
-    } = this.props
-    , {
-      options,
-      isValidOptionListCache
-    } = this.state;
-
-    if (options && !isValidOptionListCache){
-      this.optionListCache = (
-        <OptionList
-          options={options}
-          refOptionNode={this._refOptionNode}
-          className={CL_OPTIONS_ROW}
-          selectedIndex={this.indexActiveOption}
-          propCaption={propCaption}
-          onClick={this._hClickItem}
-          ItemComp={ItemOptionComp}
-        />
-      )
-    }
-    return this.optionListCache;
-  }
-
   _hClear = () => {
     this.clearInput()
     this.focusInput()
@@ -424,6 +398,9 @@ class InputSelect extends Component {
       style,
       width,
 
+      propCaption,
+      ItemOptionComp,
+
       optionsStyle,
       noFooterBts
     } = this.props
@@ -433,7 +410,7 @@ class InputSelect extends Component {
       value,
 
       options,
-      initialOptions
+      nAll
     } = this.state
     , _rootWidthStyle = crWidthStyle(width, style)
     , [
@@ -472,20 +449,22 @@ class InputSelect extends Component {
         {afterInputEl}
         <hr className={CL_INPUT_HR} />
         {isShowOption && <OptionsView
+          propCaption={propCaption}
           optionsStyle={optionsStyle}
           width={width}
           noFooterBts={noFooterBts}
+          ItemOptionComp={ItemOptionComp}
 
           isShowOption={isShowOption}
           options={options}
-          initialOptions={initialOptions}
-
-          optionListEl={this._crOptionListWithCache()}
+          nAll={nAll}
 
           refOptionsComp={this._refOptionsComp}
+          refOptionNode={this._refOptionNode}
           refIndexNode={this._refIndexNode}
           indexActive={this.indexActiveOption}
 
+          onClickItem={this._hClickItem}
           onClear={this._hClear}
         />}
       </div>
