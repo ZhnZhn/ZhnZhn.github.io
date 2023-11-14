@@ -13,18 +13,13 @@ import {
 
 import { HAS_TOUCH_EVENTS } from '../has';
 
-import ArrowCell from './ArrowCell';
-import { BtSvgClear } from '../zhn/BtSvgX'
-
-import ButtonCircle2 from '../zhn/ButtonCircle2';
+import crAfterInputEl from './crAfterInputEl';
 import ItemOptionDf from './ItemOptionDf'
 import OptionList from './OptionList'
 import OptionsFooter from './OptionsFooter'
 import {
   CL_ROOT,
   CL_INPUT,
-  CL_SPINNER,
-  CL_SPINNER_FAILED,
   CL_INPUT_HR,
   CL_OPTIONS,
   CL_OPTIONS_DIV,
@@ -33,19 +28,8 @@ import {
 } from './CL';
 
 const MAX_WITHOUT_ANIMATION = 800
-
 , INPUT_PREFIX = 'From input:'
-, NO_RESULT = 'noresult'
-
-, S_ARROW_SHOW = {
-  borderColor: '#1b75bb transparent transparent'
-}
-, S_SVG_CLEAR = {
-  position: 'absolute',
-  top: 5,
-  right: 8,
-  stroke: '#1b75bb'
-};
+, NO_RESULT = 'noresult';
 
 const _crValue = str => str
   .replace(INPUT_PREFIX, '')
@@ -516,57 +500,6 @@ class InputSelect extends Component {
     this.focusInput()
   }
 
-  _crAfterInputEl = () => {
-    const {
-       isLoading, isLoadingFailed,
-       placeholder, optionName, onLoadOption
-     } = this.props
-    , { isShowOption, optionNames, isFocused, value } = this.state;
-
-    let _placeholder, _afterInputEl;
-    if (!isLoading && !isLoadingFailed){
-       if (isFocused && value) {
-         _afterInputEl = (
-            <BtSvgClear
-               style={S_SVG_CLEAR}
-               onClick={this._hClear}
-            />
-          )
-       } else {
-         _placeholder = placeholder || `Select ${optionName}...`;
-         _afterInputEl = (
-           <ArrowCell
-             ref={this._refArrowCell}
-             arrowStyle={isShowOption ? S_ARROW_SHOW : void 0}
-             onClick={this._hToggleOptions}
-           />
-        );
-      }
-
-    } else if (isLoading){
-      _placeholder = `Loading ${optionNames}...`;
-      _afterInputEl = (
-        <span
-          className={CL_SPINNER}
-          data-loader="circle"
-        />
-      );
-    } else if (isLoadingFailed) {
-       _placeholder=`Loading ${optionNames} Failed`;
-       _afterInputEl = (
-         <ButtonCircle2
-           className={CL_SPINNER_FAILED}
-           dataLoader="circle-failed"
-           onClick={onLoadOption}
-         />
-       )
-    }
-    return {
-      placeholder: _placeholder,
-      afterInputEl: _afterInputEl
-    };
-  }
-
   _hFocus = () => {
     clearTimeout(this._blurId)
     this.setState({ isFocused: true })
@@ -579,10 +512,31 @@ class InputSelect extends Component {
   }
 
   render(){
-    const { style, width } = this.props
-    , { value, isShowOption } = this.state
+    const {
+      style,
+      width
+    } = this.props
+    , {
+      isShowOption,
+      isFocused,
+      value,
+      optionNames
+    } = this.state
     , _rootWidthStyle = _crWidthStyle(width, style)
-    , { afterInputEl, placeholder } = this._crAfterInputEl();
+    , [
+      afterInputEl,
+      placeholder
+    ] = crAfterInputEl(
+      this.props,
+
+      isFocused && value,
+      isShowOption,
+      optionNames,
+
+      this._refArrowCell,
+      this._hClear,
+      this._hToggleOptions
+    );
 
     return (
       <div

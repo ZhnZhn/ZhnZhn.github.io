@@ -6,9 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _has = require("../has");
-var _ArrowCell = _interopRequireDefault(require("./ArrowCell"));
-var _BtSvgX = require("../zhn/BtSvgX");
-var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle2"));
+var _crAfterInputEl = _interopRequireDefault(require("./crAfterInputEl"));
 var _ItemOptionDf = _interopRequireDefault(require("./ItemOptionDf"));
 var _OptionList = _interopRequireDefault(require("./OptionList"));
 var _OptionsFooter = _interopRequireDefault(require("./OptionsFooter"));
@@ -18,16 +16,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 const MAX_WITHOUT_ANIMATION = 800,
   INPUT_PREFIX = 'From input:',
-  NO_RESULT = 'noresult',
-  S_ARROW_SHOW = {
-    borderColor: '#1b75bb transparent transparent'
-  },
-  S_SVG_CLEAR = {
-    position: 'absolute',
-    top: 5,
-    right: 8,
-    stroke: '#1b75bb'
-  };
+  NO_RESULT = 'noresult';
 const _crValue = str => str.replace(INPUT_PREFIX, '').trim();
 const _crInputItem = (inputValue, _ref) => {
   let {
@@ -464,54 +453,6 @@ class InputSelect extends _uiApi.Component {
     this.clearInput();
     this.focusInput();
   };
-  _crAfterInputEl = () => {
-    const {
-        isLoading,
-        isLoadingFailed,
-        placeholder,
-        optionName,
-        onLoadOption
-      } = this.props,
-      {
-        isShowOption,
-        optionNames,
-        isFocused,
-        value
-      } = this.state;
-    let _placeholder, _afterInputEl;
-    if (!isLoading && !isLoadingFailed) {
-      if (isFocused && value) {
-        _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClear, {
-          style: S_SVG_CLEAR,
-          onClick: this._hClear
-        });
-      } else {
-        _placeholder = placeholder || `Select ${optionName}...`;
-        _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell.default, {
-          ref: this._refArrowCell,
-          arrowStyle: isShowOption ? S_ARROW_SHOW : void 0,
-          onClick: this._hToggleOptions
-        });
-      }
-    } else if (isLoading) {
-      _placeholder = `Loading ${optionNames}...`;
-      _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        className: _CL.CL_SPINNER,
-        "data-loader": "circle"
-      });
-    } else if (isLoadingFailed) {
-      _placeholder = `Loading ${optionNames} Failed`;
-      _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
-        className: _CL.CL_SPINNER_FAILED,
-        dataLoader: "circle-failed",
-        onClick: onLoadOption
-      });
-    }
-    return {
-      placeholder: _placeholder,
-      afterInputEl: _afterInputEl
-    };
-  };
   _hFocus = () => {
     clearTimeout(this._blurId);
     this.setState({
@@ -529,14 +470,13 @@ class InputSelect extends _uiApi.Component {
         width
       } = this.props,
       {
+        isShowOption,
+        isFocused,
         value,
-        isShowOption
+        optionNames
       } = this.state,
       _rootWidthStyle = _crWidthStyle(width, style),
-      {
-        afterInputEl,
-        placeholder
-      } = this._crAfterInputEl();
+      [afterInputEl, placeholder] = (0, _crAfterInputEl.default)(this.props, isFocused && value, isShowOption, optionNames, this._refArrowCell, this._hClear, this._hToggleOptions);
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: _CL.CL_ROOT,
       style: _rootWidthStyle,
