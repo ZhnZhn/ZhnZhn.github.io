@@ -32,7 +32,6 @@ const WrapperInputSearch = (0, _memoEqual.default)(_ref => {
     style: style,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect.default, {
       width: "100%",
-      isShowOptionAnim: true,
       placeholder: placeholder,
       propCaption: caption,
       options: _options,
@@ -41,6 +40,5 @@ const WrapperInputSearch = (0, _memoEqual.default)(_ref => {
     })
   });
 });
-var _default = WrapperInputSearch;
-exports.default = _default;
+var _default = exports.default = WrapperInputSearch;
 //# sourceMappingURL=WrapperInputSearch.js.map

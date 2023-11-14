@@ -2,7 +2,6 @@
 import {
   Component,
   createRef,
-  getRefValue,
   focusRefElement
 } from '../uiApi';
 
@@ -27,8 +26,7 @@ import {
   CL_OPTIONS_ROW_ACTIVE
 } from './CL';
 
-const MAX_WITHOUT_ANIMATION = 800
-, INPUT_PREFIX = 'From input:'
+const INPUT_PREFIX = 'From input:'
 , NO_RESULT = 'noresult';
 
 const _crValue = str => str
@@ -120,7 +118,6 @@ class InputSelect extends Component {
      width: PropTypes.string,
      style: PropTypes.object,
      optionsStyle: PropTypes.object,
-     isShowOptionAnim: PropTypes.bool,
      options: PropTypes.arrayOf(PropTypes.shape({
         caption: PropTypes.string,
         value: PropTypes.oneOfType([
@@ -166,7 +163,6 @@ class InputSelect extends Component {
       : void 0
     this._initProperties()
     this._refInput = createRef()
-    this._refArrowCell = createRef()
 
     this.state = _crInitialStateFromProps(props)
   }
@@ -276,29 +272,6 @@ class InputSelect extends Component {
     }
   }
 
-  _startAfterInputAnimation = () => {
-    if (this.state.options.length>MAX_WITHOUT_ANIMATION){
-      getRefValue(this._refArrowCell).startAnimation()
-    }
-  }
-  _stopAfterInputAnimation = () => {
-    getRefValue(this._refArrowCell).stopAnimation()
-  }
-  _setShowOptions = () => {
-    this.setState(
-      { isShowOption: true },
-      this._stopAfterInputAnimation
-    )
-  }
-  _showOptions = (ms) => {
-    if (this.props.isShowOptionAnim) {
-      this._startAfterInputAnimation()
-      setTimeout( this._setShowOptions, ms )
-    } else {
-      this.setState({ isShowOption: true })
-    }
-  }
-
   _decorateByStep = (isStepDown) => {
     const fnPredicate = isStepDown
       ? (delta) => delta > 70
@@ -392,7 +365,7 @@ class InputSelect extends Component {
       break;}
       case 40: //down
         if (!this.state.isShowOption){
-          this._showOptions(0)
+          this.setState({ isShowOption: true })
         } else {
           event.preventDefault()
           this._stepDownOption()
@@ -409,11 +382,10 @@ class InputSelect extends Component {
   }
 
   _hToggleOptions = () => {
-    if (this.state.isShowOption){
-      this.setState({ isShowOption: false })
-    } else {
-      this._showOptions(1)
-    }
+    this.setState(prevState => ({
+      ...prevState,
+      isShowOption: !prevState.isShowOption
+    }))
   }
 
   _hClickItem = (item, index, propCaption) => {
@@ -527,7 +499,6 @@ class InputSelect extends Component {
       isFocused && value,
       isShowOption,
 
-      this._refArrowCell,
       this._hClear,
       this._hToggleOptions
     );

@@ -14,8 +14,7 @@ var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from 'prop-types'
 
-const MAX_WITHOUT_ANIMATION = 800,
-  INPUT_PREFIX = 'From input:',
+const INPUT_PREFIX = 'From input:',
   NO_RESULT = 'noresult';
 const _crValue = str => str.replace(INPUT_PREFIX, '').trim();
 const _crInputItem = (inputValue, _ref) => {
@@ -85,7 +84,6 @@ class InputSelect extends _uiApi.Component {
      width: PropTypes.string,
      style: PropTypes.object,
      optionsStyle: PropTypes.object,
-     isShowOptionAnim: PropTypes.bool,
      options: PropTypes.arrayOf(PropTypes.shape({
         caption: PropTypes.string,
         value: PropTypes.oneOfType([
@@ -126,7 +124,6 @@ class InputSelect extends _uiApi.Component {
     } : void 0;
     this._initProperties();
     this._refInput = (0, _uiApi.createRef)();
-    this._refArrowCell = (0, _uiApi.createRef)();
     this.state = _crInitialStateFromProps(props);
   }
   _initProperties = () => {
@@ -228,29 +225,6 @@ class InputSelect extends _uiApi.Component {
       });
     }
   };
-  _startAfterInputAnimation = () => {
-    if (this.state.options.length > MAX_WITHOUT_ANIMATION) {
-      (0, _uiApi.getRefValue)(this._refArrowCell).startAnimation();
-    }
-  };
-  _stopAfterInputAnimation = () => {
-    (0, _uiApi.getRefValue)(this._refArrowCell).stopAnimation();
-  };
-  _setShowOptions = () => {
-    this.setState({
-      isShowOption: true
-    }, this._stopAfterInputAnimation);
-  };
-  _showOptions = ms => {
-    if (this.props.isShowOptionAnim) {
-      this._startAfterInputAnimation();
-      setTimeout(this._setShowOptions, ms);
-    } else {
-      this.setState({
-        isShowOption: true
-      });
-    }
-  };
   _decorateByStep = isStepDown => {
     const fnPredicate = isStepDown ? delta => delta > 70 : delta => delta < 70,
       comp = this._decorateCurrentComp(),
@@ -345,7 +319,9 @@ class InputSelect extends _uiApi.Component {
       case 40:
         //down
         if (!this.state.isShowOption) {
-          this._showOptions(0);
+          this.setState({
+            isShowOption: true
+          });
         } else {
           event.preventDefault();
           this._stepDownOption();
@@ -363,13 +339,10 @@ class InputSelect extends _uiApi.Component {
     }
   };
   _hToggleOptions = () => {
-    if (this.state.isShowOption) {
-      this.setState({
-        isShowOption: false
-      });
-    } else {
-      this._showOptions(1);
-    }
+    this.setState(prevState => ({
+      ...prevState,
+      isShowOption: !prevState.isShowOption
+    }));
   };
   _hClickItem = (item, index, propCaption) => {
     this._undecorateCurrentComp();
@@ -471,7 +444,7 @@ class InputSelect extends _uiApi.Component {
         value
       } = this.state,
       _rootWidthStyle = _crWidthStyle(width, style),
-      [afterInputEl, placeholder] = (0, _crAfterInputEl.default)(this.props, isFocused && value, isShowOption, this._refArrowCell, this._hClear, this._hToggleOptions);
+      [afterInputEl, placeholder] = (0, _crAfterInputEl.default)(this.props, isFocused && value, isShowOption, this._hClear, this._hToggleOptions);
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: _CL.CL_ROOT,
       style: _rootWidthStyle,

@@ -23,7 +23,6 @@ const crAfterInputEl = (
   isBtSvgClear,
   isShowOption,
 
-  _refArrowCell,
   _hClear,
   _hToggleOptions
 ) => {
@@ -49,7 +48,7 @@ const crAfterInputEl = (
        _placeholder = placeholder || `Select ${optionName}...`;
        _afterInputEl = (
          <ArrowCell
-           ref={_refArrowCell}
+           //ref={_refArrowCell}
            arrowStyle={isShowOption ? S_ARROW_SHOW : void 0}
            onClick={_hToggleOptions}
          />

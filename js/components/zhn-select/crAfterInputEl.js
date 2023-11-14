@@ -17,7 +17,7 @@ const S_ARROW_SHOW = {
     right: 8,
     stroke: '#1b75bb'
   };
-const crAfterInputEl = (props, isBtSvgClear, isShowOption, _refArrowCell, _hClear, _hToggleOptions) => {
+const crAfterInputEl = (props, isBtSvgClear, isShowOption, _hClear, _hToggleOptions) => {
   const {
       isLoading,
       isLoadingFailed,
@@ -35,8 +35,9 @@ const crAfterInputEl = (props, isBtSvgClear, isShowOption, _refArrowCell, _hClea
       });
     } else {
       _placeholder = placeholder || `Select ${optionName}...`;
-      _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell.default, {
-        ref: _refArrowCell,
+      _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell.default
+      //ref={_refArrowCell}
+      , {
         arrowStyle: isShowOption ? S_ARROW_SHOW : void 0,
         onClick: _hToggleOptions
       });

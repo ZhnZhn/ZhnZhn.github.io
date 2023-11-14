@@ -21,8 +21,7 @@ const WrapperInputSearch = memoEqual(({
   return (
     <div style={style}>
       <InputSelect
-         width="100%"
-         isShowOptionAnim={true}
+         width="100%"         
          placeholder={placeholder}
          propCaption={caption}
          options={_options}
