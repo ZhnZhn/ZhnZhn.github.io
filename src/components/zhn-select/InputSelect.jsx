@@ -7,6 +7,11 @@ import {
 
 import { HAS_TOUCH_EVENTS } from '../has';
 
+import {
+  S_NONE,
+  S_BLOCK
+} from '../styleFn';
+
 import crAfterInputEl from './crAfterInputEl';
 import {
   NO_RESULT,
@@ -424,6 +429,10 @@ class InputSelect extends Component {
 
       this._hClear,
       this._hToggleOptions
+    )
+    , _optionViewWidthStyle = crWidthStyle(
+        width,
+        isShowOption ? S_BLOCK : S_NONE
     );
 
     return (
@@ -449,13 +458,13 @@ class InputSelect extends Component {
         {afterInputEl}
         <hr className={CL_INPUT_HR} />
         {isShowOption && <OptionsView
-          propCaption={propCaption}
-          optionsStyle={optionsStyle}
-          width={width}
-          noFooterBts={noFooterBts}
-          ItemOptionComp={ItemOptionComp}
+          widthStyle={_optionViewWidthStyle}
 
-          isShowOption={isShowOption}
+          optionsStyle={optionsStyle}
+          propCaption={propCaption}
+          ItemOptionComp={ItemOptionComp}
+          noFooterBts={noFooterBts}
+
           options={options}
           nAll={nAll}
 

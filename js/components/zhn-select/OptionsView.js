@@ -7,18 +7,16 @@ var _uiApi = require("../uiApi");
 var _InputSelectFn = require("./InputSelectFn");
 var _OptionList = _interopRequireDefault(require("./OptionList"));
 var _OptionsFooter = _interopRequireDefault(require("./OptionsFooter"));
-var _styleFn = require("../styleFn");
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 const _crFooterIndex = options => options[0] && options[0].value !== _InputSelectFn.NO_RESULT ? options.length : 0;
 const OptionsView = _ref => {
   let {
+    widthStyle,
     optionsStyle,
-    width,
     propCaption,
     ItemOptionComp,
     noFooterBts,
-    isShowOption,
     options,
     nAll,
     refOptionsComp,
@@ -40,12 +38,10 @@ const OptionsView = _ref => {
     }), [options])
     // indexActive
     /*eslint-enable react-hooks/exhaustive-deps */,
-    _styleOptions = isShowOption ? _styleFn.S_BLOCK : _styleFn.S_NONE,
-    _rootWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, _styleOptions),
     _nFiltered = _crFooterIndex(options);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: _CL.CL_OPTIONS,
-    style: _rootWidthStyle,
+    style: widthStyle,
     "data-scrollable": true,
     tabIndex: "-1",
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
@@ -53,7 +49,7 @@ const OptionsView = _ref => {
       className: _CL.CL_OPTIONS_DIV,
       style: {
         ...optionsStyle,
-        ..._rootWidthStyle
+        ...widthStyle
       },
       tabIndex: "-1",
       children: _optionListEl

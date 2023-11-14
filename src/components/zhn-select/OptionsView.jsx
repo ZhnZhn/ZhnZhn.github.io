@@ -1,17 +1,9 @@
 import { useMemo } from '../uiApi';
 
-import {
-  NO_RESULT,
-  crWidthStyle
-} from './InputSelectFn';
+import { NO_RESULT } from './InputSelectFn';
 
 import OptionList from './OptionList';
 import OptionsFooter from './OptionsFooter';
-
-import {
-  S_NONE,
-  S_BLOCK
-} from '../styleFn';
 
 import {
   CL_OPTIONS,
@@ -26,13 +18,13 @@ const _crFooterIndex = (
   : 0;
 
 const OptionsView = ({
+  widthStyle,
+
   optionsStyle,
-  width,
   propCaption,
   ItemOptionComp,
   noFooterBts,
 
-  isShowOption,
   options,
   nAll,
 
@@ -58,14 +50,6 @@ const OptionsView = ({
   ), [options])
   // indexActive
   /*eslint-enable react-hooks/exhaustive-deps */
-
-  , _styleOptions = isShowOption
-    ? S_BLOCK
-    : S_NONE
-  , _rootWidthStyle = crWidthStyle(
-      width,
-      _styleOptions
-    )
   , _nFiltered = _crFooterIndex(
       options
    );
@@ -73,14 +57,14 @@ const OptionsView = ({
   return (
     <div
        className={CL_OPTIONS}
-       style={_rootWidthStyle}
+       style={widthStyle}
        data-scrollable={true}
        tabIndex="-1"
      >
       <div
          ref={refOptionsComp}
          className={CL_OPTIONS_DIV}
-         style={{...optionsStyle, ..._rootWidthStyle}}
+         style={{...optionsStyle, ...widthStyle}}
          tabIndex="-1"
        >
         {_optionListEl}

@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _has = require("../has");
+var _styleFn = require("../styleFn");
 var _crAfterInputEl = _interopRequireDefault(require("./crAfterInputEl"));
 var _InputSelectFn = require("./InputSelectFn");
 var _ItemOptionDf = _interopRequireDefault(require("./ItemOptionDf"));
@@ -365,7 +366,8 @@ class InputSelect extends _uiApi.Component {
         nAll
       } = this.state,
       _rootWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, style),
-      [afterInputEl, placeholder] = (0, _crAfterInputEl.default)(this.props, isFocused && value, isShowOption, this._hClear, this._hToggleOptions);
+      [afterInputEl, placeholder] = (0, _crAfterInputEl.default)(this.props, isFocused && value, isShowOption, this._hClear, this._hToggleOptions),
+      _optionViewWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, isShowOption ? _styleFn.S_BLOCK : _styleFn.S_NONE);
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: _CL.CL_ROOT,
       style: _rootWidthStyle,
@@ -387,12 +389,11 @@ class InputSelect extends _uiApi.Component {
       }), afterInputEl, /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
         className: _CL.CL_INPUT_HR
       }), isShowOption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsView.default, {
-        propCaption: propCaption,
+        widthStyle: _optionViewWidthStyle,
         optionsStyle: optionsStyle,
-        width: width,
-        noFooterBts: noFooterBts,
+        propCaption: propCaption,
         ItemOptionComp: ItemOptionComp,
-        isShowOption: isShowOption,
+        noFooterBts: noFooterBts,
         options: options,
         nAll: nAll,
         refOptionsComp: this._refOptionsComp,
