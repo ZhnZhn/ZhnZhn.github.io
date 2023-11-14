@@ -75,15 +75,12 @@ const _crFooterIndex = ({
 });
 
 const _crInitialStateFromProps = ({
-  optionName,
-  optionNames,
   options
 }) => ({
   value: '',
   isShowOption: false,
   initialOptions: options,
   options: options,
-  optionNames: optionNames || optionName || '',
   isValidOptionListCache: false,
   isFocused: false
 });
@@ -151,7 +148,6 @@ class InputSelect extends Component {
     ItemOptionComp: ItemOptionDf,
     options: [],
     optionName: '',
-    optionNames: '',
     isWithInput: false,
     maxInput: 10,
     regInput: /[A-Za-z0-9()^ ]/,
@@ -520,7 +516,6 @@ class InputSelect extends Component {
       isShowOption,
       isFocused,
       value,
-      optionNames
     } = this.state
     , _rootWidthStyle = _crWidthStyle(width, style)
     , [
@@ -531,7 +526,6 @@ class InputSelect extends Component {
 
       isFocused && value,
       isShowOption,
-      optionNames,
 
       this._refArrowCell,
       this._hClear,

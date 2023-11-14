@@ -22,7 +22,6 @@ const crAfterInputEl = (
 
   isBtSvgClear,
   isShowOption,
-  optionNames,
 
   _refArrowCell,
   _hClear,
@@ -34,7 +33,8 @@ const crAfterInputEl = (
     placeholder,
     optionName,
     onLoadOption
-  } = props;
+  } = props
+  , _optionNames = props.optionNames || optionName || '';
 
   let _placeholder, _afterInputEl;
   if (!isLoading && !isLoadingFailed){
@@ -57,7 +57,7 @@ const crAfterInputEl = (
     }
 
   } else if (isLoading){
-    _placeholder = `Loading ${optionNames}...`;
+    _placeholder = `Loading ${_optionNames}...`;
     _afterInputEl = (
       <span
         className={CL_SPINNER}
@@ -65,7 +65,7 @@ const crAfterInputEl = (
       />
     );
   } else if (isLoadingFailed) {
-     _placeholder=`Loading ${optionNames} Failed`;
+     _placeholder=`Loading ${_optionNames} Failed`;
      _afterInputEl = (
        <ButtonCircle2
          className={CL_SPINNER_FAILED}

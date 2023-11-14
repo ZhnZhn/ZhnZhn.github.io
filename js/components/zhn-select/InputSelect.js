@@ -51,8 +51,6 @@ const _crFooterIndex = _ref2 => {
 };
 const _crInitialStateFromProps = _ref3 => {
   let {
-    optionName,
-    optionNames,
     options
   } = _ref3;
   return {
@@ -60,7 +58,6 @@ const _crInitialStateFromProps = _ref3 => {
     isShowOption: false,
     initialOptions: options,
     options: options,
-    optionNames: optionNames || optionName || '',
     isValidOptionListCache: false,
     isFocused: false
   };
@@ -114,7 +111,6 @@ class InputSelect extends _uiApi.Component {
     ItemOptionComp: _ItemOptionDf.default,
     options: [],
     optionName: '',
-    optionNames: '',
     isWithInput: false,
     maxInput: 10,
     regInput: /[A-Za-z0-9()^ ]/,
@@ -472,11 +468,10 @@ class InputSelect extends _uiApi.Component {
       {
         isShowOption,
         isFocused,
-        value,
-        optionNames
+        value
       } = this.state,
       _rootWidthStyle = _crWidthStyle(width, style),
-      [afterInputEl, placeholder] = (0, _crAfterInputEl.default)(this.props, isFocused && value, isShowOption, optionNames, this._refArrowCell, this._hClear, this._hToggleOptions);
+      [afterInputEl, placeholder] = (0, _crAfterInputEl.default)(this.props, isFocused && value, isShowOption, this._refArrowCell, this._hClear, this._hToggleOptions);
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: _CL.CL_ROOT,
       style: _rootWidthStyle,

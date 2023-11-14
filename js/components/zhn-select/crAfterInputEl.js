@@ -17,14 +17,15 @@ const S_ARROW_SHOW = {
     right: 8,
     stroke: '#1b75bb'
   };
-const crAfterInputEl = (props, isBtSvgClear, isShowOption, optionNames, _refArrowCell, _hClear, _hToggleOptions) => {
+const crAfterInputEl = (props, isBtSvgClear, isShowOption, _refArrowCell, _hClear, _hToggleOptions) => {
   const {
-    isLoading,
-    isLoadingFailed,
-    placeholder,
-    optionName,
-    onLoadOption
-  } = props;
+      isLoading,
+      isLoadingFailed,
+      placeholder,
+      optionName,
+      onLoadOption
+    } = props,
+    _optionNames = props.optionNames || optionName || '';
   let _placeholder, _afterInputEl;
   if (!isLoading && !isLoadingFailed) {
     if (isBtSvgClear) {
@@ -41,13 +42,13 @@ const crAfterInputEl = (props, isBtSvgClear, isShowOption, optionNames, _refArro
       });
     }
   } else if (isLoading) {
-    _placeholder = `Loading ${optionNames}...`;
+    _placeholder = `Loading ${_optionNames}...`;
     _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       className: _CL.CL_SPINNER,
       "data-loader": "circle"
     });
   } else if (isLoadingFailed) {
-    _placeholder = `Loading ${optionNames} Failed`;
+    _placeholder = `Loading ${_optionNames} Failed`;
     _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
       className: _CL.CL_SPINNER_FAILED,
       dataLoader: "circle-failed",
