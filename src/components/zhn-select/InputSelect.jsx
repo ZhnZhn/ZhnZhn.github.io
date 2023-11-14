@@ -5,29 +5,26 @@ import {
   focusRefElement
 } from '../uiApi';
 
-import {
-  S_NONE,
-  S_BLOCK
-} from '../styleFn';
-
 import { HAS_TOUCH_EVENTS } from '../has';
 
 import crAfterInputEl from './crAfterInputEl';
-import ItemOptionDf from './ItemOptionDf'
-import OptionList from './OptionList'
-import OptionsFooter from './OptionsFooter'
+import {
+  NO_RESULT,
+  crWidthStyle
+} from './InputSelectFn';
+import ItemOptionDf from './ItemOptionDf';
+import OptionsView from './OptionsView';
+import OptionList from './OptionList';
+
 import {
   CL_ROOT,
   CL_INPUT,
   CL_INPUT_HR,
-  CL_OPTIONS,
-  CL_OPTIONS_DIV,
   CL_OPTIONS_ROW,
   CL_OPTIONS_ROW_ACTIVE
 } from './CL';
 
-const INPUT_PREFIX = 'From input:'
-, NO_RESULT = 'noresult';
+const INPUT_PREFIX = 'From input:';
 
 const _crValue = str => str
   .replace(INPUT_PREFIX, '')
@@ -49,28 +46,6 @@ const _crInputItem = (
     inputValue: _inputValue
   };
 };
-
-const _crWidthStyle = (
-  width,
-  style
-) => width
-  ? ((''+width).indexOf('%') !== -1)
-      ? {...style, width}
-      : {...style, width: width + 'px'}
-  : null;
-
-
-const _crFooterIndex = ({
-  options,
-  initialOptions
-}) => ({
-  _nFiltered: options[0] && (options[0].value !== NO_RESULT)
-     ? options.length
-     : 0,
-  _nAll: initialOptions
-     ? initialOptions.length
-     : 0
-});
 
 const _crInitialStateFromProps = ({
   options
@@ -428,41 +403,6 @@ class InputSelect extends Component {
     return this.optionListCache;
   }
 
-  renderOptions = () => {
-    const { optionsStyle, width, noFooterBts } = this.props
-    , { isShowOption } = this.state
-    , _optionListEl = this._crOptionListWithCache()
-    , _styleOptions = isShowOption ? S_BLOCK : S_NONE
-    , _rootWidthStyle = _crWidthStyle(width, _styleOptions)
-    , { _nFiltered, _nAll } = _crFooterIndex(this.state);
-
-    return (
-        <div
-           className={CL_OPTIONS}
-           style={_rootWidthStyle}
-           data-scrollable={true}
-           tabIndex="-1"
-         >
-          <div
-             ref={this._refOptionsComp}
-             className={CL_OPTIONS_DIV}
-             style={{...optionsStyle, ..._rootWidthStyle}}
-             tabIndex="-1"
-           >
-            {_optionListEl}
-          </div>
-          {<OptionsFooter
-            ref={this._refIndexNode}
-            noFooterBts={noFooterBts}
-            indexActiveOption={this.indexActiveOption}
-            nAll={_nAll}
-            nFiltered={_nFiltered}
-            onClear={this._hClear}
-          />}
-        </div>
-    );
-  }
-
   _hClear = () => {
     this.clearInput()
     this.focusInput()
@@ -482,14 +422,20 @@ class InputSelect extends Component {
   render(){
     const {
       style,
-      width
+      width,
+
+      optionsStyle,
+      noFooterBts
     } = this.props
     , {
       isShowOption,
       isFocused,
       value,
+
+      options,
+      initialOptions
     } = this.state
-    , _rootWidthStyle = _crWidthStyle(width, style)
+    , _rootWidthStyle = crWidthStyle(width, style)
     , [
       afterInputEl,
       placeholder
@@ -525,7 +471,23 @@ class InputSelect extends Component {
         />
         {afterInputEl}
         <hr className={CL_INPUT_HR} />
-        {isShowOption && this.renderOptions()}
+        {isShowOption && <OptionsView
+          optionsStyle={optionsStyle}
+          width={width}
+          noFooterBts={noFooterBts}
+
+          isShowOption={isShowOption}
+          options={options}
+          initialOptions={initialOptions}
+
+          optionListEl={this._crOptionListWithCache()}
+
+          refOptionsComp={this._refOptionsComp}
+          refIndexNode={this._refIndexNode}
+          indexActive={this.indexActiveOption}
+
+          onClear={this._hClear}
+        />}
       </div>
     )
   }

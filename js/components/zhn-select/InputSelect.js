@@ -4,18 +4,17 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _styleFn = require("../styleFn");
 var _has = require("../has");
 var _crAfterInputEl = _interopRequireDefault(require("./crAfterInputEl"));
+var _InputSelectFn = require("./InputSelectFn");
 var _ItemOptionDf = _interopRequireDefault(require("./ItemOptionDf"));
+var _OptionsView = _interopRequireDefault(require("./OptionsView"));
 var _OptionList = _interopRequireDefault(require("./OptionList"));
-var _OptionsFooter = _interopRequireDefault(require("./OptionsFooter"));
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from 'prop-types'
 
-const INPUT_PREFIX = 'From input:',
-  NO_RESULT = 'noresult';
+const INPUT_PREFIX = 'From input:';
 const _crValue = str => str.replace(INPUT_PREFIX, '').trim();
 const _crInputItem = (inputValue, _ref) => {
   let {
@@ -27,31 +26,14 @@ const _crInputItem = (inputValue, _ref) => {
     _caption = isWithInput ? `${INPUT_PREFIX} ${_inputValue}` : 'No results found';
   return {
     [propCaption]: _caption,
-    value: NO_RESULT,
+    value: _InputSelectFn.NO_RESULT,
     inputValue: _inputValue
   };
 };
-const _crWidthStyle = (width, style) => width ? ('' + width).indexOf('%') !== -1 ? {
-  ...style,
-  width
-} : {
-  ...style,
-  width: width + 'px'
-} : null;
-const _crFooterIndex = _ref2 => {
-  let {
-    options,
-    initialOptions
-  } = _ref2;
-  return {
-    _nFiltered: options[0] && options[0].value !== NO_RESULT ? options.length : 0,
-    _nAll: initialOptions ? initialOptions.length : 0
-  };
-};
-const _crInitialStateFromProps = _ref3 => {
+const _crInitialStateFromProps = _ref2 => {
   let {
     options
-  } = _ref3;
+  } = _ref2;
   return {
     value: '',
     isShowOption: false,
@@ -265,7 +247,7 @@ class InputSelect extends _uiApi.Component {
     } = this.props;
     if (!item) {
       onSelect();
-    } else if (item.value !== NO_RESULT) {
+    } else if (item.value !== _InputSelectFn.NO_RESULT) {
       onSelect(item);
     } else if (!isWithInput) {
       onSelect();
@@ -378,46 +360,6 @@ class InputSelect extends _uiApi.Component {
     }
     return this.optionListCache;
   };
-  renderOptions = () => {
-    const {
-        optionsStyle,
-        width,
-        noFooterBts
-      } = this.props,
-      {
-        isShowOption
-      } = this.state,
-      _optionListEl = this._crOptionListWithCache(),
-      _styleOptions = isShowOption ? _styleFn.S_BLOCK : _styleFn.S_NONE,
-      _rootWidthStyle = _crWidthStyle(width, _styleOptions),
-      {
-        _nFiltered,
-        _nAll
-      } = _crFooterIndex(this.state);
-    return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: _CL.CL_OPTIONS,
-      style: _rootWidthStyle,
-      "data-scrollable": true,
-      tabIndex: "-1",
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        ref: this._refOptionsComp,
-        className: _CL.CL_OPTIONS_DIV,
-        style: {
-          ...optionsStyle,
-          ..._rootWidthStyle
-        },
-        tabIndex: "-1",
-        children: _optionListEl
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsFooter.default, {
-        ref: this._refIndexNode,
-        noFooterBts: noFooterBts,
-        indexActiveOption: this.indexActiveOption,
-        nAll: _nAll,
-        nFiltered: _nFiltered,
-        onClear: this._hClear
-      })]
-    });
-  };
   _hClear = () => {
     this.clearInput();
     this.focusInput();
@@ -436,14 +378,18 @@ class InputSelect extends _uiApi.Component {
   render() {
     const {
         style,
-        width
+        width,
+        optionsStyle,
+        noFooterBts
       } = this.props,
       {
         isShowOption,
         isFocused,
-        value
+        value,
+        options,
+        initialOptions
       } = this.state,
-      _rootWidthStyle = _crWidthStyle(width, style),
+      _rootWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, style),
       [afterInputEl, placeholder] = (0, _crAfterInputEl.default)(this.props, isFocused && value, isShowOption, this._hClear, this._hToggleOptions);
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: _CL.CL_ROOT,
@@ -465,7 +411,19 @@ class InputSelect extends _uiApi.Component {
         ...this._touchHandlers
       }), afterInputEl, /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
         className: _CL.CL_INPUT_HR
-      }), isShowOption && this.renderOptions()]
+      }), isShowOption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsView.default, {
+        optionsStyle: optionsStyle,
+        width: width,
+        noFooterBts: noFooterBts,
+        isShowOption: isShowOption,
+        options: options,
+        initialOptions: initialOptions,
+        optionListEl: this._crOptionListWithCache(),
+        refOptionsComp: this._refOptionsComp,
+        refIndexNode: this._refIndexNode,
+        indexActive: this.indexActiveOption,
+        onClear: this._hClear
+      })]
     });
   }
   clearInput = () => {
