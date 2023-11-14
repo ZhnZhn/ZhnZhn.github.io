@@ -2,7 +2,10 @@ export { getColorBlack } from '../components/styleFn';
 
 import Big from 'big.js';
 
+
 import { toTd as _toTd } from '../charts/dateFormat';
+
+export { isTokenInStr } from '../utils/isTokenInStr';
 export { isInArrStr } from '../utils/arrFn';
 import formatAllNumber from '../utils/formatAllNumber';
 import {
@@ -63,11 +66,6 @@ const _fToFloatOr = dfValue => str => {
   const _v = parseFloat(str);
   return _isNaN(_v) ? dfValue : _v;
 };
-
-export const isTokenInStr = (
-  str,
-  token
-) => (str || '').indexOf(token) !== -1
 
 export const toTd = (mls) => isNumber(mls)
   ? _toTd(mls)

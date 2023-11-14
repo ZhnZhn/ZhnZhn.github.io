@@ -7,6 +7,8 @@ var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
 var _dateFormat = require("../charts/dateFormat");
+var _isTokenInStr = require("../utils/isTokenInStr");
+exports.isTokenInStr = _isTokenInStr.isTokenInStr;
 var _arrFn = require("../utils/arrFn");
 exports.isInArrStr = _arrFn.isInArrStr;
 var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
@@ -47,8 +49,6 @@ const _fToFloatOr = dfValue => str => {
   const _v = parseFloat(str);
   return _isNaN(_v) ? dfValue : _v;
 };
-const isTokenInStr = (str, token) => (str || '').indexOf(token) !== -1;
-exports.isTokenInStr = isTokenInStr;
 const toTd = mls => isNumber(mls) ? (0, _dateFormat.toTd)(mls) : '';
 exports.toTd = toTd;
 const getCaption = exports.getCaption = _getPropertyFn.getC;

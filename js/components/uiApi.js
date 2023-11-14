@@ -1,7 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.memo = exports.lazy = exports.isInputValid = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.focusElementById = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.bindTo = exports.Suspense = exports.Component = exports.Children = void 0;
+exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.memo = exports.lazy = exports.isTokenInStr = exports.isInputValid = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.focusElementById = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.bindTo = exports.Suspense = exports.Component = exports.Children = void 0;
+var _isTokenInStr = require("../utils/isTokenInStr");
+exports.isTokenInStr = _isTokenInStr.isTokenInStr;
 var _bindTo = require("../utils/bindTo");
 exports.bindTo = _bindTo.bindTo;
 var _react = require("react");
@@ -83,10 +85,8 @@ const _getFirstTouches = touches => touches && touches[0] || {},
   _getTouchClientX = _fGetTouch(CLIENT_X),
   _getTouchClientY = _fGetTouch(CLIENT_Y),
   _fGetEvt = (propName, getTouch) => evt => evt[propName] || getTouch(evt.targetTouches) || getTouch(evt.changedTouches) || 0;
-const getClientX = _fGetEvt(CLIENT_X, _getTouchClientX);
-exports.getClientX = getClientX;
-const getClientY = _fGetEvt(CLIENT_Y, _getTouchClientY);
-exports.getClientY = getClientY;
+const getClientX = exports.getClientX = _fGetEvt(CLIENT_X, _getTouchClientX);
+const getClientY = exports.getClientY = _fGetEvt(CLIENT_Y, _getTouchClientY);
 const toHref = (href, isHttp) => {
   const protocol = (href || '').split('://')[0];
   return protocol === 'https' || isHttp && protocol === 'http' ? href : void 0;
