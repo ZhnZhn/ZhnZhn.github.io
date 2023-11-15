@@ -30,7 +30,8 @@ import {
 } from './CL';
 
 const INPUT_PREFIX = 'From input:'
-, DF_OPTIONS = [];
+, DF_OPTIONS = []
+, _isArr = Array.isArray;
 
 const _crValue = str => str
   .replace(INPUT_PREFIX, '')
@@ -54,15 +55,22 @@ const _crInputItem = (
 };
 
 const _crInitialStateFromProps = ({
+  propCaption,
   options
 }) => {
-  const _options = options || DF_OPTIONS;
+  const _options = _isArr(options)
+    ? options
+    : DF_OPTIONS;
+
   return {
     value: '',
     isShowOption: false,
 
     initialOptions: _options,
-    options: _options,
+    options: _options.map(item => {
+      item._c = item[propCaption].toLowerCase()
+      return item;
+    }),
     nAll: _options.length,
 
     isFocused: false
@@ -71,12 +79,10 @@ const _crInitialStateFromProps = ({
 
 const _filterOptions = (
   options,
-  value,
-  pnCaption
+  value
 ) => {
    const _value = value.toLowerCase();
-   return options.filter(item => item[pnCaption]
-     .toLowerCase()
+   return options.filter(item => item._c
      .indexOf(_value) !== -1
    );
 }
@@ -86,8 +92,7 @@ const _crFilterOptions = (
   token,
   props
 ) => {
-  const { propCaption } = props;
-  const _arr = _filterOptions(options, token, propCaption);
+  const _arr = _filterOptions(options, token);
   if (_arr.length === 0){
     _arr.push(_crInputItem(token, props))
   }
@@ -266,9 +271,10 @@ class InputSelect extends Component {
           onBlur: this._hBlur
         }
       : void 0
-    this._initProperties()
+
     this._refInput = createRef()
     this._refIndexActive = createRef()
+    this._initProperties()
 
     this.state = _crInitialStateFromProps(props)
   }
@@ -343,12 +349,13 @@ class InputSelect extends Component {
       })
     }
   }
-  
+
   _selectItem = item => {
     const { onSelect, isWithInput } = this.props;
     if (!item) {
       onSelect()
     } else if (item.value !== NO_RESULT) {
+      delete item._c
       onSelect(item)
     } else if (!isWithInput) {
       onSelect()

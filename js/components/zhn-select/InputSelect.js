@@ -15,7 +15,8 @@ var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from 'prop-types'
 
 const INPUT_PREFIX = 'From input:',
-  DF_OPTIONS = [];
+  DF_OPTIONS = [],
+  _isArr = Array.isArray;
 const _crValue = str => str.replace(INPUT_PREFIX, '').trim();
 const _crInputItem = (inputValue, _ref) => {
   let {
@@ -33,27 +34,28 @@ const _crInputItem = (inputValue, _ref) => {
 };
 const _crInitialStateFromProps = _ref2 => {
   let {
+    propCaption,
     options
   } = _ref2;
-  const _options = options || DF_OPTIONS;
+  const _options = _isArr(options) ? options : DF_OPTIONS;
   return {
     value: '',
     isShowOption: false,
     initialOptions: _options,
-    options: _options,
+    options: _options.map(item => {
+      item._c = item[propCaption].toLowerCase();
+      return item;
+    }),
     nAll: _options.length,
     isFocused: false
   };
 };
-const _filterOptions = (options, value, pnCaption) => {
+const _filterOptions = (options, value) => {
   const _value = value.toLowerCase();
-  return options.filter(item => item[pnCaption].toLowerCase().indexOf(_value) !== -1);
+  return options.filter(item => item._c.indexOf(_value) !== -1);
 };
 const _crFilterOptions = (options, token, props) => {
-  const {
-    propCaption
-  } = props;
-  const _arr = _filterOptions(options, token, propCaption);
+  const _arr = _filterOptions(options, token);
   if (_arr.length === 0) {
     _arr.push(_crInputItem(token, props));
   }
@@ -167,9 +169,9 @@ class InputSelect extends _uiApi.Component {
       onFocus: this._hFocus,
       onBlur: this._hBlur
     } : void 0;
-    this._initProperties();
     this._refInput = (0, _uiApi.createRef)();
     this._refIndexActive = (0, _uiApi.createRef)();
+    this._initProperties();
     this.state = _crInitialStateFromProps(props);
   }
   _initProperties = () => {
@@ -243,6 +245,7 @@ class InputSelect extends _uiApi.Component {
     if (!item) {
       onSelect();
     } else if (item.value !== _InputSelectFn.NO_RESULT) {
+      delete item._c;
       onSelect(item);
     } else if (!isWithInput) {
       onSelect();
