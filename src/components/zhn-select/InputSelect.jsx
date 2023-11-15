@@ -2,6 +2,8 @@
 import {
   Component,
   createRef,
+  setRefValue,
+  getRefValue,
   focusRefElement
 } from '../uiApi';
 
@@ -116,7 +118,101 @@ const _makeVisible = (
       optionsComp.scrollTop = 0;
     }
   }
+};
+
+const _decorateCurrentComp = (
+  comp,
+  indexEl,
+  indexActive
+) => {
+  if (comp){
+    comp.classList.add(CL_OPTIONS_ROW_ACTIVE);
+    if (indexEl) {
+      indexEl.textContent = indexActive + 1
+    }
+  }
+};
+
+const _undecorateComp = (comp) => {
+  if (comp){
+    comp.classList.remove(CL_OPTIONS_ROW_ACTIVE);
+  }
+};
+
+const _predicateStepDown = delta => delta > 70
+, _predicateStepUp = delta => delta < 70
+, _decorateByStep = (
+    fnPredicate,
+    comp,
+    indexEl,
+    indexActive,
+    optionsComp
+) => {
+  _decorateCurrentComp(comp, indexEl, indexActive)
+  const deltaTop = _calcDeltaTop(comp, optionsComp);
+  if (fnPredicate(deltaTop)){
+     optionsComp.scrollTop += deltaTop - 70;
+  }
 }
+
+
+const _stepDownOption = (
+  getCurrentComp,
+  refIndexActive,
+  maxIndex,
+  indexEl,
+  optionsComp
+) => {
+  const prevComp = getCurrentComp();
+
+  if (prevComp){
+     _undecorateComp(prevComp);
+
+     setRefValue(refIndexActive, getRefValue(refIndexActive) + 1)
+     if (getRefValue(refIndexActive)>=maxIndex){
+        setRefValue(refIndexActive, 0)
+        optionsComp.scrollTop = 0;
+     }
+
+     _decorateByStep(
+       _predicateStepDown,
+       getCurrentComp(),
+       indexEl,
+       getRefValue(refIndexActive),
+       optionsComp
+     )
+  }
+}
+
+const _stepUpOption = (
+  getCurrentComp,
+  refIndexActive,
+  maxIndex,
+  indexEl,
+  optionsComp
+) => {
+  const prevComp = getCurrentComp();
+  if (prevComp){
+    _undecorateComp(prevComp);
+
+
+    setRefValue(refIndexActive, getRefValue(refIndexActive) - 1)
+    if (getRefValue(refIndexActive) < 0){
+      setRefValue(refIndexActive, maxIndex - 1)
+      const bottomComp = getCurrentComp()
+      optionsComp.scrollTop = bottomComp.offsetTop
+    }
+
+    _decorateByStep(
+      _predicateStepUp,
+      getCurrentComp(),
+      indexEl,
+      getRefValue(refIndexActive),
+      optionsComp
+    )
+  }
+}
+
 
 const FN_NOOP = () => {};
 
@@ -172,13 +268,13 @@ class InputSelect extends Component {
       : void 0
     this._initProperties()
     this._refInput = createRef()
+    this._refIndexActive = createRef()
 
     this.state = _crInitialStateFromProps(props)
   }
 
   _initProperties = () => {
-    this.optionListCache = null
-    this.indexActiveOption = 0
+    setRefValue(this._refIndexActive, 0)
   }
 
   static getDerivedStateFromProps(props, state){
@@ -196,11 +292,13 @@ class InputSelect extends Component {
     }
     //Decorate Active Option and Make Visible
     if (isShowOption){
-      const comp = this._decorateCurrentComp();
+      const comp = this._getCurrentComp()
+      , _indexActive = getRefValue(this._refIndexActive);
+      _decorateCurrentComp(comp, this.indexNode, _indexActive);
       if (!prevState.isShowOption) {
         _makeVisible(
           comp,
-          this.indexActiveOption,
+          _indexActive,
           this.optionsComp
         )
       }
@@ -217,25 +315,9 @@ class InputSelect extends Component {
   }
 
   _getCurrentComp = () => {
-    return this[`v${this.indexActiveOption}`];
+    return this[`v${getRefValue(this._refIndexActive)}`];
   }
-  _decorateCurrentComp = () => {
-    const comp = this._getCurrentComp();
-    if (comp){
-      comp.classList.add(CL_OPTIONS_ROW_ACTIVE);
-      if (this.indexNode) {
-        this.indexNode.textContent = this.indexActiveOption + 1
-      }
-    }
-    return comp;
-  }
-  _undecorateCurrentComp = (comp) => {
-     const _comp = comp || this._getCurrentComp();
-     if (_comp){
-      _comp.classList.remove(CL_OPTIONS_ROW_ACTIVE);
-     }
-  }
-    
+
   _hInputChange = (event) => {
     const { isWithInput, regInput } = this.props
     , token = event.target.value
@@ -250,8 +332,8 @@ class InputSelect extends Component {
     }
 
     if (tokenLn !== valueLn){
-      this._undecorateCurrentComp()
-      this.indexActiveOption = 0;
+      _undecorateComp(this._getCurrentComp())
+      setRefValue(this._refIndexActive, 0)
       const _options = tokenLn > valueLn
         ? options : initialOptions;
       this.setState({
@@ -261,51 +343,7 @@ class InputSelect extends Component {
       })
     }
   }
-
-  _decorateByStep = (isStepDown) => {
-    const fnPredicate = isStepDown
-      ? (delta) => delta > 70
-      : (delta) => delta < 70
-    , comp = this._decorateCurrentComp()
-    , _optionsComp = this.optionsComp
-    , deltaTop = _calcDeltaTop(comp, _optionsComp);
-    if (fnPredicate(deltaTop)){
-       _optionsComp.scrollTop += deltaTop - 70;
-    }
-  }
-
-  _stepDownOption = () => {
-    const prevComp = this._getCurrentComp();
-
-    if (prevComp){
-       this._undecorateCurrentComp(prevComp);
-
-       this.indexActiveOption += 1;
-       if (this.indexActiveOption>=this.state.options.length){
-          this.indexActiveOption = 0;
-          this.optionsComp.scrollTop = 0;
-       }
-
-       this._decorateByStep(true)
-    }
-  }
-
-  _stepUpOption = () => {
-    const prevComp = this._getCurrentComp();
-    if (prevComp){
-      this._undecorateCurrentComp(prevComp);
-
-      this.indexActiveOption -= 1;
-      if (this.indexActiveOption < 0){
-        this.indexActiveOption = this.state.options.length - 1;
-        const bottomComp = this._getCurrentComp()
-        this.optionsComp.scrollTop = bottomComp.offsetTop
-      }
-
-      this._decorateByStep()
-    }
-  }
-
+  
   _selectItem = item => {
     const { onSelect, isWithInput } = this.props;
     if (!item) {
@@ -333,7 +371,7 @@ class InputSelect extends Component {
       // enter
       case 13:{
          const { propCaption } = this.props
-         , item = this.state.options[this.indexActiveOption] || {}
+         , item = this.state.options[getRefValue(this._refIndexActive)] || {}
          , _value = item[propCaption];
 
          if (_value){
@@ -358,13 +396,25 @@ class InputSelect extends Component {
           this.setState({ isShowOption: true })
         } else {
           event.preventDefault()
-          this._stepDownOption()
+          _stepDownOption(
+            this._getCurrentComp,
+            this._refIndexActive,
+            this.state.options.length,
+            this.indexNode,
+            this.optionsComp
+          )
         }
         break;
       case 38: //up
         if (this.state.isShowOption){
           event.preventDefault()
-          this._stepUpOption()
+          _stepUpOption(
+            this._getCurrentComp,
+            this._refIndexActive,
+            this.state.options.length,
+            this.indexNode,
+            this.optionsComp
+          )
         }
         break;
       default: return;
@@ -379,8 +429,8 @@ class InputSelect extends Component {
   }
 
   _hClickItem = (item, index, propCaption) => {
-    this._undecorateCurrentComp()
-    this.indexActiveOption = index;
+    _undecorateComp(this._getCurrentComp())
+    setRefValue(this._refIndexActive, index)
     this.setState({
       value: _crValue(item[propCaption]),
       isShowOption: false
@@ -481,7 +531,7 @@ class InputSelect extends Component {
           refOptionsComp={this._refOptionsComp}
           refOptionNode={this._refOptionNode}
           refIndexNode={this._refIndexNode}
-          indexActive={this.indexActiveOption}
+          indexActive={getRefValue(this._refIndexActive)}
 
           onClickItem={this._hClickItem}
           onClear={this._hClear}
@@ -491,7 +541,7 @@ class InputSelect extends Component {
   }
 
   clearInput = () => {
-    this._undecorateCurrentComp()
+    _undecorateComp(this._getCurrentComp())
     this._selectItem()
     this._setStateToInit(this.props)
   }
