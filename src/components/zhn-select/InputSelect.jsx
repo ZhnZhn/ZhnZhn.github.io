@@ -12,8 +12,6 @@ import {
   focusRefElement
 } from '../uiApi';
 
-import { HAS_TOUCH_EVENTS } from '../has';
-
 import {
   S_NONE,
   S_BLOCK
@@ -37,6 +35,8 @@ import {
 } from './InputSelectFn';
 import ItemOptionDf from './ItemOptionDf';
 import OptionsView from './OptionsView';
+
+import useTouchHandlers from './useTouchHandlers';
 
 import {
   CL_ROOT,
@@ -76,14 +76,17 @@ const InputSelect = forwardRef(({
   , _refOptionsComp = useRef()
   , _refIndexNode = useRef()
 
-  , _refBlurId = useRef()
-
   , _refOptionNode = useCallback((n, index) => {
     const _hmItems = getRefValue(_refHmItems);
     if (_hmItems) {
       _hmItems[`v${index}`] = n
     }
   }, [])
+
+  , [
+    isFocused,
+    touchHandlers
+  ] = useTouchHandlers()
 
   , [
     state,
@@ -98,15 +101,9 @@ const InputSelect = forwardRef(({
     initialOptions,
 
     isShowOption,
-    isFocused,
     nAll
   } = state
-
-  , _initProperties = () => {
-    setRefValue(_refIndexActive, 0)
-    setRefValue(_refHmItems, Object.create(null))
-  }
-
+  
   , _getCurrentComp = useCallback(
     () => getRefValue(_refHmItems)[`v${getRefValue(_refIndexActive)}`]
   , [])
@@ -287,45 +284,16 @@ const InputSelect = forwardRef(({
     _focusInput()
   }, [])
 
-  , _hFocus = useCallback(() => {
-    clearTimeout(getRefValue(_refBlurId))
-    setState(prevState => ({
-      ...prevState,
-      isFocused: true
-    }))
-  }, [])
-  , _hBlur = useCallback(() => {
-    setRefValue(_refBlurId, setTimeout(
-      () => setState(prevState => ({
-        ...prevState,
-        isFocused: false
-      })),
-      800
-    ))
-  }, [])
-  , _refTouchHandlers = useRef(HAS_TOUCH_EVENTS
-    ? {
-        onFocus: _hFocus,
-        onBlur: _hBlur
-      }
-    : void 0
-  )
 
   useImperativeHandle(ref, () => ({
     clearInput: _clearInput,
     focusInput: _focusInput
   }))
 
-  useEffect(() => {
-    _initProperties()
-    return () => {
-      clearTimeout(getRefValue(_refBlurId))
-    }
-  }, [])
-
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    _initProperties()
+    setRefValue(_refIndexActive, 0)
+    setRefValue(_refHmItems, Object.create(null))
     setState(crInitialStateFromProps(
       propCaption,
       propsOptions
@@ -392,7 +360,7 @@ const InputSelect = forwardRef(({
          placeholder={_placeholder}
          onChange={_hInputChange}
          onKeyDown={_hInputKeyDown}
-         {...getRefValue(_refTouchHandlers)}
+         {...touchHandlers}
       />
       {afterInputEl}
       <hr className={CL_INPUT_HR} />

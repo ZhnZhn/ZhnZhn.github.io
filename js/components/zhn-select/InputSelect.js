@@ -4,12 +4,12 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _has = require("../has");
 var _styleFn = require("../styleFn");
 var _crAfterInputEl = _interopRequireDefault(require("./crAfterInputEl"));
 var _InputSelectFn = require("./InputSelectFn");
 var _ItemOptionDf = _interopRequireDefault(require("./ItemOptionDf"));
 var _OptionsView = _interopRequireDefault(require("./OptionsView"));
+var _useTouchHandlers = _interopRequireDefault(require("./useTouchHandlers"));
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 const FN_NOOP = () => {};
@@ -38,26 +38,21 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     _refHmItems = (0, _uiApi.useRef)(),
     _refOptionsComp = (0, _uiApi.useRef)(),
     _refIndexNode = (0, _uiApi.useRef)(),
-    _refBlurId = (0, _uiApi.useRef)(),
     _refOptionNode = (0, _uiApi.useCallback)((n, index) => {
       const _hmItems = (0, _uiApi.getRefValue)(_refHmItems);
       if (_hmItems) {
         _hmItems[`v${index}`] = n;
       }
     }, []),
+    [isFocused, touchHandlers] = (0, _useTouchHandlers.default)(),
     [state, setState] = (0, _uiApi.useState)(() => (0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions)),
     {
       value,
       options,
       initialOptions,
       isShowOption,
-      isFocused,
       nAll
     } = state,
-    _initProperties = () => {
-      (0, _uiApi.setRefValue)(_refIndexActive, 0);
-      (0, _uiApi.setRefValue)(_refHmItems, Object.create(null));
-    },
     _getCurrentComp = (0, _uiApi.useCallback)(() => (0, _uiApi.getRefValue)(_refHmItems)[`v${(0, _uiApi.getRefValue)(_refIndexActive)}`], [])
 
     /*eslint-disable react-hooks/exhaustive-deps */,
@@ -214,38 +209,16 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     _hClear = (0, _uiApi.useCallback)(() => {
       _clearInput();
       _focusInput();
-    }, []),
-    _hFocus = (0, _uiApi.useCallback)(() => {
-      clearTimeout((0, _uiApi.getRefValue)(_refBlurId));
-      setState(prevState => ({
-        ...prevState,
-        isFocused: true
-      }));
-    }, []),
-    _hBlur = (0, _uiApi.useCallback)(() => {
-      (0, _uiApi.setRefValue)(_refBlurId, setTimeout(() => setState(prevState => ({
-        ...prevState,
-        isFocused: false
-      })), 800));
-    }, []),
-    _refTouchHandlers = (0, _uiApi.useRef)(_has.HAS_TOUCH_EVENTS ? {
-      onFocus: _hFocus,
-      onBlur: _hBlur
-    } : void 0);
+    }, []);
   (0, _uiApi.useImperativeHandle)(ref, () => ({
     clearInput: _clearInput,
     focusInput: _focusInput
   }));
-  (0, _uiApi.useEffect)(() => {
-    _initProperties();
-    return () => {
-      clearTimeout((0, _uiApi.getRefValue)(_refBlurId));
-    };
-  }, []);
 
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
-    _initProperties();
+    (0, _uiApi.setRefValue)(_refIndexActive, 0);
+    (0, _uiApi.setRefValue)(_refHmItems, Object.create(null));
     setState((0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions));
   }, [propsOptions]);
   //propCaption
@@ -283,7 +256,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
       placeholder: _placeholder,
       onChange: _hInputChange,
       onKeyDown: _hInputKeyDown,
-      ...(0, _uiApi.getRefValue)(_refTouchHandlers)
+      ...touchHandlers
     }), afterInputEl, /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
       className: _CL.CL_INPUT_HR
     }), isShowOption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsView.default, {
