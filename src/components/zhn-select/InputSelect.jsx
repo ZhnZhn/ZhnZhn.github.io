@@ -274,6 +274,11 @@ class InputSelect extends Component {
 
     this._refInput = createRef()
     this._refIndexActive = createRef()
+
+    this._refHmItems = createRef()
+    this._refOptionsComp = createRef()
+    this._refIndexNode = createRef()
+
     this._initProperties()
 
     this.state = _crInitialStateFromProps(props)
@@ -281,6 +286,7 @@ class InputSelect extends Component {
 
   _initProperties = () => {
     setRefValue(this._refIndexActive, 0)
+    setRefValue(this._refHmItems, Object.create(null))
   }
 
   static getDerivedStateFromProps(props, state){
@@ -300,12 +306,16 @@ class InputSelect extends Component {
     if (isShowOption){
       const comp = this._getCurrentComp()
       , _indexActive = getRefValue(this._refIndexActive);
-      _decorateCurrentComp(comp, this.indexNode, _indexActive);
+      _decorateCurrentComp(
+        comp,
+        getRefValue(this._refIndexNode),
+        _indexActive
+      );
       if (!prevState.isShowOption) {
         _makeVisible(
           comp,
           _indexActive,
-          this.optionsComp
+          getRefValue(this._refOptionsComp)
         )
       }
     }
@@ -321,7 +331,7 @@ class InputSelect extends Component {
   }
 
   _getCurrentComp = () => {
-    return this[`v${getRefValue(this._refIndexActive)}`];
+    return getRefValue(this._refHmItems)[`v${getRefValue(this._refIndexActive)}`];
   }
 
   _hInputChange = (event) => {
@@ -407,8 +417,8 @@ class InputSelect extends Component {
             this._getCurrentComp,
             this._refIndexActive,
             this.state.options.length,
-            this.indexNode,
-            this.optionsComp
+            getRefValue(this._refIndexNode),
+            getRefValue(this._refOptionsComp)
           )
         }
         break;
@@ -419,8 +429,8 @@ class InputSelect extends Component {
             this._getCurrentComp,
             this._refIndexActive,
             this.state.options.length,
-            this.indexNode,
-            this.optionsComp
+            getRefValue(this._refIndexNode),
+            getRefValue(this._refOptionsComp)
           )
         }
         break;
@@ -445,9 +455,13 @@ class InputSelect extends Component {
     this._selectItem(item)
   }
 
-  _refOptionsComp = c => this.optionsComp = c
-  _refOptionNode = (n, index) => this[`v${index}`] = n
-  _refIndexNode = n => this.indexNode = n
+
+  _refOptionNode = (n, index) => {
+    const _hmItems = getRefValue(this._refHmItems);
+    if (_hmItems) {
+      _hmItems[`v${index}`] = n
+    }
+  }
 
   _hClear = () => {
     this.clearInput()

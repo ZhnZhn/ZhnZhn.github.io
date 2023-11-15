@@ -171,11 +171,15 @@ class InputSelect extends _uiApi.Component {
     } : void 0;
     this._refInput = (0, _uiApi.createRef)();
     this._refIndexActive = (0, _uiApi.createRef)();
+    this._refHmItems = (0, _uiApi.createRef)();
+    this._refOptionsComp = (0, _uiApi.createRef)();
+    this._refIndexNode = (0, _uiApi.createRef)();
     this._initProperties();
     this.state = _crInitialStateFromProps(props);
   }
   _initProperties = () => {
     (0, _uiApi.setRefValue)(this._refIndexActive, 0);
+    (0, _uiApi.setRefValue)(this._refHmItems, Object.create(null));
   };
   static getDerivedStateFromProps(props, state) {
     //Init state for new options from props
@@ -194,9 +198,9 @@ class InputSelect extends _uiApi.Component {
     if (isShowOption) {
       const comp = this._getCurrentComp(),
         _indexActive = (0, _uiApi.getRefValue)(this._refIndexActive);
-      _decorateCurrentComp(comp, this.indexNode, _indexActive);
+      _decorateCurrentComp(comp, (0, _uiApi.getRefValue)(this._refIndexNode), _indexActive);
       if (!prevState.isShowOption) {
-        _makeVisible(comp, _indexActive, this.optionsComp);
+        _makeVisible(comp, _indexActive, (0, _uiApi.getRefValue)(this._refOptionsComp));
       }
     }
   }
@@ -208,7 +212,7 @@ class InputSelect extends _uiApi.Component {
     this.setState(_crInitialStateFromProps(props));
   };
   _getCurrentComp = () => {
-    return this[`v${(0, _uiApi.getRefValue)(this._refIndexActive)}`];
+    return (0, _uiApi.getRefValue)(this._refHmItems)[`v${(0, _uiApi.getRefValue)(this._refIndexActive)}`];
   };
   _hInputChange = event => {
     const {
@@ -303,14 +307,14 @@ class InputSelect extends _uiApi.Component {
           });
         } else {
           event.preventDefault();
-          _stepDownOption(this._getCurrentComp, this._refIndexActive, this.state.options.length, this.indexNode, this.optionsComp);
+          _stepDownOption(this._getCurrentComp, this._refIndexActive, this.state.options.length, (0, _uiApi.getRefValue)(this._refIndexNode), (0, _uiApi.getRefValue)(this._refOptionsComp));
         }
         break;
       case 38:
         //up
         if (this.state.isShowOption) {
           event.preventDefault();
-          _stepUpOption(this._getCurrentComp, this._refIndexActive, this.state.options.length, this.indexNode, this.optionsComp);
+          _stepUpOption(this._getCurrentComp, this._refIndexActive, this.state.options.length, (0, _uiApi.getRefValue)(this._refIndexNode), (0, _uiApi.getRefValue)(this._refOptionsComp));
         }
         break;
       default:
@@ -332,9 +336,12 @@ class InputSelect extends _uiApi.Component {
     });
     this._selectItem(item);
   };
-  _refOptionsComp = c => this.optionsComp = c;
-  _refOptionNode = (n, index) => this[`v${index}`] = n;
-  _refIndexNode = n => this.indexNode = n;
+  _refOptionNode = (n, index) => {
+    const _hmItems = (0, _uiApi.getRefValue)(this._refHmItems);
+    if (_hmItems) {
+      _hmItems[`v${index}`] = n;
+    }
+  };
   _hClear = () => {
     this.clearInput();
     this.focusInput();
