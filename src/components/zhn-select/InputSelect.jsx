@@ -17,7 +17,18 @@ import {
 import crAfterInputEl from './crAfterInputEl';
 import {
   NO_RESULT,
-  crWidthStyle
+  crWidthStyle,
+
+  crValue,
+  crInitialStateFromProps,
+  crFilterOptions,
+
+  makeVisible,
+  decorateCurrentComp,
+  undecorateComp,
+
+  stepDownOption,
+  stepUpOption
 } from './InputSelectFn';
 import ItemOptionDf from './ItemOptionDf';
 import OptionsView from './OptionsView';
@@ -25,199 +36,8 @@ import OptionsView from './OptionsView';
 import {
   CL_ROOT,
   CL_INPUT,
-  CL_INPUT_HR,
-  CL_OPTIONS_ROW_ACTIVE
+  CL_INPUT_HR
 } from './CL';
-
-const INPUT_PREFIX = 'From input:'
-, DF_OPTIONS = []
-, _isArr = Array.isArray;
-
-const _crValue = str => str
-  .replace(INPUT_PREFIX, '')
-  .trim();
-
-const _crInputItem = (
-  inputValue, {
-  propCaption,
-  isWithInput,
-  maxInput
-}) => {
-  const _inputValue = inputValue.slice(0, maxInput)
-  , _caption = isWithInput
-       ? `${INPUT_PREFIX} ${_inputValue}`
-       : 'No results found';
-  return {
-    [propCaption]: _caption,
-    value: NO_RESULT,
-    inputValue: _inputValue
-  };
-};
-
-const _crInitialStateFromProps = ({
-  propCaption,
-  options
-}) => {
-  const _options = _isArr(options)
-    ? options
-    : DF_OPTIONS;
-
-  return {
-    value: '',
-    isShowOption: false,
-
-    initialOptions: _options,
-    options: _options.map(item => {
-      item._c = item[propCaption].toLowerCase()
-      return item;
-    }),
-    nAll: _options.length,
-
-    isFocused: false
-  };
-}
-
-const _filterOptions = (
-  options,
-  value
-) => {
-   const _value = value.toLowerCase();
-   return options.filter(item => item._c
-     .indexOf(_value) !== -1
-   );
-}
-
-const _crFilterOptions = (
-  options,
-  token,
-  props
-) => {
-  const _arr = _filterOptions(options, token);
-  if (_arr.length === 0){
-    _arr.push(_crInputItem(token, props))
-  }
-  return _arr;
-}
-
-const _calcDeltaTop = (
-  comp,
-  optionsComp
-) => comp && optionsComp
-  ? comp.offsetTop - optionsComp.scrollTop
-  : void 0;
-
-const _makeVisible = (
-  comp,
-  indexActive,
-  optionsComp
-) => {
-  if (comp){
-    if (indexActive === 0){
-      return;
-    }
-    const deltaTop = _calcDeltaTop(comp, optionsComp);
-    if (deltaTop > 70){
-      optionsComp.scrollTop += deltaTop - 70;
-    }
-    if (deltaTop < 0){
-      optionsComp.scrollTop = 0;
-    }
-  }
-};
-
-const _decorateCurrentComp = (
-  comp,
-  indexEl,
-  indexActive
-) => {
-  if (comp){
-    comp.classList.add(CL_OPTIONS_ROW_ACTIVE);
-    if (indexEl) {
-      indexEl.textContent = indexActive + 1
-    }
-  }
-};
-
-const _undecorateComp = (comp) => {
-  if (comp){
-    comp.classList.remove(CL_OPTIONS_ROW_ACTIVE);
-  }
-};
-
-const _predicateStepDown = delta => delta > 70
-, _predicateStepUp = delta => delta < 70
-, _decorateByStep = (
-    fnPredicate,
-    comp,
-    indexEl,
-    indexActive,
-    optionsComp
-) => {
-  _decorateCurrentComp(comp, indexEl, indexActive)
-  const deltaTop = _calcDeltaTop(comp, optionsComp);
-  if (fnPredicate(deltaTop)){
-     optionsComp.scrollTop += deltaTop - 70;
-  }
-}
-
-
-const _stepDownOption = (
-  getCurrentComp,
-  refIndexActive,
-  maxIndex,
-  indexEl,
-  optionsComp
-) => {
-  const prevComp = getCurrentComp();
-
-  if (prevComp){
-     _undecorateComp(prevComp);
-
-     setRefValue(refIndexActive, getRefValue(refIndexActive) + 1)
-     if (getRefValue(refIndexActive)>=maxIndex){
-        setRefValue(refIndexActive, 0)
-        optionsComp.scrollTop = 0;
-     }
-
-     _decorateByStep(
-       _predicateStepDown,
-       getCurrentComp(),
-       indexEl,
-       getRefValue(refIndexActive),
-       optionsComp
-     )
-  }
-}
-
-const _stepUpOption = (
-  getCurrentComp,
-  refIndexActive,
-  maxIndex,
-  indexEl,
-  optionsComp
-) => {
-  const prevComp = getCurrentComp();
-  if (prevComp){
-    _undecorateComp(prevComp);
-
-
-    setRefValue(refIndexActive, getRefValue(refIndexActive) - 1)
-    if (getRefValue(refIndexActive) < 0){
-      setRefValue(refIndexActive, maxIndex - 1)
-      const bottomComp = getCurrentComp()
-      optionsComp.scrollTop = bottomComp.offsetTop
-    }
-
-    _decorateByStep(
-      _predicateStepUp,
-      getCurrentComp(),
-      indexEl,
-      getRefValue(refIndexActive),
-      optionsComp
-    )
-  }
-}
-
 
 const FN_NOOP = () => {};
 
@@ -281,7 +101,7 @@ class InputSelect extends Component {
 
     this._initProperties()
 
-    this.state = _crInitialStateFromProps(props)
+    this.state = crInitialStateFromProps(props)
   }
 
   _initProperties = () => {
@@ -292,7 +112,7 @@ class InputSelect extends Component {
   static getDerivedStateFromProps(props, state){
      //Init state for new options from props
      return props.options !== state.initialOptions
-       ? _crInitialStateFromProps(props)
+       ? crInitialStateFromProps(props)
        : null;
   }
 
@@ -306,13 +126,13 @@ class InputSelect extends Component {
     if (isShowOption){
       const comp = this._getCurrentComp()
       , _indexActive = getRefValue(this._refIndexActive);
-      _decorateCurrentComp(
+      decorateCurrentComp(
         comp,
         getRefValue(this._refIndexNode),
         _indexActive
       );
       if (!prevState.isShowOption) {
-        _makeVisible(
+        makeVisible(
           comp,
           _indexActive,
           getRefValue(this._refOptionsComp)
@@ -327,7 +147,7 @@ class InputSelect extends Component {
 
   _setStateToInit = (props) => {
     this._initProperties()
-    this.setState(_crInitialStateFromProps(props))
+    this.setState(crInitialStateFromProps(props))
   }
 
   _getCurrentComp = () => {
@@ -348,14 +168,14 @@ class InputSelect extends Component {
     }
 
     if (tokenLn !== valueLn){
-      _undecorateComp(this._getCurrentComp())
+      undecorateComp(this._getCurrentComp())
       setRefValue(this._refIndexActive, 0)
       const _options = tokenLn > valueLn
         ? options : initialOptions;
       this.setState({
         value: token,
         isShowOption: true,
-        options: _crFilterOptions(_options, token, this.props)
+        options: crFilterOptions(_options, token, this.props)
       })
     }
   }
@@ -393,7 +213,7 @@ class InputSelect extends Component {
 
          if (_value){
            this.setState({
-             value: _crValue(_value),
+             value: crValue(_value),
              isShowOption: false,
            });
            this._selectItem(item)
@@ -413,7 +233,7 @@ class InputSelect extends Component {
           this.setState({ isShowOption: true })
         } else {
           event.preventDefault()
-          _stepDownOption(
+          stepDownOption(
             this._getCurrentComp,
             this._refIndexActive,
             this.state.options.length,
@@ -425,7 +245,7 @@ class InputSelect extends Component {
       case 38: //up
         if (this.state.isShowOption){
           event.preventDefault()
-          _stepUpOption(
+          stepUpOption(
             this._getCurrentComp,
             this._refIndexActive,
             this.state.options.length,
@@ -446,10 +266,10 @@ class InputSelect extends Component {
   }
 
   _hClickItem = (item, index, propCaption) => {
-    _undecorateComp(this._getCurrentComp())
+    undecorateComp(this._getCurrentComp())
     setRefValue(this._refIndexActive, index)
     this.setState({
-      value: _crValue(item[propCaption]),
+      value: crValue(item[propCaption]),
       isShowOption: false
     });
     this._selectItem(item)
@@ -562,7 +382,7 @@ class InputSelect extends Component {
   }
 
   clearInput = () => {
-    _undecorateComp(this._getCurrentComp())
+    undecorateComp(this._getCurrentComp())
     this._selectItem()
     this._setStateToInit(this.props)
   }

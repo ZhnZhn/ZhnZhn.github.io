@@ -14,115 +14,6 @@ var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from 'prop-types'
 
-const INPUT_PREFIX = 'From input:',
-  DF_OPTIONS = [],
-  _isArr = Array.isArray;
-const _crValue = str => str.replace(INPUT_PREFIX, '').trim();
-const _crInputItem = (inputValue, _ref) => {
-  let {
-    propCaption,
-    isWithInput,
-    maxInput
-  } = _ref;
-  const _inputValue = inputValue.slice(0, maxInput),
-    _caption = isWithInput ? `${INPUT_PREFIX} ${_inputValue}` : 'No results found';
-  return {
-    [propCaption]: _caption,
-    value: _InputSelectFn.NO_RESULT,
-    inputValue: _inputValue
-  };
-};
-const _crInitialStateFromProps = _ref2 => {
-  let {
-    propCaption,
-    options
-  } = _ref2;
-  const _options = _isArr(options) ? options : DF_OPTIONS;
-  return {
-    value: '',
-    isShowOption: false,
-    initialOptions: _options,
-    options: _options.map(item => {
-      item._c = item[propCaption].toLowerCase();
-      return item;
-    }),
-    nAll: _options.length,
-    isFocused: false
-  };
-};
-const _filterOptions = (options, value) => {
-  const _value = value.toLowerCase();
-  return options.filter(item => item._c.indexOf(_value) !== -1);
-};
-const _crFilterOptions = (options, token, props) => {
-  const _arr = _filterOptions(options, token);
-  if (_arr.length === 0) {
-    _arr.push(_crInputItem(token, props));
-  }
-  return _arr;
-};
-const _calcDeltaTop = (comp, optionsComp) => comp && optionsComp ? comp.offsetTop - optionsComp.scrollTop : void 0;
-const _makeVisible = (comp, indexActive, optionsComp) => {
-  if (comp) {
-    if (indexActive === 0) {
-      return;
-    }
-    const deltaTop = _calcDeltaTop(comp, optionsComp);
-    if (deltaTop > 70) {
-      optionsComp.scrollTop += deltaTop - 70;
-    }
-    if (deltaTop < 0) {
-      optionsComp.scrollTop = 0;
-    }
-  }
-};
-const _decorateCurrentComp = (comp, indexEl, indexActive) => {
-  if (comp) {
-    comp.classList.add(_CL.CL_OPTIONS_ROW_ACTIVE);
-    if (indexEl) {
-      indexEl.textContent = indexActive + 1;
-    }
-  }
-};
-const _undecorateComp = comp => {
-  if (comp) {
-    comp.classList.remove(_CL.CL_OPTIONS_ROW_ACTIVE);
-  }
-};
-const _predicateStepDown = delta => delta > 70,
-  _predicateStepUp = delta => delta < 70,
-  _decorateByStep = (fnPredicate, comp, indexEl, indexActive, optionsComp) => {
-    _decorateCurrentComp(comp, indexEl, indexActive);
-    const deltaTop = _calcDeltaTop(comp, optionsComp);
-    if (fnPredicate(deltaTop)) {
-      optionsComp.scrollTop += deltaTop - 70;
-    }
-  };
-const _stepDownOption = (getCurrentComp, refIndexActive, maxIndex, indexEl, optionsComp) => {
-  const prevComp = getCurrentComp();
-  if (prevComp) {
-    _undecorateComp(prevComp);
-    (0, _uiApi.setRefValue)(refIndexActive, (0, _uiApi.getRefValue)(refIndexActive) + 1);
-    if ((0, _uiApi.getRefValue)(refIndexActive) >= maxIndex) {
-      (0, _uiApi.setRefValue)(refIndexActive, 0);
-      optionsComp.scrollTop = 0;
-    }
-    _decorateByStep(_predicateStepDown, getCurrentComp(), indexEl, (0, _uiApi.getRefValue)(refIndexActive), optionsComp);
-  }
-};
-const _stepUpOption = (getCurrentComp, refIndexActive, maxIndex, indexEl, optionsComp) => {
-  const prevComp = getCurrentComp();
-  if (prevComp) {
-    _undecorateComp(prevComp);
-    (0, _uiApi.setRefValue)(refIndexActive, (0, _uiApi.getRefValue)(refIndexActive) - 1);
-    if ((0, _uiApi.getRefValue)(refIndexActive) < 0) {
-      (0, _uiApi.setRefValue)(refIndexActive, maxIndex - 1);
-      const bottomComp = getCurrentComp();
-      optionsComp.scrollTop = bottomComp.offsetTop;
-    }
-    _decorateByStep(_predicateStepUp, getCurrentComp(), indexEl, (0, _uiApi.getRefValue)(refIndexActive), optionsComp);
-  }
-};
 const FN_NOOP = () => {};
 class InputSelect extends _uiApi.Component {
   /*
@@ -175,7 +66,7 @@ class InputSelect extends _uiApi.Component {
     this._refOptionsComp = (0, _uiApi.createRef)();
     this._refIndexNode = (0, _uiApi.createRef)();
     this._initProperties();
-    this.state = _crInitialStateFromProps(props);
+    this.state = (0, _InputSelectFn.crInitialStateFromProps)(props);
   }
   _initProperties = () => {
     (0, _uiApi.setRefValue)(this._refIndexActive, 0);
@@ -183,7 +74,7 @@ class InputSelect extends _uiApi.Component {
   };
   static getDerivedStateFromProps(props, state) {
     //Init state for new options from props
-    return props.options !== state.initialOptions ? _crInitialStateFromProps(props) : null;
+    return props.options !== state.initialOptions ? (0, _InputSelectFn.crInitialStateFromProps)(props) : null;
   }
   componentDidUpdate(prevProps, prevState) {
     const {
@@ -198,9 +89,9 @@ class InputSelect extends _uiApi.Component {
     if (isShowOption) {
       const comp = this._getCurrentComp(),
         _indexActive = (0, _uiApi.getRefValue)(this._refIndexActive);
-      _decorateCurrentComp(comp, (0, _uiApi.getRefValue)(this._refIndexNode), _indexActive);
+      (0, _InputSelectFn.decorateCurrentComp)(comp, (0, _uiApi.getRefValue)(this._refIndexNode), _indexActive);
       if (!prevState.isShowOption) {
-        _makeVisible(comp, _indexActive, (0, _uiApi.getRefValue)(this._refOptionsComp));
+        (0, _InputSelectFn.makeVisible)(comp, _indexActive, (0, _uiApi.getRefValue)(this._refOptionsComp));
       }
     }
   }
@@ -209,7 +100,7 @@ class InputSelect extends _uiApi.Component {
   }
   _setStateToInit = props => {
     this._initProperties();
-    this.setState(_crInitialStateFromProps(props));
+    this.setState((0, _InputSelectFn.crInitialStateFromProps)(props));
   };
   _getCurrentComp = () => {
     return (0, _uiApi.getRefValue)(this._refHmItems)[`v${(0, _uiApi.getRefValue)(this._refIndexActive)}`];
@@ -231,13 +122,13 @@ class InputSelect extends _uiApi.Component {
       return;
     }
     if (tokenLn !== valueLn) {
-      _undecorateComp(this._getCurrentComp());
+      (0, _InputSelectFn.undecorateComp)(this._getCurrentComp());
       (0, _uiApi.setRefValue)(this._refIndexActive, 0);
       const _options = tokenLn > valueLn ? options : initialOptions;
       this.setState({
         value: token,
         isShowOption: true,
-        options: _crFilterOptions(_options, token, this.props)
+        options: (0, _InputSelectFn.crFilterOptions)(_options, token, this.props)
       });
     }
   };
@@ -278,7 +169,7 @@ class InputSelect extends _uiApi.Component {
             _value = item[propCaption];
           if (_value) {
             this.setState({
-              value: _crValue(_value),
+              value: (0, _InputSelectFn.crValue)(_value),
               isShowOption: false
             });
             this._selectItem(item);
@@ -307,14 +198,14 @@ class InputSelect extends _uiApi.Component {
           });
         } else {
           event.preventDefault();
-          _stepDownOption(this._getCurrentComp, this._refIndexActive, this.state.options.length, (0, _uiApi.getRefValue)(this._refIndexNode), (0, _uiApi.getRefValue)(this._refOptionsComp));
+          (0, _InputSelectFn.stepDownOption)(this._getCurrentComp, this._refIndexActive, this.state.options.length, (0, _uiApi.getRefValue)(this._refIndexNode), (0, _uiApi.getRefValue)(this._refOptionsComp));
         }
         break;
       case 38:
         //up
         if (this.state.isShowOption) {
           event.preventDefault();
-          _stepUpOption(this._getCurrentComp, this._refIndexActive, this.state.options.length, (0, _uiApi.getRefValue)(this._refIndexNode), (0, _uiApi.getRefValue)(this._refOptionsComp));
+          (0, _InputSelectFn.stepUpOption)(this._getCurrentComp, this._refIndexActive, this.state.options.length, (0, _uiApi.getRefValue)(this._refIndexNode), (0, _uiApi.getRefValue)(this._refOptionsComp));
         }
         break;
       default:
@@ -328,10 +219,10 @@ class InputSelect extends _uiApi.Component {
     }));
   };
   _hClickItem = (item, index, propCaption) => {
-    _undecorateComp(this._getCurrentComp());
+    (0, _InputSelectFn.undecorateComp)(this._getCurrentComp());
     (0, _uiApi.setRefValue)(this._refIndexActive, index);
     this.setState({
-      value: _crValue(item[propCaption]),
+      value: (0, _InputSelectFn.crValue)(item[propCaption]),
       isShowOption: false
     });
     this._selectItem(item);
@@ -414,7 +305,7 @@ class InputSelect extends _uiApi.Component {
     });
   }
   clearInput = () => {
-    _undecorateComp(this._getCurrentComp());
+    (0, _InputSelectFn.undecorateComp)(this._getCurrentComp());
     this._selectItem();
     this._setStateToInit(this.props);
   };
