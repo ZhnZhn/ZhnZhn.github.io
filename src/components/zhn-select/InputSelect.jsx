@@ -37,6 +37,7 @@ import ItemOptionDf from './ItemOptionDf';
 import OptionsView from './OptionsView';
 
 import useTouchHandlers from './useTouchHandlers';
+import useOptionsElement from './useOptionsElement';
 
 import {
   CL_ROOT,
@@ -70,18 +71,16 @@ const InputSelect = forwardRef(({
   onLoadOption=FN_NOOP
 }, ref) => {
   const _refInput = useRef()
-  , _refIndexActive = useRef()
 
-  , _refHmItems = useRef()
   , _refOptionsComp = useRef()
   , _refIndexNode = useRef()
 
-  , _refOptionNode = useCallback((n, index) => {
-    const _hmItems = getRefValue(_refHmItems);
-    if (_hmItems) {
-      _hmItems[`v${index}`] = n
-    }
-  }, [])
+  , [
+    _initHmItems,
+    _refOptionNode,
+    _getCurrentComp,
+    _refIndexActive
+  ] = useOptionsElement()
 
   , [
     isFocused,
@@ -103,10 +102,6 @@ const InputSelect = forwardRef(({
     isShowOption,
     nAll
   } = state
-  
-  , _getCurrentComp = useCallback(
-    () => getRefValue(_refHmItems)[`v${getRefValue(_refIndexActive)}`]
-  , [])
 
   /*eslint-disable react-hooks/exhaustive-deps */
   , _decorateCurrentComp = useCallback(() => {
@@ -292,8 +287,7 @@ const InputSelect = forwardRef(({
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    setRefValue(_refIndexActive, 0)
-    setRefValue(_refHmItems, Object.create(null))
+    _initHmItems()
     setState(crInitialStateFromProps(
       propCaption,
       propsOptions
@@ -317,7 +311,6 @@ const InputSelect = forwardRef(({
   }, [isShowOption])
   // _getCurrentComp
   /*eslint-unable react-hooks/exhaustive-deps */
-
 
   const _rootWidthStyle = crWidthStyle(width, style)
   , [

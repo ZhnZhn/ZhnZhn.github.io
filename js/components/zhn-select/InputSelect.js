@@ -10,6 +10,7 @@ var _InputSelectFn = require("./InputSelectFn");
 var _ItemOptionDf = _interopRequireDefault(require("./ItemOptionDf"));
 var _OptionsView = _interopRequireDefault(require("./OptionsView"));
 var _useTouchHandlers = _interopRequireDefault(require("./useTouchHandlers"));
+var _useOptionsElement = _interopRequireDefault(require("./useOptionsElement"));
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 const FN_NOOP = () => {};
@@ -34,16 +35,9 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     onLoadOption = FN_NOOP
   } = _ref;
   const _refInput = (0, _uiApi.useRef)(),
-    _refIndexActive = (0, _uiApi.useRef)(),
-    _refHmItems = (0, _uiApi.useRef)(),
     _refOptionsComp = (0, _uiApi.useRef)(),
     _refIndexNode = (0, _uiApi.useRef)(),
-    _refOptionNode = (0, _uiApi.useCallback)((n, index) => {
-      const _hmItems = (0, _uiApi.getRefValue)(_refHmItems);
-      if (_hmItems) {
-        _hmItems[`v${index}`] = n;
-      }
-    }, []),
+    [_initHmItems, _refOptionNode, _getCurrentComp, _refIndexActive] = (0, _useOptionsElement.default)(),
     [isFocused, touchHandlers] = (0, _useTouchHandlers.default)(),
     [state, setState] = (0, _uiApi.useState)(() => (0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions)),
     {
@@ -52,8 +46,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
       initialOptions,
       isShowOption,
       nAll
-    } = state,
-    _getCurrentComp = (0, _uiApi.useCallback)(() => (0, _uiApi.getRefValue)(_refHmItems)[`v${(0, _uiApi.getRefValue)(_refIndexActive)}`], [])
+    } = state
 
     /*eslint-disable react-hooks/exhaustive-deps */,
     _decorateCurrentComp = (0, _uiApi.useCallback)(() => {
@@ -217,8 +210,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
 
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
-    (0, _uiApi.setRefValue)(_refIndexActive, 0);
-    (0, _uiApi.setRefValue)(_refHmItems, Object.create(null));
+    _initHmItems();
     setState((0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions));
   }, [propsOptions]);
   //propCaption
