@@ -17,15 +17,8 @@ const S_ARROW_SHOW = {
     right: 8,
     stroke: '#1b75bb'
   };
-const crAfterInputEl = (props, isBtSvgClear, isShowOption, _hClear, _hToggleOptions) => {
-  const {
-      isLoading,
-      isLoadingFailed,
-      placeholder,
-      optionName,
-      onLoadOption
-    } = props,
-    _optionNames = props.optionNames || optionName || '';
+const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isBtSvgClear, isShowOption, _hClear, _hToggleOptions) => {
+  const _optionNames = optionNames || optionName || '';
   let _placeholder, _afterInputEl;
   if (!isLoading && !isLoadingFailed) {
     if (isBtSvgClear) {

@@ -29,20 +29,16 @@ const _crInputItem = (inputValue, _ref) => {
     inputValue: _inputValue
   };
 };
-const crInitialStateFromProps = _ref2 => {
-  let {
-    propCaption,
-    options
-  } = _ref2;
+const crInitialStateFromProps = (propCaption, options) => {
   const _options = _isArr(options) ? options : DF_OPTIONS;
+  _options.forEach(item => {
+    item._c = item[propCaption].toLowerCase();
+  });
   return {
     value: '',
     isShowOption: false,
     initialOptions: _options,
-    options: _options.map(item => {
-      item._c = item[propCaption].toLowerCase();
-      return item;
-    }),
+    options: _options,
     nAll: _options.length,
     isFocused: false
   };

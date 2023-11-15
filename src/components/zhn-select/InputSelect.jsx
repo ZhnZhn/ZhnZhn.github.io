@@ -1,7 +1,12 @@
-//import PropTypes from 'prop-types'
 import {
-  Component,
-  createRef,
+  forwardRef,
+
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+
   setRefValue,
   getRefValue,
   focusRefElement
@@ -41,124 +46,85 @@ import {
 
 const FN_NOOP = () => {};
 
-class InputSelect extends Component {
-  /*
-  static propTypes = {
-     propCaption: PropTypes.string,
-     ItemOptionComp: PropTypes.element,
-     width: PropTypes.string,
-     style: PropTypes.object,
-     optionsStyle: PropTypes.object,
-     options: PropTypes.arrayOf(PropTypes.shape({
-        caption: PropTypes.string,
-        value: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.number
-        ])
-     })),
-     optionName: PropTypes.string,
-     optionNames: PropTypes.string,
-     placeholder: PropTypes.string,
-     isWithInput: PropTypes.bool,
-     prefixInput: PropTypes.string
+const InputSelect = forwardRef(({
+  propCaption='caption',
+  ItemOptionComp=ItemOptionDf,
+  options: propsOptions,
+  optionName='',
+  isWithInput=false,
+  maxInput=10,
+  regInput=/[A-Za-z0-9()^ ]/,
 
-     isLoading: PropTypes.bool,
-     isLoadingFailed: PropTypes.bool,
-     noFooterBts: PropTypes.bool
+  style,
+  width,
 
-     onSelect: PropTypes.func,
-     onLoadOption: PropTypes.func
-  }
-  */
+  optionsStyle,
+  noFooterBts,
 
-  static defaultProps = {
-    propCaption: 'caption',
-    ItemOptionComp: ItemOptionDf,
-    optionName: '',
-    isWithInput: false,
-    maxInput: 10,
-    regInput: /[A-Za-z0-9()^ ]/,
-    //prefixInput: 'From Input:',
-    onSelect: FN_NOOP,
-    onLoadOption: FN_NOOP
-  }
+  isLoading,
+  isLoadingFailed,
+  placeholder,
+  optionNames,
 
-  constructor(props){
-    super(props)
-    this._touchHandlers = HAS_TOUCH_EVENTS
-      ? {
-          onFocus: this._hFocus,
-          onBlur: this._hBlur
-        }
-      : void 0
+  onSelect=FN_NOOP,
+  onLoadOption=FN_NOOP
+}, ref) => {
+  const _refInput = useRef()
+  , _refIndexActive = useRef()
 
-    this._refInput = createRef()
-    this._refIndexActive = createRef()
+  , _refHmItems = useRef()
+  , _refOptionsComp = useRef()
+  , _refIndexNode = useRef()
 
-    this._refHmItems = createRef()
-    this._refOptionsComp = createRef()
-    this._refIndexNode = createRef()
+  , _refBlurId = useRef()
 
-    this._initProperties()
-
-    this.state = crInitialStateFromProps(props)
-  }
-
-  _initProperties = () => {
-    setRefValue(this._refIndexActive, 0)
-    setRefValue(this._refHmItems, Object.create(null))
-  }
-
-  static getDerivedStateFromProps(props, state){
-     //Init state for new options from props
-     return props.options !== state.initialOptions
-       ? crInitialStateFromProps(props)
-       : null;
-  }
-
-  componentDidUpdate(prevProps, prevState){
-    const { initialOptions, isShowOption } = this.state;
-    // Init from props for new options from props
-    if (prevState.initialOptions !== initialOptions) {
-      this._initProperties()
+  , _refOptionNode = useCallback((n, index) => {
+    const _hmItems = getRefValue(_refHmItems);
+    if (_hmItems) {
+      _hmItems[`v${index}`] = n
     }
-    //Decorate Active Option and Make Visible
-    if (isShowOption){
-      const comp = this._getCurrentComp()
-      , _indexActive = getRefValue(this._refIndexActive);
-      decorateCurrentComp(
-        comp,
-        getRefValue(this._refIndexNode),
-        _indexActive
-      );
-      if (!prevState.isShowOption) {
-        makeVisible(
-          comp,
-          _indexActive,
-          getRefValue(this._refOptionsComp)
-        )
-      }
-    }
+  }, [])
+
+  , [
+    state,
+    setState
+  ] = useState(() => crInitialStateFromProps(
+    propCaption,
+    propsOptions
+  ))
+  , {
+    value,
+    options,
+    initialOptions,
+
+    isShowOption,
+    isFocused,
+    nAll
+  } = state
+
+  , _initProperties = () => {
+    setRefValue(_refIndexActive, 0)
+    setRefValue(_refHmItems, Object.create(null))
   }
 
-  componentWillUnmount() {
-    clearTimeout(this._blurId)
-  }
+  , _getCurrentComp = useCallback(
+    () => getRefValue(_refHmItems)[`v${getRefValue(_refIndexActive)}`]
+  , [])
 
-  _setStateToInit = (props) => {
-    this._initProperties()
-    this.setState(crInitialStateFromProps(props))
-  }
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _decorateCurrentComp = useCallback(() => {
+    decorateCurrentComp(
+      _getCurrentComp(),
+      getRefValue(_refIndexNode),
+      getRefValue(_refIndexActive)
+    )
+  }, [])
+  // _getCurrentComp
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  _getCurrentComp = () => {
-    return getRefValue(this._refHmItems)[`v${getRefValue(this._refIndexActive)}`];
-  }
-
-  _hInputChange = (event) => {
-    const { isWithInput, regInput } = this.props
-    , token = event.target.value
+  , _hInputChange = (event) => {
+    const token = event.target.value
     , tokenLn = token.length
-    , { value, options, initialOptions } = this.state
     , valueLn = value.length;
 
     if ( isWithInput
@@ -168,89 +134,122 @@ class InputSelect extends Component {
     }
 
     if (tokenLn !== valueLn){
-      undecorateComp(this._getCurrentComp())
-      setRefValue(this._refIndexActive, 0)
+      undecorateComp(_getCurrentComp())
+      setRefValue(_refIndexActive, 0)
+      _decorateCurrentComp()
       const _options = tokenLn > valueLn
-        ? options : initialOptions;
-      this.setState({
+        ? options
+        : initialOptions;
+      setState(prevState => ({
+        ...prevState,
         value: token,
         isShowOption: true,
-        options: crFilterOptions(_options, token, this.props)
+        options: crFilterOptions(
+          _options,
+          token, {
+          propCaption,
+          isWithInput,
+          maxInput
+        })
+      }))
+    }
+  }
+
+  /*eslint-disable react-hooks/exhaustive-deps */
+ , _selectItem = useCallback(item => {
+   if (!item) {
+     onSelect()
+   } else if (item.value !== NO_RESULT) {
+     const _item = {...item};
+     delete _item._c
+     onSelect(_item)
+   } else if (!isWithInput) {
+     onSelect()
+   } else {
+     const _value = item.inputValue.trim();
+     if (!_value) {
+       onSelect()
+     } else {
+       onSelect({
+        caption: _value,
+        value: _value,
+        isInput: true
       })
-    }
-  }
+     }
+   }
+ }, [])
+ // isWithInput, onSelect
+ /*eslint-unable react-hooks/exhaustive-deps */
 
-  _selectItem = item => {
-    const { onSelect, isWithInput } = this.props;
-    if (!item) {
-      onSelect()
-    } else if (item.value !== NO_RESULT) {
-      delete item._c
-      onSelect(item)
-    } else if (!isWithInput) {
-      onSelect()
-    } else {
-      const _value = item.inputValue.trim();
-      if (!_value) {
-        onSelect()
-      } else {
-        onSelect({
-         caption: _value,
-         value: _value,
-         isInput: true
-       })
-      }
-    }
-  }
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _clearInput = useCallback(() => {
+    undecorateComp(_getCurrentComp())
+    setRefValue(_refIndexActive, 0)
+    _selectItem()
+    setState(prevState => ({
+      ...prevState,
+      options: prevState.initialOptions,
+      isShowOption: false,
+      value: ''
+    }))
+  }, [])
+  // _getCurrentComp, _selectItem
+  /*eslint-enable react-hooks/exhaustive-deps */
 
-  _hInputKeyDown = (event) => {
+  , _hInputKeyDown = (event) => {
     switch(event.keyCode){
       // enter
       case 13:{
-         const { propCaption } = this.props
-         , item = this.state.options[getRefValue(this._refIndexActive)] || {}
+         const item = options[getRefValue(_refIndexActive)] || {}
          , _value = item[propCaption];
 
          if (_value){
-           this.setState({
+           setState(prevState => ({
+             ...prevState,
              value: crValue(_value),
              isShowOption: false,
-           });
-           this._selectItem(item)
+           }));
+           _selectItem(item)
          }
       break; }
       //escape, delete
       case 27: case 46: {
         event.preventDefault()
-        if (this.state.isShowOption){
-          this.setState({ isShowOption: false });
+        if (isShowOption){
+          setState(prevState => ({
+            ...prevState,
+            isShowOption: false
+          }));
         } else {
-          this.clearInput()
+          _clearInput()
         }
       break;}
       case 40: //down
-        if (!this.state.isShowOption){
-          this.setState({ isShowOption: true })
+        if (!isShowOption){
+          setState(prevState => ({
+            ...prevState,
+            isShowOption: true
+          }))
         } else {
           event.preventDefault()
           stepDownOption(
-            this._getCurrentComp,
-            this._refIndexActive,
-            this.state.options.length,
-            getRefValue(this._refIndexNode),
-            getRefValue(this._refOptionsComp)
+            _getCurrentComp,
+            _refIndexActive,
+            options.length,
+            getRefValue(_refIndexNode),
+            getRefValue(_refOptionsComp)
           )
         }
         break;
       case 38: //up
-        if (this.state.isShowOption){
+        if (isShowOption){
           event.preventDefault()
           stepUpOption(
-            this._getCurrentComp,
-            this._refIndexActive,
-            this.state.options.length,
-            getRefValue(this._refIndexNode),
-            getRefValue(this._refOptionsComp)
+            _getCurrentComp,
+            _refIndexActive,
+            options.length,
+            getRefValue(_refIndexNode),
+            getRefValue(_refOptionsComp)
           )
         }
         break;
@@ -258,139 +257,166 @@ class InputSelect extends Component {
     }
   }
 
-  _hToggleOptions = () => {
-    this.setState(prevState => ({
+  , _hToggleOptions = () => {
+    setState(prevState => ({
       ...prevState,
       isShowOption: !prevState.isShowOption
     }))
   }
 
-  _hClickItem = (item, index, propCaption) => {
-    undecorateComp(this._getCurrentComp())
-    setRefValue(this._refIndexActive, index)
-    this.setState({
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _hClickItem = useCallback((item, index, propCaption) => {
+    undecorateComp(_getCurrentComp())
+    setRefValue(_refIndexActive, index)
+    setState(prevState => ({
+      ...prevState,
       value: crValue(item[propCaption]),
       isShowOption: false
-    });
-    this._selectItem(item)
-  }
+    }));
+    _selectItem(item)
+  }, [_selectItem])
+  // _getCurrentComp
+  /*eslint-unable react-hooks/exhaustive-deps */
 
+  , _focusInput = useCallback(() => {
+    focusRefElement(_refInput)
+  }, [])
 
-  _refOptionNode = (n, index) => {
-    const _hmItems = getRefValue(this._refHmItems);
-    if (_hmItems) {
-      _hmItems[`v${index}`] = n
-    }
-  }
+  , _hClear = useCallback(() => {
+    _clearInput()
+    _focusInput()
+  }, [])
 
-  _hClear = () => {
-    this.clearInput()
-    this.focusInput()
-  }
-
-  _hFocus = () => {
-    clearTimeout(this._blurId)
-    this.setState({ isFocused: true })
-  }
-  _hBlur = () => {
-    this._blurId = setTimeout(
-      () => this.setState({ isFocused: false }),
+  , _hFocus = useCallback(() => {
+    clearTimeout(getRefValue(_refBlurId))
+    setState(prevState => ({
+      ...prevState,
+      isFocused: true
+    }))
+  }, [])
+  , _hBlur = useCallback(() => {
+    setRefValue(_refBlurId, setTimeout(
+      () => setState(prevState => ({
+        ...prevState,
+        isFocused: false
+      })),
       800
-    )
-  }
+    ))
+  }, [])
+  , _refTouchHandlers = useRef(HAS_TOUCH_EVENTS
+    ? {
+        onFocus: _hFocus,
+        onBlur: _hBlur
+      }
+    : void 0
+  )
 
-  render(){
-    const {
-      style,
-      width,
+  useImperativeHandle(ref, () => ({
+    clearInput: _clearInput,
+    focusInput: _focusInput
+  }))
 
+  useEffect(() => {
+    _initProperties()
+    return () => {
+      clearTimeout(getRefValue(_refBlurId))
+    }
+  }, [])
+
+  /*eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    _initProperties()
+    setState(crInitialStateFromProps(
       propCaption,
-      ItemOptionComp,
+      propsOptions
+    ))
+  }, [propsOptions])
+  //propCaption
+  /*eslint-unable react-hooks/exhaustive-deps */
 
-      optionsStyle,
-      noFooterBts
-    } = this.props
-    , {
-      isShowOption,
-      isFocused,
-      value,
+  /*eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    if (isShowOption){
+      const comp = _getCurrentComp()
+      , _indexActive = getRefValue(_refIndexActive);
+      _decorateCurrentComp()
+      makeVisible(
+        comp,
+        _indexActive,
+        getRefValue(_refOptionsComp)
+      )
+    }
+  }, [isShowOption])
+  // _getCurrentComp
+  /*eslint-unable react-hooks/exhaustive-deps */
 
-      options,
-      nAll
-    } = this.state
-    , _rootWidthStyle = crWidthStyle(width, style)
-    , [
-      afterInputEl,
-      placeholder
-    ] = crAfterInputEl(
-      this.props,
 
-      isFocused && value,
-      isShowOption,
+  const _rootWidthStyle = crWidthStyle(width, style)
+  , [
+    afterInputEl,
+    _placeholder
+  ] = crAfterInputEl(
+    isLoading,
+    isLoadingFailed,
+    placeholder,
+    optionName,
+    optionNames,
+    onLoadOption,
 
-      this._hClear,
-      this._hToggleOptions
-    )
-    , _optionViewWidthStyle = crWidthStyle(
-        width,
-        isShowOption ? S_BLOCK : S_NONE
-    );
+    isFocused && value,
+    isShowOption,
 
-    return (
-      <div
-        className={CL_ROOT}
-        style={_rootWidthStyle}
-      >
-        <input
-           ref={this._refInput}
-           className={CL_INPUT}
-           type="text"
-           name="select"
-           //autoComplete="off"
-           autoCorrect="off"
-           autoCapitalize="off"
-           spellCheck={false}
-           value={value}
-           placeholder={placeholder}
-           onChange={this._hInputChange}
-           onKeyDown={this._hInputKeyDown}
-           {...this._touchHandlers}
-        />
-        {afterInputEl}
-        <hr className={CL_INPUT_HR} />
-        {isShowOption && <OptionsView
-          widthStyle={_optionViewWidthStyle}
+    _hClear,
+    _hToggleOptions
+  )
+  , _optionViewWidthStyle = crWidthStyle(
+      width,
+      isShowOption ? S_BLOCK : S_NONE
+  );
 
-          optionsStyle={optionsStyle}
-          propCaption={propCaption}
-          ItemOptionComp={ItemOptionComp}
-          noFooterBts={noFooterBts}
+  return (
+    <div
+      className={CL_ROOT}
+      style={_rootWidthStyle}
+    >
+      <input
+         ref={_refInput}
+         className={CL_INPUT}
+         type="text"
+         name="select"
+         //autoComplete="off"
+         autoCorrect="off"
+         autoCapitalize="off"
+         spellCheck={false}
+         value={value}
+         placeholder={_placeholder}
+         onChange={_hInputChange}
+         onKeyDown={_hInputKeyDown}
+         {...getRefValue(_refTouchHandlers)}
+      />
+      {afterInputEl}
+      <hr className={CL_INPUT_HR} />
+      {isShowOption && <OptionsView
+        widthStyle={_optionViewWidthStyle}
 
-          options={options}
-          nAll={nAll}
+        optionsStyle={optionsStyle}
+        propCaption={propCaption}
+        ItemOptionComp={ItemOptionComp}
+        noFooterBts={noFooterBts}
 
-          refOptionsComp={this._refOptionsComp}
-          refOptionNode={this._refOptionNode}
-          refIndexNode={this._refIndexNode}
-          indexActive={getRefValue(this._refIndexActive)}
+        options={options}
+        nAll={nAll}
 
-          onClickItem={this._hClickItem}
-          onClear={this._hClear}
-        />}
-      </div>
-    )
-  }
+        refOptionsComp={_refOptionsComp}
+        refOptionNode={_refOptionNode}
+        refIndexNode={_refIndexNode}
+        indexActive={getRefValue(_refIndexActive)}
 
-  clearInput = () => {
-    undecorateComp(this._getCurrentComp())
-    this._selectItem()
-    this._setStateToInit(this.props)
-  }
-
-  focusInput(){
-    focusRefElement(this._refInput)
-  }
-
-}
+        onClickItem={_hClickItem}
+        onClear={_hClear}
+      />}
+    </div>
+  );
+})
 
 export default InputSelect
