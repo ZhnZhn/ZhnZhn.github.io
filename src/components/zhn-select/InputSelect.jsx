@@ -76,10 +76,10 @@ const InputSelect = forwardRef(({
   , _refIndexNode = useRef()
 
   , [
+    _refIndexActive,
     _initHmItems,
     _refOptionNode,
-    _getCurrentComp,
-    _refIndexActive
+    _getCurrentComp    
   ] = useOptionsElement()
 
   , [
