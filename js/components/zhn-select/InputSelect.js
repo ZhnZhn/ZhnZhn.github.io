@@ -37,7 +37,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
   const _refInput = (0, _uiApi.useRef)(),
     _refOptionsComp = (0, _uiApi.useRef)(),
     _refIndexNode = (0, _uiApi.useRef)(),
-    [_initHmItems, _refOptionNode, _getCurrentComp, _refIndexActive] = (0, _useOptionsElement.default)(),
+    [_refIndexActive, _initHmItems, _refOptionNode, _getCurrentComp] = (0, _useOptionsElement.default)(),
     [isFocused, touchHandlers] = (0, _useTouchHandlers.default)(),
     [state, setState] = (0, _uiApi.useState)(() => (0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions)),
     {
@@ -49,38 +49,11 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     } = state
 
     /*eslint-disable react-hooks/exhaustive-deps */,
-    _decorateCurrentComp = (0, _uiApi.useCallback)(() => {
+    [_decorateCurrentComp, _selectItem] = (0, _uiApi.useMemo)(() => [() => {
       (0, _InputSelectFn.decorateCurrentComp)(_getCurrentComp(), (0, _uiApi.getRefValue)(_refIndexNode), (0, _uiApi.getRefValue)(_refIndexActive));
-    }, [])
+    },
     // _getCurrentComp
-    /*eslint-enable react-hooks/exhaustive-deps */,
-    _hInputChange = event => {
-      const token = event.target.value,
-        tokenLn = token.length,
-        valueLn = value.length;
-      if (isWithInput && tokenLn > 0 && !regInput.test(token[tokenLn - 1])) {
-        return;
-      }
-      if (tokenLn !== valueLn) {
-        (0, _InputSelectFn.undecorateComp)(_getCurrentComp());
-        (0, _uiApi.setRefValue)(_refIndexActive, 0);
-        _decorateCurrentComp();
-        const _options = tokenLn > valueLn ? options : initialOptions;
-        setState(prevState => ({
-          ...prevState,
-          value: token,
-          isShowOption: true,
-          options: (0, _InputSelectFn.crFilterOptions)(_options, token, {
-            propCaption,
-            isWithInput,
-            maxInput
-          })
-        }));
-      }
-    }
-
-    /*eslint-disable react-hooks/exhaustive-deps */,
-    _selectItem = (0, _uiApi.useCallback)(item => {
+    item => {
       if (!item) {
         onSelect();
       } else if (item.value !== _InputSelectFn.NO_RESULT) {
@@ -103,12 +76,36 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
           });
         }
       }
-    }, [])
+    }
     // isWithInput, onSelect
-    /*eslint-unable react-hooks/exhaustive-deps */
+    ], [])
+    /*eslint-enable react-hooks/exhaustive-deps */,
+    _hInputChange = evt => {
+      const token = evt.target.value,
+        tokenLn = token.length,
+        valueLn = value.length;
+      if (isWithInput && tokenLn > 0 && !regInput.test(token[tokenLn - 1])) {
+        return;
+      }
+      if (tokenLn !== valueLn) {
+        (0, _InputSelectFn.undecorateComp)(_getCurrentComp());
+        (0, _uiApi.setRefValue)(_refIndexActive, 0);
+        _decorateCurrentComp();
+        setState(prevState => ({
+          ...prevState,
+          value: token,
+          isShowOption: true,
+          options: (0, _InputSelectFn.crFilterOptions)(tokenLn > valueLn ? options : initialOptions, token, {
+            propCaption,
+            isWithInput,
+            maxInput
+          })
+        }));
+      }
+    }
 
     /*eslint-disable react-hooks/exhaustive-deps */,
-    _clearInput = (0, _uiApi.useCallback)(() => {
+    _clearInput = (0, _uiApi.useMemo)(() => () => {
       (0, _InputSelectFn.undecorateComp)(_getCurrentComp());
       (0, _uiApi.setRefValue)(_refIndexActive, 0);
       _selectItem();
@@ -121,8 +118,8 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     }, [])
     // _getCurrentComp, _selectItem
     /*eslint-enable react-hooks/exhaustive-deps */,
-    _hInputKeyDown = event => {
-      switch (event.keyCode) {
+    _hInputKeyDown = evt => {
+      switch (evt.keyCode) {
         // enter
         case 13:
           {
@@ -142,7 +139,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
         case 27:
         case 46:
           {
-            event.preventDefault();
+            evt.preventDefault();
             if (isShowOption) {
               setState(prevState => ({
                 ...prevState,
@@ -161,30 +158,24 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
               isShowOption: true
             }));
           } else {
-            event.preventDefault();
+            evt.preventDefault();
             (0, _InputSelectFn.stepDownOption)(_getCurrentComp, _refIndexActive, options.length, (0, _uiApi.getRefValue)(_refIndexNode), (0, _uiApi.getRefValue)(_refOptionsComp));
           }
           break;
         case 38:
           //up
           if (isShowOption) {
-            event.preventDefault();
+            evt.preventDefault();
             (0, _InputSelectFn.stepUpOption)(_getCurrentComp, _refIndexActive, options.length, (0, _uiApi.getRefValue)(_refIndexNode), (0, _uiApi.getRefValue)(_refOptionsComp));
           }
           break;
         default:
           return;
       }
-    },
-    _hToggleOptions = () => {
-      setState(prevState => ({
-        ...prevState,
-        isShowOption: !prevState.isShowOption
-      }));
     }
 
     /*eslint-disable react-hooks/exhaustive-deps */,
-    _hClickItem = (0, _uiApi.useCallback)((item, index, propCaption) => {
+    [_hClickItem, _hToggleOptions, _focusInput, _hClear] = (0, _uiApi.useMemo)(() => [(item, index, propCaption) => {
       (0, _InputSelectFn.undecorateComp)(_getCurrentComp());
       (0, _uiApi.setRefValue)(_refIndexActive, index);
       setState(prevState => ({
@@ -193,16 +184,23 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
         isShowOption: false
       }));
       _selectItem(item);
-    }, [_selectItem])
-    // _getCurrentComp
-    /*eslint-unable react-hooks/exhaustive-deps */,
-    _focusInput = (0, _uiApi.useCallback)(() => {
+    },
+    // _getCurrentComp, _refIndexActive, _selectItem
+    () => {
+      setState(prevState => ({
+        ...prevState,
+        isShowOption: !prevState.isShowOption
+      }));
+    }, () => {
       (0, _uiApi.focusRefElement)(_refInput);
-    }, []),
-    _hClear = (0, _uiApi.useCallback)(() => {
+    }, () => {
       _clearInput();
       _focusInput();
-    }, []);
+    }
+    // _clearInput
+    ], []);
+  /*eslint-enable react-hooks/exhaustive-deps */
+
   (0, _uiApi.useImperativeHandle)(ref, () => ({
     clearInput: _clearInput,
     focusInput: _focusInput
@@ -219,10 +217,8 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
     if (isShowOption) {
-      const comp = _getCurrentComp(),
-        _indexActive = (0, _uiApi.getRefValue)(_refIndexActive);
       _decorateCurrentComp();
-      (0, _InputSelectFn.makeVisible)(comp, _indexActive, (0, _uiApi.getRefValue)(_refOptionsComp));
+      (0, _InputSelectFn.makeVisible)(_getCurrentComp(), (0, _uiApi.getRefValue)(_refIndexActive), (0, _uiApi.getRefValue)(_refOptionsComp));
     }
   }, [isShowOption]);
   // _getCurrentComp
@@ -238,9 +234,8 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
       ref: _refInput,
       className: _CL.CL_INPUT,
       type: "text",
-      name: "select"
-      //autoComplete="off"
-      ,
+      name: "select",
+      autoComplete: "off",
       autoCorrect: "off",
       autoCapitalize: "off",
       spellCheck: false,

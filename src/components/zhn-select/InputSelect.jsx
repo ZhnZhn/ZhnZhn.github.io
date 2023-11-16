@@ -3,7 +3,7 @@ import {
 
   useRef,
   useState,
-  useCallback,
+  useMemo,
   useEffect,
   useImperativeHandle,
 
@@ -79,7 +79,7 @@ const InputSelect = forwardRef(({
     _refIndexActive,
     _initHmItems,
     _refOptionNode,
-    _getCurrentComp    
+    _getCurrentComp
   ] = useOptionsElement()
 
   , [
@@ -104,18 +104,46 @@ const InputSelect = forwardRef(({
   } = state
 
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _decorateCurrentComp = useCallback(() => {
-    decorateCurrentComp(
-      _getCurrentComp(),
-      getRefValue(_refIndexNode),
-      getRefValue(_refIndexActive)
-    )
-  }, [])
-  // _getCurrentComp
+  , [
+    _decorateCurrentComp,
+    _selectItem
+  ] = useMemo(() => [
+    () => {
+      decorateCurrentComp(
+        _getCurrentComp(),
+        getRefValue(_refIndexNode),
+        getRefValue(_refIndexActive)
+      )
+    },
+    // _getCurrentComp
+    item => {
+      if (!item) {
+        onSelect()
+      } else if (item.value !== NO_RESULT) {
+        const _item = {...item};
+        delete _item._c
+        onSelect(_item)
+      } else if (!isWithInput) {
+        onSelect()
+      } else {
+        const _value = item.inputValue.trim();
+        if (!_value) {
+          onSelect()
+        } else {
+          onSelect({
+           caption: _value,
+           value: _value,
+           isInput: true
+         })
+        }
+      }
+    }
+    // isWithInput, onSelect
+  ], [])
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  , _hInputChange = (event) => {
-    const token = event.target.value
+  , _hInputChange = (evt) => {
+    const token = evt.target.value
     , tokenLn = token.length
     , valueLn = value.length;
 
@@ -129,15 +157,14 @@ const InputSelect = forwardRef(({
       undecorateComp(_getCurrentComp())
       setRefValue(_refIndexActive, 0)
       _decorateCurrentComp()
-      const _options = tokenLn > valueLn
-        ? options
-        : initialOptions;
       setState(prevState => ({
         ...prevState,
         value: token,
         isShowOption: true,
         options: crFilterOptions(
-          _options,
+          tokenLn > valueLn
+            ? options
+            : initialOptions,
           token, {
           propCaption,
           isWithInput,
@@ -148,33 +175,7 @@ const InputSelect = forwardRef(({
   }
 
   /*eslint-disable react-hooks/exhaustive-deps */
- , _selectItem = useCallback(item => {
-   if (!item) {
-     onSelect()
-   } else if (item.value !== NO_RESULT) {
-     const _item = {...item};
-     delete _item._c
-     onSelect(_item)
-   } else if (!isWithInput) {
-     onSelect()
-   } else {
-     const _value = item.inputValue.trim();
-     if (!_value) {
-       onSelect()
-     } else {
-       onSelect({
-        caption: _value,
-        value: _value,
-        isInput: true
-      })
-     }
-   }
- }, [])
- // isWithInput, onSelect
- /*eslint-unable react-hooks/exhaustive-deps */
-
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _clearInput = useCallback(() => {
+  , _clearInput = useMemo(() => () => {
     undecorateComp(_getCurrentComp())
     setRefValue(_refIndexActive, 0)
     _selectItem()
@@ -188,8 +189,8 @@ const InputSelect = forwardRef(({
   // _getCurrentComp, _selectItem
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  , _hInputKeyDown = (event) => {
-    switch(event.keyCode){
+  , _hInputKeyDown = (evt) => {
+    switch(evt.keyCode){
       // enter
       case 13:{
          const item = options[getRefValue(_refIndexActive)] || {}
@@ -206,7 +207,7 @@ const InputSelect = forwardRef(({
       break; }
       //escape, delete
       case 27: case 46: {
-        event.preventDefault()
+        evt.preventDefault()
         if (isShowOption){
           setState(prevState => ({
             ...prevState,
@@ -223,7 +224,7 @@ const InputSelect = forwardRef(({
             isShowOption: true
           }))
         } else {
-          event.preventDefault()
+          evt.preventDefault()
           stepDownOption(
             _getCurrentComp,
             _refIndexActive,
@@ -235,7 +236,7 @@ const InputSelect = forwardRef(({
         break;
       case 38: //up
         if (isShowOption){
-          event.preventDefault()
+          evt.preventDefault()
           stepUpOption(
             _getCurrentComp,
             _refIndexActive,
@@ -249,36 +250,40 @@ const InputSelect = forwardRef(({
     }
   }
 
-  , _hToggleOptions = () => {
-    setState(prevState => ({
-      ...prevState,
-      isShowOption: !prevState.isShowOption
-    }))
-  }
-
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hClickItem = useCallback((item, index, propCaption) => {
-    undecorateComp(_getCurrentComp())
-    setRefValue(_refIndexActive, index)
-    setState(prevState => ({
-      ...prevState,
-      value: crValue(item[propCaption]),
-      isShowOption: false
-    }));
-    _selectItem(item)
-  }, [_selectItem])
-  // _getCurrentComp
-  /*eslint-unable react-hooks/exhaustive-deps */
-
-  , _focusInput = useCallback(() => {
-    focusRefElement(_refInput)
-  }, [])
-
-  , _hClear = useCallback(() => {
-    _clearInput()
-    _focusInput()
-  }, [])
-
+  , [
+    _hClickItem,
+    _hToggleOptions,
+    _focusInput,
+    _hClear
+  ] = useMemo(() => [
+    (item, index, propCaption) => {
+       undecorateComp(_getCurrentComp())
+       setRefValue(_refIndexActive, index)
+       setState(prevState => ({
+         ...prevState,
+         value: crValue(item[propCaption]),
+         isShowOption: false
+       }));
+       _selectItem(item)
+    },
+    // _getCurrentComp, _refIndexActive, _selectItem
+    () => {
+      setState(prevState => ({
+        ...prevState,
+        isShowOption: !prevState.isShowOption
+      }))
+    },
+    () => {
+      focusRefElement(_refInput)
+    },
+    () => {
+      _clearInput()
+      _focusInput()
+    }
+    // _clearInput
+  ], []);
+  /*eslint-enable react-hooks/exhaustive-deps */
 
   useImperativeHandle(ref, () => ({
     clearInput: _clearInput,
@@ -299,12 +304,10 @@ const InputSelect = forwardRef(({
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (isShowOption){
-      const comp = _getCurrentComp()
-      , _indexActive = getRefValue(_refIndexActive);
       _decorateCurrentComp()
       makeVisible(
-        comp,
-        _indexActive,
+        _getCurrentComp(),
+        getRefValue(_refIndexActive),
         getRefValue(_refOptionsComp)
       )
     }
@@ -345,7 +348,7 @@ const InputSelect = forwardRef(({
          className={CL_INPUT}
          type="text"
          name="select"
-         //autoComplete="off"
+         autoComplete="off"
          autoCorrect="off"
          autoCapitalize="off"
          spellCheck={false}
