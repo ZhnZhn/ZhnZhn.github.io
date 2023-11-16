@@ -39,8 +39,7 @@ const crInitialStateFromProps = (propCaption, options) => {
     isShowOption: false,
     initialOptions: _options,
     options: _options,
-    nAll: _options.length,
-    isFocused: false
+    nAll: _options.length
   };
 };
 exports.crInitialStateFromProps = crInitialStateFromProps;

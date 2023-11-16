@@ -14,33 +14,7 @@ const useTouchHandlers = () => {
   , [
     isFocused,
     setIsFocused
-  ] = useState()
-  , [
-    _hFocus,
-    _hBlur
-  ] = useMemo(() => [
-    () => {
-      clearTimeout(getRefValue(_refBlurId))
-      setIsFocused(true)
-    },
-    () => {
-      setRefValue(_refBlurId, setTimeout(
-        () => setIsFocused(false),
-        800
-      ))
-    }
-  ], [])
-  
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , touchHandlers = useMemo(() => HAS_TOUCH_EVENTS
-    ? {
-        onFocus: _hFocus,
-        onBlur: _hBlur
-      }
-    : void 0
-  , [])
-  // _hFocus, _hBlur
-  /*eslint-enable react-hooks/exhaustive-deps */
+  ] = useState();
 
   useEffect(() => () => {
     clearTimeout(getRefValue(_refBlurId))
@@ -48,8 +22,22 @@ const useTouchHandlers = () => {
 
   return [
     isFocused,
-    touchHandlers
+    useMemo(() => HAS_TOUCH_EVENTS
+      ? {
+          onFocus: () => {
+            clearTimeout(getRefValue(_refBlurId))
+            setIsFocused(true)
+          },
+          onBlur: () => {
+            setRefValue(_refBlurId, setTimeout(
+              () => setIsFocused(false),
+              800
+            ))
+          }
+        }
+      : void 0
+    , [])
   ];
-}
+};
 
 export default useTouchHandlers
