@@ -47,7 +47,8 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
       options,
       initialOptions,
       nAll
-    } = state
+    } = state,
+    _getItemCaption = (0, _uiApi.useMemo)(() => item => (0, _InputSelectFn.crValue)((item || {})[propCaption]), [propCaption])
 
     /*eslint-disable react-hooks/exhaustive-deps */,
     [_decorateCurrentComp, _selectItem] = (0, _uiApi.useMemo)(() => [() => {
@@ -124,13 +125,13 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
         // enter
         case 13:
           {
-            const item = options[(0, _uiApi.getRefValue)(_refIndexActive)] || {},
-              _value = item[propCaption];
+            const item = options[(0, _uiApi.getRefValue)(_refIndexActive)],
+              _value = _getItemCaption(item);
             if (_value) {
               toggleIsShowOption(false);
               setState(prevState => ({
                 ...prevState,
-                value: (0, _InputSelectFn.crValue)(_value)
+                value: _value
               }));
               _selectItem(item);
             }
@@ -170,18 +171,21 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     }
 
     /*eslint-disable react-hooks/exhaustive-deps */,
-    [_hClickItem, _focusInput, _hClear] = (0, _uiApi.useMemo)(() => [(item, index, propCaption) => {
+    _hClickItem = (0, _uiApi.useMemo)(() => (item, index) => {
       (0, _InputSelectFn.undecorateComp)(_getCurrentComp());
       (0, _uiApi.setRefValue)(_refIndexActive, index);
       toggleIsShowOption(false);
       setState(prevState => ({
         ...prevState,
-        value: (0, _InputSelectFn.crValue)(item[propCaption])
+        value: _getItemCaption(item)
       }));
       _selectItem(item);
-    },
+    }, [_getItemCaption])
     // _getCurrentComp, _refIndexActive, _selectItem
-    () => {
+    /*eslint-enable react-hooks/exhaustive-deps */
+
+    /*eslint-disable react-hooks/exhaustive-deps */,
+    [_focusInput, _hClear] = (0, _uiApi.useMemo)(() => [() => {
       (0, _uiApi.focusRefElement)(_refInput);
     }, () => {
       _clearInput();
@@ -225,9 +229,8 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
       ref: _refInput,
       className: _CL.CL_INPUT,
       type: "text",
-      name: "select"
-      //autoComplete="off"
-      ,
+      name: "select",
+      autoComplete: "off",
       autoCorrect: "off",
       autoCapitalize: "off",
       spellCheck: false,

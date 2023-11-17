@@ -19,7 +19,7 @@ const _crItem = (
     key={index}
     className={className}
     ref={n => refOptionNode(n, index)}
-    onClick={() => onClick(item, index, propCaption)}
+    onClick={() => onClick(item, index)}
   >
     <ItemComp
        item={item}

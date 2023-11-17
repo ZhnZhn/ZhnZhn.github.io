@@ -13,7 +13,7 @@ exports.crWidthStyle = crWidthStyle;
 const INPUT_PREFIX = 'From input:',
   DF_OPTIONS = [],
   _isArr = Array.isArray;
-const crValue = str => str.replace(INPUT_PREFIX, '').trim();
+const crValue = str => (str || '').replace(INPUT_PREFIX, '').trim();
 exports.crValue = crValue;
 const _crInputItem = (inputValue, _ref) => {
   let {
@@ -25,6 +25,7 @@ const _crInputItem = (inputValue, _ref) => {
     _caption = isWithInput ? `${INPUT_PREFIX} ${_inputValue}` : 'No results found';
   return {
     [propCaption]: _caption,
+    _c: _caption,
     value: NO_RESULT,
     inputValue: _inputValue
   };

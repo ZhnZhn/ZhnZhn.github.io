@@ -22,7 +22,7 @@ const INPUT_PREFIX = 'From input:'
 , DF_OPTIONS = []
 , _isArr = Array.isArray;
 
-export const crValue = str => str
+export const crValue = str => (str || '')
   .replace(INPUT_PREFIX, '')
   .trim();
 
@@ -38,6 +38,7 @@ const _crInputItem = (
        : 'No results found';
   return {
     [propCaption]: _caption,
+    _c: _caption,
     value: NO_RESULT,
     inputValue: _inputValue
   };

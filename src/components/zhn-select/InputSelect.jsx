@@ -108,6 +108,10 @@ const InputSelect = forwardRef(({
     nAll
   } = state
 
+  , _getItemCaption = useMemo(() => item => crValue(
+      (item || {})[propCaption]
+    ), [propCaption])
+
   /*eslint-disable react-hooks/exhaustive-deps */
   , [
     _decorateCurrentComp,
@@ -199,14 +203,13 @@ const InputSelect = forwardRef(({
     switch(evt.keyCode){
       // enter
       case 13:{
-         const item = options[getRefValue(_refIndexActive)] || {}
-         , _value = item[propCaption];
-
+         const item = options[getRefValue(_refIndexActive)]
+         , _value = _getItemCaption(item)
          if (_value){
            toggleIsShowOption(false)
            setState(prevState => ({
              ...prevState,
-             value: crValue(_value)
+             value: _value
            }));
            _selectItem(item)
          }
@@ -251,23 +254,25 @@ const InputSelect = forwardRef(({
   }
 
   /*eslint-disable react-hooks/exhaustive-deps */
+  , _hClickItem = useMemo(() => (item, index) => {
+    undecorateComp(_getCurrentComp())
+    setRefValue(_refIndexActive, index)
+
+    toggleIsShowOption(false)
+    setState(prevState => ({
+      ...prevState,
+      value: _getItemCaption(item)
+    }));
+    _selectItem(item)
+  }, [_getItemCaption])
+  // _getCurrentComp, _refIndexActive, _selectItem
+  /*eslint-enable react-hooks/exhaustive-deps */
+
+  /*eslint-disable react-hooks/exhaustive-deps */
   , [
-    _hClickItem,
     _focusInput,
     _hClear
   ] = useMemo(() => [
-    (item, index, propCaption) => {
-       undecorateComp(_getCurrentComp())
-       setRefValue(_refIndexActive, index)
-
-       toggleIsShowOption(false)
-       setState(prevState => ({
-         ...prevState,
-         value: crValue(item[propCaption])
-       }));
-       _selectItem(item)
-    },
-    // _getCurrentComp, _refIndexActive, _selectItem
     () => {
       focusRefElement(_refInput)
     },
@@ -343,7 +348,7 @@ const InputSelect = forwardRef(({
          className={CL_INPUT}
          type="text"
          name="select"
-         //autoComplete="off"
+         autoComplete="off"
          autoCorrect="off"
          autoCapitalize="off"
          spellCheck={false}
