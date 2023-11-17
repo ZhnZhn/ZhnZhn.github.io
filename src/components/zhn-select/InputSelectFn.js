@@ -57,7 +57,6 @@ export const crInitialStateFromProps = (
 
   return {
     value: '',
-    isShowOption: false,
 
     initialOptions: _options,
     options: _options,

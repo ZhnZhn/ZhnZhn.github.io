@@ -12,6 +12,8 @@ import {
   focusRefElement
 } from '../uiApi';
 
+import useToggle from '../hooks/useToggle';
+
 import {
   S_NONE,
   S_BLOCK
@@ -88,6 +90,10 @@ const InputSelect = forwardRef(({
   ] = useTouchHandlers()
 
   , [
+    isShowOption,
+    toggleIsShowOption
+  ] = useToggle()
+  , [
     state,
     setState
   ] = useState(() => crInitialStateFromProps(
@@ -99,7 +105,6 @@ const InputSelect = forwardRef(({
     options,
     initialOptions,
 
-    isShowOption,
     nAll
   } = state
 
@@ -160,7 +165,6 @@ const InputSelect = forwardRef(({
       setState(prevState => ({
         ...prevState,
         value: token,
-        isShowOption: true,
         options: crFilterOptions(
           tokenLn > valueLn
             ? options
@@ -171,20 +175,22 @@ const InputSelect = forwardRef(({
           maxInput
         })
       }))
+      toggleIsShowOption(true)
     }
   }
 
   /*eslint-disable react-hooks/exhaustive-deps */
   , _clearInput = useMemo(() => () => {
-    undecorateComp(_getCurrentComp())
-    setRefValue(_refIndexActive, 0)
-    _selectItem()
-    setState(prevState => ({
-      ...prevState,
-      options: prevState.initialOptions,
-      isShowOption: false,
-      value: ''
-    }))
+     undecorateComp(_getCurrentComp())
+     setRefValue(_refIndexActive, 0)
+     _selectItem()
+
+     toggleIsShowOption(false)
+     setState(prevState => ({
+       ...prevState,
+       options: prevState.initialOptions,
+       value: ''
+     }))
   }, [])
   // _getCurrentComp, _selectItem
   /*eslint-enable react-hooks/exhaustive-deps */
@@ -197,10 +203,10 @@ const InputSelect = forwardRef(({
          , _value = item[propCaption];
 
          if (_value){
+           toggleIsShowOption(false)
            setState(prevState => ({
              ...prevState,
-             value: crValue(_value),
-             isShowOption: false,
+             value: crValue(_value)
            }));
            _selectItem(item)
          }
@@ -209,20 +215,14 @@ const InputSelect = forwardRef(({
       case 27: case 46: {
         evt.preventDefault()
         if (isShowOption){
-          setState(prevState => ({
-            ...prevState,
-            isShowOption: false
-          }));
+          toggleIsShowOption()
         } else {
           _clearInput()
         }
       break;}
       case 40: //down
         if (!isShowOption){
-          setState(prevState => ({
-            ...prevState,
-            isShowOption: true
-          }))
+          toggleIsShowOption()
         } else {
           evt.preventDefault()
           stepDownOption(
@@ -253,27 +253,21 @@ const InputSelect = forwardRef(({
   /*eslint-disable react-hooks/exhaustive-deps */
   , [
     _hClickItem,
-    _hToggleOptions,
     _focusInput,
     _hClear
   ] = useMemo(() => [
     (item, index, propCaption) => {
        undecorateComp(_getCurrentComp())
        setRefValue(_refIndexActive, index)
+
+       toggleIsShowOption(false)
        setState(prevState => ({
          ...prevState,
-         value: crValue(item[propCaption]),
-         isShowOption: false
+         value: crValue(item[propCaption])
        }));
        _selectItem(item)
     },
     // _getCurrentComp, _refIndexActive, _selectItem
-    () => {
-      setState(prevState => ({
-        ...prevState,
-        isShowOption: !prevState.isShowOption
-      }))
-    },
     () => {
       focusRefElement(_refInput)
     },
@@ -293,6 +287,7 @@ const InputSelect = forwardRef(({
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     _initHmItems()
+    toggleIsShowOption(false)
     setState(crInitialStateFromProps(
       propCaption,
       propsOptions
@@ -331,7 +326,7 @@ const InputSelect = forwardRef(({
     isShowOption,
 
     _hClear,
-    _hToggleOptions
+    toggleIsShowOption
   )
   , _optionViewWidthStyle = crWidthStyle(
       width,
@@ -348,7 +343,7 @@ const InputSelect = forwardRef(({
          className={CL_INPUT}
          type="text"
          name="select"
-         autoComplete="off"
+         //autoComplete="off"
          autoCorrect="off"
          autoCapitalize="off"
          spellCheck={false}

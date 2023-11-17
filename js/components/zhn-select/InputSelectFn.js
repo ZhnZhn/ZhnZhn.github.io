@@ -36,7 +36,6 @@ const crInitialStateFromProps = (propCaption, options) => {
   });
   return {
     value: '',
-    isShowOption: false,
     initialOptions: _options,
     options: _options,
     nAll: _options.length

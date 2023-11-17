@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _styleFn = require("../styleFn");
 var _crAfterInputEl = _interopRequireDefault(require("./crAfterInputEl"));
 var _InputSelectFn = require("./InputSelectFn");
@@ -39,12 +40,12 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     _refIndexNode = (0, _uiApi.useRef)(),
     [_refIndexActive, _initHmItems, _refOptionNode, _getCurrentComp] = (0, _useOptionsElement.default)(),
     [isFocused, touchHandlers] = (0, _useTouchHandlers.default)(),
+    [isShowOption, toggleIsShowOption] = (0, _useToggle.default)(),
     [state, setState] = (0, _uiApi.useState)(() => (0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions)),
     {
       value,
       options,
       initialOptions,
-      isShowOption,
       nAll
     } = state
 
@@ -94,13 +95,13 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
         setState(prevState => ({
           ...prevState,
           value: token,
-          isShowOption: true,
           options: (0, _InputSelectFn.crFilterOptions)(tokenLn > valueLn ? options : initialOptions, token, {
             propCaption,
             isWithInput,
             maxInput
           })
         }));
+        toggleIsShowOption(true);
       }
     }
 
@@ -109,10 +110,10 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
       (0, _InputSelectFn.undecorateComp)(_getCurrentComp());
       (0, _uiApi.setRefValue)(_refIndexActive, 0);
       _selectItem();
+      toggleIsShowOption(false);
       setState(prevState => ({
         ...prevState,
         options: prevState.initialOptions,
-        isShowOption: false,
         value: ''
       }));
     }, [])
@@ -126,10 +127,10 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
             const item = options[(0, _uiApi.getRefValue)(_refIndexActive)] || {},
               _value = item[propCaption];
             if (_value) {
+              toggleIsShowOption(false);
               setState(prevState => ({
                 ...prevState,
-                value: (0, _InputSelectFn.crValue)(_value),
-                isShowOption: false
+                value: (0, _InputSelectFn.crValue)(_value)
               }));
               _selectItem(item);
             }
@@ -141,10 +142,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
           {
             evt.preventDefault();
             if (isShowOption) {
-              setState(prevState => ({
-                ...prevState,
-                isShowOption: false
-              }));
+              toggleIsShowOption();
             } else {
               _clearInput();
             }
@@ -153,10 +151,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
         case 40:
           //down
           if (!isShowOption) {
-            setState(prevState => ({
-              ...prevState,
-              isShowOption: true
-            }));
+            toggleIsShowOption();
           } else {
             evt.preventDefault();
             (0, _InputSelectFn.stepDownOption)(_getCurrentComp, _refIndexActive, options.length, (0, _uiApi.getRefValue)(_refIndexNode), (0, _uiApi.getRefValue)(_refOptionsComp));
@@ -175,23 +170,18 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     }
 
     /*eslint-disable react-hooks/exhaustive-deps */,
-    [_hClickItem, _hToggleOptions, _focusInput, _hClear] = (0, _uiApi.useMemo)(() => [(item, index, propCaption) => {
+    [_hClickItem, _focusInput, _hClear] = (0, _uiApi.useMemo)(() => [(item, index, propCaption) => {
       (0, _InputSelectFn.undecorateComp)(_getCurrentComp());
       (0, _uiApi.setRefValue)(_refIndexActive, index);
+      toggleIsShowOption(false);
       setState(prevState => ({
         ...prevState,
-        value: (0, _InputSelectFn.crValue)(item[propCaption]),
-        isShowOption: false
+        value: (0, _InputSelectFn.crValue)(item[propCaption])
       }));
       _selectItem(item);
     },
     // _getCurrentComp, _refIndexActive, _selectItem
     () => {
-      setState(prevState => ({
-        ...prevState,
-        isShowOption: !prevState.isShowOption
-      }));
-    }, () => {
       (0, _uiApi.focusRefElement)(_refInput);
     }, () => {
       _clearInput();
@@ -209,6 +199,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
     _initHmItems();
+    toggleIsShowOption(false);
     setState((0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions));
   }, [propsOptions]);
   //propCaption
@@ -225,7 +216,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
   /*eslint-unable react-hooks/exhaustive-deps */
 
   const _rootWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, style),
-    [afterInputEl, _placeholder] = (0, _crAfterInputEl.default)(isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isFocused && value, isShowOption, _hClear, _hToggleOptions),
+    [afterInputEl, _placeholder] = (0, _crAfterInputEl.default)(isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isFocused && value, isShowOption, _hClear, toggleIsShowOption),
     _optionViewWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, isShowOption ? _styleFn.S_BLOCK : _styleFn.S_NONE);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: _CL.CL_ROOT,
@@ -234,8 +225,9 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
       ref: _refInput,
       className: _CL.CL_INPUT,
       type: "text",
-      name: "select",
-      autoComplete: "off",
+      name: "select"
+      //autoComplete="off"
+      ,
       autoCorrect: "off",
       autoCapitalize: "off",
       spellCheck: false,
