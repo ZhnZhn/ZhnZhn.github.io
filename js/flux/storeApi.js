@@ -2,10 +2,15 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.atom = void 0;
+exports.getStoreApi = exports.createStoreWithSelector = exports.atom = void 0;
+var _zustandLite = require("./zustand-lite");
 var _useRerender = _interopRequireDefault(require("../components/hooks/useRerender"));
-const _isFn = v => typeof v === 'function',
-  _reducerUseAtomValue = (value, crOrValue) => _isFn(crOrValue) ? crOrValue(value) : crOrValue;
+const _isFn = v => typeof v === 'function';
+const createStoreWithSelector = crStore => (0, _zustandLite.createStore)((0, _zustandLite.subscribeWithSelector)(crStore));
+exports.createStoreWithSelector = createStoreWithSelector;
+const getStoreApi = store => [store.setState, store.getState];
+exports.getStoreApi = getStoreApi;
+const _reducerUseAtomValue = (value, crOrValue) => _isFn(crOrValue) ? crOrValue(value) : crOrValue;
 const atom = initialValue => {
   const _atom = Object.create(null);
   _atom.value = initialValue;

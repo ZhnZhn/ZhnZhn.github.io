@@ -1,7 +1,24 @@
+import {
+  createStore,
+  subscribeWithSelector
+} from './zustand-lite';
+
 import useRerender from '../components/hooks/useRerender';
 
-const _isFn = v => typeof v === 'function'
-, _reducerUseAtomValue = (
+const _isFn = v => typeof v === 'function';
+
+export const createStoreWithSelector = (
+  crStore
+) => createStore(
+  subscribeWithSelector(crStore)
+)
+
+export const getStoreApi = store => [
+  store.setState,
+  store.getState
+];
+
+const _reducerUseAtomValue = (
   value,
   crOrValue
 ) => _isFn(crOrValue)
