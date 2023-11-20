@@ -1,3 +1,4 @@
+export { bindTo } from '../utils/bindTo';
 import { bindTo } from '../utils/bindTo';
 
 import useSubscribe from '../components/hooks/useSubscribe';
