@@ -42,10 +42,10 @@ const _GREY_THEME_ID = "GREY",
   _SAND_THEME_ID = "SAND",
   _SAND_L_THEME_ID = "SANDL_L";
 const UI_THEME_OPTIONS = exports.UI_THEME_OPTIONS = [{
-  c: 'Dark',
+  c: 'Grey',
   v: _GREY_THEME_ID
 }, {
-  c: 'Light',
+  c: 'White',
   v: _WHITE_THEME_ID
 }, {
   c: 'Sand',

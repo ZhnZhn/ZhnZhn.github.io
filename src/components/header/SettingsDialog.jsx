@@ -7,7 +7,10 @@ import useRerender from '../hooks/useRerender';
 
 import useSettingsMenuMore from './useSettingsMenuMore';
 
-import { setUiTheme } from '../styles/uiTheme';
+import {
+  UI_THEME_OPTIONS,
+  setUiTheme
+} from '../styles/uiTheme';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import TabPane from '../zhn-tab/TabPane';
@@ -79,6 +82,7 @@ const SettingsDialog = memoIsShow(({
         <Tab title="Options">
           <PaneOptions
              titleStyle={S_TITLE_OPTION}
+             uiThemeOptions={UI_THEME_OPTIONS}
              onChangeTheme={_setUiTheme}
           />
         </Tab>

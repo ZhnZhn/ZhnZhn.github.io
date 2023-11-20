@@ -72,6 +72,7 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
         title: "Options",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneOptions.default, {
           titleStyle: S_TITLE_OPTION,
+          uiThemeOptions: _uiTheme.UI_THEME_OPTIONS,
           onChangeTheme: _setUiTheme
         })
       })]

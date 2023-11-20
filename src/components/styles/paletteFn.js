@@ -114,8 +114,8 @@ const _GREY_THEME_ID = "GREY"
 , _SAND_L_THEME_ID = "SANDL_L";
 
 export const UI_THEME_OPTIONS = [
-  { c: 'Dark', v: _GREY_THEME_ID },
-  { c: 'Light', v: _WHITE_THEME_ID },
+  { c: 'Grey', v: _GREY_THEME_ID },
+  { c: 'White', v: _WHITE_THEME_ID },
   { c: 'Sand', v: _SAND_THEME_ID },
   { c: 'Sand Light', v: _SAND_L_THEME_ID },
   { c: 'Black', v: _BLACK_THEME_ID }

@@ -10,14 +10,6 @@ const S_MR_4 = { marginRight: 4 }
 , S_MR_12 = { marginRight: 12 }
 , WITHOUT_LABELS_WIDTH = 275;
 
-const UI_THEME_OPTIONS = [
-  { caption: 'Dark', value: 'GREY' },
-  { caption: 'Light', value: 'WHITE' },
-  { caption: 'Sand', value: 'SAND' },
-  { caption: 'Sand Light', value: 'SAND_L' },
-  { caption: 'Black', value: 'BLACK' }
-];
-
 const CHECKBOX_CONFIGS = [
   ['View in Admin Mode', 'isAdminMode'],
   ['Draw Deltas to Min-Max', 'isDrawDeltaExtrems'],
@@ -36,6 +28,7 @@ const PaneOptions = ({
   titleStyle,
   btStyle,
   data,
+  uiThemeOptions,
   onClose,
   setRefFocusLast,
   onChangeTheme
@@ -71,7 +64,8 @@ const PaneOptions = ({
         width={_width}
         caption="UI Theme"
         captionStyle={titleStyle}
-        options={UI_THEME_OPTIONS}
+        propCaption="c"
+        options={uiThemeOptions}
         onSelect={onChangeTheme}
       />
       <OptionCheckBoxStack
