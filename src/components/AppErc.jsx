@@ -56,7 +56,7 @@ const AppErc = () => {
          <About />
          <CompContainer addAction={CHAT_INIT_AND_SHOW} />
        </div>
-       <DialogContainer />
+       <DialogContainer store={ChartStore} />
     </>
   );
 };

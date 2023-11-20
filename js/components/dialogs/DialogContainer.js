@@ -38,7 +38,10 @@ const _renderDialogs = (store, _ref, _handleClose) => {
     });
   });
 };
-const DialogContainer = () => {
+const DialogContainer = _ref3 => {
+  let {
+    store
+  } = _ref3;
   const [state, setState] = (0, _uiApi.useState)({
       isShow: false,
       inits: {},
@@ -60,35 +63,34 @@ const DialogContainer = () => {
           ...prevState
         };
       });
-    }, []),
-    store = (0, _useListen.default)((actionType, option) => {
-      if (actionType === _ComponentActions.CAT_SHOW_MODAL_DIALOG) {
-        const type = option.modalDialogType,
-          {
-            inits
-          } = state;
-        if (inits[type]) {
-          Promise.resolve().then(_ => {
-            setState(prevState => _setTypeTo(prevState, type, option));
+    }, []);
+  (0, _useListen.default)((actionType, option) => {
+    if (actionType === _ComponentActions.CAT_SHOW_MODAL_DIALOG) {
+      const type = option.modalDialogType,
+        {
+          inits
+        } = state;
+      if (inits[type]) {
+        Promise.resolve().then(_ => {
+          setState(prevState => _setTypeTo(prevState, type, option));
+        });
+      } else {
+        (0, _RouterModalDialog.getModalDialog)(type).then(comp => setState(prevState => {
+          prevState.dialogs.push({
+            type,
+            comp
           });
-        } else {
-          (0, _RouterModalDialog.getModalDialog)(type).then(comp => setState(prevState => {
-            prevState.dialogs.push({
-              type,
-              comp
-            });
-            prevState.inits[type] = true;
-            return _setTypeTo(prevState, type, option);
-          }));
-        }
+          prevState.inits[type] = true;
+          return _setTypeTo(prevState, type, option);
+        }));
       }
-    });
+    }
+  });
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialogContainer.default, {
     isShow: isShow,
     onClose: (0, _uiApi.bindTo)(_hClose, currentDialog),
     children: _renderDialogs(store, state, _hClose)
   });
 };
-var _default = DialogContainer;
-exports.default = _default;
+var _default = exports.default = DialogContainer;
 //# sourceMappingURL=DialogContainer.js.map

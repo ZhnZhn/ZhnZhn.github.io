@@ -39,7 +39,9 @@ const _renderDialogs = (
 }));
 
 
-const DialogContainer = () => {
+const DialogContainer = ({
+  store
+}) => {
   const [
     state,
     setState
@@ -63,7 +65,8 @@ const DialogContainer = () => {
        return {...prevState};
      })
   }, [])
-  , store = useListen((actionType, option) => {
+
+  useListen((actionType, option) => {
     if (actionType === CAT_SHOW_MODAL_DIALOG){
       const type = option.modalDialogType
       , { inits } = state;

@@ -38,7 +38,9 @@ const AppErc = () => {
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
         addAction: _ChartActions.CHAT_INIT_AND_SHOW
       })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {})]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {
+      store: _ChartStore.default
+    })]
   });
 };
 var _default = exports.default = AppErc;
