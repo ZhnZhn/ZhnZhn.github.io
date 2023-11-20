@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.setUiPalette = exports.getColorBlack = exports.crUiThemeId = exports.DF_THEME_ID = void 0;
+exports.setUiPalette = exports.getColorBlack = exports.crUiThemeId = exports.UI_THEME_OPTIONS = exports.DF_THEME_ID = void 0;
 const COLOR_SILVER = "silver",
   COLOR_DARK_BLUE = "#1b2836",
   COLOR_DARK_CYAN = "#009688",
@@ -36,25 +36,46 @@ const P_WHITE_VALUES = ["#e1e1e1", DF_S_C1, EL_BG_WHITE, "#ebf1f5", DF_BH_C, LB_
 const BTF_C_SAND = "#785133",
   EL_BG_SAND_L = "#64473d";
 const P_SAND_L_VALUES = ["#9e9e9e", DF_S_C1, EL_BG_SAND_L, "#e8e0cb", "#5b5b5b", LB_BC_LIGHT, EL_BG_SAND_L, COLOR_SILVER, BTF_C_SAND, DF_C_BLACK];
-const DF_THEME_ID = exports.DF_THEME_ID = "GREY";
+const _GREY_THEME_ID = "GREY",
+  _BLACK_THEME_ID = "BLACK",
+  _WHITE_THEME_ID = "WHITE",
+  _SAND_THEME_ID = "SAND",
+  _SAND_L_THEME_ID = "SANDL_L";
+const UI_THEME_OPTIONS = exports.UI_THEME_OPTIONS = [{
+  c: 'Dark',
+  v: _GREY_THEME_ID
+}, {
+  c: 'Light',
+  v: _WHITE_THEME_ID
+}, {
+  c: 'Sand',
+  v: _SAND_THEME_ID
+}, {
+  c: 'Sand Light',
+  v: _SAND_L_THEME_ID
+}, {
+  c: 'Black',
+  v: _BLACK_THEME_ID
+}];
+const DF_THEME_ID = exports.DF_THEME_ID = _GREY_THEME_ID;
 const PALETTE_VALUES = {
-  GREY: P_GREY_VALUES,
-  BLACK: P_GREY_VALUES,
-  WHITE: P_WHITE_VALUES,
-  SAND: P_SAND_L_VALUES,
-  SAND_L: P_SAND_L_VALUES
+  [_GREY_THEME_ID]: P_GREY_VALUES,
+  [_BLACK_THEME_ID]: P_GREY_VALUES,
+  [_WHITE_THEME_ID]: P_WHITE_VALUES,
+  [_SAND_THEME_ID]: P_SAND_L_VALUES,
+  [_SAND_L_THEME_ID]: P_SAND_L_VALUES
 };
 const EL_BG_SAND = "#463222";
 const BTF_C_BLACK = COLOR_DARK_CYAN;
 const PALETTE_CHANGES = {
-  BLACK: {
+  [_BLACK_THEME_ID]: {
     [PROPERTY_B_BG]: "#202328",
     [PROPERTY_C_BG]: COLOR_BLACK,
     [PROPERTY_EL_BG]: "#292e37",
     [PROPERTY_BTF_C]: BTF_C_BLACK,
     [PROPERTY_COLOR_BLACK]: COLOR_GREY
   },
-  SAND: {
+  [_SAND_THEME_ID]: {
     [PROPERTY_S_C2]: EL_BG_SAND,
     [PROPERTY_C_BG]: "#e6d5a9",
     [PROPERTY_EL_BG]: EL_BG_SAND

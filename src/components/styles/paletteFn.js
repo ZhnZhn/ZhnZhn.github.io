@@ -107,19 +107,33 @@ const P_SAND_L_VALUES = [
   DF_C_BLACK
 ];
 
-export const DF_THEME_ID = "GREY";
+const _GREY_THEME_ID = "GREY"
+, _BLACK_THEME_ID = "BLACK"
+, _WHITE_THEME_ID = "WHITE"
+, _SAND_THEME_ID = "SAND"
+, _SAND_L_THEME_ID = "SANDL_L";
+
+export const UI_THEME_OPTIONS = [
+  { c: 'Dark', v: _GREY_THEME_ID },
+  { c: 'Light', v: _WHITE_THEME_ID },
+  { c: 'Sand', v: _SAND_THEME_ID },
+  { c: 'Sand Light', v: _SAND_L_THEME_ID },
+  { c: 'Black', v: _BLACK_THEME_ID }
+]
+
+export const DF_THEME_ID = _GREY_THEME_ID;
 const PALETTE_VALUES = {
-  GREY: P_GREY_VALUES,
-  BLACK: P_GREY_VALUES,
-  WHITE: P_WHITE_VALUES,
-  SAND: P_SAND_L_VALUES,
-  SAND_L: P_SAND_L_VALUES
+  [_GREY_THEME_ID]: P_GREY_VALUES,
+  [_BLACK_THEME_ID]: P_GREY_VALUES,
+  [_WHITE_THEME_ID]: P_WHITE_VALUES,
+  [_SAND_THEME_ID]: P_SAND_L_VALUES,
+  [_SAND_L_THEME_ID]: P_SAND_L_VALUES
 };
 
 const EL_BG_SAND = "#463222";
 const BTF_C_BLACK = COLOR_DARK_CYAN;
 const PALETTE_CHANGES = {
-  BLACK: {
+  [_BLACK_THEME_ID]: {
     [PROPERTY_B_BG]: "#202328",
 
     [PROPERTY_C_BG]: COLOR_BLACK,
@@ -128,7 +142,7 @@ const PALETTE_CHANGES = {
     [PROPERTY_BTF_C]: BTF_C_BLACK,
     [PROPERTY_COLOR_BLACK]: COLOR_GREY
   },
-  SAND: {
+  [_SAND_THEME_ID]: {
     [PROPERTY_S_C2]: EL_BG_SAND,
     [PROPERTY_C_BG]: "#e6d5a9",
 

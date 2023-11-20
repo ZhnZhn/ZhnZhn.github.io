@@ -1,4 +1,7 @@
-export { getColorBlack } from './paletteFn';
+export {
+  UI_THEME_OPTIONS,
+  getColorBlack
+} from './paletteFn';
 
 import { setChartTheme } from '../../charts/ChartUiTheme';
 import {
@@ -18,7 +21,7 @@ _setUiThemeImpl(DF_THEME_ID)
 export const setUiTheme = (
   item
 ) => {
-  const _nextUiThemeId = (item || {}).value;
+  const _nextUiThemeId = (item || {}).v;
   if (_uiThemeId !== _nextUiThemeId) {
     _setUiThemeImpl(_nextUiThemeId)
   }
