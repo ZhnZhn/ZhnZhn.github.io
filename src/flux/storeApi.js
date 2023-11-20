@@ -21,6 +21,18 @@ export const getStoreApi = store => [
   store.getState
 ];
 
+export const fCrStoreSlice = (
+  slicePn,
+  optionPn
+) => [
+  (value) => ({
+    [slicePn]: optionPn
+      ? {[optionPn]: value}
+      : value
+  }),
+  state => state[slicePn]
+]
+
 export const fCrUse = (
   store,
   select
