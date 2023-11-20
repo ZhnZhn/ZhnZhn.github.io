@@ -4,8 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
-var _ComponentActions = require("../../flux/actions/ComponentActions");
+var _compStore = require("../../flux/stores/compStore");
 var _ModalDialogContainer = _interopRequireDefault(require("../zhn-containers/ModalDialogContainer"));
 var _RouterModalDialog = require("./RouterModalDialog");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -64,15 +63,15 @@ const DialogContainer = _ref3 => {
         };
       });
     }, []);
-  (0, _useListen.default)((actionType, option) => {
-    if (actionType === _ComponentActions.CAT_SHOW_MODAL_DIALOG) {
-      const type = option.modalDialogType,
+  (0, _compStore.useMdOption)(mdOption => {
+    if (mdOption) {
+      const type = mdOption.modalDialogType,
         {
           inits
         } = state;
       if (inits[type]) {
         Promise.resolve().then(_ => {
-          setState(prevState => _setTypeTo(prevState, type, option));
+          setState(prevState => _setTypeTo(prevState, type, mdOption));
         });
       } else {
         (0, _RouterModalDialog.getModalDialog)(type).then(comp => setState(prevState => {
@@ -81,7 +80,7 @@ const DialogContainer = _ref3 => {
             comp
           });
           prevState.inits[type] = true;
-          return _setTypeTo(prevState, type, option);
+          return _setTypeTo(prevState, type, mdOption);
         }));
       }
     }

@@ -2,9 +2,10 @@ import {
   CAT_SHOW_ABOUT,
   CAT_SHOW_DIALOG,
   CAT_CLOSE_DIALOG,
-  CAT_SHOW_MODAL_DIALOG,
   CAT_CLOSE_CHART_CONTAINER_2
 } from '../actions/ComponentActions';
+
+import { showModalDialog } from './compStore';
 
 import {
   MDT_ALERT
@@ -28,7 +29,7 @@ const ComponentSlice = {
 
   showAlertDialog(option={}){
     option.modalDialogType = MDT_ALERT;
-    this.trigger(CAT_SHOW_MODAL_DIALOG, option);
+    showModalDialog(MDT_ALERT, option)
   },
 
   onShowAbout(){
@@ -57,8 +58,7 @@ const ComponentSlice = {
       this.trigger(CAT_SHOW_DIALOG, r)
     })
     .catch(err => {
-      this.trigger(CAT_SHOW_MODAL_DIALOG, {
-        modalDialogType: 'alert',
+      showModalDialog(MDT_ALERT, {
         alertCaption: 'Failed Load',
         alertDescr: err.message
       })
@@ -97,11 +97,6 @@ const ComponentSlice = {
   },
   uncheckActiveCheckbox(chartType){
     uncheckActiveItemCheckBox(this, chartType)
-  },
-
-  onShowModalDialog(modalDialogType, option={}){
-    option.modalDialogType = modalDialogType;
-    this.trigger(CAT_SHOW_MODAL_DIALOG, option);
   }
 }
 

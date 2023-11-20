@@ -5,11 +5,8 @@ import {
   createElement
 } from '../uiApi';
 
-import useListen from '../hooks/useListen';
+import { useMdOption } from '../../flux/stores/compStore';
 
-import {
-  CAT_SHOW_MODAL_DIALOG
-} from '../../flux/actions/ComponentActions';
 import ModalDialogContainer from '../zhn-containers/ModalDialogContainer';
 import { getModalDialog } from './RouterModalDialog';
 
@@ -66,16 +63,18 @@ const DialogContainer = ({
      })
   }, [])
 
-  useListen((actionType, option) => {
-    if (actionType === CAT_SHOW_MODAL_DIALOG){
-      const type = option.modalDialogType
+  useMdOption(mdOption => {
+    if (mdOption) {
+      const type = mdOption.modalDialogType
       , { inits } = state;
 
       if (inits[type]){
         Promise.resolve()
           .then( _ => {
             setState(prevState => _setTypeTo(
-              prevState, type, option
+              prevState,
+              type,
+              mdOption
             ))
           })
       } else {
@@ -84,13 +83,15 @@ const DialogContainer = ({
               prevState.dialogs.push({ type, comp })
               prevState.inits[type] = true
               return _setTypeTo(
-                prevState, type, option
+                prevState,
+                type,
+                mdOption
               );
             })
           )
       }
     }
-  });
+  })
 
   return (
     <ModalDialogContainer

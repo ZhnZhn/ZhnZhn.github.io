@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _ComponentActions = require("../actions/ComponentActions");
+var _compStore = require("./compStore");
 var _ModalDialogType = require("../../constants/ModalDialogType");
 var _ContCheckBoxLogicFn = require("./comp/ContCheckBoxLogicFn");
 var _DialogLogicFn = require("./comp/DialogLogicFn");
@@ -14,7 +15,7 @@ const ComponentSlice = {
       option = {};
     }
     option.modalDialogType = _ModalDialogType.MDT_ALERT;
-    this.trigger(_ComponentActions.CAT_SHOW_MODAL_DIALOG, option);
+    (0, _compStore.showModalDialog)(_ModalDialogType.MDT_ALERT, option);
   },
   onShowAbout() {
     this.trigger(_ComponentActions.CAT_SHOW_ABOUT);
@@ -41,8 +42,7 @@ const ComponentSlice = {
     }).then(r => {
       this.trigger(_ComponentActions.CAT_SHOW_DIALOG, r);
     }).catch(err => {
-      this.trigger(_ComponentActions.CAT_SHOW_MODAL_DIALOG, {
-        modalDialogType: 'alert',
+      (0, _compStore.showModalDialog)(_ModalDialogType.MDT_ALERT, {
         alertCaption: 'Failed Load',
         alertDescr: err.message
       });
@@ -83,15 +83,7 @@ const ComponentSlice = {
   },
   uncheckActiveCheckbox(chartType) {
     (0, _ItemCheckBoxLogicFn.uncheckActiveItemCheckBox)(this, chartType);
-  },
-  onShowModalDialog(modalDialogType, option) {
-    if (option === void 0) {
-      option = {};
-    }
-    option.modalDialogType = modalDialogType;
-    this.trigger(_ComponentActions.CAT_SHOW_MODAL_DIALOG, option);
   }
 };
-var _default = ComponentSlice;
-exports.default = _default;
+var _default = exports.default = ComponentSlice;
 //# sourceMappingURL=ComponentSlice.js.map

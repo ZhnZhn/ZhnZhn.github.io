@@ -1,5 +1,8 @@
 import Reflux from 'reflux-core';
 
+import { bindTo } from '../storeApi';
+import { showModalDialog } from '../stores/compStore';
+
 import {
   MDT_DESCRIPTION,
   MDT_SETTINGS,
@@ -23,8 +26,6 @@ export const CAT_CLOSE_CHART_CONTAINER_2 = 'closeChartContainer2'
 export const CAT_SET_ACTIVE_CONTAINER = 'setActiveContainer'
 export const CAT_SET_ACTIVE_CHECKBOX = 'setActiveCheckbox'
 
-export const CAT_SHOW_MODAL_DIALOG = 'showModalDialog'
-
 const CA = Reflux.createActions({
   [CAT_SHOW_ABOUT]: {},
 
@@ -34,22 +35,19 @@ const CA = Reflux.createActions({
   [CAT_CLOSE_CHART_CONTAINER]: {},
   [CAT_CLOSE_CHART_CONTAINER_2]: {},
   [CAT_SET_ACTIVE_CONTAINER]: {},
-  [CAT_SET_ACTIVE_CHECKBOX]: {},
-
-  [CAT_SHOW_MODAL_DIALOG]: {}
+  [CAT_SET_ACTIVE_CHECKBOX]: {}
 });
 
-const _showMd = CA.showModalDialog;
 Object.assign(CA, {
-  showDescription: _showMd.bind(null, MDT_DESCRIPTION),
-  showSettings: _showMd.bind(null, MDT_SETTINGS),
-  showPasteTo: _showMd.bind(null, MDT_PASTE_TO),
-  zoom: _showMd.bind(null, MDT_ZOOM),
-  showReload: _showMd.bind(null, MDT_RELOAD),
-  showAlert: _showMd.bind(null, MDT_ALERT),
-  showAsk: _showMd.bind(null, MDT_ASK),
-  showCustomizeExport: _showMd.bind(null, MDT_CUSTOMIZE_EXPORT),
-  showAddToWatch: _showMd.bind(null, MDT_ADD_TO_WATCH)
+  showDescription: bindTo(showModalDialog, MDT_DESCRIPTION),
+  showSettings: bindTo(showModalDialog, MDT_SETTINGS),
+  showPasteTo: bindTo(showModalDialog, MDT_PASTE_TO),
+  zoom: bindTo(showModalDialog, MDT_ZOOM),
+  showReload: bindTo(showModalDialog, MDT_RELOAD),
+  showAlert: bindTo(showModalDialog, MDT_ALERT),
+  showAsk: bindTo(showModalDialog, MDT_ASK),
+  showCustomizeExport: bindTo(showModalDialog, MDT_CUSTOMIZE_EXPORT),
+  showAddToWatch: bindTo(showModalDialog, MDT_ADD_TO_WATCH)
 })
 
 const _showOd = CA.showOptionDialog;
