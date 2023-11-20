@@ -1,9 +1,12 @@
+import { bindTo } from '../utils/bindTo';
+
+import useSubscribe from '../components/hooks/useSubscribe';
+import useRerender from '../components/hooks/useRerender';
+
 import {
   createStore,
   subscribeWithSelector
 } from './zustand-lite';
-
-import useRerender from '../components/hooks/useRerender';
 
 const _isFn = v => typeof v === 'function';
 
@@ -17,6 +20,14 @@ export const getStoreApi = store => [
   store.setState,
   store.getState
 ];
+
+export const fCrUse = (
+  store,
+  select
+) => bindTo(useSubscribe,
+  store,
+  select
+);
 
 const _reducerUseAtomValue = (
   value,
