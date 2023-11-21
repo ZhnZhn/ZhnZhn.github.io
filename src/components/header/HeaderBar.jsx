@@ -5,6 +5,7 @@ import {
 import {
   BrowserActions
 } from '../../flux/actions/BrowserActions';
+import { showAbout } from '../../flux/stores/compStore';
 
 import {
   crContainerCn
@@ -128,7 +129,7 @@ const HeaderBar = ({
              title="About Web Application ERC"
              hotKey={HK_ABOUT}
              timeout={0}
-             onClick={ComponentActions.showAbout}
+             onClick={showAbout}
           >
              <SvgInfo style={S_SVG_BT} />
           </FlatButton>

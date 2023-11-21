@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 var _BrowserActions = require("../../flux/actions/BrowserActions");
+var _compStore = require("../../flux/stores/compStore");
 var _styleFn = require("../styleFn");
 var _hotkeys = require("../hotkeys/hotkeys");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
@@ -96,7 +97,7 @@ const HeaderBar = _ref => {
         title: "About Web Application ERC",
         hotKey: _hotkeys.HK_ABOUT,
         timeout: 0,
-        onClick: _ComponentActions.ComponentActions.showAbout,
+        onClick: _compStore.showAbout,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgInfo.default, {
           style: S_SVG_BT
         })

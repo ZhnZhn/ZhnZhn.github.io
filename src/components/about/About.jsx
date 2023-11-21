@@ -5,15 +5,7 @@ import {
 } from '../styleFn';
 
 import useBool from '../hooks/useBool';
-import useListen from '../hooks/useListen';
-
-import {
-  CAT_SHOW_ABOUT
-} from '../../flux/actions/ComponentActions';
-import {
-  CHAT_INIT_AND_SHOW,
-  CHAT_SHOW
-} from '../../flux/actions/ChartActions';
+import { useMsAbout } from '../../flux/stores/compStore';
 
 import A from '../Comp';
 import TwitterLink from './TwitterLink';
@@ -54,10 +46,6 @@ const CL_ABOUT = crBsContainerCn("about-container")
 
 , IS_CLOSE_PROVIDERS = !isWideWidth();
 
-const _isHide = actionType =>
-  actionType === CHAT_INIT_AND_SHOW
-  || actionType === CHAT_SHOW;
-
 const About = () => {
   const [
     isShow,
@@ -65,11 +53,13 @@ const About = () => {
     hide
   ] = useBool(true);
 
-  useListen(actionType => {
-    if (actionType === CAT_SHOW_ABOUT){
-      show()
-    } else if (_isHide(actionType)) {
-      hide()
+  useMsAbout(msAbout => {
+    if (msAbout) {
+      if (msAbout.is) {
+        show()
+      } else {
+        hide()
+      }
     }
   })
 

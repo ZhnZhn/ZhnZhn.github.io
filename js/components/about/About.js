@@ -6,9 +6,7 @@ exports.default = void 0;
 var _has = require("../has");
 var _styleFn = require("../styleFn");
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
-var _ComponentActions = require("../../flux/actions/ComponentActions");
-var _ChartActions = require("../../flux/actions/ChartActions");
+var _compStore = require("../../flux/stores/compStore");
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _TwitterLink = _interopRequireDefault(require("./TwitterLink"));
 var _DataProviders = _interopRequireDefault(require("./DataProviders"));
@@ -66,14 +64,15 @@ const CL_ABOUT = (0, _styleFn.crBsContainerCn)("about-container"),
   STEP_T3 = "Select params and enter query date in the opened up draggable Dialog",
   STEP_T4 = "Click a button Load",
   IS_CLOSE_PROVIDERS = !(0, _has.isWideWidth)();
-const _isHide = actionType => actionType === _ChartActions.CHAT_INIT_AND_SHOW || actionType === _ChartActions.CHAT_SHOW;
 const About = () => {
   const [isShow, show, hide] = (0, _useBool.default)(true);
-  (0, _useListen.default)(actionType => {
-    if (actionType === _ComponentActions.CAT_SHOW_ABOUT) {
-      show();
-    } else if (_isHide(actionType)) {
-      hide();
+  (0, _compStore.useMsAbout)(msAbout => {
+    if (msAbout) {
+      if (msAbout.is) {
+        show();
+      } else {
+        hide();
+      }
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.ShowHide, {
