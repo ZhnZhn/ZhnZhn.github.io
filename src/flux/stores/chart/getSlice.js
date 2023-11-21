@@ -1,6 +1,10 @@
+import { getActiveContCheckBox } from '../contCheckBoxLogic';
 
-const getSlice = (slice, chartType) => {
-  const { activeContChb } = slice
+const getSlice = (
+  slice,
+  chartType
+) => {
+  const activeContChb = getActiveContCheckBox()
   , _cT = activeContChb
      ? activeContChb.chartType || chartType
      : chartType

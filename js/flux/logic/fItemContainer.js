@@ -7,6 +7,7 @@ var _react = require("react");
 var _ChartContainer = _interopRequireDefault(require("../../components/zhn-containers/ChartContainer"));
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 var _ComponentActions = require("../actions/ComponentActions");
+var _contCheckBoxLogic = require("../stores/contCheckBoxLogic");
 var _ChartActions = require("../actions/ChartActions");
 const _isStr = str => typeof str === 'string';
 const _crCaption = (dialogConf, browserType) => {
@@ -47,7 +48,7 @@ const crItemContainerEl = _ref => {
     store,
     browserType,
     contWidth,
-    onSetActive: _ComponentActions.ComponentActions[_ComponentActions.CAT_SET_ACTIVE_CONTAINER].bind(null, _chartType, browserType),
+    onSetActive: _contCheckBoxLogic.setActiveContainer.bind(null, _chartType, browserType),
     onCloseContainer: _ComponentActions.ComponentActions[_ComponentActions.CAT_CLOSE_CHART_CONTAINER].bind(null, _chartType, browserType),
     onSortBy: _ChartActions.ChartActions[_ChartActions.CHAT_SORT_BY].bind(null, _chartType),
     updateMovingValues: _ChartActions.ChartActions[_ChartActions.CHAT_UPDATE_MOVING_VALUES].bind(null, _chartType),

@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ComponentActions = exports.CAT_SHOW_OPTION_DIALOG = exports.CAT_SHOW_DIALOG = exports.CAT_SET_ACTIVE_CONTAINER = exports.CAT_CLOSE_DIALOG = exports.CAT_CLOSE_CHART_CONTAINER_2 = exports.CAT_CLOSE_CHART_CONTAINER = void 0;
+exports.ComponentActions = exports.CAT_SHOW_OPTION_DIALOG = exports.CAT_SHOW_DIALOG = exports.CAT_CLOSE_DIALOG = exports.CAT_CLOSE_CHART_CONTAINER_2 = exports.CAT_CLOSE_CHART_CONTAINER = void 0;
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
 var _storeApi = require("../storeApi");
 var _compStore = require("../stores/compStore");
@@ -12,14 +12,12 @@ const CAT_CLOSE_DIALOG = exports.CAT_CLOSE_DIALOG = 'closeDialog';
 const CAT_SHOW_OPTION_DIALOG = exports.CAT_SHOW_OPTION_DIALOG = 'showOptionDialog';
 const CAT_CLOSE_CHART_CONTAINER = exports.CAT_CLOSE_CHART_CONTAINER = 'closeChartContainer';
 const CAT_CLOSE_CHART_CONTAINER_2 = exports.CAT_CLOSE_CHART_CONTAINER_2 = 'closeChartContainer2';
-const CAT_SET_ACTIVE_CONTAINER = exports.CAT_SET_ACTIVE_CONTAINER = 'setActiveContainer';
 const CA = _refluxCore.default.createActions({
   [CAT_SHOW_DIALOG]: {},
   [CAT_CLOSE_DIALOG]: {},
   [CAT_SHOW_OPTION_DIALOG]: {},
   [CAT_CLOSE_CHART_CONTAINER]: {},
-  [CAT_CLOSE_CHART_CONTAINER_2]: {},
-  [CAT_SET_ACTIVE_CONTAINER]: {}
+  [CAT_CLOSE_CHART_CONTAINER_2]: {}
 });
 Object.assign(CA, {
   showDescription: (0, _storeApi.bindTo)(_compStore.showModalDialog, _ModalDialogType.MDT_DESCRIPTION),

@@ -6,15 +6,14 @@ import {
 
 import { showModalDialog } from './compStore';
 import { uncheckActiveCheckbox } from './chartCheckBoxLogic';
+import {
+  uncheckActiveContCheckBox
+} from './contCheckBoxLogic';
 
 import {
   MDT_ALERT
 } from '../../constants/ModalDialogType';
 
-import {
-  toggleContCheckBox,
-  uncheckActiveContCheckBox
-} from './comp/ContCheckBoxLogicFn';
 import {
   showItemDialog,
   showOptionDialog
@@ -58,20 +57,12 @@ const ComponentSlice = {
   },
 
   onCloseChartContainer(chartType, browserType){
-    this.uncheckActiveContChb(chartType);
+    uncheckActiveContCheckBox(chartType)
     uncheckActiveCheckbox(chartType);
     this.setMenuItemClose(chartType, browserType);
   },
   onCloseChartContainer2(chartType, browserType){
     this.trigger(CAT_CLOSE_CHART_CONTAINER_2, chartType);
-  },
-  onSetActiveContainer(chartType, browserType, checkBox, isCheck){
-    checkBox.chartType = chartType
-    checkBox.browserType = browserType
-    toggleContCheckBox(this, checkBox, isCheck)
-  },
-  uncheckActiveContChb(chartType){
-    uncheckActiveContCheckBox(this, chartType)
   }
 }
 

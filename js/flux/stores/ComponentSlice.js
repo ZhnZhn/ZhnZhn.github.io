@@ -5,8 +5,8 @@ exports.default = void 0;
 var _ComponentActions = require("../actions/ComponentActions");
 var _compStore = require("./compStore");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
+var _contCheckBoxLogic = require("./contCheckBoxLogic");
 var _ModalDialogType = require("../../constants/ModalDialogType");
-var _ContCheckBoxLogicFn = require("./comp/ContCheckBoxLogicFn");
 var _DialogLogicFn = require("./comp/DialogLogicFn");
 const ComponentSlice = {
   dialogInit: {},
@@ -46,20 +46,12 @@ const ComponentSlice = {
     });
   },
   onCloseChartContainer(chartType, browserType) {
-    this.uncheckActiveContChb(chartType);
+    (0, _contCheckBoxLogic.uncheckActiveContCheckBox)(chartType);
     (0, _chartCheckBoxLogic.uncheckActiveCheckbox)(chartType);
     this.setMenuItemClose(chartType, browserType);
   },
   onCloseChartContainer2(chartType, browserType) {
     this.trigger(_ComponentActions.CAT_CLOSE_CHART_CONTAINER_2, chartType);
-  },
-  onSetActiveContainer(chartType, browserType, checkBox, isCheck) {
-    checkBox.chartType = chartType;
-    checkBox.browserType = browserType;
-    (0, _ContCheckBoxLogicFn.toggleContCheckBox)(this, checkBox, isCheck);
-  },
-  uncheckActiveContChb(chartType) {
-    (0, _ContCheckBoxLogicFn.uncheckActiveContCheckBox)(this, chartType);
   }
 };
 var _default = exports.default = ComponentSlice;

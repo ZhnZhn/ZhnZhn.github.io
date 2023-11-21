@@ -12,6 +12,7 @@ exports.updateMovingValues = _ChartLogicFn.updateMovingValues;
 var _ModalDialogType = require("../../../constants/ModalDialogType");
 var _compStore = require("../compStore");
 var _chartCheckBoxLogic = require("../chartCheckBoxLogic");
+var _contCheckBoxLogic = require("../contCheckBoxLogic");
 var _fItemContainer = require("../../logic/fItemContainer");
 var _getSlice = _interopRequireDefault(require("./getSlice"));
 var _fCompareBy = _interopRequireDefault(require("./fCompareBy"));
@@ -93,10 +94,8 @@ const sortBy = (slice, chartType, by) => {
   return chartSlice;
 };
 exports.sortBy = sortBy;
-const checkBrowserChartTypes = (slice, option) => {
-  const {
-    activeContChb: chb
-  } = slice;
+const checkBrowserChartTypes = option => {
+  const chb = (0, _contCheckBoxLogic.getActiveContCheckBox)();
   if (chb) {
     option.chartType = chb.chartType;
     option.browserType = chb.browserType;

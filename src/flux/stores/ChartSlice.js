@@ -50,7 +50,7 @@ const ChartSlice = {
     return this.charts[chartType];
   },
   isChartExist(option){
-    checkBrowserChartTypes(this, option)
+    checkBrowserChartTypes(option)
     const { chartType, key } = option;
     return isChartExist(this.charts, chartType, key);
   },

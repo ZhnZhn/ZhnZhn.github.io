@@ -11,6 +11,7 @@ import {
 } from '../../../constants/ModalDialogType';
 import { showModalDialog } from '../compStore';
 import { getActiveChart } from '../chartCheckBoxLogic';
+import { getActiveContCheckBox } from '../contCheckBoxLogic';
 
 import { crItemContainerEl } from '../../logic/fItemContainer';
 
@@ -106,10 +107,9 @@ export const sortBy = (
 }
 
 export const checkBrowserChartTypes = (
-  slice,
   option
 ) => {
-  const { activeContChb:chb } = slice;
+  const chb = getActiveContCheckBox();
   if (chb) {
     option.chartType = chb.chartType
     option.browserType = chb.browserType

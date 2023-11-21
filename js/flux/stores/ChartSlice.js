@@ -24,7 +24,7 @@ const ChartSlice = {
     return this.charts[chartType];
   },
   isChartExist(option) {
-    (0, _ChartLogic.checkBrowserChartTypes)(this, option);
+    (0, _ChartLogic.checkBrowserChartTypes)(option);
     const {
       chartType,
       key
