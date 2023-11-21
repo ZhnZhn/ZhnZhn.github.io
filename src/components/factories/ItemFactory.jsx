@@ -11,6 +11,9 @@ import {
   ComponentActions
 } from '../../flux/actions/ComponentActions';
 import {
+  setActiveCheckbox
+} from '../../flux/stores/chartCheckBoxLogic';
+import {
   CHAT_TO_TOP,
   CHAT_COPY,
   ChartActions
@@ -71,7 +74,7 @@ const _crAreaChart = ({
        chartType={chartType}
        caption={id}
        config={config}
-       onSetActive={ComponentActions.setActiveCheckbox}
+       onSetActive={setActiveCheckbox}       
        onAddToWatch={_fAddToWatch(id, config)}
        {...props}
        crValueMoving={crValueMoving}

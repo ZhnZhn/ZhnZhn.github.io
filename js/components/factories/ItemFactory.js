@@ -5,6 +5,7 @@ exports.crItem = void 0;
 var _uiApi = require("../uiApi");
 var _ChartFn = require("../../charts/ChartFn");
 var _ComponentActions = require("../../flux/actions/ComponentActions");
+var _chartCheckBoxLogic = require("../../flux/stores/chartCheckBoxLogic");
 var _ChartActions = require("../../flux/actions/ChartActions");
 var _CompItemType = require("../../constants/CompItemType");
 var _Items = require("../items/Items");
@@ -17,7 +18,7 @@ const _getIdKey = (config, index) => {
       id,
       key
     } = zhConfig || {};
-  return [id || "Id:" + index, key || id || (0, _ChartFn.crId)()];
+  return [id || `Id:${index}`, key || id || (0, _ChartFn.crId)()];
 };
 const _fAddToWatch = (caption, config) => () => _ComponentActions.ComponentActions.showAddToWatch({
   caption,
@@ -40,7 +41,7 @@ const _crAreaChart = _ref => {
     chartType: chartType,
     caption: id,
     config: config,
-    onSetActive: _ComponentActions.ComponentActions.setActiveCheckbox,
+    onSetActive: _chartCheckBoxLogic.setActiveCheckbox,
     onAddToWatch: _fAddToWatch(id, config),
     ...props,
     crValueMoving: _ChartFn.crValueMoving,
