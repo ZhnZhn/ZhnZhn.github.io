@@ -17,9 +17,6 @@ const ComponentSlice = {
     option.modalDialogType = _ModalDialogType.MDT_ALERT;
     (0, _compStore.showModalDialog)(_ModalDialogType.MDT_ALERT, option);
   },
-  onShowAbout() {
-    this.trigger(_ComponentActions.CAT_SHOW_ABOUT);
-  },
   onShowDialog(type, browserType, dialogConfOr) {
     (0, _DialogLogicFn.showItemDialog)(this, this.dialogInit, {
       type,

@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _LoadingProgressActions = require("../actions/LoadingProgressActions");
 var _ChartActions = require("../actions/ChartActions");
+var _compStore = require("./compStore");
 var _ChartLogic = require("./chart/ChartLogic");
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 const _logErrorToConsole = function (_ref) {
@@ -53,6 +54,7 @@ const ChartSlice = {
       this.trigger(_ChartActions.CHAT_LOAD_COMPLETED, chartSlice);
     } else {
       this.trigger(_ChartActions.CHAT_INIT_AND_SHOW, Comp);
+      (0, _compStore.hideAbout)();
     }
     this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_COMPLETE);
     this.triggerLimitRemaining(limitRemaining);
@@ -90,6 +92,7 @@ const ChartSlice = {
       this.trigger(_ChartActions.CHAT_SHOW, chartSlice);
     } else {
       this.trigger(_ChartActions.CHAT_INIT_AND_SHOW, Comp);
+      (0, _compStore.hideAbout)();
     }
   },
   resetActiveChart(id) {
@@ -132,6 +135,5 @@ const ChartSlice = {
     this.trigger(_ChartActions.CHAT_SHOW, chartSlice);
   }
 };
-var _default = ChartSlice;
-exports.default = _default;
+var _default = exports.default = ChartSlice;
 //# sourceMappingURL=ChartSlice.js.map

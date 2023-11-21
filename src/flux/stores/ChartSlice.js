@@ -10,6 +10,8 @@ import {
   CHAT_CLOSE
 } from '../actions/ChartActions';
 
+import { hideAbout } from './compStore';
+
 import {
   isChartExist,
   removeConfig,
@@ -77,6 +79,7 @@ const ChartSlice = {
         this.trigger(CHAT_LOAD_COMPLETED, chartSlice);
       } else {
         this.trigger(CHAT_INIT_AND_SHOW, Comp);
+        hideAbout()
       }
       this.triggerLoadingProgress(LPAT_LOADING_COMPLETE)
       this.triggerLimitRemaining(limitRemaining);
@@ -112,6 +115,7 @@ const ChartSlice = {
       this.trigger(CHAT_SHOW, chartSlice);
     } else {
       this.trigger(CHAT_INIT_AND_SHOW, Comp)
+      hideAbout()
     }
   },
 

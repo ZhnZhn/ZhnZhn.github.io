@@ -1,5 +1,4 @@
-import {
-  CAT_SHOW_ABOUT,
+import {  
   CAT_SHOW_DIALOG,
   CAT_CLOSE_DIALOG,
   CAT_CLOSE_CHART_CONTAINER_2
@@ -30,10 +29,6 @@ const ComponentSlice = {
   showAlertDialog(option={}){
     option.modalDialogType = MDT_ALERT;
     showModalDialog(MDT_ALERT, option)
-  },
-
-  onShowAbout(){
-    this.trigger(CAT_SHOW_ABOUT);
   },
 
   onShowDialog(type, browserType, dialogConfOr){
