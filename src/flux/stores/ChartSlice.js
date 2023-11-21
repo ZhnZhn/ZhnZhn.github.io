@@ -11,6 +11,10 @@ import {
 } from '../actions/ChartActions';
 
 import { hideAbout } from './compStore';
+import {
+  uncheckActiveCheckbox,
+  resetActiveChart
+} from './chartCheckBoxLogic';
 
 import {
   isChartExist,
@@ -86,7 +90,7 @@ const ChartSlice = {
   },
   onLoadItemAdded(option={}){
      this.triggerLoadingProgress(LPAT_LOADING_COMPLETE)
-     scanPostAdded(this, option)
+     scanPostAdded(option)
   },
   onLoadItemFailed(option){
     this.triggerLoadingProgress(LPAT_LOADING_FAILED)
@@ -119,15 +123,6 @@ const ChartSlice = {
     }
   },
 
-  resetActiveChart(id){
-    if (
-      this.activeChart &&
-      this.activeChart.options.zhConfig.id === id
-    ){
-      this.activeChart = null;
-    }
-  },
-
   onCloseChart(chartType, browserType, chartId){
     const {
       chartSlice,
@@ -135,7 +130,7 @@ const ChartSlice = {
     } = removeConfig(this.charts, chartType, chartId);
 
     if (isRemoved) {
-      this.resetActiveChart(chartId)
+      resetActiveChart(chartId)
       this.minusMenuItemCounter(chartType, browserType);
 
       this.trigger(CHAT_CLOSE, chartSlice);
@@ -165,7 +160,7 @@ const ChartSlice = {
   onRemoveAll(chartType, browserType){
     const chartSlice = removeAll(this.charts, chartType);
     this.resetMenuItemCounter(chartType, browserType)
-    this.uncheckActiveCheckbox()
+    uncheckActiveCheckbox()
     this.trigger(CHAT_SHOW, chartSlice);
   }
 

@@ -9,7 +9,8 @@ export {
 import {
   MDT_COLUMN_RANGE
 } from '../../../constants/ModalDialogType';
-import { showModalDialog } from '../compStore'
+import { showModalDialog } from '../compStore';
+import { getActiveChart } from '../chartCheckBoxLogic';
 
 import { crItemContainerEl } from '../../logic/fItemContainer';
 
@@ -116,10 +117,9 @@ export const checkBrowserChartTypes = (
 }
 
 export const scanPostAdded = (
-  store,
   option
 ) => {
-  const chart = store.getActiveChart();
+  const chart = getActiveChart();
   if (chart && _isSecondDotCase(chart.series, option)) {
     showModalDialog(MDT_COLUMN_RANGE, { chart })
   }

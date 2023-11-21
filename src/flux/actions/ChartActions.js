@@ -12,6 +12,8 @@ import {
   withoutProxy
 } from '../../constants/Msg';
 import ChartStore from '../stores/ChartStore';
+import { isLoadToChart } from '../stores/chartCheckBoxLogic';
+
 import SettingSlice from '../stores/SettingSlice';
 import LoadConfig from '../logic/LoadConfig';
 import { crKeyForConfig } from '../logic/LogicFn';
@@ -155,7 +157,7 @@ CHA[CHAT_LOAD].shouldEmit = function(confItem={}, option={}){
   , { isLoadMeta } = option
   , key = isLoadMeta ? _crMetaDataKey(_key) : _key
   , _isDoublingLoad = this.isLoading && key === this.idLoading
-  , _isTs = ChartStore.isLoadToChart();
+  , _isTs = isLoadToChart();
 
   //{ chartType, browserType, dialogConf } = confItem
   _addSettingsTo(option, confItem, { key, _isTs })

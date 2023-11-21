@@ -22,16 +22,14 @@ export const CAT_SHOW_OPTION_DIALOG = 'showOptionDialog'
 export const CAT_CLOSE_CHART_CONTAINER = 'closeChartContainer'
 export const CAT_CLOSE_CHART_CONTAINER_2 = 'closeChartContainer2'
 export const CAT_SET_ACTIVE_CONTAINER = 'setActiveContainer'
-export const CAT_SET_ACTIVE_CHECKBOX = 'setActiveCheckbox'
 
-const CA = Reflux.createActions({  
+const CA = Reflux.createActions({
   [CAT_SHOW_DIALOG]: {},
   [CAT_CLOSE_DIALOG]: {},
   [CAT_SHOW_OPTION_DIALOG]: {},
   [CAT_CLOSE_CHART_CONTAINER]: {},
   [CAT_CLOSE_CHART_CONTAINER_2]: {},
-  [CAT_SET_ACTIVE_CONTAINER]: {},
-  [CAT_SET_ACTIVE_CHECKBOX]: {}
+  [CAT_SET_ACTIVE_CONTAINER]: {}
 });
 
 Object.assign(CA, {

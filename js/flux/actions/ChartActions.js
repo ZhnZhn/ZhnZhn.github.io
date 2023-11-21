@@ -7,6 +7,7 @@ var _refluxCore = _interopRequireDefault(require("reflux-core"));
 var _dateFn = require("../../utils/dateFn");
 var _Msg = require("../../constants/Msg");
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
+var _chartCheckBoxLogic = require("../stores/chartCheckBoxLogic");
 var _SettingSlice = _interopRequireDefault(require("../stores/SettingSlice"));
 var _LoadConfig = _interopRequireDefault(require("../logic/LoadConfig"));
 var _LogicFn = require("../logic/LogicFn");
@@ -17,32 +18,19 @@ const ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found.",
   _isFn = fn => typeof fn === 'function',
   _isUndef = v => typeof v === 'undefined',
   _assign = Object.assign;
-const CHAT_INIT_AND_SHOW = 'initAndShowChart';
-exports.CHAT_INIT_AND_SHOW = CHAT_INIT_AND_SHOW;
-const CHAT_SHOW = 'showChart';
-exports.CHAT_SHOW = CHAT_SHOW;
-const CHAT_CLOSE = 'closeChart';
-exports.CHAT_CLOSE = CHAT_CLOSE;
-const CHAT_LOAD = 'loadItem';
-exports.CHAT_LOAD = CHAT_LOAD;
-const CHAT_LOAD_ADDED = 'loadItemAdded';
-exports.CHAT_LOAD_ADDED = CHAT_LOAD_ADDED;
-const CHAT_LOAD_COMPLETED = 'loadItemCompleted';
-exports.CHAT_LOAD_COMPLETED = CHAT_LOAD_COMPLETED;
-const CHAT_LOAD_FAILED = 'loadItemFailed';
-exports.CHAT_LOAD_FAILED = CHAT_LOAD_FAILED;
-const CHAT_LOAD_BY_QUERY = 'loadItemByQuery';
-exports.CHAT_LOAD_BY_QUERY = CHAT_LOAD_BY_QUERY;
-const CHAT_TO_TOP = 'toTop';
-exports.CHAT_TO_TOP = CHAT_TO_TOP;
-const CHAT_COPY = 'copy';
-exports.CHAT_COPY = CHAT_COPY;
-const CHAT_UPDATE_MOVING_VALUES = 'updateMovingValues';
-exports.CHAT_UPDATE_MOVING_VALUES = CHAT_UPDATE_MOVING_VALUES;
-const CHAT_SORT_BY = 'sortBy';
-exports.CHAT_SORT_BY = CHAT_SORT_BY;
-const CHAT_REMOVE_ALL = 'removeAll';
-exports.CHAT_REMOVE_ALL = CHAT_REMOVE_ALL;
+const CHAT_INIT_AND_SHOW = exports.CHAT_INIT_AND_SHOW = 'initAndShowChart';
+const CHAT_SHOW = exports.CHAT_SHOW = 'showChart';
+const CHAT_CLOSE = exports.CHAT_CLOSE = 'closeChart';
+const CHAT_LOAD = exports.CHAT_LOAD = 'loadItem';
+const CHAT_LOAD_ADDED = exports.CHAT_LOAD_ADDED = 'loadItemAdded';
+const CHAT_LOAD_COMPLETED = exports.CHAT_LOAD_COMPLETED = 'loadItemCompleted';
+const CHAT_LOAD_FAILED = exports.CHAT_LOAD_FAILED = 'loadItemFailed';
+const CHAT_LOAD_BY_QUERY = exports.CHAT_LOAD_BY_QUERY = 'loadItemByQuery';
+const CHAT_TO_TOP = exports.CHAT_TO_TOP = 'toTop';
+const CHAT_COPY = exports.CHAT_COPY = 'copy';
+const CHAT_UPDATE_MOVING_VALUES = exports.CHAT_UPDATE_MOVING_VALUES = 'updateMovingValues';
+const CHAT_SORT_BY = exports.CHAT_SORT_BY = 'sortBy';
+const CHAT_REMOVE_ALL = exports.CHAT_REMOVE_ALL = 'removeAll';
 const _cancelLoad = function (option, alertMsg) {
   (0, _Msg.setAlertMsg)(option, alertMsg);
   this.failed(option);
@@ -129,7 +117,7 @@ CHA[CHAT_LOAD].shouldEmit = function (confItem, option) {
     } = option,
     key = isLoadMeta ? _crMetaDataKey(_key) : _key,
     _isDoublingLoad = this.isLoading && key === this.idLoading,
-    _isTs = _ChartStore.default.isLoadToChart();
+    _isTs = (0, _chartCheckBoxLogic.isLoadToChart)();
 
   //{ chartType, browserType, dialogConf } = confItem
   _addSettingsTo(option, confItem, {
@@ -191,6 +179,5 @@ CHA[CHAT_LOAD_BY_QUERY].listen(function (option) {
     this.failed(option);
   }
 });
-const ChartActions = CHA;
-exports.ChartActions = ChartActions;
+const ChartActions = exports.ChartActions = CHA;
 //# sourceMappingURL=ChartActions.js.map

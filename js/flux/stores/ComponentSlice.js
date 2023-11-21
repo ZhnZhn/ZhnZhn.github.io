@@ -4,10 +4,10 @@ exports.__esModule = true;
 exports.default = void 0;
 var _ComponentActions = require("../actions/ComponentActions");
 var _compStore = require("./compStore");
+var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
 var _ModalDialogType = require("../../constants/ModalDialogType");
 var _ContCheckBoxLogicFn = require("./comp/ContCheckBoxLogicFn");
 var _DialogLogicFn = require("./comp/DialogLogicFn");
-var _ItemCheckBoxLogicFn = require("./comp/ItemCheckBoxLogicFn");
 const ComponentSlice = {
   dialogInit: {},
   showAlertDialog(option) {
@@ -47,7 +47,7 @@ const ComponentSlice = {
   },
   onCloseChartContainer(chartType, browserType) {
     this.uncheckActiveContChb(chartType);
-    this.uncheckActiveCheckbox(chartType);
+    (0, _chartCheckBoxLogic.uncheckActiveCheckbox)(chartType);
     this.setMenuItemClose(chartType, browserType);
   },
   onCloseChartContainer2(chartType, browserType) {
@@ -60,26 +60,6 @@ const ComponentSlice = {
   },
   uncheckActiveContChb(chartType) {
     (0, _ContCheckBoxLogicFn.uncheckActiveContCheckBox)(this, chartType);
-  },
-  isLoadToChart() {
-    if (this.activeChart) {
-      return this.activeChart.options.zhConfig.id;
-    } else {
-      return false;
-    }
-  },
-  getActiveChart() {
-    return this.activeChart;
-  },
-  onSetActiveCheckbox(isCheck, checkBox, chart) {
-    (0, _ItemCheckBoxLogicFn.toggleItemCheckBox)(this, {
-      isCheck,
-      checkBox,
-      chart
-    });
-  },
-  uncheckActiveCheckbox(chartType) {
-    (0, _ItemCheckBoxLogicFn.uncheckActiveItemCheckBox)(this, chartType);
   }
 };
 var _default = exports.default = ComponentSlice;

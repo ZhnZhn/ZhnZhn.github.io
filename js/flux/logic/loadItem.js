@@ -1,35 +1,25 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _fnFetch = require("../../utils/fnFetch");
-
-var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
-
+var _chartCheckBoxLogic = require("../stores/chartCheckBoxLogic");
 var _ChartFn = require("../../charts/ChartFn");
-
 var _ChartOptionsFn = require("../../components/dialogs/ChartOptionsFn");
-
 var _onCatch = _interopRequireDefault(require("./onCatch"));
-
 const ALERT_CATEGORY_TO_SPLINE = {
   alertCaption: 'Series Error',
   alertDescr: "Adding category seria to not category isn't allowed."
 };
 const _isArr = Array.isArray;
-
 const _isFn = fn => typeof fn === 'function';
-
 const _crOptionFetch = (_ref, option) => {
   let {
     optionFetch
   } = _ref;
   return _isFn(optionFetch) ? optionFetch(option) : optionFetch;
 };
-
 const _fetchToChartComp = function (objImpl, _ref2) {
   let {
     json,
@@ -37,12 +27,11 @@ const _fetchToChartComp = function (objImpl, _ref2) {
     onCompleted
   } = _ref2;
   const {
-    adapter
-  } = objImpl,
-        {
-    config
-  } = adapter.toConfig(json, option);
-
+      adapter
+    } = objImpl,
+    {
+      config
+    } = adapter.toConfig(json, option);
   if (!_isFn(config.then)) {
     onCompleted(option, config);
   } else {
@@ -52,7 +41,6 @@ const _fetchToChartComp = function (objImpl, _ref2) {
     });
   }
 };
-
 const _crRequestUrl = (api, option, onFailed) => {
   try {
     return api.getRequestUrl(option);
@@ -64,17 +52,15 @@ const _crRequestUrl = (api, option, onFailed) => {
     });
   }
 };
-
 const _loadToChartComp = function (objImpl, option, onCompleted, onFailed) {
   const {
-    fnFetch,
-    api
-  } = objImpl,
-        {
-    getLimitRemaiming
-  } = api || {},
-        optionFetch = _crOptionFetch(objImpl, option);
-
+      fnFetch,
+      api
+    } = objImpl,
+    {
+      getLimitRemaiming
+    } = api || {},
+    optionFetch = _crOptionFetch(objImpl, option);
   fnFetch({
     uri: _crRequestUrl(api, option, onFailed),
     option,
@@ -87,7 +73,6 @@ const _loadToChartComp = function (objImpl, option, onCompleted, onFailed) {
     onFailed
   });
 };
-
 const _isNotAllowToAdd = (_ref3, option) => {
   let {
     toSeries,
@@ -95,17 +80,15 @@ const _isNotAllowToAdd = (_ref3, option) => {
   } = _ref3;
   return !_isFn(toSeries) || _isFn(isAdd) && !isAdd(option);
 };
-
 const _loadToChart = function (objImpl, option, onAdded, onFailed) {
   const {
-    fnFetch,
-    api
-  } = objImpl,
-        {
-    getLimitRemaiming
-  } = api || {},
-        optionFetch = _crOptionFetch(objImpl, option);
-
+      fnFetch,
+      api
+    } = objImpl,
+    {
+      getLimitRemaiming
+    } = api || {},
+    optionFetch = _crOptionFetch(objImpl, option);
   fnFetch({
     uri: _crRequestUrl(api, option, onFailed),
     option,
@@ -118,30 +101,27 @@ const _loadToChart = function (objImpl, option, onAdded, onFailed) {
     onFailed
   });
 };
-
 const _fetchToChart = function (objImpl, _ref4) {
   let {
     json,
     option,
     onCompleted
   } = _ref4;
-
   const {
-    adapter
-  } = objImpl,
-        {
-    itemCaption: label,
-    value,
-    hasSecondYAxis
-  } = option,
-        chart = _ChartStore.default.getActiveChart(),
-        series = adapter.toSeries(json, option, chart),
-        {
-    itemCaption,
-    color,
-    zhColor
-  } = series || {};
-
+      adapter
+    } = objImpl,
+    {
+      itemCaption: label,
+      value,
+      hasSecondYAxis
+    } = option,
+    chart = (0, _chartCheckBoxLogic.getActiveChart)(),
+    series = adapter.toSeries(json, option, chart),
+    {
+      itemCaption,
+      color,
+      zhColor
+    } = series || {};
   (0, _ChartFn.addSeriaWithRenderLabel)({
     chart,
     series,
@@ -151,30 +131,23 @@ const _fetchToChart = function (objImpl, _ref4) {
   });
   onCompleted(option);
 };
-
 const _isAddCategoryToSpline = _ref5 => {
   let {
     seriaType
   } = _ref5;
-
-  const chart = _ChartStore.default.getActiveChart();
-
+  const chart = (0, _chartCheckBoxLogic.getActiveChart)();
   return seriaType && (0, _ChartOptionsFn.isCategoryItem)({
     value: seriaType
   }) && chart && _isArr(chart.xAxis) && !_isArr(chart.xAxis[0].categories);
 };
-
 const _runAsync = function (fn, mls) {
   if (mls === void 0) {
     mls = 500;
   }
-
   setTimeout(fn, mls);
 };
-
 const _loadItem = function (objImpl, option, onCompleted, onAdded, onFailed) {
-  const parentId = _ChartStore.default.isLoadToChart();
-
+  const parentId = (0, _chartCheckBoxLogic.isLoadToChart)();
   if (!parentId) {
     _loadToChartComp(objImpl, option, onCompleted, onFailed);
   } else {
@@ -190,25 +163,21 @@ const _loadItem = function (objImpl, option, onCompleted, onAdded, onFailed) {
       _runAsync(() => onFailed(ALERT_CATEGORY_TO_SPLINE));
     } else {
       option.parentId = parentId;
-
       _loadToChart(objImpl, option, onAdded, onFailed);
     }
   }
 };
-
 const _crLoadFns = objImpl => objImpl.id === 'Q' ? {
   fnFetchToChartComp: _fetchToChartComp.bind(null, objImpl),
   fnFetchToChart: _fetchToChart.bind(null, objImpl)
 } : void 0;
-
 const fLoadItem = objImpl => {
   const {
-    fnFetch = _fnFetch.fetchJson,
-    api,
-    adapter
-  } = objImpl,
-        _loadFns = _crLoadFns(objImpl);
-
+      fnFetch = _fnFetch.fetchJson,
+      api,
+      adapter
+    } = objImpl,
+    _loadFns = _crLoadFns(objImpl);
   objImpl.fnFetch = fnFetch;
   return {
     loadItem: _loadItem.bind(null, objImpl),
@@ -217,7 +186,5 @@ const fLoadItem = objImpl => {
     ..._loadFns
   };
 };
-
-var _default = fLoadItem;
-exports.default = _default;
+var _default = exports.default = fLoadItem;
 //# sourceMappingURL=loadItem.js.map

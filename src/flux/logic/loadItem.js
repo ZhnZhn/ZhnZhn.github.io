@@ -1,6 +1,9 @@
 import { fetchJson } from '../../utils/fnFetch';
 
-import ChartStore from '../stores/ChartStore';
+import {
+  isLoadToChart,
+  getActiveChart
+} from '../stores/chartCheckBoxLogic';
 import {
   addSeriaWithRenderLabel
 } from '../../charts/ChartFn';
@@ -80,10 +83,10 @@ const _loadToChart = function(objImpl, option, onAdded, onFailed){
 
 const _fetchToChart = function(objImpl, { json, option, onCompleted }){
   const { adapter } = objImpl
-      , { itemCaption:label, value, hasSecondYAxis } = option
-      , chart = ChartStore.getActiveChart()
-      , series = adapter.toSeries(json, option, chart)
-      , { itemCaption, color, zhColor } = series || {};
+  , { itemCaption:label, value, hasSecondYAxis } = option
+  , chart = getActiveChart()
+  , series = adapter.toSeries(json, option, chart)
+  , { itemCaption, color, zhColor } = series || {};
 
   addSeriaWithRenderLabel({
     chart, series,
@@ -95,7 +98,7 @@ const _fetchToChart = function(objImpl, { json, option, onCompleted }){
 }
 
 const _isAddCategoryToSpline = ({ seriaType }) => {
-  const chart = ChartStore.getActiveChart();
+  const chart = getActiveChart();
   return seriaType
     && isCategoryItem({ value: seriaType })
     && chart && _isArr(chart.xAxis)
@@ -107,7 +110,7 @@ const _runAsync = (fn, mls=500) => {
 };
 
 const _loadItem = function(objImpl, option, onCompleted, onAdded, onFailed){
-  const parentId = ChartStore.isLoadToChart();
+  const parentId = isLoadToChart();
   if (!parentId) {
      _loadToChartComp(objImpl, option, onCompleted, onFailed);
   } else {

@@ -7,6 +7,7 @@ var _LoadType = require("../../constants/LoadType");
 var _fnFetch = require("../../utils/fnFetch");
 var _onCatch = _interopRequireDefault(require("./onCatch"));
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
+var _chartCheckBoxLogic = require("../stores/chartCheckBoxLogic");
 var _NdlApi = _interopRequireDefault(require("../../adapters/ndl/NdlApi"));
 var _LoadImpl = _interopRequireDefault(require("./LoadImpl"));
 const _compareByCaption = (a, b) => {
@@ -39,7 +40,7 @@ const _loadToChartComp = function (option, onCompleted, onFailed) {
   const {
       isLoadMeta
     } = option,
-    _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl.default.Quandl.fnFetchToChartComp,
+    _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl.default.Ndl.fnFetchToChartComp,
     _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
   (0, _fnFetch.fetchJson)({
     uri: _NdlApi.default.getRequestUrl(option),
@@ -55,7 +56,7 @@ const _loadToChart = function (option, onAdded, onFailed) {
   const {
       isLoadMeta
     } = option,
-    _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl.default.Quandl.fnFetchToChart,
+    _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl.default.Ndl.fnFetchToChart,
     _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
   (0, _fnFetch.fetchJson)({
     uri: _NdlApi.default.getRequestUrl(option),
@@ -67,9 +68,9 @@ const _loadToChart = function (option, onAdded, onFailed) {
     onFailed: _onFailed
   });
 };
-const loadNdlCommodityTrade = {
+const loadNdlCommodityTrade = exports.loadNdlCommodityTrade = {
   loadItem(option, onCompleted, onAdded, onFailed) {
-    const parentId = _ChartStore.default.isLoadToChart();
+    const parentId = (0, _chartCheckBoxLogic.isLoadToChart)();
     option.apiKey = _ChartStore.default.getKey(_LoadType.LT_Q);
     if (!parentId) {
       _loadToChartComp(option, onCompleted, onFailed);
@@ -79,5 +80,4 @@ const loadNdlCommodityTrade = {
     }
   }
 };
-exports.loadNdlCommodityTrade = loadNdlCommodityTrade;
 //# sourceMappingURL=loadNdlCommodityTrade.js.map

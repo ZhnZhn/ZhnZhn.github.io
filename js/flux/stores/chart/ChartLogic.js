@@ -11,6 +11,7 @@ exports.removeAll = _ChartLogicFn.removeAll;
 exports.updateMovingValues = _ChartLogicFn.updateMovingValues;
 var _ModalDialogType = require("../../../constants/ModalDialogType");
 var _compStore = require("../compStore");
+var _chartCheckBoxLogic = require("../chartCheckBoxLogic");
 var _fItemContainer = require("../../logic/fItemContainer");
 var _getSlice = _interopRequireDefault(require("./getSlice"));
 var _fCompareBy = _interopRequireDefault(require("./fCompareBy"));
@@ -102,8 +103,8 @@ const checkBrowserChartTypes = (slice, option) => {
   }
 };
 exports.checkBrowserChartTypes = checkBrowserChartTypes;
-const scanPostAdded = (store, option) => {
-  const chart = store.getActiveChart();
+const scanPostAdded = option => {
+  const chart = (0, _chartCheckBoxLogic.getActiveChart)();
   if (chart && _isSecondDotCase(chart.series, option)) {
     (0, _compStore.showModalDialog)(_ModalDialogType.MDT_COLUMN_RANGE, {
       chart

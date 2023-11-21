@@ -1,10 +1,11 @@
-import {  
+import {
   CAT_SHOW_DIALOG,
   CAT_CLOSE_DIALOG,
   CAT_CLOSE_CHART_CONTAINER_2
 } from '../actions/ComponentActions';
 
 import { showModalDialog } from './compStore';
+import { uncheckActiveCheckbox } from './chartCheckBoxLogic';
 
 import {
   MDT_ALERT
@@ -18,10 +19,6 @@ import {
   showItemDialog,
   showOptionDialog
 } from './comp/DialogLogicFn';
-import {
-  toggleItemCheckBox,
-  uncheckActiveItemCheckBox
-} from './comp/ItemCheckBoxLogicFn';
 
 const ComponentSlice = {
   dialogInit : {},
@@ -62,7 +59,7 @@ const ComponentSlice = {
 
   onCloseChartContainer(chartType, browserType){
     this.uncheckActiveContChb(chartType);
-    this.uncheckActiveCheckbox(chartType);
+    uncheckActiveCheckbox(chartType);
     this.setMenuItemClose(chartType, browserType);
   },
   onCloseChartContainer2(chartType, browserType){
@@ -75,23 +72,6 @@ const ComponentSlice = {
   },
   uncheckActiveContChb(chartType){
     uncheckActiveContCheckBox(this, chartType)
-  },
-
-  isLoadToChart(){
-    if (this.activeChart){
-      return this.activeChart.options.zhConfig.id;
-    } else {
-      return false;
-    }
-  },
-  getActiveChart(){
-    return this.activeChart;
-  },
-  onSetActiveCheckbox(isCheck, checkBox, chart){
-    toggleItemCheckBox(this, {isCheck, checkBox, chart})
-  },
-  uncheckActiveCheckbox(chartType){
-    uncheckActiveItemCheckBox(this, chartType)
   }
 }
 
