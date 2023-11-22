@@ -3,6 +3,7 @@ import {
   useState,
   useMemo,
   useEffect,
+  getRefValue,
   getRefElementStyle
 } from '../uiApi';
 
@@ -26,9 +27,7 @@ import {
   CHAT_LOAD_COMPLETED,
   CHAT_CLOSE
 } from '../../flux/actions/ChartActions';
-import {
-  CAT_CLOSE_CHART_CONTAINER_2
-} from '../../flux/actions/ComponentActions';
+import { useMsChartCont } from '../../flux/stores/compStore';
 
 import crModelMore from './crModelMore';
 import forEachInstance from './forEachInstance';
@@ -79,7 +78,7 @@ const _crFnByNameArgs = (
   methodName,
   ...args
 ) => () => {
-  const _compInstance = ref.current;
+  const _compInstance = getRefValue(ref);
   if (_compInstance) {
     _compInstance[methodName](...args)
   }
@@ -246,19 +245,23 @@ const ChartContainer = ({
   // store, chartType
   /*eslint-enable react-hooks/exhaustive-deps */
 
+  useMsChartCont(msChartCont => {
+    if (msChartCont && msChartCont.id === chartType) {
+      _hHide()
+    }
+  })
+
   useListen((actionType, data) => {
-     if (_isDataForContainer(data, chartType)) {
-       if (_isInArray(CHAT_ACTIONS, actionType)) {
-         if (actionType !== CHAT_CLOSE) {
-           _refSpComp.current.scrollTop = 0
-         }
-         setState(prevState => ({
-           ...prevState,
-           ...data
-         }));
-       } else if (actionType === CAT_CLOSE_CHART_CONTAINER_2){
-         _hHide();
-       }
+     if (_isDataForContainer(data, chartType)
+       && _isInArray(CHAT_ACTIONS, actionType)
+     ) {
+        if (actionType !== CHAT_CLOSE) {
+          (getRefValue(_refSpComp) || {}).scrollTop = 0
+        }
+        setState(prevState => ({
+         ...prevState,
+         ...data
+        }));
      }
   })
 

@@ -14,7 +14,7 @@ var _useSetActiveCheckBox = _interopRequireDefault(require("./useSetActiveCheckB
 var _useCompareTo = _interopRequireDefault(require("./useCompareTo"));
 var _crChartContainerStyle = _interopRequireDefault(require("./crChartContainerStyle"));
 var _ChartActions = require("../../flux/actions/ChartActions");
-var _ComponentActions = require("../../flux/actions/ComponentActions");
+var _compStore = require("../../flux/stores/compStore");
 var _crModelMore = _interopRequireDefault(require("./crModelMore"));
 var _forEachInstance = _interopRequireDefault(require("./forEachInstance"));
 var _Comp = _interopRequireDefault(require("../Comp"));
@@ -56,7 +56,7 @@ const _crFnByNameArgs = function (ref, methodName) {
     args[_key - 2] = arguments[_key];
   }
   return () => {
-    const _compInstance = ref.current;
+    const _compInstance = (0, _uiApi.getRefValue)(ref);
     if (_compInstance) {
       _compInstance[methodName](...args);
     }
@@ -166,19 +166,20 @@ const ChartContainer = _ref => {
   // store, chartType
   /*eslint-enable react-hooks/exhaustive-deps */
 
+  (0, _compStore.useMsChartCont)(msChartCont => {
+    if (msChartCont && msChartCont.id === chartType) {
+      _hHide();
+    }
+  });
   (0, _useListen.default)((actionType, data) => {
-    if (_isDataForContainer(data, chartType)) {
-      if (_isInArray(CHAT_ACTIONS, actionType)) {
-        if (actionType !== _ChartActions.CHAT_CLOSE) {
-          _refSpComp.current.scrollTop = 0;
-        }
-        setState(prevState => ({
-          ...prevState,
-          ...data
-        }));
-      } else if (actionType === _ComponentActions.CAT_CLOSE_CHART_CONTAINER_2) {
-        _hHide();
+    if (_isDataForContainer(data, chartType) && _isInArray(CHAT_ACTIONS, actionType)) {
+      if (actionType !== _ChartActions.CHAT_CLOSE) {
+        ((0, _uiApi.getRefValue)(_refSpComp) || {}).scrollTop = 0;
       }
+      setState(prevState => ({
+        ...prevState,
+        ...data
+      }));
     }
   });
   const [_style, _className] = (0, _crChartContainerStyle.default)(isShow);
@@ -235,6 +236,5 @@ const ChartContainer = _ref => {
     })]
   });
 };
-var _default = ChartContainer;
-exports.default = _default;
+var _default = exports.default = ChartContainer;
 //# sourceMappingURL=ChartContainer.js.map
