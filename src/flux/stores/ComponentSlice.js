@@ -3,15 +3,9 @@ import {
   CAT_CLOSE_DIALOG
 } from '../actions/ComponentActions';
 
-import { showModalDialog } from './compStore';
+import { showAlertDialog } from './compStore';
 import { uncheckActiveCheckbox } from './chartCheckBoxLogic';
-import {
-  uncheckActiveContCheckBox
-} from './contCheckBoxLogic';
-
-import {
-  MDT_ALERT
-} from '../../constants/ModalDialogType';
+import { uncheckActiveContCheckBox } from './contCheckBoxLogic';
 
 import {
   showItemDialog,
@@ -20,11 +14,6 @@ import {
 
 const ComponentSlice = {
   dialogInit : {},
-
-  showAlertDialog(option={}){
-    option.modalDialogType = MDT_ALERT;
-    showModalDialog(MDT_ALERT, option)
-  },
 
   onShowDialog(type, browserType, dialogConfOr){
     showItemDialog(
@@ -48,7 +37,7 @@ const ComponentSlice = {
       this.trigger(CAT_SHOW_DIALOG, r)
     })
     .catch(err => {
-      showModalDialog(MDT_ALERT, {
+      showAlertDialog({
         alertCaption: 'Failed Load',
         alertDescr: err.message
       })
@@ -60,7 +49,7 @@ const ComponentSlice = {
     uncheckActiveCheckbox(chartType);
     this.setMenuItemClose(chartType, browserType);
   }
-  
+
 }
 
 export default ComponentSlice

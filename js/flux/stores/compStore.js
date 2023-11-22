@@ -1,8 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useMsChartCont = exports.useMsAbout = exports.useMdOption = exports.showModalDialog = exports.showAbout = exports.hideAbout = exports.closeChartCont = void 0;
+exports.useMsChartCont = exports.useMsAbout = exports.useMdOption = exports.showModalDialog = exports.showAlertDialog = exports.showAbout = exports.hideAbout = exports.closeChartCont = void 0;
 var _storeApi = require("../storeApi");
+var _ModalDialogType = require("../../constants/ModalDialogType");
 const [_crMsAbout, _selectMsAbout] = (0, _storeApi.fCrStoreSlice)("msAbout", "is"),
   [_crMsChartCont, _selectMsChartCont] = (0, _storeApi.fCrStoreSlice)("msChartCont"),
   [_crMdOption, _selectMdOption] = (0, _storeApi.fCrStoreSlice)("mdOption");
@@ -33,4 +34,5 @@ const showModalDialog = function (modalDialogType, option) {
   }));
 };
 exports.showModalDialog = showModalDialog;
+const showAlertDialog = exports.showAlertDialog = (0, _storeApi.bindTo)(showModalDialog, _ModalDialogType.MDT_ALERT);
 //# sourceMappingURL=compStore.js.map

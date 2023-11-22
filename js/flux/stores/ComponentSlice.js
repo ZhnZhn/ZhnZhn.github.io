@@ -6,17 +6,9 @@ var _ComponentActions = require("../actions/ComponentActions");
 var _compStore = require("./compStore");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
 var _contCheckBoxLogic = require("./contCheckBoxLogic");
-var _ModalDialogType = require("../../constants/ModalDialogType");
 var _DialogLogicFn = require("./comp/DialogLogicFn");
 const ComponentSlice = {
   dialogInit: {},
-  showAlertDialog(option) {
-    if (option === void 0) {
-      option = {};
-    }
-    option.modalDialogType = _ModalDialogType.MDT_ALERT;
-    (0, _compStore.showModalDialog)(_ModalDialogType.MDT_ALERT, option);
-  },
   onShowDialog(type, browserType, dialogConfOr) {
     (0, _DialogLogicFn.showItemDialog)(this, this.dialogInit, {
       type,
@@ -39,7 +31,7 @@ const ComponentSlice = {
     }).then(r => {
       this.trigger(_ComponentActions.CAT_SHOW_DIALOG, r);
     }).catch(err => {
-      (0, _compStore.showModalDialog)(_ModalDialogType.MDT_ALERT, {
+      (0, _compStore.showAlertDialog)({
         alertCaption: 'Failed Load',
         alertDescr: err.message
       });

@@ -1,9 +1,14 @@
 import {
+  bindTo,
   createStoreWithSelector,
   getStoreApi,
   fCrStoreSlice,
   fCrUse
 } from '../storeApi';
+
+import {
+  MDT_ALERT
+} from '../../constants/ModalDialogType';
 
 const [
   _crMsAbout,
@@ -40,3 +45,4 @@ export const showModalDialog = (
   option.modalDialogType = modalDialogType
   _set(_crMdOption({...option}))
 }
+export const showAlertDialog = bindTo(showModalDialog, MDT_ALERT)

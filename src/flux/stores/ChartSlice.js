@@ -10,7 +10,10 @@ import {
   CHAT_CLOSE
 } from '../actions/ChartActions';
 
-import { hideAbout } from './compStore';
+import {
+  hideAbout,
+  showAlertDialog
+} from './compStore';
 import {
   uncheckActiveCheckbox,
   resetActiveChart
@@ -95,7 +98,7 @@ const ChartSlice = {
   onLoadItemFailed(option){
     this.triggerLoadingProgress(LPAT_LOADING_FAILED)
     setAlertItemIdTo(option)
-    this.showAlertDialog(option);
+    showAlertDialog(option)  
     _logErrorToConsole(option);
   },
 

@@ -70,7 +70,7 @@ const ChartSlice = {
   onLoadItemFailed(option) {
     this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_FAILED);
     (0, _ChartLogic.setAlertItemIdTo)(option);
-    this.showAlertDialog(option);
+    (0, _compStore.showAlertDialog)(option);
     _logErrorToConsole(option);
   },
   onLoadItemByQuery() {

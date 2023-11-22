@@ -9,6 +9,8 @@ import {
   BAT_LOAD_BROWSER_FAILED
 } from '../actions/BrowserActions';
 
+import { showAlertDialog } from './compStore';
+
 import {
   isWithItemCounter,
   initBrowserMenu,
@@ -68,7 +70,7 @@ const BrowserSlice = {
     }
   },
   onShowBrowserDynamicFailed(option){
-    this.showAlertDialog(option)
+    showAlertDialog(option)
     this.trigger(BAT_SHOW_BROWSER_DYNAMIC + FAILED)
   },
 
@@ -84,7 +86,7 @@ const BrowserSlice = {
   onLoadBrowserDynamicFailed(option){
     const { alertItemId, caption, browserType } = option;
     option.alertItemId = alertItemId || caption
-    this.showAlertDialog(option);
+    showAlertDialog()  
     this.trigger(BAT_LOAD_BROWSER_FAILED, browserType)
   }
 
