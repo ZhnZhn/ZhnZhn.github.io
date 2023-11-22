@@ -21,6 +21,8 @@ import {
   WATCH_PREV
 } from '../../constants/MsgWatch';
 
+import { showModalDialog } from '../stores/compStore';
+
 import { findGroup } from './LogicFn';
 import {
   dragDropItem,
@@ -116,7 +118,7 @@ const WatchListSlice = {
        LocalForage.setItem(STORAGE_KEY , this.watchList)
           .then(()=>{
              this.isWatchEdited = false;
-             this.onShowModalDialog(MDT_INFO, {
+             showModalDialog(MDT_INFO, {
                 caption: DIALOG_CAPTION,
                 descr: WATCH_SAVED
              })
@@ -125,7 +127,7 @@ const WatchListSlice = {
              console.log(error);
           })
     } else {
-       this.onShowModalDialog(MDT_INFO, {
+       showModalDialog(MDT_INFO, {
           caption: DIALOG_CAPTION,
           descr: WATCH_PREV
        })
