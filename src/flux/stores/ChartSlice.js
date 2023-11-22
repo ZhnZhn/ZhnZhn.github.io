@@ -27,6 +27,10 @@ import {
 } from './chartCheckBoxLogic';
 
 import {
+  getDialogConf
+} from './dialogLogic';
+
+import {
   isChartExist,
   removeConfig,
   toTop,
@@ -81,8 +85,7 @@ const ChartSlice = {
         return;
       }
 
-      const _dialogConf = dialogConf
-        || this.getDialogConf(void 0, chartType)
+      const _dialogConf = dialogConf || getDialogConf(void 0, chartType)
       , {
         chartSlice,
         Comp
@@ -121,7 +124,7 @@ const ChartSlice = {
 
   onShowChart(chartType, browserType, dialogConfOr){
     setMenuItemOpen(chartType, browserType)
-    const dialogConf = this.getDialogConf(dialogConfOr, chartType);
+    const dialogConf = getDialogConf(dialogConfOr, chartType);
     const {
       chartSlice, Comp
      } = showChart(this.charts, chartType, browserType, dialogConf, this);

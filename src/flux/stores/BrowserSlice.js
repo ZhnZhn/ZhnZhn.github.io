@@ -1,7 +1,3 @@
-//import BrowserConfig from '../../constants/BrowserConfig';
-//import { BT_STOCKS_BY_SECTORS } from '../../constants/BrowserType';
-//import DataWL from '../../constants/DataWL';
-
 import {
   BAT_SHOW_BROWSER_DYNAMIC,
   BAT_INIT_BROWSER_DYNAMIC,
@@ -19,7 +15,6 @@ import {
 import {
   getBrowserMenu,
   setBrowserMenu,
-  //getRouterDialog,
   setRouterDialog
 } from './browserLogic';
 
@@ -27,7 +22,7 @@ const FAILED = 'Failed';
 
 const BrowserSlice = {
   isWithItemCounter: isWithItemCounter,
-  
+
   onShowBrowserDynamicDone({ browserType }){
     this.trigger(BAT_SHOW_BROWSER_DYNAMIC, browserType);
   },

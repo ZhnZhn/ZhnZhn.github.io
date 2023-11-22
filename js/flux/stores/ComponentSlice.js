@@ -7,11 +7,11 @@ var _compStore = require("./compStore");
 var _browserLogic = require("./browserLogic");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
 var _contCheckBoxLogic = require("./contCheckBoxLogic");
-var _DialogLogicFn = require("./comp/DialogLogicFn");
+var _dialogLogic = require("./dialogLogic");
 const ComponentSlice = {
   dialogInit: {},
   onShowDialog(type, browserType, dialogConfOr) {
-    (0, _DialogLogicFn.showItemDialog)(this, this.dialogInit, {
+    (0, _dialogLogic.showItemDialog)(this.dialogInit, {
       type,
       browserType,
       dialogConfOr
@@ -26,7 +26,7 @@ const ComponentSlice = {
     });
   },
   onShowOptionDialog(type, option) {
-    (0, _DialogLogicFn.showOptionDialog)(this.dialogInit, {
+    (0, _dialogLogic.showOptionDialog)(this.dialogInit, {
       type,
       data: option
     }).then(r => {

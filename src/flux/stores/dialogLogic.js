@@ -1,15 +1,25 @@
 import {
   crDialog,
   crOptionDialog
-} from '../../logic/Factory';
+} from '../logic/Factory';
+
+import { getSourceConfig } from './browserLogic';
+
+export const getDialogConf = (conf, chartType) => {
+  //DialogStatN
+  if (conf && conf.dialogConf) {
+    return conf;
+  }
+  const _browserId = chartType.split('_')[0];
+  return getSourceConfig(_browserId, chartType);
+}
 
 export const showItemDialog = (
-  store,
   slice,
   { type, browserType, dialogConfOr }
 ) => slice[type]
  ? Promise.resolve({ key: type })
- : crDialog(browserType, store.getDialogConf(dialogConfOr, type))
+ : crDialog(browserType, getDialogConf(dialogConfOr, type))
      .then(Comp => {
         slice[type] = true
         return { key:type, Comp };

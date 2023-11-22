@@ -6,10 +6,6 @@ var _BrowserActions = require("../actions/BrowserActions");
 var _compStore = require("./compStore");
 var _BrowserLogicFn = require("./browser/BrowserLogicFn");
 var _browserLogic = require("./browserLogic");
-//import BrowserConfig from '../../constants/BrowserConfig';
-//import { BT_STOCKS_BY_SECTORS } from '../../constants/BrowserType';
-//import DataWL from '../../constants/DataWL';
-
 const FAILED = 'Failed';
 const BrowserSlice = {
   isWithItemCounter: _BrowserLogicFn.isWithItemCounter,

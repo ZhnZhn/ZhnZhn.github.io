@@ -7,6 +7,7 @@ var _ChartActions = require("../actions/ChartActions");
 var _browserLogic = require("./browserLogic");
 var _compStore = require("./compStore");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
+var _dialogLogic = require("./dialogLogic");
 var _ChartLogic = require("./chart/ChartLogic");
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 const _logErrorToConsole = function (_ref) {
@@ -46,7 +47,7 @@ const ChartSlice = {
     if ((0, _ChartLogic.isChartExist)(this.charts, chartType, key)) {
       return;
     }
-    const _dialogConf = dialogConf || this.getDialogConf(void 0, chartType),
+    const _dialogConf = dialogConf || (0, _dialogLogic.getDialogConf)(void 0, chartType),
       {
         chartSlice,
         Comp
@@ -85,7 +86,7 @@ const ChartSlice = {
   },
   onShowChart(chartType, browserType, dialogConfOr) {
     (0, _browserLogic.setMenuItemOpen)(chartType, browserType);
-    const dialogConf = this.getDialogConf(dialogConfOr, chartType);
+    const dialogConf = (0, _dialogLogic.getDialogConf)(dialogConfOr, chartType);
     const {
       chartSlice,
       Comp

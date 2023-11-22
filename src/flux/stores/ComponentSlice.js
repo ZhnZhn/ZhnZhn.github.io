@@ -11,14 +11,14 @@ import { uncheckActiveContCheckBox } from './contCheckBoxLogic';
 import {
   showItemDialog,
   showOptionDialog
-} from './comp/DialogLogicFn';
+} from './dialogLogic';
 
 const ComponentSlice = {
   dialogInit : {},
 
   onShowDialog(type, browserType, dialogConfOr){
     showItemDialog(
-      this, this.dialogInit, { type, browserType, dialogConfOr }
+      this.dialogInit, { type, browserType, dialogConfOr }
     ).then(r => {
        this.trigger(CAT_SHOW_DIALOG, r)
     });
