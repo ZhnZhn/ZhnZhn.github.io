@@ -8,6 +8,9 @@ import {
   ComponentActions
 } from '../actions/ComponentActions';
 import {
+  showModalDialog
+} from '../stores/compStore';
+import {
   CHAT_SHOW,
   ChartActions
 } from '../actions/ChartActions';
@@ -73,8 +76,10 @@ const _crBrowserDynamic = (
          : void 0
     //for Type2
     , onShowLoadDialog = chartContainerType
-         ? item => ComponentActions.showModalDialog(modalDialogType, {
-             item, browserType, chartContainerType,
+         ? item => showModalDialog(modalDialogType, {
+             item,
+             browserType,
+             chartContainerType,
              onShow: bindTo(ChartActions[CHAT_SHOW], chartContainerType, browserType)
            })
         : void 0;

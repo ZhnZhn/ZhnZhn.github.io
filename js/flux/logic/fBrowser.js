@@ -6,6 +6,7 @@ exports.crAsyncBrowser = void 0;
 var _uiApi = require("../../components/uiApi");
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 var _ComponentActions = require("../actions/ComponentActions");
+var _compStore = require("../stores/compStore");
 var _ChartActions = require("../actions/ChartActions");
 var _BrowserActions = require("../actions/BrowserActions");
 var _BrowserType = require("../../constants/BrowserType");
@@ -38,7 +39,7 @@ const _crBrowserDynamic = (Comp, option) => {
     onClickInfo = typeof ItemComp !== "undefined" ? _ComponentActions.ComponentActions.showDescription : void 0
     //for Type2
     ,
-    onShowLoadDialog = chartContainerType ? item => _ComponentActions.ComponentActions.showModalDialog(modalDialogType, {
+    onShowLoadDialog = chartContainerType ? item => (0, _compStore.showModalDialog)(modalDialogType, {
       item,
       browserType,
       chartContainerType,
