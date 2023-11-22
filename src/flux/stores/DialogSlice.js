@@ -1,3 +1,4 @@
+import { getSourceConfig } from './browserLogic';
 
 const DialogSlice = {
   getDialogConf(conf, chartType){
@@ -6,7 +7,7 @@ const DialogSlice = {
       return conf;
     }
     const _browserId = chartType.split('_')[0];
-    return this.getSourceConfig(_browserId, chartType);
+    return getSourceConfig(_browserId, chartType);
   }
 }
 

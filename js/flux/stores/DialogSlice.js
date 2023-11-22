@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _browserLogic = require("./browserLogic");
 const DialogSlice = {
   getDialogConf(conf, chartType) {
     //DialogStatN
@@ -9,9 +10,8 @@ const DialogSlice = {
       return conf;
     }
     const _browserId = chartType.split('_')[0];
-    return this.getSourceConfig(_browserId, chartType);
+    return (0, _browserLogic.getSourceConfig)(_browserId, chartType);
   }
 };
-var _default = DialogSlice;
-exports.default = _default;
+var _default = exports.default = DialogSlice;
 //# sourceMappingURL=DialogSlice.js.map

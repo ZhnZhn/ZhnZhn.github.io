@@ -12,7 +12,7 @@ const isWithItemCounter = browserType => {
   return typeof _config === 'undefined' ? false : !_config.withoutItemCounter;
 };
 exports.isWithItemCounter = isWithItemCounter;
-const initBrowserMenu = (setBrowserMenu, slice, option) => {
+const initBrowserMenu = (setBrowserMenu, setRouterDialog, option) => {
   const {
       json,
       browserType
@@ -24,7 +24,7 @@ const initBrowserMenu = (setBrowserMenu, slice, option) => {
     } = json,
     elMenu = (0, _crMenu.default)(menu, items, browserType);
   (0, _addDialogPropsTo.default)(items, df);
-  slice.routeDialog[browserType] = items;
+  setRouterDialog(browserType, items);
   setBrowserMenu(browserType, elMenu);
   return elMenu;
 };

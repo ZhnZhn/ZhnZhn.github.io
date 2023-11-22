@@ -12,6 +12,7 @@ import {
   withoutProxy
 } from '../../constants/Msg';
 import ChartStore from '../stores/ChartStore';
+import { getSourceConfig } from '../stores/browserLogic';
 import { isLoadToChart } from '../stores/chartCheckBoxLogic';
 
 import SettingSlice from '../stores/SettingSlice';
@@ -191,8 +192,7 @@ const _addDialogPropsTo = option => {
     chartType,
     browserType
   } = option
-  , { dialogProps } = ChartStore
-        .getSourceConfig(browserType, chartType) || {}
+  , { dialogProps } = getSourceConfig(browserType, chartType) || {}
   , { dfProps } = dialogProps || {};
 
   _assign(option, dialogProps, dfProps, {

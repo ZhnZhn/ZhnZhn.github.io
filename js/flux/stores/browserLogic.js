@@ -1,8 +1,12 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.setMenuItemOpen = exports.setMenuItemClose = exports.setBrowserMenu = exports.resetMenuItemCounter = exports.minusMenuItemCounter = exports.getBrowserMenu = exports.addMenuItemCounter = void 0;
+exports.setRouterDialog = exports.setMenuItemOpen = exports.setMenuItemClose = exports.setBrowserMenu = exports.resetMenuItemCounter = exports.minusMenuItemCounter = exports.getSourceConfig = exports.getBrowserMenu = exports.addMenuItemCounter = void 0;
 var _storeApi = require("../storeApi");
+var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
+var _BrowserType = require("../../constants/BrowserType");
+var _DataWL = _interopRequireDefault(require("../../constants/DataWL"));
 var _BrowserLogicFn = require("./browser/BrowserLogicFn");
 const BROWSER_MENU = {};
 const _setItemOpen = (0, _storeApi.bindTo)(_BrowserLogicFn.setIsOpen, true),
@@ -35,4 +39,20 @@ const resetMenuItemCounter = (cT, bT) => {
   (0, _BrowserLogicFn.resetCounter)(BROWSER_MENU, bT, cT);
 };
 exports.resetMenuItemCounter = resetMenuItemCounter;
+const ROUTER_DIALOG = {
+  WL: _DataWL.default
+};
+const setRouterDialog = (browserType, items) => {
+  ROUTER_DIALOG[browserType] = items;
+};
+exports.setRouterDialog = setRouterDialog;
+const _getRouterDialog = browserId => ROUTER_DIALOG[browserId];
+const getSourceConfig = (browserId, sourceId) => {
+  if (sourceId.indexOf(_BrowserType.BT_STOCKS_BY_SECTORS) > 0) {
+    return _BrowserConfig.default[browserId];
+  }
+  const _r = _getRouterDialog(browserId);
+  return _r ? _r[sourceId] : void 0;
+};
+exports.getSourceConfig = getSourceConfig;
 //# sourceMappingURL=browserLogic.js.map

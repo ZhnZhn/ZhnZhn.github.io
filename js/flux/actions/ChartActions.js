@@ -7,6 +7,7 @@ var _refluxCore = _interopRequireDefault(require("reflux-core"));
 var _dateFn = require("../../utils/dateFn");
 var _Msg = require("../../constants/Msg");
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
+var _browserLogic = require("../stores/browserLogic");
 var _chartCheckBoxLogic = require("../stores/chartCheckBoxLogic");
 var _SettingSlice = _interopRequireDefault(require("../stores/SettingSlice"));
 var _LoadConfig = _interopRequireDefault(require("../logic/LoadConfig"));
@@ -144,7 +145,7 @@ const _addDialogPropsTo = option => {
     } = option,
     {
       dialogProps
-    } = _ChartStore.default.getSourceConfig(browserType, chartType) || {},
+    } = (0, _browserLogic.getSourceConfig)(browserType, chartType) || {},
     {
       dfProps
     } = dialogProps || {};

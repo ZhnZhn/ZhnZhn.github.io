@@ -15,7 +15,7 @@ export const isWithItemCounter = (
 
 export const initBrowserMenu = (
   setBrowserMenu,
-  slice,
+  setRouterDialog,
   option
 ) => {
   const {
@@ -30,8 +30,8 @@ export const initBrowserMenu = (
   , elMenu = crMenu(menu, items, browserType);
 
   addDialogPropsTo(items, df);
-  slice.routeDialog[browserType] = items;
-  setBrowserMenu(browserType, elMenu)
+  setRouterDialog(browserType, items);
+  setBrowserMenu(browserType, elMenu);
   return elMenu;
 }
 

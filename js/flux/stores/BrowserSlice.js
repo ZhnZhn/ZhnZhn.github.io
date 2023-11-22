@@ -1,28 +1,18 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
-var _BrowserType = require("../../constants/BrowserType");
-var _DataWL = _interopRequireDefault(require("../../constants/DataWL"));
 var _BrowserActions = require("../actions/BrowserActions");
 var _compStore = require("./compStore");
 var _BrowserLogicFn = require("./browser/BrowserLogicFn");
 var _browserLogic = require("./browserLogic");
+//import BrowserConfig from '../../constants/BrowserConfig';
+//import { BT_STOCKS_BY_SECTORS } from '../../constants/BrowserType';
+//import DataWL from '../../constants/DataWL';
+
 const FAILED = 'Failed';
 const BrowserSlice = {
-  routeDialog: {
-    WL: _DataWL.default
-  },
   isWithItemCounter: _BrowserLogicFn.isWithItemCounter,
-  getSourceConfig(browserId, sourceId) {
-    if (sourceId.indexOf(_BrowserType.BT_STOCKS_BY_SECTORS) > 0) {
-      return _BrowserConfig.default[browserId];
-    }
-    const _r = this.routeDialog[browserId];
-    return _r ? _r[sourceId] : void 0;
-  },
   onShowBrowserDynamicDone(_ref) {
     let {
       browserType
@@ -47,7 +37,7 @@ const BrowserSlice = {
         json,
         browserType
       } = option,
-      menuItems = (0, _BrowserLogicFn.isWithItemCounter)(browserType) ? (0, _BrowserLogicFn.initBrowserMenu)(_browserLogic.setBrowserMenu, this, option) : json;
+      menuItems = (0, _BrowserLogicFn.isWithItemCounter)(browserType) ? (0, _BrowserLogicFn.initBrowserMenu)(_browserLogic.setBrowserMenu, _browserLogic.setRouterDialog, option) : json;
     this.trigger(_BrowserActions.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED, {
       menuItems,
       browserType

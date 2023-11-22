@@ -1,6 +1,6 @@
-import BrowserConfig from '../../constants/BrowserConfig';
-import { BT_STOCKS_BY_SECTORS } from '../../constants/BrowserType';
-import DataWL from '../../constants/DataWL';
+//import BrowserConfig from '../../constants/BrowserConfig';
+//import { BT_STOCKS_BY_SECTORS } from '../../constants/BrowserType';
+//import DataWL from '../../constants/DataWL';
 
 import {
   BAT_SHOW_BROWSER_DYNAMIC,
@@ -18,26 +18,16 @@ import {
 
 import {
   getBrowserMenu,
-  setBrowserMenu
+  setBrowserMenu,
+  //getRouterDialog,
+  setRouterDialog
 } from './browserLogic';
 
 const FAILED = 'Failed';
 
 const BrowserSlice = {
-  routeDialog: {
-    WL: DataWL
-  },
-
   isWithItemCounter: isWithItemCounter,
-
-  getSourceConfig(browserId, sourceId){
-    if (sourceId.indexOf(BT_STOCKS_BY_SECTORS) > 0){
-      return BrowserConfig[browserId];
-    }
-    const _r = this.routeDialog[browserId];
-    return _r ? _r[sourceId] : void 0;
-  },
-
+  
   onShowBrowserDynamicDone({ browserType }){
     this.trigger(BAT_SHOW_BROWSER_DYNAMIC, browserType);
   },
@@ -56,7 +46,7 @@ const BrowserSlice = {
   onLoadBrowserDynamicCompleted(option){
     const { json, browserType } = option
     , menuItems = isWithItemCounter(browserType)
-        ? initBrowserMenu(setBrowserMenu, this, option)
+        ? initBrowserMenu(setBrowserMenu, setRouterDialog, option)
         : json;
     this.trigger(BAT_LOAD_BROWSER_DYNAMIC_COMPLETED, {
        menuItems, browserType

@@ -1,5 +1,9 @@
 import { bindTo } from '../storeApi';
 
+import BrowserConfig from '../../constants/BrowserConfig';
+import { BT_STOCKS_BY_SECTORS } from '../../constants/BrowserType';
+import DataWL from '../../constants/DataWL';
+
 import {
   setIsOpen,
   plusCounter,
@@ -41,4 +45,21 @@ export const minusMenuItemCounter = (cT, bT) => {
 
 export const resetMenuItemCounter = (cT, bT) => {
   resetCounter(BROWSER_MENU, bT, cT)
+}
+
+const ROUTER_DIALOG = {
+  WL: DataWL
+};
+
+export const setRouterDialog = (browserType, items) => {
+  ROUTER_DIALOG[browserType] = items
+}
+
+const _getRouterDialog = (browserId) => ROUTER_DIALOG[browserId]
+export const getSourceConfig = (browserId, sourceId) => {
+  if (sourceId.indexOf(BT_STOCKS_BY_SECTORS) > 0){
+    return BrowserConfig[browserId];
+  }
+  const _r = _getRouterDialog(browserId);
+  return _r ? _r[sourceId] : void 0;
 }
