@@ -1,4 +1,7 @@
-import { createElement } from 'react';
+import {
+  bindTo,
+  createElement
+} from '../../components/uiApi';
 
 import ChartContainer from '../../components/zhn-containers/ChartContainer';
 import BrowserConfig from '../../constants/BrowserConfig';
@@ -67,16 +70,11 @@ export const crItemContainerEl = ({
     store,
     browserType,
     contWidth,
-    onSetActive: setActiveContainer
-      .bind(null, _chartType, browserType),
-    onCloseContainer: ComponentActions[CAT_CLOSE_CHART_CONTAINER]
-      .bind(null, _chartType, browserType),
-    onSortBy: ChartActions[CHAT_SORT_BY]
-      .bind(null, _chartType),
-    updateMovingValues: ChartActions[CHAT_UPDATE_MOVING_VALUES]
-      .bind(null, _chartType),
+    onSetActive: bindTo(setActiveContainer, _chartType, browserType),
+    onCloseContainer: bindTo(ComponentActions[CAT_CLOSE_CHART_CONTAINER], _chartType, browserType),
+    onSortBy: bindTo(ChartActions[CHAT_SORT_BY], _chartType),
+    updateMovingValues: bindTo(ChartActions[CHAT_UPDATE_MOVING_VALUES], _chartType),
     onCloseItem: ChartActions[CHAT_CLOSE],
-    onRemoveAll: ChartActions[CHAT_REMOVE_ALL]
-      .bind(null, _chartType, browserType)
+    onRemoveAll: bindTo(ChartActions[CHAT_REMOVE_ALL], _chartType, browserType)
   });
 }
