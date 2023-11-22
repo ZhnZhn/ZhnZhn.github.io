@@ -1,7 +1,6 @@
 import {
   CAT_SHOW_DIALOG,
-  CAT_CLOSE_DIALOG,
-  CAT_CLOSE_CHART_CONTAINER_2
+  CAT_CLOSE_DIALOG
 } from '../actions/ComponentActions';
 
 import { showModalDialog } from './compStore';
@@ -60,10 +59,8 @@ const ComponentSlice = {
     uncheckActiveContCheckBox(chartType)
     uncheckActiveCheckbox(chartType);
     this.setMenuItemClose(chartType, browserType);
-  },
-  onCloseChartContainer2(chartType, browserType){
-    this.trigger(CAT_CLOSE_CHART_CONTAINER_2, chartType);
   }
+  
 }
 
 export default ComponentSlice

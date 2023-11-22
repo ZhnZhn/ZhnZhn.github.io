@@ -1,4 +1,7 @@
-import { atom } from '../../storeApi';
+import {
+  atom,
+  bindTo
+} from '../../storeApi';
 
 import {
   ComponentActions
@@ -7,6 +10,7 @@ import {
   CHAT_SHOW,
   ChartActions
 } from '../../actions/ChartActions';
+import { closeChartCont } from '../compStore';
 
 const _isArr = Array.isArray
 , _isBool = v => typeof v === 'boolean'
@@ -18,9 +22,9 @@ const _crItemHandlers = (
   dT,
   bT
 ) => ({
-  onClick: ComponentActions.showDialog.bind(null, dT, bT),
-  onBadgeClick: ChartActions[CHAT_SHOW].bind(null, dT, bT),
-  onBadgeClose: ComponentActions.closeChartContainer2.bind(null, dT)
+  onClick: bindTo(ComponentActions.showDialog, dT, bT),
+  onBadgeClick: bindTo(ChartActions[CHAT_SHOW], dT, bT),
+  onBadgeClose: bindTo(closeChartCont, dT)  
 });
 
 const _crItem = (
@@ -31,7 +35,7 @@ const _crItem = (
   id,
   title: menuItems[id].menuTitle,
   isNew: isNew,
-  atomBadge: atom({ is: false, value: 0 }),  
+  atomBadge: atom({ is: false, value: 0 }),
   ..._crItemHandlers(id, browserType)
 })
 

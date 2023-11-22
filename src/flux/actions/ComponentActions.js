@@ -20,14 +20,12 @@ export const CAT_CLOSE_DIALOG = 'closeDialog'
 export const CAT_SHOW_OPTION_DIALOG = 'showOptionDialog'
 
 export const CAT_CLOSE_CHART_CONTAINER = 'closeChartContainer'
-export const CAT_CLOSE_CHART_CONTAINER_2 = 'closeChartContainer2'
 
 const CA = Reflux.createActions({
   [CAT_SHOW_DIALOG]: {},
   [CAT_CLOSE_DIALOG]: {},
   [CAT_SHOW_OPTION_DIALOG]: {},
-  [CAT_CLOSE_CHART_CONTAINER]: {},
-  [CAT_CLOSE_CHART_CONTAINER_2]: {}  
+  [CAT_CLOSE_CHART_CONTAINER]: {}
 });
 
 Object.assign(CA, {

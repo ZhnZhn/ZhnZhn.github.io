@@ -5,13 +5,14 @@ exports.default = void 0;
 var _storeApi = require("../../storeApi");
 var _ComponentActions = require("../../actions/ComponentActions");
 var _ChartActions = require("../../actions/ChartActions");
+var _compStore = require("../compStore");
 const _isArr = Array.isArray,
   _isBool = v => typeof v === 'boolean',
   _getBoolProperty = property => _isBool(property) ? property : void 0;
 const _crItemHandlers = (dT, bT) => ({
-  onClick: _ComponentActions.ComponentActions.showDialog.bind(null, dT, bT),
-  onBadgeClick: _ChartActions.ChartActions[_ChartActions.CHAT_SHOW].bind(null, dT, bT),
-  onBadgeClose: _ComponentActions.ComponentActions.closeChartContainer2.bind(null, dT)
+  onClick: (0, _storeApi.bindTo)(_ComponentActions.ComponentActions.showDialog, dT, bT),
+  onBadgeClick: (0, _storeApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_SHOW], dT, bT),
+  onBadgeClose: (0, _storeApi.bindTo)(_compStore.closeChartCont, dT)
 });
 const _crItem = (_ref, menuItems, browserType) => {
   let {
@@ -49,6 +50,5 @@ const crMenu = function (menu, menuItems, browserType) {
     items: _crItems(menuPart.items, menuItems, browserType)
   } : _crItem(menuPart, menuItems, browserType));
 };
-var _default = crMenu;
-exports.default = _default;
+var _default = exports.default = crMenu;
 //# sourceMappingURL=crMenu.js.map
