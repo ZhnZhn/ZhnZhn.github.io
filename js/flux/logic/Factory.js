@@ -21,7 +21,7 @@ const HAS_WIDE_WIDTH = (0, _has.isWideWidth)(600),
   _assign = Object.assign,
   _initFromDate = (0, _dateFn.getFromDate)(2),
   initToDate = (0, _dateFn.getToDate)();
-const _crFnValue = (valueFn, valueFnPrefix) => valueFn ? valueFnPrefix ? _RouterFnValue.default[valueFn].bind(null, valueFnPrefix) : _RouterFnValue.default[valueFn] : void 0;
+const _crFnValue = (valueFn, valueFnPrefix) => valueFn ? valueFnPrefix ? (0, _uiApi.bindTo)(_RouterFnValue.default[valueFn], valueFnPrefix) : _RouterFnValue.default[valueFn] : void 0;
 const _crFromDate = nInitFromDate => nInitFromDate ? nInitFromDate === '1y+1d' //Coinpaprika
 ? (0, _dateFn.addDaysToYmd)((0, _dateFn.getFromDate)(1), 1) : (0, _dateFn.getFromDate)(nInitFromDate) : _initFromDate;
 const _crInitFromDate = _ref => {
@@ -58,8 +58,8 @@ const _crClickAbout = _ref2 => {
     descr,
     descrUrl
   } = _ref2;
-  const _descrUrl = descr && rootUri ? "" + rootUri + descr + ".html" : descrUrl;
-  return _descrUrl ? _ComponentActions.ComponentActions.showDescription.bind(null, {
+  const _descrUrl = descr && rootUri ? `${rootUri}${descr}.html` : descrUrl;
+  return _descrUrl ? (0, _uiApi.bindTo)(_ComponentActions.ComponentActions.showDescription, {
     descrUrl: _descrUrl
   }) : void 0;
 };
@@ -113,12 +113,12 @@ const crDialog = (browserType, dialogConf) => {
     proxy = isProxy ? _ChartStore.default.getProxy() : void 0,
     getKey = isGetKey && _ChartStore.default.getKey,
     onError = isGetKey && _onError,
-    onLoad = _ChartActions.ChartActions[_ChartActions.CHAT_LOAD].bind(null, {
+    onLoad = (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_LOAD], {
       chartType: itemKey,
       browserType,
       dialogConf
     }),
-    onShow = _ChartActions.ChartActions[_ChartActions.CHAT_SHOW].bind(null, itemKey, browserType, dialogConf);
+    onShow = (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_SHOW], itemKey, browserType, dialogConf);
   _modifyDialogPropsByLoadId(dialogProps, loadId);
   return (0, _RouterDialog.getDialog)(_dialogType).then(Comp => (0, _uiApi.createElement)(Comp, {
     ...dialogProps,

@@ -1,6 +1,9 @@
 export { crAsyncBrowser } from './fBrowser';
 
-import { createElement } from '../../components/uiApi';
+import {
+  bindTo,
+  createElement
+} from '../../components/uiApi';
 
 import { getDialog } from './RouterDialog';
 import RouterLoadFn from './RouterLoadFn';
@@ -45,7 +48,7 @@ const _crFnValue = (
   valueFnPrefix
 ) => valueFn
   ? valueFnPrefix
-     ? RouterFnValue[valueFn].bind(null, valueFnPrefix)
+     ? bindTo(RouterFnValue[valueFn], valueFnPrefix)
      : RouterFnValue[valueFn]
   : void 0;
 
@@ -98,7 +101,7 @@ const _crClickAbout = ({
     ? `${rootUri}${descr}.html`
     : descrUrl;
   return _descrUrl
-    ? ComponentActions.showDescription.bind(null, { descrUrl: _descrUrl })
+    ? bindTo(ComponentActions.showDescription, { descrUrl: _descrUrl })
     : void 0;
 };
 
@@ -158,13 +161,11 @@ export const crDialog = (
         : void 0
    , getKey = isGetKey && ChartStore.getKey
    , onError = isGetKey && _onError
-   , onLoad = ChartActions[CHAT_LOAD]
-      .bind(null, {
+   , onLoad = bindTo(ChartActions[CHAT_LOAD], {
          chartType: itemKey,
          browserType, dialogConf
       })
-   , onShow = ChartActions[CHAT_SHOW]
-       .bind(null, itemKey, browserType, dialogConf);
+   , onShow = bindTo(ChartActions[CHAT_SHOW], itemKey, browserType, dialogConf);
 
   _modifyDialogPropsByLoadId(dialogProps, loadId)
 
