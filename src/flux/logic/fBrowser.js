@@ -1,4 +1,7 @@
-import { createElement } from 'react';
+import {
+  bindTo,
+  createElement
+} from '../../components/uiApi';
 
 import ChartStore from '../stores/ChartStore';
 import {
@@ -72,7 +75,7 @@ const _crBrowserDynamic = (
     , onShowLoadDialog = chartContainerType
          ? item => ComponentActions.showModalDialog(modalDialogType, {
              item, browserType, chartContainerType,
-             onShow: ChartActions[CHAT_SHOW].bind(null, chartContainerType, browserType)
+             onShow: bindTo(ChartActions[CHAT_SHOW], chartContainerType, browserType)
            })
         : void 0;
 
@@ -91,7 +94,7 @@ const _crBrowserDynamic = (
      loadedAction: BAT_LOAD_BROWSER_DYNAMIC_COMPLETED,
      failedAction: BAT_LOAD_BROWSER_FAILED,
      updateAction: BAT_UPDATE_BROWSER_MENU, //for Type
-     onLoadMenu: BrowserActions.loadBrowserDynamic.bind(null, { browserType, caption, sourceMenuUrl }),
+     onLoadMenu: bindTo(BrowserActions.loadBrowserDynamic, { browserType, caption, sourceMenuUrl }),
      onShowLoadDialog //for Type2
    });
  }
