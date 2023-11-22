@@ -12,7 +12,7 @@ const isWithItemCounter = browserType => {
   return typeof _config === 'undefined' ? false : !_config.withoutItemCounter;
 };
 exports.isWithItemCounter = isWithItemCounter;
-const initBrowserMenu = (slice, option) => {
+const initBrowserMenu = (setBrowserMenu, slice, option) => {
   const {
       json,
       browserType
@@ -25,7 +25,7 @@ const initBrowserMenu = (slice, option) => {
     elMenu = (0, _crMenu.default)(menu, items, browserType);
   (0, _addDialogPropsTo.default)(items, df);
   slice.routeDialog[browserType] = items;
-  slice.browserMenu[browserType] = elMenu;
+  setBrowserMenu(browserType, elMenu);
   return elMenu;
 };
 exports.initBrowserMenu = initBrowserMenu;
@@ -42,22 +42,19 @@ const _editIsOpen = (setValue, value) => {
     is: value
   }));
 };
-const setIsOpen = _fEditItem(_editIsOpen);
-exports.setIsOpen = setIsOpen;
+const setIsOpen = exports.setIsOpen = _fEditItem(_editIsOpen);
 const _editPlusCounter = (setValue, value) => {
   setValue(prev => ({
     value: prev.value + value,
     is: true
   }));
 };
-const plusCounter = _fEditItem(_editPlusCounter);
-exports.plusCounter = plusCounter;
+const plusCounter = exports.plusCounter = _fEditItem(_editPlusCounter);
 const _editResetCounter = (setValue, value) => {
   setValue(prev => ({
     ...prev,
     value
   }));
 };
-const resetCounter = _fEditItem(_editResetCounter).bind(null, 0);
-exports.resetCounter = resetCounter;
-//# sourceMappingURL=BrowserLogic.js.map
+const resetCounter = exports.resetCounter = _fEditItem(_editResetCounter).bind(null, 0);
+//# sourceMappingURL=BrowserLogicFn.js.map

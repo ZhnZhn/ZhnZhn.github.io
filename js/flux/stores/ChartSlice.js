@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _LoadingProgressActions = require("../actions/LoadingProgressActions");
 var _ChartActions = require("../actions/ChartActions");
+var _browserLogic = require("./browserLogic");
 var _compStore = require("./compStore");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
 var _ChartLogic = require("./chart/ChartLogic");
@@ -50,7 +51,7 @@ const ChartSlice = {
         chartSlice,
         Comp
       } = (0, _ChartLogic.loadConfig)(this.charts, config, option, _dialogConf, this);
-    this.addMenuItemCounter(chartType, browserType);
+    (0, _browserLogic.addMenuItemCounter)(chartType, browserType);
     if (chartSlice) {
       this.trigger(_ChartActions.CHAT_LOAD_COMPLETED, chartSlice);
     } else {
@@ -83,7 +84,7 @@ const ChartSlice = {
     this.onLoadItemFailed(option);
   },
   onShowChart(chartType, browserType, dialogConfOr) {
-    this.setMenuItemOpen(chartType, browserType);
+    (0, _browserLogic.setMenuItemOpen)(chartType, browserType);
     const dialogConf = this.getDialogConf(dialogConfOr, chartType);
     const {
       chartSlice,
@@ -103,7 +104,7 @@ const ChartSlice = {
     } = (0, _ChartLogic.removeConfig)(this.charts, chartType, chartId);
     if (isRemoved) {
       (0, _chartCheckBoxLogic.resetActiveChart)(chartId);
-      this.minusMenuItemCounter(chartType, browserType);
+      (0, _browserLogic.minusMenuItemCounter)(chartType, browserType);
       this.trigger(_ChartActions.CHAT_CLOSE, chartSlice);
     }
   },
@@ -126,7 +127,7 @@ const ChartSlice = {
   },
   onRemoveAll(chartType, browserType) {
     const chartSlice = (0, _ChartLogic.removeAll)(this.charts, chartType);
-    this.resetMenuItemCounter(chartType, browserType);
+    (0, _browserLogic.resetMenuItemCounter)(chartType, browserType);
     (0, _chartCheckBoxLogic.uncheckActiveCheckbox)();
     this.trigger(_ChartActions.CHAT_SHOW, chartSlice);
   }

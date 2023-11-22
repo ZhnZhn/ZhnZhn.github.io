@@ -11,6 +11,13 @@ import {
 } from '../actions/ChartActions';
 
 import {
+  setMenuItemOpen,
+  addMenuItemCounter,
+  minusMenuItemCounter,
+  resetMenuItemCounter
+} from './browserLogic';
+
+import {
   hideAbout,
   showAlertDialog
 } from './compStore';
@@ -81,7 +88,7 @@ const ChartSlice = {
         Comp
       } = loadConfig(this.charts, config, option, _dialogConf, this);
 
-      this.addMenuItemCounter(chartType, browserType);
+      addMenuItemCounter(chartType, browserType);
       if (chartSlice){
         this.trigger(CHAT_LOAD_COMPLETED, chartSlice);
       } else {
@@ -98,7 +105,7 @@ const ChartSlice = {
   onLoadItemFailed(option){
     this.triggerLoadingProgress(LPAT_LOADING_FAILED)
     setAlertItemIdTo(option)
-    showAlertDialog(option)  
+    showAlertDialog(option)
     _logErrorToConsole(option);
   },
 
@@ -113,7 +120,7 @@ const ChartSlice = {
   },
 
   onShowChart(chartType, browserType, dialogConfOr){
-    this.setMenuItemOpen(chartType, browserType);
+    setMenuItemOpen(chartType, browserType)
     const dialogConf = this.getDialogConf(dialogConfOr, chartType);
     const {
       chartSlice, Comp
@@ -134,7 +141,7 @@ const ChartSlice = {
 
     if (isRemoved) {
       resetActiveChart(chartId)
-      this.minusMenuItemCounter(chartType, browserType);
+      minusMenuItemCounter(chartType, browserType);
 
       this.trigger(CHAT_CLOSE, chartSlice);
     }
@@ -162,7 +169,7 @@ const ChartSlice = {
   },
   onRemoveAll(chartType, browserType){
     const chartSlice = removeAll(this.charts, chartType);
-    this.resetMenuItemCounter(chartType, browserType)
+    resetMenuItemCounter(chartType, browserType)
     uncheckActiveCheckbox()
     this.trigger(CHAT_SHOW, chartSlice);
   }

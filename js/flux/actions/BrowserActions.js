@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.BrowserActions = exports.BAT_UPDATE_WATCH_BROWSER = exports.BAT_UPDATE_BROWSER_MENU = exports.BAT_SHOW_BROWSER_DYNAMIC = exports.BAT_LOAD_BROWSER_FAILED = exports.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED = exports.BAT_LOAD_BROWSER_DYNAMIC = exports.BAT_INIT_BROWSER_DYNAMIC = void 0;
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
-var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
+var _browserLogic = require("../stores/browserLogic");
 var _Factory = require("../logic/Factory");
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 var _BrowserType = require("../../constants/BrowserType");
@@ -12,20 +12,13 @@ var _RouterModalDialog = require("../../components/dialogs/RouterModalDialog");
 var _RouterDialog = require("../logic/RouterDialog");
 var _fnFetch = require("../../utils/fnFetch");
 var _onCatch = _interopRequireDefault(require("../logic/onCatch"));
-const BAT_SHOW_BROWSER_DYNAMIC = 'showBrowserDynamic';
-exports.BAT_SHOW_BROWSER_DYNAMIC = BAT_SHOW_BROWSER_DYNAMIC;
-const BAT_INIT_BROWSER_DYNAMIC = 'initBrowserDynamic';
-exports.BAT_INIT_BROWSER_DYNAMIC = BAT_INIT_BROWSER_DYNAMIC;
-const BAT_LOAD_BROWSER_DYNAMIC = 'loadBrowserDynamic';
-exports.BAT_LOAD_BROWSER_DYNAMIC = BAT_LOAD_BROWSER_DYNAMIC;
-const BAT_LOAD_BROWSER_DYNAMIC_COMPLETED = 'loadBrowserDynamicCompleted';
-exports.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED = BAT_LOAD_BROWSER_DYNAMIC_COMPLETED;
-const BAT_LOAD_BROWSER_FAILED = 'loadBrowserFailed';
-exports.BAT_LOAD_BROWSER_FAILED = BAT_LOAD_BROWSER_FAILED;
-const BAT_UPDATE_WATCH_BROWSER = 'updateWatchBrowser';
-exports.BAT_UPDATE_WATCH_BROWSER = BAT_UPDATE_WATCH_BROWSER;
-const BAT_UPDATE_BROWSER_MENU = 'updateBrowserMenu';
-exports.BAT_UPDATE_BROWSER_MENU = BAT_UPDATE_BROWSER_MENU;
+const BAT_SHOW_BROWSER_DYNAMIC = exports.BAT_SHOW_BROWSER_DYNAMIC = 'showBrowserDynamic';
+const BAT_INIT_BROWSER_DYNAMIC = exports.BAT_INIT_BROWSER_DYNAMIC = 'initBrowserDynamic';
+const BAT_LOAD_BROWSER_DYNAMIC = exports.BAT_LOAD_BROWSER_DYNAMIC = 'loadBrowserDynamic';
+const BAT_LOAD_BROWSER_DYNAMIC_COMPLETED = exports.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED = 'loadBrowserDynamicCompleted';
+const BAT_LOAD_BROWSER_FAILED = exports.BAT_LOAD_BROWSER_FAILED = 'loadBrowserFailed';
+const BAT_UPDATE_WATCH_BROWSER = exports.BAT_UPDATE_WATCH_BROWSER = 'updateWatchBrowser';
+const BAT_UPDATE_BROWSER_MENU = exports.BAT_UPDATE_BROWSER_MENU = 'updateBrowserMenu';
 const BA = _refluxCore.default.createActions({
   [BAT_SHOW_BROWSER_DYNAMIC]: {
     children: ['done', 'init', 'failed']
@@ -69,7 +62,7 @@ BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function (option) {
     } = _option,
     config = _BrowserConfig.default[bT];
   if (bT && config) {
-    if (_ChartStore.default.getBrowserMenu(bT)) {
+    if ((0, _browserLogic.getBrowserMenu)(bT)) {
       this.done(_option);
     } else {
       Promise.all([(0, _RouterModalDialog.loadModalDialogs)(bT), (0, _RouterDialog.loadDialogs)(bT)]).then(() => (0, _Factory.crAsyncBrowser)(config)).then(elBrowser => {
@@ -104,6 +97,5 @@ Object.assign(BA, {
   showEurostat: _show.bind(null, _BrowserType.BT_EUROSTAT),
   showWatch: _show.bind(null, _BrowserType.BT_WATCH_LIST)
 });
-const BrowserActions = BA;
-exports.BrowserActions = BrowserActions;
+const BrowserActions = exports.BrowserActions = BA;
 //# sourceMappingURL=BrowserActions.js.map

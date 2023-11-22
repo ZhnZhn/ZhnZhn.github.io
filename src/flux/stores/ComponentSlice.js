@@ -4,6 +4,7 @@ import {
 } from '../actions/ComponentActions';
 
 import { showAlertDialog } from './compStore';
+import { setMenuItemClose } from './browserLogic';
 import { uncheckActiveCheckbox } from './chartCheckBoxLogic';
 import { uncheckActiveContCheckBox } from './contCheckBoxLogic';
 
@@ -45,9 +46,9 @@ const ComponentSlice = {
   },
 
   onCloseChartContainer(chartType, browserType){
-    uncheckActiveContCheckBox(chartType)
+    uncheckActiveContCheckBox(chartType);
     uncheckActiveCheckbox(chartType);
-    this.setMenuItemClose(chartType, browserType);
+    setMenuItemClose(chartType, browserType);
   }
 
 }

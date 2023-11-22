@@ -1,6 +1,6 @@
 import Reflux from 'reflux-core';
 
-import Store from '../stores/ChartStore';
+import { getBrowserMenu } from '../stores/browserLogic';
 import { crAsyncBrowser } from '../logic/Factory';
 import BrowserConfig from '../../constants/BrowserConfig';
 
@@ -63,7 +63,7 @@ BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function(option={}){
   , { browserType:bT } = _option
   , config = BrowserConfig[bT];
   if (bT && config) {
-    if (Store.getBrowserMenu(bT)) {
+    if (getBrowserMenu(bT)) {    
       this.done(_option)
     } else {
       Promise.all([

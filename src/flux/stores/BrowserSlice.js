@@ -13,44 +13,23 @@ import { showAlertDialog } from './compStore';
 
 import {
   isWithItemCounter,
-  initBrowserMenu,
-  setIsOpen,
-  plusCounter,
-  resetCounter
-} from './browser/BrowserLogic';
+  initBrowserMenu
+} from './browser/BrowserLogicFn';
+
+import {
+  getBrowserMenu,
+  setBrowserMenu
+} from './browserLogic';
 
 const FAILED = 'Failed';
 
-const _setItemOpen = setIsOpen.bind(null, true)
-, _setItemClose = setIsOpen.bind(null, false)
-, _addCounter = plusCounter.bind(null, 1)
-, _minusCounter = plusCounter.bind(null, -1);
-
 const BrowserSlice = {
-  browserMenu: {},
   routeDialog: {
     WL: DataWL
   },
 
   isWithItemCounter: isWithItemCounter,
-  getBrowserMenu(browserType){
-     return this.browserMenu[browserType];
-  },
-  setMenuItemOpen(cT, bT){
-    _setItemOpen(this.browserMenu, bT, cT)
-  },
-  setMenuItemClose(cT, bT){
-    _setItemClose(this.browserMenu, bT, cT)
-  },
-  addMenuItemCounter(cT, bT){
-    _addCounter(this.browserMenu, bT, cT);
-  },
-  minusMenuItemCounter(cT, bT){
-    _minusCounter(this.browserMenu, bT, cT);
-  },
-  resetMenuItemCounter(cT, bT){
-    resetCounter(this.browserMenu, bT, cT)
-  },
+
   getSourceConfig(browserId, sourceId){
     if (sourceId.indexOf(BT_STOCKS_BY_SECTORS) > 0){
       return BrowserConfig[browserId];
@@ -64,8 +43,8 @@ const BrowserSlice = {
   },
   onShowBrowserDynamicInit(elBrowser, option){
     const { browserType } = option;
-    if (!this.browserMenu[browserType]) {
-      this.browserMenu[browserType] = [];
+    if (!getBrowserMenu(browserType)) {
+      setBrowserMenu(browserType, []);
       this.trigger(BAT_INIT_BROWSER_DYNAMIC, elBrowser);
     }
   },
@@ -77,7 +56,7 @@ const BrowserSlice = {
   onLoadBrowserDynamicCompleted(option){
     const { json, browserType } = option
     , menuItems = isWithItemCounter(browserType)
-        ? initBrowserMenu(this, option)
+        ? initBrowserMenu(setBrowserMenu, this, option)
         : json;
     this.trigger(BAT_LOAD_BROWSER_DYNAMIC_COMPLETED, {
        menuItems, browserType
@@ -86,7 +65,7 @@ const BrowserSlice = {
   onLoadBrowserDynamicFailed(option){
     const { alertItemId, caption, browserType } = option;
     option.alertItemId = alertItemId || caption
-    showAlertDialog()  
+    showAlertDialog()
     this.trigger(BAT_LOAD_BROWSER_FAILED, browserType)
   }
 
