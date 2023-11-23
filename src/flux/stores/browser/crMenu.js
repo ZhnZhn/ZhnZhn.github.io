@@ -4,13 +4,13 @@ import {
 } from '../../storeApi';
 
 import {
-  ComponentActions
-} from '../../actions/ComponentActions';
-import {
   CHAT_SHOW,
   ChartActions
 } from '../../actions/ChartActions';
-import { closeChartCont } from '../compStore';
+import {
+  closeChartCont,
+  showDialog
+} from '../compStore';
 
 const _isArr = Array.isArray
 , _isBool = v => typeof v === 'boolean'
@@ -22,9 +22,9 @@ const _crItemHandlers = (
   dT,
   bT
 ) => ({
-  onClick: bindTo(ComponentActions.showDialog, dT, bT),
+  onClick: bindTo(showDialog, dT, bT),
   onBadgeClick: bindTo(ChartActions[CHAT_SHOW], dT, bT),
-  onBadgeClose: bindTo(closeChartCont, dT)  
+  onBadgeClose: bindTo(closeChartCont, dT)
 });
 
 const _crItem = (

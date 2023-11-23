@@ -2,42 +2,10 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _ComponentActions = require("../actions/ComponentActions");
-var _compStore = require("./compStore");
 var _browserLogic = require("./browserLogic");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
 var _contCheckBoxLogic = require("./contCheckBoxLogic");
-var _dialogLogic = require("./dialogLogic");
 const ComponentSlice = {
-  dialogInit: {},
-  onShowDialog(type, browserType, dialogConfOr) {
-    (0, _dialogLogic.showItemDialog)(this.dialogInit, {
-      type,
-      browserType,
-      dialogConfOr
-    }).then(r => {
-      this.trigger(_ComponentActions.CAT_SHOW_DIALOG, r);
-    });
-  },
-  onCloseDialog(Comp) {
-    this.trigger(_ComponentActions.CAT_CLOSE_DIALOG, {
-      type: Comp.key,
-      caption: Comp.props.caption
-    });
-  },
-  onShowOptionDialog(type, option) {
-    (0, _dialogLogic.showOptionDialog)(this.dialogInit, {
-      type,
-      data: option
-    }).then(r => {
-      this.trigger(_ComponentActions.CAT_SHOW_DIALOG, r);
-    }).catch(err => {
-      (0, _compStore.showAlertDialog)({
-        alertCaption: 'Failed Load',
-        alertDescr: err.message
-      });
-    });
-  },
   onCloseChartContainer(chartType, browserType) {
     (0, _contCheckBoxLogic.uncheckActiveContCheckBox)(chartType);
     (0, _chartCheckBoxLogic.uncheckActiveCheckbox)(chartType);

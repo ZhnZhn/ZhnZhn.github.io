@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.showOptionDialog = exports.showItemDialog = exports.getDialogConf = void 0;
+exports.showOptionDialogImpl = exports.showDialogImpl = exports.getDialogConf = void 0;
 var _Factory = require("../logic/Factory");
 var _browserLogic = require("./browserLogic");
 const getDialogConf = (conf, chartType) => {
@@ -13,7 +13,7 @@ const getDialogConf = (conf, chartType) => {
   return (0, _browserLogic.getSourceConfig)(_browserId, chartType);
 };
 exports.getDialogConf = getDialogConf;
-const showItemDialog = (slice, _ref) => {
+const showDialogImpl = (slice, _ref) => {
   let {
     type,
     browserType,
@@ -29,8 +29,8 @@ const showItemDialog = (slice, _ref) => {
     };
   });
 };
-exports.showItemDialog = showItemDialog;
-const showOptionDialog = (slice, options) => {
+exports.showDialogImpl = showDialogImpl;
+const showOptionDialogImpl = (slice, options) => {
   const {
     type,
     data
@@ -52,5 +52,5 @@ const showOptionDialog = (slice, options) => {
     });
   }
 };
-exports.showOptionDialog = showOptionDialog;
+exports.showOptionDialogImpl = showOptionDialogImpl;
 //# sourceMappingURL=dialogLogic.js.map

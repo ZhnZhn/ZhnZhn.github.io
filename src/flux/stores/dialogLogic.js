@@ -14,7 +14,7 @@ export const getDialogConf = (conf, chartType) => {
   return getSourceConfig(_browserId, chartType);
 }
 
-export const showItemDialog = (
+export const showDialogImpl = (
   slice,
   { type, browserType, dialogConfOr }
 ) => slice[type]
@@ -25,7 +25,7 @@ export const showItemDialog = (
         return { key:type, Comp };
    });
 
-export const showOptionDialog = (
+export const showOptionDialogImpl = (
   slice,
   options
 ) => {
