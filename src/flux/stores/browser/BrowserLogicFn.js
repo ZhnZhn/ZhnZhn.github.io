@@ -1,39 +1,5 @@
-import BrowserConfig from '../../../constants/BrowserConfig';
-
-import crMenu from './crMenu';
-import addDialogPropsTo from './addDialogPropsTo';
+import isWithItemCounter from './isWithItemCounter';
 import findItemSetValue from './findItem';
-
-export const isWithItemCounter = (
-  browserType
-) => {
-  const _config = BrowserConfig[browserType];
-  return typeof _config === 'undefined'
-    ? false
-    : !_config.withoutItemCounter;
-}
-
-export const initBrowserMenu = (
-  setBrowserMenu,
-  setRouterDialog,
-  option
-) => {
-  const {
-    json,
-    browserType
-  } = option
-  , {
-    menu,
-    items,
-    df
-  } = json
-  , elMenu = crMenu(menu, items, browserType);
-
-  addDialogPropsTo(items, df);
-  setRouterDialog(browserType, items);
-  setBrowserMenu(browserType, elMenu);
-  return elMenu;
-}
 
 const _findItemSetValue = (
   appMenu,

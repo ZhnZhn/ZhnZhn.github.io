@@ -10,6 +10,10 @@ import {
   MDT_ALERT
 } from '../../constants/ModalDialogType';
 
+import { uncheckActiveCheckbox } from './chartCheckBoxLogic';
+import { uncheckActiveContCheckBox } from './contCheckBoxLogic';
+import { setMenuItemClose } from './browserLogic';
+
 import {
   showDialogImpl,
   showOptionDialogImpl
@@ -49,6 +53,11 @@ export const hideAbout = () => _set(_crMsAbout(false))
 
 export const useMsChartCont = fCrUse(_compStore, _selectMsChartCont)
 export const closeChartCont = (chartType) => _set(_crMsChartCont({ id: chartType }))
+export const closeChartContainer = (chartType, browserType) => {
+  uncheckActiveContCheckBox(chartType);
+  uncheckActiveCheckbox(chartType);
+  setMenuItemClose(chartType, browserType);
+}
 
 export const useMdOption = fCrUse(_compStore, _selectMdOption)
 export const showModalDialog = (

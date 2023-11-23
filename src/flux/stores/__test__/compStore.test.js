@@ -3,14 +3,16 @@
  */
  //Highcharts dataFormat require jsdom
 "use strict";
-import store from '../ChartStore';
 import {
   getActiveContCheckBox,
   setActiveContainer
 } from '../contCheckBoxLogic';
+import {
+  closeChartContainer
+} from '../compStore';
 
-const CHART_TYPE = 'type1'
-const BROWSER_TYPE = 'browserType1'
+const CHART_TYPE = 'type1';
+const BROWSER_TYPE = 'browserType1';
 
 const _crChb = (
   name='checkbox',
@@ -24,8 +26,8 @@ const _crSpyUnchecked = (chb) => jest
   .spyOn(chb, 'setUnchecked');
 
 
-describe('ComponentSlice', ()=>{
-  test('should assign/clear store.activeContChb onSetActiveContainer',()=>{
+describe('compStore', ()=>{
+  test('should assign/clear activeContChb onSetActiveContainer',()=>{
     const _chb = _crChb();
     let _contChb = getActiveContCheckBox();
     expect(_contChb).toBe(null)
@@ -47,7 +49,7 @@ describe('ComponentSlice', ()=>{
     expect(_contChb).toBe(null)
   })
 
-  test('should call setUnchecked on prev store.activeContChb', ()=>{
+  test('should call setUnchecked on prev activeContChb', ()=>{
     const _prevChb = _crChb('prev')
     , _nextChb = _crChb('next')
     , spy = _crSpyUnchecked(_prevChb);
@@ -65,7 +67,7 @@ describe('ComponentSlice', ()=>{
     //spy.mockRestore()
   })
 
-  test('should call setUnchecked and clear store.activeContChb onCloseChartContainer', ()=>{
+  test('should call setUnchecked and clear activeContChb onCloseChartContainer', ()=>{
     const _chartType = CHART_TYPE
     , _chb = _crChb('checkbox', _chartType)
     , spy = _crSpyUnchecked(_chb);
@@ -74,12 +76,12 @@ describe('ComponentSlice', ()=>{
     let _contChb = getActiveContCheckBox()
     expect(_contChb).toBe(_chb)
 
-    store.onCloseChartContainer('not'+_chartType, BROWSER_TYPE)
+    closeChartContainer('not'+_chartType, BROWSER_TYPE)
     expect(spy).toHaveBeenCalledTimes(0)
     _contChb = getActiveContCheckBox()
     expect(_contChb).toBe(_chb)
 
-    store.onCloseChartContainer(_chartType, BROWSER_TYPE)
+    closeChartContainer(_chartType, BROWSER_TYPE)
     expect(spy).toHaveBeenCalledTimes(1)
     _contChb = getActiveContCheckBox()
     expect(_contChb).toBe(null)

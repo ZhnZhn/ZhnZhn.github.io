@@ -1,14 +1,16 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _BrowserActions = require("../actions/BrowserActions");
 var _compStore = require("./compStore");
-var _BrowserLogicFn = require("./browser/BrowserLogicFn");
+var _isWithItemCounter = _interopRequireDefault(require("./browser/isWithItemCounter"));
+var _initBrowserMenu = _interopRequireDefault(require("./browser/initBrowserMenu"));
 var _browserLogic = require("./browserLogic");
 const FAILED = 'Failed';
 const BrowserSlice = {
-  isWithItemCounter: _BrowserLogicFn.isWithItemCounter,
+  isWithItemCounter: _isWithItemCounter.default,
   onShowBrowserDynamicDone(_ref) {
     let {
       browserType
@@ -33,7 +35,7 @@ const BrowserSlice = {
         json,
         browserType
       } = option,
-      menuItems = (0, _BrowserLogicFn.isWithItemCounter)(browserType) ? (0, _BrowserLogicFn.initBrowserMenu)(_browserLogic.setBrowserMenu, _browserLogic.setRouterDialog, option) : json;
+      menuItems = (0, _isWithItemCounter.default)(browserType) ? (0, _initBrowserMenu.default)(_browserLogic.setBrowserMenu, _browserLogic.setRouterDialog, option) : json;
     this.trigger(_BrowserActions.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED, {
       menuItems,
       browserType

@@ -1,0 +1,29 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/flux/stores/browser/initBrowserMenu.js"
+ ],
+ "file": "../../../../src/flux/stores/browser/initBrowserMenu.js",
+ "names": [
+  "_crMenu",
+  "_interopRequireDefault",
+  "require",
+  "_addDialogPropsTo",
+  "initBrowserMenu",
+  "setBrowserMenu",
+  "setRouterDialog",
+  "option",
+  "json",
+  "browserType",
+  "menu",
+  "items",
+  "df",
+  "elMenu",
+  "crMenu",
+  "addDialogPropsTo",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,OAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,iBAAA,GAAAF,sBAAA,CAAAC,OAAA;AAEA,MAAME,eAAe,GAAGA,CACtBC,cAAc,EACdC,eAAe,EACfC,MAAM,KACH;EACH,MAAM;MACJC,IAAI;MACJC;IACF,CAAC,GAAGF,MAAM;IACR;MACAG,IAAI;MACJC,KAAK;MACLC;IACF,CAAC,GAAGJ,IAAI;IACNK,MAAM,GAAG,IAAAC,eAAM,EAACJ,IAAI,EAAEC,KAAK,EAAEF,WAAW,CAAC;EAE3C,IAAAM,yBAAgB,EAACJ,KAAK,EAAEC,EAAE,CAAC;EAC3BN,eAAe,CAACG,WAAW,EAAEE,KAAK,CAAC;EACnCN,cAAc,CAACI,WAAW,EAAEI,MAAM,CAAC;EACnC,OAAOA,MAAM;AACf,CAAC;AAAA,IAAAG,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEcd,eAAe"
+}

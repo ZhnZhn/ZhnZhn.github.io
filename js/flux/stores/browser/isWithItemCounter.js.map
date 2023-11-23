@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/flux/stores/browser/isWithItemCounter.js"
+ ],
+ "file": "../../../../src/flux/stores/browser/isWithItemCounter.js",
+ "names": [
+  "_BrowserConfig",
+  "_interopRequireDefault",
+  "require",
+  "isWithItemCounter",
+  "browserType",
+  "_config",
+  "BrowserConfig",
+  "withoutItemCounter",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,cAAA,GAAAC,sBAAA,CAAAC,OAAA;AAEA,MAAMC,iBAAiB,GACrBC,WAAW,IACR;EACH,MAAMC,OAAO,GAAGC,sBAAa,CAACF,WAAW,CAAC;EAC1C,OAAO,OAAOC,OAAO,KAAK,WAAW,GACjC,KAAK,GACL,CAACA,OAAO,CAACE,kBAAkB;AACjC,CAAC;AAAA,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEcP,iBAAiB"
+}

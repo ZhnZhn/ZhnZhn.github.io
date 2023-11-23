@@ -6,13 +6,9 @@ import {
 import ChartContainer from '../../components/zhn-containers/ChartContainer';
 import BrowserConfig from '../../constants/BrowserConfig';
 
-import {
-  CAT_CLOSE_CHART_CONTAINER,
-  ComponentActions
-} from '../actions/ComponentActions';
-import {
-  setActiveContainer
-} from '../stores/contCheckBoxLogic';
+import { setActiveContainer } from '../stores/contCheckBoxLogic';
+import { closeChartContainer } from '../stores/compStore';
+
 import {
   CHAT_SORT_BY,
   CHAT_UPDATE_MOVING_VALUES,
@@ -70,8 +66,8 @@ export const crItemContainerEl = ({
     store,
     browserType,
     contWidth,
-    onSetActive: bindTo(setActiveContainer, _chartType, browserType),
-    onCloseContainer: bindTo(ComponentActions[CAT_CLOSE_CHART_CONTAINER], _chartType, browserType),
+    onSetActive: bindTo(setActiveContainer, _chartType, browserType),    
+    onCloseContainer: bindTo(closeChartContainer, _chartType, browserType),
     onSortBy: bindTo(ChartActions[CHAT_SORT_BY], _chartType),
     updateMovingValues: bindTo(ChartActions[CHAT_UPDATE_MOVING_VALUES], _chartType),
     onCloseItem: ChartActions[CHAT_CLOSE],

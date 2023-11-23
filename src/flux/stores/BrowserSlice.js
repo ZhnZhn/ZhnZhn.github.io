@@ -7,10 +7,8 @@ import {
 
 import { showAlertDialog } from './compStore';
 
-import {
-  isWithItemCounter,
-  initBrowserMenu
-} from './browser/BrowserLogicFn';
+import isWithItemCounter from './browser/isWithItemCounter';
+import initBrowserMenu  from './browser/initBrowserMenu';
 
 import {
   getBrowserMenu,

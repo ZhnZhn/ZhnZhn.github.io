@@ -6,8 +6,8 @@ exports.crItemContainerEl = void 0;
 var _uiApi = require("../../components/uiApi");
 var _ChartContainer = _interopRequireDefault(require("../../components/zhn-containers/ChartContainer"));
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
-var _ComponentActions = require("../actions/ComponentActions");
 var _contCheckBoxLogic = require("../stores/contCheckBoxLogic");
+var _compStore = require("../stores/compStore");
 var _ChartActions = require("../actions/ChartActions");
 const _isStr = str => typeof str === 'string';
 const _crCaption = (dialogConf, browserType) => {
@@ -49,7 +49,7 @@ const crItemContainerEl = _ref => {
     browserType,
     contWidth,
     onSetActive: (0, _uiApi.bindTo)(_contCheckBoxLogic.setActiveContainer, _chartType, browserType),
-    onCloseContainer: (0, _uiApi.bindTo)(_ComponentActions.ComponentActions[_ComponentActions.CAT_CLOSE_CHART_CONTAINER], _chartType, browserType),
+    onCloseContainer: (0, _uiApi.bindTo)(_compStore.closeChartContainer, _chartType, browserType),
     onSortBy: (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_SORT_BY], _chartType),
     updateMovingValues: (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_UPDATE_MOVING_VALUES], _chartType),
     onCloseItem: _ChartActions.ChartActions[_ChartActions.CHAT_CLOSE],

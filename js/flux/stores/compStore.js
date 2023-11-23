@@ -1,9 +1,12 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useMsShowDialog = exports.useMsCloseDialog = exports.useMsChartCont = exports.useMsAbout = exports.useMdOption = exports.showOptionDialog = exports.showModalDialog = exports.showDialog = exports.showAlertDialog = exports.showAbout = exports.hideAbout = exports.closeDialog = exports.closeChartCont = void 0;
+exports.useMsShowDialog = exports.useMsCloseDialog = exports.useMsChartCont = exports.useMsAbout = exports.useMdOption = exports.showOptionDialog = exports.showModalDialog = exports.showDialog = exports.showAlertDialog = exports.showAbout = exports.hideAbout = exports.closeDialog = exports.closeChartContainer = exports.closeChartCont = void 0;
 var _storeApi = require("../storeApi");
 var _ModalDialogType = require("../../constants/ModalDialogType");
+var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
+var _contCheckBoxLogic = require("./contCheckBoxLogic");
+var _browserLogic = require("./browserLogic");
 var _dialogLogic = require("./dialogLogic");
 const [_crMsAbout, _selectMsAbout] = (0, _storeApi.fCrStoreSlice)("msAbout", "is"),
   [_crMsChartCont, _selectMsChartCont] = (0, _storeApi.fCrStoreSlice)("msChartCont"),
@@ -26,6 +29,12 @@ const closeChartCont = chartType => _set(_crMsChartCont({
   id: chartType
 }));
 exports.closeChartCont = closeChartCont;
+const closeChartContainer = (chartType, browserType) => {
+  (0, _contCheckBoxLogic.uncheckActiveContCheckBox)(chartType);
+  (0, _chartCheckBoxLogic.uncheckActiveCheckbox)(chartType);
+  (0, _browserLogic.setMenuItemClose)(chartType, browserType);
+};
+exports.closeChartContainer = closeChartContainer;
 const useMdOption = exports.useMdOption = (0, _storeApi.fCrUse)(_compStore, _selectMdOption);
 const showModalDialog = function (modalDialogType, option) {
   if (option === void 0) {

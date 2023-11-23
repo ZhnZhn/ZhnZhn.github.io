@@ -8,7 +8,6 @@ var _Actions = _interopRequireDefault(require("../actions/Actions"));
 var _ChartActions = require("../actions/ChartActions");
 var _ChartSlice = _interopRequireDefault(require("./ChartSlice"));
 var _BrowserSlice = _interopRequireDefault(require("./BrowserSlice"));
-var _ComponentSlice = _interopRequireDefault(require("./ComponentSlice"));
 var _SettingSlice = _interopRequireDefault(require("./SettingSlice"));
 var _WatchListSlice = _interopRequireDefault(require("../watch-list/WatchListSlice"));
 var _WithLimitRemaining = _interopRequireDefault(require("./WithLimitRemaining"));
@@ -21,7 +20,6 @@ const ChartStore = _refluxCore.default.createStore({
   },
   ..._ChartSlice.default,
   ..._BrowserSlice.default,
-  ..._ComponentSlice.default,
   ..._SettingSlice.default,
   ..._WatchListSlice.default,
   ..._WithLimitRemaining.default,

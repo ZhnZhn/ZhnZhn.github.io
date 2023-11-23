@@ -1,16 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ComponentActions = exports.CAT_CLOSE_CHART_CONTAINER = void 0;
-var _refluxCore = _interopRequireDefault(require("reflux-core"));
+exports.ComponentActions = void 0;
 var _storeApi = require("../storeApi");
 var _compStore = require("../stores/compStore");
 var _ModalDialogType = require("../../constants/ModalDialogType");
-const CAT_CLOSE_CHART_CONTAINER = exports.CAT_CLOSE_CHART_CONTAINER = 'closeChartContainer';
-const CA = _refluxCore.default.createActions({
-  [CAT_CLOSE_CHART_CONTAINER]: {}
-});
+const CA = {};
 Object.assign(CA, {
   showDescription: (0, _storeApi.bindTo)(_compStore.showModalDialog, _ModalDialogType.MDT_DESCRIPTION),
   showSettings: (0, _storeApi.bindTo)(_compStore.showModalDialog, _ModalDialogType.MDT_SETTINGS),
@@ -22,6 +17,5 @@ Object.assign(CA, {
   showCustomizeExport: (0, _storeApi.bindTo)(_compStore.showModalDialog, _ModalDialogType.MDT_CUSTOMIZE_EXPORT),
   showAddToWatch: (0, _storeApi.bindTo)(_compStore.showModalDialog, _ModalDialogType.MDT_ADD_TO_WATCH)
 });
-CA.showConfigChart = (0, _storeApi.bindTo)(_compStore.showOptionDialog, 'ChartConfigDialog');
 const ComponentActions = exports.ComponentActions = CA;
 //# sourceMappingURL=ComponentActions.js.map

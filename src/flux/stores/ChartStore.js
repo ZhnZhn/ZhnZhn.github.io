@@ -5,7 +5,6 @@ import { ChartActions } from '../actions/ChartActions';
 
 import ChartSlice from './ChartSlice';
 import BrowserSlice from './BrowserSlice';
-import ComponentSlice from './ComponentSlice';
 import SettingSlice from './SettingSlice';
 import WatchListSlice from '../watch-list/WatchListSlice';
 import WithLimitRemaining from './WithLimitRemaining';
@@ -21,7 +20,6 @@ const ChartStore = Reflux.createStore({
 
  ...ChartSlice,
  ...BrowserSlice,
- ...ComponentSlice,
  ...SettingSlice,
  ...WatchListSlice,
 

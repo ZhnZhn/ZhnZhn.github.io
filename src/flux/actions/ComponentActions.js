@@ -1,10 +1,5 @@
-import Reflux from 'reflux-core';
-
 import { bindTo } from '../storeApi';
-import {
-  showModalDialog,
-  showOptionDialog
-} from '../stores/compStore';
+import { showModalDialog } from '../stores/compStore';
 
 import {
   MDT_DESCRIPTION,
@@ -18,11 +13,7 @@ import {
   MDT_ADD_TO_WATCH
 } from '../../constants/ModalDialogType';
 
-export const CAT_CLOSE_CHART_CONTAINER = 'closeChartContainer'
-
-const CA = Reflux.createActions({
-  [CAT_CLOSE_CHART_CONTAINER]: {}
-});
+const CA = {};
 
 Object.assign(CA, {
   showDescription: bindTo(showModalDialog, MDT_DESCRIPTION),
@@ -35,7 +26,5 @@ Object.assign(CA, {
   showCustomizeExport: bindTo(showModalDialog, MDT_CUSTOMIZE_EXPORT),
   showAddToWatch: bindTo(showModalDialog, MDT_ADD_TO_WATCH)
 })
-
-CA.showConfigChart = bindTo(showOptionDialog, 'ChartConfigDialog')
 
 export const ComponentActions = CA
