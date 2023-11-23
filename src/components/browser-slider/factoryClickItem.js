@@ -1,6 +1,4 @@
-import {
-  ComponentActions
-} from '../../flux/actions/ComponentActions';
+import { showDialog } from '../../flux/stores/compStore';
 
 const CONF = {
   dialogConf: true,
@@ -69,7 +67,7 @@ const factoryClickItem = (
        noTime
      }
    })
-   ComponentActions.showDialog(`${bT}_${id}`, bT, _conf)
+   showDialog(`${bT}_${id}`, bT, _conf)
 };
 
 export default factoryClickItem

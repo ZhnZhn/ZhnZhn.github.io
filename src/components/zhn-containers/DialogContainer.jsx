@@ -3,7 +3,10 @@ import {
   cloneElement
 } from '../uiApi';
 
-import useListen from '../hooks/useListen';
+import {
+  closeDialog,
+  useMsShowDialog
+} from '../../flux/stores/compStore';
 
 const S_ROOT = {
   zIndex: 1030,
@@ -89,12 +92,8 @@ const _renderDialogs = (
     });
 });
 
-const FN_NOOP = () => {};
-
 const DialogContainer = ({
-  maxDialog=3,
-  showAction,
-  onCloseDialog=FN_NOOP
+  maxDialog=3
 }) => {
   const [state, setState] = useState({
     hmIs: {},
@@ -118,7 +117,7 @@ const DialogContainer = ({
      if (hmIs[key]){
        const _Comp = _findCompByKey(compDialogs, key);
        if (_Comp){
-         onCloseDialog(_Comp)
+         closeDialog(_Comp)
        }
      }
      setState(prevState => {
@@ -131,23 +130,23 @@ const DialogContainer = ({
      })
   };
 
-  useListen((actionType, option) => {
-     if (actionType === showAction){
-        setState(prevState => {
-          const { key, Comp, data } = option;
-           if (Comp && !_isUndef(_findCompIndex(prevState.compDialogs, key))) {
-             return prevState;
-           }
-          _updateVisible(prevState, key, maxDialog)
-          if (!Comp){
-             prevState.compDialogs = _doVisible(prevState.compDialogs, key)
-          } else {
-             prevState.compDialogs.push(Comp)
-          }
-          prevState.hmData[key] = data
-          return {...prevState};
-        })
-     }
+  useMsShowDialog(msShowDialog => {
+    if (msShowDialog) {
+      setState(prevState => {
+        const { key, Comp, data } = msShowDialog;
+         if (Comp && !_isUndef(_findCompIndex(prevState.compDialogs, key))) {
+           return prevState;
+         }
+        _updateVisible(prevState, key, maxDialog)
+        if (!Comp){
+           prevState.compDialogs = _doVisible(prevState.compDialogs, key)
+        } else {
+           prevState.compDialogs.push(Comp)
+        }
+        prevState.hmData[key] = data
+        return {...prevState};
+      })
+    }
   })
 
   return (

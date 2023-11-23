@@ -1,11 +1,11 @@
 import {
-  CAT_CLOSE_DIALOG,
-  ComponentActions
-} from '../../flux/actions/ComponentActions';
+  showAbout,
+  showDialog,
+  useMsCloseDialog
+} from '../../flux/stores/compStore';
 import {
   BrowserActions
 } from '../../flux/actions/BrowserActions';
-import { showAbout } from '../../flux/stores/compStore';
 
 import {
   crContainerCn
@@ -110,8 +110,8 @@ const HeaderBar = ({
           onClick={BrowserActions.showWatch}
        />
        <HotBar
-          closeDialogAction={CAT_CLOSE_DIALOG}
-          onShowDialog={ComponentActions.showDialog}
+          useMsCloseDialog={useMsCloseDialog}
+          onShowDialog={showDialog}
        />
        <div className={CL_BTS_RIGHT}>
           <LimitRemainingLabel />

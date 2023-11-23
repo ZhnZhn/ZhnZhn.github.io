@@ -1,10 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
+var _compStore = require("../../flux/stores/compStore");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROOT = {
   zIndex: 1030,
@@ -67,12 +66,9 @@ const _renderDialogs = (_ref, _hToTopLayer, _hToggleDialog) => {
     });
   });
 };
-const FN_NOOP = () => {};
 const DialogContainer = _ref2 => {
   let {
-    maxDialog = 3,
-    showAction,
-    onCloseDialog = FN_NOOP
+    maxDialog = 3
   } = _ref2;
   const [state, setState] = (0, _uiApi.useState)({
       hmIs: {},
@@ -102,7 +98,7 @@ const DialogContainer = _ref2 => {
       if (hmIs[key]) {
         const _Comp = _findCompByKey(compDialogs, key);
         if (_Comp) {
-          onCloseDialog(_Comp);
+          (0, _compStore.closeDialog)(_Comp);
         }
       }
       setState(prevState => {
@@ -118,14 +114,14 @@ const DialogContainer = _ref2 => {
         };
       });
     };
-  (0, _useListen.default)((actionType, option) => {
-    if (actionType === showAction) {
+  (0, _compStore.useMsShowDialog)(msShowDialog => {
+    if (msShowDialog) {
       setState(prevState => {
         const {
           key,
           Comp,
           data
-        } = option;
+        } = msShowDialog;
         if (Comp && !_isUndef(_findCompIndex(prevState.compDialogs, key))) {
           return prevState;
         }
@@ -147,6 +143,5 @@ const DialogContainer = _ref2 => {
     children: _renderDialogs(state, _hToTopLayer, _hToggleDialog)
   });
 };
-var _default = DialogContainer;
-exports.default = _default;
+var _default = exports.default = DialogContainer;
 //# sourceMappingURL=DialogContainer.js.map

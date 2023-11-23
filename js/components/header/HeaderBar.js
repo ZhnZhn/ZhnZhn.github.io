@@ -3,9 +3,8 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _ComponentActions = require("../../flux/actions/ComponentActions");
-var _BrowserActions = require("../../flux/actions/BrowserActions");
 var _compStore = require("../../flux/stores/compStore");
+var _BrowserActions = require("../../flux/actions/BrowserActions");
 var _styleFn = require("../styleFn");
 var _hotkeys = require("../hotkeys/hotkeys");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
@@ -79,8 +78,8 @@ const HeaderBar = _ref => {
       hotKey: _hotkeys.HK_WATCHLIST_BROWSER,
       onClick: _BrowserActions.BrowserActions.showWatch
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotBar.default, {
-      closeDialogAction: _ComponentActions.CAT_CLOSE_DIALOG,
-      onShowDialog: _ComponentActions.ComponentActions.showDialog
+      useMsCloseDialog: _compStore.useMsCloseDialog,
+      onShowDialog: _compStore.showDialog
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_BTS_RIGHT,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {

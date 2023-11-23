@@ -5,7 +5,6 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _has = require("../has");
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
@@ -56,18 +55,18 @@ const _crHotBtItem = (conf, index, _ref) => {
 const HotBar = _ref2 => {
   let {
     maxButtons = 5,
-    closeDialogAction,
+    useMsCloseDialog,
     onShowDialog
   } = _ref2;
   const _maxNumberOfBts = (0, _useRefInit.default)(() => _calcMaxButtons(maxButtons)),
     [hotButtons, setHotButtons] = (0, _uiApi.useState)([]),
     _hClean = (0, _uiApi.useCallback)(() => setHotButtons([]), []);
-  (0, _useListen.default)((actionType, conf) => {
-    if (actionType === closeDialogAction) {
+  useMsCloseDialog(msCloseDialog => {
+    if (msCloseDialog) {
       setHotButtons(arr => {
-        if (!_isIn(arr, conf.type)) {
+        if (!_isIn(arr, msCloseDialog.type)) {
           const _index = arr.length % _maxNumberOfBts;
-          arr[_index] = conf;
+          arr[_index] = msCloseDialog;
           return [...arr];
         }
         return arr;
@@ -89,6 +88,5 @@ const HotBar = _ref2 => {
     }, "BT_CLEAN")]
   });
 };
-var _default = HotBar;
-exports.default = _default;
+var _default = exports.default = HotBar;
 //# sourceMappingURL=HotBar.js.map

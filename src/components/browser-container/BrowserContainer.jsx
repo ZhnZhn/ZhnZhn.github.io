@@ -6,9 +6,7 @@ import DialogContainer from '../zhn-containers/DialogContainer';
 const CL_HRZ_CONTAINER = "hrz-container";
 
 const BrowserContainer = ({
-  initBrowserAction,
-  showDialogAction,
-  onCloseDialog
+  initBrowserAction
 }) => {
   const [
     elBrowsers,
@@ -25,8 +23,6 @@ const BrowserContainer = ({
        {elBrowsers}
        <DialogContainer
           maxDialog={3}
-          showAction={showDialogAction}
-          onCloseDialog={onCloseDialog}
        />
     </div>
   );

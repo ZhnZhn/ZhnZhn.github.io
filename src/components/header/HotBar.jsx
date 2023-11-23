@@ -5,7 +5,6 @@ import {
 } from '../uiApi';
 
 import useRefInit from '../hooks/useRefInit';
-import useListen from '../hooks/useListen';
 
 import {
   HAS_TOUCH_EVENTS,
@@ -67,7 +66,7 @@ const _crHotBtItem = (
 
 const HotBar = ({
   maxButtons=5,
-  closeDialogAction,
+  useMsCloseDialog,
   onShowDialog
 }) => {
   const _maxNumberOfBts = useRefInit(
@@ -79,12 +78,12 @@ const HotBar = ({
   ] = useState([])
   , _hClean = useCallback(() => setHotButtons([]), []);
 
-  useListen((actionType, conf) => {
-    if (actionType === closeDialogAction ) {
+  useMsCloseDialog(msCloseDialog => {
+    if (msCloseDialog) {
       setHotButtons(arr => {
-        if (!_isIn(arr, conf.type)) {
+        if (!_isIn(arr, msCloseDialog.type)) {
           const _index = arr.length % _maxNumberOfBts
-          arr[_index] = conf
+          arr[_index] = msCloseDialog
           return [...arr];
         }
         return arr;

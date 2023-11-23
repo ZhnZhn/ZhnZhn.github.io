@@ -32,9 +32,7 @@ const AppErc = () => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_COMP_CONTAINER,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContainer.default, {
-        initBrowserAction: _BrowserActions.BAT_INIT_BROWSER_DYNAMIC,
-        showDialogAction: _ComponentActions.CAT_SHOW_DIALOG,
-        onCloseDialog: _ComponentActions.ComponentActions.closeDialog
+        initBrowserAction: _BrowserActions.BAT_INIT_BROWSER_DYNAMIC
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
         addAction: _ChartActions.CHAT_INIT_AND_SHOW
       })]

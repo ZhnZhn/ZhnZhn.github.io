@@ -7,7 +7,6 @@ import LocationSearch from '../flux/logic/LocationSearch';
 import ChartStore from '../flux/stores/ChartStore';
 
 import {
-  CAT_SHOW_DIALOG,
   ComponentActions
 } from '../flux/actions/ComponentActions';
 import {
@@ -50,8 +49,6 @@ const AppErc = () => {
       <div className={CL_COMP_CONTAINER}>
          <BrowserContainer
             initBrowserAction={BAT_INIT_BROWSER_DYNAMIC}
-            showDialogAction={CAT_SHOW_DIALOG}
-            onCloseDialog={ComponentActions.closeDialog}
          />
          <About />
          <CompContainer addAction={CHAT_INIT_AND_SHOW} />
