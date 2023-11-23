@@ -1,5 +1,7 @@
 
+const FN_NOOP = () => {};
+
 export const bindTo = (
   fn,
   ...args
-) => fn.bind(null, ...args)
+) => (fn || FN_NOOP).bind(null, ...args)
