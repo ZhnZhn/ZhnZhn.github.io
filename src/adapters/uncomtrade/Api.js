@@ -9,6 +9,8 @@ import {
   isAggr
 } from './fnAdapter';
 
+const _isStr = v => typeof v == 'string';
+
 const API_URL = 'https://comtradeapi.un.org/public/v1/preview/C'
 , ALL = 'all'
 , DF_RG = 'X'
@@ -21,7 +23,9 @@ const _checkReq = (option) => {
   }
 };
 
-const DF_QUERY_TAIL = '&period=2022,2021,2020,2019,2018&partner2Code=0';
+const DF_SHORT_PERIOD = 'period=2022,2021,2020'
+, DF_PERIOD = `${DF_SHORT_PERIOD},2019`
+, DF_QUERY_TAIL = `${DF_PERIOD}&partner2Code=0`;
 const _crReporterToTradePartnerQueryTail = (
   tp
 ) => {
@@ -29,9 +33,9 @@ const _crReporterToTradePartnerQueryTail = (
     ? ''
     : tp || '0'
   , _partnerCode = _tpCode
-      ? `&partnerCode=${_tpCode}&partner2Code=0`
+      ? `&partnerCode=${_tpCode}`
       : '';
-  return _partnerCode || DF_QUERY_TAIL;
+  return `${_partnerCode}&${DF_QUERY_TAIL}`;
 };
 
 
@@ -100,7 +104,7 @@ const UnComtradeApi = {
       const _tpCode = tp === ALL
         ? '0'
         : tp || '0';
-      return `${_crCmdFlowUrl(proxy, freq, two, rg)}&partnerCode=${_tpCode}&partner2Code=${_tpCode}`;
+      return `${_crCmdFlowUrl(proxy, freq, two, rg)}&partnerCode=${_tpCode}&partner2Code=${_tpCode}&${DF_SHORT_PERIOD}`;
     }
 
     // Reporter to TradePartner (Default TradePartner: All)
@@ -112,8 +116,20 @@ const UnComtradeApi = {
     if (json && isArr(json.data)) {
       return true;
     }
-    if (json && json.error) {
-      throw crError('', json.error);
+    const {
+      error,
+      message,
+      statusCode
+    } = json || {}
+    if (_isStr(error)) {
+      throw crError('', error);
+    }
+    if (_isStr(message)) {
+      throw crError('',
+        statusCode === 429
+          ? `${statusCode}: ${message.replace('in 1 seconds', 'in 1 minutes')}`
+          : message
+      );
     }
     throw crError();
   },
