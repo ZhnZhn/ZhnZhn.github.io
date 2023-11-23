@@ -19,8 +19,6 @@ import {
 const FAILED = 'Failed';
 
 const BrowserSlice = {
-  isWithItemCounter: isWithItemCounter,
-
   onShowBrowserDynamicDone({ browserType }){
     this.trigger(BAT_SHOW_BROWSER_DYNAMIC, browserType);
   },
@@ -51,7 +49,6 @@ const BrowserSlice = {
     showAlertDialog()
     this.trigger(BAT_LOAD_BROWSER_FAILED, browserType)
   }
-
 }
 
 export default BrowserSlice

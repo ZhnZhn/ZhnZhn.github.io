@@ -10,7 +10,6 @@ var _initBrowserMenu = _interopRequireDefault(require("./browser/initBrowserMenu
 var _browserLogic = require("./browserLogic");
 const FAILED = 'Failed';
 const BrowserSlice = {
-  isWithItemCounter: _isWithItemCounter.default,
   onShowBrowserDynamicDone(_ref) {
     let {
       browserType
