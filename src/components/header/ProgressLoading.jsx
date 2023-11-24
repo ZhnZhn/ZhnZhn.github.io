@@ -1,7 +1,5 @@
-import { useState } from '../uiApi';
-
 import memoEqual from '../hoc/memoEqual';
-import useListen from '../hooks/useListen';
+import { useLoading } from '../../flux/stores/loadingStore';
 
 import {
   LPAT_LOADING,
@@ -12,46 +10,25 @@ import {
 import ProgressLine from '../zhn/ProgressLine';
 
 const COLOR_LOADING = '#2f7ed8'
-, COLOR_FAILED = '#ed5813'
-, COMPLETE_TIMEOUT_MLS = 450;
-
-const _crState = (
-  completed,
-  color
-) => [
-  completed,
-  color
-];
+, COLOR_FAILED = '#ed5813';
 
 const ProgressLoading = memoEqual(() => {
-  const [
-    state,
-    setState
-  ] = useState(
-    ()=>_crState(0, COLOR_LOADING)
-  )
+  const status = useLoading()
   , [
     completed,
     color
-  ] = state;
-
-  useListen(actionType => {
-    if (actionType === LPAT_LOADING){
-      setState(_crState(35, COLOR_LOADING))
-    } else if (actionType === LPAT_LOADING_COMPLETE){
-      setTimeout(
-        () => setState(_crState(100, COLOR_LOADING)),
-        COMPLETE_TIMEOUT_MLS
-      )
-    } else if (actionType === LPAT_LOADING_FAILED){
-      setState(_crState(100, COLOR_FAILED))
-    }
-  }, 'listenLoadingProgress')
+  ] = status === LPAT_LOADING
+    ? [35, COLOR_LOADING]
+    : status === LPAT_LOADING_COMPLETE
+       ? [100, COLOR_LOADING]
+       : status === LPAT_LOADING_FAILED
+          ? [100, COLOR_FAILED]
+          : [0, COLOR_LOADING];
 
   return (
     <ProgressLine
-       color={color}
        completed={completed}
+       color={color}       
     />
   );
 });

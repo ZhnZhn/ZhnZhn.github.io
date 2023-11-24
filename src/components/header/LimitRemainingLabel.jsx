@@ -1,6 +1,4 @@
-import { useState } from '../uiApi';
-
-import useListen from '../hooks/useListen';
+import { useLimitRemaining } from '../../flux/stores/loadingStore';
 
 const S_LABEL = {
   display: 'inline-block',
@@ -10,20 +8,10 @@ const S_LABEL = {
   fontWeight: 'bold'
 };
 
-const LimitRemainingLabel = () => {
-  const [value, setValue] = useState('');
-
-  useListen(v => {    
-    if (v != null) {
-      setValue(v)
-    }
-  }, 'listenLimitRemaining')
-
-  return (
-    <span style={S_LABEL}>
-      {value}
-    </span>
-  );
-};
+const LimitRemainingLabel = () => (
+  <span style={S_LABEL}>
+    {useLimitRemaining()}
+  </span>
+);
 
 export default LimitRemainingLabel
