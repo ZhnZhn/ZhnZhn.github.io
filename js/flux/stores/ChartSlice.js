@@ -2,10 +2,10 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _LoadingProgressActions = require("../actions/LoadingProgressActions");
 var _ChartActions = require("../actions/ChartActions");
 var _browserLogic = require("./browserLogic");
 var _compStore = require("./compStore");
+var _loadingStore = require("./loadingStore");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
 var _dialogLogic = require("./dialogLogic");
 var _ChartLogic = require("./chart/ChartLogic");
@@ -34,7 +34,7 @@ const ChartSlice = {
     return (0, _ChartLogic.isChartExist)(this.charts, chartType, key);
   },
   onLoadItem() {
-    this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING);
+    (0, _loadingStore.setLoading)();
   },
   onLoadItemCompleted(option, config) {
     const {
@@ -59,21 +59,28 @@ const ChartSlice = {
       this.trigger(_ChartActions.CHAT_INIT_AND_SHOW, Comp);
       (0, _compStore.hideAbout)();
     }
-    this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_COMPLETE);
-    this.triggerLimitRemaining(limitRemaining);
+    (0, _loadingStore.setLoadingComplete)(limitRemaining);
+    (0, _ChartActions.setLoadingDone)();
   },
   onLoadItemAdded(option) {
     if (option === void 0) {
       option = {};
     }
-    this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_COMPLETE);
+    (0, _loadingStore.setLoadingComplete)();
+    (0, _ChartActions.setLoadingDone)();
     (0, _ChartLogic.scanPostAdded)(option);
   },
   onLoadItemFailed(option) {
-    this.triggerLoadingProgress(_LoadingProgressActions.LPAT_LOADING_FAILED);
+    (0, _loadingStore.setLoadingFailed)();
+    (0, _ChartActions.setLoadingDone)();
     (0, _ChartLogic.setAlertItemIdTo)(option);
     (0, _compStore.showAlertDialog)(option);
     _logErrorToConsole(option);
+  },
+  onLoadItemCancel(option) {
+    (0, _ChartLogic.setAlertItemIdTo)(option);
+    (0, _compStore.showAlertDialog)(option);
+    this.onToTop(option.chartType, option.key);
   },
   onLoadItemByQuery() {
     this.onLoadItem();

@@ -19,11 +19,6 @@ import SettingSlice from '../stores/SettingSlice';
 import LoadConfig from '../logic/LoadConfig';
 import { crKeyForConfig } from '../logic/LogicFn';
 
-import {
-  LPAT_LOADING_COMPLETE,
-  LPAT_LOADING_FAILED
-} from './LoadingProgressActions';
-
 const ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found."
 , META_SUFFIX = '_Meta'
 , _fnNoop = () => {}
@@ -56,12 +51,19 @@ const _cancelLoad = function(
   alertMsg
 ){
   setAlertMsg(option, alertMsg);
+
+  if (alertMsg === ERR_ALREADY_EXIST) {
+    this.cancel(option)
+    if (_isFn(option.onFailed)) {
+      option.onFailed();
+    }
+    return;
+  }
+
   this.failed(option);
 
   if (_isFn(option.onCancel)) {
     option.onCancel();
-  } else if (alertMsg === ERR_ALREADY_EXIST && _isFn(option.onFailed)) {
-    option.onFailed();
   }
 };
 
@@ -90,7 +92,7 @@ const _addSettingsTo = (
 
 const CHA =  Reflux.createActions({
   [CHAT_LOAD]: {
-     children: ['completed', 'added', 'failed'],
+     children: ['completed', 'added', 'failed', 'cancel'],
      isLoading: false,
      idLoading: void 0,
      cancelLoad: _cancelLoad
@@ -108,17 +110,9 @@ const CHA =  Reflux.createActions({
   [CHAT_REMOVE_ALL]: {}
 });
 
-const _isItemLoaded = actionType =>
-  actionType === LPAT_LOADING_COMPLETE
-  || actionType === LPAT_LOADING_FAILED;
-
-const _onChangeStore = actionType => {
-  if (_isItemLoaded(actionType)) {
-    CHA[CHAT_LOAD].isLoading = false;
-  }
-};
-
-CHA.onChangeStore = _onChangeStore
+export const setLoadingDone = () => {
+  CHA[CHAT_LOAD].isLoading = false;
+}
 
 const {
   isApiKeyRequired,

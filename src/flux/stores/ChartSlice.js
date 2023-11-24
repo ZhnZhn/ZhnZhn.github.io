@@ -1,13 +1,9 @@
 import {
-  LPAT_LOADING,
-  LPAT_LOADING_COMPLETE,
-  LPAT_LOADING_FAILED
-} from '../actions/LoadingProgressActions';
-import {
   CHAT_LOAD_COMPLETED,
   CHAT_INIT_AND_SHOW,
   CHAT_SHOW,
-  CHAT_CLOSE
+  CHAT_CLOSE,
+  setLoadingDone
 } from '../actions/ChartActions';
 
 import {
@@ -21,6 +17,13 @@ import {
   hideAbout,
   showAlertDialog
 } from './compStore';
+
+import {
+  setLoading,
+  setLoadingComplete,
+  setLoadingFailed
+} from './loadingStore';
+
 import {
   uncheckActiveCheckbox,
   resetActiveChart
@@ -70,7 +73,7 @@ const ChartSlice = {
   },
 
   onLoadItem(){
-    this.triggerLoadingProgress(LPAT_LOADING)
+    setLoading()
   },
   onLoadItemCompleted(option, config){
       const {
@@ -98,18 +101,27 @@ const ChartSlice = {
         this.trigger(CHAT_INIT_AND_SHOW, Comp);
         hideAbout()
       }
-      this.triggerLoadingProgress(LPAT_LOADING_COMPLETE)
-      this.triggerLimitRemaining(limitRemaining);
+      setLoadingComplete(limitRemaining)
+      setLoadingDone()
   },
   onLoadItemAdded(option={}){
-     this.triggerLoadingProgress(LPAT_LOADING_COMPLETE)
+     setLoadingComplete()
+     setLoadingDone()
+
      scanPostAdded(option)
   },
   onLoadItemFailed(option){
-    this.triggerLoadingProgress(LPAT_LOADING_FAILED)
+    setLoadingFailed()
+    setLoadingDone()
+
     setAlertItemIdTo(option)
     showAlertDialog(option)
     _logErrorToConsole(option);
+  },
+  onLoadItemCancel(option) {
+    setAlertItemIdTo(option)
+    showAlertDialog(option)
+    this.onToTop(option.chartType, option.key)
   },
 
   onLoadItemByQuery(){
