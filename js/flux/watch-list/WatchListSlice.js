@@ -11,10 +11,10 @@ var _ModalDialogType = require("../../constants/ModalDialogType");
 var _MsgWatch = require("../../constants/MsgWatch");
 var _compStore = require("../stores/compStore");
 var _LogicFn = require("./LogicFn");
-var _WithLogicDnD = require("./WithLogicDnD");
-var _WithLogicGroup = require("./WithLogicGroup");
-var _WithLogicList = require("./WithLogicList");
-var _WithLogicItem = require("./WithLogicItem");
+var _DragDropFn = require("./DragDropFn");
+var _GroupFn = require("./GroupFn");
+var _ListFn = require("./ListFn");
+var _ItemFn = require("./ItemFn");
 const STORAGE_KEY = 'WATCH_LIST_ERC',
   DIALOG_CAPTION = 'Watch List:';
 const WatchListSlice = {
@@ -43,10 +43,10 @@ const WatchListSlice = {
     return group.lists;
   },
   onAddItem(item) {
-    this._onEditWatch((0, _WithLogicItem.addItem)(this.watchList, item), _WatchActions.WAT_ADD_ITEM);
+    this._onEditWatch((0, _ItemFn.addItem)(this.watchList, item), _WatchActions.WAT_ADD_ITEM);
   },
   onRemoveItem(option) {
-    (0, _WithLogicItem.removeItem)(this.watchList, option);
+    (0, _ItemFn.removeItem)(this.watchList, option);
     this._triggerUpdateWL();
   },
   _triggerUpdateWL() {
@@ -61,13 +61,13 @@ const WatchListSlice = {
     }
   },
   onDragDropItem(option) {
-    this._onDragDrop((0, _WithLogicDnD.dragDropItem)(this.watchList, option));
+    this._onDragDrop((0, _DragDropFn.dragDropItem)(this.watchList, option));
   },
   onDragDropList(option) {
-    this._onDragDrop((0, _WithLogicDnD.dragDropList)(this.watchList, option));
+    this._onDragDrop((0, _DragDropFn.dragDropList)(this.watchList, option));
   },
   onDragDropGroup(option) {
-    this._onDragDrop((0, _WithLogicDnD.dragDropGroup)(this.watchList, option));
+    this._onDragDrop((0, _DragDropFn.dragDropGroup)(this.watchList, option));
   },
   onSaveWatch() {
     if (this.isWatchEdited) {
@@ -101,22 +101,22 @@ const WatchListSlice = {
     }
   },
   onAddGroup(option) {
-    this._onEditWatch((0, _WithLogicGroup.addGroup)(this.watchList, option), _WatchActions.WAT_ADD_GROUP);
+    this._onEditWatch((0, _GroupFn.addGroup)(this.watchList, option), _WatchActions.WAT_ADD_GROUP);
   },
   onRenameGroup(option) {
-    this._onEditWatch((0, _WithLogicGroup.renameGroup)(this.watchList, option), _WatchActions.WAT_RENAME_GROUP);
+    this._onEditWatch((0, _GroupFn.renameGroup)(this.watchList, option), _WatchActions.WAT_RENAME_GROUP);
   },
   onDeleteGroup(option) {
-    this._onEditWatch((0, _WithLogicGroup.deleteGroup)(this.watchList, option), _WatchActions.WAT_DELETE_GROUP);
+    this._onEditWatch((0, _GroupFn.deleteGroup)(this.watchList, option), _WatchActions.WAT_DELETE_GROUP);
   },
   onCreateList(option) {
-    this._onEditWatch((0, _WithLogicList.createList)(this.watchList, option), _WatchActions.WAT_CREATE_LIST);
+    this._onEditWatch((0, _ListFn.createList)(this.watchList, option), _WatchActions.WAT_CREATE_LIST);
   },
   onRenameList(option) {
-    this._onEditWatch((0, _WithLogicList.renameList)(this.watchList, option), _WatchActions.WAT_RENAME_LIST);
+    this._onEditWatch((0, _ListFn.renameList)(this.watchList, option), _WatchActions.WAT_RENAME_LIST);
   },
   onDeleteList(option) {
-    this._onEditWatch((0, _WithLogicList.deleteList)(this.watchList, option), _WatchActions.WAT_DELETE_LIST);
+    this._onEditWatch((0, _ListFn.deleteList)(this.watchList, option), _WatchActions.WAT_DELETE_LIST);
   }
 };
 var _default = exports.default = WatchListSlice;

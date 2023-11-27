@@ -28,21 +28,21 @@ import {
   dragDropItem,
   dragDropList,
   dragDropGroup
-} from './WithLogicDnD';
+} from './DragDropFn';
 import {
   addGroup,
   renameGroup,
   deleteGroup
-} from './WithLogicGroup';
+} from './GroupFn';
 import {
   createList,
   renameList,
   deleteList
-} from './WithLogicList';
+} from './ListFn';
 import {
   addItem,
   removeItem
-} from './WithLogicItem';
+} from './ItemFn';
 
 const STORAGE_KEY = 'WATCH_LIST_ERC'
 , DIALOG_CAPTION ='Watch List:';
