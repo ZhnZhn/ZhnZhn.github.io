@@ -6,7 +6,7 @@ import useToggle from '../hooks/useToggle';
 import useListen from '../hooks/useListen';
 import useLoadMenu from './useLoadMenu';
 
-import Comp from '../Comp'
+import Comp from '../Comp';
 
 import ToolbarButtonCircle from '../zhn/ToolbarButtonCircle';
 import WrapperInputSearch from '../zhn-select/WrapperInputSearch';
@@ -57,11 +57,11 @@ const _useToolbarButtons = (
 
 const BrowserMenu2 = ({
   isInitShow,
-  //store,
   browserType,
   showAction,
   loadedAction,
   failedAction,
+  useMsBrowserLoad,
   caption,
   onLoadMenu,
   descrUrl,
@@ -91,15 +91,22 @@ const BrowserMenu2 = ({
      ? CL_BROWSER_WITH_SEARCH
      : CL_BROWSER;
 
+  useMsBrowserLoad(msBrowserLoad => {
+   if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
+     const { menuItems } = msBrowserLoad;
+     if (menuItems) {
+       setLoaded(menuItems)
+     } else {
+       setFailed()
+     }
+   }
+  })
+
   useListen((actionType, data) => {
     if (data === browserType){
       if (actionType === showAction) {
         showBrowser();
-      } else if (actionType === failedAction) {
-        setFailed()
       }
-    } else if (actionType === loadedAction && data.browserType === browserType){
-      setLoaded(data.menuItems)
     }
   })
 

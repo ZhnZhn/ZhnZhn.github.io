@@ -60,11 +60,11 @@ const _useToolbarButtons = (toggleSearch, onClickInfo, descrUrl) => {
 const BrowserMenu2 = _ref => {
   let {
     isInitShow,
-    //store,
     browserType,
     showAction,
     loadedAction,
     failedAction,
+    useMsBrowserLoad,
     caption,
     onLoadMenu,
     descrUrl,
@@ -79,15 +79,23 @@ const BrowserMenu2 = _ref => {
     _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
     [isLoading, menu, setLoaded, setFailed] = (0, _useLoadMenu.default)(isShow, onLoadMenu),
     _scrollClass = isShowSearch ? CL_BROWSER_WITH_SEARCH : CL_BROWSER;
+  useMsBrowserLoad(msBrowserLoad => {
+    if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
+      const {
+        menuItems
+      } = msBrowserLoad;
+      if (menuItems) {
+        setLoaded(menuItems);
+      } else {
+        setFailed();
+      }
+    }
+  });
   (0, _useListen.default)((actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {
         showBrowser();
-      } else if (actionType === failedAction) {
-        setFailed();
       }
-    } else if (actionType === loadedAction && data.browserType === browserType) {
-      setLoaded(data.menuItems);
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
