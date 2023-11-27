@@ -7,6 +7,7 @@ var _uiApi = require("../../components/uiApi");
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 var _ComponentActions = require("../actions/ComponentActions");
 var _compStore = require("../stores/compStore");
+var _browserStore = require("../stores/browserStore");
 var _ChartActions = require("../actions/ChartActions");
 var _BrowserActions = require("../actions/BrowserActions");
 var _BrowserType = require("../../constants/BrowserType");
@@ -57,11 +58,10 @@ const _crBrowserDynamic = (Comp, option) => {
     descrUrl,
     onClickInfo,
     showAction: _BrowserActions.BAT_SHOW_BROWSER_DYNAMIC,
-    loadedAction: _BrowserActions.BAT_LOAD_BROWSER_DYNAMIC_COMPLETED,
-    failedAction: _BrowserActions.BAT_LOAD_BROWSER_FAILED,
+    useMsBrowserLoad: _browserStore.useMsBrowserLoad,
     updateAction: _BrowserActions.BAT_UPDATE_BROWSER_MENU,
     //for Type
-    onLoadMenu: (0, _uiApi.bindTo)(_BrowserActions.BrowserActions.loadBrowserDynamic, {
+    onLoadMenu: (0, _uiApi.bindTo)(_browserStore.loadBrowser, {
       browserType,
       caption,
       sourceMenuUrl

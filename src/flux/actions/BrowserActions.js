@@ -13,13 +13,8 @@ import {
 import { loadModalDialogs } from '../../components/dialogs/RouterModalDialog';
 import { loadDialogs } from '../logic/RouterDialog';
 
-import { fetchJson } from '../../utils/fnFetch';
-import onCatch from '../logic/onCatch';
-
 export const BAT_SHOW_BROWSER_DYNAMIC = 'showBrowserDynamic'
 export const BAT_INIT_BROWSER_DYNAMIC = 'initBrowserDynamic'
-export const BAT_LOAD_BROWSER_DYNAMIC = 'loadBrowserDynamic'
-export const BAT_LOAD_BROWSER_DYNAMIC_COMPLETED = 'loadBrowserDynamicCompleted'
 export const BAT_LOAD_BROWSER_FAILED = 'loadBrowserFailed'
 export const BAT_UPDATE_WATCH_BROWSER = 'updateWatchBrowser'
 export const BAT_UPDATE_BROWSER_MENU = 'updateBrowserMenu'
@@ -29,24 +24,13 @@ const BA = Reflux.createActions({
     children: ['done', 'init', 'failed']
   },
   [BAT_INIT_BROWSER_DYNAMIC]: {},
-  [BAT_LOAD_BROWSER_DYNAMIC]: {
-    children: ['completed', 'failed']
-  },
 
   [BAT_UPDATE_WATCH_BROWSER]: {}
 });
 
 const ERR_LOAD = "Failed to load browser."
 , ERR_FOUND = "Browser hasn't found."
-, ERR_ITEM = "Browser"
-, _fetchSourceMenu = ({
-  json,
-  option,
-  onCompleted
-}) => {
-  const { browserType } = option;
-  onCompleted({ json, browserType });
-};
+, ERR_ITEM = "Browser";
 
 const _crErr = (
   alertDescr,
@@ -63,7 +47,7 @@ BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function(option={}){
   , { browserType:bT } = _option
   , config = BrowserConfig[bT];
   if (bT && config) {
-    if (getBrowserMenu(bT)) {    
+    if (getBrowserMenu(bT)) {
       this.done(_option)
     } else {
       Promise.all([
@@ -81,17 +65,6 @@ BA[BAT_SHOW_BROWSER_DYNAMIC].listen(function(option={}){
   } else {
     this.failed({..._option, ..._crErr(ERR_FOUND, ERR_ITEM)})
   }
-})
-
-BA[BAT_LOAD_BROWSER_DYNAMIC].listen(function(option){
-  fetchJson({
-    option,
-    uri: option.sourceMenuUrl,
-    onFetch: _fetchSourceMenu,
-    onCompleted: this.completed,
-    onFailed: this.failed,
-    onCatch
-  })
 })
 
 const _show = BA.showBrowserDynamic;

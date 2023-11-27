@@ -11,16 +11,15 @@ import {
   showModalDialog
 } from '../stores/compStore';
 import {
+  useMsBrowserLoad,
+  loadBrowser
+} from '../stores/browserStore';
+import {
   CHAT_SHOW,
   ChartActions
 } from '../actions/ChartActions';
 import {
-  BrowserActions
-} from '../actions/BrowserActions';
-import {
   BAT_SHOW_BROWSER_DYNAMIC,
-  BAT_LOAD_BROWSER_DYNAMIC_COMPLETED,
-  BAT_LOAD_BROWSER_FAILED,
   BAT_UPDATE_WATCH_BROWSER,
   BAT_UPDATE_BROWSER_MENU
 } from '../actions/BrowserActions';
@@ -96,10 +95,9 @@ const _crBrowserDynamic = (
      descrUrl,
      onClickInfo,
      showAction: BAT_SHOW_BROWSER_DYNAMIC,
-     loadedAction: BAT_LOAD_BROWSER_DYNAMIC_COMPLETED,
-     failedAction: BAT_LOAD_BROWSER_FAILED,
+     useMsBrowserLoad,
      updateAction: BAT_UPDATE_BROWSER_MENU, //for Type
-     onLoadMenu: bindTo(BrowserActions.loadBrowserDynamic, { browserType, caption, sourceMenuUrl }),
+     onLoadMenu: bindTo(loadBrowser, { browserType, caption, sourceMenuUrl }),     
      onShowLoadDialog //for Type2
    });
  }

@@ -1,19 +1,13 @@
 import {
   BAT_SHOW_BROWSER_DYNAMIC,
-  BAT_INIT_BROWSER_DYNAMIC,
-  BAT_LOAD_BROWSER_DYNAMIC_COMPLETED,
-  BAT_LOAD_BROWSER_FAILED
+  BAT_INIT_BROWSER_DYNAMIC
 } from '../actions/BrowserActions';
 
 import { showAlertDialog } from './compStore';
 
-import isWithItemCounter from './browser/isWithItemCounter';
-import initBrowserMenu  from './browser/initBrowserMenu';
-
 import {
   getBrowserMenu,
-  setBrowserMenu,
-  setRouterDialog
+  setBrowserMenu
 } from './browserLogic';
 
 const FAILED = 'Failed';
@@ -32,22 +26,6 @@ const BrowserSlice = {
   onShowBrowserDynamicFailed(option){
     showAlertDialog(option)
     this.trigger(BAT_SHOW_BROWSER_DYNAMIC + FAILED)
-  },
-
-  onLoadBrowserDynamicCompleted(option){
-    const { json, browserType } = option
-    , menuItems = isWithItemCounter(browserType)
-        ? initBrowserMenu(setBrowserMenu, setRouterDialog, option)
-        : json;
-    this.trigger(BAT_LOAD_BROWSER_DYNAMIC_COMPLETED, {
-       menuItems, browserType
-    })
-  },
-  onLoadBrowserDynamicFailed(option){
-    const { alertItemId, caption, browserType } = option;
-    option.alertItemId = alertItemId || caption
-    showAlertDialog()
-    this.trigger(BAT_LOAD_BROWSER_FAILED, browserType)
   }
 }
 

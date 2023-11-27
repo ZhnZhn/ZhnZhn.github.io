@@ -13,7 +13,7 @@ const _crLoadQueryDynamic = option => {
   return new SeqActions([
     {
       action: BrowserActions.showBrowserDynamic,
-      type: 'loadBrowserDynamicCompleted',
+      type: 'showBrowserDynamicDone',
       typeFail: 'showBrowserDynamicFailed',
       args: [browserType]
     },{
