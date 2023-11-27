@@ -27,6 +27,7 @@ const BrowserMenu = ({
   updateAction,
   loadedAction,
   failedAction,
+  useMsBrowserLoad,
   onLoadMenu,
   children
 }) => {
@@ -47,19 +48,25 @@ const BrowserMenu = ({
      menu
   );
 
+
+  useMsBrowserLoad(msBrowserLoad => {
+    if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
+      const { menuItems } = msBrowserLoad;
+      if (menuItems) {
+        setLoaded(menuItems)
+      } else {
+        setFailed()
+      }
+    }
+  })
+
   useListen((actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {
         showBrowser()
       } else if (actionType === updateAction) {
         updateMenu(store.getBrowserMenu(browserType))
-      } else if (actionType === failedAction) {
-        setFailed()
       }
-    } else if (data
-        && data.browserType === browserType
-        && actionType === loadedAction) {
-        setLoaded(data.menuItems)
     }
   })
 

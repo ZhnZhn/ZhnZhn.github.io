@@ -31,23 +31,32 @@ const BrowserMenu = _ref => {
     updateAction,
     loadedAction,
     failedAction,
+    useMsBrowserLoad,
     onLoadMenu,
     children
   } = _ref;
   const [isShow, showBrowser, hideBrowser] = (0, _useBool.default)(isInitShow),
     [isLoading, menu, setLoaded, setFailed, updateMenu] = (0, _useLoadMenu.default)(isShow, onLoadMenu),
     refFirstItem = (0, _useBrowserMenu.default)(isShow, menu);
+  useMsBrowserLoad(msBrowserLoad => {
+    if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
+      const {
+        menuItems
+      } = msBrowserLoad;
+      if (menuItems) {
+        setLoaded(menuItems);
+      } else {
+        setFailed();
+      }
+    }
+  });
   (0, _useListen.default)((actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {
         showBrowser();
       } else if (actionType === updateAction) {
         updateMenu(store.getBrowserMenu(browserType));
-      } else if (actionType === failedAction) {
-        setFailed();
       }
-    } else if (data && data.browserType === browserType && actionType === loadedAction) {
-      setLoaded(data.menuItems);
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
@@ -65,6 +74,5 @@ const BrowserMenu = _ref => {
     })]
   });
 };
-var _default = BrowserMenu;
-exports.default = _default;
+var _default = exports.default = BrowserMenu;
 //# sourceMappingURL=BrowserMenu.js.map
