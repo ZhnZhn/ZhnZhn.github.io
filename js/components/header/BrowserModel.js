@@ -4,14 +4,14 @@ exports.__esModule = true;
 exports.default = void 0;
 var _BrowserType = require("../../constants/BrowserType");
 var _ComponentActions = require("../../flux/actions/ComponentActions");
-var _BrowserActions = require("../../flux/actions/BrowserActions");
+var _browserStore = require("../../flux/stores/browserStore");
 const CL_ROW = 'row__pane-topic',
   PREFIX_CL_ROW_ITEM = `${CL_ROW} item__`,
   CL_BR = `${PREFIX_CL_ROW_ITEM}browser`,
   CL_ORG = `${PREFIX_CL_ROW_ITEM}org`,
   CL_W = `${PREFIX_CL_ROW_ITEM}watch`;
 const _fBD = id => () => {
-  _BrowserActions.BrowserActions.showBrowserDynamic(id);
+  (0, _browserStore.showBrowser)(id);
 };
 const _crSubMenuItem = (id, name) => ({
   id,

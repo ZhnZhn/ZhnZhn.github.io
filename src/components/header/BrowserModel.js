@@ -31,8 +31,8 @@ import {
   ComponentActions
 } from '../../flux/actions/ComponentActions';
 import {
-  BrowserActions
-} from '../../flux/actions/BrowserActions';
+  showBrowser
+} from '../../flux/stores/browserStore';
 
 const CL_ROW = 'row__pane-topic'
 , PREFIX_CL_ROW_ITEM = `${CL_ROW} item__`
@@ -41,7 +41,7 @@ const CL_ROW = 'row__pane-topic'
 , CL_W = `${PREFIX_CL_ROW_ITEM}watch`;
 
 const _fBD = id => () => {
-  BrowserActions.showBrowserDynamic(id)
+  showBrowser(id)
 };
 
 const _crSubMenuItem = (
