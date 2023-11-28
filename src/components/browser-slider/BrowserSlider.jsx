@@ -5,9 +5,8 @@ import {
 
 import { crScrollYCn } from '../styleFn'
 
-import useBool from '../hooks/useBool';
+import useBrowserShow from '../hooks/useBrowserShow';
 import useToggle from '../hooks/useToggle';
-import useListen from '../hooks/useListen';
 
 import fFilterNotActive from './fFilterNotActive';
 
@@ -34,16 +33,12 @@ const CL_SCROLL_Y = crScrollYCn()
 
 const BrowserSlider = memo((props) => {
   const {
-    isInitShow,
-    caption,
-    browserType,
-    showAction
+    caption
   } = props
   , [
     isShow,
-    show,
     hide
-  ] = useBool(isInitShow)
+  ] = useBrowserShow(props)
   , [
     isMenuMore,
     toggleMenuMore
@@ -59,11 +54,6 @@ const BrowserSlider = memo((props) => {
   //props.dfProps.lT
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  useListen((actionType, data) => {
-    if (actionType === showAction && data === browserType){
-      show()
-    }
-  })
 
   return (
     <BrowserContext.Provider value={_browserContext}>

@@ -2,7 +2,7 @@ import { useState } from '../uiApi';
 import { crScrollYCn } from '../styleFn';
 
 import useToggle from '../hooks/useToggle';
-import useBool from '../hooks/useBool';
+import useBrowserShow from '../hooks/useBrowserShow';
 import useListen from '../hooks/useListen';
 
 import {
@@ -23,32 +23,27 @@ const CL_SCROLL_WATCH = crScrollYCn('scroll-watch')
   marginLeft: 20
 };
 
-const WatchBrowser = ({
-  isInitShow,
-  caption,
-  store,
-  browserType,
-  showAction,
-  updateAction
-}) => {
-  const [
+const WatchBrowser = (props) => {
+  const {
+    caption,
+    store,
+    updateAction
+  } = props
+  , [
     isModeEdit,
     _toggleEditMode
   ] = useToggle()
   , [
     isShow,
-    _hShow,
     _hHide
-  ] = useBool(isInitShow)
+  ] = useBrowserShow(props)
   , [
     watchList,
     setWatchList
   ] = useState(() => store.getWatchList());
 
   useListen((actionType, data) => {
-     if (actionType === showAction && data === browserType ){
-      _hShow()
-    } else if (actionType === updateAction) {
+    if (actionType === updateAction) {
       setWatchList({...data})
     }
   })

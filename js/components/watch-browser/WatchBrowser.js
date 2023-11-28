@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
 var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _Handlers = require("./Handlers");
 var _Comp = _interopRequireDefault(require("../Comp"));
@@ -22,22 +22,17 @@ const CL_SCROLL_WATCH = (0, _styleFn.crScrollYCn)('scroll-watch'),
     top: -6,
     marginLeft: 20
   };
-const WatchBrowser = _ref => {
-  let {
-    isInitShow,
-    caption,
-    store,
-    browserType,
-    showAction,
-    updateAction
-  } = _ref;
-  const [isModeEdit, _toggleEditMode] = (0, _useToggle.default)(),
-    [isShow, _hShow, _hHide] = (0, _useBool.default)(isInitShow),
+const WatchBrowser = props => {
+  const {
+      caption,
+      store,
+      updateAction
+    } = props,
+    [isModeEdit, _toggleEditMode] = (0, _useToggle.default)(),
+    [isShow, _hHide] = (0, _useBrowserShow.default)(props),
     [watchList, setWatchList] = (0, _uiApi.useState)(() => store.getWatchList());
   (0, _useListen.default)((actionType, data) => {
-    if (actionType === showAction && data === browserType) {
-      _hShow();
-    } else if (actionType === updateAction) {
+    if (actionType === updateAction) {
       setWatchList({
         ...data
       });
@@ -77,6 +72,5 @@ const WatchBrowser = _ref => {
     })]
   });
 };
-var _default = WatchBrowser;
-exports.default = _default;
+var _default = exports.default = WatchBrowser;
 //# sourceMappingURL=WatchBrowser.js.map

@@ -1,9 +1,9 @@
 import { crScrollYCn } from '../styleFn';
 
-import useBool from '../hooks/useBool';
+import useBrowserShow from '../hooks/useBrowserShow';
 import useListen from '../hooks/useListen';
 import useLoadMenu from './useLoadMenu';
-import useBrowserMenu from './useBrowserMenu'
+import useBrowserMenu from './useBrowserMenu';
 
 import Comp from '../Comp';
 import MenuTopicList from './MenuTopicList';
@@ -18,24 +18,20 @@ const {
 const CL_SCROLL_MENU = crScrollYCn('scroll-menu')
 , S_BROWSER = { paddingRight: 0 };
 
-const BrowserMenu = ({
-  isInitShow,
-  caption,
-  store,
-  browserType,
-  showAction,
-  updateAction,
-  loadedAction,
-  failedAction,
-  useMsBrowserLoad,
-  onLoadMenu,
-  children
-}) => {
-  const [
+const BrowserMenu = (props) => {
+  const {
+    caption,
+    store,
+    browserType,
+    updateAction,
+    useMsBrowserLoad,
+    onLoadMenu,
+    children
+  } = props
+  , [
     isShow,
-    showBrowser,
     hideBrowser
-  ] = useBool(isInitShow)
+  ] = useBrowserShow(props)
   , [
     isLoading,
     menu,
@@ -50,14 +46,10 @@ const BrowserMenu = ({
      isShow,
      menu
   );
-  
+
   useListen((actionType, data) => {
-    if (data === browserType) {
-      if (actionType === showAction) {
-        showBrowser()
-      } else if (actionType === updateAction) {
-        updateMenu(store.getBrowserMenu(browserType))
-      }
+    if (data === browserType && actionType === updateAction) {
+      updateMenu(store.getBrowserMenu(browserType))
     }
   })
 

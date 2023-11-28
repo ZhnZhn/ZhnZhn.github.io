@@ -5,9 +5,8 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _ToolbarButtonCircle = _interopRequireDefault(require("../zhn/ToolbarButtonCircle"));
@@ -57,35 +56,24 @@ const _useToolbarButtons = (toggleSearch, onClickInfo, descrUrl) => {
   /*eslint-enable react-hooks/exhaustive-deps */
 };
 
-const BrowserMenu2 = _ref => {
-  let {
-    isInitShow,
-    browserType,
-    showAction,
-    loadedAction,
-    failedAction,
-    useMsBrowserLoad,
-    caption,
-    onLoadMenu,
-    descrUrl,
-    onClickInfo,
-    onShowLoadDialog,
-    ItemOptionComp,
-    ItemComp,
-    children
-  } = _ref;
-  const [isShow, showBrowser, hideBrowser] = (0, _useBool.default)(isInitShow),
+const BrowserMenu2 = props => {
+  const {
+      browserType,
+      useMsBrowserLoad,
+      caption,
+      onLoadMenu,
+      descrUrl,
+      onClickInfo,
+      onShowLoadDialog,
+      ItemOptionComp,
+      ItemComp,
+      children
+    } = props,
+    [isShow, hideBrowser] = (0, _useBrowserShow.default)(props),
     [isShowSearch, toggleSearch] = (0, _useToggle.default)(),
     _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
     [isLoading, menu] = (0, _useLoadMenu.default)(isShow, onLoadMenu, useMsBrowserLoad, browserType),
     _scrollClass = isShowSearch ? CL_BROWSER_WITH_SEARCH : CL_BROWSER;
-  (0, _useListen.default)((actionType, data) => {
-    if (data === browserType) {
-      if (actionType === showAction) {
-        showBrowser();
-      }
-    }
-  });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
     isShow: isShow,
     style: S_BROWSER,

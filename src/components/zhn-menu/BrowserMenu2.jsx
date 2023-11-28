@@ -1,9 +1,8 @@
 import { useMemo } from '../uiApi';
 import { CL_ROW_TYPE2_TOPIC } from '../styleFn';
 
-import useBool from '../hooks/useBool';
+import useBrowserShow from '../hooks/useBrowserShow';
 import useToggle from '../hooks/useToggle';
-import useListen from '../hooks/useListen';
 import useLoadMenu from './useLoadMenu';
 
 import Comp from '../Comp';
@@ -55,27 +54,23 @@ const _useToolbarButtons = (
 };
 
 
-const BrowserMenu2 = ({
-  isInitShow,
-  browserType,
-  showAction,
-  loadedAction,
-  failedAction,
-  useMsBrowserLoad,
-  caption,
-  onLoadMenu,
-  descrUrl,
-  onClickInfo,
-  onShowLoadDialog,
-  ItemOptionComp,
-  ItemComp,
-  children
-}) => {
-  const [
+const BrowserMenu2 = (props) => {
+  const {
+    browserType,
+    useMsBrowserLoad,
+    caption,
+    onLoadMenu,
+    descrUrl,
+    onClickInfo,
+    onShowLoadDialog,
+    ItemOptionComp,
+    ItemComp,
+    children
+  } = props
+  , [
     isShow,
-    showBrowser,
     hideBrowser
-  ] = useBool(isInitShow)
+  ] = useBrowserShow(props)
   , [
     isShowSearch,
     toggleSearch
@@ -97,14 +92,6 @@ const BrowserMenu2 = ({
   , _scrollClass = isShowSearch
      ? CL_BROWSER_WITH_SEARCH
      : CL_BROWSER;
-
-  useListen((actionType, data) => {
-    if (data === browserType){
-      if (actionType === showAction) {
-        showBrowser();
-      }
-    }
-  })
 
   return (
     <Browser isShow={isShow} style={S_BROWSER}>

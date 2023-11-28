@@ -5,9 +5,8 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _fFilterNotActive = _interopRequireDefault(require("./fFilterNotActive"));
 var _Browser = _interopRequireDefault(require("../zhn/Browser"));
 var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
@@ -37,12 +36,9 @@ const CL_SCROLL_Y = (0, _styleFn.crScrollYCn)(),
   };
 const BrowserSlider = (0, _uiApi.memo)(props => {
   const {
-      isInitShow,
-      caption,
-      browserType,
-      showAction
+      caption
     } = props,
-    [isShow, show, hide] = (0, _useBool.default)(isInitShow),
+    [isShow, hide] = (0, _useBrowserShow.default)(props),
     [isMenuMore, toggleMenuMore] = (0, _useToggle.default)(),
     [isFilterNotActive, toggleFilterNotActive] = (0, _useToggle.default)()
     /*eslint-disable react-hooks/exhaustive-deps */,
@@ -50,11 +46,6 @@ const BrowserSlider = (0, _uiApi.memo)(props => {
   //props.dfProps.lT
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  (0, _useListen.default)((actionType, data) => {
-    if (actionType === showAction && data === browserType) {
-      show();
-    }
-  });
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContext.default.Provider, {
     value: _browserContext,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Browser.default, {
@@ -81,6 +72,5 @@ const BrowserSlider = (0, _uiApi.memo)(props => {
     })
   });
 });
-var _default = BrowserSlider;
-exports.default = _default;
+var _default = exports.default = BrowserSlider;
 //# sourceMappingURL=BrowserSlider.js.map
