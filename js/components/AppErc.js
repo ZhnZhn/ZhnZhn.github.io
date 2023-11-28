@@ -7,7 +7,7 @@ var _uiApi = require("./uiApi");
 var _LocationSearch = _interopRequireDefault(require("../flux/logic/LocationSearch"));
 var _ChartStore = _interopRequireDefault(require("../flux/stores/ChartStore"));
 var _ComponentActions = require("../flux/actions/ComponentActions");
-var _BrowserActions = require("../flux/actions/BrowserActions");
+var _browserStore = require("../flux/stores/browserStore");
 var _ChartActions = require("../flux/actions/ChartActions");
 var _useHotKeysHandler = _interopRequireDefault(require("./hotkeys/useHotKeysHandler"));
 var _HeaderBar = _interopRequireDefault(require("./header/HeaderBar"));
@@ -32,7 +32,7 @@ const AppErc = () => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_COMP_CONTAINER,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContainer.default, {
-        initBrowserAction: _BrowserActions.BAT_INIT_BROWSER_DYNAMIC
+        useMsInitBrowser: _browserStore.useMsInitBrowser
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
         addAction: _ChartActions.CHAT_INIT_AND_SHOW
       })]

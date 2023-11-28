@@ -1,23 +1,24 @@
 import { useState } from '../uiApi';
-import useListen from '../hooks/useListen';
 
 import DialogContainer from '../zhn-containers/DialogContainer';
 
 const CL_HRZ_CONTAINER = "hrz-container";
 
 const BrowserContainer = ({
-  initBrowserAction
+  useMsInitBrowser
 }) => {
   const [
     elBrowsers,
     setElBrowsers
   ] = useState([]);
 
-  useListen((actionType, elBrowser) => {
-    if (actionType === initBrowserAction){
+  useMsInitBrowser(msInitBrowser => {
+    const { elBrowser } = msInitBrowser || {};
+    if (elBrowser) {
       setElBrowsers(arrEl => [elBrowser, ...arrEl])
     }
   })
+
   return (
     <div className={CL_HRZ_CONTAINER}>
        {elBrowsers}

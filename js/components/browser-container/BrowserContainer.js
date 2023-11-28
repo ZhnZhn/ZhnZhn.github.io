@@ -4,17 +4,19 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _DialogContainer = _interopRequireDefault(require("../zhn-containers/DialogContainer"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_HRZ_CONTAINER = "hrz-container";
 const BrowserContainer = _ref => {
   let {
-    initBrowserAction
+    useMsInitBrowser
   } = _ref;
   const [elBrowsers, setElBrowsers] = (0, _uiApi.useState)([]);
-  (0, _useListen.default)((actionType, elBrowser) => {
-    if (actionType === initBrowserAction) {
+  useMsInitBrowser(msInitBrowser => {
+    const {
+      elBrowser
+    } = msInitBrowser || {};
+    if (elBrowser) {
       setElBrowsers(arrEl => [elBrowser, ...arrEl]);
     }
   });

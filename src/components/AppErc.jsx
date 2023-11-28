@@ -10,8 +10,8 @@ import {
   ComponentActions
 } from '../flux/actions/ComponentActions';
 import {
-  BAT_INIT_BROWSER_DYNAMIC
-} from '../flux/actions/BrowserActions';
+  useMsInitBrowser
+} from '../flux/stores/browserStore'
 import {
   CHAT_INIT_AND_SHOW
 } from '../flux/actions/ChartActions';
@@ -47,9 +47,7 @@ const AppErc = () => {
      <>
       <HeaderBar showSettings={showSettings} />
       <div className={CL_COMP_CONTAINER}>
-         <BrowserContainer
-            initBrowserAction={BAT_INIT_BROWSER_DYNAMIC}
-         />
+         <BrowserContainer useMsInitBrowser={useMsInitBrowser} />
          <About />
          <CompContainer addAction={CHAT_INIT_AND_SHOW} />
        </div>
