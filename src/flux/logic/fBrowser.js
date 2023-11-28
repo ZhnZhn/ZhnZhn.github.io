@@ -12,6 +12,7 @@ import {
 } from '../stores/compStore';
 import {
   useMsBrowserLoad,
+  useMsBrowserShow,
   loadBrowser
 } from '../stores/browserStore';
 import {
@@ -19,7 +20,6 @@ import {
   ChartActions
 } from '../actions/ChartActions';
 import {
-  BAT_SHOW_BROWSER_DYNAMIC,
   BAT_UPDATE_WATCH_BROWSER,
   BAT_UPDATE_BROWSER_MENU
 } from '../actions/BrowserActions';
@@ -45,7 +45,7 @@ const _crBrowserWatchList = (
    caption: "Watch List",
    isInitShow: true,
    store: ChartStore,
-   showAction: BAT_SHOW_BROWSER_DYNAMIC,
+   useMsBrowserShow,
    updateAction: BAT_UPDATE_WATCH_BROWSER
 })
 
@@ -94,10 +94,10 @@ const _crBrowserDynamic = (
      ItemComp,
      descrUrl,
      onClickInfo,
-     showAction: BAT_SHOW_BROWSER_DYNAMIC,
+     useMsBrowserShow,
      useMsBrowserLoad,
      updateAction: BAT_UPDATE_BROWSER_MENU, //for Type
-     onLoadMenu: bindTo(loadBrowser, { browserType, caption, sourceMenuUrl }),     
+     onLoadMenu: bindTo(loadBrowser, { browserType, caption, sourceMenuUrl }),
      onShowLoadDialog //for Type2
    });
  }

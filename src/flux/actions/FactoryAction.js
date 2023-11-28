@@ -1,7 +1,7 @@
 import SeqActions from './SeqActions';
 import {
-  BrowserActions
-} from './BrowserActions';
+  showBrowser
+} from '../stores/browserStore';
 import {
   CHAT_LOAD_BY_QUERY,
   CHAT_LOAD_COMPLETED,
@@ -12,9 +12,7 @@ const _crLoadQueryDynamic = option => {
   const { browserType } = option || {};
   return new SeqActions([
     {
-      action: BrowserActions.showBrowserDynamic,
-      type: 'showBrowserDynamicDone',
-      typeFail: 'showBrowserDynamicFailed',
+      action: showBrowser,
       args: [browserType]
     },{
       action: ChartActions[CHAT_LOAD_BY_QUERY],

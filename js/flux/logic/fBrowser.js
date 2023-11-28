@@ -20,7 +20,7 @@ const _crBrowserWatchList = Comp => (0, _uiApi.createElement)(Comp, {
   caption: "Watch List",
   isInitShow: true,
   store: _ChartStore.default,
-  showAction: _BrowserActions.BAT_SHOW_BROWSER_DYNAMIC,
+  useMsBrowserShow: _browserStore.useMsBrowserShow,
   updateAction: _BrowserActions.BAT_UPDATE_WATCH_BROWSER
 });
 const _crBrowserDynamic = (Comp, option) => {
@@ -57,7 +57,7 @@ const _crBrowserDynamic = (Comp, option) => {
     ItemComp,
     descrUrl,
     onClickInfo,
-    showAction: _BrowserActions.BAT_SHOW_BROWSER_DYNAMIC,
+    useMsBrowserShow: _browserStore.useMsBrowserShow,
     useMsBrowserLoad: _browserStore.useMsBrowserLoad,
     updateAction: _BrowserActions.BAT_UPDATE_BROWSER_MENU,
     //for Type

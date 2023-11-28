@@ -15,16 +15,33 @@ import initBrowserMenu  from './browser/initBrowserMenu';
 
 import {
   setBrowserMenu,
-  setRouterDialog
+  setRouterDialog,
+  getBrowserMenu
 } from './browserLogic';
+
+import { crAsyncBrowser } from '../logic/Factory';
+import BrowserConfig from '../../constants/BrowserConfig';
+
+import { loadModalDialogs } from '../../components/dialogs/RouterModalDialog';
+import { loadDialogs } from '../logic/RouterDialog';
 
 const [
   _crMsBrowserLoad,
   _selectMsBrowserLoad
-] = fCrStoreSlice()
+] = fCrStoreSlice("msBrowserLoad")
+, [
+  _crMsBrowserShow,
+  _selectMsBrowserShow
+] = fCrStoreSlice("msBrowserShow")
+, [
+  _crMsInitBrowser,
+  _selectMsInitBrowser
+] = fCrStoreSlice("msInitBrowser")
 
 const _crStore = () => ({
-  ..._crMsBrowserLoad()
+  ..._crMsBrowserLoad(),
+  ..._crMsBrowserShow(),
+  ..._crMsInitBrowser()
 })
 , _browserStore = createStoreWithSelector(_crStore)
 , [_set] = getStoreApi(_browserStore);
@@ -76,4 +93,64 @@ export const loadBrowser = (option) => {
     onFailed: _loadBrowserFailed,
     onCatch
   })
+}
+
+export const useMsBrowserShow = fCrUse(_browserStore, _selectMsBrowserShow)
+export const useMsInitBrowser = fCrUse(_browserStore, _selectMsInitBrowser)
+
+const ERR_LOAD = "Failed to load browser."
+, ERR_FOUND = "Browser hasn't found."
+, ERR_ITEM = "Browser"
+, _crErr = (
+  alertDescr,
+  alertItemId
+) => ({
+  alertDescr,
+  alertItemId
+});
+
+const _showBrowserFailed = (option) => {
+  showAlertDialog(option)
+}
+, _initBrowser = (elBrowser, config) => {
+  const { browserType } = config;
+  if (!getBrowserMenu(browserType)) {
+    setBrowserMenu(browserType, []);
+    _set(_crMsInitBrowser({ elBrowser }))
+  }
+};
+
+export const showBrowser = (option={}) => {
+  const _option = typeof option === 'string'
+    ? { browserType: option }
+    : option
+  , { browserType:bT } = _option
+  , config = BrowserConfig[bT];
+  if (bT && config) {
+    if (getBrowserMenu(bT)) {
+      _set(_crMsBrowserShow({
+        browserType: _option.browserType
+      }))
+    } else {
+      Promise.all([
+        loadModalDialogs(bT),
+        loadDialogs(bT)
+      ])
+      .then(() => crAsyncBrowser(config))
+      .then(elBrowser => {
+        _initBrowser(elBrowser, config)
+      })
+      .catch(() => {
+        _showBrowserFailed({
+          ..._option,
+          ..._crErr(ERR_LOAD, config.caption)
+        })
+      })
+    }
+  } else {
+    _showBrowserFailed({
+      ..._option,
+      ..._crErr(ERR_FOUND, ERR_ITEM)
+    })
+  }
 }

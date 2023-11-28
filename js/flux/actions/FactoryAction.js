@@ -4,16 +4,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _SeqActions = _interopRequireDefault(require("./SeqActions"));
-var _BrowserActions = require("./BrowserActions");
+var _browserStore = require("../stores/browserStore");
 var _ChartActions = require("./ChartActions");
 const _crLoadQueryDynamic = option => {
   const {
     browserType
   } = option || {};
   return new _SeqActions.default([{
-    action: _BrowserActions.BrowserActions.showBrowserDynamic,
-    type: 'showBrowserDynamicDone',
-    typeFail: 'showBrowserDynamicFailed',
+    action: _browserStore.showBrowser,
     args: [browserType]
   }, {
     action: _ChartActions.ChartActions[_ChartActions.CHAT_LOAD_BY_QUERY],
