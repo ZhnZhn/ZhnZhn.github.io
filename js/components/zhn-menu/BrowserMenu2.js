@@ -77,20 +77,8 @@ const BrowserMenu2 = _ref => {
   const [isShow, showBrowser, hideBrowser] = (0, _useBool.default)(isInitShow),
     [isShowSearch, toggleSearch] = (0, _useToggle.default)(),
     _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
-    [isLoading, menu, setLoaded, setFailed] = (0, _useLoadMenu.default)(isShow, onLoadMenu),
+    [isLoading, menu] = (0, _useLoadMenu.default)(isShow, onLoadMenu, useMsBrowserLoad, browserType),
     _scrollClass = isShowSearch ? CL_BROWSER_WITH_SEARCH : CL_BROWSER;
-  useMsBrowserLoad(msBrowserLoad => {
-    if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
-      const {
-        menuItems
-      } = msBrowserLoad;
-      if (menuItems) {
-        setLoaded(menuItems);
-      } else {
-        setFailed();
-      }
-    }
-  });
   (0, _useListen.default)((actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {

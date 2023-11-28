@@ -36,20 +36,8 @@ const BrowserMenu = _ref => {
     children
   } = _ref;
   const [isShow, showBrowser, hideBrowser] = (0, _useBool.default)(isInitShow),
-    [isLoading, menu, setLoaded, setFailed, updateMenu] = (0, _useLoadMenu.default)(isShow, onLoadMenu),
+    [isLoading, menu, updateMenu] = (0, _useLoadMenu.default)(isShow, onLoadMenu, useMsBrowserLoad, browserType),
     refFirstItem = (0, _useBrowserMenu.default)(isShow, menu);
-  useMsBrowserLoad(msBrowserLoad => {
-    if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
-      const {
-        menuItems
-      } = msBrowserLoad;
-      if (menuItems) {
-        setLoaded(menuItems);
-      } else {
-        setFailed();
-      }
-    }
-  });
   (0, _useListen.default)((actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {

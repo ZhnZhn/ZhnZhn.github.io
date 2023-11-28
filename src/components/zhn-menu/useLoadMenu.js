@@ -1,4 +1,4 @@
-import { 
+import {
   useReducer,
   useEffect
 } from '../uiApi';
@@ -33,7 +33,9 @@ const _reducer = (
 
 const useLoadMenu = (
   isShow,
-  onLoadMenu
+  onLoadMenu,
+  useMsBrowserLoad,
+  browserType
 ) => {
    const [{
      isLoading,
@@ -41,9 +43,18 @@ const useLoadMenu = (
      menu
    }, dispatch] = useReducer(_reducer, initialState)
    , setLoading = () => dispatch(_crAction(LOADING))
-   , setFailed = () => dispatch(_crAction(FAILED))
-   , setLoaded = menu => dispatch(_crAction(LOADED, menu))
    , updateMenu = menu => dispatch(_crAction(UPDATE, menu));
+
+   useMsBrowserLoad(msBrowserLoad => {
+     if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
+       const { menuItems } = msBrowserLoad;
+       if (menuItems) {
+         dispatch(_crAction(LOADED, menuItems))
+       } else {
+         dispatch(_crAction(FAILED))
+       }
+     }
+   })
 
    /*eslint-disable react-hooks/exhaustive-deps */
    useEffect(()=>{
@@ -58,8 +69,6 @@ const useLoadMenu = (
    return [
      isLoading,
      menu,
-     setLoaded,
-     setFailed,
      updateMenu
    ];
 };

@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.useMsBrowserLoad = exports.loadBrowser = void 0;
+exports.useMsBrowserLoad = exports.setMsBrowserLoaded = exports.setMsBrowserFailed = exports.loadBrowser = void 0;
 var _fnFetch = require("../../utils/fnFetch");
 var _onCatch = _interopRequireDefault(require("../logic/onCatch"));
 var _storeApi = require("../storeApi");
@@ -17,6 +17,15 @@ const _crStore = () => ({
   _browserStore = (0, _storeApi.createStoreWithSelector)(_crStore),
   [_set] = (0, _storeApi.getStoreApi)(_browserStore);
 const useMsBrowserLoad = exports.useMsBrowserLoad = (0, _storeApi.fCrUse)(_browserStore, _selectMsBrowserLoad);
+const setMsBrowserLoaded = (browserType, menuItems) => _set(_crMsBrowserLoad({
+  browserType,
+  menuItems
+}));
+exports.setMsBrowserLoaded = setMsBrowserLoaded;
+const setMsBrowserFailed = browserType => _set(_crMsBrowserLoad({
+  browserType
+}));
+exports.setMsBrowserFailed = setMsBrowserFailed;
 const _fetchSourceMenu = _ref => {
     let {
       json,
@@ -37,10 +46,7 @@ const _fetchSourceMenu = _ref => {
         browserType
       } = option,
       menuItems = (0, _isWithItemCounter.default)(browserType) ? (0, _initBrowserMenu.default)(_browserLogic.setBrowserMenu, _browserLogic.setRouterDialog, option) : json;
-    _set(_crMsBrowserLoad({
-      browserType,
-      menuItems
-    }));
+    setMsBrowserLoaded(browserType, menuItems);
   },
   _loadBrowserFailed = option => {
     const {
@@ -50,9 +56,7 @@ const _fetchSourceMenu = _ref => {
     } = option;
     option.alertItemId = alertItemId || caption;
     (0, _compStore.showAlertDialog)(option);
-    _set(_crMsBrowserLoad({
-      browserType
-    }));
+    setMsBrowserFailed(browserType);
   };
 const loadBrowser = option => {
   (0, _fnFetch.fetchJson)({

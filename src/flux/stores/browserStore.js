@@ -30,6 +30,13 @@ const _crStore = () => ({
 , [_set] = getStoreApi(_browserStore);
 
 export const useMsBrowserLoad = fCrUse(_browserStore, _selectMsBrowserLoad)
+export const setMsBrowserLoaded = (
+  browserType,
+  menuItems
+) => _set(_crMsBrowserLoad({ browserType, menuItems }))
+export const setMsBrowserFailed = (
+  browserType
+) => _set(_crMsBrowserLoad({ browserType }))
 
 const _fetchSourceMenu = ({
   json,
@@ -44,10 +51,10 @@ const _fetchSourceMenu = ({
   , menuItems = isWithItemCounter(browserType)
       ? initBrowserMenu(setBrowserMenu, setRouterDialog, option)
       : json;
-  _set(_crMsBrowserLoad({
+  setMsBrowserLoaded(
     browserType,
     menuItems
-  }))
+  )
 }
 , _loadBrowserFailed = (option) => {
   const {
@@ -57,7 +64,7 @@ const _fetchSourceMenu = ({
   } = option;
   option.alertItemId = alertItemId || caption
   showAlertDialog(option)
-  _set(_crMsBrowserLoad({ browserType }))
+  setMsBrowserFailed(browserType)
 }
 
 export const loadBrowser = (option) => {

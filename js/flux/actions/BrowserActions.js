@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.BrowserActions = exports.BAT_UPDATE_WATCH_BROWSER = exports.BAT_UPDATE_BROWSER_MENU = exports.BAT_SHOW_BROWSER_DYNAMIC = exports.BAT_LOAD_BROWSER_FAILED = exports.BAT_INIT_BROWSER_DYNAMIC = void 0;
+exports.BrowserActions = exports.BAT_UPDATE_WATCH_BROWSER = exports.BAT_UPDATE_BROWSER_MENU = exports.BAT_SHOW_BROWSER_DYNAMIC = exports.BAT_INIT_BROWSER_DYNAMIC = void 0;
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
 var _browserLogic = require("../stores/browserLogic");
 var _Factory = require("../logic/Factory");
@@ -12,14 +12,12 @@ var _RouterModalDialog = require("../../components/dialogs/RouterModalDialog");
 var _RouterDialog = require("../logic/RouterDialog");
 const BAT_SHOW_BROWSER_DYNAMIC = exports.BAT_SHOW_BROWSER_DYNAMIC = 'showBrowserDynamic';
 const BAT_INIT_BROWSER_DYNAMIC = exports.BAT_INIT_BROWSER_DYNAMIC = 'initBrowserDynamic';
-const BAT_LOAD_BROWSER_FAILED = exports.BAT_LOAD_BROWSER_FAILED = 'loadBrowserFailed';
 const BAT_UPDATE_WATCH_BROWSER = exports.BAT_UPDATE_WATCH_BROWSER = 'updateWatchBrowser';
 const BAT_UPDATE_BROWSER_MENU = exports.BAT_UPDATE_BROWSER_MENU = 'updateBrowserMenu';
 const BA = _refluxCore.default.createActions({
   [BAT_SHOW_BROWSER_DYNAMIC]: {
     children: ['done', 'init', 'failed']
   },
-  [BAT_INIT_BROWSER_DYNAMIC]: {},
   [BAT_UPDATE_WATCH_BROWSER]: {}
 });
 const ERR_LOAD = "Failed to load browser.",

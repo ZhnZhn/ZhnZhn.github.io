@@ -15,15 +15,13 @@ import { loadDialogs } from '../logic/RouterDialog';
 
 export const BAT_SHOW_BROWSER_DYNAMIC = 'showBrowserDynamic'
 export const BAT_INIT_BROWSER_DYNAMIC = 'initBrowserDynamic'
-export const BAT_LOAD_BROWSER_FAILED = 'loadBrowserFailed'
 export const BAT_UPDATE_WATCH_BROWSER = 'updateWatchBrowser'
 export const BAT_UPDATE_BROWSER_MENU = 'updateBrowserMenu'
 
 const BA = Reflux.createActions({
   [BAT_SHOW_BROWSER_DYNAMIC]: {
     children: ['done', 'init', 'failed']
-  },
-  [BAT_INIT_BROWSER_DYNAMIC]: {},
+  },  
 
   [BAT_UPDATE_WATCH_BROWSER]: {}
 });

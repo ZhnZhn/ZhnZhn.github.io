@@ -39,27 +39,18 @@ const BrowserMenu = ({
   , [
     isLoading,
     menu,
-    setLoaded,
-    setFailed,
     updateMenu
-  ] = useLoadMenu(isShow, onLoadMenu)
+  ] = useLoadMenu(
+    isShow,
+    onLoadMenu,
+    useMsBrowserLoad,
+    browserType
+  )
   , refFirstItem = useBrowserMenu(
      isShow,
      menu
   );
-
-
-  useMsBrowserLoad(msBrowserLoad => {
-    if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
-      const { menuItems } = msBrowserLoad;
-      if (menuItems) {
-        setLoaded(menuItems)
-      } else {
-        setFailed()
-      }
-    }
-  })
-
+  
   useListen((actionType, data) => {
     if (data === browserType) {
       if (actionType === showAction) {

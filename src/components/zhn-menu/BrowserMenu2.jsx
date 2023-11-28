@@ -80,27 +80,23 @@ const BrowserMenu2 = ({
     isShowSearch,
     toggleSearch
   ] = useToggle()
-  , _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl)
+  , _toolbarButtons = _useToolbarButtons(
+    toggleSearch,
+    onClickInfo,
+    descrUrl
+  )
   , [
     isLoading,
     menu,
-    setLoaded,
-    setFailed
-  ] = useLoadMenu(isShow, onLoadMenu)
+  ] = useLoadMenu(
+    isShow,
+    onLoadMenu,
+    useMsBrowserLoad,
+    browserType
+  )
   , _scrollClass = isShowSearch
      ? CL_BROWSER_WITH_SEARCH
      : CL_BROWSER;
-
-  useMsBrowserLoad(msBrowserLoad => {
-   if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
-     const { menuItems } = msBrowserLoad;
-     if (menuItems) {
-       setLoaded(menuItems)
-     } else {
-       setFailed()
-     }
-   }
-  })
 
   useListen((actionType, data) => {
     if (data === browserType){
