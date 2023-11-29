@@ -8,14 +8,12 @@
   "_ChartActions",
   "require",
   "_BrowserActions",
-  "_WatchActions",
   "Actions",
   "ChartActions",
   "BrowserActions",
-  "WatchActions",
   "_default",
   "exports",
   "default"
  ],
- "mappings": ";;;;AAAA,IAAAA,aAAA,GAAAC,OAAA;AACA,IAAAC,eAAA,GAAAD,OAAA;AAEA,IAAAE,aAAA,GAAAF,OAAA;AAEA,MAAMG,OAAO,GAAG,CACdC,0BAAY,EACZC,8BAAc,EACdC,0BAAY,CACb;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaN,OAAO"
+ "mappings": ";;;;AAAA,IAAAA,aAAA,GAAAC,OAAA;AACA,IAAAC,eAAA,GAAAD,OAAA;AAEA,MAAME,OAAO,GAAG,CACdC,0BAAY,EACZC,8BAAc,CACf;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaL,OAAO"
 }

@@ -8,6 +8,7 @@ var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 var _ComponentActions = require("../actions/ComponentActions");
 var _compStore = require("../stores/compStore");
 var _browserStore = require("../stores/browserStore");
+var _watchListStore = require("../watch-list/watchListStore");
 var _ChartActions = require("../actions/ChartActions");
 var _BrowserActions = require("../actions/BrowserActions");
 var _BrowserType = require("../../constants/BrowserType");
@@ -19,9 +20,8 @@ const _crBrowserWatchList = Comp => (0, _uiApi.createElement)(Comp, {
   browserType: _BrowserType.BT_WATCH_LIST,
   caption: "Watch List",
   isInitShow: true,
-  store: _ChartStore.default,
   useMsBrowserShow: _browserStore.useMsBrowserShow,
-  updateAction: _BrowserActions.BAT_UPDATE_WATCH_BROWSER
+  useWatchList: _watchListStore.useWatchList
 });
 const _crBrowserDynamic = (Comp, option) => {
   const {

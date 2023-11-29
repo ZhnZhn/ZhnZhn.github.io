@@ -7,15 +7,14 @@ var _refluxCore = _interopRequireDefault(require("reflux-core"));
 var _Actions = _interopRequireDefault(require("../actions/Actions"));
 var _ChartSlice = _interopRequireDefault(require("./ChartSlice"));
 var _SettingSlice = _interopRequireDefault(require("./SettingSlice"));
-var _WatchListSlice = _interopRequireDefault(require("../watch-list/WatchListSlice"));
+var _watchListStore = require("../watch-list/watchListStore");
 const ChartStore = _refluxCore.default.createStore({
   listenables: [..._Actions.default],
   init() {
-    this.initWatchList();
+    (0, _watchListStore.initWatchList)();
   },
   ..._ChartSlice.default,
-  ..._SettingSlice.default,
-  ..._WatchListSlice.default
+  ..._SettingSlice.default
 });
 var _default = exports.default = ChartStore;
 //# sourceMappingURL=ChartStore.js.map

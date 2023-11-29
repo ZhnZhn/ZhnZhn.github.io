@@ -16,11 +16,13 @@ import {
   loadBrowser
 } from '../stores/browserStore';
 import {
+  useWatchList
+} from '../watch-list/watchListStore';
+import {
   CHAT_SHOW,
   ChartActions
 } from '../actions/ChartActions';
 import {
-  BAT_UPDATE_WATCH_BROWSER,
   BAT_UPDATE_BROWSER_MENU
 } from '../actions/BrowserActions';
 import {
@@ -44,10 +46,9 @@ const _crBrowserWatchList = (
    browserType: BT_WATCH_LIST,
    caption: "Watch List",
    isInitShow: true,
-   store: ChartStore,
    useMsBrowserShow,
-   updateAction: BAT_UPDATE_WATCH_BROWSER
-})
+   useWatchList
+});
 
 const _crBrowserDynamic = (
   Comp,

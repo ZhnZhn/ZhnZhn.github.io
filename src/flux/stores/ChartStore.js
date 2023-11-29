@@ -4,19 +4,17 @@ import Actions from '../actions/Actions'
 
 import ChartSlice from './ChartSlice';
 import SettingSlice from './SettingSlice';
-import WatchListSlice from '../watch-list/WatchListSlice';
+import { initWatchList } from '../watch-list/watchListStore';
 
 const ChartStore = Reflux.createStore({
   listenables: [...Actions],
 
   init(){
-    this.initWatchList();
+    initWatchList()
   },
 
  ...ChartSlice,
- ...SettingSlice,
- ...WatchListSlice
-
+ ...SettingSlice
 })
 
 export default ChartStore
