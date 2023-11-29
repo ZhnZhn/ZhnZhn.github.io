@@ -7,7 +7,6 @@ import {
   getInputValue
 } from '../uiApi';
 
-import useListen from '../hooks/useListen';
 import useSelectItem from './hooks/useSelectItem';
 import useInputText from './hooks/useInputText';
 
@@ -16,19 +15,18 @@ import { getRefFocusLast } from './paneFn';
 
 const ListCreatePane = (props) => {
   const {
-    store,
     onCreate,
     msgOnNotSelect,
     msgOnIsEmptyName,
-    actionCompleted,
-    actionFailed,
+    useMsEdit,
+    getWatchGroups,
     forActionType,
     onClose,
   } = props
   , [
     groupOptions,
     setGroupOptions
-  ] = useState(() => store.getWatchGroups())
+  ] = useState(() => getWatchGroups())
   , [
     validationMessages,
     setValidationMessages
@@ -64,15 +62,18 @@ const ListCreatePane = (props) => {
      />
   ), [_hCreate]);
 
-
-  useListen((actionType, data) => {
-    if (actionType === actionCompleted){
-      if (data.forActionType === forActionType){
-        _hClear()
+  useMsEdit(msEdit => {
+    if (msEdit) {
+      if (msEdit.forActionType === forActionType) {
+        if (msEdit.messages) {
+          setValidationMessages(msEdit.messages)
+        } else {
+          _hClear()
+          setGroupOptions(getWatchGroups())
+        }
+      } else {
+        setGroupOptions(getWatchGroups())
       }
-      setGroupOptions(store.getWatchGroups())
-    } else if (actionType === actionFailed && data.forActionType === forActionType){
-      setValidationMessages(data.messages)
     }
   })
 
@@ -102,13 +103,9 @@ const ListCreatePane = (props) => {
 
 /*
 ListCreatePane.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchGroups: PropTypes.func
-  }),
-  actionCompleted: PropTypes.string,
-  actionFailed: PropTypes.string,
+  getWatchGroups: PropTypes.func,
   forActionType: PropTypes.string,
+  useMsEdit: : PropTypes.func,
 
   msgOnNotSelect: PropTypes.func,
   msgOnIsEmptyName: PropTypes.func,

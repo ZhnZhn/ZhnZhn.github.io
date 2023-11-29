@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _useSelectItem = _interopRequireDefault(require("./hooks/useSelectItem"));
 var _useInputText = _interopRequireDefault(require("./hooks/useInputText"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
@@ -14,16 +13,15 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 const GroupEditPane = props => {
   const {
-      store,
-      actionCompleted,
-      actionFailed,
       forActionType,
       onRename,
       msgOnNotSelect,
       msgOnIsEmptyName,
+      useMsEdit,
+      getWatchGroups,
       onClose
     } = props,
-    [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => store.getWatchGroups()),
+    [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => getWatchGroups()),
     [validationMessages, setValidationMessages] = (0, _uiApi.useState)([]),
     [_refInputText, _hClear] = (0, _useInputText.default)(setValidationMessages),
     [_refCaptionFrom, _hSelectGroup] = (0, _useSelectItem.default)()
@@ -54,14 +52,18 @@ const GroupEditPane = props => {
       title: "Edit Group Name",
       onClick: _hRename
     }), [_hRename]);
-  (0, _useListen.default)((actionType, data) => {
-    if (actionType === actionCompleted) {
-      if (data.forActionType === forActionType) {
-        _hClear();
+  useMsEdit(msEdit => {
+    if (msEdit) {
+      if (msEdit.forActionType === forActionType) {
+        if (msEdit.messages) {
+          setValidationMessages(msEdit.messages);
+        } else {
+          _hClear();
+          setGroupOptions(getWatchGroups());
+        }
+      } else {
+        setGroupOptions(getWatchGroups());
       }
-      setGroupOptions(store.getWatchGroups());
-    } else if (actionType === actionFailed && data.forActionType === forActionType) {
-      setValidationMessages(data.messages);
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -85,13 +87,9 @@ const GroupEditPane = props => {
 
 /*
 GroupEditPane.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchGroups: PropTypes.func
-  }),
-  actionCompleted: PropTypes.string,
-  actionFailed: PropTypes.string,
+  getWatchGroups: PropTypes.func,
   forActionType: PropTypes.string,
+  useMsEdit: PropTypes.func,
 
   msgOnIsEmptyName: PropTypes.func,
   msgOnNotSelect: PropTypes.func,
@@ -100,6 +98,5 @@ GroupEditPane.propTypes = {
   onClose: PropTypes.func
 }
 */
-var _default = GroupEditPane;
-exports.default = _default;
+var _default = exports.default = GroupEditPane;
 //# sourceMappingURL=GroupEditPane.js.map

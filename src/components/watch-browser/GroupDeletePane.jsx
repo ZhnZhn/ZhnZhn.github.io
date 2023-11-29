@@ -5,16 +5,14 @@ import {
   setRefValue,
   getRefValue
 } from '../uiApi';
-import useListen from '../hooks/useListen';
 
 import A from './Atoms';
 import { getRefFocusLast } from './paneFn';
 
-
 const UPDATE = 'a'
 , VALIDATION_ERR = 'b'
-, _initState = store => ({
-  groups: store.getWatchGroups,
+, _initState = getWatchGroups => ({
+  groups: getWatchGroups(),
   errs: []
 })
 , _crAction = (
@@ -43,7 +41,7 @@ const _reducer = (
 }
 
 const _useReducer = (
-  store,
+  getWatchGroups,
   msgOnNotSelect
 ) => {
   const [
@@ -51,7 +49,7 @@ const _useReducer = (
     dispatch
   ] = useReducer(
     _reducer,
-    store,
+    getWatchGroups,
     _initState
   )
   return [
@@ -86,10 +84,10 @@ const _usePrimaryBt = (
 
 const GroupDeletePane = (props) => {
   const {
-    store,
-    actionCompleted,
     onDelete,
     msgOnNotSelect,
+    useMsEdit,
+    getWatchGroups,
     onClose
   } = props
   , _refCaption = useRef(null)
@@ -99,7 +97,7 @@ const GroupDeletePane = (props) => {
     updateGroups,
     setErrs
   ] = _useReducer(
-    store,
+    getWatchGroups,
     msgOnNotSelect
   )
   , _primaryBt = _usePrimaryBt(
@@ -114,9 +112,9 @@ const GroupDeletePane = (props) => {
      )
   };
 
-  useListen((actionType, data) => {
-    if (actionType === actionCompleted) {
-      updateGroups(store.getWatchGroups())
+  useMsEdit(msEdit => {
+    if (msEdit && !msEdit.messages) {
+      updateGroups(getWatchGroups())
     }
   })
 
@@ -142,12 +140,10 @@ const GroupDeletePane = (props) => {
 
 /*
 GroupDeletePane.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchGroups: PropTypes.func
-  }),
-  actionCompleted: PropTypes.string,
+  getWatchGroups: PropTypes.func,
   forActionType: PropTypes.string,
+  useMsEdit: PropTypes.func,
+
   msgOnNotSelect: PropTypes.func,
   onDelete: PropTypes.func,
   onClose: PropTypes.func

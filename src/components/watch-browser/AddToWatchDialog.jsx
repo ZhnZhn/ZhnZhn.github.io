@@ -8,14 +8,17 @@ import {
 import memoIsShow from '../hoc/memoIsShow';
 import usePrevValue from '../hooks/usePrevValue';
 import useProperty from '../hooks/useProperty';
-import useListen from '../hooks/useListen';
 
 import {
-  WAT_EDIT_WATCH_COMPLETED,
-  WAT_EDIT_WATCH_FAILED,
-  WAT_ADD_ITEM,
-  WatchActions
+  WAT_ADD_ITEM
 } from '../../flux/actions/WatchActions';
+import {
+  useMsEdit,
+  getWatchGroups,
+  getWatchListsByGroup,
+  addWatchItem
+} from '../../flux/watch-list/watchListStore';
+
 import {
   notSelected
 } from '../../constants/MsgWatch';
@@ -25,8 +28,7 @@ import Button from './Button';
 import ValidationMessages from '../zhn/ValidationMessages';
 import D from '../dialogs/DialogCell'
 
-const addItem = WatchActions[WAT_ADD_ITEM]
-, S_DIALOG = { width: 300 }
+const S_DIALOG = { width: 300 }
 , S_CAPTION = { width: 70 }
 , SELECT_WIDTH = "202";
 
@@ -44,7 +46,7 @@ const AddToWatchDialog = memoIsShow((
   , _prevProps = usePrevValue(props)
   , {
     isShow,
-    store,
+    //store,
     data,
     onClose
   } = props
@@ -56,7 +58,7 @@ const AddToWatchDialog = memoIsShow((
     state,
     setState
   ] = useState(() => ({
-    groupOptions: store.getWatchGroups(),
+    groupOptions: getWatchGroups(),
     listOptions: []
   }))
   , {
@@ -110,7 +112,7 @@ const AddToWatchDialog = memoIsShow((
       } = data
       , groupCaption = getGroupCaption()
       , listCaption = getListCaption();
-      addItem({
+      addWatchItem({
         caption,
         groupCaption,
         listCaption,
@@ -143,24 +145,27 @@ const AddToWatchDialog = memoIsShow((
     onClose()
   }, [onClose]);
 
-
-  useListen((actionType, data) => {
-    if (actionType === WAT_EDIT_WATCH_COMPLETED && data.forActionType === WAT_ADD_ITEM){
-       setValidationMessages(
-         prevVms => prevVms.length>0
-           ? []
-           : prevVms
-       )
-       onClose()
-    } else if (actionType === WAT_EDIT_WATCH_FAILED && data.forActionType === WAT_ADD_ITEM){
-       setValidationMessages(data.messages)
+  useMsEdit(msEdit => {
+    if (msEdit) {
+      if (msEdit.forActionType === WAT_ADD_ITEM) {
+        if (msEdit.messages) {
+          setValidationMessages(msEdit.messages)
+        } else {
+          setValidationMessages(
+            prevVms => prevVms.length>0
+              ? []
+              : prevVms
+          )
+          onClose()
+        }
+      }
     }
   })
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (_prevProps && _prevProps !== props && _prevProps.isShow !== isShow) {
-      const groups = store.getWatchGroups()
+      const groups = getWatchGroups()
       , _groupCaption = getGroupCaption()
       if (groups !== groupOptions){
         setGroupCaption(null)
@@ -171,7 +176,7 @@ const AddToWatchDialog = memoIsShow((
         })
       } else if (_groupCaption){
         setState(prevState => {
-          const _listOptions = store.getWatchListsByGroup(_groupCaption)
+          const _listOptions = getWatchListsByGroup(_groupCaption)
           return listOptions !== _listOptions
             ? (setListCaption(null), {...prevState, listOptions: _listOptions})
             : prevState;
@@ -224,14 +229,11 @@ const AddToWatchDialog = memoIsShow((
 
 /*
 AddToWatchDialog.propTypes = {
-  isShow  : PropTypes.bool,
-  data    : PropTypes.object,
-  store   : PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchGroups: PropTypes.func,
-    getWatchListsByGroup: PropTypes.func
-  }),
-  onClose : PropTypes.func
+  isShow: PropTypes.bool,
+  data: PropTypes.object,
+  getWatchGroups: PropTypes.func,
+  getWatchListsByGroup: PropTypes.func,
+  onClose: PropTypes.func
 }
 */
 

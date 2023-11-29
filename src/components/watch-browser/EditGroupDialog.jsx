@@ -2,13 +2,18 @@ import memoIsShow from '../hoc/memoIsShow';
 import useRefFocus from '../hooks/useRefFocus';
 
 import {
-  WAT_EDIT_WATCH_COMPLETED,
-  WAT_EDIT_WATCH_FAILED,
   WAT_ADD_GROUP,
   WAT_RENAME_GROUP,
-  WAT_DELETE_GROUP,
-  WatchActions
+  WAT_DELETE_GROUP
 } from '../../flux/actions/WatchActions';
+
+import {
+  useMsEdit,
+  getWatchGroups,
+  crGroup,
+  renGroup,
+  delGroup
+} from '../../flux/watch-list/watchListStore'
 
 import {
   notSelected,
@@ -22,13 +27,8 @@ import GroupAddPane from './GroupAddPane';
 import GroupEditPane from './GroupEditPane';
 import GroupDeletePane from './GroupDeletePane';
 
-const addGroup = WatchActions[WAT_ADD_GROUP]
-, renameGroup = WatchActions[WAT_RENAME_GROUP]
-, deleteGroup = WatchActions[WAT_DELETE_GROUP];
-
 const EditGroupDialog = memoIsShow(({
   isShow,
-  store,
   onClose
 }) => {
   const [
@@ -46,9 +46,8 @@ const EditGroupDialog = memoIsShow(({
     <TabPane
        id="egd"
        width={380}
-       store={store}
-       actionCompleted={WAT_EDIT_WATCH_COMPLETED}
-       actionFailed={WAT_EDIT_WATCH_FAILED}
+       useMsEdit={useMsEdit}
+       getWatchGroups={getWatchGroups}
        msgOnNotSelect={notSelected}
        msgOnIsEmptyName={emptyName}
        onClose={onClose}
@@ -57,19 +56,19 @@ const EditGroupDialog = memoIsShow(({
        <Tab title="Create">
          <GroupAddPane
             forActionType={WAT_ADD_GROUP}
-            onCreate={addGroup}
+            onCreate={crGroup}
           />
        </Tab>
        <Tab title="Rename">
          <GroupEditPane
             forActionType={WAT_RENAME_GROUP}
-            onRename={renameGroup}
+            onRename={renGroup}
          />
        </Tab>
        <Tab title="Delete">
          <GroupDeletePane
             forActionType={WAT_DELETE_GROUP}
-            onDelete={deleteGroup}
+            onDelete={delGroup}
          />
        </Tab>
     </TabPane>

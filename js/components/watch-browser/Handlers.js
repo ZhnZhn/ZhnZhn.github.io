@@ -2,8 +2,9 @@
 
 exports.__esModule = true;
 exports.showDialogWatchItem = exports.showDialogEditLists = exports.showDialogEditGroups = exports.saveWatchList = exports.removeWatchItem = void 0;
+var _watchListStore = require("../../flux/watch-list/watchListStore");
+exports.saveWatchList = _watchListStore.saveWatchList;
 var _compStore = require("../../flux/stores/compStore");
-var _WatchActions = require("../../flux/actions/WatchActions");
 var _ModalDialogType = require("../../constants/ModalDialogType");
 const showDialogEditGroups = () => (0, _compStore.showModalDialog)(_ModalDialogType.MDT_EDIT_WATCH_GROUP);
 exports.showDialogEditGroups = showDialogEditGroups;
@@ -13,11 +14,7 @@ const showDialogWatchItem = item => (0, _compStore.showModalDialog)(_ModalDialog
 exports.showDialogWatchItem = showDialogWatchItem;
 const removeWatchItem = (option, evt) => {
   evt.stopPropagation();
-  _WatchActions.WatchActions.removeItem(option);
+  (0, _watchListStore.deleteWatchItem)(option);
 };
 exports.removeWatchItem = removeWatchItem;
-const saveWatchList = () => {
-  _WatchActions.WatchActions.saveWatch();
-};
-exports.saveWatchList = saveWatchList;
 //# sourceMappingURL=Handlers.js.map

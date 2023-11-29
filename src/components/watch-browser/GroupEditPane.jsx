@@ -7,7 +7,6 @@ import {
   getInputValue
 } from '../uiApi';
 
-import useListen from '../hooks/useListen';
 import useSelectItem from './hooks/useSelectItem';
 import useInputText from './hooks/useInputText';
 
@@ -16,19 +15,18 @@ import { getRefFocusLast } from './paneFn';
 
 const GroupEditPane = (props) => {
   const {
-    store,
-    actionCompleted,
-    actionFailed,
     forActionType,
     onRename,
     msgOnNotSelect,
     msgOnIsEmptyName,
+    useMsEdit,
+    getWatchGroups,
     onClose
   } = props
   , [
     groupOptions,
     setGroupOptions
-  ] = useState(() => store.getWatchGroups())
+  ] = useState(() => getWatchGroups())
   , [
     validationMessages,
     setValidationMessages
@@ -68,15 +66,18 @@ const GroupEditPane = (props) => {
     />
   ), [_hRename]);
 
-
-  useListen((actionType, data)=>{
-    if (actionType === actionCompleted){
-      if (data.forActionType === forActionType){
-        _hClear()
+  useMsEdit(msEdit => {
+    if (msEdit) {
+      if (msEdit.forActionType === forActionType) {
+        if (msEdit.messages) {
+          setValidationMessages(msEdit.messages)
+        } else {
+          _hClear()
+          setGroupOptions(getWatchGroups())
+        }
+      } else {
+        setGroupOptions(getWatchGroups())
       }
-      setGroupOptions(store.getWatchGroups())
-    } else if (actionType === actionFailed && data.forActionType === forActionType){
-      setValidationMessages(data.messages)
     }
   })
 
@@ -106,13 +107,9 @@ const GroupEditPane = (props) => {
 
 /*
 GroupEditPane.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchGroups: PropTypes.func
-  }),
-  actionCompleted: PropTypes.string,
-  actionFailed: PropTypes.string,
+  getWatchGroups: PropTypes.func,
   forActionType: PropTypes.string,
+  useMsEdit: PropTypes.func,
 
   msgOnIsEmptyName: PropTypes.func,
   msgOnNotSelect: PropTypes.func,

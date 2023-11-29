@@ -3,11 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _Handlers = require("./Handlers");
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _EditBar = _interopRequireDefault(require("./EditBar"));
@@ -25,23 +23,15 @@ const CL_SCROLL_WATCH = (0, _styleFn.crScrollYCn)('scroll-watch'),
 const WatchBrowser = props => {
   const {
       caption,
-      store,
-      updateAction
+      useWatchList
     } = props,
     [isModeEdit, _toggleEditMode] = (0, _useToggle.default)(),
     [isShow, _hHide] = (0, _useBrowserShow.default)(props),
-    [watchList, setWatchList] = (0, _uiApi.useState)(() => store.getWatchList());
-  (0, _useListen.default)((actionType, data) => {
-    if (actionType === updateAction) {
-      setWatchList({
-        ...data
-      });
-    }
-  });
-  const _captionEV = isModeEdit ? 'V' : 'E',
+    watchList = useWatchList(),
     {
       groups
-    } = watchList || {};
+    } = watchList || {},
+    _captionEV = isModeEdit ? 'V' : 'E';
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.Browser, {
     isShow: isShow,
     style: S_BROWSER,

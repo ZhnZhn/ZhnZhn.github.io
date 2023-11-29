@@ -1,9 +1,7 @@
-import { useState } from '../uiApi';
 import { crScrollYCn } from '../styleFn';
 
 import useToggle from '../hooks/useToggle';
 import useBrowserShow from '../hooks/useBrowserShow';
-import useListen from '../hooks/useListen';
 
 import {
   saveWatchList,
@@ -26,8 +24,7 @@ const CL_SCROLL_WATCH = crScrollYCn('scroll-watch')
 const WatchBrowser = (props) => {
   const {
     caption,
-    store,
-    updateAction
+    useWatchList,
   } = props
   , [
     isModeEdit,
@@ -37,19 +34,9 @@ const WatchBrowser = (props) => {
     isShow,
     _hHide
   ] = useBrowserShow(props)
-  , [
-    watchList,
-    setWatchList
-  ] = useState(() => store.getWatchList());
-
-  useListen((actionType, data) => {
-    if (actionType === updateAction) {
-      setWatchList({...data})
-    }
-  })
-
-  const _captionEV = isModeEdit ? 'V' : 'E'
-  , { groups } = watchList || {};
+  , watchList = useWatchList()
+  , { groups } = watchList || {}
+  , _captionEV = isModeEdit ? 'V' : 'E';
 
   return (
     <A.Browser isShow={isShow} style={S_BROWSER}>

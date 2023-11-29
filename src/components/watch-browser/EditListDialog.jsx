@@ -2,13 +2,19 @@ import memoIsShow from '../hoc/memoIsShow';
 import useRefFocus from '../hooks/useRefFocus';
 
 import {
-  WAT_EDIT_WATCH_COMPLETED,
-  WAT_EDIT_WATCH_FAILED,
   WAT_CREATE_LIST,
   WAT_RENAME_LIST,
-  WAT_DELETE_LIST,
-  WatchActions
+  WAT_DELETE_LIST
 } from '../../flux/actions/WatchActions';
+
+import {
+  useMsEdit,
+  getWatchGroups,
+  getWatchListsByGroup,
+  crList,
+  renList,
+  delList
+} from '../../flux/watch-list/watchListStore';
 
 import {
   notSelected,
@@ -22,13 +28,8 @@ import ListCreatePane from './ListCreatePane';
 import ListEditPane from './ListEditPane';
 import ListDeletePane from './ListDeletePane';
 
-const createList = WatchActions[WAT_CREATE_LIST]
-, renameList = WatchActions[WAT_RENAME_LIST]
-, deleteList = WatchActions[WAT_DELETE_LIST];
-
 const EditListDialog = memoIsShow(({
   isShow,
-  store,
   onClose
 }) => {
   const [
@@ -46,9 +47,8 @@ const EditListDialog = memoIsShow(({
     <TabPane
       id="eld"
       width={380}
-      store={store}
-      actionCompleted={WAT_EDIT_WATCH_COMPLETED}
-      actionFailed={WAT_EDIT_WATCH_FAILED}
+      useMsEdit={useMsEdit}
+      getWatchGroups={getWatchGroups}
       msgOnNotSelect={notSelected}
       msgOnIsEmptyName={emptyName}
       onClose={onClose}
@@ -57,19 +57,21 @@ const EditListDialog = memoIsShow(({
        <Tab title="Create">
          <ListCreatePane
             forActionType={WAT_CREATE_LIST}
-            onCreate={createList}
+            onCreate={crList}
           />
        </Tab>
        <Tab title="Rename">
          <ListEditPane
+            getWatchListsByGroup={getWatchListsByGroup}
             forActionType={WAT_RENAME_LIST}
-            onRename={renameList}
+            onRename={renList}
          />
        </Tab>
        <Tab title="Delete">
          <ListDeletePane
+            getWatchListsByGroup={getWatchListsByGroup}
             forActionType={WAT_DELETE_LIST}
-            onDelete={deleteList}
+            onDelete={delList}
          />
        </Tab>
     </TabPane>

@@ -7,24 +7,23 @@ import {
   getInputValue
 } from '../uiApi';
 
-import useListen from '../hooks/useListen';
-
 import A from './Atoms';
 import { getRefFocusLast } from './paneFn';
 
 const ListDeletePane = (props) => {
   const {
-    store,
-    actionCompleted,
+    getWatchListsByGroup,
+    useMsEdit,
+    getWatchGroups,
     forActionType,
     onDelete,
     msgOnNotSelect,
-    onClose    
+    onClose
   } = props
   , [
     groupOptions,
     setGroupOptions
-  ] = useState(() => store.getWatchGroups())
+  ] = useState(() => getWatchGroups())
   , [
     validationMessages,
     setValidationMessages
@@ -59,13 +58,14 @@ const ListDeletePane = (props) => {
      />
   ), [_hDelete]);
 
-
-  useListen((actionType, data) => {
-    if (actionType === actionCompleted){
-      if (data.forActionType === forActionType) {
-        _hClear()
+  useMsEdit(msEdit => {
+    if (msEdit) {
+      if (!msEdit.messages) {
+        if (msEdit.forActionType === forActionType) {
+          _hClear()
+        }
+        setGroupOptions(getWatchGroups())
       }
-      setGroupOptions(store.getWatchGroups())
     }
   })
 
@@ -73,7 +73,7 @@ const ListDeletePane = (props) => {
     <div>
        <A.SelectGroupList
          ref={_refSelectGroupList}
-         store={store}
+         getWatchListsByGroup={getWatchListsByGroup}
          groupCaption="In Group:"
          groupOptions={groupOptions}
          listCaption="List:"
@@ -93,12 +93,11 @@ const ListDeletePane = (props) => {
 
 /*
 ListDeletePane.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchGroups: PropTypes.func
-  }),
-  actionCompleted: PropTypes.string,
+  getWatchGroups: PropTypes.func,
+  getWatchListsByGroup: PropTypes.func,
   forActionType: PropTypes.string,
+  useMsEdit: PropTypes.func,
+
   msgOnNotSelect: PropTypes.func,
   onDelete: PropTypes.func,
   onClose: PropTypes.func

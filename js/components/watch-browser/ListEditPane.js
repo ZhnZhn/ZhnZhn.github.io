@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _useInputText = _interopRequireDefault(require("./hooks/useInputText"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 var _paneFn = require("./paneFn");
@@ -13,16 +12,16 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 const ListEditPane = props => {
   const {
-      store,
       onRename,
       msgOnIsEmptyName,
       msgOnNotSelect,
-      actionCompleted,
-      actionFailed,
+      useMsEdit,
+      getWatchGroups,
+      getWatchListsByGroup,
       forActionType,
       onClose
     } = props,
-    [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => store.getWatchGroups()),
+    [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => getWatchGroups()),
     [validationMessages, setValidationMessages] = (0, _uiApi.useState)([]),
     _refSelectGroupList = (0, _uiApi.useRef)(),
     [_refInputText, _hClear] = (0, _useInputText.default)(setValidationMessages)
@@ -60,20 +59,24 @@ const ListEditPane = props => {
       title: "Edit List Name",
       onClick: _hRename
     }), [_hRename]);
-  (0, _useListen.default)((actionType, data) => {
-    if (actionType === actionCompleted) {
-      if (data.forActionType === forActionType) {
-        _hClear();
+  useMsEdit(msEdit => {
+    if (msEdit) {
+      if (msEdit.forActionType === forActionType) {
+        if (msEdit.messages) {
+          setValidationMessages(msEdit.messages);
+        } else {
+          _hClear();
+          setGroupOptions(getWatchGroups());
+        }
+      } else {
+        setGroupOptions(getWatchGroups());
       }
-      setGroupOptions(store.getWatchGroups());
-    } else if (actionType === actionFailed && data.forActionType === forActionType) {
-      setValidationMessages(data.messages);
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.SelectGroupList, {
       ref: _refSelectGroupList,
-      store: store,
+      getWatchListsByGroup: getWatchListsByGroup,
       groupCaption: "In Group:",
       groupOptions: groupOptions,
       listCaption: "List From:"
@@ -93,13 +96,10 @@ const ListEditPane = props => {
 
 /*
 ListEditPane.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchGroups: PropTypes.func
-  }),
-  actionCompleted: PropTypes.string,
-  actionFailed: PropTypes.string,
+  getWatchGroups: PropTypes.func,
+  getWatchListsByGroup: PropTypes.func,
   forActionType: PropTypes.string,
+  useMsEdit: PropTypes.string,
 
   msgOnIsEmptyName: PropTypes.func,
   msgOnNotSelect: PropTypes.func,
@@ -108,6 +108,5 @@ ListEditPane.propTypes = {
   onClose: PropTypes.func
 }
 */
-var _default = ListEditPane;
-exports.default = _default;
+var _default = exports.default = ListEditPane;
 //# sourceMappingURL=ListEditPane.js.map

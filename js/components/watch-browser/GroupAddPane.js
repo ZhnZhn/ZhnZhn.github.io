@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -30,11 +29,10 @@ const _usePrimaryBt = (refInput, setState, onCreate, msgOnIsEmptyName) => {
 };
 const GroupAddPane = props => {
   const {
-      actionCompleted,
-      actionFailed,
       forActionType,
-      onCreate,
+      useMsEdit,
       msgOnIsEmptyName,
+      onCreate,
       onClose
     } = props,
     _refInput = (0, _uiApi.useRef)(),
@@ -44,11 +42,15 @@ const GroupAddPane = props => {
       _refInput.current.setValue('');
       setState([]);
     };
-  (0, _useListen.default)((actionType, data) => {
-    if (actionType === actionCompleted && data.forActionType === forActionType) {
-      _hClear();
-    } else if (actionType === actionFailed && data.forActionType === forActionType) {
-      setState(data.messages);
+  useMsEdit(msEdit => {
+    if (msEdit) {
+      if (msEdit.forActionType === forActionType) {
+        if (msEdit.messages) {
+          setState(msEdit.messages);
+        } else {
+          _hClear();
+        }
+      }
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -68,17 +70,13 @@ const GroupAddPane = props => {
 
 /*
 GroupAddPane.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func
-  }),
-  actionCompleted: PropTypes.string,
-  actionFailed: PropTypes.string,
   forActionType: PropTypes.string,
+  useMsEdit: PropTypes.func,
+
   msgOnIsEmptyName: PropTypes.func,
   onCreate: PropTypes.func,
   onClose: PropTypes.func
 }
 */
-var _default = GroupAddPane;
-exports.default = _default;
+var _default = exports.default = GroupAddPane;
 //# sourceMappingURL=GroupAddPane.js.map

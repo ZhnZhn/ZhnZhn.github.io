@@ -13,7 +13,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 const SelectGroupList = (0, _uiApi.forwardRef)((props, ref) => {
   const [_setPrevProps, _getPrevProps] = (0, _useProperty.default)(props),
     {
-      store,
+      getWatchListsByGroup,
       groupCaption,
       groupOptions,
       listCaption
@@ -46,7 +46,7 @@ const SelectGroupList = (0, _uiApi.forwardRef)((props, ref) => {
         (0, _uiApi.setRefValue)(_refListCaption, null);
         setListOptions([]);
       } else if ((0, _uiApi.getRefValue)(_refGroupCaption)) {
-        const _listOptions = store.getWatchListsByGroup(_refGroupCaption.current);
+        const _listOptions = getWatchListsByGroup(_refGroupCaption.current);
         if (_listOptions !== listOptions) {
           (0, _uiApi.setRefValue)(_refListCaption, null);
           setListOptions(_listOptions);
@@ -56,7 +56,7 @@ const SelectGroupList = (0, _uiApi.forwardRef)((props, ref) => {
     }
   }, [props]);
   //_getPrevProps, _setPrevProps, _refListCaption
-  //groupOptions, listCaption, store
+  //groupOptions, listCaption, getWatchListsByGroup
   /*eslint-enable react-hooks/exhaustive-deps */
 
   (0, _uiApi.useImperativeHandle)(ref, () => ({
@@ -79,16 +79,12 @@ const SelectGroupList = (0, _uiApi.forwardRef)((props, ref) => {
 });
 
 /*
-SelectGroupList.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchListsByGroup: PropTypes.func
-  }),
+SelectGroupList.propTypes = {  
+  getWatchListsByGroup: PropTypes.func
   groupCaption: PropTypes.string,
   groupOptions: PropTypes.array,
   listCaption: PropTypes.string
 }
 */
-var _default = SelectGroupList;
-exports.default = _default;
+var _default = exports.default = SelectGroupList;
 //# sourceMappingURL=SelectGroupList.js.map

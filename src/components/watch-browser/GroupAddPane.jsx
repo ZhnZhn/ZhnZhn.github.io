@@ -4,7 +4,6 @@ import {
   useState,
   getInputValue
 } from '../uiApi';
-import useListen from '../hooks/useListen';
 
 import A from './Atoms';
 import { getRefFocusLast } from './paneFn'
@@ -34,13 +33,12 @@ const _usePrimaryBt = (
 
 const GroupAddPane = (props) => {
   const {
-    actionCompleted,
-    actionFailed,
     forActionType,
-    onCreate,
+    useMsEdit,
     msgOnIsEmptyName,
+    onCreate,  
     onClose
-} = props
+  } = props
   , _refInput = useRef()
   , [
     validationMessages,
@@ -57,11 +55,15 @@ const GroupAddPane = (props) => {
       setState([])
   };
 
-  useListen((actionType, data) => {
-    if (actionType === actionCompleted && data.forActionType === forActionType){
-       _hClear()
-    } else if (actionType === actionFailed && data.forActionType === forActionType){
-       setState(data.messages)
+  useMsEdit(msEdit => {
+    if (msEdit) {
+      if (msEdit.forActionType === forActionType){
+        if (msEdit.messages) {
+          setState(msEdit.messages)
+        } else {
+         _hClear()
+        }
+      }
     }
   })
 
@@ -86,12 +88,9 @@ const GroupAddPane = (props) => {
 
 /*
 GroupAddPane.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func
-  }),
-  actionCompleted: PropTypes.string,
-  actionFailed: PropTypes.string,
   forActionType: PropTypes.string,
+  useMsEdit: PropTypes.func,
+
   msgOnIsEmptyName: PropTypes.func,
   onCreate: PropTypes.func,
   onClose: PropTypes.func

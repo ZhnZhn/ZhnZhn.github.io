@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -12,14 +11,15 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 const ListDeletePane = props => {
   const {
-      store,
-      actionCompleted,
+      getWatchListsByGroup,
+      useMsEdit,
+      getWatchGroups,
       forActionType,
       onDelete,
       msgOnNotSelect,
       onClose
     } = props,
-    [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => store.getWatchGroups()),
+    [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => getWatchGroups()),
     [validationMessages, setValidationMessages] = (0, _uiApi.useState)([]),
     _refSelectGroupList = (0, _uiApi.useRef)(),
     _hClear = (0, _uiApi.useCallback)(() => setValidationMessages([]), [])
@@ -52,18 +52,20 @@ const ListDeletePane = props => {
       title: "Delete List",
       onClick: _hDelete
     }), [_hDelete]);
-  (0, _useListen.default)((actionType, data) => {
-    if (actionType === actionCompleted) {
-      if (data.forActionType === forActionType) {
-        _hClear();
+  useMsEdit(msEdit => {
+    if (msEdit) {
+      if (!msEdit.messages) {
+        if (msEdit.forActionType === forActionType) {
+          _hClear();
+        }
+        setGroupOptions(getWatchGroups());
       }
-      setGroupOptions(store.getWatchGroups());
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.SelectGroupList, {
       ref: _refSelectGroupList,
-      store: store,
+      getWatchListsByGroup: getWatchListsByGroup,
       groupCaption: "In Group:",
       groupOptions: groupOptions,
       listCaption: "List:"
@@ -80,17 +82,15 @@ const ListDeletePane = props => {
 
 /*
 ListDeletePane.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchGroups: PropTypes.func
-  }),
-  actionCompleted: PropTypes.string,
+  getWatchGroups: PropTypes.func,
+  getWatchListsByGroup: PropTypes.func,
   forActionType: PropTypes.string,
+  useMsEdit: PropTypes.func,
+
   msgOnNotSelect: PropTypes.func,
   onDelete: PropTypes.func,
   onClose: PropTypes.func
 }
 */
-var _default = ListDeletePane;
-exports.default = _default;
+var _default = exports.default = ListDeletePane;
 //# sourceMappingURL=ListDeletePane.js.map

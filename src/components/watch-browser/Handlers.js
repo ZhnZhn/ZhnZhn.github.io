@@ -1,5 +1,11 @@
-import { showModalDialog } from '../../flux/stores/compStore';
-import { WatchActions } from '../../flux/actions/WatchActions';
+export { saveWatchList } from '../../flux/watch-list/watchListStore';
+
+import {
+  showModalDialog
+} from '../../flux/stores/compStore';
+import {
+  deleteWatchItem
+} from '../../flux/watch-list/watchListStore';
 import {
   MDT_EDIT_WATCH_GROUP,
   MDT_EDIT_WATCH_LIST,
@@ -14,9 +20,5 @@ export const showDialogWatchItem = (
 
 export const removeWatchItem = (option, evt) => {
   evt.stopPropagation()
-  WatchActions.removeItem(option)
-}
-
-export const saveWatchList = () => {
-  WatchActions.saveWatch()
+  deleteWatchItem(option)
 }

@@ -7,8 +7,8 @@ var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _usePrevValue = _interopRequireDefault(require("../hooks/usePrevValue"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _WatchActions = require("../../flux/actions/WatchActions");
+var _watchListStore = require("../../flux/watch-list/watchListStore");
 var _MsgWatch = require("../../constants/MsgWatch");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _Button = _interopRequireDefault(require("./Button"));
@@ -17,8 +17,7 @@ var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const addItem = _WatchActions.WatchActions[_WatchActions.WAT_ADD_ITEM],
-  S_DIALOG = {
+const S_DIALOG = {
     width: 300
   },
   S_CAPTION = {
@@ -31,13 +30,13 @@ const AddToWatchDialog = (0, _memoIsShow.default)(props => {
     _prevProps = (0, _usePrevValue.default)(props),
     {
       isShow,
-      store,
+      //store,
       data,
       onClose
     } = props,
     [validationMessages, setValidationMessages] = (0, _uiApi.useState)([]),
     [state, setState] = (0, _uiApi.useState)(() => ({
-      groupOptions: store.getWatchGroups(),
+      groupOptions: (0, _watchListStore.getWatchGroups)(),
       listOptions: []
     })),
     {
@@ -92,7 +91,7 @@ const AddToWatchDialog = (0, _memoIsShow.default)(props => {
           } = data,
           groupCaption = getGroupCaption(),
           listCaption = getListCaption();
-        addItem({
+        (0, _watchListStore.addWatchItem)({
           caption,
           groupCaption,
           listCaption,
@@ -113,19 +112,23 @@ const AddToWatchDialog = (0, _memoIsShow.default)(props => {
       setValidationMessages(prevVms => prevVms.length > 0 ? [] : prevVms);
       onClose();
     }, [onClose]);
-  (0, _useListen.default)((actionType, data) => {
-    if (actionType === _WatchActions.WAT_EDIT_WATCH_COMPLETED && data.forActionType === _WatchActions.WAT_ADD_ITEM) {
-      setValidationMessages(prevVms => prevVms.length > 0 ? [] : prevVms);
-      onClose();
-    } else if (actionType === _WatchActions.WAT_EDIT_WATCH_FAILED && data.forActionType === _WatchActions.WAT_ADD_ITEM) {
-      setValidationMessages(data.messages);
+  (0, _watchListStore.useMsEdit)(msEdit => {
+    if (msEdit) {
+      if (msEdit.forActionType === _WatchActions.WAT_ADD_ITEM) {
+        if (msEdit.messages) {
+          setValidationMessages(msEdit.messages);
+        } else {
+          setValidationMessages(prevVms => prevVms.length > 0 ? [] : prevVms);
+          onClose();
+        }
+      }
     }
   });
 
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
     if (_prevProps && _prevProps !== props && _prevProps.isShow !== isShow) {
-      const groups = store.getWatchGroups(),
+      const groups = (0, _watchListStore.getWatchGroups)(),
         _groupCaption = getGroupCaption();
       if (groups !== groupOptions) {
         setGroupCaption(null);
@@ -136,7 +139,7 @@ const AddToWatchDialog = (0, _memoIsShow.default)(props => {
         });
       } else if (_groupCaption) {
         setState(prevState => {
-          const _listOptions = store.getWatchListsByGroup(_groupCaption);
+          const _listOptions = (0, _watchListStore.getWatchListsByGroup)(_groupCaption);
           return listOptions !== _listOptions ? (setListCaption(null), {
             ...prevState,
             listOptions: _listOptions
@@ -183,16 +186,12 @@ const AddToWatchDialog = (0, _memoIsShow.default)(props => {
 
 /*
 AddToWatchDialog.propTypes = {
-  isShow  : PropTypes.bool,
-  data    : PropTypes.object,
-  store   : PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchGroups: PropTypes.func,
-    getWatchListsByGroup: PropTypes.func
-  }),
-  onClose : PropTypes.func
+  isShow: PropTypes.bool,
+  data: PropTypes.object,
+  getWatchGroups: PropTypes.func,
+  getWatchListsByGroup: PropTypes.func,
+  onClose: PropTypes.func
 }
 */
-var _default = AddToWatchDialog;
-exports.default = _default;
+var _default = exports.default = AddToWatchDialog;
 //# sourceMappingURL=AddToWatchDialog.js.map

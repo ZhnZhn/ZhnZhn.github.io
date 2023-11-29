@@ -7,7 +7,6 @@ import {
   getInputValue
 } from '../uiApi';
 
-import useListen from '../hooks/useListen';
 import useInputText from './hooks/useInputText';
 
 import A from './Atoms';
@@ -15,19 +14,19 @@ import { getRefFocusLast } from './paneFn';
 
 const ListEditPane = (props) => {
   const {
-    store,
     onRename,
     msgOnIsEmptyName,
     msgOnNotSelect,
-    actionCompleted,
-    actionFailed,
+    useMsEdit,
+    getWatchGroups,
+    getWatchListsByGroup,
     forActionType,
     onClose
   } = props
   , [
     groupOptions,
     setGroupOptions
-  ] = useState(() => store.getWatchGroups())
+  ] = useState(() => getWatchGroups())
   , [
     validationMessages,
     setValidationMessages
@@ -69,32 +68,36 @@ const ListEditPane = (props) => {
     />
   ), [_hRename]);
 
-  useListen((actionType, data) => {
-    if (actionType === actionCompleted){
-      if (data.forActionType === forActionType){
-        _hClear()
+  useMsEdit(msEdit => {
+    if (msEdit) {            
+      if (msEdit.forActionType === forActionType) {
+        if (msEdit.messages) {
+          setValidationMessages(msEdit.messages)
+        } else {
+          _hClear()
+          setGroupOptions(getWatchGroups())
+        }
+      } else {
+        setGroupOptions(getWatchGroups())
       }
-      setGroupOptions(store.getWatchGroups())
-    } else if (actionType === actionFailed && data.forActionType === forActionType){
-      setValidationMessages(data.messages)
     }
   })
 
   return (
     <div>
        <A.SelectGroupList
-         ref={_refSelectGroupList}
-         store={store}
-         groupCaption="In Group:"
-         groupOptions={groupOptions}
-         listCaption="List From:"
+          ref={_refSelectGroupList}
+          getWatchListsByGroup={getWatchListsByGroup}
+          groupCaption="In Group:"
+          groupOptions={groupOptions}
+          listCaption="List From:"
        />
        <A.RowInputText
           ref={_refInputText}
           caption="List To:"
        />
        <A.ValidationMessages
-         validationMessages={validationMessages}
+          validationMessages={validationMessages}
        />
        <A.RowButtons
           refBtClose={getRefFocusLast(props)}
@@ -108,13 +111,10 @@ const ListEditPane = (props) => {
 
 /*
 ListEditPane.propTypes = {
-  store: PropTypes.shape({
-    listen: PropTypes.func,
-    getWatchGroups: PropTypes.func
-  }),
-  actionCompleted: PropTypes.string,
-  actionFailed: PropTypes.string,
+  getWatchGroups: PropTypes.func,
+  getWatchListsByGroup: PropTypes.func,
   forActionType: PropTypes.string,
+  useMsEdit: PropTypes.string,
 
   msgOnIsEmptyName: PropTypes.func,
   msgOnNotSelect: PropTypes.func,
