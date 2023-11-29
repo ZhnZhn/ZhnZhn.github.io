@@ -1,0 +1,24 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useSubscribeState.js"
+ ],
+ "file": "../../../src/components/hooks/useSubscribeState.js",
+ "names": [
+  "_uiApi",
+  "require",
+  "useSubscribeState",
+  "store",
+  "selector",
+  "initialState",
+  "state",
+  "setState",
+  "useState",
+  "useEffect",
+  "subscribe",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAKA;AACA,MAAMC,iBAAiB,GAAGA,CACxBC,KAAK,EACLC,QAAQ,EACRC,YAAY,KACT;EACH,MAAM,CACJC,KAAK,EACLC,QAAQ,CACT,GAAG,IAAAC,eAAQ,EAACH,YAAY,CAAC;EAE1B,IAAAI,gBAAS,EACP,MAAMN,KAAK,CAACO,SAAS,CAACN,QAAQ,EAAEG,QAAQ,CAAC,EACzC,EACF,CAAC;EACD;;EAEA,OAAOD,KAAK;AACd,CAAC;AACD;AAAA,IAAAK,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEeX,iBAAiB"
+}
