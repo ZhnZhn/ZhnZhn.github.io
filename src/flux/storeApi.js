@@ -2,6 +2,7 @@ export { bindTo } from '../utils/bindTo';
 import { bindTo } from '../utils/bindTo';
 
 import useSubscribe from '../components/hooks/useSubscribe';
+import useSubscribeState from '../components/hooks/useSubscribeState';
 import useRerender from '../components/hooks/useRerender';
 
 import {
@@ -40,7 +41,17 @@ export const fCrUse = (
 ) => bindTo(useSubscribe,
   store,
   select
-);
+)
+
+export const fUseStoreState = (
+  store,
+  select
+) => bindTo(
+  useSubscribeState,
+  store,
+  select,
+  () => select(store.getState())
+)
 
 const _reducerUseAtomValue = (
   value,

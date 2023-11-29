@@ -2,10 +2,11 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.getStoreApi = exports.fCrUse = exports.fCrStoreSlice = exports.createStoreWithSelector = exports.atom = void 0;
+exports.getStoreApi = exports.fUseStoreState = exports.fCrUse = exports.fCrStoreSlice = exports.createStoreWithSelector = exports.atom = void 0;
 var _bindTo = require("../utils/bindTo");
 exports.bindTo = _bindTo.bindTo;
 var _useSubscribe = _interopRequireDefault(require("../components/hooks/useSubscribe"));
+var _useSubscribeState = _interopRequireDefault(require("../components/hooks/useSubscribeState"));
 var _useRerender = _interopRequireDefault(require("../components/hooks/useRerender"));
 var _zustandLite = require("./zustand-lite");
 const _isFn = v => typeof v === 'function';
@@ -21,6 +22,8 @@ const fCrStoreSlice = (slicePn, optionPn) => [value => ({
 exports.fCrStoreSlice = fCrStoreSlice;
 const fCrUse = (store, select) => (0, _bindTo.bindTo)(_useSubscribe.default, store, select);
 exports.fCrUse = fCrUse;
+const fUseStoreState = (store, select) => (0, _bindTo.bindTo)(_useSubscribeState.default, store, select, () => select(store.getState()));
+exports.fUseStoreState = fUseStoreState;
 const _reducerUseAtomValue = (value, crOrValue) => _isFn(crOrValue) ? crOrValue(value) : crOrValue;
 const atom = initialValue => {
   const _atom = Object.create(null);
