@@ -9,24 +9,18 @@ import {
 
 import useSelectItem from './hooks/useSelectItem';
 import useInputText from './hooks/useInputText';
+import useGroupOptions from './hooks/useGroupOptions';
 
 import A from './Atoms';
 import { getRefFocusLast } from './paneFn';
 
 const ListCreatePane = (props) => {
   const {
-    onCreate,
     msgOnNotSelect,
     msgOnIsEmptyName,
-    useMsEdit,
-    getWatchGroups,
-    forActionType,
-    onClose,
+    onCreate,
+    onClose
   } = props
-  , [
-    groupOptions,
-    setGroupOptions
-  ] = useState(() => getWatchGroups())
   , [
     validationMessages,
     setValidationMessages
@@ -35,6 +29,11 @@ const ListCreatePane = (props) => {
     _refInputText,
     _hClear
   ] = useInputText(setValidationMessages)
+  , groupOptions = useGroupOptions(
+    props,
+    setValidationMessages,
+    _hClear
+  )
   , [
     _refCaptionGroup,
     _hSelectGroup
@@ -61,21 +60,6 @@ const ListCreatePane = (props) => {
         onClick={_hCreate}
      />
   ), [_hCreate]);
-
-  useMsEdit(msEdit => {
-    if (msEdit) {
-      if (msEdit.forActionType === forActionType) {
-        if (msEdit.messages) {
-          setValidationMessages(msEdit.messages)
-        } else {
-          _hClear()
-          setGroupOptions(getWatchGroups())
-        }
-      } else {
-        setGroupOptions(getWatchGroups())
-      }
-    }
-  })
 
   return (
     <div>

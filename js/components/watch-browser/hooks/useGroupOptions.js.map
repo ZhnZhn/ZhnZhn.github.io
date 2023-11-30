@@ -1,0 +1,27 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/watch-browser/hooks/useGroupOptions.js"
+ ],
+ "file": "../../../../src/components/watch-browser/hooks/useGroupOptions.js",
+ "names": [
+  "_uiApi",
+  "require",
+  "useGroupOptions",
+  "props",
+  "setValidationMessages",
+  "clearInput",
+  "useMsEdit",
+  "forActionType",
+  "getWatchGroups",
+  "groupOptions",
+  "setGroupOptions",
+  "useState",
+  "msEdit",
+  "messages",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAEA,MAAMC,eAAe,GAAGA,CACtBC,KAAK,EACLC,qBAAqB,EACrBC,UAAU,KACP;EACH,MAAM;MACJC,SAAS;MACTC,aAAa;MACbC;IACF,CAAC,GAAGL,KAAK;IACP,CACAM,YAAY,EACZC,eAAe,CAChB,GAAG,IAAAC,eAAQ,EAAC,MAAMH,cAAc,CAAC,CAAC,CAAC;EAEpCF,SAAS,CAACM,MAAM,IAAI;IAClB,IAAIA,MAAM,EAAE;MACV,IAAIA,MAAM,CAACL,aAAa,KAAKA,aAAa,EAAE;QAC1C,IAAIK,MAAM,CAACC,QAAQ,EAAE;UACnBT,qBAAqB,CAACQ,MAAM,CAACC,QAAQ,CAAC;QACxC,CAAC,MAAM;UACLR,UAAU,CAAC,CAAC;UACZK,eAAe,CAACF,cAAc,CAAC,CAAC,CAAC;QACnC;MACF,CAAC,MAAM;QACLE,eAAe,CAACF,cAAc,CAAC,CAAC,CAAC;MACnC;IACF;EACF,CAAC,CAAC;EAEF,OAAOC,YAAY;AACrB,CAAC;AAAA,IAAAK,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEcd,eAAe"
+}

@@ -8,6 +8,7 @@ import {
 } from '../uiApi';
 
 import useInputText from './hooks/useInputText';
+import useGroupOptions from './hooks/useGroupOptions';
 
 import A from './Atoms';
 import { getRefFocusLast } from './paneFn';
@@ -17,25 +18,23 @@ const ListEditPane = (props) => {
     onRename,
     msgOnIsEmptyName,
     msgOnNotSelect,
-    useMsEdit,
-    getWatchGroups,
     getWatchListsByGroup,
-    forActionType,
     onClose
   } = props
-  , [
-    groupOptions,
-    setGroupOptions
-  ] = useState(() => getWatchGroups())
+  , _refSelectGroupList = useRef()
   , [
     validationMessages,
     setValidationMessages
   ] = useState([])
-  , _refSelectGroupList = useRef()
   , [
     _refInputText,
     _hClear
   ] = useInputText(setValidationMessages)
+  , groupOptions = useGroupOptions(
+    props,
+    setValidationMessages,
+    _hClear
+  )
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hRename = useCallback(()=>{
     const {
@@ -67,21 +66,6 @@ const ListEditPane = (props) => {
        onClick={_hRename}
     />
   ), [_hRename]);
-
-  useMsEdit(msEdit => {
-    if (msEdit) {            
-      if (msEdit.forActionType === forActionType) {
-        if (msEdit.messages) {
-          setValidationMessages(msEdit.messages)
-        } else {
-          _hClear()
-          setGroupOptions(getWatchGroups())
-        }
-      } else {
-        setGroupOptions(getWatchGroups())
-      }
-    }
-  })
 
   return (
     <div>

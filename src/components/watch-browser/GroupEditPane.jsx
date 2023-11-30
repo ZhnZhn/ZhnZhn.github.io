@@ -9,24 +9,18 @@ import {
 
 import useSelectItem from './hooks/useSelectItem';
 import useInputText from './hooks/useInputText';
+import useGroupOptions from './hooks/useGroupOptions';
 
 import A from './Atoms';
 import { getRefFocusLast } from './paneFn';
 
 const GroupEditPane = (props) => {
   const {
-    forActionType,
-    onRename,
     msgOnNotSelect,
     msgOnIsEmptyName,
-    useMsEdit,
-    getWatchGroups,
+    onRename,
     onClose
   } = props
-  , [
-    groupOptions,
-    setGroupOptions
-  ] = useState(() => getWatchGroups())
   , [
     validationMessages,
     setValidationMessages
@@ -35,6 +29,11 @@ const GroupEditPane = (props) => {
     _refInputText,
     _hClear
   ] = useInputText(setValidationMessages)
+  , groupOptions = useGroupOptions(
+    props,
+    setValidationMessages,
+    _hClear
+  )
   , [
     _refCaptionFrom,
     _hSelectGroup
@@ -65,21 +64,6 @@ const GroupEditPane = (props) => {
        onClick={_hRename}
     />
   ), [_hRename]);
-
-  useMsEdit(msEdit => {
-    if (msEdit) {
-      if (msEdit.forActionType === forActionType) {
-        if (msEdit.messages) {
-          setValidationMessages(msEdit.messages)
-        } else {
-          _hClear()
-          setGroupOptions(getWatchGroups())
-        }
-      } else {
-        setGroupOptions(getWatchGroups())
-      }
-    }
-  })
 
   return (
     <div>

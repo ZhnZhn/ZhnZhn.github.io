@@ -6,6 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useSelectItem = _interopRequireDefault(require("./hooks/useSelectItem"));
 var _useInputText = _interopRequireDefault(require("./hooks/useInputText"));
+var _useGroupOptions = _interopRequireDefault(require("./hooks/useGroupOptions"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -13,17 +14,14 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 const GroupEditPane = props => {
   const {
-      forActionType,
-      onRename,
       msgOnNotSelect,
       msgOnIsEmptyName,
-      useMsEdit,
-      getWatchGroups,
+      onRename,
       onClose
     } = props,
-    [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => getWatchGroups()),
     [validationMessages, setValidationMessages] = (0, _uiApi.useState)([]),
     [_refInputText, _hClear] = (0, _useInputText.default)(setValidationMessages),
+    groupOptions = (0, _useGroupOptions.default)(props, setValidationMessages, _hClear),
     [_refCaptionFrom, _hSelectGroup] = (0, _useSelectItem.default)()
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hRename = (0, _uiApi.useCallback)(() => {
@@ -52,20 +50,6 @@ const GroupEditPane = props => {
       title: "Edit Group Name",
       onClick: _hRename
     }), [_hRename]);
-  useMsEdit(msEdit => {
-    if (msEdit) {
-      if (msEdit.forActionType === forActionType) {
-        if (msEdit.messages) {
-          setValidationMessages(msEdit.messages);
-        } else {
-          _hClear();
-          setGroupOptions(getWatchGroups());
-        }
-      } else {
-        setGroupOptions(getWatchGroups());
-      }
-    }
-  });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowInputSelect, {
       caption: "Group From:",
