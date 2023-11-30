@@ -21,9 +21,8 @@ const GroupEditPane = props => {
     } = props,
     [validationMessages, setValidationMessages, _hClear, _refInputText] = (0, _useValidationMessages.default)(),
     groupOptions = (0, _useGroupOptions.default)(props, setValidationMessages, _hClear),
-    [_refCaptionFrom, _hSelectGroup] = (0, _useSelectItem.default)()
-    /*eslint-disable react-hooks/exhaustive-deps */,
-    _hRename = (0, _uiApi.useMemo)(() => () => {
+    [_refCaptionFrom, _hSelectGroup] = (0, _useSelectItem.default)(),
+    _hRename = () => {
       const captionTo = (0, _uiApi.getInputValue)(_refInputText),
         captionFrom = (0, _uiApi.getRefValue)(_refCaptionFrom);
       if (captionTo && captionFrom) {
@@ -41,14 +40,7 @@ const GroupEditPane = props => {
         }
         setValidationMessages(msg);
       }
-    }, [])
-    //onRename, msgOnNotSelect, msgOnIsEmptyName
-    /*eslint-enable react-hooks/exhaustive-deps */,
-    _primaryBt = (0, _uiApi.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.Button.Primary, {
-      caption: "Edit",
-      title: "Edit Group Name",
-      onClick: _hRename
-    }), [_hRename]);
+    };
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowInputSelect, {
       caption: "Group From:",
@@ -61,7 +53,9 @@ const GroupEditPane = props => {
       validationMessages: validationMessages
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
       refBtClose: (0, _paneFn.getRefFocusLast)(props),
-      Primary: _primaryBt,
+      caption: "Edit",
+      title: "Edit Group Name",
+      onPrimary: _hRename,
       onClear: _hClear,
       onClose: onClose
     })]

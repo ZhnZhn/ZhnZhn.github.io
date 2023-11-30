@@ -24,7 +24,7 @@ const ListDeletePane = props => {
     [validationMessages, setValidationMessages, _hClear] = (0, _useValidationMessages.default)(),
     [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => getWatchGroups())
     /*eslint-disable react-hooks/exhaustive-deps */,
-    _hDelete = (0, _uiApi.useMemo)(() => () => {
+    _hDelete = () => {
       const {
         captionGroup,
         captionList
@@ -44,14 +44,7 @@ const ListDeletePane = props => {
         }
         setValidationMessages(msg);
       }
-    }, [])
-    //onDelete. msgOnNotSelect
-    /*eslint-enable react-hooks/exhaustive-deps */,
-    _primaryBt = (0, _uiApi.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.Button.Primary, {
-      caption: "Delete",
-      title: "Delete List",
-      onClick: _hDelete
-    }), [_hDelete]);
+    };
   useMsEdit(msEdit => {
     if (msEdit) {
       if (!msEdit.messages) {
@@ -73,7 +66,9 @@ const ListDeletePane = props => {
       validationMessages: validationMessages
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
       refBtClose: (0, _paneFn.getRefFocusLast)(props),
-      Primary: _primaryBt,
+      caption: "Delete",
+      title: "Delete List",
+      onPrimary: _hDelete,
       onClear: _hClear,
       onClose: onClose
     })]

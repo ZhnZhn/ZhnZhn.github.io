@@ -11,13 +11,19 @@ const S_COMMAND_DIV = {
 
 const RowButtons = ({
   refBtClose,
-  Primary,
   withoutClear,
+  caption,
+  title,
+  onPrimary,
   onClear,
   onClose
 }) => (
   <div style={S_COMMAND_DIV}>
-    {Primary}
+    <Button.Primary
+      caption={caption}
+      title={title}
+      onClick={onPrimary}
+    />
     {!withoutClear &&
       <Button.Clear
          onClick={onClear}

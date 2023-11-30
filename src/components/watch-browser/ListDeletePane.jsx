@@ -1,8 +1,7 @@
 //import PropTypes from "prop-types";
 import {
   useRef,
-  useState,
-  useMemo,
+  useState,  
   getInputValue
 } from '../uiApi';
 
@@ -32,7 +31,7 @@ const ListDeletePane = (props) => {
     setGroupOptions
   ] = useState(() => getWatchGroups())
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hDelete = useMemo(() => () => {
+  , _hDelete = () => {
     const {
       captionGroup,
       captionList
@@ -45,16 +44,7 @@ const ListDeletePane = (props) => {
       if (!captionList)  { msg.push(msgOnNotSelect('List'))  }
       setValidationMessages(msg)
     }
-  }, [])
-  //onDelete. msgOnNotSelect
-  /*eslint-enable react-hooks/exhaustive-deps */
-  , _primaryBt = useMemo(()=>(
-     <A.Button.Primary
-       caption="Delete"
-       title="Delete List"
-       onClick={_hDelete}
-     />
-  ), [_hDelete]);
+  };
 
   useMsEdit(msEdit => {
     if (msEdit) {
@@ -81,7 +71,9 @@ const ListDeletePane = (props) => {
        />
        <A.RowButtons
          refBtClose={getRefFocusLast(props)}
-         Primary={_primaryBt}
+         caption="Delete"
+         title="Delete List"
+         onPrimary={_hDelete}
          onClear={_hClear}
          onClose={onClose}
        />

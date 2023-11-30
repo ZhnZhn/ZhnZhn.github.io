@@ -10,24 +10,6 @@ var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const _usePrimaryBt = (refInput, setState, onCreate, msgOnIsEmptyName) => {
-  const _hCreate = () => {
-    const caption = (0, _uiApi.getInputValue)(refInput);
-    if (caption) {
-      onCreate({
-        caption
-      });
-    } else {
-      refInput.current.setValue('');
-      setState([msgOnIsEmptyName('Group')]);
-    }
-  };
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.Button.Primary, {
-    caption: "Create",
-    title: "Create New Group",
-    onClick: _hCreate
-  });
-};
 const GroupAddPane = props => {
   const {
       forActionType,
@@ -37,7 +19,17 @@ const GroupAddPane = props => {
       onClose
     } = props,
     [validationMessages, setValidationMessages, clearInput, refInput] = (0, _useValidationMessages.default)(),
-    _primaryBt = _usePrimaryBt(refInput, setValidationMessages, onCreate, msgOnIsEmptyName);
+    _hCreate = () => {
+      const caption = (0, _uiApi.getInputValue)(refInput);
+      if (caption) {
+        onCreate({
+          caption
+        });
+      } else {
+        (0, _uiApi.clearInputValue)(refInput);
+        setValidationMessages([msgOnIsEmptyName('Group')]);
+      }
+    };
   useMsEdit(msEdit => {
     if (msEdit) {
       if (msEdit.forActionType === forActionType) {
@@ -57,7 +49,9 @@ const GroupAddPane = props => {
       validationMessages: validationMessages
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
       refBtClose: (0, _paneFn.getRefFocusLast)(props),
-      Primary: _primaryBt,
+      caption: "Create",
+      title: "Create New Group",
+      onPrimary: _hCreate,
       onClear: clearInput,
       onClose: onClose
     })]

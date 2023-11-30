@@ -1,6 +1,5 @@
 //import PropTypes from "prop-types";
 import {
-  useMemo,
   getRefValue,
   getInputValue
 } from '../uiApi';
@@ -35,7 +34,7 @@ const ListCreatePane = (props) => {
     _hSelectGroup
   ] = useSelectItem()
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hCreate = useMemo(() => () => {
+  , _hCreate = () => {
       const captionList = getInputValue(_refInputText)
       , captionGroup = getRefValue(_refCaptionGroup);
       if (captionGroup && captionList) {
@@ -46,16 +45,7 @@ const ListCreatePane = (props) => {
         if (!captionList)  { msg.push(msgOnIsEmptyName('List')); }
         setValidationMessages(msg)
       }
-  }, [])
-  //onCreate, msgOnNotSelect, msgOnIsEmptyName
-  /*eslint-enable react-hooks/exhaustive-deps */
-  , _primaryBt = useMemo(() =>(
-     <A.Button.Primary
-        caption="Create"
-        title="Create New List"
-        onClick={_hCreate}
-     />
-  ), [_hCreate]);
+  };    
 
   return (
     <div>
@@ -73,7 +63,9 @@ const ListCreatePane = (props) => {
       />
       <A.RowButtons
          refBtClose={getRefFocusLast(props)}
-         Primary={_primaryBt}
+         caption="Create"
+         title="Create New List"
+         onPrimary={_hCreate}
          onClear={_hClear}
          onClose={onClose}
       />

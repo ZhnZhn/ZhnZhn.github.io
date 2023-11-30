@@ -60,28 +60,6 @@ const _useReducer = (
  ];
 }
 
-const _usePrimaryBt = (
-  refCaption,
-  onDelete,
-  setErrs
-) => {
-  const _hDeleteGroup = () => {
-     const caption = getRefValue(refCaption);
-     if (caption){
-       onDelete({ caption })
-       setRefValue(refCaption, null)
-     } else {
-       setErrs()
-     }
-  };
-  return (
-    <A.Button.Primary
-     caption="Delete"
-     title="Delete Group"
-     onClick={_hDeleteGroup}
-  />);
-}
-
 const GroupDeletePane = (props) => {
   const {
     onDelete,
@@ -100,11 +78,15 @@ const GroupDeletePane = (props) => {
     getWatchGroups,
     msgOnNotSelect
   )
-  , _primaryBt = _usePrimaryBt(
-    _refCaption,
-    onDelete,
-    setErrs
-  )
+  , _hDeleteGroup = () => {
+     const caption = getRefValue(_refCaption);
+     if (caption){
+       onDelete({ caption })
+       setRefValue(_refCaption, null)
+     } else {
+       setErrs()
+     }
+  }
   , _hSelectGroup = item => {
      setRefValue(
        _refCaption,
@@ -130,7 +112,9 @@ const GroupDeletePane = (props) => {
       />
       <A.RowButtons
         refBtClose={getRefFocusLast(props)}
-        Primary={_primaryBt}
+        caption="Delete"
+        title="Delete Group"
+        onPrimary={_hDeleteGroup}
         withoutClear={true}
         onClose={onClose}
       />

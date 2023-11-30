@@ -1,7 +1,6 @@
 //import PropTypes from "prop-types";
 import {
   useRef,
-  useMemo,
   getInputValue
 } from '../uiApi';
 
@@ -32,7 +31,7 @@ const ListEditPane = (props) => {
     _hClear
   )
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hRename = useMemo(() => () => {
+  , _hRename = () => {
     const {
       captionGroup,
       captionList
@@ -51,17 +50,7 @@ const ListEditPane = (props) => {
       if (!captionListTo){ msg.push(msgOnIsEmptyName('List To')) }
       setValidationMessages(msg)
     }
-  },[])
-  //onRename, msgOnNotSelect, msgOnIsEmptyName
-  /*eslint-enable react-hooks/exhaustive-deps */
-
-  , _primaryBt = useMemo(()=>(
-    <A.Button.Primary
-       caption="Edit"
-       title="Edit List Name"
-       onClick={_hRename}
-    />
-  ), [_hRename]);
+  };
 
   return (
     <div>
@@ -81,7 +70,9 @@ const ListEditPane = (props) => {
        />
        <A.RowButtons
           refBtClose={getRefFocusLast(props)}
-          Primary={_primaryBt}
+          caption="Edit"
+          title="Edit List Name"
+          onPrimary={_hRename}
           onClear={_hClear}
           onClose={onClose}
        />

@@ -1,6 +1,5 @@
 //import PropTypes from "prop-types";
 import {
-  useMemo,
   getRefValue,
   getInputValue
 } from '../uiApi';
@@ -34,8 +33,7 @@ const GroupEditPane = (props) => {
     _refCaptionFrom,
     _hSelectGroup
   ] = useSelectItem()
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _hRename = useMemo(() => () => {
+  , _hRename = () => {
     const captionTo = getInputValue(_refInputText)
     , captionFrom = getRefValue(_refCaptionFrom);
     if (captionTo && captionFrom) {
@@ -50,16 +48,7 @@ const GroupEditPane = (props) => {
       }
       setValidationMessages(msg)
     }
-  }, [])
-  //onRename, msgOnNotSelect, msgOnIsEmptyName
-  /*eslint-enable react-hooks/exhaustive-deps */
-  , _primaryBt = useMemo(() => (
-    <A.Button.Primary
-       caption="Edit"
-       title="Edit Group Name"
-       onClick={_hRename}
-    />
-  ), [_hRename]);
+  };
 
   return (
     <div>
@@ -77,7 +66,9 @@ const GroupEditPane = (props) => {
       />
       <A.RowButtons
          refBtClose={getRefFocusLast(props)}
-         Primary={_primaryBt}
+         caption="Edit"
+         title="Edit Group Name"
+         onPrimary={_hRename}
          onClear={_hClear}
          onClose={onClose}
       />

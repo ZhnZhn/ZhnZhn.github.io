@@ -1,33 +1,13 @@
 //import PropTypes from "prop-types";
-import { getInputValue } from '../uiApi';
+import {
+  getInputValue,
+  clearInputValue
+} from '../uiApi';
 
 import useValidationMessages from './hooks/useValidationMessages';
 
 import A from './Atoms';
 import { getRefFocusLast } from './paneFn';
-
-const _usePrimaryBt = (
-  refInput,
-  setState,
-  onCreate,
-  msgOnIsEmptyName
-) => {
-  const _hCreate = () => {
-     const caption = getInputValue(refInput);
-     if (caption){
-       onCreate({ caption })
-     } else {
-       refInput.current.setValue('')
-       setState([msgOnIsEmptyName('Group')])
-     }
-  };
-  return (
-    <A.Button.Primary
-       caption="Create"
-       title="Create New Group"
-       onClick={_hCreate}
-    />);
-}
 
 const GroupAddPane = (props) => {
   const {
@@ -43,12 +23,15 @@ const GroupAddPane = (props) => {
     clearInput,
     refInput
   ] = useValidationMessages()
-  , _primaryBt = _usePrimaryBt(
-     refInput,
-     setValidationMessages,
-     onCreate,
-     msgOnIsEmptyName
-  );
+  , _hCreate = () => {
+     const caption = getInputValue(refInput);
+     if (caption){
+       onCreate({ caption })
+     } else {
+       clearInputValue(refInput)
+       setValidationMessages([msgOnIsEmptyName('Group')])
+     }
+  };
 
   useMsEdit(msEdit => {
     if (msEdit) {
@@ -73,7 +56,9 @@ const GroupAddPane = (props) => {
        />
        <A.RowButtons
           refBtClose={getRefFocusLast(props)}
-          Primary={_primaryBt}
+          caption="Create"
+          title="Create New Group"
+          onPrimary={_hCreate}
           onClear={clearInput}
           onClose={onClose}
        />

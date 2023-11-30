@@ -46,24 +46,6 @@ const _useReducer = (getWatchGroups, msgOnNotSelect) => {
   }, dispatch] = (0, _uiApi.useReducer)(_reducer, getWatchGroups, _initState);
   return [groups, errs, groups => dispatch(_crAction(UPDATE, groups)), () => dispatch(_crAction(VALIDATION_ERR, [msgOnNotSelect('Group')]))];
 };
-const _usePrimaryBt = (refCaption, onDelete, setErrs) => {
-  const _hDeleteGroup = () => {
-    const caption = (0, _uiApi.getRefValue)(refCaption);
-    if (caption) {
-      onDelete({
-        caption
-      });
-      (0, _uiApi.setRefValue)(refCaption, null);
-    } else {
-      setErrs();
-    }
-  };
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.Button.Primary, {
-    caption: "Delete",
-    title: "Delete Group",
-    onClick: _hDeleteGroup
-  });
-};
 const GroupDeletePane = props => {
   const {
       onDelete,
@@ -74,7 +56,17 @@ const GroupDeletePane = props => {
     } = props,
     _refCaption = (0, _uiApi.useRef)(null),
     [groups, errs, updateGroups, setErrs] = _useReducer(getWatchGroups, msgOnNotSelect),
-    _primaryBt = _usePrimaryBt(_refCaption, onDelete, setErrs),
+    _hDeleteGroup = () => {
+      const caption = (0, _uiApi.getRefValue)(_refCaption);
+      if (caption) {
+        onDelete({
+          caption
+        });
+        (0, _uiApi.setRefValue)(_refCaption, null);
+      } else {
+        setErrs();
+      }
+    },
     _hSelectGroup = item => {
       (0, _uiApi.setRefValue)(_refCaption, item && item.caption || null);
     };
@@ -92,7 +84,9 @@ const GroupDeletePane = props => {
       validationMessages: errs
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
       refBtClose: (0, _paneFn.getRefFocusLast)(props),
-      Primary: _primaryBt,
+      caption: "Delete",
+      title: "Delete Group",
+      onPrimary: _hDeleteGroup,
       withoutClear: true,
       onClose: onClose
     })]

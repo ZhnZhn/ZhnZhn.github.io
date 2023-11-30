@@ -13,14 +13,20 @@ const S_COMMAND_DIV = {
 const RowButtons = _ref => {
   let {
     refBtClose,
-    Primary,
     withoutClear,
+    caption,
+    title,
+    onPrimary,
     onClear,
     onClose
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_COMMAND_DIV,
-    children: [Primary, !withoutClear && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Clear, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Primary, {
+      caption: caption,
+      title: title,
+      onClick: onPrimary
+    }), !withoutClear && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Clear, {
       onClick: onClear
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Close, {
       refBt: refBtClose,
@@ -28,6 +34,5 @@ const RowButtons = _ref => {
     })]
   });
 };
-var _default = RowButtons;
-exports.default = _default;
+var _default = exports.default = RowButtons;
 //# sourceMappingURL=RowButtons.js.map

@@ -23,7 +23,7 @@ const ListCreatePane = props => {
     groupOptions = (0, _useGroupOptions.default)(props, setValidationMessages, _hClear),
     [_refCaptionGroup, _hSelectGroup] = (0, _useSelectItem.default)()
     /*eslint-disable react-hooks/exhaustive-deps */,
-    _hCreate = (0, _uiApi.useMemo)(() => () => {
+    _hCreate = () => {
       const captionList = (0, _uiApi.getInputValue)(_refInputText),
         captionGroup = (0, _uiApi.getRefValue)(_refCaptionGroup);
       if (captionGroup && captionList) {
@@ -41,14 +41,7 @@ const ListCreatePane = props => {
         }
         setValidationMessages(msg);
       }
-    }, [])
-    //onCreate, msgOnNotSelect, msgOnIsEmptyName
-    /*eslint-enable react-hooks/exhaustive-deps */,
-    _primaryBt = (0, _uiApi.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.Button.Primary, {
-      caption: "Create",
-      title: "Create New List",
-      onClick: _hCreate
-    }), [_hCreate]);
+    };
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowInputSelect, {
       caption: "In Group:",
@@ -61,7 +54,9 @@ const ListCreatePane = props => {
       validationMessages: validationMessages
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
       refBtClose: (0, _paneFn.getRefFocusLast)(props),
-      Primary: _primaryBt,
+      caption: "Create",
+      title: "Create New List",
+      onPrimary: _hCreate,
       onClear: _hClear,
       onClose: onClose
     })]
