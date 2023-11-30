@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _useValidationMessages = _interopRequireDefault(require("./hooks/useValidationMessages"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -19,12 +20,11 @@ const ListDeletePane = props => {
       msgOnNotSelect,
       onClose
     } = props,
-    [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => getWatchGroups()),
-    [validationMessages, setValidationMessages] = (0, _uiApi.useState)([]),
     _refSelectGroupList = (0, _uiApi.useRef)(),
-    _hClear = (0, _uiApi.useCallback)(() => setValidationMessages([]), [])
+    [validationMessages, setValidationMessages, _hClear] = (0, _useValidationMessages.default)(),
+    [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => getWatchGroups())
     /*eslint-disable react-hooks/exhaustive-deps */,
-    _hDelete = (0, _uiApi.useCallback)(() => {
+    _hDelete = (0, _uiApi.useMemo)(() => () => {
       const {
         captionGroup,
         captionList

@@ -1,12 +1,10 @@
 //import PropTypes from "prop-types";
-import {
-  useRef,
-  useState,
-  getInputValue
-} from '../uiApi';
+import { getInputValue } from '../uiApi';
+
+import useValidationMessages from './hooks/useValidationMessages';
 
 import A from './Atoms';
-import { getRefFocusLast } from './paneFn'
+import { getRefFocusLast } from './paneFn';
 
 const _usePrimaryBt = (
   refInput,
@@ -36,32 +34,29 @@ const GroupAddPane = (props) => {
     forActionType,
     useMsEdit,
     msgOnIsEmptyName,
-    onCreate,  
+    onCreate,
     onClose
   } = props
-  , _refInput = useRef()
   , [
     validationMessages,
-    setState
-  ] = useState([])
+    setValidationMessages,
+    clearInput,
+    refInput
+  ] = useValidationMessages()
   , _primaryBt = _usePrimaryBt(
-     _refInput,
-     setState,
+     refInput,
+     setValidationMessages,
      onCreate,
      msgOnIsEmptyName
-  )
-  , _hClear = () => {
-      _refInput.current.setValue('')
-      setState([])
-  };
+  );
 
   useMsEdit(msEdit => {
     if (msEdit) {
       if (msEdit.forActionType === forActionType){
         if (msEdit.messages) {
-          setState(msEdit.messages)
+          setValidationMessages(msEdit.messages)
         } else {
-         _hClear()
+          clearInput()
         }
       }
     }
@@ -70,7 +65,7 @@ const GroupAddPane = (props) => {
   return (
     <div>
       <A.RowInputText
-         ref={_refInput}
+         ref={refInput}
          caption="Group:"
       />
       <A.ValidationMessages
@@ -79,7 +74,7 @@ const GroupAddPane = (props) => {
        <A.RowButtons
           refBtClose={getRefFocusLast(props)}
           Primary={_primaryBt}
-          onClear={_hClear}
+          onClear={clearInput}
           onClose={onClose}
        />
     </div>

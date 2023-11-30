@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _useValidationMessages = _interopRequireDefault(require("./hooks/useValidationMessages"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -35,34 +36,29 @@ const GroupAddPane = props => {
       onCreate,
       onClose
     } = props,
-    _refInput = (0, _uiApi.useRef)(),
-    [validationMessages, setState] = (0, _uiApi.useState)([]),
-    _primaryBt = _usePrimaryBt(_refInput, setState, onCreate, msgOnIsEmptyName),
-    _hClear = () => {
-      _refInput.current.setValue('');
-      setState([]);
-    };
+    [validationMessages, setValidationMessages, clearInput, refInput] = (0, _useValidationMessages.default)(),
+    _primaryBt = _usePrimaryBt(refInput, setValidationMessages, onCreate, msgOnIsEmptyName);
   useMsEdit(msEdit => {
     if (msEdit) {
       if (msEdit.forActionType === forActionType) {
         if (msEdit.messages) {
-          setState(msEdit.messages);
+          setValidationMessages(msEdit.messages);
         } else {
-          _hClear();
+          clearInput();
         }
       }
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowInputText, {
-      ref: _refInput,
+      ref: refInput,
       caption: "Group:"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.ValidationMessages, {
       validationMessages: validationMessages
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
       refBtClose: (0, _paneFn.getRefFocusLast)(props),
       Primary: _primaryBt,
-      onClear: _hClear,
+      onClear: clearInput,
       onClose: onClose
     })]
   });

@@ -2,10 +2,11 @@
 import {
   useRef,
   useState,
-  useCallback,
   useMemo,
   getInputValue
 } from '../uiApi';
+
+import useValidationMessages from './hooks/useValidationMessages';
 
 import A from './Atoms';
 import { getRefFocusLast } from './paneFn';
@@ -20,21 +21,18 @@ const ListDeletePane = (props) => {
     msgOnNotSelect,
     onClose
   } = props
+  , _refSelectGroupList = useRef()
+  , [
+    validationMessages,
+    setValidationMessages,
+    _hClear
+  ] = useValidationMessages()
   , [
     groupOptions,
     setGroupOptions
   ] = useState(() => getWatchGroups())
-  , [
-    validationMessages,
-    setValidationMessages
-  ] = useState([])
-  , _refSelectGroupList = useRef()
-  , _hClear = useCallback(
-    () => setValidationMessages([]),
-    []
-  )
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hDelete = useCallback(()=>{
+  , _hDelete = useMemo(() => () => {
     const {
       captionGroup,
       captionList

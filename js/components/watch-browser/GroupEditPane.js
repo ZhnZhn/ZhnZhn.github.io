@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useSelectItem = _interopRequireDefault(require("./hooks/useSelectItem"));
-var _useInputText = _interopRequireDefault(require("./hooks/useInputText"));
+var _useValidationMessages = _interopRequireDefault(require("./hooks/useValidationMessages"));
 var _useGroupOptions = _interopRequireDefault(require("./hooks/useGroupOptions"));
 var _Atoms = _interopRequireDefault(require("./Atoms"));
 var _paneFn = require("./paneFn");
@@ -19,12 +19,11 @@ const GroupEditPane = props => {
       onRename,
       onClose
     } = props,
-    [validationMessages, setValidationMessages] = (0, _uiApi.useState)([]),
-    [_refInputText, _hClear] = (0, _useInputText.default)(setValidationMessages),
+    [validationMessages, setValidationMessages, _hClear, _refInputText] = (0, _useValidationMessages.default)(),
     groupOptions = (0, _useGroupOptions.default)(props, setValidationMessages, _hClear),
     [_refCaptionFrom, _hSelectGroup] = (0, _useSelectItem.default)()
     /*eslint-disable react-hooks/exhaustive-deps */,
-    _hRename = (0, _uiApi.useCallback)(() => {
+    _hRename = (0, _uiApi.useMemo)(() => () => {
       const captionTo = (0, _uiApi.getInputValue)(_refInputText),
         captionFrom = (0, _uiApi.getRefValue)(_refCaptionFrom);
       if (captionTo && captionFrom) {

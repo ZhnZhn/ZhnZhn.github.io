@@ -1,14 +1,12 @@
 //import PropTypes from "prop-types";
 import {
-  useState,
-  useCallback,
   useMemo,
   getRefValue,
   getInputValue
 } from '../uiApi';
 
 import useSelectItem from './hooks/useSelectItem';
-import useInputText from './hooks/useInputText';
+import useValidationMessages from './hooks/useValidationMessages';
 import useGroupOptions from './hooks/useGroupOptions';
 
 import A from './Atoms';
@@ -23,12 +21,10 @@ const GroupEditPane = (props) => {
   } = props
   , [
     validationMessages,
-    setValidationMessages
-  ] = useState([])
-  , [
-    _refInputText,
-    _hClear
-  ] = useInputText(setValidationMessages)
+    setValidationMessages,
+    _hClear,
+    _refInputText
+  ] = useValidationMessages()
   , groupOptions = useGroupOptions(
     props,
     setValidationMessages,
@@ -39,7 +35,7 @@ const GroupEditPane = (props) => {
     _hSelectGroup
   ] = useSelectItem()
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hRename = useCallback(()=>{
+  , _hRename = useMemo(() => () => {
     const captionTo = getInputValue(_refInputText)
     , captionFrom = getRefValue(_refCaptionFrom);
     if (captionTo && captionFrom) {
@@ -57,7 +53,7 @@ const GroupEditPane = (props) => {
   }, [])
   //onRename, msgOnNotSelect, msgOnIsEmptyName
   /*eslint-enable react-hooks/exhaustive-deps */
-  , _primaryBt = useMemo(()=>(
+  , _primaryBt = useMemo(() => (
     <A.Button.Primary
        caption="Edit"
        title="Edit Group Name"

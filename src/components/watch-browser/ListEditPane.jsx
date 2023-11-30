@@ -1,13 +1,11 @@
 //import PropTypes from "prop-types";
 import {
   useRef,
-  useState,
-  useCallback,
   useMemo,
   getInputValue
 } from '../uiApi';
 
-import useInputText from './hooks/useInputText';
+import useValidationMessages from './hooks/useValidationMessages';
 import useGroupOptions from './hooks/useGroupOptions';
 
 import A from './Atoms';
@@ -24,19 +22,17 @@ const ListEditPane = (props) => {
   , _refSelectGroupList = useRef()
   , [
     validationMessages,
-    setValidationMessages
-  ] = useState([])
-  , [
-    _refInputText,
-    _hClear
-  ] = useInputText(setValidationMessages)
+    setValidationMessages,
+    _hClear,
+    _refInputText
+  ] = useValidationMessages()
   , groupOptions = useGroupOptions(
     props,
     setValidationMessages,
     _hClear
   )
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hRename = useCallback(()=>{
+  , _hRename = useMemo(() => () => {
     const {
       captionGroup,
       captionList

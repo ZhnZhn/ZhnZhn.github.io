@@ -1,14 +1,12 @@
 //import PropTypes from "prop-types";
 import {
-  useState,
-  useCallback,
   useMemo,
   getRefValue,
   getInputValue
 } from '../uiApi';
 
 import useSelectItem from './hooks/useSelectItem';
-import useInputText from './hooks/useInputText';
+import useValidationMessages from './hooks/useValidationMessages';
 import useGroupOptions from './hooks/useGroupOptions';
 
 import A from './Atoms';
@@ -23,12 +21,10 @@ const ListCreatePane = (props) => {
   } = props
   , [
     validationMessages,
-    setValidationMessages
-  ] = useState([])
-  , [
-    _refInputText,
-    _hClear
-  ] = useInputText(setValidationMessages)
+    setValidationMessages,
+    _hClear,
+    _refInputText
+  ] = useValidationMessages()
   , groupOptions = useGroupOptions(
     props,
     setValidationMessages,
@@ -39,7 +35,7 @@ const ListCreatePane = (props) => {
     _hSelectGroup
   ] = useSelectItem()
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hCreate = useCallback(() => {
+  , _hCreate = useMemo(() => () => {
       const captionList = getInputValue(_refInputText)
       , captionGroup = getRefValue(_refCaptionGroup);
       if (captionGroup && captionList) {
