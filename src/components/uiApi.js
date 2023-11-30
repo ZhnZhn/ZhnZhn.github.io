@@ -95,10 +95,17 @@ export const isInputValid = ref => {
 }
 
 export const getInputValue = ref => {
-  const inputComp = getRefValue(ref);
-  return inputComp && _isFn(inputComp.getValue)
-    ? inputComp.getValue()
+  const inputInst = getRefValue(ref);
+  return inputInst && _isFn(inputInst.getValue)
+    ? inputInst.getValue()
     : void 0
+}
+
+export const clearInputValue = ref => {
+  const inputInst = getRefValue(ref);
+  if (inputInst && _isFn(inputInst.setValue)) {
+    inputInst.setValue('')
+  }
 }
 
 export const getInputValidValue = (
