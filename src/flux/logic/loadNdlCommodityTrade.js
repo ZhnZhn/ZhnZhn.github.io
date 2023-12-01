@@ -1,7 +1,7 @@
 import { LT_Q } from '../../constants/LoadType';
 import { fetchJson } from '../../utils/fnFetch';
 import onCatch from './onCatch';
-import ChartStore from '../stores/ChartStore';
+import { getKey } from '../stores/settingStore';
 import { isLoadToChart } from '../stores/chartCheckBoxLogic';
 
 import NdlApi from '../../adapters/ndl/NdlApi';
@@ -70,9 +70,9 @@ const _loadToChart = function(option, onAdded, onFailed){
 }
 
 export const loadNdlCommodityTrade = {
-  loadItem(option, onCompleted, onAdded, onFailed){    
+  loadItem(option, onCompleted, onAdded, onFailed){
     const parentId = isLoadToChart();
-    option.apiKey = ChartStore.getKey(LT_Q)
+    option.apiKey = getKey(LT_Q)
 
     if (!parentId){
       _loadToChartComp(option, onCompleted, onFailed);

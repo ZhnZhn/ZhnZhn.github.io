@@ -9,7 +9,7 @@ var _Msg = require("../../constants/Msg");
 var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 var _browserLogic = require("../stores/browserLogic");
 var _chartCheckBoxLogic = require("../stores/chartCheckBoxLogic");
-var _SettingSlice = _interopRequireDefault(require("../stores/SettingSlice"));
+var _settingStore = require("../stores/settingStore");
 var _LoadConfig = _interopRequireDefault(require("../logic/LoadConfig"));
 var _LogicFn = require("../logic/LogicFn");
 const ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found.",
@@ -47,7 +47,7 @@ const _cancelLoad = function (option, alertMsg) {
 };
 const _addBoolOptionTo = (options, propName) => {
   if (_isUndef(options[propName])) {
-    options[propName] = _ChartStore.default.isSetting(propName);
+    options[propName] = (0, _settingStore.isSetting)(propName);
   }
 };
 const _addSettingsTo = (options, confItem, itemProps) => {
@@ -55,8 +55,8 @@ const _addSettingsTo = (options, confItem, itemProps) => {
     loadId
   } = options;
   _assign(options, confItem, itemProps, {
-    apiKey: _ChartStore.default.getKey(loadId),
-    proxy: _ChartStore.default.getProxy(loadId)
+    apiKey: (0, _settingStore.getKey)(loadId),
+    proxy: (0, _settingStore.getProxy)(loadId)
   });
   _addBoolOptionTo(options, 'isDrawDeltaExtrems');
   _addBoolOptionTo(options, 'isNotZoomToMinMax');
@@ -83,11 +83,6 @@ const setLoadingDone = () => {
   CHA[CHAT_LOAD].isLoading = false;
 };
 exports.setLoadingDone = setLoadingDone;
-const {
-  isApiKeyRequired,
-  isProxyRequired,
-  getApiTitle
-} = _SettingSlice.default;
 const _checkMsgApiKey = _ref => {
   let {
     apiKey,
@@ -95,14 +90,14 @@ const _checkMsgApiKey = _ref => {
     isKeyFeature,
     isPremium
   } = _ref;
-  return apiKey ? '' : isApiKeyRequired(loadId) ? (0, _Msg.withoutApiKey)(getApiTitle(loadId)) : isKeyFeature ? _Msg.ERR_FEATURE_WITHOUT_KEY : isPremium ? _Msg.ERR_PREMIUM_WITHOUT_KEY : '';
+  return apiKey ? '' : (0, _settingStore.isApiKeyRequired)(loadId) ? (0, _Msg.withoutApiKey)((0, _settingStore.getApiTitle)(loadId)) : isKeyFeature ? _Msg.ERR_FEATURE_WITHOUT_KEY : isPremium ? _Msg.ERR_PREMIUM_WITHOUT_KEY : '';
 };
 const _checkProxy = _ref2 => {
   let {
     proxy,
     loadId
   } = _ref2;
-  return isProxyRequired(loadId) && !proxy ? (0, _Msg.withoutProxy)(getApiTitle(loadId)) : '';
+  return (0, _settingStore.isProxyRequired)(loadId) && !proxy ? (0, _Msg.withoutProxy)((0, _settingStore.getApiTitle)(loadId)) : '';
 };
 const _crMsgSetting = option => _checkMsgApiKey(option) || _checkProxy(option);
 const _crMetaDataKey = key => key + META_SUFFIX;
@@ -166,7 +161,7 @@ CHA[CHAT_LOAD_BY_QUERY].listen(function (option) {
   const {
     loadId
   } = option;
-  option.proxy = _ChartStore.default.getProxy(loadId);
+  option.proxy = (0, _settingStore.getProxy)(loadId);
   const impl = _LoadConfig.default[loadId];
   if (impl) {
     const {

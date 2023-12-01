@@ -15,7 +15,8 @@ var _ComponentActions = require("../actions/ComponentActions");
 var _ChartActions = require("../actions/ChartActions");
 var _dateFn = require("../../utils/dateFn");
 var _has = require("../../components/has");
-var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
+var _compStore = require("../stores/compStore");
+var _settingStore = require("../stores/settingStore");
 const HAS_WIDE_WIDTH = (0, _has.isWideWidth)(600),
   _isArr = Array.isArray,
   _assign = Object.assign,
@@ -47,7 +48,7 @@ const _onError = function (alertDescr, alertCaption) {
   if (alertCaption === void 0) {
     alertCaption = 'Request Error';
   }
-  _ComponentActions.ComponentActions.showAlert({
+  (0, _compStore.showAlertDialog)({
     alertDescr,
     alertCaption
   });
@@ -110,8 +111,8 @@ const crDialog = (browserType, dialogConf) => {
     _dialogType = _getDialogType(dialogType, dialogProps),
     onAbout = _crClickAbout(dialogProps),
     loadFn = _RouterLoadFn.default.getFn(loadFnType, _dialogType),
-    proxy = isProxy ? _ChartStore.default.getProxy() : void 0,
-    getKey = isGetKey && _ChartStore.default.getKey,
+    proxy = isProxy ? (0, _settingStore.getProxy)() : void 0,
+    _getKey = isGetKey && _settingStore.getKey,
     onError = isGetKey && _onError,
     onLoad = (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_LOAD], {
       chartType: itemKey,
@@ -130,12 +131,12 @@ const crDialog = (browserType, dialogConf) => {
     msgOnNotSelected: _Msg.NOT_SELECTED,
     msgOnNotValidFormat: _Msg.NOT_VALID_FORMAT,
     fnValue: _crFnValue(valueFn, valueFnPrefix),
+    getKey: _getKey,
     onAbout,
     onLoad,
     onShow,
     loadFn,
     proxy,
-    getKey,
     onError
   }));
 };

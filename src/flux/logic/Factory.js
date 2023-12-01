@@ -35,7 +35,13 @@ import {
   addDaysToYmd
 } from '../../utils/dateFn';
 import { isWideWidth } from '../../components/has';
-import ChartStore from '../stores/ChartStore';
+import {
+  showAlertDialog
+} from '../stores/compStore';
+import {
+  getProxy,
+  getKey
+} from '../stores/settingStore';
 
 const HAS_WIDE_WIDTH = isWideWidth(600)
 , _isArr = Array.isArray
@@ -86,7 +92,7 @@ const _onError = (
   alertDescr,
   alertCaption='Request Error'
 ) => {
-  ComponentActions.showAlert({
+  showAlertDialog({
     alertDescr,
     alertCaption
   })
@@ -157,9 +163,9 @@ export const crDialog = (
    , onAbout = _crClickAbout(dialogProps)
    , loadFn = RouterLoadFn.getFn(loadFnType, _dialogType)
    , proxy = isProxy
-        ? ChartStore.getProxy()
+        ? getProxy()
         : void 0
-   , getKey = isGetKey && ChartStore.getKey
+   , _getKey = isGetKey && getKey
    , onError = isGetKey && _onError
    , onLoad = bindTo(ChartActions[CHAT_LOAD], {
          chartType: itemKey,
@@ -181,12 +187,12 @@ export const crDialog = (
           msgOnNotSelected: NOT_SELECTED,
           msgOnNotValidFormat: NOT_VALID_FORMAT,
           fnValue: _crFnValue(valueFn, valueFnPrefix),
+          getKey: _getKey,
           onAbout,
           onLoad,
           onShow,
           loadFn,
           proxy,
-          getKey,
           onError
        })
    );

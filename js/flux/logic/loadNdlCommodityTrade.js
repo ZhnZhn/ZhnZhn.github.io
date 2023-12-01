@@ -6,7 +6,7 @@ exports.loadNdlCommodityTrade = void 0;
 var _LoadType = require("../../constants/LoadType");
 var _fnFetch = require("../../utils/fnFetch");
 var _onCatch = _interopRequireDefault(require("./onCatch"));
-var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
+var _settingStore = require("../stores/settingStore");
 var _chartCheckBoxLogic = require("../stores/chartCheckBoxLogic");
 var _NdlApi = _interopRequireDefault(require("../../adapters/ndl/NdlApi"));
 var _LoadImpl = _interopRequireDefault(require("./LoadImpl"));
@@ -71,7 +71,7 @@ const _loadToChart = function (option, onAdded, onFailed) {
 const loadNdlCommodityTrade = exports.loadNdlCommodityTrade = {
   loadItem(option, onCompleted, onAdded, onFailed) {
     const parentId = (0, _chartCheckBoxLogic.isLoadToChart)();
-    option.apiKey = _ChartStore.default.getKey(_LoadType.LT_Q);
+    option.apiKey = (0, _settingStore.getKey)(_LoadType.LT_Q);
     if (!parentId) {
       _loadToChartComp(option, onCompleted, onFailed);
     } else {

@@ -15,7 +15,15 @@ import ChartStore from '../stores/ChartStore';
 import { getSourceConfig } from '../stores/browserLogic';
 import { isLoadToChart } from '../stores/chartCheckBoxLogic';
 
-import SettingSlice from '../stores/SettingSlice';
+import {
+  getProxy,
+  getKey,
+  isSetting,
+  isApiKeyRequired,
+  isProxyRequired,
+  getApiTitle
+} from '../stores/settingStore';
+
 import LoadConfig from '../logic/LoadConfig';
 import { crKeyForConfig } from '../logic/LogicFn';
 
@@ -72,7 +80,7 @@ const _addBoolOptionTo = (
   propName
 ) => {
   if (_isUndef(options[propName])) {
-    options[propName] = ChartStore.isSetting(propName)
+    options[propName] = isSetting(propName)
   }
 };
 
@@ -83,8 +91,8 @@ const _addSettingsTo = (
 ) => {
   const { loadId } = options;
   _assign(options, confItem, itemProps, {
-    apiKey: ChartStore.getKey(loadId),
-    proxy: ChartStore.getProxy(loadId)
+    apiKey: getKey(loadId),
+    proxy: getProxy(loadId)
   })
   _addBoolOptionTo(options, 'isDrawDeltaExtrems')
   _addBoolOptionTo(options, 'isNotZoomToMinMax')
@@ -113,12 +121,6 @@ const CHA =  Reflux.createActions({
 export const setLoadingDone = () => {
   CHA[CHAT_LOAD].isLoading = false;
 }
-
-const {
-  isApiKeyRequired,
-  isProxyRequired,
-  getApiTitle
-} = SettingSlice;
 
 const _checkMsgApiKey = ({
   apiKey,
@@ -205,7 +207,7 @@ const _addDialogPropsTo = option => {
 CHA[CHAT_LOAD_BY_QUERY].listen(function(option){
   _addDialogPropsTo(option)
   const { loadId } = option;
-  option.proxy = ChartStore.getProxy(loadId)
+  option.proxy = getProxy(loadId)
 
   const impl = LoadConfig[loadId];
   if (impl) {
