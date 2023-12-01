@@ -73,7 +73,6 @@ const _showCaptionByRef = refItem => {
     refItem.showCaption();
   }
 };
-const _crIsAdminModeFn = store => _isFn(store.isAdminMode) ? store.isAdminMode.bind(store) : () => false;
 const _hasBtsResize = (refEl, initialWidth, caption) => {
   const _style = (0, _uiApi.getRefElementStyle)(refEl),
     _widthEl = _style ? parseInt(_style.width, 10) || initialWidth : initialWidth;
@@ -87,6 +86,7 @@ const ChartContainer = _ref => {
     browserType,
     contWidth,
     caption,
+    isAdminMode,
     onSortBy,
     onRemoveAll,
     onCloseContainer,
@@ -135,8 +135,7 @@ const ChartContainer = _ref => {
         _hResizeAfter(parseInt(width, 10));
       }
     }, [_hResizeAfter]),
-    _isAdminModeFn = _crIsAdminModeFn(store),
-    _isAdminMode = _isAdminModeFn()
+    _isAdminMode = isAdminMode()
     /*eslint-disable react-hooks/exhaustive-deps */,
     _modelMore = (0, _uiApi.useMemo)(() => (0, _crModelMore.default)(_isAdminMode, {
       onMinWidth: _crFnByNameArgs(_refResize, 'toWidth', _MIN_WIDTH, true),
@@ -192,9 +191,7 @@ const ChartContainer = _ref => {
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ModalSlider, {
       isShow: isMore,
-      className: CL_MENU_MORE
-      //style={TS.EL_BORDER}
-      ,
+      className: CL_MENU_MORE,
       model: _modelMore,
       onClose: _hToggleMore
     }), _isAdminMode && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalCompareTo.default, {
@@ -226,7 +223,7 @@ const ChartContainer = _ref => {
       className: CL_SCROLL_ITEMS,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartList.default, {
         refChartFn: _refChartFn,
-        isAdminMode: _isAdminModeFn,
+        isAdminMode: isAdminMode,
         configs: configs,
         store: store,
         chartType: chartType,

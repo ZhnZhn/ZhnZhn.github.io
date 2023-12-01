@@ -35,7 +35,6 @@ import A from '../Comp';
 import ModalCompareTo from './ModalCompareTo';
 import ChartList from './ChartList';
 
-
 const CL_SCROLL_ITEMS = crScrollYCn('scroll-items')
 , CL_MENU_MORE = "popup-menu charts__menu-more el-b"
 
@@ -103,12 +102,6 @@ const _showCaptionByRef = refItem => {
   }
 };
 
-const _crIsAdminModeFn = (
-  store
-) => _isFn(store.isAdminMode)
-  ? store.isAdminMode.bind(store)
-  : () => false;
-
 const _hasBtsResize = (
   refEl,
   initialWidth,
@@ -129,6 +122,7 @@ const ChartContainer = ({
   browserType,
   contWidth,
   caption,
+  isAdminMode,
   onSortBy,
   onRemoveAll,
   onCloseContainer,
@@ -203,8 +197,7 @@ const ChartContainer = ({
       _hResizeAfter(parseInt(width, 10))
     }
   }, [_hResizeAfter])
-  , _isAdminModeFn = _crIsAdminModeFn(store)
-  , _isAdminMode = _isAdminModeFn()
+  , _isAdminMode = isAdminMode()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _modelMore = useMemo(() => crModelMore(_isAdminMode, {
       onMinWidth: _crFnByNameArgs(_refResize, 'toWidth', _MIN_WIDTH, true),
@@ -282,7 +275,6 @@ const ChartContainer = ({
       <A.ModalSlider
         isShow={isMore}
         className={CL_MENU_MORE}
-        //style={TS.EL_BORDER}
         model={_modelMore}
         onClose={_hToggleMore}
       />
@@ -320,7 +312,7 @@ const ChartContainer = ({
       >
         <ChartList
            refChartFn={_refChartFn}
-           isAdminMode={_isAdminModeFn}
+           isAdminMode={isAdminMode}
            configs={configs}
            store={store}
            chartType={chartType}

@@ -6,6 +6,7 @@ exports.default = void 0;
 var _uiApi = require("./uiApi");
 var _LocationSearch = _interopRequireDefault(require("../flux/logic/LocationSearch"));
 var _ChartStore = _interopRequireDefault(require("../flux/stores/ChartStore"));
+var _settingStore = require("../flux/stores/settingStore");
 var _ComponentActions = require("../flux/actions/ComponentActions");
 var _browserStore = require("../flux/stores/browserStore");
 var _ChartActions = require("../flux/actions/ChartActions");
@@ -19,7 +20,7 @@ var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 var _jsxRuntime = require("react/jsx-runtime");
 const BUILD_DATE = '30-11-2023',
   CL_COMP_CONTAINER = "component-container";
-const showSettings = (0, _uiApi.bindTo)(_ComponentActions.ComponentActions.showSettings, _ChartStore.default.exportSettingFn());
+const showSettings = (0, _uiApi.bindTo)(_ComponentActions.ComponentActions.showSettings, (0, _settingStore.exportSettingFn)());
 const AppErc = () => {
   (0, _uiApi.useEffect)(() => {
     _LocationSearch.default.load();

@@ -5,6 +5,7 @@ import {
 
 import LocationSearch from '../flux/logic/LocationSearch';
 import ChartStore from '../flux/stores/ChartStore';
+import { exportSettingFn } from '../flux/stores/settingStore';
 
 import {
   ComponentActions
@@ -31,7 +32,7 @@ const BUILD_DATE = '30-11-2023'
 
 const showSettings = bindTo(
   ComponentActions.showSettings,
-  ChartStore.exportSettingFn()
+  exportSettingFn()
 );
 
 const AppErc = () => {

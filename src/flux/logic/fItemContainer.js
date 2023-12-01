@@ -8,6 +8,7 @@ import BrowserConfig from '../../constants/BrowserConfig';
 
 import { setActiveContainer } from '../stores/contCheckBoxLogic';
 import { closeChartContainer } from '../stores/compStore';
+import { isAdminMode } from '../stores/settingStore';
 
 import {
   CHAT_SORT_BY,
@@ -66,7 +67,8 @@ export const crItemContainerEl = ({
     store,
     browserType,
     contWidth,
-    onSetActive: bindTo(setActiveContainer, _chartType, browserType),    
+    isAdminMode,
+    onSetActive: bindTo(setActiveContainer, _chartType, browserType),
     onCloseContainer: bindTo(closeChartContainer, _chartType, browserType),
     onSortBy: bindTo(ChartActions[CHAT_SORT_BY], _chartType),
     updateMovingValues: bindTo(ChartActions[CHAT_UPDATE_MOVING_VALUES], _chartType),

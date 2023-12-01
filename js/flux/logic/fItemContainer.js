@@ -8,6 +8,7 @@ var _ChartContainer = _interopRequireDefault(require("../../components/zhn-conta
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 var _contCheckBoxLogic = require("../stores/contCheckBoxLogic");
 var _compStore = require("../stores/compStore");
+var _settingStore = require("../stores/settingStore");
 var _ChartActions = require("../actions/ChartActions");
 const _isStr = str => typeof str === 'string';
 const _crCaption = (dialogConf, browserType) => {
@@ -48,6 +49,7 @@ const crItemContainerEl = _ref => {
     store,
     browserType,
     contWidth,
+    isAdminMode: _settingStore.isAdminMode,
     onSetActive: (0, _uiApi.bindTo)(_contCheckBoxLogic.setActiveContainer, _chartType, browserType),
     onCloseContainer: (0, _uiApi.bindTo)(_compStore.closeChartContainer, _chartType, browserType),
     onSortBy: (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_SORT_BY], _chartType),
