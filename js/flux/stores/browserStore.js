@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.useMsInitBrowser = exports.useMsBrowserShow = exports.useMsBrowserLoad = exports.showBrowser = exports.setMsBrowserLoaded = exports.setMsBrowserFailed = exports.loadBrowser = void 0;
+exports.useMsInitBrowser = exports.useMsBrowserShow = exports.useMsBrowserLoad = exports.showWatch = exports.showNdl = exports.showEurostat = exports.showBrowser = exports.setMsBrowserLoaded = exports.setMsBrowserFailed = exports.loadBrowser = void 0;
 var _fnFetch = require("../../utils/fnFetch");
 var _onCatch = _interopRequireDefault(require("../logic/onCatch"));
 var _storeApi = require("../storeApi");
@@ -12,6 +12,7 @@ var _initBrowserMenu = _interopRequireDefault(require("./browser/initBrowserMenu
 var _browserLogic = require("./browserLogic");
 var _Factory = require("../logic/Factory");
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
+var _BrowserType = require("../../constants/BrowserType");
 var _RouterModalDialog = require("../../components/dialogs/RouterModalDialog");
 var _RouterDialog = require("../logic/RouterDialog");
 const [_crMsBrowserLoad, _selectMsBrowserLoad] = (0, _storeApi.fCrStoreSlice)("msBrowserLoad"),
@@ -134,4 +135,7 @@ const showBrowser = function (option) {
   }
 };
 exports.showBrowser = showBrowser;
+const showNdl = exports.showNdl = (0, _storeApi.bindTo)(showBrowser, _BrowserType.BT_NDL);
+const showEurostat = exports.showEurostat = (0, _storeApi.bindTo)(showBrowser, _BrowserType.BT_EUROSTAT);
+const showWatch = exports.showWatch = (0, _storeApi.bindTo)(showBrowser, _BrowserType.BT_WATCH_LIST);
 //# sourceMappingURL=browserStore.js.map

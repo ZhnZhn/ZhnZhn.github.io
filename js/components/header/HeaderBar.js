@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _compStore = require("../../flux/stores/compStore");
-var _BrowserActions = require("../../flux/actions/BrowserActions");
+var _browserStore = require("../../flux/stores/browserStore");
 var _styleFn = require("../styleFn");
 var _hotkeys = require("../hotkeys/hotkeys");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
@@ -64,19 +64,19 @@ const HeaderBar = _ref => {
       caption: "Eurostat",
       title: "Eurostat Browser",
       hotKey: _hotkeys.HK_EUROSTAT_BROWSER,
-      onClick: _BrowserActions.BrowserActions.showEurostat
+      onClick: _browserStore.showEurostat
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       className: CL_NDL,
       caption: "NDL",
       title: "Nasdaq Data Link Browser",
       hotKey: _hotkeys.HK_NDL_BROWSER,
-      onClick: _BrowserActions.BrowserActions.showNdl
+      onClick: _browserStore.showNdl
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       className: CL_WATCH,
       caption: "Watch",
       title: "Watch List Browser",
       hotKey: _hotkeys.HK_WATCHLIST_BROWSER,
-      onClick: _BrowserActions.BrowserActions.showWatch
+      onClick: _browserStore.showWatch
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotBar.default, {
       useMsCloseDialog: _compStore.useMsCloseDialog,
       onShowDialog: _compStore.showDialog

@@ -3,9 +3,12 @@ import {
   showDialog,
   useMsCloseDialog
 } from '../../flux/stores/compStore';
+
 import {
-  BrowserActions
-} from '../../flux/actions/BrowserActions';
+  showNdl,
+  showEurostat,
+  showWatch
+} from '../../flux/stores/browserStore';
 
 import {
   crContainerCn
@@ -93,21 +96,21 @@ const HeaderBar = ({
           caption="Eurostat"
           title="Eurostat Browser"
           hotKey={HK_EUROSTAT_BROWSER}
-          onClick={BrowserActions.showEurostat}
+          onClick={showEurostat}
        />
        <FlatButton
           className={CL_NDL}
           caption="NDL"
           title="Nasdaq Data Link Browser"
           hotKey={HK_NDL_BROWSER}
-          onClick={BrowserActions.showNdl}
+          onClick={showNdl}
        />
        <FlatButton
           className={CL_WATCH}
           caption="Watch"
           title="Watch List Browser"
           hotKey={HK_WATCHLIST_BROWSER}
-          onClick={BrowserActions.showWatch}
+          onClick={showWatch}
        />
        <HotBar
           useMsCloseDialog={useMsCloseDialog}

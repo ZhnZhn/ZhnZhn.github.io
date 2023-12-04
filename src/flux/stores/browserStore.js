@@ -2,6 +2,7 @@ import { fetchJson } from '../../utils/fnFetch';
 import onCatch from '../logic/onCatch';
 
 import {
+  bindTo,
   createStoreWithSelector,
   fCrStoreSlice,
   fCrUse,
@@ -21,6 +22,11 @@ import {
 
 import { crAsyncBrowser } from '../logic/Factory';
 import BrowserConfig from '../../constants/BrowserConfig';
+import {
+  BT_NDL,
+  BT_EUROSTAT,
+  BT_WATCH_LIST
+} from '../../constants/BrowserType';
 
 import { loadModalDialogs } from '../../components/dialogs/RouterModalDialog';
 import { loadDialogs } from '../logic/RouterDialog';
@@ -154,3 +160,7 @@ export const showBrowser = (option={}) => {
     })
   }
 }
+
+export const showNdl = bindTo(showBrowser, BT_NDL)
+export const showEurostat = bindTo(showBrowser, BT_EUROSTAT)
+export const showWatch = bindTo(showBrowser, BT_WATCH_LIST)
