@@ -1,8 +1,8 @@
 //import PropTypes from "prop-types";
 import {
   useRef,
-  useCallback,
-  useMemo
+  useMemo,
+  getRefValue
 } from '../uiApi';
 import memoIsShow from '../hoc/memoIsShow';
 
@@ -10,7 +10,7 @@ import FlatButton from '../zhn-m/FlatButton';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import MathCaptcha from '../zhn-moleculs/MathCaptcha';
 
-import FactoryAction from '../../flux/actions/FactoryAction'
+import { loadFromQuery } from '../../flux/actions/FactoryAction'
 
 const MSG_PREFIX = "Would you like load item"
 , MSG_SUFFIX = "from url?"
@@ -50,12 +50,11 @@ const AskDialog = memoIsShow(({
   onClose
 }) => {
   const _refCaptcha = useRef()
-  , _hLoad = useCallback(() => {
-      if (_refCaptcha.current.isOk()){
+  , _hLoad = useMemo(() => () => {
+      const _captchaInst = getRefValue(_refCaptcha);
+      if (_captchaInst && _captchaInst.isOk()){
         const { options } = data;
-        FactoryAction
-          .crLoadQuery(options)
-          .run()
+        loadFromQuery(options)
         onClose()
       }
     }, [data, onClose])

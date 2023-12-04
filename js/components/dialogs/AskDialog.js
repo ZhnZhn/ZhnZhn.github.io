@@ -8,7 +8,7 @@ var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _MathCaptcha = _interopRequireDefault(require("../zhn-moleculs/MathCaptcha"));
-var _FactoryAction = _interopRequireDefault(require("../../flux/actions/FactoryAction"));
+var _FactoryAction = require("../../flux/actions/FactoryAction");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
@@ -56,12 +56,13 @@ const AskDialog = (0, _memoIsShow.default)(_ref => {
     onClose
   } = _ref;
   const _refCaptcha = (0, _uiApi.useRef)(),
-    _hLoad = (0, _uiApi.useCallback)(() => {
-      if (_refCaptcha.current.isOk()) {
+    _hLoad = (0, _uiApi.useMemo)(() => () => {
+      const _captchaInst = (0, _uiApi.getRefValue)(_refCaptcha);
+      if (_captchaInst && _captchaInst.isOk()) {
         const {
           options
         } = data;
-        _FactoryAction.default.crLoadQuery(options).run();
+        (0, _FactoryAction.loadFromQuery)(options);
         onClose();
       }
     }, [data, onClose]),
@@ -109,6 +110,5 @@ AskDialog.propTypes = {
   onClose: PropTypes.func
 }
 */
-var _default = AskDialog;
-exports.default = _default;
+var _default = exports.default = AskDialog;
 //# sourceMappingURL=AskDialog.js.map

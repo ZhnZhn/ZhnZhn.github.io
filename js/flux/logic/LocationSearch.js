@@ -9,7 +9,7 @@ const {
   crOptions
 } = _LocationQuery.default;
 const ARR_B = ['UN', 'QE', 'FAO'];
-const ARR_C = ['SM_WIKI', 'SM_IEX_CHART_5Y', 'SM_IEX_CHART_2Y', 'USAE_BLS_1', 'BC_HD'];
+const ARR_C = ['USAE_BLS_1', 'BC_HD'];
 const _isArrInclude = (arr, value) => arr.indexOf(value) !== -1;
 const _isQuery = obj => obj && obj.v && _isArrInclude(ARR_C, obj.cT) || _isArrInclude(ARR_B, obj.bT);
 const _trSearchToOptions = () => {

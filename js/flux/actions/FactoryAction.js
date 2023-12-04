@@ -1,26 +1,19 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.default = void 0;
-var _SeqActions = _interopRequireDefault(require("./SeqActions"));
+exports.loadFromQuery = void 0;
 var _browserStore = require("../stores/browserStore");
-var _ChartActions = require("./ChartActions");
-const _crLoadQueryDynamic = option => {
-  const {
-    browserType
-  } = option || {};
-  return new _SeqActions.default([{
-    action: _browserStore.showBrowser,
-    args: [browserType]
-  }, {
-    action: _ChartActions.ChartActions[_ChartActions.CHAT_LOAD_BY_QUERY],
-    type: _ChartActions.CHAT_LOAD_COMPLETED,
-    args: [option]
-  }]);
+var _itemStore = require("../stores/itemStore");
+const loadFromQuery = function (option) {
+  if (option === void 0) {
+    option = {};
+  }
+  setTimeout(() => {
+    (0, _browserStore.showBrowser)(option);
+  }, 100);
+  setTimeout(() => {
+    (0, _itemStore.loadItemByQuery)(option);
+  }, 800);
 };
-const FactoryAction = {
-  crLoadQuery: _crLoadQueryDynamic
-};
-var _default = exports.default = FactoryAction;
+exports.loadFromQuery = loadFromQuery;
 //# sourceMappingURL=FactoryAction.js.map
