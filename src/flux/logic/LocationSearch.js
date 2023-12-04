@@ -38,13 +38,9 @@ const _trSearchToOptions = () => {
     : void 0;
 };
 
-const LocationSearch = {
-  load: () => {
-    const options = _trSearchToOptions();
-    if (options) {
-      ComponentActions.showAsk({ options })
-    }
+export const showAskDialogIf = () => {
+  const options = _trSearchToOptions();
+  if (options) {
+    ComponentActions.showAsk({ options })
   }
-};
-
-export default LocationSearch
+}
