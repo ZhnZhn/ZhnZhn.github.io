@@ -10,7 +10,6 @@ import {
 } from '../../constants/BrowserType';
 
 export const BAT_UPDATE_WATCH_BROWSER = 'updateWatchBrowser'
-export const BAT_UPDATE_BROWSER_MENU = 'updateBrowserMenu'
 
 const BA = Reflux.createActions({
   [BAT_UPDATE_WATCH_BROWSER]: {}

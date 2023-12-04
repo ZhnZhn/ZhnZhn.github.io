@@ -2,13 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.BrowserActions = exports.BAT_UPDATE_WATCH_BROWSER = exports.BAT_UPDATE_BROWSER_MENU = void 0;
+exports.BrowserActions = exports.BAT_UPDATE_WATCH_BROWSER = void 0;
 var _refluxCore = _interopRequireDefault(require("reflux-core"));
 var _storeApi = require("../storeApi");
 var _browserStore = require("../stores/browserStore");
 var _BrowserType = require("../../constants/BrowserType");
 const BAT_UPDATE_WATCH_BROWSER = exports.BAT_UPDATE_WATCH_BROWSER = 'updateWatchBrowser';
-const BAT_UPDATE_BROWSER_MENU = exports.BAT_UPDATE_BROWSER_MENU = 'updateBrowserMenu';
 const BA = _refluxCore.default.createActions({
   [BAT_UPDATE_WATCH_BROWSER]: {}
 });
