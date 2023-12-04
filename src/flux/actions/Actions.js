@@ -1,9 +1,7 @@
 import { ChartActions } from './ChartActions';
-import { BrowserActions } from './BrowserActions';
 
 const Actions = [
-  ChartActions,
-  BrowserActions
+  ChartActions
 ];
 
 export default Actions

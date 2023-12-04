@@ -7,13 +7,11 @@
  "names": [
   "_ChartActions",
   "require",
-  "_BrowserActions",
   "Actions",
   "ChartActions",
-  "BrowserActions",
   "_default",
   "exports",
   "default"
  ],
- "mappings": ";;;;AAAA,IAAAA,aAAA,GAAAC,OAAA;AACA,IAAAC,eAAA,GAAAD,OAAA;AAEA,MAAME,OAAO,GAAG,CACdC,0BAAY,EACZC,8BAAc,CACf;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaL,OAAO"
+ "mappings": ";;;;AAAA,IAAAA,aAAA,GAAAC,OAAA;AAEA,MAAMC,OAAO,GAAG,CACdC,0BAAY,CACb;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaJ,OAAO"
 }
