@@ -4,9 +4,8 @@ import {
 } from '../../storeApi';
 
 import {
-  CHAT_SHOW,
-  ChartActions
-} from '../../actions/ChartActions';
+  showItemsContainer
+} from '../itemStore';
 import {
   closeChartCont,
   showDialog
@@ -23,7 +22,7 @@ const _crItemHandlers = (
   bT
 ) => ({
   onClick: bindTo(showDialog, dT, bT),
-  onBadgeClick: bindTo(ChartActions[CHAT_SHOW], dT, bT),
+  onBadgeClick: bindTo(showItemsContainer, dT, bT),
   onBadgeClose: bindTo(closeChartCont, dT)
 });
 

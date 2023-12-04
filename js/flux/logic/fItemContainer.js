@@ -9,7 +9,7 @@ var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConf
 var _contCheckBoxLogic = require("../stores/contCheckBoxLogic");
 var _compStore = require("../stores/compStore");
 var _settingStore = require("../stores/settingStore");
-var _ChartActions = require("../actions/ChartActions");
+var _itemStore = require("../stores/itemStore");
 const _isStr = str => typeof str === 'string';
 const _crCaption = (dialogConf, browserType) => {
   let _caption = dialogConf.contFullCaption || _BrowserConfig.default[browserType].contFullCaption;
@@ -32,7 +32,7 @@ const crItemContainerEl = _ref => {
   let {
     browserType,
     dialogConf,
-    store
+    itemStoreApi
   } = _ref;
   const {
       type,
@@ -46,16 +46,16 @@ const crItemContainerEl = _ref => {
     key: _chartType,
     caption: _caption,
     chartType: _chartType,
-    store,
+    itemStoreApi,
     browserType,
     contWidth,
     isAdminMode: _settingStore.isAdminMode,
     onSetActive: (0, _uiApi.bindTo)(_contCheckBoxLogic.setActiveContainer, _chartType, browserType),
     onCloseContainer: (0, _uiApi.bindTo)(_compStore.closeChartContainer, _chartType, browserType),
-    onSortBy: (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_SORT_BY], _chartType),
-    updateMovingValues: (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_UPDATE_MOVING_VALUES], _chartType),
-    onCloseItem: _ChartActions.ChartActions[_ChartActions.CHAT_CLOSE],
-    onRemoveAll: (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_REMOVE_ALL], _chartType, browserType)
+    onSortBy: (0, _uiApi.bindTo)(_itemStore.sortItemsBy, _chartType),
+    updateMovingValues: (0, _uiApi.bindTo)(_itemStore.updateMv, _chartType),
+    onCloseItem: _itemStore.closeChartItem,
+    onRemoveAll: (0, _uiApi.bindTo)(_itemStore.removeItemsAll, _chartType, browserType)
   });
 };
 exports.crItemContainerEl = crItemContainerEl;

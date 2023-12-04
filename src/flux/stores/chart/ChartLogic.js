@@ -48,7 +48,7 @@ export const loadConfig = (
   config,
   option,
   dialogConf,
-  store
+  itemStoreApi
 ) => {
     const {
       chartType,
@@ -65,7 +65,7 @@ export const loadConfig = (
     } else {
       _initChartSlice(slice, chartType, config)
       return {
-        Comp: crItemContainerEl({ browserType, dialogConf, store })
+        Comp: crItemContainerEl({ browserType, dialogConf, itemStoreApi })
       };
     }
 }
@@ -75,7 +75,7 @@ export const showChart = (
   chartType,
   browserType,
   dialogConf,
-  store
+  itemStoreApi
 ) => {
    const { chartSlice } = getSlice(slice, chartType);
    if (chartSlice){
@@ -84,7 +84,7 @@ export const showChart = (
    } else {
      _initChartSlice(slice, chartType)
      return {
-       Comp: crItemContainerEl({ browserType, dialogConf, store })
+       Comp: crItemContainerEl({ browserType, dialogConf, itemStoreApi })
      };
    }
 }

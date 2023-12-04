@@ -21,11 +21,11 @@ import {
 import {
   ComponentActions
 } from '../actions/ComponentActions';
+
 import {
-  CHAT_LOAD,
-  CHAT_SHOW,
-  ChartActions
-} from '../actions/ChartActions';
+  loadItem,
+  showItemsContainer
+} from '../stores/itemStore';
 
 import {
   getFromDate,
@@ -167,11 +167,15 @@ export const crDialog = (
         : void 0
    , _getKey = isGetKey && getKey
    , onError = isGetKey && _onError
-   , onLoad = bindTo(ChartActions[CHAT_LOAD], {
+   , onLoad = bindTo(loadItem, {
          chartType: itemKey,
          browserType, dialogConf
       })
-   , onShow = bindTo(ChartActions[CHAT_SHOW], itemKey, browserType, dialogConf);
+   , onShow = bindTo(showItemsContainer,
+       itemKey,
+       browserType,
+       dialogConf
+     );
 
   _modifyDialogPropsByLoadId(dialogProps, loadId)
 

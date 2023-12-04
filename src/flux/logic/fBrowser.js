@@ -3,7 +3,6 @@ import {
   createElement
 } from '../../components/uiApi';
 
-import ChartStore from '../stores/ChartStore';
 import {
   ComponentActions
 } from '../actions/ComponentActions';
@@ -18,13 +17,11 @@ import {
 import {
   useWatchList
 } from '../watch-list/watchListStore';
+
 import {
-  CHAT_SHOW,
-  ChartActions
-} from '../actions/ChartActions';
-import {
-  BAT_UPDATE_BROWSER_MENU
-} from '../actions/BrowserActions';
+  showItemsContainer
+} from '../stores/itemStore';
+
 import {
   BT_WATCH_LIST,
   BT_SWEDEN_STAT_ALL,
@@ -80,7 +77,7 @@ const _crBrowserDynamic = (
              item,
              browserType,
              chartContainerType,
-             onShow: bindTo(ChartActions[CHAT_SHOW], chartContainerType, browserType)
+             onShow: bindTo(showItemsContainer, chartContainerType, browserType)
            })
         : void 0;
 
@@ -88,7 +85,6 @@ const _crBrowserDynamic = (
      dfProps,
      key: browserType,
      browserType,
-     store: ChartStore,
      isInitShow: true,
      caption,
      ItemOptionComp,
@@ -97,7 +93,6 @@ const _crBrowserDynamic = (
      onClickInfo,
      useMsBrowserShow,
      useMsBrowserLoad,
-     updateAction: BAT_UPDATE_BROWSER_MENU, //for Type
      onLoadMenu: bindTo(loadBrowser, { browserType, caption, sourceMenuUrl }),
      onShowLoadDialog //for Type2
    });

@@ -4,13 +4,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.crAsyncBrowser = void 0;
 var _uiApi = require("../../components/uiApi");
-var _ChartStore = _interopRequireDefault(require("../stores/ChartStore"));
 var _ComponentActions = require("../actions/ComponentActions");
 var _compStore = require("../stores/compStore");
 var _browserStore = require("../stores/browserStore");
 var _watchListStore = require("../watch-list/watchListStore");
-var _ChartActions = require("../actions/ChartActions");
-var _BrowserActions = require("../actions/BrowserActions");
+var _itemStore = require("../stores/itemStore");
 var _BrowserType = require("../../constants/BrowserType");
 var _RouterBrowser = _interopRequireDefault(require("./RouterBrowser"));
 var _RouterItemOption = _interopRequireDefault(require("../../components/zhn-select/RouterItemOption"));
@@ -44,13 +42,12 @@ const _crBrowserDynamic = (Comp, option) => {
       item,
       browserType,
       chartContainerType,
-      onShow: (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_SHOW], chartContainerType, browserType)
+      onShow: (0, _uiApi.bindTo)(_itemStore.showItemsContainer, chartContainerType, browserType)
     }) : void 0;
   return (0, _uiApi.createElement)(Comp, {
     dfProps,
     key: browserType,
     browserType,
-    store: _ChartStore.default,
     isInitShow: true,
     caption,
     ItemOptionComp,
@@ -59,8 +56,6 @@ const _crBrowserDynamic = (Comp, option) => {
     onClickInfo,
     useMsBrowserShow: _browserStore.useMsBrowserShow,
     useMsBrowserLoad: _browserStore.useMsBrowserLoad,
-    updateAction: _BrowserActions.BAT_UPDATE_BROWSER_MENU,
-    //for Type
     onLoadMenu: (0, _uiApi.bindTo)(_browserStore.loadBrowser, {
       browserType,
       caption,
@@ -69,7 +64,6 @@ const _crBrowserDynamic = (Comp, option) => {
     onShowLoadDialog //for Type2
   });
 };
-
 const STAT_ALL_TYPES = [_BrowserType.BT_SWEDEN_STAT_ALL, _BrowserType.BT_NORWAY_STAT_ALL, _BrowserType.BT_FINLAND_STAT_ALL, _BrowserType.BT_DENMARK_STAT_ALL, _BrowserType.BT_IRELAND_STAT_ALL];
 const _isStatAll = browserType => STAT_ALL_TYPES.indexOf(browserType) !== -1;
 const crAsyncBrowser = option => {

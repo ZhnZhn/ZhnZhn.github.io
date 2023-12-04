@@ -3,14 +3,14 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _storeApi = require("../../storeApi");
-var _ChartActions = require("../../actions/ChartActions");
+var _itemStore = require("../itemStore");
 var _compStore = require("../compStore");
 const _isArr = Array.isArray,
   _isBool = v => typeof v === 'boolean',
   _getBoolProperty = property => _isBool(property) ? property : void 0;
 const _crItemHandlers = (dT, bT) => ({
   onClick: (0, _storeApi.bindTo)(_compStore.showDialog, dT, bT),
-  onBadgeClick: (0, _storeApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_SHOW], dT, bT),
+  onBadgeClick: (0, _storeApi.bindTo)(_itemStore.showItemsContainer, dT, bT),
   onBadgeClose: (0, _storeApi.bindTo)(_compStore.closeChartCont, dT)
 });
 const _crItem = (_ref, menuItems, browserType) => {

@@ -12,7 +12,7 @@ var _RouterFnValue = _interopRequireDefault(require("./RouterFnValue"));
 var _Msg = require("../../constants/Msg");
 var _LoadType = require("../../constants/LoadType");
 var _ComponentActions = require("../actions/ComponentActions");
-var _ChartActions = require("../actions/ChartActions");
+var _itemStore = require("../stores/itemStore");
 var _dateFn = require("../../utils/dateFn");
 var _has = require("../../components/has");
 var _compStore = require("../stores/compStore");
@@ -114,12 +114,12 @@ const crDialog = (browserType, dialogConf) => {
     proxy = isProxy ? (0, _settingStore.getProxy)() : void 0,
     _getKey = isGetKey && _settingStore.getKey,
     onError = isGetKey && _onError,
-    onLoad = (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_LOAD], {
+    onLoad = (0, _uiApi.bindTo)(_itemStore.loadItem, {
       chartType: itemKey,
       browserType,
       dialogConf
     }),
-    onShow = (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_SHOW], itemKey, browserType, dialogConf);
+    onShow = (0, _uiApi.bindTo)(_itemStore.showItemsContainer, itemKey, browserType, dialogConf);
   _modifyDialogPropsByLoadId(dialogProps, loadId);
   return (0, _RouterDialog.getDialog)(_dialogType).then(Comp => (0, _uiApi.createElement)(Comp, {
     ...dialogProps,

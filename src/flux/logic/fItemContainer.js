@@ -11,12 +11,11 @@ import { closeChartContainer } from '../stores/compStore';
 import { isAdminMode } from '../stores/settingStore';
 
 import {
-  CHAT_SORT_BY,
-  CHAT_UPDATE_MOVING_VALUES,
-  CHAT_CLOSE,
-  CHAT_REMOVE_ALL,
-  ChartActions
-} from '../actions/ChartActions';
+  sortItemsBy,
+  updateMv,
+  closeChartItem,
+  removeItemsAll
+} from '../stores/itemStore';
 
 const _isStr = str => typeof str === 'string';
 
@@ -49,7 +48,7 @@ const _crCaption = (
 export const crItemContainerEl = ({
   browserType,
   dialogConf,
-  store
+  itemStoreApi
 }) => {
   const {
     type,
@@ -64,15 +63,15 @@ export const crItemContainerEl = ({
     key: _chartType,
     caption: _caption,
     chartType: _chartType,
-    store,
+    itemStoreApi,
     browserType,
     contWidth,
     isAdminMode,
     onSetActive: bindTo(setActiveContainer, _chartType, browserType),
     onCloseContainer: bindTo(closeChartContainer, _chartType, browserType),
-    onSortBy: bindTo(ChartActions[CHAT_SORT_BY], _chartType),
-    updateMovingValues: bindTo(ChartActions[CHAT_UPDATE_MOVING_VALUES], _chartType),
-    onCloseItem: ChartActions[CHAT_CLOSE],
-    onRemoveAll: bindTo(ChartActions[CHAT_REMOVE_ALL], _chartType, browserType)
+    onSortBy: bindTo(sortItemsBy, _chartType),
+    updateMovingValues: bindTo(updateMv, _chartType),
+    onCloseItem: closeChartItem,
+    onRemoveAll: bindTo(removeItemsAll, _chartType, browserType)
   });
 }
