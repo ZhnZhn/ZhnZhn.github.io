@@ -17,6 +17,9 @@ import {
 import {
   useWatchList
 } from '../watch-list/watchListStore';
+import {
+  getProxy
+} from '../stores/settingStore';
 
 import {
   showItemsContainer
@@ -94,7 +97,8 @@ const _crBrowserDynamic = (
      useMsBrowserShow,
      useMsBrowserLoad,
      onLoadMenu: bindTo(loadBrowser, { browserType, caption, sourceMenuUrl }),
-     onShowLoadDialog //for Type2
+     onShowLoadDialog, //for Type2
+     getProxy // for BrowserSlider
    });
  }
 

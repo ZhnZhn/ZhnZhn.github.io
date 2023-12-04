@@ -16,11 +16,6 @@ import { S_FRAME } from './Style';
 const _isArr = Array.isArray
 , FOCUS_FIRST_MLS = 1000;
 
-const _getProxy = (
-  store,
-  dfProps
-) => store.getProxy(dfProps.lT);
-
 const _crId = (
   dfProps,
   rootId,
@@ -57,7 +52,6 @@ const _fOnClick = (
 
 const Frame = ({
   style,
-  store,
   title,
   id='',
   dfProps={},
@@ -66,13 +60,14 @@ const Frame = ({
   onClickPrev,
   onClickNext,
   fOnClickItem,
-  loadItems
+  loadItems,
+  getProxy
 }) => {
   const _refTitle = useRef()
   , _refId = useRef()
   , [state, setState] = useState({})
   , { model, errMsg } = state
-  , proxy = _getProxy(store, dfProps)
+  , proxy = getProxy(dfProps.lT)
   /*eslint-disable react-hooks/exhaustive-deps */
   , _fOnClickItem = useCallback(
       bindTo(

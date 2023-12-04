@@ -10,8 +10,7 @@ var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const _isArr = Array.isArray,
   FOCUS_FIRST_MLS = 1000;
-const _getProxy = (store, dfProps) => store.getProxy(dfProps.lT);
-const _crId = (dfProps, rootId, id) => dfProps.lT === 'SDN' ? id || rootId : rootId ? rootId + "/" + id : id;
+const _crId = (dfProps, rootId, id) => dfProps.lT === 'SDN' ? id || rootId : rootId ? `${rootId}/${id}` : id;
 const _fOnClick = (proxy, rootId, dfProps, pageNumber, onClickNext, fOnClickItem, item) => {
   const {
       text,
@@ -29,7 +28,6 @@ const _fOnClick = (proxy, rootId, dfProps, pageNumber, onClickNext, fOnClickItem
 const Frame = _ref => {
   let {
     style,
-    store,
     title,
     id = '',
     dfProps = {},
@@ -38,7 +36,8 @@ const Frame = _ref => {
     onClickPrev,
     onClickNext,
     fOnClickItem,
-    loadItems
+    loadItems,
+    getProxy
   } = _ref;
   const _refTitle = (0, _uiApi.useRef)(),
     _refId = (0, _uiApi.useRef)(),
@@ -47,7 +46,7 @@ const Frame = _ref => {
       model,
       errMsg
     } = state,
-    proxy = _getProxy(store, dfProps)
+    proxy = getProxy(dfProps.lT)
     /*eslint-disable react-hooks/exhaustive-deps */,
     _fOnClickItem = (0, _uiApi.useCallback)((0, _uiApi.bindTo)(_fOnClick, proxy, id, dfProps, pageNumber, onClickNext, fOnClickItem), [proxy])
     /*eslint-enable react-hooks/exhaustive-deps */,
@@ -100,6 +99,5 @@ const Frame = _ref => {
     })]
   });
 };
-var _default = Frame;
-exports.default = _default;
+var _default = exports.default = Frame;
 //# sourceMappingURL=Frame.js.map

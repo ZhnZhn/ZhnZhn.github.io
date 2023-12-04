@@ -8,6 +8,7 @@ var _ComponentActions = require("../actions/ComponentActions");
 var _compStore = require("../stores/compStore");
 var _browserStore = require("../stores/browserStore");
 var _watchListStore = require("../watch-list/watchListStore");
+var _settingStore = require("../stores/settingStore");
 var _itemStore = require("../stores/itemStore");
 var _BrowserType = require("../../constants/BrowserType");
 var _RouterBrowser = _interopRequireDefault(require("./RouterBrowser"));
@@ -61,7 +62,9 @@ const _crBrowserDynamic = (Comp, option) => {
       caption,
       sourceMenuUrl
     }),
-    onShowLoadDialog //for Type2
+    onShowLoadDialog,
+    //for Type2
+    getProxy: _settingStore.getProxy // for BrowserSlider
   });
 };
 const STAT_ALL_TYPES = [_BrowserType.BT_SWEDEN_STAT_ALL, _BrowserType.BT_NORWAY_STAT_ALL, _BrowserType.BT_FINLAND_STAT_ALL, _BrowserType.BT_DENMARK_STAT_ALL, _BrowserType.BT_IRELAND_STAT_ALL];

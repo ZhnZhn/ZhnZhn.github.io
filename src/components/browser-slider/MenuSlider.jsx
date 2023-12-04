@@ -68,7 +68,7 @@ const INITIAL_STATE = {
 
 const MenuSlider = ({
   dfProps,
-  store
+  getProxy
 }) => {
   const _refMenu = useRef()
   , _refDirection = useRef(0)
@@ -124,12 +124,12 @@ const MenuSlider = ({
           pages={pages}
           pageCurrent={pageCurrent}
           style={S_PAGE}
-          store={store}
           dfProps={dfProps}
           onClickPrev={_hPrevPage}
           onClickNext={_hNextPage}
           loadItems={loadItems}
           fOnClickItem={fOnClickItem}
+          getProxy={getProxy}
         />
       </div>
     </div>
