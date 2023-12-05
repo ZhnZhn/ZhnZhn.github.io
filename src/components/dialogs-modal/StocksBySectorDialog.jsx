@@ -9,10 +9,7 @@ import useToggle from '../hooks/useToggle';
 import useProperty from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';
 
-import {
-  CHAT_LOAD,
-  ChartActions
-} from '../../flux/actions/ChartActions';
+import { loadItem } from '../../flux/stores/itemStore';
 
 import {
   ButtonLoad,
@@ -140,10 +137,10 @@ const StocksBySectorDialog = memoIsShow(({
       value,
       route,
       dfProps
-    } = getDataSource() || DF_DATA_SOURCE;    
+    } = getDataSource() || DF_DATA_SOURCE;
     if (id) {
       const _chartTypeItem = getChartType();
-      ChartActions[CHAT_LOAD](
+      loadItem(
         {
           chartType: chartContainerType,
           browserType

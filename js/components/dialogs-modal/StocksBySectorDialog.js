@@ -8,7 +8,7 @@ var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
-var _ChartActions = require("../../flux/actions/ChartActions");
+var _itemStore = require("../../flux/stores/itemStore");
 var _Buttons = require("../dialogs/Buttons");
 var _RowInputSelect = _interopRequireDefault(require("../dialogs/rows/RowInputSelect"));
 var _RowChart = _interopRequireDefault(require("../dialogs/rows/RowChart"));
@@ -82,20 +82,20 @@ const IEX_CLOUD_DATA_FEEDS = [{
   ADJUSTED = 'ADJUSTED',
   AV_DATA_FEEDS = [{
     c: 'Daily Adjusted (100)',
-    r: TS + "_DAILY_" + ADJUSTED + "&outputsize=compact"
+    r: `${TS}_DAILY_${ADJUSTED}&outputsize=compact`
   }, {
     c: 'Weekly Adjusted',
-    r: TS + "_WEEKLY_" + ADJUSTED
+    r: `${TS}_WEEKLY_${ADJUSTED}`
   }, {
     c: 'Monthly Adjusted',
-    r: TS + "_MONTHLY_" + ADJUSTED
+    r: `${TS}_MONTHLY_${ADJUSTED}`
   }].map(_ref2 => {
     let {
       c,
       r
     } = _ref2;
     return {
-      caption: "Alpha Vantage: " + c,
+      caption: `Alpha Vantage: ${c}`,
       value: 'AL',
       route: r,
       dfProps: {
@@ -152,7 +152,7 @@ const StocksBySectorDialog = (0, _memoIsShow.default)(_ref3 => {
         } = getDataSource() || DF_DATA_SOURCE;
       if (id) {
         const _chartTypeItem = getChartType();
-        _ChartActions.ChartActions[_ChartActions.CHAT_LOAD]({
+        (0, _itemStore.loadItem)({
           chartType: chartContainerType,
           browserType
         }, {
@@ -168,7 +168,7 @@ const StocksBySectorDialog = (0, _memoIsShow.default)(_ref3 => {
           title: text,
           value: id,
           loadId: value,
-          _itemKey: id + "_" + value,
+          _itemKey: `${id}_${value}`,
           linkFn: 'NASDAQ',
           dataSource: caption,
           ...dialogProps,
@@ -233,6 +233,5 @@ const StocksBySectorDialog = (0, _memoIsShow.default)(_ref3 => {
     })]
   });
 });
-var _default = StocksBySectorDialog;
-exports.default = _default;
+var _default = exports.default = StocksBySectorDialog;
 //# sourceMappingURL=StocksBySectorDialog.js.map
