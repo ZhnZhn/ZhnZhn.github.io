@@ -139,13 +139,18 @@ let _fromChart;
 export const copyChart = (chart) => {
   _fromChart = chart
 }
-const getCopyFromChart = () => _fromChart;
+export const getCopyFromChart = () => _fromChart;
 
-export const moveToTop = (chartType, id) => {
-  const chartSlice = toTop(CHARTS, chartType, id)
+export const moveToTop = (
+  chartType,
+  id
+) => {
+  const chartSlice = toTop(
+    CHARTS,
+    chartType,
+    id
+  )
   _setMsItemLoaded(chartSlice)
-  //set(_crMsItemLoaded({ chartSlice }))
-  //this.trigger(CHAT_SHOW, chartSlice);
 }
 
 const _cancelLoad = function(
@@ -155,7 +160,6 @@ const _cancelLoad = function(
   setAlertMsg(option, alertMsg);
 
   if (alertMsg === ERR_ALREADY_EXIST) {
-    //this.cancel(option)
     setAlertItemIdTo(option)
     showAlertDialog(option)
     moveToTop(option.chartType, option.key)
@@ -279,18 +283,14 @@ const _loadItemCompleted = (
     config,
     option,
     _dialogConf,
-    { getConfigs, getCopyFromChart }
+    { getConfigs }
   );
 
   addMenuItemCounter(chartType, browserType);
   if (chartSlice){
     _setMsItemLoaded(chartSlice)
-    //set(_crMsItemLoaded({ chartSlice }))
-    //this.trigger(CHAT_LOAD_COMPLETED, chartSlice);
   } else {
-    //console.log()
     set(_crMsItemInit({ Comp }))
-    //this.trigger(CHAT_INIT_AND_SHOW, Comp);
     hideAbout()
   }
   setLoadingComplete(limitRemaining)
@@ -318,9 +318,6 @@ export const loadItem = (confItem, option) => {
     )
   }
 }
-
-
-
 
 const _FN_NOOP = () => {}
 const SUBTITLE = 'Loaded from URL Query';
@@ -390,16 +387,12 @@ export const showItemsContainer = (
     chartType,
     browserType,
     dialogConf,
-    { getConfigs, getCopyFromChart }
+    { getConfigs }
   );
   if (chartSlice){
-    //console.log(chartSlice)
     _setMsItemLoaded(chartSlice)
-    //set(_crMsItemLoaded({...chartSlice}))
-    //this.trigger(CHAT_SHOW, chartSlice);
   } else {
     set(_crMsItemInit({ Comp }))
-    //this.trigger(CHAT_INIT_AND_SHOW, Comp)
     hideAbout()
   }
 }
@@ -423,8 +416,6 @@ export const closeChartItem = (
     minusMenuItemCounter(chartType, browserType);
 
     _setMsItemLoaded(chartSlice)
-    //set(_crMsItemLoaded({ chartSlice }))
-    //this.trigger(CHAT_CLOSE, chartSlice);
   }
 }
 
@@ -442,8 +433,6 @@ export const sortItemsBy = (
 ) => {
   const chartSlice = sortBy(CHARTS, chartType, by);
   _setMsItemLoaded(chartSlice)
-  //set(_crMsItemLoaded({ chartSlice }))
-  //this.trigger(CHAT_SHOW, chartSlice);
 }
 
 
@@ -454,7 +443,5 @@ export const removeItemsAll = (
   const chartSlice = removeAll(CHARTS, chartType);
   resetMenuItemCounter(chartType, browserType)
   uncheckActiveCheckbox()
-  _setMsItemLoaded(chartSlice)
-  //set(_crMsItemLoaded({ chartSlice }))
-  //this.trigger(CHAT_SHOW, chartSlice);
+  _setMsItemLoaded(chartSlice)  
 }

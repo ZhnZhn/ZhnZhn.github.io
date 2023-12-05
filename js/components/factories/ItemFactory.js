@@ -6,7 +6,7 @@ var _uiApi = require("../uiApi");
 var _ChartFn = require("../../charts/ChartFn");
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 var _chartCheckBoxLogic = require("../../flux/stores/chartCheckBoxLogic");
-var _ChartActions = require("../../flux/actions/ChartActions");
+var _itemStore = require("../../flux/stores/itemStore");
 var _CompItemType = require("../../constants/CompItemType");
 var _Items = require("../items/Items");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -24,17 +24,16 @@ const _fAddToWatch = (caption, config) => () => _ComponentActions.ComponentActio
   caption,
   config
 });
-const _fOnPasteToDialog = store => toChart => _ComponentActions.ComponentActions.showPasteTo({
+const _fOnPasteToDialog = () => toChart => _ComponentActions.ComponentActions.showPasteTo({
   toChart,
-  fromChart: store.getCopyFromChart()
+  fromChart: (0, _itemStore.getCopyFromChart)()
 });
 const _crAreaChart = _ref => {
   let {
     config,
     index,
     chartType,
-    props,
-    store
+    props
   } = _ref;
   const [id, key] = _getIdKey(config, index);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items.ChartItem, {
@@ -45,9 +44,9 @@ const _crAreaChart = _ref => {
     onAddToWatch: _fAddToWatch(id, config),
     ...props,
     crValueMoving: _ChartFn.crValueMoving,
-    onToTop: (0, _uiApi.bindTo)(_ChartActions.ChartActions[_ChartActions.CHAT_TO_TOP], chartType, id),
-    onCopy: _ChartActions.ChartActions[_ChartActions.CHAT_COPY],
-    onPasteTo: _fOnPasteToDialog(store),
+    onToTop: (0, _uiApi.bindTo)(_itemStore.moveToTop, chartType, id),
+    onCopy: _itemStore.copyChart,
+    onPasteTo: _fOnPasteToDialog(),
     onZoom: _ComponentActions.ComponentActions.zoom
   }, key);
 };

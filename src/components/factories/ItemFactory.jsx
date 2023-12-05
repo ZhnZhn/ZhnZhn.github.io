@@ -14,10 +14,11 @@ import {
   setActiveCheckbox
 } from '../../flux/stores/chartCheckBoxLogic';
 import {
-  CHAT_TO_TOP,
-  CHAT_COPY,
-  ChartActions
-} from '../../flux/actions/ChartActions';
+  moveToTop,
+  copyChart,
+  getCopyFromChart
+} from '../../flux/stores/itemStore';
+
 import {
   CIT_EUROSTAT_MAP,
   CIT_TABLE,
@@ -53,10 +54,10 @@ const _fAddToWatch = (
    config
  });
 
-const _fOnPasteToDialog = store => toChart =>
+const _fOnPasteToDialog = () => toChart =>
   ComponentActions.showPasteTo({
     toChart,
-    fromChart: store.getCopyFromChart()
+    fromChart: getCopyFromChart()
   });
 
 
@@ -64,8 +65,7 @@ const _crAreaChart = ({
   config,
   index,
   chartType,
-  props,
-  store
+  props
 }) => {
   const [id, key] = _getIdKey(config, index);
   return (
@@ -74,13 +74,13 @@ const _crAreaChart = ({
        chartType={chartType}
        caption={id}
        config={config}
-       onSetActive={setActiveCheckbox}       
+       onSetActive={setActiveCheckbox}
        onAddToWatch={_fAddToWatch(id, config)}
        {...props}
        crValueMoving={crValueMoving}
-       onToTop={bindTo(ChartActions[CHAT_TO_TOP], chartType, id)}
-       onCopy={ChartActions[CHAT_COPY]}
-       onPasteTo={_fOnPasteToDialog(store)}
+       onToTop={bindTo(moveToTop, chartType, id)}
+       onCopy={copyChart}
+       onPasteTo={_fOnPasteToDialog()}
        onZoom={ComponentActions.zoom}
     />
   );

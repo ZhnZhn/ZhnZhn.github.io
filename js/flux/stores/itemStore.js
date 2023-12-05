@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.useMsItemLoaded = exports.useMsInit = exports.updateMv = exports.sortItemsBy = exports.showItemsContainer = exports.removeItemsAll = exports.moveToTop = exports.loadItemByQuery = exports.loadItem = exports.isChartExist = exports.getConfigs = exports.copyChart = exports.closeChartItem = void 0;
+exports.useMsItemLoaded = exports.useMsInit = exports.updateMv = exports.sortItemsBy = exports.showItemsContainer = exports.removeItemsAll = exports.moveToTop = exports.loadItemByQuery = exports.loadItem = exports.isChartExist = exports.getCopyFromChart = exports.getConfigs = exports.copyChart = exports.closeChartItem = void 0;
 var _dateFn = require("../../utils/dateFn");
 var _Msg = require("../../constants/Msg");
 var _LogicFn = require("../logic/LogicFn");
@@ -74,17 +74,15 @@ const copyChart = chart => {
 };
 exports.copyChart = copyChart;
 const getCopyFromChart = () => _fromChart;
+exports.getCopyFromChart = getCopyFromChart;
 const moveToTop = (chartType, id) => {
   const chartSlice = (0, _ChartLogic.toTop)(CHARTS, chartType, id);
   _setMsItemLoaded(chartSlice);
-  //set(_crMsItemLoaded({ chartSlice }))
-  //this.trigger(CHAT_SHOW, chartSlice);
 };
 exports.moveToTop = moveToTop;
 const _cancelLoad = function (option, alertMsg) {
   (0, _Msg.setAlertMsg)(option, alertMsg);
   if (alertMsg === _Msg.ERR_ALREADY_EXIST) {
-    //this.cancel(option)
     (0, _ChartLogic.setAlertItemIdTo)(option);
     (0, _compStore.showAlertDialog)(option);
     moveToTop(option.chartType, option.key);
@@ -172,20 +170,15 @@ const _loadItemCompleted = (option, config) => {
       chartSlice,
       Comp
     } = (0, _ChartLogic.loadConfig)(CHARTS, config, option, _dialogConf, {
-      getConfigs,
-      getCopyFromChart
+      getConfigs
     });
   (0, _browserLogic.addMenuItemCounter)(chartType, browserType);
   if (chartSlice) {
     _setMsItemLoaded(chartSlice);
-    //set(_crMsItemLoaded({ chartSlice }))
-    //this.trigger(CHAT_LOAD_COMPLETED, chartSlice);
   } else {
-    //console.log()
     set(_crMsItemInit({
       Comp
     }));
-    //this.trigger(CHAT_INIT_AND_SHOW, Comp);
     (0, _compStore.hideAbout)();
   }
   (0, _loadingStore.setLoadingComplete)(limitRemaining);
@@ -265,19 +258,14 @@ const showItemsContainer = (chartType, browserType, dialogConfOr) => {
     chartSlice,
     Comp
   } = (0, _ChartLogic.showChart)(CHARTS, chartType, browserType, dialogConf, {
-    getConfigs,
-    getCopyFromChart
+    getConfigs
   });
   if (chartSlice) {
-    //console.log(chartSlice)
     _setMsItemLoaded(chartSlice);
-    //set(_crMsItemLoaded({...chartSlice}))
-    //this.trigger(CHAT_SHOW, chartSlice);
   } else {
     set(_crMsItemInit({
       Comp
     }));
-    //this.trigger(CHAT_INIT_AND_SHOW, Comp)
     (0, _compStore.hideAbout)();
   }
 };
@@ -291,8 +279,6 @@ const closeChartItem = (chartType, browserType, chartId) => {
     (0, _chartCheckBoxLogic.resetActiveChart)(chartId);
     (0, _browserLogic.minusMenuItemCounter)(chartType, browserType);
     _setMsItemLoaded(chartSlice);
-    //set(_crMsItemLoaded({ chartSlice }))
-    //this.trigger(CHAT_CLOSE, chartSlice);
   }
 };
 exports.closeChartItem = closeChartItem;
@@ -303,8 +289,6 @@ exports.updateMv = updateMv;
 const sortItemsBy = (chartType, by) => {
   const chartSlice = (0, _ChartLogic.sortBy)(CHARTS, chartType, by);
   _setMsItemLoaded(chartSlice);
-  //set(_crMsItemLoaded({ chartSlice }))
-  //this.trigger(CHAT_SHOW, chartSlice);
 };
 exports.sortItemsBy = sortItemsBy;
 const removeItemsAll = (chartType, browserType) => {
@@ -312,8 +296,6 @@ const removeItemsAll = (chartType, browserType) => {
   (0, _browserLogic.resetMenuItemCounter)(chartType, browserType);
   (0, _chartCheckBoxLogic.uncheckActiveCheckbox)();
   _setMsItemLoaded(chartSlice);
-  //set(_crMsItemLoaded({ chartSlice }))
-  //this.trigger(CHAT_SHOW, chartSlice);
 };
 exports.removeItemsAll = removeItemsAll;
 //# sourceMappingURL=itemStore.js.map
