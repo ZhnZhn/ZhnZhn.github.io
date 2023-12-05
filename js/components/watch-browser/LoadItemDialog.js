@@ -9,7 +9,7 @@ var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _dateFn = require("../../utils/dateFn");
 var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 var _has = require("../has");
-var _ChartActions = require("../../flux/actions/ChartActions");
+var _itemStore = require("../../flux/stores/itemStore");
 var _LoadType = require("../../constants/LoadType");
 var _BrowserType = require("../../constants/BrowserType");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
@@ -39,7 +39,7 @@ const _crValue = function (x, y) {
   if (y === void 0) {
     y = '';
   }
-  return ((0, _formatNumber.default)(y) + " " + (0, _dateFn.mlsToDmy)(x)).trim();
+  return `${(0, _formatNumber.default)(y)} ${(0, _dateFn.mlsToDmy)(x)}`.trim();
 };
 const HAS_WIDE_WIDTH = (0, _has.isWideWidth)(),
   DF_DATA = {},
@@ -122,7 +122,7 @@ const LoadItemDialog = (0, _memoIsShow.default)(_ref => {
             loadId: itemConf.loadId || _LoadType.LT_WL,
             ...itemConf
           };
-        _ChartActions.ChartActions[_ChartActions.CHAT_LOAD]({
+        (0, _itemStore.loadItem)({
           chartType: _LoadType.LT_WATCH_LIST,
           browserType: _BrowserType.BT_WATCH_LIST
         }, option);
@@ -197,10 +197,8 @@ LoadItemDialog.propTypes = {
     initToDate: PropTypes.string,
     onTestDate: PropTypes.func
   }),
-  store: PropTypes.object,
   onClose: PropTypes.func
 }
 */
-var _default = LoadItemDialog;
-exports.default = _default;
+var _default = exports.default = LoadItemDialog;
 //# sourceMappingURL=LoadItemDialog.js.map

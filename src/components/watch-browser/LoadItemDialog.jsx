@@ -20,9 +20,9 @@ import formatNumber from '../../utils/formatNumber';
 import { isWideWidth } from '../has';
 
 import {
-  CHAT_LOAD,
-  ChartActions
-} from '../../flux/actions/ChartActions';
+  loadItem
+} from '../../flux/stores/itemStore';
+
 import {
   LT_WL,
   LT_WATCH_LIST
@@ -150,7 +150,8 @@ const LoadItemDialog = memoIsShow(({
           loadId: itemConf.loadId || LT_WL,
           ...itemConf
        };
-      ChartActions[CHAT_LOAD]({
+
+      loadItem({
         chartType: LT_WATCH_LIST,
         browserType: BT_WATCH_LIST
       }, option);
@@ -245,7 +246,6 @@ LoadItemDialog.propTypes = {
     initToDate: PropTypes.string,
     onTestDate: PropTypes.func
   }),
-  store: PropTypes.object,
   onClose: PropTypes.func
 }
 */
