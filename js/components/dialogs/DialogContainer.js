@@ -17,30 +17,7 @@ const _setTypeTo = (prevState, type, option) => {
     ...prevState
   };
 };
-const _renderDialogs = (store, _ref, _handleClose) => {
-  let {
-    shows,
-    data,
-    dialogs
-  } = _ref;
-  return dialogs.map(_ref2 => {
-    let {
-      type,
-      comp
-    } = _ref2;
-    return (0, _uiApi.createElement)(comp, {
-      key: type,
-      isShow: shows[type],
-      data: data[type],
-      store: store,
-      onClose: (0, _uiApi.bindTo)(_handleClose, type)
-    });
-  });
-};
-const DialogContainer = _ref3 => {
-  let {
-    store
-  } = _ref3;
+const DialogContainer = () => {
   const [state, setState] = (0, _uiApi.useState)({
       isShow: false,
       inits: {},
@@ -51,7 +28,10 @@ const DialogContainer = _ref3 => {
     }),
     {
       isShow,
-      currentDialog
+      currentDialog,
+      shows,
+      data,
+      dialogs
     } = state,
     _hClose = (0, _uiApi.useCallback)(type => {
       setState(prevState => {
@@ -88,7 +68,18 @@ const DialogContainer = _ref3 => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialogContainer.default, {
     isShow: isShow,
     onClose: (0, _uiApi.bindTo)(_hClose, currentDialog),
-    children: _renderDialogs(store, state, _hClose)
+    children: dialogs.map(_ref => {
+      let {
+        type,
+        comp
+      } = _ref;
+      return (0, _uiApi.createElement)(comp, {
+        key: type,
+        isShow: shows[type],
+        data: data[type],
+        onClose: (0, _uiApi.bindTo)(_hClose, type)
+      });
+    })
   });
 };
 var _default = exports.default = DialogContainer;

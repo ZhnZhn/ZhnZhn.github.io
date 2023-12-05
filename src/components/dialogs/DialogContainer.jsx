@@ -22,23 +22,7 @@ const _setTypeTo = (
     return {...prevState};
 };
 
-const _renderDialogs = (
-  store,
-  { shows, data, dialogs },
-  _handleClose
-) => dialogs
-  .map(({ type, comp }) => createElement(comp, {
-     key: type,
-     isShow: shows[type],
-     data: data[type],
-     store: store,
-     onClose: bindTo(_handleClose, type)
-}));
-
-
-const DialogContainer = ({
-  store
-}) => {
+const DialogContainer = () => {
   const [
     state,
     setState
@@ -52,7 +36,10 @@ const DialogContainer = ({
   })
   , {
     isShow,
-    currentDialog
+    currentDialog,
+    shows,
+    data,
+    dialogs
   } = state
   , _hClose = useCallback(type => {
      setState(prevState => {
@@ -98,7 +85,12 @@ const DialogContainer = ({
        isShow={isShow}
        onClose={bindTo(_hClose, currentDialog)}
     >
-       {_renderDialogs(store, state, _hClose)}
+       {dialogs.map(({ type, comp }) => createElement(comp, {
+          key: type,
+          isShow: shows[type],
+          data: data[type],
+          onClose: bindTo(_hClose, type)
+       }))}
    </ModalDialogContainer>
   );
 };

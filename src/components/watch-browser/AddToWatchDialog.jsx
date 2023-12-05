@@ -46,7 +46,6 @@ const AddToWatchDialog = memoIsShow((
   , _prevProps = usePrevValue(props)
   , {
     isShow,
-    //store,
     data,
     onClose
   } = props
@@ -184,7 +183,7 @@ const AddToWatchDialog = memoIsShow((
       }
     }
   })
-  //_prevProps, props, isShow, store
+  //_prevProps, props, isShow
   //getGroupCaption, setGroupCaption, setListCaption
   //groupOptions, listOptions
   /*eslint-enable react-hooks/exhaustive-deps */
