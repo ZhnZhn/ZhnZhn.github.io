@@ -9,8 +9,7 @@ module.exports = {
   mode: "production",
   entry: {
      lib: [            
-            "react", "react-dom", "raven-js",
-            "reflux-core",            
+            "react", "react-dom", "raven-js",                       
             "big.js",
             "localforage",            
             "dompurify",
