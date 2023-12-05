@@ -1,35 +1,27 @@
-//import PropTypes from 'prop-types';
 import { useState } from '../uiApi';
-import useListen from '../hooks/useListen';
 
 const CL = "hrz-container";
 
 const CompContainer = ({
   className=CL,
-  addAction
+  useMsInit
 }) => {
   const [
     containers,
     setContainers
   ] = useState([]);
 
-  useListen((actionType, Comp) => {
-    if (actionType === addAction) {
-      setContainers(arrComp => [Comp, ...arrComp])
+  useMsInit(msInit => {
+    if (msInit && msInit.Comp) {
+      setContainers(arrComp => [msInit.Comp, ...arrComp])
     }
   })
+
   return (
     <div className={className}>
       {containers}
     </div>
   );
 }
-
-/*
-CompContainer.propTypes = {
-  className: PropTypes.string,
-  addAction: PropTypes.string
-}
-*/
 
 export default CompContainer
