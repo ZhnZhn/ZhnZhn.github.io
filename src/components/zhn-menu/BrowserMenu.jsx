@@ -1,7 +1,6 @@
 import { crScrollYCn } from '../styleFn';
 
 import useBrowserShow from '../hooks/useBrowserShow';
-import useListen from '../hooks/useListen';
 import useLoadMenu from './useLoadMenu';
 import useBrowserMenu from './useBrowserMenu';
 
@@ -21,9 +20,7 @@ const CL_SCROLL_MENU = crScrollYCn('scroll-menu')
 const BrowserMenu = (props) => {
   const {
     caption,
-    store,
     browserType,
-    updateAction,
     useMsBrowserLoad,
     onLoadMenu,
     children
@@ -34,8 +31,7 @@ const BrowserMenu = (props) => {
   ] = useBrowserShow(props)
   , [
     isLoading,
-    menu,
-    updateMenu
+    menu
   ] = useLoadMenu(
     isShow,
     onLoadMenu,
@@ -46,12 +42,6 @@ const BrowserMenu = (props) => {
      isShow,
      menu
   );
-
-  useListen((actionType, data) => {
-    if (data === browserType && actionType === updateAction) {
-      updateMenu(store.getBrowserMenu(browserType))
-    }
-  })
 
   return (
     <Browser
