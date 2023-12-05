@@ -4,12 +4,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("./uiApi");
-var _LocationSearch = _interopRequireDefault(require("../flux/logic/LocationSearch"));
-var _ChartStore = _interopRequireDefault(require("../flux/stores/ChartStore"));
+var _LocationSearch = require("../flux/logic/LocationSearch");
 var _settingStore = require("../flux/stores/settingStore");
 var _ComponentActions = require("../flux/actions/ComponentActions");
 var _browserStore = require("../flux/stores/browserStore");
-var _ChartActions = require("../flux/actions/ChartActions");
+var _itemStore = require("../flux/stores/itemStore");
 var _useHotKeysHandler = _interopRequireDefault(require("./hotkeys/useHotKeysHandler"));
 var _HeaderBar = _interopRequireDefault(require("./header/HeaderBar"));
 var _BrowserContainer = _interopRequireDefault(require("./browser-container/BrowserContainer"));
@@ -23,7 +22,7 @@ const BUILD_DATE = '30-11-2023',
 const showSettings = (0, _uiApi.bindTo)(_ComponentActions.ComponentActions.showSettings, (0, _settingStore.exportSettingFn)());
 const AppErc = () => {
   (0, _uiApi.useEffect)(() => {
-    _LocationSearch.default.load();
+    (0, _LocationSearch.showAskDialogIf)();
     (0, _checkBuild.default)(BUILD_DATE, _ComponentActions.ComponentActions.showReload);
   }, []);
   (0, _useHotKeysHandler.default)();
@@ -35,11 +34,9 @@ const AppErc = () => {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContainer.default, {
         useMsInitBrowser: _browserStore.useMsInitBrowser
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_About.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CompContainer.default, {
-        addAction: _ChartActions.CHAT_INIT_AND_SHOW
+        useMsInit: _itemStore.useMsInit
       })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {
-      store: _ChartStore.default
-    })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogContainer.default, {})]
   });
 };
 var _default = exports.default = AppErc;

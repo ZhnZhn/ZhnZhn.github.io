@@ -3,8 +3,7 @@ import {
   useEffect
 } from './uiApi';
 
-import LocationSearch from '../flux/logic/LocationSearch';
-import ChartStore from '../flux/stores/ChartStore';
+import { showAskDialogIf } from '../flux/logic/LocationSearch';
 import { exportSettingFn } from '../flux/stores/settingStore';
 
 import {
@@ -12,10 +11,10 @@ import {
 } from '../flux/actions/ComponentActions';
 import {
   useMsInitBrowser
-} from '../flux/stores/browserStore'
+} from '../flux/stores/browserStore';
 import {
-  CHAT_INIT_AND_SHOW
-} from '../flux/actions/ChartActions';
+  useMsInit
+} from '../flux/stores/itemStore';
 
 import useHotKeysHandler from './hotkeys/useHotKeysHandler';
 
@@ -38,7 +37,7 @@ const showSettings = bindTo(
 const AppErc = () => {
 
   useEffect(() => {
-    LocationSearch.load();
+    showAskDialogIf()
     checkBuild(BUILD_DATE, ComponentActions.showReload)
   }, [])
 
@@ -48,11 +47,15 @@ const AppErc = () => {
      <>
       <HeaderBar showSettings={showSettings} />
       <div className={CL_COMP_CONTAINER}>
-         <BrowserContainer useMsInitBrowser={useMsInitBrowser} />
+         <BrowserContainer
+            useMsInitBrowser={useMsInitBrowser}
+         />
          <About />
-         <CompContainer addAction={CHAT_INIT_AND_SHOW} />
+         <CompContainer
+            useMsInit={useMsInit}
+         />
        </div>
-       <DialogContainer store={ChartStore} />
+       <DialogContainer />
     </>
   );
 };
