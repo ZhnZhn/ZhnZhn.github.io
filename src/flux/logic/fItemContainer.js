@@ -47,8 +47,7 @@ const _crCaption = (
 
 export const crItemContainerEl = ({
   browserType,
-  dialogConf,
-  itemStoreApi
+  dialogConf
 }) => {
   const {
     type,
@@ -62,8 +61,7 @@ export const crItemContainerEl = ({
   return createElement(Comp, {
     key: _chartType,
     caption: _caption,
-    chartType: _chartType,
-    itemStoreApi,
+    chartType: _chartType,    
     browserType,
     contWidth,
     isAdminMode,

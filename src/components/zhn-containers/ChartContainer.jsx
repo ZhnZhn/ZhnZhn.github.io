@@ -13,7 +13,6 @@ import {
 
 import useBool from '../hooks/useBool';
 import useToggle from '../hooks/useToggle';
-import useListen from '../hooks/useListen';
 
 import useHmInstance from './useHmInstance';
 import useInitialWidth from './useInitialWidth';
@@ -22,12 +21,11 @@ import useCompareTo from './useCompareTo';
 
 import crChartContainerStyle from './crChartContainerStyle';
 
-import {
-  CHAT_SHOW,
-  CHAT_LOAD_COMPLETED,
-  CHAT_CLOSE
-} from '../../flux/actions/ChartActions';
 import { useMsChartCont } from '../../flux/stores/compStore';
+import {
+  useMsItemLoaded,
+  getConfigs
+} from '../../flux/stores/itemStore';
 
 import crModelMore from './crModelMore';
 import forEachInstance from './forEachInstance';
@@ -59,18 +57,7 @@ const CL_SCROLL_ITEMS = crScrollYCn('scroll-items')
   top: -3
 };
 
-
-const CHAT_ACTIONS = [
-  CHAT_SHOW,
-  CHAT_LOAD_COMPLETED,
-  CHAT_CLOSE
-];
-
 const _isFn = fn => typeof fn === "function";
-const _isInArray = (
-  arr=[],
-  value
-) => Boolean(~arr.indexOf(value))
 
 const _crFnByNameArgs = (
   ref,
@@ -117,7 +104,6 @@ const _hasBtsResize = (
 const DF_ONS_SET_ACTIVE = () => {};
 
 const ChartContainer = ({
-  store,
   chartType,
   browserType,
   contWidth,
@@ -232,7 +218,7 @@ const ChartContainer = ({
   useEffect(() => {
     setState(prevState => ({
       ...prevState,
-      ...store.getConfigs(chartType)
+      ...getConfigs(chartType)
     }))
   }, [])
   // store, chartType
@@ -244,18 +230,16 @@ const ChartContainer = ({
     }
   })
 
-  useListen((actionType, data) => {
-     if (_isDataForContainer(data, chartType)
-       && _isInArray(CHAT_ACTIONS, actionType)
-     ) {
-        if (actionType !== CHAT_CLOSE) {
-          (getRefValue(_refSpComp) || {}).scrollTop = 0
-        }
-        setState(prevState => ({
-         ...prevState,
-         ...data
-        }));
-     }
+  useMsItemLoaded(msItemLoaded => {
+    if (msItemLoaded && _isDataForContainer(msItemLoaded, chartType)) {
+      if (msItemLoaded.isShow) {
+        (getRefValue(_refSpComp) || {}).scrollTop = 0
+      }
+      setState(prevState => ({
+        ...prevState,
+        ...msItemLoaded
+      }));
+    }
   })
 
   const [
@@ -314,7 +298,6 @@ const ChartContainer = ({
            refChartFn={_refChartFn}
            isAdminMode={isAdminMode}
            configs={configs}
-           store={store}
            chartType={chartType}
            browserType={browserType}
            onCloseItem={onCloseItem}

@@ -31,8 +31,7 @@ const _crCaption = (dialogConf, browserType) => {
 const crItemContainerEl = _ref => {
   let {
     browserType,
-    dialogConf,
-    itemStoreApi
+    dialogConf
   } = _ref;
   const {
       type,
@@ -46,7 +45,6 @@ const crItemContainerEl = _ref => {
     key: _chartType,
     caption: _caption,
     chartType: _chartType,
-    itemStoreApi,
     browserType,
     contWidth,
     isAdminMode: _settingStore.isAdminMode,

@@ -9,7 +9,6 @@ const ChartList = _ref => {
   let {
     refChartFn,
     configs,
-    store,
     chartType,
     browserType,
     isAdminMode,
@@ -25,7 +24,6 @@ const ChartList = _ref => {
           id
         } = zhConfig || {};
       return (0, _ItemFactory.crItem)({
-        store,
         config,
         index,
         chartType,
@@ -38,6 +36,5 @@ const ChartList = _ref => {
     })
   });
 };
-var _default = ChartList;
-exports.default = _default;
+var _default = exports.default = ChartList;
 //# sourceMappingURL=ChartList.js.map

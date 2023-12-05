@@ -33,7 +33,7 @@ const _initChartSlice = (slice, chartType, config) => {
     };
   }
 };
-const loadConfig = (slice, config, option, dialogConf, itemStoreApi) => {
+const loadConfig = (slice, config, option, dialogConf) => {
   const {
       chartType,
       browserType
@@ -53,14 +53,13 @@ const loadConfig = (slice, config, option, dialogConf, itemStoreApi) => {
     return {
       Comp: (0, _fItemContainer.crItemContainerEl)({
         browserType,
-        dialogConf,
-        itemStoreApi
+        dialogConf
       })
     };
   }
 };
 exports.loadConfig = loadConfig;
-const showChart = (slice, chartType, browserType, dialogConf, itemStoreApi) => {
+const showChart = (slice, chartType, browserType, dialogConf) => {
   const {
     chartSlice
   } = (0, _getSlice.default)(slice, chartType);
@@ -74,8 +73,7 @@ const showChart = (slice, chartType, browserType, dialogConf, itemStoreApi) => {
     return {
       Comp: (0, _fItemContainer.crItemContainerEl)({
         browserType,
-        dialogConf,
-        itemStoreApi
+        dialogConf
       })
     };
   }

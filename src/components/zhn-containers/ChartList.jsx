@@ -4,7 +4,6 @@ import { crItem } from '../factories/ItemFactory';
 const ChartList = ({
   refChartFn,
   configs,
-  store,
   chartType,
   browserType,
   isAdminMode,
@@ -16,8 +15,8 @@ const ChartList = ({
        const { zhConfig, zhCompType } = config
        , { id } = zhConfig || {};
        return crItem({
-         store,
-         config, index,
+         config,
+         index,
          chartType,
          props: {
            isAdminMode,
@@ -30,6 +29,5 @@ const ChartList = ({
    })}
  </div>
 );
-
 
 export default ChartList

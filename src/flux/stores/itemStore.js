@@ -282,8 +282,7 @@ const _loadItemCompleted = (
     CHARTS,
     config,
     option,
-    _dialogConf,
-    { getConfigs }
+    _dialogConf
   );
 
   addMenuItemCounter(chartType, browserType);
@@ -386,8 +385,7 @@ export const showItemsContainer = (
     CHARTS,
     chartType,
     browserType,
-    dialogConf,
-    { getConfigs }
+    dialogConf
   );
   if (chartSlice){
     _setMsItemLoaded(chartSlice)
@@ -443,5 +441,5 @@ export const removeItemsAll = (
   const chartSlice = removeAll(CHARTS, chartType);
   resetMenuItemCounter(chartType, browserType)
   uncheckActiveCheckbox()
-  _setMsItemLoaded(chartSlice)  
+  _setMsItemLoaded(chartSlice)
 }

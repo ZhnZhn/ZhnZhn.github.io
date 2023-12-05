@@ -169,9 +169,7 @@ const _loadItemCompleted = (option, config) => {
     {
       chartSlice,
       Comp
-    } = (0, _ChartLogic.loadConfig)(CHARTS, config, option, _dialogConf, {
-      getConfigs
-    });
+    } = (0, _ChartLogic.loadConfig)(CHARTS, config, option, _dialogConf);
   (0, _browserLogic.addMenuItemCounter)(chartType, browserType);
   if (chartSlice) {
     _setMsItemLoaded(chartSlice);
@@ -257,9 +255,7 @@ const showItemsContainer = (chartType, browserType, dialogConfOr) => {
   const {
     chartSlice,
     Comp
-  } = (0, _ChartLogic.showChart)(CHARTS, chartType, browserType, dialogConf, {
-    getConfigs
-  });
+  } = (0, _ChartLogic.showChart)(CHARTS, chartType, browserType, dialogConf);
   if (chartSlice) {
     _setMsItemLoaded(chartSlice);
   } else {

@@ -7,14 +7,13 @@ var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-var _useListen = _interopRequireDefault(require("../hooks/useListen"));
 var _useHmInstance = _interopRequireDefault(require("./useHmInstance"));
 var _useInitialWidth = _interopRequireDefault(require("./useInitialWidth"));
 var _useSetActiveCheckBox = _interopRequireDefault(require("./useSetActiveCheckBox"));
 var _useCompareTo = _interopRequireDefault(require("./useCompareTo"));
 var _crChartContainerStyle = _interopRequireDefault(require("./crChartContainerStyle"));
-var _ChartActions = require("../../flux/actions/ChartActions");
 var _compStore = require("../../flux/stores/compStore");
+var _itemStore = require("../../flux/stores/itemStore");
 var _crModelMore = _interopRequireDefault(require("./crModelMore"));
 var _forEachInstance = _interopRequireDefault(require("./forEachInstance"));
 var _Comp = _interopRequireDefault(require("../Comp"));
@@ -43,14 +42,7 @@ const CL_SCROLL_ITEMS = (0, _styleFn.crScrollYCn)('scroll-items'),
     position: 'relative',
     top: -3
   };
-const CHAT_ACTIONS = [_ChartActions.CHAT_SHOW, _ChartActions.CHAT_LOAD_COMPLETED, _ChartActions.CHAT_CLOSE];
 const _isFn = fn => typeof fn === "function";
-const _isInArray = function (arr, value) {
-  if (arr === void 0) {
-    arr = [];
-  }
-  return Boolean(~arr.indexOf(value));
-};
 const _crFnByNameArgs = function (ref, methodName) {
   for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
     args[_key - 2] = arguments[_key];
@@ -81,7 +73,6 @@ const _hasBtsResize = (refEl, initialWidth, caption) => {
 const DF_ONS_SET_ACTIVE = () => {};
 const ChartContainer = _ref => {
   let {
-    store,
     chartType,
     browserType,
     contWidth,
@@ -159,7 +150,7 @@ const ChartContainer = _ref => {
   (0, _uiApi.useEffect)(() => {
     setState(prevState => ({
       ...prevState,
-      ...store.getConfigs(chartType)
+      ...(0, _itemStore.getConfigs)(chartType)
     }));
   }, []);
   // store, chartType
@@ -170,14 +161,14 @@ const ChartContainer = _ref => {
       _hHide();
     }
   });
-  (0, _useListen.default)((actionType, data) => {
-    if (_isDataForContainer(data, chartType) && _isInArray(CHAT_ACTIONS, actionType)) {
-      if (actionType !== _ChartActions.CHAT_CLOSE) {
+  (0, _itemStore.useMsItemLoaded)(msItemLoaded => {
+    if (msItemLoaded && _isDataForContainer(msItemLoaded, chartType)) {
+      if (msItemLoaded.isShow) {
         ((0, _uiApi.getRefValue)(_refSpComp) || {}).scrollTop = 0;
       }
       setState(prevState => ({
         ...prevState,
-        ...data
+        ...msItemLoaded
       }));
     }
   });
@@ -225,7 +216,6 @@ const ChartContainer = _ref => {
         refChartFn: _refChartFn,
         isAdminMode: isAdminMode,
         configs: configs,
-        store: store,
         chartType: chartType,
         browserType: browserType,
         onCloseItem: onCloseItem
