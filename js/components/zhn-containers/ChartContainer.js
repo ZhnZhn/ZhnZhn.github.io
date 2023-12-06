@@ -6,7 +6,6 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useBool = _interopRequireDefault(require("../hooks/useBool"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useHmInstance = _interopRequireDefault(require("./useHmInstance"));
 var _useInitialWidth = _interopRequireDefault(require("./useInitialWidth"));
 var _useSetActiveCheckBox = _interopRequireDefault(require("./useSetActiveCheckBox"));
@@ -88,21 +87,19 @@ const ChartContainer = _ref => {
   const _refRootElement = (0, _uiApi.useRef)(),
     _refSpComp = (0, _uiApi.useRef)(),
     _refResize = (0, _uiApi.useRef)(),
-    [_refHm, _refChartFn] = (0, _useHmInstance.default)(),
-    [state, setState] = (0, _uiApi.useState)(() => (0, _itemStore.getConfigs)(chartType))
+    [_refHm, _refChartFn] = (0, _useHmInstance.default)()
     //{ isShow: false, configs: [], chartType }
     ,
+    [state, setState] = (0, _uiApi.useState)(() => (0, _itemStore.getConfigs)(chartType)),
     {
       isShow,
       configs
     } = state,
     [isCompareTo, _onCompareTo, _closeCompareTo] = (0, _useBool.default)(),
-    [isMore, _hToggleMore] = (0, _useToggle.default)(),
+    [isMenuMore, _showMenuMore, _hideMenuMore] = (0, _useBool.default)(),
     [_initialWidthStyle, _INITIAL_WIDTH, _MIN_WIDTH] = (0, _useInitialWidth.default)(contWidth)
     /*eslint-disable react-hooks/exhaustive-deps */,
-    [_showMore, _hHide, _hResizeAfter, _onShowCaptions] = (0, _uiApi.useMemo)(() => [() => {
-      _hToggleMore(true);
-    }, () => {
+    [_hHide, _hResizeAfter, _onShowCaptions] = (0, _uiApi.useMemo)(() => [() => {
       onCloseContainer();
       setState(prevState => ({
         ...prevState,
@@ -168,17 +165,17 @@ const ChartContainer = _ref => {
       ..._style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ModalSlider, {
-      isShow: isMore,
+      isShow: isMenuMore,
       className: CL_MENU_MORE,
       model: _modelMore,
-      onClose: _hToggleMore
+      onClose: _hideMenuMore
     }), _isAdminMode && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalCompareTo.default, {
       isShow: isCompareTo,
       onClose: _closeCompareTo,
       onCompareTo: _compareTo
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.BrowserCaption, {
       style: S_BR_CAPTION,
-      onMore: _showMore,
+      onMore: _showMenuMore,
       onCheck: _hSetActive,
       onUnCheck: _hSetNotActive,
       caption: caption,

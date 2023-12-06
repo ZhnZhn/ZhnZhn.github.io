@@ -11,7 +11,6 @@ import {
 } from '../styleFn';
 
 import useBool from '../hooks/useBool';
-import useToggle from '../hooks/useToggle';
 
 import useHmInstance from './useHmInstance';
 import useInitialWidth from './useInitialWidth';
@@ -122,11 +121,11 @@ const ChartContainer = ({
     _refHm,
     _refChartFn
   ] = useHmInstance()
+  //{ isShow: false, configs: [], chartType }
   , [
     state,
     setState
-  ] = useState(() => getConfigs(chartType))
-  //{ isShow: false, configs: [], chartType }
+  ] = useState(() => getConfigs(chartType))  
   , {
     isShow,
     configs
@@ -137,9 +136,10 @@ const ChartContainer = ({
     _closeCompareTo
   ] = useBool()
   , [
-    isMore,
-    _hToggleMore
-  ] = useToggle()
+    isMenuMore,
+    _showMenuMore,
+    _hideMenuMore
+  ] = useBool()
   , [
     _initialWidthStyle,
     _INITIAL_WIDTH,
@@ -147,14 +147,10 @@ const ChartContainer = ({
   ] = useInitialWidth(contWidth)
   /*eslint-disable react-hooks/exhaustive-deps */
   , [
-    _showMore,
     _hHide,
     _hResizeAfter,
     _onShowCaptions
   ] = useMemo(() => [
-    () => {
-      _hToggleMore(true)
-    },
     () => {
       onCloseContainer()
       setState(prevState => ({
@@ -243,10 +239,10 @@ const ChartContainer = ({
        }}
     >
       <A.ModalSlider
-        isShow={isMore}
+        isShow={isMenuMore}
         className={CL_MENU_MORE}
         model={_modelMore}
-        onClose={_hToggleMore}
+        onClose={_hideMenuMore}
       />
       { _isAdminMode && <ModalCompareTo
           isShow={isCompareTo}
@@ -256,7 +252,7 @@ const ChartContainer = ({
       }
       <A.BrowserCaption
          style={S_BR_CAPTION}
-         onMore={_showMore}
+         onMore={_showMenuMore}
          onCheck={_hSetActive}
          onUnCheck={_hSetNotActive}
          caption={caption}
