@@ -2,7 +2,6 @@ import {
   useRef,
   useState,
   useMemo,
-  useEffect,
   getRefValue,
   getRefElementStyle
 } from '../uiApi';
@@ -23,8 +22,8 @@ import crChartContainerStyle from './crChartContainerStyle';
 
 import { useMsChartCont } from '../../flux/stores/compStore';
 import {
-  useMsItemLoaded,
-  getConfigs
+  getConfigs,
+  useMsItemLoaded
 } from '../../flux/stores/itemStore';
 
 import crModelMore from './crModelMore';
@@ -126,11 +125,8 @@ const ChartContainer = ({
   , [
     state,
     setState
-  ] = useState(() => ({
-    isShow: false,
-    configs: [],
-    chartType
-  }))
+  ] = useState(() => getConfigs(chartType))
+  //{ isShow: false, configs: [], chartType }
   , {
     isShow,
     configs
@@ -213,16 +209,6 @@ const ChartContainer = ({
      browserType,
      onSetActive
   );
-
-  /*eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
-    setState(prevState => ({
-      ...prevState,
-      ...getConfigs(chartType)
-    }))
-  }, [])
-  // store, chartType
-  /*eslint-enable react-hooks/exhaustive-deps */
 
   useMsChartCont(msChartCont => {
     if (msChartCont && msChartCont.id === chartType) {

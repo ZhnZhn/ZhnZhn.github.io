@@ -89,11 +89,9 @@ const ChartContainer = _ref => {
     _refSpComp = (0, _uiApi.useRef)(),
     _refResize = (0, _uiApi.useRef)(),
     [_refHm, _refChartFn] = (0, _useHmInstance.default)(),
-    [state, setState] = (0, _uiApi.useState)(() => ({
-      isShow: false,
-      configs: [],
-      chartType
-    })),
+    [state, setState] = (0, _uiApi.useState)(() => (0, _itemStore.getConfigs)(chartType))
+    //{ isShow: false, configs: [], chartType }
+    ,
     {
       isShow,
       configs
@@ -145,17 +143,6 @@ const ChartContainer = _ref => {
     /*eslint-enable react-hooks/exhaustive-deps */,
     _compareTo = (0, _useCompareTo.default)(_refHm, updateMovingValues),
     [_hSetActive, _hSetNotActive] = (0, _useSetActiveCheckBox.default)(chartType, browserType, onSetActive);
-
-  /*eslint-disable react-hooks/exhaustive-deps */
-  (0, _uiApi.useEffect)(() => {
-    setState(prevState => ({
-      ...prevState,
-      ...(0, _itemStore.getConfigs)(chartType)
-    }));
-  }, []);
-  // store, chartType
-  /*eslint-enable react-hooks/exhaustive-deps */
-
   (0, _compStore.useMsChartCont)(msChartCont => {
     if (msChartCont && msChartCont.id === chartType) {
       _hHide();
