@@ -8,9 +8,9 @@ var _forEachInstance = _interopRequireDefault(require("./forEachInstance"));
 const _isFn = v => typeof v === 'function';
 
 /*eslint-disable react-hooks/exhaustive-deps */
-const useCompareTo = (refHm, updateMovingValues) => (0, _uiApi.useCallback)(dateTo => {
+const useCompareTo = (hmInstances, updateMovingValues) => (0, _uiApi.useCallback)(dateTo => {
   const _valueMoves = [],
-    itemsLength = (0, _forEachInstance.default)(refHm, refInst => {
+    itemsLength = (0, _forEachInstance.default)(hmInstances, refInst => {
       if (_isFn(refInst.compareTo)) {
         _valueMoves.push(refInst.compareTo(dateTo));
       }
@@ -23,6 +23,5 @@ const useCompareTo = (refHm, updateMovingValues) => (0, _uiApi.useCallback)(date
 }, []);
 // refHm, updateMovingValues
 /*eslint-enable react-hooks/exhaustive-deps */
-var _default = useCompareTo;
-exports.default = _default;
+var _default = exports.default = useCompareTo;
 //# sourceMappingURL=useCompareTo.js.map

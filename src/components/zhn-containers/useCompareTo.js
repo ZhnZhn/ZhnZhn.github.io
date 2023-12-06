@@ -5,11 +5,11 @@ const _isFn = v => typeof v === 'function';
 
 /*eslint-disable react-hooks/exhaustive-deps */
 const useCompareTo = (
-  refHm,
+  hmInstances,
   updateMovingValues
 ) => useCallback(dateTo => {
   const _valueMoves = []
-  , itemsLength = forEachInstance(refHm, refInst => {
+  , itemsLength = forEachInstance(hmInstances, refInst => {
     if (_isFn(refInst.compareTo)){
       _valueMoves.push(refInst.compareTo(dateTo))
     }

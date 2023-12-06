@@ -1,21 +1,23 @@
-import { 
-  useRef,
-  useCallback
-} from '../uiApi';
+import { useCallback } from '../uiApi';
 
-const _crItemRefPropName = index => 'chart' + index;
-const _hmInstances = Object.create(null);
+import useRefInit from '../hooks/useRefInit';
+
+const _crItemRefPropName = index => 'chart' + index
+, _crInitialValue = () => Object.create(null);
 
 const useHmInstance = () => {
-  const _refHm = useRef(_hmInstances)
-  , _hmInstanceFn = useCallback((
+  const _hmInstances = useRefInit(_crInitialValue)
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , _addToHmInstances = useCallback((
       index,
       compInstance
-    ) => _refHm.current[_crItemRefPropName(index)] = compInstance
+    ) => _hmInstances[_crItemRefPropName(index)] = compInstance
   , []);
+  // _hmInstances
+  /*eslint-enable react-hooks/exhaustive-deps */
   return [
-    _refHm,
-    _hmInstanceFn
+    _hmInstances,
+    _addToHmInstances
   ];
 };
 

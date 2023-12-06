@@ -118,22 +118,22 @@ const ChartContainer = ({
   , _refSpComp = useRef()
   , _refResize = useRef()
   , [
-    _refHm,
+    _hmCharts,
     _refChartFn
   ] = useHmInstance()
   //{ isShow: false, configs: [], chartType }
   , [
     state,
     setState
-  ] = useState(() => getConfigs(chartType))  
+  ] = useState(() => getConfigs(chartType))
   , {
     isShow,
     configs
   } = state
   , [
     isCompareTo,
-    _onCompareTo,
-    _closeCompareTo
+    _showCompareTo,
+    _hideCompareTo
   ] = useBool()
   , [
     isMenuMore,
@@ -159,22 +159,26 @@ const ChartContainer = ({
       }))
     },
     (parentWidth) => {
-      forEachInstance(_refHm, _fReflowChartByRef(parentWidth))
+      forEachInstance(_hmCharts, _fReflowChartByRef(parentWidth))
     },
     () => {
-      forEachInstance(_refHm, _showCaptionByRef)
+      forEachInstance(_hmCharts, _showCaptionByRef)
     }
   ], [])
   // _hToggleMore, onCloseContainer
-  // _refHm
+  // _hmCharts
   /*eslint-enable react-hooks/exhaustive-deps */
 
+  /*eslint-disable react-hooks/exhaustive-deps */
   , _fitToWidth = useMemo(() => () => {
     const { width } = getRefElementStyle(_refRootElement) || {};
     if (width) {
       _hResizeAfter(parseInt(width, 10))
     }
-  }, [_hResizeAfter])
+  }, [])
+  // _hResizeAfter
+  /*eslint-enable react-hooks/exhaustive-deps */
+
   , _isAdminMode = isAdminMode()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _modelMore = useMemo(() => crModelMore(_isAdminMode, {
@@ -186,7 +190,7 @@ const ChartContainer = ({
       onShowCaptions: _onShowCaptions,
       onSortBy,
       onRemoveAll,
-      onCompareTo: _onCompareTo
+      onCompareTo: _showCompareTo
   }), [_isAdminMode])
   // _INITIAL_WIDTH, _MIN_WIDTH
   // _fitToWidth, _onCompareTo, _onShowCaptions
@@ -194,7 +198,7 @@ const ChartContainer = ({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   , _compareTo = useCompareTo(
-     _refHm,
+     _hmCharts,
      updateMovingValues
   )
   , [
@@ -246,7 +250,7 @@ const ChartContainer = ({
       />
       { _isAdminMode && <ModalCompareTo
           isShow={isCompareTo}
-          onClose={_closeCompareTo}
+          onClose={_hideCompareTo}
           onCompareTo={_compareTo}
         />
       }

@@ -87,7 +87,7 @@ const ChartContainer = _ref => {
   const _refRootElement = (0, _uiApi.useRef)(),
     _refSpComp = (0, _uiApi.useRef)(),
     _refResize = (0, _uiApi.useRef)(),
-    [_refHm, _refChartFn] = (0, _useHmInstance.default)()
+    [_hmCharts, _refChartFn] = (0, _useHmInstance.default)()
     //{ isShow: false, configs: [], chartType }
     ,
     [state, setState] = (0, _uiApi.useState)(() => (0, _itemStore.getConfigs)(chartType)),
@@ -95,7 +95,7 @@ const ChartContainer = _ref => {
       isShow,
       configs
     } = state,
-    [isCompareTo, _onCompareTo, _closeCompareTo] = (0, _useBool.default)(),
+    [isCompareTo, _showCompareTo, _hideCompareTo] = (0, _useBool.default)(),
     [isMenuMore, _showMenuMore, _hideMenuMore] = (0, _useBool.default)(),
     [_initialWidthStyle, _INITIAL_WIDTH, _MIN_WIDTH] = (0, _useInitialWidth.default)(contWidth)
     /*eslint-disable react-hooks/exhaustive-deps */,
@@ -106,13 +106,15 @@ const ChartContainer = _ref => {
         isShow: false
       }));
     }, parentWidth => {
-      (0, _forEachInstance.default)(_refHm, _fReflowChartByRef(parentWidth));
+      (0, _forEachInstance.default)(_hmCharts, _fReflowChartByRef(parentWidth));
     }, () => {
-      (0, _forEachInstance.default)(_refHm, _showCaptionByRef);
+      (0, _forEachInstance.default)(_hmCharts, _showCaptionByRef);
     }], [])
     // _hToggleMore, onCloseContainer
-    // _refHm
-    /*eslint-enable react-hooks/exhaustive-deps */,
+    // _hmCharts
+    /*eslint-enable react-hooks/exhaustive-deps */
+
+    /*eslint-disable react-hooks/exhaustive-deps */,
     _fitToWidth = (0, _uiApi.useMemo)(() => () => {
       const {
         width
@@ -120,7 +122,9 @@ const ChartContainer = _ref => {
       if (width) {
         _hResizeAfter(parseInt(width, 10));
       }
-    }, [_hResizeAfter]),
+    }, [])
+    // _hResizeAfter
+    /*eslint-enable react-hooks/exhaustive-deps */,
     _isAdminMode = isAdminMode()
     /*eslint-disable react-hooks/exhaustive-deps */,
     _modelMore = (0, _uiApi.useMemo)(() => (0, _crModelMore.default)(_isAdminMode, {
@@ -132,13 +136,13 @@ const ChartContainer = _ref => {
       onShowCaptions: _onShowCaptions,
       onSortBy,
       onRemoveAll,
-      onCompareTo: _onCompareTo
+      onCompareTo: _showCompareTo
     }), [_isAdminMode])
     // _INITIAL_WIDTH, _MIN_WIDTH
     // _fitToWidth, _onCompareTo, _onShowCaptions
     // onRemoveAll, onSortBy
     /*eslint-enable react-hooks/exhaustive-deps */,
-    _compareTo = (0, _useCompareTo.default)(_refHm, updateMovingValues),
+    _compareTo = (0, _useCompareTo.default)(_hmCharts, updateMovingValues),
     [_hSetActive, _hSetNotActive] = (0, _useSetActiveCheckBox.default)(chartType, browserType, onSetActive);
   (0, _compStore.useMsChartCont)(msChartCont => {
     if (msChartCont && msChartCont.id === chartType) {
@@ -171,7 +175,7 @@ const ChartContainer = _ref => {
       onClose: _hideMenuMore
     }), _isAdminMode && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalCompareTo.default, {
       isShow: isCompareTo,
-      onClose: _closeCompareTo,
+      onClose: _hideCompareTo,
       onCompareTo: _compareTo
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.BrowserCaption, {
       style: S_BR_CAPTION,

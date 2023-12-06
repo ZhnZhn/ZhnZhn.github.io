@@ -1,15 +1,19 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-const _crItemRefPropName = index => 'chart' + index;
-const _hmInstances = Object.create(null);
+var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
+const _crItemRefPropName = index => 'chart' + index,
+  _crInitialValue = () => Object.create(null);
 const useHmInstance = () => {
-  const _refHm = (0, _uiApi.useRef)(_hmInstances),
-    _hmInstanceFn = (0, _uiApi.useCallback)((index, compInstance) => _refHm.current[_crItemRefPropName(index)] = compInstance, []);
-  return [_refHm, _hmInstanceFn];
+  const _hmInstances = (0, _useRefInit.default)(_crInitialValue)
+    /*eslint-disable react-hooks/exhaustive-deps */,
+    _addToHmInstances = (0, _uiApi.useCallback)((index, compInstance) => _hmInstances[_crItemRefPropName(index)] = compInstance, []);
+  // _hmInstances
+  /*eslint-enable react-hooks/exhaustive-deps */
+  return [_hmInstances, _addToHmInstances];
 };
-var _default = useHmInstance;
-exports.default = _default;
+var _default = exports.default = useHmInstance;
 //# sourceMappingURL=useHmInstance.js.map

@@ -1,17 +1,15 @@
 const _getObjectKeys = Object.keys;
 
 const forEachInstance = (
-  refHm,
+  hmInstances,
   onInstance
-) => {
-  const _hmInstances = refHm.current;
-  return _getObjectKeys(_hmInstances)
-   .reduce((numberOfInstance, propName) => {
-      const _refInstance = _hmInstances[propName];
-      return _refInstance
-        ? (onInstance(_refInstance), ++numberOfInstance)
-        : numberOfInstance;
-   }, 0);
-};
+) => _getObjectKeys(hmInstances)
+  .reduce((numberOfInstance, propName) => {
+     const _refInstance = hmInstances[propName];
+     return _refInstance
+       ? (onInstance(_refInstance), ++numberOfInstance)
+       : numberOfInstance;
+  }, 0);
+
 
 export default forEachInstance
