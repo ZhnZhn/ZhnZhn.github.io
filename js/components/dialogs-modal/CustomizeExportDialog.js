@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _merge = _interopRequireDefault(require("../../utils/merge"));
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
@@ -117,9 +118,8 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
       fn
     } = data,
     _hExport = (0, _useEventCallback.default)(() => {
-      var _chart$userOptions$zh, _chart$userOptions$zh2;
       const [width, height] = _getDimension(chart, (0, _uiApi.getInputValue)(_refInputWidth), (0, _uiApi.getInputValue)(_refInputHeight)),
-        _customOption = (0, _ChartExportConfig.merge)(true, {
+        _customOption = (0, _merge.default)(true, {
           chart: {
             width,
             height
@@ -131,7 +131,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
             text: (0, _uiApi.getInputValue)(_refInputSubtitle)
           },
           labels: {
-            items: [_crItemLabel(APP_HTML), _crItemLabel("DataSource: " + ((_chart$userOptions$zh = (_chart$userOptions$zh2 = chart.userOptions.zhConfig) == null ? void 0 : _chart$userOptions$zh2.dataSource) != null ? _chart$userOptions$zh : ''), height - DS_TOP_PADDING, DS_FONT_SIZE)]
+            items: [_crItemLabel(APP_HTML), _crItemLabel(`DataSource: ${chart.userOptions.zhConfig?.dataSource ?? ''}`, height - DS_TOP_PADDING, DS_FONT_SIZE)]
           }
         }, (0, _uiApi.getRefValue)(_refExportStyle));
       fn.apply(chart, [null, _customOption]);
@@ -227,6 +227,5 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     })]
   });
 });
-var _default = CustomizeExportDialog;
-exports.default = _default;
+var _default = exports.default = CustomizeExportDialog;
 //# sourceMappingURL=CustomizeExportDialog.js.map

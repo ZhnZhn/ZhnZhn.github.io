@@ -1,5 +1,5 @@
-import Highcharts from 'highcharts';
 import domSanitize from '../utils/domSanitize';
+import merge from '../utils/merge';
 
 import {
   COLOR_CHART_TITLE,
@@ -15,7 +15,6 @@ import {
 } from '../constants/Color';
 import { tooltipValueTdmyIf } from './Tooltip';
 
-const merge = Highcharts.merge;
 const _isStr = str => typeof str === 'string';
 
 const FONT_STYLE = {

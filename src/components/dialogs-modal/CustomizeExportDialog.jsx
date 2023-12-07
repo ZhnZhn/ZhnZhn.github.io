@@ -1,3 +1,5 @@
+import merge from '../../utils/merge';
+
 import {
   useRef,
   useMemo,
@@ -11,10 +13,7 @@ import useToggle from '../hooks/useToggle';
 import useRefInit from '../hooks/useRefInit';
 import useEventCallback from '../hooks/useEventCallback';
 
-import {
-  merge,
-  crExportStyleOptions
-} from '../../charts/ChartExportConfig';
+import { crExportStyleOptions } from '../../charts/ChartExportConfig';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import ToolbarButtonCircle from '../zhn/ToolbarButtonCircle';
