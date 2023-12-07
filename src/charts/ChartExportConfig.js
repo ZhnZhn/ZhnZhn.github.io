@@ -1,6 +1,5 @@
-import Highcharts from 'highcharts';
+import merge from '../utils/merge';
 
-const _merge = Highcharts.merge;
 const _STYLE_COLOR_BLACK = {
   style: {
     color: 'black'
@@ -34,33 +33,30 @@ const BLACK_AXIS = {
    }
  };
 
-const _crStyleBlackAxis = () => _merge(false, {},
+const _crStyleBlackAxis = () => merge(false, {},
   BLACK_AXIS
 )
-, _crStyleBlackAxisTitle = () => _merge(false, {},
+, _crStyleBlackAxisTitle = () => merge(false, {},
   BLACK_AXIS,
   BLACK_TITLE
 )
-, _crStyleBlackAll = () => _merge(false, {},
+, _crStyleBlackAll = () => merge(false, {},
   BLACK_AXIS,
   BLACK_TITLE,
   BLACK_SERIES
 );
 
-export const merge = _merge
+const _crStyleItem = (
+  caption,
+  value
+) => ({
+  caption,
+  value
+})
 
 export const crExportStyleOptions = () => [
-  {
-    caption: 'Default',
-    value : {}
-  },{
-    caption: 'Default + Black Axis',
-    value : _crStyleBlackAxis()
-  },{
-    caption: 'Default + Black Axis + Black Title',
-    value : _crStyleBlackAxisTitle()
-  },{
-    caption: 'All Black',
-    value: _crStyleBlackAll()
-  }
+  _crStyleItem('Default', {}),
+  _crStyleItem('Default + Black Axis', _crStyleBlackAxis()),
+  _crStyleItem('Default + Black Axis + Black Title', _crStyleBlackAxisTitle()),
+  _crStyleItem('All Black', _crStyleBlackAll())  
 ]
