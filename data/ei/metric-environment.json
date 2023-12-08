@@ -1,5 +1,7 @@
 {"items":[      
-  {"c":"Carbon dioxide emissions from energy in Mt of CO2","v":"co2-combust-mtco2"},
-  {"c":"Carbon dioxide emissions in Mt of CO2 per EJ energy","v":"co2-combust-per-ej"}   
+  {"c":"CO2 emissions in Mt from energy","v":"co2-combust-mtco2"},
+  {"c":"CO2 emissions in Mt per EJ energy","v":"co2-combust-per-ej"},
+  {"c":"CO2 emissions in Mt from gas flared","v":"gas-flared-mtco2"},      
+  {"c":"Gas flared in Bcm","v":"gas-flared-bcm"}
  ]
 }
