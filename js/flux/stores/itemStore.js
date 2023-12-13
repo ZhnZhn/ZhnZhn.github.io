@@ -30,6 +30,11 @@ const _setMsItemLoaded = chartSlice => {
     ...chartSlice
   }));
 };
+const _setMsItemInit = Comp => {
+  set(_crMsItemInit({
+    Comp
+  }));
+};
 const _isFn = v => typeof v === "function",
   _isUndef = v => typeof v === 'undefined',
   _assign = Object.assign;
@@ -174,9 +179,7 @@ const _loadItemCompleted = (option, config) => {
   if (chartSlice) {
     _setMsItemLoaded(chartSlice);
   } else {
-    set(_crMsItemInit({
-      Comp
-    }));
+    _setMsItemInit(Comp);
     (0, _compStore.hideAbout)();
   }
   (0, _loadingStore.setLoadingComplete)(limitRemaining);
@@ -259,9 +262,7 @@ const showItemsContainer = (chartType, browserType, dialogConfOr) => {
   if (chartSlice) {
     _setMsItemLoaded(chartSlice);
   } else {
-    set(_crMsItemInit({
-      Comp
-    }));
+    _setMsItemInit(Comp);
     (0, _compStore.hideAbout)();
   }
 };

@@ -91,6 +91,9 @@ export const useMsInit = fCrUse(_itemStore, _selectMsItemInit)
 const _setMsItemLoaded = chartSlice => {
   set(_crMsItemLoaded({...chartSlice}))
 }
+const _setMsItemInit = Comp => {
+  set(_crMsItemInit({ Comp }))
+}
 
 const _isFn = v => typeof v === "function"
 , _isUndef = v => typeof v === 'undefined'
@@ -289,7 +292,7 @@ const _loadItemCompleted = (
   if (chartSlice){
     _setMsItemLoaded(chartSlice)
   } else {
-    set(_crMsItemInit({ Comp }))
+    _setMsItemInit(Comp)
     hideAbout()
   }
   setLoadingComplete(limitRemaining)
@@ -390,7 +393,7 @@ export const showItemsContainer = (
   if (chartSlice){
     _setMsItemLoaded(chartSlice)
   } else {
-    set(_crMsItemInit({ Comp }))
+    _setMsItemInit(Comp)
     hideAbout()
   }
 }
