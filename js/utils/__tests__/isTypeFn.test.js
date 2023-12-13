@@ -61,6 +61,17 @@ describe('isUndef', () => {
     expect(fn('')).toBe(false);
   });
 });
+describe("isFn", () => {
+  const fn = _isTypeFn.isFn;
+  test('should return true for function value otherwise flase', () => {
+    expect(fn(fn)).toBe(true);
+    expect(fn(() => {})).toBe(true);
+    expect(fn()).toBe(false);
+    expect(fn(null)).toBe(false);
+    expect(fn({})).toBe(false);
+    expect(fn('')).toBe(false);
+  });
+});
 describe('isObj', () => {
   const fn = _isTypeFn.isObj;
   test('should return true for object except null othewise false', () => {
