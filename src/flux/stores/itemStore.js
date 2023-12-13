@@ -49,8 +49,6 @@ import {
 
 import {
   getProxy,
-  getKey,
-  isSetting,
   isApiKeyRequired,
   isProxyRequired,
   getApiTitle
@@ -68,8 +66,11 @@ import {
 } from './compStore';
 
 import {
+  addSettingsTo
+} from './itemStoreFn';
+
+import {
   isFn,
-  isUndef,
   createStoreWithSelector,
   fCrStoreSlice,
   getStoreApi,
@@ -129,14 +130,6 @@ const _loadItemFailed = (option) => {
   logErrorToConsole(option)
 }
 
-/*
-let _fromChart;
-export const copyChart = (chart) => {
-  _fromChart = chart
-}
-export const getCopyFromChart = () => _fromChart;
-*/
-
 export const moveToTop = (
   chartType,
   id
@@ -149,10 +142,10 @@ export const moveToTop = (
   _setMsItemLoaded(chartSlice)
 }
 
-const _cancelLoad = function(
+const _cancelLoad = (
   option,
   alertMsg
-){
+) => {
   setAlertMsg(option, alertMsg);
 
   if (alertMsg === ERR_ALREADY_EXIST) {
@@ -172,29 +165,6 @@ const _cancelLoad = function(
     option.onCancel();
   }
 }
-
-const _addBoolOptionTo = (
-  options,
-  propName
-) => {
-  if (isUndef(options[propName])) {
-    options[propName] = isSetting(propName)
-  }
-};
-
-const _addSettingsTo = (
-  options,
-  confItem,
-  itemProps
-) => {
-  const { loadId } = options;
-  _assign(options, confItem, itemProps, {
-    apiKey: getKey(loadId),
-    proxy: getProxy(loadId)
-  })
-  _addBoolOptionTo(options, 'isDrawDeltaExtrems')
-  _addBoolOptionTo(options, 'isNotZoomToMinMax')
-};
 
 const _checkMsgApiKey = ({
   apiKey,
@@ -238,7 +208,7 @@ const _isShouldEmit = (
   , _isTs = isLoadToChart();
 
   //{ chartType, browserType, dialogConf } = confItem
-  _addSettingsTo(option, confItem, { key, _isTs })
+  addSettingsTo(option, confItem, { key, _isTs })
 
   const _alertMsg = _crMsgSetting(option)
    || (isLoadMeta && _isDoublingLoad

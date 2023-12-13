@@ -15,6 +15,7 @@ var _browserLogic = require("./browserLogic");
 var _settingStore = require("../stores/settingStore");
 var _loadingStore = require("./loadingStore");
 var _compStore = require("./compStore");
+var _itemStoreFn = require("./itemStoreFn");
 var _storeApi = require("../storeApi");
 const [_crMsItemLoaded, _selectMsItemLoaded] = (0, _storeApi.fCrStoreSlice)("msItemLoaded"),
   [_crMsItemInit, _selectMsItemInit] = (0, _storeApi.fCrStoreSlice)("msItemInit"),
@@ -61,21 +62,12 @@ const _loadItemFailed = option => {
   (0, _compStore.showAlertDialog)(option);
   (0, _storeFn.logErrorToConsole)(option);
 };
-
-/*
-let _fromChart;
-export const copyChart = (chart) => {
-  _fromChart = chart
-}
-export const getCopyFromChart = () => _fromChart;
-*/
-
 const moveToTop = (chartType, id) => {
   const chartSlice = (0, _ChartLogic.toTop)(CHARTS, chartType, id);
   _setMsItemLoaded(chartSlice);
 };
 exports.moveToTop = moveToTop;
-const _cancelLoad = function (option, alertMsg) {
+const _cancelLoad = (option, alertMsg) => {
   (0, _Msg.setAlertMsg)(option, alertMsg);
   if (alertMsg === _Msg.ERR_ALREADY_EXIST) {
     (0, _ChartLogic.setAlertItemIdTo)(option);
@@ -90,22 +82,6 @@ const _cancelLoad = function (option, alertMsg) {
   if ((0, _storeApi.isFn)(option.onCancel)) {
     option.onCancel();
   }
-};
-const _addBoolOptionTo = (options, propName) => {
-  if ((0, _storeApi.isUndef)(options[propName])) {
-    options[propName] = (0, _settingStore.isSetting)(propName);
-  }
-};
-const _addSettingsTo = (options, confItem, itemProps) => {
-  const {
-    loadId
-  } = options;
-  _assign(options, confItem, itemProps, {
-    apiKey: (0, _settingStore.getKey)(loadId),
-    proxy: (0, _settingStore.getProxy)(loadId)
-  });
-  _addBoolOptionTo(options, 'isDrawDeltaExtrems');
-  _addBoolOptionTo(options, 'isNotZoomToMinMax');
 };
 const _checkMsgApiKey = _ref => {
   let {
@@ -142,7 +118,7 @@ const _isShouldEmit = function (confItem, option) {
     _isTs = (0, _chartCheckBoxLogic.isLoadToChart)();
 
   //{ chartType, browserType, dialogConf } = confItem
-  _addSettingsTo(option, confItem, {
+  (0, _itemStoreFn.addSettingsTo)(option, confItem, {
     key,
     _isTs
   });
