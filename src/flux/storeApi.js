@@ -1,6 +1,12 @@
 export { bindTo } from '../utils/bindTo';
 import { bindTo } from '../utils/bindTo';
 
+export {
+  isFn,
+  isUndef
+} from '../utils/isTypeFn';
+import { isFn } from '../utils/isTypeFn';
+
 import useSubscribe from '../components/hooks/useSubscribe';
 import useSubscribeState from '../components/hooks/useSubscribeState';
 import useRerender from '../components/hooks/useRerender';
@@ -10,7 +16,6 @@ import {
   subscribeWithSelector
 } from './zustand-lite';
 
-const _isFn = v => typeof v === 'function';
 
 export const createStoreWithSelector = (
   crStore
@@ -56,7 +61,7 @@ export const fUseStoreState = (
 const _reducerUseAtomValue = (
   value,
   crOrValue
-) => _isFn(crOrValue)
+) => isFn(crOrValue)
   ? crOrValue(value)
   : crOrValue;
 export const atom = (initialValue) => {
@@ -71,7 +76,7 @@ export const atom = (initialValue) => {
        const _prev = _atom.value
        , _rerender = _atom.rerender;
        _atom.value = _reducerUseAtomValue(_prev, crOrValue)
-       if (_prev !== _atom.value && _isFn(_rerender)) {
+       if (_prev !== _atom.value && isFn(_rerender)) {
          _rerender()
        }
      }
