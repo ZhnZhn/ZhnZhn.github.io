@@ -83,23 +83,6 @@ const _cancelLoad = (option, alertMsg) => {
     option.onCancel();
   }
 };
-const _checkMsgApiKey = _ref => {
-  let {
-    apiKey,
-    loadId,
-    isKeyFeature,
-    isPremium
-  } = _ref;
-  return apiKey ? '' : (0, _settingStore.isApiKeyRequired)(loadId) ? (0, _Msg.withoutApiKey)((0, _settingStore.getApiTitle)(loadId)) : isKeyFeature ? _Msg.ERR_FEATURE_WITHOUT_KEY : isPremium ? _Msg.ERR_PREMIUM_WITHOUT_KEY : '';
-};
-const _checkProxy = _ref2 => {
-  let {
-    proxy,
-    loadId
-  } = _ref2;
-  return (0, _settingStore.isProxyRequired)(loadId) && !proxy ? (0, _Msg.withoutProxy)((0, _settingStore.getApiTitle)(loadId)) : '';
-};
-const _crMsgSetting = option => _checkMsgApiKey(option) || _checkProxy(option);
 const META_SUFFIX = '_Meta';
 const _crMetaDataKey = key => key + META_SUFFIX;
 const _isShouldEmit = function (confItem, option) {
@@ -122,7 +105,7 @@ const _isShouldEmit = function (confItem, option) {
     key,
     _isTs
   });
-  const _alertMsg = _crMsgSetting(option) || (isLoadMeta && _isDoublingLoad ? _Msg.ERR_DOUBLE_LOAD_META : _isDoublingLoad ? _Msg.ERR_LOADING_IN_PROGRESS : !_isTs && isChartExist(option) ? _Msg.ERR_ALREADY_EXIST : '');
+  const _alertMsg = (0, _itemStoreFn.crMsgSetting)(option) || (isLoadMeta && _isDoublingLoad ? _Msg.ERR_DOUBLE_LOAD_META : _isDoublingLoad ? _Msg.ERR_LOADING_IN_PROGRESS : !_isTs && isChartExist(option) ? _Msg.ERR_ALREADY_EXIST : '');
   return _alertMsg ? (_cancelLoad(option, _alertMsg), false) : true;
 };
 const _loadItemCompleted = (option, config) => {

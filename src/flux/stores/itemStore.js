@@ -3,12 +3,8 @@ import { getFromDate } from '../../utils/dateFn';
 import {
   setAlertMsg,
   ERR_ALREADY_EXIST,
-  ERR_FEATURE_WITHOUT_KEY,
-  ERR_PREMIUM_WITHOUT_KEY,
   ERR_DOUBLE_LOAD_META,
   ERR_LOADING_IN_PROGRESS,
-  withoutApiKey,
-  withoutProxy
 } from '../../constants/Msg';
 
 import {
@@ -48,10 +44,7 @@ import {
 } from './chartCheckBoxLogic';
 
 import {
-  getProxy,
-  isApiKeyRequired,
-  isProxyRequired,
-  getApiTitle
+  getProxy
 } from '../stores/settingStore';
 
 import {
@@ -66,7 +59,8 @@ import {
 } from './compStore';
 
 import {
-  addSettingsTo
+  addSettingsTo,
+  crMsgSetting
 } from './itemStoreFn';
 
 import {
@@ -166,31 +160,6 @@ const _cancelLoad = (
   }
 }
 
-const _checkMsgApiKey = ({
-  apiKey,
-  loadId,
-  isKeyFeature,
-  isPremium
-}) => apiKey
-  ? ''
-  : isApiKeyRequired(loadId)
-    ? withoutApiKey(getApiTitle(loadId))
-    : isKeyFeature
-       ? ERR_FEATURE_WITHOUT_KEY
-       : isPremium
-          ? ERR_PREMIUM_WITHOUT_KEY
-          : '';
-
-const _checkProxy = ({
-  proxy,
-  loadId
-}) => isProxyRequired(loadId) && !proxy
-  ? withoutProxy(getApiTitle(loadId))
-  : ''
-
-const _crMsgSetting = option =>
-  _checkMsgApiKey(option) || _checkProxy(option);
-
 const META_SUFFIX = '_Meta'
 const _crMetaDataKey = key => key + META_SUFFIX;
 
@@ -210,7 +179,7 @@ const _isShouldEmit = (
   //{ chartType, browserType, dialogConf } = confItem
   addSettingsTo(option, confItem, { key, _isTs })
 
-  const _alertMsg = _crMsgSetting(option)
+  const _alertMsg = crMsgSetting(option)
    || (isLoadMeta && _isDoublingLoad
         ? ERR_DOUBLE_LOAD_META
         : _isDoublingLoad
