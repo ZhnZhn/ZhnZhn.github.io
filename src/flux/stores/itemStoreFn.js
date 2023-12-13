@@ -8,6 +8,11 @@ import {
 } from '../../constants/Msg';
 
 import { isUndef } from '../storeApi';
+
+import {
+  getSourceConfig
+} from './browserLogic';
+
 import {
   getProxy,
   getKey,
@@ -68,7 +73,22 @@ export const crMsgSetting = (
   option
 ) => _checkMsgApiKey(option) || _checkProxy(option)
 
-export const initOptionFromDateIf = (option) => {
+const SUBTITLE = 'Loaded from URL Query';
+const _assignDialogPropsTo = (option) => {
+  const {
+    chartType,
+    browserType
+  } = option
+  , { dialogProps } = getSourceConfig(browserType, chartType) || {}
+  , { dfProps } = dialogProps || {};
+
+  _assign(option, dialogProps, dfProps, {
+      subtitle: SUBTITLE
+    }
+  )
+}
+
+const _initOptionFromDateIf = (option) => {
   const {
     fromDate,
     nInitFromDate
@@ -78,4 +98,10 @@ export const initOptionFromDateIf = (option) => {
       ? getFromDate(nInitFromDate)
       : getFromDate(2)
   }
+}
+
+//Load item from query
+export const addDialogPropsTo = option => {
+  _assignDialogPropsTo(option)
+  _initOptionFromDateIf(option)
 }

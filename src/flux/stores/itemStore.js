@@ -32,8 +32,7 @@ import {
   setMenuItemOpen,
   addMenuItemCounter,
   minusMenuItemCounter,
-  resetMenuItemCounter,
-  getSourceConfig
+  resetMenuItemCounter
 } from './browserLogic';
 
 import {
@@ -59,7 +58,7 @@ import {
 import {
   addSettingsTo,
   crMsgSetting,
-  initOptionFromDateIf
+  addDialogPropsTo
 } from './itemStoreFn';
 
 import {
@@ -94,8 +93,6 @@ const _setMsItemLoaded = chartSlice => {
 const _setMsItemInit = Comp => {
   set(_crMsItemInit({ Comp }))
 }
-
-const _assign = Object.assign;
 
 const CHARTS = {};
 
@@ -253,28 +250,10 @@ export const loadItem = (confItem, option) => {
 }
 
 const _FN_NOOP = () => {}
-, SUBTITLE = 'Loaded from URL Query'
 , ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found."
-, _assignDialogPropsTo = (option) => {
-  const {
-    chartType,
-    browserType
-  } = option
-  , { dialogProps } = getSourceConfig(browserType, chartType) || {}
-  , { dfProps } = dialogProps || {};
-
-  _assign(option, dialogProps, dfProps, {
-      subtitle: SUBTITLE
-    }
-  )
-};
-const _addDialogPropsTo = option => {
-  _assignDialogPropsTo(option)
-  initOptionFromDateIf(option)
-}
 
 export const loadItemByQuery = (option) => {
-  _addDialogPropsTo(option)
+  addDialogPropsTo(option)
   const { loadId } = option;
   option.proxy = getProxy(loadId)
 

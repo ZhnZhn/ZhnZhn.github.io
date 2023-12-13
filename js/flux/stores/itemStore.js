@@ -36,7 +36,6 @@ const _setMsItemInit = Comp => {
     Comp
   }));
 };
-const _assign = Object.assign;
 const CHARTS = {};
 const getConfigs = chartType => CHARTS[chartType];
 exports.getConfigs = getConfigs;
@@ -155,29 +154,9 @@ const loadItem = (confItem, option) => {
 };
 exports.loadItem = loadItem;
 const _FN_NOOP = () => {},
-  SUBTITLE = 'Loaded from URL Query',
-  ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found.",
-  _assignDialogPropsTo = option => {
-    const {
-        chartType,
-        browserType
-      } = option,
-      {
-        dialogProps
-      } = (0, _browserLogic.getSourceConfig)(browserType, chartType) || {},
-      {
-        dfProps
-      } = dialogProps || {};
-    _assign(option, dialogProps, dfProps, {
-      subtitle: SUBTITLE
-    });
-  };
-const _addDialogPropsTo = option => {
-  _assignDialogPropsTo(option);
-  (0, _itemStoreFn.initOptionFromDateIf)(option);
-};
+  ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found.";
 const loadItemByQuery = option => {
-  _addDialogPropsTo(option);
+  (0, _itemStoreFn.addDialogPropsTo)(option);
   const {
     loadId
   } = option;

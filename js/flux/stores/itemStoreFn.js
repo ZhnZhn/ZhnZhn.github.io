@@ -1,10 +1,11 @@
 "use strict";
 
 exports.__esModule = true;
-exports.initOptionFromDateIf = exports.crMsgSetting = exports.addSettingsTo = void 0;
+exports.crMsgSetting = exports.addSettingsTo = exports.addDialogPropsTo = void 0;
 var _dateFn = require("../../utils/dateFn");
 var _Msg = require("../../constants/Msg");
 var _storeApi = require("../storeApi");
+var _browserLogic = require("./browserLogic");
 var _settingStore = require("../stores/settingStore");
 const _assign = Object.assign;
 const _addBoolOptionTo = (options, propName) => {
@@ -42,7 +43,23 @@ const _checkProxy = _ref2 => {
 };
 const crMsgSetting = option => _checkMsgApiKey(option) || _checkProxy(option);
 exports.crMsgSetting = crMsgSetting;
-const initOptionFromDateIf = option => {
+const SUBTITLE = 'Loaded from URL Query';
+const _assignDialogPropsTo = option => {
+  const {
+      chartType,
+      browserType
+    } = option,
+    {
+      dialogProps
+    } = (0, _browserLogic.getSourceConfig)(browserType, chartType) || {},
+    {
+      dfProps
+    } = dialogProps || {};
+  _assign(option, dialogProps, dfProps, {
+    subtitle: SUBTITLE
+  });
+};
+const _initOptionFromDateIf = option => {
   const {
     fromDate,
     nInitFromDate
@@ -51,5 +68,11 @@ const initOptionFromDateIf = option => {
     option.fromDate = nInitFromDate ? (0, _dateFn.getFromDate)(nInitFromDate) : (0, _dateFn.getFromDate)(2);
   }
 };
-exports.initOptionFromDateIf = initOptionFromDateIf;
+
+//Load item from query
+const addDialogPropsTo = option => {
+  _assignDialogPropsTo(option);
+  _initOptionFromDateIf(option);
+};
+exports.addDialogPropsTo = addDialogPropsTo;
 //# sourceMappingURL=itemStoreFn.js.map
