@@ -35,9 +35,7 @@ const _setMsItemInit = Comp => {
     Comp
   }));
 };
-const _isFn = v => typeof v === "function",
-  _isUndef = v => typeof v === 'undefined',
-  _assign = Object.assign;
+const _assign = Object.assign;
 const CHARTS = {};
 const getConfigs = chartType => CHARTS[chartType];
 exports.getConfigs = getConfigs;
@@ -91,18 +89,18 @@ const _cancelLoad = function (option, alertMsg) {
     (0, _ChartLogic.setAlertItemIdTo)(option);
     (0, _compStore.showAlertDialog)(option);
     moveToTop(option.chartType, option.key);
-    if (_isFn(option.onFailed)) {
+    if ((0, _storeApi.isFn)(option.onFailed)) {
       option.onFailed();
     }
     return;
   }
   _loadItemFailed(option);
-  if (_isFn(option.onCancel)) {
+  if ((0, _storeApi.isFn)(option.onCancel)) {
     option.onCancel();
   }
 };
 const _addBoolOptionTo = (options, propName) => {
-  if (_isUndef(options[propName])) {
+  if ((0, _storeApi.isUndef)(options[propName])) {
     options[propName] = (0, _settingStore.isSetting)(propName);
   }
 };
@@ -242,7 +240,7 @@ const loadItemByQuery = option => {
     const {
       addPropsTo
     } = impl;
-    if (_isFn(addPropsTo)) {
+    if ((0, _storeApi.isFn)(addPropsTo)) {
       addPropsTo(option);
     }
     impl.loadItem(option, _loadItemCompleted, _FN_NOOP, _loadItemFailed);

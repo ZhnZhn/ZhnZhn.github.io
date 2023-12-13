@@ -64,6 +64,8 @@ import {
 } from './compStore';
 
 import {
+  isFn,
+  isUndef,
   createStoreWithSelector,
   fCrStoreSlice,
   getStoreApi,
@@ -95,9 +97,7 @@ const _setMsItemInit = Comp => {
   set(_crMsItemInit({ Comp }))
 }
 
-const _isFn = v => typeof v === "function"
-, _isUndef = v => typeof v === 'undefined'
-, _assign = Object.assign
+const _assign = Object.assign;
 
 const CHARTS = {};
 
@@ -167,7 +167,7 @@ const _cancelLoad = function(
     showAlertDialog(option)
     moveToTop(option.chartType, option.key)
 
-    if (_isFn(option.onFailed)) {
+    if (isFn(option.onFailed)) {
       option.onFailed();
     }
     return;
@@ -175,7 +175,7 @@ const _cancelLoad = function(
 
   _loadItemFailed(option);
 
-  if (_isFn(option.onCancel)) {
+  if (isFn(option.onCancel)) {
     option.onCancel();
   }
 }
@@ -184,7 +184,7 @@ const _addBoolOptionTo = (
   options,
   propName
 ) => {
-  if (_isUndef(options[propName])) {
+  if (isUndef(options[propName])) {
     options[propName] = isSetting(propName)
   }
 };
@@ -356,7 +356,7 @@ export const loadItemByQuery = (option) => {
   const impl = LoadConfig[loadId];
   if (impl) {
     const { addPropsTo } = impl;
-    if (_isFn(addPropsTo)){
+    if (isFn(addPropsTo)){
       addPropsTo(option)
     }
     impl.loadItem(
