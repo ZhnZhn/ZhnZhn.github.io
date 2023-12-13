@@ -1,5 +1,3 @@
-import { getFromDate } from '../../utils/dateFn';
-
 import {
   setAlertMsg,
   ERR_ALREADY_EXIST,
@@ -60,7 +58,8 @@ import {
 
 import {
   addSettingsTo,
-  crMsgSetting
+  crMsgSetting,
+  initOptionFromDateIf
 } from './itemStoreFn';
 
 import {
@@ -254,9 +253,9 @@ export const loadItem = (confItem, option) => {
 }
 
 const _FN_NOOP = () => {}
-const SUBTITLE = 'Loaded from URL Query';
-const ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found."
-const _addDialogPropsTo = option => {
+, SUBTITLE = 'Loaded from URL Query'
+, ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found."
+, _assignDialogPropsTo = (option) => {
   const {
     chartType,
     browserType
@@ -268,16 +267,10 @@ const _addDialogPropsTo = option => {
       subtitle: SUBTITLE
     }
   )
-
-  const {
-    fromDate,
-    nInitFromDate
-  } = option;
-  if (!fromDate) {
-    option.fromDate = nInitFromDate
-       ? getFromDate(nInitFromDate)
-       : getFromDate(2)
-  }
+};
+const _addDialogPropsTo = option => {
+  _assignDialogPropsTo(option)
+  initOptionFromDateIf(option)
 }
 
 export const loadItemByQuery = (option) => {

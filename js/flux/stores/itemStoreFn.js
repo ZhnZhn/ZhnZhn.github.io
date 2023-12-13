@@ -1,7 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crMsgSetting = exports.addSettingsTo = void 0;
+exports.initOptionFromDateIf = exports.crMsgSetting = exports.addSettingsTo = void 0;
+var _dateFn = require("../../utils/dateFn");
 var _Msg = require("../../constants/Msg");
 var _storeApi = require("../storeApi");
 var _settingStore = require("../stores/settingStore");
@@ -41,4 +42,14 @@ const _checkProxy = _ref2 => {
 };
 const crMsgSetting = option => _checkMsgApiKey(option) || _checkProxy(option);
 exports.crMsgSetting = crMsgSetting;
+const initOptionFromDateIf = option => {
+  const {
+    fromDate,
+    nInitFromDate
+  } = option;
+  if (!fromDate) {
+    option.fromDate = nInitFromDate ? (0, _dateFn.getFromDate)(nInitFromDate) : (0, _dateFn.getFromDate)(2);
+  }
+};
+exports.initOptionFromDateIf = initOptionFromDateIf;
 //# sourceMappingURL=itemStoreFn.js.map

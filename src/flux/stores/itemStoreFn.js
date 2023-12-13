@@ -1,3 +1,5 @@
+import { getFromDate } from '../../utils/dateFn';
+
 import {
   ERR_FEATURE_WITHOUT_KEY,
   ERR_PREMIUM_WITHOUT_KEY,
@@ -64,4 +66,16 @@ const _checkProxy = ({
 
 export const crMsgSetting = (
   option
-) => _checkMsgApiKey(option) || _checkProxy(option);
+) => _checkMsgApiKey(option) || _checkProxy(option)
+
+export const initOptionFromDateIf = (option) => {
+  const {
+    fromDate,
+    nInitFromDate
+  } = option;
+  if (!fromDate) {
+    option.fromDate = nInitFromDate
+      ? getFromDate(nInitFromDate)
+      : getFromDate(2)
+  }
+}

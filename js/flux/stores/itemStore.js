@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.useMsItemLoaded = exports.useMsInit = exports.updateMv = exports.sortItemsBy = exports.showItemsContainer = exports.removeItemsAll = exports.moveToTop = exports.loadItemByQuery = exports.loadItem = exports.isChartExist = exports.getConfigs = exports.closeChartItem = void 0;
-var _dateFn = require("../../utils/dateFn");
 var _Msg = require("../../constants/Msg");
 var _storeFn = require("./storeFn");
 var _LogicFn = require("../logic/LogicFn");
@@ -155,30 +154,27 @@ const loadItem = (confItem, option) => {
   }
 };
 exports.loadItem = loadItem;
-const _FN_NOOP = () => {};
-const SUBTITLE = 'Loaded from URL Query';
-const ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found.";
+const _FN_NOOP = () => {},
+  SUBTITLE = 'Loaded from URL Query',
+  ALERT_DESCR_BY_QUERY = "Loader for this item hasn't found.",
+  _assignDialogPropsTo = option => {
+    const {
+        chartType,
+        browserType
+      } = option,
+      {
+        dialogProps
+      } = (0, _browserLogic.getSourceConfig)(browserType, chartType) || {},
+      {
+        dfProps
+      } = dialogProps || {};
+    _assign(option, dialogProps, dfProps, {
+      subtitle: SUBTITLE
+    });
+  };
 const _addDialogPropsTo = option => {
-  const {
-      chartType,
-      browserType
-    } = option,
-    {
-      dialogProps
-    } = (0, _browserLogic.getSourceConfig)(browserType, chartType) || {},
-    {
-      dfProps
-    } = dialogProps || {};
-  _assign(option, dialogProps, dfProps, {
-    subtitle: SUBTITLE
-  });
-  const {
-    fromDate,
-    nInitFromDate
-  } = option;
-  if (!fromDate) {
-    option.fromDate = nInitFromDate ? (0, _dateFn.getFromDate)(nInitFromDate) : (0, _dateFn.getFromDate)(2);
-  }
+  _assignDialogPropsTo(option);
+  (0, _itemStoreFn.initOptionFromDateIf)(option);
 };
 const loadItemByQuery = option => {
   _addDialogPropsTo(option);
