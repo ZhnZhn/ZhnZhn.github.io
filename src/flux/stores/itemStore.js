@@ -1,5 +1,4 @@
 import { getFromDate } from '../../utils/dateFn';
-import { joinBy } from '../../utils/arrFn';
 
 import {
   setAlertMsg,
@@ -11,6 +10,10 @@ import {
   withoutApiKey,
   withoutProxy
 } from '../../constants/Msg';
+
+import {
+  logErrorToConsole
+} from './storeFn';
 
 import { crKeyForConfig } from '../logic/LogicFn';
 import LoadConfig from '../logic/LoadConfig';
@@ -117,26 +120,13 @@ const _setLoadingDone = () => {
   _isLoading = false
 }
 
-const LOG_ERR_COLOR = 'color:rgb(237, 88, 19);'
-, _consoleLogErr = str => {
-  console.log('%c' + str, LOG_ERR_COLOR)
-}
-, _logErrorToConsole = ({
-  alertCaption,
-  alertItemId,
-  alertDescr,
-}) => {
-  _consoleLogErr(joinBy(": ", alertCaption, alertItemId));
-  _consoleLogErr(alertDescr);
-};
-
 const _loadItemFailed = (option) => {
   setLoadingFailed()
   _setLoadingDone()
 
   setAlertItemIdTo(option)
   showAlertDialog(option)
-  _logErrorToConsole(option);
+  logErrorToConsole(option)
 }
 
 let _fromChart;

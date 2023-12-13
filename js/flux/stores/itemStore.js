@@ -4,8 +4,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.useMsItemLoaded = exports.useMsInit = exports.updateMv = exports.sortItemsBy = exports.showItemsContainer = exports.removeItemsAll = exports.moveToTop = exports.loadItemByQuery = exports.loadItem = exports.isChartExist = exports.getCopyFromChart = exports.getConfigs = exports.copyChart = exports.closeChartItem = void 0;
 var _dateFn = require("../../utils/dateFn");
-var _arrFn = require("../../utils/arrFn");
 var _Msg = require("../../constants/Msg");
+var _storeFn = require("./storeFn");
 var _LogicFn = require("../logic/LogicFn");
 var _LoadConfig = _interopRequireDefault(require("../logic/LoadConfig"));
 var _ChartLogic = require("./chart/ChartLogic");
@@ -54,25 +54,12 @@ let _isLoading = false,
 const _setLoadingDone = () => {
   _isLoading = false;
 };
-const LOG_ERR_COLOR = 'color:rgb(237, 88, 19);',
-  _consoleLogErr = str => {
-    console.log('%c' + str, LOG_ERR_COLOR);
-  },
-  _logErrorToConsole = _ref => {
-    let {
-      alertCaption,
-      alertItemId,
-      alertDescr
-    } = _ref;
-    _consoleLogErr((0, _arrFn.joinBy)(": ", alertCaption, alertItemId));
-    _consoleLogErr(alertDescr);
-  };
 const _loadItemFailed = option => {
   (0, _loadingStore.setLoadingFailed)();
   _setLoadingDone();
   (0, _ChartLogic.setAlertItemIdTo)(option);
   (0, _compStore.showAlertDialog)(option);
-  _logErrorToConsole(option);
+  (0, _storeFn.logErrorToConsole)(option);
 };
 let _fromChart;
 const copyChart = chart => {
@@ -118,20 +105,20 @@ const _addSettingsTo = (options, confItem, itemProps) => {
   _addBoolOptionTo(options, 'isDrawDeltaExtrems');
   _addBoolOptionTo(options, 'isNotZoomToMinMax');
 };
-const _checkMsgApiKey = _ref2 => {
+const _checkMsgApiKey = _ref => {
   let {
     apiKey,
     loadId,
     isKeyFeature,
     isPremium
-  } = _ref2;
+  } = _ref;
   return apiKey ? '' : (0, _settingStore.isApiKeyRequired)(loadId) ? (0, _Msg.withoutApiKey)((0, _settingStore.getApiTitle)(loadId)) : isKeyFeature ? _Msg.ERR_FEATURE_WITHOUT_KEY : isPremium ? _Msg.ERR_PREMIUM_WITHOUT_KEY : '';
 };
-const _checkProxy = _ref3 => {
+const _checkProxy = _ref2 => {
   let {
     proxy,
     loadId
-  } = _ref3;
+  } = _ref2;
   return (0, _settingStore.isProxyRequired)(loadId) && !proxy ? (0, _Msg.withoutProxy)((0, _settingStore.getApiTitle)(loadId)) : '';
 };
 const _crMsgSetting = option => _checkMsgApiKey(option) || _checkProxy(option);
