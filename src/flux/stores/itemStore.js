@@ -1,4 +1,5 @@
 import { getFromDate } from '../../utils/dateFn';
+import { joinBy } from '../../utils/arrFn';
 
 import {
   setAlertMsg,
@@ -116,18 +117,18 @@ const _setLoadingDone = () => {
   _isLoading = false
 }
 
-const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
-const _logErrorToConsole = function({
+const LOG_ERR_COLOR = 'color:rgb(237, 88, 19);'
+, _consoleLogErr = str => {
+  console.log('%c' + str, LOG_ERR_COLOR)
+}
+, _logErrorToConsole = ({
   alertCaption,
   alertItemId,
   alertDescr,
-}){
-  const _title = [alertCaption, alertItemId]
-    .filter(Boolean)
-    .join(": ");
-  console.log('%c'+ _title, CONSOLE_LOG_STYLE);
-  console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
-}
+}) => {
+  _consoleLogErr(joinBy(": ", alertCaption, alertItemId));
+  _consoleLogErr(alertDescr);
+};
 
 const _loadItemFailed = (option) => {
   setLoadingFailed()

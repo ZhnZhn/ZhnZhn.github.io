@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.useMsItemLoaded = exports.useMsInit = exports.updateMv = exports.sortItemsBy = exports.showItemsContainer = exports.removeItemsAll = exports.moveToTop = exports.loadItemByQuery = exports.loadItem = exports.isChartExist = exports.getCopyFromChart = exports.getConfigs = exports.copyChart = exports.closeChartItem = void 0;
 var _dateFn = require("../../utils/dateFn");
+var _arrFn = require("../../utils/arrFn");
 var _Msg = require("../../constants/Msg");
 var _LogicFn = require("../logic/LogicFn");
 var _LoadConfig = _interopRequireDefault(require("../logic/LoadConfig"));
@@ -53,17 +54,19 @@ let _isLoading = false,
 const _setLoadingDone = () => {
   _isLoading = false;
 };
-const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
-const _logErrorToConsole = function (_ref) {
-  let {
-    alertCaption,
-    alertItemId,
-    alertDescr
-  } = _ref;
-  const _title = [alertCaption, alertItemId].filter(Boolean).join(": ");
-  console.log('%c' + _title, CONSOLE_LOG_STYLE);
-  console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
-};
+const LOG_ERR_COLOR = 'color:rgb(237, 88, 19);',
+  _consoleLogErr = str => {
+    console.log('%c' + str, LOG_ERR_COLOR);
+  },
+  _logErrorToConsole = _ref => {
+    let {
+      alertCaption,
+      alertItemId,
+      alertDescr
+    } = _ref;
+    _consoleLogErr((0, _arrFn.joinBy)(": ", alertCaption, alertItemId));
+    _consoleLogErr(alertDescr);
+  };
 const _loadItemFailed = option => {
   (0, _loadingStore.setLoadingFailed)();
   _setLoadingDone();
