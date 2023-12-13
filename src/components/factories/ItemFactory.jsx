@@ -14,10 +14,12 @@ import {
   setActiveCheckbox
 } from '../../flux/stores/chartCheckBoxLogic';
 import {
-  moveToTop,
+  moveToTop
+} from '../../flux/stores/itemStore';
+import {
   copyChart,
   getCopyFromChart
-} from '../../flux/stores/itemStore';
+} from '../../flux/stores/propertyFromChart';
 
 import {
   CIT_EUROSTAT_MAP,

@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/stores/propertyFromChart.js"
+ ],
+ "file": "../../../src/flux/stores/propertyFromChart.js",
+ "names": [
+  "_fromChart",
+  "copyChart",
+  "chart",
+  "exports",
+  "getCopyFromChart"
+ ],
+ "mappings": ";;;;AAAA,IAAIA,UAAU;AACP,MAAMC,SAAS,GAAGC,KAAK,IAAI;EAChCF,UAAU,GAAGE,KAAK;AACpB,CAAC;AAAAC,OAAA,CAAAF,SAAA,GAAAA,SAAA;AACM,MAAMG,gBAAgB,GAAGA,CAAA,KAAMJ,UAAU;AAAAG,OAAA,CAAAC,gBAAA,GAAAA,gBAAA"
+}

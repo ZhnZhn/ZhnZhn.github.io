@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.useMsItemLoaded = exports.useMsInit = exports.updateMv = exports.sortItemsBy = exports.showItemsContainer = exports.removeItemsAll = exports.moveToTop = exports.loadItemByQuery = exports.loadItem = exports.isChartExist = exports.getCopyFromChart = exports.getConfigs = exports.copyChart = exports.closeChartItem = void 0;
+exports.useMsItemLoaded = exports.useMsInit = exports.updateMv = exports.sortItemsBy = exports.showItemsContainer = exports.removeItemsAll = exports.moveToTop = exports.loadItemByQuery = exports.loadItem = exports.isChartExist = exports.getConfigs = exports.closeChartItem = void 0;
 var _dateFn = require("../../utils/dateFn");
 var _Msg = require("../../constants/Msg");
 var _storeFn = require("./storeFn");
@@ -61,13 +61,15 @@ const _loadItemFailed = option => {
   (0, _compStore.showAlertDialog)(option);
   (0, _storeFn.logErrorToConsole)(option);
 };
+
+/*
 let _fromChart;
-const copyChart = chart => {
-  _fromChart = chart;
-};
-exports.copyChart = copyChart;
-const getCopyFromChart = () => _fromChart;
-exports.getCopyFromChart = getCopyFromChart;
+export const copyChart = (chart) => {
+  _fromChart = chart
+}
+export const getCopyFromChart = () => _fromChart;
+*/
+
 const moveToTop = (chartType, id) => {
   const chartSlice = (0, _ChartLogic.toTop)(CHARTS, chartType, id);
   _setMsItemLoaded(chartSlice);
