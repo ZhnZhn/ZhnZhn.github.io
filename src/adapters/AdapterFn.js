@@ -6,7 +6,10 @@ import Big from 'big.js';
 import { toTd as _toTd } from '../charts/dateFormat';
 
 export { isTokenInStr } from '../utils/isTokenInStr';
-export { isInArrStr } from '../utils/arrFn';
+export {
+  isInArrStr,
+  joinBy
+} from '../utils/arrFn';
 import formatAllNumber from '../utils/formatAllNumber';
 import {
   getC,
@@ -124,13 +127,6 @@ export const valueMoving = (
     date, dateTo
   };
 }
-
-export const joinBy = (
-  delimeter,
-  ...restItems
-) => restItems
-  .filter(Boolean)
-  .join(delimeter)
 
 export const fCrValue = (
   option

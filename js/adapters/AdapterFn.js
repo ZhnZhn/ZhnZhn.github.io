@@ -11,6 +11,7 @@ var _isTokenInStr = require("../utils/isTokenInStr");
 exports.isTokenInStr = _isTokenInStr.isTokenInStr;
 var _arrFn = require("../utils/arrFn");
 exports.isInArrStr = _arrFn.isInArrStr;
+exports.joinBy = _arrFn.joinBy;
 var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
 var _getPropertyFn = require("../utils/getPropertyFn");
 var _dateFn = require("../utils/dateFn");
@@ -111,13 +112,6 @@ const valueMoving = (data, dfR) => {
   };
 };
 exports.valueMoving = valueMoving;
-const joinBy = function (delimeter) {
-  for (var _len = arguments.length, restItems = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    restItems[_key - 1] = arguments[_key];
-  }
-  return restItems.filter(Boolean).join(delimeter);
-};
-exports.joinBy = joinBy;
 const fCrValue = option => {
   const _rt = option._rt;
   return isNumber(_rt) ? v => (0, _mathFn.roundBy)(v, _rt) : v => v;

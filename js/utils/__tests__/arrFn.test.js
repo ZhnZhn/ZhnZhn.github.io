@@ -1,15 +1,14 @@
 "use strict";
 
 var _arrFn = require("../arrFn");
-
 const propName = 'caption',
-      propValue1 = 'caption1',
-      propValue2 = 'caption2',
-      arr = [{
-  [propName]: propValue1
-}, {
-  [propName]: propValue2
-}];
+  propValue1 = 'caption1',
+  propValue2 = 'caption2',
+  arr = [{
+    [propName]: propValue1
+  }, {
+    [propName]: propValue2
+  }];
 describe('arrFactoryFindIndexByProp', () => {
   const fn = (0, _arrFn.arrFactoryFindIndexByProp)(propName);
   test('should return function', () => {
@@ -45,7 +44,7 @@ describe('arrFactoryIsSameByProp', () => {
 });
 describe('isInArrStr', () => {
   const arr = ['test1', 'test2', 'test3'],
-        isTest = (0, _arrFn.isInArrStr)(arr);
+    isTest = (0, _arrFn.isInArrStr)(arr);
   test('should return function', () => {
     expect(typeof isTest).toBe('function');
   });
@@ -59,10 +58,21 @@ describe('isInArrStr', () => {
   });
   test('should return false in edge case', () => {
     const _isTest1 = (0, _arrFn.isInArrStr)(),
-          _isTest2 = (0, _arrFn.isInArrStr)({});
-
+      _isTest2 = (0, _arrFn.isInArrStr)({});
     expect(_isTest1('test1')).toBe(false);
     expect(_isTest2('test1')).toBe(false);
+  });
+});
+describe('joinBy', () => {
+  test('should join by delimeter', () => {
+    expect((0, _arrFn.joinBy)('.')).toBe('');
+    expect((0, _arrFn.joinBy)('.', 'a')).toBe('a');
+    expect((0, _arrFn.joinBy)('.', 'a', 'b')).toBe('a.b');
+  });
+  test('should filter falsy values', () => {
+    expect((0, _arrFn.joinBy)('.', '', 'b', 'c')).toBe('b.c');
+    expect((0, _arrFn.joinBy)('.', null, 'b', 'c')).toBe('b.c');
+    expect((0, _arrFn.joinBy)('.', void 0, 'b', 'c')).toBe('b.c');
   });
 });
 //# sourceMappingURL=arrFn.test.js.map

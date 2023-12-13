@@ -184,16 +184,9 @@ describe('findMaxY', ()=>{
   })
 })
 
-describe('joinBy', () => {
-  test('should join by delimeter', () => {
-    expect(joinBy('.')).toBe('')
-    expect(joinBy('.', 'a')).toBe('a')
-    expect(joinBy('.', 'a', 'b')).toBe('a.b')
-  })
-  test('should filter falsy values', () => {
-    expect(joinBy('.', '', 'b', 'c')).toBe('b.c')
-    expect(joinBy('.', null, 'b', 'c')).toBe('b.c')
-    expect(joinBy('.', void 0, 'b', 'c')).toBe('b.c')
+describe('joinBy', () => {  
+  test('joinBy should be function', () => {
+    expect(typeof joinBy).toBe('function')
   })
 })
 

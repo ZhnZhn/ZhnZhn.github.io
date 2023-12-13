@@ -21,3 +21,10 @@ export const arrFactoryFindIndexByProp = (
 ) => (arr, propValue) => _isArr(arr)
   ? _findArrIndexBy(arr, propName, propValue)
   : -1
+
+export const joinBy = (
+  delimeter,
+  ...restItems
+) => restItems
+  .filter(Boolean)
+  .join(delimeter)

@@ -1,7 +1,8 @@
 import {
   arrFactoryFindIndexByProp,
   arrFactoryIsSameByProp,
-  isInArrStr
+  isInArrStr,
+  joinBy
 } from '../arrFn';
 
 const propName = 'caption'
@@ -74,4 +75,17 @@ describe('isInArrStr', () => {
       expect(_isTest1('test1')).toBe(false)
       expect(_isTest2('test1')).toBe(false)
    })
+})
+
+describe('joinBy', () => {
+  test('should join by delimeter', () => {
+    expect(joinBy('.')).toBe('')
+    expect(joinBy('.', 'a')).toBe('a')
+    expect(joinBy('.', 'a', 'b')).toBe('a.b')
+  })
+  test('should filter falsy values', () => {
+    expect(joinBy('.', '', 'b', 'c')).toBe('b.c')
+    expect(joinBy('.', null, 'b', 'c')).toBe('b.c')
+    expect(joinBy('.', void 0, 'b', 'c')).toBe('b.c')
+  })
 })

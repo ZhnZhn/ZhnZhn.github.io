@@ -240,15 +240,8 @@ describe('findMaxY', () => {
   });
 });
 describe('joinBy', () => {
-  test('should join by delimeter', () => {
-    expect((0, _AdapterFn.joinBy)('.')).toBe('');
-    expect((0, _AdapterFn.joinBy)('.', 'a')).toBe('a');
-    expect((0, _AdapterFn.joinBy)('.', 'a', 'b')).toBe('a.b');
-  });
-  test('should filter falsy values', () => {
-    expect((0, _AdapterFn.joinBy)('.', '', 'b', 'c')).toBe('b.c');
-    expect((0, _AdapterFn.joinBy)('.', null, 'b', 'c')).toBe('b.c');
-    expect((0, _AdapterFn.joinBy)('.', void 0, 'b', 'c')).toBe('b.c');
+  test('joinBy should be function', () => {
+    expect(typeof _AdapterFn.joinBy).toBe('function');
   });
 });
 describe('valueMoving', () => {
