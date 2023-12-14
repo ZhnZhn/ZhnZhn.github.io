@@ -1,1 +1,32 @@
-{"version":3,"sources":["../../../../src/components/zhn-search/flux/reducer.js"],"names":["reducer","state","action","type","SEARCH","LOADING","isLoadingFailed","isLoading","LOADING_FAILED","LOADED","options","isOptions","SET_TICKET","ticket","SHOW_OPTIONS","HIDE_OPTIONS","TOGGLE_OPTIONS","TypeError"],"mappings":";;;;;;;;;AAAA;;AAEA,IAAMA,OAAO,GAAG,SAAVA,OAAU,CAACC,KAAD,EAAQC,MAAR,EAAmB;AACjC,UAAOA,MAAM,CAACC,IAAd;AACE,SAAKC,uBAAOC,OAAZ;AACE,2CACKJ,KADL;AAEEK,QAAAA,eAAe,EAAE,KAFnB;AAGEC,QAAAA,SAAS,EAAE;AAHb;;AAKF,SAAKH,uBAAOI,cAAZ;AACE,2CACKP,KADL;AAEEM,QAAAA,SAAS,EAAE,KAFb;AAGED,QAAAA,eAAe,EAAE;AAHnB;;AAKF,SAAKF,uBAAOK,MAAZ;AACE,2CACKR,KADL;AAEES,QAAAA,OAAO,EAAER,MAAM,CAACQ,OAFlB;AAGEC,QAAAA,SAAS,EAAE,IAHb;AAIEJ,QAAAA,SAAS,EAAE;AAJb;;AAMF,SAAKH,uBAAOQ,UAAZ;AACE,2CACKX,KADL;AAEEY,QAAAA,MAAM,EAAEX,MAAM,CAACW,MAFjB;AAGEF,QAAAA,SAAS,EAAE;AAHb;;AAKF,SAAKP,uBAAOU,YAAZ;AACE,2CACKb,KADL;AAEEU,QAAAA,SAAS,EAAE;AAFb;;AAIF,SAAKP,uBAAOW,YAAZ;AACE,2CACKd,KADL;AAEEU,QAAAA,SAAS,EAAE,KAFb;AAGEL,QAAAA,eAAe,EAAE;AAHnB;;AAKF,SAAKF,uBAAOY,cAAZ;AACE,2CACMf,KADN;AAEGU,QAAAA,SAAS,EAAE,CAACV,KAAK,CAACU;AAFrB;;AAIF;AACE,YAAM,IAAIM,SAAJ,CAAc,yBAAyBf,MAAM,CAACC,IAA9C,CAAN;AA3CJ;AA6CD,CA9CD;;eAgDeH,O","sourcesContent":["import SEARCH from './enumSearch'\r\n\r\nconst reducer = (state, action) => {\r\n  switch(action.type){\r\n    case SEARCH.LOADING:\r\n      return {\r\n        ...state,\r\n        isLoadingFailed: false,\r\n        isLoading: true\r\n      };\r\n    case SEARCH.LOADING_FAILED:\r\n      return {\r\n        ...state,\r\n        isLoading: false,\r\n        isLoadingFailed: true\r\n      };\r\n    case SEARCH.LOADED:\r\n      return {\r\n        ...state,\r\n        options: action.options,\r\n        isOptions: true,\r\n        isLoading: false\r\n      };\r\n    case SEARCH.SET_TICKET:\r\n      return {\r\n        ...state,\r\n        ticket: action.ticket,\r\n        isOptions: false\r\n      };\r\n    case SEARCH.SHOW_OPTIONS:\r\n      return {\r\n        ...state,\r\n        isOptions: true\r\n      };\r\n    case SEARCH.HIDE_OPTIONS:\r\n      return {\r\n        ...state,\r\n        isOptions: false,\r\n        isLoadingFailed: false\r\n      };\r\n    case SEARCH.TOGGLE_OPTIONS:\r\n      return {\r\n         ...state,\r\n         isOptions: !state.isOptions\r\n      };\r\n    default:\r\n      throw new TypeError('Not existed action: ' + action.type)\r\n  }\r\n};\r\n\r\nexport default reducer\r\n"],"file":"reducer.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/zhn-search/flux/reducer.js"
+ ],
+ "file": "../../../../src/components/zhn-search/flux/reducer.js",
+ "names": [
+  "_actionTypes",
+  "require",
+  "reducer",
+  "state",
+  "action",
+  "type",
+  "LOADING",
+  "isLoadingFailed",
+  "isLoading",
+  "LOADING_FAILED",
+  "LOADED",
+  "options",
+  "isOptions",
+  "SET_TICKET",
+  "ticket",
+  "SHOW_OPTIONS",
+  "HIDE_OPTIONS",
+  "TOGGLE_OPTIONS",
+  "TypeError",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,YAAA,GAAAC,OAAA;AAUA,MAAMC,OAAO,GAAGA,CAACC,KAAK,EAAEC,MAAM,KAAK;EACjC,QAAOA,MAAM,CAACC,IAAI;IAChB,KAAKC,oBAAO;MACV,OAAO;QACL,GAAGH,KAAK;QACRI,eAAe,EAAE,KAAK;QACtBC,SAAS,EAAE;MACb,CAAC;IACH,KAAKC,2BAAc;MACjB,OAAO;QACL,GAAGN,KAAK;QACRK,SAAS,EAAE,KAAK;QAChBD,eAAe,EAAE;MACnB,CAAC;IACH,KAAKG,mBAAM;MACT,OAAO;QACL,GAAGP,KAAK;QACRQ,OAAO,EAAEP,MAAM,CAACO,OAAO;QACvBC,SAAS,EAAE,IAAI;QACfJ,SAAS,EAAE;MACb,CAAC;IACH,KAAKK,uBAAU;MACb,OAAO;QACL,GAAGV,KAAK;QACRW,MAAM,EAAEV,MAAM,CAACU,MAAM;QACrBF,SAAS,EAAE;MACb,CAAC;IACH,KAAKG,yBAAY;MACf,OAAO;QACL,GAAGZ,KAAK;QACRS,SAAS,EAAE;MACb,CAAC;IACH,KAAKI,yBAAY;MACf,OAAO;QACL,GAAGb,KAAK;QACRS,SAAS,EAAE,KAAK;QAChBL,eAAe,EAAE;MACnB,CAAC;IACH,KAAKU,2BAAc;MACjB,OAAO;QACJ,GAAGd,KAAK;QACRS,SAAS,EAAE,CAACT,KAAK,CAACS;MACrB,CAAC;IACH;MACE,MAAM,IAAIM,SAAS,CAAC,sBAAsB,GAAGd,MAAM,CAACC,IAAI,CAAC;EAC7D;AACF,CAAC;AAAC,IAAAc,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEanB,OAAO"
+}

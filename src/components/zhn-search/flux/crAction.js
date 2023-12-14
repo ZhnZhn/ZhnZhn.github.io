@@ -1,30 +1,38 @@
 import memoizeOne from 'memoize-one'
 
-import SEARCH from './enumSearch'
+import {
+  LOADING,
+  LOADING_FAILED,
+  LOADED,
+  SET_TICKET,
+  SHOW_OPTIONS,
+  HIDE_OPTIONS,
+  TOGGLE_OPTIONS
+} from './actionTypes';
 
 const crAction = (dispatch) => ({
   loading: () => dispatch({
-    type: SEARCH.LOADING
+    type: LOADING
   }),
   loadingFailed: () => dispatch({
-    type: SEARCH.LOADING_FAILED
+    type: LOADING_FAILED
   }),
   loaded: (options) => dispatch({
-    type: SEARCH.LOADED, options
+    type: LOADED, options
   }),
 
   setTicket: (ticket) => dispatch({
-    type: SEARCH.SET_TICKET, ticket
+    type: SET_TICKET, ticket
   }),
 
   showOptions: () => dispatch({
-    type: SEARCH.SHOW_OPTIONS
+    type: SHOW_OPTIONS
   }),
   hideOptions: () => dispatch({
-    type: SEARCH.HIDE_OPTIONS
+    type: HIDE_OPTIONS
   }),
   toggleOptions: () => dispatch({
-    type: SEARCH.TOGGLE_OPTIONS
+    type: TOGGLE_OPTIONS
   })
 })
 

@@ -1,62 +1,54 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _enumSearch = _interopRequireDefault(require("./enumSearch"));
-
-var reducer = function reducer(state, action) {
+exports.default = void 0;
+var _actionTypes = require("./actionTypes");
+const reducer = (state, action) => {
   switch (action.type) {
-    case _enumSearch["default"].LOADING:
-      return (0, _extends2["default"])({}, state, {
+    case _actionTypes.LOADING:
+      return {
+        ...state,
         isLoadingFailed: false,
         isLoading: true
-      });
-
-    case _enumSearch["default"].LOADING_FAILED:
-      return (0, _extends2["default"])({}, state, {
+      };
+    case _actionTypes.LOADING_FAILED:
+      return {
+        ...state,
         isLoading: false,
         isLoadingFailed: true
-      });
-
-    case _enumSearch["default"].LOADED:
-      return (0, _extends2["default"])({}, state, {
+      };
+    case _actionTypes.LOADED:
+      return {
+        ...state,
         options: action.options,
         isOptions: true,
         isLoading: false
-      });
-
-    case _enumSearch["default"].SET_TICKET:
-      return (0, _extends2["default"])({}, state, {
+      };
+    case _actionTypes.SET_TICKET:
+      return {
+        ...state,
         ticket: action.ticket,
         isOptions: false
-      });
-
-    case _enumSearch["default"].SHOW_OPTIONS:
-      return (0, _extends2["default"])({}, state, {
+      };
+    case _actionTypes.SHOW_OPTIONS:
+      return {
+        ...state,
         isOptions: true
-      });
-
-    case _enumSearch["default"].HIDE_OPTIONS:
-      return (0, _extends2["default"])({}, state, {
+      };
+    case _actionTypes.HIDE_OPTIONS:
+      return {
+        ...state,
         isOptions: false,
         isLoadingFailed: false
-      });
-
-    case _enumSearch["default"].TOGGLE_OPTIONS:
-      return (0, _extends2["default"])({}, state, {
+      };
+    case _actionTypes.TOGGLE_OPTIONS:
+      return {
+        ...state,
         isOptions: !state.isOptions
-      });
-
+      };
     default:
       throw new TypeError('Not existed action: ' + action.type);
   }
 };
-
-var _default = reducer;
-exports["default"] = _default;
+var _default = exports.default = reducer;
 //# sourceMappingURL=reducer.js.map

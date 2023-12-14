@@ -1,44 +1,52 @@
-import SEARCH from './enumSearch'
+import {
+  LOADING,
+  LOADING_FAILED,
+  LOADED,
+  SET_TICKET,
+  SHOW_OPTIONS,
+  HIDE_OPTIONS,
+  TOGGLE_OPTIONS
+} from './actionTypes';
 
 const reducer = (state, action) => {
   switch(action.type){
-    case SEARCH.LOADING:
+    case LOADING:
       return {
         ...state,
         isLoadingFailed: false,
         isLoading: true
       };
-    case SEARCH.LOADING_FAILED:
+    case LOADING_FAILED:
       return {
         ...state,
         isLoading: false,
         isLoadingFailed: true
       };
-    case SEARCH.LOADED:
+    case LOADED:
       return {
         ...state,
         options: action.options,
         isOptions: true,
         isLoading: false
       };
-    case SEARCH.SET_TICKET:
+    case SET_TICKET:
       return {
         ...state,
         ticket: action.ticket,
         isOptions: false
       };
-    case SEARCH.SHOW_OPTIONS:
+    case SHOW_OPTIONS:
       return {
         ...state,
         isOptions: true
       };
-    case SEARCH.HIDE_OPTIONS:
+    case HIDE_OPTIONS:
       return {
         ...state,
         isOptions: false,
         isLoadingFailed: false
       };
-    case SEARCH.TOGGLE_OPTIONS:
+    case TOGGLE_OPTIONS:
       return {
          ...state,
          isOptions: !state.isOptions
