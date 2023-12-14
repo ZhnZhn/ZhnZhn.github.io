@@ -16,8 +16,7 @@ module.exports = {
             "highcharts",             
             "highcharts/modules/treemap",
             "highcharts/modules/exporting", "highcharts/modules/offline-exporting",            
-            "jsonstat",
-            "memoize-one"
+            "jsonstat"
           ]
   },
   output: {
