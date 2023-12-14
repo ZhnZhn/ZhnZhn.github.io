@@ -1,9 +1,7 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _memoizeOne = _interopRequireDefault(require("memoize-one"));
 const _isArr = Array.isArray;
 const _findItem = (item, chartType) => {
   if (_isArr(item.items)) {
@@ -37,7 +35,7 @@ const findItem = (menu, chartType) => {
     }
   }
 };
-const findItemSetValue = (menu, chartType) => ((findItem(menu, chartType) || {}).atomBadge || {}).setValue;
-var _default = (0, _memoizeOne.default)(findItemSetValue);
-exports.default = _default;
+let _recentSetValue, _recentChartType, _recentMenu;
+const findItemSetValue = (menu, chartType) => menu === _recentMenu && chartType === _recentChartType ? _recentSetValue : (_recentMenu = menu, _recentChartType = chartType, _recentSetValue = ((findItem(menu, chartType) || {}).atomBadge || {}).setValue, _recentSetValue);
+var _default = exports.default = findItemSetValue;
 //# sourceMappingURL=findItem.js.map

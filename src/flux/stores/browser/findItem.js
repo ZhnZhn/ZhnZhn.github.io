@@ -1,5 +1,3 @@
-import memoizeOne from "memoize-one";
-
 const _isArr = Array.isArray;
 
 const _findItem = (
@@ -20,7 +18,7 @@ const _findItem = (
 const findItem = (
   menu,
   chartType
-) => {
+) => {  
   if (!_isArr(menu)) {return;}
 
   for (const topics of menu){
@@ -37,9 +35,20 @@ const findItem = (
   }
 };
 
+let _recentSetValue
+, _recentChartType
+, _recentMenu;
 const findItemSetValue = (
   menu,
   chartType
-) => ((findItem(menu, chartType) || {}).atomBadge || {}).setValue
+) => menu === _recentMenu
+ && chartType === _recentChartType
+ ? _recentSetValue
+ : (
+     _recentMenu = menu,
+     _recentChartType = chartType,
+     _recentSetValue = ((findItem(menu, chartType) || {}).atomBadge || {}).setValue,
+     _recentSetValue
+  );
 
-export default memoizeOne(findItemSetValue)
+export default findItemSetValue
