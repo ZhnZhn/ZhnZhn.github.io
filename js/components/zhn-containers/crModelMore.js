@@ -1,9 +1,7 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _memoizeOne = _interopRequireDefault(require("memoize-one"));
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 const _crSubItem = (id, name) => ({
@@ -12,7 +10,6 @@ const _crSubItem = (id, name) => ({
   name
   //cn
 });
-
 const _crItem = function (name, onClick, isClose) {
   if (isClose === void 0) {
     isClose = true;
@@ -24,9 +21,8 @@ const _crItem = function (name, onClick, isClose) {
     //cn
   };
 };
-
 const P0 = [_crSubItem('p1', 'Items'), _crSubItem('p2', 'Sort By, ASC'), _crSubItem('p3', 'Resize')];
-const _crModelMore = (isAdminMode, _ref) => {
+const crModelMore = (isAdminMode, _ref) => {
   let {
     onMinWidth,
     onInitWidth,
@@ -52,6 +48,5 @@ const _crModelMore = (isAdminMode, _ref) => {
     p3: [_crItem('to MinWidth', onMinWidth, false), _crItem('to InitialWidth', onInitWidth, false), _crItem('+10px to Width', onPlusWidth, false), _crItem('-10px to Width', onMinusWidth, false), _crItem('Fit Items to Width', onFit, false)]
   };
 };
-const crModelMore = (0, _memoizeOne.default)(_crModelMore);
 var _default = exports.default = crModelMore;
 //# sourceMappingURL=crModelMore.js.map

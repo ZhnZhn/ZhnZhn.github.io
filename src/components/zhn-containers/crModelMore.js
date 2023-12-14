@@ -1,15 +1,17 @@
-import memoizeOne from 'memoize-one';
 import { bindTo } from '../uiApi';
 import { CL_ROW_PANE_TOPIC } from '../styleFn';
 
 const _crSubItem = (id, name) => ({
   type: 'sub',
-  id, name
+  id,
+  name
   //cn
 });
 
 const _crItem = (name, onClick, isClose=true) => ({
-  name, onClick, isClose
+  name,
+  onClick,
+  isClose
   //cn
 });
 
@@ -19,7 +21,7 @@ const P0 = [
   _crSubItem('p3', 'Resize')
 ];
 
-const _crModelMore = (isAdminMode, {
+const crModelMore = (isAdminMode, {
   onMinWidth,
   onInitWidth,
   onPlusWidth,
@@ -58,7 +60,5 @@ const _crModelMore = (isAdminMode, {
     ]
   };
 };
-
-const crModelMore = memoizeOne(_crModelMore);
 
 export default crModelMore
