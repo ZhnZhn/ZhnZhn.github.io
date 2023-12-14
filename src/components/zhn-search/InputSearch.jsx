@@ -2,6 +2,7 @@ import {
   useRef,
   useState,
   useReducer,
+  useMemo,
   useEffect,
   focusRefElement
 } from '../uiApi';
@@ -69,7 +70,7 @@ const InputSearch = ({
       options,
       ticket
     } = state
-  , action = crAction(dispatch)
+  , action = useMemo(() => crAction(dispatch), [])
   , _onInputChange = crInputChange(action, searchApi);
 
   const _onEnter = () => {

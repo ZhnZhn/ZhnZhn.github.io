@@ -1,5 +1,3 @@
-import memoizeOne from 'memoize-one'
-
 import {
   LOADING,
   LOADING_FAILED,
@@ -36,4 +34,4 @@ const crAction = (dispatch) => ({
   })
 })
 
-export default memoizeOne(crAction)
+export default crAction
