@@ -52,7 +52,7 @@ const _isShowOptions = (
 const InputSearch = ({
   isSearch=true,
   searchApi,
-  crInputChange=crInputChangeDf
+  crInputChange
 }) => {
   const refInput = useRef()
   , [
@@ -70,8 +70,14 @@ const InputSearch = ({
       options,
       ticket
     } = state
-  , action = useMemo(() => crAction(dispatch), [])
-  , _onInputChange = crInputChange(action, searchApi);
+  , action = useMemo(
+    () => crAction(dispatch),
+    []
+  )
+  , _onInputChange = useMemo(
+    () => (crInputChange || crInputChangeDf)(action, searchApi),
+    [action, searchApi, crInputChange]
+  );
 
   const _onEnter = () => {
     if (isSearch) {

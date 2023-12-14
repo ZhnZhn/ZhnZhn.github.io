@@ -41,7 +41,7 @@ const InputSearch = _ref => {
   let {
     isSearch = true,
     searchApi,
-    crInputChange = _crInputChange.default
+    crInputChange
   } = _ref;
   const refInput = (0, _uiApi.useRef)(),
     [inputKey, forceUpdate] = (0, _uiApi.useState)(0),
@@ -54,7 +54,7 @@ const InputSearch = _ref => {
       ticket
     } = state,
     action = (0, _uiApi.useMemo)(() => (0, _crAction.default)(dispatch), []),
-    _onInputChange = crInputChange(action, searchApi);
+    _onInputChange = (0, _uiApi.useMemo)(() => (crInputChange || _crInputChange.default)(action, searchApi), [action, searchApi, crInputChange]);
   const _onEnter = () => {
     if (isSearch) {
       _onInputChange.cancel();

@@ -1,4 +1,3 @@
-import memoizeOne from 'memoize-one';
 import debounceFn from '../../../utils/debounceFn';
 
 const DF_MS = 5000;
@@ -36,7 +35,7 @@ const _fetchUrl = ({
     }
   })
 
-const _crInputChange = (
+const crInputChange = (
   action,
   api,
   ms
@@ -57,4 +56,4 @@ const _crInputChange = (
   }
 }, ms || DF_MS)
 
-export default memoizeOne(_crInputChange)
+export default crInputChange
