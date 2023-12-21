@@ -1,4 +1,5 @@
 import useBool from './useBool';
+import { useKeyEscape } from './fUseKey';
 
 const useBrowserShow = ({
   isInitShow,
@@ -19,7 +20,8 @@ const useBrowserShow = ({
 
   return [
     isShow,
-    hideBrowser
+    hideBrowser,
+    useKeyEscape(hideBrowser)
   ];
 };
 

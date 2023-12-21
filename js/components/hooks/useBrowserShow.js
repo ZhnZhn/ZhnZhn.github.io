@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _useBool = _interopRequireDefault(require("./useBool"));
+var _fUseKey = require("./fUseKey");
 const useBrowserShow = _ref => {
   let {
     isInitShow,
@@ -16,7 +17,7 @@ const useBrowserShow = _ref => {
       showBrowser();
     }
   });
-  return [isShow, hideBrowser];
+  return [isShow, hideBrowser, (0, _fUseKey.useKeyEscape)(hideBrowser)];
 };
 var _default = exports.default = useBrowserShow;
 //# sourceMappingURL=useBrowserShow.js.map
