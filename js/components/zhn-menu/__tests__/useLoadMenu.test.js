@@ -6,7 +6,6 @@ var _browserStore = require("../../../flux/stores/browserStore");
 var _useLoadMenu = _interopRequireDefault(require("../useLoadMenu"));
 const _getIsLoading = result => result.current[0];
 const _getMenu = result => result.current[1];
-const _getUpdateMenu = result => result.current[2];
 const _expectResult = (result, isLoading, menu) => {
   //try {
   expect(_getIsLoading(result)).toBe(isLoading);
@@ -16,7 +15,6 @@ const _expectResult = (result, isLoading, menu) => {
   //  throw error;
   //}
 };
-
 describe('useLoadMenu', () => {
   test('should return correct state after actions', () => {
     const BROWSER_TYPE = "BROWSER_TYPE_1",
@@ -38,13 +36,6 @@ describe('useLoadMenu', () => {
     }];
     (0, _react.act)(() => (0, _browserStore.setMsBrowserLoaded)(BROWSER_TYPE, menu));
     _testResult(false, menu);
-
-    //UPDATE
-    const menuUpdate = [{
-      caption: 'Item2'
-    }];
-    (0, _react.act)(() => _getUpdateMenu(result)(menuUpdate));
-    _testResult(false, menuUpdate);
   });
 });
 //# sourceMappingURL=useLoadMenu.test.js.map

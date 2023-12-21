@@ -9,9 +9,8 @@ import {
 } from '../../../flux/stores/browserStore';
 import useLoadMenu from '../useLoadMenu';
 
-const _getIsLoading = result => result.current[0]
-const _getMenu = result => result.current[1]
-const _getUpdateMenu = result => result.current[2]
+const _getIsLoading = result => result.current[0];
+const _getMenu = result => result.current[1];
 
 const _expectResult = (
   result,
@@ -52,11 +51,5 @@ describe('useLoadMenu', ()=>{
       menu
     ))
     _testResult(false, menu)
-
-    //UPDATE
-    const menuUpdate = [{caption: 'Item2'}]
-    act(() => _getUpdateMenu(result)(menuUpdate))
-    _testResult(false, menuUpdate)
-
   })
 })

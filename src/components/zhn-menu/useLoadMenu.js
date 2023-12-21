@@ -6,7 +6,6 @@ import {
 const LOADING = 'a'
 , LOADED = 'b'
 , FAILED = 'c'
-, UPDATE = 'd'
 , _crAction = (type, menu) => ({ type, menu })
 , initialState = {
   isLoaded: false,
@@ -19,14 +18,16 @@ const _reducer = (
   {type, menu}
 ) => {
   switch(type){
-    case LOADING: return { ...state, isLoading: true };
+    case LOADING: return {
+      ...state,
+      isLoading: true
+    };
     case LOADED: return {
+      menu,
       isLoading: false,
-      isLoaded: true,
-      menu
+      isLoaded: true
     };
     case FAILED: return { ...initialState };
-    case UPDATE: return { ...state, menu };
     default: return state;
   }
 };
@@ -41,9 +42,11 @@ const useLoadMenu = (
      isLoading,
      isLoaded,
      menu
-   }, dispatch] = useReducer(_reducer, initialState)
-   , setLoading = () => dispatch(_crAction(LOADING))
-   , updateMenu = menu => dispatch(_crAction(UPDATE, menu));
+   }, dispatch] = useReducer(
+     _reducer,
+     initialState
+   )
+   , _isRequireLoadMenu = !isLoaded && !isLoading && isShow;
 
    useMsBrowserLoad(msBrowserLoad => {
      if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
@@ -58,18 +61,17 @@ const useLoadMenu = (
 
    /*eslint-disable react-hooks/exhaustive-deps */
    useEffect(()=>{
-     if (!isLoaded && isShow) {
+     if (_isRequireLoadMenu) {
        onLoadMenu()
-       setLoading()
+       dispatch(_crAction(LOADING))
      }
-   }, [isLoaded, isShow])
+   }, [_isRequireLoadMenu])
    // onLoadMenu
    /*eslint-enable react-hooks/exhaustive-deps */
 
    return [
      isLoading,
-     menu,
-     updateMenu
+     menu
    ];
 };
 

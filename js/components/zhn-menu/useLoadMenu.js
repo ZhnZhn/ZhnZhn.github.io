@@ -6,7 +6,6 @@ var _uiApi = require("../uiApi");
 const LOADING = 'a',
   LOADED = 'b',
   FAILED = 'c',
-  UPDATE = 'd',
   _crAction = (type, menu) => ({
     type,
     menu
@@ -29,18 +28,13 @@ const _reducer = (state, _ref) => {
       };
     case LOADED:
       return {
+        menu,
         isLoading: false,
-        isLoaded: true,
-        menu
+        isLoaded: true
       };
     case FAILED:
       return {
         ...initialState
-      };
-    case UPDATE:
-      return {
-        ...state,
-        menu
       };
     default:
       return state;
@@ -52,8 +46,7 @@ const useLoadMenu = (isShow, onLoadMenu, useMsBrowserLoad, browserType) => {
       isLoaded,
       menu
     }, dispatch] = (0, _uiApi.useReducer)(_reducer, initialState),
-    setLoading = () => dispatch(_crAction(LOADING)),
-    updateMenu = menu => dispatch(_crAction(UPDATE, menu));
+    _isRequireLoadMenu = !isLoaded && !isLoading && isShow;
   useMsBrowserLoad(msBrowserLoad => {
     if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
       const {
@@ -69,15 +62,15 @@ const useLoadMenu = (isShow, onLoadMenu, useMsBrowserLoad, browserType) => {
 
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
-    if (!isLoaded && isShow) {
+    if (_isRequireLoadMenu) {
       onLoadMenu();
-      setLoading();
+      dispatch(_crAction(LOADING));
     }
-  }, [isLoaded, isShow]);
+  }, [_isRequireLoadMenu]);
   // onLoadMenu
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  return [isLoading, menu, updateMenu];
+  return [isLoading, menu];
 };
 var _default = exports.default = useLoadMenu;
 //# sourceMappingURL=useLoadMenu.js.map
