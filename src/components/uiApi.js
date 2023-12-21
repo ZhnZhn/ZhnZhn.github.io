@@ -22,6 +22,7 @@ export {
   useMemo,
   useLayoutEffect,
   useEffect,
+  useSyncExternalStore,
   useImperativeHandle
 } from 'react';
 
