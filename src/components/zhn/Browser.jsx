@@ -8,6 +8,7 @@ const CL_BROWSER = crBsContainerCn('browser-container');
 const Browser = ({
   isShow,
   style,
+  onKeyDown,
   children
 }) => {
   const [
@@ -22,6 +23,8 @@ const Browser = ({
          ...style,
          ..._style
        }}
+       role="presentation"
+       onKeyDown={onKeyDown}
     >
        {children}
     </div>

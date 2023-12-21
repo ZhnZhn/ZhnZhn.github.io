@@ -9,6 +9,7 @@ const Browser = _ref => {
   let {
     isShow,
     style,
+    onKeyDown,
     children
   } = _ref;
   const [_cn, _style] = (0, _styleFn.crShowHide)(isShow, CL_BROWSER);
@@ -18,9 +19,10 @@ const Browser = _ref => {
       ...style,
       ..._style
     },
+    role: "presentation",
+    onKeyDown: onKeyDown,
     children: children
   });
 };
-var _default = Browser;
-exports.default = _default;
+var _default = exports.default = Browser;
 //# sourceMappingURL=Browser.js.map
