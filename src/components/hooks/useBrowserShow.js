@@ -1,3 +1,5 @@
+import { HAS_KEYBOARD_FOCUS } from '../has';
+
 import useBool from './useBool';
 import { useKeyEscape } from './fUseKey';
 
@@ -21,7 +23,9 @@ const useBrowserShow = ({
   return [
     isShow,
     hideBrowser,
-    useKeyEscape(hideBrowser)
+    /*eslint-disable react-hooks/rules-of-hooks*/
+    HAS_KEYBOARD_FOCUS && useKeyEscape(hideBrowser)
+    /*eslint-enable react-hooks/rules-of-hooks*/
   ];
 };
 
