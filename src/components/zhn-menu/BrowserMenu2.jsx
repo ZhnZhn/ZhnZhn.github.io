@@ -25,7 +25,6 @@ const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
 //, CL_ROW_ITEM = 'row__type2-topic not-selected'
 
 , S_BROWSER = {
-  paddingRight: 0,
   paddingBottom: 4,
   minWidth: 300
 }
@@ -69,7 +68,8 @@ const BrowserMenu2 = (props) => {
   } = props
   , [
     isShow,
-    hideBrowser
+    hideBrowser,
+    hKeyDown
   ] = useBrowserShow(props)
   , [
     isShowSearch,
@@ -94,7 +94,11 @@ const BrowserMenu2 = (props) => {
      : CL_BROWSER;
 
   return (
-    <Browser isShow={isShow} style={S_BROWSER}>
+    <Browser
+       isShow={isShow}
+       style={S_BROWSER}
+       onKeyDown={hKeyDown}
+    >
         <BrowserCaption
            caption={caption}
            onClose={hideBrowser}

@@ -14,7 +14,6 @@ import EditBar from './EditBar';
 import WatchGroups from './WatchGroups';
 
 const CL_SCROLL_WATCH = crScrollYCn('scroll-watch')
-, S_BROWSER = { paddingRight: 0 }
 , S_BT_CIRCLE = {
   position: 'relative',
   top: -6,
@@ -32,14 +31,18 @@ const WatchBrowser = (props) => {
   ] = useToggle()
   , [
     isShow,
-    _hHide
+    _hHide,
+    hKeyDown
   ] = useBrowserShow(props)
   , watchList = useWatchList()
   , { groups } = watchList || {}
   , _captionEV = isModeEdit ? 'V' : 'E';
 
   return (
-    <A.Browser isShow={isShow} style={S_BROWSER}>
+    <A.Browser
+      isShow={isShow}    
+      onKeyDown={hKeyDown}
+    >
        <A.BrowserCaption
          caption={caption}
          onClose={_hHide}

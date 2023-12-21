@@ -14,8 +14,7 @@ const {
   SpinnerLoading
 } = Comp;
 
-const CL_SCROLL_MENU = crScrollYCn('scroll-menu')
-, S_BROWSER = { paddingRight: 0 };
+const CL_SCROLL_MENU = crScrollYCn('scroll-menu');
 
 const BrowserMenu = (props) => {
   const {
@@ -27,7 +26,8 @@ const BrowserMenu = (props) => {
   } = props
   , [
     isShow,
-    hideBrowser
+    hideBrowser,
+    hKeyDown
   ] = useBrowserShow(props)
   , [
     isLoading,
@@ -45,8 +45,8 @@ const BrowserMenu = (props) => {
 
   return (
     <Browser
-       isShow={isShow}
-       style={S_BROWSER}
+       isShow={isShow}      
+       onKeyDown={hKeyDown}
     >
       <BrowserCaption
          caption={caption}

@@ -171,8 +171,8 @@
   margin-right: 8px;
 }
 
-.browser-container {  
-  padding: 0 3px 35px 0;
+.browser-container {   
+  padding-bottom: 35px;
   min-width: 270px;
   max-width: 400px;
 }

@@ -18,7 +18,6 @@ import BrowserMenuMore from './BrowserMenuMore';
 import MenuSlider from './MenuSlider';
 
 const CL_SCROLL_Y = crScrollYCn()
-, S_BROWSER = { paddingRight: 0 }
 , S_BR_CAPTION = { paddingLeft: 6 }
 , S_SVG_MORE = {
    position: 'relative',
@@ -37,7 +36,8 @@ const BrowserSlider = memo((props) => {
   } = props
   , [
     isShow,
-    hide
+    hide,
+    hKeyDown
   ] = useBrowserShow(props)
   , [
     isMenuMore,
@@ -57,7 +57,10 @@ const BrowserSlider = memo((props) => {
 
   return (
     <BrowserContext.Provider value={_browserContext}>
-      <Browser isShow={isShow} style={S_BROWSER}>
+      <Browser
+         isShow={isShow}         
+         onKeyDown={hKeyDown}
+       >
         <BrowserMenuMore
            is={isMenuMore}
            toggleMenu={toggleMenuMore}

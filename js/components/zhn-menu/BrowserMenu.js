@@ -16,10 +16,7 @@ const {
   ScrollPane,
   SpinnerLoading
 } = _Comp.default;
-const CL_SCROLL_MENU = (0, _styleFn.crScrollYCn)('scroll-menu'),
-  S_BROWSER = {
-    paddingRight: 0
-  };
+const CL_SCROLL_MENU = (0, _styleFn.crScrollYCn)('scroll-menu');
 const BrowserMenu = props => {
   const {
       caption,
@@ -28,12 +25,12 @@ const BrowserMenu = props => {
       onLoadMenu,
       children
     } = props,
-    [isShow, hideBrowser] = (0, _useBrowserShow.default)(props),
+    [isShow, hideBrowser, hKeyDown] = (0, _useBrowserShow.default)(props),
     [isLoading, menu] = (0, _useLoadMenu.default)(isShow, onLoadMenu, useMsBrowserLoad, browserType),
     refFirstItem = (0, _useBrowserMenu.default)(isShow, menu);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
     isShow: isShow,
-    style: S_BROWSER,
+    onKeyDown: hKeyDown,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BrowserCaption, {
       caption: caption,
       onClose: hideBrowser

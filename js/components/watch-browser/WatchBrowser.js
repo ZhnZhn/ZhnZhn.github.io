@@ -12,9 +12,6 @@ var _EditBar = _interopRequireDefault(require("./EditBar"));
 var _WatchGroups = _interopRequireDefault(require("./WatchGroups"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_SCROLL_WATCH = (0, _styleFn.crScrollYCn)('scroll-watch'),
-  S_BROWSER = {
-    paddingRight: 0
-  },
   S_BT_CIRCLE = {
     position: 'relative',
     top: -6,
@@ -26,7 +23,7 @@ const WatchBrowser = props => {
       useWatchList
     } = props,
     [isModeEdit, _toggleEditMode] = (0, _useToggle.default)(),
-    [isShow, _hHide] = (0, _useBrowserShow.default)(props),
+    [isShow, _hHide, hKeyDown] = (0, _useBrowserShow.default)(props),
     watchList = useWatchList(),
     {
       groups
@@ -34,7 +31,7 @@ const WatchBrowser = props => {
     _captionEV = isModeEdit ? 'V' : 'E';
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.Browser, {
     isShow: isShow,
-    style: S_BROWSER,
+    onKeyDown: hKeyDown,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.BrowserCaption, {
       caption: caption,
       onClose: _hHide,

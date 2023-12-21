@@ -26,7 +26,6 @@ const SEARCH_PLACEHOLDER = "Search By Symbol Or Name",
   //, CL_ROW_ITEM = 'row__type2-topic not-selected'
   ,
   S_BROWSER = {
-    paddingRight: 0,
     paddingBottom: 4,
     minWidth: 300
   },
@@ -55,7 +54,6 @@ const _useToolbarButtons = (toggleSearch, onClickInfo, descrUrl) => {
   // toggleSearch
   /*eslint-enable react-hooks/exhaustive-deps */
 };
-
 const BrowserMenu2 = props => {
   const {
       browserType,
@@ -69,7 +67,7 @@ const BrowserMenu2 = props => {
       ItemComp,
       children
     } = props,
-    [isShow, hideBrowser] = (0, _useBrowserShow.default)(props),
+    [isShow, hideBrowser, hKeyDown] = (0, _useBrowserShow.default)(props),
     [isShowSearch, toggleSearch] = (0, _useToggle.default)(),
     _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
     [isLoading, menu] = (0, _useLoadMenu.default)(isShow, onLoadMenu, useMsBrowserLoad, browserType),
@@ -77,6 +75,7 @@ const BrowserMenu2 = props => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
     isShow: isShow,
     style: S_BROWSER,
+    onKeyDown: hKeyDown,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BrowserCaption, {
       caption: caption,
       onClose: hideBrowser

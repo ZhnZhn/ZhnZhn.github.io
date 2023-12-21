@@ -16,9 +16,6 @@ var _BrowserMenuMore = _interopRequireDefault(require("./BrowserMenuMore"));
 var _MenuSlider = _interopRequireDefault(require("./MenuSlider"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_SCROLL_Y = (0, _styleFn.crScrollYCn)(),
-  S_BROWSER = {
-    paddingRight: 0
-  },
   S_BR_CAPTION = {
     paddingLeft: 6
   },
@@ -38,7 +35,7 @@ const BrowserSlider = (0, _uiApi.memo)(props => {
   const {
       caption
     } = props,
-    [isShow, hide] = (0, _useBrowserShow.default)(props),
+    [isShow, hide, hKeyDown] = (0, _useBrowserShow.default)(props),
     [isMenuMore, toggleMenuMore] = (0, _useToggle.default)(),
     [isFilterNotActive, toggleFilterNotActive] = (0, _useToggle.default)()
     /*eslint-disable react-hooks/exhaustive-deps */,
@@ -50,7 +47,7 @@ const BrowserSlider = (0, _uiApi.memo)(props => {
     value: _browserContext,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Browser.default, {
       isShow: isShow,
-      style: S_BROWSER,
+      onKeyDown: hKeyDown,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserMenuMore.default, {
         is: isMenuMore,
         toggleMenu: toggleMenuMore,
