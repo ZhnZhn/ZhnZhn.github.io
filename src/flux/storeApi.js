@@ -54,8 +54,7 @@ export const fUseStoreState = (
 ) => bindTo(
   useSubscribeState,
   store,
-  select,
-  () => select(store.getState())
+  select
 )
 
 const _reducerUseAtomValue = (

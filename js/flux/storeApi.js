@@ -24,7 +24,7 @@ const fCrStoreSlice = (slicePn, optionPn) => [value => ({
 exports.fCrStoreSlice = fCrStoreSlice;
 const fCrUse = (store, select) => (0, _bindTo.bindTo)(_useSubscribe.default, store, select);
 exports.fCrUse = fCrUse;
-const fUseStoreState = (store, select) => (0, _bindTo.bindTo)(_useSubscribeState.default, store, select, () => select(store.getState()));
+const fUseStoreState = (store, select) => (0, _bindTo.bindTo)(_useSubscribeState.default, store, select);
 exports.fUseStoreState = fUseStoreState;
 const _reducerUseAtomValue = (value, crOrValue) => (0, _isTypeFn.isFn)(crOrValue) ? crOrValue(value) : crOrValue;
 const atom = initialValue => {
