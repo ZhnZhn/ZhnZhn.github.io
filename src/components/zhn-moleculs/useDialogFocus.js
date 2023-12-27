@@ -1,8 +1,6 @@
 import {
   useRef,
-  useCallback,
   useEffect,
-  useImperativeHandle,
   getRefValue,
   setRefValue,
   focusRefElement
@@ -10,40 +8,27 @@ import {
 
 const useDialogFocus = (
   isShow,
-  ref,
   refBtMenuMore
 ) => {
   const refRoot = useRef()
   , _refPrevFocused = useRef()
-  , _refIsShowPrev = useRef()
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , focus = useCallback(() => {
-      setRefValue(_refPrevFocused, document.activeElement)
-      focusRefElement(refBtMenuMore, refRoot)
-  }, [])
-  // refBtMenuMore
-  /*eslint-enable react-hooks/exhaustive-deps */
-  , focusPrev = useCallback(()=>{
-      focusRefElement(_refPrevFocused)
-      setRefValue(_refPrevFocused, null)
-  }, []);
+  , _refIsShowPrev = useRef();
 
   /*eslint-disable react-hooks/exhaustive-deps */
-  useEffect(()=>{
+  useEffect(() => {
     const _isPrevShow = getRefValue(_refIsShowPrev);
     if (isShow && !_isPrevShow) {
-      focus()
+      //focus
+      setRefValue(_refPrevFocused, document.activeElement)
+      focusRefElement(refBtMenuMore, refRoot)
     } else if (!isShow && _isPrevShow) {
-      focusPrev()
+      //focusPrev
+      focusRefElement(_refPrevFocused)
+      setRefValue(_refPrevFocused, null)
     }
-    setRefValue(_refIsShowPrev, isShow)    
+    setRefValue(_refIsShowPrev, isShow)
   }, [isShow])
-  //focus, focusPrev
-  useImperativeHandle(ref, () => ({
-    focus,
-    focusPrev
-  }), [])
-  //focus, focusPrev
+  //refBtMenuMore
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return refRoot;
