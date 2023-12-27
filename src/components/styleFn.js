@@ -106,4 +106,4 @@ export const crBtCircleHfCn = (
 
 export const crBtCircleCn = (
   className
-) => `bt-circle ${className} not-selected`
+) => `bt-circle ${className} ${CL_NOT_SELECTED}`

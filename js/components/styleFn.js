@@ -59,6 +59,6 @@ const crElementBgCn = className => crCn(className, CL_EL_BG);
 exports.crElementBgCn = crElementBgCn;
 const crBtCircleHfCn = className => crCn(className, "bt-circle-hf");
 exports.crBtCircleHfCn = crBtCircleHfCn;
-const crBtCircleCn = className => `bt-circle ${className} not-selected`;
+const crBtCircleCn = className => `bt-circle ${className} ${CL_NOT_SELECTED}`;
 exports.crBtCircleCn = crBtCircleCn;
 //# sourceMappingURL=styleFn.js.map
