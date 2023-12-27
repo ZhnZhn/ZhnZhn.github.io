@@ -1,5 +1,4 @@
-import useBool from './useBool';
-import { useKeyEscape } from './fUseKey';
+import useShowHideComponent from './useShowHideComponent';
 
 const useBrowserShow = ({
   isInitShow,
@@ -9,8 +8,9 @@ const useBrowserShow = ({
   const [
     isShow,
     showBrowser,
-    hideBrowser
-  ] = useBool(isInitShow);
+    hideBrowser,
+    hKeyDown
+  ] = useShowHideComponent(isInitShow);
 
   useMsBrowserShow(msBrowserShow => {
     if (msBrowserShow && msBrowserShow.browserType === browserType) {
@@ -21,7 +21,7 @@ const useBrowserShow = ({
   return [
     isShow,
     hideBrowser,
-    useKeyEscape(hideBrowser)
+    hKeyDown
   ];
 };
 
