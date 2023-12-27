@@ -1,7 +1,4 @@
-import {
-  forwardRef,
-  useRef
-} from '../uiApi';
+import { useRef } from '../uiApi';
 
 import {
   crDialogCn,
@@ -64,7 +61,7 @@ const _hClickDialog = evt => {
   evt.stopPropagation()
 }
 
-const ModalDialog = forwardRef(({
+const ModalDialog = ({
   refFocusFirts,
   refFocusLast,
   isShow,
@@ -78,7 +75,7 @@ const ModalDialog = forwardRef(({
   children,
   timeout=450,
   onClose=FN_NOOP
-}, ref) => {
+}) => {
   const refBtClose = useRef()
   , [
     refBtMenuMore,
@@ -87,7 +84,6 @@ const ModalDialog = forwardRef(({
   ] = useMenuMore()
   , refRoot = useDialogFocus(
      isShow,
-     ref,
      refBtMenuMore
   )
   , _hKeyDown = useKeyEscape(onClose)
@@ -153,6 +149,6 @@ const ModalDialog = forwardRef(({
     </div>
     </FocusTrap>
   );
-});
+};
 
 export default ModalDialog

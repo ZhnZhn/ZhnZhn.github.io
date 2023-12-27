@@ -48,7 +48,7 @@ const FN_NOOP = () => {};
 const _hClickDialog = evt => {
   evt.stopPropagation();
 };
-const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
+const ModalDialog = _ref2 => {
   let {
     refFocusFirts,
     refFocusLast,
@@ -66,7 +66,7 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
   } = _ref2;
   const refBtClose = (0, _uiApi.useRef)(),
     [refBtMenuMore, isMenuMore, toggleMenuMore] = (0, _useMenuMore.default)(),
-    refRoot = (0, _useDialogFocus.default)(isShow, ref, refBtMenuMore),
+    refRoot = (0, _useDialogFocus.default)(isShow, refBtMenuMore),
     _hKeyDown = (0, _fUseKey.useKeyEscape)(onClose),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_MODAL_DIALOG);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FocusTrap.default, {
@@ -113,6 +113,6 @@ const ModalDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
       })]
     })
   });
-});
+};
 var _default = exports.default = ModalDialog;
 //# sourceMappingURL=ModalDialog.js.map
