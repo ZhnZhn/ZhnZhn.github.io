@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _has = require("../has");
 var _styleFn = require("../styleFn");
-var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+var _useShowHideComponent = _interopRequireDefault(require("../hooks/useShowHideComponent"));
 var _compStore = require("../../flux/stores/compStore");
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _TwitterLink = _interopRequireDefault(require("./TwitterLink"));
@@ -65,7 +65,7 @@ const CL_ABOUT = (0, _styleFn.crBsContainerCn)("about-container"),
   STEP_T4 = "Click a button Load",
   IS_CLOSE_PROVIDERS = !(0, _has.isWideWidth)();
 const About = () => {
-  const [isShow, show, hide] = (0, _useBool.default)(true);
+  const [isShow, show, hide, hKeyDown] = (0, _useShowHideComponent.default)(true);
   (0, _compStore.useMsAbout)(msAbout => {
     if (msAbout) {
       if (msAbout.is) {
@@ -79,6 +79,7 @@ const About = () => {
     isShow: isShow,
     className: CL_ABOUT,
     animationClass: CL_SHOW_CONT,
+    onKeyDown: hKeyDown,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.BrowserCaption, {
       caption: "About",
       onClose: hide,

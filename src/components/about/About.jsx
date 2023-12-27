@@ -4,7 +4,7 @@ import {
   crScrollYCn
 } from '../styleFn';
 
-import useBool from '../hooks/useBool';
+import useShowHideComponent from '../hooks/useShowHideComponent';
 import { useMsAbout } from '../../flux/stores/compStore';
 
 import A from '../Comp';
@@ -50,8 +50,9 @@ const About = () => {
   const [
     isShow,
     show,
-    hide
-  ] = useBool(true);
+    hide,
+    hKeyDown
+  ] = useShowHideComponent(true);
 
   useMsAbout(msAbout => {
     if (msAbout) {
@@ -68,6 +69,7 @@ const About = () => {
       isShow={isShow}
       className={CL_ABOUT}
       animationClass={CL_SHOW_CONT}
+      onKeyDown={hKeyDown}
     >
        <A.BrowserCaption
           caption="About"

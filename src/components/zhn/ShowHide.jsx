@@ -6,6 +6,7 @@ const ShowHide = ({
   style,
   withoutAnimation,
   animationClass,
+  onKeyDown,
   children
 }) => {
     const [
@@ -17,16 +18,19 @@ const ShowHide = ({
       withoutAnimation,
       animationClass
     );
-    
+
+    /*eslint-disable jsx-a11y/no-static-element-interactions*/
     return (
       <div
         aria-expanded={isShow}
         className={_cn}
         style={{...style, ..._style}}
+        onKeyDown={onKeyDown}
       >
         {children}
       </div>
     );
+    /*eslint-enable jsx-a11y/no-static-element-interactions*/
  };
 
 

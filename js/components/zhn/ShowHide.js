@@ -11,9 +11,12 @@ const ShowHide = _ref => {
     style,
     withoutAnimation,
     animationClass,
+    onKeyDown,
     children
   } = _ref;
   const [_cn, _style] = (0, _styleFn.crShowHide)(isShow, className, withoutAnimation, animationClass);
+
+  /*eslint-disable jsx-a11y/no-static-element-interactions*/
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     "aria-expanded": isShow,
     className: _cn,
@@ -21,9 +24,10 @@ const ShowHide = _ref => {
       ...style,
       ..._style
     },
+    onKeyDown: onKeyDown,
     children: children
   });
+  /*eslint-enable jsx-a11y/no-static-element-interactions*/
 };
-var _default = ShowHide;
-exports.default = _default;
+var _default = exports.default = ShowHide;
 //# sourceMappingURL=ShowHide.js.map
