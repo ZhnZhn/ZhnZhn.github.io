@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.memo = exports.lazy = exports.isTokenInStr = exports.isInputValid = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.focusElementById = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = exports.Children = void 0;
+exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.memo = exports.lazy = exports.isTokenInStr = exports.isInputValid = exports.isFn = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.focusElementById = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = exports.Children = void 0;
 var _isTokenInStr = require("../utils/isTokenInStr");
 exports.isTokenInStr = _isTokenInStr.isTokenInStr;
 var _bindTo = require("../utils/bindTo");
@@ -27,7 +27,8 @@ exports.useLayoutEffect = _react.useLayoutEffect;
 exports.useEffect = _react.useEffect;
 exports.useSyncExternalStore = _react.useSyncExternalStore;
 exports.useImperativeHandle = _react.useImperativeHandle;
-const _isFn = fn => typeof fn === 'function';
+const isFn = fn => typeof fn === 'function';
+exports.isFn = isFn;
 const getRefValue = ref => (ref || {}).current;
 exports.getRefValue = getRefValue;
 const setRefValue = (ref, value) => {
@@ -39,11 +40,11 @@ exports.setRefValue = setRefValue;
 const getRefElementStyle = ref => (getRefValue(ref) || {}).style;
 exports.getRefElementStyle = getRefElementStyle;
 const _focusHtmlElement = element => {
-  if (element && _isFn(element.focus)) {
+  if (element && isFn(element.focus)) {
     element.focus();
   }
 };
-const _getValueFromFnOrRef = refOrFn => _isFn(refOrFn) ? refOrFn() : getRefValue(refOrFn);
+const _getValueFromFnOrRef = refOrFn => isFn(refOrFn) ? refOrFn() : getRefValue(refOrFn);
 const focusRefElement = (fnOrRef1, fnOrRef2) => {
   _focusHtmlElement(_getValueFromFnOrRef(fnOrRef1) || _getValueFromFnOrRef(fnOrRef2));
 };
@@ -64,17 +65,17 @@ const stopDefaultFor = evt => {
 exports.stopDefaultFor = stopDefaultFor;
 const isInputValid = ref => {
   const inputComp = getRefValue(ref);
-  return inputComp && _isFn(inputComp.isValid) ? inputComp.isValid() : false;
+  return inputComp && isFn(inputComp.isValid) ? inputComp.isValid() : false;
 };
 exports.isInputValid = isInputValid;
 const getInputValue = ref => {
   const inputInst = getRefValue(ref);
-  return inputInst && _isFn(inputInst.getValue) ? inputInst.getValue() : void 0;
+  return inputInst && isFn(inputInst.getValue) ? inputInst.getValue() : void 0;
 };
 exports.getInputValue = getInputValue;
 const clearInputValue = ref => {
   const inputInst = getRefValue(ref);
-  if (inputInst && _isFn(inputInst.setValue)) {
+  if (inputInst && isFn(inputInst.setValue)) {
     inputInst.setValue('');
   }
 };
@@ -83,7 +84,7 @@ const getInputValidValue = (ref, dfValue) => isInputValid(ref) ? getInputValue(r
 exports.getInputValidValue = getInputValidValue;
 const getRefOptions = ref => {
   const _inst = getRefValue(ref);
-  return _inst && _isFn(_inst.getOptions) ? _inst.getOptions() : void 0;
+  return _inst && isFn(_inst.getOptions) ? _inst.getOptions() : void 0;
 };
 exports.getRefOptions = getRefOptions;
 const _getFirstTouches = touches => touches && touches[0] || {},

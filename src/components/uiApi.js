@@ -27,7 +27,7 @@ export {
 } from 'react';
 
 
-const _isFn = fn => typeof fn === 'function';
+export const isFn = fn => typeof fn === 'function'
 
 export const getRefValue = (
   ref
@@ -49,14 +49,14 @@ export const getRefElementStyle = (
 const _focusHtmlElement = (
   element
 ) => {
-  if (element && _isFn(element.focus)) {
+  if (element && isFn(element.focus)) {
     element.focus()
   }
 }
 
 const _getValueFromFnOrRef = (
   refOrFn
-) => _isFn(refOrFn)
+) => isFn(refOrFn)
   ? refOrFn()
   : getRefValue(refOrFn)
 
@@ -90,21 +90,21 @@ export const stopDefaultFor = (evt) => {
 
 export const isInputValid = ref => {
   const inputComp = getRefValue(ref);
-  return inputComp && _isFn(inputComp.isValid)
+  return inputComp && isFn(inputComp.isValid)
     ? inputComp.isValid()
     : false;
 }
 
 export const getInputValue = ref => {
   const inputInst = getRefValue(ref);
-  return inputInst && _isFn(inputInst.getValue)
+  return inputInst && isFn(inputInst.getValue)
     ? inputInst.getValue()
     : void 0
 }
 
 export const clearInputValue = ref => {
   const inputInst = getRefValue(ref);
-  if (inputInst && _isFn(inputInst.setValue)) {
+  if (inputInst && isFn(inputInst.setValue)) {
     inputInst.setValue('')
   }
 }
@@ -120,7 +120,7 @@ export const getRefOptions = (
   ref
 ) => {
   const _inst = getRefValue(ref)
-  return _inst && _isFn(_inst.getOptions)
+  return _inst && isFn(_inst.getOptions)
     ? _inst.getOptions()
     : void 0
 };
