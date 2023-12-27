@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _useMenuMore = _interopRequireDefault(require("../hooks/useMenuMore"));
@@ -15,7 +16,6 @@ var _MenuMore = _interopRequireDefault(require("./MenuMore"));
 var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_DRAGGABLE_DIALOG = (0, _styleFn.crDialogCn)("draggable-dialog"),
-  CL_NOT_SELECTED = "not-selected",
   CL_EL = (0, _styleFn.crElementCn)(),
   S_DIALOG_DIV = {
     ..._Dialog.S_ROOT_DIV,
@@ -24,7 +24,6 @@ const CL_DRAGGABLE_DIALOG = (0, _styleFn.crDialogCn)("draggable-dialog"),
     left: 50,
     zIndex: 10
   };
-const _isFn = fn => typeof fn === 'function';
 const CommandButtons = _ref => {
   let {
     buttons,
@@ -34,12 +33,12 @@ const CommandButtons = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: _Dialog.S_COMMAND_DIV,
-    children: [buttons, _isFn(onLoad) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+    children: [buttons, (0, _uiApi.isFn)(onLoad) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       style: _Dialog.S_BT_LOAD,
       caption: "Load",
       title: "Load item",
       onClick: onLoad
-    }, "load"), _isFn(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+    }, "load"), (0, _uiApi.isFn)(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       timeout: 0,
       caption: "Show",
       title: "Show items",
@@ -93,7 +92,7 @@ const DraggableDialog = _ref2 => {
         menuModel: menuModel,
         toggle: toggleMenuMore
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        className: CL_NOT_SELECTED,
+        className: _styleFn.CL_NOT_SELECTED,
         children: caption
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
         style: _Dialog.S_SVG_CLOSE,

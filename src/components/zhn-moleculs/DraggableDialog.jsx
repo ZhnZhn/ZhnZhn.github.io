@@ -1,7 +1,8 @@
+import { isFn  } from '../uiApi';
+import { crDialogRole } from '../a11yFn';
+
 import {
-  crDialogRole
-} from '../a11yFn';
-import {
+  CL_NOT_SELECTED,
   crDialogCn,
   crShowHide,
   crElementCn
@@ -26,7 +27,6 @@ import {
 } from './Dialog.Style';
 
 const CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
-, CL_NOT_SELECTED = "not-selected"
 , CL_EL = crElementCn()
 , S_DIALOG_DIV = {
   ...S_ROOT_DIV,
@@ -35,8 +35,6 @@ const CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
   left: 50,
   zIndex: 10
 };
-
-const _isFn = fn => typeof fn === 'function';
 
 const CommandButtons = ({
   buttons,
@@ -47,7 +45,7 @@ const CommandButtons = ({
   <div style={S_COMMAND_DIV}>
     {buttons}
     {
-      _isFn(onLoad) && <FlatButton
+      isFn(onLoad) && <FlatButton
         key="load"
         style={S_BT_LOAD}
         caption="Load"
@@ -56,7 +54,7 @@ const CommandButtons = ({
       />
     }
     {
-      _isFn(onShow) && <FlatButton
+      isFn(onShow) && <FlatButton
         key="show"
         timeout={0}
         caption="Show"
