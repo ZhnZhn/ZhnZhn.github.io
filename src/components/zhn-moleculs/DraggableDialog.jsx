@@ -1,4 +1,3 @@
-import { forwardRef } from '../uiApi';
 import {
   crDialogCn,
   crShowHide,
@@ -74,7 +73,7 @@ const CommandButtons = ({
 
 const FN_NOOP = () => {};
 
-const DraggableDialog = forwardRef(({
+const DraggableDialog = ({
   isShow,
   style,
   menuModel,
@@ -85,7 +84,7 @@ const DraggableDialog = forwardRef(({
   onLoad,
   onShow,
   onClose=FN_NOOP
-}, ref) => {
+}) => {
   const [
     refBtMenuMore,
     isMenuMore,
@@ -93,7 +92,6 @@ const DraggableDialog = forwardRef(({
   ] = useMenuMore()
   , refRoot = useDialogFocus(
      isShow,
-     ref,
      refBtMenuMore
   )
   , _hKeyDown = useKeyEscape(onClose)
@@ -151,6 +149,6 @@ const DraggableDialog = forwardRef(({
       />
     </div>
   );
-})
+};
 
 export default DraggableDialog

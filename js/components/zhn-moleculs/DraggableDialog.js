@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useMenuMore = _interopRequireDefault(require("../hooks/useMenuMore"));
 var _fUseKey = require("../hooks/fUseKey");
@@ -53,7 +52,7 @@ const CommandButtons = _ref => {
   });
 };
 const FN_NOOP = () => {};
-const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
+const DraggableDialog = _ref2 => {
   let {
     isShow,
     style,
@@ -67,7 +66,7 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
     onClose = FN_NOOP
   } = _ref2;
   const [refBtMenuMore, isMenuMore, toggleMenuMore] = (0, _useMenuMore.default)(),
-    refRoot = (0, _useDialogFocus.default)(isShow, ref, refBtMenuMore),
+    refRoot = (0, _useDialogFocus.default)(isShow, refBtMenuMore),
     _hKeyDown = (0, _fUseKey.useKeyEscape)(onClose),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_DRAGGABLE_DIALOG);
   (0, _useXYMovable.default)(refRoot);
@@ -113,6 +112,6 @@ const DraggableDialog = (0, _uiApi.forwardRef)((_ref2, ref) => {
       })]
     })
   );
-});
+};
 var _default = exports.default = DraggableDialog;
 //# sourceMappingURL=DraggableDialog.js.map
