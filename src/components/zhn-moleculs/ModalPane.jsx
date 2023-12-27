@@ -1,4 +1,4 @@
-//import PropTypes from 'prop-types'
+import { crPresentationRole } from '../a11yFn';
 import { crContainerCn } from '../styleFn';
 
 import useClickOutside from '../hooks/useClickOutside';
@@ -13,29 +13,20 @@ const ModalPane = ({
   onClose
 }) => {
   const _refNode = useClickOutside(isShow, onClose)
-  , _hKeyEscape = useKeyEscape(onClose)
-  , _hKeyDown = isShow ? _hKeyEscape : void 0
+  , _hKeyEscape = useKeyEscape(onClose);
+  /*eslint-disable jsx-a11y/no-static-element-interactions*/
   return (
     <div
-       role="presentation"
-       aria-hidden={!isShow}
+       {...crPresentationRole(isShow)}
        ref={_refNode}
        className={CL_MODAL_PANE}
        style={style}
-       onKeyDown={_hKeyDown}
+       onKeyDown={isShow ? _hKeyEscape : void 0}
     >
       {children}
     </div>
   );
-}
-
-/*
-ModalPane.propTypes = {
- className: PropTypes.string,
- style: PropTypes.object,
- isShow: PropTypes.bool,
- onClose: PropTypes.func
-}
-*/
+  /*eslint-enable jsx-a11y/no-static-element-interactions*/
+};
 
 export default ModalPane

@@ -1,0 +1,14 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/components/a11yFn.js"
+ ],
+ "file": "../../src/components/a11yFn.js",
+ "names": [
+  "crPresentationRole",
+  "isShow",
+  "role",
+  "exports"
+ ],
+ "mappings": ";;;;AACO,MAAMA,kBAAkB,GAC7BC,MAAM,KACF;EACJC,IAAI,EAAE,cAAc;EACpB,aAAa,EAAE,CAACD;AAClB,CAAC,CAAC;AAAAE,OAAA,CAAAH,kBAAA,GAAAA,kBAAA"
+}

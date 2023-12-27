@@ -1,4 +1,7 @@
 import {
+  crPresentationRole
+} from '../a11yFn';
+import {
   crBsContainerCn,
   crShowHide
 } from '../styleFn';
@@ -16,19 +19,21 @@ const Browser = ({
     _style
   ] = crShowHide(isShow, CL_BROWSER);
 
+ /*eslint-disable jsx-a11y/no-static-element-interactions*/
   return (
     <div
+       {...crPresentationRole(isShow)}
        className={_cn}
        style={{
          ...style,
          ..._style
        }}
-       role="presentation"
        onKeyDown={onKeyDown}
     >
        {children}
     </div>
   );
+  /*eslint-enable jsx-a11y/no-static-element-interactions*/
 };
 
 export default Browser

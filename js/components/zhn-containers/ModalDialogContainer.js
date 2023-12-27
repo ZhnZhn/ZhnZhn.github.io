@@ -2,43 +2,34 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
+var _a11yFn = require("../a11yFn");
 var _jsxRuntime = require("react/jsx-runtime");
-
-//import PropTypes from 'prop-types'
 const CL_INIT = 'modal-root',
-      CL_SHOWING = 'modal-root show-modal',
-      S_SHOW = {
-  display: 'block'
-},
-      S_HIDE = {
-  display: 'none'
-};
-
-const ModalDialogContainer = ({
-  isShow,
-  timeout = 450,
-  children,
-  onClose
-}) => {
+  CL_SHOWING = 'modal-root show-modal',
+  S_SHOW = {
+    display: 'block'
+  },
+  S_HIDE = {
+    display: 'none'
+  };
+const ModalDialogContainer = _ref => {
+  let {
+    isShow,
+    onClose,
+    children
+  } = _ref;
   const [_className, _style] = isShow ? [CL_SHOWING, S_SHOW] : [CL_INIT, S_HIDE];
+  /*eslint-disable jsx-a11y/no-static-element-interactions*/
+  /*eslint-disable jsx-a11y/click-events-have-key-events*/
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    role: "presentation",
+    ...(0, _a11yFn.crPresentationRole)(isShow),
     className: _className,
     style: _style,
     onClick: onClose,
     children: children
   });
+  /*eslint-enable jsx-a11y/no-static-element-interactions*/
+  /*eslint-enable jsx-a11y/click-events-have-key-events*/
 };
-/*
-ModalDialogContainer.propTypes = {
-  isShow  : PropTypes.bool,
-  timeout : PropTypes.number,
-  onClose : PropTypes.func
-}
-*/
-
-
-var _default = ModalDialogContainer;
-exports.default = _default;
+var _default = exports.default = ModalDialogContainer;
 //# sourceMappingURL=ModalDialogContainer.js.map
