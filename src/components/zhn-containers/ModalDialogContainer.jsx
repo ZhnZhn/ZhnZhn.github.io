@@ -1,9 +1,11 @@
 import { crPresentationRole } from '../a11yFn';
+import {
+  S_BLOCK,
+  S_NONE
+} from '../styleFn';
 
-const CL_INIT = 'modal-root'
-, CL_SHOWING = 'modal-root show-modal'
-, S_SHOW = { display: 'block' }
-, S_HIDE = { display: 'none' };
+const CL_MODAL_ROOT = 'modal-root'
+, CL_MODAL_ROOT_SHOWING = `${CL_MODAL_ROOT} show-modal`;
 
 const ModalDialogContainer = ({
   isShow,
@@ -14,8 +16,8 @@ const ModalDialogContainer = ({
     _className,
     _style
   ] = isShow
-    ? [CL_SHOWING, S_SHOW]
-    : [CL_INIT, S_HIDE];
+    ? [CL_MODAL_ROOT_SHOWING, S_BLOCK]
+    : [CL_MODAL_ROOT, S_NONE];
   /*eslint-disable jsx-a11y/no-static-element-interactions*/
   /*eslint-disable jsx-a11y/click-events-have-key-events*/
   return (
