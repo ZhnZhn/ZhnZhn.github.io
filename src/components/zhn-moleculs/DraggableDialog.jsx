@@ -1,4 +1,7 @@
 import {
+  crDialogRole
+} from '../a11yFn';
+import {
   crDialogCn,
   crShowHide,
   crElementCn
@@ -105,14 +108,11 @@ const DraggableDialog = ({
 
   useXYMovable(refRoot)
 
+  /*eslint-disable jsx-a11y/no-static-element-interactions*/
   return (
-    /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
     <div
+      {...crDialogRole(isShow, caption)}
       ref={refRoot}
-      role="dialog"
-      tabIndex="-1"
-      aria-label={caption}
-      aria-hidden={!isShow}
       className={_className}
       style={{
         ...style,
@@ -122,7 +122,7 @@ const DraggableDialog = ({
       onClick={toTopLayer}
       onKeyDown={_hKeyDown}
      >
-    {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
+    {/*eslint-enable jsx-a11y/no-static-element-interactions*/}
       <div className={CL_EL} style={S_CAPTION_DIV}>
         <MenuMore
           ref={refBtMenuMore}

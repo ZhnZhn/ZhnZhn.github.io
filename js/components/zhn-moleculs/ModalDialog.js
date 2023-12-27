@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _fUseKey = require("../hooks/fUseKey");
 var _useMenuMore = _interopRequireDefault(require("../hooks/useMenuMore"));
@@ -75,11 +76,8 @@ const ModalDialog = _ref2 => {
     refLast: refFocusLast || refBtClose,
     style: _showHideStyle,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      ...(0, _a11yFn.crDialogRole)(isShow, caption),
       ref: refRoot,
-      role: "dialog",
-      tabIndex: "-1",
-      "aria-label": caption,
-      "aria-hidden": !isShow,
       className: _className,
       style: {
         ...S_ROOT_DIV_MODAL,

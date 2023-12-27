@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _useMenuMore = _interopRequireDefault(require("../hooks/useMenuMore"));
 var _fUseKey = require("../hooks/fUseKey");
@@ -70,48 +71,43 @@ const DraggableDialog = _ref2 => {
     _hKeyDown = (0, _fUseKey.useKeyEscape)(onClose),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_DRAGGABLE_DIALOG);
   (0, _useXYMovable.default)(refRoot);
-  return (
-    /*#__PURE__*/
-    /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
-    (0, _jsxRuntime.jsxs)("div", {
-      ref: refRoot,
-      role: "dialog",
-      tabIndex: "-1",
-      "aria-label": caption,
-      "aria-hidden": !isShow,
-      className: _className,
-      style: {
-        ...style,
-        ...S_DIALOG_DIV,
-        ..._showHideStyle
-      },
-      onClick: toTopLayer,
-      onKeyDown: _hKeyDown,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        className: CL_EL,
-        style: _Dialog.S_CAPTION_DIV,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
-          ref: refBtMenuMore,
-          isMore: isMenuMore,
-          menuModel: menuModel,
-          toggle: toggleMenuMore
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          className: CL_NOT_SELECTED,
-          children: caption
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
-          style: _Dialog.S_SVG_CLOSE,
-          onClick: onClose
-        })]
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        children: children
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
-        buttons: commandButtons,
-        onLoad: onLoad,
-        onShow: onShow,
-        onClose: onClose
+
+  /*eslint-disable jsx-a11y/no-static-element-interactions*/
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    ...(0, _a11yFn.crDialogRole)(isShow, caption),
+    ref: refRoot,
+    className: _className,
+    style: {
+      ...style,
+      ...S_DIALOG_DIV,
+      ..._showHideStyle
+    },
+    onClick: toTopLayer,
+    onKeyDown: _hKeyDown,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      className: CL_EL,
+      style: _Dialog.S_CAPTION_DIV,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
+        ref: refBtMenuMore,
+        isMore: isMenuMore,
+        menuModel: menuModel,
+        toggle: toggleMenuMore
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: CL_NOT_SELECTED,
+        children: caption
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
+        style: _Dialog.S_SVG_CLOSE,
+        onClick: onClose
       })]
-    })
-  );
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      children: children
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
+      buttons: commandButtons,
+      onLoad: onLoad,
+      onShow: onShow,
+      onClose: onClose
+    })]
+  });
 };
 var _default = exports.default = DraggableDialog;
 //# sourceMappingURL=DraggableDialog.js.map

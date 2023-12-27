@@ -1,4 +1,5 @@
 import { useRef } from '../uiApi';
+import { crDialogRole } from '../a11yFn';
 
 import {
   crDialogCn,
@@ -102,13 +103,10 @@ const ModalDialog = ({
       refLast={refFocusLast || refBtClose}
       style={_showHideStyle}
     >
-    {/*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/}
+    {/*eslint-disable jsx-a11y/no-static-element-interactions*/}
      <div
+        {...crDialogRole(isShow, caption)}
         ref={refRoot}
-        role="dialog"
-        tabIndex="-1"
-        aria-label={caption}
-        aria-hidden={!isShow}
         className={_className}
         style={{
           ...S_ROOT_DIV_MODAL,
@@ -118,7 +116,7 @@ const ModalDialog = ({
         onClick={_hClickDialog}
         onKeyDown={_hKeyDown}
      >
-     {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}
+     {/*eslint-enable jsx-a11y/no-static-element-interactions*/}      
          <div className={CL_EL} style={S_CAPTION_DIV}>
            <MenuMore
              ref={refBtMenuMore}
