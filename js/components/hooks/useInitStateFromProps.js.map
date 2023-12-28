@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useInitStateFromProps.js"
+ ],
+ "file": "../../../src/components/hooks/useInitStateFromProps.js",
+ "names": [
+  "_uiApi",
+  "require",
+  "useInitStateFromProps",
+  "initState",
+  "props",
+  "_initState",
+  "_props",
+  "state",
+  "setState",
+  "useState",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAEA,MAAMC,qBAAqB,GAAGA,CAC5BC,SAAS,EACTC,KAAK,KACF;EACH,MAAMC,UAAU,GAAGA,CAAA,MAAO;MACxB,GAAGF,SAAS,CAACC,KAAK,CAAC;MACnBE,MAAM,EAAEF;IACV,CAAC,CAAC;IACA,CACAG,KAAK,EACLC,QAAQ,CACT,GAAG,IAAAC,eAAQ,EAACJ,UAAU,CAAC;EAExB,IAAID,KAAK,KAAKG,KAAK,CAACD,MAAM,EAAE;IAC1BE,QAAQ,CAACH,UAAU,CAAC,CAAC,CAAC;EACxB;EAEA,OAAO,CACLE,KAAK,EACLC,QAAQ,CACT;AACH,CAAC;AAAC,IAAAE,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaV,qBAAqB"
+}
