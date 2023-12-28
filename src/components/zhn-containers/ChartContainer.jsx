@@ -1,16 +1,21 @@
 import {
   useRef,
   useState,
-  useMemo,
+  useCallback,
   getRefValue,
   getRefElementStyle
 } from '../uiApi';
+
+import {
+  crPresentationRole
+} from '../a11yFn';
 
 import {
   crScrollYCn
 } from '../styleFn';
 
 import useBool from '../hooks/useBool';
+import { useKeyEscape } from '../hooks/fUseKey';
 
 import useHmInstance from './useHmInstance';
 import useInitialWidth from './useInitialWidth';
@@ -20,7 +25,6 @@ import useCompareTo from './useCompareTo';
 
 import crChartContainerStyle from './crChartContainerStyle';
 
-import { useMsChartCont } from '../../flux/stores/compStore';
 import {
   getConfigs,
   useMsItemLoaded
@@ -87,28 +91,30 @@ const ChartContainer = (props) => {
   } = props
   , _isAdminMode = isAdminMode()
   , _refSpComp = useRef()
-  //{ isShow: false, configs: [], chartType }
   , [
     state,
     setState
-  ] = useState(() => getConfigs(chartType))
+  ] = useState(() => ({
+    configs: getConfigs(chartType)
+  }))
   , {
-    isShow,
     configs
   } = state
+  , [
+    isShow,
+    showChartContainer,
+    hideChartContainer
+  ] = useBool(true)
 
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hHideChartContainer = useMemo(() => () => {
+  , _hHideChartContainer = useCallback(() => {
       onCloseContainer()
-      setState(prevState => ({
-        ...prevState,
-        isShow: false
-      }))
+      hideChartContainer()
     }
   , [])
-  // onCloseContainer
+  // onCloseContainer, hideChartContainer
   /*eslint-enable react-hooks/exhaustive-deps */
-
+  , _hKeyDown = useKeyEscape(_hHideChartContainer)
   , [
     isCompareTo,
     _showCompareTo,
@@ -141,7 +147,7 @@ const ChartContainer = (props) => {
     STEP,
     _hmCharts,
     _showCompareTo
-  )      
+  )
   , _compareTo = useCompareTo(
      _hmCharts,
      updateMovingValues
@@ -155,21 +161,17 @@ const ChartContainer = (props) => {
      onSetActive
   );
 
-  useMsChartCont(msChartCont => {
-    if (msChartCont && msChartCont.id === chartType) {
-      _hHideChartContainer()
-    }
-  })
-
   useMsItemLoaded(msItemLoaded => {
     if (msItemLoaded && _isDataForContainer(msItemLoaded, chartType)) {
       if (msItemLoaded.isShow) {
         (getRefValue(_refSpComp) || {}).scrollTop = 0
+        setState({
+          configs: msItemLoaded.configs
+        })
+        showChartContainer()
+      } else {
+        _hHideChartContainer()
       }
-      setState(prevState => ({
-        ...prevState,
-        ...msItemLoaded
-      }));
     }
   })
 
@@ -178,15 +180,19 @@ const ChartContainer = (props) => {
     _className
   ] = crChartContainerStyle(isShow);
 
+  /*eslint-disable jsx-a11y/no-static-element-interactions*/
   return (
     <div
+       {...crPresentationRole(isShow)}
        ref={_refRootElement}
        className={_className}
        style={{
          ..._initialWidthStyle,
          ..._style
        }}
+       onKeyDown={_hKeyDown}
     >
+  {/*eslint-enable jsx-a11y/no-static-element-interactions*/}
       <A.ModalSlider
         isShow={isMenuMore}
         className={CL_MENU_MORE}

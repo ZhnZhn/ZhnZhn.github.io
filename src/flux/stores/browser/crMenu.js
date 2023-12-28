@@ -4,10 +4,10 @@ import {
 } from '../../storeApi';
 
 import {
-  showItemsContainer
+  showItemsContainer,
+  hideItemsContainer
 } from '../itemStore';
 import {
-  closeChartCont,
   showDialog
 } from '../compStore';
 
@@ -23,7 +23,7 @@ const _crItemHandlers = (
 ) => ({
   onClick: bindTo(showDialog, dT, bT),
   onBadgeClick: bindTo(showItemsContainer, dT, bT),
-  onBadgeClose: bindTo(closeChartCont, dT)
+  onBadgeClose: bindTo(hideItemsContainer, dT)
 });
 
 const _crItem = (

@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.useMsItemLoaded = exports.useMsInit = exports.updateMv = exports.sortItemsBy = exports.showItemsContainer = exports.removeItemsAll = exports.moveToTop = exports.loadItemByQuery = exports.loadItem = exports.isChartExist = exports.getConfigs = exports.closeChartItem = void 0;
+exports.useMsItemLoaded = exports.useMsInit = exports.updateMv = exports.sortItemsBy = exports.showItemsContainer = exports.removeItemsAll = exports.moveToTop = exports.loadItemByQuery = exports.loadItem = exports.isChartExist = exports.hideItemsContainer = exports.getConfigs = exports.closeChartItem = void 0;
 var _Msg = require("../../constants/Msg");
 var _storeFn = require("./storeFn");
 var _LogicFn = require("../logic/LogicFn");
@@ -37,7 +37,7 @@ const _setMsItemInit = Comp => {
   }));
 };
 const CHARTS = {};
-const getConfigs = chartType => CHARTS[chartType];
+const getConfigs = chartType => CHARTS[chartType].configs;
 exports.getConfigs = getConfigs;
 const isChartExist = option => {
   (0, _ChartLogic.checkBrowserChartTypes)(option);
@@ -191,6 +191,12 @@ const showItemsContainer = (chartType, browserType, dialogConfOr) => {
   }
 };
 exports.showItemsContainer = showItemsContainer;
+const hideItemsContainer = chartType => {
+  _setMsItemLoaded({
+    chartType
+  });
+};
+exports.hideItemsContainer = hideItemsContainer;
 const closeChartItem = (chartType, browserType, chartId) => {
   const {
     chartSlice,

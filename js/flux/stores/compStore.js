@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useMsShowDialog = exports.useMsCloseDialog = exports.useMsChartCont = exports.useMsAbout = exports.useMdOption = exports.showOptionDialog = exports.showModalDialog = exports.showDialog = exports.showAlertDialog = exports.showAbout = exports.hideAbout = exports.closeDialog = exports.closeChartContainer = exports.closeChartCont = void 0;
+exports.useMsShowDialog = exports.useMsCloseDialog = exports.useMsAbout = exports.useMdOption = exports.showOptionDialog = exports.showModalDialog = exports.showDialog = exports.showAlertDialog = exports.showAbout = exports.hideAbout = exports.closeDialog = exports.closeChartContainer = void 0;
 var _storeApi = require("../storeApi");
 var _ModalDialogType = require("../../constants/ModalDialogType");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
@@ -9,7 +9,6 @@ var _contCheckBoxLogic = require("./contCheckBoxLogic");
 var _browserLogic = require("./browserLogic");
 var _dialogLogic = require("./dialogLogic");
 const [_crMsAbout, _selectMsAbout] = (0, _storeApi.fCrStoreSlice)("msAbout", "is"),
-  [_crMsChartCont, _selectMsChartCont] = (0, _storeApi.fCrStoreSlice)("msChartCont"),
   [_crMdOption, _selectMdOption] = (0, _storeApi.fCrStoreSlice)("mdOption"),
   [_crMsShowDialog, _selectMsShowDialog] = (0, _storeApi.fCrStoreSlice)("msShowDialog"),
   [_crMsCloseDialog, _selectMsCloseDialog] = (0, _storeApi.fCrStoreSlice)("msCloseDialog");
@@ -24,11 +23,6 @@ const showAbout = () => _set(_crMsAbout(true));
 exports.showAbout = showAbout;
 const hideAbout = () => _set(_crMsAbout(false));
 exports.hideAbout = hideAbout;
-const useMsChartCont = exports.useMsChartCont = (0, _storeApi.fCrUse)(_compStore, _selectMsChartCont);
-const closeChartCont = chartType => _set(_crMsChartCont({
-  id: chartType
-}));
-exports.closeChartCont = closeChartCont;
 const closeChartContainer = (chartType, browserType) => {
   (0, _contCheckBoxLogic.uncheckActiveContCheckBox)(chartType);
   (0, _chartCheckBoxLogic.uncheckActiveCheckbox)(chartType);

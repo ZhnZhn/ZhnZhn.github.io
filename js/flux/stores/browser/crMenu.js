@@ -11,7 +11,7 @@ const _isArr = Array.isArray,
 const _crItemHandlers = (dT, bT) => ({
   onClick: (0, _storeApi.bindTo)(_compStore.showDialog, dT, bT),
   onBadgeClick: (0, _storeApi.bindTo)(_itemStore.showItemsContainer, dT, bT),
-  onBadgeClose: (0, _storeApi.bindTo)(_compStore.closeChartCont, dT)
+  onBadgeClose: (0, _storeApi.bindTo)(_itemStore.hideItemsContainer, dT)
 });
 const _crItem = (_ref, menuItems, browserType) => {
   let {

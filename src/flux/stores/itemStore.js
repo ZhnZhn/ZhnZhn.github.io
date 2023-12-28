@@ -96,7 +96,7 @@ const _setMsItemInit = Comp => {
 
 const CHARTS = {};
 
-export const getConfigs = chartType => CHARTS[chartType]
+export const getConfigs = chartType => CHARTS[chartType].configs
 
 export const isChartExist = option => {
   checkBrowserChartTypes(option)
@@ -300,6 +300,10 @@ export const showItemsContainer = (
     _setMsItemInit(Comp)
     hideAbout()
   }
+}
+
+export const hideItemsContainer = (chartType) => {
+  _setMsItemLoaded({ chartType })
 }
 
 export const closeChartItem = (
