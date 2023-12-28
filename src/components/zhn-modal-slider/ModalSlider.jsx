@@ -1,7 +1,7 @@
-import { useState } from '../uiApi';
+import { bindTo } from '../uiApi';
 
+import useInitStateFromProps from '../hooks/useInitStateFromProps';
 import useThrottleCallback from '../hooks/useThrottleCallback';
-import useDidUpdate from '../hooks/useDidUpdate';
 
 import ModalPane from '../zhn-moleculs/ModalPane';
 import ShowHide from '../zhn/ShowHide';
@@ -29,36 +29,15 @@ const S_SHOW_HIDE = {
   p0: []
 };
 
-const _initState = model => {
-  const _pW = model.pageWidth
-  , _maxP = model.maxPages
-  , _initId = model.initId || DF_INIT_ID;
-
-  return {
-    pageWidth: _pW,
-    pagesStyle: {
-      width: `${_maxP*_pW}px`
-    },
-    pageStyle: {
-      width: `${_pW}px`
-    },
-    pageCurrent: 1,
-    pages: [
-      <MenuPage
-        key={_initId}
-        items={model[_initId]}
-        titleCl={model.titleCl}
-        itemCl={model.itemCl}
-      />
-    ]
-  };
-};
+const _crWidthStyle = (v) => ({
+  width: v
+})
 
 const _addPage = (
+  model,
   pages,
   id,
-  title,
-  model
+  title
 ) => {
   pages.push((
     <MenuPage
@@ -71,7 +50,29 @@ const _addPage = (
   ))
 };
 
-const _crTransform = (
+const _initState = model => {
+  const _pW = model.pageWidth
+  , _maxP = model.maxPages
+  , _initId = model.initId || DF_INIT_ID;
+
+  return {
+    addPage: bindTo(_addPage, model),
+    pageWidth: _pW,
+    pagesStyle: _crWidthStyle(_maxP*_pW),
+    pageStyle: _crWidthStyle(_pW),
+    pageCurrent: 1,
+    pages: [
+      <MenuPage
+        key={_initId}
+        items={model[_initId]}
+        titleCl={model.titleCl}
+        itemCl={model.itemCl}
+      />
+    ]
+  };
+};
+
+const _crTransformStyle = (
   pageWidth,
   pageCurrent
 ) => {
@@ -92,7 +93,10 @@ const ModalSlider = ({
   const [
     state,
     setState
-  ] = useState(() => _initState(model))
+  ] = useInitStateFromProps(
+    _initState,
+    model
+  )
   , {
      pageWidth,
      pagesStyle,
@@ -112,31 +116,29 @@ const ModalSlider = ({
       pageNumber
     ) => {
      setState(prevState => {
-       const { pages } = prevState
+       const {
+         addPage,
+         pages
+       } = prevState
        , _max = pages.length-1;
 
-       if ( (_max+1) > pageNumber) {
+       if ((_max+1) > pageNumber) {
          if (pages[pageNumber] && pages[pageNumber].key !== id) {
            if (pageNumber>0) {
              prevState.pages.splice(pageNumber)
            } else {
              prevState.pages = []
            }
-           _addPage(prevState.pages, id, title, model)
+           addPage(prevState.pages, id, title)
          }
        } else {
-         _addPage(pages, id, title, model)
+         addPage(pages, id, title)
        }
 
        prevState.pageCurrent = pageNumber + 1
        return {...prevState};
      })
-  }, [model])
-
-  useDidUpdate(
-    () => setState(_initState(model)),
-    [model]
-  )
+  });
 
   const _showHideStyle = {
     ...style,
@@ -145,7 +147,7 @@ const ModalSlider = ({
   }, _divStyle = {
     ...S_PAGES,
     ...pagesStyle,
-    ..._crTransform(pageWidth, pageCurrent)
+    ..._crTransformStyle(pageWidth, pageCurrent)
   };
 
   return (
