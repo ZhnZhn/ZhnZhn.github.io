@@ -1,27 +1,15 @@
-import {
-  useReducer,
-  useRef,
-  getRefValue
-} from '../uiApi';
+import { useState  } from '../uiApi';
 
-const _initState = initialValue => !!initialValue
-, _reducer = (state, boolValue) => boolValue;
-
-const useBool = (
-  initialValue
-) => {
-  const [is, setIs] = useReducer(
-    _reducer,
-    initialValue,
-    _initState
-  )
-  , _refSetTrue = useRef(() => setIs(true))
-  , _refSetFalse = useRef(() => setIs(false));
-  return [
-    is,
-    getRefValue(_refSetTrue),
-    getRefValue(_refSetFalse)
-  ];
+const useBool = (initialValue) => {
+  const [
+     state,
+     setState
+  ] = useState(() => [
+    !!initialValue,
+    () => setState(prevState => [true, prevState[1], prevState[2]]),
+    () => setState(prevState => [false, prevState[1], prevState[2]]),
+  ]);
+  return state;
 };
 
 export default useBool
