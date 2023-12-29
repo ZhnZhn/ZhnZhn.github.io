@@ -1,24 +1,17 @@
-import {
-  useState,
-  useMemo
-} from '../uiApi';
+import { useState } from '../uiApi';
 
-// [is, toggle, close]
 const useToggleClose = (
   initialValue
 ) => {
   const [
-    is,
-    setIs
-  ] = useState(() => !!initialValue);
-
-  return [
-    is,
-    ...useMemo(() => [
-      () => setIs(is => !is),
-      () => setIs(false)
-    ], [])
-  ];
+    state,
+    setState
+  ] = useState(() => [
+    !!initialValue,
+    () => setState(prevState => [!prevState[0], prevState[1], prevState[2]]),
+    () => setState(prevState => [false, prevState[1], prevState[2]]),
+  ]);
+  return state;
 };
 
 export default useToggleClose

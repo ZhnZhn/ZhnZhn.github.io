@@ -3,11 +3,9 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-// [is, toggle, close]
 const useToggleClose = initialValue => {
-  const [is, setIs] = (0, _uiApi.useState)(() => !!initialValue);
-  return [is, ...(0, _uiApi.useMemo)(() => [() => setIs(is => !is), () => setIs(false)], [])];
+  const [state, setState] = (0, _uiApi.useState)(() => [!!initialValue, () => setState(prevState => [!prevState[0], prevState[1], prevState[2]]), () => setState(prevState => [false, prevState[1], prevState[2]])]);
+  return state;
 };
-var _default = useToggleClose;
-exports.default = _default;
+var _default = exports.default = useToggleClose;
 //# sourceMappingURL=useToggleClose.js.map
