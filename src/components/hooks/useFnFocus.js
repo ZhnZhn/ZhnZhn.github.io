@@ -1,22 +1,21 @@
-import { 
+import {
   useRef,
-  useEffect,
   useCallback,
   focusRefElement
 } from '../uiApi';
 
-/*eslint-disable react-hooks/exhaustive-deps */
 const useFnFocus = (fn) => {
-  const _ref = useRef(null)
-  useEffect(() => { return () => _ref.current = null }, [])
+  const _ref = useRef();
   return [
     _ref,
+    /*eslint-disable react-hooks/exhaustive-deps */
     useCallback(() => {
       fn()
       focusRefElement(_ref)
     }, [])
-  ]
-}
-/*eslint-enable react-hooks/exhaustive-deps */
+    // fn
+    /*eslint-enable react-hooks/exhaustive-deps */
+  ];
+};
 
 export default useFnFocus
