@@ -5,7 +5,7 @@ import {
   getClientX
 } from '../uiApi';
 
-import useBool from '../hooks/useBool';
+import { useBool } from '../hooks/useBool';
 import { HAS_TOUCH_EVENTS } from '../has';
 import { roundBy } from '../../math/mathFn';
 

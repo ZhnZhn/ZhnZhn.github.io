@@ -14,7 +14,7 @@ import {
   crScrollYCn
 } from '../styleFn';
 
-import useBool from '../hooks/useBool';
+import { useBool } from '../hooks/useBool';
 import { useKeyEscape } from '../hooks/fUseKey';
 
 import useHmInstance from './useHmInstance';

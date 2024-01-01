@@ -3,7 +3,7 @@ import {
   useMemo
 } from '../../uiApi';
 
-import useToggleClose from '../../hooks/useToggleClose';
+import { useToggleFalse } from '../../hooks/useBool';
 
 const useDialogOptions = () => {
   const refDialogOptions = useRef({
@@ -15,7 +15,7 @@ const useDialogOptions = () => {
     isShowOptions,
     toggleOptions,
     hideOptions
-  ] = useToggleClose()
+  ] = useToggleFalse()
   , toggleDialogOption = useMemo(() =>
     (is, propName) => {
       refDialogOptions.current[propName] = is

@@ -10,7 +10,7 @@ import {
 
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
-import useToggleClose from '../hooks/useToggleClose';
+import { useToggleFalse } from '../hooks/useBool';
 import useToggleState from '../hooks/useToggleState';
 import useProperty from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';
@@ -113,7 +113,7 @@ const DialogSelectN = memoIsShow((
     isToggle,
     toggleInputs,
     _hideToggle
-  ] = useToggleClose()
+  ] = useToggleFalse()
   , [
     refDialogOptions,
     isShowOptions,

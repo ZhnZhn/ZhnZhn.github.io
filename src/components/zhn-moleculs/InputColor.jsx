@@ -1,4 +1,4 @@
-import useBool from '../hooks/useBool';
+import { useBool } from '../hooks/useBool';
 
 import CellColor from './CellColor';
 import ModalPalette from './ModalPalette';

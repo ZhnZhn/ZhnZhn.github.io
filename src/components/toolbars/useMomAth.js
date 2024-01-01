@@ -1,5 +1,5 @@
 import { useMemo } from '../uiApi';
-import useBool from '../hooks/useBool';
+import { useBool } from '../hooks/useBool';
 
 import {
   crMomAthConfig

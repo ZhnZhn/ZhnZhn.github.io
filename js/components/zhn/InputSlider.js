@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+var _useBool = require("../hooks/useBool");
 var _has = require("../has");
 var _mathFn = require("../../math/mathFn");
 var _CircleInner = _interopRequireDefault(require("./CircleInner"));
@@ -88,10 +88,10 @@ const _isNaN = Number.isNaN,
     return _isNaN(_percent) ? 0 : _percent * 100;
   },
   _crWidthStyle = percent => ({
-    width: "calc(" + percent + "%)"
+    width: `calc(${percent}%)`
   }),
   _crLeftStyle = percent => ({
-    left: percent + "%"
+    left: `${percent}%`
   }),
   _isUp = keyCode => keyCode === 39 || keyCode === 38,
   _isDown = keyCode => keyCode === 37 || keyCode === 40,
@@ -99,7 +99,7 @@ const _isNaN = Number.isNaN,
   _isNumber = n => typeof n === 'number' && n - n === 0,
   _getRefValue = ref => ref.current;
 const _useMouseDown = setValueFromPosition => {
-  const [isDragged, setDraggedTrue, setDraggedFalse] = (0, _useBool.default)(false),
+  const [isDragged, setDraggedTrue, setDraggedFalse] = (0, _useBool.useBool)(false),
     _refDragRunning = (0, _uiApi.useRef)(false),
     _hDragMouseMove = event => {
       if (_getRefValue(_refDragRunning)) {
@@ -136,7 +136,7 @@ const InputSlider = _ref => {
     onChange = _FN_NOOP
   } = _ref;
   const _refTrack = (0, _uiApi.useRef)(),
-    [isHovered, setHoveredTrue, setHoveredFalse] = (0, _useBool.default)(false),
+    [isHovered, setHoveredTrue, setHoveredFalse] = (0, _useBool.useBool)(false),
     [value, setValue] = (0, _uiApi.useState)(initialValue),
     _updateValue = value => {
       const _value = _checkValueInMinMax(min, max, value);
@@ -247,6 +247,5 @@ static propTypes = {
   onChange : PropTypes.func
 }
 */
-var _default = InputSlider;
-exports.default = _default;
+var _default = exports.default = InputSlider;
 //# sourceMappingURL=InputSlider.js.map

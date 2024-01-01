@@ -7,7 +7,7 @@ var _uiApi = require("../uiApi");
 var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+var _useBool = require("../hooks/useBool");
 var _useVm = _interopRequireDefault(require("./useVm"));
 var _useSetCheckBox = _interopRequireDefault(require("./useSetCheckBox"));
 var _useCaption = _interopRequireDefault(require("./useCaption"));
@@ -47,7 +47,7 @@ const CL_CHART_ITEM = 'chart-item',
   };
 const _IS_ANIMATE_REFLOW = (0, _has.isWideWidth)(),
   MINI_CONFIGS_ID_PN = "btTitle";
-const ChartItem = (0, _memoEqual.default)((0, _uiApi.forwardRef)((_ref, ref) => {
+const ChartItem = exports.ChartItem = (0, _memoEqual.default)((0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     caption,
     config,
@@ -78,8 +78,8 @@ const ChartItem = (0, _memoEqual.default)((0, _uiApi.forwardRef)((_ref, ref) => 
     } = zhConfig || {},
     [_refVm, compareTo] = (0, _useVm.default)(),
     [_hLoaded, getMainChart] = (0, _useProperty.default)(),
-    [hasError, _hError] = (0, _useBool.default)(),
-    [isShowChart, showChart, hideChart] = (0, _useBool.default)(true),
+    [hasError, _hError] = (0, _useBool.useBool)(),
+    [isShowChart, showChart, hideChart] = (0, _useBool.useBool)(true),
     isShowInfo = !isShowChart,
     [isOpen, toggleOpen] = (0, _useToggle.default)(true),
     [isShowLegend, toggleLegend] = (0, _useToggle.default)(),
@@ -243,5 +243,4 @@ static propTypes = {
   onToTop: PropTypes.func
 }
 */
-exports.ChartItem = ChartItem;
 //# sourceMappingURL=ChartItem.js.map

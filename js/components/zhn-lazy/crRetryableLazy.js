@@ -1,10 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+var _useBool = require("../hooks/useBool");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_LOADING = {
     color: '#2f7ed8'
@@ -37,7 +36,7 @@ const crRetryableLazy = function (crLoadPromise, LoaderView, ErrorRetryView) {
     ErrorRetryView = DfErrorRetryView;
   }
   const RetryableLazy = props => {
-    const [loading, retry, setLoadingFalse] = (0, _useBool.default)(true)
+    const [loading, retry, setLoadingFalse] = (0, _useBool.useBool)(true)
       /*eslint-disable react-hooks/exhaustive-deps */,
       LazyComponent = (0, _uiApi.useMemo)(() => (0, _uiApi.lazy)(() => crLoadPromise().catch(() => {
         setLoadingFalse();
@@ -59,6 +58,5 @@ const crRetryableLazy = function (crLoadPromise, LoaderView, ErrorRetryView) {
   };
   return RetryableLazy;
 };
-var _default = crRetryableLazy;
-exports.default = _default;
+var _default = exports.default = crRetryableLazy;
 //# sourceMappingURL=crRetryableLazy.js.map

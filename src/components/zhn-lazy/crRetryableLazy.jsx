@@ -4,7 +4,7 @@ import {
   lazy
 } from '../uiApi';
 
-import useBool from '../hooks/useBool';
+import { useBool } from '../hooks/useBool';
 
 const S_LOADING = { color: '#2f7ed8'}
 , CL_BT = 'bt'

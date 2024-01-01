@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
-var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+var _useBool = require("../hooks/useBool");
 var _fUseKey = require("../hooks/fUseKey");
 var _useHmInstance = _interopRequireDefault(require("./useHmInstance"));
 var _useInitialWidth = _interopRequireDefault(require("./useInitialWidth"));
@@ -68,7 +68,7 @@ const ChartContainer = props => {
     {
       configs
     } = state,
-    [isShow, showChartContainer, hideChartContainer] = (0, _useBool.default)(true)
+    [isShow, showChartContainer, hideChartContainer] = (0, _useBool.useBool)(true)
 
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hHideChartContainer = (0, _uiApi.useCallback)(() => {
@@ -78,8 +78,8 @@ const ChartContainer = props => {
     // onCloseContainer, hideChartContainer
     /*eslint-enable react-hooks/exhaustive-deps */,
     _hKeyDown = (0, _fUseKey.useKeyEscape)(_hHideChartContainer),
-    [isCompareTo, _showCompareTo, _hideCompareTo] = (0, _useBool.default)(),
-    [isMenuMore, _showMenuMore, _hideMenuMore] = (0, _useBool.default)(),
+    [isCompareTo, _showCompareTo, _hideCompareTo] = (0, _useBool.useBool)(),
+    [isMenuMore, _showMenuMore, _hideMenuMore] = (0, _useBool.useBool)(),
     [_initialWidthStyle, _INITIAL_WIDTH, _MIN_WIDTH] = (0, _useInitialWidth.default)(contWidth),
     [_hmCharts, _refChartFn] = (0, _useHmInstance.default)(),
     [_refRootElement, _refResize, _modelMore, _hResizeAfter] = (0, _useChartContainerMenuMore.default)(_isAdminMode, props, _INITIAL_WIDTH, _MIN_WIDTH, STEP, _hmCharts, _showCompareTo),

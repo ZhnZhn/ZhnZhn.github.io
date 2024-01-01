@@ -1,4 +1,4 @@
-import useBool from './useBool';
+import { useBool } from './useBool';
 import { useKeyEscape } from './fUseKey';
 
 const useShowHideComponent = (

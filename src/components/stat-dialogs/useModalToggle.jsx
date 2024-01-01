@@ -1,6 +1,6 @@
 import { useMemo } from '../uiApi';
 
-import useToggleClose from '../hooks/useToggleClose';
+import { useToggleFalse } from '../hooks/useBool';
 import useTitles from '../dialogs/hooks/useTitles';
 import useRowToggle from './useRowToggle';
 
@@ -14,7 +14,7 @@ const useModalToggle = (
     isToggle,
     toggleInputs,
     hideInputs
-  ] = useToggleClose()
+  ] = useToggleFalse()
   , [
     isRow,
     toggleIsRow

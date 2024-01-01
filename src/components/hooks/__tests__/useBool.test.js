@@ -2,7 +2,7 @@ import {
   renderHook,
   act
 } from '@testing-library/react';
-import useBool from '../useBool';
+import { useBool } from '../useBool';
 
 const _getIs = result => result.current[0]
 , _getSetTrue = result => result.current[1]
@@ -29,7 +29,7 @@ describe('useBool', ()=>{
     _testInitialValue(true, true)
   })
 
-  test('should return setTrue and setFalse function for setting vale', ()=>{
+  test('should return setTrue and setFalse function for setting value', ()=>{
     const {result: r1} = renderHook(()=>useBool())
     , setTrue = _getSetTrue(r1)
     , setFalse = _getSetFalse(r1);

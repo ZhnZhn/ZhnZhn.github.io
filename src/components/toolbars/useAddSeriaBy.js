@@ -4,7 +4,7 @@ import {
   getRefValue,
   setRefValue
 } from '../uiApi';
-import useBool from '../hooks/useBool';
+import { useBool } from '../hooks/useBool';
 
 const _isNumber = n => typeof n === 'number'
 , _isFn = fn => typeof fn === 'function';

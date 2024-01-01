@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+var _useBool = require("../hooks/useBool");
 var _CellColor = _interopRequireDefault(require("./CellColor"));
 var _ModalPalette = _interopRequireDefault(require("./ModalPalette"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -14,7 +14,7 @@ const InputColor = _ref => {
     color,
     setColor
   } = _ref;
-  const [_isShowPallete, _hOpenPallete, _hClosePalette] = (0, _useBool.default)(false);
+  const [_isShowPallete, _hOpenPallete, _hClosePalette] = (0, _useBool.useBool)(false);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor.default, {
     className: className,
     color: color,
@@ -27,6 +27,5 @@ const InputColor = _ref => {
     })
   });
 };
-var _default = InputColor;
-exports.default = _default;
+var _default = exports.default = InputColor;
 //# sourceMappingURL=InputColor.js.map

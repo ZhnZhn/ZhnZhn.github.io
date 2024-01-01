@@ -6,7 +6,7 @@ import {
   useImperativeHandle
 } from '../uiApi';
 
-import useToggleClose from '../hooks/useToggleClose';
+import { useToggleFalse } from '../hooks/useBool';
 import { getDateFromVm } from '../../utils/dateFn';
 
 import {
@@ -87,7 +87,7 @@ const ValueMovingBadge = forwardRef(({
     isShowModal,
     _toggleModal,
     _closeModal
-  ] = useToggleClose()
+  ] = useToggleFalse()
   , _date = useMemo(
      () => getDateFromVm(initialVm),
      [initialVm]

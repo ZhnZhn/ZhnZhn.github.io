@@ -11,7 +11,7 @@ import memoEqual from '../hoc/memoEqual';
 
 import useProperty from '../hooks/useProperty';
 import useToggle from '../hooks/useToggle';
-import useBool from '../hooks/useBool';
+import { useBool } from '../hooks/useBool';
 
 import useVm from './useVm';
 import useSetCheckBox from './useSetCheckBox';

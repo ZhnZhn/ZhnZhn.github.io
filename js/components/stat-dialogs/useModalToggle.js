@@ -4,14 +4,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useToggleClose = _interopRequireDefault(require("../hooks/useToggleClose"));
+var _useBool = require("../hooks/useBool");
 var _useTitles = _interopRequireDefault(require("../dialogs/hooks/useTitles"));
 var _useRowToggle = _interopRequireDefault(require("./useRowToggle"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _crIsId = _interopRequireDefault(require("./crIsId"));
 var _jsxRuntime = require("react/jsx-runtime");
 const useModalToggle = configs => {
-  const [isToggle, toggleInputs, hideInputs] = (0, _useToggleClose.default)(),
+  const [isToggle, toggleInputs, hideInputs] = (0, _useBool.useToggleFalse)(),
     [isRow, toggleIsRow] = (0, _useRowToggle.default)(configs),
     {
       isShowChart
@@ -31,6 +31,5 @@ const useModalToggle = configs => {
   //toggleIsRow, checkCaptionBy, uncheckCaption, hideInputs
   /*eslint-enable react-hooks/exhaustive-deps */, refTitles, isRow, toggleInputs];
 };
-var _default = useModalToggle;
-exports.default = _default;
+var _default = exports.default = useModalToggle;
 //# sourceMappingURL=useModalToggle.js.map

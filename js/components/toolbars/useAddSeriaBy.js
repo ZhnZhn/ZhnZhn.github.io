@@ -1,15 +1,14 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useBool = _interopRequireDefault(require("../hooks/useBool"));
+var _useBool = require("../hooks/useBool");
 const _isNumber = n => typeof n === 'number',
   _isFn = fn => typeof fn === 'function';
 const _crName = (prefixStr, nOrObj) => {
-  const _suffix = _isNumber(nOrObj) ? "(" + nOrObj + ")" : '';
-  return "" + prefixStr + _suffix;
+  const _suffix = _isNumber(nOrObj) ? `(${nOrObj})` : '';
+  return `${prefixStr}${_suffix}`;
 };
 const _isSeriaInst = s => s && _isFn(s.setVisible);
 const _getSeriaIndex = (chart, _ref) => {
@@ -17,11 +16,11 @@ const _getSeriaIndex = (chart, _ref) => {
     s
   } = _ref;
   const _index = _isNumber(s) ? s - 1 : 0;
-  return (chart == null ? void 0 : chart.series.length) > _index ? _index : 0;
+  return chart?.series.length > _index ? _index : 0;
 };
 const useAddSeriaBy = (confArr, getChart) => {
   const _refSeria = (0, _uiApi.useRef)(),
-    [isSeria, showSeria, hideSeria] = (0, _useBool.default)()
+    [isSeria, showSeria, hideSeria] = (0, _useBool.useBool)()
     /*eslint-disable react-hooks/exhaustive-deps */,
     addSeriaBy = (0, _uiApi.useCallback)(function () {
       for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
@@ -68,6 +67,5 @@ const useAddSeriaBy = (confArr, getChart) => {
 
   return [isSeria, addSeriaBy, hideSeriaBy];
 };
-var _default = useAddSeriaBy;
-exports.default = _default;
+var _default = exports.default = useAddSeriaBy;
 //# sourceMappingURL=useAddSeriaBy.js.map

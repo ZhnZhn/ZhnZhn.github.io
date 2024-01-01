@@ -1,8 +1,7 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 var _react = require("@testing-library/react");
-var _useBool = _interopRequireDefault(require("../useBool"));
+var _useBool = require("../useBool");
 const _getIs = result => result.current[0],
   _getSetTrue = result => result.current[1],
   _getSetFalse = result => result.current[2];
@@ -11,7 +10,7 @@ const _getIs = result => result.current[0],
 const _testInitialValue = (initialValue, expectedValue) => {
   const {
     result: r1
-  } = (0, _react.renderHook)(() => (0, _useBool.default)(initialValue));
+  } = (0, _react.renderHook)(() => (0, _useBool.useBool)(initialValue));
   expect(_getIs(r1)).toBe(expectedValue);
 };
 /* eslint-enable react-hooks/rules-of-hooks */
@@ -28,10 +27,10 @@ describe('useBool', () => {
     _testInitialValue(false, false);
     _testInitialValue(true, true);
   });
-  test('should return setTrue and setFalse function for setting vale', () => {
+  test('should return setTrue and setFalse function for setting value', () => {
     const {
         result: r1
-      } = (0, _react.renderHook)(() => (0, _useBool.default)()),
+      } = (0, _react.renderHook)(() => (0, _useBool.useBool)()),
       setTrue = _getSetTrue(r1),
       setFalse = _getSetFalse(r1);
     expect(_getIs(r1)).toBe(false);
