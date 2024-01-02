@@ -2,8 +2,9 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.hDropItem = exports.hDragStartItem = exports.hDragOverItem = exports.hDragLeaveItem = exports.hDragEnterItem = void 0;
+exports.crDnDItemHandlers = void 0;
 var _watchListStore = require("../../../flux/watch-list/watchListStore");
+var _uiApi = require("../../uiApi");
 var _getTransferData = _interopRequireDefault(require("./getTransferData"));
 var _WatchDnDConfig = _interopRequireDefault(require("./WatchDnDConfig"));
 var _DnDStyleHandlers = require("./DnDStyleHandlers");
@@ -16,7 +17,7 @@ const _crItemId = _ref => {
   } = _ref;
   return `${groupCaption};${listCaption};${caption}`;
 };
-const hDragStartItem = exports.hDragStartItem = (0, _DnDHandlers.fDragStart)([_WatchDnDConfig.default.ITEM, _WatchDnDConfig.default.LIST], _crItemId);
+const hDragStartItem = (0, _DnDHandlers.fDragStart)([_WatchDnDConfig.default.ITEM, _WatchDnDConfig.default.LIST], _crItemId);
 const hDropItem = (
 //{groupCaption, listCaption, caption},
 options, evt) => {
@@ -38,8 +39,6 @@ options, evt) => {
     }
   }
 };
-exports.hDropItem = hDropItem;
-const hDragEnterItem = exports.hDragEnterItem = (0, _DnDHandlers.fDragEnter)(_WatchDnDConfig.default.ITEM, _WatchDnDConfig.default.C_LIST_ENTER);
-const hDragOverItem = exports.hDragOverItem = _DnDHandlers.hDragOver;
-const hDragLeaveItem = exports.hDragLeaveItem = _DnDHandlers.hDragLeave;
+const hDragEnterItem = (0, _DnDHandlers.fDragEnter)(_WatchDnDConfig.default.ITEM, _WatchDnDConfig.default.C_LIST_ENTER);
+const crDnDItemHandlers = exports.crDnDItemHandlers = (0, _uiApi.bindTo)(_DnDHandlers.crDnDHandlers, hDragStartItem, hDropItem, hDragEnterItem, _DnDHandlers.hDragOver, _DnDHandlers.hDragLeave);
 //# sourceMappingURL=DnDItemHandlers.js.map

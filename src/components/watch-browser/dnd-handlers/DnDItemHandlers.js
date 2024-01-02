@@ -2,6 +2,8 @@ import {
   ddItem
 } from '../../../flux/watch-list/watchListStore';
 
+import { bindTo } from '../../uiApi';
+
 import getTransferData from './getTransferData';
 import DRAG from './WatchDnDConfig';
 
@@ -12,7 +14,8 @@ import {
   fDragStart,
   fDragEnter,
   hDragOver,
-  hDragLeave
+  hDragLeave,
+  crDnDHandlers
 } from './DnDHandlers';
 
 const _crItemId = ({
@@ -21,12 +24,12 @@ const _crItemId = ({
   caption
 }) => `${groupCaption};${listCaption};${caption}`;
 
-export const hDragStartItem = fDragStart(
+const hDragStartItem = fDragStart(
   [DRAG.ITEM, DRAG.LIST],
   _crItemId
-)
+);
 
-export const hDropItem = (
+const hDropItem = (
   //{groupCaption, listCaption, caption},
   options,
   evt
@@ -48,10 +51,16 @@ export const hDropItem = (
   }
 };
 
-export const hDragEnterItem = fDragEnter(
+const hDragEnterItem = fDragEnter(
   DRAG.ITEM,
   DRAG.C_LIST_ENTER
-)
+);
 
-export const hDragOverItem = hDragOver
-export const hDragLeaveItem = hDragLeave
+export const crDnDItemHandlers = bindTo(
+  crDnDHandlers,
+  hDragStartItem,
+  hDropItem,
+  hDragEnterItem,
+  hDragOver,
+  hDragLeave
+)

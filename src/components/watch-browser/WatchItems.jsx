@@ -6,11 +6,7 @@ import {
 } from './Handlers';
 
 import {
-  hDragStartItem,
-  hDragOverItem,
-  hDragEnterItem,
-  hDragLeaveItem,
-  hDropItem
+  crDnDItemHandlers
 } from './dnd-handlers/DnDItemHandlers';
 
 import WatchItem from './WatchItem';
@@ -24,25 +20,22 @@ const WatchItems = ({
   listCaption
 }) => _isArr(items) ? items
   .map(item => {
-    const { caption } = item;
+    const { caption } = item
+    , option = {
+      groupCaption,
+      listCaption,
+      caption
+    };
     return (
        <WatchItem
           key={caption}
           className={CL_ROW_TYPE2_TOPIC}
-          isDraggable={isModeEdit}
           item={item}
-          option={{
-            groupCaption,
-            listCaption,
-            caption
-          }}
+          isDraggable={isModeEdit}
+          option={option}
+          dndHandlers={crDnDItemHandlers(isModeEdit, option)}
           onClick={showDialogWatchItem}
           onClose={removeWatchItem}
-          onDragStart={hDragStartItem}
-          onDragOver={hDragOverItem}
-          onDragEnter={hDragEnterItem}
-          onDragLeave={hDragLeaveItem}
-          onDrop={hDropItem}
        />
     );
   }) : null;

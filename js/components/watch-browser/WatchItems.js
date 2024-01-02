@@ -18,24 +18,21 @@ const WatchItems = _ref => {
   } = _ref;
   return _isArr(items) ? items.map(item => {
     const {
-      caption
-    } = item;
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_WatchItem.default, {
-      className: _styleFn.CL_ROW_TYPE2_TOPIC,
-      isDraggable: isModeEdit,
-      item: item,
-      option: {
+        caption
+      } = item,
+      option = {
         groupCaption,
         listCaption,
         caption
-      },
+      };
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_WatchItem.default, {
+      className: _styleFn.CL_ROW_TYPE2_TOPIC,
+      item: item,
+      isDraggable: isModeEdit,
+      option: option,
+      dndHandlers: (0, _DnDItemHandlers.crDnDItemHandlers)(isModeEdit, option),
       onClick: _Handlers.showDialogWatchItem,
-      onClose: _Handlers.removeWatchItem,
-      onDragStart: _DnDItemHandlers.hDragStartItem,
-      onDragOver: _DnDItemHandlers.hDragOverItem,
-      onDragEnter: _DnDItemHandlers.hDragEnterItem,
-      onDragLeave: _DnDItemHandlers.hDragLeaveItem,
-      onDrop: _DnDItemHandlers.hDropItem
+      onClose: _Handlers.removeWatchItem
     }, caption);
   }) : null;
 };
