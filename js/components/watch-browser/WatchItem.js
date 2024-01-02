@@ -5,7 +5,6 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
-var _useDnDHandlers = _interopRequireDefault(require("../hooks/useDnDHandlers"));
 var _BtSvgX = require("../zhn/BtSvgX");
 var _DivEllipsis = _interopRequireDefault(require("../zhn/DivEllipsis"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -23,23 +22,17 @@ const S_ITEM_DIV = {
     top: 8
   };
 const EMPTY_ITEM_CAPTION = 'Not Found';
-const WatchItem = props => {
+const WatchItem = _ref => {
+  let {
+    item,
+    className,
+    onClick,
+    onClose,
+    isDraggable,
+    dndHandlers,
+    option
+  } = _ref;
   const {
-      item,
-      className,
-      onClick,
-      onClose,
-      isDraggable,
-      option
-      /*
-      onDragStart,
-      onDragEnter,
-      onDragOver,
-      onDragLeave,
-      onDrop
-      */
-    } = props,
-    {
       caption = EMPTY_ITEM_CAPTION
     } = item || {},
     _btClose = isDraggable ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
@@ -54,16 +47,15 @@ const WatchItem = props => {
       if ((0, _isKeyEnter.default)(evt)) {
         _hClick();
       }
-    }, [_hClick]),
-    _dndOptions = (0, _useDnDHandlers.default)(props);
+    }, [_hClick]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     role: "menuitem",
     tabIndex: "0",
     className: className,
     style: S_ITEM_DIV,
     onClick: _hClick,
-    ..._dndOptions,
     onKeyUp: _hKeyUp,
+    ...dndHandlers,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
       style: S_CAPTION,
       text: caption

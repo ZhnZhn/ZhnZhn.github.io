@@ -4,7 +4,6 @@ import {
 } from '../uiApi';
 
 import isKeyEnter from '../zhn/isKeyEnter';
-import useDnDHandlers from '../hooks/useDnDHandlers';
 
 import { BtSvgClose } from '../zhn/BtSvgX';
 import DivEllipsis from '../zhn/DivEllipsis';
@@ -25,24 +24,17 @@ const S_ITEM_DIV = {
 
 const EMPTY_ITEM_CAPTION = 'Not Found';
 
-const WatchItem = (props) => {
-  const {
-    item,
-    className,
-    onClick,
-    onClose,
+const WatchItem = ({
+  item,
+  className,
+  onClick,
+  onClose,
 
-    isDraggable,
-    option,
-    /*
-    onDragStart,
-    onDragEnter,
-    onDragOver,
-    onDragLeave,
-    onDrop
-    */
-  } = props
-  , {
+  isDraggable,
+  dndHandlers,
+  option
+}) => {
+  const {
     caption=EMPTY_ITEM_CAPTION
   } = item || {}
   , _btClose = isDraggable
@@ -60,7 +52,6 @@ const WatchItem = (props) => {
          _hClick()
        }
   }, [_hClick])
-  , _dndOptions = useDnDHandlers(props);
 
  return (
      <div
@@ -69,8 +60,8 @@ const WatchItem = (props) => {
        className={className}
        style={S_ITEM_DIV}
        onClick={_hClick}
-       {..._dndOptions}
        onKeyUp={_hKeyUp}
+       {...dndHandlers}
      >
        <DivEllipsis
          style={S_CAPTION}
