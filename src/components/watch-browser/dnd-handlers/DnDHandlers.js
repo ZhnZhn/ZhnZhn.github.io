@@ -1,3 +1,4 @@
+import { bindTo } from '../../uiApi';
 import setTransferTo from './setTransferTo';
 
 import {
@@ -38,3 +39,22 @@ export const hDragLeave = ev => {
    ev.preventDefault()
    dragLeaveWithDnDStyle(ev)
 }
+
+export const crDnDHandlers = (
+  onDragStart,
+  onDrop,
+  onDragEnter,
+  onDragOver,
+  onDragLeave,
+  isEditMode,
+  option,
+) => isEditMode
+ ? {
+    draggable: true,
+    onDragStart: bindTo(onDragStart, option),
+    onDrop: bindTo(onDrop, option),
+    onDragEnter,
+    onDragOver,
+    onDragLeave
+  }
+ : void 0
