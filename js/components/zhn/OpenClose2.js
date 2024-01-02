@@ -5,36 +5,26 @@ exports.__esModule = true;
 exports.default = void 0;
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _fUseKey = require("../hooks/fUseKey");
-var _useDnDHandlers = _interopRequireDefault(require("../hooks/useDnDHandlers"));
 var _Svg = _interopRequireDefault(require("./svg/Svg"));
 var _OpenCloseStyle = require("./OpenCloseStyle");
 var _jsxRuntime = require("react/jsx-runtime");
 const _crStyleConf = (isOpen, openColor, notSelectedStyle) => isOpen
 //_pathV, _fillV, _divStyle, _expClass, _notSelectedStyle
 ? [_OpenCloseStyle.PATH_OPEN, openColor, _OpenCloseStyle.S_BLOCK, `${_OpenCloseStyle.CL_OPEN_CLOSE_EXP} ${_OpenCloseStyle.CL_SHOW_POPUP}`] : [_OpenCloseStyle.PATH_CLOSE, _OpenCloseStyle.FILL_CLOSE_COLOR, _OpenCloseStyle.S_NONE, _OpenCloseStyle.CL_OPEN_CLOSE_EXP, notSelectedStyle];
-const OpenClose2 = props => {
-  const {
-      isInitialOpen,
-      style,
-      ocStyle,
-      notSelectedStyle,
-      captionStyle,
-      caption,
-      openColor,
-      /*
-      isDraggable,
-      option,
-      onDragStart,
-      onDragEnter,
-      onDragOver,
-      onDragLeave,
-      onDrop,
-      */
-      children
-    } = props,
-    [isOpen, toggleIsOpen] = (0, _useToggle.default)(isInitialOpen),
+const OpenClose2 = _ref => {
+  let {
+    isInitialOpen,
+    style,
+    ocStyle,
+    notSelectedStyle,
+    captionStyle,
+    caption,
+    openColor,
+    dndHandlers,
+    children
+  } = _ref;
+  const [isOpen, toggleIsOpen] = (0, _useToggle.default)(isInitialOpen),
     _hKeyDown = (0, _fUseKey.useKeyEnter)(toggleIsOpen),
-    _dragOption = (0, _useDnDHandlers.default)(props),
     [_pathV, _fillV, _divStyle, _expClass, _notSelectedStyle] = _crStyleConf(isOpen, openColor, notSelectedStyle);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: _OpenCloseStyle.CL_NOT_SELECTED,
@@ -49,7 +39,7 @@ const OpenClose2 = props => {
       },
       onClick: toggleIsOpen,
       onKeyDown: _hKeyDown,
-      ..._dragOption,
+      ...dndHandlers,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.default, {
         w: "16",
         style: _OpenCloseStyle.S_SVG,

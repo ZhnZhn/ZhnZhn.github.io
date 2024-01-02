@@ -1,6 +1,5 @@
 import useToggle from '../hooks/useToggle';
 import { useKeyEnter } from '../hooks/fUseKey';
-import useDnDHandlers from '../hooks/useDnDHandlers';
 
 import Svg from './svg/Svg';
 import {
@@ -36,34 +35,22 @@ const _crStyleConf = (
      notSelectedStyle
   ];
 
-const OpenClose2 = (
-  props
-) => {
-  const {
-    isInitialOpen,
-    style,
-    ocStyle,
-    notSelectedStyle,
-    captionStyle,
-    caption,
-    openColor,
-    /*
-    isDraggable,
-    option,
-    onDragStart,
-    onDragEnter,
-    onDragOver,
-    onDragLeave,
-    onDrop,
-    */
-    children
-  } = props
-  , [
+const OpenClose2 = ({
+  isInitialOpen,
+  style,
+  ocStyle,
+  notSelectedStyle,
+  captionStyle,
+  caption,
+  openColor,
+  dndHandlers,
+  children
+}) => {
+  const [
     isOpen,
     toggleIsOpen
   ] = useToggle(isInitialOpen)
   , _hKeyDown = useKeyEnter(toggleIsOpen)
-  , _dragOption = useDnDHandlers(props)
   , [
       _pathV,
       _fillV,
@@ -71,11 +58,11 @@ const OpenClose2 = (
       _expClass,
       _notSelectedStyle
    ] = _crStyleConf(
-       isOpen,
-       openColor,
-       notSelectedStyle
-     );
-  return (
+      isOpen,
+      openColor,
+      notSelectedStyle
+   );
+   return (
     <div className={CL_NOT_SELECTED} style={style}>
       <div
          role="menuitem"
@@ -84,7 +71,7 @@ const OpenClose2 = (
          style={{...ocStyle, ..._notSelectedStyle}}
          onClick={toggleIsOpen}
          onKeyDown={_hKeyDown}
-         {..._dragOption}
+         {...dndHandlers}
        >
          <Svg w="16" style={S_SVG}>
            <path
