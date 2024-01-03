@@ -10,7 +10,6 @@ import {
   LT_TW,
   LT_BEA,
   LT_EIA,
-  LT_BF,
   LT_CRC,
   LT_BLS,
   LT_WL,
@@ -26,7 +25,6 @@ const _withApiKey = [
 const _withProxy = [
   LT_Q,
   LT_QCT,
-  LT_BF,
   LT_UN
 ];
 const _apiTitle = {

@@ -1,6 +1,7 @@
 import {
   isArr,
-  crError
+  crError,
+  crAllOriginsUrl
 } from '../AdapterFn';
 
 const API_URL = "https://api-pub.bitfinex.com/v2";
@@ -13,7 +14,7 @@ const _crDfUrl = (
   , {v:timeframe} = items[1]
   , {v:limit} = items[2];
   option.timeframe = timeframe
-  return `${proxy}${API_URL}/candles/trade:${timeframe}:t${pair}/hist?limit=${limit}`;
+  return crAllOriginsUrl(proxy, `${API_URL}/candles/trade:${timeframe}:t${pair}/hist?limit=${limit}`)
 };
 
 const _crObUrl = ({
@@ -22,13 +23,25 @@ const _crObUrl = ({
 }) => {
   const {v:pair} = items[0]
   , {v:len} = items[1];
-  return `${proxy}${API_URL}/book/t${pair}/P0?len=${len}`;
+  return crAllOriginsUrl(proxy, `${API_URL}/book/t${pair}/P0?len=${len}`)
 };
 
 const _rCrUrl = {
   DF: _crDfUrl,
   OB: _crObUrl
 };
+
+const _getData = (
+  json
+) => {
+  if (isArr(json)) {
+    return json;
+  }
+  const _data = JSON.parse(json.contents);
+  return isArr(_data)
+    ? _data
+    : void 0;
+}
 
 const BfApi = {
   getRequestUrl(option){
@@ -39,10 +52,15 @@ const BfApi = {
   },
 
   checkResponse(json, option){
-    if (!isArr(json)) {
+    try {
+      const _json = _getData(json);
+      if (!isArr(_json)) {
+        throw crError();
+      }
+      return _json;
+    } catch(err) {
       throw crError();
     }
-    return true;
   }
 };
 
