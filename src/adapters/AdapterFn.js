@@ -148,3 +148,8 @@ export const crZhConfig = ({
   itemCaption,
   dataSource
 })
+
+export const crAllOriginsUrl = (
+  proxy,
+  url
+) => `${proxy || "https://api.allorigins.win/get?url="}${encodeURIComponent(url)}`
