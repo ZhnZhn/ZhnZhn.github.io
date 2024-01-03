@@ -114,7 +114,7 @@ const UnComtradeApi = {
 
   checkResponse(json){
     if (json && isArr(json.data)) {
-      return true;
+      return json;
     }
     const {
       error,

@@ -1,4 +1,4 @@
-import { 
+import {
   isArr,
   assign,
   crError,
@@ -76,10 +76,10 @@ const CgApi = {
     if ( (dfSubId === 'MCL' || dfSubId === 'EL')
         && isArr(json)
         && json.length > 1) {
-      return true;
+      return json;
     }
     if (json && isArr(json.prices)) {
-      return true;
+      return json;
     }
     throw crError();
   }

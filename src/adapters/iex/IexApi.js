@@ -1,4 +1,4 @@
-import { 
+import {
   assign,
   getValue,
   crError
@@ -71,7 +71,6 @@ const IexApi = {
     if (!json) {
       throw crError();
     }
-    return true;
   }
 }
 

@@ -1,1 +1,47 @@
-{"version":3,"sources":["../../../src/adapters/crypto-compare/CrcApi.js"],"names":["URL","QUERY_TAIL","DF_ID","DF_E","DF_INTERVAL","_fGetParam","index","dfValue","items","_getFsym","_getE","_getInterval","_hdUrl","option","value","exchange","interval","tsym","_rUrl","DF","HD","CrcApi","getRequestUrl","dfSubId","_crUrl","checkResponse","json","Response","Message"],"mappings":";;;;;AAAA;;AAMA,MAAMA,GAAG,GAAG,mCAAZ,CACA;AADA;AAAA,MAEEC,UAAU,GAAG,uBAFf;AAAA,MAGEC,KAAK,GAAG,KAHV;AAAA,MAIEC,IAAI,GAAG,QAJT;AAAA,MAKEC,WAAW,GAAG,UALhB;;AAOA,MAAMC,UAAU,GAAG,CAACC,KAAD,EAAQC,OAAR,KAAoBC,KAAK,IAAI,yBAASA,KAAK,CAACF,KAAD,CAAd,EAAuB;AAAEC,EAAAA;AAAF,CAAvB,CAAhD;AAAA,MACEE,QAAQ,GAAGJ,UAAU,CAAC,CAAD,EAAIH,KAAJ,CADvB;AAAA,MAEEQ,KAAK,GAAGL,UAAU,CAAC,CAAD,EAAIF,IAAJ,CAFpB;AAAA,MAGEQ,YAAY,GAAGN,UAAU,CAAC,CAAD,EAAID,WAAJ,CAH3B;;AAKA,MAAMQ,MAAM,GAAIC,MAAD,IAAY;AACzB,QAAM;AAAEL,IAAAA,KAAK,GAAC;AAAR,MAAeK,MAArB;AAAA,QACEC,KAAK,GAAGL,QAAQ,CAACD,KAAD,CADlB;AAAA,QAEEO,QAAQ,GAAGL,KAAK,CAACF,KAAD,CAFlB;AAAA,QAGEQ,QAAQ,GAAGL,YAAY,CAACH,KAAD,CAHzB;AAAA,QAIES,IAAI,GAAGF,QAAQ,KAAK,SAAb,GAAyB,MAAzB,GAAkC,KAJ3C;;AAKA,0BAAQF,MAAR,EAAgB;AAAEC,IAAAA,KAAF;AAASC,IAAAA,QAAT;AAAmBE,IAAAA;AAAnB,GAAhB;AACA,SAAUjB,GAAV,cAAsBgB,QAAtB,cAAuCF,KAAvC,WAAkDC,QAAlD,cAAmEE,IAAnE,mBAAqFhB,UAArF;AACD,CARD;;AAWA,MAAMiB,KAAK,GAAG;AACZC,EAAAA,EAAE,EAAEP,MADQ;AAEZQ,EAAAA,EAAE,EAAER;AAFQ,CAAd;AAKA,MAAMS,MAAM,GAAG;AACbC,EAAAA,aAAa,CAACT,MAAD,EAAQ;AACnB,UAAM;AAAEU,MAAAA;AAAF,QAAcV,MAApB;AAAA,UACEW,MAAM,GAAGN,KAAK,CAACK,OAAD,CAAL,IAAkBL,KAAK,CAACC,EADnC;;AAEA,WAAOK,MAAM,CAACX,MAAD,CAAb;AACD,GALY;;AAMbY,EAAAA,aAAa,CAACC,IAAD,EAAM;AACjB,QAAI,CAACA,IAAD,IAASA,IAAI,CAACC,QAAL,KAAkB,OAA/B,EAAwC;AACtC,YAAM,wBAAQ,EAAR,EAAYD,IAAI,IAAIA,IAAI,CAACE,OAAzB,CAAN;AACD;;AACD,WAAO,IAAP;AACD;;AAXY,CAAf;eAceP,M","sourcesContent":["import {\r\n  _assign,\r\n  crError,\r\n  getValue\r\n} from './fnAdapter';\r\n\r\nconst URL = 'https://min-api.cryptocompare.com'\r\n//, HD: 'data/histoday'\r\n, QUERY_TAIL = 'extraParams=webapperc'\r\n, DF_ID = 'BTC'\r\n, DF_E = 'CCCAGG'\r\n, DF_INTERVAL = 'histoday';\r\n\r\nconst _fGetParam = (index, dfValue) => items => getValue(items[index], { dfValue })\r\n, _getFsym = _fGetParam(0, DF_ID)\r\n, _getE = _fGetParam(1, DF_E)\r\n, _getInterval = _fGetParam(2, DF_INTERVAL)\r\n\r\nconst _hdUrl = (option) => {\r\n  const { items=[] } = option\r\n  , value = _getFsym(items)\r\n  , exchange = _getE(items)\r\n  , interval = _getInterval(items)\r\n  , tsym = exchange === 'Binance' ? 'USDT' : 'USD';\r\n  _assign(option, { value, exchange, tsym })\r\n  return `${URL}/data/${interval}?fsym=${value}&e=${exchange}&tsym=${tsym}&limit=600&${QUERY_TAIL}`;\r\n};\r\n\r\n\r\nconst _rUrl = {\r\n  DF: _hdUrl,\r\n  HD: _hdUrl\r\n};\r\n\r\nconst CrcApi = {\r\n  getRequestUrl(option){\r\n    const { dfSubId } = option\r\n    , _crUrl = _rUrl[dfSubId] || _rUrl.DF;\r\n    return _crUrl(option);\r\n  },\r\n  checkResponse(json){\r\n    if (!json || json.Response === 'Error') {\r\n      throw crError('', json && json.Message);\r\n    }\r\n    return true;\r\n  }\r\n};\r\n\r\nexport default CrcApi\r\n"],"file":"CrcApi.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/crypto-compare/CrcApi.js"
+ ],
+ "file": "../../../src/adapters/crypto-compare/CrcApi.js",
+ "names": [
+  "_fnAdapter",
+  "require",
+  "URL",
+  "QUERY_TAIL",
+  "DF_ID",
+  "DF_E",
+  "DF_INTERVAL",
+  "_fGetParam",
+  "index",
+  "dfValue",
+  "items",
+  "getValue",
+  "_getFsym",
+  "_getE",
+  "_getInterval",
+  "_hdUrl",
+  "option",
+  "value",
+  "exchange",
+  "interval",
+  "tsym",
+  "_assign",
+  "_rUrl",
+  "DF",
+  "HD",
+  "CrcApi",
+  "getRequestUrl",
+  "dfSubId",
+  "_crUrl",
+  "checkResponse",
+  "json",
+  "Response",
+  "crError",
+  "Message",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAMA,MAAMC,GAAG,GAAG;EACZ;EAAA;EACEC,UAAU,GAAG,uBAAuB;EACpCC,KAAK,GAAG,KAAK;EACbC,IAAI,GAAG,QAAQ;EACfC,WAAW,GAAG,UAAU;AAE1B,MAAMC,UAAU,GAAGA,CAACC,KAAK,EAAEC,OAAO,KAAKC,KAAK,IAAI,IAAAC,mBAAQ,EAACD,KAAK,CAACF,KAAK,CAAC,EAAE;IAAEC;EAAQ,CAAC,CAAC;EACjFG,QAAQ,GAAGL,UAAU,CAAC,CAAC,EAAEH,KAAK,CAAC;EAC/BS,KAAK,GAAGN,UAAU,CAAC,CAAC,EAAEF,IAAI,CAAC;EAC3BS,YAAY,GAAGP,UAAU,CAAC,CAAC,EAAED,WAAW,CAAC;AAE3C,MAAMS,MAAM,GAAIC,MAAM,IAAK;EACzB,MAAM;MAAEN,KAAK,GAAC;IAAG,CAAC,GAAGM,MAAM;IACzBC,KAAK,GAAGL,QAAQ,CAACF,KAAK,CAAC;IACvBQ,QAAQ,GAAGL,KAAK,CAACH,KAAK,CAAC;IACvBS,QAAQ,GAAGL,YAAY,CAACJ,KAAK,CAAC;IAC9BU,IAAI,GAAGF,QAAQ,KAAK,SAAS,GAAG,MAAM,GAAG,KAAK;EAChD,IAAAG,kBAAO,EAACL,MAAM,EAAE;IAAEC,KAAK;IAAEC,QAAQ;IAAEE;EAAK,CAAC,CAAC;EAC1C,OAAQ,GAAElB,GAAI,SAAQiB,QAAS,SAAQF,KAAM,MAAKC,QAAS,SAAQE,IAAK,cAAajB,UAAW,EAAC;AACnG,CAAC;AAGD,MAAMmB,KAAK,GAAG;EACZC,EAAE,EAAER,MAAM;EACVS,EAAE,EAAET;AACN,CAAC;AAED,MAAMU,MAAM,GAAG;EACbC,aAAaA,CAACV,MAAM,EAAC;IACnB,MAAM;QAAEW;MAAQ,CAAC,GAAGX,MAAM;MACxBY,MAAM,GAAGN,KAAK,CAACK,OAAO,CAAC,IAAIL,KAAK,CAACC,EAAE;IACrC,OAAOK,MAAM,CAACZ,MAAM,CAAC;EACvB,CAAC;EACDa,aAAaA,CAACC,IAAI,EAAC;IACjB,IAAI,CAACA,IAAI,IAAIA,IAAI,CAACC,QAAQ,KAAK,OAAO,EAAE;MACtC,MAAM,IAAAC,kBAAO,EAAC,EAAE,EAAEF,IAAI,IAAIA,IAAI,CAACG,OAAO,CAAC;IACzC;EACF;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaX,MAAM"
+}

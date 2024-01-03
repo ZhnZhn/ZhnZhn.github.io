@@ -18,10 +18,9 @@ const TwApi = {
   },
   checkResponse(json, option){
     const { values } = json || {};
-    if (_isArr(values)) {
-      return true;
+    if (!_isArr(values)) {
+      crError('', json.message);
     }
-    throw crError('', json.message);
   }
 };
 

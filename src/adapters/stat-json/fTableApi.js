@@ -47,7 +47,6 @@ const fTableApi = (
     if (error) {
       throw _crErr(error);
     }
-    return true;
   }
 });
 

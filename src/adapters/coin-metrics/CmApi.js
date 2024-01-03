@@ -30,7 +30,6 @@ const CmApi = {
     if (!_isArr(data)) {
       throw crError("Server Response");
     }
-    return true;
   }
 };
 

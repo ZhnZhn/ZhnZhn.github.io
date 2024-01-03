@@ -114,7 +114,7 @@ const BlsApi = {
     , { series } = Results || {}
     , _s = (series || [])[0];
     if (_s && isArr(_s.data)){
-      return true;
+      return json;
     }
     throw crError('', message[0]);
   }

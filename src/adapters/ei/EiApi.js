@@ -1,4 +1,7 @@
-import { isArr } from '../AdapterFn';
+import {
+  isArr,
+  crError
+} from '../AdapterFn';
 import {
   isTreeMap,
   isCategory
@@ -57,7 +60,9 @@ const IrenaApi = {
 
   checkResponse(json){
     const { data } = json || {};
-    return isArr(data);
+    if (!isArr(data)) {
+      throw crError()
+    }
   }
 };
 

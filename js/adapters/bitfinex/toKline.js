@@ -1,14 +1,11 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _AdapterFn = require("../AdapterFn");
-
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
-
+var _fnAdapter = require("./fnAdapter");
 const _crAddConfig = _ref => {
   let {
     option
@@ -17,15 +14,14 @@ const _crAddConfig = _ref => {
     zhConfig: (0, _AdapterFn.crZhConfig)(option)
   };
 };
-
 const _compareByDate = (a, b) => a.date - b.date,
-      _roundBy = n => {
-  if (n > -1 && n < 1) {
-    return n;
-  }
+  _roundBy = n => {
+    if (n > -1 && n < 1) {
+      return n;
+    }
+    return (0, _AdapterFn.roundBy)(n, 2);
+  };
 
-  return (0, _AdapterFn.roundBy)(n, 2);
-};
 /*
 From Bitfinex Documentation
 [[
@@ -37,7 +33,6 @@ From Bitfinex Documentation
  VOLUME:	float	Quantity of symbol traded within the timeframe
 ]]
 */
-
 
 const _crDataOHLCV = (json, option) => {
   const _data = [];
@@ -55,12 +50,10 @@ const _crDataOHLCV = (json, option) => {
   });
   return _data.sort(_compareByDate);
 };
-
 const toKline = (0, _crAdapterOHLCV.default)({
   getArr: _crDataOHLCV,
   toDate: date => date,
   crAddConfig: _crAddConfig
 });
-var _default = toKline;
-exports.default = _default;
+var _default = exports.default = toKline;
 //# sourceMappingURL=toKline.js.map

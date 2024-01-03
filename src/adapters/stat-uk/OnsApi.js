@@ -64,7 +64,6 @@ const OnsApi = {
     if (!(json && isArr(json.observations))) {
       throw crError();
     }
-    return true;
   }
 };
 

@@ -1,4 +1,7 @@
-import { isArr } from '../AdapterFn';
+import {
+  isArr,
+  crError
+} from '../AdapterFn';
 import { isCategory } from '../CategoryFn';
 
 const DATA_URL = './data/irena';
@@ -28,7 +31,7 @@ const _crCategoryUrl = (
 }
 
 const IrenaApi = {
-  getRequestUrl(option){  
+  getRequestUrl(option){
     return isCategory(option.seriaType)
       ? _crCategoryUrl(option)
       : _crLineUrl(option);
@@ -36,7 +39,9 @@ const IrenaApi = {
 
   checkResponse(json){
     const { data } = json || {};
-    return isArr(data);
+    if (!isArr(data)) {
+      throw crError();
+    }
   }
 };
 

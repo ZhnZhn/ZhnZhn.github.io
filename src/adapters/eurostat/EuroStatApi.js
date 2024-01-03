@@ -33,7 +33,6 @@ const EuroStatApi = {
           : void 0
       throw crError('', _msgErr);
     }
-    return true;
   }
 
 };

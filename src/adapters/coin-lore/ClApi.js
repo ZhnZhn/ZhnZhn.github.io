@@ -14,10 +14,9 @@ const ClApi = {
 
   checkResponse(json, option){
     const { pairs } = json  || {};
-    if (isArr(pairs)) {
-      return true;
+    if (!isArr(pairs)) {
+      throw crError()
     }
-    throw crError();
   }
 };
 

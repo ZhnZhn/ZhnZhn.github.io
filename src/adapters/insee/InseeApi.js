@@ -15,8 +15,7 @@ const InseeApi = {
       return _crUrl(option);
     }
     return `${_crUrl(option)}&endPeriod=${option.toDate}`;
-  },
-  checkResponse() {}
+  }
 };
 
 export default InseeApi

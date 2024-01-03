@@ -26,29 +26,29 @@ const _assignDf = option => {
     {
       v: _currency
     } = it2,
-    _vs = s + "/" + _currency,
+    _vs = `${s}/${_currency}`,
     _days = _crDays(option);
   (0, _AdapterFn.assign)(option, {
     itemCaption: _vs,
     title: c,
     subtitle: 'Values on 00:00 GMT',
     _currency: _currency,
-    _nativeUrl: PAGE_URL + "/" + value,
-    _itemUrl: API_URL + "/coins/" + value + "/market_chart?vs_currency=" + _currency + "&days=" + _days
+    _nativeUrl: `${PAGE_URL}/${value}`,
+    _itemUrl: `${API_URL}/coins/${value}/market_chart?vs_currency=${_currency}&days=${_days}`
   });
 };
 const _assignMcl = option => {
   const [page, perPage, currency] = (0, _fnAdapter.crPageConfig)(option);
   (0, _AdapterFn.assign)(option, {
-    title: "By Market Cap Page: " + page + " (" + perPage + ")",
-    _itemUrl: API_URL + "/coins/markets?order=market_cap_desc&page=" + page + "&per_page=" + perPage + "&vs_currency=" + currency + "&price_change_percentage=1h,7d,30d,1y"
+    title: `By Market Cap Page: ${page} (${perPage})`,
+    _itemUrl: `${API_URL}/coins/markets?order=market_cap_desc&page=${page}&per_page=${perPage}&vs_currency=${currency}&price_change_percentage=1h,7d,30d,1y`
   });
 };
 const _assignEl = option => {
   const [page, perPage] = (0, _fnAdapter.crPageConfig)(option);
   (0, _AdapterFn.assign)(option, {
-    title: "By Exchages Page: " + page + " (" + perPage + ")",
-    _itemUrl: API_URL + "/exchanges?page=" + page + "&per_page=" + perPage
+    title: `By Exchages Page: ${page} (${perPage})`,
+    _itemUrl: `${API_URL}/exchanges?page=${page}&per_page=${perPage}`
   });
 };
 const _rAssign = {
@@ -70,14 +70,13 @@ const CgApi = {
       dfSubId
     } = option;
     if ((dfSubId === 'MCL' || dfSubId === 'EL') && (0, _AdapterFn.isArr)(json) && json.length > 1) {
-      return true;
+      return json;
     }
     if (json && (0, _AdapterFn.isArr)(json.prices)) {
-      return true;
+      return json;
     }
     throw (0, _AdapterFn.crError)();
   }
 };
-var _default = CgApi;
-exports.default = _default;
+var _default = exports.default = CgApi;
 //# sourceMappingURL=CgApi.js.map

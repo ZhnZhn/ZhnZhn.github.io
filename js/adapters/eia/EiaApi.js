@@ -11,7 +11,7 @@ const _crFacets = items => items.map(_ref => {
     v,
     id
   } = _ref;
-  return "facets[" + id + "][]=" + v;
+  return `facets[${id}][]=${v}`;
 }).join('&');
 const EiaApi = {
   getRequestUrl(option) {
@@ -23,7 +23,7 @@ const EiaApi = {
       items,
       apiKey
     } = option;
-    return API_URL + "/" + dfRoute + "/" + dfSet + "/data?frequency=" + dfFreq + "&data[0]=" + dfData + "&api_key=" + apiKey + "&" + _crFacets(items) + "&" + QUERY_PARAMS;
+    return `${API_URL}/${dfRoute}/${dfSet}/data?frequency=${dfFreq}&data[0]=${dfData}&api_key=${apiKey}&${_crFacets(items)}&${QUERY_PARAMS}`;
   },
   checkResponse(json) {
     const {
@@ -35,9 +35,7 @@ const EiaApi = {
     if (!(0, _AdapterFn.isArr)(data)) {
       throw (0, _AdapterFn.crError)();
     }
-    return true;
   }
 };
-var _default = EiaApi;
-exports.default = _default;
+var _default = exports.default = EiaApi;
 //# sourceMappingURL=EiaApi.js.map

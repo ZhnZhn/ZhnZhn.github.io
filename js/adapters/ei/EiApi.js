@@ -10,20 +10,20 @@ const _crApiUrl = option => {
       items
     } = option,
     metric = items[1].v;
-  return DATA_URL + "/" + metric;
+  return `${DATA_URL}/${metric}`;
 };
 const _crLineUrl = option => {
   const {
       items
     } = option,
     geo = items[0].v;
-  return _crApiUrl(option) + "/" + geo + ".json";
+  return `${_crApiUrl(option)}/${geo}.json`;
 };
 const _crCategoryUrl = option => {
   const {
     time
   } = option;
-  return _crApiUrl(option) + "/by-geo-" + time + ".json";
+  return `${_crApiUrl(option)}/by-geo-${time}.json`;
 };
 const _crTreeMapUrl = option => {
   const {
@@ -37,7 +37,7 @@ const _crTreeMapUrl = option => {
       message: "TreeMap only available for 2022"
     };
   }
-  return DATA_URL + "/" + dfTmToken + "-tm/" + geo + "-" + time + ".json";
+  return `${DATA_URL}/${dfTmToken}-tm/${geo}-${time}.json`;
 };
 const IrenaApi = {
   getRequestUrl(option) {
@@ -47,7 +47,9 @@ const IrenaApi = {
     const {
       data
     } = json || {};
-    return (0, _AdapterFn.isArr)(data);
+    if (!(0, _AdapterFn.isArr)(data)) {
+      throw (0, _AdapterFn.crError)();
+    }
   }
 };
 var _default = exports.default = IrenaApi;

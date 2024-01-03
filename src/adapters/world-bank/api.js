@@ -21,15 +21,17 @@ const _addNativeLinkTo = (option) => {
 
 const api = {
   getRequestUrl(option){
-    const { country, indicator } = getCi(option);
+    const {
+      country,
+      indicator
+    } = getCi(option);
     _addNativeLinkTo(option)
     return `${URL}/countries/${country}/indicators/${indicator}?date=1990:2020&format=json`;
   },
   checkResponse(json){
-    if (_isArr(json)) {
-      return true;
+    if (!_isArr(json)) {
+      throw crError();
     }
-    throw crError();
   }
 };
 

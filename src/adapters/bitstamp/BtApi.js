@@ -44,7 +44,7 @@ const BtApi = {
     , { c } = items[0];
     if ( (c === pair && isArr(ohlc))
       || (isArr(bids) && isArr(asks)) ) {
-      return true;
+      return json;
     }
     throw crError();
   }

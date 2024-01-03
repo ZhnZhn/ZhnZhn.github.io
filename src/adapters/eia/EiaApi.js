@@ -35,7 +35,6 @@ const EiaApi = {
     if (!isArr(data)) {
       throw crError();
     }
-    return true;
   }
 };
 

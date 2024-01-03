@@ -54,7 +54,6 @@ const BeaApi = {
     if (Results.Error || !isArr(Results.Data)) {
       return crError();
     }
-    return true;
   }
 
 };

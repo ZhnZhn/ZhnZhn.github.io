@@ -38,7 +38,7 @@ const CpApi = {
   checkResponse(json, option){
     const { dfSubId } = option;
     if (_isArr(json) || (dfSubId === 'CI' && json)) {
-      return true;
+      return json;
     }
     throw crError();
   }

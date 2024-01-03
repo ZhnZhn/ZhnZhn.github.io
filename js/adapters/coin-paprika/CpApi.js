@@ -10,15 +10,15 @@ const _crUrlDf = option => {
       fromDate
     } = option,
     _coinId = (0, _fnAdapter.getCoinId)(option);
-  return URL + "/tickers/" + _coinId + "/historical?start=" + fromDate + "&interval=1d";
+  return `${URL}/tickers/${_coinId}/historical?start=${fromDate}&interval=1d`;
 };
 const _crUrlTw = option => {
   const _coinId = (0, _fnAdapter.getCoinId)(option);
-  return URL + "/coins/" + _coinId + "/twitter";
+  return `${URL}/coins/${_coinId}/twitter`;
 };
 const _crUrlCi = option => {
   const _coinId = (0, _fnAdapter.getCoinId)(option);
-  return URL + "/coins/" + _coinId;
+  return `${URL}/coins/${_coinId}`;
 };
 const _rApi = {
   DF: _crUrlDf,
@@ -38,11 +38,10 @@ const CpApi = {
       dfSubId
     } = option;
     if (_isArr(json) || dfSubId === 'CI' && json) {
-      return true;
+      return json;
     }
     throw (0, _fnAdapter.crError)();
   }
 };
-var _default = CpApi;
-exports.default = _default;
+var _default = exports.default = CpApi;
 //# sourceMappingURL=CpApi.js.map

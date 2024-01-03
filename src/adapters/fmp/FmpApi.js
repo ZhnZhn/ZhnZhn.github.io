@@ -104,7 +104,7 @@ const FmpApi = {
     if (!dfPn && _isArr(json) && _json[0].symbol === _symbol
      || dfPn === 'intraday' && _isArr(_json)
      || _isArr(_json[dfPn]) && _json.symbol === _symbol) {
-       return true;
+       return json;
     }
     throw crError(_symbol, _json.Error);
   }

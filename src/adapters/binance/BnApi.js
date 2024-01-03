@@ -57,11 +57,11 @@ const BnApi = {
   checkResponse(json, option){
     const { dfSubId } = option
     if (!dfSubId && isArr(json)) {
-      return true;
+      return json;
     }
     const { bids, asks } = json;
     if (dfSubId === 'OB' && isArr(bids) && isArr(asks)) {
-      return true;
+      return json;
     }
     throw crError();
   }

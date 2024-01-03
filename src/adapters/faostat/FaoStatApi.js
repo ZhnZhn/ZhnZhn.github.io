@@ -46,10 +46,9 @@ const FaoStatApi = {
   },
 
   checkResponse(json){
-    if (json && _isArr(json.data)) {
-      return true;
+    if (!(json && _isArr(json.data))) {
+      throw crError();
     }
-    throw crError();
   },
 
   addPropsTo(option){

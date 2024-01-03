@@ -61,7 +61,7 @@ const UnComtradeApi = {
   },
   checkResponse(json) {
     if (json && (0, _AdapterFn.isArr)(json.data)) {
-      return true;
+      return json;
     }
     const {
       error,

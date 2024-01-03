@@ -1,1 +1,26 @@
-{"version":3,"sources":["../../../src/adapters/stat-norway/ApiDataset.js"],"names":["C","ROOT_URL","DatasetApi","getRequestUrl","option","dfId","checkResponse"],"mappings":";;;;AACA,IAAMA,CAAC,GAAG;AACRC,EAAAA,QAAQ,EAAE;AADF,CAAV;AAIA,IAAMC,UAAU,GAAG;AACjBC,EAAAA,aADiB,yBACFC,MADE,EACM;AAAA,QACbC,IADa,GACJD,MADI,CACbC,IADa;AAErB,WAAUL,CAAC,CAACC,QAAZ,SAAwBI,IAAxB;AACD,GAJgB;AAKjBC,EAAAA,aALiB,2BAKF;AACb,WAAO,IAAP;AACD;AAPgB,CAAnB;eAUeJ,U","sourcesContent":["\r\nconst C = {\r\n  ROOT_URL: 'https://data.ssb.no/api/v0/dataset'\r\n};\r\n\r\nconst DatasetApi = {\r\n  getRequestUrl( option ){\r\n    const { dfId } = option;        \r\n    return `${C.ROOT_URL}/${dfId}.json?lang=en`;\r\n  },\r\n  checkResponse(){\r\n    return true;\r\n  }\r\n}\r\n\r\nexport default DatasetApi\r\n"],"file":"ApiDataset.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-norway/ApiDataset.js"
+ ],
+ "file": "../../../src/adapters/stat-norway/ApiDataset.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "API_URL",
+  "_crErr",
+  "crError",
+  "bind",
+  "DatasetApi",
+  "getRequestUrl",
+  "option",
+  "dfId",
+  "checkResponse",
+  "json",
+  "error",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAEA,MAAMC,OAAO,GAAG,oCAAoC;AACpD,MAAMC,MAAM,GAAGC,kBAAO,CAACC,IAAI,CAAC,IAAI,EAAE,EAAE,CAAC;AAErC,MAAMC,UAAU,GAAG;EACjBC,aAAaA,CAAEC,MAAM,EAAE;IACrB,MAAM;MAAEC;IAAK,CAAC,GAAGD,MAAM;IACvB,OAAQ,GAAEN,OAAQ,IAAGO,IAAK,eAAc;EAC1C,CAAC;EAEDC,aAAaA,CAACC,IAAI,EAAC;IACjB,MAAM;MAAEC;IAAM,CAAC,GAAGD,IAAI,IAAI,CAAC,CAAC;IAC5B,IAAIC,KAAK,EAAE;MACT,MAAMT,MAAM,CAACS,KAAK,CAAC;IACrB;EACF;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaT,UAAU"
+}
