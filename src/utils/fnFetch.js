@@ -116,9 +116,9 @@ const _fFetch = (propName) => function({
       }
     })
     .then(([limitRemaining, json, status]) => {
-      onCheckResponse(json, option, status)
+      const _json = onCheckResponse(json, option, status)
       option.limitRemaining = limitRemaining;
-      onFetch({ json, option, onCompleted });
+      onFetch({ json: _json || json, option, onCompleted });
     })
     .catch(error => {
        if (_isFn(onCatch)) {
