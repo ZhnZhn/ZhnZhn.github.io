@@ -155,3 +155,32 @@ export const crAllOriginsUrl = (
 ) => proxyServer
   ? `${proxyServer}${url}`
   : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`
+
+const FN_IDENTITY = v => v;
+const _getBlockchainData = (
+  json,
+  getData=FN_IDENTITY
+) => {
+  if (isArr(getData(json))) {
+    return json;
+  }
+  const _data = getData(JSON.parse(json.contents));
+  return isArr(_data)
+    ? _data
+    : void 0;
+}
+
+export const fCheckResponse = (getData) => (
+  json,
+  option
+) => {
+  try {
+    const _data = _getBlockchainData(json, getData);
+    if (!isArr(_data)) {
+      throw crError();
+    }
+    return _data;
+  } catch(err) {
+    throw crError();
+  }
+}
