@@ -9,15 +9,9 @@ const _crDfUrl = option => {
       proxy,
       items = []
     } = option,
-    {
-      v: pair
-    } = items[0],
-    {
-      v: timeframe
-    } = items[1],
-    {
-      v: limit
-    } = items[2];
+    pair = (0, _AdapterFn.getValue)(items[0]),
+    timeframe = (0, _AdapterFn.getValue)(items[1]),
+    limit = (0, _AdapterFn.getValue)(items[2]);
   option.timeframe = timeframe;
   return (0, _AdapterFn.crAllOriginsUrl)(proxy, `${API_URL}/candles/trade:${timeframe}:t${pair}/hist?limit=${limit}`);
 };

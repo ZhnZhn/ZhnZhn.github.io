@@ -1,4 +1,5 @@
 import {
+  getValue,
   crAllOriginsUrl,
   fCheckResponse
 } from '../AdapterFn';
@@ -8,10 +9,13 @@ const API_URL = "https://api-pub.bitfinex.com/v2";
 const _crDfUrl = (
   option
 ) => {
-  const { proxy, items=[] } = option
-  , {v:pair} = items[0]
-  , {v:timeframe} = items[1]
-  , {v:limit} = items[2];
+  const {
+    proxy,
+    items=[]
+  } = option
+  , pair = getValue(items[0])
+  , timeframe = getValue(items[1])
+  , limit = getValue(items[2]);
   option.timeframe = timeframe
   return crAllOriginsUrl(proxy, `${API_URL}/candles/trade:${timeframe}:t${pair}/hist?limit=${limit}`)
 };
