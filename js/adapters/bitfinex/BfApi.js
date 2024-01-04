@@ -38,13 +38,6 @@ const _rCrUrl = {
   DF: _crDfUrl,
   OB: _crObUrl
 };
-const _getData = json => {
-  if ((0, _AdapterFn.isArr)(json)) {
-    return json;
-  }
-  const _data = JSON.parse(json.contents);
-  return (0, _AdapterFn.isArr)(_data) ? _data : void 0;
-};
 const BfApi = {
   getRequestUrl(option) {
     const {
@@ -53,17 +46,7 @@ const BfApi = {
       _crUrl = dfSubId && _rCrUrl[dfSubId] || _rCrUrl.DF;
     return _crUrl(option);
   },
-  checkResponse(json, option) {
-    try {
-      const _json = _getData(json);
-      if (!(0, _AdapterFn.isArr)(_json)) {
-        throw (0, _AdapterFn.crError)();
-      }
-      return _json;
-    } catch (err) {
-      throw (0, _AdapterFn.crError)();
-    }
-  }
+  checkResponse: (0, _AdapterFn.fCheckResponse)()
 };
 var _default = exports.default = BfApi;
 //# sourceMappingURL=BfApi.js.map

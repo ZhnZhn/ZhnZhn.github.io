@@ -1,7 +1,6 @@
 import {
-  isArr,
-  crError,
-  crAllOriginsUrl
+  crAllOriginsUrl,
+  fCheckResponse
 } from '../AdapterFn';
 
 const API_URL = "https://api-pub.bitfinex.com/v2";
@@ -31,18 +30,6 @@ const _rCrUrl = {
   OB: _crObUrl
 };
 
-const _getData = (
-  json
-) => {
-  if (isArr(json)) {
-    return json;
-  }
-  const _data = JSON.parse(json.contents);
-  return isArr(_data)
-    ? _data
-    : void 0;
-}
-
 const BfApi = {
   getRequestUrl(option){
     const { dfSubId } = option
@@ -50,18 +37,7 @@ const BfApi = {
         || _rCrUrl.DF;
     return _crUrl(option);
   },
-
-  checkResponse(json, option){
-    try {
-      const _json = _getData(json);
-      if (!isArr(_json)) {
-        throw crError();
-      }
-      return _json;
-    } catch(err) {
-      throw crError();
-    }
-  }
+  checkResponse: fCheckResponse()
 };
 
 export default BfApi
