@@ -132,6 +132,6 @@ const crZhConfig = _ref2 => {
   };
 };
 exports.crZhConfig = crZhConfig;
-const crAllOriginsUrl = (proxy, url) => `${proxy || "https://api.allorigins.win/get?url="}${encodeURIComponent(url)}`;
+const crAllOriginsUrl = (proxyServer, url) => proxyServer ? `${proxyServer}${url}` : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
 exports.crAllOriginsUrl = crAllOriginsUrl;
 //# sourceMappingURL=AdapterFn.js.map

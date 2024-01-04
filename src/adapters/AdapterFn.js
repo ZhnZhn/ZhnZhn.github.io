@@ -2,7 +2,6 @@ export { getColorBlack } from '../components/styleFn';
 
 import Big from 'big.js';
 
-
 import { toTd as _toTd } from '../charts/dateFormat';
 
 export { isTokenInStr } from '../utils/isTokenInStr';
@@ -144,12 +143,15 @@ export const crZhConfig = ({
   itemCaption,
   dataSource
 }) => ({
-  id: _itemKey, key: _itemKey,
+  id: _itemKey,
+  key: _itemKey,
   itemCaption,
   dataSource
 })
 
 export const crAllOriginsUrl = (
-  proxy,
+  proxyServer,
   url
-) => `${proxy || "https://api.allorigins.win/get?url="}${encodeURIComponent(url)}`
+) => proxyServer
+  ? `${proxyServer}${url}`
+  : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`
