@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.crAllOriginsUrl = exports.assign = exports._isNaN = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCheckResponse = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.crAllOriginsUrl = exports.assign = exports._isNaN = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -134,4 +134,27 @@ const crZhConfig = _ref2 => {
 exports.crZhConfig = crZhConfig;
 const crAllOriginsUrl = (proxyServer, url) => proxyServer ? `${proxyServer}${url}` : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
 exports.crAllOriginsUrl = crAllOriginsUrl;
+const FN_IDENTITY = v => v;
+const _getBlockchainData = function (json, getData) {
+  if (getData === void 0) {
+    getData = FN_IDENTITY;
+  }
+  if (isArr(getData(json))) {
+    return json;
+  }
+  const _data = getData(JSON.parse(json.contents));
+  return isArr(_data) ? _data : void 0;
+};
+const fCheckResponse = getData => (json, option) => {
+  try {
+    const _data = _getBlockchainData(json, getData);
+    if (!isArr(_data)) {
+      throw crError();
+    }
+    return _data;
+  } catch (err) {
+    throw crError();
+  }
+};
+exports.fCheckResponse = fCheckResponse;
 //# sourceMappingURL=AdapterFn.js.map

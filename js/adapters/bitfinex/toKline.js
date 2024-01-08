@@ -5,7 +5,6 @@ exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
-var _fnAdapter = require("./fnAdapter");
 const _crAddConfig = _ref => {
   let {
     option
