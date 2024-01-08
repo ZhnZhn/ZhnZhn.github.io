@@ -43,9 +43,10 @@ const _crStore = () => ({
 , _compStore = createStoreWithSelector(_crStore)
 , [_set] = getStoreApi(_compStore);
 
+const _setMsAbout = is => _set(_crMsAbout(is));
 export const useMsAbout = fCrUse(_compStore, _selectMsAbout)
-export const showAbout = () => _set(_crMsAbout(true))
-export const hideAbout = () => _set(_crMsAbout(false))
+export const showAbout = () => _setMsAbout(true)
+export const hideAbout = () => _setMsAbout(false)
 
 export const closeChartContainer = (chartType, browserType) => {
   uncheckActiveContCheckBox(chartType);

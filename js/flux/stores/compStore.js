@@ -18,10 +18,11 @@ const _crStore = () => ({
   }),
   _compStore = (0, _storeApi.createStoreWithSelector)(_crStore),
   [_set] = (0, _storeApi.getStoreApi)(_compStore);
+const _setMsAbout = is => _set(_crMsAbout(is));
 const useMsAbout = exports.useMsAbout = (0, _storeApi.fCrUse)(_compStore, _selectMsAbout);
-const showAbout = () => _set(_crMsAbout(true));
+const showAbout = () => _setMsAbout(true);
 exports.showAbout = showAbout;
-const hideAbout = () => _set(_crMsAbout(false));
+const hideAbout = () => _setMsAbout(false);
 exports.hideAbout = hideAbout;
 const closeChartContainer = (chartType, browserType) => {
   (0, _contCheckBoxLogic.uncheckActiveContCheckBox)(chartType);
