@@ -28,8 +28,8 @@ import {
 } from '../../constants/BrowserType';
 
 import {
-  ComponentActions
-} from '../../flux/actions/ComponentActions';
+  showAbout
+} from '../../flux/stores/compStore';
 import {
   showBrowser
 } from '../../flux/stores/browserStore';
@@ -118,7 +118,7 @@ const crBrowserModel = () => ({
     {
       cn: CL_BR,
       name: 'About',
-      onClick: ComponentActions.showAbout,
+      onClick: showAbout,
       isClose: true
     }
   ],

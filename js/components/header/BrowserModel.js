@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _BrowserType = require("../../constants/BrowserType");
-var _ComponentActions = require("../../flux/actions/ComponentActions");
+var _compStore = require("../../flux/stores/compStore");
 var _browserStore = require("../../flux/stores/browserStore");
 const CL_ROW = 'row__pane-topic',
   PREFIX_CL_ROW_ITEM = `${CL_ROW} item__`,
@@ -41,7 +41,7 @@ const crBrowserModel = () => ({
   page_0: [_crSubMenuItem('page_01', 'Economics'), _crSubMenuItem('page_02', 'Statistics Agencies'), _crSubMenuItem('page_03', 'Stock Markets'), _crSubMenuItem('page_04', 'World Organizations'), _crMenuItem(CL_BR, 'Blockchains', _BrowserType.BT_BLOCKCHAIN), _crMenuItem(CL_BR, 'Commodities', _BrowserType.BT_COMMODITIES), _crMenuItem(CL_BR, 'Currencies', _BrowserType.BT_CURRENCY), _crMenuItem(CL_W, 'Watch List', _BrowserType.BT_WATCH_LIST), {
     cn: CL_BR,
     name: 'About',
-    onClick: _ComponentActions.ComponentActions.showAbout,
+    onClick: _compStore.showAbout,
     isClose: true
   }],
   page_01: _crMenuItems(PAGE_CONFIGS_01),
