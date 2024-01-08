@@ -29,8 +29,9 @@ import Cm from './coin-metrics/Cm'
 import Cp from './coin-paprika/Cp'
 import Cl from './coin-lore/Cl'
 import Bn from './binance/Bn'
-import Bf from './bitfinex/Bf'
 import Bt from './bitstamp/Bt'
+import Bf from './bitfinex/Bf'
+import Kc from './kucoin/Kc'
 
 
 const RouterAdapter = {
@@ -64,8 +65,9 @@ const RouterAdapter = {
   Cp,
   Cl,
   Bn,
+  Bt,
   Bf,
-  Bt
+  Kc
 };
 
 export default RouterAdapter

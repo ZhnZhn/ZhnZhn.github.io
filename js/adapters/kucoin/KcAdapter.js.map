@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/kucoin/KcAdapter.js"
+ ],
+ "file": "../../../src/adapters/kucoin/KcAdapter.js",
+ "names": [
+  "_crAdapterRouter",
+  "_interopRequireDefault",
+  "require",
+  "_toKline",
+  "_rAdapter",
+  "DF",
+  "toKline",
+  "KcAdapter",
+  "crAdapterRouter",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,gBAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,QAAA,GAAAF,sBAAA,CAAAC,OAAA;AAEA,MAAME,SAAS,GAAG;IAChBC,EAAE,EAAEC;EACN,CAAC;EACCC,SAAS,GAAG,IAAAC,wBAAe,EAACJ,SAAS,CAAC;AAAC,IAAAK,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAE1BJ,SAAS"
+}

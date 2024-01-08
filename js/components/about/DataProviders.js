@@ -47,7 +47,7 @@ const CL_NOTE_BR = "provider__note__br",
 const _isArr = Array.isArray;
 const DP = [_ProviderLinks.default.DBnomics, _ProviderLinks.default.EI, _ProviderLinks.default.Ember, _ProviderLinks.default.IRENA, _ProviderLinks.default.Eurostat, _ProviderLinks.default.FaoStat, _ProviderLinks.default.WorldBank, _ProviderLinks.default.Insee, _ProviderLinks.default.ONS, _ProviderLinks.default.StatNorway, _ProviderLinks.default.StatSweden, _ProviderLinks.default.StatFinland, _ProviderLinks.default.StatDenmark, _ProviderLinks.default.StatIreland, [_ProviderLinks.default.Bsl, '25'], _ProviderLinks.default.CryptoCompare, _ProviderLinks.default.CoinGecko, _ProviderLinks.default.CoinMetrics, _ProviderLinks.default.CoinLore, _ProviderLinks.default.Coinpaprika, _ProviderLinks.default.Binance, _ProviderLinks.default.Bitstamp],
   DP_KEY = [[_ProviderLinks.default.Ndl, '50 000'], _ProviderLinks.default.AlphaVantage, _ProviderLinks.default.Iex, _ProviderLinks.default.Fmp, _ProviderLinks.default.Tw, _ProviderLinks.default.Intrinio, _ProviderLinks.default.Bea, [_ProviderLinks.default.Bsl, '500'], _ProviderLinks.default.Eia],
-  DP_PR = [[_ProviderLinks.default.Ndl, '50'], _ProviderLinks.default.UnComtrade, _ProviderLinks.default.Bitfinex];
+  DP_PR = [[_ProviderLinks.default.Ndl, '50'], _ProviderLinks.default.UnComtrade, _ProviderLinks.default.Bitfinex, _ProviderLinks.default.KuCoin];
 const LinkPer = _ref => {
   let {
     Comp,
@@ -81,7 +81,7 @@ const DataProviders = _ref3 => {
   } = _ref3;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     isClose: isClose,
-    caption: "Data Providers (All 32):",
+    caption: "Data Providers (All 33):",
     childStyle: S_ROOT_CHILD,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("p", {

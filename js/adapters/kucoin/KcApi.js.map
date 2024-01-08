@@ -1,0 +1,30 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/kucoin/KcApi.js"
+ ],
+ "file": "../../../src/adapters/kucoin/KcApi.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "API_URL",
+  "_getData",
+  "json",
+  "data",
+  "KcApi",
+  "getRequestUrl",
+  "option",
+  "proxy",
+  "items",
+  "v",
+  "pair",
+  "timeframe",
+  "crAllOriginsUrl",
+  "checkResponse",
+  "fCheckResponse",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAKA,MAAMC,OAAO,GAAG,8CAA8C;AAC9D,MAAMC,QAAQ,GACZC,IAAI,IACD,CAACA,IAAI,IAAI,CAAC,CAAC,EAAEC,IAAI;AAEtB,MAAMC,KAAK,GAAG;EACZC,aAAaA,CAACC,MAAM,EAAC;IACnB,MAAM;QAAEC,KAAK;QAAEC,KAAK,GAAC;MAAG,CAAC,GAAGF,MAAM;MAChC;QAACG,CAAC,EAACC;MAAI,CAAC,GAAGF,KAAK,CAAC,CAAC,CAAC;MACnB;QAACC,CAAC,EAACE;MAAS,CAAC,GAAGH,KAAK,CAAC,CAAC,CAAC;IAC1BF,MAAM,CAACK,SAAS,GAAGA,SAAS;IAC5B,OAAO,IAAAC,0BAAe,EAACL,KAAK,EAAG,GAAEP,OAAQ,WAAUU,IAAK,SAAQC,SAAU,EAAC,CAAC;EAC9E,CAAC;EAEDE,aAAa,EAAE,IAAAC,yBAAc,EAACb,QAAQ;AACxC,CAAC;AAAC,IAAAc,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEab,KAAK"
+}
