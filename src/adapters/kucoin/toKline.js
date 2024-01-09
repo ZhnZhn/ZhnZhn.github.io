@@ -1,19 +1,6 @@
-import {
-  crError,
-  crZhConfig,
-  roundBy
-} from '../AdapterFn';
-import crAdapterOHLCV from '../crAdapterOHLCV';
+import { roundByOHLC } from '../AdapterFn';
 
-const _crAddConfig = ({ option }) => ({
-  zhConfig: crZhConfig(option)
-});
-
-const _compareByDate = (a, b) => a.date - b.date
-, _roundBy = n => {
-  if (n>-1 && n<1) { return n; }
-  return roundBy(n, 2);
-};
+import fToKline from '../fToKline';
 
 /*
 From KuCoin Documentation
@@ -29,32 +16,10 @@ From KuCoin Documentation
 
 const _parseFloat = parseFloat;
 
-const _crDataOHLCV = (
-  json,
-  option
-) => {
-  const _data = [];
-  try {
-    json.forEach(arrItem => {
-      _data.push({
-         date: _parseFloat(arrItem[0])*1000,
-         open: _roundBy(_parseFloat(arrItem[1])),
-         high: _roundBy(_parseFloat(arrItem[3])),
-         low: _roundBy(_parseFloat(arrItem[4])),
-         close: _roundBy(_parseFloat(arrItem[2])),
-         volume: _parseFloat(arrItem[5])
-       })
-    })
-  } catch(err) {
-    throw crError()
-  }
-  return _data.sort(_compareByDate);
-};
-
-const toKline = crAdapterOHLCV({
-  getArr: _crDataOHLCV,
-  toDate: date => date,
-  crAddConfig: _crAddConfig
+const toKline = fToKline({
+  crDate: (v) => _parseFloat(v)*1000,
+  crValue: (v) => roundByOHLC(_parseFloat(v)),
+  crVolume: (v) => _parseFloat(v)
 });
 
 export default toKline
