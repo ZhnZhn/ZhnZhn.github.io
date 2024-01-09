@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCheckResponse = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.crAllOriginsUrl = exports.assign = exports._isNaN = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fGetRequestUrl = exports.fCrValue = exports.fCheckResponse = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.crAllOriginsUrl = exports.assign = exports._isNaN = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -43,6 +43,7 @@ const isNumberOrNull = v => isNumber(v) || v === null;
 exports.isNumberOrNull = isNumberOrNull;
 const assign = exports.assign = Object.assign;
 const EMPTY = '';
+const _isStr = v => typeof v === 'string';
 const _fIsNumber = pn => p => isTypeNumber(p[pn]) && isFinite(p[pn]);
 const _crBigValueFrom = point => (0, _big.default)((0, _getterPointFn.getPointValue)(point));
 const _crDmyFrom = point => (0, _dateFn.mlsToDmy)((0, _getterPointFn.getPointDate)(point));
@@ -148,7 +149,7 @@ const _getBlockchainData = function (json, getData) {
   if (getData === void 0) {
     getData = FN_IDENTITY;
   }
-  return getData(json && json.contents ? JSON.parse(json.contents) : json);
+  return getData(json && _isStr(json.contents) ? JSON.parse(json.contents) : json);
 };
 const fCheckResponse = getData => (json, option) => {
   try {
@@ -162,4 +163,12 @@ const fCheckResponse = getData => (json, option) => {
   }
 };
 exports.fCheckResponse = fCheckResponse;
+const fGetRequestUrl = rCrUrl => option => {
+  const {
+      dfSubId
+    } = option,
+    _crUrl = dfSubId && rCrUrl[dfSubId] || rCrUrl.DF;
+  return _crUrl(option);
+};
+exports.fGetRequestUrl = fGetRequestUrl;
 //# sourceMappingURL=AdapterFn.js.map

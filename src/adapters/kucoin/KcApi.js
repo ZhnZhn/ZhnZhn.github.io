@@ -1,6 +1,7 @@
 import {
   getValue,
   crAllOriginsUrl,
+  fGetRequestUrl,
   fCheckResponse
 } from '../AdapterFn';
 
@@ -31,13 +32,7 @@ const _rCrUrl = {
 };
 
 const KcApi = {
-  getRequestUrl(option){
-    const { dfSubId } = option
-    , _crUrl = dfSubId && _rCrUrl[dfSubId]
-        || _rCrUrl.DF;
-    return _crUrl(option);
-  },
-
+  getRequestUrl: fGetRequestUrl(_rCrUrl),
   checkResponse: fCheckResponse(_getData)
 };
 

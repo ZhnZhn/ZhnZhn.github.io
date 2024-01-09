@@ -34,13 +34,7 @@ const _rCrUrl = {
   OB: _crObUrl
 };
 const BtApi = {
-  getRequestUrl(option) {
-    const {
-        dfSubId
-      } = option,
-      _crUrl = dfSubId && _rCrUrl[dfSubId] || _rCrUrl.DF;
-    return _crUrl(option);
-  },
+  getRequestUrl: (0, _AdapterFn.fGetRequestUrl)(_rCrUrl),
   checkResponse(json, option) {
     const {
         data,

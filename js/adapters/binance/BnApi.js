@@ -59,29 +59,8 @@ const _rCrUrl = {
   OB: _crObUrl
 };
 const BnApi = {
-  getRequestUrl(option) {
-    const {
-      dfSubId
-    } = option;
-    const _crUrl = dfSubId && _rCrUrl[dfSubId] || _rCrUrl.DF;
-    return _crUrl(option);
-  },
-  checkResponse(json, option) {
-    const {
-      dfSubId
-    } = option;
-    if (!dfSubId && (0, _AdapterFn.isArr)(json)) {
-      return json;
-    }
-    const {
-      bids,
-      asks
-    } = json;
-    if (dfSubId === 'OB' && (0, _AdapterFn.isArr)(bids) && (0, _AdapterFn.isArr)(asks)) {
-      return json;
-    }
-    throw (0, _AdapterFn.crError)();
-  }
+  getRequestUrl: (0, _AdapterFn.fGetRequestUrl)(_rCrUrl),
+  checkResponse: (0, _AdapterFn.fCheckResponse)()
 };
 var _default = exports.default = BnApi;
 //# sourceMappingURL=BnApi.js.map

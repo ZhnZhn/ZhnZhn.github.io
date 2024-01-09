@@ -27,13 +27,7 @@ const _rCrUrl = {
   OB: _crObUrl
 };
 const KcApi = {
-  getRequestUrl(option) {
-    const {
-        dfSubId
-      } = option,
-      _crUrl = dfSubId && _rCrUrl[dfSubId] || _rCrUrl.DF;
-    return _crUrl(option);
-  },
+  getRequestUrl: (0, _AdapterFn.fGetRequestUrl)(_rCrUrl),
   checkResponse: (0, _AdapterFn.fCheckResponse)(_getData)
 };
 var _default = exports.default = KcApi;

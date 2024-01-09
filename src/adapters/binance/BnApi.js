@@ -1,6 +1,6 @@
 import {
-  isArr,
-  crError
+  fGetRequestUrl,
+  fCheckResponse
 } from '../AdapterFn';
 
 const API_URL = 'https://api.binance.com/api/v3'
@@ -47,24 +47,8 @@ const _rCrUrl = {
 };
 
 const BnApi = {
-  getRequestUrl(option){
-    const { dfSubId } = option
-    const _crUrl = dfSubId && _rCrUrl[dfSubId]
-      || _rCrUrl.DF
-    return _crUrl(option);
-  },
-
-  checkResponse(json, option){
-    const { dfSubId } = option
-    if (!dfSubId && isArr(json)) {
-      return json;
-    }
-    const { bids, asks } = json;
-    if (dfSubId === 'OB' && isArr(bids) && isArr(asks)) {
-      return json;
-    }
-    throw crError();
-  }
+  getRequestUrl: fGetRequestUrl(_rCrUrl),
+  checkResponse: fCheckResponse()  
 };
 
 export default BnApi

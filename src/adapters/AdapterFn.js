@@ -56,6 +56,7 @@ export const isNumberOrNull = v => isNumber(v) || v === null
 export const assign = Object.assign
 
 const EMPTY = '';
+const _isStr = v => typeof v === 'string'
 
 const _fIsNumber = (
   pn
@@ -166,7 +167,7 @@ const FN_IDENTITY = v => v;
 const _getBlockchainData = (
   json,
   getData=FN_IDENTITY
-) => getData(json && json.contents
+) => getData(json && _isStr(json.contents)
   ? JSON.parse(json.contents)
   : json
 );
@@ -185,4 +186,13 @@ export const fCheckResponse = (getData) => (
   } catch(err) {
     throw crError();
   }
+}
+
+export const fGetRequestUrl = (
+  rCrUrl
+) => (option) => {
+  const { dfSubId } = option
+  , _crUrl = dfSubId && rCrUrl[dfSubId]
+      || rCrUrl.DF;
+  return _crUrl(option);
 }
