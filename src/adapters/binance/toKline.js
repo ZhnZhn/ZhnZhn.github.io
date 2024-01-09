@@ -1,26 +1,21 @@
-import { crZhConfig } from '../AdapterFn';
 import { crItemLink } from '../crFn';
-import crAdapterOHLCV from '../crAdapterOHLCV';
+import fToKline from '../fToKline';
 import { CL_PB_8 } from '../CL';
 
 const _crResearchLink = crItemLink
-    .bind(null, 'Binance Research');
+  .bind(null, 'Binance Research');
 const _crTradeLink = crItemLink
-    .bind(null, 'Binance Trade Chart');
+  .bind(null, 'Binance Trade Chart');
 
-const _crDescription = ({ _researchLink, _tradeLink }) =>
- _crResearchLink(_researchLink, CL_PB_8)
- + _crTradeLink(_tradeLink);
+const _crDescription = ({
+  _researchLink,
+  _tradeLink
+}) => _crResearchLink(_researchLink, CL_PB_8) + _crTradeLink(_tradeLink);
 
 const _crInfo = (option) => ({
   name: option.title,
   description: _crDescription(option)
-})
-
-const _crAddConfig = ({ option }) => ({
-  zhConfig: crZhConfig(option),
-  info: _crInfo(option)
-})
+});
 
 /*
 From Binance API Documentation
@@ -40,19 +35,19 @@ From Binance API Documentation
   ]
 */
 
-const _crDataOHLCV = json => json.map(item => ({
-  date: item[6],
-  open: parseFloat(item[1]),
-  high: parseFloat(item[2]),
-  low: parseFloat(item[3]),
-  close: parseFloat(item[4]),
-  volume: parseFloat(item[5])
-}))
+const _crValue = v => parseFloat(v);
 
-const toKline = crAdapterOHLCV({
-  getArr: _crDataOHLCV,
-  toDate: date => date,
-  crAddConfig: _crAddConfig
-})
+const toKline = fToKline({
+  d: 6,
+  o: 1,
+  h: 2,
+  l: 3,
+  c: 4,
+  crValue: _crValue,
+  crVolume: _crValue,
+  crAddConfig: option => ({
+    info: _crInfo(option)
+  })
+});
 
 export default toKline

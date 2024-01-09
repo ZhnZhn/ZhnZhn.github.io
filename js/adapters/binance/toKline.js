@@ -1,22 +1,13 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _AdapterFn = require("../AdapterFn");
-
 var _crFn = require("../crFn");
-
-var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
-
+var _fToKline = _interopRequireDefault(require("../fToKline"));
 var _CL = require("../CL");
-
 const _crResearchLink = _crFn.crItemLink.bind(null, 'Binance Research');
-
 const _crTradeLink = _crFn.crItemLink.bind(null, 'Binance Trade Chart');
-
 const _crDescription = _ref => {
   let {
     _researchLink,
@@ -24,21 +15,11 @@ const _crDescription = _ref => {
   } = _ref;
   return _crResearchLink(_researchLink, _CL.CL_PB_8) + _crTradeLink(_tradeLink);
 };
-
 const _crInfo = option => ({
   name: option.title,
   description: _crDescription(option)
 });
 
-const _crAddConfig = _ref2 => {
-  let {
-    option
-  } = _ref2;
-  return {
-    zhConfig: (0, _AdapterFn.crZhConfig)(option),
-    info: _crInfo(option)
-  };
-};
 /*
 From Binance API Documentation
 [
@@ -57,21 +38,18 @@ From Binance API Documentation
   ]
 */
 
-
-const _crDataOHLCV = json => json.map(item => ({
-  date: item[6],
-  open: parseFloat(item[1]),
-  high: parseFloat(item[2]),
-  low: parseFloat(item[3]),
-  close: parseFloat(item[4]),
-  volume: parseFloat(item[5])
-}));
-
-const toKline = (0, _crAdapterOHLCV.default)({
-  getArr: _crDataOHLCV,
-  toDate: date => date,
-  crAddConfig: _crAddConfig
+const _crValue = v => parseFloat(v);
+const toKline = (0, _fToKline.default)({
+  d: 6,
+  o: 1,
+  h: 2,
+  l: 3,
+  c: 4,
+  crValue: _crValue,
+  crVolume: _crValue,
+  crAddConfig: option => ({
+    info: _crInfo(option)
+  })
 });
-var _default = toKline;
-exports.default = _default;
+var _default = exports.default = toKline;
 //# sourceMappingURL=toKline.js.map
