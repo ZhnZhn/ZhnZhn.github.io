@@ -139,26 +139,24 @@ const crZhConfig = _ref2 => {
   };
 };
 exports.crZhConfig = crZhConfig;
-const crAllOriginsUrl = (proxyServer, url) => proxyServer ? `${proxyServer}${url}` : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+const crAllOriginsUrl = (proxyServer, url) => proxyServer ? `${proxyServer}${url}`
+//: `http://127.0.0.1:3000/proxy/${url}`
+: `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
 exports.crAllOriginsUrl = crAllOriginsUrl;
 const FN_IDENTITY = v => v;
 const _getBlockchainData = function (json, getData) {
   if (getData === void 0) {
     getData = FN_IDENTITY;
   }
-  if (isArr(getData(json))) {
-    return json;
-  }
-  const _data = getData(JSON.parse(json.contents));
-  return isArr(_data) ? _data : void 0;
+  return getData(json && json.contents ? JSON.parse(json.contents) : json);
 };
 const fCheckResponse = getData => (json, option) => {
   try {
     const _data = _getBlockchainData(json, getData);
-    if (!isArr(_data)) {
-      throw crError();
+    if (isArr(_data) || _data && isArr(_data.asks) && isArr(_data.bids)) {
+      return _data;
     }
-    return _data;
+    throw crError();
   } catch (err) {
     throw crError();
   }
