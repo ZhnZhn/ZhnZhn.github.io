@@ -13,7 +13,9 @@ import {
   LT_CRC,
   LT_BLS,
   LT_WL,
-  LT_UN
+  LT_UN,
+  LT_BF,
+  LT_KC
 } from '../../constants/LoadType';
 
 const _isUndef = value => typeof value === 'undefined';
@@ -22,11 +24,17 @@ const _withApiKey = [
   LT_AL, LT_IEX, LT_FMP, LT_INTR, LT_TW,
   LT_BEA, LT_EIA
 ];
-const _withProxy = [
+const _withProxyServer = [
   LT_Q,
   LT_QCT,
   LT_UN
 ];
+const _withProxyServer2 = [
+  ..._withProxyServer,
+  LT_BF,
+  LT_KC
+];
+
 const _apiTitle = {
   DF: '',
   [LT_AL]: 'Alpha Vantage',
@@ -40,10 +48,11 @@ const _apiTitle = {
   [LT_CRC]: 'CryptoCompare Information'
 };
 
-export const isApiKeyRequired = loadId => _withApiKey
-  .indexOf(loadId) !== -1
-export const isProxyRequired = loadId => _withProxy
-  .indexOf(loadId) !== -1
+const _fIsRequired = items => id => items
+  .indexOf(id) !== -1;
+export const isApiKeyRequired = _fIsRequired(_withApiKey)
+export const isProxyRequired = _fIsRequired(_withProxyServer)
+
 export const getApiTitle = loadId => _apiTitle[loadId]
   || _apiTitle.DF
 
@@ -84,9 +93,10 @@ const _setProxy = (url) => {
   }
 };
 
+const _isProxyServerValueRequired = _fIsRequired(_withProxyServer2)
 export const getProxy = (
   loadId
-) => isProxyRequired(loadId)
+) => _isProxyServerValueRequired(loadId)
   ? _SETTINGS.proxy
   : ''
 

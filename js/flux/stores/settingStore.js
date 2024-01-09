@@ -6,7 +6,8 @@ var _storeApi = require("../storeApi");
 var _LoadType = require("../../constants/LoadType");
 const _isUndef = value => typeof value === 'undefined';
 const _withApiKey = [_LoadType.LT_AL, _LoadType.LT_IEX, _LoadType.LT_FMP, _LoadType.LT_INTR, _LoadType.LT_TW, _LoadType.LT_BEA, _LoadType.LT_EIA];
-const _withProxy = [_LoadType.LT_Q, _LoadType.LT_QCT, _LoadType.LT_UN];
+const _withProxyServer = [_LoadType.LT_Q, _LoadType.LT_QCT, _LoadType.LT_UN];
+const _withProxyServer2 = [..._withProxyServer, _LoadType.LT_BF, _LoadType.LT_KC];
 const _apiTitle = {
   DF: '',
   [_LoadType.LT_AL]: 'Alpha Vantage',
@@ -18,10 +19,9 @@ const _apiTitle = {
   [_LoadType.LT_TW]: 'Twelve Data',
   [_LoadType.LT_CRC]: 'CryptoCompare Information'
 };
-const isApiKeyRequired = loadId => _withApiKey.indexOf(loadId) !== -1;
-exports.isApiKeyRequired = isApiKeyRequired;
-const isProxyRequired = loadId => _withProxy.indexOf(loadId) !== -1;
-exports.isProxyRequired = isProxyRequired;
+const _fIsRequired = items => id => items.indexOf(id) !== -1;
+const isApiKeyRequired = exports.isApiKeyRequired = _fIsRequired(_withApiKey);
+const isProxyRequired = exports.isProxyRequired = _fIsRequired(_withProxyServer);
 const getApiTitle = loadId => _apiTitle[loadId] || _apiTitle.DF;
 exports.getApiTitle = getApiTitle;
 const _API_KEYS = Object.create(null);
@@ -57,7 +57,8 @@ const _setProxy = url => {
     return true;
   }
 };
-const getProxy = loadId => isProxyRequired(loadId) ? _SETTINGS.proxy : '';
+const _isProxyServerValueRequired = _fIsRequired(_withProxyServer2);
+const getProxy = loadId => _isProxyServerValueRequired(loadId) ? _SETTINGS.proxy : '';
 exports.getProxy = getProxy;
 const exportSettingFn = () => {
   return {
