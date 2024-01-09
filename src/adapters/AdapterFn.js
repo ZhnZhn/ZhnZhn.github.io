@@ -136,6 +136,11 @@ export const fCrValue = (
     : v => v;
 }
 
+export const roundByOHLC = n => {
+  if (n>-1 && n<1) { return n; }
+  return roundBy(n, 2);
+}
+
 export const toUpperCaseFirst = _toUpperCaseFirst
 
 export const crZhConfig = ({
