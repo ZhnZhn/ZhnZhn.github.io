@@ -5,9 +5,14 @@ import {
 } from './AdapterFn';
 import crAdapterOHLCV from './crAdapterOHLCV';
 
-const _crAddConfig = ({ option }) => ({
+const FN_NOOP = () => {};
+
+const _fCrAddConfig = (
+  crAddConfig=FN_NOOP
+) => ({ option }) => ({
+  ...crAddConfig(option),
   zhConfig: crZhConfig(option)
-});
+})
 
 const _compareByDate = (a, b) => a.date - b.date
 
@@ -46,8 +51,8 @@ const _fCrDataOHLCV = ({
 
 const fToKline = (options) => crAdapterOHLCV({
   getArr: _fCrDataOHLCV(options),
-  toDate: date => date,
-  crAddConfig: _crAddConfig
+  toDate: FN_IDENTITY,
+  crAddConfig: _fCrAddConfig(options.crAddConfig)
 });
 
 export default fToKline

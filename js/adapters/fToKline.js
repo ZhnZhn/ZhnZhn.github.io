@@ -5,12 +5,19 @@ exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("./AdapterFn");
 var _crAdapterOHLCV = _interopRequireDefault(require("./crAdapterOHLCV"));
-const _crAddConfig = _ref => {
-  let {
-    option
-  } = _ref;
-  return {
-    zhConfig: (0, _AdapterFn.crZhConfig)(option)
+const FN_NOOP = () => {};
+const _fCrAddConfig = function (crAddConfig) {
+  if (crAddConfig === void 0) {
+    crAddConfig = FN_NOOP;
+  }
+  return _ref => {
+    let {
+      option
+    } = _ref;
+    return {
+      ...crAddConfig(option),
+      zhConfig: (0, _AdapterFn.crZhConfig)(option)
+    };
   };
 };
 const _compareByDate = (a, b) => a.date - b.date;
@@ -51,8 +58,8 @@ const _fCrDataOHLCV = _ref2 => {
 };
 const fToKline = options => (0, _crAdapterOHLCV.default)({
   getArr: _fCrDataOHLCV(options),
-  toDate: date => date,
-  crAddConfig: _crAddConfig
+  toDate: FN_IDENTITY,
+  crAddConfig: _fCrAddConfig(options.crAddConfig)
 });
 var _default = exports.default = fToKline;
 //# sourceMappingURL=fToKline.js.map
