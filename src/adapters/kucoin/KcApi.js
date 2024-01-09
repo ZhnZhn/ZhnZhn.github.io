@@ -1,20 +1,41 @@
 import {
+  getValue,
   crAllOriginsUrl,
   fCheckResponse
 } from '../AdapterFn';
 
-const API_URL = "https://api.kucoin.com/api/v1/market/candles";
+const API_URL = "https://api.kucoin.com/api/v1/market";
 const _getData = (
   json
 ) => (json || {}).data;
 
+const _crDfUrl = (option) => {
+  const {
+    proxy,
+    items=[]
+  } = option
+  , pair = getValue(items[0])
+  , timeframe = getValue(items[1]);
+  option.timeframe = timeframe
+  return crAllOriginsUrl(proxy, `${API_URL}/candles?symbol=${pair}&type=${timeframe}`)
+};
+
+const _crObUrl = ({
+  proxy,
+  items=[]
+}) => crAllOriginsUrl(proxy, `${API_URL}/orderbook/level2_20?symbol=${getValue(items[0])}`);
+
+const _rCrUrl = {
+  DF: _crDfUrl,
+  OB: _crObUrl
+};
+
 const KcApi = {
   getRequestUrl(option){
-    const { proxy, items=[] } = option
-    , {v:pair} = items[0]
-    , {v:timeframe} = items[1];
-    option.timeframe = timeframe
-    return crAllOriginsUrl(proxy, `${API_URL}?symbol=${pair}&type=${timeframe}`)
+    const { dfSubId } = option
+    , _crUrl = dfSubId && _rCrUrl[dfSubId]
+        || _rCrUrl.DF;
+    return _crUrl(option);
   },
 
   checkResponse: fCheckResponse(_getData)
