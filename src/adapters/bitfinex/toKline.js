@@ -1,19 +1,6 @@
-import {
-  isTypeNumber,
-  crZhConfig,
-  roundBy
-} from '../AdapterFn';
-import crAdapterOHLCV from '../crAdapterOHLCV';
+import { roundByOHLC } from '../AdapterFn';
 
-const _crAddConfig = ({ option }) => ({
-  zhConfig: crZhConfig(option)
-});
-
-const _compareByDate = (a, b) => a.date - b.date
-, _roundBy = n => {
-  if (n>-1 && n<1) { return n; }
-  return roundBy(n, 2);
-};
+import fToKline from '../fToKline';
 
 /*
 From Bitfinex Documentation
@@ -27,27 +14,8 @@ From Bitfinex Documentation
 ]]
 */
 
-const _crDataOHLCV = (json, option) => {
-  const _data = [];
-  json.forEach(arrItem => {
-    if (isTypeNumber(arrItem[0])) {
-      _data.push({
-         date: arrItem[0],
-         open: _roundBy(arrItem[1]),
-         high: _roundBy(arrItem[3]),
-         low: _roundBy(arrItem[4]),
-         close: _roundBy(arrItem[2]),
-         volume: arrItem[5]
-       })
-    }
-  })
-  return _data.sort(_compareByDate);
-};
-
-const toKline = crAdapterOHLCV({
-  getArr: _crDataOHLCV,
-  toDate: date => date,
-  crAddConfig: _crAddConfig
-});
+const toKline = fToKline({
+  crValue: (v) => roundByOHLC(v)
+})
 
 export default toKline
