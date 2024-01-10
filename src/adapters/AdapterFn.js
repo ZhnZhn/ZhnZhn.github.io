@@ -54,6 +54,8 @@ export const isNumber = n => isTypeNumber(n)
 export const isNumberOrNull = v => isNumber(v) || v === null
 
 export const assign = Object.assign
+export const FN_IDENTITY = v => v
+export const FN_NOOP = () => {}
 
 const EMPTY = '';
 

@@ -24,16 +24,14 @@ const _crCaptionDf = _ref => {
       _itemKey
     } = _ref2;
     return _itemKey;
-  },
-  _getArrDf = json => json,
-  _crAddConfigDf = () => {};
+  };
 const crAdapterOHLCV = _ref3 => {
   let {
     seriaOption = {},
     crCaption = _crCaptionDf,
     crId = _crIdDf,
-    getArr = _getArrDf,
-    crAddConfig = _crAddConfigDf,
+    getArr = _AdapterFn.FN_IDENTITY,
+    crAddConfig = _AdapterFn.FN_NOOP,
     toDate
   } = _ref3;
   return {
@@ -86,6 +84,5 @@ const crAdapterOHLCV = _ref3 => {
     }
   };
 };
-var _default = crAdapterOHLCV;
-exports.default = _default;
+var _default = exports.default = crAdapterOHLCV;
 //# sourceMappingURL=crAdapterOHLCV.js.map

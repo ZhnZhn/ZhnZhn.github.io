@@ -11,7 +11,11 @@ import {
   toConfig
 } from '../charts/configBuilderFn';
 
-import { valueMoving } from './AdapterFn'
+import {
+  FN_IDENTITY,
+  FN_NOOP,
+  valueMoving
+} from './AdapterFn'
 import { stockSeriesLegend } from './legendFn';
 import { toStockSeriesData } from './AdapterStockFn';
 
@@ -22,16 +26,14 @@ const _crCaptionDf = ({
   title,
   subtitle
 })
-, _crIdDf = ({ _itemKey }) => _itemKey
-, _getArrDf = json => json
-, _crAddConfigDf = () => {};
+, _crIdDf = ({ _itemKey }) => _itemKey;
 
 const crAdapterOHLCV = ({
   seriaOption={},
   crCaption=_crCaptionDf,
   crId=_crIdDf,
-  getArr=_getArrDf,
-  crAddConfig=_crAddConfigDf,
+  getArr=FN_IDENTITY,
+  crAddConfig=FN_NOOP,
   toDate
 }) => ({
   toConfig(json, option){

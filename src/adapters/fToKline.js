@@ -1,11 +1,11 @@
 import {
+  FN_IDENTITY,
+  FN_NOOP,
   isTypeNumber,
   crError,
   crZhConfig
 } from './AdapterFn';
 import crAdapterOHLCV from './crAdapterOHLCV';
-
-const FN_NOOP = () => {};
 
 const _fCrAddConfig = (
   crAddConfig=FN_NOOP
@@ -16,7 +16,6 @@ const _fCrAddConfig = (
 
 const _compareByDate = (a, b) => a.date - b.date
 
-const FN_IDENTITY = v => v;
 const _fCrDataOHLCV = ({
   d=0,
   o=1,

@@ -1,9 +1,13 @@
 import crConfigType1 from '../charts/crConfigType1';
 import { crSeriaConfigFromAdapter } from '../charts/configBuilderFn';
+import {
+  FN_IDENTITY,
+  FN_NOOP,
+  isArr,
+  assign
+} from './AdapterFn';
 
-const _isArr = Array.isArray
-, _assign = Object.assign
-, _crZhConfig = ({
+const _crZhConfig = ({
    _itemKey,
    itemCaption,
    dataSource,
@@ -14,26 +18,25 @@ const _isArr = Array.isArray
   dataSource
 }), crConfOptionDf = (option) => ({
   zhConfig: _crZhConfig(option)
-}), NOP = () => {}
-, IDENTITY = v => v
+})
 , crKeyDf = ({ _itemKey }) => _itemKey;
 
 const crAdapterType1 = ({
   crKey=crKeyDf,
   crData,
   crConfOption=crConfOptionDf,
-  addConfOption=NOP,
-  trOption=NOP,
-  addToConfig=IDENTITY
+  addConfOption=FN_NOOP,
+  trOption=FN_NOOP,
+  addToConfig=FN_IDENTITY
 }) => {
   const adapter = {
     crKey,
     toConfig(json, option){
       const _data = crData(json, option)
-      , data = _isArr(_data)
+      , data = isArr(_data)
          ? _data
          : (_data || {}).data
-      , confOption = _assign(
+      , confOption = assign(
           crConfOption(option, json, _data),
           addConfOption(option, json)
       );

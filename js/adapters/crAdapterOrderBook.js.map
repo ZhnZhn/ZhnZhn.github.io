@@ -1,1 +1,39 @@
-{"version":3,"sources":["../../src/adapters/crAdapterOrderBook.js"],"names":["fnNoop","fnIdentity","json","crAdapterOrderBook","crTitle","crLimit","crOrderBook","toConfig","option","_itemKey","dataSource","title","_orderBook","_limit","headers","rows","config","id"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,MAAMA,MAAM,GAAG,MAAM,CAAE,CAAvB;;AACA,MAAMC,UAAU,GAAGC,IAAI,IAAIA,IAA3B;;AAEA,MAAMC,kBAAkB,GAAG;AAAA,MAAC;AAC1BC,IAAAA,OAD0B;AAE1BC,IAAAA,OAAO,GAACL,MAFkB;AAG1BM,IAAAA,WAAW,GAACL;AAHc,GAAD;AAAA,SAIpB;AACJM,IAAAA,QAAQ,CAACL,IAAD,EAAOM,MAAP,EAAc;AACpB,YAAM;AAAEC,QAAAA,QAAF;AAAYC,QAAAA;AAAZ,UAA2BF,MAAjC;AAAA,YACEG,KAAK,GAAGP,OAAO,CAACI,MAAD,EAASN,IAAT,CADjB;AAAA,YAEEU,UAAU,GAAGN,WAAW,CAACJ,IAAD,CAF1B;AAAA,YAGEW,MAAM,GAAGR,OAAO,CAACG,MAAD,CAHlB;AAAA,YAIE,CAACM,OAAD,EAAUC,IAAV,IAAkB,8BAAgBH,UAAhB,EAA4BC,MAA5B,CAJpB;AAAA,YAKEG,MAAM,GAAG,8BAAc;AACtBC,QAAAA,EAAE,EAAER,QADkB;AACRE,QAAAA,KADQ;AAEtBG,QAAAA,OAFsB;AAGtBC,QAAAA,IAHsB;AAGhBL,QAAAA;AAHgB,OAAd,CALX;;AAUA,aAAO;AAAEM,QAAAA;AAAF,OAAP;AACD;;AAbG,GAJoB;AAAA,CAA3B;;eAoBeb,kB","sourcesContent":["import { crTableConfig } from './toTableFn';\r\nimport crOrderBookRows from './crOrderBookRows';\r\n\r\nconst fnNoop = () => {};\r\nconst fnIdentity = json => json;\r\n\r\nconst crAdapterOrderBook = ({\r\n  crTitle,\r\n  crLimit=fnNoop,\r\n  crOrderBook=fnIdentity\r\n}) => ({\r\n   toConfig(json, option){\r\n     const { _itemKey, dataSource } = option\r\n     , title = crTitle(option, json)\r\n     , _orderBook = crOrderBook(json)\r\n     , _limit = crLimit(option)\r\n     , [headers, rows] = crOrderBookRows(_orderBook, _limit)\r\n     , config = crTableConfig({\r\n        id: _itemKey, title,\r\n        headers,\r\n        rows, dataSource\r\n     });\r\n     return { config };\r\n   }\r\n})\r\n\r\nexport default crAdapterOrderBook\r\n"],"file":"crAdapterOrderBook.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/adapters/crAdapterOrderBook.js"
+ ],
+ "file": "../../src/adapters/crAdapterOrderBook.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "_toTableFn",
+  "_crOrderBookRows",
+  "_interopRequireDefault",
+  "crAdapterOrderBook",
+  "_ref",
+  "crTitle",
+  "crLimit",
+  "FN_NOOP",
+  "crOrderBook",
+  "FN_IDENTITY",
+  "toConfig",
+  "json",
+  "option",
+  "_itemKey",
+  "dataSource",
+  "title",
+  "_orderBook",
+  "_limit",
+  "headers",
+  "rows",
+  "crOrderBookRows",
+  "config",
+  "crTableConfig",
+  "id",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAIA,IAAAC,UAAA,GAAAD,OAAA;AACA,IAAAE,gBAAA,GAAAC,sBAAA,CAAAH,OAAA;AAEA,MAAMI,kBAAkB,GAAGC,IAAA;EAAA,IAAC;IAC1BC,OAAO;IACPC,OAAO,GAACC,kBAAO;IACfC,WAAW,GAACC;EACd,CAAC,GAAAL,IAAA;EAAA,OAAM;IACJM,QAAQA,CAACC,IAAI,EAAEC,MAAM,EAAC;MACpB,MAAM;UAAEC,QAAQ;UAAEC;QAAW,CAAC,GAAGF,MAAM;QACrCG,KAAK,GAAGV,OAAO,CAACO,MAAM,EAAED,IAAI,CAAC;QAC7BK,UAAU,GAAGR,WAAW,CAACG,IAAI,CAAC;QAC9BM,MAAM,GAAGX,OAAO,CAACM,MAAM,CAAC;QACxB,CAACM,OAAO,EAAEC,IAAI,CAAC,GAAG,IAAAC,wBAAe,EAACJ,UAAU,EAAEC,MAAM,CAAC;QACrDI,MAAM,GAAG,IAAAC,wBAAa,EAAC;UACtBC,EAAE,EAAEV,QAAQ;UACZE,KAAK;UACLG,OAAO;UACPC,IAAI;UACJL;QACH,CAAC,CAAC;MACF,OAAO;QAAEO;MAAO,CAAC;IACnB;EACH,CAAC;AAAA,CAAC;AAAA,IAAAG,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEavB,kBAAkB"
+}

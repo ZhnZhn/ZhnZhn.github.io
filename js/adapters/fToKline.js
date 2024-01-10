@@ -5,10 +5,9 @@ exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("./AdapterFn");
 var _crAdapterOHLCV = _interopRequireDefault(require("./crAdapterOHLCV"));
-const FN_NOOP = () => {};
 const _fCrAddConfig = function (crAddConfig) {
   if (crAddConfig === void 0) {
-    crAddConfig = FN_NOOP;
+    crAddConfig = _AdapterFn.FN_NOOP;
   }
   return _ref => {
     let {
@@ -21,7 +20,6 @@ const _fCrAddConfig = function (crAddConfig) {
   };
 };
 const _compareByDate = (a, b) => a.date - b.date;
-const FN_IDENTITY = v => v;
 const _fCrDataOHLCV = _ref2 => {
   let {
     d = 0,
@@ -30,9 +28,9 @@ const _fCrDataOHLCV = _ref2 => {
     l = 4,
     c = 2,
     v = 5,
-    crDate = FN_IDENTITY,
-    crValue = FN_IDENTITY,
-    crVolume = FN_IDENTITY
+    crDate = _AdapterFn.FN_IDENTITY,
+    crValue = _AdapterFn.FN_IDENTITY,
+    crVolume = _AdapterFn.FN_IDENTITY
   } = _ref2;
   return (json, option) => {
     const _data = [];
@@ -58,7 +56,7 @@ const _fCrDataOHLCV = _ref2 => {
 };
 const fToKline = options => (0, _crAdapterOHLCV.default)({
   getArr: options.getArr || _fCrDataOHLCV(options),
-  toDate: FN_IDENTITY,
+  toDate: _AdapterFn.FN_IDENTITY,
   crAddConfig: _fCrAddConfig(options.crAddConfig)
 });
 var _default = exports.default = fToKline;
