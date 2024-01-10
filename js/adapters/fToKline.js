@@ -57,7 +57,7 @@ const _fCrDataOHLCV = _ref2 => {
   };
 };
 const fToKline = options => (0, _crAdapterOHLCV.default)({
-  getArr: _fCrDataOHLCV(options),
+  getArr: options.getArr || _fCrDataOHLCV(options),
   toDate: FN_IDENTITY,
   crAddConfig: _fCrAddConfig(options.crAddConfig)
 });

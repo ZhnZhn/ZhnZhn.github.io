@@ -1,12 +1,5 @@
-import { 
-  crZhConfig,
-  isInArrStr
-} from '../AdapterFn';
-import crAdapterOHLCV from '../crAdapterOHLCV'
-
-const _crAddConfig = ({ option }) => ({
-  zhConfig: crZhConfig(option)
-});
+import { isInArrStr } from '../AdapterFn';
+import fToKline from '../fToKline';
 
 /*
 From Bitstamp API Documentation
@@ -20,41 +13,50 @@ From Bitstamp API Documentation
    }
 */
 
-const _isDailyTimeframe = isInArrStr(["86400", "259200"])
-, _isHourlyTimeframe = isInArrStr(["3600","7200","14400","21600","43200"]);
+const _isDailyTimeframe = isInArrStr([
+  "86400",
+  "259200"
+])
+, _isHourlyTimeframe = isInArrStr([
+  "3600",
+  "7200",
+  "14400",
+  "21600",
+  "43200"
+]);
 
 const DAILY_TIME_DELTA = 86_394_000; //1000*60*60*24 - 1000*60
 const HOURLY_TIME_DELTA = 3_540_000; //1000*60*59
-const _toMls = timestamp => parseFloat(timestamp)*1000
+
+const _parseFloat = parseFloat
+, _toMls = timestamp => _parseFloat(timestamp)*1000
 , _fToMls = (delta) => (timestamp, isRecent) => isRecent
    ? Date.now() - 6000 //1000*60
    : _toMls(timestamp) + delta
 , _toDailyMls = _fToMls(DAILY_TIME_DELTA)
-, _toHourlyMls = _fToMls(HOURLY_TIME_DELTA);
+, _toHourlyMls = _fToMls(HOURLY_TIME_DELTA)
+, _fToDate = ({ timeframe }) => _isDailyTimeframe(timeframe)
+   ? _toDailyMls
+   : _isHourlyTimeframe(timeframe)
+       ? _toHourlyMls
+       : _toMls;
 
 const _crDataOHLCV = (json, option) => {
   const { ohlc } = json.data
   , _recentIndex = ohlc.length - 1
-  , { timeframe } = option
-  , _toDate = _isDailyTimeframe(timeframe)
-     ? _toDailyMls
-     : _isHourlyTimeframe(timeframe)
-         ? _toHourlyMls
-         : _toMls;
+  , _toDate = _fToDate(option);
   return ohlc.map((item, index) => ({
     date: _toDate(item.timestamp, index === _recentIndex),
-    open: parseFloat(item.open),
-    high: parseFloat(item.high),
-    low: parseFloat(item.low),
-    close: parseFloat(item.close),
-    volume: parseFloat(item.volume)
+    open: _parseFloat(item.open),
+    high: _parseFloat(item.high),
+    low: _parseFloat(item.low),
+    close: _parseFloat(item.close),
+    volume: _parseFloat(item.volume)
   }));
 }
 
-const toKline = crAdapterOHLCV({
-  getArr: _crDataOHLCV,
-  toDate: date => date,
-  crAddConfig: _crAddConfig
+const toKline = fToKline({
+  getArr: _crDataOHLCV
 });
 
 export default toKline
