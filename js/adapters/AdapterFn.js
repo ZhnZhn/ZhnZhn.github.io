@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.assign = exports._isNaN = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.crDfItemKey = exports.assign = exports._isNaN = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -46,6 +46,13 @@ const FN_IDENTITY = v => v;
 exports.FN_IDENTITY = FN_IDENTITY;
 const FN_NOOP = () => {};
 exports.FN_NOOP = FN_NOOP;
+const crDfItemKey = _ref => {
+  let {
+    _itemKey
+  } = _ref;
+  return _itemKey;
+};
+exports.crDfItemKey = crDfItemKey;
 const EMPTY = '';
 const _fIsNumber = pn => p => isTypeNumber(p[pn]) && isFinite(p[pn]);
 const _crBigValueFrom = point => (0, _big.default)((0, _getterPointFn.getPointValue)(point));
@@ -76,12 +83,12 @@ const crError = function (errCaption, message) {
   };
 };
 exports.crError = crError;
-const crValueMoving = _ref => {
+const crValueMoving = _ref2 => {
   let {
     bNowValue = (0, _big.default)('0.0'),
     bPrevValue = (0, _big.default)('0.0'),
     dfR
-  } = _ref;
+  } = _ref2;
   return (0, _mathFn.crValueMoving)({
     nowValue: bNowValue,
     prevValue: bPrevValue,
@@ -129,12 +136,12 @@ const roundByOHLC = n => {
 };
 exports.roundByOHLC = roundByOHLC;
 const toUpperCaseFirst = exports.toUpperCaseFirst = _toUpperCaseFirst2.default;
-const crZhConfig = _ref2 => {
+const crZhConfig = _ref3 => {
   let {
     _itemKey,
     itemCaption,
     dataSource
-  } = _ref2;
+  } = _ref3;
   return {
     id: _itemKey,
     key: _itemKey,

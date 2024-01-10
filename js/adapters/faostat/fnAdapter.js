@@ -1,12 +1,13 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.findMinY = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crSeriaData = exports.crId = exports.crError = void 0;
+exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.findMinY = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crSeriaData = exports.crError = exports.crDfItemKey = void 0;
 var _fnDescr = require("./fnDescr");
 exports.toInfo = _fnDescr.toInfo;
 var _AdapterFn = require("../AdapterFn");
 exports.getValue = _AdapterFn.getValue;
 exports.findMinY = _AdapterFn.findMinY;
+exports.crDfItemKey = _AdapterFn.crDfItemKey;
 exports.crError = _AdapterFn.crError;
 const BLANK = ' ',
   MM_DD = '-12-31',
@@ -27,7 +28,7 @@ const _crPoint = _ref => {
     Value
   } = _ref;
   const m = Months ? (0, _AdapterFn.monthIndex)(Months) + 1 : 0,
-    Tail = m !== 0 ? "-" + m : MM_DD;
+    Tail = m !== 0 ? `-${m}` : MM_DD;
   return {
     x: (0, _AdapterFn.ymdToUTC)('' + Year + Tail),
     y: parseFloat(Value)
@@ -79,13 +80,6 @@ const _isListForList = _ref3 => {
   } = _ref3;
   return _isItemList(items[0]) && _isItemList(items[1]);
 };
-const crId = _ref4 => {
-  let {
-    _itemKey
-  } = _ref4;
-  return _itemKey;
-};
-exports.crId = crId;
 const crTitle = (json, option) => {
   const {
     title,
@@ -94,10 +88,10 @@ const crTitle = (json, option) => {
     subtitle
   } = option;
   if (dfSubtitle) {
-    return subtitle + " " + _crUnit(json) + ": " + title;
+    return `${subtitle} ${_crUnit(json)}: ${title}`;
   }
   if (title) {
-    return dfTitle ? dfTitle + ": " + title : title;
+    return dfTitle ? `${dfTitle}: ${title}` : title;
   }
   const {
       data
@@ -109,16 +103,15 @@ const crTitle = (json, option) => {
       Item = '',
       Element = ''
     } = p;
-    return Area + " " + Item + " " + Element;
+    return `${Area} ${Item} ${Element}`;
   } else {
     return DF_TITLE;
   }
 };
 exports.crTitle = crTitle;
-const crSubtitle = (json, option) => option.dfSubtitle || option.subtitle + ": " + _crUnit(json);
+const crSubtitle = (json, option) => option.dfSubtitle || `${option.subtitle}: ${_crUnit(json)}`;
 exports.crSubtitle = crSubtitle;
-const crSeriaData = _crSeriaData;
-exports.crSeriaData = crSeriaData;
+const crSeriaData = exports.crSeriaData = _crSeriaData;
 const toDataPoints = (json, option) => {
   const _prName = _getSeriesPropName(option),
     _itemCode = (0, _AdapterFn.getValue)(option.items[1]),
@@ -129,11 +122,11 @@ const toDataPoints = (json, option) => {
   return _prName ? _crSeriesData(_data, _prName) : _crSeriaData(_data, option);
 };
 exports.toDataPoints = toDataPoints;
-const crZhConfig = (id, _ref5) => {
+const crZhConfig = (id, _ref4) => {
   let {
     dfDomain,
     itemCaption
-  } = _ref5;
+  } = _ref4;
   return {
     id: id,
     key: id,
@@ -147,8 +140,6 @@ const crZhConfig = (id, _ref5) => {
 exports.crZhConfig = crZhConfig;
 const crValueMoving = points => (0, _AdapterFn.isArr)(points) && !(0, _AdapterFn.isArr)(points[0]) ? (0, _AdapterFn.valueMoving)(points) : void 0;
 exports.crValueMoving = crValueMoving;
-const isSeriesReq = _getSeriesPropName;
-exports.isSeriesReq = isSeriesReq;
-const isQueryAllowed = _isListForList;
-exports.isQueryAllowed = isQueryAllowed;
+const isSeriesReq = exports.isSeriesReq = _getSeriesPropName;
+const isQueryAllowed = exports.isQueryAllowed = _isListForList;
 //# sourceMappingURL=fnAdapter.js.map

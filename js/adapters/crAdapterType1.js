@@ -21,22 +21,16 @@ const _crZhConfig = _ref => {
   },
   crConfOptionDf = option => ({
     zhConfig: _crZhConfig(option)
-  }),
-  crKeyDf = _ref2 => {
-    let {
-      _itemKey
-    } = _ref2;
-    return _itemKey;
-  };
-const crAdapterType1 = _ref3 => {
+  });
+const crAdapterType1 = _ref2 => {
   let {
-    crKey = crKeyDf,
+    crKey = _AdapterFn.crDfItemKey,
     crData,
     crConfOption = crConfOptionDf,
     addConfOption = _AdapterFn.FN_NOOP,
     trOption = _AdapterFn.FN_NOOP,
     addToConfig = _AdapterFn.FN_IDENTITY
-  } = _ref3;
+  } = _ref2;
   const adapter = {
     crKey,
     toConfig(json, option) {

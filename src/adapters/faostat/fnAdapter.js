@@ -2,6 +2,7 @@ export { toInfo } from './fnDescr';
 export {
   getValue,
   findMinY,
+  crDfItemKey,
   crError
 } from '../AdapterFn';
 
@@ -127,8 +128,6 @@ const _isListForList = ({
   items
 }) => _isItemList(items[0])
    && _isItemList(items[1]);
-
-export const crId = ({ _itemKey }) => _itemKey
 
 export const crTitle = (
   json,

@@ -15,7 +15,7 @@ import {
 } from '../../charts/Tooltip';
 
 import {
-  crId,
+  crDfItemKey,
   crSubtitle,
   crTitle,
   toDataPoints,
@@ -27,10 +27,10 @@ import {
 } from './fnAdapter';
 
 const FaoStatAdapter = {
-  crKey: crId,
+  crKey: crDfItemKey,
 
   toConfig(json, option){
-    const _id = crId(option)
+    const _id = crDfItemKey(option)
     , _title = crTitle(json, option)
     , _subtitle = crSubtitle(json, option)
     , _points = toDataPoints(json, option);

@@ -3,6 +3,7 @@ import { crSeriaConfigFromAdapter } from '../charts/configBuilderFn';
 import {
   FN_IDENTITY,
   FN_NOOP,
+  crDfItemKey,
   isArr,
   assign
 } from './AdapterFn';
@@ -18,11 +19,10 @@ const _crZhConfig = ({
   dataSource
 }), crConfOptionDf = (option) => ({
   zhConfig: _crZhConfig(option)
-})
-, crKeyDf = ({ _itemKey }) => _itemKey;
+});
 
 const crAdapterType1 = ({
-  crKey=crKeyDf,
+  crKey=crDfItemKey,
   crData,
   crConfOption=crConfOptionDf,
   addConfOption=FN_NOOP,

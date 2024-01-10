@@ -3,6 +3,7 @@ export {
   isArr,
   isInArrStr,
   isTokenInStr,
+  crDfItemKey,
   getValue,
   getCaption,
   getValueCaption,

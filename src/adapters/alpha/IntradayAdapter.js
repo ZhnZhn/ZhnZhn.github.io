@@ -16,6 +16,7 @@ import { crVolumePoint } from '../pointFn';
 import { crMarkerColor } from '../IntradayFns';
 import {
   isTokenInStr,
+  crDfItemKey,
   ymdhmsToUTC,
   crIntradayConfigOption
 } from './fnAdapter';
@@ -165,7 +166,7 @@ const _crSeriaData = (
 }
 
 const IntradayAdapter = {
-  crKey: ({ _itemKey }) => _itemKey,
+  crKey: crDfItemKey,
 
   toConfig(json, option){
     const {

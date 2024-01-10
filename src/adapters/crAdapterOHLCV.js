@@ -14,6 +14,7 @@ import {
 import {
   FN_IDENTITY,
   FN_NOOP,
+  crDfItemKey,
   valueMoving
 } from './AdapterFn'
 import { stockSeriesLegend } from './legendFn';
@@ -25,13 +26,12 @@ const _crCaptionDf = ({
 }) => ({
   title,
   subtitle
-})
-, _crIdDf = ({ _itemKey }) => _itemKey;
+});
 
 const crAdapterOHLCV = ({
   seriaOption={},
   crCaption=_crCaptionDf,
-  crId=_crIdDf,
+  crId=crDfItemKey,
   getArr=FN_IDENTITY,
   crAddConfig=FN_NOOP,
   toDate

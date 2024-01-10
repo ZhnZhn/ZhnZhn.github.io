@@ -1,9 +1,11 @@
 import { CIT_INFO_ITEM } from '../../constants/CompItemType';
+import {
+  FN_NOOP,
+  crDfItemKey
+} from '../AdapterFn';
 
 const _isFn = fn => typeof fn === 'function';
-const _crNoop = () => {};
 const _crEmptyDescr = () => '';
-const _getId = ({ _itemKey }) => _itemKey;
 
 const _crToken = (json, fnOrPropName) => _isFn(fnOrPropName)
   ? fnOrPropName(json)
@@ -17,11 +19,11 @@ const TemplateTokens = function(impl) {
     return (new TemplateTokens(impl));
   }
   this.impl = {
-    getId: _getId,
-    crTokensName: _crNoop,
+    getId: crDfItemKey,
+    crTokensName: FN_NOOP,
     crDescr: _crEmptyDescr,
-    crDescrName: _crNoop,
-    crDescrStyle: _crNoop,
+    crDescrName: FN_NOOP,
+    crDescrStyle: FN_NOOP,
     ...impl
   }
 };

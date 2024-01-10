@@ -57,6 +57,8 @@ export const assign = Object.assign
 export const FN_IDENTITY = v => v
 export const FN_NOOP = () => {}
 
+export const crDfItemKey = ({ _itemKey }) => _itemKey
+
 const EMPTY = '';
 
 const _fIsNumber = (

@@ -48,7 +48,7 @@ const _getJsonDataPropName = _ref2 => {
   let {
     interval
   } = _ref2;
-  return interval === 'Daily Adjusted' ? TIME_SERIES + " (Daily)" : _isWeeklyOrMonthly(interval) ? interval + " " + TIME_SERIES : TIME_SERIES + " (" + interval + ")";
+  return interval === 'Daily Adjusted' ? `${TIME_SERIES} (Daily)` : _isWeeklyOrMonthly(interval) ? `${interval} ${TIME_SERIES}` : `${TIME_SERIES} (${interval})`;
 };
 const _getObjValues = (json, option) => json[_getJsonDataPropName(option)];
 const _crSeriaData = (json, option) => {
@@ -135,12 +135,7 @@ const _crSeriaData = (json, option) => {
   };
 };
 const IntradayAdapter = {
-  crKey: _ref3 => {
-    let {
-      _itemKey
-    } = _ref3;
-    return _itemKey;
-  },
+  crKey: _fnAdapter.crDfItemKey,
   toConfig(json, option) {
     const {
         _itemKey,
@@ -175,6 +170,5 @@ const IntradayAdapter = {
     });
   }
 };
-var _default = IntradayAdapter;
-exports.default = _default;
+var _default = exports.default = IntradayAdapter;
 //# sourceMappingURL=IntradayAdapter.js.map

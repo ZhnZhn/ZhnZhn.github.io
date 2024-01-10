@@ -8,9 +8,9 @@ var _configBuilderFn = require("../../charts/configBuilderFn");
 var _Tooltip = require("../../charts/Tooltip");
 var _fnAdapter = require("./fnAdapter");
 const FaoStatAdapter = {
-  crKey: _fnAdapter.crId,
+  crKey: _fnAdapter.crDfItemKey,
   toConfig(json, option) {
-    const _id = (0, _fnAdapter.crId)(option),
+    const _id = (0, _fnAdapter.crDfItemKey)(option),
       _title = (0, _fnAdapter.crTitle)(json, option),
       _subtitle = (0, _fnAdapter.crSubtitle)(json, option),
       _points = (0, _fnAdapter.toDataPoints)(json, option);
@@ -38,6 +38,5 @@ const FaoStatAdapter = {
     }));
   }
 };
-var _default = FaoStatAdapter;
-exports.default = _default;
+var _default = exports.default = FaoStatAdapter;
 //# sourceMappingURL=FaoStatAdapter.js.map

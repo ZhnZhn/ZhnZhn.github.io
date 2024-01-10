@@ -10,30 +10,24 @@ var _AdapterFn = require("./AdapterFn");
 var _legendFn = require("./legendFn");
 var _AdapterStockFn = require("./AdapterStockFn");
 const _crCaptionDf = _ref => {
-    let {
-      title,
-      subtitle
-    } = _ref;
-    return {
-      title,
-      subtitle
-    };
-  },
-  _crIdDf = _ref2 => {
-    let {
-      _itemKey
-    } = _ref2;
-    return _itemKey;
+  let {
+    title,
+    subtitle
+  } = _ref;
+  return {
+    title,
+    subtitle
   };
-const crAdapterOHLCV = _ref3 => {
+};
+const crAdapterOHLCV = _ref2 => {
   let {
     seriaOption = {},
     crCaption = _crCaptionDf,
-    crId = _crIdDf,
+    crId = _AdapterFn.crDfItemKey,
     getArr = _AdapterFn.FN_IDENTITY,
     crAddConfig = _AdapterFn.FN_NOOP,
     toDate
-  } = _ref3;
+  } = _ref2;
   return {
     toConfig(json, option) {
       const {
