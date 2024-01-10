@@ -1,9 +1,8 @@
+import { getValue } from '../AdapterFn';
 import {
-  getValue,
   crAllOriginsUrl,
-  fGetRequestUrl,
-  fCheckResponse
-} from '../AdapterFn';
+  fRouteApi
+} from '../ApiFn';
 
 const API_URL = "https://api.kucoin.com/api/v1/market";
 const _getData = (
@@ -31,9 +30,6 @@ const _rCrUrl = {
   OB: _crObUrl
 };
 
-const KcApi = {
-  getRequestUrl: fGetRequestUrl(_rCrUrl),
-  checkResponse: fCheckResponse(_getData)
-};
+const KcApi = fRouteApi(_rCrUrl, _getData);
 
 export default KcApi

@@ -1,8 +1,10 @@
 import {
   isArr,
-  fGetRequestUrl,
   crError
 } from '../AdapterFn';
+import {
+  fGetRequestUrl
+} from '../ApiFn';
 
 const API_URL = "https://www.bitstamp.net/api/v2";
 

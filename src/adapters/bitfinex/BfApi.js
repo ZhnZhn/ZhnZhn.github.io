@@ -1,9 +1,8 @@
+import { getValue } from '../AdapterFn';
 import {
-  getValue,
   crAllOriginsUrl,
-  fGetRequestUrl,
-  fCheckResponse
-} from '../AdapterFn';
+  fRouteApi
+} from '../ApiFn';
 
 const API_URL = "https://api-pub.bitfinex.com/v2";
 
@@ -35,9 +34,6 @@ const _rCrUrl = {
   OB: _crObUrl
 };
 
-const BfApi = {
-  getRequestUrl: fGetRequestUrl(_rCrUrl),
-  checkResponse: fCheckResponse()
-};
+const BfApi = fRouteApi(_rCrUrl);
 
 export default BfApi

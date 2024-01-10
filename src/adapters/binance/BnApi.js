@@ -1,7 +1,5 @@
-import {
-  fGetRequestUrl,
-  fCheckResponse
-} from '../AdapterFn';
+import { getValue } from '../AdapterFn';
+import { fRouteApi } from '../ApiFn';
 
 const API_URL = 'https://api.binance.com/api/v3'
 , RESEARCH_URL = 'https://research.binance.com/en/projects'
@@ -11,7 +9,7 @@ const REG_BLANKS = /\s/g;
 
 const _setLinks = (option, c, s='') => {
   const _toIndex = c.indexOf('(')
-  , _caption = c.substring(0, _toIndex)
+  , _caption = c.slice(0, _toIndex)
       .trim()
       .toLowerCase()
       .replace(REG_BLANKS, '-')
@@ -25,8 +23,8 @@ const _crSymbol = (s='') => s.replace('/','');
 const _crDfUrl = option => {
   const { items=[] } = option
   , { s, c='' } = items[0]
-  , { v:interval } = items[1]
-  , { v:limit } = items[2]
+  , interval = getValue(items[1])
+  , limit = getValue(items[2])
   , _symbol = _crSymbol(s);
 
   _setLinks(option, c, s)
@@ -36,7 +34,7 @@ const _crDfUrl = option => {
 const _crObUrl = option => {
   const { items=[] } = option
   , { s } = items[0]
-  , { v:limit } = items[1]
+  , limit = getValue(items[1])
   , _symbol = _crSymbol(s);
   return `${API_URL}/depth?symbol=${_symbol}&limit=${limit}`;
 }
@@ -46,9 +44,6 @@ const _rCrUrl = {
   OB: _crObUrl
 };
 
-const BnApi = {
-  getRequestUrl: fGetRequestUrl(_rCrUrl),
-  checkResponse: fCheckResponse()  
-};
+const BnApi = fRouteApi(_rCrUrl);
 
 export default BnApi

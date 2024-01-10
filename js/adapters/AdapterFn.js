@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fGetRequestUrl = exports.fCrValue = exports.fCheckResponse = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.crAllOriginsUrl = exports.assign = exports._isNaN = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.assign = exports._isNaN = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -43,7 +43,6 @@ const isNumberOrNull = v => isNumber(v) || v === null;
 exports.isNumberOrNull = isNumberOrNull;
 const assign = exports.assign = Object.assign;
 const EMPTY = '';
-const _isStr = v => typeof v === 'string';
 const _fIsNumber = pn => p => isTypeNumber(p[pn]) && isFinite(p[pn]);
 const _crBigValueFrom = point => (0, _big.default)((0, _getterPointFn.getPointValue)(point));
 const _crDmyFrom = point => (0, _dateFn.mlsToDmy)((0, _getterPointFn.getPointDate)(point));
@@ -140,35 +139,4 @@ const crZhConfig = _ref2 => {
   };
 };
 exports.crZhConfig = crZhConfig;
-const crAllOriginsUrl = (proxyServer, url) => proxyServer ? `${proxyServer}${url}`
-//: `http://127.0.0.1:3000/proxy/${url}`
-: `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-exports.crAllOriginsUrl = crAllOriginsUrl;
-const FN_IDENTITY = v => v;
-const _getBlockchainData = function (json, getData) {
-  if (getData === void 0) {
-    getData = FN_IDENTITY;
-  }
-  return getData(json && _isStr(json.contents) ? JSON.parse(json.contents) : json);
-};
-const fCheckResponse = getData => (json, option) => {
-  try {
-    const _data = _getBlockchainData(json, getData);
-    if (isArr(_data) || _data && isArr(_data.asks) && isArr(_data.bids)) {
-      return _data;
-    }
-    throw crError();
-  } catch (err) {
-    throw crError();
-  }
-};
-exports.fCheckResponse = fCheckResponse;
-const fGetRequestUrl = rCrUrl => option => {
-  const {
-      dfSubId
-    } = option,
-    _crUrl = dfSubId && rCrUrl[dfSubId] || rCrUrl.DF;
-  return _crUrl(option);
-};
-exports.fGetRequestUrl = fGetRequestUrl;
 //# sourceMappingURL=AdapterFn.js.map

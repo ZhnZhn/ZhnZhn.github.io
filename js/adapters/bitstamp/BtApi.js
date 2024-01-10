@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 const API_URL = "https://www.bitstamp.net/api/v2";
 const _crDfUrl = option => {
   const {
@@ -34,7 +35,7 @@ const _rCrUrl = {
   OB: _crObUrl
 };
 const BtApi = {
-  getRequestUrl: (0, _AdapterFn.fGetRequestUrl)(_rCrUrl),
+  getRequestUrl: (0, _ApiFn.fGetRequestUrl)(_rCrUrl),
   checkResponse(json, option) {
     const {
         data,
