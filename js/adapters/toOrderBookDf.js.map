@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/adapters/kucoin/toOrderBook.js"
+  "../../src/adapters/toOrderBookDf.js"
  ],
- "file": "../../../src/adapters/kucoin/toOrderBook.js",
+ "file": "../../src/adapters/toOrderBookDf.js",
  "names": [
   "_crAdapterOrderBook",
   "_interopRequireDefault",

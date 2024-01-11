@@ -1,10 +1,10 @@
 import crAdapterRouter from '../crAdapterRouter'
 import toKline from './toKline'
-import toOrderBook from './toOrderBook'
+import toOrderBookDf from '../toOrderBookDf'
 
 const _rAdapter = {
   DF: toKline,
-  OB: toOrderBook
+  OB: toOrderBookDf
 }
 , GtAdapter = crAdapterRouter(_rAdapter);
 

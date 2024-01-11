@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _crAdapterOrderBook = _interopRequireDefault(require("../crAdapterOrderBook"));
+var _crAdapterOrderBook = _interopRequireDefault(require("./crAdapterOrderBook"));
 const crTitle = _ref => {
   let {
     items
@@ -14,4 +14,4 @@ const toOrderBook = (0, _crAdapterOrderBook.default)({
   crTitle
 });
 var _default = exports.default = toOrderBook;
-//# sourceMappingURL=toOrderBook.js.map
+//# sourceMappingURL=toOrderBookDf.js.map
