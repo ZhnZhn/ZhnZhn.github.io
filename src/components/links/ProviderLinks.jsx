@@ -36,7 +36,8 @@ const LINK_CONFIGS = [
  ["Binance", _crUrl("binance.com")],
  ["Bitstamp", _crUrl("www.bitstamp.net")],
  ["Bitfinex", _crUrl("bitfinex.com")],
- ["KuCoin", _crUrl("www.kucoin.com")]
+ ["KuCoin", _crUrl("www.kucoin.com")],
+ ["GateIo", "Gate.io", _crUrl("gate.io")]
 ];
 
 const _isStr = str => typeof str === 'string';

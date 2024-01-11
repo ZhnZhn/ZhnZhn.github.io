@@ -57,8 +57,9 @@ const DP = [
 , DP_PR = [
   [Link.Ndl, '50'],
   Link.UnComtrade,
-  Link.Bitfinex,
-  Link.KuCoin
+  Link.KuCoin,
+  Link.GateIo,
+  Link.Bitfinex
 ];
 
 const LinkPer = ({
@@ -99,7 +100,7 @@ const _crListCaption = (
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 33):"
+     caption="Data Providers (All 34):"
      childStyle={S_ROOT_CHILD}
   >
     <div>
