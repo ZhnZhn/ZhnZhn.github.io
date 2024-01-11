@@ -32,7 +32,7 @@ import Bn from './binance/Bn'
 import Bt from './bitstamp/Bt'
 import Bf from './bitfinex/Bf'
 import Kc from './kucoin/Kc'
-
+import Gt from './gateio/Gt'
 
 const RouterAdapter = {
   Ndl,
@@ -67,7 +67,8 @@ const RouterAdapter = {
   Bn,
   Bt,
   Bf,
-  Kc
+  Kc,
+  Gt
 };
 
 export default RouterAdapter

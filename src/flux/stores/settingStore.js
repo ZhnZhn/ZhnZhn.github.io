@@ -15,7 +15,8 @@ import {
   LT_WL,
   LT_UN,
   LT_BF,
-  LT_KC
+  LT_KC,
+  LT_GT
 } from '../../constants/LoadType';
 
 const _isUndef = value => typeof value === 'undefined';
@@ -32,7 +33,8 @@ const _withProxyServer = [
 const _withProxyServer2 = [
   ..._withProxyServer,
   LT_BF,
-  LT_KC
+  LT_KC,
+  LT_GT
 ];
 
 const _apiTitle = {

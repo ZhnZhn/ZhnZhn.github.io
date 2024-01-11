@@ -1,0 +1,30 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/gateio/toKline.js"
+ ],
+ "file": "../../../src/adapters/gateio/toKline.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "_fToKline",
+  "_interopRequireDefault",
+  "_parseFloat",
+  "parseFloat",
+  "toKline",
+  "fToKline",
+  "o",
+  "h",
+  "l",
+  "c",
+  "v",
+  "crDate",
+  "crValue",
+  "roundByOHLC",
+  "crVolume",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAEA,IAAAC,SAAA,GAAAC,sBAAA,CAAAF,OAAA;AAEA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;AAEA,MAAMG,WAAW,GAAGC,UAAU;AAE9B,MAAMC,OAAO,GAAG,IAAAC,iBAAQ,EAAC;EACvBC,CAAC,EAAE,CAAC;EACJC,CAAC,EAAE,CAAC;EACJC,CAAC,EAAE,CAAC;EACJC,CAAC,EAAE,CAAC;EACJC,CAAC,EAAE,CAAC;EACJC,MAAM,EAAGD,CAAC,IAAKR,WAAW,CAACQ,CAAC,CAAC,GAAC,IAAI;EAClCE,OAAO,EAAGF,CAAC,IAAK,IAAAG,sBAAW,EAACX,WAAW,CAACQ,CAAC,CAAC,CAAC;EAC3CI,QAAQ,EAAGJ,CAAC,IAAKR,WAAW,CAACQ,CAAC;AAChC,CAAC,CAAC;AAAC,IAAAK,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYb,OAAO"
+}

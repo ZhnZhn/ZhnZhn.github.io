@@ -24,6 +24,7 @@ var _Eia = _interopRequireDefault(require("./eia/Eia"));
 var _Intrinio = _interopRequireDefault(require("./intrinio/Intrinio"));
 var _Ndl = _interopRequireDefault(require("./ndl/Ndl"));
 var _DbNomics = _interopRequireDefault(require("./db-nomics/DbNomics"));
+var _Ei = _interopRequireDefault(require("./ei/Ei"));
 var _Ember = _interopRequireDefault(require("./ember/Ember"));
 var _Irena = _interopRequireDefault(require("./irena/Irena"));
 var _Crc = _interopRequireDefault(require("./crypto-compare/Crc"));
@@ -32,11 +33,14 @@ var _Cm = _interopRequireDefault(require("./coin-metrics/Cm"));
 var _Cp = _interopRequireDefault(require("./coin-paprika/Cp"));
 var _Cl = _interopRequireDefault(require("./coin-lore/Cl"));
 var _Bn = _interopRequireDefault(require("./binance/Bn"));
-var _Bf = _interopRequireDefault(require("./bitfinex/Bf"));
 var _Bt = _interopRequireDefault(require("./bitstamp/Bt"));
+var _Bf = _interopRequireDefault(require("./bitfinex/Bf"));
+var _Kc = _interopRequireDefault(require("./kucoin/Kc"));
+var _Gt = _interopRequireDefault(require("./gateio/Gt"));
 const RouterAdapter = {
   Ndl: _Ndl.default,
   DbNomics: _DbNomics.default,
+  Ei: _Ei.default,
   Ember: _Ember.default,
   Irena: _Irena.default,
   EuroStat: _EuroStat.default,
@@ -64,9 +68,10 @@ const RouterAdapter = {
   Cp: _Cp.default,
   Cl: _Cl.default,
   Bn: _Bn.default,
+  Bt: _Bt.default,
   Bf: _Bf.default,
-  Bt: _Bt.default
+  Kc: _Kc.default,
+  Gt: _Gt.default
 };
-var _default = RouterAdapter;
-exports.default = _default;
+var _default = exports.default = RouterAdapter;
 //# sourceMappingURL=RouterAdapter.js.map

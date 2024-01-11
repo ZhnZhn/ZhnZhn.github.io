@@ -39,6 +39,7 @@ const LoadConfig = {
   [_LoadType.LT_BT]: _LoadImpl.default.Bt,
   [_LoadType.LT_BF]: _LoadImpl.default.Bf,
   [_LoadType.LT_KC]: _LoadImpl.default.Kc,
+  [_LoadType.LT_GT]: _LoadImpl.default.Gt,
   [_LoadType.LT_UN]: _LoadImpl.default.UnComtrade,
   [_LoadType.LT_FAO]: _LoadImpl.default.FaoStat,
   [_LoadType.LT_WB]: _LoadImpl.default.WorldBank,

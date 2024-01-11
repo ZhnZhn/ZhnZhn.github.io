@@ -34,6 +34,7 @@ export const LT_BN = 'BN'
 export const LT_BF = 'BF'
 export const LT_BT = 'BT'
 export const LT_KC = 'KC'
+export const LT_GT = 'GT'
 export const LT_WL = 'WL'
 export const LT_WATCH_LIST = 'WL_WATCH_LIST'
 
