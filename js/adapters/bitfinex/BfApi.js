@@ -16,22 +16,10 @@ const _crDfUrl = option => {
   option.timeframe = timeframe;
   return (0, _ApiFn.crAllOriginsUrl)(proxy, `${API_URL}/candles/trade:${timeframe}:t${pair}/hist?limit=${limit}`);
 };
-const _crObUrl = _ref => {
-  let {
-    proxy,
-    items = []
-  } = _ref;
-  const {
-      v: pair
-    } = items[0],
-    {
-      v: len
-    } = items[1];
-  return (0, _ApiFn.crAllOriginsUrl)(proxy, `${API_URL}/book/t${pair}/P0?len=${len}`);
-};
+const _crObUrl = (pair, limit) => `${API_URL}/book/t${pair}/P0?len=${limit}`;
 const _rCrUrl = {
   DF: _crDfUrl,
-  OB: _crObUrl
+  OB: (0, _ApiFn.fCrObUrl)(_crObUrl)
 };
 const BfApi = (0, _ApiFn.fRouteApi)(_rCrUrl);
 var _default = exports.default = BfApi;

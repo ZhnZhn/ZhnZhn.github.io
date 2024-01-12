@@ -1,6 +1,7 @@
 import { getValue } from '../AdapterFn';
 import {
   crAllOriginsUrl,
+  fCrObUrl,
   fRouteApi
 } from '../ApiFn';
 
@@ -20,18 +21,14 @@ const _crDfUrl = (
   return crAllOriginsUrl(proxy, `${API_URL}/candles/trade:${timeframe}:t${pair}/hist?limit=${limit}`)
 };
 
-const _crObUrl = ({
-  proxy,
-  items=[]
-}) => {
-  const {v:pair} = items[0]
-  , {v:len} = items[1];
-  return crAllOriginsUrl(proxy, `${API_URL}/book/t${pair}/P0?len=${len}`)
-};
+const _crObUrl = (
+  pair,
+  limit
+) => `${API_URL}/book/t${pair}/P0?len=${limit}`;
 
 const _rCrUrl = {
   DF: _crDfUrl,
-  OB: _crObUrl
+  OB: fCrObUrl(_crObUrl)
 };
 
 const BfApi = fRouteApi(_rCrUrl);

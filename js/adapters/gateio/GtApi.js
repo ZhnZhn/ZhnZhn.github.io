@@ -16,16 +16,10 @@ const _crDfUrl = option => {
   option.timeframe = timeframe;
   return (0, _ApiFn.crAllOriginsUrl)(proxy, `${API_URL}/candlesticks?currency_pair=${pair}&interval=${timeframe}&limit=${limit}`);
 };
-const _crObUrl = _ref => {
-  let {
-    proxy,
-    items = []
-  } = _ref;
-  return (0, _ApiFn.crAllOriginsUrl)(proxy, `${API_URL}/order_book?currency_pair=${(0, _AdapterFn.getValue)(items[0])}&limit=${(0, _AdapterFn.getValue)(items[1])}`);
-};
+const _crObUrl = (pair, limit) => `${API_URL}/order_book?currency_pair=${pair}&limit=${limit}`;
 const _rCrUrl = {
   DF: _crDfUrl,
-  OB: _crObUrl
+  OB: (0, _ApiFn.fCrObUrl)(_crObUrl)
 };
 const GtApi = (0, _ApiFn.fRouteApi)(_rCrUrl);
 var _default = exports.default = GtApi;

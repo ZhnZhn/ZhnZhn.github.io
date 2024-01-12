@@ -21,18 +21,10 @@ const _crDfUrl = option => {
   option.timeframe = timeframe;
   return `${API_URL}/ohlc/${pair}?step=${timeframe}&limit=${limit}`;
 };
-const _crObUrl = option => {
-  const {
-      items = []
-    } = option,
-    {
-      v: pair
-    } = items[0];
-  return `${API_URL}/order_book/${pair}?order=0`;
-};
+const _crObUrl = pair => `${API_URL}/order_book/${pair}?order=0`;
 const _rCrUrl = {
   DF: _crDfUrl,
-  OB: _crObUrl
+  OB: (0, _ApiFn.fCrObUrl)(_crObUrl)
 };
 const BtApi = {
   getRequestUrl: (0, _ApiFn.fGetRequestUrl)(_rCrUrl),
