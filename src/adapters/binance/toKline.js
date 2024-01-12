@@ -1,11 +1,10 @@
+import { bindTo } from '../AdapterFn';
 import { crItemLink } from '../crFn';
 import fToKline from '../fToKline';
 import { CL_PB_8 } from '../CL';
 
-const _crResearchLink = crItemLink
-  .bind(null, 'Binance Research');
-const _crTradeLink = crItemLink
-  .bind(null, 'Binance Trade Chart');
+const _crResearchLink = bindTo(crItemLink, 'Binance Research');
+const _crTradeLink = bindTo(crItemLink, 'Binance Trade Chart');
 
 const _crDescription = ({
   _researchLink,

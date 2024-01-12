@@ -3,11 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _AdapterFn = require("../AdapterFn");
 var _crFn = require("../crFn");
 var _fToKline = _interopRequireDefault(require("../fToKline"));
 var _CL = require("../CL");
-const _crResearchLink = _crFn.crItemLink.bind(null, 'Binance Research');
-const _crTradeLink = _crFn.crItemLink.bind(null, 'Binance Trade Chart');
+const _crResearchLink = (0, _AdapterFn.bindTo)(_crFn.crItemLink, 'Binance Research');
+const _crTradeLink = (0, _AdapterFn.bindTo)(_crFn.crItemLink, 'Binance Trade Chart');
 const _crDescription = _ref => {
   let {
     _researchLink,

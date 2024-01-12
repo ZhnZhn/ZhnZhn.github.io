@@ -4,6 +4,7 @@ import Big from 'big.js';
 
 import { toTd as _toTd } from '../charts/dateFormat';
 
+export { bindTo } from '../utils/bindTo';
 export { isTokenInStr } from '../utils/isTokenInStr';
 export {
   isInArrStr,
