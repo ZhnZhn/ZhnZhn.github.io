@@ -1,17 +1,31 @@
 "use strict";
 
 exports.__esModule = true;
-exports.fRouteApi = exports.fGetRequestUrl = exports.fCrObUrl = exports.crAllOriginsUrl = void 0;
+exports.fRouteApi = exports.fGetRequestUrl = exports.fCrObUrl = exports.fCrDfUrl = void 0;
+var _LoadType = require("../constants/LoadType");
 var _AdapterFn = require("./AdapterFn");
 const _isStr = v => typeof v === "string";
-const crAllOriginsUrl = (proxyServer, url) => proxyServer ? `${proxyServer}${url}` : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-exports.crAllOriginsUrl = crAllOriginsUrl;
-const fCrObUrl = crObUrl => _ref => {
+const _crAllOriginsUrl = (url, _ref) => {
   let {
     proxy,
-    items = []
+    loadId
   } = _ref;
-  return crAllOriginsUrl(proxy, crObUrl((0, _AdapterFn.getValue)(items[0]), (0, _AdapterFn.getValue)(items[1])));
+  return loadId === _LoadType.LT_BT ? url : proxy ? `${proxy}${url}` : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+};
+const fCrDfUrl = crDfUrl => option => {
+  const {
+      items = []
+    } = option,
+    timeframe = (0, _AdapterFn.getValue)(items[1]);
+  option.timeframe = timeframe;
+  return _crAllOriginsUrl(crDfUrl((0, _AdapterFn.getValue)(items[0]), timeframe, (0, _AdapterFn.getValue)(items[2])), option);
+};
+exports.fCrDfUrl = fCrDfUrl;
+const fCrObUrl = crObUrl => option => {
+  const {
+    items = []
+  } = option;
+  return _crAllOriginsUrl(crObUrl((0, _AdapterFn.getValue)(items[0]), (0, _AdapterFn.getValue)(items[1])), option);
 };
 exports.fCrObUrl = fCrObUrl;
 const FN_IDENTITY = v => v;

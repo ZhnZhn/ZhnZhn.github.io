@@ -1,25 +1,43 @@
+import { LT_BT } from '../constants/LoadType';
+
 import {
   isArr,
   getValue,
   crError
 } from './AdapterFn';
 
-const _isStr = v => typeof v === "string"
+const _isStr = v => typeof v === "string";
 
-export const crAllOriginsUrl = (
-  proxyServer,
-  url
-) => proxyServer
-  ? `${proxyServer}${url}`
-  : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`
+const _crAllOriginsUrl = (
+  url,
+  { proxy, loadId }
+) => loadId === LT_BT
+  ? url
+  : proxy
+     ? `${proxy}${url}`
+     : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`
 
-export const fCrObUrl = crObUrl => ({
-  proxy,
-  items=[]
-}) => crAllOriginsUrl(
-  proxy,
-  crObUrl(getValue(items[0]), getValue(items[1]))
-)
+export const fCrDfUrl = (crDfUrl) => (
+  option
+) => {
+  const { items=[] } = option
+  , timeframe = getValue(items[1]);
+  option.timeframe = timeframe
+  return _crAllOriginsUrl(
+    crDfUrl(getValue(items[0]), timeframe, getValue(items[2])),
+    option
+  );
+}
+
+export const fCrObUrl = crObUrl => (
+  option
+) => {
+  const { items=[] } = option;
+  return _crAllOriginsUrl(
+    crObUrl(getValue(items[0]), getValue(items[1])),
+    option
+  );
+}
 
 const FN_IDENTITY = v => v;
 const _getBlockchainData = (

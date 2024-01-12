@@ -1,6 +1,5 @@
-import { getValue } from '../AdapterFn';
 import {
-  crAllOriginsUrl,
+  fCrDfUrl,
   fCrObUrl,
   fRouteApi
 } from '../ApiFn';
@@ -8,18 +7,10 @@ import {
 const API_URL = "https://api-pub.bitfinex.com/v2";
 
 const _crDfUrl = (
-  option
-) => {
-  const {
-    proxy,
-    items=[]
-  } = option
-  , pair = getValue(items[0])
-  , timeframe = getValue(items[1])
-  , limit = getValue(items[2]);
-  option.timeframe = timeframe
-  return crAllOriginsUrl(proxy, `${API_URL}/candles/trade:${timeframe}:t${pair}/hist?limit=${limit}`)
-};
+  pair,
+  timeframe,
+  limit
+) => `${API_URL}/candles/trade:${timeframe}:t${pair}/hist?limit=${limit}`;
 
 const _crObUrl = (
   pair,
@@ -27,7 +18,7 @@ const _crObUrl = (
 ) => `${API_URL}/book/t${pair}/P0?len=${limit}`;
 
 const _rCrUrl = {
-  DF: _crDfUrl,
+  DF: fCrDfUrl(_crDfUrl),
   OB: fCrObUrl(_crObUrl)
 };
 

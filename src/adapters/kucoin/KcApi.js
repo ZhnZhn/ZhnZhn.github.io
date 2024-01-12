@@ -1,6 +1,5 @@
-import { getValue } from '../AdapterFn';
 import {
-  crAllOriginsUrl,
+  fCrDfUrl,
   fCrObUrl,
   fRouteApi
 } from '../ApiFn';
@@ -10,23 +9,17 @@ const _getData = (
   json
 ) => (json || {}).data;
 
-const _crDfUrl = (option) => {
-  const {
-    proxy,
-    items=[]
-  } = option
-  , pair = getValue(items[0])
-  , timeframe = getValue(items[1]);
-  option.timeframe = timeframe
-  return crAllOriginsUrl(proxy, `${API_URL}/candles?symbol=${pair}&type=${timeframe}`)
-};
+const _crDfUrl = (
+  pair,
+  timeframe
+) => `${API_URL}/candles?symbol=${pair}&type=${timeframe}`;
 
 const _crObUrl = (
   pair
 ) => `${API_URL}/orderbook/level2_20?symbol=${pair}`;
 
 const _rCrUrl = {
-  DF: _crDfUrl,
+  DF: fCrDfUrl(_crDfUrl),
   OB: fCrObUrl(_crObUrl)
 };
 
