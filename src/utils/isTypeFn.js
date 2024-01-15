@@ -8,7 +8,8 @@ export const isStr = v => typeof v === 'string'
 export const isUndef = v => typeof v === 'undefined'
 export const isFn = v => typeof v === 'function'
 
-export const isObj = v => typeof v === 'object' && !!v
+export const isObj = v => typeof v === 'object'
+  && v !== null
 
 const _isArr = Array.isArray
 export const isNotEmptyArr = arr => _isArr(arr)

@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.crDfItemKey = exports.bindTo = exports.assign = exports._isNaN = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isObj = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.crDfItemKey = exports.bindTo = exports.assign = exports._isNaN = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -35,6 +35,8 @@ exports.findMaxY = _seriaFn.findMaxY;
 exports.filterTrimZero = _seriaFn.filterTrimZero;
 var _DirectionType = require("../constants/DirectionType");
 var _getterPointFn = require("./getterPointFn");
+var _isTypeFn = require("../utils/isTypeFn");
+exports.isObj = _isTypeFn.isObj;
 const _isNaN = exports._isNaN = Number.isNaN;
 const isArr = exports.isArr = Array.isArray;
 const isTypeNumber = n => typeof n === 'number';

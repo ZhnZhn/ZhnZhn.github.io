@@ -47,6 +47,8 @@ import {
   getPointValue
 } from './getterPointFn';
 
+export { isObj } from '../utils/isTypeFn';
+
 export const _isNaN = Number.isNaN
 export const isArr = Array.isArray
 export const isTypeNumber = n => typeof n === 'number'

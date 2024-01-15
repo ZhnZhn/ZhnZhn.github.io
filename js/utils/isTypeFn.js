@@ -14,7 +14,7 @@ const isUndef = v => typeof v === 'undefined';
 exports.isUndef = isUndef;
 const isFn = v => typeof v === 'function';
 exports.isFn = isFn;
-const isObj = v => typeof v === 'object' && !!v;
+const isObj = v => typeof v === 'object' && v !== null;
 exports.isObj = isObj;
 const _isArr = Array.isArray;
 const isNotEmptyArr = arr => _isArr(arr) && arr.length > 0;
