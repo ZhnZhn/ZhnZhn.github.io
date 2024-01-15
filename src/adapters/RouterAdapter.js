@@ -31,6 +31,7 @@ import Cl from './coin-lore/Cl'
 import Bn from './binance/Bn'
 import Bt from './bitstamp/Bt'
 import Bf from './bitfinex/Bf'
+import Kr from './kraken/Kr'
 import Kc from './kucoin/Kc'
 import Gt from './gateio/Gt'
 
@@ -67,6 +68,7 @@ const RouterAdapter = {
   Bn,
   Bt,
   Bf,
+  Kr,
   Kc,
   Gt
 };

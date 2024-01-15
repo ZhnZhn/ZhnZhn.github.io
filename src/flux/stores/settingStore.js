@@ -15,6 +15,7 @@ import {
   LT_WL,
   LT_UN,
   LT_BF,
+  LT_KR,
   LT_KC,
   LT_GT
 } from '../../constants/LoadType';
@@ -33,6 +34,7 @@ const _withProxyServer = [
 const _withProxyServer2 = [
   ..._withProxyServer,
   LT_BF,
+  LT_KR,
   LT_KC,
   LT_GT
 ];

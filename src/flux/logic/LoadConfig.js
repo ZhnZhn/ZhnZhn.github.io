@@ -30,6 +30,7 @@ import {
   LT_BN,
   LT_BT,
   LT_BF,
+  LT_KR,
   LT_KC,
   LT_GT,
   LT_UN,
@@ -79,6 +80,7 @@ const LoadConfig = {
   [LT_BN]: LoadImpl.Bn,
   [LT_BT]: LoadImpl.Bt,
   [LT_BF]: LoadImpl.Bf,
+  [LT_KR]: LoadImpl.Kr,
   [LT_KC]: LoadImpl.Kc,
   [LT_GT]: LoadImpl.Gt,
 
