@@ -2,66 +2,57 @@
 
 exports.__esModule = true;
 exports.toStockSeriesData = void 0;
-
 var _AdapterFn = require("./AdapterFn");
-
 var _pointFn = require("./pointFn");
-
 const _isUndef = v => typeof v === 'undefined';
-
 const toStockSeriesData = _ref => {
   let {
+    isAth = true,
     arr = [],
     toDate = _AdapterFn.ymdhmsToUTC,
     seriaOption,
     option
   } = _ref;
   const {
-    isAllSeries = true,
-    pnDate = 'date'
-  } = seriaOption || {},
-        {
-    isNotZoomToMinMax,
-    isDrawDeltaExtrems,
-    seriaType,
-    seriaColor,
-    seriaWidth
-  } = option || {};
+      isAllSeries = true,
+      pnDate = 'date'
+    } = seriaOption || {},
+    {
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems,
+      seriaType,
+      seriaColor,
+      seriaWidth
+    } = option || {};
   const dC = [],
-        dO = [],
-        dH = [],
-        dL = [],
-        dV = [],
-        dVc = [],
-        dATH = [],
-        dMfi = [];
-
+    dO = [],
+    dH = [],
+    dL = [],
+    dV = [],
+    dVc = [],
+    dATH = [],
+    dMfi = [];
   let _prevClose,
-      minClose = Number.POSITIVE_INFINITY,
-      maxClose = Number.NEGATIVE_INFINITY;
-
+    minClose = Number.POSITIVE_INFINITY,
+    maxClose = Number.NEGATIVE_INFINITY;
   arr.forEach(item => {
     const {
-      open,
-      high,
-      low,
-      close,
-      volume
-    } = item,
-          date = item[pnDate] || '',
-          _date = toDate(date);
-
+        open,
+        high,
+        low,
+        close,
+        volume
+      } = item,
+      date = item[pnDate] || '',
+      _date = toDate(date);
     dC.push([_date, close]);
-
     if (isAllSeries) {
       if (minClose > close) {
         minClose = close;
       }
-
       if (maxClose < close) {
         maxClose = close;
       }
-
       dO.push([_date, open]);
       dH.push([_date, high]);
       dL.push([_date, low]);
@@ -77,16 +68,18 @@ const toStockSeriesData = _ref => {
         }
       }));
       dMfi.push([date, close, high, low, close, volume]);
-      dATH.push(!_isUndef(_prevClose) ? (0, _pointFn.crAthPoint)({
-        date: _date,
-        close: _prevClose,
-        open
-      }) : (0, _pointFn.crAthPoint)({
-        date: _date,
-        close: close,
-        open: close
-      }));
-      _prevClose = close;
+      if (isAth) {
+        dATH.push(!_isUndef(_prevClose) ? (0, _pointFn.crAthPoint)({
+          date: _date,
+          close: _prevClose,
+          open
+        }) : (0, _pointFn.crAthPoint)({
+          date: _date,
+          close: close,
+          open: close
+        }));
+        _prevClose = close;
+      }
     }
   });
   return {
@@ -98,7 +91,7 @@ const toStockSeriesData = _ref => {
     maxClose,
     dVc,
     dV,
-    dATH,
+    dATH: dATH.length === 0 ? void 0 : dATH,
     dMfi,
     isNotZoomToMinMax,
     isDrawDeltaExtrems,
@@ -107,6 +100,5 @@ const toStockSeriesData = _ref => {
     seriaWidth
   };
 };
-
 exports.toStockSeriesData = toStockSeriesData;
 //# sourceMappingURL=AdapterStockFn.js.map

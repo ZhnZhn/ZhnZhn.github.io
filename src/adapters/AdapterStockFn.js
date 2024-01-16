@@ -7,6 +7,7 @@ import {
 const _isUndef = v => typeof v === 'undefined';
 
 export const toStockSeriesData = ({
+  isAth=true,
   arr=[],
   toDate=ymdhmsToUTC,
   seriaOption,
@@ -54,26 +55,31 @@ export const toStockSeriesData = ({
           })
       )
       dMfi.push([date, close, high, low, close, volume])
-      dATH.push(!_isUndef(_prevClose)
-        ? crAthPoint({
-           date: _date,
-           close: _prevClose,
-           open
-          })
-        : crAthPoint({
-           date: _date,
-           close: close,
-           open: close
-          })
-      )
-      _prevClose = close
+      if (isAth) {
+        dATH.push(!_isUndef(_prevClose)
+          ? crAthPoint({
+             date: _date,
+             close: _prevClose,
+             open
+            })
+          : crAthPoint({
+             date: _date,
+             close: close,
+             open: close
+            })
+        )
+        _prevClose = close
      }
+   }
   })
   return {
     dC, dO, dH, dL,
-    minClose, maxClose,
-    dVc, dV,
-    dATH, dMfi,
+    minClose,
+    maxClose,
+    dVc,
+    dV,
+    dATH: dATH.length === 0 ? void 0 : dATH,
+    dMfi,
     isNotZoomToMinMax,
     isDrawDeltaExtrems,
     seriaType,

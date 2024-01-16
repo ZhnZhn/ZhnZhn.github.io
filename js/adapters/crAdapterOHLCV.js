@@ -21,6 +21,7 @@ const _crCaptionDf = _ref => {
 };
 const crAdapterOHLCV = _ref2 => {
   let {
+    isAth,
     seriaOption = {},
     crCaption = _crCaptionDf,
     crId = _AdapterFn.crDfItemKey,
@@ -36,6 +37,7 @@ const crAdapterOHLCV = _ref2 => {
         } = crCaption(option, json),
         id = crId(option),
         dataOption = (0, _AdapterStockFn.toStockSeriesData)({
+          isAth,
           arr: getArr(json, option),
           toDate,
           seriaOption,
