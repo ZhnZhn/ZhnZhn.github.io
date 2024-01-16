@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coinbase/Cb.js"
+ ],
+ "file": "../../../src/adapters/coinbase/Cb.js",
+ "names": [
+  "_CbApi",
+  "_interopRequireDefault",
+  "require",
+  "_CbAdapter",
+  "Cb",
+  "api",
+  "adapter",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,MAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,UAAA,GAAAF,sBAAA,CAAAC,OAAA;AAEA,MAAME,EAAE,GAAG;EACTC,GAAG,EAAHA,cAAG;EACHC,OAAO,EAAPA;AACF,CAAC;AAAA,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEcL,EAAE"
+}

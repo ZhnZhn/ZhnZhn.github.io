@@ -36,6 +36,7 @@ const LoadConfig = {
   [_LoadType.LT_CP]: _LoadImpl.default.Cp,
   [_LoadType.LT_CL]: _LoadImpl.default.Cl,
   [_LoadType.LT_BN]: _LoadImpl.default.Bn,
+  [_LoadType.LT_CB]: _LoadImpl.default.Cb,
   [_LoadType.LT_BT]: _LoadImpl.default.Bt,
   [_LoadType.LT_BF]: _LoadImpl.default.Bf,
   [_LoadType.LT_KR]: _LoadImpl.default.Kr,

@@ -33,6 +33,7 @@ var _Cm = _interopRequireDefault(require("./coin-metrics/Cm"));
 var _Cp = _interopRequireDefault(require("./coin-paprika/Cp"));
 var _Cl = _interopRequireDefault(require("./coin-lore/Cl"));
 var _Bn = _interopRequireDefault(require("./binance/Bn"));
+var _Cb = _interopRequireDefault(require("./coinbase/Cb"));
 var _Bt = _interopRequireDefault(require("./bitstamp/Bt"));
 var _Bf = _interopRequireDefault(require("./bitfinex/Bf"));
 var _Kr = _interopRequireDefault(require("./kraken/Kr"));
@@ -69,6 +70,7 @@ const RouterAdapter = {
   Cp: _Cp.default,
   Cl: _Cl.default,
   Bn: _Bn.default,
+  Cb: _Cb.default,
   Bt: _Bt.default,
   Bf: _Bf.default,
   Kr: _Kr.default,

@@ -1,0 +1,24 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coinbase/CbApi.js"
+ ],
+ "file": "../../../src/adapters/coinbase/CbApi.js",
+ "names": [
+  "_ApiFn",
+  "require",
+  "API_URL",
+  "_crDfUrl",
+  "pair",
+  "timeframe",
+  "_rCrUrl",
+  "DF",
+  "fCrDfUrl",
+  "CbApi",
+  "fRouteApi",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAKA,MAAMC,OAAO,GAAG,4CAA4C;AAE5D,MAAMC,QAAQ,GAAGA,CACfC,IAAI,EACJC,SAAS,KACL,GAAEH,OAAQ,IAAGE,IAAK,UAAS;AAEjC,MAAME,OAAO,GAAG;EACdC,EAAE,EAAE,IAAAC,eAAQ,EAACL,QAAQ;AACvB,CAAC;AAED,MAAMM,KAAK,GAAG,IAAAC,gBAAS,EAACJ,OAAO,CAAC;AAAC,IAAAK,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAElBJ,KAAK"
+}
