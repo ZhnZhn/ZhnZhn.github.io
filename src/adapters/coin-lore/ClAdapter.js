@@ -1,69 +1,84 @@
-import { toTd } from '../AdapterFn';
+import {
+  toTd,
+  roundByOHLC
+} from '../AdapterFn';
 import {
   crTableConfig,
   crTableRows
 } from '../toTableFn';
 
-const HEADERS = [{
-  name: 'Rank',
-  pn: 'id',
+const _crNameProps = (
+  name,
+  pn,
+  isHide
+) => ({
+  name,
+  pn,
+  isHide
+})
+, _crToNumberProps = (n) => ({
+  toN: [n],
+  isF: true,
+  style: {
+    fontWeight: 'bold'
+  }
+})
+, _pnTurnoverUsd = 'turnover'
+, HEADERS = [{
+  ..._crNameProps('Rank', 'id'),
   style: { textAlign: 'center' }
+},
+_crNameProps('Base', 'base'),
+_crNameProps('Quote', 'quote'),
+{
+  ..._crNameProps('Volume', 'volume'),
+  ..._crToNumberProps(0)
 },{
-  name: 'Base',
-  pn: 'base'
+  ..._crNameProps('Price', 'price'),
+  ..._crToNumberProps()
 },{
-  name: 'Quote',
-  pn: 'quote'
+  ..._crNameProps('Price USD', 'price_usd', true),
+  ..._crToNumberProps()
 },{
-  name: 'Volume',
-  pn: 'volume',
-  toN: [0],
-  isF: true,
-  style: {
-    fontWeight: 'bold'
-  }
-},{
-  name: 'Price',
-  pn: 'price',
-  toN: [],
-  isF: true,
-  style: {
-    fontWeight: 'bold'
-  }
-},{
-  isHide: true,
-  name: 'Price USD',
-  pn: 'price_usd',
-  toN: [],
-  isF: true,
-  style: {
-    fontWeight: 'bold'
-  }
-},{
-  isHide: true,
-  name: 'Time',
-  pn: 'time'
-},{
-  isHide: true,
-  name: 'Date',
-  pn: 'date'
-}];
+  ..._crNameProps('V*P USD', _pnTurnoverUsd, true),
+  ..._crToNumberProps(0)
+},
+_crNameProps('Time', 'time', true),
+_crNameProps('Date', 'date', true)
+];
 
-const _crTimeDate = (time) => toTd(time*1000).split(' ')
+const _crTimeDate = (
+  time
+) => toTd(time*1000).split(' ')
 // base = null or quote = null or volume = 0
-, _isNotEmptyPair = ({ base, quote, volume }) => base && quote && volume !== 0
+, _isNotEmptyPair = ({
+  base,
+  quote,
+  volume
+}) => base && quote && volume !== 0
 , _crRows = (json) => {
   const { pairs } = json
   , _rows = []
   , _len = pairs.length;
-  let tMin = NaN, tMax = NaN
-  , item, i = 0, id = 1;
+  let tMin = NaN
+  , tMax = NaN
+  , item
+  , i = 0
+  , id = 1;
   for (i; i<_len; i++){
     item = pairs[i]
     if (_isNotEmptyPair(item)) {
       const _time  = item.time
-      , [time='', date=''] = _crTimeDate(_time);
-      _rows.push({ ...item, time, date, id })
+      , [time='', date=''] = _crTimeDate(_time)
+      , _priceUsd = item.price_usd;
+      _rows.push({
+        ...item,
+        'price_usd': roundByOHLC(_priceUsd),
+        [_pnTurnoverUsd]: item.volume * _priceUsd,
+        time,
+        date,
+        id
+      })
       tMin = tMin < _time ? tMin : _time
       tMax = tMax > _time ? tMax : _time
       id++
@@ -94,13 +109,22 @@ _crTitle = (json, { items }, tMin, tMax) => {
 
 const ClAdapter = {
   toConfig(json, option){
-    const { _itemKey, dataSource } = option
-    , { rows, tMin, tMax } = _crRows(json)
+    const {
+      _itemKey,
+      dataSource
+    } = option
+    , {
+      rows,
+      tMin,
+      tMax
+    } = _crRows(json)
     , title = _crTitle(json, option, tMin, tMax)
     , config = crTableConfig({
-       id: _itemKey, title,
+       id: _itemKey,
+       title,
        headers: HEADERS,
-       rows, dataSource
+       rows,
+       dataSource
     });
     return { config };
   }
