@@ -34,6 +34,7 @@ const LINK_CONFIGS = [
  ["CoinLore", _crUrl("www.coinlore.com")],
  ["Coinpaprika", _crUrl("coinpaprika.com")],
  ["Binance", _crUrl("binance.com")],
+ ["Coinbase", _crUrl("coinbase.com")],
  ["Bitstamp", _crUrl("www.bitstamp.net")],
  ["Bitfinex", _crUrl("bitfinex.com")],
  ["Kraken", _crUrl("www.kraken.com")],

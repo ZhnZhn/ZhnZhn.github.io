@@ -46,7 +46,7 @@ const DP = [
   Link.StatNorway, Link.StatSweden, Link.StatFinland, Link.StatDenmark, Link.StatIreland,
   [Link.Bsl, '25'],
   Link.CryptoCompare, Link.CoinGecko, Link.CoinMetrics,
-  Link.CoinLore, Link.Coinpaprika, Link.Binance, Link.Bitstamp
+  Link.CoinLore, Link.Coinpaprika, Link.Binance, Link.Coinbase, Link.Bitstamp
 ]
 , DP_KEY = [
   [Link.Ndl, '50 000'],
@@ -101,7 +101,7 @@ const _crListCaption = (
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 35):"
+     caption="Data Providers (All 36):"
      childStyle={S_ROOT_CHILD}
   >
     <div>
