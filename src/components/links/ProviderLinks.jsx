@@ -34,12 +34,13 @@ const LINK_CONFIGS = [
  ["CoinLore", _crUrl("www.coinlore.com")],
  ["Coinpaprika", _crUrl("coinpaprika.com")],
  ["Binance", _crUrl("binance.com")],
- ["Coinbase", _crUrl("coinbase.com")],
  ["Bitstamp", _crUrl("www.bitstamp.net")],
+ ["Coinbase", _crUrl("coinbase.com")],
  ["Bitfinex", _crUrl("bitfinex.com")],
+ ["GateIo", "Gate.io", _crUrl("gate.io")],
  ["Kraken", _crUrl("www.kraken.com")],
  ["KuCoin", _crUrl("www.kucoin.com")],
- ["GateIo", "Gate.io", _crUrl("gate.io")]
+ ["OKX", _crUrl("okx.com")]
 ];
 
 const _isStr = str => typeof str === 'string';
