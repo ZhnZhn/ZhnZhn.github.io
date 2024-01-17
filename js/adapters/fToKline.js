@@ -56,6 +56,7 @@ const _fCrDataOHLCV = _ref2 => {
 };
 const fToKline = options => (0, _crAdapterOHLCV.default)({
   isAth: false,
+  isVolume: !options.isNotVolume,
   getArr: options.getArr || _fCrDataOHLCV(options),
   toDate: _AdapterFn.FN_IDENTITY,
   crAddConfig: _fCrAddConfig(options.crAddConfig)

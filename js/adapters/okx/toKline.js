@@ -19,12 +19,12 @@ From OKX Documentation
 
 const _parseFloat = parseFloat;
 const toKline = (0, _fToKline.default)({
+  isNotVolume: true,
   h: 2,
   l: 3,
   c: 4,
   crDate: v => _parseFloat(v),
-  crValue: v => (0, _AdapterFn.roundByOHLC)(parseFloat(v)),
-  crVolume: () => 0
+  crValue: v => (0, _AdapterFn.roundByOHLC)(parseFloat(v))
 });
 var _default = exports.default = toKline;
 //# sourceMappingURL=toKline.js.map

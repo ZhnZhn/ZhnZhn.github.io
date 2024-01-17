@@ -13,15 +13,15 @@ From OKX Documentation
 ]]
 */
 
-const _parseFloat = parseFloat
+const _parseFloat = parseFloat;
 
 const toKline = fToKline({
+  isNotVolume: true,
   h:2,
   l:3,
   c:4,
   crDate: (v) => _parseFloat(v),
   crValue: (v) => roundByOHLC(parseFloat(v)),
-  crVolume: () => 0
 });
 
 export default toKline

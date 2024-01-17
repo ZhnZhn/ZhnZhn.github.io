@@ -50,9 +50,10 @@ const _fCrDataOHLCV = ({
 
 const fToKline = (options) => crAdapterOHLCV({
   isAth: false,
+  isVolume: !options.isNotVolume,
   getArr: options.getArr || _fCrDataOHLCV(options),
   toDate: FN_IDENTITY,
   crAddConfig: _fCrAddConfig(options.crAddConfig)
-});
+})
 
 export default fToKline

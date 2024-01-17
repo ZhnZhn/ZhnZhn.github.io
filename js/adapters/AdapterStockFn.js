@@ -5,9 +5,11 @@ exports.toStockSeriesData = void 0;
 var _AdapterFn = require("./AdapterFn");
 var _pointFn = require("./pointFn");
 const _isUndef = v => typeof v === 'undefined';
+const _getNotEmptyErr = arr => arr.length === 0 ? void 0 : arr;
 const toStockSeriesData = _ref => {
   let {
     isAth = true,
+    isVolume = true,
     arr = [],
     toDate = _AdapterFn.ymdhmsToUTC,
     seriaOption,
@@ -56,18 +58,20 @@ const toStockSeriesData = _ref => {
       dO.push([_date, open]);
       dH.push([_date, high]);
       dL.push([_date, low]);
-      dV.push([_date, volume]);
-      dVc.push((0, _pointFn.crVolumePoint)({
-        open,
-        close,
-        volume,
-        date: _date,
-        option: {
-          _high: high,
-          _low: low
-        }
-      }));
-      dMfi.push([date, close, high, low, close, volume]);
+      if (isVolume) {
+        dV.push([_date, volume]);
+        dVc.push((0, _pointFn.crVolumePoint)({
+          open,
+          close,
+          volume,
+          date: _date,
+          option: {
+            _high: high,
+            _low: low
+          }
+        }));
+        dMfi.push([date, close, high, low, close, volume]);
+      }
       if (isAth) {
         dATH.push(!_isUndef(_prevClose) ? (0, _pointFn.crAthPoint)({
           date: _date,
@@ -89,10 +93,10 @@ const toStockSeriesData = _ref => {
     dL,
     minClose,
     maxClose,
-    dVc,
-    dV,
-    dATH: dATH.length === 0 ? void 0 : dATH,
-    dMfi,
+    dVc: _getNotEmptyErr(dVc),
+    dV: _getNotEmptyErr(dV),
+    dATH: _getNotEmptyErr(dATH),
+    dMfi: _getNotEmptyErr(dMfi),
     isNotZoomToMinMax,
     isDrawDeltaExtrems,
     seriaType,
