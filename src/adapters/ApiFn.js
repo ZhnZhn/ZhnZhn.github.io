@@ -1,4 +1,7 @@
-import { LT_BT } from '../constants/LoadType';
+import {
+  LT_BT,
+  LT_CB 
+} from '../constants/LoadType';
 
 import {
   isArr,
@@ -11,7 +14,7 @@ const _isStr = v => typeof v === "string";
 const _crAllOriginsUrl = (
   url,
   { proxy, loadId }
-) => loadId === LT_BT
+) => loadId === LT_BT || loadId === LT_CB
   ? url
   : proxy
      ? `${proxy}${url}`

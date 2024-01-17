@@ -10,7 +10,7 @@ const _crAllOriginsUrl = (url, _ref) => {
     proxy,
     loadId
   } = _ref;
-  return loadId === _LoadType.LT_BT ? url : proxy ? `${proxy}${url}` : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+  return loadId === _LoadType.LT_BT || loadId === _LoadType.LT_CB ? url : proxy ? `${proxy}${url}` : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
 };
 const fCrDfUrl = crDfUrl => option => {
   const {
