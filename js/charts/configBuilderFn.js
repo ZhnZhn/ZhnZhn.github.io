@@ -144,10 +144,10 @@ const fAddZhPoints = function (data, propName) {
   if (propName === void 0) {
     propName = 'zhIsMfi';
   }
-  return config => fAdd({
+  return config => data ? fAdd({
     zhPoints: data,
     [propName]: true
-  })(config);
+  })(config) : config;
 };
 exports.fAddZhPoints = fAddZhPoints;
 const fAddSeriaBy = (index, obj) => config => {

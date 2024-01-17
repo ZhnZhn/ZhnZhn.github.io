@@ -226,10 +226,10 @@ export const fAddMinMax = (
 export const fAddZhPoints = (
   data,
   propName='zhIsMfi'
-) => config => fAdd({
+) => config => data ? fAdd({
    zhPoints: data,
    [propName]: true
-})(config)
+})(config) : config
 
   export const fAddSeriaBy = (
   index,
