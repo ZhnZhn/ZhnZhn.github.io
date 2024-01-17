@@ -1,0 +1,28 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/okx/KxApi.js"
+ ],
+ "file": "../../../src/adapters/okx/KxApi.js",
+ "names": [
+  "_ApiFn",
+  "require",
+  "API_URL",
+  "getData",
+  "json",
+  "data",
+  "_crDfUrl",
+  "pair",
+  "timeframe",
+  "limit",
+  "_rCrUrl",
+  "DF",
+  "fCrDfUrl",
+  "KxApi",
+  "fRouteApi",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAKA,MAAMC,OAAO,GAAG,mCAAmC;AAEnD,MAAMC,OAAO,GAAIC,IAAI,IAAK,CAACA,IAAI,IAAI,CAAC,CAAC,EAAEC,IAAI;AAE3C,MAAMC,QAAQ,GAAGA,CACfC,IAAI,EACJC,SAAS,EACTC,KAAK,KACD,GAAEP,OAAQ,8BAA6BK,IAAK,QAAOC,SAAU,UAASC,KAAM,EAAC;AAEnF,MAAMC,OAAO,GAAG;EACdC,EAAE,EAAE,IAAAC,eAAQ,EAACN,QAAQ;AACvB,CAAC;AAED,MAAMO,KAAK,GAAG,IAAAC,gBAAS,EAACJ,OAAO,EAAEP,OAAO,CAAC;AAAC,IAAAY,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAE3BJ,KAAK"
+}

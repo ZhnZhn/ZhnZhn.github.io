@@ -4,6 +4,6 @@ import toKline from './toKline'
 const _rAdapter = {
   DF: toKline
 }
-, CbAdapter = crAdapterRouter(_rAdapter);
+, KxAdapter = crAdapterRouter(_rAdapter);
 
-export default CbAdapter
+export default KxAdapter

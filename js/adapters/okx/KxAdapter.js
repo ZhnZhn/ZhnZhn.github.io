@@ -8,6 +8,6 @@ var _toKline = _interopRequireDefault(require("./toKline"));
 const _rAdapter = {
     DF: _toKline.default
   },
-  CbAdapter = (0, _crAdapterRouter.default)(_rAdapter);
-var _default = exports.default = CbAdapter;
-//# sourceMappingURL=CbAdapter.js.map
+  KxAdapter = (0, _crAdapterRouter.default)(_rAdapter);
+var _default = exports.default = KxAdapter;
+//# sourceMappingURL=KxAdapter.js.map

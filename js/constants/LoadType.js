@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isEstat = exports.isEmber = exports.LT_WL = exports.LT_WB = exports.LT_WATCH_LIST = exports.LT_UN = exports.LT_UKS = exports.LT_TW = exports.LT_SWS = exports.LT_SIR = exports.LT_SFL = exports.LT_SDN = exports.LT_QCT = exports.LT_Q = exports.LT_NST_2 = exports.LT_NST = exports.LT_KR = exports.LT_KC = exports.LT_IRE = exports.LT_INTR = exports.LT_IEX = exports.LT_GT = exports.LT_FS = exports.LT_FMP = exports.LT_FAO = exports.LT_EU_STAT = exports.LT_EMB = exports.LT_EIA = exports.LT_EI = exports.LT_DBN = exports.LT_CRC = exports.LT_CP = exports.LT_CM = exports.LT_CL = exports.LT_CG = exports.LT_CB = exports.LT_BT = exports.LT_BN = exports.LT_BLS = exports.LT_BF = exports.LT_BEA = exports.LT_AL = void 0;
+exports.isEstat = exports.isEmber = exports.LT_WL = exports.LT_WB = exports.LT_WATCH_LIST = exports.LT_UN = exports.LT_UKS = exports.LT_TW = exports.LT_SWS = exports.LT_SIR = exports.LT_SFL = exports.LT_SDN = exports.LT_QCT = exports.LT_Q = exports.LT_NST_2 = exports.LT_NST = exports.LT_KX = exports.LT_KR = exports.LT_KC = exports.LT_IRE = exports.LT_INTR = exports.LT_IEX = exports.LT_GT = exports.LT_FS = exports.LT_FMP = exports.LT_FAO = exports.LT_EU_STAT = exports.LT_EMB = exports.LT_EIA = exports.LT_EI = exports.LT_DBN = exports.LT_CRC = exports.LT_CP = exports.LT_CM = exports.LT_CL = exports.LT_CG = exports.LT_CB = exports.LT_BT = exports.LT_BN = exports.LT_BLS = exports.LT_BF = exports.LT_BEA = exports.LT_AL = void 0;
 const LT_Q = exports.LT_Q = 'Q';
 const LT_QCT = exports.LT_QCT = 'QCT';
 const LT_AL = exports.LT_AL = 'AL';
@@ -40,6 +40,7 @@ const LT_BT = exports.LT_BT = 'BT';
 const LT_KR = exports.LT_KR = 'KR';
 const LT_KC = exports.LT_KC = 'KC';
 const LT_GT = exports.LT_GT = 'GT';
+const LT_KX = exports.LT_KX = 'KX';
 const LT_WL = exports.LT_WL = 'WL';
 const LT_WATCH_LIST = exports.LT_WATCH_LIST = 'WL_WATCH_LIST';
 const isEstat = loadId => loadId === LT_EU_STAT;

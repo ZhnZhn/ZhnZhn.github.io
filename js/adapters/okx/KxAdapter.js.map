@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/adapters/coinbase/CbAdapter.js"
+  "../../../src/adapters/okx/KxAdapter.js"
  ],
- "file": "../../../src/adapters/coinbase/CbAdapter.js",
+ "file": "../../../src/adapters/okx/KxAdapter.js",
  "names": [
   "_crAdapterRouter",
   "_interopRequireDefault",
@@ -12,7 +12,7 @@
   "_rAdapter",
   "DF",
   "toKline",
-  "CbAdapter",
+  "KxAdapter",
   "crAdapterRouter",
   "_default",
   "exports",
