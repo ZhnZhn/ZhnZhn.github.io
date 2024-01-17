@@ -13,11 +13,11 @@ const _crInfo = ({ title, _nativeUrl }) => ({
 const _crMvOption = (
   btTitle,
   currency,
-  dVolume
+  data
 ) => ({
   btTitle,
   title: `${btTitle} ${currency}`,
-  dVolume
+  data
 });
 
 const crData = ({ prices }) => prices

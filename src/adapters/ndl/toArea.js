@@ -170,8 +170,8 @@ const toArea = (json, option) => {
         fAddSplitRatio(dataSplitRatio, minY, maxY),
         fAddMiniVolume({
           id: chartId,
-          dColumn: dataVolumeColumn,
-          dVolume: dataVolume
+          data: dataVolume,
+          dColumn: dataVolumeColumn          
         }),
         fAddMiniATH({ id: chartId, data: dataATH }),
         fAddMiniHL({ id: chartId, data: dataHighLow }),

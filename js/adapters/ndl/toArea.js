@@ -95,8 +95,8 @@ const toArea = (json, option) => {
       info: (0, _NdlFn.crDatasetInfo)(json)
     }), (0, _configBuilderFn.fAddLegend)(legend), (0, _stockBuilderFn.fAddDividend)(dataExDividend, minY, maxY), (0, _stockBuilderFn.fAddSplitRatio)(dataSplitRatio, minY, maxY), (0, _stockBuilderFn.fAddMiniVolume)({
       id: chartId,
-      dColumn: dataVolumeColumn,
-      dVolume: dataVolume
+      data: dataVolume,
+      dColumn: dataVolumeColumn
     }), (0, _stockBuilderFn.fAddMiniATH)({
       id: chartId,
       data: dataATH
@@ -106,6 +106,5 @@ const toArea = (json, option) => {
     }), ...[_isMfi(columnNames) && (0, _configBuilderFn.fAddZhPoints)(zhPoints), _isMomAth(columnNames) && (0, _configBuilderFn.fAddZhPoints)(zhPoints, 'zhIsMomAth')].filter(Boolean), _configBuilderFn.toConfig)
   };
 };
-var _default = toArea;
-exports.default = _default;
+var _default = exports.default = toArea;
 //# sourceMappingURL=toArea.js.map

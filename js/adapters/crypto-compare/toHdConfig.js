@@ -8,7 +8,7 @@ var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 var _fnAdapter = require("./fnAdapter");
 const _crTitle = (title, items) => {
   const _time = (0, _fnAdapter.getValue)(items[2]) === 'histoday' ? '00:00 GMT+0' : 'GMT+0';
-  return title + ": Values on " + _time;
+  return `${title}: Values on ${_time}`;
 };
 const _getTsym = (json, option) => {
   const {
@@ -32,7 +32,7 @@ const _crSubtitle = (json, option) => {
       tsym,
       type
     } = _getTsym(json, option);
-  return exchange + ": " + value + "/" + tsym + " " + type;
+  return `${exchange}: ${value}/${tsym} ${type}`;
 };
 const _crBtTitleTo = (json, option) => {
   const {
@@ -40,10 +40,10 @@ const _crBtTitleTo = (json, option) => {
   } = _getTsym(json, option);
   return tsym;
 };
-const _crMiniVolume = (title, dColumn, dVolume) => ({
-  btTitle: "Volume " + title,
+const _crMiniVolume = (title, dColumn, data) => ({
+  btTitle: `Volume ${title}`,
   dColumn,
-  dVolume
+  data
 });
 const trOption = (option, json) => {
   const {
@@ -78,6 +78,5 @@ const toHdConfig = (0, _crAdapterType.default)({
   trOption,
   addToConfig
 });
-var _default = toHdConfig;
-exports.default = _default;
+var _default = exports.default = toHdConfig;
 //# sourceMappingURL=toHdConfig.js.map

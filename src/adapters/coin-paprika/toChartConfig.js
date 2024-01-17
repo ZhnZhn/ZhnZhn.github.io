@@ -4,12 +4,13 @@ import { crData, addConfOption } from './fnAdapter';
 
 const _crMvOption = (
   btTitle,
-  dVolume,
+  data,
   dColumn
 ) => ({
   btTitle,
   title: `${btTitle} USD`,
-  dVolume, dColumn
+  data, 
+  dColumn
 });
 
 const addToConfig = (

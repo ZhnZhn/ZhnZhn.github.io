@@ -17,10 +17,10 @@ const _crInfo = _ref => {
     description: _crDescription(_nativeUrl)
   };
 };
-const _crMvOption = (btTitle, currency, dVolume) => ({
+const _crMvOption = (btTitle, currency, data) => ({
   btTitle,
-  title: btTitle + " " + currency,
-  dVolume
+  title: `${btTitle} ${currency}`,
+  data
 });
 const crData = _ref2 => {
     let {
@@ -46,6 +46,5 @@ const toChart = (0, _crAdapterType.default)({
   addConfOption,
   addToConfig
 });
-var _default = toChart;
-exports.default = _default;
+var _default = exports.default = toChart;
 //# sourceMappingURL=toChart.js.map

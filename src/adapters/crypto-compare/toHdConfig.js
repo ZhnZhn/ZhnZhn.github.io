@@ -43,11 +43,11 @@ const _crBtTitleTo = (json, option) => {
 const _crMiniVolume = (
   title,
   dColumn,
-  dVolume
+  data
 ) => ({
   btTitle: `Volume ${title}`,
   dColumn,
-  dVolume
+  data
 });
 
 const trOption = (option, json) => {

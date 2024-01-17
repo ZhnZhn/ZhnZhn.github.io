@@ -6,10 +6,10 @@ exports.default = void 0;
 var _stockBuilderFn = require("../../charts/stockBuilderFn");
 var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 var _fnAdapter = require("./fnAdapter");
-const _crMvOption = (btTitle, dVolume, dColumn) => ({
+const _crMvOption = (btTitle, data, dColumn) => ({
   btTitle,
-  title: btTitle + " USD",
-  dVolume,
+  title: `${btTitle} USD`,
+  data,
   dColumn
 });
 const addToConfig = (config, json, option, data) => {
@@ -25,6 +25,5 @@ const toChartConfig = (0, _crAdapterType.default)({
   addConfOption: _fnAdapter.addConfOption,
   addToConfig
 });
-var _default = toChartConfig;
-exports.default = _default;
+var _default = exports.default = toChartConfig;
 //# sourceMappingURL=toChartConfig.js.map

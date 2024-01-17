@@ -69,7 +69,7 @@ const _factoryAddMini = (
 );
 
 export const fAddMiniVolume = _factoryAddMini(
-  'dVolume',
+  'data',
   crMiniVolumeConfig
 )
 
@@ -173,8 +173,8 @@ export const crStockConfig = (
         maxY: maxClose,
         isNotZoomToMinMax,
         isDrawDeltaExtrems
-     }),
-     fAddMiniVolume({ id, dColumn: dVc, dVolume: dV }),
+     }),     
+     fAddMiniVolume({ id, data: dV, dColumn: dVc }),
      fAddMiniATH({ id, data: dATH }),
      _fSetStockSerias(seriaType, seriaWidth, dC, dH, dL, dO)
   );

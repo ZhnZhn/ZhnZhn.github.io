@@ -20,22 +20,17 @@ const _crScatterSeria = (color, pointFormatter, data) => ({
   _crDividendSeria = data => _crScatterSeria(_Color.COLOR_EX_DIVIDEND, _Tooltip.tooltipExDividend, data),
   _crSplitRatioSeria = data => _crScatterSeria(_Color.COLOR_SPLIT_RATIO, _Tooltip.tooltipSplitRatio, data);
 const _factoryAddMini = (propName, crMiniConfig) => option => config => (0, _configBuilderFn._addMini)(option[propName], option, crMiniConfig, config);
-const fAddMiniVolume = _factoryAddMini('dVolume', _crMiniConfigFn.crMiniVolumeConfig);
-exports.fAddMiniVolume = fAddMiniVolume;
+const fAddMiniVolume = exports.fAddMiniVolume = _factoryAddMini('data', _crMiniConfigFn.crMiniVolumeConfig);
 const fAddMiniVolumes = arrOption => config => {
   arrOption.forEach(option => fAddMiniVolume(option)(config));
   return config;
 };
 exports.fAddMiniVolumes = fAddMiniVolumes;
-const fAddMiniATH = _factoryAddMini('data', _crMiniConfigFn.crMiniATHConfig);
-exports.fAddMiniATH = fAddMiniATH;
-const fAddMiniHL = _factoryAddMini('data', _crMiniConfigFn.crMiniHLConfig);
-exports.fAddMiniHL = fAddMiniHL;
+const fAddMiniATH = exports.fAddMiniATH = _factoryAddMini('data', _crMiniConfigFn.crMiniATHConfig);
+const fAddMiniHL = exports.fAddMiniHL = _factoryAddMini('data', _crMiniConfigFn.crMiniHLConfig);
 const _factoryAddScatterBottom = (crSeria, seriaName) => (data, min, max) => config => (0, _configBuilderFn._fAddScatterBottom)(crSeria(data), seriaName, min, max)(config);
-const fAddDividend = _factoryAddScatterBottom(_crDividendSeria, 'Dividend');
-exports.fAddDividend = fAddDividend;
-const fAddSplitRatio = _factoryAddScatterBottom(_crSplitRatioSeria, 'Split Ratio');
-exports.fAddSplitRatio = fAddSplitRatio;
+const fAddDividend = exports.fAddDividend = _factoryAddScatterBottom(_crDividendSeria, 'Dividend');
+const fAddSplitRatio = exports.fAddSplitRatio = _factoryAddScatterBottom(_crSplitRatioSeria, 'Split Ratio');
 const _crSeriaOption = (color, lineWidth) => ({
   type: 'line',
   visible: false,
@@ -81,8 +76,8 @@ const crStockConfig = (id, option) => {
     isDrawDeltaExtrems
   }), fAddMiniVolume({
     id,
-    dColumn: dVc,
-    dVolume: dV
+    data: dV,
+    dColumn: dVc
   }), fAddMiniATH({
     id,
     data: dATH

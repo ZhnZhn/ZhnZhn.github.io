@@ -50,8 +50,8 @@ const crMiniVolumeConfig = _ref => {
   let {
     btTitle = 'Volume',
     title,
+    data,
     dColumn = [],
-    dVolume,
     tooltipColumn
   } = _ref;
   const _title = title || btTitle,
@@ -62,8 +62,8 @@ const crMiniVolumeConfig = _ref => {
       title: (0, _indicatorBuilderFn.crIndicatorTitle)(_title),
       legend: (0, _indicatorBuilderFn.crLegendVolume)(_title)
     }), (0, _indicatorBuilderFn.fAssignToSeries)(0, {
+      data,
       zhValueText: "Volume",
-      data: dVolume,
       visible: !_hasColumn,
       name: "Spline",
       point: (0, _Chart.fEventsMouseOver)(_handleMouseOver.default)
@@ -89,8 +89,8 @@ const crMiniVolumeConfig = _ref => {
       },
       tooltip: tooltipColumn || (0, _Chart.fTooltip)(_Tooltip.tooltipVolumeTdmyIf)
     });
-    series.push((0, _indicatorBuilderFn.crIndicatorLineSeria)('Median', COLOR_MEDIAN, (0, _seriaFn.median)(dVolume)));
-    series.push((0, _indicatorBuilderFn.crIndicatorLineSeria)('Mean', COLOR_MEAN, (0, _seriaFn.mean)(dVolume)));
+    series.push((0, _indicatorBuilderFn.crIndicatorLineSeria)('Median', COLOR_MEDIAN, (0, _seriaFn.median)(data)));
+    series.push((0, _indicatorBuilderFn.crIndicatorLineSeria)('Mean', COLOR_MEAN, (0, _seriaFn.mean)(data)));
   }
   return {
     btTitle,

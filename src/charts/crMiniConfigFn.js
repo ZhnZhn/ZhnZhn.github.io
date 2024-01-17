@@ -72,8 +72,8 @@ export const crMiniMfiConfig = (
 export const crMiniVolumeConfig = ({
   btTitle='Volume',
   title,
+  data,
   dColumn=[],
-  dVolume,
   tooltipColumn
 }) => {
   const _title = title || btTitle
@@ -87,8 +87,8 @@ export const crMiniVolumeConfig = ({
       legend: crLegendVolume(_title)
     }),
     fAssignToSeries(0, {
+      data,
       zhValueText: "Volume",
-      data: dVolume,
       visible: !_hasColumn,
       name: "Spline",
       point: fEventsMouseOver(handleMouseOver)
@@ -117,12 +117,12 @@ export const crMiniVolumeConfig = ({
     series.push(crIndicatorLineSeria(
       'Median',
       COLOR_MEDIAN,
-      median(dVolume)
+      median(data)
     ))
     series.push(crIndicatorLineSeria(
       'Mean',
       COLOR_MEAN,
-      mean(dVolume)
+      mean(data)
     ))
   }
 
