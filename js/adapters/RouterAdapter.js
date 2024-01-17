@@ -9,7 +9,7 @@ var _FaoStat = _interopRequireDefault(require("./faostat/FaoStat"));
 var _WorldBank = _interopRequireDefault(require("./world-bank/WorldBank"));
 var _Insee = _interopRequireDefault(require("./insee/Insee"));
 var _StatUk = _interopRequireDefault(require("./stat-uk/StatUk"));
-var _StatNorway = _interopRequireDefault(require("./stat-norway/StatNorway"));
+var _StatNorway = require("./stat-norway/StatNorway");
 var _StatSweden = _interopRequireDefault(require("./stat-sweden/StatSweden"));
 var _StatFinland = _interopRequireDefault(require("./stat-finland/StatFinland"));
 var _StatDenmark = _interopRequireDefault(require("./stat-denmark/StatDenmark"));
@@ -39,6 +39,7 @@ var _Bf = _interopRequireDefault(require("./bitfinex/Bf"));
 var _Kr = _interopRequireDefault(require("./kraken/Kr"));
 var _Kc = _interopRequireDefault(require("./kucoin/Kc"));
 var _Gt = _interopRequireDefault(require("./gateio/Gt"));
+var _Kx = _interopRequireDefault(require("./okx/Kx"));
 const RouterAdapter = {
   Ndl: _Ndl.default,
   DbNomics: _DbNomics.default,
@@ -51,7 +52,8 @@ const RouterAdapter = {
   WorldBank: _WorldBank.default,
   Insee: _Insee.default,
   StatUk: _StatUk.default,
-  ..._StatNorway.default,
+  StatNorway: _StatNorway.StatNorway,
+  StatNorway2: _StatNorway.StatNorway2,
   StatSweden: _StatSweden.default,
   StatFinland: _StatFinland.default,
   StatDenmark: _StatDenmark.default,
@@ -75,7 +77,8 @@ const RouterAdapter = {
   Bf: _Bf.default,
   Kr: _Kr.default,
   Kc: _Kc.default,
-  Gt: _Gt.default
+  Gt: _Gt.default,
+  Kx: _Kx.default
 };
 var _default = exports.default = RouterAdapter;
 //# sourceMappingURL=RouterAdapter.js.map

@@ -5,11 +5,18 @@
  ],
  "file": "../../../src/adapters/stat-norway/StatNorway.js",
  "names": [
+  "_ApiDataset",
+  "_interopRequireDefault",
+  "require",
+  "_StatJsonAdapter",
+  "_fStatJsonAdapter",
   "DATA_URL",
   "StatNorway",
+  "exports",
   "api",
   "adapter",
-  "StatNorway2"
+  "StatNorway2",
+  "fStatJsonAdapter"
  ],
- "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AAEA,MAAMA,QAAQ,GAAG,qCAAjB;AAEA,MAAMC,UAAU,GAAG;AACjBA,EAAAA,UAAU,EAAE;AAAEC,IAAAA,GAAG,EAAHA,mBAAF;AAAOC,IAAAA,OAAO,EAAPA;AAAP,GADK;AAEjBC,EAAAA,WAAW,EAAE,+BAAiBJ,QAAjB;AAFI,CAAnB;eAKeC,U"
+ "mappings": ";;;;;AAAA,IAAAA,WAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,gBAAA,GAAAF,sBAAA,CAAAC,OAAA;AACA,IAAAE,iBAAA,GAAAH,sBAAA,CAAAC,OAAA;AAEA,MAAMG,QAAQ,GAAG,qCAAqC;AAE/C,MAAMC,UAAU,GAAAC,OAAA,CAAAD,UAAA,GAAG;EAAEE,GAAG,EAAHA,mBAAG;EAAEC,OAAO,EAAPA;AAAQ,CAAC;AACnC,MAAMC,WAAW,GAAAH,OAAA,CAAAG,WAAA,GAAG,IAAAC,yBAAgB,EAACN,QAAQ,CAAC"
 }

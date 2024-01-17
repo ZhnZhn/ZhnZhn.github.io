@@ -1,11 +1,13 @@
-
 import EuroStat from './eurostat/EuroStat'
 import UnComtrade from './uncomtrade/UnComtrade'
 import FaoStat from './faostat/FaoStat'
 import WorldBank from './world-bank/WorldBank'
 import Insee from './insee/Insee'
 import StatUk from './stat-uk/StatUk'
-import StatNorway from './stat-norway/StatNorway'
+import {
+  StatNorway,
+  StatNorway2
+} from './stat-norway/StatNorway'
 import StatSweden from './stat-sweden/StatSweden'
 import StatFinland from './stat-finland/StatFinland'
 import StatDenmark from './stat-denmark/StatDenmark'
@@ -35,6 +37,7 @@ import Bf from './bitfinex/Bf'
 import Kr from './kraken/Kr'
 import Kc from './kucoin/Kc'
 import Gt from './gateio/Gt'
+import Kx from './okx/Kx'
 
 const RouterAdapter = {
   Ndl,
@@ -48,7 +51,8 @@ const RouterAdapter = {
   WorldBank,
   Insee,
   StatUk,
-  ...StatNorway,
+  StatNorway,
+  StatNorway2,
   StatSweden,
   StatFinland,
   StatDenmark,
@@ -72,7 +76,8 @@ const RouterAdapter = {
   Bf,
   Kr,
   Kc,
-  Gt
+  Gt,
+  Kx
 };
 
 export default RouterAdapter

@@ -4,9 +4,5 @@ import fStatJsonAdapter from '../stat-json/fStatJsonAdapter';
 
 const DATA_URL = 'https://data.ssb.no/api/v0/en/table';
 
-const StatNorway = {
-  StatNorway: { api, adapter },
-  StatNorway2: fStatJsonAdapter(DATA_URL)
-};
-
-export default StatNorway
+export const StatNorway = { api, adapter }
+export const StatNorway2 = fStatJsonAdapter(DATA_URL)
