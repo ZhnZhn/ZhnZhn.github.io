@@ -42,11 +42,14 @@ const _fCrItems = crValue => arr => arr.map(c => {
 })
 , _crValueT1 = (b, q) => `${b}-${q}`
 , _crValueT2 = (b, q) => `${b}${q}`
+, _crValueT3 = (b, q) => `${b}_${q}`
 , _rCrItems = {
   //cb-items
   t1: _fCrItems(_crValueT1),
   //bf-items
-  t2: _fCrItems(_crValueT2)
+  t2: _fCrItems(_crValueT2),
+  //gt-items
+  t3: _fCrItems(_crValueT3)
 };
 
 const _crItems = (json, optionJsonProp) => {
