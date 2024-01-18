@@ -1,9 +1,10 @@
 import {
-  LT_Q,  
+  LT_Q,
   LT_DBN,
   LT_EI,
   LT_EMB,
   LT_IRE,
+  LT_EN,
   LT_AL,
   LT_IEX,
   LT_FMP,
@@ -67,6 +68,7 @@ import Ndl from './ndl/Ndl'
 import DbNomics from './db-nomics/DbNomics'
 import Ei from './ei/Ei'
 import Ember from './ember/Ember'
+import En from './environment/En'
 import Irena from './irena/Irena'
 import Crc from './crypto-compare/Crc'
 import Cg from './coin-gecko/Cg'
@@ -89,6 +91,7 @@ const RouterAdapter = {
   [LT_EI]: Ei,
   [LT_EMB]: Ember,
   [LT_IRE]: Irena,
+  [LT_EN]: En,
 
   [LT_UN]: UnComtrade,
   [LT_FAO]: FaoStat,

@@ -6,9 +6,12 @@ export const LT_IEX = 'IEX'
 export const LT_FMP = 'FMP'
 export const LT_TW = 'TW'
 export const LT_DBN = 'DBN'
+
 export const LT_EI = 'EI'
 export const LT_EMB = 'EMB'
 export const LT_IRE = 'IRE'
+export const LT_EN = 'EN'
+
 export const LT_EU_STAT = 'EU_STAT'
 export const LT_FS = 'FS'
 export const LT_UKS = 'UKS'

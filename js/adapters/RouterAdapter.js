@@ -27,6 +27,7 @@ var _Ndl = _interopRequireDefault(require("./ndl/Ndl"));
 var _DbNomics = _interopRequireDefault(require("./db-nomics/DbNomics"));
 var _Ei = _interopRequireDefault(require("./ei/Ei"));
 var _Ember = _interopRequireDefault(require("./ember/Ember"));
+var _En = _interopRequireDefault(require("./environment/En"));
 var _Irena = _interopRequireDefault(require("./irena/Irena"));
 var _Crc = _interopRequireDefault(require("./crypto-compare/Crc"));
 var _Cg = _interopRequireDefault(require("./coin-gecko/Cg"));
@@ -47,6 +48,7 @@ const RouterAdapter = {
   [_LoadType.LT_EI]: _Ei.default,
   [_LoadType.LT_EMB]: _Ember.default,
   [_LoadType.LT_IRE]: _Irena.default,
+  [_LoadType.LT_EN]: _En.default,
   [_LoadType.LT_UN]: _UnComtrade.default,
   [_LoadType.LT_FAO]: _FaoStat.default,
   [_LoadType.LT_WB]: _WorldBank.default,
