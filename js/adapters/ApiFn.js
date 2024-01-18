@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.fRouteApi = exports.fGetRequestUrl = exports.fCrObUrl = exports.fCrDfUrl = void 0;
+exports.fRouteApi = exports.fGetRequestUrl = exports.fCrObUrl = exports.fCrDfUrl = exports.checkResponseData = void 0;
 var _LoadType = require("../constants/LoadType");
 var _AdapterFn = require("./AdapterFn");
 const _isStr = v => typeof v === "string";
@@ -59,4 +59,13 @@ const fRouteApi = (rCrUrl, getData) => ({
   checkResponse: _fCheckResponse(getData)
 });
 exports.fRouteApi = fRouteApi;
+const checkResponseData = json => {
+  const {
+    data
+  } = json || {};
+  if (!(0, _AdapterFn.isArr)(data)) {
+    throw (0, _AdapterFn.crError)();
+  }
+};
+exports.checkResponseData = checkResponseData;
 //# sourceMappingURL=ApiFn.js.map

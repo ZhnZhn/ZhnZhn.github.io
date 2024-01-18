@@ -1,6 +1,6 @@
 import {
   LT_BT,
-  LT_CB 
+  LT_CB
 } from '../constants/LoadType';
 
 import {
@@ -86,3 +86,10 @@ export const fRouteApi = (
   getRequestUrl: fGetRequestUrl(rCrUrl),
   checkResponse: _fCheckResponse(getData)
 })
+
+export const checkResponseData = (json) => {
+  const { data } = json || {};
+  if (!isArr(data)) {
+    throw crError();
+  }
+}

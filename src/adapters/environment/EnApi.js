@@ -1,8 +1,5 @@
-import {
-  getValue,
-  isArr,
-  crError
-} from '../AdapterFn';
+import { getValue } from '../AdapterFn';
+import { checkResponseData } from '../ApiFn';
 
 const DATA_URL = './data/environment';
 
@@ -18,13 +15,7 @@ const EnApi = {
   getRequestUrl(option){
     return _crLineUrl(option);
   },
-
-  checkResponse(json){
-    const { data } = json || {};
-    if (!isArr(data)) {
-      throw crError();
-    }
-  }
+  checkResponse: checkResponseData
 };
 
 export default EnApi
