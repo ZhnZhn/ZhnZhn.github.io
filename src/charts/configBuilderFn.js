@@ -62,6 +62,14 @@ import {
 const _isArr = Array.isArray
 , _assign = Object.assign;
 
+export const setDataSourceTo = (
+  config,
+  dataSource
+) => {
+  config.zhConfig.dataSource = dataSource
+  return config;
+}
+
 export const fAddCaption = (
   title,
   subtitle
