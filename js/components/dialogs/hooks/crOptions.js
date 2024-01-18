@@ -69,12 +69,15 @@ const _fCrItems = crValue => arr => arr.map(c => {
   }),
   _crValueT1 = (b, q) => `${b}-${q}`,
   _crValueT2 = (b, q) => `${b}${q}`,
+  _crValueT2L = (b, q) => `${b}${q}`.toLowerCase(),
   _crValueT3 = (b, q) => `${b}_${q}`,
   _rCrItems = {
-    //cb-items
+    //cb-items, kc-items, kx-items
     t1: _fCrItems(_crValueT1),
-    //bf-items
+    //bf-items, kr-items
     t2: _fCrItems(_crValueT2),
+    //bt-items
+    t2l: _fCrItems(_crValueT2L),
     //gt-items
     t3: _fCrItems(_crValueT3)
   };
