@@ -1,4 +1,5 @@
 const _isArr = Array.isArray;
+const _notNullOrUndef = v => v != null;
 
 const _crCvItems = arr => arr
  .map(({ c, v, ...restProps }) => ({
@@ -35,36 +36,40 @@ const _crCpItems = arr => arr
     v: id || (`${v}-${(c || '').replace(REG_BLANKS, '-')}`).toLowerCase()
 }));
 
-const _crItems = (json, optionJsonProp) => {
-  const _arr = json[optionJsonProp];
-  if (json.isCv) {
-    return _crCvItems(_arr);
-  }
-  if (json.isNbq) {
-    return _crNbqItems(_arr);
-  }
-  if (json.isCp) {
-    return _crCpItems(_arr);
-  }
-  return _arr[0] && _arr[0].s != null
-    ? _crSItems(_arr)
-    : _arr;
+//cb-items
+const _crT1 = arr => arr.map(c => {
+  const [b, q] = c.split('/')
+  return {c, v: `${b}-${q}`};
+})
+
+const _rCrItems = {
+  t1: _crT1
 };
 
-const _notNullOrUndef = v => v != null;
+const _crItems = (json, optionJsonProp) => {
+  const _arr = json[optionJsonProp]
+  , _crItems = json.isCv
+    ? _crCvItems
+    : json.isNbq
+    ? _crNbqItems
+    : json.isCp
+    ? _crCpItems
+    : _rCrItems[json.type];
 
-const _crPropCaption = arr => {
-   if (!_isArr(arr) || arr.length === 0) {
-     return;
-   }
-   const _items = arr[0];
-   if (_notNullOrUndef(_items.caption)) {
-     return;
-   }
-   if (_notNullOrUndef(_items.c)) {
-     return 'c';
-   }
-}
+  return _crItems
+    ? _crItems(_arr)
+    : _arr[0] && _notNullOrUndef(_arr[0].s)
+        ? _crSItems(_arr)
+        : _arr;
+};
+
+const _crPropCaption = (
+  arr
+) => !_isArr(arr) || arr.length === 0
+  ? void 0
+  : _notNullOrUndef(arr[0].c)
+     ? 'c'
+     : void 0;
 
 const crOptions = (
   json,
