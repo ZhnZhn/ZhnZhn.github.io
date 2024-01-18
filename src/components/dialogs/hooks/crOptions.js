@@ -36,14 +36,17 @@ const _crCpItems = arr => arr
     v: id || (`${v}-${(c || '').replace(REG_BLANKS, '-')}`).toLowerCase()
 }));
 
-//cb-items
-const _crT1 = arr => arr.map(c => {
-  const [b, q] = c.split('/')
-  return {c, v: `${b}-${q}`};
+const _fCrItems = crValue => arr => arr.map(c => {
+  const [b, q] = c.split('/');
+  return {c, v: crValue(b, q)};
 })
-
-const _rCrItems = {
-  t1: _crT1
+, _crValueT1 = (b, q) => `${b}-${q}`
+, _crValueT2 = (b, q) => `${b}${q}`
+, _rCrItems = {
+  //cb-items
+  t1: _fCrItems(_crValueT1),
+  //bf-items
+  t2: _fCrItems(_crValueT2)
 };
 
 const _crItems = (json, optionJsonProp) => {

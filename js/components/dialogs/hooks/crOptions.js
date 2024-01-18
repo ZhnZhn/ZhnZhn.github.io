@@ -60,18 +60,21 @@ const _crCpItems = arr => arr.map(_ref4 => {
     v: id || `${v}-${(c || '').replace(REG_BLANKS, '-')}`.toLowerCase()
   };
 });
-
-//cb-items
-const _crT1 = arr => arr.map(c => {
-  const [b, q] = c.split('/');
-  return {
-    c,
-    v: `${b}-${q}`
+const _fCrItems = crValue => arr => arr.map(c => {
+    const [b, q] = c.split('/');
+    return {
+      c,
+      v: crValue(b, q)
+    };
+  }),
+  _crValueT1 = (b, q) => `${b}-${q}`,
+  _crValueT2 = (b, q) => `${b}${q}`,
+  _rCrItems = {
+    //cb-items
+    t1: _fCrItems(_crValueT1),
+    //bf-items
+    t2: _fCrItems(_crValueT2)
   };
-});
-const _rCrItems = {
-  t1: _crT1
-};
 const _crItems = (json, optionJsonProp) => {
   const _arr = json[optionJsonProp],
     _crItems = json.isCv ? _crCvItems : json.isNbq ? _crNbqItems : json.isCp ? _crCpItems : _rCrItems[json.type];
