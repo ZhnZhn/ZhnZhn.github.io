@@ -24,7 +24,7 @@ const toKline = (0, _fToKline.default)({
   h: 3,
   l: 4,
   c: 2,
-  v: 1,
+  v: 6,
   crDate: v => _parseFloat(v) * 1000,
   crValue: v => (0, _AdapterFn.roundByOHLC)(_parseFloat(v)),
   crVolume: v => _parseFloat(v)

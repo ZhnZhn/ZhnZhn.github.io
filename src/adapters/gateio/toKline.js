@@ -22,7 +22,7 @@ const toKline = fToKline({
   h: 3,
   l: 4,
   c: 2,
-  v: 1,
+  v: 6,
   crDate: (v) => _parseFloat(v)*1000,
   crValue: (v) => roundByOHLC(_parseFloat(v)),
   crVolume: (v) => _parseFloat(v)
