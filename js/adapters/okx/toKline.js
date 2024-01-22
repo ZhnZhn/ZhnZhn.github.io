@@ -2,7 +2,6 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _AdapterFn = require("../AdapterFn");
 var _fToKline = require("../fToKline");
 /*
 From OKX Documentation
@@ -16,14 +15,12 @@ From OKX Documentation
 ]]
 */
 
-const _parseFloat = parseFloat;
 const toKline = (0, _fToKline.fToKline)({
+  ...(0, _fToKline.crOptionsFromStr)(false),
   isNotVolume: true,
   h: 2,
   l: 3,
-  c: 4,
-  crDate: v => _parseFloat(v),
-  crValue: v => (0, _AdapterFn.roundByOHLC)(parseFloat(v))
+  c: 4
 });
 var _default = exports.default = toKline;
 //# sourceMappingURL=toKline.js.map

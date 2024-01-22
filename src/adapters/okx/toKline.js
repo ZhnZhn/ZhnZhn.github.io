@@ -1,5 +1,7 @@
-import { roundByOHLC } from '../AdapterFn';
-import { fToKline } from '../fToKline';
+import {
+  crOptionsFromStr,
+  fToKline
+} from '../fToKline';
 
 /*
 From OKX Documentation
@@ -13,15 +15,12 @@ From OKX Documentation
 ]]
 */
 
-const _parseFloat = parseFloat;
-
 const toKline = fToKline({
+  ...crOptionsFromStr(false),
   isNotVolume: true,
   h:2,
   l:3,
-  c:4,
-  crDate: (v) => _parseFloat(v),
-  crValue: (v) => roundByOHLC(parseFloat(v)),
+  c:4
 });
 
 export default toKline
