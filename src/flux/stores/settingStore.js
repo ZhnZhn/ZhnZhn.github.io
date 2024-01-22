@@ -14,6 +14,7 @@ import {
   LT_BLS,
   LT_WL,
   LT_UN,
+  LT_BB,
   LT_BF,
   LT_KR,
   LT_KC,
@@ -30,7 +31,8 @@ const _withApiKey = [
 const _withProxyServer = [
   LT_Q,
   LT_QCT,
-  LT_UN
+  LT_UN,
+  LT_BB
 ];
 const _withProxyServer2 = [
   ..._withProxyServer,

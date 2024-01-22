@@ -35,6 +35,7 @@ import {
   LT_KC,
   LT_GT,
   LT_KX,
+  LT_BB,
   LT_UN,
   LT_FAO,
   LT_WB,
@@ -83,6 +84,7 @@ import Kr from './kraken/Kr'
 import Kc from './kucoin/Kc'
 import Gt from './gateio/Gt'
 import Kx from './okx/Kx'
+import Bb from './bybit/Bb'
 
 const RouterAdapter = {
   [LT_Q]: Ndl,
@@ -130,6 +132,7 @@ const RouterAdapter = {
   [LT_KC]: Kc,
   [LT_GT]: Gt,
   [LT_KX]: Kx,
+  [LT_BB]: Bb,
 
   [LT_WATCH_LIST]: Ndl,
   [LT_WL]: Ndl

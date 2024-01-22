@@ -42,6 +42,7 @@ var _Kr = _interopRequireDefault(require("./kraken/Kr"));
 var _Kc = _interopRequireDefault(require("./kucoin/Kc"));
 var _Gt = _interopRequireDefault(require("./gateio/Gt"));
 var _Kx = _interopRequireDefault(require("./okx/Kx"));
+var _Bb = _interopRequireDefault(require("./bybit/Bb"));
 const RouterAdapter = {
   [_LoadType.LT_Q]: _Ndl.default,
   [_LoadType.LT_DBN]: _DbNomics.default,
@@ -82,6 +83,7 @@ const RouterAdapter = {
   [_LoadType.LT_KC]: _Kc.default,
   [_LoadType.LT_GT]: _Gt.default,
   [_LoadType.LT_KX]: _Kx.default,
+  [_LoadType.LT_BB]: _Bb.default,
   [_LoadType.LT_WATCH_LIST]: _Ndl.default,
   [_LoadType.LT_WL]: _Ndl.default
 };

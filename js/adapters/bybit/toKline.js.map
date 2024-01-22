@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bybit/toKline.js"
+ ],
+ "file": "../../../src/adapters/bybit/toKline.js",
+ "names": [
+  "_fToKline",
+  "require",
+  "toKline",
+  "fToKline",
+  "crOptionsFromStr",
+  "h",
+  "l",
+  "c",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,SAAA,GAAAC,OAAA;AAKA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;AAEA,MAAMC,OAAO,GAAG,IAAAC,kBAAQ,EAAC;EACvB,GAAG,IAAAC,0BAAgB,EAAC,KAAK,CAAC;EAC1BC,CAAC,EAAC,CAAC;EACHC,CAAC,EAAC,CAAC;EACHC,CAAC,EAAC;AACJ,CAAC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYR,OAAO"
+}
