@@ -3,7 +3,8 @@ import {
   FN_NOOP,
   isTypeNumber,
   crError,
-  crZhConfig
+  crZhConfig,
+  roundByOHLC
 } from './AdapterFn';
 import crAdapterOHLCV from './crAdapterOHLCV';
 
@@ -48,12 +49,17 @@ const _fCrDataOHLCV = ({
   return _data.sort(_compareByDate);
 };
 
-const fToKline = (options) => crAdapterOHLCV({
+const _parseFloat = parseFloat;
+export const optionsCrFromStr = {
+  crDate: v => _parseFloat(v)*1000,
+  crValue: v => roundByOHLC(_parseFloat(v)),
+  crVolume: v => _parseFloat(v)
+}
+
+export const fToKline = (options) => crAdapterOHLCV({
   isAth: false,
   isVolume: !options.isNotVolume,
   getArr: options.getArr || _fCrDataOHLCV(options),
   toDate: FN_IDENTITY,
   crAddConfig: _fCrAddConfig(options.crAddConfig)
 })
-
-export default fToKline

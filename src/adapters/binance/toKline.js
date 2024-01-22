@@ -1,6 +1,6 @@
 import { bindTo } from '../AdapterFn';
 import { crItemLink } from '../crFn';
-import fToKline from '../fToKline';
+import { fToKline } from '../fToKline';
 import { CL_PB_8 } from '../CL';
 
 const _crResearchLink = bindTo(crItemLink, 'Binance Research');

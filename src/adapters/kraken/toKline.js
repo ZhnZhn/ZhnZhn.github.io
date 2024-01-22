@@ -1,6 +1,7 @@
-import { roundByOHLC } from '../AdapterFn';
-
-import fToKline from '../fToKline';
+import {
+  optionsCrFromStr,
+  fToKline
+} from '../fToKline';
 
 /*
 From Kraken Documentation
@@ -16,17 +17,15 @@ From Kraken Documentation
 ]]
 */
 
-const _parseFloat = parseFloat;
+
 
 const toKline = fToKline({
+  ...optionsCrFromStr,
   o: 1,
   h: 2,
   l: 3,
   c: 4,
-  v: 6,
-  crDate: (v) => _parseFloat(v)*1000,
-  crValue: (v) => roundByOHLC(_parseFloat(v)),
-  crVolume: (v) => _parseFloat(v)
+  v: 6
 });
 
 export default toKline

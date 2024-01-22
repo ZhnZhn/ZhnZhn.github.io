@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.default = void 0;
+exports.optionsCrFromStr = exports.fToKline = void 0;
 var _AdapterFn = require("./AdapterFn");
 var _crAdapterOHLCV = _interopRequireDefault(require("./crAdapterOHLCV"));
 const _fCrAddConfig = function (crAddConfig) {
@@ -54,6 +54,12 @@ const _fCrDataOHLCV = _ref2 => {
     return _data.sort(_compareByDate);
   };
 };
+const _parseFloat = parseFloat;
+const optionsCrFromStr = exports.optionsCrFromStr = {
+  crDate: v => _parseFloat(v) * 1000,
+  crValue: v => (0, _AdapterFn.roundByOHLC)(_parseFloat(v)),
+  crVolume: v => _parseFloat(v)
+};
 const fToKline = options => (0, _crAdapterOHLCV.default)({
   isAth: false,
   isVolume: !options.isNotVolume,
@@ -61,5 +67,5 @@ const fToKline = options => (0, _crAdapterOHLCV.default)({
   toDate: _AdapterFn.FN_IDENTITY,
   crAddConfig: _fCrAddConfig(options.crAddConfig)
 });
-var _default = exports.default = fToKline;
+exports.fToKline = fToKline;
 //# sourceMappingURL=fToKline.js.map

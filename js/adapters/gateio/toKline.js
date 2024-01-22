@@ -1,10 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _AdapterFn = require("../AdapterFn");
-var _fToKline = _interopRequireDefault(require("../fToKline"));
+var _fToKline = require("../fToKline");
 /*
 From Gate.io Documentation
 [[
@@ -18,16 +16,13 @@ From Gate.io Documentation
 ]]
 */
 
-const _parseFloat = parseFloat;
-const toKline = (0, _fToKline.default)({
+const toKline = (0, _fToKline.fToKline)({
+  ..._fToKline.optionsCrFromStr,
   o: 5,
   h: 3,
   l: 4,
   c: 2,
-  v: 6,
-  crDate: v => _parseFloat(v) * 1000,
-  crValue: v => (0, _AdapterFn.roundByOHLC)(_parseFloat(v)),
-  crVolume: v => _parseFloat(v)
+  v: 6
 });
 var _default = exports.default = toKline;
 //# sourceMappingURL=toKline.js.map

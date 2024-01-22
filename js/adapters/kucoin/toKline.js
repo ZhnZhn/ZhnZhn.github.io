@@ -1,10 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _AdapterFn = require("../AdapterFn");
-var _fToKline = _interopRequireDefault(require("../fToKline"));
+var _fToKline = require("../fToKline");
 /*
 From KuCoin Documentation
 [[
@@ -17,11 +15,8 @@ From KuCoin Documentation
 ]]
 */
 
-const _parseFloat = parseFloat;
-const toKline = (0, _fToKline.default)({
-  crDate: v => _parseFloat(v) * 1000,
-  crValue: v => (0, _AdapterFn.roundByOHLC)(_parseFloat(v)),
-  crVolume: v => _parseFloat(v)
+const toKline = (0, _fToKline.fToKline)({
+  ..._fToKline.optionsCrFromStr
 });
 var _default = exports.default = toKline;
 //# sourceMappingURL=toKline.js.map

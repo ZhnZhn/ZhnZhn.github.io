@@ -1,10 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
-var _fToKline = _interopRequireDefault(require("../fToKline"));
+var _fToKline = require("../fToKline");
 /*
 From Bitfinex Documentation
 [[
@@ -17,7 +16,7 @@ From Bitfinex Documentation
 ]]
 */
 
-const toKline = (0, _fToKline.default)({
+const toKline = (0, _fToKline.fToKline)({
   crValue: v => (0, _AdapterFn.roundByOHLC)(v)
 });
 var _default = exports.default = toKline;

@@ -1,5 +1,5 @@
 import { roundByOHLC } from '../AdapterFn';
-import fToKline from '../fToKline';
+import { fToKline } from '../fToKline';
 
 /*
 From OKX Documentation

@@ -1,6 +1,7 @@
-import { roundByOHLC } from '../AdapterFn';
-
-import fToKline from '../fToKline';
+import {
+  optionsCrFromStr,
+  fToKline
+} from '../fToKline';
 
 /*
 From Gate.io Documentation
@@ -15,17 +16,13 @@ From Gate.io Documentation
 ]]
 */
 
-const _parseFloat = parseFloat;
-
 const toKline = fToKline({
+  ...optionsCrFromStr,
   o: 5,
   h: 3,
   l: 4,
   c: 2,
-  v: 6,
-  crDate: (v) => _parseFloat(v)*1000,
-  crValue: (v) => roundByOHLC(_parseFloat(v)),
-  crVolume: (v) => _parseFloat(v)
+  v: 6
 });
 
 export default toKline

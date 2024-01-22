@@ -1,4 +1,4 @@
-import fToKline from '../fToKline';
+import { fToKline } from '../fToKline';
 
 /*
 From Coinbase Documentation

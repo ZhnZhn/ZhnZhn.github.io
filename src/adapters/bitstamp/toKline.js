@@ -1,5 +1,5 @@
 import { isInArrStr } from '../AdapterFn';
-import fToKline from '../fToKline';
+import { fToKline } from '../fToKline';
 
 /*
 From Bitstamp API Documentation

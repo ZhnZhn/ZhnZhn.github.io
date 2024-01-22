@@ -1,6 +1,7 @@
-import { roundByOHLC } from '../AdapterFn';
-
-import fToKline from '../fToKline';
+import {
+  optionsCrFromStr,
+  fToKline
+} from '../fToKline';
 
 /*
 From KuCoin Documentation
@@ -14,12 +15,8 @@ From KuCoin Documentation
 ]]
 */
 
-const _parseFloat = parseFloat;
-
 const toKline = fToKline({
-  crDate: (v) => _parseFloat(v)*1000,
-  crValue: (v) => roundByOHLC(_parseFloat(v)),
-  crVolume: (v) => _parseFloat(v)
+  ...optionsCrFromStr
 });
 
 export default toKline

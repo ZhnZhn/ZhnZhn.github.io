@@ -1,11 +1,10 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _crFn = require("../crFn");
-var _fToKline = _interopRequireDefault(require("../fToKline"));
+var _fToKline = require("../fToKline");
 var _CL = require("../CL");
 const _crResearchLink = (0, _AdapterFn.bindTo)(_crFn.crItemLink, 'Binance Research');
 const _crTradeLink = (0, _AdapterFn.bindTo)(_crFn.crItemLink, 'Binance Trade Chart');
@@ -40,7 +39,7 @@ From Binance API Documentation
 */
 
 const _crValue = v => parseFloat(v);
-const toKline = (0, _fToKline.default)({
+const toKline = (0, _fToKline.fToKline)({
   d: 6,
   o: 1,
   h: 2,

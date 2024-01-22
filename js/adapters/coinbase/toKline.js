@@ -1,9 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _fToKline = _interopRequireDefault(require("../fToKline"));
+var _fToKline = require("../fToKline");
 /*
 From Coinbase Documentation
 [[
@@ -16,7 +15,7 @@ From Coinbase Documentation
 ]]
 */
 
-const toKline = (0, _fToKline.default)({
+const toKline = (0, _fToKline.fToKline)({
   o: 3,
   h: 2,
   l: 1,
