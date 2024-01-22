@@ -8,22 +8,14 @@ const API_URL = "https://api.bybit.com/v5/market";
 const SYMBOL = "category=spot&symbol";
 const _getData = json => {
   const {
-      result
-    } = json || {},
-    {
-      list,
-      a,
-      b
-    } = result || {};
-  if ((0, _AdapterFn.isArr)(list)) {
-    return list;
-  }
-  if ((0, _AdapterFn.isArr)(a) && (0, _AdapterFn.isArr)(b)) {
-    return {
-      asks: a,
-      bids: b
-    };
-  }
+    list,
+    a,
+    b
+  } = (json || {}).result || {};
+  return (0, _AdapterFn.isArr)(list) ? list : (0, _AdapterFn.isArr)(a) && (0, _AdapterFn.isArr)(b) ? {
+    asks: a,
+    bids: b
+  } : void 0;
 };
 const _crDfUrl = (pair, timeframe, limit) => `${API_URL}/kline?${SYMBOL}=${pair}&interval=${timeframe}&limit=${limit}`;
 const _crObUrl = (pair, limit) => `${API_URL}/orderbook?${SYMBOL}=${pair}&limit=${limit}`;
