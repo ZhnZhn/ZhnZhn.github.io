@@ -40,7 +40,8 @@ const LINK_CONFIGS = [
  ["GateIo", "Gate.io", _crUrl("gate.io")],
  ["Kraken", _crUrl("www.kraken.com")],
  ["KuCoin", _crUrl("www.kucoin.com")],
- ["OKX", _crUrl("okx.com")]
+ ["OKX", _crUrl("okx.com")],
+ ["Bybit", _crUrl("www.bybit.com")]
 ];
 
 const _isStr = str => typeof str === 'string';
