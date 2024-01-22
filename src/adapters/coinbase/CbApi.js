@@ -8,7 +8,7 @@ const API_URL = "https://api.exchange.coinbase.com/products";
 const _crDfUrl = (
   pair,
   timeframe
-) => `${API_URL}/${pair}/candles`;
+) => `${API_URL}/${pair}/candles?granularity=${timeframe}`;
 
 const _rCrUrl = {
   DF: fCrDfUrl(_crDfUrl)

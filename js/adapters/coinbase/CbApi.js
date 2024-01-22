@@ -4,7 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _ApiFn = require("../ApiFn");
 const API_URL = "https://api.exchange.coinbase.com/products";
-const _crDfUrl = (pair, timeframe) => `${API_URL}/${pair}/candles`;
+const _crDfUrl = (pair, timeframe) => `${API_URL}/${pair}/candles?granularity=${timeframe}`;
 const _rCrUrl = {
   DF: (0, _ApiFn.fCrDfUrl)(_crDfUrl)
 };
