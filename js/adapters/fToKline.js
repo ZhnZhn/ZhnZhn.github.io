@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.optionsCrFromStr = exports.fToKline = void 0;
+exports.fToKline = exports.crOptionsFromStr = void 0;
 var _AdapterFn = require("./AdapterFn");
 var _crAdapterOHLCV = _interopRequireDefault(require("./crAdapterOHLCV"));
 const _fCrAddConfig = function (crAddConfig) {
@@ -55,11 +55,18 @@ const _fCrDataOHLCV = _ref2 => {
   };
 };
 const _parseFloat = parseFloat;
-const optionsCrFromStr = exports.optionsCrFromStr = {
-  crDate: v => _parseFloat(v) * 1000,
-  crValue: v => (0, _AdapterFn.roundByOHLC)(_parseFloat(v)),
-  crVolume: v => _parseFloat(v)
+const crOptionsFromStr = function (isSeconds) {
+  if (isSeconds === void 0) {
+    isSeconds = true;
+  }
+  const _m = isSeconds ? 1000 : 1;
+  return {
+    crDate: v => _parseFloat(v) * _m,
+    crValue: v => (0, _AdapterFn.roundByOHLC)(_parseFloat(v)),
+    crVolume: v => _parseFloat(v)
+  };
 };
+exports.crOptionsFromStr = crOptionsFromStr;
 const fToKline = options => (0, _crAdapterOHLCV.default)({
   isAth: false,
   isVolume: !options.isNotVolume,

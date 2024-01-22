@@ -50,10 +50,15 @@ const _fCrDataOHLCV = ({
 };
 
 const _parseFloat = parseFloat;
-export const optionsCrFromStr = {
-  crDate: v => _parseFloat(v)*1000,
-  crValue: v => roundByOHLC(_parseFloat(v)),
-  crVolume: v => _parseFloat(v)
+export const crOptionsFromStr = (
+  isSeconds=true
+) => {
+  const _m = isSeconds ? 1000 : 1;
+  return {
+    crDate: v => _parseFloat(v)*_m,
+    crValue: v => roundByOHLC(_parseFloat(v)),
+    crVolume: v => _parseFloat(v)
+  };
 }
 
 export const fToKline = (options) => crAdapterOHLCV({

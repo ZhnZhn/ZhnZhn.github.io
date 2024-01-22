@@ -17,7 +17,7 @@ From Gate.io Documentation
 */
 
 const toKline = (0, _fToKline.fToKline)({
-  ..._fToKline.optionsCrFromStr,
+  ...(0, _fToKline.crOptionsFromStr)(),
   o: 5,
   h: 3,
   l: 4,

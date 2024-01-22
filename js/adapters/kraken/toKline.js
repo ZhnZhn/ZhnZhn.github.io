@@ -18,7 +18,7 @@ From Kraken Documentation
 */
 
 const toKline = (0, _fToKline.fToKline)({
-  ..._fToKline.optionsCrFromStr,
+  ...(0, _fToKline.crOptionsFromStr)(),
   o: 1,
   h: 2,
   l: 3,

@@ -15,8 +15,6 @@ From KuCoin Documentation
 ]]
 */
 
-const toKline = (0, _fToKline.fToKline)({
-  ..._fToKline.optionsCrFromStr
-});
+const toKline = (0, _fToKline.fToKline)((0, _fToKline.crOptionsFromStr)());
 var _default = exports.default = toKline;
 //# sourceMappingURL=toKline.js.map

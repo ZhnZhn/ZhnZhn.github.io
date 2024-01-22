@@ -1,5 +1,5 @@
 import {
-  optionsCrFromStr,
+  crOptionsFromStr,
   fToKline
 } from '../fToKline';
 
@@ -17,7 +17,7 @@ From Gate.io Documentation
 */
 
 const toKline = fToKline({
-  ...optionsCrFromStr,
+  ...crOptionsFromStr(),
   o: 5,
   h: 3,
   l: 4,

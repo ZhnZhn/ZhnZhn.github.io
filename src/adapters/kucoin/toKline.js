@@ -1,5 +1,5 @@
 import {
-  optionsCrFromStr,
+  crOptionsFromStr,
   fToKline
 } from '../fToKline';
 
@@ -15,8 +15,8 @@ From KuCoin Documentation
 ]]
 */
 
-const toKline = fToKline({
-  ...optionsCrFromStr
-});
+const toKline = fToKline(
+  crOptionsFromStr()
+);
 
 export default toKline

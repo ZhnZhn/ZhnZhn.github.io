@@ -1,5 +1,5 @@
 import {
-  optionsCrFromStr,
+  crOptionsFromStr,
   fToKline
 } from '../fToKline';
 
@@ -20,7 +20,7 @@ From Kraken Documentation
 
 
 const toKline = fToKline({
-  ...optionsCrFromStr,
+  ...crOptionsFromStr(),
   o: 1,
   h: 2,
   l: 3,
