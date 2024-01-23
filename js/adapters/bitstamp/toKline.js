@@ -33,13 +33,10 @@ const _parseFloat = parseFloat,
     } = _ref;
     return _isDailyTimeframe(timeframe) ? _toDailyMls : _isHourlyTimeframe(timeframe) ? _toHourlyMls : _toMls;
   };
-const _crDataOHLCV = (json, option) => {
-  const {
-      ohlc
-    } = json.data,
-    _recentIndex = ohlc.length - 1,
+const _crDataOHLCV = (data, option) => {
+  const _recentIndex = data.length - 1,
     _toDate = _fToDate(option);
-  return ohlc.map((item, index) => ({
+  return data.map((item, index) => ({
     date: _toDate(item.timestamp, index === _recentIndex),
     open: _parseFloat(item.open),
     high: _parseFloat(item.high),
