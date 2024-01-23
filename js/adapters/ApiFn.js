@@ -4,13 +4,14 @@ exports.__esModule = true;
 exports.fRouteApi = exports.fGetRequestUrl = exports.fCrObUrl = exports.fCrDfUrl = exports.checkResponseData = void 0;
 var _LoadType = require("../constants/LoadType");
 var _AdapterFn = require("./AdapterFn");
-const _isStr = v => typeof v === "string";
+const _isStr = v => typeof v === "string",
+  _isWithCORS = (0, _AdapterFn.isInArrStr)([_LoadType.LT_BN, _LoadType.LT_BT, _LoadType.LT_CB]);
 const _crAllOriginsUrl = (url, _ref) => {
   let {
     proxy,
     loadId
   } = _ref;
-  return loadId === _LoadType.LT_BT || loadId === _LoadType.LT_CB ? url : proxy ? `${proxy}${url}` : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+  return _isWithCORS(loadId) ? url : proxy ? `${proxy}${url}` : `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
 };
 const fCrDfUrl = crDfUrl => option => {
   const {
@@ -18,7 +19,7 @@ const fCrDfUrl = crDfUrl => option => {
     } = option,
     timeframe = (0, _AdapterFn.getValue)(items[1]);
   option.timeframe = timeframe;
-  return _crAllOriginsUrl(crDfUrl((0, _AdapterFn.getValue)(items[0]), timeframe, (0, _AdapterFn.getValue)(items[2])), option);
+  return _crAllOriginsUrl(crDfUrl((0, _AdapterFn.getValue)(items[0]), timeframe, (0, _AdapterFn.getValue)(items[2]), option, items), option);
 };
 exports.fCrDfUrl = fCrDfUrl;
 const fCrObUrl = crObUrl => option => {
@@ -28,10 +29,9 @@ const fCrObUrl = crObUrl => option => {
   return _crAllOriginsUrl(crObUrl((0, _AdapterFn.getValue)(items[0]), (0, _AdapterFn.getValue)(items[1])), option);
 };
 exports.fCrObUrl = fCrObUrl;
-const FN_IDENTITY = v => v;
 const _getBlockchainData = function (json, option, getData) {
   if (getData === void 0) {
-    getData = FN_IDENTITY;
+    getData = _AdapterFn.FN_IDENTITY;
   }
   return getData(json && _isStr(json.contents) ? JSON.parse(json.contents) : json, option);
 };

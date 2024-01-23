@@ -1,20 +1,28 @@
 import {
+  LT_BN,
   LT_BT,
   LT_CB
 } from '../constants/LoadType';
 
 import {
+  FN_IDENTITY,
   isArr,
+  isInArrStr,
   getValue,
   crError
 } from './AdapterFn';
 
-const _isStr = v => typeof v === "string";
+const _isStr = v => typeof v === "string"
+, _isWithCORS = isInArrStr([
+  LT_BN,
+  LT_BT,
+  LT_CB
+]);
 
 const _crAllOriginsUrl = (
   url,
   { proxy, loadId }
-) => loadId === LT_BT || loadId === LT_CB
+) => _isWithCORS(loadId)
   ? url
   : proxy
      ? `${proxy}${url}`
@@ -27,7 +35,7 @@ export const fCrDfUrl = (crDfUrl) => (
   , timeframe = getValue(items[1]);
   option.timeframe = timeframe
   return _crAllOriginsUrl(
-    crDfUrl(getValue(items[0]), timeframe, getValue(items[2])),
+    crDfUrl(getValue(items[0]), timeframe, getValue(items[2]), option, items),
     option
   );
 }
@@ -42,7 +50,6 @@ export const fCrObUrl = crObUrl => (
   );
 }
 
-const FN_IDENTITY = v => v;
 const _getBlockchainData = (
   json,
   option,

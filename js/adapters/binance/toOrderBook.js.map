@@ -5,10 +5,18 @@
  ],
  "file": "../../../src/adapters/binance/toOrderBook.js",
  "names": [
+  "_crAdapterOrderBook",
+  "_interopRequireDefault",
+  "require",
   "crTitle",
+  "_ref",
   "items",
-  "s",
-  "toOrderBook"
+  "v",
+  "toOrderBook",
+  "crAdapterOrderBook",
+  "_default",
+  "exports",
+  "default"
  ],
- "mappings": ";;;;;;;AAAA;;AAEA,IAAMA,OAAO,GAAG,SAAVA,OAAU;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,SAAeA,KAAK,CAAC,CAAD,CAAL,CAASC,CAAxB;AAAA,CAAhB;;AACA,IAAMC,WAAW,GAAG,oCAAmB;AAAEH,EAAAA,OAAO,EAAPA;AAAF,CAAnB,CAApB;eAEeG,W"
+ "mappings": ";;;;;AAAA,IAAAA,mBAAA,GAAAC,sBAAA,CAAAC,OAAA;AAEA,MAAMC,OAAO,GAAGC,IAAA;EAAA,IAAC;IAAEC;EAAM,CAAC,GAAAD,IAAA;EAAA,OAAKC,KAAK,CAAC,CAAC,CAAC,CAACC,CAAC;AAAA;AACzC,MAAMC,WAAW,GAAG,IAAAC,2BAAkB,EAAC;EAAEL;AAAQ,CAAC,CAAC;AAAC,IAAAM,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAErCJ,WAAW"
 }
