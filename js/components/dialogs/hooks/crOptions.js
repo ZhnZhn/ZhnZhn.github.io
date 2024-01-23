@@ -41,7 +41,7 @@ const _crNbqItems = arr => {
         const s = `${b}/${to}`;
         items.push({
           c: `${n} (${s})`,
-          s
+          v: s
         });
       });
     }
@@ -79,11 +79,13 @@ const _fCrItems = crValue => arr => arr.map(c => {
     //bt-items
     t2l: _fCrItems(_crValueT2L),
     //gt-items
-    t3: _fCrItems(_crValueT3)
+    t3: _fCrItems(_crValueT3),
+    //bn-items
+    nbq: _crNbqItems
   };
 const _crItems = (json, optionJsonProp) => {
   const _arr = json[optionJsonProp],
-    _crItems = json.isCv ? _crCvItems : json.isNbq ? _crNbqItems : json.isCp ? _crCpItems : _rCrItems[json.type];
+    _crItems = json.isCv ? _crCvItems : json.isCp ? _crCpItems : _rCrItems[json.type];
   return _crItems ? _crItems(_arr) : _arr[0] && _notNullOrUndef(_arr[0].s) ? _crSItems(_arr) : _arr;
 };
 const _crPropCaption = arr => !_isArr(arr) || arr.length === 0 ? void 0 : _notNullOrUndef(arr[0].c) ? 'c' : void 0;

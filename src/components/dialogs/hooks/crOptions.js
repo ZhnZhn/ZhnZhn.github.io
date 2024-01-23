@@ -21,7 +21,10 @@ const _crNbqItems = arr => {
     if (_isArr(q)) {
       q.forEach(to => {
         const s = `${b}/${to}`;
-        items.push({c: `${n} (${s})`, s})
+        items.push({
+          c: `${n} (${s})`,
+          v: s
+        })
       })
     }
   })
@@ -52,15 +55,15 @@ const _fCrItems = crValue => arr => arr.map(c => {
   //bt-items
   t2l: _fCrItems(_crValueT2L),
   //gt-items
-  t3: _fCrItems(_crValueT3)
+  t3: _fCrItems(_crValueT3),
+  //bn-items
+  nbq: _crNbqItems
 };
 
 const _crItems = (json, optionJsonProp) => {
   const _arr = json[optionJsonProp]
   , _crItems = json.isCv
     ? _crCvItems
-    : json.isNbq
-    ? _crNbqItems
     : json.isCp
     ? _crCpItems
     : _rCrItems[json.type];
