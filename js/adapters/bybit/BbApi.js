@@ -19,10 +19,6 @@ const _getData = json => {
 };
 const _crDfUrl = (pair, timeframe, limit) => `${API_URL}/kline?${SYMBOL}=${pair}&interval=${timeframe}&limit=${limit}`;
 const _crObUrl = (pair, limit) => `${API_URL}/orderbook?${SYMBOL}=${pair}&limit=${limit}`;
-const _rCrUrl = {
-  DF: (0, _ApiFn.fCrDfUrl)(_crDfUrl),
-  OB: (0, _ApiFn.fCrObUrl)(_crObUrl)
-};
-const BbApi = (0, _ApiFn.fRouteApi)(_rCrUrl, _getData);
+const BbApi = (0, _ApiFn.crRouteDfObApi)(_crDfUrl, _crObUrl, _getData);
 var _default = exports.default = BbApi;
 //# sourceMappingURL=BbApi.js.map

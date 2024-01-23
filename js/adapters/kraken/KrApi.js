@@ -22,10 +22,6 @@ const _getData = json => {
 };
 const _crDfUrl = (pair, timeframe) => `${API_URL}/OHLC?pair=${pair}&interval=${timeframe}`;
 const _crObUrl = (pair, limit) => `${API_URL}/Depth?pair=${pair}&count=${limit}`;
-const _rCrUrl = {
-  DF: (0, _ApiFn.fCrDfUrl)(_crDfUrl),
-  OB: (0, _ApiFn.fCrObUrl)(_crObUrl)
-};
-const KrApi = (0, _ApiFn.fRouteApi)(_rCrUrl, _getData);
+const KrApi = (0, _ApiFn.crRouteDfObApi)(_crDfUrl, _crObUrl, _getData);
 var _default = exports.default = KrApi;
 //# sourceMappingURL=KrApi.js.map

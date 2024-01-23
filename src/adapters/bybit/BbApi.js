@@ -1,11 +1,5 @@
-import {
-  isArr
-} from '../AdapterFn';
-import {
-  fCrDfUrl,
-  fCrObUrl,
-  fRouteApi
-} from '../ApiFn';
+import { isArr } from '../AdapterFn';
+import { crRouteDfObApi } from '../ApiFn';
 
 const API_URL = "https://api.bybit.com/v5/market";
 const SYMBOL = "category=spot&symbol";
@@ -34,11 +28,10 @@ const _crObUrl = (
   limit
 ) => `${API_URL}/orderbook?${SYMBOL}=${pair}&limit=${limit}`;
 
-const _rCrUrl = {
-  DF: fCrDfUrl(_crDfUrl),
-  OB: fCrObUrl(_crObUrl)
-};
-
-const BbApi = fRouteApi(_rCrUrl, _getData);
+const BbApi = crRouteDfObApi(
+  _crDfUrl,
+  _crObUrl,
+  _getData
+);
 
 export default BbApi

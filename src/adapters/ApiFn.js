@@ -86,13 +86,22 @@ export const fGetRequestUrl = (
   return _crUrl(option);
 }
 
-export const fRouteApi = (
+const _crRouteApi = (
   rCrUrl,
   getData
 ) => ({
   getRequestUrl: fGetRequestUrl(rCrUrl),
   checkResponse: _fCheckResponse(getData)
 })
+
+export const crRouteDfObApi = (
+  crDfUrl,
+  crObUrl,
+  getData
+) => _crRouteApi({
+  DF: fCrDfUrl(crDfUrl),
+  OB: crObUrl ? fCrObUrl(crObUrl) : void 0
+}, getData)
 
 export const checkResponseData = (json) => {
   const { data } = json || {};

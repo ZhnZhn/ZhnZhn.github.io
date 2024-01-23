@@ -1,8 +1,4 @@
-import {
-  fCrDfUrl,
-  fCrObUrl,
-  fRouteApi
-} from '../ApiFn';
+import { crRouteDfObApi } from '../ApiFn';
 
 const HTTPS = 'https://'
 , BINANCE_COM = 'binance.com'
@@ -45,11 +41,6 @@ const _crObUrl = (
   limit
 ) => `${API_URL}/depth?symbol=${_crSymbol(pair)}&limit=${limit}`;
 
-const _rCrUrl = {
-  DF: fCrDfUrl(_crDfUrl),
-  OB: fCrObUrl(_crObUrl)
-};
-
-const BnApi = fRouteApi(_rCrUrl);
+const BnApi = crRouteDfObApi(_crDfUrl, _crObUrl);
 
 export default BnApi

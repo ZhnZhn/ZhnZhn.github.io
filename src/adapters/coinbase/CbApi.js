@@ -1,7 +1,4 @@
-import {
-  fCrDfUrl,
-  fRouteApi
-} from '../ApiFn';
+import { crRouteDfObApi } from '../ApiFn';
 
 const API_URL = "https://api.exchange.coinbase.com/products";
 
@@ -10,10 +7,6 @@ const _crDfUrl = (
   timeframe
 ) => `${API_URL}/${pair}/candles?granularity=${timeframe}`;
 
-const _rCrUrl = {
-  DF: fCrDfUrl(_crDfUrl)
-};
-
-const CbApi = fRouteApi(_rCrUrl);
+const CbApi = crRouteDfObApi(_crDfUrl);
 
 export default CbApi

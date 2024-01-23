@@ -28,10 +28,6 @@ const _crDfUrl = (pair, timeframe, limit, option, items) => {
   return `${API_URL}/klines?symbol=${_crSymbol(pair)}&interval=${timeframe}&limit=${limit}`;
 };
 const _crObUrl = (pair, limit) => `${API_URL}/depth?symbol=${_crSymbol(pair)}&limit=${limit}`;
-const _rCrUrl = {
-  DF: (0, _ApiFn.fCrDfUrl)(_crDfUrl),
-  OB: (0, _ApiFn.fCrObUrl)(_crObUrl)
-};
-const BnApi = (0, _ApiFn.fRouteApi)(_rCrUrl);
+const BnApi = (0, _ApiFn.crRouteDfObApi)(_crDfUrl, _crObUrl);
 var _default = exports.default = BnApi;
 //# sourceMappingURL=BnApi.js.map

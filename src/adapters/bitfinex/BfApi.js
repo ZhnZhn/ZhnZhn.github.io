@@ -1,8 +1,4 @@
-import {
-  fCrDfUrl,
-  fCrObUrl,
-  fRouteApi
-} from '../ApiFn';
+import { crRouteDfObApi } from '../ApiFn';
 
 const API_URL = "https://api-pub.bitfinex.com/v2";
 
@@ -17,11 +13,6 @@ const _crObUrl = (
   limit
 ) => `${API_URL}/book/t${pair}/P0?len=${limit}`;
 
-const _rCrUrl = {
-  DF: fCrDfUrl(_crDfUrl),
-  OB: fCrObUrl(_crObUrl)
-};
-
-const BfApi = fRouteApi(_rCrUrl);
+const BfApi = crRouteDfObApi(_crDfUrl, _crObUrl);
 
 export default BfApi

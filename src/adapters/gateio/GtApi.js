@@ -1,8 +1,4 @@
-import {
-  fCrDfUrl,
-  fCrObUrl,
-  fRouteApi
-} from '../ApiFn';
+import { crRouteDfObApi } from '../ApiFn';
 
 const API_URL = "https://api.gateio.ws/api/v4/spot";
 
@@ -17,11 +13,6 @@ const _crObUrl = (
   limit
 ) => `${API_URL}/order_book?currency_pair=${pair}&limit=${limit}`;
 
-const _rCrUrl = {
-  DF: fCrDfUrl(_crDfUrl),
-  OB: fCrObUrl(_crObUrl)
-};
-
-const GtApi = fRouteApi(_rCrUrl);
+const GtApi = crRouteDfObApi(_crDfUrl, _crObUrl);
 
 export default GtApi

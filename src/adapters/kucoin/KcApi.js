@@ -1,8 +1,4 @@
-import {
-  fCrDfUrl,
-  fCrObUrl,
-  fRouteApi
-} from '../ApiFn';
+import { crRouteDfObApi } from '../ApiFn';
 
 const API_URL = "https://api.kucoin.com/api/v1/market";
 const _getData = (
@@ -18,11 +14,10 @@ const _crObUrl = (
   pair
 ) => `${API_URL}/orderbook/level2_20?symbol=${pair}`;
 
-const _rCrUrl = {
-  DF: fCrDfUrl(_crDfUrl),
-  OB: fCrObUrl(_crObUrl)
-};
-
-const KcApi = fRouteApi(_rCrUrl, _getData);
+const KcApi = crRouteDfObApi(
+  _crDfUrl,
+  _crObUrl,
+  _getData
+);
 
 export default KcApi

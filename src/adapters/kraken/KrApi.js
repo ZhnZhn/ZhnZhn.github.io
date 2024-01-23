@@ -3,11 +3,8 @@ import {
   isObj
 } from '../AdapterFn';
 import {
-  fCrDfUrl,
-  fCrObUrl,
-  fRouteApi
+  crRouteDfObApi
 } from '../ApiFn';
-
 
 const API_URL = "https://api.kraken.com/0/public";
 const _getData = (
@@ -38,11 +35,10 @@ const _crObUrl = (
   limit
 ) => `${API_URL}/Depth?pair=${pair}&count=${limit}`;
 
-const _rCrUrl = {
-  DF: fCrDfUrl(_crDfUrl),
-  OB: fCrObUrl(_crObUrl)
-};
-
-const KrApi = fRouteApi(_rCrUrl, _getData);
+const KrApi = crRouteDfObApi(
+  _crDfUrl,
+  _crObUrl,
+  _getData
+);
 
 export default KrApi
