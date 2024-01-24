@@ -14,6 +14,8 @@ import {
   LT_BLS,
   LT_WL,
   LT_UN,
+  
+  LT_CR,
   LT_BB,
   LT_BF,
   LT_KR,
@@ -36,6 +38,7 @@ const _withProxyServer = [
 ];
 const _withProxyServer2 = [
   ..._withProxyServer,
+  LT_CR,
   LT_BF,
   LT_KR,
   LT_KC,

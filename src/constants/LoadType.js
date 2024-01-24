@@ -33,15 +33,18 @@ export const LT_CG = 'CG'
 export const LT_CM = 'CM'
 export const LT_CP = 'CP'
 export const LT_CL = 'CL'
+
 export const LT_BN = 'BN'
 export const LT_CB = 'CB'
 export const LT_BF = 'BF'
 export const LT_BT = 'BT'
+export const LT_CR = 'CR'
 export const LT_KR = 'KR'
 export const LT_KC = 'KC'
 export const LT_GT = 'GT'
 export const LT_KX = 'KX'
 export const LT_BB = 'BB'
+
 export const LT_WL = 'WL'
 export const LT_WATCH_LIST = 'WL_WATCH_LIST'
 

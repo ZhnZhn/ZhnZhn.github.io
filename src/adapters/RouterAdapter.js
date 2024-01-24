@@ -30,6 +30,7 @@ import {
   LT_BN,
   LT_CB,
   LT_BT,
+  LT_CR,
   LT_BF,
   LT_KR,
   LT_KC,
@@ -80,6 +81,7 @@ import Bn from './binance/Bn'
 import Cb from './coinbase/Cb'
 import Bt from './bitstamp/Bt'
 import Bf from './bitfinex/Bf'
+import Cr from './cryptocom/Cr'
 import Kr from './kraken/Kr'
 import Kc from './kucoin/Kc'
 import Gt from './gateio/Gt'
@@ -127,6 +129,7 @@ const RouterAdapter = {
   [LT_BN]: Bn,
   [LT_CB]: Cb,
   [LT_BT]: Bt,
+  [LT_CR]: Cr,
   [LT_BF]: Bf,
   [LT_KR]: Kr,
   [LT_KC]: Kc,

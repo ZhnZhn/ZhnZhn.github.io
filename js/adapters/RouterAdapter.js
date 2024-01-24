@@ -38,6 +38,7 @@ var _Bn = _interopRequireDefault(require("./binance/Bn"));
 var _Cb = _interopRequireDefault(require("./coinbase/Cb"));
 var _Bt = _interopRequireDefault(require("./bitstamp/Bt"));
 var _Bf = _interopRequireDefault(require("./bitfinex/Bf"));
+var _Cr = _interopRequireDefault(require("./cryptocom/Cr"));
 var _Kr = _interopRequireDefault(require("./kraken/Kr"));
 var _Kc = _interopRequireDefault(require("./kucoin/Kc"));
 var _Gt = _interopRequireDefault(require("./gateio/Gt"));
@@ -78,6 +79,7 @@ const RouterAdapter = {
   [_LoadType.LT_BN]: _Bn.default,
   [_LoadType.LT_CB]: _Cb.default,
   [_LoadType.LT_BT]: _Bt.default,
+  [_LoadType.LT_CR]: _Cr.default,
   [_LoadType.LT_BF]: _Bf.default,
   [_LoadType.LT_KR]: _Kr.default,
   [_LoadType.LT_KC]: _Kc.default,
