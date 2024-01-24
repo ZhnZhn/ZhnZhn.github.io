@@ -41,7 +41,8 @@ const LINK_CONFIGS = [
  ["Kraken", _crUrl("www.kraken.com")],
  ["KuCoin", _crUrl("www.kucoin.com")],
  ["OKX", _crUrl("okx.com")],
- ["Bybit", _crUrl("www.bybit.com")]
+ ["Bybit", _crUrl("www.bybit.com")],
+ ["CryptoCom", "Crypto.com", _crUrl("crypto.com")] 
 ];
 
 const _isStr = str => typeof str === 'string';
