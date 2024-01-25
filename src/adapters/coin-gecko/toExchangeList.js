@@ -9,10 +9,13 @@ import {
   getYmdhmUTC
 } from './fnAdapter';
 
-const HEADERS = [{
-  ...crNameProps('Trust Rank', 'trust_score_rank'),
+const _crNumberCenterProps = () => ({
   toN: [],
   style: { textAlign: 'center' }
+})
+, HEADERS = [{
+  ...crNameProps('Trust Rank', 'trust_score_rank'),
+  ..._crNumberCenterProps()
 }
 , crNameProps('Name', 'name')
 , {
@@ -23,8 +26,7 @@ const HEADERS = [{
   ...crNumberProps(0)
 },{
   ...crNameProps('Trust Score', 'trust_score'),
-  toN: [],
-  style: { textAlign: 'center' }
+  ..._crNumberCenterProps()
 },{
   ...crNameProps('Year Estb.', 'year_established', true),
   style: { textAlign: 'center' }

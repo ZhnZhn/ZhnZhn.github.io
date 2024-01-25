@@ -4,33 +4,33 @@ exports.__esModule = true;
 exports.default = void 0;
 var _toTableFn = require("../toTableFn");
 var _fnAdapter = require("./fnAdapter");
-const HEADERS = [{
-  ...(0, _toTableFn.crNameProps)('Trust Rank', 'trust_score_rank'),
-  toN: [],
-  style: {
-    textAlign: 'center'
-  }
-}, (0, _toTableFn.crNameProps)('Name', 'name'), {
-  ...(0, _toTableFn.crNameProps)('24h BTC', 'trade_volume_24h_btc'),
-  ...(0, _toTableFn.crNumberProps)(0)
-}, {
-  ...(0, _toTableFn.crNameProps)('24h BTC Norm.', 'trade_volume_24h_btc_normalized'),
-  ...(0, _toTableFn.crNumberProps)(0)
-}, {
-  ...(0, _toTableFn.crNameProps)('Trust Score', 'trust_score'),
-  toN: [],
-  style: {
-    textAlign: 'center'
-  }
-}, {
-  ...(0, _toTableFn.crNameProps)('Year Estb.', 'year_established', true),
-  style: {
-    textAlign: 'center'
-  }
-}, (0, _toTableFn.crNameProps)('Country', 'country', true), {
-  ...(0, _toTableFn.crNameProps)('Link', 'url', true),
-  isHref: true
-}];
+const _crNumberCenterProps = () => ({
+    toN: [],
+    style: {
+      textAlign: 'center'
+    }
+  }),
+  HEADERS = [{
+    ...(0, _toTableFn.crNameProps)('Trust Rank', 'trust_score_rank'),
+    ..._crNumberCenterProps()
+  }, (0, _toTableFn.crNameProps)('Name', 'name'), {
+    ...(0, _toTableFn.crNameProps)('24h BTC', 'trade_volume_24h_btc'),
+    ...(0, _toTableFn.crNumberProps)(0)
+  }, {
+    ...(0, _toTableFn.crNameProps)('24h BTC Norm.', 'trade_volume_24h_btc_normalized'),
+    ...(0, _toTableFn.crNumberProps)(0)
+  }, {
+    ...(0, _toTableFn.crNameProps)('Trust Score', 'trust_score'),
+    ..._crNumberCenterProps()
+  }, {
+    ...(0, _toTableFn.crNameProps)('Year Estb.', 'year_established', true),
+    style: {
+      textAlign: 'center'
+    }
+  }, (0, _toTableFn.crNameProps)('Country', 'country', true), {
+    ...(0, _toTableFn.crNameProps)('Link', 'url', true),
+    isHref: true
+  }];
 const toExchangeList = {
   crKey(option) {
     option.key = (0, _fnAdapter.crPageConfig)(option).join('_');
