@@ -1,16 +1,9 @@
 import Big from 'big.js';
 import { crTableRows } from './toTableFn';
 
-const S = {
-  TO_LEFT: {
-   to: 'to left',
-   c: '#184416'
- },
- TO_RIGHT: {
-  to: 'to right',
-  c: '#6c3632'
- }
-};
+const _crBgStyleProps = isLeft => isLeft
+  ? ['to left', '#184416']
+  : ['to right', '#6c3632'];
 
 const _crItemHeader = (name, pn, color) => ({
    name, pn,
@@ -40,10 +33,13 @@ const _calcTotal = (arr, valueIndex, len) => {
 
 const _crBgStyle = (onePerc, strV, isLeft) => {
   try {
-    const perc = parseInt(Big(strV).div(onePerc).toFixed(0), 10)
-    , { to, c } = isLeft ? S.TO_LEFT : S.TO_RIGHT;
+    const perc = parseInt(
+      Big(strV).div(onePerc).toFixed(0)
+      , 10
+    )
+    , [to, color] = _crBgStyleProps(isLeft);
     return {
-      background: `linear-gradient(${to}, ${c} ${perc}%, transparent ${perc}% ${100-perc}%)`
+      background: `linear-gradient(${to}, ${color} ${perc}%, transparent ${perc}% ${100-perc}%)`
     };
   } catch(err) {
     return;
