@@ -17,7 +17,7 @@ var _CompContainer = _interopRequireDefault(require("./zhn-containers/CompContai
 var _DialogContainer = _interopRequireDefault(require("./dialogs/DialogContainer"));
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 var _jsxRuntime = require("react/jsx-runtime");
-const BUILD_DATE = '24-01-2024',
+const BUILD_DATE = '25-01-2024',
   CL_COMP_CONTAINER = "component-container";
 const showSettings = (0, _uiApi.bindTo)(_ComponentActions.ComponentActions.showSettings, (0, _settingStore.exportSettingFn)());
 const AppErc = () => {
