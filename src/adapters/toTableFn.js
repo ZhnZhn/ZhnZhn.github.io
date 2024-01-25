@@ -4,6 +4,14 @@ import {
   roundBy
 } from './AdapterFn';
 
+export const crNumberProps = (n) => ({
+  toN: [n],
+  isF: true,
+  style: {
+    fontWeight: 'bold'
+  }
+})
+
 const _replaceNaN = (
   n,
   str=''
@@ -73,4 +81,4 @@ export const crTableRows = (
      })
      r.id = r[idPropName] || `id${rIndex}`
      return r;
-  });
+  })

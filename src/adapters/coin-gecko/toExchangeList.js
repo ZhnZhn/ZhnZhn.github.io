@@ -1,4 +1,5 @@
 import {
+  crNumberProps,
   crTableRows,
   crTableConfig
 } from '../toTableFn';
@@ -18,19 +19,11 @@ const HEADERS = [{
 },{
   name: '24h BTC',
   pn: 'trade_volume_24h_btc',
-  toN: [2],
-  isF: true,
-  style: {
-    fontWeight: 'bold'
-  }
+  ...crNumberProps(0)
 },{
   name: '24h BTC Norm.',
   pn: 'trade_volume_24h_btc_normalized',
-  toN: [2],
-  isF: true,
-  style: {
-    fontWeight: 'bold'
-  }
+  ...crNumberProps(0)
 },{
   name: 'Trust Score',
   pn: 'trust_score',

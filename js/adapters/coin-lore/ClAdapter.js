@@ -9,13 +9,6 @@ const _crNameProps = (name, pn, isHide) => ({
     pn,
     isHide
   }),
-  _crToNumberProps = n => ({
-    toN: [n],
-    isF: true,
-    style: {
-      fontWeight: 'bold'
-    }
-  }),
   _pnTurnoverUsd = 'turnover',
   HEADERS = [{
     ..._crNameProps('Rank', 'id'),
@@ -24,16 +17,16 @@ const _crNameProps = (name, pn, isHide) => ({
     }
   }, _crNameProps('Base', 'base'), _crNameProps('Quote', 'quote'), {
     ..._crNameProps('Volume', 'volume'),
-    ..._crToNumberProps(0)
+    ...(0, _toTableFn.crNumberProps)(0)
   }, {
     ..._crNameProps('Price', 'price'),
-    ..._crToNumberProps()
+    ...(0, _toTableFn.crNumberProps)()
   }, {
     ..._crNameProps('Price USD', 'price_usd', true),
-    ..._crToNumberProps()
+    ...(0, _toTableFn.crNumberProps)()
   }, {
     ..._crNameProps('V*P USD', _pnTurnoverUsd, true),
-    ..._crToNumberProps(0)
+    ...(0, _toTableFn.crNumberProps)(0)
   }, _crNameProps('Time', 'time', true), _crNameProps('Date', 'date', true)];
 const _crTimeDate = time => (0, _AdapterFn.toTd)(time * 1000).split(' ')
   // base = null or quote = null or volume = 0

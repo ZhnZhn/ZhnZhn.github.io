@@ -1,8 +1,16 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crTableRows = exports.crTableOptions = exports.crTableConfig = void 0;
+exports.crTableRows = exports.crTableOptions = exports.crTableConfig = exports.crNumberProps = void 0;
 var _AdapterFn = require("./AdapterFn");
+const crNumberProps = n => ({
+  toN: [n],
+  isF: true,
+  style: {
+    fontWeight: 'bold'
+  }
+});
+exports.crNumberProps = crNumberProps;
 const _replaceNaN = function (n, str) {
   if (str === void 0) {
     str = '';
@@ -64,7 +72,7 @@ const crTableRows = function (headers, rows, idPropName) {
     headers.forEach(h => {
       r[h.pn] = _getCellValue(r, h);
     });
-    r.id = r[idPropName] || "id" + rIndex;
+    r.id = r[idPropName] || `id${rIndex}`;
     return r;
   });
 };

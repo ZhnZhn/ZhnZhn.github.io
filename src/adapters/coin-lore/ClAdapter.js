@@ -3,6 +3,7 @@ import {
   roundByOHLC
 } from '../AdapterFn';
 import {
+  crNumberProps,
   crTableConfig,
   crTableRows
 } from '../toTableFn';
@@ -16,13 +17,6 @@ const _crNameProps = (
   pn,
   isHide
 })
-, _crToNumberProps = (n) => ({
-  toN: [n],
-  isF: true,
-  style: {
-    fontWeight: 'bold'
-  }
-})
 , _pnTurnoverUsd = 'turnover'
 , HEADERS = [{
   ..._crNameProps('Rank', 'id'),
@@ -32,16 +26,16 @@ _crNameProps('Base', 'base'),
 _crNameProps('Quote', 'quote'),
 {
   ..._crNameProps('Volume', 'volume'),
-  ..._crToNumberProps(0)
+  ...crNumberProps(0)
 },{
   ..._crNameProps('Price', 'price'),
-  ..._crToNumberProps()
+  ...crNumberProps()
 },{
   ..._crNameProps('Price USD', 'price_usd', true),
-  ..._crToNumberProps()
+  ...crNumberProps()
 },{
   ..._crNameProps('V*P USD', _pnTurnoverUsd, true),
-  ..._crToNumberProps(0)
+  ...crNumberProps(0)
 },
 _crNameProps('Time', 'time', true),
 _crNameProps('Date', 'date', true)
