@@ -1,8 +1,14 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crTableRows = exports.crTableOptions = exports.crTableConfig = exports.crNumberProps = void 0;
+exports.crTableRows = exports.crTableOptions = exports.crTableConfig = exports.crNumberProps = exports.crNameProps = void 0;
 var _AdapterFn = require("./AdapterFn");
+const crNameProps = (name, pn, isHide) => ({
+  name,
+  pn,
+  isHide
+});
+exports.crNameProps = crNameProps;
 const crNumberProps = n => ({
   toN: [n],
   isF: true,

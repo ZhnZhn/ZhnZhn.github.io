@@ -5,45 +5,30 @@ exports.default = void 0;
 var _toTableFn = require("../toTableFn");
 var _fnAdapter = require("./fnAdapter");
 const HEADERS = [{
-  name: 'Trust Rank',
-  pn: 'trust_score_rank',
+  ...(0, _toTableFn.crNameProps)('Trust Rank', 'trust_score_rank'),
+  toN: [],
+  style: {
+    textAlign: 'center'
+  }
+}, (0, _toTableFn.crNameProps)('Name', 'name'), {
+  ...(0, _toTableFn.crNameProps)('24h BTC', 'trade_volume_24h_btc'),
+  ...(0, _toTableFn.crNumberProps)(0)
+}, {
+  ...(0, _toTableFn.crNameProps)('24h BTC Norm.', 'trade_volume_24h_btc_normalized'),
+  ...(0, _toTableFn.crNumberProps)(0)
+}, {
+  ...(0, _toTableFn.crNameProps)('Trust Score', 'trust_score'),
   toN: [],
   style: {
     textAlign: 'center'
   }
 }, {
-  name: 'Name',
-  pn: 'name'
-}, {
-  name: '24h BTC',
-  pn: 'trade_volume_24h_btc',
-  ...(0, _toTableFn.crNumberProps)(0)
-}, {
-  name: '24h BTC Norm.',
-  pn: 'trade_volume_24h_btc_normalized',
-  ...(0, _toTableFn.crNumberProps)(0)
-}, {
-  name: 'Trust Score',
-  pn: 'trust_score',
-  toN: [],
+  ...(0, _toTableFn.crNameProps)('Year Estb.', 'year_established', true),
   style: {
     textAlign: 'center'
   }
-}, {
-  isHide: true,
-  name: 'Year Estb.',
-  pn: 'year_established',
-  style: {
-    textAlign: 'center'
-  }
-}, {
-  isHide: true,
-  name: 'Country',
-  pn: 'country'
-}, {
-  isHide: true,
-  name: 'Link',
-  pn: 'url',
+}, (0, _toTableFn.crNameProps)('Country', 'country', true), {
+  ...(0, _toTableFn.crNameProps)('Link', 'url', true),
   isHref: true
 }];
 const toExchangeList = {

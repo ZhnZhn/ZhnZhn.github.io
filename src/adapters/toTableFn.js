@@ -4,6 +4,16 @@ import {
   roundBy
 } from './AdapterFn';
 
+export const crNameProps = (
+  name,
+  pn,
+  isHide
+) => ({
+  name,
+  pn,
+  isHide
+})
+
 export const crNumberProps = (n) => ({
   toN: [n],
   isF: true,

@@ -4,30 +4,25 @@ exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _toTableFn = require("../toTableFn");
-const _crNameProps = (name, pn, isHide) => ({
-    name,
-    pn,
-    isHide
-  }),
-  _pnTurnoverUsd = 'turnover',
+const _pnTurnoverUsd = 'turnover',
   HEADERS = [{
-    ..._crNameProps('Rank', 'id'),
+    ...(0, _toTableFn.crNameProps)('Rank', 'id'),
     style: {
       textAlign: 'center'
     }
-  }, _crNameProps('Base', 'base'), _crNameProps('Quote', 'quote'), {
-    ..._crNameProps('Volume', 'volume'),
+  }, (0, _toTableFn.crNameProps)('Base', 'base'), (0, _toTableFn.crNameProps)('Quote', 'quote'), {
+    ...(0, _toTableFn.crNameProps)('Volume', 'volume'),
     ...(0, _toTableFn.crNumberProps)(0)
   }, {
-    ..._crNameProps('Price', 'price'),
+    ...(0, _toTableFn.crNameProps)('Price', 'price'),
     ...(0, _toTableFn.crNumberProps)()
   }, {
-    ..._crNameProps('Price USD', 'price_usd', true),
+    ...(0, _toTableFn.crNameProps)('Price USD', 'price_usd', true),
     ...(0, _toTableFn.crNumberProps)()
   }, {
-    ..._crNameProps('V*P USD', _pnTurnoverUsd, true),
+    ...(0, _toTableFn.crNameProps)('V*P USD', _pnTurnoverUsd, true),
     ...(0, _toTableFn.crNumberProps)(0)
-  }, _crNameProps('Time', 'time', true), _crNameProps('Date', 'date', true)];
+  }, (0, _toTableFn.crNameProps)('Time', 'time', true), (0, _toTableFn.crNameProps)('Date', 'date', true)];
 const _crTimeDate = time => (0, _AdapterFn.toTd)(time * 1000).split(' ')
   // base = null or quote = null or volume = 0
   ,

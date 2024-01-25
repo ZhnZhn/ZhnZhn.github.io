@@ -3,42 +3,34 @@ import {
   roundByOHLC
 } from '../AdapterFn';
 import {
+  crNameProps,
   crNumberProps,
   crTableConfig,
   crTableRows
 } from '../toTableFn';
 
-const _crNameProps = (
-  name,
-  pn,
-  isHide
-) => ({
-  name,
-  pn,
-  isHide
-})
-, _pnTurnoverUsd = 'turnover'
+const _pnTurnoverUsd = 'turnover'
 , HEADERS = [{
-  ..._crNameProps('Rank', 'id'),
+  ...crNameProps('Rank', 'id'),
   style: { textAlign: 'center' }
-},
-_crNameProps('Base', 'base'),
-_crNameProps('Quote', 'quote'),
-{
-  ..._crNameProps('Volume', 'volume'),
+}
+, crNameProps('Base', 'base')
+, crNameProps('Quote', 'quote')
+, {
+  ...crNameProps('Volume', 'volume'),
   ...crNumberProps(0)
 },{
-  ..._crNameProps('Price', 'price'),
+  ...crNameProps('Price', 'price'),
   ...crNumberProps()
 },{
-  ..._crNameProps('Price USD', 'price_usd', true),
+  ...crNameProps('Price USD', 'price_usd', true),
   ...crNumberProps()
 },{
-  ..._crNameProps('V*P USD', _pnTurnoverUsd, true),
+  ...crNameProps('V*P USD', _pnTurnoverUsd, true),
   ...crNumberProps(0)
-},
-_crNameProps('Time', 'time', true),
-_crNameProps('Date', 'date', true)
+}
+, crNameProps('Time', 'time', true)
+, crNameProps('Date', 'date', true)
 ];
 
 const _crTimeDate = (

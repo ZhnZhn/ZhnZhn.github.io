@@ -1,4 +1,5 @@
 import {
+  crNameProps,
   crNumberProps,
   crTableRows,
   crTableConfig
@@ -9,41 +10,30 @@ import {
 } from './fnAdapter';
 
 const HEADERS = [{
-  name: 'Trust Rank',
-  pn: 'trust_score_rank',
+  ...crNameProps('Trust Rank', 'trust_score_rank'),
+  toN: [],
+  style: { textAlign: 'center' }
+}
+, crNameProps('Name', 'name')
+, {
+  ...crNameProps('24h BTC', 'trade_volume_24h_btc'),
+  ...crNumberProps(0)
+},{
+  ...crNameProps('24h BTC Norm.', 'trade_volume_24h_btc_normalized'),
+  ...crNumberProps(0)
+},{
+  ...crNameProps('Trust Score', 'trust_score'),
   toN: [],
   style: { textAlign: 'center' }
 },{
-  name: 'Name',
-  pn: 'name'
-},{
-  name: '24h BTC',
-  pn: 'trade_volume_24h_btc',
-  ...crNumberProps(0)
-},{
-  name: '24h BTC Norm.',
-  pn: 'trade_volume_24h_btc_normalized',
-  ...crNumberProps(0)
-},{
-  name: 'Trust Score',
-  pn: 'trust_score',
-  toN: [],
+  ...crNameProps('Year Estb.', 'year_established', true),
   style: { textAlign: 'center' }
-},{
-  isHide: true,
-  name: 'Year Estb.',
-  pn: 'year_established',
-  style: { textAlign: 'center' }
-},{
-  isHide: true,
-  name: 'Country',
-  pn: 'country'
-},{
-  isHide: true,
-  name: 'Link',
-  pn: 'url',
+}
+, crNameProps('Country', 'country', true)
+, {
+  ...crNameProps('Link', 'url', true),
   isHref: true
-}]
+}];
 
 const toExchangeList = {
   crKey(option){
