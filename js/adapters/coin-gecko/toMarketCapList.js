@@ -2,19 +2,15 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
 var _toTableFn = require("../toTableFn");
-
 var _fnAdapter = require("./fnAdapter");
-
 const _crPriceChangeItem = (name, pnSuffix, options) => ({
   name,
-  pn: "price_change_percentage_" + pnSuffix,
-  toN: [3],
+  pn: `price_change_percentage_${pnSuffix}`,
+  toN: [2],
   isR: true,
   ...options
 });
-
 const _crStyleItem = (name, pn, options) => ({
   name,
   pn,
@@ -24,9 +20,7 @@ const _crStyleItem = (name, pn, options) => ({
   },
   ...options
 });
-
 let _headers;
-
 const _getTableHeaders = () => _headers || (_headers = [{
   name: 'Rank',
   pn: 'market_cap_rank',
@@ -56,46 +50,39 @@ const _getTableHeaders = () => _headers || (_headers = [{
   name: 'Updated UTC',
   pn: 'last_updated'
 }]);
-
 const _toDate = rowDate => (rowDate || '').replace('T', ' ').split('.')[0];
-
 const _transformDate = json => json.map(item => {
   item.last_updated = _toDate(item.last_updated);
   return item;
 });
-
 const _crDataSource = rows => {
-  return "CoinGecko " + rows[0].last_updated + " UTC";
+  return `CoinGecko ${rows[0].last_updated} UTC`;
 };
-
 const toMarketCapList = {
   crKey(option) {
     option.key = (0, _fnAdapter.crPageConfig)(option).join('_');
     return option.key;
   },
-
   toConfig(json, option) {
     const {
-      key,
-      title
-    } = option,
-          _json = _transformDate(json),
-          headers = _getTableHeaders(),
-          rows = (0, _toTableFn.crTableRows)(headers, _json),
-          config = (0, _toTableFn.crTableConfig)({
-      id: key,
-      title,
-      headers,
-      rows,
-      dataSource: _crDataSource(rows)
-    });
-
+        key,
+        title
+      } = option,
+      _json = _transformDate(json),
+      headers = _getTableHeaders(),
+      rows = (0, _toTableFn.crTableRows)(headers, _json),
+      config = (0, _toTableFn.crTableConfig)({
+        id: key,
+        title,
+        headers,
+        rows,
+        dataSource: _crDataSource(rows)
+      });
+    console.log(config);
     return {
       config
     };
   }
-
 };
-var _default = toMarketCapList;
-exports.default = _default;
+var _default = exports.default = toMarketCapList;
 //# sourceMappingURL=toMarketCapList.js.map

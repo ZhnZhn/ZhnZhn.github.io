@@ -11,7 +11,7 @@ const _crPriceChangeItem = (
 ) => ({
   name,
   pn: `price_change_percentage_${pnSuffix}`,
-  toN: [3],
+  toN: [2],
   isR: true,
   ...options
 });
