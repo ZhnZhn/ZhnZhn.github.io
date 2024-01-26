@@ -14,13 +14,13 @@ const _pnTurnoverUsd = 'turnover'
   ...crNameProps('Rank', 'id'),
   style: { textAlign: 'center' }
 }
-, crNameProps('Base', 'base')
-, crNameProps('Quote', 'quote')
+, crNameProps('Base')
+, crNameProps('Quote')
 , {
-  ...crNameProps('Volume', 'volume'),
+  ...crNameProps('Volume'),
   ...crNumberProps(0)
 },{
-  ...crNameProps('Price', 'price'),
+  ...crNameProps('Price'),
   ...crNumberProps()
 },{
   ...crNameProps('Price USD', 'price_usd', true),
@@ -29,8 +29,8 @@ const _pnTurnoverUsd = 'turnover'
   ...crNameProps('V*P USD', _pnTurnoverUsd, true),
   ...crNumberProps(0)
 }
-, crNameProps('Time', 'time', true)
-, crNameProps('Date', 'date', true)
+, crNameProps('Time', true)
+, crNameProps('Date', true)
 ];
 
 const _crTimeDate = (

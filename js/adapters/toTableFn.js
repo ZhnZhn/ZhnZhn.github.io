@@ -3,9 +3,10 @@
 exports.__esModule = true;
 exports.crTableRows = exports.crTableOptions = exports.crTableConfig = exports.crNumberProps = exports.crNameProps = void 0;
 var _AdapterFn = require("./AdapterFn");
+const _isStr = v => typeof v === 'string';
 const crNameProps = (name, pn, isHide) => ({
   name,
-  pn,
+  pn: _isStr(pn) ? pn : name.toLocalCase(),
   isHide
 });
 exports.crNameProps = crNameProps;

@@ -13,16 +13,18 @@ const _crNumberCenterProps = () => ({
   toN: [],
   style: { textAlign: 'center' }
 })
+, PN_TRADE_VOLUME_24H_BTC = 'trade_volume_24h_btc'
+, PN_TRADE_VOLUME_24H_BTC_NORM = `${PN_TRADE_VOLUME_24H_BTC}_normalized`
 , HEADERS = [{
   ...crNameProps('Trust Rank', 'trust_score_rank'),
   ..._crNumberCenterProps()
 }
-, crNameProps('Name', 'name')
+, crNameProps('Name')
 , {
-  ...crNameProps('24h BTC', 'trade_volume_24h_btc'),
+  ...crNameProps('24h BTC', PN_TRADE_VOLUME_24H_BTC),
   ...crNumberProps(0)
 },{
-  ...crNameProps('24h BTC Norm.', 'trade_volume_24h_btc_normalized'),
+  ...crNameProps('24h BTC Norm.', PN_TRADE_VOLUME_24H_BTC_NORM),
   ...crNumberProps(0)
 },{
   ...crNameProps('Trust Score', 'trust_score'),
@@ -31,9 +33,9 @@ const _crNumberCenterProps = () => ({
   ...crNameProps('Year Estb.', 'year_established', true),
   style: { textAlign: 'center' }
 }
-, crNameProps('Country', 'country', true)
+, crNameProps('Country', true)
 , {
-  ...crNameProps('Link', 'url', true),
+  ...crNameProps('Url', true),
   isHref: true
 }];
 

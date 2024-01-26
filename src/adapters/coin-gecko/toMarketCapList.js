@@ -1,4 +1,5 @@
 import {
+  crNameProps,
   crTableRows,
   crTableConfig
 } from '../toTableFn';
@@ -7,16 +8,18 @@ import { crPageConfig } from './fnAdapter';
 const _crPriceChangeItem = (
   name,
   pnSuffix,
-  options
+  isHide
 ) => ({
-  name,
-  pn: `price_change_percentage_${pnSuffix}`,
+  ...crNameProps(
+    name,
+    `price_change_percentage_${pnSuffix}`,
+    isHide
+  ),
   toN: [2],
-  isR: true,
-  ...options
+  isR: true
 });
 const _crStyleItem = (name, pn, options) => ({
-  name, pn,
+  ...crNameProps(name, pn),
   toN: [],
   style: {
     fontWeight: 'bold'
@@ -27,34 +30,28 @@ const _crStyleItem = (name, pn, options) => ({
 let _headers;
 const _getTableHeaders = () => _headers
   || (_headers = [{
-    name: 'Rank',
-    pn: 'market_cap_rank',
+    ...crNameProps('Rank', 'market_cap_rank'),
     toN: [],
     style: { textAlign: 'center' }
-  },{
-    name: 'Name',
-    pn: 'name',
-  },{
-    isHide: true,
-    name: 'Coin',
-    pn: 'symbol',
+  }
+  , crNameProps('Name')
+  , {
+    ...crNameProps('Symbol', true),
     style: {
       textTransform: 'uppercase',
       fontWeight: 'bold'
     }
   },
+
   _crPriceChangeItem('1h %', '1h_in_currency'),
   _crPriceChangeItem('24h %', '24h'),
   _crPriceChangeItem('7d %', '7d_in_currency'),
-  _crPriceChangeItem('30d %', '30d_in_currency', {isHide: true}),
-  _crPriceChangeItem('1y %', '1y_in_currency', {isHide: true}),
+  _crPriceChangeItem('30d %', '30d_in_currency', true),
+  _crPriceChangeItem('1y %', '1y_in_currency', true),
+
   _crStyleItem('Price', 'current_price'),
   _crStyleItem('MarketCap', 'market_cap', {isF: true})
-  ,{
-    isHide: true,
-    name: 'Updated UTC',
-    pn: 'last_updated'
-  }
+  , crNameProps('Updated UTC', 'last_updated', true)
 ]);
 
 const _toDate = rowDate => (rowDate || '')

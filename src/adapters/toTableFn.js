@@ -4,13 +4,15 @@ import {
   roundBy
 } from './AdapterFn';
 
+const _isStr = v => typeof v === 'string';
+
 export const crNameProps = (
   name,
   pn,
   isHide
 ) => ({
   name,
-  pn,
+  pn : _isStr(pn) ? pn : name.toLocalCase(),
   isHide
 })
 

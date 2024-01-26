@@ -10,11 +10,11 @@ const _pnTurnoverUsd = 'turnover',
     style: {
       textAlign: 'center'
     }
-  }, (0, _toTableFn.crNameProps)('Base', 'base'), (0, _toTableFn.crNameProps)('Quote', 'quote'), {
-    ...(0, _toTableFn.crNameProps)('Volume', 'volume'),
+  }, (0, _toTableFn.crNameProps)('Base'), (0, _toTableFn.crNameProps)('Quote'), {
+    ...(0, _toTableFn.crNameProps)('Volume'),
     ...(0, _toTableFn.crNumberProps)(0)
   }, {
-    ...(0, _toTableFn.crNameProps)('Price', 'price'),
+    ...(0, _toTableFn.crNameProps)('Price'),
     ...(0, _toTableFn.crNumberProps)()
   }, {
     ...(0, _toTableFn.crNameProps)('Price USD', 'price_usd', true),
@@ -22,7 +22,7 @@ const _pnTurnoverUsd = 'turnover',
   }, {
     ...(0, _toTableFn.crNameProps)('V*P USD', _pnTurnoverUsd, true),
     ...(0, _toTableFn.crNumberProps)(0)
-  }, (0, _toTableFn.crNameProps)('Time', 'time', true), (0, _toTableFn.crNameProps)('Date', 'date', true)];
+  }, (0, _toTableFn.crNameProps)('Time', true), (0, _toTableFn.crNameProps)('Date', true)];
 const _crTimeDate = time => (0, _AdapterFn.toTd)(time * 1000).split(' ')
   // base = null or quote = null or volume = 0
   ,

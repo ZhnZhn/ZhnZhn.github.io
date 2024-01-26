@@ -4,16 +4,13 @@ exports.__esModule = true;
 exports.default = void 0;
 var _toTableFn = require("../toTableFn");
 var _fnAdapter = require("./fnAdapter");
-const _crPriceChangeItem = (name, pnSuffix, options) => ({
-  name,
-  pn: `price_change_percentage_${pnSuffix}`,
+const _crPriceChangeItem = (name, pnSuffix, isHide) => ({
+  ...(0, _toTableFn.crNameProps)(name, `price_change_percentage_${pnSuffix}`, isHide),
   toN: [2],
-  isR: true,
-  ...options
+  isR: true
 });
 const _crStyleItem = (name, pn, options) => ({
-  name,
-  pn,
+  ...(0, _toTableFn.crNameProps)(name, pn),
   toN: [],
   style: {
     fontWeight: 'bold'
@@ -22,34 +19,20 @@ const _crStyleItem = (name, pn, options) => ({
 });
 let _headers;
 const _getTableHeaders = () => _headers || (_headers = [{
-  name: 'Rank',
-  pn: 'market_cap_rank',
+  ...(0, _toTableFn.crNameProps)('Rank', 'market_cap_rank'),
   toN: [],
   style: {
     textAlign: 'center'
   }
-}, {
-  name: 'Name',
-  pn: 'name'
-}, {
-  isHide: true,
-  name: 'Coin',
-  pn: 'symbol',
+}, (0, _toTableFn.crNameProps)('Name'), {
+  ...(0, _toTableFn.crNameProps)('Symbol', true),
   style: {
     textTransform: 'uppercase',
     fontWeight: 'bold'
   }
-}, _crPriceChangeItem('1h %', '1h_in_currency'), _crPriceChangeItem('24h %', '24h'), _crPriceChangeItem('7d %', '7d_in_currency'), _crPriceChangeItem('30d %', '30d_in_currency', {
-  isHide: true
-}), _crPriceChangeItem('1y %', '1y_in_currency', {
-  isHide: true
-}), _crStyleItem('Price', 'current_price'), _crStyleItem('MarketCap', 'market_cap', {
+}, _crPriceChangeItem('1h %', '1h_in_currency'), _crPriceChangeItem('24h %', '24h'), _crPriceChangeItem('7d %', '7d_in_currency'), _crPriceChangeItem('30d %', '30d_in_currency', true), _crPriceChangeItem('1y %', '1y_in_currency', true), _crStyleItem('Price', 'current_price'), _crStyleItem('MarketCap', 'market_cap', {
   isF: true
-}), {
-  isHide: true,
-  name: 'Updated UTC',
-  pn: 'last_updated'
-}]);
+}), (0, _toTableFn.crNameProps)('Updated UTC', 'last_updated', true)]);
 const _toDate = rowDate => (rowDate || '').replace('T', ' ').split('.')[0];
 const _transformDate = json => json.map(item => {
   item.last_updated = _toDate(item.last_updated);

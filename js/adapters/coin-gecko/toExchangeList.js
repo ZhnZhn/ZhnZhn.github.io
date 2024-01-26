@@ -10,14 +10,16 @@ const _crNumberCenterProps = () => ({
       textAlign: 'center'
     }
   }),
+  PN_TRADE_VOLUME_24H_BTC = 'trade_volume_24h_btc',
+  PN_TRADE_VOLUME_24H_BTC_NORM = `${PN_TRADE_VOLUME_24H_BTC}_normalized`,
   HEADERS = [{
     ...(0, _toTableFn.crNameProps)('Trust Rank', 'trust_score_rank'),
     ..._crNumberCenterProps()
-  }, (0, _toTableFn.crNameProps)('Name', 'name'), {
-    ...(0, _toTableFn.crNameProps)('24h BTC', 'trade_volume_24h_btc'),
+  }, (0, _toTableFn.crNameProps)('Name'), {
+    ...(0, _toTableFn.crNameProps)('24h BTC', PN_TRADE_VOLUME_24H_BTC),
     ...(0, _toTableFn.crNumberProps)(0)
   }, {
-    ...(0, _toTableFn.crNameProps)('24h BTC Norm.', 'trade_volume_24h_btc_normalized'),
+    ...(0, _toTableFn.crNameProps)('24h BTC Norm.', PN_TRADE_VOLUME_24H_BTC_NORM),
     ...(0, _toTableFn.crNumberProps)(0)
   }, {
     ...(0, _toTableFn.crNameProps)('Trust Score', 'trust_score'),
@@ -27,8 +29,8 @@ const _crNumberCenterProps = () => ({
     style: {
       textAlign: 'center'
     }
-  }, (0, _toTableFn.crNameProps)('Country', 'country', true), {
-    ...(0, _toTableFn.crNameProps)('Link', 'url', true),
+  }, (0, _toTableFn.crNameProps)('Country', true), {
+    ...(0, _toTableFn.crNameProps)('Url', true),
     isHref: true
   }];
 const toExchangeList = {
