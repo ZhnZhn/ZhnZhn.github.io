@@ -1,3 +1,5 @@
+import { fCrLazyValue } from '../AdapterFn';
+
 import {
   crNameProps,
   crTableRows,
@@ -27,15 +29,14 @@ const _crStyleItem = (name, pn, options) => ({
   ...options
 });
 
-let _headers;
-const _getTableHeaders = () => _headers
-  || (_headers = [{
+const _getTableHeaders = fCrLazyValue(() => [
+  {
     ...crNameProps('Rank', 'market_cap_rank'),
     toN: [],
     style: { textAlign: 'center' }
-  }
-  , crNameProps('Name')
-  , {
+  },
+  crNameProps('Name'),
+  {
     ...crNameProps('Symbol', true),
     style: {
       textTransform: 'uppercase',
@@ -50,9 +51,10 @@ const _getTableHeaders = () => _headers
   _crPriceChangeItem('1y %', '1y_in_currency', true),
 
   _crStyleItem('Price', 'current_price'),
-  _crStyleItem('MarketCap', 'market_cap', {isF: true})
-  , crNameProps('Updated UTC', 'last_updated', true)
+  _crStyleItem('MarketCap', 'market_cap', {isF: true}),
+  crNameProps('Updated UTC', 'last_updated', true)
 ]);
+
 
 const _toDate = rowDate => (rowDate || '')
   .replace('T', ' ')

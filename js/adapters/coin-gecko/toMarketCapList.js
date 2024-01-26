@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _AdapterFn = require("../AdapterFn");
 var _toTableFn = require("../toTableFn");
 var _fnAdapter = require("./fnAdapter");
 const _crPriceChangeItem = (name, pnSuffix, isHide) => ({
@@ -17,8 +18,7 @@ const _crStyleItem = (name, pn, options) => ({
   },
   ...options
 });
-let _headers;
-const _getTableHeaders = () => _headers || (_headers = [{
+const _getTableHeaders = (0, _AdapterFn.fCrLazyValue)(() => [{
   ...(0, _toTableFn.crNameProps)('Rank', 'market_cap_rank'),
   toN: [],
   style: {

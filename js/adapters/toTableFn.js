@@ -6,7 +6,7 @@ var _AdapterFn = require("./AdapterFn");
 const _isStr = v => typeof v === 'string';
 const crNameProps = (name, pn, isHide) => ({
   name,
-  pn: _isStr(pn) ? pn : name.toLocalCase(),
+  pn: _isStr(pn) ? pn : name.toLowerCase(),
   isHide
 });
 exports.crNameProps = crNameProps;

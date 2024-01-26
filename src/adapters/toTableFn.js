@@ -12,7 +12,7 @@ export const crNameProps = (
   isHide
 ) => ({
   name,
-  pn : _isStr(pn) ? pn : name.toLocalCase(),
+  pn : _isStr(pn) ? pn : name.toLowerCase(),
   isHide
 })
 

@@ -13,7 +13,7 @@
   "name",
   "pn",
   "isHide",
-  "toLocalCase",
+  "toLowerCase",
   "exports",
   "crNumberProps",
   "n",
