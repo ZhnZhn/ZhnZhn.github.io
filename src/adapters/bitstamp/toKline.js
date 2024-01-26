@@ -1,5 +1,7 @@
-import { isInArrStr } from '../AdapterFn';
-import { fToKline } from '../fToKline';
+import {
+  crOptionsFromStr,
+  fToKline
+} from '../fToKline';
 
 /*
 From Bitstamp API Documentation
@@ -13,49 +15,14 @@ From Bitstamp API Documentation
    }
 */
 
-const _isDailyTimeframe = isInArrStr([
-  "86400",
-  "259200"
-])
-, _isHourlyTimeframe = isInArrStr([
-  "3600",
-  "7200",
-  "14400",
-  "21600",
-  "43200"
-]);
-
-const DAILY_TIME_DELTA = 86_394_000; //1000*60*60*24 - 1000*60
-const HOURLY_TIME_DELTA = 3_540_000; //1000*60*59
-
-const _parseFloat = parseFloat
-, _toMls = timestamp => _parseFloat(timestamp)*1000
-, _fToMls = (delta) => (timestamp, isRecent) => isRecent
-   ? Date.now() - 6000 //1000*60
-   : _toMls(timestamp) + delta
-, _toDailyMls = _fToMls(DAILY_TIME_DELTA)
-, _toHourlyMls = _fToMls(HOURLY_TIME_DELTA)
-, _fToDate = ({ timeframe }) => _isDailyTimeframe(timeframe)
-   ? _toDailyMls
-   : _isHourlyTimeframe(timeframe)
-       ? _toHourlyMls
-       : _toMls;
-
-const _crDataOHLCV = (data, option) => {
-  const _recentIndex = data.length - 1
-  , _toDate = _fToDate(option);
-  return data.map((item, index) => ({
-    date: _toDate(item.timestamp, index === _recentIndex),
-    open: _parseFloat(item.open),
-    high: _parseFloat(item.high),
-    low: _parseFloat(item.low),
-    close: _parseFloat(item.close),
-    volume: _parseFloat(item.volume)
-  }));
-}
-
 const toKline = fToKline({
-  getArr: _crDataOHLCV
+  ...crOptionsFromStr(),
+  d: 'timestamp',
+  o: 'open',
+  h: 'high',
+  l: 'low',
+  c: 'close',
+  v: 'volume'
 });
 
 export default toKline
