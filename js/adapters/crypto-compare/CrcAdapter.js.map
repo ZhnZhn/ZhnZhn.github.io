@@ -5,10 +5,18 @@
  ],
  "file": "../../../src/adapters/crypto-compare/CrcAdapter.js",
  "names": [
+  "_crAdapterRouter",
+  "require",
+  "_toHdConfig",
+  "_interopRequireDefault",
   "_rAdapter",
   "DF",
   "toHdConfig",
-  "CrcAdapter"
+  "CrcAdapter",
+  "crAdapterRouter",
+  "_default",
+  "exports",
+  "default"
  ],
- "mappings": ";;;;;;;AAAA;;AAEA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC;AADY,CAAlB;AAAA,IAGEC,UAAU,GAAG,iCAAgBH,SAAhB,CAHf;eAKeG,U"
+ "mappings": ";;;;;AAAA,IAAAA,gBAAA,GAAAC,OAAA;AAEA,IAAAC,WAAA,GAAAC,sBAAA,CAAAF,OAAA;AAEA,MAAMG,SAAS,GAAG;IAChBC,EAAE,EAAEC;EACN,CAAC;EACCC,UAAU,GAAG,IAAAC,gCAAe,EAACJ,SAAS,CAAC;AAAC,IAAAK,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAE3BJ,UAAU"
 }

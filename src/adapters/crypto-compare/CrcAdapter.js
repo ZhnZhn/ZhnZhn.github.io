@@ -1,4 +1,4 @@
-import crAdapterRouter from '../crAdapterRouter'
+import { crAdapterRouter } from '../crAdapterRouter'
 
 import toHdConfig from './toHdConfig'
 

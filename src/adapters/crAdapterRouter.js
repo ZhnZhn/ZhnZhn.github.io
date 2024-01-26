@@ -1,3 +1,4 @@
+import toOrderBookDf from './toOrderBookDf';
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -23,7 +24,7 @@ const _fGetAdapter = (
     : routeAdapter;
 };
 
-const crAdapterRouter = (
+export const crAdapterRouter = (
   rAdapter, {
   getRoute,
   isKey,
@@ -53,6 +54,12 @@ const crAdapterRouter = (
       .toSeries(json, option, chart)
    };
    return _adapter;
-};
+}
 
-export default crAdapterRouter
+export const crAdapterRouterDfOb = (
+  toKline,
+  toOrderBook
+) => crAdapterRouter({
+  DF: toKline,
+  OB: toOrderBook || toOrderBookDf
+})

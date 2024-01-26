@@ -1,9 +1,11 @@
-import api from './BtApi'
-import adapter from './BtAdapter'
+import { crAdapterRouterDfOb } from '../crAdapterRouter';
+import toKline from './toKline';
+import toOrderBook from './toOrderBook';
+import api from './BtApi';
 
 const Bt = {
   api,
-  adapter
+  adapter: crAdapterRouterDfOb(toKline, toOrderBook)
 };
 
 export default Bt

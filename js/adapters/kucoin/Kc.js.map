@@ -5,16 +5,19 @@
  ],
  "file": "../../../src/adapters/kucoin/Kc.js",
  "names": [
-  "_KcApi",
-  "_interopRequireDefault",
+  "_crAdapterRouter",
   "require",
-  "_KcAdapter",
+  "_toKline",
+  "_interopRequireDefault",
+  "_KcApi",
   "Kc",
   "api",
   "adapter",
+  "crAdapterRouterDfOb",
+  "toKline",
   "_default",
   "exports",
   "default"
  ],
- "mappings": ";;;;;AAAA,IAAAA,MAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,UAAA,GAAAF,sBAAA,CAAAC,OAAA;AAEA,MAAME,EAAE,GAAG;EACTC,GAAG,EAAHA,cAAG;EACHC,OAAO,EAAPA;AACF,CAAC;AAAA,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEcL,EAAE"
+ "mappings": ";;;;;AAAA,IAAAA,gBAAA,GAAAC,OAAA;AACA,IAAAC,QAAA,GAAAC,sBAAA,CAAAF,OAAA;AACA,IAAAG,MAAA,GAAAD,sBAAA,CAAAF,OAAA;AAEA,MAAMI,EAAE,GAAG;EACTC,GAAG,EAAHA,cAAG;EACHC,OAAO,EAAE,IAAAC,oCAAmB,EAACC,gBAAO;AACtC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaP,EAAE"
 }

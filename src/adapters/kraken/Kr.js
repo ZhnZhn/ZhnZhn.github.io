@@ -1,9 +1,10 @@
-import api from './KrApi'
-import adapter from './KrAdapter'
+import { crAdapterRouterDfOb } from '../crAdapterRouter';
+import toKline from './toKline';
+import api from './KrApi';
 
 const Kr = {
   api,
-  adapter
-}
+  adapter: crAdapterRouterDfOb(toKline)
+};
 
 export default Kr

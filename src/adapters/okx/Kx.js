@@ -1,9 +1,10 @@
-import api from './KxApi'
-import adapter from './KxAdapter'
+import { crAdapterRouterDfOb } from '../crAdapterRouter';
+import toKline from './toKline';
+import api from './KxApi';
 
 const Kx = {
   api,
-  adapter
-}
+  adapter: crAdapterRouterDfOb(toKline)
+};
 
 export default Kx

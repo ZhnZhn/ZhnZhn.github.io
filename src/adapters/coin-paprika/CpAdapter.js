@@ -1,10 +1,10 @@
-import crAdapterRouter from '../crAdapterRouter'
+import { crAdapterRouter } from '../crAdapterRouter'
 
 import toChartConfig from './toChartConfig'
 import toTwConfig from './toTwConfig'
 import toCiConfig from './toCiConfig'
 
-const _rAdapter = {  
+const _rAdapter = {
   DF: toChartConfig,
   TW: toTwConfig,
   CI: toCiConfig

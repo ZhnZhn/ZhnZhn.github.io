@@ -1,8 +1,6 @@
 import crAdapterType1 from '../crAdapterType1';
-import crAdapterRouter from '../crAdapterRouter';
-import {
-  compareByDate
-} from '../compareByFn';
+import { crAdapterRouter } from '../crAdapterRouter';
+import { compareByDate } from '../compareByFn';
 import toCategoryAdapter from './toCategoryAdapter';
 import crToTreeMapAdapter from './crToTreeMapAdapter';
 

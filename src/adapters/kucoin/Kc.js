@@ -1,9 +1,10 @@
-import api from './KcApi'
-import adapter from './KcAdapter'
+import { crAdapterRouterDfOb } from '../crAdapterRouter';
+import toKline from './toKline';
+import api from './KcApi';
 
 const Kc = {
   api,
-  adapter
-}
+  adapter: crAdapterRouterDfOb(toKline)
+};
 
 export default Kc

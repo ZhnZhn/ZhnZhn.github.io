@@ -1,4 +1,4 @@
-import crAdapterRouter from '../crAdapterRouter'
+import { crAdapterRouter } from '../crAdapterRouter'
 
 import Scatter from './TemplateScatter'
 import Tokens from './TemplateTokens'
@@ -11,7 +11,7 @@ import IT from './ItemTypes'
 
 const _rAdapter = {
   _pn: 'dfType',
-  DF: toChart,  
+  DF: toChart,
   [IT.DIV]: Scatter(toDividends),
   [IT.CHART]: toChart,
   [IT.COM]: Tokens(toCompany),

@@ -1,9 +1,10 @@
+import { crAdapterRouterDfOb } from '../crAdapterRouter';
+import toKline from './toKline';
 import api from './BbApi';
-import adapter from './BbAdapter';
 
 const Bb = {
   api,
-  adapter
+  adapter: crAdapterRouterDfOb(toKline)
 };
 
 export default Bb

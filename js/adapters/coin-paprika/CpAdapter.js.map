@@ -5,6 +5,12 @@
  ],
  "file": "../../../src/adapters/coin-paprika/CpAdapter.js",
  "names": [
+  "_crAdapterRouter",
+  "require",
+  "_toChartConfig",
+  "_interopRequireDefault",
+  "_toTwConfig",
+  "_toCiConfig",
   "_rAdapter",
   "DF",
   "toChartConfig",
@@ -13,7 +19,11 @@
   "CI",
   "toCiConfig",
   "CpAdapter",
-  "isKey"
+  "crAdapterRouter",
+  "isKey",
+  "_default",
+  "exports",
+  "default"
  ],
- "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;AACA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC,yBADY;AAEhBC,EAAAA,EAAE,EAAEC,sBAFY;AAGhBC,EAAAA,EAAE,EAAEC;AAHY,CAAlB;AAAA,IAKEC,SAAS,GAAG,iCAAgBP,SAAhB,EAA2B;AAAEQ,EAAAA,KAAK,EAAE;AAAT,CAA3B,CALd;eAOeD,S"
+ "mappings": ";;;;;AAAA,IAAAA,gBAAA,GAAAC,OAAA;AAEA,IAAAC,cAAA,GAAAC,sBAAA,CAAAF,OAAA;AACA,IAAAG,WAAA,GAAAD,sBAAA,CAAAF,OAAA;AACA,IAAAI,WAAA,GAAAF,sBAAA,CAAAF,OAAA;AAEA,MAAMK,SAAS,GAAG;IAChBC,EAAE,EAAEC,sBAAa;IACjBC,EAAE,EAAEC,mBAAU;IACdC,EAAE,EAAEC;EACN,CAAC;EACCC,SAAS,GAAG,IAAAC,gCAAe,EAACR,SAAS,EAAE;IAAES,KAAK,EAAE;EAAK,CAAC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAE3CL,SAAS"
 }

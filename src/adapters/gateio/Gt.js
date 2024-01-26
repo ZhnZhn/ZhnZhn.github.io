@@ -1,9 +1,10 @@
-import api from './GtApi'
-import adapter from './GtAdapter'
+import { crAdapterRouterDfOb } from '../crAdapterRouter';
+import toKline from './toKline';
+import api from './GtApi';
 
 const Gt = {
   api,
-  adapter
-}
+  adapter: crAdapterRouterDfOb(toKline)
+};
 
 export default Gt

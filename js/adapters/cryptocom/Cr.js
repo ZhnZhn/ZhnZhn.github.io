@@ -3,11 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _crAdapterRouter = require("../crAdapterRouter");
+var _toKline = _interopRequireDefault(require("./toKline"));
 var _CrApi = _interopRequireDefault(require("./CrApi"));
-var _CrAdapter = _interopRequireDefault(require("./CrAdapter"));
 const Cr = {
   api: _CrApi.default,
-  adapter: _CrAdapter.default
+  adapter: (0, _crAdapterRouter.crAdapterRouterDfOb)(_toKline.default)
 };
 var _default = exports.default = Cr;
 //# sourceMappingURL=Cr.js.map

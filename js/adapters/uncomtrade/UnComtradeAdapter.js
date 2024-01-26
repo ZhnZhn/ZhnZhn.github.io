@@ -5,11 +5,10 @@ exports.__esModule = true;
 exports.default = void 0;
 var _fnAdapter = require("./fnAdapter");
 var _toConfig = _interopRequireDefault(require("./toConfig"));
-var _crAdapterRouter = _interopRequireDefault(require("../crAdapterRouter"));
-const UnComtradeAdapter = (0, _crAdapterRouter.default)(void 0, {
+var _crAdapterRouter = require("../crAdapterRouter");
+const UnComtradeAdapter = (0, _crAdapterRouter.crAdapterRouter)(void 0, {
   getRoute: _toConfig.default,
   crDfKey: _fnAdapter.crChartId
 });
-var _default = UnComtradeAdapter;
-exports.default = _default;
+var _default = exports.default = UnComtradeAdapter;
 //# sourceMappingURL=UnComtradeAdapter.js.map

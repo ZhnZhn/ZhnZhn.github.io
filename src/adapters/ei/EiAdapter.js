@@ -10,7 +10,7 @@ import {
 
 import crAdapterType1 from '../crAdapterType1';
 import crFromYearData from '../crFromYearData';
-import crAdapterRouter from '../crAdapterRouter';
+import { crAdapterRouter } from '../crAdapterRouter';
 import toCategoryAdapter from '../toCategoryAdapter';
 
 import toTreeMapAdapter from './toTreeMapAdapter';

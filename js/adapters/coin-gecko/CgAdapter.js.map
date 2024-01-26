@@ -5,6 +5,12 @@
  ],
  "file": "../../../src/adapters/coin-gecko/CgAdapter.js",
  "names": [
+  "_crAdapterRouter",
+  "require",
+  "_toChart",
+  "_interopRequireDefault",
+  "_toExchangeList",
+  "_toMarketCapList",
   "_rAdapter",
   "DF",
   "toChart",
@@ -13,7 +19,11 @@
   "MCL",
   "toMarketCapList",
   "CgAdapter",
-  "isKey"
+  "crAdapterRouter",
+  "isKey",
+  "_default",
+  "exports",
+  "default"
  ],
- "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;AACA;;AAEA,IAAMA,SAAS,GAAG;AAChBC,EAAAA,EAAE,EAAEC,mBADY;AAEhBC,EAAAA,EAAE,EAAEC,0BAFY;AAGhBC,EAAAA,GAAG,EAAEC;AAHW,CAAlB;AAAA,IAKEC,SAAS,GAAG,iCAAgBP,SAAhB,EAA2B;AAAEQ,EAAAA,KAAK,EAAE;AAAT,CAA3B,CALd;eAOeD,S"
+ "mappings": ";;;;;AAAA,IAAAA,gBAAA,GAAAC,OAAA;AAEA,IAAAC,QAAA,GAAAC,sBAAA,CAAAF,OAAA;AACA,IAAAG,eAAA,GAAAD,sBAAA,CAAAF,OAAA;AACA,IAAAI,gBAAA,GAAAF,sBAAA,CAAAF,OAAA;AAEA,MAAMK,SAAS,GAAG;IAChBC,EAAE,EAAEC,gBAAO;IACXC,EAAE,EAAEC,uBAAc;IAClBC,GAAG,EAAEC;EACP,CAAC;EACCC,SAAS,GAAG,IAAAC,gCAAe,EAACR,SAAS,EAAE;IAAES,KAAK,EAAE;EAAK,CAAC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAE3CL,SAAS"
 }

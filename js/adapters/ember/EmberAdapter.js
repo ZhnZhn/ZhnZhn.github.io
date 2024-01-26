@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
-var _crAdapterRouter = _interopRequireDefault(require("../crAdapterRouter"));
+var _crAdapterRouter = require("../crAdapterRouter");
 var _compareByFn = require("../compareByFn");
 var _toCategoryAdapter = _interopRequireDefault(require("./toCategoryAdapter"));
 var _crToTreeMapAdapter = _interopRequireDefault(require("./crToTreeMapAdapter"));
@@ -42,7 +42,7 @@ const getRoute = option => {
   const _seriaType = option.seriaType;
   return (0, _fnAdapter.isTreeMap)(_seriaType) ? (0, _crToTreeMapAdapter.default)(option) : (0, _fnAdapter.isCategory)(_seriaType) ? _toCategoryAdapter.default : toLineAdapter;
 };
-const EmberAdapter = (0, _crAdapterRouter.default)(void 0, {
+const EmberAdapter = (0, _crAdapterRouter.crAdapterRouter)(void 0, {
   getRoute
 });
 var _default = exports.default = EmberAdapter;

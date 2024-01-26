@@ -1,4 +1,4 @@
-import crAdapterRouter from '../crAdapterRouter'
+import { crAdapterRouter } from '../crAdapterRouter'
 
 import toChart from './toChart'
 import toHistorical from './toHistorical'

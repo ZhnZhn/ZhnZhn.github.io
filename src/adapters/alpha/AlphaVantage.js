@@ -1,5 +1,5 @@
 import api from './Api'
-import crAdapterRouter from '../crAdapterRouter'
+import { crAdapterRouter } from '../crAdapterRouter'
 
 import IndicatorAdapter from './IndicatorAdapter'
 import IntradayAdapter from './IntradayAdapter'
