@@ -26,7 +26,7 @@ import DialogContainer from './dialogs/DialogContainer';
 
 import checkBuild from './checkBuild';
 
-const BUILD_DATE = '25-01-2024'
+const BUILD_DATE = '26-01-2024'
 , CL_COMP_CONTAINER = "component-container";
 
 const showSettings = bindTo(
