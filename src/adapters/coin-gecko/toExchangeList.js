@@ -35,7 +35,7 @@ const _crNumberCenterProps = () => ({
 }
 , crNameProps('Country', true)
 , {
-  ...crNameProps('Url', true),
+  ...crNameProps('Link', 'url', true),
   isHref: true
 }];
 

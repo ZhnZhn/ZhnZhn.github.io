@@ -8,13 +8,18 @@ const _isStr = v => typeof v === 'string';
 
 export const crNameProps = (
   name,
-  pn,
-  isHide
-) => ({
-  name,
-  pn : _isStr(pn) ? pn : name.toLowerCase(),
-  isHide
-})
+  pnOrIsHideOrVoid,
+  isHideOrVoid
+) => {
+  const [pn, isHide] = _isStr(pnOrIsHideOrVoid)
+    ? [pnOrIsHideOrVoid, isHideOrVoid]
+    : [name.toLowerCase(), pnOrIsHideOrVoid];
+  return {
+    name,
+    pn,
+    isHide
+  };
+};
 
 export const crNumberProps = (n) => ({
   toN: [n],

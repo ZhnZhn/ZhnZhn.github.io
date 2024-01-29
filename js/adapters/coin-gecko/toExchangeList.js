@@ -30,7 +30,7 @@ const _crNumberCenterProps = () => ({
       textAlign: 'center'
     }
   }, (0, _toTableFn.crNameProps)('Country', true), {
-    ...(0, _toTableFn.crNameProps)('Url', true),
+    ...(0, _toTableFn.crNameProps)('Link', 'url', true),
     isHref: true
   }];
 const toExchangeList = {

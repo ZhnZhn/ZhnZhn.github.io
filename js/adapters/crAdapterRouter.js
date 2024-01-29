@@ -1,7 +1,9 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.default = void 0;
+exports.crAdapterRouterDfOb = exports.crAdapterRouter = void 0;
+var _toOrderBookDf = _interopRequireDefault(require("./toOrderBookDf"));
 const _isFn = fn => typeof fn === 'function';
 const _getDfRoute = (option, rAdapter) => {
   const {
@@ -37,6 +39,10 @@ const crAdapterRouter = function (rAdapter, _temp) {
   };
   return _adapter;
 };
-var _default = crAdapterRouter;
-exports.default = _default;
+exports.crAdapterRouter = crAdapterRouter;
+const crAdapterRouterDfOb = (toKline, toOrderBook) => crAdapterRouter({
+  DF: toKline,
+  OB: toOrderBook || _toOrderBookDf.default
+});
+exports.crAdapterRouterDfOb = crAdapterRouterDfOb;
 //# sourceMappingURL=crAdapterRouter.js.map

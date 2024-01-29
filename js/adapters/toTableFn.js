@@ -4,11 +4,14 @@ exports.__esModule = true;
 exports.crTableRows = exports.crTableOptions = exports.crTableConfig = exports.crNumberProps = exports.crNameProps = void 0;
 var _AdapterFn = require("./AdapterFn");
 const _isStr = v => typeof v === 'string';
-const crNameProps = (name, pn, isHide) => ({
-  name,
-  pn: _isStr(pn) ? pn : name.toLowerCase(),
-  isHide
-});
+const crNameProps = (name, pnOrIsHideOrVoid, isHideOrVoid) => {
+  const [pn, isHide] = _isStr(pnOrIsHideOrVoid) ? [pnOrIsHideOrVoid, isHideOrVoid] : [name.toLowerCase(), pnOrIsHideOrVoid];
+  return {
+    name,
+    pn,
+    isHide
+  };
+};
 exports.crNameProps = crNameProps;
 const crNumberProps = n => ({
   toN: [n],
