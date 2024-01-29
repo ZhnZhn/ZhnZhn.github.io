@@ -154,9 +154,9 @@ const crZhConfig = _ref3 => {
   };
 };
 exports.crZhConfig = crZhConfig;
-const fCrLazyValue = crValue => () => {
+const fCrLazyValue = crValue => {
   let value;
-  return value === void 0 ? value = crValue() : value;
+  return () => value === void 0 ? value = crValue() : value;
 };
 exports.fCrLazyValue = fCrLazyValue;
 //# sourceMappingURL=AdapterFn.js.map

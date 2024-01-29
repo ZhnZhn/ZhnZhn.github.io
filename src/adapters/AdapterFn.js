@@ -161,9 +161,9 @@ export const crZhConfig = ({
   dataSource
 })
 
-export const fCrLazyValue = crValue => () => {
+export const fCrLazyValue = crValue => {
   let value;
-  return value === void 0
+  return () => value === void 0
     ? (value = crValue())
-    : value;
-};
+    : value;    
+}
