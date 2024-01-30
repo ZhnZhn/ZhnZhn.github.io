@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _big = _interopRequireDefault(require("big.js"));
-var _dateFn = require("../utils/dateFn");
 const _getPriceAndFlow = point => {
   const close = point[4],
     high = point[2] || close,
@@ -14,9 +13,8 @@ const _getPriceAndFlow = point => {
     isFullData = !!(point[2] && point[3]);
   return [bTp, bRmf, isFullData];
 };
-const _isNumber = n => typeof n === 'number' && n - n === 0;
-const _crMfiPoint = (p, y, isNegative, bTp, bRmf) => ({
-  x: _isNumber(p) ? p : (0, _dateFn.ymdToUTC)(p),
+const _crMfiPoint = (dateMls, y, isNegative, bTp, bRmf) => ({
+  x: dateMls,
   y,
   isNegative,
   tp: parseFloat(bTp.toFixed(4)),
@@ -70,6 +68,5 @@ const mfi = (data, period) => {
   }
   return [dataMfi, nNotFullPoint];
 };
-var _default = mfi;
-exports.default = _default;
+var _default = exports.default = mfi;
 //# sourceMappingURL=mfi.js.map

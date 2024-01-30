@@ -1,5 +1,4 @@
 import Big from 'big.js';
-import { ymdToUTC } from '../utils/dateFn';
 
 const _getPriceAndFlow = (point) => {
   const close = point[4]
@@ -18,17 +17,14 @@ const _getPriceAndFlow = (point) => {
   ];
 };
 
-const _isNumber = n => typeof n === 'number'
-  && n-n === 0;
-
 const _crMfiPoint = (
-  p,
+  dateMls,
   y,
   isNegative,
   bTp,
   bRmf
 ) => ({
-  x: _isNumber(p) ? p : ymdToUTC(p),
+  x: dateMls,
   y,
   isNegative,
   tp: parseFloat(bTp.toFixed(4)),
