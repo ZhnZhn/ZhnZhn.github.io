@@ -1,4 +1,7 @@
-import { ymdhmsToUTC } from './AdapterFn';
+import {
+  FN_NOOP,
+  ymdhmsToUTC
+} from './AdapterFn';
 import {
   crVolumePoint,
   crAthPoint
@@ -9,6 +12,24 @@ const _getNotEmptyErr = arr => arr.length === 0
   ? void 0
   : arr
 
+const _fAddAthPointTo = () => {
+  let _prevClose;
+  return (dATH, _date, open, close) => {
+    dATH.push(!_isUndef(_prevClose)
+      ? crAthPoint({
+         date: _date,
+         close: _prevClose,
+         open
+        })
+      : crAthPoint({
+         date: _date,
+         close: close,
+         open: close
+        })
+    )
+    _prevClose = close
+  }
+};
 
 export const toStockSeriesData = ({
   isAth=true,
@@ -28,30 +49,32 @@ export const toStockSeriesData = ({
     seriaType,
     seriaColor,
     seriaWidth
-  } = option || {};
-  const dC = [], dO = [], dH = [], dL = []
+  } = option || {}
+  , dC = [], dO = [], dH = [], dL = []
   , dV = [], dVc = []
-  , dATH = [], dMfi = [];
-  let _prevClose
-  , minClose = Number.POSITIVE_INFINITY
+  , dATH = [], dMfi = []
+  , _addATHPointTo = isAth
+     ? _fAddAthPointTo()
+     : FN_NOOP;
+
+  let minClose = Number.POSITIVE_INFINITY
   , maxClose = Number.NEGATIVE_INFINITY;
+
   arr.forEach(item => {
     const {
-       open,
-       high,
-       low,
-       close,
-       volume
-      } = item
-    , date = item[pnDate] || ''
-    , _date = toDate(date);
+      open,
+      high,
+      low,
+      close,
+      volume
+    } = item
+    , _date = toDate(item[pnDate] || '');
 
     dC.push([_date, close])
+    if (minClose > close) { minClose = close }
+    if (maxClose < close) { maxClose = close }
 
     if (isAllSeries) {
-      if (minClose > close) { minClose = close }
-      if (maxClose < close ) { maxClose = close }
-
       dO.push([_date, open])
       dH.push([_date, high])
       dL.push([_date, low])
@@ -64,26 +87,13 @@ export const toStockSeriesData = ({
              option: { _high: high, _low: low }
           })
         )
-        dMfi.push([date, close, high, low, close, volume])
+        dMfi.push([_date, close, high, low, close, volume])
       }
 
-      if (isAth) {
-        dATH.push(!_isUndef(_prevClose)
-          ? crAthPoint({
-             date: _date,
-             close: _prevClose,
-             open
-            })
-          : crAthPoint({
-             date: _date,
-             close: close,
-             open: close
-            })
-        )
-        _prevClose = close
-     }
+      _addATHPointTo(dATH, _date, open, close)
    }
   })
+
   return {
     dC, dO, dH, dL,
     minClose,
