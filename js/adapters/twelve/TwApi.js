@@ -21,10 +21,11 @@ const TwApi = {
   },
   checkResponse(json, option) {
     const {
-      values
+      values,
+      message
     } = json || {};
     if (!_isArr(values)) {
-      (0, _fnAdapter.crError)('', json.message);
+      throw (0, _fnAdapter.crError)('', message);
     }
   }
 };

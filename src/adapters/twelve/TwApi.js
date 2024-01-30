@@ -17,9 +17,9 @@ const TwApi = {
     return `${URL}/time_series?symbol=${symbol}&apikey=${apiKey}&interval=${interval}&outputsize=${outputsize}&${QUERY_TAIL}`;
   },
   checkResponse(json, option){
-    const { values } = json || {};
+    const { values, message } = json || {};
     if (!_isArr(values)) {
-      crError('', json.message);
+      throw crError('', message);
     }
   }
 };
