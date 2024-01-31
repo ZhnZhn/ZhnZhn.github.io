@@ -1,4 +1,5 @@
 import {
+  isNumber,
   getCaption,
   ymdToUTC
 } from '../AdapterFn';
@@ -26,7 +27,7 @@ const _crInfo = (
   description: json.response.description || ''
 })
 
-/* [ ["201806", 1000], ... ] */
+
 export const crTitle = ({
   items=[],
   dfTitle
@@ -42,12 +43,19 @@ export const crTitle = ({
   };
 }
 
+const _toNumber = str => {
+  const _n = parseFloat(str);
+  return isNumber(_n)
+    ? _n
+    : null;
+};
+
 export const crData = (
   json,
   { dfData }
 ) => json.response.data.map(item => [
   ymdToUTC(item.period),
-  item[dfData]
+  _toNumber(item[dfData])
 ])
 
 
