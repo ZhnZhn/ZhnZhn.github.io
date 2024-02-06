@@ -100,6 +100,7 @@
       "<rootDir>/js/components/zhn-menu",
       "<rootDir>/js/components/zhn-tab",
       "<rootDir>/js/components/zhn-table",
+      "<rootDir>/js/flux/",
       "<rootDir>/js/flux/logic/",
       "<rootDir>/js/flux/stores/"
     ],
@@ -122,6 +123,7 @@
       "<rootDir>/js/components/zhn-menu",
       "<rootDir>/js/components/zhn-tab",
       "<rootDir>/js/components/zhn-table",
+      "<rootDir>/js/flux/",
       "<rootDir>/js/flux/logic/",
       "<rootDir>/js/flux/stores/"
     ]

@@ -11,7 +11,7 @@ const _createStoreImpl = createState => {
     const nextState = typeof partial === "function" ? partial(state) : partial;
     if (!_objectIs(nextState, state)) {
       const previousState = state;
-      state = (replace != null ? replace : typeof nextState !== "object") ? nextState : _assign({}, state, nextState);
+      state = (replace != null ? replace : typeof nextState !== "object" || nextState === null) ? nextState : _assign({}, state, nextState);
       listeners.forEach(listener => listener(state, previousState));
     }
   };
@@ -21,8 +21,8 @@ const _createStoreImpl = createState => {
     return () => listeners.delete(listener);
   };
   const api = {
-    setState,
     getState,
+    setState,
     subscribe
   };
   state = createState(setState, getState, api);
