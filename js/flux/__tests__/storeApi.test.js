@@ -1,6 +1,42 @@
 "use strict";
 
 var _storeApi = require("../storeApi");
+describe("createStoreWithSelector", () => {
+  const fn = _storeApi.createStoreWithSelector;
+  test("should create store", () => {
+    const _initialStore = {
+        v: "value",
+        c: 0,
+        is: false
+      },
+      _crStore = () => _initialStore,
+      {
+        getState,
+        setState
+      } = fn(_crStore);
+    expect(getState()).toEqual(_initialStore);
+    setState({
+      v: "newValue",
+      is: true
+    });
+    expect(getState()).toEqual({
+      v: "newValue",
+      c: 0,
+      is: true
+    });
+  });
+});
+describe("getStoreApi", () => {
+  const fn = _storeApi.getStoreApi;
+  test('should return tuple with store api functions', () => {
+    const store = (0, _storeApi.createStoreWithSelector)(() => ({})),
+      [setState, getState] = fn(store);
+    expect(typeof setState).toBe("function");
+    expect(setState).toEqual(store.setState);
+    expect(typeof getState).toBe("function");
+    expect(getState).toEqual(store.getState);
+  });
+});
 describe("fCrStoreSlice", () => {
   const fn = _storeApi.fCrStoreSlice;
   test("should return array with crSlice and selector functions", () => {
