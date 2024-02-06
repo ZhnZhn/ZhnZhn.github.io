@@ -10,10 +10,8 @@ var _type2 = _interopRequireDefault(require("../creaters/type5"));
 var _un = _interopRequireDefault(require("../creaters/un5"));
 var _futures = _interopRequireDefault(require("../creaters/futures3"));
 var _futuresWiki = _interopRequireDefault(require("../creaters/futuresWiki"));
-var _bigMac = _interopRequireDefault(require("../creaters/bigMac"));
 const noopFn = () => {};
 const _r = {
-  BigMac: _bigMac.default,
   DF: _selectN.default,
   DialogType4: _type.default,
   DialogType4A: _type.default,
@@ -30,6 +28,5 @@ const _r = {
 const RouterLoadFn = {
   getFn: (loadFnType, dialogType) => loadFnType ? _r[loadFnType] || noopFn : dialogType && _r[dialogType] || _r.DF
 };
-var _default = RouterLoadFn;
-exports.default = _default;
+var _default = exports.default = RouterLoadFn;
 //# sourceMappingURL=RouterLoadFn.js.map

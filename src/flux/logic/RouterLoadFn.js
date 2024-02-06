@@ -9,13 +9,9 @@ import fnUn5 from '../creaters/un5'
 import fnFutures3 from '../creaters/futures3'
 import fnFuturesWiki from '../creaters/futuresWiki'
 
-import fnBigMac from '../creaters/bigMac'
-
 const noopFn = () => {};
 
 const _r = {
-  BigMac: fnBigMac,
-
   DF: fnSelectN,
   DialogType4: fnType4,
   DialogType4A: fnType4,
