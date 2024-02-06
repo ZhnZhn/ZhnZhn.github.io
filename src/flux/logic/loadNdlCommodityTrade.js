@@ -34,7 +34,7 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
    const { isLoadMeta } = option
    , _onFetch = (isLoadMeta)
         ? _fnFetchToChartComp
-        : LoadImpl.Ndl.fnFetchToChartComp
+        : LoadImpl[LT_Q].fnFetchToChartComp
    , _onFailed = (isLoadMeta)
         ? _fnFailedLoadMeta.bind(null, option, onFailed)
         : onFailed;
@@ -54,7 +54,7 @@ const _loadToChart = function(option, onAdded, onFailed){
   const { isLoadMeta } = option
       , _onFetch = (isLoadMeta)
            ? _fnFetchToChartComp
-           : LoadImpl.Ndl.fnFetchToChart
+           : LoadImpl[LT_Q].fnFetchToChart
       , _onFailed = (isLoadMeta)
            ? _fnFailedLoadMeta.bind(null, option, onFailed)
            : onFailed;

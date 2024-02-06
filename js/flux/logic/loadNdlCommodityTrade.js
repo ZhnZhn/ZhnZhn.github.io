@@ -40,7 +40,7 @@ const _loadToChartComp = function (option, onCompleted, onFailed) {
   const {
       isLoadMeta
     } = option,
-    _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl.default.Ndl.fnFetchToChartComp,
+    _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl.default[_LoadType.LT_Q].fnFetchToChartComp,
     _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
   (0, _fnFetch.fetchJson)({
     uri: _NdlApi.default.getRequestUrl(option),
@@ -56,7 +56,7 @@ const _loadToChart = function (option, onAdded, onFailed) {
   const {
       isLoadMeta
     } = option,
-    _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl.default.Ndl.fnFetchToChart,
+    _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl.default[_LoadType.LT_Q].fnFetchToChart,
     _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
   (0, _fnFetch.fetchJson)({
     uri: _NdlApi.default.getRequestUrl(option),
