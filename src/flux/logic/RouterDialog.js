@@ -1,3 +1,5 @@
+import { crRouter } from '../../utils/crRouter';
+
 import {
   BT_STOCK_MARKETS,
   BT_NORWAY_STATISTICS,
@@ -11,7 +13,7 @@ import DialogSelectN from '../../components/dialogs/DialogSelectN';
 const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
 
-const _router = {
+const _router = crRouter({
   DF: DialogSelectN,
   DialogSelectN: DialogSelectN,
 
@@ -211,9 +213,8 @@ const _router = {
         this._loadUN(); break;
       default: return;
     }
-  }
-
-}
+  }  
+});
 
 export const getDialog = (
   type

@@ -3,13 +3,14 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.loadDialogs = exports.getDialog = void 0;
+var _crRouter = require("../../utils/crRouter");
 var _BrowserType = require("../../constants/BrowserType");
 var _DialogSelectN = _interopRequireDefault(require("../../components/dialogs/DialogSelectN"));
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
-const _router = {
+const _router = (0, _crRouter.crRouter)({
   DF: _DialogSelectN.default,
   DialogSelectN: _DialogSelectN.default,
   _loadGD() {
@@ -19,7 +20,6 @@ const _router = {
       return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/dialogs/GeneralDialogs.js"))).then(module => this.GD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
-
     return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "general-dialogs" */
     /* webpackMode: "lazy" */
     "../../components/dialogs/GeneralDialogs"))).then(module => this.GD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
@@ -56,7 +56,6 @@ const _router = {
       return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/uncomtrade/UnDialogs.js"))).then(module => this.UN = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
-
     return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "un-dialogs" */
     /* webpackMode: "lazy" */
     "../../components/uncomtrade/UnDialogs"))).then(module => this.UN = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
@@ -76,7 +75,6 @@ const _router = {
       return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/stock-markets/AlphaDialogs.js"))).then(module => this.SM = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
-
     return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "av-dialogs" */
     /* webpackMode: "lazy" */
     "../../components/stock-markets/AlphaDialogs"))).then(module => this.SM = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
@@ -99,7 +97,6 @@ const _router = {
       return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/stat-dialogs/StatDialogs.js"))).then(module => this.SD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
-
     return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "stat-dialogs" */
     /* webpackMode: "lazy" */
     "../../components/stat-dialogs/StatDialogs"))).then(module => this.SD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
@@ -116,7 +113,6 @@ const _router = {
       return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/us-economics/UsDialogs.js"))).then(module => this.US = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
-
     return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "us-economics-dialogs" */
     /* webpackMode: "lazy" */
     "../../components/us-economics/UsDialogs"))).then(module => this.US = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
@@ -133,7 +129,6 @@ const _router = {
       return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/ndl/NdlDialogs.js"))).then(module => this.NDL = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
-
     return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "ndl-dialogs" */
     /* webpackMode: "lazy" */
     "../../components/ndl/NdlDialogs"))).then(module => this.NDL = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
@@ -172,7 +167,7 @@ const _router = {
         return;
     }
   }
-};
+});
 const getDialog = type => _resolve(type && _router[type] || _router.DF);
 exports.getDialog = getDialog;
 const loadDialogs = browserType => {
