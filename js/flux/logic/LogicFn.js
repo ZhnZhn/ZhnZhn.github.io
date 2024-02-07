@@ -2,7 +2,9 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.crKeyForConfig = void 0;
+exports.crRouter = exports.crKeyForConfig = void 0;
+var _crRouter = require("../../utils/crRouter");
+exports.crRouter = _crRouter.crRouter;
 var _LoadType = require("../../constants/LoadType");
 var _ChartType = require("../../constants/ChartType");
 var _LoadConfig = _interopRequireDefault(require("./LoadConfig"));
@@ -16,7 +18,7 @@ const _crNdlKey = _ref => {
     seriaType,
     viewKey
   } = _ref;
-  return loadId === _LoadType.LT_QCT && !isLoadMeta ? seriaType === _ChartType.CHT_AREA ? value + "_" + _ChartType.CHT_AREA + "_" + dataColumn : value + "_" + seriaType : viewKey || value;
+  return loadId === _LoadType.LT_QCT && !isLoadMeta ? seriaType === _ChartType.CHT_AREA ? `${value}_${_ChartType.CHT_AREA}_${dataColumn}` : `${value}_${seriaType}` : viewKey || value;
 };
 const _crKey = option => {
   const {

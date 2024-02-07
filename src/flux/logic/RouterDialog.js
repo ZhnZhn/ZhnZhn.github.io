@@ -1,4 +1,4 @@
-import { crRouter } from '../../utils/crRouter';
+import { crRouter } from './LogicFn';
 
 import {
   BT_STOCK_MARKETS,
@@ -213,7 +213,7 @@ const _router = crRouter({
         this._loadUN(); break;
       default: return;
     }
-  }  
+  }
 });
 
 export const getDialog = (

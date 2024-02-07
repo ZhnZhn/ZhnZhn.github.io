@@ -1,4 +1,4 @@
-import { crRouter } from '../../utils/crRouter';
+import { crRouter } from './LogicFn';
 
 import {
   BT_NYSE_STOCKS,

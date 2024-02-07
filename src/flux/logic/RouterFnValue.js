@@ -1,4 +1,4 @@
-import { crRouter } from '../../utils/crRouter';
+import { crRouter } from './LogicFn';
 
 const RouterFnValue = crRouter({
   ROne : (one) => one,

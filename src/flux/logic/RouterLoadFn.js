@@ -1,3 +1,5 @@
+import { crRouter } from './LogicFn'
+
 import fnSelectN from '../creaters/selectN'
 import fnStatN from '../creaters/statN'
 
@@ -11,7 +13,7 @@ import fnFuturesWiki from '../creaters/futuresWiki'
 
 const noopFn = () => {};
 
-const _r = {
+const _r = crRouter({
   DF: fnSelectN,
   DialogType4: fnType4,
   DialogType4A: fnType4,
@@ -27,7 +29,7 @@ const _r = {
 
   UnDialog5: fnUn5,
   UnDialogAgg: fnUn5
-};
+});
 
 const RouterLoadFn = {
   getFn : (loadFnType, dialogType) => loadFnType

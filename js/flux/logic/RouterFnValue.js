@@ -2,8 +2,8 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _crRouter = require("../../utils/crRouter");
-const RouterFnValue = (0, _crRouter.crRouter)({
+var _LogicFn = require("./LogicFn");
+const RouterFnValue = (0, _LogicFn.crRouter)({
   ROne: one => one,
   RTwo: (one, two) => `${two}`,
   ROneTwo: (one, two) => `${one}/${two}`,
