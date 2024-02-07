@@ -52,11 +52,19 @@ const HAS_WIDE_WIDTH = isWideWidth(600)
 const _crFnValue = (
   valueFn,
   valueFnPrefix
-) => valueFn
-  ? valueFnPrefix
-     ? bindTo(RouterFnValue[valueFn], valueFnPrefix)
-     : RouterFnValue[valueFn]
-  : void 0;
+) => {
+  if (!valueFn) {
+    return;
+  }
+  const _crValue = RouterFnValue[valueFn];
+  if (!_crValue) {
+    return;
+  }
+  return valueFnPrefix
+    ? bindTo(_crValue, valueFnPrefix)
+    : _crValue;
+};
+
 
 const _crFromDate = (
   nInitFromDate,

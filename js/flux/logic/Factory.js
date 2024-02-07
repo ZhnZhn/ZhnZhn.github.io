@@ -22,7 +22,16 @@ const HAS_WIDE_WIDTH = (0, _has.isWideWidth)(600),
   _assign = Object.assign,
   _initFromDate = (0, _dateFn.getFromDate)(2),
   initToDate = (0, _dateFn.getToDate)();
-const _crFnValue = (valueFn, valueFnPrefix) => valueFn ? valueFnPrefix ? (0, _uiApi.bindTo)(_RouterFnValue.default[valueFn], valueFnPrefix) : _RouterFnValue.default[valueFn] : void 0;
+const _crFnValue = (valueFn, valueFnPrefix) => {
+  if (!valueFn) {
+    return;
+  }
+  const _crValue = _RouterFnValue.default[valueFn];
+  if (!_crValue) {
+    return;
+  }
+  return valueFnPrefix ? (0, _uiApi.bindTo)(_crValue, valueFnPrefix) : _crValue;
+};
 const _crFromDate = nInitFromDate => nInitFromDate ? nInitFromDate === '1y+1d' //Coinpaprika
 ? (0, _dateFn.addDaysToYmd)((0, _dateFn.getFromDate)(1), 1) : (0, _dateFn.getFromDate)(nInitFromDate) : _initFromDate;
 const _crInitFromDate = _ref => {
