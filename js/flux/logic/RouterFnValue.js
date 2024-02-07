@@ -2,7 +2,8 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-const RouterFnValue = {
+var _crRouter = require("../../utils/crRouter");
+const RouterFnValue = (0, _crRouter.crRouter)({
   ROne: one => one,
   RTwo: (one, two) => `${two}`,
   ROneTwo: (one, two) => `${one}/${two}`,
@@ -15,6 +16,6 @@ const RouterFnValue = {
   RJodiOil: (country, product, flow, units) => `JODI/OIL_${product}${flow}${units}_${country}`,
   RFutures: (prefix, item, month, year) => `${prefix}/${item}${month}${year}`,
   RWikiFutures: (exchange, item, type) => `CHRIS/${exchange}_${item}${type}`
-};
+});
 var _default = exports.default = RouterFnValue;
 //# sourceMappingURL=RouterFnValue.js.map

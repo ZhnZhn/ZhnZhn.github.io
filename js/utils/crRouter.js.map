@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/crRouter.js"
+ ],
+ "file": "../../src/utils/crRouter.js",
+ "names": [
+  "crRouter",
+  "config",
+  "Object",
+  "assign",
+  "create",
+  "exports"
+ ],
+ "mappings": ";;;;AAAO,MAAMA,QAAQ,GACnBC,MAAM,IACHC,MAAM,CAACC,MAAM,CAACD,MAAM,CAACE,MAAM,CAAC,IAAI,CAAC,EAAEH,MAAM,CAAC;AAAAI,OAAA,CAAAL,QAAA,GAAAA,QAAA"
+}
