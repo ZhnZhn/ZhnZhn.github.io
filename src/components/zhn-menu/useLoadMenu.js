@@ -3,6 +3,8 @@ import {
   useEffect
 } from '../uiApi';
 
+import usePrevValue from '../hooks/usePrevValue';
+
 const LOADING = 'a'
 , LOADED = 'b'
 , FAILED = 'c'
@@ -38,7 +40,8 @@ const useLoadMenu = (
   useMsBrowserLoad,
   browserType
 ) => {
-   const [{
+   const _isShowPrev = usePrevValue(isShow)
+   , [{
      isLoading,
      isLoaded,
      menu
@@ -46,7 +49,9 @@ const useLoadMenu = (
      _reducer,
      initialState
    )
-   , _isRequireLoadMenu = !isLoaded && !isLoading && isShow;
+   , _hasBeenOpen = isShow && !_isShowPrev
+   , _isRequireLoadMenu = !isLoaded && !isLoading
+        && _hasBeenOpen;
 
    useMsBrowserLoad(msBrowserLoad => {
      if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
