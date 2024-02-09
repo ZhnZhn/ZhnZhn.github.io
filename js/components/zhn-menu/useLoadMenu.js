@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _usePrevValue = _interopRequireDefault(require("../hooks/usePrevValue"));
+var _useHasBeenOpen = _interopRequireDefault(require("./useHasBeenOpen"));
 const LOADING = 'a',
   LOADED = 'b',
   FAILED = 'c',
@@ -43,14 +43,12 @@ const _reducer = (state, _ref) => {
   }
 };
 const useLoadMenu = (isShow, onLoadMenu, useMsBrowserLoad, browserType) => {
-  const _isShowPrev = (0, _usePrevValue.default)(isShow),
-    [{
+  const [{
       isLoading,
       isLoaded,
       menu
     }, dispatch] = (0, _uiApi.useReducer)(_reducer, initialState),
-    _hasBeenOpen = isShow && !_isShowPrev,
-    _isRequireLoadMenu = !isLoaded && !isLoading && _hasBeenOpen;
+    _isRequireLoadMenu = (0, _useHasBeenOpen.default)(isShow) && !isLoaded && !isLoading;
   useMsBrowserLoad(msBrowserLoad => {
     if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
       const {
