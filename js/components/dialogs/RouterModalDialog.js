@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.loadModalDialogs = exports.getModalDialog = void 0;
+var _clearPrototypeOf = require("../../utils/clearPrototypeOf");
 var _BrowserType = require("../../constants/BrowserType");
 var _ModalDialogType = require("../../constants/ModalDialogType");
 var _AskDialog = _interopRequireDefault(require("./AskDialog"));
@@ -14,8 +15,8 @@ var _ZoomDialog = _interopRequireDefault(require("./ZoomDialog"));
 var _SettingsDialog = _interopRequireDefault(require("../header/SettingsDialog"));
 var _AddToWatchDialog = _interopRequireDefault(require("../watch-browser/AddToWatchDialog"));
 var _PasteToModalDialog = _interopRequireDefault(require("../dialogs-modal/PasteToModalDialog"));
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
 const _router = {
@@ -28,28 +29,28 @@ const _router = {
   [_ModalDialogType.MDT_SETTINGS]: _SettingsDialog.default,
   [_ModalDialogType.MDT_ADD_TO_WATCH]: _AddToWatchDialog.default,
   [_ModalDialogType.MDT_PASTE_TO]: _PasteToModalDialog.default,
-  _loadGMD() {
+  _loadMD() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/dialogs-modal/GeneralModalDialogs.js"))).then(module => this.GMD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/dialogs-modal/ModalDialogs.js"))).then(module => this.MD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     } else {
-      return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "general-modal-dialogs" */
+      return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "modal-dialogs" */
       /* webpackMode: "lazy" */
-      "../../components/dialogs-modal/GeneralModalDialogs"))).then(module => this.GMD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      "../../components/dialogs-modal/ModalDialogs"))).then(module => this.MD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
     }
   },
-  getGMD() {
-    return this.GMD || this._loadGMD();
+  getMD() {
+    return this.MD || this._loadMD();
   },
   get [_ModalDialogType.MDT_CUSTOMIZE_EXPORT]() {
-    return this.getGMD().then(D => D.CeDialog);
+    return this.getMD().then(D => D.CeDialog);
   },
   get [_ModalDialogType.MDT_STOCKS_BY_SECTOR]() {
-    return this.getGMD().then(D => D.SbsDialog);
+    return this.getMD().then(D => D.SbsDialog);
   },
   get [_ModalDialogType.MDT_COLUMN_RANGE]() {
-    return this.getGMD().then(D => D.CrDialog);
+    return this.getMD().then(D => D.CrDialog);
   },
   _loadWL() {
     /*eslint-disable no-undef */
@@ -84,6 +85,7 @@ const _router = {
     }
   }
 };
+(0, _clearPrototypeOf.clearPrototypeOf)(_router);
 const getModalDialog = id => _resolve(_router[id]);
 exports.getModalDialog = getModalDialog;
 const loadModalDialogs = id => {

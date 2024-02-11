@@ -1,4 +1,4 @@
-import { crRouter } from './LogicFn'
+import { clearPrototypeOf } from './LogicFn'
 
 import fnSelectN from '../creaters/selectN'
 import fnStatN from '../creaters/statN'
@@ -11,9 +11,9 @@ import fnUn5 from '../creaters/un5'
 import fnFutures3 from '../creaters/futures3'
 import fnFuturesWiki from '../creaters/futuresWiki'
 
-const noopFn = () => {};
+const FN_NOOP = () => {};
 
-const _r = crRouter({
+const _r = {
   DF: fnSelectN,
   DialogType4: fnType4,
   DialogType4A: fnType4,
@@ -29,11 +29,13 @@ const _r = crRouter({
 
   UnDialog5: fnUn5,
   UnDialogAgg: fnUn5
-});
+};
+
+clearPrototypeOf(_r)
 
 const RouterLoadFn = {
   getFn : (loadFnType, dialogType) => loadFnType
-    ? _r[loadFnType] || noopFn
+    ? _r[loadFnType] || FN_NOOP
     : dialogType && _r[dialogType] || _r.DF
 };
 

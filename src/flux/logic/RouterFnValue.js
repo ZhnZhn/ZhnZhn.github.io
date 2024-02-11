@@ -1,6 +1,6 @@
-import { crRouter } from './LogicFn';
+import { clearPrototypeOf } from './LogicFn';
 
-const RouterFnValue = crRouter({
+const RouterFnValue = {
   ROne : (one) => one,
   RTwo : (one, two) => `${two}`,
   ROneTwo : (one, two) => `${one}/${two}`,
@@ -13,6 +13,8 @@ const RouterFnValue = crRouter({
   RJodiOil : (country, product, flow, units) => `JODI/OIL_${product}${flow}${units}_${country}`,
   RFutures : (prefix, item, month, year) => `${prefix}/${item}${month}${year}`,
   RWikiFutures : (exchange, item, type) => `CHRIS/${exchange}_${item}${type}`
-});
+}
+
+clearPrototypeOf(RouterFnValue)
 
 export default RouterFnValue

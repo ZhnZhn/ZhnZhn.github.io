@@ -1,4 +1,4 @@
-export { crRouter } from '../../utils/crRouter';
+export { clearPrototypeOf } from '../../utils/clearPrototypeOf';
 
 import {
   LT_Q,

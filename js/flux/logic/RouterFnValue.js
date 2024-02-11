@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _LogicFn = require("./LogicFn");
-const RouterFnValue = (0, _LogicFn.crRouter)({
+const RouterFnValue = {
   ROne: one => one,
   RTwo: (one, two) => `${two}`,
   ROneTwo: (one, two) => `${one}/${two}`,
@@ -16,6 +16,7 @@ const RouterFnValue = (0, _LogicFn.crRouter)({
   RJodiOil: (country, product, flow, units) => `JODI/OIL_${product}${flow}${units}_${country}`,
   RFutures: (prefix, item, month, year) => `${prefix}/${item}${month}${year}`,
   RWikiFutures: (exchange, item, type) => `CHRIS/${exchange}_${item}${type}`
-});
+};
+(0, _LogicFn.clearPrototypeOf)(RouterFnValue);
 var _default = exports.default = RouterFnValue;
 //# sourceMappingURL=RouterFnValue.js.map

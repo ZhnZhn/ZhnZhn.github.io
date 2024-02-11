@@ -1,4 +1,4 @@
-import { crRouter } from './LogicFn';
+import { clearPrototypeOf } from './LogicFn';
 
 import {
   BT_STOCK_MARKETS,
@@ -13,55 +13,41 @@ import DialogSelectN from '../../components/dialogs/DialogSelectN';
 const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
 
-const _router = crRouter({
+const _router = {
   DF: DialogSelectN,
   DialogSelectN: DialogSelectN,
 
-  _loadGD(){
+  _loadD(){
     /*eslint-disable no-undef */
     if ( process.env.NODE_ENV === '_development' ) {
       //
-      return import("js/components/dialogs/GeneralDialogs.js")
-        .then(module => this.GD = _resolve(module.default))
+      return import("js/components/dialogs/Dialogs.js")
+        .then(module => this.D = _resolve(module.default))
         .catch(err => console.log(MSG_OFFLINE));
    /*eslint-enable no-undef */
    }
    return import(
-      /* webpackChunkName: "general-dialogs" */
+      /* webpackChunkName: "dialogs" */
       /* webpackMode: "lazy" */
-       "../../components/dialogs/GeneralDialogs"
+       "../../components/dialogs/Dialogs"
       )
-     .then(module => this.GD = _resolve(module.default))
+     .then(module => this.D = _resolve(module.default))
      .catch(err => console.log(MSG_OFFLINE));
   },
-  getGD(){
-    return this.GD || this._loadGD();
+  getD(){
+    return this.D || this._loadD();
   },
   get DialogQuery() {
-    return this.getGD().then(D => D.Query);
+    return this.getD().then(D => D.Query);
   },
   get DialogType4() {
-    return this.getGD().then(D => D.Type4);
+    return this.getD().then(D => D.Type4);
   },
   get DialogType4A() {
-    return this.getGD().then(D => D.Type4A);
+    return this.getD().then(D => D.Type4A);
   },
   get DialogType5() {
-    return this.getGD().then(D => D.Type5);
-  },
-
-  get ChartConfigDialog() {
-    /*eslint-disable no-undef */
-    if ( process.env.NODE_ENV === '_development' ) {
-      return import("js/components/chart-config/ChartConfigDialog.js")
-        .then(module => module.default);
-    }
-    /*eslint-enable no-undef */
-    return import(
-       /* webpackChunkName: "config-dialog" */
-       /* webpackMode: "lazy" */
-       "../../components/chart-config/ChartConfigDialog"
-     ).then(module => module.default);
+    return this.getD().then(D => D.Type5);
   },
 
   _loadUN() {
@@ -214,7 +200,9 @@ const _router = crRouter({
       default: return;
     }
   }
-});
+};
+
+clearPrototypeOf(_router)
 
 export const getDialog = (
   type

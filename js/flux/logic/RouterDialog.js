@@ -10,44 +10,34 @@ function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return 
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
-const _router = (0, _LogicFn.crRouter)({
+const _router = {
   DF: _DialogSelectN.default,
   DialogSelectN: _DialogSelectN.default,
-  _loadGD() {
+  _loadD() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
       //
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/dialogs/GeneralDialogs.js"))).then(module => this.GD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/dialogs/Dialogs.js"))).then(module => this.D = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
-    return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "general-dialogs" */
+    return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "dialogs" */
     /* webpackMode: "lazy" */
-    "../../components/dialogs/GeneralDialogs"))).then(module => this.GD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+    "../../components/dialogs/Dialogs"))).then(module => this.D = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
   },
-  getGD() {
-    return this.GD || this._loadGD();
+  getD() {
+    return this.D || this._loadD();
   },
   get DialogQuery() {
-    return this.getGD().then(D => D.Query);
+    return this.getD().then(D => D.Query);
   },
   get DialogType4() {
-    return this.getGD().then(D => D.Type4);
+    return this.getD().then(D => D.Type4);
   },
   get DialogType4A() {
-    return this.getGD().then(D => D.Type4A);
+    return this.getD().then(D => D.Type4A);
   },
   get DialogType5() {
-    return this.getGD().then(D => D.Type5);
-  },
-  get ChartConfigDialog() {
-    /*eslint-disable no-undef */
-    if (process.env.NODE_ENV === '_development') {
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/chart-config/ChartConfigDialog.js"))).then(module => module.default);
-    }
-    /*eslint-enable no-undef */
-    return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "config-dialog" */
-    /* webpackMode: "lazy" */
-    "../../components/chart-config/ChartConfigDialog"))).then(module => module.default);
+    return this.getD().then(D => D.Type5);
   },
   _loadUN() {
     /*eslint-disable no-undef */
@@ -167,7 +157,8 @@ const _router = (0, _LogicFn.crRouter)({
         return;
     }
   }
-});
+};
+(0, _LogicFn.clearPrototypeOf)(_router);
 const getDialog = type => _resolve(type && _router[type] || _router.DF);
 exports.getDialog = getDialog;
 const loadDialogs = browserType => {

@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/clearPrototypeOf.js"
+ ],
+ "file": "../../src/utils/clearPrototypeOf.js",
+ "names": [
+  "clearPrototypeOf",
+  "obj",
+  "Object",
+  "setPrototypeOf",
+  "exports"
+ ],
+ "mappings": ";;;;AACO,MAAMA,gBAAgB,GAAGC,GAAG,IAAI;EACrCC,MAAM,CAACC,cAAc,CAACF,GAAG,EAAE,IAAI,CAAC;AAClC,CAAC;AAAAG,OAAA,CAAAJ,gBAAA,GAAAA,gBAAA"
+}

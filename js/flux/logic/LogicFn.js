@@ -2,9 +2,9 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.crRouter = exports.crKeyForConfig = void 0;
-var _crRouter = require("../../utils/crRouter");
-exports.crRouter = _crRouter.crRouter;
+exports.crKeyForConfig = exports.clearPrototypeOf = void 0;
+var _clearPrototypeOf = require("../../utils/clearPrototypeOf");
+exports.clearPrototypeOf = _clearPrototypeOf.clearPrototypeOf;
 var _LoadType = require("../../constants/LoadType");
 var _ChartType = require("../../constants/ChartType");
 var _LoadConfig = _interopRequireDefault(require("./LoadConfig"));

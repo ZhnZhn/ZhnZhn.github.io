@@ -1,0 +1,24 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/Dialogs.js"
+ ],
+ "file": "../../../src/components/dialogs/Dialogs.js",
+ "names": [
+  "_DialogQuery",
+  "_interopRequireDefault",
+  "require",
+  "_DialogType",
+  "_DialogType4A",
+  "_DialogType2",
+  "Dialogs",
+  "Query",
+  "Type4",
+  "Type4A",
+  "Type5",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,YAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,WAAA,GAAAF,sBAAA,CAAAC,OAAA;AACA,IAAAE,aAAA,GAAAH,sBAAA,CAAAC,OAAA;AACA,IAAAG,YAAA,GAAAJ,sBAAA,CAAAC,OAAA;AAEA,MAAMI,OAAO,GAAG;EACdC,KAAK,EAALA,oBAAK;EACLC,KAAK,EAALA,mBAAK;EACLC,MAAM,EAANA,qBAAM;EACNC,KAAK,EAALA;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaP,OAAO"
+}

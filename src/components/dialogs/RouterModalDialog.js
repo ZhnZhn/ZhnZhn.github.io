@@ -1,4 +1,7 @@
 import {
+  clearPrototypeOf
+} from '../../utils/clearPrototypeOf';
+import {
   BT_WATCH_LIST
 } from '../../constants/BrowserType';
 import {
@@ -45,34 +48,34 @@ const _router = {
   [MDT_ADD_TO_WATCH]: AddToWatchDialog,
   [MDT_PASTE_TO]: PasteToModalDialog,
 
-  _loadGMD(){
+  _loadMD(){
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
-      return import("js/components/dialogs-modal/GeneralModalDialogs.js")
-        .then(module => this.GMD = _resolve(module.default))
+      return import("js/components/dialogs-modal/ModalDialogs.js")
+        .then(module => this.MD = _resolve(module.default))
         .catch(err => console.log(MSG_OFFLINE))
    /*eslint-enable no-undef */
     } else {
      return import(
-          /* webpackChunkName: "general-modal-dialogs" */
+          /* webpackChunkName: "modal-dialogs" */
           /* webpackMode: "lazy" */
-          "../../components/dialogs-modal/GeneralModalDialogs"
+          "../../components/dialogs-modal/ModalDialogs"
         )
-       .then(module => this.GMD = _resolve(module.default))
+       .then(module => this.MD = _resolve(module.default))
        .catch(err => console.log(MSG_OFFLINE))
      }
   },
-  getGMD(){
-    return this.GMD || this._loadGMD();
+  getMD(){
+    return this.MD || this._loadMD();
   },
   get [MDT_CUSTOMIZE_EXPORT]() {
-    return this.getGMD().then(D => D.CeDialog);
+    return this.getMD().then(D => D.CeDialog);
   },
   get [MDT_STOCKS_BY_SECTOR]() {
-    return this.getGMD().then(D => D.SbsDialog);
+    return this.getMD().then(D => D.SbsDialog);
   },
   get [MDT_COLUMN_RANGE]() {
-    return this.getGMD().then(D => D.CrDialog);
+    return this.getMD().then(D => D.CrDialog);
   },
 
   _loadWL(){
@@ -114,6 +117,7 @@ const _router = {
   }
 }
 
+clearPrototypeOf(_router)
 
 export const getModalDialog = (
   id

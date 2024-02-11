@@ -11,8 +11,8 @@ var _type2 = _interopRequireDefault(require("../creaters/type5"));
 var _un = _interopRequireDefault(require("../creaters/un5"));
 var _futures = _interopRequireDefault(require("../creaters/futures3"));
 var _futuresWiki = _interopRequireDefault(require("../creaters/futuresWiki"));
-const noopFn = () => {};
-const _r = (0, _LogicFn.crRouter)({
+const FN_NOOP = () => {};
+const _r = {
   DF: _selectN.default,
   DialogType4: _type.default,
   DialogType4A: _type.default,
@@ -25,9 +25,10 @@ const _r = (0, _LogicFn.crRouter)({
   DialogStatN: _statN.default,
   UnDialog5: _un.default,
   UnDialogAgg: _un.default
-});
+};
+(0, _LogicFn.clearPrototypeOf)(_r);
 const RouterLoadFn = {
-  getFn: (loadFnType, dialogType) => loadFnType ? _r[loadFnType] || noopFn : dialogType && _r[dialogType] || _r.DF
+  getFn: (loadFnType, dialogType) => loadFnType ? _r[loadFnType] || FN_NOOP : dialogType && _r[dialogType] || _r.DF
 };
 var _default = exports.default = RouterLoadFn;
 //# sourceMappingURL=RouterLoadFn.js.map
