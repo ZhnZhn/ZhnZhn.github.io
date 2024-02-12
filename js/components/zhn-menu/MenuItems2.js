@@ -5,89 +5,69 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _Color = require("../styles/Color");
-var _Comp = _interopRequireDefault(require("../Comp"));
+var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose2"));
 var _jsxRuntime = require("react/jsx-runtime");
-const {
-  OpenClose2
-} = _Comp.default;
-const LIST_OPEN_COLOR = _Color.GREEN_COLOR;
-const MODEL_PROP = {
-  CAPTION: 'caption',
-  GROUPS: 'groups',
-  LISTS: 'lists',
-  ITEMS: 'items'
-};
-const S_GROUP_DIV = {
+const S_LH_2 = {
     lineHeight: 2
   },
   S_LIST_DIV = {
+    ...S_LH_2,
     marginLeft: 8,
     paddingLeft: 12,
-    lineHeight: 2,
     borderLeftStyle: 'solid',
     borderLeftWidth: 2,
     borderLeftColor: 'inherit'
-  };
-const _renderLevel3 = (items, captionProp, props) => {
-  const {
+  },
+  MODEL_PROP_CAPTION = 'caption',
+  MODEL_PROP_GROUPS = 'groups',
+  MODEL_PROP_LISTS = 'lists',
+  MODEL_PROP_ITEMS = 'items';
+const _renderLevel3 = (items, captionProp, _ref) => {
+  let {
     itemClassName,
     ItemComp,
     onClickItem
-  } = props;
-  return (items || []).map((item, index) => {
-    const caption = item[captionProp];
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemComp, {
-      className: itemClassName,
-      caption: caption,
-      item: item,
-      onClickItem: onClickItem
-    }, index);
-  });
+  } = _ref;
+  return (items || []).map((item, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemComp, {
+    className: itemClassName,
+    caption: item[captionProp],
+    item: item,
+    onClickItem: onClickItem
+  }, index));
 };
-const _renderLevel2 = (lists, captionProp, itemsProp, props) => {
-  return (lists || []).map((list, index) => {
-    const caption = list[captionProp],
-      items = list[itemsProp];
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(OpenClose2, {
-      style: S_LIST_DIV,
-      openColor: LIST_OPEN_COLOR,
-      caption: caption,
-      children: _renderLevel3(items, captionProp, props)
-    }, index);
-  });
-};
+const _renderLevel2 = (lists, captionProp, itemsProp, props) => (lists || []).map((list, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
+  style: S_LIST_DIV,
+  openColor: _Color.GREEN_COLOR,
+  caption: list[captionProp],
+  children: _renderLevel3(list[itemsProp], captionProp, props)
+}, index));
 const _renderLevel1 = props => {
   const {
       model
     } = props,
     {
       meta
-    } = model || {},
+    } = model,
     {
       caption,
       level1,
       level2,
       level3
     } = meta || {},
-    _captionProp = caption || MODEL_PROP.CAPTION,
-    _groupsProp = level1 || MODEL_PROP.GROUPS,
-    _listsProp = level2 || MODEL_PROP.LISTS,
-    _itemsProp = level3 || MODEL_PROP.ITEMS,
+    _captionProp = caption || MODEL_PROP_CAPTION,
+    _groupsProp = level1 || MODEL_PROP_GROUPS,
+    _listsProp = level2 || MODEL_PROP_LISTS,
+    _itemsProp = level3 || MODEL_PROP_ITEMS,
     groups = model[_groupsProp] || [];
-  return groups.map((group, index) => {
-    const caption = group[_captionProp],
-      lists = group[_listsProp];
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(OpenClose2, {
-      style: S_GROUP_DIV,
-      caption: caption,
-      children: _renderLevel2(lists, _captionProp, _itemsProp, props)
-    }, index);
-  });
+  return groups.map((group, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
+    style: S_LH_2,
+    caption: group[_captionProp],
+    children: _renderLevel2(group[_listsProp], _captionProp, _itemsProp, props)
+  }, index));
 };
 const _areEqual = (prevProps, nextProps) => prevProps.model === nextProps.model;
 const MenuItems2 = (0, _uiApi.memo)(props => /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
   children: _renderLevel1(props)
 }), _areEqual);
-var _default = MenuItems2;
-exports.default = _default;
+var _default = exports.default = MenuItems2;
 //# sourceMappingURL=MenuItems2.js.map
