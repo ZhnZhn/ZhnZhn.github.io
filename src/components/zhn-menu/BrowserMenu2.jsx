@@ -21,8 +21,7 @@ const {
 
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
 , CL_BROWSER = "scroll-browser-by"
-, CL_BROWSER_WITH_SEARCH = "scroll-browser-by--search"
-//, CL_ROW_ITEM = 'row__type2-topic not-selected'
+, CL_BROWSER_WITH_SEARCH = `${CL_BROWSER}--search`
 
 , S_BROWSER = {
   paddingBottom: 4,
@@ -34,24 +33,33 @@ const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
   paddingRight: 24
 };
 
+const _crToolbarButton = (
+  caption,
+  title,
+  onClick
+) => ({
+  caption,
+  title,
+  onClick
+});
+
 const _useToolbarButtons = (
   toggleSearch,
   onClickInfo,
   descrUrl
-) => {
-  /*eslint-disable react-hooks/exhaustive-deps */
-  const _hClickInfo = useMemo(() => () => {
-     onClickInfo({ descrUrl })
-  }, []);
-  // onClickInfo, descrUrl
-  return useMemo(() => [
-     { caption: 'S', title: 'Click to toggle input search', onClick: toggleSearch },
-     { caption: 'A', title: 'About Datasources', onClick: _hClickInfo }
-  ], [_hClickInfo])
-  // toggleSearch
-  /*eslint-enable react-hooks/exhaustive-deps */
-};
-
+/*eslint-disable react-hooks/exhaustive-deps */
+) => useMemo(() => [
+  _crToolbarButton('S',
+     'Click to toggle input search',
+     toggleSearch
+  ),
+  _crToolbarButton('A',
+     'About Datasources',
+     () => { onClickInfo({ descrUrl }) }
+   )  
+], [])
+// toggleSearch, onClickInfo, descrUrl
+/*eslint-enable react-hooks/exhaustive-deps */
 
 const BrowserMenu2 = (props) => {
   const {
@@ -99,35 +107,34 @@ const BrowserMenu2 = (props) => {
        style={S_BROWSER}
        onKeyDown={hKeyDown}
     >
-        <BrowserCaption
-           caption={caption}
-           onClose={hideBrowser}
-        />
-       <ToolbarButtonCircle
-         buttons={_toolbarButtons}
+       <BrowserCaption
+          caption={caption}
+          onClose={hideBrowser}
        />
-       {!isLoading && <ShowHide isShow={isShowSearch}>
-           <WrapperInputSearch
+       <ToolbarButtonCircle
+          buttons={_toolbarButtons}
+       />
+       {menu && <ShowHide isShow={isShowSearch}>
+          <WrapperInputSearch
              style={S_WRAPPER_SEARCH}
              placeholder={SEARCH_PLACEHOLDER}
              data={menu}
              ItemOptionComp={ItemOptionComp}
              onSelect={onShowLoadDialog}
-           />
-         </ShowHide>
-       }
+          />
+       </ShowHide>}
        <ScrollPane className={_scrollClass}>
-         {isLoading && <SpinnerLoading />}
-         <MenuItems2
-            model={menu}
-            ItemComp={ItemComp}
-            itemClassName={CL_ROW_TYPE2_TOPIC}
-            onClickItem={onShowLoadDialog}
-         />
-         {children}
+          {isLoading && <SpinnerLoading />}
+          {menu && <MenuItems2
+             model={menu}
+             ItemComp={ItemComp}
+             itemClassName={CL_ROW_TYPE2_TOPIC}
+             onClickItem={onShowLoadDialog}
+          />}
+          {children}
        </ScrollPane>
     </Browser>
   );
-}
+};
 
-export default BrowserMenu2;
+export default BrowserMenu2
