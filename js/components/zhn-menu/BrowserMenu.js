@@ -5,8 +5,8 @@ exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
 var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
+var _useFocus = require("../hooks/useFocus");
 var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
-var _useBrowserMenu = _interopRequireDefault(require("./useBrowserMenu"));
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _MenuTopicList = _interopRequireDefault(require("./MenuTopicList"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -27,7 +27,7 @@ const BrowserMenu = props => {
     } = props,
     [isShow, hideBrowser, hKeyDown] = (0, _useBrowserShow.default)(props),
     [isLoading, menu] = (0, _useLoadMenu.default)(isShow, onLoadMenu, useMsBrowserLoad, browserType),
-    refFirstItem = (0, _useBrowserMenu.default)(isShow, menu);
+    refFirstItem = (0, _useFocus.useRefFocusIf)(isShow && menu);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
     isShow: isShow,
     onKeyDown: hKeyDown,

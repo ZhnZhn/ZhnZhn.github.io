@@ -1,8 +1,7 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 var _react = require("@testing-library/react");
-var _useFnFocus = _interopRequireDefault(require("../useFnFocus"));
+var _useFocus = require("../useFocus");
 const _getHookRef = result => result.current[0];
 const _getHookFn = result => result.current[1];
 const _actHookFn = (result, hookFn, fn, focus, timesFn, timesFocus) => {
@@ -17,7 +16,7 @@ describe('useFnFocus', () => {
       focus = jest.fn();
     const {
       result
-    } = (0, _react.renderHook)(() => (0, _useFnFocus.default)(fn));
+    } = (0, _react.renderHook)(() => (0, _useFocus.useFnFocus)(fn));
     const ref = _getHookRef(result);
     ref.current = {
       focus

@@ -3,7 +3,7 @@ import {
   useCallback
 } from '../uiApi';
 
-import useFocus from '../hooks/useFocus';
+import { useRefFocusIf } from '../hooks/useFocus';
 import { isDmy } from '../../utils/dateFn';
 
 import ModalPopup from '../zhn-moleculs/ModalPopup';
@@ -28,7 +28,7 @@ const ModalCompareTo = ({
   onCompareTo,
   onClose,
 }) => {
-  const _refInput = useFocus(isShow)
+  const _refInput = useRefFocusIf(isShow)
   , [msgErr, setMsgErr] = useState('')
   , _onEnterDateTo = useCallback(dateTo => {
    if (isDmy(dateTo)) {

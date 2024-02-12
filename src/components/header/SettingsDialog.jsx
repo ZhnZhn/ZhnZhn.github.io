@@ -2,7 +2,7 @@ import { useCallback } from '../uiApi';
 import { crStyle2 } from '../styleFn';
 
 import memoIsShow from '../hoc/memoIsShow';
-import useRefFocus from '../hooks/useRefFocus';
+import { useRefFocusElement } from '../hooks/useFocus';
 import useRerender from '../hooks/useRerender';
 
 import useSettingsMenuMore from './useSettingsMenuMore';
@@ -38,7 +38,7 @@ const SettingsDialog = memoIsShow(({
   const [
     refFocusLast,
     setRefFocusLast
-  ] = useRefFocus()
+  ] = useRefFocusElement()
   , rerender = useRerender()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _setUiTheme = useCallback(item => {

@@ -1,5 +1,5 @@
 import memoIsShow from '../hoc/memoIsShow';
-import useRefFocus from '../hooks/useRefFocus';
+import { useRefFocusElement } from '../hooks/useFocus';
 
 import {
   WAT_CREATE_LIST,
@@ -35,7 +35,7 @@ const EditListDialog = memoIsShow(({
   const [
     refFocusLast,
     setRefFocusLast
-  ] = useRefFocus();
+  ] = useRefFocusElement();
   return (
   <ModalDialog
      refFocusLast={refFocusLast}

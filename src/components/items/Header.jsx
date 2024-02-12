@@ -6,7 +6,7 @@ import {
 } from '../styleFn';
 
 import useToggle from '../hooks/useToggle';
-import useFnFocus from '../hooks/useFnFocus';
+import { useFnFocus } from '../hooks/useFocus';
 
 import { GREEN_COLOR } from '../styles/Color';
 

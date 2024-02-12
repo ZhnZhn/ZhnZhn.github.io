@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useFocus = _interopRequireDefault(require("../hooks/useFocus"));
+var _useFocus = require("../hooks/useFocus");
 var _dateFn = require("../../utils/dateFn");
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _DivCompareTo = _interopRequireDefault(require("../items/DivCompareTo"));
@@ -28,12 +28,12 @@ const ModalCompareTo = _ref => {
     onCompareTo,
     onClose
   } = _ref;
-  const _refInput = (0, _useFocus.default)(isShow),
+  const _refInput = (0, _useFocus.useRefFocusIf)(isShow),
     [msgErr, setMsgErr] = (0, _uiApi.useState)(''),
     _onEnterDateTo = (0, _uiApi.useCallback)(dateTo => {
       if ((0, _dateFn.isDmy)(dateTo)) {
         const _r = onCompareTo(dateTo),
-          _msgErr = _r !== 0 ? "No " + _r + " data for " + dateTo : '';
+          _msgErr = _r !== 0 ? `No ${_r} data for ${dateTo}` : '';
         setMsgErr(_msgErr);
       }
     }, [onCompareTo]);
@@ -49,6 +49,5 @@ const ModalCompareTo = _ref => {
     })
   });
 };
-var _default = ModalCompareTo;
-exports.default = _default;
+var _default = exports.default = ModalCompareTo;
 //# sourceMappingURL=ModalCompareTo.js.map

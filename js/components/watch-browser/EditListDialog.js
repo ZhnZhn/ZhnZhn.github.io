@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useRefFocus = _interopRequireDefault(require("../hooks/useRefFocus"));
+var _useFocus = require("../hooks/useFocus");
 var _WatchActions = require("../../flux/actions/WatchActions");
 var _watchListStore = require("../../flux/watch-list/watchListStore");
 var _MsgWatch = require("../../constants/MsgWatch");
@@ -20,7 +20,7 @@ const EditListDialog = (0, _memoIsShow.default)(_ref => {
     isShow,
     onClose
   } = _ref;
-  const [refFocusLast, setRefFocusLast] = (0, _useRefFocus.default)();
+  const [refFocusLast, setRefFocusLast] = (0, _useFocus.useRefFocusElement)();
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
     refFocusLast: refFocusLast,
     caption: "Watch Lists Edit",

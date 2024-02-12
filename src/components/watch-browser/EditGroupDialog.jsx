@@ -1,5 +1,5 @@
 import memoIsShow from '../hoc/memoIsShow';
-import useRefFocus from '../hooks/useRefFocus';
+import { useRefFocusElement } from '../hooks/useFocus';
 
 import {
   WAT_ADD_GROUP,
@@ -34,7 +34,7 @@ const EditGroupDialog = memoIsShow(({
   const [
     refFocusLast,
     setRefFocusLast
-  ] = useRefFocus();
+  ] = useRefFocusElement();
   return (
   <ModalDialog
      refFocusLast={refFocusLast}

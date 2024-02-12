@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useItemsFocusTrap = _interopRequireDefault(require("../hooks/useItemsFocusTrap"));
 var _useGetRefValue = _interopRequireDefault(require("../hooks/useGetRefValue2"));
-var _useAsyncFocusIf = _interopRequireDefault(require("../hooks/useAsyncFocusIf"));
+var _useFocus = require("../hooks/useFocus");
 var _FocusTrap = _interopRequireDefault(require("../zhn-moleculs/FocusTrap"));
 var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
 var _MenuItemList = _interopRequireDefault(require("./MenuItemList"));
@@ -32,7 +32,7 @@ const MenuPage = _ref => {
     _hClickTitle = (0, _uiApi.useCallback)(() => {
       onPrevPage(pageNumber);
     }, [onPrevPage, pageNumber]);
-  (0, _useAsyncFocusIf.default)(isVisible, _getFocusFirstItem);
+  (0, _useFocus.useAsyncFocusIf)(isVisible, _getFocusFirstItem);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     style: style,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_FocusTrap.default, {
@@ -78,6 +78,5 @@ MenuPage.propTypes = {
   onClose: PropTypes.func
 }
 */
-var _default = MenuPage;
-exports.default = _default;
+var _default = exports.default = MenuPage;
 //# sourceMappingURL=MenuPage.js.map

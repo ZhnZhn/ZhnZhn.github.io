@@ -5,7 +5,7 @@ import {
 
 import useItemsFocusTrap from '../hooks/useItemsFocusTrap';
 import useGetRefValue2 from '../hooks/useGetRefValue2';
-import useAsyncFocusIf from '../hooks/useAsyncFocusIf';
+import { useAsyncFocusIf } from '../hooks/useFocus';
 
 import FocusTrap from '../zhn-moleculs/FocusTrap';
 import MenuTitle from './MenuTitle';

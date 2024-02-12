@@ -1,8 +1,8 @@
 import { crScrollYCn } from '../styleFn';
 
 import useBrowserShow from '../hooks/useBrowserShow';
+import { useRefFocusIf } from '../hooks/useFocus';
 import useLoadMenu from './useLoadMenu';
-import useBrowserMenu from './useBrowserMenu';
 
 import Comp from '../Comp';
 import MenuTopicList from './MenuTopicList';
@@ -38,14 +38,13 @@ const BrowserMenu = (props) => {
     useMsBrowserLoad,
     browserType
   )
-  , refFirstItem = useBrowserMenu(
-     isShow,
-     menu
+  , refFirstItem = useRefFocusIf(
+    isShow && menu
   );
 
   return (
     <Browser
-       isShow={isShow}      
+       isShow={isShow}
        onKeyDown={hKeyDown}
     >
       <BrowserCaption

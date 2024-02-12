@@ -24,7 +24,7 @@ import {
 } from '../hotkeys/hotkeys';
 
 import useToggle from '../hooks/useToggle';
-import useFnFocus from '../hooks/useFnFocus';
+import { useFnFocus } from '../hooks/useFocus';
 
 import FlatButton from '../zhn-m/FlatButton';
 import SvgSettings from '../zhn/svg/SvgSettings';

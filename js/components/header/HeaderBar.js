@@ -8,7 +8,7 @@ var _browserStore = require("../../flux/stores/browserStore");
 var _styleFn = require("../styleFn");
 var _hotkeys = require("../hotkeys/hotkeys");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-var _useFnFocus = _interopRequireDefault(require("../hooks/useFnFocus"));
+var _useFocus = require("../hooks/useFocus");
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _SvgSettings = _interopRequireDefault(require("../zhn/svg/SvgSettings"));
 var _SvgInfo = _interopRequireDefault(require("../zhn/svg/SvgInfo"));
@@ -42,7 +42,7 @@ const HeaderBar = _ref => {
     showSettings
   } = _ref;
   const [isTopics, toggleTopics] = (0, _useToggle.default)(),
-    [refBt, _toggleTopics] = (0, _useFnFocus.default)(toggleTopics);
+    [refBt, _toggleTopics] = (0, _useFocus.useFnFocus)(toggleTopics);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_HEADER_BAR,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ProgressLoading.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_IconLogoErc.default, {

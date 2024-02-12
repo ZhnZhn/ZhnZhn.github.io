@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-var _useFnFocus = _interopRequireDefault(require("../hooks/useFnFocus"));
+var _useFocus = require("../hooks/useFocus");
 var _Color = require("../styles/Color");
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _Button = _interopRequireDefault(require("../zhn/Button"));
@@ -59,7 +59,7 @@ const MenuMore = _ref => {
     moreModel,
     onToggle
   } = _ref;
-  const [refBtSvg, toggleFocus] = (0, _useFnFocus.default)(onToggle);
+  const [refBtSvg, toggleFocus] = (0, _useFocus.useFnFocus)(onToggle);
   return moreModel ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SvgMore, {
       ref: refBtSvg,

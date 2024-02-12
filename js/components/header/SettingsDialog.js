@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useRefFocus = _interopRequireDefault(require("../hooks/useRefFocus"));
+var _useFocus = require("../hooks/useFocus");
 var _useRerender = _interopRequireDefault(require("../hooks/useRerender"));
 var _useSettingsMenuMore = _interopRequireDefault(require("./useSettingsMenuMore"));
 var _uiTheme = require("../styles/uiTheme");
@@ -37,7 +37,7 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
     data,
     onClose
   } = _ref;
-  const [refFocusLast, setRefFocusLast] = (0, _useRefFocus.default)(),
+  const [refFocusLast, setRefFocusLast] = (0, _useFocus.useRefFocusElement)(),
     rerender = (0, _useRerender.default)()
     /*eslint-disable react-hooks/exhaustive-deps */,
     _setUiTheme = (0, _uiApi.useCallback)(item => {

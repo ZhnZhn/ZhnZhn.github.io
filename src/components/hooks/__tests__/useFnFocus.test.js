@@ -2,7 +2,7 @@ import {
   renderHook,
   act
 } from '@testing-library/react';
-import useFnFocus from '../useFnFocus';
+import { useFnFocus } from '../useFocus';
 
 const _getHookRef = result => result.current[0];
 const _getHookFn = result => result.current[1];
