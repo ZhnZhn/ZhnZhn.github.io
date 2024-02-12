@@ -1,9 +1,10 @@
+import { crCnNotSelected } from '../styleFn';
 import { useKeyEnter } from '../hooks/fUseKey';
 
 import LabelNew from './LabelNew';
 import MenuItemBadge from './MenuItemBadge';
 
-const CL_ROW = "row__topic not-selected";
+const CL_ROW = crCnNotSelected("row__topic");
 
 const MenuItem = ({
   refItem,

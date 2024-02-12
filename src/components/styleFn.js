@@ -24,7 +24,12 @@ export const CL_NOT_SELECTED = "not-selected"
 export const CL_TEXT_ELLIPSIS= "text-ellipsis"
 export const CL_WIDTH_100_PERCENT = "w-100"
 
-const _crRowCn = className => `${className} ${CL_BLACK} ${CL_NOT_SELECTED}`
+export const crCnNotSelected = className => crCn(
+  className,
+  CL_NOT_SELECTED
+)
+
+const _crRowCn = className => crCnNotSelected(`${className} ${CL_BLACK}`)
 export const CL_ROW_PANE_TOPIC = _crRowCn("row__pane-topic")
 export const CL_ROW_TYPE2_TOPIC = _crRowCn("row__type2-topic")
 export const CL_OC_BLACK = "zhn-oc-black"
@@ -81,7 +86,6 @@ export const crScrollYCn = (
   className
 ) => crCn("scroll-container-y", className)
 
-
 const CL_EL_B = "el-b";
 export const crDialogCn = (
   className
@@ -106,4 +110,4 @@ export const crBtCircleHfCn = (
 
 export const crBtCircleCn = (
   className
-) => `bt-circle ${className} ${CL_NOT_SELECTED}`
+) => crCnNotSelected(`bt-circle ${className}`)

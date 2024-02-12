@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getColorBlack = exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crScrollYCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_OC_BLACK = exports.CL_NOT_SELECTED = exports.CL_CHB_BLACK = exports.CL_BLACK = void 0;
+exports.getColorBlack = exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crScrollYCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCnNotSelected = exports.crCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_OC_BLACK = exports.CL_NOT_SELECTED = exports.CL_CHB_BLACK = exports.CL_BLACK = void 0;
 var _uiTheme = require("./styles/uiTheme");
 exports.getColorBlack = _uiTheme.getColorBlack;
 const _isArr = Array.isArray;
@@ -18,7 +18,9 @@ const CL_CHB_BLACK = exports.CL_CHB_BLACK = "chb-bl";
 const CL_NOT_SELECTED = exports.CL_NOT_SELECTED = "not-selected";
 const CL_TEXT_ELLIPSIS = exports.CL_TEXT_ELLIPSIS = "text-ellipsis";
 const CL_WIDTH_100_PERCENT = exports.CL_WIDTH_100_PERCENT = "w-100";
-const _crRowCn = className => `${className} ${CL_BLACK} ${CL_NOT_SELECTED}`;
+const crCnNotSelected = className => crCn(className, CL_NOT_SELECTED);
+exports.crCnNotSelected = crCnNotSelected;
+const _crRowCn = className => crCnNotSelected(`${className} ${CL_BLACK}`);
 const CL_ROW_PANE_TOPIC = exports.CL_ROW_PANE_TOPIC = _crRowCn("row__pane-topic");
 const CL_ROW_TYPE2_TOPIC = exports.CL_ROW_TYPE2_TOPIC = _crRowCn("row__type2-topic");
 const CL_OC_BLACK = exports.CL_OC_BLACK = "zhn-oc-black";
@@ -59,6 +61,6 @@ const crElementBgCn = className => crCn(className, CL_EL_BG);
 exports.crElementBgCn = crElementBgCn;
 const crBtCircleHfCn = className => crCn(className, "bt-circle-hf");
 exports.crBtCircleHfCn = crBtCircleHfCn;
-const crBtCircleCn = className => `bt-circle ${className} ${CL_NOT_SELECTED}`;
+const crBtCircleCn = className => crCnNotSelected(`bt-circle ${className}`);
 exports.crBtCircleCn = crBtCircleCn;
 //# sourceMappingURL=styleFn.js.map

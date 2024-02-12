@@ -3,11 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _fUseKey = require("../hooks/fUseKey");
 var _LabelNew = _interopRequireDefault(require("./LabelNew"));
 var _MenuItemBadge = _interopRequireDefault(require("./MenuItemBadge"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_ROW = "row__topic not-selected";
+const CL_ROW = (0, _styleFn.crCnNotSelected)("row__topic");
 const MenuItem = _ref => {
   let {
     refItem,
