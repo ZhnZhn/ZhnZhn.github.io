@@ -6,7 +6,7 @@ import {
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
-import usePrevValue from '../hooks/usePrevValue';
+import useHasBeenOpen from '../hooks/useHasBeenOpen';
 import useProperty from '../hooks/useProperty';
 
 import {
@@ -26,16 +26,19 @@ import {
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import Button from './Button';
 import ValidationMessages from '../zhn/ValidationMessages';
-import D from '../dialogs/DialogCell'
+import D from '../dialogs/DialogCell';
 
 const S_DIALOG = { width: 300 }
 , S_CAPTION = { width: 70 }
 , SELECT_WIDTH = "202";
 
-const AddToWatchDialog = memoIsShow((
-  props
-) => {
-  const [
+const AddToWatchDialog = memoIsShow(({
+  isShow,
+  data,
+  onClose
+}) => {
+  const _hasBeenOpen = useHasBeenOpen(isShow)
+  , [
     setGroupCaption,
     getGroupCaption
   ] = useProperty(null)
@@ -43,12 +46,6 @@ const AddToWatchDialog = memoIsShow((
     setListCaption,
     getListCaption
   ] = useProperty(null)
-  , _prevProps = usePrevValue(props)
-  , {
-    isShow,
-    data,
-    onClose
-  } = props
   , [
     validationMessages,
     setValidationMessages
@@ -145,25 +142,23 @@ const AddToWatchDialog = memoIsShow((
   }, [onClose]);
 
   useMsEdit(msEdit => {
-    if (msEdit) {
-      if (msEdit.forActionType === WAT_ADD_ITEM) {
-        if (msEdit.messages) {
-          setValidationMessages(msEdit.messages)
-        } else {
-          setValidationMessages(
-            prevVms => prevVms.length>0
-              ? []
-              : prevVms
-          )
-          onClose()
-        }
+    if (msEdit && msEdit.forActionType === WAT_ADD_ITEM) {
+      if (msEdit.messages) {
+        setValidationMessages(msEdit.messages)
+      } else {
+        setValidationMessages(
+          prevVms => prevVms.length>0
+            ? []
+            : prevVms
+        )
+        onClose()
       }
     }
   })
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    if (_prevProps && _prevProps !== props && _prevProps.isShow !== isShow) {
+    if (_hasBeenOpen) {
       const groups = getWatchGroups()
       , _groupCaption = getGroupCaption()
       if (groups !== groupOptions){
@@ -182,15 +177,14 @@ const AddToWatchDialog = memoIsShow((
         })
       }
     }
-  })
-  //_prevProps, props, isShow
+  }, [_hasBeenOpen])
   //getGroupCaption, setGroupCaption, setListCaption
   //groupOptions, listOptions
   /*eslint-enable react-hooks/exhaustive-deps */
 
   const {
     caption
-  } = data;
+  } = data || {};
 
   return (
     <ModalDialog
@@ -225,15 +219,5 @@ const AddToWatchDialog = memoIsShow((
     </ModalDialog>
   );
 });
-
-/*
-AddToWatchDialog.propTypes = {
-  isShow: PropTypes.bool,
-  data: PropTypes.object,
-  getWatchGroups: PropTypes.func,
-  getWatchListsByGroup: PropTypes.func,
-  onClose: PropTypes.func
-}
-*/
 
 export default AddToWatchDialog

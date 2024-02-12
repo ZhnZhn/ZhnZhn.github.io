@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/zhn-menu/useHasBeenOpen.js"
+  "../../../src/components/hooks/useHasBeenOpen.js"
  ],
- "file": "../../../src/components/zhn-menu/useHasBeenOpen.js",
+ "file": "../../../src/components/hooks/useHasBeenOpen.js",
  "names": [
   "_usePrevValue",
   "_interopRequireDefault",

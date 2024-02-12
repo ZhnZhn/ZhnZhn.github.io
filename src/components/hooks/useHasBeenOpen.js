@@ -1,4 +1,4 @@
-import usePrevValue from '../hooks/usePrevValue';
+import usePrevValue from './usePrevValue';
 
 const useHasBeenOpen = (
   isShow

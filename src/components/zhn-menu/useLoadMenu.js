@@ -3,7 +3,7 @@ import {
   useEffect
 } from '../uiApi';
 
-import useHasBeenOpen from './useHasBeenOpen';
+import useHasBeenOpen from '../hooks/useHasBeenOpen';
 
 const LOADING = 'a'
 , LOADED = 'b'
@@ -50,7 +50,7 @@ const useLoadMenu = (
    )
    , _isRequireLoadMenu = useHasBeenOpen(isShow)
        && !isLoaded && !isLoading;
-        
+
    useMsBrowserLoad(msBrowserLoad => {
      if (msBrowserLoad && msBrowserLoad.browserType === browserType) {
        const { menuItems } = msBrowserLoad;
