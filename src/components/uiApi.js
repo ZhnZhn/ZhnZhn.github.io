@@ -26,7 +26,7 @@ export {
   useImperativeHandle
 } from 'react';
 
-export const isArr = Array.isArray;
+export const isArr = Array.isArray
 export const safeMap = (
   items,
   crElement
@@ -34,6 +34,7 @@ export const safeMap = (
   ? items.map(crElement)
   : null
 
+export const isUndef = value => typeof value === 'undefined'
 export const isFn = fn => typeof fn === 'function'
 
 export const getRefValue = (
@@ -51,7 +52,7 @@ export const setRefValue = (
 
 export const getRefElementStyle = (
   ref
-) => (getRefValue(ref) || {}).style;
+) => (getRefValue(ref) || {}).style
 
 const _focusHtmlElement = (
   element
@@ -59,13 +60,13 @@ const _focusHtmlElement = (
   if (element && isFn(element.focus)) {
     element.focus()
   }
-}
+};
 
 const _getValueFromFnOrRef = (
   refOrFn
 ) => isFn(refOrFn)
   ? refOrFn()
-  : getRefValue(refOrFn)
+  : getRefValue(refOrFn);
 
 export const focusRefElement = (
   fnOrRef1,
@@ -120,8 +121,8 @@ export const getInputValidValue = (
   ref,
   dfValue
 ) => isInputValid(ref)
-  ? getInputValue(ref)
-  : dfValue;
+ ? getInputValue(ref)
+ : dfValue
 
 export const getRefOptions = (
   ref
@@ -130,7 +131,7 @@ export const getRefOptions = (
   return _inst && isFn(_inst.getOptions)
     ? _inst.getOptions()
     : void 0
-};
+}
 
 const _getFirstTouches = (
   touches
@@ -159,4 +160,4 @@ export const toHref = (href, isHttp) => {
      || ( isHttp && protocol === 'http')
    ? href
    : void 0;
-};
+}
