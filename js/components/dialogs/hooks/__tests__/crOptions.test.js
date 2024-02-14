@@ -39,6 +39,13 @@ const CAPTION_OPTIONS = {
       id: "bbb-token"
     }]
   },
+  VC_OPTIONS = {
+    type: "vc",
+    "items": ["Item1", {
+      "c": "Item2",
+      "v": "Item2a"
+    }]
+  },
   ITEMS = ["B1/Q1", "B2/Q2"],
   _crTypeOptions = type => ({
     type,
@@ -77,6 +84,15 @@ describe('crOptions', () => {
     }, {
       "c": "Title2 A B (BBB)",
       "v": "bbb-token"
+    }]);
+  });
+  test('should return correct options for type vc format', () => {
+    expect(fn(VC_OPTIONS, 'items').items).toEqual([{
+      "c": "Item1",
+      "v": "Item1"
+    }, {
+      "c": "Item2",
+      "v": "Item2a"
     }]);
   });
   test('should return correct options for type t1 format', () => {

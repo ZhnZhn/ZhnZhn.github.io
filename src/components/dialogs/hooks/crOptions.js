@@ -1,5 +1,6 @@
 const _isArr = Array.isArray;
 const _notNullOrUndef = v => v != null;
+const _isObj = v => typeof v === "object" && v !== null
 
 const _crCvItems = arr => arr
  .map(({ c, v, ...restProps }) => ({
@@ -14,6 +15,11 @@ const _crSItems = arr => arr
     v,
     s
   }));
+
+const _crVcItems = arr => arr.map(v => _isObj(v)
+ ? v
+ : ({ c: v, v })
+)
 
 const _crNbqItems = arr => {
   const items = [];
@@ -48,6 +54,7 @@ const _fCrItems = crValue => arr => arr.map(c => {
 , _crValueT2L = (b, q) => `${b}${q}`.toLowerCase()
 , _crValueT3 = (b, q) => `${b}_${q}`
 , _rCrItems = {
+  vc: _crVcItems,
   //cb-items, kc-items, kx-items
   t1: _fCrItems(_crValueT1),
   //bf-items, kr-items
