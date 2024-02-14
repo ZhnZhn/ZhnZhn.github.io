@@ -1,16 +1,12 @@
-import { memo } from '../uiApi';
-
-const _isArr = Array.isArray;
+import { safeMap, memo } from '../uiApi';
 
 const ItemStack = memo(({
   items,
   crItem,
   ...restProps
-}) => _isArr(items)
-  ? items.map(
-      (item, index) => crItem(item, index, restProps)
-    )
-  : null
-);
+}) => safeMap(
+  items,
+  (item, index) => crItem(item, index, restProps)
+))
 
 export default ItemStack
