@@ -1,10 +1,9 @@
 //import PropTypes from 'prop-types'
+import { isArr } from '../uiApi';
 
 import OpenClose from '../zhn/OpenClose';
 import MenuItems from './MenuItems';
 import MenuItem from './MenuItem';
-
-const _isArr = Array.isArray;
 
 const S_OC_STYLE = {
   paddingRight: 12,
@@ -22,28 +21,25 @@ const MenuTopic = ({
   isInitOpen,
   items,
   ...restMenuItemProps
-}) => {
-  const _isClose = !(isInitOpen === true);
-  return _isArr(items) ? (
-    <OpenClose
-       refItem={refFirstItem}
-       role="menuitem"
-       isClose={_isClose}
-       style={style}
-       ocStyle={S_OC_STYLE}
-       openColor={openColor}
-       caption={caption}
-    >
-       <MenuItems items={items} />
-    </OpenClose>
-  ) : (
-    <MenuItem
-      {...restMenuItemProps}
-      style={S_MENU_ITEM}
-      refItem={refFirstItem}
-    />
-  );
-};
+}) => isArr(items) ? (
+  <OpenClose
+     refItem={refFirstItem}
+     role="menuitem"
+     isClose={!(isInitOpen === true)}
+     style={style}
+     ocStyle={S_OC_STYLE}
+     openColor={openColor}
+     caption={caption}
+  >
+     <MenuItems items={items} />
+  </OpenClose>
+) : (
+  <MenuItem
+    {...restMenuItemProps}
+    style={S_MENU_ITEM}
+    refItem={refFirstItem}
+  />
+);
 
 /*
 MenuPart.propTypes = {

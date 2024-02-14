@@ -3,13 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _MenuItems = _interopRequireDefault(require("./MenuItems"));
 var _MenuItem = _interopRequireDefault(require("./MenuItem"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from 'prop-types'
 
-const _isArr = Array.isArray;
 const S_OC_STYLE = {
     paddingRight: 12,
     whiteSpace: 'nowrap'
@@ -27,11 +27,10 @@ const MenuTopic = _ref => {
     items,
     ...restMenuItemProps
   } = _ref;
-  const _isClose = !(isInitOpen === true);
-  return _isArr(items) ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
+  return (0, _uiApi.isArr)(items) ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     refItem: refFirstItem,
     role: "menuitem",
-    isClose: _isClose,
+    isClose: !(isInitOpen === true),
     style: style,
     ocStyle: S_OC_STYLE,
     openColor: openColor,
@@ -73,6 +72,5 @@ MenuPart.propTypes = {
   onBadgeClose: PropTypes.func
 }
 */
-var _default = MenuTopic;
-exports.default = _default;
+var _default = exports.default = MenuTopic;
 //# sourceMappingURL=MenuTopic.js.map

@@ -1,4 +1,4 @@
-import { memo } from '../uiApi';
+import { safeMap, memo } from '../uiApi';
 
 import { GREEN_COLOR } from '../styles/Color';
 import OpenClose2 from '../zhn/OpenClose2';
@@ -27,15 +27,14 @@ const _renderLevel3 = (
     ItemComp,
     onClickItem
   }
-) => (items || [])
-.map((item, index) => (
-   <ItemComp
-      key={index}
-      className={itemClassName}
-      caption={item[captionProp]}
-      item={item}
-      onClickItem={onClickItem}
-   />
+) => safeMap(items, (item, index) => (
+  <ItemComp
+     key={index}
+     className={itemClassName}
+     caption={item[captionProp]}
+     item={item}
+     onClickItem={onClickItem}
+  />
 ))
 
 const _renderLevel2 = (
@@ -43,20 +42,19 @@ const _renderLevel2 = (
   captionProp,
   itemsProp,
   props
-) => (lists || [])
-.map((list, index) => (
-   <OpenClose2
-      key={index}
-      style={S_LIST_DIV}
-      openColor={GREEN_COLOR}
-      caption={list[captionProp]}
-   >
-     {_renderLevel3(
-         list[itemsProp],
-         captionProp,
-         props
-     )}
-   </OpenClose2>
+) => safeMap(lists, (list, index) => (
+  <OpenClose2
+     key={index}
+     style={S_LIST_DIV}
+     openColor={GREEN_COLOR}
+     caption={list[captionProp]}
+  >
+   {_renderLevel3(
+       list[itemsProp],
+       captionProp,
+       props
+   )}
+  </OpenClose2>
 ))
 
 
@@ -68,9 +66,9 @@ const _renderLevel1 = (props) => {
   , _groupsProp = level1 || MODEL_PROP_GROUPS
   , _listsProp = level2 || MODEL_PROP_LISTS
   , _itemsProp = level3 || MODEL_PROP_ITEMS
-  , groups = model[_groupsProp] || [];
+  , groups = model[_groupsProp];
 
-  return groups.map((group, index) => (
+  return safeMap(groups, (group, index) => (
     <OpenClose2
        key={index}
        style={S_LH_2}

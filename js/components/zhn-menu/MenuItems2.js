@@ -28,14 +28,14 @@ const _renderLevel3 = (items, captionProp, _ref) => {
     ItemComp,
     onClickItem
   } = _ref;
-  return (items || []).map((item, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemComp, {
+  return (0, _uiApi.safeMap)(items, (item, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemComp, {
     className: itemClassName,
     caption: item[captionProp],
     item: item,
     onClickItem: onClickItem
   }, index));
 };
-const _renderLevel2 = (lists, captionProp, itemsProp, props) => (lists || []).map((list, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
+const _renderLevel2 = (lists, captionProp, itemsProp, props) => (0, _uiApi.safeMap)(lists, (list, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
   style: S_LIST_DIV,
   openColor: _Color.GREEN_COLOR,
   caption: list[captionProp],
@@ -58,8 +58,8 @@ const _renderLevel1 = props => {
     _groupsProp = level1 || MODEL_PROP_GROUPS,
     _listsProp = level2 || MODEL_PROP_LISTS,
     _itemsProp = level3 || MODEL_PROP_ITEMS,
-    groups = model[_groupsProp] || [];
-  return groups.map((group, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
+    groups = model[_groupsProp];
+  return (0, _uiApi.safeMap)(groups, (group, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     style: S_LH_2,
     caption: group[_captionProp],
     children: _renderLevel2(group[_listsProp], _captionProp, _itemsProp, props)
