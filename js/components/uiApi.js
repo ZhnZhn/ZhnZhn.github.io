@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.memo = exports.lazy = exports.isTokenInStr = exports.isInputValid = exports.isFn = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.focusElementById = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = exports.Children = void 0;
+exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.safeMap = exports.memo = exports.lazy = exports.isTokenInStr = exports.isInputValid = exports.isFn = exports.isArr = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.focusElementById = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = exports.Children = void 0;
 var _isTokenInStr = require("../utils/isTokenInStr");
 exports.isTokenInStr = _isTokenInStr.isTokenInStr;
 var _bindTo = require("../utils/bindTo");
@@ -27,6 +27,9 @@ exports.useLayoutEffect = _react.useLayoutEffect;
 exports.useEffect = _react.useEffect;
 exports.useSyncExternalStore = _react.useSyncExternalStore;
 exports.useImperativeHandle = _react.useImperativeHandle;
+const isArr = exports.isArr = Array.isArray;
+const safeMap = (items, crElement) => isArr(items) ? items.map(crElement) : null;
+exports.safeMap = safeMap;
 const isFn = fn => typeof fn === 'function';
 exports.isFn = isFn;
 const getRefValue = ref => (ref || {}).current;

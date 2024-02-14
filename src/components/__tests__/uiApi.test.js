@@ -1,4 +1,5 @@
 import {
+  safeMap,
   getRefValue,
   setRefValue,
   focusRefElement,
@@ -6,6 +7,26 @@ import {
   getInputValue,
   getInputValidValue
 } from '../uiApi';
+
+
+describe("safeMap", ()=>{
+  const fn = safeMap;
+  test("should map items by crElement function", ()=>{
+    expect(fn([1,2,3], (n, index) => n+index)).toEqual([
+      1,3,5
+    ])
+  })
+  test("should return null for items type edge cases", ()=>{
+    expect(fn()).toBe(null)
+    expect(fn(null)).toBe(null)
+
+    expect(fn(false)).toBe(null)
+    expect(fn(1)).toBe(null)
+    expect(fn('str')).toBe(null)
+
+    expect(fn({})).toBe(null)
+  })
+})
 
 describe("getRefValue", ()=>{
   const fn = getRefValue;

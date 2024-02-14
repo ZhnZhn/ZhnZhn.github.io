@@ -26,6 +26,13 @@ export {
   useImperativeHandle
 } from 'react';
 
+export const isArr = Array.isArray;
+export const safeMap = (
+  items,
+  crElement
+) => isArr(items)
+  ? items.map(crElement)
+  : null
 
 export const isFn = fn => typeof fn === 'function'
 
