@@ -24,11 +24,11 @@ describe('useLoadMenu', () => {
 
     //Init
     const _testResult = _expectResult.bind(null, result);
-    _testResult(false, []);
+    _testResult(undefined, undefined);
 
     //FAILED
     (0, _react.act)(() => (0, _browserStore.setMsBrowserFailed)(BROWSER_TYPE));
-    _testResult(false, []);
+    _testResult(undefined, undefined);
 
     //LOADED
     const menu = [{

@@ -38,11 +38,11 @@ describe('useLoadMenu', ()=>{
 
     //Init
     const _testResult = _expectResult.bind(null, result)
-    _testResult(false, [])
+    _testResult(undefined, undefined)
 
     //FAILED
     act(() => setMsBrowserFailed(BROWSER_TYPE))
-    _testResult(false, [])
+    _testResult(undefined, undefined)
 
     //LOADED
     const menu = [{caption: 'Item1'}]
