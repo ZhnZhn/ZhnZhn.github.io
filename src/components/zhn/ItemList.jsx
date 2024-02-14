@@ -1,14 +1,13 @@
-import { memo } from '../uiApi';
+import { isArr, memo } from '../uiApi';
 
-const _isArr = Array.isArray
-, UL_STYLE = { listStyle: 'none' }
+const UL_STYLE = { listStyle: 'none' }
 , _crKeyDf = (_, index) => index;
 
 const ItemList = memo(({
   items,
   crKey=_crKeyDf,
   crItem
-}) => _isArr(items) ? (
+}) => isArr(items) ? (
     <ul style={UL_STYLE}>
       {items.map((item, index) => (
         <li key={crKey(item, index)}>
