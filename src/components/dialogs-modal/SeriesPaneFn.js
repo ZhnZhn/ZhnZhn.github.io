@@ -1,3 +1,4 @@
+import { safeMap } from '../uiApi';
 
 export const getUserMinMax = fromChart => {
   const { xAxis } = fromChart || {}
@@ -10,7 +11,7 @@ export const getUserMinMax = fromChart => {
     userMin || dataMin,
     userMax || dataMax
   ];
-};
+}
 
 const _crOptionItem = (
   caption,
@@ -23,11 +24,10 @@ const _crOptionItem = (
 export const crYAxisOptions = (
   toChart
 ) => [
-   _crOptionItem('withYAxis')
+  _crOptionItem('withYAxis')
 ].concat(
-  (toChart.yAxis || [])
-    .map((
-      yAxis,
-      index
-    ) => _crOptionItem(`toYAxis${index+1}`, index))
-);
+  safeMap(
+    toChart.yAxis,
+    (yAxis, index) => _crOptionItem(`toYAxis${index+1}`, index)
+  ) || []
+)

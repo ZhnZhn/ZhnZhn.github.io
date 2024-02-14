@@ -25,7 +25,7 @@ describe("safeMap", ()=>{
     expect(fn('str')).toBe(null)
 
     expect(fn({})).toBe(null)
-  })
+  })  
 })
 
 describe("getRefValue", ()=>{
