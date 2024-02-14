@@ -1,4 +1,5 @@
 import {
+  isFn,
   useRef,
   useMemo,
   getRefValue,
@@ -8,8 +9,7 @@ import {
 import crModelMore from './crModelMore';
 import forEachInstance from './forEachInstance';
 
-const _isFn = v => typeof v === "function"
-, CHILD_MARGIN = 36;
+const CHILD_MARGIN = 36;
 
 const _crFnByNameArgs = (
   ref,
@@ -23,13 +23,13 @@ const _crFnByNameArgs = (
 };
 
 const _fReflowChartByRef = parentWidth => refItem => {
-  if (_isFn(refItem.reflowChart)){
+  if (isFn(refItem.reflowChart)){
     refItem.reflowChart(parentWidth - CHILD_MARGIN)
   }
 };
 
 const _showCaptionByRef = refItem => {
-  if (_isFn(refItem.showCaption)){
+  if (isFn(refItem.showCaption)){
     refItem.showCaption()
   }
 };

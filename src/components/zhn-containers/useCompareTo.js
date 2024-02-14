@@ -1,7 +1,5 @@
-import { useCallback } from '../uiApi';
+import { isFn, useCallback } from '../uiApi';
 import forEachInstance from './forEachInstance';
-
-const _isFn = v => typeof v === 'function';
 
 /*eslint-disable react-hooks/exhaustive-deps */
 const useCompareTo = (
@@ -10,7 +8,7 @@ const useCompareTo = (
 ) => useCallback(dateTo => {
   const _valueMoves = []
   , itemsLength = forEachInstance(hmInstances, refInst => {
-    if (_isFn(refInst.compareTo)){
+    if (isFn(refInst.compareTo)){
       _valueMoves.push(refInst.compareTo(dateTo))
     }
   })

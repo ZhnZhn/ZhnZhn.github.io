@@ -5,13 +5,11 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _forEachInstance = _interopRequireDefault(require("./forEachInstance"));
-const _isFn = v => typeof v === 'function';
-
 /*eslint-disable react-hooks/exhaustive-deps */
 const useCompareTo = (hmInstances, updateMovingValues) => (0, _uiApi.useCallback)(dateTo => {
   const _valueMoves = [],
     itemsLength = (0, _forEachInstance.default)(hmInstances, refInst => {
-      if (_isFn(refInst.compareTo)) {
+      if ((0, _uiApi.isFn)(refInst.compareTo)) {
         _valueMoves.push(refInst.compareTo(dateTo));
       }
     }),

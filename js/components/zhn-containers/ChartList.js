@@ -15,7 +15,7 @@ const ChartList = _ref => {
     onCloseItem
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    children: (configs || []).map((config, index) => {
+    children: (0, _uiApi.safeMap)(configs, (config, index) => {
       const {
           zhConfig,
           zhCompType

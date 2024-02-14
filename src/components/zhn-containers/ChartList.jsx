@@ -1,4 +1,4 @@
-import { bindTo } from '../uiApi';
+import { safeMap, bindTo } from '../uiApi';
 import { crItem } from '../factories/ItemFactory';
 
 const ChartList = ({
@@ -9,23 +9,25 @@ const ChartList = ({
   isAdminMode,
   onCloseItem
 }) => (
-  <div>
-   {(configs || [])
-     .map((config, index) => {
-       const { zhConfig, zhCompType } = config
-       , { id } = zhConfig || {};
-       return crItem({
-         config,
-         index,
-         chartType,
-         props: {
-           isAdminMode,
-           ref: zhCompType
-             ? void 0
-             : bindTo(refChartFn, index),
-           onCloseItem: () => onCloseItem(chartType, browserType, id)
-         }
-      });
+ <div>
+   {safeMap(configs, (config, index) => {
+      const {
+        zhConfig,
+        zhCompType
+      } = config
+      , { id } = zhConfig || {};
+      return crItem({
+       config,
+       index,
+       chartType,
+       props: {
+         isAdminMode,
+         ref: zhCompType
+           ? void 0
+           : bindTo(refChartFn, index),
+         onCloseItem: () => onCloseItem(chartType, browserType, id)
+       }
+     });
    })}
  </div>
 );

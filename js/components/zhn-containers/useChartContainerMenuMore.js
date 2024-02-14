@@ -6,8 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _crModelMore = _interopRequireDefault(require("./crModelMore"));
 var _forEachInstance = _interopRequireDefault(require("./forEachInstance"));
-const _isFn = v => typeof v === "function",
-  CHILD_MARGIN = 36;
+const CHILD_MARGIN = 36;
 const _crFnByNameArgs = function (ref, methodName) {
   for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
     args[_key - 2] = arguments[_key];
@@ -20,12 +19,12 @@ const _crFnByNameArgs = function (ref, methodName) {
   };
 };
 const _fReflowChartByRef = parentWidth => refItem => {
-  if (_isFn(refItem.reflowChart)) {
+  if ((0, _uiApi.isFn)(refItem.reflowChart)) {
     refItem.reflowChart(parentWidth - CHILD_MARGIN);
   }
 };
 const _showCaptionByRef = refItem => {
-  if (_isFn(refItem.showCaption)) {
+  if ((0, _uiApi.isFn)(refItem.showCaption)) {
     refItem.showCaption();
   }
 };

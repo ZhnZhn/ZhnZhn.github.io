@@ -12,8 +12,6 @@ const S_ROOT = {
   left: 10
   //width: '98%'
 };
-
-const _isUndef = value => typeof value === 'undefined';
 const _findCompIndex = (arr, key) => {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].key === key) {
@@ -44,7 +42,7 @@ const _updateVisible = (state, key, maxDialog) => {
 };
 const _findCompByKey = (comps, key) => {
   const index = _findCompIndex(comps, key);
-  return _isUndef(index) ? void 0 : comps[index];
+  return (0, _uiApi.isUndef)(index) ? void 0 : comps[index];
 };
 const _filterArrByKey = (arr, key) => {
   arr.splice(arr.indexOf(key), 1);
@@ -55,7 +53,7 @@ const _renderDialogs = (_ref, _hToTopLayer, _hToggleDialog) => {
     compDialogs,
     hmData
   } = _ref;
-  return compDialogs.map(Comp => {
+  return (0, _uiApi.safeMap)(compDialogs, Comp => {
     const key = Comp.key;
     return (0, _uiApi.cloneElement)(Comp, {
       key: key,
@@ -122,7 +120,7 @@ const DialogContainer = _ref2 => {
           Comp,
           data
         } = msShowDialog;
-        if (Comp && !_isUndef(_findCompIndex(prevState.compDialogs, key))) {
+        if (Comp && !(0, _uiApi.isUndef)(_findCompIndex(prevState.compDialogs, key))) {
           return prevState;
         }
         _updateVisible(prevState, key, maxDialog);
