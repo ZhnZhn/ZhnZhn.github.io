@@ -25,7 +25,7 @@ const _fClick = _ref => {
     onClick,
     onClose
   } = _ref;
-  return typeof onClick === 'function' ? isClose ? () => {
+  return (0, _uiApi.isFn)(onClick) ? isClose ? () => {
     onClick();
     onClose();
   } : onClick : void 0;
@@ -49,7 +49,7 @@ const MenuItemList = _ref3 => {
     onClose
   } = _ref3;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
-    children: items.map((item, index) => {
+    children: (0, _uiApi.safeMap)(items, (item, index) => {
       const {
           cn,
           name,
@@ -87,6 +87,5 @@ MenuItemList.propTypes = {
   onClose: PropTypes.func
 }
 */
-var _default = MenuItemList;
-exports.default = _default;
+var _default = exports.default = MenuItemList;
 //# sourceMappingURL=MenuItemList.js.map

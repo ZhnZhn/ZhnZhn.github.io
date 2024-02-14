@@ -1,4 +1,4 @@
-import { bindTo } from '../uiApi';
+import { isFn, safeMap, bindTo } from '../uiApi';
 
 import MenuAriaItem from './MenuAriaItem';
 
@@ -18,7 +18,7 @@ const _fClick = ({
   isClose,
   onClick,
   onClose
-}) => typeof onClick === 'function'
+}) => isFn(onClick)
   ? isClose
       ? () => { onClick(); onClose(); }
       : onClick
@@ -26,11 +26,9 @@ const _fClick = ({
 
 const NextPageArrow = ({
   type
-}) => type === SUB_MENU ? (
-   <span style={S_NEXT_PAGE}>
-       >
-   </span>
-  ) : null;
+}) => type === SUB_MENU
+ ? (<span style={S_NEXT_PAGE}>{">"}</span>)
+ : null;
 
 const MenuItemList = ({
   getRefFocus,
@@ -41,7 +39,7 @@ const MenuItemList = ({
   onClose
 }) => (
   <>
-   {items.map((item, index) => {
+   {safeMap(items, (item, index) => {
      const {
        cn,
        name,

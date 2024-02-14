@@ -13,7 +13,7 @@ const MenuPages = _ref => {
     onPrevPage,
     onClose
   } = _ref;
-  return pages.map((Page, index) => (0, _uiApi.cloneElement)(Page, {
+  return (0, _uiApi.safeMap)(pages, (Page, index) => (0, _uiApi.cloneElement)(Page, {
     style,
     isVisible: isShow && index + 1 === pageCurrent,
     pageNumber: index + 1,
@@ -22,6 +22,5 @@ const MenuPages = _ref => {
     onClose
   }));
 };
-var _default = MenuPages;
-exports.default = _default;
+var _default = exports.default = MenuPages;
 //# sourceMappingURL=MenuPages.js.map
