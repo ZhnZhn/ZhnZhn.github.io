@@ -5,7 +5,7 @@ import crAdapterCategory from '../crAdapterCategory';
 import {
   isTotalVariable,
   isTotalData,
-  getCountryName,
+  fGetCategory,
   reduceToHmBy,
   getSourceValue,
   getMetricValue,
@@ -15,10 +15,11 @@ import {
 const _getObjectKeys = Object.keys
 , _crTotalData = (
   json,
+  getCategory,
   pnMetric
 ) => {
   const hm = reduceToHmBy((_hm, item) => {
-    const c = getCountryName(item)
+    const c = getCategory(item)
     if (c && isTotalVariable(item)) {
       _hm[c] = (_hm[c] || 0) + item[pnMetric]
     }
@@ -32,9 +33,10 @@ const _getObjectKeys = Object.keys
 }
 , _crSourceData = (
   json,
+  getCategory,
   pnMetric
 ) => json.reduce((data, item) => {
-  const c = getCountryName(item)
+  const c = getCategory(item)
   if (c) {
     data.push(crCategoryPoint(
       item[pnMetric],
@@ -48,11 +50,17 @@ const _getObjectKeys = Object.keys
   options
 ) => {
   const source = getSourceValue(options)
-  , pnMetric = getMetricValue(options);
+  , pnMetric = getMetricValue(options)
+  , getCategory = fGetCategory(options)
+  , crCategoryData = isTotalData(source)
+      ? _crTotalData
+      : _crSourceData;
   return sortDescByPnY(
-    isTotalData(source)
-      ? _crTotalData(json, pnMetric)
-      : _crSourceData(json, pnMetric)
+    crCategoryData(
+      json,
+      getCategory,
+      pnMetric
+    )
   );
 }
 , toCategoryAdapter = crAdapterCategory(_crData);

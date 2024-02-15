@@ -60,7 +60,6 @@ const crData = (
   , data = isTotalData(source)
      ? _crTotalData(pnDate, json, metric)
      : _crSourceData(pnDate, json, metric, source);
-
   return data.sort(compareByDate);
 };
 
@@ -76,7 +75,6 @@ const getRoute = (
        ? toCategoryAdapter
        : toLineAdapter;
 };
-
 
 const EmberAdapter = crAdapterRouter(void 0, { getRoute })
 

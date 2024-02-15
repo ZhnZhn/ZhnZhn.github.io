@@ -15,16 +15,31 @@ import {
   getValue
 } from '../AdapterFn';
 
-export const getCountryName = (
+export const isUsRoute = (
+  option
+) => option.dfId === "US"
+
+const _getCountryOrRegionCategory = (
   item
 ) => item.country_code
   ? item.country_or_region || ''
   : ''
+const _getStateCategory = (
+  item
+) => item.country && item.state !== "US Total"
+  ? item.state || ''
+  : ''
 
-const _getItems = options => options.items
+export const fGetCategory = (
+  option
+) => isUsRoute(option)
+  ? _getStateCategory
+  : _getCountryOrRegionCategory
+
+const _getItems = option => option.items
 , _fGetItemsBy = (fn) => (
   itemIndex
-) => (options) => fn(_getItems(options)[itemIndex])
+) => (option) => fn(_getItems(option)[itemIndex])
 , _fGetItemsCaptionBy = _fGetItemsBy(getCaption)
 , _fGetItemsValueBy = _fGetItemsBy(getValue);
 
