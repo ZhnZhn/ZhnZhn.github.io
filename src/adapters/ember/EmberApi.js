@@ -1,7 +1,8 @@
 import {
+  isArr,
+  isUsRoute,
   isTreeMap,
   isCategory,
-  isArr,
   crError,
   getGeoCaption,
   getMetricCaption,
@@ -10,91 +11,135 @@ import {
 } from './fnAdapter';
 
 const API_URL = 'https://ember-data-api-scg3n.ondigitalocean.app/ember'
-, YEARLY_JSON = 'generation_yearly.json'
-, MONTHLY_JSON = 'generation_monthly.json'
-, QUERY_TAIL = '&_shape=array';
+, GENERATION = "generation"
+, JSON_TOKEN = "json"
+, YEARLY_SUFFIX= `yearly.${JSON_TOKEN}`
+, MONTHLY_SUFFIX = `monthly.${JSON_TOKEN}`
+, YEARLY_JSON = `${GENERATION}_${YEARLY_SUFFIX}`
+, MONTHLY_JSON = `${GENERATION}_${MONTHLY_SUFFIX}`
+, US_YEARLY_JSON = `${GENERATION}_usa_${YEARLY_SUFFIX}`
+, US_MONTHLY_JSON = `${GENERATION}_usa_${MONTHLY_SUFFIX}`
+//, QUERY_TAIL = "&_sort=rowid&_shape=array"
+, QUERY_TAIL = "&_shape=array"
+, DATE = 'date'
+, YEAR = 'year';
 
 const _fCrProperty = (suffix) => (
   name,
   value
 ) => `${name}__${suffix}=${value}`
 , _crExactProperty = _fCrProperty('exact')
-, _crGteProperty = _fCrProperty('gte');
+, _crGteProperty = _fCrProperty('gte')
+, _crDateProperty = (
+  options
+) => _crExactProperty(options.pnDate, options.time);
 
 // geo, _sourceQuery
-const _crQueryParams = (
-  options
+const _crSourceQueryParam = (
+  option
 ) => {
-  const source = getSourceValue(options);
-  return [
-    getGeoCaption(options),
-    isTotalData(source)
-      ? ''
-      : `&${_crExactProperty('variable', source)}`
-  ];
+  const source = getSourceValue(option);
+  return isTotalData(source)
+    ? ''
+    : `&${_crExactProperty('variable', source)}`;
 }
 
-const _crUrl = (
+const _fCrUrl = (
+  geoParamName
+) => (
   pathToken,
   options
+) => `${API_URL}/${pathToken}?${_crExactProperty(geoParamName, getGeoCaption(options))}${QUERY_TAIL}`
+
+, _crUrl = _fCrUrl("country_or_region")
+, _crUsUrl = _fCrUrl("state");
+
+const _getPathToken = (
+  isMonthlyRoute,
+  option
 ) => {
   const [
-    geo,
-    sourceQuery
-  ] = _crQueryParams(options);
+    monthlyToken,
+    yearlyToken
+  ] = isUsRoute(option)
+    ? [US_MONTHLY_JSON, US_YEARLY_JSON]
+    : [MONTHLY_JSON, YEARLY_JSON];
+  return isMonthlyRoute
+    ? monthlyToken
+    : yearlyToken;
+};
 
-  return `${API_URL}/${pathToken}?${_crExactProperty('country_or_region', geo)}${QUERY_TAIL}${sourceQuery}`;
-}
-
-const DATE = 'date'
-, YEAR = 'year';
+const _crRouteApiUrl = (
+  isMonthlyRoute,
+  option
+) => {
+  const pathToken = _getPathToken(
+    isMonthlyRoute,
+    option
+  )
+  , crUrlRoute = isUsRoute(option)
+     ? _crUsUrl
+     : _crUrl;
+  return crUrlRoute(pathToken, option);
+};
 
 const _crCategoryUrl = (
   isMonthlyRoute,
-  options
+  option
 ) => {
-  if (isMonthlyRoute) {
-    options.time = options.time + '-01'
-  }
-  const _sourceQuery = _crQueryParams(options)[1]
-  , _queryTail = `${QUERY_TAIL}${_sourceQuery}`
-  , _date = options.time;
+  const _sourceQuery = _crSourceQueryParam(option)
+  , pathToken = _getPathToken(
+    isMonthlyRoute,
+    option
+  );
 
-  return isMonthlyRoute
-    ? `${API_URL}/${MONTHLY_JSON}?${_crExactProperty(DATE, _date)}${_queryTail}`
-    : `${API_URL}/${YEARLY_JSON}?${_crExactProperty(YEAR, _date)}${_queryTail}`;
+  return `${API_URL}/${pathToken}?${_crDateProperty(option)}${QUERY_TAIL}${_sourceQuery}`;
 }
 
 const _crTreeMapUrl = (
   isMonthlyRoute,
-  options
+  option
 ) => {
-  const _date = options.time
-  , geo = _crQueryParams(options)[0];
-  options.dfTmTitle = getMetricCaption(options)
-  return `${API_URL}/${YEARLY_JSON}?${_crExactProperty(YEAR, _date)}&${_crExactProperty('country_or_region', geo)}${QUERY_TAIL}`;
+  option.dfTmTitle = getMetricCaption(option);
+
+  return `${_crRouteApiUrl(isMonthlyRoute, option)}&${_crDateProperty(option)}`;
 }
 
-const EmberApi = {
-  getRequestUrl(options) {
-    const _isMonthlyRoute = options.dfRId === 'M';
+const _crLineUrl = (
+  isMonthlyRoute,
+  option
+) => {
+  const queryDateParam = isMonthlyRoute
+     ? `&${_crGteProperty(DATE, option.fromDate)}`
+     : '';
 
-    options.pnDate = _isMonthlyRoute
+  return `${_crRouteApiUrl(isMonthlyRoute, option)}${_crSourceQueryParam(option)}${queryDateParam}`;
+};
+
+const EmberApi = {
+  getRequestUrl(option) {
+    const { seriaType } = option
+    , _isMonthlyRoute = option.dfRId === 'M'
+    , _crUrl = isTreeMap(seriaType)
+       ? _crTreeMapUrl
+       : isCategory(seriaType)
+          ? _crCategoryUrl
+          : _crLineUrl;
+
+    option.pnDate = _isMonthlyRoute
       ? DATE
       : YEAR;
 
-    return isTreeMap(options.seriaType)
-      ? _crTreeMapUrl(_isMonthlyRoute, options)
-      : isCategory(options.seriaType)
-         ? _crCategoryUrl(_isMonthlyRoute, options)
-         : _isMonthlyRoute
-            ? `${_crUrl(MONTHLY_JSON, options)}&${_crGteProperty(DATE, options.fromDate)}`
-            : _crUrl(YEARLY_JSON, options);
+    if (_isMonthlyRoute) {
+      option.time = option.time + '-01'
+    }
+
+    return _crUrl(_isMonthlyRoute, option);
   },
 
   checkResponse(json) {
     if (!isArr(json)) {
-      throw crError('', 'There are no data');
+      throw crError();
     }
   }
 }
