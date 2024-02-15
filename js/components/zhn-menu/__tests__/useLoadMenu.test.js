@@ -18,17 +18,51 @@ const _expectResult = (result, isLoading, menu) => {
 describe('useLoadMenu', () => {
   test('should return correct state after actions', () => {
     const BROWSER_TYPE = "BROWSER_TYPE_1",
+      _onLoadMenu = jest.fn(),
       {
-        result
-      } = (0, _react.renderHook)(() => (0, _useLoadMenu.default)(false, () => {}, _browserStore.useMsBrowserLoad, BROWSER_TYPE));
+        result,
+        rerender
+      } = (0, _react.renderHook)(function (_temp) {
+        let {
+          isShow = false
+        } = _temp === void 0 ? {} : _temp;
+        return (0, _useLoadMenu.default)(isShow, _onLoadMenu, _browserStore.useMsBrowserLoad, BROWSER_TYPE);
+      }),
+      _testResult = _expectResult.bind(null, result);
 
-    //Init
-    const _testResult = _expectResult.bind(null, result);
+    //Init wish isShow false
     _testResult(undefined, undefined);
+    expect(_onLoadMenu).toHaveBeenCalledTimes(0);
+
+    //Call _onLoadMenu with first isShow true
+    rerender({
+      isShow: true
+    });
+    _testResult(true, undefined);
+    expect(_onLoadMenu).toHaveBeenCalledTimes(1);
 
     //FAILED
     (0, _react.act)(() => (0, _browserStore.setMsBrowserFailed)(BROWSER_TYPE));
     _testResult(undefined, undefined);
+
+    //Rerender with same isShow true
+    rerender({
+      isShow: true
+    });
+    _testResult(undefined, undefined);
+    expect(_onLoadMenu).toHaveBeenCalledTimes(1);
+    rerender({
+      isShow: false
+    });
+    _testResult(undefined, undefined);
+    expect(_onLoadMenu).toHaveBeenCalledTimes(1);
+
+    //Rerender with isShow true
+    rerender({
+      isShow: true
+    });
+    _testResult(true, undefined);
+    expect(_onLoadMenu).toHaveBeenCalledTimes(2);
 
     //LOADED
     const menu = [{
