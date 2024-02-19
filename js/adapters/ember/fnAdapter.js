@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdToUTC = exports.roundBy = exports.reduceToHmBy = exports.isUsRoute = exports.isTreeMap = exports.isTotalVariable = exports.isTotalData = exports.isNumber = exports.isCategory = exports.isArr = exports.getSourceValue = exports.getMetricValue = exports.getMetricCaption = exports.getGeoCaption = exports.fGetCategory = exports.crError = void 0;
+exports.ymdToUTC = exports.roundBy = exports.reduceToHmBy = exports.isUsRoute = exports.isTreeMap = exports.isTotalVariable = exports.isTotalData = exports.isNumber = exports.isEuRoute = exports.isCategory = exports.isArr = exports.getSourceValue = exports.getMetricValue = exports.getMetricCaption = exports.getGeoCaption = exports.fGetCategory = exports.crError = void 0;
 var _CategoryFn = require("../CategoryFn");
 exports.isTreeMap = _CategoryFn.isTreeMap;
 exports.isCategory = _CategoryFn.isCategory;
@@ -11,6 +11,8 @@ exports.isNumber = _AdapterFn.isNumber;
 exports.crError = _AdapterFn.crError;
 exports.roundBy = _AdapterFn.roundBy;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
+const isEuRoute = option => option.dfId === "EU";
+exports.isEuRoute = isEuRoute;
 const isUsRoute = option => option.dfId === "US";
 exports.isUsRoute = isUsRoute;
 const _getCountryOrRegionCategory = item => item.country_code ? item.country_or_region || '' : '';

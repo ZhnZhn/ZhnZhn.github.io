@@ -15,6 +15,10 @@ import {
   getValue
 } from '../AdapterFn';
 
+export const isEuRoute = (
+  option
+) => option.dfId === "EU"
+
 export const isUsRoute = (
   option
 ) => option.dfId === "US"
