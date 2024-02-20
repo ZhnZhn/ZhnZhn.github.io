@@ -12,7 +12,8 @@ const API_URL = 'https://ember-data-api-scg3n.ondigitalocean.app/ember',
   MONTHLY_JSON = `${GENERATION}_${MONTHLY_SUFFIX}`,
   US_YEARLY_JSON = `${GENERATION}_usa_${YEARLY_SUFFIX}`,
   US_MONTHLY_JSON = `${GENERATION}_usa_${MONTHLY_SUFFIX}`,
-  EU_MONTHLY_JSON = "price_monthly.json"
+  EU_MONTHLY_JSON = "price_monthly.json",
+  API_URL_EU = `${API_URL}/${EU_MONTHLY_JSON}`
   //, QUERY_TAIL = "&_sort=rowid&_shape=array"
   ,
   QUERY_ARRAY_TAIL = "&_shape=array",
@@ -42,8 +43,9 @@ const _crRouteApiUrl = (isMonthlyRoute, option) => {
 };
 const _crCategoryUrl = (isMonthlyRoute, option) => {
   const _sourceQuery = _crSourceQueryParam(option),
+    _queryToken = `${_crDateProperty(option)}${QUERY_ARRAY_TAIL}`,
     pathToken = _getPathToken(isMonthlyRoute, option);
-  return `${API_URL}/${pathToken}?${_crDateProperty(option)}${QUERY_ARRAY_TAIL}${_sourceQuery}`;
+  return (0, _fnAdapter.isEuRoute)(option) ? `${API_URL_EU}?${_queryToken}` : `${API_URL}/${pathToken}?${_queryToken}${_sourceQuery}`;
 };
 const _crTreeMapUrl = (isMonthlyRoute, option) => {
   option.dfTmTitle = (0, _fnAdapter.getMetricCaption)(option);
@@ -51,7 +53,7 @@ const _crTreeMapUrl = (isMonthlyRoute, option) => {
 };
 const _crLineUrl = (isMonthlyRoute, option) => {
   const queryDateParam = isMonthlyRoute ? `&${_crGteProperty(DATE, option.fromDate)}` : '';
-  return (0, _fnAdapter.isEuRoute)(option) ? `${API_URL}/${EU_MONTHLY_JSON}?${_crExactProperty("country_or_region", (0, _fnAdapter.getGeoCaption)(option))}${queryDateParam}${QUERY_ARRAY_TAIL}` : `${_crRouteApiUrl(isMonthlyRoute, option)}${_crSourceQueryParam(option)}${queryDateParam}`;
+  return (0, _fnAdapter.isEuRoute)(option) ? `${API_URL_EU}?${_crExactProperty("country_or_region", (0, _fnAdapter.getGeoCaption)(option))}${queryDateParam}${QUERY_ARRAY_TAIL}` : `${_crRouteApiUrl(isMonthlyRoute, option)}${_crSourceQueryParam(option)}${queryDateParam}`;
 };
 const EmberApi = {
   getRequestUrl(option) {
