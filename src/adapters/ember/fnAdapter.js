@@ -50,7 +50,12 @@ const _getItems = option => option.items
 export const getGeoCaption = _fGetItemsCaptionBy(0)
 export const getSourceValue = _fGetItemsValueBy(1)
 export const getMetricCaption = _fGetItemsCaptionBy(2)
-export const getMetricValue = _fGetItemsValueBy(2)
+const _getMetricValue = _fGetItemsValueBy(2);
+export const getMetricValue = (
+  options
+) => isEuRoute(options)
+  ? 'day_ahead_price_eur_per_mwh'
+  : _getMetricValue(options)
 
 const SOURCE_TOTAL = 'Total';
 export const isTotalData = (

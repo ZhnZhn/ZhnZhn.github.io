@@ -24,7 +24,7 @@ const _getObjectKeys = Object.keys,
     }
     return data;
   }, []);
-const _crEuData = json => json.map(item => _crDataPoint(item.date, item.day_ahead_price_eur_per_mwh));
+const _crEuData = (json, pnDate, metric) => json.map(item => _crDataPoint(item[pnDate], item[metric]));
 const crData = (json, options) => {
   const source = (0, _fnAdapter.getSourceValue)(options),
     _crData = (0, _fnAdapter.isEuRoute)(options) ? _crEuData : (0, _fnAdapter.isTotalData)(source) ? _crTotalData : _crSourceData;

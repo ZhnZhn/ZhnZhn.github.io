@@ -26,7 +26,9 @@ const _getItems = option => option.items,
 const getGeoCaption = exports.getGeoCaption = _fGetItemsCaptionBy(0);
 const getSourceValue = exports.getSourceValue = _fGetItemsValueBy(1);
 const getMetricCaption = exports.getMetricCaption = _fGetItemsCaptionBy(2);
-const getMetricValue = exports.getMetricValue = _fGetItemsValueBy(2);
+const _getMetricValue = _fGetItemsValueBy(2);
+const getMetricValue = options => isEuRoute(options) ? 'day_ahead_price_eur_per_mwh' : _getMetricValue(options);
+exports.getMetricValue = getMetricValue;
 const SOURCE_TOTAL = 'Total';
 const isTotalData = source => source === SOURCE_TOTAL;
 exports.isTotalData = isTotalData;

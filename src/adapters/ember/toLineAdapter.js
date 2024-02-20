@@ -50,10 +50,12 @@ const _getObjectKeys = Object.keys
 }, []);
 
 const _crEuData = (
-  json
+  json,
+  pnDate,
+  metric
 ) => json.map(item => _crDataPoint(
-  item.date,
-  item.day_ahead_price_eur_per_mwh
+  item[pnDate],
+  item[metric]
 ));
 
 const crData = (
@@ -69,7 +71,7 @@ const crData = (
 
   return _crData(
     json,
-    options.pnDate, 
+    options.pnDate,
     getMetricValue(options),
     source
   ).sort(compareByDate);
