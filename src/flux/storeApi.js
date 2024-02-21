@@ -3,6 +3,7 @@ import { bindTo } from '../utils/bindTo';
 
 export {
   isFn,
+  isNumber,
   isStr,
   isUndef
 } from '../utils/isTypeFn';

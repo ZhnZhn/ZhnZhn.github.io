@@ -3,8 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _storeApi = require("../../storeApi");
-const _isArr = Array.isArray,
-  _isNumber = n => typeof n === 'number' && n - n === 0;
+const _isArr = Array.isArray;
 const _crJsonProp = strOr => (0, _storeApi.isStr)(strOr) ? strOr : void 0;
 const _crDfItem = (item, rootUri) => ({
   id: item[0],
@@ -27,7 +26,7 @@ const _mergeSelectProps = (selectProps, obj) => {
   const arr = [...selectProps];
   (obj.selectProps || []).forEach(_arr => {
     const _rowIndex = _arr[_arr.length - 1];
-    if (_isNumber(_rowIndex)) {
+    if ((0, _storeApi.isNumber)(_rowIndex)) {
       arr.splice(_rowIndex - 1, 0, _arr);
     } else {
       arr.push(_arr);
