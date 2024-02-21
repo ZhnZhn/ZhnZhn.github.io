@@ -1,10 +1,10 @@
+import { isStr } from '../../storeApi';
 
 const _isArr = Array.isArray
 , _isNumber = n => typeof n === 'number'
-    && n-n === 0
-, _isStr = str => typeof str === 'string';
+    && n-n === 0;
 
-const _crJsonProp = strOr => _isStr(strOr)
+const _crJsonProp = strOr => isStr(strOr)
  ? strOr
  : void 0;
 const _crDfItem = (item, rootUri) => ({
@@ -26,7 +26,7 @@ const _rFns = {
   id: _crIdItem
 };
 
-const _mergeSelectProps = (selectProps, obj) => {  
+const _mergeSelectProps = (selectProps, obj) => {
   const arr = [...selectProps];
   (obj.selectProps || []).forEach(_arr => {
     const _rowIndex = _arr[_arr.length - 1];

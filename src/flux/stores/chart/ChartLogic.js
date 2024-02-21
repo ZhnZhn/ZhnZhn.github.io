@@ -14,12 +14,12 @@ import { getActiveChart } from '../chartCheckBoxLogic';
 import { getActiveContCheckBox } from '../contCheckBoxLogic';
 
 import { crItemContainerEl } from '../../logic/fItemContainer';
+import { isStr } from '../../storeApi';
 
 import getSlice from './getSlice';
 import fCompareBy from './fCompareBy';
 
 const _isArr = Array.isArray;
-const _isStr = str => typeof str === 'string';
 
 const _isSecondDotCase = (
   series, {
@@ -127,7 +127,7 @@ export const setAlertItemIdTo = (
   option
 ) => {
   const { alertItemId, value } = option;
-  option.alertItemId = _isStr(alertItemId)
+  option.alertItemId = isStr(alertItemId)
     ? alertItemId
-    : _isStr(value) ? value : void 0;
+    : isStr(value) ? value : void 0;
 }

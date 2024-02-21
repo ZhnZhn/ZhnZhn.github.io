@@ -14,10 +14,10 @@ var _compStore = require("../compStore");
 var _chartCheckBoxLogic = require("../chartCheckBoxLogic");
 var _contCheckBoxLogic = require("../contCheckBoxLogic");
 var _fItemContainer = require("../../logic/fItemContainer");
+var _storeApi = require("../../storeApi");
 var _getSlice = _interopRequireDefault(require("./getSlice"));
 var _fCompareBy = _interopRequireDefault(require("./fCompareBy"));
 const _isArr = Array.isArray;
-const _isStr = str => typeof str === 'string';
 const _isSecondDotCase = (series, _ref) => {
   let {
     seriaType
@@ -114,7 +114,7 @@ const setAlertItemIdTo = option => {
     alertItemId,
     value
   } = option;
-  option.alertItemId = _isStr(alertItemId) ? alertItemId : _isStr(value) ? value : void 0;
+  option.alertItemId = (0, _storeApi.isStr)(alertItemId) ? alertItemId : (0, _storeApi.isStr)(value) ? value : void 0;
 };
 exports.setAlertItemIdTo = setAlertItemIdTo;
 //# sourceMappingURL=ChartLogic.js.map

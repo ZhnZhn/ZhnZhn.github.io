@@ -6,11 +6,11 @@ exports.crItemContainerEl = void 0;
 var _uiApi = require("../../components/uiApi");
 var _ChartContainer = _interopRequireDefault(require("../../components/zhn-containers/ChartContainer"));
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
+var _storeApi = require("../storeApi");
 var _contCheckBoxLogic = require("../stores/contCheckBoxLogic");
 var _compStore = require("../stores/compStore");
 var _settingStore = require("../stores/settingStore");
 var _itemStore = require("../stores/itemStore");
-const _isStr = str => typeof str === 'string';
 const _crCaption = (dialogConf, browserType) => {
   let _caption = dialogConf.contFullCaption || _BrowserConfig.default[browserType].contFullCaption;
   if (_caption) {
@@ -25,7 +25,7 @@ const _crCaption = (dialogConf, browserType) => {
     {
       dataSource = ''
     } = dialogProps || {};
-  _caption = _isStr(contCaption) ? contCaption : dialogCaption || menuTitle || 'Item Container';
+  _caption = (0, _storeApi.isStr)(contCaption) ? contCaption : dialogCaption || menuTitle || 'Item Container';
   return [dataSource, _caption].filter(Boolean).join(': ');
 };
 const crItemContainerEl = _ref => {
@@ -38,13 +38,11 @@ const crItemContainerEl = _ref => {
       chartContainerComp,
       contWidth
     } = dialogConf || {},
-    Comp = chartContainerComp || _ChartContainer.default,
-    _chartType = type || _BrowserConfig.default[browserType].chartContainerType,
-    _caption = _crCaption(dialogConf, browserType);
-  return (0, _uiApi.createElement)(Comp, {
+    _chartType = type || _BrowserConfig.default[browserType].chartContainerType;
+  return (0, _uiApi.createElement)(chartContainerComp || _ChartContainer.default, {
     key: _chartType,
-    caption: _caption,
     chartType: _chartType,
+    caption: _crCaption(dialogConf, browserType),
     browserType,
     contWidth,
     isAdminMode: _settingStore.isAdminMode,

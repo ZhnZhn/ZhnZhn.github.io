@@ -2,9 +2,9 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _storeApi = require("../../storeApi");
 const _assign = Object.assign,
-  _isArr = Array.isArray,
-  _isStr = str => typeof str === 'string';
+  _isArr = Array.isArray;
 const _getSelectProps = function (_temp) {
   let {
     selectProps
@@ -29,7 +29,7 @@ const _assignConfigTo = (toObj, conf1, conf2) => {
 };
 const _crExtendsProps = (items, conf1) => {
   const _extends1 = conf1.extends,
-    conf2 = _isStr(_extends1) ? items[_extends1] : void 0;
+    conf2 = (0, _storeApi.isStr)(_extends1) ? items[_extends1] : void 0;
   return _assignConfigTo({}, conf1, conf2);
 };
 
@@ -37,9 +37,8 @@ const _crExtendsProps = (items, conf1) => {
 const crAddProps = (items, addPropsId) => {
   const _conf = items[addPropsId],
     _extends = _conf.extends,
-    initialProps = _isStr(_extends) ? _crExtendsProps(items, items[_extends]) : {};
+    initialProps = (0, _storeApi.isStr)(_extends) ? _crExtendsProps(items, items[_extends]) : {};
   return [_conf.dialogType, _assignConfigTo(initialProps, _conf)];
 };
-var _default = crAddProps;
-exports.default = _default;
+var _default = exports.default = crAddProps;
 //# sourceMappingURL=crAddProps.js.map

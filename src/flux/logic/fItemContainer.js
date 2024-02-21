@@ -6,6 +6,7 @@ import {
 import ChartContainer from '../../components/zhn-containers/ChartContainer';
 import BrowserConfig from '../../constants/BrowserConfig';
 
+import { isStr } from '../storeApi';
 import { setActiveContainer } from '../stores/contCheckBoxLogic';
 import { closeChartContainer } from '../stores/compStore';
 import { isAdminMode } from '../stores/settingStore';
@@ -16,8 +17,6 @@ import {
   closeChartItem,
   removeItemsAll
 } from '../stores/itemStore';
-
-const _isStr = str => typeof str === 'string';
 
 const _crCaption = (
   dialogConf,
@@ -37,7 +36,7 @@ const _crCaption = (
   } = dialogConf
   , { dataSource= '' } = dialogProps || {};
 
-  _caption = _isStr(contCaption)
+  _caption = isStr(contCaption)
      ? contCaption
      : dialogCaption || menuTitle || 'Item Container';
   return [dataSource, _caption]
@@ -54,14 +53,12 @@ export const crItemContainerEl = ({
     chartContainerComp,
     contWidth
   } = dialogConf || {}
-  , Comp = chartContainerComp || ChartContainer
-  , _chartType = type || BrowserConfig[browserType].chartContainerType
-  , _caption = _crCaption(dialogConf, browserType);
+  , _chartType = type || BrowserConfig[browserType].chartContainerType;
 
-  return createElement(Comp, {
+  return createElement(chartContainerComp || ChartContainer, {
     key: _chartType,
-    caption: _caption,
-    chartType: _chartType,    
+    chartType: _chartType,
+    caption: _crCaption(dialogConf, browserType),
     browserType,
     contWidth,
     isAdminMode,
