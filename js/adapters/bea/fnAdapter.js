@@ -2,45 +2,38 @@
 
 exports.__esModule = true;
 exports.crData = exports.crConfOption = void 0;
-
 var _AdapterFn = require("../AdapterFn");
-
 const _getResults = json => json.BEAAPI.Results,
-      _getData = Results => (0, _AdapterFn.isArr)(Results) ? Results[0].Data : Results.Data,
-      _getInfo = Results => (0, _AdapterFn.isArr)(Results) ? Results[0] : Results;
-
+  _getData = Results => (0, _AdapterFn.isArr)(Results) ? Results[0].Data : Results.Data,
+  _getInfo = Results => (0, _AdapterFn.isArr)(Results) ? Results[0] : Results;
 const _crName = info => {
   const {
-    Statistic = '',
-    UTCProductionTime = ''
-  } = info,
-        t = UTCProductionTime.replace('T', ' ');
-  return Statistic + ": " + t;
+      Statistic = '',
+      UTCProductionTime = ''
+    } = info,
+    t = UTCProductionTime.replace('T', ' ');
+  return `${Statistic}: ${t}`;
 };
-
 const _crDescr = info => {
   const {
-    Notes = []
-  } = info,
-        arr = Notes.map(note => {
-    const {
-      NoteRef = '',
-      NoteText = ''
-    } = note;
-    return "<P>" + NoteRef + ": " + NoteText + "</P><BR/>";
-  });
+      Notes = []
+    } = info,
+    arr = Notes.map(note => {
+      const {
+        NoteRef = '',
+        NoteText = ''
+      } = note;
+      return `<P>${NoteRef}: ${NoteText}</P><BR/>`;
+    });
   return arr.join('');
 };
-
 const _crInfo = Results => {
   const _info = _getInfo(Results);
-
   return {
     name: _crName(_info),
     description: _crDescr(_info)
   };
 };
-
 const _crZhConfig = _ref => {
   let {
     _itemKey,
@@ -54,39 +47,34 @@ const _crZhConfig = _ref => {
     dataSource
   };
 };
-
 const MD = {
   DF: '-12-31',
   'I': '-03-31',
   'II': '-06-30',
   'III': '-09-30'
 };
-
 const _crUTC = item => {
   const {
-    Frequency,
-    Year,
-    Quarter
-  } = item,
-        md = Frequency === 'Q' ? MD[Quarter] || MD.DF : MD.DF;
+      Frequency,
+      Year,
+      Quarter
+    } = item,
+    md = Frequency === 'Q' ? MD[Quarter] || MD.DF : MD.DF;
   return (0, _AdapterFn.ymdToUTC)(Year + md);
 };
-
 const crData = (json, option) => {
   const Results = _getResults(json),
-        {
-    dfFilterName,
-    items
-  } = option,
-        two = (items[1] || {}).value,
-        d = [],
-        isFilter = dfFilterName ? true : false,
-        data = _getData(Results) || [];
-
+    {
+      dfFilterName,
+      items
+    } = option,
+    two = (items[1] || {}).value,
+    d = [],
+    isFilter = dfFilterName ? true : false,
+    data = _getData(Results) || [];
   data.forEach(item => {
     const v = parseFloat(item.DataValue),
-          y = (0, _AdapterFn._isNaN)(v) ? null : v;
-
+      y = (0, _AdapterFn.isNaN)(v) ? null : v;
     if (!(isFilter && item[dfFilterName] !== two)) {
       d.push({
         x: _crUTC(item),
@@ -96,17 +84,13 @@ const crData = (json, option) => {
   });
   return d;
 };
-
 exports.crData = crData;
-
 const crConfOption = (option, json) => {
   const Results = _getResults(json);
-
   return {
     zhConfig: _crZhConfig(option),
     info: _crInfo(Results)
   };
 };
-
 exports.crConfOption = crConfOption;
 //# sourceMappingURL=fnAdapter.js.map

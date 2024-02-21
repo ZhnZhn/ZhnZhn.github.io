@@ -8,15 +8,15 @@ var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1")
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _fnDescr = require("./fnDescr");
-const _parser = new window.DOMParser(),
-  _isNaN = Number.isNaN;
+const _parser = new window.DOMParser();
 
 //€
 
-const _crZhConfig = id => ({
+const _crZhConfig = (id, caption) => ({
   id: id,
   key: id,
-  dataSource: "INSEE"
+  itemCaption: caption,
+  dataSource: 'INSEE'
 });
 const _crValueStatus = node => {
   const _status = node.getAttribute('OBS_STATUS');
@@ -47,23 +47,17 @@ const _toData = str => {
     _childNodes = _seria.childNodes || [];
     _childNodes.forEach(node => {
       _v = parseFloat(node.getAttribute('OBS_VALUE'));
-      if (!_isNaN(_v)) {
+      if (!(0, _AdapterFn.isNaN)(_v)) {
         data.push([(0, _AdapterFn.ymdToUTC)(node.getAttribute('TIME_PERIOD')), _v, _crValueStatus(node)]);
       }
     });
   }
   return [data.sort(_compareByFn.compareByDate), seriesParams];
 };
-const _crConfigOption = (_ref, seriesParams) => {
-  let {
-    value,
-    title
-  } = _ref;
-  return {
-    info: (0, _fnDescr.crInfo)(title, seriesParams),
-    zhConfig: _crZhConfig(value)
-  };
-};
+const _crConfigOption = (option, seriesParams) => ({
+  info: (0, _fnDescr.crInfo)(option.title, option.subtitle, seriesParams),
+  zhConfig: _crZhConfig(option._itemKey || option.value, option.value)
+});
 const InseeAdapter = {
   toConfig(str, option) {
     const [data, seriesParams] = _toData(str);
@@ -89,6 +83,5 @@ const InseeAdapter = {
     });
   }
 };
-var _default = InseeAdapter;
-exports.default = _default;
+var _default = exports.default = InseeAdapter;
 //# sourceMappingURL=InseeAdapter.js.map

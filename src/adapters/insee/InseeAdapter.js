@@ -2,14 +2,14 @@ import { crSeriaConfig } from '../../charts/configBuilderFn';
 import crConfigType1 from '../../charts/crConfigType1';
 
 import {
+  isNaN,
   ymdToUTC,
   findMinY
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import { crInfo } from './fnDescr';
 
-const _parser = new window.DOMParser()
-, _isNaN = Number.isNaN;
+const _parser = new window.DOMParser();
 
 //€
 
@@ -59,7 +59,7 @@ const _toData = (str) => {
     _childNodes = _seria.childNodes || []
     _childNodes.forEach(node => {
       _v = parseFloat(node.getAttribute('OBS_VALUE'))
-      if (!_isNaN(_v)) {
+      if (!isNaN(_v)) {
         data.push([
           ymdToUTC(node.getAttribute('TIME_PERIOD')),
           _v,

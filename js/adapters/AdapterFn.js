@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTypeNumber = exports.isTokenInStr = exports.isObj = exports.isNumberOrNull = exports.isNumber = exports.isInArrStr = exports.isArr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.crDfItemKey = exports.bindTo = exports.assign = exports._isNaN = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTokenInStr = exports.isObj = exports.isNumberOrNull = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.crDfItemKey = exports.bindTo = exports.assign = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -37,13 +37,11 @@ var _DirectionType = require("../constants/DirectionType");
 var _getterPointFn = require("./getterPointFn");
 var _isTypeFn = require("../utils/isTypeFn");
 exports.isObj = _isTypeFn.isObj;
-const _isNaN = exports._isNaN = Number.isNaN;
-const isArr = exports.isArr = Array.isArray;
-const isTypeNumber = n => typeof n === 'number';
-exports.isTypeNumber = isTypeNumber;
-const isNumber = n => isTypeNumber(n) && n - n === 0;
-exports.isNumber = isNumber;
-const isNumberOrNull = v => isNumber(v) || v === null;
+exports.isArr = _isTypeFn.isArr;
+exports.isNaN = _isTypeFn.isNaN;
+exports.isTypeNumber = _isTypeFn.isTypeNumber;
+exports.isNumber = _isTypeFn.isNumber;
+const isNumberOrNull = v => (0, _isTypeFn.isNumber)(v) || v === null;
 exports.isNumberOrNull = isNumberOrNull;
 const assign = exports.assign = Object.assign;
 const FN_IDENTITY = v => v;
@@ -58,14 +56,14 @@ const crDfItemKey = _ref => {
 };
 exports.crDfItemKey = crDfItemKey;
 const EMPTY = '';
-const _fIsNumber = pn => p => isTypeNumber(p[pn]) && isFinite(p[pn]);
+const _fIsNumber = pn => p => (0, _isTypeFn.isTypeNumber)(p[pn]) && isFinite(p[pn]);
 const _crBigValueFrom = point => (0, _big.default)((0, _getterPointFn.getPointValue)(point));
 const _crDmyFrom = point => (0, _dateFn.mlsToDmy)((0, _getterPointFn.getPointDate)(point));
 const _fToFloatOr = dfValue => str => {
   const _v = parseFloat(str);
-  return _isNaN(_v) ? dfValue : _v;
+  return (0, _isTypeFn.isNaN)(_v) ? dfValue : _v;
 };
-const toTd = mls => isNumber(mls) ? (0, _dateFormat.toTd)(mls) : '';
+const toTd = mls => (0, _isTypeFn.isNumber)(mls) ? (0, _dateFormat.toTd)(mls) : '';
 exports.toTd = toTd;
 const getCaption = exports.getCaption = _getPropertyFn.getC;
 const getValue = exports.getValue = _getPropertyFn.getV;
@@ -102,7 +100,7 @@ const crValueMoving = _ref2 => {
 };
 exports.crValueMoving = crValueMoving;
 const valueMoving = (data, dfR) => {
-  if (!isArr(data)) {
+  if (!(0, _isTypeFn.isArr)(data)) {
     return {
       date: data,
       direction: _DirectionType.DT_EMPTY
@@ -129,7 +127,7 @@ const valueMoving = (data, dfR) => {
 exports.valueMoving = valueMoving;
 const fCrValue = option => {
   const _rt = option._rt;
-  return isNumber(_rt) ? v => (0, _mathFn.roundBy)(v, _rt) : v => v;
+  return (0, _isTypeFn.isNumber)(_rt) ? v => (0, _mathFn.roundBy)(v, _rt) : v => v;
 };
 exports.fCrValue = fCrValue;
 const roundByOHLC = n => {

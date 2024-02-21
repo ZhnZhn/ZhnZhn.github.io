@@ -6,7 +6,7 @@ export {
 } from '../AdapterFn';
 
 import {
-  _isNaN,
+  isNaN,
   crZhConfig,
   getCaption,
   joinBy,
@@ -68,7 +68,7 @@ export const crData = (
   , _data = [];
   _metrics.forEach(item => {
     const _v = parseFloat(item[_propName]);
-    if (!_isNaN(_v)) {
+    if (!isNaN(_v)) {
       _data.push([ymdToUTC(item.date), _v])
     }
   })

@@ -1,5 +1,5 @@
 import {
-  _isNaN,
+  isNaN,
   isArr,
   ymdToUTC
 } from '../AdapterFn';
@@ -81,7 +81,7 @@ export const crData = (
 
   data.forEach(item => {
     const v = parseFloat(item.DataValue)
-        , y = _isNaN(v) ? null : v;
+        , y = isNaN(v) ? null : v;
     if ( !(isFilter && item[dfFilterName] !== two) ) {
       d.push({
         x: _crUTC(item),

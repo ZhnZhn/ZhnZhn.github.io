@@ -50,7 +50,7 @@ const fCrData = (paramNameY, paramNameX, yConfig) => data => {
       item = {};
     }
     const _y = _crY(item[paramNameY]);
-    if (!(0, _AdapterFn._isNaN)(_y)) {
+    if (!(0, _AdapterFn.isNaN)(_y)) {
       arr.push([(0, _AdapterFn.ymdToUTC)(item[paramNameX]), _y]);
     }
     return arr;

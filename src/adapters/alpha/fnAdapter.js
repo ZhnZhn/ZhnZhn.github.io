@@ -17,7 +17,7 @@ export {
 } from '../AdapterFn';
 
 import {
-  _isNaN,
+  isNaN,
   roundBy,
   ymdToUTC
 } from '../AdapterFn';
@@ -69,7 +69,7 @@ export const fCrData = (
   return (data || [])
     .reduce((arr, item={}) => {
        const _y = _crY(item[paramNameY]);
-       if (!_isNaN(_y)) {
+       if (!isNaN(_y)) {
          arr.push([ymdToUTC(item[paramNameX]), _y])
        }
        return arr;

@@ -47,13 +47,20 @@ import {
   getPointValue
 } from './getterPointFn';
 
-export { isObj } from '../utils/isTypeFn';
+export {
+  isObj,
+  isArr,
+  isNaN,
+  isTypeNumber,
+  isNumber
+} from '../utils/isTypeFn';
+import {
+  isArr,
+  isNaN,
+  isTypeNumber,
+  isNumber
+} from '../utils/isTypeFn';
 
-export const _isNaN = Number.isNaN
-export const isArr = Array.isArray
-export const isTypeNumber = n => typeof n === 'number'
-export const isNumber = n => isTypeNumber(n)
-  && (n - n) === 0;
 export const isNumberOrNull = v => isNumber(v) || v === null
 
 export const assign = Object.assign
@@ -73,7 +80,7 @@ const _crDmyFrom = point => mlsToDmy(getPointDate(point));
 
 const _fToFloatOr = dfValue => str => {
   const _v = parseFloat(str);
-  return _isNaN(_v) ? dfValue : _v;
+  return isNaN(_v) ? dfValue : _v;
 };
 
 export const toTd = (mls) => isNumber(mls)
@@ -165,5 +172,5 @@ export const fCrLazyValue = crValue => {
   let value;
   return () => value === void 0
     ? (value = crValue())
-    : value;    
+    : value;
 }
