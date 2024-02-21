@@ -4,10 +4,10 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _useHasBeenOpen = _interopRequireDefault(require("../hooks/useHasBeenOpen"));
 var _ChartOptionsFn = require("../dialogs/ChartOptionsFn");
 var _crDateConfig = _interopRequireDefault(require("../dialogs/fns/crDateConfig"));
 var _loadConfigs = _interopRequireDefault(require("./dimensions/loadConfigs"));
-var _usePreviousProps = _interopRequireDefault(require("./usePreviousProps"));
 const MAP_FREQUENCY_DF = 'M',
   _crOptionItem = (caption, value) => ({
     caption,
@@ -40,8 +40,8 @@ const _crLoadingState = () => ({
   isLoadFailed: false
 });
 const _useIsLoadDims = (props, isLoadFailed) => {
-  const prevProps = (0, _usePreviousProps.default)(props);
-  return isLoadFailed && !prevProps.isShow && props.isShow;
+  const _hasBeenOpen = (0, _useHasBeenOpen.default)(props.isShow);
+  return isLoadFailed && _hasBeenOpen;
 };
 const _crDateOptions = (configs, _mF, mapDateDf, loadId) => {
   const {
@@ -136,6 +136,5 @@ const useLoadDims = (props, setValidationMessages) => {
   }, [_isLoadDims, props, _setConfigs]);
   return [state, isLoading, isLoadFailed];
 };
-var _default = useLoadDims;
-exports.default = _default;
+var _default = exports.default = useLoadDims;
 //# sourceMappingURL=useLoadDims.js.map

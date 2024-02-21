@@ -4,11 +4,12 @@ import {
   useEffect
 } from '../uiApi';
 
+import useHasBeenOpen from '../hooks/useHasBeenOpen';
+
 import { crDialogChartOptions } from '../dialogs/ChartOptionsFn';
 import crDateConfig from '../dialogs/fns/crDateConfig';
 
 import loadConfigs from './dimensions/loadConfigs';
-import usePreviousProps from './usePreviousProps';
 
 const MAP_FREQUENCY_DF = 'M'
 , _crOptionItem = (
@@ -52,10 +53,8 @@ const _useIsLoadDims = (
   props,
   isLoadFailed
 ) => {
-  const prevProps = usePreviousProps(props);
-  return isLoadFailed
-    && !prevProps.isShow
-    && props.isShow;
+  const _hasBeenOpen = useHasBeenOpen(props.isShow);
+  return isLoadFailed && _hasBeenOpen;
 };
 
 const _crDateOptions = (
