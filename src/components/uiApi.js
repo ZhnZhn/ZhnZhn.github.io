@@ -26,16 +26,22 @@ export {
   useImperativeHandle
 } from 'react';
 
-export const isArr = Array.isArray
+export {
+  isArr,
+  isFn,
+  isUndef
+} from '../utils/isTypeFn';
+import {
+  isArr,
+  isFn
+} from '../utils/isTypeFn';
+
 export const safeMap = (
   items,
   crElement
 ) => isArr(items)
   ? items.map(crElement)
   : null
-
-export const isUndef = value => typeof value === 'undefined'
-export const isFn = fn => typeof fn === 'function'
 
 export const getRefValue = (
   ref
