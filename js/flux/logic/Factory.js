@@ -18,7 +18,6 @@ var _has = require("../../components/has");
 var _compStore = require("../stores/compStore");
 var _settingStore = require("../stores/settingStore");
 const HAS_WIDE_WIDTH = (0, _has.isWideWidth)(600),
-  _isArr = Array.isArray,
   _assign = Object.assign,
   _initFromDate = (0, _dateFn.getFromDate)(2),
   initToDate = (0, _dateFn.getToDate)();
@@ -81,7 +80,7 @@ const _getDialogType = (dialogType, _ref3) => {
     dims,
     dfProps
   } = _ref3;
-  return dialogType || (_isArr(selectProps) ? D_SELECT_N : void 0) || (_isArr(dims) || (dfProps || {}).dfId ? D_STAT_N : void 0);
+  return dialogType || ((0, _uiApi.isArr)(selectProps) ? D_SELECT_N : void 0) || ((0, _uiApi.isArr)(dims) || (dfProps || {}).dfId ? D_STAT_N : void 0);
 };
 const _modifyDialogPropsByLoadId = (dialogProps, loadId) => {
   if (!loadId) {

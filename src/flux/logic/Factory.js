@@ -1,6 +1,7 @@
 export { crAsyncBrowser } from './fBrowser';
 
 import {
+  isArr,
   bindTo,
   createElement
 } from '../../components/uiApi';
@@ -44,7 +45,6 @@ import {
 } from '../stores/settingStore';
 
 const HAS_WIDE_WIDTH = isWideWidth(600)
-, _isArr = Array.isArray
 , _assign = Object.assign
 , _initFromDate = getFromDate(2)
 , initToDate = getToDate();
@@ -128,8 +128,8 @@ const _getDialogType = (
   dims,
   dfProps
 }) => dialogType
-  || (_isArr(selectProps) ? D_SELECT_N : void 0)
-  || (_isArr(dims) || (dfProps || {}).dfId ? D_STAT_N : void 0);
+  || (isArr(selectProps) ? D_SELECT_N : void 0)
+  || (isArr(dims) || (dfProps || {}).dfId ? D_STAT_N : void 0);
 
 const _modifyDialogPropsByLoadId = (
   dialogProps,
