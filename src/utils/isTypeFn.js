@@ -11,6 +11,6 @@ export const isFn = v => typeof v === 'function'
 export const isObj = v => typeof v === 'object'
   && v !== null
 
-const _isArr = Array.isArray
-export const isNotEmptyArr = arr => _isArr(arr)
+export const isArr = Array.isArray
+export const isNotEmptyArr = arr => isArr(arr)
   && arr.length > 0;
