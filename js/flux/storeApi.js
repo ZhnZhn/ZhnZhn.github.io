@@ -2,11 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.isUndef = exports.isStr = exports.isNumber = exports.getStoreApi = exports.fUseStoreState = exports.fCrUse = exports.fCrStoreSlice = exports.createStoreWithSelector = exports.atom = void 0;
+exports.isUndef = exports.isStr = exports.isNumber = exports.isArr = exports.getStoreApi = exports.fUseStoreState = exports.fCrUse = exports.fCrStoreSlice = exports.createStoreWithSelector = exports.atom = void 0;
 var _bindTo = require("../utils/bindTo");
 exports.bindTo = _bindTo.bindTo;
 var _isTypeFn = require("../utils/isTypeFn");
 exports.isFn = _isTypeFn.isFn;
+exports.isArr = _isTypeFn.isArr;
 exports.isNumber = _isTypeFn.isNumber;
 exports.isStr = _isTypeFn.isStr;
 exports.isUndef = _isTypeFn.isUndef;

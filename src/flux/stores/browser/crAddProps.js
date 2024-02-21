@@ -1,14 +1,15 @@
-import { isStr } from '../../storeApi';
+import {
+  isArr,
+  isStr
+} from '../../storeApi';
 
 const _assign = Object.assign
-, _isArr = Array.isArray;
-
-const _getSelectProps = ({
+, _getSelectProps = ({
   selectProps
-}={}) => _isArr(selectProps)
+}={}) => isArr(selectProps)
   ? selectProps
-  : [];
-const _getDialogProps = ({
+  : []
+, _getDialogProps = ({
   dialogProps
 }={}) => dialogProps;
 

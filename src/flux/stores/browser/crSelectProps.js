@@ -1,6 +1,8 @@
-import { isNumber, isStr } from '../../storeApi';
-
-const _isArr = Array.isArray;
+import {
+  isArr,
+  isNumber,
+  isStr
+} from '../../storeApi';
 
 const _crJsonProp = strOr => isStr(strOr)
  ? strOr
@@ -39,13 +41,13 @@ const _mergeSelectProps = (selectProps, obj) => {
     : void 0;
 };
 const _crSelectProps = (items, rootUri='', spT) => {
-  if (!_isArr(items)) {
+  if (!isArr(items)) {
     return;
   }
   const selectProps = []
   , _crItem = (spT && _rFns[spT]) || _rFns.df;
   items.forEach(item => {
-    if (_isArr(item)) {
+    if (isArr(item)) {
       selectProps.push(_crItem(item, rootUri))
     }
   })
@@ -54,7 +56,7 @@ const _crSelectProps = (items, rootUri='', spT) => {
 
 const crSelectProps = (initialProps={}, dialogProps) => {
   const { selectProps, rootUri, spT } = initialProps
-  , _selectItems = _isArr(selectProps)
+  , _selectItems = isArr(selectProps)
       ? _mergeSelectProps(selectProps, dialogProps)
       : dialogProps.selectProps
   , _rootUri = dialogProps.rootUri || rootUri

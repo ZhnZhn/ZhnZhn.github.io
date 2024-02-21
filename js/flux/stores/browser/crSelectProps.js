@@ -3,7 +3,6 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _storeApi = require("../../storeApi");
-const _isArr = Array.isArray;
 const _crJsonProp = strOr => (0, _storeApi.isStr)(strOr) ? strOr : void 0;
 const _crDfItem = (item, rootUri) => ({
   id: item[0],
@@ -38,13 +37,13 @@ const _crSelectProps = function (items, rootUri, spT) {
   if (rootUri === void 0) {
     rootUri = '';
   }
-  if (!_isArr(items)) {
+  if (!(0, _storeApi.isArr)(items)) {
     return;
   }
   const selectProps = [],
     _crItem = spT && _rFns[spT] || _rFns.df;
   items.forEach(item => {
-    if (_isArr(item)) {
+    if ((0, _storeApi.isArr)(item)) {
       selectProps.push(_crItem(item, rootUri));
     }
   });
@@ -61,7 +60,7 @@ const crSelectProps = function (initialProps, dialogProps) {
       rootUri,
       spT
     } = initialProps,
-    _selectItems = _isArr(selectProps) ? _mergeSelectProps(selectProps, dialogProps) : dialogProps.selectProps,
+    _selectItems = (0, _storeApi.isArr)(selectProps) ? _mergeSelectProps(selectProps, dialogProps) : dialogProps.selectProps,
     _rootUri = dialogProps.rootUri || rootUri,
     _spT = dialogProps.spT || spT;
   return _crSelectProps(_selectItems, _rootUri, _spT);

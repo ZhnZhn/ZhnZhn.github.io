@@ -5,8 +5,7 @@ exports.default = void 0;
 var _storeApi = require("../../storeApi");
 var _itemStore = require("../itemStore");
 var _compStore = require("../compStore");
-const _isArr = Array.isArray,
-  _isBool = v => typeof v === 'boolean',
+const _isBool = v => typeof v === 'boolean',
   _getBoolProperty = property => _isBool(property) ? property : void 0;
 const _crItemHandlers = (dT, bT) => ({
   onClick: (0, _storeApi.bindTo)(_compStore.showDialog, dT, bT),
@@ -43,7 +42,7 @@ const crMenu = function (menu, menuItems, browserType) {
   if (menu === void 0) {
     menu = [];
   }
-  return menu.map(menuPart => _isArr(menuPart.items) ? {
+  return menu.map(menuPart => (0, _storeApi.isArr)(menuPart.items) ? {
     caption: menuPart.caption,
     isInitOpen: _getBoolProperty(menuPart.isInitOpen),
     items: _crItems(menuPart.items, menuItems, browserType)

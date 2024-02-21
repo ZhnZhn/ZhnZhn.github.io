@@ -2,9 +2,9 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-const _isArr = Array.isArray;
+var _storeApi = require("../../storeApi");
 const _findItem = (item, chartType) => {
-  if (_isArr(item.items)) {
+  if ((0, _storeApi.isArr)(item.items)) {
     for (const subItem of item.items) {
       if (subItem.id === chartType) {
         return subItem;
@@ -15,12 +15,12 @@ const _findItem = (item, chartType) => {
   }
 };
 const findItem = (menu, chartType) => {
-  if (!_isArr(menu)) {
+  if (!(0, _storeApi.isArr)(menu)) {
     return;
   }
   for (const topics of menu) {
     const items = topics.items;
-    if (_isArr(items)) {
+    if ((0, _storeApi.isArr)(items)) {
       for (const item of items) {
         const _item = _findItem(item, chartType);
         if (_item) {

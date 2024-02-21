@@ -14,18 +14,16 @@ import { getActiveChart } from '../chartCheckBoxLogic';
 import { getActiveContCheckBox } from '../contCheckBoxLogic';
 
 import { crItemContainerEl } from '../../logic/fItemContainer';
-import { isStr } from '../../storeApi';
+import { isArr, isStr } from '../../storeApi';
 
 import getSlice from './getSlice';
 import fCompareBy from './fCompareBy';
-
-const _isArr = Array.isArray;
 
 const _isSecondDotCase = (
   series, {
   seriaType
 }) => seriaType === 'DOT_SET'
-  && _isArr(series)
+  && isArr(series)
   && series[0].type === 'scatter'
   && series.length === 2;
 

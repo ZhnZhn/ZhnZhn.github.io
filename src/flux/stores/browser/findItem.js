@@ -1,10 +1,10 @@
-const _isArr = Array.isArray;
+import { isArr } from '../../storeApi';
 
 const _findItem = (
   item,
   chartType
 ) => {
-  if (_isArr(item.items)) {
+  if (isArr(item.items)) {
     for(const subItem of item.items) {
       if (subItem.id === chartType) {
         return subItem;
@@ -18,12 +18,12 @@ const _findItem = (
 const findItem = (
   menu,
   chartType
-) => {  
-  if (!_isArr(menu)) {return;}
+) => {
+  if (!isArr(menu)) {return;}
 
   for (const topics of menu){
     const items = topics.items;
-    if (_isArr(items)) {
+    if (isArr(items)) {
       for(const item of items){
         const _item = _findItem(item, chartType)
         if (_item) {return _item;}

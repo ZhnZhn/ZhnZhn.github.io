@@ -1,4 +1,5 @@
 import {
+  isArr,
   atom,
   bindTo
 } from '../../storeApi';
@@ -11,8 +12,7 @@ import {
   showDialog
 } from '../compStore';
 
-const _isArr = Array.isArray
-, _isBool = v => typeof v === 'boolean'
+const _isBool = v => typeof v === 'boolean'
 , _getBoolProperty = property => _isBool(property)
    ? property
    : void 0;
@@ -57,7 +57,7 @@ const crMenu = (
   menuItems,
   browserType
 ) => menu
- .map(menuPart => _isArr(menuPart.items)
+ .map(menuPart => isArr(menuPart.items)
     ? {
         caption: menuPart.caption,
         isInitOpen: _getBoolProperty(menuPart.isInitOpen),

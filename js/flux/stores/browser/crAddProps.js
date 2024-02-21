@@ -4,19 +4,18 @@ exports.__esModule = true;
 exports.default = void 0;
 var _storeApi = require("../../storeApi");
 const _assign = Object.assign,
-  _isArr = Array.isArray;
-const _getSelectProps = function (_temp) {
-  let {
-    selectProps
-  } = _temp === void 0 ? {} : _temp;
-  return _isArr(selectProps) ? selectProps : [];
-};
-const _getDialogProps = function (_temp2) {
-  let {
-    dialogProps
-  } = _temp2 === void 0 ? {} : _temp2;
-  return dialogProps;
-};
+  _getSelectProps = function (_temp) {
+    let {
+      selectProps
+    } = _temp === void 0 ? {} : _temp;
+    return (0, _storeApi.isArr)(selectProps) ? selectProps : [];
+  },
+  _getDialogProps = function (_temp2) {
+    let {
+      dialogProps
+    } = _temp2 === void 0 ? {} : _temp2;
+    return dialogProps;
+  };
 const _assignConfigTo = (toObj, conf1, conf2) => {
   const dialogProps1 = _getDialogProps(conf1),
     dialogProps2 = _getDialogProps(conf2),

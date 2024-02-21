@@ -17,12 +17,11 @@ var _fItemContainer = require("../../logic/fItemContainer");
 var _storeApi = require("../../storeApi");
 var _getSlice = _interopRequireDefault(require("./getSlice"));
 var _fCompareBy = _interopRequireDefault(require("./fCompareBy"));
-const _isArr = Array.isArray;
 const _isSecondDotCase = (series, _ref) => {
   let {
     seriaType
   } = _ref;
-  return seriaType === 'DOT_SET' && _isArr(series) && series[0].type === 'scatter' && series.length === 2;
+  return seriaType === 'DOT_SET' && (0, _storeApi.isArr)(series) && series[0].type === 'scatter' && series.length === 2;
 };
 const _initChartSlice = (slice, chartType, config) => {
   if (!slice[chartType]) {
