@@ -1,24 +1,16 @@
 import {
-  useRef,
-  useState,
-  useCallback,
-  focusRefElement
+  useRef
 } from '../uiApi';
+
+import useMenuToggle from './useMenuToggle';
 
 const useMenuMore = () => {
   const refBtMenuMore = useRef()
   , [
     isMenuMore,
-    setIsMenuMore
-  ] = useState(false)
-  , toggleMenuMore = useCallback(() => {
-      setIsMenuMore(is => {
-        if (is) {
-          focusRefElement(refBtMenuMore)
-        }
-        return !is;
-      })
-  }, []);
+    toggleMenuMore
+  ] = useMenuToggle(refBtMenuMore);
+
   return [
     refBtMenuMore,
     isMenuMore,
