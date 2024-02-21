@@ -1,33 +1,28 @@
-import { isFn  } from '../uiApi';
+import {
+  isFn,
+  useRef
+} from '../uiApi';
 import { crDialogRole } from '../a11yFn';
 
 import {
-  CL_NOT_SELECTED,
   crDialogCn,
-  crShowHide,
-  crElementCn
+  crShowHide
 } from '../styleFn';
 
-import useMenuMore from '../hooks/useMenuMore';
 import { useKeyEscape } from '../hooks/fUseKey';
 import useXYMovable from '../hooks/useXYMovable';
 import useDialogFocus from './useDialogFocus';
 
-import { BtSvgClose } from '../zhn/BtSvgX';
 import FlatButton from '../zhn-m/FlatButton';
-
-import MenuMore from './MenuMore';
+import DialogCaption from './DialogCaption';
 
 import {
   S_ROOT_DIV,
-  S_CAPTION_DIV,
   S_COMMAND_DIV,
-  S_BT_LOAD,
-  S_SVG_CLOSE
+  S_BT_LOAD
 } from './Dialog.Style';
 
 const CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
-, CL_EL = crElementCn()
 , S_DIALOG_DIV = {
   ...S_ROOT_DIV,
   position: 'absolute',
@@ -86,11 +81,7 @@ const DraggableDialog = ({
   onShow,
   onClose=FN_NOOP
 }) => {
-  const [
-    refBtMenuMore,
-    isMenuMore,
-    toggleMenuMore
-  ] = useMenuMore()
+  const refBtMenuMore = useRef()
   , refRoot = useDialogFocus(
      isShow,
      refBtMenuMore
@@ -121,21 +112,12 @@ const DraggableDialog = ({
       onKeyDown={_hKeyDown}
      >
     {/*eslint-enable jsx-a11y/no-static-element-interactions*/}
-      <div className={CL_EL} style={S_CAPTION_DIV}>
-        <MenuMore
-          ref={refBtMenuMore}
-          isMore={isMenuMore}
-          menuModel={menuModel}
-          toggle={toggleMenuMore}
-        />
-        <span className={CL_NOT_SELECTED}>
-          {caption}
-        </span>
-        <BtSvgClose
-           style={S_SVG_CLOSE}
-           onClick={onClose}
-        />
-      </div>
+      <DialogCaption
+         refBtMenuMore={refBtMenuMore}
+         menuModel={menuModel}
+         caption={caption}
+         onClose={onClose}
+      />
       <div>
          {children}
       </div>

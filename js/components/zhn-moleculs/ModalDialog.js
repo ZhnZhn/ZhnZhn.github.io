@@ -7,16 +7,13 @@ var _uiApi = require("../uiApi");
 var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _fUseKey = require("../hooks/fUseKey");
-var _useMenuMore = _interopRequireDefault(require("../hooks/useMenuMore"));
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
-var _BtSvgX = require("../zhn/BtSvgX");
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _FocusTrap = _interopRequireDefault(require("./FocusTrap"));
-var _MenuMore = _interopRequireDefault(require("./MenuMore"));
+var _DialogCaption = _interopRequireDefault(require("./DialogCaption"));
 var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_MODAL_DIALOG = (0, _styleFn.crDialogCn)('modal-dialog'),
-  CL_EL = (0, _styleFn.crElementCn)(),
   S_ROOT_DIV_MODAL = {
     ..._Dialog.S_ROOT_DIV,
     display: 'block',
@@ -66,7 +63,7 @@ const ModalDialog = _ref2 => {
     onClose = FN_NOOP
   } = _ref2;
   const refBtClose = (0, _uiApi.useRef)(),
-    [refBtMenuMore, isMenuMore, toggleMenuMore] = (0, _useMenuMore.default)(),
+    refBtMenuMore = (0, _uiApi.useRef)(),
     refRoot = (0, _useDialogFocus.default)(isShow, refBtMenuMore),
     _hKeyDown = (0, _fUseKey.useKeyEscape)(onClose),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_MODAL_DIALOG);
@@ -86,21 +83,11 @@ const ModalDialog = _ref2 => {
       },
       onClick: _hClickDialog,
       onKeyDown: _hKeyDown,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        className: CL_EL,
-        style: _Dialog.S_CAPTION_DIV,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
-          ref: refBtMenuMore,
-          isMore: isMenuMore,
-          menuModel: menuModel,
-          toggle: toggleMenuMore
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: styleCaption,
-          children: caption
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
-          style: _Dialog.S_SVG_CLOSE,
-          onClick: onClose
-        })]
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCaption.default, {
+        refBtMenuMore: refBtMenuMore,
+        menuModel: menuModel,
+        caption: caption,
+        onClose: onClose
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         children: children
       }), isWithButton && /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {

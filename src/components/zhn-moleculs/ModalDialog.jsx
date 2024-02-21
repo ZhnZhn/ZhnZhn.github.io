@@ -3,28 +3,22 @@ import { crDialogRole } from '../a11yFn';
 
 import {
   crDialogCn,
-  crShowHide,
-  crElementCn
+  crShowHide
 } from '../styleFn';
 
 import { useKeyEscape } from '../hooks/fUseKey';
-import useMenuMore from '../hooks/useMenuMore';
 import useDialogFocus from './useDialogFocus';
 
-import { BtSvgClose } from '../zhn/BtSvgX';
 import FlatButton from '../zhn-m/FlatButton';
 import FocusTrap from './FocusTrap';
-import MenuMore from './MenuMore';
+import DialogCaption from './DialogCaption';
 
 import {
   S_ROOT_DIV,
-  S_CAPTION_DIV,
-  S_SVG_CLOSE,
   S_COMMAND_DIV
 } from './Dialog.Style';
 
 const CL_MODAL_DIALOG = crDialogCn('modal-dialog')
-, CL_EL = crElementCn()
 , S_ROOT_DIV_MODAL = {
   ...S_ROOT_DIV,
   display: 'block',
@@ -78,11 +72,7 @@ const ModalDialog = ({
   onClose=FN_NOOP
 }) => {
   const refBtClose = useRef()
-  , [
-    refBtMenuMore,
-    isMenuMore,
-    toggleMenuMore
-  ] = useMenuMore()
+  , refBtMenuMore = useRef()
   , refRoot = useDialogFocus(
      isShow,
      refBtMenuMore
@@ -116,22 +106,13 @@ const ModalDialog = ({
         onClick={_hClickDialog}
         onKeyDown={_hKeyDown}
      >
-     {/*eslint-enable jsx-a11y/no-static-element-interactions*/}      
-         <div className={CL_EL} style={S_CAPTION_DIV}>
-           <MenuMore
-             ref={refBtMenuMore}
-             isMore={isMenuMore}
-             menuModel={menuModel}
-             toggle={toggleMenuMore}
-           />
-            <span style={styleCaption}>
-              {caption}
-            </span>
-            <BtSvgClose
-              style={S_SVG_CLOSE}
-              onClick={onClose}
-            />
-         </div>
+     {/*eslint-enable jsx-a11y/no-static-element-interactions*/}
+         <DialogCaption
+            refBtMenuMore={refBtMenuMore}
+            menuModel={menuModel}
+            caption={caption}
+            onClose={onClose}
+         />
          <div>
            {children}
          </div>
