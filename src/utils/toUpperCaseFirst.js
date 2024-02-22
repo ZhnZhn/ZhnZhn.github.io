@@ -1,7 +1,7 @@
+import { isStr } from './isTypeFn';
 
-const toUpperCaseFirst = str => typeof str === 'string'
-  && str.length > 0
-    ? str[0].toUpperCase() + str.substring(1)
-    : '';
-
-export default toUpperCaseFirst
+export const toUpperCaseFirst = (
+  v
+) => isStr(v) && v
+  ? v[0].toUpperCase() + v.slice(1)
+  : ''

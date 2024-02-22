@@ -26,7 +26,8 @@ exports.getYear = _dateFn.getYear;
 exports.getCurrentYear = _dateFn.getCurrentYear;
 exports.getDaysFromYmd = _dateFn.getDaysFromYmd;
 exports.monthIndex = _dateFn.monthIndex;
-var _toUpperCaseFirst2 = _interopRequireDefault(require("../utils/toUpperCaseFirst"));
+var _toUpperCaseFirst = require("../utils/toUpperCaseFirst");
+exports.toUpperCaseFirst = _toUpperCaseFirst.toUpperCaseFirst;
 var _mathFn = require("../math/mathFn");
 exports.roundBy = _mathFn.roundBy;
 var _seriaFn = require("../math/seriaFn");
@@ -137,7 +138,6 @@ const roundByOHLC = n => {
   return (0, _mathFn.roundBy)(n, 2);
 };
 exports.roundByOHLC = roundByOHLC;
-const toUpperCaseFirst = exports.toUpperCaseFirst = _toUpperCaseFirst2.default;
 const crZhConfig = _ref3 => {
   let {
     _itemKey,

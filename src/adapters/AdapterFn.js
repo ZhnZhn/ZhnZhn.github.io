@@ -29,17 +29,19 @@ export {
   mlsToDmy,
   monthIndex
 } from '../utils/dateFn';
-import _toUpperCaseFirst from '../utils/toUpperCaseFirst'
-import { crValueMoving as _crVm } from '../math/mathFn'
+export { toUpperCaseFirst } from '../utils/toUpperCaseFirst';
 
-import { roundBy } from '../math/mathFn';
+import {
+  crValueMoving as _crVm,
+  roundBy
+} from '../math/mathFn';
 export { roundBy } from '../math/mathFn';
 
 export {
   findMinY,
   findMaxY,
   filterTrimZero
-} from '../math/seriaFn'
+} from '../math/seriaFn';
 
 import { DT_EMPTY } from '../constants/DirectionType';
 import {
@@ -154,8 +156,6 @@ export const roundByOHLC = n => {
   if (n>-1 && n<1) { return n; }
   return roundBy(n, 2);
 }
-
-export const toUpperCaseFirst = _toUpperCaseFirst
 
 export const crZhConfig = ({
   _itemKey,

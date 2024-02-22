@@ -5,11 +5,14 @@
  ],
  "file": "../../src/utils/toUpperCaseFirst.js",
  "names": [
+  "_isTypeFn",
+  "require",
   "toUpperCaseFirst",
-  "str",
-  "length",
+  "v",
+  "isStr",
   "toUpperCase",
-  "substring"
+  "slice",
+  "exports"
  ],
- "mappings": ";;;;;AACA,MAAMA,gBAAgB,GAAGC,GAAG,IAAI,OAAOA,GAAP,KAAe,QAAf,IAC3BA,GAAG,CAACC,MAAJ,GAAa,CADc,GAE1BD,GAAG,CAAC,CAAD,CAAH,CAAOE,WAAP,KAAuBF,GAAG,CAACG,SAAJ,CAAc,CAAd,CAFG,GAG1B,EAHN;;eAKeJ,gB"
+ "mappings": ";;;;AAAA,IAAAA,SAAA,GAAAC,OAAA;AAEO,MAAMC,gBAAgB,GAC3BC,CAAC,IACE,IAAAC,eAAK,EAACD,CAAC,CAAC,IAAIA,CAAC,GACdA,CAAC,CAAC,CAAC,CAAC,CAACE,WAAW,CAAC,CAAC,GAAGF,CAAC,CAACG,KAAK,CAAC,CAAC,CAAC,GAC/B,EAAE;AAAAC,OAAA,CAAAL,gBAAA,GAAAA,gBAAA"
 }

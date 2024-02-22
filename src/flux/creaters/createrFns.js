@@ -2,7 +2,7 @@ import {
   getC as _gC,
   getV as _gV
 } from '../../utils/getPropertyFn';
-import toUpperCaseFirst from '../../utils/toUpperCaseFirst';
+import { toUpperCaseFirst } from '../../utils/toUpperCaseFirst';
 
 export const getC = _gC
 export const getV = _gV

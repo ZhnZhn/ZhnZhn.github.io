@@ -1,11 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _toUpperCaseFirst = _interopRequireDefault(require("../toUpperCaseFirst"));
-
+var _toUpperCaseFirst = require("../toUpperCaseFirst");
 describe('toUpperCaseFirst', () => {
-  const fn = _toUpperCaseFirst.default;
+  const fn = _toUpperCaseFirst.toUpperCaseFirst;
   const EMPTY = '';
   test('should return string with first upper case letter for string or String input', () => {
     expect(fn('abc')).toBe('Abc');

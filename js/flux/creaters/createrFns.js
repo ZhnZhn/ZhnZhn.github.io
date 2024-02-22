@@ -1,17 +1,14 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.isFn = exports.getV = exports.getC = exports.crRoundTo = exports.crItemKey = exports.crCaptions = exports.crAlertConf = void 0;
 var _getPropertyFn = require("../../utils/getPropertyFn");
-var _toUpperCaseFirst = _interopRequireDefault(require("../../utils/toUpperCaseFirst"));
-const getC = _getPropertyFn.getC;
-exports.getC = getC;
-const getV = _getPropertyFn.getV;
-exports.getV = getV;
+var _toUpperCaseFirst = require("../../utils/toUpperCaseFirst");
+const getC = exports.getC = _getPropertyFn.getC;
+const getV = exports.getV = _getPropertyFn.getV;
 const isFn = fn => typeof fn === 'function';
 exports.isFn = isFn;
-const _getC = item => (0, _toUpperCaseFirst.default)(item && item.sc || getC(item));
+const _getC = item => (0, _toUpperCaseFirst.toUpperCaseFirst)(item && item.sc || getC(item));
 const _isArr = Array.isArray;
 const _join = arr => arr.filter(Boolean).join(': ');
 const _crItemCaption = (items, titles) => {
