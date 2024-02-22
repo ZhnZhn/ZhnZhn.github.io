@@ -22,7 +22,6 @@ const SpinnerDiv = _ref => {
 };
 const S_SPINNER_LOADING = {
   position: 'relative',
-  textAlign: 'middle',
   margin: '32px auto 0'
 };
 const SpinnerLoading = _ref2 => {
@@ -41,13 +40,13 @@ const SPINNER_LOADING = 'L';
 const SPINNER_FAILED = 'F';
 const crSpinnerStatus = (isLoading, isLoadFailed) => isLoading ? SPINNER_LOADING : isLoadFailed ? SPINNER_FAILED : void 0;
 exports.crSpinnerStatus = crSpinnerStatus;
-const S_LOADING = {
-    position: 'absolute',
-    top: 80,
-    left: '45%',
-    zIndex: 10,
-    opacity: 1,
-    transition: 'opacity 800ms ease-out'
+const TRANSITION_DURATION = 800,
+  HIDE_TIMEOUT_MLS = TRANSITION_DURATION + 200,
+  S_SPINNER_TRANSITION = {
+    transition: `opacity ${TRANSITION_DURATION}ms ease-out`
+  },
+  S_LOADING = {
+    opacity: 1
   },
   S_FAILED = {
     borderColor: '#f44336',
@@ -60,7 +59,7 @@ const _useIsHide = status => {
   const [isHide, setIsHide] = (0, _uiApi.useState)(false);
   (0, _uiApi.useEffect)(() => {
     if (!status) {
-      setTimeout(() => setIsHide(true), 1000);
+      setTimeout(() => setIsHide(true), HIDE_TIMEOUT_MLS);
     }
   }, [status]);
   return isHide;
@@ -74,7 +73,7 @@ const Spinner = _ref3 => {
     _style = status === SPINNER_LOADING ? S_LOADING : status === SPINNER_FAILED ? S_FAILED : S_LOADED;
   return isHide ? null : /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerDiv, {
     style: {
-      ...S_LOADING,
+      ...S_SPINNER_TRANSITION,
       ...style,
       ..._style
     }

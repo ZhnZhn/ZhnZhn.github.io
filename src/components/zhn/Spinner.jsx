@@ -17,7 +17,6 @@ const SpinnerDiv = ({ style }) => (
 
 const S_SPINNER_LOADING = {
   position: 'relative',
-  textAlign: 'middle',
   margin: '32px auto 0'
 };
 
@@ -42,25 +41,31 @@ export const crSpinnerStatus = (
      ? SPINNER_FAILED
      : void 0
 
-const S_LOADING = {
-  position: 'absolute',
-  top: 80,
-  left: '45%',
-  zIndex: 10,
-  opacity: 1,
-  transition: 'opacity 800ms ease-out'
+const TRANSITION_DURATION = 800
+, HIDE_TIMEOUT_MLS = TRANSITION_DURATION + 200
+, S_SPINNER_TRANSITION = {
+  transition: `opacity ${TRANSITION_DURATION}ms ease-out`
+}
+, S_LOADING = {
+  opacity: 1
 }, S_FAILED = {
   borderColor: '#f44336',
   animation: 'none'
 }, S_LOADED = {
-  opacity: 0,
+  opacity: 0
 };
 
 const _useIsHide = (status) => {
-  const [isHide, setIsHide] = useState(false);
+  const [
+    isHide,
+    setIsHide
+  ] = useState(false);
   useEffect(() => {
     if (!status) {
-      setTimeout(() => setIsHide(true), 1000)
+      setTimeout(
+        () => setIsHide(true),
+        HIDE_TIMEOUT_MLS
+      )
     }
   }, [status])
   return isHide;
@@ -79,7 +84,7 @@ export const Spinner = ({
 
   return isHide ? null : (
     <SpinnerDiv style={{
-      ...S_LOADING,
+      ...S_SPINNER_TRANSITION,
       ...style,
       ..._style}}
     />

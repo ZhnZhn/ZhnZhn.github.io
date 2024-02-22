@@ -24,6 +24,12 @@ var _EsConfig = require("./dimensions/EsConfig");
 var _jsxRuntime = require("react/jsx-runtime");
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.",
   MSG_DIMS_LOADING = "Dims is loading",
+  S_SPINNER = {
+    position: 'absolute',
+    top: 80,
+    left: '45%',
+    zIndex: 10
+  },
   S_DIV_LOADING = {
     height: 50,
     width: '100%'
@@ -193,6 +199,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       toggleOption: toggleDialogOption,
       onClose: hideOptions
     }), _modalToggleEl, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.Spinner, {
+      style: S_SPINNER,
       status: _spinnerStatus
     }), _spinnerStatus ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_DIV_LOADING

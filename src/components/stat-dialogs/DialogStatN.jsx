@@ -32,7 +32,16 @@ import { GEO_ENTITY } from './dimensions/EsConfig';
 
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again."
 , MSG_DIMS_LOADING = "Dims is loading"
-, S_DIV_LOADING = { height: 50, width: '100%' };
+, S_SPINNER = {
+  position: 'absolute',
+  top: 80,
+  left: '45%',
+  zIndex: 10
+}
+, S_DIV_LOADING = {
+  height: 50,
+  width: '100%'
+};
 
 const IS_SHOW_LABELS = isWideWidth();
 
@@ -264,7 +273,10 @@ const DialogStatN = memoIsShow((props) => {
          onClose={hideOptions}
        />
        {_modalToggleEl}
-       <Spinner status={_spinnerStatus} />
+       <Spinner
+         style={S_SPINNER}
+         status={_spinnerStatus}
+       />
        {
          _spinnerStatus
            ? <div style={S_DIV_LOADING} />
