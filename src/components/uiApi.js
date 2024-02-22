@@ -29,6 +29,7 @@ export {
 export {
   isArr,
   isFn,
+  isNumber,
   isUndef
 } from '../utils/isTypeFn';
 import {
