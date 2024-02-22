@@ -310,8 +310,17 @@ export const getDateFromVm = ({
  || _getDateQuarterly(date, dateTo)
  || date;
 
- export const formatStrDate = (
-   strDate
- ) => _getStr(strDate)[5] === 'Q'
-   ? strDate.slice(5) + ' ' + strDate.slice(0, 4)
-   : strDate
+const _toMmYyyy = (
+ strDate,
+ delimeter
+) => strDate.slice(5) + delimeter + strDate.slice(0, 4);
+export const formatStrDate = (
+  strDate
+) => {
+  const _strDate = _getStr(strDate);
+  return _strDate[5] === 'Q'
+    ? _toMmYyyy(_strDate, ' ')
+    : _strDate.length === 7 && _strDate[4] === '-'
+    ? _toMmYyyy(_strDate, '-')
+    : _strDate
+ }

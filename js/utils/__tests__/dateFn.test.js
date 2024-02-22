@@ -22,8 +22,8 @@ describe('isYmd YYYY-MM-DD', () => {
     expect(fn("2010-14-01")).toBe(false);
     expect(fn("2010-02-32")).toBe(false);
   });
-  test("min default valid value is " + MIN_YEAR + "-01-01", () => {
-    expect(fn(MIN_YEAR + "-01-01")).toBe(true);
+  test(`min default valid value is ${MIN_YEAR}-01-01`, () => {
+    expect(fn(`${MIN_YEAR}-01-01`)).toBe(true);
     expect(fn('1989-12-30')).toBe(false);
   });
   test('min default valid can be configured', () => {
@@ -186,7 +186,7 @@ describe('isDmy', () => {
     expect(fn('20-01-2000')).toBe(true);
     expect(fn('01-12-2000')).toBe(true);
   });
-  test("should use defult min year value " + MIN_YEAR, () => {
+  test(`should use defult min year value ${MIN_YEAR}`, () => {
     expect(fn('31-12-1989')).toBe(false);
   });
   test('should use minYear param', () => {
@@ -366,8 +366,15 @@ describe('formatStrDate', () => {
   it('should format str date to quarterly format', () => {
     expect(fn('2010-Q1')).toBe('Q1 2010');
     expect(fn('2010-Q2')).toBe('Q2 2010');
+  });
+  it('should format str date to MM-YYYY format', () => {
+    expect(fn('2010-10')).toBe('10-2010');
+    expect(fn('10-2010')).toBe('10-2010');
+    expect(fn('2010-09')).toBe('09-2010');
+    expect(fn('09-2010')).toBe('09-2010');
+  });
+  it('should return same str date in other cases', () => {
     expect(fn('2010')).toBe('2010');
-    expect(fn('2010-10')).toBe('2010-10');
     expect(fn('2010-10-01')).toBe('2010-10-01');
   });
 });

@@ -24,7 +24,7 @@ const _isYmd = function (yStr, mStr, dStr, minYear, nForecastDate) {
   const _nowYear = new Date().getFullYear();
   return !(_notInLengthMinMax(yStr, 4, minYear, _nowYear + nForecastDate) || _notInLengthMinMax(mStr, 2, 1, 12) || _notInLengthMinMax(dStr, 2, 1, 31));
 };
-const _getTimeUTC = d => _pad2(d.getUTCHours()) + ":" + _pad2(d.getUTCMinutes());
+const _getTimeUTC = d => `${_pad2(d.getUTCHours())}:${_pad2(d.getUTCMinutes())}`;
 const _getYmdUTC = (d, yearMinus) => d.getUTCFullYear() - yearMinus + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + d.getUTCDate()).slice(-2);
 const MONTH_HP = {
   january: 0,
@@ -74,7 +74,7 @@ const getCurrentYear = () => _currentYear ? _currentYear : _currentYear = getYea
 exports.getCurrentYear = getCurrentYear;
 const getYmdhmUTC = date => {
   const _d = date || new Date();
-  return _getYmdUTC(_d, 0) + " " + _getTimeUTC(_d) + " UTC";
+  return `${_getYmdUTC(_d, 0)} ${_getTimeUTC(_d)} UTC`;
 };
 exports.getYmdhmUTC = getYmdhmUTC;
 const mlsToDmy = mlsUTC => {
@@ -92,7 +92,7 @@ const mlsToYmd = mlsUTC => {
   const _dmy = mlsToDmy(mlsUTC);
   if (_dmy) {
     const [d, m, y] = _dmy.split('-');
-    return y + "-" + m + "-" + d;
+    return `${y}-${m}-${d}`;
   }
   return '';
 };
@@ -182,7 +182,7 @@ const addToDmy = (dmy, month) => {
 exports.addToDmy = addToDmy;
 const getYTDfromDmy = dmy => {
   const _year = dmy.split('-')[2];
-  return dmyToUTC("01-01-" + _year);
+  return dmyToUTC(`01-01-${_year}`);
 };
 exports.getYTDfromDmy = getYTDfromDmy;
 const getDaysFromYmd = ymd => {
@@ -209,7 +209,7 @@ const _getStr = date => date || '',
       _intM1 = _parseIntBy10(m1),
       _mDiff = _intM1 - _parseIntBy10(m2),
       _yDiff = _parseIntBy10(y1) - _parseIntBy10(y2);
-    return _intM1 % 3 === 0 && _isEndOfMonthDay(d1) && _isEndOfMonthDay(d2) && (_mDiff === 3 && _yDiff === 0 || _mDiff === -9 && _yDiff === 1) ? "Q" + m1 / 3 + " " + y1 : '';
+    return _intM1 % 3 === 0 && _isEndOfMonthDay(d1) && _isEndOfMonthDay(d2) && (_mDiff === 3 && _yDiff === 0 || _mDiff === -9 && _yDiff === 1) ? `Q${m1 / 3} ${y1}` : '';
   };
 const getDateFromVm = _ref => {
   let {
@@ -219,6 +219,10 @@ const getDateFromVm = _ref => {
   return _getDateAnnual(date, dateTo) || _getDateQuarterly(date, dateTo) || date;
 };
 exports.getDateFromVm = getDateFromVm;
-const formatStrDate = strDate => _getStr(strDate)[5] === 'Q' ? strDate.slice(5) + ' ' + strDate.slice(0, 4) : strDate;
+const _toMmYyyy = (strDate, delimeter) => strDate.slice(5) + delimeter + strDate.slice(0, 4);
+const formatStrDate = strDate => {
+  const _strDate = _getStr(strDate);
+  return _strDate[5] === 'Q' ? _toMmYyyy(_strDate, ' ') : _strDate.length === 7 && _strDate[4] === '-' ? _toMmYyyy(_strDate, '-') : _strDate;
+};
 exports.formatStrDate = formatStrDate;
 //# sourceMappingURL=dateFn.js.map

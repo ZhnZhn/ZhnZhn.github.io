@@ -410,9 +410,15 @@ describe('formatStrDate', () => {
   it('should format str date to quarterly format', ()=>{
     expect(fn('2010-Q1')).toBe('Q1 2010')
     expect(fn('2010-Q2')).toBe('Q2 2010')
-
+  })
+  it('should format str date to MM-YYYY format', ()=>{
+    expect(fn('2010-10')).toBe('10-2010')
+    expect(fn('10-2010')).toBe('10-2010')
+    expect(fn('2010-09')).toBe('09-2010')
+    expect(fn('09-2010')).toBe('09-2010')
+  })
+  it('should return same str date in other cases', ()=>{
     expect(fn('2010')).toBe('2010')
-    expect(fn('2010-10')).toBe('2010-10')
     expect(fn('2010-10-01')).toBe('2010-10-01')
   })
 })
