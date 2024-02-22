@@ -1,6 +1,6 @@
 import {
   crDimItem,
-  toFirstUpperCase
+  toUpperCaseFirst
 } from './dimConfigFn';
 
 const _crSdnOptions = ({ values, id }) =>
@@ -21,7 +21,7 @@ const crDimConfigSdn = (variables) => {
         })).reverse()
     } else {
       dims.push({
-        c: toFirstUpperCase(text),
+        c: toUpperCaseFirst(text),
         v: id,
         options: _crSdnOptions(item)
       })

@@ -5,16 +5,15 @@
  ],
  "file": "../../../../src/components/stat-dialogs/dimensions/dimConfigFn.js",
  "names": [
+  "_toUpperCaseFirst",
+  "require",
+  "exports",
+  "toUpperCaseFirst",
   "crDimItem",
   "caption",
   "sliceId",
   "value",
-  "slice",
-  "toFirstUpperCase",
-  "str",
-  "charAt",
-  "toUpperCase",
-  "substring"
+  "slice"
  ],
- "mappings": ";;;;;AACO,MAAMA,SAAS,GAAG,CAACC,OAAD,EAAUC,OAAV,EAAmBC,KAAnB,MAA8B;AACrDF,EAAAA,OADqD;AAErDG,EAAAA,KAAK,EAAE;AAAE,KAACF,OAAD,GAAWC;AAAb;AAF8C,CAA9B,CAAlB;;;;AAKA,MAAME,gBAAgB,GAAGC,GAAG,IAAIA,GAAG,GACtCA,GAAG,CAACC,MAAJ,CAAW,CAAX,EAAcC,WAAd,KAA8BF,GAAG,CAACG,SAAJ,CAAc,CAAd,CADQ,GAEtC,EAFG"
+ "mappings": ";;;;AAAA,IAAAA,iBAAA,GAAAC,OAAA;AAAkEC,OAAA,CAAAC,gBAAA,GAAAH,iBAAA,CAAAG,gBAAA;AAE3D,MAAMC,SAAS,GAAGA,CACvBC,OAAO,EACPC,OAAO,EACPC,KAAK,MACD;EACJF,OAAO;EACPG,KAAK,EAAE;IAAE,CAACF,OAAO,GAAGC;EAAM;AAC5B,CAAC,CAAC;AAAAL,OAAA,CAAAE,SAAA,GAAAA,SAAA"
 }

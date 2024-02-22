@@ -1,6 +1,6 @@
 import {
   crDimItem,
-  toFirstUpperCase
+  toUpperCaseFirst
 } from './dimConfigFn';
 
 const _isArr = Array.isArray;
@@ -54,7 +54,7 @@ const crDimConfig = variables => {
     , _text = item.text || '';
     if (_isNotTimeDimension(time, code)) {
       dims.push({
-        c: toFirstUpperCase(_text),
+        c: toUpperCaseFirst(_text),
         v: code,
         options: _crDimOptions(item)
      })

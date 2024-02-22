@@ -5,13 +5,13 @@ import {
   ADJ_ID,
   GEO_ENTITY
 } from './EsConfig';
-import { toFirstUpperCase } from './dimConfigFn';
+import { toUpperCaseFirst } from './dimConfigFn';
 
 const _keys = Object.keys;
 
 const _crC = label => (label || '')
   .split('_')
-  .map(toFirstUpperCase)
+  .map(toUpperCaseFirst)
   .join(' ');
 
 const _crEsOptions = (category, id) => {
