@@ -1,5 +1,6 @@
 //import PropTypes from "prop-types";
 import {
+  isNumber,
   forwardRef,
   useState,
   useRef,
@@ -30,10 +31,8 @@ const S_INPUT_TEXT = {
 
 const BLANK = ''
 , TEXT = 'text'
-, OFF = "off";
-
-const _isFn = fn => typeof fn === 'function';
-const _isNumber = n => typeof n === 'number';
+, OFF = "off"
+, FN_NOOP = () => {};
 
 const _initValue = initialValue => initialValue != null
   ? initialValue
@@ -44,8 +43,8 @@ const _isMinMaxNumber = ({
   min,
   max
 }) => type === 'number'
- && _isNumber(min)
- && _isNumber(max);
+ && isNumber(min)
+ && isNumber(max);
 
 const InputText = forwardRef((props, ref) => {
   const {
@@ -58,18 +57,19 @@ const InputText = forwardRef((props, ref) => {
     min,
     max,
     step,
-    onChange,
+    onChange=FN_NOOP,
     onEnter
   } = props
-  , [value, setValue] = useState(() => _initValue(initValue))
+  , [
+    value,
+    setValue
+  ] = useState(() => _initValue(initValue))
   , _refInput = useRef()
   , _hChange = (event) => {
       const { value } = event.target;
       if (value.length <= maxLength) {
         setValue(value)
-        if (_isFn(onChange)) {
-          onChange(value)
-        }
+        onChange(value)
       }
     }
   , _hKeyDown = useInputKeyDown({
@@ -78,8 +78,9 @@ const InputText = forwardRef((props, ref) => {
   }, [onEnter]);
 
 
-  useEffect(() => setValue(_initValue(initValue))
-   ,[initValue]
+  useEffect(
+    () => setValue(_initValue(initValue)),
+    [initValue]
   )
 
   useImperativeHandle(ref, () => ({

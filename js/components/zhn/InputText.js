@@ -23,9 +23,8 @@ const S_INPUT_TEXT = {
 };
 const BLANK = '',
   TEXT = 'text',
-  OFF = "off";
-const _isFn = fn => typeof fn === 'function';
-const _isNumber = n => typeof n === 'number';
+  OFF = "off",
+  FN_NOOP = () => {};
 const _initValue = initialValue => initialValue != null ? initialValue : BLANK;
 const _isMinMaxNumber = _ref => {
   let {
@@ -33,7 +32,7 @@ const _isMinMaxNumber = _ref => {
     min,
     max
   } = _ref;
-  return type === 'number' && _isNumber(min) && _isNumber(max);
+  return type === 'number' && (0, _uiApi.isNumber)(min) && (0, _uiApi.isNumber)(max);
 };
 const InputText = (0, _uiApi.forwardRef)((props, ref) => {
   const {
@@ -46,7 +45,7 @@ const InputText = (0, _uiApi.forwardRef)((props, ref) => {
       min,
       max,
       step,
-      onChange,
+      onChange = FN_NOOP,
       onEnter
     } = props,
     [value, setValue] = (0, _uiApi.useState)(() => _initValue(initValue)),
@@ -57,9 +56,7 @@ const InputText = (0, _uiApi.forwardRef)((props, ref) => {
       } = event.target;
       if (value.length <= maxLength) {
         setValue(value);
-        if (_isFn(onChange)) {
-          onChange(value);
-        }
+        onChange(value);
       }
     },
     _hKeyDown = (0, _useInputKeyDown.default)({
