@@ -2,6 +2,10 @@ import { forwardRef } from '../uiApi';
 
 import SpanLabel from '../zhn-span/SpanLabel';
 import DateField from '../zhn/DateField';
+import {
+  S_BOX_SHADOW,
+  S_ERR
+} from '../zhn/Input.Style';
 
 const S_ROW_INPUT = {
   display: 'flex',
@@ -9,14 +13,12 @@ const S_ROW_INPUT = {
   marginTop: 8
 }
 , S_DATE_FIELD = {
+   ...S_BOX_SHADOW,
    width: 120,
-   marginLeft: 8,
-   boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+   marginLeft: 8
 }
-, S_DIV_MSG = { marginTop: 6 }
-, S_MSG = {
-   color: '#f44336',
-   fontWeight: 'bold'
+, S_MT_6 = {
+  marginTop: 6
 };
 
 const DivCompareTo = forwardRef(({
@@ -40,8 +42,8 @@ const DivCompareTo = forwardRef(({
      />
    </label>
    {/* eslint-enable jsx-a11y/label-has-associated-control */ }
-   {msgErr && <div style={S_DIV_MSG}>
-       <span style={S_MSG}>
+   {msgErr && <div style={S_MT_6}>
+       <span style={S_ERR}>
          {msgErr}
        </span>
      </div>

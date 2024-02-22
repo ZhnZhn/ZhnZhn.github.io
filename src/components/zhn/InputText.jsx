@@ -10,21 +10,22 @@ import {
 import useInputKeyDown from './useInputKeyDown';
 
 import {
-  S_INPUT
+  S_INPUT,
+  S_BOX_SHADOW
 } from './Input.Style';
 
 const CL_NUMBER_RANGE = 'input-minmax-number';
 
 const S_INPUT_TEXT = {
    ...S_INPUT,
+   ...S_BOX_SHADOW,
    display: 'inline',
    width: 40,
    paddingLeft: 5,
    marginLeft: 5,
    marginRight: 5,
    height: 26,
-   backgroundColor: '#e1e1cb',
-   boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+   backgroundColor: '#e1e1cb'
 };
 
 const BLANK = ''

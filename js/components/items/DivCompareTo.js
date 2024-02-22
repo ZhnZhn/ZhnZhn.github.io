@@ -1,35 +1,26 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../uiApi");
-
 var _SpanLabel = _interopRequireDefault(require("../zhn-span/SpanLabel"));
-
 var _DateField = _interopRequireDefault(require("../zhn/DateField"));
-
+var _Input = require("../zhn/Input.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-
 const S_ROW_INPUT = {
-  display: 'flex',
-  alignItems: 'center',
-  marginTop: 8
-},
-      S_DATE_FIELD = {
-  width: 120,
-  marginLeft: 8,
-  boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
-},
-      S_DIV_MSG = {
-  marginTop: 6
-},
-      S_MSG = {
-  color: '#f44336',
-  fontWeight: 'bold'
-};
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: 8
+  },
+  S_DATE_FIELD = {
+    ..._Input.S_BOX_SHADOW,
+    width: 120,
+    marginLeft: 8
+  },
+  S_MT_6 = {
+    marginTop: 6
+  };
 const DivCompareTo = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     initialValue,
@@ -52,14 +43,13 @@ const DivCompareTo = (0, _uiApi.forwardRef)((_ref, ref) => {
         onEnter: onEnter
       })]
     }), msgErr && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: S_DIV_MSG,
+      style: S_MT_6,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        style: S_MSG,
+        style: _Input.S_ERR,
         children: msgErr
       })
     })]
   });
 });
-var _default = DivCompareTo;
-exports.default = _default;
+var _default = exports.default = DivCompareTo;
 //# sourceMappingURL=DivCompareTo.js.map

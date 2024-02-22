@@ -1,40 +1,32 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../uiApi");
-
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
-
 var _Input = require("./Input.Style");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 //import PropTypes from "prop-types";
+
 const CL_NUMBER_RANGE = 'input-minmax-number';
-const S_INPUT_TEXT = { ..._Input.S_INPUT,
+const S_INPUT_TEXT = {
+  ..._Input.S_INPUT,
+  ..._Input.S_BOX_SHADOW,
   display: 'inline',
   width: 40,
   paddingLeft: 5,
   marginLeft: 5,
   marginRight: 5,
   height: 26,
-  backgroundColor: '#e1e1cb',
-  boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+  backgroundColor: '#e1e1cb'
 };
 const BLANK = '',
-      TEXT = 'text',
-      OFF = "off";
-
+  TEXT = 'text',
+  OFF = "off";
 const _isFn = fn => typeof fn === 'function';
-
 const _isNumber = n => typeof n === 'number';
-
 const _initValue = initialValue => initialValue != null ? initialValue : BLANK;
-
 const _isMinMaxNumber = _ref => {
   let {
     type,
@@ -43,55 +35,50 @@ const _isMinMaxNumber = _ref => {
   } = _ref;
   return type === 'number' && _isNumber(min) && _isNumber(max);
 };
-
 const InputText = (0, _uiApi.forwardRef)((props, ref) => {
   const {
-    initValue,
-    style,
-    type,
-    spellCheck,
-    placeholder,
-    maxLength = 125,
-    min,
-    max,
-    step,
-    onChange,
-    onEnter
-  } = props,
-        [value, setValue] = (0, _uiApi.useState)(() => _initValue(initValue)),
-        _refInput = (0, _uiApi.useRef)(),
-        _hChange = event => {
-    const {
-      value
-    } = event.target;
-
-    if (value.length <= maxLength) {
-      setValue(value);
-
-      if (_isFn(onChange)) {
-        onChange(value);
+      initValue,
+      style,
+      type,
+      spellCheck,
+      placeholder,
+      maxLength = 125,
+      min,
+      max,
+      step,
+      onChange,
+      onEnter
+    } = props,
+    [value, setValue] = (0, _uiApi.useState)(() => _initValue(initValue)),
+    _refInput = (0, _uiApi.useRef)(),
+    _hChange = event => {
+      const {
+        value
+      } = event.target;
+      if (value.length <= maxLength) {
+        setValue(value);
+        if (_isFn(onChange)) {
+          onChange(value);
+        }
       }
-    }
-  },
-        _hKeyDown = (0, _useInputKeyDown.default)({
-    onEnter,
-    onDelete: () => setValue(BLANK)
-  }, [onEnter]);
-
+    },
+    _hKeyDown = (0, _useInputKeyDown.default)({
+      onEnter,
+      onDelete: () => setValue(BLANK)
+    }, [onEnter]);
   (0, _uiApi.useEffect)(() => setValue(_initValue(initValue)), [initValue]);
   (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValue: () => ('' + value).trim(),
     setValue,
     focus: () => (0, _uiApi.focusRefElement)(_refInput)
   }), [value]);
-
   const [_autoCorrect, _spellCheck] = spellCheck ? ["on", "true"] : ["off", "false"],
-        _className = _isMinMaxNumber(props) ? CL_NUMBER_RANGE : void 0;
-
+    _className = _isMinMaxNumber(props) ? CL_NUMBER_RANGE : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
     ref: _refInput,
     className: _className,
-    style: { ...S_INPUT_TEXT,
+    style: {
+      ...S_INPUT_TEXT,
       ...style
     },
     type: type || TEXT,
@@ -111,6 +98,7 @@ const InputText = (0, _uiApi.forwardRef)((props, ref) => {
     onKeyDown: _hKeyDown
   });
 });
+
 /*
  InputText.propTypes = {
    style: PropTypes.object,
@@ -126,7 +114,5 @@ const InputText = (0, _uiApi.forwardRef)((props, ref) => {
    onChange: PropTypes.func
  }
  */
-
-var _default = InputText;
-exports.default = _default;
+var _default = exports.default = InputText;
 //# sourceMappingURL=InputText.js.map
