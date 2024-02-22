@@ -8,6 +8,7 @@ var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useBool = require("../hooks/useBool");
 var _ChoroplethMap = _interopRequireDefault(require("../../adapters/eurostat/ChoroplethMap"));
 var _Comp = _interopRequireDefault(require("../Comp"));
+var _Spinner = require("../zhn/Spinner");
 var _ItemHeader = _interopRequireDefault(require("./ItemHeader"));
 var _PanelDataInfo = _interopRequireDefault(require("./PanelDataInfo"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -147,7 +148,7 @@ const MapChartItem = _ref2 => {
           ...S_MAP_DIV,
           ..._styleMap
         },
-        children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.SpinnerLoading, {
+        children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.SpinnerLoading, {
           style: S_SPINNER_LOADING
         }), isErr && /*#__PURE__*/(0, _jsxRuntime.jsx)(ErrMsg, {})]
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_PanelDataInfo.default, {

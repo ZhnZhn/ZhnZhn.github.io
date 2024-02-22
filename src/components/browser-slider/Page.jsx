@@ -1,4 +1,4 @@
-import SpinnerLoading from '../zhn/SpinnerLoading';
+import { SpinnerLoading } from '../zhn/Spinner';
 import MenuList from './MenuList';
 import ErrMsg from './ErrMsg';
 

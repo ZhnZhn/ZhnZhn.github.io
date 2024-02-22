@@ -8,13 +8,13 @@ var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"))
 var _useFocus = require("../hooks/useFocus");
 var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
 var _Comp = _interopRequireDefault(require("../Comp"));
+var _Spinner = require("../zhn/Spinner");
 var _MenuTopicList = _interopRequireDefault(require("./MenuTopicList"));
 var _jsxRuntime = require("react/jsx-runtime");
 const {
   Browser,
   BrowserCaption,
-  ScrollPane,
-  SpinnerLoading
+  ScrollPane
 } = _Comp.default;
 const CL_SCROLL_MENU = (0, _styleFn.crScrollYCn)('scroll-menu');
 const BrowserMenu = props => {
@@ -36,7 +36,7 @@ const BrowserMenu = props => {
       onClose: hideBrowser
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ScrollPane, {
       className: CL_SCROLL_MENU,
-      children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopicList.default, {
+      children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.SpinnerLoading, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopicList.default, {
         menu: menu,
         refFirstItem: refFirstItem
       }), children]

@@ -7,6 +7,7 @@ import useLoadMenu from './useLoadMenu';
 
 import Comp from '../Comp';
 
+import { SpinnerLoading } from '../zhn/Spinner';
 import ToolbarButtonCircle from '../zhn/ToolbarButtonCircle';
 import WrapperInputSearch from '../zhn-select/WrapperInputSearch';
 import MenuItems2 from './MenuItems2';
@@ -15,8 +16,7 @@ const {
   Browser,
   BrowserCaption,
   ShowHide,
-  ScrollPane,
-  SpinnerLoading
+  ScrollPane
 } = Comp;
 
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
@@ -56,7 +56,7 @@ const _useToolbarButtons = (
   _crToolbarButton('A',
      'About Datasources',
      () => { onClickInfo({ descrUrl }) }
-   )  
+   )
 ], [])
 // toggleSearch, onClickInfo, descrUrl
 /*eslint-enable react-hooks/exhaustive-deps */

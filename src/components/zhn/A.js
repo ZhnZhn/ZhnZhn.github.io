@@ -1,5 +1,4 @@
 import SvgIcons from './svg/SvgIcons'
-import SpinnerLoading from './SpinnerLoading'
 import ScrollPane from './ScrollPane'
 import Browser from './Browser'
 import BrowserCaption from './BrowserCaption'
@@ -21,8 +20,7 @@ import HighchartWrapper from './HighchartWrapper'
 import ErrorBoundary from './ErrorBoundary'
 
 const A = {
-  ...SvgIcons,
-  SpinnerLoading,
+  ...SvgIcons,  
   ScrollPane,
   Browser,
   BrowserCaption,

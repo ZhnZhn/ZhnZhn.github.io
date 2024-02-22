@@ -9,6 +9,7 @@ var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"))
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
 var _Comp = _interopRequireDefault(require("../Comp"));
+var _Spinner = require("../zhn/Spinner");
 var _ToolbarButtonCircle = _interopRequireDefault(require("../zhn/ToolbarButtonCircle"));
 var _WrapperInputSearch = _interopRequireDefault(require("../zhn-select/WrapperInputSearch"));
 var _MenuItems = _interopRequireDefault(require("./MenuItems2"));
@@ -17,8 +18,7 @@ const {
   Browser,
   BrowserCaption,
   ShowHide,
-  ScrollPane,
-  SpinnerLoading
+  ScrollPane
 } = _Comp.default;
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name",
   CL_BROWSER = "scroll-browser-by",
@@ -84,7 +84,7 @@ const BrowserMenu2 = props => {
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ScrollPane, {
       className: _scrollClass,
-      children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerLoading, {}), menu && /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItems.default, {
+      children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.SpinnerLoading, {}), menu && /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItems.default, {
         model: menu,
         ItemComp: ItemComp,
         itemClassName: _styleFn.CL_ROW_TYPE2_TOPIC,

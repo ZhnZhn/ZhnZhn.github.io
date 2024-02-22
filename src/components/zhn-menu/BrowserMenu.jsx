@@ -5,13 +5,13 @@ import { useRefFocusIf } from '../hooks/useFocus';
 import useLoadMenu from './useLoadMenu';
 
 import Comp from '../Comp';
+import { SpinnerLoading } from '../zhn/Spinner';
 import MenuTopicList from './MenuTopicList';
 
 const {
   Browser,
   BrowserCaption,
-  ScrollPane,
-  SpinnerLoading
+  ScrollPane
 } = Comp;
 
 const CL_SCROLL_MENU = crScrollYCn('scroll-menu');

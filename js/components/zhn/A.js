@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _SvgIcons = _interopRequireDefault(require("./svg/SvgIcons"));
-var _SpinnerLoading = _interopRequireDefault(require("./SpinnerLoading"));
 var _ScrollPane = _interopRequireDefault(require("./ScrollPane"));
 var _Browser = _interopRequireDefault(require("./Browser"));
 var _BrowserCaption = _interopRequireDefault(require("./BrowserCaption"));
@@ -26,7 +25,6 @@ var _HighchartWrapper = _interopRequireDefault(require("./HighchartWrapper"));
 var _ErrorBoundary = _interopRequireDefault(require("./ErrorBoundary"));
 const A = {
   ..._SvgIcons.default,
-  SpinnerLoading: _SpinnerLoading.default,
   ScrollPane: _ScrollPane.default,
   Browser: _Browser.default,
   BrowserCaption: _BrowserCaption.default,

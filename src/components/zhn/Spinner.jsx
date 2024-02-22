@@ -3,6 +3,33 @@ import {
   useEffect
 } from '../uiApi';
 
+const S_SPINNER_DIV = {
+  width: 32,
+  height: 32
+};
+
+const SpinnerDiv = ({ style }) => (
+  <div
+    style={{...S_SPINNER_DIV, ...style}}
+    data-loader="circle"
+  />
+);
+
+const S_SPINNER_LOADING = {
+  position: 'relative',
+  textAlign: 'middle',
+  margin: '32px auto 0'
+};
+
+export const SpinnerLoading = ({
+  style
+}) => (
+  <SpinnerDiv style={{
+    ...S_SPINNER_LOADING,
+    ...style}}
+  />
+)
+
 const SPINNER_LOADING = 'L';
 const SPINNER_FAILED = 'F';
 
@@ -20,9 +47,6 @@ const S_LOADING = {
   top: 80,
   left: '45%',
   zIndex: 10,
-  display: 'block',
-  width: 32,
-  height: 32,
   opacity: 1,
   transition: 'opacity 800ms ease-out'
 }, S_FAILED = {
@@ -48,15 +72,16 @@ export const Spinner = ({
 }) => {
   const isHide = _useIsHide(status)
   , _style = status === SPINNER_LOADING
-     ? S_LOADING
-     : status === SPINNER_FAILED
-         ? S_FAILED
-         : S_LOADED;
+    ? S_LOADING
+    : status === SPINNER_FAILED
+      ? S_FAILED
+      : S_LOADED;
 
   return isHide ? null : (
-   <span
-      style={{...S_LOADING, ...style, ..._style}}
-      data-loader="circle"
+    <SpinnerDiv style={{
+      ...S_LOADING,
+      ...style,
+      ..._style}}
     />
   );
 }

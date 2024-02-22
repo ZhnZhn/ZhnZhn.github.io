@@ -10,6 +10,7 @@ import { useBool } from '../hooks/useBool';
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
 import A from '../Comp';
+import { SpinnerLoading } from '../zhn/Spinner';
 import ItemHeader from './ItemHeader';
 import PanelDataInfo from './PanelDataInfo';
 
@@ -133,7 +134,7 @@ export const MapChartItem = ({
              id={_mapId}
              style={{...S_MAP_DIV, ..._styleMap}}
           >
-            { isLoading && <A.SpinnerLoading style={S_SPINNER_LOADING} /> }
+            { isLoading && <SpinnerLoading style={S_SPINNER_LOADING} /> }
             { isErr && <ErrMsg /> }
           </div>
           <PanelDataInfo
