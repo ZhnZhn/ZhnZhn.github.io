@@ -7,8 +7,8 @@ var _uiApi = require("../uiApi");
 var _has = require("../has");
 var _ChartOptionsFn = require("../dialogs/ChartOptionsFn");
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
+var _Spinner = require("../zhn/Spinner");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
-var _Spinner = _interopRequireDefault(require("./Spinner"));
 var _crSelectItem = _interopRequireDefault(require("./crSelectItem"));
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
@@ -20,7 +20,6 @@ var _useDialogOptions = _interopRequireDefault(require("../dialogs/hooks/useDial
 var _useRefByIndex = _interopRequireDefault(require("./useRefByIndex"));
 var _useModalToggle = _interopRequireDefault(require("./useModalToggle"));
 var _useLoadDims = _interopRequireDefault(require("./useLoadDims"));
-var _crSpinnerStatus = _interopRequireDefault(require("./crSpinnerStatus"));
 var _EsConfig = require("./dimensions/EsConfig");
 var _jsxRuntime = require("react/jsx-runtime");
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.",
@@ -174,7 +173,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     }, [_crValidationMessages, dateDf, timeId, chartType, configs, selectOptions])
     //loadFn, onLoad, props, clearValidationMessages, setValidationMessages
     /*eslint-enable react-hooks/exhaustive-deps */,
-    _spinnerStatus = (0, _crSpinnerStatus.default)(isLoading, isLoadFailed),
+    _spinnerStatus = (0, _Spinner.crSpinnerStatus)(isLoading, isLoadFailed),
     _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(chartType);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
@@ -193,7 +192,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       onRoundTo: _setRoundTo,
       toggleOption: toggleDialogOption,
       onClose: hideOptions
-    }), _modalToggleEl, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.default, {
+    }), _modalToggleEl, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.Spinner, {
       status: _spinnerStatus
     }), _spinnerStatus ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_DIV_LOADING
@@ -222,6 +221,5 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     })]
   });
 });
-var _default = DialogStatN;
-exports.default = _default;
+var _default = exports.default = DialogStatN;
 //# sourceMappingURL=DialogStatN.js.map

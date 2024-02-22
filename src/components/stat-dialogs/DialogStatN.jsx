@@ -10,8 +10,11 @@ import { isWideWidth } from '../has';
 import { isCategoryItem } from '../dialogs/ChartOptionsFn';
 
 import ItemStack from '../zhn/ItemStack';
+import {
+  crSpinnerStatus,
+  Spinner
+} from '../zhn/Spinner';
 import D from '../dialogs/DialogCell';
-import Spinner from './Spinner';
 import crSelectItem from './crSelectItem';
 
 import memoIsShow from '../hoc/memoIsShow';
@@ -24,8 +27,6 @@ import useDialogOptions from '../dialogs/hooks/useDialogOptions';
 import useRefByIndex from './useRefByIndex';
 import useModalToggle from './useModalToggle';
 import useLoadDims from './useLoadDims';
-
-import crSpinnerStatus from './crSpinnerStatus';
 
 import { GEO_ENTITY } from './dimensions/EsConfig';
 

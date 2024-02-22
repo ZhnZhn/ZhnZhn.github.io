@@ -3,7 +3,17 @@ import {
   useEffect
 } from '../uiApi';
 
-import { LOADING, FAILED } from './SpinnerStatus';
+const SPINNER_LOADING = 'L';
+const SPINNER_FAILED = 'F';
+
+export const crSpinnerStatus = (
+  isLoading,
+  isLoadFailed
+) => isLoading
+  ? SPINNER_LOADING
+  : isLoadFailed
+     ? SPINNER_FAILED
+     : void 0
 
 const S_LOADING = {
   position: 'absolute',
@@ -32,14 +42,14 @@ const _useIsHide = (status) => {
   return isHide;
 };
 
-const Spinner = ({
+export const Spinner = ({
   style,
   status
 }) => {
   const isHide = _useIsHide(status)
-  , _style = status === LOADING
+  , _style = status === SPINNER_LOADING
      ? S_LOADING
-     : status === FAILED
+     : status === SPINNER_FAILED
          ? S_FAILED
          : S_LOADED;
 
@@ -50,5 +60,3 @@ const Spinner = ({
     />
   );
 }
-
-export default Spinner

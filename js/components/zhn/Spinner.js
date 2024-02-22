@@ -1,10 +1,13 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.crSpinnerStatus = exports.Spinner = void 0;
 var _uiApi = require("../uiApi");
-var _SpinnerStatus = require("./SpinnerStatus");
 var _jsxRuntime = require("react/jsx-runtime");
+const SPINNER_LOADING = 'L';
+const SPINNER_FAILED = 'F';
+const crSpinnerStatus = (isLoading, isLoadFailed) => isLoading ? SPINNER_LOADING : isLoadFailed ? SPINNER_FAILED : void 0;
+exports.crSpinnerStatus = crSpinnerStatus;
 const S_LOADING = {
     position: 'absolute',
     top: 80,
@@ -38,7 +41,7 @@ const Spinner = _ref => {
     status
   } = _ref;
   const isHide = _useIsHide(status),
-    _style = status === _SpinnerStatus.LOADING ? S_LOADING : status === _SpinnerStatus.FAILED ? S_FAILED : S_LOADED;
+    _style = status === SPINNER_LOADING ? S_LOADING : status === SPINNER_FAILED ? S_FAILED : S_LOADED;
   return isHide ? null : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
     style: {
       ...S_LOADING,
@@ -48,6 +51,5 @@ const Spinner = _ref => {
     "data-loader": "circle"
   });
 };
-var _default = Spinner;
-exports.default = _default;
+exports.Spinner = Spinner;
 //# sourceMappingURL=Spinner.js.map
