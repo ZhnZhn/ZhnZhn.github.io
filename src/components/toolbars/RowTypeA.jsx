@@ -1,24 +1,19 @@
 import { useState } from '../uiApi';
-import { CL_OC_BLACK } from '../styleFn';
+import { CL_OPEN_CLOSE_BLACK } from '../styleFn';
 
 import useProperty from '../hooks/useProperty';
 
 import OpenClose from '../zhn/OpenClose';
 import { SvgPlus } from '../zhn/BtSvgCircle';
 import D from '../dialogs/DialogCell';
+import {
+  S_ROOT_OC,
+  S_OC
+} from './Row.Style';
 
 const DF_COLOR = '#2b908f'
-, S_ROOT_OC = {
-  lineHeight: 'unset',
-  paddingBottom: 4,
-  marginLeft: -8
-}
-, S_OC = {
-  display: 'inline-block',
-  height: 32,
-  paddingTop: 4,
-  width: 'auto',
-  paddingRight: 8,
+, _S_OC = {
+  ...S_OC,
   marginRight: 6
 }
 , S_INPUT_COLOR = { paddingLeft: 10 };
@@ -64,9 +59,9 @@ const RowTypeA = ({
   return (
     <OpenClose
       caption={caption}
-      className={CL_OC_BLACK}
+      className={CL_OPEN_CLOSE_BLACK}
       style={S_ROOT_OC}
-      ocStyle={S_OC}
+      ocStyle={_S_OC}
       CompAfter={compAfter}
     >
       <D.RowInputColor

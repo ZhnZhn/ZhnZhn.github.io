@@ -4,7 +4,7 @@ import {
   setRefValue
 } from '../uiApi';
 import {
-  CL_OC_BLACK,
+  CL_OPEN_CLOSE_BLACK,
   CL_CHB_BLACK,
   CL_BLACK
 } from '../styleFn';
@@ -18,24 +18,16 @@ import {
 } from '../zhn/BtSvgCircle';
 import InputText from '../zhn/InputText';
 import OpenClose from '../zhn/OpenClose';
+import {
+  S_ROOT_OC,
+  S_OC
+} from './Row.Style'
 
 const DF_COLOR = '#2b908f'
 
 , DF_PERIOD = 1
 , DF_SERIA = 1
 
-, S_ROOT_OC = {
-  paddingBottom: 4,
-  marginLeft: -8,
-  lineHeight: 'unset'
-}
-, S_OC = {
-  display: 'inline-block',
-  width: 'auto',
-  height: 32,
-  paddingTop: 4,
-  paddingRight: 8
-}
 , S_PERIOD_INPUT = {
   width: 56,
   marginRight: 12
@@ -140,7 +132,7 @@ const RowType1 = ({
   return (
   <OpenClose
     caption={caption}
-    className={CL_OC_BLACK}
+    className={CL_OPEN_CLOSE_BLACK}
     style={S_ROOT_OC}
     ocStyle={S_OC}
     CompAfter={
