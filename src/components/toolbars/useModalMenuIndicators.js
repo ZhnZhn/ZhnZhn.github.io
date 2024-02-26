@@ -17,25 +17,23 @@ import RowMomAth from './RowMomAth';
 const useModalMenuIndicators = (
   config
 ) => useMemo(() => {
-  const { zhConfig } = config
-  , _isMfi = !!config.zhIsMfi
-  , { btTitle } = (config.zhMiniConfigs || [])[0] || {}
-  , indicatorConfigs = [];
+  const _isMfi = !!config.zhIsMfi
+  , { btTitle } = (config.zhMiniConfigs || [])[0] || {};
 
-  if (!(zhConfig || {}).isWithoutSma) {
-    indicatorConfigs.push([RowSma, 'sma', INDICATOR_TYPE_1])
-  }
-  if (_isMfi) {
-    indicatorConfigs.push([RowMfi, 'mfi', INDICATOR_TYPE_2])
-  }
-  if (config.zhIsMomAth) {
-    indicatorConfigs.push([RowMomAth, 'ath', INDICATOR_TYPE_2])
-  }
-  if (_isMfi || (btTitle || '').indexOf('Volume') !== -1) {
-    indicatorConfigs.push([RowRsi, 'rsi', INDICATOR_TYPE_1])
-  }
-
-  return indicatorConfigs;
+  return [
+    !(config.zhConfig || {}).isWithoutSma ? [
+      RowSma, 'sma', INDICATOR_TYPE_1
+    ] : '',
+    _isMfi ? [
+      RowMfi, 'mfi', INDICATOR_TYPE_2
+    ] : '',
+    config.zhIsMomAth ? [
+      RowMomAth, 'ath', INDICATOR_TYPE_2
+    ] : '',
+    _isMfi || (btTitle || '').indexOf('Volume') !== -1 ? [
+      RowRsi, 'rsi', INDICATOR_TYPE_1
+    ] : '' 
+  ].filter(Boolean);
 }, [config]);
 
 

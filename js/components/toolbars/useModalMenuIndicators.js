@@ -10,27 +10,11 @@ var _RowMfi = _interopRequireDefault(require("./RowMfi"));
 var _RowMomAth = _interopRequireDefault(require("./RowMomAth"));
 //[[RowComp, key, type], ...]
 const useModalMenuIndicators = config => (0, _uiApi.useMemo)(() => {
-  const {
-      zhConfig
-    } = config,
-    _isMfi = !!config.zhIsMfi,
+  const _isMfi = !!config.zhIsMfi,
     {
       btTitle
-    } = (config.zhMiniConfigs || [])[0] || {},
-    indicatorConfigs = [];
-  if (!(zhConfig || {}).isWithoutSma) {
-    indicatorConfigs.push([_fRowTaType.RowSma, 'sma', _IndicatorType.INDICATOR_TYPE_1]);
-  }
-  if (_isMfi) {
-    indicatorConfigs.push([_RowMfi.default, 'mfi', _IndicatorType.INDICATOR_TYPE_2]);
-  }
-  if (config.zhIsMomAth) {
-    indicatorConfigs.push([_RowMomAth.default, 'ath', _IndicatorType.INDICATOR_TYPE_2]);
-  }
-  if (_isMfi || (btTitle || '').indexOf('Volume') !== -1) {
-    indicatorConfigs.push([_fRowTaType.RowRsi, 'rsi', _IndicatorType.INDICATOR_TYPE_1]);
-  }
-  return indicatorConfigs;
+    } = (config.zhMiniConfigs || [])[0] || {};
+  return [!(config.zhConfig || {}).isWithoutSma ? [_fRowTaType.RowSma, 'sma', _IndicatorType.INDICATOR_TYPE_1] : '', _isMfi ? [_RowMfi.default, 'mfi', _IndicatorType.INDICATOR_TYPE_2] : '', config.zhIsMomAth ? [_RowMomAth.default, 'ath', _IndicatorType.INDICATOR_TYPE_2] : '', _isMfi || (btTitle || '').indexOf('Volume') !== -1 ? [_fRowTaType.RowRsi, 'rsi', _IndicatorType.INDICATOR_TYPE_1] : ''].filter(Boolean);
 }, [config]);
 var _default = exports.default = useModalMenuIndicators;
 //# sourceMappingURL=useModalMenuIndicators.js.map
