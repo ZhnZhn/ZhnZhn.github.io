@@ -1,4 +1,6 @@
 import {
+  isNumber,
+  isFn,
   useRef,
   useCallback,
   getRefValue,
@@ -6,23 +8,20 @@ import {
 } from '../uiApi';
 import { useBool } from '../hooks/useBool';
 
-const _isNumber = n => typeof n === 'number'
-, _isFn = fn => typeof fn === 'function';
-
 const _crName = (
   prefixStr,
   nOrObj
 ) => {
-  const _suffix = _isNumber(nOrObj)
+  const suffix = isNumber(nOrObj)
     ? `(${nOrObj})`
     : '';
-  return `${prefixStr}${_suffix}`;
+  return `${prefixStr}${suffix}`;
 };
 
-const _isSeriaInst = (s) => s && _isFn(s.setVisible);
+const _isSeriaInst = (s) => s && isFn(s.setVisible);
 
 const _getSeriaIndex = (chart, { s }) => {
-  const _index = _isNumber(s) ? s - 1 : 0;
+  const _index = isNumber(s) ? s - 1 : 0;
   return chart?.series.length > _index
     ? _index
     : 0;

@@ -4,18 +4,16 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useBool = require("../hooks/useBool");
-const _isNumber = n => typeof n === 'number',
-  _isFn = fn => typeof fn === 'function';
 const _crName = (prefixStr, nOrObj) => {
-  const _suffix = _isNumber(nOrObj) ? `(${nOrObj})` : '';
-  return `${prefixStr}${_suffix}`;
+  const suffix = (0, _uiApi.isNumber)(nOrObj) ? `(${nOrObj})` : '';
+  return `${prefixStr}${suffix}`;
 };
-const _isSeriaInst = s => s && _isFn(s.setVisible);
+const _isSeriaInst = s => s && (0, _uiApi.isFn)(s.setVisible);
 const _getSeriaIndex = (chart, _ref) => {
   let {
     s
   } = _ref;
-  const _index = _isNumber(s) ? s - 1 : 0;
+  const _index = (0, _uiApi.isNumber)(s) ? s - 1 : 0;
   return chart?.series.length > _index ? _index : 0;
 };
 const useAddSeriaBy = (confArr, getChart) => {
