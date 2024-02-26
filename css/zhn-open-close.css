@@ -1,35 +1,36 @@
 
-.zhn-oc {
+.open-close {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.cfs-dark {
   color: #1b2836;
   fill: #1b2836;
   stroke: #1b2836;
+
   color: var(--btf-c, #1b2836);
   fill: var(--btf-c, #1b2836);
-  stroke: var(--btf-c, #1b2836);
-
-  display: inline-block;
-  width: 100%;
-  cursor: pointer;
+  stroke: var(--btf-c, #1b2836);  
 }
-.zhn-oc-black {
+.cfs-black {
   color: black;
   fill: black;
   stroke: black;
+
   color: var(--c-bl, black);
   fill: var(--c-bl, black);
-  stroke: var(--c-bl, black);
-  display: inline-block;
-  width: 100%;
-  cursor: pointer;
+  stroke: var(--c-bl, black);  
 }
 
-.zhn-oc:focus,
-.zhn-oc:active {
+.open-close:focus,
+.open-close:active {
   outline: none;
   background-color: rgba(128, 128, 128, 0.3);
 }
 
-.zhn-oc__exp {
+.open-close__exp {
   border-color: #1b2836;
   border-color: var(--btf-c, #1b2836);
 }
