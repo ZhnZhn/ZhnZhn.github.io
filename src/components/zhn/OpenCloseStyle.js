@@ -2,13 +2,12 @@ export {
   CL_SHOW_POPUP,
   CL_NOT_SELECTED,
   S_BLOCK,
-  S_NONE
+  S_NONE,
+  CL_OPEN_CLOSE,
+  CL_OPEN_CLOSE_EXP
 } from '../styleFn';
 
 import { TRANSPARENT_COLOR } from '../styles/Color';
-
-export const CL_OPEN_CLOSE = 'zhn-oc'
-export const CL_OPEN_CLOSE_EXP = `${CL_OPEN_CLOSE}__exp`
 
 export const S_SVG = {
   display: 'inline-block',

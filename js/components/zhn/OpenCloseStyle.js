@@ -7,9 +7,9 @@ exports.CL_SHOW_POPUP = _styleFn.CL_SHOW_POPUP;
 exports.CL_NOT_SELECTED = _styleFn.CL_NOT_SELECTED;
 exports.S_BLOCK = _styleFn.S_BLOCK;
 exports.S_NONE = _styleFn.S_NONE;
+exports.CL_OPEN_CLOSE = _styleFn.CL_OPEN_CLOSE;
+exports.CL_OPEN_CLOSE_EXP = _styleFn.CL_OPEN_CLOSE_EXP;
 var _Color = require("../styles/Color");
-const CL_OPEN_CLOSE = exports.CL_OPEN_CLOSE = 'zhn-oc';
-const CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_EXP = `${CL_OPEN_CLOSE}__exp`;
 const S_SVG = exports.S_SVG = {
   display: 'inline-block',
   position: 'relative',

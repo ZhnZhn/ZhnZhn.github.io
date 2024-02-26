@@ -32,7 +32,11 @@ export const crCnNotSelected = className => crCn(
 const _crRowCn = className => crCnNotSelected(`${className} ${CL_BLACK}`)
 export const CL_ROW_PANE_TOPIC = _crRowCn("row__pane-topic")
 export const CL_ROW_TYPE2_TOPIC = _crRowCn("row__type2-topic")
-export const CL_OC_BLACK = "zhn-oc-black"
+
+const OPEN_CLOSE = "open-close";
+export const CL_OPEN_CLOSE = `${OPEN_CLOSE} cfs-dark`
+export const CL_OPEN_CLOSE_EXP = `${OPEN_CLOSE}__exp`
+export const CL_OPEN_CLOSE_BLACK = `${OPEN_CLOSE} cfs-black`
 
 export const S_BLOCK = { display: "block" }
 export const S_INLINE = { display: "inline-block" }
