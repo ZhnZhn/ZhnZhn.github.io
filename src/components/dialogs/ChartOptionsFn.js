@@ -90,7 +90,12 @@ const _crT2A = (_, mapFrequency) => [
   _crYearlyByMonthItem(mapFrequency)
 ].filter(Boolean);
 
-const _crT3All = (oneCaption) => _crItems([
+const _crColumBarItems = (oneCaption) => _crItems([
+  [`Column: By ${oneCaption}`, COLUMN_SET, oneCaption],
+  [`Bar: By ${oneCaption}`, BAR_SET, oneCaption],
+]);
+
+const _crColumBarClusterItems = (oneCaption) => _crItems([
   [`Column: By ${oneCaption}`, COLUMN_SET, oneCaption],
   [`Column: By ${oneCaption}: Cluster`, COLUMN_CLUSTER, oneCaption],
   [`Bar: By ${oneCaption}`, BAR_SET, oneCaption],
@@ -99,18 +104,22 @@ const _crT3All = (oneCaption) => _crItems([
 
 const _crT2AE = (_, mapFrequency) => [
   ..._crT2A(_, mapFrequency),
-  ..._crT3All("Dim")
+  ..._crColumBarClusterItems("Dim")
 ];
 
 const _crT3 = ([oneCaption]) => [
   ..._crT2(),
-  ..._crT3All(oneCaption)
+  ..._crColumBarClusterItems(oneCaption)
+];
+const _crT3C = ([oneCaption]) => [
+  ..._crT2(),
+  ..._crColumBarItems(oneCaption)
 ];
 
 const _crT3B = ([oneCaption], mapFrequency) => [
   _crItem(['Default: Spline', SPLINE]),
   _crYearlyByMonthItem(mapFrequency),
-  ..._crT3All(oneCaption)
+  ..._crColumBarClusterItems(oneCaption)
 ].filter(Boolean);
 
 const _crTreeMapItem = (
@@ -143,10 +152,11 @@ const _r = {
   t2a: _crT2A,
   t2ae: _crT2AE,
   t3: _crT3,
-  t3b: _crT3B,
   t3a: _crT3A,
   t3a2: _crT3A2,
+  t3b: _crT3B,
   [TYPE_T3AB]: _crT3AB,
+  t3c: _crT3C,
   df3: _crDF3
 };
 
