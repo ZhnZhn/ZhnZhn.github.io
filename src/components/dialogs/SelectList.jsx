@@ -7,16 +7,25 @@ const SelectList = ({
   selectProps,
   isShowById,
   hSelect
-}) => safeMap(selectProps, ({id, ...restItem}, index) => (
-  <D.ShowHide key={id} isShow={isShowById(id)}>
-    <D.SelectWithLoad
-      //uri, jsonProp, caption, isWithInput
-      {...restItem}
-      isShow={isShow}
-      isShowLabels={isShowLabels}
-      onSelect={item => hSelect(id, index, item)}
-    />
-  </D.ShowHide>
-));
+}) => safeMap(selectProps, ({type, id, ...restItem}, index) => {
+  const Comp = !type
+    ? D.SelectWithLoad
+    : type === "two"
+    ? D.SelectOneTwo
+    : null
+  , _onSelect = item => hSelect(id, index, item);
+  return (
+    <D.ShowHide key={id} isShow={isShowById(id)}>
+      {Comp && <Comp
+        //uri, jsonProp, caption, isWithInput
+        //uri, caption, oneCaption, twoCaption
+        {...restItem}
+        isShow={isShow}
+        isShowLabels={isShowLabels}
+        onSelect={_onSelect}
+      />}
+    </D.ShowHide>
+  );
+})
 
 export default SelectList

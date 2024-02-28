@@ -16,16 +16,22 @@ const SelectList = _ref => {
   } = _ref;
   return (0, _uiApi.safeMap)(selectProps, (_ref2, index) => {
     let {
+      type,
       id,
       ...restItem
     } = _ref2;
+    const Comp = !type ? _DialogCell.default.SelectWithLoad : type === "two" ? _DialogCell.default.SelectOneTwo : null,
+      _onSelect = item => hSelect(id, index, item);
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isShowById(id),
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
+      children: Comp && /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp
+      //uri, jsonProp, caption, isWithInput
+      //uri, caption, oneCaption, twoCaption
+      , {
         ...restItem,
         isShow: isShow,
         isShowLabels: isShowLabels,
-        onSelect: item => hSelect(id, index, item)
+        onSelect: _onSelect
       })
     }, id);
   });
