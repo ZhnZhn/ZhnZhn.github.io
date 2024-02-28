@@ -1,9 +1,8 @@
 import toPlural from '../../utils/toPlural';
+import { isInArrStr } from '../../utils/arrFn';
 import { CIT_EUROSTAT_MAP } from '../../constants/CompItemType';
 
-import {
-  TYPE_T3AB
-} from './ChartOptionsTypes'
+import { TYPE_T3AB } from './ChartOptionsTypes';
 
 const _isArr = Array.isArray
 , AREA = 'AREA'
@@ -28,7 +27,8 @@ const CATEGORY_TYPES = [
   COLUMN_SET, COLUMN_CLUSTER,
   BAR_SET, BAR_CLUSTER, BAR_WITH_LABELS,
   DOT_SET,
-  TREE_MAP, TREE_MAP_CLUSTER, TREE_MAP_2, TREE_MAP_2_CLUSTER
+  TREE_MAP, TREE_MAP_CLUSTER,
+  TREE_MAP_2, TREE_MAP_2_CLUSTER
 ];
 
 const EMPTY = '';
@@ -199,10 +199,7 @@ export const crChartOptions = (
    return _crOptions(_captions, mapFrequency);
 }
 
-export const isCategoryItem = (chartItem) => {
-  if (!chartItem) {
-    return false;
-  }
-  return CATEGORY_TYPES
-    .indexOf(chartItem.value) !== -1;
-}
+const _isCategory = isInArrStr(CATEGORY_TYPES);
+export const isCategoryItem = (
+  chartItem
+) => !!chartItem && _isCategory(chartItem.value)

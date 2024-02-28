@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.isCategoryItem = exports.crDialogChartOptions = exports.crChartOptions = void 0;
 var _toPlural = _interopRequireDefault(require("../../utils/toPlural"));
+var _arrFn = require("../../utils/arrFn");
 var _CompItemType = require("../../constants/CompItemType");
 var _ChartOptionsTypes = require("./ChartOptionsTypes");
 const _isArr = Array.isArray,
@@ -120,11 +121,7 @@ const crChartOptions = (selectProps, chartsType, mapFrequency) => {
   return _crOptions(_captions, mapFrequency);
 };
 exports.crChartOptions = crChartOptions;
-const isCategoryItem = chartItem => {
-  if (!chartItem) {
-    return false;
-  }
-  return CATEGORY_TYPES.indexOf(chartItem.value) !== -1;
-};
+const _isCategory = (0, _arrFn.isInArrStr)(CATEGORY_TYPES);
+const isCategoryItem = chartItem => !!chartItem && _isCategory(chartItem.value);
 exports.isCategoryItem = isCategoryItem;
 //# sourceMappingURL=ChartOptionsFn.js.map
