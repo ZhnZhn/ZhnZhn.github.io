@@ -6,24 +6,48 @@ import {
 
 const _crJsonProp = strOr => isStr(strOr)
  ? strOr
- : void 0;
-const _crDfItem = (item, rootUri) => ({
-  id: item[0],
-  caption: item[1],
-  uri: `${rootUri}${item[2]}.json`,
+ : void 0
+, _crItemProps = (
+  id,
+  caption,
+  rootUri,
+  pathToken
+) => ({
+  id,
+  caption,
+  uri: `${rootUri}${pathToken}.json`
+})
+, _crDfItem = (
+  item,
+  rootUri
+) => ({
+  ..._crItemProps(item[0], item[1], rootUri, item[2]),
   jsonProp: _crJsonProp(item[3])
 })
-const _crIdItem = (item, rootUri) => ({
-  id: item[0],
-  caption: item[0],
-  uri: `${rootUri}${item[1]}.json`,
+, _crIdItem = (
+  item,
+  rootUri
+) => ({
+  ..._crItemProps(item[0], item[0], rootUri, item[1]),
   jsonProp: _crJsonProp(item[2]),
   isWithInput: Boolean(item[3])
-});
+})
+, _crS2Item = (
+  item,
+  rootUri
+) => item.length === 3
+  ? _crDfItem(item, rootUri)
+  : {
+    ..._crItemProps(item[0], item[2], rootUri, item[3]),
+    type: "two",
+    oneCaption: item[1],
+    twoCaption: item[2]
+  };
 
 const _rFns = {
   df: _crDfItem,
-  id: _crIdItem
+  id: _crIdItem,
+  s2: _crS2Item
 };
 
 const _mergeSelectProps = (selectProps, obj) => {
