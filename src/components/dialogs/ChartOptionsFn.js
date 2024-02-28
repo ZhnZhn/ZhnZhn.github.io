@@ -33,19 +33,25 @@ const CATEGORY_TYPES = [
 
 const EMPTY = '';
 
-const _crItem = confArr => ({
-  caption: confArr[0],
-  value: confArr[1],
-  dim: confArr[2],
-  compType: confArr[3],
-  id: confArr[4]
+const _crItem = configArr => ({
+  caption: configArr[0],
+  value: configArr[1],
+  dim: configArr[2],
+  compType: configArr[3],
+  id: configArr[4]
 });
-const _crItems = arr => arr.map(_crItem);
+const _crItems = (arr) => arr
+  .filter(Boolean)
+  .map(_crItem);
 
-const _isMonthly = mapFrequency => !mapFrequency
-  || mapFrequency === 'M';
+const _isMonthly = (
+  mapFrequency
+) => !mapFrequency || mapFrequency === 'M';
 
-const _crDF3 = (oneCaption, mapFrequency) => _crItems([
+const _crDF3 = (
+  oneCaption,
+  mapFrequency
+) => _crItems([
   ['Default: Spline', SPLINE],
   ['Line', LINE],
   _isMonthly(mapFrequency) && ['Yearly by Months', AREA_YEARLY],
@@ -55,9 +61,12 @@ const _crDF3 = (oneCaption, mapFrequency) => _crItems([
   [`Bar+Labels: By ${oneCaption}`, BAR_WITH_LABELS],
   [`Column: By ${oneCaption}`, COLUMN_SET],
   [`Dots: By ${oneCaption}`, DOT_SET]
-].filter(Boolean));
+]);
 
-const _crDF = (captions, mapFrequency) => {
+const _crDF = (
+  captions,
+  mapFrequency
+) => {
   const oneCaption = toPlural(captions[0]) || 'Dim';
   return _crDF3(oneCaption, mapFrequency)
     .concat(_crItems([
@@ -76,19 +85,20 @@ const _crT1A = () => [
   _crItem(['Spline', SPLINE])
 ];
 
-
 const _crT2 = () => [
   ..._crT1(),
-  _crItem(['Column', COLUMN]),
+  _crItem(['Column', COLUMN])
 ];
 
-const _crYearlyByMonthItem = mapFrequency =>
-  _isMonthly(mapFrequency) && _crItem(['Yearly by Months' , AREA_YEARLY]);
+const _crYearlyByMonthItem = (
+  mapFrequency
+) => _isMonthly(mapFrequency)
+  && _crItem(['Yearly by Months' , AREA_YEARLY]);
 
 const _crT2A = (_, mapFrequency) => [
   ..._crT2(),
   _crYearlyByMonthItem(mapFrequency)
-].filter(Boolean);
+];
 
 const _crColumBarItems = (oneCaption) => _crItems([
   [`Column: By ${oneCaption}`, COLUMN_SET, oneCaption],
@@ -116,11 +126,14 @@ const _crT3C = ([oneCaption]) => [
   ..._crColumBarItems(oneCaption)
 ];
 
-const _crT3B = ([oneCaption], mapFrequency) => [
+const _crT3B = (
+  [oneCaption],
+  mapFrequency
+) => [
   _crItem(['Default: Spline', SPLINE]),
   _crYearlyByMonthItem(mapFrequency),
   ..._crColumBarClusterItems(oneCaption)
-].filter(Boolean);
+];
 
 const _crTreeMapItem = (
   caption,
@@ -172,32 +185,40 @@ const _crCaptions = ({
     : [ oneCaption, twoCaption ];
 };
 
+const _crChartOptionsImpl = (
+  chartsType,
+  captions,
+  mapFrequency
+) => (_r[chartsType] || _r.DF)(
+  captions,
+  mapFrequency
+).filter(Boolean);
 
 export const crDialogChartOptions = (
   dialogOption,
   { mapFrequency }={}
 ) => {
-    const {
-     chartsType,
-     mapFrequency:mF,
-     dfProps
-    } = dialogOption
-    , _mapFrequency = mapFrequency
-        || mF || (dfProps || {}).mapFrequency
-    , _captions = _crCaptions(dialogOption)
-    , _crOptions = _r[chartsType] || _r.DF;
-    return _crOptions(_captions, _mapFrequency);
+  const {
+    chartsType,
+    mapFrequency:mF,
+    dfProps
+  } = dialogOption;
+  return _crChartOptionsImpl(
+    chartsType,
+    _crCaptions(dialogOption),
+    mapFrequency || mF || (dfProps || {}).mapFrequency
+  );
 }
 
 export const crChartOptions = (
   selectProps,
   chartsType,
   mapFrequency
-) => {
-   const _captions = _crCaptions({ selectProps })
-   , _crOptions = _r[chartsType] || _r.DF;
-   return _crOptions(_captions, mapFrequency);
-}
+) => _crChartOptionsImpl(
+  chartsType,
+  _crCaptions({ selectProps }),
+  mapFrequency
+)
 
 const _isCategory = isInArrStr(CATEGORY_TYPES);
 export const isCategoryItem = (
