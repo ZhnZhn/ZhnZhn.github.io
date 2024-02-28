@@ -5,6 +5,8 @@ import { CIT_EUROSTAT_MAP } from '../../constants/CompItemType';
 import { TYPE_T3AB } from './ChartOptionsTypes';
 
 const _isArr = Array.isArray
+, BLANK_CAPTION = ''
+
 , AREA = 'AREA'
 , AREA_YEARLY = 'AREA_YEARLY'
 , SPLINE = 'SPLINE'
@@ -20,19 +22,28 @@ const _isArr = Array.isArray
 , TREE_MAP = 'TREE_MAP'
 , TREE_MAP_CLUSTER = 'TREE_MAP_CLUSTER'
 , TREE_MAP_2 = 'TREE_MAP_2'
-, TREE_MAP_2_CLUSTER = 'TREE_MAP_2_CLUSTER';
+, TREE_MAP_2_CLUSTER = 'TREE_MAP_2_CLUSTER'
 
-const CATEGORY_TYPES = [
-  MAP,
-  COLUMN_SET, COLUMN_CLUSTER,
-  BAR_SET, BAR_CLUSTER, BAR_WITH_LABELS,
-  DOT_SET,
-  TREE_MAP, TREE_MAP_CLUSTER,
-  TREE_MAP_2, TREE_MAP_2_CLUSTER
-];
+, CATEGORY_TYPES = [
+    MAP,
+    COLUMN_SET, COLUMN_CLUSTER,
+    BAR_SET, BAR_CLUSTER, BAR_WITH_LABELS,
+    DOT_SET,
+    TREE_MAP, TREE_MAP_CLUSTER,
+    TREE_MAP_2, TREE_MAP_2_CLUSTER
+]
 
-const EMPTY = '';
+, SPLINE_CONFIG = ['Spline', SPLINE]
+, LINE_CONFIG = ['Line', LINE]
+, AREA_CONFIG = ['Area', AREA]
+, COLUMN_CONFIG = ['Column', COLUMN]
+, YEARLY_BY_MONTH_CONFIG = ['Yearly by Months' , AREA_YEARLY];
 
+const _crDfConfig = configArr => {
+  const _dfConfigArr = [...configArr];
+  _dfConfigArr[0] = `Default: ${configArr[0]}`
+  return _dfConfigArr;
+}
 const _crItem = configArr => ({
   caption: configArr[0],
   value: configArr[1],
@@ -52,11 +63,11 @@ const _crDF3 = (
   oneCaption,
   mapFrequency
 ) => _crItems([
-  ['Default: Spline', SPLINE],
-  ['Line', LINE],
-  _isMonthly(mapFrequency) && ['Yearly by Months', AREA_YEARLY],
-  ['Area', AREA],
-  ['Column', COLUMN],
+  _crDfConfig(SPLINE_CONFIG),
+  LINE_CONFIG,
+  _isMonthly(mapFrequency) && YEARLY_BY_MONTH_CONFIG,
+  AREA_CONFIG,
+  COLUMN_CONFIG,
   [`Bar: By ${oneCaption}`, BAR_SET],
   [`Bar+Labels: By ${oneCaption}`, BAR_WITH_LABELS],
   [`Column: By ${oneCaption}`, COLUMN_SET],
@@ -74,26 +85,26 @@ const _crDF = (
     ]));
 };
 
-const _crT1 = () => [
-  _crItem(['Default: Spline', SPLINE]),
-  _crItem(['Line', LINE]),
-  _crItem(['Area', AREA]),
-];
-const _crT1A = () => [
-  _crItem(['Default: Area', AREA]),
-  _crItem(['Line', LINE]),
-  _crItem(['Spline', SPLINE])
-];
+const _crT1 = () => _crItems([
+  _crDfConfig(SPLINE_CONFIG),
+  LINE_CONFIG,
+  AREA_CONFIG
+]);
+const _crT1A = () => _crItems([
+  _crDfConfig(AREA_CONFIG),
+  LINE_CONFIG,
+  SPLINE_CONFIG
+]);
 
 const _crT2 = () => [
   ..._crT1(),
-  _crItem(['Column', COLUMN])
+  _crItem(COLUMN_CONFIG)
 ];
 
 const _crYearlyByMonthItem = (
   mapFrequency
 ) => _isMonthly(mapFrequency)
-  && _crItem(['Yearly by Months' , AREA_YEARLY]);
+  && _crItem(YEARLY_BY_MONTH_CONFIG);
 
 const _crT2A = (_, mapFrequency) => [
   ..._crT2(),
@@ -112,8 +123,11 @@ const _crColumBarClusterItems = (oneCaption) => _crItems([
   [`Bar: By ${oneCaption}: Cluster`, BAR_CLUSTER, oneCaption]
 ]);
 
-const _crT2AE = (_, mapFrequency) => [
-  ..._crT2A(_, mapFrequency),
+const _crT2AE = (
+  captions,
+  mapFrequency
+) => [
+  ..._crT2A(captions, mapFrequency),
   ..._crColumBarClusterItems("Dim")
 ];
 
@@ -130,7 +144,7 @@ const _crT3B = (
   [oneCaption],
   mapFrequency
 ) => [
-  _crItem(['Default: Spline', SPLINE]),
+  _crItem(_crDfConfig(SPLINE_CONFIG)),
   _crYearlyByMonthItem(mapFrequency),
   ..._crColumBarClusterItems(oneCaption)
 ];
@@ -176,12 +190,12 @@ const _r = {
 const _crCaptions = ({
   configs,
   selectProps,
-  oneCaption=EMPTY,
-  twoCaption=EMPTY
+  oneCaption=BLANK_CAPTION,
+  twoCaption=BLANK_CAPTION
 }) => {
   const _arr = configs || selectProps;
   return _isArr(_arr)
-    ? _arr.map(item => item.caption || EMPTY)
+    ? _arr.map(item => item.caption || BLANK_CAPTION)
     : [ oneCaption, twoCaption ];
 };
 
