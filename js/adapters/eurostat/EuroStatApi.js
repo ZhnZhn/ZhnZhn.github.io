@@ -14,11 +14,7 @@ const RES_ERR_STATUS = [400],
 const EuroStatApi = {
   getRequestUrl(option) {
     _addPropTo(option);
-    if (option.url) {
-      return option.url;
-    }
-    const _url = _api.default.crUrlN(option);
-    return option.url = _url;
+    return option.url ? option.url : option.url = _api.default.crUrlN(option);
   },
   checkResponse(json, option, status) {
     if (status === 400) {

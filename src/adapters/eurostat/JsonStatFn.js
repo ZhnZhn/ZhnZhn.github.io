@@ -111,7 +111,9 @@ export const createGeoSlice = (
   }
 
   return {
-    dGeo: ds.Dimension("geo") || { id: [] },
+    dGeo: ds.Dimension("geo")
+     || ds.Dimension("reporter")
+     || { id: [] },
     sGeo: _sGeo || [],
     time
   };

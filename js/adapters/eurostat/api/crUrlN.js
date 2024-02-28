@@ -25,7 +25,7 @@ const _crMapSlice = (items, _ref) => {
   }
   return mapSlice;
 };
-const _notEmptyOrGeo = item => Boolean(item) && item.id !== 'geo';
+const _notEmptyOrGeo = item => Boolean(item) && item.id !== 'geo' && item.id !== 'reporter';
 const _crItems = _ref2 => {
   let {
     seriaType,
@@ -42,8 +42,8 @@ const _crItems = _ref2 => {
   return items;
 };
 const _crQuery = (items, dfTail) => {
-  const _q = items.map(item => item.id + "=" + (0, _apiFn.getValue)(item)).join('&');
-  return dfTail ? _q + "&" + dfTail : _q;
+  const _q = items.map(item => `${item.id}=${(0, _apiFn.getValue)(item)}`).join('&');
+  return dfTail ? `${_q}&${dfTail}` : _q;
 };
 const _updateOptionsIf = (seriaType, items, options) => {
   if ((0, _apiFn.isCategory)(seriaType)) {
@@ -53,6 +53,7 @@ const _updateOptionsIf = (seriaType, items, options) => {
 const crUrlN = options => {
   const {
       seriaType,
+      dfCmx,
       dfTable,
       dfId,
       dfTail
@@ -61,8 +62,7 @@ const crUrlN = options => {
     _items = _crItems(options),
     _q = _crQuery(_items, dfTail);
   _updateOptionsIf(seriaType, _items, options);
-  return (0, _apiFn.isCategory)(seriaType) ? (0, _apiFn.crUrl)(_dfTable, _q, _apiFn.DF_TAIL) : (0, _apiFn.crUrl)(_dfTable, _q);
+  return (0, _apiFn.crUrl)(!!dfCmx, _dfTable, _q, (0, _apiFn.isCategory)(seriaType) ? _apiFn.DF_TAIL : void 0);
 };
-var _default = crUrlN;
-exports.default = _default;
+var _default = exports.default = crUrlN;
 //# sourceMappingURL=crUrlN.js.map

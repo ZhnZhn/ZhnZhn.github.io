@@ -35,8 +35,11 @@ const _crMapSlice = (
   return mapSlice;
 };
 
-const _notEmptyOrGeo = item =>
-  Boolean(item) && item.id !== 'geo';
+const _notEmptyOrGeo = (
+  item
+) => Boolean(item)
+  && item.id !== 'geo'
+  && item.id !== 'reporter';
 const _crItems = ({
   seriaType,
   items,
@@ -76,6 +79,7 @@ const _updateOptionsIf = (
 const crUrlN = (options) => {
   const {
     seriaType,
+    dfCmx,
     dfTable,
     dfId,
     dfTail
@@ -85,9 +89,12 @@ const crUrlN = (options) => {
   , _q = _crQuery(_items, dfTail);
   _updateOptionsIf(seriaType, _items, options)
 
-  return isCategory(seriaType)
-    ? crUrl(_dfTable, _q, DF_TAIL)
-    : crUrl(_dfTable, _q);
+  return crUrl(
+    !!dfCmx,
+    _dfTable,
+    _q,
+    isCategory(seriaType) ? DF_TAIL : void 0
+  );
 };
 
 export default crUrlN

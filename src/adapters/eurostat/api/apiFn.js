@@ -9,14 +9,19 @@ const CATEGORY_TYPES = [
   'DOT_SET'
 ];
 
-export const STAT_API_URL = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data"
-export const QUERY_TAIL = "&sinceTimePeriod=1996-01"
+const API_URL = "https://ec.europa.eu/eurostat/api";
+const PATH_DATA = "dissemination/statistics/1.0/data";
+const COMEXT_API_URL = `${API_URL}/comext/${PATH_DATA}`;
+
+export const STAT_API_URL = `${API_URL}/${PATH_DATA}`
+export const QUERY_TAIL = "&sinceTimePeriod=1999-01"
 export const DF_TAIL = ""
 
 export const isCategory = isInArrStr(CATEGORY_TYPES)
 export const isMap = seriaType => seriaType === 'MAP'
 export const crUrl = (
+  isComext,
   table,
   q,
   tail=QUERY_TAIL
-) => `${STAT_API_URL}/${table}?${q}${tail}`
+) => `${isComext ? COMEXT_API_URL : STAT_API_URL}/${table}?${q}${tail}`

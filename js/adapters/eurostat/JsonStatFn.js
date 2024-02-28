@@ -116,7 +116,7 @@ const createGeoSlice = function (json, configSlice, dfTime) {
     }
   }
   return {
-    dGeo: ds.Dimension("geo") || {
+    dGeo: ds.Dimension("geo") || ds.Dimension("reporter") || {
       id: []
     },
     sGeo: _sGeo || [],
@@ -126,9 +126,9 @@ const createGeoSlice = function (json, configSlice, dfTime) {
 exports.createGeoSlice = createGeoSlice;
 const crGeoSeria = (json, configSlice) => {
   const ds = (0, _jsonstat.default)(json).Dataset(0) || {},
-    data = ((ds.Data == null ? void 0 : ds.Data(configSlice)) || []).map(obj => obj.value).filter(value => value !== null);
+    data = (ds.Data?.(configSlice) || []).map(obj => obj.value).filter(value => value !== null);
   return {
-    date: (ds.Dimension == null ? void 0 : ds.Dimension("time")) || {},
+    date: ds.Dimension?.("time") || {},
     data
   };
 };

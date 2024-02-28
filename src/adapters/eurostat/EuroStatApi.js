@@ -14,11 +14,9 @@ const EuroStatApi = {
 
   getRequestUrl(option){
     _addPropTo(option)
-    if (option.url) {
-      return option.url;
-    }
-    const _url = api.crUrlN(option);
-    return (option.url = _url);
+    return option.url
+      ? option.url
+      : (option.url = api.crUrlN(option));
   },
 
   checkResponse(json, option, status) {
