@@ -8,7 +8,7 @@ var _useLoadOptions = _interopRequireDefault(require("../hooks/useLoadOptions"))
 var _RowInputSelect = _interopRequireDefault(require("./RowInputSelect"));
 var _ShowHide = _interopRequireDefault(require("../../zhn/ShowHide"));
 var _jsxRuntime = require("react/jsx-runtime");
-const DF_MSG_ON_NOT_SELECRED = item => item + " is not selected";
+const DF_MSG_ON_NOT_SELECRED = item => `${item} is not selected`;
 const FN_NOOP = () => {};
 const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
@@ -22,7 +22,8 @@ const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
     oneCaption,
     twoCaption,
     propCaption,
-    onSelectOne = FN_NOOP
+    onSelectOne = FN_NOOP,
+    onSelect = FN_NOOP
   } = _ref;
   const [state, loadOptions] = (0, _useLoadOptions.default)(isShow, uri, oneJsonProp),
     {
@@ -42,10 +43,15 @@ const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
       onSelectOne(one);
     }, [])
     //onSelectOne
-    /*eslint-enable react-hooks/exhaustive-deps */,
+    /*eslint-enable react-hooks/exhaustive-deps */
+
+    /*eslint-disable react-hooks/exhaustive-deps */,
     _hSelectTwo = (0, _uiApi.useCallback)(item => {
       (0, _uiApi.setRefValue)(_refTwo, item);
+      onSelect(item);
     }, []);
+  //onSelect
+  /*eslint-enable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useImperativeHandle)(ref, () => ({

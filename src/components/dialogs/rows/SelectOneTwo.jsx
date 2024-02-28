@@ -27,7 +27,8 @@ const SelectOneTwo = forwardRef(({
   oneCaption,
   twoCaption,
   propCaption,
-  onSelectOne=FN_NOOP
+  onSelectOne=FN_NOOP,
+  onSelect=FN_NOOP
 }, ref) => {
     const [
       state,
@@ -58,9 +59,13 @@ const SelectOneTwo = forwardRef(({
     //onSelectOne
     /*eslint-enable react-hooks/exhaustive-deps */
 
+    /*eslint-disable react-hooks/exhaustive-deps */
     , _hSelectTwo = useCallback(item => {
        setRefValue(_refTwo, item)
+       onSelect(item)
     }, []);
+    //onSelect
+    /*eslint-enable react-hooks/exhaustive-deps */
 
     /*eslint-disable react-hooks/exhaustive-deps */
     useImperativeHandle(ref, ()=>({
