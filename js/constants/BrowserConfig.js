@@ -4,7 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _BrowserType = require("./BrowserType");
 var _ModalDialogType = require("./ModalDialogType");
-const _crSourceMenuUrl = token => "./data/" + token + "/source-menu.json",
+const _crSourceMenuUrl = token => `./data/${token}/source-menu.json`,
   _crBrowserItem = (browserType, caption, token) => ({
     browserType,
     caption,
@@ -15,6 +15,7 @@ const BrowserConfig = {
   [_BrowserType.BT_EUROSTAT]: _crBrowserItem(_BrowserType.BT_EUROSTAT, 'Eurostat Statistics', 'eurostat'),
   [_BrowserType.BT_FGR]: _crBrowserItem(_BrowserType.BT_FGR, 'Eurostat: FIGARO', 'figaro'),
   [_BrowserType.BT_PE]: _crBrowserItem(_BrowserType.BT_PE, 'Euro Indicators / PEEIs', 'peeis'),
+  [_BrowserType.BT_COMEXT]: _crBrowserItem(_BrowserType.BT_COMEXT, 'EU Comext', 'comext'),
   [_BrowserType.BT_UN_COMTRADE]: _crBrowserItem(_BrowserType.BT_UN_COMTRADE, 'UN Comtrade', 'uncomtrade'),
   [_BrowserType.BT_FAOSTAT]: _crBrowserItem(_BrowserType.BT_FAOSTAT, 'FAOSTAT', 'faostat'),
   [_BrowserType.BT_WORLD_BANK]: _crBrowserItem(_BrowserType.BT_WORLD_BANK, 'World Bank', 'world-bank'),
@@ -122,6 +123,5 @@ const BrowserConfig = {
     withoutItemCounter: true
   }
 };
-var _default = BrowserConfig;
-exports.default = _default;
+var _default = exports.default = BrowserConfig;
 //# sourceMappingURL=BrowserConfig.js.map

@@ -6,6 +6,7 @@ import {
   BT_DB_NOMICS,
   BT_FGR,
   BT_PE,
+  BT_COMEXT,
   BT_NDL,
   BT_US_ECONOMICS,
   BT_ENERGY,
@@ -73,6 +74,7 @@ const _crMenuItems = (
 const PAGE_CONFIGS_01 = [
   [CL_ORG, 'DBnomics', BT_DB_NOMICS],
   [CL_BR, 'Energy', BT_ENERGY],
+  [CL_ORG, 'EU: Comext', BT_COMEXT],
   [CL_ORG, 'EU: FIGARO', BT_FGR],
   [CL_ORG, 'Euro Indicators / PEEIs', BT_PE],
   [CL_ORG, 'Nasdaq Data Link', BT_NDL],

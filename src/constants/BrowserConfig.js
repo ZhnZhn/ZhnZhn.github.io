@@ -3,6 +3,7 @@ import {
   BT_EUROSTAT,
   BT_FGR,
   BT_PE,
+  BT_COMEXT,
   BT_UN_COMTRADE,
   BT_FAOSTAT,
   BT_WORLD_BANK,
@@ -64,6 +65,11 @@ const BrowserConfig = {
     BT_PE,
     'Euro Indicators / PEEIs',
     'peeis'
+  ),
+  [BT_COMEXT]: _crBrowserItem(
+    BT_COMEXT,
+    'EU Comext',
+    'comext'
   ),
   [BT_UN_COMTRADE]: _crBrowserItem(
     BT_UN_COMTRADE,
