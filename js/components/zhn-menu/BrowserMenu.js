@@ -21,6 +21,7 @@ const BrowserMenu = props => {
   const {
       caption,
       browserType,
+      itemStyle,
       useMsBrowserLoad,
       onLoadMenu,
       children
@@ -37,8 +38,9 @@ const BrowserMenu = props => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ScrollPane, {
       className: CL_SCROLL_MENU,
       children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.SpinnerLoading, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopicList.default, {
+        refFirstItem: refFirstItem,
         menu: menu,
-        refFirstItem: refFirstItem
+        itemStyle: itemStyle
       }), children]
     })]
   });

@@ -13,15 +13,18 @@ const S_MP_LEVEL_2 = {
   COLOR_OPEN = "#80c040";
 const MenuItems = _ref => {
   let {
-    items
+    items,
+    itemStyle
   } = _ref;
   return (0, _uiApi.safeMap)(items, (item, index) => (0, _uiApi.isArr)(item.items) ? /*#__PURE__*/(0, _react.createElement)(_MenuTopic.default, {
     ...item,
     key: index,
     style: S_MP_LEVEL_2,
-    openColor: COLOR_OPEN
+    openColor: COLOR_OPEN,
+    topicStyle: itemStyle
   }) : /*#__PURE__*/(0, _react.createElement)(_MenuItem.default, {
     ...item,
+    style: itemStyle,
     key: index
   }));
 };

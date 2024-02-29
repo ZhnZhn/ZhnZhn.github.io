@@ -26,6 +26,7 @@ const _crBrowserDynamic = (Comp, option) => {
   const {
       browserType,
       caption = 'Source Browser',
+      itemStyle,
       sourceMenuUrl,
       chartContainerType,
       modalDialogType,
@@ -51,6 +52,7 @@ const _crBrowserDynamic = (Comp, option) => {
     browserType,
     isInitShow: true,
     caption,
+    itemStyle,
     ItemOptionComp,
     ItemComp,
     descrUrl,

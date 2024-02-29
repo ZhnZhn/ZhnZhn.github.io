@@ -17,6 +17,7 @@ const MenuTopic = ({
   refFirstItem,
   style,
   openColor,
+  itemStyle,
   caption,
   isInitOpen,
   items,
@@ -31,12 +32,15 @@ const MenuTopic = ({
      openColor={openColor}
      caption={caption}
   >
-     <MenuItems items={items} />
+     <MenuItems
+        items={items}
+        itemStyle={itemStyle}
+     />
   </OpenClose>
 ) : (
   <MenuItem
     {...restMenuItemProps}
-    style={S_MENU_ITEM}
+    style={{...S_MENU_ITEM, ...itemStyle}}
     refItem={refFirstItem}
   />
 );

@@ -20,6 +20,7 @@ const BrowserMenu = (props) => {
   const {
     caption,
     browserType,
+    itemStyle,
     useMsBrowserLoad,
     onLoadMenu,
     children
@@ -41,7 +42,6 @@ const BrowserMenu = (props) => {
   , refFirstItem = useRefFocusIf(
     isShow && menu
   );
-
   return (
     <Browser
        isShow={isShow}
@@ -54,8 +54,9 @@ const BrowserMenu = (props) => {
       <ScrollPane className={CL_SCROLL_MENU}>
          {isLoading && <SpinnerLoading />}
          <MenuTopicList
-            menu={menu}
             refFirstItem={refFirstItem}
+            menu={menu}
+            itemStyle={itemStyle}
          />
          {children}
       </ScrollPane>

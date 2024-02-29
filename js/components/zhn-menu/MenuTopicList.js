@@ -8,11 +8,13 @@ var _MenuTopic = _interopRequireDefault(require("./MenuTopic"));
 var _jsxRuntime = require("react/jsx-runtime");
 const MenuTopicList = _ref => {
   let {
+    refFirstItem,
     menu,
-    refFirstItem
+    itemStyle
   } = _ref;
   return (0, _uiApi.safeMap)(menu, (menuTopicProps, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopic.default, {
     ...menuTopicProps,
+    itemStyle: itemStyle,
     refFirstItem: index === 0 ? refFirstItem : void 0
   }, index));
 };

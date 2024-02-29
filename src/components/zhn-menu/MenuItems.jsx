@@ -7,16 +7,19 @@ const S_MP_LEVEL_2 = { paddingLeft: 6 }
 , COLOR_OPEN = "#80c040";
 
 const MenuItems = ({
-  items
+  items,
+  itemStyle
 }) => safeMap(items, (item, index) => isArr(item.items)
   ? <MenuTopic
       {...item}
       key={index}
       style={S_MP_LEVEL_2}
       openColor={COLOR_OPEN}
+      topicStyle={itemStyle}
     />
   : <MenuItem
       {...item}
+      style={itemStyle}
       key={index}
     />
 );

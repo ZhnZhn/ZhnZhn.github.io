@@ -22,6 +22,7 @@ const MenuTopic = _ref => {
     refFirstItem,
     style,
     openColor,
+    itemStyle,
     caption,
     isInitOpen,
     items,
@@ -36,11 +37,15 @@ const MenuTopic = _ref => {
     openColor: openColor,
     caption: caption,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItems.default, {
-      items: items
+      items: items,
+      itemStyle: itemStyle
     })
   }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItem.default, {
     ...restMenuItemProps,
-    style: S_MENU_ITEM,
+    style: {
+      ...S_MENU_ITEM,
+      ...itemStyle
+    },
     refItem: refFirstItem
   });
 };
