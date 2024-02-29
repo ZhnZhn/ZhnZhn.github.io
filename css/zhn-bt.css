@@ -26,8 +26,8 @@
 
 .bt-c2 {
   background-color: #949ab4;
-  width: 32px;
-  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
   font-weight: bold;
 }
 
