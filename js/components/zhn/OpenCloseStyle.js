@@ -13,8 +13,7 @@ var _Color = require("../styles/Color");
 const S_SVG = exports.S_SVG = {
   display: 'inline-block',
   position: 'relative',
-  top: 1,
-  marginLeft: 8
+  top: 1
 };
 const S_CAPTION = exports.S_CAPTION = {
   paddingLeft: 4,

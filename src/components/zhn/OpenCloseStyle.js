@@ -12,8 +12,7 @@ import { TRANSPARENT_COLOR } from '../styles/Color';
 export const S_SVG = {
   display: 'inline-block',
   position: 'relative',
-  top: 1,
-  marginLeft: 8
+  top: 1
 }
 export const S_CAPTION = {
   paddingLeft: 4,
