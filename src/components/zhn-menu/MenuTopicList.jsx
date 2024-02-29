@@ -4,12 +4,14 @@ import MenuTopic from './MenuTopic';
 const MenuTopicList = ({
   refFirstItem,
   menu,
-  itemStyle
+  itemStyle,
+  topicStyle
 }) => safeMap(menu, (menuTopicProps, index) => (
   <MenuTopic
      key={index}
      {...menuTopicProps}
      itemStyle={itemStyle}
+     topicStyle={topicStyle}
      refFirstItem={index ===0 ? refFirstItem : void 0}
   />
 ));

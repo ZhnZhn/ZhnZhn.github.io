@@ -10,7 +10,7 @@ var _MenuItem = _interopRequireDefault(require("./MenuItem"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from 'prop-types'
 
-const S_OC_STYLE = {
+const S_TOPIC_STYLE = {
     paddingRight: 12,
     whiteSpace: 'nowrap'
   },
@@ -23,6 +23,7 @@ const MenuTopic = _ref => {
     style,
     openColor,
     itemStyle,
+    topicStyle,
     caption,
     isInitOpen,
     items,
@@ -33,12 +34,16 @@ const MenuTopic = _ref => {
     role: "menuitem",
     isClose: !(isInitOpen === true),
     style: style,
-    ocStyle: S_OC_STYLE,
+    ocStyle: {
+      ...S_TOPIC_STYLE,
+      ...topicStyle
+    },
     openColor: openColor,
     caption: caption,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItems.default, {
       items: items,
-      itemStyle: itemStyle
+      itemStyle: itemStyle,
+      topicStyle: topicStyle
     })
   }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItem.default, {
     ...restMenuItemProps,

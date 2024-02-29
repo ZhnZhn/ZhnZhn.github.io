@@ -5,7 +5,7 @@ import OpenClose from '../zhn/OpenClose';
 import MenuItems from './MenuItems';
 import MenuItem from './MenuItem';
 
-const S_OC_STYLE = {
+const S_TOPIC_STYLE = {
   paddingRight: 12,
   whiteSpace: 'nowrap'
 }
@@ -18,6 +18,7 @@ const MenuTopic = ({
   style,
   openColor,
   itemStyle,
+  topicStyle,
   caption,
   isInitOpen,
   items,
@@ -28,13 +29,14 @@ const MenuTopic = ({
      role="menuitem"
      isClose={!(isInitOpen === true)}
      style={style}
-     ocStyle={S_OC_STYLE}
+     ocStyle={{...S_TOPIC_STYLE, ...topicStyle}}
      openColor={openColor}
      caption={caption}
   >
      <MenuItems
         items={items}
         itemStyle={itemStyle}
+        topicStyle={topicStyle}
      />
   </OpenClose>
 ) : (

@@ -10,11 +10,13 @@ const MenuTopicList = _ref => {
   let {
     refFirstItem,
     menu,
-    itemStyle
+    itemStyle,
+    topicStyle
   } = _ref;
   return (0, _uiApi.safeMap)(menu, (menuTopicProps, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopic.default, {
     ...menuTopicProps,
     itemStyle: itemStyle,
+    topicStyle: topicStyle,
     refFirstItem: index === 0 ? refFirstItem : void 0
   }, index));
 };

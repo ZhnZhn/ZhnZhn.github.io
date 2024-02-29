@@ -22,6 +22,7 @@ const BrowserMenu = props => {
       caption,
       browserType,
       itemStyle,
+      topicStyle,
       useMsBrowserLoad,
       onLoadMenu,
       children
@@ -40,7 +41,8 @@ const BrowserMenu = props => {
       children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.SpinnerLoading, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTopicList.default, {
         refFirstItem: refFirstItem,
         menu: menu,
-        itemStyle: itemStyle
+        itemStyle: itemStyle,
+        topicStyle: topicStyle
       }), children]
     })]
   });

@@ -21,6 +21,7 @@ const BrowserMenu = (props) => {
     caption,
     browserType,
     itemStyle,
+    topicStyle,
     useMsBrowserLoad,
     onLoadMenu,
     children
@@ -57,6 +58,7 @@ const BrowserMenu = (props) => {
             refFirstItem={refFirstItem}
             menu={menu}
             itemStyle={itemStyle}
+            topicStyle={topicStyle}
          />
          {children}
       </ScrollPane>

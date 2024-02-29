@@ -8,14 +8,16 @@ const S_MP_LEVEL_2 = { paddingLeft: 6 }
 
 const MenuItems = ({
   items,
-  itemStyle
+  itemStyle,
+  topicStyle
 }) => safeMap(items, (item, index) => isArr(item.items)
   ? <MenuTopic
       {...item}
       key={index}
       style={S_MP_LEVEL_2}
       openColor={COLOR_OPEN}
-      topicStyle={itemStyle}
+      itemStyle={itemStyle}
+      topicStyle={topicStyle}
     />
   : <MenuItem
       {...item}
