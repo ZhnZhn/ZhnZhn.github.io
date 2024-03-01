@@ -4,37 +4,38 @@ exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 const API_V3 = 'https://data.nasdaq.com/api/v3',
-  SET_URL = API_V3 + "/datasets/",
-  TABLE_URL = API_V3 + "/datatables/",
+  SET_URL = `${API_V3}/datasets/`,
+  TABLE_URL = `${API_V3}/datatables/`,
   LIMIT_REMAINING = 'X-RateLimit-Remaining',
   _isArr = Array.isArray;
-const _crSetUrl2 = option => {
-  const {
-      proxy,
-      items,
-      fromDate,
-      apiKey,
-      dfDbId
-    } = option,
-    id = (0, _AdapterFn.getValue)(items[0]);
-  return "" + proxy + SET_URL + dfDbId + "/" + id + ".json?sort_order=asc&api_key=" + apiKey + "&trim_start=" + (fromDate || '');
+const _crSetUrl2 = _ref => {
+  let {
+    proxy,
+    items,
+    fromDate,
+    apiKey,
+    dfDbId
+  } = _ref;
+  const id = (0, _AdapterFn.getValue)(items[0]),
+    tokenPath = dfDbId ? dfDbId + '/' : '';
+  return `${proxy}${SET_URL}${tokenPath}${id}.json?sort_order=asc&api_key=${apiKey}&trim_start=${fromDate || ''}`;
 };
-const _addTo = (q, pN, pV) => pV ? q ? q + "&" + pN + "=" + pV : pN + "=" + pV : q || '';
-const _crSetUrl = option => {
-  const {
+const _addTo = (q, pN, pV) => pV ? q ? `${q}&${pN}=${pV}` : `${pN}=${pV}` : q || '';
+const _crSetUrl = _ref2 => {
+  let {
     proxy,
     value,
     fromDate,
     toDate,
     apiKey,
     transform
-  } = option;
+  } = _ref2;
   let _q = 'sort_order=asc';
   _q = _addTo(_q, 'trim_start', fromDate);
   _q = _addTo(_q, 'trim_end', toDate);
   _q = _addTo(_q, 'transform', transform);
   _q = _addTo(_q, 'api_key', apiKey);
-  return "" + proxy + SET_URL + value + ".json?" + _q;
+  return `${proxy}${SET_URL}${value}.json?${_q}`;
 };
 const _crTableUrl = option => {
   const {
@@ -46,9 +47,9 @@ const _crTableUrl = option => {
       fromDate,
       apiKey
     } = option,
-    _dateQuery = dfFromDate && fromDate ? "&date.gte=" + fromDate : '';
+    _dateQuery = dfFromDate && fromDate ? `&date.gte=${fromDate}` : '';
   option.key = key || value;
-  return "" + proxy + TABLE_URL + dfTable + ".json?" + (value || '') + "&api_key=" + apiKey + _dateQuery;
+  return `${proxy}${TABLE_URL}${dfTable}.json?${value || ''}&api_key=${apiKey}${_dateQuery}`;
 };
 const _checkErr = err => {
   if (err) {
@@ -67,7 +68,9 @@ const _checkDataset = (dataset, datatable) => {
     oldest_available_date
   } = dataset || datatable || {};
   if (!_isArr(data) || data.length === 0) {
-    throw (0, _AdapterFn.crError)('', "Result dataset for request is empty:\n        Newest Date: " + (newest_available_date || '') + "\n        Oldest Date: " + (oldest_available_date || ''));
+    throw (0, _AdapterFn.crError)('', `Result dataset for request is empty:
+        Newest Date: ${newest_available_date || ''}
+        Oldest Date: ${oldest_available_date || ''}`);
   }
 };
 const NdlApi = {

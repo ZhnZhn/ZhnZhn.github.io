@@ -9,18 +9,18 @@ const API_V3 = 'https://data.nasdaq.com/api/v3'
 , LIMIT_REMAINING = 'X-RateLimit-Remaining'
 , _isArr = Array.isArray;
 
-const _crSetUrl2 = (
-  option
-) => {
-  const {
+const _crSetUrl2 = ({
     proxy,
     items,
     fromDate,
     apiKey,
     dfDbId
-  } = option
-  , id = getValue(items[0]);
-  return `${proxy}${SET_URL}${dfDbId}/${id}.json?sort_order=asc&api_key=${apiKey}&trim_start=${fromDate || ''}`;
+}) => {
+  const id = getValue(items[0])
+  , tokenPath = dfDbId
+     ? dfDbId + '/'
+     : '';
+  return `${proxy}${SET_URL}${tokenPath}${id}.json?sort_order=asc&api_key=${apiKey}&trim_start=${fromDate || ''}`;
 }
 
 const _addTo = (
@@ -31,17 +31,14 @@ const _addTo = (
   ? q ? `${q}&${pN}=${pV}` : `${pN}=${pV}`
   : q || '';
 
-const _crSetUrl = (
-  option
-) => {
-  const {
-    proxy,
-    value,
-    fromDate,
-    toDate,
-    apiKey,
-    transform
-  } = option;
+const _crSetUrl = ({
+  proxy,
+  value,
+  fromDate,
+  toDate,
+  apiKey,
+  transform
+}) => {
   let _q = 'sort_order=asc';
   _q = _addTo(_q, 'trim_start', fromDate)
   _q = _addTo(_q, 'trim_end', toDate)
