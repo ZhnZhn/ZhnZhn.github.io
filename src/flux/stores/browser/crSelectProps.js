@@ -41,7 +41,8 @@ const _crJsonProp = strOr => isStr(strOr)
     ..._crItemProps(item[0], item[2], rootUri, item[3]),
     type: "two",
     oneCaption: item[1],
-    twoCaption: item[2]
+    twoCaption: item[2],
+    isAddTitle: item[4]
   };
 
 const _rFns = {

@@ -22,7 +22,8 @@ const _crJsonProp = strOr => (0, _storeApi.isStr)(strOr) ? strOr : void 0,
     ..._crItemProps(item[0], item[2], rootUri, item[3]),
     type: "two",
     oneCaption: item[1],
-    twoCaption: item[2]
+    twoCaption: item[2],
+    isAddTitle: item[4]
   };
 const _rFns = {
   df: _crDfItem,

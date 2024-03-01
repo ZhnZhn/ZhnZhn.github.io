@@ -18,7 +18,7 @@ const SelectList = ({
     <D.ShowHide key={id} isShow={isShowById(id)}>
       {Comp && <Comp
         //uri, jsonProp, caption, isWithInput
-        //uri, caption, oneCaption, twoCaption
+        //uri, caption, oneCaption, twoCaption, isAddTitle
         {...restItem}
         isShow={isShow}
         isShowLabels={isShowLabels}

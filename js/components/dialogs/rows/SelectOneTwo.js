@@ -10,11 +10,13 @@ var _ShowHide = _interopRequireDefault(require("../../zhn/ShowHide"));
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_MSG_ON_NOT_SELECRED = item => `${item} is not selected`;
 const FN_NOOP = () => {};
+const _getCaption = item => (item || {}).caption || '';
 const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     isShowLabels,
     isShow = true,
     isHideTwo = false,
+    isAddTitle,
     oneOptionNames = 'Items',
     msgOnNotSelected = DF_MSG_ON_NOT_SELECRED,
     uri,
@@ -47,10 +49,14 @@ const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
 
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hSelectTwo = (0, _uiApi.useCallback)(item => {
-      (0, _uiApi.setRefValue)(_refTwo, item);
-      onSelect(item);
+      const _item = item && isAddTitle ? {
+        caption: _getCaption((0, _uiApi.getRefValue)(_refOne)) + ': ' + _getCaption(item),
+        value: item.value
+      } : item;
+      (0, _uiApi.setRefValue)(_refTwo, _item);
+      onSelect(_item);
     }, []);
-  //onSelect
+  //onSelect, isAddTitle
   /*eslint-enable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */

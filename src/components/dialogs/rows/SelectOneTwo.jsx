@@ -15,11 +15,13 @@ import ShowHide from '../../zhn/ShowHide';
 
 const DF_MSG_ON_NOT_SELECRED = item => `${item} is not selected`;
 const FN_NOOP = () => {};
+const _getCaption = item => (item || {}).caption || ''
 
 const SelectOneTwo = forwardRef(({
   isShowLabels,
   isShow=true,
   isHideTwo=false,
+  isAddTitle,
   oneOptionNames='Items',
   msgOnNotSelected=DF_MSG_ON_NOT_SELECRED,
   uri,
@@ -61,10 +63,15 @@ const SelectOneTwo = forwardRef(({
 
     /*eslint-disable react-hooks/exhaustive-deps */
     , _hSelectTwo = useCallback(item => {
-       setRefValue(_refTwo, item)
-       onSelect(item)
+       const _item = item && isAddTitle
+         ? {
+           caption: _getCaption(getRefValue(_refOne)) + ': ' + _getCaption(item),
+           value: item.value
+         } : item;
+       setRefValue(_refTwo, _item)
+       onSelect(_item)
     }, []);
-    //onSelect
+    //onSelect, isAddTitle
     /*eslint-enable react-hooks/exhaustive-deps */
 
     /*eslint-disable react-hooks/exhaustive-deps */

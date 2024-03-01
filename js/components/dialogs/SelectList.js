@@ -26,7 +26,7 @@ const SelectList = _ref => {
       isShow: isShowById(id),
       children: Comp && /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp
       //uri, jsonProp, caption, isWithInput
-      //uri, caption, oneCaption, twoCaption
+      //uri, caption, oneCaption, twoCaption, isAddTitle
       , {
         ...restItem,
         isShow: isShow,
