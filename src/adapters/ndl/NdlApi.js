@@ -9,19 +9,27 @@ const API_V3 = 'https://data.nasdaq.com/api/v3'
 , LIMIT_REMAINING = 'X-RateLimit-Remaining'
 , _isArr = Array.isArray;
 
+const _rIdFn = {
+  df: items => getValue(items[0]),
+  b_a: items => `${getValue(items[1])}_${getValue(items[0])}`
+};
+
 const _crSetUrl2 = ({
     proxy,
     items,
     fromDate,
     apiKey,
+    dfIdFn,
     dfDbId
 }) => {
-  const id = getValue(items[0])
+  const _crId = (dfIdFn && _rIdFn[dfIdFn])
+    || _rIdFn.df
+  , id = _crId(items)
   , tokenPath = dfDbId
      ? dfDbId + '/'
      : '';
   return `${proxy}${SET_URL}${tokenPath}${id}.json?sort_order=asc&api_key=${apiKey}&trim_start=${fromDate || ''}`;
-}
+};
 
 const _addTo = (
   q,

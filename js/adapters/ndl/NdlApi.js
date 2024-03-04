@@ -8,15 +8,21 @@ const API_V3 = 'https://data.nasdaq.com/api/v3',
   TABLE_URL = `${API_V3}/datatables/`,
   LIMIT_REMAINING = 'X-RateLimit-Remaining',
   _isArr = Array.isArray;
+const _rIdFn = {
+  df: items => (0, _AdapterFn.getValue)(items[0]),
+  b_a: items => `${(0, _AdapterFn.getValue)(items[1])}_${(0, _AdapterFn.getValue)(items[0])}`
+};
 const _crSetUrl2 = _ref => {
   let {
     proxy,
     items,
     fromDate,
     apiKey,
+    dfIdFn,
     dfDbId
   } = _ref;
-  const id = (0, _AdapterFn.getValue)(items[0]),
+  const _crId = dfIdFn && _rIdFn[dfIdFn] || _rIdFn.df,
+    id = _crId(items),
     tokenPath = dfDbId ? dfDbId + '/' : '';
   return `${proxy}${SET_URL}${tokenPath}${id}.json?sort_order=asc&api_key=${apiKey}&trim_start=${fromDate || ''}`;
 };
