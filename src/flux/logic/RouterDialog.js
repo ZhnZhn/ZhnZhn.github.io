@@ -42,10 +42,7 @@ const _router = {
   },
   get DialogType4() {
     return this.getD().then(D => D.Type4);
-  },
-  get DialogType4A() {
-    return this.getD().then(D => D.Type4A);
-  },
+  },  
   get DialogType5() {
     return this.getD().then(D => D.Type5);
   },

@@ -15,9 +15,7 @@ const FN_NOOP = () => {};
 const _r = {
   DF: _selectN.default,
   DialogType4: _type.default,
-  DialogType4A: _type.default,
   DialogType5: _type2.default,
-  DialogType5A: _type2.default,
   Futures3Dialog: _futures.default,
   FuturesWikiDialog: _futuresWiki.default,
   DialogSelectN: _selectN.default,
