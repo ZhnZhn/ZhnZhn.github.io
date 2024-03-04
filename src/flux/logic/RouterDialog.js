@@ -40,9 +40,6 @@ const _router = {
   get DialogQuery() {
     return this.getD().then(D => D.Query);
   },
-  get DialogType4() {
-    return this.getD().then(D => D.Type4);
-  },  
   get DialogType5() {
     return this.getD().then(D => D.Type5);
   },

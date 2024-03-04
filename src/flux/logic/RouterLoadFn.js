@@ -3,7 +3,6 @@ import { clearPrototypeOf } from './LogicFn'
 import fnSelectN from '../creaters/selectN'
 import fnStatN from '../creaters/statN'
 
-import fnType4 from '../creaters/type4'
 import fnType5 from '../creaters/type5'
 
 import fnUn5 from '../creaters/un5'
@@ -15,8 +14,7 @@ const FN_NOOP = () => {};
 
 const _r = {
   DF: fnSelectN,
-  DialogType4: fnType4,
-  DialogType5: fnType5,  
+  DialogType5: fnType5,
 
   Futures3Dialog: fnFutures3,
   FuturesWikiDialog: fnFuturesWiki,
