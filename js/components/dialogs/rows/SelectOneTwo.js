@@ -8,9 +8,14 @@ var _useLoadOptions = _interopRequireDefault(require("../hooks/useLoadOptions"))
 var _RowInputSelect = _interopRequireDefault(require("./RowInputSelect"));
 var _ShowHide = _interopRequireDefault(require("../../zhn/ShowHide"));
 var _jsxRuntime = require("react/jsx-runtime");
-const DF_MSG_ON_NOT_SELECRED = item => `${item} is not selected`;
-const FN_NOOP = () => {};
-const _getCaption = item => (item || {}).caption || '';
+const DF_MSG_ON_NOT_SELECRED = item => `${item} is not selected`,
+  FN_NOOP = () => {},
+  _getCaption = item => (item || {}).caption || '',
+  _getValue = item => (item || {}).value || '',
+  _crItem = (item1, item2) => ({
+    caption: `${_getCaption(item1)}: ${_getCaption(item2)}`,
+    value: _getValue(item1) ? `${_getValue(item1)}${_getValue(item2)}` : _getValue(item2)
+  });
 const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     isShowLabels,
@@ -49,10 +54,7 @@ const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
 
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hSelectTwo = (0, _uiApi.useCallback)(item => {
-      const _item = item && isAddTitle ? {
-        caption: _getCaption((0, _uiApi.getRefValue)(_refOne)) + ': ' + _getCaption(item),
-        value: item.value
-      } : item;
+      const _item = isAddTitle && item ? _crItem((0, _uiApi.getRefValue)(_refOne), item) : item;
       (0, _uiApi.setRefValue)(_refTwo, _item);
       onSelect(_item);
     }, []);

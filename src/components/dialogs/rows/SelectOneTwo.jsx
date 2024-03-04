@@ -13,9 +13,19 @@ import useLoadOptions  from '../hooks/useLoadOptions';
 import RowInputSelect from './RowInputSelect';
 import ShowHide from '../../zhn/ShowHide';
 
-const DF_MSG_ON_NOT_SELECRED = item => `${item} is not selected`;
-const FN_NOOP = () => {};
-const _getCaption = item => (item || {}).caption || ''
+const DF_MSG_ON_NOT_SELECRED = item => `${item} is not selected`
+, FN_NOOP = () => {}
+, _getCaption = item => (item || {}).caption || ''
+, _getValue = item => (item || {}).value || ''
+, _crItem = (
+  item1,
+  item2
+) => ({
+  caption: `${_getCaption(item1)}: ${_getCaption(item2)}`,
+  value: _getValue(item1)
+    ? `${_getValue(item1)}${_getValue(item2)}`
+    : _getValue(item2)
+});
 
 const SelectOneTwo = forwardRef(({
   isShowLabels,
@@ -63,11 +73,9 @@ const SelectOneTwo = forwardRef(({
 
     /*eslint-disable react-hooks/exhaustive-deps */
     , _hSelectTwo = useCallback(item => {
-       const _item = item && isAddTitle
-         ? {
-           caption: _getCaption(getRefValue(_refOne)) + ': ' + _getCaption(item),
-           value: item.value
-         } : item;
+       const _item = isAddTitle && item
+         ? _crItem(getRefValue(_refOne), item)
+         : item;
        setRefValue(_refTwo, _item)
        onSelect(_item)
     }, []);
