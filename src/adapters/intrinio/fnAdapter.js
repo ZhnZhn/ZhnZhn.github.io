@@ -6,27 +6,25 @@ import {
 const FRED = 'FRED';
 
 const _crId = ({
-  value,
+  one,
   two,
   three='',
   _itemKey
 }) => _itemKey
   || (two
-       ? `${value}_${two}_${three}`
-       : value
+       ? `${one}_${two}_${three}`
+       : one
     );
 
-const _crLinkItem = (
-  option
-) => {
-  const {
-    linkFn,
-    value
-  } = option;
+const _crLinkItem = ({
+  linkFn,
+  one,
+  dfArticle
+}) => {
   return linkFn === FRED ? {
-    id: (value || '').replace('$', ''),
-    article: option.dfArticle
-  } : value;
+    id: (one || '').replace('$', ''),
+    article: dfArticle
+  } : one;
 };
 
 const _crZhConfig = (option) => {

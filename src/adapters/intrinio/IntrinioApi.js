@@ -1,21 +1,15 @@
 import {
+  getToDate
+} from '../../utils/dateFn';
+import {
   isArr,
   getValue,
   crError
 } from '../AdapterFn';
 
 const API_URL = 'https://api.intrinio.com/historical_data'
-, TAIL = 'item=level'
-, RES_ERR_STATUS = [ 401 ];
-
-const FRQ = {
-  A: 'yearly',
-  Q: 'quarterly',
-  W: 'weekly',
-  D: 'daily',
-  M: 'monthly',
-  DF: 'monthly'
-};
+, RES_ERR_STATUS = [ 401 ]
+, TO_DATE = getToDate();
 
 const _getErr = (
   json
@@ -41,30 +35,24 @@ const IntrinioApi = {
   getRequestUrl(option){
     const {
       fromDate,
-      toDate,
-      one,
-      two,
-      three='QTR',
       items
     } = option;
-    let {
-      value,
-      item={}
+
+    option.one = getValue(items[0])
+    option.two = getValue(items[1])
+    option.three = getValue(items[0]) || 'QTR'
+
+    const {
+      one,
+      two,
+      three,
     } = option;
 
     option.resErrStatus = RES_ERR_STATUS
 
     if (two) {
-      return `${_crUrl(one, fromDate)}&item=${two}&end_date=${toDate}&type=${three}`
+      return `${_crUrl(one, fromDate)}&item=${two}&end_date=${TO_DATE}&type=${three}`
     }
-
-    if (isArr(items)) {
-      option.item = item = items[0]
-      option.value = value = getValue(item)
-    }
-
-    const _frq = FRQ[item.frq] || FRQ.DF;
-    return `${_crUrl(value, fromDate)}&frequency=${_frq}&${TAIL}`;
   },
 
   checkResponse(json){

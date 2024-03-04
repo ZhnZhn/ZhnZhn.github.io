@@ -6,22 +6,23 @@ var _AdapterFn = require("../AdapterFn");
 const FRED = 'FRED';
 const _crId = _ref => {
   let {
-    value,
+    one,
     two,
     three = '',
     _itemKey
   } = _ref;
-  return _itemKey || (two ? value + "_" + two + "_" + three : value);
+  return _itemKey || (two ? `${one}_${two}_${three}` : one);
 };
-const _crLinkItem = option => {
-  const {
+const _crLinkItem = _ref2 => {
+  let {
     linkFn,
-    value
-  } = option;
+    one,
+    dfArticle
+  } = _ref2;
   return linkFn === FRED ? {
-    id: (value || '').replace('$', ''),
-    article: option.dfArticle
-  } : value;
+    id: (one || '').replace('$', ''),
+    article: dfArticle
+  } : one;
 };
 const _crZhConfig = option => {
   const {
@@ -40,20 +41,20 @@ const _crZhConfig = option => {
     dataSource
   };
 };
-const _crInfo = _ref2 => {
+const _crInfo = _ref3 => {
   let {
     title = ''
-  } = _ref2;
+  } = _ref3;
   return {
     name: title
   };
 };
-const crSubtitle = _ref3 => {
+const crSubtitle = _ref4 => {
   let {
     subtitle = '',
     threeCaption
-  } = _ref3;
-  return threeCaption ? subtitle + ", " + threeCaption : subtitle;
+  } = _ref4;
+  return threeCaption ? `${subtitle}, ${threeCaption}` : subtitle;
 };
 exports.crSubtitle = crSubtitle;
 const crData = json => json.data.reduce((_data, p) => {
