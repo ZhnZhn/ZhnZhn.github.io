@@ -12,7 +12,8 @@ const _crIdB_A = items => (0, _AdapterFn.getValue)(items[1]) + "_" + (0, _Adapte
 const _rIdFn = {
   df: items => (0, _AdapterFn.getValue)(items[0]),
   b_a: _crIdB_A,
-  jg: items => "JODI/GAS_" + _crIdB_A(items)
+  jg: items => "JODI/GAS_" + _crIdB_A(items),
+  jo: items => "JODI/OIL_" + (0, _AdapterFn.getValue)(items[1]) + (0, _AdapterFn.getValue)(items[2]) + "_" + (0, _AdapterFn.getValue)(items[0])
 };
 const _crSetUrl2 = _ref => {
   let {
