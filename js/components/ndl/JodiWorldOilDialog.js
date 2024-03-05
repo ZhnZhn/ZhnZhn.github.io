@@ -100,7 +100,7 @@ const JodiWorldOilDialog = (0, _memoIsShow.default)(_ref => {
           } = getChartType() || {};
         onLoad({
           ..._datesInst.getValues(),
-          value: fnValue(country.value, product.value, flow.value, units.value),
+          value: fnValue(country.v, product.value, flow.value, units.value),
           title: country.caption + ": " + product.caption,
           subtitle: flow.caption + ": " + units.caption,
           seriaType,
@@ -131,7 +131,6 @@ const JodiWorldOilDialog = (0, _memoIsShow.default)(_ref => {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: oneURI,
-      jsonProp: oneJsonProp,
       caption: oneCaption,
       optionNames: "Items",
       onSelect: setCountry
@@ -173,6 +172,5 @@ const JodiWorldOilDialog = (0, _memoIsShow.default)(_ref => {
     })]
   });
 });
-var _default = JodiWorldOilDialog;
-exports.default = _default;
+var _default = exports.default = JodiWorldOilDialog;
 //# sourceMappingURL=JodiWorldOilDialog.js.map

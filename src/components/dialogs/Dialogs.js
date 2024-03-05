@@ -1,9 +1,7 @@
-import Query from './DialogQuery'
-import Type5 from './DialogType5'
+import Query from './DialogQuery';
 
 const Dialogs = {
-  Query,
-  Type5
+  Query
 };
 
 export default Dialogs

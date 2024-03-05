@@ -106,10 +106,9 @@ const JodiWorldOilDialog = memoIsShow(({
         two:flow
       } = _productFlowInst.getValues()
       , { value:seriaType } = getChartType() || {};
-
       onLoad({
         ..._datesInst.getValues(),
-        value: fnValue(country.value, product.value, flow.value, units.value),
+        value: fnValue(country.v, product.value, flow.value, units.value),
         title: `${country.caption}: ${product.caption}`,
         subtitle: `${flow.caption}: ${units.caption}`,
         seriaType,
@@ -143,7 +142,6 @@ const JodiWorldOilDialog = memoIsShow(({
          isShow={isShow}
          isShowLabels={isShowLabels}
          uri={oneURI}
-         jsonProp={oneJsonProp}
          caption={oneCaption}
          optionNames="Items"
          onSelect={setCountry}

@@ -30,9 +30,6 @@ const _router = {
   get DialogQuery() {
     return this.getD().then(D => D.Query);
   },
-  get DialogType5() {
-    return this.getD().then(D => D.Type5);
-  },
   _loadUN() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {

@@ -6,14 +6,12 @@ exports.default = void 0;
 var _LogicFn = require("./LogicFn");
 var _selectN = _interopRequireDefault(require("../creaters/selectN"));
 var _statN = _interopRequireDefault(require("../creaters/statN"));
-var _type = _interopRequireDefault(require("../creaters/type5"));
 var _un = _interopRequireDefault(require("../creaters/un5"));
 var _futures = _interopRequireDefault(require("../creaters/futures3"));
 var _futuresWiki = _interopRequireDefault(require("../creaters/futuresWiki"));
 const FN_NOOP = () => {};
 const _r = {
   DF: _selectN.default,
-  DialogType5: _type.default,
   Futures3Dialog: _futures.default,
   FuturesWikiDialog: _futuresWiki.default,
   DialogSelectN: _selectN.default,
