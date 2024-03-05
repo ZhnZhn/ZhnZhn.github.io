@@ -126,9 +126,6 @@ const _router = {
   get FuturesWikiDialog() {
     return this.getNDL().then(D => D.FuturesWiki);
   },
-  get JodiWorldOilDialog() {
-    return this.getNDL().then(D => D.JodiWorldOil);
-  },
   loadDialogs(browserType) {
     switch (browserType) {
       case _BrowserType.BT_STOCK_MARKETS:

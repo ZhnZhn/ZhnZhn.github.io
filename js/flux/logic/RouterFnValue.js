@@ -12,7 +12,6 @@ const RouterFnValue = {
   RPrefixOneEmptyTwo: (prefix, one, two) => prefix + "/" + two,
   RPrefixTwoOne: (prefix, one, two) => prefix + "/" + two + "_" + one,
   RZillow: (one, three) => "indicator_id=" + one + "&region_id=" + three,
-  RJodiOil: (country, product, flow, units) => "JODI/OIL_" + product + flow + units + "_" + country,
   RFutures: (prefix, item, month, year) => prefix + "/" + item + month + year,
   RWikiFutures: (exchange, item, type) => "CHRIS/" + exchange + "_" + item + type
 };

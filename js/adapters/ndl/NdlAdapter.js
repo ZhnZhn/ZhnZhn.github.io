@@ -20,15 +20,20 @@ const _fToConfig = crConfig => (json, option) => ({
 });
 const _fToSeria = crSeria => (json, option, chart) => crSeria((0, _NdlFn.getData)(json), option, chart);
 const _crScatterConfig = _fToConfig(_toScatter.toScatterConfig);
+const _toYearlyByMonth = _fToConfig(_toYearsByMonths.default);
 const _rToConfig = {
   [_ChartType.CHT_AREA]: _toArea.default,
+  [_ChartType.CHT_SPLINE]: _toArea.default,
+  [_ChartType.CHT_LINE]: _toArea.default,
+  [_ChartType.CHT_COLUMN]: _toArea.default,
   [_ChartType.CHT_SEMI_DONUT]: _toSemiDonut.default,
   [_ChartType.CHT_STACKED_AREA]: _toStackedArea.default,
   [_ChartType.CHT_STACKED_AREA_PERCENT]: _toStackedArea.default,
   [_ChartType.CHT_STACKED_COLUMN]: _toStackedColumn.default,
   [_ChartType.CHT_STACKED_COLUMN_PERCENT]: _toStackedColumn.default,
   [_ChartType.CHT_TREE_MAP]: _toTreeMap.default,
-  [_ChartType.CHT_YEARLY]: _fToConfig(_toYearsByMonths.default),
+  [_ChartType.CHT_YEARLY]: _toYearlyByMonth,
+  [_ChartType.CHT_AREA_YEARLY]: _toYearlyByMonth,
   [_ChartType.CHT_SCATTER]: _crScatterConfig,
   [_ChartType.CHT_SCATTER_UP]: _crScatterConfig,
   [_ChartType.CHT_SCATTER_DOWN]: _crScatterConfig
@@ -68,6 +73,5 @@ const NdlAdapter = {
     return _toSeria(json, option, chart);
   }
 };
-var _default = NdlAdapter;
-exports.default = _default;
+var _default = exports.default = NdlAdapter;
 //# sourceMappingURL=NdlAdapter.js.map

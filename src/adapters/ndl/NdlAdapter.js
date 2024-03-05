@@ -10,6 +10,7 @@ import {
   CHT_STACKED_COLUMN_PERCENT,
   CHT_TREE_MAP,
   CHT_YEARLY,
+  CHT_AREA_YEARLY,
   CHT_SCATTER,
   CHT_SCATTER_UP,
   CHT_SCATTER_DOWN
@@ -55,18 +56,25 @@ const _fToSeria = crSeria => (
 ) => crSeria(getData(json), option, chart);
 
 const _crScatterConfig = _fToConfig(toScatterConfig);
+const _toYearlyByMonth = _fToConfig(crYearlyConfig);
 const _rToConfig = {
   [CHT_AREA]: toArea,
   [CHT_SPLINE]: toArea,
   [CHT_LINE]: toArea,
   [CHT_COLUMN]: toArea,
+
   [CHT_SEMI_DONUT]: toSemiDonut,
+
   [CHT_STACKED_AREA]: toStackedArea,
   [CHT_STACKED_AREA_PERCENT]: toStackedArea,
   [CHT_STACKED_COLUMN]: toStackedColumn,
   [CHT_STACKED_COLUMN_PERCENT]: toStackedColumn,
+
   [CHT_TREE_MAP]: toTreeMap,
-  [CHT_YEARLY]: _fToConfig(crYearlyConfig),
+
+  [CHT_YEARLY]: _toYearlyByMonth,
+  [CHT_AREA_YEARLY]: _toYearlyByMonth,
+
   [CHT_SCATTER]: _crScatterConfig,
   [CHT_SCATTER_UP]: _crScatterConfig,
   [CHT_SCATTER_DOWN]: _crScatterConfig

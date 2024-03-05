@@ -39,7 +39,7 @@ const _router = {
   },
   get DialogQuery() {
     return this.getD().then(D => D.Query);
-  },  
+  },
 
   _loadUN() {
      /*eslint-disable no-undef */
@@ -172,10 +172,6 @@ const _router = {
   get FuturesWikiDialog() {
     return this.getNDL().then(D => D.FuturesWiki);
   },
-  get JodiWorldOilDialog() {
-    return this.getNDL().then(D => D.JodiWorldOil);
-  },
-
 
   loadDialogs(browserType) {
     switch(browserType){
