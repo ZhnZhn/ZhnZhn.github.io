@@ -9,9 +9,11 @@ const API_V3 = 'https://data.nasdaq.com/api/v3'
 , LIMIT_REMAINING = 'X-RateLimit-Remaining'
 , _isArr = Array.isArray;
 
+const _crIdB_A = items => `${getValue(items[1])}_${getValue(items[0])}`;
 const _rIdFn = {
   df: items => getValue(items[0]),
-  b_a: items => `${getValue(items[1])}_${getValue(items[0])}`
+  b_a: _crIdB_A,
+  jg: items => `JODI/GAS_${_crIdB_A(items)}`
 };
 
 const _crSetUrl2 = ({
@@ -40,12 +42,12 @@ const _addTo = (
   : q || '';
 
 const _crSetUrl = ({
-  proxy,
-  value,
-  fromDate,
-  toDate,
-  apiKey,
-  transform
+    proxy,
+    value,
+    fromDate,
+    toDate,
+    apiKey,
+    transform
 }) => {
   let _q = 'sort_order=asc';
   _q = _addTo(_q, 'trim_start', fromDate)
