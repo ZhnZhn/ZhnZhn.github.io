@@ -104,7 +104,7 @@ export const crDatasetInfo = ({
   };
 }
 
-const DATA_SOURCE = 'Nasdaq Data Link';
+const DATA_SOURCE = 'NDL';
 
 export const crZhConfig = (
   option

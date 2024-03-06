@@ -12,6 +12,7 @@ const API_V3 = 'https://data.nasdaq.com/api/v3'
 const _crIdB_A = items => `${getValue(items[1])}_${getValue(items[0])}`;
 const _rIdFn = {
   df: items => getValue(items[0]),
+  ab: items => `${getValue(items[0])}${getValue(items[1])}`,
   b_a: _crIdB_A,
   jg: items => `JODI/GAS_${_crIdB_A(items)}`,
   jo: items => `JODI/OIL_${getValue(items[1])}${getValue(items[2])}_${getValue(items[0])}`
@@ -30,8 +31,11 @@ const _crSetUrl2 = ({
   , id = _crId(items)
   , tokenPath = dfDbId
      ? dfDbId + '/'
+     : ''
+  , queryTail = fromDate
+     ? `&trim_start=${fromDate}`
      : '';
-  return `${proxy}${SET_URL}${tokenPath}${id}.json?sort_order=asc&api_key=${apiKey}&trim_start=${fromDate || ''}`;
+  return `${proxy}${SET_URL}${tokenPath}${id}.json?sort_order=asc&api_key=${apiKey}${queryTail}`;
 };
 
 const _addTo = (

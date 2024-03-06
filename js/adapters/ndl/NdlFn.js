@@ -77,7 +77,7 @@ const crDatasetInfo = _ref4 => {
   };
 };
 exports.crDatasetInfo = crDatasetInfo;
-const DATA_SOURCE = 'Nasdaq Data Link';
+const DATA_SOURCE = 'NDL';
 const crZhConfig = option => {
   const {
       item,

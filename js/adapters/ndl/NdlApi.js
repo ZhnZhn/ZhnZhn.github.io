@@ -11,6 +11,7 @@ const API_V3 = 'https://data.nasdaq.com/api/v3',
 const _crIdB_A = items => (0, _AdapterFn.getValue)(items[1]) + "_" + (0, _AdapterFn.getValue)(items[0]);
 const _rIdFn = {
   df: items => (0, _AdapterFn.getValue)(items[0]),
+  ab: items => "" + (0, _AdapterFn.getValue)(items[0]) + (0, _AdapterFn.getValue)(items[1]),
   b_a: _crIdB_A,
   jg: items => "JODI/GAS_" + _crIdB_A(items),
   jo: items => "JODI/OIL_" + (0, _AdapterFn.getValue)(items[1]) + (0, _AdapterFn.getValue)(items[2]) + "_" + (0, _AdapterFn.getValue)(items[0])
@@ -26,8 +27,9 @@ const _crSetUrl2 = _ref => {
   } = _ref;
   const _crId = dfIdFn && _rIdFn[dfIdFn] || _rIdFn.df,
     id = _crId(items),
-    tokenPath = dfDbId ? dfDbId + '/' : '';
-  return "" + proxy + SET_URL + tokenPath + id + ".json?sort_order=asc&api_key=" + apiKey + "&trim_start=" + (fromDate || '');
+    tokenPath = dfDbId ? dfDbId + '/' : '',
+    queryTail = fromDate ? "&trim_start=" + fromDate : '';
+  return "" + proxy + SET_URL + tokenPath + id + ".json?sort_order=asc&api_key=" + apiKey + queryTail;
 };
 const _addTo = (q, pN, pV) => pV ? q ? q + "&" + pN + "=" + pV : pN + "=" + pV : q || '';
 const _crSetUrl = _ref2 => {
