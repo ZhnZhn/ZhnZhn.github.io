@@ -8,13 +8,11 @@
   "_UNCommodityTradeDialog",
   "_interopRequireDefault",
   "require",
-  "_FuturesWikiDialog",
   "Dialogs",
   "UNCommodityTrade",
-  "FuturesWiki",
   "_default",
   "exports",
   "default"
  ],
- "mappings": ";;;;;AAAA,IAAAA,uBAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,kBAAA,GAAAF,sBAAA,CAAAC,OAAA;AAEA,MAAME,OAAO,GAAG;EACdC,gBAAgB,EAAhBA,+BAAgB;EAChBC,WAAW,EAAXA;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaL,OAAO"
+ "mappings": ";;;;;AAAA,IAAAA,uBAAA,GAAAC,sBAAA,CAAAC,OAAA;AAEA,MAAMC,OAAO,GAAG;EACdC,gBAAgB,EAAhBA;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaJ,OAAO"
 }

@@ -1,9 +1,7 @@
 import UNCommodityTrade from './UNCommodityTradeDialog';
-import FuturesWiki from './FuturesWikiDialog';
 
 const Dialogs = {
-  UNCommodityTrade,
-  FuturesWiki
+  UNCommodityTrade
 };
 
 export default Dialogs

@@ -8,8 +8,7 @@ const RouterFnValue = {
   RPrefixOneTwo : (prefix, one, two) => `${prefix}/${one}_${two}`,
   RPrefixOneEmptyTwo : (prefix, one, two) => `${prefix}/${two}`,
   RPrefixTwoOne : (prefix, one, two) => `${prefix}/${two}_${one}`,
-  RZillow : (one, three) => `indicator_id=${one}&region_id=${three}`,  
-  RWikiFutures : (exchange, item, type) => `CHRIS/${exchange}_${item}${type}`
+  RZillow : (one, three) => `indicator_id=${one}&region_id=${three}`
 }
 
 clearPrototypeOf(RouterFnValue)

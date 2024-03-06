@@ -165,10 +165,7 @@ const _router = {
   },
   get UNCommodityTradeDialog() {
     return this.getNDL().then(D => D.UNCommodityTrade);
-  },  
-  get FuturesWikiDialog() {
-    return this.getNDL().then(D => D.FuturesWiki);
-  },
+  },    
 
   loadDialogs(browserType) {
     switch(browserType){

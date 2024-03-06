@@ -7,11 +7,9 @@ var _LogicFn = require("./LogicFn");
 var _selectN = _interopRequireDefault(require("../creaters/selectN"));
 var _statN = _interopRequireDefault(require("../creaters/statN"));
 var _un = _interopRequireDefault(require("../creaters/un5"));
-var _futuresWiki = _interopRequireDefault(require("../creaters/futuresWiki"));
 const FN_NOOP = () => {};
 const _r = {
   DF: _selectN.default,
-  FuturesWikiDialog: _futuresWiki.default,
   DialogSelectN: _selectN.default,
   DialogQuery: _selectN.default,
   DialogStatN: _statN.default,
