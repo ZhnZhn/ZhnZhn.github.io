@@ -5,7 +5,6 @@ import fnStatN from '../creaters/statN'
 
 import fnUn5 from '../creaters/un5'
 
-import fnFutures3 from '../creaters/futures3'
 import fnFuturesWiki from '../creaters/futuresWiki'
 
 const FN_NOOP = () => {};
@@ -13,7 +12,6 @@ const FN_NOOP = () => {};
 const _r = {
   DF: fnSelectN,
 
-  Futures3Dialog: fnFutures3,
   FuturesWikiDialog: fnFuturesWiki,
 
   DialogSelectN: fnSelectN,

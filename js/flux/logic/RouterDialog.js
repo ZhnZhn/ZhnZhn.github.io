@@ -120,9 +120,6 @@ const _router = {
   get UNCommodityTradeDialog() {
     return this.getNDL().then(D => D.UNCommodityTrade);
   },
-  get Futures3Dialog() {
-    return this.getNDL().then(D => D.Futures3);
-  },
   get FuturesWikiDialog() {
     return this.getNDL().then(D => D.FuturesWiki);
   },
