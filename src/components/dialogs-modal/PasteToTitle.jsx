@@ -1,5 +1,5 @@
 import DivEllipsis from '../zhn/DivEllipsis';
-import SpanBlack from '../zhn/SpanBlack';
+import { SpanBlack } from '../zhn/SpanToken';
 
 const S_TITLE = {
   paddingBottom: 4,

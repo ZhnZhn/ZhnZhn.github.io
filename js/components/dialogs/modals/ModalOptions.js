@@ -6,7 +6,7 @@ exports.default = void 0;
 var _styleFn = require("../../styleFn");
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
 var _InputText = _interopRequireDefault(require("../../zhn/InputText"));
-var _SpanBlack = _interopRequireDefault(require("../../zhn/SpanBlack"));
+var _SpanToken = require("../../zhn/SpanToken");
 var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox2"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -43,7 +43,7 @@ const ModalOptions = _ref => {
     children: [onRoundTo && _isRt(dfRt) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_DIV_INPUT,
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
           style: S_CAPTION,
           children: "Round Decimals to"
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {

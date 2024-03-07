@@ -1,10 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _BtSvgCircle = require("../zhn/BtSvgCircle");
-var _SpanBlack = _interopRequireDefault(require("../zhn/SpanBlack"));
+var _SpanToken = require("../zhn/SpanToken");
 var _Row = require("./Row.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_CAPTION = {
@@ -20,7 +19,7 @@ const RowPlusMinus = _ref => {
     onPlus
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
       style: {
         ...S_CAPTION,
         ...styleCaption

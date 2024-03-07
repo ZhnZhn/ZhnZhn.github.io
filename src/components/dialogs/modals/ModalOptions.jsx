@@ -5,7 +5,7 @@ import {
 
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import InputText from '../../zhn/InputText';
-import SpanBlack from '../../zhn/SpanBlack';
+import { SpanBlack } from '../../zhn/SpanToken';
 import RowCheckBox2 from '../rows/RowCheckBox2';
 import {
   CL_POPUP_MENU,

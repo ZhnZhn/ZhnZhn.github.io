@@ -3,7 +3,7 @@ import { GREEN_COLOR } from '../styles/Color';
 
 import Link from '../links/ProviderLinks';
 import OpenClose from '../zhn/OpenClose';
-import SpanBlack from '../zhn/SpanBlack';
+import { SpanBlack } from '../zhn/SpanToken';
 
 const CL_NOTE_BR = "provider__note__br"
 , OPEN_COLOR_L2 = GREEN_COLOR

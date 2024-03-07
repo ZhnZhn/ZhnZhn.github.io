@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _BtSvgCircle = require("../zhn/BtSvgCircle");
-var _SpanBlack = _interopRequireDefault(require("../zhn/SpanBlack"));
+var _SpanToken = require("../zhn/SpanToken");
 var _Row = require("./Row.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_CAPTION = {
@@ -32,7 +32,7 @@ const RowTypeB = _ref => {
       setIsPlus(!onAdd());
     } : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
       style: S_CAPTION,
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {

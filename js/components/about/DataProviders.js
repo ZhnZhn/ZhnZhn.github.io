@@ -7,7 +7,7 @@ var _styleFn = require("../styleFn");
 var _Color = require("../styles/Color");
 var _ProviderLinks = _interopRequireDefault(require("../links/ProviderLinks"));
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
-var _SpanBlack = _interopRequireDefault(require("../zhn/SpanBlack"));
+var _SpanToken = require("../zhn/SpanToken");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_NOTE_BR = "provider__note__br",
   OPEN_COLOR_L2 = _Color.GREEN_COLOR,
@@ -54,7 +54,7 @@ const LinkPer = _ref => {
     per
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {}), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_SpanBlack.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {}), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_SpanToken.SpanBlack, {
       children: ["\xA0(", per, ")"]
     })]
   });
@@ -74,7 +74,7 @@ const LinkList = _ref2 => {
     }, index);
   });
 };
-const _crListCaption = (items, captionSuffix) => `(${items.length}) ${captionSuffix}:`;
+const _crListCaption = (items, captionSuffix) => "(" + items.length + ") " + captionSuffix + ":";
 const DataProviders = _ref3 => {
   let {
     isClose
@@ -101,7 +101,7 @@ const DataProviders = _ref3 => {
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           style: S_NOTE,
           children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
-            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
               children: "Note:\xA0"
             }), "User API key from data provider required for request.\xA0", /*#__PURE__*/(0, _jsxRuntime.jsx)("br", {
               className: CL_NOTE_BR
@@ -114,7 +114,7 @@ const DataProviders = _ref3 => {
           style: S_NOTE,
           children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
             style: S_MAX_WIDTH,
-            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
               children: "Note:\xA0"
             }), "This product uses the Bureau of Economic Analysis (BEA) Data API but is not endorsed or certified by BEA."]
           })
@@ -132,7 +132,7 @@ const DataProviders = _ref3 => {
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           style: S_NOTE,
           children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
-            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
               children: "Note:\xA0"
             }), "Local Http Proxy is required for data APIs without CORS.\xA0", /*#__PURE__*/(0, _jsxRuntime.jsx)("br", {
               className: CL_NOTE_BR

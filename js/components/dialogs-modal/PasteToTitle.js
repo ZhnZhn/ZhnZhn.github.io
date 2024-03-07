@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _DivEllipsis = _interopRequireDefault(require("../zhn/DivEllipsis"));
-var _SpanBlack = _interopRequireDefault(require("../zhn/SpanBlack"));
+var _SpanToken = require("../zhn/SpanToken");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_TITLE = {
     paddingBottom: 4,
@@ -24,7 +24,7 @@ const PasteToTitle = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_TITLE,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanBlack.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
       children: "From Chart:\xA0"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
       style: S_CHART_ID,

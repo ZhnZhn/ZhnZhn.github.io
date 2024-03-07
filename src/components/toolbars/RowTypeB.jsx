@@ -2,7 +2,7 @@ import { useState } from '../uiApi';
 
 import InputText from '../zhn/InputText';
 import { SvgPlus } from '../zhn/BtSvgCircle';
-import SpanBlack from '../zhn/SpanBlack';
+import { SpanBlack } from '../zhn/SpanToken';
 
 import { S_INLINE_BLOCK_BOLD } from './Row.Style';
 

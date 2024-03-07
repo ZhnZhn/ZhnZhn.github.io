@@ -11,7 +11,7 @@ import A from '../Comp';
 import TwitterLink from './TwitterLink';
 import DataProviders from './DataProviders';
 import StepTitle from './StepTitle';
-import SpanBlack from '../zhn/SpanBlack';
+import { SpanBlack } from '../zhn/SpanToken';
 import Link from '../links/ProviderLinks';
 import LogosBar from './LogosBar';
 
