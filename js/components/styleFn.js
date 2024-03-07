@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getColorBlack = exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crScrollYCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCnNotSelected = exports.crCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE = exports.CL_NOT_SELECTED = exports.CL_CHB_BLACK = exports.CL_BLACK = void 0;
+exports.getColorBlack = exports.crStyle3 = exports.crStyle2 = exports.crShowHide = exports.crScrollYCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCnNotSelected = exports.crCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.crBoldCn = exports.S_NONE = exports.S_INLINE = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE = exports.CL_NOT_SELECTED = exports.CL_CHB_BLACK = exports.CL_BLACK = void 0;
 var _uiTheme = require("./styles/uiTheme");
 exports.getColorBlack = _uiTheme.getColorBlack;
 const _isArr = Array.isArray;
@@ -9,7 +9,7 @@ const _getCn = arrOrStr => _isArr(arrOrStr) ? arrOrStr[0] ? arrOrStr[1] : '' : a
 const crCn = (arrOrStr1, arrOrStr2) => {
   const _cl1 = _getCn(arrOrStr1),
     _cl2 = _getCn(arrOrStr2);
-  return _cl1 ? _cl2 ? `${_cl1} ${_cl2}` : _cl1 : _cl2 || void 0;
+  return _cl1 ? _cl2 ? _cl1 + " " + _cl2 : _cl1 : _cl2 || void 0;
 };
 exports.crCn = crCn;
 const CL_SHOW_POPUP = exports.CL_SHOW_POPUP = "show-popup";
@@ -20,13 +20,13 @@ const CL_TEXT_ELLIPSIS = exports.CL_TEXT_ELLIPSIS = "text-ellipsis";
 const CL_WIDTH_100_PERCENT = exports.CL_WIDTH_100_PERCENT = "w-100";
 const crCnNotSelected = className => crCn(className, CL_NOT_SELECTED);
 exports.crCnNotSelected = crCnNotSelected;
-const _crRowCn = className => crCnNotSelected(`${className} ${CL_BLACK}`);
+const _crRowCn = className => crCnNotSelected(className + " " + CL_BLACK);
 const CL_ROW_PANE_TOPIC = exports.CL_ROW_PANE_TOPIC = _crRowCn("row__pane-topic");
 const CL_ROW_TYPE2_TOPIC = exports.CL_ROW_TYPE2_TOPIC = _crRowCn("row__type2-topic");
 const OPEN_CLOSE = "open-close";
-const CL_OPEN_CLOSE = exports.CL_OPEN_CLOSE = `${OPEN_CLOSE} cfs-dark`;
-const CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_EXP = `${OPEN_CLOSE}__exp`;
-const CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE_BLACK = `${OPEN_CLOSE} cfs-black`;
+const CL_OPEN_CLOSE = exports.CL_OPEN_CLOSE = OPEN_CLOSE + " cfs-dark";
+const CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_EXP = OPEN_CLOSE + "__exp";
+const CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE_BLACK = OPEN_CLOSE + " cfs-black";
 const S_BLOCK = exports.S_BLOCK = {
   display: "block"
 };
@@ -53,17 +53,19 @@ exports.crBsContainerCn = crBsContainerCn;
 const crScrollYCn = className => crCn("scroll-container-y", className);
 exports.crScrollYCn = crScrollYCn;
 const CL_EL_B = "el-b";
-const crDialogCn = className => crCn(className, `${CL_C_BG} ${CL_EL_B}`);
+const crDialogCn = className => crCn(className, CL_C_BG + " " + CL_EL_B);
 exports.crDialogCn = crDialogCn;
 const crElementBorderCn = className => crCn(className, CL_EL_B);
 exports.crElementBorderCn = crElementBorderCn;
 const CL_EL_BG = "el-bg";
-const crElementCn = className => crCn(className, `el-c ${CL_EL_BG}`);
+const crElementCn = className => crCn(className, "el-c " + CL_EL_BG);
 exports.crElementCn = crElementCn;
 const crElementBgCn = className => crCn(className, CL_EL_BG);
 exports.crElementBgCn = crElementBgCn;
 const crBtCircleHfCn = className => crCn(className, "bt-circle-hf");
 exports.crBtCircleHfCn = crBtCircleHfCn;
-const crBtCircleCn = className => crCnNotSelected(`bt-circle ${className}`);
+const crBtCircleCn = className => crCnNotSelected("bt-circle " + className);
 exports.crBtCircleCn = crBtCircleCn;
+const crBoldCn = className => crCn("bold", className);
+exports.crBoldCn = crBoldCn;
 //# sourceMappingURL=styleFn.js.map
