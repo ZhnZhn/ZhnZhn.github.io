@@ -1,6 +1,6 @@
 import { forwardRef } from '../uiApi';
 
-import SpanLabel from '../zhn-span/SpanLabel';
+import { SpanLabel } from '../zhn/SpanToken';
 import DateField from '../zhn/DateField';
 import {
   S_BOX_SHADOW,
@@ -30,7 +30,7 @@ const DivCompareTo = forwardRef(({
   <div>
    {/* eslint-disable jsx-a11y/label-has-associated-control */ }
    <label style={S_ROW_INPUT} >
-     <SpanLabel label="CompareTo:" />
+     <SpanLabel>CompareTo:</SpanLabel>
      <DateField
        ref={ref}
        style={S_DATE_FIELD}

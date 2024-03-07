@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _SpanLabel = _interopRequireDefault(require("../zhn-span/SpanLabel"));
+var _SpanToken = require("../zhn/SpanToken");
 var _DateField = _interopRequireDefault(require("../zhn/DateField"));
 var _Input = require("../zhn/Input.Style");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -31,8 +31,8 @@ const DivCompareTo = (0, _uiApi.forwardRef)((_ref, ref) => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
       style: S_ROW_INPUT,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanLabel.default, {
-        label: "CompareTo:"
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanLabel, {
+        children: "CompareTo:"
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
         ref: ref,
         style: S_DATE_FIELD,
