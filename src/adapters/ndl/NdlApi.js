@@ -18,7 +18,7 @@ const _rIdFn = {
   jo: items => `JODI/OIL_${getValue(items[1])}${getValue(items[2])}_${getValue(items[0])}`
 };
 
-const _crSetUrl2 = ({
+const _crSetUrl = ({
     proxy,
     items,
     fromDate,
@@ -36,31 +36,6 @@ const _crSetUrl2 = ({
      ? `&trim_start=${fromDate}`
      : '';
   return `${proxy}${SET_URL}${tokenPath}${id}.json?sort_order=asc&api_key=${apiKey}${queryTail}`;
-};
-
-const _addTo = (
-  q,
-  pN,
-  pV
-) => pV
-  ? q ? `${q}&${pN}=${pV}` : `${pN}=${pV}`
-  : q || '';
-
-const _crSetUrl = ({
-    proxy,
-    value,
-    fromDate,
-    toDate,
-    apiKey,
-    transform
-}) => {
-  let _q = 'sort_order=asc';
-  _q = _addTo(_q, 'trim_start', fromDate)
-  _q = _addTo(_q, 'trim_end', toDate)
-  _q = _addTo(_q, 'transform', transform)
-  _q = _addTo(_q, 'api_key', apiKey)
-
-  return `${proxy}${SET_URL}${value}.json?${_q}`;
 };
 
 const _crTableUrl = (
@@ -120,9 +95,7 @@ const NdlApi = {
   getRequestUrl(option) {
     return option.dfTable
       ? _crTableUrl(option)
-      : option.items && !option.value
-         ? _crSetUrl2(option)
-         : _crSetUrl(option);
+      : _crSetUrl(option);
   },
 
   // headers && headers.get existed

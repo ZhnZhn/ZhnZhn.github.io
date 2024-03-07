@@ -16,7 +16,7 @@ const _rIdFn = {
   jg: items => "JODI/GAS_" + _crIdB_A(items),
   jo: items => "JODI/OIL_" + (0, _AdapterFn.getValue)(items[1]) + (0, _AdapterFn.getValue)(items[2]) + "_" + (0, _AdapterFn.getValue)(items[0])
 };
-const _crSetUrl2 = _ref => {
+const _crSetUrl = _ref => {
   let {
     proxy,
     items,
@@ -30,23 +30,6 @@ const _crSetUrl2 = _ref => {
     tokenPath = dfDbId ? dfDbId + '/' : '',
     queryTail = fromDate ? "&trim_start=" + fromDate : '';
   return "" + proxy + SET_URL + tokenPath + id + ".json?sort_order=asc&api_key=" + apiKey + queryTail;
-};
-const _addTo = (q, pN, pV) => pV ? q ? q + "&" + pN + "=" + pV : pN + "=" + pV : q || '';
-const _crSetUrl = _ref2 => {
-  let {
-    proxy,
-    value,
-    fromDate,
-    toDate,
-    apiKey,
-    transform
-  } = _ref2;
-  let _q = 'sort_order=asc';
-  _q = _addTo(_q, 'trim_start', fromDate);
-  _q = _addTo(_q, 'trim_end', toDate);
-  _q = _addTo(_q, 'transform', transform);
-  _q = _addTo(_q, 'api_key', apiKey);
-  return "" + proxy + SET_URL + value + ".json?" + _q;
 };
 const _crTableUrl = option => {
   const {
@@ -84,7 +67,7 @@ const _checkDataset = (dataset, datatable) => {
 };
 const NdlApi = {
   getRequestUrl(option) {
-    return option.dfTable ? _crTableUrl(option) : option.items && !option.value ? _crSetUrl2(option) : _crSetUrl(option);
+    return option.dfTable ? _crTableUrl(option) : _crSetUrl(option);
   },
   // headers && headers.get existed
   getLimitRemaiming: headers => headers.get(LIMIT_REMAINING),
