@@ -1,5 +1,5 @@
 import { formatStrDate } from '../../utils/dateFn';
-import SpanValue from '../zhn-span/SpanValue';
+import { SpanValue } from '../zhn/SpanToken';
 
 const CL_ITEM_TIME = 'item-time';
 
@@ -13,7 +13,7 @@ const ValueDate = ({
 }) => (
    <>
     {value
-       ? <SpanValue style={S_VALUE} value={value} />
+       ? <SpanValue style={S_VALUE}>{value}</SpanValue>
        : null
     }
     {strDate

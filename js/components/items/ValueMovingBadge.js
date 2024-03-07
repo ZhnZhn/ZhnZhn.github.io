@@ -9,7 +9,7 @@ var _dateFn = require("../../utils/dateFn");
 var _DirectionType = require("../../constants/DirectionType");
 var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _SvgMove = require("../zhn/SvgMove");
-var _SpanValue = _interopRequireDefault(require("../zhn-span/SpanValue"));
+var _SpanToken = require("../zhn/SpanToken");
 var _SpanDate = _interopRequireDefault(require("../zhn-span/SpanDate"));
 var _ValueMovingModal = _interopRequireDefault(require("./ValueMovingModal"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -88,8 +88,8 @@ const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref, ref) => {
     };
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
     style: S_ROOT,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanValue.default, {
-      value: value
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanValue, {
+      children: value
     }), _svgDirection, /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       style: _spanStyle,
       children: percent

@@ -22,7 +22,7 @@ import {
   SvgUp
 } from '../zhn/SvgMove';
 
-import SpanValue from '../zhn-span/SpanValue';
+import { SpanValue } from '../zhn/SpanToken';
 import SpanDate from '../zhn-span/SpanDate';
 import ValueMovingModal from './ValueMovingModal';
 
@@ -120,7 +120,7 @@ const ValueMovingBadge = forwardRef(({
 
   return (
     <span style={S_ROOT}>
-       <SpanValue value={value} />
+       <SpanValue>{value}</SpanValue>
        {_svgDirection}
        <span style={_spanStyle}>
          {percent}

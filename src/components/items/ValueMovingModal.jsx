@@ -11,7 +11,7 @@ import { isDmy } from '../../utils/dateFn';
 import formatAllNumber from '../../utils/formatAllNumber'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
-import SpanValue from '../zhn-span/SpanValue'
+import { SpanValue } from '../zhn/SpanToken'
 import SpanDate from '../zhn-span/SpanDate'
 import DivCompareTo from './DivCompareTo'
 
@@ -54,7 +54,7 @@ const RowValueDate = ({
   date
 }) => (
   <div style={S_ROW}>
-    <SpanValue value={formatAllNumber(value)} />
+    <SpanValue>{formatAllNumber(value)}</SpanValue>
     <SpanDate date={date} style={S_DATE} />
   </div>
 );

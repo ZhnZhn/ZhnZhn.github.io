@@ -7,7 +7,7 @@ var _uiApi = require("../uiApi");
 var _dateFn = require("../../utils/dateFn");
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
-var _SpanValue = _interopRequireDefault(require("../zhn-span/SpanValue"));
+var _SpanToken = require("../zhn/SpanToken");
 var _SpanDate = _interopRequireDefault(require("../zhn-span/SpanDate"));
 var _DivCompareTo = _interopRequireDefault(require("./DivCompareTo"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -45,8 +45,8 @@ const RowValueDate = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_ROW,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanValue.default, {
-      value: (0, _formatAllNumber.default)(value)
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanValue, {
+      children: (0, _formatAllNumber.default)(value)
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanDate.default, {
       date: date,
       style: S_DATE
@@ -122,6 +122,5 @@ ModalValueMoving.propTypes = {
   onClose: PropTypes.func
 }
 */
-var _default = ValueMovingModal;
-exports.default = _default;
+var _default = exports.default = ValueMovingModal;
 //# sourceMappingURL=ValueMovingModal.js.map
