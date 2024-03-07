@@ -21,9 +21,11 @@ import {
   SvgEqual,
   SvgUp
 } from '../zhn/SvgMove';
+import {
+  SpanValue,
+  SpanDate
+} from '../zhn/SpanToken';
 
-import { SpanValue } from '../zhn/SpanToken';
-import SpanDate from '../zhn-span/SpanDate';
 import ValueMovingModal from './ValueMovingModal';
 
 const CL_BT = 'bt';
@@ -133,10 +135,9 @@ const ValueMovingBadge = forwardRef(({
          className={CL_BT}
          onClick={_toggleModal}
        >
-         <SpanDate
-            style={S_DATE}
-            date={_date}
-         />
+         <SpanDate style={S_DATE}>
+           {_date}
+         </SpanDate>            
        </Button>
        {
          _svgDirection && <ValueMovingModal

@@ -10,7 +10,6 @@ var _DirectionType = require("../../constants/DirectionType");
 var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _SvgMove = require("../zhn/SvgMove");
 var _SpanToken = require("../zhn/SpanToken");
-var _SpanDate = _interopRequireDefault(require("../zhn-span/SpanDate"));
 var _ValueMovingModal = _interopRequireDefault(require("./ValueMovingModal"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -101,9 +100,9 @@ const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref, ref) => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
       className: CL_BT,
       onClick: _toggleModal,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanDate.default, {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanDate, {
         style: S_DATE,
-        date: _date
+        children: _date
       })
     }), _svgDirection && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingModal.default, {
       isShow: isShowModal,

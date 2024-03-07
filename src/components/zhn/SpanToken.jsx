@@ -13,3 +13,5 @@ const _fSpanToken = (
 )
 
 export const SpanValue = _fSpanToken(crBoldCn("sp-value"))
+export const SpanLabel = _fSpanToken(crBoldCn("sp-label"))
+export const SpanDate = _fSpanToken(crBoldCn("sp-date"))

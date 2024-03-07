@@ -8,12 +8,14 @@ import {
 } from '../uiApi';
 
 import { isDmy } from '../../utils/dateFn';
-import formatAllNumber from '../../utils/formatAllNumber'
+import formatAllNumber from '../../utils/formatAllNumber';
 
-import ModalPopup from '../zhn-moleculs/ModalPopup'
-import { SpanValue } from '../zhn/SpanToken'
-import SpanDate from '../zhn-span/SpanDate'
-import DivCompareTo from './DivCompareTo'
+import ModalPopup from '../zhn-moleculs/ModalPopup';
+import {
+  SpanValue,
+  SpanDate 
+} from '../zhn/SpanToken';
+import DivCompareTo from './DivCompareTo';
 
 const S_MODAL_POPUP = {
   position: 'absolute',
@@ -55,7 +57,7 @@ const RowValueDate = ({
 }) => (
   <div style={S_ROW}>
     <SpanValue>{formatAllNumber(value)}</SpanValue>
-    <SpanDate date={date} style={S_DATE} />
+    <SpanDate style={S_DATE}>{date}</SpanDate>
   </div>
 );
 

@@ -8,7 +8,6 @@ var _dateFn = require("../../utils/dateFn");
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _SpanToken = require("../zhn/SpanToken");
-var _SpanDate = _interopRequireDefault(require("../zhn-span/SpanDate"));
 var _DivCompareTo = _interopRequireDefault(require("./DivCompareTo"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -47,9 +46,9 @@ const RowValueDate = _ref => {
     style: S_ROW,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanValue, {
       children: (0, _formatAllNumber.default)(value)
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanDate.default, {
-      date: date,
-      style: S_DATE
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanDate, {
+      style: S_DATE,
+      children: date
     })]
   });
 };
