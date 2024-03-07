@@ -4,10 +4,11 @@ import {
 } from '../zhn/BtSvgCircle';
 import SpanBlack from '../zhn/SpanBlack';
 
+import { S_INLINE_BLOCK_BOLD } from './Row.Style';
+
 const S_CAPTION = {
-  display: 'inline-block',
-  padding: '0 8px 6px 0',
-  fontWeight: 'bold'
+  ...S_INLINE_BLOCK_BOLD,
+  padding: '0 8px 6px 0'
 };
 
 const RowPlusMinus = ({

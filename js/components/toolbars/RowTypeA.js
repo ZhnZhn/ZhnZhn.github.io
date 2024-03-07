@@ -12,8 +12,8 @@ var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _Row = require("./Row.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_COLOR = '#2b908f',
-  _S_OC = {
-    ..._Row.S_OC,
+  _S_OC_STYLE = {
+    ..._Row.S_OC_STYLE,
     marginRight: 6
   },
   S_INPUT_COLOR = {
@@ -41,8 +41,8 @@ const RowTypeA = _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     caption: caption,
     className: _styleFn.CL_OPEN_CLOSE_BLACK,
-    style: _Row.S_ROOT_OC,
-    ocStyle: _S_OC,
+    style: _Row.S_OPEN_CLOSE,
+    ocStyle: _S_OC_STYLE,
     CompAfter: compAfter,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputColor, {
       style: S_INPUT_COLOR,

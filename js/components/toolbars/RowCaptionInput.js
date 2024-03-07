@@ -6,11 +6,11 @@ exports.default = void 0;
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _SpanBlack = _interopRequireDefault(require("../zhn/SpanBlack"));
+var _Row = require("./Row.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_CAPTION = {
-    display: 'inline-block',
-    width: 48,
-    fontWeight: 'bold'
+    ..._Row.S_INLINE_BLOCK_BOLD,
+    width: 48
   },
   S_INPUT_TEXT = {
     width: 56,

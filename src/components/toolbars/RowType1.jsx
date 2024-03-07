@@ -19,8 +19,9 @@ import {
 import InputText from '../zhn/InputText';
 import OpenClose from '../zhn/OpenClose';
 import {
-  S_ROOT_OC,
-  S_OC
+  S_OPEN_CLOSE,
+  S_OC_STYLE,
+  S_INLINE_BLOCK_BOLD
 } from './Row.Style'
 
 const DF_COLOR = '#2b908f'
@@ -40,10 +41,9 @@ const DF_COLOR = '#2b908f'
 , S_PL_10 = { paddingLeft: 10 }
 , S_INLINE = { display: 'inline-block' }
 , S_CAPTION_STYLE = {
-   display: 'inline-block',
+   ...S_INLINE_BLOCK_BOLD,
    width: 85,
-   paddingLeft: 5,
-   fontWeight: 'bold'
+   paddingLeft: 5
 }
 , crSpanStyle = color => ({
   color,
@@ -133,8 +133,8 @@ const RowType1 = ({
   <OpenClose
     caption={caption}
     className={CL_OPEN_CLOSE_BLACK}
-    style={S_ROOT_OC}
-    ocStyle={S_OC}
+    style={S_OPEN_CLOSE}
+    ocStyle={S_OC_STYLE}
     CompAfter={
       is ? <MinusPeriod
               color={getRefValue(_refColor)}

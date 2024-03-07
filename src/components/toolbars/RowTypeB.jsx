@@ -4,10 +4,11 @@ import InputText from '../zhn/InputText';
 import { SvgPlus } from '../zhn/BtSvgCircle';
 import SpanBlack from '../zhn/SpanBlack';
 
+import { S_INLINE_BLOCK_BOLD } from './Row.Style';
+
 const S_CAPTION = {
-  display: 'inline-block',
-  width: 120,
-  fontWeight: 'bold'
+  ...S_INLINE_BLOCK_BOLD,
+  width: 120
 }
 , S_INPUT_TEXT = {
   width: 46,

@@ -7,13 +7,13 @@ import OpenClose from '../zhn/OpenClose';
 import { SvgPlus } from '../zhn/BtSvgCircle';
 import D from '../dialogs/DialogCell';
 import {
-  S_ROOT_OC,
-  S_OC
+  S_OPEN_CLOSE,
+  S_OC_STYLE
 } from './Row.Style';
 
 const DF_COLOR = '#2b908f'
-, _S_OC = {
-  ...S_OC,
+, _S_OC_STYLE = {
+  ...S_OC_STYLE,
   marginRight: 6
 }
 , S_INPUT_COLOR = { paddingLeft: 10 };
@@ -60,8 +60,8 @@ const RowTypeA = ({
     <OpenClose
       caption={caption}
       className={CL_OPEN_CLOSE_BLACK}
-      style={S_ROOT_OC}
-      ocStyle={_S_OC}
+      style={S_OPEN_CLOSE}
+      ocStyle={_S_OC_STYLE}
       CompAfter={compAfter}
     >
       <D.RowInputColor

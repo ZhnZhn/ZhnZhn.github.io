@@ -41,10 +41,9 @@ const DF_COLOR = '#2b908f',
     display: 'inline-block'
   },
   S_CAPTION_STYLE = {
-    display: 'inline-block',
+    ..._Row.S_INLINE_BLOCK_BOLD,
     width: 85,
-    paddingLeft: 5,
-    fontWeight: 'bold'
+    paddingLeft: 5
   },
   crSpanStyle = color => ({
     color,
@@ -127,8 +126,8 @@ const RowType1 = _ref3 => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     caption: caption,
     className: _styleFn.CL_OPEN_CLOSE_BLACK,
-    style: _Row.S_ROOT_OC,
-    ocStyle: _Row.S_OC,
+    style: _Row.S_OPEN_CLOSE,
+    ocStyle: _Row.S_OC_STYLE,
     CompAfter: is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MinusPeriod, {
       color: (0, _uiApi.getRefValue)(_refColor),
       period: (0, _uiApi.getRefValue)(_refPeriod),
