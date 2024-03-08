@@ -1,8 +1,10 @@
+import { isArr } from './uiApi';
+
 export { getColorBlack } from './styles/uiTheme';
 
-const _isArr = Array.isArray;
-
-const _getCn = (arrOrStr) => _isArr(arrOrStr)
+const _getCn = (
+  arrOrStr
+) => isArr(arrOrStr)
   ? arrOrStr[0] ? arrOrStr[1] : ''
   : arrOrStr || '';
 
@@ -17,6 +19,12 @@ export const crCn = (
     : _cl2 || void 0 ;
 }
 
+const _fCrCn = (
+  className1
+) => (
+  className2
+) => crCn(className2, className1);
+
 export const CL_SHOW_POPUP = "show-popup"
 export const CL_BLACK = "black"
 export const CL_CHB_BLACK = "chb-bl"
@@ -24,12 +32,14 @@ export const CL_NOT_SELECTED = "not-selected"
 export const CL_TEXT_ELLIPSIS= "text-ellipsis"
 export const CL_WIDTH_100_PERCENT = "w-100"
 
-export const crCnNotSelected = className => crCn(
-  className,
-  CL_NOT_SELECTED
-)
+export const crCnNotSelected = _fCrCn(CL_NOT_SELECTED)
+const _fCrCnNotSelected = (
+  className1
+) => (
+  className2
+) => crCnNotSelected(`${className2} ${className1}`);
 
-const _crRowCn = className => crCnNotSelected(`${className} ${CL_BLACK}`)
+const _crRowCn = _fCrCnNotSelected(CL_BLACK);
 export const CL_ROW_PANE_TOPIC = _crRowCn("row__pane-topic")
 export const CL_ROW_TYPE2_TOPIC = _crRowCn("row__type2-topic")
 
@@ -76,46 +86,24 @@ export const crStyle3 = (
   style3
 )
 
-const CL_C_BG = "c-bg"
-export const crContainerCn = (
-  className
-) => crCn(className, CL_C_BG)
+const CL_C_BG = "c-bg";
+export const crContainerCn = _fCrCn(CL_C_BG)
 
 export const crBsContainerCn = (
   className
 ) => crContainerCn(crCn("bs-cont", className))
 
-
-export const crScrollYCn = (
-  className
-) => crCn("scroll-container-y", className)
+export const crScrollYCn = _fCrCn("scroll-container-y")
 
 const CL_EL_B = "el-b";
-export const crDialogCn = (
-  className
-) => crCn(className, `${CL_C_BG} ${CL_EL_B}`)
-
-export const crElementBorderCn = (
-  className
-) => crCn(className, CL_EL_B)
+export const crDialogCn = _fCrCn(`${CL_C_BG} ${CL_EL_B}`)
+export const crElementBorderCn = _fCrCn(CL_EL_B)
 
 const CL_EL_BG = "el-bg";
-export const crElementCn = (
-  className
-) => crCn(className, `el-c ${CL_EL_BG}`)
+export const crElementCn = _fCrCn(`el-c ${CL_EL_BG}`)
+export const crElementBgCn = _fCrCn(CL_EL_BG)
 
-export const crElementBgCn = (
-  className
-) => crCn(className, CL_EL_BG)
+export const crBtCircleHfCn = _fCrCn("bt-circle-hf")
+export const crBtCircleCn = _fCrCnNotSelected("bt-circle")
 
-export const crBtCircleHfCn = (
-  className
-) => crCn(className, "bt-circle-hf")
-
-export const crBtCircleCn = (
-  className
-) => crCnNotSelected(`bt-circle ${className}`)
-
-export const crBoldCn = (
-  className
-) => crCn("bold", className)
+export const crBoldCn = _fCrCn("bold")
