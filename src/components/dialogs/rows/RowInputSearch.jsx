@@ -1,3 +1,4 @@
+import { SpanInputLabel } from '../../zhn/SpanToken';
 import InputSearch from '../../zhn-search/InputSearch';
 import crRowProps from './crRowProps';
 
@@ -11,9 +12,9 @@ const RowInputSearch = (props) => {
 
   return (
      <div style={rowStyle}>
-        <span style={labelStyle}>
+        <SpanInputLabel style={labelStyle}>
            {caption}
-        </span>
+        </SpanInputLabel>
         <InputSearch {...inputProps} />
     </div>
   );

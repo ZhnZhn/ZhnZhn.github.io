@@ -1,3 +1,4 @@
+import { SpanInputLabel } from  '../../zhn/SpanToken';
 import InputSelect from '../../zhn-select/InputSelect';
 import crRowProps from './crRowProps';
 
@@ -6,15 +7,14 @@ const RowInputSelect = (props) => {
     rowStyle,
     labelStyle,
     selectProps,
-    caption,
-    title
+    caption
   ] = crRowProps(props);
 
   return (
      <div style={rowStyle}>
-        <span style={labelStyle} title={title}>
+        <SpanInputLabel style={labelStyle}>
            {caption}
-        </span>
+        </SpanInputLabel>
         <InputSelect {...selectProps} />
     </div>
   );

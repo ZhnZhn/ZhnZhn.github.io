@@ -11,12 +11,6 @@ const S_ROW = {
   },
   S_ROW_SHORT = {
     margin: '5px 12px'
-  },
-  S_LABEL = {
-    ..._styleFn.S_INLINE,
-    width: 100,
-    paddingRight: 6,
-    textAlign: 'right'
   };
 
 //Dialogs, DatesFragments
@@ -31,9 +25,7 @@ const crRowLabelStyle = function (isShowLabels, captionStyle) {
   }
   return [(0, _styleFn.crStyle2)({
     ...S_ROW
-  }, isShowLabels && S_ROW_SHORT), (0, _styleFn.crStyle2)({
-    ...S_LABEL
-  }, isShowLabels ? captionStyle : _styleFn.S_NONE)];
+  }, isShowLabels && S_ROW_SHORT), (0, _styleFn.crStyle2)(void 0, isShowLabels ? captionStyle : _styleFn.S_NONE)];
 };
 
 //ValidationMessagesFragment

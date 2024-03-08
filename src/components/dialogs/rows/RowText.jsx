@@ -1,23 +1,20 @@
 import DivEllipsis from '../../zhn/DivEllipsis';
-import { CL_BLACK } from '../../styleFn';
+import { SpanInputLabel } from '../../zhn/SpanToken';
+import {
+  S_NONE,
+  CL_BLACK
+} from '../../styleFn';
 
 const S_DIV = {
   display: 'flex',
   margin: '5px 5px 5px 10px',
-  lineHeight: 2,
-  fontWeight: 'bold'
-}, S_LABEL = {
-  color: '#1b75bb',
-  width: 95,
-  paddingRight: 5,
-  textAlign: 'right',
-  fontSize: '16px'
+  lineHeight: 2
 }, S_TEXT = {
   maxWidth: 200,
   height: 32,
   verticalAlign: 'middle',
-}
-, S_NONE = { display: 'none' };
+  fontWeight: 'bold'
+};
 
 const RowText = ({
   isShowLabels=true,
@@ -28,13 +25,12 @@ const RowText = ({
   textStyle
 }) => text ? (
   <div style={{...S_DIV, ...style}}>
-    <div style={{
-      ...S_LABEL,
+    <SpanInputLabel style={{
       ...captionStyle,
       ...(isShowLabels ? void 0 : S_NONE)
     }}>
       {caption}
-    </div>
+    </SpanInputLabel>
     <DivEllipsis
       className={CL_BLACK}
       style={{

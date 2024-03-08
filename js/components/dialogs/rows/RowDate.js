@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../../uiApi");
 var _DialogStyles = require("../../styles/DialogStyles");
+var _SpanToken = require("../../zhn/SpanToken");
 var _DateField = _interopRequireDefault(require("../../zhn/DateField"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -26,7 +27,7 @@ const RowDate = _ref => {
   }), []);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: rowStyle,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanInputLabel, {
       style: labelStyle,
       children: title
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
@@ -48,6 +49,5 @@ RowDate.propTypes = {
   onTest: PropTypes.func
 }
 */
-var _default = RowDate;
-exports.default = _default;
+var _default = exports.default = RowDate;
 //# sourceMappingURL=RowDate.js.map

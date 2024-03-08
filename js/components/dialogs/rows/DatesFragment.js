@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../../uiApi");
 var _DialogStyles = require("../../styles/DialogStyles");
+var _SpanToken = require("../../zhn/SpanToken");
 var _DateField = _interopRequireDefault(require("../../zhn/DateField"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -69,7 +70,7 @@ const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: rowStyle,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanInputLabel, {
         style: labelStyle,
         children: fromCaption
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
@@ -83,7 +84,7 @@ const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: rowStyle,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanInputLabel, {
         style: labelStyle,
         children: toCaption
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
@@ -115,6 +116,5 @@ DatesFragment.propTypes = {
   onEnter: PropTypes.func
 }
 */
-var _default = DatesFragment;
-exports.default = _default;
+var _default = exports.default = DatesFragment;
 //# sourceMappingURL=DatesFragment.js.map

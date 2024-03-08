@@ -12,12 +12,6 @@ const S_ROW = {
 }
 , S_ROW_SHORT = {
   margin: '5px 12px'
-}
-, S_LABEL = {
-  ...S_INLINE,
-  width: 100,
-  paddingRight: 6,
-  textAlign: 'right'
 };
 
 //Dialogs, DatesFragments
@@ -33,7 +27,7 @@ export const crRowLabelStyle = (
     isShowLabels && S_ROW_SHORT
   ),
   crStyle2(
-    {...S_LABEL},
+    void 0,    
     isShowLabels ? captionStyle : S_NONE
   )
 ];

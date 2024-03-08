@@ -1,6 +1,7 @@
 import { forwardRef } from '../../uiApi';
 
 import { crRowLabelStyle } from '../../styles/DialogStyles';
+import { SpanInputLabel } from '../../zhn/SpanToken';
 import InputPattern from '../../zhn/InputPattern';
 
 const RowPattern = forwardRef(({
@@ -18,9 +19,9 @@ const RowPattern = forwardRef(({
     );
     return (
       <div style={rowStyle}>
-        <span style={labelStyle}>
+        <SpanInputLabel style={labelStyle}>
            {caption}
-        </span>
+        </SpanInputLabel>
         <InputPattern
            ref={ref}
            {...rest}

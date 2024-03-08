@@ -12,6 +12,7 @@ import {
 import {
   crRowLabelStyle
 } from '../../styles/DialogStyles';
+import { SpanInputLabel } from '../../zhn/SpanToken';
 import DateField from '../../zhn/DateField';
 
 const FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
@@ -78,9 +79,9 @@ const DatesFragment = forwardRef(({
   return (
     <div>
       <div style={rowStyle}>
-        <span style={labelStyle}>
+        <SpanInputLabel style={labelStyle}>
            {fromCaption}
-        </span>
+        </SpanInputLabel>
         <DateField
            ref={_refFrom}
            style={dateStyle}
@@ -92,9 +93,9 @@ const DatesFragment = forwardRef(({
         />
      </div>
      <div style={rowStyle}>
-        <span style={labelStyle}>
+        <SpanInputLabel style={labelStyle}>
           {toCaption}
-        </span>
+        </SpanInputLabel>
         <DateField
            ref={_refTo}
            style={dateStyle}

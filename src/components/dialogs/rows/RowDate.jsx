@@ -9,6 +9,7 @@ import {
 import {
   crRowLabelStyle
 } from '../../styles/DialogStyles';
+import { SpanInputLabel } from '../../zhn/SpanToken';
 import DateField from '../../zhn/DateField';
 
 const RowDate = ({
@@ -32,9 +33,9 @@ const RowDate = ({
 
  return (
    <div style={rowStyle}>
-     <span style={labelStyle}>
+     <SpanInputLabel style={labelStyle}>
         {title}
-     </span>
+     </SpanInputLabel>
      <DateField
         ref={_refDate}
         initialValue={initialValue}

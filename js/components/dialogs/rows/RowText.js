@@ -4,28 +4,19 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _DivEllipsis = _interopRequireDefault(require("../../zhn/DivEllipsis"));
+var _SpanToken = require("../../zhn/SpanToken");
 var _styleFn = require("../../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_DIV = {
     display: 'flex',
     margin: '5px 5px 5px 10px',
-    lineHeight: 2,
-    fontWeight: 'bold'
-  },
-  S_LABEL = {
-    color: '#1b75bb',
-    width: 95,
-    paddingRight: 5,
-    textAlign: 'right',
-    fontSize: '16px'
+    lineHeight: 2
   },
   S_TEXT = {
     maxWidth: 200,
     height: 32,
-    verticalAlign: 'middle'
-  },
-  S_NONE = {
-    display: 'none'
+    verticalAlign: 'middle',
+    fontWeight: 'bold'
   };
 const RowText = _ref => {
   let {
@@ -41,11 +32,10 @@ const RowText = _ref => {
       ...S_DIV,
       ...style
     },
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanInputLabel, {
       style: {
-        ...S_LABEL,
         ...captionStyle,
-        ...(isShowLabels ? void 0 : S_NONE)
+        ...(isShowLabels ? void 0 : _styleFn.S_NONE)
       },
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {

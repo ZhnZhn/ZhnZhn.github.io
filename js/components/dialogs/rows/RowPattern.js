@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../../uiApi");
 var _DialogStyles = require("../../styles/DialogStyles");
+var _SpanToken = require("../../zhn/SpanToken");
 var _InputPattern = _interopRequireDefault(require("../../zhn/InputPattern"));
 var _jsxRuntime = require("react/jsx-runtime");
 const RowPattern = (0, _uiApi.forwardRef)((_ref, ref) => {
@@ -17,7 +18,7 @@ const RowPattern = (0, _uiApi.forwardRef)((_ref, ref) => {
   const [rowStyle, labelStyle] = (0, _DialogStyles.crRowLabelStyle)(isShowLabels, captionStyle);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: rowStyle,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanInputLabel, {
       style: labelStyle,
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPattern.default, {
@@ -26,6 +27,5 @@ const RowPattern = (0, _uiApi.forwardRef)((_ref, ref) => {
     })]
   });
 });
-var _default = RowPattern;
-exports.default = _default;
+var _default = exports.default = RowPattern;
 //# sourceMappingURL=RowPattern.js.map
