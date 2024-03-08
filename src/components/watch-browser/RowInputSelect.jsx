@@ -1,13 +1,11 @@
 //import PropTypes from "prop-types";
 
+import { SpanInputLabel } from '../zhn/SpanToken';
 import InputSelect from '../zhn-select/InputSelect';
-import {
-  S_DIALOG_CAPTION,
-  S_DIALOG_ROW
-} from '../styles/DialogStyles';
+
+import { S_DIALOG_ROW } from '../styles/DialogStyles';
 
 const S_CAPTION = {
-  ...S_DIALOG_CAPTION,
   width: 120
 };
 
@@ -17,9 +15,9 @@ const RowInputSelect = ({
   onSelect
 }) => (
   <div style={S_DIALOG_ROW}>
-     <span style={S_CAPTION}>
+     <SpanInputLabel style={S_CAPTION}>
        {caption}
-     </span>
+     </SpanInputLabel>
      <InputSelect
         width="250"
         options={options}

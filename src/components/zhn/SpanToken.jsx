@@ -1,5 +1,6 @@
 import {
   CL_BLACK,
+  crCnNotSelected,
   crBoldCn
 } from '../styleFn';
 
@@ -13,10 +14,13 @@ const _fSpanToken = (
     className={className}
     style={style}
   >{children}</span>
-)
+);
 
 export const SpanValue = _fSpanToken(crBoldCn("sp-value"))
-export const SpanLabel = _fSpanToken(crBoldCn("sp-label"))
 export const SpanDate = _fSpanToken(crBoldCn("sp-date"))
+
+const CL_SP_LABEL = crCnNotSelected("sp-label");
+export const SpanLabel = _fSpanToken(crBoldCn(CL_SP_LABEL))
+export const SpanInputLabel = _fSpanToken(crBoldCn(`${CL_SP_LABEL} sp-input`))
 
 export const SpanBlack = _fSpanToken(CL_BLACK)

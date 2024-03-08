@@ -8,6 +8,13 @@
   font-size: 16px;
 }
 
+.sp-input {
+  display: inline-block;
+  width: 100px;
+  padding-right: 6px;
+  text-align: right;
+}
+
 .sp-date {
   color: #fdb316;
   display: inline-block;

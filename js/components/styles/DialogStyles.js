@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crRowLabelStyle = exports.S_VM_MSG_NUMBER = exports.S_VM_MSG = exports.S_VM_CONT = exports.S_DIALOG_ROW = exports.S_DIALOG_CAPTION = void 0;
+exports.crRowLabelStyle = exports.S_VM_MSG_NUMBER = exports.S_VM_MSG = exports.S_VM_CONT = exports.S_DIALOG_ROW = void 0;
 var _styleFn = require("../styleFn");
 //Dialogs, DatesFragments
 const S_ROW = {
@@ -14,19 +14,12 @@ const S_ROW = {
   },
   S_LABEL = {
     ..._styleFn.S_INLINE,
-    color: '#1b75bb',
     width: 100,
     paddingRight: 6,
-    textAlign: 'right',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    userSelect: 'none'
+    textAlign: 'right'
   };
 
 //Dialogs, DatesFragments
-const S_DIALOG_CAPTION = exports.S_DIALOG_CAPTION = {
-  ...S_LABEL
-};
 const S_DIALOG_ROW = exports.S_DIALOG_ROW = {
   ...S_ROW
 };

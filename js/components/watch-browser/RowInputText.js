@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _SpanToken = require("../zhn/SpanToken");
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _DialogStyles = require("../styles/DialogStyles");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -12,7 +13,6 @@ const S_ROW = {
     lineHeight: 2
   },
   S_CAPTION = {
-    ..._DialogStyles.S_DIALOG_CAPTION,
     width: 120
   },
   S_INPUT_TEXT = {
@@ -28,7 +28,7 @@ const RowInputText = (0, _uiApi.forwardRef)((_ref, ref) => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_ROW,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanInputLabel, {
       style: S_CAPTION,
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
@@ -37,6 +37,5 @@ const RowInputText = (0, _uiApi.forwardRef)((_ref, ref) => {
     })]
   });
 });
-var _default = RowInputText;
-exports.default = _default;
+var _default = exports.default = RowInputText;
 //# sourceMappingURL=RowInputText.js.map

@@ -1,4 +1,4 @@
-import { 
+import {
   S_INLINE,
   S_NONE,
   crStyle2
@@ -15,17 +15,12 @@ const S_ROW = {
 }
 , S_LABEL = {
   ...S_INLINE,
-  color: '#1b75bb',
   width: 100,
   paddingRight: 6,
-  textAlign: 'right',
-  fontSize: '16px',
-  fontWeight: 'bold',
-  userSelect: 'none'
+  textAlign: 'right'
 };
 
 //Dialogs, DatesFragments
-export const S_DIALOG_CAPTION = {...S_LABEL}
 export const S_DIALOG_ROW = {...S_ROW}
 
 //[rowStyle, labelStyle]
