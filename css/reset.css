@@ -13,7 +13,7 @@ html {
 
 body {
   background-color: #5f5f5f;
-  background-color: var(--b-bg, #5f5f5f);
+  background-color: var(--b-bg);
 
 
   font-family: Roboto, Arial, Lato, sans-serif;

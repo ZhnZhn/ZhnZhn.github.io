@@ -16,7 +16,7 @@
 
 .highcharts-text-outline {
   color: grey;
-  color: var(--c-bl, grey);
+  color: var(--c-bl);
   fill: transparent;
   stroke: transparent;
 }
@@ -24,14 +24,14 @@
 .highcharts-title,
 .highcharts-subtitle {
   color: grey !important;
-  color: var(--c-bl, grey) !important;
+  color: var(--c-bl) !important;
   fill: grey !important;
-  fill: var(--c-bl, grey) !important;
+  fill: var(--c-bl) !important;
 }
 
 .hc-gl {  
   fill: grey;
-  fill: var(--c-bl, grey);
+  fill: var(--c-bl);
 
   font-size: 14px;
   font-weight: bold;

@@ -53,7 +53,7 @@
 
 .black {
   color: #1b2836;
-  color: var(--c-bl, #1b2836);
+  color: var(--c-bl);
 }
 .dark-blue {
   color: #1b75bb;

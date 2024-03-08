@@ -37,7 +37,7 @@
 
 .bt-hot {
   color: #c0c0c0;
-  color: var(--bh-c, #c0c0c0);
+  color: var(--bh-c);
 }
 
 

@@ -17,14 +17,14 @@
 
 .chb-checked {
   stroke: #4d4d4d;
-  stroke: var(--c-bg, #4d4d4d);
+  stroke: var(--c-bg);
 }
 
 .chb-bl {
   stroke: #1b2836;
-  stroke: var(--c-bl, #1b2836);
+  stroke: var(--c-bl);
   fill: #1b2836;
-  fill: var(--c-bl, #1b2836);
+  fill: var(--c-bl);
 }
 
 .bt-chb {
@@ -169,7 +169,7 @@
 
 .bt-flat {
   color: #607d8b;
-  color: var(--btf-c, #607d8b);
+  color: var(--btf-c);
 
   display: inline-block;
   text-decoration: none;
@@ -195,16 +195,16 @@
 
 .menu-item {
   color: #1b2836;
-  color: var(--btf-c, #1b2836);
+  color: var(--btf-c);
 
   outline: none;
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   background-color: rgba(0, 0, 0, 0);
   border-bottom: 2px solid transparent;
 }
-.menu-item:focus {
-  border-bottom: 2px solid #1b75bb;
+.menu-item:focus { 
+  background-color: rgba(128, 128, 128, 0.3);
 }
 .menu-item:hover {
-  background-color: rgba(128, 128, 128, 0.3);
+  border-bottom: 2px solid #1b75bb;
 }

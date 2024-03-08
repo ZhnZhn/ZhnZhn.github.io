@@ -1,12 +1,4 @@
 
-.bold {
-  font-weight: bold;
-}
-
-.fs-18 {
-  font-size: 18px;
-}
-
 .native-link {
   color: #0b8fff;
   margin-bottom: 2px;
@@ -21,7 +13,7 @@
 
 .descr-datasource h1 {
   color: black;
-  color: var(--c-bl, black);
+  color: var(--c-bl);
   font-size: 18px;
   font-weight: normal;
 }
@@ -34,7 +26,7 @@
 }
 .descr-datasource span {
   color: black;
-  color: var(--c-bl, black);
+  color: var(--c-bl);
 }
 
 /* Provider Links */

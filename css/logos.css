@@ -13,9 +13,9 @@
   text-align: center;
   padding: 4px 0 8px 0;
   border-color: #1b2836;
-  border-color: var(--lb-bc, #1b2836);
+  border-color: var(--lb-bc);
   fill: #4d4d4d;
-  fill: var(--c-bg, #4d4d4d);
+  fill: var(--c-bg);
 }
 
 .logo-item {
@@ -51,7 +51,7 @@
 
 .logo-github {
   background-color: black;
-  background-color: var(--c-bl, black);
+  background-color: var(--c-bl);
 
   width: 72px;
   height: 72px;

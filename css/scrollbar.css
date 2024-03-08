@@ -47,10 +47,10 @@
 
 .scroll {
   scrollbar-width: thin;
-  scrollbar-color: var(--s-c1, #8bc34a) var(--s-c2, #1b2836);
+  scrollbar-color: var(--s-c1) var(--s-c2);
 }
 .scroll::-webkit-scrollbar-track-piece {
-  background-color: var(--s-c2, #1b2836);
+  background-color: var(--s-c2);
 }
 
 .scroll-browser-by {
