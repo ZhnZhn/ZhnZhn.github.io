@@ -1,12 +1,20 @@
 export { getValue } from '../../AdapterFn';
 import { isInArrStr } from '../../AdapterFn';
 
+import {
+  CHT_MAP,
+  CHT_COLUMN_SET,
+  CHT_BAR_SET,
+  CHT_BAR_WITH_LABELS,
+  CHT_DOT_SET
+} from '../../../constants/ChartType';
+
 const CATEGORY_TYPES = [
-  'MAP',
-  'COLUMN_SET',
-  'BAR_SET',
-  'BAR_WITH_LABELS',
-  'DOT_SET'
+  CHT_MAP,
+  CHT_COLUMN_SET,
+  CHT_BAR_SET,
+  CHT_BAR_WITH_LABELS,
+  CHT_DOT_SET
 ];
 
 const API_URL = "https://ec.europa.eu/eurostat/api";
@@ -18,7 +26,7 @@ export const QUERY_TAIL = "&sinceTimePeriod=1999-01"
 export const DF_TAIL = ""
 
 export const isCategory = isInArrStr(CATEGORY_TYPES)
-export const isMap = seriaType => seriaType === 'MAP'
+export const isMap = seriaType => seriaType === CHT_MAP
 export const crUrl = (
   isComext,
   table,

@@ -5,6 +5,7 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _ChartType = require("../../../constants/ChartType");
 var _EuroStatApi = _interopRequireDefault(require("../EuroStatApi"));
 var _apiFn = require("../api/apiFn");
 const TYPE = 'selectN';
@@ -17,7 +18,6 @@ describe('getRequestUrl', () => {
     id: 'n2',
     value: 'v2'
   }];
-  const COLUMN_SET = 'COLUMN_SET';
   test('should return valid url for crUrlN spline', () => {
     const options = {
         _type: TYPE,
@@ -33,7 +33,7 @@ describe('getRequestUrl', () => {
         _type: TYPE,
         dfTable: DF_TABLE,
         items: [undefined, ...ITEMS],
-        seriaType: COLUMN_SET,
+        seriaType: _ChartType.CHT_COLUMN_SET,
         time
       },
       url = _EuroStatApi.default.getRequestUrl(options);

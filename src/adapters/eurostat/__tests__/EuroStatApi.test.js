@@ -3,6 +3,11 @@
  */
 //Highcharts dateFormat from AdapterFn require jsdom
 "use strict";
+
+import {
+  CHT_COLUMN_SET
+} from '../../../constants/ChartType';
+
 import api from '../EuroStatApi'
 import {
   STAT_API_URL,
@@ -17,8 +22,7 @@ describe('getRequestUrl', ()=>{
   const ITEMS = [
     {id: 'n1', value: 'v1'},
     {id: 'n2', value: 'v2'}
-  ];
-  const COLUMN_SET = 'COLUMN_SET';
+  ];  
 
   test('should return valid url for crUrlN spline', ()=>{
       const options = {
@@ -35,7 +39,7 @@ describe('getRequestUrl', ()=>{
       _type: TYPE,
       dfTable: DF_TABLE,
       items: [ undefined, ...ITEMS ],
-      seriaType: COLUMN_SET,
+      seriaType: CHT_COLUMN_SET,
       time
     },
     url = api.getRequestUrl(options);
