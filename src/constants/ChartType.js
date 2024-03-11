@@ -4,10 +4,10 @@ export const CHT_AREA = 'AREA'
 , CHT_COLUMN = 'COLUMN'
 
 const _crClusterType = chartType => `${chartType}_CLUSTER`
-, _crSetType = chartType => `${chartType}_SET`
-, CHT_BAR = "BAR";
+, _crSetType = chartType => `${chartType}_SET`;
 
-export const CHT_BAR_CLUSTER = _crClusterType(CHT_BAR)
+export const CHT_BAR = "BAR"
+, CHT_BAR_CLUSTER = _crClusterType(CHT_BAR)
 , CHT_BAR_SET = _crSetType(CHT_BAR)
 , CHT_BAR_WITH_LABELS = `${CHT_BAR}_WITH_LABELS`
 , CHT_COLUMN_SET = _crSetType(CHT_COLUMN)

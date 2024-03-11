@@ -1,3 +1,19 @@
+import {
+  CHT_AREA,
+  CHT_SPLINE,
+  CHT_BAR,
+  CHT_COLUMN,
+  CHT_AREA_YEARLY,
+  CHT_COLUMN_SET,
+  CHT_BAR_SET,
+  CHT_COLUMN_CLUSTER,
+  CHT_BAR_CLUSTER,
+  CHT_TREE_MAP,
+  CHT_TREE_MAP_CLUSTER,
+  CHT_TREE_MAP_2,
+  CHT_TREE_MAP_2_CLUSTER
+} from '../../constants/ChartType';
+
 import toSpline from './toSpline';
 import toY from './toYearly';
 import toC from './toColumn';
@@ -5,26 +21,26 @@ import toT from './toTreeMap';
 
 const _r = {
   DF: toSpline.crConfig,
-  AREA: toSpline.crConfig,
-  SPLINE: toSpline.crConfig,
-  COLUMN: toSpline.crConfig,
-  AREA_YEARLY: toY.crConfig,
-  COLUMN_SET: toC.fCrConfig({ seriaType: 'COLUMN'}),
-  BAR_SET: toC.fCrConfig({ seriaType: 'BAR'}),
-  COLUMN_CLUSTER: toC.fCrConfig({
-    isCluster: true, seriaType: 'COLUMN'
+  [CHT_AREA]: toSpline.crConfig,
+  [CHT_SPLINE]: toSpline.crConfig,
+  [CHT_COLUMN]: toSpline.crConfig,
+  [CHT_AREA_YEARLY]: toY.crConfig,
+  [CHT_COLUMN_SET]: toC.fCrConfig({ seriaType: CHT_COLUMN }),
+  [CHT_BAR_SET]: toC.fCrConfig({ seriaType: CHT_BAR }),
+  [CHT_COLUMN_CLUSTER]: toC.fCrConfig({
+    isCluster: true, seriaType: CHT_COLUMN
   }),
-  BAR_CLUSTER: toC.fCrConfig({
-    isCluster: true, seriaType: 'BAR'
-  }),  
-  TREE_MAP: toT.fCrConfig(),
-  TREE_MAP_CLUSTER: toT.fCrConfig(
+  [CHT_BAR_CLUSTER]: toC.fCrConfig({
+    isCluster: true, seriaType: CHT_BAR
+  }),
+  [CHT_TREE_MAP]: toT.fCrConfig(),
+  [CHT_TREE_MAP_CLUSTER]: toT.fCrConfig(
     { isCluster: true }
   ),
-  TREE_MAP_2: toT.fCrConfig(
+  [CHT_TREE_MAP_2]: toT.fCrConfig(
     {}, { depth: "d2" }
   ),
-  TREE_MAP_2_CLUSTER: toT.fCrConfig(
+  [CHT_TREE_MAP_2_CLUSTER]: toT.fCrConfig(
     { isCluster: true }, { depth: "d2" }
   )
 };
