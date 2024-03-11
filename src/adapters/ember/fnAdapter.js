@@ -11,6 +11,7 @@ export {
 } from '../AdapterFn';
 
 import {
+  isNumber,
   getCaption,
   getValue
 } from '../AdapterFn';
@@ -73,3 +74,17 @@ export const reduceToHmBy = (
   fn,
   arr
 ) => arr.reduce(fn, Object.create(null))
+
+const getTrue = () => true;
+export const crDataImpl = (
+  items,
+  getValue,
+  crDataPoint,
+  isValue=getTrue
+) => items.reduce((data, item) => {
+  const value = getValue(item);
+  if (isNumber(value) && isValue(item)) {
+    data.push(crDataPoint(value, item))
+  }
+  return data;
+}, [])

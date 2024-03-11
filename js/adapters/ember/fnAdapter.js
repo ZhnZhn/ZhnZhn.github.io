@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdToUTC = exports.roundBy = exports.reduceToHmBy = exports.isUsRoute = exports.isTreeMap = exports.isTotalVariable = exports.isTotalData = exports.isNumber = exports.isEuRoute = exports.isCategory = exports.isArr = exports.getSourceValue = exports.getMetricValue = exports.getMetricCaption = exports.getGeoCaption = exports.fGetCategory = exports.crError = void 0;
+exports.ymdToUTC = exports.roundBy = exports.reduceToHmBy = exports.isUsRoute = exports.isTreeMap = exports.isTotalVariable = exports.isTotalData = exports.isEuRoute = exports.isCategory = exports.isArr = exports.getSourceValue = exports.getMetricValue = exports.getMetricCaption = exports.getGeoCaption = exports.fGetCategory = exports.crError = exports.crDataImpl = void 0;
 var _CategoryFn = require("../CategoryFn");
 exports.isTreeMap = _CategoryFn.isTreeMap;
 exports.isCategory = _CategoryFn.isCategory;
@@ -38,4 +38,18 @@ const isTotalVariable = item => item.variable === SOURCE_FOSSIL || item.variable
 exports.isTotalVariable = isTotalVariable;
 const reduceToHmBy = (fn, arr) => arr.reduce(fn, Object.create(null));
 exports.reduceToHmBy = reduceToHmBy;
+const getTrue = () => true;
+const crDataImpl = function (items, getValue, crDataPoint, isValue) {
+  if (isValue === void 0) {
+    isValue = getTrue;
+  }
+  return items.reduce((data, item) => {
+    const value = getValue(item);
+    if ((0, _AdapterFn.isNumber)(value) && isValue(item)) {
+      data.push(crDataPoint(value, item));
+    }
+    return data;
+  }, []);
+};
+exports.crDataImpl = crDataImpl;
 //# sourceMappingURL=fnAdapter.js.map
