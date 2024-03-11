@@ -2,30 +2,31 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _ChartType = require("../../constants/ChartType");
 var _toSpline = require("./toSpline");
 var _toAreaYearly = require("./toAreaYearly");
 var _toCategory = require("./toCategory");
 var _toMap = require("./toMap");
-const DF_TYPE = 'SPLINE';
+const DF_TYPE = _ChartType.CHT_SPLINE;
 const _rToConfig = {
-  AREA: _toSpline.crSplineConfig,
-  SPLINE: _toSpline.crSplineConfig,
-  COLUMN: _toSpline.crSplineConfig,
-  AREA_YEARLY: _toAreaYearly.crAreaYearlyConfig,
-  MAP: _toMap.crMapConfig,
-  COLUMN_SET: _toCategory.crCategoryConfig,
-  BAR_SET: _toCategory.crCategoryConfig,
-  BAR_WITH_LABELS: _toCategory.crCategoryConfig,
-  DOT_SET: _toCategory.crCategoryConfig
+  [_ChartType.CHT_AREA]: _toSpline.crSplineConfig,
+  [_ChartType.CHT_SPLINE]: _toSpline.crSplineConfig,
+  [_ChartType.CHT_COLUMN]: _toSpline.crSplineConfig,
+  [_ChartType.CHT_AREA_YEARLY]: _toAreaYearly.crAreaYearlyConfig,
+  [_ChartType.CHT_MAP]: _toMap.crMapConfig,
+  [_ChartType.CHT_COLUMN_SET]: _toCategory.crCategoryConfig,
+  [_ChartType.CHT_BAR_SET]: _toCategory.crCategoryConfig,
+  [_ChartType.CHT_BAR_WITH_LABELS]: _toCategory.crCategoryConfig,
+  [_ChartType.CHT_DOT_SET]: _toCategory.crCategoryConfig
 };
 const _rToSeria = {
-  AREA: _toSpline.crSplineSeria,
-  SPLINE: _toSpline.crSplineSeria,
-  COLUMN: _toSpline.crSplineSeria,
-  COLUMN_SET: _toCategory.crCategorySeria,
-  BAR_SET: _toCategory.crCategorySeria,
-  BAR_WITH_LABELS: _toCategory.crCategorySeria,
-  DOT_SET: _toCategory.crCategorySeria
+  [_ChartType.CHT_AREA]: _toSpline.crSplineSeria,
+  [_ChartType.CHT_SPLINE]: _toSpline.crSplineSeria,
+  [_ChartType.CHT_COLUMN]: _toSpline.crSplineSeria,
+  [_ChartType.CHT_COLUMN_SET]: _toCategory.crCategorySeria,
+  [_ChartType.CHT_BAR_SET]: _toCategory.crCategorySeria,
+  [_ChartType.CHT_BAR_WITH_LABELS]: _toCategory.crCategorySeria,
+  [_ChartType.CHT_DOT_SET]: _toCategory.crCategorySeria
 };
 const _checkSeriaType = function (router, option, dfType) {
   if (dfType === void 0) {
@@ -62,6 +63,5 @@ const EuroStatAdapter = {
     return seria;
   }
 };
-var _default = EuroStatAdapter;
-exports.default = _default;
+var _default = exports.default = EuroStatAdapter;
 //# sourceMappingURL=EuroStatAdapter.js.map

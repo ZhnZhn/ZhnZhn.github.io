@@ -6,15 +6,18 @@ const CHT_AREA = exports.CHT_AREA = 'AREA',
   CHT_SPLINE = exports.CHT_SPLINE = 'SPLINE',
   CHT_LINE = exports.CHT_LINE = 'LINE',
   CHT_COLUMN = exports.CHT_COLUMN = 'COLUMN';
-const CHT_BAR_CLUSTER = exports.CHT_BAR_CLUSTER = "BAR_CLUSTER",
-  CHT_BAR_SET = exports.CHT_BAR_SET = "BAR_SET",
-  CHT_BAR_WITH_LABELS = exports.CHT_BAR_WITH_LABELS = "BAR_WITH_LABELS",
-  CHT_COLUMN_SET = exports.CHT_COLUMN_SET = "COLUMN_SET",
-  CHT_COLUMN_CLUSTER = exports.CHT_COLUMN_CLUSTER = "COLUMN_CLUSTER",
+const _crClusterType = chartType => chartType + "_CLUSTER",
+  _crSetType = chartType => chartType + "_SET",
+  CHT_BAR = "BAR";
+const CHT_BAR_CLUSTER = exports.CHT_BAR_CLUSTER = _crClusterType(CHT_BAR),
+  CHT_BAR_SET = exports.CHT_BAR_SET = _crSetType(CHT_BAR),
+  CHT_BAR_WITH_LABELS = exports.CHT_BAR_WITH_LABELS = CHT_BAR + "_WITH_LABELS",
+  CHT_COLUMN_SET = exports.CHT_COLUMN_SET = _crSetType(CHT_COLUMN),
+  CHT_COLUMN_CLUSTER = exports.CHT_COLUMN_CLUSTER = _crClusterType(CHT_COLUMN),
   CHT_TREE_MAP = exports.CHT_TREE_MAP = "TREE_MAP",
-  CHT_TREE_MAP_CLUSTER = exports.CHT_TREE_MAP_CLUSTER = "TREE_MAP_CLUSTER",
-  CHT_TREE_MAP_2 = exports.CHT_TREE_MAP_2 = "TREE_MAP_2",
-  CHT_TREE_MAP_2_CLUSTER = exports.CHT_TREE_MAP_2_CLUSTER = "TREE_MAP_2_CLUSTER";
+  CHT_TREE_MAP_CLUSTER = exports.CHT_TREE_MAP_CLUSTER = _crClusterType(CHT_TREE_MAP),
+  CHT_TREE_MAP_2 = exports.CHT_TREE_MAP_2 = CHT_TREE_MAP + "_2",
+  CHT_TREE_MAP_2_CLUSTER = exports.CHT_TREE_MAP_2_CLUSTER = _crClusterType(CHT_TREE_MAP_2);
 const CHT_MAP = exports.CHT_MAP = 'MAP',
   CHT_DOT_SET = exports.CHT_DOT_SET = 'DOT_SET';
 const CHT_SEMI_DONUT = exports.CHT_SEMI_DONUT = 'SEMI_DONUT';

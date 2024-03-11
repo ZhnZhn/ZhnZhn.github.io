@@ -1,4 +1,18 @@
 import {
+  CHT_AREA,
+  CHT_SPLINE,
+  CHT_COLUMN,
+
+  CHT_AREA_YEARLY,
+  CHT_MAP,
+
+  CHT_COLUMN_SET,
+  CHT_BAR_SET,
+  CHT_BAR_WITH_LABELS,
+  CHT_DOT_SET
+} from '../../constants/ChartType';
+
+import {
   crSplineConfig,
   crSplineSeria
 } from './toSpline';
@@ -13,30 +27,30 @@ import {
   crMapConfig
 } from './toMap';
 
-const DF_TYPE = 'SPLINE';
+const DF_TYPE = CHT_SPLINE;
 const _rToConfig = {
-  AREA: crSplineConfig,
-  SPLINE: crSplineConfig,
-  COLUMN: crSplineConfig,
+  [CHT_AREA]: crSplineConfig,
+  [CHT_SPLINE]: crSplineConfig,
+  [CHT_COLUMN]: crSplineConfig,
 
-  AREA_YEARLY: crAreaYearlyConfig,
-  MAP: crMapConfig,
+  [CHT_AREA_YEARLY]: crAreaYearlyConfig,
+  [CHT_MAP]: crMapConfig,
 
-  COLUMN_SET: crCategoryConfig,
-  BAR_SET: crCategoryConfig,
-  BAR_WITH_LABELS: crCategoryConfig,
-  DOT_SET: crCategoryConfig
+  [CHT_COLUMN_SET]: crCategoryConfig,
+  [CHT_BAR_SET]: crCategoryConfig,
+  [CHT_BAR_WITH_LABELS]: crCategoryConfig,
+  [CHT_DOT_SET]: crCategoryConfig
 };
 
 const _rToSeria = {
-  AREA: crSplineSeria,
-  SPLINE: crSplineSeria,
-  COLUMN: crSplineSeria,
+  [CHT_AREA]: crSplineSeria,
+  [CHT_SPLINE]: crSplineSeria,
+  [CHT_COLUMN]: crSplineSeria,
 
-  COLUMN_SET: crCategorySeria,
-  BAR_SET: crCategorySeria,
-  BAR_WITH_LABELS: crCategorySeria,
-  DOT_SET: crCategorySeria
+  [CHT_COLUMN_SET]: crCategorySeria,
+  [CHT_BAR_SET]: crCategorySeria,
+  [CHT_BAR_WITH_LABELS]: crCategorySeria,
+  [CHT_DOT_SET]: crCategorySeria
 };
 
 const _checkSeriaType = (
