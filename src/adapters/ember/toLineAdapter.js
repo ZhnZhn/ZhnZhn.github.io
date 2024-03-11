@@ -2,6 +2,7 @@ import crAdapterType1 from '../crAdapterType1';
 import { compareByDate } from '../compareByFn';
 
 import {
+  isNumber,
   isTotalVariable,
   isEuRoute,
   ymdToUTC,
@@ -12,13 +13,22 @@ import {
 } from './fnAdapter';
 
 const _getObjectKeys = Object.keys
-, _crDataPoint = (
-  date,
-  value
-) => [
-  ymdToUTC(date),
-  value
-]
+, getTrue = () => true
+, _crDataImpl = (
+  items,
+  getDate,
+  getValue,
+  isValue=getTrue
+) => items.reduce((data, item) => {
+  const value = getValue(item);
+  if (isNumber(value) && isValue(item)) {
+    data.push([
+      ymdToUTC(getDate(item)),
+      value
+    ])
+  }
+  return data;
+}, [])
 , _crTotalData = (
   json,
   pnDate,
@@ -31,49 +41,42 @@ const _getObjectKeys = Object.keys
     }
     return hm;
   }, json);
-  return _getObjectKeys(_hm)
-    .map(key => _crDataPoint(key, _hm[key]))
+  return _crDataImpl(
+    _getObjectKeys(_hm),
+    dateKey => dateKey,
+    dateKey => _hm[dateKey]
+  );
 }
 , _crSourceData = (
   json,
   pnDate,
   metric,
-  source
-) => json.reduce((data, item) => {
-  if (item.variable === source) {
-    data.push(_crDataPoint(
-      item[pnDate],
-      item[metric]
-    ))
-  }
-  return data;
-}, []);
-
-const _crEuData = (
+  source,
+  options
+) => _crDataImpl(
   json,
-  pnDate,
-  metric
-) => json.map(item => _crDataPoint(
-  item[pnDate],
-  item[metric]
-));
+  item => item[pnDate],
+  item => item[metric],
+  isEuRoute(options)
+    ? getTrue
+    : item => item.variable === source
+);
 
 const crData = (
   json,
   options
 ) => {
   const source = getSourceValue(options)
-  , _crData = isEuRoute(options)
-     ? _crEuData
-     : isTotalData(source)
-        ? _crTotalData
-        : _crSourceData;
+  , _crData = isTotalData(source)
+     ? _crTotalData
+     : _crSourceData;
 
   return _crData(
     json,
     options.pnDate,
     getMetricValue(options),
-    source
+    source,
+    options
   ).sort(compareByDate);
 };
 
