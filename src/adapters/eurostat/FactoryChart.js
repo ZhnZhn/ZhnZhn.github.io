@@ -4,6 +4,12 @@ import {
   fAdd,
   toConfig
 } from '../../charts/configBuilderFn';
+import {
+  CHT_COLUMN_SET,
+  CHT_BAR_SET,
+  CHT_BAR_WITH_LABELS,
+  CHT_DOT_SET
+} from '../../constants/ChartType'
 import { getColorBlack } from './EuroStatFn';
 
 const _assign = Object.assign;
@@ -99,7 +105,7 @@ const _crBarConfig = (option) => {
     toConfig
   );
 
-  if (option.seriaType === 'BAR_WITH_LABELS') {
+  if (option.seriaType === CHT_BAR_WITH_LABELS) {
     config.plotOptions.bar.dataLabels = _crBarDataLabels()
   }
   return config;
@@ -127,10 +133,10 @@ const _crDotConfig = (option) => {
 };
 
 const _r = {
-  COLUMN_SET: _crColumnConfig,
-  BAR_SET: _crBarConfig,
-  BAR_WITH_LABELS: _crBarConfig,
-  DOT_SET: _crDotConfig
+  [CHT_COLUMN_SET]: _crColumnConfig,
+  [CHT_BAR_SET]: _crBarConfig,
+  [CHT_BAR_WITH_LABELS]: _crBarConfig,
+  [CHT_DOT_SET]: _crDotConfig
 };
 
 const FactoryChart = {

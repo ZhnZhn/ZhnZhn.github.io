@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
+var _ChartType = require("../../constants/ChartType");
 var _EuroStatFn = require("./EuroStatFn");
 const _assign = Object.assign;
 const CHART_HEIGHT = {
@@ -95,7 +96,7 @@ const _crBarConfig = option => {
     legend: _crLegend(28),
     plotOptions: _crPlotOptionsBar(option)
   }), _configBuilderFn.toConfig);
-  if (option.seriaType === 'BAR_WITH_LABELS') {
+  if (option.seriaType === _ChartType.CHT_BAR_WITH_LABELS) {
     config.plotOptions.bar.dataLabels = _crBarDataLabels();
   }
   return config;
@@ -120,10 +121,10 @@ const _crDotConfig = option => {
   return config;
 };
 const _r = {
-  COLUMN_SET: _crColumnConfig,
-  BAR_SET: _crBarConfig,
-  BAR_WITH_LABELS: _crBarConfig,
-  DOT_SET: _crDotConfig
+  [_ChartType.CHT_COLUMN_SET]: _crColumnConfig,
+  [_ChartType.CHT_BAR_SET]: _crBarConfig,
+  [_ChartType.CHT_BAR_WITH_LABELS]: _crBarConfig,
+  [_ChartType.CHT_DOT_SET]: _crDotConfig
 };
 const FactoryChart = {
   createConfig: option => {
