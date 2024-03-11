@@ -9,10 +9,34 @@ import {
   reduceToHmBy,
   getSourceValue,
   getMetricValue,
-  roundBy
+  roundBy,
+  crDataImpl
 } from './fnAdapter';
 
 const _getObjectKeys = Object.keys
+, FN_IDENTITY = value => value
+, _fCrDataPoint = (
+  transformValue,
+  getCategory
+) => (
+  value,
+  item
+) => crCategoryPoint(
+  transformValue(value),
+  getCategory(item)
+)
+, _crDataImpl = (
+  items,
+  getValue,
+  getCategory,
+  transformValue,
+  isValue
+) => crDataImpl(
+  items,
+  getValue,
+  _fCrDataPoint(transformValue, getCategory),
+  isValue
+)
 , _crTotalData = (
   json,
   getCategory,
@@ -25,26 +49,24 @@ const _getObjectKeys = Object.keys
     }
     return _hm;
   }, json);
-  return _getObjectKeys(hm)
-    .map(k => crCategoryPoint(
-      roundBy(hm[k], 2),
-      k
-    ));
+  return _crDataImpl(
+    _getObjectKeys(hm),
+    itemKey => hm[itemKey],
+    FN_IDENTITY,
+    value => roundBy(value, 2)
+  );
 }
 , _crSourceData = (
   json,
   getCategory,
   pnMetric
-) => json.reduce((data, item) => {
-  const c = getCategory(item)
-  if (c) {
-    data.push(crCategoryPoint(
-      item[pnMetric],
-      c
-    ))
-  }
-  return data;
-}, [])
+) => _crDataImpl(
+  json,
+  item => item[pnMetric],
+  getCategory,
+  FN_IDENTITY,
+  item => !!getCategory(item)
+)
 , _crData = (
   json,
   options

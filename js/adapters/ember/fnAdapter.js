@@ -38,14 +38,11 @@ const isTotalVariable = item => item.variable === SOURCE_FOSSIL || item.variable
 exports.isTotalVariable = isTotalVariable;
 const reduceToHmBy = (fn, arr) => arr.reduce(fn, Object.create(null));
 exports.reduceToHmBy = reduceToHmBy;
-const getTrue = () => true;
-const crDataImpl = function (items, getValue, crDataPoint, isValue) {
-  if (isValue === void 0) {
-    isValue = getTrue;
-  }
+const crDataImpl = (items, getValue, crDataPoint, isValue) => {
+  const _isValue = isValue ? (value, item) => (0, _AdapterFn.isNumber)(value) && isValue(item) : _AdapterFn.isNumber;
   return items.reduce((data, item) => {
     const value = getValue(item);
-    if ((0, _AdapterFn.isNumber)(value) && isValue(item)) {
+    if (_isValue(value, item)) {
       data.push(crDataPoint(value, item));
     }
     return data;

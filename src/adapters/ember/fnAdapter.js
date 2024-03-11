@@ -75,16 +75,20 @@ export const reduceToHmBy = (
   arr
 ) => arr.reduce(fn, Object.create(null))
 
-const getTrue = () => true;
 export const crDataImpl = (
   items,
   getValue,
   crDataPoint,
-  isValue=getTrue
-) => items.reduce((data, item) => {
-  const value = getValue(item);
-  if (isNumber(value) && isValue(item)) {
-    data.push(crDataPoint(value, item))
-  }
-  return data;
-}, [])
+  isValue
+) => {
+  const _isValue = isValue
+    ? (value, item) => isNumber(value) && isValue(item)
+    : isNumber;
+  return items.reduce((data, item) => {
+    const value = getValue(item);
+    if (_isValue(value, item)) {
+      data.push(crDataPoint(value, item))
+    }
+    return data;
+  }, []);
+}
