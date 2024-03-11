@@ -1,43 +1,47 @@
 import toPlural from '../../utils/toPlural';
 import { isInArrStr } from '../../utils/arrFn';
 import { CIT_EUROSTAT_MAP } from '../../constants/CompItemType';
+import {
+  CHT_AREA,
+  CHT_SPLINE,
+  CHT_LINE,
+  CHT_COLUMN,
+  CHT_AREA_YEARLY,
+
+  CHT_COLUMN_SET,
+  CHT_COLUMN_CLUSTER,
+  CHT_BAR_SET,
+  CHT_BAR_CLUSTER,
+  CHT_BAR_WITH_LABELS,
+
+  CHT_TREE_MAP,
+  CHT_TREE_MAP_CLUSTER,
+  CHT_TREE_MAP_2,
+  CHT_TREE_MAP_2_CLUSTER,
+
+  CHT_MAP,
+  CHT_DOT_SET
+} from '../../constants/ChartType';
 
 import { TYPE_T3AB } from './ChartOptionsTypes';
 
 const _isArr = Array.isArray
 , BLANK_CAPTION = ''
 
-, AREA = 'AREA'
-, AREA_YEARLY = 'AREA_YEARLY'
-, SPLINE = 'SPLINE'
-, LINE = 'LINE'
-, COLUMN = 'COLUMN'
-, MAP = 'MAP'
-, COLUMN_SET = 'COLUMN_SET'
-, COLUMN_CLUSTER = 'COLUMN_CLUSTER'
-, BAR_SET = 'BAR_SET'
-, BAR_CLUSTER = 'BAR_CLUSTER'
-, BAR_WITH_LABELS = 'BAR_WITH_LABELS'
-, DOT_SET = 'DOT_SET'
-, TREE_MAP = 'TREE_MAP'
-, TREE_MAP_CLUSTER = 'TREE_MAP_CLUSTER'
-, TREE_MAP_2 = 'TREE_MAP_2'
-, TREE_MAP_2_CLUSTER = 'TREE_MAP_2_CLUSTER'
-
 , CATEGORY_TYPES = [
-    MAP,
-    COLUMN_SET, COLUMN_CLUSTER,
-    BAR_SET, BAR_CLUSTER, BAR_WITH_LABELS,
-    DOT_SET,
-    TREE_MAP, TREE_MAP_CLUSTER,
-    TREE_MAP_2, TREE_MAP_2_CLUSTER
+    CHT_MAP,
+    CHT_COLUMN_SET, CHT_COLUMN_CLUSTER,
+    CHT_BAR_SET, CHT_BAR_CLUSTER, CHT_BAR_WITH_LABELS,
+    CHT_DOT_SET,
+    CHT_TREE_MAP, CHT_TREE_MAP_CLUSTER,
+    CHT_TREE_MAP_2, CHT_TREE_MAP_2_CLUSTER
 ]
 
-, SPLINE_CONFIG = ['Spline', SPLINE]
-, LINE_CONFIG = ['Line', LINE]
-, AREA_CONFIG = ['Area', AREA]
-, COLUMN_CONFIG = ['Column', COLUMN]
-, YEARLY_BY_MONTH_CONFIG = ['Yearly by Months' , AREA_YEARLY];
+, SPLINE_CONFIG = ['Spline', CHT_SPLINE]
+, LINE_CONFIG = ['Line', CHT_LINE]
+, AREA_CONFIG = ['Area', CHT_AREA]
+, COLUMN_CONFIG = ['Column', CHT_COLUMN]
+, YEARLY_BY_MONTH_CONFIG = ['Yearly by Months' , CHT_AREA_YEARLY];
 
 const _crDfConfig = configArr => {
   const _dfConfigArr = [...configArr];
@@ -68,10 +72,10 @@ const _crDF3 = (
   _isMonthly(mapFrequency) && YEARLY_BY_MONTH_CONFIG,
   AREA_CONFIG,
   COLUMN_CONFIG,
-  [`Bar: By ${oneCaption}`, BAR_SET],
-  [`Bar+Labels: By ${oneCaption}`, BAR_WITH_LABELS],
-  [`Column: By ${oneCaption}`, COLUMN_SET],
-  [`Dots: By ${oneCaption}`, DOT_SET]
+  [`Bar: By ${oneCaption}`, CHT_BAR_SET],
+  [`Bar+Labels: By ${oneCaption}`, CHT_BAR_WITH_LABELS],
+  [`Column: By ${oneCaption}`, CHT_COLUMN_SET],
+  [`Dots: By ${oneCaption}`, CHT_DOT_SET]
 ]);
 
 const _crDF = (
@@ -81,7 +85,7 @@ const _crDF = (
   const oneCaption = toPlural(captions[0]) || 'Dim';
   return _crDF3(oneCaption, mapFrequency)
     .concat(_crItems([
-       [`Map: By ${oneCaption}` , MAP, void 0, CIT_EUROSTAT_MAP]
+       [`Map: By ${oneCaption}` , CHT_MAP, void 0, CIT_EUROSTAT_MAP]
     ]));
 };
 
@@ -112,15 +116,15 @@ const _crT2A = (_, mapFrequency) => [
 ];
 
 const _crColumBarItems = (oneCaption) => _crItems([
-  [`Column: By ${oneCaption}`, COLUMN_SET, oneCaption],
-  [`Bar: By ${oneCaption}`, BAR_SET, oneCaption],
+  [`Column: By ${oneCaption}`, CHT_COLUMN_SET, oneCaption],
+  [`Bar: By ${oneCaption}`, CHT_BAR_SET, oneCaption],
 ]);
 
 const _crColumBarClusterItems = (oneCaption) => _crItems([
-  [`Column: By ${oneCaption}`, COLUMN_SET, oneCaption],
-  [`Column: By ${oneCaption}: Cluster`, COLUMN_CLUSTER, oneCaption],
-  [`Bar: By ${oneCaption}`, BAR_SET, oneCaption],
-  [`Bar: By ${oneCaption}: Cluster`, BAR_CLUSTER, oneCaption]
+  [`Column: By ${oneCaption}`, CHT_COLUMN_SET, oneCaption],
+  [`Column: By ${oneCaption}: Cluster`, CHT_COLUMN_CLUSTER, oneCaption],
+  [`Bar: By ${oneCaption}`, CHT_BAR_SET, oneCaption],
+  [`Bar: By ${oneCaption}: Cluster`, CHT_BAR_CLUSTER, oneCaption]
 ]);
 
 const _crT2AE = (
@@ -152,12 +156,12 @@ const _crT3B = (
 const _crTreeMapItem = (
   caption,
   id
-) => _crItem([`TreeMap: By ${caption}`, TREE_MAP, caption, void 0, id]);
+) => _crItem([`TreeMap: By ${caption}`, CHT_TREE_MAP, caption, void 0, id]);
 
 const _crT3A = ([oneCaption]) => [
   ..._crT3([oneCaption]),
   _crTreeMapItem(oneCaption),
-  _crItem([`TreeMap: By ${oneCaption}: Cluster`, TREE_MAP_CLUSTER, oneCaption])
+  _crItem([`TreeMap: By ${oneCaption}: Cluster`, CHT_TREE_MAP_CLUSTER, oneCaption])
 ];
 
 const _crT3AB = ([oneCaption, twoCaption]) => [
@@ -167,8 +171,8 @@ const _crT3AB = ([oneCaption, twoCaption]) => [
 
 const _crT3A2 = ([oneCaption]) => [
   ..._crT3A([oneCaption]),
-  _crItem([`TreeMap: By ${oneCaption}: Depth 2`, TREE_MAP_2, oneCaption]),
-  _crItem([`TreeMap: By ${oneCaption}: Depth 2: Cluster`, TREE_MAP_2_CLUSTER, oneCaption])
+  _crItem([`TreeMap: By ${oneCaption}: Depth 2`, CHT_TREE_MAP_2, oneCaption]),
+  _crItem([`TreeMap: By ${oneCaption}: Depth 2: Cluster`, CHT_TREE_MAP_2_CLUSTER, oneCaption])
 ];
 
 const _r = {
