@@ -1,20 +1,36 @@
 import domSanitize from '../utils/domSanitize';
+import { isInArrStr } from '../utils/arrFn';
+import {
+  CHT_TREE_MAP,
+  CHT_TREE_MAP_CLUSTER,
+  CHT_TREE_MAP_2,
+  CHT_TREE_MAP_2_CLUSTER,
 
-const _isArr = Array.isArray;
+  CHT_BAR_CLUSTER,
+  CHT_BAR_SET,
+  CHT_COLUMN_SET,
+  CHT_COLUMN_CLUSTER
+} from '../constants/ChartType';
 
-export const isTreeMap = (
-  seriaType
-) => seriaType === "TREE_MAP"
- || seriaType === "TREE_MAP_CLUSTER"
- || seriaType === "TREE_MAP_2"
- || seriaType === "TREE_MAP_2_CLUSTER"
+const _isArr = Array.isArray
+, TREE_MAP_CHART_TYPES = [
+  CHT_TREE_MAP,
+  CHT_TREE_MAP_CLUSTER,
+  CHT_TREE_MAP_2,
+  CHT_TREE_MAP_2_CLUSTER
+];
+export const isTreeMap = isInArrStr(TREE_MAP_CHART_TYPES)
 
+const COLUMN_BAR_CATEGORY_CHART_TYPES = [
+  CHT_BAR_CLUSTER,
+  CHT_BAR_SET,
+  CHT_COLUMN_SET,
+  CHT_COLUMN_CLUSTER
+]
+, _isColumnBarCategory = isInArrStr(COLUMN_BAR_CATEGORY_CHART_TYPES)
 export const isCategory = (
   seriaType
-) => seriaType === "BAR_CLUSTER"
- || seriaType === "BAR_SET"
- || seriaType === "COLUMN_SET"
- || seriaType === "COLUMN_CLUSTER"
+) => _isColumnBarCategory(seriaType)
  || isTreeMap(seriaType)
 
 export const isCategoryCluster = (
