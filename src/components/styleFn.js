@@ -52,6 +52,19 @@ export const S_BLOCK = { display: "block" }
 export const S_INLINE = { display: "inline-block" }
 export const S_NONE = { display: "none" }
 
+export const crStepStyle = (
+  color,
+  size=26
+) => ({
+  ...S_INLINE,
+  color,
+  width: size,
+  height: size,
+  textAlign: "center",
+  border: `solid 2px ${color}`,
+  borderRadius: "50%"
+})
+
 export const crShowHide = (
   is,
   className,
