@@ -1,6 +1,6 @@
-//import PropTypes from 'prop-types'
 import useToggle from '../hooks/useToggle';
 import { useKeyEnter } from '../hooks/fUseKey';
+
 import Svg from './svg/Svg';
 import {
   CL_OPEN_CLOSE,
@@ -49,6 +49,7 @@ const OpenClose = ({
   openColor,
   CompAfter,
   childStyle,
+  dndHandlers,
   children
 }) => {
   const [
@@ -66,6 +67,7 @@ const OpenClose = ({
     <div style={{...S_ROOT_DIV, ...style}}>
       <div className={CL_NOT_SELECTED} style={rowStyle}>
         <div
+          {...dndHandlers}
           ref={refItem}
           tabIndex="0"
           role={role}
@@ -98,20 +100,5 @@ const OpenClose = ({
    </div>
   );
 }
-
-/*
-OpenClose.propTypes = {
-  isClose: PropTypes.bool,
-  role: PropTypes.string
-  style: PropTypes.object,
-  rowStyle: PropTypes.object,
-  ocStyle: PropTypes.object,
-  caption: PropTypes.string,
-  captionStyle: PropTypes.object,
-  openColor: PropTypes.string,
-  CompAfter: PropTypes.node,
-  childStyle: PropTypes.object,
-}
-*/
 
 export default OpenClose
