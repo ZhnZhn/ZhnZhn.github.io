@@ -12,7 +12,7 @@ import A from '../Comp';
 import TwitterLink from './TwitterLink';
 import DataProviders from './DataProviders';
 
-import StepTitle from '../zhn/StepTitle';
+import StepTitles from '../zhn/StepTitles';
 import { SpanBlack } from '../zhn/SpanToken';
 import Link from '../links/ProviderLinks';
 import LogosBar from './LogosBar';
@@ -42,10 +42,12 @@ const CL_ABOUT = crBsContainerCn("about-container")
 , S_BLUE_DARK = { color: '#2f7ed8' }
 , S_RED = { color: '#f44336' }
 
-, STEP_T1 = "Please, choose a data source Browser from Topics [t]"
-, STEP_T2 = "Next, choose a dataset menu item in the the opended up Browser"
-, STEP_T3 = "Select params and enter query date in the opened up draggable Dialog"
-, STEP_T4 = "Click a button Load"
+, STEP_TITLES = [
+  "Please, choose a data source Browser from Topics [t]",
+  "Next, choose a dataset menu item in the the opended up Browser",
+  "Select params and enter query date in the opened up draggable Dialog",
+  "Click a button Load"
+]
 
 , IS_CLOSE_PROVIDERS = !isWideWidth();
 
@@ -99,12 +101,11 @@ const About = () => {
            </span>
          </p>
          <DataProviders isClose={IS_CLOSE_PROVIDERS} />
-         <div className={CL_BLACK}>
-            <StepTitle step="1" stepStyle={S_STEP} title={STEP_T1} />
-            <StepTitle step="2" stepStyle={S_STEP} title={STEP_T2} />
-            <StepTitle step="3" stepStyle={S_STEP} title={STEP_T3} />
-            <StepTitle step="4" stepStyle={S_STEP} title={STEP_T4} />
-         </div>
+         <StepTitles
+           className={CL_BLACK}
+           stepStyle={S_STEP}
+           titles={STEP_TITLES}
+         />
           <p style={S_MT_4}>
             The result will be shown in a chart in a resizebale container.
           </p>

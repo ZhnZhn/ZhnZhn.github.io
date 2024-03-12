@@ -1,5 +1,20 @@
 import ItemStack from './ItemStack';
-import StepTitle from './StepTitle';
+
+const S_PB_4 = { paddingBottom: 4 };
+const StepTitle = ({
+  step,
+  stepStyle,
+  title
+}) => (
+  <p style={S_PB_4}>
+    <span style={stepStyle}>
+      {step}
+    </span>
+    <span>
+       &nbsp;{title}.
+    </span>
+  </p>
+);
 
 const _crItem = (
   title,
@@ -15,11 +30,12 @@ const _crItem = (
 );
 
 const StepTitles = ({
+  className,
   style,
   stepStyle,
   titles
 }) => (
- <div style={style}>
+ <div className={className} style={style}>
    <ItemStack
      items={titles}
      crItem={_crItem}

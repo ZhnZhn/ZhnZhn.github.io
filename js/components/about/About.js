@@ -10,7 +10,7 @@ var _compStore = require("../../flux/stores/compStore");
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _TwitterLink = _interopRequireDefault(require("./TwitterLink"));
 var _DataProviders = _interopRequireDefault(require("./DataProviders"));
-var _StepTitle = _interopRequireDefault(require("../zhn/StepTitle"));
+var _StepTitles = _interopRequireDefault(require("../zhn/StepTitles"));
 var _SpanToken = require("../zhn/SpanToken");
 var _ProviderLinks = _interopRequireDefault(require("../links/ProviderLinks"));
 var _LogosBar = _interopRequireDefault(require("./LogosBar"));
@@ -60,10 +60,7 @@ const CL_ABOUT = (0, _styleFn.crBsContainerCn)("about-container"),
   S_RED = {
     color: '#f44336'
   },
-  STEP_T1 = "Please, choose a data source Browser from Topics [t]",
-  STEP_T2 = "Next, choose a dataset menu item in the the opended up Browser",
-  STEP_T3 = "Select params and enter query date in the opened up draggable Dialog",
-  STEP_T4 = "Click a button Load",
+  STEP_TITLES = ["Please, choose a data source Browser from Topics [t]", "Next, choose a dataset menu item in the the opended up Browser", "Select params and enter query date in the opened up draggable Dialog", "Click a button Load"],
   IS_CLOSE_PROVIDERS = !(0, _has.isWideWidth)();
 const About = () => {
   const [isShow, show, hide, hKeyDown] = (0, _useShowHideComponent.default)(true);
@@ -104,25 +101,10 @@ const About = () => {
           })]
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DataProviders.default, {
           isClose: IS_CLOSE_PROVIDERS
-        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitles.default, {
           className: CL_BLACK,
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitle.default, {
-            step: "1",
-            stepStyle: S_STEP,
-            title: STEP_T1
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitle.default, {
-            step: "2",
-            stepStyle: S_STEP,
-            title: STEP_T2
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitle.default, {
-            step: "3",
-            stepStyle: S_STEP,
-            title: STEP_T3
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitle.default, {
-            step: "4",
-            stepStyle: S_STEP,
-            title: STEP_T4
-          })]
+          stepStyle: S_STEP,
+          titles: STEP_TITLES
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
           style: S_MT_4,
           children: "The result will be shown in a chart in a resizebale container."
