@@ -4,21 +4,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _DnDListHandlers = require("./dnd-handlers/DnDListHandlers");
-var _Comp = _interopRequireDefault(require("../Comp"));
+var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _WatchItems = _interopRequireDefault(require("./WatchItems"));
 var _jsxRuntime = require("react/jsx-runtime");
-const {
-    OpenClose2
-  } = _Comp.default,
-  _isArr = Array.isArray,
+const _isArr = Array.isArray,
   C_LIST_OPEN = '#80c040',
-  S_LIST_DIV = {
+  S_OPEN_CLOSE_ROW = {
     marginLeft: 8,
-    paddingLeft: 2,
-    borderLeftStyle: 'solid',
-    borderLeftWidth: 2,
-    borderLeftColor: 'inherit',
-    lineHeight: 2
+    borderLeft: "solid 2px " + C_LIST_OPEN
   },
   S_MR_10 = {
     marginRight: 10
@@ -34,9 +27,10 @@ const WatchLists = _ref => {
       caption,
       items
     } = _ref2;
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(OpenClose2, {
-      style: S_LIST_DIV,
-      notSelectedStyle: S_MR_10,
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
+      role: "menuitem",
+      rowStyle: S_OPEN_CLOSE_ROW,
+      ocStyle: S_MR_10,
       openColor: C_LIST_OPEN,
       caption: caption,
       dndHandlers: (0, _DnDListHandlers.crDnDListHandlers)(isModeEdit, {

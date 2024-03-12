@@ -2,21 +2,19 @@ import {
   crDnDGroupHandlers
 } from './dnd-handlers/DnDGroupHandlers';
 
-import Comp from '../Comp';
+import OpenClose from '../zhn/OpenClose';
 import WatchLists from './WatchLists';
 
-const { OpenClose2 } = Comp
-, _isArr = Array.isArray
-, S_GROUP_DIV = { lineHeight: 2 };
+const _isArr = Array.isArray;
 
 const WatchGroups = ({
   isModeEdit,
   groups
 }) => _isArr(groups) ? groups
   .map(({caption, lists}) => (
-      <OpenClose2
+      <OpenClose
          key={caption}
-         style={S_GROUP_DIV}
+         role="menuitem"
          caption={caption}
          dndHandlers={crDnDGroupHandlers(isModeEdit, {caption})}
        >
@@ -25,7 +23,7 @@ const WatchGroups = ({
            groupCaption={caption}
            lists={lists}
          />
-       </OpenClose2>
+       </OpenClose>
   )) : null;
 
 export default WatchGroups

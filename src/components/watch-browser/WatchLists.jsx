@@ -1,20 +1,15 @@
-import {  
+import {
   crDnDListHandlers
 } from './dnd-handlers/DnDListHandlers';
 
-import Comp from '../Comp';
+import OpenClose from '../zhn/OpenClose';
 import WatchItems from './WatchItems';
 
-const { OpenClose2 } = Comp
-, _isArr = Array.isArray
+const _isArr = Array.isArray
 , C_LIST_OPEN = '#80c040'
-, S_LIST_DIV = {
+, S_OPEN_CLOSE_ROW = {
   marginLeft: 8,
-  paddingLeft: 2,
-  borderLeftStyle: 'solid',
-  borderLeftWidth: 2,
-  borderLeftColor: 'inherit',
-  lineHeight: 2
+  borderLeft: `solid 2px ${C_LIST_OPEN}`
 }
 , S_MR_10 = { marginRight: 10 };
 
@@ -24,10 +19,11 @@ const WatchLists = ({
   lists
 }) => _isArr(lists) ? lists
   .map(({ caption, items }) => (
-    <OpenClose2
+    <OpenClose
        key={caption}
-       style={S_LIST_DIV}
-       notSelectedStyle={S_MR_10}
+       role="menuitem"
+       rowStyle={S_OPEN_CLOSE_ROW}
+       ocStyle={S_MR_10}
        openColor={C_LIST_OPEN}
        caption={caption}
        dndHandlers={crDnDListHandlers(isModeEdit, {groupCaption, caption})}
@@ -38,7 +34,7 @@ const WatchLists = ({
         groupCaption={groupCaption}
         listCaption={caption}
       />
-    </OpenClose2>
+    </OpenClose>
   )) : null;
 
 export default WatchLists
