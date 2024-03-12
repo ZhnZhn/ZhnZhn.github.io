@@ -3,17 +3,31 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
+var _Color = require("../styles/Color");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _fUseKey = require("../hooks/fUseKey");
 var _Svg = _interopRequireDefault(require("./svg/Svg"));
-var _OpenCloseStyle = require("./OpenCloseStyle");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROOT_DIV = {
-  lineHeight: 2
-};
+    lineHeight: 2
+  },
+  S_SVG = {
+    display: 'inline-block',
+    position: 'relative',
+    top: 1
+  },
+  S_CAPTION = {
+    paddingLeft: 4,
+    fontWeight: 'bold',
+    fontSize: '16px',
+    cursor: 'pointer'
+  },
+  PATH_OPEN = "M 2,14 L 14,14 14,2 2,14",
+  PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
 //_pathV, _fillV, _childCl, _childStyle
-const _crConf = (isOpen, openColor) => isOpen ? [_OpenCloseStyle.PATH_OPEN, openColor, _OpenCloseStyle.CL_OPEN_CLOSE_EXP + " " + _OpenCloseStyle.CL_SHOW_POPUP, _OpenCloseStyle.S_BLOCK] : [_OpenCloseStyle.PATH_CLOSE, _OpenCloseStyle.FILL_CLOSE_COLOR, _OpenCloseStyle.CL_OPEN_CLOSE_EXP, _OpenCloseStyle.S_NONE];
+const _crConf = (isOpen, openColor) => isOpen ? [PATH_OPEN, openColor, _styleFn.CL_OPEN_CLOSE_EXP + " " + _styleFn.CL_SHOW_POPUP, _styleFn.S_BLOCK] : [PATH_CLOSE, _Color.TRANSPARENT_COLOR, _styleFn.CL_OPEN_CLOSE_EXP, _styleFn.S_NONE];
 const OpenClose = _ref => {
   let {
     refItem,
@@ -40,20 +54,20 @@ const OpenClose = _ref => {
       ...style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: _OpenCloseStyle.CL_NOT_SELECTED,
+      className: _styleFn.CL_NOT_SELECTED,
       style: rowStyle,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         ...dndHandlers,
         ref: refItem,
         tabIndex: "0",
         role: role,
-        className: className || _OpenCloseStyle.CL_OPEN_CLOSE,
+        className: className || _styleFn.CL_OPEN_CLOSE,
         style: ocStyle,
         onClick: toggleIsOpen,
         onKeyDown: _hKeyDown,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.default, {
           w: "16",
-          style: _OpenCloseStyle.S_SVG,
+          style: S_SVG,
           children: /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
             fill: _fillV,
             strokeWidth: "1",
@@ -62,7 +76,7 @@ const OpenClose = _ref => {
           })
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: {
-            ..._OpenCloseStyle.S_CAPTION,
+            ...S_CAPTION,
             ...captionStyle
           },
           children: caption

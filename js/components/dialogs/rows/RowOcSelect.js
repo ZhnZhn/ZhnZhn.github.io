@@ -3,14 +3,14 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _OpenCloseStyle = require("../../zhn/OpenCloseStyle");
+var _styleFn = require("../../styleFn");
 var _SpanToken = require("../../zhn/SpanToken");
 var _OpenClose = _interopRequireDefault(require("../../zhn/OpenClose"));
 var _InputSelect = _interopRequireDefault(require("../../zhn-select/InputSelect"));
 var _crRowProps = _interopRequireDefault(require("./crRowProps"));
 var _jsxRuntime = require("react/jsx-runtime");
 const C_OPEN = "#1b75bb",
-  CL_OPEN_CLOSE_INPUT_LABEL = _OpenCloseStyle.CL_OPEN_CLOSE + " " + _SpanToken.CL_SP_INPUT_LABEL,
+  CL_OPEN_CLOSE_INPUT_LABEL = _styleFn.CL_OPEN_CLOSE + " " + _SpanToken.CL_SP_INPUT_LABEL,
   S_OC = {
     height: 36,
     paddingTop: 6,

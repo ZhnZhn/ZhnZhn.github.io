@@ -1,4 +1,4 @@
-import { CL_OPEN_CLOSE } from '../../zhn/OpenCloseStyle';
+import { CL_OPEN_CLOSE } from '../../styleFn';
 import { CL_SP_INPUT_LABEL } from '../../zhn/SpanToken';
 
 import OpenClose from '../../zhn/OpenClose';
