@@ -1,26 +1,34 @@
 //import PropTypes from "prop-types";
+import { crStepStyle } from '../styleFn';
 import ItemStack from './ItemStack';
+import StepTitle from './StepTitle';
 
-import {
-  S_VM_MSG_NUMBER,
-  S_VM_MSG,
-  S_VM_CONT
-} from '../styles/DialogStyles';
+const MSG_COLOR = "#f44336"
+, S_VM = {
+  color: MSG_COLOR,
+  paddingLeft: 10,
+  paddingTop: 4,
+  fontWeight: "bold",
+  lineHeight: 1.4
+}
+, S_VM_MSG_NUMBER = crStepStyle(MSG_COLOR);
 
 const _crItem = (
   msg,
   index
 ) => (
-  <div key={msg}>
-    <span style={S_VM_MSG_NUMBER}>{index+1}</span>
-    <span style={S_VM_MSG}>{msg}</span>
-  </div>
+  <StepTitle
+    key={msg}
+    step={index+1}
+    stepStyle={S_VM_MSG_NUMBER}
+    title={msg}
+  />
 );
 
 const ValidationMessages = ({
   validationMessages
 }) => (
- <div style={S_VM_CONT}>
+ <div style={S_VM}>
    <ItemStack
      items={validationMessages}
      crItem={_crItem}

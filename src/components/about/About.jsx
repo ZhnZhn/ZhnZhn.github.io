@@ -1,5 +1,6 @@
 import { isWideWidth } from '../has';
 import {
+  crStepStyle,
   crBsContainerCn,
   crScrollYCn
 } from '../styleFn';
@@ -10,7 +11,8 @@ import { useMsAbout } from '../../flux/stores/compStore';
 import A from '../Comp';
 import TwitterLink from './TwitterLink';
 import DataProviders from './DataProviders';
-import StepTitle from './StepTitle';
+
+import StepTitle from '../zhn/StepTitle';
 import { SpanBlack } from '../zhn/SpanToken';
 import Link from '../links/ProviderLinks';
 import LogosBar from './LogosBar';
@@ -20,6 +22,7 @@ const CL_ABOUT = crBsContainerCn("about-container")
 , CL_SCROLL_Y = crScrollYCn()
 , CL_BLACK = "black"
 
+, S_STEP = crStepStyle("#80c040")
 , S_SCROLL_DIV = { height: '94%' }
 , S_DIV_WRAPPER = {
   paddingLeft: 12,
@@ -97,10 +100,10 @@ const About = () => {
          </p>
          <DataProviders isClose={IS_CLOSE_PROVIDERS} />
          <div className={CL_BLACK}>
-            <StepTitle step="1" title={STEP_T1} />
-            <StepTitle step="2" title={STEP_T2} />
-            <StepTitle step="3" title={STEP_T3} />
-            <StepTitle step="4" title={STEP_T4} />
+            <StepTitle step="1" stepStyle={S_STEP} title={STEP_T1} />
+            <StepTitle step="2" stepStyle={S_STEP} title={STEP_T2} />
+            <StepTitle step="3" stepStyle={S_STEP} title={STEP_T3} />
+            <StepTitle step="4" stepStyle={S_STEP} title={STEP_T4} />
          </div>
           <p style={S_MT_4}>
             The result will be shown in a chart in a resizebale container.

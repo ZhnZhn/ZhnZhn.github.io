@@ -1,5 +1,4 @@
 import {
-  S_INLINE,
   S_NONE,
   crStyle2
 } from '../styleFn';
@@ -27,27 +26,7 @@ export const crRowLabelStyle = (
     isShowLabels && S_ROW_SHORT
   ),
   crStyle2(
-    void 0,    
+    void 0,
     isShowLabels ? captionStyle : S_NONE
   )
 ];
-
-//ValidationMessagesFragment
-export const S_VM_CONT = {
-  color: '#f44336',
-  paddingLeft: 10,
-  paddingTop: 5
-}
-export const S_VM_MSG_NUMBER = {
-  ...S_INLINE,
-  width: 22,
-  height: 22,
-  marginRight: 5,
-  textAlign: 'center',
-  border: 'solid 2px #f44336',
-  borderRadius: '50%'
-}
-export const S_VM_MSG = {
-  //whiteSpace: 'pre',
-  fontWeight: 'bold'
-}

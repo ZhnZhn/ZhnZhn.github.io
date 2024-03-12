@@ -10,7 +10,7 @@ var _compStore = require("../../flux/stores/compStore");
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _TwitterLink = _interopRequireDefault(require("./TwitterLink"));
 var _DataProviders = _interopRequireDefault(require("./DataProviders"));
-var _StepTitle = _interopRequireDefault(require("./StepTitle"));
+var _StepTitle = _interopRequireDefault(require("../zhn/StepTitle"));
 var _SpanToken = require("../zhn/SpanToken");
 var _ProviderLinks = _interopRequireDefault(require("../links/ProviderLinks"));
 var _LogosBar = _interopRequireDefault(require("./LogosBar"));
@@ -19,6 +19,7 @@ const CL_ABOUT = (0, _styleFn.crBsContainerCn)("about-container"),
   CL_SHOW_CONT = "show-cont",
   CL_SCROLL_Y = (0, _styleFn.crScrollYCn)(),
   CL_BLACK = "black",
+  S_STEP = (0, _styleFn.crStepStyle)("#80c040"),
   S_SCROLL_DIV = {
     height: '94%'
   },
@@ -107,15 +108,19 @@ const About = () => {
           className: CL_BLACK,
           children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitle.default, {
             step: "1",
+            stepStyle: S_STEP,
             title: STEP_T1
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitle.default, {
             step: "2",
+            stepStyle: S_STEP,
             title: STEP_T2
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitle.default, {
             step: "3",
+            stepStyle: S_STEP,
             title: STEP_T3
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitle.default, {
             step: "4",
+            stepStyle: S_STEP,
             title: STEP_T4
           })]
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {

@@ -27,10 +27,10 @@ const NDL = 'Nasdaq Data Link'
 
 export const NOT_SELECTED = (
   item
-) => `${item} is not selected.`
+) => `${item} is not selected`
 export const NOT_VALID_FORMAT = (
   item
-) => `${item} is not in valid format.`
+) => `${item} is not in valid format`
 export const YMD_DATE_OR_EMPTY = "YYYY-MM-DD format must be OR Empty"
 
 export const ERR_ALREADY_EXIST = _crMsg(
