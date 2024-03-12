@@ -1,15 +1,11 @@
 import { safeMap } from '../uiApi';
+import { S_OPEN_CLOSE_LEVEL_2 } from '../styleFn';
+import { GREEN_COLOR } from '../styles/Color';
+
 import { crDnDListHandlers } from './dnd-handlers/DnDListHandlers';
 
 import OpenClose from '../zhn/OpenClose';
 import WatchItems from './WatchItems';
-
-const C_LIST_OPEN = '#80c040'
-, S_OPEN_CLOSE_ROW = {
-  marginLeft: 8,
-  borderLeft: `solid 2px ${C_LIST_OPEN}`
-}
-, S_MR_10 = { marginRight: 10 };
 
 const WatchLists = ({
   isModeEdit,
@@ -19,9 +15,8 @@ const WatchLists = ({
   <OpenClose
      key={caption}
      role="menuitem"
-     rowStyle={S_OPEN_CLOSE_ROW}
-     ocStyle={S_MR_10}
-     openColor={C_LIST_OPEN}
+     style={S_OPEN_CLOSE_LEVEL_2}
+     openColor={GREEN_COLOR}
      caption={caption}
      dndHandlers={crDnDListHandlers(isModeEdit, {groupCaption, caption})}
   >
