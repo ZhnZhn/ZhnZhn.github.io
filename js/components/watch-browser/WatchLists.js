@@ -3,12 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _DnDListHandlers = require("./dnd-handlers/DnDListHandlers");
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _WatchItems = _interopRequireDefault(require("./WatchItems"));
 var _jsxRuntime = require("react/jsx-runtime");
-const _isArr = Array.isArray,
-  C_LIST_OPEN = '#80c040',
+const C_LIST_OPEN = '#80c040',
   S_OPEN_CLOSE_ROW = {
     marginLeft: 8,
     borderLeft: "solid 2px " + C_LIST_OPEN
@@ -22,7 +22,7 @@ const WatchLists = _ref => {
     groupCaption,
     lists
   } = _ref;
-  return _isArr(lists) ? lists.map(_ref2 => {
+  return (0, _uiApi.safeMap)(lists, _ref2 => {
     let {
       caption,
       items
@@ -44,7 +44,7 @@ const WatchLists = _ref => {
         listCaption: caption
       })
     }, caption);
-  }) : null;
+  });
 };
 var _default = exports.default = WatchLists;
 //# sourceMappingURL=WatchLists.js.map
