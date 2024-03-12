@@ -1,20 +1,11 @@
 import { safeMap, memo } from '../uiApi';
 
+import { S_OPEN_CLOSE_LEVEL_2 } from '../styleFn';
 import { GREEN_COLOR } from '../styles/Color';
-import OpenClose2 from '../zhn/OpenClose2';
 
-const S_LH_2 = {
-  lineHeight: 2
-}
-, S_LIST_DIV = {
-  ...S_LH_2,
-  marginLeft: 8,
-  paddingLeft: 12,
-  borderLeftStyle: 'solid',
-  borderLeftWidth: 2,
-  borderLeftColor: 'inherit'
-}
-, MODEL_PROP_CAPTION = 'caption'
+import OpenClose from '../zhn/OpenClose';
+
+const MODEL_PROP_CAPTION = 'caption'
 , MODEL_PROP_GROUPS = 'groups'
 , MODEL_PROP_LISTS = 'lists'
 , MODEL_PROP_ITEMS = 'items';
@@ -43,9 +34,10 @@ const _renderLevel2 = (
   itemsProp,
   props
 ) => safeMap(lists, (list, index) => (
-  <OpenClose2
+  <OpenClose
      key={index}
-     style={S_LIST_DIV}
+     role="menuitem"
+     style={S_OPEN_CLOSE_LEVEL_2}
      openColor={GREEN_COLOR}
      caption={list[captionProp]}
   >
@@ -54,7 +46,7 @@ const _renderLevel2 = (
        captionProp,
        props
    )}
-  </OpenClose2>
+  </OpenClose>
 ))
 
 
@@ -69,9 +61,9 @@ const _renderLevel1 = (props) => {
   , groups = model[_groupsProp];
 
   return safeMap(groups, (group, index) => (
-    <OpenClose2
+    <OpenClose
        key={index}
-       style={S_LH_2}
+       role="menuitem"
        caption={group[_captionProp]}
     >
       {_renderLevel2(
@@ -80,7 +72,7 @@ const _renderLevel1 = (props) => {
           _itemsProp,
           props
       )}
-    </OpenClose2>
+    </OpenClose>
   ))
 };
 
