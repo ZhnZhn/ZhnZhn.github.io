@@ -16,7 +16,6 @@ var _ItemList = _interopRequireDefault(require("./ItemList"));
 var _ItemStack = _interopRequireDefault(require("./ItemStack"));
 var _Load = _interopRequireDefault(require("./Load"));
 var _OpenClose = _interopRequireDefault(require("./OpenClose"));
-var _OpenClose2 = _interopRequireDefault(require("./OpenClose2"));
 var _ShowHide = _interopRequireDefault(require("./ShowHide"));
 var _SvgCheckBox = _interopRequireDefault(require("./SvgCheckBox"));
 var _SvgMore = _interopRequireDefault(require("./SvgMore"));
@@ -37,7 +36,6 @@ const A = {
   ItemStack: _ItemStack.default,
   Load: _Load.default,
   OpenClose: _OpenClose.default,
-  OpenClose2: _OpenClose2.default,
   ShowHide: _ShowHide.default,
   SvgCheckBox: _SvgCheckBox.default,
   SvgMore: _SvgMore.default,

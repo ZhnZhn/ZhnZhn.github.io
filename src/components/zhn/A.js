@@ -11,7 +11,6 @@ import ItemList from './ItemList'
 import ItemStack from './ItemStack'
 import Load from './Load'
 import OpenClose from './OpenClose'
-import OpenClose2 from './OpenClose2'
 import ShowHide from './ShowHide'
 import SvgCheckBox from './SvgCheckBox'
 import SvgMore from './SvgMore'
@@ -20,7 +19,7 @@ import HighchartWrapper from './HighchartWrapper'
 import ErrorBoundary from './ErrorBoundary'
 
 const A = {
-  ...SvgIcons,  
+  ...SvgIcons,
   ScrollPane,
   Browser,
   BrowserCaption,
@@ -33,7 +32,6 @@ const A = {
   ItemStack,
   Load,
   OpenClose,
-  OpenClose2,
   ShowHide,
   SvgCheckBox,
   SvgMore,
