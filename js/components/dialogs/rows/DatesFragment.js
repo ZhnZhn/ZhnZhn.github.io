@@ -4,9 +4,10 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../../uiApi");
-var _DialogStyles = require("../../styles/DialogStyles");
 var _SpanToken = require("../../zhn/SpanToken");
 var _DateField = _interopRequireDefault(require("../../zhn/DateField"));
+var _crRowLabelStyle = _interopRequireDefault(require("./crRowLabelStyle"));
+var _RowFlex = require("./RowFlex");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
@@ -37,7 +38,9 @@ const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
   } = _ref;
   const _refFrom = (0, _uiApi.useRef)(),
     _refTo = (0, _uiApi.useRef)(),
-    [rowStyle, labelStyle] = (0, _DialogStyles.crRowLabelStyle)(isShowLabels);
+    labelStyle = (0, _crRowLabelStyle.default)({
+      isShowLabels
+    });
   (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValues: () => ({
       fromDate: (0, _uiApi.getInputValue)(_refFrom),
@@ -67,9 +70,8 @@ const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
       (0, _uiApi.setRefValue)(_refTo, toStr);
     }
   }), [isPeriodValid, msgOnNotValidFormat]);
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: rowStyle,
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlex, {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanInputLabel, {
         style: labelStyle,
         children: fromCaption
@@ -82,8 +84,7 @@ const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
         onTest: onTestDate,
         onEnter: onEnter
       })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: rowStyle,
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlex, {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanInputLabel, {
         style: labelStyle,
         children: toCaption

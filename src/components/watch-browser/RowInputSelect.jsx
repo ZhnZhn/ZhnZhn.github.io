@@ -3,7 +3,7 @@
 import { SpanInputLabel } from '../zhn/SpanToken';
 import InputSelect from '../zhn-select/InputSelect';
 
-import { S_DIALOG_ROW } from '../styles/DialogStyles';
+import { RowFlex } from '../dialogs/rows/RowFlex';
 
 const S_CAPTION = {
   width: 120
@@ -14,7 +14,7 @@ const RowInputSelect = ({
   options,
   onSelect
 }) => (
-  <div style={S_DIALOG_ROW}>
+  <RowFlex>
      <SpanInputLabel style={S_CAPTION}>
        {caption}
      </SpanInputLabel>
@@ -23,7 +23,7 @@ const RowInputSelect = ({
         options={options}
         onSelect={onSelect}
      />
-  </div>
+  </RowFlex>
 );
 
 /*

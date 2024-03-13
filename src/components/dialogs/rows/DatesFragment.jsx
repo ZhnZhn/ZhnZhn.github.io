@@ -9,11 +9,11 @@ import {
   getInputValue
 } from '../../uiApi';
 
-import {
-  crRowLabelStyle
-} from '../../styles/DialogStyles';
 import { SpanInputLabel } from '../../zhn/SpanToken';
 import DateField from '../../zhn/DateField';
+
+import crRowLabelStyle from './crRowLabelStyle';
+import { RowFlex } from './RowFlex';
 
 const FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
 const NEAR_ERR_MSG = "From Date is near that To Date";
@@ -39,10 +39,7 @@ const DatesFragment = forwardRef(({
 }, ref) => {
   const _refFrom = useRef()
   , _refTo = useRef()
-  , [
-    rowStyle,
-    labelStyle
-  ] = crRowLabelStyle(isShowLabels);
+  , labelStyle = crRowLabelStyle({ isShowLabels });
 
   useImperativeHandle(ref, () => ({
     getValues: () => ({
@@ -77,8 +74,8 @@ const DatesFragment = forwardRef(({
   }), [isPeriodValid, msgOnNotValidFormat])
 
   return (
-    <div>
-      <div style={rowStyle}>
+    <>
+      <RowFlex>
         <SpanInputLabel style={labelStyle}>
            {fromCaption}
         </SpanInputLabel>
@@ -91,8 +88,8 @@ const DatesFragment = forwardRef(({
            onTest={onTestDate}
            onEnter={onEnter}
         />
-     </div>
-     <div style={rowStyle}>
+     </RowFlex>
+     <RowFlex>
         <SpanInputLabel style={labelStyle}>
           {toCaption}
         </SpanInputLabel>
@@ -105,8 +102,8 @@ const DatesFragment = forwardRef(({
            onTest={onTestDate}
            onEnter={onEnter}
         />
-     </div>
-   </div>
+     </RowFlex>
+   </>
   );
 })
 

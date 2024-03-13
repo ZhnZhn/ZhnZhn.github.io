@@ -1,6 +1,7 @@
 import memoIsShow from '../hoc/memoIsShow';
+
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import { S_DIALOG_ROW } from '../styles/DialogStyles';
+import { RowFlex } from './rows/RowFlex';
 
 const S_CAPTION = {
   color: '#a487d4',
@@ -34,14 +35,14 @@ const InfoDialog = memoIsShow(({
       isShow={isShow}
       onClose={onClose}
     >
-       <div style={S_DIALOG_ROW}>
+       <RowFlex>
           <p style={S_CAPTION}>
             {caption}
           </p>
-       </div>
-       <div style={S_DIALOG_ROW}>
+       </RowFlex>
+       <RowFlex>
           <p style={S_DESCR}>{descr}</p>
-       </div>
+       </RowFlex>
     </ModalDialog>
   );
 });

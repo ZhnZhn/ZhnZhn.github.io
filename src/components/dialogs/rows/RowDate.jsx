@@ -6,25 +6,21 @@ import {
   getInputValue
 } from '../../uiApi';
 
-import {
-  crRowLabelStyle
-} from '../../styles/DialogStyles';
 import { SpanInputLabel } from '../../zhn/SpanToken';
 import DateField from '../../zhn/DateField';
 
-const RowDate = ({
-  innerRef,
-  isShowLabels,
-  title='',
-  initialValue,
-  errorMsg,
-  onTest
-}) => {
- const _refDate = useRef(null)
- , [
-   rowStyle,
-   labelStyle
- ] = crRowLabelStyle(isShowLabels);
+import { RowFlex } from './RowFlex';
+import crRowLabelStyle from './crRowLabelStyle';
+
+const RowDate = (props) => {
+ const {
+   innerRef,
+   title='',
+   initialValue,
+   errorMsg,
+   onTest
+ } = props
+ , _refDate = useRef(null);
 
  useImperativeHandle(innerRef, () => ({
    getValue: () => getInputValue(_refDate),
@@ -32,8 +28,8 @@ const RowDate = ({
  }), []);
 
  return (
-   <div style={rowStyle}>
-     <SpanInputLabel style={labelStyle}>
+   <RowFlex>
+     <SpanInputLabel style={crRowLabelStyle(props)}>
         {title}
      </SpanInputLabel>
      <DateField
@@ -42,7 +38,7 @@ const RowDate = ({
         errorMsg={errorMsg}
         onTest={onTest}
      />
-  </div>
+  </RowFlex>
  );
 }
 

@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _SpanToken = require("../zhn/SpanToken");
 var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
-var _DialogStyles = require("../styles/DialogStyles");
+var _RowFlex = require("../dialogs/rows/RowFlex");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
@@ -18,8 +18,7 @@ const RowInputSelect = _ref => {
     options,
     onSelect
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: _DialogStyles.S_DIALOG_ROW,
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlex, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanInputLabel, {
       style: S_CAPTION,
       children: caption

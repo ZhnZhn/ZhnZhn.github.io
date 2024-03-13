@@ -15,9 +15,9 @@ import useEventCallback from '../hooks/useEventCallback';
 
 import { crExportStyleOptions } from '../../charts/ChartExportConfig';
 
+import { RowFlex } from '../dialogs/rows/RowFlex';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import ToolbarButtonCircle from '../zhn/ToolbarButtonCircle';
-import { S_DIALOG_ROW } from '../styles/DialogStyles';
 
 import ShowHide from '../zhn/ShowHide';
 import InputText from '../zhn/InputText';
@@ -30,8 +30,7 @@ const _S_LABEL = {
   fontSize: '16px',
   fontWeight: 'bold'
 }
-, S_ROW_WITH_TOP_GAP = {
-  ...S_DIALOG_ROW,
+, S_MT_10 = {
   marginTop: 10
 }
 , S_LABEL = {
@@ -42,11 +41,7 @@ const _S_LABEL = {
 }
 , S_LABEL_WIDTH = {
   ..._S_LABEL,
-  padding: '0 5px 0 3px'
-}
-, S_LABEL_HEIGHT = {
-  ...S_LABEL_WIDTH,
-  paddingLeft: 6
+  padding: '0 5px 0 10px'
 }
 , S_INPUT_NUMBER = {
   width: 60,
@@ -190,9 +185,9 @@ const CustomizeExportDialog = memoIsShow(({
          buttons={getRefValue(_refToolbarButtons)}
        />
        <ShowHide isShow={isShowDimension}>
-         <div style={S_DIALOG_ROW}>
+         <RowFlex>
             <span style={S_LABEL}>Dimension:</span>
-            <span style={S_LABEL_WIDTH}>Width:</span>
+            <span style={S_LABEL_WIDTH}>Width</span>
             <InputText
               ref={_refInputWidth}
               type="number"
@@ -202,7 +197,7 @@ const CustomizeExportDialog = memoIsShow(({
               min={W_MIN}
               max={W_MAX}
             />
-            <span style={S_LABEL_HEIGHT}>Height:</span>
+            <span style={S_LABEL_WIDTH}>Height</span>
             <InputText
               ref={_refInputHeight}
               type="number"
@@ -212,36 +207,36 @@ const CustomizeExportDialog = memoIsShow(({
               min={H_MIN}
               max={H_MAX}
             />
-         </div>
+         </RowFlex>
        </ShowHide>
        <ShowHide isShow={isShowTitle}>
-         <div style={S_ROW_WITH_TOP_GAP}>
-           <span style={S_LABEL}>Title:</span>
+         <RowFlex style={S_MT_10}>
+           <span style={S_LABEL}>Title</span>
            <InputText
              ref={_refInputTitle}
              initValue={title}
              style={S_INPUT_TEXT}
            />
-         </div>
-         <div style={S_DIALOG_ROW}>
-           <span style={S_LABEL}>Subtitle:</span>
+         </RowFlex>
+         <RowFlex>
+           <span style={S_LABEL}>Subtitle</span>
            <InputText
              ref={_refInputSubtitle}
              initValue={subtitle}
              style={S_INPUT_TEXT}
            />
-         </div>
+         </RowFlex>
        </ShowHide>
        <ShowHide isShow={isShowStyle}>
-         <div style={S_ROW_WITH_TOP_GAP}>
-           <span style={S_LABEL}>Style:</span>
+         <RowFlex style={S_MT_10}>
+           <span style={S_LABEL}>Style</span>
            <InputSelect
              width="250"
              options={_optionStyles}
              placeholder="Default"
              onSelect={_hSelectStyle}
            />
-         </div>
+         </RowFlex>
        </ShowHide>
     </ModalDialog>
   );

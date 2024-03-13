@@ -2,21 +2,22 @@ import { SpanInputLabel } from  '../../zhn/SpanToken';
 import InputSelect from '../../zhn-select/InputSelect';
 import crRowProps from './crRowProps';
 
+import crRowLabelStyle from './crRowLabelStyle';
+import { RowFlex } from './RowFlex';
+
 const RowInputSelect = (props) => {
   const [
-    rowStyle,
-    labelStyle,
     selectProps,
     caption
   ] = crRowProps(props);
 
   return (
-     <div style={rowStyle}>
-        <SpanInputLabel style={labelStyle}>
-           {caption}
-        </SpanInputLabel>
-        <InputSelect {...selectProps} />
-    </div>
+    <RowFlex>
+      <SpanInputLabel style={crRowLabelStyle(props)}>
+         {caption}
+      </SpanInputLabel>
+      <InputSelect {...selectProps} />
+    </RowFlex>
   );
 };
 

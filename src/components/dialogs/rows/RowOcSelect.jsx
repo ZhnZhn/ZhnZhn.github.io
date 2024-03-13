@@ -5,6 +5,9 @@ import OpenClose from '../../zhn/OpenClose';
 import InputSelect from '../../zhn-select/InputSelect';
 import crRowProps from './crRowProps';
 
+import crRowLabelStyle from './crRowLabelStyle';
+import { S_ROW_FLEX } from './RowFlex';
+
 const C_OPEN = "#1b75bb"
 , CL_OPEN_CLOSE_INPUT_LABEL = `${CL_OPEN_CLOSE} ${CL_SP_INPUT_LABEL}`
 , S_OC = {
@@ -24,14 +27,12 @@ const RowOcSelect = ({
   ...restProps
 }) => {
   const [
-     rowStyle,
-     labelStyle,
      selectProps,
      caption
   ] = crRowProps(restProps)
   , _ocStyle = {
      ...S_OC,
-     ...labelStyle,
+     ...crRowLabelStyle(restProps),
      ...restProps.labelStyle
   };
 
@@ -39,7 +40,7 @@ const RowOcSelect = ({
      <OpenClose
        caption={caption}
        style={S_OPEN_CLOSE}
-       rowStyle={rowStyle}
+       rowStyle={S_ROW_FLEX}
        className={CL_OPEN_CLOSE_INPUT_LABEL}
        ocStyle={_ocStyle}
        captionStyle={S_CAPTION}
