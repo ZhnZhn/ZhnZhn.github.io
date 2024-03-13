@@ -8,6 +8,7 @@ var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _fUseKey = require("../hooks/fUseKey");
 var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
+var _RowFlex = require("../dialogs/rows/RowFlex");
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _FocusTrap = _interopRequireDefault(require("./FocusTrap"));
 var _DialogCaption = _interopRequireDefault(require("./DialogCaption"));
@@ -31,8 +32,7 @@ const CommandButtons = _ref => {
     withoutClose,
     onClose
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: _Dialog.S_COMMAND_DIV,
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlexEnd, {
     children: [commandButtons, !withoutClose && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       refBt: refBtClose,
       caption: "Close",

@@ -13,12 +13,12 @@ import { useKeyEscape } from '../hooks/fUseKey';
 import useXYMovable from '../hooks/useXYMovable';
 import useDialogFocus from './useDialogFocus';
 
+import { RowFlexEnd } from '../dialogs/rows/RowFlex';
 import FlatButton from '../zhn-m/FlatButton';
 import DialogCaption from './DialogCaption';
 
 import {
   S_ROOT_DIV,
-  S_COMMAND_DIV,
   S_BT_LOAD
 } from './Dialog.Style';
 
@@ -37,7 +37,7 @@ const CommandButtons = ({
   onShow,
   onClose
 }) => (
-  <div style={S_COMMAND_DIV}>
+  <RowFlexEnd>
     {buttons}
     {
       isFn(onLoad) && <FlatButton
@@ -64,7 +64,7 @@ const CommandButtons = ({
       title="Close dialog"
       onClick={onClose}
     />
-  </div>
+  </RowFlexEnd>
 );
 
 const FN_NOOP = () => {};

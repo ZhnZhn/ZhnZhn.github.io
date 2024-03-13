@@ -3,13 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _GeneralStyles = require("../styles/GeneralStyles");
+var _RowFlex = require("../dialogs/rows/RowFlex");
 var _Button = _interopRequireDefault(require("./Button"));
 var _jsxRuntime = require("react/jsx-runtime");
-const S_COMMAND_DIV = {
-  ..._GeneralStyles.S_FLEX_ROW_END,
-  margin: '8px 4px 10px 0'
-};
 const RowButtons = _ref => {
   let {
     refBtClose,
@@ -20,8 +16,7 @@ const RowButtons = _ref => {
     onClear,
     onClose
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: S_COMMAND_DIV,
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlexEnd, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Primary, {
       caption: caption,
       title: title,

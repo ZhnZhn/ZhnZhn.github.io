@@ -1,12 +1,8 @@
-import {
-  S_FLEX_ROW_END
-} from '../styles/GeneralStyles';
 import FlatButton from '../zhn-m/FlatButton';
+import { RowFlexEnd } from '../dialogs/rows/RowFlex';
 
 const S_ROW = {
-  ...S_FLEX_ROW_END,
-  marginTop: 8,
-  marginBottom: 10
+  marginRight: 0
 };
 
 const RowButtons = ({
@@ -16,7 +12,7 @@ const RowButtons = ({
   btStyle,
   onClose
 }) => (
- <div style={{...S_ROW, ...style}}>
+ <RowFlexEnd style={{...S_ROW, ...style}}>
    {children}
    <FlatButton
      refBt={setRefFocusLast}
@@ -24,7 +20,7 @@ const RowButtons = ({
      caption="Close"
      onClick={onClose}
    />
- </div>
+ </RowFlexEnd>
 );
 
 export default RowButtons

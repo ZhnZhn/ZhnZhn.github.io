@@ -1,13 +1,5 @@
-import {
-  S_FLEX_ROW_END
-} from '../styles/GeneralStyles';
-
+import { RowFlexEnd } from '../dialogs/rows/RowFlex';
 import Button from './Button';
-
-const S_COMMAND_DIV = {
-  ...S_FLEX_ROW_END,
-  margin: '8px 4px 10px 0'
-}
 
 const RowButtons = ({
   refBtClose,
@@ -18,7 +10,7 @@ const RowButtons = ({
   onClear,
   onClose
 }) => (
-  <div style={S_COMMAND_DIV}>
+  <RowFlexEnd>
     <Button.Primary
       caption={caption}
       title={title}
@@ -33,7 +25,7 @@ const RowButtons = ({
        refBt={refBtClose}
        onClick={onClose}
     />
-  </div>
+  </RowFlexEnd>
 );
 
 export default RowButtons

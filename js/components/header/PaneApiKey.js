@@ -156,6 +156,5 @@ class PaneApiKey extends _uiApi.Component {
     }) : null;
   }
 }
-var _default = PaneApiKey;
-exports.default = _default;
+var _default = exports.default = PaneApiKey;
 //# sourceMappingURL=PaneApiKey.js.map

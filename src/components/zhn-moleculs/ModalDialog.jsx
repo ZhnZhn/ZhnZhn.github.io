@@ -9,14 +9,12 @@ import {
 import { useKeyEscape } from '../hooks/fUseKey';
 import useDialogFocus from './useDialogFocus';
 
+import { RowFlexEnd } from '../dialogs/rows/RowFlex';
 import FlatButton from '../zhn-m/FlatButton';
 import FocusTrap from './FocusTrap';
 import DialogCaption from './DialogCaption';
 
-import {
-  S_ROOT_DIV,
-  S_COMMAND_DIV
-} from './Dialog.Style';
+import { S_ROOT_DIV } from './Dialog.Style';
 
 const CL_MODAL_DIALOG = crDialogCn('modal-dialog')
 , S_ROOT_DIV_MODAL = {
@@ -36,7 +34,7 @@ const CommandButtons = ({
   withoutClose,
   onClose
 }) => (
-  <div style={S_COMMAND_DIV}>
+  <RowFlexEnd>
     {commandButtons}
     {!withoutClose &&
        <FlatButton
@@ -48,7 +46,7 @@ const CommandButtons = ({
          onClick={onClose}
        />
     }
-  </div>
+  </RowFlexEnd>
 );
 
 const FN_NOOP = () => {};
