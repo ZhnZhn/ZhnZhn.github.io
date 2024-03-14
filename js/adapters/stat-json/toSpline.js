@@ -3,9 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _ChartType = require("../../constants/ChartType");
 var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 var _fnUtil = require("./fnUtil");
 var _fnAdapter = require("./fnAdapter");
+var _toYearly = _interopRequireDefault(require("./toYearly"));
 const _isArr = Array.isArray;
 const _filterLeadingNulls = data => {
   const _len = data.length;
@@ -36,7 +38,7 @@ const _toData = (values, times, hasPerJanuary) => {
     _crPoint = _fCrDataPoint(_values, hasPerJanuary);
   return _isArr(times) ? _postProcessData(times.map(_crPoint)) : [];
 };
-const crSplineConfig = (json, option) => {
+const _crSplineConfig = (json, option) => {
   const [ds, values, times] = (0, _fnAdapter.crDsValuesTimes)(json, option),
     _hasPerJanuary = _isPerJanuary(ds.label),
     data = _toData(values, times, _hasPerJanuary),
@@ -47,5 +49,12 @@ const crSplineConfig = (json, option) => {
     confOption
   });
 };
-var _default = exports.default = crSplineConfig;
+const routerSplineConfig = {
+  DF: _crSplineConfig,
+  [_ChartType.CHT_AREA]: _crSplineConfig,
+  [_ChartType.CHT_SPLINE]: _crSplineConfig,
+  [_ChartType.CHT_COLUMN]: _crSplineConfig,
+  [_ChartType.CHT_AREA_YEARLY]: _toYearly.default
+};
+var _default = exports.default = routerSplineConfig;
 //# sourceMappingURL=toSpline.js.map

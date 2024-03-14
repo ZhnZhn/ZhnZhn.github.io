@@ -1,4 +1,12 @@
+import {
+  CHT_AREA,
+  CHT_SPLINE,
+  CHT_COLUMN,
+  CHT_AREA_YEARLY
+} from '../../constants/ChartType';
+
 import crConfigType1 from '../../charts/crConfigType1';
+
 import {
   toUTC,
   compose
@@ -7,6 +15,8 @@ import {
   crDsValuesTimes,
   crConfOption
 } from './fnAdapter';
+
+import crYearlyConfig from './toYearly';
 
 const _isArr = Array.isArray;
 
@@ -69,7 +79,7 @@ const _toData = (
     : [];
 };
 
-const crSplineConfig = (
+const _crSplineConfig = (
   json,
   option
 ) => {
@@ -89,4 +99,12 @@ const crSplineConfig = (
   });
 };
 
-export default crSplineConfig
+const routerSplineConfig = {
+  DF: _crSplineConfig,
+  [CHT_AREA]: _crSplineConfig,
+  [CHT_SPLINE]: _crSplineConfig,
+  [CHT_COLUMN]: _crSplineConfig,
+  [CHT_AREA_YEARLY]: crYearlyConfig
+};
+
+export default routerSplineConfig
