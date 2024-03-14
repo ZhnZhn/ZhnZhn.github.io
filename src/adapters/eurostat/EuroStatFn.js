@@ -210,6 +210,10 @@ const _crTimeIndexAndValue = (json) => {
   ];
 }
 
+export const isNotGeoOrReporter = (
+  token
+) => token !== "geo" && token !== "reporter"
+
 export const crData = (
   json,
   {mapFrequency, isFilterZero}={}
