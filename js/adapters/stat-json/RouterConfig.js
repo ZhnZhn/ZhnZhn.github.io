@@ -10,10 +10,10 @@ var _toColumn = _interopRequireDefault(require("./toColumn"));
 var _toTreeMap = _interopRequireDefault(require("./toTreeMap"));
 const _r = {
   ..._toColumn.default,
-  DF: _toSpline.default.crConfig,
-  [_ChartType.CHT_AREA]: _toSpline.default.crConfig,
-  [_ChartType.CHT_SPLINE]: _toSpline.default.crConfig,
-  [_ChartType.CHT_COLUMN]: _toSpline.default.crConfig,
+  DF: _toSpline.default,
+  [_ChartType.CHT_AREA]: _toSpline.default,
+  [_ChartType.CHT_SPLINE]: _toSpline.default,
+  [_ChartType.CHT_COLUMN]: _toSpline.default,
   [_ChartType.CHT_AREA_YEARLY]: _toYearly.default.crConfig,
   [_ChartType.CHT_TREE_MAP]: _toTreeMap.default.fCrConfig(),
   [_ChartType.CHT_TREE_MAP_CLUSTER]: _toTreeMap.default.fCrConfig({

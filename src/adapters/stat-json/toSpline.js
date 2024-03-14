@@ -69,24 +69,24 @@ const _toData = (
     : [];
 };
 
+const crSplineConfig = (
+  json,
+  option
+) => {
+  const [
+    ds,
+    values,
+    times
+  ] = crDsValuesTimes(json, option)
+  , _hasPerJanuary = _isPerJanuary(ds.label)
+  , data = _toData(values, times, _hasPerJanuary)
+  , confOption = crConfOption(ds, option);
 
-const toArea = {
-  crConfig: (json, option) => {
-    const [
-      ds,
-      values,
-      times
-    ] = crDsValuesTimes(json, option)
-    , _hasPerJanuary = _isPerJanuary(ds.label)
-    , data = _toData(values, times, _hasPerJanuary)
-    , confOption = crConfOption(ds, option);
-
-    return crConfigType1({
-      option,
-      data,
-      confOption
-    });
-  }
+  return crConfigType1({
+    option,
+    data,
+    confOption
+  });
 };
 
-export default toArea
+export default crSplineConfig

@@ -10,7 +10,7 @@ import {
   CHT_TREE_MAP_2_CLUSTER
 } from '../../constants/ChartType';
 
-import toSpline from './toSpline';
+import crSplineConfig from './toSpline';
 import toY from './toYearly';
 import routerColumnBarSet from './toColumn';
 import toT from './toTreeMap';
@@ -18,10 +18,11 @@ import toT from './toTreeMap';
 const _r = {
   ...routerColumnBarSet,
 
-  DF: toSpline.crConfig,
-  [CHT_AREA]: toSpline.crConfig,
-  [CHT_SPLINE]: toSpline.crConfig,
-  [CHT_COLUMN]: toSpline.crConfig,
+  DF: crSplineConfig,
+  [CHT_AREA]: crSplineConfig,
+  [CHT_SPLINE]: crSplineConfig,
+  [CHT_COLUMN]: crSplineConfig,
+
   [CHT_AREA_YEARLY]: toY.crConfig,
 
   [CHT_TREE_MAP]: toT.fCrConfig(),
