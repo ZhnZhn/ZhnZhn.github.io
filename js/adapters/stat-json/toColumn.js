@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
+var _ChartType = require("../../constants/ChartType");
 var _CategoryFn = require("../CategoryFn");
 var _crCategoryConfig = _interopRequireDefault(require("../crCategoryConfig"));
 var _fnAdapter = require("./fnAdapter");
@@ -77,18 +78,7 @@ const _crSubtitle = (items, category) => {
   });
   return _arr.join(": ");
 };
-const toColumn = {
-  fCrConfig: function (param) {
-    if (param === void 0) {
-      param = {};
-    }
-    return (json, option) => toColumn.crConfig(json, {
-      ...option,
-      ...param,
-      ..._crCategory(option)
-    });
-  },
-  crConfig: (json, option) => {
+const _crConfig = (json, option) => {
     const {
         category,
         cTotal,
@@ -113,8 +103,18 @@ const toColumn = {
       config = (0, _crCategoryConfig.default)(_title, _subtitle, seriaType, seriaColor, data, isCluster);
     _assign(config, (0, _fnAdapter.crChartOption)(_ds, Tid, option));
     return config;
-  }
+  },
+  _fCrConfig = (seriaType, isCluster) => (json, option) => _crConfig(json, {
+    ...option,
+    seriaType,
+    isCluster,
+    ..._crCategory(option)
+  });
+const routerColumnBarSet = {
+  [_ChartType.CHT_COLUMN_SET]: _fCrConfig(_ChartType.CHT_COLUMN),
+  [_ChartType.CHT_COLUMN_CLUSTER]: _fCrConfig(_ChartType.CHT_COLUMN, true),
+  [_ChartType.CHT_BAR_SET]: _fCrConfig(_ChartType.CHT_BAR),
+  [_ChartType.CHT_BAR_CLUSTER]: _fCrConfig(_ChartType.CHT_BAR, true)
 };
-var _default = toColumn;
-exports.default = _default;
+var _default = exports.default = routerColumnBarSet;
 //# sourceMappingURL=toColumn.js.map

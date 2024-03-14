@@ -1,5 +1,14 @@
 import JSONstat from 'jsonstat';
 
+import {
+  CHT_BAR,
+  CHT_COLUMN,
+  CHT_COLUMN_SET,
+  CHT_BAR_SET,
+  CHT_COLUMN_CLUSTER,
+  CHT_BAR_CLUSTER
+} from '../../constants/ChartType';
+
 import { crCategoryPoint } from '../CategoryFn';
 import crCategoryConfig from '../crCategoryConfig';
 
@@ -110,49 +119,61 @@ const _crSubtitle = (items, category) => {
   return _arr.join(": ");
 };
 
-const toColumn = {
+const _crConfig = (
+  json,
+  option
+) => {
+  const {
+    category,
+    cTotal,
+    itemSlice,
+    time,
+    timeId='Tid',
+    dfTitle,
+    dfTSlice,
+    seriaType,
+    seriaColor,
+    isCluster,
+    items=[],
+  } = option
+  , _ds = JSONstat(json).Dataset(0)
+  , _dimC = _ds.Dimension(category)
+  , Tid = crTid(time, _ds)
+  , _cSlice = _crSlice(json, timeId, time, itemSlice, dfTSlice)
+  , _values = _crValues(_ds, _cSlice)
+  , _title = _crTitle(dfTitle, option)
+  , _subtitle = _crSubtitle(items, category)
+  , data = _crData(_values, _dimC, cTotal)
+  , config = crCategoryConfig(
+     _title,
+     _subtitle,
+     seriaType,
+     seriaColor,
+     data,
+     isCluster
+   );
 
-  fCrConfig: (param={}) => {
-    return (json, option) => toColumn.crConfig(json, {
-      ...option, ...param,
-      ..._crCategory(option)
-    });
-  },
+  _assign(config, crChartOption(_ds, Tid, option))
+  return config;
+}
+, _fCrConfig = (
+  seriaType,
+  isCluster
+) => (
+  json,
+  option
+) => _crConfig(json, {
+  ...option,
+  seriaType,
+  isCluster,
+  ..._crCategory(option)
+});
 
-  crConfig: (json, option) => {
-    const {
-      category,
-      cTotal,
-      itemSlice,
-      time,
-      timeId='Tid',
-      dfTitle,
-      dfTSlice,
-      seriaType,
-      seriaColor,
-      isCluster,
-      items=[],
-    } = option
-    , _ds = JSONstat(json).Dataset(0)
-    , _dimC = _ds.Dimension(category)
-    , Tid = crTid(time, _ds)
-    , _cSlice = _crSlice(json, timeId, time, itemSlice, dfTSlice)
-    , _values = _crValues(_ds, _cSlice)
-    , _title = _crTitle(dfTitle, option)
-    , _subtitle = _crSubtitle(items, category)
-    , data = _crData(_values, _dimC, cTotal)
-    , config = crCategoryConfig(
-       _title,
-       _subtitle,
-       seriaType,
-       seriaColor,
-       data,
-       isCluster
-     );
-
-    _assign(config, crChartOption(_ds, Tid, option))
-    return config;
-  }
+const routerColumnBarSet = {
+  [CHT_COLUMN_SET]: _fCrConfig(CHT_COLUMN),
+  [CHT_COLUMN_CLUSTER]: _fCrConfig(CHT_COLUMN, true),
+  [CHT_BAR_SET]: _fCrConfig(CHT_BAR),
+  [CHT_BAR_CLUSTER]: _fCrConfig(CHT_BAR, true)
 };
 
-export default toColumn
+export default routerColumnBarSet
