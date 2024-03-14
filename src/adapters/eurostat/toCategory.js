@@ -1,9 +1,12 @@
+import routerColumnBarSet from '../stat-json/toColumn';
+
 import FactoryChart from './FactoryChart';
 import {
   trJsonToCategory,
   trJsonToSeria
 } from './JsonStatFn';
 import {
+  isNotGeoOrReporter,
   addToCategoryConfig,
   findMinY,
   crCategoryTooltip
@@ -27,10 +30,26 @@ const _crScatterProps = (
   }
 });
 
+const _crRouteIsNotExistMsg = (
+  seriaType
+) => `Chart ${seriaType} route isn't exist`
+
 export const crCategoryConfig = (
   json,
   option
 ) => {
+  // By Dim route
+  const { dfC } = option;
+  if (dfC && isNotGeoOrReporter(dfC)) {
+    option.category = dfC
+    option.itemSlice = option.zhMapSlice
+    const { seriaType } = option
+    , _crConfig = routerColumnBarSet[seriaType];
+    if (!_crConfig) {
+      throw new Error(_crRouteIsNotExistMsg(seriaType));
+    }
+    return _crConfig(json, option);
+  }
   const { zhMapSlice:configSlice } = option;
   return trJsonToCategory(json, configSlice)
     .then(({ categories, data, min }) => {
