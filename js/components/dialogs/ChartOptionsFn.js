@@ -51,6 +51,7 @@ const _crT3C = _ref2 => {
   let [oneCaption] = _ref2;
   return [..._crT2(), ..._crColumBarItems(oneCaption)];
 };
+const _crT3CA = () => _crT3C(["Dim"]);
 const _crT3B = (_ref3, mapFrequency) => {
   let [oneCaption] = _ref3;
   return [_crItem(_crDfConfig(SPLINE_CONFIG)), _crYearlyByMonthItem(mapFrequency), ..._crColumBarClusterItems(oneCaption)];
@@ -81,6 +82,7 @@ const _r = {
   t3b: _crT3B,
   [_ChartOptionsTypes.TYPE_T3AB]: _crT3AB,
   t3c: _crT3C,
+  t3ca: _crT3CA,
   df3: _crDF3
 };
 const _crCaptions = _ref7 => {
