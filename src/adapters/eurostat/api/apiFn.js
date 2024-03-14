@@ -1,6 +1,8 @@
 export { getValue } from '../../AdapterFn';
 import { isInArrStr } from '../../AdapterFn';
 
+export { isNotGeoOrReporter } from '../EuroStatFn';
+
 import {
   CHT_MAP,
   CHT_COLUMN_SET,

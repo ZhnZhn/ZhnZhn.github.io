@@ -2,6 +2,7 @@ import {
   DF_TAIL,
   isCategory,
   isMap,
+  isNotGeoOrReporter,
   crUrl,
   getValue
 } from './apiFn';
@@ -37,16 +38,18 @@ const _crMapSlice = (
 
 const _notEmptyOrGeo = (
   item
-) => Boolean(item)
-  && item.id !== 'geo'
-  && item.id !== 'reporter';
+) => Boolean(item) && isNotGeoOrReporter(item.id);
 const _crItems = ({
   seriaType,
+  dfC,
   items,
   time
 }) => {
   if (isCategory(seriaType)) {
-    const _items = items.filter(_notEmptyOrGeo);
+    const _filterItemsBy = dfC
+      ? item => Boolean(item) && item.id !== dfC
+      : _notEmptyOrGeo
+    , _items = items.filter(_filterItemsBy);
     return isMap(seriaType)
       ? _items
       : _items.concat([{ id: 'time', value: time }])
