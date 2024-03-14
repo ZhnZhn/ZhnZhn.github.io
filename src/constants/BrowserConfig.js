@@ -4,6 +4,7 @@ import {
   BT_FGR,
   BT_PE,
   BT_COMEXT,
+  BT_SDG,
   BT_UN_COMTRADE,
   BT_FAOSTAT,
   BT_WORLD_BANK,
@@ -32,17 +33,28 @@ import {
   MDT_STOCKS_BY_SECTOR
 } from './ModalDialogType';
 
+const S_ITEM_MULTI_LINE = {
+  maxWidth: 275,
+  lineHeight: 1.3,
+  paddingTop: 4,
+  paddingBottom: 4
+}
+
 const _crSourceMenuUrl = (
   token
 ) => `./data/${token}/source-menu.json`
 , _crBrowserItem = (
   browserType,
   caption,
-  token
+  token,
+  itemStyle,
+  topicStyle
 ) => ({
   browserType,
   caption,
-  sourceMenuUrl: _crSourceMenuUrl(token)
+  sourceMenuUrl: _crSourceMenuUrl(token),
+  itemStyle,
+  topicStyle
 });
 
 const BrowserConfig = {
@@ -70,6 +82,13 @@ const BrowserConfig = {
     BT_COMEXT,
     'EU Comext',
     'comext'
+  ),
+  [BT_SDG]: _crBrowserItem(
+    BT_SDG,
+    'EU SDG',
+    'eu-sdg',
+    {...S_ITEM_MULTI_LINE},
+    {...S_ITEM_MULTI_LINE, whiteSpace: 'unset'}
   ),
   [BT_UN_COMTRADE]: _crBrowserItem(
     BT_UN_COMTRADE,

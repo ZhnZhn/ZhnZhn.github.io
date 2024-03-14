@@ -4,11 +4,19 @@ exports.__esModule = true;
 exports.default = void 0;
 var _BrowserType = require("./BrowserType");
 var _ModalDialogType = require("./ModalDialogType");
-const _crSourceMenuUrl = token => `./data/${token}/source-menu.json`,
-  _crBrowserItem = (browserType, caption, token) => ({
+const S_ITEM_MULTI_LINE = {
+  maxWidth: 275,
+  lineHeight: 1.3,
+  paddingTop: 4,
+  paddingBottom: 4
+};
+const _crSourceMenuUrl = token => "./data/" + token + "/source-menu.json",
+  _crBrowserItem = (browserType, caption, token, itemStyle, topicStyle) => ({
     browserType,
     caption,
-    sourceMenuUrl: _crSourceMenuUrl(token)
+    sourceMenuUrl: _crSourceMenuUrl(token),
+    itemStyle,
+    topicStyle
   });
 const BrowserConfig = {
   [_BrowserType.BT_STOCK_MARKETS]: _crBrowserItem(_BrowserType.BT_STOCK_MARKETS, 'Stock Markets', 'stock-markets'),
@@ -16,6 +24,12 @@ const BrowserConfig = {
   [_BrowserType.BT_FGR]: _crBrowserItem(_BrowserType.BT_FGR, 'Eurostat: FIGARO', 'figaro'),
   [_BrowserType.BT_PE]: _crBrowserItem(_BrowserType.BT_PE, 'Euro Indicators / PEEIs', 'peeis'),
   [_BrowserType.BT_COMEXT]: _crBrowserItem(_BrowserType.BT_COMEXT, 'EU Comext', 'comext'),
+  [_BrowserType.BT_SDG]: _crBrowserItem(_BrowserType.BT_SDG, 'EU SDG', 'eu-sdg', {
+    ...S_ITEM_MULTI_LINE
+  }, {
+    ...S_ITEM_MULTI_LINE,
+    whiteSpace: 'unset'
+  }),
   [_BrowserType.BT_UN_COMTRADE]: _crBrowserItem(_BrowserType.BT_UN_COMTRADE, 'UN Comtrade', 'uncomtrade'),
   [_BrowserType.BT_FAOSTAT]: _crBrowserItem(_BrowserType.BT_FAOSTAT, 'FAOSTAT', 'faostat'),
   [_BrowserType.BT_WORLD_BANK]: _crBrowserItem(_BrowserType.BT_WORLD_BANK, 'World Bank', 'world-bank'),
