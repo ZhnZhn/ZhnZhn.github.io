@@ -14,7 +14,7 @@ const _r = {
   [_ChartType.CHT_AREA]: _toSpline.default,
   [_ChartType.CHT_SPLINE]: _toSpline.default,
   [_ChartType.CHT_COLUMN]: _toSpline.default,
-  [_ChartType.CHT_AREA_YEARLY]: _toYearly.default.crConfig,
+  [_ChartType.CHT_AREA_YEARLY]: _toYearly.default,
   [_ChartType.CHT_TREE_MAP]: _toTreeMap.default.fCrConfig(),
   [_ChartType.CHT_TREE_MAP_CLUSTER]: _toTreeMap.default.fCrConfig({
     isCluster: true

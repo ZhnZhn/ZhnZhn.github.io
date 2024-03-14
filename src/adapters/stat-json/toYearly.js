@@ -4,7 +4,7 @@ import {
   fAdd,
   toConfig
 } from '../../charts/configBuilderFn';
-import crYearlyConfig from '../toYearsByMonths';
+import crYearlyConfigImpl from '../toYearsByMonths';
 
 import {
   crDsValuesTimes,
@@ -30,28 +30,29 @@ const _toData = (
   return data.reverse();
 };
 
-const toYearly = {
-  crConfig:(json, option) => {
-    const {
-      title='',
-      subtitle
-    } = option
-    , [
-      ds,
-      values,
-      times
-    ] = crDsValuesTimes(json, option)
-    , data = _toData(values, times);
+const crYearlyConfig = (
+  json,
+  option
+) => {
+  const {
+    title='',
+    subtitle
+  } = option
+  , [
+    ds,
+    values,
+    times
+  ] = crDsValuesTimes(json, option)
+  , data = _toData(values, times);
 
-     return pipe(
-       crYearlyConfig(data, option),
-       fAdd('chart', { spacingTop: 25 }),
-       fAddCaption(title, subtitle),
-       fAdd('info', crInfo(ds, option)),
-       fAdd('zhConfig', crZhConfig(option)),
-       toConfig
-     );
-  }
+   return pipe(
+     crYearlyConfigImpl(data, option),
+     fAdd('chart', { spacingTop: 25 }),
+     fAddCaption(title, subtitle),
+     fAdd('info', crInfo(ds, option)),
+     fAdd('zhConfig', crZhConfig(option)),
+     toConfig
+   );
 };
 
-export default toYearly
+export default crYearlyConfig

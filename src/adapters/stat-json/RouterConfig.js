@@ -11,7 +11,7 @@ import {
 } from '../../constants/ChartType';
 
 import crSplineConfig from './toSpline';
-import toY from './toYearly';
+import crYearlyConfig from './toYearly';
 import routerColumnBarSet from './toColumn';
 import toT from './toTreeMap';
 
@@ -23,7 +23,7 @@ const _r = {
   [CHT_SPLINE]: crSplineConfig,
   [CHT_COLUMN]: crSplineConfig,
 
-  [CHT_AREA_YEARLY]: toY.crConfig,
+  [CHT_AREA_YEARLY]: crYearlyConfig,
 
   [CHT_TREE_MAP]: toT.fCrConfig(),
   [CHT_TREE_MAP_CLUSTER]: toT.fCrConfig(
