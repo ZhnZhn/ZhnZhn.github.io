@@ -1,5 +1,12 @@
 import JSONstat from 'jsonstat';
 
+import {
+  CHT_TREE_MAP,
+  CHT_TREE_MAP_CLUSTER,
+  CHT_TREE_MAP_2,
+  CHT_TREE_MAP_2_CLUSTER
+} from '../../constants/ChartType';
+
 import domSanitize from '../../utils/domSanitize';
 import pipe from '../../utils/pipe';
 import {
@@ -128,44 +135,64 @@ const _crData = (
   ) : [];
 };
 
-const toTreeMap = {
-  crConfig: (json, option) => {
-    const  {
-       category,
-       itemSlice,
-       time,
-       dfTSlice,
-       isCluster,
-       items=[]
-    } = option
-    , ds = JSONstat(json).Dataset(0)
-    , categories = ds.Dimension(category)
-    , Tid = crTid(time, ds)
-    , _title = crTitle(option)
-    , _subtitle = `${items[1].caption || ''}: ${Tid}`
-    , values = ds.Data({ Tid, ...itemSlice, ...dfTSlice })
-    , _d1 = _crData(values, categories, Tid, option )
-    , [data, total] = _addPercent(_d1)
+const _crConfig = (
+  json,
+  option
+) => {
+  const  {
+     category,
+     itemSlice,
+     time,
+     dfTSlice,
+     isCluster,
+     items=[]
+  } = option
+  , ds = JSONstat(json).Dataset(0)
+  , categories = ds.Dimension(category)
+  , Tid = crTid(time, ds)
+  , _title = crTitle(option)
+  , _subtitle = `${items[1].caption || ''}: ${Tid}`
+  , values = ds.Data({ Tid, ...itemSlice, ...dfTSlice })
+  , _d1 = _crData(values, categories, Tid, option )
+  , [data, total] = _addPercent(_d1)
 
-    if (isCluster) {
-      addColorsTo({ data, total })
-    }
-
-    return pipe(
-      crTreeMapConfig(data),
-      fAddCaption(_title, _subtitle),
-      fAdd(crChartOption(ds, Tid, option)),
-      toConfig
-    );
-  },
-
-  fCrConfig: (param={}, config={}) => {
-    return (json, option) => toTreeMap.crConfig(json, {
-      ...option,
-      ...param,
-      ..._crCategory(option, config.by, config.depth)
-    });
+  if (isCluster) {
+    addColorsTo({ data, total })
   }
+
+  return pipe(
+    crTreeMapConfig(data),
+    fAddCaption(_title, _subtitle),
+    fAdd(crChartOption(ds, Tid, option)),
+    toConfig
+  );
+}
+
+const _fCrConfig = (
+  param={},
+  config={}
+) => (
+  json,
+  option
+) => _crConfig(json, {
+  ...option,
+  ...param,
+  ..._crCategory(option, config.by, config.depth)
+});
+
+const routerTreeMap = {
+  [CHT_TREE_MAP]: _fCrConfig(),
+  [CHT_TREE_MAP_CLUSTER]: _fCrConfig(
+    { isCluster: true }
+  ),
+  [CHT_TREE_MAP_2]: _fCrConfig(
+    {},
+    { depth: "d2" }
+  ),
+  [CHT_TREE_MAP_2_CLUSTER]: _fCrConfig(
+    { isCluster: true },
+    { depth: "d2" }
+  )
 };
 
-export default toTreeMap
+export default routerTreeMap

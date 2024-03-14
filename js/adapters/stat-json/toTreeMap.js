@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
+var _ChartType = require("../../constants/ChartType");
 var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
@@ -84,50 +85,61 @@ const _crData = (values, categories, Tid, option) => {
   } = option;
   return _isArr(values) ? (0, _compareByFn.sortDescByPnValue)(values.map(_fCrTreeMapPoint(categories, Tid)).filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth))) : [];
 };
-const toTreeMap = {
-  crConfig: (json, option) => {
-    const {
-        category,
-        itemSlice,
-        time,
-        dfTSlice,
-        isCluster,
-        items = []
-      } = option,
-      ds = (0, _jsonstat.default)(json).Dataset(0),
-      categories = ds.Dimension(category),
-      Tid = (0, _fnAdapter.crTid)(time, ds),
-      _title = (0, _fnAdapter.crTitle)(option),
-      _subtitle = (items[1].caption || '') + ": " + Tid,
-      values = ds.Data({
-        Tid,
-        ...itemSlice,
-        ...dfTSlice
-      }),
-      _d1 = _crData(values, categories, Tid, option),
-      [data, total] = _addPercent(_d1);
-    if (isCluster) {
-      (0, _TreeMapFn.addColorsTo)({
-        data,
-        total
-      });
-    }
-    return (0, _pipe.default)((0, _configBuilderFn.crTreeMapConfig)(data), (0, _configBuilderFn.fAddCaption)(_title, _subtitle), (0, _configBuilderFn.fAdd)((0, _fnAdapter.crChartOption)(ds, Tid, option)), _configBuilderFn.toConfig);
-  },
-  fCrConfig: function (param, config) {
-    if (param === void 0) {
-      param = {};
-    }
-    if (config === void 0) {
-      config = {};
-    }
-    return (json, option) => toTreeMap.crConfig(json, {
-      ...option,
-      ...param,
-      ..._crCategory(option, config.by, config.depth)
+const _crConfig = (json, option) => {
+  const {
+      category,
+      itemSlice,
+      time,
+      dfTSlice,
+      isCluster,
+      items = []
+    } = option,
+    ds = (0, _jsonstat.default)(json).Dataset(0),
+    categories = ds.Dimension(category),
+    Tid = (0, _fnAdapter.crTid)(time, ds),
+    _title = (0, _fnAdapter.crTitle)(option),
+    _subtitle = (items[1].caption || '') + ": " + Tid,
+    values = ds.Data({
+      Tid,
+      ...itemSlice,
+      ...dfTSlice
+    }),
+    _d1 = _crData(values, categories, Tid, option),
+    [data, total] = _addPercent(_d1);
+  if (isCluster) {
+    (0, _TreeMapFn.addColorsTo)({
+      data,
+      total
     });
   }
+  return (0, _pipe.default)((0, _configBuilderFn.crTreeMapConfig)(data), (0, _configBuilderFn.fAddCaption)(_title, _subtitle), (0, _configBuilderFn.fAdd)((0, _fnAdapter.crChartOption)(ds, Tid, option)), _configBuilderFn.toConfig);
 };
-var _default = toTreeMap;
-exports.default = _default;
+const _fCrConfig = function (param, config) {
+  if (param === void 0) {
+    param = {};
+  }
+  if (config === void 0) {
+    config = {};
+  }
+  return (json, option) => _crConfig(json, {
+    ...option,
+    ...param,
+    ..._crCategory(option, config.by, config.depth)
+  });
+};
+const routerTreeMap = {
+  [_ChartType.CHT_TREE_MAP]: _fCrConfig(),
+  [_ChartType.CHT_TREE_MAP_CLUSTER]: _fCrConfig({
+    isCluster: true
+  }),
+  [_ChartType.CHT_TREE_MAP_2]: _fCrConfig({}, {
+    depth: "d2"
+  }),
+  [_ChartType.CHT_TREE_MAP_2_CLUSTER]: _fCrConfig({
+    isCluster: true
+  }, {
+    depth: "d2"
+  })
+};
+var _default = exports.default = routerTreeMap;
 //# sourceMappingURL=toTreeMap.js.map

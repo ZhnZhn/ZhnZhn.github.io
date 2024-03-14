@@ -2,39 +2,23 @@ import {
   CHT_AREA,
   CHT_SPLINE,
   CHT_COLUMN,
-  CHT_AREA_YEARLY,
-
-  CHT_TREE_MAP,
-  CHT_TREE_MAP_CLUSTER,
-  CHT_TREE_MAP_2,
-  CHT_TREE_MAP_2_CLUSTER
+  CHT_AREA_YEARLY  
 } from '../../constants/ChartType';
 
 import crSplineConfig from './toSpline';
 import crYearlyConfig from './toYearly';
 import routerColumnBarSet from './toColumn';
-import toT from './toTreeMap';
+import routerTreeMap from './toTreeMap';
 
 const _r = {
   ...routerColumnBarSet,
+  ...routerTreeMap,
 
   DF: crSplineConfig,
   [CHT_AREA]: crSplineConfig,
   [CHT_SPLINE]: crSplineConfig,
   [CHT_COLUMN]: crSplineConfig,
-
-  [CHT_AREA_YEARLY]: crYearlyConfig,
-
-  [CHT_TREE_MAP]: toT.fCrConfig(),
-  [CHT_TREE_MAP_CLUSTER]: toT.fCrConfig(
-    { isCluster: true }
-  ),
-  [CHT_TREE_MAP_2]: toT.fCrConfig(
-    {}, { depth: "d2" }
-  ),
-  [CHT_TREE_MAP_2_CLUSTER]: toT.fCrConfig(
-    { isCluster: true }, { depth: "d2" }
-  )
+  [CHT_AREA_YEARLY]: crYearlyConfig
 };
 
 const RouterConfig = {
