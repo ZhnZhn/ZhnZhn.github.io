@@ -7,7 +7,7 @@ var _RouterNativeLink = _interopRequireDefault(require("../native-links/RouterNa
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_DESCR = 'info__descr',
+const CL_DESCR = "info__descr " + _styleFn.CL_BLACK,
   S_ROOT = {
     position: 'relative',
     padding: '34px 20px 0 8px'
@@ -31,10 +31,9 @@ const CL_DESCR = 'info__descr',
     textTransform: 'capitalize'
   },
   S_DESCR_INFO = {
-    lineHeight: 1.7
+    lineHeight: 1.6
   },
   S_DESCR_TEXT = {
-    color: 'grey',
     fontWeight: 'bold'
   };
 const InfoPartWithStyle = _ref => {

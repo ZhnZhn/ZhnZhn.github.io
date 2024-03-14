@@ -7,7 +7,7 @@ import {
   S_NONE
 } from '../styleFn';
 
-const CL_DESCR = 'info__descr'
+const CL_DESCR = `info__descr ${CL_BLACK}`
 , S_ROOT = {
   position: 'relative',
   padding: '34px 20px 0 8px'
@@ -26,9 +26,10 @@ const CL_DESCR = 'info__descr'
   fontWeight: 'bold',
   textTransform: 'capitalize'
 }
-, S_DESCR_INFO = { lineHeight: 1.7 }
+, S_DESCR_INFO = {
+  lineHeight: 1.6
+}
 , S_DESCR_TEXT = {
-  color: 'grey',
   fontWeight: 'bold'
 };
 
