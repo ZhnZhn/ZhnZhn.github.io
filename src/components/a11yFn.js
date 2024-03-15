@@ -3,7 +3,7 @@ export const crPresentationRole = (
   isShow
 ) => ({
   role: "presentation",
-  "aria-hidden": !isShow
+  hidden: !isShow
 })
 
 export const crDialogRole = (
@@ -12,7 +12,7 @@ export const crDialogRole = (
 ) => ({
   role: "dialog",
   tabIndex: "-1",
-  "aria-hidden": !isShow,
+  hidden: !isShow,  
   "aria-label": caption
 })
 
@@ -21,4 +21,4 @@ export const crAriaLabelProp = (
   dfAriaLabel
 ) => ({
   ariaLabel: ariaLabel || dfAriaLabel
-})  
+})
