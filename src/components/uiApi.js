@@ -16,6 +16,7 @@ export {
   createContext,
   useContext,
   useRef,
+  useId,
   useState,
   useReducer,
   useCallback,
