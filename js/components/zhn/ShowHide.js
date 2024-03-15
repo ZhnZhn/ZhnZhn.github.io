@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const ShowHide = _ref => {
@@ -18,7 +19,7 @@ const ShowHide = _ref => {
 
   /*eslint-disable jsx-a11y/no-static-element-interactions*/
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    "aria-expanded": isShow,
+    ...(0, _a11yFn.crPresentationRole)(isShow),
     className: _cn,
     style: {
       ...style,

@@ -1,3 +1,4 @@
+import { crPresentationRole } from '../a11yFn';
 import { crShowHide } from '../styleFn';
 
 const ShowHide = ({
@@ -22,7 +23,7 @@ const ShowHide = ({
     /*eslint-disable jsx-a11y/no-static-element-interactions*/
     return (
       <div
-        aria-expanded={isShow}
+        {...crPresentationRole(isShow)}
         className={_cn}
         style={{...style, ..._style}}
         onKeyDown={onKeyDown}
