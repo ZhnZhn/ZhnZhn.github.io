@@ -5,6 +5,7 @@ exports.default = void 0;
 var _jsxRuntime = require("react/jsx-runtime");
 const Button = _ref => {
   let {
+    ariaLabel,
     tabIndex,
     className,
     style,
@@ -15,6 +16,7 @@ const Button = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     type: "button",
+    "aria-label": ariaLabel,
     tabIndex: tabIndex,
     className: className,
     style: style,
@@ -24,6 +26,5 @@ const Button = _ref => {
     children: children
   });
 };
-var _default = Button;
-exports.default = _default;
+var _default = exports.default = Button;
 //# sourceMappingURL=Button.js.map

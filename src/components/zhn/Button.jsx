@@ -1,5 +1,6 @@
 
 const Button = ({
+  ariaLabel,
   tabIndex,
   className,
   style,
@@ -10,6 +11,7 @@ const Button = ({
 }) => (
   <button
     type="button"
+    aria-label={ariaLabel}
     tabIndex={tabIndex}
     className={className}
     style={style}
