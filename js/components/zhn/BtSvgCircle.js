@@ -4,10 +4,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.SvgPlus = exports.SvgMinus = void 0;
 var _a11yFn = require("../a11yFn");
+var _styleFn = require("../styleFn");
 var _Button = _interopRequireDefault(require("./Button"));
 var _Svg = _interopRequireDefault(require("./svg/Svg"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_BT_SVG_CIRCLE = "bt-svg-circle",
+const CL_BT_SVG_CIRCLE = (0, _styleFn.crBtSvgCn)("circle"),
   _fBtCircleSvg = (pathElement, dfAriaLabel) => props => /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
     ...(0, _a11yFn.crAriaLabelProp)(props, dfAriaLabel),
     className: CL_BT_SVG_CIRCLE,

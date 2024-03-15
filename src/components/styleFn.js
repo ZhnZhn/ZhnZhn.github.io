@@ -126,3 +126,5 @@ export const crBtCircleHfCn = _fCrCn("bt-circle-hf")
 export const crBtCircleCn = _fCrCnNotSelected("bt-circle")
 
 export const crBoldCn = _fCrCn("bold")
+
+export const crBtSvgCn = token => `bt-svg-${token}`

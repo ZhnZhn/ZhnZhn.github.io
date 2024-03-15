@@ -1,9 +1,10 @@
 import { crAriaLabelProp } from '../a11yFn';
+import { crBtSvgCn } from '../styleFn';
 
 import Button from './Button';
 import Svg from './svg/Svg';
 
-const CL_BT_SVG_CIRCLE = "bt-svg-circle"
+const CL_BT_SVG_CIRCLE = crBtSvgCn("circle")
 , _fBtCircleSvg = (
   pathElement,
   dfAriaLabel
