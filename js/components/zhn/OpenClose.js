@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _Color = require("../styles/Color");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
@@ -45,7 +46,8 @@ const OpenClose = _ref => {
     dndHandlers,
     children
   } = _ref;
-  const [isOpen, toggleIsOpen] = (0, _useToggle.default)(!isClose),
+  const _childrenWrapperId = (0, _uiApi.useId)(),
+    [isOpen, toggleIsOpen] = (0, _useToggle.default)(!isClose),
     _hKeyDown = (0, _fUseKey.useKeyEnter)(toggleIsOpen),
     [_pathV, _fillV, _childCl, _childStyle] = _crConf(isOpen, openColor);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -59,6 +61,8 @@ const OpenClose = _ref => {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         ...dndHandlers,
         ref: refItem,
+        "aria-expanded": isOpen,
+        "aria-controls": _childrenWrapperId,
         tabIndex: "0",
         role: role,
         className: className || _styleFn.CL_OPEN_CLOSE,
@@ -83,7 +87,7 @@ const OpenClose = _ref => {
         })]
       }), CompAfter]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      "aria-expanded": isOpen,
+      id: _childrenWrapperId,
       className: _childCl,
       style: {
         ...childStyle,

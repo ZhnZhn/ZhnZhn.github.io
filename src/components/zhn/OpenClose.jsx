@@ -1,3 +1,5 @@
+import { useId } from '../uiApi';
+
 import {
   CL_SHOW_POPUP,
   CL_NOT_SELECTED,
@@ -64,7 +66,8 @@ const OpenClose = ({
   dndHandlers,
   children
 }) => {
-  const [
+  const _childrenWrapperId = useId()
+  , [
     isOpen,
     toggleIsOpen
   ] = useToggle(!isClose)
@@ -81,6 +84,8 @@ const OpenClose = ({
         <div
           {...dndHandlers}
           ref={refItem}
+          aria-expanded={isOpen}
+          aria-controls={_childrenWrapperId}
           tabIndex="0"
           role={role}
           className={className || CL_OPEN_CLOSE}
@@ -103,7 +108,7 @@ const OpenClose = ({
        {CompAfter}
     </div>
     <div
-      aria-expanded={isOpen}
+      id={_childrenWrapperId}
       className={_childCl}
       style={{...childStyle, ..._childStyle}}
     >
