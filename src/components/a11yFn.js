@@ -15,3 +15,10 @@ export const crDialogRole = (
   "aria-hidden": !isShow,
   "aria-label": caption
 })
+
+export const crAriaLabelProp = (
+  { ariaLabel },
+  dfAriaLabel
+) => ({
+  ariaLabel: ariaLabel || dfAriaLabel
+})  

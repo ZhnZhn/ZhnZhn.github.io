@@ -1,20 +1,18 @@
+import { crAriaLabelProp } from '../a11yFn';
+
 import Button from './Button';
 import SvgX from './svg/SvgX';
 
 const _fBtSvgX = (
   className,
   dfAriaLabel
-) => ({
-  ariaLabel,
-  style,
-  onClick
-}) => (
+) => (props) => (
   <Button
-    ariaLabel={ariaLabel || dfAriaLabel}
+    {...crAriaLabelProp(props, dfAriaLabel)}
     tabIndex="-1"
     className={className}
-    style={style}
-    onClick={onClick}
+    style={props.style}
+    onClick={props.onClick}
   >
     <SvgX />
   </Button>

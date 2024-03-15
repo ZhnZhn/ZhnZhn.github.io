@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crPresentationRole = exports.crDialogRole = void 0;
+exports.crPresentationRole = exports.crDialogRole = exports.crAriaLabelProp = void 0;
 const crPresentationRole = isShow => ({
   role: "presentation",
   "aria-hidden": !isShow
@@ -14,4 +14,13 @@ const crDialogRole = (isShow, caption) => ({
   "aria-label": caption
 });
 exports.crDialogRole = crDialogRole;
+const crAriaLabelProp = (_ref, dfAriaLabel) => {
+  let {
+    ariaLabel
+  } = _ref;
+  return {
+    ariaLabel: ariaLabel || dfAriaLabel
+  };
+};
+exports.crAriaLabelProp = crAriaLabelProp;
 //# sourceMappingURL=a11yFn.js.map
