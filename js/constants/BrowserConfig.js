@@ -7,8 +7,8 @@ var _ModalDialogType = require("./ModalDialogType");
 const S_ITEM_MULTI_LINE = {
   maxWidth: 275,
   lineHeight: 1.3,
-  paddingTop: 4,
-  paddingBottom: 4
+  paddingTop: 6,
+  paddingBottom: 6
 };
 const _crSourceMenuUrl = token => "./data/" + token + "/source-menu.json",
   _crBrowserItem = (browserType, caption, token, itemStyle, topicStyle) => ({
