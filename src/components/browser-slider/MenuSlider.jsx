@@ -58,14 +58,6 @@ const _crPagesStyle = (
   };
 };
 
-const INITIAL_STATE = {
-  pageCurrent: 0,
-  pages: [{
-    id: "",
-    title: "Menu"
-  }]
-};
-
 const MenuSlider = ({
   dfProps,
   getProxy
@@ -77,7 +69,13 @@ const MenuSlider = ({
        pages
     },
     setState
-  ] = useState(INITIAL_STATE)
+  ] = useState({
+    pageCurrent: 0,
+    pages: [{
+      id: "",
+      title: "Menu"
+    }]
+  })
   , _hPrevPage = useThrottleCallback(pageNumber => {
        setState(prevState => {
          const { pageCurrent } = prevState;

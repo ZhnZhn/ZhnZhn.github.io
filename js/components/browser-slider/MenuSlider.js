@@ -35,15 +35,8 @@ const _crPagesStyle = (refMenu, refDirection) => {
     dX = _direction !== 0 && _menuNode ? ((0, _uiApi.setRefValue)(refDirection, 0), _getTranslateX(_menuNode) - 1 * _direction * PAGE_WIDTH) : _direction === 0 && _menuNode ? _getTranslateX(_menuNode) : 0;
   return {
     ...S_PAGES,
-    transform: `translateX(${dX}px)`
+    transform: "translateX(" + dX + "px)"
   };
-};
-const INITIAL_STATE = {
-  pageCurrent: 0,
-  pages: [{
-    id: "",
-    title: "Menu"
-  }]
 };
 const MenuSlider = _ref => {
   let {
@@ -55,7 +48,13 @@ const MenuSlider = _ref => {
     [{
       pageCurrent,
       pages
-    }, setState] = (0, _uiApi.useState)(INITIAL_STATE),
+    }, setState] = (0, _uiApi.useState)({
+      pageCurrent: 0,
+      pages: [{
+        id: "",
+        title: "Menu"
+      }]
+    }),
     _hPrevPage = (0, _useThrottleCallback.default)(pageNumber => {
       setState(prevState => {
         const {
