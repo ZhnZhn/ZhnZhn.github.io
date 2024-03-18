@@ -6,12 +6,14 @@ var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const DivEllipsis = _ref => {
   let {
+    id,
     className,
     style,
     text,
     title
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    id: id,
     className: (0, _styleFn.crCn)(_styleFn.CL_TEXT_ELLIPSIS, className),
     style: style,
     title: title,
