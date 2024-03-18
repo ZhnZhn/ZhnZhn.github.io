@@ -12,7 +12,6 @@ import ItemStack from './ItemStack'
 import Load from './Load'
 import OpenClose from './OpenClose'
 import ShowHide from './ShowHide'
-import SvgCheckBox from './SvgCheckBox'
 import SvgMore from './SvgMore'
 import MsgRenderErr from './MsgRenderErr'
 import HighchartWrapper from './HighchartWrapper'
@@ -32,8 +31,7 @@ const A = {
   ItemStack,
   Load,
   OpenClose,
-  ShowHide,
-  SvgCheckBox,
+  ShowHide,  
   SvgMore,
   MsgRenderErr,
   HighchartWrapper,

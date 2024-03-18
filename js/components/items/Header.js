@@ -3,23 +3,21 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useFocus = require("../hooks/useFocus");
 var _Color = require("../styles/Color");
-var _Comp = _interopRequireDefault(require("../Comp"));
 var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _BtSvgX = require("../zhn/BtSvgX");
+var _SvgCheckBox = _interopRequireDefault(require("../zhn/SvgCheckBox"));
+var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
+var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
 var _ValueMovingBadge = _interopRequireDefault(require("./ValueMovingBadge"));
 var _ValueDate = _interopRequireDefault(require("./ValueDate"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const {
-  SvgMore,
-  ModalSlider,
-  SvgCheckBox
-} = _Comp.default;
 const CL_ITEM_HEADER = (0, _styleFn.crElementCn)("item-header"),
   CL_CHARTS_MENU_MORE = (0, _styleFn.crElementBorderCn)("popup-menu charts__menu-more"),
   CL_CAPTION = "not-selected text-clip bt-left bt",
@@ -32,9 +30,6 @@ const CL_ITEM_HEADER = (0, _styleFn.crElementCn)("item-header"),
   S_SVG_MORE = {
     stroke: COLOR_SVG_MORE,
     fill: COLOR_SVG_MORE
-  },
-  S_MODAL_SLIDER = {
-    display: 'inline-block'
   },
   S_CHECK_BOX = {
     position: 'relative',
@@ -61,14 +56,14 @@ const MenuMore = _ref => {
   } = _ref;
   const [refBtSvg, toggleFocus] = (0, _useFocus.useFnFocus)(onToggle);
   return moreModel ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SvgMore, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
       ref: refBtSvg,
       style: S_BT_MORE,
       svgStyle: S_SVG_MORE,
       onClick: onToggle
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalSlider, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.default, {
       isShow: isMore,
-      rootStyle: S_MODAL_SLIDER,
+      rootStyle: _styleFn.S_INLINE,
       className: CL_CHARTS_MENU_MORE,
       model: moreModel,
       onClose: toggleFocus
@@ -91,7 +86,8 @@ const Header = _ref2 => {
     moreModel,
     onClose
   } = _ref2;
-  const [isMore, _toggleMore] = (0, _useToggle.default)(false),
+  const _captionId = (0, _uiApi.useId)(),
+    [isMore, _toggleMore] = (0, _useToggle.default)(false),
     _captionStyle = (0, _styleFn.crStyle3)(S_CAPTION, !isOpen && S_CAPTION_CLOSE, !valueMoving && S_CAPTION_WIDTH),
     _btTitle = itemCaption.length > 15 ? itemCaption : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -100,12 +96,14 @@ const Header = _ref2 => {
       isMore: isMore,
       moreModel: moreModel,
       onToggle: _toggleMore
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgCheckBox, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
       style: S_CHECK_BOX,
       color: _Color.GREEN_COLOR,
+      labelId: _captionId,
       onCheck: onCheck,
       onUnCheck: onUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+      id: _captionId,
       className: CL_CAPTION,
       style: _captionStyle,
       title: _btTitle,

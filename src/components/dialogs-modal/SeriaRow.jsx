@@ -1,5 +1,6 @@
 import {
   useRef,
+  useId,
   useState,
   useEffect,
   useImperativeHandle,
@@ -67,6 +68,7 @@ const SeriaRow = (props) => {
     name=''
   } = seria
   , ref = useRef()
+  , _captionId = useId()
   , [
     setYAxis,
     getYAxis
@@ -120,10 +122,12 @@ const SeriaRow = (props) => {
       <SvgCheckBox
         className={CL_CHB_BLACK}
         style={S_CHECK_BOX}
+        labelId={_captionId}
         onCheck={_hCheck}
         onUnCheck={_hUnCheck}
       />
       <DivEllipsis
+        id={_captionId}
         className={CL_SERIE_TITLE}
         style={S_TITLE_STYLE}
         text={name}

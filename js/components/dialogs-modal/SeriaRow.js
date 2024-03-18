@@ -55,6 +55,7 @@ const SeriaRow = props => {
       name = ''
     } = seria,
     ref = (0, _uiApi.useRef)(),
+    _captionId = (0, _uiApi.useId)(),
     [setYAxis, getYAxis] = (0, _useProperty.default)(),
     [_refIsChecked, _hCheck, _hUnCheck] = (0, _useRefBool.default)(false),
     [_color, _setColor] = (0, _uiApi.useState)(() => color || DF_COLOR);
@@ -98,9 +99,11 @@ const SeriaRow = props => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
       className: _styleFn.CL_CHB_BLACK,
       style: S_CHECK_BOX,
+      labelId: _captionId,
       onCheck: _hCheck,
       onUnCheck: _hUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
+      id: _captionId,
       className: CL_SERIE_TITLE,
       style: S_TITLE_STYLE,
       text: name

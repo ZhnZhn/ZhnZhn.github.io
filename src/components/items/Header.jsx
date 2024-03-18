@@ -1,5 +1,7 @@
 //import PropTypes from "prop-types";
+import { useId } from '../uiApi';
 import {
+  S_INLINE,
   crStyle3,
   crElementCn,
   crElementBorderCn
@@ -10,17 +12,14 @@ import { useFnFocus } from '../hooks/useFocus';
 
 import { GREEN_COLOR } from '../styles/Color';
 
-import Comp from '../Comp';
 import Button from '../zhn/Button';
 import { BtSvgClose } from '../zhn/BtSvgX';
+import SvgCheckBox from '../zhn/SvgCheckBox';
+import SvgMore from '../zhn/SvgMore';
+import ModalSlider from '../zhn-modal-slider/ModalSlider';
+
 import ValueMovingBadge from './ValueMovingBadge';
 import ValueDate from './ValueDate';
-
-const {
-  SvgMore,
-  ModalSlider,
-  SvgCheckBox
-} = Comp;
 
 const CL_ITEM_HEADER = crElementCn("item-header")
 , CL_CHARTS_MENU_MORE = crElementBorderCn("popup-menu charts__menu-more")
@@ -35,9 +34,6 @@ const CL_ITEM_HEADER = crElementCn("item-header")
 S_SVG_MORE = {
   stroke: COLOR_SVG_MORE,
   fill: COLOR_SVG_MORE
-}
-, S_MODAL_SLIDER = {
-  display: 'inline-block'
 }
 , S_CHECK_BOX = {
   position: 'relative',
@@ -76,7 +72,7 @@ const MenuMore = ({
       />
       <ModalSlider
         isShow={isMore}
-        rootStyle={S_MODAL_SLIDER}
+        rootStyle={S_INLINE}
         className={CL_CHARTS_MENU_MORE}
         model={moreModel}
         onClose={toggleFocus}
@@ -102,7 +98,8 @@ const Header = ({
   moreModel,
   onClose
 }) => {
-  const [
+  const _captionId = useId()
+  , [
     isMore,
     _toggleMore
   ] = useToggle(false)
@@ -125,10 +122,12 @@ const Header = ({
       <SvgCheckBox
          style={S_CHECK_BOX}
          color={GREEN_COLOR}
+         labelId={_captionId}
          onCheck={onCheck}
          onUnCheck={onUnCheck}
       />
       <Button
+         id={_captionId}
          className={CL_CAPTION}
          style={_captionStyle}
          title={_btTitle}

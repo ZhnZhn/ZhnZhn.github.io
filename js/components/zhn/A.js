@@ -17,7 +17,6 @@ var _ItemStack = _interopRequireDefault(require("./ItemStack"));
 var _Load = _interopRequireDefault(require("./Load"));
 var _OpenClose = _interopRequireDefault(require("./OpenClose"));
 var _ShowHide = _interopRequireDefault(require("./ShowHide"));
-var _SvgCheckBox = _interopRequireDefault(require("./SvgCheckBox"));
 var _SvgMore = _interopRequireDefault(require("./SvgMore"));
 var _MsgRenderErr = _interopRequireDefault(require("./MsgRenderErr"));
 var _HighchartWrapper = _interopRequireDefault(require("./HighchartWrapper"));
@@ -37,7 +36,6 @@ const A = {
   Load: _Load.default,
   OpenClose: _OpenClose.default,
   ShowHide: _ShowHide.default,
-  SvgCheckBox: _SvgCheckBox.default,
   SvgMore: _SvgMore.default,
   MsgRenderErr: _MsgRenderErr.default,
   HighchartWrapper: _HighchartWrapper.default,

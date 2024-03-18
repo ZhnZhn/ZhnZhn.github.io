@@ -1,5 +1,6 @@
 //import PropTypes from "prop-types";
-import { crElementCn } from '../styleFn'
+import { isFn, useId } from '../uiApi';
+import { crElementCn } from '../styleFn';
 
 import { GREEN_COLOR } from '../styles/Color';
 
@@ -22,8 +23,6 @@ S_CHECK_BOX = {
   margin: '0 10px 0 6px'
 };
 
-const _isFn = fn => typeof fn === 'function';
-
 const BrowserCaption = ({
   style,
   captionStyle,
@@ -34,39 +33,44 @@ const BrowserCaption = ({
   onCheck,
   onUnCheck,
   onClose
-}) => (
-  <div
-    className={CL_BR_CAPTION}
-    style={style}
-  >
-     {
-       _isFn(onMore) &&
-       <SvgMore
-          style={svgMoreStyle}
-          onClick={onMore}
-       />
-     }
-     {
-        _isFn(onCheck) && _isFn(onUnCheck) &&
-        <SvgCheckBox
-           style={S_CHECK_BOX}
-           color={GREEN_COLOR}
-           onCheck={onCheck}
-           onUnCheck={onUnCheck}
-        />
-     }
-     <span
-        className={CL_CAPTION}
-        style={{...S_CAPTION, ...captionStyle}}
-     >
-       {caption}
-    </span>
-    {children}
-    <BtSvgClose
-      onClick={onClose}
-    />
-  </div>
-);
+}) => {
+  const captionId = useId();
+  return (
+    <div
+      className={CL_BR_CAPTION}
+      style={style}
+    >
+       {
+         isFn(onMore) &&
+         <SvgMore
+            style={svgMoreStyle}
+            onClick={onMore}
+         />
+       }
+       {
+          isFn(onCheck) && isFn(onUnCheck) &&
+          <SvgCheckBox
+             style={S_CHECK_BOX}
+             color={GREEN_COLOR}
+             labelId={captionId}
+             onCheck={onCheck}
+             onUnCheck={onUnCheck}
+          />
+       }
+       <span
+          id={captionId}
+          className={CL_CAPTION}
+          style={{...S_CAPTION, ...captionStyle}}
+       >
+         {caption}
+      </span>
+      {children}
+      <BtSvgClose
+        onClick={onClose}
+      />
+    </div>
+  );
+}
 
 /*
 BrowserCaption.propTypes = {

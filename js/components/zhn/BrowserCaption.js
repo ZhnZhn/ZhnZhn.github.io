@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _Color = require("../styles/Color");
 var _SvgMore = _interopRequireDefault(require("./SvgMore"));
@@ -12,8 +13,8 @@ var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
 const CL_TEXT_CLIP = 'text-clip',
-  CL_BR_CAPTION = (0, _styleFn.crElementCn)(`br-caption ${CL_TEXT_CLIP} gap-right`),
-  CL_CAPTION = `not-selected ${CL_TEXT_CLIP}`,
+  CL_BR_CAPTION = (0, _styleFn.crElementCn)("br-caption " + CL_TEXT_CLIP + " gap-right"),
+  CL_CAPTION = "not-selected " + CL_TEXT_CLIP,
   S_CAPTION = {
     paddingRight: 8,
     fontSize: '18px',
@@ -24,7 +25,6 @@ const CL_TEXT_CLIP = 'text-clip',
     top: -3,
     margin: '0 10px 0 6px'
   };
-const _isFn = fn => typeof fn === 'function';
 const BrowserCaption = _ref => {
   let {
     style,
@@ -37,18 +37,21 @@ const BrowserCaption = _ref => {
     onUnCheck,
     onClose
   } = _ref;
+  const captionId = (0, _uiApi.useId)();
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_BR_CAPTION,
     style: style,
-    children: [_isFn(onMore) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
+    children: [(0, _uiApi.isFn)(onMore) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
       style: svgMoreStyle,
       onClick: onMore
-    }), _isFn(onCheck) && _isFn(onUnCheck) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
+    }), (0, _uiApi.isFn)(onCheck) && (0, _uiApi.isFn)(onUnCheck) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {
       style: S_CHECK_BOX,
       color: _Color.GREEN_COLOR,
+      labelId: captionId,
       onCheck: onCheck,
       onUnCheck: onUnCheck
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      id: captionId,
       className: CL_CAPTION,
       style: {
         ...S_CAPTION,
