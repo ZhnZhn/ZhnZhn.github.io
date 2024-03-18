@@ -1,23 +1,15 @@
 
 const Button = ({
   ariaLabel,
-  tabIndex,
-  className,
-  style,
-  title,
   dataLoader,
-  onClick,
-  children
+  children,
+  ...restProps
 }) => (
   <button
-    type="button"
-    aria-label={ariaLabel}
-    tabIndex={tabIndex}
-    className={className}
-    style={style}
-    title={title}
+    {...restProps}
     data-loader={dataLoader}
-    onClick={onClick}
+    aria-label={ariaLabel}
+    type="button"
   >
     {children}
   </button>

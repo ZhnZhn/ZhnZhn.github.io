@@ -6,23 +6,15 @@ var _jsxRuntime = require("react/jsx-runtime");
 const Button = _ref => {
   let {
     ariaLabel,
-    tabIndex,
-    className,
-    style,
-    title,
     dataLoader,
-    onClick,
-    children
+    children,
+    ...restProps
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-    type: "button",
-    "aria-label": ariaLabel,
-    tabIndex: tabIndex,
-    className: className,
-    style: style,
-    title: title,
+    ...restProps,
     "data-loader": dataLoader,
-    onClick: onClick,
+    "aria-label": ariaLabel,
+    type: "button",
     children: children
   });
 };
