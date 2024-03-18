@@ -1,4 +1,4 @@
-import { useCallback } from '../../uiApi';
+import { useId, useCallback } from '../../uiApi';
 import { crCn, crStyle2 } from '../../styleFn';
 
 import Button from '../../zhn/Button';
@@ -21,7 +21,8 @@ const RowCheckBoxView = ({
   hCheck,
   hUnCheck
 }) => {
-  const _hToggle = useCallback(() => {
+  const _captionId = useId()
+  , _hToggle = useCallback(() => {
      if (value) {
        hUnCheck()
      } else {
@@ -32,7 +33,8 @@ const RowCheckBoxView = ({
   , _captionStyle = crStyle2(
      captionStyle,
      !_btCn && value && { color }
-  );
+  )
+  , _isCaption = !!caption ;
 
   return (
     <div style={{...S_ROOT, ...style}}>
@@ -40,12 +42,14 @@ const RowCheckBoxView = ({
         value={value}
         className={chbCn}
         color={color}
+        labelId={_isCaption ? _captionId : void 0}
         onCheck={hCheck}
         onUnCheck={hUnCheck}
       />
       {
-        caption && (
+        _isCaption && (
           <Button
+            id={_captionId}
             tabIndex="-1"
             className={crCn(CL_BT_CHB, _btCn)}
             style={_captionStyle}

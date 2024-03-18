@@ -25,7 +25,8 @@ const RowCheckBoxView = _ref => {
     hCheck,
     hUnCheck
   } = _ref;
-  const _hToggle = (0, _uiApi.useCallback)(() => {
+  const _captionId = (0, _uiApi.useId)(),
+    _hToggle = (0, _uiApi.useCallback)(() => {
       if (value) {
         hUnCheck();
       } else {
@@ -35,7 +36,8 @@ const RowCheckBoxView = _ref => {
     _btCn = value ? btCn : void 0,
     _captionStyle = (0, _styleFn.crStyle2)(captionStyle, !_btCn && value && {
       color
-    });
+    }),
+    _isCaption = !!caption;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       ...S_ROOT,
@@ -45,9 +47,11 @@ const RowCheckBoxView = _ref => {
       value: value,
       className: chbCn,
       color: color,
+      labelId: _isCaption ? _captionId : void 0,
       onCheck: hCheck,
       onUnCheck: hUnCheck
-    }), caption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+    }), _isCaption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+      id: _captionId,
       tabIndex: "-1",
       className: (0, _styleFn.crCn)(CL_BT_CHB, _btCn),
       style: _captionStyle,
