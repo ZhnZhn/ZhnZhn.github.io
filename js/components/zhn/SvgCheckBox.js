@@ -32,18 +32,29 @@ const SvgChecked = _ref => {
 };
 const _isBool = bool => typeof bool === 'boolean';
 const FN_NOOP = () => {};
-const SvgCheckBox = _ref2 => {
+const _crAriaLabelledByProp = _ref2 => {
   let {
-    initialValue,
-    value,
-    className,
-    style,
-    color,
-    cnChecked = CL_CHB_CHECKED,
-    onCheck = FN_NOOP,
-    onUnCheck = FN_NOOP
+    labelId,
+    ariaLabel
   } = _ref2;
-  const [valueState, setValueState] = (0, _uiApi.useState)(() => _isBool(value) ? void 0 : !!initialValue),
+  return labelId ? {
+    "aria-labelledby": labelId
+  } : {
+    "aria-label": ariaLabel || "Option"
+  };
+};
+const SvgCheckBox = props => {
+  const {
+      initialValue,
+      value,
+      className,
+      style,
+      color,
+      cnChecked = CL_CHB_CHECKED,
+      onCheck = FN_NOOP,
+      onUnCheck = FN_NOOP
+    } = props,
+    [valueState, setValueState] = (0, _uiApi.useState)(() => _isBool(value) ? void 0 : !!initialValue),
     _isValueState = (0, _useRefInit.default)(() => _isBool(valueState)),
     _value = _isValueState ? valueState : value,
     _comp = (0, _uiApi.useMemo)(() => ({
@@ -64,11 +75,10 @@ const SvgCheckBox = _ref2 => {
     _className = _value ? className : void 0,
     [_restStroke, _restFill] = _className ? [] : _value ? [color || C_GREY, color || _Color.TRANSPARENT_COLOR] : [C_GREY, _Color.TRANSPARENT_COLOR];
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    ..._crAriaLabelledByProp(props),
     role: "checkbox",
     tabIndex: "0",
-    "aria-checked": _value
-    //aria-labelledby
-    ,
+    "aria-checked": _value,
     className: (0, _styleFn.crCn)(CL_CHB, _className),
     style: style,
     onClick: _hToggle,
@@ -98,6 +108,8 @@ SvgCheckBox.propTypes = {
   value: PropTypes.bool,
   style: PropTypes.object,
   color: PropTypes.string,
+  labelId: PropTypes.string,
+  ariaLabel: PropTypes.string,
   cnChecked: PropTypes.string,
   onCheck: PropTypes.func,
   onUnCheck: PropTypes.func

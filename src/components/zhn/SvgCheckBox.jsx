@@ -33,24 +33,35 @@ const SvgChecked = ({
 
 const _isBool = bool => typeof bool === 'boolean';
 const FN_NOOP = () => {};
+const _crAriaLabelledByProp = ({
+  labelId,
+  ariaLabel
+}) => labelId
+  ? { "aria-labelledby": labelId }
+  : { "aria-label": ariaLabel || "Option" };
 
-const SvgCheckBox = ({
-  initialValue,
-  value,
-  className,
-  style,
-  color,
-  cnChecked=CL_CHB_CHECKED,
-  onCheck=FN_NOOP,
-  onUnCheck=FN_NOOP
-}) => {
-  const [
+const SvgCheckBox = (props) => {
+  const {
+    initialValue,
+    value,
+    className,
+    style,
+    color,
+    cnChecked=CL_CHB_CHECKED,
+    onCheck=FN_NOOP,
+    onUnCheck=FN_NOOP
+  } = props
+  , [
     valueState,
     setValueState
   ] = useState(
-    () => _isBool(value) ? void 0: !!initialValue
+    () => _isBool(value)
+      ? void 0:
+      !!initialValue
   )
-  , _isValueState = useRefInit(() => _isBool(valueState))
+  , _isValueState = useRefInit(
+      () => _isBool(valueState)
+    )
   , _value = _isValueState
      ? valueState
      : value
@@ -85,10 +96,10 @@ const SvgCheckBox = ({
 
   return (
     <div
+       {..._crAriaLabelledByProp(props)}
        role="checkbox"
        tabIndex="0"
        aria-checked={_value}
-       //aria-labelledby
        className={crCn(CL_CHB, _className)}
        style={style}
        onClick={_hToggle}
@@ -120,6 +131,8 @@ SvgCheckBox.propTypes = {
   value: PropTypes.bool,
   style: PropTypes.object,
   color: PropTypes.string,
+  labelId: PropTypes.string,
+  ariaLabel: PropTypes.string,
   cnChecked: PropTypes.string,
   onCheck: PropTypes.func,
   onUnCheck: PropTypes.func
