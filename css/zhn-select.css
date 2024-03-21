@@ -92,9 +92,6 @@
   border-bottom: solid 2px transparent;
   cursor: pointer;
 }
-.zhn-select__row:nth-child(odd) {
-  background-color: #c3c3ac;
-}
 
 .zhn-select__row:hover {
   border-bottom: solid 2px #1b75bb;
