@@ -4,19 +4,27 @@ import crRowProps from './crRowProps';
 
 import crRowLabelStyle from './crRowLabelStyle';
 import { RowFlex } from './RowFlex';
+import useLabelId from './useLabelId'
 
 const RowInputSelect = (props) => {
-  const [
+  const labelId = useLabelId(props)
+  , [
     selectProps,
     caption
   ] = crRowProps(props);
 
   return (
     <RowFlex>
-      <SpanInputLabel style={crRowLabelStyle(props)}>
+      <SpanInputLabel
+         id={labelId}
+         style={crRowLabelStyle(props)}
+      >
          {caption}
       </SpanInputLabel>
-      <InputSelect {...selectProps} />
+      <InputSelect
+         {...selectProps}
+         labelId={labelId}
+      />
     </RowFlex>
   );
 };

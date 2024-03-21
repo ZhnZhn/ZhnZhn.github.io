@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/rows/useLabelId.js"
+ ],
+ "file": "../../../../src/components/dialogs/rows/useLabelId.js",
+ "names": [
+  "_uiApi",
+  "require",
+  "useLabelId",
+  "_ref",
+  "isShowLabels",
+  "id",
+  "useId",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAEA,MAAMC,UAAU,GAAGC,IAAA,IAEb;EAAA,IAFc;IAClBC;EACF,CAAC,GAAAD,IAAA;EACC,MAAME,EAAE,GAAG,IAAAC,YAAK,EAAC,CAAC;EAClB,OAAOF,YAAY,GACfC,EAAE,GACF,KAAK,CAAC;AACZ,CAAC;AAAC,IAAAE,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaP,UAAU"
+}
