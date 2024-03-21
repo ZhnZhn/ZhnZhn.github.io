@@ -7,10 +7,12 @@ import {
 const _fSpanToken = (
   className
 ) => ({
+  id,
   style,
   children
 }) => (
   <span
+    id={id}
     className={className}
     style={style}
   >{children}</span>

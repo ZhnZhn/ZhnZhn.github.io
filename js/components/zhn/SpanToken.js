@@ -6,10 +6,12 @@ var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const _fSpanToken = className => _ref => {
   let {
+    id,
     style,
     children
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    id: id,
     className: className,
     style: style,
     children: children
