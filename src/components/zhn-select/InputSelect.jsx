@@ -39,7 +39,6 @@ import ItemOptionDf from './ItemOptionDf';
 import OptionsView from './OptionsView';
 
 import useTouchHandlers from './useTouchHandlers';
-import useOptionsElement from './useOptionsElement';
 
 import {
   CL_ROOT,
@@ -77,12 +76,7 @@ const InputSelect = forwardRef(({
   , _refOptionsComp = useRef()
   , _refIndexNode = useRef()
 
-  , [
-    _refIndexActive,
-    _initHmItems,
-    _refOptionNode,
-    _getCurrentComp
-  ] = useOptionsElement()
+  , _refIndexActive = useRef()
 
   , [
     isFocused,
@@ -114,9 +108,16 @@ const InputSelect = forwardRef(({
 
   /*eslint-disable react-hooks/exhaustive-deps */
   , [
+    _getCurrentComp,
     _decorateCurrentComp,
     _selectItem
   ] = useMemo(() => [
+    () => {
+      const _optionsEl = getRefValue(_refOptionsComp)
+      if (_optionsEl) {
+        return _optionsEl.childNodes.item(getRefValue(_refIndexActive))
+      }
+    },
     () => {
       decorateCurrentComp(
         _getCurrentComp(),
@@ -265,7 +266,7 @@ const InputSelect = forwardRef(({
     }));
     _selectItem(item)
   }, [_getItemCaption])
-  // _getCurrentComp, _refIndexActive, _selectItem
+  // _getCurrentComp, _selectItem
   /*eslint-enable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -291,7 +292,8 @@ const InputSelect = forwardRef(({
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    _initHmItems()
+    //_initHmItems()
+    setRefValue(_refIndexActive, 0)
     toggleIsShowOption(false)
     setState(crInitialStateFromProps(
       propCaption,
@@ -372,7 +374,6 @@ const InputSelect = forwardRef(({
         nAll={nAll}
 
         refOptionsComp={_refOptionsComp}
-        refOptionNode={_refOptionNode}
         refIndexNode={_refIndexNode}
         indexActive={getRefValue(_refIndexActive)}
 

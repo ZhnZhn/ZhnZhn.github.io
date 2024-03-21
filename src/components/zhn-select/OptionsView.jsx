@@ -29,7 +29,6 @@ const OptionsView = ({
   nAll,
 
   refOptionsComp,
-  refOptionNode,
   refIndexNode,
   indexActive,
 
@@ -40,7 +39,6 @@ const OptionsView = ({
   const _optionListEl = useMemo(() => (
     <OptionList
       options={options}
-      refOptionNode={refOptionNode}
       className={CL_OPTIONS_ROW}
       selectedIndex={indexActive}
       propCaption={propCaption}
@@ -59,13 +57,11 @@ const OptionsView = ({
        className={CL_OPTIONS}
        style={widthStyle}
        data-scrollable={true}
-       tabIndex="-1"
      >
       <div
          ref={refOptionsComp}
          className={CL_OPTIONS_DIV}
          style={{...optionsStyle, ...widthStyle}}
-         tabIndex="-1"
        >
         {_optionListEl}
       </div>

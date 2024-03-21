@@ -9,7 +9,6 @@ const _crItem = (item, index, _ref) => {
   let {
     selectedIndex,
     className,
-    refOptionNode,
     onClick,
     propCaption,
     ItemComp
@@ -22,7 +21,6 @@ const _crItem = (item, index, _ref) => {
       "aria-selected": selectedIndex === index,
       tabIndex: "-1",
       className: className,
-      ref: n => refOptionNode(n, index),
       onClick: () => onClick(item, index),
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(ItemComp, {
         item: item,
@@ -32,7 +30,6 @@ const _crItem = (item, index, _ref) => {
     /*eslint-enable jsx-a11y/click-events-have-key-events*/
   );
 };
-
 const OptionList = _ref2 => {
   let {
     options,

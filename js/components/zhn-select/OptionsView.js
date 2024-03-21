@@ -20,7 +20,6 @@ const OptionsView = _ref => {
     options,
     nAll,
     refOptionsComp,
-    refOptionNode,
     refIndexNode,
     indexActive,
     onClickItem,
@@ -29,7 +28,6 @@ const OptionsView = _ref => {
   /*eslint-disable react-hooks/exhaustive-deps */
   const _optionListEl = (0, _uiApi.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionList.default, {
       options: options,
-      refOptionNode: refOptionNode,
       className: _CL.CL_OPTIONS_ROW,
       selectedIndex: indexActive,
       propCaption: propCaption,
@@ -43,7 +41,6 @@ const OptionsView = _ref => {
     className: _CL.CL_OPTIONS,
     style: widthStyle,
     "data-scrollable": true,
-    tabIndex: "-1",
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       ref: refOptionsComp,
       className: _CL.CL_OPTIONS_DIV,
@@ -51,7 +48,6 @@ const OptionsView = _ref => {
         ...optionsStyle,
         ...widthStyle
       },
-      tabIndex: "-1",
       children: _optionListEl
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsFooter.default, {
       ref: refIndexNode,

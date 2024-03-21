@@ -5,7 +5,6 @@ const _crItem = (
   index, {
     selectedIndex,
     className,
-    refOptionNode,
     onClick,
     propCaption,
     ItemComp
@@ -15,10 +14,9 @@ const _crItem = (
   <div
     role="option"
     aria-selected={selectedIndex === index}
-    tabIndex="-1"
+    tabIndex="-1"    
     key={index}
     className={className}
-    ref={n => refOptionNode(n, index)}
     onClick={() => onClick(item, index)}
   >
     <ItemComp

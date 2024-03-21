@@ -11,7 +11,6 @@ var _InputSelectFn = require("./InputSelectFn");
 var _ItemOptionDf = _interopRequireDefault(require("./ItemOptionDf"));
 var _OptionsView = _interopRequireDefault(require("./OptionsView"));
 var _useTouchHandlers = _interopRequireDefault(require("./useTouchHandlers"));
-var _useOptionsElement = _interopRequireDefault(require("./useOptionsElement"));
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 const FN_NOOP = () => {};
@@ -38,7 +37,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
   const _refInput = (0, _uiApi.useRef)(),
     _refOptionsComp = (0, _uiApi.useRef)(),
     _refIndexNode = (0, _uiApi.useRef)(),
-    [_refIndexActive, _initHmItems, _refOptionNode, _getCurrentComp] = (0, _useOptionsElement.default)(),
+    _refIndexActive = (0, _uiApi.useRef)(),
     [isFocused, touchHandlers] = (0, _useTouchHandlers.default)(),
     [isShowOption, toggleIsShowOption] = (0, _useToggle.default)(),
     [state, setState] = (0, _uiApi.useState)(() => (0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions)),
@@ -51,7 +50,12 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     _getItemCaption = (0, _uiApi.useMemo)(() => item => (0, _InputSelectFn.crValue)((item || {})[propCaption]), [propCaption])
 
     /*eslint-disable react-hooks/exhaustive-deps */,
-    [_decorateCurrentComp, _selectItem] = (0, _uiApi.useMemo)(() => [() => {
+    [_getCurrentComp, _decorateCurrentComp, _selectItem] = (0, _uiApi.useMemo)(() => [() => {
+      const _optionsEl = (0, _uiApi.getRefValue)(_refOptionsComp);
+      if (_optionsEl) {
+        return _optionsEl.childNodes.item((0, _uiApi.getRefValue)(_refIndexActive));
+      }
+    }, () => {
       (0, _InputSelectFn.decorateCurrentComp)(_getCurrentComp(), (0, _uiApi.getRefValue)(_refIndexNode), (0, _uiApi.getRefValue)(_refIndexActive));
     },
     // _getCurrentComp
@@ -181,7 +185,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
       }));
       _selectItem(item);
     }, [_getItemCaption])
-    // _getCurrentComp, _refIndexActive, _selectItem
+    // _getCurrentComp, _selectItem
     /*eslint-enable react-hooks/exhaustive-deps */
 
     /*eslint-disable react-hooks/exhaustive-deps */,
@@ -202,7 +206,8 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
 
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
-    _initHmItems();
+    //_initHmItems()
+    (0, _uiApi.setRefValue)(_refIndexActive, 0);
     toggleIsShowOption(false);
     setState((0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions));
   }, [propsOptions]);
@@ -250,7 +255,6 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
       options: options,
       nAll: nAll,
       refOptionsComp: _refOptionsComp,
-      refOptionNode: _refOptionNode,
       refIndexNode: _refIndexNode,
       indexActive: (0, _uiApi.getRefValue)(_refIndexActive),
       onClickItem: _hClickItem,
