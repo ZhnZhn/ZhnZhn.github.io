@@ -15,20 +15,20 @@ const _checkReq = option => {
     throw new Error('ERR_10');
   }
 };
-const DF_SHORT_PERIOD = 'period=2022,2021,2020',
-  DF_PERIOD = `${DF_SHORT_PERIOD},2019`,
-  DF_QUERY_TAIL = `${DF_PERIOD}&partner2Code=0`;
+const DF_SHORT_PERIOD = 'period=2023,2022,2021',
+  DF_PERIOD = DF_SHORT_PERIOD + ",2020",
+  DF_QUERY_TAIL = DF_PERIOD + "&partner2Code=0";
 const _crReporterToTradePartnerQueryTail = tp => {
   const _tpCode = tp === ALL ? '' : tp || '0',
-    _partnerCode = _tpCode ? `&partnerCode=${_tpCode}` : '';
-  return `${_partnerCode}&${DF_QUERY_TAIL}`;
+    _partnerCode = _tpCode ? "&partnerCode=" + _tpCode : '';
+  return _partnerCode + "&" + DF_QUERY_TAIL;
 };
 const _crAggrTotalUrl = (proxy, reporterCode, cmdCode, flowCode, period, tfType) => {
-  const _url = `${proxy}${API_URL}/A/HS?${DF_MOT_AND_CUSTOMS_CODE}&cmdCode=${cmdCode}&flowCode=${flowCode}&period=${period}&partner2Code=0`;
+  const _url = "" + proxy + API_URL + "/A/HS?" + DF_MOT_AND_CUSTOMS_CODE + "&cmdCode=" + cmdCode + "&flowCode=" + flowCode + "&period=" + period + "&partner2Code=0";
   // t1: trade flow calculated cases and reporter World case
-  return (0, _fnAdapter.isAggrCalculatedCase)(reporterCode, tfType) ? `${_url}&partnerCode=${reporterCode}` : `${_url}&reporterCode=${reporterCode}`;
+  return (0, _fnAdapter.isAggrCalculatedCase)(reporterCode, tfType) ? _url + "&partnerCode=" + reporterCode : _url + "&reporterCode=" + reporterCode;
 };
-const _crCmdFlowUrl = (proxy, freq, cmdCode, flowCode) => `${proxy}${API_URL}/${freq}/HS?${DF_MOT_AND_CUSTOMS_CODE}&cmdCode=${cmdCode}&flowCode=${flowCode}`;
+const _crCmdFlowUrl = (proxy, freq, cmdCode, flowCode) => "" + proxy + API_URL + "/" + freq + "/HS?" + DF_MOT_AND_CUSTOMS_CODE + "&cmdCode=" + cmdCode + "&flowCode=" + flowCode;
 const UnComtradeApi = {
   getRequestUrl(option) {
     _checkReq(option);
@@ -46,18 +46,18 @@ const UnComtradeApi = {
       return _crAggrTotalUrl(proxy, one, two, rg, period, tfType);
     }
     if ((0, _fnAdapter.isAggr)(two)) {
-      return _crAggrTotalUrl(proxy, one, two, rg, period, tfType) + ((0, _fnAdapter.isAggrCalculatedCase)(one, tfType) ? '' : `&partnerCode=${tp || 0}`);
+      return _crAggrTotalUrl(proxy, one, two, rg, period, tfType) + ((0, _fnAdapter.isAggrCalculatedCase)(one, tfType) ? '' : "&partnerCode=" + (tp || 0));
     }
 
     // All Reporter to TradePartner (Default TradePartner: World)
     if (one === ALL) {
       const _tpCode = tp === ALL ? '0' : tp || '0';
-      return `${_crCmdFlowUrl(proxy, freq, two, rg)}&partnerCode=${_tpCode}&partner2Code=${_tpCode}&${DF_SHORT_PERIOD}`;
+      return _crCmdFlowUrl(proxy, freq, two, rg) + "&partnerCode=" + _tpCode + "&partner2Code=" + _tpCode + "&" + DF_SHORT_PERIOD;
     }
 
     // Reporter to TradePartner (Default TradePartner: All)
-    const _reporterQuery = `reporterCode=${one}${_crReporterToTradePartnerQueryTail(tp)}`;
-    return `${_crCmdFlowUrl(proxy, freq, two, rg)}&${_reporterQuery}`;
+    const _reporterQuery = "reporterCode=" + one + _crReporterToTradePartnerQueryTail(tp);
+    return _crCmdFlowUrl(proxy, freq, two, rg) + "&" + _reporterQuery;
   },
   checkResponse(json) {
     if (json && (0, _AdapterFn.isArr)(json.data)) {
@@ -72,7 +72,7 @@ const UnComtradeApi = {
       throw (0, _AdapterFn.crError)('', error);
     }
     if (_isStr(message)) {
-      throw (0, _AdapterFn.crError)('', statusCode === 429 ? `${statusCode}: ${message.replace('in 1 seconds', 'in 1 minutes')}` : message);
+      throw (0, _AdapterFn.crError)('', statusCode === 429 ? statusCode + ": " + message.replace('in 1 seconds', 'in 1 minutes') : message);
     }
     throw (0, _AdapterFn.crError)();
   },

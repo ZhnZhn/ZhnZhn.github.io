@@ -24,8 +24,8 @@ const AGG_OPTIONS = [{
   [DF_AGGREGATION, AGGREGATION_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)(AGG_OPTIONS),
   PERIOD_OPTIONS = (() => {
     const arr = [];
-    for (let i = 0; i < 22; i++) {
-      const _v = '' + (2022 - i);
+    for (let i = 0; i < 23; i++) {
+      const _v = '' + (2023 - i);
       arr.push({
         c: _v,
         v: _v
@@ -173,7 +173,6 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       isShow: isShowToggle,
       configs: [['Trade Flow', isFlow, toggleFlow], ['Partner', isPartner, togglePartner]
       /*['Aggregation', isAggr, toggleAggr]*/],
-
       onClose: hideToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
@@ -236,6 +235,5 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
     })]
   });
 });
-var _default = UnDialogAgg;
-exports.default = _default;
+var _default = exports.default = UnDialogAgg;
 //# sourceMappingURL=UnDialogAgg.js.map

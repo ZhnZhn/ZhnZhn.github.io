@@ -23,8 +23,8 @@ const _checkReq = (option) => {
   }
 };
 
-const DF_SHORT_PERIOD = 'period=2022,2021,2020'
-, DF_PERIOD = `${DF_SHORT_PERIOD},2019`
+const DF_SHORT_PERIOD = 'period=2023,2022,2021'
+, DF_PERIOD = `${DF_SHORT_PERIOD},2020`
 , DF_QUERY_TAIL = `${DF_PERIOD}&partner2Code=0`;
 const _crReporterToTradePartnerQueryTail = (
   tp
