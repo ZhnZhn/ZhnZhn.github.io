@@ -32,6 +32,7 @@ const ArrowCell = (0, _uiApi.forwardRef)((_ref, ref) => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     "aria-labelledby": labelId,
     "aria-label": "Toggle suggestions",
+    "aria-haspopup": "true",
     "aria-expanded": isShowOption,
     "aria-controls": isShowOption ? controlsId : void 0,
     type: "button",

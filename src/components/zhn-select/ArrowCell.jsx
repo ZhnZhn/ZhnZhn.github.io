@@ -40,6 +40,7 @@ const ArrowCell = forwardRef(({
     <button
        aria-labelledby={labelId}
        aria-label="Toggle suggestions"
+       aria-haspopup="true"
        aria-expanded={isShowOption}
        aria-controls={isShowOption ? controlsId : void 0}
        type="button"
