@@ -7,6 +7,7 @@ import crRowProps from './crRowProps';
 
 import crRowLabelStyle from './crRowLabelStyle';
 import { S_ROW_FLEX } from './RowFlex';
+import useLabelId from './useLabelId';
 
 const C_OPEN = "#1b75bb"
 , CL_OPEN_CLOSE_INPUT_LABEL = `${CL_OPEN_CLOSE} ${CL_SP_INPUT_LABEL}`
@@ -26,7 +27,8 @@ const RowOcSelect = ({
   children,
   ...restProps
 }) => {
-  const [
+  const labelId = useLabelId(restProps)
+  , [
      selectProps,
      caption
   ] = crRowProps(restProps)
@@ -38,6 +40,7 @@ const RowOcSelect = ({
 
   return (
      <OpenClose
+       labelId={labelId}
        caption={caption}
        style={S_OPEN_CLOSE}
        rowStyle={S_ROW_FLEX}
@@ -45,7 +48,12 @@ const RowOcSelect = ({
        ocStyle={_ocStyle}
        captionStyle={S_CAPTION}
        openColor={C_OPEN}
-       CompAfter={<InputSelect {...selectProps} />}
+       CompAfter={(
+         <InputSelect
+            {...selectProps}
+            labelId={labelId}
+         />
+       )}
      >
       {children}
     </OpenClose>
