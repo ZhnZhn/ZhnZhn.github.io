@@ -54,6 +54,7 @@ const OpenClose = ({
   refItem,
   isClose=true,
   role='button',
+  labelId,
   className,
   style,
   rowStyle,
@@ -101,7 +102,10 @@ const OpenClose = ({
               d={_pathV}
            />
          </Svg>
-         <span style={{...S_CAPTION, ...captionStyle}} >
+         <span
+           id={labelId}
+           style={{...S_CAPTION, ...captionStyle}}
+         >
             {caption}
          </span>
        </div>

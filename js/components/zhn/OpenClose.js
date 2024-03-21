@@ -34,6 +34,7 @@ const OpenClose = _ref => {
     refItem,
     isClose = true,
     role = 'button',
+    labelId,
     className,
     style,
     rowStyle,
@@ -79,6 +80,7 @@ const OpenClose = _ref => {
             d: _pathV
           })
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          id: labelId,
           style: {
             ...S_CAPTION,
             ...captionStyle
