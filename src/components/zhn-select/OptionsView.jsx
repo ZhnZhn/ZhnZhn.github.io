@@ -18,6 +18,7 @@ const _crFooterIndex = (
   : 0;
 
 const OptionsView = ({
+  id,
   widthStyle,
 
   optionsStyle,
@@ -54,6 +55,7 @@ const OptionsView = ({
 
   return (
     <div
+       id={id}
        className={CL_OPTIONS}
        style={widthStyle}
        data-scrollable={true}

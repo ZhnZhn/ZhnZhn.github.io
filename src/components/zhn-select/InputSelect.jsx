@@ -1,6 +1,7 @@
 import {
   forwardRef,
 
+  useId,
   useRef,
   useState,
   useMemo,
@@ -49,6 +50,7 @@ import {
 const FN_NOOP = () => {};
 
 const InputSelect = forwardRef(({
+  labelId,
   propCaption='caption',
   ItemOptionComp=ItemOptionDf,
   options: propsOptions,
@@ -71,7 +73,8 @@ const InputSelect = forwardRef(({
   onSelect=FN_NOOP,
   onLoadOption=FN_NOOP
 }, ref) => {
-  const _refInput = useRef()
+  const _optionsViewId = useId()
+  , _refInput = useRef()
 
   , _refOptionsComp = useRef()
   , _refIndexNode = useRef()
@@ -331,6 +334,8 @@ const InputSelect = forwardRef(({
 
     isFocused && value,
     isShowOption,
+    labelId,
+    _optionsViewId,
 
     _hClear,
     toggleIsShowOption
@@ -363,6 +368,7 @@ const InputSelect = forwardRef(({
       {afterInputEl}
       <hr className={CL_INPUT_HR} />
       {isShowOption && <OptionsView
+        id={_optionsViewId}
         widthStyle={_optionViewWidthStyle}
 
         optionsStyle={optionsStyle}

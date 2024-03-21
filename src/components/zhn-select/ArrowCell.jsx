@@ -8,13 +8,22 @@ import {
 import { CL_BT_ARROW } from './CL';
 
 const ANIMATION_CIRCLE = "circle infinite 1.25s linear"
-, BORDER_COLOR = "#1b75bb transparent transparent";
+, BORDER_COLOR = "#1b75bb transparent transparent"
+
+, S_ARROW_SHOW = {
+  borderColor: '#1b75bb transparent transparent'
+};
+
 
 const ArrowCell = forwardRef(({
-  arrowStyle,
+  isShowOption,
+  labelId,
+  controlsId,
   onClick
 }, ref) => {
-  const _refArrowCell = useRef()
+  const _arrowStyle = isShowOption
+    ? S_ARROW_SHOW : void 0
+  , _refArrowCell = useRef()
   , _refArrow = useRef();
 
   useImperativeHandle(ref, () => ({
@@ -29,6 +38,10 @@ const ArrowCell = forwardRef(({
 
   return (
     <button
+       aria-labelledby={labelId}
+       aria-label="Toggle suggestions"
+       aria-expanded={isShowOption}
+       aria-controls={isShowOption ? controlsId : void 0}
        type="button"
        ref={_refArrowCell}
        tabIndex="-1"
@@ -37,7 +50,7 @@ const ArrowCell = forwardRef(({
     >
       <span
          ref={_refArrow}
-         style={arrowStyle}
+         style={_arrowStyle}
       />
     </button>
   );

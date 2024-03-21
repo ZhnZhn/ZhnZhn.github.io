@@ -6,13 +6,19 @@ var _uiApi = require("../uiApi");
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 const ANIMATION_CIRCLE = "circle infinite 1.25s linear",
-  BORDER_COLOR = "#1b75bb transparent transparent";
+  BORDER_COLOR = "#1b75bb transparent transparent",
+  S_ARROW_SHOW = {
+    borderColor: '#1b75bb transparent transparent'
+  };
 const ArrowCell = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
-    arrowStyle,
+    isShowOption,
+    labelId,
+    controlsId,
     onClick
   } = _ref;
-  const _refArrowCell = (0, _uiApi.useRef)(),
+  const _arrowStyle = isShowOption ? S_ARROW_SHOW : void 0,
+    _refArrowCell = (0, _uiApi.useRef)(),
     _refArrow = (0, _uiApi.useRef)();
   (0, _uiApi.useImperativeHandle)(ref, () => ({
     startAnimation: () => {
@@ -24,6 +30,10 @@ const ArrowCell = (0, _uiApi.forwardRef)((_ref, ref) => {
     }
   }), []);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+    "aria-labelledby": labelId,
+    "aria-label": "Toggle suggestions",
+    "aria-expanded": isShowOption,
+    "aria-controls": isShowOption ? controlsId : void 0,
     type: "button",
     ref: _refArrowCell,
     tabIndex: "-1",
@@ -31,10 +41,9 @@ const ArrowCell = (0, _uiApi.forwardRef)((_ref, ref) => {
     onClick: onClick,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       ref: _refArrow,
-      style: arrowStyle
+      style: _arrowStyle
     })
   });
 });
-var _default = ArrowCell;
-exports.default = _default;
+var _default = exports.default = ArrowCell;
 //# sourceMappingURL=ArrowCell.js.map

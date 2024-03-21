@@ -12,6 +12,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 const _crFooterIndex = options => options[0] && options[0].value !== _InputSelectFn.NO_RESULT ? options.length : 0;
 const OptionsView = _ref => {
   let {
+    id,
     widthStyle,
     optionsStyle,
     propCaption,
@@ -38,6 +39,7 @@ const OptionsView = _ref => {
     /*eslint-enable react-hooks/exhaustive-deps */,
     _nFiltered = _crFooterIndex(options);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    id: id,
     className: _CL.CL_OPTIONS,
     style: widthStyle,
     "data-scrollable": true,

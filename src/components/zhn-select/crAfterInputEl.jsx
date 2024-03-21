@@ -7,10 +7,7 @@ import {
   CL_SPINNER_FAILED
 } from './CL';
 
-const S_ARROW_SHOW = {
-  borderColor: '#1b75bb transparent transparent'
-}
-, S_SVG_CLEAR = {
+const S_SVG_CLEAR = {
   position: 'absolute',
   top: 5,
   right: 8,
@@ -27,6 +24,8 @@ const crAfterInputEl = (
 
   isBtSvgClear,
   isShowOption,
+  labelId,
+  optionsViewId,
 
   _hClear,
   _hToggleOptions
@@ -47,7 +46,9 @@ const crAfterInputEl = (
        _afterInputEl = (
          <ArrowCell
            //ref={_refArrowCell}
-           arrowStyle={isShowOption ? S_ARROW_SHOW : void 0}
+           isShowOption={isShowOption}
+           labelId={labelId}
+           controlsId={optionsViewId}
            onClick={_hToggleOptions}
          />
       );

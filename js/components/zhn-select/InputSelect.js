@@ -16,6 +16,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 const FN_NOOP = () => {};
 const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
+    labelId,
     propCaption = 'caption',
     ItemOptionComp = _ItemOptionDf.default,
     options: propsOptions,
@@ -34,7 +35,8 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     onSelect = FN_NOOP,
     onLoadOption = FN_NOOP
   } = _ref;
-  const _refInput = (0, _uiApi.useRef)(),
+  const _optionsViewId = (0, _uiApi.useId)(),
+    _refInput = (0, _uiApi.useRef)(),
     _refOptionsComp = (0, _uiApi.useRef)(),
     _refIndexNode = (0, _uiApi.useRef)(),
     _refIndexActive = (0, _uiApi.useRef)(),
@@ -225,7 +227,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
   /*eslint-unable react-hooks/exhaustive-deps */
 
   const _rootWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, style),
-    [afterInputEl, _placeholder] = (0, _crAfterInputEl.default)(isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isFocused && value, isShowOption, _hClear, toggleIsShowOption),
+    [afterInputEl, _placeholder] = (0, _crAfterInputEl.default)(isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isFocused && value, isShowOption, labelId, _optionsViewId, _hClear, toggleIsShowOption),
     _optionViewWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, isShowOption ? _styleFn.S_BLOCK : _styleFn.S_NONE);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: _CL.CL_ROOT,
@@ -247,6 +249,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     }), afterInputEl, /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
       className: _CL.CL_INPUT_HR
     }), isShowOption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsView.default, {
+      id: _optionsViewId,
       widthStyle: _optionViewWidthStyle,
       optionsStyle: optionsStyle,
       propCaption: propCaption,
