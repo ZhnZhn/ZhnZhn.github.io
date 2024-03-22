@@ -5,15 +5,14 @@ import {
   getRefElementStyle
 } from '../uiApi';
 
+import { crAriaExpandedProps } from './InputSelectFn';
 import { CL_BT_ARROW } from './CL';
 
 const ANIMATION_CIRCLE = "circle infinite 1.25s linear"
-, BORDER_COLOR = "#1b75bb transparent transparent"
-
+, ARROW_BORDER_COLOR = "#1b75bb transparent transparent"
 , S_ARROW_SHOW = {
-  borderColor: '#1b75bb transparent transparent'
+  borderColor: ARROW_BORDER_COLOR
 };
-
 
 const ArrowCell = forwardRef(({
   isShowOption,
@@ -22,14 +21,15 @@ const ArrowCell = forwardRef(({
   onClick
 }, ref) => {
   const _arrowStyle = isShowOption
-    ? S_ARROW_SHOW : void 0
+    ? S_ARROW_SHOW
+    : void 0
   , _refArrowCell = useRef()
   , _refArrow = useRef();
 
   useImperativeHandle(ref, () => ({
     startAnimation: () => {
       getRefElementStyle(_refArrowCell).animation = ANIMATION_CIRCLE;
-      getRefElementStyle(_refArrow).borderColor = BORDER_COLOR;
+      getRefElementStyle(_refArrow).borderColor = ARROW_BORDER_COLOR;
     },
     stopAnimation: () => {
       getRefElementStyle(_refArrowCell).animation = "";
@@ -38,11 +38,10 @@ const ArrowCell = forwardRef(({
 
   return (
     <button
+       {...crAriaExpandedProps(isShowOption, controlsId)}
        aria-labelledby={labelId}
        aria-label="Toggle suggestions"
        aria-haspopup="true"
-       aria-expanded={isShowOption}
-       aria-controls={isShowOption ? controlsId : void 0}
        type="button"
        ref={_refArrowCell}
        tabIndex="-1"

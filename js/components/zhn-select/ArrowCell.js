@@ -3,12 +3,13 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _InputSelectFn = require("./InputSelectFn");
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 const ANIMATION_CIRCLE = "circle infinite 1.25s linear",
-  BORDER_COLOR = "#1b75bb transparent transparent",
+  ARROW_BORDER_COLOR = "#1b75bb transparent transparent",
   S_ARROW_SHOW = {
-    borderColor: '#1b75bb transparent transparent'
+    borderColor: ARROW_BORDER_COLOR
   };
 const ArrowCell = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
@@ -23,18 +24,17 @@ const ArrowCell = (0, _uiApi.forwardRef)((_ref, ref) => {
   (0, _uiApi.useImperativeHandle)(ref, () => ({
     startAnimation: () => {
       (0, _uiApi.getRefElementStyle)(_refArrowCell).animation = ANIMATION_CIRCLE;
-      (0, _uiApi.getRefElementStyle)(_refArrow).borderColor = BORDER_COLOR;
+      (0, _uiApi.getRefElementStyle)(_refArrow).borderColor = ARROW_BORDER_COLOR;
     },
     stopAnimation: () => {
       (0, _uiApi.getRefElementStyle)(_refArrowCell).animation = "";
     }
   }), []);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+    ...(0, _InputSelectFn.crAriaExpandedProps)(isShowOption, controlsId),
     "aria-labelledby": labelId,
     "aria-label": "Toggle suggestions",
     "aria-haspopup": "true",
-    "aria-expanded": isShowOption,
-    "aria-controls": isShowOption ? controlsId : void 0,
     type: "button",
     ref: _refArrowCell,
     tabIndex: "-1",
