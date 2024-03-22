@@ -23,6 +23,7 @@ import {
 import crAfterInputEl from './crAfterInputEl';
 import {
   NO_RESULT,
+  crAriaExpandedProps,
   crWidthStyle,
 
   crValue,
@@ -111,10 +112,12 @@ const InputSelect = forwardRef(({
 
   /*eslint-disable react-hooks/exhaustive-deps */
   , [
+    _hideOptions,
     _getCurrentComp,
     _decorateCurrentComp,
     _selectItem
   ] = useMemo(() => [
+    () => toggleIsShowOption(false),
     () => {
       const _optionsEl = getRefValue(_refOptionsComp)
       if (_optionsEl) {
@@ -295,7 +298,6 @@ const InputSelect = forwardRef(({
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    //_initHmItems()
     setRefValue(_refIndexActive, 0)
     toggleIsShowOption(false)
     setState(crInitialStateFromProps(
@@ -351,19 +353,23 @@ const InputSelect = forwardRef(({
       style={_rootWidthStyle}
     >
       <input
+         {...touchHandlers}
+
+         {...crAriaExpandedProps(isShowOption, _optionsViewId)}
+         role="combobox"
+         aria-autocomplete="list"
+         aria-labelledby={labelId}
+
          ref={_refInput}
          className={CL_INPUT}
          type="text"
-         name="select"
          autoComplete="off"
          autoCorrect="off"
-         autoCapitalize="off"
          spellCheck={false}
          value={value}
          placeholder={_placeholder}
          onChange={_hInputChange}
          onKeyDown={_hInputKeyDown}
-         {...touchHandlers}
       />
       {afterInputEl}
       <hr className={CL_INPUT_HR} />
@@ -385,6 +391,7 @@ const InputSelect = forwardRef(({
 
         onClickItem={_hClickItem}
         onClear={_hClear}
+        onClickOutside={_hideOptions}
       />}
     </div>
   );

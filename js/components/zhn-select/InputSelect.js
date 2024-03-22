@@ -52,7 +52,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     _getItemCaption = (0, _uiApi.useMemo)(() => item => (0, _InputSelectFn.crValue)((item || {})[propCaption]), [propCaption])
 
     /*eslint-disable react-hooks/exhaustive-deps */,
-    [_getCurrentComp, _decorateCurrentComp, _selectItem] = (0, _uiApi.useMemo)(() => [() => {
+    [_hideOptions, _getCurrentComp, _decorateCurrentComp, _selectItem] = (0, _uiApi.useMemo)(() => [() => toggleIsShowOption(false), () => {
       const _optionsEl = (0, _uiApi.getRefValue)(_refOptionsComp);
       if (_optionsEl) {
         return _optionsEl.childNodes.item((0, _uiApi.getRefValue)(_refIndexActive));
@@ -208,7 +208,6 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
 
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
-    //_initHmItems()
     (0, _uiApi.setRefValue)(_refIndexActive, 0);
     toggleIsShowOption(false);
     setState((0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions));
@@ -233,19 +232,21 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     className: _CL.CL_ROOT,
     style: _rootWidthStyle,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+      ...touchHandlers,
+      ...(0, _InputSelectFn.crAriaExpandedProps)(isShowOption, _optionsViewId),
+      role: "combobox",
+      "aria-autocomplete": "list",
+      "aria-labelledby": labelId,
       ref: _refInput,
       className: _CL.CL_INPUT,
       type: "text",
-      name: "select",
       autoComplete: "off",
       autoCorrect: "off",
-      autoCapitalize: "off",
       spellCheck: false,
       value: value,
       placeholder: _placeholder,
       onChange: _hInputChange,
-      onKeyDown: _hInputKeyDown,
-      ...touchHandlers
+      onKeyDown: _hInputKeyDown
     }), afterInputEl, /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
       className: _CL.CL_INPUT_HR
     }), isShowOption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsView.default, {
@@ -261,7 +262,8 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
       refIndexNode: _refIndexNode,
       indexActive: (0, _uiApi.getRefValue)(_refIndexActive),
       onClickItem: _hClickItem,
-      onClear: _hClear
+      onClear: _hClear,
+      onClickOutside: _hideOptions
     })]
   });
 });
