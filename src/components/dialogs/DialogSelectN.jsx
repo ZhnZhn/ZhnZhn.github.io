@@ -206,6 +206,7 @@ const DialogSelectN = memoIsShow((
   return (
     <D.DraggableDialog
       isShow={isShow}
+      isFocusCombobox={true}
       caption={caption}
       menuModel={menuMoreModel}
       toTopLayer={toTopLayer}

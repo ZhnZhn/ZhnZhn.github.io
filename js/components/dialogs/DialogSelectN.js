@@ -120,6 +120,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     _isShowDate = isShowChart && _isCategory;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
+    isFocusCombobox: true,
     caption: caption,
     menuModel: menuMoreModel,
     toTopLayer: toTopLayer,

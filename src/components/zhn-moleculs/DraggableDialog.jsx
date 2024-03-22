@@ -71,6 +71,7 @@ const FN_NOOP = () => {};
 
 const DraggableDialog = ({
   isShow,
+  isFocusCombobox,
   style,
   menuModel,
   caption,
@@ -84,7 +85,8 @@ const DraggableDialog = ({
   const refBtMenuMore = useRef()
   , refRoot = useDialogFocus(
      isShow,
-     refBtMenuMore
+     refBtMenuMore,
+     isFocusCombobox
   )
   , _hKeyDown = useKeyEscape(onClose)
   , [

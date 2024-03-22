@@ -52,6 +52,7 @@ const FN_NOOP = () => {};
 const DraggableDialog = _ref2 => {
   let {
     isShow,
+    isFocusCombobox,
     style,
     menuModel,
     caption,
@@ -63,7 +64,7 @@ const DraggableDialog = _ref2 => {
     onClose = FN_NOOP
   } = _ref2;
   const refBtMenuMore = (0, _uiApi.useRef)(),
-    refRoot = (0, _useDialogFocus.default)(isShow, refBtMenuMore),
+    refRoot = (0, _useDialogFocus.default)(isShow, refBtMenuMore, isFocusCombobox),
     _hKeyDown = (0, _fUseKey.useKeyEscape)(onClose),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_DRAGGABLE_DIALOG);
   (0, _useXYMovable.default)(refRoot);
