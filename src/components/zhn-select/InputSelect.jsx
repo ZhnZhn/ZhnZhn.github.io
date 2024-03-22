@@ -22,7 +22,7 @@ import {
 
 import crAfterInputEl from './crAfterInputEl';
 import {
-  NO_RESULT,
+  NO_ITEMS_FOUND_VALUE,
   crAriaExpandedProps,
   crWidthStyle,
 
@@ -52,10 +52,10 @@ const FN_NOOP = () => {};
 
 const InputSelect = forwardRef(({
   labelId,
-  propCaption='caption',
+  propCaption="caption",
   ItemOptionComp=ItemOptionDf,
   options: propsOptions,
-  optionName='',
+  optionName="",
   isWithInput=false,
   maxInput=10,
   regInput=/[A-Za-z0-9()^ ]/,
@@ -135,7 +135,7 @@ const InputSelect = forwardRef(({
     item => {
       if (!item) {
         onSelect()
-      } else if (item.value !== NO_RESULT) {
+      } else if (item.value !== NO_ITEMS_FOUND_VALUE) {
         const _item = {...item};
         delete _item._c
         onSelect(_item)
@@ -200,7 +200,7 @@ const InputSelect = forwardRef(({
      setState(prevState => ({
        ...prevState,
        options: prevState.initialOptions,
-       value: ''
+       value: ""
      }))
   }, [])
   // _getCurrentComp, _selectItem

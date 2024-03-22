@@ -12,7 +12,7 @@ var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 const _crFooterIndex = options => {
   const _item = options[0];
-  return _item && _item.value !== _InputSelectFn.NO_RESULT ? options.length : 0;
+  return _item && _item.value !== _InputSelectFn.NO_ITEMS_FOUND_VALUE ? options.length : 0;
 };
 const OptionsView = _ref => {
   let {

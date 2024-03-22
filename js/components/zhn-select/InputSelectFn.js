@@ -1,10 +1,11 @@
 "use strict";
 
 exports.__esModule = true;
-exports.undecorateComp = exports.stepUpOption = exports.stepDownOption = exports.makeVisible = exports.decorateCurrentComp = exports.crWidthStyle = exports.crValue = exports.crInitialStateFromProps = exports.crFilterOptions = exports.crAriaExpandedProps = exports.NO_RESULT = void 0;
+exports.undecorateComp = exports.stepUpOption = exports.stepDownOption = exports.makeVisible = exports.decorateCurrentComp = exports.crWidthStyle = exports.crValue = exports.crInitialStateFromProps = exports.crFilterOptions = exports.crAriaExpandedProps = exports.NO_ITEMS_FOUND_VALUE = void 0;
 var _uiApi = require("../uiApi");
 var _CL = require("./CL");
-const NO_RESULT = exports.NO_RESULT = 'noresult';
+const NO_ITEMS_FOUND_CAPTION = "No items found";
+const NO_ITEMS_FOUND_VALUE = exports.NO_ITEMS_FOUND_VALUE = NO_ITEMS_FOUND_CAPTION;
 const crAriaExpandedProps = (isShowOption, controlsId) => ({
   "aria-expanded": isShowOption,
   "aria-controls": isShowOption ? controlsId : void 0
@@ -12,13 +13,13 @@ const crAriaExpandedProps = (isShowOption, controlsId) => ({
 exports.crAriaExpandedProps = crAriaExpandedProps;
 const crWidthStyle = (width, style) => width ? {
   ...style,
-  width: width + ((0, _uiApi.isTokenInStr)('' + width, '%') ? '' : 'px')
+  width: width + ((0, _uiApi.isTokenInStr)("" + width, "%") ? "" : "px")
 } : null;
 exports.crWidthStyle = crWidthStyle;
-const INPUT_PREFIX = 'From input:',
+const INPUT_PREFIX = "From input:",
   DF_OPTIONS = [],
   _isArr = Array.isArray;
-const crValue = str => (str || '').replace(INPUT_PREFIX, '').trim();
+const crValue = str => (str || "").replace(INPUT_PREFIX, "").trim();
 exports.crValue = crValue;
 const _crInputItem = (inputValue, _ref) => {
   let {
@@ -27,11 +28,11 @@ const _crInputItem = (inputValue, _ref) => {
     maxInput
   } = _ref;
   const _inputValue = inputValue.slice(0, maxInput),
-    _caption = isWithInput ? INPUT_PREFIX + " " + _inputValue : 'No results found';
+    _caption = isWithInput ? INPUT_PREFIX + " " + _inputValue : NO_ITEMS_FOUND_CAPTION;
   return {
     [propCaption]: _caption,
     _c: _caption,
-    value: NO_RESULT,
+    value: NO_ITEMS_FOUND_VALUE,
     inputValue: _inputValue
   };
 };
@@ -41,7 +42,7 @@ const crInitialStateFromProps = (propCaption, options) => {
     item._c = item[propCaption].toLowerCase();
   });
   return {
-    value: '',
+    value: "",
     initialOptions: _options,
     options: _options,
     nAll: _options.length

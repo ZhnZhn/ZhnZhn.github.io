@@ -6,7 +6,8 @@ import {
 
 import { CL_OPTIONS_ROW_ACTIVE } from './CL';
 
-export const NO_RESULT = 'noresult'
+const NO_ITEMS_FOUND_CAPTION = "No items found";
+export const NO_ITEMS_FOUND_VALUE = NO_ITEMS_FOUND_CAPTION
 
 export const crAriaExpandedProps = (
   isShowOption,
@@ -23,16 +24,16 @@ export const crWidthStyle = (
 ) => width
   ? {
       ...style,
-      width: width + (isTokenInStr(''+width, '%') ? '' : 'px')
+      width: width + (isTokenInStr(""+width, "%") ? "" : "px")
     }
   : null;
 
-const INPUT_PREFIX = 'From input:'
+const INPUT_PREFIX = "From input:"
 , DF_OPTIONS = []
 , _isArr = Array.isArray;
 
-export const crValue = str => (str || '')
-  .replace(INPUT_PREFIX, '')
+export const crValue = str => (str || "")
+  .replace(INPUT_PREFIX, "")
   .trim();
 
 const _crInputItem = (
@@ -44,11 +45,11 @@ const _crInputItem = (
   const _inputValue = inputValue.slice(0, maxInput)
   , _caption = isWithInput
        ? `${INPUT_PREFIX} ${_inputValue}`
-       : 'No results found';
+       : NO_ITEMS_FOUND_CAPTION;
   return {
     [propCaption]: _caption,
     _c: _caption,
-    value: NO_RESULT,
+    value: NO_ITEMS_FOUND_VALUE,
     inputValue: _inputValue
   };
 };
@@ -66,7 +67,7 @@ export const crInitialStateFromProps = (
   })
 
   return {
-    value: '',
+    value: "",
 
     initialOptions: _options,
     options: _options,

@@ -17,10 +17,10 @@ const FN_NOOP = () => {};
 const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     labelId,
-    propCaption = 'caption',
+    propCaption = "caption",
     ItemOptionComp = _ItemOptionDf.default,
     options: propsOptions,
-    optionName = '',
+    optionName = "",
     isWithInput = false,
     maxInput = 10,
     regInput = /[A-Za-z0-9()^ ]/,
@@ -64,7 +64,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     item => {
       if (!item) {
         onSelect();
-      } else if (item.value !== _InputSelectFn.NO_RESULT) {
+      } else if (item.value !== _InputSelectFn.NO_ITEMS_FOUND_VALUE) {
         const _item = {
           ...item
         };
@@ -121,7 +121,7 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
       setState(prevState => ({
         ...prevState,
         options: prevState.initialOptions,
-        value: ''
+        value: ""
       }));
     }, [])
     // _getCurrentComp, _selectItem

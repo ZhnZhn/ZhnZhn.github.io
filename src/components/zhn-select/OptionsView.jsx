@@ -1,7 +1,7 @@
 import { useMemo } from '../uiApi';
 import useClickOutside from '../hooks/useClickOutside';
 
-import { NO_RESULT } from './InputSelectFn';
+import { NO_ITEMS_FOUND_VALUE } from './InputSelectFn';
 
 import OptionList from './OptionList';
 import OptionsFooter from './OptionsFooter';
@@ -16,7 +16,7 @@ const _crFooterIndex = (
   options
 ) => {
   const _item = options[0];
-  return _item && _item.value !== NO_RESULT
+  return _item && _item.value !== NO_ITEMS_FOUND_VALUE
     ? options.length
     : 0;
 };
