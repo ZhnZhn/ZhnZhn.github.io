@@ -6,9 +6,26 @@ import {
   focusRefElement
 } from '../uiApi';
 
+const _getComboboxElement = (
+  refRoot
+) => {
+  const _elRoot = getRefValue(refRoot);
+  if (_elRoot) {
+    const _comboboxNodeList = _elRoot.querySelectorAll('input[role="combobox"]')
+    let i = 0, _elInput;
+    for (; i<_comboboxNodeList.length; i++){
+      _elInput = _comboboxNodeList.item(i)
+      if (_elInput && _elInput.clientHeight) {
+        return _elInput;
+      }
+    }
+  }
+}
+
 const useDialogFocus = (
   isShow,
-  refBtMenuMore
+  refBtMenuMore,
+  isFocusCombobox
 ) => {
   const refRoot = useRef()
   , _refPrevFocused = useRef()
@@ -20,7 +37,13 @@ const useDialogFocus = (
     if (isShow && !_isPrevShow) {
       //focus
       setRefValue(_refPrevFocused, document.activeElement)
-      focusRefElement(refBtMenuMore, refRoot)
+      const _inputEl = _getComboboxElement(refRoot);
+      focusRefElement(
+        isFocusCombobox && _inputEl
+           ? () => _inputEl
+           : refBtMenuMore,
+        refRoot
+      )
     } else if (!isShow && _isPrevShow) {
       //focusPrev
       focusRefElement(_refPrevFocused)
