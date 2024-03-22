@@ -1,10 +1,15 @@
 "use strict";
 
 exports.__esModule = true;
-exports.undecorateComp = exports.stepUpOption = exports.stepDownOption = exports.makeVisible = exports.decorateCurrentComp = exports.crWidthStyle = exports.crValue = exports.crInitialStateFromProps = exports.crFilterOptions = exports.NO_RESULT = void 0;
+exports.undecorateComp = exports.stepUpOption = exports.stepDownOption = exports.makeVisible = exports.decorateCurrentComp = exports.crWidthStyle = exports.crValue = exports.crInitialStateFromProps = exports.crFilterOptions = exports.crAriaExpandedProps = exports.NO_RESULT = void 0;
 var _uiApi = require("../uiApi");
 var _CL = require("./CL");
 const NO_RESULT = exports.NO_RESULT = 'noresult';
+const crAriaExpandedProps = (isShowOption, controlsId) => ({
+  "aria-expanded": isShowOption,
+  "aria-controls": isShowOption ? controlsId : void 0
+});
+exports.crAriaExpandedProps = crAriaExpandedProps;
 const crWidthStyle = (width, style) => width ? {
   ...style,
   width: width + ((0, _uiApi.isTokenInStr)('' + width, '%') ? '' : 'px')
@@ -22,7 +27,7 @@ const _crInputItem = (inputValue, _ref) => {
     maxInput
   } = _ref;
   const _inputValue = inputValue.slice(0, maxInput),
-    _caption = isWithInput ? `${INPUT_PREFIX} ${_inputValue}` : 'No results found';
+    _caption = isWithInput ? INPUT_PREFIX + " " + _inputValue : 'No results found';
   return {
     [propCaption]: _caption,
     _c: _caption,

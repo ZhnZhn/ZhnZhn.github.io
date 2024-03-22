@@ -8,6 +8,15 @@ import { CL_OPTIONS_ROW_ACTIVE } from './CL';
 
 export const NO_RESULT = 'noresult'
 
+export const crAriaExpandedProps = (
+  isShowOption,
+  controlsId
+) => ({
+  "aria-expanded": isShowOption,
+  "aria-controls": isShowOption
+     ? controlsId : void 0
+})
+
 export const crWidthStyle = (
   width,
   style
