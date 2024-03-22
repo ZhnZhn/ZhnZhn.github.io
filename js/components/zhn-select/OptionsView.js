@@ -4,12 +4,16 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _useClickOutside = _interopRequireDefault(require("../hooks/useClickOutside"));
 var _InputSelectFn = require("./InputSelectFn");
 var _OptionList = _interopRequireDefault(require("./OptionList"));
 var _OptionsFooter = _interopRequireDefault(require("./OptionsFooter"));
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
-const _crFooterIndex = options => options[0] && options[0].value !== _InputSelectFn.NO_RESULT ? options.length : 0;
+const _crFooterIndex = options => {
+  const _item = options[0];
+  return _item && _item.value !== _InputSelectFn.NO_RESULT ? options.length : 0;
+};
 const OptionsView = _ref => {
   let {
     id,
@@ -24,7 +28,8 @@ const OptionsView = _ref => {
     refIndexNode,
     indexActive,
     onClickItem,
-    onClear
+    onClear,
+    onClickOutside
   } = _ref;
   /*eslint-disable react-hooks/exhaustive-deps */
   const _optionListEl = (0, _uiApi.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionList.default, {
@@ -37,8 +42,10 @@ const OptionsView = _ref => {
     }), [options])
     // indexActive
     /*eslint-enable react-hooks/exhaustive-deps */,
-    _nFiltered = _crFooterIndex(options);
+    _nFiltered = _crFooterIndex(options),
+    _refOptionsView = (0, _useClickOutside.default)(true, onClickOutside);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    ref: _refOptionsView,
     id: id,
     className: _CL.CL_OPTIONS,
     style: widthStyle,

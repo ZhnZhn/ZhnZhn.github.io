@@ -1,4 +1,5 @@
 import { useMemo } from '../uiApi';
+import useClickOutside from '../hooks/useClickOutside';
 
 import { NO_RESULT } from './InputSelectFn';
 
@@ -13,9 +14,12 @@ import {
 
 const _crFooterIndex = (
   options
-) => options[0] && (options[0].value !== NO_RESULT)
-  ? options.length
-  : 0;
+) => {
+  const _item = options[0];
+  return _item && _item.value !== NO_RESULT
+    ? options.length
+    : 0;
+};
 
 const OptionsView = ({
   id,
@@ -34,7 +38,8 @@ const OptionsView = ({
   indexActive,
 
   onClickItem,
-  onClear
+  onClear,
+  onClickOutside
 }) => {
   /*eslint-disable react-hooks/exhaustive-deps */
   const _optionListEl = useMemo(() => (
@@ -51,10 +56,15 @@ const OptionsView = ({
   /*eslint-enable react-hooks/exhaustive-deps */
   , _nFiltered = _crFooterIndex(
       options
-   );
+  )
+  , _refOptionsView = useClickOutside(
+      true,
+      onClickOutside
+  );
 
   return (
     <div
+       ref={_refOptionsView}
        id={id}
        className={CL_OPTIONS}
        style={widthStyle}
