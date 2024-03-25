@@ -27,6 +27,8 @@ import GroupAddPane from './GroupAddPane';
 import GroupEditPane from './GroupEditPane';
 import GroupDeletePane from './GroupDeletePane';
 
+const TOKEN_WATCH_GROUPS_EDIT = "Watch Groups Edit";
+
 const EditGroupDialog = memoIsShow(({
   isShow,
   onClose
@@ -38,12 +40,13 @@ const EditGroupDialog = memoIsShow(({
   return (
   <ModalDialog
      refFocusLast={refFocusLast}
-     caption="Watch Groups Edit"
+     caption={TOKEN_WATCH_GROUPS_EDIT}
      isShow={isShow}
      isWithButton={false}
      onClose={onClose}
   >
     <TabPane
+       ariaLabel={TOKEN_WATCH_GROUPS_EDIT}
        id="egd"
        width={380}
        useMsEdit={useMsEdit}

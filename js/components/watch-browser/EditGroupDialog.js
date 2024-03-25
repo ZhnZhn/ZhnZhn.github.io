@@ -15,6 +15,7 @@ var _GroupAddPane = _interopRequireDefault(require("./GroupAddPane"));
 var _GroupEditPane = _interopRequireDefault(require("./GroupEditPane"));
 var _GroupDeletePane = _interopRequireDefault(require("./GroupDeletePane"));
 var _jsxRuntime = require("react/jsx-runtime");
+const TOKEN_WATCH_GROUPS_EDIT = "Watch Groups Edit";
 const EditGroupDialog = (0, _memoIsShow.default)(_ref => {
   let {
     isShow,
@@ -23,11 +24,12 @@ const EditGroupDialog = (0, _memoIsShow.default)(_ref => {
   const [refFocusLast, setRefFocusLast] = (0, _useFocus.useRefFocusElement)();
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
     refFocusLast: refFocusLast,
-    caption: "Watch Groups Edit",
+    caption: TOKEN_WATCH_GROUPS_EDIT,
     isShow: isShow,
     isWithButton: false,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
+      ariaLabel: TOKEN_WATCH_GROUPS_EDIT,
       id: "egd",
       width: 380,
       useMsEdit: _watchListStore.useMsEdit,

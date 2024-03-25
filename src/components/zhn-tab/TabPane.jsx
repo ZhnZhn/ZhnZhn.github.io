@@ -39,6 +39,7 @@ const _crNextId = (
       : id;
 
 const TabPane = ({
+  ariaLabel,
   id,
   isShow,
   width,
@@ -77,7 +78,12 @@ const TabPane = ({
 
   return (
     <div style={{ width, height }}>
-      <div style={S_TABS}>
+      <div
+        role="tablist"
+        aria-label={ariaLabel}
+        aria-orientation="horizontal"
+        style={S_TABS}
+      >
          {children.map((tab, index) => {
             const isSelected = _isSelectedTabIndex(index);
             return cloneElement(tab, {

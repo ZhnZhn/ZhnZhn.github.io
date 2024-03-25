@@ -16,7 +16,8 @@ var _Tab = _interopRequireDefault(require("../zhn-tab/Tab"));
 var _PaneApiKey = _interopRequireDefault(require("./PaneApiKey"));
 var _PaneOptions = _interopRequireDefault(require("./PaneOptions"));
 var _jsxRuntime = require("react/jsx-runtime");
-const S_MODAL = {
+const TOKEN_USER_SETTINGS = "User Settings",
+  S_MODAL = {
     position: 'static',
     width: 380,
     maxHeight: 446,
@@ -51,12 +52,13 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
     refFocusLast: refFocusLast,
     style: _style,
-    caption: "User Settings",
+    caption: TOKEN_USER_SETTINGS,
     menuModel: menuModel,
     isWithButton: false,
     isShow: isShow,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
+      ariaLabel: TOKEN_USER_SETTINGS,
       id: "sd",
       isShow: isShow,
       setRefFocusLast: setRefFocusLast,

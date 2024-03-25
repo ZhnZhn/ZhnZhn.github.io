@@ -20,7 +20,8 @@ import PaneOptions from './PaneOptions';
 
 import { CL_ROW_PANE_TOPIC } from '../styleFn';
 
-const S_MODAL = {
+const TOKEN_USER_SETTINGS = "User Settings"
+, S_MODAL = {
   position: 'static',
   width: 380,
   maxHeight: 446,
@@ -60,13 +61,14 @@ const SettingsDialog = memoIsShow(({
     <ModalDialog
        refFocusLast={refFocusLast}
        style={_style}
-       caption="User Settings"
+       caption={TOKEN_USER_SETTINGS}
        menuModel={menuModel}
        isWithButton={false}
        isShow={isShow}
        onClose={onClose}
     >
       <TabPane
+         ariaLabel={TOKEN_USER_SETTINGS}
          id="sd"
          isShow={isShow}
          setRefFocusLast={setRefFocusLast}

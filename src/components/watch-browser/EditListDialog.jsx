@@ -28,6 +28,8 @@ import ListCreatePane from './ListCreatePane';
 import ListEditPane from './ListEditPane';
 import ListDeletePane from './ListDeletePane';
 
+const TOKEN_WATCH_LISTS_EDIT = "Watch Lists Edit";
+
 const EditListDialog = memoIsShow(({
   isShow,
   onClose
@@ -39,12 +41,13 @@ const EditListDialog = memoIsShow(({
   return (
   <ModalDialog
      refFocusLast={refFocusLast}
-     caption="Watch Lists Edit"
+     caption={TOKEN_WATCH_LISTS_EDIT}
      isShow={isShow}
      isWithButton={false}
      onClose={onClose}
   >
     <TabPane
+      ariaLabel={TOKEN_WATCH_LISTS_EDIT}
       id="eld"
       width={380}
       useMsEdit={useMsEdit}

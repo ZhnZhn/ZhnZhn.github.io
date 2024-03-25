@@ -20,6 +20,7 @@ const S_TABS = {
 const _crNextId = (id, childrenLength) => id === -1 ? childrenLength - 1 : id === childrenLength ? 0 : id;
 const TabPane = _ref => {
   let {
+    ariaLabel,
     id,
     isShow,
     width,
@@ -50,6 +51,9 @@ const TabPane = _ref => {
       height
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      role: "tablist",
+      "aria-label": ariaLabel,
+      "aria-orientation": "horizontal",
       style: S_TABS,
       children: children.map((tab, index) => {
         const isSelected = _isSelectedTabIndex(index);

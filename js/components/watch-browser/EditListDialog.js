@@ -15,6 +15,7 @@ var _ListCreatePane = _interopRequireDefault(require("./ListCreatePane"));
 var _ListEditPane = _interopRequireDefault(require("./ListEditPane"));
 var _ListDeletePane = _interopRequireDefault(require("./ListDeletePane"));
 var _jsxRuntime = require("react/jsx-runtime");
+const TOKEN_WATCH_LISTS_EDIT = "Watch Lists Edit";
 const EditListDialog = (0, _memoIsShow.default)(_ref => {
   let {
     isShow,
@@ -23,11 +24,12 @@ const EditListDialog = (0, _memoIsShow.default)(_ref => {
   const [refFocusLast, setRefFocusLast] = (0, _useFocus.useRefFocusElement)();
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
     refFocusLast: refFocusLast,
-    caption: "Watch Lists Edit",
+    caption: TOKEN_WATCH_LISTS_EDIT,
     isShow: isShow,
     isWithButton: false,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_TabPane.default, {
+      ariaLabel: TOKEN_WATCH_LISTS_EDIT,
       id: "eld",
       width: 380,
       useMsEdit: _watchListStore.useMsEdit,
