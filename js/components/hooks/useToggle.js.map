@@ -5,14 +5,19 @@
  ],
  "file": "../../../src/components/hooks/useToggle.js",
  "names": [
-  "_isBool",
-  "v",
+  "_uiApi",
+  "require",
   "_initState",
   "initialValue",
   "_reducer",
   "state",
   "value",
-  "useToggle"
+  "isBool",
+  "useToggle",
+  "useReducer",
+  "_default",
+  "exports",
+  "default"
  ],
- "mappings": ";;;;;AAAA;;AAEA,MAAMA,OAAO,GAAGC,CAAC,IAAI,OAAOA,CAAP,KAAa,SAAlC;AAAA,MACEC,UAAU,GAAIC,YAAD,IAAkB,CAAC,CAACA,YADnC;AAAA,MAEEC,QAAQ,GAAG,CACXC,KADW,EAEXC,KAFW,KAGRN,OAAO,CAACM,KAAD,CAAP,GACDA,KADC,GAED,CAACD,KAPL;;AASA,MAAME,SAAS,GACbJ,YADgB,IAEb,uBACHC,QADG,EAEHD,YAFG,EAGHD,UAHG,CAFL;;eAQeK,S"
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAKA,MAAMC,UAAU,GAAGC,YAAY,IAAI,CAAC,CAACA,YAAY;EAC/CC,QAAQ,GAAGA,CACXC,KAAK,EACLC,KAAK,KACF,IAAAC,aAAM,EAACD,KAAK,CAAC,GACdA,KAAK,GACL,CAACD,KAAK;AAEV,MAAMG,SAAS,GACbL,YAAY,IACT,IAAAM,iBAAU,EACbL,QAAQ,EACRD,YAAY,EACZD,UACF,CAAC;AAAC,IAAAQ,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaJ,SAAS"
 }

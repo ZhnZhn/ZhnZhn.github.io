@@ -1,7 +1,12 @@
-import { useReducer } from '../uiApi';
+import {
+  useReducer,
+  isBool,
+  isFn,
+  isStr,
+  isObj
+} from '../uiApi';
 
-const _getTypeOf = v => typeof v
-, hasOwnProperty = Object.prototype.hasOwnProperty
+const hasOwnProperty = Object.prototype.hasOwnProperty
 , _isNotOwnBooleanPropsEqual = (
   state,
   stateSlice
@@ -9,7 +14,7 @@ const _getTypeOf = v => typeof v
   let propName;
   for(propName in stateSlice) {
     if (hasOwnProperty.call(stateSlice, propName)) {
-      if (_getTypeOf(stateSlice[propName]) !== 'boolean') {
+      if (!isBool(stateSlice[propName])) {
         return;
       }
       if (state[propName] !== stateSlice[propName]) {
@@ -20,19 +25,18 @@ const _getTypeOf = v => typeof v
 }
 , _initState = (
   initialValue
-) => _getTypeOf(initialValue) === 'function'
+) => isFn(initialValue)
   ? initialValue()
   : initialValue
 , _reducer = (
   state,
   propNameOrStateSlice
-) => _getTypeOf(propNameOrStateSlice) === 'string'
+) => isStr(propNameOrStateSlice)
  ? {
      ...state,
      [propNameOrStateSlice]: !state[propNameOrStateSlice]
    }
- : propNameOrStateSlice
-   && _getTypeOf(propNameOrStateSlice) === 'object'
+ : isObj(propNameOrStateSlice)
    && _isNotOwnBooleanPropsEqual(state, propNameOrStateSlice)
      ? {
          ...state,

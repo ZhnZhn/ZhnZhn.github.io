@@ -1,3 +1,5 @@
+import { isBool } from '../../uiApi';
+
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import ItemStack from '../../zhn/ItemStack';
 
@@ -33,7 +35,7 @@ const S_ROW_FLEX = {
 
 const _crChbToggleInitValue = (
   isRow
-) => typeof isRow === 'boolean'
+) => isBool(isRow)
   ? isRow
   : true;
 

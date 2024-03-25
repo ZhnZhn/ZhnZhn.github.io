@@ -3,13 +3,12 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-const _getTypeOf = v => typeof v,
-  hasOwnProperty = Object.prototype.hasOwnProperty,
+const hasOwnProperty = Object.prototype.hasOwnProperty,
   _isNotOwnBooleanPropsEqual = (state, stateSlice) => {
     let propName;
     for (propName in stateSlice) {
       if (hasOwnProperty.call(stateSlice, propName)) {
-        if (_getTypeOf(stateSlice[propName]) !== 'boolean') {
+        if (!(0, _uiApi.isBool)(stateSlice[propName])) {
           return;
         }
         if (state[propName] !== stateSlice[propName]) {
@@ -18,15 +17,14 @@ const _getTypeOf = v => typeof v,
       }
     }
   },
-  _initState = initialValue => _getTypeOf(initialValue) === 'function' ? initialValue() : initialValue,
-  _reducer = (state, propNameOrStateSlice) => _getTypeOf(propNameOrStateSlice) === 'string' ? {
+  _initState = initialValue => (0, _uiApi.isFn)(initialValue) ? initialValue() : initialValue,
+  _reducer = (state, propNameOrStateSlice) => (0, _uiApi.isStr)(propNameOrStateSlice) ? {
     ...state,
     [propNameOrStateSlice]: !state[propNameOrStateSlice]
-  } : propNameOrStateSlice && _getTypeOf(propNameOrStateSlice) === 'object' && _isNotOwnBooleanPropsEqual(state, propNameOrStateSlice) ? {
+  } : (0, _uiApi.isObj)(propNameOrStateSlice) && _isNotOwnBooleanPropsEqual(state, propNameOrStateSlice) ? {
     ...state,
     ...propNameOrStateSlice
   } : state;
 const useToggleState = initialValue => (0, _uiApi.useReducer)(_reducer, initialValue || {}, _initState);
-var _default = useToggleState;
-exports.default = _default;
+var _default = exports.default = useToggleState;
 //# sourceMappingURL=useToggleState.js.map

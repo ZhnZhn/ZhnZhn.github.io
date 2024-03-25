@@ -34,7 +34,7 @@ const S_MODAL_POPUP = {
     whiteSpace: 'nowrap'
   };
 const _isCompareTo = (isAdminMode, isDenyToChange) => {
-  const _isAdminMode = typeof isAdminMode == 'function' ? isAdminMode() : typeof isAdminMode == 'boolean' ? isAdminMode : false;
+  const _isAdminMode = (0, _uiApi.isFn)(isAdminMode) ? isAdminMode() : (0, _uiApi.isBool)(isAdminMode) ? isAdminMode : false;
   return _isAdminMode && !isDenyToChange;
 };
 const RowValueDate = _ref => {

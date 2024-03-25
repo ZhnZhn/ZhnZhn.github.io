@@ -32,7 +32,9 @@ export {
   isBool,
   isFn,
   isNumber,
-  isUndef
+  isStr,
+  isUndef,
+  isObj
 } from '../utils/isTypeFn';
 import {
   isArr,

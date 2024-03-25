@@ -2,7 +2,8 @@
 import {
   useState,
   useMemo,
-  useCallback
+  useCallback,
+  isBool
 } from '../uiApi';
 import { crCn } from '../styleFn';
 
@@ -31,7 +32,6 @@ const SvgChecked = ({
   />
 );
 
-const _isBool = bool => typeof bool === 'boolean';
 const FN_NOOP = () => {};
 const _crAriaLabelledByProp = ({
   labelId,
@@ -55,12 +55,12 @@ const SvgCheckBox = (props) => {
     valueState,
     setValueState
   ] = useState(
-    () => _isBool(value)
+    () => isBool(value)
       ? void 0:
       !!initialValue
   )
   , _isValueState = useRefInit(
-      () => _isBool(valueState)
+      () => isBool(valueState)
     )
   , _value = _isValueState
      ? valueState

@@ -30,7 +30,6 @@ const SvgChecked = _ref => {
     fill: _Color.TRANSPARENT_COLOR
   });
 };
-const _isBool = bool => typeof bool === 'boolean';
 const FN_NOOP = () => {};
 const _crAriaLabelledByProp = _ref2 => {
   let {
@@ -54,8 +53,8 @@ const SvgCheckBox = props => {
       onCheck = FN_NOOP,
       onUnCheck = FN_NOOP
     } = props,
-    [valueState, setValueState] = (0, _uiApi.useState)(() => _isBool(value) ? void 0 : !!initialValue),
-    _isValueState = (0, _useRefInit.default)(() => _isBool(valueState)),
+    [valueState, setValueState] = (0, _uiApi.useState)(() => (0, _uiApi.isBool)(value) ? void 0 : !!initialValue),
+    _isValueState = (0, _useRefInit.default)(() => (0, _uiApi.isBool)(valueState)),
     _value = _isValueState ? valueState : value,
     _comp = (0, _uiApi.useMemo)(() => ({
       setUnchecked: () => setValueState(false)

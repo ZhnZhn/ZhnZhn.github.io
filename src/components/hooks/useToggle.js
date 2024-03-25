@@ -1,11 +1,13 @@
-import { useReducer } from '../uiApi';
+import {
+  useReducer,
+  isBool
+} from '../uiApi';
 
-const _isBool = v => typeof v === 'boolean'
-, _initState = (initialValue) => !!initialValue
+const _initState = initialValue => !!initialValue
 , _reducer = (
   state,
   value
-) => _isBool(value)
+) => isBool(value)
   ? value
   : !state;
 

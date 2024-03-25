@@ -4,6 +4,8 @@ import {
   useRef,
   useCallback,
   useEffect,
+  isBool,
+  isFn,
   focusRefElement
 } from '../uiApi';
 
@@ -13,7 +15,7 @@ import formatAllNumber from '../../utils/formatAllNumber';
 import ModalPopup from '../zhn-moleculs/ModalPopup';
 import {
   SpanValue,
-  SpanDate 
+  SpanDate
 } from '../zhn/SpanToken';
 import DivCompareTo from './DivCompareTo';
 
@@ -43,9 +45,9 @@ const _isCompareTo = (
   isAdminMode,
   isDenyToChange
 ) => {
-  const _isAdminMode = typeof isAdminMode == 'function'
+  const _isAdminMode = isFn(isAdminMode)
     ? isAdminMode()
-    : typeof isAdminMode == 'boolean'
+    : isBool(isAdminMode)
         ? isAdminMode
         : false;
   return _isAdminMode && !isDenyToChange;
