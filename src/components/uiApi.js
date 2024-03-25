@@ -29,6 +29,7 @@ export {
 
 export {
   isArr,
+  isBool,
   isFn,
   isNumber,
   isUndef

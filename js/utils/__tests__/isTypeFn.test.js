@@ -40,6 +40,19 @@ describe('isInt', () => {
     expect(fn(NaN)).toBe(false);
   });
 });
+describe('isBool', () => {
+  const fn = _isTypeFn.isBool;
+  test('should return true for boolean values otherwise false', () => {
+    expect(fn(true)).toBe(true);
+    expect(fn(false)).toBe(true);
+    expect(fn()).toBe(false);
+    expect(fn(null)).toBe(false);
+    expect(fn(0)).toBe(false);
+    expect(fn(1)).toBe(false);
+    expect(fn('')).toBe(false);
+    expect(fn(NaN)).toBe(false);
+  });
+});
 describe('isStr', () => {
   const fn = _isTypeFn.isStr;
   test('should return true for string value otherwise false', () => {

@@ -3,6 +3,7 @@ import {
   isNumber,
   isNaN,
   isInt,
+  isBool,
   isStr,
   isUndef,
   isFn,
@@ -53,6 +54,21 @@ describe('isInt',()=>{
 
     expect(fn(-0.2)).toBe(false)
     expect(fn(0.1)).toBe(false)
+    expect(fn(NaN)).toBe(false)
+  })
+})
+
+describe('isBool',()=>{
+  const fn = isBool;
+  test('should return true for boolean values otherwise false',()=>{
+    expect(fn(true)).toBe(true)
+    expect(fn(false)).toBe(true)
+
+    expect(fn()).toBe(false)
+    expect(fn(null)).toBe(false)    
+    expect(fn(0)).toBe(false)
+    expect(fn(1)).toBe(false)
+    expect(fn('')).toBe(false)
     expect(fn(NaN)).toBe(false)
   })
 })
