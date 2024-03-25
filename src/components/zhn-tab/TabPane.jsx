@@ -1,17 +1,21 @@
 import {
   cloneElement,
   useState,
+  isBool,
   focusElementById,
   stopDefaultFor
 } from '../uiApi';
+
+import {
+  S_BLOCK,
+  S_NONE
+} from '../styleFn';
 
 import {
   crTabCn,
   crTabId,
   crTabPanelId
 } from './tabPaneFn';
-
-const _isBool = v => typeof v === 'boolean';
 
 const S_TABS = {
   margin: '5px 5px 10px 24px'
@@ -20,13 +24,9 @@ const S_TABS = {
   width: "100%",
   height: "100%"
 }
-, S_BLOCK = {
-  display: 'block',
-  width: "100%",
-  height: "100%"
-}
-, S_NONE = {
-  display: 'none'
+, S_COMPONENTS_BLOCK = {
+  ...S_BLOCK,
+  ...S_COMPONENTS
 };
 
 const _crNextId = (
@@ -63,14 +63,15 @@ const TabPane = ({
         setSelectedTabIndex(_nextIndex)
       }
 
-      const { keyCode } = evt;
-      if (keyCode === 39) {
+      , { keyCode } = evt
+      , _increaseIndexBy = keyCode === 39
+         ? 1
+         : keyCode === 37
+            ? -1
+            : 0;
+      if (_increaseIndexBy) {
         stopDefaultFor(evt)
-        _focusTabByIndex(index + 1)
-      }
-      if (keyCode === 37) {
-        stopDefaultFor(evt)
-        _focusTabByIndex(index - 1)
+        _focusTabByIndex(index + _increaseIndexBy)
       }
   };
 
@@ -96,13 +97,13 @@ const TabPane = ({
              return (
                 <div
                   key={index}
-                  style={_isSelected ? S_BLOCK : S_NONE}
+                  style={_isSelected ? S_COMPONENTS_BLOCK : S_NONE}
                   role="tabpanel"
                   id={crTabPanelId(id, index)}
                   aria-labelledby={crTabId(id, index)}
                 >
                    {cloneElement(tab.props.children, {
-                     isVisible: _isBool(isShow)
+                     isVisible: isBool(isShow)
                        ? isShow && _isSelected
                        : _isSelected,
                      ...restTapPanelProps
