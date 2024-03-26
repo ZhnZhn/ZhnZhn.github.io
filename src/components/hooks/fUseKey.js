@@ -1,13 +1,15 @@
 import { useCallback } from '../uiApi';
 import { HAS_KEYBOARD_FOCUS } from '../has';
 
-import isKeyEscape from '../zhn/isKeyEscape';
-
 const FN_NOOP = () => {};
 
 export const isKeyEnterOrBlank = ({
   keyCode
 }) => keyCode === 13 || keyCode === 32
+
+const isKeyEscape = (
+  evt
+) => evt.keyCode === 27 || evt.key === 'Escape';
 
 /*eslint-disable react-hooks/exhaustive-deps */
 const fUseKey = isKey => (
