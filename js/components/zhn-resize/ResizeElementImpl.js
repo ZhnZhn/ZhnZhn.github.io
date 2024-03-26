@@ -1,12 +1,10 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
-const _isFn = fn => typeof fn === 'function',
-  _isNaN = Number.isNaN,
+var _fUseKey = require("../hooks/fUseKey");
+const _isNaN = Number.isNaN,
   _assign = Object.assign,
   _initResizeProperties = inst => {
     _assign(inst, {
@@ -49,7 +47,7 @@ class ResizeElementImpl {
       const {
         onResizeAfter
       } = this;
-      if (_isFn(onResizeAfter)) {
+      if ((0, _uiApi.isFn)(onResizeAfter)) {
         onResizeAfter(this._getWidth());
       }
     };
@@ -73,9 +71,9 @@ class ResizeElementImpl {
         this.hStopResize();
       }
     };
-    this.hKdLeft = event => {
-      if ((0, _isKeyEnter.default)(event)) {
-        event.stopPropagation();
+    this.hKdLeft = evt => {
+      if ((0, _fUseKey.isKeyEnterOrBlank)(evt)) {
+        evt.stopPropagation();
         this.resizeBy(-this.step);
       }
     };
@@ -83,9 +81,9 @@ class ResizeElementImpl {
       this.resizeBy(-this.deltaStep);
       this._increaseDeltaStep();
     };
-    this.hKdRight = event => {
-      if ((0, _isKeyEnter.default)(event)) {
-        event.stopPropagation();
+    this.hKdRight = evt => {
+      if ((0, _fUseKey.isKeyEnterOrBlank)(evt)) {
+        evt.stopPropagation();
         this.resizeBy(this.step);
       }
     };
@@ -128,6 +126,5 @@ class ResizeElementImpl {
     this.hStartResizeRight = (0, _uiApi.bindTo)(this._startResize, this._resizeRight);
   }
 }
-var _default = ResizeElementImpl;
-exports.default = _default;
+var _default = exports.default = ResizeElementImpl;
 //# sourceMappingURL=ResizeElementImpl.js.map

@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _isKeyEnter = _interopRequireDefault(require("../zhn/isKeyEnter"));
+var _fUseKey = require("../hooks/fUseKey");
 var _BtSvgX = require("../zhn/BtSvgX");
 var _DivEllipsis = _interopRequireDefault(require("../zhn/DivEllipsis"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -44,7 +44,7 @@ const WatchItem = _ref => {
     //onClick
     /*eslint-enable react-hooks/exhaustive-deps */,
     _hKeyUp = (0, _uiApi.useCallback)(evt => {
-      if ((0, _isKeyEnter.default)(evt)) {
+      if ((0, _fUseKey.isKeyEnterOrBlank)(evt)) {
         _hClick();
       }
     }, [_hClick]);

@@ -3,7 +3,7 @@ import {
   useCallback
 } from '../uiApi';
 
-import isKeyEnter from '../zhn/isKeyEnter';
+import { isKeyEnterOrBlank } from '../hooks/fUseKey';
 
 import { BtSvgClose } from '../zhn/BtSvgX';
 import DivEllipsis from '../zhn/DivEllipsis';
@@ -48,7 +48,7 @@ const WatchItem = ({
   //onClick
   /*eslint-enable react-hooks/exhaustive-deps */
   , _hKeyUp = useCallback(evt => {
-       if (isKeyEnter(evt)) {
+       if (isKeyEnterOrBlank(evt)) {
          _hClick()
        }
   }, [_hClick])

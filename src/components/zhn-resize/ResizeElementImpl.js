@@ -1,12 +1,12 @@
 import {
+  isFn,
   bindTo,
   getRefElementStyle
 } from '../uiApi';
 
-import isKeyEnter from '../zhn/isKeyEnter';
+import { isKeyEnterOrBlank } from '../hooks/fUseKey';
 
-const _isFn = fn => typeof fn === 'function'
-, _isNaN = Number.isNaN
+const _isNaN = Number.isNaN
 , _assign = Object.assign
 , _initResizeProperties = inst => {
   _assign(inst, {
@@ -70,7 +70,7 @@ class ResizeElementImpl {
 
   _onResizeAfter = () => {
     const { onResizeAfter } = this;
-    if (_isFn(onResizeAfter)) {
+    if (isFn(onResizeAfter)) {
       onResizeAfter(this._getWidth());
     }
   }
@@ -99,9 +99,9 @@ class ResizeElementImpl {
     }
   }
 
-  hKdLeft = (event) => {
-    if (isKeyEnter(event)) {
-      event.stopPropagation()
+  hKdLeft = (evt) => {
+    if (isKeyEnterOrBlank(evt)) {
+      evt.stopPropagation()
       this.resizeBy(-this.step)
     }
   }
@@ -109,9 +109,9 @@ class ResizeElementImpl {
      this.resizeBy(-this.deltaStep)
      this._increaseDeltaStep();
   }
-  hKdRight = (event) => {
-    if (isKeyEnter(event)) {
-      event.stopPropagation()
+  hKdRight = (evt) => {
+    if (isKeyEnterOrBlank(evt)) {
+      evt.stopPropagation()
       this.resizeBy(this.step)
     }
   }

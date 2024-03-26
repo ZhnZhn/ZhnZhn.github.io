@@ -1,5 +1,5 @@
-import isKeyEnter from '../zhn/isKeyEnter'
-import SvgMore from '../zhn/SvgMore'
+import { isKeyEnterOrBlank } from '../hooks/fUseKey';
+import SvgMore from '../zhn/SvgMore';
 
 import { crAppearance } from './tableFn';
 import {
@@ -83,7 +83,7 @@ const _renderHeader = (props, _hThKeyDown) => {
 
 const TableHead = (props) => {
   const _hThKeyEnter = (evt, pn) => {
-    if (isKeyEnter(evt)) {
+    if (isKeyEnterOrBlank(evt)) {
       props?.onSort(pn)
     }
   }
