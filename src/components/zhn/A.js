@@ -9,7 +9,6 @@ import InfoPart from './InfoPart'
 import InputText from './InputText'
 import ItemList from './ItemList'
 import ItemStack from './ItemStack'
-import Load from './Load'
 import OpenClose from './OpenClose'
 import ShowHide from './ShowHide'
 import SvgMore from './SvgMore'
@@ -28,10 +27,9 @@ const A = {
   InfoPart,
   InputText,
   ItemList,
-  ItemStack,
-  Load,
+  ItemStack,  
   OpenClose,
-  ShowHide,  
+  ShowHide,
   SvgMore,
   MsgRenderErr,
   HighchartWrapper,

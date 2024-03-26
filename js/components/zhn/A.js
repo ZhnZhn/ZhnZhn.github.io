@@ -14,7 +14,6 @@ var _InfoPart = _interopRequireDefault(require("./InfoPart"));
 var _InputText = _interopRequireDefault(require("./InputText"));
 var _ItemList = _interopRequireDefault(require("./ItemList"));
 var _ItemStack = _interopRequireDefault(require("./ItemStack"));
-var _Load = _interopRequireDefault(require("./Load"));
 var _OpenClose = _interopRequireDefault(require("./OpenClose"));
 var _ShowHide = _interopRequireDefault(require("./ShowHide"));
 var _SvgMore = _interopRequireDefault(require("./SvgMore"));
@@ -33,7 +32,6 @@ const A = {
   InputText: _InputText.default,
   ItemList: _ItemList.default,
   ItemStack: _ItemStack.default,
-  Load: _Load.default,
   OpenClose: _OpenClose.default,
   ShowHide: _ShowHide.default,
   SvgMore: _SvgMore.default,

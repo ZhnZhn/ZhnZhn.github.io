@@ -9,7 +9,10 @@ import { fetchTxt } from '../../utils/fnFetch';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import DivHtml from '../zhn/DivHtml';
-import Load from '../zhn/Load';
+import {
+  SpinnerLoading,
+  LoadFailedMsg
+} from '../zhn/Spinner';
 
 const EMPTY_DESCR = '<p class="descr__part">Description empty</p>'
 , INITIAL_DESCR = ''
@@ -88,9 +91,10 @@ const DescriptionDialog = memoIsShow((props) => {
       onClose={onClose}
     >
       {isLoading
-         ? <Load.Loading />
+         ? <SpinnerLoading />
          : isLoadFailed
-             ? <Load.LoadFailed errMsg={errMsg} />
+             //? <SpinnerLoadFailed errMsg={errMsg} />
+             ? <LoadFailedMsg errMsg={errMsg} />
              : <DivHtml style={S_DIV} str={descrHtml} />
       }
     </ModalDialog>

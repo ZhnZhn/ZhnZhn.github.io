@@ -3,20 +3,17 @@ import {
   useEffect
 } from '../uiApi';
 
-const S_SPINNER_DIV = {
-  width: 32,
-  height: 32
-};
-
 const SpinnerDiv = ({ style }) => (
   <div
-    style={{...S_SPINNER_DIV, ...style}}
+    style={style}
     data-loader="circle"
   />
 );
 
 const S_SPINNER_LOADING = {
   position: 'relative',
+  width: 32,
+  height: 32,
   margin: '32px auto 0'
 };
 
@@ -27,6 +24,31 @@ export const SpinnerLoading = ({
     ...S_SPINNER_LOADING,
     ...style}}
   />
+)
+
+const FAILED_LOAD_COLOR = '#f44336'
+, S_LOAD_FAILED = {
+  ...S_SPINNER_LOADING,
+  borderColor: FAILED_LOAD_COLOR
+}
+, S_ERR_MSG = {
+  color: FAILED_LOAD_COLOR,
+  padding: 16,
+  fontWeight: 600
+};
+
+export const LoadFailedMsg = ({
+  errMsg=''
+}) => (
+  <>
+    <div
+      data-loader="circle-failed"
+      style={S_LOAD_FAILED}
+    />
+    <p style={S_ERR_MSG}>
+      {`${errMsg}: Network error.`}
+    </p>
+  </>
 )
 
 const SPINNER_LOADING = 'L';
@@ -49,7 +71,7 @@ const TRANSITION_DURATION = 800
 , S_LOADING = {
   opacity: 1
 }, S_FAILED = {
-  borderColor: '#f44336',
+  borderColor: FAILED_LOAD_COLOR,
   animation: 'none'
 }, S_LOADED = {
   opacity: 0

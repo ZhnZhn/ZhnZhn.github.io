@@ -9,7 +9,7 @@ var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _fnFetch = require("../../utils/fnFetch");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _DivHtml = _interopRequireDefault(require("../zhn/DivHtml"));
-var _Load = _interopRequireDefault(require("../zhn/Load"));
+var _Spinner = require("../zhn/Spinner");
 var _jsxRuntime = require("react/jsx-runtime");
 const EMPTY_DESCR = '<p class="descr__part">Description empty</p>',
   INITIAL_DESCR = '',
@@ -75,7 +75,9 @@ const DescriptionDialog = (0, _memoIsShow.default)(props => {
     isShow: isShow,
     style: S_DIALOG,
     onClose: onClose,
-    children: isLoading ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Load.default.Loading, {}) : isLoadFailed ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Load.default.LoadFailed, {
+    children: isLoading ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.SpinnerLoading, {}) : isLoadFailed
+    //? <SpinnerLoadFailed errMsg={errMsg} />
+    ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.LoadFailedMsg, {
       errMsg: errMsg
     }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivHtml.default, {
       style: S_DIV,
@@ -83,6 +85,5 @@ const DescriptionDialog = (0, _memoIsShow.default)(props => {
     })
   });
 });
-var _default = DescriptionDialog;
-exports.default = _default;
+var _default = exports.default = DescriptionDialog;
 //# sourceMappingURL=DescriptionDialog.js.map
