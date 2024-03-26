@@ -1,31 +1,19 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../uiApi");
-
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
-
 var _Hr = _interopRequireDefault(require("./Hr"));
-
 var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
-
 var _Input = require("./Input.Style");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 //import PropTypes from "prop-types";
-const _initState = value => ({
-  value,
-  errorInput: null,
-  isValid: true
-});
 
-const DF_ON_TEST = () => true;
-
+const _crState = (value, errorInput, isValid) => [value, errorInput, isValid],
+  _initState = value => _crState(value, null, true),
+  DF_ON_TEST = () => true;
 const DateField = (0, _uiApi.forwardRef)((_ref, ref) => {
   let {
     style,
@@ -39,44 +27,22 @@ const DateField = (0, _uiApi.forwardRef)((_ref, ref) => {
     onTest = DF_ON_TEST,
     onEnter
   } = _ref;
-
   const _refInput = (0, _uiApi.useRef)(null),
-        [state, setState] = (0, _uiApi.useState)(() => _initState(initialValue)),
-        {
-    value,
-    errorInput,
-    isValid
-  } = state,
-        _hChangeValue = event => {
-    const {
-      value
-    } = event.target,
-          _nextState = onTest(value) ? _initState(value) : {
-      value,
-      isValid: false,
-      errorInput: null
-    };
-
-    setState(_nextState);
-  },
-        _hBlurValue = () => {
-    const _nextState = value !== initialValue && !onTest(value) ? {
-      value,
-      errorInput: errorMsg,
-      isValid: false
-    } : {
-      value,
-      errorInput: null,
-      isValid: true
-    };
-
-    setState(_nextState);
-  },
-        _hKeyDown = (0, _useInputKeyDown.default)({
-    onEnter,
-    onDelete: () => setState(_initState(initialValue))
-  }, [initialValue]);
-
+    [state, setState] = (0, _uiApi.useState)(() => _initState(initialValue)),
+    [value, errorInput, isValid] = state,
+    _hChangeValue = evt => {
+      const {
+        value
+      } = evt.target;
+      setState(onTest(value) ? _initState(value) : _crState(value, null, false));
+    },
+    _hBlurValue = () => {
+      setState(value !== initialValue && !onTest(value) ? _crState(value, errorMsg, false) : _crState(value, null, true));
+    },
+    _hKeyDown = (0, _useInputKeyDown.default)({
+      onEnter,
+      onDelete: () => setState(_initState(initialValue))
+    }, [initialValue]);
   (0, _uiApi.useEffect)(() => setState(_initState(initialValue)), [initialValue]);
   (0, _uiApi.useImperativeHandle)(ref, () => ({
     getValue: () => value,
@@ -89,12 +55,14 @@ const DateField = (0, _uiApi.forwardRef)((_ref, ref) => {
     focus: () => (0, _uiApi.focusRefElement)(_refInput)
   }), [value, isValid, onTest]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: { ..._Input.S_ROW,
+    style: {
+      ..._Input.S_ROW,
       ...style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
       ref: _refInput,
-      style: { ..._Input.S_INPUT,
+      style: {
+        ..._Input.S_INPUT,
         ...inputStyle
       },
       name: name,
@@ -117,6 +85,7 @@ const DateField = (0, _uiApi.forwardRef)((_ref, ref) => {
     })]
   });
 });
+
 /*
  DateField.propTypes = {
    style: PropTypes.object,
@@ -130,7 +99,5 @@ const DateField = (0, _uiApi.forwardRef)((_ref, ref) => {
    onEnter: PropTypes.func
  }
 */
-
-var _default = DateField;
-exports.default = _default;
+var _default = exports.default = DateField;
 //# sourceMappingURL=DateField.js.map

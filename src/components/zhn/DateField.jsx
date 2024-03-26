@@ -17,15 +17,19 @@ import {
   S_INPUT
 } from './Input.Style';
 
-const _initState = (
-  value
-) => ({
+const _crState = (
   value,
-  errorInput: null,
-  isValid: true
-});
-
-const DF_ON_TEST = () => true
+  errorInput,
+  isValid
+) => [
+  value,
+  errorInput,
+  isValid
+]
+, _initState = (
+  value
+) => _crState(value, null, true)
+, DF_ON_TEST = () => true;
 
 const DateField = forwardRef(({
   style,
@@ -44,31 +48,32 @@ const DateField = forwardRef(({
     state,
     setState
   ] = useState(() => _initState(initialValue))
-  , {
+  , [
     value,
     errorInput,
     isValid
-  } = state
-  , _hChangeValue = (event) => {
-      const { value } = event.target
-      , _nextState = onTest(value)
-          ? _initState(value)
-          : { value, isValid: false, errorInput: null };
-      setState(_nextState)
+  ] = state
+  , _hChangeValue = (evt) => {
+      const { value } = evt.target;
+      setState(onTest(value)
+        ? _initState(value)
+        : _crState(value, null, false)
+      )
     }
   , _hBlurValue = () => {
-      const _nextState = (value !== initialValue && !onTest(value))
-        ? { value, errorInput: errorMsg, isValid: false }
-        : { value, errorInput: null, isValid: true }
-      setState(_nextState)
+      setState(value !== initialValue && !onTest(value)
+        ? _crState(value, errorMsg, false)
+        : _crState(value, null, true)
+      )
     }
   , _hKeyDown = useInputKeyDown({
       onEnter,
       onDelete: () => setState(_initState(initialValue))
   }, [initialValue]);
 
-  useEffect(() => setState(_initState(initialValue))
-    ,[initialValue]
+  useEffect(
+    () => setState(_initState(initialValue)),
+    [initialValue]
   )
 
   useImperativeHandle(ref, () => ({
