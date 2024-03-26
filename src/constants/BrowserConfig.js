@@ -65,12 +65,12 @@ const BrowserConfig = {
   ),
   [BT_EUROSTAT]: _crBrowserItem(
     BT_EUROSTAT,
-    'Eurostat Statistics',
+    'Eurostat Overview',
     'eurostat'
   ),
   [BT_FGR]: _crBrowserItem(
     BT_FGR,
-    'Eurostat: FIGARO',
+    'EU FIGARO',
     'figaro'
   ),
   [BT_PE]: _crBrowserItem(

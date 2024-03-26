@@ -20,8 +20,8 @@ const _crSourceMenuUrl = token => "./data/" + token + "/source-menu.json",
   });
 const BrowserConfig = {
   [_BrowserType.BT_STOCK_MARKETS]: _crBrowserItem(_BrowserType.BT_STOCK_MARKETS, 'Stock Markets', 'stock-markets'),
-  [_BrowserType.BT_EUROSTAT]: _crBrowserItem(_BrowserType.BT_EUROSTAT, 'Eurostat Statistics', 'eurostat'),
-  [_BrowserType.BT_FGR]: _crBrowserItem(_BrowserType.BT_FGR, 'Eurostat: FIGARO', 'figaro'),
+  [_BrowserType.BT_EUROSTAT]: _crBrowserItem(_BrowserType.BT_EUROSTAT, 'Eurostat Overview', 'eurostat'),
+  [_BrowserType.BT_FGR]: _crBrowserItem(_BrowserType.BT_FGR, 'EU FIGARO', 'figaro'),
   [_BrowserType.BT_PE]: _crBrowserItem(_BrowserType.BT_PE, 'Euro Indicators / PEEIs', 'peeis'),
   [_BrowserType.BT_COMEXT]: _crBrowserItem(_BrowserType.BT_COMEXT, 'EU Comext', 'comext'),
   [_BrowserType.BT_SDG]: _crBrowserItem(_BrowserType.BT_SDG, 'EU SDG', 'eu-sdg', {
