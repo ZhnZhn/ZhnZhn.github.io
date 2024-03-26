@@ -8,6 +8,7 @@ import {
   BT_PE,
   BT_COMEXT,
   BT_SDG,
+  BT_CEI,
   BT_NDL,
   BT_US_ECONOMICS,
   BT_ENERGY,
@@ -81,9 +82,10 @@ const PAGE_CONFIGS_01 = [
 ]
 , PAGE_CONFIGS_02 = [
   [CL_ORG, 'Overview', BT_EUROSTAT],
-  [CL_ORG, 'EU Comext', BT_COMEXT],
-  [CL_ORG, 'EU FIGARO', BT_FGR],
+  [CL_ORG, 'Circular Economy', BT_CEI],
   [CL_ORG, 'Euro Indicators / PEEIs', BT_PE],
+  [CL_ORG, 'EU Comext', BT_COMEXT],  
+  [CL_ORG, 'EU FIGARO', BT_FGR],
   [CL_ORG, 'EU SDG', BT_SDG],
 ]
 , PAGE_CONFIGS_03 = [

@@ -5,6 +5,7 @@ import {
   BT_PE,
   BT_COMEXT,
   BT_SDG,
+  BT_CEI,
   BT_UN_COMTRADE,
   BT_FAOSTAT,
   BT_WORLD_BANK,
@@ -87,6 +88,13 @@ const BrowserConfig = {
     BT_SDG,
     'EU SDG',
     'eu-sdg',
+    {...S_ITEM_MULTI_LINE},
+    {...S_ITEM_MULTI_LINE, whiteSpace: 'unset'}
+  ),
+  [BT_CEI]: _crBrowserItem(
+    BT_CEI,
+    'Circular economy indicators',
+    'eu-cei',
     {...S_ITEM_MULTI_LINE},
     {...S_ITEM_MULTI_LINE, whiteSpace: 'unset'}
   ),

@@ -30,6 +30,12 @@ const BrowserConfig = {
     ...S_ITEM_MULTI_LINE,
     whiteSpace: 'unset'
   }),
+  [_BrowserType.BT_CEI]: _crBrowserItem(_BrowserType.BT_CEI, 'Circular economy indicators', 'eu-cei', {
+    ...S_ITEM_MULTI_LINE
+  }, {
+    ...S_ITEM_MULTI_LINE,
+    whiteSpace: 'unset'
+  }),
   [_BrowserType.BT_UN_COMTRADE]: _crBrowserItem(_BrowserType.BT_UN_COMTRADE, 'UN Comtrade', 'uncomtrade'),
   [_BrowserType.BT_FAOSTAT]: _crBrowserItem(_BrowserType.BT_FAOSTAT, 'FAOSTAT', 'faostat'),
   [_BrowserType.BT_WORLD_BANK]: _crBrowserItem(_BrowserType.BT_WORLD_BANK, 'World Bank', 'world-bank'),
