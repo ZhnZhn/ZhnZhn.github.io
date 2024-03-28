@@ -7,6 +7,7 @@ var _AdapterFn = require("../AdapterFn");
 exports.getColorBlack = _AdapterFn.getColorBlack;
 exports.findMinY = _AdapterFn.findMinY;
 var _Chart = require("../../charts/Chart");
+var _configBuilderFn = require("../../charts/configBuilderFn");
 var _Tooltip = require("../../charts/Tooltip");
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
@@ -104,11 +105,6 @@ const _setZoomMinMaxTo = (config, isNotZoomToMinMax, min) => {
     yAxis.zhNotZoomToMinMax = true;
   } else {
     yAxis.min = min;
-  }
-};
-const _setHeightIfBarTo = (config, seriaType, categories) => {
-  if (seriaType === 'BAR_SET' || seriaType === 'BAR_WITH_LABELS') {
-    config.chart.height = Math.min(100 + 17 * categories.length, config.chart.height);
   }
 };
 const _getTableId = _ref2 => {
@@ -235,18 +231,16 @@ const _setCategories = _ref6 => {
     option
   } = _ref6;
   const {
-    time,
-    isNotZoomToMinMax,
-    seriaType
+    time
   } = option;
   config.xAxis.categories = categories;
-  _setZoomMinMaxTo(config, isNotZoomToMinMax, min);
+  _setZoomMinMaxTo(config, option.isNotZoomToMinMax, min);
   config.series[0].name = time;
   _assign(config.zhConfig, {
     itemCaption: _crItemCaption(option),
     itemTime: time
   });
-  _setHeightIfBarTo(config, seriaType, categories);
+  (0, _configBuilderFn.setBarConfigHeightIf)(config);
 };
 const _colorSeries = config => {
   _colorSeriaIn(config, _isEUCode, COLOR_EU);

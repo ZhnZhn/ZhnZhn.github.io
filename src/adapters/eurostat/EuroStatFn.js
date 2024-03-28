@@ -8,6 +8,9 @@ import {
   setDefaultTitle
 } from '../../charts/Chart';
 import {
+  setBarConfigHeightIf
+} from '../../charts/configBuilderFn';
+import {
   tooltipCategorySimple
 } from '../../charts/Tooltip';
 
@@ -176,18 +179,6 @@ const _setZoomMinMaxTo = (
     yAxis.min = min
   }
 }
-const _setHeightIfBarTo = (
-  config,
-  seriaType,
-  categories
-) => {
-  if (seriaType === 'BAR_SET' || seriaType === 'BAR_WITH_LABELS'){
-    config.chart.height = Math.min(
-      100 + 17*categories.length,
-      config.chart.height
-    )
-  }
-};
 
 const _getTableId = ({
   dfId,
@@ -328,12 +319,10 @@ const _setCategories = ({
   option
 }) => {
    const {
-     time,
-     isNotZoomToMinMax,
-     seriaType
+     time
    } = option;
    config.xAxis.categories = categories
-   _setZoomMinMaxTo(config, isNotZoomToMinMax, min)
+   _setZoomMinMaxTo(config, option.isNotZoomToMinMax, min)
 
    config.series[0].name = time
 
@@ -341,7 +330,7 @@ const _setCategories = ({
      itemCaption: _crItemCaption(option),
      itemTime: time
    })
-   _setHeightIfBarTo(config, seriaType, categories)
+   setBarConfigHeightIf(config)
 }
 
 const _colorSeries = (config) => {
