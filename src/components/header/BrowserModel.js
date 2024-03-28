@@ -76,15 +76,15 @@ const _crMenuItems = (
 const PAGE_CONFIGS_01 = [
   [CL_ORG, 'DBnomics', BT_DB_NOMICS],
   [CL_BR, 'Energy', BT_ENERGY],
-  [CL_ORG, 'Nasdaq Data Link', BT_NDL],
   [CL_BR, 'U.S. Economics', BT_US_ECONOMICS],
-  [CL_BR, 'Commodities', BT_COMMODITIES]
+  [CL_BR, 'Commodities', BT_COMMODITIES],
+  [CL_ORG, 'Nasdaq Data Link', BT_NDL],
 ]
 , PAGE_CONFIGS_02 = [
   [CL_ORG, 'Overview', BT_EUROSTAT],
   [CL_ORG, 'Circular Economy', BT_CEI],
   [CL_ORG, 'Euro Indicators / PEEIs', BT_PE],
-  [CL_ORG, 'EU Comext', BT_COMEXT],  
+  [CL_ORG, 'EU Comext', BT_COMEXT],
   [CL_ORG, 'EU FIGARO', BT_FGR],
   [CL_ORG, 'EU SDG', BT_SDG],
 ]

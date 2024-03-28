@@ -6,7 +6,6 @@ exports.crKeyForConfig = exports.clearPrototypeOf = void 0;
 var _clearPrototypeOf = require("../../utils/clearPrototypeOf");
 exports.clearPrototypeOf = _clearPrototypeOf.clearPrototypeOf;
 var _LoadType = require("../../constants/LoadType");
-var _ChartType = require("../../constants/ChartType");
 var _LoadConfig = _interopRequireDefault(require("./LoadConfig"));
 const _isFn = fn => typeof fn === 'function';
 const _crNdlKey = _ref => {
@@ -18,7 +17,7 @@ const _crNdlKey = _ref => {
     seriaType,
     viewKey
   } = _ref;
-  return loadId === _LoadType.LT_QCT && !isLoadMeta ? seriaType === _ChartType.CHT_AREA ? `${value}_${_ChartType.CHT_AREA}_${dataColumn}` : `${value}_${seriaType}` : viewKey || value;
+  return viewKey || value;
 };
 const _crKey = option => {
   const {
@@ -40,7 +39,6 @@ const crKeyForConfig = option => {
   } = option;
   switch (loadId) {
     case _LoadType.LT_Q:
-    case _LoadType.LT_QCT:
       return _itemKey || _crNdlKey(option);
     case _LoadType.LT_EU_STAT:
     case _LoadType.LT_EIA:

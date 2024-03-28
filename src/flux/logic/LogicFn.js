@@ -1,13 +1,11 @@
 export { clearPrototypeOf } from '../../utils/clearPrototypeOf';
 
 import {
-  LT_Q,
-  LT_QCT,
+  LT_Q,  
   LT_EU_STAT,
   LT_EIA,
   LT_WL
 } from '../../constants/LoadType';
-import { CHT_AREA } from '../../constants/ChartType';
 
 import LoadConfig from './LoadConfig';
 
@@ -20,11 +18,7 @@ const _crNdlKey = ({
   dataColumn,
   seriaType,
   viewKey
-}) => loadId === LT_QCT && !isLoadMeta
-  ? seriaType === CHT_AREA
-      ? `${value}_${CHT_AREA}_${dataColumn}`
-      : `${value}_${seriaType}`
-  : viewKey || value;
+}) => viewKey || value;
 
 const _crKey = (option) => {
   const {
@@ -42,7 +36,7 @@ const _crKey = (option) => {
 export const crKeyForConfig = (option) => {
   const { loadId, _itemKey, id } = option;
   switch (loadId) {
-    case LT_Q: case LT_QCT:
+    case LT_Q:
       return _itemKey || _crNdlKey(option);
     case LT_EU_STAT: case LT_EIA: case LT_WL:
       return _itemKey || id;

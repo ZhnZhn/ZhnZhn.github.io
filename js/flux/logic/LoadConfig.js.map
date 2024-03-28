@@ -5,18 +5,14 @@
  ],
  "file": "../../../src/flux/logic/LoadConfig.js",
  "names": [
-  "_LoadType",
-  "require",
-  "_loadNdlCommodityTrade",
   "_LoadImpl",
   "_interopRequireDefault",
+  "require",
   "LoadConfig",
   "LoadImpl",
-  "LT_QCT",
-  "loadNdlCommodityTrade",
   "_default",
   "exports",
   "default"
  ],
- "mappings": ";;;;;AAAA,IAAAA,SAAA,GAAAC,OAAA;AACA,IAAAC,sBAAA,GAAAD,OAAA;AACA,IAAAE,SAAA,GAAAC,sBAAA,CAAAH,OAAA;AAEA,MAAMI,UAAU,GAAG;EACjB,GAAGC,iBAAQ;EACX,CAACC,gBAAM,GAAGC;AACZ,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaN,UAAU"
+ "mappings": ";;;;;AAAA,IAAAA,SAAA,GAAAC,sBAAA,CAAAC,OAAA;AAEA,MAAMC,UAAU,GAAG;EACjB,GAAGC;AACL,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaJ,UAAU"
 }

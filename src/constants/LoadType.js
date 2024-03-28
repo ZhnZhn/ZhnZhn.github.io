@@ -1,5 +1,4 @@
 export const LT_Q = 'Q'
-export const LT_QCT = 'QCT'
 
 export const LT_AL = 'AL'
 export const LT_IEX = 'IEX'

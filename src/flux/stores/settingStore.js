@@ -2,7 +2,6 @@ import { bindTo } from '../storeApi';
 
 import {
   LT_Q,
-  LT_QCT,
   LT_AL,
   LT_IEX,
   LT_FMP,
@@ -14,7 +13,7 @@ import {
   LT_BLS,
   LT_WL,
   LT_UN,
-  
+
   LT_CR,
   LT_BB,
   LT_BF,
@@ -32,7 +31,6 @@ const _withApiKey = [
 ];
 const _withProxyServer = [
   LT_Q,
-  LT_QCT,
   LT_UN,
   LT_BB
 ];

@@ -1,10 +1,7 @@
-import { LT_QCT } from '../../constants/LoadType';
-import { loadNdlCommodityTrade } from './loadNdlCommodityTrade';
 import LoadImpl from './LoadImpl';
 
 const LoadConfig = {
-  ...LoadImpl,
-  [LT_QCT]: loadNdlCommodityTrade  
+  ...LoadImpl
 };
 
 export default LoadConfig

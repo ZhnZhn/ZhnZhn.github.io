@@ -7,7 +7,7 @@ var _LogicFn = require("./LogicFn");
 var _BrowserType = require("../../constants/BrowserType");
 var _DialogSelectN = _interopRequireDefault(require("../../components/dialogs/DialogSelectN"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
 const _router = {
@@ -104,22 +104,6 @@ const _router = {
   get ZillowDialog() {
     return this.getUS().then(D => D.Zillow);
   },
-  _loadNDL() {
-    /*eslint-disable no-undef */
-    if (process.env.NODE_ENV === '_development') {
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/ndl/NdlDialogs.js"))).then(module => this.NDL = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
-      /*eslint-enable no-undef */
-    }
-    return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "ndl-dialogs" */
-    /* webpackMode: "lazy" */
-    "../../components/ndl/NdlDialogs"))).then(module => this.NDL = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
-  },
-  getNDL() {
-    return this.NDL || this._loadNDL();
-  },
-  get UNCommodityTradeDialog() {
-    return this.getNDL().then(D => D.UNCommodityTrade);
-  },
   loadDialogs(browserType) {
     switch (browserType) {
       case _BrowserType.BT_STOCK_MARKETS:
@@ -128,9 +112,6 @@ const _router = {
       case _BrowserType.BT_NORWAY_STATISTICS:
       case _BrowserType.BT_SWEDEN_STAT:
         this._loadSD();
-        break;
-      case _BrowserType.BT_NDL:
-        this._loadNDL();
         break;
       case _BrowserType.BT_UN_COMTRADE:
         this._loadUN();

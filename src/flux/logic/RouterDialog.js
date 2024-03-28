@@ -4,7 +4,6 @@ import {
   BT_STOCK_MARKETS,
   BT_NORWAY_STATISTICS,
   BT_SWEDEN_STAT,
-  BT_NDL,
   BT_UN_COMTRADE
 } from '../../constants/BrowserType';
 
@@ -144,29 +143,6 @@ const _router = {
     return this.getUS().then(D => D.Zillow);
   },
 
-  _loadNDL() {
-     /*eslint-disable no-undef */
-     if ( process.env.NODE_ENV === '_development' ) {
-       return import("js/components/ndl/NdlDialogs.js")
-         .then(module => this.NDL = _resolve(module.default))
-         .catch(err => console.log(MSG_OFFLINE));
-    /*eslint-enable no-undef */
-    }
-    return import(
-       /* webpackChunkName: "ndl-dialogs" */
-       /* webpackMode: "lazy" */
-        "../../components/ndl/NdlDialogs"
-       )
-      .then(module => this.NDL = _resolve(module.default))
-      .catch(err => console.log(MSG_OFFLINE));
-  },
-  getNDL() {
-    return this.NDL || this._loadNDL();
-  },
-  get UNCommodityTradeDialog() {
-    return this.getNDL().then(D => D.UNCommodityTrade);
-  },    
-
   loadDialogs(browserType) {
     switch(browserType){
       case BT_STOCK_MARKETS:
@@ -174,8 +150,6 @@ const _router = {
       case BT_NORWAY_STATISTICS:
       case BT_SWEDEN_STAT:
          this._loadSD(); break;
-      case BT_NDL:
-         this._loadNDL(); break;
       case BT_UN_COMTRADE:
         this._loadUN(); break;
       default: return;
