@@ -3,7 +3,6 @@ import {
   CHT_SPLINE,
   CHT_LINE,
   CHT_COLUMN,
-  CHT_SEMI_DONUT,
   CHT_STACKED_AREA,
   CHT_STACKED_AREA_PERCENT,
   CHT_STACKED_COLUMN,
@@ -32,7 +31,6 @@ import {
 } from './NdlFn';
 
 import toArea from './toArea';
-import toSemiDonut from './toSemiDonut';
 import toStackedArea  from './toStackedArea';
 import toStackedColumn from './toStackedColumn';
 import toTreeMap from './toTreeMap';
@@ -62,9 +60,7 @@ const _rToConfig = {
   [CHT_SPLINE]: toArea,
   [CHT_LINE]: toArea,
   [CHT_COLUMN]: toArea,
-
-  [CHT_SEMI_DONUT]: toSemiDonut,
-
+  
   [CHT_STACKED_AREA]: toStackedArea,
   [CHT_STACKED_AREA_PERCENT]: toStackedArea,
   [CHT_STACKED_COLUMN]: toStackedColumn,
