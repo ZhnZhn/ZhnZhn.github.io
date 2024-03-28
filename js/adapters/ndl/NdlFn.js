@@ -2,11 +2,9 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.valueMoving = exports.sortDescByPnY = exports.setTitleToConfig = exports.isPrevDateAfter = exports.getRecentDate = exports.getDataColumnIndex = exports.getData = exports.getColumnNames = exports.findColumnIndex = exports.crZhConfig = exports.crValueMoving = exports.crPercent = exports.crDatasetInfo = void 0;
+exports.valueMoving = exports.setTitleToConfig = exports.isPrevDateAfter = exports.getRecentDate = exports.getDataColumnIndex = exports.getData = exports.getColumnNames = exports.findColumnIndex = exports.crZhConfig = exports.crValueMoving = exports.crDatasetInfo = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.valueMoving = _AdapterFn.valueMoving;
-var _compareByFn = require("../compareByFn");
-exports.sortDescByPnY = _compareByFn.sortDescByPnY;
 var _big = _interopRequireDefault(require("big.js"));
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 var _mathFn = require("../../math/mathFn");
@@ -114,7 +112,6 @@ const crZhConfig = option => {
   };
 };
 exports.crZhConfig = crZhConfig;
-const crPercent = exports.crPercent = _mathFn.calcPercent;
 const crValueMoving = _ref5 => {
   let {
     bNowValue = (0, _big.default)('0.0'),
@@ -164,13 +161,6 @@ const findColumnIndex = function (obj, columnName) {
   return;
 };
 exports.findColumnIndex = findColumnIndex;
-const getDataColumnIndex = (json, option) => {
-  const {
-      columnName,
-      dataColumn
-    } = option,
-    _dataColumn = findColumnIndex(json, columnName);
-  return _dataColumn || dataColumn || 1;
-};
+const getDataColumnIndex = (json, option) => findColumnIndex(json, option.columnName) || option.dataColumn || 1;
 exports.getDataColumnIndex = getDataColumnIndex;
 //# sourceMappingURL=NdlFn.js.map

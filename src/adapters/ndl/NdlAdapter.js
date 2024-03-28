@@ -3,11 +3,6 @@ import {
   CHT_SPLINE,
   CHT_LINE,
   CHT_COLUMN,
-  CHT_STACKED_AREA,
-  CHT_STACKED_AREA_PERCENT,
-  CHT_STACKED_COLUMN,
-  CHT_STACKED_COLUMN_PERCENT,
-  CHT_TREE_MAP,
   CHT_YEARLY,
   CHT_AREA_YEARLY,
   CHT_SCATTER,
@@ -31,9 +26,6 @@ import {
 } from './NdlFn';
 
 import toArea from './toArea';
-import toStackedArea  from './toStackedArea';
-import toStackedColumn from './toStackedColumn';
-import toTreeMap from './toTreeMap';
 import crYearlyConfig from '../toYearsByMonths';
 import {
   toScatterConfig,
@@ -60,13 +52,6 @@ const _rToConfig = {
   [CHT_SPLINE]: toArea,
   [CHT_LINE]: toArea,
   [CHT_COLUMN]: toArea,
-  
-  [CHT_STACKED_AREA]: toStackedArea,
-  [CHT_STACKED_AREA_PERCENT]: toStackedArea,
-  [CHT_STACKED_COLUMN]: toStackedColumn,
-  [CHT_STACKED_COLUMN_PERCENT]: toStackedColumn,
-
-  [CHT_TREE_MAP]: toTreeMap,
 
   [CHT_YEARLY]: _toYearlyByMonth,
   [CHT_AREA_YEARLY]: _toYearlyByMonth,

@@ -1,5 +1,4 @@
 export { valueMoving } from '../AdapterFn';
-export { sortDescByPnY } from '../compareByFn'
 
 import Big from 'big.js';
 
@@ -11,10 +10,7 @@ import {
 } from '../AdapterFn';
 
 import formatAllNumber from '../../utils/formatAllNumber';
-import {
-  calcPercent,
-  crValueMoving as crVm
-} from '../../math/mathFn';
+import { crValueMoving as crVm } from '../../math/mathFn';
 
 const _isStr = str => typeof str === 'string';
 
@@ -23,7 +19,8 @@ const _crItemCaption = ({
   items,
   itemCaption
 }) => isNumber(dfItemCaption)
-  && isArr(items) && items[dfItemCaption-1]
+  && isArr(items)
+  && items[dfItemCaption-1]
       ? items[dfItemCaption-1].caption || itemCaption
       : itemCaption;
 
@@ -146,8 +143,6 @@ export const crZhConfig = (
   };
 }
 
-export const crPercent = calcPercent
-
 export const crValueMoving = ({
    bNowValue=Big('0.0'),
    bPrevValue=Big('0.0')
@@ -208,11 +203,6 @@ export const findColumnIndex = (
 export const getDataColumnIndex = (
   json,
   option
-) => {
-  const {
-    columnName,
-    dataColumn
-  } = option
-  , _dataColumn = findColumnIndex(json, columnName);
-  return _dataColumn || dataColumn || 1;
-}
+) => findColumnIndex(json, option.columnName)
+ || option.dataColumn
+ || 1

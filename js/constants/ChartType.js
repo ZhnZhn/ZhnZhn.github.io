@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.CHT_YEARLY = exports.CHT_TREE_MAP_CLUSTER = exports.CHT_TREE_MAP_2_CLUSTER = exports.CHT_TREE_MAP_2 = exports.CHT_TREE_MAP = exports.CHT_STACKED_COLUMN_PERCENT = exports.CHT_STACKED_COLUMN = exports.CHT_STACKED_AREA_PERCENT = exports.CHT_STACKED_AREA = exports.CHT_SPLINE = exports.CHT_SEMI_DONUT = exports.CHT_SCATTER_UP = exports.CHT_SCATTER_DOWN = exports.CHT_SCATTER = exports.CHT_MAP = exports.CHT_LINE = exports.CHT_DOT_SET = exports.CHT_COLUMN_SET = exports.CHT_COLUMN_CLUSTER = exports.CHT_COLUMN = exports.CHT_BAR_WITH_LABELS = exports.CHT_BAR_SET = exports.CHT_BAR_CLUSTER = exports.CHT_BAR = exports.CHT_AREA_YEARLY = exports.CHT_AREA = void 0;
+exports.CHT_YEARLY = exports.CHT_TREE_MAP_CLUSTER = exports.CHT_TREE_MAP_2_CLUSTER = exports.CHT_TREE_MAP_2 = exports.CHT_TREE_MAP = exports.CHT_SPLINE = exports.CHT_SCATTER_UP = exports.CHT_SCATTER_DOWN = exports.CHT_SCATTER = exports.CHT_MAP = exports.CHT_LINE = exports.CHT_DOT_SET = exports.CHT_COLUMN_SET = exports.CHT_COLUMN_CLUSTER = exports.CHT_COLUMN = exports.CHT_BAR_WITH_LABELS = exports.CHT_BAR_SET = exports.CHT_BAR_CLUSTER = exports.CHT_BAR = exports.CHT_AREA_YEARLY = exports.CHT_AREA = void 0;
 const CHT_AREA = exports.CHT_AREA = 'AREA',
   CHT_SPLINE = exports.CHT_SPLINE = 'SPLINE',
   CHT_LINE = exports.CHT_LINE = 'LINE',
@@ -20,11 +20,6 @@ const CHT_BAR = exports.CHT_BAR = "BAR",
   CHT_TREE_MAP_2_CLUSTER = exports.CHT_TREE_MAP_2_CLUSTER = _crClusterType(CHT_TREE_MAP_2);
 const CHT_MAP = exports.CHT_MAP = 'MAP',
   CHT_DOT_SET = exports.CHT_DOT_SET = 'DOT_SET';
-const CHT_SEMI_DONUT = exports.CHT_SEMI_DONUT = 'SEMI_DONUT';
-const CHT_STACKED_AREA = exports.CHT_STACKED_AREA = 'STACKED_AREA';
-const CHT_STACKED_AREA_PERCENT = exports.CHT_STACKED_AREA_PERCENT = 'STACKED_AREA_PERCENT';
-const CHT_STACKED_COLUMN = exports.CHT_STACKED_COLUMN = 'STACKED_COLUMN';
-const CHT_STACKED_COLUMN_PERCENT = exports.CHT_STACKED_COLUMN_PERCENT = 'STACKED_COLUMN_PERCENT';
 const CHT_YEARLY = exports.CHT_YEARLY = 'YEARLY';
 const CHT_AREA_YEARLY = exports.CHT_AREA_YEARLY = 'AREA_YEARLY';
 const CHT_SCATTER = exports.CHT_SCATTER = 'SCATTER';

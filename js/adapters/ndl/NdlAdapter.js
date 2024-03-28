@@ -9,10 +9,6 @@ var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _NdlFn = require("./NdlFn");
 var _toArea = _interopRequireDefault(require("./toArea"));
-var _toSemiDonut = _interopRequireDefault(require("./toSemiDonut"));
-var _toStackedArea = _interopRequireDefault(require("./toStackedArea"));
-var _toStackedColumn = _interopRequireDefault(require("./toStackedColumn"));
-var _toTreeMap = _interopRequireDefault(require("./toTreeMap"));
 var _toYearsByMonths = _interopRequireDefault(require("../toYearsByMonths"));
 var _toScatter = require("./toScatter");
 const _fToConfig = crConfig => (json, option) => ({
@@ -26,12 +22,6 @@ const _rToConfig = {
   [_ChartType.CHT_SPLINE]: _toArea.default,
   [_ChartType.CHT_LINE]: _toArea.default,
   [_ChartType.CHT_COLUMN]: _toArea.default,
-  [_ChartType.CHT_SEMI_DONUT]: _toSemiDonut.default,
-  [_ChartType.CHT_STACKED_AREA]: _toStackedArea.default,
-  [_ChartType.CHT_STACKED_AREA_PERCENT]: _toStackedArea.default,
-  [_ChartType.CHT_STACKED_COLUMN]: _toStackedColumn.default,
-  [_ChartType.CHT_STACKED_COLUMN_PERCENT]: _toStackedColumn.default,
-  [_ChartType.CHT_TREE_MAP]: _toTreeMap.default,
   [_ChartType.CHT_YEARLY]: _toYearlyByMonth,
   [_ChartType.CHT_AREA_YEARLY]: _toYearlyByMonth,
   [_ChartType.CHT_SCATTER]: _crScatterConfig,
