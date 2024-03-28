@@ -389,7 +389,7 @@ const CATEGORIES_X_AXIS = {
   categories: [],
   opposite: false,
   crosshair: void 0,
-  tickColor: "gray",
+  tickColor: "grey",
   tickWidth: 3,
   tickLength: 7,
   tickPosition: "outside",
@@ -429,6 +429,21 @@ export const crBarOrColumnConfig = (
     ? crBarConfig
     : crColumnConfig;
   return fAdd('xAxis', { categories })(_crConfig());
+}
+
+const HEIGHT_OF_ONE_BAR_CATEGORY = 30;
+export const setBarConfigHeightIf = (
+  config
+) => {
+  const _chart = config.chart;
+  if (_chart.type === 'bar') {
+    const _categoriesNumber = config.xAxis.categories.length;
+    if (_categoriesNumber < 16) {
+      _chart.height = _categoriesNumber * HEIGHT_OF_ONE_BAR_CATEGORY
+        || HEIGHT_OF_ONE_BAR_CATEGORY
+    }
+  }  
+  return config;
 }
 
 export const crTreeMapConfig = (

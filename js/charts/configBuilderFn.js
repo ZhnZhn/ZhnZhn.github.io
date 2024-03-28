@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toConfig = exports.setDataSourceTo = exports.fSetSeriaBy = exports.fAddZhPoints = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSplineConfig = exports.crSeriaConfigFromAdapter = exports.crScatterSeriaConfig = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+exports.toConfig = exports.setDataSourceTo = exports.setBarConfigHeightIf = exports.fSetSeriaBy = exports.fAddZhPoints = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSplineConfig = exports.crSeriaConfigFromAdapter = exports.crScatterSeriaConfig = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _ChartConfigFn = require("./ChartConfigFn");
 exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
@@ -299,7 +299,7 @@ const CATEGORIES_X_AXIS = {
     categories: [],
     opposite: false,
     crosshair: void 0,
-    tickColor: "gray",
+    tickColor: "grey",
     tickWidth: 3,
     tickLength: 7,
     tickPosition: "outside",
@@ -340,6 +340,18 @@ const crBarOrColumnConfig = function (type, categories) {
   })(_crConfig());
 };
 exports.crBarOrColumnConfig = crBarOrColumnConfig;
+const HEIGHT_OF_ONE_BAR_CATEGORY = 30;
+const setBarConfigHeightIf = config => {
+  const _chart = config.chart;
+  if (_chart.type === 'bar') {
+    const _categoriesNumber = config.xAxis.categories.length;
+    if (_categoriesNumber < 16) {
+      _chart.height = _categoriesNumber * HEIGHT_OF_ONE_BAR_CATEGORY || HEIGHT_OF_ONE_BAR_CATEGORY;
+    }
+  }
+  return config;
+};
+exports.setBarConfigHeightIf = setBarConfigHeightIf;
 const crTreeMapConfig = data => {
   const config = (0, _TreeMapConfigFn.crTreeMapConfig)(),
     seria = (0, _TreeMapConfigFn.crTreeMapSeria)(data);
