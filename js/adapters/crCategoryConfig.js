@@ -11,7 +11,6 @@ var _CategoryFn = require("./CategoryFn");
 const crCategoryConfig = (title, subtitle, seriaType, seriaColor, data, isCluster) => (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)(seriaType, (0, _CategoryFn.crCategories)(data)), (0, _configBuilderFn.fAddCaption)(title, subtitle), (0, _configBuilderFn.fAddSeriaBy)(0, {
   color: seriaColor,
   data: isCluster ? (0, _addJenksColorTo.default)(data) : data
-}), _configBuilderFn.toConfig);
-var _default = crCategoryConfig;
-exports.default = _default;
+}), _configBuilderFn.setBarConfigHeightIf, _configBuilderFn.toConfig);
+var _default = exports.default = crCategoryConfig;
 //# sourceMappingURL=crCategoryConfig.js.map

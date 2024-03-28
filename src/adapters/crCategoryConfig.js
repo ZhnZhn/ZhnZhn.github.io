@@ -3,6 +3,7 @@ import {
   crBarOrColumnConfig,
   fAddCaption,
   fAddSeriaBy,
+  setBarConfigHeightIf,
   toConfig
 } from '../charts/configBuilderFn';
 import addJenksColorTo from '../math/addJenksColorTo';
@@ -25,6 +26,7 @@ const crCategoryConfig = (
       ? addJenksColorTo(data)
       : data
   }),
+  setBarConfigHeightIf,
   toConfig
 );
 
