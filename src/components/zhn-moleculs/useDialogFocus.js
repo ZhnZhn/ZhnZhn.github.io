@@ -3,24 +3,9 @@ import {
   useEffect,
   getRefValue,
   setRefValue,
-  focusRefElement
+  focusRefElement,
+  getComboboxElement
 } from '../uiApi';
-
-const _getComboboxElement = (
-  refRoot
-) => {
-  const _elRoot = getRefValue(refRoot);
-  if (_elRoot) {
-    const _comboboxNodeList = _elRoot.querySelectorAll('input[role="combobox"]')
-    let i = 0, _elInput;
-    for (; i<_comboboxNodeList.length; i++){
-      _elInput = _comboboxNodeList.item(i)
-      if (_elInput && _elInput.clientHeight) {
-        return _elInput;
-      }
-    }
-  }
-}
 
 const useDialogFocus = (
   isShow,
@@ -37,7 +22,7 @@ const useDialogFocus = (
     if (isShow && !_isPrevShow) {
       //focus
       setRefValue(_refPrevFocused, document.activeElement)
-      const _inputEl = _getComboboxElement(refRoot);
+      const _inputEl = getComboboxElement(refRoot);
       focusRefElement(
         isFocusCombobox && _inputEl
            ? () => _inputEl

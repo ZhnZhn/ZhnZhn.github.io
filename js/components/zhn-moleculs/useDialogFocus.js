@@ -3,20 +3,6 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-const _getComboboxElement = refRoot => {
-  const _elRoot = (0, _uiApi.getRefValue)(refRoot);
-  if (_elRoot) {
-    const _comboboxNodeList = _elRoot.querySelectorAll('input[role="combobox"]');
-    let i = 0,
-      _elInput;
-    for (; i < _comboboxNodeList.length; i++) {
-      _elInput = _comboboxNodeList.item(i);
-      if (_elInput && _elInput.clientHeight) {
-        return _elInput;
-      }
-    }
-  }
-};
 const useDialogFocus = (isShow, refBtMenuMore, isFocusCombobox) => {
   const refRoot = (0, _uiApi.useRef)(),
     _refPrevFocused = (0, _uiApi.useRef)(),
@@ -28,7 +14,7 @@ const useDialogFocus = (isShow, refBtMenuMore, isFocusCombobox) => {
     if (isShow && !_isPrevShow) {
       //focus
       (0, _uiApi.setRefValue)(_refPrevFocused, document.activeElement);
-      const _inputEl = _getComboboxElement(refRoot);
+      const _inputEl = (0, _uiApi.getComboboxElement)(refRoot);
       (0, _uiApi.focusRefElement)(isFocusCombobox && _inputEl ? () => _inputEl : refBtMenuMore, refRoot);
     } else if (!isShow && _isPrevShow) {
       //focusPrev

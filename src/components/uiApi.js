@@ -172,3 +172,19 @@ export const toHref = (href, isHttp) => {
    ? href
    : void 0;
 }
+
+export const getComboboxElement = (
+  refRoot
+) => {
+  const _elRoot = getRefValue(refRoot);
+  if (_elRoot) {
+    const _comboboxNodeList = _elRoot.querySelectorAll('input[role="combobox"]')
+    let i = 0, _elInput;
+    for (; i<_comboboxNodeList.length; i++){
+      _elInput = _comboboxNodeList.item(i)
+      if (_elInput && _elInput.clientHeight) {
+        return _elInput;
+      }
+    }
+  }
+}
