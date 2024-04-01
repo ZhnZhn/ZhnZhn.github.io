@@ -6,6 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _has = require("../has");
 var _ChartOptionsFn = require("../dialogs/ChartOptionsFn");
+var _FocusFirstCombobox = _interopRequireDefault(require("../zhn-moleculs/FocusFirstCombobox"));
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 var _Spinner = require("../zhn/Spinner");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
@@ -28,12 +29,14 @@ const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open 
     position: 'absolute',
     top: 80,
     left: '45%',
+    width: 32,
+    height: 32,
     zIndex: 10
   },
-  S_DIV_LOADING = {
-    height: 50,
-    width: '100%'
-  };
+  _crDivLoadingStyle = isShowLabels => ({
+    width: isShowLabels ? 350 : 250,
+    height: 72
+  });
 const IS_SHOW_LABELS = (0, _has.isWideWidth)();
 const _crDfC = (props, dim) => props.dfC || (dim || {}).value;
 const _crDfTitle = (props, dim) => {
@@ -182,6 +185,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     _spinnerStatus = (0, _Spinner.crSpinnerStatus)(isLoading, isLoadFailed),
     _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(chartType);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
+    isFocusBtMenu: false,
     isShow: isShow,
     caption: caption,
     menuModel: menuMoreModel,
@@ -202,27 +206,30 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       style: S_SPINNER,
       status: _spinnerStatus
     }), _spinnerStatus ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: S_DIV_LOADING
-    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
-      items: configs,
-      crItem: _crSelectItem.default,
-      isShowLabels: isShowLabels,
-      isRow: isRow,
-      fSelect: _fSelectItem
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
-      refSeriaColor: _refSeriaColor,
-      chartType: chartType,
-      isShowLabels: isShowLabels,
-      isShowChart: isShowChart,
-      chartOptions: chartOptions,
-      onSelectChart: setChartType,
-      isShowDate: _isShowDate,
-      dateDefault: dateDf.caption,
-      dateOptions: dateOptions,
-      onSelectDate: setDate,
-      isDim: _isDim,
-      dimOptions: dimOptions,
-      onSelectDim: setDim
+      style: _crDivLoadingStyle(isShowLabels)
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsxs)(_FocusFirstCombobox.default, {
+      is: isShow,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
+        items: configs,
+        crItem: _crSelectItem.default,
+        isShowLabels: isShowLabels,
+        isRow: isRow,
+        fSelect: _fSelectItem
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
+        refSeriaColor: _refSeriaColor,
+        chartType: chartType,
+        isShowLabels: isShowLabels,
+        isShowChart: isShowChart,
+        chartOptions: chartOptions,
+        onSelectChart: setChartType,
+        isShowDate: _isShowDate,
+        dateDefault: dateDf.caption,
+        dateOptions: dateOptions,
+        onSelectDate: setDate,
+        isDim: _isDim,
+        dimOptions: dimOptions,
+        onSelectDim: setDim
+      })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
       validationMessages: validationMessages
     })]
