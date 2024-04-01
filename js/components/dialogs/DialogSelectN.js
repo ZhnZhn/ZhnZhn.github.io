@@ -15,6 +15,7 @@ var _useDialogOptions = _interopRequireDefault(require("./hooks/useDialogOptions
 var _useTitles = _interopRequireDefault(require("./hooks/useTitles"));
 var _useChartConfig = _interopRequireDefault(require("./hooks/useChartConfig"));
 var _ChartOptionsFn = require("./ChartOptionsFn");
+var _FocusFirstCombobox = _interopRequireDefault(require("../zhn-moleculs/FocusFirstCombobox"));
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 var _SelectList = _interopRequireDefault(require("./SelectList"));
 var _dialogFn = require("./dialogFn");
@@ -119,8 +120,8 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     _isRowFd = isFd && !_isCategory,
     _isShowDate = isShowChart && _isCategory;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
+    isFocusBtMenu: false,
     isShow: isShow,
-    isFocusCombobox: true,
     caption: caption,
     menuModel: menuMoreModel,
     toTopLayer: toTopLayer,
@@ -150,12 +151,15 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       onToggleFd: toggleIsShowFd,
       onToggleChart: toggleIsShowChart,
       onClose: _hideToggle
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectList.default, {
-      isShow: isShow,
-      isShowLabels: isShowLabels,
-      selectProps: selectProps,
-      isShowById: _isShowById,
-      hSelect: _hSelect
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FocusFirstCombobox.default, {
+      is: isShow,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectList.default, {
+        isShow: isShow,
+        isShowLabels: isShowLabels,
+        selectProps: selectProps,
+        isShowById: _isShowById,
+        hSelect: _hSelect
+      })
     }), _isRowFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isShowFd,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowDate, {

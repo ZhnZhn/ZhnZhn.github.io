@@ -20,6 +20,7 @@ import useTitles from './hooks/useTitles';
 import useChartConfig from './hooks/useChartConfig';
 
 import { isCategoryItem } from './ChartOptionsFn';
+import FocusFirstCombobox from '../zhn-moleculs/FocusFirstCombobox';
 import D from './DialogCell';
 import SelectList from './SelectList';
 
@@ -205,8 +206,8 @@ const DialogSelectN = memoIsShow((
 
   return (
     <D.DraggableDialog
+      isFocusBtMenu={false}
       isShow={isShow}
-      isFocusCombobox={true}
       caption={caption}
       menuModel={menuMoreModel}
       toTopLayer={toTopLayer}
@@ -240,13 +241,15 @@ const DialogSelectN = memoIsShow((
         onToggleChart={toggleIsShowChart}
         onClose={_hideToggle}
       />
-      <SelectList
-        isShow={isShow}
-        isShowLabels={isShowLabels}
-        selectProps={selectProps}
-        isShowById={_isShowById}
-        hSelect={_hSelect}
-      />
+      <FocusFirstCombobox is={isShow}>
+        <SelectList
+          isShow={isShow}
+          isShowLabels={isShowLabels}
+          selectProps={selectProps}
+          isShowById={_isShowById}
+          hSelect={_hSelect}
+        />
+      </FocusFirstCombobox>
       { _isRowFd && <D.ShowHide isShow={isShowFd}>
           <D.RowDate
             innerRef={_refFromDate}
