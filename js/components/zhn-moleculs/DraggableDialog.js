@@ -51,8 +51,8 @@ const CommandButtons = _ref => {
 const FN_NOOP = () => {};
 const DraggableDialog = _ref2 => {
   let {
+    isFocusBtMenu = true,
     isShow,
-    isFocusCombobox,
     style,
     menuModel,
     caption,
@@ -63,10 +63,11 @@ const DraggableDialog = _ref2 => {
     onShow,
     onClose = FN_NOOP
   } = _ref2;
-  const refBtMenuMore = (0, _uiApi.useRef)(),
-    refRoot = (0, _useDialogFocus.default)(isShow, refBtMenuMore, isFocusCombobox),
+  const refRoot = (0, _uiApi.useRef)(),
+    refBtMenu = (0, _uiApi.useRef)(),
     _hKeyDown = (0, _fUseKey.useKeyEscape)(onClose),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_DRAGGABLE_DIALOG);
+  (0, _useDialogFocus.default)(isShow, isFocusBtMenu ? refBtMenu : void 0);
   (0, _useXYMovable.default)(refRoot);
 
   /*eslint-disable jsx-a11y/no-static-element-interactions*/
@@ -82,13 +83,11 @@ const DraggableDialog = _ref2 => {
     onClick: toTopLayer,
     onKeyDown: _hKeyDown,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCaption.default, {
-      refBtMenuMore: refBtMenuMore,
+      refBtMenuMore: refBtMenu,
       menuModel: menuModel,
       caption: caption,
       onClose: onClose
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      children: children
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
+    }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
       buttons: commandButtons,
       onLoad: onLoad,
       onShow: onShow,

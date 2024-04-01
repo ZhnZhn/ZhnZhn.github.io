@@ -48,7 +48,6 @@ const _hClickDialog = evt => {
 };
 const ModalDialog = _ref2 => {
   let {
-    refFocusFirts,
     refFocusLast,
     isShow,
     style,
@@ -62,14 +61,15 @@ const ModalDialog = _ref2 => {
     timeout = 450,
     onClose = FN_NOOP
   } = _ref2;
-  const refBtClose = (0, _uiApi.useRef)(),
+  const refRoot = (0, _uiApi.useRef)(),
+    refBtClose = (0, _uiApi.useRef)(),
     refBtMenuMore = (0, _uiApi.useRef)(),
-    refRoot = (0, _useDialogFocus.default)(isShow, refBtMenuMore),
     _hKeyDown = (0, _fUseKey.useKeyEscape)(onClose),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_MODAL_DIALOG);
+  (0, _useDialogFocus.default)(isShow, refBtMenuMore);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FocusTrap.default, {
     refEl: refRoot,
-    refFirst: refFocusFirts || refBtMenuMore,
+    refFirst: refBtMenuMore,
     refLast: refFocusLast || refBtClose,
     style: _showHideStyle,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {

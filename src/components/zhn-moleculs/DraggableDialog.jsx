@@ -70,8 +70,8 @@ const CommandButtons = ({
 const FN_NOOP = () => {};
 
 const DraggableDialog = ({
+  isFocusBtMenu=true,
   isShow,
-  isFocusCombobox,
   style,
   menuModel,
   caption,
@@ -82,12 +82,8 @@ const DraggableDialog = ({
   onShow,
   onClose=FN_NOOP
 }) => {
-  const refBtMenuMore = useRef()
-  , refRoot = useDialogFocus(
-     isShow,
-     refBtMenuMore,
-     isFocusCombobox
-  )
+  const refRoot = useRef()
+  , refBtMenu = useRef()
   , _hKeyDown = useKeyEscape(onClose)
   , [
     _className,
@@ -97,6 +93,10 @@ const DraggableDialog = ({
     CL_DRAGGABLE_DIALOG
   );
 
+  useDialogFocus(
+    isShow,
+    isFocusBtMenu ? refBtMenu : void 0
+  )
   useXYMovable(refRoot)
 
   /*eslint-disable jsx-a11y/no-static-element-interactions*/
@@ -115,14 +115,12 @@ const DraggableDialog = ({
      >
     {/*eslint-enable jsx-a11y/no-static-element-interactions*/}
       <DialogCaption
-         refBtMenuMore={refBtMenuMore}
+         refBtMenuMore={refBtMenu}
          menuModel={menuModel}
          caption={caption}
          onClose={onClose}
       />
-      <div>
-         {children}
-      </div>
+      {children}
       <CommandButtons
          buttons={commandButtons}
          onLoad={onLoad}

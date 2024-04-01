@@ -55,7 +55,6 @@ const _hClickDialog = evt => {
 }
 
 const ModalDialog = ({
-  refFocusFirts,
   refFocusLast,
   isShow,
   style,
@@ -69,12 +68,9 @@ const ModalDialog = ({
   timeout=450,
   onClose=FN_NOOP
 }) => {
-  const refBtClose = useRef()
+  const refRoot = useRef()
+  , refBtClose = useRef()
   , refBtMenuMore = useRef()
-  , refRoot = useDialogFocus(
-     isShow,
-     refBtMenuMore
-  )
   , _hKeyDown = useKeyEscape(onClose)
   , [
     _className,
@@ -84,10 +80,12 @@ const ModalDialog = ({
     CL_MODAL_DIALOG
   );
 
+  useDialogFocus(isShow, refBtMenuMore)
+
   return (
     <FocusTrap
       refEl={refRoot}
-      refFirst={refFocusFirts || refBtMenuMore}
+      refFirst={refBtMenuMore}
       refLast={refFocusLast || refBtClose}
       style={_showHideStyle}
     >
