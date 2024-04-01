@@ -65,7 +65,7 @@ export const getRefElementStyle = (
   ref
 ) => (getRefValue(ref) || {}).style
 
-const _focusHtmlElement = (
+export const focusHtmlElement = (
   element
 ) => {
   if (element && isFn(element.focus)) {
@@ -83,7 +83,7 @@ export const focusRefElement = (
   fnOrRef1,
   fnOrRef2
 ) => {
-  _focusHtmlElement(
+  focusHtmlElement(
      _getValueFromFnOrRef(fnOrRef1)
      || _getValueFromFnOrRef(fnOrRef2)
   )
@@ -92,7 +92,7 @@ export const focusRefElement = (
 export const focusElementById = (
   id
 ) => {
-  _focusHtmlElement(
+  focusHtmlElement(
     document.getElementById(id)
   )
 }

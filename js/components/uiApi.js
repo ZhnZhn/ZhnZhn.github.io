@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useId = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.safeMap = exports.memo = exports.lazy = exports.isUndef = exports.isTokenInStr = exports.isStr = exports.isObj = exports.isNumber = exports.isInputValid = exports.isBool = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getComboboxElement = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.focusElementById = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = exports.Children = void 0;
+exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useId = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.safeMap = exports.memo = exports.lazy = exports.isUndef = exports.isTokenInStr = exports.isStr = exports.isObj = exports.isNumber = exports.isInputValid = exports.isBool = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getComboboxElement = exports.getClientY = exports.getClientX = exports.forwardRef = exports.focusRefElement = exports.focusHtmlElement = exports.focusElementById = exports.createRef = exports.createElement = exports.createContext = exports.cloneElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = exports.Children = void 0;
 var _isTokenInStr = require("../utils/isTokenInStr");
 exports.isTokenInStr = _isTokenInStr.isTokenInStr;
 var _bindTo = require("../utils/bindTo");
@@ -48,18 +48,19 @@ const setRefValue = (ref, value) => {
 exports.setRefValue = setRefValue;
 const getRefElementStyle = ref => (getRefValue(ref) || {}).style;
 exports.getRefElementStyle = getRefElementStyle;
-const _focusHtmlElement = element => {
+const focusHtmlElement = element => {
   if (element && (0, _isTypeFn.isFn)(element.focus)) {
     element.focus();
   }
 };
+exports.focusHtmlElement = focusHtmlElement;
 const _getValueFromFnOrRef = refOrFn => (0, _isTypeFn.isFn)(refOrFn) ? refOrFn() : getRefValue(refOrFn);
 const focusRefElement = (fnOrRef1, fnOrRef2) => {
-  _focusHtmlElement(_getValueFromFnOrRef(fnOrRef1) || _getValueFromFnOrRef(fnOrRef2));
+  focusHtmlElement(_getValueFromFnOrRef(fnOrRef1) || _getValueFromFnOrRef(fnOrRef2));
 };
 exports.focusRefElement = focusRefElement;
 const focusElementById = id => {
-  _focusHtmlElement(document.getElementById(id));
+  focusHtmlElement(document.getElementById(id));
 };
 exports.focusElementById = focusElementById;
 const stopImmediatePropagation = evt => {
