@@ -10,7 +10,10 @@ const _assign = Object.assign
 , _isArr = Array.isArray;
 
 const _addNativeLinkTo = (option) => {
-  const { country, indicator } = getCi(option);
+  const [
+    country,
+    indicator
+  ] = getCi(option);
   _assign(option, {
     linkItem: {
       caption: 'World Bank',
@@ -21,12 +24,12 @@ const _addNativeLinkTo = (option) => {
 
 const api = {
   getRequestUrl(option){
-    const {
+    const [
       country,
       indicator
-    } = getCi(option);
+    ] = getCi(option);
     _addNativeLinkTo(option)
-    return `${URL}/countries/${country}/indicators/${indicator}?date=1990:2020&format=json`;
+    return `${URL}/countries/${country}/indicators/${indicator}?date=1990:2023&format=json`;
   },
   checkResponse(json){
     if (!_isArr(json)) {

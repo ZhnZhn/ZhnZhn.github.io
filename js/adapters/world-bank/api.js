@@ -8,25 +8,19 @@ const URL = 'https://api.worldbank.org/v2',
 const _assign = Object.assign,
   _isArr = Array.isArray;
 const _addNativeLinkTo = option => {
-  const {
-    country,
-    indicator
-  } = (0, _fnAdapter.getCi)(option);
+  const [country, indicator] = (0, _fnAdapter.getCi)(option);
   _assign(option, {
     linkItem: {
       caption: 'World Bank',
-      href: `${NATIVE_URL}/${indicator}?locations=${country}`
+      href: NATIVE_URL + "/" + indicator + "?locations=" + country
     }
   });
 };
 const api = {
   getRequestUrl(option) {
-    const {
-      country,
-      indicator
-    } = (0, _fnAdapter.getCi)(option);
+    const [country, indicator] = (0, _fnAdapter.getCi)(option);
     _addNativeLinkTo(option);
-    return `${URL}/countries/${country}/indicators/${indicator}?date=1990:2020&format=json`;
+    return URL + "/countries/" + country + "/indicators/" + indicator + "?date=1990:2023&format=json";
   },
   checkResponse(json) {
     if (!_isArr(json)) {

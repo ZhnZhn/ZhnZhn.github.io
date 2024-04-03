@@ -13,15 +13,14 @@ const _crInfo = ({
   name: `${title}: ${subtitle} (${items[1].c || ''})`
 });
 
-const _getCountryIndicator = (
+export const getCi = (
   { items=[] }
-) => ({
-  country: items[0].v,
-  indicator: items[1].v
-});
-
-
-export const getCi = _getCountryIndicator
+) => [
+  //country
+  items[0].v,
+  //indicator
+  items[1].v
+]
 
 export const crData = (json) => {
    const arrIn = json[1];
