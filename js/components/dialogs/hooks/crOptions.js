@@ -12,7 +12,7 @@ const _crCvItems = arr => arr.map(_ref => {
     ...restProps
   } = _ref;
   return {
-    c: `${c} (${v})`,
+    c: c + " (" + v + ")",
     v,
     ...restProps
   };
@@ -24,7 +24,7 @@ const _crSItems = arr => arr.map(_ref2 => {
     s
   } = _ref2;
   return {
-    c: `${c} (${s})`,
+    c: c + " (" + s + ")",
     v,
     s
   };
@@ -43,9 +43,9 @@ const _crNbqItems = arr => {
     } = _ref3;
     if (_isArr(q)) {
       q.forEach(to => {
-        const s = `${b}/${to}`;
+        const s = b + "/" + to;
         items.push({
-          c: `${n} (${s})`,
+          c: n + " (" + s + ")",
           v: s
         });
       });
@@ -61,8 +61,8 @@ const _crCpItems = arr => arr.map(_ref4 => {
     id
   } = _ref4;
   return {
-    c: `${c} (${v})`,
-    v: id || `${v}-${(c || '').replace(REG_BLANKS, '-')}`.toLowerCase()
+    c: c + " (" + v + ")",
+    v: id || (v + "-" + (c || '').replace(REG_BLANKS, '-')).toLowerCase()
   };
 });
 const _fCrItems = crValue => arr => arr.map(c => {
@@ -72,17 +72,17 @@ const _fCrItems = crValue => arr => arr.map(c => {
       v: crValue(b, q)
     };
   }),
-  _crValueT1 = (b, q) => `${b}-${q}`,
-  _crValueT2 = (b, q) => `${b}${q}`,
-  _crValueT2L = (b, q) => `${b}${q}`.toLowerCase(),
-  _crValueT3 = (b, q) => `${b}_${q}`,
+  _crValueT1 = (b, q) => b + "-" + q,
+  _crValueT2 = (b, q) => "" + b + q,
+  _crValueT2L = (b, q) => ("" + b + q).toLowerCase(),
+  _crValueT3 = (b, q) => b + "_" + q,
   _rCrItems = {
     vc: _crVcItems,
     //cb-items, kc-items, kx-items
     t1: _fCrItems(_crValueT1),
     //bf-items, kr-items
     t2: _fCrItems(_crValueT2),
-    //bt-items
+    //bt-items, ht-items
     t2l: _fCrItems(_crValueT2L),
     //gt-items
     t3: _fCrItems(_crValueT3),

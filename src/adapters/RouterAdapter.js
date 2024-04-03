@@ -35,6 +35,7 @@ import {
   LT_KR,
   LT_KC,
   LT_GT,
+  LT_HT,
   LT_KX,
   LT_BB,
   LT_UN,
@@ -85,6 +86,7 @@ import Cr from './cryptocom/Cr'
 import Kr from './kraken/Kr'
 import Kc from './kucoin/Kc'
 import Gt from './gateio/Gt'
+import Ht from './htx/Ht'
 import Kx from './okx/Kx'
 import Bb from './bybit/Bb'
 
@@ -134,6 +136,7 @@ const RouterAdapter = {
   [LT_KR]: Kr,
   [LT_KC]: Kc,
   [LT_GT]: Gt,
+  [LT_HT]: Ht,
   [LT_KX]: Kx,
   [LT_BB]: Bb,
 

@@ -64,7 +64,8 @@ const DP = [
   Link.Kraken,
   Link.KuCoin,
   Link.OKX,
-  Link.Bybit
+  Link.Bybit,
+  Link.HTX
 ];
 
 const LinkPer = ({
@@ -105,7 +106,7 @@ const _crListCaption = (
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 39):"
+     caption="Data Providers (All 40):"
      childStyle={S_ROOT_CHILD}
   >
     <div>

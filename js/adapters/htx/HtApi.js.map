@@ -1,0 +1,28 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/htx/HtApi.js"
+ ],
+ "file": "../../../src/adapters/htx/HtApi.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "_ApiFn",
+  "API_URL",
+  "_getData",
+  "json",
+  "isArr",
+  "data",
+  "_crDfUrl",
+  "pair",
+  "timeframe",
+  "limit",
+  "_crObUrl",
+  "HtApi",
+  "crRouteDfObApi",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AACA,IAAAC,MAAA,GAAAD,OAAA;AAEA,MAAME,OAAO,GAAG,uBAAuB;AAEvC,MAAMC,QAAQ,GACZC,IAAI,IACDA,IAAI,IAAI,IAAAC,gBAAK,EAACD,IAAI,CAACE,IAAI,CAAC,GACzBF,IAAI,CAACE,IAAI,GACT,KAAK,CAAC;AAEV,MAAMC,QAAQ,GAAGA,CACfC,IAAI,EACJC,SAAS,EACTC,KAAK,KACCR,OAAO,qCAAgCM,IAAI,gBAAWC,SAAS,cAASC,KAAO;AAEvF,MAAMC,QAAQ,GAAGA,CAAA,KAAM,CAAC,CAAC;AAEzB,MAAMC,KAAK,GAAG,IAAAC,qBAAc,EAC1BN,QAAQ,EACRI,QAAQ,EACRR,QACF,CAAC;AAAC,IAAAW,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaJ,KAAK"
+}

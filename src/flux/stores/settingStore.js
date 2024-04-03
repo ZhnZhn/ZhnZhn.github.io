@@ -20,6 +20,7 @@ import {
   LT_KR,
   LT_KC,
   LT_GT,
+  LT_HT,
   LT_KX
 } from '../../constants/LoadType';
 
@@ -41,6 +42,7 @@ const _withProxyServer2 = [
   LT_KR,
   LT_KC,
   LT_GT,
+  LT_HT,
   LT_KX
 ];
 

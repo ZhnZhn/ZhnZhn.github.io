@@ -43,6 +43,7 @@ export const LT_KC = 'KC'
 export const LT_GT = 'GT'
 export const LT_KX = 'KX'
 export const LT_BB = 'BB'
+export const LT_HT = 'HT'
 
 export const LT_WL = 'WL'
 export const LT_WATCH_LIST = 'WL_WATCH_LIST'
