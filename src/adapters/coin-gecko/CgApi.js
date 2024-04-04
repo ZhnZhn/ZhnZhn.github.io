@@ -2,37 +2,50 @@ import {
   isArr,
   assign,
   crError,
-  getDaysFromYmd
+  getDaysFromYmd,
+  getCaption,
+  getValue
 } from '../AdapterFn';
 import { crPageConfig } from './fnAdapter';
 
 const API_URL = 'https://api.coingecko.com/api/v3'
+, COINS_API_URL = API_URL + "/coins"
+, EXCHANGES_API_URL = API_URL + "/exchanges"
 , PAGE_URL = 'https://www.coingecko.com/en/coins';
 
-const _crDays = ({
-  fromDate
-}) => {
-  const _d = getDaysFromYmd(fromDate);
-  return _d > 90 ? _d : 91;
-};
+const _setTitleAndItemUrlTo = (
+  option,
+  title,
+  _itemUrl
+) => assign(option, {
+  title,
+  _itemUrl
+});
 
 const _assignDf = option => {
-  const { items } = option
-  , [ it1, it2 ] = items
-  , { c, v:value, s } = it1
-  , { v:_currency } = it2
+  const [
+    item1,
+    item2
+  ] = option.items
+  , { c, v:value, s } = item1
+  , { v:_currency } = item2
   , _vs = `${s}/${_currency}`
-  , _days = _crDays(option);
+  , _days = Math.min(Math.max(
+      getDaysFromYmd(option.fromDate),
+      91
+  ), 365);
 
   assign(option, {
     itemCaption: _vs,
-    title: c,
     subtitle: 'Values on 00:00 GMT',
     _currency: _currency,
     _nativeUrl: `${PAGE_URL}/${value}`,
-    _itemUrl: `${API_URL}/coins/${value}/market_chart?vs_currency=${_currency}&days=${_days}`
   })
-}
+  _setTitleAndItemUrlTo(option,
+     c,
+     `${COINS_API_URL}/${value}/market_chart?vs_currency=${_currency}&days=${_days}`
+  )
+};
 
 const _assignMcl = option => {
   const [
@@ -41,39 +54,49 @@ const _assignMcl = option => {
     currency
   ] = crPageConfig(option);
 
-  assign(option, {
-    title: `By Market Cap Page: ${page} (${perPage})`,
-    _itemUrl: `${API_URL}/coins/markets?order=market_cap_desc&page=${page}&per_page=${perPage}&vs_currency=${currency}&price_change_percentage=1h,7d,30d,1y`
-  })
-}
+  _setTitleAndItemUrlTo(option,
+    `By Market Cap Page: ${page} (${perPage})`,
+    `${COINS_API_URL}/markets?order=market_cap_desc&page=${page}&per_page=${perPage}&vs_currency=${currency}&price_change_percentage=1h,7d,30d,1y`
+  )
+};
 
 const _assignEl = option => {
   const [
-    page, perPage
+    page,
+    perPage
   ] = crPageConfig(option);
 
-  assign(option, {
-    title: `By Exchages Page: ${page} (${perPage})`,
-    _itemUrl: `${API_URL}/exchanges?page=${page}&per_page=${perPage}`
-  })
-}
+  _setTitleAndItemUrlTo(option,
+    `By Exchages Page: ${page} (${perPage})`,
+    `${EXCHANGES_API_URL}?page=${page}&per_page=${perPage}`
+  )
+};
+
+const _assignEv = option => {
+  const items = option.items;
+
+  _setTitleAndItemUrlTo(option,
+    `${getCaption(items[0])} historical trading volume in BTC`,
+    `${EXCHANGES_API_URL}/${getValue(items[0])}/volume_chart?days=${getValue(items[1])}`
+  )
+};
 
 const _rAssign = {
   DF: _assignDf,
   MCL: _assignMcl,
-  EL: _assignEl
-}
+  EL: _assignEl,
+  EV: _assignEv
+};
 
 const CgApi = {
   getRequestUrl(option){
-    const { dfSubId } = option
-    , _assignTo = _rAssign[dfSubId] || _rAssign.DF;
-    _assignTo(option)
+    (_rAssign[option.dfSubId] || _rAssign.DF)(option)
     return option._itemUrl;
   },
+
   checkResponse(json, option){
-    const { dfSubId } = option
-    if ( (dfSubId === 'MCL' || dfSubId === 'EL')
+    const { dfSubId } = option;
+    if ( (dfSubId === 'MCL' || dfSubId === 'EL' || dfSubId === 'EV')
         && isArr(json)
         && json.length > 1) {
       return json;
@@ -83,6 +106,6 @@ const CgApi = {
     }
     throw crError();
   }
-}
+};
 
 export default CgApi

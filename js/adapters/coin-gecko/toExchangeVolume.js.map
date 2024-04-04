@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-gecko/toExchangeVolume.js"
+ ],
+ "file": "../../../src/adapters/coin-gecko/toExchangeVolume.js",
+ "names": [
+  "_crAdapterType",
+  "_interopRequireDefault",
+  "require",
+  "crData",
+  "json",
+  "map",
+  "tuple",
+  "parseFloat",
+  "toExchangeVolume",
+  "crAdapterType1",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,cAAA,GAAAC,sBAAA,CAAAC,OAAA;AAEA,MAAMC,MAAM,GAAGC,IAAI,IAAIA,IAAI,CAACC,GAAG,CAACC,KAAK,IAAI,CACvCA,KAAK,CAAC,CAAC,CAAC,EACRC,UAAU,CAACD,KAAK,CAAC,CAAC,CAAC,CAAC,CACrB,CAAC;AAEF,MAAME,gBAAgB,GAAG,IAAAC,sBAAc,EAAC;EACtCN;AACF,CAAC,CAAC;AAAC,IAAAO,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYJ,gBAAgB"
+}
