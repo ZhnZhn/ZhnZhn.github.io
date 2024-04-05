@@ -11,6 +11,7 @@ import {
   hasZeroOrLessValue
 } from '../math/seriaFn';
 import {
+  isNumber,
   isStr,
   isObj,
   isNotEmptyArr
@@ -294,7 +295,7 @@ export const fAddPointsToConfig = (
 ) => config => points[0]
   && _isArr(points[0])
   && points[0][0]
-  && typeof points[0][0] !== 'number'
+  && !isNumber(points[0][0])
   ? _fAddSeriaPoints(points)(config)
   : fAddSeriaBy(0, {
       type: 'spline',
@@ -345,7 +346,7 @@ const _checkDataLength = (config) => {
 }
 
 export const toConfig = (config) => {
-  _checkDataLength(config)
+  _checkDataLength(config)  
   return config;
 }
 
@@ -431,7 +432,8 @@ export const crBarOrColumnConfig = (
   return fAdd('xAxis', { categories })(_crConfig());
 }
 
-const HEIGHT_OF_ONE_BAR_CATEGORY = 30;
+const HEIGHT_OF_ONE_BAR_CATEGORY = 22
+, BAR_CATEGORY_TOTAL_MARGIN = 85;
 export const setBarConfigHeightIf = (
   config
 ) => {
@@ -439,10 +441,9 @@ export const setBarConfigHeightIf = (
   if (_chart.type === 'bar') {
     const _categoriesNumber = config.xAxis.categories.length;
     if (_categoriesNumber < 16) {
-      _chart.height = _categoriesNumber * HEIGHT_OF_ONE_BAR_CATEGORY
-        || HEIGHT_OF_ONE_BAR_CATEGORY
+      _chart.height = BAR_CATEGORY_TOTAL_MARGIN + _categoriesNumber * HEIGHT_OF_ONE_BAR_CATEGORY
     }
-  }  
+  }
   return config;
 }
 

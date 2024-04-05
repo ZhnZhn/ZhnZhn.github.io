@@ -206,7 +206,7 @@ const _fAddSeriaPoints = function (points, _temp) {
 };
 
 //FAOSTAT
-const fAddPointsToConfig = points => config => points[0] && _isArr(points[0]) && points[0][0] && typeof points[0][0] !== 'number' ? _fAddSeriaPoints(points)(config) : fAddSeriaBy(0, {
+const fAddPointsToConfig = points => config => points[0] && _isArr(points[0]) && points[0][0] && !(0, _isTypeFn.isNumber)(points[0][0]) ? _fAddSeriaPoints(points)(config) : fAddSeriaBy(0, {
   type: 'spline',
   data: points
 })(config);
@@ -340,13 +340,14 @@ const crBarOrColumnConfig = function (type, categories) {
   })(_crConfig());
 };
 exports.crBarOrColumnConfig = crBarOrColumnConfig;
-const HEIGHT_OF_ONE_BAR_CATEGORY = 30;
+const HEIGHT_OF_ONE_BAR_CATEGORY = 22,
+  BAR_CATEGORY_TOTAL_MARGIN = 85;
 const setBarConfigHeightIf = config => {
   const _chart = config.chart;
   if (_chart.type === 'bar') {
     const _categoriesNumber = config.xAxis.categories.length;
     if (_categoriesNumber < 16) {
-      _chart.height = _categoriesNumber * HEIGHT_OF_ONE_BAR_CATEGORY || HEIGHT_OF_ONE_BAR_CATEGORY;
+      _chart.height = BAR_CATEGORY_TOTAL_MARGIN + _categoriesNumber * HEIGHT_OF_ONE_BAR_CATEGORY;
     }
   }
   return config;
