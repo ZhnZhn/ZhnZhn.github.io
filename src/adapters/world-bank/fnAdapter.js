@@ -1,5 +1,3 @@
-export { crError } from '../AdapterFn';
-
 import {
   isArr,
   ymdToUTC
@@ -7,10 +5,9 @@ import {
 
 const _crInfo = ({
   title,
-  subtitle,
-  items
+  subtitle
 }) => ({
-  name: `${title}: ${subtitle} (${items[1].c || ''})`
+  name: `${title}: ${subtitle}`
 });
 
 export const getCi = (
@@ -22,22 +19,17 @@ export const getCi = (
   items[1].v
 ]
 
-export const crData = (json) => {
-   const arrIn = json[1];
-   if (!isArr(arrIn)) {
-     return [];
-   }
-   const d = [];
-   arrIn.forEach(p => {
-     if (p && p.value != null && p.date) {
-       d.push({
-         x: ymdToUTC(p.date),
-         y: p.value
-       })
-     }
-   })
-   return d.reverse();
-}
+export const crData = (
+  [metaData, data]
+) => isArr(data) ? data.reduce((d, p) => {
+  if (p && p.value != null && p.date) {
+   d.push([
+     ymdToUTC(p.date),
+     p.value
+   ])
+  }
+  return d;
+}, []).reverse() : [];
 
 export const crConfOption = (option) => {
    const {

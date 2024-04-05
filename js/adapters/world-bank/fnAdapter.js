@@ -1,17 +1,15 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getCi = exports.crError = exports.crData = exports.crConfOption = void 0;
+exports.getCi = exports.crData = exports.crConfOption = void 0;
 var _AdapterFn = require("../AdapterFn");
-exports.crError = _AdapterFn.crError;
 const _crInfo = _ref => {
   let {
     title,
-    subtitle,
-    items
+    subtitle
   } = _ref;
   return {
-    name: title + ": " + subtitle + " (" + (items[1].c || '') + ")"
+    name: title + ": " + subtitle
   };
 };
 const getCi = _ref2 => {
@@ -25,21 +23,14 @@ const getCi = _ref2 => {
   items[1].v];
 };
 exports.getCi = getCi;
-const crData = json => {
-  const arrIn = json[1];
-  if (!(0, _AdapterFn.isArr)(arrIn)) {
-    return [];
-  }
-  const d = [];
-  arrIn.forEach(p => {
+const crData = _ref3 => {
+  let [metaData, data] = _ref3;
+  return (0, _AdapterFn.isArr)(data) ? data.reduce((d, p) => {
     if (p && p.value != null && p.date) {
-      d.push({
-        x: (0, _AdapterFn.ymdToUTC)(p.date),
-        y: p.value
-      });
+      d.push([(0, _AdapterFn.ymdToUTC)(p.date), p.value]);
     }
-  });
-  return d.reverse();
+    return d;
+  }, []).reverse() : [];
 };
 exports.crData = crData;
 const crConfOption = option => {
