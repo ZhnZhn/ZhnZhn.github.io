@@ -1,3 +1,7 @@
+import {
+  isObj,
+  isStr
+} from '../utils/isTypeFn';
 import domSanitize from '../utils/domSanitize';
 import merge from '../utils/merge';
 
@@ -15,12 +19,11 @@ import {
 } from '../constants/Color';
 import { tooltipValueTdmyIf } from './Tooltip';
 
-const _isStr = str => typeof str === 'string';
-
 const FONT_STYLE = {
   fontSize: '16px',
   fontWeight: 'bold',
-}, CAPTION_CONFIG = {
+}
+, CAPTION_CONFIG = {
   text: '',
   floating: true,
   align: 'left',
@@ -31,13 +34,18 @@ const FONT_STYLE = {
     color: COLOR_CHART_TITLE,
     fill: COLOR_CHART_TITLE,
   }
-}, YAXIS_CONFIG = {
+}
+, YAXIS_CONFIG = {
   endOnTick: false,
   maxPadding: 0.15,
   startOnTick: false,
   minPadding: 0.15,
   title: { text: '' }
-}, _crPlotOption = (lineColor, markerLineColor) => ({
+}
+, _crPlotOption = (
+  lineColor,
+  markerLineColor
+) => ({
    lineColor: lineColor,
    lineWidth: 0,
    marker: {
@@ -53,21 +61,22 @@ const FONT_STYLE = {
 });
 
 const _sanitizeOptionText = option => {
-  if (option && typeof option === 'object') {
+  if (isObj(option)) {
     option.text = domSanitize(option.text)
   }
   return option;
 };
 
-const  _crTitle = title => _isStr(title)
+const  _crTitle = title => isStr(title)
   ? { text: domSanitize(title) }
   : _sanitizeOptionText(title)
-, _crCrosshair = (is=true) => is ? {
-    color: COLOR_CROSSHAIR,
-    width: 1,
-    zIndex: 2
-  } : void 0;
-
+, _crCrosshair = (
+  is=true
+) => is ? {
+  color: COLOR_CROSSHAIR,
+  width: 1,
+  zIndex: 2
+} : void 0;
 
 export const CHART_HEIGHT = 300
 export const MARGIN_RIGHT = 50
@@ -84,7 +93,7 @@ export const SEMIDONUT_SUBTITLE_Y = 35
 export const crType = (
   seriaType,
   dfType
-) => seriaType && _isStr(seriaType)
+) => seriaType && isStr(seriaType)
   ? seriaType.toLowerCase()
   : dfType || 'spline';
 
@@ -100,22 +109,15 @@ export const fCreditsRightBottom = (
   }
 }, option)
 
-
-export const fTitle = (option) => {
+const _fCrTitle = y => (
+  option
+) => merge(false,
+  {...CAPTION_CONFIG, y},
   _sanitizeOptionText(option)
-  return merge(false, {
-     ...CAPTION_CONFIG,
-     y: -10
-  }, option)
-}
+);
 
-export const fSubtitle = (option) => {
-  _sanitizeOptionText(option)
-  return merge(false, {
-    ...CAPTION_CONFIG,
-    y: 10
-  }, option)
-}
+export const fTitle = _fCrTitle(-10)
+export const fSubtitle = _fCrTitle(10)
 
 export const setDefaultTitle = (
   config,
@@ -257,20 +259,24 @@ export const fSecondYAxis = (
    }
 })
 
-export const fPlotOptionsArea = (
+const _fCrPlotOptions = (
+  colorHoverLine,
+  colorMarkerLine
+) => (
   option
 ) => merge(false, _crPlotOption(
-   COLOR_AREA_HOVER_LINE,
-   COLOR_AREA_MARKER_LINE
+   colorHoverLine,
+   colorMarkerLine
 ), option || {});
 
-
-export const fPlotOptionsColumn = (
-  option
-) => merge(false, _crPlotOption(
-   COLOR_COLUMN_HOVER_LINE,
-   COLOR_COLUMN_MARKER_LINE
-), option)
+export const fPlotOptionsArea = _fCrPlotOptions(
+  COLOR_AREA_HOVER_LINE,
+  COLOR_AREA_MARKER_LINE
+)
+export const fPlotOptionsColumn = _fCrPlotOptions(
+  COLOR_COLUMN_HOVER_LINE,
+  COLOR_COLUMN_MARKER_LINE
+)
 
 export const fPlotOptionsSeries = (
   option

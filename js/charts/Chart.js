@@ -3,11 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.setDefaultTitle = exports.fYAxisOpposite = exports.fXAxisOpposite = exports.fTooltip = exports.fTitle = exports.fSubtitle = exports.fSeriaMarker = exports.fSecondYAxis = exports.fPlotOptionsSeries = exports.fPlotOptionsColumn = exports.fPlotOptionsArea = exports.fPlotLine = exports.fNavigation = exports.fLegend = exports.fEventsMouseOver = exports.fCrosshair = exports.fCreditsRightBottom = exports.crType = exports.crAreaConfig = exports.STACKED_SPACING_TOP = exports.STACKED_HEIGHT = exports.SPACING_TOP = exports.SPACING_BOTTOM = exports.SEMIDONUT_TITLE_Y = exports.SEMIDONUT_SUBTITLE_Y = exports.MARGIN_RIGHT = exports.LEGEND_ROW_HEIGHT = exports.CHART_HEIGHT = void 0;
+var _isTypeFn = require("../utils/isTypeFn");
 var _domSanitize = _interopRequireDefault(require("../utils/domSanitize"));
 var _merge = _interopRequireDefault(require("../utils/merge"));
 var _Color = require("../constants/Color");
 var _Tooltip = require("./Tooltip");
-const _isStr = str => typeof str === 'string';
 const FONT_STYLE = {
     fontSize: '16px',
     fontWeight: 'bold'
@@ -48,12 +48,12 @@ const FONT_STYLE = {
     }
   });
 const _sanitizeOptionText = option => {
-  if (option && typeof option === 'object') {
+  if ((0, _isTypeFn.isObj)(option)) {
     option.text = (0, _domSanitize.default)(option.text);
   }
   return option;
 };
-const _crTitle = title => _isStr(title) ? {
+const _crTitle = title => (0, _isTypeFn.isStr)(title) ? {
     text: (0, _domSanitize.default)(title)
   } : _sanitizeOptionText(title),
   _crCrosshair = function (is) {
@@ -75,7 +75,7 @@ const STACKED_SPACING_TOP = exports.STACKED_SPACING_TOP = 25;
 const SPACING_BOTTOM = exports.SPACING_BOTTOM = 24;
 const SEMIDONUT_TITLE_Y = exports.SEMIDONUT_TITLE_Y = 15;
 const SEMIDONUT_SUBTITLE_Y = exports.SEMIDONUT_SUBTITLE_Y = 35;
-const crType = (seriaType, dfType) => seriaType && _isStr(seriaType) ? seriaType.toLowerCase() : dfType || 'spline';
+const crType = (seriaType, dfType) => seriaType && (0, _isTypeFn.isStr)(seriaType) ? seriaType.toLowerCase() : dfType || 'spline';
 exports.crType = crType;
 const fCreditsRightBottom = option => (0, _merge.default)(false, {
   enabled: true,
@@ -87,22 +87,12 @@ const fCreditsRightBottom = option => (0, _merge.default)(false, {
   }
 }, option);
 exports.fCreditsRightBottom = fCreditsRightBottom;
-const fTitle = option => {
-  _sanitizeOptionText(option);
-  return (0, _merge.default)(false, {
-    ...CAPTION_CONFIG,
-    y: -10
-  }, option);
-};
-exports.fTitle = fTitle;
-const fSubtitle = option => {
-  _sanitizeOptionText(option);
-  return (0, _merge.default)(false, {
-    ...CAPTION_CONFIG,
-    y: 10
-  }, option);
-};
-exports.fSubtitle = fSubtitle;
+const _fCrTitle = y => option => (0, _merge.default)(false, {
+  ...CAPTION_CONFIG,
+  y
+}, _sanitizeOptionText(option));
+const fTitle = exports.fTitle = _fCrTitle(-10);
+const fSubtitle = exports.fSubtitle = _fCrTitle(10);
 const setDefaultTitle = (config, title, subtitle) => {
   config.chart.spacingTop = STACKED_SPACING_TOP;
   config.title = fTitle({
@@ -228,10 +218,9 @@ const fSecondYAxis = (name, color) => ({
   }
 });
 exports.fSecondYAxis = fSecondYAxis;
-const fPlotOptionsArea = option => (0, _merge.default)(false, _crPlotOption(_Color.COLOR_AREA_HOVER_LINE, _Color.COLOR_AREA_MARKER_LINE), option || {});
-exports.fPlotOptionsArea = fPlotOptionsArea;
-const fPlotOptionsColumn = option => (0, _merge.default)(false, _crPlotOption(_Color.COLOR_COLUMN_HOVER_LINE, _Color.COLOR_COLUMN_MARKER_LINE), option);
-exports.fPlotOptionsColumn = fPlotOptionsColumn;
+const _fCrPlotOptions = (colorHoverLine, colorMarkerLine) => option => (0, _merge.default)(false, _crPlotOption(colorHoverLine, colorMarkerLine), option || {});
+const fPlotOptionsArea = exports.fPlotOptionsArea = _fCrPlotOptions(_Color.COLOR_AREA_HOVER_LINE, _Color.COLOR_AREA_MARKER_LINE);
+const fPlotOptionsColumn = exports.fPlotOptionsColumn = _fCrPlotOptions(_Color.COLOR_COLUMN_HOVER_LINE, _Color.COLOR_COLUMN_MARKER_LINE);
 const fPlotOptionsSeries = option => (0, _merge.default)(false, {
   states: {
     hover: {
