@@ -1,26 +1,13 @@
 import {
-  crError,
-  getCi
-} from './fnAdapter';
+  isArr,
+  assign,
+  crError
+} from '../AdapterFn';
+
+import { getCi } from './fnAdapter';
 
 const URL = 'https://api.worldbank.org/v2'
-, NATIVE_URL = 'https://data.worldbank.org/indicator'
-
-const _assign = Object.assign
-, _isArr = Array.isArray;
-
-const _addNativeLinkTo = (option) => {
-  const [
-    country,
-    indicator
-  ] = getCi(option);
-  _assign(option, {
-    linkItem: {
-      caption: 'World Bank',
-      href: `${NATIVE_URL}/${indicator}?locations=${country}`
-    }
-  })
-};
+, NATIVE_URL = 'https://data.worldbank.org/indicator';
 
 const api = {
   getRequestUrl(option){
@@ -28,11 +15,19 @@ const api = {
       country,
       indicator
     ] = getCi(option);
-    _addNativeLinkTo(option)
+
+    assign(option, {
+      linkItem: {
+        caption: 'World Bank',
+        href: `${NATIVE_URL}/${indicator}?locations=${country}`
+      }
+    })
+
     return `${URL}/countries/${country}/indicators/${indicator}?date=1990:2023&format=json`;
   },
+
   checkResponse(json){
-    if (!_isArr(json)) {
+    if (!isArr(json)) {
       throw crError();
     }
   }

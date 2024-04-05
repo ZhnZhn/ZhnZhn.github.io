@@ -2,29 +2,24 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
 const URL = 'https://api.worldbank.org/v2',
   NATIVE_URL = 'https://data.worldbank.org/indicator';
-const _assign = Object.assign,
-  _isArr = Array.isArray;
-const _addNativeLinkTo = option => {
-  const [country, indicator] = (0, _fnAdapter.getCi)(option);
-  _assign(option, {
-    linkItem: {
-      caption: 'World Bank',
-      href: NATIVE_URL + "/" + indicator + "?locations=" + country
-    }
-  });
-};
 const api = {
   getRequestUrl(option) {
     const [country, indicator] = (0, _fnAdapter.getCi)(option);
-    _addNativeLinkTo(option);
+    (0, _AdapterFn.assign)(option, {
+      linkItem: {
+        caption: 'World Bank',
+        href: NATIVE_URL + "/" + indicator + "?locations=" + country
+      }
+    });
     return URL + "/countries/" + country + "/indicators/" + indicator + "?date=1990:2023&format=json";
   },
   checkResponse(json) {
-    if (!_isArr(json)) {
-      throw (0, _fnAdapter.crError)();
+    if (!(0, _AdapterFn.isArr)(json)) {
+      throw (0, _AdapterFn.crError)();
     }
   }
 };
