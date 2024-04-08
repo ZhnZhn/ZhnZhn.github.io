@@ -3,28 +3,20 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _dateFn = require("../../utils/dateFn");
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _SubMenuItem = _interopRequireDefault(require("./SubMenuItem"));
 var _ModalMenu = require("./ModalMenu.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const _isFn = fn => typeof fn === 'function';
-const _isMinMax = config => {
-  const {
-      yAxis
-    } = config,
-    {
-      plotLines
-    } = yAxis || {};
-  return (plotLines || {}).length > 0;
-};
+const _isMinMax = config => ((config.yAxis || {}).plotLines || []).length > 0;
 const EPOCH_DMY = '01-01-1970';
 const _isZoom = getChart => {
-  if (!_isFn(getChart)) {
+  if (!(0, _uiApi.isFn)(getChart)) {
     return false;
   }
   const chart = getChart();
-  if (!chart || !_isFn(chart.zhGetFromToDates)) {
+  if (!chart || !(0, _uiApi.isFn)(chart.zhGetFromToDates)) {
     return false;
   }
   const {
@@ -42,6 +34,7 @@ const ModalMenuFn = _ref => {
     onClose,
     config,
     getChart,
+    onAddToWatch,
     onX2H,
     onMinMax,
     onZoom,
@@ -57,7 +50,10 @@ const ModalMenuFn = _ref => {
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: _ModalMenu.S_MODAL_MENU_PANE,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
+      children: [(0, _uiApi.isFn)(onAddToWatch) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
+        caption: "Add To",
+        onClick: onAddToWatch
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
         caption: "x2H",
         onClick: onX2H
       }), _isMinMax(config) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
@@ -80,6 +76,5 @@ const ModalMenuFn = _ref => {
     })
   });
 };
-var _default = ModalMenuFn;
-exports.default = _default;
+var _default = exports.default = ModalMenuFn;
 //# sourceMappingURL=ModalMenuFn.js.map

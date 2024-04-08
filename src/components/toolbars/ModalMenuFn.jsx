@@ -1,28 +1,25 @@
+import { isFn } from '../uiApi';
 import { mlsToDmy } from '../../utils/dateFn';
 
-import ModalPopup from '../zhn-moleculs/ModalPopup'
-import SubMenuItem from './SubMenuItem'
+import ModalPopup from '../zhn-moleculs/ModalPopup';
+import SubMenuItem from './SubMenuItem';
 
 import {
   S_MODAL_MENU,
   S_MODAL_MENU_PANE
-} from './ModalMenu.Style'
+} from './ModalMenu.Style';
 
-const _isFn = fn => typeof fn === 'function';
-
-const _isMinMax = config => {
-  const { yAxis } = config
-  , { plotLines } = yAxis || {}
-  return (plotLines || {}).length > 0;
-};
+const _isMinMax = (
+  config
+) => ((config.yAxis || {}).plotLines || []).length > 0;
 
 const EPOCH_DMY = '01-01-1970';
 const _isZoom = (getChart) => {
-  if (!_isFn(getChart)) {
+  if (!isFn(getChart)) {
     return false;
   }
   const chart = getChart();
-  if (!chart || !_isFn(chart.zhGetFromToDates)) {
+  if (!chart || !isFn(chart.zhGetFromToDates)) {
     return false;
   }
   const { from, to } = chart.zhGetFromToDates({
@@ -39,6 +36,7 @@ const ModalMenuFn = ({
   onClose,
   config,
   getChart,
+  onAddToWatch,
   onX2H,
   onMinMax,
   onZoom,
@@ -51,6 +49,11 @@ const ModalMenuFn = ({
     onClose={onClose}
   >
     <div style={S_MODAL_MENU_PANE}>
+      { isFn(onAddToWatch) && <SubMenuItem
+           caption="Add To"
+           onClick={onAddToWatch}
+        />
+      }
       <SubMenuItem
         caption="x2H"
         onClick={onX2H}

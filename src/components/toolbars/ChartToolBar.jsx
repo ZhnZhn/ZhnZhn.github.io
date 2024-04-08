@@ -2,7 +2,9 @@
 import {
   useRef,
   useCallback,
-  getRefValue
+  getRefValue,
+  isFn,
+  isNumber
 } from '../uiApi';
 
 import useToggle from '../hooks/useToggle';
@@ -28,7 +30,6 @@ const CL_WITH_SCROLL_X = "with-scroll-x"
   top: 60,
   left: 150
 }
-, S_BT_ADD = { left: 250 }
 , S_BT_MINI = {
   left: 350,
   width: 68
@@ -42,8 +43,6 @@ const CL_WITH_SCROLL_X = "with-scroll-x"
   width: 36
 };
 
-const _isFn = fn => typeof fn === 'function';
-const _isNumber = n => typeof n === 'number';
 const _isArr = Array.isArray;
 
 const _isHrzScrollable = node => node
@@ -55,7 +54,7 @@ const _scrollNodeToLeft = (
 ) => {
   const node = getRefValue(ref);
   if (_isHrzScrollable(node)) {
-   if (_isFn(node.scroll)) {
+   if (isFn(node.scroll)) {
      node.scroll({ left, behavior: 'smooth'})
    } else {
      node.scrollLeft = left
@@ -79,7 +78,7 @@ const _crModalMenuStyle = (
   left
 ) => {
   const node = getRefValue(ref);
-  return node && _isNumber(node.scrollLeft)
+  return node && isNumber(node.scrollLeft)
     ? { left: left - node.scrollLeft }
     : void 0;
 };
@@ -190,13 +189,6 @@ const ChartToolbar = ({
     onClick={onClickLegend}
   />)
 
-  const _btAdd = (<ButtonTab
-    is={!!itemConf}
-    style={S_BT_ADD}
-    caption="Add"
-    onClick={onAddToWatch}
-  />);
-
   let _btTabMini = null;
   if (zhMiniConfigs && zhMiniConfigs.length) {
     _btTabMini = (<ButtonTab
@@ -230,6 +222,7 @@ const ChartToolbar = ({
         style={{...S_M_FN, ..._fnStyle}}
         config={config}
         getChart={getChart}
+        onAddToWatch={itemConf ? onAddToWatch : void 0}
         onX2H={onClick2H}
         onMinMax={onMinMax}
         onZoom={onZoomChart}
@@ -252,7 +245,6 @@ const ChartToolbar = ({
            isMenu={true}
            onClick={toggleFn}
          />
-         {_btAdd}
          {_btInfo}
          {_btTabMini}
          <ButtonTab

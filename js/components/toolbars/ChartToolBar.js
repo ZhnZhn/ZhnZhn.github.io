@@ -33,9 +33,6 @@ const CL_WITH_SCROLL_X = "with-scroll-x",
     top: 60,
     left: 150
   },
-  S_BT_ADD = {
-    left: 250
-  },
   S_BT_MINI = {
     left: 350,
     width: 68
@@ -48,14 +45,12 @@ const CL_WITH_SCROLL_X = "with-scroll-x",
     left: 440,
     width: 36
   };
-const _isFn = fn => typeof fn === 'function';
-const _isNumber = n => typeof n === 'number';
 const _isArr = Array.isArray;
 const _isHrzScrollable = node => node && node.scrollWidth > node.clientWidth;
 const _scrollNodeToLeft = (ref, left) => {
   const node = (0, _uiApi.getRefValue)(ref);
   if (_isHrzScrollable(node)) {
-    if (_isFn(node.scroll)) {
+    if ((0, _uiApi.isFn)(node.scroll)) {
       node.scroll({
         left,
         behavior: 'smooth'
@@ -82,7 +77,7 @@ const _isIndicatorTab = (_ref, isWithoutIndicator) => {
 };
 const _crModalMenuStyle = (ref, left) => {
   const node = (0, _uiApi.getRefValue)(ref);
-  return node && _isNumber(node.scrollLeft) ? {
+  return node && (0, _uiApi.isNumber)(node.scrollLeft) ? {
     left: left - node.scrollLeft
   } : void 0;
 };
@@ -177,12 +172,6 @@ const ChartToolbar = _ref2 => {
     caption: "Legend",
     onClick: onClickLegend
   });
-  const _btAdd = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
-    is: !!itemConf,
-    style: S_BT_ADD,
-    caption: "Add",
-    onClick: onAddToWatch
-  });
   let _btTabMini = null;
   if (zhMiniConfigs && zhMiniConfigs.length) {
     _btTabMini = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
@@ -214,6 +203,7 @@ const ChartToolbar = _ref2 => {
       },
       config: config,
       getChart: getChart,
+      onAddToWatch: itemConf ? onAddToWatch : void 0,
       onX2H: onClick2H,
       onMinMax: onMinMax,
       onZoom: onZoomChart,
@@ -230,7 +220,7 @@ const ChartToolbar = _ref2 => {
         isShow: isShowFn,
         isMenu: true,
         onClick: toggleFn
-      }), _btAdd, _btInfo, _btTabMini, /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
+      }), _btInfo, _btTabMini, /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
         is: !!_btTabMini,
         className: CL_BT_R,
         style: S_BT_R,
@@ -261,6 +251,5 @@ ChartToolbar.propTypes = {
   onClickInfo: PropTypes.func
 }
 */
-var _default = ChartToolbar;
-exports.default = _default;
+var _default = exports.default = ChartToolbar;
 //# sourceMappingURL=ChartToolBar.js.map
