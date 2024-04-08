@@ -1,34 +1,49 @@
 import { getColorBlack } from '../ChartFn';
 
-const _crDataLabelsConfig = () => ({
-  enabled: true,
+const _crDataLabelsConfig = (isEnabled) => ({
+  enabled: isEnabled,
   color: getColorBlack(),
   crop: false,
   overflow: 'allow',
   style: {
     fontSize: 14
   }
-})
+});
 
-const  zhEnableDataLabels = function(
-  seriaType='columnrange',
-  options
-) {
+const _crDataLabels = (
+  seriaType,
+  dataLabels
+) => ({
+  plotOptions: {
+    [seriaType]: {
+      dataLabels
+    }
+  }
+});
+
+const _tryUpdate = (inst, options) => {
   try {
-    this.update({
-      plotOptions: {
-        [seriaType]: {
-          dataLabels: {
-            ...options,
-            ..._crDataLabelsConfig()
-          }
-        }
-      }
-    })
+    inst.update(options)
   } catch(err) {
     console.log(err)
   }
 };
 
+const _getSeriaType = (
+  chartInst
+) => chartInst.options.chart.type;
 
-export default zhEnableDataLabels
+const _fDataLabels = (
+  isEnabled
+) => function(seriaType) {
+  _tryUpdate(
+    this,
+    _crDataLabels(
+      seriaType || _getSeriaType(this),
+      _crDataLabelsConfig(isEnabled)
+    )
+  )
+};
+
+export const zhEnableDataLabels = _fDataLabels(true)
+export const zhDisableDataLabels = _fDataLabels(false)

@@ -96,7 +96,7 @@ class ColumnRangeDialog extends _uiApi.Component {
         color: _color,
         yIndex: 0
       }, _crSeriaOptions(this._pointWidth));
-      chart.zhEnableDataLabels();
+      chart.zhEnableDataLabels("columnrange");
       onClose();
     };
     this._heColor = color => {
@@ -205,6 +205,5 @@ class ColumnRangeDialog extends _uiApi.Component {
     });
   }
 }
-var _default = ColumnRangeDialog;
-exports.default = _default;
+var _default = exports.default = ColumnRangeDialog;
 //# sourceMappingURL=ColumnRangeDialog.js.map

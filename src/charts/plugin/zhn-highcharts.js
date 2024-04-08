@@ -5,7 +5,10 @@ import zhAddSeriaToYAxis from './zhAddSeriaToYAxis'
 import zhToggleSeria from './zhToggleSeria'
 import zhTogglePlotLines from './zhTogglePlotLines'
 import zhToggle2H from './zhToggle2H'
-import zhEnableDataLabels from './zhEnableDataLabels'
+import {
+  zhEnableDataLabels,
+  zhDisableDataLabels
+} from './zhEnableDataLabels'
 import zhZoomX from './zhZoomX'
 import zhIs from './zhIs'
 import zhGet from './zhGet'
@@ -23,7 +26,10 @@ const HighchartsZhn = (Highcharts) => {
     //zhDetailCharts,
     zhReflowCharts,
     zhUpdateSpacing,
+
     zhEnableDataLabels,
+    zhDisableDataLabels,
+
     zhToggleSeria,
     zhToggle2H,
     zhRemoveCategory,
