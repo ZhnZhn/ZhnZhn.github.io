@@ -13,32 +13,33 @@ import useChartMethods from './useChartMethods';
 import ButtonTab from '../zhn/ButtonTab'
 import ModalMenuIndicator from './ModalMenuIndicator'
 import ModalMenuInd2 from './ModalMenuInd2'
+import ModalMenuAppearance from './ModalMenuAppearance'
 import ModalMenuFn from './ModalMenuFn'
 import ModalMenuMini from './ModalMenuMini'
 
 const CL_WITH_SCROLL_X = "with-scroll-x"
 , CL_BT_R = `${CL_WITH_SCROLL_X}__bt-r`
-
-, S_BT_IND = { left: 8 }
-, S_M_IND = {
+, _crModalPopupStyle = (left) => ({
   top: 60,
-  left: 5
-}
-, S_BT_LEGEND = { left: 115 }
-, S_BT_FN = { left: 190 }
-, S_M_FN = {
-  top: 60,
-  left: 150
-}
+  left
+})
+, _crLeftStyle = (left) => ({
+  left
+})
+, S_BT_IND = _crLeftStyle(8)
+, S_M_IND = _crModalPopupStyle(5)
+, S_BT_APPEARANCE = _crLeftStyle(95)
+, S_M_APPEARANCE = _crModalPopupStyle(80)
+, S_BT_LEGEND = _crLeftStyle(115)
+, S_BT_FN = _crLeftStyle(190)
+, S_BT_FN_APPEARANCE = _crLeftStyle(230)
+, S_M_FN = _crModalPopupStyle(159)
 , S_BT_MINI = {
   left: 350,
   width: 68
 }
-, S_M_MINI = {
-  top: 60,
-  left: 290
-}
-, S_BT_R = {
+, S_M_MINI = _crModalPopupStyle(290)
+  , S_BT_R = {
   left: 440,
   width: 36
 };
@@ -112,6 +113,7 @@ const ChartToolbar = ({
       onPasteTo
     )
   , [isShowInd, toggleInd] = useToggle(false)
+  , [isShowAppearance, toggleAppearance] = useToggle(false)
   , [isShowFn, toggleFn] = useToggle(false)
   , [isShowMini, toggleMini] = useToggle(false)
   , _hClickR = useCallback(() => {
@@ -148,7 +150,8 @@ const ChartToolbar = ({
     );
   }
 
-  let _btTabIndicator = null;
+  let _btTabIndicator = null
+  , _btAppearance = null;
   if (_isIndicatorTab(config, isWithoutIndicator)) {
     let _tabIndCaption = "Indicator";
     if (_isColumnCategoryConfig(config.xAxis)) {
@@ -160,6 +163,21 @@ const ChartToolbar = ({
         config={config}
         getChart={getChart}
         onClose={toggleInd}
+      />)
+      _modalMenuArr.push(<ModalMenuAppearance
+        key="appearance"
+        isShow={isShowAppearance}
+        style={S_M_APPEARANCE}
+        config={config}
+        getChart={getChart}
+        onClose={toggleAppearance}
+      />)
+      _btAppearance = (<ButtonTab
+        style={S_BT_APPEARANCE}
+        caption="Appearance"
+        isShow={isShowAppearance}
+        isMenu={true}
+        onClick={toggleAppearance}
       />)
     } else {
      _modalMenuArr.push(<ModalMenuIndicator
@@ -237,9 +255,10 @@ const ChartToolbar = ({
          style={style}
       >
          {_btTabIndicator}
+         {_btAppearance}
          {_btLegend}
          <ButtonTab
-           style={S_BT_FN}
+           style={_btAppearance ? S_BT_FN_APPEARANCE : S_BT_FN}
            caption="Fn"
            isShow={isShowFn}
            isMenu={true}
