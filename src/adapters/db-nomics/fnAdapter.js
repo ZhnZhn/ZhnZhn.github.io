@@ -112,6 +112,10 @@ export const crTitle = (
   };
 }
 
+const _getRecentPoint = (
+  arr
+) => arr[arr.length-1] || [];
+
 export const crData = (
   json,
   option
@@ -131,7 +135,10 @@ export const crData = (
   let _arrPoint;
   return period.reduce((_data, periodItem, index) => {
     _arrPoint = crPoint(periodItem, value[index]);
-    if (_arrPoint[0] > _xFrom && isNumber(_arrPoint[1])) {
+    if (_arrPoint[0] > _xFrom
+      && isNumber(_arrPoint[1])
+      && _arrPoint[0] !== _getRecentPoint(_data)[0]
+    ) {
       _data.push(_arrPoint)
     }
     return _data;

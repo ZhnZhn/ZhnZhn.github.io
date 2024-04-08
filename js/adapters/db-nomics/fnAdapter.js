@@ -25,13 +25,11 @@ const _crId = _ref => {
 const _crItemLink = _crFn.crItemLink.bind(null, 'DBnomics Chart');
 const _crUpdatedDate = json => {
   const _date = (0, _fnSelector.getIndexedAt)(json).split('T')[0];
-  return _date ? `<p>Updated by DBnomics on ${_date}</p>` : '';
+  return _date ? "<p>Updated by DBnomics on " + _date + "</p>" : '';
 };
 const _crDescr = (json, option) => {
   const _id = _crId(option);
-  return `<p>SeriaId: ${_id}</p>
-   ${_crUpdatedDate(json)}
-   ${_crItemLink(CHART_URL + '/' + _id)}`;
+  return "<p>SeriaId: " + _id + "</p>\n   " + _crUpdatedDate(json) + "\n   " + _crItemLink(CHART_URL + '/' + _id);
 };
 const _crZhConfig = option => {
   const {
@@ -78,6 +76,7 @@ const crTitle = (_ref2, json) => {
   };
 };
 exports.crTitle = crTitle;
+const _getRecentPoint = arr => arr[arr.length - 1] || [];
 const crData = (json, option) => {
   const {
       fromDate
@@ -88,7 +87,7 @@ const crData = (json, option) => {
   let _arrPoint;
   return period.reduce((_data, periodItem, index) => {
     _arrPoint = crPoint(periodItem, value[index]);
-    if (_arrPoint[0] > _xFrom && (0, _AdapterFn.isNumber)(_arrPoint[1])) {
+    if (_arrPoint[0] > _xFrom && (0, _AdapterFn.isNumber)(_arrPoint[1]) && _arrPoint[0] !== _getRecentPoint(_data)[0]) {
       _data.push(_arrPoint);
     }
     return _data;
