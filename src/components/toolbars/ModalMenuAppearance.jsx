@@ -6,10 +6,12 @@ import {
 
 import ModalPopup from '../zhn-moleculs/ModalPopup';
 import RowCheckBox1 from '../dialogs/rows/RowCheckBox1';
-import { S_MODAL_MENU } from './ModalMenu.Style';
+import {
+  S_MODAL_MENU,
+  S_MENU_PANE
+} from './ModalMenu.Style';
 
-const S_PANE = { margin: '6px 10px 6px 6px' }
-, S_CHB = { padding: 0 };
+const S_CHB = { padding: 0 };
 
 const ModalMenuAppearance = ({
   style,
@@ -39,7 +41,7 @@ const ModalMenuAppearance = ({
       isShow={isShow}
       onClose={onClose}
     >
-      <div style={S_PANE}>
+      <div style={S_MENU_PANE}>
         <RowCheckBox1
           style={S_CHB}
           caption="Category Labels"

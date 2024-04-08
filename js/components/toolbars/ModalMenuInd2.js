@@ -12,9 +12,6 @@ var _RowTypeA = _interopRequireDefault(require("./RowTypeA"));
 var _RowTypeB = _interopRequireDefault(require("./RowTypeB"));
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_POWER_BY_10 = 0,
-  S_PANE = {
-    margin: '6px 10px 6px 6px'
-  },
   _isNumber = n => typeof n === 'number' && n - n === 0,
   _isPowerBy = config => {
     var _config$plotOptions;
@@ -45,7 +42,7 @@ const ModalMenuInd2 = _ref => {
     isShow: isShow,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: S_PANE,
+      style: _ModalMenu.S_MENU_PANE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeA.default, {
         caption: "Rate (S1/S2)",
         mathFn: _IndicatorBuilder.addCategoryRateTo,
@@ -70,6 +67,5 @@ const ModalMenuInd2 = _ref => {
     })
   });
 };
-var _default = ModalMenuInd2;
-exports.default = _default;
+var _default = exports.default = ModalMenuInd2;
 //# sourceMappingURL=ModalMenuInd2.js.map

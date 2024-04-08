@@ -8,13 +8,15 @@ import {
 } from '../../charts/IndicatorBuilder'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
-import { S_MODAL_MENU } from './ModalMenu.Style'
+import {
+  S_MODAL_MENU,
+  S_MENU_PANE
+} from './ModalMenu.Style'
 
 import RowTypeA from './RowTypeA'
 import RowTypeB from './RowTypeB'
 
 const DF_POWER_BY_10 = 0
-, S_PANE = { margin: '6px 10px 6px 6px' }
 
 , _isNumber = n => typeof n === 'number'
     && n-n === 0
@@ -45,7 +47,7 @@ const ModalMenuInd2 = ({
       isShow={isShow}
       onClose={onClose}
     >
-      <div style={S_PANE}>
+      <div style={S_MENU_PANE}>
         <RowTypeA
            caption="Rate (S1/S2)"
            mathFn={addCategoryRateTo}

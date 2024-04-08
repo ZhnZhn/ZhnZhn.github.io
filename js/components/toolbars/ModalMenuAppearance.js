@@ -9,12 +9,9 @@ var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox1"));
 var _ModalMenu = require("./ModalMenu.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const S_PANE = {
-    margin: '6px 10px 6px 6px'
-  },
-  S_CHB = {
-    padding: 0
-  };
+const S_CHB = {
+  padding: 0
+};
 const ModalMenuAppearance = _ref => {
   let {
     style,
@@ -40,7 +37,7 @@ const ModalMenuAppearance = _ref => {
     isShow: isShow,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: S_PANE,
+      style: _ModalMenu.S_MENU_PANE,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
         style: S_CHB,
         caption: "Category Labels",
