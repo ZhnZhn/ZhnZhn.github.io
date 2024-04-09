@@ -1,3 +1,5 @@
+import { getColorBlack } from '../components/styleFn';
+
 import {
   isObj,
   isStr
@@ -187,6 +189,16 @@ export const crAreaConfig = ({
     }]
   }
 }
+
+export const crCategoryDataLabels = (isEnabled) => ({
+  enabled: isEnabled,
+  color: getColorBlack(),
+  crop: false,
+  overflow: 'allow',
+  style: {
+    fontSize: 14
+  }
+})
 
 export const fEventsMouseOver = (
   mouseOver

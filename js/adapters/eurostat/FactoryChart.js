@@ -4,9 +4,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
+var _Chart = require("../../charts/Chart");
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _ChartType = require("../../constants/ChartType");
-var _EuroStatFn = require("./EuroStatFn");
 const _assign = Object.assign;
 const CHART_HEIGHT = {
   height: 600,
@@ -17,16 +17,6 @@ const BAR_CHART = {
   ...CHART_HEIGHT,
   type: 'bar'
 };
-const _crBarDataLabels = () => ({
-  enabled: true,
-  color: (0, _EuroStatFn.getColorBlack)(),
-  crop: false,
-  overflow: 'allow',
-  zIndex: 10,
-  style: {
-    fontSize: '14px'
-  }
-});
 const SCATTER_CHART = {
   ...CHART_HEIGHT,
   type: 'scatter',
@@ -97,7 +87,7 @@ const _crBarConfig = option => {
     plotOptions: _crPlotOptionsBar(option)
   }), _configBuilderFn.toConfig);
   if (option.seriaType === _ChartType.CHT_BAR_WITH_LABELS) {
-    config.plotOptions.bar.dataLabels = _crBarDataLabels();
+    config.plotOptions.bar.dataLabels = (0, _Chart.crCategoryDataLabels)(true);
   }
   return config;
 };

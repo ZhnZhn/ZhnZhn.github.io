@@ -1,4 +1,5 @@
 import pipe from '../../utils/pipe';
+import { crCategoryDataLabels } from '../../charts/Chart';
 import {
   crBarOrColumnConfig,
   fAdd,
@@ -9,8 +10,7 @@ import {
   CHT_BAR_SET,
   CHT_BAR_WITH_LABELS,
   CHT_DOT_SET
-} from '../../constants/ChartType'
-import { getColorBlack } from './EuroStatFn';
+} from '../../constants/ChartType';
 
 const _assign = Object.assign;
 
@@ -24,16 +24,6 @@ const BAR_CHART = {
   ...CHART_HEIGHT,
   type: 'bar',
 };
-const _crBarDataLabels = () => ({
-  enabled: true,
-  color: getColorBlack(),
-  crop: false,
-  overflow: 'allow',
-  zIndex: 10,
-  style: {
-    fontSize: '14px'
-  }
-})
 
 const SCATTER_CHART = {
   ...CHART_HEIGHT,
@@ -106,7 +96,7 @@ const _crBarConfig = (option) => {
   );
 
   if (option.seriaType === CHT_BAR_WITH_LABELS) {
-    config.plotOptions.bar.dataLabels = _crBarDataLabels()
+    config.plotOptions.bar.dataLabels = crCategoryDataLabels(true)
   }
   return config;
 };
