@@ -10,7 +10,7 @@ var _zhAddSeriaToYAxis = _interopRequireDefault(require("./zhAddSeriaToYAxis"));
 var _zhToggleSeria = _interopRequireDefault(require("./zhToggleSeria"));
 var _zhTogglePlotLines = _interopRequireDefault(require("./zhTogglePlotLines"));
 var _zhToggle2H = _interopRequireDefault(require("./zhToggle2H"));
-var _zhEnableDataLabels = require("./zhEnableDataLabels");
+var _zhDataLabels = _interopRequireDefault(require("./zhDataLabels"));
 var _zhZoomX = _interopRequireDefault(require("./zhZoomX"));
 var _zhIs = _interopRequireDefault(require("./zhIs"));
 var _zhGet = _interopRequireDefault(require("./zhGet"));
@@ -30,8 +30,7 @@ const HighchartsZhn = Highcharts => {
     //zhDetailCharts,
     zhReflowCharts: _zhReflowCharts.default,
     zhUpdateSpacing: _zhUpdateSpacing.default,
-    zhEnableDataLabels: _zhEnableDataLabels.zhEnableDataLabels,
-    zhDisableDataLabels: _zhEnableDataLabels.zhDisableDataLabels,
+    zhDataLabels: _zhDataLabels.default,
     zhToggleSeria: _zhToggleSeria.default,
     zhToggle2H: _zhToggle2H.default,
     zhRemoveCategory: _zhRemoveCategory.default,

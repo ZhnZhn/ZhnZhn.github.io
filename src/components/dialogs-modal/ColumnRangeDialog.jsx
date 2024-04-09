@@ -135,8 +135,8 @@ class ColumnRangeDialog extends Component {
        color: _color,
        yIndex: 0,
      }, _crSeriaOptions(this._pointWidth))
-
-     chart.zhEnableDataLabels("columnrange")
+     
+     chart.zhDataLabels(true)
      onClose()
   }
 

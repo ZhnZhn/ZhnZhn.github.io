@@ -26,12 +26,12 @@ const ModalMenuAppearance = ({
     _disableCategoryLabels
   ]= useMemo(() => [
     () => {
-      getChart().zhEnableDataLabels()
+      getChart().zhDataLabels(true)
     },
     () => {
-      getChart().zhDisableDataLabels()
+      getChart().zhDataLabels(false)
     }
-  ], [])
+  ], []);
   // getChart
   /*eslint-enable react-hooks/exhaustive-deps */
 
@@ -44,7 +44,7 @@ const ModalMenuAppearance = ({
       <div style={S_MENU_PANE}>
         <RowCheckBox1
           style={S_CHB}
-          caption="Category Labels"
+          caption="Data Labels"
           chbCn={CL_CHB_BLACK}
           btCn={CL_BLACK}
           onCheck={_enableCategoryLabels}

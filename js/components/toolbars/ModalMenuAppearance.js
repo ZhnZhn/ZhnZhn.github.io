@@ -22,9 +22,9 @@ const ModalMenuAppearance = _ref => {
   } = _ref;
   /*eslint-disable react-hooks/exhaustive-deps */
   const [_enableCategoryLabels, _disableCategoryLabels] = (0, _uiApi.useMemo)(() => [() => {
-    getChart().zhEnableDataLabels();
+    getChart().zhDataLabels(true);
   }, () => {
-    getChart().zhDisableDataLabels();
+    getChart().zhDataLabels(false);
   }], []);
   // getChart
   /*eslint-enable react-hooks/exhaustive-deps */
@@ -40,7 +40,7 @@ const ModalMenuAppearance = _ref => {
       style: _ModalMenu.S_MENU_PANE,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
         style: S_CHB,
-        caption: "Category Labels",
+        caption: "Data Labels",
         chbCn: _styleFn.CL_CHB_BLACK,
         btCn: _styleFn.CL_BLACK,
         onCheck: _enableCategoryLabels,
