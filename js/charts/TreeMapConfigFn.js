@@ -15,8 +15,7 @@ const CONFIG_TREE_MAP = exports.CONFIG_TREE_MAP = {
     align: 'left',
     verticalAlign: 'top',
     style: {
-      fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
-      fontSize: '14px',
+      fontSize: '15px',
       fontWeight: 'bold',
       color: (0, _ChartFn.getColorBlack)(),
       textShadow: 'none'

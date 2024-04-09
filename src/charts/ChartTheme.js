@@ -320,6 +320,6 @@ export const ChartTheme = {
       tickWidth: 0,
       gridLineColor: COLOR_Y_GRID_LINE,
       gridLineDashStyle: "Dot",
-      labels: _crAxisLabelStyle(COLOR_Y_LABEL, "14px")
+      labels: _crAxisLabelStyle(COLOR_Y_LABEL, "15px")
   }
 };

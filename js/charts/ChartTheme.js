@@ -243,8 +243,8 @@ const ChartTheme = exports.ChartTheme = {
     backgroundColor: _Color.COLOR_TOOLTIP,
     borderWidth: 2,
     borderRadius: 10,
-    headerFormat: `<span class="${_CL.CL_TP_HEADER}">{point.key}</span><br/>'`,
-    pointFormat: `<span class="${_CL.CL_TP_TITLE}">Value: </span>` + `<span class="${_CL.CL_TP_VALUE}">{point.y}</span><br/>`
+    headerFormat: "<span class=\"" + _CL.CL_TP_HEADER + "\">{point.key}</span><br/>'",
+    pointFormat: "<span class=\"" + _CL.CL_TP_TITLE + "\">Value: </span>" + ("<span class=\"" + _CL.CL_TP_VALUE + "\">{point.y}</span><br/>")
   },
   xAxis: {
     lineColor: _Color.COLOR_X_LINE,
@@ -268,7 +268,7 @@ const ChartTheme = exports.ChartTheme = {
     tickWidth: 0,
     gridLineColor: _Color.COLOR_Y_GRID_LINE,
     gridLineDashStyle: "Dot",
-    labels: _crAxisLabelStyle(_Color.COLOR_Y_LABEL, "14px")
+    labels: _crAxisLabelStyle(_Color.COLOR_Y_LABEL, "15px")
   }
 };
 //# sourceMappingURL=ChartTheme.js.map

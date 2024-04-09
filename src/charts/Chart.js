@@ -196,7 +196,7 @@ export const crCategoryDataLabels = (isEnabled) => ({
   crop: false,
   overflow: 'allow',
   style: {
-    fontSize: 14
+    fontSize: '15px'
   }
 })
 
@@ -266,7 +266,7 @@ export const fSecondYAxis = (
      style: {
        color: color,
        fontWeight: "bold",
-       fontSize: "14px"
+       fontSize: "15px"
      }
    }
 })
