@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/plugin/zhSetPointWidth.js"
+ ],
+ "file": "../../../src/charts/plugin/zhSetPointWidth.js",
+ "names": [
+  "_pluginFn",
+  "require",
+  "zhSetPointWidth",
+  "pointWidth",
+  "tryUpdate",
+  "plotOptions",
+  "getSeriaType",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,SAAA,GAAAC,OAAA;AAMA,MAAMC,eAAe,GAAG,SAAAA,CAASC,UAAU,EAAE;EAC3C,IAAAC,mBAAS,EACP,IAAI,EACJ;IACEC,WAAW,EAAE;MACX,CAAC,IAAAC,sBAAY,EAAC,IAAI,CAAC,GAAG;QACpBH;MACF;IACF;EACF,CACF,CAAC;AACH,CAAC;AAAA,IAAAI,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEcP,eAAe"
+}

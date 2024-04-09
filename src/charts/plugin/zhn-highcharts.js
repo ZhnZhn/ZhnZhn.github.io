@@ -5,7 +5,10 @@ import zhAddSeriaToYAxis from './zhAddSeriaToYAxis'
 import zhToggleSeria from './zhToggleSeria'
 import zhTogglePlotLines from './zhTogglePlotLines'
 import zhToggle2H from './zhToggle2H'
+
 import zhDataLabels from './zhDataLabels'
+import zhSetPointWidth from './zhSetPointWidth'
+
 import zhZoomX from './zhZoomX'
 import zhIs from './zhIs'
 import zhGet from './zhGet'
@@ -25,6 +28,7 @@ const HighchartsZhn = (Highcharts) => {
     zhUpdateSpacing,
 
     zhDataLabels,
+    zhSetPointWidth,
 
     zhToggleSeria,
     zhToggle2H,
