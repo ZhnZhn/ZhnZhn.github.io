@@ -14,14 +14,21 @@ S_INPUT_TEXT = {
 };
 
 const RowCaptionInput = ({
+  isBtAdd=true,
+  style,
+  captionStyle,
   caption,
   forwardRef,
   initValue,
   maxLength=3,
   onAdd
 }) => (
-  <div>
-    <SpanBlack style={S_CAPTION}>{caption}</SpanBlack>
+  <div style={style}>
+    <SpanBlack
+      style={{...S_CAPTION, ...captionStyle}}
+    >
+      {caption}
+    </SpanBlack>
     <InputText
        ref={forwardRef}
        type="number"
@@ -30,7 +37,7 @@ const RowCaptionInput = ({
        maxLength={maxLength}
        onEnter={onAdd}
     />
-    <SvgPlus onClick={onAdd} />
+    {isBtAdd ? <SvgPlus onClick={onAdd} /> : null}
   </div>
 );
 

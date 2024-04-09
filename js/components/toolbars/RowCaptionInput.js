@@ -18,6 +18,9 @@ const S_CAPTION = {
   };
 const RowCaptionInput = _ref => {
   let {
+    isBtAdd = true,
+    style,
+    captionStyle,
     caption,
     forwardRef,
     initValue,
@@ -25,8 +28,12 @@ const RowCaptionInput = _ref => {
     onAdd
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: style,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-      style: S_CAPTION,
+      style: {
+        ...S_CAPTION,
+        ...captionStyle
+      },
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
       ref: forwardRef,
@@ -35,9 +42,9 @@ const RowCaptionInput = _ref => {
       initValue: initValue,
       maxLength: maxLength,
       onEnter: onAdd
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgPlus, {
+    }), isBtAdd ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgPlus, {
       onClick: onAdd
-    })]
+    }) : null]
   });
 };
 var _default = exports.default = RowCaptionInput;
