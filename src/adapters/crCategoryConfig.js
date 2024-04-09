@@ -18,7 +18,7 @@ const crCategoryConfig = (
   data,
   isCluster
 ) => pipe(
-  crBarOrColumnConfig(seriaType, crCategories(data)),
+  crBarOrColumnConfig(seriaType, crCategories(data), seriaColor),
   fAddCaption(title, subtitle),
   fAddSeriaBy(0, {
     color: seriaColor,

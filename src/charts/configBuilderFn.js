@@ -346,7 +346,7 @@ const _checkDataLength = (config) => {
 }
 
 export const toConfig = (config) => {
-  _checkDataLength(config)  
+  _checkDataLength(config)
   return config;
 }
 
@@ -412,6 +412,7 @@ const CATEGORIES_X_AXIS = {
   }
 };
 
+//toYearsByMonths
 export const crCategoryConfig = (
   categories,
   title,
@@ -421,15 +422,17 @@ export const crCategoryConfig = (
    yAxis: CATEGORIES_Y_AXIS
 })(crArea2Config(title, subtitle))
 
-
 export const crBarOrColumnConfig = (
   type,
-  categories=[]
+  categories=[],
+  seriaColor
 ) => {
   const _crConfig = type === 'BAR'
     ? crBarConfig
     : crColumnConfig;
-  return fAdd('xAxis', { categories })(_crConfig());
+  return fAdd('xAxis', { categories })(
+    _crConfig(seriaColor)
+  );
 }
 
 const HEIGHT_OF_ONE_BAR_CATEGORY = 22

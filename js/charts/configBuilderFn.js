@@ -320,6 +320,8 @@ const CATEGORIES_X_AXIS = {
       x: 3
     }
   };
+
+//toYearsByMonths
 const crCategoryConfig = (categories, title, subtitle) => fAdd({
   xAxis: {
     ...CATEGORIES_X_AXIS,
@@ -330,14 +332,14 @@ const crCategoryConfig = (categories, title, subtitle) => fAdd({
   yAxis: CATEGORIES_Y_AXIS
 })(crArea2Config(title, subtitle));
 exports.crCategoryConfig = crCategoryConfig;
-const crBarOrColumnConfig = function (type, categories) {
+const crBarOrColumnConfig = function (type, categories, seriaColor) {
   if (categories === void 0) {
     categories = [];
   }
   const _crConfig = type === 'BAR' ? _ChartFactory.crBarConfig : _ChartFactory.crColumnConfig;
   return fAdd('xAxis', {
     categories
-  })(_crConfig());
+  })(_crConfig(seriaColor));
 };
 exports.crBarOrColumnConfig = crBarOrColumnConfig;
 const HEIGHT_OF_ONE_BAR_CATEGORY = 22,
