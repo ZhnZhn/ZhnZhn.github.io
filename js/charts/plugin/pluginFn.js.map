@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/plugin/pluginFn.js"
+ ],
+ "file": "../../../src/charts/plugin/pluginFn.js",
+ "names": [
+  "getSeriaType",
+  "chartInst",
+  "options",
+  "chart",
+  "type",
+  "exports",
+  "tryUpdate",
+  "inst",
+  "update",
+  "err",
+  "console",
+  "log"
+ ],
+ "mappings": ";;;;AACO,MAAMA,YAAY,GACvBC,SAAS,IACNA,SAAS,CAACC,OAAO,CAACC,KAAK,CAACC,IAAI;AAAAC,OAAA,CAAAL,YAAA,GAAAA,YAAA;AAE1B,MAAMM,SAAS,GAAGA,CAACC,IAAI,EAAEL,OAAO,KAAK;EAC1C,IAAI;IACFK,IAAI,CAACC,MAAM,CAACN,OAAO,CAAC;EACtB,CAAC,CAAC,OAAMO,GAAG,EAAE;IACXC,OAAO,CAACC,GAAG,CAACF,GAAG,CAAC;EAClB;AACF,CAAC;AAAAJ,OAAA,CAAAC,SAAA,GAAAA,SAAA"
+}
