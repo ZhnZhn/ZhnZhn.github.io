@@ -3,27 +3,38 @@ import {
   assign,
   crError
 } from '../AdapterFn';
+import {
+  isCategory
+} from '../CategoryFn';
 
 import { getCi } from './fnAdapter';
 
 const URL = 'https://api.worldbank.org/v2'
-, NATIVE_URL = 'https://data.worldbank.org/indicator';
+, NATIVE_URL = 'https://data.worldbank.org/indicator'
+, _crCountryIndicatorToken = (
+  country,
+  indicator
+) => `countries/${country}/indicators/${indicator}`;
 
 const api = {
   getRequestUrl(option){
     const [
       country,
       indicator
-    ] = getCi(option);
+    ] = getCi(option)
+    , _isCategory = isCategory(option.seriaType)
+    , _locations = _isCategory ? "1W" : country;
 
     assign(option, {
       linkItem: {
         caption: 'World Bank',
-        href: `${NATIVE_URL}/${indicator}?locations=${country}`
+        href: `${NATIVE_URL}/${indicator}?locations=${_locations}`
       }
     })
 
-    return `${URL}/countries/${country}/indicators/${indicator}?date=1990:2023&format=json`;
+    return _isCategory
+      ? `${URL}/${_crCountryIndicatorToken("all", indicator)}?date=${option.time}&format=json&per_page=305`
+      : `${URL}/${_crCountryIndicatorToken(country, indicator)}?date=1990:2023&format=json`;
   },
 
   checkResponse(json){
