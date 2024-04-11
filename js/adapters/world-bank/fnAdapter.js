@@ -18,9 +18,9 @@ const getCi = _ref2 => {
   } = _ref2;
   return [
   //country
-  items[0].v,
+  (0, _AdapterFn.getValue)(items[0]),
   //indicator
-  items[1].v];
+  (0, _AdapterFn.getValue)(items[1])];
 };
 exports.getCi = getCi;
 const crData = _ref3 => {
