@@ -1,7 +1,15 @@
 
-export const getSeriaType = (
-  chartInst
-) => chartInst.options.chart.type
+export const crPlotOptions = (
+  chartInst,
+  propName,
+  propValue
+) => ({
+    plotOptions: {
+      [chartInst.options.chart.type]: {
+        [propName]: propValue
+      }
+    }
+})
 
 export const tryUpdate = (inst, options) => {
   try {

@@ -1,9 +1,15 @@
 "use strict";
 
 exports.__esModule = true;
-exports.tryUpdate = exports.getSeriaType = void 0;
-const getSeriaType = chartInst => chartInst.options.chart.type;
-exports.getSeriaType = getSeriaType;
+exports.tryUpdate = exports.crPlotOptions = void 0;
+const crPlotOptions = (chartInst, propName, propValue) => ({
+  plotOptions: {
+    [chartInst.options.chart.type]: {
+      [propName]: propValue
+    }
+  }
+});
+exports.crPlotOptions = crPlotOptions;
 const tryUpdate = (inst, options) => {
   try {
     inst.update(options);

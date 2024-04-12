@@ -1,27 +1,17 @@
 import { crCategoryDataLabels } from '../Chart';
-import {
-  getSeriaType,
-  tryUpdate
+import {  
+  tryUpdate,
+  crPlotOptions
 } from './pluginFn';
-
-const _crDataLabels = (
-  seriaType,
-  dataLabels
-) => ({
-  plotOptions: {
-    [seriaType]: {
-      dataLabels
-    }
-  }
-});
 
 const zhDataLabels = function(isEnabled) {
   tryUpdate(
     this,
-    _crDataLabels(
-       getSeriaType(this),
-       crCategoryDataLabels(isEnabled)
-     )
+    crPlotOptions(
+      this,
+      "dataLabels",
+      crCategoryDataLabels(isEnabled)
+    )
   )
 };
 

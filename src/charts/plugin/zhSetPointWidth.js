@@ -1,20 +1,17 @@
 import {
   tryUpdate,
-  getSeriaType
+  crPlotOptions
 } from './pluginFn';
-
 
 const zhSetPointWidth = function(pointWidth) {
   tryUpdate(
     this,
-    {
-      plotOptions: {
-        [getSeriaType(this)]: {
-          pointWidth
-        }
-      }
-    }
+    crPlotOptions(
+      this,
+      "pointWidth",
+      pointWidth
+    )
   )
-}
+};
 
 export default zhSetPointWidth
