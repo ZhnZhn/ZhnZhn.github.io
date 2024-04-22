@@ -27,7 +27,8 @@ import {
   BT_NASDAQ_STOCKS,
   BT_FAOSTAT,
   BT_UN_COMTRADE,
-  BT_WORLD_BANK
+  BT_WORLD_BANK,
+  BT_WTO
 } from '../../constants/BrowserType';
 
 import {
@@ -107,7 +108,8 @@ const PAGE_CONFIGS_01 = [
 , PAGE_CONFIGS_05 = [
   [CL_ORG, 'FAOSTAT', BT_FAOSTAT],
   [CL_ORG, 'UN Comtrade', BT_UN_COMTRADE],
-  [CL_ORG, 'World Bank', BT_WORLD_BANK]
+  [CL_ORG, 'World Bank', BT_WORLD_BANK],
+  [CL_ORG, 'WTO', BT_WTO]
 ];
 
 const crBrowserModel = () => ({
