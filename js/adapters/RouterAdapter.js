@@ -8,6 +8,7 @@ var _EuroStat = _interopRequireDefault(require("./eurostat/EuroStat"));
 var _UnComtrade = _interopRequireDefault(require("./uncomtrade/UnComtrade"));
 var _FaoStat = _interopRequireDefault(require("./faostat/FaoStat"));
 var _WorldBank = _interopRequireDefault(require("./world-bank/WorldBank"));
+var _Wt = _interopRequireDefault(require("./wto/Wt"));
 var _Insee = _interopRequireDefault(require("./insee/Insee"));
 var _StatUk = _interopRequireDefault(require("./stat-uk/StatUk"));
 var _StatNorway = require("./stat-norway/StatNorway");
@@ -55,6 +56,7 @@ const RouterAdapter = {
   [_LoadType.LT_UN]: _UnComtrade.default,
   [_LoadType.LT_FAO]: _FaoStat.default,
   [_LoadType.LT_WB]: _WorldBank.default,
+  [_LoadType.LT_WT]: _Wt.default,
   [_LoadType.LT_EU_STAT]: _EuroStat.default,
   [_LoadType.LT_FS]: _Insee.default,
   [_LoadType.LT_UKS]: _StatUk.default,

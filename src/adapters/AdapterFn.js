@@ -54,7 +54,8 @@ export {
   isArr,
   isNaN,
   isTypeNumber,
-  isNumber
+  isNumber,
+  isStr
 } from '../utils/isTypeFn';
 import {
   isArr,

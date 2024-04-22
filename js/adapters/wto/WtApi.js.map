@@ -1,0 +1,31 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/wto/WtApi.js"
+ ],
+ "file": "../../../src/adapters/wto/WtApi.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "API_URL",
+  "WtApi",
+  "getRequestUrl",
+  "option",
+  "proxy",
+  "items",
+  "dfInd",
+  "apiKey",
+  "_r",
+  "getValue",
+  "_pc",
+  "checkResponse",
+  "json",
+  "Dataset",
+  "isArr",
+  "crError",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAMA,MAAMC,OAAO,GAAG,wCAAwC;AAExD,MAAMC,KAAK,GAAG;EACZC,aAAaA,CAACC,MAAM,EAAC;IACnB,MAAM;QACJC,KAAK;QACLC,KAAK;QACLC,KAAK;QACLC;MACF,CAAC,GAAGJ,MAAM;MACRK,EAAE,GAAG,IAAAC,mBAAQ,EAACJ,KAAK,CAAC,CAAC,CAAC,CAAC;MACvBK,GAAG,GAAG,IAAAD,mBAAQ,EAACJ,KAAK,CAAC,CAAC,CAAC,CAAC,IAAI,IAAI;IAElC,YAAUD,KAAK,GAAGJ,OAAO,WAAMM,KAAK,WAAME,EAAE,kBAAaE,GAAG,uCAAkCH,MAAM;EACtG,CAAC;EAEDI,aAAaA,CAACC,IAAI,EAAET,MAAM,EAAC;IACzB,MAAM;MAAEU;IAAQ,CAAC,GAAGD,IAAI,IAAI,CAAC,CAAC;IAC9B,IAAI,CAAC,IAAAE,gBAAK,EAACD,OAAO,CAAC,EAAE;MACnB,MAAM,IAAAE,kBAAO,EAAC,CAAC;IACjB;EACF;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEajB,KAAK"
+}
