@@ -39,6 +39,7 @@ const BrowserConfig = {
   [_BrowserType.BT_UN_COMTRADE]: _crBrowserItem(_BrowserType.BT_UN_COMTRADE, 'UN Comtrade', 'uncomtrade'),
   [_BrowserType.BT_FAOSTAT]: _crBrowserItem(_BrowserType.BT_FAOSTAT, 'FAOSTAT', 'faostat'),
   [_BrowserType.BT_WORLD_BANK]: _crBrowserItem(_BrowserType.BT_WORLD_BANK, 'World Bank', 'world-bank'),
+  [_BrowserType.BT_WTO]: _crBrowserItem(_BrowserType.BT_WTO, 'WTO', 'wto'),
   [_BrowserType.BT_NDL]: _crBrowserItem(_BrowserType.BT_NDL, 'Nasdaq Data Link', 'ndl'),
   [_BrowserType.BT_DB_NOMICS]: _crBrowserItem(_BrowserType.BT_DB_NOMICS, 'DBnomics', 'db-nomics'),
   [_BrowserType.BT_ENERGY]: _crBrowserItem(_BrowserType.BT_ENERGY, 'Energy', 'energy'),

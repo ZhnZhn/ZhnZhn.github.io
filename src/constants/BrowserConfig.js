@@ -9,6 +9,7 @@ import {
   BT_UN_COMTRADE,
   BT_FAOSTAT,
   BT_WORLD_BANK,
+  BT_WTO,
   BT_NDL,
   BT_DB_NOMICS,
   BT_ENERGY,
@@ -112,6 +113,11 @@ const BrowserConfig = {
     BT_WORLD_BANK,
     'World Bank',
     'world-bank'
+  ),
+  [BT_WTO]: _crBrowserItem(
+    BT_WTO,
+    'WTO',
+    'wto'
   ),
   [BT_NDL]: _crBrowserItem(
     BT_NDL,

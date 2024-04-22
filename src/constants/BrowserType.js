@@ -7,6 +7,7 @@ export const BT_CEI = 'CEI'
 export const BT_UN_COMTRADE = 'UN'
 export const BT_FAOSTAT = 'FAO'
 export const BT_WORLD_BANK = 'WB'
+export const BT_WTO = 'WT'
 
 export const BT_FRANCE_STATISTICS = 'FS'
 export const BT_UK_STATISTICS = 'UKS'
