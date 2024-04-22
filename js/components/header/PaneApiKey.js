@@ -30,7 +30,7 @@ const S_SCROLL_PANE = {
     margin: '0 2px'
   };
 const CONF_SM_ARR = [["AV", "alpha-vantage", "Alpha Vantage"], ["FMP", "fmp", "Financial Modeling Prep", "32"], ["IEX", "iex-cloud", "IEX Cloud", "35"], ["Intrinio", "intrinio", "Intrinio", "32"], ["Twelve", "twelve", "Twelve Data"]];
-const CONF_EC_ARR = [["NDL", "nasdaq-data-link", "Nasdaq Data Link"]];
+const CONF_EC_ARR = [["NDL", "nasdaq-data-link", "Nasdaq Data Link"], ["WTO", "wto", "WTO", "32"]];
 const CONF_EC_USA_ARR = [["BEA", "bea", "BEA", "36"], ["BLS", "bls", "BLS", "32"], ["EIA", "eia", "EIA", "32"]];
 const _crPwdItem = (item, index, _ref) => {
   let {
@@ -84,6 +84,7 @@ class PaneApiKey extends _uiApi.Component {
     this._ref7 = n => this.iComp7 = n;
     this._ref8 = n => this.iComp8 = n;
     this._ref9 = n => this.iComp9 = n;
+    this._ref10 = n => this.iComp10 = n;
     const {
       data
     } = props;
@@ -121,7 +122,7 @@ class PaneApiKey extends _uiApi.Component {
           crItem: _crPwdItem,
           isShowLabels: isShowLabels,
           titleStyle: titleStyle,
-          i: 2,
+          i: 3,
           comp: this
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
@@ -132,7 +133,7 @@ class PaneApiKey extends _uiApi.Component {
           crItem: _crPwdItem,
           isShowLabels: isShowLabels,
           titleStyle: titleStyle,
-          i: 5,
+          i: 6,
           comp: this
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowButtons.default, {

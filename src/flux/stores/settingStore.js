@@ -1,4 +1,7 @@
-import { bindTo } from '../storeApi';
+import {
+  isUndef,
+  bindTo
+} from '../storeApi';
 
 import {
   LT_Q,
@@ -13,6 +16,7 @@ import {
   LT_BLS,
   LT_WL,
   LT_UN,
+  LT_WT,
 
   LT_CR,
   LT_BB,
@@ -24,16 +28,16 @@ import {
   LT_KX
 } from '../../constants/LoadType';
 
-const _isUndef = value => typeof value === 'undefined';
-
 const _withApiKey = [
   LT_AL, LT_IEX, LT_FMP, LT_INTR, LT_TW,
-  LT_BEA, LT_EIA
+  LT_BEA, LT_EIA,
+  LT_WT
 ];
 const _withProxyServer = [
   LT_Q,
   LT_UN,
-  LT_BB
+  LT_BB,
+  LT_WT
 ];
 const _withProxyServer2 = [
   ..._withProxyServer,
@@ -55,6 +59,7 @@ const _apiTitle = {
   [LT_FMP]: 'FMP',
   [LT_INTR]: 'Intrinio',
   [LT_TW]: 'Twelve Data',
+  [LT_WT]: 'WTO',
 
   [LT_CRC]: 'CryptoCompare Information'
 };
@@ -90,7 +95,7 @@ const _SETTINGS = {
 };
 
 export const isSetting = (propName, value) => {
-  if (_isUndef(value)){
+  if (isUndef(value)){
     return _SETTINGS[propName];
   }
   _SETTINGS[propName] = !!value
@@ -114,14 +119,15 @@ export const getProxy = (
 export const exportSettingFn = () => {
   return {
     key1: _fSetKey(LT_Q),
-    key2: _fSetKey(LT_BEA),
-    key3: _fSetKey(LT_BLS),
-    key4: _fSetKey(LT_EIA),
-    key5: _fSetKey(LT_AL),
-    key6: _fSetKey(LT_FMP),
-    key7: _fSetKey(LT_IEX),
-    key8: _fSetKey(LT_INTR),
-    key9: _fSetKey(LT_TW),
+    key2: _fSetKey(LT_WT),
+    key3: _fSetKey(LT_BEA),
+    key4: _fSetKey(LT_BLS),
+    key5: _fSetKey(LT_EIA),
+    key6: _fSetKey(LT_AL),
+    key7: _fSetKey(LT_FMP),
+    key8: _fSetKey(LT_IEX),
+    key9: _fSetKey(LT_INTR),
+    key10: _fSetKey(LT_TW),
     setProxy: _setProxy,
     getProxy,
     isAdminMode,

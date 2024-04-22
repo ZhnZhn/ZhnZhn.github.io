@@ -30,6 +30,7 @@ const CONF_SM_ARR = [
 
 const CONF_EC_ARR = [
   ["NDL","nasdaq-data-link","Nasdaq Data Link"],
+  ["WTO","wto","WTO", "32"],
 ];
 
 const CONF_EC_USA_ARR = [
@@ -105,6 +106,7 @@ class PaneApiKey extends Component {
   _ref7 = n => this.iComp7 = n
   _ref8 = n => this.iComp8 = n
   _ref9 = n => this.iComp9 = n
+  _ref10 = n => this.iComp10 = n
 
   render(){
     const {
@@ -133,7 +135,7 @@ class PaneApiKey extends Component {
              crItem={_crPwdItem}
              isShowLabels={isShowLabels}
              titleStyle={titleStyle}
-             i={2}
+             i={3}
              comp={this}
            />
         </OpenClose>
@@ -143,7 +145,7 @@ class PaneApiKey extends Component {
             crItem={_crPwdItem}
             isShowLabels={isShowLabels}
             titleStyle={titleStyle}
-            i={5}
+            i={6}
             comp={this}
           />
         </OpenClose>
