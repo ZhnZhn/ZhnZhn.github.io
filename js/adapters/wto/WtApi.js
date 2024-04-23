@@ -3,18 +3,31 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
+var _CategoryFn = require("../CategoryFn");
 const API_URL = 'https://api.wto.org/timeseries/v1/data';
+const _crApiUrl = _ref => {
+  let {
+    proxy,
+    dfInd,
+    apiKey
+  } = _ref;
+  return "" + proxy + API_URL + "?i=" + dfInd + "&p=000&subscription-key=" + apiKey;
+};
 const WtApi = {
   getRequestUrl(option) {
     const {
-        proxy,
         items,
-        dfInd,
-        apiKey
+        dfPc
       } = option,
       _r = (0, _AdapterFn.getValue)(items[0]),
-      _pc = (0, _AdapterFn.getValue)(items[1]) || "TO";
-    return "" + proxy + API_URL + "?i=" + dfInd + "&r=" + _r + "&p=000&pc=" + _pc + "&ps=2005-2024&subscription-key=" + apiKey;
+      _pc = (0, _AdapterFn.getValue)(items[1]) || dfPc || "TO",
+      _url = _crApiUrl(option);
+    if ((0, _CategoryFn.isCategory)(option.seriaType)) {
+      option.title = option.dfT;
+      const _ps = (option.time || '').replace("M", "") || 2023;
+      return _url + "&pc=" + _pc + "&ps=" + _ps;
+    }
+    return _url + "&r=" + _r + "&pc=" + _pc + "&ps=2005-2024";
   },
   checkResponse(json, option) {
     const {

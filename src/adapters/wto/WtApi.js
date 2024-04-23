@@ -3,21 +3,36 @@ import {
   crError,
   getValue
 } from '../AdapterFn';
+import {
+  isCategory
+} from '../CategoryFn';
 
 const API_URL = 'https://api.wto.org/timeseries/v1/data';
+
+const _crApiUrl = ({
+  proxy,
+  dfInd,
+  apiKey
+}) => `${proxy}${API_URL}?i=${dfInd}&p=000&subscription-key=${apiKey}`;
 
 const WtApi = {
   getRequestUrl(option){
     const {
-      proxy,
       items,
-      dfInd,
-      apiKey
+      dfPc
     } = option
     , _r = getValue(items[0])
-    , _pc = getValue(items[1]) || "TO";
+    , _pc = getValue(items[1]) || dfPc || "TO"
+    , _url = _crApiUrl(option);
 
-    return `${proxy}${API_URL}?i=${dfInd}&r=${_r}&p=000&pc=${_pc}&ps=2005-2024&subscription-key=${apiKey}`;
+    if (isCategory(option.seriaType)) {
+      option.title = option.dfT
+      const _ps = (option.time || '')
+        .replace("M", "") || 2023;
+      return `${_url}&pc=${_pc}&ps=${_ps}`;
+    }
+
+    return `${_url}&r=${_r}&pc=${_pc}&ps=2005-2024`;
   },
 
   checkResponse(json, option){
