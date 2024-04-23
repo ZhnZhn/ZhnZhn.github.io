@@ -17,6 +17,7 @@ const LINK_CONFIGS = [
  ["Eurostat", _crUrl("ec.europa.eu/eurostat/")],
  ["UnComtrade", "UN Comtrade", _crUrl("comtrade.un.org")],
  ["WorldBank","World Bank", _crUrl("data.worldbank.org")],
+ ["WTO", _crUrl("wto.org")],
  ["FaoStat","FAOSTAT", _crUrl("www.fao.org/faostat/en/#data")],
  ["Bea","U.S. Bureau of Economic Analysis", _crUrl("www.bea.gov")],
  ["Bsl","U.S. Bureau of Labor Statistics", _crUrl("www.bls.gov/home.htm")],

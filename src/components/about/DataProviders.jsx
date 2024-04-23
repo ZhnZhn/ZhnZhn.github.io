@@ -53,11 +53,13 @@ const DP = [
   [Link.Ndl, '50 000'],
   Link.AlphaVantage, Link.Iex,
   Link.Fmp, Link.Tw, Link.Intrinio,
-  Link.Bea, [Link.Bsl, '500'], Link.Eia
+  Link.Bea, [Link.Bsl, '500'], Link.Eia,
+  Link.WTO
 ]
 , DP_PR = [
   [Link.Ndl, '50'],
   Link.UnComtrade,
+  Link.WTO,
   Link.Bitfinex,
   Link.CryptoCom,
   Link.GateIo,
@@ -106,7 +108,7 @@ const _crListCaption = (
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 40):"
+     caption="Data Providers (All 41):"
      childStyle={S_ROOT_CHILD}
   >
     <div>
