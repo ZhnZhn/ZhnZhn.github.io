@@ -2,12 +2,15 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.fGetRouteCategory = exports.crAdapterRouterDfOb = exports.crAdapterRouter = void 0;
+exports.fGetRouteTreeMap = exports.fGetRouteCategory = exports.crAdapterRouterDfOb = exports.crAdapterRouter = void 0;
 var _CategoryFn = require("./CategoryFn");
 var _toOrderBookDf = _interopRequireDefault(require("./toOrderBookDf"));
 const _isFn = fn => typeof fn === 'function';
-const fGetRouteCategory = (toCategoryAdapter, toLineAdapter) => option => (0, _CategoryFn.isCategory)(option.seriaType) ? toCategoryAdapter : toLineAdapter;
+const _getCategoryAdapter = (toCategoryAdapter, toLineAdapter, option) => (0, _CategoryFn.isCategory)(option.seriaType) ? toCategoryAdapter : toLineAdapter;
+const fGetRouteCategory = (toCategoryAdapter, toLineAdapter) => option => _getCategoryAdapter(toCategoryAdapter, toLineAdapter, option);
 exports.fGetRouteCategory = fGetRouteCategory;
+const fGetRouteTreeMap = (toTreeMapAdapter, toCategoryAdapter, toLineAdapter) => option => (0, _CategoryFn.isTreeMap)(option.seriaType) ? _isFn(toTreeMapAdapter) ? toTreeMapAdapter(option) : toTreeMapAdapter : _getCategoryAdapter(toCategoryAdapter, toLineAdapter, option);
+exports.fGetRouteTreeMap = fGetRouteTreeMap;
 const _fGetRouteDf = rAdapter => option => {
   const {
       _pn = 'dfSubId'

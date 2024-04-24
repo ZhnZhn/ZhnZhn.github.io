@@ -1,9 +1,11 @@
+import {  
+  isTreeMap,
+  isCategory
+} from '../CategoryFn';
 import {
   isArr,
   isEuRoute,
   isUsRoute,
-  isTreeMap,
-  isCategory,
   crError,
   getGeoCaption,
   getMetricCaption,

@@ -1,24 +1,18 @@
-import { crAdapterRouter } from '../crAdapterRouter';
+import {
+  fGetRouteTreeMap,
+  crAdapterRouter
+} from '../crAdapterRouter';
+
+import crToTreeMapAdapter from './crToTreeMapAdapter';
 import toCategoryAdapter from './toCategoryAdapter';
 import toLineAdapter from './toLineAdapter';
-import crToTreeMapAdapter from './crToTreeMapAdapter';
 
-import {
-  isTreeMap,
-  isCategory
-} from './fnAdapter';
-
-const getRoute = (
-  option
-) => {
-  const _seriaType = option.seriaType;
-  return isTreeMap(_seriaType)
-    ? crToTreeMapAdapter(option)
-    : isCategory(_seriaType)
-       ? toCategoryAdapter
-       : toLineAdapter;
-};
-
-const EmberAdapter = crAdapterRouter({ getRoute })
+const EmberAdapter = crAdapterRouter({
+  getRoute: fGetRouteTreeMap(
+    crToTreeMapAdapter,
+    toCategoryAdapter,
+    toLineAdapter
+  )
+});
 
 export default EmberAdapter

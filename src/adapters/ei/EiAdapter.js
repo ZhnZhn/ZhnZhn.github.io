@@ -1,17 +1,15 @@
 import {
-  isTreeMap,
-  isCategory
-} from '../CategoryFn';
-
-import {
   isNumber,
   ymdToUTC
 } from '../AdapterFn';
 
 import crAdapterType1 from '../crAdapterType1';
 import crFromYearData from '../crFromYearData';
-import { crAdapterRouter } from '../crAdapterRouter';
 import toCategoryAdapter from '../toCategoryAdapter';
+import {
+  fGetRouteTreeMap,
+  crAdapterRouter
+} from '../crAdapterRouter';
 
 import toTreeMapAdapter from './toTreeMapAdapter';
 
@@ -25,13 +23,12 @@ const toLineAdapter = crAdapterType1({
       : _data;
   }
 })
-, getRoute = (
-  option
-) => isTreeMap(option.seriaType)
-  ? toTreeMapAdapter
-  : isCategory(option.seriaType)
-     ? toCategoryAdapter
-     : toLineAdapter
-, IrenaAdapter = crAdapterRouter({ getRoute })
+, IrenaAdapter = crAdapterRouter({
+  getRoute: fGetRouteTreeMap(
+    toTreeMapAdapter,
+    toCategoryAdapter,
+    toLineAdapter
+  )
+})
 
 export default IrenaAdapter

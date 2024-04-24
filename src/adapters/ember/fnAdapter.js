@@ -1,8 +1,4 @@
 export {
-  isTreeMap,
-  isCategory
-} from '../CategoryFn';
-export {
   isArr,
   isNumber,
   crError,
