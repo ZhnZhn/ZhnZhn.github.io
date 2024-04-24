@@ -9,7 +9,6 @@ const S_MODAL_MENU = exports.S_MODAL_MENU = {
   left: -5,
   backgroundColor: 'inherit',
   stroke: 'inherit',
-  border: '2px solid #1b2836',
   borderRadius: 5,
   boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 0 5px'
 };
