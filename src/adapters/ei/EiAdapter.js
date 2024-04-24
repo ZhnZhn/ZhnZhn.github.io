@@ -32,6 +32,6 @@ const toLineAdapter = crAdapterType1({
   : isCategory(option.seriaType)
      ? toCategoryAdapter
      : toLineAdapter
-, IrenaAdapter = crAdapterRouter(void 0, { getRoute })
+, IrenaAdapter = crAdapterRouter({ getRoute })
 
 export default IrenaAdapter

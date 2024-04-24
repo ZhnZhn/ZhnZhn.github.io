@@ -1,10 +1,10 @@
 import { crAdapterRouter } from '../crAdapterRouter'
-
 import toHdConfig from './toHdConfig'
 
-const _rAdapter = {
-  DF: toHdConfig
-}
-, CrcAdapter = crAdapterRouter(_rAdapter);
+const CrcAdapter = crAdapterRouter({
+  rAdapter: {
+    DF: toHdConfig
+  }
+});
 
 export default CrcAdapter

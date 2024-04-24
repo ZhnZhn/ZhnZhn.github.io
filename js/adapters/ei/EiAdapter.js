@@ -19,7 +19,7 @@ const toLineAdapter = (0, _crAdapterType.default)({
     }
   }),
   getRoute = option => (0, _CategoryFn.isTreeMap)(option.seriaType) ? _toTreeMapAdapter.default : (0, _CategoryFn.isCategory)(option.seriaType) ? _toCategoryAdapter.default : toLineAdapter,
-  IrenaAdapter = (0, _crAdapterRouter.crAdapterRouter)(void 0, {
+  IrenaAdapter = (0, _crAdapterRouter.crAdapterRouter)({
     getRoute
   });
 var _default = exports.default = IrenaAdapter;

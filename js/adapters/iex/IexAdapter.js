@@ -12,7 +12,8 @@ var _toDividendsImpl = _interopRequireDefault(require("./toDividendsImpl"));
 var _toChart = _interopRequireDefault(require("./toChart"));
 var _toTable = _interopRequireDefault(require("./toTable"));
 var _ItemTypes = _interopRequireDefault(require("./ItemTypes"));
-const _rAdapter = {
+const IexAdapter = (0, _crAdapterRouter.crAdapterRouter)({
+  rAdapter: {
     _pn: 'dfType',
     DF: _toChart.default,
     [_ItemTypes.default.DIV]: (0, _TemplateScatter.default)(_toDividendsImpl.default),
@@ -21,15 +22,14 @@ const _rAdapter = {
     [_ItemTypes.default.STA]: (0, _TemplateTokens.default)(_toStatsImpl.default),
     [_ItemTypes.default.ML]: _toTable.default
   },
-  IexAdapter = (0, _crAdapterRouter.crAdapterRouter)(_rAdapter, {
-    crDfKey: _ref => {
-      let {
-        _itemKey,
-        one = '',
-        two = ''
-      } = _ref;
-      return _itemKey || one + '_' + two;
-    }
-  });
+  crDfKey: _ref => {
+    let {
+      _itemKey,
+      one = '',
+      two = ''
+    } = _ref;
+    return _itemKey || one + '_' + two;
+  }
+});
 var _default = exports.default = IexAdapter;
 //# sourceMappingURL=IexAdapter.js.map

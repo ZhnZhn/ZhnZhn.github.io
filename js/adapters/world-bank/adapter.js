@@ -13,7 +13,7 @@ const toLineAdapter = (0, _crAdapterType.default)({
   crConfOption: _fnAdapter.crConfOption
 });
 const getRoute = option => (0, _CategoryFn.isCategory)(option.seriaType) ? _toCategoryAdapter.default : toLineAdapter;
-const adapter = (0, _crAdapterRouter.crAdapterRouter)(void 0, {
+const adapter = (0, _crAdapterRouter.crAdapterRouter)({
   getRoute
 });
 var _default = exports.default = adapter;

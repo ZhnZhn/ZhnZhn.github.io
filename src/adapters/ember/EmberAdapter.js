@@ -19,6 +19,6 @@ const getRoute = (
        : toLineAdapter;
 };
 
-const EmberAdapter = crAdapterRouter(void 0, { getRoute })
+const EmberAdapter = crAdapterRouter({ getRoute })
 
 export default EmberAdapter

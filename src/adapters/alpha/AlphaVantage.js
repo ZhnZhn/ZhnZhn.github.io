@@ -10,18 +10,20 @@ import EconomicsAdapter from './EconomicsAdapter'
 import TopGainersLosersAdapter from './TopGainersLosersAdapter'
 import CryptocurrencyAdapter from './CryptocurrencyAdapter'
 
-const _rAdapter = {
-  DF: IndicatorAdapter,
-  I: IntradayAdapter,
-  SR: SearchAdapter,
-  F: FundAdapter,
-  E: EarnAdapter,
-  EI: EconomicsAdapter,
-  CM: EconomicsAdapter,
-  GL: TopGainersLosersAdapter,
-  CR: CryptocurrencyAdapter
-}
-, adapter = crAdapterRouter(_rAdapter, { isKey: true })
+const adapter = crAdapterRouter({
+  rAdapter: {
+    DF: IndicatorAdapter,
+    I: IntradayAdapter,
+    SR: SearchAdapter,
+    F: FundAdapter,
+    E: EarnAdapter,
+    EI: EconomicsAdapter,
+    CM: EconomicsAdapter,
+    GL: TopGainersLosersAdapter,
+    CR: CryptocurrencyAdapter
+  },
+  isKey: true
+})
 , AlphaVantage = { api, adapter };
 
 export default AlphaVantage

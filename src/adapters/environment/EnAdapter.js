@@ -7,7 +7,8 @@ const toLineAdapter = crAdapterType1({
   crData: crFromYearData,
   addToConfig: (config, json) => setDataSourceTo(config, json.source)
 })
-, getRoute = () => toLineAdapter
-, EnAdapter = crAdapterRouter(void 0, { getRoute })
+, EnAdapter = crAdapterRouter({ 
+  getRoute: () => toLineAdapter
+})
 
 export default EnAdapter

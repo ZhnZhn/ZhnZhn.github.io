@@ -13,18 +13,18 @@ var _EarnAdapter = _interopRequireDefault(require("./EarnAdapter"));
 var _EconomicsAdapter = _interopRequireDefault(require("./EconomicsAdapter"));
 var _TopGainersLosersAdapter = _interopRequireDefault(require("./TopGainersLosersAdapter"));
 var _CryptocurrencyAdapter = _interopRequireDefault(require("./CryptocurrencyAdapter"));
-const _rAdapter = {
-    DF: _IndicatorAdapter.default,
-    I: _IntradayAdapter.default,
-    SR: _SearchAdapter.default,
-    F: _FundAdapter.default,
-    E: _EarnAdapter.default,
-    EI: _EconomicsAdapter.default,
-    CM: _EconomicsAdapter.default,
-    GL: _TopGainersLosersAdapter.default,
-    CR: _CryptocurrencyAdapter.default
-  },
-  adapter = (0, _crAdapterRouter.crAdapterRouter)(_rAdapter, {
+const adapter = (0, _crAdapterRouter.crAdapterRouter)({
+    rAdapter: {
+      DF: _IndicatorAdapter.default,
+      I: _IntradayAdapter.default,
+      SR: _SearchAdapter.default,
+      F: _FundAdapter.default,
+      E: _EarnAdapter.default,
+      EI: _EconomicsAdapter.default,
+      CM: _EconomicsAdapter.default,
+      GL: _TopGainersLosersAdapter.default,
+      CR: _CryptocurrencyAdapter.default
+    },
     isKey: true
   }),
   AlphaVantage = {

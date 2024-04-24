@@ -20,9 +20,8 @@ const getRoute = (
  ? toCategoryAdapter
  : toLineAdapter;
 
-const adapter = crAdapterRouter(
-  void 0,
-  { getRoute }
-);
+const adapter = crAdapterRouter({
+  getRoute
+});
 
 export default adapter

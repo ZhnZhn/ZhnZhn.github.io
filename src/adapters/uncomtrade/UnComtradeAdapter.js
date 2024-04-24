@@ -2,7 +2,7 @@ import { crChartId } from './fnAdapter';
 import getRoute from './toConfig';
 import { crAdapterRouter } from '../crAdapterRouter';
 
-const UnComtradeAdapter = crAdapterRouter(void 0, {
+const UnComtradeAdapter = crAdapterRouter({
   getRoute,
   crDfKey: crChartId
 });

@@ -9,6 +9,8 @@ const getRoute = (
   ? toCategoryAdapter
   : toLineAdapter;
 
-const WtAdapter = crAdapterRouter(void 0, { getRoute })
+const WtAdapter = crAdapterRouter({
+  getRoute
+})
 
 export default WtAdapter

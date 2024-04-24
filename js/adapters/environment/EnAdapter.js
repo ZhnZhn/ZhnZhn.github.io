@@ -11,9 +11,8 @@ const toLineAdapter = (0, _crAdapterType.default)({
     crData: _crFromYearData.default,
     addToConfig: (config, json) => (0, _configBuilderFn.setDataSourceTo)(config, json.source)
   }),
-  getRoute = () => toLineAdapter,
-  EnAdapter = (0, _crAdapterRouter.crAdapterRouter)(void 0, {
-    getRoute
+  EnAdapter = (0, _crAdapterRouter.crAdapterRouter)({
+    getRoute: () => toLineAdapter
   });
 var _default = exports.default = EnAdapter;
 //# sourceMappingURL=EnAdapter.js.map

@@ -12,7 +12,7 @@ const getRoute = option => {
   const _seriaType = option.seriaType;
   return (0, _fnAdapter.isTreeMap)(_seriaType) ? (0, _crToTreeMapAdapter.default)(option) : (0, _fnAdapter.isCategory)(_seriaType) ? _toCategoryAdapter.default : _toLineAdapter.default;
 };
-const EmberAdapter = (0, _crAdapterRouter.crAdapterRouter)(void 0, {
+const EmberAdapter = (0, _crAdapterRouter.crAdapterRouter)({
   getRoute
 });
 var _default = exports.default = EmberAdapter;

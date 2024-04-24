@@ -2,9 +2,10 @@ import toOrderBookDf from './toOrderBookDf';
 
 const _isFn = fn => typeof fn === 'function';
 
-const _getDfRoute = (
-  option,
+const _fGetRouteDf = (
   rAdapter
+) => (
+  option
 ) => {
   const {
     _pn='dfSubId'
@@ -15,25 +16,24 @@ const _getDfRoute = (
 }
 
 const _fGetAdapter = (
-  getRoute=_getDfRoute,
-  rAdapter
-) => (option) => {
-  const routeAdapter = getRoute(option, rAdapter)
+  getRoute
+) => (
+  option
+) => {
+  const routeAdapter = getRoute(option)
   return _isFn(routeAdapter)
     ? routeAdapter()
     : routeAdapter;
 };
 
-export const crAdapterRouter = (
-  rAdapter, {
+export const crAdapterRouter = ({
+  rAdapter,
   getRoute,
   isKey,
   crDfKey
-} = {}) => {
-  const _getAdapter = _fGetAdapter(
-    getRoute,
-    rAdapter
-  );
+}) => {
+  const _getRoute = getRoute || _fGetRouteDf(rAdapter)
+  , _getAdapter = _fGetAdapter(_getRoute);
   const _adapter = {
     crKey: isKey || crDfKey
       ? (option) => {
@@ -60,6 +60,8 @@ export const crAdapterRouterDfOb = (
   toKline,
   toOrderBook
 ) => crAdapterRouter({
-  DF: toKline,
-  OB: toOrderBook || toOrderBookDf
+  rAdapter: {
+    DF: toKline,
+    OB: toOrderBook || toOrderBookDf
+  }
 })
