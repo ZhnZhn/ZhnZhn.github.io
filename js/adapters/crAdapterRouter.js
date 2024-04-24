@@ -2,9 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.crAdapterRouterDfOb = exports.crAdapterRouter = void 0;
+exports.fGetRouteCategory = exports.crAdapterRouterDfOb = exports.crAdapterRouter = void 0;
+var _CategoryFn = require("./CategoryFn");
 var _toOrderBookDf = _interopRequireDefault(require("./toOrderBookDf"));
 const _isFn = fn => typeof fn === 'function';
+const fGetRouteCategory = (toCategoryAdapter, toLineAdapter) => option => (0, _CategoryFn.isCategory)(option.seriaType) ? toCategoryAdapter : toLineAdapter;
+exports.fGetRouteCategory = fGetRouteCategory;
 const _fGetRouteDf = rAdapter => option => {
   const {
       _pn = 'dfSubId'

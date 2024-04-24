@@ -1,5 +1,7 @@
-import { crAdapterRouter } from '../crAdapterRouter';
-import { isCategory } from '../CategoryFn';
+import {
+  fGetRouteCategory,
+  crAdapterRouter
+} from '../crAdapterRouter';
 
 import crAdapterType1 from '../crAdapterType1';
 import {
@@ -12,16 +14,12 @@ import toCategoryAdapter from './toCategoryAdapter';
 const toLineAdapter = crAdapterType1({
    crData,
    crConfOption
-});
-
-const getRoute = (
-  option
-) => isCategory(option.seriaType)
- ? toCategoryAdapter
- : toLineAdapter;
-
-const adapter = crAdapterRouter({
-  getRoute
+})
+, adapter = crAdapterRouter({
+  getRoute: fGetRouteCategory(
+    toCategoryAdapter,
+    toLineAdapter
+  )
 });
 
 export default adapter

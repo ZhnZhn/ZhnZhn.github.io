@@ -1,17 +1,20 @@
-import { isCategory } from '../CategoryFn';
 import crAdapterType1 from '../crAdapterType1';
 import crFromYearData from '../crFromYearData';
-import { crAdapterRouter } from '../crAdapterRouter';
 import toCategoryAdapter from '../toCategoryAdapter';
+
+import {
+  fGetRouteCategory,
+  crAdapterRouter
+} from '../crAdapterRouter';
 
 const toLineAdapter = crAdapterType1({
   crData: crFromYearData
 })
-, getRoute = (
-  option
-) => isCategory(option.seriaType)
-  ? toCategoryAdapter
-  : toLineAdapter
-, IrenaAdapter = crAdapterRouter({ getRoute })
+, IrenaAdapter = crAdapterRouter({
+  getRoute: fGetRouteCategory(
+    toCategoryAdapter,
+    toLineAdapter
+  )
+});
 
 export default IrenaAdapter

@@ -1,6 +1,16 @@
+import { isCategory } from './CategoryFn';
 import toOrderBookDf from './toOrderBookDf';
 
 const _isFn = fn => typeof fn === 'function';
+
+export const fGetRouteCategory = (
+  toCategoryAdapter,
+  toLineAdapter
+) => (
+  option
+) => isCategory(option.seriaType)
+  ? toCategoryAdapter
+  : toLineAdapter;
 
 const _fGetRouteDf = (
   rAdapter
