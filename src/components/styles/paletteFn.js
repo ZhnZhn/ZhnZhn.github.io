@@ -68,8 +68,10 @@ const P_GREY_VALUES = [
   DF_C_BLACK
 ];
 
-const BTF_C_WHITE = COLOR_DARK_CYAN
-, EL_BG_WHITE = "#bcd8f5"
+const BTF_C_WHITE = COLOR_GREY
+// BTF_C_WHITE = COLOR_DARK_CYAN
+//, EL_BG_WHITE = "#bcd8f5"
+, EL_BG_WHITE = "#dce1e5"
 , LB_BC_LIGHT = COLOR_GREY;
 const P_WHITE_VALUES = [
   "#e1e1e1",
@@ -77,7 +79,8 @@ const P_WHITE_VALUES = [
   DF_S_C1,
   EL_BG_WHITE,
 
-  "#ebf1f5",
+  //"#ebf1f5",
+  "#f1f2f3",
   DF_BH_C,
   LB_BC_LIGHT,
 

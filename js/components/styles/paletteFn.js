@@ -29,10 +29,15 @@ const PROPERTY_B_BG = "b-bg",
   PROPERTY_COLOR_BLACK = "c-bl";
 const PALETTE_KEYS = [PROPERTY_B_BG, PROPERTY_S_C1, PROPERTY_S_C2, PROPERTY_C_BG, PROPERTY_BH_C, PROPERTY_LB_BC, PROPERTY_EL_BG, PROPERTY_EL_C, PROPERTY_BTF_C, PROPERTY_COLOR_BLACK];
 const P_GREY_VALUES = [DF_B_BG, DF_S_C1, DF_S_C2, DF_C_BG, DF_BH_C, DF_LB_BC, DF_EL_BG, DF_EL_C, DF_BTF_C, DF_C_BLACK];
-const BTF_C_WHITE = COLOR_DARK_CYAN,
-  EL_BG_WHITE = "#bcd8f5",
+const BTF_C_WHITE = COLOR_GREY
+  // BTF_C_WHITE = COLOR_DARK_CYAN
+  //, EL_BG_WHITE = "#bcd8f5"
+  ,
+  EL_BG_WHITE = "#dce1e5",
   LB_BC_LIGHT = COLOR_GREY;
-const P_WHITE_VALUES = ["#e1e1e1", DF_S_C1, EL_BG_WHITE, "#ebf1f5", DF_BH_C, LB_BC_LIGHT, EL_BG_WHITE, "#212020", BTF_C_WHITE, DF_C_BLACK];
+const P_WHITE_VALUES = ["#e1e1e1", DF_S_C1, EL_BG_WHITE,
+//"#ebf1f5",
+"#f1f2f3", DF_BH_C, LB_BC_LIGHT, EL_BG_WHITE, "#212020", BTF_C_WHITE, DF_C_BLACK];
 const BTF_C_SAND = "#785133",
   EL_BG_SAND_L = "#64473d";
 const P_SAND_L_VALUES = ["#9e9e9e", DF_S_C1, EL_BG_SAND_L, "#e8e0cb", "#5b5b5b", LB_BC_LIGHT, EL_BG_SAND_L, COLOR_SILVER, BTF_C_SAND, DF_C_BLACK];
@@ -110,7 +115,7 @@ const setUiPalette = uiThemeId => {
     _style = document.body.style,
     _dfPaletteValues = PALETTE_VALUES[DF_THEME_ID];
   PALETTE_KEYS.forEach((propName, index) => {
-    _style.setProperty(`--${propName}`, _palette[propName] || _dfPaletteValues[index]);
+    _style.setProperty("--" + propName, _palette[propName] || _dfPaletteValues[index]);
   });
   _colorBlack = _palette[PROPERTY_COLOR_BLACK];
 };
