@@ -9,7 +9,7 @@ import FlatButton from '../zhn-m/FlatButton'
 import RowSecret from '../dialogs/RowSecret'
 import RowButtons from './RowButtons'
 
-const MAX_KEY = 10;
+const MAX_KEY = 11;
 
 const S_SCROLL_PANE = {
   overflowY: 'auto',

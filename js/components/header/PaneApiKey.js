@@ -14,7 +14,7 @@ var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from 'prop-types'
 
-const MAX_KEY = 10;
+const MAX_KEY = 11;
 const S_SCROLL_PANE = {
     overflowY: 'auto',
     maxHeight: 360,
