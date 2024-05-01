@@ -31,7 +31,7 @@ const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open 
     left: '45%',
     width: 32,
     height: 32,
-    zIndex: 10
+    zIndex: 8
   },
   _crDivLoadingStyle = isShowLabels => ({
     width: isShowLabels ? 350 : 250,
