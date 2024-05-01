@@ -4,13 +4,22 @@ import crSelectProps from './crSelectProps';
 const _keys = Object.keys;
 
 const _getItemDialogProps = item => {
-  const { dfId } = item;
+  const {
+    dfId,
+    mapDateDf,
+    mapFrequency
+  } = item;
   if (dfId) {
+    const _dfProps = mapDateDf
+      ? { mapDateDf }
+      : {};
+    if (mapFrequency) {
+      _dfProps.mapFrequency = mapFrequency
+    }
     item.dialogProps = {
       dfProps: {
-        dfId,
-        mapDateDf: item.mapDateDf,
-        mapFrequency: item.mapFrequency
+        ..._dfProps,
+        dfId
       }
     }
   }

@@ -8,14 +8,21 @@ var _crSelectProps = _interopRequireDefault(require("./crSelectProps"));
 const _keys = Object.keys;
 const _getItemDialogProps = item => {
   const {
-    dfId
+    dfId,
+    mapDateDf,
+    mapFrequency
   } = item;
   if (dfId) {
+    const _dfProps = mapDateDf ? {
+      mapDateDf
+    } : {};
+    if (mapFrequency) {
+      _dfProps.mapFrequency = mapFrequency;
+    }
     item.dialogProps = {
       dfProps: {
-        dfId,
-        mapDateDf: item.mapDateDf,
-        mapFrequency: item.mapFrequency
+        ..._dfProps,
+        dfId
       }
     };
   }
