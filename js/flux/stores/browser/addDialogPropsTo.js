@@ -6,6 +6,21 @@ exports.default = void 0;
 var _crAddProps = _interopRequireDefault(require("./crAddProps"));
 var _crSelectProps = _interopRequireDefault(require("./crSelectProps"));
 const _keys = Object.keys;
+const _getItemDialogProps = item => {
+  const {
+    dfId
+  } = item;
+  if (dfId) {
+    item.dialogProps = {
+      dfProps: {
+        dfId,
+        mapDateDf: item.mapDateDf,
+        mapFrequency: item.mapFrequency
+      }
+    };
+  }
+  return item.dialogProps;
+};
 const addDialogPropsTo = (items, df) => {
   const {
     dfAddProps
@@ -14,9 +29,7 @@ const addDialogPropsTo = (items, df) => {
     const item = items[pnId],
       addPropsId = item.addProps || dfAddProps;
     if (addPropsId) {
-      const {
-          dialogProps
-        } = item,
+      const dialogProps = _getItemDialogProps(item),
         [dialogType, addProps] = (0, _crAddProps.default)(items, addPropsId),
         _selectProps = (0, _crSelectProps.default)(addProps, dialogProps);
       item.dialogType = item.dialogType || dialogType;
@@ -32,6 +45,5 @@ const addDialogPropsTo = (items, df) => {
     }
   });
 };
-var _default = addDialogPropsTo;
-exports.default = _default;
+var _default = exports.default = addDialogPropsTo;
 //# sourceMappingURL=addDialogPropsTo.js.map
