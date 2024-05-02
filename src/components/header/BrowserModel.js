@@ -18,10 +18,11 @@ import {
   BT_NORWAY_STATISTICS,
   BT_NORWAY_STAT_ALL,
   BT_SWEDEN_STAT,
-  BT_SWEDEN_STAT_ALL,
+  BT_SWEDEN_STAT_ALL,  
   BT_FINLAND_STAT_ALL,
   BT_DENMARK_STAT_ALL,
   BT_IRELAND_STAT_ALL,
+  BT_SWISS_STAT,
   BT_STOCK_MARKETS,
   BT_NYSE_STOCKS,
   BT_NASDAQ_STOCKS,
@@ -90,15 +91,16 @@ const PAGE_CONFIGS_01 = [
   [CL_ORG, 'EU SDG', BT_SDG],
 ]
 , PAGE_CONFIGS_03 = [
-  [CL_ORG, 'Insee: France Statistics', BT_FRANCE_STATISTICS],
-  [CL_ORG, 'ONS: UK Statistics', BT_UK_STATISTICS],
+  [CL_ORG, 'INSEE: Statistics France', BT_FRANCE_STATISTICS],
+  [CL_ORG, 'ONS: Statistics UK', BT_UK_STATISTICS],
   [CL_ORG, 'Statistics Norway', BT_NORWAY_STATISTICS],
   [CL_ORG, 'Statistics Norway All', BT_NORWAY_STAT_ALL],
   [CL_ORG, 'Statistics Sweden', BT_SWEDEN_STAT],
   [CL_ORG, 'Statistics Sweden All', BT_SWEDEN_STAT_ALL],
   [CL_ORG, 'Statistics Finland All', BT_FINLAND_STAT_ALL],
   [CL_ORG, 'Statistics Denmark All', BT_DENMARK_STAT_ALL],
-  [CL_ORG, 'CSO Ireland All', BT_IRELAND_STAT_ALL]
+  [CL_ORG, 'CSO: Statistics Ireland All', BT_IRELAND_STAT_ALL],
+  [CL_ORG, 'FSO: Statistics Swiss', BT_SWISS_STAT]
 ]
 , PAGE_CONFIGS_04 = [
   [CL_BR, 'Stock Markets', BT_STOCK_MARKETS],
