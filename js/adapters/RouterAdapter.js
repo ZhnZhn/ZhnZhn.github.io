@@ -16,6 +16,7 @@ var _StatSweden = _interopRequireDefault(require("./stat-sweden/StatSweden"));
 var _StatFinland = _interopRequireDefault(require("./stat-finland/StatFinland"));
 var _StatDenmark = _interopRequireDefault(require("./stat-denmark/StatDenmark"));
 var _StatIreland = _interopRequireDefault(require("./stat-ireland/StatIreland"));
+var _StatSwiss = _interopRequireDefault(require("./stat-swiss/StatSwiss"));
 var _AlphaVantage = _interopRequireDefault(require("./alpha/AlphaVantage"));
 var _Iex = _interopRequireDefault(require("./iex/Iex"));
 var _Fmp = _interopRequireDefault(require("./fmp/Fmp"));
@@ -66,6 +67,7 @@ const RouterAdapter = {
   [_LoadType.LT_SFL]: _StatFinland.default,
   [_LoadType.LT_SDN]: _StatDenmark.default,
   [_LoadType.LT_SIR]: _StatIreland.default,
+  [_LoadType.LT_FSO]: _StatSwiss.default,
   [_LoadType.LT_AL]: _AlphaVantage.default,
   [_LoadType.LT_IEX]: _Iex.default,
   [_LoadType.LT_FMP]: _Fmp.default,

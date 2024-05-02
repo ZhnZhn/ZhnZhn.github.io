@@ -8,7 +8,8 @@ const FREQUENCY_HM = {
   month: 'M',
   quarter: 'K'
 };
-const TIME_IDS = ['Tid', 'Year', 'Month', 'Vuosi', 'Vuosineljännes'];
+const TIME_IDS = ['Tid', 'Year', 'Month', 'Vuosi', 'Vuosineljännes', 'Jahr' //FSO
+];
 const _isNotTimeDimension = (time, code) => !time && TIME_IDS.indexOf(code) === -1 && (code + '').indexOf('TLIST(') === -1;
 //'TLIST(' //'TLIST(M1)', 'TLIST(A1)' SIR
 

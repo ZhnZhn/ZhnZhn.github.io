@@ -21,29 +21,33 @@ import {
 const _getObjectKeys = Object.keys
 , _crTitle = country => `Statisctics ${country}: All Items`
 , TITLE_NST = _crTitle('Norway')
-, TITLE_SWS = _crTitle('Sweden')
+, TITLE_SWS = _crTitle('Sweden');
 
-const _crSearchTitle = country => `Statistics ${country} Search`
-const SEARCH_NST = {
-  url: 'https://www.ssb.no/en/sok?sok=',
-  title: _crSearchTitle('Norway')
-}
-, SEARCH_SWS = {
-  url: 'https://www.scb.se/en/finding-statistics/search/?query=',
-  title: _crSearchTitle('Sweden')
-}
-, SEARCH_SFL = {
-  url: 'https://statfin.stat.fi/PXWeb/pxweb/en/StatFin/',
-  title: "Statistics Finland's PX-Web"
-}
-, SEARCH_SDN = {
-  url: 'https://www.statbank.dk/statbank5a/default.asp',
-  title: _crSearchTitle('Denmark')
-}
-, SEARCH_SIR = {
-  url: 'https://data.cso.ie/',
-  title: "CSO Ireland Web PxStat"
-};
+const _crSearchTitle = country => `Statistics ${country} Search`;
+const SEARCH_NST = [
+  'https://www.ssb.no/en/sok?sok=',
+  _crSearchTitle('Norway')
+]
+, SEARCH_SWS = [
+  'https://www.scb.se/en/finding-statistics/search/?query=',
+  _crSearchTitle('Sweden')
+]
+, SEARCH_SFL = [
+  'https://statfin.stat.fi/PXWeb/pxweb/en/StatFin/',
+  "Statistics Finland's PX-Web"
+]
+, SEARCH_SDN = [
+  'https://www.statbank.dk/statbank5a/default.asp',
+  _crSearchTitle('Denmark')
+]
+, SEARCH_SIR = [
+  'https://data.cso.ie/',
+  "CSO Ireland Web PxStat"
+]
+, _crFsoLink = ({ dfId }) => [
+  `https://www.pxweb.bfs.admin.ch/pxweb/en/${dfId}/-/${dfId}.px/`,
+  'Statistics Swiss Stat-Tab'
+];
 
 const MAX_SOURCE_ID_LENGTH = 9;
 
@@ -55,7 +59,7 @@ const _crSearchToken = (
 };
 
 const _crLink = (
-  {url, title},
+  [url, title],
   token=''
 ) => `<a class="native-link" href="${url}${token}">${title}</a>`;
 
@@ -86,6 +90,8 @@ const _crSearchLink = (
       return _crLink(SEARCH_SDN);
     case 'SIR':
       return _crLink(SEARCH_SIR);
+    case 'FSO':
+      return _crLink(_crFsoLink(option));
     default:
       return '';
   }
@@ -129,6 +135,12 @@ const _crAreaMapSlice = ({
   return assign(mapSlice, dfTSlice);
 };
 
+//Time as index case (FSO sometimes)
+const _isLookLikeTimeAsIndex = time => parseInt(time) < 1600
+, _crTimesFromDimCategoriesLabel = dim => dim
+   .Category()
+   .map(item => item.label)
+
 const _getDimensionWithouTime = (
   ds
 ) => {
@@ -136,8 +148,12 @@ const _getDimensionWithouTime = (
    || ds.Dimension("Vuosi")
    || ds.Dimension("Vuosineljännes")
    || ds.Dimension("Month")
+   || ds.Dimension("Jahr") //FSO
   return _dim && _dim.id
-    ? [_dim.id[0]]
+    // Time as index case (FSO sometimes)
+    ? _isLookLikeTimeAsIndex(_dim.id[0])
+        ? _crTimesFromDimCategoriesLabel(_dim)
+        : [_dim.id[0]]
     : ["2019"];
 };
 
@@ -165,7 +181,11 @@ const _getTimeDimension = (
   , _dim = _dimTimeId || ds.Dimension("Tid")
   , times = _dim && _dim.id
      || _getDimensionWithouTime(ds);
-  return times;
+
+  //Times index case (FSO sometimes)
+  return times && _isLookLikeTimeAsIndex(times[0])
+    ? _crTimesFromDimCategoriesLabel(_dim)
+    : times;
 };
 
 const _crDataSource = ({
@@ -211,7 +231,8 @@ export const crTid = (
   time,
   ds
 ) => {
-  if (time) {
+  // Time index filter (FSO sometimes)
+  if (time && !_isLookLikeTimeAsIndex(time)) {
     return time;
   }
   const tidIds = _getTimeDimension(ds);

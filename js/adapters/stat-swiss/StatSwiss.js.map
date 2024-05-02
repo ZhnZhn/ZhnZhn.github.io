@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-swiss/StatSwiss.js"
+ ],
+ "file": "../../../src/adapters/stat-swiss/StatSwiss.js",
+ "names": [
+  "_fStatJsonAdapter",
+  "_interopRequireDefault",
+  "require",
+  "DATA_URL",
+  "crUrlPath",
+  "_ref",
+  "dfId",
+  "StatSwiss",
+  "fStatJsonAdapter",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,iBAAA,GAAAC,sBAAA,CAAAC,OAAA;AAEA,MAAMC,QAAQ,GAAG,0CAA0C;AAC3D,MAAMC,SAAS,GAAGC,IAAA;EAAA,IAAC;IACjBC;EACF,CAAC,GAAAD,IAAA;EAAA,aAASC,IAAI,SAAIA,IAAI;AAAA,CAAK;AAC3B,MAAMC,SAAS,GAAG,IAAAC,yBAAgB,EAACL,QAAQ,EAAEC,SAAS,CAAC;AAAC,IAAAK,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEzCJ,SAAS"
+}

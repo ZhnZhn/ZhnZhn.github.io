@@ -6,9 +6,16 @@ const _crDimUrl = ({
   dfId
 }) => `${proxy}${baseMeta}/${dfId}`;
 
+const _crDimUrlFso = ({
+  proxy='',
+  baseMeta,
+  dfId
+}) => `${proxy}${baseMeta}/${dfId}/${dfId}.px`;
+
 const _rCrDimUrl = {
   DF: _crDimUrl,
-  EU_STAT: crDimUrlEs
+  EU_STAT: crDimUrlEs,
+  FSO: _crDimUrlFso
 };
 
 const _crUrl = props =>

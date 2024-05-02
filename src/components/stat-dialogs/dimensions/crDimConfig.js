@@ -12,7 +12,8 @@ const FREQUENCY_HM = {
 
 const TIME_IDS = [
   'Tid',
-  'Year','Month','Vuosi','Vuosineljännes'
+  'Year','Month','Vuosi','Vuosineljännes',
+  'Jahr' //FSO
 ];
 
 const _isNotTimeDimension = (time, code) => !time &&

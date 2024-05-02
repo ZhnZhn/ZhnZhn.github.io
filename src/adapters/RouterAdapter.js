@@ -18,6 +18,7 @@ import {
   LT_SFL,
   LT_SDN,
   LT_SIR,
+  LT_FSO,
   LT_BEA,
   LT_BLS,
   LT_EIA,
@@ -61,6 +62,7 @@ import StatSweden from './stat-sweden/StatSweden'
 import StatFinland from './stat-finland/StatFinland'
 import StatDenmark from './stat-denmark/StatDenmark'
 import StatIreland from './stat-ireland/StatIreland'
+import StatSwiss from './stat-swiss/StatSwiss'
 import AlphaVantage from './alpha/AlphaVantage'
 import Iex from './iex/Iex'
 import Fmp from './fmp/Fmp'
@@ -115,6 +117,7 @@ const RouterAdapter = {
   [LT_SFL]: StatFinland,
   [LT_SDN]: StatDenmark,
   [LT_SIR]: StatIreland,
+  [LT_FSO]: StatSwiss,
 
   [LT_AL]: AlphaVantage,
   [LT_IEX]: Iex,
