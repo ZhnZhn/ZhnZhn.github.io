@@ -1,9 +1,10 @@
 import crAddProps from './crAddProps';
 import crSelectProps from './crSelectProps';
 
-const _keys = Object.keys;
+const _isArr = Array.isArray
+, _keys = Object.keys;
 
-const _getItemDialogProps = item => {
+const _checkItemDfIdCase = item => {
   const {
     dfId,
     mapDateDf,
@@ -23,16 +24,35 @@ const _getItemDialogProps = item => {
       }
     }
   }
+}
+, _getItemDialogProps = item => {
+  _checkItemDfIdCase(item)
   return item.dialogProps;
 }
+, _checkItemsTuplesCase = (
+  items,
+  tuples
+) => {
+  if (_isArr(tuples)) {
+    tuples.forEach(tuple => {
+      items[tuple[0]] = {
+        type: tuple[0],
+        menuTitle: tuple[1],
+        dfId: tuple[2]
+      }
+    })
+  }
+};
 
 const addDialogPropsTo = (
   items,
   df
 ) => {
   const {
-    dfAddProps
+    dfAddProps,
+    tuples
   } = df || {};
+  _checkItemsTuplesCase(items, tuples)
   _keys(items).forEach(pnId => {
     const item = items[pnId]
     , addPropsId = item.addProps || dfAddProps;

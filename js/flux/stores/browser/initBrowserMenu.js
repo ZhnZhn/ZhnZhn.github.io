@@ -14,10 +14,10 @@ const initBrowserMenu = (setBrowserMenu, setRouterDialog, option) => {
       menu,
       items,
       df
-    } = json,
-    elMenu = (0, _crMenu.default)(menu, items, browserType);
+    } = json;
   (0, _addDialogPropsTo.default)(items, df);
   setRouterDialog(browserType, items);
+  const elMenu = (0, _crMenu.default)(menu, items, browserType);
   setBrowserMenu(browserType, elMenu);
   return elMenu;
 };
