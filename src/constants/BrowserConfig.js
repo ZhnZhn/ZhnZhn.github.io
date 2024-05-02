@@ -25,6 +25,7 @@ import {
   BT_FINLAND_STAT_ALL,
   BT_DENMARK_STAT_ALL,
   BT_IRELAND_STAT_ALL,
+  BT_SWISS_STAT,
   BT_US_ECONOMICS,
   BT_NYSE_STOCKS,
   BT_STOCKS_BY_SECTORS,
@@ -152,12 +153,12 @@ const BrowserConfig = {
 
   [BT_FRANCE_STATISTICS]: _crBrowserItem(
     BT_FRANCE_STATISTICS,
-    'Insee: France Statistics',
+    'INSEE: Statistics France',
     'statistics-france'
   ),
   [BT_UK_STATISTICS]: _crBrowserItem(
     BT_UK_STATISTICS,
-    'ONS: UK Statistics',
+    'ONS: Statistics UK',
     'statistics-uk'
   ),
   [BT_NORWAY_STATISTICS]: _crBrowserItem(
@@ -194,6 +195,11 @@ const BrowserConfig = {
       rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
     }
   },
+  [BT_SWISS_STAT]: _crBrowserItem(
+    BT_SWISS_STAT,
+    'FSO: Statistics Swiss',
+    'statistics-swiss'
+  ),
   [BT_FINLAND_STAT_ALL]: {
     browserType: BT_FINLAND_STAT_ALL,
     caption: 'Statistics Finland All',
@@ -224,7 +230,7 @@ const BrowserConfig = {
   },
   [BT_IRELAND_STAT_ALL]: {
     browserType: BT_IRELAND_STAT_ALL,
-    caption: 'CSO Ireland All',
+    caption: 'CSO: Statistics Ireland All',
     dfProps: {
       bT: BT_IRELAND_STAT_ALL,
       lT: 'SIR',

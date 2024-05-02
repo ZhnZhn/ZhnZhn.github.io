@@ -46,8 +46,8 @@ const BrowserConfig = {
   [_BrowserType.BT_BLOCKCHAIN]: _crBrowserItem(_BrowserType.BT_BLOCKCHAIN, 'Blockchains', 'blockchain'),
   [_BrowserType.BT_COMMODITIES]: _crBrowserItem(_BrowserType.BT_COMMODITIES, 'Commodities', 'commodities'),
   [_BrowserType.BT_CURRENCY]: _crBrowserItem(_BrowserType.BT_CURRENCY, 'Currencies', 'currency'),
-  [_BrowserType.BT_FRANCE_STATISTICS]: _crBrowserItem(_BrowserType.BT_FRANCE_STATISTICS, 'Insee: France Statistics', 'statistics-france'),
-  [_BrowserType.BT_UK_STATISTICS]: _crBrowserItem(_BrowserType.BT_UK_STATISTICS, 'ONS: UK Statistics', 'statistics-uk'),
+  [_BrowserType.BT_FRANCE_STATISTICS]: _crBrowserItem(_BrowserType.BT_FRANCE_STATISTICS, 'INSEE: Statistics France', 'statistics-france'),
+  [_BrowserType.BT_UK_STATISTICS]: _crBrowserItem(_BrowserType.BT_UK_STATISTICS, 'ONS: Statistics UK', 'statistics-uk'),
   [_BrowserType.BT_NORWAY_STATISTICS]: _crBrowserItem(_BrowserType.BT_NORWAY_STATISTICS, 'Statistics Norway', 'statistics-norway'),
   [_BrowserType.BT_NORWAY_STAT_ALL]: {
     browserType: _BrowserType.BT_NORWAY_STAT_ALL,
@@ -74,6 +74,7 @@ const BrowserConfig = {
       rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
     }
   },
+  [_BrowserType.BT_SWISS_STAT]: _crBrowserItem(_BrowserType.BT_SWISS_STAT, 'FSO: Statistics Swiss', 'statistics-swiss'),
   [_BrowserType.BT_FINLAND_STAT_ALL]: {
     browserType: _BrowserType.BT_FINLAND_STAT_ALL,
     caption: 'Statistics Finland All',
@@ -104,7 +105,7 @@ const BrowserConfig = {
   },
   [_BrowserType.BT_IRELAND_STAT_ALL]: {
     browserType: _BrowserType.BT_IRELAND_STAT_ALL,
-    caption: 'CSO Ireland All',
+    caption: 'CSO: Statistics Ireland All',
     dfProps: {
       bT: _BrowserType.BT_IRELAND_STAT_ALL,
       lT: 'SIR',

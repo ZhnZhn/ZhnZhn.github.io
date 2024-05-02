@@ -18,6 +18,7 @@ export const BT_SWEDEN_STAT_ALL = 'SWS_ALL'
 export const BT_FINLAND_STAT_ALL = 'SFL'
 export const BT_DENMARK_STAT_ALL = 'SDN'
 export const BT_IRELAND_STAT_ALL = 'SIR'
+export const BT_SWISS_STAT = 'FSO'
 
 export const BT_NDL = 'QE'
 

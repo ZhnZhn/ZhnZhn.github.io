@@ -20,6 +20,8 @@ export const LT_SWS = 'SWS'
 export const LT_SFL = 'SFL'
 export const LT_SDN = 'SDN'
 export const LT_SIR = 'SIR'
+export const LT_FSO = 'FSO'
+
 export const LT_UN = 'UN'
 export const LT_FAO = 'FAO'
 export const LT_WB = 'WB'
