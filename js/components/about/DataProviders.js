@@ -45,7 +45,7 @@ const CL_NOTE_BR = "provider__note__br",
     color: '#607d8b'
   };
 const _isArr = Array.isArray;
-const DP = [_ProviderLinks.default.DBnomics, _ProviderLinks.default.EI, _ProviderLinks.default.Ember, _ProviderLinks.default.IRENA, _ProviderLinks.default.Eurostat, _ProviderLinks.default.FaoStat, _ProviderLinks.default.WorldBank, _ProviderLinks.default.Insee, _ProviderLinks.default.ONS, _ProviderLinks.default.StatNorway, _ProviderLinks.default.StatSweden, _ProviderLinks.default.StatFinland, _ProviderLinks.default.StatDenmark, _ProviderLinks.default.StatIreland, [_ProviderLinks.default.Bsl, '25'], _ProviderLinks.default.CryptoCompare, _ProviderLinks.default.CoinGecko, _ProviderLinks.default.CoinMetrics, _ProviderLinks.default.CoinLore, _ProviderLinks.default.Coinpaprika, _ProviderLinks.default.Binance, _ProviderLinks.default.Bitstamp, _ProviderLinks.default.Coinbase],
+const DP = [_ProviderLinks.default.DBnomics, _ProviderLinks.default.EI, _ProviderLinks.default.Ember, _ProviderLinks.default.IRENA, _ProviderLinks.default.Eurostat, _ProviderLinks.default.FaoStat, _ProviderLinks.default.WorldBank, _ProviderLinks.default.Insee, _ProviderLinks.default.ONS, _ProviderLinks.default.StatNorway, _ProviderLinks.default.StatSweden, _ProviderLinks.default.StatFinland, _ProviderLinks.default.StatDenmark, _ProviderLinks.default.StatIreland, _ProviderLinks.default.FSO, [_ProviderLinks.default.Bsl, '25'], _ProviderLinks.default.CryptoCompare, _ProviderLinks.default.CoinGecko, _ProviderLinks.default.CoinMetrics, _ProviderLinks.default.CoinLore, _ProviderLinks.default.Coinpaprika, _ProviderLinks.default.Binance, _ProviderLinks.default.Bitstamp, _ProviderLinks.default.Coinbase],
   DP_KEY = [[_ProviderLinks.default.Ndl, '50 000'], _ProviderLinks.default.AlphaVantage, _ProviderLinks.default.Iex, _ProviderLinks.default.Fmp, _ProviderLinks.default.Tw, _ProviderLinks.default.Intrinio, _ProviderLinks.default.Bea, [_ProviderLinks.default.Bsl, '500'], _ProviderLinks.default.Eia, _ProviderLinks.default.WTO],
   DP_PR = [[_ProviderLinks.default.Ndl, '50'], _ProviderLinks.default.UnComtrade, _ProviderLinks.default.WTO, _ProviderLinks.default.Bitfinex, _ProviderLinks.default.CryptoCom, _ProviderLinks.default.GateIo, _ProviderLinks.default.Kraken, _ProviderLinks.default.KuCoin, _ProviderLinks.default.OKX, _ProviderLinks.default.Bybit, _ProviderLinks.default.HTX];
 const LinkPer = _ref => {
@@ -81,7 +81,7 @@ const DataProviders = _ref3 => {
   } = _ref3;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     isClose: isClose,
-    caption: "Data Providers (All 41):",
+    caption: "Data Providers (All 42):",
     childStyle: S_ROOT_CHILD,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
