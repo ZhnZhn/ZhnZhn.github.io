@@ -7,7 +7,7 @@ const _crJsonProp = strOr => (0, _storeApi.isStr)(strOr) ? strOr : void 0,
   _crItemProps = (id, caption, rootUri, pathToken) => ({
     id,
     caption,
-    uri: `${rootUri}${pathToken}.json`
+    uri: "" + rootUri + pathToken + ".json"
   }),
   _crDfItem = (item, rootUri) => ({
     ..._crItemProps(item[0], item[1], rootUri, item[2]),
@@ -42,37 +42,23 @@ const _mergeSelectProps = (selectProps, obj) => {
   });
   return arr.length > 0 ? arr : void 0;
 };
-const _crSelectProps = function (items, rootUri, spT) {
-  if (rootUri === void 0) {
-    rootUri = '';
-  }
-  if (!(0, _storeApi.isArr)(items)) {
-    return;
-  }
-  const selectProps = [],
-    _crItem = spT && _rFns[spT] || _rFns.df;
-  items.forEach(item => {
-    if ((0, _storeApi.isArr)(item)) {
-      selectProps.push(_crItem(item, rootUri));
-    }
-  });
-  return {
-    selectProps
-  };
-};
-const crSelectProps = function (initialProps, dialogProps) {
-  if (initialProps === void 0) {
-    initialProps = {};
-  }
+const _crSelectProps = (items, rootUri, crItem) => (0, _storeApi.isArr)(items) ? {
+  selectProps: items.reduce((props, item) => {
+    props.push((0, _storeApi.isArr)(item) && rootUri ? crItem(item, rootUri) : item);
+    return props;
+  }, [])
+} : void 0;
+const crSelectProps = (initialProps, dialogProps) => {
   const {
       selectProps,
       rootUri,
       spT
-    } = initialProps,
+    } = initialProps || {},
     _selectItems = (0, _storeApi.isArr)(selectProps) ? _mergeSelectProps(selectProps, dialogProps) : dialogProps.selectProps,
     _rootUri = dialogProps.rootUri || rootUri,
-    _spT = dialogProps.spT || spT;
-  return _crSelectProps(_selectItems, _rootUri, _spT);
+    _spT = dialogProps.spT || spT,
+    _crItem = _spT && _rFns[_spT] || _rFns.df;
+  return _crSelectProps(_selectItems, _rootUri, _crItem);
 };
 var _default = exports.default = crSelectProps;
 //# sourceMappingURL=crSelectProps.js.map

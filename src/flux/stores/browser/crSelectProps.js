@@ -65,28 +65,41 @@ const _mergeSelectProps = (selectProps, obj) => {
     ? arr
     : void 0;
 };
-const _crSelectProps = (items, rootUri='', spT) => {
-  if (!isArr(items)) {
-    return;
-  }
-  const selectProps = []
-  , _crItem = (spT && _rFns[spT]) || _rFns.df;
-  items.forEach(item => {
-    if (isArr(item)) {
-      selectProps.push(_crItem(item, rootUri))
-    }
-  })
-  return { selectProps };
-}
+const _crSelectProps = (
+  items,
+  rootUri,
+  crItem
+) => isArr(items) ? {
+  selectProps: items.reduce((props, item) => {
+    props.push(
+      isArr(item) && rootUri
+         ? crItem(item, rootUri)
+         : item
+    )
+    return props;
+  }, [])
+} : void 0;
 
-const crSelectProps = (initialProps={}, dialogProps) => {
-  const { selectProps, rootUri, spT } = initialProps
+const crSelectProps = (
+  initialProps,
+  dialogProps
+) => {
+  const {
+    selectProps,
+    rootUri,
+    spT
+  } = initialProps || {}
   , _selectItems = isArr(selectProps)
       ? _mergeSelectProps(selectProps, dialogProps)
       : dialogProps.selectProps
   , _rootUri = dialogProps.rootUri || rootUri
-  , _spT = dialogProps.spT || spT;
-  return _crSelectProps(_selectItems, _rootUri, _spT);
+  , _spT = dialogProps.spT || spT
+  , _crItem = (_spT && _rFns[_spT]) || _rFns.df;
+  return _crSelectProps(
+    _selectItems,
+    _rootUri,
+    _crItem
+  );
 };
 
 export default crSelectProps

@@ -52,7 +52,7 @@ const addDialogPropsTo = (items, df) => {
   _keys(items).forEach(pnId => {
     const item = items[pnId],
       addPropsId = item.addProps || dfAddProps;
-    if (addPropsId) {
+    if (addPropsId && item.type) {
       const dialogProps = _getItemDialogProps(item),
         [dialogType, addProps] = (0, _crAddProps.default)(items, addPropsId),
         _selectProps = (0, _crSelectProps.default)(addProps, dialogProps);

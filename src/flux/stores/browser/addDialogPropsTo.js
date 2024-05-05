@@ -56,7 +56,7 @@ const addDialogPropsTo = (
   _keys(items).forEach(pnId => {
     const item = items[pnId]
     , addPropsId = item.addProps || dfAddProps;
-    if (addPropsId) {
+    if (addPropsId && item.type) {
       const dialogProps = _getItemDialogProps(item)
       , [
         dialogType,
