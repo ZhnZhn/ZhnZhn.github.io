@@ -1,5 +1,4 @@
 import {
-  forwardRef,
   useRef,
   useMemo,
   useImperativeHandle,
@@ -27,11 +26,12 @@ const DF_FROM_CHART = {
 };
 */
 
-const SeriesPane = forwardRef(({
+const SeriesPane = ({
+  refEl,
   style,
   toChart,
   fromChart
-}, ref) => {
+}) => {
   const _refSeries = useRef([])
   , [
     _regSeriaRow,
@@ -45,7 +45,7 @@ const SeriesPane = forwardRef(({
     }
   ], []);
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
      getValues: () => {
        const [
          userMin,
@@ -82,6 +82,6 @@ const SeriesPane = forwardRef(({
        />
     </ScrollPane>
   );
-});
+};
 
 export default SeriesPane

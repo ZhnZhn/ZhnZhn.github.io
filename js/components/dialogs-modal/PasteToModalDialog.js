@@ -37,13 +37,12 @@ const PasteToModalDialog = (0, _memoIsShow.default)(_ref => {
     commandButtons: commandButtons,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriesPane.default, {
-      ref: refCompSeries,
+      refEl: refCompSeries,
       style: S_SERIES_PANE,
       fromChart: fromChart,
       toChart: toChart
     })
   });
 });
-var _default = PasteToModalDialog;
-exports.default = _default;
+var _default = exports.default = PasteToModalDialog;
 //# sourceMappingURL=PasteToModalDialog.js.map

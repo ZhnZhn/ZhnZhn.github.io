@@ -18,10 +18,9 @@ const DF_FROM_CHART = {
   },
   series: []
 };
-*/
-
-const SeriesPane = (0, _uiApi.forwardRef)((_ref, ref) => {
+*/const SeriesPane = _ref => {
   let {
+    refEl,
     style,
     toChart,
     fromChart
@@ -32,7 +31,7 @@ const SeriesPane = (0, _uiApi.forwardRef)((_ref, ref) => {
     }, compIndex => {
       _refSeries.current[compIndex] = null;
     }], []);
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValues: () => {
       const [userMin, userMax] = (0, _SeriesPaneFn.getUserMinMax)(fromChart);
       return (0, _uiApi.getRefValue)(_refSeries).map(refRow => (0, _uiApi.getInputValue)(refRow)).filter(config => config && config.isChecked).map(config => {
@@ -65,7 +64,6 @@ const SeriesPane = (0, _uiApi.forwardRef)((_ref, ref) => {
       onUnReg: _unregSeriaRow
     })]
   });
-});
-var _default = SeriesPane;
-exports.default = _default;
+};
+var _default = exports.default = SeriesPane;
 //# sourceMappingURL=SeriesPane.js.map

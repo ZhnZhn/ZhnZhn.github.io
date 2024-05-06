@@ -38,7 +38,7 @@ const PasteToModalDialog = memoIsShow(({
       onClose={onClose}
     >
       <SeriesPane
-         ref={refCompSeries}
+         refEl={refCompSeries}
          style={S_SERIES_PANE}
          fromChart={fromChart}
          toChart={toChart}
