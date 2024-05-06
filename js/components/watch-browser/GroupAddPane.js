@@ -43,7 +43,7 @@ const GroupAddPane = props => {
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowInputText, {
-      ref: refInput,
+      refEl: refInput,
       caption: "Group:"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.ValidationMessages, {
       validationMessages: validationMessages

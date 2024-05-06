@@ -62,7 +62,7 @@ const ListEditPane = (props) => {
           listCaption="List From:"
        />
        <A.RowInputText
-          ref={_refInputText}
+          refEl={_refInputText}
           caption="List To:"
        />
        <A.ValidationMessages

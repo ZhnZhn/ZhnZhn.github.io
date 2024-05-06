@@ -48,7 +48,7 @@ const ListCreatePane = props => {
       options: groupOptions,
       onSelect: _hSelectGroup
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowInputText, {
-      ref: _refInputText,
+      refEl: _refInputText,
       caption: "List:"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.ValidationMessages, {
       validationMessages: validationMessages

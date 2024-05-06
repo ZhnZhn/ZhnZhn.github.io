@@ -48,7 +48,7 @@ const GroupAddPane = (props) => {
   return (
     <div>
       <A.RowInputText
-         ref={refInput}
+         refEl={refInput}
          caption="Group:"
       />
       <A.ValidationMessages

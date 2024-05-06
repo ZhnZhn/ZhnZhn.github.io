@@ -45,7 +45,7 @@ const ListCreatePane = (props) => {
         if (!captionList)  { msg.push(msgOnIsEmptyName('List')); }
         setValidationMessages(msg)
       }
-  };    
+  };
 
   return (
     <div>
@@ -55,7 +55,7 @@ const ListCreatePane = (props) => {
          onSelect={_hSelectGroup}
       />
       <A.RowInputText
-         ref={_refInputText}
+         refEl={_refInputText}
          caption="List:"
       />
       <A.ValidationMessages

@@ -47,7 +47,7 @@ const GroupEditPane = props => {
       options: groupOptions,
       onSelect: _hSelectGroup
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowInputText, {
-      ref: _refInputText,
+      refEl: _refInputText,
       caption: "Group To:"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.ValidationMessages, {
       validationMessages: validationMessages

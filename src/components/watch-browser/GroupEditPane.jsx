@@ -58,7 +58,7 @@ const GroupEditPane = (props) => {
           onSelect={_hSelectGroup}
        />
       <A.RowInputText
-         ref={_refInputText}
+         refEl={_refInputText}
          caption="Group To:"
       />
       <A.ValidationMessages

@@ -57,7 +57,7 @@ const ListEditPane = props => {
       groupOptions: groupOptions,
       listCaption: "List From:"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowInputText, {
-      ref: _refInputText,
+      refEl: _refInputText,
       caption: "List To:"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.ValidationMessages, {
       validationMessages: validationMessages

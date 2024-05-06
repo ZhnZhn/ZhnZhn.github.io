@@ -1,5 +1,3 @@
-import { forwardRef } from '../uiApi';
-
 import { SpanInputLabel } from '../zhn/SpanToken';
 import InputText from '../zhn/InputText';
 import { RowFlex } from '../dialogs/rows/RowFlex';
@@ -18,19 +16,19 @@ const S_LH_2 = {
   marginRight: 0
 };
 
-const RowInputText = forwardRef((
-  { caption },
-  ref
-) => (
+const RowInputText = ({
+  refEl,
+  caption
+}) => (
   <RowFlex style={S_LH_2}>
      <SpanInputLabel style={S_CAPTION}>
        {caption}
      </SpanInputLabel>
      <InputText
-        ref={ref}
+        ref={refEl}
         style={S_INPUT_TEXT}
      />
   </RowFlex>
-))
+);
 
 export default RowInputText
