@@ -6,16 +6,17 @@ import useRefInit from '../hooks/useRefInit';
 
 import ResizeElementImpl from './ResizeElementImpl';
 
-const useResizeElement = (
-  props,
-  ref
+const useResizeElement = ({
+  refEl,
+  ...restProps
+}
 ) => {
   const resizeImpl = useRefInit(() => {
-    return new ResizeElementImpl(props);
+    return new ResizeElementImpl(restProps);
   });
 
   /*eslint-disable react-hooks/exhaustive-deps */
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
     toWidth: resizeImpl.toWidth,
     resizeBy: resizeImpl.resizeBy
   }), [])

@@ -1,4 +1,3 @@
-import { forwardRef } from '../uiApi';
 import useResizeElement from './useResizeElement';
 
 import BtResize from './BtResize';
@@ -10,9 +9,8 @@ const S_ROOT_DIV = { display: 'inline-block' }
   transform: 'rotate(180deg)'
 };
 
-const SvgHrzResize = forwardRef((
-  props,
-  ref
+const SvgHrzResize = (
+  props
 ) => {
   const [
     hStartResizeLeft,
@@ -20,7 +18,7 @@ const SvgHrzResize = forwardRef((
     hStopResize,
     hKdLeft,
     hKdRight
-  ] = useResizeElement(props, ref);
+  ] = useResizeElement(props);
   return props.isBts ? (
     <div style={{...S_ROOT_DIV, ...props.style}}>
       <BtResize
@@ -39,10 +37,11 @@ const SvgHrzResize = forwardRef((
       />
    </div>
  ) : null;
-});
+};
 
 /*
 SvgHrzResize.propTypes = {
+  refEl: PropTypes.ref,
   nodeRef: PropTypes.ref,
   isBts: PropTypes.bool,
   initWidth: PropTypes.number,

@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _useResizeElement = _interopRequireDefault(require("./useResizeElement"));
 var _BtResize = _interopRequireDefault(require("./BtResize"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -17,8 +16,8 @@ const S_ROOT_DIV = {
     ...S_BT_LEFT,
     transform: 'rotate(180deg)'
   };
-const SvgHrzResize = (0, _uiApi.forwardRef)((props, ref) => {
-  const [hStartResizeLeft, hStartResizeRight, hStopResize, hKdLeft, hKdRight] = (0, _useResizeElement.default)(props, ref);
+const SvgHrzResize = props => {
+  const [hStartResizeLeft, hStartResizeRight, hStopResize, hKdLeft, hKdRight] = (0, _useResizeElement.default)(props);
   return props.isBts ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       ...S_ROOT_DIV,
@@ -38,10 +37,11 @@ const SvgHrzResize = (0, _uiApi.forwardRef)((props, ref) => {
       onKeyDown: hKdRight
     })]
   }) : null;
-});
+};
 
 /*
 SvgHrzResize.propTypes = {
+  refEl: PropTypes.ref,
   nodeRef: PropTypes.ref,
   isBts: PropTypes.bool,
   initWidth: PropTypes.number,
@@ -51,6 +51,5 @@ SvgHrzResize.propTypes = {
   onResizeAfter: PropTypes.func
 }
 */
-var _default = SvgHrzResize;
-exports.default = _default;
+var _default = exports.default = SvgHrzResize;
 //# sourceMappingURL=SvgHrzResize.js.map

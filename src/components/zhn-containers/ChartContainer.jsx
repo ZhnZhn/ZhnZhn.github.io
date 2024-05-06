@@ -216,14 +216,14 @@ const ChartContainer = (props) => {
          onClose={_hHideChartContainer}
       >
          <A.SvgHrzResize
-           ref={_refResize}
+           refEl={_refResize}
+           elementRef={_refRootElement}
            isBts={_hasBtsResize(_refRootElement, _INITIAL_WIDTH, caption)}
            style={S_SVG_RESIZE}
            initWidth={_INITIAL_WIDTH}
            minWidth={_MIN_WIDTH}
            maxWidth={MAX_WIDTH}
            step={STEP}
-           elementRef={_refRootElement}
            onResizeAfter={_hResizeAfter}
          />
       </A.BrowserCaption>
