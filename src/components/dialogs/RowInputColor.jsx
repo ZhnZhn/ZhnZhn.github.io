@@ -64,7 +64,7 @@ const RowInputColor = ({
    }, []);
 
   useEffect(
-    () => setValue(initValue), 
+    () => setValue(initValue),
     [initValue]
   )
 
@@ -84,7 +84,7 @@ const RowInputColor = ({
         />
       </label>
       <CellColor
-        ref={_refCellColor}
+        refEl={_refCellColor}
         className={CL_INPUT_COLOR}
         color={value}
         onClick={_hClickPallete}

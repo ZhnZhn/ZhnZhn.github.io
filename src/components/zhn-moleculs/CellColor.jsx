@@ -1,17 +1,17 @@
-import { forwardRef } from '../uiApi';
 import { crCn } from '../styleFn';
 
 import { useKeyEnter } from '../hooks/fUseKey';
 
 const CL_INPUT_COLOR = 'input-color';
 
-const CellColor = forwardRef(({
+const CellColor = ({
+  refEl,
   className,
   style,
   color,
   onClick,
   children
-}, ref) => {
+}) => {
   const _cn = crCn(className, CL_INPUT_COLOR)
    , _bgColorStyle = color
       ? { backgroundColor: color }
@@ -22,7 +22,7 @@ const CellColor = forwardRef(({
   , _onKeyEnter = useKeyEnter(_onClick, [_onClick]);
   return (
     <span
-       ref={ref}
+       ref={refEl}
        tabIndex="0"
        role="button"
        className={_cn}
@@ -33,6 +33,6 @@ const CellColor = forwardRef(({
        {children}
     </span>
   );
-})
+};
 
 export default CellColor

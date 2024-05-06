@@ -79,7 +79,7 @@ const RowInputColor = _ref => {
         onEnter: _hEnter
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor.default, {
-      ref: _refCellColor,
+      refEl: _refCellColor,
       className: CL_INPUT_COLOR,
       color: value,
       onClick: _hClickPallete,
@@ -103,6 +103,5 @@ RowInputColor.propTypes = {
   onEnter: PropTypes.func
 }
 */
-var _default = RowInputColor;
-exports.default = _default;
+var _default = exports.default = RowInputColor;
 //# sourceMappingURL=RowInputColor.js.map
