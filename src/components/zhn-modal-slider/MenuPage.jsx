@@ -52,7 +52,7 @@ const MenuPage = ({
         refLast={_refLastItem}
       >
         <MenuTitle
-          ref={_refTitle}
+          refEl={_refTitle}
           titleCl={titleCl}
           title={title}
           onClick={_hClickTitle}

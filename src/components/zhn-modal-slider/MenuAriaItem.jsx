@@ -1,18 +1,17 @@
-import { forwardRef } from '../uiApi';
-
 import { useKeyEnter } from '../hooks/fUseKey';
 
-const MenuAriaItem = forwardRef(({
+const MenuAriaItem = ({
+  refEl,
   className,
   style,
   children,
   onClick
-}, ref) => {
+}) => {
   const _hKeyDown = useKeyEnter(onClick);
 
   return (
     <div
-      ref={ref}
+      ref={refEl}
       className={className}
       style={style}
       role="menuitem"
@@ -23,6 +22,6 @@ const MenuAriaItem = forwardRef(({
       {children}
     </div>
   );
-})
+};
 
 export default MenuAriaItem

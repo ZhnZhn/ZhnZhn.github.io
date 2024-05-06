@@ -64,7 +64,7 @@ const MenuItemList = _ref3 => {
           onClose
         });
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_MenuAriaItem.default, {
-        ref: getRefFocus(index),
+        refEl: getRefFocus(index),
         className: cn || itemCl,
         style: S_ITEM,
         onClick: _onClick,

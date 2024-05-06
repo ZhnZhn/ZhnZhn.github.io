@@ -39,7 +39,7 @@ const MenuPage = _ref => {
       refFirst: _getFocusFirstItem,
       refLast: _refLastItem,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTitle.default, {
-        ref: _refTitle,
+        refEl: _refTitle,
         titleCl: titleCl,
         title: title,
         onClick: _hClickTitle

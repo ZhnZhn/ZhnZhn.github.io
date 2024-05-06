@@ -54,7 +54,7 @@ const MenuItemList = ({
      return (
        <MenuAriaItem
          key={name}
-         ref={getRefFocus(index)}
+         refEl={getRefFocus(index)}
          className={cn || itemCl}
          style={S_ITEM}
          onClick={_onClick}

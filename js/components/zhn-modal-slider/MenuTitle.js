@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _MenuAriaItem = _interopRequireDefault(require("./MenuAriaItem"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ITEM = {
@@ -17,14 +16,15 @@ const S_ITEM = {
   S_TITLE = {
     paddingLeft: 16
   };
-const MenuTitle = (0, _uiApi.forwardRef)((_ref, ref) => {
+const MenuTitle = _ref => {
   let {
+    refEl,
     titleCl,
     title,
     onClick
   } = _ref;
   return title ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_MenuAriaItem.default, {
-    ref: ref,
+    refEl: refEl,
     className: titleCl,
     style: S_ITEM,
     onClick: onClick,
@@ -36,7 +36,6 @@ const MenuTitle = (0, _uiApi.forwardRef)((_ref, ref) => {
       children: title
     })]
   }) : null;
-});
-var _default = MenuTitle;
-exports.default = _default;
+};
+var _default = exports.default = MenuTitle;
 //# sourceMappingURL=MenuTitle.js.map
