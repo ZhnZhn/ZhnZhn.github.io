@@ -1,5 +1,3 @@
-import { forwardRef } from '../uiApi';
-
 import ButtonCircle2 from '../zhn/ButtonCircle2';
 import {
   CL_FOOTER,
@@ -9,16 +7,17 @@ import {
   CL_FOOTER_BT
 } from './CL';
 
-const OptionsFooter = forwardRef(({
+const OptionsFooter = ({
+  refIndexNode,
   noFooterBts,
   indexActiveOption,
   nFiltered,
   nAll,
   onClear
-}, ref) => (
+}) => (
   <div className={`${CL_FOOTER} ${CL_NOT_SELECTED}`}>
     <span className={CL_FOOTER_INDEX}>
-      <span ref={ref}>
+      <span ref={refIndexNode}>
         {indexActiveOption}
       </span>
       <span>
@@ -33,6 +32,6 @@ const OptionsFooter = forwardRef(({
       />
     </span>}
   </div>
-));
+);
 
 export default OptionsFooter

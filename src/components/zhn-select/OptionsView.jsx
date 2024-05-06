@@ -78,7 +78,7 @@ const OptionsView = ({
         {_optionListEl}
       </div>
       <OptionsFooter
-         ref={refIndexNode}
+         refIndexNode={refIndexNode}
          noFooterBts={noFooterBts}
          indexActiveOption={indexActive}
          nAll={nAll}

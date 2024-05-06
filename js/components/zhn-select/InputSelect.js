@@ -14,7 +14,7 @@ var _useTouchHandlers = _interopRequireDefault(require("./useTouchHandlers"));
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 const FN_NOOP = () => {};
-const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
+const InputSelect = _ref => {
   let {
     labelId,
     propCaption = "caption",
@@ -201,11 +201,6 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
     ], []);
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
-    clearInput: _clearInput,
-    focusInput: _focusInput
-  }));
-
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
     (0, _uiApi.setRefValue)(_refIndexActive, 0);
@@ -266,6 +261,6 @@ const InputSelect = (0, _uiApi.forwardRef)((_ref, ref) => {
       onClickOutside: _hideOptions
     })]
   });
-});
+};
 var _default = exports.default = InputSelect;
 //# sourceMappingURL=InputSelect.js.map

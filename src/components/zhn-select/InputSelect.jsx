@@ -1,12 +1,9 @@
 import {
-  forwardRef,
-
   useId,
   useRef,
   useState,
   useMemo,
   useEffect,
-  useImperativeHandle,
 
   setRefValue,
   getRefValue,
@@ -50,7 +47,7 @@ import {
 
 const FN_NOOP = () => {};
 
-const InputSelect = forwardRef(({
+const InputSelect = ({
   labelId,
   propCaption="caption",
   ItemOptionComp=ItemOptionDf,
@@ -73,7 +70,7 @@ const InputSelect = forwardRef(({
 
   onSelect=FN_NOOP,
   onLoadOption=FN_NOOP
-}, ref) => {
+}) => {
   const _optionsViewId = useId()
   , _refInput = useRef()
 
@@ -291,11 +288,6 @@ const InputSelect = forwardRef(({
   ], []);
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  useImperativeHandle(ref, () => ({
-    clearInput: _clearInput,
-    focusInput: _focusInput
-  }))
-
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     setRefValue(_refIndexActive, 0)
@@ -395,6 +387,6 @@ const InputSelect = forwardRef(({
       />}
     </div>
   );
-})
+}
 
 export default InputSelect

@@ -3,12 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle2"));
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
-const OptionsFooter = (0, _uiApi.forwardRef)((_ref, ref) => {
+const OptionsFooter = _ref => {
   let {
+    refIndexNode,
     noFooterBts,
     indexActiveOption,
     nFiltered,
@@ -16,11 +16,11 @@ const OptionsFooter = (0, _uiApi.forwardRef)((_ref, ref) => {
     onClear
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    className: `${_CL.CL_FOOTER} ${_CL.CL_NOT_SELECTED}`,
+    className: _CL.CL_FOOTER + " " + _CL.CL_NOT_SELECTED,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
       className: _CL.CL_FOOTER_INDEX,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        ref: ref,
+        ref: refIndexNode,
         children: indexActiveOption
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
         children: [": ", nFiltered, ": ", nAll]
@@ -34,6 +34,6 @@ const OptionsFooter = (0, _uiApi.forwardRef)((_ref, ref) => {
       })
     })]
   });
-});
+};
 var _default = exports.default = OptionsFooter;
 //# sourceMappingURL=OptionsFooter.js.map

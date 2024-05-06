@@ -44,8 +44,7 @@ const crAfterInputEl = (
      } else {
        _placeholder = placeholder || `Select ${optionName}...`;
        _afterInputEl = (
-         <ArrowCell
-           //ref={_refArrowCell}
+         <ArrowCell           
            isShowOption={isShowOption}
            labelId={labelId}
            controlsId={optionsViewId}

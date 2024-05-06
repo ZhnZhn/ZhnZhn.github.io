@@ -59,7 +59,7 @@ const OptionsView = _ref => {
       },
       children: _optionListEl
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsFooter.default, {
-      ref: refIndexNode,
+      refIndexNode: refIndexNode,
       noFooterBts: noFooterBts,
       indexActiveOption: indexActive,
       nAll: nAll,

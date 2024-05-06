@@ -25,9 +25,7 @@ const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, opt
       });
     } else {
       _placeholder = placeholder || "Select " + optionName + "...";
-      _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell.default
-      //ref={_refArrowCell}
-      , {
+      _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell.default, {
         isShowOption: isShowOption,
         labelId: labelId,
         controlsId: optionsViewId,
