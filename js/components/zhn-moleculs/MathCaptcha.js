@@ -32,8 +32,9 @@ const _crRandomNumber = function (m, n) {
   return m + Math.floor((n - m + 1) * Math.random());
 };
 const _useRandomNumber = () => (0, _uiApi.useState)(() => _crRandomNumber(0, 10))[0];
-const MathCaptcha = (0, _uiApi.forwardRef)((_ref, ref) => {
+const MathCaptcha = _ref => {
   let {
+    refEl,
     style
   } = _ref;
   const n1 = _useRandomNumber(),
@@ -52,7 +53,7 @@ const MathCaptcha = (0, _uiApi.forwardRef)((_ref, ref) => {
     }), []);
   /* eslint-enable react-hooks/exhaustive-deps */
 
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     isOk: () => isOk
   }), [isOk]);
   const _sumStyle = isOk ? S_SUM_OK : S_SUM_NOT_OK;
@@ -73,7 +74,6 @@ const MathCaptcha = (0, _uiApi.forwardRef)((_ref, ref) => {
       onChange: _hChangeSlider
     })]
   });
-});
-var _default = MathCaptcha;
-exports.default = _default;
+};
+var _default = exports.default = MathCaptcha;
 //# sourceMappingURL=MathCaptcha.js.map

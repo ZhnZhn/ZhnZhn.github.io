@@ -91,7 +91,7 @@ const AskDialog = (0, _memoIsShow.default)(_ref => {
           children: _name
         }), MSG_SUFFIX]
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_MathCaptcha.default, {
-        ref: _refCaptcha,
+        refEl: _refCaptcha,
         style: S_CAPTCHA
       })]
     })

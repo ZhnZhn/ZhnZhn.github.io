@@ -1,11 +1,10 @@
 import {
-  forwardRef,
   useState,
   useCallback,
   useImperativeHandle
 } from '../uiApi';
 
-import InputSlider from '../zhn/InputSlider'
+import InputSlider from '../zhn/InputSlider';
 
 const MSG = 'Before loading, please, enter sum using slider'
 
@@ -27,7 +26,10 @@ const _crRandomNumber = (m=0, n=10) =>
 const _useRandomNumber = () =>
    useState(() => _crRandomNumber(0, 10))[0];
 
-const MathCaptcha = forwardRef(({ style }, ref) => {
+const MathCaptcha = ({
+  refEl,
+  style
+}) => {
   const n1 = _useRandomNumber()
   , n2  = _useRandomNumber()
   , [{isOk, resultSum}, setState] = useState({isOk: false, resultSum: ''})
@@ -38,7 +40,7 @@ const MathCaptcha = forwardRef(({ style }, ref) => {
     }), []);
   /* eslint-enable react-hooks/exhaustive-deps */
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
     isOk: () => isOk
   }), [isOk])
 
@@ -61,6 +63,6 @@ const MathCaptcha = forwardRef(({ style }, ref) => {
       <InputSlider onChange={_hChangeSlider} />
     </div>
   );
-});
+};
 
 export default MathCaptcha

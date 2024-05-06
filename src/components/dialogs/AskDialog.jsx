@@ -89,7 +89,7 @@ const AskDialog = memoIsShow(({
              {MSG_SUFFIX}
           </p>
           <MathCaptcha
-            ref={_refCaptcha}
+            refEl={_refCaptcha}
             style={S_CAPTCHA}
           />
        </div>
