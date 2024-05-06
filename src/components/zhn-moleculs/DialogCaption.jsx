@@ -27,7 +27,7 @@ const DialogCaption = ({
   return (
     <div className={CL_EL} style={S_CAPTION_DIV}>
       <MenuMore
-         ref={refBtMenuMore}
+         refEl={refBtMenuMore}
          isMore={isMenuMore}
          menuModel={menuModel}
          toggle={toggleMenuMore}

@@ -22,7 +22,7 @@ const DialogCaption = _ref => {
     className: CL_EL,
     style: _Dialog.S_CAPTION_DIV,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
-      ref: refBtMenuMore,
+      refEl: refBtMenuMore,
       isMore: isMenuMore,
       menuModel: menuModel,
       toggle: toggleMenuMore
