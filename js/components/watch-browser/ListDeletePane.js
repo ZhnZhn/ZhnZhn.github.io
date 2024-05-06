@@ -57,7 +57,7 @@ const ListDeletePane = props => {
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.SelectGroupList, {
-      ref: _refSelectGroupList,
+      refEl: _refSelectGroupList,
       getWatchListsByGroup: getWatchListsByGroup,
       groupCaption: "In Group:",
       groupOptions: groupOptions,

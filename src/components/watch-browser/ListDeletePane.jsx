@@ -1,7 +1,7 @@
 //import PropTypes from "prop-types";
 import {
   useRef,
-  useState,  
+  useState,
   getInputValue
 } from '../uiApi';
 
@@ -60,7 +60,7 @@ const ListDeletePane = (props) => {
   return (
     <div>
        <A.SelectGroupList
-         ref={_refSelectGroupList}
+         refEl={_refSelectGroupList}
          getWatchListsByGroup={getWatchListsByGroup}
          groupCaption="In Group:"
          groupOptions={groupOptions}

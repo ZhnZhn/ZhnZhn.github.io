@@ -55,7 +55,7 @@ const ListEditPane = (props) => {
   return (
     <div>
        <A.SelectGroupList
-          ref={_refSelectGroupList}
+          refEl={_refSelectGroupList}
           getWatchListsByGroup={getWatchListsByGroup}
           groupCaption="In Group:"
           groupOptions={groupOptions}

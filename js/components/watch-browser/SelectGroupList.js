@@ -10,9 +10,10 @@ var _RowInputSelect = _interopRequireDefault(require("./RowInputSelect"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const SelectGroupList = (0, _uiApi.forwardRef)((props, ref) => {
+const SelectGroupList = props => {
   const [_setPrevProps, _getPrevProps] = (0, _useProperty.default)(props),
     {
+      refEl,
       getWatchListsByGroup,
       groupCaption,
       groupOptions,
@@ -59,7 +60,7 @@ const SelectGroupList = (0, _uiApi.forwardRef)((props, ref) => {
   //groupOptions, listCaption, getWatchListsByGroup
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValue: () => ({
       captionGroup: (0, _uiApi.getRefValue)(_refGroupCaption),
       captionList: (0, _uiApi.getRefValue)(_refListCaption)
@@ -76,10 +77,11 @@ const SelectGroupList = (0, _uiApi.forwardRef)((props, ref) => {
       onSelect: _hSelectList
     })]
   });
-});
+};
 
 /*
-SelectGroupList.propTypes = {  
+SelectGroupList.propTypes = {
+  refEl: PropTypes.ref
   getWatchListsByGroup: PropTypes.func
   groupCaption: PropTypes.string,
   groupOptions: PropTypes.array,
