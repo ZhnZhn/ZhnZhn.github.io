@@ -158,7 +158,7 @@ class ColumnRangeDialog extends _uiApi.Component {
           initValue: c1,
           onEnter: this._heColor
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputText.default, {
-          ref: this._refW,
+          refEl: this._refW,
           styleRoot: S_INLINE,
           styleCaption: S_CAPTION_1,
           styleInput: S_INPUT,
@@ -173,7 +173,7 @@ class ColumnRangeDialog extends _uiApi.Component {
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: S_ROW,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputText.default, {
-          ref: this._refR1,
+          refEl: this._refR1,
           styleRoot: S_INLINE,
           styleCaption: {
             ...S_CAPTION_2,
@@ -187,7 +187,7 @@ class ColumnRangeDialog extends _uiApi.Component {
           type: "number",
           maxLength: 2
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputText.default, {
-          ref: this._refR2,
+          refEl: this._refR2,
           styleRoot: S_INLINE,
           styleCaption: {
             ...S_CAPTION_2,

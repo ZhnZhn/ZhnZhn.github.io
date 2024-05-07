@@ -1,6 +1,4 @@
 //import PropTypes from "prop-types";
-import { forwardRef } from '../uiApi';
-
 import InputText from '../zhn/InputText';
 import crCaption from './fns/crCaption';
 
@@ -18,24 +16,24 @@ const S_ROOT = { padding: '6px 0 6px 6px' }
   width: 220
 };
 
-const RowInputText = forwardRef((props, ref) => {
-  const {
-    styleRoot,
-    rootStyle,
-    captionCn,
-    captionStyle,
-    styleCaption,
-    caption='Input',
-    inputStyle,
-    styleInput,
-    ...rest
-  } = props
-  , _rootStyle = rootStyle
-       || {...S_ROOT, ...styleRoot}
+const RowInputText = ({
+  refEl,
+  styleRoot,
+  rootStyle,
+  captionCn,
+  captionStyle,
+  styleCaption,
+  caption='Input',
+  inputStyle,
+  styleInput,
+  ...restProps
+}) => {
+  const _rootStyle = rootStyle
+    || {...S_ROOT, ...styleRoot}
   , _captionStyle = captionStyle
-       || {...S_CAPTION, ...styleCaption}
+    || {...S_CAPTION, ...styleCaption}
   , _inputStyle = inputStyle
-       || {...S_INPUT_TEXT, ...styleInput}
+    || {...S_INPUT_TEXT, ...styleInput}
   , _caption = crCaption(caption);
   return (
     <div style={_rootStyle}>
@@ -44,17 +42,18 @@ const RowInputText = forwardRef((props, ref) => {
           {_caption}
         </span>
         <InputText
-           ref={ref}
+           ref={refEl}
            style={_inputStyle}
-           {...rest}
+           {...restProps}
         />
       </label>
     </div>
   );
-})
+};
 
 /*
 RowInputText.propTypes= {
+  refEl: PropTypes.ref,
   styleRoot: PropTypes.object,
   styleCaption: PropTypes.object,
   styleInput: PropTypes.object,

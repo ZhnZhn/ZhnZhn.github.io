@@ -135,7 +135,7 @@ class ColumnRangeDialog extends Component {
        color: _color,
        yIndex: 0,
      }, _crSeriaOptions(this._pointWidth))
-     
+
      chart.zhDataLabels(true)
      onClose()
   }
@@ -183,7 +183,7 @@ class ColumnRangeDialog extends Component {
             onEnter={this._heColor}
           />
           <RowInputText
-             ref={this._refW}
+             refEl={this._refW}
              styleRoot={S_INLINE}
              styleCaption={S_CAPTION_1}
              styleInput={S_INPUT}
@@ -198,7 +198,7 @@ class ColumnRangeDialog extends Component {
         </div>
         <div style={S_ROW}>
           <RowInputText
-             ref={this._refR1}
+             refEl={this._refR1}
              styleRoot={S_INLINE}
              styleCaption={{...S_CAPTION_2, ...{ color: c1 }}}
              styleInput={S_INPUT}
@@ -208,7 +208,7 @@ class ColumnRangeDialog extends Component {
              maxLength={2}
           />
           <RowInputText
-             ref={this._refR2}
+             refEl={this._refR2}
              styleRoot={S_INLINE}
              styleCaption={{...S_CAPTION_2, ...{ color: c2 }}}
              styleInput={S_INPUT}

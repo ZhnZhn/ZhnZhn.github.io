@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _crCaption = _interopRequireDefault(require("./fns/crCaption"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -24,19 +23,20 @@ const S_ROOT = {
   S_INPUT_TEXT = {
     width: 220
   };
-const RowInputText = (0, _uiApi.forwardRef)((props, ref) => {
-  const {
-      styleRoot,
-      rootStyle,
-      captionCn,
-      captionStyle,
-      styleCaption,
-      caption = 'Input',
-      inputStyle,
-      styleInput,
-      ...rest
-    } = props,
-    _rootStyle = rootStyle || {
+const RowInputText = _ref => {
+  let {
+    refEl,
+    styleRoot,
+    rootStyle,
+    captionCn,
+    captionStyle,
+    styleCaption,
+    caption = 'Input',
+    inputStyle,
+    styleInput,
+    ...restProps
+  } = _ref;
+  const _rootStyle = rootStyle || {
       ...S_ROOT,
       ...styleRoot
     },
@@ -57,16 +57,17 @@ const RowInputText = (0, _uiApi.forwardRef)((props, ref) => {
         style: _captionStyle,
         children: _caption
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
-        ref: ref,
+        ref: refEl,
         style: _inputStyle,
-        ...rest
+        ...restProps
       })]
     })
   });
-});
+};
 
 /*
 RowInputText.propTypes= {
+  refEl: PropTypes.ref,
   styleRoot: PropTypes.object,
   styleCaption: PropTypes.object,
   styleInput: PropTypes.object,
