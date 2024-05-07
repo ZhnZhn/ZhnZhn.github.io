@@ -6,8 +6,9 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
 var _jsxRuntime = require("react/jsx-runtime");
-const BtCounter = (0, _uiApi.forwardRef)((_ref, ref) => {
+const BtCounter = _ref => {
   let {
+    refEl,
     isShow,
     style,
     title,
@@ -18,7 +19,7 @@ const BtCounter = (0, _uiApi.forwardRef)((_ref, ref) => {
     _onClick = (0, _uiApi.useCallback)(() => {
       setValue(v => v < maxValue ? v + 1 : initialValue);
     }, [maxValue, initialValue]);
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValue: () => value
   }), [value]);
   return isShow ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
@@ -27,7 +28,6 @@ const BtCounter = (0, _uiApi.forwardRef)((_ref, ref) => {
     caption: value,
     onClick: _onClick
   }) : null;
-});
-var _default = BtCounter;
-exports.default = _default;
+};
+var _default = exports.default = BtCounter;
 //# sourceMappingURL=BtCounter.js.map

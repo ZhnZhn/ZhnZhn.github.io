@@ -73,7 +73,7 @@ const SeriaColor = (0, _uiApi.forwardRef)((_ref, ref) => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: _rowStyle,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtCounter.default, {
-        ref: _refLineWidth,
+        refEl: _refLineWidth,
         isShow: _isLineWidth,
         style: S_BT_COUNTER,
         title: "Line Width"
@@ -85,6 +85,5 @@ const SeriaColor = (0, _uiApi.forwardRef)((_ref, ref) => {
     })]
   });
 });
-var _default = SeriaColor;
-exports.default = _default;
+var _default = exports.default = SeriaColor;
 //# sourceMappingURL=SeriaColor.js.map

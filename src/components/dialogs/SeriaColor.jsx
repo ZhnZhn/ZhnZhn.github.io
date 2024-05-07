@@ -110,7 +110,7 @@ const SeriaColor = forwardRef(({
       </div>
       <div style={_rowStyle}>
          <BtCounter
-            ref={_refLineWidth}
+            refEl={_refLineWidth}
             isShow={_isLineWidth}
             style={S_BT_COUNTER}
             title="Line Width"

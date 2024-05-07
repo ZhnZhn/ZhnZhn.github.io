@@ -1,5 +1,4 @@
 import {
-  forwardRef,
   useState,
   useCallback,
   useImperativeHandle
@@ -7,13 +6,14 @@ import {
 
 import ButtonCircle from '../zhn/ButtonCircle';
 
-const BtCounter = forwardRef(({
+const BtCounter = ({
+  refEl,
   isShow,
   style,
   title,
   initialValue=1,
   maxValue=4,
-}, ref) => {
+}) => {
   const [
     value,
     setValue
@@ -25,7 +25,7 @@ const BtCounter = forwardRef(({
      )
    }, [maxValue, initialValue]);
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
      getValue: () => value
   }), [value])
 
@@ -37,6 +37,6 @@ const BtCounter = forwardRef(({
       onClick={_onClick}
     />
   ) : null;
-});
+};
 
 export default BtCounter
