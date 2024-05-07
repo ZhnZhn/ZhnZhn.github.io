@@ -1,5 +1,3 @@
-import { forwardRef } from '../uiApi';
-
 import InputSecret from '../zhn/InputSecret';
 import { SpanInputLabel } from '../zhn/SpanToken';
 
@@ -8,12 +6,13 @@ const S_LABEL = {
   margin: '5px 0'
 };
 
-const RowSecret = forwardRef(({
+const RowSecret = ({
+  refEl,
   isTitle,
   title,
   titleStyle,
   ...rest
-}, ref) => (
+}) => (
   <form>
     <label style={S_LABEL}>
        {isTitle && title &&
@@ -22,16 +21,17 @@ const RowSecret = forwardRef(({
           </SpanInputLabel>
        }
        <InputSecret
-          ref={ref}
+          ref={refEl}
           {...rest}
        />
     </label>
   </form>
-));
+);
 
 
 /*
 RowSecret.propTypes = {
+  refEl: PropTypes.ref,
   title: PropTypes.string,
   titleStyle: PropTypes.object
 }

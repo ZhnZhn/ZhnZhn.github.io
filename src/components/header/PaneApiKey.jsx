@@ -51,7 +51,7 @@ const _crPwdItem = (
     return (
       <RowSecret
          key={item[0]}
-         ref={comp['_ref'+_i]}
+         refEl={comp['_ref'+_i]}
          isTitle={isShowLabels}
          titleStyle={titleStyle}
          title={item[0]}

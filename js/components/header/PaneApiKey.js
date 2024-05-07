@@ -41,7 +41,7 @@ const _crPwdItem = (item, index, _ref) => {
   } = _ref;
   const _i = index + i;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowSecret.default, {
-    ref: comp['_ref' + _i],
+    refEl: comp['_ref' + _i],
     isTitle: isShowLabels,
     titleStyle: titleStyle,
     title: item[0],
