@@ -237,7 +237,7 @@ const UnDialogAgg = memoIsShow((
      </D.ShowHide>
      <D.ShowHide isShow={isPartner}>
        <D.SelectWithLoad
-          ref={_refTradePartner}
+          refEl={_refTradePartner}
           isShowLabels={isShowLabels}
           uri={tpURI}
           caption="Partner"

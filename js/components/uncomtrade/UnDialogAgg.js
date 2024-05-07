@@ -193,7 +193,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isPartner,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
-        ref: _refTradePartner,
+        refEl: _refTradePartner,
         isShowLabels: isShowLabels,
         uri: tpURI,
         caption: "Partner",

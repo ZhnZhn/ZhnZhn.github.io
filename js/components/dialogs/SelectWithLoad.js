@@ -7,8 +7,9 @@ var _uiApi = require("../uiApi");
 var _useLoadOptions = _interopRequireDefault(require("./hooks/useLoadOptions"));
 var _RowInputSelect = _interopRequireDefault(require("./rows/RowInputSelect"));
 var _jsxRuntime = require("react/jsx-runtime");
-const SelectWithLoad = (0, _uiApi.forwardRef)((_ref, ref) => {
+const SelectWithLoad = _ref => {
   let {
+    refEl,
     isShow = true,
     optionNames = 'Items',
     jsonProp = 'items',
@@ -19,7 +20,7 @@ const SelectWithLoad = (0, _uiApi.forwardRef)((_ref, ref) => {
     {
       options
     } = state;
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getOptions: () => options
   }), [options]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
@@ -28,7 +29,6 @@ const SelectWithLoad = (0, _uiApi.forwardRef)((_ref, ref) => {
     ...state,
     onLoadOption: loadOptions
   });
-});
-var _default = SelectWithLoad;
-exports.default = _default;
+};
+var _default = exports.default = SelectWithLoad;
 //# sourceMappingURL=SelectWithLoad.js.map

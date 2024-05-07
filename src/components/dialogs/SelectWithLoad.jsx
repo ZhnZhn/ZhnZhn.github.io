@@ -1,25 +1,23 @@
-import {
-  forwardRef,
-  useImperativeHandle
-} from '../uiApi';
+import { useImperativeHandle } from '../uiApi';
 import useLoadOptions  from './hooks/useLoadOptions';
 
 import RowInputSelect from './rows/RowInputSelect';
 
-const SelectWithLoad = forwardRef(({
+const SelectWithLoad = ({
+  refEl,
   isShow=true,
   optionNames='Items',
   jsonProp='items',
   uri,
   ...restProps
-}, ref) => {
+}) => {
   const [
     state,
     loadOptions
   ] = useLoadOptions(isShow, uri, jsonProp)
   , { options } = state;
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
     getOptions: () => options
   }), [options])
 
@@ -31,6 +29,6 @@ const SelectWithLoad = forwardRef(({
        onLoadOption={loadOptions}
     />
   );
-})
+};
 
 export default SelectWithLoad
