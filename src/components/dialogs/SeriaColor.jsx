@@ -1,5 +1,4 @@
 import {
-  forwardRef,
   useRef,
   useState,
   useMemo,
@@ -53,10 +52,11 @@ const _hasLineWidth = ({
  || value === 'SPLINE'
  || value === 'LINE';
 
-const SeriaColor = forwardRef(({
+const SeriaColor = ({
+  refEl,
   isLong,
   chartType
-}, ref) => {
+}) => {
   const _refLineWidth = useRef()
   , [
     color,
@@ -76,7 +76,7 @@ const SeriaColor = forwardRef(({
     }
   ], []);
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
     getValue: () => ({
        seriaColor: color !== TRANSPARENT_COLOR
           ? color
@@ -123,6 +123,6 @@ const SeriaColor = forwardRef(({
       </div>
     </div>
   );
-});
+};
 
 export default SeriaColor

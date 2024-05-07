@@ -21,7 +21,7 @@ const RowChart = ({
     onSelect={onSelectChart}
   >
     <SeriaColor
-      ref={refSeriaColor}
+      refEl={refSeriaColor}
       isLong={isShowLabels}
       chartType={chartType}
     />

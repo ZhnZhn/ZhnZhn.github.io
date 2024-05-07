@@ -35,8 +35,9 @@ const _hasLineWidth = function (_temp) {
   } = _temp === void 0 ? {} : _temp;
   return !value || value === 'SPLINE' || value === 'LINE';
 };
-const SeriaColor = (0, _uiApi.forwardRef)((_ref, ref) => {
+const SeriaColor = _ref => {
   let {
+    refEl,
     isLong,
     chartType
   } = _ref;
@@ -49,7 +50,7 @@ const SeriaColor = (0, _uiApi.forwardRef)((_ref, ref) => {
     }, () => {
       setColor(_Color.TRANSPARENT_COLOR);
     }], []);
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValue: () => ({
       seriaColor: color !== _Color.TRANSPARENT_COLOR ? color : void 0,
       seriaWidth: _hasLineWidth(chartType) ? (0, _uiApi.getInputValue)(_refLineWidth) : void 0
@@ -84,6 +85,6 @@ const SeriaColor = (0, _uiApi.forwardRef)((_ref, ref) => {
       })]
     })]
   });
-});
+};
 var _default = exports.default = SeriaColor;
 //# sourceMappingURL=SeriaColor.js.map
