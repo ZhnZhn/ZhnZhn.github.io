@@ -166,8 +166,8 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isShowDate,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.DatesFragment, {
-        ref: _refDates,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.InputPeriod, {
+        refEl: _refDates,
         isShowLabels: isShowLabels,
         initFromDate: initFromDate,
         initToDate: initToDate,

@@ -8,7 +8,7 @@ import RowCheckBox1 from './RowCheckBox1';
 import RowText from './RowText';
 import RowDate from './RowDate';
 
-import DatesFragment from './DatesFragment';
+import InputPeriod from './InputPeriod';
 import SelectOneTwo from './SelectOneTwo';
 
 const Rows = {
@@ -17,7 +17,7 @@ const Rows = {
   RowChart,
   RowChartDate,
 
-  DatesFragment,
+  InputPeriod,
   SelectOneTwo,
 
   RowPattern,

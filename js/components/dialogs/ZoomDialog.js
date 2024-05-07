@@ -122,8 +122,8 @@ const ZoomDialog = (0, _memoIsShow.default)(_ref => {
     isShow: isShow,
     commandButtons: _commandButtons,
     onClose: onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.DatesFragment, {
-      ref: _refDates,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.InputPeriod, {
+      refEl: _refDates,
       dateStyle: S_DATE,
       placeholder: "DD-MM-YYYY",
       initFromDate: from,
@@ -141,6 +141,5 @@ const ZoomDialog = (0, _memoIsShow.default)(_ref => {
     })]
   });
 });
-var _default = ZoomDialog;
-exports.default = _default;
+var _default = exports.default = ZoomDialog;
 //# sourceMappingURL=ZoomDialog.js.map

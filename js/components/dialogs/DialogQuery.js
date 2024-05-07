@@ -109,8 +109,8 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
       noDate: noDate
     }), !noDate && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isShowDate,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.DatesFragment, {
-        ref: _refDates,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.InputPeriod, {
+        refEl: _refDates,
         isShowLabels: isShowLabels,
         initFromDate: initFromDate,
         initToDate: initToDate,
@@ -120,6 +120,5 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
     })]
   });
 });
-var _default = DialogQuery;
-exports.default = _default;
+var _default = exports.default = DialogQuery;
 //# sourceMappingURL=DialogQuery.js.map

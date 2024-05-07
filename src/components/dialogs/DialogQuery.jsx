@@ -140,8 +140,8 @@ const DialogQuery = memoIsShow((
       {
         !noDate &&
         <D.ShowHide isShow={isShowDate}>
-          <D.DatesFragment
-            ref={_refDates}
+          <D.InputPeriod
+            refEl={_refDates}
             isShowLabels={isShowLabels}
             initFromDate={initFromDate}
             initToDate={initToDate}

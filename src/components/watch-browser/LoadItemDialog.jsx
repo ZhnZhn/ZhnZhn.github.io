@@ -217,8 +217,8 @@ const LoadItemDialog = memoIsShow(({
         />
       </D.ShowHide>
       <D.ShowHide isShow={isShowDate}>
-        <D.DatesFragment
-          ref={_refDates}
+        <D.InputPeriod
+          refEl={_refDates}
           isShowLabels={isShowLabels}
           initFromDate={_initFromDate}
           initToDate={_initToDate}

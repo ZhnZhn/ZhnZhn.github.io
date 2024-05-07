@@ -1,6 +1,5 @@
 //import PropTypes from "prop-types";
 import {
-  forwardRef,
   useRef,
   useImperativeHandle,
   setRefValue,
@@ -23,7 +22,8 @@ const _isPeriodValid = (from, to) => from<=to
 
 const _getTrimValue = ref => (getInputValue(ref) || '').trim();
 
-const DatesFragment = forwardRef(({
+const InputPeriod = ({
+  refEl,
   isShowLabels=true,
   placeholder,
   fromCaption='From Date',
@@ -36,12 +36,12 @@ const DatesFragment = forwardRef(({
   msgOnNotValidFormat=_msgOnNotValidFormat,
   onTestDate,
   onEnter
-}, ref) => {
+}) => {
   const _refFrom = useRef()
   , _refTo = useRef()
   , labelStyle = crRowLabelStyle({ isShowLabels });
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
     getValues: () => ({
       fromDate: getInputValue(_refFrom),
       toDate: getInputValue(_refTo)
@@ -105,10 +105,11 @@ const DatesFragment = forwardRef(({
      </RowFlex>
    </>
   );
-})
+}
 
 /*
-DatesFragment.propTypes = {
+InputPeriod.propTypes = {
+  refEl: PropTypes.ref,
   isShowLabels: PropTypes.bool,
   dateStyle: PropTypes.object,
   placeholder: PropTypes.string,
@@ -124,4 +125,4 @@ DatesFragment.propTypes = {
 }
 */
 
-export default DatesFragment
+export default InputPeriod

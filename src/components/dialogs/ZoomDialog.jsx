@@ -150,9 +150,9 @@ const ZoomDialog = memoIsShow(({
       commandButtons={_commandButtons}
       onClose={onClose}
     >
-      <D.DatesFragment
+      <D.InputPeriod
          key={id}
-         ref={_refDates}
+         refEl={_refDates}
          dateStyle={S_DATE}
          placeholder="DD-MM-YYYY"
          initFromDate={from}

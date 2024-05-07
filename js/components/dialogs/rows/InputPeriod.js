@@ -21,8 +21,9 @@ const _isPeriodValid = (from, to) => from <= to,
     return item + " is not in valid format";
   };
 const _getTrimValue = ref => ((0, _uiApi.getInputValue)(ref) || '').trim();
-const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
+const InputPeriod = _ref => {
   let {
+    refEl,
     isShowLabels = true,
     placeholder,
     fromCaption = 'From Date',
@@ -41,7 +42,7 @@ const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
     labelStyle = (0, _crRowLabelStyle.default)({
       isShowLabels
     });
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValues: () => ({
       fromDate: (0, _uiApi.getInputValue)(_refFrom),
       toDate: (0, _uiApi.getInputValue)(_refTo)
@@ -99,10 +100,11 @@ const DatesFragment = (0, _uiApi.forwardRef)((_ref, ref) => {
       })]
     })]
   });
-});
+};
 
 /*
-DatesFragment.propTypes = {
+InputPeriod.propTypes = {
+  refEl: PropTypes.ref,
   isShowLabels: PropTypes.bool,
   dateStyle: PropTypes.object,
   placeholder: PropTypes.string,
@@ -117,5 +119,5 @@ DatesFragment.propTypes = {
   onEnter: PropTypes.func
 }
 */
-var _default = exports.default = DatesFragment;
-//# sourceMappingURL=DatesFragment.js.map
+var _default = exports.default = InputPeriod;
+//# sourceMappingURL=InputPeriod.js.map

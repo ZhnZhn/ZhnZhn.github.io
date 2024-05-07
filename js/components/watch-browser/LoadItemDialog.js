@@ -39,7 +39,7 @@ const _crValue = function (x, y) {
   if (y === void 0) {
     y = '';
   }
-  return `${(0, _formatNumber.default)(y)} ${(0, _dateFn.mlsToDmy)(x)}`.trim();
+  return ((0, _formatNumber.default)(y) + " " + (0, _dateFn.mlsToDmy)(x)).trim();
 };
 const HAS_WIDE_WIDTH = (0, _has.isWideWidth)(),
   DF_DATA = {},
@@ -171,8 +171,8 @@ const LoadItemDialog = (0, _memoIsShow.default)(_ref => {
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isShowDate,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.DatesFragment, {
-        ref: _refDates,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.InputPeriod, {
+        refEl: _refDates,
         isShowLabels: isShowLabels,
         initFromDate: _initFromDate,
         initToDate: _initToDate,
