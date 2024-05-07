@@ -1,20 +1,20 @@
-import { forwardRef } from '../uiApi';
 import { crCn } from '../styleFn';
 
 const CL_SCROLL = 'with-scroll scroll';
 
-const ScrollPane = forwardRef(({
+const ScrollPane = ({
+  refEl,
   className,
   style,
   children
-}, ref) => (
+}) => (
   <div
-    ref={ref}
+    ref={refEl}
     className={crCn(CL_SCROLL, className)}
     style={style}
   >
      {children}
   </div>
-));
+);
 
 export default ScrollPane

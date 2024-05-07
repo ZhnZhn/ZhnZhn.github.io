@@ -140,7 +140,7 @@ const ChartContainer = props => {
         onResizeAfter: _hResizeAfter
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {
-      ref: _refSpComp,
+      refEl: _refSpComp,
       className: CL_SCROLL_ITEMS,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartList.default, {
         refChartFn: _refChartFn,

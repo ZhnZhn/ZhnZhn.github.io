@@ -228,7 +228,7 @@ const ChartContainer = (props) => {
          />
       </A.BrowserCaption>
       <A.ScrollPane
-         ref={_refSpComp}
+         refEl={_refSpComp}
          className={CL_SCROLL_ITEMS}
       >
         <ChartList
