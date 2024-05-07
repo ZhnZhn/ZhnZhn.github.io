@@ -16,7 +16,7 @@ const MenuMore = ({
 }) => menuModel ? (
   <>
     <SvgMore
-      ref={refEl}
+      refEl={refEl}
       style={S_BT_MORE}
       onClick={toggle}
     />

@@ -1,16 +1,16 @@
-import { forwardRef } from '../uiApi';
 import Svg from './svg/Svg';
 
 const CL_BT_MORE = 'bt-more';
 
-const SvgMore = forwardRef(({
+const SvgMore = ({
+  refEl,
   style,
   svgStyle,
   onClick
-}, ref) => (
+}) => (
   <button
     type="button"
-    ref={ref}
+    ref={refEl}
     className={CL_BT_MORE}
     style={style}
     onClick={onClick}
@@ -21,7 +21,6 @@ const SvgMore = forwardRef(({
       <circle cx="3" cy="18" r="2" />
     </Svg>
   </button>
-));
-
+);
 
 export default SvgMore

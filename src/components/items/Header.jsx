@@ -65,7 +65,7 @@ const MenuMore = ({
 
   return moreModel ? (<>
       <SvgMore
-        ref={refBtSvg}
+        refEl={refBtSvg}
         style={S_BT_MORE}
         svgStyle={S_SVG_MORE}
         onClick={onToggle}

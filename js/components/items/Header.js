@@ -57,7 +57,7 @@ const MenuMore = _ref => {
   const [refBtSvg, toggleFocus] = (0, _useFocus.useFnFocus)(onToggle);
   return moreModel ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
-      ref: refBtSvg,
+      refEl: refBtSvg,
       style: S_BT_MORE,
       svgStyle: S_SVG_MORE,
       onClick: onToggle

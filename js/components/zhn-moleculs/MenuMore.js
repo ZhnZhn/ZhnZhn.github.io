@@ -21,7 +21,7 @@ const MenuMore = _ref => {
   } = _ref;
   return menuModel ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
-      ref: refEl,
+      refEl: refEl,
       style: S_BT_MORE,
       onClick: toggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.default, {

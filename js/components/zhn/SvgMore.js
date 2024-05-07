@@ -3,19 +3,19 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _Svg = _interopRequireDefault(require("./svg/Svg"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_BT_MORE = 'bt-more';
-const SvgMore = (0, _uiApi.forwardRef)((_ref, ref) => {
+const SvgMore = _ref => {
   let {
+    refEl,
     style,
     svgStyle,
     onClick
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     type: "button",
-    ref: ref,
+    ref: refEl,
     className: CL_BT_MORE,
     style: style,
     onClick: onClick,
@@ -38,7 +38,6 @@ const SvgMore = (0, _uiApi.forwardRef)((_ref, ref) => {
       })]
     })
   });
-});
-var _default = SvgMore;
-exports.default = _default;
+};
+var _default = exports.default = SvgMore;
 //# sourceMappingURL=SvgMore.js.map
