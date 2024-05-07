@@ -97,7 +97,7 @@ const AlphaIndicatorDialog = (0, _memoIsShow.default)(_ref => {
       isShow: isToolbar,
       buttons: _toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
-      ref: _refTicket,
+      refEl: _refTicket,
       isShowLabels: isShowLabels,
       caption: "Stock",
       placeholder: "Nyse or Nasdaq Symbol",
@@ -136,6 +136,5 @@ const AlphaIndicatorDialog = (0, _memoIsShow.default)(_ref => {
     })]
   });
 });
-var _default = AlphaIndicatorDialog;
-exports.default = _default;
+var _default = exports.default = AlphaIndicatorDialog;
 //# sourceMappingURL=AlphaIndicatorDialog.js.map

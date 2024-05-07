@@ -88,7 +88,7 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
       toggleOption: toggleDialogOption,
       onClose: hideOptions
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
-      ref: _refIdInput,
+      refEl: _refIdInput,
       isShow: isShow,
       isShowLabels: isShowLabels,
       style: S_ID_ROOT,

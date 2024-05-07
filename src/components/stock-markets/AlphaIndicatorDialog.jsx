@@ -131,7 +131,7 @@ const AlphaIndicatorDialog = memoIsShow(({
         buttons={_toolbarButtons}
       />
       <D.RowPattern
-        ref={_refTicket}
+        refEl={_refTicket}
         isShowLabels={isShowLabels}
         caption="Stock"
         placeholder="Nyse or Nasdaq Symbol"

@@ -47,7 +47,7 @@ const PaneOptions = ({
   return (
     <div>
       <RowPattern
-        ref={_refProxy}
+        refEl={_refProxy}
         isShowLabels={isShowLabels}
         style={_rowPatterStyle}
         captionStyle={titleStyle}

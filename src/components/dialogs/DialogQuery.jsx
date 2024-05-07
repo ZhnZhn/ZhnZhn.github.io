@@ -116,7 +116,7 @@ const DialogQuery = memoIsShow((
         onClose={hideOptions}
       />
       <D.RowPattern
-        ref={_refIdInput}
+        refEl={_refIdInput}
         isShow={isShow}
         isShowLabels={isShowLabels}
         style={S_ID_ROOT}

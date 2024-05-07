@@ -37,7 +37,7 @@ const PaneOptions = _ref => {
     [_width, _rowPatterStyle] = _crInputStyles(isShowLabels);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowPattern.default, {
-      ref: _refProxy,
+      refEl: _refProxy,
       isShowLabels: isShowLabels,
       style: _rowPatterStyle,
       captionStyle: titleStyle,

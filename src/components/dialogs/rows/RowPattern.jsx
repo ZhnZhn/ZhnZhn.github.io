@@ -1,17 +1,16 @@
-import { forwardRef } from '../../uiApi';
-
 import { SpanInputLabel } from '../../zhn/SpanToken';
 import InputPattern from '../../zhn/InputPattern';
 
 import crRowLabelStyle from './crRowLabelStyle';
 import { RowFlex } from './RowFlex';
 
-const RowPattern = forwardRef(({
+const RowPattern = ({
+  refEl,
   isShowLabels,
   captionStyle,
   caption,
   ...inputPatternProps
-}, ref) => (
+}) => (
   <RowFlex>
     <SpanInputLabel
        style={crRowLabelStyle({
@@ -22,10 +21,10 @@ const RowPattern = forwardRef(({
        {caption}
     </SpanInputLabel>
     <InputPattern
-       ref={ref}
+       ref={refEl}
        {...inputPatternProps}
     />
   </RowFlex>
-))
+);
 
 export default RowPattern

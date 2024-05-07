@@ -157,7 +157,7 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isShowPattern,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
-        ref: _refZip,
+        refEl: _refZip,
         isShowLabels: isShowLabels,
         caption: "*Zip Code",
         placeholder: "Zip Code, 5 Digits",

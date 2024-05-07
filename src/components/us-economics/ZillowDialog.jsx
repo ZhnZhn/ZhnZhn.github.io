@@ -185,7 +185,7 @@ const ZillowDialog = memoIsShow(({
       />
       <D.ShowHide isShow={isShowPattern}>
          <D.RowPattern
-            ref={_refZip}
+            refEl={_refZip}
             isShowLabels={isShowLabels}
             caption="*Zip Code"
             placeholder="Zip Code, 5 Digits"
