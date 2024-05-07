@@ -8,16 +8,17 @@ var _useLoadOptions = _interopRequireDefault(require("../hooks/useLoadOptions"))
 var _RowInputSelect = _interopRequireDefault(require("./RowInputSelect"));
 var _ShowHide = _interopRequireDefault(require("../../zhn/ShowHide"));
 var _jsxRuntime = require("react/jsx-runtime");
-const DF_MSG_ON_NOT_SELECRED = item => `${item} is not selected`,
+const DF_MSG_ON_NOT_SELECRED = item => item + " is not selected",
   FN_NOOP = () => {},
   _getCaption = item => (item || {}).caption || '',
   _getValue = item => (item || {}).value || '',
   _crItem = (item1, item2) => ({
-    caption: `${_getCaption(item1)}: ${_getCaption(item2)}`,
-    value: _getValue(item1) ? `${_getValue(item1)}${_getValue(item2)}` : _getValue(item2)
+    caption: _getCaption(item1) + ": " + _getCaption(item2),
+    value: _getValue(item1) ? "" + _getValue(item1) + _getValue(item2) : _getValue(item2)
   });
-const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
+const SelectOneTwo = _ref => {
   let {
+    refEl,
     isShowLabels,
     isShow = true,
     isHideTwo = false,
@@ -62,7 +63,7 @@ const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
   /*eslint-enable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValidation: () => {
       const msg = [];
       if (!(0, _uiApi.getRefValue)(_refOne)) {
@@ -108,6 +109,6 @@ const SelectOneTwo = (0, _uiApi.forwardRef)((_ref, ref) => {
       })
     })]
   });
-});
+};
 var _default = exports.default = SelectOneTwo;
 //# sourceMappingURL=SelectOneTwo.js.map

@@ -171,7 +171,7 @@ const ZillowDialog = memoIsShow(({
          onSelect={setMetric}
       />
       <D.SelectOneTwo
-         ref={_refTypeCode}
+         refEl={_refTypeCode}
          isShow={isShow}
          isShowLabels={isShowLabels}
          isHideTwo={isShowPattern}

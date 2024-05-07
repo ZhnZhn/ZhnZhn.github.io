@@ -180,7 +180,6 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
       isShow: isShowToggle,
       configs: [['Partner', isPartner, togglePartner], ['Heading', isHeading, toggleHeading], ['Trade Flow', isFlow, toggleFlow]
       /*['Frequency', isFreq, toggleFreq]*/],
-
       onClose: hideToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
@@ -202,7 +201,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isHeading,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectOneTwo, {
-        ref: _refGroupItem,
+        refEl: _refGroupItem,
         isShow: isShow,
         isShowLabels: isShowLabels,
         uri: twoURI,
@@ -235,6 +234,5 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     })]
   });
 });
-var _default = UnDialog5;
-exports.default = _default;
+var _default = exports.default = UnDialog5;
 //# sourceMappingURL=UnDialog5.js.map

@@ -1,5 +1,4 @@
 import {
-  forwardRef,
   useRef,
   useState,
   useCallback,
@@ -27,7 +26,8 @@ const DF_MSG_ON_NOT_SELECRED = item => `${item} is not selected`
     : _getValue(item2)
 });
 
-const SelectOneTwo = forwardRef(({
+const SelectOneTwo = ({
+  refEl,
   isShowLabels,
   isShow=true,
   isHideTwo=false,
@@ -41,7 +41,7 @@ const SelectOneTwo = forwardRef(({
   propCaption,
   onSelectOne=FN_NOOP,
   onSelect=FN_NOOP
-}, ref) => {
+}) => {
     const [
       state,
       loadOptions
@@ -83,7 +83,7 @@ const SelectOneTwo = forwardRef(({
     /*eslint-enable react-hooks/exhaustive-deps */
 
     /*eslint-disable react-hooks/exhaustive-deps */
-    useImperativeHandle(ref, ()=>({
+    useImperativeHandle(refEl, ()=>({
       getValidation:() => {
          const msg = [];
          if (!getRefValue(_refOne)){
@@ -129,6 +129,6 @@ const SelectOneTwo = forwardRef(({
          </ShowHide>
       </div>
     );
-})
+};
 
 export default SelectOneTwo

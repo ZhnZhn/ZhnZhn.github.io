@@ -143,7 +143,7 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
       optionNames: "Items",
       onSelect: setMetric
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectOneTwo, {
-      ref: _refTypeCode,
+      refEl: _refTypeCode,
       isShow: isShow,
       isShowLabels: isShowLabels,
       isHideTwo: isShowPattern,
