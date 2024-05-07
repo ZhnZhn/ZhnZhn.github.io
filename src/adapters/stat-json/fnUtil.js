@@ -72,7 +72,10 @@ export const toUTC = (
   if (_isInclude('H')) {
     return _toHalfYearUTC('H', str);
   }
-  return _toYearUTC(str, hasPerJanuary);
+
+  return _isInclude('/') // FSO 2000/01 case
+    ? _toYearUTC(str.slice(0, 4))
+    : _toYearUTC(str, hasPerJanuary);
 }
 
 export const toYMD = (str) => {
