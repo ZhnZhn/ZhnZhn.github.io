@@ -31,7 +31,7 @@ const DivCompareTo = ({
    <label style={S_ROW_INPUT} >
      <SpanLabel>CompareTo:</SpanLabel>
      <DateField
-       ref={refEl}
+       refEl={refEl}
        style={S_DATE_FIELD}
        initialValue={initialValue}
        placeholder="DD-MM-YYYY"

@@ -80,7 +80,7 @@ const InputPeriod = ({
            {fromCaption}
         </SpanInputLabel>
         <DateField
-           ref={_refFrom}
+           refEl={_refFrom}
            style={dateStyle}
            placeholder={placeholder}
            initialValue={initFromDate}
@@ -94,7 +94,7 @@ const InputPeriod = ({
           {toCaption}
         </SpanInputLabel>
         <DateField
-           ref={_refTo}
+           refEl={_refTo}
            style={dateStyle}
            placeholder={placeholder}
            initialValue={initToDate}

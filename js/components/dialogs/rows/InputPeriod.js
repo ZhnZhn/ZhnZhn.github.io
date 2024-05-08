@@ -77,7 +77,7 @@ const InputPeriod = _ref => {
         style: labelStyle,
         children: fromCaption
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
-        ref: _refFrom,
+        refEl: _refFrom,
         style: dateStyle,
         placeholder: placeholder,
         initialValue: initFromDate,
@@ -90,7 +90,7 @@ const InputPeriod = _ref => {
         style: labelStyle,
         children: toCaption
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
-        ref: _refTo,
+        refEl: _refTo,
         style: dateStyle,
         placeholder: placeholder,
         initialValue: initToDate,

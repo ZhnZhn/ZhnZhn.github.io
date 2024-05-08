@@ -33,7 +33,7 @@ const RowDate = (props) => {
         {title}
      </SpanInputLabel>
      <DateField
-        ref={_refDate}
+        refEl={_refDate}
         initialValue={initialValue}
         errorMsg={errorMsg}
         onTest={onTest}

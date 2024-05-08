@@ -20,7 +20,7 @@ describe("DateField", () => {
   const _findInput = () => screen.findByRole('textbox');
   test('', async () => {
     const onEnter = jest.fn(),
-      ref = createRef(),
+      refEl = createRef(),
       initialValue = "2010-01-01"
       //1 Test render with initialValue
       ,
@@ -28,7 +28,7 @@ describe("DateField", () => {
         user,
         rerender
       } = setupUserEvent( /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
-        ref: ref,
+        refEl: refEl,
         initialValue: initialValue,
         onEnter: onEnter
       }));
@@ -53,16 +53,16 @@ describe("DateField", () => {
 
     //3 Test ref implementation interface
     //3.1
-    expect(ref.current.getValue()).toBe(initialValue);
+    expect(refEl.current.getValue()).toBe(initialValue);
     //3.2
     const _setValue = '2000-01-01';
-    act(() => ref.current.setValue(_setValue));
+    act(() => refEl.current.setValue(_setValue));
     input = await _findInput();
     expect(input).toHaveValue(_setValue);
     //3.3
-    expect(ref.current.isValid()).toBe(true);
+    expect(refEl.current.isValid()).toBe(true);
     //3.4
-    ref.current.focus();
+    refEl.current.focus();
     expect(input).toHaveFocus();
 
     //4 Test rerender with new initialValue

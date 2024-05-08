@@ -29,7 +29,7 @@ const RowDate = props => {
       style: (0, _crRowLabelStyle.default)(props),
       children: title
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
-      ref: _refDate,
+      refEl: _refDate,
       initialValue: initialValue,
       errorMsg: errorMsg,
       onTest: onTest

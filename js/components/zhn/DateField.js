@@ -14,8 +14,9 @@ var _jsxRuntime = require("react/jsx-runtime");
 const _crState = (value, errorInput, isValid) => [value, errorInput, isValid],
   _initState = value => _crState(value, null, true),
   DF_ON_TEST = () => true;
-const DateField = (0, _uiApi.forwardRef)((_ref, ref) => {
+const DateField = _ref => {
   let {
+    refEl,
     style,
     inputStyle,
     initialValue = '',
@@ -44,7 +45,7 @@ const DateField = (0, _uiApi.forwardRef)((_ref, ref) => {
       onDelete: () => setState(_initState(initialValue))
     }, [initialValue]);
   (0, _uiApi.useEffect)(() => setState(_initState(initialValue)), [initialValue]);
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValue: () => value,
     setValue: value => {
       if (onTest(value)) {
@@ -84,10 +85,11 @@ const DateField = (0, _uiApi.forwardRef)((_ref, ref) => {
       msg: errorInput
     })]
   });
-});
+};
 
 /*
  DateField.propTypes = {
+   refEl: PropTypes.ref,
    style: PropTypes.object,
    inputStyle: PropTypes.object,
    initialValue: PropTypes.string,

@@ -34,7 +34,7 @@ const DivCompareTo = _ref => {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanLabel, {
         children: "CompareTo:"
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
-        ref: refEl,
+        refEl: refEl,
         style: S_DATE_FIELD,
         initialValue: initialValue,
         placeholder: "DD-MM-YYYY",

@@ -1,6 +1,5 @@
 //import PropTypes from "prop-types";
 import {
-  forwardRef,
   useState,
   useRef,
   useEffect,
@@ -31,7 +30,8 @@ const _crState = (
 ) => _crState(value, null, true)
 , DF_ON_TEST = () => true;
 
-const DateField = forwardRef(({
+const DateField = ({
+  refEl,
   style,
   inputStyle,
   initialValue='',
@@ -42,7 +42,7 @@ const DateField = forwardRef(({
   errorMsg=null,
   onTest=DF_ON_TEST,
   onEnter
-}, ref) => {
+}) => {
   const _refInput = useRef(null)
   , [
     state,
@@ -76,7 +76,7 @@ const DateField = forwardRef(({
     [initialValue]
   )
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
     getValue: () => value,
     setValue: (value) => {
       if (onTest(value)) {
@@ -110,10 +110,11 @@ const DateField = forwardRef(({
       <ErrMsg msg={errorInput} />
     </div>
   );
-})
+}
 
 /*
  DateField.propTypes = {
+   refEl: PropTypes.ref,
    style: PropTypes.object,
    inputStyle: PropTypes.object,
    initialValue: PropTypes.string,
