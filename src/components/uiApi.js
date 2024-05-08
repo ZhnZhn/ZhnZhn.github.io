@@ -12,7 +12,6 @@ export {
   cloneElement,
   memo,
 
-  forwardRef,
   createContext,
   useContext,
   useRef,
