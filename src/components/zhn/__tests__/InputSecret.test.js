@@ -22,13 +22,13 @@ describe('InputSecret', () =>{
   //, _findInput = () => screen.findByPlaceholderText(placeholder);
   test('should render InputSecret with event handlers and ref', async ()=> {
     const onEnter = jest.fn()
-    , ref = createRef()
+    , refEl = createRef()
     //1 Test render
     , {
       user,
       rerender
     } = setupUserEvent(<InputSecret
-       ref={ref}
+       refEl={refEl}
        placeholder={placeholder}
        onEnter={onEnter}
     />);
@@ -55,18 +55,18 @@ describe('InputSecret', () =>{
     //4 Test ref implementation interface
     await user.type(input, _changeValue);
     //4.1
-    expect(ref.current.getValue()).toBe(_changeValue)
+    expect(refEl.current.getValue()).toBe(_changeValue)
     //4.2
-    act(() => ref.current.clear())
+    act(() => refEl.current.clear())
     expect(input).toHaveValue('')
-    expect(input.hasAttribute('value')).toBe(false)    
+    expect(input.hasAttribute('value')).toBe(false)
 
     //5 Test rerender without onEnter
     const _onEnterTimes = 2;
     await user.type(input, _changeValue);
     //5.1 Test render
     rerender(<InputSecret
-       ref={ref}
+       refEl={refEl}
        placeholder={placeholder}
     />)
     expect(input).toHaveValue(_changeValue)

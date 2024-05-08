@@ -1,5 +1,4 @@
 import {
-  forwardRef,
   useRef,
   useState,
   useCallback,
@@ -29,12 +28,13 @@ const S_DIV = {
 
 const _onEnter = () => {}
 
-const InputSecret = forwardRef(({
+const InputSecret = ({
+  refEl,
   name,
   placeholder,
   maxLength="32",
   onEnter=_onEnter
-}, ref) => {
+}) => {
   const _refInput = useRef()
   , _refEnter = useRef(() => '')
   , [
@@ -55,7 +55,7 @@ const InputSecret = forwardRef(({
 
   _refEnter.current = () => onEnter(value)
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
     getValue: () => value,
     clear: () => setValue('')
   }), [value])
@@ -90,6 +90,6 @@ const InputSecret = forwardRef(({
       />
     </div>
   );
-})
+};
 
 export default InputSecret

@@ -21,7 +21,7 @@ const RowSecret = ({
           </SpanInputLabel>
        }
        <InputSecret
-          ref={refEl}
+          refEl={refEl}
           {...rest}
        />
     </label>

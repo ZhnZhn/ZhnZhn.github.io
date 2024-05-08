@@ -25,7 +25,7 @@ const RowSecret = _ref => {
         style: titleStyle,
         children: title
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSecret.default, {
-        ref: refEl,
+        refEl: refEl,
         ...rest
       })]
     })

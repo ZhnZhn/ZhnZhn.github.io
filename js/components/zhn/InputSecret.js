@@ -24,8 +24,9 @@ const S_DIV = {
     fontWeight: 'bold'
   };
 const _onEnter = () => {};
-const InputSecret = (0, _uiApi.forwardRef)((_ref, ref) => {
+const InputSecret = _ref => {
   let {
+    refEl,
     name,
     placeholder,
     maxLength = "32",
@@ -46,7 +47,7 @@ const InputSecret = (0, _uiApi.forwardRef)((_ref, ref) => {
       }
     }, [onEnter]);
   _refEnter.current = () => onEnter(value);
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValue: () => value,
     clear: () => setValue('')
   }), [value]);
@@ -77,7 +78,6 @@ const InputSecret = (0, _uiApi.forwardRef)((_ref, ref) => {
       onKeyDown: _hKeyDown
     })]
   });
-});
-var _default = InputSecret;
-exports.default = _default;
+};
+var _default = exports.default = InputSecret;
 //# sourceMappingURL=InputSecret.js.map
