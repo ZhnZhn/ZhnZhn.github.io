@@ -1,6 +1,5 @@
 //import PropTypes from "prop-types";
 import {
-  forwardRef,
   useState,
   useMemo,
   useEffect,
@@ -51,7 +50,8 @@ const CL_CHART_ITEM = 'chart-item'
 const _IS_ANIMATE_REFLOW = isWideWidth()
 , MINI_CONFIGS_ID_PN = "btTitle";
 
-export const ChartItem = memoEqual(forwardRef(({
+export const ChartItem = memoEqual(({
+  refEl,
   caption,
 
   config,
@@ -68,7 +68,7 @@ export const ChartItem = memoEqual(forwardRef(({
   onShowConfigDialog,
   crValueMoving,
   onToTop
-}, ref) => {
+}) => {
   const {
     zhConfig,
     valueMoving,
@@ -144,7 +144,7 @@ export const ChartItem = memoEqual(forwardRef(({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
     compareTo,
     hideCaption,
     showCaption,
@@ -251,10 +251,11 @@ export const ChartItem = memoEqual(forwardRef(({
       </ShowHide>
     </div>
   );
-}))
+})
 
 /*
 static propTypes = {
+  refEl: PropTypes.ref,
   caption: PropTypes.string,
   chartType: PropTypes.string,
   config: PropTypes.shape({

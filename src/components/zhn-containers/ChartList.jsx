@@ -22,7 +22,7 @@ const ChartList = ({
        chartType,
        props: {
          isAdminMode,
-         ref: zhCompType
+         refEl: zhCompType
            ? void 0
            : bindTo(refChartFn, index),
          onCloseItem: () => onCloseItem(chartType, browserType, id)

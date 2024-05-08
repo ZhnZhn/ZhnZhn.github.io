@@ -47,8 +47,9 @@ const CL_CHART_ITEM = 'chart-item',
   };
 const _IS_ANIMATE_REFLOW = (0, _has.isWideWidth)(),
   MINI_CONFIGS_ID_PN = "btTitle";
-const ChartItem = exports.ChartItem = (0, _memoEqual.default)((0, _uiApi.forwardRef)((_ref, ref) => {
+const ChartItem = exports.ChartItem = (0, _memoEqual.default)(_ref => {
   let {
+    refEl,
     caption,
     config,
     onCloseItem,
@@ -118,7 +119,7 @@ const ChartItem = exports.ChartItem = (0, _memoEqual.default)((0, _uiApi.forward
   /*eslint-enable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     compareTo,
     hideCaption,
     showCaption,
@@ -212,10 +213,11 @@ const ChartItem = exports.ChartItem = (0, _memoEqual.default)((0, _uiApi.forward
       })]
     })]
   });
-}));
+});
 
 /*
 static propTypes = {
+  refEl: PropTypes.ref,
   caption: PropTypes.string,
   chartType: PropTypes.string,
   config: PropTypes.shape({
