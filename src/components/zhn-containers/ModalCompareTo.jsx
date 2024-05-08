@@ -47,7 +47,7 @@ const ModalCompareTo = ({
       onClose={onClose}
     >
       <DivCompareTo
-        ref={_refInput}
+        refEl={_refInput}
         msgErr={msgErr}
         onTest={isDmy}
         onEnter={_onEnterDateTo}

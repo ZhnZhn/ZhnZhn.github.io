@@ -114,7 +114,7 @@ const ValueMovingModal = (
       <RowValueDate value={valueTo} date={dateTo} />
       { _isCompareTo(isAdminMode, isDenyToChange)
         && <DivCompareTo
-         ref={_refInput}
+         refEl={_refInput}
          initialValue={dateTo}
          msgErr={msgDateTo}
          onTest={isDmy}

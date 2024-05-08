@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _SpanToken = require("../zhn/SpanToken");
 var _DateField = _interopRequireDefault(require("../zhn/DateField"));
 var _Input = require("../zhn/Input.Style");
@@ -21,8 +20,9 @@ const S_ROW_INPUT = {
   S_MT_6 = {
     marginTop: 6
   };
-const DivCompareTo = (0, _uiApi.forwardRef)((_ref, ref) => {
+const DivCompareTo = _ref => {
   let {
+    refEl,
     initialValue,
     msgErr,
     onTest,
@@ -34,7 +34,7 @@ const DivCompareTo = (0, _uiApi.forwardRef)((_ref, ref) => {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanLabel, {
         children: "CompareTo:"
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
-        ref: ref,
+        ref: refEl,
         style: S_DATE_FIELD,
         initialValue: initialValue,
         placeholder: "DD-MM-YYYY",
@@ -50,6 +50,6 @@ const DivCompareTo = (0, _uiApi.forwardRef)((_ref, ref) => {
       })
     })]
   });
-});
+};
 var _default = exports.default = DivCompareTo;
 //# sourceMappingURL=DivCompareTo.js.map

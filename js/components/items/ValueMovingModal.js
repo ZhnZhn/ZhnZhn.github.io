@@ -94,7 +94,7 @@ const ValueMovingModal = props => {
       value: valueTo,
       date: dateTo
     }), _isCompareTo(isAdminMode, isDenyToChange) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivCompareTo.default, {
-      ref: _refInput,
+      refEl: _refInput,
       initialValue: dateTo,
       msgErr: msgDateTo,
       onTest: _dateFn.isDmy,

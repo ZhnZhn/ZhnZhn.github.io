@@ -1,5 +1,3 @@
-import { forwardRef } from '../uiApi';
-
 import { SpanLabel } from '../zhn/SpanToken';
 import DateField from '../zhn/DateField';
 import {
@@ -21,18 +19,19 @@ const S_ROW_INPUT = {
   marginTop: 6
 };
 
-const DivCompareTo = forwardRef(({
+const DivCompareTo = ({
+  refEl,
   initialValue,
   msgErr,
   onTest,
   onEnter
-}, ref) => (
+}) => (
   <div>
    {/* eslint-disable jsx-a11y/label-has-associated-control */ }
    <label style={S_ROW_INPUT} >
      <SpanLabel>CompareTo:</SpanLabel>
      <DateField
-       ref={ref}
+       ref={refEl}
        style={S_DATE_FIELD}
        initialValue={initialValue}
        placeholder="DD-MM-YYYY"
@@ -49,6 +48,6 @@ const DivCompareTo = forwardRef(({
      </div>
    }
  </div>
-));
+);
 
 export default DivCompareTo

@@ -33,7 +33,7 @@ const ModalCompareTo = _ref => {
     _onEnterDateTo = (0, _uiApi.useCallback)(dateTo => {
       if ((0, _dateFn.isDmy)(dateTo)) {
         const _r = onCompareTo(dateTo),
-          _msgErr = _r !== 0 ? `No ${_r} data for ${dateTo}` : '';
+          _msgErr = _r !== 0 ? "No " + _r + " data for " + dateTo : '';
         setMsgErr(_msgErr);
       }
     }, [onCompareTo]);
@@ -42,7 +42,7 @@ const ModalCompareTo = _ref => {
     style: S_MODAL_POPUP,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivCompareTo.default, {
-      ref: _refInput,
+      refEl: _refInput,
       msgErr: msgErr,
       onTest: _dateFn.isDmy,
       onEnter: _onEnterDateTo
