@@ -1,6 +1,5 @@
 //import PropTypes from "prop-types";
 import {
-  forwardRef,
   useState,
   useMemo,
   useImperativeHandle
@@ -76,11 +75,12 @@ const DF_VALUE_MOVING = {
   date: ''
 };
 
-const ValueMovingBadge = forwardRef(({
+const ValueMovingBadge = ({
+  refEl,
   isAdminMode,
   initialVm=DF_VALUE_MOVING,
   crValueMoving
-}, ref) => {
+}) => {
   const [
     vm,
     setVm
@@ -104,7 +104,7 @@ const ValueMovingBadge = forwardRef(({
   //crValueMoving
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
     _updateDateTo
   }), [_updateDateTo])
 
@@ -137,7 +137,7 @@ const ValueMovingBadge = forwardRef(({
        >
          <SpanDate style={S_DATE}>
            {_date}
-         </SpanDate>            
+         </SpanDate>
        </Button>
        {
          _svgDirection && <ValueMovingModal
@@ -150,10 +150,11 @@ const ValueMovingBadge = forwardRef(({
        }
     </span>
   );
-});
+};
 
 /*
 ValueMovingBadge.propTypes = {
+  refEl: PropTypes.ref,
   valueMoving: PropTypes.shape({
     value: PropTypes.number,
     delta: PropTypes.number,

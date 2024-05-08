@@ -138,7 +138,7 @@ const Header = ({
       {
         valueMoving
           ? <ValueMovingBadge
-              ref={refVm}
+              refEl={refVm}
               isAdminMode={isAdminMode}
               initialVm={valueMoving}
               crValueMoving={crValueMoving}

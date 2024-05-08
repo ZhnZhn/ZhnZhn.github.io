@@ -110,7 +110,7 @@ const Header = _ref2 => {
       onClick: onToggle,
       children: itemCaption
     }), valueMoving ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingBadge.default, {
-      ref: refVm,
+      refEl: refVm,
       isAdminMode: isAdminMode,
       initialVm: valueMoving,
       crValueMoving: crValueMoving

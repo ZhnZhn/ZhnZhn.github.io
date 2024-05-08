@@ -54,8 +54,9 @@ const DF_VALUE_MOVING = {
   direction: _DirectionType.DT_EQUAL,
   date: ''
 };
-const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref, ref) => {
+const ValueMovingBadge = _ref => {
   let {
+    refEl,
     isAdminMode,
     initialVm = DF_VALUE_MOVING,
     crValueMoving
@@ -71,7 +72,7 @@ const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref, ref) => {
   //crValueMoving
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     _updateDateTo
   }), [_updateDateTo]);
   const {
@@ -112,10 +113,11 @@ const ValueMovingBadge = (0, _uiApi.forwardRef)((_ref, ref) => {
       onClose: _closeModal
     })]
   });
-});
+};
 
 /*
 ValueMovingBadge.propTypes = {
+  refEl: PropTypes.ref,
   valueMoving: PropTypes.shape({
     value: PropTypes.number,
     delta: PropTypes.number,
