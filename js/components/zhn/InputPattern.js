@@ -44,8 +44,9 @@ const _crBtClearStyle = isValid => ({
 });
 const DF_ON_TEST = () => true,
   DF_ON_CLEAR = () => {};
-const InputPattern = (0, _uiApi.forwardRef)((_ref, ref) => {
+const InputPattern = (_ref, ref) => {
   let {
+    refEl,
     style,
     inputStyle,
     maxLength = 64,
@@ -98,7 +99,7 @@ const InputPattern = (0, _uiApi.forwardRef)((_ref, ref) => {
 
   _refGetValue.current = () => (value || '').trim();
   _refIsValid.current = () => onTest(value);
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValue: () => _refGetValue.current(),
     isValid: () => _refIsValid.current(),
     focus: () => (0, _uiApi.focusRefElement)(_refInput),
@@ -145,10 +146,11 @@ const InputPattern = (0, _uiApi.forwardRef)((_ref, ref) => {
       msg: errorInput
     })]
   });
-});
+};
 
 /*
 InputPattern.propTypes = {
+  refEl: PropTypes.refEl,
   style: PropTypes.object,
   inputStyle: PropTypes.object,
   initValue: PropTypes.string,

@@ -1,6 +1,5 @@
 //import PropTypes from "prop-types";
 import {
-  forwardRef,
   useState,
   useRef,
   useCallback,
@@ -57,7 +56,8 @@ const _crBtClearStyle = (isValid) => ({
 const DF_ON_TEST = () => true
 , DF_ON_CLEAR = () => {};
 
-const InputPattern = forwardRef(({
+const InputPattern = ({
+  refEl,
   style,
   inputStyle,
   maxLength=64,
@@ -116,7 +116,7 @@ const InputPattern = forwardRef(({
   _refGetValue.current = () => (value || '').trim()
   _refIsValid.current = () => onTest(value)
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
     getValue: () => _refGetValue.current(),
     isValid: () =>_refIsValid.current(),
     focus: () => focusRefElement(_refInput),
@@ -161,10 +161,11 @@ const InputPattern = forwardRef(({
       <ErrMsg msg={errorInput} />
     </div>
   );
-})
+}
 
 /*
 InputPattern.propTypes = {
+  refEl: PropTypes.refEl,
   style: PropTypes.object,
   inputStyle: PropTypes.object,
   initValue: PropTypes.string,

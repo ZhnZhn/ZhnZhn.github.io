@@ -21,7 +21,7 @@ const RowPattern = ({
        {caption}
     </SpanInputLabel>
     <InputPattern
-       ref={refEl}
+       refEl={refEl}
        {...inputPatternProps}
     />
   </RowFlex>

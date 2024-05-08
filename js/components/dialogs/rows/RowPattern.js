@@ -24,7 +24,7 @@ const RowPattern = _ref => {
       }),
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPattern.default, {
-      ref: refEl,
+      refEl: refEl,
       ...inputPatternProps
     })]
   });

@@ -24,7 +24,7 @@ describe("InputPattern", () => {
     const onEnter = jest.fn(),
       onClear = jest.fn(),
       onTest = jest.fn(str => str.length < 4),
-      ref = createRef(),
+      refEl = createRef(),
       initValue = "abc"
       //1 Test render
       ,
@@ -32,7 +32,7 @@ describe("InputPattern", () => {
         user,
         rerender
       } = setupUserEvent( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPattern.default, {
-        ref: ref,
+        refEl: refEl,
         initValue: initValue,
         onTest: onTest,
         onEnter: onEnter,
@@ -71,17 +71,17 @@ describe("InputPattern", () => {
 
     //3 Test ref implementation interface
     //3.1
-    expect(ref.current.getValue()).toBe(initValue);
+    expect(refEl.current.getValue()).toBe(initValue);
     //3.2
-    expect(ref.current.isValid()).toBe(true);
+    expect(refEl.current.isValid()).toBe(true);
     expect(onTest).toHaveBeenCalledTimes(_onTestCalledTimes + 1);
     expect(onTest.mock.calls[_recentOnTestCalledIndex + 1][0]).toBe(initValue);
     //3.3
-    ref.current.focus();
+    refEl.current.focus();
     expect(input).toHaveFocus();
     //3.4
-    act(() => ref.current.showErrMsg());
-    expect(ref.current.isValid()).toBe(true);
+    act(() => refEl.current.showErrMsg());
+    expect(refEl.current.isValid()).toBe(true);
 
     //4 Test rerender with new initValue without optional handlers
     const _initValue = "abcde";
