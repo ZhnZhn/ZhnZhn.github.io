@@ -25,7 +25,7 @@ const RowInputText = ({
        {caption}
      </SpanInputLabel>
      <InputText
-        ref={refEl}
+        refEl={refEl}
         style={S_INPUT_TEXT}
      />
   </RowFlex>

@@ -42,7 +42,7 @@ const RowInputText = ({
           {_caption}
         </span>
         <InputText
-           ref={refEl}
+           refEl={refEl}
            style={_inputStyle}
            {...restProps}
         />

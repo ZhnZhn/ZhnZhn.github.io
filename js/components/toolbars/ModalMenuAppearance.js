@@ -60,11 +60,11 @@ const ModalMenuAppearance = _ref => {
         onCheck: _enableCategoryLabels,
         onUnCheck: _disableCategoryLabels
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCaptionInput.default, {
+        refEl: _refPointWidth,
         caption: "Point Width",
         isBtAdd: false,
         style: S_ROW_INPUT,
         captionStyle: S_CAPTION_STYLE,
-        forwardRef: _refPointWidth,
         initValue: 4,
         maxLength: 2,
         onAdd: _onPointWidth

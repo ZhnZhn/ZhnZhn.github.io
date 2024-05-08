@@ -1,7 +1,6 @@
 //import PropTypes from "prop-types";
 import {
   isNumber,
-  forwardRef,
   useState,
   useRef,
   useEffect,
@@ -38,29 +37,29 @@ const _initValue = initialValue => initialValue != null
   ? initialValue
   : BLANK
 
-const _isMinMaxNumber = ({
+const _isMinMaxNumber = (
   type,
   min,
   max
-}) => type === 'number'
+) => type === 'number'
  && isNumber(min)
  && isNumber(max);
 
-const InputText = forwardRef((props, ref) => {
-  const {
-    initValue,
-    style,
-    type,
-    spellCheck,
-    placeholder,
-    maxLength=125,
-    min,
-    max,
-    step,
-    onChange=FN_NOOP,
-    onEnter
-  } = props
-  , [
+const InputText = ({
+  refEl,
+  initValue,
+  style,
+  type,
+  spellCheck,
+  placeholder,
+  maxLength=125,
+  min,
+  max,
+  step,
+  onChange=FN_NOOP,
+  onEnter
+}) => {
+  const [
     value,
     setValue
   ] = useState(() => _initValue(initValue))
@@ -83,7 +82,7 @@ const InputText = forwardRef((props, ref) => {
     [initValue]
   )
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(refEl, () => ({
     getValue: () => (''+value).trim(),
     setValue,
     focus: () => focusRefElement(_refInput)
@@ -95,7 +94,7 @@ const InputText = forwardRef((props, ref) => {
   ] = spellCheck
     ? ["on", "true"]
     : ["off", "false"]
-  , _className = _isMinMaxNumber(props)
+  , _className = _isMinMaxNumber(type, min, max)
        ? CL_NUMBER_RANGE
        : void 0;
   return (
@@ -120,10 +119,11 @@ const InputText = forwardRef((props, ref) => {
       onKeyDown={_hKeyDown}
     />
   );
-})
+}
 
 /*
  InputText.propTypes = {
+   refEl: PropTypes.ref,
    style: PropTypes.object,
    initValue: PropTypes.string,
    type: PropTypes.string,

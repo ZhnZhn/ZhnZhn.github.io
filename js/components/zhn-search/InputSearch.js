@@ -87,7 +87,7 @@ const InputSearch = _ref => {
     role: "textbox",
     onKeyDown: onKeyDown,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
-      ref: refInput,
+      refEl: refInput,
       style: S_INPUT,
       initValue: ticket,
       onChange: onInputChange,

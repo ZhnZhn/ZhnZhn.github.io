@@ -53,7 +53,7 @@ const RowMfi = ({
   };
   return (
     <RowType2
-      forwardRef={_refPeriod}
+      refEl={_refPeriod}
       caption="MFI"
       initValue={30}
       configs={mfiConfs}

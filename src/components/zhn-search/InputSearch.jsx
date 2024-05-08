@@ -117,7 +117,7 @@ const InputSearch = ({
       onKeyDown={onKeyDown}
     >
       <InputText
-        ref={refInput}
+        refEl={refInput}
         key={inputKey}
         style={S_INPUT}
         initValue={ticket}

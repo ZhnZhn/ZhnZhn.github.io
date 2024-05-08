@@ -16,7 +16,7 @@ const S_CAPTION = {
 };
 
 const RowTypeB = ({
-  forwardRef,
+  refEl,
   caption,
   initValue,
   min,
@@ -37,7 +37,7 @@ const RowTypeB = ({
         {caption}
       </SpanBlack>
       <InputText
-         ref={forwardRef}
+         refEl={refEl}
          type="number"
          style={S_INPUT_TEXT}
          initValue={initValue}

@@ -31,7 +31,7 @@ const RowInputText = _ref => {
       style: S_CAPTION,
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
-      ref: refEl,
+      refEl: refEl,
       style: S_INPUT_TEXT
     })]
   });

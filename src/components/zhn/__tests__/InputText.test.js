@@ -16,18 +16,18 @@ const {
   getFnParameter
 } = zhnUtils;
 
-describe("InputText", () => {  
+describe("InputText", () => {
   test('should render InputText with event handlers and ref', async ()=>{
     const initValue = 'abc'
     , onEnter = jest.fn()
     , onChange = jest.fn()
-    , ref = createRef()
+    , refEl = createRef()
     //1 Test render
     , {
       user,
       rerender
     } = setupUserEvent(<InputText
-       ref={ref}
+       refEl={refEl}
        initValue={initValue}
        onChange={onChange}
        onEnter={onEnter}
@@ -55,12 +55,12 @@ describe("InputText", () => {
 
     //3 Test ref implementation interface
     //3.1
-    expect(ref.current.getValue()).toBe(_changeValue)
+    expect(refEl.current.getValue()).toBe(_changeValue)
     //3.2
-    act(() => ref.current.setValue('a'))
+    act(() => refEl.current.setValue('a'))
     expect(input).toHaveValue('a')
     //3.3
-    ref.current.focus()
+    refEl.current.focus()
     expect(input).toHaveFocus()
 
     //4 Test rerender with new initValue without optional handlers

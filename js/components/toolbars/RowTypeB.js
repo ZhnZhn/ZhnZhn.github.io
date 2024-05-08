@@ -19,7 +19,7 @@ const S_CAPTION = {
   };
 const RowTypeB = _ref => {
   let {
-    forwardRef,
+    refEl,
     caption,
     initValue,
     min,
@@ -36,7 +36,7 @@ const RowTypeB = _ref => {
       style: S_CAPTION,
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
-      ref: forwardRef,
+      refEl: refEl,
       type: "number",
       style: S_INPUT_TEXT,
       initValue: initValue,

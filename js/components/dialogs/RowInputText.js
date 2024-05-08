@@ -57,7 +57,7 @@ const RowInputText = _ref => {
         style: _captionStyle,
         children: _caption
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
-        ref: refEl,
+        refEl: refEl,
         style: _inputStyle,
         ...restProps
       })]

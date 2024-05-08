@@ -18,11 +18,11 @@ const S_CAPTION = {
   };
 const RowCaptionInput = _ref => {
   let {
+    refEl,
     isBtAdd = true,
     style,
     captionStyle,
     caption,
-    forwardRef,
     initValue,
     maxLength = 3,
     onAdd
@@ -36,7 +36,7 @@ const RowCaptionInput = _ref => {
       },
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
-      ref: forwardRef,
+      refEl: refEl,
       type: "number",
       style: S_INPUT_TEXT,
       initValue: initValue,

@@ -26,29 +26,23 @@ const BLANK = '',
   OFF = "off",
   FN_NOOP = () => {};
 const _initValue = initialValue => initialValue != null ? initialValue : BLANK;
-const _isMinMaxNumber = _ref => {
+const _isMinMaxNumber = (type, min, max) => type === 'number' && (0, _uiApi.isNumber)(min) && (0, _uiApi.isNumber)(max);
+const InputText = _ref => {
   let {
+    refEl,
+    initValue,
+    style,
     type,
+    spellCheck,
+    placeholder,
+    maxLength = 125,
     min,
-    max
+    max,
+    step,
+    onChange = FN_NOOP,
+    onEnter
   } = _ref;
-  return type === 'number' && (0, _uiApi.isNumber)(min) && (0, _uiApi.isNumber)(max);
-};
-const InputText = (0, _uiApi.forwardRef)((props, ref) => {
-  const {
-      initValue,
-      style,
-      type,
-      spellCheck,
-      placeholder,
-      maxLength = 125,
-      min,
-      max,
-      step,
-      onChange = FN_NOOP,
-      onEnter
-    } = props,
-    [value, setValue] = (0, _uiApi.useState)(() => _initValue(initValue)),
+  const [value, setValue] = (0, _uiApi.useState)(() => _initValue(initValue)),
     _refInput = (0, _uiApi.useRef)(),
     _hChange = event => {
       const {
@@ -64,13 +58,13 @@ const InputText = (0, _uiApi.forwardRef)((props, ref) => {
       onDelete: () => setValue(BLANK)
     }, [onEnter]);
   (0, _uiApi.useEffect)(() => setValue(_initValue(initValue)), [initValue]);
-  (0, _uiApi.useImperativeHandle)(ref, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValue: () => ('' + value).trim(),
     setValue,
     focus: () => (0, _uiApi.focusRefElement)(_refInput)
   }), [value]);
   const [_autoCorrect, _spellCheck] = spellCheck ? ["on", "true"] : ["off", "false"],
-    _className = _isMinMaxNumber(props) ? CL_NUMBER_RANGE : void 0;
+    _className = _isMinMaxNumber(type, min, max) ? CL_NUMBER_RANGE : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
     ref: _refInput,
     className: _className,
@@ -94,10 +88,11 @@ const InputText = (0, _uiApi.forwardRef)((props, ref) => {
     onChange: _hChange,
     onKeyDown: _hKeyDown
   });
-});
+};
 
 /*
  InputText.propTypes = {
+   refEl: PropTypes.ref,
    style: PropTypes.object,
    initValue: PropTypes.string,
    type: PropTypes.string,

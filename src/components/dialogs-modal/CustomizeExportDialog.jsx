@@ -189,7 +189,7 @@ const CustomizeExportDialog = memoIsShow(({
             <span style={S_LABEL}>Dimension:</span>
             <span style={S_LABEL_WIDTH}>Width</span>
             <InputText
-              ref={_refInputWidth}
+              refEl={_refInputWidth}
               type="number"
               placeholder={chartWidth}
               initValue={chartWidth}
@@ -199,7 +199,7 @@ const CustomizeExportDialog = memoIsShow(({
             />
             <span style={S_LABEL_WIDTH}>Height</span>
             <InputText
-              ref={_refInputHeight}
+              refEl={_refInputHeight}
               type="number"
               placeholder={chartHeight}
               initValue={chartHeight}
@@ -213,7 +213,7 @@ const CustomizeExportDialog = memoIsShow(({
          <RowFlex style={S_MT_10}>
            <span style={S_LABEL}>Title</span>
            <InputText
-             ref={_refInputTitle}
+             refEl={_refInputTitle}
              initValue={title}
              style={S_INPUT_TEXT}
            />
@@ -221,7 +221,7 @@ const CustomizeExportDialog = memoIsShow(({
          <RowFlex>
            <span style={S_LABEL}>Subtitle</span>
            <InputText
-             ref={_refInputSubtitle}
+             refEl={_refInputSubtitle}
              initValue={subtitle}
              style={S_INPUT_TEXT}
            />

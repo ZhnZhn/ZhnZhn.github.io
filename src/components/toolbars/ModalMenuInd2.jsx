@@ -64,7 +64,7 @@ const ModalMenuInd2 = ({
            getChart={getChart}
         />
         {_hasPowerBy10 && <RowTypeB
-           forwardRef={_refPowerBy10}
+           refEl={_refPowerBy10}
            caption="S1*Power of 10"
            initValue={DF_POWER_BY_10}
            min={-9}

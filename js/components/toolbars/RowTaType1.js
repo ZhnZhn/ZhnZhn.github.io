@@ -45,7 +45,7 @@ const RowTaType1 = _ref => {
       }
     };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowType.default, {
-    forwardRef: _refPeriodInput,
+    refEl: _refPeriodInput,
     caption: caption,
     initValue: _initialTaPeriod,
     configs: taConfs,
@@ -53,6 +53,5 @@ const RowTaType1 = _ref => {
     onRemove: _onRemoveTa
   });
 };
-var _default = RowTaType1;
-exports.default = _default;
+var _default = exports.default = RowTaType1;
 //# sourceMappingURL=RowTaType1.js.map

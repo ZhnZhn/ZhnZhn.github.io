@@ -69,11 +69,11 @@ const ModalMenuAppearance = ({
           onUnCheck={_disableCategoryLabels}
         />
         <RowCaptionInput
+          refEl={_refPointWidth}
           caption="Point Width"
           isBtAdd={false}
           style={S_ROW_INPUT}
-          captionStyle={S_CAPTION_STYLE}
-          forwardRef={_refPointWidth}
+          captionStyle={S_CAPTION_STYLE}          
           initValue={4}
           maxLength={2}
           onAdd={_onPointWidth}

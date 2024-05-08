@@ -14,11 +14,11 @@ S_INPUT_TEXT = {
 };
 
 const RowCaptionInput = ({
+  refEl,
   isBtAdd=true,
   style,
   captionStyle,
   caption,
-  forwardRef,
   initValue,
   maxLength=3,
   onAdd
@@ -30,7 +30,7 @@ const RowCaptionInput = ({
       {caption}
     </SpanBlack>
     <InputText
-       ref={forwardRef}
+       refEl={refEl}
        type="number"
        style={S_INPUT_TEXT}
        initValue={initValue}

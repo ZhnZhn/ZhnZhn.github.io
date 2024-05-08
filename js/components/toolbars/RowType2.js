@@ -1,19 +1,14 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _RowCaptionInput = _interopRequireDefault(require("./RowCaptionInput"));
-
 var _SeriaConfigs = _interopRequireDefault(require("./SeriaConfigs"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const RowType2 = _ref => {
   let {
-    forwardRef,
+    refEl,
     caption,
     initValue,
     configs,
@@ -22,8 +17,8 @@ const RowType2 = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCaptionInput.default, {
+      refEl: refEl,
       caption: caption,
-      forwardRef: forwardRef,
       initValue: initValue,
       onAdd: onAdd
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SeriaConfigs.default, {
@@ -32,7 +27,5 @@ const RowType2 = _ref => {
     })]
   });
 };
-
-var _default = RowType2;
-exports.default = _default;
+var _default = exports.default = RowType2;
 //# sourceMappingURL=RowType2.js.map

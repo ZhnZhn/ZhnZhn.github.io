@@ -38,7 +38,7 @@ const RowMfi = _ref => {
       setMfiConfs(mfiConfs.filter(d => d.id !== id));
     };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowType.default, {
-    forwardRef: _refPeriod,
+    refEl: _refPeriod,
     caption: "MFI",
     initValue: 30,
     configs: mfiConfs,
@@ -46,6 +46,5 @@ const RowMfi = _ref => {
     onRemove: _onRemoveMfi
   });
 };
-var _default = RowMfi;
-exports.default = _default;
+var _default = exports.default = RowMfi;
 //# sourceMappingURL=RowMfi.js.map

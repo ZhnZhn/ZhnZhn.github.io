@@ -2,7 +2,7 @@ import RowCaptionInput from './RowCaptionInput';
 import SeriaConfigs from './SeriaConfigs';
 
 const RowType2 = ({
-  forwardRef,
+  refEl,
   caption,
   initValue,
   configs,
@@ -11,8 +11,8 @@ const RowType2 = ({
 }) => (
   <>
     <RowCaptionInput
+      refEl={refEl}
       caption={caption}
-      forwardRef={forwardRef}
       initValue={initValue}
       onAdd={onAdd}
     />

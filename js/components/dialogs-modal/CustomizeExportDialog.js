@@ -162,7 +162,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
           style: S_LABEL_WIDTH,
           children: "Width"
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
-          ref: _refInputWidth,
+          refEl: _refInputWidth,
           type: "number",
           placeholder: chartWidth,
           initValue: chartWidth,
@@ -173,7 +173,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
           style: S_LABEL_WIDTH,
           children: "Height"
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
-          ref: _refInputHeight,
+          refEl: _refInputHeight,
           type: "number",
           placeholder: chartHeight,
           initValue: chartHeight,
@@ -190,7 +190,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
           style: S_LABEL,
           children: "Title"
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
-          ref: _refInputTitle,
+          refEl: _refInputTitle,
           initValue: title,
           style: S_INPUT_TEXT
         })]
@@ -199,7 +199,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
           style: S_LABEL,
           children: "Subtitle"
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
-          ref: _refInputSubtitle,
+          refEl: _refInputSubtitle,
           initValue: subtitle,
           style: S_INPUT_TEXT
         })]

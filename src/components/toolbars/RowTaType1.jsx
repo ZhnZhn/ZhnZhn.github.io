@@ -56,7 +56,7 @@ const RowTaType1 = ({
 
   return (
     <RowType2
-      forwardRef={_refPeriodInput}
+      refEl={_refPeriodInput}
       caption={caption}
       initValue={_initialTaPeriod}
       configs={taConfs}
