@@ -51,22 +51,26 @@ const _crT3C = _ref2 => {
   let [oneCaption] = _ref2;
   return [..._crT2(), ..._crColumBarItems(oneCaption)];
 };
+const _crT3C2 = _ref3 => {
+  let [oneCaption, twoCaption] = _ref3;
+  return [..._crT3C([oneCaption]), ..._crColumBarItems(twoCaption)];
+};
 const _crT3CA = () => _crT3C(["Dim"]);
-const _crT3B = (_ref3, mapFrequency) => {
-  let [oneCaption] = _ref3;
+const _crT3B = (_ref4, mapFrequency) => {
+  let [oneCaption] = _ref4;
   return [_crItem(_crDfConfig(SPLINE_CONFIG)), _crYearlyByMonthItem(mapFrequency), ..._crColumBarClusterItems(oneCaption)];
 };
 const _crTreeMapItem = (caption, id) => _crItem(["TreeMap: By " + caption, _ChartType.CHT_TREE_MAP, caption, void 0, id]);
-const _crT3A = _ref4 => {
-  let [oneCaption] = _ref4;
+const _crT3A = _ref5 => {
+  let [oneCaption] = _ref5;
   return [..._crT3([oneCaption]), _crTreeMapItem(oneCaption), _crItem(["TreeMap: By " + oneCaption + ": Cluster", _ChartType.CHT_TREE_MAP_CLUSTER, oneCaption])];
 };
-const _crT3AB = _ref5 => {
-  let [oneCaption, twoCaption] = _ref5;
+const _crT3AB = _ref6 => {
+  let [oneCaption, twoCaption] = _ref6;
   return [..._crT3([oneCaption]), _crTreeMapItem(twoCaption, _ChartOptionsTypes.TYPE_T3AB)];
 };
-const _crT3A2 = _ref6 => {
-  let [oneCaption] = _ref6;
+const _crT3A2 = _ref7 => {
+  let [oneCaption] = _ref7;
   return [..._crT3A([oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Depth 2", _ChartType.CHT_TREE_MAP_2, oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Depth 2: Cluster", _ChartType.CHT_TREE_MAP_2_CLUSTER, oneCaption])];
 };
 const _r = {
@@ -82,16 +86,17 @@ const _r = {
   t3b: _crT3B,
   [_ChartOptionsTypes.TYPE_T3AB]: _crT3AB,
   t3c: _crT3C,
+  t3c2: _crT3C2,
   t3ca: _crT3CA,
   df3: _crDF3
 };
-const _crCaptions = _ref7 => {
+const _crCaptions = _ref8 => {
   let {
     configs,
     selectProps,
     oneCaption = BLANK_CAPTION,
     twoCaption = BLANK_CAPTION
-  } = _ref7;
+  } = _ref8;
   const _arr = configs || selectProps;
   return _isArr(_arr) ? _arr.map(item => item.caption || BLANK_CAPTION) : [oneCaption, twoCaption];
 };

@@ -143,6 +143,10 @@ const _crT3C = ([oneCaption]) => [
   ..._crT2(),
   ..._crColumBarItems(oneCaption)
 ];
+const _crT3C2 = ([oneCaption, twoCaption]) => [
+  ..._crT3C([oneCaption]),
+  ..._crColumBarItems(twoCaption)
+];
 const _crT3CA = () => _crT3C(["Dim"])
 
 const _crT3B = (
@@ -189,6 +193,7 @@ const _r = {
   t3b: _crT3B,
   [TYPE_T3AB]: _crT3AB,
   t3c: _crT3C,
+  t3c2: _crT3C2,
   t3ca: _crT3CA,
   df3: _crDF3
 };
