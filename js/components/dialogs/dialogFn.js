@@ -4,7 +4,7 @@ exports.__esModule = true;
 exports.getItemValue = exports.crMsgs = exports.crIsToggleInit = exports.crIsId = void 0;
 var _ChartOptionsFn = require("./ChartOptionsFn");
 var _ChartOptionsTypes = require("./ChartOptionsTypes");
-const crIsId = id => `is${id}Select`;
+const crIsId = id => "is" + id + "Select";
 exports.crIsId = crIsId;
 const crIsToggleInit = selectProps => selectProps.reduce((toggleConfig, item) => {
   toggleConfig[crIsId(item.id)] = true;
@@ -27,6 +27,18 @@ const _crMsgs = function (items, selectProps, msgOnNotSelected, isItem) {
     return msgs;
   }, []);
 };
-const crMsgs = (chartType, items, selectProps, msgOnNotSelected) => _crMsgs(items, selectProps, msgOnNotSelected, _isChartTypeT3AB(chartType) ? i => i !== 1 : (0, _ChartOptionsFn.isCategoryItem)(chartType) ? i => i !== 0 : void 0);
+const _fIsItem = (chartType, selectProps) => {
+  const dfIsItem = i => i !== 0,
+    {
+      dim
+    } = chartType;
+  if (dim) {
+    const dimIndex = selectProps.findIndex(item => item.caption === dim);
+    return dimIndex !== -1 ? i => i !== dimIndex : dfIsItem;
+  }
+  return dfIsItem;
+};
+const _crIsItem = (chartType, selectProps) => _isChartTypeT3AB(chartType) ? i => i !== 1 : (0, _ChartOptionsFn.isCategoryItem)(chartType) ? _fIsItem(chartType, selectProps) : void 0;
+const crMsgs = (chartType, items, selectProps, msgOnNotSelected) => _crMsgs(items, selectProps, msgOnNotSelected, _crIsItem(chartType, selectProps));
 exports.crMsgs = crMsgs;
 //# sourceMappingURL=dialogFn.js.map

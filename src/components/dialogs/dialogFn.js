@@ -41,6 +41,31 @@ const _crMsgs = (
     return msgs;
   }, []);
 
+const _fIsItem = (
+  chartType,
+  selectProps
+) => {
+  const dfIsItem = i => i !== 0
+  , { dim } = chartType;
+  if (dim) {
+    const dimIndex = selectProps
+      .findIndex(item => item.caption === dim)
+    return dimIndex !== -1
+      ? i => i !== dimIndex
+      : dfIsItem
+  }
+  return dfIsItem;
+}
+
+const _crIsItem = (
+  chartType,
+  selectProps
+) => _isChartTypeT3AB(chartType)
+  ? i => i !== 1
+  : isCategoryItem(chartType)
+     ? _fIsItem(chartType, selectProps)
+     : void 0
+
 export const crMsgs = (
   chartType,
   items,
@@ -50,9 +75,5 @@ export const crMsgs = (
   items,
   selectProps,
   msgOnNotSelected,
-  _isChartTypeT3AB(chartType)
-    ? i => i !== 1
-    : isCategoryItem(chartType)
-       ? i => i !== 0
-       : void 0
+  _crIsItem(chartType, selectProps)
 )
