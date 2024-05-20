@@ -25,7 +25,7 @@ const crSirQuery = option => {
   return {
     method: "POST",
     headers: {
-     'Content-Type': "application/json",
+     'Content-Type': "text/plain; charset=UTF-8",
     },
     body: JSON.stringify({
       query,
