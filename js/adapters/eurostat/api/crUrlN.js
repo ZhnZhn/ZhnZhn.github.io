@@ -30,11 +30,12 @@ const _crItems = _ref2 => {
   let {
     seriaType,
     dfC,
+    dfCmx,
     items,
     time
   } = _ref2;
   if ((0, _apiFn.isCategory)(seriaType)) {
-    const _filterItemsBy = dfC ? item => Boolean(item) && item.id !== dfC : _notEmptyOrGeo,
+    const _filterItemsBy = dfC ? item => Boolean(item) && item.id !== dfC : dfCmx ? item => item : _notEmptyOrGeo,
       _items = items.filter(_filterItemsBy);
     return (0, _apiFn.isMap)(seriaType) ? _items : _items.concat([{
       id: 'time',

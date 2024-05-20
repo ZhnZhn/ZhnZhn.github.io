@@ -109,11 +109,18 @@ export const createGeoSlice = (
       _sGeo = ds.Data({...configSlice, ...{ time } })
     }
   }
+  const geoDim = ds.Dimension("geo")
+  , reporterDim = ds.Dimension("reporter")
+  , partnerDim = ds.Dimension("partner");
 
   return {
-    dGeo: ds.Dimension("geo")
-     || ds.Dimension("reporter")
-     || { id: [] },
+    dGeo: geoDim
+      ? geoDim
+      : reporterDim && reporterDim.length !== 1
+          ? reporterDim
+          : partnerDim
+              ? partnerDim
+              : reporterDim || { id: [] },     
     sGeo: _sGeo || [],
     time
   };

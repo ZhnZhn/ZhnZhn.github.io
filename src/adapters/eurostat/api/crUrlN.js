@@ -42,13 +42,16 @@ const _notEmptyOrGeo = (
 const _crItems = ({
   seriaType,
   dfC,
+  dfCmx,
   items,
   time
 }) => {
   if (isCategory(seriaType)) {
     const _filterItemsBy = dfC
       ? item => Boolean(item) && item.id !== dfC
-      : _notEmptyOrGeo
+      : dfCmx
+         ? item => item
+         : _notEmptyOrGeo
     , _items = items.filter(_filterItemsBy);
     return isMap(seriaType)
       ? _items

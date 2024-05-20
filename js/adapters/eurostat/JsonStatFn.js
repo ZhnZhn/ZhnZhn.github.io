@@ -115,8 +115,11 @@ const createGeoSlice = function (json, configSlice, dfTime) {
       });
     }
   }
+  const geoDim = ds.Dimension("geo"),
+    reporterDim = ds.Dimension("reporter"),
+    partnerDim = ds.Dimension("partner");
   return {
-    dGeo: ds.Dimension("geo") || ds.Dimension("reporter") || {
+    dGeo: geoDim ? geoDim : reporterDim && reporterDim.length !== 1 ? reporterDim : partnerDim ? partnerDim : reporterDim || {
       id: []
     },
     sGeo: _sGeo || [],
@@ -126,9 +129,9 @@ const createGeoSlice = function (json, configSlice, dfTime) {
 exports.createGeoSlice = createGeoSlice;
 const crGeoSeria = (json, configSlice) => {
   const ds = (0, _jsonstat.default)(json).Dataset(0) || {},
-    data = (ds.Data?.(configSlice) || []).map(obj => obj.value).filter(value => value !== null);
+    data = ((ds.Data == null ? void 0 : ds.Data(configSlice)) || []).map(obj => obj.value).filter(value => value !== null);
   return {
-    date: ds.Dimension?.("time") || {},
+    date: (ds.Dimension == null ? void 0 : ds.Dimension("time")) || {},
     data
   };
 };
