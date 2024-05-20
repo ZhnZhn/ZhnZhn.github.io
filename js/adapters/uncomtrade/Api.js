@@ -4,7 +4,6 @@ exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
-const _isStr = v => typeof v == 'string';
 const API_URL = 'https://comtradeapi.un.org/public/v1/preview/C',
   ALL = 'all',
   DF_RG = 'X',
@@ -17,11 +16,13 @@ const _checkReq = option => {
 };
 const DF_SHORT_PERIOD = 'period=2023,2022,2021',
   DF_PERIOD = DF_SHORT_PERIOD + ",2020",
+  DF_LONG_QUERY_TAIL = DF_PERIOD + ",2019,2018,2017,2016",
   DF_QUERY_TAIL = DF_PERIOD + "&partner2Code=0";
 const _crReporterToTradePartnerQueryTail = tp => {
   const _tpCode = tp === ALL ? '' : tp || '0',
-    _partnerCode = _tpCode ? "&partnerCode=" + _tpCode : '';
-  return _partnerCode + "&" + DF_QUERY_TAIL;
+    _partnerCode = _tpCode ? "&partnerCode=" + _tpCode : '',
+    _queryTail = tp === ALL ? DF_QUERY_TAIL : DF_LONG_QUERY_TAIL;
+  return _partnerCode + "&" + _queryTail;
 };
 const _crAggrTotalUrl = (proxy, reporterCode, cmdCode, flowCode, period, tfType) => {
   const _url = "" + proxy + API_URL + "/A/HS?" + DF_MOT_AND_CUSTOMS_CODE + "&cmdCode=" + cmdCode + "&flowCode=" + flowCode + "&period=" + period + "&partner2Code=0";
@@ -68,10 +69,10 @@ const UnComtradeApi = {
       message,
       statusCode
     } = json || {};
-    if (_isStr(error)) {
+    if ((0, _AdapterFn.isStr)(error)) {
       throw (0, _AdapterFn.crError)('', error);
     }
-    if (_isStr(message)) {
+    if ((0, _AdapterFn.isStr)(message)) {
       throw (0, _AdapterFn.crError)('', statusCode === 429 ? statusCode + ": " + message.replace('in 1 seconds', 'in 1 minutes') : message);
     }
     throw (0, _AdapterFn.crError)();
@@ -84,7 +85,7 @@ const UnComtradeApi = {
       measure = DF_MEASURE
     } = option;
     if (!one) {
-      const arr = v.substring(3).split('_');
+      const arr = v.slice(3).split('_');
       (0, _AdapterFn.assign)(option, {
         one: arr[0],
         two: arr[1]

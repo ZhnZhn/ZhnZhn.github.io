@@ -1,5 +1,6 @@
 import {
   isArr,
+  isStr,
   assign,
   crError
 } from '../AdapterFn';
@@ -8,8 +9,6 @@ import {
   isAggrByTotalWorld,
   isAggr
 } from './fnAdapter';
-
-const _isStr = v => typeof v == 'string';
 
 const API_URL = 'https://comtradeapi.un.org/public/v1/preview/C'
 , ALL = 'all'
@@ -25,6 +24,7 @@ const _checkReq = (option) => {
 
 const DF_SHORT_PERIOD = 'period=2023,2022,2021'
 , DF_PERIOD = `${DF_SHORT_PERIOD},2020`
+, DF_LONG_QUERY_TAIL = `${DF_PERIOD},2019,2018,2017,2016`
 , DF_QUERY_TAIL = `${DF_PERIOD}&partner2Code=0`;
 const _crReporterToTradePartnerQueryTail = (
   tp
@@ -34,10 +34,12 @@ const _crReporterToTradePartnerQueryTail = (
     : tp || '0'
   , _partnerCode = _tpCode
       ? `&partnerCode=${_tpCode}`
-      : '';
-  return `${_partnerCode}&${DF_QUERY_TAIL}`;
+      : ''
+  , _queryTail = tp === ALL
+      ? DF_QUERY_TAIL
+      : DF_LONG_QUERY_TAIL;
+  return `${_partnerCode}&${_queryTail}`;
 };
-
 
 const _crAggrTotalUrl = (
   proxy,
@@ -121,10 +123,10 @@ const UnComtradeApi = {
       message,
       statusCode
     } = json || {}
-    if (_isStr(error)) {
+    if (isStr(error)) {
       throw crError('', error);
     }
-    if (_isStr(message)) {
+    if (isStr(message)) {
       throw crError('',
         statusCode === 429
           ? `${statusCode}: ${message.replace('in 1 seconds', 'in 1 minutes')}`
@@ -143,7 +145,7 @@ const UnComtradeApi = {
     } = option;
 
     if (!one) {
-      const arr = v.substring(3).split('_')
+      const arr = v.slice(3).split('_')
       assign(option, {
         one: arr[0],
         two: arr[1]
