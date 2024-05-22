@@ -1,32 +1,31 @@
 import {
   isNumber,
   getCaption,
+  joinBy,
   ymdToUTC
 } from '../AdapterFn';
 
 const _crZhConfig = (
   json,
-  option
-) => {
-  const {
+  {
     dataSource,
     key
-  } = option;
-  return {
-    id: key,
-    key,
-    dataSource
-  };
-};
+  }
+) => ({
+  id: key,
+  key,
+  dataSource
+});
 
 const _crInfo = (
-  json,
+  { response },
   option
 ) => ({
-  name: option.title + ': ' + option.subtitle,
-  description: json.response.description || ''
-})
-
+  name: joinBy(': ', option.title, option.subtitle),
+  description: response.description
+   || (response.data[0] || {})["series-description"]
+   || ''
+});
 
 export const crTitle = ({
   items=[],
