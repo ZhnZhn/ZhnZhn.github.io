@@ -217,7 +217,8 @@ export const crValueMoving = (
   prev,
   dateTo
 ) => {
-  const points = chart.series[0].data
+  const _id = (chart.userOptions.zhConfig || {}).id
+  , points = chart.series[0].data
   , mlsUTC = dmyToUTC(dateTo)
   , index = _isNumber(mlsUTC)
       ? _findIndexByX(points, mlsUTC)
@@ -233,7 +234,7 @@ export const crValueMoving = (
           prevValue: valueTo,
           fnFormat: formatAllNumber
         }),
-        { valueTo, dateTo }
+        { valueTo, dateTo, _id }
       )
    : void 0;
 }
