@@ -1,6 +1,12 @@
+import { setAxisLabelsColor } from '../../charts/ChartUiTheme';
+import {
+  COLOR_X_LABEL,
+  COLOR_Y_LABEL
+} from '../../constants/Color';
+
 import {
   isUndef,
-  bindTo
+  isFn
 } from '../storeApi';
 
 import {
@@ -28,6 +34,7 @@ import {
   LT_KX
 } from '../../constants/LoadType';
 
+const _assign = Object.assign;
 const _withApiKey = [
   LT_AL, LT_IEX, LT_FMP, LT_INTR, LT_TW,
   LT_BEA, LT_EIA,
@@ -87,23 +94,76 @@ export const getKey = (id) => {
   }
 }
 
+const PN_IS_ADMIN_MODE = 'isAdm'
+, PN_IS_DRAW_DELTA_EXTREMS = 'isDrawDeltaExtrems'
+, PN_IS_NOT_ZOOM_TO_MIN_MAX = 'isNotZoomToMinMax'
+, PN_IS_AXIS_LABELS_GREY = 'isAlg';
+
+export const CHECKBOX_CONFIGS = [
+  ['View in Admin Mode', PN_IS_ADMIN_MODE],
+  ['Draw Axis Labels Grey', PN_IS_AXIS_LABELS_GREY],
+  ['Draw Deltas to Min-Max', PN_IS_DRAW_DELTA_EXTREMS],
+  ['Not Zoom to Min-Max', PN_IS_NOT_ZOOM_TO_MIN_MAX]
+];
+
 const _SETTINGS = {
   proxy: '',
-  isAdminMode: false,
-  isDrawDeltaExtrems: false,
-  isNotZoomToMinMax: false
+  [PN_IS_ADMIN_MODE]: false,
+  [PN_IS_DRAW_DELTA_EXTREMS]: false,
+  [PN_IS_NOT_ZOOM_TO_MIN_MAX]: false,
+  [PN_IS_AXIS_LABELS_GREY]: false
 };
 
-export const isSetting = (propName, value) => {
+const _isSetting = propName => _SETTINGS[propName];
+const _fGetSetOption = (
+  propName,
+  onSetting
+) => (value) => {
   if (isUndef(value)){
-    return _SETTINGS[propName];
+    return _isSetting(propName);
   }
   _SETTINGS[propName] = !!value
+  if (isFn(onSetting)) {
+    onSetting(_SETTINGS[propName])
+  }
 }
-export const isAdminMode = bindTo(isSetting, 'isAdminMode')
+
+const _addBoolOptionTo = (
+  options,
+  propName
+) => {
+  if (isUndef(options[propName])) {
+    options[propName] = _isSetting(propName)
+  }
+};
+
+export const addSettingTo = (
+  options,
+  loadId
+) => {
+  _assign(options, {
+    apiKey: getKey(loadId),
+    proxy: getProxy(loadId)
+  })
+  _addBoolOptionTo(options, PN_IS_DRAW_DELTA_EXTREMS)
+  _addBoolOptionTo(options, PN_IS_NOT_ZOOM_TO_MIN_MAX)
+}
+
+const _setAxisLabelColor = isGrey => {
+  if (isGrey) {
+    setAxisLabelsColor()
+  } else {
+    setAxisLabelsColor(COLOR_X_LABEL, COLOR_Y_LABEL)
+  }
+};
+
+export const isAdminMode = _fGetSetOption(PN_IS_ADMIN_MODE)
+const _isDrawDeltaExtrems = _fGetSetOption(PN_IS_DRAW_DELTA_EXTREMS)
+, _isNotZoomToMinMax = _fGetSetOption(PN_IS_NOT_ZOOM_TO_MIN_MAX)
+, _isAxisLabelsGrey = _fGetSetOption(PN_IS_AXIS_LABELS_GREY, _setAxisLabelColor)
 
 const _setProxy = (url) => {
-  if ((''+url).substring(0,16) === 'http://127.0.0.1') {
+  if ((''+url).slice(0,16) === 'http://127.0.0.1') {
     _SETTINGS.proxy = url
     return true;
   }
@@ -130,8 +190,9 @@ export const exportSettingFn = () => {
     key10: _fSetKey(LT_TW),
     setProxy: _setProxy,
     getProxy,
-    isAdminMode,
-    isDrawDeltaExtrems: bindTo(isSetting, 'isDrawDeltaExtrems'),
-    isNotZoomToMinMax: bindTo(isSetting, 'isNotZoomToMinMax')
+    [PN_IS_ADMIN_MODE]: isAdminMode,
+    [PN_IS_DRAW_DELTA_EXTREMS]: _isDrawDeltaExtrems,
+    [PN_IS_NOT_ZOOM_TO_MIN_MAX]: _isNotZoomToMinMax,
+    [PN_IS_AXIS_LABELS_GREY]: _isAxisLabelsGrey
   };
 }

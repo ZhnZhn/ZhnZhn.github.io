@@ -1,9 +1,12 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isSetting = exports.isProxyRequired = exports.isApiKeyRequired = exports.isAdminMode = exports.getProxy = exports.getKey = exports.getApiTitle = exports.exportSettingFn = void 0;
+exports.isProxyRequired = exports.isApiKeyRequired = exports.isAdminMode = exports.getProxy = exports.getKey = exports.getApiTitle = exports.exportSettingFn = exports.addSettingTo = exports.CHECKBOX_CONFIGS = void 0;
+var _ChartUiTheme = require("../../charts/ChartUiTheme");
+var _Color = require("../../constants/Color");
 var _storeApi = require("../storeApi");
 var _LoadType = require("../../constants/LoadType");
+const _assign = Object.assign;
 const _withApiKey = [_LoadType.LT_AL, _LoadType.LT_IEX, _LoadType.LT_FMP, _LoadType.LT_INTR, _LoadType.LT_TW, _LoadType.LT_BEA, _LoadType.LT_EIA, _LoadType.LT_WT];
 const _withProxyServer = [_LoadType.LT_Q, _LoadType.LT_UN, _LoadType.LT_BB, _LoadType.LT_WT];
 const _withProxyServer2 = [..._withProxyServer, _LoadType.LT_CR, _LoadType.LT_BF, _LoadType.LT_KR, _LoadType.LT_KC, _LoadType.LT_GT, _LoadType.LT_HT, _LoadType.LT_KX];
@@ -37,22 +40,55 @@ const getKey = id => {
   }
 };
 exports.getKey = getKey;
+const PN_IS_ADMIN_MODE = 'isAdm',
+  PN_IS_DRAW_DELTA_EXTREMS = 'isDrawDeltaExtrems',
+  PN_IS_NOT_ZOOM_TO_MIN_MAX = 'isNotZoomToMinMax',
+  PN_IS_AXIS_LABELS_GREY = 'isAlg';
+const CHECKBOX_CONFIGS = exports.CHECKBOX_CONFIGS = [['View in Admin Mode', PN_IS_ADMIN_MODE], ['Draw Axis Labels Grey', PN_IS_AXIS_LABELS_GREY], ['Draw Deltas to Min-Max', PN_IS_DRAW_DELTA_EXTREMS], ['Not Zoom to Min-Max', PN_IS_NOT_ZOOM_TO_MIN_MAX]];
 const _SETTINGS = {
   proxy: '',
-  isAdminMode: false,
-  isDrawDeltaExtrems: false,
-  isNotZoomToMinMax: false
+  [PN_IS_ADMIN_MODE]: false,
+  [PN_IS_DRAW_DELTA_EXTREMS]: false,
+  [PN_IS_NOT_ZOOM_TO_MIN_MAX]: false,
+  [PN_IS_AXIS_LABELS_GREY]: false
 };
-const isSetting = (propName, value) => {
+const _isSetting = propName => _SETTINGS[propName];
+const _fGetSetOption = (propName, onSetting) => value => {
   if ((0, _storeApi.isUndef)(value)) {
-    return _SETTINGS[propName];
+    return _isSetting(propName);
   }
   _SETTINGS[propName] = !!value;
+  if ((0, _storeApi.isFn)(onSetting)) {
+    onSetting(_SETTINGS[propName]);
+  }
 };
-exports.isSetting = isSetting;
-const isAdminMode = exports.isAdminMode = (0, _storeApi.bindTo)(isSetting, 'isAdminMode');
+const _addBoolOptionTo = (options, propName) => {
+  if ((0, _storeApi.isUndef)(options[propName])) {
+    options[propName] = _isSetting(propName);
+  }
+};
+const addSettingTo = (options, loadId) => {
+  _assign(options, {
+    apiKey: getKey(loadId),
+    proxy: getProxy(loadId)
+  });
+  _addBoolOptionTo(options, PN_IS_DRAW_DELTA_EXTREMS);
+  _addBoolOptionTo(options, PN_IS_NOT_ZOOM_TO_MIN_MAX);
+};
+exports.addSettingTo = addSettingTo;
+const _setAxisLabelColor = isGrey => {
+  if (isGrey) {
+    (0, _ChartUiTheme.setAxisLabelsColor)();
+  } else {
+    (0, _ChartUiTheme.setAxisLabelsColor)(_Color.COLOR_X_LABEL, _Color.COLOR_Y_LABEL);
+  }
+};
+const isAdminMode = exports.isAdminMode = _fGetSetOption(PN_IS_ADMIN_MODE);
+const _isDrawDeltaExtrems = _fGetSetOption(PN_IS_DRAW_DELTA_EXTREMS),
+  _isNotZoomToMinMax = _fGetSetOption(PN_IS_NOT_ZOOM_TO_MIN_MAX),
+  _isAxisLabelsGrey = _fGetSetOption(PN_IS_AXIS_LABELS_GREY, _setAxisLabelColor);
 const _setProxy = url => {
-  if (('' + url).substring(0, 16) === 'http://127.0.0.1') {
+  if (('' + url).slice(0, 16) === 'http://127.0.0.1') {
     _SETTINGS.proxy = url;
     return true;
   }
@@ -74,9 +110,10 @@ const exportSettingFn = () => {
     key10: _fSetKey(_LoadType.LT_TW),
     setProxy: _setProxy,
     getProxy,
-    isAdminMode,
-    isDrawDeltaExtrems: (0, _storeApi.bindTo)(isSetting, 'isDrawDeltaExtrems'),
-    isNotZoomToMinMax: (0, _storeApi.bindTo)(isSetting, 'isNotZoomToMinMax')
+    [PN_IS_ADMIN_MODE]: isAdminMode,
+    [PN_IS_DRAW_DELTA_EXTREMS]: _isDrawDeltaExtrems,
+    [PN_IS_NOT_ZOOM_TO_MIN_MAX]: _isNotZoomToMinMax,
+    [PN_IS_AXIS_LABELS_GREY]: _isAxisLabelsGrey
   };
 };
 exports.exportSettingFn = exportSettingFn;
