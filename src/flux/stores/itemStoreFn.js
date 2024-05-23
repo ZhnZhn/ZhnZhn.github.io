@@ -7,16 +7,12 @@ import {
   withoutProxy
 } from '../../constants/Msg';
 
-import { isUndef } from '../storeApi';
-
 import {
   getSourceConfig
 } from './browserLogic';
 
 import {
-  getProxy,
-  getKey,
-  isSetting,
+  addSettingTo,
   isApiKeyRequired,
   getApiTitle,
   isProxyRequired
@@ -24,27 +20,14 @@ import {
 
 const _assign = Object.assign;
 
-const _addBoolOptionTo = (
-  options,
-  propName
-) => {
-  if (isUndef(options[propName])) {
-    options[propName] = isSetting(propName)
-  }
-};
-
 export const addSettingsTo = (
   options,
   confItem,
   itemProps
 ) => {
   const { loadId } = options;
-  _assign(options, confItem, itemProps, {
-    apiKey: getKey(loadId),
-    proxy: getProxy(loadId)
-  })
-  _addBoolOptionTo(options, 'isDrawDeltaExtrems')
-  _addBoolOptionTo(options, 'isNotZoomToMinMax')
+  _assign(options, confItem, itemProps)
+  addSettingTo(options, loadId)
 }
 
 const _checkMsgApiKey = ({
