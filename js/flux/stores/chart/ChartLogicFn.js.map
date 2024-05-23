@@ -1,1 +1,46 @@
-{"version":3,"sources":["../../../../src/flux/stores/chart/ChartLogicFn.js"],"names":["_notConfById","id","c","zhConfig","_confById","isChartExist","slice","chartType","key","chartSlice","configs","_max","length","i","removeConfig","filter","isRemoved","toTop","_conf","find","arrWithout","removeAll","_slice","updateMovingValues","movingValues","_maxConfigs","valueMoving"],"mappings":";;;;;;;AACA;;AAEA,MAAMA,YAAY,GAAGC,EAAE,IAAIC,CAAC,IAAIA,CAAC,CAACC,QAAF,CAAWF,EAAX,KAAkBA,EAAlD;;AACA,MAAMG,SAAS,GAAGH,EAAE,IAAIC,CAAC,IAAIA,CAAC,CAACC,QAAF,CAAWF,EAAX,KAAkBA,EAA/C;;AAEO,MAAMI,YAAY,GAAG,CAC1BC,KAD0B,EAE1BC,SAF0B,EAG1BC,GAH0B,KAIvB;AACH,QAAM;AACJC,IAAAA,UADI;AAEJC,IAAAA;AAFI,MAGF,uBAASJ,KAAT,EAAgBC,SAAhB,CAHJ;;AAIA,MAAI,CAACE,UAAL,EAAgB;AACd,WAAO,KAAP;AACD;;AACD,QAAME,IAAI,GAAGD,OAAO,CAACE,MAArB;AACA,MAAIC,CAAC,GAAG,CAAR;;AACA,SAAOA,CAAC,GAACF,IAAT,EAAeE,CAAC,EAAhB,EAAmB;AACjB,QAAIH,OAAO,CAACG,CAAD,CAAP,CAAWV,QAAX,CAAoBK,GAApB,KAA4BA,GAAhC,EAAoC;AAClC,aAAO,IAAP;AACD;AACF;;AACD,SAAO,KAAP;AACD,CApBM;;;;AAsBA,MAAMM,YAAY,GAAG,CAC1BR,KAD0B,EAE1BC,SAF0B,EAG1BN,EAH0B,KAIvB;AACH,QAAM;AACJQ,IAAAA,UADI;AAEJC,IAAAA;AAFI,MAGF,uBAASJ,KAAT,EAAgBC,SAAhB,CAHJ;AAKAE,EAAAA,UAAU,CAACC,OAAX,GAAqBA,OAAO,CACxBK,MADiB,CACVf,YAAY,CAACC,EAAD,CADF,CAArB;AAGA,SAAO;AACLQ,IAAAA,UADK;AAELO,IAAAA,SAAS,EAAEN,OAAO,CAACE,MAAR,GAAiBH,UAAU,CAACC,OAAX,CAAmBE;AAF1C,GAAP;AAID,CAjBM;;;;AAmBA,MAAMK,KAAK,GAAG,CACnBX,KADmB,EAEnBC,SAFmB,EAGnBN,EAHmB,KAIhB;AACH,QAAM;AACJQ,IAAAA,UADI;AAEJC,IAAAA;AAFI,MAGF,uBAASJ,KAAT,EAAgBC,SAAhB,CAHJ;AAAA,QAIEW,KAAK,GAAGR,OAAO,CAACS,IAAR,CAAaf,SAAS,CAACH,EAAD,CAAtB,CAJV;;AAKA,MAAIiB,KAAJ,EAAW;AACT,UAAME,UAAU,GAAGV,OAAO,CAACK,MAAR,CAAef,YAAY,CAACC,EAAD,CAA3B,CAAnB;AACAQ,IAAAA,UAAU,CAACC,OAAX,GAAqB,CAAEQ,KAAF,EAAS,GAAGE,UAAZ,CAArB;AACD;;AACD,SAAOX,UAAP;AACD,CAfM;;;;AAiBA,MAAMY,SAAS,GAAG,CACvBf,KADuB,EAEvBC,SAFuB,KAGpB;AACF,QAAMe,MAAM,GAAGhB,KAAK,CAACC,SAAD,CAAL,IAAoB,EAAnC;;AACAe,EAAAA,MAAM,CAACZ,OAAP,GAAiB,EAAjB;AACA,SAAOY,MAAP;AACF,CAPM;;;;AASA,MAAMC,kBAAkB,GAAG,CAChCjB,KADgC,EAEhCC,SAFgC,EAGhCiB,YAHgC,KAI7B;AACH,QAAM;AAAEd,IAAAA;AAAF,MAAc,uBAASJ,KAAT,EAAgBC,SAAhB,CAApB;AAAA,QACEkB,WAAW,GAAGf,OAAO,CAACE,MADxB;;AAEA,MAAIa,WAAW,KAAKD,YAAY,CAACZ,MAAjC,EAAyC;AACvC,QAAIC,CAAC,GAAG,CAAR;;AACA,WAAKA,CAAC,GAACY,WAAP,EAAmBZ,CAAC,EAApB,EAAuB;AACrBH,MAAAA,OAAO,CAACG,CAAD,CAAP,CAAWa,WAAX,GAAyBF,YAAY,CAACX,CAAD,CAArC;AACD;AACF;AACF,CAbM","sourcesContent":["\r\nimport getSlice from './getSlice'\r\n\r\nconst _notConfById = id => c => c.zhConfig.id !== id;\r\nconst _confById = id => c => c.zhConfig.id === id;\r\n\r\nexport const isChartExist = (\r\n  slice,\r\n  chartType,\r\n  key\r\n) => {\r\n  const {\r\n    chartSlice,\r\n    configs\r\n  } = getSlice(slice, chartType);\r\n  if (!chartSlice){\r\n    return false;\r\n  }\r\n  const _max = configs.length;\r\n  let i = 0;\r\n  for (; i<_max; i++){\r\n    if (configs[i].zhConfig.key === key){\r\n      return true;\r\n    }\r\n  }\r\n  return false;\r\n}\r\n\r\nexport const removeConfig = (\r\n  slice,\r\n  chartType,\r\n  id\r\n) => {\r\n  const {\r\n    chartSlice,\r\n    configs\r\n  } = getSlice(slice, chartType);\r\n\r\n  chartSlice.configs = configs\r\n     .filter(_notConfById(id))\r\n\r\n  return {\r\n    chartSlice,\r\n    isRemoved: configs.length > chartSlice.configs.length\r\n  }\r\n}\r\n\r\nexport const toTop = (\r\n  slice,\r\n  chartType,\r\n  id\r\n) => {\r\n  const {\r\n    chartSlice,\r\n    configs\r\n  } = getSlice(slice, chartType)\r\n  , _conf = configs.find(_confById(id));\r\n  if (_conf) {\r\n    const arrWithout = configs.filter(_notConfById(id));\r\n    chartSlice.configs = [ _conf, ...arrWithout]\r\n  }\r\n  return chartSlice;\r\n}\r\n\r\nexport const removeAll = (\r\n  slice,\r\n  chartType\r\n) => {\r\n   const _slice = slice[chartType] || {}\r\n   _slice.configs = []\r\n   return _slice;\r\n}\r\n\r\nexport const updateMovingValues = (\r\n  slice,\r\n  chartType,\r\n  movingValues\r\n) => {\r\n  const { configs } = getSlice(slice, chartType)\r\n  , _maxConfigs = configs.length;\r\n  if (_maxConfigs === movingValues.length) {\r\n    let i = 0;\r\n    for(;i<_maxConfigs;i++){\r\n      configs[i].valueMoving = movingValues[i]\r\n    }\r\n  }\r\n}\r\n"],"file":"ChartLogicFn.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/flux/stores/chart/ChartLogicFn.js"
+ ],
+ "file": "../../../../src/flux/stores/chart/ChartLogicFn.js",
+ "names": [
+  "_getSlice",
+  "_interopRequireDefault",
+  "require",
+  "_notConfById",
+  "id",
+  "c",
+  "zhConfig",
+  "_confById",
+  "isChartExist",
+  "slice",
+  "chartType",
+  "key",
+  "chartSlice",
+  "configs",
+  "getSlice",
+  "_max",
+  "length",
+  "i",
+  "exports",
+  "removeConfig",
+  "filter",
+  "isRemoved",
+  "toTop",
+  "_conf",
+  "find",
+  "arrWithout",
+  "removeAll",
+  "_slice",
+  "updateMovingValues",
+  "movingValues",
+  "_maxConfigs",
+  "forEach",
+  "mv",
+  "_config",
+  "_id",
+  "valueMoving"
+ ],
+ "mappings": "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"
+}

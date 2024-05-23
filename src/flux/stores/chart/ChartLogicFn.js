@@ -76,12 +76,16 @@ export const updateMovingValues = (
   chartType,
   movingValues
 ) => {
-  const { configs } = getSlice(slice, chartType)
+  const {
+    configs
+  } = getSlice(slice, chartType)
   , _maxConfigs = configs.length;
   if (_maxConfigs === movingValues.length) {
-    let i = 0;
-    for(;i<_maxConfigs;i++){
-      configs[i].valueMoving = movingValues[i]
-    }
+    movingValues.forEach(mv => {
+      const _config = configs.find(_confById(mv._id))
+      if (_config) {
+        _config.valueMoving = mv
+      }
+    });    
   }
 }
