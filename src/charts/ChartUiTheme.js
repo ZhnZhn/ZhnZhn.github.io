@@ -33,3 +33,19 @@ export const setChartTheme = (
     _crAreaPlotOptions(COLOR_PLOT_G1, bottomColor)
   )
 }
+
+const _crLabelsStyleColor = (
+  color
+) => ({
+  labels: { style: { color }}
+})
+, DF_AXIS_LABEL_COLOR = 'grey';
+export const setAxisLabelsColor = (
+  xAxisColor=DF_AXIS_LABEL_COLOR,
+  yAxisColor=DF_AXIS_LABEL_COLOR
+) => {
+  Highcharts.setOptions({
+    xAxis: _crLabelsStyleColor(xAxisColor),
+    yAxis: _crLabelsStyleColor(yAxisColor)
+  })
+}
