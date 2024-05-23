@@ -1,3 +1,5 @@
+import { CHECKBOX_CONFIGS } from '../../flux/stores/settingStore';
+
 import useInputData from './useInputData';
 
 import RowPattern from '../dialogs/rows/RowPattern';
@@ -9,12 +11,6 @@ import FlatButton from '../zhn-m/FlatButton';
 const S_MR_4 = { marginRight: 4 }
 , S_MR_12 = { marginRight: 12 }
 , WITHOUT_LABELS_WIDTH = 275;
-
-const CHECKBOX_CONFIGS = [
-  ['View in Admin Mode', 'isAdminMode'],
-  ['Draw Deltas to Min-Max', 'isDrawDeltaExtrems'],
-  ['Not Zoom to Min-Max', 'isNotZoomToMinMax']
-];
 
 const _crInputStyles = (
   isShowLabels

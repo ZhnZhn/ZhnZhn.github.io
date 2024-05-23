@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _settingStore = require("../../flux/stores/settingStore");
 var _useInputData = _interopRequireDefault(require("./useInputData"));
 var _RowPattern = _interopRequireDefault(require("../dialogs/rows/RowPattern"));
 var _RowInputSelect = _interopRequireDefault(require("../dialogs/rows/RowInputSelect"));
@@ -17,7 +18,6 @@ const S_MR_4 = {
     marginRight: 12
   },
   WITHOUT_LABELS_WIDTH = 275;
-const CHECKBOX_CONFIGS = [['View in Admin Mode', 'isAdminMode'], ['Draw Deltas to Min-Max', 'isDrawDeltaExtrems'], ['Not Zoom to Min-Max', 'isNotZoomToMinMax']];
 const _crInputStyles = isShowLabels => isShowLabels ? [] : [WITHOUT_LABELS_WIDTH, {
   width: WITHOUT_LABELS_WIDTH
 }];
@@ -58,7 +58,7 @@ const PaneOptions = _ref => {
       onSelect: onChangeTheme
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionCheckBoxStack.default, {
       data: data,
-      configs: CHECKBOX_CONFIGS
+      configs: _settingStore.CHECKBOX_CONFIGS
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowButtons.default, {
       style: S_MR_12,
       btStyle: btStyle,
