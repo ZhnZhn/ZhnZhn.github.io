@@ -22,15 +22,21 @@ const ChartList = _ref => {
         } = config,
         {
           id
-        } = zhConfig || {};
+        } = zhConfig || {},
+        _refChartFn = zhCompType ? void 0 : (0, _uiApi.bindTo)(refChartFn, id);
       return (0, _ItemFactory.crItem)({
         config,
         index,
         chartType,
         props: {
           isAdminMode,
-          refEl: zhCompType ? void 0 : (0, _uiApi.bindTo)(refChartFn, index),
-          onCloseItem: () => onCloseItem(chartType, browserType, id)
+          refEl: _refChartFn,
+          onCloseItem: () => {
+            onCloseItem(chartType, browserType, id);
+            if (_refChartFn) {
+              _refChartFn();
+            }
+          }
         }
       });
     })

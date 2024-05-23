@@ -15,17 +15,23 @@ const ChartList = ({
         zhConfig,
         zhCompType
       } = config
-      , { id } = zhConfig || {};
+      , { id } = zhConfig || {}
+      , _refChartFn = zhCompType
+        ? void 0
+        : bindTo(refChartFn, id);
       return crItem({
        config,
        index,
        chartType,
        props: {
          isAdminMode,
-         refEl: zhCompType
-           ? void 0
-           : bindTo(refChartFn, index),
-         onCloseItem: () => onCloseItem(chartType, browserType, id)
+         refEl: _refChartFn,
+         onCloseItem: () => {
+           onCloseItem(chartType, browserType, id)
+           if (_refChartFn) {
+             _refChartFn()
+           }
+         }
        }
      });
    })}
