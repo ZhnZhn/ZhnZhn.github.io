@@ -1,14 +1,11 @@
 "use strict";
 
 var _ChartLogicFn = require("../ChartLogicFn");
-
 const CHART_TYPE = "AA_BB";
-
 const _crChartsConfig = function (chartType) {
   if (chartType === void 0) {
     chartType = CHART_TYPE;
   }
-
   return {
     [chartType]: {
       chartType,
@@ -34,27 +31,21 @@ const _crChartsConfig = function (chartType) {
     }
   };
 };
-
 const _getVm = (chartsConfig, chartType, index) => chartsConfig[chartType].configs[index].valueMoving;
-
 describe('isChartExist', () => {
   test('should return true if config for chartType and key exists', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
-
     expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, "k1")).toBe(true);
     expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, "k2")).toBe(true);
   });
   test('should return false if config for chartType and key does not exist', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
-
     expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, "k5")).toBe(false);
     expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, "k6")).toBe(false);
   });
   test('should return false if configs for chartType does not exist', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
-
     const _NOT_EXIST_CHART_TYPE = 'NOT_EXIST_' + CHART_TYPE;
-
     expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, _NOT_EXIST_CHART_TYPE, "k1")).toBe(false);
     expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, _NOT_EXIST_CHART_TYPE, "k2")).toBe(false);
     expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, _NOT_EXIST_CHART_TYPE, "k5")).toBe(false);
@@ -63,7 +54,6 @@ describe('isChartExist', () => {
 describe('removeConfig', () => {
   test('should remove config from configs by id', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
-
     const _idOrKey = 'k1';
     expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, _idOrKey)).toBe(true);
     const {
@@ -76,7 +66,6 @@ describe('removeConfig', () => {
   });
   test('should return object with isRemoved false for not existed id', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
-
     const _idOrKey = 'k5';
     expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, _idOrKey)).toBe(false);
     const {
@@ -91,7 +80,6 @@ describe('removeConfig', () => {
 describe('toTop', () => {
   test('should set and return chart slice with config on 0 index by chartType and id', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
-
     const _idOrKey = 'k3';
     expect(_chartsConfig[CHART_TYPE].configs[0].zhConfig.id).not.toBe(_idOrKey);
     const chartSlice = (0, _ChartLogicFn.toTop)(_chartsConfig, CHART_TYPE, _idOrKey);
@@ -102,7 +90,6 @@ describe('toTop', () => {
 describe('removeAll', () => {
   test('should set and return chartSlice with empty configs array', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
-
     expect(_chartsConfig[CHART_TYPE].configs.length).not.toBe(0);
     const chartSlice = (0, _ChartLogicFn.removeAll)(_chartsConfig, CHART_TYPE);
     expect(_chartsConfig[CHART_TYPE].configs.length).toBe(0);
@@ -112,17 +99,18 @@ describe('removeAll', () => {
 describe('updateMovingValues', () => {
   test('should update valueMoving for all configs', () => {
     const VM0 = {
-      value: "1.01"
+      value: "1.01",
+      _id: "k1"
     };
     const VM1 = {
-      value: "2.02"
+      value: "2.02",
+      _id: "k2"
     };
     const VM2 = {
-      value: "3.03"
+      value: "3.03",
+      _id: "k3"
     };
-
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
-
     (0, _ChartLogicFn.updateMovingValues)(_chartsConfig, CHART_TYPE, [VM0, VM1, VM2]);
     expect(_getVm(_chartsConfig, CHART_TYPE, 0)).toBe(VM0);
     expect(_getVm(_chartsConfig, CHART_TYPE, 1)).toBe(VM1);
@@ -130,18 +118,16 @@ describe('updateMovingValues', () => {
   });
   test('should not update valueMoving for configs if array lenghts not match', () => {
     const VM0 = {
-      value: "1.01"
+      value: "1.01",
+      _id: "k1"
     };
     const VM1 = {
-      value: "2.02"
+      value: "2.02",
+      _id: "k2"
     };
-
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
-
     const _prevVm0 = _getVm(_chartsConfig, CHART_TYPE, 0);
-
     const _prevVm1 = _getVm(_chartsConfig, CHART_TYPE, 1);
-
     (0, _ChartLogicFn.updateMovingValues)(_chartsConfig, CHART_TYPE, [VM0, VM1]);
     expect(_getVm(_chartsConfig, CHART_TYPE, 0)).not.toBe(VM0);
     expect(_getVm(_chartsConfig, CHART_TYPE, 0)).toBe(_prevVm0);

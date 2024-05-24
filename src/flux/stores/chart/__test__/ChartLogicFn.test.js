@@ -12,19 +12,24 @@ const _crChartsConfig = (chartType=CHART_TYPE) => ({
     chartType,
     configs: [{
       valueMoving: {},
-      zhConfig: { key: 'k1', id: 'k1'}
+      zhConfig: { key: 'k1', id: 'k1' }
     },{
       valueMoving: {},
-      zhConfig: { key: 'k2', id: 'k2'}
+      zhConfig: { key: 'k2', id: 'k2' }
     },{
       valueMoving: {},
-      zhConfig: { key: 'k3', id: 'k3'}
+      zhConfig: { key: 'k3', id: 'k3' }
     }]
   }
 })
 
-const _getVm = (chartsConfig, chartType, index) => chartsConfig[chartType]
-  .configs[index].valueMoving;
+const _getVm = (
+  chartsConfig,
+  chartType,
+  index
+) => chartsConfig[chartType]
+  .configs[index]
+  .valueMoving;
 
 describe('isChartExist', ()=>{
   test('should return true if config for chartType and key exists', ()=>{
@@ -99,25 +104,25 @@ describe('removeAll', ()=>{
 
 describe('updateMovingValues', ()=>{
   test('should update valueMoving for all configs', ()=>{
-    const VM0 = { value: "1.01"}
-    const VM1 = { value: "2.02"}
-    const VM2 = { value: "3.03"}
+    const VM0 = { value: "1.01", _id: "k1" }
+    const VM1 = { value: "2.02", _id: "k2" }
+    const VM2 = { value: "3.03", _id: "k3" }
     const _chartsConfig = _crChartsConfig(CHART_TYPE)
 
-    updateMovingValues(_chartsConfig, CHART_TYPE, [ VM0, VM1, VM2 ])
+    updateMovingValues(_chartsConfig, CHART_TYPE, [VM0, VM1, VM2])
     expect(_getVm(_chartsConfig, CHART_TYPE, 0)).toBe(VM0)
     expect(_getVm(_chartsConfig, CHART_TYPE, 1)).toBe(VM1)
     expect(_getVm(_chartsConfig, CHART_TYPE, 2)).toBe(VM2)
   })
 
   test('should not update valueMoving for configs if array lenghts not match', ()=>{
-    const VM0 = { value: "1.01"}
-    const VM1 = { value: "2.02"}
+    const VM0 = { value: "1.01", _id: "k1" }
+    const VM1 = { value: "2.02", _id: "k2" }
     const _chartsConfig = _crChartsConfig(CHART_TYPE)
     const _prevVm0 = _getVm(_chartsConfig, CHART_TYPE, 0)
     const _prevVm1 = _getVm(_chartsConfig, CHART_TYPE, 1)
 
-    updateMovingValues(_chartsConfig, CHART_TYPE, [ VM0, VM1])
+    updateMovingValues(_chartsConfig, CHART_TYPE, [VM0, VM1])
     expect(_getVm(_chartsConfig, CHART_TYPE, 0)).not.toBe(VM0)
     expect(_getVm(_chartsConfig, CHART_TYPE, 0)).toBe(_prevVm0)
     expect(_getVm(_chartsConfig, CHART_TYPE, 1)).not.toBe(VM1)
