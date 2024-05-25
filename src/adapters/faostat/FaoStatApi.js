@@ -7,8 +7,9 @@ import {
 
 import getMemoizedYear from './getMemoizedYear';
 
-const API_URL = 'https://fenixservices.fao.org/faostat/api/v1/en/data'
-, TAIL = 'area_cs=FAO&item_cs=FAO&show_codes=true&show_unit=true&show_flags=true&null_values=false&output_type=json'
+const API_URL = 'https://faostatservices.fao.org/api/v1/en/data'
+, TAIL = '&area_cs=M49&item_cs=CPC&show_codes=true&show_unit=true&show_flags=true&show_notes=true&null_values=false&page_number=1&datasource=PRODUCTION_AWS&output_type=objects'
+, WORLD_LIST_ID = '5000>';
 
 const _isArr = Array.isArray
 , _assign = Object.assign
@@ -40,9 +41,14 @@ const FaoStatApi = {
     , _two = getValue(items[1])
     , _three = getValue(items[2])
     , _element = _three || dfElement
-    , _year = getMemoizedYear();
+    , [
+      _year,
+      _pageSize
+    ] = _one === WORLD_LIST_ID
+        ? [ getMemoizedYear(2004), 5000]
+        : [ getMemoizedYear(1980), 100];
 
-    return `${API_URL}/${dfDomain}?element=${_element}&area=${_one}&${dfItemName}=${_two}&year=${_year}&${TAIL}`;
+    return `${API_URL}/${dfDomain}?element=${_element}&area=${_one}&${dfItemName}=${_two}&year=${_year}&page_size=${_pageSize}${TAIL}`;
   },
 
   checkResponse(json){
