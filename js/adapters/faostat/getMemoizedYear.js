@@ -2,17 +2,15 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-let _memoized_year;
-const _crYear = () => {
+let _memoizedYears = Object.create(null);
+const _crYear = fromYear => {
     const year = new Date().getUTCFullYear(),
       arr = [];
-    let i = 1980;
-    for (; i < year; i++) {
-      arr.push(i);
+    for (; fromYear < year; fromYear++) {
+      arr.push(fromYear);
     }
-    return _memoized_year = arr.join(',');
+    return _memoizedYears[fromYear] = arr.join(',');
   },
-  getMemoizedYear = () => _memoized_year || _crYear();
-var _default = getMemoizedYear;
-exports.default = _default;
+  getMemoizedYear = fromYear => _memoizedYears[fromYear] || _crYear(fromYear);
+var _default = exports.default = getMemoizedYear;
 //# sourceMappingURL=getMemoizedYear.js.map
