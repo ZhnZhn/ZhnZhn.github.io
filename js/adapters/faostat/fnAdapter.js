@@ -12,7 +12,8 @@ exports.crError = _AdapterFn.crError;
 const BLANK = ' ',
   MM_DD = '-12-31',
   DF_TITLE = 'More about data on tab Info in Description',
-  _isArr = Array.isArray;
+  _createObject = () => Object.create(null),
+  _getObjectKeys = Object.keys;
 const _crUnit = json => {
   const {
       data
@@ -28,37 +29,29 @@ const _crPoint = _ref => {
     Value
   } = _ref;
   const m = Months ? (0, _AdapterFn.monthIndex)(Months) + 1 : 0,
-    Tail = m !== 0 ? `-${m}` : MM_DD;
+    Tail = m !== 0 ? "-" + m : MM_DD;
   return {
     x: (0, _AdapterFn.ymdToUTC)('' + Year + Tail),
     y: parseFloat(Value)
   };
 };
-const _crHm = (data, prName) => {
-  const hm = Object.create(null);
-  data.forEach(item => {
-    const _itemKey = item[prName];
-    if (!hm[_itemKey]) {
-      hm[_itemKey] = [];
-      hm[_itemKey].seriaName = _itemKey;
-    }
-    hm[_itemKey].push(_crPoint(item));
-  });
-  return hm;
-};
-const _compareByY = (a, b) => b.y - a.y;
-const _crRefLegend = hm => {
-  const legend = [];
-  let propName;
-  for (propName in hm) {
-    const _arr = hm[propName];
-    legend.push({
-      ..._arr[_arr.length - 1],
-      listPn: propName
-    });
+const _crHm = (data, prName) => data.reduce((hm, item) => {
+  const _itemKey = item[prName];
+  if (!hm[_itemKey]) {
+    hm[_itemKey] = [];
+    hm[_itemKey].seriaName = _itemKey;
   }
-  return legend.filter(_AdapterFn.isYNumber).sort(_compareByY);
-};
+  hm[_itemKey].push(_crPoint(item));
+  return hm;
+}, _createObject());
+const _compareByY = (a, b) => b.y - a.y;
+const _crRefLegend = hm => _getObjectKeys(hm).map(propName => {
+  const _arr = hm[propName];
+  return {
+    ..._arr[_arr.length - 1],
+    listPn: propName
+  };
+}).filter(_AdapterFn.isYNumber).sort(_compareByY);
 const _hmToPoints = (hm, arr) => arr.map(item => hm[item.listPn]);
 const _crSeriesData = (data, prName) => {
   const _hm = _crHm(data, prName),
@@ -66,7 +59,7 @@ const _crSeriesData = (data, prName) => {
   return _hmToPoints(_hm, _legend);
 };
 const _compareByX = (a, b) => a.x - b.x;
-const _crSeriaData = (data, option) => _isArr(data) ? data.map(_crPoint).filter(p => (0, _AdapterFn.isNumber)(p.y)).sort(_compareByX) : [];
+const _crSeriaData = (data, option) => (0, _AdapterFn.isArr)(data) ? data.map(_crPoint).filter(p => (0, _AdapterFn.isNumber)(p.y)).sort(_compareByX) : [];
 const _isItemList = item => (0, _AdapterFn.getValue)(item).indexOf('>') !== -1;
 const _getSeriesPropName = _ref2 => {
   let {
@@ -88,34 +81,25 @@ const crTitle = (json, option) => {
     subtitle
   } = option;
   if (dfSubtitle) {
-    return `${subtitle} ${_crUnit(json)}: ${title}`;
+    return subtitle + " " + _crUnit(json) + ": " + title;
   }
   if (title) {
-    return dfTitle ? `${dfTitle}: ${title}` : title;
+    return (0, _AdapterFn.joinBy)(': ', dfTitle, title);
   }
   const {
       data
     } = json,
     p = data[data.length - 1];
-  if (p && typeof p === 'object') {
-    const {
-      Area = '',
-      Item = '',
-      Element = ''
-    } = p;
-    return `${Area} ${Item} ${Element}`;
-  } else {
-    return DF_TITLE;
-  }
+  return (0, _AdapterFn.isObj)(p) ? (0, _AdapterFn.joinBy)(' ', p.Area, p.Item, p.Element) : DF_TITLE;
 };
 exports.crTitle = crTitle;
-const crSubtitle = (json, option) => option.dfSubtitle || `${option.subtitle}: ${_crUnit(json)}`;
+const crSubtitle = (json, option) => option.dfSubtitle || option.subtitle + ": " + _crUnit(json);
 exports.crSubtitle = crSubtitle;
 const crSeriaData = exports.crSeriaData = _crSeriaData;
 const toDataPoints = (json, option) => {
   const _prName = _getSeriesPropName(option),
     _itemCode = (0, _AdapterFn.getValue)(option.items[1]),
-    _data = (json.data || []).filter(item => {
+    _data = json.data.filter(item => {
       const _itemCodeFao = (item['Item Code (FAO)'] || '').trim();
       return _itemCodeFao ? _itemCodeFao === _itemCode : true;
     });

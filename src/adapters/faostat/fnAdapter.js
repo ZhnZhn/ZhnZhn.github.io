@@ -8,9 +8,11 @@ export {
 
 import {
   isArr,
+  isObj,
   isNumber,
   isYNumber,
   getValue,
+  joinBy,
   toUpperCaseFirst,
   monthIndex,
   ymdToUTC,
@@ -21,7 +23,8 @@ import { DATASET_EMPTY } from './fnDescr';
 const BLANK = ' '
 , MM_DD = '-12-31'
 , DF_TITLE = 'More about data on tab Info in Description'
-, _isArr = Array.isArray;
+, _createObject = () => Object.create(null)
+, _getObjectKeys = Object.keys;
 
 const _crUnit = (json) => {
   const { data } = json
@@ -50,39 +53,33 @@ const _crPoint = ({
   };
 };
 
-
 const _crHm = (
   data,
   prName
-) => {
-  const hm = Object.create(null);
-  data.forEach(item => {
-    const _itemKey = item[prName];
-    if (!hm[_itemKey]) {
-      hm[_itemKey] = []
-      hm[_itemKey].seriaName = _itemKey
-    }
-    hm[_itemKey].push(_crPoint(item))
-  })
+) => data.reduce((hm, item) => {
+  const _itemKey = item[prName];
+  if (!hm[_itemKey]) {
+    hm[_itemKey] = []
+    hm[_itemKey].seriaName = _itemKey
+  }
+  hm[_itemKey].push(_crPoint(item))
   return hm;
-};
+}, _createObject());
 
 const _compareByY = (a, b) => b.y - a.y;
 
-const _crRefLegend = (hm) => {
-  const legend = [];
-  let propName;
-  for(propName in hm) {
+const _crRefLegend = (
+  hm
+) => _getObjectKeys(hm)
+  .map(propName => {
     const _arr = hm[propName];
-    legend.push({
+    return {
       ..._arr[_arr.length-1],
       listPn: propName
-    })
-  }
-  return legend
-    .filter(isYNumber)
-    .sort(_compareByY);
-};
+    };
+  })
+  .filter(isYNumber)
+  .sort(_compareByY);
 
 const _hmToPoints = (
   hm,
@@ -90,14 +87,12 @@ const _hmToPoints = (
 ) => arr
   .map(item => hm[item.listPn]);
 
-
 const _crSeriesData = (
   data,
   prName
 ) => {
   const _hm = _crHm(data, prName)
   , _legend = _crRefLegend(_hm);
-
   return _hmToPoints(_hm, _legend);
 };
 
@@ -106,7 +101,7 @@ const _compareByX = (a, b) => a.x - b.x;
 const _crSeriaData = (
   data,
   option
-) => _isArr(data)
+) => isArr(data)
   ? data
      .map(_crPoint)
      .filter(p => isNumber(p.y))
@@ -143,22 +138,13 @@ export const crTitle = (
     return `${subtitle} ${_crUnit(json)}: ${title}`;
   }
   if (title) {
-    return dfTitle
-      ? `${dfTitle}: ${title}`
-      : title;
+    return joinBy(': ', dfTitle, title);
   }
   const { data } = json
   , p = data[data.length-1];
-  if (p && typeof p === 'object') {
-    const {
-      Area='',
-      Item='',
-      Element=''
-    } = p;
-    return `${Area} ${Item} ${Element}`;
-  } else {
-    return DF_TITLE;
-  }
+  return isObj(p)
+    ? joinBy(' ', p.Area, p.Item, p.Element)
+    : DF_TITLE;
 }
 
 export const crSubtitle = (
@@ -174,7 +160,7 @@ export const toDataPoints = (
 ) => {
   const _prName = _getSeriesPropName(option)
   , _itemCode = getValue(option.items[1])
-  , _data = (json.data || []).filter(item => {
+  , _data = json.data.filter(item => {
     const _itemCodeFao = (item['Item Code (FAO)'] || '').trim();
     return _itemCodeFao
       ? _itemCodeFao === _itemCode
