@@ -34,7 +34,10 @@ import {
   LT_KX
 } from '../../constants/LoadType';
 
-const _assign = Object.assign;
+
+const _createObject = () => Object.create(null)
+, _assign = Object.assign;
+
 const _withApiKey = [
   LT_AL, LT_IEX, LT_FMP, LT_INTR, LT_TW,
   LT_BEA, LT_EIA,
@@ -79,7 +82,7 @@ export const isProxyRequired = _fIsRequired(_withProxyServer)
 export const getApiTitle = loadId => _apiTitle[loadId]
   || _apiTitle.DF
 
-const _API_KEYS = Object.create(null);
+const _API_KEYS = _createObject();
 
 const _fSetKey = (propName) => (value) => {
   _API_KEYS[propName] = value
@@ -94,7 +97,8 @@ export const getKey = (id) => {
   }
 }
 
-const PN_IS_ADMIN_MODE = 'isAdm'
+const PN_LH_CORS_PROXY_SERVER = 'cps'
+, PN_IS_ADMIN_MODE = 'isAdm'
 , PN_IS_DRAW_DELTA_EXTREMS = 'isDrawDeltaExtrems'
 , PN_IS_NOT_ZOOM_TO_MIN_MAX = 'isNotZoomToMinMax'
 , PN_IS_AXIS_LABELS_GREY = 'isAlg';
@@ -106,13 +110,13 @@ export const CHECKBOX_CONFIGS = [
   ['Not Zoom to Min-Max', PN_IS_NOT_ZOOM_TO_MIN_MAX]
 ];
 
-const _SETTINGS = {
-  proxy: '',
+const _SETTINGS = _assign(_createObject(), {
+  [PN_LH_CORS_PROXY_SERVER]: '',
   [PN_IS_ADMIN_MODE]: false,
   [PN_IS_DRAW_DELTA_EXTREMS]: false,
   [PN_IS_NOT_ZOOM_TO_MIN_MAX]: false,
   [PN_IS_AXIS_LABELS_GREY]: false
-};
+});
 
 const _isSetting = propName => _SETTINGS[propName];
 const _fGetSetOption = (
@@ -127,6 +131,20 @@ const _fGetSetOption = (
     onSetting(_SETTINGS[propName])
   }
 }
+
+const _setProxy = (url) => {
+  if ((''+url).slice(0,16) === 'http://127.0.0.1') {
+    _SETTINGS[PN_LH_CORS_PROXY_SERVER] = url
+    return true;
+  }
+};
+
+const _isProxyServerValueRequired = _fIsRequired(_withProxyServer2)
+export const getProxy = (
+  loadId
+) => _isProxyServerValueRequired(loadId)
+  ? _SETTINGS[PN_LH_CORS_PROXY_SERVER]
+  : ''
 
 const _addBoolOptionTo = (
   options,
@@ -162,37 +180,21 @@ const _isDrawDeltaExtrems = _fGetSetOption(PN_IS_DRAW_DELTA_EXTREMS)
 , _isNotZoomToMinMax = _fGetSetOption(PN_IS_NOT_ZOOM_TO_MIN_MAX)
 , _isAxisLabelsGrey = _fGetSetOption(PN_IS_AXIS_LABELS_GREY, _setAxisLabelColor)
 
-const _setProxy = (url) => {
-  if ((''+url).slice(0,16) === 'http://127.0.0.1') {
-    _SETTINGS.proxy = url
-    return true;
-  }
-};
-
-const _isProxyServerValueRequired = _fIsRequired(_withProxyServer2)
-export const getProxy = (
-  loadId
-) => _isProxyServerValueRequired(loadId)
-  ? _SETTINGS.proxy
-  : ''
-
-export const exportSettingFn = () => {
-  return {
-    key1: _fSetKey(LT_Q),
-    key2: _fSetKey(LT_WT),
-    key3: _fSetKey(LT_BEA),
-    key4: _fSetKey(LT_BLS),
-    key5: _fSetKey(LT_EIA),
-    key6: _fSetKey(LT_AL),
-    key7: _fSetKey(LT_FMP),
-    key8: _fSetKey(LT_IEX),
-    key9: _fSetKey(LT_INTR),
-    key10: _fSetKey(LT_TW),
-    setProxy: _setProxy,
-    getProxy,
-    [PN_IS_ADMIN_MODE]: isAdminMode,
-    [PN_IS_DRAW_DELTA_EXTREMS]: _isDrawDeltaExtrems,
-    [PN_IS_NOT_ZOOM_TO_MIN_MAX]: _isNotZoomToMinMax,
-    [PN_IS_AXIS_LABELS_GREY]: _isAxisLabelsGrey
-  };
-}
+export const exportSettingFn = () => ({
+  key1: _fSetKey(LT_Q),
+  key2: _fSetKey(LT_WT),
+  key3: _fSetKey(LT_BEA),
+  key4: _fSetKey(LT_BLS),
+  key5: _fSetKey(LT_EIA),
+  key6: _fSetKey(LT_AL),
+  key7: _fSetKey(LT_FMP),
+  key8: _fSetKey(LT_IEX),
+  key9: _fSetKey(LT_INTR),
+  key10: _fSetKey(LT_TW),
+  setProxy: _setProxy,
+  getProxy,
+  [PN_IS_ADMIN_MODE]: isAdminMode,
+  [PN_IS_DRAW_DELTA_EXTREMS]: _isDrawDeltaExtrems,
+  [PN_IS_NOT_ZOOM_TO_MIN_MAX]: _isNotZoomToMinMax,
+  [PN_IS_AXIS_LABELS_GREY]: _isAxisLabelsGrey
+})
