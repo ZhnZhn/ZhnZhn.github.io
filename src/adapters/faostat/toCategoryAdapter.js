@@ -8,9 +8,9 @@ const _crData = (
   option
 ) => json.data.reduce((_data, item) => {
     const _value = parseFloat(item.Value);
-    if (isNumber(_value) && item.Area) {
+    if (isNumber(_value) && _value !== 0 && item.Area) {
       _data.push(crCategoryPoint(
-        parseFloat(item.Value),
+        _value,
         item.Area
       ))
     }

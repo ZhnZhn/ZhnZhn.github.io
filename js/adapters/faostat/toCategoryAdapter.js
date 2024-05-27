@@ -9,8 +9,8 @@ var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 const _crData = (json, option) => json.data.reduce((_data, item) => {
   const _value = parseFloat(item.Value);
-  if ((0, _AdapterFn.isNumber)(_value) && item.Area) {
-    _data.push((0, _CategoryFn.crCategoryPoint)(parseFloat(item.Value), item.Area));
+  if ((0, _AdapterFn.isNumber)(_value) && _value !== 0 && item.Area) {
+    _data.push((0, _CategoryFn.crCategoryPoint)(_value, item.Area));
   }
   return _data;
 }, []).sort(_compareByFn.compareByPnY).reverse();
