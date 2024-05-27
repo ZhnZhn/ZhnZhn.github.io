@@ -3,8 +3,12 @@ import { isCategoryCluster } from './CategoryFn';
 import crCategoryConfig from './crCategoryConfig';
 import fToCategorySeries from './fToCategorySeries';
 
+const FN_ECHO = v => v;
+
 const crAdapterCategory = (
-  crData
+  crData,
+  //FAOSTAT
+  crTitle=FN_ECHO
 ) => {
   const adapter = {
     toConfig: (json, option) => {
@@ -20,7 +24,7 @@ const crAdapterCategory = (
       , data = crData(json, option)
       , _arrSeriaType = seriaType.split('_')
       , config = crCategoryConfig(
-          subtitle,
+          crTitle(subtitle, json),
           title,
           _arrSeriaType[0],
           seriaColor,
