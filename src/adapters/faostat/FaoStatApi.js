@@ -1,3 +1,5 @@
+import { isCategory } from '../CategoryFn';
+
 import {
   crError,
   isSeriesReq,
@@ -35,7 +37,8 @@ const FaoStatApi = {
       items,
       dfElement,
       dfDomain='QC',
-      dfItemName='item'
+      dfItemName='item',
+      seriaType
     } = option
     , _one = getValue(items[0])
     , _two = getValue(items[1])
@@ -46,9 +49,13 @@ const FaoStatApi = {
       _pageSize
     ] = _one === WORLD_LIST_ID
         ? [ getMemoizedYear(2004), 5000]
-        : [ getMemoizedYear(1980), 100];
+        : [ getMemoizedYear(1980), 100]
+    , _apiUrl = `${API_URL}/${dfDomain}?element=${_element}&${dfItemName}=${_two}`
+    , _apiQuery = isCategory(seriaType)
+        ? `area=${WORLD_LIST_ID}&year=${option.time}&page_size=300`
+        : `area=${_one}&year=${_year}&page_size=${_pageSize}`
 
-    return `${API_URL}/${dfDomain}?element=${_element}&area=${_one}&${dfItemName}=${_two}&year=${_year}&page_size=${_pageSize}${TAIL}`;
+    return `${_apiUrl}&${_apiQuery}${TAIL}`;
   },
 
   checkResponse(json){
