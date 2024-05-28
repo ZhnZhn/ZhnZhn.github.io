@@ -7,22 +7,6 @@ var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _TreeMapFn = require("../TreeMapFn");
 var _fnAdapter = require("./fnAdapter");
-const _addPercentAndColorToData = (data, total) => {
-  if (total !== 0) {
-    const _onePercent = total / 100;
-    data.forEach(item => {
-      item.percent = (0, _fnAdapter.roundBy)(item.value / _onePercent);
-      item.name = (0, _TreeMapFn.crPointName)(item.label, item.percent > 1 ? item.percent : '');
-    });
-    (0, _fnAdapter.sortDescByPnValue)(data);
-    (0, _TreeMapFn.addColorsTo)({
-      data,
-      total
-    });
-  } else {
-    data = [];
-  }
-};
 const _crTreeMapData = json => {
   const data = [];
   let total = 0;
@@ -37,7 +21,7 @@ const _crTreeMapData = json => {
       });
     }
   });
-  _addPercentAndColorToData(data, total);
+  (0, _TreeMapFn.addPercentAndColorToData)(data, total);
   return [data, total];
 };
 const _crDataPoint = (value, label, item) => ({
@@ -47,7 +31,7 @@ const _crDataPoint = (value, label, item) => ({
 });
 const _crDataByCountry = (json, option) => {
   const [data, totalOfWorld] = (0, _fnAdapter.crCategoryData)(json, option, _crDataPoint);
-  _addPercentAndColorToData(data, totalOfWorld);
+  (0, _TreeMapFn.addPercentAndColorToData)(data, totalOfWorld);
   return [data, totalOfWorld];
 };
 const toTreeMap = (json, option) => {
@@ -59,6 +43,5 @@ const toTreeMap = (json, option) => {
     })
   }), _configBuilderFn.toConfig);
 };
-var _default = toTreeMap;
-exports.default = _default;
+var _default = exports.default = toTreeMap;
 //# sourceMappingURL=toTreeMap.js.map

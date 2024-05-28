@@ -6,14 +6,12 @@ import {
   toConfig
 } from '../../charts/configBuilderFn';
 import {
-  addColorsTo,
-  crPointName
+  addPercentAndColorToData
 } from '../TreeMapFn';
 
 import {
   isPositiveNumber,
   isTotalByAll,
-  roundBy,
   getItemTradeValue,
   getItemCmdCode,
   getItemCmdDescE,
@@ -21,29 +19,8 @@ import {
   crCategoryData,
   crCategoryTitle,
   crInfo,
-  crZhConfig,
-  sortDescByPnValue
+  crZhConfig
 } from './fnAdapter';
-
-const _addPercentAndColorToData = (
-  data,
-  total
-) => {
-  if (total !== 0) {
-    const _onePercent = total/100;
-    data.forEach(item => {
-      item.percent = roundBy(item.value/_onePercent)
-      item.name = crPointName(
-        item.label,
-        item.percent > 1 ? item.percent : ''
-      )
-    })
-    sortDescByPnValue(data)    
-    addColorsTo({ data, total })
-  } else {
-    data = []
-  }
-};
 
 const _crTreeMapData = json => {
   const data = [];
@@ -59,7 +36,7 @@ const _crTreeMapData = json => {
       })
     }
   })
-  _addPercentAndColorToData(data, total)
+  addPercentAndColorToData(data, total)
   return [data, total];
 }
 
@@ -85,7 +62,7 @@ const _crDataByCountry = (
     option,
     _crDataPoint
   )
-  _addPercentAndColorToData(data, totalOfWorld)
+  addPercentAndColorToData(data, totalOfWorld)
   return [
     data,
     totalOfWorld

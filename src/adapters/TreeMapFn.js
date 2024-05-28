@@ -1,4 +1,11 @@
-import { isNumber } from './AdapterFn';
+import {
+  isNumber,
+  roundBy
+} from './AdapterFn';
+import {
+  sortDescByPnValue
+} from './compareByFn';
+
 import {
   COLOR_PERIOD,
   COLOR_BASE1,
@@ -6,7 +13,9 @@ import {
   COLOR_BASE3,
   crMonoColor
 } from '../charts/MonoColorFn';
-import { CL_TREE_MAP_PERCENT } from './CL';
+import {
+  CL_TREE_MAP_PERCENT
+} from './CL';
 
 const _findLevelBy = (
   data,
@@ -104,4 +113,22 @@ export const crPointName = (
     ? `<span class="${CL_TREE_MAP_PERCENT}">${percent}%</span>`
     : '';
   return `${label}<br/>${_percent}`;
+}
+
+export const addPercentAndColorToData = (
+  data,
+  total
+) => {
+  if (total !== 0) {
+    const _onePercent = total/100;
+    data.forEach(item => {
+      item.percent = roundBy(item.value/_onePercent)
+      item.name = crPointName(
+        item.label,
+        item.percent > 1 ? item.percent : ''
+      )
+    })
+    sortDescByPnValue(data)
+    addColorsTo({ data, total })
+  }
 }
