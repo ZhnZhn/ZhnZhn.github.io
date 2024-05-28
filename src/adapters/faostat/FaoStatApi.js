@@ -1,10 +1,16 @@
-import { isCategory } from '../CategoryFn';
+import {
+  isCategory,
+  isTreeMap
+} from '../CategoryFn';
+import {
+  getValue,
+  getCaption,
+  crError
+} from '../AdapterFn';
 
 import {
-  crError,
   isSeriesReq,
-  isQueryAllowed,
-  getValue
+  isQueryAllowed
 } from './fnAdapter';
 
 import getMemoizedYear from './getMemoizedYear';
@@ -28,6 +34,10 @@ const _checkReq = (option) => {
   if (isQueryAllowed(option)) {
     throw new Error('Query lists for lists is not allowed.');
   }
+  const _element = option.items[2] || {};
+  if (isTreeMap(option.seriaType) && !_element.isTm) {
+    throw new Error(`TreeMap for ${getCaption(_element)} is not exist.`);
+  }
 };
 
 const FaoStatApi = {
@@ -48,8 +58,8 @@ const FaoStatApi = {
       _year,
       _pageSize
     ] = _one === WORLD_LIST_ID
-        ? [ getMemoizedYear(2004), 5000]
-        : [ getMemoizedYear(1980), 100]
+        ? [getMemoizedYear(2004), 5000]
+        : [getMemoizedYear(1980), 100]
     , _apiUrl = `${API_URL}/${dfDomain}?element=${_element}&${dfItemName}=${_two}`
     , _apiQuery = isCategory(seriaType)
         ? `area=${WORLD_LIST_ID}&year=${option.time}&page_size=300`

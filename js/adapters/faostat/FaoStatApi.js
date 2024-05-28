@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _CategoryFn = require("../CategoryFn");
+var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
 var _getMemoizedYear = _interopRequireDefault(require("./getMemoizedYear"));
 const API_URL = 'https://faostatservices.fao.org/api/v1/en/data',
@@ -19,6 +20,10 @@ const _checkReq = option => {
   if ((0, _fnAdapter.isQueryAllowed)(option)) {
     throw new Error('Query lists for lists is not allowed.');
   }
+  const _element = option.items[2] || {};
+  if ((0, _CategoryFn.isTreeMap)(option.seriaType) && !_element.isTm) {
+    throw new Error("TreeMap for " + (0, _AdapterFn.getCaption)(_element) + " is not exist.");
+  }
 };
 const FaoStatApi = {
   getRequestUrl(option) {
@@ -30,9 +35,9 @@ const FaoStatApi = {
         dfItemName = 'item',
         seriaType
       } = option,
-      _one = (0, _fnAdapter.getValue)(items[0]),
-      _two = (0, _fnAdapter.getValue)(items[1]),
-      _three = (0, _fnAdapter.getValue)(items[2]),
+      _one = (0, _AdapterFn.getValue)(items[0]),
+      _two = (0, _AdapterFn.getValue)(items[1]),
+      _three = (0, _AdapterFn.getValue)(items[2]),
       _element = _three || dfElement,
       [_year, _pageSize] = _one === WORLD_LIST_ID ? [(0, _getMemoizedYear.default)(2004), 5000] : [(0, _getMemoizedYear.default)(1980), 100],
       _apiUrl = API_URL + "/" + dfDomain + "?element=" + _element + "&" + dfItemName + "=" + _two,
@@ -41,7 +46,7 @@ const FaoStatApi = {
   },
   checkResponse(json) {
     if (!(json && _isArr(json.data))) {
-      throw (0, _fnAdapter.crError)();
+      throw (0, _AdapterFn.crError)();
     }
   },
   addPropsTo(option) {
