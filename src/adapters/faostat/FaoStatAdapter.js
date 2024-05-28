@@ -1,13 +1,15 @@
 import {
-  fGetRouteCategory,
+  fGetRouteTreeMap,
   crAdapterRouter
 } from '../crAdapterRouter';
 
+import toTreeMapAdapter from './toTreeMapAdapter';
 import toCategoryAdapter from './toCategoryAdapter';
 import toSplineAdapter from './toSplineAdapter';
 
 const FaoStatAdapter = crAdapterRouter({
-  getRoute: fGetRouteCategory(
+  getRoute: fGetRouteTreeMap(
+    toTreeMapAdapter,
     toCategoryAdapter,
     toSplineAdapter
   )

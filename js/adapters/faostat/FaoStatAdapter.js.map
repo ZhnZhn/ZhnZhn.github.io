@@ -7,18 +7,20 @@
  "names": [
   "_crAdapterRouter",
   "require",
-  "_toCategoryAdapter",
+  "_toTreeMapAdapter",
   "_interopRequireDefault",
+  "_toCategoryAdapter",
   "_toSplineAdapter",
   "FaoStatAdapter",
   "crAdapterRouter",
   "getRoute",
-  "fGetRouteCategory",
+  "fGetRouteTreeMap",
+  "toTreeMapAdapter",
   "toCategoryAdapter",
   "toSplineAdapter",
   "_default",
   "exports",
   "default"
  ],
- "mappings": ";;;;;AAAA,IAAAA,gBAAA,GAAAC,OAAA;AAKA,IAAAC,kBAAA,GAAAC,sBAAA,CAAAF,OAAA;AACA,IAAAG,gBAAA,GAAAD,sBAAA,CAAAF,OAAA;AAEA,MAAMI,cAAc,GAAG,IAAAC,gCAAe,EAAC;EACrCC,QAAQ,EAAE,IAAAC,kCAAiB,EACzBC,0BAAiB,EACjBC,wBACF;AACF,CAAC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYR,cAAc"
+ "mappings": ";;;;;AAAA,IAAAA,gBAAA,GAAAC,OAAA;AAKA,IAAAC,iBAAA,GAAAC,sBAAA,CAAAF,OAAA;AACA,IAAAG,kBAAA,GAAAD,sBAAA,CAAAF,OAAA;AACA,IAAAI,gBAAA,GAAAF,sBAAA,CAAAF,OAAA;AAEA,MAAMK,cAAc,GAAG,IAAAC,gCAAe,EAAC;EACrCC,QAAQ,EAAE,IAAAC,iCAAgB,EACxBC,yBAAgB,EAChBC,0BAAiB,EACjBC,wBACF;AACF,CAAC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYT,cAAc"
 }

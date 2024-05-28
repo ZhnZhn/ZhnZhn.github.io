@@ -45,8 +45,8 @@ const _crDataImpl = (data, option, totalRt, onePercent, percRt) => {
       _perc: _percent,
       title: (0, _domSanitize.default)(title),
       _label: (0, _domSanitize.default)(label),
-      label: (0, _domSanitize.default)(`${label} (${_percent}%)`),
-      name: (0, _domSanitize.default)(`${label}<br/><span class="${_CL.CL_TREE_MAP_PERCENT_BLACK}">${(0, _formatNumber.default)(_value)} (${_percent}%)</span>`)
+      label: (0, _domSanitize.default)(label + " (" + _percent + "%)"),
+      name: (0, _domSanitize.default)(label + "<br/><span class=\"" + _CL.CL_TREE_MAP_PERCENT_BLACK + "\">" + (0, _formatNumber.default)(_value) + " (" + _percent + "%)</span>")
     };
   }, []);
 };
@@ -57,7 +57,7 @@ const _crData = function () {
   const _data = _crDataImpl(...args, 0);
   return _crTotalPerc(_data) === 100 ? _data : _crDataImpl(...args, 1);
 };
-const _crTotalToken = (title, value, perc) => `${title} ${(0, _formatNumber.default)(value, true)} (${perc}%)`;
+const _crTotalToken = (title, value, perc) => title + " " + (0, _formatNumber.default)(value, true) + " (" + perc + "%)";
 const _crSubTotalRt = (value, rt) => (0, _AdapterFn.isNumber)(rt) ? _crItemRt(value, rt) : 0;
 const _crSubValue = v => (0, _AdapterFn.isNumber)(v) ? v : 0;
 const _isZeroValueCase = (v, sum) => sum === 0 && v !== 0;
@@ -85,7 +85,7 @@ const _crCaption = (data, option, total, totalRt, onePercent) => {
     [ffPerc, nffPerc] = crRoundedSubTotal(ffTotal / onePercent, nffTotal / onePercent, 100),
     _titleF = _crTotalToken("Fossil Fuels", ffTotal, ffPerc),
     _titleNf = _crTotalToken('Not Fossil Fuels', nffTotal, nffPerc);
-  return [(0, _AdapterFn.joinBy)(": ", option.title, option.dfTmTitle), _arrTotal[0] > _arrTotal[1] ? `${_titleF}, ${_titleNf}` : `${_titleNf}, ${_titleF}`];
+  return [(0, _AdapterFn.joinBy)(": ", option.title, option.dfTmTitle), _arrTotal[0] > _arrTotal[1] ? _titleF + ", " + _titleNf : _titleNf + ", " + _titleF];
 };
 const fToTreeMapAdapter = function (getDataTotalTuple, crCaption) {
   if (crCaption === void 0) {
@@ -94,7 +94,7 @@ const fToTreeMapAdapter = function (getDataTotalTuple, crCaption) {
   return () => {
     const adapter = {
       toConfig: (json, option) => {
-        const [data, total] = getDataTotalTuple(json),
+        const [data, total] = getDataTotalTuple(json, option),
           {
             _itemKey
           } = option,

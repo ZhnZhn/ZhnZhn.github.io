@@ -205,7 +205,7 @@ export const fToTreeMapAdapter = (
       const [
         data,
         total
-      ] = getDataTotalTuple(json)
+      ] = getDataTotalTuple(json, option)
       , {
         _itemKey
       } = option
