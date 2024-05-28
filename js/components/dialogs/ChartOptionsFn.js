@@ -69,8 +69,12 @@ const _crT3AB = _ref6 => {
   let [oneCaption, twoCaption] = _ref6;
   return [..._crT3([oneCaption]), _crTreeMapItem(twoCaption, _ChartOptionsTypes.TYPE_T3AB)];
 };
-const _crT3A2 = _ref7 => {
+const _crT3AC = _ref7 => {
   let [oneCaption] = _ref7;
+  return [..._crT3([oneCaption]), _crItem(["TreeMap (60, 90): By " + oneCaption, _ChartType.CHT_TREE_MAP_CLUSTER, oneCaption])];
+};
+const _crT3A2 = _ref8 => {
+  let [oneCaption] = _ref8;
   return [..._crT3A([oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Depth 2", _ChartType.CHT_TREE_MAP_2, oneCaption]), _crItem(["TreeMap: By " + oneCaption + ": Depth 2: Cluster", _ChartType.CHT_TREE_MAP_2_CLUSTER, oneCaption])];
 };
 const _r = {
@@ -85,18 +89,19 @@ const _r = {
   t3a2: _crT3A2,
   t3b: _crT3B,
   [_ChartOptionsTypes.TYPE_T3AB]: _crT3AB,
+  t3ac: _crT3AC,
   t3c: _crT3C,
   t3c2: _crT3C2,
   t3ca: _crT3CA,
   df3: _crDF3
 };
-const _crCaptions = _ref8 => {
+const _crCaptions = _ref9 => {
   let {
     configs,
     selectProps,
     oneCaption = BLANK_CAPTION,
     twoCaption = BLANK_CAPTION
-  } = _ref8;
+  } = _ref9;
   const _arr = configs || selectProps;
   return _isArr(_arr) ? _arr.map(item => item.caption || BLANK_CAPTION) : [oneCaption, twoCaption];
 };

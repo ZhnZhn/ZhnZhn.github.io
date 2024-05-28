@@ -174,6 +174,11 @@ const _crT3AB = ([oneCaption, twoCaption]) => [
   _crTreeMapItem(twoCaption, TYPE_T3AB)
 ];
 
+const _crT3AC = ([oneCaption]) => [
+  ..._crT3([oneCaption]),
+  _crItem([`TreeMap (60, 90): By ${oneCaption}`, CHT_TREE_MAP_CLUSTER, oneCaption])
+];
+
 const _crT3A2 = ([oneCaption]) => [
   ..._crT3A([oneCaption]),
   _crItem([`TreeMap: By ${oneCaption}: Depth 2`, CHT_TREE_MAP_2, oneCaption]),
@@ -192,6 +197,7 @@ const _r = {
   t3a2: _crT3A2,
   t3b: _crT3B,
   [TYPE_T3AB]: _crT3AB,
+  t3ac: _crT3AC,
   t3c: _crT3C,
   t3c2: _crT3C2,
   t3ca: _crT3CA,
