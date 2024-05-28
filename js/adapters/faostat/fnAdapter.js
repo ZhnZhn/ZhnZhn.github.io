@@ -125,7 +125,7 @@ exports.crValueMoving = crValueMoving;
 const isSeriesReq = exports.isSeriesReq = _getSeriesPropName;
 const isQueryAllowed = exports.isQueryAllowed = _isListForList;
 const crCategoryTitle = (title, json) => {
-  const _unit = json.data[0].Unit;
+  const _unit = (json.data[0] || {}).Unit;
   return (0, _AdapterFn.joinBy)(', ', title, (0, _AdapterFn.isStr)(_unit) ? _unit.length > 2 ? _unit : _unit.toUpperCase() : '');
 };
 exports.crCategoryTitle = crCategoryTitle;

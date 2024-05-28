@@ -45,7 +45,10 @@ const FaoStatApi = {
     return _apiUrl + "&" + _apiQuery + TAIL;
   },
   checkResponse(json) {
-    if (!(json && _isArr(json.data))) {
+    const {
+      data
+    } = json || {};
+    if (!(_isArr(data) && data.length > 0)) {
       throw (0, _AdapterFn.crError)();
     }
   },

@@ -69,7 +69,8 @@ const FaoStatApi = {
   },
 
   checkResponse(json){
-    if (!(json && _isArr(json.data))) {
+    const { data } = json || {};
+    if (!(_isArr(data) && data.length > 0)) {
       throw crError();
     }
   },
