@@ -7,6 +7,7 @@ var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"))
 var _CategoryFn = require("../CategoryFn");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
+var _fnAdapter = require("./fnAdapter");
 const _crData = (json, option) => json.data.reduce((_data, item) => {
   const _value = parseFloat(item.Value);
   if ((0, _AdapterFn.isNumber)(_value) && _value !== 0 && item.Area) {
@@ -14,10 +15,6 @@ const _crData = (json, option) => json.data.reduce((_data, item) => {
   }
   return _data;
 }, []).sort(_compareByFn.compareByPnY).reverse();
-const _crTitle = (title, json) => {
-  const _unit = json.data[0].Unit;
-  return (0, _AdapterFn.joinBy)(', ', title, (0, _AdapterFn.isStr)(_unit) ? _unit.toUpperCase() : '');
-};
-const toCategoryAdapter = (0, _crAdapterCategory.default)(_crData, _crTitle);
+const toCategoryAdapter = (0, _crAdapterCategory.default)(_crData, _fnAdapter.crCategoryTitle);
 var _default = exports.default = toCategoryAdapter;
 //# sourceMappingURL=toCategoryAdapter.js.map

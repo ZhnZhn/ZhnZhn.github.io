@@ -1,15 +1,14 @@
 export { toInfo } from './fnDescr';
 export {
-  getValue,
   findMinY,
-  crDfItemKey,
-  crError
+  crDfItemKey
 } from '../AdapterFn';
 
 import {
   isArr,
   isObj,
   isNumber,
+  isStr,
   isYNumber,
   getValue,
   joinBy,
@@ -192,3 +191,18 @@ export const crValueMoving = (
 
 export const isSeriesReq = _getSeriesPropName
 export const isQueryAllowed = _isListForList
+
+export const crCategoryTitle = (
+  title,
+  json
+) => {
+  const _unit = json.data[0].Unit;
+  return joinBy(', ',
+    title,
+    isStr(_unit)
+      ? _unit.length > 2
+          ? _unit
+          : _unit.toUpperCase()
+      : ''
+  );
+}

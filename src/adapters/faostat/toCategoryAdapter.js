@@ -1,11 +1,8 @@
 import crAdapterCategory from '../crAdapterCategory';
 import { crCategoryPoint } from '../CategoryFn';
-import {
-  isNumber,
-  isStr,
-  joinBy
-} from '../AdapterFn';
+import { isNumber } from '../AdapterFn';
 import { compareByPnY } from '../compareByFn';
+import { crCategoryTitle } from './fnAdapter'
 
 const _crData = (
   json,
@@ -23,20 +20,9 @@ const _crData = (
  .sort(compareByPnY)
  .reverse();
 
- const _crTitle = (
-   title,
-   json
- ) => {
-   const _unit = json.data[0].Unit;
-   return joinBy(', ',
-     title,
-     isStr(_unit) ? _unit.toUpperCase() : ''
-   );
-};
-
 const toCategoryAdapter = crAdapterCategory(
   _crData,
-  _crTitle
+  crCategoryTitle
 );
 
 export default toCategoryAdapter

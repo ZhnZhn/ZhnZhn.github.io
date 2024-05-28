@@ -1,14 +1,12 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.findMinY = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crSeriaData = exports.crError = exports.crDfItemKey = void 0;
+exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.findMinY = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crSeriaData = exports.crDfItemKey = exports.crCategoryTitle = void 0;
 var _fnDescr = require("./fnDescr");
 exports.toInfo = _fnDescr.toInfo;
 var _AdapterFn = require("../AdapterFn");
-exports.getValue = _AdapterFn.getValue;
 exports.findMinY = _AdapterFn.findMinY;
 exports.crDfItemKey = _AdapterFn.crDfItemKey;
-exports.crError = _AdapterFn.crError;
 const BLANK = ' ',
   MM_DD = '-12-31',
   DF_TITLE = 'More about data on tab Info in Description',
@@ -126,4 +124,9 @@ const crValueMoving = points => (0, _AdapterFn.isArr)(points) && !(0, _AdapterFn
 exports.crValueMoving = crValueMoving;
 const isSeriesReq = exports.isSeriesReq = _getSeriesPropName;
 const isQueryAllowed = exports.isQueryAllowed = _isListForList;
+const crCategoryTitle = (title, json) => {
+  const _unit = json.data[0].Unit;
+  return (0, _AdapterFn.joinBy)(', ', title, (0, _AdapterFn.isStr)(_unit) ? _unit.length > 2 ? _unit : _unit.toUpperCase() : '');
+};
+exports.crCategoryTitle = crCategoryTitle;
 //# sourceMappingURL=fnAdapter.js.map
