@@ -25,8 +25,8 @@ import { crItemConf } from '../crFn';
 
 import convertToUTC from './convertToUTC';
 
-const COLOR_EU = "#0088ff"
-, COLOR_EA = "#ff5800"
+const COLOR_EU = "#001489"
+, COLOR_EA = "#ffdd00"
 , COLOR_NOT_EU_MEMBER = '#8085e9'
 , EU_CODES = ["EU", "EU28", "EU27_2020", "G20", "Group of Twenty" ]
 , EA_CODES = ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19", "EA20", "EUROZONE"]
