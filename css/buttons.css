@@ -153,20 +153,6 @@
   border-radius: 100%;
 }
 
-.bt-twitter {
-  background-color: #1b95e0;
-}
-.bt-twitter:hover {
-  background-color: #0c7abf;
-}
-
-.bt-twitter span {
-  border-bottom: thin solid;
-}
-.bt-twitter:hover span {
-  border-bottom-width: medium;
-}
-
 .bt-flat {
   color: #607d8b;
   color: var(--btf-c);

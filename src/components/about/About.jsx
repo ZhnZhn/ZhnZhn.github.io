@@ -9,7 +9,7 @@ import useShowHideComponent from '../hooks/useShowHideComponent';
 import { useMsAbout } from '../../flux/stores/compStore';
 
 import A from '../Comp';
-import TwitterLink from './TwitterLink';
+import XPlatformLink from './XPlatformLink';
 import DataProviders from './DataProviders';
 
 import StepTitles from '../zhn/StepTitles';
@@ -37,7 +37,7 @@ const CL_ABOUT = crBsContainerCn("about-container")
 , S_MB_6EM = { marginBottom: '0.6em' }
 , S_MB_4 = { marginBottom: 4 }
 , S_MT_4 = { marginTop: 4 }
-, S_BT_TWITTER = { marginLeft: 12 }
+, S_BT_X_PLATFORM = { marginLeft: 12 }
 , S_GREEN = { color: '#80c040' }
 , S_BLUE_DARK = { color: '#2f7ed8' }
 , S_RED = { color: '#f44336' }
@@ -80,10 +80,10 @@ const About = () => {
           caption="About"
           onClose={hide}
        >
-         <TwitterLink
-            style={S_BT_TWITTER}
+         <XPlatformLink
+            style={S_BT_X_PLATFORM}
             account="webapperc"
-            title="Twitter / X page @webapperc with chart examples"
+            title="X / Twitter page @webapperc with chart examples"
          />
        </A.BrowserCaption>
 

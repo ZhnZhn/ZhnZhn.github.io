@@ -1,6 +1,6 @@
 const COLOR = '#faebd7'
-, TWITTER_X_URL = 'https://twitter.com'
-, CL_BT_TWITTER = "bt-twitter"
+, X_URL = 'https://x.com'
+, CL_LINK_X = "x-link"
 , S_LINK = {
    color: COLOR,
    display: 'inline-block',
@@ -25,19 +25,19 @@ const COLOR = '#faebd7'
    marginRight: 8
 };
 
-const TITLE = "X formerly known as Twitter"
+const TITLE = "X formerly known as Twitter";
 
-const TwitterLink = ({
+const XPlatformLink = ({
   style,
   iconStyle,
   account,
   title
 }) => account ? (
   <a
-     className={CL_BT_TWITTER}
+     className={CL_LINK_X}
      style={{...S_LINK, ...style}}
      target="_blank"
-     href={`${TWITTER_X_URL}/${account}`}
+     href={`${X_URL}/${account}`}
      title={title}
   >
     <svg
@@ -53,4 +53,4 @@ const TwitterLink = ({
   </a>
 ) : null;
 
-export default TwitterLink
+export default XPlatformLink

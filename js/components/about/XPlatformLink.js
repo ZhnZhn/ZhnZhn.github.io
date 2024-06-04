@@ -4,8 +4,8 @@ exports.__esModule = true;
 exports.default = void 0;
 var _jsxRuntime = require("react/jsx-runtime");
 const COLOR = '#faebd7',
-  TWITTER_X_URL = 'https://twitter.com',
-  CL_BT_TWITTER = "bt-twitter",
+  X_URL = 'https://x.com',
+  CL_LINK_X = "x-link",
   S_LINK = {
     color: COLOR,
     display: 'inline-block',
@@ -30,7 +30,7 @@ const COLOR = '#faebd7',
     marginRight: 8
   };
 const TITLE = "X formerly known as Twitter";
-const TwitterLink = _ref => {
+const XPlatformLink = _ref => {
   let {
     style,
     iconStyle,
@@ -38,13 +38,13 @@ const TwitterLink = _ref => {
     title
   } = _ref;
   return account ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("a", {
-    className: CL_BT_TWITTER,
+    className: CL_LINK_X,
     style: {
       ...S_LINK,
       ...style
     },
     target: "_blank",
-    href: TWITTER_X_URL + "/" + account,
+    href: X_URL + "/" + account,
     title: title,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("svg", {
       viewBox: "0 0 22 20",
@@ -64,6 +64,5 @@ const TwitterLink = _ref => {
     })]
   }) : null;
 };
-var _default = TwitterLink;
-exports.default = _default;
-//# sourceMappingURL=TwitterLink.js.map
+var _default = exports.default = XPlatformLink;
+//# sourceMappingURL=XPlatformLink.js.map

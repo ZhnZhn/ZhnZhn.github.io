@@ -8,7 +8,7 @@ var _styleFn = require("../styleFn");
 var _useShowHideComponent = _interopRequireDefault(require("../hooks/useShowHideComponent"));
 var _compStore = require("../../flux/stores/compStore");
 var _Comp = _interopRequireDefault(require("../Comp"));
-var _TwitterLink = _interopRequireDefault(require("./TwitterLink"));
+var _XPlatformLink = _interopRequireDefault(require("./XPlatformLink"));
 var _DataProviders = _interopRequireDefault(require("./DataProviders"));
 var _StepTitles = _interopRequireDefault(require("../zhn/StepTitles"));
 var _SpanToken = require("../zhn/SpanToken");
@@ -48,7 +48,7 @@ const CL_ABOUT = (0, _styleFn.crBsContainerCn)("about-container"),
   S_MT_4 = {
     marginTop: 4
   },
-  S_BT_TWITTER = {
+  S_BT_X_PLATFORM = {
     marginLeft: 12
   },
   S_GREEN = {
@@ -81,10 +81,10 @@ const About = () => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.BrowserCaption, {
       caption: "About",
       onClose: hide,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TwitterLink.default, {
-        style: S_BT_TWITTER,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_XPlatformLink.default, {
+        style: S_BT_X_PLATFORM,
         account: "webapperc",
-        title: "Twitter / X page @webapperc with chart examples"
+        title: "X / Twitter page @webapperc with chart examples"
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {
       className: CL_SCROLL_Y,

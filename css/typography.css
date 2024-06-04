@@ -11,6 +11,20 @@
   border-bottom-width: 3px;
 }
 
+.x-link {
+  background-color: #1b95e0;
+}
+.x-link:hover {
+  background-color: #0c7abf;
+}
+
+.x-link span {
+  border-bottom: thin solid;
+}
+.x-link:hover span {
+  border-bottom-width: medium;
+}
+
 .descr-datasource h1 {
   color: black;
   color: var(--c-bl);
