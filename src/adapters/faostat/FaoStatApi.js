@@ -3,6 +3,9 @@ import {
   isTreeMap
 } from '../CategoryFn';
 import {
+  isArr,
+  isTokenInStr,
+  assign,
   getValue,
   getCaption,
   crError
@@ -19,12 +22,9 @@ const API_URL = 'https://faostatservices.fao.org/api/v1/en/data'
 , TAIL = '&area_cs=M49&item_cs=CPC&show_codes=true&show_unit=true&show_flags=true&show_notes=true&null_values=false&page_number=1&datasource=PRODUCTION_AWS&output_type=objects'
 , WORLD_LIST_ID = '5000>';
 
-const _isArr = Array.isArray
-, _assign = Object.assign
-
 const _isTitle = (
   qT
-) => qT.indexOf('World') !== -1
+) => isTokenInStr(qT, 'World')
   && qT.length < 22;
 
 const _checkReq = (option) => {
@@ -39,6 +39,12 @@ const _checkReq = (option) => {
     throw new Error(`TreeMap for ${getCaption(_element)} is not exist.`);
   }
 };
+
+const _getListId = (
+  geoId
+) => isTokenInStr(geoId, '>')
+  ? geoId
+  : WORLD_LIST_ID;
 
 const FaoStatApi = {
   getRequestUrl(option){
@@ -61,16 +67,20 @@ const FaoStatApi = {
         ? [getMemoizedYear(2004), 5000]
         : [getMemoizedYear(1980), 100]
     , _apiUrl = `${API_URL}/${dfDomain}?element=${_element}&${dfItemName}=${_two}`
-    , _apiQuery = isCategory(seriaType)
-        ? `area=${WORLD_LIST_ID}&year=${option.time}&page_size=300`
-        : `area=${_one}&year=${_year}&page_size=${_pageSize}`
+    , _isCategorySeriaType = isCategory(seriaType)
+    , _area = _isCategorySeriaType
+        ? _getListId(_one)
+        : _one
+    , _apiQuery = _isCategorySeriaType
+        ? `area=${_area}&year=${option.time}&page_size=300`
+        : `area=${_area}&year=${_year}&page_size=${_pageSize}`
 
     return `${_apiUrl}&${_apiQuery}${TAIL}`;
   },
 
   checkResponse(json){
     const { data } = json || {};
-    if (!(_isArr(data) && data.length > 0)) {
+    if (!(isArr(data) && data.length > 0)) {
       throw crError();
     }
   },
@@ -83,7 +93,7 @@ const FaoStatApi = {
       qT=''
     } = option
     , title = _isTitle(qT) ? qT : '';
-    _assign(option, {
+    assign(option, {
       items: [{v:qA},{v:qI},{v:qE}],
       itemCaption: 'Item',
       title
