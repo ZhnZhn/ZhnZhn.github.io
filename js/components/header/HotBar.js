@@ -13,9 +13,6 @@ var _jsxRuntime = require("react/jsx-runtime");
 const CL_BT_HOT = "bt-hot",
   S_ROOT = {
     display: 'inline-block'
-  },
-  S_BT_CL = {
-    color: '#f44336'
   };
 const _isIn = (arr, type) => {
   for (let i = 0; i < arr.length; i++) {
@@ -81,7 +78,7 @@ const HotBar = _ref2 => {
       onShowDialog: onShowDialog
     }), hotButtons.length !== 0 && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       timeout: 0,
-      style: S_BT_CL,
+      className: CL_BT_HOT,
       caption: "CL",
       title: "Clean Hot Bar",
       onClick: _hClean
