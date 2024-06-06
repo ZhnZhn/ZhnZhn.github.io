@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/items/Item.Style.js"
+ ],
+ "file": "../../../src/components/items/Item.Style.js",
+ "names": [
+  "CL_HEADER_CAPTION",
+  "exports",
+  "COLOR_SVG_MORE",
+  "S_BT_SVG_CLOSE",
+  "stroke",
+  "S_HEADER_CAPTION_OPEN",
+  "color",
+  "S_HEADER_CAPTION_CLOSE"
+ ],
+ "mappings": ";;;;AACO,MAAMA,iBAAiB,GAAAC,OAAA,CAAAD,iBAAA,GAAG,mCAAmC;AAE7D,MAAME,cAAc,GAAAD,OAAA,CAAAC,cAAA,GAAG,MAAM;AAC7B,MAAMC,cAAc,GAAAF,OAAA,CAAAE,cAAA,GAAG;EAC5BC,MAAM,EAAEF;AACV,CAAC;AAEM,MAAMG,qBAAqB,GAAAJ,OAAA,CAAAI,qBAAA,GAAG;EACnCC,KAAK,EAAE;AACT,CAAC;AACM,MAAMC,sBAAsB,GAAAN,OAAA,CAAAM,sBAAA,GAAG;EACpCD,KAAK,EAAE;AACT,CAAC"
+}

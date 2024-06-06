@@ -6,9 +6,9 @@ exports.default = void 0;
 var _styleFn = require("../styleFn");
 var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _BtSvgX = require("../zhn/BtSvgX");
+var _Item = require("./Item.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_ITEM_HEADER = (0, _styleFn.crElementCn)(),
-  CL_CAPTION = "not-selected text-clip bt-left bt",
   S_ROOT = {
     position: 'relative',
     height: 'auto',
@@ -21,18 +21,9 @@ const CL_ITEM_HEADER = (0, _styleFn.crElementCn)(),
     width: '75%',
     padding: '4px 2px 2px 0'
   },
-  S_OPEN = {
-    color: '#a487d4'
-  },
-  S_CLOSE = {
-    color: 'gray'
-  },
-  S_SVG_CLOSE = {
-    top: 4
-  },
   MAX_LENGTH = 45,
   _crTitle = (title, caption) => title || caption.length > MAX_LENGTH ? caption : void 0;
-function ItemHeader(_ref) {
+const ItemHeader = _ref => {
   let {
     isOpen,
     style,
@@ -44,7 +35,7 @@ function ItemHeader(_ref) {
     onClose
   } = _ref;
   const _title = _crTitle(title, caption),
-    _captionStyle = isOpen ? S_OPEN : S_CLOSE;
+    _captionStyle = isOpen ? _Item.S_HEADER_CAPTION_OPEN : _Item.S_HEADER_CAPTION_CLOSE;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_ITEM_HEADER,
     style: {
@@ -52,7 +43,7 @@ function ItemHeader(_ref) {
       ...style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-      className: CL_CAPTION,
+      className: _Item.CL_HEADER_CAPTION,
       style: {
         ...S_CAPTION,
         ...captionStyle,
@@ -62,10 +53,10 @@ function ItemHeader(_ref) {
       onClick: onClick,
       children: caption
     }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
-      style: S_SVG_CLOSE,
+      style: _Item.S_BT_SVG_CLOSE,
       onClick: onClose
     })]
   });
-}
+};
 var _default = exports.default = ItemHeader;
 //# sourceMappingURL=ItemHeader.js.map

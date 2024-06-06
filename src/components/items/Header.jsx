@@ -21,11 +21,16 @@ import ModalSlider from '../zhn-modal-slider/ModalSlider';
 import ValueMovingBadge from './ValueMovingBadge';
 import ValueDate from './ValueDate';
 
+import {
+  CL_HEADER_CAPTION,
+  S_HEADER_CAPTION_OPEN,
+  S_HEADER_CAPTION_CLOSE,
+  S_BT_SVG_CLOSE,
+  COLOR_SVG_MORE
+} from './Item.Style';
+
 const CL_ITEM_HEADER = crElementCn("item-header")
 , CL_CHARTS_MENU_MORE = crElementBorderCn("popup-menu charts__menu-more")
-, CL_CAPTION = "not-selected text-clip bt-left bt"
-, COLOR_SVG_MORE = "#777777"
-
 , S_BT_MORE = {
   position: 'relative',
   top: 4,
@@ -41,12 +46,9 @@ S_SVG_MORE = {
   margin: '0 6px 0 8px'
 },
 S_CAPTION = {
-  color: '#a487d4',
+  ...S_HEADER_CAPTION_OPEN,
   width: 125,
   padding: '4px 0 2px 4px'
-}
-, S_CAPTION_CLOSE = {
-  color: 'grey'
 }
 , S_CAPTION_WIDTH = {
   width: void 0,
@@ -105,7 +107,7 @@ const Header = ({
   ] = useToggle(false)
   , _captionStyle = crStyle3(
      S_CAPTION,
-     !isOpen && S_CAPTION_CLOSE,
+     !isOpen && S_HEADER_CAPTION_CLOSE,
      !valueMoving && S_CAPTION_WIDTH
   )
   , _btTitle = itemCaption.length > 15
@@ -128,7 +130,7 @@ const Header = ({
       />
       <Button
          id={_captionId}
-         className={CL_CAPTION}
+         className={CL_HEADER_CAPTION}
          style={_captionStyle}
          title={_btTitle}
          onClick={onToggle}
@@ -149,6 +151,7 @@ const Header = ({
             />
       }
       <BtSvgClose
+        style={S_BT_SVG_CLOSE}
         onClick={onClose}
       />
     </div>
