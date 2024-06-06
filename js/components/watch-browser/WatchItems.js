@@ -8,7 +8,8 @@ var _Handlers = require("./Handlers");
 var _DnDItemHandlers = require("./dnd-handlers/DnDItemHandlers");
 var _WatchItem = _interopRequireDefault(require("./WatchItem"));
 var _jsxRuntime = require("react/jsx-runtime");
-const _isArr = Array.isArray;
+const _isArr = Array.isArray,
+  CL_WATCH_ITEM = _styleFn.CL_ROW_TYPE2_TOPIC + " stroke-black";
 const WatchItems = _ref => {
   let {
     isModeEdit,
@@ -26,7 +27,7 @@ const WatchItems = _ref => {
         caption
       };
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(_WatchItem.default, {
-      className: _styleFn.CL_ROW_TYPE2_TOPIC,
+      className: CL_WATCH_ITEM,
       item: item,
       isDraggable: isModeEdit,
       option: option,
