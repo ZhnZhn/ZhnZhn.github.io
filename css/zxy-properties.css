@@ -55,6 +55,10 @@
   color: #1b2836;
   color: var(--c-bl);
 }
+.stroke-black {
+  stroke: #1b2836;
+  stroke: var(--c-bl);
+}
 .dark-blue {
   color: #1b75bb;
 }

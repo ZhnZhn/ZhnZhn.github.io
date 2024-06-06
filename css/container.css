@@ -121,7 +121,7 @@
   height: 24px;
   padding: 2px;
   margin-right: 6px;
-  stroke: #f44336; 
+  stroke: inherit;
   will-change: transform;
   transform-origin: center center;
   transition: transform 0.3s ease-out;
