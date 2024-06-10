@@ -8,6 +8,7 @@ import {
   BT_PE,
   BT_COMEXT,
   BT_SDG,
+  BT_MIP,
   BT_CEI,
   BT_NDL,
   BT_US_ECONOMICS,
@@ -18,7 +19,7 @@ import {
   BT_NORWAY_STATISTICS,
   BT_NORWAY_STAT_ALL,
   BT_SWEDEN_STAT,
-  BT_SWEDEN_STAT_ALL,  
+  BT_SWEDEN_STAT_ALL,
   BT_FINLAND_STAT_ALL,
   BT_DENMARK_STAT_ALL,
   BT_IRELAND_STAT_ALL,
@@ -83,11 +84,12 @@ const PAGE_CONFIGS_01 = [
   [CL_ORG, 'Nasdaq Data Link', BT_NDL],
 ]
 , PAGE_CONFIGS_02 = [
-  [CL_ORG, 'Overview', BT_EUROSTAT],
+  [CL_ORG, 'Overview', BT_EUROSTAT],  
   [CL_ORG, 'Circular Economy', BT_CEI],
   [CL_ORG, 'Euro Indicators / PEEIs', BT_PE],
   [CL_ORG, 'EU Comext', BT_COMEXT],
   [CL_ORG, 'EU FIGARO', BT_FGR],
+  [CL_ORG, 'EU MIP', BT_MIP],
   [CL_ORG, 'EU SDG', BT_SDG],
 ]
 , PAGE_CONFIGS_03 = [
