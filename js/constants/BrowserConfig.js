@@ -5,11 +5,15 @@ exports.default = void 0;
 var _BrowserType = require("./BrowserType");
 var _ModalDialogType = require("./ModalDialogType");
 const S_ITEM_MULTI_LINE = {
-  maxWidth: 275,
-  lineHeight: 1.3,
-  paddingTop: 6,
-  paddingBottom: 6
-};
+    maxWidth: 275,
+    lineHeight: 1.3,
+    paddingTop: 6,
+    paddingBottom: 6
+  },
+  S_ITEM_MULTI_LINE_WHITE_SPACE = {
+    ...S_ITEM_MULTI_LINE,
+    whiteSpace: 'unset'
+  };
 const _crSourceMenuUrl = token => "./data/" + token + "/source-menu.json",
   _crBrowserItem = (browserType, caption, token, itemStyle, topicStyle) => ({
     browserType,
@@ -27,14 +31,17 @@ const BrowserConfig = {
   [_BrowserType.BT_SDG]: _crBrowserItem(_BrowserType.BT_SDG, 'EU SDG', 'eu-sdg', {
     ...S_ITEM_MULTI_LINE
   }, {
-    ...S_ITEM_MULTI_LINE,
-    whiteSpace: 'unset'
+    ...S_ITEM_MULTI_LINE_WHITE_SPACE
+  }),
+  [_BrowserType.BT_MIP]: _crBrowserItem(_BrowserType.BT_MIP, 'EU MIP', 'eu-mip', {
+    ...S_ITEM_MULTI_LINE
+  }, {
+    ...S_ITEM_MULTI_LINE_WHITE_SPACE
   }),
   [_BrowserType.BT_CEI]: _crBrowserItem(_BrowserType.BT_CEI, 'Circular economy indicators', 'eu-cei', {
     ...S_ITEM_MULTI_LINE
   }, {
-    ...S_ITEM_MULTI_LINE,
-    whiteSpace: 'unset'
+    ...S_ITEM_MULTI_LINE_WHITE_SPACE
   }),
   [_BrowserType.BT_UN_COMTRADE]: _crBrowserItem(_BrowserType.BT_UN_COMTRADE, 'UN Comtrade', 'uncomtrade'),
   [_BrowserType.BT_FAOSTAT]: _crBrowserItem(_BrowserType.BT_FAOSTAT, 'FAOSTAT', 'faostat'),

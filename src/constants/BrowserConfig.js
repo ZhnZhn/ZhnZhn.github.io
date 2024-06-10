@@ -5,6 +5,7 @@ import {
   BT_PE,
   BT_COMEXT,
   BT_SDG,
+  BT_MIP,
   BT_CEI,
   BT_UN_COMTRADE,
   BT_FAOSTAT,
@@ -41,6 +42,10 @@ const S_ITEM_MULTI_LINE = {
   lineHeight: 1.3,
   paddingTop: 6,
   paddingBottom: 6
+}
+, S_ITEM_MULTI_LINE_WHITE_SPACE = {
+  ...S_ITEM_MULTI_LINE,
+  whiteSpace: 'unset'
 }
 
 const _crSourceMenuUrl = (
@@ -91,14 +96,21 @@ const BrowserConfig = {
     'EU SDG',
     'eu-sdg',
     {...S_ITEM_MULTI_LINE},
-    {...S_ITEM_MULTI_LINE, whiteSpace: 'unset'}
+    {...S_ITEM_MULTI_LINE_WHITE_SPACE}
+  ),
+  [BT_MIP]: _crBrowserItem(
+    BT_MIP,
+    'EU MIP',
+    'eu-mip',
+    {...S_ITEM_MULTI_LINE},
+    {...S_ITEM_MULTI_LINE_WHITE_SPACE}
   ),
   [BT_CEI]: _crBrowserItem(
     BT_CEI,
     'Circular economy indicators',
     'eu-cei',
     {...S_ITEM_MULTI_LINE},
-    {...S_ITEM_MULTI_LINE, whiteSpace: 'unset'}
+    {...S_ITEM_MULTI_LINE_WHITE_SPACE}
   ),
   [BT_UN_COMTRADE]: _crBrowserItem(
     BT_UN_COMTRADE,
