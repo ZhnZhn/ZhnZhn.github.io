@@ -1,8 +1,4 @@
 export { toInfo } from './fnDescr';
-export {
-  findMinY,
-  crDfItemKey
-} from '../AdapterFn';
 
 import {
   isArr,
@@ -152,7 +148,6 @@ export const crSubtitle = (
 ) => option.dfSubtitle
   || `${option.subtitle}: ${_crUnit(json)}`;
 
-export const crSeriaData = _crSeriaData
 export const toDataPoints = (
   json,
   option
@@ -170,12 +165,9 @@ export const toDataPoints = (
     : _crSeriaData(_data, option);
 }
 
-export const crZhConfig = (
-  id,
-  { dfDomain, itemCaption }
-) => ({
-  id: id,
-  key: id,
+export const crZhConfig = ({
+  dfDomain, itemCaption
+}) => ({
   isWithoutSma: true,
   dataSource: "FAOSTAT",
   linkFn: "FAO_STAT",

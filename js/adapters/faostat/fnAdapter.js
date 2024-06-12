@@ -1,12 +1,10 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.findMinY = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crSeriaData = exports.crDfItemKey = exports.crCategoryTitle = void 0;
+exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crCategoryTitle = void 0;
 var _fnDescr = require("./fnDescr");
 exports.toInfo = _fnDescr.toInfo;
 var _AdapterFn = require("../AdapterFn");
-exports.findMinY = _AdapterFn.findMinY;
-exports.crDfItemKey = _AdapterFn.crDfItemKey;
 const BLANK = ' ',
   MM_DD = '-12-31',
   DF_TITLE = 'More about data on tab Info in Description',
@@ -93,7 +91,6 @@ const crTitle = (json, option) => {
 exports.crTitle = crTitle;
 const crSubtitle = (json, option) => option.dfSubtitle || option.subtitle + ": " + _crUnit(json);
 exports.crSubtitle = crSubtitle;
-const crSeriaData = exports.crSeriaData = _crSeriaData;
 const toDataPoints = (json, option) => {
   const _prName = _getSeriesPropName(option),
     _itemCode = (0, _AdapterFn.getValue)(option.items[1]),
@@ -104,14 +101,12 @@ const toDataPoints = (json, option) => {
   return _prName ? _crSeriesData(_data, _prName) : _crSeriaData(_data, option);
 };
 exports.toDataPoints = toDataPoints;
-const crZhConfig = (id, _ref4) => {
+const crZhConfig = _ref4 => {
   let {
     dfDomain,
     itemCaption
   } = _ref4;
   return {
-    id: id,
-    key: id,
     isWithoutSma: true,
     dataSource: "FAOSTAT",
     linkFn: "FAO_STAT",

@@ -3,40 +3,24 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _pipe = _interopRequireDefault(require("../../utils/pipe"));
-var _configBuilderFn = require("../../charts/configBuilderFn");
-var _Tooltip = require("../../charts/Tooltip");
+var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 var _fnAdapter = require("./fnAdapter");
-const toSplineAdapter = {
-  crKey: _fnAdapter.crDfItemKey,
-  toConfig(json, option) {
-    const _id = (0, _fnAdapter.crDfItemKey)(option),
-      _title = (0, _fnAdapter.crTitle)(json, option),
-      _subtitle = (0, _fnAdapter.crSubtitle)(json, option),
-      _points = (0, _fnAdapter.toDataPoints)(json, option);
-    return {
-      config: (0, _pipe.default)((0, _configBuilderFn.crAreaConfig)(), (0, _configBuilderFn.fAddCaption)(_title, _subtitle), (0, _configBuilderFn.fAddPointsToConfig)(_points), (0, _configBuilderFn.fAddMinMax)(_points, option), (0, _configBuilderFn.fAddTooltip)(_Tooltip.tooltipValueDmy), (0, _configBuilderFn.fAdd)({
-        info: (0, _fnAdapter.toInfo)(json, _title, _subtitle),
-        valueMoving: (0, _fnAdapter.crValueMoving)(_points),
-        zhConfig: (0, _fnAdapter.crZhConfig)(_id, option)
-      }), _configBuilderFn.toConfig)
-    };
-  },
-  toSeries(json, option) {
-    const {
-        data
-      } = json,
-      _data = (0, _fnAdapter.crSeriaData)(data, option),
-      {
-        itemCaption
-      } = option;
-    return (0, _pipe.default)((0, _configBuilderFn.crSeriaConfig)(), (0, _configBuilderFn.fAdd)({
-      data: _data,
-      minY: (0, _fnAdapter.findMinY)(_data),
-      name: itemCaption,
-      itemCaption
-    }));
-  }
+const trOption = (option, json) => {
+  option.title = (0, _fnAdapter.crTitle)(json, option);
+  option.subtitle = (0, _fnAdapter.crSubtitle)(json, option);
 };
+const addToConfig = (config, json, option) => {
+  config.info = (0, _fnAdapter.toInfo)(json, option.title, option.subtitle);
+  config.zhConfig = {
+    ...(0, _fnAdapter.crZhConfig)(option),
+    ...config.zhConfig
+  };
+  return config;
+};
+const toSplineAdapter = (0, _crAdapterType.default)({
+  crData: _fnAdapter.toDataPoints,
+  trOption,
+  addToConfig
+});
 var _default = exports.default = toSplineAdapter;
 //# sourceMappingURL=toSplineAdapter.js.map
