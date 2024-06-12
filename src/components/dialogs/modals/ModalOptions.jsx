@@ -26,7 +26,7 @@ const MIN_RT = 0, MAX_RT = 3;
 const _isRt = (
   rt
 ) => rt === ''
-  || rt>=MIN_RT && rt<=MAX_RT
+  || (rt>=MIN_RT && rt<=MAX_RT)
 
 const ROW_CHECKBOX_CONFIGS = [
   ["isNotZoomToMinMax", "Not Zoom to Min-Max"],
