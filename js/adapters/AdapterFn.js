@@ -127,9 +127,9 @@ const valueMoving = (data, dfR) => {
   };
 };
 exports.valueMoving = valueMoving;
-const fCrValue = option => {
+const fCrValue = (option, crValueDf) => {
   const _rt = option._rt;
-  return (0, _isTypeFn.isNumber)(_rt) ? v => (0, _mathFn.roundBy)(v, _rt) : v => v;
+  return (0, _isTypeFn.isNumber)(_rt) ? v => (0, _mathFn.roundBy)(v, _rt) : crValueDf || (v => v);
 };
 exports.fCrValue = fCrValue;
 const roundByOHLC = n => {

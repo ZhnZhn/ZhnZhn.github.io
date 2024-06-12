@@ -145,12 +145,13 @@ export const valueMoving = (
 }
 
 export const fCrValue = (
-  option
+  option,
+  crValueDf
 ) => {
   const _rt = option._rt;
   return isNumber(_rt)
     ? v => roundBy(v, _rt)
-    : v => v;
+    : crValueDf || (v => v);
 }
 
 export const roundByOHLC = n => {
