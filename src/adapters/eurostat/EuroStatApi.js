@@ -8,6 +8,7 @@ const RES_ERR_STATUS = [400]
     `${errLabel}\n\nIf you use For Date input field in Dialog\ntry to use more late date.`
 , _addPropTo = option => {
   option.resErrStatus = [...RES_ERR_STATUS]
+  option._rt = option._rt || option.dfRt;
 };
 
 const EuroStatApi = {

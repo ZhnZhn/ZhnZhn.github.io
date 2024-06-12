@@ -1,3 +1,8 @@
+import {
+  FN_IDENTITY,
+  isNumber,
+  fCrValue
+} from '../AdapterFn';
 import routerColumnBarSet from '../stat-json/toColumn';
 
 import FactoryChart from './FactoryChart';
@@ -12,12 +17,22 @@ import {
   crCategoryTooltip
 } from './EuroStatFn';
 
-const _filterZeroIf = (
+const _filterZeroAndRoundByIf = (
   data,
-  isFilter
-) => isFilter
-  ? data.map(value => value === 0 ? null : value)
-  : data;
+  option
+) => {
+  const { isFilterZero } = option
+  , crValue = fCrValue(option, FN_IDENTITY)
+  , _roundValue = point => isNumber(point && point.y)
+     ? (point.y = crValue(point.y), point)
+     : point
+  , _crCategoryPoint = isFilterZero
+     ? point => (!point || point.y === 0) ? null : _roundValue(point)
+     : _roundValue;
+  return _crCategoryPoint === FN_IDENTITY
+    ? data
+    : data.map(_crCategoryPoint);
+};
 
 const _crScatterProps = (
   seriaColor
@@ -57,7 +72,7 @@ export const crCategoryConfig = (
       addToCategoryConfig(config, {
         json,
         option,
-        data,
+        data: _filterZeroAndRoundByIf(data, option),
         categories,
         min
       })
@@ -67,16 +82,16 @@ export const crCategoryConfig = (
 
 const _crSeriaData = (
   json,
+  option,
   configSlice,
-  categories,
-  isFilterZero
+  categories
 ) => {
   const data = trJsonToSeria(
     json,
     configSlice,
     categories
   );
-  return _filterZeroIf(data, isFilterZero);
+  return _filterZeroAndRoundByIf(data, option);
 }
 
 const _crSeriaProps = (
@@ -93,7 +108,6 @@ export const crCategorySeria = (
 ) => {
   const categories = chart.options.xAxis[0].categories
   , {
-     isFilterZero,
      zhMapSlice:configSlice,
      time,
      seriaColor,
@@ -101,9 +115,9 @@ export const crCategorySeria = (
   } = option
   , data = _crSeriaData(
      json,
+     option,
      configSlice,
-     categories,
-     isFilterZero
+     categories
   );
 
   return {

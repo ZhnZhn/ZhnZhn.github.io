@@ -3,11 +3,20 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.crCategorySeria = exports.crCategoryConfig = void 0;
+var _AdapterFn = require("../AdapterFn");
 var _toColumn = _interopRequireDefault(require("../stat-json/toColumn"));
 var _FactoryChart = _interopRequireDefault(require("./FactoryChart"));
 var _JsonStatFn = require("./JsonStatFn");
 var _EuroStatFn = require("./EuroStatFn");
-const _filterZeroIf = (data, isFilter) => isFilter ? data.map(value => value === 0 ? null : value) : data;
+const _filterZeroAndRoundByIf = (data, option) => {
+  const {
+      isFilterZero
+    } = option,
+    crValue = (0, _AdapterFn.fCrValue)(option, _AdapterFn.FN_IDENTITY),
+    _roundValue = point => (0, _AdapterFn.isNumber)(point && point.y) ? (point.y = crValue(point.y), point) : point,
+    _crCategoryPoint = isFilterZero ? point => !point || point.y === 0 ? null : _roundValue(point) : _roundValue;
+  return _crCategoryPoint === _AdapterFn.FN_IDENTITY ? data : data.map(_crCategoryPoint);
+};
 const _crScatterProps = seriaColor => ({
   type: 'scatter',
   marker: {
@@ -47,7 +56,7 @@ const crCategoryConfig = (json, option) => {
     (0, _EuroStatFn.addToCategoryConfig)(config, {
       json,
       option,
-      data,
+      data: _filterZeroAndRoundByIf(data, option),
       categories,
       min
     });
@@ -55,21 +64,20 @@ const crCategoryConfig = (json, option) => {
   });
 };
 exports.crCategoryConfig = crCategoryConfig;
-const _crSeriaData = (json, configSlice, categories, isFilterZero) => {
+const _crSeriaData = (json, option, configSlice, categories) => {
   const data = (0, _JsonStatFn.trJsonToSeria)(json, configSlice, categories);
-  return _filterZeroIf(data, isFilterZero);
+  return _filterZeroAndRoundByIf(data, option);
 };
 const _crSeriaProps = (seriaType, seriaColor) => seriaType === 'DOT_SET' ? _crScatterProps(seriaColor) : void 0;
 const crCategorySeria = (json, option, chart) => {
   const categories = chart.options.xAxis[0].categories,
     {
-      isFilterZero,
       zhMapSlice: configSlice,
       time,
       seriaColor,
       seriaType
     } = option,
-    data = _crSeriaData(json, configSlice, categories, isFilterZero);
+    data = _crSeriaData(json, option, configSlice, categories);
   return {
     data,
     minY: (0, _EuroStatFn.findMinY)(data),
