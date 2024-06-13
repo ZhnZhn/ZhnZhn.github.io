@@ -1,24 +1,29 @@
+import {
+  isNumber,
+  fCrValue
+} from '../AdapterFn';
 import crAdapterCategory from '../crAdapterCategory';
 import { crCategoryPoint } from '../CategoryFn';
-import { isNumber } from '../AdapterFn';
-import { compareByPnY } from '../compareByFn';
-import { crCategoryTitle } from './fnAdapter'
+import { sortDescByPnY } from '../compareByFn';
+import { crCategoryTitle } from './fnAdapter';
 
 const _crData = (
   json,
   option
-) => json.data.reduce((_data, item) => {
-    const _value = parseFloat(item.Value);
-    if (isNumber(_value) && _value !== 0 && item.Area) {
+) => {
+  const _crValue = fCrValue(option);
+  return sortDescByPnY(json.data.reduce((_data, item) => {
+    const { Value, Area } = item || {}
+    , _value = _crValue(parseFloat(Value));
+    if (isNumber(_value) && _value !== 0 && Area) {
       _data.push(crCategoryPoint(
         _value,
-        item.Area
+        Area
       ))
     }
     return _data;
- }, [])
- .sort(compareByPnY)
- .reverse();
+ }, []));
+}
 
 const toCategoryAdapter = crAdapterCategory(
   _crData,
