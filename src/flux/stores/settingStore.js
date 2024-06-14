@@ -165,6 +165,7 @@ export const addSettingTo = (
   })
   _addBoolOptionTo(options, PN_IS_DRAW_DELTA_EXTREMS)
   _addBoolOptionTo(options, PN_IS_NOT_ZOOM_TO_MIN_MAX)
+  _addBoolOptionTo(options, PN_IS_AXIS_LABELS_GREY)
 }
 
 const _setAxisLabelColor = isGrey => {
