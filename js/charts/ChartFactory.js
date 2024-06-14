@@ -1,8 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crColumnConfig = exports.crBarConfig = void 0;
-var _Color = require("../constants/Color");
+exports.crBarOrColumnConfigImpl = void 0;
 var _Chart = require("./Chart");
 var _Tooltip = require("./Tooltip");
 const DF_COLOR = '#8085e9';
@@ -19,19 +18,19 @@ const _assign = Object.assign,
 const _crEmptyText = () => ({
     text: ''
   }),
-  _crAxisLabels = function (x, y, color) {
-    if (color === void 0) {
-      color = _Color.COLOR_BLUE;
-    }
-    return {
+  _crAxisLabels = (x, y, color) => {
+    const _axisLabelsConfig = {
       x,
-      y,
-      style: {
-        color
-      }
+      y
     };
+    if (color) {
+      _axisLabelsConfig.style = {
+        color
+      };
+    }
+    return _axisLabelsConfig;
   },
-  _crCategoryConfig = seriaColor => ({
+  _crCategoryConfig = (seriaColor, yAxisLabelsColor) => ({
     chart: {
       panKey: void 0,
       panning: false,
@@ -52,7 +51,7 @@ const _crEmptyText = () => ({
       lineWidth: 0,
       tickLength: 0,
       gridLineDashStyle: 'Dot',
-      labels: _crAxisLabels(3, 0, seriaColor),
+      labels: _crAxisLabels(3, 0, yAxisLabelsColor),
       title: _crEmptyText()
     },
     legend: {
@@ -73,29 +72,29 @@ const _crEmptyText = () => ({
     marginTop,
     marginBottom
   });
-const crColumnConfig = seriaColor => {
-  const config = _crCategoryConfig(seriaColor);
+const _crColumnConfig = (seriaColor, yAxisLabelsColor) => {
+  const config = _crCategoryConfig(seriaColor, yAxisLabelsColor);
   _assign(config.chart, _crChartTypeMargin("column", 60, 100));
   _assign(config.plotOptions, {
     column: _crPlotOption(6)
   });
   return config;
 };
-exports.crColumnConfig = crColumnConfig;
-const crBarConfig = seriaColor => {
-  const config = _crCategoryConfig(seriaColor);
+const _crBarConfig = (seriaColor, yAxisLabelsColor) => {
+  const config = _crCategoryConfig(seriaColor, yAxisLabelsColor);
   _assign(config.chart, _crChartTypeMargin("bar", 50, 35), {
     height: 450
   });
   _assign(config.yAxis, {
     opposite: false,
     gridLineDashStyle: 'ShortDot',
-    labels: _crAxisLabels(0, 14, seriaColor)
+    labels: _crAxisLabels(0, 14, yAxisLabelsColor)
   });
   _assign(config.plotOptions, {
     bar: _crPlotOption(4)
   });
   return config;
 };
-exports.crBarConfig = crBarConfig;
+const crBarOrColumnConfigImpl = (type, seriaColor, yAxisLabelsColor) => (type === 'BAR' ? _crBarConfig : _crColumnConfig)(seriaColor, yAxisLabelsColor);
+exports.crBarOrColumnConfigImpl = crBarOrColumnConfigImpl;
 //# sourceMappingURL=ChartFactory.js.map

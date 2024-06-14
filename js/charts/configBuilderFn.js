@@ -332,14 +332,13 @@ const crCategoryConfig = (categories, title, subtitle) => fAdd({
   yAxis: CATEGORIES_Y_AXIS
 })(crArea2Config(title, subtitle));
 exports.crCategoryConfig = crCategoryConfig;
-const crBarOrColumnConfig = function (type, categories, seriaColor) {
+const crBarOrColumnConfig = function (type, categories, seriaColor, yAxisLabelsColor) {
   if (categories === void 0) {
     categories = [];
   }
-  const _crConfig = type === 'BAR' ? _ChartFactory.crBarConfig : _ChartFactory.crColumnConfig;
   return fAdd('xAxis', {
     categories
-  })(_crConfig(seriaColor));
+  })((0, _ChartFactory.crBarOrColumnConfigImpl)(type, seriaColor, yAxisLabelsColor));
 };
 exports.crBarOrColumnConfig = crBarOrColumnConfig;
 const HEIGHT_OF_ONE_BAR_CATEGORY = 22,

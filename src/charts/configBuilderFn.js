@@ -40,8 +40,7 @@ import {
   setPlotLinesDeltas
 } from './ChartFn';
 import {
-  crBarConfig,
-  crColumnConfig
+  crBarOrColumnConfigImpl
 } from './ChartFactory';
 import {
   tooltipTreeMap
@@ -425,15 +424,11 @@ export const crCategoryConfig = (
 export const crBarOrColumnConfig = (
   type,
   categories=[],
-  seriaColor
-) => {
-  const _crConfig = type === 'BAR'
-    ? crBarConfig
-    : crColumnConfig;
-  return fAdd('xAxis', { categories })(
-    _crConfig(seriaColor)
-  );
-}
+  seriaColor,
+  yAxisLabelsColor
+) => fAdd('xAxis', { categories })(
+  crBarOrColumnConfigImpl(type, seriaColor, yAxisLabelsColor)
+);
 
 const HEIGHT_OF_ONE_BAR_CATEGORY = 22
 , BAR_CATEGORY_TOTAL_MARGIN = 85;

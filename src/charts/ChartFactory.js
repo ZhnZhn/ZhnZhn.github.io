@@ -1,4 +1,3 @@
-import { COLOR_BLUE } from '../constants/Color';
 import { fTooltip } from './Chart';
 import { tooltipCategory } from './Tooltip';
 
@@ -23,13 +22,20 @@ const _crEmptyText = () => ({
 , _crAxisLabels = (
   x,
   y,
-  color=COLOR_BLUE
-) => ({
-  x, y,
-  style: { color }
-})
+  color
+) => {
+  const _axisLabelsConfig = {
+    x,
+    y
+  };
+  if (color) {
+    _axisLabelsConfig.style = { color }
+  }
+  return _axisLabelsConfig;
+}
 , _crCategoryConfig = (
-  seriaColor
+  seriaColor,
+  yAxisLabelsColor
 ) => ({
   chart: {
     panKey: void 0,
@@ -51,7 +57,7 @@ const _crEmptyText = () => ({
     lineWidth: 0,
     tickLength: 0,
     gridLineDashStyle: 'Dot',
-    labels: _crAxisLabels(3, 0, seriaColor),
+    labels: _crAxisLabels(3, 0, yAxisLabelsColor),
     title: _crEmptyText()
   },
   legend: {
@@ -75,8 +81,11 @@ const _crEmptyText = () => ({
   marginBottom
 });
 
-export const crColumnConfig = (seriaColor) => {
-  const config = _crCategoryConfig(seriaColor);
+const _crColumnConfig = (
+  seriaColor,
+  yAxisLabelsColor
+) => {
+  const config = _crCategoryConfig(seriaColor, yAxisLabelsColor);
   _assign(config.chart,
     _crChartTypeMargin("column", 60, 100)
   )
@@ -86,8 +95,11 @@ export const crColumnConfig = (seriaColor) => {
   return config;
 }
 
-export const crBarConfig = (seriaColor) =>  {
-  const config = _crCategoryConfig(seriaColor);
+const _crBarConfig = (
+  seriaColor,
+  yAxisLabelsColor
+) =>  {
+  const config = _crCategoryConfig(seriaColor, yAxisLabelsColor);
   _assign(config.chart,
     _crChartTypeMargin("bar", 50, 35),
     { height: 450 }
@@ -95,10 +107,18 @@ export const crBarConfig = (seriaColor) =>  {
   _assign(config.yAxis, {
     opposite: false,
     gridLineDashStyle: 'ShortDot',
-    labels: _crAxisLabels(0, 14, seriaColor)
+    labels: _crAxisLabels(0, 14, yAxisLabelsColor)
   })
   _assign(config.plotOptions, {
     bar: _crPlotOption(4)
   })
   return config;
 }
+
+export const crBarOrColumnConfigImpl = (
+  type,
+  seriaColor,
+  yAxisLabelsColor
+) => (type === 'BAR'
+ ? _crBarConfig
+ : _crColumnConfig)(seriaColor, yAxisLabelsColor);
