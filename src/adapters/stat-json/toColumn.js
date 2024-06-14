@@ -150,7 +150,8 @@ const _crConfig = (
      seriaType,
      seriaColor,
      data,
-     isCluster
+     isCluster,
+     option.isAlg
    );
 
   _assign(config, crChartOption(_ds, Tid, option))

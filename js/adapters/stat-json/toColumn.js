@@ -100,7 +100,7 @@ const _crConfig = (json, option) => {
       _title = _crTitle(dfTitle, option),
       _subtitle = _crSubtitle(items, category),
       data = _crData(_values, _dimC, cTotal),
-      config = (0, _crCategoryConfig.default)(_title, _subtitle, seriaType, seriaColor, data, isCluster);
+      config = (0, _crCategoryConfig.default)(_title, _subtitle, seriaType, seriaColor, data, isCluster, option.isAlg);
     _assign(config, (0, _fnAdapter.crChartOption)(_ds, Tid, option));
     return config;
   },

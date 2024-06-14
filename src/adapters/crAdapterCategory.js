@@ -29,7 +29,8 @@ const crAdapterCategory = (
           _arrSeriaType[0],
           seriaColor,
           data,
-          isCategoryCluster(seriaType)
+          isCategoryCluster(seriaType),
+          option.isAlg
       );
 
       config.zhConfig = {

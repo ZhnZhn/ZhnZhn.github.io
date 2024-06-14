@@ -27,7 +27,7 @@ crTitle) {
         } = option,
         data = crData(json, option),
         _arrSeriaType = seriaType.split('_'),
-        config = (0, _crCategoryConfig.default)(crTitle(subtitle, json), title, _arrSeriaType[0], seriaColor, data, (0, _CategoryFn.isCategoryCluster)(seriaType));
+        config = (0, _crCategoryConfig.default)(crTitle(subtitle, json), title, _arrSeriaType[0], seriaColor, data, (0, _CategoryFn.isCategoryCluster)(seriaType), option.isAlg);
       config.zhConfig = {
         id: _itemKey,
         key: _itemKey,
