@@ -1,23 +1,24 @@
-import { useState } from '../uiApi';
+import useStoreState from '../hooks/useStoreState';
 
 import DialogContainer from '../zhn-containers/DialogContainer';
 
 const CL_HRZ_CONTAINER = "hrz-container";
+const updateElementBrowsers = (
+  msInitBrowser,
+  setState
+) => {
+  const { elBrowser } = msInitBrowser || {};
+  if (elBrowser) {
+    setState(arrEl => [elBrowser, ...arrEl])
+  }
+};
 
 const BrowserContainer = ({
   useMsInitBrowser
 }) => {
-  const [
-    elBrowsers,
-    setElBrowsers
-  ] = useState([]);
-
-  useMsInitBrowser(msInitBrowser => {
-    const { elBrowser } = msInitBrowser || {};
-    if (elBrowser) {
-      setElBrowsers(arrEl => [elBrowser, ...arrEl])
-    }
-  })
+  const elBrowsers = useStoreState(
+    [], useMsInitBrowser, updateElementBrowsers
+  )[0];
 
   return (
     <div className={CL_HRZ_CONTAINER}>
