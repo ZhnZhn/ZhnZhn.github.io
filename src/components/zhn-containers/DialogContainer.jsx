@@ -1,9 +1,11 @@
 import {
   isUndef,
   safeMap,
-  useState,
   cloneElement
 } from '../uiApi';
+
+import useRefInit from '../hooks/useRefInit';
+import useStoreState from '../hooks/useStoreState';
 
 import {
   closeDialog,
@@ -92,16 +94,51 @@ const _renderDialogs = (
   });
 });
 
+const fUpdateState = maxDialog => (
+  msShowDialog,
+  setState
+) => {
+  if (msShowDialog) {
+    setState(prevState => {
+      const { key, Comp, data } = msShowDialog;
+       if (Comp && !isUndef(_findCompIndex(prevState.compDialogs, key))) {
+         return prevState;
+       }
+      _updateVisible(prevState, key, maxDialog)
+      if (!Comp){
+         prevState.compDialogs = _doVisible(prevState.compDialogs, key)
+      } else {
+         prevState.compDialogs.push(Comp)
+      }
+      prevState.hmData[key] = data
+      return {...prevState};
+    })
+  }
+};
+
 const DialogContainer = ({
   maxDialog=3
 }) => {
-  const [state, setState] = useState({
+  const _upateState = useRefInit(
+    () => fUpdateState(maxDialog)
+  )
+  , [
+    state,
+    setState
+  ] = useStoreState({
     hmIs: {},
     compDialogs: [],
     hmData: {},
     visibleDialogs: []
-  })
-  , { hmIs, compDialogs, visibleDialogs } = state
+  },
+    useMsShowDialog,
+    _upateState
+  )
+  , {
+    hmIs,
+    compDialogs,
+    visibleDialogs
+  } = state
   , _hToTopLayer = key => {
      if (visibleDialogs[visibleDialogs.length-1] !== key) {
        setState(prevState => {
@@ -129,25 +166,6 @@ const DialogContainer = ({
        return {...prevState};
      })
   };
-
-  useMsShowDialog(msShowDialog => {
-    if (msShowDialog) {
-      setState(prevState => {
-        const { key, Comp, data } = msShowDialog;
-         if (Comp && !isUndef(_findCompIndex(prevState.compDialogs, key))) {
-           return prevState;
-         }
-        _updateVisible(prevState, key, maxDialog)
-        if (!Comp){
-           prevState.compDialogs = _doVisible(prevState.compDialogs, key)
-        } else {
-           prevState.compDialogs.push(Comp)
-        }
-        prevState.hmData[key] = data
-        return {...prevState};
-      })
-    }
-  })
 
   return (
     <div style={S_ROOT}>

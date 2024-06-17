@@ -1,8 +1,11 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
+var _useStoreState = _interopRequireDefault(require("../hooks/useStoreState"));
 var _compStore = require("../../flux/stores/compStore");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROOT = {
@@ -64,16 +67,41 @@ const _renderDialogs = (_ref, _hToTopLayer, _hToggleDialog) => {
     });
   });
 };
+const fUpdateState = maxDialog => (msShowDialog, setState) => {
+  if (msShowDialog) {
+    setState(prevState => {
+      const {
+        key,
+        Comp,
+        data
+      } = msShowDialog;
+      if (Comp && !(0, _uiApi.isUndef)(_findCompIndex(prevState.compDialogs, key))) {
+        return prevState;
+      }
+      _updateVisible(prevState, key, maxDialog);
+      if (!Comp) {
+        prevState.compDialogs = _doVisible(prevState.compDialogs, key);
+      } else {
+        prevState.compDialogs.push(Comp);
+      }
+      prevState.hmData[key] = data;
+      return {
+        ...prevState
+      };
+    });
+  }
+};
 const DialogContainer = _ref2 => {
   let {
     maxDialog = 3
   } = _ref2;
-  const [state, setState] = (0, _uiApi.useState)({
+  const _upateState = (0, _useRefInit.default)(() => fUpdateState(maxDialog)),
+    [state, setState] = (0, _useStoreState.default)({
       hmIs: {},
       compDialogs: [],
       hmData: {},
       visibleDialogs: []
-    }),
+    }, _compStore.useMsShowDialog, _upateState),
     {
       hmIs,
       compDialogs,
@@ -112,30 +140,6 @@ const DialogContainer = _ref2 => {
         };
       });
     };
-  (0, _compStore.useMsShowDialog)(msShowDialog => {
-    if (msShowDialog) {
-      setState(prevState => {
-        const {
-          key,
-          Comp,
-          data
-        } = msShowDialog;
-        if (Comp && !(0, _uiApi.isUndef)(_findCompIndex(prevState.compDialogs, key))) {
-          return prevState;
-        }
-        _updateVisible(prevState, key, maxDialog);
-        if (!Comp) {
-          prevState.compDialogs = _doVisible(prevState.compDialogs, key);
-        } else {
-          prevState.compDialogs.push(Comp);
-        }
-        prevState.hmData[key] = data;
-        return {
-          ...prevState
-        };
-      });
-    }
-  });
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     style: S_ROOT,
     children: _renderDialogs(state, _hToTopLayer, _hToggleDialog)
