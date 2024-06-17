@@ -1,10 +1,9 @@
 import {
   bindTo,
-  useState,
   useCallback
 } from '../uiApi';
 
-import useRefInit from '../hooks/useRefInit';
+import useStoreState from '../hooks/useStoreState';
 
 import {
   HAS_TOUCH_EVENTS,
@@ -24,16 +23,6 @@ const _isIn = (arr, type) => {
   }
   return false;
 }
-
-const _calcMaxButtons = (
-  maxButtons
-) => {
-  const _innerWidth = getWindowInnerWidth() || 601;
-  return _innerWidth>600 ? maxButtons
-    : _innerWidth>500 ? 3
-    : _innerWidth>360 ? 2
-    : 1;
-};
 
 const _crBtProps = (
   index,
@@ -63,31 +52,47 @@ const _crHotBtItem = (
    />
 );
 
+const _calcMaxButtons = (
+  maxButtons
+) => {
+  const _innerWidth = getWindowInnerWidth() || 601;
+  return _innerWidth>600 ? maxButtons
+    : _innerWidth>500 ? 3
+    : _innerWidth>360 ? 2
+    : 1;
+};
+
+const NUMBER_OF_MAX_BUTTONS = _calcMaxButtons(5);
+
+const updateHotButtons = (
+  msCloseDialog,
+  setHotButtons
+) => {
+  if (msCloseDialog) {
+    setHotButtons(arr => {
+      if (!_isIn(arr, msCloseDialog.type)) {
+        const _index = arr.length % NUMBER_OF_MAX_BUTTONS
+        arr[_index] = msCloseDialog
+        return [...arr];
+      }
+      return arr;
+    })
+}}
+
 const HotBar = ({
-  maxButtons=5,
   useMsCloseDialog,
   onShowDialog
 }) => {
-  const _maxNumberOfBts = useRefInit(
-    () => _calcMaxButtons(maxButtons)
-  )
-  , [
+  const [
     hotButtons,
     setHotButtons
-  ] = useState([])
+  ] = useStoreState(
+    [], useMsCloseDialog, updateHotButtons
+  )
+  /*eslint-disable react-hooks/exhaustive-deps */
   , _hClean = useCallback(() => setHotButtons([]), []);
-
-  useMsCloseDialog(msCloseDialog => {
-    if (msCloseDialog) {
-      setHotButtons(arr => {
-        if (!_isIn(arr, msCloseDialog.type)) {
-          const _index = arr.length % _maxNumberOfBts
-          arr[_index] = msCloseDialog
-          return [...arr];
-        }
-        return arr;
-      })
-  }})
+  // setHotButtons
+  /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <div style={S_ROOT}>

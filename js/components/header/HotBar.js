@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
+var _useStoreState = _interopRequireDefault(require("../hooks/useStoreState"));
 var _has = require("../has");
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
@@ -21,10 +21,6 @@ const _isIn = (arr, type) => {
     }
   }
   return false;
-};
-const _calcMaxButtons = maxButtons => {
-  const _innerWidth = (0, _has.getWindowInnerWidth)() || 601;
-  return _innerWidth > 600 ? maxButtons : _innerWidth > 500 ? 3 : _innerWidth > 360 ? 2 : 1;
 };
 const _crBtProps = function (index, caption) {
   if (caption === void 0) {
@@ -49,27 +45,34 @@ const _crHotBtItem = (conf, index, _ref) => {
     onClick: (0, _uiApi.bindTo)(onShowDialog, conf.type)
   });
 };
+const _calcMaxButtons = maxButtons => {
+  const _innerWidth = (0, _has.getWindowInnerWidth)() || 601;
+  return _innerWidth > 600 ? maxButtons : _innerWidth > 500 ? 3 : _innerWidth > 360 ? 2 : 1;
+};
+const NUMBER_OF_MAX_BUTTONS = _calcMaxButtons(5);
+const updateHotButtons = (msCloseDialog, setHotButtons) => {
+  if (msCloseDialog) {
+    setHotButtons(arr => {
+      if (!_isIn(arr, msCloseDialog.type)) {
+        const _index = arr.length % NUMBER_OF_MAX_BUTTONS;
+        arr[_index] = msCloseDialog;
+        return [...arr];
+      }
+      return arr;
+    });
+  }
+};
 const HotBar = _ref2 => {
   let {
-    maxButtons = 5,
     useMsCloseDialog,
     onShowDialog
   } = _ref2;
-  const _maxNumberOfBts = (0, _useRefInit.default)(() => _calcMaxButtons(maxButtons)),
-    [hotButtons, setHotButtons] = (0, _uiApi.useState)([]),
+  const [hotButtons, setHotButtons] = (0, _useStoreState.default)([], useMsCloseDialog, updateHotButtons)
+    /*eslint-disable react-hooks/exhaustive-deps */,
     _hClean = (0, _uiApi.useCallback)(() => setHotButtons([]), []);
-  useMsCloseDialog(msCloseDialog => {
-    if (msCloseDialog) {
-      setHotButtons(arr => {
-        if (!_isIn(arr, msCloseDialog.type)) {
-          const _index = arr.length % _maxNumberOfBts;
-          arr[_index] = msCloseDialog;
-          return [...arr];
-        }
-        return arr;
-      });
-    }
-  });
+  // setHotButtons
+  /*eslint-enable react-hooks/exhaustive-deps */
+
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
