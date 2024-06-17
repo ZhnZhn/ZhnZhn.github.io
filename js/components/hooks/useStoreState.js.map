@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useStoreState.js"
+ ],
+ "file": "../../../src/components/hooks/useStoreState.js",
+ "names": [
+  "_uiApi",
+  "require",
+  "useStoreState",
+  "initialState",
+  "useStoreMessage",
+  "updateState",
+  "state",
+  "setState",
+  "useState",
+  "storeMessage",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAEA,MAAMC,aAAa,GAAGA,CACpBC,YAAY,EACZC,eAAe,EACfC,WAAW,KACR;EACH,MAAM,CACJC,KAAK,EACLC,QAAQ,CACT,GAAG,IAAAC,eAAQ,EAACL,YAAY,CAAC;EAC1BC,eAAe,CAACK,YAAY,IAAIJ,WAAW,CAACI,YAAY,EAAEF,QAAQ,CAAC,CAAC;EACpE,OAAO,CACLD,KAAK,EACLC,QAAQ,CACT;AACH,CAAC;AAAC,IAAAG,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaV,aAAa"
+}
