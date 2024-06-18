@@ -1,3 +1,4 @@
+import { joinBy } from '../uiApi';
 import { BtSvgClear } from '../zhn/BtSvgX';
 import ButtonCircle2 from '../zhn/ButtonCircle2';
 import ArrowCell from './ArrowCell';
@@ -28,7 +29,8 @@ const crAfterInputEl = (
   optionsViewId,
 
   _hClear,
-  _hToggleOptions
+  _hToggleOptions,
+  propsOptions
 ) => {
   const _optionNames = optionNames || optionName || '';
 
@@ -42,9 +44,14 @@ const crAfterInputEl = (
           />
         )
      } else {
-       _placeholder = placeholder || `Select ${optionName}...`;
+       const _propsOptionsLength = propsOptions.length
+       , _numberOfOptions = _propsOptionsLength > 1000
+           ? `(${_propsOptionsLength})`
+           : '';
+       _placeholder = placeholder
+         || joinBy(' ', 'Select', optionName, _numberOfOptions, '...');
        _afterInputEl = (
-         <ArrowCell           
+         <ArrowCell
            isShowOption={isShowOption}
            labelId={labelId}
            controlsId={optionsViewId}
@@ -54,7 +61,7 @@ const crAfterInputEl = (
     }
 
   } else if (isLoading){
-    _placeholder = `Loading ${_optionNames}...`;
+    _placeholder = joinBy(' ', 'Loading', _optionNames, '...');
     _afterInputEl = (
       <span
         className={CL_SPINNER}
@@ -62,7 +69,7 @@ const crAfterInputEl = (
       />
     );
   } else if (isLoadingFailed) {
-     _placeholder=`Loading ${_optionNames} Failed`;
+     _placeholder = joinBy(' ', 'Loading', _optionNames, 'Failed');
      _afterInputEl = (
        <ButtonCircle2
          className={CL_SPINNER_FAILED}

@@ -332,7 +332,8 @@ const InputSelect = ({
     _optionsViewId,
 
     _hClear,
-    toggleIsShowOption
+    toggleIsShowOption,
+    propsOptions
   )
   , _optionViewWidthStyle = crWidthStyle(
       width,

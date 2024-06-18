@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _BtSvgX = require("../zhn/BtSvgX");
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle2"));
 var _ArrowCell = _interopRequireDefault(require("./ArrowCell"));
@@ -14,7 +15,7 @@ const S_SVG_CLEAR = {
   right: 8,
   stroke: '#1b75bb'
 };
-const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isBtSvgClear, isShowOption, labelId, optionsViewId, _hClear, _hToggleOptions) => {
+const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isBtSvgClear, isShowOption, labelId, optionsViewId, _hClear, _hToggleOptions, propsOptions) => {
   const _optionNames = optionNames || optionName || '';
   let _placeholder, _afterInputEl;
   if (!isLoading && !isLoadingFailed) {
@@ -24,7 +25,9 @@ const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, opt
         onClick: _hClear
       });
     } else {
-      _placeholder = placeholder || "Select " + optionName + "...";
+      const _propsOptionsLength = propsOptions.length,
+        _numberOfOptions = _propsOptionsLength > 1000 ? "(" + _propsOptionsLength + ")" : '';
+      _placeholder = placeholder || (0, _uiApi.joinBy)(' ', 'Select', optionName, _numberOfOptions, '...');
       _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell.default, {
         isShowOption: isShowOption,
         labelId: labelId,
@@ -33,13 +36,13 @@ const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, opt
       });
     }
   } else if (isLoading) {
-    _placeholder = "Loading " + _optionNames + "...";
+    _placeholder = (0, _uiApi.joinBy)(' ', 'Loading', _optionNames, '...');
     _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       className: _CL.CL_SPINNER,
       "data-loader": "circle"
     });
   } else if (isLoadingFailed) {
-    _placeholder = "Loading " + _optionNames + " Failed";
+    _placeholder = (0, _uiApi.joinBy)(' ', 'Loading', _optionNames, 'Failed');
     _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
       className: _CL.CL_SPINNER_FAILED,
       dataLoader: "circle-failed",

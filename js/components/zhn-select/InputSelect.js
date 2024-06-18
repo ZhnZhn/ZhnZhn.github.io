@@ -221,7 +221,7 @@ const InputSelect = _ref => {
   /*eslint-unable react-hooks/exhaustive-deps */
 
   const _rootWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, style),
-    [afterInputEl, _placeholder] = (0, _crAfterInputEl.default)(isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isFocused && value, isShowOption, labelId, _optionsViewId, _hClear, toggleIsShowOption),
+    [afterInputEl, _placeholder] = (0, _crAfterInputEl.default)(isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isFocused && value, isShowOption, labelId, _optionsViewId, _hClear, toggleIsShowOption, propsOptions),
     _optionViewWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, isShowOption ? _styleFn.S_BLOCK : _styleFn.S_NONE);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: _CL.CL_ROOT,
