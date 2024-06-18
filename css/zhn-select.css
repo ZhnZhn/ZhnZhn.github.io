@@ -12,7 +12,7 @@
   outline: medium none;
   color: green;
   width: 100%;
-  height: 30px;
+  height: 36px;
   padding: 0 40px 0 10px;
   font-size: 16px;
   font-weight: bold;
@@ -40,7 +40,7 @@
   position: absolute;
   right: 0;
   width: 35px;
-  padding: 12px 5px 6px 0;
+  padding: 14px 5px 6px 0;
 }
 .zhn-select__bt-arrow > span {
   display: inline-block;
@@ -54,17 +54,10 @@
   border-color: #1b75bb transparent transparent;
 }
 
-.zhn-select__input__hr {
-  border-width: medium medium 1px;
-  border-style: none none solid;
-  border-color: #1b75bb;
-  border-image: none;
-  margin: 0 40px 5px 10px;
-}
-
 .zhn-select__options {
   z-index: 10;
   position: absolute;
+  top: 36px;
   left: 0;
   background-color: #e1e1cb;
   color: green;
@@ -89,11 +82,12 @@
   background-color: #d5d5bc;
   width: 100%;
   padding: 6px 0 6px 5px;
-  border-bottom: solid 2px transparent;
+  border-bottom: solid 1px transparent;
   cursor: pointer;
 }
 
 .zhn-select__row:hover {
+  padding-bottom: 4px;
   border-bottom: solid 2px #1b75bb;
   font-weight: bolder;
 }
@@ -101,7 +95,7 @@
   outline: 0;
 }
 .zhn-select__row--active {
-  border-bottom: solid 2px #1b75bb;
+  border-bottom: solid 1px #1b75bb;
   font-weight: bolder;
 }
 
