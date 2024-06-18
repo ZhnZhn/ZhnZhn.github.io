@@ -42,9 +42,6 @@
   width: 35px;
   padding: 12px 5px 6px 0;
 }
-.zhn-select__bt-arrow:hover {
-  outline: 0;
-}
 .zhn-select__bt-arrow > span {
   display: inline-block;
   height: 0;
@@ -52,6 +49,9 @@
   border-color: #999 transparent transparent;
   border-style: solid;
   border-width: 10px 8px 4px;
+}
+.zhn-select__bt-arrow:active > span {
+  border-color: #1b75bb transparent transparent;
 }
 
 .zhn-select__input__hr {
