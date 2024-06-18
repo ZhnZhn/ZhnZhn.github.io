@@ -41,8 +41,7 @@ import useTouchHandlers from './useTouchHandlers';
 
 import {
   CL_ROOT,
-  CL_INPUT,
-  CL_INPUT_HR
+  CL_INPUT
 } from './CL';
 
 const FN_NOOP = () => {};
@@ -364,8 +363,7 @@ const InputSelect = ({
          onChange={_hInputChange}
          onKeyDown={_hInputKeyDown}
       />
-      {afterInputEl}
-      <hr className={CL_INPUT_HR} />
+      {afterInputEl}      
       {isShowOption && <OptionsView
         id={_optionsViewId}
         widthStyle={_optionViewWidthStyle}

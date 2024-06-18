@@ -21,7 +21,6 @@ const ROOT = 'zhn-select'
 
 export const CL_ROOT = ROOT
 export const CL_INPUT = INPUT
-export const CL_INPUT_HR = INPUT + '__hr'
 export const CL_SPINNER = SPINNER
 export const CL_SPINNER_FAILED = SPINNER + '--failed'
 export const CL_BT_ARROW = ROOT + '__bt-arrow'

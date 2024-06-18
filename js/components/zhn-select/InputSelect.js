@@ -242,9 +242,7 @@ const InputSelect = _ref => {
       placeholder: _placeholder,
       onChange: _hInputChange,
       onKeyDown: _hInputKeyDown
-    }), afterInputEl, /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
-      className: _CL.CL_INPUT_HR
-    }), isShowOption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsView.default, {
+    }), afterInputEl, isShowOption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsView.default, {
       id: _optionsViewId,
       widthStyle: _optionViewWidthStyle,
       optionsStyle: optionsStyle,
