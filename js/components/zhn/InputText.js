@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
+var _styleFn = require("../styleFn");
 var _Input = require("./Input.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -12,6 +13,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 const CL_NUMBER_RANGE = 'input-minmax-number';
 const S_INPUT_TEXT = {
   ..._Input.S_INPUT,
+  ..._styleFn.S_BORDER_RADIUS_2,
   ..._Input.S_BOX_SHADOW,
   display: 'inline',
   width: 40,

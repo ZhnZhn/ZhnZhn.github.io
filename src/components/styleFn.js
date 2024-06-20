@@ -52,6 +52,8 @@ export const S_BLOCK = { display: "block" }
 export const S_INLINE = { display: "inline-block" }
 export const S_NONE = { display: "none" }
 
+export const S_BORDER_RADIUS_2 = { borderRadius: 2 }
+
 export const S_OPEN_CLOSE_LEVEL_2 = {
   marginLeft: 8,
   paddingLeft: 8,

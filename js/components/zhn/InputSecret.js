@@ -4,10 +4,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_DIV = {
-    positio: 'relative',
+    ..._styleFn.S_BORDER_RADIUS_2,
     display: 'inline-block',
     width: 275,
     backgroundColor: '#e1e1cb'

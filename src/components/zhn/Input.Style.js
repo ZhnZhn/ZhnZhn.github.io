@@ -1,5 +1,8 @@
+import { S_BORDER_RADIUS_2 } from '../styleFn'
+
 
 export const S_ROW = {
+  ...S_BORDER_RADIUS_2,
   position: 'relative',
   display: 'inline-block',
   width: 250,

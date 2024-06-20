@@ -7,6 +7,8 @@ import {
   focusRefElement
 } from '../uiApi';
 
+import { S_BORDER_RADIUS_2 } from '../styleFn';
+
 import InputText from '../zhn/InputText'
 import SearchOptions from './SearchOptions'
 import ToggleButton from './ToggleButton'
@@ -18,25 +20,19 @@ import crInputChangeDf from './flux/crInputChange'
 
 const CL_INPUT_HR = 'zhn-search__input__hr'
 , S_ROOT = {
+  ...S_BORDER_RADIUS_2,
   position: 'relative',
   width: 250,
   height: 36,
-  borderRadius: 14,
   background: 'none 0px 0px repeat scroll rgb(225, 225, 203)'
 }
-, S_ROOT_WITH_OPTIONS = {
-  ...S_ROOT,
-  borderRadius: 0,
-  borderTopLeftRadius: 5,
-  borderTopRightRadius: 5
-}
 , S_INPUT = {
+  ...S_BORDER_RADIUS_2,
   display: 'block',
   width: '100%',
   height: 30,
   paddingLeft: 10,
   marginLeft: 0,
-  borderRadius: 15,
   boxShadow: 'none'
 };
 
@@ -105,14 +101,12 @@ const InputSearch = ({
   }, [inputKey])
 
   const onKeyDown = isSearch ? _onKeyDown : null
-  , onInputChange = isSearch ? _onInputChange: null
-  , _style = isOptions
-    ? S_ROOT_WITH_OPTIONS
-    : S_ROOT;
+  , onInputChange = isSearch ? _onInputChange: null;
 
   return (
-    <div style={_style}
-      tabIndex={"-1"}
+    <div
+      style={S_ROOT}
+      tabIndex="-1"
       role="textbox"
       onKeyDown={onKeyDown}
     >

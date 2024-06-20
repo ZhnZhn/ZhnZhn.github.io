@@ -9,6 +9,8 @@ import {
 } from '../uiApi';
 import useInputKeyDown from './useInputKeyDown';
 
+import { S_BORDER_RADIUS_2 } from '../styleFn';
+
 import {
   S_INPUT,
   S_BOX_SHADOW
@@ -18,6 +20,7 @@ const CL_NUMBER_RANGE = 'input-minmax-number';
 
 const S_INPUT_TEXT = {
    ...S_INPUT,
+   ...S_BORDER_RADIUS_2,
    ...S_BOX_SHADOW,
    display: 'inline',
    width: 40,

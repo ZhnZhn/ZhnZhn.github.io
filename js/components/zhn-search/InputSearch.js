@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _SearchOptions = _interopRequireDefault(require("./SearchOptions"));
 var _ToggleButton = _interopRequireDefault(require("./ToggleButton"));
@@ -14,25 +15,19 @@ var _crInputChange = _interopRequireDefault(require("./flux/crInputChange"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_INPUT_HR = 'zhn-search__input__hr',
   S_ROOT = {
+    ..._styleFn.S_BORDER_RADIUS_2,
     position: 'relative',
     width: 250,
     height: 36,
-    borderRadius: 14,
     background: 'none 0px 0px repeat scroll rgb(225, 225, 203)'
   },
-  S_ROOT_WITH_OPTIONS = {
-    ...S_ROOT,
-    borderRadius: 0,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5
-  },
   S_INPUT = {
+    ..._styleFn.S_BORDER_RADIUS_2,
     display: 'block',
     width: '100%',
     height: 30,
     paddingLeft: 10,
     marginLeft: 0,
-    borderRadius: 15,
     boxShadow: 'none'
   };
 const _isHideOptions = keyCode => keyCode === 38 || keyCode === 46 || keyCode === 27;
@@ -79,10 +74,9 @@ const InputSearch = _ref => {
     (0, _uiApi.focusRefElement)(refInput);
   }, [inputKey]);
   const onKeyDown = isSearch ? _onKeyDown : null,
-    onInputChange = isSearch ? _onInputChange : null,
-    _style = isOptions ? S_ROOT_WITH_OPTIONS : S_ROOT;
+    onInputChange = isSearch ? _onInputChange : null;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: _style,
+    style: S_ROOT,
     tabIndex: "-1",
     role: "textbox",
     onKeyDown: onKeyDown,

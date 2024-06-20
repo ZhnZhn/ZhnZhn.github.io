@@ -2,7 +2,9 @@
 
 exports.__esModule = true;
 exports.getIsValidColor = exports.S_ROW = exports.S_INPUT = exports.S_HR = exports.S_ERR_MSG = exports.S_ERR = exports.S_BOX_SHADOW = void 0;
+var _styleFn = require("../styleFn");
 const S_ROW = exports.S_ROW = {
+  ..._styleFn.S_BORDER_RADIUS_2,
   position: 'relative',
   display: 'inline-block',
   width: 250,

@@ -7,13 +7,15 @@ import {
   stopImmediatePropagation
 } from '../uiApi';
 
+import { S_BORDER_RADIUS_2 } from '../styleFn';
+
 import useInputKeyDown from './useInputKeyDown';
 
 const S_DIV = {
-  positio: 'relative',
+  ...S_BORDER_RADIUS_2,
   display: 'inline-block',
   width: 275,
-  backgroundColor: '#e1e1cb'
+  backgroundColor: '#e1e1cb',
 }, S_INPUT = {
   color: 'green',
   width: '100%',
