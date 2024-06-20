@@ -5,11 +5,13 @@ const CL_SPINNER = 'zhn-search__spinner'
 , S_ARROW_SHOW = {
   borderColor: '#1b75bb transparent transparent'
 }
+, S_TOP_6 = { top: 6 }
 , _LOADING_ELEMENT = (<span
   className={CL_SPINNER}
   data-loader="circle"
 />)
 , _LOADING_FAILED_ELEMENT = (<span
+  style={S_TOP_6}
   className={CL_SPINNER_FAILED}
   data-loader="circle-failed"
 />);
