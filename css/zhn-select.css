@@ -4,6 +4,7 @@
   position: relative;
   background-color: #e1e1cb;
   width: 160px;
+  border-radius: 2px;
 }
 
 .zhn-select__input {
@@ -57,13 +58,13 @@
 .zhn-select__options {
   z-index: 10;
   position: absolute;
-  top: 36px;
+  top: 34px;
   left: 0;
   background-color: #e1e1cb;
   color: green;
   width: 160px;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .zhn-select__options__div {
@@ -82,12 +83,11 @@
   background-color: #d5d5bc;
   width: 100%;
   padding: 6px 0 6px 5px;
-  border-bottom: solid 1px transparent;
+  border-bottom: solid 2px transparent;
   cursor: pointer;
 }
 
-.zhn-select__row:hover {
-  padding-bottom: 4px;
+.zhn-select__row:hover {  
   border-bottom: solid 2px #1b75bb;
   font-weight: bolder;
 }
@@ -95,13 +95,13 @@
   outline: 0;
 }
 .zhn-select__row--active {
-  border-bottom: solid 1px #1b75bb;
+  background-color: rgba(128, 128, 128, 0.3);
   font-weight: bolder;
 }
 
 .zhn-select__footer {
   position: relative;  
-  background-color: #a3a3a3;
+  background-color: #7d7d7d;
   line-height: 1.5;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
