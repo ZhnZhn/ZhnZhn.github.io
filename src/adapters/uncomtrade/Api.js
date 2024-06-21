@@ -23,9 +23,8 @@ const _checkReq = (option) => {
 };
 
 const DF_SHORT_PERIOD = 'period=2023,2022,2021'
-, DF_PERIOD = `${DF_SHORT_PERIOD},2020`
-, DF_LONG_QUERY_TAIL = `${DF_PERIOD},2019,2018,2017,2016`
-, DF_QUERY_TAIL = `${DF_PERIOD}&partner2Code=0`;
+, DF_LONG_QUERY_TAIL = `${DF_SHORT_PERIOD},2020,2019,2018,2017,2016`
+
 const _crReporterToTradePartnerQueryTail = (
   tp
 ) => {
@@ -33,10 +32,10 @@ const _crReporterToTradePartnerQueryTail = (
     ? ''
     : tp || '0'
   , _partnerCode = _tpCode
-      ? `&partnerCode=${_tpCode}`
+      ? `&partnerCode=${_tpCode}&partner2Code=${_tpCode}`
       : ''
   , _queryTail = tp === ALL
-      ? DF_QUERY_TAIL
+      ? DF_SHORT_PERIOD
       : DF_LONG_QUERY_TAIL;
   return `${_partnerCode}&${_queryTail}`;
 };
