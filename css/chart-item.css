@@ -1,32 +1,21 @@
 
-
 .chart-item {
+  position: relative;
   line-height: 1.5;
   margin-bottom: 10px;
-  position: relative;
-}
-
-@media (min-width: 500px) {
-  .chart-item {
-    margin-right: 12px;
-  }
 }
 
 .item-header {
   position: relative;
   background-color: #1b2836;
-  width: 100%;
-  height: auto;
-  margin-top: -2px; 
+  width: 100%; 
   padding: 0 42px 4px 0;
+  margin-top: -2px; 
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
 }
 
-.item-time {
-  display: inline-block;
-  position: relative;
-  top: 1px;
+.item-time {  
   color: #fdb316;
   padding-left: 16px;
   font-weight: bold;

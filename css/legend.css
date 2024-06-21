@@ -1,27 +1,21 @@
-.bt-item {
-  display: inline-block;
+.bt-item {  
   margin: 10px 0 0 12px;
   padding: 3px 0;
   border: 1px solid;
   border-radius: 10px;
   font-weight: normal;  
 }
-.bt-item:hover {
-  outline: 0;
-}
 .bt-item:focus {
   border-width: 2px;
 }
 
-.bt-ml {
-  display: inline-block;
+.bt-ml {  
   color: #1b2836;
   padding: 6px;
   margin-left: 8px;
   font-weight: bold;
 }
 .bt-ml:hover,
-.bt-ml:focus {
-  outline: 0;
+.bt-ml:focus { 
   background-color: rgba(128, 128, 128, 0.3);
 }

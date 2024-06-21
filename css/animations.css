@@ -42,3 +42,15 @@
     opacity: 1;
   }
 }
+
+@media screen and (max-width: 540px) {
+  .show-modal {
+    animation: showing-modal 200ms linear;
+  }
+  .show-popup {  
+    animation: showing-popup 150ms ease-in; 
+  }
+  .show-cont {
+    animation: showing-cont 200ms ease-out;
+  } 
+}
