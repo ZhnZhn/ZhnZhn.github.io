@@ -1,3 +1,5 @@
+import { CL_ROW__PANE_TOPIC } from '../styleFn';
+
 import {
   BT_BLOCKCHAIN,
   BT_COMMODITIES,
@@ -40,8 +42,7 @@ import {
   showBrowser
 } from '../../flux/stores/browserStore';
 
-const CL_ROW = 'row__pane-topic'
-, PREFIX_CL_ROW_ITEM = `${CL_ROW} item__`
+const PREFIX_CL_ROW_ITEM = `${CL_ROW__PANE_TOPIC} item__`
 , CL_BR = `${PREFIX_CL_ROW_ITEM}browser`
 , CL_ORG = `${PREFIX_CL_ROW_ITEM}org`
 , CL_W = `${PREFIX_CL_ROW_ITEM}watch`;
@@ -84,7 +85,7 @@ const PAGE_CONFIGS_01 = [
   [CL_ORG, 'Nasdaq Data Link', BT_NDL],
 ]
 , PAGE_CONFIGS_02 = [
-  [CL_ORG, 'Overview', BT_EUROSTAT],  
+  [CL_ORG, 'Overview', BT_EUROSTAT],
   [CL_ORG, 'Circular Economy', BT_CEI],
   [CL_ORG, 'Euro Indicators / PEEIs', BT_PE],
   [CL_ORG, 'EU Comext', BT_COMEXT],

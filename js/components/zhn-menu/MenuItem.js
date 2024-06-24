@@ -8,7 +8,6 @@ var _fUseKey = require("../hooks/fUseKey");
 var _LabelNew = _interopRequireDefault(require("./LabelNew"));
 var _MenuItemBadge = _interopRequireDefault(require("./MenuItemBadge"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_ROW = (0, _styleFn.crCnNotSelected)("row__topic");
 const MenuItem = _ref => {
   let {
     refItem,
@@ -25,7 +24,7 @@ const MenuItem = _ref => {
     ref: refItem,
     tabIndex: "0",
     role: "menuitem",
-    className: CL_ROW,
+    className: _styleFn.CL_ROW_TOPIC,
     style: style,
     onClick: onClick,
     onKeyDown: _hKeyDown,

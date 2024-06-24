@@ -2,11 +2,11 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _BrowserType = require("../../constants/BrowserType");
 var _compStore = require("../../flux/stores/compStore");
 var _browserStore = require("../../flux/stores/browserStore");
-const CL_ROW = 'row__pane-topic',
-  PREFIX_CL_ROW_ITEM = CL_ROW + " item__",
+const PREFIX_CL_ROW_ITEM = _styleFn.CL_ROW__PANE_TOPIC + " item__",
   CL_BR = PREFIX_CL_ROW_ITEM + "browser",
   CL_ORG = PREFIX_CL_ROW_ITEM + "org",
   CL_W = PREFIX_CL_ROW_ITEM + "watch";

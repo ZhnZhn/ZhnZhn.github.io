@@ -32,6 +32,8 @@ export const CL_NOT_SELECTED = "not-selected"
 export const CL_TEXT_ELLIPSIS= "text-ellipsis"
 export const CL_WIDTH_100_PERCENT = "w-100"
 
+export const crBold16Cn = _fCrCn("bold-16")
+
 export const crCnNotSelected = _fCrCn(CL_NOT_SELECTED)
 const _fCrCnNotSelected = (
   className1
@@ -39,9 +41,19 @@ const _fCrCnNotSelected = (
   className2
 ) => crCnNotSelected(`${className2} ${className1}`);
 
+const _crMenuItemCn = _fCrCn("menuitem");
+const _crNotSelectedBold16MenuItemCn = className => crCnNotSelected(
+  crBold16Cn(_crMenuItemCn(className))
+);
+export const CL_ROW_TOPIC = _crNotSelectedBold16MenuItemCn("row__topic");
+
+export const CL_ROW__PANE_TOPIC = _crNotSelectedBold16MenuItemCn("row__pane-topic")
 const _crRowCn = _fCrCnNotSelected(CL_BLACK);
-export const CL_ROW_PANE_TOPIC = _crRowCn("row__pane-topic")
-export const CL_ROW_TYPE2_TOPIC = _crRowCn("row__type2-topic")
+export const CL_ROW_PANE_TOPIC = _crRowCn(CL_ROW__PANE_TOPIC)
+
+export const CL_ROW_TYPE2_TOPIC = _crRowCn(
+  _crNotSelectedBold16MenuItemCn("row__type2-topic")
+)
 
 const OPEN_CLOSE = "open-close";
 export const CL_OPEN_CLOSE = `${OPEN_CLOSE} cfs-dark`

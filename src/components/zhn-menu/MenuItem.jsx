@@ -1,10 +1,8 @@
-import { crCnNotSelected } from '../styleFn';
+import { CL_ROW_TOPIC } from '../styleFn';
 import { useKeyEnter } from '../hooks/fUseKey';
 
 import LabelNew from './LabelNew';
 import MenuItemBadge from './MenuItemBadge';
-
-const CL_ROW = crCnNotSelected("row__topic");
 
 const MenuItem = ({
   refItem,
@@ -22,7 +20,7 @@ const MenuItem = ({
       ref={refItem}
       tabIndex="0"
       role="menuitem"
-      className={CL_ROW}
+      className={CL_ROW_TOPIC}
       style={style}
       onClick={onClick}
       onKeyDown={_hKeyDown}
