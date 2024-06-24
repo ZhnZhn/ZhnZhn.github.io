@@ -1,13 +1,13 @@
-.component-container {
+.flex-row {
   display: flex;
   flex-direction: row;
-  margin-top: 8px;
-  margin-bottom: 10px;
 }
 
-.hrz-container {
-  display: flex;
-  flex-direction: row;
+.app-container {
+  margin: 8px 0 10px 0;  
+}
+
+.hrz-container {  
   flex-shrink: 0;
 }
 

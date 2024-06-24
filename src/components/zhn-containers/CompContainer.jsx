@@ -1,6 +1,6 @@
+import { CL_HRZ_CONTAINER } from '../styleFn';
 import useStoreState from '../hooks/useStoreState';
 
-const CL = "hrz-container";
 const updateContainers = (
   msInit,
   setContainers
@@ -11,7 +11,7 @@ const updateContainers = (
 };
 
 const CompContainer = ({
-  className=CL,
+  className=CL_HRZ_CONTAINER,
   useMsInit
 }) => {
   const containers = useStoreState(

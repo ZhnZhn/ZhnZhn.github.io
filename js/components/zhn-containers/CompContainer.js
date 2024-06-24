@@ -3,9 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _useStoreState = _interopRequireDefault(require("../hooks/useStoreState"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL = "hrz-container";
 const updateContainers = (msInit, setContainers) => {
   if (msInit && msInit.Comp) {
     setContainers(arrComp => [msInit.Comp, ...arrComp]);
@@ -13,7 +13,7 @@ const updateContainers = (msInit, setContainers) => {
 };
 const CompContainer = _ref => {
   let {
-    className = CL,
+    className = _styleFn.CL_HRZ_CONTAINER,
     useMsInit
   } = _ref;
   const containers = (0, _useStoreState.default)([], useMsInit, updateContainers)[0];

@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("./uiApi");
+var _styleFn = require("./styleFn");
 var _LocationSearch = require("../flux/logic/LocationSearch");
 var _settingStore = require("../flux/stores/settingStore");
 var _ComponentActions = require("../flux/actions/ComponentActions");
@@ -18,7 +19,7 @@ var _DialogContainer = _interopRequireDefault(require("./dialogs/DialogContainer
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 var _jsxRuntime = require("react/jsx-runtime");
 const BUILD_DATE = '21-06-2024',
-  CL_COMP_CONTAINER = "component-container";
+  CL_COMP_CONTAINER = (0, _styleFn.crFlexRowCn)("app-container");
 const showSettings = (0, _uiApi.bindTo)(_ComponentActions.ComponentActions.showSettings, (0, _settingStore.exportSettingFn)());
 const AppErc = () => {
   (0, _uiApi.useEffect)(() => {

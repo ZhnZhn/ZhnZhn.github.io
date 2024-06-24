@@ -1,8 +1,8 @@
+import { CL_HRZ_CONTAINER } from '../styleFn';
 import useStoreState from '../hooks/useStoreState';
 
 import DialogContainer from '../zhn-containers/DialogContainer';
 
-const CL_HRZ_CONTAINER = "hrz-container";
 const updateElementBrowsers = (
   msInitBrowser,
   setState

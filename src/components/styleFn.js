@@ -130,3 +130,6 @@ export const crBtCircleCn = _fCrCnNotSelected("bt-circle")
 export const crBoldCn = _fCrCn("bold")
 
 export const crBtSvgCn = token => `bt-svg-${token}`
+
+export const crFlexRowCn = _fCrCn("flex-row")
+export const CL_HRZ_CONTAINER = crFlexRowCn("hrz-container")

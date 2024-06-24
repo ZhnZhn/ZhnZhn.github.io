@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getColorBlack = exports.crStyle3 = exports.crStyle2 = exports.crStepStyle = exports.crShowHide = exports.crScrollYCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCnNotSelected = exports.crCn = exports.crBtSvgCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.crBoldCn = exports.S_OPEN_CLOSE_LEVEL_2 = exports.S_NONE = exports.S_INLINE = exports.S_BORDER_RADIUS_2 = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE = exports.CL_NOT_SELECTED = exports.CL_CHB_BLACK = exports.CL_BLACK = void 0;
+exports.getColorBlack = exports.crStyle3 = exports.crStyle2 = exports.crStepStyle = exports.crShowHide = exports.crScrollYCn = exports.crFlexRowCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCnNotSelected = exports.crCn = exports.crBtSvgCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.crBoldCn = exports.S_OPEN_CLOSE_LEVEL_2 = exports.S_NONE = exports.S_INLINE = exports.S_BORDER_RADIUS_2 = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE = exports.CL_NOT_SELECTED = exports.CL_HRZ_CONTAINER = exports.CL_CHB_BLACK = exports.CL_BLACK = void 0;
 var _uiApi = require("./uiApi");
 var _uiTheme = require("./styles/uiTheme");
 exports.getColorBlack = _uiTheme.getColorBlack;
@@ -85,4 +85,6 @@ const crBtCircleCn = exports.crBtCircleCn = _fCrCnNotSelected("bt-circle");
 const crBoldCn = exports.crBoldCn = _fCrCn("bold");
 const crBtSvgCn = token => "bt-svg-" + token;
 exports.crBtSvgCn = crBtSvgCn;
+const crFlexRowCn = exports.crFlexRowCn = _fCrCn("flex-row");
+const CL_HRZ_CONTAINER = exports.CL_HRZ_CONTAINER = crFlexRowCn("hrz-container");
 //# sourceMappingURL=styleFn.js.map

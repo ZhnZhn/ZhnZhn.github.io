@@ -3,6 +3,8 @@ import {
   useEffect
 } from './uiApi';
 
+import { crFlexRowCn } from './styleFn';
+
 import { showAskDialogIf } from '../flux/logic/LocationSearch';
 import { exportSettingFn } from '../flux/stores/settingStore';
 
@@ -27,7 +29,7 @@ import DialogContainer from './dialogs/DialogContainer';
 import checkBuild from './checkBuild';
 
 const BUILD_DATE = '21-06-2024'
-, CL_COMP_CONTAINER = "component-container";
+, CL_COMP_CONTAINER = crFlexRowCn("app-container");
 
 const showSettings = bindTo(
   ComponentActions.showSettings,
