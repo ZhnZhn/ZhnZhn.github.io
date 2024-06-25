@@ -13,7 +13,6 @@ const _crIdB_A = items => `${getValue(items[1])}_${getValue(items[0])}`;
 const _rIdFn = {
   df: items => getValue(items[0]),
   ab: items => `${getValue(items[0])}${getValue(items[1])}`,
-  b_a: _crIdB_A,
   jg: items => `JODI/GAS_${_crIdB_A(items)}`,
   jo: items => `JODI/OIL_${getValue(items[1])}${getValue(items[2])}_${getValue(items[0])}`
 };
