@@ -1,6 +1,7 @@
 import {
   crCn,
-  crStyle2
+  crStyle2,
+  crBold16Cn
 } from '../styleFn';
 
 import useThrottleClick from '../hooks/useThrottleClick';
@@ -9,8 +10,9 @@ import useHotKey from '../hotkeys/useHotKey';
 import BtCaption from './BtCaption';
 
 const CL_ARROW = "arrow-down"
-, CL_BT_FLAT = 'bt-flat'
-, CL_BT_FLAT_CAPTION = `${CL_BT_FLAT}__caption`
+, TOKEN_BT_FLAT = 'bt-flat'
+, CL_BT_FLAT = crBold16Cn(TOKEN_BT_FLAT)
+, CL_BT_FLAT_CAPTION = `${TOKEN_BT_FLAT}__caption`
 , S_PRIMARY_COLOR = { color: '#607d8b' };
 
 const _crTitle = (

@@ -8,7 +8,7 @@ var _styleFn = require("../../styleFn");
 var _Button = _interopRequireDefault(require("../../zhn/Button"));
 var _SvgCheckBox = _interopRequireDefault(require("../../zhn/SvgCheckBox"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_BT_CHB = 'bt-chb',
+const CL_BT_CHB = (0, _styleFn.crBold16Cn)('bt-chb'),
   COLOR = '#1b2836',
   S_ROOT = {
     padding: '6px 0 0 16px'

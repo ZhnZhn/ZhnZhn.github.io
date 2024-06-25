@@ -9,8 +9,9 @@ var _useHotKey = _interopRequireDefault(require("../hotkeys/useHotKey"));
 var _BtCaption = _interopRequireDefault(require("./BtCaption"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_ARROW = "arrow-down",
-  CL_BT_FLAT = 'bt-flat',
-  CL_BT_FLAT_CAPTION = CL_BT_FLAT + "__caption",
+  TOKEN_BT_FLAT = 'bt-flat',
+  CL_BT_FLAT = (0, _styleFn.crBold16Cn)(TOKEN_BT_FLAT),
+  CL_BT_FLAT_CAPTION = TOKEN_BT_FLAT + "__caption",
   S_PRIMARY_COLOR = {
     color: '#607d8b'
   };
@@ -51,6 +52,5 @@ const FlatButton = _ref => {
     }), children]
   });
 };
-var _default = FlatButton;
-exports.default = _default;
+var _default = exports.default = FlatButton;
 //# sourceMappingURL=FlatButton.js.map

@@ -10,7 +10,7 @@ const SpinnerDiv = ({ style }) => (
   />
 );
 
-const S_SPINNER_LOADING = {
+const S_SPINNER = {
   position: 'relative',
   width: 32,
   height: 32,
@@ -20,21 +20,15 @@ const S_SPINNER_LOADING = {
 export const SpinnerLoading = ({
   style
 }) => (
-  <SpinnerDiv style={{
-    ...S_SPINNER_LOADING,
-    ...style}}
+  <SpinnerDiv
+    style={{...S_SPINNER, ...style}}
   />
 )
 
 const FAILED_LOAD_COLOR = '#f44336'
-, S_LOAD_FAILED = {
-  ...S_SPINNER_LOADING,
-  borderColor: FAILED_LOAD_COLOR
-}
+, CL_ERR_MSG = 'err-msg'
 , S_ERR_MSG = {
-  color: FAILED_LOAD_COLOR,
-  padding: 16,
-  fontWeight: 600
+  padding: 16
 };
 
 export const LoadFailedMsg = ({
@@ -43,9 +37,9 @@ export const LoadFailedMsg = ({
   <>
     <div
       data-loader="circle-failed"
-      style={S_LOAD_FAILED}
+      style={S_SPINNER}
     />
-    <p style={S_ERR_MSG}>
+    <p className={CL_ERR_MSG} style={S_ERR_MSG}>
       {`${errMsg}: Network error.`}
     </p>
   </>

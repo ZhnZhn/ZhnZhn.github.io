@@ -1,10 +1,17 @@
-import { useId, useCallback } from '../../uiApi';
-import { crCn, crStyle2 } from '../../styleFn';
+import {
+  useId,
+  useCallback
+} from '../../uiApi';
+import {
+  crCn,
+  crStyle2,
+  crBold16Cn
+} from '../../styleFn';
 
 import Button from '../../zhn/Button';
 import SvgCheckBox from '../../zhn/SvgCheckBox';
 
-const CL_BT_CHB = 'bt-chb'
+const CL_BT_CHB = crBold16Cn('bt-chb')
 , COLOR = '#1b2836'
 , S_ROOT = {
   padding: '6px 0 0 16px'

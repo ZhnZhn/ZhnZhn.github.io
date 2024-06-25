@@ -29,12 +29,9 @@
 
 .bt-chb {
   position: relative;
-  top: -2px;
-  display: inline-block;
+  top: -2px;  
   color: grey;
-  padding-left: 8px;
-  font-size: 16px;
-  font-weight: bold;
+  padding-left: 8px;  
 }
 
 .bt-tab {
@@ -92,8 +89,7 @@
   /* stylelint-enable */
 }
 
-.bt-svg-circle {
-  /*display: inline-block;*/
+.bt-svg-circle {  
   position: relative;
   top: 4px;
   border-radius: 50%;
@@ -143,7 +139,7 @@
 [data-loader='circle-failed'] {
   width: 2.5em;
   height: 2.5em;
-  border: 3px solid rgba(164, 135, 212, 1);
+  border: 3px solid '#f44336';
   border-top-color: transparent;
   border-radius: 100%;
 }
@@ -152,8 +148,6 @@
   color: #607d8b;
   color: var(--btf-c);
   height: 36px;    
-  text-decoration: none;
-  font-weight: inherit;  
   background-color: rgba(0, 0, 0, 0);
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
@@ -163,12 +157,9 @@
 }
 
 .bt-flat__caption {
-  padding: 0 8px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 0 8px;  
   letter-spacing: 0;
-  text-transform: uppercase;
-  user-select: none;
+  text-transform: uppercase;  
 }
 
 .menu-item {

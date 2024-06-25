@@ -13,7 +13,7 @@ const SpinnerDiv = _ref => {
     "data-loader": "circle"
   });
 };
-const S_SPINNER_LOADING = {
+const S_SPINNER = {
   position: 'relative',
   width: 32,
   height: 32,
@@ -25,21 +25,16 @@ const SpinnerLoading = _ref2 => {
   } = _ref2;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerDiv, {
     style: {
-      ...S_SPINNER_LOADING,
+      ...S_SPINNER,
       ...style
     }
   });
 };
 exports.SpinnerLoading = SpinnerLoading;
 const FAILED_LOAD_COLOR = '#f44336',
-  S_LOAD_FAILED = {
-    ...S_SPINNER_LOADING,
-    borderColor: FAILED_LOAD_COLOR
-  },
+  CL_ERR_MSG = 'err-msg',
   S_ERR_MSG = {
-    color: FAILED_LOAD_COLOR,
-    padding: 16,
-    fontWeight: 600
+    padding: 16
   };
 const LoadFailedMsg = _ref3 => {
   let {
@@ -48,8 +43,9 @@ const LoadFailedMsg = _ref3 => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       "data-loader": "circle-failed",
-      style: S_LOAD_FAILED
+      style: S_SPINNER
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+      className: CL_ERR_MSG,
       style: S_ERR_MSG,
       children: errMsg + ": Network error."
     })]

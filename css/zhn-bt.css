@@ -1,9 +1,8 @@
 
 /*general button circle */
-.bt-circle {
-  display: inline-block;
-  border-radius: 50%;     
+.bt-circle {  
   text-align: center;  
+  border-radius: 50%;       
   box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
 }
 .bt-circle-hf:hover,

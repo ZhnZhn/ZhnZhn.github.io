@@ -38,6 +38,9 @@ button {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
   cursor: pointer;
 }
 button:focus,
