@@ -1,1 +1,1 @@
-{"geo":"Belarus","code":"BLR","type":"Electricity Net Generation by Solar","value":"TWh","fromYear":"1980","data":[null,null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.000396,0.00198,0.00891,0.02574,0.08811,0.11682,0.17721,0.1683,0.167840164,0.282181276]}
+{"geo":"Belarus","code":"BLR","type":"Electricity Net Generation by Solar","value":"TWh","fromYear":"2013","data":[0.000396,0.00198,0.00891,0.02574,0.08811,0.1168,0.1772,0.1683,0.1721,0.2066,0.1518]}

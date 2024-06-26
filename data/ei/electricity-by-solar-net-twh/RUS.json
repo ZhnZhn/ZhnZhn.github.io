@@ -1,1 +1,1 @@
-{"geo":"Russian Federation","code":"RUS","type":"Electricity Net Generation by Solar","value":"TWh","fromYear":"1980","data":[null,null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.001188,0.004169392,0.010692,0.1584,0.332244,0.463617,0.53856,0.6182154,0.9751995,1.8435186,2.2889196,2.3746536]}
+{"geo":"Russian Federation","code":"RUS","type":"Electricity Net Generation by Solar","value":"TWh","fromYear":"2011","data":[0.001188,0.004169,0.01069,0.1584,0.3322,0.4636,0.5386,0.6182,0.9752,1.844,2.289,2.375,2.609]}

@@ -1,1 +1,1 @@
-{"geo":"Latvia","code":"LVA","type":"Electricity Net Generation by Solar","value":"TWh","fromYear":"1985","data":[null,null,null,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.000198,0.000198,0.000198,0.000198,0.000198,0.00037818,0.0004356,0.00126027,0.00310563,0.00479853,0.00672903,0.00672903]}
+{"geo":"Latvia","code":"LVA","type":"Electricity Net Generation by Solar","value":"TWh","fromYear":"2011","data":[0.000198,0.000198,0.000198,0.000198,0.000198,0.000378,0.000436,0.00126,0.003106,0.004799,0.006729,0.04086,0.04653]}

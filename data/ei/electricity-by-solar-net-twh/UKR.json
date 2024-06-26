@@ -1,1 +1,1 @@
-{"geo":"Ukraine","code":"UKR","type":"Electricity Net Generation by Solar","value":"TWh","fromYear":"1980","data":[null,null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.029799,0.329967,0.5643,0.42471,0.471735,0.485892,0.714483,1.096425,2.903472,5.315508,6.263013839,5.032390673]}
+{"geo":"Ukraine","code":"UKR","type":"Electricity Net Generation by Solar","value":"TWh","fromYear":"2011","data":[0.0298,0.33,0.5643,0.4247,0.4717,0.4859,0.7145,1.096,2.903,5.316,6.439,5.148,5.651]}

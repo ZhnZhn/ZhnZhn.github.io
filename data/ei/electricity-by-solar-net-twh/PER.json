@@ -1,1 +1,1 @@
-{"geo":"Peru","code":"PER","type":"Electricity Net Generation by Solar","value":"TWh","fromYear":"1965","data":[null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0.059103,0.194931,0.197307,0.22795279,0.23859,0.32642577,0.788733,0.824571,0.847044,0.872933238,0.894442678]}
+{"geo":"Peru","code":"PER","type":"Electricity Net Generation by Solar","value":"TWh","fromYear":"2012","data":[0.0591,0.1949,0.1973,0.228,0.2386,0.3264,0.7887,0.8246,0.847,0.8789,0.9001,1.049]}

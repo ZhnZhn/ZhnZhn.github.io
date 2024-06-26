@@ -1,1 +1,1 @@
-{"geo":"Algeria","code":"DZA","type":"Electricity Generation by Solar","value":"TWh","fromYear":"1965","data":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0091,0.01811875,0.026723014,0.0286,0.06,0.058,0.245,0.504,0.603,0.615,0.685,0.664,0.681770007]}
+{"geo":"Algeria","code":"DZA","type":"Electricity Generation by Solar","value":"TWh","fromYear":"2010","data":[0.0091,0.01812,0.02672,0.0286,0.06,0.058,0.245,0.504,0.603,0.615,0.685,0.664,0.649,0.649]}

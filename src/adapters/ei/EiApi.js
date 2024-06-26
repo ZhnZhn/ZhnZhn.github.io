@@ -37,9 +37,9 @@ const _crTreeMapUrl = (option) => {
   } = option
   , geo = items[0].v;
 
-  if (time !== '2022') {
+  if (time !== '2023') {
     throw {
-      message: "TreeMap only available for 2022"
+      message: "TreeMap only available for 2023"
     };
   }
 

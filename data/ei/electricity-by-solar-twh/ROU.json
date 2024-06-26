@@ -1,1 +1,1 @@
-{"geo":"Romania","code":"ROU","type":"Electricity Generation by Solar","value":"TWh","fromYear":"1965","data":[null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.001010101,0.002020202,0.001,0.008,0.42,1.2953,1.982,1.82,1.856,1.771,1.778,1.733,1.703,1.772]}
+{"geo":"Romania","code":"ROU","type":"Electricity Generation by Solar","value":"TWh","fromYear":"2009","data":[0.00101,0.00202,0.001,0.008,0.42,1.295,1.982,1.82,1.856,1.771,1.778,1.733,1.703,1.988,1.863]}
