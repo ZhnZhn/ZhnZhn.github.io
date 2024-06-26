@@ -2,7 +2,7 @@
 
 exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
 <button
-  className="bt-flat"
+  className="bt-flat bold-16"
   onClick={[Function]}
   title="Click to load [l]"
   type="button"
@@ -17,7 +17,7 @@ exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
 
 exports[`FlatButton Snap should renders correctly with isPrimary true 1`] = `
 <button
-  className="bt-flat"
+  className="bt-flat bold-16"
   onClick={[Function]}
   style={
     {
