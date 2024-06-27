@@ -61,7 +61,7 @@ const _crYearMonthConfig = function (loadId, mapDateDf) {
   }
   const dateOptions = [],
     y = new Date().getUTCFullYear(),
-    _delimeter = (0, _LoadType.isEstat)(loadId) || (0, _LoadType.isEmber)(loadId) ? '-' : 'M';
+    _delimeter = (0, _LoadType.isEstat)(loadId) || (0, _LoadType.isEmber)(loadId) || (0, _LoadType.isEia)(loadId) ? '-' : 'M';
   for (let i = 0; i < M_YEAR_MAX; i++) {
     _addYearMonthsTo(dateOptions, y - i, _delimeter);
   }
@@ -119,6 +119,5 @@ const crDateConfig = function (frequency, mapDateDf, loadId) {
   }
   return (_hmCr[frequency] || _hmCr.DF)(loadId, mapDateDf, frequency);
 };
-var _default = crDateConfig;
-exports.default = _default;
+var _default = exports.default = crDateConfig;
 //# sourceMappingURL=crDateConfig.js.map

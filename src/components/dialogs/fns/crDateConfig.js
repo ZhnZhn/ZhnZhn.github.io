@@ -1,6 +1,7 @@
 import {
   isEstat,
-  isEmber
+  isEmber,
+  isEia
 } from '../../../constants/LoadType';
 
 const YEAR_MAX = 12
@@ -78,7 +79,7 @@ const _crYearMonthConfig = (
 ) => {
 	const dateOptions = []
   , y = (new Date()).getUTCFullYear()
-  , _delimeter = isEstat(loadId) || isEmber(loadId)
+  , _delimeter = isEstat(loadId) || isEmber(loadId) || isEia(loadId)
       ? '-'
       : 'M';
   for(let i=0; i<M_YEAR_MAX; i++){
