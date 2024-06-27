@@ -1,19 +1,16 @@
-import crAdapterType1 from '../crAdapterType1';
 import {
-  crTitle,
-  crData,
-  crConfOption
-} from './fnAdapter';
+  crAdapterRouter,
+  fGetRouteCategory
+} from '../crAdapterRouter';
 
-const _assign = Object.assign;
+import toCategoryAdapter from './toCategoryAdapter';
+import toLineAdapter from './toLineAdapter';
 
-const trOption = option =>
-  _assign(option, crTitle(option));
-
-const EiaAdapter = crAdapterType1({
-  crData,
-  crConfOption,
-  trOption
+const EiaAdapter = crAdapterRouter({
+  getRoute: fGetRouteCategory(
+    toCategoryAdapter,
+    toLineAdapter
+  )
 });
 
 export default EiaAdapter
