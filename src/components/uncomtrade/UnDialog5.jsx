@@ -1,9 +1,15 @@
 import {
   useRef,
+  useState,
   useCallback,
   getRefValue,
   getRefOptions
 } from '../uiApi';
+
+import {
+  CHT_SPLINE,
+  CHT_BAR_SET
+} from '../../constants/ChartType';
 
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
@@ -12,6 +18,8 @@ import useDialog from '../dialogs/hooks/useDialog';
 import useInputToggle from './useInputToggle';
 
 import D from '../dialogs/DialogCell';
+import { isCategoryItem } from '../dialogs/ChartOptionsFn';
+import crDateConfig from '../dialogs/fns/crDateConfig';
 import ModalInputToggle from './ModalInputToggle';
 import { crInputSelectDfProps } from './dialogFn';
 
@@ -42,7 +50,20 @@ const TRADE_FLOW_OPTIONS = [
 , [
   DF_FREQ,
   FREQUENCY_PLACEHOLDER
-] = crInputSelectDfProps(FREQUENCY_OPTIONS);
+] = crInputSelectDfProps(FREQUENCY_OPTIONS)
+, _crOptionItem = (caption, value) => ({
+  caption,
+  value,
+})
+, CHART_OPTIONS = [
+  _crOptionItem('Spline', CHT_SPLINE),
+  _crOptionItem('Bar by Reporter', CHT_BAR_SET)
+]
+, [
+  DATE_OPTIONS,
+  DATE_DEFAULT
+] = crDateConfig("Y", 1)
+, DATE_DF = _crOptionItem(DATE_DEFAULT, DATE_DEFAULT);
 
 const UnDialog5 = memoIsShow((
   props
@@ -64,6 +85,10 @@ const UnDialog5 = memoIsShow((
      onClose
    } = props
    , [
+     seriaType,
+     setSeriaType
+   ] = useState()
+   , [
      isShowToggle,
      toggleInputs,
      hideToggle
@@ -84,6 +109,7 @@ const UnDialog5 = memoIsShow((
    , [isHeading, toggleHeading] = useToggle(true)
    , [isPartner, togglePartner] = useToggle(false)
    , [isFlow, toggleFlow] = useToggle(true)
+   , [isChartType, toggleChartType] = useToggle(false)
    //, [isFreq, toggleFreq] = useToggle(false)
    , _refTradePartner = useRef()
    , _refGroupItem = useRef()
@@ -99,6 +125,10 @@ const UnDialog5 = memoIsShow((
      setTradePartner,
      getTradePartner
    ] = useProperty()
+   , [
+     setPropertyTime,
+     getPropertyTime
+   ] = useProperty(DATE_DF)
 
    /*eslint-disable no-unused-vars*/
    , [
@@ -134,15 +164,18 @@ const UnDialog5 = memoIsShow((
          tradeFlow: getTradeFlow() || DF_TRADE_FLOW,
          tradePartner,
          freq,
+         chType: seriaType,
+         time: getPropertyTime().value,
          tradePartners: getRefOptions(_refTradePartner)
        }))
      }
      setValidationMessages(msg)
-   }, [])
+   }, [seriaType])
    // props, loadFn, onLoad,
    // getOne, getTradeFlow,
    // setValidationMessages
    /*eslint-enable react-hooks/exhaustive-deps */
+   , _isShowDate = isCategoryItem(seriaType);
 
    return (
      <D.DraggableDialog
@@ -164,6 +197,7 @@ const UnDialog5 = memoIsShow((
           ['Partner', isPartner, togglePartner],
           ['Heading', isHeading, toggleHeading],
           ['Trade Flow', isFlow, toggleFlow],
+          ['Chart', isChartType, toggleChartType]
           /*['Frequency', isFreq, toggleFreq]*/
         ]}
         onClose={hideToggle}
@@ -217,6 +251,19 @@ const UnDialog5 = memoIsShow((
           //onSelect={setFreq}
         />
       </D.ShowHide>
+      { isChartType && <D.RowChartDate
+          //refSeriaColor={_refSeriaColor}
+          chartType={seriaType}
+          isShowLabels={isShowLabels}
+          isShowChart={isChartType}
+          chartOptions={CHART_OPTIONS}
+          onSelectChart={setSeriaType}
+          isShowDate={_isShowDate}
+          dateDefault={DATE_DEFAULT}
+          dateOptions={DATE_OPTIONS}
+          onSelectDate={setPropertyTime}
+        />
+      }
       <D.ValidationMessages
           validationMessages={validationMessages}
       />

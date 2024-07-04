@@ -30,6 +30,8 @@ const crLoadOptions = (props, options) => {
       freq,
       period,
       chart,
+      chType,
+      time,
       tradePartners
     } = options || {},
     _oneValue = (0, _createrFns.getV)(one),
@@ -49,9 +51,10 @@ const crLoadOptions = (props, options) => {
     freq: (0, _createrFns.getV)(freq),
     period: (0, _createrFns.getV)(period),
     chart: (0, _createrFns.getV)(chart),
+    chType,
+    time,
     tradePartners
   };
 };
-var _default = crLoadOptions;
-exports.default = _default;
+var _default = exports.default = crLoadOptions;
 //# sourceMappingURL=un5.js.map

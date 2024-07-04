@@ -50,6 +50,8 @@ const crLoadOptions = (
     freq,
     period,
     chart,
+    chType,
+    time,
     tradePartners
   } = options || {}
   , _oneValue = getV(one)
@@ -72,6 +74,8 @@ const crLoadOptions = (
     freq: getV(freq),
     period: getV(period),
     chart: getV(chart),
+    chType,
+    time,
     tradePartners
   };
 };
