@@ -97,12 +97,12 @@ const _crYearConfig = function (loadId, mapDateDf) {
     mapDateDf = 1;
   }
   const dateOptions = [];
-  let y = new Date().getUTCFullYear();
+  let y = new Date().getUTCFullYear() - 1;
   for (let i = 0; i < YEAR_MAX; i++) {
     dateOptions.push(_crDateOption('' + y));
     y = y - 1;
   }
-  return _crDateConfig(dateOptions, mapDateDf);
+  return _crDateConfig(dateOptions, mapDateDf - 1);
 };
 const _hmCr = {
   M: _crYearMonthConfig,
