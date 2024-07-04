@@ -1,8 +1,15 @@
 export {
+  isNumber,
   ymdToUTC,
   valueMoving,
   roundBy
 } from '../AdapterFn';
+import {
+  isNumber
+} from '../AdapterFn';
+import {
+  isColumnOrBarCategory
+} from '../CategoryFn';
 export {
   sortDescByPnValue
 } from '../compareByFn';
@@ -13,13 +20,12 @@ import { toDescr } from './fnDescr';
 import { WORLD_CODE } from './conf';
 
 const _isArr = Array.isArray
-, _isNumber = n => typeof n === 'number' && n-n === 0
-, _sanitizeNumber = (v) => _isNumber(v)
+, _sanitizeNumber = (v) => isNumber(v)
    ? ''+v
    : domSanitize(v);
 
 export const crEmptyHmObject = () => Object.create(null)
-export const isPositiveNumber = (n) => _isNumber(n) && n > 0
+export const isPositiveNumber = (n) => isNumber(n) && n > 0
 
 export const isAggr = (v) => v === 'AG2'
 export const isTotalByAll = (option) => option.two === 'TOTAL';
@@ -29,6 +35,10 @@ export const isAggrByTotalWorld = (
 ) => isTotalByAll(option)
   && (!option.tp || option.tp === '0')
   && option.chart !== 'SPLINE'
+
+export const isCategorySet = ({
+  chType
+}) => chType && isColumnOrBarCategory(chType.value)
 
 export const getItemTradeValue = (
   item
@@ -167,8 +177,9 @@ export const crChartId = ({
   tp,
   freq,
   period,
-  chart
-}) => [value, rg, measure, tp, freq, period, chart]
+  chart,
+  time,
+}) => [value, rg, measure, tp, freq, period, chart, time]
   .filter(Boolean)
   .join("_");
 
