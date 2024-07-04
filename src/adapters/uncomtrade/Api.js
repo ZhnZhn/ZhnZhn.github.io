@@ -4,10 +4,12 @@ import {
   assign,
   crError
 } from '../AdapterFn';
+
 import {
   isAggrCalculatedCase,
   isAggrByTotalWorld,
-  isAggr
+  isAggr,
+  isCategorySet
 } from './fnAdapter';
 
 const API_URL = 'https://comtradeapi.un.org/public/v1/preview/C'
@@ -25,19 +27,21 @@ const _checkReq = (option) => {
 const DF_SHORT_PERIOD = 'period=2023,2022,2021'
 , DF_LONG_QUERY_TAIL = `${DF_SHORT_PERIOD},2020,2019,2018,2017,2016`
 
-const _crReporterToTradePartnerQueryTail = (
+const _crPeriodQuery = (
+  tp
+) => tp === ALL
+  ? DF_SHORT_PERIOD
+  : DF_LONG_QUERY_TAIL;
+
+const _crReporterToTradePartnerQuery = (
   tp
 ) => {
   const _tpCode = tp === ALL
     ? ''
     : tp || '0'
-  , _partnerCode = _tpCode
-      ? `&partnerCode=${_tpCode}&partner2Code=${_tpCode}`
-      : ''
-  , _queryTail = tp === ALL
-      ? DF_SHORT_PERIOD
-      : DF_LONG_QUERY_TAIL;
-  return `${_partnerCode}&${_queryTail}`;
+  return _tpCode
+    ? `&partnerCode=${_tpCode}&partner2Code=${_tpCode}`
+    : '';
 };
 
 const _crAggrTotalUrl = (
@@ -104,13 +108,17 @@ const UnComtradeApi = {
     if (one === ALL) {
       const _tpCode = tp === ALL
         ? '0'
-        : tp || '0';
-      return `${_crCmdFlowUrl(proxy, freq, two, rg)}&partnerCode=${_tpCode}&partner2Code=${_tpCode}&${DF_SHORT_PERIOD}`;
+        : tp || '0'
+      , _periodQuery = isCategorySet(option)
+        ? `period=${option.time}`
+        : DF_SHORT_PERIOD;
+      return `${_crCmdFlowUrl(proxy, freq, two, rg)}&partnerCode=${_tpCode}&partner2Code=${_tpCode}&${_periodQuery}`;
     }
 
     // Reporter to TradePartner (Default TradePartner: All)
-    const _reporterQuery = `reporterCode=${one}${_crReporterToTradePartnerQueryTail(tp)}`;
-    return `${_crCmdFlowUrl(proxy, freq, two, rg)}&${_reporterQuery}`;
+    const _reporterQuery = `reporterCode=${one}${_crReporterToTradePartnerQuery(tp)}`
+    , _periodQuery = _crPeriodQuery(tp);
+    return `${_crCmdFlowUrl(proxy, freq, two, rg)}&${_reporterQuery}&${_periodQuery}`;
   },
 
   checkResponse(json){

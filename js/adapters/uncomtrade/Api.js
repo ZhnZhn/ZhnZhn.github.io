@@ -16,11 +16,10 @@ const _checkReq = option => {
 };
 const DF_SHORT_PERIOD = 'period=2023,2022,2021',
   DF_LONG_QUERY_TAIL = DF_SHORT_PERIOD + ",2020,2019,2018,2017,2016";
-const _crReporterToTradePartnerQueryTail = tp => {
-  const _tpCode = tp === ALL ? '' : tp || '0',
-    _partnerCode = _tpCode ? "&partnerCode=" + _tpCode + "&partner2Code=" + _tpCode : '',
-    _queryTail = tp === ALL ? DF_SHORT_PERIOD : DF_LONG_QUERY_TAIL;
-  return _partnerCode + "&" + _queryTail;
+const _crPeriodQuery = tp => tp === ALL ? DF_SHORT_PERIOD : DF_LONG_QUERY_TAIL;
+const _crReporterToTradePartnerQuery = tp => {
+  const _tpCode = tp === ALL ? '' : tp || '0';
+  return _tpCode ? "&partnerCode=" + _tpCode + "&partner2Code=" + _tpCode : '';
 };
 const _crAggrTotalUrl = (proxy, reporterCode, cmdCode, flowCode, period, tfType) => {
   const _url = "" + proxy + API_URL + "/A/HS?" + DF_MOT_AND_CUSTOMS_CODE + "&cmdCode=" + cmdCode + "&flowCode=" + flowCode + "&period=" + period + "&partner2Code=0";
@@ -50,13 +49,15 @@ const UnComtradeApi = {
 
     // All Reporter to TradePartner (Default TradePartner: World)
     if (one === ALL) {
-      const _tpCode = tp === ALL ? '0' : tp || '0';
-      return _crCmdFlowUrl(proxy, freq, two, rg) + "&partnerCode=" + _tpCode + "&partner2Code=" + _tpCode + "&" + DF_SHORT_PERIOD;
+      const _tpCode = tp === ALL ? '0' : tp || '0',
+        _periodQuery = (0, _fnAdapter.isCategorySet)(option) ? "period=" + option.time : DF_SHORT_PERIOD;
+      return _crCmdFlowUrl(proxy, freq, two, rg) + "&partnerCode=" + _tpCode + "&partner2Code=" + _tpCode + "&" + _periodQuery;
     }
 
     // Reporter to TradePartner (Default TradePartner: All)
-    const _reporterQuery = "reporterCode=" + one + _crReporterToTradePartnerQueryTail(tp);
-    return _crCmdFlowUrl(proxy, freq, two, rg) + "&" + _reporterQuery;
+    const _reporterQuery = "reporterCode=" + one + _crReporterToTradePartnerQuery(tp),
+      _periodQuery = _crPeriodQuery(tp);
+    return _crCmdFlowUrl(proxy, freq, two, rg) + "&" + _reporterQuery + "&" + _periodQuery;
   },
   checkResponse(json) {
     if (json && (0, _AdapterFn.isArr)(json.data)) {
