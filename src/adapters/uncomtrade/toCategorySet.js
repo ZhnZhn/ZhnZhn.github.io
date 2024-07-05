@@ -7,17 +7,18 @@ import {
   getHmTradePartners
 } from './fnAdapter';
 
+const _round = Math.round;
+
 const crCategoryData = (
   json,
   option
 ) => {
-  const data = (json || {}).data || []
-  , hm = getHmTradePartners(option.tradePartners)
+  const hm = getHmTradePartners(option.tradePartners)
   , pnValue = option.measure;
   option._itemKey = option.key
   let value;
-  return sortDescByPnY(data.reduce((arr, item) => {
-    value = parseFloat(item[pnValue])
+  return sortDescByPnY(json.data.reduce((arr, item) => {
+    value = _round(parseFloat(item[pnValue]));
     const { reporterCode } = item || {};
     if (value && isNumber(reporterCode)) {
       arr.push(crCategoryPoint(

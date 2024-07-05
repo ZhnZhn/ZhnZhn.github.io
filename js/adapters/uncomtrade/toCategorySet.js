@@ -7,14 +7,14 @@ var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"))
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
+const _round = Math.round;
 const crCategoryData = (json, option) => {
-  const data = (json || {}).data || [],
-    hm = (0, _fnAdapter.getHmTradePartners)(option.tradePartners),
+  const hm = (0, _fnAdapter.getHmTradePartners)(option.tradePartners),
     pnValue = option.measure;
   option._itemKey = option.key;
   let value;
-  return (0, _compareByFn.sortDescByPnY)(data.reduce((arr, item) => {
-    value = parseFloat(item[pnValue]);
+  return (0, _compareByFn.sortDescByPnY)(json.data.reduce((arr, item) => {
+    value = _round(parseFloat(item[pnValue]));
     const {
       reporterCode
     } = item || {};
