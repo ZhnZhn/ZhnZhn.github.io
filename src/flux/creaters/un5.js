@@ -52,6 +52,8 @@ const crLoadOptions = (
     chart,
     chType,
     time,
+    seriaColor,
+    seriaWidth,
     tradePartners
   } = options || {}
   , _oneValue = getV(one)
@@ -76,6 +78,8 @@ const crLoadOptions = (
     chart: getV(chart),
     chType,
     time,
+    seriaColor,
+    seriaWidth,
     tradePartners
   };
 };

@@ -125,11 +125,12 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     [isHeading, toggleHeading] = (0, _useToggle.default)(true),
     [isPartner, togglePartner] = (0, _useToggle.default)(false),
     [isFlow, toggleFlow] = (0, _useToggle.default)(true),
-    [isChartType, toggleChartType] = (0, _useToggle.default)(false)
+    [isChart, toggleChart] = (0, _useToggle.default)(false)
     //, [isFreq, toggleFreq] = useToggle(false)
     ,
     _refTradePartner = (0, _uiApi.useRef)(),
     _refGroupItem = (0, _uiApi.useRef)(),
+    _refSeriaColor = (0, _uiApi.useRef)(),
     [setOne, getOne] = (0, _useProperty.default)(),
     [setTradeFlow, getTradeFlow] = (0, _useProperty.default)(),
     [setTradePartner, getTradePartner] = (0, _useProperty.default)(),
@@ -162,6 +163,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
           two: three
         } = _groupItemInst.getValues();
         onLoad(loadFn(props, {
+          ...(0, _uiApi.getInputValue)(_refSeriaColor),
           one,
           two,
           three,
@@ -179,7 +181,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     // getOne, getTradeFlow,
     // setValidationMessages
     /*eslint-enable react-hooks/exhaustive-deps */,
-    _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(seriaType);
+    _isShowDate = isChart && (0, _ChartOptionsFn.isCategoryItem)(seriaType);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
     caption: caption,
@@ -193,7 +195,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
       buttons: toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalInputToggle.default, {
       isShow: isShowToggle,
-      configs: [['Partner', isPartner, togglePartner], ['Heading', isHeading, toggleHeading], ['Trade Flow', isFlow, toggleFlow], ['Chart', isChartType, toggleChartType]
+      configs: [['Partner', isPartner, togglePartner], ['Heading', isHeading, toggleHeading], ['Trade Flow', isFlow, toggleFlow], ['Chart', isChart, toggleChart]
       /*['Frequency', isFreq, toggleFreq]*/],
       onClose: hideToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
@@ -244,14 +246,14 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
         options: FREQUENCY_OPTIONS
         //onSelect={setFreq}
       })
-    }), isChartType && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
-      //refSeriaColor={_refSeriaColor}
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
+      isShowChart: isChart,
+      isShowDate: _isShowDate,
+      refSeriaColor: _refSeriaColor,
       chartType: seriaType,
       isShowLabels: isShowLabels,
-      isShowChart: isChartType,
       chartOptions: CHART_OPTIONS,
       onSelectChart: setSeriaType,
-      isShowDate: _isShowDate,
       dateDefault: DATE_DEFAULT,
       dateOptions: DATE_OPTIONS,
       onSelectDate: setPropertyTime

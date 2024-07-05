@@ -3,7 +3,8 @@ import {
   useState,
   useCallback,
   getRefValue,
-  getRefOptions
+  getRefOptions,
+  getInputValue
 } from '../uiApi';
 
 import {
@@ -109,10 +110,11 @@ const UnDialog5 = memoIsShow((
    , [isHeading, toggleHeading] = useToggle(true)
    , [isPartner, togglePartner] = useToggle(false)
    , [isFlow, toggleFlow] = useToggle(true)
-   , [isChartType, toggleChartType] = useToggle(false)
+   , [isChart, toggleChart] = useToggle(false)
    //, [isFreq, toggleFreq] = useToggle(false)
    , _refTradePartner = useRef()
    , _refGroupItem = useRef()
+   , _refSeriaColor = useRef()
    , [
      setOne,
      getOne
@@ -158,6 +160,7 @@ const UnDialog5 = memoIsShow((
          two:three
        } = _groupItemInst.getValues()
        onLoad(loadFn(props, {
+         ...getInputValue(_refSeriaColor),
          one,
          two,
          three,
@@ -175,7 +178,7 @@ const UnDialog5 = memoIsShow((
    // getOne, getTradeFlow,
    // setValidationMessages
    /*eslint-enable react-hooks/exhaustive-deps */
-   , _isShowDate = isCategoryItem(seriaType);
+   , _isShowDate = isChart && isCategoryItem(seriaType);
 
    return (
      <D.DraggableDialog
@@ -197,7 +200,7 @@ const UnDialog5 = memoIsShow((
           ['Partner', isPartner, togglePartner],
           ['Heading', isHeading, toggleHeading],
           ['Trade Flow', isFlow, toggleFlow],
-          ['Chart', isChartType, toggleChartType]
+          ['Chart', isChart, toggleChart]
           /*['Frequency', isFreq, toggleFreq]*/
         ]}
         onClose={hideToggle}
@@ -251,19 +254,18 @@ const UnDialog5 = memoIsShow((
           //onSelect={setFreq}
         />
       </D.ShowHide>
-      { isChartType && <D.RowChartDate
-          //refSeriaColor={_refSeriaColor}
-          chartType={seriaType}
-          isShowLabels={isShowLabels}
-          isShowChart={isChartType}
-          chartOptions={CHART_OPTIONS}
-          onSelectChart={setSeriaType}
-          isShowDate={_isShowDate}
-          dateDefault={DATE_DEFAULT}
-          dateOptions={DATE_OPTIONS}
-          onSelectDate={setPropertyTime}
-        />
-      }
+      <D.RowChartDate
+         isShowChart={isChart}
+         isShowDate={_isShowDate}
+         refSeriaColor={_refSeriaColor}
+         chartType={seriaType}
+         isShowLabels={isShowLabels}
+         chartOptions={CHART_OPTIONS}
+         onSelectChart={setSeriaType}
+         dateDefault={DATE_DEFAULT}
+         dateOptions={DATE_OPTIONS}
+         onSelectDate={setPropertyTime}
+      />
       <D.ValidationMessages
           validationMessages={validationMessages}
       />

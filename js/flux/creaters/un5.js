@@ -32,6 +32,8 @@ const crLoadOptions = (props, options) => {
       chart,
       chType,
       time,
+      seriaColor,
+      seriaWidth,
       tradePartners
     } = options || {},
     _oneValue = (0, _createrFns.getV)(one),
@@ -53,6 +55,8 @@ const crLoadOptions = (props, options) => {
     chart: (0, _createrFns.getV)(chart),
     chType,
     time,
+    seriaColor,
+    seriaWidth,
     tradePartners
   };
 };
