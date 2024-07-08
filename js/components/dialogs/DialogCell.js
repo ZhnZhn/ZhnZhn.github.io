@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _crMenuMore = _interopRequireDefault(require("./fns/crMenuMore"));
 var _Modals = _interopRequireDefault(require("./modals/Modals"));
 var _Rows = _interopRequireDefault(require("./rows/Rows"));
 var _DraggableDialog = _interopRequireDefault(require("../zhn-moleculs/DraggableDialog"));
@@ -24,9 +23,7 @@ const DialogCell = {
   RowInputColor: _RowInputColor.default,
   SelectWithLoad: _SelectWithLoad.default,
   ..._Rows.default,
-  ..._Modals.default,
-  crMenuMore: _crMenuMore.default
+  ..._Modals.default
 };
-var _default = DialogCell;
-exports.default = _default;
+var _default = exports.default = DialogCell;
 //# sourceMappingURL=DialogCell.js.map

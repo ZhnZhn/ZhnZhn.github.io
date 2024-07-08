@@ -1,5 +1,4 @@
 
-import crMenuMore from './fns/crMenuMore'
 import Modals from './modals/Modals'
 import Rows from './rows/Rows'
 
@@ -24,8 +23,7 @@ const DialogCell = {
   RowInputColor,
   SelectWithLoad,
   ...Rows,
-  ...Modals,
-  crMenuMore
+  ...Modals
 };
 
 export default DialogCell
