@@ -7,12 +7,9 @@ const YEAR_MAX = 12,
   BI_YEAR_MAX = 24,
   Q_YEAR_MAX = 4,
   M_YEAR_MAX = 3;
-const _loopFn = function (fn, n, initialNumber) {
-  if (initialNumber === void 0) {
-    initialNumber = 0;
-  }
-  for (let i = initialNumber; i < n; i++) {
-    fn(i);
+const _loopFn = (fn, fromValue, n) => {
+  for (let i = 0; i < n; i++) {
+    fn(fromValue - i);
   }
 };
 const _crDateOption = function (caption, value) {
@@ -92,12 +89,11 @@ const _crYearBiAnnualConfig = function (loadId, mapDateDf) {
     mapDateDf = 3;
   }
   const dateOptions = [],
-    _delimeter = (0, _LoadType.isEstat)(loadId) ? '-S' : 'S';
-  let y = new Date().getUTCFullYear();
-  for (let i = 0; i < BI_YEAR_MAX; i++) {
+    _delimeter = (0, _LoadType.isEstat)(loadId) ? '-S' : 'S',
+    fromYear = new Date().getUTCFullYear();
+  _loopFn(y => {
     dateOptions.push(_crDateOption("" + y + _delimeter + "2"), _crDateOption("" + y + _delimeter + "1"));
-    y = y - 1;
-  }
+  }, fromYear, BI_YEAR_MAX);
   return _crDateConfig(dateOptions, mapDateDf);
 };
 const _crYearConfig = function (loadId, mapDateDf) {
@@ -105,11 +101,11 @@ const _crYearConfig = function (loadId, mapDateDf) {
     mapDateDf = 1;
   }
   const dateOptions = [],
-    yNow = new Date().getUTCFullYear() - 1;
+    fromYear = new Date().getUTCFullYear() - 1;
   _loopFn(y => {
     dateOptions.push(_crDateOption('' + y));
-  }, YEAR_MAX, yNow - YEAR_MAX);
-  return _crDateConfig(dateOptions.reverse(), mapDateDf - 1);
+  }, fromYear, YEAR_MAX);
+  return _crDateConfig(dateOptions, mapDateDf - 1);
 };
 const _hmCr = {
   M: _crYearMonthConfig,

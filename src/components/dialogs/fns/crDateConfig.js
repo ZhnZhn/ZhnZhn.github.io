@@ -11,12 +11,12 @@ const YEAR_MAX = 12
 
 const _loopFn = (
   fn,
-  n,
-  initialNumber=0
+  fromValue,
+  n
 ) => {
-  for (let i=initialNumber; i<n; i++){
-		fn(i)
-	}
+  for(let i=0; i<n; i++) {
+    fn(fromValue-i)
+  }
 };
 
 const _crDateOption = (
@@ -122,15 +122,14 @@ const _crYearBiAnnualConfig = (
   const dateOptions = []
   , _delimeter = isEstat(loadId)
        ? '-S'
-       : 'S';
-  let y = (new Date()).getUTCFullYear();
-  for(let i=0; i<BI_YEAR_MAX; i++){
+       : 'S'
+  , fromYear = (new Date()).getUTCFullYear();
+  _loopFn(y => {
     dateOptions.push(
       _crDateOption(`${y}${_delimeter}2`),
       _crDateOption(`${y}${_delimeter}1`),
     )
-    y = y - 1;
-  }
+  }, fromYear, BI_YEAR_MAX)
   return _crDateConfig(dateOptions, mapDateDf);
 };
 
@@ -139,12 +138,12 @@ const _crYearConfig = (
   mapDateDf=1
 ) => {
 	const dateOptions = []
-  , yNow = (new Date()).getUTCFullYear() - 1;
+  , fromYear = (new Date()).getUTCFullYear() - 1;
   _loopFn(y => {
     dateOptions.push(_crDateOption(''+y));
-  }, YEAR_MAX, yNow - YEAR_MAX)
+  }, fromYear, YEAR_MAX)
 	return _crDateConfig(
-    dateOptions.reverse(),
+    dateOptions,
     mapDateDf - 1
   );
 };
