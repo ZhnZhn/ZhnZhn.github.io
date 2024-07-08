@@ -2,7 +2,9 @@
 import InputText from '../zhn/InputText';
 import crCaption from './fns/crCaption';
 
-const S_ROOT = { padding: '6px 0 6px 6px' }
+const S_ROOT = {
+  padding: '6px 0 6px 6px'
+}
 , S_CAPTION = {
   display: 'inline-block',
   color: '#1b75bb',
@@ -14,7 +16,14 @@ const S_ROOT = { padding: '6px 0 6px 6px' }
 }
 , S_INPUT_TEXT = {
   width: 220
-};
+}
+, DF_CAPTION = 'Input';
+
+const _crStyle = (
+  style,
+  dfStyle,
+  overrideStyle
+) => style || {...dfStyle, ...overrideStyle};
 
 const RowInputText = ({
   refEl,
@@ -23,33 +32,28 @@ const RowInputText = ({
   captionCn,
   captionStyle,
   styleCaption,
-  caption='Input',
+  caption,
   inputStyle,
   styleInput,
-  ...restProps
-}) => {
-  const _rootStyle = rootStyle
-    || {...S_ROOT, ...styleRoot}
-  , _captionStyle = captionStyle
-    || {...S_CAPTION, ...styleCaption}
-  , _inputStyle = inputStyle
-    || {...S_INPUT_TEXT, ...styleInput}
-  , _caption = crCaption(caption);
-  return (
-    <div style={_rootStyle}>
-      <label>
-        <span className={captionCn} style={_captionStyle}>
-          {_caption}
-        </span>
-        <InputText
-           refEl={refEl}
-           style={_inputStyle}
-           {...restProps}
-        />
-      </label>
-    </div>
-  );
-};
+  ...restInpuTextProps
+}) => (
+  <div style={_crStyle(rootStyle, S_ROOT, styleRoot)}>
+    <label>
+      <span
+         className={captionCn}
+         style={_crStyle(captionStyle, S_CAPTION, styleCaption)}
+      >
+        {crCaption(caption || DF_CAPTION)}
+      </span>
+      <InputText
+         {...restInpuTextProps}
+         refEl={refEl}
+         style={_crStyle(inputStyle, S_INPUT_TEXT, styleInput)}
+      />
+    </label>
+  </div>
+);
+
 
 /*
 RowInputText.propTypes= {

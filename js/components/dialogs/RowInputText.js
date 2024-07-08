@@ -22,7 +22,12 @@ const S_ROOT = {
   },
   S_INPUT_TEXT = {
     width: 220
-  };
+  },
+  DF_CAPTION = 'Input';
+const _crStyle = (style, dfStyle, overrideStyle) => style || {
+  ...dfStyle,
+  ...overrideStyle
+};
 const RowInputText = _ref => {
   let {
     refEl,
@@ -31,35 +36,22 @@ const RowInputText = _ref => {
     captionCn,
     captionStyle,
     styleCaption,
-    caption = 'Input',
+    caption,
     inputStyle,
     styleInput,
-    ...restProps
+    ...restInpuTextProps
   } = _ref;
-  const _rootStyle = rootStyle || {
-      ...S_ROOT,
-      ...styleRoot
-    },
-    _captionStyle = captionStyle || {
-      ...S_CAPTION,
-      ...styleCaption
-    },
-    _inputStyle = inputStyle || {
-      ...S_INPUT_TEXT,
-      ...styleInput
-    },
-    _caption = (0, _crCaption.default)(caption);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    style: _rootStyle,
+    style: _crStyle(rootStyle, S_ROOT, styleRoot),
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
         className: captionCn,
-        style: _captionStyle,
-        children: _caption
+        style: _crStyle(captionStyle, S_CAPTION, styleCaption),
+        children: (0, _crCaption.default)(caption || DF_CAPTION)
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
+        ...restInpuTextProps,
         refEl: refEl,
-        style: _inputStyle,
-        ...restProps
+        style: _crStyle(inputStyle, S_INPUT_TEXT, styleInput)
       })]
     })
   });
