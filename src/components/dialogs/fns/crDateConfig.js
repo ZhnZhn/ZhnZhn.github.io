@@ -9,6 +9,16 @@ const YEAR_MAX = 12
 , Q_YEAR_MAX = 4
 , M_YEAR_MAX = 3;
 
+const _loopFn = (
+  fn,
+  n,
+  initialNumber=0
+) => {
+  for (let i=initialNumber; i<n; i++){
+		fn(i)
+	}
+};
+
 const _crDateOption = (
   caption,
   value=caption
@@ -128,13 +138,15 @@ const _crYearConfig = (
   loadId,
   mapDateDf=1
 ) => {
-	const dateOptions = [];
-  let y = (new Date()).getUTCFullYear() - 1;
-	for (let i=0; i<YEAR_MAX; i++){
-		dateOptions.push(_crDateOption(''+y));
-		y = y - 1;
-	}
-	return _crDateConfig(dateOptions, mapDateDf - 1);
+	const dateOptions = []
+  , yNow = (new Date()).getUTCFullYear() - 1;
+  _loopFn(y => {
+    dateOptions.push(_crDateOption(''+y));
+  }, YEAR_MAX, yNow - YEAR_MAX)
+	return _crDateConfig(
+    dateOptions.reverse(),
+    mapDateDf - 1
+  );
 };
 
 const _hmCr = {
