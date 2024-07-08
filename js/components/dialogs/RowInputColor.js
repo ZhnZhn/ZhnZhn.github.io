@@ -9,28 +9,20 @@ var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _CellColor = _interopRequireDefault(require("../zhn-moleculs/CellColor"));
 var _ModalPalette = _interopRequireDefault(require("../zhn-moleculs/ModalPalette"));
 var _crCaption = _interopRequireDefault(require("./fns/crCaption"));
+var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const CL_INPUT_COLOR = 'p-r va-b';
-const DF_COLOR = '#90ed7d';
-const S_ROOT = {
+const CL_INPUT_COLOR = 'p-r va-b',
+  DF_COLOR = '#90ed7d',
+  S_ROOT = {
     padding: '6px 6px 6px 0'
-  },
-  S_CAPTION = {
-    display: 'inline-block',
-    color: '#1b75bb',
-    textAlign: 'right',
-    width: 100,
-    paddingRight: 5,
-    fontSize: 16,
-    fontWeight: 'bold'
   },
   S_INPUT_TEXT = {
     width: 80,
     margin: '0 8px 2px 5px'
-  };
-const NOOP = () => {};
+  },
+  FN_NOOP = () => {};
 const RowInputColor = _ref => {
   let {
     style,
@@ -38,7 +30,7 @@ const RowInputColor = _ref => {
     inputStyle,
     caption,
     initValue = DF_COLOR,
-    onEnter = NOOP
+    onEnter = FN_NOOP
   } = _ref;
   const _refCellColor = (0, _uiApi.useRef)(),
     [value, setValue] = (0, _uiApi.useState)(initValue),
@@ -65,7 +57,7 @@ const RowInputColor = _ref => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
       children: [_caption && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
         style: {
-          ...S_CAPTION,
+          ..._Dialog.S_CAPTION,
           ...captionStyle
         },
         children: _caption

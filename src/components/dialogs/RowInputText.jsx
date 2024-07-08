@@ -1,22 +1,10 @@
 //import PropTypes from "prop-types";
 import InputText from '../zhn/InputText';
 import crCaption from './fns/crCaption';
+import { S_CAPTION } from './Dialog.Style';
 
-const S_ROOT = {
-  padding: '6px 0 6px 6px'
-}
-, S_CAPTION = {
-  display: 'inline-block',
-  color: '#1b75bb',
-  textAlign: 'right',
-  width: 100,
-  paddingRight: 5,
-  fontSize: 16,
-  fontWeight: 'bold'
-}
-, S_INPUT_TEXT = {
-  width: 220
-}
+const S_ROOT = { padding: '6px 0 6px 6px' }
+, S_INPUT_TEXT = { width: 220 }
 , DF_CAPTION = 'Input';
 
 const _crStyle = (

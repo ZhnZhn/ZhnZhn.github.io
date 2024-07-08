@@ -1,0 +1,19 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/Dialog.Style.js"
+ ],
+ "file": "../../../src/components/dialogs/Dialog.Style.js",
+ "names": [
+  "S_CAPTION",
+  "exports",
+  "display",
+  "color",
+  "textAlign",
+  "width",
+  "paddingRight",
+  "fontSize",
+  "fontWeight"
+ ],
+ "mappings": ";;;;AAAO,MAAMA,SAAS,GAAAC,OAAA,CAAAD,SAAA,GAAG;EACvBE,OAAO,EAAE,cAAc;EACvBC,KAAK,EAAE,SAAS;EAChBC,SAAS,EAAE,OAAO;EAClBC,KAAK,EAAE,GAAG;EACVC,YAAY,EAAE,CAAC;EACfC,QAAQ,EAAE,EAAE;EACZC,UAAU,EAAE;AACd,CAAC"
+}

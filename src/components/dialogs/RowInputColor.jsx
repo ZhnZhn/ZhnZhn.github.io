@@ -12,26 +12,19 @@ import CellColor from '../zhn-moleculs/CellColor'
 import ModalPalette from '../zhn-moleculs/ModalPalette'
 
 import crCaption from './fns/crCaption'
+import { S_CAPTION } from './Dialog.Style'
 
-const CL_INPUT_COLOR = 'p-r va-b';
-const DF_COLOR = '#90ed7d';
+const CL_INPUT_COLOR = 'p-r va-b'
+, DF_COLOR = '#90ed7d'
 
-const S_ROOT = { padding: '6px 6px 6px 0' }
-, S_CAPTION = {
-   display: 'inline-block',
-   color: '#1b75bb',
-   textAlign: 'right',
-   width: 100,
-   paddingRight: 5,
-   fontSize: 16,
-   fontWeight: 'bold'
+, S_ROOT = {
+  padding: '6px 6px 6px 0'
 }
 , S_INPUT_TEXT = {
   width: 80,
   margin: '0 8px 2px 5px'
-};
-
-const NOOP = () => {};
+}
+, FN_NOOP = () => {};
 
 const RowInputColor = ({
   style,
@@ -39,7 +32,7 @@ const RowInputColor = ({
   inputStyle,
   caption,
   initValue=DF_COLOR,
-  onEnter=NOOP
+  onEnter=FN_NOOP
 }) => {
   const _refCellColor = useRef()
   , [

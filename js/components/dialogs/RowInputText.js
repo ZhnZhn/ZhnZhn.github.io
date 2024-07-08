@@ -5,20 +5,12 @@ exports.__esModule = true;
 exports.default = void 0;
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _crCaption = _interopRequireDefault(require("./fns/crCaption"));
+var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
 const S_ROOT = {
     padding: '6px 0 6px 6px'
-  },
-  S_CAPTION = {
-    display: 'inline-block',
-    color: '#1b75bb',
-    textAlign: 'right',
-    width: 100,
-    paddingRight: 5,
-    fontSize: 16,
-    fontWeight: 'bold'
   },
   S_INPUT_TEXT = {
     width: 220
@@ -46,7 +38,7 @@ const RowInputText = _ref => {
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
         className: captionCn,
-        style: _crStyle(captionStyle, S_CAPTION, styleCaption),
+        style: _crStyle(captionStyle, _Dialog.S_CAPTION, styleCaption),
         children: (0, _crCaption.default)(caption || DF_CAPTION)
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
         ...restInpuTextProps,
