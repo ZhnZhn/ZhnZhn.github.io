@@ -5,10 +5,10 @@ exports.__esModule = true;
 exports.loadDialogs = exports.getDialog = void 0;
 var _LogicFn = require("./LogicFn");
 var _BrowserType = require("../../constants/BrowserType");
+var _Msg = require("../../constants/Msg");
 var _DialogSelectN = _interopRequireDefault(require("../../components/dialogs/DialogSelectN"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
 const _router = {
   DF: _DialogSelectN.default,
@@ -17,12 +17,12 @@ const _router = {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
       //
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/dialogs/Dialogs.js"))).then(module => this.D = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/dialogs/Dialogs.js"))).then(module => this.D = _resolve(module.default)).catch(err => console.log(_Msg.MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
     return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "dialogs" */
     /* webpackMode: "lazy" */
-    "../../components/dialogs/Dialogs"))).then(module => this.D = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+    "../../components/dialogs/Dialogs"))).then(module => this.D = _resolve(module.default)).catch(err => console.log(_Msg.MSG_OFFLINE));
   },
   getD() {
     return this.D || this._loadD();
@@ -34,12 +34,12 @@ const _router = {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
       //
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/uncomtrade/UnDialogs.js"))).then(module => this.UN = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/uncomtrade/UnDialogs.js"))).then(module => this.UN = _resolve(module.default)).catch(err => console.log(_Msg.MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
     return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "un-dialogs" */
     /* webpackMode: "lazy" */
-    "../../components/uncomtrade/UnDialogs"))).then(module => this.UN = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+    "../../components/uncomtrade/UnDialogs"))).then(module => this.UN = _resolve(module.default)).catch(err => console.log(_Msg.MSG_OFFLINE));
   },
   getUN() {
     return this.UN || this._loadUN();
@@ -53,12 +53,12 @@ const _router = {
   _loadSM() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/stock-markets/AlphaDialogs.js"))).then(module => this.SM = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/stock-markets/AlphaDialogs.js"))).then(module => this.SM = _resolve(module.default)).catch(err => console.log(_Msg.MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
     return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "av-dialogs" */
     /* webpackMode: "lazy" */
-    "../../components/stock-markets/AlphaDialogs"))).then(module => this.SM = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+    "../../components/stock-markets/AlphaDialogs"))).then(module => this.SM = _resolve(module.default)).catch(err => console.log(_Msg.MSG_OFFLINE));
   },
   getSM() {
     return this.SM || this._loadSM();
@@ -75,12 +75,12 @@ const _router = {
   _loadSD() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/stat-dialogs/StatDialogs.js"))).then(module => this.SD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/stat-dialogs/StatDialogs.js"))).then(module => this.SD = _resolve(module.default)).catch(err => console.log(_Msg.MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
     return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "stat-dialogs" */
     /* webpackMode: "lazy" */
-    "../../components/stat-dialogs/StatDialogs"))).then(module => this.SD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+    "../../components/stat-dialogs/StatDialogs"))).then(module => this.SD = _resolve(module.default)).catch(err => console.log(_Msg.MSG_OFFLINE));
   },
   getSD() {
     return this.SD || this._loadSD();
@@ -91,12 +91,12 @@ const _router = {
   _loadUS() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/us-economics/UsDialogs.js"))).then(module => this.US = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/us-economics/UsDialogs.js"))).then(module => this.US = _resolve(module.default)).catch(err => console.log(_Msg.MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
     return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "us-economics-dialogs" */
     /* webpackMode: "lazy" */
-    "../../components/us-economics/UsDialogs"))).then(module => this.US = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+    "../../components/us-economics/UsDialogs"))).then(module => this.US = _resolve(module.default)).catch(err => console.log(_Msg.MSG_OFFLINE));
   },
   getUS() {
     return this.US || this._loadUS();

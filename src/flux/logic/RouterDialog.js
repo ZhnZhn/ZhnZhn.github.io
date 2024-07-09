@@ -6,10 +6,12 @@ import {
   BT_SWEDEN_STAT,
   BT_UN_COMTRADE
 } from '../../constants/BrowserType';
+import {
+  MSG_OFFLINE
+} from '../../constants/Msg';
 
 import DialogSelectN from '../../components/dialogs/DialogSelectN';
 
-const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
 
 const _router = {

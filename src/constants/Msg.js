@@ -49,13 +49,15 @@ export const ERR_PREMIUM_WITHOUT_KEY = _crMsg(
   WITHOUT_API_KEY,
   `403 : Forbidden\n\nYou have attempted to view a premium database in anonymous mode, i.e., without providing a ${NDL} key. Please register for a free ${NDL} account, and then enter your API in dialog SETTINGS [s].`
 )
+const TOKEN_API_KEY_REQUIRED = 'API key is required';
+const TOKEN_PLEASE_REGISTER_FOR_FREE = 'Please register for a free';
 export const ERR_FEATURE_WITHOUT_KEY = _crMsg(
   WITHOUT_API_KEY,
-  `${_crForReqToken()} a ${NDL} API key is required. Please register for a free ${NDL} account, ${AND_THEN_ENTER_KEY}`
+  `${_crForReqToken()} a ${NDL} ${TOKEN_API_KEY_REQUIRED}. ${TOKEN_PLEASE_REGISTER_FOR_FREE} ${NDL} account, ${AND_THEN_ENTER_KEY}`
 )
 export const withoutApiKey = (providerName) => _crMsg(
   WITHOUT_API_KEY,
-  `${_crForReqToken()} a ${providerName} API key is required. Please register for a free ${providerName} account, more top button A in dialog, ${AND_THEN_ENTER_KEY}`
+  `${_crForReqToken()} a ${providerName} ${TOKEN_API_KEY_REQUIRED}. ${TOKEN_PLEASE_REGISTER_FOR_FREE} ${providerName} account, more top button A in dialog, ${AND_THEN_ENTER_KEY}`
 )
 export const withoutProxy = (providerName) => _crMsg(
   'Without Proxy Server',
@@ -76,3 +78,5 @@ export const ERR_10 = {
   ),
   token: 'ERR_10'
 }
+
+export const MSG_OFFLINE = 'It seems you are offline'
