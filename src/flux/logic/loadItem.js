@@ -1,3 +1,7 @@
+import {
+  isArr,
+  isFn
+} from '../../utils/isTypeFn';
 import { bindTo } from '../../utils/bindTo';
 import { fetchJson } from '../../utils/fnFetch';
 
@@ -19,13 +23,10 @@ const ALERT_CATEGORY_TO_SPLINE = {
   alertDescr: "Adding category seria to not category isn't allowed."
 };
 
-const _isArr = Array.isArray;
-const _isFn = fn => typeof fn === 'function';
-
 const _crOptionFetch = (
   { optionFetch },
   option
-) => _isFn(optionFetch)
+) => isFn(optionFetch)
   ? optionFetch(option)
   : optionFetch;
 
@@ -38,12 +39,11 @@ const _fetchToChartComp = (
   const { adapter } = objImpl
   , { config } = adapter.toConfig(json, option);
 
-  if (!_isFn(config.then)){
+  if (!isFn(config.then)){
      onCompleted(option, config)
   } else {
     config.then(config => {
       onCompleted(option, config)
-      return;
     })
   }
 };
@@ -90,8 +90,8 @@ const _isNotAllowToAdd = ({
   toSeries,
   isAdd },
   option
-) => !_isFn(toSeries)
-  || (_isFn(isAdd) && !isAdd(option));
+) => !isFn(toSeries)
+  || (isFn(isAdd) && !isAdd(option));
 
 const _loadToChart = (
   objImpl,
@@ -152,8 +152,8 @@ const _isAddCategoryToSpline = ({ seriaType }) => {
   const chart = getActiveChart();
   return seriaType
     && isCategoryItem({ value: seriaType })
-    && chart && _isArr(chart.xAxis)
-    && !_isArr(chart.xAxis[0].categories);
+    && chart && isArr(chart.xAxis)
+    && !isArr(chart.xAxis[0].categories);
 };
 
 const _runAsync = (fn, mls=500) => {

@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _bindTo = require("../../utils/bindTo");
 var _fnFetch = require("../../utils/fnFetch");
 var _chartCheckBoxLogic = require("../stores/chartCheckBoxLogic");
@@ -13,13 +14,11 @@ const ALERT_CATEGORY_TO_SPLINE = {
   alertCaption: 'Series Error',
   alertDescr: "Adding category seria to not category isn't allowed."
 };
-const _isArr = Array.isArray;
-const _isFn = fn => typeof fn === 'function';
 const _crOptionFetch = (_ref, option) => {
   let {
     optionFetch
   } = _ref;
-  return _isFn(optionFetch) ? optionFetch(option) : optionFetch;
+  return (0, _isTypeFn.isFn)(optionFetch) ? optionFetch(option) : optionFetch;
 };
 const _fetchToChartComp = (objImpl, _ref2) => {
   let {
@@ -33,12 +32,11 @@ const _fetchToChartComp = (objImpl, _ref2) => {
     {
       config
     } = adapter.toConfig(json, option);
-  if (!_isFn(config.then)) {
+  if (!(0, _isTypeFn.isFn)(config.then)) {
     onCompleted(option, config);
   } else {
     config.then(config => {
       onCompleted(option, config);
-      return;
     });
   }
 };
@@ -79,7 +77,7 @@ const _isNotAllowToAdd = (_ref3, option) => {
     toSeries,
     isAdd
   } = _ref3;
-  return !_isFn(toSeries) || _isFn(isAdd) && !isAdd(option);
+  return !(0, _isTypeFn.isFn)(toSeries) || (0, _isTypeFn.isFn)(isAdd) && !isAdd(option);
 };
 const _loadToChart = (objImpl, option, onAdded, onFailed) => {
   const {
@@ -139,7 +137,7 @@ const _isAddCategoryToSpline = _ref5 => {
   const chart = (0, _chartCheckBoxLogic.getActiveChart)();
   return seriaType && (0, _ChartOptionsFn.isCategoryItem)({
     value: seriaType
-  }) && chart && _isArr(chart.xAxis) && !_isArr(chart.xAxis[0].categories);
+  }) && chart && (0, _isTypeFn.isArr)(chart.xAxis) && !(0, _isTypeFn.isArr)(chart.xAxis[0].categories);
 };
 const _runAsync = function (fn, mls) {
   if (mls === void 0) {
