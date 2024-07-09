@@ -5,6 +5,9 @@ import {
 import { bindTo } from '../../utils/bindTo';
 import { fetchJson } from '../../utils/fnFetch';
 
+import { isTreeMap } from '../../adapters/CategoryFn';
+import { loadTreeMap } from '../../charts/initChartTheme';
+
 import {
   isLoadToChart,
   getActiveChart
@@ -19,7 +22,7 @@ import {
 import onCatch from './onCatch';
 
 const ALERT_CATEGORY_TO_SPLINE = {
-  alertCaption: 'Series Error',
+  alertCaption: "Series Error",
   alertDescr: "Adding category seria to not category isn't allowed."
 };
 
@@ -37,14 +40,21 @@ const _fetchToChartComp = (
   onCompleted
 }) => {
   const { adapter } = objImpl
-  , { config } = adapter.toConfig(json, option);
-  
-  if (!isFn(config.then)){
-     onCompleted(option, config)
+  , { config } = adapter.toConfig(json, option)
+  , _onCompleteImpl = () => {
+    if (!isFn(config.then)){
+       onCompleted(option, config)
+    } else {
+      config.then(config => {
+        onCompleted(option, config)
+      })
+    }
+  };
+
+  if (isTreeMap(option.seriaType)){
+    loadTreeMap().then(_onCompleteImpl)
   } else {
-    config.then(config => {
-      onCompleted(option, config)
-    })
+    _onCompleteImpl()
   }
 };
 

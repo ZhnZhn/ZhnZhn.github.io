@@ -13,8 +13,7 @@ module.exports = {
             "big.js",
             "localforage",            
             "dompurify",
-            "highcharts",             
-            "highcharts/modules/treemap",
+            "highcharts",                         
             "highcharts/modules/exporting", "highcharts/modules/offline-exporting",            
             "jsonstat"
           ]

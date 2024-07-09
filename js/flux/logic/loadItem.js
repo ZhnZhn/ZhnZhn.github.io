@@ -6,12 +6,14 @@ exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _bindTo = require("../../utils/bindTo");
 var _fnFetch = require("../../utils/fnFetch");
+var _CategoryFn = require("../../adapters/CategoryFn");
+var _initChartTheme = require("../../charts/initChartTheme");
 var _chartCheckBoxLogic = require("../stores/chartCheckBoxLogic");
 var _ChartFn = require("../../charts/ChartFn");
 var _ChartOptionsFn = require("../../components/dialogs/ChartOptionsFn");
 var _onCatch = _interopRequireDefault(require("./onCatch"));
 const ALERT_CATEGORY_TO_SPLINE = {
-  alertCaption: 'Series Error',
+  alertCaption: "Series Error",
   alertDescr: "Adding category seria to not category isn't allowed."
 };
 const _crOptionFetch = (_ref, option) => {
@@ -31,13 +33,20 @@ const _fetchToChartComp = (objImpl, _ref2) => {
     } = objImpl,
     {
       config
-    } = adapter.toConfig(json, option);
-  if (!(0, _isTypeFn.isFn)(config.then)) {
-    onCompleted(option, config);
+    } = adapter.toConfig(json, option),
+    _onCompleteImpl = () => {
+      if (!(0, _isTypeFn.isFn)(config.then)) {
+        onCompleted(option, config);
+      } else {
+        config.then(config => {
+          onCompleted(option, config);
+        });
+      }
+    };
+  if ((0, _CategoryFn.isTreeMap)(option.seriaType)) {
+    (0, _initChartTheme.loadTreeMap)().then(_onCompleteImpl);
   } else {
-    config.then(config => {
-      onCompleted(option, config);
-    });
+    _onCompleteImpl();
   }
 };
 const _crRequestUrl = (api, option, onFailed) => {
