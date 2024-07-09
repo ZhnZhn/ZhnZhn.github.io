@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _bindTo = require("../../utils/bindTo");
 var _fnFetch = require("../../utils/fnFetch");
 var _chartCheckBoxLogic = require("../stores/chartCheckBoxLogic");
 var _ChartFn = require("../../charts/ChartFn");
@@ -20,7 +21,7 @@ const _crOptionFetch = (_ref, option) => {
   } = _ref;
   return _isFn(optionFetch) ? optionFetch(option) : optionFetch;
 };
-const _fetchToChartComp = function (objImpl, _ref2) {
+const _fetchToChartComp = (objImpl, _ref2) => {
   let {
     json,
     option,
@@ -52,7 +53,7 @@ const _crRequestUrl = (api, option, onFailed) => {
     });
   }
 };
-const _loadToChartComp = function (objImpl, option, onCompleted, onFailed) {
+const _loadToChartComp = (objImpl, option, onCompleted, onFailed) => {
   const {
       fnFetch,
       api
@@ -67,7 +68,7 @@ const _loadToChartComp = function (objImpl, option, onCompleted, onFailed) {
     optionFetch,
     getLimitRemaiming,
     onCheckResponse: api.checkResponse,
-    onFetch: _fetchToChartComp.bind(null, objImpl),
+    onFetch: (0, _bindTo.bindTo)(_fetchToChartComp, objImpl),
     onCompleted: onCompleted,
     onCatch: _onCatch.default,
     onFailed
@@ -80,7 +81,7 @@ const _isNotAllowToAdd = (_ref3, option) => {
   } = _ref3;
   return !_isFn(toSeries) || _isFn(isAdd) && !isAdd(option);
 };
-const _loadToChart = function (objImpl, option, onAdded, onFailed) {
+const _loadToChart = (objImpl, option, onAdded, onFailed) => {
   const {
       fnFetch,
       api
@@ -95,13 +96,13 @@ const _loadToChart = function (objImpl, option, onAdded, onFailed) {
     optionFetch,
     getLimitRemaiming,
     onCheckResponse: api.checkResponse,
-    onFetch: _fetchToChart.bind(null, objImpl),
+    onFetch: (0, _bindTo.bindTo)(_fetchToChart, objImpl),
     onCompleted: onAdded,
     onCatch: _onCatch.default,
     onFailed
   });
 };
-const _fetchToChart = function (objImpl, _ref4) {
+const _fetchToChart = (objImpl, _ref4) => {
   let {
     json,
     option,
@@ -146,7 +147,7 @@ const _runAsync = function (fn, mls) {
   }
   setTimeout(fn, mls);
 };
-const _loadItem = function (objImpl, option, onCompleted, onAdded, onFailed) {
+const _loadItem = (objImpl, option, onCompleted, onAdded, onFailed) => {
   const parentId = (0, _chartCheckBoxLogic.isLoadToChart)();
   if (!parentId) {
     _loadToChartComp(objImpl, option, onCompleted, onFailed);
@@ -168,8 +169,8 @@ const _loadItem = function (objImpl, option, onCompleted, onAdded, onFailed) {
   }
 };
 const _crLoadFns = objImpl => objImpl.id === 'Q' ? {
-  fnFetchToChartComp: _fetchToChartComp.bind(null, objImpl),
-  fnFetchToChart: _fetchToChart.bind(null, objImpl)
+  fnFetchToChartComp: (0, _bindTo.bindTo)(_fetchToChartComp, objImpl),
+  fnFetchToChart: (0, _bindTo.bindTo)(_fetchToChart, objImpl)
 } : void 0;
 const fLoadItem = objImpl => {
   const {
@@ -180,7 +181,7 @@ const fLoadItem = objImpl => {
     _loadFns = _crLoadFns(objImpl);
   objImpl.fnFetch = fnFetch;
   return {
-    loadItem: _loadItem.bind(null, objImpl),
+    loadItem: (0, _bindTo.bindTo)(_loadItem, objImpl),
     addPropsTo: api.addPropsTo,
     crKey: adapter.crKey,
     ..._loadFns

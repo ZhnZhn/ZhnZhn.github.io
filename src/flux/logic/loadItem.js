@@ -1,3 +1,4 @@
+import { bindTo } from '../../utils/bindTo';
 import { fetchJson } from '../../utils/fnFetch';
 
 import {
@@ -21,13 +22,21 @@ const ALERT_CATEGORY_TO_SPLINE = {
 const _isArr = Array.isArray;
 const _isFn = fn => typeof fn === 'function';
 
-const _crOptionFetch = ({ optionFetch }, option) => _isFn(optionFetch)
+const _crOptionFetch = (
+  { optionFetch },
+  option
+) => _isFn(optionFetch)
   ? optionFetch(option)
   : optionFetch;
 
-const _fetchToChartComp = function(objImpl ,{json, option, onCompleted}){
+const _fetchToChartComp = (
+  objImpl, {
+  json,
+  option,
+  onCompleted
+}) => {
   const { adapter } = objImpl
-      , { config } = adapter.toConfig(json, option);
+  , { config } = adapter.toConfig(json, option);
 
   if (!_isFn(config.then)){
      onCompleted(option, config)
@@ -39,7 +48,11 @@ const _fetchToChartComp = function(objImpl ,{json, option, onCompleted}){
   }
 };
 
-const _crRequestUrl = (api, option, onFailed) => {
+const _crRequestUrl = (
+  api,
+  option,
+  onFailed
+) => {
   try {
     return api.getRequestUrl(option);
   } catch (error) {
@@ -47,54 +60,92 @@ const _crRequestUrl = (api, option, onFailed) => {
   }
 };
 
-const _loadToChartComp = function(objImpl, option, onCompleted, onFailed){
-  const { fnFetch, api } = objImpl
+const _loadToChartComp = (
+  objImpl,
+  option,
+  onCompleted,
+  onFailed
+) => {
+  const {
+    fnFetch,
+    api
+  } = objImpl
   , { getLimitRemaiming } = api || {}
   , optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
     uri: _crRequestUrl(api, option, onFailed),
-    option, optionFetch,
+    option,
+    optionFetch,
     getLimitRemaiming,
-    onCheckResponse : api.checkResponse,
-    onFetch : _fetchToChartComp.bind(null, objImpl),
-    onCompleted : onCompleted,
-    onCatch, onFailed
+    onCheckResponse: api.checkResponse,
+    onFetch: bindTo(_fetchToChartComp, objImpl),
+    onCompleted: onCompleted,
+    onCatch,
+    onFailed
   })
 }
 
-const _isNotAllowToAdd = ({ toSeries, isAdd }, option) => !_isFn(toSeries)
- || (_isFn(isAdd) && !isAdd(option));
+const _isNotAllowToAdd = ({
+  toSeries,
+  isAdd },
+  option
+) => !_isFn(toSeries)
+  || (_isFn(isAdd) && !isAdd(option));
 
-const _loadToChart = function(objImpl, option, onAdded, onFailed){
-  const { fnFetch, api } = objImpl
+const _loadToChart = (
+  objImpl,
+  option,
+  onAdded,
+  onFailed
+) => {
+  const {
+    fnFetch,
+    api
+  } = objImpl
   , { getLimitRemaiming } = api || {}
   , optionFetch = _crOptionFetch(objImpl, option);
   fnFetch({
     uri: _crRequestUrl(api, option, onFailed),
-    option, optionFetch,
+    option,
+    optionFetch,
     getLimitRemaiming,
-    onCheckResponse : api.checkResponse,
-    onFetch : _fetchToChart.bind(null, objImpl),
-    onCompleted : onAdded,
-    onCatch, onFailed
+    onCheckResponse: api.checkResponse,
+    onFetch: bindTo(_fetchToChart, objImpl),
+    onCompleted: onAdded,
+    onCatch,
+    onFailed
   })
 };
 
-const _fetchToChart = function(objImpl, { json, option, onCompleted }){
+const _fetchToChart = (
+  objImpl, {
+  json,
+  option,
+  onCompleted
+}) => {
   const { adapter } = objImpl
-  , { itemCaption:label, value, hasSecondYAxis } = option
+  , {
+    itemCaption:label,
+    value,
+    hasSecondYAxis
+  } = option
   , chart = getActiveChart()
   , series = adapter.toSeries(json, option, chart)
-  , { itemCaption, color, zhColor } = series || {};
+  , {
+     itemCaption,
+     color,
+     zhColor
+   } = series || {};
 
-  addSeriaWithRenderLabel({
-    chart, series,
-    label: itemCaption || label || value,
-    color: color || zhColor,
-    hasSecondYAxis: !!hasSecondYAxis
-  })
-  onCompleted(option)
+   addSeriaWithRenderLabel({
+     chart,
+     series,
+     label: itemCaption || label || value,
+     color: color || zhColor,
+     hasSecondYAxis: !!hasSecondYAxis
+   })
+   onCompleted(option)
 }
 
 const _isAddCategoryToSpline = ({ seriaType }) => {
@@ -109,7 +160,13 @@ const _runAsync = (fn, mls=500) => {
   setTimeout(fn, mls)
 };
 
-const _loadItem = function(objImpl, option, onCompleted, onAdded, onFailed){
+const _loadItem = (
+  objImpl,
+  option,
+  onCompleted,
+  onAdded,
+  onFailed
+) => {
   const parentId = isLoadToChart();
   if (!parentId) {
      _loadToChartComp(objImpl, option, onCompleted, onFailed);
@@ -118,7 +175,8 @@ const _loadItem = function(objImpl, option, onCompleted, onAdded, onFailed){
       _runAsync(() => {
         onCatch({
           error: new Error("ERR_10"),
-          option, onFailed
+          option,
+          onFailed
         })
       })
     } else if (_isAddCategoryToSpline(option)) {
@@ -130,22 +188,23 @@ const _loadItem = function(objImpl, option, onCompleted, onAdded, onFailed){
   }
 };
 
-const _crLoadFns = (objImpl) => objImpl.id === 'Q'
+const _crLoadFns = objImpl => objImpl.id === 'Q'
   ? {
-      fnFetchToChartComp: _fetchToChartComp.bind(null, objImpl),
-      fnFetchToChart: _fetchToChart.bind(null, objImpl),
+      fnFetchToChartComp: bindTo(_fetchToChartComp, objImpl),
+      fnFetchToChart: bindTo(_fetchToChart, objImpl)
     }
   : void 0;
 
 const fLoadItem = (objImpl) => {
    const {
      fnFetch=fetchJson,
-     api, adapter
+     api,
+     adapter
    } = objImpl
    , _loadFns = _crLoadFns(objImpl);
    objImpl.fnFetch = fnFetch
    return {
-     loadItem: _loadItem.bind(null, objImpl),
+     loadItem: bindTo(_loadItem, objImpl),
      addPropsTo: api.addPropsTo,
      crKey: adapter.crKey,
      ..._loadFns
