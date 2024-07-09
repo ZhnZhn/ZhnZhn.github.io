@@ -2,10 +2,9 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 var _client = require("react-dom/client");
-var _polyfill = _interopRequireDefault(require("./polyfill"));
 var _ravenJs = _interopRequireDefault(require("raven-js"));
 var _AppErc = _interopRequireDefault(require("./components/AppErc"));
-var _initChartTheme = _interopRequireDefault(require("./charts/initChartTheme"));
+var _initChartTheme = require("./charts/initChartTheme");
 var _jsxRuntime = require("react/jsx-runtime");
 const _isHighchartsWarning = str => typeof str === 'string' && str.indexOf('Highcharts warning') !== -1;
 let consoleWarn = (console || {}).warn;
@@ -47,8 +46,7 @@ const _runLoadingApp = () => {
     _renderApp();
   }
 };
-(0, _polyfill.default)();
 _initRaven();
-(0, _initChartTheme.default)();
+(0, _initChartTheme.initChartTheme)();
 _runLoadingApp();
 //# sourceMappingURL=index.js.map

@@ -1,10 +1,9 @@
 import { createRoot } from 'react-dom/client';
 
-import polyfill from './polyfill';
 import Raven from 'raven-js';
 
 import AppErc from './components/AppErc';
-import initChartTheme from './charts/initChartTheme';
+import { initChartTheme } from './charts/initChartTheme';
 
 const _isHighchartsWarning = str => typeof str === 'string'
  && str.indexOf('Highcharts warning') !== -1;
@@ -59,7 +58,6 @@ const _runLoadingApp = () => {
   }
 }
 
-polyfill();
 _initRaven();
 initChartTheme();
 _runLoadingApp();
