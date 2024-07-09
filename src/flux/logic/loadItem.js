@@ -38,7 +38,7 @@ const _fetchToChartComp = (
 }) => {
   const { adapter } = objImpl
   , { config } = adapter.toConfig(json, option);
-
+  
   if (!isFn(config.then)){
      onCompleted(option, config)
   } else {
@@ -188,27 +188,18 @@ const _loadItem = (
   }
 };
 
-const _crLoadFns = objImpl => objImpl.id === 'Q'
-  ? {
-      fnFetchToChartComp: bindTo(_fetchToChartComp, objImpl),
-      fnFetchToChart: bindTo(_fetchToChart, objImpl)
-    }
-  : void 0;
-
 const fLoadItem = (objImpl) => {
    const {
      fnFetch=fetchJson,
      api,
      adapter
-   } = objImpl
-   , _loadFns = _crLoadFns(objImpl);
+   } = objImpl;
    objImpl.fnFetch = fnFetch
    return {
      loadItem: bindTo(_loadItem, objImpl),
      addPropsTo: api.addPropsTo,
-     crKey: adapter.crKey,
-     ..._loadFns
+     crKey: adapter.crKey
    };
-}
+};
 
 export default fLoadItem

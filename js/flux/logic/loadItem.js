@@ -166,23 +166,17 @@ const _loadItem = (objImpl, option, onCompleted, onAdded, onFailed) => {
     }
   }
 };
-const _crLoadFns = objImpl => objImpl.id === 'Q' ? {
-  fnFetchToChartComp: (0, _bindTo.bindTo)(_fetchToChartComp, objImpl),
-  fnFetchToChart: (0, _bindTo.bindTo)(_fetchToChart, objImpl)
-} : void 0;
 const fLoadItem = objImpl => {
   const {
-      fnFetch = _fnFetch.fetchJson,
-      api,
-      adapter
-    } = objImpl,
-    _loadFns = _crLoadFns(objImpl);
+    fnFetch = _fnFetch.fetchJson,
+    api,
+    adapter
+  } = objImpl;
   objImpl.fnFetch = fnFetch;
   return {
     loadItem: (0, _bindTo.bindTo)(_loadItem, objImpl),
     addPropsTo: api.addPropsTo,
-    crKey: adapter.crKey,
-    ..._loadFns
+    crKey: adapter.crKey
   };
 };
 var _default = exports.default = fLoadItem;
