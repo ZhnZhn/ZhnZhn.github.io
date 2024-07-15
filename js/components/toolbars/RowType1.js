@@ -37,9 +37,6 @@ const DF_COLOR = '#2b908f',
   S_PL_10 = {
     paddingLeft: 10
   },
-  S_INLINE = {
-    display: 'inline-block'
-  },
   S_CAPTION_STYLE = {
     ..._Row.S_INLINE_BLOCK_BOLD,
     width: 85,
@@ -51,12 +48,12 @@ const DF_COLOR = '#2b908f',
     fontWeight: 'bold'
   }),
   S1_COLUMN = {
-    ...S_INLINE,
+    ..._styleFn.S_INLINE,
     ...S_VA_M,
     ...S_PL_10
   },
   S1_ON_TOP = {
-    ...S_INLINE,
+    ..._styleFn.S_INLINE,
     ...S_VA_M,
     ...S_PL_10
   };
@@ -77,7 +74,7 @@ const InputPlus = _ref => {
       onChange: onChangePeriod,
       onEnter: onPlus
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgPlus, {
-      style: S_INLINE,
+      style: _styleFn.S_INLINE,
       onClick: onPlus
     })]
   });
@@ -90,7 +87,7 @@ const MinusPeriod = _ref2 => {
   } = _ref2;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgMinus, {
-      style: S_INLINE,
+      style: _styleFn.S_INLINE,
       onClick: onMinus
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       style: crSpanStyle(color),
@@ -140,7 +137,7 @@ const RowType1 = _ref3 => {
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S_PL_8,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputColor, {
-        style: S_INLINE,
+        style: _styleFn.S_INLINE,
         initValue: DF_COLOR,
         onEnter: _onColor
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
@@ -154,11 +151,11 @@ const RowType1 = _ref3 => {
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: S_ROW_2,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputText, {
-          rootStyle: S_INLINE,
+          rootStyle: _styleFn.S_INLINE,
           caption: "For Seria",
           captionCn: _styleFn.CL_BLACK,
           captionStyle: S_CAPTION_STYLE,
-          style: S_SERIA_INPUT,
+          inputStyle: S_SERIA_INPUT,
           type: "number",
           initValue: 1,
           min: 1,

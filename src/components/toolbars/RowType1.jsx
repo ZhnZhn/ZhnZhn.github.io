@@ -4,6 +4,7 @@ import {
   setRefValue
 } from '../uiApi';
 import {
+  S_INLINE,
   CL_OPEN_CLOSE_BLACK,
   CL_CHB_BLACK,
   CL_BLACK
@@ -39,7 +40,6 @@ const DF_COLOR = '#2b908f'
 , S_PL_6 = { paddingLeft: 6 }
 , S_PL_8 = { paddingLeft: 8 }
 , S_PL_10 = { paddingLeft: 10 }
-, S_INLINE = { display: 'inline-block' }
 , S_CAPTION_STYLE = {
    ...S_INLINE_BLOCK_BOLD,
    width: 85,
@@ -169,7 +169,7 @@ const RowType1 = ({
           caption="For Seria"
           captionCn={CL_BLACK}
           captionStyle={S_CAPTION_STYLE}
-          style={S_SERIA_INPUT}
+          inputStyle={S_SERIA_INPUT}
           type="number"
           initValue={1}
           min={1}
