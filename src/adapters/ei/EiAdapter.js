@@ -1,8 +1,3 @@
-import {
-  isNumber,
-  ymdToUTC
-} from '../AdapterFn';
-
 import crAdapterType1 from '../crAdapterType1';
 import crFromYearData from '../crFromYearData';
 import toCategoryAdapter from '../toCategoryAdapter';
@@ -14,16 +9,9 @@ import {
 import toTreeMapAdapter from './toTreeMapAdapter';
 
 const toLineAdapter = crAdapterType1({
-  crData: (json, option) => {
-    const _data = crFromYearData(json, option)
-    , fromDate = option.fromDate
-    , _fromDateUTC = ymdToUTC(fromDate)
-    return isNumber(_fromDateUTC)
-      ? _data.filter(p => p[0] > _fromDateUTC)
-      : _data;
-  }
+  crData: crFromYearData
 })
-, IrenaAdapter = crAdapterRouter({
+, IeAdapter = crAdapterRouter({
   getRoute: fGetRouteTreeMap(
     toTreeMapAdapter,
     toCategoryAdapter,
@@ -31,4 +19,4 @@ const toLineAdapter = crAdapterType1({
   )
 })
 
-export default IrenaAdapter
+export default IeAdapter

@@ -3,20 +3,25 @@ import {
   ymdToUTC
 } from './AdapterFn';
 
+const FN_TRUE = () => true;
+
 const crFromYearData = (
   json,
   option
 ) => {
-  const {
-    fromYear,
-    data
-  } = json
-  , _fromYear = parseInt(fromYear, 10);
+  const _fromYear = parseInt(json.fromYear, 10)
+  , _fromDateUTC = ymdToUTC(option.fromDate)
+  , _isPoint = isNumber(_fromDateUTC)
+     ? mls => mls > _fromDateUTC
+     : FN_TRUE;
   return isNumber(_fromYear)
-    ? data.map((v, index) => [
-        ymdToUTC((_fromYear + index)+''),
-        v
-     ])
+    ? json.data.reduce((arr, v, index) => {
+        const _mls = ymdToUTC(_fromYear + index);
+        if (_isPoint(_mls)) {
+          arr.push([_mls, v])
+        }
+        return arr;
+      }, [])
    : [];
 }
 
