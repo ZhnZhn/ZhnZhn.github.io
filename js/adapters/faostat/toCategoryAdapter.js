@@ -10,7 +10,7 @@ var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
 const _crData = (json, option) => {
   const _crValue = (0, _AdapterFn.fCrValue)(option);
-  return (0, _compareByFn.sortDescByPnY)(json.data.reduce((_data, item) => {
+  return (0, _compareByFn.sortDescCategory)(json.data.reduce((_data, item) => {
     const {
         Value,
         Area

@@ -1,5 +1,5 @@
 import { crCategoryPoint } from '../CategoryFn';
-import { sortDescByPnY } from '../compareByFn';
+import { sortDescCategory } from '../compareByFn';
 import crAdapterCategory from '../crAdapterCategory';
 
 import {
@@ -77,7 +77,7 @@ const _getObjectKeys = Object.keys
   , crCategoryData = isTotalData(source)
       ? _crTotalData
       : _crSourceData;
-  return sortDescByPnY(
+  return sortDescCategory(
     crCategoryData(
       json,
       getCategory,

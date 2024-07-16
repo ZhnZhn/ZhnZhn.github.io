@@ -1,6 +1,6 @@
 import crAdapterCategory from '../crAdapterCategory';
 import { crCategoryPoint } from '../CategoryFn'
-import { sortDescByPnY } from '../compareByFn';
+import { sortDescCategory } from '../compareByFn';
 
 import {
   isNumber,
@@ -17,7 +17,7 @@ const crCategoryData = (
   , pnValue = option.measure;
   option._itemKey = option.key
   let value;
-  return sortDescByPnY(json.data.reduce((arr, item) => {
+  return sortDescCategory(json.data.reduce((arr, item) => {
     value = _round(parseFloat(item[pnValue]));
     const { reporterCode } = item || {};
     if (value && isNumber(reporterCode)) {

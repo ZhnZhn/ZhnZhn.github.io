@@ -4,7 +4,7 @@ import {
 } from '../AdapterFn';
 import crAdapterCategory from '../crAdapterCategory';
 import { crCategoryPoint } from '../CategoryFn';
-import { sortDescByPnY } from '../compareByFn';
+import { sortDescCategory } from '../compareByFn';
 import { crCategoryTitle } from './fnAdapter';
 
 const _crData = (
@@ -12,7 +12,7 @@ const _crData = (
   option
 ) => {
   const _crValue = fCrValue(option);
-  return sortDescByPnY(json.data.reduce((_data, item) => {
+  return sortDescCategory(json.data.reduce((_data, item) => {
     const { Value, Area } = item || {}
     , _value = _crValue(parseFloat(Value));
     if (isNumber(_value) && _value !== 0 && Area) {

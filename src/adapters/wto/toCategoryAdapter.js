@@ -1,6 +1,6 @@
 import { isNumber, isStr } from '../AdapterFn';
 import { crCategoryPoint } from '../CategoryFn';
-import { compareByPnY } from '../compareByFn';
+import { sortDescCategory } from '../compareByFn';
 import crAdapterCategory from '../crAdapterCategory';
 
 const _isStrInclude = (
@@ -22,7 +22,7 @@ const _crReportingEconomy = (
 const _crData = (
   json,
   option
-) => json.Dataset.reduce((data, item) => {
+) => sortDescCategory(json.Dataset.reduce((data, item) => {
   const {
     Value,
     ReportingEconomy
@@ -34,9 +34,7 @@ const _crData = (
     ))
   }
   return data;
-}, [])
-.sort(compareByPnY)
-.reverse()
+}, []))
 , toCategoryAdapter = crAdapterCategory(_crData);
 
 export default toCategoryAdapter

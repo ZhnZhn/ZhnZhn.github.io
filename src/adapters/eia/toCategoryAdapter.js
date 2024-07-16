@@ -1,6 +1,6 @@
 import crAdapterCategory from '../crAdapterCategory';
 import { crCategoryPoint } from '../CategoryFn'
-import { sortDescByPnY } from '../compareByFn';
+import { sortDescCategory } from '../compareByFn';
 
 const _isState = stateid => stateid
   && stateid.length === 2
@@ -9,8 +9,8 @@ const crCategoryData = (
   json,
   option
 ) => {
-  const data = ((json || {}).response || {}).data || [];
-  return sortDescByPnY(data.reduce((arr, item) => {
+  const data = json.response.data;
+  return sortDescCategory(data.reduce((arr, item) => {
     const {
       stateid,
       stateDescription

@@ -11,7 +11,7 @@ const _isStrInclude = (str, token) => str.indexOf(token) !== -1;
 
 //Unicode character patch
 const _crReportingEconomy = reportingEconomy => _isStrInclude(reportingEconomy, "rkiye") ? "Türkiye" : _isStrInclude(reportingEconomy, "Ivoire") ? "Côte d'Ivoire" : _isStrInclude(reportingEconomy, "Principe") ? "Sao Tomé and Principe" : reportingEconomy;
-const _crData = (json, option) => json.Dataset.reduce((data, item) => {
+const _crData = (json, option) => (0, _compareByFn.sortDescCategory)(json.Dataset.reduce((data, item) => {
     const {
       Value,
       ReportingEconomy
@@ -20,7 +20,7 @@ const _crData = (json, option) => json.Dataset.reduce((data, item) => {
       data.push((0, _CategoryFn.crCategoryPoint)(item.Value, _crReportingEconomy(item.ReportingEconomy)));
     }
     return data;
-  }, []).sort(_compareByFn.compareByPnY).reverse(),
+  }, [])),
   toCategoryAdapter = (0, _crAdapterCategory.default)(_crData);
 var _default = exports.default = toCategoryAdapter;
 //# sourceMappingURL=toCategoryAdapter.js.map

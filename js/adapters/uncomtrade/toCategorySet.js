@@ -13,7 +13,7 @@ const crCategoryData = (json, option) => {
     pnValue = option.measure;
   option._itemKey = option.key;
   let value;
-  return (0, _compareByFn.sortDescByPnY)(json.data.reduce((arr, item) => {
+  return (0, _compareByFn.sortDescCategory)(json.data.reduce((arr, item) => {
     value = _round(parseFloat(item[pnValue]));
     const {
       reporterCode

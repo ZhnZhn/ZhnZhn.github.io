@@ -5,7 +5,7 @@ import {
   fCrValue
 } from '../AdapterFn';
 
-import { sortDescByPnY } from '../compareByFn';
+import { sortDescCategory } from '../compareByFn';
 import { crCategoryPoint } from '../CategoryFn';
 import crAdapterCategory from '../crAdapterCategory';
 
@@ -56,7 +56,7 @@ const _crData = (
 ) => {
   const _crValue = fCrValue(option)
   , _data = json[1];
-  return isArr(_data) ? sortDescByPnY(_data
+  return isArr(_data) ? sortDescCategory(_data
     .reduce((data, point) => {
       const { country, value } = point || {}
       , { id } = country || {};

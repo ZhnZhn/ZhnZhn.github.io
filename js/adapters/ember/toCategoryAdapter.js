@@ -27,7 +27,7 @@ const _getObjectKeys = Object.keys,
       pnMetric = (0, _fnAdapter.getMetricValue)(options),
       getCategory = (0, _fnAdapter.fGetCategory)(options),
       crCategoryData = (0, _fnAdapter.isTotalData)(source) ? _crTotalData : _crSourceData;
-    return (0, _compareByFn.sortDescByPnY)(crCategoryData(json, getCategory, pnMetric));
+    return (0, _compareByFn.sortDescCategory)(crCategoryData(json, getCategory, pnMetric));
   },
   toCategoryAdapter = (0, _crAdapterCategory.default)(_crData);
 var _default = exports.default = toCategoryAdapter;

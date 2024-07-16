@@ -13,7 +13,7 @@ const _isCategoryId = (0, _AdapterFn.isInArrStr)(CATEGORY_IDS);
 const _crData = (json, option) => {
     const _crValue = (0, _AdapterFn.fCrValue)(option),
       _data = json[1];
-    return (0, _AdapterFn.isArr)(_data) ? (0, _compareByFn.sortDescByPnY)(_data.reduce((data, point) => {
+    return (0, _AdapterFn.isArr)(_data) ? (0, _compareByFn.sortDescCategory)(_data.reduce((data, point) => {
       const {
           country,
           value

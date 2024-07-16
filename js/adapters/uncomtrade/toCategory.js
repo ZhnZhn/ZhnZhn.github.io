@@ -33,7 +33,7 @@ const _fetchHs = () => _hmHs ? Promise.resolve(_hmHs) : fetch(URL_HS_CHAPTERS).t
   return _hmHs = (json || {}).hm;
 }).catch(() => void 0);
 const _crCategoriesAndAddColors = (data, total) => {
-  (0, _compareByFn.sortDescByPnY)(data);
+  (0, _compareByFn.sortDescCategory)(data);
   (0, _TreeMapFn.addColorsTo)({
     data,
     total,
@@ -74,6 +74,5 @@ const toCategory = (json, option) => (0, _fnAdapter.isTotalByAll)(option) ? _toC
   let [data, categories, total] = _ref;
   return _crConfig(json, option, data, categories, total);
 });
-var _default = toCategory;
-exports.default = _default;
+var _default = exports.default = toCategory;
 //# sourceMappingURL=toCategory.js.map
