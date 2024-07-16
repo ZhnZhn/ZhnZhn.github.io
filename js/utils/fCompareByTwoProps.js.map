@@ -1,1 +1,18 @@
-{"version":3,"sources":["../../src/utils/fCompareByTwoProps.js"],"names":["fCompareByTwoProps","propName1","propName2","a","b"],"mappings":";;;;;AACA,IAAMA,kBAAkB,GAAG,SAArBA,kBAAqB,CAACC,SAAD,EAAYC,SAAZ;AAAA,SAA0B,UAACC,CAAD,EAAIC,CAAJ,EAAU;AAC7D,QAAID,CAAC,CAACF,SAAD,CAAD,GAAeG,CAAC,CAACH,SAAD,CAApB,EAAiC;AAAE,aAAO,CAAC,CAAR;AAAY,KAA/C,MACK,IAAIE,CAAC,CAACF,SAAD,CAAD,GAAeG,CAAC,CAACH,SAAD,CAApB,EAAiC;AAAE,aAAO,CAAP;AAAW,KAA9C,MACA,IAAIE,CAAC,CAACD,SAAD,CAAD,GAAeE,CAAC,CAACF,SAAD,CAApB,EAAiC;AAAE,aAAO,CAAC,CAAR;AAAY,KAA/C,MACA,IAAIC,CAAC,CAACD,SAAD,CAAD,GAAeE,CAAC,CAACF,SAAD,CAApB,EAAiC;AAAE,aAAO,CAAP;AAAW,KAA9C,MACA,OAAO,CAAP;AACN,GAN0B;AAAA,CAA3B;;eAQeF,kB","sourcesContent":["\r\nconst fCompareByTwoProps = (propName1, propName2) => (a, b) => {\r\n  if (a[propName1] < b[propName1]) { return -1; }\r\n  else if (a[propName1] > b[propName1]) { return 1; }\r\n  else if (a[propName2] < b[propName2]) { return -1; }\r\n  else if (a[propName2] > b[propName2]) { return 1; }\r\n  else return 0;\r\n}\r\n\r\nexport default fCompareByTwoProps\r\n"],"file":"fCompareByTwoProps.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/fCompareByTwoProps.js"
+ ],
+ "file": "../../src/utils/fCompareByTwoProps.js",
+ "names": [
+  "fCompareByTwoProps",
+  "propName1",
+  "propName2",
+  "a",
+  "b",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AACA,MAAMA,kBAAkB,GAAGA,CACzBC,SAAS,EACTC,SAAS,KACN,CAACC,CAAC,EAAEC,CAAC,KAAKD,CAAC,CAACF,SAAS,CAAC,GAAGG,CAAC,CAACH,SAAS,CAAC,GACtC,CAAC,CAAC,GACFE,CAAC,CAACF,SAAS,CAAC,GAAGG,CAAC,CAACH,SAAS,CAAC,GAC3B,CAAC,GACDE,CAAC,CAACD,SAAS,CAAC,GAAGE,CAAC,CAACF,SAAS,CAAC,GAC3B,CAAC,CAAC,GACFC,CAAC,CAACD,SAAS,CAAC,GAAGE,CAAC,CAACF,SAAS,CAAC,GAC3B,CAAC,GAAG,CAAC;AAAC,IAAAG,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEKP,kBAAkB"
+}

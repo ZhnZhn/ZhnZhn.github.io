@@ -1,10 +1,14 @@
 
-const fCompareByTwoProps = (propName1, propName2) => (a, b) => {
-  if (a[propName1] < b[propName1]) { return -1; }
-  else if (a[propName1] > b[propName1]) { return 1; }
-  else if (a[propName2] < b[propName2]) { return -1; }
-  else if (a[propName2] > b[propName2]) { return 1; }
-  else return 0;
-}
+const fCompareByTwoProps = (
+  propName1,
+  propName2
+) => (a, b) => a[propName1] < b[propName1]
+  ? -1
+  : a[propName1] > b[propName1]
+  ? 1
+  : a[propName2] < b[propName2]
+  ? -1
+  : a[propName2] > b[propName2]
+  ? 1 : 0;
 
 export default fCompareByTwoProps
