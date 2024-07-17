@@ -1,4 +1,5 @@
 import { crId as _crId } from '../math/mathFn';
+import { bindTo } from './AdapterFn';
 import {
   getPointDate,
   getPointValue
@@ -20,6 +21,8 @@ export const crItemLink = (
   itemUrl,
   className
 ) => `${_crPTag(className)}<a href="${itemUrl}">${caption}</a></p>`
+
+export const fCrItemLinkByCaption = caption => bindTo(crItemLink, caption)
 
 const ITEM_CONF_PROP_NAMES = [
  'url',
