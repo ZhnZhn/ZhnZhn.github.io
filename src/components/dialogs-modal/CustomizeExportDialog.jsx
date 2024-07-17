@@ -1,4 +1,5 @@
 import merge from '../../utils/merge';
+import { isInRange } from '../../math/mathFn';
 
 import {
   useRef,
@@ -62,16 +63,15 @@ const APP_HTML = 'Web app ERC https://zhnzhn.github.io'
 , H_MIN = 251
 , H_MAX = 1001;
 
-const _isInRange = (v, min, max) => v>min && v<max
-, _getDimension = (
+const  _getDimension = (
   { chartWidth, chartHeight },
   width,
   height
 ) => [
-  _isInRange(width, W_MIN, W_MAX)
+  isInRange(width, W_MIN, W_MAX)
      ? width
      : chartWidth,
-  _isInRange(height, H_MIN, H_MAX)
+  isInRange(height, H_MIN, H_MAX)
      ? height
      : chartHeight
 ];

@@ -1,4 +1,5 @@
 import Big from 'big.js';
+import { isNumber } from '../utils/isTypeFn';
 
 import {
   DT_UP,
@@ -9,12 +10,9 @@ import {
 const MAX_TO_ROUND = 1000000;
 const FN_ECHO = value => value;
 
-const _isNumber = n => typeof n === 'number'
- && (n - n === 0);
-
 const _formatedToBig = (v=0, dfR) => {
   const _b = Big(v.toString().replace(/\s/g,''));
-  return _isNumber(dfR)
+  return isNumber(dfR)
     ? _b.round(dfR)
     : _b;
 }
@@ -99,7 +97,7 @@ export const toFixed = (value) => {
 
 export const toFixedNumber = (
   value
-) => !_isNumber(value)
+) => !isNumber(value)
   ? value
   : roundBy(
       value,
@@ -113,3 +111,5 @@ export const crId = (prefix) => (
   Date.now().toString(36) +
   Math.random().toString(36).slice(2, 9)
 )
+
+export const isInRange = (v, min, max) => v>min && v<max

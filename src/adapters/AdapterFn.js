@@ -33,9 +33,12 @@ export { toUpperCaseFirst } from '../utils/toUpperCaseFirst';
 
 import {
   crValueMoving as _crVm,
-  roundBy
+  roundBy,
 } from '../math/mathFn';
-export { roundBy } from '../math/mathFn';
+export {
+  roundBy,
+  isInRange 
+} from '../math/mathFn';
 
 export {
   findMinY,

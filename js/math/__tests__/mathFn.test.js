@@ -1,21 +1,15 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 var _big = _interopRequireDefault(require("big.js"));
-
 var _mathFn = require("../mathFn");
-
 var _DirectionType = require("../../constants/DirectionType");
-
 const PERCENT_0 = '0.00%';
 const PERCENT_100 = '100.00%';
-
 const _crVmInputs = (nowValue, prevValue) => ({
   nowValue,
   prevValue
 });
-
 describe('roundBy', () => {
   const fn = _mathFn.roundBy;
   test('should return rounded number from string or number by', () => {
@@ -94,7 +88,8 @@ describe('crValueMoving', () => {
     expect(r.direction).toBe(_DirectionType.DT_UP);
   });
   test('should use dfR for rounding', () => {
-    const r = fn({ ..._crVmInputs('200.023333', '100.01333'),
+    const r = fn({
+      ..._crVmInputs('200.023333', '100.01333'),
       ...{
         dfR: 2
       }
@@ -105,7 +100,8 @@ describe('crValueMoving', () => {
     expect(r.direction).toBe(_DirectionType.DT_UP);
   });
   test('should use fnFormat for output', () => {
-    const r = fn({ ..._crVmInputs('200.02', '100.01'),
+    const r = fn({
+      ..._crVmInputs('200.02', '100.01'),
       ...{
         fnFormat: value => value + ';'
       }
@@ -195,15 +191,26 @@ describe('crId', () => {
   });
   test('should use prefix parameter', () => {
     const prefix = 'ABC_',
-          id = fn(prefix);
+      id = fn(prefix);
     expect(id.substring(0, prefix.length)).toBe(prefix);
   });
   test('should return unique id', () => {
     const id1 = fn(),
-          id2 = fn(),
-          id3 = fn();
+      id2 = fn(),
+      id3 = fn();
     expect(id1).not.toBe(id2);
     expect(id2).not.toBe(id3);
+  });
+});
+describe('isInRange', () => {
+  const fn = _mathFn.isInRange;
+  test('should return boolean is number in range min max exclusive', () => {
+    expect(fn(1, 0, 11)).toBe(true);
+    expect(fn(10, 0, 11)).toBe(true);
+    expect(fn(0, 0, 11)).toBe(false);
+    expect(fn(11, 0, 11)).toBe(false);
+    expect(fn(-1, 0, 11)).toBe(false);
+    expect(fn(12, 0, 11)).toBe(false);
   });
 });
 //# sourceMappingURL=mathFn.test.js.map

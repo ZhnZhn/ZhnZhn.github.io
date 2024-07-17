@@ -2,18 +2,18 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toFixedNumber = exports.toFixed = exports.roundBy = exports.crValueMoving = exports.crId = exports.calcPercent = void 0;
+exports.toFixedNumber = exports.toFixed = exports.roundBy = exports.isInRange = exports.crValueMoving = exports.crId = exports.calcPercent = void 0;
 var _big = _interopRequireDefault(require("big.js"));
+var _isTypeFn = require("../utils/isTypeFn");
 var _DirectionType = require("../constants/DirectionType");
 const MAX_TO_ROUND = 1000000;
 const FN_ECHO = value => value;
-const _isNumber = n => typeof n === 'number' && n - n === 0;
 const _formatedToBig = function (v, dfR) {
   if (v === void 0) {
     v = 0;
   }
   const _b = (0, _big.default)(v.toString().replace(/\s/g, ''));
-  return _isNumber(dfR) ? _b.round(dfR) : _b;
+  return (0, _isTypeFn.isNumber)(dfR) ? _b.round(dfR) : _b;
 };
 const _toBig = bValue => {
   if (bValue instanceof _big.default) {
@@ -84,8 +84,10 @@ const toFixed = value => {
   return bValue.gt('10') ? parseInt(bValue.toFixed(0), 10) : parseFloat(bValue.toFixed(2));
 };
 exports.toFixed = toFixed;
-const toFixedNumber = value => !_isNumber(value) ? value : roundBy(value, value < 10 ? 4 : value < 10000 ? 2 : 0);
+const toFixedNumber = value => !(0, _isTypeFn.isNumber)(value) ? value : roundBy(value, value < 10 ? 4 : value < 10000 ? 2 : 0);
 exports.toFixedNumber = toFixedNumber;
 const crId = prefix => (prefix || '') + Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
 exports.crId = crId;
+const isInRange = (v, min, max) => v > min && v < max;
+exports.isInRange = isInRange;
 //# sourceMappingURL=mathFn.js.map

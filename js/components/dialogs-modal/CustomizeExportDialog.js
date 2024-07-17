@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _merge = _interopRequireDefault(require("../../utils/merge"));
+var _mathFn = require("../../math/mathFn");
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
@@ -54,14 +55,13 @@ const APP_HTML = 'Web app ERC https://zhnzhn.github.io',
   W_MAX = 2001,
   H_MIN = 251,
   H_MAX = 1001;
-const _isInRange = (v, min, max) => v > min && v < max,
-  _getDimension = (_ref, width, height) => {
-    let {
-      chartWidth,
-      chartHeight
-    } = _ref;
-    return [_isInRange(width, W_MIN, W_MAX) ? width : chartWidth, _isInRange(height, H_MIN, H_MAX) ? height : chartHeight];
-  };
+const _getDimension = (_ref, width, height) => {
+  let {
+    chartWidth,
+    chartHeight
+  } = _ref;
+  return [(0, _mathFn.isInRange)(width, W_MIN, W_MAX) ? width : chartWidth, (0, _mathFn.isInRange)(height, H_MIN, H_MAX) ? height : chartHeight];
+};
 const _crItemLabel = function (html, top, fontSize) {
   if (top === void 0) {
     top = -70;
@@ -113,7 +113,6 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
       fn
     } = data,
     _hExport = (0, _useEventCallback.default)(() => {
-      var _chart$userOptions$zh, _chart$userOptions$zh2;
       const [width, height] = _getDimension(chart, (0, _uiApi.getInputValue)(_refInputWidth), (0, _uiApi.getInputValue)(_refInputHeight)),
         _customOption = (0, _merge.default)(true, {
           chart: {
@@ -127,7 +126,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
             text: (0, _uiApi.getInputValue)(_refInputSubtitle)
           },
           labels: {
-            items: [_crItemLabel(APP_HTML), _crItemLabel("DataSource: " + ((_chart$userOptions$zh = (_chart$userOptions$zh2 = chart.userOptions.zhConfig) == null ? void 0 : _chart$userOptions$zh2.dataSource) != null ? _chart$userOptions$zh : ''), height - DS_TOP_PADDING, DS_FONT_SIZE)]
+            items: [_crItemLabel(APP_HTML), _crItemLabel(`DataSource: ${chart.userOptions.zhConfig?.dataSource ?? ''}`, height - DS_TOP_PADDING, DS_FONT_SIZE)]
           }
         }, (0, _uiApi.getRefValue)(_refExportStyle));
       fn.apply(chart, [null, _customOption]);

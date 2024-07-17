@@ -5,7 +5,8 @@ import {
   crValueMoving,
   toFixed,
   toFixedNumber,
-  crId
+  crId,
+  isInRange
 } from '../mathFn';
 import {
   DT_UP,
@@ -235,4 +236,17 @@ describe('crId', ()=>{
     expect(id2).not.toBe(id3)
   })
 
+})
+
+describe('isInRange', ()=>{
+  const fn = isInRange;
+  test('should return boolean is number in range min max exclusive', () => {
+    expect(fn(1, 0, 11)).toBe(true)
+    expect(fn(10, 0, 11)).toBe(true)
+
+    expect(fn(0, 0, 11)).toBe(false)
+    expect(fn(11, 0, 11)).toBe(false)
+    expect(fn(-1, 0, 11)).toBe(false)
+    expect(fn(12, 0, 11)).toBe(false)
+  })
 })
