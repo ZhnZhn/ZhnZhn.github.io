@@ -22,14 +22,16 @@ const _crId = _ref => {
   } = _ref;
   return (0, _AdapterFn.joinBy)('/', dfProvider, dfCode, seriaId);
 };
-const _crItemLink = _crFn.crItemLink.bind(null, 'DBnomics Chart');
+const _crItemLink = (0, _crFn.fCrItemLinkByCaption)('DBnomics Chart');
 const _crUpdatedDate = json => {
   const _date = (0, _fnSelector.getIndexedAt)(json).split('T')[0];
-  return _date ? "<p>Updated by DBnomics on " + _date + "</p>" : '';
+  return _date ? `<p>Updated by DBnomics on ${_date}</p>` : '';
 };
 const _crDescr = (json, option) => {
   const _id = _crId(option);
-  return "<p>SeriaId: " + _id + "</p>\n   " + _crUpdatedDate(json) + "\n   " + _crItemLink(CHART_URL + '/' + _id);
+  return `<p>SeriaId: ${_id}</p>
+   ${_crUpdatedDate(json)}
+   ${_crItemLink(CHART_URL + '/' + _id)}`;
 };
 const _crZhConfig = option => {
   const {

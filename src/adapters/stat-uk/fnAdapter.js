@@ -4,9 +4,9 @@ import {
   joinBy
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
-import { crItemLink } from '../crFn';
+import { fCrItemLinkByCaption } from '../crFn';
 
-const _crItemLink = crItemLink.bind(null, 'ONS Dataset Metadata');
+const _crItemLink = fCrItemLinkByCaption('ONS Dataset Metadata');
 
 const MONTH_HM = {
   Jan: '01',

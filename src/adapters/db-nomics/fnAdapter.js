@@ -13,8 +13,8 @@ import {
   joinBy,
   ymdToUTC,
 } from '../AdapterFn';
-import {
-  crItemLink,
+import {  
+  fCrItemLinkByCaption,
   crItemConf
 } from '../crFn';
 import {
@@ -37,8 +37,7 @@ const _crId = ({
   seriaId
 }) =>  joinBy('/', dfProvider, dfCode, seriaId);
 
-const _crItemLink = crItemLink
-  .bind(null, 'DBnomics Chart');
+const _crItemLink = fCrItemLinkByCaption('DBnomics Chart');
 const _crUpdatedDate = json => {
   const _date = getIndexedAt(json).split('T')[0];
   return _date

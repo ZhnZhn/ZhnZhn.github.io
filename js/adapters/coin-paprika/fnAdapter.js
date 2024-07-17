@@ -8,23 +8,23 @@ exports.joinBy = _AdapterFn.joinBy;
 exports.toUpperCaseFirst = _AdapterFn.toUpperCaseFirst;
 exports.crError = _AdapterFn.crError;
 var _crFn = require("../crFn");
-const DF_ID = 'btc-bitcoin';
-const _getCoinId = _ref => {
-  let {
-    items = []
-  } = _ref;
-  return (0, _AdapterFn.getValue)(items[0], {
-    dfValue: DF_ID
-  });
-};
+const DF_ID = 'btc-bitcoin',
+  _crItemLink = (0, _crFn.fCrItemLinkByCaption)('Coinpaprika'),
+  _getCoinId = _ref => {
+    let {
+      items = []
+    } = _ref;
+    return (0, _AdapterFn.getValue)(items[0], {
+      dfValue: DF_ID
+    });
+  };
 const COIN_URL = 'https://coinpaprika.com/coin',
-  _crCoinUrl = option => COIN_URL + "/" + _getCoinId(option) + "/",
+  _crCoinUrl = option => `${COIN_URL}/${_getCoinId(option)}/`,
   _crInfo = option => ({
     name: option.title || '',
-    description: (0, _crFn.crItemLink)('Coinpaprika', _crCoinUrl(option))
+    description: _crItemLink(_crCoinUrl(option))
   });
-const getCoinId = _getCoinId;
-exports.getCoinId = getCoinId;
+const getCoinId = exports.getCoinId = _getCoinId;
 const crData = arr => {
   const data = [],
     dVolume = [],

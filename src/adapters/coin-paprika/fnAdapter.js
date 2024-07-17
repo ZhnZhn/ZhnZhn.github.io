@@ -10,18 +10,20 @@ import {
   ymdToUTC
 } from '../AdapterFn';
 import {
-  crItemLink
+  fCrItemLinkByCaption
 } from '../crFn';
 
-const DF_ID = 'btc-bitcoin';
-const _getCoinId = ({ items=[] }) =>
-  getValue(items[0], { dfValue: DF_ID });
+const DF_ID = 'btc-bitcoin'
+, _crItemLink = fCrItemLinkByCaption('Coinpaprika')
+, _getCoinId = ({
+  items=[]
+}) => getValue(items[0], { dfValue: DF_ID });
 
 const COIN_URL = 'https://coinpaprika.com/coin'
 , _crCoinUrl = option => `${COIN_URL}/${_getCoinId(option)}/`
 , _crInfo = option => ({
   name: option.title || '',
-  description: crItemLink('Coinpaprika', _crCoinUrl(option))
+  description: _crItemLink(_crCoinUrl(option))
 });
 
 export const getCoinId = _getCoinId

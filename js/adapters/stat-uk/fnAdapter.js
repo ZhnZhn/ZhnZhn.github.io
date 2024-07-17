@@ -2,15 +2,10 @@
 
 exports.__esModule = true;
 exports.crData = exports.addConfOption = void 0;
-
 var _AdapterFn = require("../AdapterFn");
-
 var _compareByFn = require("../compareByFn");
-
 var _crFn = require("../crFn");
-
-const _crItemLink = _crFn.crItemLink.bind(null, 'ONS Dataset Metadata');
-
+const _crItemLink = (0, _crFn.fCrItemLinkByCaption)('ONS Dataset Metadata');
 const MONTH_HM = {
   Jan: '01',
   Feb: '02',
@@ -31,36 +26,30 @@ const QUARTER_HM = {
   q3: "09",
   q4: "12"
 };
+const _getTimeObj = dimensions => (dimensions || {}).Time || {};
 
-const _getTimeObj = dimensions => (dimensions || {}).Time || {}; //Jan-20
-
-
+//Jan-20
 const _mmmYyToMls = str => {
   const _arr = str.split('-'),
-        _m = MONTH_HM[_arr[0].trim()],
-        _yStr = _arr[1].trim(),
-        _yPrefix = _yStr < '30' ? '20' : '19';
+    _m = MONTH_HM[_arr[0].trim()],
+    _yStr = _arr[1].trim(),
+    _yPrefix = _yStr < '30' ? '20' : '19';
+  return (0, _AdapterFn.ymdToUTC)(`${_yPrefix}${_yStr}-${_m}`);
+};
 
-  return (0, _AdapterFn.ymdToUTC)("" + _yPrefix + _yStr + "-" + _m);
-}; //2010-q1
-
-
+//2010-q1
 const _yyyyQqToMls = str => {
   const [_yyyy, _q = ''] = str && str.split('-') || [],
-        _mm = QUARTER_HM[_q.trim().toLowerCase()];
-
-  return _yyyy && _mm ? (0, _AdapterFn.ymdToUTC)(_yyyy + "-" + _mm) : NaN;
+    _mm = QUARTER_HM[_q.trim().toLowerCase()];
+  return _yyyy && _mm ? (0, _AdapterFn.ymdToUTC)(`${_yyyy}-${_mm}`) : NaN;
 };
-
 const _fCrToMls = observations => {
   const _item = observations[0] || {},
-        {
-    href
-  } = _getTimeObj(_item.dimensions);
-
+    {
+      href
+    } = _getTimeObj(_item.dimensions);
   return (href || '').indexOf('yyyy-qq') !== -1 ? _yyyyQqToMls : _mmmYyToMls;
 };
-
 const _crName = (_ref, _ref2) => {
   let {
     unit_of_measure
@@ -71,7 +60,6 @@ const _crName = (_ref, _ref2) => {
   } = _ref2;
   return (0, _AdapterFn.joinBy)(': ', subtitle, title, unit_of_measure);
 };
-
 const _crDescr = _ref3 => {
   let {
     links
@@ -81,42 +69,34 @@ const _crDescr = _ref3 => {
   } = (links || {}).dataset_metadata || {};
   return href ? _crItemLink(href) : '';
 };
-
 const _crInfo = (json, option) => ({
   name: _crName(json, option),
   description: _crDescr(json)
 });
-
 const crData = json => {
   const {
-    observations
-  } = json,
-        _toMsl = _fCrToMls(observations);
-
+      observations
+    } = json,
+    _toMsl = _fCrToMls(observations);
   return observations.reduce((_data, item) => {
     const {
-      dimensions,
-      observation
-    } = item,
-          {
-      id
-    } = _getTimeObj(dimensions),
-          _x = _toMsl(id),
-          _y = parseFloat(observation);
-
+        dimensions,
+        observation
+      } = item,
+      {
+        id
+      } = _getTimeObj(dimensions),
+      _x = _toMsl(id),
+      _y = parseFloat(observation);
     if ((0, _AdapterFn.isNumber)(_x) && (0, _AdapterFn.isNumber)(_y)) {
       _data.push([_x, _y]);
     }
-
     return _data;
   }, []).sort(_compareByFn.compareByDate);
 };
-
 exports.crData = crData;
-
 const addConfOption = (option, json) => ({
   info: _crInfo(json, option)
 });
-
 exports.addConfOption = addConfOption;
 //# sourceMappingURL=fnAdapter.js.map
