@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.fCrItemLinkByCaption = exports.crValueConf = exports.crItemLink = exports.crItemConf = exports.crId = exports.crHm = void 0;
+exports.fCrItemLinkByUrl = exports.fCrItemLinkByCaption = exports.crValueConf = exports.crItemConf = exports.crId = exports.crHm = void 0;
 var _mathFn = require("../math/mathFn");
 var _AdapterFn = require("./AdapterFn");
 var _getterPointFn = require("./getterPointFn");
@@ -17,10 +17,11 @@ const crHm = obj => assign(create(null), obj);
 exports.crHm = crHm;
 const crId = () => (0, _mathFn.crId)().toUpperCase();
 exports.crId = crId;
-const crItemLink = (caption, itemUrl, className) => `${_crPTag(className)}<a href="${itemUrl}">${caption}</a></p>`;
-exports.crItemLink = crItemLink;
-const fCrItemLinkByCaption = caption => (0, _AdapterFn.bindTo)(crItemLink, caption);
+const _crItemLink = (caption, itemUrl, className) => `${_crPTag(className)}<a href="${itemUrl}">${caption}</a></p>`;
+const fCrItemLinkByCaption = caption => (0, _AdapterFn.bindTo)(_crItemLink, caption);
 exports.fCrItemLinkByCaption = fCrItemLinkByCaption;
+const fCrItemLinkByUrl = (caption, url) => (0, _AdapterFn.bindTo)(_crItemLink, caption, url);
+exports.fCrItemLinkByUrl = fCrItemLinkByUrl;
 const ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
 const crItemConf = option => {
   const _itemConf = {};

@@ -16,13 +16,19 @@ export const crHm = obj => assign(create(null), obj)
 // Ndl toScatter, Stat-Json
 export const crId = () => _crId().toUpperCase()
 
-export const crItemLink = (
+const _crItemLink = (
   caption,
   itemUrl,
   className
 ) => `${_crPTag(className)}<a href="${itemUrl}">${caption}</a></p>`
 
-export const fCrItemLinkByCaption = caption => bindTo(crItemLink, caption)
+export const fCrItemLinkByCaption = (
+  caption
+) => bindTo(_crItemLink, caption)
+export const fCrItemLinkByUrl = (
+  caption,
+  url
+) => bindTo(_crItemLink, caption, url)
 
 const ITEM_CONF_PROP_NAMES = [
  'url',
