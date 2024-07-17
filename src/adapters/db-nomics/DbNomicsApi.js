@@ -1,7 +1,7 @@
 import {
   isArr,
   assign,
-  crError,
+  crErrorByMessage,
   getValue,
   getDocs,
   joinBy
@@ -10,8 +10,6 @@ import {
 const URL = 'https://api.db.nomics.world/v22/series'
 , TAIL = 'observations=1&format=json&metadata=false'
 , DF_ID = 'ECB/EXR/A.USD.EUR.SP00.A';
-
-const _crErr = crError.bind(null, '');
 
 const _crUrlImpl = (
   dfProvider,
@@ -167,7 +165,7 @@ const DbNomicsApi = {
   checkResponse(json){
     const { errors } = json || {};
     if (isArr(errors)) {
-      throw _crErr((errors[0] || {}).message);
+      throw crErrorByMessage((errors[0] || {}).message);
     }
 
     const docs = getDocs(json)
@@ -175,7 +173,7 @@ const DbNomicsApi = {
     if (!_ts
       || !isArr(_ts.period)
       || !isArr(_ts.value)) {
-      throw _crErr();
+      throw crErrorByMessage();
     }
   }
 };

@@ -2,20 +2,20 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toUpperCaseFirst = exports.roundBy = exports.isYNumber = exports.crZhConfig = exports.crTitle = exports.crTid = exports.crInfo = exports.crError = exports.crDsValuesTimes = exports.crConfOption = exports.crChartOption = void 0;
+exports.toUpperCaseFirst = exports.roundBy = exports.isYNumber = exports.crZhConfig = exports.crTitle = exports.crTid = exports.crInfo = exports.crErrorByMessage = exports.crDsValuesTimes = exports.crConfOption = exports.crChartOption = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isYNumber = _AdapterFn.isYNumber;
 exports.roundBy = _AdapterFn.roundBy;
 exports.toUpperCaseFirst = _AdapterFn.toUpperCaseFirst;
-exports.crError = _AdapterFn.crError;
+exports.crErrorByMessage = _AdapterFn.crErrorByMessage;
 var _crFn = require("../crFn");
 exports.crId = _crFn.crId;
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
 const _getObjectKeys = Object.keys,
-  _crTitle = country => "Statisctics " + country + ": All Items",
+  _crTitle = country => `Statisctics ${country}: All Items`,
   TITLE_NST = _crTitle('Norway'),
   TITLE_SWS = _crTitle('Sweden');
-const _crSearchTitle = country => "Statistics " + country + " Search";
+const _crSearchTitle = country => `Statistics ${country} Search`;
 const SEARCH_NST = ['https://www.ssb.no/en/sok?sok=', _crSearchTitle('Norway')],
   SEARCH_SWS = ['https://www.scb.se/en/finding-statistics/search/?query=', _crSearchTitle('Sweden')],
   SEARCH_SFL = ['https://statfin.stat.fi/PXWeb/pxweb/en/StatFin/', "Statistics Finland's PX-Web"],
@@ -25,7 +25,7 @@ const SEARCH_NST = ['https://www.ssb.no/en/sok?sok=', _crSearchTitle('Norway')],
     let {
       dfId
     } = _ref;
-    return ["https://www.pxweb.bfs.admin.ch/pxweb/en/" + dfId + "/-/" + dfId + ".px/", 'Statistics Swiss Stat-Tab'];
+    return [`https://www.pxweb.bfs.admin.ch/pxweb/en/${dfId}/-/${dfId}.px/`, 'Statistics Swiss Stat-Tab'];
   };
 const MAX_SOURCE_ID_LENGTH = 9;
 const _crSearchToken = label => {
@@ -37,7 +37,7 @@ const _crLink = function (_ref2, token) {
   if (token === void 0) {
     token = '';
   }
-  return "<a class=\"native-link\" href=\"" + url + token + "\">" + title + "</a>";
+  return `<a class="native-link" href="${url}${token}">${title}</a>`;
 };
 const _crSflSearchToken = _ref3 => {
   let {
@@ -46,7 +46,7 @@ const _crSflSearchToken = _ref3 => {
   const arr = ('' + dfId).split('/'),
     id = arr.pop(),
     prefix = arr.join('__');
-  return prefix && id ? "StatFin__" + prefix + "/" + id : '';
+  return prefix && id ? `StatFin__${prefix}/${id}` : '';
 };
 const _crSearchLink = (label, option) => {
   const _token = _crSearchToken(label);
@@ -79,7 +79,7 @@ const _crDescr = (_ref4, option) => {
       dfId
     } = option,
     _elSearchLink = _crSearchLink(label, option);
-  return dfId && source ? "TableId: " + dfId + "<BR/>" + source + ": " + _date + "<BR/>" + _elSearchLink : _elSearchLink;
+  return dfId && source ? `TableId: ${dfId}<BR/>${source}: ${_date}<BR/>${_elSearchLink}` : _elSearchLink;
 };
 const _crItemCaption = _ref5 => {
   let {
@@ -87,7 +87,7 @@ const _crItemCaption = _ref5 => {
     dfId = 'id'
   } = _ref5;
   const caption = items[0] ? items[0].caption : 'All Items';
-  return dfId + "_" + caption;
+  return `${dfId}_${caption}`;
 };
 const _crAreaMapSlice = _ref6 => {
   let {
@@ -134,7 +134,7 @@ const _crDataSource = _ref7 => {
     dataSource,
     dfId
   } = _ref7;
-  return dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? dataSource + " (" + dfId + ")" : dataSource;
+  return dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? `${dataSource} (${dfId})` : dataSource;
 };
 const crTitle = option => {
   switch (option.browserType) {

@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTokenInStr = exports.isStr = exports.isObj = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.crZhConfig = exports.crValueMoving = exports.crError = exports.crDfItemKey = exports.bindTo = exports.assign = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTokenInStr = exports.isObj = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.crZhConfig = exports.crValueMoving = exports.crErrorByMessage = exports.crError = exports.crDfItemKey = exports.bindTo = exports.assign = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -79,15 +79,14 @@ const crError = function (errCaption, message) {
   if (errCaption === void 0) {
     errCaption = '';
   }
-  if (message === void 0) {
-    message = DF_ERR_MESSAGE;
-  }
   return {
     errCaption,
-    message
+    message: (0, _isTypeFn.isStr)(message) ? message : DF_ERR_MESSAGE
   };
 };
 exports.crError = crError;
+const crErrorByMessage = message => crError('', message);
+exports.crErrorByMessage = crErrorByMessage;
 const crValueMoving = _ref2 => {
   let {
     bNowValue = (0, _big.default)('0.0'),

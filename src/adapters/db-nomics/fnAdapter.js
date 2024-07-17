@@ -2,7 +2,7 @@ export {
   isArr,
   assign,
   getValue,
-  crError,
+  crErrorByMessage,
   joinBy
 } from '../AdapterFn';
 
@@ -13,7 +13,7 @@ import {
   joinBy,
   ymdToUTC,
 } from '../AdapterFn';
-import {  
+import {
   fCrItemLinkByCaption,
   crItemConf
 } from '../crFn';

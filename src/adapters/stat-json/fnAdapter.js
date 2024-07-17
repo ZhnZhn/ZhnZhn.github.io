@@ -2,7 +2,7 @@ export {
   isYNumber,
   roundBy,
   toUpperCaseFirst,
-  crError,
+  crErrorByMessage,
 } from '../AdapterFn';
 export {
   crId

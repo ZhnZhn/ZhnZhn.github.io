@@ -37,7 +37,7 @@ import {
 } from '../math/mathFn';
 export {
   roundBy,
-  isInRange 
+  isInRange
 } from '../math/mathFn';
 
 export {
@@ -64,7 +64,8 @@ import {
   isArr,
   isNaN,
   isTypeNumber,
-  isNumber
+  isNumber,
+  isStr
 } from '../utils/isTypeFn';
 
 export const isNumberOrNull = v => isNumber(v) || v === null
@@ -104,11 +105,12 @@ export const toFloatOrEmpty = _fToFloatOr('')
 const DF_ERR_MESSAGE = 'No data available for request.'
 export const crError = (
   errCaption='',
-  message=DF_ERR_MESSAGE
+  message
 ) => ({
   errCaption,
-  message
+  message: isStr(message) ? message : DF_ERR_MESSAGE
 })
+export const crErrorByMessage = message => crError('', message)
 
 export const crValueMoving = ({
   bNowValue=Big('0.0'),

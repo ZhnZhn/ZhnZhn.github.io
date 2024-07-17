@@ -8,7 +8,6 @@ var _fnAdapter = require("./fnAdapter");
 var _crDfQuery = _interopRequireDefault(require("./crDfQuery"));
 var _crSdnQuery = _interopRequireDefault(require("./crSdnQuery"));
 var _crSirQuery = _interopRequireDefault(require("./crSirQuery"));
-const _crErr = _fnAdapter.crError.bind(null, '');
 const _hmCrQuery = {
   DF: _crDfQuery.default,
   [_LoadType.LT_SDN]: _crSdnQuery.default,
@@ -40,7 +39,7 @@ const fTableApi = function (rootUrl, crUrlPath) {
         error
       } = json || {};
       if (error) {
-        throw _crErr(error);
+        throw (0, _fnAdapter.crErrorByMessage)(error);
       }
     }
   };

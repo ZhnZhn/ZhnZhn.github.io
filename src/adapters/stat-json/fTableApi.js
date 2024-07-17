@@ -3,13 +3,11 @@ import {
   LT_SIR
 } from '../../constants/LoadType';
 
-import { crError } from './fnAdapter';
+import { crErrorByMessage } from './fnAdapter';
 
 import crDfQuery from './crDfQuery';
 import crSdnQuery from './crSdnQuery';
 import crSirQuery from './crSirQuery';
-
-const _crErr = crError.bind(null, '');
 
 const _hmCrQuery = {
   DF: crDfQuery,
@@ -45,7 +43,7 @@ const fTableApi = (
   checkResponse(json){
     const { error } = json || {};
     if (error) {
-      throw _crErr(error);
+      throw crErrorByMessage(error);
     }
   }
 });

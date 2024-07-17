@@ -1,12 +1,12 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isArr = exports.getValue = exports.getDocs = exports.crTitle = exports.crError = exports.crData = exports.crConfOption = exports.assign = void 0;
+exports.isArr = exports.getValue = exports.getDocs = exports.crTitle = exports.crErrorByMessage = exports.crData = exports.crConfOption = exports.assign = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isArr = _AdapterFn.isArr;
 exports.assign = _AdapterFn.assign;
 exports.getValue = _AdapterFn.getValue;
-exports.crError = _AdapterFn.crError;
+exports.crErrorByMessage = _AdapterFn.crErrorByMessage;
 exports.joinBy = _AdapterFn.joinBy;
 var _crFn = require("../crFn");
 var _fnSelector = require("./fnSelector");

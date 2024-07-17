@@ -4,7 +4,6 @@ exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 const API_URL = "https://data.ssb.no/api/v0/dataset";
-const _crErr = _AdapterFn.crError.bind(null, '');
 const DatasetApi = {
   getRequestUrl(option) {
     const {
@@ -17,7 +16,7 @@ const DatasetApi = {
       error
     } = json || {};
     if (error) {
-      throw _crErr(error);
+      throw (0, _AdapterFn.crErrorByMessage)(error);
     }
   }
 };

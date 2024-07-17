@@ -6,7 +6,6 @@ var _fnAdapter = require("./fnAdapter");
 const URL = 'https://api.db.nomics.world/v22/series',
   TAIL = 'observations=1&format=json&metadata=false',
   DF_ID = 'ECB/EXR/A.USD.EUR.SP00.A';
-const _crErr = _fnAdapter.crError.bind(null, '');
 const _crUrlImpl = (dfProvider, dfCode, seriaId) => {
   const _seriesId = dfProvider && seriaId ? (0, _fnAdapter.joinBy)('/', dfProvider, dfCode, seriaId) : `${DF_ID}`;
   return `${URL}?series_ids=${_seriesId}&${TAIL}`;
@@ -133,12 +132,12 @@ const DbNomicsApi = {
       errors
     } = json || {};
     if ((0, _fnAdapter.isArr)(errors)) {
-      throw _crErr((errors[0] || {}).message);
+      throw (0, _fnAdapter.crErrorByMessage)((errors[0] || {}).message);
     }
     const docs = (0, _fnAdapter.getDocs)(json),
       _ts = (0, _fnAdapter.isArr)(docs) ? docs[0] : '';
     if (!_ts || !(0, _fnAdapter.isArr)(_ts.period) || !(0, _fnAdapter.isArr)(_ts.value)) {
-      throw _crErr();
+      throw (0, _fnAdapter.crErrorByMessage)();
     }
   }
 };

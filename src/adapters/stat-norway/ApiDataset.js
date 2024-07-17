@@ -1,7 +1,6 @@
-import { crError } from '../AdapterFn';
+import { crErrorByMessage } from '../AdapterFn';
 
 const API_URL = "https://data.ssb.no/api/v0/dataset";
-const _crErr = crError.bind(null, '');
 
 const DatasetApi = {
   getRequestUrl( option ){
@@ -12,7 +11,7 @@ const DatasetApi = {
   checkResponse(json){
     const { error } = json || {};
     if (error) {
-      throw _crErr(error);
+      throw crErrorByMessage(error);
     }
   }
 };
