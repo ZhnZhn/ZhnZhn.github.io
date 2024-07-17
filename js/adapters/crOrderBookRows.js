@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _big = _interopRequireDefault(require("big.js"));
+var _AdapterFn = require("./AdapterFn");
 var _toTableFn = require("./toTableFn");
 const _crBgStyleProps = isLeft => isLeft ? ['to left', '#184416'] : ['to right', '#6c3632'];
 const _crItemHeader = (name, pn, color) => ({
@@ -56,13 +57,13 @@ const crOrderBookRows = (json, limit) => {
       bids,
       asks
     } = json,
-    _isOrderNumber = typeof asks[0][2] === 'number',
+    _isOrderNumber = (0, _AdapterFn.isNumber)(asks[0][2]),
     _len = limit || bids.length,
     rows = [],
     _totalBids = _calcTotal(bids, 1, _len),
     _totalAsks = _calcTotal(asks, 1, _len),
     _onePerc = _totalBids.add(_totalAsks).div(100),
-    _crQtyStyle = _crBgStyle.bind(null, _onePerc),
+    _crQtyStyle = (0, _AdapterFn.bindTo)(_crBgStyle, _onePerc),
     _crRow = _isOrderNumber ? _crRowPnq : _crRowPq;
   let i = 0,
     bidItem,

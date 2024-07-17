@@ -1,4 +1,5 @@
 import Big from 'big.js';
+import { isNumber, bindTo } from './AdapterFn';
 import { crTableRows } from './toTableFn';
 
 const _crBgStyleProps = isLeft => isLeft
@@ -66,13 +67,13 @@ const _crRowPnq = (bidItem, askItem, _crQtyStyle) => {
 
 const crOrderBookRows = (json, limit) => {
   const { bids, asks } = json
-  , _isOrderNumber = typeof asks[0][2] === 'number'
+  , _isOrderNumber = isNumber(asks[0][2])
   , _len = limit || bids.length
   , rows = []
   , _totalBids = _calcTotal(bids, 1, _len)
   , _totalAsks = _calcTotal(asks, 1, _len)
   , _onePerc = _totalBids.add(_totalAsks).div(100)
-  , _crQtyStyle = _crBgStyle.bind(null, _onePerc)
+  , _crQtyStyle = bindTo(_crBgStyle, _onePerc)
   , _crRow = _isOrderNumber ? _crRowPnq : _crRowPq;
 
   let i=0, bidItem, askItem;
