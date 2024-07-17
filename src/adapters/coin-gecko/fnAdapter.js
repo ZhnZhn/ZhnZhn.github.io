@@ -1,5 +1,4 @@
 export { getYmdhmUTC } from '../AdapterFn';
-export { crItemLink } from '../crFn';
 
 import { getValue } from '../AdapterFn';
 

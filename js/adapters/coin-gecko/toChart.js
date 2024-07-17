@@ -5,8 +5,8 @@ exports.__esModule = true;
 exports.default = void 0;
 var _stockBuilderFn = require("../../charts/stockBuilderFn");
 var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
-var _fnAdapter = require("./fnAdapter");
-const _crDescription = _fnAdapter.crItemLink.bind(null, 'Coin Gecko');
+var _crFn = require("../crFn");
+const _crDescription = (0, _crFn.fCrItemLinkByCaption)('Coin Gecko');
 const _crInfo = _ref => {
   let {
     title,

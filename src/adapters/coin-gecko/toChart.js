@@ -1,10 +1,8 @@
 import { fAddMiniVolumes } from '../../charts/stockBuilderFn';
 import crAdapterType1 from '../crAdapterType1';
-import { crItemLink } from './fnAdapter';
+import { fCrItemLinkByCaption } from '../crFn';
 
-const _crDescription = crItemLink
-  .bind(null, 'Coin Gecko');
-
+const _crDescription = fCrItemLinkByCaption('Coin Gecko');
 const _crInfo = ({ title, _nativeUrl }) => ({
   name: title,
   description: _crDescription(_nativeUrl)
