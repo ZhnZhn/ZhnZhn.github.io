@@ -1,6 +1,7 @@
-import { 
+import {
   isCategory,
-  isTreeMap
+  isTreeMap,
+  isBarTreeMap
 } from './CategoryFn';
 import toOrderBookDf from './toOrderBookDf';
 
@@ -33,13 +34,29 @@ export const fGetRouteTreeMap = (
   option
 ) => isTreeMap(option.seriaType)
   ? _isFn(toTreeMapAdapter)
-     ? toTreeMapAdapter(option)
-     : toTreeMapAdapter
+      ? toTreeMapAdapter(option)
+      : toTreeMapAdapter
   : _getCategoryAdapter(
       toCategoryAdapter,
       toLineAdapter,
       option
    )
+
+export const fGetRouteBarTreeMap = (
+  toBarTreeMapAdapter,
+  toTreeMapAdapter,
+  toCategoryAdapter,
+  toLineAdapter
+) => {
+  const _toRouteTreeMap = fGetRouteTreeMap(
+    toTreeMapAdapter,
+    toCategoryAdapter,
+    toLineAdapter
+  );
+  return option => isBarTreeMap(option.seriaType)
+    ? toBarTreeMapAdapter
+    : _toRouteTreeMap(option);
+}
 
 const _fGetRouteDf = (
   rAdapter
