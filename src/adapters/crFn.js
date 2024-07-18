@@ -38,21 +38,19 @@ const ITEM_CONF_PROP_NAMES = [
  'itemCaption',
  'seriaType',
  'items'
-]
+];
 
-export const crItemConf = (option) => {
-  const _itemConf = {};
-  let _value;
-  ITEM_CONF_PROP_NAMES.forEach(k => {
-    _value = option[k]
-    if (_value != null) {
-      _itemConf[k] = _isArr(_value)
-         ? _value.map(obj => ({...obj}))
-         : _value
-    }
-   })
-   return _itemConf;
-}
+export const crItemConf = (
+  option
+) => ITEM_CONF_PROP_NAMES.reduce((itemConf, pn) => {
+  const _value = option[pn];
+  if (_value != null) {
+    itemConf[pn] = _isArr(_value)
+      ? _value.map(obj => ({...obj}))
+      : _value
+  }
+  return itemConf;
+}, crHm());
 
 export const crValueConf = data => {
   const _p = data[data.length-1];

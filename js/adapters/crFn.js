@@ -23,19 +23,15 @@ exports.fCrItemLinkByCaption = fCrItemLinkByCaption;
 const fCrItemLinkByUrl = (caption, url) => (0, _AdapterFn.bindTo)(_crItemLink, caption, url);
 exports.fCrItemLinkByUrl = fCrItemLinkByUrl;
 const ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
-const crItemConf = option => {
-  const _itemConf = {};
-  let _value;
-  ITEM_CONF_PROP_NAMES.forEach(k => {
-    _value = option[k];
-    if (_value != null) {
-      _itemConf[k] = _isArr(_value) ? _value.map(obj => ({
-        ...obj
-      })) : _value;
-    }
-  });
-  return _itemConf;
-};
+const crItemConf = option => ITEM_CONF_PROP_NAMES.reduce((itemConf, pn) => {
+  const _value = option[pn];
+  if (_value != null) {
+    itemConf[pn] = _isArr(_value) ? _value.map(obj => ({
+      ...obj
+    })) : _value;
+  }
+  return itemConf;
+}, crHm());
 exports.crItemConf = crItemConf;
 const crValueConf = data => {
   const _p = data[data.length - 1];
