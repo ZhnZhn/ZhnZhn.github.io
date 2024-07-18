@@ -5,6 +5,7 @@ import {
   CHT_TREE_MAP_CLUSTER,
   CHT_TREE_MAP_2,
   CHT_TREE_MAP_2_CLUSTER,
+  CHT_BAR_TREE_MAP,
 
   CHT_BAR_CLUSTER,
   CHT_BAR_SET,
@@ -20,6 +21,7 @@ const _isArr = Array.isArray
   CHT_TREE_MAP_2_CLUSTER
 ];
 export const isTreeMap = isInArrStr(TREE_MAP_CHART_TYPES)
+export const isBarTreeMap = seriaType => seriaType === CHT_BAR_TREE_MAP
 
 const COLUMN_BAR_CATEGORY_CHART_TYPES = [
   CHT_BAR_CLUSTER,

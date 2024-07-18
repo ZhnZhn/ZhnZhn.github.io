@@ -2,13 +2,15 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.isTreeMap = exports.isColumnOrBarCategory = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.getCategories = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
+exports.isTreeMap = exports.isColumnOrBarCategory = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
 var _domSanitize = _interopRequireDefault(require("../utils/domSanitize"));
 var _arrFn = require("../utils/arrFn");
 var _ChartType = require("../constants/ChartType");
 const _isArr = Array.isArray,
   TREE_MAP_CHART_TYPES = [_ChartType.CHT_TREE_MAP, _ChartType.CHT_TREE_MAP_CLUSTER, _ChartType.CHT_TREE_MAP_2, _ChartType.CHT_TREE_MAP_2_CLUSTER];
 const isTreeMap = exports.isTreeMap = (0, _arrFn.isInArrStr)(TREE_MAP_CHART_TYPES);
+const isBarTreeMap = seriaType => seriaType === _ChartType.CHT_BAR_TREE_MAP;
+exports.isBarTreeMap = isBarTreeMap;
 const COLUMN_BAR_CATEGORY_CHART_TYPES = [_ChartType.CHT_BAR_CLUSTER, _ChartType.CHT_BAR_SET, _ChartType.CHT_COLUMN_SET, _ChartType.CHT_COLUMN_CLUSTER];
 const isColumnOrBarCategory = exports.isColumnOrBarCategory = (0, _arrFn.isInArrStr)(COLUMN_BAR_CATEGORY_CHART_TYPES);
 const isCategory = seriaType => isColumnOrBarCategory(seriaType) || isTreeMap(seriaType);
