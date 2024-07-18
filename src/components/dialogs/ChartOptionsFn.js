@@ -18,6 +18,7 @@ import {
   CHT_TREE_MAP_CLUSTER,
   CHT_TREE_MAP_2,
   CHT_TREE_MAP_2_CLUSTER,
+  CHT_BAR_TREE_MAP,
 
   CHT_MAP,
   CHT_DOT_SET
@@ -34,7 +35,8 @@ const _isArr = Array.isArray
     CHT_BAR_SET, CHT_BAR_CLUSTER, CHT_BAR_WITH_LABELS,
     CHT_DOT_SET,
     CHT_TREE_MAP, CHT_TREE_MAP_CLUSTER,
-    CHT_TREE_MAP_2, CHT_TREE_MAP_2_CLUSTER
+    CHT_TREE_MAP_2, CHT_TREE_MAP_2_CLUSTER,
+    CHT_BAR_TREE_MAP
 ]
 
 , SPLINE_CONFIG = ['Spline', CHT_SPLINE]
@@ -162,6 +164,10 @@ const _crTreeMapItem = (
   caption,
   id
 ) => _crItem([`TreeMap: By ${caption}`, CHT_TREE_MAP, caption, void 0, id]);
+const _crBarTreeMapItem = (
+  caption,
+  id
+) => _crItem([`Bar: By ${caption}`, CHT_BAR_TREE_MAP, caption, void 0, id]);
 
 const _crT3A = ([oneCaption]) => [
   ..._crT3([oneCaption]),
@@ -171,6 +177,11 @@ const _crT3A = ([oneCaption]) => [
 
 const _crT3AB = ([oneCaption, twoCaption]) => [
   ..._crT3([oneCaption]),
+  _crTreeMapItem(twoCaption, TYPE_T3AB)
+];
+const _crT3AB2 = ([oneCaption, twoCaption]) => [
+  ..._crT3([oneCaption]),
+  _crBarTreeMapItem(twoCaption, TYPE_T3AB),
   _crTreeMapItem(twoCaption, TYPE_T3AB)
 ];
 
@@ -197,6 +208,7 @@ const _r = {
   t3a2: _crT3A2,
   t3b: _crT3B,
   [TYPE_T3AB]: _crT3AB,
+  t3ab2: _crT3AB2,
   t3ac: _crT3AC,
   t3c: _crT3C,
   t3c2: _crT3C2,
