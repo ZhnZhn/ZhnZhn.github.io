@@ -1,6 +1,7 @@
 import { checkResponseData } from '../ApiFn';
 import {
   isTreeMap,
+  isBarTreeMap,
   isCategory
 } from '../CategoryFn';
 
@@ -29,7 +30,10 @@ const _crCategoryUrl = (
   return `${_crApiUrl(option)}/by-geo-${time}.json`;
 }
 
-const _crTreeMapUrl = (option) => {
+const _crTreeMapUrl = (
+  option,
+  _isTreeMap
+) => {
   const {
     items,
     time,
@@ -38,9 +42,17 @@ const _crTreeMapUrl = (option) => {
   , geo = items[0].v;
 
   if (time !== '2023') {
+    const _typeOfChartToken = _isTreeMap
+      ? 'TreeMap'
+      : 'Bar by metric';
     throw {
-      message: "TreeMap only available for 2023"
+      message: `${_typeOfChartToken} only available for 2023`
     };
+  }
+
+  if (!_isTreeMap) {
+    option.subtitle = option.title
+    option.title = option.dfTmTitle
   }
 
   return `${DATA_URL}/${dfTmToken}-tm/${geo}-${time}.json`;
@@ -48,9 +60,11 @@ const _crTreeMapUrl = (option) => {
 
 const IrenaApi = {
   getRequestUrl(option){
-    return isTreeMap(option.seriaType)
-      ? _crTreeMapUrl(option)
-      :  isCategory(option.seriaType)
+    const { seriaType } = option
+    , _isTreeMap = isTreeMap(seriaType);
+    return _isTreeMap || isBarTreeMap(seriaType)
+      ? _crTreeMapUrl(option, _isTreeMap)
+      :  isCategory(seriaType)
           ? _crCategoryUrl(option)
           : _crLineUrl(option);
   },
