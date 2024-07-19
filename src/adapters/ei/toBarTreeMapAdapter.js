@@ -7,10 +7,10 @@ const crData = (json, option) => {
   return sortDescCategory(
     json.data.map(item => {
       const point = crCategoryPoint(
-         item.value,
-         item.label
+         item[1],
+         item[0]
       );
-      point.color = crItemColor(item.label)
+      point.color = crItemColor(item[0])
       return point;
     }))
 };

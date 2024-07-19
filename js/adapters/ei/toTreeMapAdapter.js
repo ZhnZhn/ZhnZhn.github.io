@@ -4,11 +4,14 @@ exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _fToTreeMapAdapter = require("../fToTreeMapAdapter");
-const _getDataTotalTuple = json => ((json || {}).data || []).reduce((tuple, item) => {
-  const value = item.value;
+const _getDataTotalTuple = json => json.data.reduce((tuple, item) => {
+  const [label, value] = item || [];
   if ((0, _AdapterFn.isNumber)(value)) {
-    item.color = (0, _fToTreeMapAdapter.crItemColor)(item.label);
-    tuple[0].push(item);
+    tuple[0].push({
+      label,
+      value,
+      color: (0, _fToTreeMapAdapter.crItemColor)(label)
+    });
     tuple[1] += value;
   }
   return tuple;

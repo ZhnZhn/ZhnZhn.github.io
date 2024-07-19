@@ -7,12 +7,17 @@ import {
 
 const _getDataTotalTuple = (
   json
-) => ((json || {}).data || [])
-  .reduce((tuple, item) => {
-     const value = item.value;
+) => json.data.reduce((tuple, item) => {
+     const [
+       label,
+       value
+     ] = item || [];
      if (isNumber(value)) {
-       item.color = crItemColor(item.label)
-       tuple[0].push(item)
+       tuple[0].push({
+         label,
+         value,
+         color: crItemColor(label)}
+       )
        tuple[1] += value
      }
      return tuple;
