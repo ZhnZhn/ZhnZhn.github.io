@@ -1,4 +1,5 @@
 import { checkResponseData } from '../ApiFn';
+import { isInRange } from '../AdapterFn';
 import {
   isTreeMap,
   isBarTreeMap,
@@ -41,12 +42,12 @@ const _crTreeMapUrl = (
   } = option
   , geo = items[0].v;
 
-  if (time !== '2023') {
+  if (!isInRange(parseInt(time), 2018, 2024)) {
     const _typeOfChartToken = _isTreeMap
       ? 'TreeMap'
       : 'Bar by metric';
     throw {
-      message: `${_typeOfChartToken} only available for 2023`
+      message: `${_typeOfChartToken} only available for 2019-2023`
     };
   }
 
