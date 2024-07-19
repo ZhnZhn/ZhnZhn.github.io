@@ -1,1 +1,1 @@
-{"geo":"United States of America","code":"usa","type":"Wind Offshore","value":"Capacity in MW","fromYear":"2000","data":[2377,3864,4417,5995,6456,8706,11329,16515,24651,34296,39350,45795,59453,60198,64430,72767,81473,87801,94637,103806,118634,132978,141633,147979]}
+{"geo":"United States of America","code":"usa","type":"Wind Onshore","value":"Capacity in MW","fromYear":"2000","data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.02,0.02,29.3,29.3,29.3,29.3,29.3,41.3,41.3,41.3]}

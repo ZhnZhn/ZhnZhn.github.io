@@ -1,1 +1,1 @@
-{"geo":"United Kingdom of Great Britain and Northern Ireland","code":"gbr","type":"Wind Onshore","value":"Capacity in MW","fromYear":"2000","data":[4,4,4,64,124,214,304,394,596.2,951,1341,1838,2995,3696,4501,5093,5293,6988,8181,9888,10383,11256,13928,14746]}
+{"geo":"United Kingdom of Great Britain and Northern Ireland","code":"gbr","type":"Wind Offshore","value":"Capacity in MW","fromYear":"2000","data":[431,490,531,678,809,1351,1651,2083,2850,3468,4080,4758,6035,7586,8573,9212,10833,12597,13425,13999,14075,14493,14835,15470]}

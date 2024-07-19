@@ -1,1 +1,1 @@
-{"geo":"Netherlands (Kingdom of the)","code":"nld","type":"Wind Offshore","value":"Capacity in MW","fromYear":"2000","data":[447,486,672,905,1075,1224,1453,1641,1921,1994,2009,2088,2205,2485,2637,3034,3300,3245,3436,3527,4188,5214,6185,6771]}
+{"geo":"Netherlands (Kingdom of the)","code":"nld","type":"Wind Onshore","value":"Capacity in MW","fromYear":"2000","data":[0,0,0,0,0,0,108,108,228,228,228,228,228,228,228,357,957,957,957,957,2460,2460,2570,3978]}
