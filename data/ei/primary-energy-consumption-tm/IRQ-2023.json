@@ -1,1 +1,1 @@
-{"geo":"Iraq","code":"IRQ","data":[{"label":"Oil","value":1.803},{"label":"Natural gas","value":0.6733},{"label":"Hydroelectricity","value":0.03168},{"label":"Renewables","value":0.003949}]}
+{"geo":"Iraq","code":"IRQ","data":[["Oil",1.803],["Natural gas",0.6733],["Hydroelectricity",0.03168],["Renewables",0.003949]]}

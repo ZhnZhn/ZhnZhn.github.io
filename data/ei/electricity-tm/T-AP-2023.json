@@ -1,1 +1,1 @@
-{"geo":"Total Asia Pacific","code":"T-AP","data":[{"label":"Coal","value":8612},{"label":"Renewables","value":2354},{"label":"Hydroelectricity","value":1788},{"label":"Natural gas","value":1502},{"label":"Nuclear energy","value":781.1},{"label":"Other","value":131.8},{"label":"Oil","value":113.2}]}
+{"geo":"Total Asia Pacific","code":"T-AP","data":[["Coal",8612],["Renewables",2354],["Hydroelectricity",1788],["Natural gas",1502],["Nuclear energy",781.1],["Other",131.8],["Oil",113.2]]}

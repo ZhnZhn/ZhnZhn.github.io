@@ -1,1 +1,1 @@
-{"geo":"Colombia","code":"COL","data":[{"label":"Oil","value":0.9771},{"label":"Hydroelectricity","value":0.5595},{"label":"Natural gas","value":0.47},{"label":"Coal","value":0.1561},{"label":"Renewables","value":0.09263}]}
+{"geo":"Colombia","code":"COL","data":[["Oil",0.9771],["Hydroelectricity",0.5595],["Natural gas",0.47],["Coal",0.1561],["Renewables",0.09263]]}

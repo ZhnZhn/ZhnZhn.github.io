@@ -1,1 +1,1 @@
-{"geo":"Spain","code":"ESP","data":[{"label":"Renewables","value":116.5},{"label":"Natural gas","value":61.69},{"label":"Nuclear energy","value":56.8},{"label":"Hydroelectricity","value":25.48},{"label":"Oil","value":10.72},{"label":"Other","value":6.508},{"label":"Coal","value":4.347}]}
+{"geo":"Spain","code":"ESP","data":[["Renewables",116.5],["Natural gas",61.69],["Nuclear energy",56.8],["Hydroelectricity",25.48],["Oil",10.72],["Other",6.508],["Coal",4.347]]}

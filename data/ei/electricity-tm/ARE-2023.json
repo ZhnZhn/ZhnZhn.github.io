@@ -1,1 +1,1 @@
-{"geo":"United Arab Emirates","code":"ARE","data":[{"label":"Natural gas","value":118.9},{"label":"Nuclear energy","value":32.27},{"label":"Renewables","value":13.84},{"label":"Oil","value":0.00277}]}
+{"geo":"United Arab Emirates","code":"ARE","data":[["Natural gas",118.9],["Nuclear energy",32.27],["Renewables",13.84],["Oil",0.00277]]}

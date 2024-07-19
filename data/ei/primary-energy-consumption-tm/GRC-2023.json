@@ -1,1 +1,1 @@
-{"geo":"Greece","code":"GRC","data":[{"label":"Oil","value":0.6195},{"label":"Renewables","value":0.2009},{"label":"Natural gas","value":0.1938},{"label":"Coal","value":0.0476},{"label":"Hydroelectricity","value":0.03691}]}
+{"geo":"Greece","code":"GRC","data":[["Oil",0.6195],["Renewables",0.2009],["Natural gas",0.1938],["Coal",0.0476],["Hydroelectricity",0.03691]]}

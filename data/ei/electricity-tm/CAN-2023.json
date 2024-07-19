@@ -1,1 +1,1 @@
-{"geo":"Canada","code":"CAN","data":[{"label":"Hydroelectricity","value":364.2},{"label":"Natural gas","value":89.85},{"label":"Nuclear energy","value":89.02},{"label":"Renewables","value":56.96},{"label":"Coal","value":23.57},{"label":"Oil","value":4.832},{"label":"Other","value":4.748}]}
+{"geo":"Canada","code":"CAN","data":[["Hydroelectricity",364.2],["Natural gas",89.85],["Nuclear energy",89.02],["Renewables",56.96],["Coal",23.57],["Oil",4.832],["Other",4.748]]}

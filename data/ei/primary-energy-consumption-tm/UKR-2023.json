@@ -1,1 +1,1 @@
-{"geo":"Ukraine","code":"UKR","data":[{"label":"Natural gas","value":0.6746},{"label":"Coal","value":0.4873},{"label":"Nuclear energy","value":0.4703},{"label":"Oil","value":0.3926},{"label":"Hydroelectricity","value":0.1189},{"label":"Renewables","value":0.07622}]}
+{"geo":"Ukraine","code":"UKR","data":[["Natural gas",0.6746],["Coal",0.4873],["Nuclear energy",0.4703],["Oil",0.3926],["Hydroelectricity",0.1189],["Renewables",0.07622]]}

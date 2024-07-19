@@ -1,1 +1,1 @@
-{"geo":"Qatar","code":"QAT","data":[{"label":"Natural gas","value":1.591},{"label":"Oil","value":0.6127},{"label":"Renewables","value":0.01389},{"label":"Coal","value":0.000472}]}
+{"geo":"Qatar","code":"QAT","data":[["Natural gas",1.591],["Oil",0.6127],["Renewables",0.01389],["Coal",0.000472]]}

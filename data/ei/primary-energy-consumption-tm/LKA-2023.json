@@ -1,1 +1,1 @@
-{"geo":"Sri Lanka","code":"LKA","data":[{"label":"Oil","value":0.2182},{"label":"Coal","value":0.0593},{"label":"Hydroelectricity","value":0.0548},{"label":"Renewables","value":0.02518}]}
+{"geo":"Sri Lanka","code":"LKA","data":[["Oil",0.2182],["Coal",0.0593],["Hydroelectricity",0.0548],["Renewables",0.02518]]}

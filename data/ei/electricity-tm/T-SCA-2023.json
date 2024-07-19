@@ -1,1 +1,1 @@
-{"geo":"Total S. & Cent. America","code":"T-SCA","data":[{"label":"Hydroelectricity","value":749.9},{"label":"Renewables","value":299.7},{"label":"Natural gas","value":241.3},{"label":"Oil","value":93.24},{"label":"Coal","value":53.72},{"label":"Nuclear energy","value":23.47},{"label":"Other","value":3.183}]}
+{"geo":"Total S. & Cent. America","code":"T-SCA","data":[["Hydroelectricity",749.9],["Renewables",299.7],["Natural gas",241.3],["Oil",93.24],["Coal",53.72],["Nuclear energy",23.47],["Other",3.183]]}

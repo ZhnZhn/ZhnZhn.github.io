@@ -1,1 +1,1 @@
-{"geo":"Russian Federation","code":"RUS","data":[{"label":"Natural gas","value":528.4},{"label":"Nuclear energy","value":217.4},{"label":"Coal","value":211.1},{"label":"Hydroelectricity","value":200.9},{"label":"Renewables","value":8.232},{"label":"Oil","value":6.82},{"label":"Other","value":5.381}]}
+{"geo":"Russian Federation","code":"RUS","data":[["Natural gas",528.4],["Nuclear energy",217.4],["Coal",211.1],["Hydroelectricity",200.9],["Renewables",8.232],["Oil",6.82],["Other",5.381]]}

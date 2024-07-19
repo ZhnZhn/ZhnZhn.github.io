@@ -1,1 +1,1 @@
-{"geo":"France","code":"FRA","data":[{"label":"Nuclear energy","value":3.035},{"label":"Oil","value":2.764},{"label":"Natural gas","value":1.219},{"label":"Renewables","value":0.9485},{"label":"Hydroelectricity","value":0.5192},{"label":"Coal","value":0.1778}]}
+{"geo":"France","code":"FRA","data":[["Nuclear energy",3.035],["Oil",2.764],["Natural gas",1.219],["Renewables",0.9485],["Hydroelectricity",0.5192],["Coal",0.1778]]}

@@ -1,1 +1,1 @@
-{"geo":"Switzerland","code":"CHE","data":[{"label":"Oil","value":0.3866},{"label":"Hydroelectricity","value":0.3458},{"label":"Nuclear energy","value":0.2094},{"label":"Natural gas","value":0.09879},{"label":"Renewables","value":0.0883},{"label":"Coal","value":0.00385}]}
+{"geo":"Switzerland","code":"CHE","data":[["Oil",0.3866],["Hydroelectricity",0.3458],["Nuclear energy",0.2094],["Natural gas",0.09879],["Renewables",0.0883],["Coal",0.00385]]}

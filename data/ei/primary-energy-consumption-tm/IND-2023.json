@@ -1,1 +1,1 @@
-{"geo":"India","code":"IND","data":[{"label":"Coal","value":21.98},{"label":"Oil","value":10.57},{"label":"Renewables","value":2.38},{"label":"Natural gas","value":2.254},{"label":"Hydroelectricity","value":1.395},{"label":"Nuclear energy","value":0.4326}]}
+{"geo":"India","code":"IND","data":[["Coal",21.98],["Oil",10.57],["Renewables",2.38],["Natural gas",2.254],["Hydroelectricity",1.395],["Nuclear energy",0.4326]]}

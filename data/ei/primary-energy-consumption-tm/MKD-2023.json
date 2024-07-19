@@ -1,1 +1,1 @@
-{"geo":"North Macedonia","code":"MKD","data":[{"label":"Oil","value":0.05063},{"label":"Coal","value":0.03709},{"label":"Hydroelectricity","value":0.01518},{"label":"Natural gas","value":0.0127},{"label":"Renewables","value":0.005108}]}
+{"geo":"North Macedonia","code":"MKD","data":[["Oil",0.05063],["Coal",0.03709],["Hydroelectricity",0.01518],["Natural gas",0.0127],["Renewables",0.005108]]}

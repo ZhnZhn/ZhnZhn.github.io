@@ -1,1 +1,1 @@
-{"geo":"Germany","code":"DEU","data":[{"label":"Renewables","value":252.8},{"label":"Coal","value":127.8},{"label":"Natural gas","value":77.73},{"label":"Other","value":23.55},{"label":"Hydroelectricity","value":19.64},{"label":"Nuclear energy","value":7.216},{"label":"Oil","value":4.899}]}
+{"geo":"Germany","code":"DEU","data":[["Renewables",252.8],["Coal",127.8],["Natural gas",77.73],["Other",23.55],["Hydroelectricity",19.64],["Nuclear energy",7.216],["Oil",4.899]]}

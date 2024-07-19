@@ -1,1 +1,1 @@
-{"geo":"Denmark","code":"DNK","data":[{"label":"Oil","value":0.3153},{"label":"Renewables","value":0.3006},{"label":"Natural gas","value":0.05869},{"label":"Coal","value":0.02913},{"label":"Hydroelectricity","value":0.000184}]}
+{"geo":"Denmark","code":"DNK","data":[["Oil",0.3153],["Renewables",0.3006],["Natural gas",0.05869],["Coal",0.02913],["Hydroelectricity",0.000184]]}

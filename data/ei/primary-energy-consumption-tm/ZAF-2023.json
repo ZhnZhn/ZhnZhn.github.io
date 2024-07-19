@@ -1,1 +1,1 @@
-{"geo":"South Africa","code":"ZAF","data":[{"label":"Coal","value":3.325},{"label":"Oil","value":1.086},{"label":"Renewables","value":0.1754},{"label":"Natural gas","value":0.1709},{"label":"Nuclear energy","value":0.07989},{"label":"Hydroelectricity","value":0.01576}]}
+{"geo":"South Africa","code":"ZAF","data":[["Coal",3.325],["Oil",1.086],["Renewables",0.1754],["Natural gas",0.1709],["Nuclear energy",0.07989],["Hydroelectricity",0.01576]]}

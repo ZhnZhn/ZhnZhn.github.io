@@ -1,1 +1,1 @@
-{"geo":"Total Middle Africa","code":"T-MAFR","data":[{"label":"Oil","value":0.6063},{"label":"Hydroelectricity","value":0.3152},{"label":"Natural gas","value":0.1771},{"label":"Coal","value":0.02325},{"label":"Renewables","value":0.006989}]}
+{"geo":"Total Middle Africa","code":"T-MAFR","data":[["Oil",0.6063],["Hydroelectricity",0.3152],["Natural gas",0.1771],["Coal",0.02325],["Renewables",0.006989]]}

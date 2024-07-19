@@ -1,1 +1,1 @@
-{"geo":"Iran","code":"IRN","data":[{"label":"Natural gas","value":8.84},{"label":"Oil","value":3.502},{"label":"Hydroelectricity","value":0.2118},{"label":"Coal","value":0.07881},{"label":"Nuclear energy","value":0.05954},{"label":"Renewables","value":0.01989}]}
+{"geo":"Iran","code":"IRN","data":[["Natural gas",8.84],["Oil",3.502],["Hydroelectricity",0.2118],["Coal",0.07881],["Nuclear energy",0.05954],["Renewables",0.01989]]}

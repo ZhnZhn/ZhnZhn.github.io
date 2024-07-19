@@ -1,1 +1,1 @@
-{"geo":"Brazil","code":"BRA","data":[{"label":"Oil","value":5.108},{"label":"Hydroelectricity","value":4.009},{"label":"Renewables","value":2.974},{"label":"Natural gas","value":1.08},{"label":"Coal","value":0.5727},{"label":"Nuclear energy","value":0.1302}]}
+{"geo":"Brazil","code":"BRA","data":[["Oil",5.108],["Hydroelectricity",4.009],["Renewables",2.974],["Natural gas",1.08],["Coal",0.5727],["Nuclear energy",0.1302]]}

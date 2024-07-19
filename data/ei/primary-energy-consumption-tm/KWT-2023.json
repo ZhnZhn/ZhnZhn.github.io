@@ -1,1 +1,1 @@
-{"geo":"Kuwait","code":"KWT","data":[{"label":"Natural gas","value":0.8084},{"label":"Oil","value":0.7618},{"label":"Coal","value":0.005518},{"label":"Renewables","value":0.001536}]}
+{"geo":"Kuwait","code":"KWT","data":[["Natural gas",0.8084],["Oil",0.7618],["Coal",0.005518],["Renewables",0.001536]]}

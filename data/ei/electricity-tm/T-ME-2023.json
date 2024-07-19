@@ -1,1 +1,1 @@
-{"geo":"Total Middle East","code":"T-ME","data":[{"label":"Natural gas","value":1028},{"label":"Oil","value":308.9},{"label":"Renewables","value":41.33},{"label":"Nuclear energy","value":38.91},{"label":"Hydroelectricity","value":27.58},{"label":"Coal","value":18.36},{"label":"Other","value":0.2174}]}
+{"geo":"Total Middle East","code":"T-ME","data":[["Natural gas",1028],["Oil",308.9],["Renewables",41.33],["Nuclear energy",38.91],["Hydroelectricity",27.58],["Coal",18.36],["Other",0.2174]]}

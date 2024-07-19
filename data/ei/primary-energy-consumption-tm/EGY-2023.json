@@ -1,1 +1,1 @@
-{"geo":"Egypt","code":"EGY","data":[{"label":"Natural gas","value":2.162},{"label":"Oil","value":1.494},{"label":"Hydroelectricity","value":0.1293},{"label":"Renewables","value":0.1027},{"label":"Coal","value":0.05013}]}
+{"geo":"Egypt","code":"EGY","data":[["Natural gas",2.162],["Oil",1.494],["Hydroelectricity",0.1293],["Renewables",0.1027],["Coal",0.05013]]}

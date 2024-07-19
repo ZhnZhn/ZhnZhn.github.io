@@ -1,1 +1,1 @@
-{"geo":"Luxembourg","code":"LUX","data":[{"label":"Oil","value":0.09724},{"label":"Natural gas","value":0.02064},{"label":"Renewables","value":0.01504},{"label":"Coal","value":0.001402},{"label":"Hydroelectricity","value":0.000845}]}
+{"geo":"Luxembourg","code":"LUX","data":[["Oil",0.09724],["Natural gas",0.02064],["Renewables",0.01504],["Coal",0.001402],["Hydroelectricity",0.000845]]}

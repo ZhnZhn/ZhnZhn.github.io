@@ -1,1 +1,1 @@
-{"geo":"Latvia","code":"LVA","data":[{"label":"Oil","value":0.07067},{"label":"Hydroelectricity","value":0.03553},{"label":"Natural gas","value":0.02762},{"label":"Renewables","value":0.01069},{"label":"Coal","value":0.000323}]}
+{"geo":"Latvia","code":"LVA","data":[["Oil",0.07067],["Hydroelectricity",0.03553],["Natural gas",0.02762],["Renewables",0.01069],["Coal",0.000323]]}

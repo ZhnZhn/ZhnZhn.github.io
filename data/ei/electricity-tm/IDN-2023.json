@@ -1,1 +1,1 @@
-{"geo":"Indonesia","code":"IDN","data":[{"label":"Coal","value":216.8},{"label":"Natural gas","value":61.01},{"label":"Renewables","value":40.6},{"label":"Hydroelectricity","value":24.59},{"label":"Oil","value":6.558},{"label":"Other","value":1.074}]}
+{"geo":"Indonesia","code":"IDN","data":[["Coal",216.8],["Natural gas",61.01],["Renewables",40.6],["Hydroelectricity",24.59],["Oil",6.558],["Other",1.074]]}

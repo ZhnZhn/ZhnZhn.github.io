@@ -1,1 +1,1 @@
-{"geo":"Other S. & Cent. America","code":"O-SCA","data":[{"label":"Hydroelectricity","value":291.4},{"label":"Natural gas","value":127.6},{"label":"Renewables","value":76.86},{"label":"Oil","value":74.49},{"label":"Coal","value":37.72},{"label":"Other","value":0.0000030958}]}
+{"geo":"Other S. & Cent. America","code":"O-SCA","data":[["Hydroelectricity",291.4],["Natural gas",127.6],["Renewables",76.86],["Oil",74.49],["Coal",37.72],["Other",0.0000030958]]}

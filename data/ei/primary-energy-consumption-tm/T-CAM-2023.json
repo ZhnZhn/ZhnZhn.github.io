@@ -1,1 +1,1 @@
-{"geo":"Total Central America","code":"T-CAM","data":[{"label":"Oil","value":1.021},{"label":"Hydroelectricity","value":0.2372},{"label":"Renewables","value":0.1724},{"label":"Coal","value":0.05455},{"label":"Natural gas","value":0.04197}]}
+{"geo":"Total Central America","code":"T-CAM","data":[["Oil",1.021],["Hydroelectricity",0.2372],["Renewables",0.1724],["Coal",0.05455],["Natural gas",0.04197]]}

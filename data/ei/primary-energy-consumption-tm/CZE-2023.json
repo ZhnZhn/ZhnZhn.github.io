@@ -1,1 +1,1 @@
-{"geo":"Czech Republic","code":"CZE","data":[{"label":"Coal","value":0.4708},{"label":"Oil","value":0.4176},{"label":"Nuclear energy","value":0.2729},{"label":"Natural gas","value":0.2411},{"label":"Renewables","value":0.09978},{"label":"Hydroelectricity","value":0.02191}]}
+{"geo":"Czech Republic","code":"CZE","data":[["Coal",0.4708],["Oil",0.4176],["Nuclear energy",0.2729],["Natural gas",0.2411],["Renewables",0.09978],["Hydroelectricity",0.02191]]}

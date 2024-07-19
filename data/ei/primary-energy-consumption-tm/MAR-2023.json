@@ -1,1 +1,1 @@
-{"geo":"Morocco","code":"MAR","data":[{"label":"Oil","value":0.5705},{"label":"Coal","value":0.2916},{"label":"Renewables","value":0.08095},{"label":"Natural gas","value":0.03197},{"label":"Hydroelectricity","value":0.001522}]}
+{"geo":"Morocco","code":"MAR","data":[["Oil",0.5705],["Coal",0.2916],["Renewables",0.08095],["Natural gas",0.03197],["Hydroelectricity",0.001522]]}

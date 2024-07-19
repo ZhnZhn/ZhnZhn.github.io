@@ -1,1 +1,1 @@
-{"geo":"Vietnam","code":"VNM","data":[{"label":"Coal","value":129.6},{"label":"Hydroelectricity","value":80.9},{"label":"Renewables","value":37.92},{"label":"Natural gas","value":26.32},{"label":"Oil","value":1.267},{"label":"Other","value":0.453}]}
+{"geo":"Vietnam","code":"VNM","data":[["Coal",129.6],["Hydroelectricity",80.9],["Renewables",37.92],["Natural gas",26.32],["Oil",1.267],["Other",0.453]]}

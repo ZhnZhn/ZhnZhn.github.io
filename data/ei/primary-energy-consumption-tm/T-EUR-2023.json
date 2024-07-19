@@ -1,1 +1,1 @@
-{"geo":"Total Europe","code":"T-EUR","data":[{"label":"Oil","value":28.33},{"label":"Natural gas","value":16.68},{"label":"Renewables","value":11.86},{"label":"Coal","value":8.395},{"label":"Nuclear energy","value":6.604},{"label":"Hydroelectricity","value":5.973}]}
+{"geo":"Total Europe","code":"T-EUR","data":[["Oil",28.33],["Natural gas",16.68],["Renewables",11.86],["Coal",8.395],["Nuclear energy",6.604],["Hydroelectricity",5.973]]}

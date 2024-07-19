@@ -1,1 +1,1 @@
-{"geo":"Bangladesh","code":"BGD","data":[{"label":"Natural gas","value":1.013},{"label":"Oil","value":0.5177},{"label":"Coal","value":0.2818},{"label":"Renewables","value":0.01206},{"label":"Hydroelectricity","value":0.006392}]}
+{"geo":"Bangladesh","code":"BGD","data":[["Natural gas",1.013],["Oil",0.5177],["Coal",0.2818],["Renewables",0.01206],["Hydroelectricity",0.006392]]}

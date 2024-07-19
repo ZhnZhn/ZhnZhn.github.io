@@ -1,1 +1,1 @@
-{"geo":"China","code":"CHN","data":[{"label":"Coal","value":5754},{"label":"Renewables","value":1668},{"label":"Hydroelectricity","value":1226},{"label":"Nuclear energy","value":434.7},{"label":"Natural gas","value":297.8},{"label":"Other","value":64.74},{"label":"Oil","value":11.15}]}
+{"geo":"China","code":"CHN","data":[["Coal",5754],["Renewables",1668],["Hydroelectricity",1226],["Nuclear energy",434.7],["Natural gas",297.8],["Other",64.74],["Oil",11.15]]}

@@ -1,1 +1,1 @@
-{"geo":"Sweden","code":"SWE","data":[{"label":"Hydroelectricity","value":0.6176},{"label":"Renewables","value":0.5416},{"label":"Oil","value":0.4662},{"label":"Nuclear energy","value":0.4346},{"label":"Coal","value":0.06522},{"label":"Natural gas","value":0.02578}]}
+{"geo":"Sweden","code":"SWE","data":[["Hydroelectricity",0.6176],["Renewables",0.5416],["Oil",0.4662],["Nuclear energy",0.4346],["Coal",0.06522],["Natural gas",0.02578]]}

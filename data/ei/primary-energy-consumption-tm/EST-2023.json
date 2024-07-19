@@ -1,1 +1,1 @@
-{"geo":"Estonia","code":"EST","data":[{"label":"Coal","value":0.09909},{"label":"Oil","value":0.05642},{"label":"Renewables","value":0.03077},{"label":"Natural gas","value":0.01332},{"label":"Hydroelectricity","value":0.000248}]}
+{"geo":"Estonia","code":"EST","data":[["Coal",0.09909],["Oil",0.05642],["Renewables",0.03077],["Natural gas",0.01332],["Hydroelectricity",0.000248]]}

@@ -1,1 +1,1 @@
-{"geo":"Japan","code":"JPN","data":[{"label":"Natural gas","value":320.9},{"label":"Coal","value":304.3},{"label":"Renewables","value":149},{"label":"Nuclear energy","value":77.46},{"label":"Hydroelectricity","value":74.5},{"label":"Other","value":53.71},{"label":"Oil","value":33.4}]}
+{"geo":"Japan","code":"JPN","data":[["Natural gas",320.9],["Coal",304.3],["Renewables",149],["Nuclear energy",77.46],["Hydroelectricity",74.5],["Other",53.71],["Oil",33.4]]}

@@ -1,1 +1,1 @@
-{"geo":"Austria","code":"AUT","data":[{"label":"Oil","value":0.4861},{"label":"Hydroelectricity","value":0.3634},{"label":"Natural gas","value":0.2477},{"label":"Renewables","value":0.1919},{"label":"Coal","value":0.09625}]}
+{"geo":"Austria","code":"AUT","data":[["Oil",0.4861],["Hydroelectricity",0.3634],["Natural gas",0.2477],["Renewables",0.1919],["Coal",0.09625]]}

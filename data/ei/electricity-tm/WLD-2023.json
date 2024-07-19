@@ -1,1 +1,1 @@
-{"geo":"Total World","code":"WLD","data":[{"label":"Coal","value":10513},{"label":"Natural gas","value":6746},{"label":"Renewables","value":4748},{"label":"Hydroelectricity","value":4240},{"label":"Nuclear energy","value":2738},{"label":"Oil","value":698.1},{"label":"Other","value":241.3}]}
+{"geo":"Total World","code":"WLD","data":[["Coal",10513],["Natural gas",6746],["Renewables",4748],["Hydroelectricity",4240],["Nuclear energy",2738],["Oil",698.1],["Other",241.3]]}

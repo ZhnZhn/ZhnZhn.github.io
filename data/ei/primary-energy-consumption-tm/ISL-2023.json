@@ -1,1 +1,1 @@
-{"geo":"Iceland","code":"ISL","data":[{"label":"Hydroelectricity","value":0.133},{"label":"Renewables","value":0.05469},{"label":"Oil","value":0.03505},{"label":"Coal","value":0.003487}]}
+{"geo":"Iceland","code":"ISL","data":[["Hydroelectricity",0.133],["Renewables",0.05469],["Oil",0.03505],["Coal",0.003487]]}

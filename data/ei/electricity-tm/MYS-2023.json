@@ -1,1 +1,1 @@
-{"geo":"Malaysia","code":"MYS","data":[{"label":"Coal","value":81.4},{"label":"Natural gas","value":69.23},{"label":"Hydroelectricity","value":31.51},{"label":"Renewables","value":4.472},{"label":"Oil","value":1.187}]}
+{"geo":"Malaysia","code":"MYS","data":[["Coal",81.4],["Natural gas",69.23],["Hydroelectricity",31.51],["Renewables",4.472],["Oil",1.187]]}

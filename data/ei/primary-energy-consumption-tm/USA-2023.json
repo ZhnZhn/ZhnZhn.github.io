@@ -1,1 +1,1 @@
-{"geo":"United States","code":"USA","data":[{"label":"Oil","value":35.86},{"label":"Natural gas","value":31.91},{"label":"Renewables","value":8.779},{"label":"Coal","value":8.197},{"label":"Nuclear energy","value":7.324},{"label":"Hydroelectricity","value":2.21}]}
+{"geo":"United States","code":"USA","data":[["Oil",35.86],["Natural gas",31.91],["Renewables",8.779],["Coal",8.197],["Nuclear energy",7.324],["Hydroelectricity",2.21]]}

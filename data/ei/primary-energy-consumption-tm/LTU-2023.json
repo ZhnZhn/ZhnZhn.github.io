@@ -1,1 +1,1 @@
-{"geo":"Lithuania","code":"LTU","data":[{"label":"Oil","value":0.136},{"label":"Natural gas","value":0.05636},{"label":"Renewables","value":0.03749},{"label":"Coal","value":0.004718},{"label":"Hydroelectricity","value":0.004211}]}
+{"geo":"Lithuania","code":"LTU","data":[["Oil",0.136],["Natural gas",0.05636],["Renewables",0.03749],["Coal",0.004718],["Hydroelectricity",0.004211]]}

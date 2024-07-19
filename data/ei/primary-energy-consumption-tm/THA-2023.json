@@ -1,1 +1,1 @@
-{"geo":"Thailand","code":"THA","data":[{"label":"Oil","value":2.311},{"label":"Natural gas","value":1.698},{"label":"Coal","value":0.605},{"label":"Renewables","value":0.3311},{"label":"Hydroelectricity","value":0.06161}]}
+{"geo":"Thailand","code":"THA","data":[["Oil",2.311],["Natural gas",1.698],["Coal",0.605],["Renewables",0.3311],["Hydroelectricity",0.06161]]}

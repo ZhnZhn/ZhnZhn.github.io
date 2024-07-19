@@ -1,1 +1,1 @@
-{"geo":"Other Southern Africa","code":"O-SAFR","data":[{"label":"Oil","value":0.1217},{"label":"Coal","value":0.07513},{"label":"Hydroelectricity","value":0.01946},{"label":"Renewables","value":0.008433}]}
+{"geo":"Other Southern Africa","code":"O-SAFR","data":[["Oil",0.1217],["Coal",0.07513],["Hydroelectricity",0.01946],["Renewables",0.008433]]}

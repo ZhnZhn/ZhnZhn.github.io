@@ -1,1 +1,1 @@
-{"geo":"Ireland","code":"IRL","data":[{"label":"Oil","value":0.3048},{"label":"Natural gas","value":0.1736},{"label":"Renewables","value":0.1364},{"label":"Coal","value":0.02718},{"label":"Hydroelectricity","value":0.008732}]}
+{"geo":"Ireland","code":"IRL","data":[["Oil",0.3048],["Natural gas",0.1736],["Renewables",0.1364],["Coal",0.02718],["Hydroelectricity",0.008732]]}

@@ -1,1 +1,1 @@
-{"geo":"Romania","code":"ROU","data":[{"label":"Oil","value":0.4555},{"label":"Natural gas","value":0.3271},{"label":"Hydroelectricity","value":0.1706},{"label":"Coal","value":0.1142},{"label":"Renewables","value":0.1083},{"label":"Nuclear energy","value":0.1004}]}
+{"geo":"Romania","code":"ROU","data":[["Oil",0.4555],["Natural gas",0.3271],["Hydroelectricity",0.1706],["Coal",0.1142],["Renewables",0.1083],["Nuclear energy",0.1004]]}

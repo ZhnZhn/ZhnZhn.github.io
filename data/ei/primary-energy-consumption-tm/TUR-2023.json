@@ -1,1 +1,1 @@
-{"geo":"Türkiye","code":"TUR","data":[{"label":"Oil","value":2.301},{"label":"Natural gas","value":1.743},{"label":"Coal","value":1.649},{"label":"Renewables","value":0.7125},{"label":"Hydroelectricity","value":0.5971}]}
+{"geo":"Türkiye","code":"TUR","data":[["Oil",2.301],["Natural gas",1.743],["Coal",1.649],["Renewables",0.7125],["Hydroelectricity",0.5971]]}

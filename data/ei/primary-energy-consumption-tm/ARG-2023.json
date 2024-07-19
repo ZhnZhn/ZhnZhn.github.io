@@ -1,1 +1,1 @@
-{"geo":"Argentina","code":"ARG","data":[{"label":"Natural gas","value":1.618},{"label":"Oil","value":1.409},{"label":"Hydroelectricity","value":0.2796},{"label":"Renewables","value":0.2381},{"label":"Nuclear energy","value":0.08043},{"label":"Coal","value":0.04606}]}
+{"geo":"Argentina","code":"ARG","data":[["Natural gas",1.618],["Oil",1.409],["Hydroelectricity",0.2796],["Renewables",0.2381],["Nuclear energy",0.08043],["Coal",0.04606]]}

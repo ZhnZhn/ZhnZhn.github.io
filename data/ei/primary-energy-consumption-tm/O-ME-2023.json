@@ -1,1 +1,1 @@
-{"geo":"Other Middle East","code":"O-ME","data":[{"label":"Oil","value":1.059},{"label":"Natural gas","value":0.8538},{"label":"Renewables","value":0.07402},{"label":"Coal","value":0.04416},{"label":"Hydroelectricity","value":0.01418}]}
+{"geo":"Other Middle East","code":"O-ME","data":[["Oil",1.059],["Natural gas",0.8538],["Renewables",0.07402],["Coal",0.04416],["Hydroelectricity",0.01418]]}

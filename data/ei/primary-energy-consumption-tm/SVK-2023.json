@@ -1,1 +1,1 @@
-{"geo":"Slovakia","code":"SVK","data":[{"label":"Oil","value":0.1812},{"label":"Nuclear energy","value":0.1645},{"label":"Natural gas","value":0.1511},{"label":"Coal","value":0.09601},{"label":"Hydroelectricity","value":0.04438},{"label":"Renewables","value":0.03464}]}
+{"geo":"Slovakia","code":"SVK","data":[["Oil",0.1812],["Nuclear energy",0.1645],["Natural gas",0.1511],["Coal",0.09601],["Hydroelectricity",0.04438],["Renewables",0.03464]]}

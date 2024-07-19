@@ -1,1 +1,1 @@
-{"geo":"Venezuela","code":"VEN","data":[{"label":"Natural gas","value":1.069},{"label":"Oil","value":0.8425},{"label":"Hydroelectricity","value":0.6134},{"label":"Coal","value":0.006743},{"label":"Renewables","value":0.000164}]}
+{"geo":"Venezuela","code":"VEN","data":[["Natural gas",1.069],["Oil",0.8425],["Hydroelectricity",0.6134],["Coal",0.006743],["Renewables",0.000164]]}

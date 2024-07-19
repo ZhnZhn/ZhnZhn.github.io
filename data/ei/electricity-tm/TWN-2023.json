@@ -1,1 +1,1 @@
-{"geo":"Taiwan","code":"TWN","data":[{"label":"Coal","value":119.2},{"label":"Natural gas","value":111.6},{"label":"Renewables","value":21.06},{"label":"Nuclear energy","value":17.8},{"label":"Other","value":4.742},{"label":"Hydroelectricity","value":3.963},{"label":"Oil","value":3.775}]}
+{"geo":"Taiwan","code":"TWN","data":[["Coal",119.2],["Natural gas",111.6],["Renewables",21.06],["Nuclear energy",17.8],["Other",4.742],["Hydroelectricity",3.963],["Oil",3.775]]}

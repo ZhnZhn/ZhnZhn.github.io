@@ -1,1 +1,1 @@
-{"geo":"Chile","code":"CHL","data":[{"label":"Oil","value":0.8325},{"label":"Renewables","value":0.3293},{"label":"Natural gas","value":0.2525},{"label":"Hydroelectricity","value":0.2247},{"label":"Coal","value":0.1756}]}
+{"geo":"Chile","code":"CHL","data":[["Oil",0.8325],["Renewables",0.3293],["Natural gas",0.2525],["Hydroelectricity",0.2247],["Coal",0.1756]]}

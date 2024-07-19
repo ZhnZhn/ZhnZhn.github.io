@@ -1,1 +1,1 @@
-{"geo":"Italy","code":"ITA","data":[{"label":"Natural gas","value":117.5},{"label":"Renewables","value":75.07},{"label":"Hydroelectricity","value":38.92},{"label":"Coal","value":20.04},{"label":"Oil","value":10.62},{"label":"Other","value":3.187}]}
+{"geo":"Italy","code":"ITA","data":[["Natural gas",117.5],["Renewables",75.07],["Hydroelectricity",38.92],["Coal",20.04],["Oil",10.62],["Other",3.187]]}

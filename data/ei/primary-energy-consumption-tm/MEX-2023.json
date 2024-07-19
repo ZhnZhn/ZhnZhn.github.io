@@ -1,1 +1,1 @@
-{"geo":"Mexico","code":"MEX","data":[{"label":"Oil","value":3.837},{"label":"Natural gas","value":3.513},{"label":"Renewables","value":0.537},{"label":"Coal","value":0.264},{"label":"Hydroelectricity","value":0.1908},{"label":"Nuclear energy","value":0.1111}]}
+{"geo":"Mexico","code":"MEX","data":[["Oil",3.837],["Natural gas",3.513],["Renewables",0.537],["Coal",0.264],["Hydroelectricity",0.1908],["Nuclear energy",0.1111]]}

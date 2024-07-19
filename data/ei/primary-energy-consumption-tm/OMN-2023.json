@@ -1,1 +1,1 @@
-{"geo":"Oman","code":"OMN","data":[{"label":"Natural gas","value":1.062},{"label":"Oil","value":0.466},{"label":"Renewables","value":0.01492},{"label":"Coal","value":0.005068}]}
+{"geo":"Oman","code":"OMN","data":[["Natural gas",1.062],["Oil",0.466],["Renewables",0.01492],["Coal",0.005068]]}

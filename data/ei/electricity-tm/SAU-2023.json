@@ -1,1 +1,1 @@
-{"geo":"Saudi Arabia","code":"SAU","data":[{"label":"Natural gas","value":265},{"label":"Oil","value":152.1},{"label":"Renewables","value":5.769}]}
+{"geo":"Saudi Arabia","code":"SAU","data":[["Natural gas",265],["Oil",152.1],["Renewables",5.769]]}

@@ -1,1 +1,1 @@
-{"geo":"Other South America","code":"O-SAM","data":[{"label":"Hydroelectricity","value":264.4},{"label":"Natural gas","value":89.67},{"label":"Renewables","value":53.23},{"label":"Coal","value":22.44},{"label":"Oil","value":18.86},{"label":"Other","value":0.00001}]}
+{"geo":"Other South America","code":"O-SAM","data":[["Hydroelectricity",264.4],["Natural gas",89.67],["Renewables",53.23],["Coal",22.44],["Oil",18.86],["Other",0.00001]]}

@@ -1,1 +1,1 @@
-{"geo":"Total North America","code":"T-NAM","data":[{"label":"Natural gas","value":2232},{"label":"Nuclear energy","value":917.6},{"label":"Renewables","value":850.2},{"label":"Coal","value":789.8},{"label":"Hydroelectricity","value":620.9},{"label":"Oil","value":55.95},{"label":"Other","value":15.07}]}
+{"geo":"Total North America","code":"T-NAM","data":[["Natural gas",2232],["Nuclear energy",917.6],["Renewables",850.2],["Coal",789.8],["Hydroelectricity",620.9],["Oil",55.95],["Other",15.07]]}

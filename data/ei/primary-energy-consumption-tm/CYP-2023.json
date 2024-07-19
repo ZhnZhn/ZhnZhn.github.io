@@ -1,1 +1,1 @@
-{"geo":"Cyprus","code":"CYP","data":[{"label":"Oil","value":0.1033},{"label":"Renewables","value":0.01112},{"label":"Coal","value":0.001166}]}
+{"geo":"Cyprus","code":"CYP","data":[["Oil",0.1033],["Renewables",0.01112],["Coal",0.001166]]}

@@ -1,1 +1,1 @@
-{"geo":"Total OECD","code":"T-OECD","data":[{"label":"Natural gas","value":3464},{"label":"Renewables","value":2290},{"label":"Coal","value":1904},{"label":"Nuclear energy","value":1832},{"label":"Hydroelectricity","value":1385},{"label":"Other","value":152.5},{"label":"Oil","value":150.5}]}
+{"geo":"Total OECD","code":"T-OECD","data":[["Natural gas",3464],["Renewables",2290],["Coal",1904],["Nuclear energy",1832],["Hydroelectricity",1385],["Other",152.5],["Oil",150.5]]}

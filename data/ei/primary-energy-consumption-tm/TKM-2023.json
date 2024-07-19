@@ -1,1 +1,1 @@
-{"geo":"Turkmenistan","code":"TKM","data":[{"label":"Natural gas","value":1.323},{"label":"Oil","value":0.2787},{"label":"Coal","value":0.001926},{"label":"Renewables","value":0.000065087},{"label":"Hydroelectricity","value":0.0000294575}]}
+{"geo":"Turkmenistan","code":"TKM","data":[["Natural gas",1.323],["Oil",0.2787],["Coal",0.001926],["Renewables",0.000065087],["Hydroelectricity",0.0000294575]]}

@@ -1,1 +1,1 @@
-{"geo":"Other Northern Africa","code":"O-NAFR","data":[{"label":"Oil","value":0.7675},{"label":"Natural gas","value":0.6976},{"label":"Renewables","value":0.006818},{"label":"Hydroelectricity","value":0.0000860346},{"label":"Coal","value":0.0000657847}]}
+{"geo":"Other Northern Africa","code":"O-NAFR","data":[["Oil",0.7675],["Natural gas",0.6976],["Renewables",0.006818],["Hydroelectricity",0.0000860346],["Coal",0.0000657847]]}

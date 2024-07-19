@@ -1,1 +1,1 @@
-{"geo":"Total Africa","code":"T-AFR","data":[{"label":"Oil","value":8.492},{"label":"Natural gas","value":6.164},{"label":"Coal","value":4.082},{"label":"Hydroelectricity","value":1.512},{"label":"Renewables","value":0.539},{"label":"Nuclear energy","value":0.07989}]}
+{"geo":"Total Africa","code":"T-AFR","data":[["Oil",8.492],["Natural gas",6.164],["Coal",4.082],["Hydroelectricity",1.512],["Renewables",0.539],["Nuclear energy",0.07989]]}

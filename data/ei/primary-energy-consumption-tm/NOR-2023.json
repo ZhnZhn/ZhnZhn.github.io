@@ -1,1 +1,1 @@
-{"geo":"Norway","code":"NOR","data":[{"label":"Hydroelectricity","value":1.273},{"label":"Oil","value":0.3845},{"label":"Renewables","value":0.1629},{"label":"Natural gas","value":0.1366},{"label":"Coal","value":0.03462}]}
+{"geo":"Norway","code":"NOR","data":[["Hydroelectricity",1.273],["Oil",0.3845],["Renewables",0.1629],["Natural gas",0.1366],["Coal",0.03462]]}

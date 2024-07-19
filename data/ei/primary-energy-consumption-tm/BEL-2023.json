@@ -1,1 +1,1 @@
-{"geo":"Belgium","code":"BEL","data":[{"label":"Oil","value":1.134},{"label":"Natural gas","value":0.4934},{"label":"Nuclear energy","value":0.2955},{"label":"Renewables","value":0.2858},{"label":"Coal","value":0.09862},{"label":"Hydroelectricity","value":0.003668}]}
+{"geo":"Belgium","code":"BEL","data":[["Oil",1.134],["Natural gas",0.4934],["Nuclear energy",0.2955],["Renewables",0.2858],["Coal",0.09862],["Hydroelectricity",0.003668]]}

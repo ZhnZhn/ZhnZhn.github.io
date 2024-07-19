@@ -1,1 +1,1 @@
-{"geo":"Peru","code":"PER","data":[{"label":"Oil","value":0.5188},{"label":"Natural gas","value":0.3635},{"label":"Hydroelectricity","value":0.2717},{"label":"Renewables","value":0.05446},{"label":"Coal","value":0.02929}]}
+{"geo":"Peru","code":"PER","data":[["Oil",0.5188],["Natural gas",0.3635],["Hydroelectricity",0.2717],["Renewables",0.05446],["Coal",0.02929]]}

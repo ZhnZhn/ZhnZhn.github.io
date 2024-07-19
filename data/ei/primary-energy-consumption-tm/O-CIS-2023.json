@@ -1,1 +1,1 @@
-{"geo":"Other CIS","code":"O-CIS","data":[{"label":"Hydroelectricity","value":0.3206},{"label":"Natural gas","value":0.2152},{"label":"Oil","value":0.1985},{"label":"Coal","value":0.08888},{"label":"Nuclear energy","value":0.02431},{"label":"Renewables","value":0.009653}]}
+{"geo":"Other CIS","code":"O-CIS","data":[["Hydroelectricity",0.3206],["Natural gas",0.2152],["Oil",0.1985],["Coal",0.08888],["Nuclear energy",0.02431],["Renewables",0.009653]]}

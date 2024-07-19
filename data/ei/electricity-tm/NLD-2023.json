@@ -1,1 +1,1 @@
-{"geo":"Netherlands","code":"NLD","data":[{"label":"Renewables","value":58.09},{"label":"Natural gas","value":45.88},{"label":"Coal","value":10.7},{"label":"Nuclear energy","value":3.984},{"label":"Other","value":2.06},{"label":"Oil","value":1.553},{"label":"Hydroelectricity","value":0.068}]}
+{"geo":"Netherlands","code":"NLD","data":[["Renewables",58.09],["Natural gas",45.88],["Coal",10.7],["Nuclear energy",3.984],["Other",2.06],["Oil",1.553],["Hydroelectricity",0.068]]}

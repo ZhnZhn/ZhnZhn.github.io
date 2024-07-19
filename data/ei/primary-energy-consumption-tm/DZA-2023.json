@@ -1,1 +1,1 @@
-{"geo":"Algeria","code":"DZA","data":[{"label":"Natural gas","value":1.667},{"label":"Oil","value":0.8575},{"label":"Coal","value":0.006959},{"label":"Renewables","value":0.006219},{"label":"Hydroelectricity","value":0.000643}]}
+{"geo":"Algeria","code":"DZA","data":[["Natural gas",1.667],["Oil",0.8575],["Coal",0.006959],["Renewables",0.006219],["Hydroelectricity",0.000643]]}

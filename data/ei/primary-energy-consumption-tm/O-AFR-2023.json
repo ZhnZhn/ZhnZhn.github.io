@@ -1,1 +1,1 @@
-{"geo":"Other Africa","code":"O-AFR","data":[{"label":"Oil","value":4.484},{"label":"Natural gas","value":2.133},{"label":"Hydroelectricity","value":1.364},{"label":"Coal","value":0.4084},{"label":"Renewables","value":0.1738}]}
+{"geo":"Other Africa","code":"O-AFR","data":[["Oil",4.484],["Natural gas",2.133],["Hydroelectricity",1.364],["Coal",0.4084],["Renewables",0.1738]]}
