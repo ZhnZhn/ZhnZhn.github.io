@@ -121,7 +121,14 @@ const _crValuesS1 = ({
 , _s123BFnUrl = _fCrUrl(_crValuesS123B)
 
 , _crValuesS123 = ({ items }) => _crValuesS123B({ items })
-, _s123FnUrl = _fCrUrl(_crValuesS123);
+, _s123FnUrl = _fCrUrl(_crValuesS123)
+
+, _crValuesS231 = ({ items }) => [
+  getValue(items[2]),
+  getValue(items[0]),
+  getValue(items[1])
+]
+, _s231FnUrl = _fCrUrl(_crValuesS231);
 
 const _crValues3S12 = ({ items }) => _crValuesS12({ items })
 , _s3S12FnUrl = (option) => {
@@ -145,6 +152,7 @@ const _rFnUrl = {
   s21: _s21FnUrl,
   s123B: _s123BFnUrl,
   s123: _s123FnUrl,
+  s231: _s231FnUrl,
   s3S12: _s3S12FnUrl
 };
 

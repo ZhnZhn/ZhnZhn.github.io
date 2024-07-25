@@ -85,11 +85,18 @@ const _crValuesS1 = _ref2 => {
       items
     });
   },
-  _s123FnUrl = _fCrUrl(_crValuesS123);
-const _crValues3S12 = _ref7 => {
+  _s123FnUrl = _fCrUrl(_crValuesS123),
+  _crValuesS231 = _ref7 => {
     let {
       items
     } = _ref7;
+    return [(0, _fnAdapter.getValue)(items[2]), (0, _fnAdapter.getValue)(items[0]), (0, _fnAdapter.getValue)(items[1])];
+  },
+  _s231FnUrl = _fCrUrl(_crValuesS231);
+const _crValues3S12 = _ref8 => {
+    let {
+      items
+    } = _ref8;
     return _crValuesS12({
       items
     });
@@ -114,6 +121,7 @@ const _rFnUrl = {
   s21: _s21FnUrl,
   s123B: _s123BFnUrl,
   s123: _s123FnUrl,
+  s231: _s231FnUrl,
   s3S12: _s3S12FnUrl
 };
 const DbNomicsApi = {
