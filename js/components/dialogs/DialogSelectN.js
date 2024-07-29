@@ -10,6 +10,7 @@ var _useBool = require("../hooks/useBool");
 var _useToggleState = _interopRequireDefault(require("../hooks/useToggleState"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
+var _useSelectChartType = _interopRequireDefault(require("./hooks/useSelectChartType"));
 var _useDialog = _interopRequireDefault(require("./hooks/useDialog"));
 var _useDialogOptions = _interopRequireDefault(require("./hooks/useDialogOptions"));
 var _useTitles = _interopRequireDefault(require("./hooks/useTitles"));
@@ -51,23 +52,15 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     {
       dfRt
     } = dfProps || {},
-    [isShowFd, toggleIsShowFd] = (0, _useToggle.default)(),
     [isShowChart, toggleIsShowChart] = (0, _useToggle.default)(true),
-    [chartType, setChartType] = (0, _uiApi.useState)(),
-    _hSelectChartType = (0, _uiApi.useCallback)(chartType => {
-      setChartType(chartType);
-      if ((0, _ChartOptionsFn.isCategoryItem)(chartType)) {
-        toggleIsShowFd(false);
-      }
-    }, [toggleIsShowFd]),
+    [isShowFd, toggleIsShowFd, chartType, _hSelectChartType] = (0, _useSelectChartType.default)(),
     [setPropertyDate, getPropertyDate] = (0, _useProperty.default)()
-
     /*eslint-disable react-hooks/exhaustive-deps */,
     _onUpdateChartConfig = (0, _uiApi.useCallback)(() => {
       setPropertyDate();
-      setChartType();
+      _hSelectChartType();
     }, [])
-    // setPropertyDate
+    // setPropertyDate, _hSelectChartType
     /*eslint-enable react-hooks/exhaustive-deps */,
     [_chartOptions, dateOptions, dateDefault, setChartConfigFromItem] = (0, _useChartConfig.default)(selectProps, chartsType, loadId, dfProps, _onUpdateChartConfig),
     [isToggle, toggleInputs, _hideToggle] = (0, _useBool.useToggleFalse)(),

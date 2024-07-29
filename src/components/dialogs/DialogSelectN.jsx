@@ -1,7 +1,6 @@
 //import PropTypes from "prop-types";
 import {
   useRef,
-  useState,
   useCallback,
   getRefValue,
   getInputValue,
@@ -14,6 +13,8 @@ import { useToggleFalse } from '../hooks/useBool';
 import useToggleState from '../hooks/useToggleState';
 import useProperty from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';
+
+import useSelectChartType from './hooks/useSelectChartType';
 import useDialog from './hooks/useDialog';
 import useDialogOptions from './hooks/useDialogOptions';
 import useTitles from './hooks/useTitles';
@@ -34,7 +35,6 @@ import {
 const DF_INIT_FROM_DATE = '2010-01-01'
 , DF_SELECT_PROPS  = []
 , TABLE_ID = 'table';
-
 
 const DialogSelectN = memoIsShow((
   props
@@ -68,34 +68,26 @@ const DialogSelectN = memoIsShow((
     dfRt
   } = dfProps || {}
   , [
-    isShowFd,
-    toggleIsShowFd
-  ] = useToggle()
-  , [
     isShowChart,
     toggleIsShowChart
   ] = useToggle(true)
   , [
+    isShowFd,
+    toggleIsShowFd,
     chartType,
-    setChartType
-  ] = useState()
-  , _hSelectChartType = useCallback(chartType => {
-      setChartType(chartType)
-      if (isCategoryItem(chartType)) {
-        toggleIsShowFd(false)
-      }
-  }, [toggleIsShowFd])
+    _hSelectChartType
+  ] = useSelectChartType()
+
   , [
     setPropertyDate,
     getPropertyDate
   ] = useProperty()
-
   /*eslint-disable react-hooks/exhaustive-deps */
   , _onUpdateChartConfig = useCallback(() => {
      setPropertyDate()
-     setChartType()
+     _hSelectChartType()
   }, [])
-  // setPropertyDate
+  // setPropertyDate, _hSelectChartType
   /*eslint-enable react-hooks/exhaustive-deps */
 
   , [
