@@ -7,9 +7,9 @@ var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useBool = require("../hooks/useBool");
-var _useToggleState = _interopRequireDefault(require("../hooks/useToggleState"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
+var _useIsShowInput = _interopRequireDefault(require("./hooks/useIsShowInput"));
 var _useSelectChartType = _interopRequireDefault(require("./hooks/useSelectChartType"));
 var _useDialog = _interopRequireDefault(require("./hooks/useDialog"));
 var _useDialogOptions = _interopRequireDefault(require("./hooks/useDialogOptions"));
@@ -22,6 +22,8 @@ var _SelectList = _interopRequireDefault(require("./SelectList"));
 var _dialogFn = require("./dialogFn");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
+
+//import useToggleState from '../hooks/useToggleState';
 
 const DF_INIT_FROM_DATE = '2010-01-01',
   DF_SELECT_PROPS = [],
@@ -71,8 +73,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       toggleInputs: isFd || selectProps.length > 1 ? toggleInputs : void 0,
       toggleOptions: isOpt || isCh ? toggleOptions : void 0
     }),
-    [_isShowConfig, _toggleStateBy] = (0, _useToggleState.default)(() => (0, _dialogFn.crIsToggleInit)(selectProps)),
-    _isShowById = (0, _uiApi.useCallback)(id => _isShowConfig[(0, _dialogFn.crIsId)(id)], [_isShowConfig]),
+    [toggleInputById, isShowInputById] = (0, _useIsShowInput.default)(selectProps),
     _refItems = (0, _uiApi.useRef)([]),
     [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)(),
     [_setPropertyRoundTo, _getPropertyRoundTo] = (0, _useProperty.default)(dfRt),
@@ -138,7 +139,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       isCh: isCh,
       isShowChart: isShowChart,
       crIsId: _dialogFn.crIsId,
-      onToggle: _toggleStateBy,
+      onToggle: toggleInputById,
       onCheckCaption: addTitleIndex,
       onUnCheckCaption: removeTitleIndex,
       onToggleFd: toggleIsShowFd,
@@ -150,7 +151,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
         isShow: isShow,
         isShowLabels: isShowLabels,
         selectProps: selectProps,
-        isShowById: _isShowById,
+        isShowById: isShowInputById,
         hSelect: _hSelect
       })
     }), _isRowFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {

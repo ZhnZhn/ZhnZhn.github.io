@@ -10,10 +10,11 @@ import {
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import { useToggleFalse } from '../hooks/useBool';
-import useToggleState from '../hooks/useToggleState';
+//import useToggleState from '../hooks/useToggleState';
 import useProperty from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';
 
+import useIsShowInput from './hooks/useIsShowInput';
 import useSelectChartType from './hooks/useSelectChartType';
 import useDialog from './hooks/useDialog';
 import useDialogOptions from './hooks/useDialogOptions';
@@ -27,7 +28,7 @@ import SelectList from './SelectList';
 
 import {
   crIsId,
-  crIsToggleInit,
+  //crIsToggleInit,
   getItemValue,
   crMsgs
 } from './dialogFn';
@@ -133,15 +134,9 @@ const DialogSelectN = memoIsShow((
        : void 0
   })
   , [
-    _isShowConfig,
-    _toggleStateBy
-  ] = useToggleState(
-     () => crIsToggleInit(selectProps)
-  )
-  , _isShowById = useCallback(
-      id => _isShowConfig[crIsId(id)],
-      [_isShowConfig]
-    )
+    toggleInputById,
+    isShowInputById
+  ] = useIsShowInput(selectProps)
   , _refItems = useRef([])
   , [
     refTitles,
@@ -226,7 +221,7 @@ const DialogSelectN = memoIsShow((
         isCh={isCh}
         isShowChart={isShowChart}
         crIsId={crIsId}
-        onToggle={_toggleStateBy}
+        onToggle={toggleInputById}
         onCheckCaption={addTitleIndex}
         onUnCheckCaption={removeTitleIndex}
         onToggleFd={toggleIsShowFd}
@@ -238,7 +233,7 @@ const DialogSelectN = memoIsShow((
           isShow={isShow}
           isShowLabels={isShowLabels}
           selectProps={selectProps}
-          isShowById={_isShowById}
+          isShowById={isShowInputById}
           hSelect={_hSelect}
         />
       </FocusFirstCombobox>
