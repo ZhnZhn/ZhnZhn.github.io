@@ -11,10 +11,11 @@ var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
 var _useIsShowInput = _interopRequireDefault(require("./hooks/useIsShowInput"));
 var _useSelectChartType = _interopRequireDefault(require("./hooks/useSelectChartType"));
+var _useChartConfig = _interopRequireDefault(require("./hooks/useChartConfig"));
 var _useDialog = _interopRequireDefault(require("./hooks/useDialog"));
 var _useDialogOptions = _interopRequireDefault(require("./hooks/useDialogOptions"));
 var _useTitles = _interopRequireDefault(require("./hooks/useTitles"));
-var _useChartConfig = _interopRequireDefault(require("./hooks/useChartConfig"));
+var _useSelectItem = _interopRequireDefault(require("./hooks/useSelectItem"));
 var _ChartOptionsFn = require("./ChartOptionsFn");
 var _FocusFirstCombobox = _interopRequireDefault(require("../zhn-moleculs/FocusFirstCombobox"));
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
@@ -23,11 +24,8 @@ var _dialogFn = require("./dialogFn");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-//import useToggleState from '../hooks/useToggleState';
-
 const DF_INIT_FROM_DATE = '2010-01-01',
-  DF_SELECT_PROPS = [],
-  TABLE_ID = 'table';
+  DF_SELECT_PROPS = [];
 const DialogSelectN = (0, _memoIsShow.default)(props => {
   const {
       isCh = true,
@@ -55,8 +53,13 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       dfRt
     } = dfProps || {},
     [isShowChart, toggleIsShowChart] = (0, _useToggle.default)(true),
+    [toggleInputById, isShowInputById] = (0, _useIsShowInput.default)(selectProps),
     [isShowFd, toggleIsShowFd, chartType, _hSelectChartType] = (0, _useSelectChartType.default)(),
+    [_setPropertyRoundTo, _getPropertyRoundTo] = (0, _useProperty.default)(dfRt),
+    _refFromDate = (0, _uiApi.useRef)(),
+    _refSeriaColor = (0, _uiApi.useRef)(),
     [setPropertyDate, getPropertyDate] = (0, _useProperty.default)()
+
     /*eslint-disable react-hooks/exhaustive-deps */,
     _onUpdateChartConfig = (0, _uiApi.useCallback)(() => {
       setPropertyDate();
@@ -73,25 +76,8 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       toggleInputs: isFd || selectProps.length > 1 ? toggleInputs : void 0,
       toggleOptions: isOpt || isCh ? toggleOptions : void 0
     }),
-    [toggleInputById, isShowInputById] = (0, _useIsShowInput.default)(selectProps),
-    _refItems = (0, _uiApi.useRef)([]),
     [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)(),
-    [_setPropertyRoundTo, _getPropertyRoundTo] = (0, _useProperty.default)(dfRt),
-    _refFromDate = (0, _uiApi.useRef)(),
-    _refSeriaColor = (0, _uiApi.useRef)()
-
-    /*eslint-disable react-hooks/exhaustive-deps */,
-    _hSelect = (0, _uiApi.useCallback)((id, index, item) => {
-      (0, _uiApi.getRefValue)(_refItems)[index] = item;
-      if (item) {
-        item.id = id;
-        if (id === TABLE_ID) {
-          setChartConfigFromItem(item);
-        }
-      }
-    }, [])
-    // setChartConfigFromItem
-    /*eslint-enable react-hooks/exhaustive-deps */,
+    [_refItems, _hSelect] = (0, _useSelectItem.default)(setChartConfigFromItem),
     _hLoad = (0, _useEventCallback.default)(() => {
       const msgs = (0, _dialogFn.crMsgs)(chartType, (0, _uiApi.getRefValue)(_refItems), selectProps, msgOnNotSelected);
       if (msgs.length === 0) {

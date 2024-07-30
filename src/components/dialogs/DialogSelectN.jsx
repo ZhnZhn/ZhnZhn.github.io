@@ -10,16 +10,16 @@ import {
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
 import { useToggleFalse } from '../hooks/useBool';
-//import useToggleState from '../hooks/useToggleState';
 import useProperty from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';
 
 import useIsShowInput from './hooks/useIsShowInput';
 import useSelectChartType from './hooks/useSelectChartType';
+import useChartConfig from './hooks/useChartConfig';
 import useDialog from './hooks/useDialog';
 import useDialogOptions from './hooks/useDialogOptions';
 import useTitles from './hooks/useTitles';
-import useChartConfig from './hooks/useChartConfig';
+import useSelectItem from './hooks/useSelectItem';
 
 import { isCategoryItem } from './ChartOptionsFn';
 import FocusFirstCombobox from '../zhn-moleculs/FocusFirstCombobox';
@@ -28,14 +28,12 @@ import SelectList from './SelectList';
 
 import {
   crIsId,
-  //crIsToggleInit,
   getItemValue,
   crMsgs
 } from './dialogFn';
 
 const DF_INIT_FROM_DATE = '2010-01-01'
-, DF_SELECT_PROPS  = []
-, TABLE_ID = 'table';
+, DF_SELECT_PROPS  = [];
 
 const DialogSelectN = memoIsShow((
   props
@@ -73,6 +71,10 @@ const DialogSelectN = memoIsShow((
     toggleIsShowChart
   ] = useToggle(true)
   , [
+    toggleInputById,
+    isShowInputById
+  ] = useIsShowInput(selectProps)
+  , [
     isShowFd,
     toggleIsShowFd,
     chartType,
@@ -80,9 +82,16 @@ const DialogSelectN = memoIsShow((
   ] = useSelectChartType()
 
   , [
+    _setPropertyRoundTo,
+    _getPropertyRoundTo
+  ] = useProperty(dfRt)
+  , _refFromDate = useRef()
+  , _refSeriaColor = useRef()
+  , [
     setPropertyDate,
     getPropertyDate
   ] = useProperty()
+  
   /*eslint-disable react-hooks/exhaustive-deps */
   , _onUpdateChartConfig = useCallback(() => {
      setPropertyDate()
@@ -134,35 +143,14 @@ const DialogSelectN = memoIsShow((
        : void 0
   })
   , [
-    toggleInputById,
-    isShowInputById
-  ] = useIsShowInput(selectProps)
-  , _refItems = useRef([])
-  , [
     refTitles,
     addTitleIndex,
     removeTitleIndex
   ] = useTitles()
   , [
-    _setPropertyRoundTo,
-    _getPropertyRoundTo
-  ] = useProperty(dfRt)
-  , _refFromDate = useRef()
-  , _refSeriaColor = useRef()
-
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _hSelect = useCallback((id, index, item) => {
-     getRefValue(_refItems)[index] = item
-     if (item) {
-       item.id = id
-       if (id === TABLE_ID) {
-         setChartConfigFromItem(item)
-       }
-     }
-  }, [])
-  // setChartConfigFromItem
-  /*eslint-enable react-hooks/exhaustive-deps */
-
+    _refItems,
+    _hSelect
+  ] = useSelectItem(setChartConfigFromItem)
   , _hLoad = useEventCallback(() => {
       const msgs = crMsgs(
         chartType,
