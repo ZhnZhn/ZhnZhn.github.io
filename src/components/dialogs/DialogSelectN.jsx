@@ -50,7 +50,7 @@ const DialogSelectN = memoIsShow((
 
     caption,
     noDate,
-    initFromDate=DF_INIT_FROM_DATE,
+    initFromDate,
     errNotYmdOrEmpty,
     isYmdOrEmpty,
     loadId,
@@ -91,7 +91,7 @@ const DialogSelectN = memoIsShow((
     setPropertyDate,
     getPropertyDate
   ] = useProperty()
-  
+
   /*eslint-disable react-hooks/exhaustive-deps */
   , _onUpdateChartConfig = useCallback(() => {
      setPropertyDate()
@@ -225,17 +225,17 @@ const DialogSelectN = memoIsShow((
           hSelect={_hSelect}
         />
       </FocusFirstCombobox>
-      { _isRowFd && <D.ShowHide isShow={isShowFd}>
-          <D.RowDate
-            innerRef={_refFromDate}
-            isShowLabels={isShowLabels}
-            title="From Date:"
-            initialValue={initFromDate}
-            errorMsg={errNotYmdOrEmpty}
-            onTest={isYmdOrEmpty}
-          />
-        </D.ShowHide>
-      }
+      <D.ShowHide isShow={_isRowFd && isShowFd}>
+        <D.RowDate
+          innerRef={_refFromDate}
+          isShowLabels={isShowLabels}
+          title="From Date:"
+          initialValue={initFromDate || DF_INIT_FROM_DATE}
+          errorMsg={errNotYmdOrEmpty}
+          onTest={isYmdOrEmpty}
+        />
+      </D.ShowHide>
+
       { isCh && <D.RowChartDate
           refSeriaColor={_refSeriaColor}
           chartType={chartType}

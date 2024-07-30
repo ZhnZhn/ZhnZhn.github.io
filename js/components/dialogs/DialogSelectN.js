@@ -38,7 +38,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       msgOnNotSelected,
       caption,
       noDate,
-      initFromDate = DF_INIT_FROM_DATE,
+      initFromDate,
       errNotYmdOrEmpty,
       isYmdOrEmpty,
       loadId,
@@ -140,13 +140,13 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
         isShowById: isShowInputById,
         hSelect: _hSelect
       })
-    }), _isRowFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-      isShow: isShowFd,
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+      isShow: _isRowFd && isShowFd,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowDate, {
         innerRef: _refFromDate,
         isShowLabels: isShowLabels,
         title: "From Date:",
-        initialValue: initFromDate,
+        initialValue: initFromDate || DF_INIT_FROM_DATE,
         errorMsg: errNotYmdOrEmpty,
         onTest: isYmdOrEmpty
       })
