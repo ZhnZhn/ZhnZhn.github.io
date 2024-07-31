@@ -42,7 +42,6 @@ const _crChbToggleInitValue = (
 const _crCheckBoxItem = (
   item,
   index, {
-    crIsId,
     onToggle,
     onCheckCaption,
     onUnCheckCaption
@@ -55,7 +54,7 @@ const _crCheckBoxItem = (
       color={TOGGLE_INPUT_CHECKBOX_COLOR}
       caption={item.caption}
       captionStyle={S_CAPTION}
-      onToggle={() => onToggle(crIsId(item.id))}
+      onToggle={() => onToggle(item.id)}
     />
     <RowCheckBox1
       style={S_CHB_CAPTION}
@@ -76,7 +75,6 @@ const ModalToggle = ({
   isShowFd,
   isCh,
   isShowChart,
-  crIsId,
   onToggle,
   onCheckCaption,
   onUnCheckCaption,
@@ -93,7 +91,6 @@ const ModalToggle = ({
     <ItemStack
       items={selectProps}
       crItem={_crCheckBoxItem}
-      crIsId={crIsId}
       onToggle={onToggle}
       onCheckCaption={onCheckCaption}
       onUnCheckCaption={onUnCheckCaption}
@@ -118,6 +115,5 @@ const ModalToggle = ({
     }
   </ModalPopup>
 );
-
 
 export default ModalToggle

@@ -27,7 +27,6 @@ import D from './DialogCell';
 import SelectList from './SelectList';
 
 import {
-  crIsId,
   getItemValue,
   crMsgs
 } from './dialogFn';
@@ -208,7 +207,6 @@ const DialogSelectN = memoIsShow((
         isShowFd={isShowFd}
         isCh={isCh}
         isShowChart={isShowChart}
-        crIsId={crIsId}
         onToggle={toggleInputById}
         onCheckCaption={addTitleIndex}
         onUnCheckCaption={removeTitleIndex}

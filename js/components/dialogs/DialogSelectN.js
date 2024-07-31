@@ -124,7 +124,6 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       isShowFd: isShowFd,
       isCh: isCh,
       isShowChart: isShowChart,
-      crIsId: _dialogFn.crIsId,
       onToggle: toggleInputById,
       onCheckCaption: addTitleIndex,
       onUnCheckCaption: removeTitleIndex,

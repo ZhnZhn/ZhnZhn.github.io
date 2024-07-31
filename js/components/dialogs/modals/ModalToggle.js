@@ -31,7 +31,6 @@ const S_ROW_FLEX = {
 const _crChbToggleInitValue = isRow => (0, _uiApi.isBool)(isRow) ? isRow : true;
 const _crCheckBoxItem = (item, index, _ref) => {
   let {
-    crIsId,
     onToggle,
     onCheckCaption,
     onUnCheckCaption
@@ -44,7 +43,7 @@ const _crCheckBoxItem = (item, index, _ref) => {
       color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
       caption: item.caption,
       captionStyle: S_CAPTION,
-      onToggle: () => onToggle(crIsId(item.id))
+      onToggle: () => onToggle(item.id)
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       style: S_CHB_CAPTION,
       color: _Style.TOGGLE_CAPTION_CHECKBOX_COLOR,
@@ -64,7 +63,6 @@ const ModalToggle = _ref2 => {
     isShowFd,
     isCh,
     isShowChart,
-    crIsId,
     onToggle,
     onCheckCaption,
     onUnCheckCaption,
@@ -83,7 +81,6 @@ const ModalToggle = _ref2 => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
       items: selectProps,
       crItem: _crCheckBoxItem,
-      crIsId: crIsId,
       onToggle: onToggle,
       onCheckCaption: onCheckCaption,
       onUnCheckCaption: onUnCheckCaption
