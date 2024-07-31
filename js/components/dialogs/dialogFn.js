@@ -1,16 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getItemValue = exports.crMsgs = exports.crIsToggleInit = exports.crIsId = void 0;
+exports.getItemValue = exports.crMsgs = void 0;
 var _ChartOptionsFn = require("./ChartOptionsFn");
 var _ChartOptionsTypes = require("./ChartOptionsTypes");
-const crIsId = id => "is" + id + "Select";
-exports.crIsId = crIsId;
-const crIsToggleInit = selectProps => selectProps.reduce((toggleConfig, item) => {
-  toggleConfig[crIsId(item.id)] = true;
-  return toggleConfig;
-}, Object.create(null));
-exports.crIsToggleInit = crIsToggleInit;
 const getItemValue = item => (item || {}).value;
 exports.getItemValue = getItemValue;
 const _geSelectPropsCaption = (selectProps, index) => selectProps[index].caption;
