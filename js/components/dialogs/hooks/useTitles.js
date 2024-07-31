@@ -2,20 +2,14 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
 var _uiApi = require("../../uiApi");
-
 const useTitles = () => {
-  const refTitles = (0, _uiApi.useRef)([0]),
-        addTitleIndex = (0, _uiApi.useCallback)(index => {
+  const refTitles = (0, _uiApi.useRef)([0]);
+  return [refTitles, ...(0, _uiApi.useMemo)(() => [index => {
     (0, _uiApi.getRefValue)(refTitles).push(index);
-  }, []),
-        removeTitleIndex = (0, _uiApi.useCallback)(index => {
+  }, index => {
     refTitles.current = (0, _uiApi.getRefValue)(refTitles).filter(v => v !== index);
-  }, []);
-  return [refTitles, addTitleIndex, removeTitleIndex];
+  }], [])];
 };
-
-var _default = useTitles;
-exports.default = _default;
+var _default = exports.default = useTitles;
 //# sourceMappingURL=useTitles.js.map

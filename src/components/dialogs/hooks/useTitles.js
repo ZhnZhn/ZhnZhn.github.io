@@ -1,22 +1,22 @@
 import {
   useRef,
-  useCallback,
+  useMemo,
   getRefValue
 } from '../../uiApi';
 
 const useTitles = () => {
-  const refTitles = useRef([0])
-  , addTitleIndex = useCallback(index => {
-    getRefValue(refTitles).push(index)
-  }, [])
-  , removeTitleIndex = useCallback(index => {
-     refTitles.current = getRefValue(refTitles)
-       .filter(v => v !== index)
-  }, []);
+  const refTitles = useRef([0]);
   return [
     refTitles,
-    addTitleIndex,
-    removeTitleIndex
+    ...useMemo(() => [
+      index => {
+        getRefValue(refTitles).push(index)
+      },
+      index => {
+         refTitles.current = getRefValue(refTitles)
+           .filter(v => v !== index)
+      }
+    ], [])    
   ];
 };
 
