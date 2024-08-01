@@ -1,1 +1,1 @@
-{"items":[{"c":"Whole country","v":"00"},{"c":"Capital city","v":"CC"},{"c":"Capital Region","v":"CR"},{"c":"Capital city and suburbs","v":"CS"}]}
+{"items":[{"c":"Whole country","v":"00","not":["EF"]},{"c":"Capital city","v":"CC","not":["ED","NH","NF"]},{"c":"Capital Region","v":"CR","not":["ED","EF"]},{"c":"Capital city and suburbs","v":"CS","not":["ED","NF","NH"]}]}
