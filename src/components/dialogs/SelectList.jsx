@@ -6,7 +6,8 @@ const SelectList = ({
   isShowLabels,
   selectProps,
   isShowById,
-  hSelect
+  hSelect,
+  filters
 }) => safeMap(selectProps, ({type, id, ...restItem}, index) => {
   const Comp = !type
     ? D.SelectWithLoad
@@ -23,6 +24,7 @@ const SelectList = ({
         isShow={isShow}
         isShowLabels={isShowLabels}
         onSelect={_onSelect}
+        filters={filters}
       />}
     </D.ShowHide>
   );

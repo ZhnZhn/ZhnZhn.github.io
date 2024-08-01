@@ -77,7 +77,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       toggleOptions: isOpt || isCh ? toggleOptions : void 0
     }),
     [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)(),
-    [_refItems, _hSelect] = (0, _useSelectItem.default)(setChartConfigFromItem),
+    [_refItems, _hSelect, filters] = (0, _useSelectItem.default)(setChartConfigFromItem),
     _hLoad = (0, _useEventCallback.default)(() => {
       const msgs = (0, _dialogFn.crMsgs)(chartType, (0, _uiApi.getRefValue)(_refItems), selectProps, msgOnNotSelected);
       if (msgs.length === 0) {
@@ -137,7 +137,8 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
         isShowLabels: isShowLabels,
         selectProps: selectProps,
         isShowById: isShowInputById,
-        hSelect: _hSelect
+        hSelect: _hSelect,
+        filters: filters
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: _isRowFd && isShowFd,

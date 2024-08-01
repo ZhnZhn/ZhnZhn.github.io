@@ -12,7 +12,8 @@ const SelectList = _ref => {
     isShowLabels,
     selectProps,
     isShowById,
-    hSelect
+    hSelect,
+    filters
   } = _ref;
   return (0, _uiApi.safeMap)(selectProps, (_ref2, index) => {
     let {
@@ -31,7 +32,8 @@ const SelectList = _ref => {
         ...restItem,
         isShow: isShow,
         isShowLabels: isShowLabels,
-        onSelect: _onSelect
+        onSelect: _onSelect,
+        filters: filters
       })
     }, id);
   });
