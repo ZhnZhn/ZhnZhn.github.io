@@ -75,14 +75,24 @@ export const crInitialStateFromProps = (
   };
 }
 
+const _fCrFilter = (
+  filters
+) => item => filters.indexOf(item.v) === -1
+
 const _filterOptions = (
   options,
-  value
+  value,
+  filters
 ) => {
-   const _value = value.toLowerCase();
-   return options.filter(item => item._c
-     .indexOf(_value) !== -1
-   );
+   const _value = value.toLowerCase()
+   , _isCaptionItem = item => item._c.indexOf(_value) !== -1
+   , _isFilterItem = filters
+        ? _fCrFilter(filters)
+        : void 0
+  , _isItem = _isFilterItem
+      ? item => _isCaptionItem(item) && _isFilterItem(item)
+      : _isCaptionItem;
+   return options.filter(_isItem);
 }
 
 export const crFilterOptions = (
@@ -90,11 +100,70 @@ export const crFilterOptions = (
   token,
   props
 ) => {
-  const _arr = _filterOptions(options, token);
+  const _arr = _filterOptions(options, token, props.filters);
   if (_arr.length === 0){
     _arr.push(_crInputItem(token, props))
   }
   return _arr;
+}
+
+export const crOptionsFromInitialOptions = (prevState) => {
+  const {
+    stateFilters,
+    initialOptions
+  } = prevState;
+  return stateFilters
+    ? initialOptions.filter(_fCrFilter(stateFilters))
+    : initialOptions;
+}
+
+export const updateOptionsIfFilters = (
+  state,
+  setState,
+  filters,
+  propCaption,
+  onSelect,
+  _getCurrentComp,
+  _refIndexActive
+) => {
+  if (state.stateFilters !== filters) {
+    setState(prevState => {
+      let _nextState;
+      if (filters) {
+        const { initialOptions } = prevState
+        , _options = filters.length === 0
+           ? initialOptions
+           : initialOptions.filter(_fCrFilter(filters))
+        , _isRequireUpdateOptions = _options.length !== initialOptions.length;
+
+        let _value = prevState.value;
+        if (_value) {
+          const _v = prevState
+            .initialOptions
+            .find(item => item[propCaption] === _value).v;
+          if (filters.indexOf(_v) !== -1) {
+            _value = ""
+          }
+          if (!_value && _isRequireUpdateOptions) {
+            undecorateComp(_getCurrentComp())
+            setRefValue(_refIndexActive, 0)
+            setTimeout(onSelect, 200)
+          }
+        }
+        _nextState = {
+          value: _value,
+          options: _isRequireUpdateOptions
+            ? _options
+            : prevState.options
+        }
+      }
+      return {
+        ...prevState,
+        stateFilters: filters,
+        ..._nextState
+      };
+    })
+  }
 }
 
 const _calcDeltaTop = (

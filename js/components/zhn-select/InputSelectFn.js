@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.undecorateComp = exports.stepUpOption = exports.stepDownOption = exports.makeVisible = exports.decorateCurrentComp = exports.crWidthStyle = exports.crValue = exports.crInitialStateFromProps = exports.crFilterOptions = exports.crAriaExpandedProps = exports.NO_ITEMS_FOUND_VALUE = void 0;
+exports.updateOptionsIfFilters = exports.undecorateComp = exports.stepUpOption = exports.stepDownOption = exports.makeVisible = exports.decorateCurrentComp = exports.crWidthStyle = exports.crValue = exports.crOptionsFromInitialOptions = exports.crInitialStateFromProps = exports.crFilterOptions = exports.crAriaExpandedProps = exports.NO_ITEMS_FOUND_VALUE = void 0;
 var _uiApi = require("../uiApi");
 var _CL = require("./CL");
 const NO_ITEMS_FOUND_CAPTION = "No items found";
@@ -28,7 +28,7 @@ const _crInputItem = (inputValue, _ref) => {
     maxInput
   } = _ref;
   const _inputValue = inputValue.slice(0, maxInput),
-    _caption = isWithInput ? INPUT_PREFIX + " " + _inputValue : NO_ITEMS_FOUND_CAPTION;
+    _caption = isWithInput ? `${INPUT_PREFIX} ${_inputValue}` : NO_ITEMS_FOUND_CAPTION;
   return {
     [propCaption]: _caption,
     _c: _caption,
@@ -49,18 +49,66 @@ const crInitialStateFromProps = (propCaption, options) => {
   };
 };
 exports.crInitialStateFromProps = crInitialStateFromProps;
-const _filterOptions = (options, value) => {
-  const _value = value.toLowerCase();
-  return options.filter(item => item._c.indexOf(_value) !== -1);
+const _fCrFilter = filters => item => filters.indexOf(item.v) === -1;
+const _filterOptions = (options, value, filters) => {
+  const _value = value.toLowerCase(),
+    _isCaptionItem = item => item._c.indexOf(_value) !== -1,
+    _isFilterItem = filters ? _fCrFilter(filters) : void 0,
+    _isItem = _isFilterItem ? item => _isCaptionItem(item) && _isFilterItem(item) : _isCaptionItem;
+  return options.filter(_isItem);
 };
 const crFilterOptions = (options, token, props) => {
-  const _arr = _filterOptions(options, token);
+  const _arr = _filterOptions(options, token, props.filters);
   if (_arr.length === 0) {
     _arr.push(_crInputItem(token, props));
   }
   return _arr;
 };
 exports.crFilterOptions = crFilterOptions;
+const crOptionsFromInitialOptions = prevState => {
+  const {
+    stateFilters,
+    initialOptions
+  } = prevState;
+  return stateFilters ? initialOptions.filter(_fCrFilter(stateFilters)) : initialOptions;
+};
+exports.crOptionsFromInitialOptions = crOptionsFromInitialOptions;
+const updateOptionsIfFilters = (state, setState, filters, propCaption, onSelect, _getCurrentComp, _refIndexActive) => {
+  if (state.stateFilters !== filters) {
+    setState(prevState => {
+      let _nextState;
+      if (filters) {
+        const {
+            initialOptions
+          } = prevState,
+          _options = filters.length === 0 ? initialOptions : initialOptions.filter(_fCrFilter(filters)),
+          _isRequireUpdateOptions = _options.length !== initialOptions.length;
+        let _value = prevState.value;
+        if (_value) {
+          const _v = prevState.initialOptions.find(item => item[propCaption] === _value).v;
+          if (filters.indexOf(_v) !== -1) {
+            _value = "";
+          }
+          if (!_value && _isRequireUpdateOptions) {
+            undecorateComp(_getCurrentComp());
+            (0, _uiApi.setRefValue)(_refIndexActive, 0);
+            setTimeout(onSelect, 200);
+          }
+        }
+        _nextState = {
+          value: _value,
+          options: _isRequireUpdateOptions ? _options : prevState.options
+        };
+      }
+      return {
+        ...prevState,
+        stateFilters: filters,
+        ..._nextState
+      };
+    });
+  }
+};
+exports.updateOptionsIfFilters = updateOptionsIfFilters;
 const _calcDeltaTop = (comp, optionsComp) => comp && optionsComp ? comp.offsetTop - optionsComp.scrollTop : void 0;
 const makeVisible = (comp, indexActive, optionsComp) => {
   if (comp) {
