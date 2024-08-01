@@ -26,6 +26,8 @@ import {
   crValue,
   crInitialStateFromProps,
   crFilterOptions,
+  crOptionsFromInitialOptions,
+  updateOptionsIfFilters,
 
   makeVisible,
   decorateCurrentComp,
@@ -66,6 +68,8 @@ const InputSelect = ({
   isLoadingFailed,
   placeholder,
   optionNames,
+
+  filters,
 
   onSelect=FN_NOOP,
   onLoadOption=FN_NOOP
@@ -179,7 +183,8 @@ const InputSelect = ({
           token, {
           propCaption,
           isWithInput,
-          maxInput
+          maxInput,
+          filters
         })
       }))
       toggleIsShowOption(true)
@@ -195,7 +200,8 @@ const InputSelect = ({
      toggleIsShowOption(false)
      setState(prevState => ({
        ...prevState,
-       options: prevState.initialOptions,
+       //options: prevState.initialOptions,
+       options: crOptionsFromInitialOptions(prevState),
        value: ""
      }))
   }, [])
@@ -313,6 +319,16 @@ const InputSelect = ({
   // _getCurrentComp
   /*eslint-unable react-hooks/exhaustive-deps */
 
+  updateOptionsIfFilters(
+    state,
+    setState,
+    filters,
+    propCaption,
+    onSelect,
+    _getCurrentComp,
+    _refIndexActive
+  )
+
   const _rootWidthStyle = crWidthStyle(width, style)
   , [
     afterInputEl,
@@ -355,7 +371,7 @@ const InputSelect = ({
          ref={_refInput}
          className={CL_INPUT}
          type="text"
-         autoComplete="off"
+         //autoComplete="off"
          autoCorrect="off"
          spellCheck={false}
          value={value}
@@ -363,7 +379,7 @@ const InputSelect = ({
          onChange={_hInputChange}
          onKeyDown={_hInputKeyDown}
       />
-      {afterInputEl}      
+      {afterInputEl}
       {isShowOption && <OptionsView
         id={_optionsViewId}
         widthStyle={_optionViewWidthStyle}

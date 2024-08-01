@@ -32,6 +32,7 @@ const InputSelect = _ref => {
     isLoadingFailed,
     placeholder,
     optionNames,
+    filters,
     onSelect = FN_NOOP,
     onLoadOption = FN_NOOP
   } = _ref;
@@ -105,7 +106,8 @@ const InputSelect = _ref => {
           options: (0, _InputSelectFn.crFilterOptions)(tokenLn > valueLn ? options : initialOptions, token, {
             propCaption,
             isWithInput,
-            maxInput
+            maxInput,
+            filters
           })
         }));
         toggleIsShowOption(true);
@@ -120,7 +122,8 @@ const InputSelect = _ref => {
       toggleIsShowOption(false);
       setState(prevState => ({
         ...prevState,
-        options: prevState.initialOptions,
+        //options: prevState.initialOptions,
+        options: (0, _InputSelectFn.crOptionsFromInitialOptions)(prevState),
         value: ""
       }));
     }, [])
@@ -220,6 +223,7 @@ const InputSelect = _ref => {
   // _getCurrentComp
   /*eslint-unable react-hooks/exhaustive-deps */
 
+  (0, _InputSelectFn.updateOptionsIfFilters)(state, setState, filters, propCaption, onSelect, _getCurrentComp, _refIndexActive);
   const _rootWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, style),
     [afterInputEl, _placeholder] = (0, _crAfterInputEl.default)(isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isFocused && value, isShowOption, labelId, _optionsViewId, _hClear, toggleIsShowOption, propsOptions),
     _optionViewWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, isShowOption ? _styleFn.S_BLOCK : _styleFn.S_NONE);
@@ -234,8 +238,9 @@ const InputSelect = _ref => {
       "aria-labelledby": labelId,
       ref: _refInput,
       className: _CL.CL_INPUT,
-      type: "text",
-      autoComplete: "off",
+      type: "text"
+      //autoComplete="off"
+      ,
       autoCorrect: "off",
       spellCheck: false,
       value: value,
