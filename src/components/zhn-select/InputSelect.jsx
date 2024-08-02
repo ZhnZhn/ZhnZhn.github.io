@@ -11,6 +11,10 @@ import {
   getRefValue,
   focusRefElement
 } from '../uiApi';
+import {
+  crAriaExpandedProps,
+  crAriaComboboxProps
+} from '../ariaFn';
 
 import useToggle from '../hooks/useToggle';
 
@@ -21,8 +25,7 @@ import {
 
 import crAfterInputEl from './crAfterInputEl';
 import {
-  NO_ITEMS_FOUND_VALUE,
-  crAriaExpandedProps,
+  NO_ITEMS_FOUND_VALUE,  
   crWidthStyle,
 
   crValue,
@@ -48,11 +51,17 @@ import {
   CL_INPUT
 } from './CL';
 
-const FN_NOOP = () => {};
+const FN_NOOP = () => {}
+, DF_PROP_NAME_CAPTION = "caption"
+, _crItemFromInput = value => value ? {
+   [DF_PROP_NAME_CAPTION]: value,
+   value: value,
+   isInput: true
+} : void 0;
 
 const InputSelect = ({
   labelId,
-  propCaption="caption",
+  propCaption=DF_PROP_NAME_CAPTION,
   ItemOptionComp=ItemOptionDf,
   options: propsOptions,
   optionName="",
@@ -147,21 +156,13 @@ const InputSelect = ({
         onSelect()
       } else if (item.value !== NO_ITEMS_FOUND_VALUE) {
         const _item = {...item};
-        delete _item._c
+        delete _item._c;
         onSelect(_item)
-      } else if (!isWithInput) {
-        onSelect()
       } else {
-        const _value = item.inputValue.trim();
-        if (!_value) {
-          onSelect()
-        } else {
-          onSelect({
-           caption: _value,
-           value: _value,
-           isInput: true
-         })
-        }
+        onSelect(isWithInput
+          ? _crItemFromInput(item.inputValue.trim())
+          : void 0
+        )
       }
     }
     // isWithInput, onSelect
@@ -369,9 +370,7 @@ const InputSelect = ({
          {...touchHandlers}
 
          {...crAriaExpandedProps(isShowOption, _optionsViewId)}
-         role="combobox"
-         aria-autocomplete="list"
-         aria-labelledby={labelId}
+         {...crAriaComboboxProps(labelId)}
 
          ref={_refInput}
          className={CL_INPUT}

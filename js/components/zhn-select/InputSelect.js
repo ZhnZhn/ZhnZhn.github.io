@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _ariaFn = require("../ariaFn");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _styleFn = require("../styleFn");
 var _crAfterInputEl = _interopRequireDefault(require("./crAfterInputEl"));
@@ -13,11 +14,17 @@ var _OptionsView = _interopRequireDefault(require("./OptionsView"));
 var _useTouchHandlers = _interopRequireDefault(require("./useTouchHandlers"));
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
-const FN_NOOP = () => {};
+const FN_NOOP = () => {},
+  DF_PROP_NAME_CAPTION = "caption",
+  _crItemFromInput = value => value ? {
+    [DF_PROP_NAME_CAPTION]: value,
+    value: value,
+    isInput: true
+  } : void 0;
 const InputSelect = _ref => {
   let {
     labelId,
-    propCaption = "caption",
+    propCaption = DF_PROP_NAME_CAPTION,
     ItemOptionComp = _ItemOptionDf.default,
     options: propsOptions,
     optionName = "",
@@ -76,19 +83,8 @@ const InputSelect = _ref => {
         };
         delete _item._c;
         onSelect(_item);
-      } else if (!isWithInput) {
-        onSelect();
       } else {
-        const _value = item.inputValue.trim();
-        if (!_value) {
-          onSelect();
-        } else {
-          onSelect({
-            caption: _value,
-            value: _value,
-            isInput: true
-          });
-        }
+        onSelect(isWithInput ? _crItemFromInput(item.inputValue.trim()) : void 0);
       }
     }
     // isWithInput, onSelect
@@ -233,10 +229,8 @@ const InputSelect = _ref => {
     style: _rootWidthStyle,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
       ...touchHandlers,
-      ...(0, _InputSelectFn.crAriaExpandedProps)(isShowOption, _optionsViewId),
-      role: "combobox",
-      "aria-autocomplete": "list",
-      "aria-labelledby": labelId,
+      ...(0, _ariaFn.crAriaExpandedProps)(isShowOption, _optionsViewId),
+      ...(0, _ariaFn.crAriaComboboxProps)(labelId),
       ref: _refInput,
       className: _CL.CL_INPUT,
       type: "text",
