@@ -40,7 +40,7 @@ const InputSelect = _ref => {
     _refInput = (0, _uiApi.useRef)(),
     _refOptionsComp = (0, _uiApi.useRef)(),
     _refIndexNode = (0, _uiApi.useRef)(),
-    _refIndexActive = (0, _uiApi.useRef)(),
+    _refIndexActive = (0, _uiApi.useRef)(0),
     [isFocused, touchHandlers] = (0, _useTouchHandlers.default)(),
     [isShowOption, toggleIsShowOption] = (0, _useToggle.default)(),
     [state, setState] = (0, _uiApi.useState)(() => (0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions)),
@@ -53,13 +53,18 @@ const InputSelect = _ref => {
     _getItemCaption = (0, _uiApi.useMemo)(() => item => (0, _InputSelectFn.crValue)((item || {})[propCaption]), [propCaption])
 
     /*eslint-disable react-hooks/exhaustive-deps */,
-    [_hideOptions, _getCurrentComp, _decorateCurrentComp, _selectItem] = (0, _uiApi.useMemo)(() => [() => toggleIsShowOption(false), () => {
+    [_hideOptions, _getCurrentComp, _decorateCurrentComp, _setSelectedItemIndex, _selectItem] = (0, _uiApi.useMemo)(() => [() => toggleIsShowOption(false), () => {
       const _optionsEl = (0, _uiApi.getRefValue)(_refOptionsComp);
-      if (_optionsEl) {
-        return _optionsEl.childNodes.item((0, _uiApi.getRefValue)(_refIndexActive));
-      }
+      return _optionsEl ? _optionsEl.childNodes.item((0, _uiApi.getRefValue)(_refIndexActive)) : void 0;
     }, () => {
       (0, _InputSelectFn.decorateCurrentComp)(_getCurrentComp(), (0, _uiApi.getRefValue)(_refIndexNode), (0, _uiApi.getRefValue)(_refIndexActive));
+    },
+    // _getCurrentComp
+    index => {
+      if ((0, _uiApi.isNumber)(index) && index > -1) {
+        (0, _InputSelectFn.undecorateComp)(_getCurrentComp());
+        (0, _uiApi.setRefValue)(_refIndexActive, index);
+      }
     },
     // _getCurrentComp
     item => {
@@ -97,8 +102,7 @@ const InputSelect = _ref => {
         return;
       }
       if (tokenLn !== valueLn) {
-        (0, _InputSelectFn.undecorateComp)(_getCurrentComp());
-        (0, _uiApi.setRefValue)(_refIndexActive, 0);
+        _setSelectedItemIndex(0);
         _decorateCurrentComp();
         setState(prevState => ({
           ...prevState,
@@ -116,13 +120,11 @@ const InputSelect = _ref => {
 
     /*eslint-disable react-hooks/exhaustive-deps */,
     _clearInput = (0, _uiApi.useMemo)(() => () => {
-      (0, _InputSelectFn.undecorateComp)(_getCurrentComp());
-      (0, _uiApi.setRefValue)(_refIndexActive, 0);
+      _setSelectedItemIndex(0);
       _selectItem();
       toggleIsShowOption(false);
       setState(prevState => ({
         ...prevState,
-        //options: prevState.initialOptions,
         options: (0, _InputSelectFn.crOptionsFromInitialOptions)(prevState),
         value: ""
       }));
@@ -181,8 +183,7 @@ const InputSelect = _ref => {
 
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hClickItem = (0, _uiApi.useMemo)(() => (item, index) => {
-      (0, _InputSelectFn.undecorateComp)(_getCurrentComp());
-      (0, _uiApi.setRefValue)(_refIndexActive, index);
+      _setSelectedItemIndex(index);
       toggleIsShowOption(false);
       setState(prevState => ({
         ...prevState,
@@ -206,11 +207,11 @@ const InputSelect = _ref => {
 
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {
-    (0, _uiApi.setRefValue)(_refIndexActive, 0);
+    _setSelectedItemIndex(0);
     toggleIsShowOption(false);
     setState((0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions));
   }, [propsOptions]);
-  //propCaption
+  //propCaption, _setSelectedItemIndex
   /*eslint-unable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -223,7 +224,7 @@ const InputSelect = _ref => {
   // _getCurrentComp
   /*eslint-unable react-hooks/exhaustive-deps */
 
-  (0, _InputSelectFn.updateOptionsIfFilters)(state, setState, filters, propCaption, onSelect, _getCurrentComp, _refIndexActive);
+  (0, _InputSelectFn.updateOptionsIfFilters)(state, setState, filters, propCaption, onSelect, _setSelectedItemIndex);
   const _rootWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, style),
     [afterInputEl, _placeholder] = (0, _crAfterInputEl.default)(isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isFocused && value, isShowOption, labelId, _optionsViewId, _hClear, toggleIsShowOption, propsOptions),
     _optionViewWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, isShowOption ? _styleFn.S_BLOCK : _styleFn.S_NONE);
@@ -238,9 +239,8 @@ const InputSelect = _ref => {
       "aria-labelledby": labelId,
       ref: _refInput,
       className: _CL.CL_INPUT,
-      type: "text"
-      //autoComplete="off"
-      ,
+      type: "text",
+      autoComplete: "off",
       autoCorrect: "off",
       spellCheck: false,
       value: value,

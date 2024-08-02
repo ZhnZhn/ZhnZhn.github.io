@@ -73,7 +73,7 @@ const crOptionsFromInitialOptions = prevState => {
   return stateFilters ? initialOptions.filter(_fCrFilter(stateFilters)) : initialOptions;
 };
 exports.crOptionsFromInitialOptions = crOptionsFromInitialOptions;
-const updateOptionsIfFilters = (state, setState, filters, propCaption, onSelect, _getCurrentComp, _refIndexActive) => {
+const updateOptionsIfFilters = (state, setState, filters, propCaption, onSelect, setSelectedItemIndex) => {
   if (state.stateFilters !== filters) {
     setState(prevState => {
       let _nextState;
@@ -85,14 +85,18 @@ const updateOptionsIfFilters = (state, setState, filters, propCaption, onSelect,
           _isRequireUpdateOptions = _options.length !== initialOptions.length;
         let _value = prevState.value;
         if (_value) {
-          const _v = prevState.initialOptions.find(item => item[propCaption] === _value).v;
+          const _isPropCaptionEqualValue = item => item[propCaption] === _value,
+            _v = initialOptions.find(_isPropCaptionEqualValue).v;
           if (filters.indexOf(_v) !== -1) {
             _value = "";
           }
-          if (!_value && _isRequireUpdateOptions) {
-            undecorateComp(_getCurrentComp());
-            (0, _uiApi.setRefValue)(_refIndexActive, 0);
-            setTimeout(onSelect, 200);
+          if (_isRequireUpdateOptions) {
+            if (_value) {
+              setSelectedItemIndex(_options.findIndex(_isPropCaptionEqualValue));
+            } else {
+              setSelectedItemIndex(0);
+              setTimeout(onSelect, 200);
+            }
           }
         }
         _nextState = {

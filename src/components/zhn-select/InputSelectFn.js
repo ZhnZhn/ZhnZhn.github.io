@@ -123,8 +123,7 @@ export const updateOptionsIfFilters = (
   filters,
   propCaption,
   onSelect,
-  _getCurrentComp,
-  _refIndexActive
+  setSelectedItemIndex
 ) => {
   if (state.stateFilters !== filters) {
     setState(prevState => {
@@ -138,16 +137,20 @@ export const updateOptionsIfFilters = (
 
         let _value = prevState.value;
         if (_value) {
-          const _v = prevState
-            .initialOptions
-            .find(item => item[propCaption] === _value).v;
+          const _isPropCaptionEqualValue = item => item[propCaption] === _value
+          , _v = initialOptions.find(_isPropCaptionEqualValue).v;
           if (filters.indexOf(_v) !== -1) {
             _value = ""
           }
-          if (!_value && _isRequireUpdateOptions) {
-            undecorateComp(_getCurrentComp())
-            setRefValue(_refIndexActive, 0)
-            setTimeout(onSelect, 200)
+          if (_isRequireUpdateOptions){
+            if (_value) {
+              setSelectedItemIndex(_options
+                .findIndex(_isPropCaptionEqualValue)
+              )
+            } else {
+              setSelectedItemIndex(0)
+              setTimeout(onSelect, 200)
+            }
           }
         }
         _nextState = {

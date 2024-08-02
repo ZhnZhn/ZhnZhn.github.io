@@ -5,6 +5,8 @@ import {
   useMemo,
   useEffect,
 
+  isNumber,
+
   setRefValue,
   getRefValue,
   focusRefElement
@@ -80,7 +82,7 @@ const InputSelect = ({
   , _refOptionsComp = useRef()
   , _refIndexNode = useRef()
 
-  , _refIndexActive = useRef()
+  , _refIndexActive = useRef(0)
 
   , [
     isFocused,
@@ -115,14 +117,15 @@ const InputSelect = ({
     _hideOptions,
     _getCurrentComp,
     _decorateCurrentComp,
+    _setSelectedItemIndex,
     _selectItem
   ] = useMemo(() => [
     () => toggleIsShowOption(false),
     () => {
-      const _optionsEl = getRefValue(_refOptionsComp)
-      if (_optionsEl) {
-        return _optionsEl.childNodes.item(getRefValue(_refIndexActive))
-      }
+      const _optionsEl = getRefValue(_refOptionsComp);
+      return _optionsEl
+        ? _optionsEl.childNodes.item(getRefValue(_refIndexActive))
+        : void 0;
     },
     () => {
       decorateCurrentComp(
@@ -130,6 +133,13 @@ const InputSelect = ({
         getRefValue(_refIndexNode),
         getRefValue(_refIndexActive)
       )
+    },
+    // _getCurrentComp
+    index => {
+      if (isNumber(index) && index > -1) {
+        undecorateComp(_getCurrentComp())
+        setRefValue(_refIndexActive, index)
+      }
     },
     // _getCurrentComp
     item => {
@@ -170,8 +180,7 @@ const InputSelect = ({
     }
 
     if (tokenLn !== valueLn){
-      undecorateComp(_getCurrentComp())
-      setRefValue(_refIndexActive, 0)
+      _setSelectedItemIndex(0)
       _decorateCurrentComp()
       setState(prevState => ({
         ...prevState,
@@ -193,14 +202,12 @@ const InputSelect = ({
 
   /*eslint-disable react-hooks/exhaustive-deps */
   , _clearInput = useMemo(() => () => {
-     undecorateComp(_getCurrentComp())
-     setRefValue(_refIndexActive, 0)
+     _setSelectedItemIndex(0)
      _selectItem()
 
      toggleIsShowOption(false)
      setState(prevState => ({
        ...prevState,
-       //options: prevState.initialOptions,
        options: crOptionsFromInitialOptions(prevState),
        value: ""
      }))
@@ -213,7 +220,7 @@ const InputSelect = ({
       // enter
       case 13:{
          const item = options[getRefValue(_refIndexActive)]
-         , _value = _getItemCaption(item)
+         , _value = _getItemCaption(item);
          if (_value){
            toggleIsShowOption(false)
            setState(prevState => ({
@@ -264,8 +271,7 @@ const InputSelect = ({
 
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hClickItem = useMemo(() => (item, index) => {
-    undecorateComp(_getCurrentComp())
-    setRefValue(_refIndexActive, index)
+    _setSelectedItemIndex(index)
 
     toggleIsShowOption(false)
     setState(prevState => ({
@@ -295,14 +301,14 @@ const InputSelect = ({
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    setRefValue(_refIndexActive, 0)
+    _setSelectedItemIndex(0)
     toggleIsShowOption(false)
     setState(crInitialStateFromProps(
       propCaption,
       propsOptions
     ))
   }, [propsOptions])
-  //propCaption
+  //propCaption, _setSelectedItemIndex
   /*eslint-unable react-hooks/exhaustive-deps */
 
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -325,8 +331,7 @@ const InputSelect = ({
     filters,
     propCaption,
     onSelect,
-    _getCurrentComp,
-    _refIndexActive
+    _setSelectedItemIndex
   )
 
   const _rootWidthStyle = crWidthStyle(width, style)
@@ -371,7 +376,7 @@ const InputSelect = ({
          ref={_refInput}
          className={CL_INPUT}
          type="text"
-         //autoComplete="off"
+         autoComplete="off"
          autoCorrect="off"
          spellCheck={false}
          value={value}
