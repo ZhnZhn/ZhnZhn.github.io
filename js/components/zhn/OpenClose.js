@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _ariaFn = require("../ariaFn");
 var _styleFn = require("../styleFn");
 var _Color = require("../styles/Color");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
@@ -28,7 +29,7 @@ const S_ROOT_DIV = {
   PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
 //_pathV, _fillV, _childCl, _childStyle
-const _crConf = (isOpen, openColor) => isOpen ? [PATH_OPEN, openColor, _styleFn.CL_OPEN_CLOSE_EXP + " " + _styleFn.CL_SHOW_POPUP, _styleFn.S_BLOCK] : [PATH_CLOSE, _Color.TRANSPARENT_COLOR, _styleFn.CL_OPEN_CLOSE_EXP, _styleFn.S_NONE];
+const _crConf = (isOpen, openColor) => isOpen ? [PATH_OPEN, openColor, `${_styleFn.CL_OPEN_CLOSE_EXP} ${_styleFn.CL_SHOW_POPUP}`, _styleFn.S_BLOCK] : [PATH_CLOSE, _Color.TRANSPARENT_COLOR, _styleFn.CL_OPEN_CLOSE_EXP, _styleFn.S_NONE];
 const OpenClose = _ref => {
   let {
     refItem,
@@ -61,11 +62,10 @@ const OpenClose = _ref => {
       style: rowStyle,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         ...dndHandlers,
-        ref: refItem,
-        "aria-expanded": isOpen,
-        "aria-controls": _childrenWrapperId,
-        tabIndex: "0",
+        ...(0, _ariaFn.crAriaExpandedProps)(isOpen, _childrenWrapperId),
         role: role,
+        tabIndex: "0",
+        ref: refItem,
         className: className || _styleFn.CL_OPEN_CLOSE,
         style: ocStyle,
         onClick: toggleIsOpen,

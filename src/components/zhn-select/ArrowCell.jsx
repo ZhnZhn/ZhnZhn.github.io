@@ -1,4 +1,4 @@
-import { crAriaExpandedProps } from './InputSelectFn';
+import { crAriaExpandedProps } from '../ariaFn';
 import { CL_BT_ARROW } from './CL';
 
 const ARROW_BORDER_COLOR = "#1b75bb transparent transparent"

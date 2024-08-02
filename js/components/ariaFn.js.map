@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/components/ariaFn.js"
+ ],
+ "file": "../../src/components/ariaFn.js",
+ "names": [
+  "crAriaExpandedProps",
+  "isExpaned",
+  "controlsId",
+  "exports",
+  "crAriaComboboxProps",
+  "labelId",
+  "role"
+ ],
+ "mappings": ";;;;AAAO,MAAMA,mBAAmB,GAAGA,CACjCC,SAAS,EACTC,UAAU,MACN;EACJ,eAAe,EAAED,SAAS;EAC1B,eAAe,EAAEA,SAAS,GACrBC,UAAU,GACV,KAAK;AACZ,CAAC,CAAC;AAAAC,OAAA,CAAAH,mBAAA,GAAAA,mBAAA;AAEK,MAAMI,mBAAmB,GAC9BC,OAAO,KACH;EACJC,IAAI,EAAE,UAAU;EAChB,mBAAmB,EAAE,MAAM;EAC3B,iBAAiB,EAAED;AACrB,CAAC,CAAC;AAAAF,OAAA,CAAAC,mBAAA,GAAAA,mBAAA"
+}

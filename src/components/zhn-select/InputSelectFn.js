@@ -9,15 +9,6 @@ import { CL_OPTIONS_ROW_ACTIVE } from './CL';
 const NO_ITEMS_FOUND_CAPTION = "No items found";
 export const NO_ITEMS_FOUND_VALUE = NO_ITEMS_FOUND_CAPTION
 
-export const crAriaExpandedProps = (
-  isShowOption,
-  controlsId
-) => ({
-  "aria-expanded": isShowOption,
-  "aria-controls": isShowOption
-     ? controlsId : void 0
-})
-
 export const crWidthStyle = (
   width,
   style

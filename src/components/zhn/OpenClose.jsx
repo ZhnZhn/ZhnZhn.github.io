@@ -1,4 +1,5 @@
 import { useId } from '../uiApi';
+import { crAriaExpandedProps } from '../ariaFn';
 
 import {
   CL_SHOW_POPUP,
@@ -84,11 +85,10 @@ const OpenClose = ({
       <div className={CL_NOT_SELECTED} style={rowStyle}>
         <div
           {...dndHandlers}
-          ref={refItem}
-          aria-expanded={isOpen}
-          aria-controls={_childrenWrapperId}
-          tabIndex="0"
+          {...crAriaExpandedProps(isOpen, _childrenWrapperId)}
           role={role}
+          tabIndex="0"
+          ref={refItem}                    
           className={className || CL_OPEN_CLOSE}
           style={ocStyle}
           onClick={toggleIsOpen}
