@@ -13,8 +13,9 @@ const SelectList = _ref => {
     selectProps,
     isShowById,
     hSelect,
-    filters
+    tupleFilter
   } = _ref;
+  const [filterId, filters] = tupleFilter || [];
   return (0, _uiApi.safeMap)(selectProps, (_ref2, index) => {
     let {
       type,
@@ -33,7 +34,7 @@ const SelectList = _ref => {
         isShow: isShow,
         isShowLabels: isShowLabels,
         onSelect: _onSelect,
-        filters: filters
+        filters: id === filterId ? void 0 : filters
       })
     }, id);
   });

@@ -149,7 +149,7 @@ const DialogSelectN = memoIsShow((
   , [
     _refItems,
     _hSelect,
-    filters
+    tupleFilter
   ] = useSelectItem(setChartConfigFromItem)
   , _hLoad = useEventCallback(() => {
       const msgs = crMsgs(
@@ -222,7 +222,7 @@ const DialogSelectN = memoIsShow((
           selectProps={selectProps}
           isShowById={isShowInputById}
           hSelect={_hSelect}
-          filters={filters}
+          tupleFilter={tupleFilter}
         />
       </FocusFirstCombobox>
       <D.ShowHide isShow={_isRowFd && isShowFd}>
