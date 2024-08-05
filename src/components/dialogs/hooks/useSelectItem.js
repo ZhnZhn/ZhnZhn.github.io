@@ -1,21 +1,22 @@
 import {
+  isArr,
   useRef,
   useState,
   useCallback,
   getRefValue,
-  setRefValue
 } from '../../uiApi';
 
-const _isArr = Array.isArray;
 const TABLE_ID = 'table';
+const _isRequireClearFilters = (
+  id,
+  tupleFilter
+) => id === tupleFilter[0] && isArr(tupleFilter[1]);
 
 const useSelectItem = (
   setChartConfigFromItem
 ) => {
   const _refItems = useRef([])
-
-  , _refFilterId = useRef()
-  , [filters, setFilters] = useState()
+  , [tupleFilter, setFilters] = useState([])
 
   , _hSelect = useCallback((id, index, item) => {
      getRefValue(_refItems)[index] = item
@@ -24,31 +25,24 @@ const useSelectItem = (
        if (id === TABLE_ID) {
          setChartConfigFromItem(item)
        }
-       setFilters(prevFilters => {
-         if (_isArr(item.not)) {
-           setRefValue(_refFilterId, id)
-           return item.not;
-         } else {
-           if (_isArr(prevFilters)) {
-             return prevFilters.length === 0
-               ? void 0
-               : id === getRefValue(_refFilterId)
-                  ? []
-                  : prevFilters;
-           } else {
-             return prevFilters;
-           }
-         }
-       })
+       setFilters(prevTupleFilter => isArr(item.not)
+         ? [id, item.not]
+         : _isRequireClearFilters(id, prevTupleFilter)
+           ? []
+           : prevTupleFilter
+       )
      } else {
-       setFilters()
+       setFilters(prevTupleFilter => _isRequireClearFilters(id, prevTupleFilter)
+         ? []
+         : prevTupleFilter
+       )
      }
   }, [setChartConfigFromItem]);
 
   return [
     _refItems,
     _hSelect,
-    filters
+    tupleFilter
   ];
 };
 
