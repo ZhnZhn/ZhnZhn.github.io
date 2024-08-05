@@ -118,43 +118,34 @@ export const updateOptionsIfFilters = (
 ) => {
   if (state.stateFilters !== filters) {
     setState(prevState => {
-      let _nextState;
-      if (filters) {
-        const { initialOptions } = prevState
-        , _options = filters.length === 0
-           ? initialOptions
-           : initialOptions.filter(_fCrFilter(filters))
-        , _isRequireUpdateOptions = _options.length !== initialOptions.length;
+      const { initialOptions } = prevState
+      , _options = !filters || filters.length === 0
+         ? initialOptions
+         : initialOptions.filter(_fCrFilter(filters))
 
-        let _value = prevState.value;
-        if (_value) {
-          const _isPropCaptionEqualValue = item => item[propCaption] === _value
-          , _v = initialOptions.find(_isPropCaptionEqualValue).v;
-          if (filters.indexOf(_v) !== -1) {
-            _value = ""
-          }
-          if (_isRequireUpdateOptions){
-            if (_value) {
-              setSelectedItemIndex(_options
-                .findIndex(_isPropCaptionEqualValue)
-              )
-            } else {
-              setSelectedItemIndex(0)
-              setTimeout(onSelect, 200)
-            }
-          }
+      let _value = prevState.value;
+      if (_value) {
+        const _isPropCaptionEqualValue = item => item[propCaption] === _value
+        , _v = initialOptions.find(_isPropCaptionEqualValue).v;
+        if (filters && filters.indexOf(_v) !== -1) {
+          _value = ""
         }
-        _nextState = {
-          value: _value,
-          options: _isRequireUpdateOptions
-            ? _options
-            : prevState.options
+
+        if (_value) {
+          setSelectedItemIndex(_options
+            .findIndex(_isPropCaptionEqualValue)
+          )
+        } else {
+          setSelectedItemIndex(0)
+          setTimeout(onSelect, 200)
         }
       }
+
       return {
         ...prevState,
         stateFilters: filters,
-        ..._nextState
+        options: _options,
+        value: _value
       };
     })
   }
