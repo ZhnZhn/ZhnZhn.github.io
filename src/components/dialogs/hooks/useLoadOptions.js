@@ -108,7 +108,7 @@ const _useIsReload = (
   isShow,
   isLoadingFailed
 ) => {
-  const _hasToggled = useHasNotEqual(isShow)
+  const [_hasToggled] = useHasNotEqual(isShow)
   return isShow && isLoadingFailed && _hasToggled;
 };
 

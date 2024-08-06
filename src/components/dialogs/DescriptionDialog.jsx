@@ -56,8 +56,8 @@ const DescriptionDialog = memoIsShow((props) => {
     '',
     INITIAL_DESCR
   ))
-  , _isNextProps = useHasNotEqual(props)
-  , _isNextDescrUrl = useHasNotEqual(descrUrl)
+  , [_isNextProps] = useHasNotEqual(props)
+  , [_isNextDescrUrl] = useHasNotEqual(descrUrl)
   , _isLoadDescr = !isLoading && isShow && descrUrl && (
       descrHtml === INITIAL_DESCR
       || _isNextDescrUrl

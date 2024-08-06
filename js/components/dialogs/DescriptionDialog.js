@@ -44,8 +44,8 @@ const DescriptionDialog = (0, _memoIsShow.default)(props => {
       errMsg,
       descrHtml
     }, setState] = (0, _uiApi.useState)(() => _crState(false, false, '', INITIAL_DESCR)),
-    _isNextProps = (0, _useHasNotEqual.default)(props),
-    _isNextDescrUrl = (0, _useHasNotEqual.default)(descrUrl),
+    [_isNextProps] = (0, _useHasNotEqual.default)(props),
+    [_isNextDescrUrl] = (0, _useHasNotEqual.default)(descrUrl),
     _isLoadDescr = !isLoading && isShow && descrUrl && (descrHtml === INITIAL_DESCR || _isNextDescrUrl || _isNextProps && isLoadFailed);
   (0, _uiApi.useEffect)(() => {
     if (_isLoadDescr) {

@@ -84,7 +84,7 @@ const _useLoad = (refLoadId, setLoadingFailed, setState) => {
   return loadOptions;
 };
 const _useIsReload = (isShow, isLoadingFailed) => {
-  const _hasToggled = (0, _useHasNotEqual.default)(isShow);
+  const [_hasToggled] = (0, _useHasNotEqual.default)(isShow);
   return isShow && isLoadingFailed && _hasToggled;
 };
 const useLoadOptions = (isShow, uri, jsonProp) => {
@@ -132,6 +132,5 @@ const useLoadOptions = (isShow, uri, jsonProp) => {
 
   return [state, loadOptions];
 };
-var _default = useLoadOptions;
-exports.default = _default;
+var _default = exports.default = useLoadOptions;
 //# sourceMappingURL=useLoadOptions.js.map
