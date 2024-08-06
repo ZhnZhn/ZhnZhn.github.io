@@ -48,35 +48,26 @@ const DialogContainer = () => {
        prevState.currentDialog = null
        return {...prevState};
      })
-  }, [])
+  }, []);
 
   useMdOption(mdOption => {
     if (mdOption) {
       const type = mdOption.modalDialogType
       , { inits } = state;
 
-      if (inits[type]){
-        Promise.resolve()
-          .then( _ => {
-            setState(prevState => _setTypeTo(
+      getModalDialog(inits[type] ? void 0 : type)
+        .then(comp => setState(prevState => {
+            if (comp) {
+              prevState.dialogs.push({ type, comp })
+              prevState.inits[type] = true
+            }
+            return _setTypeTo(
               prevState,
               type,
               mdOption
-            ))
+            );
           })
-      } else {
-        getModalDialog(type)
-          .then(comp => setState(prevState => {
-              prevState.dialogs.push({ type, comp })
-              prevState.inits[type] = true
-              return _setTypeTo(
-                prevState,
-                type,
-                mdOption
-              );
-            })
-          )
-      }
+        )
     }
   })
 
@@ -91,7 +82,7 @@ const DialogContainer = () => {
           data: data[type],
           onClose: bindTo(_hClose, type)
        }))}
-   </ModalDialogContainer>
+    </ModalDialogContainer>
   );
 };
 

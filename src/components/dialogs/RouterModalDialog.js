@@ -121,7 +121,7 @@ clearPrototypeOf(_router)
 
 export const getModalDialog = (
   id
-) => _resolve(_router[id])
+) => _resolve(id ? _router[id] : void 0)
 
 export const loadModalDialogs = (id) => {
   _router.loadDialogs(id)

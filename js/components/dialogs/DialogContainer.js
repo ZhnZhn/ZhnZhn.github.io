@@ -49,20 +49,16 @@ const DialogContainer = () => {
         {
           inits
         } = state;
-      if (inits[type]) {
-        Promise.resolve().then(_ => {
-          setState(prevState => _setTypeTo(prevState, type, mdOption));
-        });
-      } else {
-        (0, _RouterModalDialog.getModalDialog)(type).then(comp => setState(prevState => {
+      (0, _RouterModalDialog.getModalDialog)(inits[type] ? void 0 : type).then(comp => setState(prevState => {
+        if (comp) {
           prevState.dialogs.push({
             type,
             comp
           });
           prevState.inits[type] = true;
-          return _setTypeTo(prevState, type, mdOption);
-        }));
-      }
+        }
+        return _setTypeTo(prevState, type, mdOption);
+      }));
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialogContainer.default, {
