@@ -45,7 +45,7 @@ const DescriptionDialog = (0, _memoIsShow.default)(props => {
       descrHtml
     }, setState] = (0, _uiApi.useState)(() => _crState(false, false, '', INITIAL_DESCR)),
     [_isNextProps] = (0, _useHasNotEqual.default)(props),
-    [_isNextDescrUrl] = (0, _useHasNotEqual.default)(descrUrl),
+    [_isNextDescrUrl, isDescrUrlCurrentValue] = (0, _useHasNotEqual.default)(descrUrl),
     _isLoadDescr = !isLoading && isShow && descrUrl && (descrHtml === INITIAL_DESCR || _isNextDescrUrl || _isNextProps && isLoadFailed);
   (0, _uiApi.useEffect)(() => {
     if (_isLoadDescr) {
@@ -59,25 +59,23 @@ const DescriptionDialog = (0, _memoIsShow.default)(props => {
           let {
             json
           } = _temp === void 0 ? {} : _temp;
-          return setState(_crState(false, false, '', json || EMPTY_DESCR));
+          return isDescrUrlCurrentValue(descrUrl) && setState(_crState(false, false, '', json || EMPTY_DESCR));
         },
         onCatch: function (_temp2) {
           let {
             error
           } = _temp2 === void 0 ? {} : _temp2;
-          return setState(_crState(false, true, error.message, EMPTY_DESCR));
+          return isDescrUrlCurrentValue(descrUrl) && setState(_crState(false, true, error.message, EMPTY_DESCR));
         }
       });
     }
-  }, [_isLoadDescr, descrUrl]);
+  }, [_isLoadDescr, descrUrl, isDescrUrlCurrentValue]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
     caption: "About Data Source",
     isShow: isShow,
     style: S_DIALOG,
     onClose: onClose,
-    children: isLoading ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.SpinnerLoading, {}) : isLoadFailed
-    //? <SpinnerLoadFailed errMsg={errMsg} />
-    ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.LoadFailedMsg, {
+    children: isLoading ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.SpinnerLoading, {}) : isLoadFailed ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.LoadFailedMsg, {
       errMsg: errMsg
     }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivHtml.default, {
       style: S_DIV,

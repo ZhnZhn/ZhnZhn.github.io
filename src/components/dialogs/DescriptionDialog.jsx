@@ -57,12 +57,12 @@ const DescriptionDialog = memoIsShow((props) => {
     INITIAL_DESCR
   ))
   , [_isNextProps] = useHasNotEqual(props)
-  , [_isNextDescrUrl] = useHasNotEqual(descrUrl)
+  , [_isNextDescrUrl, isDescrUrlCurrentValue] = useHasNotEqual(descrUrl)
   , _isLoadDescr = !isLoading && isShow && descrUrl && (
       descrHtml === INITIAL_DESCR
       || _isNextDescrUrl
       || _isNextProps && isLoadFailed
-  )
+  );
 
   useEffect(() => {
      if (_isLoadDescr) {
@@ -72,16 +72,16 @@ const DescriptionDialog = memoIsShow((props) => {
         }))
         fetchTxt({
           uri: descrUrl,
-          onFetch: ({ json }={}) => setState(
+          onFetch: ({ json }={}) => isDescrUrlCurrentValue(descrUrl) && setState(
              _crState(false, false, '', json || EMPTY_DESCR)
           ),
-          onCatch: ({ error }={}) => setState(
+          onCatch: ({ error }={}) => isDescrUrlCurrentValue(descrUrl) && setState(
             _crState(false, true, error.message, EMPTY_DESCR
             )
           )
         })
      }
-  }, [_isLoadDescr, descrUrl])
+  }, [_isLoadDescr, descrUrl, isDescrUrlCurrentValue])
 
   return (
     <ModalDialog
@@ -93,7 +93,6 @@ const DescriptionDialog = memoIsShow((props) => {
       {isLoading
          ? <SpinnerLoading />
          : isLoadFailed
-             //? <SpinnerLoadFailed errMsg={errMsg} />
              ? <LoadFailedMsg errMsg={errMsg} />
              : <DivHtml style={S_DIV} str={descrHtml} />
       }
