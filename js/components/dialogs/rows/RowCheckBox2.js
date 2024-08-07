@@ -4,30 +4,21 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../../uiApi");
-var _RowCheckBoxView = _interopRequireDefault(require("./RowCheckBoxView"));
+var _RowCheckBox = _interopRequireDefault(require("./RowCheckBox1"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
 const RowCheckBox2 = _ref => {
   let {
-    initialValue,
     onToggle,
     id,
     ...restProps
   } = _ref;
-  const [_value, _setValue] = (0, _uiApi.useState)(() => !!initialValue),
-    [_hCheck, _hUnCheck] = (0, _uiApi.useMemo)(() => [() => {
-      onToggle(true, id);
-      _setValue(true);
-    }, () => {
-      onToggle(false, id);
-      _setValue(false);
-    }], [onToggle, id]);
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBoxView.default, {
+  const [onCheck, onUnCheck] = (0, _uiApi.useMemo)(() => [() => onToggle(true, id), () => onToggle(false, id)], [onToggle, id]);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
     ...restProps,
-    value: _value,
-    hCheck: _hCheck,
-    hUnCheck: _hUnCheck
+    onCheck: onCheck,
+    onUnCheck: onUnCheck
   });
 };
 
