@@ -1,8 +1,6 @@
 //import PropTypes from "prop-types";
-import {
-  useState,
-  useCallback
-} from '../../uiApi';
+import { useCallback } from '../../uiApi';
+import { useBool } from '../../hooks/useBool';
 
 import RowCheckBoxView from './RowCheckBoxView';
 
@@ -16,18 +14,17 @@ const RowCheckBox1 = ({
 }) => {
   const [
     value,
-    setValue
-  ] = useState(
-    ()=>!!initialValue
-  )
-  , _hCheck = useCallback(()=> {
+    setTrue,
+    setFalse
+  ] = useBool(initialValue)
+  , _hCheck = useCallback(() => {
       onCheck()
-      setValue(true)
-   }, [onCheck])
+      setTrue()
+   }, [onCheck, setTrue])
   , _hUnCheck = useCallback(() => {
       onUnCheck()
-      setValue(false)
-  }, [onUnCheck]);
+      setFalse()
+  }, [onUnCheck, setFalse]);
 
   return (
     <RowCheckBoxView

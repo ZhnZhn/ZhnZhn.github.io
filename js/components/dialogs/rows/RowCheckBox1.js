@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../../uiApi");
+var _useBool = require("../../hooks/useBool");
 var _RowCheckBoxView = _interopRequireDefault(require("./RowCheckBoxView"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -16,15 +17,15 @@ const RowCheckBox1 = _ref => {
     onUnCheck = DF_FN,
     ...restProps
   } = _ref;
-  const [value, setValue] = (0, _uiApi.useState)(() => !!initialValue),
+  const [value, setTrue, setFalse] = (0, _useBool.useBool)(initialValue),
     _hCheck = (0, _uiApi.useCallback)(() => {
       onCheck();
-      setValue(true);
-    }, [onCheck]),
+      setTrue();
+    }, [onCheck, setTrue]),
     _hUnCheck = (0, _uiApi.useCallback)(() => {
       onUnCheck();
-      setValue(false);
-    }, [onUnCheck]);
+      setFalse();
+    }, [onUnCheck, setFalse]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBoxView.default, {
     ...restProps,
     value: value,
@@ -45,6 +46,5 @@ RowCheckBox.propTypes = {
   onUnCheck: PropTypes.func
 }
 */
-var _default = RowCheckBox1;
-exports.default = _default;
+var _default = exports.default = RowCheckBox1;
 //# sourceMappingURL=RowCheckBox1.js.map
