@@ -1,9 +1,7 @@
 import DivEllipsis from '../../zhn/DivEllipsis';
 import { SpanInputLabel } from '../../zhn/SpanToken';
-import {
-  S_NONE,
-  CL_BLACK
-} from '../../styleFn';
+import { CL_BLACK } from '../../styleFn';
+import crRowLabelStyle from './crRowLabelStyle';
 
 const S_DIV = {
   display: 'flex',
@@ -25,10 +23,10 @@ const RowText = ({
   textStyle
 }) => text ? (
   <div style={{...S_DIV, ...style}}>
-    <SpanInputLabel style={{
-      ...captionStyle,
-      ...(isShowLabels ? void 0 : S_NONE)
-    }}>
+    <SpanInputLabel style={crRowLabelStyle({
+      captionStyle,
+      isShowLabels
+    })}>
       {caption}
     </SpanInputLabel>
     <DivEllipsis

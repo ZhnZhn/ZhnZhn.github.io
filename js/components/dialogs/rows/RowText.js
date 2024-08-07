@@ -6,6 +6,7 @@ exports.default = void 0;
 var _DivEllipsis = _interopRequireDefault(require("../../zhn/DivEllipsis"));
 var _SpanToken = require("../../zhn/SpanToken");
 var _styleFn = require("../../styleFn");
+var _crRowLabelStyle = _interopRequireDefault(require("./crRowLabelStyle"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_DIV = {
     display: 'flex',
@@ -33,10 +34,10 @@ const RowText = _ref => {
       ...style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanInputLabel, {
-      style: {
-        ...captionStyle,
-        ...(isShowLabels ? void 0 : _styleFn.S_NONE)
-      },
+      style: (0, _crRowLabelStyle.default)({
+        captionStyle,
+        isShowLabels
+      }),
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
       className: _styleFn.CL_BLACK,
