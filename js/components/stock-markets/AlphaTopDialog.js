@@ -10,7 +10,7 @@ var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"))
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_DIALOG = {
-    width: 300
+    width: 310
   },
   S_ROW_TEXT = {
     paddingRight: 16
@@ -60,6 +60,5 @@ const AlphaTopDialog = (0, _memoIsShow.default)(_ref => {
     })]
   });
 });
-var _default = AlphaTopDialog;
-exports.default = _default;
+var _default = exports.default = AlphaTopDialog;
 //# sourceMappingURL=AlphaTopDialog.js.map

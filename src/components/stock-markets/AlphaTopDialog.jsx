@@ -6,7 +6,7 @@ import useToolbar from '../dialogs/hooks/useToolbar';
 
 import D from '../dialogs/DialogCell';
 
-const S_DIALOG = { width: 300 }
+const S_DIALOG = { width: 310 }
 , S_ROW_TEXT = { paddingRight: 16 };
 
 const AlphaTopDialog = memoIsShow(({
