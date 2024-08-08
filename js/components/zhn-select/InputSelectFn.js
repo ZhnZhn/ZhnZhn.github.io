@@ -99,18 +99,19 @@ const updateOptionsIfFilters = (state, setState, filters, propCaption, onSelect,
   }
 };
 exports.updateOptionsIfFilters = updateOptionsIfFilters;
-const _calcDeltaTop = (comp, optionsComp) => comp && optionsComp ? comp.offsetTop - optionsComp.scrollTop : void 0;
-const makeVisible = (comp, indexActive, optionsComp) => {
+const _calcDeltaTop = (comp, optionsEl) => comp && optionsEl ? comp.offsetTop - optionsEl.scrollTop : void 0;
+const OPTIONS_SCROLL_TOP = 70;
+const makeVisible = (comp, indexActive, optionsEl) => {
   if (comp) {
     if (indexActive === 0) {
       return;
     }
-    const deltaTop = _calcDeltaTop(comp, optionsComp);
-    if (deltaTop > 70) {
-      optionsComp.scrollTop += deltaTop - 70;
+    const deltaTop = _calcDeltaTop(comp, optionsEl);
+    if (deltaTop > OPTIONS_SCROLL_TOP) {
+      optionsEl.scrollTop += deltaTop - OPTIONS_SCROLL_TOP;
     }
     if (deltaTop < 0) {
-      optionsComp.scrollTop = 0;
+      optionsEl.scrollTop = 0;
     }
   }
 };
@@ -130,39 +131,40 @@ const undecorateComp = comp => {
   }
 };
 exports.undecorateComp = undecorateComp;
-const _predicateStepDown = delta => delta > 70,
-  _predicateStepUp = delta => delta < 70,
-  _decorateByStep = (fnPredicate, comp, indexEl, indexActive, optionsComp) => {
+const _predicateStepDown = delta => delta > OPTIONS_SCROLL_TOP,
+  _predicateStepUp = delta => delta < OPTIONS_SCROLL_TOP,
+  _decorateByStep = (fnPredicate, comp, indexEl, indexActive, optionsEl) => {
     decorateCurrentComp(comp, indexEl, indexActive);
-    const deltaTop = _calcDeltaTop(comp, optionsComp);
+    const deltaTop = _calcDeltaTop(comp, optionsEl);
     if (fnPredicate(deltaTop)) {
-      optionsComp.scrollTop += deltaTop - 70;
+      optionsEl.scrollTop += deltaTop - OPTIONS_SCROLL_TOP;
     }
   };
-const stepDownOption = (getCurrentComp, refIndexActive, maxIndex, indexEl, optionsComp) => {
+const _getChildNodesLength = el => el.childNodes.length;
+const stepDownOption = (getCurrentComp, refIndexActive, indexEl, optionsEl) => {
   const prevComp = getCurrentComp();
   if (prevComp) {
     undecorateComp(prevComp);
     (0, _uiApi.setRefValue)(refIndexActive, (0, _uiApi.getRefValue)(refIndexActive) + 1);
-    if ((0, _uiApi.getRefValue)(refIndexActive) >= maxIndex) {
+    if ((0, _uiApi.getRefValue)(refIndexActive) >= _getChildNodesLength(optionsEl)) {
       (0, _uiApi.setRefValue)(refIndexActive, 0);
-      optionsComp.scrollTop = 0;
+      optionsEl.scrollTop = 0;
     }
-    _decorateByStep(_predicateStepDown, getCurrentComp(), indexEl, (0, _uiApi.getRefValue)(refIndexActive), optionsComp);
+    _decorateByStep(_predicateStepDown, getCurrentComp(), indexEl, (0, _uiApi.getRefValue)(refIndexActive), optionsEl);
   }
 };
 exports.stepDownOption = stepDownOption;
-const stepUpOption = (getCurrentComp, refIndexActive, maxIndex, indexEl, optionsComp) => {
+const stepUpOption = (getCurrentComp, refIndexActive, indexEl, optionsEl) => {
   const prevComp = getCurrentComp();
   if (prevComp) {
     undecorateComp(prevComp);
     (0, _uiApi.setRefValue)(refIndexActive, (0, _uiApi.getRefValue)(refIndexActive) - 1);
     if ((0, _uiApi.getRefValue)(refIndexActive) < 0) {
-      (0, _uiApi.setRefValue)(refIndexActive, maxIndex - 1);
+      (0, _uiApi.setRefValue)(refIndexActive, _getChildNodesLength(optionsEl) - 1);
       const bottomComp = getCurrentComp();
-      optionsComp.scrollTop = bottomComp.offsetTop;
+      optionsEl.scrollTop = bottomComp.offsetTop;
     }
-    _decorateByStep(_predicateStepUp, getCurrentComp(), indexEl, (0, _uiApi.getRefValue)(refIndexActive), optionsComp);
+    _decorateByStep(_predicateStepUp, getCurrentComp(), indexEl, (0, _uiApi.getRefValue)(refIndexActive), optionsEl);
   }
 };
 exports.stepUpOption = stepUpOption;

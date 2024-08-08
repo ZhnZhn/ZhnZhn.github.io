@@ -153,26 +153,27 @@ export const updateOptionsIfFilters = (
 
 const _calcDeltaTop = (
   comp,
-  optionsComp
-) => comp && optionsComp
-  ? comp.offsetTop - optionsComp.scrollTop
+  optionsEl
+) => comp && optionsEl
+  ? comp.offsetTop - optionsEl.scrollTop
   : void 0;
 
+const OPTIONS_SCROLL_TOP = 70;
 export const makeVisible = (
   comp,
   indexActive,
-  optionsComp
+  optionsEl
 ) => {
   if (comp){
     if (indexActive === 0){
       return;
     }
-    const deltaTop = _calcDeltaTop(comp, optionsComp);
-    if (deltaTop > 70){
-      optionsComp.scrollTop += deltaTop - 70;
+    const deltaTop = _calcDeltaTop(comp, optionsEl);
+    if (deltaTop > OPTIONS_SCROLL_TOP){
+      optionsEl.scrollTop += deltaTop - OPTIONS_SCROLL_TOP;
     }
     if (deltaTop < 0){
-      optionsComp.scrollTop = 0;
+      optionsEl.scrollTop = 0;
     }
   }
 };
@@ -196,28 +197,29 @@ export const undecorateComp = (comp) => {
   }
 };
 
-const _predicateStepDown = delta => delta > 70
-, _predicateStepUp = delta => delta < 70
+const _predicateStepDown = delta => delta > OPTIONS_SCROLL_TOP
+, _predicateStepUp = delta => delta < OPTIONS_SCROLL_TOP
 , _decorateByStep = (
     fnPredicate,
     comp,
     indexEl,
     indexActive,
-    optionsComp
+    optionsEl
 ) => {
   decorateCurrentComp(comp, indexEl, indexActive)
-  const deltaTop = _calcDeltaTop(comp, optionsComp);
+  const deltaTop = _calcDeltaTop(comp, optionsEl);
   if (fnPredicate(deltaTop)){
-     optionsComp.scrollTop += deltaTop - 70;
+     optionsEl.scrollTop += deltaTop - OPTIONS_SCROLL_TOP;
   }
 }
+
+const _getChildNodesLength = el => el.childNodes.length;
 
 export const stepDownOption = (
   getCurrentComp,
   refIndexActive,
-  maxIndex,
   indexEl,
-  optionsComp
+  optionsEl
 ) => {
   const prevComp = getCurrentComp();
 
@@ -225,9 +227,9 @@ export const stepDownOption = (
      undecorateComp(prevComp);
 
      setRefValue(refIndexActive, getRefValue(refIndexActive) + 1)
-     if (getRefValue(refIndexActive)>=maxIndex){
+     if (getRefValue(refIndexActive)>=_getChildNodesLength(optionsEl)){
         setRefValue(refIndexActive, 0)
-        optionsComp.scrollTop = 0;
+        optionsEl.scrollTop = 0;
      }
 
      _decorateByStep(
@@ -235,7 +237,7 @@ export const stepDownOption = (
        getCurrentComp(),
        indexEl,
        getRefValue(refIndexActive),
-       optionsComp
+       optionsEl
      )
   }
 }
@@ -243,20 +245,18 @@ export const stepDownOption = (
 export const stepUpOption = (
   getCurrentComp,
   refIndexActive,
-  maxIndex,
   indexEl,
-  optionsComp
+  optionsEl
 ) => {
   const prevComp = getCurrentComp();
   if (prevComp){
     undecorateComp(prevComp);
 
-
     setRefValue(refIndexActive, getRefValue(refIndexActive) - 1)
     if (getRefValue(refIndexActive) < 0){
-      setRefValue(refIndexActive, maxIndex - 1)
-      const bottomComp = getCurrentComp()
-      optionsComp.scrollTop = bottomComp.offsetTop
+      setRefValue(refIndexActive, _getChildNodesLength(optionsEl) - 1)
+      const bottomComp = getCurrentComp();
+      optionsEl.scrollTop = bottomComp.offsetTop
     }
 
     _decorateByStep(
@@ -264,7 +264,7 @@ export const stepUpOption = (
       getCurrentComp(),
       indexEl,
       getRefValue(refIndexActive),
-      optionsComp
+      optionsEl
     )
   }
 }

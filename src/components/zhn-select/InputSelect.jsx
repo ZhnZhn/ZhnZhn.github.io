@@ -25,7 +25,7 @@ import {
 
 import crAfterInputEl from './crAfterInputEl';
 import {
-  NO_ITEMS_FOUND_VALUE,  
+  NO_ITEMS_FOUND_VALUE,
   crWidthStyle,
 
   crValue,
@@ -183,6 +183,11 @@ const InputSelect = ({
     if (tokenLn !== valueLn){
       _setSelectedItemIndex(0)
       _decorateCurrentComp()
+      const _optionsEl = getRefValue(_refOptionsComp);
+      if (_optionsEl) {
+        _optionsEl.scrollTop = 0
+      }
+
       setState(prevState => ({
         ...prevState,
         value: token,
@@ -248,7 +253,6 @@ const InputSelect = ({
           stepDownOption(
             _getCurrentComp,
             _refIndexActive,
-            options.length,
             getRefValue(_refIndexNode),
             getRefValue(_refOptionsComp)
           )
@@ -260,7 +264,6 @@ const InputSelect = ({
           stepUpOption(
             _getCurrentComp,
             _refIndexActive,
-            options.length,
             getRefValue(_refIndexNode),
             getRefValue(_refOptionsComp)
           )

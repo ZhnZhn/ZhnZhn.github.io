@@ -100,6 +100,10 @@ const InputSelect = _ref => {
       if (tokenLn !== valueLn) {
         _setSelectedItemIndex(0);
         _decorateCurrentComp();
+        const _optionsEl = (0, _uiApi.getRefValue)(_refOptionsComp);
+        if (_optionsEl) {
+          _optionsEl.scrollTop = 0;
+        }
         setState(prevState => ({
           ...prevState,
           value: token,
@@ -162,14 +166,14 @@ const InputSelect = _ref => {
             toggleIsShowOption();
           } else {
             evt.preventDefault();
-            (0, _InputSelectFn.stepDownOption)(_getCurrentComp, _refIndexActive, options.length, (0, _uiApi.getRefValue)(_refIndexNode), (0, _uiApi.getRefValue)(_refOptionsComp));
+            (0, _InputSelectFn.stepDownOption)(_getCurrentComp, _refIndexActive, (0, _uiApi.getRefValue)(_refIndexNode), (0, _uiApi.getRefValue)(_refOptionsComp));
           }
           break;
         case 38:
           //up
           if (isShowOption) {
             evt.preventDefault();
-            (0, _InputSelectFn.stepUpOption)(_getCurrentComp, _refIndexActive, options.length, (0, _uiApi.getRefValue)(_refIndexNode), (0, _uiApi.getRefValue)(_refOptionsComp));
+            (0, _InputSelectFn.stepUpOption)(_getCurrentComp, _refIndexActive, (0, _uiApi.getRefValue)(_refIndexNode), (0, _uiApi.getRefValue)(_refOptionsComp));
           }
           break;
         default:
