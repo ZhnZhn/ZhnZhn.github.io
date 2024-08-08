@@ -1,6 +1,10 @@
-const _isArr = Array.isArray;
+import {
+  isArr,
+  isObj,
+  isStr
+} from '../../uiApi';
+
 const _notNullOrUndef = v => v != null;
-const _isObj = v => typeof v === "object" && v !== null
 
 const _crCvItems = arr => arr
  .map(({ c, v, ...restProps }) => ({
@@ -16,7 +20,7 @@ const _crSItems = arr => arr
     s
   }));
 
-const _crVcItems = arr => arr.map(v => _isObj(v)
+const _crVcItems = arr => arr.map(v => isObj(v)
  ? v
  : ({ c: v, v })
 )
@@ -24,7 +28,7 @@ const _crVcItems = arr => arr.map(v => _isObj(v)
 const _crNbqItems = arr => {
   const items = [];
   arr.forEach(({ n, b, q }) => {
-    if (_isArr(q)) {
+    if (isArr(q)) {
       q.forEach(to => {
         const s = `${b}/${to}`;
         items.push({
@@ -67,7 +71,24 @@ const _fCrItems = crValue => arr => arr.map(c => {
   nbq: _crNbqItems
 };
 
+const _crItemsWithFilters = (
+  arr,
+  filters
+) => arr.map(item => {
+  const not = item.not;
+  if (isStr(not)) {
+    const _filters = filters[not];
+    if (isArr(_filters)) {
+      item.not = _filters
+    } else {
+      delete item.not
+    }
+  }
+  return item;
+}, []);
+
 const _crItems = (json, optionJsonProp) => {
+  json = isObj(json) ? json : {}
   const _arr = json[optionJsonProp]
   , _crItems = json.isCv
     ? _crCvItems
@@ -79,12 +100,14 @@ const _crItems = (json, optionJsonProp) => {
     ? _crItems(_arr)
     : _arr[0] && _notNullOrUndef(_arr[0].s)
         ? _crSItems(_arr)
-        : _arr;
+        : isObj(json.filters)
+            ? _crItemsWithFilters(_arr, json.filters)
+            : _arr;
 };
 
 const _crPropCaption = (
   arr
-) => !_isArr(arr) || arr.length === 0
+) => !isArr(arr) || arr.length === 0
   ? void 0
   : _notNullOrUndef(arr[0].c)
      ? 'c'

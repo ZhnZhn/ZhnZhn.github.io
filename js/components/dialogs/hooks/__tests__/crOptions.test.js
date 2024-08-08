@@ -62,6 +62,32 @@ const CAPTION_OPTIONS = {
       b: 'b1',
       q: ['q1', 'q2']
     }]
+  },
+  IS_FILTER_OPTIONS = {
+    filters: {
+      a: ["A"],
+      b: ["B"]
+    },
+    items: [{
+      c: "C1",
+      v: "V1",
+      not: "a"
+    }, {
+      c: "C2",
+      v: "V2",
+      not: "b"
+    }, {
+      c: "C3",
+      v: "V3",
+      not: "c"
+    }, {
+      c: "C4",
+      v: "V4"
+    }, {
+      c: "C5",
+      v: "V5",
+      not: ["A", "B"]
+    }]
   };
 describe('crOptions', () => {
   const fn = _crOptions.default;
@@ -138,6 +164,27 @@ describe('crOptions', () => {
     }, {
       "c": "Name1 (b1/q2)",
       v: "b1/q2"
+    }]);
+  });
+  test('should return correct options for with filters case', () => {
+    expect(fn(IS_FILTER_OPTIONS, "items").items).toEqual([{
+      c: "C1",
+      v: "V1",
+      not: ["A"]
+    }, {
+      c: "C2",
+      v: "V2",
+      not: ["B"]
+    }, {
+      c: "C3",
+      v: "V3"
+    }, {
+      c: "C4",
+      v: "V4"
+    }, {
+      c: "C5",
+      v: "V5",
+      not: ["A", "B"]
     }]);
   });
 });
