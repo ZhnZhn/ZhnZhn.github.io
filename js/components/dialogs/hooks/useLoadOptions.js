@@ -58,10 +58,7 @@ const _useLoad = (refLoadId, setLoadingFailed, setState) => {
       }
     }).then(json => {
       if (json) {
-        const {
-          items,
-          propCaption
-        } = (0, _crOptions.default)(json, jsonProp);
+        const [items, propCaption] = (0, _crOptions.default)(json, jsonProp);
         setState({
           isLoading: false,
           isLoadingFailed: false,

@@ -87,9 +87,10 @@ const _crItemsWithFilters = (
   return item;
 }, []);
 
-const _crItems = (json, optionJsonProp) => {
+const DF_OPTIONS_PROP_NAME = "items";
+const _crItems = (json, optionsPropName) => {
   json = isObj(json) ? json : {}
-  const _arr = json[optionJsonProp]
+  const _arr = json[optionsPropName || DF_OPTIONS_PROP_NAME]
   , _crItems = json.isCv
     ? _crCvItems
     : json.isCp
@@ -113,16 +114,16 @@ const _crPropCaption = (
      ? 'c'
      : void 0;
 
+//[items, propCaption]
 const crOptions = (
   json,
-  optionJsonProp
+  optionsPropName
 ) => {
-  const items = _crItems(json, optionJsonProp)
-  , propCaption = _crPropCaption(items);
-  return {
+  const items = _crItems(json, optionsPropName);
+  return [
     items,
-    propCaption
-  };
+    _crPropCaption(items)
+  ]
 };
 
 export default crOptions

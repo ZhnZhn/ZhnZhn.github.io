@@ -6,8 +6,7 @@ import RowInputSelect from './rows/RowInputSelect';
 const SelectWithLoad = ({
   refEl,
   isShow=true,
-  optionNames='Items',
-  jsonProp='items',
+  jsonProp,
   uri,
   ...restProps
 }) => {

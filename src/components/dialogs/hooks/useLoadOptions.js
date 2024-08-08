@@ -72,10 +72,10 @@ const _useLoad = (
       })
       .then(json => {
         if (json) {
-          const {
+          const [
             items,
             propCaption
-          } = crOptions(json, jsonProp);
+          ] = crOptions(json, jsonProp);
           setState({
             isLoading: false,
             isLoadingFailed: false,

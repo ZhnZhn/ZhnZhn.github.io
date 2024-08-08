@@ -11,8 +11,7 @@ const SelectWithLoad = _ref => {
   let {
     refEl,
     isShow = true,
-    optionNames = 'Items',
-    jsonProp = 'items',
+    jsonProp,
     uri,
     ...restProps
   } = _ref;
