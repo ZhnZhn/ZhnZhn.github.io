@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/snb/fnAdapter.js"
+ ],
+ "file": "../../../src/adapters/snb/fnAdapter.js",
+ "names": [
+  "getTimeSeriesValues",
+  "json",
+  "timeseries",
+  "values",
+  "exports"
+ ],
+ "mappings": ";;;;AAAO,MAAMA,mBAAmB,GAAGC,IAAI,IAAI,CAAC,CAAC,CAACA,IAAI,IAAI,CAAC,CAAC,EAAEC,UAAU,IAAI,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,EAAEC,MAAM;AAAAC,OAAA,CAAAJ,mBAAA,GAAAA,mBAAA"
+}

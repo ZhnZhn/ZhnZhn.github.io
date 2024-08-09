@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/snb/Snb.js"
+ ],
+ "file": "../../../src/adapters/snb/Snb.js",
+ "names": [
+  "_SnbApi",
+  "_interopRequireDefault",
+  "require",
+  "_SnbAdapter",
+  "Snb",
+  "api",
+  "adapter",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,OAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,WAAA,GAAAF,sBAAA,CAAAC,OAAA;AAEA,MAAME,GAAG,GAAG;EACVC,GAAG,EAAHA,eAAG;EACHC,OAAO,EAAPA;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaL,GAAG"
+}
