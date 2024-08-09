@@ -25,6 +25,7 @@ var _Bea = _interopRequireDefault(require("./bea/Bea"));
 var _Bls = _interopRequireDefault(require("./bls/Bls"));
 var _Eia = _interopRequireDefault(require("./eia/Eia"));
 var _Intrinio = _interopRequireDefault(require("./intrinio/Intrinio"));
+var _Snb = _interopRequireDefault(require("./snb/Snb"));
 var _Ndl = _interopRequireDefault(require("./ndl/Ndl"));
 var _DbNomics = _interopRequireDefault(require("./db-nomics/DbNomics"));
 var _Ei = _interopRequireDefault(require("./ei/Ei"));
@@ -48,6 +49,7 @@ var _Ht = _interopRequireDefault(require("./htx/Ht"));
 var _Kx = _interopRequireDefault(require("./okx/Kx"));
 var _Bb = _interopRequireDefault(require("./bybit/Bb"));
 const RouterAdapter = {
+  [_LoadType.LT_SNB]: _Snb.default,
   [_LoadType.LT_Q]: _Ndl.default,
   [_LoadType.LT_DBN]: _DbNomics.default,
   [_LoadType.LT_EI]: _Ei.default,

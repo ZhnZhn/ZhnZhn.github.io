@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isEstat = exports.isEmber = exports.isEia = exports.LT_WT = exports.LT_WL = exports.LT_WB = exports.LT_WATCH_LIST = exports.LT_UN = exports.LT_UKS = exports.LT_TW = exports.LT_SWS = exports.LT_SIR = exports.LT_SFL = exports.LT_SDN = exports.LT_Q = exports.LT_NST_2 = exports.LT_NST = exports.LT_KX = exports.LT_KR = exports.LT_KC = exports.LT_IRE = exports.LT_INTR = exports.LT_IEX = exports.LT_HT = exports.LT_GT = exports.LT_FSO = exports.LT_FS = exports.LT_FMP = exports.LT_FAO = exports.LT_EU_STAT = exports.LT_EN = exports.LT_EMB = exports.LT_EIA = exports.LT_EI = exports.LT_DBN = exports.LT_CRC = exports.LT_CR = exports.LT_CP = exports.LT_CM = exports.LT_CL = exports.LT_CG = exports.LT_CB = exports.LT_BT = exports.LT_BN = exports.LT_BLS = exports.LT_BF = exports.LT_BEA = exports.LT_BB = exports.LT_AL = void 0;
+exports.isEstat = exports.isEmber = exports.isEia = exports.LT_WT = exports.LT_WL = exports.LT_WB = exports.LT_WATCH_LIST = exports.LT_UN = exports.LT_UKS = exports.LT_TW = exports.LT_SWS = exports.LT_SNB = exports.LT_SIR = exports.LT_SFL = exports.LT_SDN = exports.LT_Q = exports.LT_NST_2 = exports.LT_NST = exports.LT_KX = exports.LT_KR = exports.LT_KC = exports.LT_IRE = exports.LT_INTR = exports.LT_IEX = exports.LT_HT = exports.LT_GT = exports.LT_FSO = exports.LT_FS = exports.LT_FMP = exports.LT_FAO = exports.LT_EU_STAT = exports.LT_EN = exports.LT_EMB = exports.LT_EIA = exports.LT_EI = exports.LT_DBN = exports.LT_CRC = exports.LT_CR = exports.LT_CP = exports.LT_CM = exports.LT_CL = exports.LT_CG = exports.LT_CB = exports.LT_BT = exports.LT_BN = exports.LT_BLS = exports.LT_BF = exports.LT_BEA = exports.LT_BB = exports.LT_AL = void 0;
 const LT_Q = exports.LT_Q = 'Q';
 const LT_AL = exports.LT_AL = 'AL';
 const LT_IEX = exports.LT_IEX = 'IEX';
@@ -22,6 +22,7 @@ const LT_SFL = exports.LT_SFL = 'SFL';
 const LT_SDN = exports.LT_SDN = 'SDN';
 const LT_SIR = exports.LT_SIR = 'SIR';
 const LT_FSO = exports.LT_FSO = 'FSO';
+const LT_SNB = exports.LT_SNB = 'SNB';
 const LT_UN = exports.LT_UN = 'UN';
 const LT_FAO = exports.LT_FAO = 'FAO';
 const LT_WB = exports.LT_WB = 'WB';

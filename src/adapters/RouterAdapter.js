@@ -1,4 +1,5 @@
 import {
+  LT_SNB,
   LT_Q,
   LT_DBN,
   LT_EI,
@@ -71,6 +72,7 @@ import Bea from './bea/Bea'
 import Bls from './bls/Bls'
 import Eia from './eia/Eia'
 import Intrinio from './intrinio/Intrinio'
+import Snb from './snb/Snb'
 import Ndl from './ndl/Ndl'
 import DbNomics from './db-nomics/DbNomics'
 import Ei from './ei/Ei'
@@ -95,6 +97,7 @@ import Kx from './okx/Kx'
 import Bb from './bybit/Bb'
 
 const RouterAdapter = {
+  [LT_SNB]: Snb,
   [LT_Q]: Ndl,
 
   [LT_DBN]: DbNomics,
