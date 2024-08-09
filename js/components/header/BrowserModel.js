@@ -6,10 +6,10 @@ var _styleFn = require("../styleFn");
 var _BrowserType = require("../../constants/BrowserType");
 var _compStore = require("../../flux/stores/compStore");
 var _browserStore = require("../../flux/stores/browserStore");
-const PREFIX_CL_ROW_ITEM = _styleFn.CL_ROW__PANE_TOPIC + " item__",
-  CL_BR = PREFIX_CL_ROW_ITEM + "browser",
-  CL_ORG = PREFIX_CL_ROW_ITEM + "org",
-  CL_W = PREFIX_CL_ROW_ITEM + "watch";
+const PREFIX_CL_ROW_ITEM = `${_styleFn.CL_ROW__PANE_TOPIC} item__`,
+  CL_BR = `${PREFIX_CL_ROW_ITEM}browser`,
+  CL_ORG = `${PREFIX_CL_ROW_ITEM}org`,
+  CL_W = `${PREFIX_CL_ROW_ITEM}watch`;
 const _fBD = id => () => {
   (0, _browserStore.showBrowser)(id);
 };
@@ -39,7 +39,7 @@ const crBrowserModel = () => ({
   pageWidth: 235,
   maxPages: 2,
   initId: 'page_0',
-  page_0: [_crSubMenuItem('page_01', 'Economics'), _crSubMenuItem('page_02', 'Eurostat'), _crSubMenuItem('page_03', 'Statistics Agencies'), _crSubMenuItem('page_04', 'Stock Markets'), _crSubMenuItem('page_05', 'World Organizations'), _crMenuItem(CL_BR, 'Blockchains', _BrowserType.BT_BLOCKCHAIN), _crMenuItem(CL_BR, 'Currencies', _BrowserType.BT_CURRENCY), _crMenuItem(CL_W, 'Watch List', _BrowserType.BT_WATCH_LIST), {
+  page_0: [_crSubMenuItem('page_01', 'Economics'), _crSubMenuItem('page_02', 'Eurostat'), _crSubMenuItem('page_03', 'Statistics Agencies'), _crSubMenuItem('page_04', 'Stock Markets'), _crSubMenuItem('page_05', 'World Organizations'), _crMenuItem(CL_BR, 'Blockchains', _BrowserType.BT_BLOCKCHAIN), _crMenuItem(CL_BR, 'Central Banks', _BrowserType.BT_CENTRAL_BANKS), _crMenuItem(CL_BR, 'Currencies', _BrowserType.BT_CURRENCY), _crMenuItem(CL_W, 'Watch List', _BrowserType.BT_WATCH_LIST), {
     cn: CL_BR,
     name: 'About',
     onClick: _compStore.showAbout,

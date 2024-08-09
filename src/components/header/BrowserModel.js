@@ -3,6 +3,7 @@ import { CL_ROW__PANE_TOPIC } from '../styleFn';
 import {
   BT_BLOCKCHAIN,
   BT_COMMODITIES,
+  BT_CENTRAL_BANKS,
   BT_CURRENCY,
   BT_WATCH_LIST,
   BT_DB_NOMICS,
@@ -129,6 +130,7 @@ const crBrowserModel = () => ({
     _crSubMenuItem('page_04', 'Stock Markets'),
     _crSubMenuItem('page_05', 'World Organizations'),
     _crMenuItem(CL_BR, 'Blockchains', BT_BLOCKCHAIN),
+    _crMenuItem(CL_BR, 'Central Banks', BT_CENTRAL_BANKS),
     _crMenuItem(CL_BR, 'Currencies', BT_CURRENCY),
     _crMenuItem(CL_W, 'Watch List', BT_WATCH_LIST),
     {
