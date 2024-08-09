@@ -16,6 +16,7 @@ import {
   BT_ENERGY,
   BT_BLOCKCHAIN,
   BT_COMMODITIES,
+  BT_CENTRAL_BANKS,
   BT_CURRENCY,
   BT_FRANCE_STATISTICS,
   BT_UK_STATISTICS,
@@ -156,6 +157,11 @@ const BrowserConfig = {
     BT_COMMODITIES,
     'Commodities',
     'commodities'
+  ),
+  [BT_CENTRAL_BANKS]: _crBrowserItem(
+    BT_CENTRAL_BANKS,
+    'Central Banks',
+    'central-banks'
   ),
   [BT_CURRENCY]: _crBrowserItem(
     BT_CURRENCY,
