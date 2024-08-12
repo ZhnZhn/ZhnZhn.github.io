@@ -6,13 +6,36 @@ exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 var _fnAdapter = require("./fnAdapter");
-const crData = (json, option) => (0, _fnAdapter.getTimeSeriesValues)(json).map(item => [(0, _AdapterFn.ymdToUTC)(item.date), item.value]),
+const ITEM_URL = `${_fnAdapter.DATA_SNB_URL}/en/topics`;
+const DF_SUB_ID = "uvo";
+const crData = (json, option) => (0, _fnAdapter.getTimeSeriesValues)(json).reduce((data, item) => {
+    const {
+        date,
+        value
+      } = item || {},
+      dateMls = (0, _AdapterFn.ymdToUTC)(date);
+    if ((0, _AdapterFn.isNumber)(dateMls) && (0, _AdapterFn.isNumber)(value)) {
+      data.push([dateMls, value]);
+    }
+    return data;
+  }, []),
   trOption = option => {
     option.subtitle = (0, _AdapterFn.joinBy)(', ', option.subtitle, option.dfSubtitle);
+  },
+  addToConfig = (config, json, option) => {
+    config.info = {
+      name: (0, _AdapterFn.joinBy)(", ", option.title, option.subtitle)
+    };
+    (0, _AdapterFn.assign)(config.zhConfig, {
+      linkFn: option.loadId,
+      item: `${ITEM_URL}/${option.dfSubId || DF_SUB_ID}/cube/${option.dfId}`
+    });
+    return config;
   };
 const SnbAdapter = (0, _crAdapterType.default)({
   crData,
-  trOption
+  trOption,
+  addToConfig
 });
 var _default = exports.default = SnbAdapter;
 //# sourceMappingURL=SnbAdapter.js.map

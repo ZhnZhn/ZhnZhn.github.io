@@ -2,14 +2,23 @@ import {
   isArr,
   crError
 } from '../AdapterFn';
-import { getTimeSeriesValues } from './fnAdapter';
+import {
+  DATA_SNB_URL,
+  getTimeSeriesValues
+} from './fnAdapter';
 
-const API_URL = "https://data.snb.ch/api/cube";
+const API_URL = `${DATA_SNB_URL}/api/cube`;
+
+const _isDimensionId = id => id === "D0" || id === "D1"
+, _crItem = ({ id, v }) => _isDimensionId(id)
+  ? `${id}(${v})`
+  : v;
 
 const _crDimSel = (
   options
 ) => options.items
-  .map(item => item.v)
+  .map(_crItem)
+  .sort()
   .join(',');
 
 const SnbApi = {
