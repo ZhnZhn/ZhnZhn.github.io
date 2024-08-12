@@ -32,6 +32,12 @@ const _crJsonProp = strOr => isStr(strOr)
   jsonProp: _crJsonProp(item[2]),
   isWithInput: Boolean(item[3])
 })
+, _crId3Item = (
+  item,
+  rootUri
+) => ({
+  ..._crItemProps(item[2], item[0], rootUri, item[1])
+})
 , _crS2Item = (
   item,
   rootUri
@@ -48,6 +54,7 @@ const _crJsonProp = strOr => isStr(strOr)
 const _rFns = {
   df: _crDfItem,
   id: _crIdItem,
+  id3: _crId3Item,
   s2: _crS2Item
 };
 

@@ -7,7 +7,7 @@ const _crJsonProp = strOr => (0, _storeApi.isStr)(strOr) ? strOr : void 0,
   _crItemProps = (id, caption, rootUri, pathToken) => ({
     id,
     caption,
-    uri: "" + rootUri + pathToken + ".json"
+    uri: `${rootUri}${pathToken}.json`
   }),
   _crDfItem = (item, rootUri) => ({
     ..._crItemProps(item[0], item[1], rootUri, item[2]),
@@ -17,6 +17,9 @@ const _crJsonProp = strOr => (0, _storeApi.isStr)(strOr) ? strOr : void 0,
     ..._crItemProps(item[0], item[0], rootUri, item[1]),
     jsonProp: _crJsonProp(item[2]),
     isWithInput: Boolean(item[3])
+  }),
+  _crId3Item = (item, rootUri) => ({
+    ..._crItemProps(item[2], item[0], rootUri, item[1])
   }),
   _crS2Item = (item, rootUri) => item.length === 3 ? _crDfItem(item, rootUri) : {
     ..._crItemProps(item[0], item[2], rootUri, item[3]),
@@ -28,6 +31,7 @@ const _crJsonProp = strOr => (0, _storeApi.isStr)(strOr) ? strOr : void 0,
 const _rFns = {
   df: _crDfItem,
   id: _crIdItem,
+  id3: _crId3Item,
   s2: _crS2Item
 };
 const _mergeSelectProps = (selectProps, obj) => {
