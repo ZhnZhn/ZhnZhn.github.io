@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/native-links/SnbLink.js"
+ ],
+ "file": "../../../src/components/native-links/SnbLink.js",
+ "names": [
+  "_Link",
+  "_interopRequireDefault",
+  "require",
+  "_jsxRuntime",
+  "SnbLink",
+  "_ref",
+  "item",
+  "jsx",
+  "default",
+  "caption",
+  "href",
+  "_default",
+  "exports"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,KAAA,GAAAC,sBAAA,CAAAC,OAAA;AAA0B,IAAAC,WAAA,GAAAD,OAAA;AAE1B,MAAME,OAAO,GAAGC,IAAA;EAAA,IAAC;IACfC;EACF,CAAC,GAAAD,IAAA;EAAA,OAAKC,IAAI,gBAAG,IAAAH,WAAA,CAAAI,GAAA,EAACP,KAAA,CAAAQ,OAAI;IACbC,OAAO,EAAC,qBAAqB;IAC7BC,IAAI,EAAEJ;EAAK,CACf,CAAC,GAAG,IAAI;AAAA;AAAC,IAAAK,QAAA,GAAAC,OAAA,CAAAJ,OAAA,GAEKJ,OAAO"
+}

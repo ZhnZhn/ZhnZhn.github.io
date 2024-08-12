@@ -12,6 +12,7 @@ var _FaoStatLink = _interopRequireDefault(require("./FaoStatLink"));
 var _FredLink = _interopRequireDefault(require("./FredLink"));
 var _CrcLink = _interopRequireDefault(require("./CrcLink"));
 var _EsLink = _interopRequireDefault(require("./EsLink"));
+var _SnbLink = _interopRequireDefault(require("./SnbLink"));
 const RouterNativeLink = {
   DF: _DfLink.default,
   NDL: _NdlLink.default,
@@ -21,8 +22,8 @@ const RouterNativeLink = {
   FAO_STAT: _FaoStatLink.default,
   FRED: _FredLink.default,
   CRC: _CrcLink.default,
-  ES: _EsLink.default
+  ES: _EsLink.default,
+  SNB: _SnbLink.default
 };
-var _default = RouterNativeLink;
-exports.default = _default;
+var _default = exports.default = RouterNativeLink;
 //# sourceMappingURL=RouterNativeLink.js.map
