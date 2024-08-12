@@ -79,6 +79,7 @@ const _crMenuItems = (
   .map(([cn, name, id]) => _crMenuItem(cn, name, id))
 
 const PAGE_CONFIGS_01 = [
+  [CL_BR, 'Central Banks', BT_CENTRAL_BANKS],
   [CL_ORG, 'DBnomics', BT_DB_NOMICS],
   [CL_BR, 'Energy', BT_ENERGY],
   [CL_BR, 'U.S. Economics', BT_US_ECONOMICS],
@@ -130,7 +131,6 @@ const crBrowserModel = () => ({
     _crSubMenuItem('page_04', 'Stock Markets'),
     _crSubMenuItem('page_05', 'World Organizations'),
     _crMenuItem(CL_BR, 'Blockchains', BT_BLOCKCHAIN),
-    _crMenuItem(CL_BR, 'Central Banks', BT_CENTRAL_BANKS),
     _crMenuItem(CL_BR, 'Currencies', BT_CURRENCY),
     _crMenuItem(CL_W, 'Watch List', BT_WATCH_LIST),
     {
