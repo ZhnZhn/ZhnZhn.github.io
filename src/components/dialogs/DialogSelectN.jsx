@@ -177,6 +177,10 @@ const DialogSelectN = memoIsShow((
   })
   , _isCategory = isCategoryItem(chartType)
   , _isRowFd = isFd && !_isCategory
+  , _isShowFromDate = _isRowFd && isShowFd
+  , _initialValueFromDate = isFd
+       ? initFromDate || DF_INIT_FROM_DATE
+       : void 0
   , _isShowDate = isShowChart && _isCategory;
 
   return (
@@ -225,12 +229,12 @@ const DialogSelectN = memoIsShow((
           tupleFilter={tupleFilter}
         />
       </FocusFirstCombobox>
-      <D.ShowHide isShow={_isRowFd && isShowFd}>
+      <D.ShowHide isShow={_isShowFromDate}>
         <D.RowDate
           innerRef={_refFromDate}
           isShowLabels={isShowLabels}
           title="From Date:"
-          initialValue={initFromDate || DF_INIT_FROM_DATE}
+          initialValue={_initialValueFromDate}
           errorMsg={errNotYmdOrEmpty}
           onTest={isYmdOrEmpty}
         />

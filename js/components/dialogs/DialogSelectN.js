@@ -98,6 +98,8 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     }),
     _isCategory = (0, _ChartOptionsFn.isCategoryItem)(chartType),
     _isRowFd = isFd && !_isCategory,
+    _isShowFromDate = _isRowFd && isShowFd,
+    _initialValueFromDate = isFd ? initFromDate || DF_INIT_FROM_DATE : void 0,
     _isShowDate = isShowChart && _isCategory;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isFocusBtMenu: false,
@@ -141,12 +143,12 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
         tupleFilter: tupleFilter
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-      isShow: _isRowFd && isShowFd,
+      isShow: _isShowFromDate,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowDate, {
         innerRef: _refFromDate,
         isShowLabels: isShowLabels,
         title: "From Date:",
-        initialValue: initFromDate || DF_INIT_FROM_DATE,
+        initialValue: _initialValueFromDate,
         errorMsg: errNotYmdOrEmpty,
         onTest: isYmdOrEmpty
       })
