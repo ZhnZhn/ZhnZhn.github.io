@@ -39,12 +39,7 @@ const EiaApi = {
     }
     return `${_reqUrl}&${_crFacets(items)}&${QUERY_PARAMS}`;
   },
-  checkResponse(json) {
-    const data = (0, _fnAdapter.getResponseData)(json);
-    if (!(0, _AdapterFn.isArr)(data)) {
-      throw (0, _AdapterFn.crError)();
-    }
-  }
+  checkResponse: (0, _AdapterFn.fCheckResponse)(_fnAdapter.getResponseData)
 };
 var _default = exports.default = EiaApi;
 //# sourceMappingURL=EiaApi.js.map

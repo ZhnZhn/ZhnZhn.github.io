@@ -1,13 +1,6 @@
-import {
-  isArr,
-  crError
-} from '../AdapterFn';
-import {
-  isCategory
-} from '../CategoryFn';
-import {
-  getResponseData
-} from './fnAdapter';
+import { fCheckResponse } from '../AdapterFn';
+import { isCategory } from '../CategoryFn';
+import { getResponseData } from './fnAdapter';
 
 const API_URL = "https://api.eia.gov/v2"
 , QUERY_PARAMS = "sort[0][column]=period&sort[0][direction]=asc&offset=0&length=5000"
@@ -57,12 +50,7 @@ const EiaApi = {
     return `${_reqUrl}&${_crFacets(items)}&${QUERY_PARAMS}`;
   },
 
-  checkResponse(json){
-    const data = getResponseData(json);
-    if (!isArr(data)) {
-      throw crError();
-    }
-  }
+  checkResponse: fCheckResponse(getResponseData)
 };
 
 export default EiaApi

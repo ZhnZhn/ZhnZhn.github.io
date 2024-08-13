@@ -18,11 +18,7 @@ const SnbApi = {
   getRequestUrl(options) {
     return `${options.proxy}${API_URL}/${options.dfId}/data/json/en?dimSel=${_crDimSel(options)}&fromDate=${options.fromDate}`;
   },
-  checkResponse(json, option) {
-    if (!(0, _AdapterFn.isArr)((0, _fnAdapter.getTimeSeriesValues)(json))) {
-      throw (0, _AdapterFn.crError)();
-    }
-  }
+  checkResponse: (0, _AdapterFn.fCheckResponse)(_fnAdapter.getTimeSeriesValues)
 };
 var _default = exports.default = SnbApi;
 //# sourceMappingURL=SnbApi.js.map

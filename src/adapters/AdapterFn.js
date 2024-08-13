@@ -112,6 +112,12 @@ export const crError = (
 })
 export const crErrorByMessage = message => crError('', message)
 
+export const fCheckResponse = getData => json => {
+  if ( !isArr(getData(json)) ) {
+    throw crError();
+  }
+}
+
 export const crValueMoving = ({
   bNowValue=Big('0.0'),
   bPrevValue=Big('0.0'),

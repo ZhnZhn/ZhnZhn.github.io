@@ -1,7 +1,4 @@
-import {
-  isArr,
-  crError
-} from '../AdapterFn';
+import { fCheckResponse } from '../AdapterFn';
 import {
   DATA_SNB_URL,
   getTimeSeriesValues
@@ -25,11 +22,7 @@ const SnbApi = {
   getRequestUrl(options){
     return `${options.proxy}${API_URL}/${options.dfId}/data/json/en?dimSel=${_crDimSel(options)}&fromDate=${options.fromDate}`;
   },
-  checkResponse(json, option){
-    if (!isArr(getTimeSeriesValues(json))) {
-      throw crError();
-    }
-  }
+  checkResponse: fCheckResponse(getTimeSeriesValues)
 };
 
 export default SnbApi
