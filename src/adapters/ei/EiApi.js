@@ -1,5 +1,7 @@
-import { checkResponseData } from '../ApiFn';
-import { isInRange } from '../AdapterFn';
+import { 
+  isInRange,
+  fCheckResponse
+} from '../AdapterFn';
 import {
   isTreeMap,
   isBarTreeMap,
@@ -69,7 +71,7 @@ const IrenaApi = {
           ? _crCategoryUrl(option)
           : _crLineUrl(option);
   },
-  checkResponse: checkResponseData
+  checkResponse: fCheckResponse()
 };
 
 export default IrenaApi

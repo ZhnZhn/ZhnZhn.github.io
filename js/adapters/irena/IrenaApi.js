@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _ApiFn = require("../ApiFn");
+var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 const DATA_URL = './data/irena';
 const _crApiUrl = option => {
@@ -30,7 +30,7 @@ const IrenaApi = {
   getRequestUrl(option) {
     return (0, _CategoryFn.isCategory)(option.seriaType) ? _crCategoryUrl(option) : _crLineUrl(option);
   },
-  checkResponse: _ApiFn.checkResponseData
+  checkResponse: (0, _AdapterFn.fCheckResponse)()
 };
 var _default = exports.default = IrenaApi;
 //# sourceMappingURL=IrenaApi.js.map

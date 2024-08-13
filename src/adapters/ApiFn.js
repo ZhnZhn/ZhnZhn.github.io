@@ -102,10 +102,3 @@ export const crRouteDfObApi = (
   DF: fCrDfUrl(crDfUrl),
   OB: crObUrl ? fCrObUrl(crObUrl) : void 0
 }, getData)
-
-export const checkResponseData = (json) => {
-  const { data } = json || {};
-  if (!isArr(data)) {
-    throw crError();
-  }
-}

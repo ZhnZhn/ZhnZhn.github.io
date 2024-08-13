@@ -2,7 +2,6 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _ApiFn = require("../ApiFn");
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 const DATA_URL = './data/ei';
@@ -53,7 +52,7 @@ const IrenaApi = {
       _isTreeMap = (0, _CategoryFn.isTreeMap)(seriaType);
     return _isTreeMap || (0, _CategoryFn.isBarTreeMap)(seriaType) ? _crTreeMapUrl(option, _isTreeMap) : (0, _CategoryFn.isCategory)(seriaType) ? _crCategoryUrl(option) : _crLineUrl(option);
   },
-  checkResponse: _ApiFn.checkResponseData
+  checkResponse: (0, _AdapterFn.fCheckResponse)()
 };
 var _default = exports.default = IrenaApi;
 //# sourceMappingURL=EiApi.js.map

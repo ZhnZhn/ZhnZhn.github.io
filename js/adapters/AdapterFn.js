@@ -87,10 +87,16 @@ const crError = function (errCaption, message) {
 exports.crError = crError;
 const crErrorByMessage = message => crError('', message);
 exports.crErrorByMessage = crErrorByMessage;
-const fCheckResponse = getData => json => {
-  if (!(0, _isTypeFn.isArr)(getData(json))) {
-    throw crError();
+const _getDataDf = json => (json || {}).data;
+const fCheckResponse = function (getData) {
+  if (getData === void 0) {
+    getData = _getDataDf;
   }
+  return json => {
+    if (!(0, _isTypeFn.isArr)(getData(json))) {
+      throw crError();
+    }
+  };
 };
 exports.fCheckResponse = fCheckResponse;
 const crValueMoving = _ref2 => {

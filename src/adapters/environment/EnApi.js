@@ -1,5 +1,7 @@
-import { getValue } from '../AdapterFn';
-import { checkResponseData } from '../ApiFn';
+import {
+  getValue,
+  fCheckResponse
+} from '../AdapterFn';
 
 const DATA_URL = './data/environment';
 
@@ -15,7 +17,7 @@ const EnApi = {
   getRequestUrl(option){
     return _crLineUrl(option);
   },
-  checkResponse: checkResponseData
+  checkResponse: fCheckResponse()
 };
 
 export default EnApi

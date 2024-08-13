@@ -112,7 +112,10 @@ export const crError = (
 })
 export const crErrorByMessage = message => crError('', message)
 
-export const fCheckResponse = getData => json => {
+const _getDataDf = json => (json || {}).data
+export const fCheckResponse = (
+  getData=_getDataDf
+) => json => {
   if ( !isArr(getData(json)) ) {
     throw crError();
   }

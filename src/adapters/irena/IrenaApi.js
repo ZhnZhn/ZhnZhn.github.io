@@ -1,4 +1,4 @@
-import { checkResponseData } from '../ApiFn';
+import { fCheckResponse } from '../AdapterFn';
 import { isCategory } from '../CategoryFn';
 
 const DATA_URL = './data/irena';
@@ -33,7 +33,7 @@ const IrenaApi = {
       ? _crCategoryUrl(option)
       : _crLineUrl(option);
   },
-  checkResponse: checkResponseData
+  checkResponse: fCheckResponse()
 };
 
 export default IrenaApi

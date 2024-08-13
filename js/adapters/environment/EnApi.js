@@ -3,7 +3,6 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
-var _ApiFn = require("../ApiFn");
 const DATA_URL = './data/environment';
 const _crLineUrl = option => {
   const {
@@ -16,7 +15,7 @@ const EnApi = {
   getRequestUrl(option) {
     return _crLineUrl(option);
   },
-  checkResponse: _ApiFn.checkResponseData
+  checkResponse: (0, _AdapterFn.fCheckResponse)()
 };
 var _default = exports.default = EnApi;
 //# sourceMappingURL=EnApi.js.map
