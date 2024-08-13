@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
+var _fnAdapter = require("./fnAdapter");
 const API_URL = "https://api.eia.gov/v2",
   QUERY_PARAMS = "sort[0][column]=period&sort[0][direction]=asc&offset=0&length=5000",
   DF_FREQ = 'monthly',
@@ -11,7 +12,7 @@ const API_URL = "https://api.eia.gov/v2",
 const _isItemFreq = item => (item || {}).id === ID_FREQ;
 const _crFacets = items => items.reduce((arr, item) => {
   if (!_isItemFreq(item)) {
-    arr.push("facets[" + item.id + "][]=" + item.v);
+    arr.push(`facets[${item.id}][]=${item.v}`);
   }
   return arr;
 }, []).join('&');
@@ -32,19 +33,14 @@ const EiaApi = {
       } = option,
       _dfSet = (items[0] || {}).dfSet || dfSet,
       _frequency = dfFreq || _getFrequencyOrDf(items),
-      _reqUrl = API_URL + "/" + dfRoute + "/" + _dfSet + "/data?frequency=" + _frequency + "&data[0]=" + dfData + "&api_key=" + apiKey;
+      _reqUrl = `${API_URL}/${dfRoute}/${_dfSet}/data?frequency=${_frequency}&data[0]=${dfData}&api_key=${apiKey}`;
     if ((0, _CategoryFn.isCategory)(option.seriaType)) {
-      return _reqUrl + "&" + _crFacets(items.slice(1)) + "&start=" + time + "&end=" + time + "&" + QUERY_PARAMS;
+      return `${_reqUrl}&${_crFacets(items.slice(1))}&start=${time}&end=${time}&${QUERY_PARAMS}`;
     }
-    return _reqUrl + "&" + _crFacets(items) + "&" + QUERY_PARAMS;
+    return `${_reqUrl}&${_crFacets(items)}&${QUERY_PARAMS}`;
   },
   checkResponse(json) {
-    const {
-        response
-      } = json || {},
-      {
-        data
-      } = response || {};
+    const data = (0, _fnAdapter.getResponseData)(json);
     if (!(0, _AdapterFn.isArr)(data)) {
       throw (0, _AdapterFn.crError)();
     }

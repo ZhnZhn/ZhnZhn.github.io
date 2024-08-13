@@ -5,6 +5,9 @@ import {
 import {
   isCategory
 } from '../CategoryFn';
+import {
+  getResponseData
+} from './fnAdapter';
 
 const API_URL = "https://api.eia.gov/v2"
 , QUERY_PARAMS = "sort[0][column]=period&sort[0][direction]=asc&offset=0&length=5000"
@@ -55,8 +58,7 @@ const EiaApi = {
   },
 
   checkResponse(json){
-    const { response } = json || {}
-    , { data } = response || {};
+    const data = getResponseData(json);
     if (!isArr(data)) {
       throw crError();
     }

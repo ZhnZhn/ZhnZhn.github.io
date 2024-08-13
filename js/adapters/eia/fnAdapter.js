@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crTitle = exports.crData = exports.crConfOption = void 0;
+exports.getResponseData = exports.crTitle = exports.crData = exports.crConfOption = void 0;
 var _AdapterFn = require("../AdapterFn");
 const _crZhConfig = (json, _ref) => {
   let {
@@ -28,13 +28,9 @@ const crTitle = _ref3 => {
     items = [],
     dfTitle
   } = _ref3;
-  const _s1 = (0, _AdapterFn.getCaption)(items[0]),
-    _s2 = (0, _AdapterFn.getCaption)(items[1]),
-    _s3 = (0, _AdapterFn.getCaption)(items[2]),
-    _subtitle = "" + _s2 + (_s3 ? ':' : '') + " " + _s3;
   return {
-    title: _s1 + ": " + dfTitle,
-    subtitle: _subtitle
+    title: (0, _AdapterFn.joinBy)(': ', (0, _AdapterFn.getCaption)(items[0]), dfTitle),
+    subtitle: (0, _AdapterFn.joinBy)(': ', (0, _AdapterFn.getCaption)(items[1]), (0, _AdapterFn.getCaption)(items[2]))
   };
 };
 exports.crTitle = crTitle;
@@ -42,11 +38,13 @@ const _toNumber = str => {
   const _n = parseFloat(str);
   return (0, _AdapterFn.isNumber)(_n) ? _n : null;
 };
+const getResponseData = json => ((json || {}).response || {}).data;
+exports.getResponseData = getResponseData;
 const crData = (json, _ref4) => {
   let {
     dfData
   } = _ref4;
-  return json.response.data.map(item => [(0, _AdapterFn.ymdToUTC)(item.period), _toNumber(item[dfData])]);
+  return getResponseData(json).map(item => [(0, _AdapterFn.ymdToUTC)(item.period), _toNumber(item[dfData])]);
 };
 exports.crData = crData;
 const crConfOption = (option, json) => ({
