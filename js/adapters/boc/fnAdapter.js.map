@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/boc/fnAdapter.js"
+ ],
+ "file": "../../../src/adapters/boc/fnAdapter.js",
+ "names": [
+  "getSeriesId",
+  "options",
+  "items",
+  "v",
+  "exports",
+  "getObservationsData",
+  "json",
+  "observations"
+ ],
+ "mappings": ";;;;AAAO,MAAMA,WAAW,GACtBC,OAAO,IACJA,OAAO,CAACC,KAAK,CAAC,CAAC,CAAC,CAACC,CAAC;AAAAC,OAAA,CAAAJ,WAAA,GAAAA,WAAA;AAEhB,MAAMK,mBAAmB,GAAGA,CACjCC,IAAI,EACJL,OAAO,KACJ,CAACK,IAAI,IAAI,CAAC,CAAC,EAAEC,YAAY;AAAAH,OAAA,CAAAC,mBAAA,GAAAA,mBAAA"
+}

@@ -1,0 +1,37 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/boc/BocAdapter.js"
+ ],
+ "file": "../../../src/adapters/boc/BocAdapter.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "_crAdapterType",
+  "_interopRequireDefault",
+  "_fnAdapter",
+  "crData",
+  "json",
+  "options",
+  "seriesId",
+  "getSeriesId",
+  "getObservationsData",
+  "reduce",
+  "data",
+  "item",
+  "dateMls",
+  "ymdToUTC",
+  "d",
+  "value",
+  "parseFloat",
+  "v",
+  "isNumber",
+  "push",
+  "BocAdapter",
+  "crAdapterType1",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAIA,IAAAC,cAAA,GAAAC,sBAAA,CAAAF,OAAA;AACA,IAAAG,UAAA,GAAAH,OAAA;AAKA,MAAMI,MAAM,GAAGA,CACbC,IAAI,EACJC,OAAO,KACJ;EACH,MAAMC,QAAQ,GAAG,IAAAC,sBAAW,EAACF,OAAO,CAAC;EACrC,OAAO,IAAAG,8BAAmB,EAACJ,IAAI,CAAC,CAC9BK,MAAM,CAAC,CAACC,IAAI,EAAEC,IAAI,KAAK;IACtB,MAAMC,OAAO,GAAG,IAAAC,mBAAQ,EAACF,IAAI,CAACG,CAAC,CAAC;MAC9BC,KAAK,GAAGC,UAAU,CAACL,IAAI,CAACL,QAAQ,CAAC,CAACW,CAAC,CAAC;IACtC,IAAI,IAAAC,mBAAQ,EAACN,OAAO,CAAC,IAAI,IAAAM,mBAAQ,EAACH,KAAK,CAAC,EAAE;MACxCL,IAAI,CAACS,IAAI,CAAC,CAACP,OAAO,EAAEG,KAAK,CAAC,CAAC;IAC7B;IACA,OAAOL,IAAI;EACb,CAAC,EAAE,EAAE,CAAC;AACT,CAAC;AAED,MAAMU,UAAU,GAAG,IAAAC,sBAAc,EAAC;EAChClB;AACF,CAAC,CAAC;AAAA,IAAAmB,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaJ,UAAU"
+}

@@ -1,0 +1,25 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/boc/BocApi.js"
+ ],
+ "file": "../../../src/adapters/boc/BocApi.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "_fnAdapter",
+  "API_URL",
+  "BocApi",
+  "getRequestUrl",
+  "options",
+  "getSeriesId",
+  "fromDate",
+  "checkResponse",
+  "fCheckResponse",
+  "getObservationsData",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AACA,IAAAC,UAAA,GAAAD,OAAA;AAKA,MAAME,OAAO,GAAG,gDAAgD;AAEhE,MAAMC,MAAM,GAAG;EACbC,aAAaA,CAACC,OAAO,EAAC;IACpB,OAAO,GAAGH,OAAO,IAAI,IAAAI,sBAAW,EAACD,OAAO,CAAC,oBAAoBA,OAAO,CAACE,QAAQ,EAAE;EACjF,CAAC;EACDC,aAAa,EAAE,IAAAC,yBAAc,EAACC,8BAAmB;AACnD,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaV,MAAM"
+}
