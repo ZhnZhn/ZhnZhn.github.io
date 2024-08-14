@@ -5,7 +5,8 @@ const S_COMPARE = { color: '#49d87c' };
 const _crUrl = domain => `https://${domain}`;
 
 const LINK_CONFIGS = [
- ["SNB", "Swiss National Bank", _crUrl("www.snb.ch/en/")],  
+ ["BOC", "Bank of Canada", _crUrl("www.bankofcanada.ca")],  
+ ["SNB", "Swiss National Bank", _crUrl("www.snb.ch/en/")],
  ["Ndl", "Nasdaq Data Link", _crUrl("data.nasdaq.com")],
  ["DBnomics", _crUrl("db.nomics.world")],
  ["EI", "Energy Institute", _crUrl("www.energyinst.org")],

@@ -41,6 +41,7 @@ const DP = [
   Link.Eurostat,
   Link.FaoStat,
   Link.WorldBank,
+  Link.BOC,
   Link.Insee,
   Link.ONS,
   Link.StatNorway, Link.StatSweden, Link.StatFinland, Link.StatDenmark, Link.StatIreland, Link.FSO,
@@ -109,7 +110,7 @@ const _crListCaption = (
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 43):"
+     caption="Data Providers (All 44):"
      childStyle={S_ROOT_CHILD}
   >
     <div>
