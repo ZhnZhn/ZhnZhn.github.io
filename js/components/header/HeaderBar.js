@@ -67,10 +67,10 @@ const HeaderBar = _ref => {
       onClick: _browserStore.showEurostat
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       className: CL_NDL,
-      caption: "NDL",
-      title: "Nasdaq Data Link Browser",
-      hotKey: _hotkeys.HK_NDL_BROWSER,
-      onClick: _browserStore.showNdl
+      caption: "DBN",
+      title: "DBnomics Browser",
+      hotKey: _hotkeys.HK_DBN_BROWSER,
+      onClick: _browserStore.showDbn
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       className: CL_WATCH,
       caption: "Watch",

@@ -22,9 +22,9 @@ import {
 
 import { crAsyncBrowser } from '../logic/Factory';
 import BrowserConfig from '../../constants/BrowserConfig';
-import {
-  BT_NDL,
+import {  
   BT_EUROSTAT,
+  BT_DB_NOMICS,
   BT_WATCH_LIST
 } from '../../constants/BrowserType';
 
@@ -161,6 +161,6 @@ export const showBrowser = (option={}) => {
   }
 }
 
-export const showNdl = bindTo(showBrowser, BT_NDL)
 export const showEurostat = bindTo(showBrowser, BT_EUROSTAT)
+export const showDbn = bindTo(showBrowser, BT_DB_NOMICS)
 export const showWatch = bindTo(showBrowser, BT_WATCH_LIST)

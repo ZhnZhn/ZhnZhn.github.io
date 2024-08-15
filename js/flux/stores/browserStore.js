@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.useMsInitBrowser = exports.useMsBrowserShow = exports.useMsBrowserLoad = exports.showWatch = exports.showNdl = exports.showEurostat = exports.showBrowser = exports.setMsBrowserLoaded = exports.setMsBrowserFailed = exports.loadBrowser = void 0;
+exports.useMsInitBrowser = exports.useMsBrowserShow = exports.useMsBrowserLoad = exports.showWatch = exports.showEurostat = exports.showDbn = exports.showBrowser = exports.setMsBrowserLoaded = exports.setMsBrowserFailed = exports.loadBrowser = void 0;
 var _fnFetch = require("../../utils/fnFetch");
 var _onCatch = _interopRequireDefault(require("../logic/onCatch"));
 var _storeApi = require("../storeApi");
@@ -135,7 +135,7 @@ const showBrowser = function (option) {
   }
 };
 exports.showBrowser = showBrowser;
-const showNdl = exports.showNdl = (0, _storeApi.bindTo)(showBrowser, _BrowserType.BT_NDL);
 const showEurostat = exports.showEurostat = (0, _storeApi.bindTo)(showBrowser, _BrowserType.BT_EUROSTAT);
+const showDbn = exports.showDbn = (0, _storeApi.bindTo)(showBrowser, _BrowserType.BT_DB_NOMICS);
 const showWatch = exports.showWatch = (0, _storeApi.bindTo)(showBrowser, _BrowserType.BT_WATCH_LIST);
 //# sourceMappingURL=browserStore.js.map

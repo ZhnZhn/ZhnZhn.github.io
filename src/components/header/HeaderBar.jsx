@@ -5,8 +5,8 @@ import {
 } from '../../flux/stores/compStore';
 
 import {
-  showNdl,
   showEurostat,
+  showDbn,
   showWatch
 } from '../../flux/stores/browserStore';
 
@@ -16,8 +16,8 @@ import {
 
 import {
   HK_TOPICS,
-  HK_NDL_BROWSER,
   HK_EUROSTAT_BROWSER,
+  HK_DBN_BROWSER,
   HK_WATCHLIST_BROWSER,
   HK_SETTINGS,
   HK_ABOUT
@@ -100,10 +100,10 @@ const HeaderBar = ({
        />
        <FlatButton
           className={CL_NDL}
-          caption="NDL"
-          title="Nasdaq Data Link Browser"
-          hotKey={HK_NDL_BROWSER}
-          onClick={showNdl}
+          caption="DBN"
+          title="DBnomics Browser"
+          hotKey={HK_DBN_BROWSER}
+          onClick={showDbn}
        />
        <FlatButton
           className={CL_WATCH}
