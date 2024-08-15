@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTokenInStr = exports.isObj = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.crZhConfig = exports.crValueMoving = exports.crErrorByMessage = exports.crError = exports.crDfItemKey = exports.bindTo = exports.assign = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.joinBy = exports.isYNumber = exports.isTokenInStr = exports.isObj = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCrData = exports.fCheckResponse = exports.crZhConfig = exports.crValueMoving = exports.crErrorByMessage = exports.crError = exports.crDfItemKey = exports.bindTo = exports.assign = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -170,4 +170,15 @@ const fCrLazyValue = crValue => {
   return () => value === void 0 ? value = crValue() : value;
 };
 exports.fCrLazyValue = fCrLazyValue;
+const fCrData = (getItems, fCrItemTuple) => (json, options) => {
+  const _crItemTuple = fCrItemTuple(options);
+  return getItems(json).reduce((data, item) => {
+    const p = _crItemTuple(item);
+    if ((0, _isTypeFn.isNumber)(p[0]) && (0, _isTypeFn.isNumber)(p[1])) {
+      data.push(p);
+    }
+    return data;
+  }, []);
+};
+exports.fCrData = fCrData;
 //# sourceMappingURL=AdapterFn.js.map

@@ -190,3 +190,21 @@ export const fCrLazyValue = crValue => {
     ? (value = crValue())
     : value;
 }
+
+export const fCrData = (
+  getItems,
+  fCrItemTuple
+) => (
+  json,
+  options
+) => {
+  const _crItemTuple = fCrItemTuple(options);
+  return getItems(json)
+   .reduce((data, item) => {
+     const p = _crItemTuple(item);
+     if (isNumber(p[0]) && isNumber(p[1])) {
+       data.push(p)
+     }
+     return data;
+   }, []);
+}

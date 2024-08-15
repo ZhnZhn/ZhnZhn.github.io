@@ -8,17 +8,8 @@ var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
 var _fnAdapter = require("./fnAdapter");
 const ITEM_URL = `${_fnAdapter.DATA_SNB_URL}/en/topics`;
 const DF_SUB_ID = "uvo";
-const crData = (json, option) => (0, _fnAdapter.getTimeSeriesValues)(json).reduce((data, item) => {
-    const {
-        date,
-        value
-      } = item || {},
-      dateMls = (0, _AdapterFn.ymdToUTC)(date);
-    if ((0, _AdapterFn.isNumber)(dateMls) && (0, _AdapterFn.isNumber)(value)) {
-      data.push([dateMls, value]);
-    }
-    return data;
-  }, []),
+const _fCrItemTuple = () => item => [(0, _AdapterFn.ymdToUTC)((item || {}).date), (item || {}).value],
+  crData = (0, _AdapterFn.fCrData)(_fnAdapter.getTimeSeriesValues, _fCrItemTuple),
   trOption = option => {
     option.subtitle = (0, _AdapterFn.joinBy)(', ', option.subtitle, option.dfSubtitle);
   },

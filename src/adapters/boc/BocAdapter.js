@@ -1,5 +1,5 @@
 import {
-  isNumber,
+  fCrData,
   ymdToUTC
 } from '../AdapterFn';
 import crAdapterType1 from '../crAdapterType1';
@@ -8,21 +8,14 @@ import {
   getObservationsData
 } from './fnAdapter';
 
-const crData = (
-  json,
-  options
-) => {
+const _fCrItemTuple = options => {
   const seriesId = getSeriesId(options);
-  return getObservationsData(json)
-   .reduce((data, item) => {
-     const dateMls = ymdToUTC(item.d)
-     , value = parseFloat(item[seriesId].v)
-     if (isNumber(dateMls) && isNumber(value)) {
-       data.push([dateMls, value])
-     }
-     return data;
-   }, []);
-};
+  return item => [
+    ymdToUTC((item || {}).d),
+    parseFloat(((item || {})[seriesId] || {}).v)
+  ];
+}
+, crData = fCrData(getObservationsData, _fCrItemTuple)
 
 const BocAdapter = crAdapterType1({
   crData

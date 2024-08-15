@@ -1,5 +1,5 @@
 import {
-  isNumber,
+  fCrData,
   ymdToUTC,
   assign,
   joinBy
@@ -13,18 +13,11 @@ import {
 const ITEM_URL = `${DATA_SNB_URL}/en/topics`;
 const DF_SUB_ID = "uvo";
 
-const crData = (
-  json,
-  option
-) => getTimeSeriesValues(json)
-  .reduce((data, item) => {
-    const { date, value } = item || {}
-    , dateMls = ymdToUTC(date);
-    if (isNumber(dateMls) && isNumber(value)) {
-      data.push([dateMls, value])
-    }
-    return data;
-  }, [])
+const _fCrItemTuple = () => item => [
+  ymdToUTC((item || {}).date),
+  (item || {}).value
+]
+, crData = fCrData(getTimeSeriesValues, _fCrItemTuple)
 , trOption = (option) => {
     option.subtitle = joinBy(', ',
       option.subtitle,
