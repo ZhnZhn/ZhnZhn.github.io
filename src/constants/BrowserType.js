@@ -21,8 +21,6 @@ export const BT_DENMARK_STAT_ALL = 'SDN'
 export const BT_IRELAND_STAT_ALL = 'SIR'
 export const BT_SWISS_STAT = 'FSO'
 
-export const BT_NDL = 'QE'
-
 export const BT_STOCKS_BY_SECTORS = 'STOCKS_BY_SECTORS'
 export const BT_NYSE_STOCKS = 'NS'
 export const BT_NASDAQ_STOCKS = 'NQS'

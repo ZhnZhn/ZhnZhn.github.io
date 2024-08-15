@@ -11,7 +11,6 @@ import {
   BT_FAOSTAT,
   BT_WORLD_BANK,
   BT_WTO,
-  BT_NDL,
   BT_DB_NOMICS,
   BT_ENERGY,
   BT_BLOCKCHAIN,
@@ -132,12 +131,7 @@ const BrowserConfig = {
     BT_WTO,
     'WTO',
     'wto'
-  ),
-  [BT_NDL]: _crBrowserItem(
-    BT_NDL,
-    'Nasdaq Data Link',
-    'ndl'
-  ),
+  ),  
   [BT_DB_NOMICS]: _crBrowserItem(
     BT_DB_NOMICS,
     'DBnomics',

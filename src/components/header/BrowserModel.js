@@ -13,7 +13,6 @@ import {
   BT_SDG,
   BT_MIP,
   BT_CEI,
-  BT_NDL,
   BT_US_ECONOMICS,
   BT_ENERGY,
   BT_EUROSTAT,
@@ -83,8 +82,7 @@ const PAGE_CONFIGS_01 = [
   [CL_ORG, 'DBnomics', BT_DB_NOMICS],
   [CL_BR, 'Energy', BT_ENERGY],
   [CL_BR, 'U.S. Economics', BT_US_ECONOMICS],
-  [CL_BR, 'Commodities', BT_COMMODITIES],
-  [CL_ORG, 'Nasdaq Data Link', BT_NDL],
+  [CL_BR, 'Commodities', BT_COMMODITIES]  
 ]
 , PAGE_CONFIGS_02 = [
   [CL_ORG, 'Overview', BT_EUROSTAT],
