@@ -1,10 +1,10 @@
 import {
-  isNumber,
   isStr,
   assign,
   getCaption,
   joinBy,
-  ymdToUTC
+  ymdToUTC,
+  fCrData
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import crAdapterType1 from '../crAdapterType1';
@@ -42,21 +42,12 @@ const _getPeriodCode = (
       ? "-" + periodCode.replace("M", "")
       : "-NN";
 
-const crData = (
-  json
-) => getDataset(json).reduce((data, item) => {
-  const {
-    Value,
-    Year
-  } = item;
-  if (isNumber(Value) && isNumber(Year)) {
-    data.push([
-      ymdToUTC(''+ Year + _getPeriodCode(item.PeriodCode)),
-      Value
-    ])
-  }
-  return data;
-}, []).sort(compareByDate);
+const _fCrItemTuple = () => item => [
+  ymdToUTC(''+ item.Year + _getPeriodCode(item.PeriodCode)),
+  item.Value
+]
+, _crData = fCrData(getDataset, _fCrItemTuple)
+, crData = json => _crData(json).sort(compareByDate);
 
 const toLineAdapter = crAdapterType1({
   crData,

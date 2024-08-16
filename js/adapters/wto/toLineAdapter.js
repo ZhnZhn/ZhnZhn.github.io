@@ -24,16 +24,9 @@ const trOption = (option, json) => {
   (0, _AdapterFn.assign)(option, crTitle(option, json));
 };
 const _getPeriodCode = periodCode => periodCode === "A" ? "" : (0, _AdapterFn.isStr)(periodCode) ? "-" + periodCode.replace("M", "") : "-NN";
-const crData = json => (0, _fnAdapter.getDataset)(json).reduce((data, item) => {
-  const {
-    Value,
-    Year
-  } = item;
-  if ((0, _AdapterFn.isNumber)(Value) && (0, _AdapterFn.isNumber)(Year)) {
-    data.push([(0, _AdapterFn.ymdToUTC)('' + Year + _getPeriodCode(item.PeriodCode)), Value]);
-  }
-  return data;
-}, []).sort(_compareByFn.compareByDate);
+const _fCrItemTuple = () => item => [(0, _AdapterFn.ymdToUTC)('' + item.Year + _getPeriodCode(item.PeriodCode)), item.Value],
+  _crData = (0, _AdapterFn.fCrData)(_fnAdapter.getDataset, _fCrItemTuple),
+  crData = json => _crData(json).sort(_compareByFn.compareByDate);
 const toLineAdapter = (0, _crAdapterType.default)({
   crData,
   trOption
