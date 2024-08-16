@@ -3,11 +3,13 @@ import {
   assign,
   getCaption,
   joinBy,
-  ymdToUTC,
-  fCrData
+  ymdToUTC
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
-import crAdapterType1 from '../crAdapterType1';
+import {
+  fCrDataType1,
+  crAdapterType1
+} from '../crAdapterType1';
 import { getDataset } from './fnAdapter';
 
 const crTitle = (
@@ -46,7 +48,7 @@ const _fCrItemTuple = () => item => [
   ymdToUTC(''+ item.Year + _getPeriodCode(item.PeriodCode)),
   item.Value
 ]
-, _crData = fCrData(getDataset, _fCrItemTuple)
+, _crData = fCrDataType1(getDataset, _fCrItemTuple)
 , crData = json => _crData(json).sort(compareByDate);
 
 const toLineAdapter = crAdapterType1({

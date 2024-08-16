@@ -1,4 +1,4 @@
-import crAdapterType1 from '../crAdapterType1';
+import { crAdapterType1 } from '../crAdapterType1';
 import {
   _assign,
   crData,

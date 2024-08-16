@@ -1,10 +1,12 @@
 import {
-  fCrData,
   ymdToUTC,
   assign,
   joinBy
 } from '../AdapterFn';
-import crAdapterType1 from '../crAdapterType1';
+import {
+  fCrDataType1,
+  crAdapterType1
+} from '../crAdapterType1';
 import {
   DATA_SNB_URL,
   getTimeSeriesValues
@@ -14,10 +16,10 @@ const ITEM_URL = `${DATA_SNB_URL}/en/topics`;
 const DF_SUB_ID = "uvo";
 
 const _fCrItemTuple = () => item => [
-  ymdToUTC((item || {}).date),
-  (item || {}).value
+  ymdToUTC(item.date),
+  item.value
 ]
-, crData = fCrData(getTimeSeriesValues, _fCrItemTuple)
+, crData = fCrDataType1(getTimeSeriesValues, _fCrItemTuple)
 , trOption = (option) => {
     option.subtitle = joinBy(', ',
       option.subtitle,

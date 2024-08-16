@@ -1,5 +1,5 @@
 import { fAddMiniVolumes } from '../../charts/stockBuilderFn';
-import crAdapterType1 from '../crAdapterType1';
+import { crAdapterType1 } from '../crAdapterType1';
 import { fCrItemLinkByCaption } from '../crFn';
 
 const _crDescription = fCrItemLinkByCaption('Coin Gecko');

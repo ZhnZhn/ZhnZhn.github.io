@@ -5,6 +5,8 @@ import {
   FN_NOOP,
   crDfItemKey,
   isArr,
+  isObj,
+  isNumber,
   assign
 } from './AdapterFn';
 
@@ -21,7 +23,27 @@ const _crZhConfig = ({
   zhConfig: _crZhConfig(option)
 });
 
-const crAdapterType1 = ({
+export const fCrDataType1 = (
+  getItems,
+  fCrItemTuple
+) => (
+  json,
+  options
+) => {
+  const _crItemTuple = fCrItemTuple(options);
+  return getItems(json)
+   .reduce((data, item) => {
+     const p = isObj(item)
+       ? _crItemTuple(item)
+       : void 0;
+     if (p && isNumber(p[0]) && isNumber(p[1])) {
+       data.push(p)
+     }
+     return data;
+   }, []);
+}
+
+export const crAdapterType1 = ({
   crKey=crDfItemKey,
   crData,
   crConfOption=crConfOptionDf,
@@ -61,5 +83,3 @@ const crAdapterType1 = ({
   }
   return adapter;
 };
-
-export default crAdapterType1

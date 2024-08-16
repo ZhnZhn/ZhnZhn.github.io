@@ -1,10 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _stockBuilderFn = require("../../charts/stockBuilderFn");
-var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
+var _crAdapterType = require("../crAdapterType1");
 var _fnAdapter = require("./fnAdapter");
 const _crMvOption = (btTitle, data, dColumn) => ({
   btTitle,
@@ -20,7 +19,7 @@ const addToConfig = (config, json, option, data) => {
   } = data;
   return (0, _stockBuilderFn.fAddMiniVolumes)([_crMvOption('Volume', dVolume, dColumn), _crMvOption('Market Cap', dMarketCap)])(config);
 };
-const toChartConfig = (0, _crAdapterType.default)({
+const toChartConfig = (0, _crAdapterType.crAdapterType1)({
   crData: _fnAdapter.crData,
   addConfOption: _fnAdapter.addConfOption,
   addToConfig

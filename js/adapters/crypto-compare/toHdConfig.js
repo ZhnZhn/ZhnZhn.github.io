@@ -1,10 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _stockBuilderFn = require("../../charts/stockBuilderFn");
-var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
+var _crAdapterType = require("../crAdapterType1");
 var _fnAdapter = require("./fnAdapter");
 const _crTitle = (title, items) => {
   const _time = (0, _fnAdapter.getValue)(items[2]) === 'histoday' ? '00:00 GMT+0' : 'GMT+0';
@@ -72,7 +71,7 @@ const addToConfig = (config, json, option, data) => {
     data: dHL
   })(config);
 };
-const toHdConfig = (0, _crAdapterType.default)({
+const toHdConfig = (0, _crAdapterType.crAdapterType1)({
   crData: _fnAdapter.crData,
   crConfOption: _fnAdapter.crConfOption,
   trOption,

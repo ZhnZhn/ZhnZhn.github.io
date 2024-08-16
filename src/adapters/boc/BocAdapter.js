@@ -1,8 +1,8 @@
+import { ymdToUTC } from '../AdapterFn';
 import {
-  fCrData,
-  ymdToUTC
-} from '../AdapterFn';
-import crAdapterType1 from '../crAdapterType1';
+  fCrDataType1,
+  crAdapterType1
+} from '../crAdapterType1';
 import {
   getSeriesId,
   getObservationsData
@@ -11,11 +11,11 @@ import {
 const _fCrItemTuple = options => {
   const seriesId = getSeriesId(options);
   return item => [
-    ymdToUTC((item || {}).d),
-    parseFloat(((item || {})[seriesId] || {}).v)
+    ymdToUTC(item.d),
+    parseFloat((item[seriesId] || {}).v)
   ];
 }
-, crData = fCrData(getObservationsData, _fCrItemTuple)
+, crData = fCrDataType1(getObservationsData, _fCrItemTuple)
 
 const BocAdapter = crAdapterType1({
   crData

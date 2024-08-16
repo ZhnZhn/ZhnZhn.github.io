@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.default = void 0;
+exports.fCrDataType1 = exports.crAdapterType1 = void 0;
 var _crConfigType = _interopRequireDefault(require("../charts/crConfigType1"));
 var _configBuilderFn = require("../charts/configBuilderFn");
 var _AdapterFn = require("./AdapterFn");
@@ -22,6 +22,17 @@ const _crZhConfig = _ref => {
   crConfOptionDf = option => ({
     zhConfig: _crZhConfig(option)
   });
+const fCrDataType1 = (getItems, fCrItemTuple) => (json, options) => {
+  const _crItemTuple = fCrItemTuple(options);
+  return getItems(json).reduce((data, item) => {
+    const p = (0, _AdapterFn.isObj)(item) ? _crItemTuple(item) : void 0;
+    if (p && (0, _AdapterFn.isNumber)(p[0]) && (0, _AdapterFn.isNumber)(p[1])) {
+      data.push(p);
+    }
+    return data;
+  }, []);
+};
+exports.fCrDataType1 = fCrDataType1;
 const crAdapterType1 = _ref2 => {
   let {
     crKey = _AdapterFn.crDfItemKey,
@@ -57,5 +68,5 @@ const crAdapterType1 = _ref2 => {
   };
   return adapter;
 };
-var _default = exports.default = crAdapterType1;
+exports.crAdapterType1 = crAdapterType1;
 //# sourceMappingURL=crAdapterType1.js.map

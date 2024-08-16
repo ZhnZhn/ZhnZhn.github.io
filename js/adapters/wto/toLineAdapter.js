@@ -1,11 +1,10 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
-var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
+var _crAdapterType = require("../crAdapterType1");
 var _fnAdapter = require("./fnAdapter");
 const crTitle = (option, json) => {
   const {
@@ -25,9 +24,9 @@ const trOption = (option, json) => {
 };
 const _getPeriodCode = periodCode => periodCode === "A" ? "" : (0, _AdapterFn.isStr)(periodCode) ? "-" + periodCode.replace("M", "") : "-NN";
 const _fCrItemTuple = () => item => [(0, _AdapterFn.ymdToUTC)('' + item.Year + _getPeriodCode(item.PeriodCode)), item.Value],
-  _crData = (0, _AdapterFn.fCrData)(_fnAdapter.getDataset, _fCrItemTuple),
+  _crData = (0, _crAdapterType.fCrDataType1)(_fnAdapter.getDataset, _fCrItemTuple),
   crData = json => _crData(json).sort(_compareByFn.compareByDate);
-const toLineAdapter = (0, _crAdapterType.default)({
+const toLineAdapter = (0, _crAdapterType.crAdapterType1)({
   crData,
   trOption
 });

@@ -3,7 +3,7 @@ import {
   crAdapterRouter
 } from '../crAdapterRouter';
 
-import crAdapterType1 from '../crAdapterType1';
+import { crAdapterType1 } from '../crAdapterType1';
 import {
   crData,
   crConfOption

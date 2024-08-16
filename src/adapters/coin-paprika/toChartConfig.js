@@ -1,5 +1,5 @@
 import { fAddMiniVolumes } from '../../charts/stockBuilderFn';
-import crAdapterType1 from '../crAdapterType1';
+import { crAdapterType1 } from '../crAdapterType1';
 import { crData, addConfOption } from './fnAdapter';
 
 const _crMvOption = (
@@ -9,7 +9,7 @@ const _crMvOption = (
 ) => ({
   btTitle,
   title: `${btTitle} USD`,
-  data, 
+  data,
   dColumn
 });
 

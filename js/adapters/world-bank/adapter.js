@@ -4,10 +4,10 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _crAdapterRouter = require("../crAdapterRouter");
-var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
+var _crAdapterType = require("../crAdapterType1");
 var _fnAdapter = require("./fnAdapter");
 var _toCategoryAdapter = _interopRequireDefault(require("./toCategoryAdapter"));
-const toLineAdapter = (0, _crAdapterType.default)({
+const toLineAdapter = (0, _crAdapterType.crAdapterType1)({
     crData: _fnAdapter.crData,
     crConfOption: _fnAdapter.crConfOption
   }),

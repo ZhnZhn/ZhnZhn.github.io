@@ -1,1 +1,20 @@
-{"version":3,"sources":["../../../src/adapters/bea/BeaAdapter.js"],"names":["BeaAdapter","crData","crConfOption"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,MAAMA,UAAU,GAAG,4BAAe;AAC/BC,EAAAA,MAAM,EAANA,iBAD+B;AAE/BC,EAAAA,YAAY,EAAZA;AAF+B,CAAf,CAAnB;eAKeF,U","sourcesContent":["import crAdapterType1 from '../crAdapterType1';\r\nimport { crData, crConfOption } from './fnAdapter';\r\n\r\nconst BeaAdapter = crAdapterType1({\r\n   crData,\r\n   crConfOption\r\n});\r\n\r\nexport default BeaAdapter\r\n"],"file":"BeaAdapter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bea/BeaAdapter.js"
+ ],
+ "file": "../../../src/adapters/bea/BeaAdapter.js",
+ "names": [
+  "_crAdapterType",
+  "require",
+  "_fnAdapter",
+  "BeaAdapter",
+  "crAdapterType1",
+  "crData",
+  "crConfOption",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,cAAA,GAAAC,OAAA;AACA,IAAAC,UAAA,GAAAD,OAAA;AAEA,MAAME,UAAU,GAAG,IAAAC,6BAAc,EAAC;EAC/BC,MAAM,EAANA,iBAAM;EACNC,YAAY,EAAZA;AACH,CAAC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYN,UAAU"
+}

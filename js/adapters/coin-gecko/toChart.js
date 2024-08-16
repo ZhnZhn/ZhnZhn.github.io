@@ -1,10 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _stockBuilderFn = require("../../charts/stockBuilderFn");
-var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
+var _crAdapterType = require("../crAdapterType1");
 var _crFn = require("../crFn");
 const _crDescription = (0, _crFn.fCrItemLinkByCaption)('Coin Gecko');
 const _crInfo = _ref => {
@@ -41,7 +40,7 @@ const crData = _ref2 => {
       } = option;
     return (0, _stockBuilderFn.fAddMiniVolumes)([_crMvOption('Volume', _currency, total_volumes), _crMvOption('Market Cap', _currency, market_caps)])(config);
   };
-const toChart = (0, _crAdapterType.default)({
+const toChart = (0, _crAdapterType.crAdapterType1)({
   crData,
   addConfOption,
   addToConfig

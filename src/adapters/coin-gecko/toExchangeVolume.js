@@ -1,4 +1,4 @@
-import crAdapterType1 from '../crAdapterType1';
+import { crAdapterType1 } from '../crAdapterType1';
 
 const crData = json => json.map(tuple => [
   tuple[0],

@@ -1,9 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
+var _crAdapterType = require("../crAdapterType1");
 var _fnAdapter = require("./fnAdapter");
 const trOption = (option, json) => {
   option.title = (0, _fnAdapter.crTitle)(json, option);
@@ -17,7 +16,7 @@ const addToConfig = (config, json, option) => {
   };
   return config;
 };
-const toSplineAdapter = (0, _crAdapterType.default)({
+const toSplineAdapter = (0, _crAdapterType.crAdapterType1)({
   crData: _fnAdapter.toDataPoints,
   trOption,
   addToConfig

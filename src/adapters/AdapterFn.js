@@ -61,7 +61,6 @@ export {
   isStr
 } from '../utils/isTypeFn';
 import {
-  isObj,
   isArr,
   isNaN,
   isTypeNumber,
@@ -190,24 +189,4 @@ export const fCrLazyValue = crValue => {
   return () => value === void 0
     ? (value = crValue())
     : value;
-}
-
-export const fCrData = (
-  getItems,
-  fCrItemTuple
-) => (
-  json,
-  options
-) => {
-  const _crItemTuple = fCrItemTuple(options);
-  return getItems(json)
-   .reduce((data, item) => {
-     const p = isObj(item)
-       ? _crItemTuple(item)
-       : void 0;
-     if (p && isNumber(p[0]) && isNumber(p[1])) {
-       data.push(p)
-     }
-     return data;
-   }, []);
 }
