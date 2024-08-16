@@ -61,6 +61,7 @@ export {
   isStr
 } from '../utils/isTypeFn';
 import {
+  isObj,
   isArr,
   isNaN,
   isTypeNumber,
@@ -201,8 +202,10 @@ export const fCrData = (
   const _crItemTuple = fCrItemTuple(options);
   return getItems(json)
    .reduce((data, item) => {
-     const p = _crItemTuple(item);
-     if (isNumber(p[0]) && isNumber(p[1])) {
+     const p = isObj(item)
+       ? _crItemTuple(item)
+       : void 0;
+     if (p && isNumber(p[0]) && isNumber(p[1])) {
        data.push(p)
      }
      return data;
