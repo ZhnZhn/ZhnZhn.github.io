@@ -6,6 +6,7 @@ exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _crAdapterType = _interopRequireDefault(require("../crAdapterType1"));
+var _fnAdapter = require("./fnAdapter");
 const crTitle = (option, json) => {
   const {
       items,
@@ -13,7 +14,7 @@ const crTitle = (option, json) => {
     } = option,
     _reporting = (0, _AdapterFn.getCaption)(items[0]),
     _product = (0, _AdapterFn.getCaption)(items[1]),
-    item = json.Dataset[0] || {};
+    item = (0, _fnAdapter.getDataset)(json)[0] || {};
   return {
     title: (0, _AdapterFn.joinBy)(": ", _reporting, dfT),
     subtitle: (0, _AdapterFn.joinBy)(": ", _product, item.Unit)
@@ -23,7 +24,7 @@ const trOption = (option, json) => {
   (0, _AdapterFn.assign)(option, crTitle(option, json));
 };
 const _getPeriodCode = periodCode => periodCode === "A" ? "" : (0, _AdapterFn.isStr)(periodCode) ? "-" + periodCode.replace("M", "") : "-NN";
-const crData = json => json.Dataset.reduce((data, item) => {
+const crData = json => (0, _fnAdapter.getDataset)(json).reduce((data, item) => {
   const {
     Value,
     Year

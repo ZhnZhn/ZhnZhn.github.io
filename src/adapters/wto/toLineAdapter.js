@@ -8,6 +8,7 @@ import {
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import crAdapterType1 from '../crAdapterType1';
+import { getDataset } from './fnAdapter';
 
 const crTitle = (
   option,
@@ -19,7 +20,7 @@ const crTitle = (
    } = option
   , _reporting = getCaption(items[0])
   , _product = getCaption(items[1])
-  , item = json.Dataset[0] || {};
+  , item = getDataset(json)[0] || {};
   return {
     title: joinBy(": ", _reporting, dfT),
     subtitle: joinBy(": ", _product, item.Unit)
@@ -43,7 +44,7 @@ const _getPeriodCode = (
 
 const crData = (
   json
-) => json.Dataset.reduce((data, item) => {
+) => getDataset(json).reduce((data, item) => {
   const {
     Value,
     Year

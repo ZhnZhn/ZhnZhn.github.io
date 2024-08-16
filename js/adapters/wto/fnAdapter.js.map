@@ -1,0 +1,14 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/wto/fnAdapter.js"
+ ],
+ "file": "../../../src/adapters/wto/fnAdapter.js",
+ "names": [
+  "getDataset",
+  "json",
+  "Dataset",
+  "exports"
+ ],
+ "mappings": ";;;;AACO,MAAMA,UAAU,GAAGC,IAAI,IAAI,CAACA,IAAI,IAAI,CAAC,CAAC,EAAEC,OAAO;AAAAC,OAAA,CAAAH,UAAA,GAAAA,UAAA"
+}

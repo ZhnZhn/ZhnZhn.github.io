@@ -7,11 +7,12 @@ var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"));
+var _fnAdapter = require("./fnAdapter");
 const _isStrInclude = (str, token) => str.indexOf(token) !== -1;
 
 //Unicode character patch
 const _crReportingEconomy = reportingEconomy => _isStrInclude(reportingEconomy, "rkiye") ? "Türkiye" : _isStrInclude(reportingEconomy, "Ivoire") ? "Côte d'Ivoire" : _isStrInclude(reportingEconomy, "Principe") ? "Sao Tomé and Principe" : reportingEconomy;
-const _crData = (json, option) => (0, _compareByFn.sortDescCategory)(json.Dataset.reduce((data, item) => {
+const _crData = (json, option) => (0, _compareByFn.sortDescCategory)((0, _fnAdapter.getDataset)(json).reduce((data, item) => {
     const {
       Value,
       ReportingEconomy
