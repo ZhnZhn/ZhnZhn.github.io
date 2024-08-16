@@ -1,11 +1,9 @@
-import {
-  isArr,
-  crError,
-  getValue
+import {  
+  getValue,
+  fCheckResponse
 } from '../AdapterFn';
-import {
-  isCategory
-} from '../CategoryFn';
+import { isCategory } from '../CategoryFn';
+import { getDataset } from './fnAdapter';
 
 const API_URL = 'https://api.wto.org/timeseries/v1/data';
 
@@ -35,12 +33,7 @@ const WtApi = {
     return `${_url}&r=${_r}&pc=${_pc}&ps=2005-2024`;
   },
 
-  checkResponse(json, option){
-    const { Dataset } = json || {};
-    if (!isArr(Dataset)) {
-      throw crError();
-    }
-  }
+  checkResponse: fCheckResponse(getDataset)
 };
 
 export default WtApi
