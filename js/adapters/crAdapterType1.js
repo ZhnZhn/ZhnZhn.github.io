@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.fCrDataType1 = exports.crAdapterType1 = void 0;
+exports.fCrDataType1 = exports.fCrConfOptionExchangeRate = exports.crAdapterType1 = void 0;
 var _crConfigType = _interopRequireDefault(require("../charts/crConfigType1"));
 var _configBuilderFn = require("../charts/configBuilderFn");
 var _AdapterFn = require("./AdapterFn");
@@ -22,6 +22,18 @@ const _crZhConfig = _ref => {
   crConfOptionDf = option => ({
     zhConfig: _crZhConfig(option)
   });
+const _crItemCaptionCurrencyRate = (option, toCurrency) => {
+  const _caption = option.items[0].c,
+    _fromIndex = _caption.indexOf('(');
+  return `${_caption.slice(_fromIndex + 1, _fromIndex + 4)}/${toCurrency}`;
+};
+const fCrConfOptionExchangeRate = (exchangeRateId, toCurrency) => option => {
+  if (option.dfId === exchangeRateId) {
+    option.itemCaption = _crItemCaptionCurrencyRate(option, toCurrency);
+  }
+  return crConfOptionDf(option);
+};
+exports.fCrConfOptionExchangeRate = fCrConfOptionExchangeRate;
 const fCrDataType1 = (getItems, fCrItemTuple) => (json, options) => {
   const _crItemTuple = fCrItemTuple(options);
   return getItems(json).reduce((data, item) => {
