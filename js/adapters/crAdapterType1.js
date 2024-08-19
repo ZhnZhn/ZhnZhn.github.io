@@ -27,11 +27,16 @@ const _crItemCaptionCurrencyRate = (option, toCurrency) => {
     _fromIndex = _caption.indexOf('(');
   return `${_caption.slice(_fromIndex + 1, _fromIndex + 4)}/${toCurrency}`;
 };
-const fCrConfOptionExchangeRate = (exchangeRateId, toCurrency) => option => {
-  if (option.dfId === exchangeRateId) {
-    option.itemCaption = _crItemCaptionCurrencyRate(option, toCurrency);
+const fCrConfOptionExchangeRate = function (toCurrency, exchangeRateCaseId) {
+  if (exchangeRateCaseId === void 0) {
+    exchangeRateCaseId = "EXR";
   }
-  return crConfOptionDf(option);
+  return option => {
+    if (option.dfCase === exchangeRateCaseId) {
+      option.itemCaption = _crItemCaptionCurrencyRate(option, toCurrency);
+    }
+    return crConfOptionDf(option);
+  };
 };
 exports.fCrConfOptionExchangeRate = fCrConfOptionExchangeRate;
 const fCrDataType1 = (getItems, fCrItemTuple) => (json, options) => {

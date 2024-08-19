@@ -33,10 +33,10 @@ const _crItemCaptionCurrencyRate = (
 }
 
 export const fCrConfOptionExchangeRate = (
-  exchangeRateId,
-  toCurrency
+  toCurrency,
+  exchangeRateCaseId="EXR"
 ) => option => {
-  if (option.dfId === exchangeRateId) {
+  if (option.dfCase === exchangeRateCaseId) {
     option.itemCaption = _crItemCaptionCurrencyRate(option, toCurrency)
   }
   return crConfOptionDf(option);

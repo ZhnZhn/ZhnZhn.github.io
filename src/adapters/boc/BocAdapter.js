@@ -1,6 +1,7 @@
 import { ymdToUTC } from '../AdapterFn';
 import {
   fCrDataType1,
+  fCrConfOptionExchangeRate,
   crAdapterType1
 } from '../crAdapterType1';
 import {
@@ -18,7 +19,8 @@ const _fCrItemTuple = options => {
 , crData = fCrDataType1(getObservationsData, _fCrItemTuple)
 
 const BocAdapter = crAdapterType1({
-  crData
+  crData,
+  crConfOption: fCrConfOptionExchangeRate("CAD")
 })
 
 export default BocAdapter

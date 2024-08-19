@@ -11,7 +11,8 @@ const _fCrItemTuple = options => {
   },
   crData = (0, _crAdapterType.fCrDataType1)(_fnAdapter.getObservationsData, _fCrItemTuple);
 const BocAdapter = (0, _crAdapterType.crAdapterType1)({
-  crData
+  crData,
+  crConfOption: (0, _crAdapterType.fCrConfOptionExchangeRate)("CAD")
 });
 var _default = exports.default = BocAdapter;
 //# sourceMappingURL=BocAdapter.js.map
