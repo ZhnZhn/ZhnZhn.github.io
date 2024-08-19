@@ -23,10 +23,11 @@ const _crCaption = (dialogConf, browserType) => {
       dialogProps
     } = dialogConf,
     {
-      dataSource = ''
+      ds,
+      dataSource
     } = dialogProps || {};
   _caption = (0, _storeApi.isStr)(contCaption) ? contCaption : dialogCaption || menuTitle || 'Item Container';
-  return [dataSource, _caption].filter(Boolean).join(': ');
+  return (0, _uiApi.joinBy)(': ', ds || dataSource, _caption);
 };
 const crItemContainerEl = _ref => {
   let {

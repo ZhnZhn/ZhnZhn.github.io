@@ -1,6 +1,7 @@
 import {
   bindTo,
-  createElement
+  createElement,
+  joinBy
 } from '../../components/uiApi';
 
 import ChartContainer from '../../components/zhn-containers/ChartContainer';
@@ -34,14 +35,12 @@ const _crCaption = (
     menuTitle,
     dialogProps
   } = dialogConf
-  , { dataSource= '' } = dialogProps || {};
+  , { ds, dataSource} = dialogProps || {};
 
   _caption = isStr(contCaption)
      ? contCaption
      : dialogCaption || menuTitle || 'Item Container';
-  return [dataSource, _caption]
-    .filter(Boolean)
-    .join(': ');
+  return joinBy(': ', ds || dataSource, _caption);
 };
 
 export const crItemContainerEl = ({
