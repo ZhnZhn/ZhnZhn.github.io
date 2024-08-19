@@ -1,5 +1,6 @@
-import {  
+import {
   getValue,
+  getCaption,
   fCheckResponse
 } from '../AdapterFn';
 import { isCategory } from '../CategoryFn';
@@ -17,14 +18,22 @@ const WtApi = {
   getRequestUrl(option){
     const {
       items,
-      dfPc
+      dfPc,
+      dfT
     } = option
     , _r = getValue(items[0])
-    , _pc = getValue(items[1]) || dfPc || "TO"
+    , _item1 = items[1]
+    , _pc = getValue(_item1) || dfPc || "TO"
     , _url = _crApiUrl(option);
 
     if (isCategory(option.seriaType)) {
-      option.title = option.dfT
+      const _caption1 = getCaption(_item1);
+      if (_caption1) {
+        option.title = _caption1
+        option.subtitle = dfT
+      } else {
+        option.title = dfT
+      }
       const _ps = (option.time || '')
         .replace("M", "") || 2023;
       return `${_url}&pc=${_pc}&ps=${_ps}`;

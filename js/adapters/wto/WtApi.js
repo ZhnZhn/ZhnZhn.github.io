@@ -18,13 +18,21 @@ const WtApi = {
   getRequestUrl(option) {
     const {
         items,
-        dfPc
+        dfPc,
+        dfT
       } = option,
       _r = (0, _AdapterFn.getValue)(items[0]),
-      _pc = (0, _AdapterFn.getValue)(items[1]) || dfPc || "TO",
+      _item1 = items[1],
+      _pc = (0, _AdapterFn.getValue)(_item1) || dfPc || "TO",
       _url = _crApiUrl(option);
     if ((0, _CategoryFn.isCategory)(option.seriaType)) {
-      option.title = option.dfT;
+      const _caption1 = (0, _AdapterFn.getCaption)(_item1);
+      if (_caption1) {
+        option.title = _caption1;
+        option.subtitle = dfT;
+      } else {
+        option.title = dfT;
+      }
       const _ps = (option.time || '').replace("M", "") || 2023;
       return `${_url}&pc=${_pc}&ps=${_ps}`;
     }
