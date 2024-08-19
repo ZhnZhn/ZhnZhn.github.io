@@ -28,8 +28,9 @@ const _crItemCaptionCurrencyRate = (
   toCurrency
 ) => {
   const _caption = option.items[0].c
-  , _fromIndex = _caption.indexOf('(');
-  return `${_caption.slice(_fromIndex + 1, _fromIndex + 4)}/${toCurrency}`;
+  , _fromIndex = _caption.indexOf('(') + 1
+  , _toIndex = _caption.indexOf(')');
+  return `${_caption.slice(_fromIndex, _toIndex)}/${toCurrency}`;
 }
 
 export const fCrConfOptionExchangeRate = (

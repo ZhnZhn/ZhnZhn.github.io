@@ -24,8 +24,9 @@ const _crZhConfig = _ref => {
   });
 const _crItemCaptionCurrencyRate = (option, toCurrency) => {
   const _caption = option.items[0].c,
-    _fromIndex = _caption.indexOf('(');
-  return `${_caption.slice(_fromIndex + 1, _fromIndex + 4)}/${toCurrency}`;
+    _fromIndex = _caption.indexOf('(') + 1,
+    _toIndex = _caption.indexOf(')');
+  return `${_caption.slice(_fromIndex, _toIndex)}/${toCurrency}`;
 };
 const fCrConfOptionExchangeRate = function (toCurrency, exchangeRateCaseId) {
   if (exchangeRateCaseId === void 0) {

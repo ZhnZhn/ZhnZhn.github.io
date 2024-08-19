@@ -5,6 +5,7 @@ import {
 } from '../AdapterFn';
 import {
   fCrDataType1,
+  fCrConfOptionExchangeRate,
   crAdapterType1
 } from '../crAdapterType1';
 import {
@@ -44,7 +45,8 @@ const _fCrItemTuple = () => item => [
 const SnbAdapter = crAdapterType1({
   crData,
   trOption,
-  addToConfig
+  addToConfig,
+  crConfOption: fCrConfOptionExchangeRate("CHF")
 });
 
 export default SnbAdapter

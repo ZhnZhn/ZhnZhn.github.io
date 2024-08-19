@@ -25,7 +25,8 @@ const _fCrItemTuple = () => item => [(0, _AdapterFn.ymdToUTC)(item.date), item.v
 const SnbAdapter = (0, _crAdapterType.crAdapterType1)({
   crData,
   trOption,
-  addToConfig
+  addToConfig,
+  crConfOption: (0, _crAdapterType.fCrConfOptionExchangeRate)("CHF")
 });
 var _default = exports.default = SnbAdapter;
 //# sourceMappingURL=SnbAdapter.js.map
