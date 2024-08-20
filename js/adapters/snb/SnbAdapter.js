@@ -13,9 +13,7 @@ const _fCrItemTuple = () => item => [(0, _AdapterFn.ymdToUTC)(item.date), item.v
     option.subtitle = (0, _AdapterFn.joinBy)(', ', option.subtitle, option.dfSubtitle);
   },
   addToConfig = (config, json, option) => {
-    config.info = {
-      name: (0, _AdapterFn.joinBy)(", ", option.title, option.subtitle)
-    };
+    config.info = (0, _AdapterFn.crInfoWithName)(option);
     (0, _AdapterFn.assign)(config.zhConfig, {
       linkFn: option.loadId,
       item: `${ITEM_URL}/${option.dfSubId || DF_SUB_ID}/cube/${option.dfId}`

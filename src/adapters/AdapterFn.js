@@ -10,6 +10,7 @@ export {
   isInArrStr,
   joinBy
 } from '../utils/arrFn';
+import { joinBy } from '../utils/arrFn';
 import formatAllNumber from '../utils/formatAllNumber';
 import {
   getC,
@@ -190,3 +191,7 @@ export const fCrLazyValue = crValue => {
     ? (value = crValue())
     : value;
 }
+
+export const crInfoWithName = option => ({
+  name: joinBy(", ", option.title, option.subtitle)
+})

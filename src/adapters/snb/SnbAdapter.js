@@ -1,7 +1,8 @@
 import {
   ymdToUTC,
   assign,
-  joinBy
+  joinBy,
+  crInfoWithName
 } from '../AdapterFn';
 import {
   fCrDataType1,
@@ -32,9 +33,7 @@ const _fCrItemTuple = () => item => [
   json,
   option
 ) => {
-  config.info = {
-    name: joinBy(", ", option.title, option.subtitle)
-  }
+  config.info = crInfoWithName(option)
   assign(config.zhConfig, {
     linkFn: option.loadId,
     item: `${ITEM_URL}/${option.dfSubId || DF_SUB_ID}/cube/${option.dfId}`
