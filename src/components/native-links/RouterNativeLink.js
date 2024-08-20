@@ -7,7 +7,6 @@ import FaoStatLink from './FaoStatLink'
 import FredLink from './FredLink'
 import CrcLink from './CrcLink'
 import EsLink from './EsLink'
-import SnbLink from './SnbLink'
 
 const RouterNativeLink = {
   DF: DfLink,
@@ -18,8 +17,7 @@ const RouterNativeLink = {
   FAO_STAT: FaoStatLink,
   FRED: FredLink,
   CRC: CrcLink,
-  ES: EsLink,
-  SNB: SnbLink
+  ES: EsLink
 };
 
 export default RouterNativeLink

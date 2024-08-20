@@ -195,3 +195,17 @@ export const fCrLazyValue = crValue => {
 export const crInfoWithName = option => ({
   name: joinBy(", ", option.title, option.subtitle)
 })
+
+export const addToConfigDfLink = (
+  config,
+  caption,
+  href
+) => {
+  assign(config.zhConfig, {
+    linkFn: "DF",
+    item: {
+      caption,
+      href
+    }
+  })
+}

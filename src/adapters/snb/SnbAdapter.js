@@ -1,8 +1,8 @@
 import {
   ymdToUTC,
-  assign,
   joinBy,
-  crInfoWithName
+  crInfoWithName,
+  addToConfigDfLink
 } from '../AdapterFn';
 import {
   fCrDataType1,
@@ -34,10 +34,10 @@ const _fCrItemTuple = () => item => [
   option
 ) => {
   config.info = crInfoWithName(option)
-  assign(config.zhConfig, {
-    linkFn: option.loadId,
-    item: `${ITEM_URL}/${option.dfSubId || DF_SUB_ID}/cube/${option.dfId}`
-  })
+  addToConfigDfLink(config,
+    "Swiss National Bank",
+    `${ITEM_URL}/${option.dfSubId || DF_SUB_ID}/cube/${option.dfId}`
+  )
   return config;
 }
 
