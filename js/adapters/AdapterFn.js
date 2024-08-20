@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isTokenInStr = exports.isObj = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.crZhConfig = exports.crValueMoving = exports.crInfoWithName = exports.crErrorByMessage = exports.crError = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigDfLink = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isTokenInStr = exports.isObj = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.crZhConfig = exports.crValueMoving = exports.crErrorByMessage = exports.crError = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -170,10 +170,12 @@ const fCrLazyValue = crValue => {
   return () => value === void 0 ? value = crValue() : value;
 };
 exports.fCrLazyValue = fCrLazyValue;
-const crInfoWithName = option => ({
-  name: (0, _arrFn.joinBy)(", ", option.title, option.subtitle)
-});
-exports.crInfoWithName = crInfoWithName;
+const addToConfigInfo = (config, option) => {
+  config.info = {
+    name: (0, _arrFn.joinBy)(", ", option.title, option.subtitle)
+  };
+};
+exports.addToConfigInfo = addToConfigInfo;
 const addToConfigDfLink = (config, caption, href) => {
   assign(config.zhConfig, {
     linkFn: "DF",

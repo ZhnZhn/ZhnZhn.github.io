@@ -13,7 +13,7 @@ const _fCrItemTuple = () => item => [(0, _AdapterFn.ymdToUTC)(item.date), item.v
     option.subtitle = (0, _AdapterFn.joinBy)(', ', option.subtitle, option.dfSubtitle);
   },
   addToConfig = (config, json, option) => {
-    config.info = (0, _AdapterFn.crInfoWithName)(option);
+    (0, _AdapterFn.addToConfigInfo)(config, option);
     (0, _AdapterFn.addToConfigDfLink)(config, "Swiss National Bank", `${ITEM_URL}/${option.dfSubId || DF_SUB_ID}/cube/${option.dfId}`);
     return config;
   };

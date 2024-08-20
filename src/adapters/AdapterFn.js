@@ -192,9 +192,14 @@ export const fCrLazyValue = crValue => {
     : value;
 }
 
-export const crInfoWithName = option => ({
-  name: joinBy(", ", option.title, option.subtitle)
-})
+export const addToConfigInfo = (
+  config,
+  option
+) => {
+  config.info = {
+     name: joinBy(", ", option.title, option.subtitle)
+  }
+}
 
 export const addToConfigDfLink = (
   config,
