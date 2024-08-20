@@ -114,12 +114,26 @@ const _crPropCaption = (
      ? 'c'
      : void 0;
 
+
+const _addPrefixSuffixTo = (arr, json) => {
+   const { prefix, suffix } = json;
+   if (prefix || suffix) {
+     arr.forEach(item => {
+       item.v = `${prefix || ''}${item.v}${suffix || ''}`
+     })
+   }
+   return arr;
+ };
+
 //[items, propCaption]
 const crOptions = (
   json,
   optionsPropName
 ) => {
-  const items = _crItems(json, optionsPropName);
+  const items = _addPrefixSuffixTo(
+    _crItems(json, optionsPropName),
+    json
+  );
   return [
     items,
     _crPropCaption(items)

@@ -108,10 +108,22 @@ const _crItems = (json, optionsPropName) => {
   return _crItems ? _crItems(_arr) : _arr[0] && _notNullOrUndef(_arr[0].s) ? _crSItems(_arr) : (0, _uiApi.isObj)(json.filters) ? _crItemsWithFilters(_arr, json.filters) : _arr;
 };
 const _crPropCaption = arr => !(0, _uiApi.isArr)(arr) || arr.length === 0 ? void 0 : _notNullOrUndef(arr[0].c) ? 'c' : void 0;
+const _addPrefixSuffixTo = (arr, json) => {
+  const {
+    prefix,
+    suffix
+  } = json;
+  if (prefix || suffix) {
+    arr.forEach(item => {
+      item.v = `${prefix || ''}${item.v}${suffix || ''}`;
+    });
+  }
+  return arr;
+};
 
 //[items, propCaption]
 const crOptions = (json, optionsPropName) => {
-  const items = _crItems(json, optionsPropName);
+  const items = _addPrefixSuffixTo(_crItems(json, optionsPropName), json);
   return [items, _crPropCaption(items)];
 };
 var _default = exports.default = crOptions;
