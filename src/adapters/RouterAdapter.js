@@ -1,4 +1,5 @@
 import {
+  LT_ECB,
   LT_BOC,
   LT_SNB,
   LT_Q,
@@ -73,6 +74,7 @@ import Bea from './bea/Bea'
 import Bls from './bls/Bls'
 import Eia from './eia/Eia'
 import Intrinio from './intrinio/Intrinio'
+import Ecb from './ecb/Ecb';
 import Boc from './boc/Boc'
 import Snb from './snb/Snb'
 import Ndl from './ndl/Ndl'
@@ -99,6 +101,7 @@ import Kx from './okx/Kx'
 import Bb from './bybit/Bb'
 
 const RouterAdapter = {
+  [LT_ECB]: Ecb,
   [LT_BOC]: Boc,
   [LT_SNB]: Snb,
   [LT_Q]: Ndl,

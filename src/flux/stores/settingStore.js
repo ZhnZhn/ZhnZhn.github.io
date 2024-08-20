@@ -10,6 +10,7 @@ import {
 } from '../storeApi';
 
 import {
+  LT_ECB,
   LT_SNB,
   LT_Q,
   LT_AL,
@@ -45,6 +46,7 @@ const _withApiKey = [
   LT_WT
 ];
 const _withProxyServer = [
+  LT_ECB,
   LT_SNB,
   LT_Q,
   LT_UN,
@@ -113,7 +115,7 @@ export const CHECKBOX_CONFIGS = [
 ];
 
 const _SETTINGS = _assign(_createObject(), {
-  [PN_LH_CORS_PROXY_SERVER]: '',  
+  [PN_LH_CORS_PROXY_SERVER]: '',
   [PN_IS_ADMIN_MODE]: false,
   [PN_IS_DRAW_DELTA_EXTREMS]: false,
   [PN_IS_NOT_ZOOM_TO_MIN_MAX]: false,

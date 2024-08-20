@@ -1,0 +1,30 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/ecb/EcbApi.js"
+ ],
+ "file": "../../../src/adapters/ecb/EcbApi.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "_fnAdapter",
+  "API_URL",
+  "ECB_EUROPA_EU",
+  "EcbApi",
+  "getRequestUrl",
+  "option",
+  "proxy",
+  "dfR",
+  "crItemId",
+  "fromDate",
+  "checkResponse",
+  "json",
+  "isObj",
+  "getSeriesObservertions",
+  "crError",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAIA,IAAAC,UAAA,GAAAD,OAAA;AAMA,MAAME,OAAO,GAAG,oBAAoBC,wBAAa,eAAe;AAEhE,MAAMC,MAAM,GAAG;EACbC,aAAaA,CAACC,MAAM,EAAC;IACnB,OAAO,GAAGA,MAAM,CAACC,KAAK,GAAGL,OAAO,IAAII,MAAM,CAACE,GAAG,IAAI,IAAAC,mBAAQ,EAACH,MAAM,CAAC,gDAAgDA,MAAM,CAACI,QAAQ,EAAE;EACrI,CAAC;EACDC,aAAaA,CAACC,IAAI,EAAC;IACjB,IAAI,CAAC,IAAAC,gBAAK,EAAC,IAAAC,iCAAsB,EAACF,IAAI,CAAC,CAAC,EAAE;MACxC,MAAM,IAAAG,kBAAO,EAAC,CAAC;IACjB;EACF;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEad,MAAM"
+}
