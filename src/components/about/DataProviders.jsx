@@ -59,6 +59,7 @@ const DP = [
 ]
 , DP_PR = [
   [Link.Ndl, '50'],
+  Link.ECB,
   Link.SNB,
   Link.UnComtrade,
   Link.WTO,
@@ -110,7 +111,7 @@ const _crListCaption = (
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 44):"
+     caption="Data Providers (All 45):"
      childStyle={S_ROOT_CHILD}
   >
     <div>
