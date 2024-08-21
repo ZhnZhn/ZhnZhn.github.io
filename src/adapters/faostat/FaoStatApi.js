@@ -2,13 +2,12 @@ import {
   isCategory,
   isTreeMap
 } from '../CategoryFn';
-import {
-  isArr,
+import {  
   isTokenInStr,
   assign,
   getValue,
   getCaption,
-  crError
+  fCheckResponse
 } from '../AdapterFn';
 
 import {
@@ -78,12 +77,7 @@ const FaoStatApi = {
     return `${_apiUrl}&${_apiQuery}${TAIL}`;
   },
 
-  checkResponse(json){
-    const { data } = json || {};
-    if (!(isArr(data) && data.length > 0)) {
-      throw crError();
-    }
-  },
+  checkResponse: fCheckResponse(),
 
   addPropsTo(option){
     const {

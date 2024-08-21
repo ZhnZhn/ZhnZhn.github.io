@@ -20,7 +20,7 @@ const _checkReq = option => {
   }
   const _element = option.items[2] || {};
   if ((0, _CategoryFn.isTreeMap)(option.seriaType) && !_element.isTm) {
-    throw new Error("TreeMap for " + (0, _AdapterFn.getCaption)(_element) + " is not exist.");
+    throw new Error(`TreeMap for ${(0, _AdapterFn.getCaption)(_element)} is not exist.`);
   }
 };
 const _getListId = geoId => (0, _AdapterFn.isTokenInStr)(geoId, '>') ? geoId : WORLD_LIST_ID;
@@ -39,20 +39,13 @@ const FaoStatApi = {
       _three = (0, _AdapterFn.getValue)(items[2]),
       _element = _three || dfElement,
       [_year, _pageSize] = _one === WORLD_LIST_ID ? [(0, _getMemoizedYear.default)(2004), 5000] : [(0, _getMemoizedYear.default)(1980), 100],
-      _apiUrl = API_URL + "/" + dfDomain + "?element=" + _element + "&" + dfItemName + "=" + _two,
+      _apiUrl = `${API_URL}/${dfDomain}?element=${_element}&${dfItemName}=${_two}`,
       _isCategorySeriaType = (0, _CategoryFn.isCategory)(seriaType),
       _area = _isCategorySeriaType ? _getListId(_one) : _one,
-      _apiQuery = _isCategorySeriaType ? "area=" + _area + "&year=" + option.time + "&page_size=300" : "area=" + _area + "&year=" + _year + "&page_size=" + _pageSize;
-    return _apiUrl + "&" + _apiQuery + TAIL;
+      _apiQuery = _isCategorySeriaType ? `area=${_area}&year=${option.time}&page_size=300` : `area=${_area}&year=${_year}&page_size=${_pageSize}`;
+    return `${_apiUrl}&${_apiQuery}${TAIL}`;
   },
-  checkResponse(json) {
-    const {
-      data
-    } = json || {};
-    if (!((0, _AdapterFn.isArr)(data) && data.length > 0)) {
-      throw (0, _AdapterFn.crError)();
-    }
-  },
+  checkResponse: (0, _AdapterFn.fCheckResponse)(),
   addPropsTo(option) {
     const {
         qA,
