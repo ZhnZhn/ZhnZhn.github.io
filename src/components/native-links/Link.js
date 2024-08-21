@@ -10,11 +10,11 @@ const Link = ({
   className='native-link',
   style,
   href,
-  caption='Native Link'
+  caption
 }) => {
   const _href = toHref(href, isHttp)
   , _style = {...S_LINK, ...style};
-  return _href ? (
+  return _href && caption ? (
     <a
       className={className}
       style={_style}
@@ -22,11 +22,7 @@ const Link = ({
     >
       {caption}
     </a>
-  ) : (
-    <span style={_style}>
-      {caption}
-    </span>
-  );
-}
+  ) : null;
+};
 
 export default Link
