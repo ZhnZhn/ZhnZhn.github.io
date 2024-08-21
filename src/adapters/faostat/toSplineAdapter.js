@@ -1,3 +1,4 @@
+import { addToConfigDfLink } from '../AdapterFn';
 import { crAdapterType1 } from '../crAdapterType1';
 
 import {
@@ -23,6 +24,10 @@ const addToConfig = (config, json, option) => {
     ...crZhConfig(option),
     ...config.zhConfig
   }
+  addToConfigDfLink(config,
+    "FAOSTAT",
+    `https://www.fao.org/faostat/en/#data/${option.dfDomain || ''}`
+  )
   return config;
 }
 

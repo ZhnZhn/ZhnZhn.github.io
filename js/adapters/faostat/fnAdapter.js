@@ -25,7 +25,7 @@ const _crPoint = _ref => {
     Value
   } = _ref;
   const m = Months ? (0, _AdapterFn.monthIndex)(Months) + 1 : 0,
-    Tail = m !== 0 ? "-" + m : MM_DD;
+    Tail = m !== 0 ? `-${m}` : MM_DD;
   return {
     x: (0, _AdapterFn.ymdToUTC)('' + Year + Tail),
     y: parseFloat(Value)
@@ -77,7 +77,7 @@ const crTitle = (json, option) => {
     subtitle
   } = option;
   if (dfSubtitle) {
-    return subtitle + " " + _crUnit(json) + ": " + title;
+    return `${subtitle} ${_crUnit(json)}: ${title}`;
   }
   if (title) {
     return (0, _AdapterFn.joinBy)(': ', dfTitle, title);
@@ -89,7 +89,7 @@ const crTitle = (json, option) => {
   return (0, _AdapterFn.isObj)(p) ? (0, _AdapterFn.joinBy)(' ', p.Area, p.Item, p.Element) : DF_TITLE;
 };
 exports.crTitle = crTitle;
-const crSubtitle = (json, option) => option.dfSubtitle || option.subtitle + ": " + _crUnit(json);
+const crSubtitle = (json, option) => option.dfSubtitle || `${option.subtitle}: ${_crUnit(json)}`;
 exports.crSubtitle = crSubtitle;
 const toDataPoints = (json, option) => {
   const _prName = _getSeriesPropName(option),
@@ -103,15 +103,15 @@ const toDataPoints = (json, option) => {
 exports.toDataPoints = toDataPoints;
 const crZhConfig = _ref4 => {
   let {
-    dfDomain,
+    //dfDomain,
     itemCaption
   } = _ref4;
   return {
     isWithoutSma: true,
     dataSource: "FAOSTAT",
-    linkFn: "FAO_STAT",
-    item: dfDomain,
-    itemCaption: itemCaption
+    //linkFn: "FAO_STAT",
+    //item: dfDomain,
+    itemCaption
   };
 };
 exports.crZhConfig = crZhConfig;

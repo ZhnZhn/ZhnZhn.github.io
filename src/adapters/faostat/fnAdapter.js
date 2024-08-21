@@ -166,13 +166,14 @@ export const toDataPoints = (
 }
 
 export const crZhConfig = ({
-  dfDomain, itemCaption
+  //dfDomain,
+  itemCaption
 }) => ({
   isWithoutSma: true,
   dataSource: "FAOSTAT",
-  linkFn: "FAO_STAT",
-  item: dfDomain,
-  itemCaption: itemCaption
+  //linkFn: "FAO_STAT",
+  //item: dfDomain,
+  itemCaption
 })
 
 export const crValueMoving = (
