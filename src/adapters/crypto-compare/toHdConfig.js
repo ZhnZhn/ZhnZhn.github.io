@@ -4,7 +4,7 @@ import {
 } from '../../charts/stockBuilderFn';
 import { crAdapterType1 } from '../crAdapterType1';
 import {
-  _assign,
+  assign,
   crData,
   crConfOption,
   getValue
@@ -52,7 +52,7 @@ const _crMiniVolume = (
 
 const trOption = (option, json) => {
   const { title, items } = option;
-  _assign(option, {
+  assign(option, {
     itemCaption: title,
     title: _crTitle(title, items),
     subtitle: _crSubtitle(json, option)

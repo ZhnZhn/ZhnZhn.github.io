@@ -1,10 +1,11 @@
 import {
-  _assign,
+  CRYPTOCOMPARE_COM,
+  assign,
   crError,
   getValue
 } from './fnAdapter';
 
-const URL = 'https://min-api.cryptocompare.com'
+const URL = `https://min-api.${CRYPTOCOMPARE_COM}`
 //, HD: 'data/histoday'
 , QUERY_TAIL = 'extraParams=webapperc'
 , DF_ID = 'BTC'
@@ -22,10 +23,9 @@ const _hdUrl = (option) => {
   , exchange = _getE(items)
   , interval = _getInterval(items)
   , tsym = exchange === 'Binance' ? 'USDT' : 'USD';
-  _assign(option, { value, exchange, tsym })
+  assign(option, { value, exchange, tsym })
   return `${URL}/data/${interval}?fsym=${value}&e=${exchange}&tsym=${tsym}&limit=600&${QUERY_TAIL}`;
 };
-
 
 const _rUrl = {
   DF: _hdUrl,

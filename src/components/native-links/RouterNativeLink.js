@@ -3,7 +3,6 @@ import NdlLink from './NdlLink'
 import EuronextLink from './EuronextLink'
 import NasdaqLink from './NasdaqLink'
 import FredLink from './FredLink'
-import CrcLink from './CrcLink'
 import EsLink from './EsLink'
 
 const RouterNativeLink = {
@@ -12,7 +11,6 @@ const RouterNativeLink = {
   NASDAQ: NasdaqLink,
   EURONEXT: EuronextLink,
   FRED: FredLink,
-  CRC: CrcLink,
   ES: EsLink
 };
 

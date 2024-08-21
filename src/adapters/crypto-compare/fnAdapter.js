@@ -1,32 +1,31 @@
-export { 
+export {
+  assign,
   getValue,
   crError
 } from '../AdapterFn';
 
-
 import {
+  isStr,
   isTypeNumber,
   roundBy,
-  crZhConfig
+  crZhConfig,
+  crDfLink
 } from '../AdapterFn';
 import { crVolumePoint } from '../pointFn';
 
-export const _assign = Object.assign
+export const CRYPTOCOMPARE_COM = 'cryptocompare.com'
 
-const _crZhConfig = (option) => {
-  const { linkFn, value } = option;
-  return _assign(crZhConfig(option), {
-    linkFn,
-    item: value
-  });
-}
-
-const _crInfo = ({
-  itemCaption
-}) => ({
-  name: itemCaption
-});
-
+const ITEM_URL = `https://${CRYPTOCOMPARE_COM}/coins`
+, CRYPTOCOMPARE_OVERVIEW = "CryptoCompare Overview"
+, _crDfLinkTuple = value => value && isStr(value)
+  ? [
+      `${CRYPTOCOMPARE_OVERVIEW} (${value})`,
+      `${ITEM_URL}/${value.toLowerCase()}/overview`
+    ]
+  : [
+      CRYPTOCOMPARE_OVERVIEW,
+      ITEM_URL
+    ];
 
 const _isHLOC = (p) => isTypeNumber(p.open)
   && isTypeNumber(p.high)
@@ -112,6 +111,11 @@ export const crData = (
 export const crConfOption = (
   option
 ) => ({
-  zhConfig: _crZhConfig(option),
-  info: _crInfo(option)
+  zhConfig: crZhConfig(
+    option,
+    crDfLink(..._crDfLinkTuple(option.value))
+  ),
+  info: {
+    name: option.itemCaption
+  }
 })

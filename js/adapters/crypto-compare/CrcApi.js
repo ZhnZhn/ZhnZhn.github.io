@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _fnAdapter = require("./fnAdapter");
-const URL = 'https://min-api.cryptocompare.com'
+const URL = `https://min-api.${_fnAdapter.CRYPTOCOMPARE_COM}`
   //, HD: 'data/histoday'
   ,
   QUERY_TAIL = 'extraParams=webapperc',
@@ -24,7 +24,7 @@ const _hdUrl = option => {
     exchange = _getE(items),
     interval = _getInterval(items),
     tsym = exchange === 'Binance' ? 'USDT' : 'USD';
-  (0, _fnAdapter._assign)(option, {
+  (0, _fnAdapter.assign)(option, {
     value,
     exchange,
     tsym

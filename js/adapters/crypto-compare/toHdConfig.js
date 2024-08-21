@@ -49,7 +49,7 @@ const trOption = (option, json) => {
     title,
     items
   } = option;
-  (0, _fnAdapter._assign)(option, {
+  (0, _fnAdapter.assign)(option, {
     itemCaption: title,
     title: _crTitle(title, items),
     subtitle: _crSubtitle(json, option)
