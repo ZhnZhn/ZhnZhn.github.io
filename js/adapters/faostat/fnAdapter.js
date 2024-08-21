@@ -8,8 +8,7 @@ var _AdapterFn = require("../AdapterFn");
 const BLANK = ' ',
   MM_DD = '-12-31',
   DF_TITLE = 'More about data on tab Info in Description',
-  _createObject = () => Object.create(null),
-  _getObjectKeys = Object.keys;
+  _createObject = () => Object.create(null);
 const _crUnit = json => {
   const {
       data
@@ -41,7 +40,7 @@ const _crHm = (data, prName) => data.reduce((hm, item) => {
   return hm;
 }, _createObject());
 const _compareByY = (a, b) => b.y - a.y;
-const _crRefLegend = hm => _getObjectKeys(hm).map(propName => {
+const _crRefLegend = hm => (0, _AdapterFn.getObjectKeys)(hm).map(propName => {
   const _arr = hm[propName];
   return {
     ..._arr[_arr.length - 1],
@@ -103,14 +102,11 @@ const toDataPoints = (json, option) => {
 exports.toDataPoints = toDataPoints;
 const crZhConfig = _ref4 => {
   let {
-    //dfDomain,
     itemCaption
   } = _ref4;
   return {
     isWithoutSma: true,
     dataSource: "FAOSTAT",
-    //linkFn: "FAO_STAT",
-    //item: dfDomain,
     itemCaption
   };
 };

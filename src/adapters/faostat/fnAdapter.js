@@ -7,6 +7,7 @@ import {
   isStr,
   isYNumber,
   getValue,
+  getObjectKeys,
   joinBy,
   toUpperCaseFirst,
   monthIndex,
@@ -18,8 +19,8 @@ import { DATASET_EMPTY } from './fnDescr';
 const BLANK = ' '
 , MM_DD = '-12-31'
 , DF_TITLE = 'More about data on tab Info in Description'
-, _createObject = () => Object.create(null)
-, _getObjectKeys = Object.keys;
+, _createObject = () => Object.create(null);
+
 
 const _crUnit = (json) => {
   const { data } = json
@@ -65,7 +66,7 @@ const _compareByY = (a, b) => b.y - a.y;
 
 const _crRefLegend = (
   hm
-) => _getObjectKeys(hm)
+) => getObjectKeys(hm)
   .map(propName => {
     const _arr = hm[propName];
     return {
@@ -166,13 +167,10 @@ export const toDataPoints = (
 }
 
 export const crZhConfig = ({
-  //dfDomain,
   itemCaption
 }) => ({
   isWithoutSma: true,
   dataSource: "FAOSTAT",
-  //linkFn: "FAO_STAT",
-  //item: dfDomain,
   itemCaption
 })
 
