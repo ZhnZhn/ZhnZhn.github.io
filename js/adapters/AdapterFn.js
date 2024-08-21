@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isTokenInStr = exports.isObj = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.crZhConfig = exports.crValueMoving = exports.crErrorByMessage = exports.crError = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isTokenInStr = exports.isObj = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.crZhConfig = exports.crValueMoving = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -152,13 +152,14 @@ const roundByOHLC = n => {
   return (0, _mathFn.roundBy)(n, 2);
 };
 exports.roundByOHLC = roundByOHLC;
-const crZhConfig = _ref3 => {
+const crZhConfig = (_ref3, configOptions) => {
   let {
     _itemKey,
     itemCaption,
     dataSource
   } = _ref3;
   return {
+    ...configOptions,
     id: _itemKey,
     key: _itemKey,
     itemCaption,
@@ -177,14 +178,16 @@ const addToConfigInfo = (config, option) => {
   };
 };
 exports.addToConfigInfo = addToConfigInfo;
+const crDfLink = (caption, href) => ({
+  linkFn: "DF",
+  item: {
+    caption,
+    href
+  }
+});
+exports.crDfLink = crDfLink;
 const addToConfigDfLink = (config, caption, href) => {
-  assign(config.zhConfig, {
-    linkFn: "DF",
-    item: {
-      caption,
-      href
-    }
-  });
+  assign(config.zhConfig, crDfLink(caption, href));
 };
 exports.addToConfigDfLink = addToConfigDfLink;
 //# sourceMappingURL=AdapterFn.js.map

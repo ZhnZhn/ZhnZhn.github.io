@@ -179,7 +179,8 @@ export const crZhConfig = ({
   _itemKey,
   itemCaption,
   dataSource
-}) => ({
+}, configOptions) => ({
+  ...configOptions,
   id: _itemKey,
   key: _itemKey,
   itemCaption,
@@ -202,16 +203,20 @@ export const addToConfigInfo = (
   }
 }
 
+export const crDfLink = (
+  caption,
+  href
+) => ({
+  linkFn: "DF",
+  item: {
+    caption,
+    href
+  }
+})
 export const addToConfigDfLink = (
   config,
   caption,
   href
 ) => {
-  assign(config.zhConfig, {
-    linkFn: "DF",
-    item: {
-      caption,
-      href
-    }
-  })
+  assign(config.zhConfig, crDfLink(caption, href))
 }
