@@ -1,13 +1,7 @@
+import { CL_TOGGLE_ARROW } from '../styleFn'
+
 const CL_BT = 'zhn-select__bt-arrow'
-, S_ARROW_CELL = { top: 0 }
-, S_ARROW = {
-  display: 'inline-block',
-  height: 0,
-  width: 0,
-  borderColor: '#999 transparent transparent',
-  borderStyle: 'solid',
-  borderWidth: '10px 8px 4px'
-};
+, S_ARROW_CELL = { top: 0 };
 
 const ArrowCell = ({
   arrowStyle,
@@ -19,8 +13,12 @@ const ArrowCell = ({
      tabIndex={tabIndex}
      className={CL_BT}
      style={S_ARROW_CELL}
-     onClick={onClick}>
-    <span style={{...S_ARROW, ...arrowStyle}}/>
+     onClick={onClick}
+  >
+    <span
+      className={CL_TOGGLE_ARROW}
+      style={arrowStyle}
+    />
   </button>
 );
 

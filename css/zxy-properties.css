@@ -62,3 +62,12 @@
 .dark-blue {
   color: #1b75bb;
 }
+
+.toggle-arrow {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  border-color: #999 transparent transparent;
+  border-style: solid;
+  border-width: 10px 8px 4px;
+}

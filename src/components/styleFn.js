@@ -25,6 +25,8 @@ const _fCrCn = (
   className2
 ) => crCn(className2, className1);
 
+export const CL_TOGGLE_ARROW = 'toggle-arrow'
+
 export const CL_SHOW_POPUP = "show-popup"
 export const CL_BLACK = "black"
 export const CL_CHB_BLACK = "chb-bl"
