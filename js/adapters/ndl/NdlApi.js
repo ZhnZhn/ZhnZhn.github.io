@@ -4,31 +4,32 @@ exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 const API_V3 = 'https://data.nasdaq.com/api/v3',
-  SET_URL = API_V3 + "/datasets/",
-  TABLE_URL = API_V3 + "/datatables/",
-  LIMIT_REMAINING = 'X-RateLimit-Remaining',
-  _isArr = Array.isArray;
-const _crIdB_A = items => (0, _AdapterFn.getValue)(items[1]) + "_" + (0, _AdapterFn.getValue)(items[0]);
+  SET_URL = `${API_V3}/datasets/`,
+  TABLE_URL = `${API_V3}/datatables/`,
+  LIMIT_REMAINING = 'X-RateLimit-Remaining';
+const _crIdB_A = items => `${(0, _AdapterFn.getValue)(items[1])}_${(0, _AdapterFn.getValue)(items[0])}`;
 const _rIdFn = {
   df: items => (0, _AdapterFn.getValue)(items[0]),
-  ab: items => "" + (0, _AdapterFn.getValue)(items[0]) + (0, _AdapterFn.getValue)(items[1]),
-  jg: items => "JODI/GAS_" + _crIdB_A(items),
-  jo: items => "JODI/OIL_" + (0, _AdapterFn.getValue)(items[1]) + (0, _AdapterFn.getValue)(items[2]) + "_" + (0, _AdapterFn.getValue)(items[0])
+  ab: items => `${(0, _AdapterFn.getValue)(items[0])}${(0, _AdapterFn.getValue)(items[1])}`,
+  jg: items => `JODI/GAS_${_crIdB_A(items)}`,
+  jo: items => `JODI/OIL_${(0, _AdapterFn.getValue)(items[1])}${(0, _AdapterFn.getValue)(items[2])}_${(0, _AdapterFn.getValue)(items[0])}`
 };
-const _crSetUrl = _ref => {
-  let {
-    proxy,
-    items,
-    fromDate,
-    apiKey,
-    dfIdFn,
-    dfDbId
-  } = _ref;
-  const _crId = dfIdFn && _rIdFn[dfIdFn] || _rIdFn.df,
+const _crQueryToken = (name, value) => value ? `&${name}=${value}` : '',
+  _crApiKeyQuery = option => _crQueryToken('api_key', option.apiKey);
+const _crSetUrl = option => {
+  const {
+      proxy,
+      items,
+      fromDate,
+      dfIdFn,
+      dfDbId
+    } = option,
+    _crId = dfIdFn && _rIdFn[dfIdFn] || _rIdFn.df,
     id = _crId(items),
     tokenPath = dfDbId ? dfDbId + '/' : '',
-    queryTail = fromDate ? "&trim_start=" + fromDate : '';
-  return "" + proxy + SET_URL + tokenPath + id + ".json?sort_order=asc&api_key=" + apiKey + queryTail;
+    _trimStartQuery = _crQueryToken('trim_start', fromDate),
+    _apiKeyQuery = _crApiKeyQuery(option);
+  return `${proxy}${SET_URL}${tokenPath}${id}.json?sort_order=asc${_apiKeyQuery}${_trimStartQuery}`;
 };
 const _crTableUrl = option => {
   const {
@@ -37,12 +38,12 @@ const _crTableUrl = option => {
       dfFromDate,
       value,
       key,
-      fromDate,
-      apiKey
+      fromDate
     } = option,
-    _dateQuery = dfFromDate && fromDate ? "&date.gte=" + fromDate : '';
+    _apiKeyQuery = _crApiKeyQuery(option),
+    _dateQuery = dfFromDate ? _crQueryToken('date.gte', fromDate) : '';
   option.key = key || value;
-  return "" + proxy + TABLE_URL + dfTable + ".json?" + (value || '') + "&api_key=" + apiKey + _dateQuery;
+  return `${proxy}${TABLE_URL}${dfTable}.json?${value || ''}${_apiKeyQuery}${_dateQuery}`;
 };
 const _checkErr = err => {
   if (err) {
@@ -60,8 +61,10 @@ const _checkDataset = (dataset, datatable) => {
     newest_available_date,
     oldest_available_date
   } = dataset || datatable || {};
-  if (!_isArr(data) || data.length === 0) {
-    throw (0, _AdapterFn.crError)('', "Result dataset for request is empty:\n        Newest Date: " + (newest_available_date || '') + "\n        Oldest Date: " + (oldest_available_date || ''));
+  if (!(0, _AdapterFn.isArr)(data) || data.length === 0) {
+    throw (0, _AdapterFn.crError)('', `Result dataset for request is empty:
+        Newest Date: ${newest_available_date || ''}
+        Oldest Date: ${oldest_available_date || ''}`);
   }
 };
 const NdlApi = {
