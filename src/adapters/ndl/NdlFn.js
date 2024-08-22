@@ -1,18 +1,20 @@
-export { valueMoving } from '../AdapterFn';
-
-import Big from 'big.js';
+export {
+  valueMoving,
+  crValueMoving
+} from '../AdapterFn';
 
 import {
   isArr,
   isNumber,
+  isStr,
+  assign,
   joinBy,
   mlsToDmy
 } from '../AdapterFn';
 
-import formatAllNumber from '../../utils/formatAllNumber';
-import { crValueMoving as crVm } from '../../math/mathFn';
-
-const _isStr = str => typeof str === 'string';
+const EURONEXT_ITEM_URL = 'https://www.euronext.com/en/products/equities'
+, EURONEXT_ID = "EURONEXT"
+, NDL_DATA_SOURCE = 'NDL';
 
 const _crItemCaption = ({
   dfItemCaption,
@@ -27,7 +29,7 @@ const _crItemCaption = ({
 const _isStrEqTo = (
   str,
   strTo
-) => _isStr(str) && str.toLowerCase() === strTo;
+) => isStr(str) && str.toLowerCase() === strTo;
 
 const _crLinkId = (
   database_code,
@@ -90,18 +92,23 @@ export const crDatasetInfo = ({
      dataset_code
    } = dataset || {}
    , linkId = _crLinkId(database_code, dataset_code);
-
-   return {
-     name,
-     toDate: newest_available_date,
-     fromDate: oldest_available_date,
-     frequency,
-     linkId,
-     description
-  };
+   return dataset ? {
+      name,
+      toDate: newest_available_date,
+      fromDate: oldest_available_date,
+      frequency,
+      linkId,
+      description
+   } : void 0;
 }
 
-const DATA_SOURCE = 'NDL';
+const _crEuronextHref = item => {
+  const { isin, market } = item
+  , _linkId = isin && market
+     ? `${isin}-${market}`
+     : '';
+  return `${EURONEXT_ITEM_URL}/${_linkId}`;
+};
 
 export const crZhConfig = (
   option
@@ -117,20 +124,26 @@ export const crZhConfig = (
     dataColumn,
     fromDate,
     seriaColumnNames,
-    linkFn,
     dataSource
   } = option
-  , _dataSource = joinBy(' ', DATA_SOURCE, dataSource)
-  , _itemCaption = _crItemCaption(option);
+  , _dataSource = joinBy(' ', NDL_DATA_SOURCE, dataSource)
+  , _itemCaption = _crItemCaption(option)
+  , _item = (isArr(items)
+     ? items[0]
+     : item || {})
+  , _linkFn = option.dfDbId === EURONEXT_ID
+     ? (assign(_item, {
+         caption: `Euronext ${_item.c}`,
+         href: _crEuronextHref(_item)
+       }), 'DF')
+     : option.linkFn;
   return {
-    item: isArr(items)
-      ? items[0]
-      : item,
+    linkFn: _linkFn,
+    item: _item,
     title,
     subtitle,
     id,
     key,
-    linkFn,
     itemConf: {
       _itemKey: id,
       columnName,
@@ -142,15 +155,6 @@ export const crZhConfig = (
     dataSource: _dataSource
   };
 }
-
-export const crValueMoving = ({
-   bNowValue=Big('0.0'),
-   bPrevValue=Big('0.0')
- }) => crVm({
-  nowValue: bNowValue,
-  prevValue: bPrevValue,
-  fnFormat: formatAllNumber
-})
 
 export const getRecentDate = (
   seria,

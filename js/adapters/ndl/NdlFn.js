@@ -1,14 +1,13 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.valueMoving = exports.setTitleToConfig = exports.isPrevDateAfter = exports.getRecentDate = exports.getDataColumnIndex = exports.getData = exports.getColumnNames = exports.findColumnIndex = exports.crZhConfig = exports.crValueMoving = exports.crDatasetInfo = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.valueMoving = _AdapterFn.valueMoving;
-var _big = _interopRequireDefault(require("big.js"));
-var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
-var _mathFn = require("../../math/mathFn");
-const _isStr = str => typeof str === 'string';
+exports.crValueMoving = _AdapterFn.crValueMoving;
+const EURONEXT_ITEM_URL = 'https://www.euronext.com/en/products/equities',
+  EURONEXT_ID = "EURONEXT",
+  NDL_DATA_SOURCE = 'NDL';
 const _crItemCaption = _ref => {
   let {
     dfItemCaption,
@@ -17,8 +16,8 @@ const _crItemCaption = _ref => {
   } = _ref;
   return (0, _AdapterFn.isNumber)(dfItemCaption) && (0, _AdapterFn.isArr)(items) && items[dfItemCaption - 1] ? items[dfItemCaption - 1].caption || itemCaption : itemCaption;
 };
-const _isStrEqTo = (str, strTo) => _isStr(str) && str.toLowerCase() === strTo;
-const _crLinkId = (database_code, dataset_code) => database_code && dataset_code ? database_code + "/" + dataset_code : void 0;
+const _isStrEqTo = (str, strTo) => (0, _AdapterFn.isStr)(str) && str.toLowerCase() === strTo;
+const _crLinkId = (database_code, dataset_code) => database_code && dataset_code ? `${database_code}/${dataset_code}` : void 0;
 const _getData = obj => obj.data || [];
 const getData = _ref2 => {
   let {
@@ -65,17 +64,24 @@ const crDatasetInfo = _ref4 => {
       dataset_code
     } = dataset || {},
     linkId = _crLinkId(database_code, dataset_code);
-  return {
+  return dataset ? {
     name,
     toDate: newest_available_date,
     fromDate: oldest_available_date,
     frequency,
     linkId,
     description
-  };
+  } : void 0;
 };
 exports.crDatasetInfo = crDatasetInfo;
-const DATA_SOURCE = 'NDL';
+const _crEuronextHref = item => {
+  const {
+      isin,
+      market
+    } = item,
+    _linkId = isin && market ? `${isin}-${market}` : '';
+  return `${EURONEXT_ITEM_URL}/${_linkId}`;
+};
 const crZhConfig = option => {
   const {
       item,
@@ -88,18 +94,22 @@ const crZhConfig = option => {
       dataColumn,
       fromDate,
       seriaColumnNames,
-      linkFn,
       dataSource
     } = option,
-    _dataSource = (0, _AdapterFn.joinBy)(' ', DATA_SOURCE, dataSource),
-    _itemCaption = _crItemCaption(option);
+    _dataSource = (0, _AdapterFn.joinBy)(' ', NDL_DATA_SOURCE, dataSource),
+    _itemCaption = _crItemCaption(option),
+    _item = (0, _AdapterFn.isArr)(items) ? items[0] : item || {},
+    _linkFn = option.dfDbId === EURONEXT_ID ? ((0, _AdapterFn.assign)(_item, {
+      caption: `Euronext ${_item.c}`,
+      href: _crEuronextHref(_item)
+    }), 'DF') : option.linkFn;
   return {
-    item: (0, _AdapterFn.isArr)(items) ? items[0] : item,
+    linkFn: _linkFn,
+    item: _item,
     title,
     subtitle,
     id,
     key,
-    linkFn,
     itemConf: {
       _itemKey: id,
       columnName,
@@ -112,18 +122,6 @@ const crZhConfig = option => {
   };
 };
 exports.crZhConfig = crZhConfig;
-const crValueMoving = _ref5 => {
-  let {
-    bNowValue = (0, _big.default)('0.0'),
-    bPrevValue = (0, _big.default)('0.0')
-  } = _ref5;
-  return (0, _mathFn.crValueMoving)({
-    nowValue: bNowValue,
-    prevValue: bPrevValue,
-    fnFormat: _formatAllNumber.default
-  });
-};
-exports.crValueMoving = crValueMoving;
 const getRecentDate = (seria, json) => {
   const len = (seria || []).length,
     {
@@ -142,7 +140,7 @@ const setTitleToConfig = (config, option) => {
     subtitle
   } = option || {};
   config.title.text = title || '';
-  config.subtitle.text = subtitle ? subtitle + ":" : '';
+  config.subtitle.text = subtitle ? `${subtitle}:` : '';
 };
 exports.setTitleToConfig = setTitleToConfig;
 const findColumnIndex = function (obj, columnName) {
