@@ -5,6 +5,7 @@ import {
 import { crDialogRole } from '../a11yFn';
 
 import {
+  CL_TOGGLE_ARROW,
   crDialogCn,
   crShowHide
 } from '../styleFn';
@@ -68,6 +69,9 @@ const CommandButtons = ({
 );
 
 const FN_NOOP = () => {};
+const isExcludeElement = (
+  evt
+) => ((evt.path || [])[0] || {}).className === CL_TOGGLE_ARROW
 
 const DraggableDialog = ({
   isFocusBtMenu=true,
@@ -97,7 +101,7 @@ const DraggableDialog = ({
     isShow,
     isFocusBtMenu ? refBtMenu : void 0
   )
-  useXYMovable(refRoot)
+  useXYMovable(refRoot, isExcludeElement)
 
   /*eslint-disable jsx-a11y/no-static-element-interactions*/
   return (

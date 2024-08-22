@@ -1,4 +1,6 @@
 import {
+  isArr,
+  isFn,
   useEffect,
   getRefValue,
   getClientX,
@@ -8,8 +10,6 @@ import {
 import { HAS_TOUCH_EVENTS } from '../has';
 
 const _assign = Object.assign
-, _isArr = Array.isArray
-, _isFn = fn => typeof fn === 'function'
 , [
   INIT_EVENT,
   MOVE_EVENT,
@@ -62,7 +62,7 @@ const _isValueInGapRange = (
   && to - value > START_EVENT_GAP;
 const _getComposedPath = (
   evt
-) => _isFn(evt.composedPath)
+) => isFn(evt.composedPath)
   ? evt.composedPath()
   : void 0;
 
@@ -78,7 +78,7 @@ const _isInitEvent = (
   element
 ) => {
   const _composedPath = _getComposedPath(evt);
-  if (_isArr(_composedPath)) {
+  if (isArr(_composedPath)) {
     for(let i=0; i<_composedPath.length; i++){
       const _el = _composedPath[i];
       if (_isExcludeElement(_el)) {
@@ -103,7 +103,8 @@ const _isInitEvent = (
 }
 
 const useXYMovable = (
-  refElement
+  refElement,
+  isExcludeElement
 ) => {
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
@@ -161,12 +162,14 @@ const useXYMovable = (
     /*eslint-enable no-use-before-define*/
 
     function _hInitEvent(evt) {
-      _initialEvtClientX = getClientX(evt)
-      _initialEvtClientY = getClientY(evt)
-      if (_isInitEvent(evt, _initialEvtClientX, _initialEvtClientY, _element)) {
-        _element.addEventListener(MOVE_EVENT, _hMove, MOVE_EVENT_OPTIONS)
-        _element.addEventListener(CANCEL_EVENT, _hResetEvent, EVENT_OPTIONS)
-        _element.addEventListener(RESET_EVENT, _hResetEvent, EVENT_OPTIONS)
+      if (!isExcludeElement(evt)){
+        _initialEvtClientX = getClientX(evt)
+        _initialEvtClientY = getClientY(evt)
+        if (_isInitEvent(evt, _initialEvtClientX, _initialEvtClientY, _element)) {
+          _element.addEventListener(MOVE_EVENT, _hMove, MOVE_EVENT_OPTIONS)
+          _element.addEventListener(CANCEL_EVENT, _hResetEvent, EVENT_OPTIONS)
+          _element.addEventListener(RESET_EVENT, _hResetEvent, EVENT_OPTIONS)
+        }
       }
     }
 
@@ -186,7 +189,7 @@ const useXYMovable = (
       _element = null;
     };
   }, [])
-  //refElement
+  //refElement, isExcludeElement
   /*eslint-enable react-hooks/exhaustive-deps */
 }
 

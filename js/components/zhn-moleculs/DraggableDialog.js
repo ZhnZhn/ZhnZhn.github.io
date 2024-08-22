@@ -49,6 +49,7 @@ const CommandButtons = _ref => {
   });
 };
 const FN_NOOP = () => {};
+const isExcludeElement = evt => ((evt.path || [])[0] || {}).className === _styleFn.CL_TOGGLE_ARROW;
 const DraggableDialog = _ref2 => {
   let {
     isFocusBtMenu = true,
@@ -68,7 +69,7 @@ const DraggableDialog = _ref2 => {
     _hKeyDown = (0, _fUseKey.useKeyEscape)(onClose),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_DRAGGABLE_DIALOG);
   (0, _useDialogFocus.default)(isShow, isFocusBtMenu ? refBtMenu : void 0);
-  (0, _useXYMovable.default)(refRoot);
+  (0, _useXYMovable.default)(refRoot, isExcludeElement);
 
   /*eslint-disable jsx-a11y/no-static-element-interactions*/
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
