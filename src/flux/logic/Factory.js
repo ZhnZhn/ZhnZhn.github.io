@@ -20,7 +20,7 @@ import {
   LT_EU_STAT
 } from '../../constants/LoadType';
 import {
-  ComponentActions
+  showDescription
 } from '../actions/ComponentActions';
 
 import {
@@ -115,7 +115,7 @@ const _crClickAbout = ({
     ? `${rootUri}${descr}.html`
     : descrUrl;
   return _descrUrl
-    ? bindTo(ComponentActions.showDescription, { descrUrl: _descrUrl })
+    ? bindTo(showDescription, { descrUrl: _descrUrl })
     : void 0;
 };
 

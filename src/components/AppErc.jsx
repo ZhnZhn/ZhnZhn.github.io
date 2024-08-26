@@ -9,7 +9,8 @@ import { showAskDialogIf } from '../flux/logic/LocationSearch';
 import { exportSettingFn } from '../flux/stores/settingStore';
 
 import {
-  ComponentActions
+  showSettings,
+  showReload
 } from '../flux/actions/ComponentActions';
 import {
   useMsInitBrowser
@@ -31,8 +32,8 @@ import checkBuild from './checkBuild';
 const BUILD_DATE = '22-08-2024'
 , CL_COMP_CONTAINER = crFlexRowCn("app-container");
 
-const showSettings = bindTo(
-  ComponentActions.showSettings,
+const _showSettings = bindTo(
+  showSettings,
   exportSettingFn()
 );
 
@@ -40,14 +41,14 @@ const AppErc = () => {
 
   useEffect(() => {
     showAskDialogIf()
-    checkBuild(BUILD_DATE, ComponentActions.showReload)
+    checkBuild(BUILD_DATE, showReload)
   }, [])
 
   useHotKeysHandler()
 
   return (
      <>
-      <HeaderBar showSettings={showSettings} />
+      <HeaderBar showSettings={_showSettings} />
       <div className={CL_COMP_CONTAINER}>
          <BrowserContainer
             useMsInitBrowser={useMsInitBrowser}

@@ -20,16 +20,16 @@ var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 var _jsxRuntime = require("react/jsx-runtime");
 const BUILD_DATE = '22-08-2024',
   CL_COMP_CONTAINER = (0, _styleFn.crFlexRowCn)("app-container");
-const showSettings = (0, _uiApi.bindTo)(_ComponentActions.ComponentActions.showSettings, (0, _settingStore.exportSettingFn)());
+const _showSettings = (0, _uiApi.bindTo)(_ComponentActions.showSettings, (0, _settingStore.exportSettingFn)());
 const AppErc = () => {
   (0, _uiApi.useEffect)(() => {
     (0, _LocationSearch.showAskDialogIf)();
-    (0, _checkBuild.default)(BUILD_DATE, _ComponentActions.ComponentActions.showReload);
+    (0, _checkBuild.default)(BUILD_DATE, _ComponentActions.showReload);
   }, []);
   (0, _useHotKeysHandler.default)();
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_HeaderBar.default, {
-      showSettings: showSettings
+      showSettings: _showSettings
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_COMP_CONTAINER,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserContainer.default, {

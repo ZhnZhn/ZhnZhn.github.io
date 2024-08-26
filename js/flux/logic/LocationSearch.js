@@ -23,7 +23,7 @@ const _trSearchToOptions = () => {
 const showAskDialogIf = () => {
   const options = _trSearchToOptions();
   if (options) {
-    _ComponentActions.ComponentActions.showAsk({
+    (0, _ComponentActions.showAsk)({
       options
     });
   }

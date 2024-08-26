@@ -8,7 +8,9 @@ import {
 } from '../../charts/ChartFn';
 
 import {
-  ComponentActions
+  showAddToWatch,
+  showPasteTo,
+  showZoom
 } from '../../flux/actions/ComponentActions';
 import {
   setActiveCheckbox
@@ -50,17 +52,15 @@ const _getIdKey = (
 const _fAddToWatch = (
   caption,
   config
-) => () => ComponentActions
- .showAddToWatch({
+) => () => showAddToWatch({
    caption,
    config
  });
 
-const _fOnPasteToDialog = () => toChart =>
-  ComponentActions.showPasteTo({
-    toChart,
-    fromChart: getCopyFromChart()
-  });
+const _fOnPasteToDialog = () => toChart => showPasteTo({
+  toChart,
+  fromChart: getCopyFromChart()
+});
 
 
 const _crAreaChart = ({
@@ -83,7 +83,7 @@ const _crAreaChart = ({
        onToTop={bindTo(moveToTop, chartType, id)}
        onCopy={copyChart}
        onPasteTo={_fOnPasteToDialog()}
-       onZoom={ComponentActions.zoom}
+       onZoom={showZoom}
     />
   );
 };

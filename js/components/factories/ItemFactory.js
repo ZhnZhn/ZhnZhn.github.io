@@ -21,11 +21,11 @@ const _getIdKey = (config, index) => {
     } = zhConfig || {};
   return [id || `Id:${index}`, key || id || (0, _ChartFn.crId)()];
 };
-const _fAddToWatch = (caption, config) => () => _ComponentActions.ComponentActions.showAddToWatch({
+const _fAddToWatch = (caption, config) => () => (0, _ComponentActions.showAddToWatch)({
   caption,
   config
 });
-const _fOnPasteToDialog = () => toChart => _ComponentActions.ComponentActions.showPasteTo({
+const _fOnPasteToDialog = () => toChart => (0, _ComponentActions.showPasteTo)({
   toChart,
   fromChart: (0, _propertyFromChart.getCopyFromChart)()
 });
@@ -48,7 +48,7 @@ const _crAreaChart = _ref => {
     onToTop: (0, _uiApi.bindTo)(_itemStore.moveToTop, chartType, id),
     onCopy: _propertyFromChart.copyChart,
     onPasteTo: _fOnPasteToDialog(),
-    onZoom: _ComponentActions.ComponentActions.zoom
+    onZoom: _ComponentActions.showZoom
   }, key);
 };
 const _crMapChart = _ref2 => {

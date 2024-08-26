@@ -1,10 +1,11 @@
 import {
+  isUndef,
   bindTo,
   createElement
 } from '../../components/uiApi';
 
 import {
-  ComponentActions
+  showDescription
 } from '../actions/ComponentActions';
 import {
   showModalDialog
@@ -73,9 +74,9 @@ const _crBrowserDynamic = (
     , ItemComp = itemType
         ? RouterBrowserItem[itemType] || RouterBrowserItem.DEFAULT
         : void 0
-    , onClickInfo = typeof ItemComp !== "undefined"
-         ? ComponentActions.showDescription
-         : void 0
+    , onClickInfo = isUndef(ItemComp)
+         ? void 0
+         : showDescription
     //for Type2
     , onShowLoadDialog = chartContainerType
          ? item => showModalDialog(modalDialogType, {

@@ -7,15 +7,15 @@ import {
 import useHasNotEqual from '../../hooks/useHasNotEqual'
 
 import { ERR_NETWORK } from '../../../constants/Msg';
-import { ComponentActions } from '../../../flux/actions/ComponentActions';
+import { showAlert } from '../../../flux/actions/ComponentActions';
 
-import crOptions from './crOptions'
+import crOptions from './crOptions';
 
 const _showMsgErr = (
   alertCaption,
   alertDescr
 ) => {
-  ComponentActions.showAlert({
+  showAlert({
     alertCaption,
     alertDescr
   })
@@ -59,7 +59,6 @@ const _useLoad = (
             return response.json();
          } else if (status>=400 && status<500){
             setLoadingFailed('Client Error:', status + ' ' + statusText)
-            return null;
          } else if (status>=500 && status<600) {
            if (retryServer !== 0) {
              option.retryServer = retryServer - 1
@@ -67,7 +66,6 @@ const _useLoad = (
            } else {
              setLoadingFailed('Server Error:', status + ' ' + statusText)
            }
-           return null;
          }
       })
       .then(json => {

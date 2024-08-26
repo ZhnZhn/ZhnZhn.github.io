@@ -68,7 +68,7 @@ const _crClickAbout = _ref2 => {
     descrUrl
   } = _ref2;
   const _descrUrl = descr && rootUri ? `${rootUri}${descr}.html` : descrUrl;
-  return _descrUrl ? (0, _uiApi.bindTo)(_ComponentActions.ComponentActions.showDescription, {
+  return _descrUrl ? (0, _uiApi.bindTo)(_ComponentActions.showDescription, {
     descrUrl: _descrUrl
   }) : void 0;
 };

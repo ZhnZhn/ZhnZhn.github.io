@@ -1,4 +1,4 @@
-import { ComponentActions } from '../../flux/actions/ComponentActions';
+import { showCustomizeExport } from '../../flux/actions/ComponentActions';
 
 const wrapExportChartLocal = (
   wrap,
@@ -6,7 +6,7 @@ const wrapExportChartLocal = (
 ) => {
   wrap(Chart.prototype, 'exportChartLocal', function(fn, ...args) {
      if (args.length === 0) {
-       ComponentActions.showCustomizeExport({
+       showCustomizeExport({
          fn,
          chart: this
        });

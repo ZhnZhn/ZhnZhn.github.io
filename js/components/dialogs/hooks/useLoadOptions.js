@@ -9,7 +9,7 @@ var _Msg = require("../../../constants/Msg");
 var _ComponentActions = require("../../../flux/actions/ComponentActions");
 var _crOptions = _interopRequireDefault(require("./crOptions"));
 const _showMsgErr = (alertCaption, alertDescr) => {
-  _ComponentActions.ComponentActions.showAlert({
+  (0, _ComponentActions.showAlert)({
     alertCaption,
     alertDescr
   });
@@ -46,7 +46,6 @@ const _useLoad = (refLoadId, setLoadingFailed, setState) => {
         return response.json();
       } else if (status >= 400 && status < 500) {
         setLoadingFailed('Client Error:', status + ' ' + statusText);
-        return null;
       } else if (status >= 500 && status < 600) {
         if (retryServer !== 0) {
           option.retryServer = retryServer - 1;
@@ -54,7 +53,6 @@ const _useLoad = (refLoadId, setLoadingFailed, setState) => {
         } else {
           setLoadingFailed('Server Error:', status + ' ' + statusText);
         }
-        return null;
       }
     }).then(json => {
       if (json) {

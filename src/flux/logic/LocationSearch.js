@@ -1,5 +1,5 @@
 import {
-  ComponentActions
+  showAsk
 } from '../actions/ComponentActions';
 import LocationQuery from './LocationQuery';
 
@@ -38,6 +38,6 @@ const _trSearchToOptions = () => {
 export const showAskDialogIf = () => {
   const options = _trSearchToOptions();
   if (options) {
-    ComponentActions.showAsk({ options })
+    showAsk({ options })
   }
 }
