@@ -80,7 +80,7 @@ const ModalDialog = ({
     CL_MODAL_DIALOG
   );
 
-  useDialogFocus(isShow, refBtMenuMore)
+  useDialogFocus(isShow, refBtMenuMore, refRoot)
 
   return (
     <FocusTrap

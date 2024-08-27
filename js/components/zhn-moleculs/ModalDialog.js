@@ -66,7 +66,7 @@ const ModalDialog = _ref2 => {
     refBtMenuMore = (0, _uiApi.useRef)(),
     _hKeyDown = (0, _fUseKey.useKeyEscape)(onClose),
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_MODAL_DIALOG);
-  (0, _useDialogFocus.default)(isShow, refBtMenuMore);
+  (0, _useDialogFocus.default)(isShow, refBtMenuMore, refRoot);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_FocusTrap.default, {
     refEl: refRoot,
     refFirst: refBtMenuMore,

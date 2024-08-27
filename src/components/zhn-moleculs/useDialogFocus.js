@@ -8,7 +8,8 @@ import {
 
 const useDialogFocus = (
   isShow,
-  refElementFocus
+  refElementFocus1,
+  refElementFocus2
 ) => {
   const _refPrevFocused = useRef()
   , _refIsShowPrev = useRef();
@@ -18,7 +19,7 @@ const useDialogFocus = (
     const _isPrevShow = getRefValue(_refIsShowPrev);
     if (isShow && !_isPrevShow) {
       setRefValue(_refPrevFocused, document.activeElement)
-      focusRefElement(refElementFocus)
+      focusRefElement(refElementFocus1, refElementFocus2)
     } else if (!isShow && _isPrevShow) {
       focusRefElement(_refPrevFocused)
       setRefValue(_refPrevFocused, null)

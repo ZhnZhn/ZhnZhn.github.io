@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-const useDialogFocus = (isShow, refElementFocus) => {
+const useDialogFocus = (isShow, refElementFocus1, refElementFocus2) => {
   const _refPrevFocused = (0, _uiApi.useRef)(),
     _refIsShowPrev = (0, _uiApi.useRef)();
 
@@ -12,7 +12,7 @@ const useDialogFocus = (isShow, refElementFocus) => {
     const _isPrevShow = (0, _uiApi.getRefValue)(_refIsShowPrev);
     if (isShow && !_isPrevShow) {
       (0, _uiApi.setRefValue)(_refPrevFocused, document.activeElement);
-      (0, _uiApi.focusRefElement)(refElementFocus);
+      (0, _uiApi.focusRefElement)(refElementFocus1, refElementFocus2);
     } else if (!isShow && _isPrevShow) {
       (0, _uiApi.focusRefElement)(_refPrevFocused);
       (0, _uiApi.setRefValue)(_refPrevFocused, null);
