@@ -30,7 +30,8 @@
 .zhn-select__spinner--failed {
   display: inline-block;
   position: absolute;  
-  right: 10px;
+  top: 2px;
+  right: 5px;
   width: 20px;
   height: 20px;
   border-color: #f44336;
