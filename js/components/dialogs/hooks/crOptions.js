@@ -102,7 +102,6 @@ const _crItemsWithFilters = (arr, filters) => arr.map(item => {
 }, []);
 const DF_OPTIONS_PROP_NAME = "items";
 const _crItems = (json, optionsPropName) => {
-  json = (0, _uiApi.isObj)(json) ? json : {};
   const _arr = json[optionsPropName || DF_OPTIONS_PROP_NAME],
     _crItems = json.isCv ? _crCvItems : json.isCp ? _crCpItems : _rCrItems[json.type];
   return _crItems ? _crItems(_arr) : _arr[0] && _notNullOrUndef(_arr[0].s) ? _crSItems(_arr) : (0, _uiApi.isObj)(json.filters) ? _crItemsWithFilters(_arr, json.filters) : _arr;
@@ -123,6 +122,9 @@ const _addPrefixSuffixTo = (arr, json) => {
 
 //[items, propCaption]
 const crOptions = (json, optionsPropName) => {
+  if (!(0, _uiApi.isObj)(json)) {
+    return [];
+  }
   const items = _addPrefixSuffixTo(_crItems(json, optionsPropName), json);
   return [items, _crPropCaption(items)];
 };

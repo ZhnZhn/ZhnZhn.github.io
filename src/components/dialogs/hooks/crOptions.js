@@ -88,8 +88,10 @@ const _crItemsWithFilters = (
 }, []);
 
 const DF_OPTIONS_PROP_NAME = "items";
-const _crItems = (json, optionsPropName) => {
-  json = isObj(json) ? json : {}
+const _crItems = (
+  json,
+  optionsPropName
+) => {
   const _arr = json[optionsPropName || DF_OPTIONS_PROP_NAME]
   , _crItems = json.isCv
     ? _crCvItems
@@ -130,6 +132,10 @@ const crOptions = (
   json,
   optionsPropName
 ) => {
+  if (!isObj(json)) {
+    return [];
+  }
+
   const items = _addPrefixSuffixTo(
     _crItems(json, optionsPropName),
     json
@@ -137,7 +143,7 @@ const crOptions = (
   return [
     items,
     _crPropCaption(items)
-  ]
+  ];
 };
 
 export default crOptions
