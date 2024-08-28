@@ -1,5 +1,5 @@
-import { useEffect } from '../../uiApi';
-import useHasNotEqual from '../../hooks/useHasNotEqual';
+import { useEffect, isArr } from '../../uiApi';
+import useHasBeenOpen from '../../hooks/useHasBeenOpen';
 
 import useLoadOptionsState from './useLoadOptionsState';
 import useLoadItem from './useLoadItem';
@@ -15,10 +15,9 @@ const useLoadOptions = (
     _setLoadingFailed,
     _onLoadOptions
   ] = useLoadOptionsState(jsonProp)
-  , _hasToggled = useHasNotEqual(isShow)[0]
-  , _isRequireLoadOptions = isShow
-     && state.isLoadingFailed
-     && _hasToggled
+  , _isRequireLoadOptions = useHasBeenOpen(isShow)
+      && !state.isLoading
+      && !isArr(state.options)
   , [
     loadOptions,
     refLoadId
@@ -31,19 +30,12 @@ const useLoadOptions = (
 
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    loadOptions()
-    return () => {
-      clearTimeout(refLoadId.current)
-    };
-  }, [])
-  // loadOptions
-  /*eslint-enable react-hooks/exhaustive-deps */
-
-  /*eslint-disable react-hooks/exhaustive-deps */
-  useEffect(()=>{
     if (_isRequireLoadOptions) {
       loadOptions()
     }
+    return () => {
+      clearTimeout(refLoadId.current)
+    };
   }, [_isRequireLoadOptions])
   // loadOptions
   /*eslint-enable react-hooks/exhaustive-deps */

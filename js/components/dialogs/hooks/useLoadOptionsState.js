@@ -6,14 +6,17 @@ exports.default = void 0;
 var _uiApi = require("../../uiApi");
 var _ComponentActions = require("../../../flux/actions/ComponentActions");
 var _crOptions = _interopRequireDefault(require("./crOptions"));
-const _crLoadingState = () => ({
-  isLoading: true,
+const _crInitialState = () => ({
+  isLoading: false,
   isLoadingFailed: false
 });
 const useLoadOptionsState = jsonProp => {
-  const [state, setState] = (0, _uiApi.useState)(_crLoadingState),
+  const [state, setState] = (0, _uiApi.useState)(_crInitialState),
     setLoading = (0, _uiApi.useCallback)(() => {
-      setState(_crLoadingState);
+      setState({
+        isLoading: true,
+        isLoadingFailed: false
+      });
     }, []),
     setLoadingFailed = (0, _uiApi.useCallback)((errCaption, errDescription) => {
       if (errCaption || errDescription) {
@@ -31,8 +34,7 @@ const useLoadOptionsState = jsonProp => {
     onLoadOptions = (0, _uiApi.useCallback)(json => {
       const [options, propCaption] = (0, _crOptions.default)(json || {}, jsonProp);
       setState({
-        isLoading: false,
-        isLoadingFailed: false,
+        ..._crInitialState(),
         propCaption,
         options
       });

@@ -6,8 +6,8 @@ import {
 import { showAlert } from '../../../flux/actions/ComponentActions';
 import crOptions from './crOptions';
 
-const _crLoadingState = () => ({
-  isLoading: true,
+const _crInitialState = () => ({
+  isLoading: false,
   isLoadingFailed: false
 });
 
@@ -15,9 +15,12 @@ const useLoadOptionsState = jsonProp => {
   const [
     state,
     setState
-  ] = useState(_crLoadingState)
+  ] = useState(_crInitialState)
   , setLoading = useCallback(() => {
-    setState(_crLoadingState)
+    setState({
+      isLoading: true,
+      isLoadingFailed: false
+    })
   }, [])
   , setLoadingFailed = useCallback((errCaption, errDescription) => {
       if (errCaption || errDescription) {
@@ -38,8 +41,7 @@ const useLoadOptionsState = jsonProp => {
         propCaption
       ] = crOptions(json || {}, jsonProp);
       setState({
-        isLoading: false,
-        isLoadingFailed: false,
+        ..._crInitialState(),
         propCaption,
         options
       });
