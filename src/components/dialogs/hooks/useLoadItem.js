@@ -11,6 +11,7 @@ import { ERR_NETWORK } from '../../../constants/Msg';
 const CLIENT_ERR_CAPTION = "Client Error"
 , SERVER_ERR_CAPTION = "Server Error"
 , INCORECT_JSON_ERR_DESCR = "Incorrect JSON"
+, TOO_MANY_REQ_ERR_DESCR = "Too many requests"
 , _crErrDescription = (
   status,
   statusText
@@ -26,6 +27,9 @@ const CLIENT_ERR_CAPTION = "Client Error"
      ? SERVER_ERR_CAPTION
      : '';
 
+const MAX_LOAD_ITEMS = 3;
+let _numberOfLoadItems = 0;
+
 const useLoadItem = (
   uri,
   setLoading,
@@ -36,7 +40,13 @@ const useLoadItem = (
   const refLoadId = useRef(null)
   , _refIsItemLoading = useRef(false)
   , loadItem = useCallback(option => {
-    if (!getRefValue(_refIsItemLoading)) {
+    if (_numberOfLoadItems >= MAX_LOAD_ITEMS) {
+      setLoadingFailed(
+        CLIENT_ERR_CAPTION,
+        TOO_MANY_REQ_ERR_DESCR
+      )
+    } else if (!getRefValue(_refIsItemLoading)) {
+      _numberOfLoadItems++;
       setRefValue(_refIsItemLoading, true)
       setLoading()
       fetch(uri)
@@ -78,6 +88,9 @@ const useLoadItem = (
               }), 2E3));
             }
           }
+        })
+        .finally(() => {
+          _numberOfLoadItems--;
         })
       }
   }, []);

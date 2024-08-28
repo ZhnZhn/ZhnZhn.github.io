@@ -7,15 +7,21 @@ var _Msg = require("../../../constants/Msg");
 const CLIENT_ERR_CAPTION = "Client Error",
   SERVER_ERR_CAPTION = "Server Error",
   INCORECT_JSON_ERR_DESCR = "Incorrect JSON",
+  TOO_MANY_REQ_ERR_DESCR = "Too many requests",
   _crErrDescription = (status, statusText) => status + ' ' + statusText,
   _isNumberInInterval = (n, minIncluded, maxExcluded) => n >= minIncluded && n < maxExcluded,
   _crErrCaption = status => _isNumberInInterval(status, 400, 500) ? CLIENT_ERR_CAPTION : _isNumberInInterval(status, 500, 600) ? SERVER_ERR_CAPTION : '';
+const MAX_LOAD_ITEMS = 3;
+let _numberOfLoadItems = 0;
 const useLoadItem = (uri, setLoading, setLoadingFailed, onLoadItem) => {
   /*eslint-disable react-hooks/exhaustive-deps */
   const refLoadId = (0, _uiApi.useRef)(null),
     _refIsItemLoading = (0, _uiApi.useRef)(false),
     loadItem = (0, _uiApi.useCallback)(option => {
-      if (!(0, _uiApi.getRefValue)(_refIsItemLoading)) {
+      if (_numberOfLoadItems >= MAX_LOAD_ITEMS) {
+        setLoadingFailed(CLIENT_ERR_CAPTION, TOO_MANY_REQ_ERR_DESCR);
+      } else if (!(0, _uiApi.getRefValue)(_refIsItemLoading)) {
+        _numberOfLoadItems++;
         (0, _uiApi.setRefValue)(_refIsItemLoading, true);
         setLoading();
         fetch(uri).then(response => {
@@ -47,6 +53,8 @@ const useLoadItem = (uri, setLoading, setLoadingFailed, onLoadItem) => {
               }), 2E3));
             }
           }
+        }).finally(() => {
+          _numberOfLoadItems--;
         });
       }
     }, []);
