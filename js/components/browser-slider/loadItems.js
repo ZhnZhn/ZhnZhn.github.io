@@ -20,17 +20,25 @@ const loadItems = function (proxy, dfProps, id) {
       dfTi = '',
       lT
     } = dfProps,
-    _url = "" + proxy + rootUrl + "/" + id + dfTi;
+    _url = `${proxy}${rootUrl}/${id}${dfTi}`;
   return fetch(_url, {
     cache: "default"
   }).then(res => {
-    // For example case, CSO: Indicators
-    if (res.status === 404) {
+    const {
+      status
+    } = res;
+    if (status >= 200 && status < 400) {
+      return res.json();
+    } else if (status === 404) {
+      // For example case, CSO: Indicators
       throw {
         message: 'Items not found'
       };
+    } else {
+      throw {
+        message: status + ' ' + res.statusText
+      };
     }
-    return res.json();
   }).then(json => {
     if (_isArr(json)) {
       const _trJson = _hmTr[lT];
