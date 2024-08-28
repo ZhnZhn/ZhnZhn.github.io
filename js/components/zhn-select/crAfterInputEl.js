@@ -17,7 +17,8 @@ const S_SVG_CLEAR = {
 };
 const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isBtSvgClear, isShowOption, labelId, optionsViewId, _hClear, _hToggleOptions, propsOptions) => {
   const _optionNames = optionNames || optionName || '';
-  let _placeholder, _afterInputEl;
+  let _placeholder,
+    _afterInputEl = null;
   if (!isLoading && !isLoadingFailed) {
     if (isBtSvgClear) {
       _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClear, {
@@ -25,8 +26,8 @@ const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, opt
         onClick: _hClear
       });
     } else {
-      const _propsOptionsLength = propsOptions.length,
-        _numberOfOptions = _propsOptionsLength > 1000 ? "(" + _propsOptionsLength + ")" : '';
+      const _propsOptionsLength = (propsOptions || []).length,
+        _numberOfOptions = _propsOptionsLength > 1000 ? `(${_propsOptionsLength})` : '';
       _placeholder = placeholder || (0, _uiApi.joinBy)(' ', 'Select', optionName, _numberOfOptions, '...');
       _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell.default, {
         isShowOption: isShowOption,

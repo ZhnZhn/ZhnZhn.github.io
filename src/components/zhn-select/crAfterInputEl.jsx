@@ -34,7 +34,7 @@ const crAfterInputEl = (
 ) => {
   const _optionNames = optionNames || optionName || '';
 
-  let _placeholder, _afterInputEl;
+  let _placeholder, _afterInputEl = null;
   if (!isLoading && !isLoadingFailed){
      if (isBtSvgClear) {
        _afterInputEl = (
@@ -44,7 +44,7 @@ const crAfterInputEl = (
           />
         )
      } else {
-       const _propsOptionsLength = propsOptions.length
+       const _propsOptionsLength = (propsOptions || []).length
        , _numberOfOptions = _propsOptionsLength > 1000
            ? `(${_propsOptionsLength})`
            : '';
