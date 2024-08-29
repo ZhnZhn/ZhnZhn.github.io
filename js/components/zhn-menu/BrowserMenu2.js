@@ -8,18 +8,15 @@ var _styleFn = require("../styleFn");
 var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
-var _A = _interopRequireDefault(require("../zhn/A"));
+var _Browser = _interopRequireDefault(require("../zhn/Browser"));
+var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
+var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 var _Spinner = require("../zhn/Spinner");
 var _ToolbarButtonCircle = _interopRequireDefault(require("../zhn/ToolbarButtonCircle"));
 var _WrapperInputSearch = _interopRequireDefault(require("../zhn-select/WrapperInputSearch"));
 var _MenuItems = _interopRequireDefault(require("./MenuItems2"));
 var _jsxRuntime = require("react/jsx-runtime");
-const {
-  Browser,
-  BrowserCaption,
-  ShowHide,
-  ScrollPane
-} = _A.default;
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name",
   CL_BROWSER = "scroll-browser-by",
   CL_BROWSER_WITH_SEARCH = `${CL_BROWSER}--search`,
@@ -64,16 +61,16 @@ const BrowserMenu2 = props => {
     _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
     [isLoading, menu] = (0, _useLoadMenu.default)(isShow, onLoadMenu, useMsBrowserLoad, browserType),
     _scrollClass = isShowSearch ? CL_BROWSER_WITH_SEARCH : CL_BROWSER;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Browser, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Browser.default, {
     isShow: isShow,
     style: S_BROWSER,
     onKeyDown: hKeyDown,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BrowserCaption, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserCaption.default, {
       caption: caption,
       onClose: hideBrowser
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle.default, {
       buttons: _toolbarButtons
-    }), menu && /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
+    }), menu && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: isShowSearch,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_WrapperInputSearch.default, {
         style: S_WRAPPER_SEARCH,
@@ -82,7 +79,7 @@ const BrowserMenu2 = props => {
         ItemOptionComp: ItemOptionComp,
         onSelect: onShowLoadDialog
       })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ScrollPane, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ScrollPane.default, {
       className: _scrollClass,
       children: [isLoading && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Spinner.SpinnerLoading, {}), menu && /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItems.default, {
         model: menu,

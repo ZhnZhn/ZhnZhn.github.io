@@ -9,7 +9,8 @@ import { useBool } from '../hooks/useBool';
 
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
-import A from '../zhn/A';
+import ButtonTab from '../zhn/ButtonTab';
+import ShowHide from '../zhn/ShowHide';
 import { SpinnerLoading } from '../zhn/Spinner';
 import ItemHeader from './ItemHeader';
 import PanelDataInfo from './PanelDataInfo';
@@ -49,7 +50,7 @@ const BtTabInfo = ({
   onClick
 }) => isShow ? (
   <div style={S_TAB_DIV}>
-     <A.ButtonTab
+     <ButtonTab
         caption="Info"
         onClick={onClick}
      />
@@ -125,7 +126,7 @@ export const MapChartItem = ({
          </span>
        </ItemHeader>
 
-       <A.ShowHide isShow={isOpen}>
+       <ShowHide isShow={isOpen}>
           <BtTabInfo
             isShow={!isShowInfo}
             onClick={showInfo}
@@ -142,7 +143,7 @@ export const MapChartItem = ({
              info={info}
              onClickChart={hideInfo}
           />
-       </A.ShowHide>
+       </ShowHide>
      </div>
    );
 }

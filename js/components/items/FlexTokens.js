@@ -3,7 +3,8 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _A = _interopRequireDefault(require("../zhn/A"));
+var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
+var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_TOKENS = {
     display: 'flex',
@@ -26,7 +27,7 @@ const FlexSpans = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     style: S_TOKENS,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.ItemStack, {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
       items: tokens,
       crItem: _crTokenItem
     })
@@ -37,7 +38,7 @@ const FlexTokens = _ref2 => {
     caption,
     tokens
   } = _ref2;
-  return caption ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.OpenClose, {
+  return caption ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     isClose: false,
     caption: caption,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(FlexSpans, {

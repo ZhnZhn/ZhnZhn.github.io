@@ -1,6 +1,9 @@
 import RouterNativeLink from '../native-links/RouterNativeLink';
 
-import A from '../zhn/A';
+import InfoPart from '../zhn/InfoPart';
+import ButtonTab from '../zhn/ButtonTab';
+import OpenClose from '../zhn/OpenClose';
+
 import {
   CL_BLACK,
   S_BLOCK,
@@ -38,7 +41,7 @@ const InfoPartWithStyle = ({
   t,
   s
 }) => (
-  <A.InfoPart
+  <InfoPart
      style={s}
      caption={c}
      captionStyle={S_INFO_CAPTION}
@@ -85,7 +88,7 @@ const PanelDataInfo = ({
 
   return (
     <div style={{...S_ROOT, ..._style}}>
-      <A.ButtonTab
+      <ButtonTab
         style={S_BT_CAPTION}
         caption="Chart"
         onClick={onClickChart}
@@ -95,18 +98,18 @@ const PanelDataInfo = ({
       <InfoPartWithStyle c="To Date" t={toDate} s={S_TO_DATE_INFO}/>
       <InfoPartWithStyle c="Frequency" t={frequency} />
       {_renderNdlLink(linkId)}
-      { description && <A.OpenClose
+      { description && <OpenClose
            isClose={!_isShortDescr(description)}
            caption="Description"
           >
-            <A.InfoPart
+            <InfoPart
                style={S_DESCR_INFO}
                isHtml={true}
                text={description}
                textCn={CL_DESCR}
                textStyle={S_DESCR_TEXT}
             />
-         </A.OpenClose>
+         </OpenClose>
       }
       {_renderNativeLink(linkFn, item)}
     </div>

@@ -15,7 +15,8 @@ var _useSetActiveCheckBox = _interopRequireDefault(require("./useSetActiveCheckB
 var _useCompareTo = _interopRequireDefault(require("./useCompareTo"));
 var _crChartContainerStyle = _interopRequireDefault(require("./crChartContainerStyle"));
 var _itemStore = require("../../flux/stores/itemStore");
-var _A = _interopRequireDefault(require("../zhn/A"));
+var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
+var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 var _SvgHrzResize = _interopRequireDefault(require("../zhn-resize/SvgHrzResize"));
 var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
 var _ModalCompareTo = _interopRequireDefault(require("./ModalCompareTo"));
@@ -121,7 +122,7 @@ const ChartContainer = props => {
       isShow: isCompareTo,
       onClose: _hideCompareTo,
       onCompareTo: _compareTo
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.BrowserCaption, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserCaption.default, {
       style: S_BR_CAPTION,
       onMore: _showMenuMore,
       onCheck: _hSetActive,
@@ -141,7 +142,7 @@ const ChartContainer = props => {
         step: STEP,
         onResizeAfter: _hResizeAfter
       })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.ScrollPane, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ScrollPane.default, {
       refEl: _refSpComp,
       className: CL_SCROLL_ITEMS,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartList.default, {

@@ -4,7 +4,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _RouterNativeLink = _interopRequireDefault(require("../native-links/RouterNativeLink"));
-var _A = _interopRequireDefault(require("../zhn/A"));
+var _InfoPart = _interopRequireDefault(require("../zhn/InfoPart"));
+var _ButtonTab = _interopRequireDefault(require("../zhn/ButtonTab"));
+var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_DESCR = `info__descr ${_styleFn.CL_BLACK}`,
@@ -42,7 +44,7 @@ const InfoPartWithStyle = _ref => {
     t,
     s
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.InfoPart, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_InfoPart.default, {
     style: s,
     caption: c,
     captionStyle: S_INFO_CAPTION,
@@ -90,7 +92,7 @@ const PanelDataInfo = _ref2 => {
       ...S_ROOT,
       ..._style
     },
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.ButtonTab, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
       style: S_BT_CAPTION,
       caption: "Chart",
       onClick: onClickChart
@@ -106,10 +108,10 @@ const PanelDataInfo = _ref2 => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoPartWithStyle, {
       c: "Frequency",
       t: frequency
-    }), _renderNdlLink(linkId), description && /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.OpenClose, {
+    }), _renderNdlLink(linkId), description && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
       isClose: !_isShortDescr(description),
       caption: "Description",
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.InfoPart, {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_InfoPart.default, {
         style: S_DESCR_INFO,
         isHtml: true,
         text: description,

@@ -4,15 +4,11 @@ import useBrowserShow from '../hooks/useBrowserShow';
 import { useRefFocusIf } from '../hooks/useFocus';
 import useLoadMenu from './useLoadMenu';
 
-import A from '../zhn/A';
+import Browser from '../zhn/Browser';
+import BrowserCaption from '../zhn/BrowserCaption';
+import ScrollPane from '../zhn/ScrollPane';
 import { SpinnerLoading } from '../zhn/Spinner';
 import MenuTopicList from './MenuTopicList';
-
-const {
-  Browser,
-  BrowserCaption,
-  ScrollPane
-} = A;
 
 const CL_SCROLL_MENU = crScrollYCn('scroll-menu');
 

@@ -4,7 +4,10 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.InfoItem = void 0;
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-var _A = _interopRequireDefault(require("../zhn/A"));
+var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
+var _ItemList = _interopRequireDefault(require("../zhn/ItemList"));
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
+var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 var _Link = _interopRequireDefault(require("../native-links/Link"));
 var _ItemHeader = _interopRequireDefault(require("./ItemHeader"));
 var _FlexTokens = _interopRequireDefault(require("./FlexTokens"));
@@ -43,7 +46,7 @@ const Descr = _ref2 => {
     descr,
     links
   } = _ref2;
-  return descr ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_A.default.OpenClose, {
+  return descr ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose.default, {
     caption: caption,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: {
@@ -51,7 +54,7 @@ const Descr = _ref2 => {
         ...style
       },
       children: descr
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.ItemList, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemList.default, {
       items: links,
       crItem: _crLinkItem
     })]
@@ -84,10 +87,10 @@ const InfoItem = _ref3 => {
       caption: caption,
       onClick: toggleIsOpen,
       onClose: onCloseItem
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.ShowHide, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       style: S_INFO,
       isShow: isOpen,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.ItemStack, {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
         items: items,
         crItem: _crStackItem
       })

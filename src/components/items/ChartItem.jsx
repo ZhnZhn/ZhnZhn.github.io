@@ -21,7 +21,12 @@ import useMiniHandles from './useMiniHandles';
 import useDataSourceEl from './useDataSourceEl';
 
 import { isWideWidth } from '../has';
-import A from '../zhn/A';
+
+import ShowHide from '../zhn/ShowHide';
+import ErrorBoundary from '../zhn/ErrorBoundary';
+import MsgRenderErr from '../zhn/MsgRenderErr';
+import HighchartWrapper from '../zhn/HighchartWrapper';
+
 import ChartToolBar from '../toolbars/ChartToolBar';
 import crModelMore from './ChartItemMore';
 import Header from './Header';
@@ -30,13 +35,6 @@ import MiniCharts from './MiniCharts';
 import PanelDataInfo from './PanelDataInfo';
 
 import arrangeConfigsBy from './arrangeConfigsBy';
-
-const {
-  ShowHide,
-  ErrorBoundary,
-  MsgRenderErr,
-  HighchartWrapper
-} = A;
 
 const CL_CHART_ITEM = 'chart-item'
 , S_TAB_DIV = {

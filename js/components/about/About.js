@@ -7,7 +7,10 @@ var _has = require("../has");
 var _styleFn = require("../styleFn");
 var _useShowHideComponent = _interopRequireDefault(require("../hooks/useShowHideComponent"));
 var _compStore = require("../../flux/stores/compStore");
-var _A = _interopRequireDefault(require("../zhn/A"));
+var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
+var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
+var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _XPlatformLink = _interopRequireDefault(require("./XPlatformLink"));
 var _DataProviders = _interopRequireDefault(require("./DataProviders"));
 var _StepTitles = _interopRequireDefault(require("../zhn/StepTitles"));
@@ -73,12 +76,12 @@ const About = () => {
       }
     }
   });
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_A.default.ShowHide, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide.default, {
     isShow: isShow,
     className: CL_ABOUT,
     animationClass: CL_SHOW_CONT,
     onKeyDown: hKeyDown,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.BrowserCaption, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserCaption.default, {
       caption: "About",
       onClose: hide,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_XPlatformLink.default, {
@@ -86,7 +89,7 @@ const About = () => {
         account: "webapperc",
         title: "X / Twitter page @webapperc with chart examples"
       })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.ScrollPane, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ScrollPane.default, {
       className: CL_SCROLL_Y,
       style: S_SCROLL_DIV,
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -125,7 +128,7 @@ const About = () => {
               children: "tab Info of Chart item."
             })]
           })]
-        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_A.default.OpenClose, {
+        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose.default, {
           caption: "More...",
           style: S_LH_14,
           ocStyle: S_LH_18,

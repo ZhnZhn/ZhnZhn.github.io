@@ -1,6 +1,10 @@
 import useToggle from '../hooks/useToggle';
 
-import A from '../zhn/A';
+import OpenClose from '../zhn/OpenClose';
+import ItemList from '../zhn/ItemList';
+import ShowHide from '../zhn/ShowHide';
+import ItemStack from '../zhn/ItemStack';
+
 import Link from '../native-links/Link';
 import ItemHeader from './ItemHeader';
 import FlexTokens from './FlexTokens';
@@ -31,12 +35,12 @@ const Descr = ({
   descr,
   links
 }) => descr ? (
-  <A.OpenClose caption={caption}>
+  <OpenClose caption={caption}>
     <div style={{...S_DESCR, ...style}}>
       {descr}
     </div>
-    <A.ItemList items={links} crItem={_crLinkItem} />
-  </A.OpenClose>
+    <ItemList items={links} crItem={_crLinkItem} />
+  </OpenClose>
 ) : null;
 
 const _crStackItem = (
@@ -71,9 +75,9 @@ export const InfoItem = ({
         onClick={toggleIsOpen}
         onClose={onCloseItem}
       />
-      <A.ShowHide style={S_INFO} isShow={isOpen} >
-         <A.ItemStack items={items} crItem={_crStackItem} />
-      </A.ShowHide>
+      <ShowHide style={S_INFO} isShow={isOpen} >
+         <ItemStack items={items} crItem={_crStackItem} />
+      </ShowHide>
     </div>
   );
 }

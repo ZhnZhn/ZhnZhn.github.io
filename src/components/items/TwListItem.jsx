@@ -1,14 +1,10 @@
 import { toHref } from '../uiApi';
 import useToggle from '../hooks/useToggle';
 
-import A from '../zhn/A';
+import ShowHide from '../zhn/ShowHide';
+import ItemStack from '../zhn/ItemStack';
 import ItemHeader from './ItemHeader';
 import { BtSvgClose } from '../zhn/BtSvgX';
-
-const {
-  ShowHide,
-  ItemStack
-} = A;
 
 const CL = 'twit'
 , S_TW_LIST = { marginBottom: 8 }

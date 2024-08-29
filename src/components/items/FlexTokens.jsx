@@ -1,4 +1,5 @@
-import A from '../zhn/A';
+import ItemStack from '../zhn/ItemStack';
+import OpenClose from '../zhn/OpenClose';
 
 const S_TOKENS = {
   display: 'flex',
@@ -20,7 +21,7 @@ const _crTokenItem = token => (
 
 const FlexSpans = ({ tokens }) => (
   <div style={S_TOKENS}>
-    <A.ItemStack
+    <ItemStack
       items={tokens}
       crItem={_crTokenItem}
     />
@@ -32,12 +33,12 @@ const FlexTokens = ({
   tokens
 }) => {
   return caption
-    ? <A.OpenClose
+    ? <OpenClose
         isClose={false}
         caption={caption}
       >
         <FlexSpans tokens={tokens}/>
-      </A.OpenClose>
+      </OpenClose>
     : <FlexSpans tokens={tokens}/>
 };
 

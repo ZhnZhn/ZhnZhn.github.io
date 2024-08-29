@@ -9,7 +9,10 @@ import {
   showDialogEditLists
 } from './Handlers';
 
-import A from '../zhn/A';
+import Browser from '../zhn/Browser';
+import BrowserCaption from '../zhn/BrowserCaption';
+import ScrollPane from '../zhn/ScrollPane';
+import ButtonCircle from '../zhn/ButtonCircle';
 import EditBar from './EditBar';
 import WatchGroups from './WatchGroups';
 
@@ -39,39 +42,39 @@ const WatchBrowser = (props) => {
   , _captionEV = isModeEdit ? 'V' : 'E';
 
   return (
-    <A.Browser
+    <Browser
       isShow={isShow}
       onKeyDown={hKeyDown}
     >
-       <A.BrowserCaption
+       <BrowserCaption
          caption={caption}
          onClose={_hHide}
        >
-        <A.ButtonCircle
+        <ButtonCircle
           caption="S"
           title="Save to LocalStorage"
           style={S_BT_CIRCLE}
           onClick={saveWatchList}
         />
-        <A.ButtonCircle
+        <ButtonCircle
            caption={_captionEV}
            title="Toggle Edit Mode: E/V"
            style={S_BT_CIRCLE}
            onClick={_toggleEditMode}
         />
-      </A.BrowserCaption>
+      </BrowserCaption>
       <EditBar
          isShow={isModeEdit}
          onClickGroup={showDialogEditGroups}
          onClickList={showDialogEditLists}
       />
-      <A.ScrollPane className={CL_SCROLL_WATCH}>
+      <ScrollPane className={CL_SCROLL_WATCH}>
         <WatchGroups
            isModeEdit={isModeEdit}
            groups={groups}
         />
-      </A.ScrollPane>
-   </A.Browser>
+      </ScrollPane>
+   </Browser>
   );
 }
 

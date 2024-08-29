@@ -30,7 +30,8 @@ import {
   useMsItemLoaded
 } from '../../flux/stores/itemStore';
 
-import A from '../zhn/A';
+import BrowserCaption from '../zhn/BrowserCaption';
+import ScrollPane from '../zhn/ScrollPane';
 import SvgHrzResize from '../zhn-resize/SvgHrzResize';
 import ModalSlider from '../zhn-modal-slider/ModalSlider';
 import ModalCompareTo from './ModalCompareTo';
@@ -207,7 +208,7 @@ const ChartContainer = (props) => {
           onCompareTo={_compareTo}
         />
       }
-      <A.BrowserCaption
+      <BrowserCaption
          style={S_BR_CAPTION}
          onMore={_showMenuMore}
          onCheck={_hSetActive}
@@ -228,8 +229,8 @@ const ChartContainer = (props) => {
            step={STEP}
            onResizeAfter={_hResizeAfter}
          />
-      </A.BrowserCaption>
-      <A.ScrollPane
+      </BrowserCaption>
+      <ScrollPane
          refEl={_refSpComp}
          className={CL_SCROLL_ITEMS}
       >
@@ -241,7 +242,7 @@ const ChartContainer = (props) => {
            browserType={browserType}
            onCloseItem={onCloseItem}
         />
-      </A.ScrollPane>
+      </ScrollPane>
     </div>
   );
 };

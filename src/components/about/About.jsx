@@ -8,7 +8,11 @@ import {
 import useShowHideComponent from '../hooks/useShowHideComponent';
 import { useMsAbout } from '../../flux/stores/compStore';
 
-import A from '../zhn/A';
+import BrowserCaption from '../zhn/BrowserCaption';
+import ScrollPane from '../zhn/ScrollPane';
+import OpenClose from '../zhn/OpenClose';
+import ShowHide from '../zhn/ShowHide';
+
 import XPlatformLink from './XPlatformLink';
 import DataProviders from './DataProviders';
 
@@ -70,13 +74,13 @@ const About = () => {
   })
 
   return (
-    <A.ShowHide
+    <ShowHide
       isShow={isShow}
       className={CL_ABOUT}
       animationClass={CL_SHOW_CONT}
       onKeyDown={hKeyDown}
     >
-       <A.BrowserCaption
+       <BrowserCaption
           caption="About"
           onClose={hide}
        >
@@ -85,9 +89,9 @@ const About = () => {
             account="webapperc"
             title="X / Twitter page @webapperc with chart examples"
          />
-       </A.BrowserCaption>
+       </BrowserCaption>
 
-       <A.ScrollPane
+       <ScrollPane
          className={CL_SCROLL_Y}
          style={S_SCROLL_DIV}
        >
@@ -121,7 +125,7 @@ const About = () => {
               More information about a dataset can be found on a <SpanBlack>tab Info of Chart item.</SpanBlack>
             </span>
          </p>
-          <A.OpenClose
+          <OpenClose
             caption="More..."
             style={S_LH_14}
             ocStyle={S_LH_18}
@@ -153,7 +157,7 @@ const About = () => {
             <p style={S_MB_8EM}>
               There is three UI theme in the web app ERC: <SpanBlack>Dark, Light, and Sand</SpanBlack> can be set on <SpanBlack>tab Options, dialog Settings [s]</SpanBlack>. All user's settings keep in browser's memory only for a current web session.
             </p>
-         </A.OpenClose>
+         </OpenClose>
          <LogosBar />
          <p>
            <SpanBlack>
@@ -161,8 +165,8 @@ const About = () => {
            </SpanBlack>
          </p>
          </div>
-      </A.ScrollPane>
-   </A.ShowHide>
+      </ScrollPane>
+   </ShowHide>
   );
 };
 

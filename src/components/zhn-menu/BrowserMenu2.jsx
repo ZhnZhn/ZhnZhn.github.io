@@ -5,19 +5,15 @@ import useBrowserShow from '../hooks/useBrowserShow';
 import useToggle from '../hooks/useToggle';
 import useLoadMenu from './useLoadMenu';
 
-import A from '../zhn/A';
 
+import Browser from '../zhn/Browser';
+import BrowserCaption from '../zhn/BrowserCaption';
+import ShowHide from '../zhn/ShowHide';
+import ScrollPane from '../zhn/ScrollPane';
 import { SpinnerLoading } from '../zhn/Spinner';
 import ToolbarButtonCircle from '../zhn/ToolbarButtonCircle';
 import WrapperInputSearch from '../zhn-select/WrapperInputSearch';
 import MenuItems2 from './MenuItems2';
-
-const {
-  Browser,
-  BrowserCaption,
-  ShowHide,
-  ScrollPane
-} = A;
 
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
 , CL_BROWSER = "scroll-browser-by"

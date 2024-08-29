@@ -16,7 +16,10 @@ var _useMiniTitles = _interopRequireDefault(require("./useMiniTitles"));
 var _useMiniHandles = _interopRequireDefault(require("./useMiniHandles"));
 var _useDataSourceEl = _interopRequireDefault(require("./useDataSourceEl"));
 var _has = require("../has");
-var _A = _interopRequireDefault(require("../zhn/A"));
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
+var _ErrorBoundary = _interopRequireDefault(require("../zhn/ErrorBoundary"));
+var _MsgRenderErr = _interopRequireDefault(require("../zhn/MsgRenderErr"));
+var _HighchartWrapper = _interopRequireDefault(require("../zhn/HighchartWrapper"));
 var _ChartToolBar = _interopRequireDefault(require("../toolbars/ChartToolBar"));
 var _ChartItemMore = _interopRequireDefault(require("./ChartItemMore"));
 var _Header = _interopRequireDefault(require("./Header"));
@@ -27,12 +30,6 @@ var _arrangeConfigsBy = _interopRequireDefault(require("./arrangeConfigsBy"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const {
-  ShowHide,
-  ErrorBoundary,
-  MsgRenderErr,
-  HighchartWrapper
-} = _A.default;
 const CL_CHART_ITEM = 'chart-item',
   S_TAB_DIV = {
     position: 'relative',
@@ -149,11 +146,11 @@ const ChartItem = exports.ChartItem = (0, _memoEqual.default)(_ref => {
       onClose: onCloseItem,
       crValueMoving: _crValueMoving,
       refVm: _refVm
-    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(ShowHide, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide.default, {
       isShow: isOpen,
       withoutAnimation: true,
       style: S_ML_8,
-      children: [isShowChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
+      children: [isShowChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
         isShow: isShowToolbar,
         withoutAnimation: true,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartToolBar.default, {
@@ -171,17 +168,17 @@ const ChartItem = exports.ChartItem = (0, _memoEqual.default)(_ref => {
           onPasteTo: onPasteTo,
           onZoom: onZoom
         })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ErrorBoundary, {
-        FallbackComp: /*#__PURE__*/(0, _jsxRuntime.jsx)(MsgRenderErr, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ErrorBoundary.default, {
+        FallbackComp: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MsgRenderErr.default, {
           isShow: isShowChart,
           msg: "chart"
         }),
         onError: _hError,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(ShowHide, {
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
           isShow: isShowChart,
           withoutAnimation: true,
           style: S_MT_6,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(HighchartWrapper, {
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_HighchartWrapper.default, {
             config: config,
             isShowAbs: isShowAbs,
             absComp: _dataSourceEl,
