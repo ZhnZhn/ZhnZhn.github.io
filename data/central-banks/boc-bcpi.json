@@ -1,1 +1,1 @@
-{"items":[{"c":"BCPI Total","v":"W.BCPI"},{"c":"BCPI Excluding Energy","v":"W.BCNE"},{"c":"BCPI Energy","v":"W.ENER"},{"c":"BCPI Metals and Minerals","v":"W.MTLS"},{"c":"BCPI Forestry","v":"W.FOPR"},{"c":"BCPI Agriculture","v":"W.AGRI"},{"c":"BCPI Fish","v":"W.FISH"}]}
+{"prefix":"W.","items":[{"c":"BCPI Total","v":"BCPI"},{"c":"BCPI Excluding Energy","v":"BCNE"},{"c":"BCPI Energy","v":"ENER"},{"c":"BCPI Metals and Minerals","v":"MTLS"},{"c":"BCPI Forestry","v":"FOPR"},{"c":"BCPI Agriculture","v":"AGRI"},{"c":"BCPI Fish","v":"FISH"}]}
