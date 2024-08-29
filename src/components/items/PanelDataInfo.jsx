@@ -1,6 +1,6 @@
 import RouterNativeLink from '../native-links/RouterNativeLink';
 
-import A from '../Comp';
+import A from '../zhn/A';
 import {
   CL_BLACK,
   S_BLOCK,

@@ -8,7 +8,7 @@ import {
 import useShowHideComponent from '../hooks/useShowHideComponent';
 import { useMsAbout } from '../../flux/stores/compStore';
 
-import A from '../Comp';
+import A from '../zhn/A';
 import XPlatformLink from './XPlatformLink';
 import DataProviders from './DataProviders';
 

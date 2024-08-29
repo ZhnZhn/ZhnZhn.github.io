@@ -8,7 +8,7 @@ var _styleFn = require("../styleFn");
 var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
-var _Comp = _interopRequireDefault(require("../Comp"));
+var _A = _interopRequireDefault(require("../zhn/A"));
 var _Spinner = require("../zhn/Spinner");
 var _ToolbarButtonCircle = _interopRequireDefault(require("../zhn/ToolbarButtonCircle"));
 var _WrapperInputSearch = _interopRequireDefault(require("../zhn-select/WrapperInputSearch"));
@@ -19,7 +19,7 @@ const {
   BrowserCaption,
   ShowHide,
   ScrollPane
-} = _Comp.default;
+} = _A.default;
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name",
   CL_BROWSER = "scroll-browser-by",
   CL_BROWSER_WITH_SEARCH = `${CL_BROWSER}--search`,

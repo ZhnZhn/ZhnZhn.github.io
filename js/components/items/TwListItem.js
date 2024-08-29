@@ -5,14 +5,14 @@ exports.__esModule = true;
 exports.TwListItem = void 0;
 var _uiApi = require("../uiApi");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
-var _Comp = _interopRequireDefault(require("../Comp"));
+var _A = _interopRequireDefault(require("../zhn/A"));
 var _ItemHeader = _interopRequireDefault(require("./ItemHeader"));
 var _BtSvgX = require("../zhn/BtSvgX");
 var _jsxRuntime = require("react/jsx-runtime");
 const {
   ShowHide,
   ItemStack
-} = _Comp.default;
+} = _A.default;
 const CL = 'twit',
   S_TW_LIST = {
     marginBottom: 8

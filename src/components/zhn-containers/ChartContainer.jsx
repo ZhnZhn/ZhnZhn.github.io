@@ -30,7 +30,7 @@ import {
   useMsItemLoaded
 } from '../../flux/stores/itemStore';
 
-import A from '../Comp';
+import A from '../zhn/A';
 import SvgHrzResize from '../zhn-resize/SvgHrzResize';
 import ModalSlider from '../zhn-modal-slider/ModalSlider';
 import ModalCompareTo from './ModalCompareTo';

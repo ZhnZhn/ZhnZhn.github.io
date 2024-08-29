@@ -16,7 +16,7 @@ var _useMiniTitles = _interopRequireDefault(require("./useMiniTitles"));
 var _useMiniHandles = _interopRequireDefault(require("./useMiniHandles"));
 var _useDataSourceEl = _interopRequireDefault(require("./useDataSourceEl"));
 var _has = require("../has");
-var _Comp = _interopRequireDefault(require("../Comp"));
+var _A = _interopRequireDefault(require("../zhn/A"));
 var _ChartToolBar = _interopRequireDefault(require("../toolbars/ChartToolBar"));
 var _ChartItemMore = _interopRequireDefault(require("./ChartItemMore"));
 var _Header = _interopRequireDefault(require("./Header"));
@@ -32,7 +32,7 @@ const {
   ErrorBoundary,
   MsgRenderErr,
   HighchartWrapper
-} = _Comp.default;
+} = _A.default;
 const CL_CHART_ITEM = 'chart-item',
   S_TAB_DIV = {
     position: 'relative',

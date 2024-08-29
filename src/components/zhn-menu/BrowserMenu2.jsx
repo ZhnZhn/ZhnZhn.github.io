@@ -5,7 +5,7 @@ import useBrowserShow from '../hooks/useBrowserShow';
 import useToggle from '../hooks/useToggle';
 import useLoadMenu from './useLoadMenu';
 
-import Comp from '../Comp';
+import A from '../zhn/A';
 
 import { SpinnerLoading } from '../zhn/Spinner';
 import ToolbarButtonCircle from '../zhn/ToolbarButtonCircle';
@@ -17,7 +17,7 @@ const {
   BrowserCaption,
   ShowHide,
   ScrollPane
-} = Comp;
+} = A;
 
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
 , CL_BROWSER = "scroll-browser-by"

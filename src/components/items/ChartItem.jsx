@@ -21,7 +21,7 @@ import useMiniHandles from './useMiniHandles';
 import useDataSourceEl from './useDataSourceEl';
 
 import { isWideWidth } from '../has';
-import Comp from '../Comp';
+import A from '../zhn/A';
 import ChartToolBar from '../toolbars/ChartToolBar';
 import crModelMore from './ChartItemMore';
 import Header from './Header';
@@ -36,7 +36,7 @@ const {
   ErrorBoundary,
   MsgRenderErr,
   HighchartWrapper
-} = Comp;
+} = A;
 
 const CL_CHART_ITEM = 'chart-item'
 , S_TAB_DIV = {

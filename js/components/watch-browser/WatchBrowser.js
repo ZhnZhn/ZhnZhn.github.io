@@ -7,7 +7,7 @@ var _styleFn = require("../styleFn");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
 var _Handlers = require("./Handlers");
-var _Comp = _interopRequireDefault(require("../Comp"));
+var _A = _interopRequireDefault(require("../zhn/A"));
 var _EditBar = _interopRequireDefault(require("./EditBar"));
 var _WatchGroups = _interopRequireDefault(require("./WatchGroups"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -29,18 +29,18 @@ const WatchBrowser = props => {
       groups
     } = watchList || {},
     _captionEV = isModeEdit ? 'V' : 'E';
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.Browser, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_A.default.Browser, {
     isShow: isShow,
     onKeyDown: hKeyDown,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.BrowserCaption, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)(_A.default.BrowserCaption, {
       caption: caption,
       onClose: _hHide,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ButtonCircle, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.ButtonCircle, {
         caption: "S",
         title: "Save to LocalStorage",
         style: S_BT_CIRCLE,
         onClick: _Handlers.saveWatchList
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ButtonCircle, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.ButtonCircle, {
         caption: _captionEV,
         title: "Toggle Edit Mode: E/V",
         style: S_BT_CIRCLE,
@@ -50,7 +50,7 @@ const WatchBrowser = props => {
       isShow: isModeEdit,
       onClickGroup: _Handlers.showDialogEditGroups,
       onClickList: _Handlers.showDialogEditLists
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.ScrollPane, {
       className: CL_SCROLL_WATCH,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_WatchGroups.default, {
         isModeEdit: isModeEdit,

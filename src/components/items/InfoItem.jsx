@@ -1,6 +1,6 @@
 import useToggle from '../hooks/useToggle';
 
-import A from '../Comp';
+import A from '../zhn/A';
 import Link from '../native-links/Link';
 import ItemHeader from './ItemHeader';
 import FlexTokens from './FlexTokens';

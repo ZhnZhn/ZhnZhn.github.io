@@ -9,7 +9,7 @@ import {
   showDialogEditLists
 } from './Handlers';
 
-import A from '../Comp';
+import A from '../zhn/A';
 import EditBar from './EditBar';
 import WatchGroups from './WatchGroups';
 
@@ -40,7 +40,7 @@ const WatchBrowser = (props) => {
 
   return (
     <A.Browser
-      isShow={isShow}    
+      isShow={isShow}
       onKeyDown={hKeyDown}
     >
        <A.BrowserCaption

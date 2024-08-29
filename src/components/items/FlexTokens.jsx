@@ -1,4 +1,4 @@
-import A from '../Comp';
+import A from '../zhn/A';
 
 const S_TOKENS = {
   display: 'flex',

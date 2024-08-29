@@ -7,7 +7,7 @@ var _uiApi = require("../uiApi");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useBool = require("../hooks/useBool");
 var _ChoroplethMap = _interopRequireDefault(require("../../adapters/eurostat/ChoroplethMap"));
-var _Comp = _interopRequireDefault(require("../Comp"));
+var _A = _interopRequireDefault(require("../zhn/A"));
 var _Spinner = require("../zhn/Spinner");
 var _ItemHeader = _interopRequireDefault(require("./ItemHeader"));
 var _PanelDataInfo = _interopRequireDefault(require("./PanelDataInfo"));
@@ -59,7 +59,7 @@ const BtTabInfo = _ref => {
   } = _ref;
   return isShow ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     style: S_TAB_DIV,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ButtonTab, {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.ButtonTab, {
       caption: "Info",
       onClick: onClick
     })
@@ -137,7 +137,7 @@ const MapChartItem = _ref2 => {
         style: S_TIME,
         children: time
       })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.ShowHide, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_A.default.ShowHide, {
       isShow: isOpen,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(BtTabInfo, {
         isShow: !isShowInfo,

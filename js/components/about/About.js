@@ -7,7 +7,7 @@ var _has = require("../has");
 var _styleFn = require("../styleFn");
 var _useShowHideComponent = _interopRequireDefault(require("../hooks/useShowHideComponent"));
 var _compStore = require("../../flux/stores/compStore");
-var _Comp = _interopRequireDefault(require("../Comp"));
+var _A = _interopRequireDefault(require("../zhn/A"));
 var _XPlatformLink = _interopRequireDefault(require("./XPlatformLink"));
 var _DataProviders = _interopRequireDefault(require("./DataProviders"));
 var _StepTitles = _interopRequireDefault(require("../zhn/StepTitles"));
@@ -73,12 +73,12 @@ const About = () => {
       }
     }
   });
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.ShowHide, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_A.default.ShowHide, {
     isShow: isShow,
     className: CL_ABOUT,
     animationClass: CL_SHOW_CONT,
     onKeyDown: hKeyDown,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.BrowserCaption, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.BrowserCaption, {
       caption: "About",
       onClose: hide,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_XPlatformLink.default, {
@@ -86,7 +86,7 @@ const About = () => {
         account: "webapperc",
         title: "X / Twitter page @webapperc with chart examples"
       })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ScrollPane, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_A.default.ScrollPane, {
       className: CL_SCROLL_Y,
       style: S_SCROLL_DIV,
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -125,7 +125,7 @@ const About = () => {
               children: "tab Info of Chart item."
             })]
           })]
-        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Comp.default.OpenClose, {
+        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_A.default.OpenClose, {
           caption: "More...",
           style: S_LH_14,
           ocStyle: S_LH_18,

@@ -9,7 +9,7 @@ import { useBool } from '../hooks/useBool';
 
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
-import A from '../Comp';
+import A from '../zhn/A';
 import { SpinnerLoading } from '../zhn/Spinner';
 import ItemHeader from './ItemHeader';
 import PanelDataInfo from './PanelDataInfo';
