@@ -31,6 +31,7 @@ import {
 } from '../../flux/stores/itemStore';
 
 import A from '../Comp';
+import SvgHrzResize from '../zhn-resize/SvgHrzResize';
 import ModalCompareTo from './ModalCompareTo';
 import ChartList from './ChartList';
 
@@ -215,7 +216,7 @@ const ChartContainer = (props) => {
          svgMoreStyle={S_SVG_MORE}
          onClose={_hHideChartContainer}
       >
-         <A.SvgHrzResize
+         <SvgHrzResize
            refEl={_refResize}
            elementRef={_refRootElement}
            isBts={_hasBtsResize(_refRootElement, _INITIAL_WIDTH, caption)}

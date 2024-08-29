@@ -16,6 +16,7 @@ var _useCompareTo = _interopRequireDefault(require("./useCompareTo"));
 var _crChartContainerStyle = _interopRequireDefault(require("./crChartContainerStyle"));
 var _itemStore = require("../../flux/stores/itemStore");
 var _Comp = _interopRequireDefault(require("../Comp"));
+var _SvgHrzResize = _interopRequireDefault(require("../zhn-resize/SvgHrzResize"));
 var _ModalCompareTo = _interopRequireDefault(require("./ModalCompareTo"));
 var _ChartList = _interopRequireDefault(require("./ChartList"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -128,7 +129,7 @@ const ChartContainer = props => {
       captionStyle: S_CAPTION,
       svgMoreStyle: S_SVG_MORE,
       onClose: _hHideChartContainer,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.SvgHrzResize, {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgHrzResize.default, {
         refEl: _refResize,
         elementRef: _refRootElement,
         isBts: _hasBtsResize(_refRootElement, _INITIAL_WIDTH, caption),
