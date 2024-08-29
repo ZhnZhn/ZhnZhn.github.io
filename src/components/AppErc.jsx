@@ -29,7 +29,7 @@ import DialogContainer from './dialogs/DialogContainer';
 
 import checkBuild from './checkBuild';
 
-const BUILD_DATE = '27-08-2024'
+const BUILD_DATE = '29-08-2024'
 , CL_COMP_CONTAINER = crFlexRowCn("app-container");
 
 const _showSettings = bindTo(
