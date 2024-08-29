@@ -8,15 +8,10 @@
   "_A",
   "_interopRequireDefault",
   "require",
-  "_Tab",
-  "_TabPane",
-  "Comp",
-  "A",
-  "Tab",
-  "TabPane",
   "_default",
   "exports",
-  "default"
+  "default",
+  "Comp"
  ],
- "mappings": ";;;;;AAAA,IAAAA,EAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,IAAA,GAAAF,sBAAA,CAAAC,OAAA;AACA,IAAAE,QAAA,GAAAH,sBAAA,CAAAC,OAAA;AAEA,MAAMG,IAAI,GAAG;EACX,GAAGC,UAAC;EACJC,GAAG,EAAHA,YAAG;EACHC,OAAO,EAAPA;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaN,IAAI"
+ "mappings": ";;;;;AAAA,IAAAA,EAAA,GAAAC,sBAAA,CAAAC,OAAA;AAA0B,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEXC,UAAI"
 }
