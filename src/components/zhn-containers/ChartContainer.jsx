@@ -32,6 +32,7 @@ import {
 
 import A from '../Comp';
 import SvgHrzResize from '../zhn-resize/SvgHrzResize';
+import ModalSlider from '../zhn-modal-slider/ModalSlider';
 import ModalCompareTo from './ModalCompareTo';
 import ChartList from './ChartList';
 
@@ -194,7 +195,7 @@ const ChartContainer = (props) => {
        onKeyDown={_hKeyDown}
     >
   {/*eslint-enable jsx-a11y/no-static-element-interactions*/}
-      <A.ModalSlider
+      <ModalSlider
         isShow={isMenuMore}
         className={CL_MENU_MORE}
         model={_modelMore}

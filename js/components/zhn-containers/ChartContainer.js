@@ -17,6 +17,7 @@ var _crChartContainerStyle = _interopRequireDefault(require("./crChartContainerS
 var _itemStore = require("../../flux/stores/itemStore");
 var _Comp = _interopRequireDefault(require("../Comp"));
 var _SvgHrzResize = _interopRequireDefault(require("../zhn-resize/SvgHrzResize"));
+var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
 var _ModalCompareTo = _interopRequireDefault(require("./ModalCompareTo"));
 var _ChartList = _interopRequireDefault(require("./ChartList"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -111,7 +112,7 @@ const ChartContainer = props => {
       ..._style
     },
     onKeyDown: _hKeyDown,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Comp.default.ModalSlider, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.default, {
       isShow: isMenuMore,
       className: CL_MENU_MORE,
       model: _modelMore,
