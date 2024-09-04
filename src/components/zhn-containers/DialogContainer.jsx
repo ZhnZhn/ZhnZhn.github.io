@@ -1,5 +1,4 @@
 import {
-  isUndef,
   safeMap,
   cloneElement
 } from '../uiApi';
@@ -12,87 +11,19 @@ import {
   useMsShowDialog
 } from '../../flux/stores/compStore';
 
+import {
+  findCompIndex,
+  doVisible,
+  updateVisible,
+  filterArrByKey
+} from './DialogContainerFn';
+
 const S_ROOT = {
   zIndex: 1030,
   position: 'absolute',
   top: 70,
   left: 10
-  //width: '98%'
 };
-
-const _findCompIndex = (
-  arr,
-  key
-) => {
-  for (let i=0; i<arr.length; i++){
-    if (arr[i].key === key){
-      return i;
-    }
-  }
-  return;
-};
-
-const _doVisible = (
-  arr,
-  keyValue
-) => {
-  const _index = _findCompIndex(arr, keyValue) || 0;
-  return [
-    ...arr.slice(0, _index),
-    ...arr.slice(_index+1),
-    arr[_index]
-  ];
-};
-
-const _updateVisible = (
-  state,
-  key,
-  maxDialog
-) => {
-  const { hmIs, visibleDialogs } = state
-  , _keyIndex = visibleDialogs.indexOf(key);
-  if (_keyIndex !== -1) {
-    visibleDialogs.splice(_keyIndex, 1)
-  }
-  visibleDialogs.push(key)
-  hmIs[key] = true
-  if (visibleDialogs.length > maxDialog ){
-    hmIs[visibleDialogs[0]] = false
-    visibleDialogs.splice(0, 1)
-  }
-};
-
-const _findCompByKey = (
-  comps,
-  key
-) => {
-  const index = _findCompIndex(comps, key);
-  return isUndef(index)
-    ? void 0
-    : comps[index];
-};
-
-const _filterArrByKey = (
-  arr,
-  key
-) => {
-  arr.splice(arr.indexOf(key), 1)
-};
-
-const _renderDialogs = (
-  { hmIs, compDialogs, hmData },
-  _hToTopLayer,
-  _hToggleDialog
-) => safeMap(compDialogs, Comp => {
-  const key = Comp.key;
-  return cloneElement(Comp, {
-    key: key,
-    isShow: hmIs[key],
-    optionData: hmData[key],
-    toTopLayer: () => _hToTopLayer(key),
-    onClose: () => _hToggleDialog(key)
-  });
-});
 
 const fUpdateState = maxDialog => (
   msShowDialog,
@@ -100,15 +31,25 @@ const fUpdateState = maxDialog => (
 ) => {
   if (msShowDialog) {
     setState(prevState => {
-      const { key, Comp, data } = msShowDialog;
-       if (Comp && !isUndef(_findCompIndex(prevState.compDialogs, key))) {
+      const {
+        key,
+        Comp,
+        data
+      } = msShowDialog
+      , { compDialogs } = prevState;
+      if (Comp && findCompIndex(compDialogs, key) > -1) {
          return prevState;
-       }
-      _updateVisible(prevState, key, maxDialog)
+      }
+      updateVisible(
+        prevState.hmIs,
+        prevState.visibleDialogs,
+        key,
+        maxDialog
+      )
       if (!Comp){
-         prevState.compDialogs = _doVisible(prevState.compDialogs, key)
+         prevState.compDialogs = doVisible(compDialogs, key)
       } else {
-         prevState.compDialogs.push(Comp)
+         compDialogs.push(Comp)
       }
       prevState.hmData[key] = data
       return {...prevState};
@@ -127,8 +68,8 @@ const DialogContainer = ({
     setState
   ] = useStoreState({
     hmIs: {},
-    compDialogs: [],
     hmData: {},
+    compDialogs: [],
     visibleDialogs: []
   },
     useMsShowDialog,
@@ -136,32 +77,34 @@ const DialogContainer = ({
   )
   , {
     hmIs,
-    compDialogs,
-    visibleDialogs
+    hmData,
+    compDialogs
   } = state
   , _hToTopLayer = key => {
-     if (visibleDialogs[visibleDialogs.length-1] !== key) {
        setState(prevState => {
-         prevState.compDialogs = _doVisible(prevState.compDialogs, key)
-         const visibleDialogs = prevState.visibleDialogs
-         _filterArrByKey(visibleDialogs, key)
-         visibleDialogs.push(key)
-         return {...prevState};
+         const visibleDialogs = prevState.visibleDialogs;
+         if (visibleDialogs[visibleDialogs.length-1] !== key) {
+           prevState.compDialogs = doVisible(prevState.compDialogs, key)
+           filterArrByKey(visibleDialogs, key)
+           visibleDialogs.push(key)
+           return {...prevState};
+         } else {
+           return prevState;
+         }
        })
-     }
     }
   , _hToggleDialog = key => {
      if (hmIs[key]){
-       const _Comp = _findCompByKey(compDialogs, key);
-       if (_Comp){
-         closeDialog(_Comp)
+       const _compIndex = findCompIndex(compDialogs, key);
+       if (_compIndex > -1){
+         closeDialog(compDialogs[_compIndex])
        }
      }
      setState(prevState => {
        const { hmIs } = prevState;
        hmIs[key] = !hmIs[key]
        if (!hmIs[key]) {
-         _filterArrByKey(prevState.visibleDialogs, key)
+         filterArrByKey(prevState.visibleDialogs, key)
        }
        return {...prevState};
      })
@@ -169,7 +112,15 @@ const DialogContainer = ({
 
   return (
     <div style={S_ROOT}>
-      {_renderDialogs(state, _hToTopLayer, _hToggleDialog)}
+      {safeMap(compDialogs, Comp => {
+        const key = Comp.key;
+        return cloneElement(Comp, {
+          isShow: hmIs[key],
+          optionData: hmData[key],
+          toTopLayer: () => _hToTopLayer(key),
+          onClose: () => _hToggleDialog(key)
+        });
+      })}
     </div>
   );
 }
