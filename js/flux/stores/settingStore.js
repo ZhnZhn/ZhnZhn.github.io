@@ -65,7 +65,7 @@ const _fGetSetOption = (propName, onSetting) => value => {
   }
 };
 const _setProxy = url => {
-  if (('' + url).slice(0, 16) === 'http://127.0.0.1') {
+  if (('' + url).slice(0, 16) === 'http://127.0.0.1' || url === '') {
     _SETTINGS[PN_LH_CORS_PROXY_SERVER] = url;
     return true;
   }

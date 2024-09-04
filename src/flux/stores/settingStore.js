@@ -136,8 +136,8 @@ const _fGetSetOption = (
   }
 }
 
-const _setProxy = (url) => {
-  if ((''+url).slice(0,16) === 'http://127.0.0.1') {
+const _setProxy = (url) => {  
+  if ((''+url).slice(0,16) === 'http://127.0.0.1' || url === '') {
     _SETTINGS[PN_LH_CORS_PROXY_SERVER] = url
     return true;
   }
