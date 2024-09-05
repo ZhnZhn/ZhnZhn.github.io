@@ -83,7 +83,8 @@ const createLoadOptions = (
   ] = crCaptions(items, titles)
   , {
       value:seriaType,
-      compType
+      compType,
+      cId
   } = chartType || {}
   , _itemKey = crItemKey(
       items,
@@ -96,6 +97,7 @@ const createLoadOptions = (
   _modifyIfItemTable(_dfProps, items)
 
   return {
+    dfC: cId,
     ..._dfProps,
     ...dialogOptions,
     _type: TYPE,

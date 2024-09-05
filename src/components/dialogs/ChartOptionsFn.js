@@ -55,7 +55,8 @@ const _crItem = configArr => ({
   value: configArr[1],
   dim: configArr[2],
   compType: configArr[3],
-  id: configArr[4]
+  id: configArr[4],
+  cId: configArr[5]
 });
 const _crItems = (arr) => arr
   .filter(Boolean)
@@ -89,6 +90,19 @@ const _crDF = (
     .concat(_crItems([
        [`Map: By ${oneCaption}` , CHT_MAP, void 0, CIT_EUROSTAT_MAP]
     ]));
+};
+
+const _crTes = (
+  captions,
+  mapFrequency,
+  selectProps
+) => {
+  const chartOptions = _crDF(captions, mapFrequency)
+  , twoCaption = captions[1] || 'Dim';
+  chartOptions.splice(7, 0, _crItem(
+    [`Bar: By ${toPlural(twoCaption)}`, CHT_BAR_SET, twoCaption, void 0, void 0, (selectProps[1] || {}).id]
+  ))
+  return chartOptions;
 };
 
 const _crT1 = () => _crItems([
@@ -198,6 +212,7 @@ const _crT3A2 = ([oneCaption]) => [
 
 const _r = {
   DF: _crDF,
+  tes: _crTes,
   t1: _crT1,
   t1a: _crT1A,
   t2: _crT2,
@@ -231,10 +246,12 @@ const _crCaptions = ({
 const _crChartOptionsImpl = (
   chartsType,
   captions,
-  mapFrequency
+  mapFrequency,
+  selectProps
 ) => (_r[chartsType] || _r.DF)(
   captions,
-  mapFrequency
+  mapFrequency,
+  selectProps
 ).filter(Boolean);
 
 export const crDialogChartOptions = (
@@ -249,7 +266,8 @@ export const crDialogChartOptions = (
   return _crChartOptionsImpl(
     chartsType,
     _crCaptions(dialogOption),
-    mapFrequency || mF || (dfProps || {}).mapFrequency
+    mapFrequency || mF || (dfProps || {}).mapFrequency,
+    dialogOption.selectProps
   );
 }
 
@@ -260,7 +278,8 @@ export const crChartOptions = (
 ) => _crChartOptionsImpl(
   chartsType,
   _crCaptions({ selectProps }),
-  mapFrequency
+  mapFrequency,
+  selectProps
 )
 
 const _isCategory = isInArrStr(CATEGORY_TYPES);

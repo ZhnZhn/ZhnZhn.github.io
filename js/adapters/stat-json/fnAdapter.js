@@ -144,6 +144,8 @@ const crTitle = option => {
     case 'SWS':
     case 'SWS_ALL':
       return TITLE_SWS;
+    case 'ES':
+      return (0, _AdapterFn.joinBy)(": ", option.title, option.subtitle);
     default:
       return '';
   }

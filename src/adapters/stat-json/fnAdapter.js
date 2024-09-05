@@ -11,7 +11,8 @@ export {
 import JSONstat from 'jsonstat';
 import {
   assign,
-  valueMoving
+  valueMoving,
+  joinBy
 } from '../AdapterFn';
 import {
   crId,
@@ -207,6 +208,8 @@ export const crTitle = (
     case 'SWS':
     case 'SWS_ALL':
       return TITLE_SWS;
+    case 'ES':
+      return joinBy(": ", option.title, option.subtitle)
     default:
       return '';
   }

@@ -56,10 +56,11 @@ const createLoadOptions = (props, options) => {
       date,
       _rt
     } = options || {},
-    [itemCaption, title, subtitle, threeC] = (0, _createrFns.crCaption)(items, titles),
+    [itemCaption, title, subtitle, threeC] = (0, _createrFns.crCaptions)(items, titles),
     {
       value: seriaType,
-      compType
+      compType,
+      cId
     } = chartType || {},
     _itemKey = (0, _createrFns.crItemKey)(items, seriaType, date, fromDate),
     _dfProps = {
@@ -67,6 +68,7 @@ const createLoadOptions = (props, options) => {
     };
   _modifyIfItemTable(_dfProps, items);
   return {
+    dfC: cId,
     ..._dfProps,
     ...dialogOptions,
     _type: TYPE,
@@ -84,10 +86,9 @@ const createLoadOptions = (props, options) => {
     linkFn,
     title,
     subtitle,
-    ...(0, _createrFns.crAlertConf)(itemCaption + ": " + threeC, itemCaption, threeC),
+    ...(0, _createrFns.crAlertConf)(`${itemCaption}: ${threeC}`, itemCaption, threeC),
     dataSource
   };
 };
-var _default = createLoadOptions;
-exports.default = _default;
+var _default = exports.default = createLoadOptions;
 //# sourceMappingURL=selectN.js.map
