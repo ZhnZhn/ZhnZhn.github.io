@@ -1,6 +1,7 @@
 import {
   getValue,
-  getObjectKeys
+  getObjectKeys,
+  joinBy
 } from '../AdapterFn';
 
 export const ECB_EUROPA_EU = "ecb.europa.eu"
@@ -12,10 +13,29 @@ export const getSeriesObservertions = json => {
 
 export const getObservationValues = json => (((((json || {}).structure || {}).dimensions || {}).observation || [])[0] || {}).values
 
-export const crItemId = option => {
-  const { items } = option
-  , _v0 = getValue(items[0]);
+const _crItemDf = items => {
+  const _v0 = getValue(items[0]);
   return items.length === 2
     ? `${getValue(items[1])}.${_v0}`
-    : _v0
+    : _v0;
+}
+, _crItem312 = (
+  items
+) => joinBy(".",
+  getValue(items[2]),
+  getValue(items[0]),
+  getValue(items[1])
+)
+, _hmCrItem = {
+  df: _crItemDf,
+  s312: _crItem312
+};
+
+export const crItemId = option => {
+  const { dfFnUrl } = option
+  , _crItemId = (dfFnUrl && _hmCrItem[dfFnUrl]) || _hmCrItem.df;
+  return joinBy(".",
+    option.dfPrefix,
+    _crItemId(option.items)
+  );
 }
