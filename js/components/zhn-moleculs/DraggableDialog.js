@@ -49,7 +49,7 @@ const CommandButtons = _ref => {
   });
 };
 const FN_NOOP = () => {};
-const isExcludeElement = evt => ((evt.path || [])[0] || {}).className === _styleFn.CL_TOGGLE_ARROW;
+const isExcludeElement = evt => ((0, _uiApi.getEventComposedPath)(evt)[1] || {}).className === _styleFn.CL_TOGGLE_ARROW;
 const DraggableDialog = _ref2 => {
   let {
     isFocusBtMenu = true,

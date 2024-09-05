@@ -1,6 +1,7 @@
 import {
   isFn,
-  useRef
+  useRef,
+  getEventComposedPath
 } from '../uiApi';
 import { crDialogRole } from '../a11yFn';
 
@@ -71,7 +72,7 @@ const CommandButtons = ({
 const FN_NOOP = () => {};
 const isExcludeElement = (
   evt
-) => ((evt.path || [])[0] || {}).className === CL_TOGGLE_ARROW
+) => ((getEventComposedPath(evt))[1] || {}).className === CL_TOGGLE_ARROW
 
 const DraggableDialog = ({
   isFocusBtMenu=true,

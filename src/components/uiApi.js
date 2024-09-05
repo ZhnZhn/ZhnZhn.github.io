@@ -107,6 +107,10 @@ export const stopDefaultFor = (evt) => {
   evt.preventDefault()
 }
 
+export const getEventComposedPath = evt => isFn(evt.composedPath)
+  ? evt.composedPath()
+  : evt.path || []
+
 export const isInputValid = ref => {
   const inputComp = getRefValue(ref);
   return inputComp && isFn(inputComp.isValid)
