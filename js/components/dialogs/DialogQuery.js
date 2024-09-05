@@ -21,9 +21,7 @@ const ERR_MSG = 'Empty or Id format is not valid',
   };
 const _isStrNotBlank = str => typeof str === 'string' && str.trim();
 const _testId = value => _isStrNotBlank(value) && _isStrNotBlank(value.split('/')[2]);
-const CHART_OPTIONS = (0, _ChartOptionsFn.crDialogChartOptions)({
-  chartsType: 't2'
-});
+const CHART_OPTIONS = (0, _ChartOptionsFn.crChartOptions)(void 0, 't2');
 const DialogQuery = (0, _memoIsShow.default)(props => {
   const {
       isShow,

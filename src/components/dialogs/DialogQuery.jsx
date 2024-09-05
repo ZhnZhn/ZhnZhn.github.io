@@ -11,7 +11,7 @@ import useEventCallback from '../hooks/useEventCallback';
 import useDialog from './hooks/useDialog';
 import useDialogOptions from './hooks/useDialogOptions';
 
-import { crDialogChartOptions } from './ChartOptionsFn';
+import { crChartOptions } from './ChartOptionsFn';
 import D from './DialogCell';
 
 const ERR_MSG = 'Empty or Id format is not valid'
@@ -24,9 +24,7 @@ const _isStrNotBlank = str => typeof str === 'string'
 const _testId = (value) => _isStrNotBlank(value)
   && _isStrNotBlank(value.split('/')[2]);
 
-const CHART_OPTIONS = crDialogChartOptions({
-  chartsType: 't2'
-});
+const CHART_OPTIONS = crChartOptions(void 0, 't2');
 
 const DialogQuery = memoIsShow((
   props
