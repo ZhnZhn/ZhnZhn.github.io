@@ -6,7 +6,7 @@ import {
 
 import useHasBeenOpen from '../hooks/useHasBeenOpen';
 
-import { crDialogChartOptions } from '../dialogs/ChartOptionsFn';
+import { crChartOptions } from '../dialogs/ChartOptionsFn';
 import crDateConfig from '../dialogs/fns/crDateConfig';
 
 import loadConfigs from './dimensions/loadConfigs';
@@ -121,13 +121,13 @@ const useLoadDims = (
   , [
     state,
     setState
-  ] = useState(()=>({
+  ] = useState({
      configs: [],
      selectOptions: [],
      mapFrequency,
-     chartOptions: crDialogChartOptions(props),
+     chartOptions: [],
      dateOptions: []
-  }))
+  })
   , _setConfigs = useCallback(({
       configs,
       timeId,
@@ -150,7 +150,7 @@ const useLoadDims = (
          selectOptions: _crSelectOptions(configs),
          mapFrequency: _mF,
          dimOptions: _crDimOptions(configs),
-         chartOptions: crDialogChartOptions({ configs, chartsType, mapFrequency: _mF }),
+         chartOptions: crChartOptions(configs, chartsType, _mF),
          dateOptions,
          dateDf
         })

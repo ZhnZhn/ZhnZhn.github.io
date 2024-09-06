@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.isCategoryItem = exports.crDialogChartOptions = exports.crChartOptions = void 0;
+exports.isCategoryItem = exports.crChartOptions = void 0;
 var _toPlural = _interopRequireDefault(require("../../utils/toPlural"));
 var _arrFn = require("../../utils/arrFn");
 var _CompItemType = require("../../constants/CompItemType");
@@ -109,32 +109,9 @@ const _r = {
   t3ca: _crT3CA,
   df3: _crDF3
 };
-const _crCaptions = _ref10 => {
-  let {
-    configs,
-    selectProps,
-    oneCaption = BLANK_CAPTION,
-    twoCaption = BLANK_CAPTION
-  } = _ref10;
-  const _arr = configs || selectProps;
-  return _isArr(_arr) ? _arr.map(item => item.caption || BLANK_CAPTION) : [oneCaption, twoCaption];
-};
+const _crCaptions = selectPropsOrConfigs => _isArr(selectPropsOrConfigs) ? selectPropsOrConfigs.map(item => item.caption || BLANK_CAPTION) : [BLANK_CAPTION, BLANK_CAPTION];
 const _crChartOptionsImpl = (chartsType, captions, mapFrequency, selectProps) => (_r[chartsType] || _r.DF)(captions, mapFrequency, selectProps).filter(Boolean);
-const crDialogChartOptions = function (dialogOption, _temp) {
-  let {
-    mapFrequency
-  } = _temp === void 0 ? {} : _temp;
-  const {
-    chartsType,
-    mapFrequency: mF,
-    dfProps
-  } = dialogOption;
-  return _crChartOptionsImpl(chartsType, _crCaptions(dialogOption), mapFrequency || mF || (dfProps || {}).mapFrequency, dialogOption.selectProps);
-};
-exports.crDialogChartOptions = crDialogChartOptions;
-const crChartOptions = (selectProps, chartsType, mapFrequency) => _crChartOptionsImpl(chartsType, _crCaptions({
-  selectProps
-}), mapFrequency, selectProps);
+const crChartOptions = (selectPropsOrConfigs, chartsType, mapFrequency) => _crChartOptionsImpl(chartsType, _crCaptions(selectPropsOrConfigs), mapFrequency, selectPropsOrConfigs);
 exports.crChartOptions = crChartOptions;
 const _isCategory = (0, _arrFn.isInArrStr)(CATEGORY_TYPES);
 const isCategoryItem = chartItem => !!chartItem && _isCategory(chartItem.value);

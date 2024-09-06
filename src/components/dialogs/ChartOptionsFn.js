@@ -231,17 +231,11 @@ const _r = {
   df3: _crDF3
 };
 
-const _crCaptions = ({
-  configs,
-  selectProps,
-  oneCaption=BLANK_CAPTION,
-  twoCaption=BLANK_CAPTION
-}) => {
-  const _arr = configs || selectProps;
-  return _isArr(_arr)
-    ? _arr.map(item => item.caption || BLANK_CAPTION)
-    : [ oneCaption, twoCaption ];
-};
+const _crCaptions = (
+  selectPropsOrConfigs
+) => _isArr(selectPropsOrConfigs)
+  ? selectPropsOrConfigs.map(item => item.caption || BLANK_CAPTION)
+  : [BLANK_CAPTION, BLANK_CAPTION];
 
 const _crChartOptionsImpl = (
   chartsType,
@@ -254,32 +248,16 @@ const _crChartOptionsImpl = (
   selectProps
 ).filter(Boolean);
 
-export const crDialogChartOptions = (
-  dialogOption,
-  { mapFrequency }={}
-) => {
-  const {
-    chartsType,
-    mapFrequency:mF,
-    dfProps
-  } = dialogOption;
-  return _crChartOptionsImpl(
-    chartsType,
-    _crCaptions(dialogOption),
-    mapFrequency || mF || (dfProps || {}).mapFrequency,
-    dialogOption.selectProps
-  );
-}
 
 export const crChartOptions = (
-  selectProps,
+  selectPropsOrConfigs,
   chartsType,
   mapFrequency
 ) => _crChartOptionsImpl(
   chartsType,
-  _crCaptions({ selectProps }),
+  _crCaptions(selectPropsOrConfigs),
   mapFrequency,
-  selectProps
+  selectPropsOrConfigs
 )
 
 const _isCategory = isInArrStr(CATEGORY_TYPES);

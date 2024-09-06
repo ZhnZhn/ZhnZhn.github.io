@@ -77,13 +77,13 @@ const useLoadDims = (props, setValidationMessages) => {
       isLoading,
       isLoadFailed
     }, setLoad] = (0, _uiApi.useState)(_crLoadingState),
-    [state, setState] = (0, _uiApi.useState)(() => ({
+    [state, setState] = (0, _uiApi.useState)({
       configs: [],
       selectOptions: [],
       mapFrequency,
-      chartOptions: (0, _ChartOptionsFn.crDialogChartOptions)(props),
+      chartOptions: [],
       dateOptions: []
-    })),
+    }),
     _setConfigs = (0, _uiApi.useCallback)(_ref2 => {
       let {
         configs,
@@ -104,11 +104,7 @@ const useLoadDims = (props, setValidationMessages) => {
           selectOptions: _crSelectOptions(configs),
           mapFrequency: _mF,
           dimOptions: _crDimOptions(configs),
-          chartOptions: (0, _ChartOptionsFn.crDialogChartOptions)({
-            configs,
-            chartsType,
-            mapFrequency: _mF
-          }),
+          chartOptions: (0, _ChartOptionsFn.crChartOptions)(configs, chartsType, _mF),
           dateOptions,
           dateDf
         });
