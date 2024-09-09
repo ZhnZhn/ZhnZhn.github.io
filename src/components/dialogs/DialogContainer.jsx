@@ -1,10 +1,9 @@
 import {
   bindTo,
-  useState,
-  useCallback,
-  createElement
+  useCallback
 } from '../uiApi';
 
+import useStoreState from '../hooks/useStoreState'
 import { useMdOption } from '../../flux/stores/compStore';
 
 import ModalDialogContainer from '../zhn-containers/ModalDialogContainer';
@@ -15,25 +14,47 @@ const _setTypeTo = (
   type,
   option
 ) => {
-    prevState.shows[type] = true
-    prevState.data[type] = option
-    prevState.isShow = true
-    prevState.currentDialog = type
-    return {...prevState};
+  prevState.shows[type] = true
+  prevState.data[type] = option
+  prevState.isShow = true
+  prevState.currentDialog = type
+  return {...prevState};
+};
+
+const _onMdOption = (
+  mdOption,
+  setState,
+  state
+) => {
+  if (mdOption) {
+    const type = mdOption.modalDialogType;
+    getModalDialog(state.inits[type] ? void 0 : type)
+      .then(Comp => setState(prevState => {
+         if (Comp) {
+           prevState.dialogs.push({ type, Comp })
+           prevState.inits[type] = true
+         }
+         return _setTypeTo(
+           prevState,
+           type,
+           mdOption
+         );
+      }))
+  }
 };
 
 const DialogContainer = () => {
   const [
     state,
     setState
-  ] = useState({
+  ] = useStoreState(() => ({
     isShow: false,
     inits: {},
     shows: {},
     data: {},
     dialogs: [],
     currentDialog: null
-  })
+  }), useMdOption, _onMdOption)
   , {
     isShow,
     currentDialog,
@@ -48,40 +69,20 @@ const DialogContainer = () => {
        prevState.currentDialog = null
        return {...prevState};
      })
-  }, []);
-
-  useMdOption(mdOption => {
-    if (mdOption) {
-      const type = mdOption.modalDialogType
-      , { inits } = state;
-
-      getModalDialog(inits[type] ? void 0 : type)
-        .then(comp => setState(prevState => {
-            if (comp) {
-              prevState.dialogs.push({ type, comp })
-              prevState.inits[type] = true
-            }
-            return _setTypeTo(
-              prevState,
-              type,
-              mdOption
-            );
-          })
-        )
-    }
-  })
+  }, [setState]);
 
   return (
     <ModalDialogContainer
        isShow={isShow}
        onClose={bindTo(_hClose, currentDialog)}
     >
-       {dialogs.map(({ type, comp }) => createElement(comp, {
-          key: type,
-          isShow: shows[type],
-          data: data[type],
-          onClose: bindTo(_hClose, type)
-       }))}
+      {dialogs.map(({ type, Comp }) => (<Comp
+           key={type}
+           isShow={shows[type]}
+           data={data[type]}
+           onClose={bindTo(_hClose, type)}
+        />
+      ))}
     </ModalDialogContainer>
   );
 };

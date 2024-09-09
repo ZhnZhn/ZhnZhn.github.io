@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _useStoreState = _interopRequireDefault(require("../hooks/useStoreState"));
 var _compStore = require("../../flux/stores/compStore");
 var _ModalDialogContainer = _interopRequireDefault(require("../zhn-containers/ModalDialogContainer"));
 var _RouterModalDialog = require("./RouterModalDialog");
@@ -17,15 +18,30 @@ const _setTypeTo = (prevState, type, option) => {
     ...prevState
   };
 };
+const _onMdOption = (mdOption, setState, state) => {
+  if (mdOption) {
+    const type = mdOption.modalDialogType;
+    (0, _RouterModalDialog.getModalDialog)(state.inits[type] ? void 0 : type).then(Comp => setState(prevState => {
+      if (Comp) {
+        prevState.dialogs.push({
+          type,
+          Comp
+        });
+        prevState.inits[type] = true;
+      }
+      return _setTypeTo(prevState, type, mdOption);
+    }));
+  }
+};
 const DialogContainer = () => {
-  const [state, setState] = (0, _uiApi.useState)({
+  const [state, setState] = (0, _useStoreState.default)(() => ({
       isShow: false,
       inits: {},
       shows: {},
       data: {},
       dialogs: [],
       currentDialog: null
-    }),
+    }), _compStore.useMdOption, _onMdOption),
     {
       isShow,
       currentDialog,
@@ -42,39 +58,20 @@ const DialogContainer = () => {
           ...prevState
         };
       });
-    }, []);
-  (0, _compStore.useMdOption)(mdOption => {
-    if (mdOption) {
-      const type = mdOption.modalDialogType,
-        {
-          inits
-        } = state;
-      (0, _RouterModalDialog.getModalDialog)(inits[type] ? void 0 : type).then(comp => setState(prevState => {
-        if (comp) {
-          prevState.dialogs.push({
-            type,
-            comp
-          });
-          prevState.inits[type] = true;
-        }
-        return _setTypeTo(prevState, type, mdOption);
-      }));
-    }
-  });
+    }, [setState]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialogContainer.default, {
     isShow: isShow,
     onClose: (0, _uiApi.bindTo)(_hClose, currentDialog),
     children: dialogs.map(_ref => {
       let {
         type,
-        comp
+        Comp
       } = _ref;
-      return (0, _uiApi.createElement)(comp, {
-        key: type,
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
         isShow: shows[type],
         data: data[type],
         onClose: (0, _uiApi.bindTo)(_hClose, type)
-      });
+      }, type);
     })
   });
 };
