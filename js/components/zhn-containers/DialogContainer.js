@@ -15,50 +15,12 @@ const S_ROOT = {
   top: 70,
   left: 10
 };
-const fUpdateState = maxDialog => (msShowDialog, setState) => {
-  if (msShowDialog) {
-    setState(prevState => {
-      const {
-          key,
-          Comp,
-          data
-        } = msShowDialog,
-        {
-          compDialogs
-        } = prevState;
-      if (Comp && (0, _DialogContainerFn.findCompIndex)(compDialogs, key) > -1) {
-        return prevState;
-      }
-      (0, _DialogContainerFn.updateVisible)(prevState.hmIs, prevState.visibleDialogs, key, maxDialog);
-      if (!Comp) {
-        prevState.compDialogs = (0, _DialogContainerFn.doVisible)(compDialogs, key);
-      } else {
-        compDialogs.push(Comp);
-      }
-      prevState.hmData[key] = data;
-      return {
-        ...prevState
-      };
-    });
-  }
-};
-const DialogContainer = _ref => {
+const fUpdateState = maxDialog => (msShowDialog, setState, _ref) => {
   let {
-    maxDialog = 3
+    hmIs,
+    compDialogs
   } = _ref;
-  const _upateState = (0, _useRefInit.default)(() => fUpdateState(maxDialog)),
-    [state, setState] = (0, _useStoreState.default)({
-      hmIs: {},
-      hmData: {},
-      compDialogs: [],
-      visibleDialogs: []
-    }, _compStore.useMsShowDialog, _upateState),
-    {
-      hmIs,
-      hmData,
-      compDialogs
-    } = state,
-    _hToTopLayer = key => {
+  const _hToTopLayer = key => {
       setState(prevState => {
         const visibleDialogs = prevState.visibleDialogs;
         if (visibleDialogs[visibleDialogs.length - 1] !== key) {
@@ -93,6 +55,55 @@ const DialogContainer = _ref => {
         };
       });
     };
+  if (msShowDialog) {
+    setState(prevState => {
+      const {
+          key,
+          Comp,
+          data
+        } = msShowDialog,
+        {
+          compDialogs
+        } = prevState;
+      if (Comp && (0, _DialogContainerFn.findCompIndex)(compDialogs, key) > -1) {
+        return prevState;
+      }
+      (0, _DialogContainerFn.updateVisible)(prevState.hmIs, prevState.visibleDialogs, key, maxDialog);
+      if (!Comp) {
+        prevState.compDialogs = (0, _DialogContainerFn.doVisible)(compDialogs, key);
+      } else {
+        compDialogs.push(Comp);
+      }
+      if (!prevState.compProps[key]) {
+        prevState.compProps[key] = {
+          toTopLayer: () => _hToTopLayer(key),
+          onClose: () => _hToggleDialog(key)
+        };
+      }
+      prevState.hmData[key] = data;
+      return {
+        ...prevState
+      };
+    });
+  }
+};
+const DialogContainer = _ref2 => {
+  let {
+    maxDialog = 3
+  } = _ref2;
+  const _upateState = (0, _useRefInit.default)(() => fUpdateState(maxDialog)),
+    {
+      hmIs,
+      hmData,
+      compProps,
+      compDialogs
+    } = (0, _useStoreState.default)(() => ({
+      hmIs: {},
+      hmData: {},
+      compProps: {},
+      compDialogs: [],
+      visibleDialogs: []
+    }), _compStore.useMsShowDialog, _upateState)[0];
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     style: S_ROOT,
     children: (0, _uiApi.safeMap)(compDialogs, Comp => {
@@ -100,8 +111,7 @@ const DialogContainer = _ref => {
       return (0, _uiApi.cloneElement)(Comp, {
         isShow: hmIs[key],
         optionData: hmData[key],
-        toTopLayer: () => _hToTopLayer(key),
-        onClose: () => _hToggleDialog(key)
+        ...compProps[key]
       });
     })
   });
