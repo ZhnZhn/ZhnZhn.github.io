@@ -5,7 +5,9 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useValidationMessages = _interopRequireDefault(require("./hooks/useValidationMessages"));
-var _Atoms = _interopRequireDefault(require("./Atoms"));
+var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
+var _RowInputText = _interopRequireDefault(require("./RowInputText"));
+var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -42,12 +44,12 @@ const GroupAddPane = props => {
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowInputText, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputText.default, {
       refEl: refInput,
       caption: "Group:"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.ValidationMessages, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationMessages.default, {
       validationMessages: validationMessages
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Atoms.default.RowButtons, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowButtons.default, {
       refBtClose: (0, _paneFn.getRefFocusLast)(props),
       caption: "Create",
       title: "Create New Group",

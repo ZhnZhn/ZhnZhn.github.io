@@ -8,7 +8,11 @@ import useSelectItem from './hooks/useSelectItem';
 import useValidationMessages from './hooks/useValidationMessages';
 import useGroupOptions from './hooks/useGroupOptions';
 
-import A from './Atoms';
+import ValidationMessages from '../zhn/ValidationMessages';
+import RowInputSelect from './RowInputSelect';
+import RowInputText from './RowInputText';
+import RowButtons from './RowButtons';
+
 import { getRefFocusLast } from './paneFn';
 
 const GroupEditPane = (props) => {
@@ -52,19 +56,19 @@ const GroupEditPane = (props) => {
 
   return (
     <div>
-       <A.RowInputSelect
+       <RowInputSelect
           caption="Group From:"
           options={groupOptions}
           onSelect={_hSelectGroup}
        />
-      <A.RowInputText
+       <RowInputText
          refEl={_refInputText}
          caption="Group To:"
-      />
-      <A.ValidationMessages
+       />
+       <ValidationMessages
          validationMessages={validationMessages}
-      />
-      <A.RowButtons
+       />
+       <RowButtons
          refBtClose={getRefFocusLast(props)}
          caption="Edit"
          title="Edit Group Name"

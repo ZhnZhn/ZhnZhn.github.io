@@ -7,7 +7,11 @@ import {
 import useValidationMessages from './hooks/useValidationMessages';
 import useGroupOptions from './hooks/useGroupOptions';
 
-import A from './Atoms';
+import ValidationMessages from '../zhn/ValidationMessages';
+import SelectGroupList from './SelectGroupList';
+import RowInputText from './RowInputText';
+import RowButtons from './RowButtons';
+
 import { getRefFocusLast } from './paneFn';
 
 const ListEditPane = (props) => {
@@ -54,21 +58,21 @@ const ListEditPane = (props) => {
 
   return (
     <div>
-       <A.SelectGroupList
+       <SelectGroupList
           refEl={_refSelectGroupList}
           getWatchListsByGroup={getWatchListsByGroup}
           groupCaption="In Group:"
           groupOptions={groupOptions}
           listCaption="List From:"
        />
-       <A.RowInputText
+       <RowInputText
           refEl={_refInputText}
           caption="List To:"
        />
-       <A.ValidationMessages
+       <ValidationMessages
           validationMessages={validationMessages}
        />
-       <A.RowButtons
+       <RowButtons
           refBtClose={getRefFocusLast(props)}
           caption="Edit"
           title="Edit List Name"

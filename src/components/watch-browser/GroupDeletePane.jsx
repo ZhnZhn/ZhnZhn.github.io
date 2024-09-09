@@ -6,7 +6,10 @@ import {
   getRefValue
 } from '../uiApi';
 
-import A from './Atoms';
+import ValidationMessages from '../zhn/ValidationMessages';
+import RowInputSelect from './RowInputSelect';
+import RowButtons from './RowButtons';
+
 import { getRefFocusLast } from './paneFn';
 
 const UPDATE = 'a'
@@ -102,15 +105,15 @@ const GroupDeletePane = (props) => {
 
   return (
     <div>
-      <A.RowInputSelect
+      <RowInputSelect
         caption="Group:"
         options={groups}
         onSelect={_hSelectGroup}
       />
-      <A.ValidationMessages
+      <ValidationMessages
         validationMessages={errs}
       />
-      <A.RowButtons
+      <RowButtons
         refBtClose={getRefFocusLast(props)}
         caption="Delete"
         title="Delete Group"

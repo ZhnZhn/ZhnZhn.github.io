@@ -6,7 +6,10 @@ import {
 
 import useValidationMessages from './hooks/useValidationMessages';
 
-import A from './Atoms';
+import ValidationMessages from '../zhn/ValidationMessages';
+import RowInputText from './RowInputText';
+import RowButtons from './RowButtons';
+
 import { getRefFocusLast } from './paneFn';
 
 const GroupAddPane = (props) => {
@@ -47,14 +50,14 @@ const GroupAddPane = (props) => {
 
   return (
     <div>
-      <A.RowInputText
+       <RowInputText
          refEl={refInput}
          caption="Group:"
-      />
-      <A.ValidationMessages
+       />
+       <ValidationMessages
          validationMessages={validationMessages}
        />
-       <A.RowButtons
+       <RowButtons
           refBtClose={getRefFocusLast(props)}
           caption="Create"
           title="Create New Group"
