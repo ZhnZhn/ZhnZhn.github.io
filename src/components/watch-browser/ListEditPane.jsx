@@ -7,10 +7,9 @@ import {
 import useValidationMessages from './hooks/useValidationMessages';
 import useGroupOptions from './hooks/useGroupOptions';
 
-import ValidationMessages from '../zhn/ValidationMessages';
+import WatchPane from './WatchPane';
 import SelectGroupList from './SelectGroupList';
 import RowInputText from './RowInputText';
-import RowButtons from './RowButtons';
 
 import { getRefFocusLast } from './paneFn';
 
@@ -57,30 +56,27 @@ const ListEditPane = (props) => {
   };
 
   return (
-    <div>
+    <WatchPane
+      validationMessages={validationMessages}
+      refBtClose={getRefFocusLast(props)}
+      caption="Edit"
+      title="Edit List Name"
+      onPrimary={_hRename}
+      onClear={_hClear}
+      onClose={onClose}
+    >
        <SelectGroupList
           refEl={_refSelectGroupList}
           getWatchListsByGroup={getWatchListsByGroup}
-          groupCaption="In Group:"
+          groupCaption="In Group"
           groupOptions={groupOptions}
-          listCaption="List From:"
+          listCaption="List From"
        />
        <RowInputText
           refEl={_refInputText}
-          caption="List To:"
+          caption="List To"
        />
-       <ValidationMessages
-          validationMessages={validationMessages}
-       />
-       <RowButtons
-          refBtClose={getRefFocusLast(props)}
-          caption="Edit"
-          title="Edit List Name"
-          onPrimary={_hRename}
-          onClear={_hClear}
-          onClose={onClose}
-       />
-    </div>
+    </WatchPane>
   );
 }
 

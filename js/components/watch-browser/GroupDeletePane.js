@@ -4,9 +4,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
+var _WatchPane = _interopRequireDefault(require("./WatchPane"));
 var _RowInputSelect = _interopRequireDefault(require("./RowInputSelect"));
-var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -77,21 +76,19 @@ const GroupDeletePane = props => {
       updateGroups(getWatchGroups());
     }
   });
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
-      caption: "Group:",
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_WatchPane.default, {
+    validationMessages: errs,
+    refBtClose: (0, _paneFn.getRefFocusLast)(props),
+    caption: "Delete",
+    title: "Delete Group",
+    onPrimary: _hDeleteGroup,
+    withoutClear: true,
+    onClose: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
+      caption: "Group",
       options: groups,
       onSelect: _hSelectGroup
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationMessages.default, {
-      validationMessages: errs
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowButtons.default, {
-      refBtClose: (0, _paneFn.getRefFocusLast)(props),
-      caption: "Delete",
-      title: "Delete Group",
-      onPrimary: _hDeleteGroup,
-      withoutClear: true,
-      onClose: onClose
-    })]
+    })
   });
 };
 

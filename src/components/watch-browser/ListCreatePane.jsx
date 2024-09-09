@@ -8,10 +8,9 @@ import useSelectItem from './hooks/useSelectItem';
 import useValidationMessages from './hooks/useValidationMessages';
 import useGroupOptions from './hooks/useGroupOptions';
 
-import ValidationMessages from '../zhn/ValidationMessages';
+import WatchPane from './WatchPane';
 import RowInputSelect from './RowInputSelect';
 import RowInputText from './RowInputText';
-import RowButtons from './RowButtons';
 
 import { getRefFocusLast } from './paneFn';
 
@@ -52,28 +51,25 @@ const ListCreatePane = (props) => {
   };
 
   return (
-    <div>
+    <WatchPane
+      validationMessages={validationMessages}
+      refBtClose={getRefFocusLast(props)}
+      caption="Create"
+      title="Create New List"
+      onPrimary={_hCreate}
+      onClear={_hClear}
+      onClose={onClose}
+    >
       <RowInputSelect
-         caption="In Group:"
+         caption="In Group"
          options={groupOptions}
          onSelect={_hSelectGroup}
       />
       <RowInputText
          refEl={_refInputText}
-         caption="List:"
+         caption="List"
       />
-      <ValidationMessages
-         validationMessages={validationMessages}
-      />
-      <RowButtons
-         refBtClose={getRefFocusLast(props)}
-         caption="Create"
-         title="Create New List"
-         onPrimary={_hCreate}
-         onClear={_hClear}
-         onClose={onClose}
-      />
-    </div>
+    </WatchPane>
   );
 }
 

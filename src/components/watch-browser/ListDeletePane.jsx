@@ -7,9 +7,8 @@ import {
 
 import useValidationMessages from './hooks/useValidationMessages';
 
-import ValidationMessages from '../zhn/ValidationMessages';
+import WatchPane from './WatchPane';
 import SelectGroupList from './SelectGroupList';
-import RowButtons from './RowButtons';
 
 import { getRefFocusLast } from './paneFn';
 
@@ -61,26 +60,23 @@ const ListDeletePane = (props) => {
   })
 
   return (
-    <div>
+    <WatchPane
+      validationMessages={validationMessages}
+      refBtClose={getRefFocusLast(props)}
+      caption="Delete"
+      title="Delete List"
+      onPrimary={_hDelete}
+      onClear={_hClear}
+      onClose={onClose}
+    >
        <SelectGroupList
           refEl={_refSelectGroupList}
           getWatchListsByGroup={getWatchListsByGroup}
-          groupCaption="In Group:"
+          groupCaption="In Group"
           groupOptions={groupOptions}
-          listCaption="List:"
+          listCaption="List"
        />
-       <ValidationMessages
-          validationMessages={validationMessages}
-       />
-       <RowButtons
-          refBtClose={getRefFocusLast(props)}
-          caption="Delete"
-          title="Delete List"
-          onPrimary={_hDelete}
-          onClear={_hClear}
-          onClose={onClose}
-       />
-    </div>
+    </WatchPane>
   );
 };
 

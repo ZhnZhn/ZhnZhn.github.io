@@ -6,9 +6,8 @@ import {
   getRefValue
 } from '../uiApi';
 
-import ValidationMessages from '../zhn/ValidationMessages';
+import WatchPane from './WatchPane';
 import RowInputSelect from './RowInputSelect';
-import RowButtons from './RowButtons';
 
 import { getRefFocusLast } from './paneFn';
 
@@ -104,24 +103,21 @@ const GroupDeletePane = (props) => {
   })
 
   return (
-    <div>
+    <WatchPane
+      validationMessages={errs}
+      refBtClose={getRefFocusLast(props)}
+      caption="Delete"
+      title="Delete Group"
+      onPrimary={_hDeleteGroup}
+      withoutClear={true}
+      onClose={onClose}
+    >
       <RowInputSelect
-        caption="Group:"
+        caption="Group"
         options={groups}
         onSelect={_hSelectGroup}
       />
-      <ValidationMessages
-        validationMessages={errs}
-      />
-      <RowButtons
-        refBtClose={getRefFocusLast(props)}
-        caption="Delete"
-        title="Delete Group"
-        onPrimary={_hDeleteGroup}
-        withoutClear={true}
-        onClose={onClose}
-      />
-   </div>
+   </WatchPane>
   );
 }
 

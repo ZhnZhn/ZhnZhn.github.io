@@ -5,9 +5,8 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useValidationMessages = _interopRequireDefault(require("./hooks/useValidationMessages"));
-var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
+var _WatchPane = _interopRequireDefault(require("./WatchPane"));
 var _SelectGroupList = _interopRequireDefault(require("./SelectGroupList"));
-var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -57,23 +56,21 @@ const ListDeletePane = props => {
       }
     }
   });
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectGroupList.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_WatchPane.default, {
+    validationMessages: validationMessages,
+    refBtClose: (0, _paneFn.getRefFocusLast)(props),
+    caption: "Delete",
+    title: "Delete List",
+    onPrimary: _hDelete,
+    onClear: _hClear,
+    onClose: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectGroupList.default, {
       refEl: _refSelectGroupList,
       getWatchListsByGroup: getWatchListsByGroup,
-      groupCaption: "In Group:",
+      groupCaption: "In Group",
       groupOptions: groupOptions,
-      listCaption: "List:"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationMessages.default, {
-      validationMessages: validationMessages
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowButtons.default, {
-      refBtClose: (0, _paneFn.getRefFocusLast)(props),
-      caption: "Delete",
-      title: "Delete List",
-      onPrimary: _hDelete,
-      onClear: _hClear,
-      onClose: onClose
-    })]
+      listCaption: "List"
+    })
   });
 };
 

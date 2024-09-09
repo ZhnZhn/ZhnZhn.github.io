@@ -1,0 +1,31 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/watch-browser/WatchPane.js"
+ ],
+ "file": "../../../src/components/watch-browser/WatchPane.js",
+ "names": [
+  "_ValidationMessages",
+  "_interopRequireDefault",
+  "require",
+  "_RowButtons",
+  "_jsxRuntime",
+  "WatchPane",
+  "_ref",
+  "validationMessages",
+  "refBtClose",
+  "caption",
+  "title",
+  "onPrimary",
+  "withoutClear",
+  "onClear",
+  "onClose",
+  "children",
+  "jsxs",
+  "jsx",
+  "default",
+  "_default",
+  "exports"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,mBAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,WAAA,GAAAF,sBAAA,CAAAC,OAAA;AAAsC,IAAAE,WAAA,GAAAF,OAAA;AAEtC,MAAMG,SAAS,GAAGC,IAAA;EAAA,IAAC;IACjBC,kBAAkB;IAClBC,UAAU;IACVC,OAAO;IACPC,KAAK;IACLC,SAAS;IACTC,YAAY;IACZC,OAAO;IACPC,OAAO;IACPC;EACF,CAAC,GAAAT,IAAA;EAAA,oBACC,IAAAF,WAAA,CAAAY,IAAA;IAAAD,QAAA,GACGA,QAAQ,eACT,IAAAX,WAAA,CAAAa,GAAA,EAACjB,mBAAA,CAAAkB,OAAkB;MACjBX,kBAAkB,EAAEA;IAAmB,CACxC,CAAC,eACF,IAAAH,WAAA,CAAAa,GAAA,EAACd,WAAA,CAAAe,OAAU;MACRV,UAAU,EAAEA,UAAW;MACvBC,OAAO,EAAEA,OAAQ;MACjBC,KAAK,EAAEA,KAAM;MACbC,SAAS,EAAEA,SAAU;MACrBC,YAAY,EAAEA,YAAa;MAC3BC,OAAO,EAAEA,OAAQ;MACjBC,OAAO,EAAEA;IAAQ,CACnB,CAAC;EAAA,CACC,CAAC;AAAA,CACP;AAAC,IAAAK,QAAA,GAAAC,OAAA,CAAAF,OAAA,GAEab,SAAS"
+}

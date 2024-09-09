@@ -7,10 +7,9 @@ var _uiApi = require("../uiApi");
 var _useSelectItem = _interopRequireDefault(require("./hooks/useSelectItem"));
 var _useValidationMessages = _interopRequireDefault(require("./hooks/useValidationMessages"));
 var _useGroupOptions = _interopRequireDefault(require("./hooks/useGroupOptions"));
-var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
+var _WatchPane = _interopRequireDefault(require("./WatchPane"));
 var _RowInputSelect = _interopRequireDefault(require("./RowInputSelect"));
 var _RowInputText = _interopRequireDefault(require("./RowInputText"));
-var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 var _paneFn = require("./paneFn");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -44,23 +43,21 @@ const GroupEditPane = props => {
         setValidationMessages(msg);
       }
     };
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_WatchPane.default, {
+    validationMessages: validationMessages,
+    refBtClose: (0, _paneFn.getRefFocusLast)(props),
+    caption: "Edit",
+    title: "Edit Group Name",
+    onPrimary: _hRename,
+    onClear: _hClear,
+    onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
-      caption: "Group From:",
+      caption: "Group From",
       options: groupOptions,
       onSelect: _hSelectGroup
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputText.default, {
       refEl: _refInputText,
-      caption: "Group To:"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationMessages.default, {
-      validationMessages: validationMessages
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowButtons.default, {
-      refBtClose: (0, _paneFn.getRefFocusLast)(props),
-      caption: "Edit",
-      title: "Edit Group Name",
-      onPrimary: _hRename,
-      onClear: _hClear,
-      onClose: onClose
+      caption: "Group To"
     })]
   });
 };

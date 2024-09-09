@@ -6,9 +6,8 @@ import {
 
 import useValidationMessages from './hooks/useValidationMessages';
 
-import ValidationMessages from '../zhn/ValidationMessages';
+import WatchPane from './WatchPane';
 import RowInputText from './RowInputText';
-import RowButtons from './RowButtons';
 
 import { getRefFocusLast } from './paneFn';
 
@@ -49,23 +48,20 @@ const GroupAddPane = (props) => {
   })
 
   return (
-    <div>
-       <RowInputText
-         refEl={refInput}
-         caption="Group:"
-       />
-       <ValidationMessages
-         validationMessages={validationMessages}
-       />
-       <RowButtons
-          refBtClose={getRefFocusLast(props)}
-          caption="Create"
-          title="Create New Group"
-          onPrimary={_hCreate}
-          onClear={clearInput}
-          onClose={onClose}
-       />
-    </div>
+    <WatchPane
+      validationMessages={validationMessages}
+      refBtClose={getRefFocusLast(props)}
+      caption="Create"
+      title="Create New Group"
+      onPrimary={_hCreate}
+      onClear={clearInput}
+      onClose={onClose}
+    >
+      <RowInputText
+        refEl={refInput}
+        caption="Group"
+      />
+    </WatchPane>
   );
 }
 
