@@ -24,7 +24,7 @@ import {
 } from '../../constants/MsgWatch';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import Button from './Button';
+import FlatButton from '../zhn-m/FlatButton';
 import ValidationMessages from '../zhn/ValidationMessages';
 import D from '../dialogs/DialogCell';
 
@@ -124,7 +124,7 @@ const AddToWatchDialog = memoIsShow(({
     }
   }
   , _commandButtons = [
-     <Button.Flat
+     <FlatButton
        key="add"
        caption="Add"
        title="Add Item To Watch List"

@@ -11,7 +11,7 @@ var _WatchActions = require("../../flux/actions/WatchActions");
 var _watchListStore = require("../../flux/watch-list/watchListStore");
 var _MsgWatch = require("../../constants/MsgWatch");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
-var _Button = _interopRequireDefault(require("./Button"));
+var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -101,7 +101,7 @@ const AddToWatchDialog = (0, _memoIsShow.default)(_ref => {
         setValidationMessages(_vms);
       }
     },
-    _commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default.Flat, {
+    _commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "Add",
       title: "Add Item To Watch List",
       isPrimary: true,

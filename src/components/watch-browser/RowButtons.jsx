@@ -1,5 +1,5 @@
 import { RowFlexEnd } from '../dialogs/rows/RowFlex';
-import Button from './Button';
+import FlatButton from '../zhn-m/FlatButton';
 
 const RowButtons = ({
   refBtClose,
@@ -11,18 +11,21 @@ const RowButtons = ({
   onClose
 }) => (
   <RowFlexEnd>
-    <Button.Primary
-      caption={caption}
-      title={title}
-      onClick={onPrimary}
+    <FlatButton
+       isPrimary={true}
+       caption={caption}
+       title={title}
+       onClick={onPrimary}
     />
-    {!withoutClear &&
-      <Button.Clear
-         onClick={onClear}
-      />
-    }
-    <Button.Close
+    {!withoutClear && <FlatButton
+       caption="Clear"
+       title="Clear Input"
+       onClick={onClear}
+    />}
+    <FlatButton
        refBt={refBtClose}
+       caption="Close"
+       title="Close Dialog"
        onClick={onClose}
     />
   </RowFlexEnd>
