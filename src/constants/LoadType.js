@@ -55,6 +55,8 @@ export const LT_HT = 'HT'
 export const LT_WL = 'WL'
 export const LT_WATCH_LIST = 'WL_WATCH_LIST'
 
-export const isEstat = loadId => loadId === LT_EU_STAT
-export const isEmber = loadId => loadId === LT_EMB
-export const isEia = loadId => loadId === LT_EIA
+const _fIsLoadId = LOAD_ID => loadId => loadId === LOAD_ID
+export const isEstat = _fIsLoadId(LT_EU_STAT)
+export const isEmber = _fIsLoadId(LT_EMB)
+export const isEia = _fIsLoadId(LT_EIA)
+export const isEcb = _fIsLoadId(LT_ECB)
