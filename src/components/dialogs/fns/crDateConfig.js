@@ -1,7 +1,8 @@
 import {
   isEstat,
   isEmber,
-  isEia
+  isEia,
+  isEcb
 } from '../../../constants/LoadType';
 
 const YEAR_MAX = 12
@@ -64,13 +65,19 @@ const _addYearMonthsTo = (
 	}
 };
 
+const _isMonthDelimeterDash = (
+  loadId
+) => isEstat(loadId)
+ || isEmber(loadId)
+ || isEia(loadId)
+ || isEcb(loadId);
 const _crYearMonthConfig = (
   loadId,
   mapDateDf=2
 ) => {
 	const dateOptions = []
   , y = (new Date()).getUTCFullYear()
-  , _delimeter = isEstat(loadId) || isEmber(loadId) || isEia(loadId)
+  , _delimeter = _isMonthDelimeterDash(loadId)
       ? '-'
       : 'M';
   for(let i=0; i<M_YEAR_MAX; i++){

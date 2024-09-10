@@ -38,22 +38,23 @@ const _addYearMonthsTo = (dateOptions, y, delimeter) => {
     m = m - 1;
     if (m > -1) {
       _m = m + 1 > 9 ? m + 1 : '0' + (m + 1);
-      _caption = "" + y + delimeter + _m;
+      _caption = `${y}${delimeter}${_m}`;
     } else {
       m = 11;
       y = y - 1;
-      _caption = "" + y + delimeter + "12";
+      _caption = `${y}${delimeter}12`;
     }
     dateOptions.push(_crDateOption(_caption));
   }
 };
+const _isMonthDelimeterDash = loadId => (0, _LoadType.isEstat)(loadId) || (0, _LoadType.isEmber)(loadId) || (0, _LoadType.isEia)(loadId) || (0, _LoadType.isEcb)(loadId);
 const _crYearMonthConfig = function (loadId, mapDateDf) {
   if (mapDateDf === void 0) {
     mapDateDf = 2;
   }
   const dateOptions = [],
     y = new Date().getUTCFullYear(),
-    _delimeter = (0, _LoadType.isEstat)(loadId) || (0, _LoadType.isEmber)(loadId) || (0, _LoadType.isEia)(loadId) ? '-' : 'M';
+    _delimeter = _isMonthDelimeterDash(loadId) ? '-' : 'M';
   for (let i = 0; i < M_YEAR_MAX; i++) {
     _addYearMonthsTo(dateOptions, y - i, _delimeter);
   }
@@ -68,7 +69,7 @@ const _addYearQuartesTo = (dateOptions, y, delimeter) => {
       y = y - 1;
       qNow = 4;
     }
-    dateOptions.push(_crDateOption("" + y + delimeter + qNow));
+    dateOptions.push(_crDateOption(`${y}${delimeter}${qNow}`));
     qNow = qNow - 1;
   }
 };
@@ -92,7 +93,7 @@ const _crYearBiAnnualConfig = function (loadId, mapDateDf) {
     _delimeter = (0, _LoadType.isEstat)(loadId) ? '-S' : 'S',
     fromYear = new Date().getUTCFullYear();
   _loopFn(y => {
-    dateOptions.push(_crDateOption("" + y + _delimeter + "2"), _crDateOption("" + y + _delimeter + "1"));
+    dateOptions.push(_crDateOption(`${y}${_delimeter}2`), _crDateOption(`${y}${_delimeter}1`));
   }, fromYear, BI_YEAR_MAX);
   return _crDateConfig(dateOptions, mapDateDf);
 };
