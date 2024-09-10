@@ -3,15 +3,23 @@ import {
   getObjectKeys,
   joinBy
 } from '../AdapterFn';
+import {
+  isCategory
+} from '../CategoryFn';
 
 export const ECB_EUROPA_EU = "ecb.europa.eu"
 
+export const getSeries = (
+  json
+) => ((((json || {}).dataSets || [])[0] || {}).series || {}) || {}
+
 export const getSeriesObservertions = json => {
- const _series = ((((json || {}).dataSets || [])[0] || {}).series || {}) || {}
+ const _series = getSeries(json)
  return (_series[getObjectKeys(_series)[0]] || {}).observations;
 }
 
-export const getObservationValues = json => (((((json || {}).structure || {}).dimensions || {}).observation || [])[0] || {}).values
+export const getDimensions = json => ((json || {}).structure || {}).dimensions || {}
+export const getObservationValues = json => (((getDimensions(json)).observation || [])[0] || {}).values
 
 const _crItemDf = items => {
   const _v0 = getValue(items[0]);
@@ -19,6 +27,10 @@ const _crItemDf = items => {
     ? `${getValue(items[1])}.${_v0}`
     : _v0;
 }
+, _crItem12 = (
+  items,
+  seriaType
+) => `${isCategory(seriaType) ? "" : getValue(items[0])}.${getValue(items[1])}`
 , _crItem312 = (
   items
 ) => joinBy(".",
@@ -28,6 +40,7 @@ const _crItemDf = items => {
 )
 , _hmCrItem = {
   df: _crItemDf,
+  s12: _crItem12,
   s312: _crItem312
 };
 
@@ -36,6 +49,6 @@ export const crItemId = option => {
   , _crItemId = (dfFnUrl && _hmCrItem[dfFnUrl]) || _hmCrItem.df;
   return joinBy(".",
     option.dfPrefix,
-    _crItemId(option.items)
+    _crItemId(option.items, option.seriaType)
   );
 }
