@@ -11,11 +11,5 @@
   width: 100%; 
   padding: 0 42px 4px 0;
   margin-top: -2px; 
-  border-radius: 0 4px 4px 0;  
-}
-
-.item-time {  
-  color: #fdb316;
-  padding-left: 16px;
-  font-weight: bold;
+  border-radius: 0 4px 4px 0;   
 }

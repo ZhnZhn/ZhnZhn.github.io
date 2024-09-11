@@ -18,4 +18,5 @@
 .sp-date {
   color: #fdb316;
   display: inline-block;
+  white-space: nowrap;
 }
