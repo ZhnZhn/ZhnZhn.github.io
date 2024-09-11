@@ -1,0 +1,25 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/getByPropsFrom.js"
+ ],
+ "file": "../../src/utils/getByPropsFrom.js",
+ "names": [
+  "_isTypeFn",
+  "require",
+  "getByPropsFrom",
+  "obj",
+  "_len",
+  "arguments",
+  "length",
+  "props",
+  "Array",
+  "_key",
+  "reduce",
+  "nextObj",
+  "propName",
+  "isStr",
+  "exports"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,SAAA,GAAAC,OAAA;AAEO,MAAMC,cAAc,GAAG,SAAAA,CAC5BC,GAAG;EAAA,SAAAC,IAAA,GAAAC,SAAA,CAAAC,MAAA,EACAC,KAAK,OAAAC,KAAA,CAAAJ,IAAA,OAAAA,IAAA,WAAAK,IAAA,MAAAA,IAAA,GAAAL,IAAA,EAAAK,IAAA;IAALF,KAAK,CAAAE,IAAA,QAAAJ,SAAA,CAAAI,IAAA;EAAA;EAAA,OACL,CAACF,KAAK,IAAI,EAAE,EACfG,MAAM,CAAC,CACNC,OAAO,EACPC,QAAQ,KACL,CAACD,OAAO,KAAK,IAAAE,eAAK,EAACD,QAAQ,CAAC,GAAG,CAAC,CAAC,GAAG,EAAE,CAAC,EAAEA,QAAQ,CAAC,EAAET,GAAG,CAAC;AAAA;AAAAW,OAAA,CAAAZ,cAAA,GAAAA,cAAA"
+}
