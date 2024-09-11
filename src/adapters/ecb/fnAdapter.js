@@ -1,6 +1,7 @@
 import {
   getValue,
   getObjectKeys,
+  getByPropsFrom,
   joinBy
 } from '../AdapterFn';
 import {
@@ -11,15 +12,19 @@ export const ECB_EUROPA_EU = "ecb.europa.eu"
 
 export const getSeries = (
   json
-) => ((((json || {}).dataSets || [])[0] || {}).series || {}) || {}
+) => getByPropsFrom(json, "dataSets", 0, "series")
 
 export const getSeriesObservertions = json => {
- const _series = getSeries(json)
+ const _series = getSeries(json);
  return (_series[getObjectKeys(_series)[0]] || {}).observations;
 }
 
-export const getDimensions = json => ((json || {}).structure || {}).dimensions || {}
-export const getObservationValues = json => (((getDimensions(json)).observation || [])[0] || {}).values
+export const getDimensions = (
+  json
+) => getByPropsFrom(json, "structure", "dimensions")
+export const getObservationValues = (
+  json
+) => getByPropsFrom(getDimensions(json), "observation", 0, "values")
 
 const _crItemDf = items => {
   const _v0 = getValue(items[0]);

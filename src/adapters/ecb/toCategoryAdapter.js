@@ -1,5 +1,9 @@
 import crAdapterCategory from '../crAdapterCategory';
-import { getObjectKeys, isStr } from '../AdapterFn';
+import {
+  isStr,
+  getObjectKeys,
+  getByPropsFrom
+} from '../AdapterFn';
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
 import {
@@ -12,12 +16,17 @@ const crDate = (
   json,
   option
 ) => {
-  const _categoryIndex = findCategoryIndex(option)
-   , _seriesValues = (((getDimensions(json)).series || [])[_categoryIndex] || {}).values || []
+  const  _seriesValues = getByPropsFrom(getDimensions(json),
+     "series",
+     findCategoryIndex(option),
+     "values"
+   ) || []
   , _series = getSeries(json);
   return sortDescCategory(getObjectKeys(_series)
     .reduce((data, key, index) => {
-       const _value =  ((((_series[key] || {}).observations) || {})["0"] || [])[0]
+       const _value = getByPropsFrom(_series[key],
+         "observations", "0", 0
+       )
        , _categoryName = (_seriesValues[index] || {}).name;
        if (_value !== null && isStr(_categoryName)) {
          data.push(crCategoryPoint(

@@ -5,16 +5,16 @@ exports.getSeriesObservertions = exports.getSeries = exports.getObservationValue
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 const ECB_EUROPA_EU = exports.ECB_EUROPA_EU = "ecb.europa.eu";
-const getSeries = json => (((json || {}).dataSets || [])[0] || {}).series || {} || {};
+const getSeries = json => (0, _AdapterFn.getByPropsFrom)(json, "dataSets", 0, "series");
 exports.getSeries = getSeries;
 const getSeriesObservertions = json => {
   const _series = getSeries(json);
   return (_series[(0, _AdapterFn.getObjectKeys)(_series)[0]] || {}).observations;
 };
 exports.getSeriesObservertions = getSeriesObservertions;
-const getDimensions = json => ((json || {}).structure || {}).dimensions || {};
+const getDimensions = json => (0, _AdapterFn.getByPropsFrom)(json, "structure", "dimensions");
 exports.getDimensions = getDimensions;
-const getObservationValues = json => ((getDimensions(json).observation || [])[0] || {}).values;
+const getObservationValues = json => (0, _AdapterFn.getByPropsFrom)(getDimensions(json), "observation", 0, "values");
 exports.getObservationValues = getObservationValues;
 const _crItemDf = items => {
     const _v0 = (0, _AdapterFn.getValue)(items[0]);
