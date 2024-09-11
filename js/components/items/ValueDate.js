@@ -5,8 +5,7 @@ exports.default = void 0;
 var _dateFn = require("../../utils/dateFn");
 var _SpanToken = require("../zhn/SpanToken");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_ITEM_TIME = 'item-time';
-const S_VALUE = {
+const PL_16 = {
   paddingLeft: 16
 };
 const ValueDate = _ref => {
@@ -16,10 +15,10 @@ const ValueDate = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [value ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanValue, {
-      style: S_VALUE,
+      style: PL_16,
       children: value
-    }) : null, strDate ? /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      className: CL_ITEM_TIME,
+    }) : null, strDate ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanDate, {
+      style: PL_16,
       children: (0, _dateFn.formatStrDate)(strDate)
     }) : null]
   });

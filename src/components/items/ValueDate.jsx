@@ -1,11 +1,10 @@
 import { formatStrDate } from '../../utils/dateFn';
-import { SpanValue } from '../zhn/SpanToken';
+import {
+  SpanValue,
+  SpanDate
+} from '../zhn/SpanToken';
 
-const CL_ITEM_TIME = 'item-time';
-
-const S_VALUE = {
-  paddingLeft: 16
-};
+const PL_16 = { paddingLeft: 16 };
 
 const ValueDate = ({
   value,
@@ -13,11 +12,11 @@ const ValueDate = ({
 }) => (
    <>
     {value
-       ? <SpanValue style={S_VALUE}>{value}</SpanValue>
+       ? <SpanValue style={PL_16}>{value}</SpanValue>
        : null
     }
     {strDate
-       ? <span className={CL_ITEM_TIME}>{formatStrDate(strDate)}</span>
+       ? <SpanDate style={PL_16}>{formatStrDate(strDate)}</SpanDate>
        : null
     }
    </>
