@@ -9,6 +9,7 @@ import {
   isNumber,
   isYNumber,
   isNumberOrNull,
+  getObjectKeys,
   toFloatOrEmpty,
   findMinY,
   findMaxY,
@@ -138,6 +139,21 @@ describe('isNumberOrNull', ()=>{
     expect(fn('123')).toBe(false)
     expect(fn()).toBe(false)
     expect(fn(NaN)).toBe(false)
+  })
+})
+
+describe('getObjectKeys', ()=>{
+  const fn = getObjectKeys;
+  test("should return array with object keys or empty array for not object types", () => {
+    expect(fn({a: 'a'})).toEqual(['a'])
+
+    expect(fn([1, 2])).toEqual([])
+    expect(fn(1)).toEqual([])
+    expect(fn('str')).toEqual([])
+    expect(fn(true)).toEqual([])
+    expect(fn()).toEqual([])
+    expect(fn(null)).toEqual([])
+    expect(fn(()=>{})).toEqual([])
   })
 })
 
