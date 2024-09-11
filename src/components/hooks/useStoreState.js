@@ -9,7 +9,7 @@ const useStoreState = (
     state,
     setState
   ] = useState(initialState);
-  useStoreMessage(storeMessage => updateState(storeMessage, setState, state))
+  useStoreMessage(storeMessage => updateState(storeMessage, setState))
   return [
     state,
     setState
