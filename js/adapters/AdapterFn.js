@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isTokenInStr = exports.isObj = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.crZhConfig = exports.crValueMoving = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.crZhConfig = exports.crValueMoving = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -26,6 +26,8 @@ exports.getYear = _dateFn.getYear;
 exports.getCurrentYear = _dateFn.getCurrentYear;
 exports.getDaysFromYmd = _dateFn.getDaysFromYmd;
 exports.monthIndex = _dateFn.monthIndex;
+var _getByPropsFrom = require("../utils/getByPropsFrom");
+exports.getByPropsFrom = _getByPropsFrom.getByPropsFrom;
 var _toUpperCaseFirst = require("../utils/toUpperCaseFirst");
 exports.toUpperCaseFirst = _toUpperCaseFirst.toUpperCaseFirst;
 var _mathFn = require("../math/mathFn");
@@ -47,7 +49,8 @@ exports.isStr = _isTypeFn.isStr;
 const isNumberOrNull = v => (0, _isTypeFn.isNumber)(v) || v === null;
 exports.isNumberOrNull = isNumberOrNull;
 const assign = exports.assign = Object.assign;
-const getObjectKeys = exports.getObjectKeys = Object.keys;
+const getObjectKeys = obj => (0, _isTypeFn.isObj)(obj) && !(0, _isTypeFn.isArr)(obj) ? Object.keys(obj) : [];
+exports.getObjectKeys = getObjectKeys;
 const FN_IDENTITY = v => v;
 exports.FN_IDENTITY = FN_IDENTITY;
 const FN_NOOP = () => {};
