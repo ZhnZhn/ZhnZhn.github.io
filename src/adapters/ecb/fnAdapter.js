@@ -52,3 +52,9 @@ export const crItemId = option => {
     _crItemId(option.items, option.seriaType)
   );
 }
+
+export const findCategoryIndex = (
+  option
+) => crItemId(option)
+  .split(".")
+  .findIndex(token => token === "")

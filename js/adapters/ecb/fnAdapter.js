@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getSeriesObservertions = exports.getSeries = exports.getObservationValues = exports.getDimensions = exports.crItemId = exports.ECB_EUROPA_EU = void 0;
+exports.getSeriesObservertions = exports.getSeries = exports.getObservationValues = exports.getDimensions = exports.findCategoryIndex = exports.crItemId = exports.ECB_EUROPA_EU = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 const ECB_EUROPA_EU = exports.ECB_EUROPA_EU = "ecb.europa.eu";
@@ -35,4 +35,6 @@ const crItemId = option => {
   return (0, _AdapterFn.joinBy)(".", option.dfPrefix, _crItemId(option.items, option.seriaType));
 };
 exports.crItemId = crItemId;
+const findCategoryIndex = option => crItemId(option).split(".").findIndex(token => token === "");
+exports.findCategoryIndex = findCategoryIndex;
 //# sourceMappingURL=fnAdapter.js.map

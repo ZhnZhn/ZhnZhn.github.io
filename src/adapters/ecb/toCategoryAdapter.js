@@ -1,24 +1,32 @@
 import crAdapterCategory from '../crAdapterCategory';
-import {
-  getDimensions,
-  getSeries
-} from './fnAdapter';
+import { getObjectKeys, isStr } from '../AdapterFn';
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
+import {
+  getDimensions,
+  getSeries,
+  findCategoryIndex
+} from './fnAdapter';
 
 const crDate = (
   json,
   option
 ) => {
-  const _seriesCategories = ((((getDimensions(json)).series || [])[1] || {}).values || [])
-     .map(item => (item || {}).name)
+  const _categoryIndex = findCategoryIndex(option)
+   , _seriesValues = (((getDimensions(json)).series || [])[_categoryIndex] || {}).values || []
   , _series = getSeries(json);
-  return sortDescCategory(Object.keys(_series)
-    .map((key, index) => crCategoryPoint(
-      ((((_series[key] || {}).observations) || {})["0"] || [])[0],
-      _seriesCategories[index]
-    )))
-    .filter(point => point.y !== null);
+  return sortDescCategory(getObjectKeys(_series)
+    .reduce((data, key, index) => {
+       const _value =  ((((_series[key] || {}).observations) || {})["0"] || [])[0]
+       , _categoryName = (_seriesValues[index] || {}).name;
+       if (_value !== null && isStr(_categoryName)) {
+         data.push(crCategoryPoint(
+           _value,
+           _categoryName
+         ))
+       }
+       return data;
+    }, []))
 }
 , toCategoryAdapter = crAdapterCategory(crDate);
 
