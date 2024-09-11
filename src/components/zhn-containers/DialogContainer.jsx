@@ -1,6 +1,7 @@
 import {
   safeMap,
-  cloneElement
+  cloneElement,
+  crObjWithNullPrototype
 } from '../uiApi';
 
 import useRefInit from '../hooks/useRefInit';
@@ -27,8 +28,7 @@ const S_ROOT = {
 
 const fUpdateState = maxDialog => (
   msShowDialog,
-  setState,
-  { hmIs, compDialogs }
+  setState
 ) => {
   const _hToTopLayer = key => {
      setState(prevState => {
@@ -44,14 +44,19 @@ const fUpdateState = maxDialog => (
      })
   }
   , _hToggleDialog = key => {
-     if (hmIs[key]){
-       const _compIndex = findCompIndex(compDialogs, key);
-       if (_compIndex > -1){
-         closeDialog(compDialogs[_compIndex])
-       }
-     }
      setState(prevState => {
-       const { hmIs } = prevState;
+       const {
+         hmIs,
+         compDialogs
+       } = prevState;
+
+       if (hmIs[key]){
+         const _compIndex = findCompIndex(compDialogs, key);
+         if (_compIndex > -1){
+           setTimeout(() => closeDialog(compDialogs[_compIndex]), 200)
+         }
+       }
+
        hmIs[key] = !hmIs[key]
        if (!hmIs[key]) {
          filterArrByKey(prevState.visibleDialogs, key)
@@ -105,9 +110,9 @@ const DialogContainer = ({
     compProps,
     compDialogs
   } = useStoreState(() => ({
-      hmIs: {},
-      hmData: {},
-      compProps: {},
+      hmIs: crObjWithNullPrototype(),
+      hmData: crObjWithNullPrototype(),
+      compProps: crObjWithNullPrototype(),
       compDialogs: [],
       visibleDialogs: []
     }),

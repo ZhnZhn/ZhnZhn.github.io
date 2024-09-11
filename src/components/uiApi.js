@@ -41,6 +41,8 @@ import {
   isFn
 } from '../utils/isTypeFn';
 
+export const crObjWithNullPrototype = () => Object.create(null)
+
 export const safeMap = (
   items,
   crElement

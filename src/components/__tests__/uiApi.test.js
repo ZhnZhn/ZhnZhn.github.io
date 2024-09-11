@@ -1,4 +1,5 @@
 import {
+  crObjWithNullPrototype,
   safeMap,
   getRefValue,
   setRefValue,
@@ -8,6 +9,15 @@ import {
   getInputValidValue
 } from '../uiApi';
 
+describe("crObjWithNullPrototype", ()=>{
+  const fn = crObjWithNullPrototype;
+  test("should create object with null prototype", () => {
+    const _objWithNullPrototype = fn()
+    expect(typeof _objWithNullPrototype).toBe("object")
+    expect(_objWithNullPrototype).not.toBe(null)
+    expect(Object.getPrototypeOf(_objWithNullPrototype)).toBe(null)
+  })
+})
 
 describe("safeMap", ()=>{
   const fn = safeMap;
@@ -25,7 +35,7 @@ describe("safeMap", ()=>{
     expect(fn('str')).toBe(null)
 
     expect(fn({})).toBe(null)
-  })  
+  })
 })
 
 describe("getRefValue", ()=>{

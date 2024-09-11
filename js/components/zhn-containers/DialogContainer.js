@@ -15,11 +15,7 @@ const S_ROOT = {
   top: 70,
   left: 10
 };
-const fUpdateState = maxDialog => (msShowDialog, setState, _ref) => {
-  let {
-    hmIs,
-    compDialogs
-  } = _ref;
+const fUpdateState = maxDialog => (msShowDialog, setState) => {
   const _hToTopLayer = key => {
       setState(prevState => {
         const visibleDialogs = prevState.visibleDialogs;
@@ -36,16 +32,17 @@ const fUpdateState = maxDialog => (msShowDialog, setState, _ref) => {
       });
     },
     _hToggleDialog = key => {
-      if (hmIs[key]) {
-        const _compIndex = (0, _DialogContainerFn.findCompIndex)(compDialogs, key);
-        if (_compIndex > -1) {
-          (0, _compStore.closeDialog)(compDialogs[_compIndex]);
-        }
-      }
       setState(prevState => {
         const {
-          hmIs
+          hmIs,
+          compDialogs
         } = prevState;
+        if (hmIs[key]) {
+          const _compIndex = (0, _DialogContainerFn.findCompIndex)(compDialogs, key);
+          if (_compIndex > -1) {
+            setTimeout(() => (0, _compStore.closeDialog)(compDialogs[_compIndex]), 200);
+          }
+        }
         hmIs[key] = !hmIs[key];
         if (!hmIs[key]) {
           (0, _DialogContainerFn.filterArrByKey)(prevState.visibleDialogs, key);
@@ -87,10 +84,10 @@ const fUpdateState = maxDialog => (msShowDialog, setState, _ref) => {
     });
   }
 };
-const DialogContainer = _ref2 => {
+const DialogContainer = _ref => {
   let {
     maxDialog = 3
-  } = _ref2;
+  } = _ref;
   const _upateState = (0, _useRefInit.default)(() => fUpdateState(maxDialog)),
     {
       hmIs,
@@ -98,9 +95,9 @@ const DialogContainer = _ref2 => {
       compProps,
       compDialogs
     } = (0, _useStoreState.default)(() => ({
-      hmIs: {},
-      hmData: {},
-      compProps: {},
+      hmIs: (0, _uiApi.crObjWithNullPrototype)(),
+      hmData: (0, _uiApi.crObjWithNullPrototype)(),
+      compProps: (0, _uiApi.crObjWithNullPrototype)(),
       compDialogs: [],
       visibleDialogs: []
     }), _compStore.useMsShowDialog, _upateState)[0];

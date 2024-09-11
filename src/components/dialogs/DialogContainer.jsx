@@ -1,5 +1,6 @@
 import {
   bindTo,
+  crObjWithNullPrototype,
   useCallback
 } from '../uiApi';
 
@@ -23,14 +24,13 @@ const _setTypeTo = (
 
 const _onMdOption = (
   mdOption,
-  setState,
-  state
+  setState
 ) => {
   if (mdOption) {
     const type = mdOption.modalDialogType;
-    getModalDialog(state.inits[type] ? void 0 : type)
+    getModalDialog(type)
       .then(Comp => setState(prevState => {
-         if (Comp) {
+         if (Comp && !prevState.inits[type]) {
            prevState.dialogs.push({ type, Comp })
            prevState.inits[type] = true
          }
@@ -49,9 +49,9 @@ const DialogContainer = () => {
     setState
   ] = useStoreState(() => ({
     isShow: false,
-    inits: {},
-    shows: {},
-    data: {},
+    inits: crObjWithNullPrototype(),
+    shows: crObjWithNullPrototype(),
+    data: crObjWithNullPrototype(),
     dialogs: [],
     currentDialog: null
   }), useMdOption, _onMdOption)

@@ -1,6 +1,15 @@
 "use strict";
 
 var _uiApi = require("../uiApi");
+describe("crObjWithNullPrototype", () => {
+  const fn = _uiApi.crObjWithNullPrototype;
+  test("should create object with null prototype", () => {
+    const _objWithNullPrototype = fn();
+    expect(typeof _objWithNullPrototype).toBe("object");
+    expect(_objWithNullPrototype).not.toBe(null);
+    expect(Object.getPrototypeOf(_objWithNullPrototype)).toBe(null);
+  });
+});
 describe("safeMap", () => {
   const fn = _uiApi.safeMap;
   test("should map items by crElement function", () => {

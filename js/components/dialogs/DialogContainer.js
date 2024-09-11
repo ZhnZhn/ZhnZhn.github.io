@@ -18,11 +18,11 @@ const _setTypeTo = (prevState, type, option) => {
     ...prevState
   };
 };
-const _onMdOption = (mdOption, setState, state) => {
+const _onMdOption = (mdOption, setState) => {
   if (mdOption) {
     const type = mdOption.modalDialogType;
-    (0, _RouterModalDialog.getModalDialog)(state.inits[type] ? void 0 : type).then(Comp => setState(prevState => {
-      if (Comp) {
+    (0, _RouterModalDialog.getModalDialog)(type).then(Comp => setState(prevState => {
+      if (Comp && !prevState.inits[type]) {
         prevState.dialogs.push({
           type,
           Comp
@@ -36,9 +36,9 @@ const _onMdOption = (mdOption, setState, state) => {
 const DialogContainer = () => {
   const [state, setState] = (0, _useStoreState.default)(() => ({
       isShow: false,
-      inits: {},
-      shows: {},
-      data: {},
+      inits: (0, _uiApi.crObjWithNullPrototype)(),
+      shows: (0, _uiApi.crObjWithNullPrototype)(),
+      data: (0, _uiApi.crObjWithNullPrototype)(),
       dialogs: [],
       currentDialog: null
     }), _compStore.useMdOption, _onMdOption),
