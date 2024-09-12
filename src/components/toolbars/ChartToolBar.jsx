@@ -20,7 +20,7 @@ import ModalMenuMini from './ModalMenuMini'
 const CL_WITH_SCROLL_X = "with-scroll-x"
 , CL_BT_R = `${CL_WITH_SCROLL_X}__bt-r`
 , _crModalPopupStyle = (left) => ({
-  top: 60,
+  top: 70,
   left
 })
 , _crLeftStyle = (left) => ({

@@ -37,13 +37,12 @@
 .bt-tab {
   z-index: 10;
   position: absolute;
-  top: 0;
-  left: 300px;
-  color: grey;
-  line-height: 1.4;
-  padding: 2px 8px; 
-  background-color: #1b2836;
-  border-radius: 0 0 3px 3px;
+  top: 7px;
+  left: 300px;  
+  color: #1b2836; 
+  color: var(--btf-c);
+  line-height: 1.4;    
+  font-weight: bold;   
 }
 .bt-tab:focus {
   color: #a487d4;
@@ -52,8 +51,7 @@
   border-bottom: 2px solid #a487d4;
 }
 .bt-tab--show {
-  color: #a487d4;
-  font-weight: bold;
+  color: #a487d4;  
 }
 
 .bt-sub-item {

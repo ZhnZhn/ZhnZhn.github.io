@@ -1,11 +1,8 @@
-import {
-  crCn,
-  crElementBgCn
-} from '../styleFn';
+import { crCn } from '../styleFn';
 
 import Button from './Button';
 
-const CL_BT_TAB = crElementBgCn("not-selected bt-tab")
+const CL_BT_TAB = "not-selected bt-tab"
 , CL_BT_TAB__SHOW = `${CL_BT_TAB} bt-tab--show`
 , CL_ARROW_DOWN = "arrow-down";
 

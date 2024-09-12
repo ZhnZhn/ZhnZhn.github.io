@@ -6,8 +6,8 @@ exports.default = void 0;
 var _styleFn = require("../styleFn");
 var _Button = _interopRequireDefault(require("./Button"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_BT_TAB = (0, _styleFn.crElementBgCn)("not-selected bt-tab"),
-  CL_BT_TAB__SHOW = CL_BT_TAB + " bt-tab--show",
+const CL_BT_TAB = "not-selected bt-tab",
+  CL_BT_TAB__SHOW = `${CL_BT_TAB} bt-tab--show`,
   CL_ARROW_DOWN = "arrow-down";
 const ButtonTab = _ref => {
   let {
@@ -28,6 +28,5 @@ const ButtonTab = _ref => {
     })]
   }) : null;
 };
-var _default = ButtonTab;
-exports.default = _default;
+var _default = exports.default = ButtonTab;
 //# sourceMappingURL=ButtonTab.js.map
