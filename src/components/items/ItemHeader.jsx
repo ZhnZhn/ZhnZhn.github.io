@@ -1,4 +1,4 @@
-import { crElementCn } from '../styleFn';
+import { crElementItemCn } from '../styleFn';
 
 import Button from '../zhn/Button';
 import { BtSvgClose } from '../zhn/BtSvgX';
@@ -6,17 +6,15 @@ import {
   CL_HEADER_CAPTION,
   S_HEADER_CAPTION_OPEN,
   S_HEADER_CAPTION_CLOSE,
-  S_BT_SVG_CLOSE  
+  S_BT_SVG_CLOSE
 } from './Item.Style';
 
-const CL_ITEM_HEADER = crElementCn()
+const CL_ITEM_HEADER = crElementItemCn()
 , S_ROOT = {
   position: 'relative',
   height: 'auto',
   width: '100%',
-  padding: '6px 42px 6px 10px',
-  borderTopRightRadius: 2,
-  borderBottomRightRadius: 2
+  padding: '6px 42px 6px 10px'
 }
 , S_CAPTION = {
   width: '75%',

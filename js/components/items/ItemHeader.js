@@ -8,14 +8,12 @@ var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _BtSvgX = require("../zhn/BtSvgX");
 var _Item = require("./Item.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_ITEM_HEADER = (0, _styleFn.crElementCn)(),
+const CL_ITEM_HEADER = (0, _styleFn.crElementItemCn)(),
   S_ROOT = {
     position: 'relative',
     height: 'auto',
     width: '100%',
-    padding: '6px 42px 6px 10px',
-    borderTopRightRadius: 2,
-    borderBottomRightRadius: 2
+    padding: '6px 42px 6px 10px'
   },
   S_CAPTION = {
     width: '75%',

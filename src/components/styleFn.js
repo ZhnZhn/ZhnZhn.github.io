@@ -135,7 +135,9 @@ export const crDialogCn = _fCrCn(`${CL_C_BG} ${CL_EL_B}`)
 export const crElementBorderCn = _fCrCn(CL_EL_B)
 
 const CL_EL_BG = "el-bg";
-export const crElementCn = _fCrCn(`el-c ${CL_EL_BG}`)
+const CL_EL_C = "el-c";
+export const crElementCn = _fCrCn(`${CL_EL_C} ${CL_EL_BG}`)
+export const crElementItemCn = _fCrCn(`${CL_EL_C} el-bb`)
 export const crElementBgCn = _fCrCn(CL_EL_BG)
 
 export const crBtCircleHfCn = _fCrCn("bt-circle-hf")

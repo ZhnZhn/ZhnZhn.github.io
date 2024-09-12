@@ -3,7 +3,7 @@ import { useId } from '../uiApi';
 import {
   S_INLINE,
   crStyle3,
-  crElementCn,
+  crElementItemCn,
   crElementBorderCn
 } from '../styleFn';
 
@@ -29,14 +29,14 @@ import {
   COLOR_SVG_MORE
 } from './Item.Style';
 
-const CL_ITEM_HEADER = crElementCn("item-header")
+const CL_ITEM_HEADER = crElementItemCn("item-header")
 , CL_CHARTS_MENU_MORE = crElementBorderCn("popup-menu charts__menu-more")
 , S_BT_MORE = {
   position: 'relative',
   top: 4,
   left: 2
-},
-S_SVG_MORE = {
+}
+, S_SVG_MORE = {
   stroke: COLOR_SVG_MORE,
   fill: COLOR_SVG_MORE
 }
@@ -44,8 +44,8 @@ S_SVG_MORE = {
   position: 'relative',
   top: 2,
   margin: '0 6px 0 8px'
-},
-S_CAPTION = {
+}
+, S_CAPTION = {
   ...S_HEADER_CAPTION_OPEN,
   width: 125,
   padding: '4px 0 2px 4px'
@@ -122,7 +122,7 @@ const Header = ({
         onToggle={_toggleMore}
       />
       <SvgCheckBox
-         style={S_CHECK_BOX}
+         style={S_CHECK_BOX}         
          color={GREEN_COLOR}
          labelId={_captionId}
          onCheck={onCheck}
