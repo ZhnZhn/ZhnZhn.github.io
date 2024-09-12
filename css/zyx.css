@@ -22,4 +22,9 @@
  .el-b {
    border: 2px solid #1b2836;
    border: 2px solid var(--el-bg);
+ }
+
+ .el-bb {
+   border-bottom: 2px solid #1b2836;
+   border-bottom: 2px solid var(--el-bg);
  } 
