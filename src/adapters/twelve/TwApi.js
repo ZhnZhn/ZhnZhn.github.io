@@ -14,6 +14,7 @@ const TwApi = {
     , symbol = getValue(items[0], {isUpper: true})
     , interval = getValue(items[1])
     , outputsize = getValue(items[2]);
+    option.itemCaption = symbol
     return `${URL}/time_series?symbol=${symbol}&apikey=${apiKey}&interval=${interval}&outputsize=${outputsize}&${QUERY_TAIL}`;
   },
   checkResponse(json, option){
