@@ -5,7 +5,6 @@ import { BtSvgClose } from '../zhn/BtSvgX';
 import {
   CL_HEADER_CAPTION,
   S_HEADER_CAPTION_OPEN,
-  S_HEADER_CAPTION_CLOSE,
   S_BT_SVG_CLOSE
 } from './Item.Style';
 
@@ -41,7 +40,7 @@ const ItemHeader = ({
   const _title = _crTitle(title, caption)
   , _captionStyle = isOpen
       ? S_HEADER_CAPTION_OPEN
-      : S_HEADER_CAPTION_CLOSE;
+      : void 0;
   return (
     <div
       className={CL_ITEM_HEADER}

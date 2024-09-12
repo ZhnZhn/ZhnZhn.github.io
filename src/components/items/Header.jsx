@@ -24,7 +24,6 @@ import ValueDate from './ValueDate';
 import {
   CL_HEADER_CAPTION,
   S_HEADER_CAPTION_OPEN,
-  S_HEADER_CAPTION_CLOSE,
   S_BT_SVG_CLOSE,
   COLOR_SVG_MORE
 } from './Item.Style';
@@ -46,7 +45,6 @@ const CL_ITEM_HEADER = crElementItemCn("item-header")
   margin: '0 6px 0 8px'
 }
 , S_CAPTION = {
-  ...S_HEADER_CAPTION_OPEN,
   width: 125,
   padding: '4px 0 2px 4px'
 }
@@ -107,7 +105,8 @@ const Header = ({
   ] = useToggle(false)
   , _captionStyle = crStyle3(
      S_CAPTION,
-     !isOpen && S_HEADER_CAPTION_CLOSE,
+     isOpen && S_HEADER_CAPTION_OPEN,
+     //!isOpen && S_HEADER_CAPTION_CLOSE,
      !valueMoving && S_CAPTION_WIDTH
   )
   , _btTitle = itemCaption.length > 15
@@ -122,7 +121,7 @@ const Header = ({
         onToggle={_toggleMore}
       />
       <SvgCheckBox
-         style={S_CHECK_BOX}         
+         style={S_CHECK_BOX}
          color={GREEN_COLOR}
          labelId={_captionId}
          onCheck={onCheck}
