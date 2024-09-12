@@ -1,15 +1,13 @@
 
 .chart-item {
-  position: relative;
+  position: relative; 
   line-height: 1.5;
   margin-bottom: 10px;
 }
 
 .item-header {
-  position: relative;
-  background-color: #1b2836;
+  position: relative;  
   width: 100%; 
   padding: 0 42px 4px 0;
-  margin-top: -2px; 
-  border-radius: 0 4px 4px 0;   
+  margin-top: -2px;    
 }
