@@ -1,13 +1,15 @@
-import { isFn } from '../uiApi';
+import { isFn, useMemo } from '../uiApi';
+import { CL_ROW_PANE_TOPIC, crElementBorderCn } from '../styleFn';
 import { mlsToDmy } from '../../utils/dateFn';
 
-import ModalPopup from '../zhn-moleculs/ModalPopup';
-import SubMenuItem from './SubMenuItem';
-
 import {
-  S_MODAL_MENU,
-  S_MODAL_MENU_PANE
-} from './ModalMenu.Style';
+  crSubItem,
+  crItem
+} from '../menuModelFn';
+import ModalSlider from '../zhn-modal-slider/ModalSlider';
+import { S_MODAL_MENU } from './ModalMenu.Style';
+
+const CL_MENU_SLIDER = crElementBorderCn();
 
 const _isMinMax = (
   config
@@ -25,63 +27,59 @@ const _isZoom = (getChart) => {
   const { from, to } = chart.zhGetFromToDates({
     format: mlsToDmy
   });
-  return (from === to) && to === EPOCH_DMY
-    ? false
-    : true;
+
+  return !(from === to && to === EPOCH_DMY);
 };
 
-const ModalMenuFn = ({
-  style,
-  isShow,
-  onClose,
-  config,
-  getChart,
-  onAddToWatch,
-  onX2H,
-  onMinMax,
-  onZoom,
-  onCopy,
-  onPasteTo
-}) => (
-  <ModalPopup
-    isShow={isShow}
-    style={{...S_MODAL_MENU, ...style}}
-    onClose={onClose}
-  >
-    <div style={S_MODAL_MENU_PANE}>
-      { isFn(onAddToWatch) && <SubMenuItem
-           caption="Add To"
-           onClick={onAddToWatch}
-        />
-      }
-      <SubMenuItem
-        caption="x2H"
-        onClick={onX2H}
-      />
-      { _isMinMax(config) && <SubMenuItem
-           caption="MinMax"
-           initialIsActive={true}
-           onClick={onMinMax}
-         />
-      }
-      { _isZoom(getChart) && <SubMenuItem
-          caption="Zoom"
-          onClick={onZoom}
-          onClose={onClose}
-        />
-      }
-      <SubMenuItem
-        caption="Copy"
-        onClick={onCopy}
-        onClose={onClose}
-      />
-      <SubMenuItem
-        caption="PasteTo"
-        onClick={onPasteTo}
-        onClose={onClose}
-      />
-    </div>
-  </ModalPopup>
-);
+const _crModelMore = (
+  props,
+  isItemZoom
+) => ({
+  titleCl: CL_ROW_PANE_TOPIC,
+  pageWidth: 180,
+  maxPages: 2,
+  p0: [
+    crSubItem("p1", "Chart"),
+    isFn(props.onAddToWatch)
+      ? crItem("Add To", props.onAddToWatch) : void 0,
+    _isMinMax(props.config)
+      ? crItem("MinMax", props.onMinMax, false) : void 0,
+    isItemZoom
+      ? crItem("Zoom", props.onZoom) : void 0,
+    crItem("Copy", props.onCopy),
+    crItem("PasteTo", props.onPasteTo)
+  ].filter(Boolean),
+  p1: [
+    crItem("x2 Height", props.onX2H, false),
+    crItem("Full Screen", props.onFullScreen),
+    crItem("Export As", props.onExport),
+    crItem("Print", props.onPrint)
+  ]
+});
+
+const ModalMenuFn = (props) => {
+  const {
+    getChart,
+    style,
+    isShow,
+    onClose,
+  } = props
+  , _isItemZoom = _isZoom(getChart)
+  /*eslint-disable react-hooks/exhaustive-deps*/
+  , _model = useMemo(
+     () => _crModelMore(props, _isItemZoom),
+     [_isItemZoom]
+  );
+  /*eslint-enable react-hooks/exhaustive-deps*/
+ return (
+   <ModalSlider
+     isShow={isShow}
+     className={CL_MENU_SLIDER}
+     style={{...S_MODAL_MENU, ...style}}
+     model={_model}
+     onClose={onClose}
+   />
+ );
+};
 
 export default ModalMenuFn

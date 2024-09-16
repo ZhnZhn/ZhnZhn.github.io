@@ -4,11 +4,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _dateFn = require("../../utils/dateFn");
-var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
-var _SubMenuItem = _interopRequireDefault(require("./SubMenuItem"));
+var _menuModelFn = require("../menuModelFn");
+var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
 var _ModalMenu = require("./ModalMenu.Style");
 var _jsxRuntime = require("react/jsx-runtime");
+const CL_MENU_SLIDER = (0, _styleFn.crElementBorderCn)();
 const _isMinMax = config => ((config.yAxis || {}).plotLines || []).length > 0;
 const EPOCH_DMY = '01-01-1970';
 const _isZoom = getChart => {
@@ -25,55 +27,35 @@ const _isZoom = getChart => {
   } = chart.zhGetFromToDates({
     format: _dateFn.mlsToDmy
   });
-  return from === to && to === EPOCH_DMY ? false : true;
+  return !(from === to && to === EPOCH_DMY);
 };
-const ModalMenuFn = _ref => {
-  let {
-    style,
-    isShow,
-    onClose,
-    config,
-    getChart,
-    onAddToWatch,
-    onX2H,
-    onMinMax,
-    onZoom,
-    onCopy,
-    onPasteTo
-  } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
+const _crModelMore = (props, isItemZoom) => ({
+  titleCl: _styleFn.CL_ROW_PANE_TOPIC,
+  pageWidth: 180,
+  maxPages: 2,
+  p0: [(0, _menuModelFn.crSubItem)("p1", "Chart"), (0, _uiApi.isFn)(props.onAddToWatch) ? (0, _menuModelFn.crItem)("Add To", props.onAddToWatch) : void 0, _isMinMax(props.config) ? (0, _menuModelFn.crItem)("MinMax", props.onMinMax, false) : void 0, isItemZoom ? (0, _menuModelFn.crItem)("Zoom", props.onZoom) : void 0, (0, _menuModelFn.crItem)("Copy", props.onCopy), (0, _menuModelFn.crItem)("PasteTo", props.onPasteTo)].filter(Boolean),
+  p1: [(0, _menuModelFn.crItem)("x2 Height", props.onX2H, false), (0, _menuModelFn.crItem)("Full Screen", props.onFullScreen), (0, _menuModelFn.crItem)("Export As", props.onExport), (0, _menuModelFn.crItem)("Print", props.onPrint)]
+});
+const ModalMenuFn = props => {
+  const {
+      getChart,
+      style,
+      isShow,
+      onClose
+    } = props,
+    _isItemZoom = _isZoom(getChart)
+    /*eslint-disable react-hooks/exhaustive-deps*/,
+    _model = (0, _uiApi.useMemo)(() => _crModelMore(props, _isItemZoom), [_isItemZoom]);
+  /*eslint-enable react-hooks/exhaustive-deps*/
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.default, {
     isShow: isShow,
+    className: CL_MENU_SLIDER,
     style: {
       ..._ModalMenu.S_MODAL_MENU,
       ...style
     },
-    onClose: onClose,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: _ModalMenu.S_MODAL_MENU_PANE,
-      children: [(0, _uiApi.isFn)(onAddToWatch) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
-        caption: "Add To",
-        onClick: onAddToWatch
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
-        caption: "x2H",
-        onClick: onX2H
-      }), _isMinMax(config) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
-        caption: "MinMax",
-        initialIsActive: true,
-        onClick: onMinMax
-      }), _isZoom(getChart) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
-        caption: "Zoom",
-        onClick: onZoom,
-        onClose: onClose
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
-        caption: "Copy",
-        onClick: onCopy,
-        onClose: onClose
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SubMenuItem.default, {
-        caption: "PasteTo",
-        onClick: onPasteTo,
-        onClose: onClose
-      })]
-    })
+    model: _model,
+    onClose: onClose
   });
 };
 var _default = exports.default = ModalMenuFn;
