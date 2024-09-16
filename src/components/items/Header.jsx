@@ -2,7 +2,7 @@
 import { useId } from '../uiApi';
 import {
   S_INLINE,
-  crStyle3,
+  crStyle2,
   crElementItemCn,
   crElementBorderCn
 } from '../styleFn';
@@ -23,7 +23,6 @@ import ValueDate from './ValueDate';
 
 import {
   CL_HEADER_CAPTION,
-  S_HEADER_CAPTION_OPEN,
   S_BT_SVG_CLOSE,
   COLOR_SVG_MORE
 } from './Item.Style';
@@ -103,10 +102,8 @@ const Header = ({
     isMore,
     _toggleMore
   ] = useToggle(false)
-  , _captionStyle = crStyle3(
+  , _captionStyle = crStyle2(
      S_CAPTION,
-     isOpen && S_HEADER_CAPTION_OPEN,
-     //!isOpen && S_HEADER_CAPTION_CLOSE,
      !valueMoving && S_CAPTION_WIDTH
   )
   , _btTitle = itemCaption.length > 15

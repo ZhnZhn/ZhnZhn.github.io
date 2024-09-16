@@ -32,8 +32,12 @@ const ItemHeader = _ref => {
     onClick,
     onClose
   } = _ref;
-  const _title = _crTitle(title, caption),
-    _captionStyle = isOpen ? _Item.S_HEADER_CAPTION_OPEN : void 0;
+  const _title = _crTitle(title, caption);
+  /*
+  , _captionStyle = isOpen
+      ? S_HEADER_CAPTION_OPEN
+      : void 0;
+  */
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_ITEM_HEADER,
     style: {
@@ -44,8 +48,8 @@ const ItemHeader = _ref => {
       className: _Item.CL_HEADER_CAPTION,
       style: {
         ...S_CAPTION,
-        ...captionStyle,
-        ..._captionStyle
+        ...captionStyle
+        //..._captionStyle
       },
       title: _title,
       onClick: onClick,

@@ -83,9 +83,7 @@ const Header = _ref2 => {
   } = _ref2;
   const _captionId = (0, _uiApi.useId)(),
     [isMore, _toggleMore] = (0, _useToggle.default)(false),
-    _captionStyle = (0, _styleFn.crStyle3)(S_CAPTION, isOpen && _Item.S_HEADER_CAPTION_OPEN,
-    //!isOpen && S_HEADER_CAPTION_CLOSE,
-    !valueMoving && S_CAPTION_WIDTH),
+    _captionStyle = (0, _styleFn.crStyle2)(S_CAPTION, !valueMoving && S_CAPTION_WIDTH),
     _btTitle = itemCaption.length > 15 ? itemCaption : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_ITEM_HEADER,

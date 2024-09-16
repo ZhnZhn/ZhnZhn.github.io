@@ -3,8 +3,7 @@ import { crElementItemCn } from '../styleFn';
 import Button from '../zhn/Button';
 import { BtSvgClose } from '../zhn/BtSvgX';
 import {
-  CL_HEADER_CAPTION,
-  S_HEADER_CAPTION_OPEN,
+  CL_HEADER_CAPTION,  
   S_BT_SVG_CLOSE
 } from './Item.Style';
 
@@ -38,9 +37,11 @@ const ItemHeader = ({
   onClose
 }) => {
   const _title = _crTitle(title, caption)
+  /*
   , _captionStyle = isOpen
       ? S_HEADER_CAPTION_OPEN
       : void 0;
+  */
   return (
     <div
       className={CL_ITEM_HEADER}
@@ -51,7 +52,7 @@ const ItemHeader = ({
          style={{
            ...S_CAPTION,
            ...captionStyle,
-           ..._captionStyle
+           //..._captionStyle
          }}
          title={_title}
          onClick={onClick}
