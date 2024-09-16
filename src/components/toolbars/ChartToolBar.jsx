@@ -100,18 +100,12 @@ const ChartToolbar = ({
   onClickInfo
 }) => {
   const _refToolbar = useRef()
-  , {
-      onClick2H,
-      onMinMax,
-      onZoomChart,
-      onCopyChart,
-      onPasteToChart
-    } = useChartMethods(
-      getChart,
-      onZoom,
-      onCopy,
-      onPasteTo
-    )
+  , chartHandlers = useChartMethods(
+     getChart,
+     onZoom,
+     onCopy,
+     onPasteTo
+  )
   , [isShowInd, toggleInd] = useToggle(false)
   , [isShowAppearance, toggleAppearance] = useToggle(false)
   , [isShowFn, toggleFn] = useToggle(false)
@@ -236,16 +230,12 @@ const ChartToolbar = ({
   return (
     <>
       <ModalMenuFn
+        {...chartHandlers}
         isShow={isShowFn}
         style={{...S_M_FN, ..._fnStyle}}
         config={config}
         getChart={getChart}
         onAddToWatch={itemConf ? onAddToWatch : void 0}
-        onX2H={onClick2H}
-        onMinMax={onMinMax}
-        onZoom={onZoomChart}
-        onCopy={onCopyChart}
-        onPasteTo={onPasteToChart}
         onClose={toggleFn}
       />
       {_modalMenuArr}

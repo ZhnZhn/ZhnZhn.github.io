@@ -94,13 +94,7 @@ const ChartToolbar = _ref2 => {
     onClickInfo
   } = _ref2;
   const _refToolbar = (0, _uiApi.useRef)(),
-    {
-      onClick2H,
-      onMinMax,
-      onZoomChart,
-      onCopyChart,
-      onPasteToChart
-    } = (0, _useChartMethods.default)(getChart, onZoom, onCopy, onPasteTo),
+    chartHandlers = (0, _useChartMethods.default)(getChart, onZoom, onCopy, onPasteTo),
     [isShowInd, toggleInd] = (0, _useToggle.default)(false),
     [isShowAppearance, toggleAppearance] = (0, _useToggle.default)(false),
     [isShowFn, toggleFn] = (0, _useToggle.default)(false),
@@ -208,6 +202,7 @@ const ChartToolbar = _ref2 => {
   const _fnStyle = isShowFn ? _crModalMenuStyle(_refToolbar, S_BT_FN.left) : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuFn.default, {
+      ...chartHandlers,
       isShow: isShowFn,
       style: {
         ...S_M_FN,
@@ -216,11 +211,6 @@ const ChartToolbar = _ref2 => {
       config: config,
       getChart: getChart,
       onAddToWatch: itemConf ? onAddToWatch : void 0,
-      onX2H: onClick2H,
-      onMinMax: onMinMax,
-      onZoom: onZoomChart,
-      onCopy: onCopyChart,
-      onPasteTo: onPasteToChart,
       onClose: toggleFn
     }), _modalMenuArr, /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       ref: _refToolbar,

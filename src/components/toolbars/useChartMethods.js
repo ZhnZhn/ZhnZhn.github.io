@@ -7,15 +7,18 @@ const useChartMethods = (
   onCopy,
   onPasteTo
 ) => useRefInit(() => ({
-  onClick2H: () => getChart().zhToggle2H(),
+  onExport: () => getChart().exportChartLocal(),
+  onFullScreen: () => getChart().fullscreen.open(),
+  onPrint: () => getChart().print(),
+  onX2H: () => getChart().zhToggle2H(),
   onMinMax: () => getChart().zhToggleMinMaxLines(),
-  onZoomChart: () => {
+  onZoom: () => {
     if (isFn(onZoom)) {
       onZoom({ chart: getChart() })
     }
   },
-  onCopyChart: () => onCopy(getChart()),
-  onPasteToChart: () => onPasteTo(getChart())
+  onCopy: () => onCopy(getChart()),
+  onPasteTo: () => onPasteTo(getChart())
 }));
 
 export default useChartMethods

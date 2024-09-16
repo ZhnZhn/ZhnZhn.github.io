@@ -22,15 +22,12 @@ const crModelMore = (isAdminMode, _ref) => {
   if (isAdminMode) {
     p1.push((0, _menuModelFn.crItem)('CompareTo', onCompareTo));
   }
-  return {
-    titleCl: _styleFn.CL_ROW_PANE_TOPIC,
-    pageWidth: 180,
-    maxPages: 2,
+  return (0, _menuModelFn.crSliderMenu)(_styleFn.CL_ROW_PANE_TOPIC, 180, 2, {
     p0: P0,
     p1: p1,
     p2: [(0, _menuModelFn.crItem)('Value', (0, _uiApi.bindTo)(onSortBy, '_value')), (0, _menuModelFn.crItem)('Percent', (0, _uiApi.bindTo)(onSortBy, '_percentAbs')), (0, _menuModelFn.crItem)('Delta', (0, _uiApi.bindTo)(onSortBy, '_deltaAbs')), (0, _menuModelFn.crItem)('Reverse', onSortBy)],
     p3: [(0, _menuModelFn.crItem)('to MinWidth', onMinWidth, false), (0, _menuModelFn.crItem)('to InitialWidth', onInitWidth, false), (0, _menuModelFn.crItem)('+10px to Width', onPlusWidth, false), (0, _menuModelFn.crItem)('-10px to Width', onMinusWidth, false), (0, _menuModelFn.crItem)('Fit Items to Width', onFit, false)]
-  };
+  });
 };
 var _default = exports.default = crModelMore;
 //# sourceMappingURL=crModelMore.js.map
