@@ -20,3 +20,15 @@ export const crItem = (
   isClose,
   cn
 })
+
+export const crSliderMenu = (
+  titleCl,
+  pageWidth,
+  maxPages,
+  items
+) => ({
+  ...items,
+  titleCl,
+  pageWidth,
+  maxPages
+})

@@ -2,7 +2,8 @@ import { bindTo } from '../uiApi';
 import { CL_ROW_PANE_TOPIC } from '../styleFn';
 import {
   crSubItem,
-  crItem
+  crItem,
+  crSliderMenu
 } from '../menuModelFn';
 
 const P0 = [
@@ -29,26 +30,27 @@ const crModelMore = (isAdminMode, {
   if (isAdminMode) {
     p1.push(crItem('CompareTo', onCompareTo))
   }
-  return {
-    titleCl: CL_ROW_PANE_TOPIC,
-    pageWidth: 180,
-    maxPages: 2,
-    p0: P0,
-    p1: p1,
-    p2: [
-      crItem('Value', bindTo(onSortBy, '_value')),
-      crItem('Percent', bindTo(onSortBy, '_percentAbs')),
-      crItem('Delta', bindTo(onSortBy, '_deltaAbs')),
-      crItem('Reverse', onSortBy)
-    ],
-    p3: [
-      crItem('to MinWidth', onMinWidth, false),
-      crItem('to InitialWidth', onInitWidth, false),
-      crItem('+10px to Width', onPlusWidth, false),
-      crItem('-10px to Width', onMinusWidth, false),
-      crItem('Fit Items to Width', onFit, false)
-    ]
-  };
+  return crSliderMenu(
+    CL_ROW_PANE_TOPIC,
+    180,
+    2, {
+      p0: P0,
+      p1: p1,
+      p2: [
+        crItem('Value', bindTo(onSortBy, '_value')),
+        crItem('Percent', bindTo(onSortBy, '_percentAbs')),
+        crItem('Delta', bindTo(onSortBy, '_deltaAbs')),
+        crItem('Reverse', onSortBy)
+      ],
+      p3: [
+        crItem('to MinWidth', onMinWidth, false),
+        crItem('to InitialWidth', onInitWidth, false),
+        crItem('+10px to Width', onPlusWidth, false),
+        crItem('-10px to Width', onMinusWidth, false),
+        crItem('Fit Items to Width', onFit, false)
+      ]
+    }
+  )
 };
 
 export default crModelMore

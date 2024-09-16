@@ -44,7 +44,8 @@ import {
 
 import {
   crSubItem,
-  crItem
+  crItem,
+  crSliderMenu
 } from '../menuModelFn';
 
 const PREFIX_CL_ROW_ITEM = `${CL_ROW__PANE_TOPIC} item__`
@@ -72,14 +73,14 @@ const _crMenuItems = (
 ) => configs
   .map(([cn, name, id]) => _crMenuItem(cn, name, id))
 
-const PAGE_CONFIGS_01 = [
+const PAGE_CONFIGS_1 = [
   [CL_BR, 'Central Banks', BT_CENTRAL_BANKS],
   [CL_ORG, 'DBnomics', BT_DB_NOMICS],
   [CL_BR, 'Energy', BT_ENERGY],
   [CL_BR, 'U.S. Economics', BT_US_ECONOMICS],
   [CL_BR, 'Commodities', BT_COMMODITIES]
 ]
-, PAGE_CONFIGS_02 = [
+, PAGE_CONFIGS_2 = [
   [CL_ORG, 'Overview', BT_EUROSTAT],
   [CL_ORG, 'Circular Economy', BT_CEI],
   [CL_ORG, 'Euro Indicators / PEEIs', BT_PE],
@@ -88,7 +89,7 @@ const PAGE_CONFIGS_01 = [
   [CL_ORG, 'EU MIP', BT_MIP],
   [CL_ORG, 'EU SDG', BT_SDG],
 ]
-, PAGE_CONFIGS_03 = [
+, PAGE_CONFIGS_3 = [
   [CL_ORG, 'INSEE: Statistics France', BT_FRANCE_STATISTICS],
   [CL_ORG, 'ONS: Statistics UK', BT_UK_STATISTICS],
   [CL_ORG, 'Statistics Norway', BT_NORWAY_STATISTICS],
@@ -100,44 +101,39 @@ const PAGE_CONFIGS_01 = [
   [CL_ORG, 'CSO: Statistics Ireland All', BT_IRELAND_STAT_ALL],
   [CL_ORG, 'FSO: Statistics Swiss', BT_SWISS_STAT]
 ]
-, PAGE_CONFIGS_04 = [
+, PAGE_CONFIGS_4 = [
   [CL_BR, 'Stock Markets', BT_STOCK_MARKETS],
   [CL_BR, 'NYSE by Sectors', BT_NYSE_STOCKS],
   [CL_BR, 'NASDAQ by Sectors', BT_NASDAQ_STOCKS]
 ]
-, PAGE_CONFIGS_05 = [
+, PAGE_CONFIGS_5 = [
   [CL_ORG, 'FAOSTAT', BT_FAOSTAT],
   [CL_ORG, 'UN Comtrade', BT_UN_COMTRADE],
   [CL_ORG, 'World Bank', BT_WORLD_BANK],
   [CL_ORG, 'WTO', BT_WTO]
 ];
 
-const crBrowserModel = () => ({
-  titleCl: CL_BR,
-  pageWidth: 235,
-  maxPages: 2,
-  initId: 'page_0',
-  page_0: [
-    _crSubMenuItem('page_01', 'Economics'),
-    _crSubMenuItem('page_02', 'Eurostat'),
-    _crSubMenuItem('page_03', 'Statistics Agencies'),
-    _crSubMenuItem('page_04', 'Stock Markets'),
-    _crSubMenuItem('page_05', 'World Organizations'),
-    _crMenuItem(CL_BR, 'Blockchains', BT_BLOCKCHAIN),
-    _crMenuItem(CL_BR, 'Currencies', BT_CURRENCY),
-    _crMenuItem(CL_W, 'Watch List', BT_WATCH_LIST),
-    {
-      cn: CL_BR,
-      name: 'About',
-      onClick: showAbout,
-      isClose: true
-    }
-  ],
-  page_01: _crMenuItems(PAGE_CONFIGS_01),
-  page_02: _crMenuItems(PAGE_CONFIGS_02),
-  page_03: _crMenuItems(PAGE_CONFIGS_03),
-  page_04: _crMenuItems(PAGE_CONFIGS_04),
-  page_05: _crMenuItems(PAGE_CONFIGS_05)
-})
+const crBrowserModel = () => crSliderMenu(
+  CL_BR,
+  235,
+  2, {
+    p0: [
+      _crSubMenuItem('p1', 'Economics'),
+      _crSubMenuItem('p2', 'Eurostat'),
+      _crSubMenuItem('p3', 'Statistics Agencies'),
+      _crSubMenuItem('p4', 'Stock Markets'),
+      _crSubMenuItem('p5', 'World Organizations'),
+      _crMenuItem(CL_BR, 'Blockchains', BT_BLOCKCHAIN),
+      _crMenuItem(CL_BR, 'Currencies', BT_CURRENCY),
+      _crMenuItem(CL_W, 'Watch List', BT_WATCH_LIST),
+      crItem('About', showAbout, true, CL_BR)
+    ],
+    p1: _crMenuItems(PAGE_CONFIGS_1),
+    p2: _crMenuItems(PAGE_CONFIGS_2),
+    p3: _crMenuItems(PAGE_CONFIGS_3),
+    p4: _crMenuItems(PAGE_CONFIGS_4),
+    p5: _crMenuItems(PAGE_CONFIGS_5)
+  }
+);
 
 export default crBrowserModel

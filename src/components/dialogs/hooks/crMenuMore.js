@@ -1,5 +1,8 @@
 import { CL_ROW_PANE_TOPIC } from '../../styleFn';
-import { crItem } from '../../menuModelFn';
+import {
+  crItem,
+  crSliderMenu
+} from '../../menuModelFn';
 
 const _crItem = (
   name,
@@ -14,14 +17,15 @@ const _crItem = (
 const crMenuMore = (
   onToggleToolbar,
   onAbout
-) => ({
-  titleCl: CL_ROW_PANE_TOPIC,
-  pageWidth: 185,
-  maxPages: 1,
-  p0: [
-    _crItem('Toggle Toolbar', onToggleToolbar),
-    _crItem('About Data Source', onAbout)
-  ]
-});
+) => crSliderMenu(
+  CL_ROW_PANE_TOPIC,
+  185,
+  1, {
+    p0: [
+      _crItem('Toggle Toolbar', onToggleToolbar),
+      _crItem('About Data Source', onAbout)
+    ]
+  }
+);
 
 export default crMenuMore
