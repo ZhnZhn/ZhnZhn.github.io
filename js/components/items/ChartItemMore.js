@@ -3,16 +3,9 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
-const _crItem = (name, onClick) => ({
-  name,
-  onClick,
-  isClose: true
-});
-const crModel = (toggleToolbar, onToTop, hideCaption) => ({
-  titleCl: _styleFn.CL_ROW_PANE_TOPIC,
-  pageWidth: 150,
-  maxPages: 1,
-  p0: [_crItem('Move to Top', onToTop), _crItem('Hide Caption', hideCaption), _crItem('Toggle Toolbar', toggleToolbar)]
+var _menuModelFn = require("../menuModelFn");
+const crModel = (toggleToolbar, onToTop, hideCaption) => (0, _menuModelFn.crSliderMenu)(_styleFn.CL_ROW_PANE_TOPIC, 150, 1, {
+  p0: [(0, _menuModelFn.crItem)('Move to Top', onToTop), (0, _menuModelFn.crItem)('Hide Caption', hideCaption), (0, _menuModelFn.crItem)('Toggle Toolbar', toggleToolbar)]
 });
 var _default = exports.default = crModel;
 //# sourceMappingURL=ChartItemMore.js.map

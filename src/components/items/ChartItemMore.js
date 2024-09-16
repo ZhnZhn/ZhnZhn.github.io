@@ -1,28 +1,22 @@
 import { CL_ROW_PANE_TOPIC } from '../styleFn';
-
-const _crItem = (
-  name,
-  onClick
-) => ({
-  name,
-  onClick,
-  isClose: true
-});
+import {
+  crItem,
+  crSliderMenu
+} from '../menuModelFn';
 
 const crModel = (
   toggleToolbar,
   onToTop,
   hideCaption
-) => ({
-    titleCl: CL_ROW_PANE_TOPIC,
-    pageWidth: 150,
-    maxPages: 1,
-    p0: [
-      _crItem('Move to Top', onToTop),
-      _crItem('Hide Caption', hideCaption),
-      _crItem('Toggle Toolbar', toggleToolbar)
-   ]
-});
-
+) => crSliderMenu(
+  CL_ROW_PANE_TOPIC,
+  150,
+  1, {
+  p0: [
+    crItem('Move to Top', onToTop),
+    crItem('Hide Caption', hideCaption),
+    crItem('Toggle Toolbar', toggleToolbar)
+  ]
+ });
 
 export default crModel
