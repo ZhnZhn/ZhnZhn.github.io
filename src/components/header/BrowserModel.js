@@ -42,35 +42,30 @@ import {
   showBrowser
 } from '../../flux/stores/browserStore';
 
+import {
+  crSubItem,
+  crItem
+} from '../menuModelFn';
+
 const PREFIX_CL_ROW_ITEM = `${CL_ROW__PANE_TOPIC} item__`
 , CL_BR = `${PREFIX_CL_ROW_ITEM}browser`
 , CL_ORG = `${PREFIX_CL_ROW_ITEM}org`
 , CL_W = `${PREFIX_CL_ROW_ITEM}watch`;
 
-const _fBD = id => () => {
-  showBrowser(id)
-};
-
 const _crSubMenuItem = (
   id,
   name
-) => ({
-  id,
-  name,
-  type: 'sub',
-  cn: CL_BR
-})
-
-const _crMenuItem = (
+) => crSubItem(id, name, CL_BR)
+, _crMenuItem = (
   cn,
   name,
   id
-) => ({
-  cn,
+) => crItem(
   name,
-  onClick: _fBD(id),
-  isClose: true
-})
+  () => showBrowser(id),
+  true,
+  cn
+);
 
 const _crMenuItems = (
   configs
@@ -82,7 +77,7 @@ const PAGE_CONFIGS_01 = [
   [CL_ORG, 'DBnomics', BT_DB_NOMICS],
   [CL_BR, 'Energy', BT_ENERGY],
   [CL_BR, 'U.S. Economics', BT_US_ECONOMICS],
-  [CL_BR, 'Commodities', BT_COMMODITIES]  
+  [CL_BR, 'Commodities', BT_COMMODITIES]
 ]
 , PAGE_CONFIGS_02 = [
   [CL_ORG, 'Overview', BT_EUROSTAT],

@@ -1,14 +1,15 @@
 import { CL_ROW_PANE_TOPIC } from '../../styleFn';
+import { crItem } from '../../menuModelFn';
 
 const _crItem = (
   name,
   onClick
-) => ({
+) => crItem(
   name,
   onClick,
-  cn: CL_ROW_PANE_TOPIC,
-  isClose: true
-});
+  true,
+  CL_ROW_PANE_TOPIC
+);
 
 const crMenuMore = (
   onToggleToolbar,

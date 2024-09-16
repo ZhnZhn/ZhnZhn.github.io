@@ -6,25 +6,13 @@ var _styleFn = require("../styleFn");
 var _BrowserType = require("../../constants/BrowserType");
 var _compStore = require("../../flux/stores/compStore");
 var _browserStore = require("../../flux/stores/browserStore");
+var _menuModelFn = require("../menuModelFn");
 const PREFIX_CL_ROW_ITEM = `${_styleFn.CL_ROW__PANE_TOPIC} item__`,
   CL_BR = `${PREFIX_CL_ROW_ITEM}browser`,
   CL_ORG = `${PREFIX_CL_ROW_ITEM}org`,
   CL_W = `${PREFIX_CL_ROW_ITEM}watch`;
-const _fBD = id => () => {
-  (0, _browserStore.showBrowser)(id);
-};
-const _crSubMenuItem = (id, name) => ({
-  id,
-  name,
-  type: 'sub',
-  cn: CL_BR
-});
-const _crMenuItem = (cn, name, id) => ({
-  cn,
-  name,
-  onClick: _fBD(id),
-  isClose: true
-});
+const _crSubMenuItem = (id, name) => (0, _menuModelFn.crSubItem)(id, name, CL_BR),
+  _crMenuItem = (cn, name, id) => (0, _menuModelFn.crItem)(name, () => (0, _browserStore.showBrowser)(id), true, cn);
 const _crMenuItems = configs => configs.map(_ref => {
   let [cn, name, id] = _ref;
   return _crMenuItem(cn, name, id);

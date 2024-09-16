@@ -4,24 +4,8 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-const _crSubItem = (id, name) => ({
-  type: 'sub',
-  id,
-  name
-  //cn
-});
-const _crItem = function (name, onClick, isClose) {
-  if (isClose === void 0) {
-    isClose = true;
-  }
-  return {
-    name,
-    onClick,
-    isClose
-    //cn
-  };
-};
-const P0 = [_crSubItem('p1', 'Items'), _crSubItem('p2', 'Sort By, ASC'), _crSubItem('p3', 'Resize')];
+var _menuModelFn = require("../menuModelFn");
+const P0 = [(0, _menuModelFn.crSubItem)('p1', 'Items'), (0, _menuModelFn.crSubItem)('p2', 'Sort By, ASC'), (0, _menuModelFn.crSubItem)('p3', 'Resize')];
 const crModelMore = (isAdminMode, _ref) => {
   let {
     onMinWidth,
@@ -34,9 +18,9 @@ const crModelMore = (isAdminMode, _ref) => {
     onSortBy,
     onCompareTo
   } = _ref;
-  const p1 = [_crItem('Remove All', onRemoveAll), _crItem('Show Caption', onShowCaptions, false)];
+  const p1 = [(0, _menuModelFn.crItem)('Remove All', onRemoveAll), (0, _menuModelFn.crItem)('Show Caption', onShowCaptions, false)];
   if (isAdminMode) {
-    p1.push(_crItem('CompareTo', onCompareTo));
+    p1.push((0, _menuModelFn.crItem)('CompareTo', onCompareTo));
   }
   return {
     titleCl: _styleFn.CL_ROW_PANE_TOPIC,
@@ -44,8 +28,8 @@ const crModelMore = (isAdminMode, _ref) => {
     maxPages: 2,
     p0: P0,
     p1: p1,
-    p2: [_crItem('Value', (0, _uiApi.bindTo)(onSortBy, '_value')), _crItem('Percent', (0, _uiApi.bindTo)(onSortBy, '_percentAbs')), _crItem('Delta', (0, _uiApi.bindTo)(onSortBy, '_deltaAbs')), _crItem('Reverse', onSortBy)],
-    p3: [_crItem('to MinWidth', onMinWidth, false), _crItem('to InitialWidth', onInitWidth, false), _crItem('+10px to Width', onPlusWidth, false), _crItem('-10px to Width', onMinusWidth, false), _crItem('Fit Items to Width', onFit, false)]
+    p2: [(0, _menuModelFn.crItem)('Value', (0, _uiApi.bindTo)(onSortBy, '_value')), (0, _menuModelFn.crItem)('Percent', (0, _uiApi.bindTo)(onSortBy, '_percentAbs')), (0, _menuModelFn.crItem)('Delta', (0, _uiApi.bindTo)(onSortBy, '_deltaAbs')), (0, _menuModelFn.crItem)('Reverse', onSortBy)],
+    p3: [(0, _menuModelFn.crItem)('to MinWidth', onMinWidth, false), (0, _menuModelFn.crItem)('to InitialWidth', onInitWidth, false), (0, _menuModelFn.crItem)('+10px to Width', onPlusWidth, false), (0, _menuModelFn.crItem)('-10px to Width', onMinusWidth, false), (0, _menuModelFn.crItem)('Fit Items to Width', onFit, false)]
   };
 };
 var _default = exports.default = crModelMore;

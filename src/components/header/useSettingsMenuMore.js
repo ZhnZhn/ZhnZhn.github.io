@@ -2,6 +2,7 @@ import { useMemo } from '../uiApi';
 import useToggle from '../hooks/useToggle';
 
 import { isWideWidth } from '../has';
+import { crItem } from '../menuModelFn'
 
 const IS_WIDE_WIDTH = isWideWidth();
 
@@ -15,12 +16,9 @@ const useSettingsMenuMore = (CL_ROW) => {
     titleCl: CL_ROW,
     pageWidth: 190,
     maxPages: 1,
-    p0: [{
-      cn: CL_ROW,
-      onClick: toggleLabels,
-      name: "Toggle Input Labels",
-      isClose: true
-    }]
+    p0: [
+      crItem("Toggle Input Labels", toggleLabels, true, CL_ROW)
+    ]
   }), [])
   //toggleLabels, CL_ROW
   /*eslint-enable react-hooks/exhaustive-deps */

@@ -6,6 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _has = require("../has");
+var _menuModelFn = require("../menuModelFn");
 const IS_WIDE_WIDTH = (0, _has.isWideWidth)();
 const useSettingsMenuMore = CL_ROW => {
   const [isShowLabels, toggleLabels] = (0, _useToggle.default)(IS_WIDE_WIDTH)
@@ -14,17 +15,11 @@ const useSettingsMenuMore = CL_ROW => {
       titleCl: CL_ROW,
       pageWidth: 190,
       maxPages: 1,
-      p0: [{
-        cn: CL_ROW,
-        onClick: toggleLabels,
-        name: "Toggle Input Labels",
-        isClose: true
-      }]
+      p0: [(0, _menuModelFn.crItem)("Toggle Input Labels", toggleLabels, true, CL_ROW)]
     }), []);
   //toggleLabels, CL_ROW
   /*eslint-enable react-hooks/exhaustive-deps */
   return [isShowLabels, menuModel];
 };
-var _default = useSettingsMenuMore;
-exports.default = _default;
+var _default = exports.default = useSettingsMenuMore;
 //# sourceMappingURL=useSettingsMenuMore.js.map

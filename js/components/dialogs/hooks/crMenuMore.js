@@ -3,12 +3,8 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../../styleFn");
-const _crItem = (name, onClick) => ({
-  name,
-  onClick,
-  cn: _styleFn.CL_ROW_PANE_TOPIC,
-  isClose: true
-});
+var _menuModelFn = require("../../menuModelFn");
+const _crItem = (name, onClick) => (0, _menuModelFn.crItem)(name, onClick, true, _styleFn.CL_ROW_PANE_TOPIC);
 const crMenuMore = (onToggleToolbar, onAbout) => ({
   titleCl: _styleFn.CL_ROW_PANE_TOPIC,
   pageWidth: 185,

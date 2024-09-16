@@ -1,0 +1,19 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/components/menuModelFn.js"
+ ],
+ "file": "../../src/components/menuModelFn.js",
+ "names": [
+  "crSubItem",
+  "id",
+  "name",
+  "cn",
+  "type",
+  "exports",
+  "crItem",
+  "onClick",
+  "isClose"
+ ],
+ "mappings": ";;;;AAAO,MAAMA,SAAS,GAAGA,CACvBC,EAAE,EACFC,IAAI,EACJC,EAAE,MACE;EACJC,IAAI,EAAE,KAAK;EACXH,EAAE;EACFC,IAAI;EACJC;AACF,CAAC,CAAC;AAAAE,OAAA,CAAAL,SAAA,GAAAA,SAAA;AAEK,MAAMM,MAAM,GAAG,SAAAA,CACpBJ,IAAI,EACJK,OAAO,EACPC,OAAO,EACPL,EAAE;EAAA,IADFK,OAAO;IAAPA,OAAO,GAAC,IAAI;EAAA;EAAA,OAER;IACJN,IAAI;IACJK,OAAO;IACPC,OAAO;IACPL;EACF,CAAC;AAAA,CAAC;AAAAE,OAAA,CAAAC,MAAA,GAAAA,MAAA"
+}
