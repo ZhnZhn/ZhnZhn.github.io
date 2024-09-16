@@ -91,6 +91,16 @@ const _crItemLabel = (
 });
 
 const DF_DATA = {}
+, _optionFormats = [
+  {caption: "PNG image", value: void 0},
+  {caption: "JPEG image", value: { type: "image/jpeg"}},
+  {caption: "SVG vector image", value: { type: "image/svg+xml"}}
+]
+, DF_EXPORT_FORMAT = _optionFormats[0]
+, _getItemValue = (
+  item,
+  dfValue
+) => item && item.value || dfValue
 
 const CustomizeExportDialog = memoIsShow(({
   isShow,
@@ -110,6 +120,7 @@ const CustomizeExportDialog = memoIsShow(({
     toggleStyle
   ] = useToggle(true)
   , _refExportStyle = useRef({})
+  , _refExportFormat = useRef(null)
   , _refToolbarButtons = useRef([
     { caption: 'D', onClick: toggleDimension },
     { caption: 'T', onClick: toggleTitle },
@@ -120,13 +131,19 @@ const CustomizeExportDialog = memoIsShow(({
   , _refInputHeight = useRef()
   , _refInputTitle = useRef()
   , _refInputSubtitle = useRef()
-
-  , _hSelectStyle = useMemo(() => (item) => {
-     setRefValue(
-       _refExportStyle,
-       item && item.value || {}
-     )
-  }, [])
+  , [
+    _hSelectStyle,
+    _hSelectFormat
+  ] = useMemo(() => [
+    item => setRefValue(
+      _refExportStyle,
+      _getItemValue(item, {})
+    ),
+    item => setRefValue(
+      _refExportFormat,
+      _getItemValue(item, null)
+    )
+  ], [])
   , { chart, fn } = data
   , _hExport = useEventCallback(() => {
     const [width, height] = _getDimension(
@@ -154,7 +171,9 @@ const CustomizeExportDialog = memoIsShow(({
           }
         }, getRefValue(_refExportStyle));
 
-      fn.apply(chart, [null, _customOption]);
+      fn.apply(chart,
+        [getRefValue(_refExportFormat), _customOption]
+      );
       onClose();
   })
   , _refCommandButtons = useRef([
@@ -238,6 +257,15 @@ const CustomizeExportDialog = memoIsShow(({
            />
          </RowFlex>
        </ShowHide>
+       <RowFlex style={S_MT_10}>
+         <span style={S_LABEL}>Export As</span>
+         <InputSelect
+           width="250"
+           options={_optionFormats}
+           placeholder={DF_EXPORT_FORMAT.caption}
+           onSelect={_hSelectFormat}
+         />
+       </RowFlex>
     </ModalDialog>
   );
 });

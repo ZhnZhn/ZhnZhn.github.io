@@ -79,7 +79,23 @@ const _crItemLabel = function (html, top, fontSize) {
     }
   };
 };
-const DF_DATA = {};
+const DF_DATA = {},
+  _optionFormats = [{
+    caption: "PNG image",
+    value: void 0
+  }, {
+    caption: "JPEG image",
+    value: {
+      type: "image/jpeg"
+    }
+  }, {
+    caption: "SVG vector image",
+    value: {
+      type: "image/svg+xml"
+    }
+  }],
+  DF_EXPORT_FORMAT = _optionFormats[0],
+  _getItemValue = (item, dfValue) => item && item.value || dfValue;
 const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
   let {
     isShow,
@@ -90,6 +106,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     [isShowTitle, toggleTitle] = (0, _useToggle.default)(true),
     [isShowStyle, toggleStyle] = (0, _useToggle.default)(true),
     _refExportStyle = (0, _uiApi.useRef)({}),
+    _refExportFormat = (0, _uiApi.useRef)(null),
     _refToolbarButtons = (0, _uiApi.useRef)([{
       caption: 'D',
       onClick: toggleDimension
@@ -105,9 +122,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     _refInputHeight = (0, _uiApi.useRef)(),
     _refInputTitle = (0, _uiApi.useRef)(),
     _refInputSubtitle = (0, _uiApi.useRef)(),
-    _hSelectStyle = (0, _uiApi.useMemo)(() => item => {
-      (0, _uiApi.setRefValue)(_refExportStyle, item && item.value || {});
-    }, []),
+    [_hSelectStyle, _hSelectFormat] = (0, _uiApi.useMemo)(() => [item => (0, _uiApi.setRefValue)(_refExportStyle, _getItemValue(item, {})), item => (0, _uiApi.setRefValue)(_refExportFormat, _getItemValue(item, null))], []),
     {
       chart,
       fn
@@ -129,7 +144,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
             items: [_crItemLabel(APP_HTML), _crItemLabel(`DataSource: ${chart.userOptions.zhConfig?.dataSource ?? ''}`, height - DS_TOP_PADDING, DS_FONT_SIZE)]
           }
         }, (0, _uiApi.getRefValue)(_refExportStyle));
-      fn.apply(chart, [null, _customOption]);
+      fn.apply(chart, [(0, _uiApi.getRefValue)(_refExportFormat), _customOption]);
       onClose();
     }),
     _refCommandButtons = (0, _uiApi.useRef)([/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
@@ -217,6 +232,17 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
           onSelect: _hSelectStyle
         })]
       })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlex, {
+      style: S_MT_10,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: S_LABEL,
+        children: "Export As"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSelect.default, {
+        width: "250",
+        options: _optionFormats,
+        placeholder: DF_EXPORT_FORMAT.caption,
+        onSelect: _hSelectFormat
+      })]
     })]
   });
 });
