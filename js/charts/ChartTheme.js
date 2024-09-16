@@ -132,38 +132,7 @@ const ChartTheme = exports.ChartTheme = {
   },
   navigation: {
     buttonOptions: {
-      align: 'left',
-      x: -10,
-      y: -20,
-      theme: {
-        fill: 'transparent',
-        states: {
-          hover: {
-            'stroke-width': 2,
-            stroke: _Color.COLOR_HOVER
-          }
-        }
-      }
-    },
-    menuItemStyle: {
-      'font-size': '16px',
-      'font-weight': 'bold',
-      color: _Color.COLOR_ITEM,
-      'line-height': '1.6',
-      cursor: 'pointer'
-    },
-    menuItemHoverStyle: {
-      color: _Color.COLOR_HOVER,
-      background: _Color.COLOR_BG_ITEM_HOVER
-    },
-    menuStyle: {
-      position: 'relative',
-      top: '8px',
-      border: '2px solid',
-      'border-color': _Color.COLOR_BG_TITLE,
-      'border-radius': '5px',
-      'box-shadow': 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
-      background: _Color.COLOR_CHART
+      enabled: false
     }
   },
   plotOptions: {
@@ -243,8 +212,8 @@ const ChartTheme = exports.ChartTheme = {
     backgroundColor: _Color.COLOR_TOOLTIP,
     borderWidth: 2,
     borderRadius: 10,
-    headerFormat: "<span class=\"" + _CL.CL_TP_HEADER + "\">{point.key}</span><br/>'",
-    pointFormat: "<span class=\"" + _CL.CL_TP_TITLE + "\">Value: </span>" + ("<span class=\"" + _CL.CL_TP_VALUE + "\">{point.y}</span><br/>")
+    headerFormat: `<span class="${_CL.CL_TP_HEADER}">{point.key}</span><br/>'`,
+    pointFormat: `<span class="${_CL.CL_TP_TITLE}">Value: </span>` + `<span class="${_CL.CL_TP_VALUE}">{point.y}</span><br/>`
   },
   xAxis: {
     lineColor: _Color.COLOR_X_LINE,

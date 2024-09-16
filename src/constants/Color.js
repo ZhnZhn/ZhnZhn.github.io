@@ -29,8 +29,6 @@ export const COLOR_LABEL_LINK = '#909090'
 export const COLOR_BG_TITLE = '#232f3b'
 export const COLOR_TITLE_HIDE = P_GREY
 export const COLOR_TITLE_SHOW = P_SIREN
-export const COLOR_ITEM = P_BLACK
-export const COLOR_BG_ITEM_HOVER = '#4572a5'
 export const COLOR_HOVER = P_YELLOW
 
 export const COLOR_CHART = P_DARK_GREY

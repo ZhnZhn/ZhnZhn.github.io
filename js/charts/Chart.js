@@ -17,7 +17,7 @@ const FONT_STYLE = {
     text: '',
     floating: true,
     align: 'left',
-    x: 25,
+    x: 0,
     style: {
       ...FONT_STYLE,
       stroke: 'transparent',
@@ -168,7 +168,7 @@ const crCategoryDataLabels = isEnabled => ({
   crop: false,
   overflow: 'allow',
   style: {
-    fontSize: 14
+    fontSize: '15px'
   }
 });
 exports.crCategoryDataLabels = crCategoryDataLabels;
@@ -224,7 +224,7 @@ const fSecondYAxis = (name, color) => ({
     style: {
       color: color,
       fontWeight: "bold",
-      fontSize: "14px"
+      fontSize: "15px"
     }
   }
 });

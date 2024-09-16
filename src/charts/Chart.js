@@ -28,8 +28,8 @@ const FONT_STYLE = {
 , CAPTION_CONFIG = {
   text: '',
   floating: true,
-  align: 'left',
-  x: 25,
+  align: 'left',  
+  x: 0,
   style: {
     ...FONT_STYLE,
     stroke: 'transparent',

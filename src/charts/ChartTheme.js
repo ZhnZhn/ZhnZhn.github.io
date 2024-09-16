@@ -3,11 +3,8 @@ import Highcharts from 'highcharts';
 import handleMouseOver from './handleMouseOver';
 
 import {
-  COLOR_CHART,
   COLOR_TOOLTIP,
-  COLOR_ITEM,
-  COLOR_BG_TITLE,
-  COLOR_BG_ITEM_HOVER,
+  COLOR_BG_TITLE,  
   COLOR_TITLE_SHOW,
   COLOR_HOVER,
   COLOR_CHART_PRINT,
@@ -177,38 +174,7 @@ export const ChartTheme = {
   },
   navigation: {
     buttonOptions: {
-      align: 'left',
-      x: -10,
-      y: -20,
-      theme: {
-        fill: 'transparent',
-        states: {
-          hover: {
-            'stroke-width': 2,
-            stroke: COLOR_HOVER
-          }
-        }
-      }
-    },
-    menuItemStyle: {
-      'font-size': '16px',
-      'font-weight': 'bold',
-       color: COLOR_ITEM,
-       'line-height': '1.6',
-       cursor: 'pointer'
-    },
-    menuItemHoverStyle: {
-      color: COLOR_HOVER,
-      background: COLOR_BG_ITEM_HOVER
-    },
-    menuStyle: {
-      position: 'relative',
-      top: '8px',
-      border: '2px solid',
-      'border-color': COLOR_BG_TITLE,
-      'border-radius': '5px',
-      'box-shadow': 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
-      background: COLOR_CHART
+      enabled: false
     }
   },
   plotOptions: {
