@@ -41,7 +41,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.25.6",
-    "big.js": "^6.2.1",
+    "big.js": "^6.2.2",
     "dompurify": "^3.1.6",
     "highcharts": "^9.1.2",
     "jsonstat": "^0.12.4",
