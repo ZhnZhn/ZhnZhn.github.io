@@ -4,7 +4,8 @@ import { mlsToDmy } from '../../utils/dateFn';
 
 import {
   crSubItem,
-  crItem
+  crItem,
+  crSliderMenu
 } from '../menuModelFn';
 import ModalSlider from '../zhn-modal-slider/ModalSlider';
 import { S_MODAL_MENU } from './ModalMenu.Style';
@@ -34,10 +35,10 @@ const _isZoom = (getChart) => {
 const _crModelMore = (
   props,
   isItemZoom
-) => ({
-  titleCl: CL_ROW_PANE_TOPIC,
-  pageWidth: 180,
-  maxPages: 2,
+) => crSliderMenu(
+  CL_ROW_PANE_TOPIC,
+  180,
+  2, {
   p0: [
     crSubItem("p1", "Chart"),
     isFn(props.onAddToWatch)
@@ -54,8 +55,8 @@ const _crModelMore = (
     crItem("Full Screen", props.onFullScreen),
     crItem("Export As", props.onExport),
     crItem("Print", props.onPrint)
-  ]
-});
+  ]}
+);
 
 const ModalMenuFn = (props) => {
   const {
