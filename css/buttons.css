@@ -54,20 +54,6 @@
   color: #a487d4;  
 }
 
-.bt-sub-item {
-  display: block;
-  color: grey;
-  width: 100%; 
-  line-height: 1.8;
-  text-align: left; 
-  font-weight: normal;
-  border-bottom: 1px solid;
-}
-.bt-sub-item:hover {
-  color: #a487d4;
-  font-weight: bold;
-}
-
 .arrow-down {
   display: inline-block;
   position: relative;
