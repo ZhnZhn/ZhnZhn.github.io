@@ -8,7 +8,7 @@ var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _BtSvgX = require("../zhn/BtSvgX");
 var _Item = require("./Item.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_ITEM_HEADER = (0, _styleFn.crElementItemCn)(),
+const CL_ITEM_HEADER = (0, _styleFn.crItemCaptionCn)(),
   S_ROOT = {
     position: 'relative',
     height: 'auto',

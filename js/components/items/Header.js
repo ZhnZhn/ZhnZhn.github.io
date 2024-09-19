@@ -19,7 +19,7 @@ var _Item = require("./Item.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const CL_ITEM_HEADER = (0, _styleFn.crElementItemCn)("item-header"),
+const CL_ITEM_HEADER = (0, _styleFn.crItemCaptionCn)("item-header"),
   CL_CHARTS_MENU_MORE = (0, _styleFn.crElementBorderCn)("popup-menu charts__menu-more"),
   S_BT_MORE = {
     position: 'relative',

@@ -1,13 +1,13 @@
-import { crElementItemCn } from '../styleFn';
+import { crItemCaptionCn } from '../styleFn';
 
 import Button from '../zhn/Button';
 import { BtSvgClose } from '../zhn/BtSvgX';
 import {
-  CL_HEADER_CAPTION,  
+  CL_HEADER_CAPTION,
   S_BT_SVG_CLOSE
 } from './Item.Style';
 
-const CL_ITEM_HEADER = crElementItemCn()
+const CL_ITEM_HEADER = crItemCaptionCn()
 , S_ROOT = {
   position: 'relative',
   height: 'auto',

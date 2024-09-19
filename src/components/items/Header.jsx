@@ -3,7 +3,7 @@ import { useId } from '../uiApi';
 import {
   S_INLINE,
   crStyle2,
-  crElementItemCn,
+  crItemCaptionCn,
   crElementBorderCn
 } from '../styleFn';
 
@@ -27,7 +27,7 @@ import {
   COLOR_SVG_MORE
 } from './Item.Style';
 
-const CL_ITEM_HEADER = crElementItemCn("item-header")
+const CL_ITEM_HEADER = crItemCaptionCn("item-header")
 , CL_CHARTS_MENU_MORE = crElementBorderCn("popup-menu charts__menu-more")
 , S_BT_MORE = {
   position: 'relative',

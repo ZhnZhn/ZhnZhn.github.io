@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getColorBlack = exports.crStyle3 = exports.crStyle2 = exports.crStepStyle = exports.crShowHide = exports.crScrollYCn = exports.crFlexRowCn = exports.crElementItemCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCnNotSelected = exports.crCn = exports.crBtSvgCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.crBoldCn = exports.crBold16Cn = exports.S_OPEN_CLOSE_LEVEL_2 = exports.S_NONE = exports.S_INLINE = exports.S_BORDER_RADIUS_2 = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TOGGLE_ARROW = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW__PANE_TOPIC = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE = exports.CL_NOT_SELECTED = exports.CL_HRZ_CONTAINER = exports.CL_CHB_BLACK = exports.CL_BLACK = void 0;
+exports.getColorBlack = exports.crStyle3 = exports.crStyle2 = exports.crStepStyle = exports.crShowHide = exports.crScrollYCn = exports.crItemCaptionCn = exports.crFlexRowCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCnNotSelected = exports.crCn = exports.crBtSvgCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.crBoldCn = exports.crBold16Cn = exports.S_OPEN_CLOSE_LEVEL_2 = exports.S_NONE = exports.S_INLINE = exports.S_BORDER_RADIUS_2 = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TOGGLE_ARROW = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW__PANE_TOPIC = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE = exports.CL_NOT_SELECTED = exports.CL_HRZ_CONTAINER = exports.CL_CHB_BLACK = exports.CL_BLACK = void 0;
 var _uiApi = require("./uiApi");
 var _uiTheme = require("./styles/uiTheme");
 exports.getColorBlack = _uiTheme.getColorBlack;
@@ -86,8 +86,8 @@ const crElementBorderCn = exports.crElementBorderCn = _fCrCn(CL_EL_B);
 const CL_EL_BG = "el-bg";
 const CL_EL_C = "el-c";
 const crElementCn = exports.crElementCn = _fCrCn(`${CL_EL_C} ${CL_EL_BG}`);
-const crElementItemCn = exports.crElementItemCn = _fCrCn(`${CL_EL_C} el-bb`);
 const crElementBgCn = exports.crElementBgCn = _fCrCn(CL_EL_BG);
+const crItemCaptionCn = exports.crItemCaptionCn = _fCrCn(`${CL_C_BG} ${CL_EL_C} el-bb`);
 const crBtCircleHfCn = exports.crBtCircleHfCn = _fCrCn("bt-circle-hf");
 const crBtCircleCn = exports.crBtCircleCn = _fCrCnNotSelected("bt-circle");
 const crBoldCn = exports.crBoldCn = _fCrCn("bold");
