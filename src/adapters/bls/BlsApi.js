@@ -15,12 +15,13 @@ const API_URL = 'https://api.bls.gov/publicAPI'
 
 const _assign = Object.assign;
 
-const _crCuId = (
+const _fCrId321 = idPrefix => (
   items
-) => `CU${items[2].v}R${items[1].v}${items[0].v}`;
+) => `${idPrefix}${items[2].v}R${items[1].v}${items[0].v}`;
 
 const _hmCrId = crHm({
-  CU: _crCuId
+  CU: _fCrId321('CU'),
+  CW: _fCrId321('CW')
 });
 
 const _getSeriaId = ({
@@ -46,7 +47,7 @@ const _addNativeLinkTo = (
 };
 
 
-const _crCuCaption = (
+const _crCaption321 = (
   dfTitle,
   items
 ) => ({
@@ -55,8 +56,9 @@ const _crCuCaption = (
 });
 
 const _hmCrCaption = crHm({
-  CU: _crCuCaption
-})
+  CU: _crCaption321,
+  CW: _crCaption321
+});
 
 const _crCaption = ({
   dfCode,

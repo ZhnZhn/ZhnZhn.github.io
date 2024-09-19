@@ -8,9 +8,10 @@ const API_URL = 'https://api.bls.gov/publicAPI',
   TS_DATA = 'timeseries/data',
   NATIVE_URL = 'https://data.bls.gov/timeseries';
 const _assign = Object.assign;
-const _crCuId = items => `CU${items[2].v}R${items[1].v}${items[0].v}`;
+const _fCrId321 = idPrefix => items => `${idPrefix}${items[2].v}R${items[1].v}${items[0].v}`;
 const _hmCrId = (0, _crFn.crHm)({
-  CU: _crCuId
+  CU: _fCrId321('CU'),
+  CW: _fCrId321('CW')
 });
 const _getSeriaId = _ref => {
   let {
@@ -28,12 +29,13 @@ const _addNativeLinkTo = (option, seriaId) => {
     }
   });
 };
-const _crCuCaption = (dfTitle, items) => ({
+const _crCaption321 = (dfTitle, items) => ({
   title: `${dfTitle}, ${items[2].c}`,
   subtitle: `${items[1].c}: ${items[0].c}`
 });
 const _hmCrCaption = (0, _crFn.crHm)({
-  CU: _crCuCaption
+  CU: _crCaption321,
+  CW: _crCaption321
 });
 const _crCaption = _ref2 => {
   let {
