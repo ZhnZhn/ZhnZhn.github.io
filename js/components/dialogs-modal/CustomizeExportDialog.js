@@ -95,7 +95,10 @@ const DF_DATA = {},
     }
   }],
   DF_EXPORT_FORMAT = _optionFormats[0],
-  _getItemValue = (item, dfValue) => item && item.value || dfValue;
+  _getItemValue = (item, dfValue) => item && item.value || dfValue,
+  _crCaptionText = refInput => ({
+    text: (0, _uiApi.getInputValue)(refInput)
+  });
 const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
   let {
     isShow,
@@ -124,8 +127,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     _refInputSubtitle = (0, _uiApi.useRef)(),
     [_hSelectStyle, _hSelectFormat] = (0, _uiApi.useMemo)(() => [item => (0, _uiApi.setRefValue)(_refExportStyle, _getItemValue(item, {})), item => (0, _uiApi.setRefValue)(_refExportFormat, _getItemValue(item, null))], []),
     {
-      chart,
-      fn
+      chart
     } = data,
     _hExport = (0, _useEventCallback.default)(() => {
       const [width, height] = _getDimension(chart, (0, _uiApi.getInputValue)(_refInputWidth), (0, _uiApi.getInputValue)(_refInputHeight)),
@@ -134,17 +136,13 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
             width,
             height
           },
-          title: {
-            text: (0, _uiApi.getInputValue)(_refInputTitle)
-          },
-          subtitle: {
-            text: (0, _uiApi.getInputValue)(_refInputSubtitle)
-          },
+          title: _crCaptionText(_refInputTitle),
+          subtitle: _crCaptionText(_refInputSubtitle),
           labels: {
             items: [_crItemLabel(APP_HTML), _crItemLabel(`DataSource: ${chart.userOptions.zhConfig?.dataSource ?? ''}`, height - DS_TOP_PADDING, DS_FONT_SIZE)]
           }
         }, (0, _uiApi.getRefValue)(_refExportStyle));
-      fn.apply(chart, [(0, _uiApi.getRefValue)(_refExportFormat), _customOption]);
+      chart.exportChartLocal((0, _uiApi.getRefValue)(_refExportFormat), _customOption);
       onClose();
     }),
     _refCommandButtons = (0, _uiApi.useRef)([/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {

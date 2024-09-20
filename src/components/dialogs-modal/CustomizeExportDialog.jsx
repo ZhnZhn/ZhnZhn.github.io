@@ -101,6 +101,9 @@ const DF_DATA = {}
   item,
   dfValue
 ) => item && item.value || dfValue
+, _crCaptionText = refInput => ({
+  text: getInputValue(refInput)
+});
 
 const CustomizeExportDialog = memoIsShow(({
   isShow,
@@ -144,7 +147,7 @@ const CustomizeExportDialog = memoIsShow(({
       _getItemValue(item, null)
     )
   ], [])
-  , { chart, fn } = data
+  , { chart } = data
   , _hExport = useEventCallback(() => {
     const [width, height] = _getDimension(
       chart,
@@ -154,12 +157,8 @@ const CustomizeExportDialog = memoIsShow(({
     , _customOption = merge(
         true, {
           chart: { width, height },
-          title: {
-            text: getInputValue(_refInputTitle)
-          },
-          subtitle: {
-            text: getInputValue(_refInputSubtitle)
-          },
+          title: _crCaptionText(_refInputTitle),
+          subtitle: _crCaptionText(_refInputSubtitle),
           labels: {
             items: [
               _crItemLabel(APP_HTML),
@@ -171,9 +170,10 @@ const CustomizeExportDialog = memoIsShow(({
           }
         }, getRefValue(_refExportStyle));
 
-      fn.apply(chart,
-        [getRefValue(_refExportFormat), _customOption]
-      );
+      chart.exportChartLocal(
+        getRefValue(_refExportFormat),
+        _customOption
+      )
       onClose();
   })
   , _refCommandButtons = useRef([
