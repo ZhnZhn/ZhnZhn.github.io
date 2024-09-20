@@ -5,8 +5,13 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
+var _ComponentActions = require("../../flux/actions/ComponentActions");
 const useChartMethods = (getChart, onZoom, onCopy, onPasteTo) => (0, _useRefInit.default)(() => ({
-  onExport: () => getChart().exportChartLocal(),
+  onExport: () => {
+    (0, _ComponentActions.showCustomizeExport)({
+      chart: getChart()
+    });
+  },
   onFullScreen: () => getChart().fullscreen.open(),
   onPrint: () => getChart().print(),
   onX2H: () => getChart().zhToggle2H(),

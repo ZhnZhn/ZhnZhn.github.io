@@ -1,5 +1,6 @@
 import { isFn } from '../uiApi';
 import useRefInit from '../hooks/useRefInit';
+import { showCustomizeExport } from '../../flux/actions/ComponentActions';
 
 const useChartMethods = (
   getChart,
@@ -7,7 +8,11 @@ const useChartMethods = (
   onCopy,
   onPasteTo
 ) => useRefInit(() => ({
-  onExport: () => getChart().exportChartLocal(),
+  onExport: () => {
+    showCustomizeExport({
+      chart: getChart()
+    });
+  },
   onFullScreen: () => getChart().fullscreen.open(),
   onPrint: () => getChart().print(),
   onX2H: () => getChart().zhToggle2H(),
