@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _wrapExportChartLocal = _interopRequireDefault(require("./wrapExportChartLocal"));
 var _zhRemoveCategory = _interopRequireDefault(require("./zhRemoveCategory"));
 var _zhCaption = _interopRequireDefault(require("./zhCaption"));
 var _zhAddSeriaToYAxis = _interopRequireDefault(require("./zhAddSeriaToYAxis"));
@@ -20,10 +19,8 @@ var _zhReflowCharts = _interopRequireDefault(require("./zhReflowCharts"));
 var _zhUpdateSpacing = _interopRequireDefault(require("./zhUpdateSpacing"));
 const HighchartsZhn = Highcharts => {
   const {
-    wrap,
     Chart
   } = Highcharts;
-  (0, _wrapExportChartLocal.default)(wrap, Chart);
   (0, _zhCaption.default)(Chart);
   (0, _zhTogglePlotLines.default)(Chart);
   Object.assign(Chart.prototype, {

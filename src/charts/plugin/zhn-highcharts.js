@@ -1,4 +1,3 @@
-import wrapExportChartLocal from './wrapExportChartLocal'
 import zhRemoveCategory from './zhRemoveCategory'
 import zhCaption from './zhCaption'
 import zhAddSeriaToYAxis from './zhAddSeriaToYAxis'
@@ -17,8 +16,7 @@ import zhReflowCharts from './zhReflowCharts'
 import zhUpdateSpacing from './zhUpdateSpacing'
 
 const HighchartsZhn = (Highcharts) => {
-  const { wrap, Chart } = Highcharts;
-  wrapExportChartLocal(wrap, Chart)
+  const { Chart } = Highcharts;
   zhCaption(Chart)
   zhTogglePlotLines(Chart)
   Object.assign(Chart.prototype, {
