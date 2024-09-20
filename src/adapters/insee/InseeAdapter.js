@@ -4,15 +4,13 @@ import crConfigType1 from '../../charts/crConfigType1';
 import {
   isNaN,
   ymdToUTC,
-  findMinY
+  findMinY,
+  crXmlDocument
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import { crInfo } from './fnDescr';
 
-const _parser = new window.DOMParser();
-
 //€
-
 const _crZhConfig = (
   id,
   caption
@@ -33,13 +31,13 @@ const _crValueStatus = node => {
 };
 
 const _toData = (str) => {
-  const xml = _parser.parseFromString(str, 'text/xml')
+  const xml = crXmlDocument(str)
   , series = xml.getElementsByTagName('Series')
   , data = []
   , seriesParams = [];
 
   let i=0
-  , max = series.length
+  , max = (series || []).length
   , _seria
   , _getAttr
   , _childNodes

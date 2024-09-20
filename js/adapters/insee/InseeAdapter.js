@@ -8,10 +8,7 @@ var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1")
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _fnDescr = require("./fnDescr");
-const _parser = new window.DOMParser();
-
 //€
-
 const _crZhConfig = (id, caption) => ({
   id: id,
   key: id,
@@ -23,12 +20,12 @@ const _crValueStatus = node => {
   return _status && _status.length === 1 && _status !== 'A' ? _status.toLowerCase() : void 0;
 };
 const _toData = str => {
-  const xml = _parser.parseFromString(str, 'text/xml'),
+  const xml = (0, _AdapterFn.crXmlDocument)(str),
     series = xml.getElementsByTagName('Series'),
     data = [],
     seriesParams = [];
   let i = 0,
-    max = series.length,
+    max = (series || []).length,
     _seria,
     _getAttr,
     _childNodes,

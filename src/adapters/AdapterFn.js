@@ -198,6 +198,14 @@ export const fCrLazyValue = crValue => {
     : value;
 }
 
+let _parser;
+export const crXmlDocument = str => {
+  if (!_parser) {
+    _parser = new window.DOMParser();
+  }
+  return _parser.parseFromString(str, 'text/xml');
+}
+
 export const addToConfigInfo = (
   config,
   option
