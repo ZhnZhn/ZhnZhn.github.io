@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -201,4 +201,10 @@ const addToConfigDfLink = (config, caption, href) => {
   assign(config.zhConfig, crDfLink(caption, href));
 };
 exports.addToConfigDfLink = addToConfigDfLink;
+const fAddToConfigInfoAndDfLink = (title, crDfLink) => (config, json, option) => {
+  addToConfigInfo(config, option);
+  addToConfigDfLink(config, `${title} Data Portal`, crDfLink(option));
+  return config;
+};
+exports.fAddToConfigInfoAndDfLink = fAddToConfigInfoAndDfLink;
 //# sourceMappingURL=AdapterFn.js.map

@@ -225,10 +225,27 @@ export const crDfLink = (
     href
   }
 })
+
 export const addToConfigDfLink = (
   config,
   caption,
   href
 ) => {
   assign(config.zhConfig, crDfLink(caption, href))
+}
+
+export const fAddToConfigInfoAndDfLink = (
+  title,
+  crDfLink
+) => (
+  config,
+  json,
+  option
+) => {
+  addToConfigInfo(config, option)
+  addToConfigDfLink(config,
+    `${title} Data Portal`,
+    crDfLink(option)
+  )
+  return config;
 }

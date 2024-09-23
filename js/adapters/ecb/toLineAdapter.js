@@ -19,11 +19,6 @@ const crData = (json, option) => {
     return data;
   }, []).sort(_compareByFn.compareByDate);
 };
-const addToConfig = (config, json, option) => {
-  (0, _AdapterFn.addToConfigInfo)(config, option);
-  (0, _AdapterFn.addToConfigDfLink)(config, "ECB Data Portal", `${ITEM_URL}/${option.dfR}/${option.dfR}.${(0, _fnAdapter.crItemId)(option)}`);
-  return config;
-};
 const trOption = option => {
   const {
     dfSubt
@@ -32,10 +27,11 @@ const trOption = option => {
     option.subtitle = (0, _AdapterFn.joinBy)(', ', option.subtitle, dfSubt);
   }
 };
+const _crDfLink = option => `${ITEM_URL}/${option.dfR}/${option.dfR}.${(0, _fnAdapter.crItemId)(option)}`;
 const toLineAdapter = (0, _crAdapterType.crAdapterType1)({
   crData,
   crConfOption: (0, _crAdapterType.fCrConfOptionExchangeRate)("EUR"),
-  addToConfig,
+  addToConfig: (0, _AdapterFn.fAddToConfigInfoAndDfLink)("ECB", _crDfLink),
   trOption
 });
 var _default = exports.default = toLineAdapter;

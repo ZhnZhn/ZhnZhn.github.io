@@ -6,8 +6,7 @@ import {
   isNumber,
   getObjectKeys,
   ymdToUTC,
-  addToConfigInfo,
-  addToConfigDfLink,
+  fAddToConfigInfoAndDfLink,
   joinBy
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
@@ -37,19 +36,6 @@ const crData = (
     }, []).sort(compareByDate);
 };
 
-const addToConfig = (
-  config,
-  json,
-  option
-) => {
-  addToConfigInfo(config, option)
-  addToConfigDfLink(config,
-    "ECB Data Portal",
-    `${ITEM_URL}/${option.dfR}/${option.dfR}.${crItemId(option)}`
-  )
-  return config;
-}
-
 const trOption = option => {
   const {
     dfSubt
@@ -59,10 +45,14 @@ const trOption = option => {
   }
 };
 
+const _crDfLink = (
+  option
+) => `${ITEM_URL}/${option.dfR}/${option.dfR}.${crItemId(option)}`;
+
 const toLineAdapter = crAdapterType1({
   crData,
   crConfOption: fCrConfOptionExchangeRate("EUR"),
-  addToConfig,
+  addToConfig: fAddToConfigInfoAndDfLink("ECB", _crDfLink),
   trOption
 });
 
