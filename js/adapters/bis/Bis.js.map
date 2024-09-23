@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bis/Bis.js"
+ ],
+ "file": "../../../src/adapters/bis/Bis.js",
+ "names": [
+  "_fnFetch",
+  "require",
+  "_BisApi",
+  "_interopRequireDefault",
+  "_BisAdapter",
+  "Bis",
+  "fnFetch",
+  "fetchTxt",
+  "api",
+  "adapter",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,QAAA,GAAAC,OAAA;AAEA,IAAAC,OAAA,GAAAC,sBAAA,CAAAF,OAAA;AACA,IAAAG,WAAA,GAAAD,sBAAA,CAAAF,OAAA;AAEA,MAAMI,GAAG,GAAG;EACVC,OAAO,EAAEC,iBAAQ;EACjBC,GAAG,EAAHA,eAAG;EACHC,OAAO,EAAPA;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaP,GAAG"
+}

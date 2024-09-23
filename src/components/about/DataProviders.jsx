@@ -59,6 +59,7 @@ const DP = [
 ]
 , DP_PR = [
   [Link.Ndl, '50'],
+  Link.BIS,
   Link.ECB,
   Link.SNB,
   Link.UnComtrade,
