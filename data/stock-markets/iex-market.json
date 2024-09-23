@@ -1,7 +1,0 @@
-{"items":[
- {"caption":"Most Active","value":"mostactive"},
- {"caption":"Gainers","value":"gainers"},
- {"caption":"Losers","value":"losers"},
- {"caption":"IEX Volume","value":"iexvolume"},
- {"caption":"IEX Percent","value":"iexpercent"}                
-]}
