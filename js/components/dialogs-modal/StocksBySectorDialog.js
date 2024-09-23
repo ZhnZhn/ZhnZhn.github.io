@@ -49,36 +49,7 @@ const S_ROOT_NOT_LABELS = {
   S_LINK_NOT_LABELS = {
     marginLeft: 8
   };
-const IEX_CLOUD_DATA_FEEDS = [{
-    a: '1 Month',
-    b: '1m'
-  }, {
-    a: '3 Months',
-    b: '3m'
-  }, {
-    a: '6 Months',
-    b: '6m'
-  }, {
-    a: '1 Year',
-    b: '1y'
-  }, {
-    a: '2 Years',
-    b: '2y'
-  }].map(_ref => {
-    let {
-      a,
-      b
-    } = _ref;
-    return {
-      caption: 'IEX Cloud: ' + a,
-      value: 'IEX',
-      dfProps: {
-        dfType: 'chart',
-        dfPeriod: b
-      }
-    };
-  }),
-  TS = 'TIME_SERIES',
+const TS = 'TIME_SERIES',
   ADJUSTED = 'ADJUSTED',
   AV_DATA_FEEDS = [{
     c: 'Daily Adjusted (100)',
@@ -89,11 +60,11 @@ const IEX_CLOUD_DATA_FEEDS = [{
   }, {
     c: 'Monthly Adjusted',
     r: `${TS}_MONTHLY_${ADJUSTED}`
-  }].map(_ref2 => {
+  }].map(_ref => {
     let {
       c,
       r
-    } = _ref2;
+    } = _ref;
     return {
       caption: `Alpha Vantage: ${c}`,
       value: 'AL',
@@ -104,16 +75,16 @@ const IEX_CLOUD_DATA_FEEDS = [{
       }
     };
   }),
-  DATA_SOURCE_OPTIONS = [...AV_DATA_FEEDS, ...IEX_CLOUD_DATA_FEEDS];
+  DATA_SOURCE_OPTIONS = [...AV_DATA_FEEDS];
 const DF_DATA_SOURCE = DATA_SOURCE_OPTIONS[0];
 const _isFn = fn => typeof fn === 'function';
 const CHART_OPTIONS = (0, _ChartOptionsFn.crChartOptions)(void 0, 't1a');
-const StocksBySectorDialog = (0, _memoIsShow.default)(_ref3 => {
+const StocksBySectorDialog = (0, _memoIsShow.default)(_ref2 => {
   let {
     isShow,
     data,
     onClose
-  } = _ref3;
+  } = _ref2;
   const refSeriaColor = (0, _uiApi.useRef)(),
     [isShowLabels, toggleLabels] = (0, _useToggle.default)(true),
     [isShowLink, toggleLink] = (0, _useToggle.default)(),

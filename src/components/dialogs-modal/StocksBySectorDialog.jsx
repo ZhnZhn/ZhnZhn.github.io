@@ -49,26 +49,12 @@ const S_ROOT_NOT_LABELS = { width: 280 }
 , S_LINK = { paddingTop: 0 }
 , S_LINK_NOT_LABELS = { marginLeft: 8 };
 
-
-const IEX_CLOUD_DATA_FEEDS = [
-  { a: '1 Month', b: '1m'},
-  { a: '3 Months', b: '3m'},
-  { a: '6 Months', b: '6m'},
-  { a: '1 Year', b: '1y'},
-  { a: '2 Years', b: '2y'}
-].map(({a, b}) => ({
-  caption: 'IEX Cloud: ' + a , value: 'IEX',
-  dfProps: {
-    dfType: 'chart',
-    dfPeriod: b
-  }
-}))
-, TS = 'TIME_SERIES'
+const TS = 'TIME_SERIES'
 , ADJUSTED = 'ADJUSTED'
 , AV_DATA_FEEDS = [
   {c: 'Daily Adjusted (100)', r: `${TS}_DAILY_${ADJUSTED}&outputsize=compact`},
   {c: 'Weekly Adjusted', r: `${TS}_WEEKLY_${ADJUSTED}`},
-  {c: 'Monthly Adjusted', r: `${TS}_MONTHLY_${ADJUSTED}`},
+  {c: 'Monthly Adjusted', r: `${TS}_MONTHLY_${ADJUSTED}`}
 ].map(({c, r})=>({
   caption: `Alpha Vantage: ${c}`,
   value: 'AL',
@@ -79,8 +65,7 @@ const IEX_CLOUD_DATA_FEEDS = [
   }
 }))
 , DATA_SOURCE_OPTIONS = [
-  ...AV_DATA_FEEDS,
-  ...IEX_CLOUD_DATA_FEEDS
+  ...AV_DATA_FEEDS
 ];
 
 const DF_DATA_SOURCE = DATA_SOURCE_OPTIONS[0];
