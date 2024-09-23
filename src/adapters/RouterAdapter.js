@@ -1,4 +1,5 @@
 import {
+  LT_BIS,
   LT_ECB,
   LT_BOC,
   LT_SNB,
@@ -9,7 +10,6 @@ import {
   LT_IRE,
   LT_EN,
   LT_AL,
-  LT_IEX,
   LT_FMP,
   LT_TW,
   LT_EU_STAT,
@@ -67,13 +67,13 @@ import StatDenmark from './stat-denmark/StatDenmark'
 import StatIreland from './stat-ireland/StatIreland'
 import StatSwiss from './stat-swiss/StatSwiss'
 import AlphaVantage from './alpha/AlphaVantage'
-import Iex from './iex/Iex'
 import Fmp from './fmp/Fmp'
 import Tw from './twelve/Tw'
 import Bea from './bea/Bea'
 import Bls from './bls/Bls'
 import Eia from './eia/Eia'
 import Intrinio from './intrinio/Intrinio'
+import Bis from './bis/Bis';
 import Ecb from './ecb/Ecb';
 import Boc from './boc/Boc'
 import Snb from './snb/Snb'
@@ -101,6 +101,7 @@ import Kx from './okx/Kx'
 import Bb from './bybit/Bb'
 
 const RouterAdapter = {
+  [LT_BIS]: Bis,
   [LT_ECB]: Ecb,
   [LT_BOC]: Boc,
   [LT_SNB]: Snb,
@@ -129,7 +130,6 @@ const RouterAdapter = {
   [LT_FSO]: StatSwiss,
 
   [LT_AL]: AlphaVantage,
-  [LT_IEX]: Iex,
   [LT_FMP]: Fmp,
   [LT_TW]: Tw,
 

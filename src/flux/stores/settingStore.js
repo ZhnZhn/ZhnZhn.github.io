@@ -10,11 +10,11 @@ import {
 } from '../storeApi';
 
 import {
+  LT_BIS,
   LT_ECB,
   LT_SNB,
   LT_Q,
   LT_AL,
-  LT_IEX,
   LT_FMP,
   LT_INTR,
   LT_TW,
@@ -41,11 +41,12 @@ const _createObject = () => Object.create(null)
 , _assign = Object.assign;
 
 const _withApiKey = [
-  LT_AL, LT_IEX, LT_FMP, LT_INTR, LT_TW,
+  LT_AL, LT_FMP, LT_INTR, LT_TW,
   LT_BEA, LT_EIA,
   LT_WT
 ];
 const _withProxyServer = [
+  LT_BIS,
   LT_ECB,
   LT_SNB,
   LT_Q,
@@ -67,7 +68,6 @@ const _withProxyServer2 = [
 const _apiTitle = {
   DF: '',
   [LT_AL]: 'Alpha Vantage',
-  [LT_IEX]: 'IEX Cloud',
   [LT_BEA]: 'BEA',
   [LT_EIA]: 'EIA',
   [LT_FMP]: 'FMP',
@@ -136,7 +136,7 @@ const _fGetSetOption = (
   }
 }
 
-const _setProxy = (url) => {  
+const _setProxy = (url) => {
   if ((''+url).slice(0,16) === 'http://127.0.0.1' || url === '') {
     _SETTINGS[PN_LH_CORS_PROXY_SERVER] = url
     return true;
@@ -193,9 +193,8 @@ export const exportSettingFn = () => ({
   key5: _fSetKey(LT_EIA),
   key6: _fSetKey(LT_AL),
   key7: _fSetKey(LT_FMP),
-  key8: _fSetKey(LT_IEX),
-  key9: _fSetKey(LT_INTR),
-  key10: _fSetKey(LT_TW),
+  key8: _fSetKey(LT_INTR),
+  key9: _fSetKey(LT_TW),
   setProxy: _setProxy,
   getProxy,
   [PN_IS_ADMIN_MODE]: isAdminMode,

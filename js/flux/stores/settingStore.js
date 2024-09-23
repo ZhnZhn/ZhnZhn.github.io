@@ -8,13 +8,12 @@ var _storeApi = require("../storeApi");
 var _LoadType = require("../../constants/LoadType");
 const _createObject = () => Object.create(null),
   _assign = Object.assign;
-const _withApiKey = [_LoadType.LT_AL, _LoadType.LT_IEX, _LoadType.LT_FMP, _LoadType.LT_INTR, _LoadType.LT_TW, _LoadType.LT_BEA, _LoadType.LT_EIA, _LoadType.LT_WT];
-const _withProxyServer = [_LoadType.LT_ECB, _LoadType.LT_SNB, _LoadType.LT_Q, _LoadType.LT_UN, _LoadType.LT_BB, _LoadType.LT_WT];
+const _withApiKey = [_LoadType.LT_AL, _LoadType.LT_FMP, _LoadType.LT_INTR, _LoadType.LT_TW, _LoadType.LT_BEA, _LoadType.LT_EIA, _LoadType.LT_WT];
+const _withProxyServer = [_LoadType.LT_BIS, _LoadType.LT_ECB, _LoadType.LT_SNB, _LoadType.LT_Q, _LoadType.LT_UN, _LoadType.LT_BB, _LoadType.LT_WT];
 const _withProxyServer2 = [..._withProxyServer, _LoadType.LT_CR, _LoadType.LT_BF, _LoadType.LT_KR, _LoadType.LT_KC, _LoadType.LT_GT, _LoadType.LT_HT, _LoadType.LT_KX];
 const _apiTitle = {
   DF: '',
   [_LoadType.LT_AL]: 'Alpha Vantage',
-  [_LoadType.LT_IEX]: 'IEX Cloud',
   [_LoadType.LT_BEA]: 'BEA',
   [_LoadType.LT_EIA]: 'EIA',
   [_LoadType.LT_FMP]: 'FMP',
@@ -107,9 +106,8 @@ const exportSettingFn = () => ({
   key5: _fSetKey(_LoadType.LT_EIA),
   key6: _fSetKey(_LoadType.LT_AL),
   key7: _fSetKey(_LoadType.LT_FMP),
-  key8: _fSetKey(_LoadType.LT_IEX),
-  key9: _fSetKey(_LoadType.LT_INTR),
-  key10: _fSetKey(_LoadType.LT_TW),
+  key8: _fSetKey(_LoadType.LT_INTR),
+  key9: _fSetKey(_LoadType.LT_TW),
   setProxy: _setProxy,
   getProxy,
   [PN_IS_ADMIN_MODE]: isAdminMode,

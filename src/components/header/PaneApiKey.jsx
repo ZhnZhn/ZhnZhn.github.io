@@ -9,7 +9,7 @@ import FlatButton from '../zhn-m/FlatButton'
 import RowSecret from '../dialogs/RowSecret'
 import RowButtons from './RowButtons'
 
-const MAX_KEY = 11;
+const MAX_KEY = 10;
 
 const S_SCROLL_PANE = {
   overflowY: 'auto',
@@ -23,7 +23,6 @@ const S_SCROLL_PANE = {
 const CONF_SM_ARR = [
   ["AV", "alpha-vantage", "Alpha Vantage"],
   ["FMP","fmp","Financial Modeling Prep","32"],
-  ["IEX","iex-cloud","IEX Cloud","35"],
   ["Intrinio","intrinio","Intrinio","32"],
   ["Twelve", "twelve", "Twelve Data"]
 ];

@@ -52,7 +52,7 @@ const DP = [
 ]
 , DP_KEY = [
   [Link.Ndl, '50 000'],
-  Link.AlphaVantage, Link.Iex,
+  Link.AlphaVantage,
   Link.Fmp, Link.Tw, Link.Intrinio,
   Link.Bea, [Link.Bsl, '500'], Link.Eia,
   Link.WTO

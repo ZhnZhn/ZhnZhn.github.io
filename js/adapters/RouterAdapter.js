@@ -18,13 +18,13 @@ var _StatDenmark = _interopRequireDefault(require("./stat-denmark/StatDenmark"))
 var _StatIreland = _interopRequireDefault(require("./stat-ireland/StatIreland"));
 var _StatSwiss = _interopRequireDefault(require("./stat-swiss/StatSwiss"));
 var _AlphaVantage = _interopRequireDefault(require("./alpha/AlphaVantage"));
-var _Iex = _interopRequireDefault(require("./iex/Iex"));
 var _Fmp = _interopRequireDefault(require("./fmp/Fmp"));
 var _Tw = _interopRequireDefault(require("./twelve/Tw"));
 var _Bea = _interopRequireDefault(require("./bea/Bea"));
 var _Bls = _interopRequireDefault(require("./bls/Bls"));
 var _Eia = _interopRequireDefault(require("./eia/Eia"));
 var _Intrinio = _interopRequireDefault(require("./intrinio/Intrinio"));
+var _Bis = _interopRequireDefault(require("./bis/Bis"));
 var _Ecb = _interopRequireDefault(require("./ecb/Ecb"));
 var _Boc = _interopRequireDefault(require("./boc/Boc"));
 var _Snb = _interopRequireDefault(require("./snb/Snb"));
@@ -51,6 +51,7 @@ var _Ht = _interopRequireDefault(require("./htx/Ht"));
 var _Kx = _interopRequireDefault(require("./okx/Kx"));
 var _Bb = _interopRequireDefault(require("./bybit/Bb"));
 const RouterAdapter = {
+  [_LoadType.LT_BIS]: _Bis.default,
   [_LoadType.LT_ECB]: _Ecb.default,
   [_LoadType.LT_BOC]: _Boc.default,
   [_LoadType.LT_SNB]: _Snb.default,
@@ -75,7 +76,6 @@ const RouterAdapter = {
   [_LoadType.LT_SIR]: _StatIreland.default,
   [_LoadType.LT_FSO]: _StatSwiss.default,
   [_LoadType.LT_AL]: _AlphaVantage.default,
-  [_LoadType.LT_IEX]: _Iex.default,
   [_LoadType.LT_FMP]: _Fmp.default,
   [_LoadType.LT_TW]: _Tw.default,
   [_LoadType.LT_BEA]: _Bea.default,

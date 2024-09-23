@@ -5,15 +5,14 @@ const S_COMPARE = { color: '#49d87c' };
 const _crUrl = domain => `https://${domain}`;
 
 const LINK_CONFIGS = [
- ["ECB", "European Central Bank", _crUrl("ecb.europa.eu")],  
+ ["ECB", "European Central Bank", _crUrl("ecb.europa.eu")],
  ["BOC", "Bank of Canada", _crUrl("www.bankofcanada.ca")],
  ["SNB", "Swiss National Bank", _crUrl("www.snb.ch/en/")],
  ["Ndl", "Nasdaq Data Link", _crUrl("data.nasdaq.com")],
  ["DBnomics", _crUrl("db.nomics.world")],
  ["EI", "Energy Institute", _crUrl("www.energyinst.org")],
  ["Ember", _crUrl("ember-climate.org")],
- ["IRENA", _crUrl("www.irena.org")],
- ["Iex", "IEX Cloud", _crUrl("iexcloud.io")],
+ ["IRENA", _crUrl("www.irena.org")], 
  ["Fmp", "Financial Modeling Prep", _crUrl("financialmodelingprep.com")],
  ["Tw", "Twelve Data", _crUrl("twelvedata.com")],
  ["AlphaVantage", "Alpha Vantage", _crUrl("www.alphavantage.co")],
