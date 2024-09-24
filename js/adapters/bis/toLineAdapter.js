@@ -15,7 +15,7 @@ const crData = (str, option) => {
     _obsElement;
   for (; i < elementCount; i++) {
     _obsElement = seriesCollection.childNodes[i];
-    data.push([(0, _AdapterFn.ymdToUTC)(_obsElement.getAttribute("TIME_PERIOD")), (0, _fnAdapter.getObsValue)(_obsElement)]);
+    data.push([(0, _fnAdapter.getTimePeriod)(_obsElement), (0, _fnAdapter.getObsValue)(_obsElement)]);
   }
   return data.sort(_compareByFn.compareByDate);
 };

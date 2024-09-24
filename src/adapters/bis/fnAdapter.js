@@ -1,6 +1,7 @@
 import {
   joinBy,
-  crXmlDocument
+  crXmlDocument,
+  ymdToUTC
 } from '../AdapterFn';
 import { isCategory } from '../CategoryFn';
 
@@ -21,4 +22,8 @@ export const getSeriesCollection = (
 
 export const getObsValue = element => element
   ? parseFloat(element.getAttribute("OBS_VALUE"))
+  : null
+
+export const getTimePeriod = element => element
+  ? ymdToUTC(element.getAttribute("TIME_PERIOD"))
   : null

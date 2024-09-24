@@ -1,12 +1,10 @@
 import { crAdapterType1 } from '../crAdapterType1';
-import {
-  fAddToConfigInfoAndDfLink,  
-  ymdToUTC
-} from '../AdapterFn';
+import { fAddToConfigInfoAndDfLink } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import {
   crItemId,
   getSeriesCollection,
+  getTimePeriod,
   getObsValue
 } from './fnAdapter';
 
@@ -23,7 +21,7 @@ const crData = (
   for(; i<elementCount; i++) {
     _obsElement = seriesCollection.childNodes[i]
     data.push([
-      ymdToUTC(_obsElement.getAttribute("TIME_PERIOD")),
+      getTimePeriod(_obsElement),
       getObsValue(_obsElement)
     ])
   }
