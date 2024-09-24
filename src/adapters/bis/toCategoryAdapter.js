@@ -4,10 +4,14 @@ import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
 import {
   getSeriesCollection,
+  getRefArea,
   getObsValue
 } from './fnAdapter';
 
-const crData = (str, option) => {
+const crData = (
+  str,
+  option
+) => {
   const seriesCollection = getSeriesCollection(str)
   , seriesCollectionLength = seriesCollection.length
   , data = []
@@ -15,11 +19,9 @@ const crData = (str, option) => {
   let i = 0, seriaElement;
   for(;i<seriesCollectionLength;i++){
     seriaElement = seriesCollection[i]
-    const _categoryName = seriaElement.getAttribute("REF_AREA")
-    , _value = getObsValue(seriaElement.childNodes[0]);
     data.push(crCategoryPoint(
-      _crValue(_value),
-      _categoryName
+      _crValue(getObsValue(seriaElement.childNodes[0])),
+      getRefArea(seriaElement)
     ))
   }
   return sortDescCategory(data);

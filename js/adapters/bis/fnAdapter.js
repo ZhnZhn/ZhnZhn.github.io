@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getSeriesCollection = exports.getObsValue = exports.crItemId = void 0;
+exports.getTimePeriod = exports.getSeriesCollection = exports.getRefArea = exports.getObsValue = exports.crItemId = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 const crItemId = _ref => {
@@ -17,4 +17,8 @@ const getSeriesCollection = str => (0, _AdapterFn.crXmlDocument)(str).getElement
 exports.getSeriesCollection = getSeriesCollection;
 const getObsValue = element => element ? parseFloat(element.getAttribute("OBS_VALUE")) : null;
 exports.getObsValue = getObsValue;
+const getTimePeriod = element => element ? (0, _AdapterFn.ymdToUTC)(element.getAttribute("TIME_PERIOD")) : null;
+exports.getTimePeriod = getTimePeriod;
+const getRefArea = element => element ? element.getAttribute("REF_AREA") : null;
+exports.getRefArea = getRefArea;
 //# sourceMappingURL=fnAdapter.js.map

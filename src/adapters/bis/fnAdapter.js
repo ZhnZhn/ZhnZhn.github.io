@@ -27,3 +27,7 @@ export const getObsValue = element => element
 export const getTimePeriod = element => element
   ? ymdToUTC(element.getAttribute("TIME_PERIOD"))
   : null
+
+export const getRefArea = element => element
+  ? element.getAttribute("REF_AREA")
+  : null

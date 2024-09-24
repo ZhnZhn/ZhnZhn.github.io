@@ -17,9 +17,7 @@ const crData = (str, option) => {
     seriaElement;
   for (; i < seriesCollectionLength; i++) {
     seriaElement = seriesCollection[i];
-    const _categoryName = seriaElement.getAttribute("REF_AREA"),
-      _value = (0, _fnAdapter.getObsValue)(seriaElement.childNodes[0]);
-    data.push((0, _CategoryFn.crCategoryPoint)(_crValue(_value), _categoryName));
+    data.push((0, _CategoryFn.crCategoryPoint)(_crValue((0, _fnAdapter.getObsValue)(seriaElement.childNodes[0])), (0, _fnAdapter.getRefArea)(seriaElement)));
   }
   return (0, _compareByFn.sortDescCategory)(data);
 };
