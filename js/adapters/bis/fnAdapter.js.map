@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bis/fnAdapter.js"
+ ],
+ "file": "../../../src/adapters/bis/fnAdapter.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "_CategoryFn",
+  "crItemId",
+  "_ref",
+  "dfPrefix",
+  "items",
+  "seriaType",
+  "joinBy",
+  "isCategory",
+  "v",
+  "exports"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AACA,IAAAC,WAAA,GAAAD,OAAA;AAEO,MAAME,QAAQ,GAAGC,IAAA;EAAA,IAAC;IACvBC,QAAQ;IACRC,KAAK;IACLC;EACF,CAAC,GAAAH,IAAA;EAAA,OAAK,IAAAI,iBAAM,EAAC,GAAG,EACdH,QAAQ,EACR,IAAAI,sBAAU,EAACF,SAAS,CAAC,GAAG,GAAG,GAAGD,KAAK,CAAC,CAAC,CAAC,CAACI,CAAC,EACxCJ,KAAK,CAAC,CAAC,CAAC,CAACI,CACX,CAAC;AAAA;AAAAC,OAAA,CAAAR,QAAA,GAAAA,QAAA"
+}
