@@ -5,6 +5,7 @@ import {
 } from '../AdapterFn';
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
+import { getObsValue } from './fnAdapter';
 
 const crData = (str, option) => {
   const xmlDoc = crXmlDocument(str)
@@ -16,12 +17,12 @@ const crData = (str, option) => {
   for(;i<seriesCollectionLength;i++){
     seriaElement = seriesCollection[i]
     const _categoryName = seriaElement.getAttribute("REF_AREA")
-    , _value = parseFloat(seriaElement.childNodes[0].getAttribute("OBS_VALUE"))
+    , _value = getObsValue(seriaElement.childNodes[0]);
     data.push(crCategoryPoint(
       _crValue(_value),
       _categoryName
     ))
-  }  
+  }
   return sortDescCategory(data);
 };
 

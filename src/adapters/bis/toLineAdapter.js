@@ -5,7 +5,10 @@ import {
   ymdToUTC
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
-import { crItemId } from './fnAdapter';
+import {
+  crItemId,
+  getObsValue
+} from './fnAdapter';
 
 const ITEM_URL = "https://data.bis.org/topics";
 
@@ -22,7 +25,7 @@ const crData = (
     _obsElement = seriesCollection.childNodes[i]
     data.push([
       ymdToUTC(_obsElement.getAttribute("TIME_PERIOD")),
-      parseFloat(_obsElement.getAttribute("OBS_VALUE"))
+      getObsValue(_obsElement)      
     ])
   }
   return data.sort(compareByDate);
