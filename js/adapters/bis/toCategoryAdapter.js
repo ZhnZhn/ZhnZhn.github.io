@@ -9,8 +9,7 @@ var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
 const crData = (str, option) => {
-  const xmlDoc = (0, _AdapterFn.crXmlDocument)(str),
-    seriesCollection = xmlDoc.getElementsByTagName('Series') || [],
+  const seriesCollection = (0, _fnAdapter.getSeriesCollection)(str),
     seriesCollectionLength = seriesCollection.length,
     data = [],
     _crValue = (0, _AdapterFn.fCrValue)(option);

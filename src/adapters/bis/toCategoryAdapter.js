@@ -1,15 +1,14 @@
 import crAdapterCategory from '../crAdapterCategory';
-import {
-  crXmlDocument,
-  fCrValue
-} from '../AdapterFn';
+import { fCrValue } from '../AdapterFn';
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
-import { getObsValue } from './fnAdapter';
+import {
+  getSeriesCollection,
+  getObsValue
+} from './fnAdapter';
 
 const crData = (str, option) => {
-  const xmlDoc = crXmlDocument(str)
-  , seriesCollection = xmlDoc.getElementsByTagName('Series') || []
+  const seriesCollection = getSeriesCollection(str)
   , seriesCollectionLength = seriesCollection.length
   , data = []
   , _crValue = fCrValue(option);

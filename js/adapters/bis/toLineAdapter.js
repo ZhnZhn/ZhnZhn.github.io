@@ -8,8 +8,7 @@ var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
 const ITEM_URL = "https://data.bis.org/topics";
 const crData = (str, option) => {
-  const xml = (0, _AdapterFn.crXmlDocument)(str),
-    seriesCollection = (xml.getElementsByTagName('Series') || [])[0] || {},
+  const seriesCollection = (0, _fnAdapter.getSeriesCollection)(str)[0] || {},
     elementCount = seriesCollection.childElementCount,
     data = [];
   let i = 0,

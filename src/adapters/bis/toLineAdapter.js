@@ -1,12 +1,12 @@
 import { crAdapterType1 } from '../crAdapterType1';
 import {
-  fAddToConfigInfoAndDfLink,
-  crXmlDocument,
+  fAddToConfigInfoAndDfLink,  
   ymdToUTC
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import {
   crItemId,
+  getSeriesCollection,
   getObsValue
 } from './fnAdapter';
 
@@ -16,8 +16,7 @@ const crData = (
   str,
   option
 ) => {
-  const xml = crXmlDocument(str)
-  , seriesCollection = (xml.getElementsByTagName('Series') || [])[0] || {}
+  const seriesCollection = getSeriesCollection(str)[0] || {}
   , elementCount = seriesCollection.childElementCount
   , data = [];
   let i=0, _obsElement;
@@ -25,7 +24,7 @@ const crData = (
     _obsElement = seriesCollection.childNodes[i]
     data.push([
       ymdToUTC(_obsElement.getAttribute("TIME_PERIOD")),
-      getObsValue(_obsElement)      
+      getObsValue(_obsElement)
     ])
   }
   return data.sort(compareByDate);
