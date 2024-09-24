@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isEstat = exports.isEmber = exports.isEia = exports.isEcb = exports.LT_WT = exports.LT_WL = exports.LT_WB = exports.LT_WATCH_LIST = exports.LT_UN = exports.LT_UKS = exports.LT_TW = exports.LT_SWS = exports.LT_SNB = exports.LT_SIR = exports.LT_SFL = exports.LT_SDN = exports.LT_Q = exports.LT_NST_2 = exports.LT_NST = exports.LT_KX = exports.LT_KR = exports.LT_KC = exports.LT_IRE = exports.LT_INTR = exports.LT_HT = exports.LT_GT = exports.LT_FSO = exports.LT_FS = exports.LT_FMP = exports.LT_FAO = exports.LT_EU_STAT = exports.LT_EN = exports.LT_EMB = exports.LT_EIA = exports.LT_EI = exports.LT_ECB = exports.LT_DBN = exports.LT_CRC = exports.LT_CR = exports.LT_CP = exports.LT_CM = exports.LT_CL = exports.LT_CG = exports.LT_CB = exports.LT_BT = exports.LT_BOC = exports.LT_BN = exports.LT_BLS = exports.LT_BIS = exports.LT_BF = exports.LT_BEA = exports.LT_BB = exports.LT_AL = void 0;
+exports.isMonthDelimeterDash = exports.isEstat = exports.LT_WT = exports.LT_WL = exports.LT_WB = exports.LT_WATCH_LIST = exports.LT_UN = exports.LT_UKS = exports.LT_TW = exports.LT_SWS = exports.LT_SNB = exports.LT_SIR = exports.LT_SFL = exports.LT_SDN = exports.LT_Q = exports.LT_NST_2 = exports.LT_NST = exports.LT_KX = exports.LT_KR = exports.LT_KC = exports.LT_IRE = exports.LT_INTR = exports.LT_HT = exports.LT_GT = exports.LT_FSO = exports.LT_FS = exports.LT_FMP = exports.LT_FAO = exports.LT_EU_STAT = exports.LT_EN = exports.LT_EMB = exports.LT_EIA = exports.LT_EI = exports.LT_ECB = exports.LT_DBN = exports.LT_CRC = exports.LT_CR = exports.LT_CP = exports.LT_CM = exports.LT_CL = exports.LT_CG = exports.LT_CB = exports.LT_BT = exports.LT_BOC = exports.LT_BN = exports.LT_BLS = exports.LT_BIS = exports.LT_BF = exports.LT_BEA = exports.LT_BB = exports.LT_AL = void 0;
 const LT_Q = exports.LT_Q = 'Q';
 const LT_AL = exports.LT_AL = 'AL';
 const LT_FMP = exports.LT_FMP = 'FMP';
@@ -51,9 +51,8 @@ const LT_BB = exports.LT_BB = 'BB';
 const LT_HT = exports.LT_HT = 'HT';
 const LT_WL = exports.LT_WL = 'WL';
 const LT_WATCH_LIST = exports.LT_WATCH_LIST = 'WL_WATCH_LIST';
-const _fIsLoadId = LOAD_ID => loadId => loadId === LOAD_ID;
-const isEstat = exports.isEstat = _fIsLoadId(LT_EU_STAT);
-const isEmber = exports.isEmber = _fIsLoadId(LT_EMB);
-const isEia = exports.isEia = _fIsLoadId(LT_EIA);
-const isEcb = exports.isEcb = _fIsLoadId(LT_ECB);
+const isEstat = loadId => loadId === LT_EU_STAT;
+exports.isEstat = isEstat;
+const isMonthDelimeterDash = loadId => isEstat(loadId) || loadId === LT_EMB || loadId === LT_EIA || loadId === LT_ECB || loadId === LT_BIS;
+exports.isMonthDelimeterDash = isMonthDelimeterDash;
 //# sourceMappingURL=LoadType.js.map

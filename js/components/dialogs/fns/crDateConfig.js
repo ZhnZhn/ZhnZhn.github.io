@@ -47,14 +47,13 @@ const _addYearMonthsTo = (dateOptions, y, delimeter) => {
     dateOptions.push(_crDateOption(_caption));
   }
 };
-const _isMonthDelimeterDash = loadId => (0, _LoadType.isEstat)(loadId) || (0, _LoadType.isEmber)(loadId) || (0, _LoadType.isEia)(loadId) || (0, _LoadType.isEcb)(loadId);
 const _crYearMonthConfig = function (loadId, mapDateDf) {
   if (mapDateDf === void 0) {
     mapDateDf = 2;
   }
   const dateOptions = [],
     y = new Date().getUTCFullYear(),
-    _delimeter = _isMonthDelimeterDash(loadId) ? '-' : 'M';
+    _delimeter = (0, _LoadType.isMonthDelimeterDash)(loadId) ? '-' : 'M';
   for (let i = 0; i < M_YEAR_MAX; i++) {
     _addYearMonthsTo(dateOptions, y - i, _delimeter);
   }
