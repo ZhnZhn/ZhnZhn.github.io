@@ -19,6 +19,9 @@ const crData = (str, option) => {
     seriaElement = seriesCollection[i];
     data.push((0, _CategoryFn.crCategoryPoint)(_crValue((0, _fnAdapter.getObsValue)(seriaElement.childNodes[0])), (0, _fnAdapter.getRefArea)(seriaElement)));
   }
+  if (!option.subtitle) {
+    option.subtitle = option.dfTitle;
+  }
   return (0, _compareByFn.sortDescCategory)(data);
 };
 const toCategoryAdapter = (0, _crAdapterCategory.default)(crData);

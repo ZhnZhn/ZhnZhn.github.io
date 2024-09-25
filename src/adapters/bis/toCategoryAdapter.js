@@ -24,6 +24,9 @@ const crData = (
       getRefArea(seriaElement)
     ))
   }
+  if (!option.subtitle) {
+    option.subtitle = option.dfTitle
+  }
   return sortDescCategory(data);
 };
 
