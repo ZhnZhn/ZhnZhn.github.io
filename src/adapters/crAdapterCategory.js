@@ -1,5 +1,4 @@
 import { joinBy } from './AdapterFn';
-import { isCategoryCluster } from './CategoryFn';
 import crCategoryConfig from './crCategoryConfig';
 import fToCategorySeries from './fToCategorySeries';
 
@@ -15,19 +14,13 @@ const crAdapterCategory = (
 ) => {
   const adapter = {
     toConfig: (json, option) => {
-      const {
-        seriaType,
-        dataSource
-      } = option
-      , data = crData(json, option)
-      , _arrSeriaType = seriaType.split('_')
+      const data = crData(json, option)
       , config = crCategoryConfig(
           option.subtitle,
           option.title,
-          _arrSeriaType[0],
+          option.seriaType,
           option.seriaColor,
           data,
-          isCategoryCluster(seriaType),
           option.isAlg
       );
 
@@ -38,7 +31,7 @@ const crAdapterCategory = (
         key: _itemKey,
         itemCaption: crItemCaption(option),
         itemTime: option.time,
-        dataSource
+        dataSource: option.dataSource
       }
       return { config };
     }

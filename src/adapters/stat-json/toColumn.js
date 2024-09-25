@@ -133,7 +133,6 @@ const _crConfig = (
     dfTSlice,
     seriaType,
     seriaColor,
-    isCluster,
     items=[],
   } = option
   , _ds = JSONstat(json).Dataset(0)
@@ -150,7 +149,6 @@ const _crConfig = (
      seriaType,
      seriaColor,
      data,
-     isCluster,
      option.isAlg
    );
 
@@ -158,23 +156,21 @@ const _crConfig = (
   return config;
 }
 , _fCrConfig = (
-  seriaType,
-  isCluster
+  seriaType
 ) => (
   json,
   option
 ) => _crConfig(json, {
   ...option,
   seriaType,
-  isCluster,
   ..._crCategory(option)
 });
 
 const routerColumnBarSet = {
   [CHT_COLUMN_SET]: _fCrConfig(CHT_COLUMN),
-  [CHT_COLUMN_CLUSTER]: _fCrConfig(CHT_COLUMN, true),
+  [CHT_COLUMN_CLUSTER]: _fCrConfig(CHT_COLUMN_CLUSTER),
   [CHT_BAR_SET]: _fCrConfig(CHT_BAR),
-  [CHT_BAR_CLUSTER]: _fCrConfig(CHT_BAR, true)
+  [CHT_BAR_CLUSTER]: _fCrConfig(CHT_BAR_CLUSTER)
 };
 
 export default routerColumnBarSet

@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("./AdapterFn");
-var _CategoryFn = require("./CategoryFn");
 var _crCategoryConfig = _interopRequireDefault(require("./crCategoryConfig"));
 var _fToCategorySeries = _interopRequireDefault(require("./fToCategorySeries"));
 const crItemCaptionDf = _ref => {
@@ -22,13 +21,8 @@ crItemCaption) {
   }
   const adapter = {
     toConfig: (json, option) => {
-      const {
-          seriaType,
-          dataSource
-        } = option,
-        data = crData(json, option),
-        _arrSeriaType = seriaType.split('_'),
-        config = (0, _crCategoryConfig.default)(option.subtitle, option.title, _arrSeriaType[0], option.seriaColor, data, (0, _CategoryFn.isCategoryCluster)(seriaType), option.isAlg);
+      const data = crData(json, option),
+        config = (0, _crCategoryConfig.default)(option.subtitle, option.title, option.seriaType, option.seriaColor, data, option.isAlg);
 
       //UNCOMTRADE toCategorySet generated _itemKey
       const {
@@ -39,7 +33,7 @@ crItemCaption) {
         key: _itemKey,
         itemCaption: crItemCaption(option),
         itemTime: option.time,
-        dataSource
+        dataSource: option.dataSource
       };
       return {
         config

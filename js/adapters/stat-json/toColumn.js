@@ -46,7 +46,7 @@ const _crData = (values, c, cTotal) => {
     if (!_suffixIndex) {
       _hm[_c] = 2;
     } else {
-      const _c2 = _c + " (" + _suffixIndex + ")";
+      const _c2 = `${_c} (${_suffixIndex})`;
       _hm[_c] += 1;
       p.c = _c2;
       p.name = _c2;
@@ -64,7 +64,7 @@ const _crSlice = (json, timeId, time, itemSlice, dfTSlice) => ({
   ...itemSlice,
   ...dfTSlice
 });
-const _crTitle = (dfTitle, option) => dfTitle ? dfTitle + ": All Items" : (0, _fnAdapter.crTitle)(option);
+const _crTitle = (dfTitle, option) => dfTitle ? `${dfTitle}: All Items` : (0, _fnAdapter.crTitle)(option);
 const _crSubtitle = (items, category) => {
   const _arr = [];
   items.forEach(item => {
@@ -89,7 +89,6 @@ const _crConfig = (json, option) => {
         dfTSlice,
         seriaType,
         seriaColor,
-        isCluster,
         items = []
       } = option,
       _ds = (0, _jsonstat.default)(json).Dataset(0),
@@ -100,21 +99,20 @@ const _crConfig = (json, option) => {
       _title = _crTitle(dfTitle, option),
       _subtitle = _crSubtitle(items, category),
       data = _crData(_values, _dimC, cTotal),
-      config = (0, _crCategoryConfig.default)(_title, _subtitle, seriaType, seriaColor, data, isCluster, option.isAlg);
+      config = (0, _crCategoryConfig.default)(_title, _subtitle, seriaType, seriaColor, data, option.isAlg);
     _assign(config, (0, _fnAdapter.crChartOption)(_ds, Tid, option));
     return config;
   },
-  _fCrConfig = (seriaType, isCluster) => (json, option) => _crConfig(json, {
+  _fCrConfig = seriaType => (json, option) => _crConfig(json, {
     ...option,
     seriaType,
-    isCluster,
     ..._crCategory(option)
   });
 const routerColumnBarSet = {
   [_ChartType.CHT_COLUMN_SET]: _fCrConfig(_ChartType.CHT_COLUMN),
-  [_ChartType.CHT_COLUMN_CLUSTER]: _fCrConfig(_ChartType.CHT_COLUMN, true),
+  [_ChartType.CHT_COLUMN_CLUSTER]: _fCrConfig(_ChartType.CHT_COLUMN_CLUSTER),
   [_ChartType.CHT_BAR_SET]: _fCrConfig(_ChartType.CHT_BAR),
-  [_ChartType.CHT_BAR_CLUSTER]: _fCrConfig(_ChartType.CHT_BAR, true)
+  [_ChartType.CHT_BAR_CLUSTER]: _fCrConfig(_ChartType.CHT_BAR_CLUSTER)
 };
 var _default = exports.default = routerColumnBarSet;
 //# sourceMappingURL=toColumn.js.map
