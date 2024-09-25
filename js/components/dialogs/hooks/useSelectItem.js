@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../../uiApi");
 const TABLE_ID = 'table';
+const FREQ_ID = 'Freq.';
 const _isRequireClearFilters = (id, tupleFilter) => id === tupleFilter[0] && (0, _uiApi.isArr)(tupleFilter[1]);
 const useSelectItem = setChartConfigFromItem => {
   const _refItems = (0, _uiApi.useRef)([]),
@@ -12,7 +13,7 @@ const useSelectItem = setChartConfigFromItem => {
       (0, _uiApi.getRefValue)(_refItems)[index] = item;
       if (item) {
         item.id = id;
-        if (id === TABLE_ID) {
+        if (id === TABLE_ID || id === FREQ_ID) {
           setChartConfigFromItem(item);
         }
         setFilters(prevTupleFilter => (0, _uiApi.isArr)(item.not) ? [id, item.not] : _isRequireClearFilters(id, prevTupleFilter) ? [] : prevTupleFilter);

@@ -7,6 +7,7 @@ import {
 } from '../../uiApi';
 
 const TABLE_ID = 'table';
+const FREQ_ID = 'Freq.';
 const _isRequireClearFilters = (
   id,
   tupleFilter
@@ -22,7 +23,7 @@ const useSelectItem = (
      getRefValue(_refItems)[index] = item
      if (item) {
        item.id = id
-       if (id === TABLE_ID) {
+       if (id === TABLE_ID || id === FREQ_ID) {
          setChartConfigFromItem(item)
        }
        setFilters(prevTupleFilter => isArr(item.not)
