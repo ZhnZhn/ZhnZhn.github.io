@@ -1,33 +1,59 @@
 import {
   joinBy,
+  getValue,
   crXmlDocument,
   ymdToUTC
 } from '../AdapterFn';
 import { isCategory } from '../CategoryFn';
 
-export const crItemId = ({
+const _crItemIdDf = ({
   dfPrefix,
   items,
   seriaType
 }) => joinBy('.',
   dfPrefix,
-  isCategory(seriaType) ? '*' : items[0].v,
-  items[1].v
+  isCategory(seriaType) ? '*' : getValue(items[0]),
+  getValue(items[1])
 )
+
+const _crtemId312 = ({
+  items,
+  seriaType
+}) => joinBy('.',
+  getValue(items[2]),
+  isCategory(seriaType) ? '*' : getValue(items[0]),
+  getValue(items[1])
+);
+
+const _hmCrItemId = {
+  s312: _crtemId312
+};
+
+export const crItemId = (
+  option
+) => (_hmCrItemId[option.dfFn] || _crItemIdDf)(option)
 
 export const getSeriesCollection = (
   str
 ) => crXmlDocument(str)
   .getElementsByTagName('Series') || []
 
-export const getObsValue = element => element
-  ? parseFloat(element.getAttribute("OBS_VALUE"))
-  : null
+const FN_IDENTITY = v => v;
+const _fGetAttribute = (
+  propName,
+  transformValue=FN_IDENTITY
+) => element => element
+  ? transformValue(element.getAttribute(propName))
+  : null;
 
-export const getTimePeriod = element => element
-  ? ymdToUTC(element.getAttribute("TIME_PERIOD"))
-  : null
+export const getObsValue = _fGetAttribute(
+  "OBS_VALUE",
+  parseFloat
+)
 
-export const getRefArea = element => element
-  ? element.getAttribute("REF_AREA")
-  : null
+export const getTimePeriod = _fGetAttribute(
+  "TIME_PERIOD",
+  ymdToUTC
+)
+
+export const getRefArea = _fGetAttribute("REF_AREA")
