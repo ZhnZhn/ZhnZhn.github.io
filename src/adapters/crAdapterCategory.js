@@ -3,36 +3,29 @@ import { isCategoryCluster } from './CategoryFn';
 import crCategoryConfig from './crCategoryConfig';
 import fToCategorySeries from './fToCategorySeries';
 
-const FN_ECHO = v => v;
-const dfCrItemCaption = ({
+const crItemCaptionDf = ({
   subtitle,
   title
-}) => joinBy(': ', subtitle, title)
+}) => joinBy(': ', subtitle, title);
 
 const crAdapterCategory = (
   crData,
-  //FAOSTAT
-  crTitle=FN_ECHO,
   //UNCOMTRADE
-  crItemCaption=dfCrItemCaption
+  crItemCaption=crItemCaptionDf
 ) => {
   const adapter = {
     toConfig: (json, option) => {
       const {
-        title,
-        subtitle,
         seriaType,
-        seriaColor,
-        time,
         dataSource
       } = option
       , data = crData(json, option)
       , _arrSeriaType = seriaType.split('_')
       , config = crCategoryConfig(
-          crTitle(subtitle, json),
-          title,
+          option.subtitle,
+          option.title,
           _arrSeriaType[0],
-          seriaColor,
+          option.seriaColor,
           data,
           isCategoryCluster(seriaType),
           option.isAlg
@@ -44,7 +37,7 @@ const crAdapterCategory = (
         id: _itemKey,
         key: _itemKey,
         itemCaption: crItemCaption(option),
-        itemTime: time,
+        itemTime: option.time,
         dataSource
       }
       return { config };
@@ -55,6 +48,6 @@ const crAdapterCategory = (
     adapter.toConfig
   )
   return adapter;
-}
+};
 
 export default crAdapterCategory

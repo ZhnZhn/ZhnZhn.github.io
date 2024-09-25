@@ -11,6 +11,7 @@ const _crData = (
   json,
   option
 ) => {
+  option.subtitle = crCategoryTitle(option.subtitle, json)
   const _crValue = fCrValue(option);
   return sortDescCategory(json.data.reduce((_data, item) => {
     const { Value, Area } = item || {}
@@ -23,11 +24,8 @@ const _crData = (
     }
     return _data;
  }, []));
-}
+};
 
-const toCategoryAdapter = crAdapterCategory(
-  _crData,
-  crCategoryTitle
-);
+const toCategoryAdapter = crAdapterCategory(_crData);
 
 export default toCategoryAdapter

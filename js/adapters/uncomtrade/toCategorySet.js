@@ -30,6 +30,6 @@ const _crItemCaption = _ref => {
   } = _ref;
   return (subtitle || '').split("-")[0] || 'id';
 };
-const toCategorySet = (0, _crAdapterCategory.default)(crCategoryData, void 0, _crItemCaption);
+const toCategorySet = (0, _crAdapterCategory.default)(crCategoryData, _crItemCaption);
 var _default = exports.default = toCategorySet;
 //# sourceMappingURL=toCategorySet.js.map

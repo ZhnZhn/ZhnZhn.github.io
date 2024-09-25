@@ -9,6 +9,7 @@ var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
 const _crData = (json, option) => {
+  option.subtitle = (0, _fnAdapter.crCategoryTitle)(option.subtitle, json);
   const _crValue = (0, _AdapterFn.fCrValue)(option);
   return (0, _compareByFn.sortDescCategory)(json.data.reduce((_data, item) => {
     const {
@@ -22,6 +23,6 @@ const _crData = (json, option) => {
     return _data;
   }, []));
 };
-const toCategoryAdapter = (0, _crAdapterCategory.default)(_crData, _fnAdapter.crCategoryTitle);
+const toCategoryAdapter = (0, _crAdapterCategory.default)(_crData);
 var _default = exports.default = toCategoryAdapter;
 //# sourceMappingURL=toCategoryAdapter.js.map

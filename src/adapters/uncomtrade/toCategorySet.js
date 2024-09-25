@@ -36,7 +36,6 @@ const _crItemCaption = ({
 
 const toCategorySet = crAdapterCategory(
   crCategoryData,
-  void 0,
   _crItemCaption
 );
 
