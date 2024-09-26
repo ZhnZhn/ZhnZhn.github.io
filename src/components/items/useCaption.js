@@ -3,42 +3,38 @@ import {
   useMemo
 } from '../uiApi';
 
+//[isCaption, showCaption, hideCaption]
 const useCaption = (
   getMainChart,
   toggleToolbar
 ) => {
   const [
     isCaption,
-    setIsCapion
-  ] = useState(true)
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , [
-    showCaption,
-    hideCaption
-  ] = useMemo(() => [
-    () => {
-      const _mainChart = getMainChart();
-      if (_mainChart) {
-        _mainChart.zhShowCaption()
-        setIsCapion(true)
-        toggleToolbar(true)
-      }
-    },
-    () => {
-      const _mainChart = getMainChart();
-      if (_mainChart) {
-        _mainChart.zhHideCaption()
-        setIsCapion(false)
-        toggleToolbar(false)
-      }
-    }
-  ], [])
-  // getMainChart, toggleToolbar
-  /*eslint-enable react-hooks/exhaustive-deps */
+    setIsCaption
+  ] = useState(true);  
   return [
     isCaption,
-    showCaption,
-    hideCaption
+    /*eslint-disable react-hooks/exhaustive-deps */
+    ...useMemo(() => [
+      () => {
+        const _mainChart = getMainChart();
+        if (_mainChart) {
+          _mainChart.zhShowCaption()
+          setIsCaption(true)
+          toggleToolbar(true)
+        }
+      },
+      () => {
+        const _mainChart = getMainChart();
+        if (_mainChart) {
+          _mainChart.zhHideCaption()
+          setIsCaption(false)
+          toggleToolbar(false)
+        }
+      }
+    ], [])
+    // getMainChart, toggleToolbar
+    /*eslint-enable react-hooks/exhaustive-deps */
   ];
 };
 
