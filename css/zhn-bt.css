@@ -54,3 +54,36 @@
 .bt-more:focus { 
   background: rgba(128, 128, 128, 0.3);
 }
+
+.bt-tab {
+  z-index: 10;
+  position: absolute;
+  top: 7px;
+  left: 300px;  
+  color: #1b2836; 
+  color: var(--btf-c);
+  padding: 1px 5px;
+  line-height: 1.4;      
+}
+.bt-tab:hover {
+  border-bottom: 2px solid #a487d4;
+}
+
+.arrow-down {
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  height: 0;
+  width: 0;
+  margin-left: 6px;
+  border-width: 5px;
+  border-style: solid;
+  /* stylelint-disable */
+  /* clean-css ignore:start */
+  border-top-color: inherit;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  /* clean-css ignore:end */
+  /* stylelint-enable */
+}
