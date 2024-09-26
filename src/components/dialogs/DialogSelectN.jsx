@@ -103,7 +103,7 @@ const DialogSelectN = memoIsShow((
     _chartOptions,
     dateOptions,
     dateDefault,
-    setChartConfigFromItem
+    updateChartConfig
   ] = useChartConfig(
      selectProps,
      chartsType,
@@ -150,7 +150,7 @@ const DialogSelectN = memoIsShow((
     _refItems,
     _hSelect,
     tupleFilter
-  ] = useSelectItem(setChartConfigFromItem)
+  ] = useSelectItem(updateChartConfig)
   , _hLoad = useEventCallback(() => {
       const msgs = crMsgs(
         chartType,
@@ -233,7 +233,7 @@ const DialogSelectN = memoIsShow((
         <D.RowDate
           innerRef={_refFromDate}
           isShowLabels={isShowLabels}
-          title="From Date:"
+          title="From Date"
           initialValue={_initialValueFromDate}
           errorMsg={errNotYmdOrEmpty}
           onTest={isYmdOrEmpty}

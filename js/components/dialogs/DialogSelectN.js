@@ -67,7 +67,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     }, [])
     // setPropertyDate, _hSelectChartType
     /*eslint-enable react-hooks/exhaustive-deps */,
-    [_chartOptions, dateOptions, dateDefault, setChartConfigFromItem] = (0, _useChartConfig.default)(selectProps, chartsType, loadId, dfProps, _onUpdateChartConfig),
+    [_chartOptions, dateOptions, dateDefault, updateChartConfig] = (0, _useChartConfig.default)(selectProps, chartsType, loadId, dfProps, _onUpdateChartConfig),
     [isToggle, toggleInputs, _hideToggle] = (0, _useBool.useToggleFalse)(),
     [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
     [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
@@ -77,7 +77,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       toggleOptions: isOpt || isCh ? toggleOptions : void 0
     }),
     [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)(),
-    [_refItems, _hSelect, tupleFilter] = (0, _useSelectItem.default)(setChartConfigFromItem),
+    [_refItems, _hSelect, tupleFilter] = (0, _useSelectItem.default)(updateChartConfig),
     _hLoad = (0, _useEventCallback.default)(() => {
       const msgs = (0, _dialogFn.crMsgs)(chartType, (0, _uiApi.getRefValue)(_refItems), selectProps, msgOnNotSelected);
       if (msgs.length === 0) {
@@ -147,7 +147,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowDate, {
         innerRef: _refFromDate,
         isShowLabels: isShowLabels,
-        title: "From Date:",
+        title: "From Date",
         initialValue: _initialValueFromDate,
         errorMsg: errNotYmdOrEmpty,
         onTest: isYmdOrEmpty

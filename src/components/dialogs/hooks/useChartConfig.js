@@ -8,6 +8,9 @@ import { crChartOptions } from '../ChartOptionsFn';
 
 const DF_MAP_FREQUENCY = 'EMPTY';
 
+const _isMapFrequency = item => item.id === 'table'
+|| (item.id === 'Freq.' && item.mapFrequency);
+
 const _getChartConfigFromItem = (
   item,
   mapFrequency,
@@ -55,25 +58,27 @@ const useChartConfig = (
     ], [_mapFrequency, _mapDateDf, selectProps, chartsType, loadId]),
     /*eslint-disable react-hooks/exhaustive-deps */
     useMemo(() => (item) => {
-      const [
-        _mapFrequency,
-        _mapDateDf
-      ] = _getChartConfigFromItem(
-        item,
-        mapFrequency,
-        mapDateDf
-      );
-      setChartConfig(prevState => _isRequireUpdateChartConfig(
-            prevState,
-            _mapFrequency,
-            _mapDateDf
-          )
-        ? (onUpdateChartConfig(), {
-            _mapFrequency,
-            _mapDateDf
-          })
-        : prevState
-      )
+      if (_isMapFrequency(item)) {
+        const [
+          _mapFrequency,
+          _mapDateDf
+        ] = _getChartConfigFromItem(
+          item,
+          mapFrequency,
+          mapDateDf
+        );
+        setChartConfig(prevState => _isRequireUpdateChartConfig(
+              prevState,
+              _mapFrequency,
+              _mapDateDf
+            )
+          ? (onUpdateChartConfig(), {
+              _mapFrequency,
+              _mapDateDf
+            })
+          : prevState
+        )
+      }
     }, [])
     // mapFrequency, mapDateDf, onUpdateChartConfig
     /*eslint-enable react-hooks/exhaustive-deps */

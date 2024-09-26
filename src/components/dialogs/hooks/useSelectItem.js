@@ -6,15 +6,13 @@ import {
   getRefValue,
 } from '../../uiApi';
 
-const TABLE_ID = 'table';
-const FREQ_ID = 'Freq.';
 const _isRequireClearFilters = (
   id,
   tupleFilter
 ) => id === tupleFilter[0] && isArr(tupleFilter[1]);
 
 const useSelectItem = (
-  setChartConfigFromItem
+  updateChartConfig
 ) => {
   const _refItems = useRef([])
   , [tupleFilter, setFilters] = useState([])
@@ -23,9 +21,7 @@ const useSelectItem = (
      getRefValue(_refItems)[index] = item
      if (item) {
        item.id = id
-       if (id === TABLE_ID || id === FREQ_ID) {
-         setChartConfigFromItem(item)
-       }
+       updateChartConfig(item)
        setFilters(prevTupleFilter => isArr(item.not)
          ? [id, item.not]
          : _isRequireClearFilters(id, prevTupleFilter)
@@ -38,7 +34,7 @@ const useSelectItem = (
          : prevTupleFilter
        )
      }
-  }, [setChartConfigFromItem]);
+  }, [updateChartConfig]);
 
   return [
     _refItems,
