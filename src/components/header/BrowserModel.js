@@ -74,11 +74,11 @@ const _crMenuItems = (
   .map(([cn, name, id]) => _crMenuItem(cn, name, id))
 
 const PAGE_CONFIGS_1 = [
-  [CL_BR, 'Central Banks', BT_CENTRAL_BANKS],
+  [CL_ORG, 'Central Banks', BT_CENTRAL_BANKS],
   [CL_ORG, 'DBnomics', BT_DB_NOMICS],
-  [CL_BR, 'Energy', BT_ENERGY],
-  [CL_BR, 'U.S. Economics', BT_US_ECONOMICS],
-  [CL_BR, 'Commodities', BT_COMMODITIES]
+  [CL_ORG, 'Energy', BT_ENERGY],
+  [CL_ORG, 'U.S. Economics', BT_US_ECONOMICS],
+  [CL_ORG, 'Commodities', BT_COMMODITIES]
 ]
 , PAGE_CONFIGS_2 = [
   [CL_ORG, 'Overview', BT_EUROSTAT],
@@ -102,9 +102,9 @@ const PAGE_CONFIGS_1 = [
   [CL_ORG, 'FSO: Statistics Swiss', BT_SWISS_STAT]
 ]
 , PAGE_CONFIGS_4 = [
-  [CL_BR, 'Stock Markets', BT_STOCK_MARKETS],
-  [CL_BR, 'NYSE by Sectors', BT_NYSE_STOCKS],
-  [CL_BR, 'NASDAQ by Sectors', BT_NASDAQ_STOCKS]
+  [CL_ORG, 'Stock Markets', BT_STOCK_MARKETS],
+  [CL_ORG, 'NYSE by Sectors', BT_NYSE_STOCKS],
+  [CL_ORG, 'NASDAQ by Sectors', BT_NASDAQ_STOCKS]
 ]
 , PAGE_CONFIGS_5 = [
   [CL_ORG, 'FAOSTAT', BT_FAOSTAT],
