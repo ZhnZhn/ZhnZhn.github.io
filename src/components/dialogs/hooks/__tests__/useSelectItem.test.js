@@ -29,6 +29,8 @@ describe("useSelectItem", ()=>{
     act(() => _hSelect(id1, 0, _item1))
     expect(_getRefItems(result).current).toEqual([{..._item1, id: id1}])
     expect(_getTupleFilter(result)).toEqual([id1, _filters1])
+    expect(setChartConfigFromItem).toBeCalledTimes(1)
+    expect(setChartConfigFromItem).toBeCalledWith({..._item1, id: id1 })
 
     //clear input1
     act(() => _hSelect(id1, 0, void 0))
@@ -41,11 +43,15 @@ describe("useSelectItem", ()=>{
     act(() => _hSelect(id1, 0, _item2))
     expect(_getRefItems(result).current).toEqual([{..._item2, id: id1}])
     expect(_getTupleFilter(result)).toEqual([id1, _filters2])
+    expect(setChartConfigFromItem).toBeCalledTimes(2)
+    expect(setChartConfigFromItem).toBeCalledWith({..._item2, id: id1 })
 
     // set input1 to _item1
     act(() => _hSelect(id1, 0, _item1))
     expect(_getRefItems(result).current).toEqual([{..._item1, id: id1}])
     expect(_getTupleFilter(result)).toEqual([id1, _filters1])
+    expect(setChartConfigFromItem).toBeCalledTimes(3)
+    expect(setChartConfigFromItem).toBeCalledWith({..._item1, id: id1 })
 
     //clear input1
     act(() => _hSelect(id1, 0, void 0))
@@ -63,8 +69,7 @@ describe("useSelectItem", ()=>{
     act(() => _hSelect(TABLE_ID, 1, _itemTable))
     expect(_getRefItems(result).current).toEqual([void 0, {..._itemTable, id: TABLE_ID}])
     expect(_getTupleFilter(result)).toEqual([])
-
-    expect(setChartConfigFromItem).toBeCalledTimes(1)
+    expect(setChartConfigFromItem).toBeCalledTimes(4)
     expect(setChartConfigFromItem).toBeCalledWith({..._itemTable, id: TABLE_ID})
 
     //clear input2
@@ -72,6 +77,6 @@ describe("useSelectItem", ()=>{
     expect(_getRefItems(result).current).toEqual([void 0, void 0])
     expect(_getTupleFilter(result)).toEqual([])
 
-    expect(setChartConfigFromItem).toBeCalledTimes(1)
+    expect(setChartConfigFromItem).toBeCalledTimes(4)
   })
 })
