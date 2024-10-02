@@ -1,5 +1,3 @@
-import JSONstat from 'jsonstat';
-
 import {
   CHT_TREE_MAP,
   CHT_TREE_MAP_CLUSTER,
@@ -7,7 +5,6 @@ import {
   CHT_TREE_MAP_2_CLUSTER
 } from '../../constants/ChartType';
 
-import domSanitize from '../../utils/domSanitize';
 import pipe from '../../utils/pipe';
 import {
   crTreeMapConfig,
@@ -17,6 +14,9 @@ import {
 } from '../../charts/configBuilderFn';
 
 import {
+  crTreeMapData
+} from '../JsonStatFn';
+import {
   addColorsTo,
   crPointName
 } from '../TreeMapFn';
@@ -25,24 +25,9 @@ import {
 } from '../compareByFn';
 import {
   crTitle,
-  crTid,
   crChartOption,
   roundBy
 } from './fnAdapter';
-
-const _isArr = Array.isArray;
-
-const _fCrTreeMapPoint = (
-  c,
-  title
-) => (v, i) => {
-   const { value } = v;
-   return {
-     label: domSanitize(c.Category(i).label),
-     value,
-     title
-   };
-};
 
 const _toHm = (arr) => {
   const hm = Object.create(null)
@@ -63,42 +48,7 @@ const _fIsPoint = (
    if (p.label.split(' ')[0].length !== 2) {
      return false;
    }
-   /*
-   if ( hm[p.label].d !== depth) {
-     return false;
-   }
-   */
    return p.y !== null && p.y !== 0;
-};
-
-const _crCategory = (
-  option,
-  by,
-  depth
-) => {
-  const {
-    items=[],
-    dfC,
-    dfT,
-    dfC2,
-    dfT2
-  } = option;
-  switch(by){
-    case '2':
-      return {
-        category: dfC2,
-        cTotal: dfT2,
-        itemSlice: items[0].slice,
-        depth
-      };
-    default:
-      return {
-        category: dfC,
-        cTotal: dfT,
-        itemSlice: items[1].slice,
-        depth
-      };
-  }
 };
 
 const _addPercent = (
@@ -118,9 +68,7 @@ const _addPercent = (
 };
 
 const _crData = (
-  values,
-  categories,
-  Tid,
+  json,
   option
 ) => {
   const {
@@ -129,70 +77,67 @@ const _crData = (
     cTotal
   } = option;
 
-  return _isArr(values) ? sortDescByPnValue(values
-    .map(_fCrTreeMapPoint(categories, Tid))
-    .filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth))
-  ) : [];
+  return sortDescByPnValue(
+    crTreeMapData(json, option.time)
+      .filter(_fIsPoint(
+         cTotal,
+         _toHm(selectOptions[0]),
+         depth
+      ))
+  );
 };
+
+const _crSubtitle = (
+  items,
+  time
+) => `${((items ||[])[1] || {}).caption || ''}: ${time}`;
 
 const _crConfig = (
   json,
   option
 ) => {
-  const  {
-     category,
-     itemSlice,
-     time,
-     dfTSlice,
-     isCluster,
-     items=[]
+  const {
+    time
   } = option
-  , ds = JSONstat(json).Dataset(0)
-  , categories = ds.Dimension(category)
-  , Tid = crTid(time, ds)
   , _title = crTitle(option)
-  , _subtitle = `${items[1].caption || ''}: ${Tid}`
-  , values = ds.Data({ Tid, ...itemSlice, ...dfTSlice })
-  , _d1 = _crData(values, categories, Tid, option )
-  , [data, total] = _addPercent(_d1)
+  , _subtitle = _crSubtitle(option.items, time)
+  , _data = _crData(json, option)
+  , [data, total] = _addPercent(_data)
 
-  if (isCluster) {
+  if (option.isCluster) {
     addColorsTo({ data, total })
   }
 
   return pipe(
     crTreeMapConfig(data),
     fAddCaption(_title, _subtitle),
-    fAdd(crChartOption(ds, Tid, option)),
+    fAdd(crChartOption(void 0, time, option, json)),
     toConfig
   );
-}
+};
 
 const _fCrConfig = (
-  param={},
-  config={}
+  configOption={}
 ) => (
   json,
   option
 ) => _crConfig(json, {
   ...option,
-  ...param,
-  ..._crCategory(option, config.by, config.depth)
+  ...configOption
 });
 
 const routerTreeMap = {
   [CHT_TREE_MAP]: _fCrConfig(),
-  [CHT_TREE_MAP_CLUSTER]: _fCrConfig(
-    { isCluster: true }
-  ),
-  [CHT_TREE_MAP_2]: _fCrConfig(
-    {},
-    { depth: "d2" }
-  ),
-  [CHT_TREE_MAP_2_CLUSTER]: _fCrConfig(
-    { isCluster: true },
-    { depth: "d2" }
-  )
+  [CHT_TREE_MAP_CLUSTER]: _fCrConfig({
+     isCluster: true
+  }),
+  [CHT_TREE_MAP_2]: _fCrConfig({
+     depth: "d2"
+  }),
+  [CHT_TREE_MAP_2_CLUSTER]: _fCrConfig({
+     isCluster: true,
+     depth: "d2"
+  })
 };
 
 export default routerTreeMap
