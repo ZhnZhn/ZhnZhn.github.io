@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getDatasetUpdated = exports.getDatasetSource = exports.getDatasetLabel = exports.crCategoryData = void 0;
+exports.getDatasetUpdated = exports.getDatasetSource = exports.getDatasetLabel = exports.crTreeMapData = exports.crCategoryData = void 0;
 var _AdapterFn = require("./AdapterFn");
 var _CategoryFn = require("./CategoryFn");
 const _compareByPropNameY = (a, b) => b.y - a.y;
@@ -27,7 +27,7 @@ const _crCategoryLabel = (categoryLabel, hmLabels) => {
   const _categoryNumber = hmLabels[categoryLabel];
   return _categoryNumber ? (++hmLabels[categoryLabel], `${categoryLabel} (${_categoryNumber + 1})`) : (hmLabels[categoryLabel] = 1, categoryLabel);
 };
-const _fCrCategoryData = crPoint => json => {
+const _fCrCategoryData = crPoint => (json, option) => {
     const dimension = _getDatasetDimension(json),
       value = _getDatasetValue(json),
       [id, size] = _getIdSizeTuple(json),
@@ -43,7 +43,7 @@ const _fCrCategoryData = crPoint => json => {
         const y = value[_valueIndex],
           categoryLabel = label[labelKey];
         if ((0, _AdapterFn.isNumber)(y) && (0, _AdapterFn.isStr)(categoryLabel)) {
-          data.push(crPoint(y, _crCategoryLabel(categoryLabel, hmLabels)));
+          data.push(crPoint(y, _crCategoryLabel(categoryLabel, hmLabels), option));
         }
       }
       return data;
@@ -52,6 +52,7 @@ const _fCrCategoryData = crPoint => json => {
   _crCategoryDataImpl = _fCrCategoryData(_CategoryFn.crCategoryPoint);
 const crCategoryData = json => _crCategoryDataImpl(json).sort(_compareByPropNameY);
 exports.crCategoryData = crCategoryData;
+const crTreeMapData = exports.crTreeMapData = _fCrCategoryData(_CategoryFn.crTreeMapPoint);
 const getDatasetLabel = exports.getDatasetLabel = _fGetDataset("label");
 const getDatasetUpdated = exports.getDatasetUpdated = _fGetDataset("updated");
 const getDatasetSource = exports.getDatasetSource = _fGetDataset("source");

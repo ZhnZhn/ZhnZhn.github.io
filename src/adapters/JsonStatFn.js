@@ -6,7 +6,8 @@ import {
 } from './AdapterFn';
 
 import {
-  crCategoryPoint
+  crCategoryPoint,
+  crTreeMapPoint
 } from './CategoryFn';
 
 const _compareByPropNameY = (a, b) => b.y - a.y;
@@ -64,7 +65,10 @@ const _crCategoryLabel = (
     : (hmLabels[categoryLabel]=1, categoryLabel);
 };
 
-const _fCrCategoryData = crPoint => json => {
+const _fCrCategoryData = crPoint => (
+  json,
+  option
+) => {
   const dimension = _getDatasetDimension(json)
   , value = _getDatasetValue(json)
   , [
@@ -86,8 +90,9 @@ const _fCrCategoryData = crPoint => json => {
          if (isNumber(y) && isStr(categoryLabel)) {
            data.push(crPoint(
              y,
-             _crCategoryLabel(categoryLabel, hmLabels))
-           )
+             _crCategoryLabel(categoryLabel, hmLabels),
+             option
+           ))
          }
        }
        return data;
@@ -98,6 +103,8 @@ const _fCrCategoryData = crPoint => json => {
 export const crCategoryData = (
   json
 ) => _crCategoryDataImpl(json).sort(_compareByPropNameY)
+
+export const crTreeMapData = _fCrCategoryData(crTreeMapPoint)
 
 export const getDatasetLabel = _fGetDataset("label")
 export const getDatasetUpdated = _fGetDataset("updated")
