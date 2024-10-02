@@ -11,6 +11,7 @@ exports.crErrorByMessage = _AdapterFn.crErrorByMessage;
 var _crFn = require("../crFn");
 exports.crId = _crFn.crId;
 var _jsonstat = _interopRequireDefault(require("jsonstat"));
+var _JsonStatFn = require("../JsonStatFn");
 const _getObjectKeys = Object.keys,
   _crTitle = country => `Statisctics ${country}: All Items`,
   TITLE_NST = _crTitle('Norway'),
@@ -68,32 +69,33 @@ const _crSearchLink = (label, option) => {
       return '';
   }
 };
-const _crDescr = (_ref4, option) => {
+const _crDescr = function (_temp, option, json) {
   let {
     updated,
     source,
     label
-  } = _ref4;
-  const _date = (updated || '').replace('T', ' ').replace('Z', ''),
+  } = _temp === void 0 ? {} : _temp;
+  const _date = (updated || (0, _JsonStatFn.getDatasetUpdated)(json) || '').replace('T', ' ').replace('Z', ''),
     {
       dfId
     } = option,
-    _elSearchLink = _crSearchLink(label, option);
-  return dfId && source ? `TableId: ${dfId}<BR/>${source}: ${_date}<BR/>${_elSearchLink}` : _elSearchLink;
+    _elSearchLink = _crSearchLink(label || (0, _JsonStatFn.getDatasetLabel)(json), option),
+    _source = source || (0, _JsonStatFn.getDatasetSource)(json);
+  return dfId && _source ? `TableId: ${dfId}<BR/>${_source}: ${_date}<BR/>${_elSearchLink}` : _elSearchLink;
 };
-const _crItemCaption = _ref5 => {
+const _crItemCaption = _ref4 => {
   let {
     items,
     dfId = 'id'
-  } = _ref5;
+  } = _ref4;
   const caption = items[0] ? items[0].caption : 'All Items';
   return `${dfId}_${caption}`;
 };
-const _crAreaMapSlice = _ref6 => {
+const _crAreaMapSlice = _ref5 => {
   let {
     items,
     dfTSlice
-  } = _ref6;
+  } = _ref5;
   const mapSlice = {};
   items.forEach(item => {
     if (item.slice) {
@@ -129,11 +131,11 @@ const _getTimeDimension = (ds, timeId, json) => {
   //Times index case (FSO sometimes)
   return times && _isLookLikeTimeAsIndex(times[0]) ? _crTimesFromDimCategoriesLabel(_dim) : times;
 };
-const _crDataSource = _ref7 => {
+const _crDataSource = _ref6 => {
   let {
     dataSource,
     dfId
-  } = _ref7;
+  } = _ref6;
   return dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? `${dataSource} (${dfId})` : dataSource;
 };
 const crTitle = option => {
@@ -168,9 +170,9 @@ const crTid = (time, ds) => {
   return tidIds[tidIds.length - 1];
 };
 exports.crTid = crTid;
-const crInfo = (ds, option) => ({
-  name: ds.label || '',
-  description: _crDescr(ds, option)
+const crInfo = (ds, option, json) => ({
+  name: (0, _JsonStatFn.getDatasetLabel)(json) || (ds || {}).label || '',
+  description: _crDescr(ds, option, json)
 });
 exports.crInfo = crInfo;
 const crZhConfig = option => {
@@ -204,14 +206,14 @@ const crZhConfig = option => {
   };
 };
 exports.crZhConfig = crZhConfig;
-const crConfOption = (ds, option) => ({
-  info: crInfo(ds, option),
+const crConfOption = (ds, option, datasetLabel) => ({
+  info: crInfo(ds, option, datasetLabel),
   zhConfig: crZhConfig(option)
 });
 exports.crConfOption = crConfOption;
-const crChartOption = (ds, data, option) => ({
+const crChartOption = (ds, data, option, json) => ({
   valueMoving: (0, _AdapterFn.valueMoving)(data),
-  ...crConfOption(ds, option)
+  ...crConfOption(ds, option, json)
 });
 exports.crChartOption = crChartOption;
 //# sourceMappingURL=fnAdapter.js.map

@@ -8,12 +8,18 @@ export {
   crId
 } from '../crFn';
 
+
 import JSONstat from 'jsonstat';
 import {
   assign,
   valueMoving,
   joinBy
 } from '../AdapterFn';
+import {
+  getDatasetLabel,
+  getDatasetUpdated,
+  getDatasetSource
+} from '../JsonStatFn'
 import {
   crId,
   crItemConf
@@ -99,17 +105,19 @@ const _crSearchLink = (
 };
 
 const _crDescr = (
-  { updated, source, label },
-  option
+  { updated, source, label }={},
+  option,
+  json
 ) => {
-  const _date = (updated || '')
+  const _date = (updated || getDatasetUpdated(json) || '')
     .replace('T', ' ')
     .replace('Z', '')
   , { dfId } = option
-  , _elSearchLink = _crSearchLink(label, option);
+  , _elSearchLink = _crSearchLink(label || getDatasetLabel(json), option)
+  , _source = source || getDatasetSource(json);
 
-  return dfId && source
-    ? `TableId: ${dfId}<BR/>${source}: ${_date}<BR/>${_elSearchLink}`
+  return dfId && _source
+    ? `TableId: ${dfId}<BR/>${_source}: ${_date}<BR/>${_elSearchLink}`
     : _elSearchLink;
 };
 
@@ -244,10 +252,11 @@ export const crTid = (
 
 export const crInfo = (
   ds,
-  option
+  option,
+  json
 ) => ({
-  name: ds.label || '',
-  description: _crDescr(ds, option)
+  name: getDatasetLabel(json) || (ds || {}).label || '',
+  description: _crDescr(ds, option, json)
 })
 
 export const crZhConfig = (
@@ -285,17 +294,19 @@ export const crZhConfig = (
 
 export const crConfOption = (
   ds,
-  option
+  option,
+  datasetLabel
 ) => ({
-  info: crInfo(ds, option),
+  info: crInfo(ds, option, datasetLabel),
   zhConfig: crZhConfig(option)
 })
 
 export const crChartOption = (
   ds,
   data,
-  option
+  option,
+  json
 ) => ({
   valueMoving: valueMoving(data),
-  ...crConfOption(ds, option)
+  ...crConfOption(ds, option, json)
 })
