@@ -78,3 +78,13 @@ export const crCategoryPoint = (
   const c = domSanitize(n);
   return { y, name: c, c };
 }
+
+export const crTreeMapPoint = (
+  value,
+  label,
+  title
+) => ({
+  value,
+  label: domSanitize(label),
+  title: domSanitize(title)
+})

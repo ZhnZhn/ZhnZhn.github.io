@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.isTreeMap = exports.isColumnOrBarCategory = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
+exports.isTreeMap = exports.isColumnOrBarCategory = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.crTreeMapPoint = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
 var _domSanitize = _interopRequireDefault(require("../utils/domSanitize"));
 var _arrFn = require("../utils/arrFn");
 var _ChartType = require("../constants/ChartType");
@@ -41,4 +41,10 @@ const crCategoryPoint = (y, n) => {
   };
 };
 exports.crCategoryPoint = crCategoryPoint;
+const crTreeMapPoint = (value, label, title) => ({
+  value,
+  label: (0, _domSanitize.default)(label),
+  title: (0, _domSanitize.default)(title)
+});
+exports.crTreeMapPoint = crTreeMapPoint;
 //# sourceMappingURL=CategoryFn.js.map
