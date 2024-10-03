@@ -1,4 +1,9 @@
 import {
+  toUTC,
+  toYMD
+} from './stat-json/fnUtil';
+
+import {
   isObj,
   isNumber,
   isStr,
@@ -105,6 +110,35 @@ export const crCategoryData = (
 ) => _crCategoryDataImpl(json).sort(_compareByPropNameY)
 
 export const crTreeMapData = _fCrCategoryData(crTreeMapPoint)
+
+
+const _crSplinePoint = (
+  y,
+  time,
+  hasPerJanuary
+) => {
+  const _pIndex = time.length - 1
+  , isP = time[_pIndex] === '*'
+  , _time = isP
+     ? time.slice(0, _pIndex)
+     : time
+  , x = toUTC(_time, hasPerJanuary)
+  return isP
+     ? [x, y, 'p']
+     : [x, y];
+};
+
+export const crSplineData = _fCrCategoryData(_crSplinePoint)
+
+const _crYearlyPoint = (
+  y,
+  time
+) => [
+  toYMD(time),
+  y
+];
+
+export const crYearlyData = _fCrCategoryData(_crYearlyPoint)
 
 export const getDatasetLabel = _fGetDataset("label")
 export const getDatasetUpdated = _fGetDataset("updated")
