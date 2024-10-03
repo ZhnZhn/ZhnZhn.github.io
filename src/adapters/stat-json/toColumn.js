@@ -51,7 +51,7 @@ const _crConfig = (
     crCategoryData(json),
     option.isAlg
   ),
-  crChartOption(void 0, option.time, option, json)
+  crChartOption(option.time, option, json)
 )
 , _fCrConfig = (
   seriaType

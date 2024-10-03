@@ -1,8 +1,7 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toUpperCaseFirst = exports.roundBy = exports.isYNumber = exports.crZhConfig = exports.crTitle = exports.crTid = exports.crInfo = exports.crErrorByMessage = exports.crDsValuesTimes = exports.crConfOption = exports.crChartOption = void 0;
+exports.toUpperCaseFirst = exports.roundBy = exports.isYNumber = exports.crZhConfig = exports.crTitle = exports.crInfo = exports.crErrorByMessage = exports.crConfOption = exports.crChartOption = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isYNumber = _AdapterFn.isYNumber;
 exports.roundBy = _AdapterFn.roundBy;
@@ -10,10 +9,8 @@ exports.toUpperCaseFirst = _AdapterFn.toUpperCaseFirst;
 exports.crErrorByMessage = _AdapterFn.crErrorByMessage;
 var _crFn = require("../crFn");
 exports.crId = _crFn.crId;
-var _jsonstat = _interopRequireDefault(require("jsonstat"));
 var _JsonStatFn = require("../JsonStatFn");
-const _getObjectKeys = Object.keys,
-  _crTitle = country => `Statisctics ${country}: All Items`,
+const _crTitle = country => `Statisctics ${country}: All Items`,
   TITLE_NST = _crTitle('Norway'),
   TITLE_SWS = _crTitle('Sweden');
 const _crSearchTitle = country => `Statistics ${country} Search`;
@@ -69,73 +66,27 @@ const _crSearchLink = (label, option) => {
       return '';
   }
 };
-const _crDescr = function (_temp, option, json) {
-  let {
-    updated,
-    source,
-    label
-  } = _temp === void 0 ? {} : _temp;
-  const _date = (updated || (0, _JsonStatFn.getDatasetUpdated)(json) || '').replace('T', ' ').replace('Z', ''),
+const _crDescr = (option, json) => {
+  const _date = ((0, _JsonStatFn.getDatasetUpdated)(json) || '').replace('T', ' ').replace('Z', ''),
     {
       dfId
     } = option,
-    _elSearchLink = _crSearchLink(label || (0, _JsonStatFn.getDatasetLabel)(json), option),
-    _source = source || (0, _JsonStatFn.getDatasetSource)(json);
+    _elSearchLink = _crSearchLink((0, _JsonStatFn.getDatasetLabel)(json), option),
+    _source = (0, _JsonStatFn.getDatasetSource)(json);
   return dfId && _source ? `TableId: ${dfId}<BR/>${_source}: ${_date}<BR/>${_elSearchLink}` : _elSearchLink;
 };
 const _crItemCaption = _ref4 => {
   let {
     items,
-    dfId = 'id'
+    dfId
   } = _ref4;
-  const caption = items[0] ? items[0].caption : 'All Items';
-  return `${dfId}_${caption}`;
+  return `${dfId || 'id'}_${(items[0] || {}).caption || 'All Items'}`;
 };
-const _crAreaMapSlice = _ref5 => {
-  let {
-    items,
-    dfTSlice
-  } = _ref5;
-  const mapSlice = {};
-  items.forEach(item => {
-    if (item.slice) {
-      (0, _AdapterFn.assign)(mapSlice, item.slice);
-    }
-  });
-  return (0, _AdapterFn.assign)(mapSlice, dfTSlice);
-};
-
-//Time as index case (FSO sometimes)
-const _isLookLikeTimeAsIndex = time => parseInt(time) < 1600,
-  _crTimesFromDimCategoriesLabel = dim => dim.Category().map(item => item.label);
-const _getDimensionWithouTime = ds => {
-  const _dim = ds.Dimension("Year") || ds.Dimension("Vuosi") || ds.Dimension("Vuosineljännes") || ds.Dimension("Month") || ds.Dimension("Jahr"); //FSO
-  return _dim && _dim.id
-  // Time as index case (FSO sometimes)
-  ? _isLookLikeTimeAsIndex(_dim.id[0]) ? _crTimesFromDimCategoriesLabel(_dim) : [_dim.id[0]] : ["2019"];
-};
-const _crTimesFromDs = (json, timeId) => {
-  const _dim = json.dimension[timeId],
-    label = ((_dim || {}).category || {}).label;
-  return _getObjectKeys(label).map(k => label[k]);
-};
-const _getTimeDimension = (ds, timeId, json) => {
-  // SIR
-  if (timeId && timeId.indexOf("TLIST(") !== -1) {
-    return _crTimesFromDs(json, timeId);
-  }
-  const _dimTimeId = timeId && ds.Dimension(timeId),
-    _dim = _dimTimeId || ds.Dimension("Tid"),
-    times = _dim && _dim.id || _getDimensionWithouTime(ds);
-
-  //Times index case (FSO sometimes)
-  return times && _isLookLikeTimeAsIndex(times[0]) ? _crTimesFromDimCategoriesLabel(_dim) : times;
-};
-const _crDataSource = _ref6 => {
+const _crDataSource = _ref5 => {
   let {
     dataSource,
     dfId
-  } = _ref6;
+  } = _ref5;
   return dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? `${dataSource} (${dfId})` : dataSource;
 };
 const crTitle = option => {
@@ -153,26 +104,9 @@ const crTitle = option => {
   }
 };
 exports.crTitle = crTitle;
-const crDsValuesTimes = (json, option) => {
-  const mapSlice = _crAreaMapSlice(option),
-    ds = (0, _jsonstat.default)(json).Dataset(0),
-    values = ds.Data(mapSlice),
-    times = _getTimeDimension(ds, option.timeId, json);
-  return [ds, values, times];
-};
-exports.crDsValuesTimes = crDsValuesTimes;
-const crTid = (time, ds) => {
-  // Time index filter (FSO sometimes)
-  if (time && !_isLookLikeTimeAsIndex(time)) {
-    return time;
-  }
-  const tidIds = _getTimeDimension(ds);
-  return tidIds[tidIds.length - 1];
-};
-exports.crTid = crTid;
-const crInfo = (ds, option, json) => ({
-  name: (0, _JsonStatFn.getDatasetLabel)(json) || (ds || {}).label || '',
-  description: _crDescr(ds, option, json)
+const crInfo = (option, json) => ({
+  name: (0, _JsonStatFn.getDatasetLabel)(json) || '',
+  description: _crDescr(option, json)
 });
 exports.crInfo = crInfo;
 const crZhConfig = option => {
@@ -206,14 +140,14 @@ const crZhConfig = option => {
   };
 };
 exports.crZhConfig = crZhConfig;
-const crConfOption = (ds, option, datasetLabel) => ({
-  info: crInfo(ds, option, datasetLabel),
+const crConfOption = (option, json) => ({
+  info: crInfo(option, json),
   zhConfig: crZhConfig(option)
 });
 exports.crConfOption = crConfOption;
-const crChartOption = (ds, data, option, json) => ({
+const crChartOption = (data, option, json) => ({
   valueMoving: (0, _AdapterFn.valueMoving)(data),
-  ...crConfOption(ds, option, json)
+  ...crConfOption(option, json)
 });
 exports.crChartOption = crChartOption;
 //# sourceMappingURL=fnAdapter.js.map

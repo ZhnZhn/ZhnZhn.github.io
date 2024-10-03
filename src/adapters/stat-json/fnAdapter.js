@@ -8,10 +8,7 @@ export {
   crId
 } from '../crFn';
 
-
-import JSONstat from 'jsonstat';
 import {
-  assign,
   valueMoving,
   joinBy
 } from '../AdapterFn';
@@ -25,8 +22,7 @@ import {
   crItemConf
 } from '../crFn';
 
-const _getObjectKeys = Object.keys
-, _crTitle = country => `Statisctics ${country}: All Items`
+const _crTitle = country => `Statisctics ${country}: All Items`
 , TITLE_NST = _crTitle('Norway')
 , TITLE_SWS = _crTitle('Sweden');
 
@@ -105,16 +101,15 @@ const _crSearchLink = (
 };
 
 const _crDescr = (
-  { updated, source, label }={},
   option,
   json
 ) => {
-  const _date = (updated || getDatasetUpdated(json) || '')
+  const _date = (getDatasetUpdated(json) || '')
     .replace('T', ' ')
     .replace('Z', '')
   , { dfId } = option
-  , _elSearchLink = _crSearchLink(label || getDatasetLabel(json), option)
-  , _source = source || getDatasetSource(json);
+  , _elSearchLink = _crSearchLink(getDatasetLabel(json), option)
+  , _source = getDatasetSource(json);
 
   return dfId && _source
     ? `TableId: ${dfId}<BR/>${_source}: ${_date}<BR/>${_elSearchLink}`
@@ -123,79 +118,8 @@ const _crDescr = (
 
 const _crItemCaption = ({
   items,
-  dfId='id'
-}) => {
-  const caption =  items[0]
-    ? items[0].caption
-    : 'All Items';
-  return `${dfId}_${caption}`;
-};
-
-const _crAreaMapSlice = ({
-  items,
-  dfTSlice
-}) => {
-  const mapSlice = {};
-  items.forEach(item => {
-    if (item.slice) {
-      assign(mapSlice, item.slice)
-    }
-  })
-  return assign(mapSlice, dfTSlice);
-};
-
-//Time as index case (FSO sometimes)
-const _isLookLikeTimeAsIndex = time => parseInt(time) < 1600
-, _crTimesFromDimCategoriesLabel = dim => dim
-   .Category()
-   .map(item => item.label)
-
-const _getDimensionWithouTime = (
-  ds
-) => {
-  const _dim = ds.Dimension("Year")
-   || ds.Dimension("Vuosi")
-   || ds.Dimension("Vuosineljännes")
-   || ds.Dimension("Month")
-   || ds.Dimension("Jahr") //FSO
-  return _dim && _dim.id
-    // Time as index case (FSO sometimes)
-    ? _isLookLikeTimeAsIndex(_dim.id[0])
-        ? _crTimesFromDimCategoriesLabel(_dim)
-        : [_dim.id[0]]
-    : ["2019"];
-};
-
-const _crTimesFromDs = (
-  json,
-  timeId
-) => {
-  const _dim = json.dimension[timeId]
-  , label = ((_dim || {}).category || {}).label;
-  return _getObjectKeys(label)
-    .map(k => label[k]);
-};
-
-const _getTimeDimension = (
-  ds,
-  timeId,
-  json
-) => {
-  // SIR
-  if (timeId && timeId.indexOf("TLIST(") !== -1) {
-    return _crTimesFromDs(json, timeId)
-  }
-
-  const _dimTimeId = timeId && ds.Dimension(timeId)
-  , _dim = _dimTimeId || ds.Dimension("Tid")
-  , times = _dim && _dim.id
-     || _getDimensionWithouTime(ds);
-
-  //Times index case (FSO sometimes)
-  return times && _isLookLikeTimeAsIndex(times[0])
-    ? _crTimesFromDimCategoriesLabel(_dim)
-    : times;
-};
+  dfId
+}) => `${dfId || 'id'}_${(items[0] || {}).caption || 'All Items'}`;
 
 const _crDataSource = ({
   dataSource,
@@ -223,40 +147,12 @@ export const crTitle = (
   }
 }
 
-export const crDsValuesTimes = (
-  json,
-  option
-) => {
-  const mapSlice = _crAreaMapSlice(option)
-  , ds = JSONstat(json).Dataset(0)
-  , values = ds.Data(mapSlice)
-  , times = _getTimeDimension(ds, option.timeId, json);
-  return [
-    ds,
-    values,
-    times
-  ];
-}
-
-export const crTid = (
-  time,
-  ds
-) => {
-  // Time index filter (FSO sometimes)
-  if (time && !_isLookLikeTimeAsIndex(time)) {
-    return time;
-  }
-  const tidIds = _getTimeDimension(ds);
-  return tidIds[tidIds.length-1];
-}
-
 export const crInfo = (
-  ds,
   option,
   json
 ) => ({
-  name: getDatasetLabel(json) || (ds || {}).label || '',
-  description: _crDescr(ds, option, json)
+  name: getDatasetLabel(json) || '',
+  description: _crDescr(option, json)
 })
 
 export const crZhConfig = (
@@ -293,20 +189,18 @@ export const crZhConfig = (
 }
 
 export const crConfOption = (
-  ds,
   option,
-  datasetLabel
+  json
 ) => ({
-  info: crInfo(ds, option, datasetLabel),
+  info: crInfo(option, json),
   zhConfig: crZhConfig(option)
 })
 
 export const crChartOption = (
-  ds,
   data,
   option,
   json
 ) => ({
   valueMoving: valueMoving(data),
-  ...crConfOption(ds, option, json)
+  ...crConfOption(option, json)
 })

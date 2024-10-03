@@ -22,7 +22,7 @@ const _crSubtitle = (items, category) => {
   });
   return _arr.join(": ");
 };
-const _crConfig = (json, option) => _assign((0, _crCategoryConfig.default)(_crTitle(option.dfTitle, option), _crSubtitle(option.items, option.dfC), option.seriaType, option.seriaColor, (0, _JsonStatFn.crCategoryData)(json), option.isAlg), (0, _fnAdapter.crChartOption)(void 0, option.time, option, json)),
+const _crConfig = (json, option) => _assign((0, _crCategoryConfig.default)(_crTitle(option.dfTitle, option), _crSubtitle(option.items, option.dfC), option.seriaType, option.seriaColor, (0, _JsonStatFn.crCategoryData)(json), option.isAlg), (0, _fnAdapter.crChartOption)(option.time, option, json)),
   _fCrConfig = seriaType => (json, option) => _crConfig(json, {
     ...option,
     seriaType

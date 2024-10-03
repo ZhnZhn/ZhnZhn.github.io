@@ -111,7 +111,7 @@ const _crConfig = (
   return pipe(
     crTreeMapConfig(data),
     fAddCaption(_title, _subtitle),
-    fAdd(crChartOption(void 0, time, option, json)),
+    fAdd(crChartOption(time, option, json)),
     toConfig
   );
 };
