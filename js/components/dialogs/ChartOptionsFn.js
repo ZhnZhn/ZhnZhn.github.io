@@ -10,7 +10,7 @@ var _ChartType = require("../../constants/ChartType");
 var _ChartOptionsTypes = require("./ChartOptionsTypes");
 const _isArr = Array.isArray,
   BLANK_CAPTION = '',
-  CATEGORY_TYPES = [_ChartType.CHT_MAP, _ChartType.CHT_COLUMN_SET, _ChartType.CHT_COLUMN_CLUSTER, _ChartType.CHT_BAR_SET, _ChartType.CHT_BAR_CLUSTER, _ChartType.CHT_BAR_WITH_LABELS, _ChartType.CHT_DOT_SET, _ChartType.CHT_TREE_MAP, _ChartType.CHT_TREE_MAP_CLUSTER, _ChartType.CHT_TREE_MAP_2, _ChartType.CHT_TREE_MAP_2_CLUSTER, _ChartType.CHT_BAR_TREE_MAP],
+  CATEGORY_TYPES = [_ChartType.CHT_MAP, _ChartType.CHT_COLUMN_SET, _ChartType.CHT_COLUMN_CLUSTER, _ChartType.CHT_BAR_SET, _ChartType.CHT_BAR_CLUSTER, _ChartType.CHT_BAR_WITH_LABELS, _ChartType.CHT_DOT_SET, _ChartType.CHT_TREE_MAP, _ChartType.CHT_TREE_MAP_CLUSTER, _ChartType.CHT_BAR_TREE_MAP],
   SPLINE_CONFIG = ['Spline', _ChartType.CHT_SPLINE],
   LINE_CONFIG = ['Line', _ChartType.CHT_LINE],
   AREA_CONFIG = ['Area', _ChartType.CHT_AREA],
@@ -87,7 +87,7 @@ const _crT3AC = _ref8 => {
 };
 const _crT3A2 = _ref9 => {
   let [oneCaption] = _ref9;
-  return [..._crT3A([oneCaption]), _crItem([`TreeMap: By ${oneCaption}: Depth 2`, _ChartType.CHT_TREE_MAP_2, oneCaption]), _crItem([`TreeMap: By ${oneCaption}: Depth 2: Cluster`, _ChartType.CHT_TREE_MAP_2_CLUSTER, oneCaption])];
+  return [..._crT3A([oneCaption])];
 };
 const _r = {
   DF: _crDF,

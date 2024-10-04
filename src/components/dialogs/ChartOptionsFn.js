@@ -16,8 +16,6 @@ import {
 
   CHT_TREE_MAP,
   CHT_TREE_MAP_CLUSTER,
-  CHT_TREE_MAP_2,
-  CHT_TREE_MAP_2_CLUSTER,
   CHT_BAR_TREE_MAP,
 
   CHT_MAP,
@@ -35,7 +33,6 @@ const _isArr = Array.isArray
     CHT_BAR_SET, CHT_BAR_CLUSTER, CHT_BAR_WITH_LABELS,
     CHT_DOT_SET,
     CHT_TREE_MAP, CHT_TREE_MAP_CLUSTER,
-    CHT_TREE_MAP_2, CHT_TREE_MAP_2_CLUSTER,
     CHT_BAR_TREE_MAP
 ]
 
@@ -205,9 +202,7 @@ const _crT3AC = ([oneCaption]) => [
 ];
 
 const _crT3A2 = ([oneCaption]) => [
-  ..._crT3A([oneCaption]),
-  _crItem([`TreeMap: By ${oneCaption}: Depth 2`, CHT_TREE_MAP_2, oneCaption]),
-  _crItem([`TreeMap: By ${oneCaption}: Depth 2: Cluster`, CHT_TREE_MAP_2_CLUSTER, oneCaption])
+  ..._crT3A([oneCaption])
 ];
 
 const _r = {
