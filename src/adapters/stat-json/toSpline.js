@@ -9,7 +9,8 @@ import crConfigType1 from '../../charts/crConfigType1';
 
 import {
   getDatasetLabel,
-  crSplineData
+  fCrSplinePoint,
+  crData
 } from '../JsonStatFn';
 
 import { crConfOption } from './fnAdapter';
@@ -20,30 +21,24 @@ const _isReverse = data => data.length > 2
 const _checkTimeOrder = data => _isReverse(data)
   ? data.reverse()
   : data;
-
 const _isPerJanuary = (label) => (label || '')
   .indexOf('per 1 January') !== -1;
 
 const _crData = (
   json
-) => _checkTimeOrder(crSplineData(
-  json,
-  _isPerJanuary(getDatasetLabel(json))
+) => _checkTimeOrder(crData(
+  fCrSplinePoint(_isPerJanuary(getDatasetLabel(json))),
+  json
 ));
 
 const _crSplineConfig = (
   json,
   option
-) => {
-  const data = _crData(json)
-  , confOption = crConfOption(option, json);
-
-  return crConfigType1({
-    option,
-    data,
-    confOption
-  });
-};
+) => crConfigType1({
+  option,
+  data: _crData(json),
+  confOption: crConfOption(option, json)
+});
 
 const routerSplineConfig = {
   DF: _crSplineConfig,

@@ -11,16 +11,12 @@ var _toYearly = _interopRequireDefault(require("./toYearly"));
 const _isReverse = data => data.length > 2 && data[0][0] > data[1][0];
 const _checkTimeOrder = data => _isReverse(data) ? data.reverse() : data;
 const _isPerJanuary = label => (label || '').indexOf('per 1 January') !== -1;
-const _crData = json => _checkTimeOrder((0, _JsonStatFn.crSplineData)(json, _isPerJanuary((0, _JsonStatFn.getDatasetLabel)(json))));
-const _crSplineConfig = (json, option) => {
-  const data = _crData(json),
-    confOption = (0, _fnAdapter.crConfOption)(option, json);
-  return (0, _crConfigType.default)({
-    option,
-    data,
-    confOption
-  });
-};
+const _crData = json => _checkTimeOrder((0, _JsonStatFn.crData)((0, _JsonStatFn.fCrSplinePoint)(_isPerJanuary((0, _JsonStatFn.getDatasetLabel)(json))), json));
+const _crSplineConfig = (json, option) => (0, _crConfigType.default)({
+  option,
+  data: _crData(json),
+  confOption: (0, _fnAdapter.crConfOption)(option, json)
+});
 const routerSplineConfig = {
   DF: _crSplineConfig,
   [_ChartType.CHT_AREA]: _crSplineConfig,
