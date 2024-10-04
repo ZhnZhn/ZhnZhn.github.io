@@ -11,8 +11,7 @@ import {
 } from './AdapterFn';
 
 import {
-  crCategoryPoint,
-  crTreeMapPoint
+  crCategoryPoint
 } from './CategoryFn';
 
 const _compareByPropNameY = (a, b) => b.y - a.y;
@@ -34,6 +33,7 @@ const _isDatasetVersion2 = (
 
 const _getDatasetDimension = _fGetDataset("dimension", {});
 const _getDatasetValue = _fGetDataset("value", {});
+const _getDatasetStatus = _fGetDataset("status", {});
 
 const _getIdSizeTuple = json => {
   const _json = json || {}
@@ -45,7 +45,6 @@ const _getIdSizeTuple = json => {
     dimension.size || []
   ];
 };
-
 
 const _getCategoryIndexLabel = (
   id,
@@ -70,12 +69,13 @@ const _crCategoryLabel = (
     : (hmLabels[categoryLabel]=1, categoryLabel);
 };
 
-const _fCrCategoryData = crPoint => (
-  json,
-  option
+export const crData = (
+  crPoint,
+  json
 ) => {
   const dimension = _getDatasetDimension(json)
   , value = _getDatasetValue(json)
+  , status = _getDatasetStatus(json)
   , [
     id,
     size
@@ -96,27 +96,22 @@ const _fCrCategoryData = crPoint => (
            data.push(crPoint(
              y,
              _crCategoryLabel(categoryLabel, hmLabels),
-             option
+             status[_valueIndex]
            ))
          }
        }
        return data;
     }, []) : [];
 }
-, _crCategoryDataImpl = _fCrCategoryData(crCategoryPoint)
 
 export const crCategoryData = (
   json
-) => _crCategoryDataImpl(json).sort(_compareByPropNameY)
+) => crData(crCategoryPoint, json)
+  .sort(_compareByPropNameY)
 
-export const crTreeMapData = _fCrCategoryData(crTreeMapPoint)
-
-
-const _crSplinePoint = (
-  y,
-  time,
+export const fCrSplinePoint = (
   hasPerJanuary
-) => {
+) => (y, time) => {
   const _pIndex = time.length - 1
   , isP = time[_pIndex] === '*'
   , _time = isP
@@ -126,9 +121,7 @@ const _crSplinePoint = (
   return isP
      ? [x, y, 'p']
      : [x, y];
-};
-
-export const crSplineData = _fCrCategoryData(_crSplinePoint)
+}
 
 const _crYearlyPoint = (
   y,
@@ -138,7 +131,10 @@ const _crYearlyPoint = (
   y
 ];
 
-export const crYearlyData = _fCrCategoryData(_crYearlyPoint)
+export const crYearlyData = (
+  json
+) => crData(_crYearlyPoint, json)
+  .reverse()
 
 export const getDatasetLabel = _fGetDataset("label")
 export const getDatasetUpdated = _fGetDataset("updated")
