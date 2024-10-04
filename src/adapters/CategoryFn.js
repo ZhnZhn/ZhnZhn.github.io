@@ -3,8 +3,6 @@ import { isInArrStr } from '../utils/arrFn';
 import {
   CHT_TREE_MAP,
   CHT_TREE_MAP_CLUSTER,
-  CHT_TREE_MAP_2,
-  CHT_TREE_MAP_2_CLUSTER,
   CHT_BAR_TREE_MAP,
 
   CHT_BAR_CLUSTER,
@@ -16,9 +14,7 @@ import {
 const _isArr = Array.isArray
 , TREE_MAP_CHART_TYPES = [
   CHT_TREE_MAP,
-  CHT_TREE_MAP_CLUSTER,
-  CHT_TREE_MAP_2,
-  CHT_TREE_MAP_2_CLUSTER
+  CHT_TREE_MAP_CLUSTER
 ];
 export const isTreeMap = isInArrStr(TREE_MAP_CHART_TYPES)
 export const isBarTreeMap = seriaType => seriaType === CHT_BAR_TREE_MAP
@@ -79,12 +75,14 @@ export const crCategoryPoint = (
   return { y, name: c, c };
 }
 
-export const crTreeMapPoint = (
-  value,
-  label,
-  title
-) => ({
-  value,
-  label: domSanitize(label),
-  title: domSanitize(title)
-})
+export const fCrTreeMapPoint = (title) => {
+  const _title = domSanitize(title);
+  return (
+    value,
+    label
+  ) => ({
+    value,
+    label: domSanitize(label),
+    title: _title
+  });
+}
