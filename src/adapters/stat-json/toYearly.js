@@ -15,20 +15,13 @@ import {
 const crYearlyConfig = (
   json,
   option
-) => {
-  const {
-    title='',
-    subtitle
-  } = option
-  , data = crYearlyData(json).reverse();
-  return pipe(
-    crYearlyConfigImpl(data, option),
-    fAdd('chart', { spacingTop: 25 }),
-    fAddCaption(title, subtitle),
-    fAdd('info', crInfo(option, json)),
-    fAdd('zhConfig', crZhConfig(option)),
-    toConfig
-  );
-};
+) => pipe(
+  crYearlyConfigImpl(crYearlyData(json), option),
+  fAdd('chart', { spacingTop: 25 }),
+  fAddCaption(option.title, option.subtitle),
+  fAdd('info', crInfo(option, json)),
+  fAdd('zhConfig', crZhConfig(option)),
+  toConfig
+);
 
 export default crYearlyConfig
