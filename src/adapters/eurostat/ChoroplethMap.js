@@ -1,9 +1,11 @@
 import { render } from 'react-dom';
+import domSanitize from '../../utils/domSanitize';
 
 import {
-  crGeoSeria,
-  createGeoSlice
-} from './JsonStatFn';
+  crGeoSlice,
+  crGeoSeria
+} from '../JsonStatTwoDimensionFn';
+
 import clusterMaker from '../../math/k-means';
 import { toFixed } from '../../math/mathFn';
 import merge from '../../utils/merge';
@@ -21,7 +23,7 @@ const URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json'
    '#4292c6', '#2171b5',
    '#08519c', '#08306b',
    '#74c476'
-  ];
+];
 
 const _isArr = Array.isArray
 , _assign = Object.assign
@@ -41,7 +43,6 @@ const _findFeature = (
       return features[i];
     }
   }
-  return;
 };
 
 const _mergeGeoAndValue = (
@@ -183,8 +184,8 @@ const _crRowEl = (
   el.addEventListener('click', function(event){
     wg.updateCluster(cluster, color, from, to)
   })
-  el.innerHTML = `<span>${from}&ndash;${to}<span>
-                  <span style="float: right; color: black; padding-left: 16px">${_n}</span>`
+  el.innerHTML = `<span>${domSanitize(from)}&ndash;${domSanitize(to)}<span>
+                  <span style="float: right; color: black; padding-left: 16px">${domSanitize(_n)}</span>`
   return el;
 }
 const _crFooterEl = () => {
@@ -246,30 +247,22 @@ const _addGeoSeria = (
   points,
   statJson,
   configSlice
-) => {
-  /* eslint-disable no-unused-vars */
-  const { time, ...seriaSlice } = configSlice;
-  /* eslint-enable no-unused-vars */
-  return points.map(point => {
-    seriaSlice.geo = point.id
-    point.seria = crGeoSeria(statJson, seriaSlice)
-    return point;
-  });
-}
+) => points.map(point => {
+  point.seria = crGeoSeria(statJson, point.id)
+  return point;
+});
 
 const _crChoroplethMap = (option) => {
   const {
     jsonCube:statJson,
     geoJson,
-    zhMapSlice:configSlice,
     map,
     L,
-    mapId,
-    time:dfTime
+    mapId
   } = option
-  , { dGeo, sGeo, time } = createGeoSlice(statJson, configSlice, dfTime)
+  , [dGeo, sGeo, time] = crGeoSlice(statJson)
   , { minValue, maxValue, points } = _mergeGeoAndValue(sGeo, dGeo, geoJson)
-  , _points = _addGeoSeria(points, statJson, configSlice)
+  , _points = _addGeoSeria(points, statJson)
   , _clusters = clusterMaker.crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
   , _hmIdCluster = _crHmIdCluster(_clusters);
 
