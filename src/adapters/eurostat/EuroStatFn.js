@@ -15,11 +15,12 @@ import {
 } from '../../charts/Tooltip';
 
 import {
-  isNumber,
   findMinY,
   findMaxY,
   filterTrimZero,
 } from '../AdapterFn';
+
+import { crData as crJsonStatData } from '../JsonStatFn';
 import { compareByDate } from '../compareByFn';
 import { crItemConf } from '../crFn';
 
@@ -39,8 +40,7 @@ const COLOR_EU = "#001489"
     "Spain", "Sweden"
   ];
 
-const _getObjectKeys = Object.keys
-, _assign = Object.assign
+const _assign = Object.assign
 , _isStr = str => typeof str === 'string'
 , _isArr = Array.isArray;
 
@@ -146,25 +146,20 @@ const _filterZeroCategories = (
   ];
 };
 
+const _crStatusOfPoint = (
+  status
+) => status && status !== ':' && status.length === 1
+  ? status
+  : void 0
 
-const _isYearOrMapFrequencyKey = (
-  key,
-  mapFrequency
-) => !mapFrequency
-  || mapFrequency === "Y"
-  || mapFrequency === "M"
-  || key.indexOf(mapFrequency) !== -1;
-
-const _crPoint = (
-  x,
-  y,
+const _crDataPoint = (
+  v,
+  time,
   status
 ) => [
-  x,
-  y,
-  status && status !== ':' && status.length === 1
-    ? status
-    : void 0
+  convertToUTC(time),
+  v,
+  _crStatusOfPoint(status)
 ];
 
 const _setZoomMinMaxTo = (
@@ -185,51 +180,16 @@ const _getTableId = ({
   dfTable
 }) => dfId || dfTable;
 
-const _crTimeIndexAndValue = (json) => {
-  const {
-     dimension,
-     value,
-     status
-   } = json
-  , { time } = dimension || {}
-  , { category } = time || {}
-  , { index:timeIndex=0 } = category || {};
-  return [
-    timeIndex,
-    value || [],
-    status || {}
-  ];
-}
-
 export const isNotGeoOrReporter = (
   token
 ) => token !== "geo" && token !== "reporter"
 
 export const crData = (
   json,
-  {mapFrequency, isFilterZero}={}
+  { isFilterZero }={}
 ) => {
-  const [
-    timeIndex,
-    value,
-    status
-  ] = _crTimeIndexAndValue(json)
-  let data = [];
-  _getObjectKeys(timeIndex).forEach(key => {
-     if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
-       const _valueIndex = timeIndex[key]
-       , y = value[_valueIndex]
-       , x = convertToUTC(key);
-       if (y != null && isNumber(x)){
-         data.push(_crPoint(
-           x,
-           y,
-           status[_valueIndex]
-         ));
-       }
-     }
-  })
-  data.sort(compareByDate)
+  let data = crJsonStatData(_crDataPoint, json)
+    .sort(compareByDate)
   if (isFilterZero) {
     data = filterTrimZero(data)
   }
@@ -240,28 +200,15 @@ export const crData = (
   ];
 }
 
+const _crPointArr = (value, time, status) => [
+  time.replace('M', '-'),
+  value,
+  _crStatusOfPoint(status)
+];
+
 export const toPointArr = (
   json
-) => {
-  const [
-    timeIndex,
-    value,
-    status
-  ] = _crTimeIndexAndValue(json);
-  return _getObjectKeys(timeIndex)
-    .reduce((_data, key) => {
-       const _valueIndex = timeIndex[key]
-       , y = value[_valueIndex];
-       if (y != null){
-         _data.push(_crPoint(
-             key.replace('M', '-'),
-             y,
-             status[_valueIndex]
-         ));
-       }
-       return _data;
-  }, []);
-}
+) => crJsonStatData(_crPointArr, json)
 
 export const crZhConfig = (option) => {
   const {

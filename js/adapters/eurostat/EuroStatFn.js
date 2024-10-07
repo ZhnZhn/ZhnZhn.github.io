@@ -9,6 +9,7 @@ exports.findMinY = _AdapterFn.findMinY;
 var _Chart = require("../../charts/Chart");
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _Tooltip = require("../../charts/Tooltip");
+var _JsonStatFn = require("../JsonStatFn");
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
 var _convertToUTC = _interopRequireDefault(require("./convertToUTC"));
@@ -18,25 +19,24 @@ const COLOR_EU = "#001489",
   EU_CODES = ["EU", "EU28", "EU27_2020", "G20", "Group of Twenty"],
   EA_CODES = ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19", "EA20", "EUROZONE"],
   EU_MEMBER = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"];
-const _getObjectKeys = Object.keys,
-  _assign = Object.assign,
+const _assign = Object.assign,
   _isStr = str => typeof str === 'string',
   _isArr = Array.isArray;
 const _crDescr = (updated, extension) => {
-  const _updated = _isStr(updated) ? "Updated: " + updated.replace('T', ' ') : '',
+  const _updated = _isStr(updated) ? `Updated: ${updated.replace('T', ' ')}` : '',
     _ext = extension || {},
     {
       id,
       subTitle
     } = _ext,
-    _id = "Dataset: " + (id || '').toLowerCase(),
-    _sub = subTitle ? "Metric: " + subTitle : '',
+    _id = `Dataset: ${(id || '').toLowerCase()}`,
+    _sub = subTitle ? `Metric: ${subTitle}` : '',
     _d = _ext.description || '';
-  return "<p>" + _updated + "</p><p>" + _id + "</p><p>" + _d + " " + _sub + "</p>";
+  return `<p>${_updated}</p><p>${_id}</p><p>${_d} ${_sub}</p>`;
 };
 const OBS_PERIOD_OVERALL_ = 'OBS_PERIOD_OVERALL_',
-  OLDEST_DATE = OBS_PERIOD_OVERALL_ + "OLDEST",
-  LATEST_DATE = OBS_PERIOD_OVERALL_ + "LATEST";
+  OLDEST_DATE = `${OBS_PERIOD_OVERALL_}OLDEST`,
+  LATEST_DATE = `${OBS_PERIOD_OVERALL_}LATEST`;
 const _getObsOverallPeriods = extension => {
   const {
     annotation
@@ -97,8 +97,8 @@ const _filterZeroCategories = (data, categories) => {
   });
   return [_data, _arrC.length !== 0 ? categories.filter(c => _arrC.indexOf(c) === -1) : categories];
 };
-const _isYearOrMapFrequencyKey = (key, mapFrequency) => !mapFrequency || mapFrequency === "Y" || mapFrequency === "M" || key.indexOf(mapFrequency) !== -1;
-const _crPoint = (x, y, status) => [x, y, status && status !== ':' && status.length === 1 ? status : void 0];
+const _crStatusOfPoint = status => status && status !== ':' && status.length === 1 ? status : void 0;
+const _crDataPoint = (v, time, status) => [(0, _convertToUTC.default)(time), v, _crStatusOfPoint(status)];
 const _setZoomMinMaxTo = (config, isNotZoomToMinMax, min) => {
   const yAxis = config.yAxis;
   if (isNotZoomToMinMax) {
@@ -114,60 +114,21 @@ const _getTableId = _ref2 => {
   } = _ref2;
   return dfId || dfTable;
 };
-const _crTimeIndexAndValue = json => {
-  const {
-      dimension,
-      value,
-      status
-    } = json,
-    {
-      time
-    } = dimension || {},
-    {
-      category
-    } = time || {},
-    {
-      index: timeIndex = 0
-    } = category || {};
-  return [timeIndex, value || [], status || {}];
-};
 const isNotGeoOrReporter = token => token !== "geo" && token !== "reporter";
 exports.isNotGeoOrReporter = isNotGeoOrReporter;
 const crData = function (json, _temp) {
   let {
-    mapFrequency,
     isFilterZero
   } = _temp === void 0 ? {} : _temp;
-  const [timeIndex, value, status] = _crTimeIndexAndValue(json);
-  let data = [];
-  _getObjectKeys(timeIndex).forEach(key => {
-    if (_isYearOrMapFrequencyKey(key, mapFrequency)) {
-      const _valueIndex = timeIndex[key],
-        y = value[_valueIndex],
-        x = (0, _convertToUTC.default)(key);
-      if (y != null && (0, _AdapterFn.isNumber)(x)) {
-        data.push(_crPoint(x, y, status[_valueIndex]));
-      }
-    }
-  });
-  data.sort(_compareByFn.compareByDate);
+  let data = (0, _JsonStatFn.crData)(_crDataPoint, json).sort(_compareByFn.compareByDate);
   if (isFilterZero) {
     data = (0, _AdapterFn.filterTrimZero)(data);
   }
   return [data, (0, _AdapterFn.findMinY)(data), (0, _AdapterFn.findMaxY)(data)];
 };
 exports.crData = crData;
-const toPointArr = json => {
-  const [timeIndex, value, status] = _crTimeIndexAndValue(json);
-  return _getObjectKeys(timeIndex).reduce((_data, key) => {
-    const _valueIndex = timeIndex[key],
-      y = value[_valueIndex];
-    if (y != null) {
-      _data.push(_crPoint(key.replace('M', '-'), y, status[_valueIndex]));
-    }
-    return _data;
-  }, []);
-};
+const _crPointArr = (value, time, status) => [time.replace('M', '-'), value, _crStatusOfPoint(status)];
+const toPointArr = json => (0, _JsonStatFn.crData)(_crPointArr, json);
 exports.toPointArr = toPointArr;
 const crZhConfig = option => {
   const {
@@ -276,7 +237,7 @@ exports.crCategoryTooltip = crCategoryTooltip;
 const crDataSource = dfProps => {
   const _ds = dfProps.dataSource,
     _prefix = _ds && _ds.indexOf('Eurostat') !== -1 ? _ds : 'Eurostat';
-  return _prefix + " (" + (_getTableId(dfProps) || '') + ")";
+  return `${_prefix} (${_getTableId(dfProps) || ''})`;
 };
 exports.crDataSource = crDataSource;
 const crLinkConf = dfProps => ({
