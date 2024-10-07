@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getDatasetUpdated = exports.getDatasetSource = exports.getDatasetLabel = exports.fCrSplinePoint = exports.crYearlyData = exports.crData = exports.crCategoryData = void 0;
+exports.getDatasetUpdated = exports.getDatasetSource = exports.getDatasetLabel = exports.fCrSplinePoint = exports.crYearlyData = exports.crData = exports.crCategoryData = exports._getIdSizeTuple = exports._getDimensionCategory = exports._getDatasetValue = exports._getDatasetStatus = exports._getDatasetDimension = void 0;
 var _fnUtil = require("./stat-json/fnUtil");
 var _AdapterFn = require("./AdapterFn");
 var _CategoryFn = require("./CategoryFn");
@@ -12,18 +12,24 @@ const _isDatasetVersion2 = json => json.class === "dataset" && json.version === 
     return _isDatasetVersion2(_json) ? _json : _json.dataset || {};
   },
   _fGetDataset = (propName, dfValue) => json => _getDataset(json)[propName] || dfValue;
-const _getDatasetDimension = _fGetDataset("dimension", {});
-const _getDatasetValue = _fGetDataset("value", {});
-const _getDatasetStatus = _fGetDataset("status", {});
+const _getDatasetDimension = exports._getDatasetDimension = _fGetDataset("dimension", {}),
+  _getDatasetValue = exports._getDatasetValue = _fGetDataset("value", {}),
+  _getDatasetStatus = exports._getDatasetStatus = _fGetDataset("status", {});
+const getDatasetLabel = exports.getDatasetLabel = _fGetDataset("label");
+const getDatasetUpdated = exports.getDatasetUpdated = _fGetDataset("updated");
+const getDatasetSource = exports.getDatasetSource = _fGetDataset("source");
 const _getIdSizeTuple = json => {
   const _json = json || {},
     dimension = _isDatasetVersion2(_json) ? _json : _getDatasetDimension(_json);
   return [dimension.id || [], dimension.size || []];
 };
+exports._getIdSizeTuple = _getIdSizeTuple;
+const _getDimensionCategory = (dimension, categoryPropName) => categoryPropName ? (dimension[categoryPropName] || {}).category || {} : {};
+exports._getDimensionCategory = _getDimensionCategory;
 const _getCategoryIndexLabel = (id, size, dimension) => {
   const categoryIndex = size.findIndex(v => v !== 1),
     categoryPropName = categoryIndex !== -1 ? id[categoryIndex] : '';
-  return categoryPropName && (dimension[categoryPropName] || {}).category || {} || {};
+  return _getDimensionCategory(dimension, categoryPropName);
 };
 const _crCategoryLabel = (categoryLabel, hmLabels) => {
   const _categoryNumber = hmLabels[categoryLabel];
@@ -66,7 +72,4 @@ exports.fCrSplinePoint = fCrSplinePoint;
 const _crYearlyPoint = (y, time) => [(0, _fnUtil.toYMD)(time), y];
 const crYearlyData = json => crData(_crYearlyPoint, json).reverse();
 exports.crYearlyData = crYearlyData;
-const getDatasetLabel = exports.getDatasetLabel = _fGetDataset("label");
-const getDatasetUpdated = exports.getDatasetUpdated = _fGetDataset("updated");
-const getDatasetSource = exports.getDatasetSource = _fGetDataset("source");
 //# sourceMappingURL=JsonStatFn.js.map

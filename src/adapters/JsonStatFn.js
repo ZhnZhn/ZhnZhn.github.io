@@ -31,11 +31,15 @@ const _isDatasetVersion2 = (
   dfValue
 ) => json => _getDataset(json)[propName] || dfValue;
 
-const _getDatasetDimension = _fGetDataset("dimension", {});
-const _getDatasetValue = _fGetDataset("value", {});
-const _getDatasetStatus = _fGetDataset("status", {});
+export const _getDatasetDimension = _fGetDataset("dimension", {})
+, _getDatasetValue = _fGetDataset("value", {})
+, _getDatasetStatus = _fGetDataset("status", {})
 
-const _getIdSizeTuple = json => {
+export const getDatasetLabel = _fGetDataset("label")
+export const getDatasetUpdated = _fGetDataset("updated")
+export const getDatasetSource = _fGetDataset("source")
+
+export const _getIdSizeTuple = json => {
   const _json = json || {}
   , dimension = _isDatasetVersion2(_json)
      ? _json
@@ -46,6 +50,13 @@ const _getIdSizeTuple = json => {
   ];
 };
 
+export const _getDimensionCategory = (
+  dimension,
+  categoryPropName
+) => categoryPropName
+  ? (dimension[categoryPropName] || {}).category || {}
+  : {};
+
 const _getCategoryIndexLabel = (
   id,
   size,
@@ -55,8 +66,10 @@ const _getCategoryIndexLabel = (
   , categoryPropName = categoryIndex !== -1
       ? id[categoryIndex]
       : '';
-  return (categoryPropName && (dimension[categoryPropName] || {}).category || {})
-   || {};
+  return _getDimensionCategory(
+    dimension,
+    categoryPropName
+  );
 };
 
 const _crCategoryLabel = (
@@ -135,7 +148,3 @@ export const crYearlyData = (
   json
 ) => crData(_crYearlyPoint, json)
   .reverse()
-
-export const getDatasetLabel = _fGetDataset("label")
-export const getDatasetUpdated = _fGetDataset("updated")
-export const getDatasetSource = _fGetDataset("source")
