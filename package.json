@@ -44,7 +44,6 @@
     "big.js": "^6.2.2",
     "dompurify": "^3.1.7",
     "highcharts": "^9.1.2",
-    "jsonstat": "^0.12.4",
     "leaflet": "^1.3.4",
     "localforage": "^1.10.0",
     "raven-js": "^3.27.2",

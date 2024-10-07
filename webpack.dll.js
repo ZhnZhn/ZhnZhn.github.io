@@ -14,8 +14,7 @@ module.exports = {
             "localforage",            
             "dompurify",
             "highcharts",                         
-            "highcharts/modules/exporting", "highcharts/modules/offline-exporting",            
-            "jsonstat"
+            "highcharts/modules/exporting", "highcharts/modules/offline-exporting"                        
           ]
   },
   output: {
