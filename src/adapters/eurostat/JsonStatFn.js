@@ -1,4 +1,4 @@
-import JSONstat from 'jsonstat';
+import { crData } from '../JsonStatFn';
 
 import { compareByValueId } from '../compareByFn';
 import pipe from '../../utils/pipe';
@@ -6,24 +6,6 @@ import {
   fetchHmIdCountry,
   getCountryById
 } from './fetchHmIdCountry';
-
-const _isArr = Array.isArray;
-
-const _combineToArr = (
-  dGeo,
-  sGeo,
-  status={}
-) => dGeo
-  .reduce((arr, id, index) => {
-    if (sGeo[index] != null && sGeo[index].value != null){
-      arr.push({
-         id,
-         value: sGeo[index].value,
-         status: status[index]
-      });
-    }
-    return arr;
-  }, []);
 
 const _splitForConfig = (arr) => {
    const categories = []
@@ -51,15 +33,12 @@ const _splitForConfig = (arr) => {
    };
 }
 
-/***********************/
-
 const _combineToHm = (
-  ids,
-  sGeo
+  data
 ) => {
   const hm = {};
-  ids.forEach((id, index) => {
-    const { value } = sGeo[index] || {};
+  data.forEach((point) => {
+    const { value, id } = point;
     if (value != null){
       hm[getCountryById(id)] = value;
     }
@@ -76,97 +55,29 @@ const _trHmToData = (
     c: id
   }));
 
-const _isGeoSliceEmpty = (
-  sGeo
-) => _isArr(sGeo)
-  ? sGeo
-     .filter(({ value }) => Boolean(value))
-     .length === 0
-  : true;
-
-export const createGeoSlice = (
-  json,
-  configSlice={},
-  dfTime
-) => {
-  const  ds = JSONstat(json).Dataset(0);
-
-  // 1) Try create _sGeo with configSlice
-  let time = configSlice.time
-  , _sGeo = ds.Data(configSlice);
-
-  // 2) Try create _sGeo with configSlice and dfTime from dialog
-  if (dfTime && _isGeoSliceEmpty(_sGeo)) {
-    _sGeo = ds.Data({ ...configSlice, ...{time: dfTime}})
-    time = dfTime
-  }
-
-  // 3) Try create _sGeo with maxIndex time available in ds
-  if (_isGeoSliceEmpty(_sGeo)){
-    const maxIndex = (ds.Dimension("time").id || []).length;
-    if (maxIndex>0) {
-      time = ds.Dimension("time").id[maxIndex-1];
-      _sGeo = ds.Data({...configSlice, ...{ time } })
-    }
-  }
-  const geoDim = ds.Dimension("geo")
-  , reporterDim = ds.Dimension("reporter")
-  , partnerDim = ds.Dimension("partner");
-
-  return {
-    dGeo: geoDim
-      ? geoDim
-      : reporterDim && reporterDim.length !== 1
-          ? reporterDim
-          : partnerDim
-              ? partnerDim
-              : reporterDim || { id: [] },     
-    sGeo: _sGeo || [],
-    time
-  };
-}
-
-export const crGeoSeria = (
-  json,
-  configSlice
-) => {
-   const ds = JSONstat(json).Dataset(0) || {}
-   , data = (ds.Data?.(configSlice) || [])
-       .map(obj => obj.value)
-       .filter(value => value !== null);
-   return {
-     date: ds.Dimension?.("time") || {},
-     data
-   };
-}
+const _crCategoryPoint = (
+  value,
+  label,
+  status
+) => ({
+  id: label,
+  value,
+  status
+});
 
 export const trJsonToCategory = (
-  json,
-  configSlice
-) => {
-  const {
-    dGeo,
-    sGeo
-  } = createGeoSlice(json, configSlice);
-  return fetchHmIdCountry()
-    .then(() => pipe(
-       _combineToArr(dGeo.id, sGeo, json.status),
-       arr => arr.sort(compareByValueId),
-       _splitForConfig
-    ));
-}
+  json
+) => fetchHmIdCountry()
+ .then(() => pipe(
+    crData(_crCategoryPoint, json),
+    arr => arr.sort(compareByValueId),
+    _splitForConfig
+ ))
 
 export const trJsonToSeria = (
   json,
-  configSlice={},
   categories
-) => {
-  const {
-    dGeo,
-    sGeo
-  } = createGeoSlice(json, configSlice);
-  return pipe(
-    _combineToHm(dGeo.id, sGeo),
-    hm => _trHmToData(hm, categories)
-  );
-}
+) => pipe(
+  _combineToHm(crData(_crCategoryPoint, json)),
+  hm => _trHmToData(hm, categories)
+)

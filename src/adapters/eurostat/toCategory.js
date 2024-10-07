@@ -56,8 +56,6 @@ export const crCategoryConfig = (
   // By Dim route
   const { dfC } = option;
   if (dfC && isNotGeoOrReporter(dfC)) {
-    option.category = dfC
-    option.itemSlice = option.zhMapSlice
     const { seriaType } = option
     , _crConfig = routerColumnBarSet[seriaType];
     if (!_crConfig) {
@@ -65,8 +63,7 @@ export const crCategoryConfig = (
     }
     return _crConfig(json, option);
   }
-  const { zhMapSlice:configSlice } = option;
-  return trJsonToCategory(json, configSlice)
+  return trJsonToCategory(json)
     .then(({ categories, data, min }) => {
       const config = FactoryChart.createConfig(option);
       addToCategoryConfig(config, {
@@ -83,12 +80,10 @@ export const crCategoryConfig = (
 const _crSeriaData = (
   json,
   option,
-  configSlice,
   categories
 ) => {
   const data = trJsonToSeria(
     json,
-    configSlice,
     categories
   );
   return _filterZeroAndRoundByIf(data, option);
@@ -116,7 +111,6 @@ export const crCategorySeria = (
   , data = _crSeriaData(
      json,
      option,
-     configSlice,
      categories
   );
 

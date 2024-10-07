@@ -25,15 +25,13 @@ const _crScatterProps = seriaColor => ({
     symbol: 'circle'
   }
 });
-const _crRouteIsNotExistMsg = seriaType => "Chart " + seriaType + " route isn't exist";
+const _crRouteIsNotExistMsg = seriaType => `Chart ${seriaType} route isn't exist`;
 const crCategoryConfig = (json, option) => {
   // By Dim route
   const {
     dfC
   } = option;
   if (dfC && (0, _EuroStatFn.isNotGeoOrReporter)(dfC)) {
-    option.category = dfC;
-    option.itemSlice = option.zhMapSlice;
     const {
         seriaType
       } = option,
@@ -43,10 +41,7 @@ const crCategoryConfig = (json, option) => {
     }
     return _crConfig(json, option);
   }
-  const {
-    zhMapSlice: configSlice
-  } = option;
-  return (0, _JsonStatFn.trJsonToCategory)(json, configSlice).then(_ref => {
+  return (0, _JsonStatFn.trJsonToCategory)(json).then(_ref => {
     let {
       categories,
       data,
@@ -64,8 +59,8 @@ const crCategoryConfig = (json, option) => {
   });
 };
 exports.crCategoryConfig = crCategoryConfig;
-const _crSeriaData = (json, option, configSlice, categories) => {
-  const data = (0, _JsonStatFn.trJsonToSeria)(json, configSlice, categories);
+const _crSeriaData = (json, option, categories) => {
+  const data = (0, _JsonStatFn.trJsonToSeria)(json, categories);
   return _filterZeroAndRoundByIf(data, option);
 };
 const _crSeriaProps = (seriaType, seriaColor) => seriaType === 'DOT_SET' ? _crScatterProps(seriaColor) : void 0;
@@ -77,7 +72,7 @@ const crCategorySeria = (json, option, chart) => {
       seriaColor,
       seriaType
     } = option,
-    data = _crSeriaData(json, option, configSlice, categories);
+    data = _crSeriaData(json, option, categories);
   return {
     data,
     minY: (0, _EuroStatFn.findMinY)(data),
