@@ -86,7 +86,10 @@ const _getTimeSize = json => {
   return timeTuple[1];
 }
 
-export const crGeoSeria = (json, geoId) => {
+export const crGeoSeria = (
+  json,
+  geoId
+) => {
   const value = _getDatasetValue(json)
   , dimension = _getDatasetDimension(json)
   , { index } = _getDimensionCategory(dimension, "geo")
@@ -94,13 +97,24 @@ export const crGeoSeria = (json, geoId) => {
   , _timeSize = _getTimeSize(json)
   , { index: timeIndex } = _getDimensionCategory(dimension, "time")
   , data = [];
+
   for(let i=_timeSize*geoNumberIndex;i<_timeSize*geoNumberIndex + _timeSize;i++){
     data.push(value[i])
   }
-  return {
-    data,
-    date: {
-      id: getObjectKeys(timeIndex)
-    }
+
+  let fromIndex = 0;
+  for(; fromIndex<data.length; fromIndex++){
+    if (isNumber(data[fromIndex])) break;
   }
+  let toIndex = data.length-1;
+  for(; toIndex>-1; toIndex--){
+    if (isNumber(data[toIndex])) break;
+  }
+
+  return {
+    data: data.slice(fromIndex, toIndex+1),
+    date: {
+      id: getObjectKeys(timeIndex).slice(fromIndex, toIndex+1)
+    }
+  };
 }

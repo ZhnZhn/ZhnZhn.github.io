@@ -68,10 +68,18 @@ const crGeoSeria = (json, geoId) => {
   for (let i = _timeSize * geoNumberIndex; i < _timeSize * geoNumberIndex + _timeSize; i++) {
     data.push(value[i]);
   }
+  let fromIndex = 0;
+  for (; fromIndex < data.length; fromIndex++) {
+    if ((0, _AdapterFn.isNumber)(data[fromIndex])) break;
+  }
+  let toIndex = data.length - 1;
+  for (; toIndex > -1; toIndex--) {
+    if ((0, _AdapterFn.isNumber)(data[toIndex])) break;
+  }
   return {
-    data,
+    data: data.slice(fromIndex, toIndex + 1),
     date: {
-      id: (0, _AdapterFn.getObjectKeys)(timeIndex)
+      id: (0, _AdapterFn.getObjectKeys)(timeIndex).slice(fromIndex, toIndex + 1)
     }
   };
 };
