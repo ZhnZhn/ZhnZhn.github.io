@@ -1,4 +1,4 @@
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import domSanitize from '../../utils/domSanitize';
 
 import {
@@ -139,16 +139,23 @@ const _crInfoControl = (L, mapId) => _assign(L.control(), {
     this.divEl = _crEl('div', 'control-info', '', this.idEl)
     return this.divEl;
   },
+  _getRootInfo(){
+    if (!this._rootInfo){
+      this._rootInfo = createRoot(_getElementById(this.idEl))
+    }
+    return this._rootInfo;
+  },
+  renderElement(el){
+    this._getRootInfo().render(el)
+  },
   update(props){
     if (props){
-      const elInfo = crInfo(props);
-      render(elInfo, _getElementById(this.idEl))
+      this.renderElement(crInfo(props))
     }
   },
   updateCluster(cluster, color, from, to){
     if (cluster){
-      const elClusterInfo = crClusterInfo({ cluster, color, from, to });
-      render(elClusterInfo, _getElementById(this.idEl))
+      this.renderElement(crClusterInfo({ cluster, color, from, to }))
     }
   }
 });

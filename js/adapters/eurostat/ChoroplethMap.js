@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _reactDom = require("react-dom");
+var _client = require("react-dom/client");
 var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
 var _JsonStatTwoDimensionFn = require("../JsonStatTwoDimensionFn");
 var _kMeans = _interopRequireDefault(require("../../math/k-means"));
@@ -115,21 +115,28 @@ const _crInfoControl = (L, mapId) => _assign(L.control(), {
     this.divEl = _crEl('div', 'control-info', '', this.idEl);
     return this.divEl;
   },
+  _getRootInfo() {
+    if (!this._rootInfo) {
+      this._rootInfo = (0, _client.createRoot)(_getElementById(this.idEl));
+    }
+    return this._rootInfo;
+  },
+  renderElement(el) {
+    this._getRootInfo().render(el);
+  },
   update(props) {
     if (props) {
-      const elInfo = (0, _MapFactory.crInfo)(props);
-      (0, _reactDom.render)(elInfo, _getElementById(this.idEl));
+      this.renderElement((0, _MapFactory.crInfo)(props));
     }
   },
   updateCluster(cluster, color, from, to) {
     if (cluster) {
-      const elClusterInfo = (0, _MapFactory.crClusterInfo)({
+      this.renderElement((0, _MapFactory.crClusterInfo)({
         cluster,
         color,
         from,
         to
-      });
-      (0, _reactDom.render)(elClusterInfo, _getElementById(this.idEl));
+      }));
     }
   }
 });
