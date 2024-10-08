@@ -54,7 +54,7 @@ const _mergeGeoAndValue = (
   let minValue = Number.POSITIVE_INFINITY
   , maxValue = Number.NEGATIVE_INFINITY;
   sGeo.forEach((cell, index) => {
-    const feature = _findFeature(json.features, dGeo.id[index])
+    const feature = _findFeature(json.features, dGeo[index])
     , { value, status } = cell;
     if (feature && value){
       feature.properties.value = value;
@@ -95,14 +95,14 @@ const _mergeGeoJsonAndClusters = (
   hmIdCluster,
   maxCluster
 ) => {
-  geoJson.features.forEach((feature ) => {
+  geoJson.features.forEach((feature) => {
     const _properties = feature.properties
-    , _id = _properties.id
+    , _id = _properties.id;
     if (_id){
       const _cluster = hmIdCluster[_id];
-      _properties.cluster = (typeof _cluster !== "undefined")
-          ? _cluster
-          : maxCluster;
+      _properties.cluster = typeof _cluster === "undefined"
+          ? maxCluster
+          : _cluster;
     } else {
       _properties.cluster = maxCluster;
     }
@@ -265,9 +265,10 @@ const _crChoroplethMap = (option) => {
     geoJson,
     map,
     L,
-    mapId
+    mapId,
+    time
   } = option
-  , [dGeo, sGeo, time] = crGeoSlice(statJson)
+  , [dGeo, sGeo] = crGeoSlice(statJson, time)
   , { minValue, maxValue, points } = _mergeGeoAndValue(sGeo, dGeo, geoJson)
   , _points = _addGeoSeria(points, statJson)
   , _clusters = clusterMaker.crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
@@ -288,8 +289,6 @@ const _crChoroplethMap = (option) => {
     )
     gradeControl.addTo(map);
   }
-
-  option.time = time
   return option;
 }
 

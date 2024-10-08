@@ -36,7 +36,7 @@ const _mergeGeoAndValue = (sGeo, dGeo, json) => {
   let minValue = Number.POSITIVE_INFINITY,
     maxValue = Number.NEGATIVE_INFINITY;
   sGeo.forEach((cell, index) => {
-    const feature = _findFeature(json.features, dGeo.id[index]),
+    const feature = _findFeature(json.features, dGeo[index]),
       {
         value,
         status
@@ -81,7 +81,7 @@ const _mergeGeoJsonAndClusters = (geoJson, hmIdCluster, maxCluster) => {
       _id = _properties.id;
     if (_id) {
       const _cluster = hmIdCluster[_id];
-      _properties.cluster = typeof _cluster !== "undefined" ? _cluster : maxCluster;
+      _properties.cluster = typeof _cluster === "undefined" ? maxCluster : _cluster;
     } else {
       _properties.cluster = maxCluster;
     }
@@ -209,9 +209,10 @@ const _crChoroplethMap = option => {
       geoJson,
       map,
       L,
-      mapId
+      mapId,
+      time
     } = option,
-    [dGeo, sGeo, time] = (0, _JsonStatTwoDimensionFn.crGeoSlice)(statJson),
+    [dGeo, sGeo] = (0, _JsonStatTwoDimensionFn.crGeoSlice)(statJson, time),
     {
       minValue,
       maxValue,
@@ -231,7 +232,6 @@ const _crChoroplethMap = option => {
     const gradeControl = _crGradeControl(minValue, maxValue, _clusters, L, infoControl);
     gradeControl.addTo(map);
   }
-  option.time = time;
   return option;
 };
 const _crGeoJson = geoJson => {

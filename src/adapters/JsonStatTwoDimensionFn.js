@@ -1,4 +1,7 @@
-import { getObjectKeys } from './AdapterFn';
+import {
+  isNumber,
+  getObjectKeys
+} from './AdapterFn';
 
 import {
   _getDatasetDimension,
@@ -33,16 +36,15 @@ const _getMaybeUndefValue = value => value === void 0
  ? null
  : value;
 
- const _crRecentGeoTupple = (
+ const _crGeoTupple = (
    value,
    status,
    geoIndex,
-   timeTuple
+   _timeSize,
+   _recentSliceDiff
  ) => {
    const dGeo = []
    , sGeo = []
-   , _timeSize = timeTuple[1]
-   , _recentSliceDiff = _timeSize - 1;
    let valueIndex;
    getObjectKeys(geoIndex).forEach(id => {
      valueIndex = _timeSize*geoIndex[id] + _recentSliceDiff
@@ -55,25 +57,10 @@ const _getMaybeUndefValue = value => value === void 0
    return [dGeo, sGeo];
  }
 
-const _getRecentTimeLabel = (
-  dimension,
-  timeTuple
+export const crGeoSlice = (
+  json,
+  timeId
 ) => {
-  const {
-    index: timeIndex
-  } = _getDimensionCategory(dimension, timeTuple[0]);
-  let _timeLabel = '', _timeIndex = -1;
-  getObjectKeys(timeIndex)
-    .reverse().forEach(timeId => {
-      if (timeIndex[timeId]>_timeIndex) {
-        _timeLabel = timeId
-        _timeIndex = timeIndex[timeId]
-      }
-  })
-  return _timeLabel;
-};
-
-export const crGeoSlice = (json) => {
   const value = _getDatasetValue(json)
   , [
     geoTuple,
@@ -82,18 +69,16 @@ export const crGeoSlice = (json) => {
   , dimension = _getDatasetDimension(json)
   , status = _getDatasetStatus(json)
   , { index } = _getDimensionCategory(dimension, geoTuple[0])
-  , [dGeo, sGeo] = _crRecentGeoTupple(
+  , { index: timeIndex } = _getDimensionCategory(dimension, timeTuple[0])
+  , sliceDiff = timeIndex[timeId];
+
+  return isNumber(sliceDiff) ? _crGeoTupple(
       value,
       status,
       index,
-      timeTuple
-  );
-
-  return [
-    { id: dGeo },
-    sGeo,
-    _getRecentTimeLabel(dimension, timeTuple)
-  ];
+      timeTuple[1],
+      sliceDiff
+  ) : [[], []];
 };
 
 const _getTimeSize = json => {
