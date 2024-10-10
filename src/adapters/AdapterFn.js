@@ -58,9 +58,11 @@ export {
   isObj,
   isArr,
   isNaN,
+  isUndef,
   isTypeNumber,
   isNumber,
-  isStr
+  isStr,
+  isNotEmptyArr
 } from '../utils/isTypeFn';
 import {
   isObj,

@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isTokenInStr = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isUndef = exports.isTokenInStr = exports.isNumberOrNull = exports.isNotEmptyArr = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -43,9 +43,11 @@ var _isTypeFn = require("../utils/isTypeFn");
 exports.isObj = _isTypeFn.isObj;
 exports.isArr = _isTypeFn.isArr;
 exports.isNaN = _isTypeFn.isNaN;
+exports.isUndef = _isTypeFn.isUndef;
 exports.isTypeNumber = _isTypeFn.isTypeNumber;
 exports.isNumber = _isTypeFn.isNumber;
 exports.isStr = _isTypeFn.isStr;
+exports.isNotEmptyArr = _isTypeFn.isNotEmptyArr;
 const isNumberOrNull = v => (0, _isTypeFn.isNumber)(v) || v === null;
 exports.isNumberOrNull = isNumberOrNull;
 const assign = exports.assign = Object.assign;

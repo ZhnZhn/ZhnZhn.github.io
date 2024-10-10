@@ -1,5 +1,7 @@
 import {
   FN_NOOP,
+  isUndef,
+  isNotEmptyArr,
   ymdhmsToUTC
 } from './AdapterFn';
 import {
@@ -7,24 +9,23 @@ import {
   crAthPoint
 } from './pointFn';
 
-const _isUndef = v => typeof v === 'undefined';
-const _getNotEmptyErr = arr => arr.length === 0
-  ? void 0
-  : arr
+const _getNotEmptyArr = arr => isNotEmptyArr(arr)
+  ? arr
+  : void 0;
 
 const _fAddAthPointTo = () => {
   let _prevClose;
   return (dATH, _date, open, close) => {
-    dATH.push(!_isUndef(_prevClose)
+    dATH.push(isUndef(_prevClose)
       ? crAthPoint({
-         date: _date,
-         close: _prevClose,
-         open
+          date: _date,
+          close: close,
+          open: close
         })
       : crAthPoint({
-         date: _date,
-         close: close,
-         open: close
+          date: _date,
+          close: _prevClose,
+          open
         })
     )
     _prevClose = close
@@ -34,8 +35,8 @@ const _fAddAthPointTo = () => {
 export const toStockSeriesData = ({
   isAth=true,
   isVolume=true,
-  arr=[],
   toDate=ymdhmsToUTC,
+  arr,
   seriaOption,
   option
 }) => {
@@ -60,7 +61,7 @@ export const toStockSeriesData = ({
   let minClose = Number.POSITIVE_INFINITY
   , maxClose = Number.NEGATIVE_INFINITY;
 
-  arr.forEach(item => {
+  (arr || []).forEach(item => {
     const {
       open,
       high,
@@ -98,10 +99,10 @@ export const toStockSeriesData = ({
     dC, dO, dH, dL,
     minClose,
     maxClose,
-    dVc: _getNotEmptyErr(dVc),
-    dV: _getNotEmptyErr(dV),
-    dATH: _getNotEmptyErr(dATH),
-    dMfi: _getNotEmptyErr(dMfi),
+    dVc: _getNotEmptyArr(dVc),
+    dV: _getNotEmptyArr(dV),
+    dATH: _getNotEmptyArr(dATH),
+    dMfi: _getNotEmptyArr(dMfi),
     isNotZoomToMinMax,
     isDrawDeltaExtrems,
     seriaType,
