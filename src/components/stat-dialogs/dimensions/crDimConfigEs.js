@@ -30,6 +30,15 @@ const _crOptionsWithSc = dim => dim
    return item;
 });
 
+const _getMapFrequency = dims => {
+  for(let i=0; i<dims.length; i++){
+    const _item = dims[i] || {};
+    if (_item.v === "freq") {
+      return ((_item.options || [])[0] || {}).value;
+    }
+  }
+};
+
 const crDimConfigEs = dimension => {
   const dims = [null]
   , adjDims = [];
@@ -54,8 +63,12 @@ const crDimConfigEs = dimension => {
       }
     }
   })
+  const _dims = dims
+    .filter(Boolean)
+    .concat(adjDims);
   return {
-    dims: dims.filter(Boolean).concat(adjDims),
+    dims: _dims,
+    mapFrequency: _getMapFrequency(_dims),
     timeId: TIME_ID
   };
 };
