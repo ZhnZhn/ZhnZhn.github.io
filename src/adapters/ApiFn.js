@@ -8,12 +8,12 @@ import {
   FN_IDENTITY,
   isArr,
   isInArrStr,
+  isStr,
   getValue,
   crError
 } from './AdapterFn';
 
-const _isStr = v => typeof v === "string"
-, _isWithCORS = isInArrStr([
+const _isWithCORS = isInArrStr([
   LT_BN,
   LT_BT,
   LT_CB
@@ -55,7 +55,7 @@ const _getBlockchainData = (
   option,
   getData=FN_IDENTITY
 ) => getData(
-  json && _isStr(json.contents)
+  json && isStr(json.contents)
     ? JSON.parse(json.contents)
     : json,
   option
