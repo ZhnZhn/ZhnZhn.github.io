@@ -14,10 +14,8 @@ const _fCrAddConfig = (
   ...crAddConfig(option),
   zhConfig: crZhConfig(option)
 })
-
-const _compareByDate = (a, b) => a.date - b.date
-
-const _fCrDataOHLCV = ({
+, _compareByDate = (a, b) => a.date - b.date
+, _fCrDataOHLCV = ({
   d=0,
   o=1,
   h=3,
@@ -28,12 +26,11 @@ const _fCrDataOHLCV = ({
   crValue=FN_IDENTITY,
   crVolume=FN_IDENTITY
 }) => (json, option) => {
-  const _data = [];
   try {
-    json.forEach(arrItem => {
+    const _data = json.reduce((data, arrItem) => {
       const date = crDate(arrItem[d]);
       if (isTypeNumber(date)) {
-        _data.push({
+        data.push({
            date,
            open: crValue(arrItem[o]),
            high: crValue(arrItem[h]),
@@ -42,14 +39,15 @@ const _fCrDataOHLCV = ({
            volume: crVolume(arrItem[v])
          })
       }
-    })
+      return data;
+    }, []).sort(_compareByDate);
+    return _data;
   } catch(err) {
-    throw crError()
+    throw crError();
   }
-  return _data.sort(_compareByDate);
-};
+}
+, _parseFloat = parseFloat;
 
-const _parseFloat = parseFloat;
 export const crOptionsFromStr = (
   isSeconds=true
 ) => {
