@@ -5,8 +5,8 @@ exports.default = void 0;
 var _LoadType = require("../../../constants/LoadType");
 const YEAR_MAX = 12,
   BI_YEAR_MAX = 24,
-  Q_YEAR_MAX = 4,
-  M_YEAR_MAX = 3;
+  Q_YEAR_MAX = 8,
+  M_YEAR_MAX = 4;
 const _loopFn = (fn, fromValue, n) => {
   for (let i = 0; i < n; i++) {
     fn(fromValue - i);

@@ -1,12 +1,12 @@
 import {
   isMonthDelimeterDash,
-  isEstat  
+  isEstat
 } from '../../../constants/LoadType';
 
 const YEAR_MAX = 12
 , BI_YEAR_MAX = 24
-, Q_YEAR_MAX = 4
-, M_YEAR_MAX = 3;
+, Q_YEAR_MAX = 8
+, M_YEAR_MAX = 4;
 
 const _loopFn = (
   fn,
