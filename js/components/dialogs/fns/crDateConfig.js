@@ -78,7 +78,7 @@ const _crYearQuarterConfig = function (loadId, mapDateDf, delimeter) {
   }
   const dateOptions = [],
     fromYear = new Date().getUTCFullYear(),
-    _delimeter = (0, _LoadType.isEstat)(loadId) ? '-' + delimeter : delimeter;
+    _delimeter = (0, _LoadType.isEstat)(loadId) || (0, _LoadType.isBis)(loadId) ? '-' + delimeter : delimeter;
   _loopFn(y => {
     _addYearQuartesTo(dateOptions, y, _delimeter);
   }, fromYear, Q_YEAR_MAX);
