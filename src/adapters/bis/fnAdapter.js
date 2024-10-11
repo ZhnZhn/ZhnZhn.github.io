@@ -9,14 +9,16 @@ import { isCategory } from '../CategoryFn';
 const _crItemIdDf = ({
   dfPrefix,
   items,
-  seriaType
+  seriaType,
+  dfSuffix
 }) => joinBy('.',
   dfPrefix,
   isCategory(seriaType) ? '*' : getValue(items[0]),
-  getValue(items[1])
+  getValue(items[1]),
+  dfSuffix
 )
 
-const _crtemId312 = ({
+const _crItemId312 = ({
   items,
   seriaType
 }) => joinBy('.',
@@ -26,7 +28,7 @@ const _crtemId312 = ({
 );
 
 const _hmCrItemId = {
-  s312: _crtemId312
+  s312: _crItemId312
 };
 
 export const crItemId = (
@@ -57,3 +59,8 @@ export const getTimePeriod = _fGetAttribute(
 )
 
 export const getRefArea = _fGetAttribute("REF_AREA")
+export const fCrCategoryName = ({
+  dfCategory
+}) => dfCategory
+  ? _fGetAttribute(dfCategory)
+  : getRefArea
