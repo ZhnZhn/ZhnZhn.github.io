@@ -12,12 +12,13 @@ const crData = (str, option) => {
   const seriesCollection = (0, _fnAdapter.getSeriesCollection)(str),
     seriesCollectionLength = seriesCollection.length,
     data = [],
-    _crValue = (0, _AdapterFn.fCrValue)(option);
+    _crValue = (0, _AdapterFn.fCrValue)(option),
+    _crCategoryName = (0, _fnAdapter.fCrCategoryName)(option);
   let i = 0,
     seriaElement;
   for (; i < seriesCollectionLength; i++) {
     seriaElement = seriesCollection[i];
-    data.push((0, _CategoryFn.crCategoryPoint)(_crValue((0, _fnAdapter.getObsValue)(seriaElement.childNodes[0])), (0, _fnAdapter.getRefArea)(seriaElement)));
+    data.push((0, _CategoryFn.crCategoryPoint)(_crValue((0, _fnAdapter.getObsValue)(seriaElement.childNodes[0])), _crCategoryName(seriaElement)));
   }
   if (!option.subtitle) {
     option.subtitle = option.dfTitle;

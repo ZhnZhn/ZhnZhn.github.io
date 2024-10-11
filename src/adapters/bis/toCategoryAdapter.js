@@ -4,7 +4,7 @@ import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
 import {
   getSeriesCollection,
-  getRefArea,
+  fCrCategoryName,
   getObsValue
 } from './fnAdapter';
 
@@ -15,13 +15,14 @@ const crData = (
   const seriesCollection = getSeriesCollection(str)
   , seriesCollectionLength = seriesCollection.length
   , data = []
-  , _crValue = fCrValue(option);
+  , _crValue = fCrValue(option)
+  , _crCategoryName = fCrCategoryName(option);
   let i = 0, seriaElement;
   for(;i<seriesCollectionLength;i++){
     seriaElement = seriesCollection[i]
     data.push(crCategoryPoint(
       _crValue(getObsValue(seriaElement.childNodes[0])),
-      getRefArea(seriaElement)
+      _crCategoryName(seriaElement)
     ))
   }
   if (!option.subtitle) {
