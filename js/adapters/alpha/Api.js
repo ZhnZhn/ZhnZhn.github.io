@@ -10,7 +10,7 @@ const ROOT = 'https://www.alphavantage.co/query',
   INFO_PROP = 'Information',
   REQ_ERROR = 'Request Error',
   _assign = Object.assign,
-  _crFunctionQuery = value => "function=" + value;
+  _crFunctionQuery = value => `function=${value}`;
 const _crEconomicsQuery = option => {
   const {
       items
@@ -27,7 +27,7 @@ const _checkCommoditiesParams = (item, interval) => {
   const [itemId, itemCaption] = (0, _fnAdapter.getValueCaption)(item),
     [intervalId, _intervalCaption] = (0, _fnAdapter.getValueCaption)(interval);
   if (!item.dw && _isDailyInterval(intervalId) || item.dw && _isQuarterlyInterval(intervalId)) {
-    throw (0, _fnAdapter.crError)(REQ_ERROR, "Interval " + _intervalCaption + " is absent for " + itemCaption);
+    throw (0, _fnAdapter.crError)(REQ_ERROR, `Interval ${_intervalCaption} is absent for ${itemCaption}`);
   }
   return [itemId, itemCaption, intervalId];
 };
@@ -40,9 +40,9 @@ const _crCommoditiesQuery = option => {
   _assign(option, {
     itemCaption
   });
-  return _crFunctionQuery(itemId) + "&interval=" + intervalId;
+  return `${_crFunctionQuery(itemId)}&interval=${intervalId}`;
 };
-const _crFnSymbolQuery = (fnName, symbol) => _crFunctionQuery(fnName) + "&symbol=" + symbol;
+const _crFnSymbolQuery = (fnName, symbol) => `${_crFunctionQuery(fnName)}&symbol=${symbol}`;
 const _getInterval = intervalValue => {
   const dfFn = intervalValue.split('&')[0],
     dfT = (dfFn || '').replace('TIME_SERIES_', ''),
@@ -74,14 +74,14 @@ const _crIntradayQuery = option => {
     } = option,
     ticket = (0, _fnAdapter.getValue)(items[0]),
     interval = (0, _fnAdapter.getValue)(items[1]),
-    title = ticket + " (" + interval + ")";
+    title = `${ticket} (${interval})`;
   _assign(option, {
     ticket,
     interval,
     title,
     itemCaption: title
   });
-  return _crFnSymbolQuery(dfFn, ticket) + "&interval=" + interval;
+  return `${_crFnSymbolQuery(dfFn, ticket)}&interval=${interval}`;
 };
 const _crIncomeQuery = option => {
   const {
@@ -115,7 +115,7 @@ const _crDfQuery = _ref => {
     period = 50,
     indicator = 'SMA'
   } = _ref;
-  return _crFnSymbolQuery(indicator, ticket) + "&interval=daily&time_period=" + period + "&series_type=close";
+  return `${_crFnSymbolQuery(indicator, ticket)}&interval=daily&time_period=${period}&series_type=close`;
 };
 const _crTopGlQuery = () => _crFunctionQuery('TOP_GAINERS_LOSERS');
 const _crCrQuery = option => {
@@ -125,9 +125,16 @@ const _crCrQuery = option => {
     symbol = (0, _fnAdapter.getValue)(items[0]),
     market = (0, _fnAdapter.getValue)(items[1]);
   _assign(option, {
-    itemCaption: symbol + "/" + market
+    itemCaption: `${symbol}/${market}`
   });
-  return _crFunctionQuery('DIGITAL_CURRENCY_DAILY') + "&symbol=" + symbol + "&market=" + market;
+  return `${_crFunctionQuery('DIGITAL_CURRENCY_DAILY')}&symbol=${symbol}&market=${market}`;
+};
+const _crEtfProfileQuery = option => {
+  const {
+      items
+    } = option,
+    symbol = (0, _fnAdapter.getValue)(items[0]);
+  return `${_crFunctionQuery("ETF_PROFILE")}&symbol=${symbol}`;
 };
 const _routerQuery = {
   DF: _crDfQuery,
@@ -140,7 +147,8 @@ const _routerQuery = {
   INCOME_STATEMENT: _crIncomeQuery,
   BALANCE_SHEET: _crIncomeQuery,
   CASH_FLOW: _crIncomeQuery,
-  EARNINGS: _crEarningQuery
+  EARNINGS: _crEarningQuery,
+  ETF_PROFILE: _crEtfProfileQuery
 };
 const AlphaApi = {
   getRequestUrl(option) {
@@ -151,7 +159,7 @@ const AlphaApi = {
       _crQuery = dfFn && _routerQuery[dfFn] || _routerQuery.DF,
       _queryParam = _crQuery(option);
     option.apiKey = void 0;
-    return ROOT + "?" + _queryParam + "&apikey=" + apiKey;
+    return `${ROOT}?${_queryParam}&apikey=${apiKey}`;
   },
   checkResponse(json) {
     if ((0, _isEmpty.default)(json)) {
@@ -163,6 +171,5 @@ const AlphaApi = {
     }
   }
 };
-var _default = AlphaApi;
-exports.default = _default;
+var _default = exports.default = AlphaApi;
 //# sourceMappingURL=Api.js.map
