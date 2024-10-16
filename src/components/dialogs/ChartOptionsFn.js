@@ -208,6 +208,7 @@ const _crT3A2 = ([oneCaption]) => [
 const _r = {
   DF: _crDF,
   tes: _crTes,
+  tc: _crColumBarClusterItems,
   t1: _crT1,
   t1a: _crT1A,
   t2: _crT2,
