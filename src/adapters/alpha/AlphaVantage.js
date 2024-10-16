@@ -9,6 +9,7 @@ import EarnAdapter from './EarnAdapter'
 import EconomicsAdapter from './EconomicsAdapter'
 import TopGainersLosersAdapter from './TopGainersLosersAdapter'
 import CryptocurrencyAdapter from './CryptocurrencyAdapter'
+import EtfProfileAdapter from './EtfProfileAdapter'
 
 const adapter = crAdapterRouter({
   rAdapter: {
@@ -20,7 +21,8 @@ const adapter = crAdapterRouter({
     EI: EconomicsAdapter,
     CM: EconomicsAdapter,
     GL: TopGainersLosersAdapter,
-    CR: CryptocurrencyAdapter
+    CR: CryptocurrencyAdapter,
+    EP: EtfProfileAdapter
   },
   isKey: true
 })

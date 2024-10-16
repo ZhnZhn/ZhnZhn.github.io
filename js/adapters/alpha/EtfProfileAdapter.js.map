@@ -1,0 +1,39 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/alpha/EtfProfileAdapter.js"
+ ],
+ "file": "../../../src/adapters/alpha/EtfProfileAdapter.js",
+ "names": [
+  "_crAdapterCategory",
+  "_interopRequireDefault",
+  "require",
+  "_CategoryFn",
+  "_compareByFn",
+  "_getByProps",
+  "json",
+  "propName",
+  "crItemCaption",
+  "_ref",
+  "itemCaption",
+  "crData",
+  "option",
+  "holdings",
+  "data",
+  "sortDescCategory",
+  "map",
+  "item",
+  "crCategoryPoint",
+  "parseFloat",
+  "weight",
+  "symbol",
+  "subtitle",
+  "title",
+  "EtfProfileAdapter",
+  "crAdapterCategory",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,kBAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,WAAA,GAAAD,OAAA;AACA,IAAAE,YAAA,GAAAF,OAAA;AAEA,MAAMG,WAAW,GAAGA,CAClBC,IAAI,EACJC,QAAQ,KACL,CAACD,IAAI,IAAG,CAAC,CAAC,EAAEC,QAAQ,CAAC,IAAI,KAAK;AAEnC,MAAMC,aAAa,GAAGA,CAAAC,IAAA,EAEnBH,IAAI;EAAA,IAFgB;IACrBI;EACF,CAAC,GAAAD,IAAA;EAAA,OAAW,GAAGC,WAAW,IAAI,EAAE,IAAIL,WAAW,CAACC,IAAI,EAAE,YAAY,CAAC,EAAE;AAAA;AAErE,MAAMK,MAAM,GAAGA,CAACL,IAAI,EAAEM,MAAM,KAAK;EAC/B,MAAM;MAAEC;IAAS,CAAC,GAAGP,IAAI,IAAI,CAAC,CAAC;IAC7BQ,IAAI,GAAG,IAAAC,6BAAgB,EAACF,QAAQ,CAACG,GAAG,CAACC,IAAI,IAAI;MAC7C,OAAO,IAAAC,2BAAe,EACpBC,UAAU,CAACF,IAAI,CAACG,MAAM,CAAC,EACvBH,IAAI,CAACI,MACP,CAAC;IACH,CAAC,EAAE,EAAE,CAAC,CAAC;EAEPT,MAAM,CAACU,QAAQ,GAAG,GAAGV,MAAM,CAACF,WAAW,uBAAuBL,WAAW,CAACC,IAAI,EAAE,mBAAmB,CAAC,EAAE;EACtGM,MAAM,CAACW,KAAK,GAAG,sBAAsBlB,WAAW,CAACC,IAAI,EAAE,oBAAoB,CAAC,oBAAoBD,WAAW,CAACC,IAAI,EAAE,gBAAgB,CAAC,EAAE;EAErI,OAAOQ,IAAI;AACb,CAAC;AACD,MAAMU,iBAAiB,GAAG,IAAAC,0BAAiB,EACzCd,MAAM,EACNH,aACF,CAAC;AAAC,IAAAkB,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaJ,iBAAiB"
+}
