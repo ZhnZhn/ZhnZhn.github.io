@@ -9,7 +9,7 @@ const crItemCaptionDf = ({
 
 const crAdapterCategory = (
   crData,
-  //UNCOMTRADE
+  //UNCOMTRADE, AV ETF_PROFILE (json)
   crItemCaption=crItemCaptionDf
 ) => {
   const adapter = {
@@ -29,7 +29,7 @@ const crAdapterCategory = (
       config.zhConfig = {
         id: _itemKey,
         key: _itemKey,
-        itemCaption: crItemCaption(option),
+        itemCaption: crItemCaption(option, json),
         itemTime: option.time,
         dataSource: option.dataSource
       }

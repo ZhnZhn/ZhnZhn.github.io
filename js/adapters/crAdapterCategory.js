@@ -14,7 +14,7 @@ const crItemCaptionDf = _ref => {
   return (0, _AdapterFn.joinBy)(': ', subtitle, title);
 };
 const crAdapterCategory = function (crData,
-//UNCOMTRADE
+//UNCOMTRADE, AV ETF_PROFILE (json)
 crItemCaption) {
   if (crItemCaption === void 0) {
     crItemCaption = crItemCaptionDf;
@@ -31,7 +31,7 @@ crItemCaption) {
       config.zhConfig = {
         id: _itemKey,
         key: _itemKey,
-        itemCaption: crItemCaption(option),
+        itemCaption: crItemCaption(option, json),
         itemTime: option.time,
         dataSource: option.dataSource
       };
