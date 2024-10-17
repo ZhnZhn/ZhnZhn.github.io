@@ -1,36 +1,30 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports["default"] = void 0;
-
+exports.default = void 0;
 var _highcharts = _interopRequireDefault(require("highcharts"));
-
-var REG_BLANKS = /\s/g,
-    DF_VALUE = '0',
-    DELIMETER = ' ';
-
-var _calcDecimal = function _calcDecimal(strNumber) {
-  var arrSplit = strNumber.split('.');
+var _isTypeFn = require("./isTypeFn");
+const REG_BLANKS = /\s/g,
+  STR_ZERO = '0',
+  DELIMETER = ' ';
+const _calcDecimal = strNumber => {
+  const arrSplit = strNumber.split('.');
   return arrSplit[1] ? arrSplit[1].length : 0;
 };
-
-var formatAllNumber = function formatAllNumber(value) {
-  if (!value) {
-    return DF_VALUE;
+const formatAllNumber = function (value, dfValue) {
+  if (value === 0) {
+    return STR_ZERO;
   }
-
+  if (!value) {
+    return (0, _isTypeFn.isStr)(dfValue) ? dfValue : STR_ZERO;
+  }
   if (value < 1000 && value > -1000) {
     return '' + value;
   }
-
-  var _value = ('' + value).replace(REG_BLANKS, ''),
-      decimal = _calcDecimal(_value);
-
-  return _highcharts["default"].numberFormat(_value, decimal, '.', DELIMETER);
+  const _value = ('' + value).replace(REG_BLANKS, ''),
+    decimal = _calcDecimal(_value);
+  return _highcharts.default.numberFormat(_value, decimal, '.', DELIMETER);
 };
-
-var _default = formatAllNumber;
-exports["default"] = _default;
+var _default = exports.default = formatAllNumber;
 //# sourceMappingURL=formatAllNumber.js.map
