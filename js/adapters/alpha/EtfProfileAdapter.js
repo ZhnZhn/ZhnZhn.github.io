@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"));
+var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 const _getByProps = (json, propName) => (json || {})[propName] || "n/a";
@@ -11,7 +12,7 @@ const crItemCaption = (_ref, json) => {
   let {
     itemCaption
   } = _ref;
-  return `${itemCaption || ""} ${_getByProps(json, "net_assets")}`;
+  return `${itemCaption || ""} ${(0, _AdapterFn.numberFormat)(_getByProps(json, "net_assets"), "")}`;
 };
 const crData = (json, option) => {
   const {
