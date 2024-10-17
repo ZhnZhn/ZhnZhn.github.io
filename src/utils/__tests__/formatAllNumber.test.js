@@ -52,10 +52,22 @@ describe('formatAllNumber', ()=>{
     expect(fn('100 000 000')).toBe('100 000 000')
   })
 
-  test('should return for falsy values str 0', () => {
+  test('should return str 0 for number 0 or str 0', () => {
+    expect(fn(0)).toBe('0')
+    expect(fn('0')).toBe('0')
+  })
+
+  test('should use dfValue for false values', () => {
+    expect(fn(NaN, "")).toBe("")
+    expect(fn(void 0, "")).toBe("")
+    expect(fn(null, "")).toBe("")
+    expect(fn("", "")).toBe("")
+    expect(fn(false, "")).toBe("")
+  })
+
+  test('should return for falsy values DF_VALUE  str 0', () => {
     expect(fn(null)).toBe('0')
     expect(fn()).toBe('0')
-    expect(fn(0)).toBe('0')
     expect(fn(NaN)).toBe('0')
     expect(fn(false)).toBe('0')
     expect(fn('')).toBe('0')
