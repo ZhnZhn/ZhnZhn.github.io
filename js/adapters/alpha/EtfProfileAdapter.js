@@ -12,7 +12,7 @@ const crItemCaption = (_ref, json) => {
   let {
     itemCaption
   } = _ref;
-  return `${itemCaption || ""} ${(0, _AdapterFn.numberFormat)(_getByProps(json, "net_assets"), "")}`;
+  return `${(0, _AdapterFn.crShortItemCaption)(itemCaption)} ${(0, _AdapterFn.numberFormat)(_getByProps(json, "net_assets"), "")}`;
 };
 const crData = (json, option) => {
   const {

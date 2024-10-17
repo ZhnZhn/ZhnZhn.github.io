@@ -1,5 +1,8 @@
 import crAdapterCategory from '../crAdapterCategory';
-import { numberFormat } from '../AdapterFn';
+import {
+  numberFormat,
+  crShortItemCaption
+} from '../AdapterFn';
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
 
@@ -10,7 +13,7 @@ const _getByProps = (
 
 const crItemCaption = ({
   itemCaption
-}, json) => `${itemCaption || ""} ${numberFormat(_getByProps(json, "net_assets"), "")}`;
+}, json) => `${crShortItemCaption(itemCaption)} ${numberFormat(_getByProps(json, "net_assets"), "")}`;
 
 const crData = (json, option) => {
   const { holdings } = json || {}
