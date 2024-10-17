@@ -9,6 +9,7 @@ import {
   isNumber,
   isYNumber,
   isNumberOrNull,
+  crShortItemCaption,
   getObjectKeys,
   toFloatOrEmpty,
   findMinY,
@@ -139,6 +140,19 @@ describe('isNumberOrNull', ()=>{
     expect(fn('123')).toBe(false)
     expect(fn()).toBe(false)
     expect(fn(NaN)).toBe(false)
+  })
+})
+
+describe('crShortItemCaption', () => {
+  const fn = crShortItemCaption;
+  test("should create short item caption", () => {
+    expect(fn("Some name (ABC)")).toBe("ABC")
+  })
+  test("should return empty string in edge cases", ()=>{
+    expect(fn()).toBe("")
+    expect(fn(null)).toBe("")
+    expect(fn({})).toBe("")
+    expect(fn(NaN)).toBe("")
   })
 })
 

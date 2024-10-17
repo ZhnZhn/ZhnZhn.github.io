@@ -186,6 +186,18 @@ describe('isNumberOrNull', () => {
     expect(fn(NaN)).toBe(false);
   });
 });
+describe('crShortItemCaption', () => {
+  const fn = _AdapterFn.crShortItemCaption;
+  test("should create short item caption", () => {
+    expect(fn("Some name (ABC)")).toBe("ABC");
+  });
+  test("should return empty string in edge cases", () => {
+    expect(fn()).toBe("");
+    expect(fn(null)).toBe("");
+    expect(fn({})).toBe("");
+    expect(fn(NaN)).toBe("");
+  });
+});
 describe('getObjectKeys', () => {
   const fn = _AdapterFn.getObjectKeys;
   test("should return array with object keys or empty array for not object types", () => {
