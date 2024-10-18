@@ -14,6 +14,7 @@ var _EconomicsAdapter = _interopRequireDefault(require("./EconomicsAdapter"));
 var _TopGainersLosersAdapter = _interopRequireDefault(require("./TopGainersLosersAdapter"));
 var _CryptocurrencyAdapter = _interopRequireDefault(require("./CryptocurrencyAdapter"));
 var _EtfProfileAdapter = _interopRequireDefault(require("./EtfProfileAdapter"));
+var _OverviewAdapter = _interopRequireDefault(require("./OverviewAdapter"));
 const adapter = (0, _crAdapterRouter.crAdapterRouter)({
     rAdapter: {
       DF: _IndicatorAdapter.default,
@@ -25,7 +26,8 @@ const adapter = (0, _crAdapterRouter.crAdapterRouter)({
       CM: _EconomicsAdapter.default,
       GL: _TopGainersLosersAdapter.default,
       CR: _CryptocurrencyAdapter.default,
-      EP: _EtfProfileAdapter.default
+      EP: _EtfProfileAdapter.default,
+      OV: _OverviewAdapter.default
     },
     isKey: true
   }),

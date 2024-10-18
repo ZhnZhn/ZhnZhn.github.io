@@ -129,13 +129,24 @@ const _crCrQuery = option => {
   });
   return `${_crFunctionQuery('DIGITAL_CURRENCY_DAILY')}&symbol=${symbol}&market=${market}`;
 };
-const _crEtfProfileQuery = option => {
+const _fCrQuery1 = fnName => option => {
   const {
       items
     } = option,
     symbol = (0, _fnAdapter.getValue)(items[0]);
+  return `${_crFunctionQuery(fnName)}&symbol=${symbol}`;
+};
+
+/*
+const _crEtfProfileQuery = (
+  option
+) => {
+  const { items } = option
+  , symbol = getValue(items[0]);
   return `${_crFunctionQuery("ETF_PROFILE")}&symbol=${symbol}`;
 };
+*/
+
 const _routerQuery = {
   DF: _crDfQuery,
   CR: _crCrQuery,
@@ -148,7 +159,8 @@ const _routerQuery = {
   BALANCE_SHEET: _crIncomeQuery,
   CASH_FLOW: _crIncomeQuery,
   EARNINGS: _crEarningQuery,
-  ETF_PROFILE: _crEtfProfileQuery
+  ETF_PROFILE: _fCrQuery1("ETF_PROFILE"),
+  OVERVIEW: _fCrQuery1("OVERVIEW")
 };
 const AlphaApi = {
   getRequestUrl(option) {
