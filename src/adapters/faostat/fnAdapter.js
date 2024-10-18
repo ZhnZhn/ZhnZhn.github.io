@@ -104,7 +104,7 @@ const _crSeriaData = (
      .sort(_compareByX)
   : [];
 
-const _isItemList = item => getValue(item)
+export const _isItemList = item => getValue(item)
   .indexOf('>') !== -1;
 
 const _getSeriesPropName = ({

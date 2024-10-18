@@ -22,6 +22,9 @@ const _checkReq = option => {
   if ((0, _CategoryFn.isTreeMap)(option.seriaType) && !_element.isTm) {
     throw new Error(`TreeMap for ${(0, _AdapterFn.getCaption)(_element)} is not exist.`);
   }
+  if ((0, _fnAdapter._isItemList)(option.items[0]) && !(0, _CategoryFn.isCategory)(option.seriaType)) {
+    throw new Error('Query lists for time series is not implemented.');
+  }
 };
 const _getListId = geoId => (0, _AdapterFn.isTokenInStr)(geoId, '>') ? geoId : WORLD_LIST_ID;
 const FaoStatApi = {

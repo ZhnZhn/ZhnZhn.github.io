@@ -2,7 +2,7 @@ import {
   isCategory,
   isTreeMap
 } from '../CategoryFn';
-import {  
+import {
   isTokenInStr,
   assign,
   getValue,
@@ -12,7 +12,8 @@ import {
 
 import {
   isSeriesReq,
-  isQueryAllowed
+  isQueryAllowed,
+  _isItemList
 } from './fnAdapter';
 
 import getMemoizedYear from './getMemoizedYear';
@@ -36,6 +37,9 @@ const _checkReq = (option) => {
   const _element = option.items[2] || {};
   if (isTreeMap(option.seriaType) && !_element.isTm) {
     throw new Error(`TreeMap for ${getCaption(_element)} is not exist.`);
+  }
+  if (_isItemList(option.items[0]) && !isCategory(option.seriaType)) {
+    throw new Error('Query lists for time series is not implemented.');
   }
 };
 

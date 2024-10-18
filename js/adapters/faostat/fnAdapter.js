@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crCategoryTitle = void 0;
+exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crCategoryTitle = exports._isItemList = void 0;
 var _fnDescr = require("./fnDescr");
 exports.toInfo = _fnDescr.toInfo;
 var _AdapterFn = require("../AdapterFn");
@@ -56,6 +56,7 @@ const _crSeriesData = (data, prName) => {
 const _compareByX = (a, b) => a.x - b.x;
 const _crSeriaData = (data, option) => (0, _AdapterFn.isArr)(data) ? data.map(_crPoint).filter(p => (0, _AdapterFn.isNumber)(p.y)).sort(_compareByX) : [];
 const _isItemList = item => (0, _AdapterFn.getValue)(item).indexOf('>') !== -1;
+exports._isItemList = _isItemList;
 const _getSeriesPropName = _ref2 => {
   let {
     items
