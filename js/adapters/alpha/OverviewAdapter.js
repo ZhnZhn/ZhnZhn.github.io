@@ -37,7 +37,7 @@ const OverviewAdapter = {
           links: [{
             href: _getJsonProp("OfficialSite")
           }]
-        }, _crTokensItem(`${_crMetricToken("SharesOutstanding", json)}, ${_getJsonProp("LatestQuarter")}`, _crIncomeMetricsTokens(json)), _crTokensItem(`${_crMetricToken("MarketCapitalization", json)}`, _crMarketCapTokens(_getJsonProp)), _crTokensItem(`Analyst ${_crAnalystToken("TargetPrice", ANALYST, json)}`, _crAnalystTokens(json))],
+        }, _crTokensItem(`${_crMetricToken("SharesOutstanding", json)}, ${_getJsonProp("LatestQuarter")}`, _crIncomeMetricsTokens(json)), _crTokensItem(`${_crMetricToken("MarketCapitalization", json)}`, _crMarketCapTokens(_getJsonProp)), _crTokensItem(`Analyst ${_crAnalystToken("TargetPrice", ANALYST, json)}, Beta ${_getJsonProp("Beta")}`, _crAnalystTokens(json))],
         zhConfig: {
           key: _id,
           id: _id

@@ -74,7 +74,7 @@ const OverviewAdapter = {
             _crMarketCapTokens(_getJsonProp)
           ),
           _crTokensItem(
-            `Analyst ${_crAnalystToken("TargetPrice", ANALYST, json)}`,
+            `Analyst ${_crAnalystToken("TargetPrice", ANALYST, json)}, Beta ${_getJsonProp("Beta")}`,
             _crAnalystTokens(json)
           )
         ],
