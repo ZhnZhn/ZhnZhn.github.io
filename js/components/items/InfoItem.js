@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.InfoItem = void 0;
+var _uiApi = require("../uiApi");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _ItemList = _interopRequireDefault(require("../zhn/ItemList"));
@@ -28,21 +29,22 @@ const _isArr = Array.isArray,
   S_DESCR = {
     padding: '0 4px',
     lineHeight: 1.8
-  };
+  },
+  DF_DESCR_CAPTION = "Decription";
 const _crLinkItem = _ref => {
   let {
     href,
     caption
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-    caption: `${caption}: ${href}`,
+    caption: (0, _uiApi.joinBy)(": ", caption, href),
     href: href
   });
 };
 const Descr = _ref2 => {
   let {
     style,
-    caption = "Decription",
+    caption = DF_DESCR_CAPTION,
     descr,
     links
   } = _ref2;

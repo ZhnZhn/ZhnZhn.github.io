@@ -1,3 +1,4 @@
+import { joinBy } from '../uiApi';
 import useToggle from '../hooks/useToggle';
 
 import OpenClose from '../zhn/OpenClose';
@@ -17,21 +18,22 @@ const _isArr = Array.isArray
 , S_DESCR = {
   padding: '0 4px',
   lineHeight: 1.8
-};
+}
+, DF_DESCR_CAPTION = "Decription";
 
 const _crLinkItem = ({
   href,
   caption
 }) => (
  <Link
-    caption={`${caption}: ${href}`}
+    caption={joinBy(": ", caption, href)}
     href={href}
  />
 );
 
 const Descr = ({
   style,
-  caption="Decription",
+  caption=DF_DESCR_CAPTION,
   descr,
   links
 }) => descr ? (
