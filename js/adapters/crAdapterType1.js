@@ -23,10 +23,8 @@ const _crZhConfig = _ref => {
     zhConfig: _crZhConfig(option)
   });
 const _crItemCaptionCurrencyRate = (option, toCurrency) => {
-  const _caption = option.items[0].c,
-    _fromIndex = _caption.indexOf('(') + 1,
-    _toIndex = _caption.indexOf(')');
-  return `${_caption.slice(_fromIndex, _toIndex)}/${toCurrency}`;
+  const _fromCurrency = (0, _AdapterFn.crShortItemCaption)((0, _AdapterFn.getCaption)(option.items[0]));
+  return `${_fromCurrency}/${toCurrency}`;
 };
 const fCrConfOptionExchangeRate = function (toCurrency, exchangeRateCaseId) {
   if (exchangeRateCaseId === void 0) {

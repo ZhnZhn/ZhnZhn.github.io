@@ -7,7 +7,9 @@ import {
   isArr,
   isObj,
   isNumber,
-  assign
+  assign,
+  getCaption,
+  crShortItemCaption
 } from './AdapterFn';
 
 const _crZhConfig = ({
@@ -27,10 +29,10 @@ const _crItemCaptionCurrencyRate = (
   option,
   toCurrency
 ) => {
-  const _caption = option.items[0].c
-  , _fromIndex = _caption.indexOf('(') + 1
-  , _toIndex = _caption.indexOf(')');
-  return `${_caption.slice(_fromIndex, _toIndex)}/${toCurrency}`;
+  const _fromCurrency = crShortItemCaption(
+    getCaption(option.items[0])
+  );
+  return `${_fromCurrency}/${toCurrency}`;
 }
 
 export const fCrConfOptionExchangeRate = (

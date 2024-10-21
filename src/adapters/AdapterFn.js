@@ -132,7 +132,7 @@ export const fCheckResponse = (
 export const crShortItemCaption = (itemCaption) => {
   if (!isStr(itemCaption)) return "";
   const _startIndex = itemCaption.indexOf("(")
-  , _endIndex = itemCaption.indexOf(")");
+  , _endIndex = itemCaption.indexOf(")", _startIndex);
   return _startIndex !== -1 && _startIndex < _endIndex
     ? itemCaption.slice(_startIndex+1, _endIndex)
     : itemCaption;

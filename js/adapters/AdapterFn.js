@@ -108,7 +108,7 @@ exports.fCheckResponse = fCheckResponse;
 const crShortItemCaption = itemCaption => {
   if (!(0, _isTypeFn.isStr)(itemCaption)) return "";
   const _startIndex = itemCaption.indexOf("("),
-    _endIndex = itemCaption.indexOf(")");
+    _endIndex = itemCaption.indexOf(")", _startIndex);
   return _startIndex !== -1 && _startIndex < _endIndex ? itemCaption.slice(_startIndex + 1, _endIndex) : itemCaption;
 };
 exports.crShortItemCaption = crShortItemCaption;
