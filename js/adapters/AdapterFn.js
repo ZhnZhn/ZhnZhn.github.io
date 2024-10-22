@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isUndef = exports.isTokenInStr = exports.isNumberOrNull = exports.isNotEmptyArr = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isUndef = exports.isTokenInStr = exports.isSeriesDataCase = exports.isNumberOrNull = exports.isNotEmptyArr = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -126,6 +126,33 @@ const crValueMoving = _ref2 => {
   });
 };
 exports.crValueMoving = crValueMoving;
+const _calcSumOfSlice = (data, sliceIndex, date) => data.reduce((bSum, _seriesData) => {
+  const point = _seriesData[_seriesData.length - sliceIndex];
+  return date === _crDmyFrom(point) ? bSum.plus('' + (0, _getterPointFn.getPointValue)(point)) : bSum;
+}, (0, _big.default)('0')).toString();
+const _getRecentDataPoints = data => {
+  const _length = data.length,
+    _pointNow = data[_length - 1] || [EMPTY, 0],
+    _pointPrev = data[_length - 2] || _pointNow;
+  return [_pointNow, _pointPrev];
+};
+const _crBigValue = (nOrStr, dfR) => (0, _big.default)((0, _mathFn.roundBy)(nOrStr, dfR));
+const _crSeriesDataRecentTuple = (data, dfR) => {
+  const [_pointNow, _pointPrev] = _getRecentDataPoints(data[0] || []),
+    date = _crDmyFrom(_pointNow),
+    dateTo = _crDmyFrom(_pointPrev),
+    bNowValue = _crBigValue(_calcSumOfSlice(data, 1, date), dfR),
+    bPrevValue = _crBigValue(_calcSumOfSlice(data, 2, dateTo), dfR);
+  return [bNowValue, bPrevValue, date, dateTo];
+};
+const _crSeriaDataRecentTuple = data => {
+  const [_pointNow, _pointPrev] = _getRecentDataPoints(data),
+    bNowValue = _crBigValueFrom(_pointNow),
+    bPrevValue = _crBigValueFrom(_pointPrev),
+    date = _crDmyFrom(_pointNow),
+    dateTo = _crDmyFrom(_pointPrev);
+  return [bNowValue, bPrevValue, date, dateTo];
+};
 const valueMoving = (data, dfR) => {
   if (!(0, _isTypeFn.isArr)(data)) {
     return {
@@ -133,13 +160,7 @@ const valueMoving = (data, dfR) => {
       direction: _DirectionType.DT_EMPTY
     };
   }
-  const len = data.length,
-    _pointNow = data[len - 1] || [EMPTY, 0],
-    bNowValue = _crBigValueFrom(_pointNow),
-    _pointPrev = data[len - 2] || _pointNow,
-    bPrevValue = _crBigValueFrom(_pointPrev),
-    date = _crDmyFrom(_pointNow),
-    dateTo = _crDmyFrom(_pointPrev);
+  const [bNowValue, bPrevValue, date, dateTo] = isSeriesDataCase(data) ? _crSeriesDataRecentTuple(data, dfR) : _crSeriaDataRecentTuple(data);
   return {
     ...crValueMoving({
       bNowValue,
@@ -215,5 +236,15 @@ const fAddToConfigInfoAndDfLink = (title, crDfLink) => (config, json, option) =>
   addToConfigDfLink(config, `${title} Data Portal`, crDfLink(option));
   return config;
 };
+
+//FAOSTAT > List Splines
 exports.fAddToConfigInfoAndDfLink = fAddToConfigInfoAndDfLink;
+const SERIES_DATA_TYPE = "sd";
+const addSeriesDataTypeTo = data => {
+  data._type = SERIES_DATA_TYPE;
+  return data;
+};
+exports.addSeriesDataTypeTo = addSeriesDataTypeTo;
+const isSeriesDataCase = data => (data || {})._type === SERIES_DATA_TYPE;
+exports.isSeriesDataCase = isSeriesDataCase;
 //# sourceMappingURL=AdapterFn.js.map
