@@ -3,10 +3,21 @@
   display: none;
 }
 
+.with-scroll-x {
+  position: relative;
+  background-color: transparent;
+  height: 30px;
+  overflow-y: hidden;
+}
+
+
 @media screen and (max-width: 450px) {
- .with-scroll-x {
-   scrollbar-width: thin;
+ .with-scroll-x {   
+   /*scrollbar-width: thin;*/
    overflow-x: auto;
+   height: 34px;
+   margin: -4px 0;
+   clip-path: inset(6px 0); 
  }
  .with-scroll-x__bt-r {
    display: inline-block;
