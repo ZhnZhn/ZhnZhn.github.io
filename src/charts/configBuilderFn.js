@@ -1,10 +1,9 @@
 export { crSeriaConfig } from './ChartConfigFn';
 
-import pipe from '../utils/pipe';
 import {
-  crSeriaConfig
-} from './ChartConfigFn';
-
+  isSeriesDataCase
+} from '../adapters/AdapterFn';
+import pipe from '../utils/pipe';
 import {
   filterTrimZero,
   findMinY,
@@ -19,6 +18,7 @@ import {
 
 import {
   crAreaConfig as _crAreaConfig,
+  crSeriaConfig,
   isLineType
 } from './ChartConfigFn';
 import {
@@ -463,12 +463,24 @@ const CONFIG_SERIA = {
    }
 }
 
-export const crSplineSeriaConfig = (
-  option
-) => crSeriaConfig({
-  ...CONFIG_SERIA,
-  ...option
-})
+const MAX_NUMBER_OF_VISIBLE_SERIES = 8;
+export const crSplineSeriaConfig = ({
+  data,
+  ...restOption
+}) => isSeriesDataCase(data)
+  ? data.map((seriaData, i) => crSeriaConfig({
+      ...CONFIG_SERIA,
+      ...restOption,
+      data: seriaData,
+      color: seriaData.color || getSeriaColorByIndex(i),
+      name: seriaData.seriaName,
+      visible: i < MAX_NUMBER_OF_VISIBLE_SERIES
+    }))
+  : crSeriaConfig({
+      ...CONFIG_SERIA,
+      ...restOption,
+      data
+    })
 
 const CONFIG_SCATTER = { type: 'scatter' };
 export const crScatterSeriaConfig = (

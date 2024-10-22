@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.toConfig = exports.setDataSourceTo = exports.setBarConfigHeightIf = exports.fSetSeriaBy = exports.fAddZhPoints = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSplineConfig = exports.crSeriaConfigFromAdapter = exports.crScatterSeriaConfig = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaDfConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
 var _ChartConfigFn = require("./ChartConfigFn");
 exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
+var _AdapterFn = require("../adapters/AdapterFn");
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _seriaFn = require("../math/seriaFn");
 var _isTypeFn = require("../utils/isTypeFn");
@@ -368,10 +369,25 @@ const CONFIG_SERIA = {
     symbol: 'circle'
   }
 };
-const crSplineSeriaConfig = option => (0, _ChartConfigFn.crSeriaConfig)({
-  ...CONFIG_SERIA,
-  ...option
-});
+const MAX_NUMBER_OF_VISIBLE_SERIES = 8;
+const crSplineSeriaConfig = _ref2 => {
+  let {
+    data,
+    ...restOption
+  } = _ref2;
+  return (0, _AdapterFn.isSeriesDataCase)(data) ? data.map((seriaData, i) => (0, _ChartConfigFn.crSeriaConfig)({
+    ...CONFIG_SERIA,
+    ...restOption,
+    data: seriaData,
+    color: seriaData.color || (0, _ChartTheme.getSeriaColorByIndex)(i),
+    name: seriaData.seriaName,
+    visible: i < MAX_NUMBER_OF_VISIBLE_SERIES
+  })) : (0, _ChartConfigFn.crSeriaConfig)({
+    ...CONFIG_SERIA,
+    ...restOption,
+    data
+  });
+};
 exports.crSplineSeriaConfig = crSplineSeriaConfig;
 const CONFIG_SCATTER = {
   type: 'scatter'
