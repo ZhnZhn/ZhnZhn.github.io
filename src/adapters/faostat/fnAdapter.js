@@ -12,7 +12,8 @@ import {
   toUpperCaseFirst,
   monthIndex,
   ymdToUTC,
-  valueMoving
+  valueMoving,
+  addSeriesDataTypeTo
 } from '../AdapterFn';
 import { DATASET_EMPTY } from './fnDescr';
 
@@ -83,13 +84,28 @@ const _hmToPoints = (
 ) => arr
   .map(item => hm[item.listPn]);
 
+const _getNotEmptySeriaIndex = (
+  _data
+) => {
+  for(let i=0; i<_data.length; i++) {
+    const _seria = _data[_data.length-1-i];
+    for(let j=0; j<_seria.length; j++){
+      if (_seria[j].y !== 0) return _data.length-1-i;
+    }
+  }
+};
+
 const _crSeriesData = (
   data,
   prName
 ) => {
   const _hm = _crHm(data, prName)
-  , _legend = _crRefLegend(_hm);
-  return _hmToPoints(_hm, _legend);
+  , _legend = _crRefLegend(_hm)
+  , _data = _hmToPoints(_hm, _legend)
+  , _notEmptyIndex = _getNotEmptySeriaIndex(_data);
+  return addSeriesDataTypeTo(
+    _data.slice(0, _notEmptyIndex + 1)
+  );
 };
 
 const _compareByX = (a, b) => a.x - b.x;
@@ -104,8 +120,9 @@ const _crSeriaData = (
      .sort(_compareByX)
   : [];
 
-export const _isItemList = item => getValue(item)
-  .indexOf('>') !== -1;
+const _isItemList = (
+  item
+) => getValue(item).indexOf('>') !== -1;
 
 const _getSeriesPropName = ({
   items
