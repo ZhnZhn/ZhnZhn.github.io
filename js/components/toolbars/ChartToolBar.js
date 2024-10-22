@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _has = require("../has");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useChartMethods = _interopRequireDefault(require("./useChartMethods"));
 var _ButtonTab = _interopRequireDefault(require("../zhn/ButtonTab"));
@@ -17,8 +18,9 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 const CL_WITH_SCROLL_X = "with-scroll-x",
   CL_BT_R = `${CL_WITH_SCROLL_X}__bt-r`,
+  MODAL_POPUP_STYLE_TOP = (0, _has.isWideWidth)() ? 75 : 65,
   _crModalPopupStyle = left => ({
-    top: 70,
+    top: MODAL_POPUP_STYLE_TOP,
     left
   }),
   _crLeftStyle = left => ({
@@ -80,7 +82,6 @@ const _crModalMenuStyle = (ref, left) => {
 const ChartToolbar = _ref2 => {
   let {
     hasError,
-    style,
     config = {},
     onMiniChart,
     getChart,
@@ -122,7 +123,6 @@ const ChartToolbar = _ref2 => {
     return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       ref: _refToolbar,
       className: CL_WITH_SCROLL_X,
-      style: style,
       children: _btInfo
     });
   }
@@ -132,14 +132,14 @@ const ChartToolbar = _ref2 => {
     let _tabIndCaption = "Indicator";
     if (_isColumnCategoryConfig(config.xAxis)) {
       _tabIndCaption = "Math";
-      _modalMenuArr.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuInd.default, {
+      _modalMenuArr.push(/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuInd.default, {
         isShow: isShowInd,
         style: S_M_IND,
         config: config,
         getChart: getChart,
         onClose: toggleInd
       }, "menu_ind"));
-      _modalMenuArr.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuAppearance.default, {
+      _modalMenuArr.push(/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuAppearance.default, {
         isShow: isShowAppearance,
         style: S_M_APPEARANCE,
         config: config,
@@ -154,7 +154,7 @@ const ChartToolbar = _ref2 => {
         onClick: toggleAppearance
       });
     } else {
-      _modalMenuArr.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuIndicator.default, {
+      _modalMenuArr.push(/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuIndicator.default, {
         isShow: isShowInd,
         style: S_M_IND,
         config: config,
@@ -188,7 +188,7 @@ const ChartToolbar = _ref2 => {
       onClick: toggleMini
     });
     const _miniStyle = isShowMini ? _crModalMenuStyle(_refToolbar, S_M_MINI.left) : void 0;
-    _modalMenuArr.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuMini.default, {
+    _modalMenuArr.push(/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuMini.default, {
       isShow: isShowMini,
       style: {
         ...S_M_MINI,
@@ -215,7 +215,6 @@ const ChartToolbar = _ref2 => {
     }), _modalMenuArr, /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       ref: _refToolbar,
       className: CL_WITH_SCROLL_X,
-      style: style,
       children: [_btTabIndicator, _btAppearance, _btLegend, /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
         style: _btAppearance ? S_BT_FN_APPEARANCE : S_BT_FN,
         caption: "Fn",

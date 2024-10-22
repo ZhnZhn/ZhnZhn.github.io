@@ -7,6 +7,10 @@ import {
   isNumber
 } from '../uiApi';
 
+import {
+  isWideWidth
+} from '../has';
+
 import useToggle from '../hooks/useToggle';
 import useChartMethods from './useChartMethods';
 
@@ -19,8 +23,11 @@ import ModalMenuMini from './ModalMenuMini'
 
 const CL_WITH_SCROLL_X = "with-scroll-x"
 , CL_BT_R = `${CL_WITH_SCROLL_X}__bt-r`
+, MODAL_POPUP_STYLE_TOP = isWideWidth()
+   ? 75
+   : 65
 , _crModalPopupStyle = (left) => ({
-  top: 70,
+  top: MODAL_POPUP_STYLE_TOP,
   left
 })
 , _crLeftStyle = (left) => ({
@@ -86,7 +93,6 @@ const _crModalMenuStyle = (
 
 const ChartToolbar = ({
   hasError,
-  style,
   config={},
   onMiniChart,
   getChart,
@@ -137,7 +143,6 @@ const ChartToolbar = ({
       <div
          ref={_refToolbar}
          className={CL_WITH_SCROLL_X}
-         style={style}
       >
         {_btInfo}
       </div>
@@ -241,8 +246,7 @@ const ChartToolbar = ({
       {_modalMenuArr}
       <div
          ref={_refToolbar}
-         className={CL_WITH_SCROLL_X}
-         style={style}
+         className={CL_WITH_SCROLL_X}        
       >
          {_btTabIndicator}
          {_btAppearance}

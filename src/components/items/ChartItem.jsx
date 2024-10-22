@@ -37,12 +37,6 @@ import PanelDataInfo from './PanelDataInfo';
 import arrangeConfigsBy from './arrangeConfigsBy';
 
 const CL_CHART_ITEM = 'chart-item'
-, S_TAB_DIV = {
-  position: 'relative',
-  backgroundColor: 'transparent',
-  height: 30,
-  overflowY: 'hidden'
-}
 , S_ML_8 = { marginLeft: 8 }
 , S_MT_6 = { marginTop: 6 };
 
@@ -185,7 +179,6 @@ export const ChartItem = memoEqual(({
               withoutAnimation={true}
            >
              <ChartToolBar
-               style={S_TAB_DIV}
                hasError={hasError}
                config={config}
                getChart={getMainChart}

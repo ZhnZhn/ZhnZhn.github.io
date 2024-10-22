@@ -31,12 +31,6 @@ var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
 const CL_CHART_ITEM = 'chart-item',
-  S_TAB_DIV = {
-    position: 'relative',
-    backgroundColor: 'transparent',
-    height: 30,
-    overflowY: 'hidden'
-  },
   S_ML_8 = {
     marginLeft: 8
   },
@@ -155,7 +149,6 @@ const ChartItem = exports.ChartItem = (0, _memoEqual.default)(_ref => {
         isShow: isShowToolbar,
         withoutAnimation: true,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartToolBar.default, {
-          style: S_TAB_DIV,
           hasError: hasError,
           config: config,
           getChart: getMainChart,
