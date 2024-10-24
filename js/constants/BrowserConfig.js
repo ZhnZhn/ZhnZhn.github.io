@@ -53,6 +53,7 @@ const BrowserConfig = {
   [_BrowserType.BT_COMMODITIES]: _crBrowserItem(_BrowserType.BT_COMMODITIES, 'Commodities', 'commodities'),
   [_BrowserType.BT_CENTRAL_BANKS]: _crBrowserItem(_BrowserType.BT_CENTRAL_BANKS, 'Central Banks', 'central-banks'),
   [_BrowserType.BT_CURRENCY]: _crBrowserItem(_BrowserType.BT_CURRENCY, 'Currencies', 'currency'),
+  [_BrowserType.BT_OECD]: _crBrowserItem(_BrowserType.BT_OECD, 'OECD', 'oecd'),
   [_BrowserType.BT_FRANCE_STATISTICS]: _crBrowserItem(_BrowserType.BT_FRANCE_STATISTICS, 'INSEE: Statistics France', 'statistics-france'),
   [_BrowserType.BT_UK_STATISTICS]: _crBrowserItem(_BrowserType.BT_UK_STATISTICS, 'ONS: Statistics UK', 'statistics-uk'),
   [_BrowserType.BT_NORWAY_STATISTICS]: _crBrowserItem(_BrowserType.BT_NORWAY_STATISTICS, 'Statistics Norway', 'statistics-norway'),

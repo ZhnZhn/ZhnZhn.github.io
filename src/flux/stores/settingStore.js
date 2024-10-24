@@ -10,6 +10,7 @@ import {
 } from '../storeApi';
 
 import {
+  LT_OE,
   LT_BIS,
   LT_ECB,
   LT_SNB,
@@ -46,6 +47,7 @@ const _withApiKey = [
   LT_WT
 ];
 const _withProxyServer = [
+  LT_OE,
   LT_BIS,
   LT_ECB,
   LT_SNB,

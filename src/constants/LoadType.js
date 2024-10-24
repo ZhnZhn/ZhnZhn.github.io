@@ -5,6 +5,8 @@ export const LT_FMP = 'FMP'
 export const LT_TW = 'TW'
 export const LT_DBN = 'DBN'
 
+export const LT_OE = 'OE'
+
 export const LT_EI = 'EI'
 export const LT_EMB = 'EMB'
 export const LT_IRE = 'IRE'

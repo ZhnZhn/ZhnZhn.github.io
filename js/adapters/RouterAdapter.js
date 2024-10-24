@@ -30,6 +30,7 @@ var _Boc = _interopRequireDefault(require("./boc/Boc"));
 var _Snb = _interopRequireDefault(require("./snb/Snb"));
 var _Ndl = _interopRequireDefault(require("./ndl/Ndl"));
 var _DbNomics = _interopRequireDefault(require("./db-nomics/DbNomics"));
+var _Oecd = _interopRequireDefault(require("./oecd/Oecd"));
 var _Ei = _interopRequireDefault(require("./ei/Ei"));
 var _Ember = _interopRequireDefault(require("./ember/Ember"));
 var _En = _interopRequireDefault(require("./environment/En"));
@@ -51,6 +52,7 @@ var _Ht = _interopRequireDefault(require("./htx/Ht"));
 var _Kx = _interopRequireDefault(require("./okx/Kx"));
 var _Bb = _interopRequireDefault(require("./bybit/Bb"));
 const RouterAdapter = {
+  [_LoadType.LT_OE]: _Oecd.default,
   [_LoadType.LT_BIS]: _Bis.default,
   [_LoadType.LT_ECB]: _Ecb.default,
   [_LoadType.LT_BOC]: _Boc.default,

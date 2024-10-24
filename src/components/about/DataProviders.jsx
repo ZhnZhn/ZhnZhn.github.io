@@ -28,7 +28,6 @@ const CL_NOTE_BR = "provider__note__br"
   padding: '8px 4px 4px 6px',
   lineHeight: 1.4
 }
-, S_MAX_WIDTH = { maxWidth: 450 }
 , S_SETTINGS = { color: '#607d8b' };
 
 const _isArr = Array.isArray;
@@ -64,6 +63,7 @@ const DP = [
   Link.SNB,
   Link.UnComtrade,
   Link.WTO,
+  Link.OECD,
   Link.Bitfinex,
   Link.CryptoCom,
   Link.GateIo,
@@ -112,7 +112,7 @@ const _crListCaption = (
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 45):"
+     caption="Data Providers (All 46):"
      childStyle={S_ROOT_CHILD}
   >
     <div>
@@ -134,13 +134,6 @@ const DataProviders = ({ isClose }) => (
           User API key from data provider required for request.&nbsp;
           <br className={CL_NOTE_BR} />
           Can be set in <span style={S_SETTINGS}>SETTINGS&nbsp;[s]</span>.
-        </p>
-      </div>
-      <div style={S_NOTE}>
-        <p style={S_MAX_WIDTH}>
-          <SpanBlack>Note:&nbsp;</SpanBlack>
-          This product uses the Bureau of Economic Analysis (BEA)
-          Data API but is not endorsed or certified by BEA.
         </p>
       </div>
       </OpenClose>

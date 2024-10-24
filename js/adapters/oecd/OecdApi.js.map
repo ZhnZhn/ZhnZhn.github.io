@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/oecd/OecdApi.js"
+ ],
+ "file": "../../../src/adapters/oecd/OecdApi.js",
+ "names": [
+  "API_URL",
+  "OecdApi",
+  "getRequestUrl",
+  "option",
+  "items",
+  "dfDs",
+  "v",
+  "checkResponse",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,MAAMA,OAAO,GAAG,wCAAwC;AAExD,MAAMC,OAAO,GAAG;EACdC,aAAaA,CAACC,MAAM,EAAC;IACnB,MAAM;MAAEC;IAAM,CAAC,GAAGD,MAAM;IACxB,OAAO,GAAGH,OAAO,IAAIG,MAAM,CAACE,IAAI,IAAID,KAAK,CAAC,CAAC,CAAC,CAACE,CAAC,MAAMF,KAAK,CAAC,CAAC,CAAC,CAACE,CAAC,sCAAsC;EACtG,CAAC;EAEDC,aAAaA,CAAA,EAAE,CAAC;AAClB,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaT,OAAO"
+}

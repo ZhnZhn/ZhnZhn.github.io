@@ -35,5 +35,6 @@ export const BT_BLOCKCHAIN = 'BC'
 export const BT_COMMODITIES = 'CM'
 export const BT_CENTRAL_BANKS = 'CB'
 export const BT_CURRENCY = 'CR'
+export const BT_OECD = 'OE'
 
 export const BT_WATCH_LIST = 'WL'

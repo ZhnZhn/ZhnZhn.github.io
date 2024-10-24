@@ -17,6 +17,7 @@ import {
   BT_COMMODITIES,
   BT_CENTRAL_BANKS,
   BT_CURRENCY,
+  BT_OECD,
   BT_FRANCE_STATISTICS,
   BT_UK_STATISTICS,
   BT_NORWAY_STATISTICS,
@@ -131,7 +132,7 @@ const BrowserConfig = {
     BT_WTO,
     'WTO',
     'wto'
-  ),  
+  ),
   [BT_DB_NOMICS]: _crBrowserItem(
     BT_DB_NOMICS,
     'DBnomics',
@@ -161,6 +162,11 @@ const BrowserConfig = {
     BT_CURRENCY,
     'Currencies',
     'currency'
+  ),
+  [BT_OECD]: _crBrowserItem(
+    BT_OECD,
+    'OECD',
+    'oecd'
   ),
 
   [BT_FRANCE_STATISTICS]: _crBrowserItem(

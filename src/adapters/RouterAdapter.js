@@ -1,4 +1,5 @@
 import {
+  LT_OE,
   LT_BIS,
   LT_ECB,
   LT_BOC,
@@ -79,6 +80,7 @@ import Boc from './boc/Boc'
 import Snb from './snb/Snb'
 import Ndl from './ndl/Ndl'
 import DbNomics from './db-nomics/DbNomics'
+import Oecd from './oecd/Oecd';
 import Ei from './ei/Ei'
 import Ember from './ember/Ember'
 import En from './environment/En'
@@ -101,6 +103,8 @@ import Kx from './okx/Kx'
 import Bb from './bybit/Bb'
 
 const RouterAdapter = {
+  [LT_OE]: Oecd,
+
   [LT_BIS]: Bis,
   [LT_ECB]: Ecb,
   [LT_BOC]: Boc,

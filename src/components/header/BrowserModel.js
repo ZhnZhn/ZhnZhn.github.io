@@ -3,6 +3,7 @@ import { CL_ROW__PANE_TOPIC } from '../styleFn';
 import {
   BT_BLOCKCHAIN,
   BT_COMMODITIES,
+  BT_OECD,
   BT_CENTRAL_BANKS,
   BT_CURRENCY,
   BT_WATCH_LIST,
@@ -78,7 +79,8 @@ const PAGE_CONFIGS_1 = [
   [CL_ORG, 'DBnomics', BT_DB_NOMICS],
   [CL_ORG, 'Energy', BT_ENERGY],
   [CL_ORG, 'U.S. Economics', BT_US_ECONOMICS],
-  [CL_ORG, 'Commodities', BT_COMMODITIES]
+  [CL_ORG, 'Commodities', BT_COMMODITIES],
+  [CL_ORG, 'OECD', BT_OECD]
 ]
 , PAGE_CONFIGS_2 = [
   [CL_ORG, 'Overview', BT_EUROSTAT],

@@ -1,3 +1,4 @@
+import { isStr } from '../uiApi';
 import Link from '../zhn/Link';
 
 const CL_LINK = "data-provider-link";
@@ -5,7 +6,8 @@ const S_COMPARE = { color: '#49d87c' };
 const _crUrl = domain => `https://${domain}`;
 
 const LINK_CONFIGS = [
- ["BIS", _crUrl("bis.org")],  
+ ["OECD", _crUrl("oecd.org")],
+ ["BIS", _crUrl("bis.org")],
  ["ECB", "European Central Bank", _crUrl("ecb.europa.eu")],
  ["BOC", "Bank of Canada", _crUrl("www.bankofcanada.ca")],
  ["SNB", "Swiss National Bank", _crUrl("www.snb.ch/en/")],
@@ -51,8 +53,6 @@ const LINK_CONFIGS = [
  ["CryptoCom", "Crypto.com", _crUrl("crypto.com")]
 ];
 
-const _isStr = str => typeof str === 'string';
-
 const Links = {
   CryptoCompare: () => (
     <Link
@@ -67,7 +67,7 @@ const Links = {
 
 LINK_CONFIGS.forEach(conf => {
   Links[conf[0]] = () => {
-    const _confIndex = _isStr(conf[2]) ? 1 : 0;
+    const _confIndex = isStr(conf[2]) ? 1 : 0;
     return (<Link
       className={CL_LINK}
       title={conf[_confIndex]}
