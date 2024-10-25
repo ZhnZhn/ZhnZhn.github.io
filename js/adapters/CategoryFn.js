@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.isTreeMap = exports.isColumnOrBarCategory = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.fCrTreeMapPoint = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
+exports.isTreeMap = exports.isColumnOrBarCategory = exports.isCategorySeriaType = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.fCrTreeMapPoint = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
 var _domSanitize = _interopRequireDefault(require("../utils/domSanitize"));
 var _arrFn = require("../utils/arrFn");
 var _ChartType = require("../constants/ChartType");
@@ -15,6 +15,13 @@ const COLUMN_BAR_CATEGORY_CHART_TYPES = [_ChartType.CHT_BAR_CLUSTER, _ChartType.
 const isColumnOrBarCategory = exports.isColumnOrBarCategory = (0, _arrFn.isInArrStr)(COLUMN_BAR_CATEGORY_CHART_TYPES);
 const isCategory = seriaType => isColumnOrBarCategory(seriaType) || isTreeMap(seriaType);
 exports.isCategory = isCategory;
+const isCategorySeriaType = _ref => {
+  let {
+    seriaType
+  } = _ref;
+  return isCategory(seriaType);
+};
+exports.isCategorySeriaType = isCategorySeriaType;
 const isCategoryCluster = seriaType => (seriaType || '').indexOf('CLUSTER') !== -1;
 exports.isCategoryCluster = isCategoryCluster;
 const _addToHm = (hm, p) => (hm[p.c] = p, hm);

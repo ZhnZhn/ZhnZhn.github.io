@@ -1,5 +1,5 @@
 import { fCheckResponse } from '../AdapterFn';
-import { isCategory } from '../CategoryFn';
+import { isCategorySeriaType } from '../CategoryFn';
 import { getResponseData } from './fnAdapter';
 
 const API_URL = "https://api.eia.gov/v2"
@@ -43,7 +43,7 @@ const EiaApi = {
     , _frequency = dfFreq || _getFrequencyOrDf(items)
     , _reqUrl = `${API_URL}/${dfRoute}/${_dfSet}/data?frequency=${_frequency}&data[0]=${dfData}&api_key=${apiKey}`;
 
-    if (isCategory(option.seriaType)) {
+    if (isCategorySeriaType(option)) {
       return `${_reqUrl}&${_crFacets(items.slice(1))}&start=${time}&end=${time}&${QUERY_PARAMS}`;
     }
 

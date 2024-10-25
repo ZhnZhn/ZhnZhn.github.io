@@ -26,10 +26,14 @@ const COLUMN_BAR_CATEGORY_CHART_TYPES = [
   CHT_COLUMN_CLUSTER
 ]
 export const isColumnOrBarCategory = isInArrStr(COLUMN_BAR_CATEGORY_CHART_TYPES)
+
 export const isCategory = (
   seriaType
 ) => isColumnOrBarCategory(seriaType)
  || isTreeMap(seriaType)
+export const isCategorySeriaType = ({
+  seriaType
+}) => isCategory(seriaType)
 
 export const isCategoryCluster = (
    seriaType

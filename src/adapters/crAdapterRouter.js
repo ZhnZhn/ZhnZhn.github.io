@@ -1,5 +1,5 @@
 import {
-  isCategory,
+  isCategorySeriaType,
   isTreeMap,
   isBarTreeMap
 } from './CategoryFn';
@@ -11,7 +11,7 @@ const _getCategoryAdapter = (
   toCategoryAdapter,
   toLineAdapter,
   option
-) => isCategory(option.seriaType)
+) => isCategorySeriaType(option)
   ? toCategoryAdapter
   : toLineAdapter
 
