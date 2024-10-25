@@ -1,7 +1,7 @@
 import {
   isMonthDelimeterDash,
-  isEstat,
-  isBis
+  isQuarterDelimeterDash,
+  isEstat  
 } from '../../../constants/LoadType';
 
 const YEAR_MAX = 12
@@ -104,7 +104,7 @@ const _crYearQuarterConfig = (
 ) => {
 	const dateOptions = []
   , fromYear = (new Date()).getUTCFullYear()
-  , _delimeter = isEstat(loadId) || isBis(loadId)
+  , _delimeter = isQuarterDelimeterDash(loadId)
      ? '-'+delimeter
      : delimeter;
   _loopFn(y => {
