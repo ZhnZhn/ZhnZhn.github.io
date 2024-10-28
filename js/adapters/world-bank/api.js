@@ -11,7 +11,7 @@ const URL = 'https://api.worldbank.org/v2',
 const api = {
   getRequestUrl(option) {
     const [country, indicator] = (0, _fnAdapter.getCi)(option),
-      _isCategory = (0, _CategoryFn.isCategorySeriaType)(option),
+      _isCategory = (0, _CategoryFn.isCategory)(option),
       _locations = _isCategory ? "1W" : country;
     (0, _AdapterFn.assign)(option, {
       linkItem: {

@@ -58,11 +58,8 @@ const _crLineUrl = (isMonthlyRoute, option) => {
 };
 const EmberApi = {
   getRequestUrl(option) {
-    const {
-        seriaType
-      } = option,
-      _isMonthlyRoute = option.dfRId === 'M',
-      _crUrl = (0, _CategoryFn.isTreeMap)(seriaType) ? _crTreeMapUrl : (0, _CategoryFn.isCategorySeriaType)(seriaType) ? _crCategoryUrl : _crLineUrl;
+    const _isMonthlyRoute = option.dfRId === 'M',
+      _crUrl = (0, _CategoryFn.isTreeMap)(option) ? _crTreeMapUrl : (0, _CategoryFn.isCategory)(option) ? _crCategoryUrl : _crLineUrl;
     option.pnDate = _isMonthlyRoute ? DATE : YEAR;
     if (_isMonthlyRoute) {
       option.time = option.time + '-01';

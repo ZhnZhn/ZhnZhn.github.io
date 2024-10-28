@@ -46,11 +46,8 @@ const _crTreeMapUrl = (option, _isTreeMap) => {
 };
 const EiApi = {
   getRequestUrl(option) {
-    const {
-        seriaType
-      } = option,
-      _isTreeMap = (0, _CategoryFn.isTreeMap)(seriaType);
-    return _isTreeMap || (0, _CategoryFn.isBarTreeMap)(seriaType) ? _crTreeMapUrl(option, _isTreeMap) : (0, _CategoryFn.isCategorySeriaType)(seriaType) ? _crCategoryUrl(option) : _crLineUrl(option);
+    const _isTreeMap = (0, _CategoryFn.isTreeMap)(option);
+    return _isTreeMap || (0, _CategoryFn.isBarTreeMap)(option) ? _crTreeMapUrl(option, _isTreeMap) : (0, _CategoryFn.isCategory)(option) ? _crCategoryUrl(option) : _crLineUrl(option);
   },
   checkResponse: (0, _AdapterFn.fCheckResponse)()
 };

@@ -21,7 +21,7 @@ const crDfArrQuery = option => {
   const {
     dfC
   } = option;
-  if (dfC && (0, _CategoryFn.isCategorySeriaType)(option)) {
+  if (dfC && (0, _CategoryFn.isCategory)(option)) {
     const {
         time,
         timeId = 'Tid'

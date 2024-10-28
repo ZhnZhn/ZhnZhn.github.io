@@ -4,7 +4,7 @@ import {
   crError
 } from '../AdapterFn';
 import {
-  isCategorySeriaType
+  isCategory
 } from '../CategoryFn';
 
 import { getCi } from './fnAdapter';
@@ -22,7 +22,7 @@ const api = {
       country,
       indicator
     ] = getCi(option)
-    , _isCategory = isCategorySeriaType(option)
+    , _isCategory = isCategory(option)
     , _locations = _isCategory ? "1W" : country;
 
     assign(option, {

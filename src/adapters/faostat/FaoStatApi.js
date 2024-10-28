@@ -1,5 +1,5 @@
 import {
-  isCategorySeriaType,
+  isCategory,
   isTreeMap
 } from '../CategoryFn';
 import {
@@ -34,7 +34,7 @@ const _checkReq = (option) => {
     throw new Error('Query lists for lists is not allowed.');
   }
   const _element = option.items[2] || {};
-  if (isTreeMap(option.seriaType) && !_element.isTm) {
+  if (isTreeMap(option) && !_element.isTm) {
     throw new Error(`TreeMap for ${getCaption(_element)} is not exist.`);
   }
 };
@@ -52,7 +52,7 @@ const FaoStatApi = {
       items,
       dfElement,
       dfDomain='QC',
-      dfItemName='item'      
+      dfItemName='item'
     } = option
     , _one = getValue(items[0])
     , _two = getValue(items[1])
@@ -65,11 +65,11 @@ const FaoStatApi = {
         ? [getMemoizedYear(2004), 5000]
         : [getMemoizedYear(1980), 100]
     , _apiUrl = `${API_URL}/${dfDomain}?element=${_element}&${dfItemName}=${_two}`
-    , _isCategorySeriaType = isCategorySeriaType(option)
-    , _area = _isCategorySeriaType
+    , _isCategory = isCategory(option)
+    , _area = _isCategory
         ? _getListId(_one)
         : _one
-    , _apiQuery = _isCategorySeriaType
+    , _apiQuery = _isCategory
         ? `area=${_area}&year=${option.time}&page_size=300`
         : `area=${_area}&year=${_year}&page_size=${_pageSize}`
 

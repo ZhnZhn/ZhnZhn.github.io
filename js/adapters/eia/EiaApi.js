@@ -34,7 +34,7 @@ const EiaApi = {
       _dfSet = (items[0] || {}).dfSet || dfSet,
       _frequency = dfFreq || _getFrequencyOrDf(items),
       _reqUrl = `${API_URL}/${dfRoute}/${_dfSet}/data?frequency=${_frequency}&data[0]=${dfData}&api_key=${apiKey}`;
-    if ((0, _CategoryFn.isCategorySeriaType)(option)) {
+    if ((0, _CategoryFn.isCategory)(option)) {
       return `${_reqUrl}&${_crFacets(items.slice(1))}&start=${time}&end=${time}&${QUERY_PARAMS}`;
     }
     return `${_reqUrl}&${_crFacets(items)}&${QUERY_PARAMS}`;

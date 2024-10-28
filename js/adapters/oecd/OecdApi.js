@@ -11,7 +11,7 @@ const OecdApi = {
         items,
         time
       } = option,
-      _isCategory = (0, _CategoryFn.isCategorySeriaType)(option),
+      _isCategory = (0, _CategoryFn.isCategory)(option),
       _item0 = _isCategory ? "" : (0, _AdapterFn.getValue)(items[0]),
       queryDate = _isCategory ? `startPeriod=${time}&endPeriod=${time}` : "startPeriod=2005";
     return `${API_URL}/${option.dfDs}/${_item0}.Q.${(0, _AdapterFn.getValue)(items[1])}.IX?${queryDate}&format=jsondata`;

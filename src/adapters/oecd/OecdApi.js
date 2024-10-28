@@ -1,5 +1,5 @@
 import { getValue } from '../AdapterFn';
-import { isCategorySeriaType } from '../CategoryFn';
+import { isCategory } from '../CategoryFn';
 const API_URL = "https://sdmx.oecd.org/public/rest/data";
 
 const OecdApi = {
@@ -8,7 +8,7 @@ const OecdApi = {
       items,
       time
     } = option
-    , _isCategory = isCategorySeriaType(option)
+    , _isCategory = isCategory(option)
     , _item0 = _isCategory
        ? ""
        : getValue(items[0])

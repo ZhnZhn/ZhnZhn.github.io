@@ -15,7 +15,7 @@ const _crVariables = items => items.filter(Boolean).map(_ref => {
   return _crVariable(code, slice[code]);
 });
 const _crTimeVariable = (seriaType, time, dfC) => {
-  const _isCategory = (0, _CategoryFn.isCategorySeriaType)(seriaType),
+  const _isCategory = (0, _CategoryFn.isCategory)(seriaType),
     _tidValue = _isCategory ? time : "*",
     _arr = [_crVariable('Tid', _tidValue)];
   if (_isCategory) {

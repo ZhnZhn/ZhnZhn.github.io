@@ -5,7 +5,7 @@ import {
 import {
   isTreeMap,
   isBarTreeMap,
-  isCategorySeriaType
+  isCategory
 } from '../CategoryFn';
 
 const DATA_URL = './data/ei';
@@ -63,11 +63,10 @@ const _crTreeMapUrl = (
 
 const EiApi = {
   getRequestUrl(option){
-    const { seriaType } = option
-    , _isTreeMap = isTreeMap(seriaType);
-    return _isTreeMap || isBarTreeMap(seriaType)
+    const _isTreeMap = isTreeMap(option);
+    return _isTreeMap || isBarTreeMap(option)
       ? _crTreeMapUrl(option, _isTreeMap)
-      :  isCategorySeriaType(seriaType)
+      :  isCategory(option)
           ? _crCategoryUrl(option)
           : _crLineUrl(option);
   },

@@ -11,14 +11,14 @@ const _crItemIdDf = _ref => {
     seriaType,
     dfSuffix
   } = _ref;
-  return (0, _AdapterFn.joinBy)('.', dfPrefix, (0, _CategoryFn.isCategorySeriaType)(seriaType) ? '*' : (0, _AdapterFn.getValue)(items[0]), (0, _AdapterFn.getValue)(items[1]), dfSuffix);
+  return (0, _AdapterFn.joinBy)('.', dfPrefix, (0, _CategoryFn.isCategory)(seriaType) ? '*' : (0, _AdapterFn.getValue)(items[0]), (0, _AdapterFn.getValue)(items[1]), dfSuffix);
 };
 const _crItemId312 = _ref2 => {
   let {
     items,
     seriaType
   } = _ref2;
-  return (0, _AdapterFn.joinBy)('.', (0, _AdapterFn.getValue)(items[2]), (0, _CategoryFn.isCategorySeriaType)(seriaType) ? '*' : (0, _AdapterFn.getValue)(items[0]), (0, _AdapterFn.getValue)(items[1]));
+  return (0, _AdapterFn.joinBy)('.', (0, _AdapterFn.getValue)(items[2]), (0, _CategoryFn.isCategory)(seriaType) ? '*' : (0, _AdapterFn.getValue)(items[0]), (0, _AdapterFn.getValue)(items[1]));
 };
 const _hmCrItemId = {
   s312: _crItemId312

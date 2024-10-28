@@ -5,7 +5,7 @@ import {
   ymdToUTC
 } from '../AdapterFn';
 import {
-  isCategorySeriaType
+  isCategory
 } from '../CategoryFn';
 
 const _crItemIdDf = ({
@@ -15,7 +15,7 @@ const _crItemIdDf = ({
   dfSuffix
 }) => joinBy('.',
   dfPrefix,
-  isCategorySeriaType(seriaType) ? '*' : getValue(items[0]),
+  isCategory(seriaType) ? '*' : getValue(items[0]),
   getValue(items[1]),
   dfSuffix
 )
@@ -25,7 +25,7 @@ const _crItemId312 = ({
   seriaType
 }) => joinBy('.',
   getValue(items[2]),
-  isCategorySeriaType(seriaType) ? '*' : getValue(items[0]),
+  isCategory(seriaType) ? '*' : getValue(items[0]),
   getValue(items[1])
 );
 

@@ -1,6 +1,6 @@
 import {
   isTreeMap,
-  isCategorySeriaType
+  isCategory
 } from '../CategoryFn';
 import {
   isArr,
@@ -128,11 +128,10 @@ const _crLineUrl = (
 
 const EmberApi = {
   getRequestUrl(option) {
-    const { seriaType } = option
-    , _isMonthlyRoute = option.dfRId === 'M'
-    , _crUrl = isTreeMap(seriaType)
+    const _isMonthlyRoute = option.dfRId === 'M'
+    , _crUrl = isTreeMap(option)
        ? _crTreeMapUrl
-       : isCategorySeriaType(seriaType)
+       : isCategory(option)
           ? _crCategoryUrl
           : _crLineUrl;
 

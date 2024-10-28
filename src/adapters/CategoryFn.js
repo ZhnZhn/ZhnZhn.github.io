@@ -12,35 +12,48 @@ import {
   CHT_COLUMN_CLUSTER
 } from '../constants/ChartType';
 
-import { isObj } from './AdapterFn';
+import {
+  isArr,
+  isObj
+} from './AdapterFn';
 
-const _isArr = Array.isArray
-, TREE_MAP_CHART_TYPES = [
+const _getSeriaType = (
+  optionOrStr
+) => isObj(optionOrStr)
+  ? optionOrStr.seriaType
+  : optionOrStr
+, _fIsSeriaType = (
+  isSeriaType
+) => (
+  optionOrStr
+) => isSeriaType(_getSeriaType(optionOrStr));
+
+const TREE_MAP_CHART_TYPES = [
   CHT_TREE_MAP,
   CHT_TREE_MAP_CLUSTER
 ];
-export const isTreeMap = isInArrStr(TREE_MAP_CHART_TYPES)
-export const isBarTreeMap = seriaType => seriaType === CHT_BAR_TREE_MAP
+export const isTreeMap = _fIsSeriaType(
+  isInArrStr(TREE_MAP_CHART_TYPES)
+)
+
+export const isBarTreeMap = (
+  optionOrStr
+) => _getSeriaType(optionOrStr) === CHT_BAR_TREE_MAP
 
 const COLUMN_BAR_CATEGORY_CHART_TYPES = [
   CHT_BAR_CLUSTER,
   CHT_BAR_SET,
   CHT_COLUMN_SET,
   CHT_COLUMN_CLUSTER
-]
-export const isColumnOrBarCategory = isInArrStr(COLUMN_BAR_CATEGORY_CHART_TYPES)
+];
+export const isColumnOrBarCategory = _fIsSeriaType(
+  isInArrStr(COLUMN_BAR_CATEGORY_CHART_TYPES)
+)
 
-const _isCategory = (
-  seriaType
-) => isColumnOrBarCategory(seriaType)
- || isTreeMap(seriaType);
-export const isCategorySeriaType = (
+export const isCategory = (
   optionOrStr
-) => _isCategory(isObj(optionOrStr)
-  ? optionOrStr.seriaType
-  : optionOrStr
-);
-
+) => isColumnOrBarCategory(optionOrStr)
+ || isTreeMap(optionOrStr)
 
 export const isCategoryCluster = (
    seriaType
@@ -71,8 +84,8 @@ export const getCategories = (
 export const isCategoryCase = (
   config,
   categories
-) => _isArr((config.xAxis||{}).categories)
-  && _isArr(categories);
+) => isArr((config.xAxis||{}).categories)
+  && isArr(categories);
 
 export const crCategories = (
   data

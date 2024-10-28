@@ -43,7 +43,7 @@ const _fetchToChartComp = (objImpl, _ref2) => {
         });
       }
     };
-  if ((0, _CategoryFn.isTreeMap)(option.seriaType)) {
+  if ((0, _CategoryFn.isTreeMap)(option)) {
     (0, _initChartTheme.loadTreeMap)().then(_onCompleteImpl);
   } else {
     _onCompleteImpl();

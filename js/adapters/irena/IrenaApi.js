@@ -28,7 +28,7 @@ const _crCategoryUrl = option => {
 };
 const IrenaApi = {
   getRequestUrl(option) {
-    return (0, _CategoryFn.isCategorySeriaType)(option) ? _crCategoryUrl(option) : _crLineUrl(option);
+    return (0, _CategoryFn.isCategory)(option) ? _crCategoryUrl(option) : _crLineUrl(option);
   },
   checkResponse: (0, _AdapterFn.fCheckResponse)()
 };

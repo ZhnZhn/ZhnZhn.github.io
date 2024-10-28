@@ -51,7 +51,7 @@ const _fetchToChartComp = (
     }
   };
 
-  if (isTreeMap(option.seriaType)){
+  if (isTreeMap(option)){
     loadTreeMap().then(_onCompleteImpl)
   } else {
     _onCompleteImpl()

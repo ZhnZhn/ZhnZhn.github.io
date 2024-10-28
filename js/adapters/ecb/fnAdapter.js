@@ -20,7 +20,7 @@ const _crItemDf = items => {
     const _v0 = (0, _AdapterFn.getValue)(items[0]);
     return items.length === 2 ? `${(0, _AdapterFn.getValue)(items[1])}.${_v0}` : _v0;
   },
-  _crItem12 = (items, seriaType) => `${(0, _CategoryFn.isCategorySeriaType)(seriaType) ? "" : (0, _AdapterFn.getValue)(items[0])}.${(0, _AdapterFn.getValue)(items[1])}`,
+  _crItem12 = (items, seriaType) => `${(0, _CategoryFn.isCategory)(seriaType) ? "" : (0, _AdapterFn.getValue)(items[0])}.${(0, _AdapterFn.getValue)(items[1])}`,
   _crItem312 = items => (0, _AdapterFn.joinBy)(".", (0, _AdapterFn.getValue)(items[2]), (0, _AdapterFn.getValue)(items[0]), (0, _AdapterFn.getValue)(items[1])),
   _hmCrItem = {
     df: _crItemDf,

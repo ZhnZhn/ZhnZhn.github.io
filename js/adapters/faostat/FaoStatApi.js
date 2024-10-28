@@ -19,7 +19,7 @@ const _checkReq = option => {
     throw new Error('Query lists for lists is not allowed.');
   }
   const _element = option.items[2] || {};
-  if ((0, _CategoryFn.isTreeMap)(option.seriaType) && !_element.isTm) {
+  if ((0, _CategoryFn.isTreeMap)(option) && !_element.isTm) {
     throw new Error(`TreeMap for ${(0, _AdapterFn.getCaption)(_element)} is not exist.`);
   }
 };
@@ -39,9 +39,9 @@ const FaoStatApi = {
       _element = _three || dfElement,
       [_year, _pageSize] = _one === WORLD_LIST_ID ? [(0, _getMemoizedYear.default)(2004), 5000] : [(0, _getMemoizedYear.default)(1980), 100],
       _apiUrl = `${API_URL}/${dfDomain}?element=${_element}&${dfItemName}=${_two}`,
-      _isCategorySeriaType = (0, _CategoryFn.isCategorySeriaType)(option),
-      _area = _isCategorySeriaType ? _getListId(_one) : _one,
-      _apiQuery = _isCategorySeriaType ? `area=${_area}&year=${option.time}&page_size=300` : `area=${_area}&year=${_year}&page_size=${_pageSize}`;
+      _isCategory = (0, _CategoryFn.isCategory)(option),
+      _area = _isCategory ? _getListId(_one) : _one,
+      _apiQuery = _isCategory ? `area=${_area}&year=${option.time}&page_size=300` : `area=${_area}&year=${_year}&page_size=${_pageSize}`;
     return `${_apiUrl}&${_apiQuery}${TAIL}`;
   },
   checkResponse: (0, _AdapterFn.fCheckResponse)(),
