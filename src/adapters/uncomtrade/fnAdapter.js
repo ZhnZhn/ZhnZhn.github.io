@@ -4,8 +4,11 @@ export {
   valueMoving,
   roundBy
 } from '../AdapterFn';
+
 import {
-  isNumber
+  isArr,
+  isNumber,
+  joinBy
 } from '../AdapterFn';
 import {
   isColumnOrBarCategory
@@ -19,10 +22,9 @@ import formatNumber from '../../utils/formatNumber';
 import { toDescr } from './fnDescr';
 import { WORLD_CODE } from './conf';
 
-const _isArr = Array.isArray
-, _sanitizeNumber = (v) => isNumber(v)
-   ? ''+v
-   : domSanitize(v);
+const _sanitizeNumber = (v) => isNumber(v)
+  ? ''+v
+  : domSanitize(v);
 
 export const crEmptyHmObject = () => Object.create(null)
 export const isPositiveNumber = (n) => isNumber(n) && n > 0
@@ -81,7 +83,7 @@ export const getHmTradePartners = (
     return _hmTradePartner;
   }
 
-  if (!_isArr(tradePartners)) {
+  if (!isArr(tradePartners)) {
     return crEmptyHmObject();
   }
 
@@ -93,7 +95,6 @@ export const getHmTradePartners = (
   }, crEmptyHmObject());
   return _hmTradePartner;
 }
-
 
 const _getItemTradePartnerFromHm = (
   hmTradePartners,
@@ -166,9 +167,9 @@ export const crCategoryData = (
 export const crCategoryTitle = ({
   title,
   period
-}) => [title, 'in', period]
-  .filter(Boolean)
-  .join(' ');
+}) => joinBy(" ",
+  title, "in", period
+)
 
 export const crChartId = ({
   value,
@@ -179,9 +180,9 @@ export const crChartId = ({
   period,
   chart,
   time,
-}) => [value, rg, measure, tp, freq, period, chart, time]
-  .filter(Boolean)
-  .join("_");
+}) => joinBy("_",
+  value, rg, measure, tp, freq, period, chart, time
+)
 
 export const crInfo = (
   json,

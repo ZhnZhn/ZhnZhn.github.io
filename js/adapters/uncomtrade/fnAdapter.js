@@ -15,8 +15,7 @@ var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
 var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 var _fnDescr = require("./fnDescr");
 var _conf = require("./conf");
-const _isArr = Array.isArray,
-  _sanitizeNumber = v => (0, _AdapterFn.isNumber)(v) ? '' + v : (0, _domSanitize.default)(v);
+const _sanitizeNumber = v => (0, _AdapterFn.isNumber)(v) ? '' + v : (0, _domSanitize.default)(v);
 const crEmptyHmObject = () => Object.create(null);
 exports.crEmptyHmObject = crEmptyHmObject;
 const isPositiveNumber = n => (0, _AdapterFn.isNumber)(n) && n > 0;
@@ -55,7 +54,7 @@ const getHmTradePartners = tradePartners => {
   if (_hmTradePartner) {
     return _hmTradePartner;
   }
-  if (!_isArr(tradePartners)) {
+  if (!(0, _AdapterFn.isArr)(tradePartners)) {
     return crEmptyHmObject();
   }
   _hmTradePartner = tradePartners.reduce((hm, item) => {
@@ -105,7 +104,7 @@ const crCategoryTitle = _ref2 => {
     title,
     period
   } = _ref2;
-  return [title, 'in', period].filter(Boolean).join(' ');
+  return (0, _AdapterFn.joinBy)(" ", title, "in", period);
 };
 exports.crCategoryTitle = crCategoryTitle;
 const crChartId = _ref3 => {
@@ -119,7 +118,7 @@ const crChartId = _ref3 => {
     chart,
     time
   } = _ref3;
-  return [value, rg, measure, tp, freq, period, chart, time].filter(Boolean).join("_");
+  return (0, _AdapterFn.joinBy)("_", value, rg, measure, tp, freq, period, chart, time);
 };
 exports.crChartId = crChartId;
 const crInfo = (json, option) => ({
