@@ -1,5 +1,5 @@
 import {
-  isCategory,
+  isCategorySeriaType,
   isTreeMap
 } from '../CategoryFn';
 import {
@@ -52,8 +52,7 @@ const FaoStatApi = {
       items,
       dfElement,
       dfDomain='QC',
-      dfItemName='item',
-      seriaType
+      dfItemName='item'      
     } = option
     , _one = getValue(items[0])
     , _two = getValue(items[1])
@@ -66,7 +65,7 @@ const FaoStatApi = {
         ? [getMemoizedYear(2004), 5000]
         : [getMemoizedYear(1980), 100]
     , _apiUrl = `${API_URL}/${dfDomain}?element=${_element}&${dfItemName}=${_two}`
-    , _isCategorySeriaType = isCategory(seriaType)
+    , _isCategorySeriaType = isCategorySeriaType(option)
     , _area = _isCategorySeriaType
         ? _getListId(_one)
         : _one

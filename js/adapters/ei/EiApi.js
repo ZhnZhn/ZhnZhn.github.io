@@ -44,15 +44,15 @@ const _crTreeMapUrl = (option, _isTreeMap) => {
   }
   return `${DATA_URL}/${dfTmToken}-tm/${geo}-${time}.json`;
 };
-const IrenaApi = {
+const EiApi = {
   getRequestUrl(option) {
     const {
         seriaType
       } = option,
       _isTreeMap = (0, _CategoryFn.isTreeMap)(seriaType);
-    return _isTreeMap || (0, _CategoryFn.isBarTreeMap)(seriaType) ? _crTreeMapUrl(option, _isTreeMap) : (0, _CategoryFn.isCategory)(seriaType) ? _crCategoryUrl(option) : _crLineUrl(option);
+    return _isTreeMap || (0, _CategoryFn.isBarTreeMap)(seriaType) ? _crTreeMapUrl(option, _isTreeMap) : (0, _CategoryFn.isCategorySeriaType)(seriaType) ? _crCategoryUrl(option) : _crLineUrl(option);
   },
   checkResponse: (0, _AdapterFn.fCheckResponse)()
 };
-var _default = exports.default = IrenaApi;
+var _default = exports.default = EiApi;
 //# sourceMappingURL=EiApi.js.map

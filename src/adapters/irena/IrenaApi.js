@@ -1,5 +1,5 @@
 import { fCheckResponse } from '../AdapterFn';
-import { isCategory } from '../CategoryFn';
+import { isCategorySeriaType } from '../CategoryFn';
 
 const DATA_URL = './data/irena';
 
@@ -29,7 +29,7 @@ const _crCategoryUrl = (
 
 const IrenaApi = {
   getRequestUrl(option){
-    return isCategory(option.seriaType)
+    return isCategorySeriaType(option)
       ? _crCategoryUrl(option)
       : _crLineUrl(option);
   },

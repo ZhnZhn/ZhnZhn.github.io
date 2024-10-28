@@ -1,4 +1,4 @@
-import { isCategory } from '../CategoryFn';
+import { isCategorySeriaType } from '../CategoryFn';
 
 const _crVariable = (code, value) => ({
   code,
@@ -13,7 +13,7 @@ const _crVariables = items => items
   });
 
 const _crTimeVariable = (seriaType, time, dfC) => {
-   const _isCategory = isCategory(seriaType)
+   const _isCategory = isCategorySeriaType(seriaType)
    , _tidValue = _isCategory ? time : "*"
    , _arr = [_crVariable('Tid', _tidValue)];
    if (_isCategory){

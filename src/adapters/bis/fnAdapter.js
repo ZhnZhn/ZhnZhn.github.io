@@ -4,7 +4,9 @@ import {
   crXmlDocument,
   ymdToUTC
 } from '../AdapterFn';
-import { isCategory } from '../CategoryFn';
+import {
+  isCategorySeriaType
+} from '../CategoryFn';
 
 const _crItemIdDf = ({
   dfPrefix,
@@ -13,7 +15,7 @@ const _crItemIdDf = ({
   dfSuffix
 }) => joinBy('.',
   dfPrefix,
-  isCategory(seriaType) ? '*' : getValue(items[0]),
+  isCategorySeriaType(seriaType) ? '*' : getValue(items[0]),
   getValue(items[1]),
   dfSuffix
 )
@@ -23,7 +25,7 @@ const _crItemId312 = ({
   seriaType
 }) => joinBy('.',
   getValue(items[2]),
-  isCategory(seriaType) ? '*' : getValue(items[0]),
+  isCategorySeriaType(seriaType) ? '*' : getValue(items[0]),
   getValue(items[1])
 );
 

@@ -1,4 +1,4 @@
-import { isCategory } from '../CategoryFn';
+import { isCategorySeriaType } from '../CategoryFn';
 import crArrQuery from './crArrQuery';
 import crQueryItem from './crQueryItem';
 
@@ -16,8 +16,8 @@ const crDfArrQuery = (option) => {
   } = option
   , arrQuery = crArrQuery(items);
 
-  const { dfC, seriaType } = option;
-  if (dfC && isCategory(seriaType)) {
+  const { dfC } = option;
+  if (dfC && isCategorySeriaType(option)) {
     const {time, timeId='Tid'} = option
     , _arr = arrQuery.filter(item => item.code !== dfC);
     _arr.unshift(crQueryItem(dfC, 'all', '*'))

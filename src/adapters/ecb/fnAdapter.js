@@ -5,7 +5,7 @@ import {
   joinBy
 } from '../AdapterFn';
 import {
-  isCategory
+  isCategorySeriaType
 } from '../CategoryFn';
 
 export const ECB_EUROPA_EU = "ecb.europa.eu"
@@ -35,7 +35,7 @@ const _crItemDf = items => {
 , _crItem12 = (
   items,
   seriaType
-) => `${isCategory(seriaType) ? "" : getValue(items[0])}.${getValue(items[1])}`
+) => `${isCategorySeriaType(seriaType) ? "" : getValue(items[0])}.${getValue(items[1])}`
 , _crItem312 = (
   items
 ) => joinBy(".",

@@ -1,11 +1,11 @@
-import { 
+import {
   isInRange,
   fCheckResponse
 } from '../AdapterFn';
 import {
   isTreeMap,
   isBarTreeMap,
-  isCategory
+  isCategorySeriaType
 } from '../CategoryFn';
 
 const DATA_URL = './data/ei';
@@ -61,17 +61,17 @@ const _crTreeMapUrl = (
   return `${DATA_URL}/${dfTmToken}-tm/${geo}-${time}.json`;
 }
 
-const IrenaApi = {
+const EiApi = {
   getRequestUrl(option){
     const { seriaType } = option
     , _isTreeMap = isTreeMap(seriaType);
     return _isTreeMap || isBarTreeMap(seriaType)
       ? _crTreeMapUrl(option, _isTreeMap)
-      :  isCategory(seriaType)
+      :  isCategorySeriaType(seriaType)
           ? _crCategoryUrl(option)
           : _crLineUrl(option);
   },
   checkResponse: fCheckResponse()
 };
 
-export default IrenaApi
+export default EiApi

@@ -3,7 +3,7 @@ import {
   getCaption,
   fCheckResponse
 } from '../AdapterFn';
-import { isCategory } from '../CategoryFn';
+import { isCategorySeriaType } from '../CategoryFn';
 import { getDataset } from './fnAdapter';
 
 const API_URL = 'https://api.wto.org/timeseries/v1/data';
@@ -26,7 +26,7 @@ const WtApi = {
     , _pc = getValue(_item1) || dfPc || "TO"
     , _url = _crApiUrl(option);
 
-    if (isCategory(option.seriaType)) {
+    if (isCategorySeriaType(option)) {
       const _caption1 = getCaption(_item1);
       if (_caption1) {
         option.title = _caption1

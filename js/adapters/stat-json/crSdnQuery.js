@@ -2,14 +2,11 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
 var _CategoryFn = require("../CategoryFn");
-
 const _crVariable = (code, value) => ({
   code,
   values: [value]
 });
-
 const _crVariables = items => items.filter(Boolean).map(_ref => {
   let {
     slice
@@ -17,19 +14,15 @@ const _crVariables = items => items.filter(Boolean).map(_ref => {
   const code = Object.keys(slice)[0];
   return _crVariable(code, slice[code]);
 });
-
 const _crTimeVariable = (seriaType, time, dfC) => {
-  const _isCategory = (0, _CategoryFn.isCategory)(seriaType),
-        _tidValue = _isCategory ? time : "*",
-        _arr = [_crVariable('Tid', _tidValue)];
-
+  const _isCategory = (0, _CategoryFn.isCategorySeriaType)(seriaType),
+    _tidValue = _isCategory ? time : "*",
+    _arr = [_crVariable('Tid', _tidValue)];
   if (_isCategory) {
     _arr.push(_crVariable(dfC, "*"));
   }
-
   return _arr;
 };
-
 const crSdnQuery = _ref2 => {
   let {
     dfId,
@@ -53,7 +46,5 @@ const crSdnQuery = _ref2 => {
     })
   };
 };
-
-var _default = crSdnQuery;
-exports.default = _default;
+var _default = exports.default = crSdnQuery;
 //# sourceMappingURL=crSdnQuery.js.map

@@ -1,5 +1,6 @@
 import domSanitize from '../utils/domSanitize';
 import { isInArrStr } from '../utils/arrFn';
+
 import {
   CHT_TREE_MAP,
   CHT_TREE_MAP_CLUSTER,
@@ -10,6 +11,8 @@ import {
   CHT_COLUMN_SET,
   CHT_COLUMN_CLUSTER
 } from '../constants/ChartType';
+
+import { isObj } from './AdapterFn';
 
 const _isArr = Array.isArray
 , TREE_MAP_CHART_TYPES = [
@@ -27,13 +30,17 @@ const COLUMN_BAR_CATEGORY_CHART_TYPES = [
 ]
 export const isColumnOrBarCategory = isInArrStr(COLUMN_BAR_CATEGORY_CHART_TYPES)
 
-export const isCategory = (
+const _isCategory = (
   seriaType
 ) => isColumnOrBarCategory(seriaType)
- || isTreeMap(seriaType)
-export const isCategorySeriaType = ({
-  seriaType
-}) => isCategory(seriaType)
+ || isTreeMap(seriaType);
+export const isCategorySeriaType = (
+  optionOrStr
+) => _isCategory(isObj(optionOrStr)
+  ? optionOrStr.seriaType
+  : optionOrStr
+);
+
 
 export const isCategoryCluster = (
    seriaType

@@ -25,7 +25,7 @@ const WtApi = {
       _item1 = items[1],
       _pc = (0, _AdapterFn.getValue)(_item1) || dfPc || "TO",
       _url = _crApiUrl(option);
-    if ((0, _CategoryFn.isCategory)(option.seriaType)) {
+    if ((0, _CategoryFn.isCategorySeriaType)(option)) {
       const _caption1 = (0, _AdapterFn.getCaption)(_item1);
       if (_caption1) {
         option.title = _caption1;
