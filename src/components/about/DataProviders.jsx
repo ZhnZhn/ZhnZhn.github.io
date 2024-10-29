@@ -54,8 +54,8 @@ const DP = [
   [Link.Ndl, '50 000'],
   Link.AlphaVantage,
   Link.Fmp, Link.Tw, Link.Intrinio,
-  Link.Bea, [Link.Bsl, '500'], Link.Eia,
-  Link.WTO
+  Link.WTO,
+  [Link.Bsl, '500'], Link.Eia, Link.Bea
 ]
 , DP_PR = [
   [Link.Ndl, '50'],
@@ -128,6 +128,12 @@ const DataProviders = ({ isClose }) => (
       <p style={S_PT_4}>
         <LinkList list={DP_KEY} />
       </p>
+      <div style={S_NOTE}>
+        <p>
+          <SpanBlack>Note:&nbsp;</SpanBlack>
+          This product uses the Bureau of Economic Analysis (BEA) Data API but is not endorsed or certified by BEA.&nbsp;
+        </p>
+      </div>
       <div style={S_NOTE}>
         <p>
           <SpanBlack>Note:&nbsp;</SpanBlack>

@@ -1,11 +1,19 @@
 import {
   isArr,
   assign,
+  getValue,
   joinBy,
   crError
 } from '../AdapterFn';
+import {
+  BEA_DATA_URL,
+  getFrequency,
+  getResError,
+  getResults,
+  getResultsData  
+} from './fnAdapter';
 
-const URL = 'https://apps.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID';
+const API_URL = `${BEA_DATA_URL}/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID`;
 
 const _setCaptionTo = option => {
   const {
@@ -16,7 +24,7 @@ const _setCaptionTo = option => {
   assign(option, {
     itemCaption: title,
     title: dfTitle,
-    subtitle: joinBy(':', title, subtitle)
+    subtitle: joinBy(": ", title, subtitle)
   })
 };
 
@@ -29,30 +37,25 @@ const BeaApi = {
       ValueName,
       items=[],
     } = option
-    , value = items[0].value
-    , oneCaption = items[0].caption
-    , _Frequncy = oneCaption.indexOf('(A,Q)') === -1
-         ? 'A' : 'Q';
+    , value = getValue(items[0])
+    , _Frequncy = getFrequency(items[0])
     _setCaptionTo(option)
-    return `${URL}=${apiKey}&TableID=${TableID}&DataSetName=${DataSetName}&Frequency=${_Frequncy}&${ValueName}=${value}`;
+    return `${API_URL}=${apiKey}&TableID=${TableID}&DataSetName=${DataSetName}&Frequency=${_Frequncy}&${ValueName}=${value}`;
   },
 
   checkResponse(json){
-    const { BEAAPI } = json
-    , {
-      Results={},
-      Error:ResError
-    } = BEAAPI || {};
+    const ResError = getResError(json);
     if (ResError) {
-      const { ErrorDetail } = ResError;
       throw crError(
         ResError.APIErrorCode,
-        ErrorDetail.Description
+        (ResError.ErrorDetail || {}).Description
           || ResError.APIErrorDescription
       );
     }
-    if (Results.Error || !isArr(Results.Data)) {
-      return crError();
+
+    const Results = getResults(json);
+    if ( !Results || Results.Error || !isArr(getResultsData(Results)) ) {
+      throw crError();
     }
   }
 

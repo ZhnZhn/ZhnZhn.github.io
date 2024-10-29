@@ -43,7 +43,7 @@ const CL_NOTE_BR = "provider__note__br",
   };
 const _isArr = Array.isArray;
 const DP = [_ProviderLinks.default.DBnomics, _ProviderLinks.default.EI, _ProviderLinks.default.Ember, _ProviderLinks.default.IRENA, _ProviderLinks.default.Eurostat, _ProviderLinks.default.FaoStat, _ProviderLinks.default.WorldBank, _ProviderLinks.default.BOC, _ProviderLinks.default.Insee, _ProviderLinks.default.ONS, _ProviderLinks.default.StatNorway, _ProviderLinks.default.StatSweden, _ProviderLinks.default.StatFinland, _ProviderLinks.default.StatDenmark, _ProviderLinks.default.StatIreland, _ProviderLinks.default.FSO, _ProviderLinks.default.OECD, [_ProviderLinks.default.Bsl, '25'], _ProviderLinks.default.CryptoCompare, _ProviderLinks.default.CoinGecko, _ProviderLinks.default.CoinMetrics, _ProviderLinks.default.CoinLore, _ProviderLinks.default.Coinpaprika, _ProviderLinks.default.Binance, _ProviderLinks.default.Bitstamp, _ProviderLinks.default.Coinbase],
-  DP_KEY = [[_ProviderLinks.default.Ndl, '50 000'], _ProviderLinks.default.AlphaVantage, _ProviderLinks.default.Fmp, _ProviderLinks.default.Tw, _ProviderLinks.default.Intrinio, _ProviderLinks.default.Bea, [_ProviderLinks.default.Bsl, '500'], _ProviderLinks.default.Eia, _ProviderLinks.default.WTO],
+  DP_KEY = [[_ProviderLinks.default.Ndl, '50 000'], _ProviderLinks.default.AlphaVantage, _ProviderLinks.default.Fmp, _ProviderLinks.default.Tw, _ProviderLinks.default.Intrinio, _ProviderLinks.default.WTO, [_ProviderLinks.default.Bsl, '500'], _ProviderLinks.default.Eia, _ProviderLinks.default.Bea],
   DP_PR = [[_ProviderLinks.default.Ndl, '50'], _ProviderLinks.default.BIS, _ProviderLinks.default.ECB, _ProviderLinks.default.SNB, _ProviderLinks.default.UnComtrade, _ProviderLinks.default.WTO, _ProviderLinks.default.Bitfinex, _ProviderLinks.default.CryptoCom, _ProviderLinks.default.GateIo, _ProviderLinks.default.Kraken, _ProviderLinks.default.KuCoin, _ProviderLinks.default.OKX, _ProviderLinks.default.Bybit, _ProviderLinks.default.HTX];
 const LinkPer = _ref => {
   let {
@@ -94,6 +94,13 @@ const DataProviders = _ref3 => {
           style: S_PT_4,
           children: /*#__PURE__*/(0, _jsxRuntime.jsx)(LinkList, {
             list: DP_KEY
+          })
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          style: S_NOTE,
+          children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
+              children: "Note:\xA0"
+            }), "This product uses the Bureau of Economic Analysis (BEA) Data API but is not endorsed or certified by BEA.\xA0"]
           })
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           style: S_NOTE,

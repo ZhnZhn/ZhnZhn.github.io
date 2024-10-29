@@ -1,9 +1,14 @@
-import { crAdapterType1 } from '../crAdapterType1';
-import { crData, crConfOption } from './fnAdapter';
+import {
+  crAdapterType1
+} from '../crAdapterType1';
+import {
+  crData,
+  crConfOption
+} from './fnAdapter';
 
 const BeaAdapter = crAdapterType1({
    crData,
-   crConfOption
+   crConfOption   
 });
 
 export default BeaAdapter
