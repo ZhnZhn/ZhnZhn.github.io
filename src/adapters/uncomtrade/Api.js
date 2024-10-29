@@ -5,10 +5,6 @@ import {
   crError
 } from '../AdapterFn';
 import {
-  isTreeMap
-} from '../CategoryFn';
-
-import {
   isAggrCalculatedCase,
   isAggrByTotalWorld,
   isAggr,
@@ -80,13 +76,8 @@ const UnComtradeApi = {
       tp,
       freq,
       period,
-      proxy,
-      chart
+      proxy
     } = option;
-
-    if (isTreeMap(chart)) {
-      option.seriaType = chart
-    }
 
     if (isAggrByTotalWorld(option)) {
       return _crAggrTotalUrl(

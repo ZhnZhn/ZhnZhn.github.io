@@ -9,7 +9,7 @@ const _crTitle = (one, tradeFlow, tradePartner) => {
   const _tradeFlowCaption = (0, _createrFns.getC)(tradeFlow),
     _title = (0, _createrFns.getC)(one) + ': ' + _tradeFlowCaption,
     _tradePartnerCapion = (0, _createrFns.getC)(tradePartner);
-  return _tradePartnerCapion ? _title + " " + _crDirection(_tradeFlowCaption) + " " + _tradePartnerCapion : _title;
+  return _tradePartnerCapion ? `${_title} ${_crDirection(_tradeFlowCaption)} ${_tradePartnerCapion}` : _title;
 };
 const _crSubtitle = three => {
   const _threeCaption = (0, _createrFns.getC)(three);
@@ -55,6 +55,7 @@ const crLoadOptions = (props, options) => {
     chart: (0, _createrFns.getV)(chart),
     chType,
     time,
+    seriaType: (0, _createrFns.getV)(chart),
     seriaColor,
     seriaWidth,
     tradePartners

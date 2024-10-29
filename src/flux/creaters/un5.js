@@ -78,6 +78,7 @@ const crLoadOptions = (
     chart: getV(chart),
     chType,
     time,
+    seriaType: getV(chart),
     seriaColor,
     seriaWidth,
     tradePartners

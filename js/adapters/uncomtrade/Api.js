@@ -3,7 +3,6 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
-var _CategoryFn = require("../CategoryFn");
 var _fnAdapter = require("./fnAdapter");
 const API_URL = 'https://comtradeapi.un.org/public/v1/preview/C',
   ALL = 'all',
@@ -39,12 +38,8 @@ const UnComtradeApi = {
       tp,
       freq,
       period,
-      proxy,
-      chart
+      proxy
     } = option;
-    if ((0, _CategoryFn.isTreeMap)(chart)) {
-      option.seriaType = chart;
-    }
     if ((0, _fnAdapter.isAggrByTotalWorld)(option)) {
       return _crAggrTotalUrl(proxy, one, two, rg, period, tfType);
     }
