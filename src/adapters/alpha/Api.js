@@ -1,5 +1,9 @@
 import isEmpty from '../../utils/isEmpty';
 import {
+  assign,
+  crGetRoute
+} from '../AdapterFn';
+import {
   DF_FN_EOD,
   isInArrStr,
   toUpperCaseFirst,
@@ -13,7 +17,6 @@ const ROOT = 'https://www.alphavantage.co/query'
 , ERR_PROP = 'Error Message'
 , INFO_PROP = 'Information'
 , REQ_ERROR = 'Request Error'
-, _assign = Object.assign
 , _crFunctionQuery = value => `function=${value}`;
 
 const _crEconomicsQuery = (
@@ -26,7 +29,7 @@ const _crEconomicsQuery = (
     value,
     itemCaption
   ] = getValueCaption(items[0]);
-  _assign(option, {
+  assign(option, {
     itemCaption
   })
   return _crFunctionQuery(value);
@@ -84,7 +87,7 @@ const _crCommoditiesQuery = (
     interval
   );
 
-  _assign(option, {
+  assign(option, {
     itemCaption
   })
   return `${_crFunctionQuery(itemId)}&interval=${intervalId}`;
@@ -126,7 +129,7 @@ const _crEodQuery = option => {
     interval
   ] = _getInterval(intervalValue);
 
-  _assign(option, {
+  assign(option, {
     itemCaption: ticket,
     ticket,
     title,
@@ -145,7 +148,7 @@ const _crIntradayQuery = option => {
   , ticket = getValue(items[0])
   , interval = getValue(items[1])
   , title = `${ticket} (${interval})`;
-  _assign(option, {
+  assign(option, {
     ticket,
     interval,
     title,
@@ -161,7 +164,7 @@ const _crIncomeQuery = option => {
     dfFn
   } = option
   , _symbol = getValue(items[0]);
-  _assign(option, {
+  assign(option, {
     itemCaption: itemCaption.replace(getCaption(items[0]), _symbol),
     dfItem: getValue(items[1]),
     dfPeriod: getValue(items[2])
@@ -175,7 +178,7 @@ const _crEarningQuery = option => {
     dfFn
   } = option
   , _symbol = getValue(items[0]);
-  _assign(option, {
+  assign(option, {
     itemCaption: _symbol,
     dfPeriod: getValue(items[1])
   })
@@ -195,7 +198,7 @@ const _crCrQuery = (
   const { items } = option
   , symbol = getValue(items[0])
   , market = getValue(items[1]);
-  _assign(option, {
+  assign(option, {
     itemCaption: `${symbol}/${market}`
   })
   return `${_crFunctionQuery('DIGITAL_CURRENCY_DAILY')}&symbol=${symbol}&market=${market}`;
@@ -217,9 +220,7 @@ const _crEtfProfileQuery = (
 };
 */
 
-const _routerQuery = {
-  DF: _crDfQuery,
-
+const _getCrQuery = crGetRoute({
   CR: _crCrQuery,
 
   ECONOMICS: _crEconomicsQuery,
@@ -236,8 +237,8 @@ const _routerQuery = {
   EARNINGS: _crEarningQuery,
 
   ETF_PROFILE: _fCrQuery1("ETF_PROFILE"),
-  OVERVIEW: _fCrQuery1("OVERVIEW"),
-};
+  OVERVIEW: _fCrQuery1("OVERVIEW")
+}, _crDfQuery);
 
 const AlphaApi = {
   getRequestUrl(option) {
@@ -245,8 +246,7 @@ const AlphaApi = {
       dfFn,
       apiKey
     } = option
-    , _crQuery = (dfFn && _routerQuery[dfFn])
-        || _routerQuery.DF
+    , _crQuery = _getCrQuery(dfFn)    
     , _queryParam = _crQuery(option);
 
     option.apiKey = void 0

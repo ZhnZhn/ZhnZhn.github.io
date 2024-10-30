@@ -4,19 +4,19 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isEmpty = _interopRequireDefault(require("../../utils/isEmpty"));
+var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
 const ROOT = 'https://www.alphavantage.co/query',
   ERR_PROP = 'Error Message',
   INFO_PROP = 'Information',
   REQ_ERROR = 'Request Error',
-  _assign = Object.assign,
   _crFunctionQuery = value => `function=${value}`;
 const _crEconomicsQuery = option => {
   const {
       items
     } = option,
     [value, itemCaption] = (0, _fnAdapter.getValueCaption)(items[0]);
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     itemCaption
   });
   return _crFunctionQuery(value);
@@ -37,7 +37,7 @@ const _crCommoditiesQuery = option => {
     } = option,
     [item, interval] = items,
     [itemId, itemCaption, intervalId] = _checkCommoditiesParams(item, interval);
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     itemCaption
   });
   return `${_crFunctionQuery(itemId)}&interval=${intervalId}`;
@@ -57,7 +57,7 @@ const _crEodQuery = option => {
     [ticket, title] = (0, _fnAdapter.getValueCaption)(_stockItem),
     [intervalValue, subtitle] = (0, _fnAdapter.getValueCaption)(_intervalItem),
     [dfT, interval] = _getInterval(intervalValue);
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     itemCaption: ticket,
     ticket,
     title,
@@ -75,7 +75,7 @@ const _crIntradayQuery = option => {
     ticket = (0, _fnAdapter.getValue)(items[0]),
     interval = (0, _fnAdapter.getValue)(items[1]),
     title = `${ticket} (${interval})`;
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     ticket,
     interval,
     title,
@@ -90,7 +90,7 @@ const _crIncomeQuery = option => {
       dfFn
     } = option,
     _symbol = (0, _fnAdapter.getValue)(items[0]);
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     itemCaption: itemCaption.replace((0, _fnAdapter.getCaption)(items[0]), _symbol),
     dfItem: (0, _fnAdapter.getValue)(items[1]),
     dfPeriod: (0, _fnAdapter.getValue)(items[2])
@@ -103,7 +103,7 @@ const _crEarningQuery = option => {
       dfFn
     } = option,
     _symbol = (0, _fnAdapter.getValue)(items[0]);
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     itemCaption: _symbol,
     dfPeriod: (0, _fnAdapter.getValue)(items[1])
   });
@@ -124,7 +124,7 @@ const _crCrQuery = option => {
     } = option,
     symbol = (0, _fnAdapter.getValue)(items[0]),
     market = (0, _fnAdapter.getValue)(items[1]);
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     itemCaption: `${symbol}/${market}`
   });
   return `${_crFunctionQuery('DIGITAL_CURRENCY_DAILY')}&symbol=${symbol}&market=${market}`;
@@ -147,8 +147,7 @@ const _crEtfProfileQuery = (
 };
 */
 
-const _routerQuery = {
-  DF: _crDfQuery,
+const _getCrQuery = (0, _AdapterFn.crGetRoute)({
   CR: _crCrQuery,
   ECONOMICS: _crEconomicsQuery,
   CM: _crCommoditiesQuery,
@@ -161,14 +160,14 @@ const _routerQuery = {
   EARNINGS: _crEarningQuery,
   ETF_PROFILE: _fCrQuery1("ETF_PROFILE"),
   OVERVIEW: _fCrQuery1("OVERVIEW")
-};
+}, _crDfQuery);
 const AlphaApi = {
   getRequestUrl(option) {
     const {
         dfFn,
         apiKey
       } = option,
-      _crQuery = dfFn && _routerQuery[dfFn] || _routerQuery.DF,
+      _crQuery = _getCrQuery(dfFn),
       _queryParam = _crQuery(option);
     option.apiKey = void 0;
     return `${ROOT}?${_queryParam}&apikey=${apiKey}`;
