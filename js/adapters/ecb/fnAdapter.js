@@ -22,16 +22,13 @@ const _crItemDf = items => {
   },
   _crItem12 = (items, seriaType) => `${(0, _CategoryFn.isCategory)(seriaType) ? "" : (0, _AdapterFn.getValue)(items[0])}.${(0, _AdapterFn.getValue)(items[1])}`,
   _crItem312 = items => (0, _AdapterFn.joinBy)(".", (0, _AdapterFn.getValue)(items[2]), (0, _AdapterFn.getValue)(items[0]), (0, _AdapterFn.getValue)(items[1])),
-  _hmCrItem = {
-    df: _crItemDf,
+  _routersCrItem = {
     s12: _crItem12,
     s312: _crItem312
-  };
+  },
+  _getCrItemId = (0, _AdapterFn.crGetRoute)(_routersCrItem, _crItemDf);
 const crItemId = option => {
-  const {
-      dfFnUrl
-    } = option,
-    _crItemId = dfFnUrl && _hmCrItem[dfFnUrl] || _hmCrItem.df;
+  const _crItemId = _getCrItemId(option.dfFnUrl);
   return (0, _AdapterFn.joinBy)(".", option.dfPrefix, _crItemId(option.items, option.seriaType));
 };
 exports.crItemId = crItemId;

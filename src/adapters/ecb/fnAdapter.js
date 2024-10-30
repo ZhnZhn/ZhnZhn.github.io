@@ -2,7 +2,8 @@ import {
   getValue,
   getObjectKeys,
   getByPropsFrom,
-  joinBy
+  joinBy,
+  crGetRoute
 } from '../AdapterFn';
 import {
   isCategory
@@ -43,15 +44,17 @@ const _crItemDf = items => {
   getValue(items[0]),
   getValue(items[1])
 )
-, _hmCrItem = {
-  df: _crItemDf,
+, _routersCrItem = {
   s12: _crItem12,
   s312: _crItem312
-};
+}
+, _getCrItemId = crGetRoute(
+  _routersCrItem,
+  _crItemDf
+);
 
 export const crItemId = option => {
-  const { dfFnUrl } = option
-  , _crItemId = (dfFnUrl && _hmCrItem[dfFnUrl]) || _hmCrItem.df;
+  const _crItemId = _getCrItemId(option.dfFnUrl);
   return joinBy(".",
     option.dfPrefix,
     _crItemId(option.items, option.seriaType)
