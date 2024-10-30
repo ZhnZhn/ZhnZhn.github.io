@@ -1,44 +1,41 @@
 import {
   isArr,
   isNumber,
+  assign,
+  crGetRoute,
   getYear,
   getCurrentYear,
   crError
 } from '../AdapterFn';
-import {
-  crHm
-} from '../crFn';
 
 const API_URL = 'https://api.bls.gov/publicAPI'
 , TS_DATA = 'timeseries/data'
 , NATIVE_URL = 'https://data.bls.gov/timeseries';
 
-const _assign = Object.assign;
-
 const _fCrId321 = idPrefix => (
   items
 ) => `${idPrefix}${items[2].v}R${items[1].v}${items[0].v}`;
 
-const _hmCrId = crHm({
+const _crSeriaIdRoutes = {
   CU: _fCrId321('CU'),
   CW: _fCrId321('CW')
-});
+}
+, _crDfSeriaId = items => items[0].v
+, _getCrSeriaId = crGetRoute(
+  _crSeriaIdRoutes,
+  _crDfSeriaId
+);
 
 const _getSeriaId = ({
   items=[],
   dfCode
-}) => {
-  const _crId = _hmCrId[dfCode];
-  return _crId
-    ? _crId(items)
-    : items[0].v;
-};
+}) => _getCrSeriaId(dfCode)(items);
 
 const _addNativeLinkTo = (
   option,
   seriaId
 ) => {
-  _assign(option, {
+  assign(option, {
     linkItem: {
       caption: 'U.S. BLS Data Link',
       href: `${NATIVE_URL}/${seriaId}`
@@ -46,39 +43,48 @@ const _addNativeLinkTo = (
   })
 };
 
-
-const _crCaption321 = (
+const _crCaptionImpl = (
+  title,
+  subtitle
+) => ({
+  title,
+  subtitle
+})
+, _crCaption321 = (
   dfTitle,
   items
-) => ({
-  title: `${dfTitle}, ${items[2].c}`,
-  subtitle: `${items[1].c}: ${items[0].c}`
-});
-
-const _hmCrCaption = crHm({
+) => _crCaptionImpl(
+  `${dfTitle}, ${items[2].c}`,
+  `${items[1].c}: ${items[0].c}`
+)
+, _routesCrCaption = {
   CU: _crCaption321,
   CW: _crCaption321
-});
-
-const _crCaption = ({
-  dfCode,
+}
+, _crDfCaption = (
   dfTitle,
-  title,
-  subtitle,
-  items
-}) => {
-  const _crC = _hmCrCaption[dfCode];
-  return _crC
-    ? _crC(dfTitle, items)
-    : {
-      title: dfTitle || subtitle,
-      subtitle: title
-    };
-};
+  items,
+  option
+) => _crCaptionImpl(
+  dfTitle || option.subtitle,
+  option.title
+)
+, _getCrCaption = crGetRoute(
+  _routesCrCaption,
+  _crDfCaption
+);
+
+const _crCaption = (
+  option
+) => _getCrCaption(option.dfCode)(
+  option.dfTitle,
+  option.items,
+  option
+);
 
 const _setCaptionTo = option => {
   const { title } = option;
-  _assign(option, {
+  assign(option, {
     itemCaption: title,
     ..._crCaption(option)
   })
@@ -116,10 +122,10 @@ const BlsApi = {
     , { series } = Results || {}
     , _s = (series || [])[0];
     if (_s && isArr(_s.data)){
-      return json;
+      return;
     }
     throw crError('', message[0]);
   }
-}
+};
 
 export default BlsApi

@@ -3,73 +3,62 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
-var _crFn = require("../crFn");
 const API_URL = 'https://api.bls.gov/publicAPI',
   TS_DATA = 'timeseries/data',
   NATIVE_URL = 'https://data.bls.gov/timeseries';
-const _assign = Object.assign;
 const _fCrId321 = idPrefix => items => `${idPrefix}${items[2].v}R${items[1].v}${items[0].v}`;
-const _hmCrId = (0, _crFn.crHm)({
-  CU: _fCrId321('CU'),
-  CW: _fCrId321('CW')
-});
+const _crSeriaIdRoutes = {
+    CU: _fCrId321('CU'),
+    CW: _fCrId321('CW')
+  },
+  _crDfSeriaId = items => items[0].v,
+  _getCrSeriaId = (0, _AdapterFn.crGetRoute)(_crSeriaIdRoutes, _crDfSeriaId);
 const _getSeriaId = _ref => {
   let {
     items = [],
     dfCode
   } = _ref;
-  const _crId = _hmCrId[dfCode];
-  return _crId ? _crId(items) : items[0].v;
+  return _getCrSeriaId(dfCode)(items);
 };
 const _addNativeLinkTo = (option, seriaId) => {
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     linkItem: {
       caption: 'U.S. BLS Data Link',
       href: `${NATIVE_URL}/${seriaId}`
     }
   });
 };
-const _crCaption321 = (dfTitle, items) => ({
-  title: `${dfTitle}, ${items[2].c}`,
-  subtitle: `${items[1].c}: ${items[0].c}`
-});
-const _hmCrCaption = (0, _crFn.crHm)({
-  CU: _crCaption321,
-  CW: _crCaption321
-});
-const _crCaption = _ref2 => {
-  let {
-    dfCode,
-    dfTitle,
+const _crCaptionImpl = (title, subtitle) => ({
     title,
-    subtitle,
-    items
-  } = _ref2;
-  const _crC = _hmCrCaption[dfCode];
-  return _crC ? _crC(dfTitle, items) : {
-    title: dfTitle || subtitle,
-    subtitle: title
-  };
-};
+    subtitle
+  }),
+  _crCaption321 = (dfTitle, items) => _crCaptionImpl(`${dfTitle}, ${items[2].c}`, `${items[1].c}: ${items[0].c}`),
+  _routesCrCaption = {
+    CU: _crCaption321,
+    CW: _crCaption321
+  },
+  _crDfCaption = (dfTitle, items, option) => _crCaptionImpl(dfTitle || option.subtitle, option.title),
+  _getCrCaption = (0, _AdapterFn.crGetRoute)(_routesCrCaption, _crDfCaption);
+const _crCaption = option => _getCrCaption(option.dfCode)(option.dfTitle, option.items, option);
 const _setCaptionTo = option => {
   const {
     title
   } = option;
-  _assign(option, {
+  (0, _AdapterFn.assign)(option, {
     itemCaption: title,
     ..._crCaption(option)
   });
 };
-const _crQueryKey = _ref3 => {
+const _crQueryKey = _ref2 => {
   let {
     apiKey
-  } = _ref3;
+  } = _ref2;
   return apiKey ? `?registrationkey=${apiKey}` : '';
 };
-const _crQueryPeriod = (queryKey, _ref4) => {
+const _crQueryPeriod = (queryKey, _ref3) => {
   let {
     fromDate
-  } = _ref4;
+  } = _ref3;
   if (!queryKey) {
     return '';
   }
@@ -100,7 +89,7 @@ const BlsApi = {
       } = Results || {},
       _s = (series || [])[0];
     if (_s && (0, _AdapterFn.isArr)(_s.data)) {
-      return json;
+      return;
     }
     throw (0, _AdapterFn.crError)('', message[0]);
   }
