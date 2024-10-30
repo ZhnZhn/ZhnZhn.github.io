@@ -1,9 +1,11 @@
 export {
   getColorBlack,
+  assign,
   isArr,
   isInArrStr,
   isTokenInStr,
   crDfItemKey,
+  crGetRoute,
   getValue,
   getCaption,
   getValueCaption,
@@ -13,7 +15,7 @@ export {
   ymdToUTC,
   ymdhmsToUTC,
   roundBy,
-  crError
+  crError   
 } from '../AdapterFn';
 
 import {

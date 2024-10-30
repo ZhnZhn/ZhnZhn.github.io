@@ -1,12 +1,10 @@
 import isEmpty from '../../utils/isEmpty';
 import {
-  assign,
-  crGetRoute
-} from '../AdapterFn';
-import {
   DF_FN_EOD,
+  assign,
   isInArrStr,
   toUpperCaseFirst,
+  crGetRoute,
   crError,
   getValue,
   getCaption,
@@ -246,7 +244,7 @@ const AlphaApi = {
       dfFn,
       apiKey
     } = option
-    , _crQuery = _getCrQuery(dfFn)    
+    , _crQuery = _getCrQuery(dfFn)
     , _queryParam = _crQuery(option);
 
     option.apiKey = void 0

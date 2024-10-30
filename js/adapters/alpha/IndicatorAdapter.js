@@ -31,8 +31,7 @@ const TWO_YEARS_DAYS = 501,
   COLOR_BLUE_A = 'rgba(47, 126, 216, 0.75)',
   S_GREEN = {
     color: '#4caf50'
-  },
-  _assign = Object.assign;
+  };
 const _crZhConfig = id => ({
   id: id,
   key: id,
@@ -90,7 +89,7 @@ const _crSplineSeria = (_ref2, option) => {
     data,
     name
   } = _ref2;
-  return _assign((0, _ChartConfigFn.crSeriaConfig)(), {
+  return (0, _fnAdapter.assign)((0, _ChartConfigFn.crSeriaConfig)(), {
     data,
     name,
     type: 'spline',
@@ -141,7 +140,7 @@ const _crMacdSeries = (json, option) => {
       data: _arrs[1],
       name: MACD_S
     }, S_RED),
-    sHist = _assign((0, _ChartConfigFn.crSeriaConfig)(), {
+    sHist = (0, _fnAdapter.assign)((0, _ChartConfigFn.crSeriaConfig)(), {
       color: COLOR_BLUE_A,
       data: _arrs[2],
       name: MACD_H,
@@ -184,37 +183,20 @@ const _crBbandsSeries = (json, option) => {
     }, S_RED);
   return [sMiddle, sUpper, sLow];
 };
-const _rSeries = {
-  DF: _crDfSeria,
-  [MACD]: _crMacdSeries,
-  [STOCH]: _crStochSeries,
-  [BBANDS]: _crBbandsSeries
-};
-const _toSeries = (json, option) => {
-  const _crSeries = _rSeries[option.indicator] || _rSeries.DF;
-  return _crSeries(json, option);
-};
+const _getCrSeries = (0, _fnAdapter.crGetRoute)({
+    [MACD]: _crMacdSeries,
+    [STOCH]: _crStochSeries,
+    [BBANDS]: _crBbandsSeries
+  }, _crDfSeria),
+  _toSeries = (json, option) => _getCrSeries(option.indicator)(json, option);
 const IndicatorAdapter = {
   crKey(option) {
-    const {
-      ticket,
-      value
-    } = option;
-    return option.chartId = `${ticket}-${value}`;
+    return option.chartId = `${option.ticket}-${option.value}`;
   },
   toConfig(json, option) {
-    const {
-      ticket,
-      value,
-      chartId
-    } = option;
     return {
-      config: (0, _pipe.default)(
-      //_title
-      (0, _configBuilderFn.crArea2Config)(`${ticket}: ${value}`),
-      //_series
-      (0, _configBuilderFn.fAddSeries)(_toSeries(json, option)), (0, _configBuilderFn.fAdd)({
-        zhConfig: _crZhConfig(chartId)
+      config: (0, _pipe.default)((0, _configBuilderFn.crArea2Config)(`${option.ticket}: ${option.value}`), (0, _configBuilderFn.fAddSeries)(_toSeries(json, option)), (0, _configBuilderFn.fAdd)({
+        zhConfig: _crZhConfig(option.chartId)
       }), _configBuilderFn.toConfig),
       isDrawDeltaExtrems: false,
       isNotZoomToMinMax: false

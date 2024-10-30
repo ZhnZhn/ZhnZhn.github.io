@@ -9,6 +9,8 @@ import {
 import { crSeriaConfig } from '../../charts/ChartConfigFn';
 
 import {
+  assign,
+  crGetRoute,
   getColorBlack,
   ymdToUTC
 } from './fnAdapter';
@@ -32,9 +34,7 @@ const TWO_YEARS_DAYS = 501
 , S_RED = { color: '#f44336' }
 , S_BLUE = { color: 'rgb(47, 126, 216)' }
 , COLOR_BLUE_A = 'rgba(47, 126, 216, 0.75)'
-, S_GREEN = { color: '#4caf50' }
-
-, _assign = Object.assign;
+, S_GREEN = { color: '#4caf50' };
 
 const _crZhConfig = (id) => ({
   id: id,
@@ -87,7 +87,7 @@ const _toDataArrs = ({dateKeys, value, max}, arrProp) => {
 }
 
 const _crSplineSeria = ({ data, name }, option) =>
-  _assign(crSeriaConfig(), {
+  assign(crSeriaConfig(), {
     data, name,
     type: 'spline',
     visible: true,
@@ -136,7 +136,7 @@ const _crMacdSeries = (json, option) => {
        data: _arrs[1],
        name: MACD_S
     }, S_RED)
-  , sHist = _assign(crSeriaConfig(), {
+  , sHist = assign(crSeriaConfig(), {
        color: COLOR_BLUE_A,
        data: _arrs[2],
        name: MACD_H,
@@ -190,42 +190,27 @@ const _crBbandsSeries = (json, option) => {
     return [sMiddle, sUpper, sLow];
 }
 
-const _rSeries = {
-  DF: _crDfSeria,
+const _getCrSeries = crGetRoute({
   [MACD]: _crMacdSeries,
   [STOCH]: _crStochSeries,
   [BBANDS]: _crBbandsSeries,
-}
-
-const _toSeries = (json, option) => {
-  const _crSeries = _rSeries[option.indicator]
-    || _rSeries.DF;
-  return _crSeries(json, option);
-};
+}, _crDfSeria)
+, _toSeries = (
+  json,
+  option
+) => _getCrSeries(option.indicator)(json, option);
 
 const IndicatorAdapter = {
   crKey(option){
-    const {
-      ticket,
-      value
-    } = option;
-    return (option.chartId = `${ticket}-${value}`);
+    return (option.chartId = `${option.ticket}-${option.value}`);
   },
 
   toConfig(json, option) {
-    const {
-      ticket,
-      value,
-      chartId
-    } = option;
-
     return {
       config: pipe(
-        //_title
-        crArea2Config(`${ticket}: ${value}`),
-        //_series
+        crArea2Config(`${option.ticket}: ${option.value}`),
         fAddSeries(_toSeries(json, option)),
-        fAdd({ zhConfig: _crZhConfig(chartId) }),
+        fAdd({ zhConfig: _crZhConfig(option.chartId) }),
         toConfig
       ),
       isDrawDeltaExtrems: false,
