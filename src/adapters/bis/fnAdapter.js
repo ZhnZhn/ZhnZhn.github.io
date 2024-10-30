@@ -1,4 +1,6 @@
 import {
+  FN_IDENTITY,
+  crGetRoute,
   joinBy,
   getValue,
   crXmlDocument,
@@ -19,30 +21,27 @@ const _crItemIdDf = ({
   getValue(items[1]),
   dfSuffix
 )
-
-const _crItemId312 = ({
+, _crItemId312 = ({
   items,
   seriaType
 }) => joinBy('.',
   getValue(items[2]),
   isCategory(seriaType) ? '*' : getValue(items[0]),
   getValue(items[1])
-);
-
-const _hmCrItemId = {
+)
+, _getCrItemId = crGetRoute({
   s312: _crItemId312
-};
+}, _crItemIdDf);
 
 export const crItemId = (
   option
-) => (_hmCrItemId[option.dfFn] || _crItemIdDf)(option)
+) => _getCrItemId(option.dfFn)(option)
 
 export const getSeriesCollection = (
   str
 ) => crXmlDocument(str)
   .getElementsByTagName('Series') || []
 
-const FN_IDENTITY = v => v;
 const _fGetAttribute = (
   propName,
   transformValue=FN_IDENTITY
