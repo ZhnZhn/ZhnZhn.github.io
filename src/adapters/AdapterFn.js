@@ -339,3 +339,12 @@ export const addSeriesDataTypeTo = (
 export const isSeriesDataCase = (
   data
 ) => (data || {})._type === SERIES_DATA_TYPE
+
+export const crRouters = obj => assign(Object.create(null), obj)
+export const crGetRoute = (
+  routes,
+  dfRoute
+) => {
+  const _routes = crRouters(routes);
+  return routeId => routeId && _routes[routeId] || dfRoute;
+}
