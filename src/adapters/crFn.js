@@ -1,17 +1,19 @@
-import { crId as _crId } from '../math/mathFn';
-import { bindTo } from './AdapterFn';
+import {
+  crId as _crId
+} from '../math/mathFn';
+import {
+  isArr,
+  bindTo,
+  crRouters
+} from './AdapterFn';
 import {
   getPointDate,
   getPointValue
 } from './getterPointFn';
 
-const { assign, create } = Object
-, _isArr = Array.isArray
-, _crPTag = className => className
-    ? `<p class="${className}">`
-    : '<p>';
-
-export const crHm = obj => assign(create(null), obj)
+const _crPTag = className => className
+  ? `<p class="${className}">`
+  : '<p>';
 
 // Ndl toScatter, Stat-Json
 export const crId = () => _crId().toUpperCase()
@@ -45,12 +47,12 @@ export const crItemConf = (
 ) => ITEM_CONF_PROP_NAMES.reduce((itemConf, pn) => {
   const _value = option[pn];
   if (_value != null) {
-    itemConf[pn] = _isArr(_value)
+    itemConf[pn] = isArr(_value)
       ? _value.map(obj => ({...obj}))
       : _value
   }
   return itemConf;
-}, crHm());
+}, crRouters());
 
 export const crValueConf = data => {
   const _p = data[data.length-1];

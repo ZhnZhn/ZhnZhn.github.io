@@ -1,20 +1,13 @@
 "use strict";
 
 exports.__esModule = true;
-exports.fCrItemLinkByUrl = exports.fCrItemLinkByCaption = exports.crValueConf = exports.crItemConf = exports.crId = exports.crHm = void 0;
+exports.fCrItemLinkByUrl = exports.fCrItemLinkByCaption = exports.crValueConf = exports.crItemConf = exports.crId = void 0;
 var _mathFn = require("../math/mathFn");
 var _AdapterFn = require("./AdapterFn");
 var _getterPointFn = require("./getterPointFn");
-const {
-    assign,
-    create
-  } = Object,
-  _isArr = Array.isArray,
-  _crPTag = className => className ? `<p class="${className}">` : '<p>';
-const crHm = obj => assign(create(null), obj);
+const _crPTag = className => className ? `<p class="${className}">` : '<p>';
 
 // Ndl toScatter, Stat-Json
-exports.crHm = crHm;
 const crId = () => (0, _mathFn.crId)().toUpperCase();
 exports.crId = crId;
 const _crItemLink = (caption, itemUrl, className) => `${_crPTag(className)}<a href="${itemUrl}">${caption}</a></p>`;
@@ -26,12 +19,12 @@ const ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption
 const crItemConf = option => ITEM_CONF_PROP_NAMES.reduce((itemConf, pn) => {
   const _value = option[pn];
   if (_value != null) {
-    itemConf[pn] = _isArr(_value) ? _value.map(obj => ({
+    itemConf[pn] = (0, _AdapterFn.isArr)(_value) ? _value.map(obj => ({
       ...obj
     })) : _value;
   }
   return itemConf;
-}, crHm());
+}, (0, _AdapterFn.crRouters)());
 exports.crItemConf = crItemConf;
 const crValueConf = data => {
   const _p = data[data.length - 1];
