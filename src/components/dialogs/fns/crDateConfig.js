@@ -1,13 +1,19 @@
 import {
   isMonthDelimeterDash,
   isQuarterDelimeterDash,
-  isEstat  
+  isEstat
 } from '../../../constants/LoadType';
 
 const YEAR_MAX = 12
 , BI_YEAR_MAX = 24
 , Q_YEAR_MAX = 8
 , M_YEAR_MAX = 4;
+
+const _getCurrentDate = () => new Date()
+, _getYear = date => date.getUTCFullYear()
+, _getCurrentYear = () => _getYear(_getCurrentDate())
+, _getMonth = date => date.getUTCMonth()
+, _getCurrentMonth = () => _getMonth(_getCurrentDate());
 
 const _loopFn = (
   fn,
@@ -48,7 +54,7 @@ const _addYearMonthsTo = (
   y,
   delimeter
 ) => {
-	let m = (new Date()).getUTCMonth()
+	let m = _getCurrentMonth()
 	, _m, _caption;
 	for(let i=0; i<12; i++){
 		m = m - 1;
@@ -64,18 +70,46 @@ const _addYearMonthsTo = (
 	}
 };
 
+const _addMaybeNextMonthTo = (
+  dateOptions,
+  currentDate,
+  currentYear,
+  delimeter
+) => {
+  const currentMonth = _getMonth(currentDate);
+  currentDate.setDate(currentDate.getDate() + 1)
+  const _m = _getMonth(currentDate)
+  , _nextMonthOption = _m === currentMonth
+      ? void 0
+      : _m > currentMonth
+         ? _crDateOption(`${currentYear}${delimeter}${_m}`)
+         : _crDateOption(`${currentYear+1}${delimeter}01`);
+  if (_nextMonthOption) {
+    dateOptions.unshift(_nextMonthOption)
+  }
+};
+
 const _crYearMonthConfig = (
   loadId,
   mapDateDf=2
 ) => {
 	const dateOptions = []
-  , y = (new Date()).getUTCFullYear()
+  , currentDate = _getCurrentDate()
+  , currentYear = _getYear(currentDate)
   , _delimeter = isMonthDelimeterDash(loadId)
       ? '-'
       : 'M';
   for(let i=0; i<M_YEAR_MAX; i++){
-    _addYearMonthsTo(dateOptions, y-i, _delimeter);
+    _addYearMonthsTo(dateOptions, currentYear-i, _delimeter);
   }
+
+  _addMaybeNextMonthTo(
+    dateOptions,
+    currentDate,
+    currentYear,
+    _delimeter
+  )
+
 	return _crDateConfig(dateOptions, mapDateDf);
 };
 
@@ -84,7 +118,7 @@ const _addYearQuartesTo = (
   y,
   delimeter
 ) => {
-  const m = (new Date()).getUTCMonth()
+  const m = _getCurrentMonth()
   , _c = Math.floor( (m + 1) / 3);
   let qNow = ( _c === 4 ) ? 3 : _c ;
 
@@ -103,7 +137,7 @@ const _crYearQuarterConfig = (
   delimeter
 ) => {
 	const dateOptions = []
-  , fromYear = (new Date()).getUTCFullYear()
+  , fromYear = _getCurrentYear()
   , _delimeter = isQuarterDelimeterDash(loadId)
      ? '-'+delimeter
      : delimeter;
@@ -122,7 +156,7 @@ const _crYearBiAnnualConfig = (
   , _delimeter = isEstat(loadId)
        ? '-S'
        : 'S'
-  , fromYear = (new Date()).getUTCFullYear();
+  , fromYear = _getCurrentYear();
   _loopFn(y => {
     dateOptions.push(
       _crDateOption(`${y}${_delimeter}2`),
@@ -137,7 +171,7 @@ const _crYearConfig = (
   mapDateDf=1
 ) => {
 	const dateOptions = []
-  , fromYear = (new Date()).getUTCFullYear() - 1;
+  , fromYear = _getCurrentYear() - 1;
   _loopFn(y => {
     dateOptions.push(_crDateOption(''+y));
   }, fromYear, YEAR_MAX)
