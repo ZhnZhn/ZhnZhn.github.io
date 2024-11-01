@@ -12,10 +12,12 @@ const _getCurrentDate = () => new Date(),
   _getCurrentYear = () => _getYear(_getCurrentDate()),
   _getMonth = date => date.getUTCMonth(),
   _getCurrentMonth = () => _getMonth(_getCurrentDate());
-const _loopFn = (fn, fromValue, n) => {
+const _crArrByFn = (fn, fromValue, n) => {
+  const arr = [];
   for (let i = 0; i < n; i++) {
-    fn(fromValue - i);
+    fn(arr, fromValue - i);
   }
+  return arr;
 };
 const _crDateOption = function (caption, value) {
   if (value === void 0) {
@@ -65,13 +67,11 @@ const _crYearMonthConfig = function (loadId, mapDateDf) {
   if (mapDateDf === void 0) {
     mapDateDf = 2;
   }
-  const dateOptions = [],
-    currentDate = _getCurrentDate(),
-    currentYear = _getYear(currentDate),
-    _delimeter = (0, _LoadType.isMonthDelimeterDash)(loadId) ? '-' : 'M';
-  for (let i = 0; i < M_YEAR_MAX; i++) {
-    _addYearMonthsTo(dateOptions, currentYear - i, _delimeter);
-  }
+  const currentDate = _getCurrentDate(),
+    _delimeter = (0, _LoadType.isMonthDelimeterDash)(loadId) ? '-' : 'M',
+    dateOptions = _crArrByFn((arr, y) => {
+      _addYearMonthsTo(arr, y, _delimeter);
+    }, _getYear(currentDate), M_YEAR_MAX);
   if ((0, _LoadType.isEstat)(loadId)) {
     _addCurrentMonthIfTo(dateOptions, currentDate, _delimeter);
   }
@@ -94,35 +94,29 @@ const _crYearQuarterConfig = function (loadId, mapDateDf, delimeter) {
   if (mapDateDf === void 0) {
     mapDateDf = 1;
   }
-  const dateOptions = [],
-    fromYear = _getCurrentYear(),
-    _delimeter = (0, _LoadType.isQuarterDelimeterDash)(loadId) ? '-' + delimeter : delimeter;
-  _loopFn(y => {
-    _addYearQuartesTo(dateOptions, y, _delimeter);
-  }, fromYear, Q_YEAR_MAX);
+  const _delimeter = (0, _LoadType.isQuarterDelimeterDash)(loadId) ? '-' + delimeter : delimeter,
+    dateOptions = _crArrByFn((arr, y) => {
+      _addYearQuartesTo(arr, y, _delimeter);
+    }, _getCurrentYear(), Q_YEAR_MAX);
   return _crDateConfig(dateOptions, mapDateDf);
 };
 const _crYearBiAnnualConfig = function (loadId, mapDateDf) {
   if (mapDateDf === void 0) {
     mapDateDf = 3;
   }
-  const dateOptions = [],
-    _delimeter = (0, _LoadType.isEstat)(loadId) ? '-S' : 'S',
-    fromYear = _getCurrentYear();
-  _loopFn(y => {
-    dateOptions.push(_crDateOption(`${y}${_delimeter}2`), _crDateOption(`${y}${_delimeter}1`));
-  }, fromYear, BI_YEAR_MAX);
+  const _delimeter = (0, _LoadType.isEstat)(loadId) ? '-S' : 'S',
+    dateOptions = _crArrByFn((arr, y) => {
+      arr.push(_crDateOption(`${y}${_delimeter}2`), _crDateOption(`${y}${_delimeter}1`));
+    }, _getCurrentYear(), BI_YEAR_MAX);
   return _crDateConfig(dateOptions, mapDateDf);
 };
 const _crYearConfig = function (loadId, mapDateDf) {
   if (mapDateDf === void 0) {
     mapDateDf = 1;
   }
-  const dateOptions = [],
-    fromYear = _getCurrentYear() - 1;
-  _loopFn(y => {
-    dateOptions.push(_crDateOption('' + y));
-  }, fromYear, YEAR_MAX);
+  const dateOptions = _crArrByFn((arr, y) => {
+    arr.push(_crDateOption('' + y));
+  }, _getCurrentYear() - 1, YEAR_MAX);
   return _crDateConfig(dateOptions, mapDateDf - 1);
 };
 const _hmCr = {
