@@ -70,20 +70,18 @@ const _addYearMonthsTo = (
 	}
 };
 
-const _addMaybeNextMonthTo = (
+const _addCurrentMonthIfTo = (
   dateOptions,
   currentDate,
-  currentYear,
   delimeter
 ) => {
   const currentMonth = _getMonth(currentDate);
   currentDate.setDate(currentDate.getDate() + 1)
+
   const _m = _getMonth(currentDate)
   , _nextMonthOption = _m === currentMonth
       ? void 0
-      : _m > currentMonth
-         ? _crDateOption(`${currentYear}${delimeter}${_m}`)
-         : _crDateOption(`${currentYear+1}${delimeter}01`);
+      : _crDateOption(`${_getYear(currentDate)}${delimeter}${_m}`);
   if (_nextMonthOption) {
     dateOptions.unshift(_nextMonthOption)
   }
@@ -103,12 +101,13 @@ const _crYearMonthConfig = (
     _addYearMonthsTo(dateOptions, currentYear-i, _delimeter);
   }
 
-  _addMaybeNextMonthTo(
-    dateOptions,
-    currentDate,
-    currentYear,
-    _delimeter
-  )
+  if (isEstat(loadId)) {
+    _addCurrentMonthIfTo(
+      dateOptions,
+      currentDate,
+      _delimeter
+    )
+  }
 
 	return _crDateConfig(dateOptions, mapDateDf);
 };
