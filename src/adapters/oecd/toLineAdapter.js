@@ -11,6 +11,7 @@ import {
   compareByDate
 } from '../compareByFn';
 import {
+  crObservationPropName,
   getJsonData,
   getDataSeries,
   getDataDimensions
@@ -21,11 +22,12 @@ const crData = (
   option
 ) => {
   const data = getJsonData(json)
-  , observations = getByPropsFrom(
-      getDataSeries(data), "0:0:0:0", "observations"
+  , observations = getByPropsFrom(getDataSeries(data),
+      crObservationPropName(option),
+      "observations"
     ) || {}
-  , dates = getByPropsFrom(
-      getDataDimensions(data), "observation", 0, "values"
+  , dates = getByPropsFrom(getDataDimensions(data),
+      "observation", 0, "values"
     ) || [];
    return getObjectKeys(observations)
     .reduce((_arr, valueKey) => {
