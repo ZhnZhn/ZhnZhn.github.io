@@ -1,7 +1,45 @@
 import {
   getByPropsFrom,
-  getValue
+  getValue,
+  crGetRoute
 } from '../AdapterFn';
+import {
+  isCategory
+} from '../CategoryFn';
+
+const _getRefArea = (
+  isCategory,
+  items
+) => isCategory ? "" : getValue(items[0]);
+
+const _crItemId = (
+  isCategory,
+  items
+) => `${_getRefArea(isCategory, items)}.Q.${getValue(items[1])}.IX`;
+
+const _crItemIdMdf = (
+  isCategory,
+  items
+) => `${_getRefArea(isCategory, items)}.Q......${getValue(items[1])}`;
+const _crItemIdNvr = (
+  isCategory,
+  items
+) => `${_getRefArea(isCategory, items)}.Q.....${getValue(items[1])}.`;
+const _crItemIdMvt = (
+  isCategory,
+  items
+) => `${_getRefArea(isCategory, items)}.Q......`;
+
+const _hmCrItemId = {
+  mdf: _crItemIdMdf,
+  nvr: _crItemIdNvr,
+  mvt: _crItemIdMvt
+}
+, _getCrItemId = crGetRoute(_hmCrItemId, _crItemId);
+
+export const crItemId = (
+  option
+) => _getCrItemId(option.dfFn)(isCategory(option), option.items)
 
 export const getJsonData = (
   json
@@ -15,7 +53,9 @@ export const getDataDimensions = (
   data
 ) => getByPropsFrom(data, "structures", 0, "dimensions")
 
-export const crItemId = (
-  isCategory,
-  items
-) => `${isCategory ? "" : getValue(items[0])}.Q.${getValue(items[1])}.IX`
+export const crObservationPropName = (
+  option
+) => crItemId(option)
+.split(".")
+.reduce((pn, _) => pn + ":0", "")
+.slice(1)
