@@ -8,11 +8,10 @@ const OecdApi = {
     const {
       time
     } = option
-    , _isCategory = isCategory(option)
-    , queryDate = _isCategory
+    , queryDate = isCategory(option)
         ? `startPeriod=${time}&endPeriod=${time}`
         : "startPeriod=2005";
-    return `${API_URL}/${option.dfDs}/${crItemId(_isCategory, option.items)}?${queryDate}&format=jsondata`;
+    return `${API_URL}/${option.dfDs}/${crItemId(option)}?${queryDate}&format=jsondata`;
   }
 };
 
