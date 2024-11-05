@@ -30,7 +30,7 @@ const _crTotalConfig = total => {
 const _crItemRt = (value, rt) => value >= 10 ? rt : value >= 0.01 ? 2 : value >= 0.0001 ? 4 : 6;
 const _crValue = (value, totalRt) => (0, _AdapterFn.roundBy)(value, _crItemRt(value, totalRt));
 const _crValuePercentToken = (percent, value) => `${(0, _formatNumber.default)(value)} (${percent}%)`,
-  _crPercentToken = percent => `${percent}%`,
+  _crPercentToken = percent => percent >= 1 ? `${percent}%` : `.${('' + percent).split(".")[1]}%`,
   fCrName = crToken => (label, percent, value) => (0, _domSanitize.default)(`${label}<br/><span class="${_CL.CL_TREE_MAP_PERCENT_BLACK}">${crToken(percent, value)}</span>`),
   _crValuePercentName = fCrName(_crValuePercentToken),
   _crPercentName = fCrName(_crPercentToken),
@@ -53,7 +53,10 @@ const _crDataImpl = (data, option, totalRt, onePercent, percRt) => {
       title: (0, _domSanitize.default)(title),
       _label: (0, _domSanitize.default)(label),
       label: (0, _domSanitize.default)(`${label} (${_percent}%)`),
-      name: _crName(label, _percent, _value)
+      name: _crName(label, _percent, _value),
+      dataLabels: item._level === 3 && _percent < 1 ? {
+        enabled: false
+      } : void 0
     };
   }, []);
 };

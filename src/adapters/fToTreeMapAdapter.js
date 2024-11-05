@@ -82,7 +82,9 @@ const _crValuePercentToken = (
   percent,
   value
 ) => `${formatNumber(value)} (${percent}%)`
-, _crPercentToken = percent => `${percent}%`
+, _crPercentToken = percent => percent >= 1
+   ? `${percent}%`
+   : `.${(''+percent).split(".")[1]}%`
 , fCrName = (crToken) => (
   label,
   percent,
@@ -118,7 +120,10 @@ const _crDataImpl = (
       title: domSanitize(title),
       _label: domSanitize(label),
       label: domSanitize(`${label} (${_percent}%)`),
-      name: _crName(label, _percent, _value)
+      name: _crName(label, _percent, _value),
+      dataLabels: item._level === 3 && _percent < 1
+        ? { enabled: false }
+        : void 0
     };
   }, []);
 }

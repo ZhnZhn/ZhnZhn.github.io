@@ -81,6 +81,7 @@ const _addColor = (
      } else {
        deltaColor = (pointIndex - levelIndex2) * ( COLOR_PERIOD / _numberOfPoints3 )
        point.color = crMonoColor(COLOR_BASE3, deltaColor)
+       point._level = 3       
      }
    })
 };

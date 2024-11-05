@@ -47,6 +47,7 @@ const _addColor = (data, levelIndex1, levelIndex2) => {
     } else {
       deltaColor = (pointIndex - levelIndex2) * (_MonoColorFn.COLOR_PERIOD / _numberOfPoints3);
       point.color = (0, _MonoColorFn.crMonoColor)(_MonoColorFn.COLOR_BASE3, deltaColor);
+      point._level = 3;
     }
   });
 };
@@ -63,8 +64,8 @@ const addColorsTo = _ref => {
 };
 exports.addColorsTo = addColorsTo;
 const crPointName = (label, percent) => {
-  const _percent = (0, _AdapterFn.isNumber)(percent) ? "<span class=\"" + _CL.CL_TREE_MAP_PERCENT + "\">" + percent + "%</span>" : '';
-  return label + "<br/>" + _percent;
+  const _percent = (0, _AdapterFn.isNumber)(percent) ? `<span class="${_CL.CL_TREE_MAP_PERCENT}">${percent}%</span>` : '';
+  return `${label}<br/>${_percent}`;
 };
 exports.crPointName = crPointName;
 const addPercentAndColorToData = (data, total) => {
