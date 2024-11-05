@@ -68,7 +68,7 @@ const _crYearMonthConfig = function (loadId, mapDateDf) {
     mapDateDf = 2;
   }
   const currentDate = _getCurrentDate(),
-    _delimeter = (0, _LoadType.isMonthDelimeterDash)(loadId) ? '-' : 'M',
+    _delimeter = (0, _LoadType.isDateDelimeterDash)(loadId) ? '-' : 'M',
     dateOptions = _crArrByFn((arr, y) => {
       _addYearMonthsTo(arr, y, _delimeter);
     }, _getYear(currentDate), M_YEAR_MAX);
@@ -94,7 +94,7 @@ const _crYearQuarterConfig = function (loadId, mapDateDf, delimeter) {
   if (mapDateDf === void 0) {
     mapDateDf = 1;
   }
-  const _delimeter = (0, _LoadType.isQuarterDelimeterDash)(loadId) ? '-' + delimeter : delimeter,
+  const _delimeter = (0, _LoadType.isDateDelimeterDash)(loadId) ? '-' + delimeter : delimeter,
     dateOptions = _crArrByFn((arr, y) => {
       _addYearQuartesTo(arr, y, _delimeter);
     }, _getCurrentYear(), Q_YEAR_MAX);

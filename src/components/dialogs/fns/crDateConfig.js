@@ -1,6 +1,5 @@
 import {
-  isMonthDelimeterDash,
-  isQuarterDelimeterDash,
+  isDateDelimeterDash,
   isEstat
 } from '../../../constants/LoadType';
 
@@ -94,7 +93,7 @@ const _crYearMonthConfig = (
   mapDateDf=2
 ) => {
 	const currentDate = _getCurrentDate()
-  , _delimeter = isMonthDelimeterDash(loadId)
+  , _delimeter = isDateDelimeterDash(loadId)
       ? '-'
       : 'M'
   , dateOptions = _crArrByFn((arr, y) => {
@@ -135,7 +134,7 @@ const _crYearQuarterConfig = (
   mapDateDf=1,
   delimeter
 ) => {
-	const _delimeter = isQuarterDelimeterDash(loadId)
+	const _delimeter = isDateDelimeterDash(loadId)
      ? '-'+delimeter
      : delimeter
   , dateOptions = _crArrByFn((arr, y) => {

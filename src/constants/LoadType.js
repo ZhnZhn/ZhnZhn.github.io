@@ -59,15 +59,11 @@ export const LT_WATCH_LIST = 'WL_WATCH_LIST'
 
 export const isEstat = loadId => loadId === LT_EU_STAT
 
-export const isMonthDelimeterDash = (
+export const isDateDelimeterDash = (
   loadId
 ) => isEstat(loadId)
  || loadId === LT_EMB
  || loadId === LT_EIA
  || loadId === LT_ECB
  || loadId === LT_BIS
-export const isQuarterDelimeterDash = (
-  loadId
-) => isEstat(loadId)
-  || loadId === LT_BIS
-  || loadId === LT_OE
+ || loadId === LT_OE
