@@ -29,10 +29,17 @@ const _crTotalConfig = total => {
 };
 const _crItemRt = (value, rt) => value >= 10 ? rt : value >= 0.01 ? 2 : value >= 0.0001 ? 4 : 6;
 const _crValue = (value, totalRt) => (0, _AdapterFn.roundBy)(value, _crItemRt(value, totalRt));
+const _crValuePercentToken = (percent, value) => `${(0, _formatNumber.default)(value)} (${percent}%)`,
+  _crPercentToken = percent => `${percent}%`,
+  fCrName = crToken => (label, percent, value) => (0, _domSanitize.default)(`${label}<br/><span class="${_CL.CL_TREE_MAP_PERCENT_BLACK}">${crToken(percent, value)}</span>`),
+  _crValuePercentName = fCrName(_crValuePercentToken),
+  _crPercentName = fCrName(_crPercentToken),
+  _isPercentName = data => data.length > 8 && data[0].value > 1000;
 const _crDataImpl = (data, option, totalRt, onePercent, percRt) => {
   const {
-    title
-  } = option;
+      title
+    } = option,
+    _crName = _isPercentName(data) ? _crPercentName : _crValuePercentName;
   return data.map(item => {
     const value = item.value,
       label = item.label,
@@ -45,8 +52,8 @@ const _crDataImpl = (data, option, totalRt, onePercent, percRt) => {
       _perc: _percent,
       title: (0, _domSanitize.default)(title),
       _label: (0, _domSanitize.default)(label),
-      label: (0, _domSanitize.default)(label + " (" + _percent + "%)"),
-      name: (0, _domSanitize.default)(label + "<br/><span class=\"" + _CL.CL_TREE_MAP_PERCENT_BLACK + "\">" + (0, _formatNumber.default)(_value) + " (" + _percent + "%)</span>")
+      label: (0, _domSanitize.default)(`${label} (${_percent}%)`),
+      name: _crName(label, _percent, _value)
     };
   }, []);
 };
@@ -57,7 +64,7 @@ const _crData = function () {
   const _data = _crDataImpl(...args, 0);
   return _crTotalPerc(_data) === 100 ? _data : _crDataImpl(...args, 1);
 };
-const _crTotalToken = (title, value, perc) => title + " " + (0, _formatNumber.default)(value, true) + " (" + perc + "%)";
+const _crTotalToken = (title, value, perc) => `${title} ${(0, _formatNumber.default)(value, true)} (${perc}%)`;
 const _crSubTotalRt = (value, rt) => (0, _AdapterFn.isNumber)(rt) ? _crItemRt(value, rt) : 0;
 const _crSubValue = v => (0, _AdapterFn.isNumber)(v) ? v : 0;
 const _isZeroValueCase = (v, sum) => sum === 0 && v !== 0;
@@ -85,7 +92,7 @@ const _crCaption = (data, option, total, totalRt, onePercent) => {
     [ffPerc, nffPerc] = crRoundedSubTotal(ffTotal / onePercent, nffTotal / onePercent, 100),
     _titleF = _crTotalToken("Fossil Fuels", ffTotal, ffPerc),
     _titleNf = _crTotalToken('Not Fossil Fuels', nffTotal, nffPerc);
-  return [(0, _AdapterFn.joinBy)(": ", option.title, option.dfTmTitle), _arrTotal[0] > _arrTotal[1] ? _titleF + ", " + _titleNf : _titleNf + ", " + _titleF];
+  return [(0, _AdapterFn.joinBy)(": ", option.title, option.dfTmTitle), _arrTotal[0] > _arrTotal[1] ? `${_titleF}, ${_titleNf}` : `${_titleNf}, ${_titleF}`];
 };
 const fToTreeMapAdapter = function (getDataTotalTuple, crCaption) {
   if (crCaption === void 0) {

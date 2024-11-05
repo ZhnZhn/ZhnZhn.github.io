@@ -78,6 +78,22 @@ const _crValue = (
   totalRt
 ) => roundBy(value, _crItemRt(value, totalRt));
 
+const _crValuePercentToken = (
+  percent,
+  value
+) => `${formatNumber(value)} (${percent}%)`
+, _crPercentToken = percent => `${percent}%`
+, fCrName = (crToken) => (
+  label,
+  percent,
+  value
+) => domSanitize(`${label}<br/><span class="${CL_TREE_MAP_PERCENT_BLACK}">${crToken(percent, value)}</span>`)
+, _crValuePercentName = fCrName(_crValuePercentToken)
+, _crPercentName = fCrName(_crPercentToken)
+, _isPercentName = (
+  data
+) => data.length > 8 && data[0].value > 1000;
+
 const _crDataImpl = (
   data,
   option,
@@ -85,7 +101,10 @@ const _crDataImpl = (
   onePercent,
   percRt
 ) => {
-  const { title } = option;
+  const { title } = option
+  , _crName = _isPercentName(data)
+      ? _crPercentName
+      : _crValuePercentName;
   return data.map(item => {
     const value = item.value
     , label = item.label
@@ -99,7 +118,7 @@ const _crDataImpl = (
       title: domSanitize(title),
       _label: domSanitize(label),
       label: domSanitize(`${label} (${_percent}%)`),
-      name: domSanitize(`${label}<br/><span class="${CL_TREE_MAP_PERCENT_BLACK}">${formatNumber(_value)} (${_percent}%)</span>`)
+      name: _crName(label, _percent, _value)
     };
   }, []);
 }
