@@ -29,11 +29,16 @@ const _crItemIdMvt = (
   isCategory,
   items
 ) => `${_getRefArea(isCategory, items)}.Q......`;
+const _crItemIdCpi = (
+  isCategory,
+  items
+) => `${_getRefArea(isCategory, items)}.M.${getValue(items[1])}.CPI.IX._T.N._Z`;
 
 const _hmCrItemId = {
   mdf: _crItemIdMdf,
   nvr: _crItemIdNvr,
-  mvt: _crItemIdMvt
+  mvt: _crItemIdMvt,
+  cpi: _crItemIdCpi
 }
 , _getCrItemId = crGetRoute(_hmCrItemId, _crItemId);
 
