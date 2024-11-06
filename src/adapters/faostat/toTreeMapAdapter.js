@@ -1,16 +1,8 @@
-import {
-  fToTreeMapAdapter
-} from '../fToTreeMapAdapter';
+import { isNumber } from '../AdapterFn';
+import { addPercentAndColorToData } from '../TreeMapFn';
+import { fToTreeMapAdapter } from '../fToTreeMapAdapter';
 
-import {
-  isNumber
-} from '../AdapterFn';
-import {
-  addPercentAndColorToData
-} from '../TreeMapFn';
-import {
-  crCategoryTitle
-} from './fnAdapter';
+import { crCategoryTitle } from './fnAdapter';
 
 const _crTreeMapTupleDataTotal = (
   json,
@@ -39,7 +31,7 @@ const _crTreeMapTupleDataTotal = (
   option
 ) => [
   option.subtitle,
-  option.title
+  `${option.title} (${option._ps60}%, ${option._ps90}%)`    
 ];
 
 const toTreeMapAdapter = fToTreeMapAdapter(

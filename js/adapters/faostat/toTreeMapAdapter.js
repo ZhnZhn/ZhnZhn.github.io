@@ -2,9 +2,9 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _fToTreeMapAdapter = require("../fToTreeMapAdapter");
 var _AdapterFn = require("../AdapterFn");
 var _TreeMapFn = require("../TreeMapFn");
+var _fToTreeMapAdapter = require("../fToTreeMapAdapter");
 var _fnAdapter = require("./fnAdapter");
 const _crTreeMapTupleDataTotal = (json, option) => {
     let total = 0;
@@ -27,7 +27,7 @@ const _crTreeMapTupleDataTotal = (json, option) => {
     option.subtitle = (0, _fnAdapter.crCategoryTitle)(option.subtitle, json);
     return [data, total];
   },
-  _crCaption = (data, option) => [option.subtitle, option.title];
+  _crCaption = (data, option) => [option.subtitle, `${option.title} (${option._ps60}%, ${option._ps90}%)`];
 const toTreeMapAdapter = (0, _fToTreeMapAdapter.fToTreeMapAdapter)(_crTreeMapTupleDataTotal, _crCaption);
 var _default = exports.default = toTreeMapAdapter;
 //# sourceMappingURL=toTreeMapAdapter.js.map
