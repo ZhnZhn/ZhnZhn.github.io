@@ -68,17 +68,22 @@ const addColorsTo = _ref => {
   _addColor(data, leveIndex1, levelIndex2);
 };
 exports.addColorsTo = addColorsTo;
-const crPointName = (label, percent) => {
-  const _percent = (0, _AdapterFn.isNumber)(percent) ? `<span class="${_CL.CL_TREE_MAP_PERCENT}">${percent}%</span>` : '';
-  return `${label}<br/>${_percent}`;
-};
-exports.crPointName = crPointName;
+const _crValuePercentToken = (percent, value) => `${(0, _formatNumber.default)(value)} (${percent}%)`,
+  _crPercentToken = percent => percent >= 1 ? `${percent}%` : `.${('' + percent).split(".")[1]}%`,
+  _fCrName = crToken => (label, percent, value) => (0, _domSanitize.default)(`${label}<br/><span class="${_CL.CL_TREE_MAP_PERCENT_BLACK}">${crToken(percent, value)}</span>`),
+  _crValuePercentName = _fCrName(_crValuePercentToken),
+  _crPercentName = _fCrName(_crPercentToken),
+  _isPercentName = data => data.length > 8 && data[0].value > 1000;
+const getCrPointName = data => _isPercentName(data) ? _crPercentName : _crValuePercentName;
+exports.getCrPointName = getCrPointName;
+const _crPointName = percent => (0, _AdapterFn.isNumber)(percent) ? `${percent}%` : "";
+const crPointName = exports.crPointName = _fCrName(_crPointName);
 const addPercentAndColorToData = (data, total) => {
   if (total !== 0) {
     const _onePercent = total / 100;
     data.forEach(item => {
       item.percent = (0, _AdapterFn.roundBy)(item.value / _onePercent);
-      item.name = crPointName(item.label, item.percent > 1 ? item.percent : '');
+      item.name = crPointName(item.label, item.percent > 1 ? item.percent : "");
     });
     (0, _compareByFn.sortDescByPnValue)(data);
     addColorsTo({
@@ -88,12 +93,4 @@ const addPercentAndColorToData = (data, total) => {
   }
 };
 exports.addPercentAndColorToData = addPercentAndColorToData;
-const _crValuePercentToken = (percent, value) => `${(0, _formatNumber.default)(value)} (${percent}%)`,
-  _crPercentToken = percent => percent >= 1 ? `${percent}%` : `.${('' + percent).split(".")[1]}%`,
-  fCrName = crToken => (label, percent, value) => (0, _domSanitize.default)(`${label}<br/><span class="${_CL.CL_TREE_MAP_PERCENT_BLACK}">${crToken(percent, value)}</span>`),
-  _crValuePercentName = fCrName(_crValuePercentToken),
-  _crPercentName = fCrName(_crPercentToken),
-  _isPercentName = data => data.length > 8 && data[0].value > 1000;
-const getCrPointName = data => _isPercentName(data) ? _crPercentName : _crValuePercentName;
-exports.getCrPointName = getCrPointName;
 //# sourceMappingURL=TreeMapFn.js.map

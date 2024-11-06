@@ -17,7 +17,6 @@ import {
   crMonoColor
 } from '../charts/MonoColorFn';
 import {
-  CL_TREE_MAP_PERCENT,
   CL_TREE_MAP_PERCENT_BLACK
 } from './CL';
 
@@ -111,15 +110,38 @@ export const addColorsTo = ({
   _addColor(data, leveIndex1, levelIndex2)
 }
 
-export const crPointName = (
+const _crValuePercentToken = (
+  percent,
+  value
+) => `${formatNumber(value)} (${percent}%)`
+, _crPercentToken = percent => percent >= 1
+   ? `${percent}%`
+   : `.${(''+percent).split(".")[1]}%`
+
+, _fCrName = (crToken) => (
   label,
+  percent,
+  value
+) => domSanitize(`${label}<br/><span class="${CL_TREE_MAP_PERCENT_BLACK}">${crToken(percent, value)}</span>`)
+
+, _crValuePercentName = _fCrName(_crValuePercentToken)
+, _crPercentName = _fCrName(_crPercentToken)
+
+, _isPercentName = (
+  data
+) => data.length > 8 && data[0].value > 1000;
+export const getCrPointName = (
+  data
+) => _isPercentName(data)
+  ? _crPercentName
+  : _crValuePercentName
+
+const _crPointName = (
   percent
-) => {
-  const _percent = isNumber(percent)
-    ? `<span class="${CL_TREE_MAP_PERCENT}">${percent}%</span>`
-    : '';
-  return `${label}<br/>${_percent}`;
-}
+) => isNumber(percent)
+  ? `${percent}%`
+  : "";
+export const crPointName = _fCrName(_crPointName)
 
 export const addPercentAndColorToData = (
   data,
@@ -131,33 +153,10 @@ export const addPercentAndColorToData = (
       item.percent = roundBy(item.value/_onePercent)
       item.name = crPointName(
         item.label,
-        item.percent > 1 ? item.percent : ''
+        item.percent > 1 ? item.percent : ""
       )
     })
     sortDescByPnValue(data)
     addColorsTo({ data, total })
   }
 }
-
-const _crValuePercentToken = (
-  percent,
-  value
-) => `${formatNumber(value)} (${percent}%)`
-, _crPercentToken = percent => percent >= 1
-   ? `${percent}%`
-   : `.${(''+percent).split(".")[1]}%`
-, fCrName = (crToken) => (
-  label,
-  percent,
-  value
-) => domSanitize(`${label}<br/><span class="${CL_TREE_MAP_PERCENT_BLACK}">${crToken(percent, value)}</span>`)
-, _crValuePercentName = fCrName(_crValuePercentToken)
-, _crPercentName = fCrName(_crPercentToken)
-, _isPercentName = (
-  data
-) => data.length > 8 && data[0].value > 1000;
-export const getCrPointName = (
-  data
-) => _isPercentName(data)
-  ? _crPercentName
-  : _crValuePercentName
