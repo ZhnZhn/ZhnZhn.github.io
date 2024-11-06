@@ -14,10 +14,9 @@ import {
   roundBy,
   joinBy
 } from './AdapterFn';
-
 import {
-  CL_TREE_MAP_PERCENT_BLACK
-} from './CL';
+  getCrPointName
+} from './TreeMapFn'
 
 const COLOR_FOSSIL_FUEL = "#658fb9"
 , COLOR_NOT_FOSSIL_FUEL = "#6ea3d7";
@@ -78,23 +77,31 @@ const _crValue = (
   totalRt
 ) => roundBy(value, _crItemRt(value, totalRt));
 
-const _crValuePercentToken = (
-  percent,
-  value
-) => `${formatNumber(value)} (${percent}%)`
-, _crPercentToken = percent => percent >= 1
-   ? `${percent}%`
-   : `.${(''+percent).split(".")[1]}%`
-, fCrName = (crToken) => (
-  label,
-  percent,
-  value
-) => domSanitize(`${label}<br/><span class="${CL_TREE_MAP_PERCENT_BLACK}">${crToken(percent, value)}</span>`)
-, _crValuePercentName = fCrName(_crValuePercentToken)
-, _crPercentName = fCrName(_crPercentToken)
-, _isPercentName = (
-  data
-) => data.length > 8 && data[0].value > 1000;
+const _initPercentLevelFor = option => {
+  option._ps60 = 0
+  option._ps90 = 0
+};
+const _sumPercentLevelTo = (
+  option,
+  level,
+  percent
+) => {
+  if (level === 1) {
+    option._ps60 += percent
+  } else if (level === 2) {
+    if (!option._ps90) {
+      option._ps90 = option._ps60
+    }
+    option._ps90 += percent
+  }
+};
+const _roundByPercentLevel = (
+  option,
+  percRt
+) => {
+  option._ps60 = roundBy(option._ps60, percRt)
+  option._ps90 = roundBy(option._ps90, percRt)
+}
 
 const _crDataImpl = (
   data,
@@ -104,28 +111,36 @@ const _crDataImpl = (
   percRt
 ) => {
   const { title } = option
-  , _crName = _isPercentName(data)
-      ? _crPercentName
-      : _crValuePercentName;
-  return data.map(item => {
-    const value = item.value
-    , label = item.label
+  , _crPointName = getCrPointName(data)
+  , _data = [];
+
+  _initPercentLevelFor(option)
+  data.forEach(item => {
+    const {
+      _level,
+      value,
+      label
+    } = item
     , _value = _crValue(value, totalRt)
     , _percent = roundBy(value/onePercent, percRt);
-    return {
+
+    _sumPercentLevelTo(option, _level, _percent)
+    _data.push({
       color: item.color,
       value: _value,
       _value: value,
       _perc: _percent,
-      title: domSanitize(title),
       _label: domSanitize(label),
+      title: domSanitize(title),
       label: domSanitize(`${label} (${_percent}%)`),
-      name: _crName(label, _percent, _value),
-      dataLabels: item._level === 3 && _percent < 1
-        ? { enabled: false }
-        : void 0
-    };
-  }, []);
+      name: _level === 3 && _percent < 1
+        ? void 0
+        : _crPointName(label, _percent, _value)
+    })
+  })
+  _roundByPercentLevel(option, percRt);
+
+  return _data;
 }
 
 const _crData = (

@@ -8,7 +8,7 @@ var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
 var _domSanitize = _interopRequireDefault(require("../utils/domSanitize"));
 var _configBuilderFn = require("../charts/configBuilderFn");
 var _AdapterFn = require("./AdapterFn");
-var _CL = require("./CL");
+var _TreeMapFn = require("./TreeMapFn");
 const COLOR_FOSSIL_FUEL = "#658fb9",
   COLOR_NOT_FOSSIL_FUEL = "#6ea3d7";
 const _isFossilFuel = label => label === "Coal" || label === "Natural gas" || label === "Oil"
@@ -29,36 +29,53 @@ const _crTotalConfig = total => {
 };
 const _crItemRt = (value, rt) => value >= 10 ? rt : value >= 0.01 ? 2 : value >= 0.0001 ? 4 : 6;
 const _crValue = (value, totalRt) => (0, _AdapterFn.roundBy)(value, _crItemRt(value, totalRt));
-const _crValuePercentToken = (percent, value) => `${(0, _formatNumber.default)(value)} (${percent}%)`,
-  _crPercentToken = percent => percent >= 1 ? `${percent}%` : `.${('' + percent).split(".")[1]}%`,
-  fCrName = crToken => (label, percent, value) => (0, _domSanitize.default)(`${label}<br/><span class="${_CL.CL_TREE_MAP_PERCENT_BLACK}">${crToken(percent, value)}</span>`),
-  _crValuePercentName = fCrName(_crValuePercentToken),
-  _crPercentName = fCrName(_crPercentToken),
-  _isPercentName = data => data.length > 8 && data[0].value > 1000;
+const _initPercentLevelFor = option => {
+  option._ps60 = 0;
+  option._ps90 = 0;
+};
+const _sumPercentLevelTo = (option, level, percent) => {
+  if (level === 1) {
+    option._ps60 += percent;
+  } else if (level === 2) {
+    if (!option._ps90) {
+      option._ps90 = option._ps60;
+    }
+    option._ps90 += percent;
+  }
+};
+const _roundByPercentLevel = (option, percRt) => {
+  option._ps60 = (0, _AdapterFn.roundBy)(option._ps60, percRt);
+  option._ps90 = (0, _AdapterFn.roundBy)(option._ps90, percRt);
+};
 const _crDataImpl = (data, option, totalRt, onePercent, percRt) => {
   const {
       title
     } = option,
-    _crName = _isPercentName(data) ? _crPercentName : _crValuePercentName;
-  return data.map(item => {
-    const value = item.value,
-      label = item.label,
+    _crPointName = (0, _TreeMapFn.getCrPointName)(data),
+    _data = [];
+  _initPercentLevelFor(option);
+  data.forEach(item => {
+    const {
+        _level,
+        value,
+        label
+      } = item,
       _value = _crValue(value, totalRt),
       _percent = (0, _AdapterFn.roundBy)(value / onePercent, percRt);
-    return {
+    _sumPercentLevelTo(option, _level, _percent);
+    _data.push({
       color: item.color,
       value: _value,
       _value: value,
       _perc: _percent,
-      title: (0, _domSanitize.default)(title),
       _label: (0, _domSanitize.default)(label),
+      title: (0, _domSanitize.default)(title),
       label: (0, _domSanitize.default)(`${label} (${_percent}%)`),
-      name: _crName(label, _percent, _value),
-      dataLabels: item._level === 3 && _percent < 1 ? {
-        enabled: false
-      } : void 0
-    };
-  }, []);
+      name: _level === 3 && _percent < 1 ? void 0 : _crPointName(label, _percent, _value)
+    });
+  });
+  _roundByPercentLevel(option, percRt);
+  return _data;
 };
 const _crData = function () {
   for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {

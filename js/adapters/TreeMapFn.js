@@ -1,7 +1,10 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.crPointName = exports.addPercentAndColorToData = exports.addColorsTo = void 0;
+exports.getCrPointName = exports.crPointName = exports.addPercentAndColorToData = exports.addColorsTo = void 0;
+var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
+var _domSanitize = _interopRequireDefault(require("../utils/domSanitize"));
 var _AdapterFn = require("./AdapterFn");
 var _compareByFn = require("./compareByFn");
 var _MonoColorFn = require("../charts/MonoColorFn");
@@ -41,9 +44,11 @@ const _addColor = (data, levelIndex1, levelIndex2) => {
     if (pointIndex < levelIndex1) {
       deltaColor = pointIndex * (_MonoColorFn.COLOR_PERIOD / levelIndex1);
       point.color = (0, _MonoColorFn.crMonoColor)(_MonoColorFn.COLOR_BASE1, deltaColor);
+      point._level = 1;
     } else if (pointIndex < levelIndex2) {
       deltaColor = (pointIndex - levelIndex1) * (_MonoColorFn.COLOR_PERIOD / _numberOfPoints2);
       point.color = (0, _MonoColorFn.crMonoColor)(_MonoColorFn.COLOR_BASE2, deltaColor);
+      point._level = 2;
     } else {
       deltaColor = (pointIndex - levelIndex2) * (_MonoColorFn.COLOR_PERIOD / _numberOfPoints3);
       point.color = (0, _MonoColorFn.crMonoColor)(_MonoColorFn.COLOR_BASE3, deltaColor);
@@ -83,4 +88,12 @@ const addPercentAndColorToData = (data, total) => {
   }
 };
 exports.addPercentAndColorToData = addPercentAndColorToData;
+const _crValuePercentToken = (percent, value) => `${(0, _formatNumber.default)(value)} (${percent}%)`,
+  _crPercentToken = percent => percent >= 1 ? `${percent}%` : `.${('' + percent).split(".")[1]}%`,
+  fCrName = crToken => (label, percent, value) => (0, _domSanitize.default)(`${label}<br/><span class="${_CL.CL_TREE_MAP_PERCENT_BLACK}">${crToken(percent, value)}</span>`),
+  _crValuePercentName = fCrName(_crValuePercentToken),
+  _crPercentName = fCrName(_crPercentToken),
+  _isPercentName = data => data.length > 8 && data[0].value > 1000;
+const getCrPointName = data => _isPercentName(data) ? _crPercentName : _crValuePercentName;
+exports.getCrPointName = getCrPointName;
 //# sourceMappingURL=TreeMapFn.js.map
