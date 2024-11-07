@@ -10,11 +10,13 @@ const _crItemIdMdf = (isCategory, items) => `${_getRefArea(isCategory, items)}.Q
 const _crItemIdNvr = (isCategory, items) => `${_getRefArea(isCategory, items)}.Q.....${(0, _AdapterFn.getValue)(items[1])}.`;
 const _crItemIdMvt = (isCategory, items) => `${_getRefArea(isCategory, items)}.Q......`;
 const _crItemIdCpi = (isCategory, items) => `${_getRefArea(isCategory, items)}.M.${(0, _AdapterFn.getValue)(items[1])}.CPI.IX._T.N._Z`;
+const _crItemIdEp = (isCategory, items) => `${_getRefArea(isCategory, items)}..${(0, _AdapterFn.getValue)(items[1])}._T`;
 const _hmCrItemId = {
     mdf: _crItemIdMdf,
     nvr: _crItemIdNvr,
     mvt: _crItemIdMvt,
-    cpi: _crItemIdCpi
+    cpi: _crItemIdCpi,
+    ep: _crItemIdEp
   },
   _getCrItemId = (0, _AdapterFn.crGetRoute)(_hmCrItemId, _crItemId);
 const crItemId = option => _getCrItemId(option.dfFn)((0, _CategoryFn.isCategory)(option), option.items);
