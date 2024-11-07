@@ -1,4 +1,4 @@
-import { isNumber } from '../AdapterFn';
+import { isPositiveNumber } from '../AdapterFn';
 import { addPercentAndColorToData } from '../TreeMapFn';
 import { fToTreeMapAdapter } from '../fToTreeMapAdapter';
 
@@ -13,7 +13,7 @@ const _crTreeMapTupleDataTotal = (
   , { time } = option;
   json.data.forEach(item => {
     const _value = parseFloat(item.Value);
-    if (isNumber(_value) && _value !== 0 && item.Area) {
+    if (isPositiveNumber(_value) && item.Area) {
       total += _value
       data.push({
         value: _value,
@@ -31,7 +31,7 @@ const _crTreeMapTupleDataTotal = (
   option
 ) => [
   option.subtitle,
-  `${option.title} (${option._ps60}%, ${option._ps90}%)`    
+  `${option.title} (${option._ps60}%, ${option._ps90}%)`
 ];
 
 const toTreeMapAdapter = fToTreeMapAdapter(

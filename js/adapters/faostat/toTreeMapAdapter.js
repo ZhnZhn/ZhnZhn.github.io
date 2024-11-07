@@ -14,7 +14,7 @@ const _crTreeMapTupleDataTotal = (json, option) => {
       } = option;
     json.data.forEach(item => {
       const _value = parseFloat(item.Value);
-      if ((0, _AdapterFn.isNumber)(_value) && _value !== 0 && item.Area) {
+      if ((0, _AdapterFn.isPositiveNumber)(_value) && item.Area) {
         total += _value;
         data.push({
           value: _value,

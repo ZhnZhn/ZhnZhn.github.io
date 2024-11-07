@@ -2,9 +2,10 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdToUTC = exports.valueMoving = exports.sortDescByPnValue = exports.roundBy = exports.isTotalByAll = exports.isPositiveNumber = exports.isCategorySet = exports.isAggrCalculatedCase = exports.isAggrByTotalWorld = exports.isAggr = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = void 0;
+exports.ymdToUTC = exports.valueMoving = exports.sortDescByPnValue = exports.roundBy = exports.isTotalByAll = exports.isCategorySet = exports.isAggrCalculatedCase = exports.isAggrByTotalWorld = exports.isAggr = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isNumber = _AdapterFn.isNumber;
+exports.isPositiveNumber = _AdapterFn.isPositiveNumber;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.valueMoving = _AdapterFn.valueMoving;
 exports.roundBy = _AdapterFn.roundBy;
@@ -18,8 +19,6 @@ var _conf = require("./conf");
 const _sanitizeNumber = v => (0, _AdapterFn.isNumber)(v) ? '' + v : (0, _domSanitize.default)(v);
 const crEmptyHmObject = () => Object.create(null);
 exports.crEmptyHmObject = crEmptyHmObject;
-const isPositiveNumber = n => (0, _AdapterFn.isNumber)(n) && n > 0;
-exports.isPositiveNumber = isPositiveNumber;
 const isAggr = v => v === 'AG2';
 exports.isAggr = isAggr;
 const isTotalByAll = option => option.two === 'TOTAL';
@@ -91,7 +90,7 @@ const crCategoryData = (json, option, crDataPoint) => {
       partnerCode = _getItemPartnerCode(item);
     if (option.one !== _conf.WORLD_CODE && partnerCode === _conf.WORLD_CODE && _isSameTradePartnerCode(item)) {
       totalOfWorld = value;
-    } else if (isPositiveNumber(value) && _isSameTradePartnerCode(item)) {
+    } else if ((0, _AdapterFn.isPositiveNumber)(value) && _isSameTradePartnerCode(item)) {
       totalOfItems += value;
       data.push(_crDataPoint(value, _hmTradePartners, item));
     }

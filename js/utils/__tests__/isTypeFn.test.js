@@ -21,6 +21,20 @@ describe('isNumber', () => {
     expect(fn(NaN)).toBe(false);
   });
 });
+describe('isPositiveNumber', () => {
+  const fn = _isTypeFn.isPositiveNumber;
+  test('should return true for positive number otherwise false', () => {
+    expect(fn(0.000001)).toBe(true);
+    expect(fn(-0.000001)).toBe(false);
+    expect(fn(0)).toBe(false);
+    expect(fn(-0)).toBe(false);
+    expect(fn(+0)).toBe(false);
+    expect(fn(NaN)).toBe(false);
+    expect(fn()).toBe(false);
+    expect(fn(void 0)).toBe(false);
+    expect(fn("")).toBe(false);
+  });
+});
 describe('isNaN', () => {
   const fn = _isTypeFn.isNaN;
   test('should return true for NaN value otherwise false', () => {

@@ -1,6 +1,7 @@
 import {
   isTypeNumber,
   isNumber,
+  isPositiveNumber,
   isNaN,
   isInt,
   isBool,
@@ -35,6 +36,24 @@ describe('isNumber',()=>{
   })
 })
 
+describe('isPositiveNumber',()=>{
+  const fn = isPositiveNumber;
+  test('should return true for positive number otherwise false',()=>{
+    expect(fn(0.000001)).toBe(true)
+    expect(fn(-0.000001)).toBe(false)
+
+    expect(fn(0)).toBe(false)
+    expect(fn(-0)).toBe(false)
+    expect(fn(+0)).toBe(false)
+
+    expect(fn(NaN)).toBe(false)
+    expect(fn()).toBe(false)
+    expect(fn(void 0)).toBe(false)
+    expect(fn("")).toBe(false)
+  })
+})
+
+
 describe('isNaN',()=>{
   const fn = isNaN;
   test('should return true for NaN value otherwise false',()=>{
@@ -65,7 +84,7 @@ describe('isBool',()=>{
     expect(fn(false)).toBe(true)
 
     expect(fn()).toBe(false)
-    expect(fn(null)).toBe(false)    
+    expect(fn(null)).toBe(false)
     expect(fn(0)).toBe(false)
     expect(fn(1)).toBe(false)
     expect(fn('')).toBe(false)

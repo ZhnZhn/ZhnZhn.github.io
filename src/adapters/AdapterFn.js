@@ -61,6 +61,7 @@ export {
   isUndef,
   isTypeNumber,
   isNumber,
+  isPositiveNumber,
   isStr,
   isNotEmptyArr
 } from '../utils/isTypeFn';

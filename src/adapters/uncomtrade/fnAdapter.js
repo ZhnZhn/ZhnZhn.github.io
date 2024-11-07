@@ -1,5 +1,6 @@
 export {
   isNumber,
+  isPositiveNumber,
   ymdToUTC,
   valueMoving,
   roundBy
@@ -8,6 +9,7 @@ export {
 import {
   isArr,
   isNumber,
+  isPositiveNumber,
   joinBy
 } from '../AdapterFn';
 import {
@@ -27,7 +29,6 @@ const _sanitizeNumber = (v) => isNumber(v)
   : domSanitize(v);
 
 export const crEmptyHmObject = () => Object.create(null)
-export const isPositiveNumber = (n) => isNumber(n) && n > 0
 
 export const isAggr = (v) => v === 'AG2'
 export const isTotalByAll = (option) => option.two === 'TOTAL';
