@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 "use strict";
-import domSanitize from '../domSanitize';
+import { domSanitize } from '../domSanitize';
 
 describe("domSanitize", () => {
   const fn = domSanitize;

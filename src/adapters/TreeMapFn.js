@@ -1,8 +1,8 @@
 import formatNumber from '../utils/formatNumber';
-import domSanitize from '../utils/domSanitize';
 
 import {
   isNumber,
+  domSanitize,
   roundBy
 } from './AdapterFn';
 import {

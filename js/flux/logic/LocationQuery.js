@@ -1,14 +1,13 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
+var _domSanitize = require("../../utils/domSanitize");
 var _dateFn = require("../../utils/dateFn");
 const _toOptions = params => {
   const _options = Object.create(null);
   params.forEach((value, key) => {
-    _options[key] = (0, _domSanitize.default)(value);
+    _options[key] = (0, _domSanitize.domSanitize)(value);
   });
   return _options;
 };
@@ -37,6 +36,5 @@ const crOptions = params => {
 const LocationQuery = {
   crOptions
 };
-var _default = LocationQuery;
-exports.default = _default;
+var _default = exports.default = LocationQuery;
 //# sourceMappingURL=LocationQuery.js.map

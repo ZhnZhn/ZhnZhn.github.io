@@ -1,4 +1,4 @@
-import domSanitize from '../../utils/domSanitize'
+import { domSanitize } from '../../utils/domSanitize'
 import { getToDate } from '../../utils/dateFn';
 
 const _toOptions = params => {

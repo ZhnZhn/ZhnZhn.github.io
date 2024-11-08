@@ -4,7 +4,7 @@ import {
   isObj,
   isStr
 } from '../utils/isTypeFn';
-import domSanitize from '../utils/domSanitize';
+import { domSanitize } from '../utils/domSanitize';
 import merge from '../utils/merge';
 
 import {
@@ -28,7 +28,7 @@ const FONT_STYLE = {
 , CAPTION_CONFIG = {
   text: '',
   floating: true,
-  align: 'left',  
+  align: 'left',
   x: 0,
   style: {
     ...FONT_STYLE,

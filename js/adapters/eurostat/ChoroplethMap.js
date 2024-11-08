@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _client = require("react-dom/client");
-var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
+var _AdapterFn = require("../AdapterFn");
 var _JsonStatTwoDimensionFn = require("../JsonStatTwoDimensionFn");
 var _kMeans = _interopRequireDefault(require("../../math/k-means"));
 var _mathFn = require("../../math/mathFn");
@@ -156,8 +156,8 @@ const _crRowEl = (color, from, to, cluster, wg) => {
   el.addEventListener('click', function (event) {
     wg.updateCluster(cluster, color, from, to);
   });
-  el.innerHTML = `<span>${(0, _domSanitize.default)(from)}&ndash;${(0, _domSanitize.default)(to)}<span>
-                  <span style="float: right; color: black; padding-left: 16px">${(0, _domSanitize.default)(_n)}</span>`;
+  el.innerHTML = `<span>${(0, _AdapterFn.domSanitize)(from)}&ndash;${(0, _AdapterFn.domSanitize)(to)}<span>
+                  <span style="float: right; color: black; padding-left: 16px">${(0, _AdapterFn.domSanitize)(_n)}</span>`;
   return el;
 };
 const _crFooterEl = () => {

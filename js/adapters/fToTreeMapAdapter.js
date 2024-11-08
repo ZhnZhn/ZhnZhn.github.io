@@ -5,7 +5,6 @@ exports.__esModule = true;
 exports.fToTreeMapAdapter = exports.crRoundedSubTotal = exports.crItemColor = void 0;
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
-var _domSanitize = _interopRequireDefault(require("../utils/domSanitize"));
 var _configBuilderFn = require("../charts/configBuilderFn");
 var _AdapterFn = require("./AdapterFn");
 var _TreeMapFn = require("./TreeMapFn");
@@ -68,9 +67,9 @@ const _crDataImpl = (data, option, totalRt, onePercent, percRt) => {
       value: _value,
       _value: value,
       _perc: _percent,
-      _label: (0, _domSanitize.default)(label),
-      title: (0, _domSanitize.default)(title),
-      label: (0, _domSanitize.default)(`${label} (${_percent}%)`),
+      _label: (0, _AdapterFn.domSanitize)(label),
+      title: (0, _AdapterFn.domSanitize)(title),
+      label: (0, _AdapterFn.domSanitize)(`${label} (${_percent}%)`),
       name: _level === 3 && _percent < 1 ? void 0 : _crPointName(label, _percent, _value)
     });
   });

@@ -10,6 +10,7 @@ import {
   isArr,
   isNumber,
   isPositiveNumber,
+  domSanitize,
   joinBy
 } from '../AdapterFn';
 import {
@@ -19,7 +20,6 @@ export {
   sortDescByPnValue
 } from '../compareByFn';
 
-import domSanitize from '../../utils/domSanitize';
 import formatNumber from '../../utils/formatNumber';
 import { toDescr } from './fnDescr';
 import { WORLD_CODE } from './conf';

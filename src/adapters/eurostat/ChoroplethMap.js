@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
-import domSanitize from '../../utils/domSanitize';
 
+import { domSanitize } from '../AdapterFn';
 import {
   crGeoSlice,
   crGeoSeria

@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.fAssignToSeries = exports.fAssignTo = exports.fAssign = exports.fAddColumnSeria = exports.crLegendVolume = exports.crIndicatorTitle = exports.crIndicatorLineSeria = exports.crIndicatorConfig = void 0;
-var _domSanitize = _interopRequireDefault(require("../utils/domSanitize"));
+var _domSanitize = require("../utils/domSanitize");
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _Chart = require("./Chart");
 var _Tooltip = require("./Tooltip");
@@ -16,7 +16,7 @@ const _crColumnSeria = option => _assign({
   tooltip: (0, _Chart.fTooltip)(_Tooltip.tooltipValueDmy)
 }, option);
 const crIndicatorTitle = text => ({
-  text: (0, _domSanitize.default)(text),
+  text: (0, _domSanitize.domSanitize)(text),
   style: {
     color: _Color.COLOR_METRIC_TITLE,
     fontSize: '16px',

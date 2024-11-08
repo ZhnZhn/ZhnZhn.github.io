@@ -1,4 +1,3 @@
-import domSanitize from '../utils/domSanitize';
 import { isInArrStr } from '../utils/arrFn';
 
 import {
@@ -14,7 +13,8 @@ import {
 
 import {
   isArr,
-  isObj
+  isObj,
+  domSanitize
 } from './AdapterFn';
 
 const _getSeriaType = (

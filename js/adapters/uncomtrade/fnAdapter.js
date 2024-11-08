@@ -12,11 +12,10 @@ exports.roundBy = _AdapterFn.roundBy;
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 exports.sortDescByPnValue = _compareByFn.sortDescByPnValue;
-var _domSanitize = _interopRequireDefault(require("../../utils/domSanitize"));
 var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 var _fnDescr = require("./fnDescr");
 var _conf = require("./conf");
-const _sanitizeNumber = v => (0, _AdapterFn.isNumber)(v) ? '' + v : (0, _domSanitize.default)(v);
+const _sanitizeNumber = v => (0, _AdapterFn.isNumber)(v) ? '' + v : (0, _AdapterFn.domSanitize)(v);
 const crEmptyHmObject = () => Object.create(null);
 exports.crEmptyHmObject = crEmptyHmObject;
 const isAggr = v => v === 'AG2';
@@ -38,10 +37,10 @@ const getItemCmdCode = item => {
   const {
     cmdCode
   } = item || {};
-  return (cmdCode || '').length < 4 ? cmdCode : (0, _domSanitize.default)(cmdCode);
+  return (cmdCode || '').length < 4 ? cmdCode : (0, _AdapterFn.domSanitize)(cmdCode);
 };
 exports.getItemCmdCode = getItemCmdCode;
-const getItemCmdDescE = item => (0, _domSanitize.default)((item || {}).cmdDescE);
+const getItemCmdDescE = item => (0, _AdapterFn.domSanitize)((item || {}).cmdDescE);
 exports.getItemCmdDescE = getItemCmdDescE;
 const _fGetItemNumberPropValueByName = propName => item => _sanitizeNumber((item || {})[propName]);
 const _getItemPartnerCode = _fGetItemNumberPropValueByName('partnerCode');
@@ -58,7 +57,7 @@ const getHmTradePartners = tradePartners => {
   }
   _hmTradePartner = tradePartners.reduce((hm, item) => {
     if (item && item.v && item.v.length < 4 && item.c) {
-      hm[item.v] = (0, _domSanitize.default)(item.c);
+      hm[item.v] = (0, _AdapterFn.domSanitize)(item.c);
     }
     return hm;
   }, crEmptyHmObject());

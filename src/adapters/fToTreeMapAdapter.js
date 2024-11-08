@@ -1,6 +1,5 @@
 import pipe from '../utils/pipe';
 import formatNumber from '../utils/formatNumber';
-import domSanitize from '../utils/domSanitize';
 
 import {
   crTreeMapConfig,
@@ -11,6 +10,7 @@ import {
 
 import {
   isNumber,
+  domSanitize,
   roundBy,
   joinBy
 } from './AdapterFn';

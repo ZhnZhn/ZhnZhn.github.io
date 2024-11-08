@@ -3,12 +3,9 @@
  */
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _domSanitize = _interopRequireDefault(require("../domSanitize"));
-
+var _domSanitize = require("../domSanitize");
 describe("domSanitize", () => {
-  const fn = _domSanitize.default;
+  const fn = _domSanitize.domSanitize;
   test('should return empty string for void 0 && null inputs', () => {
     expect(fn()).toBe('');
     expect(fn(null)).toBe('');
