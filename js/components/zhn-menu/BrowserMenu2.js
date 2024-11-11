@@ -34,7 +34,7 @@ const _crToolbarButton = (caption, title, onClick) => ({
   title,
   onClick
 });
-const _useToolbarButtons = (toggleSearch, onClickInfo, descrUrl
+const useToolbarButtons = (toggleSearch, onClickInfo, descrUrl
 /*eslint-disable react-hooks/exhaustive-deps */) => (0, _uiApi.useMemo)(() => [_crToolbarButton('S', 'Click to toggle input search', toggleSearch), _crToolbarButton('A', 'About Datasources', () => {
   onClickInfo({
     descrUrl
@@ -58,7 +58,7 @@ const BrowserMenu2 = props => {
     } = props,
     [isShow, hideBrowser, hKeyDown] = (0, _useBrowserShow.default)(props),
     [isShowSearch, toggleSearch] = (0, _useToggle.default)(),
-    _toolbarButtons = _useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
+    _toolbarButtons = useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
     [isLoading, menu] = (0, _useLoadMenu.default)(isShow, onLoadMenu, useMsBrowserLoad, browserType),
     _scrollClass = isShowSearch ? CL_BROWSER_WITH_SEARCH : CL_BROWSER;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Browser.default, {

@@ -39,7 +39,7 @@ const _crToolbarButton = (
   onClick
 });
 
-const _useToolbarButtons = (
+const useToolbarButtons = (
   toggleSearch,
   onClickInfo,
   descrUrl
@@ -79,7 +79,7 @@ const BrowserMenu2 = (props) => {
     isShowSearch,
     toggleSearch
   ] = useToggle()
-  , _toolbarButtons = _useToolbarButtons(
+  , _toolbarButtons = useToolbarButtons(
     toggleSearch,
     onClickInfo,
     descrUrl
