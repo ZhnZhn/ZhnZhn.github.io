@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _has = require("../has");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useChartMethods = _interopRequireDefault(require("./useChartMethods"));
@@ -16,7 +17,7 @@ var _ModalMenuMini = _interopRequireDefault(require("./ModalMenuMini"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const CL_WITH_SCROLL_X = "with-scroll-x",
+const CL_WITH_SCROLL_X = (0, _styleFn.crWithScrollCn)("with-scroll-x"),
   CL_BT_R = `${CL_WITH_SCROLL_X}__bt-r`,
   MODAL_POPUP_STYLE_TOP = (0, _has.isWideWidth)() ? 75 : 65,
   _crModalPopupStyle = left => ({

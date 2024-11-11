@@ -1,6 +1,9 @@
-import { crCn } from '../styleFn';
+import {
+  crCn,
+  crWithScrollCn
+} from '../styleFn';
 
-const CL_SCROLL = 'with-scroll scroll';
+const CL_SCROLL = crWithScrollCn();
 
 const ScrollPane = ({
   refEl,

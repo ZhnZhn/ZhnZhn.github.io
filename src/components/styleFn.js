@@ -35,6 +35,7 @@ export const CL_TEXT_ELLIPSIS= "text-ellipsis"
 export const CL_WIDTH_100_PERCENT = "w-100"
 
 export const crBold16Cn = _fCrCn("bold-16")
+export const crWithScrollCn = _fCrCn("with-scroll")
 
 export const crCnNotSelected = _fCrCn(CL_NOT_SELECTED)
 const _fCrCnNotSelected = (

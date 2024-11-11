@@ -10,7 +10,7 @@ var _Button = _interopRequireDefault(require("./Button"));
 var _ItemStack = _interopRequireDefault(require("./ItemStack"));
 var _LegendItem = _interopRequireDefault(require("./LegendItem"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_WITH_SCROLL = "with-scroll",
+const CL_WITH_SCROLL = (0, _styleFn.crWithScrollCn)(),
   CL_BT_ML = "bt-ml",
   MORE_MAX = 12,
   S_MORE = {
@@ -26,7 +26,7 @@ const CL_WITH_SCROLL = "with-scroll",
   S_DIV = {
     transform: 'scaleX(-1)'
   };
-const _crBtCaption = (isMore, len) => isMore ? "Less: " + MORE_MAX : "More: " + (len - MORE_MAX);
+const _crBtCaption = (isMore, len) => isMore ? `Less: ${MORE_MAX}` : `More: ${len - MORE_MAX}`;
 const BtMoreOrLess = _ref => {
   let {
     isMore,
@@ -69,6 +69,5 @@ const Legend = (0, _uiApi.memo)(_ref2 => {
     })
   });
 });
-var _default = Legend;
-exports.default = _default;
+var _default = exports.default = Legend;
 //# sourceMappingURL=Legend.js.map

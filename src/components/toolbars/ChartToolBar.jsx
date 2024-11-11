@@ -8,6 +8,9 @@ import {
 } from '../uiApi';
 
 import {
+  crWithScrollCn
+} from '../styleFn';
+import {
   isWideWidth
 } from '../has';
 
@@ -21,7 +24,7 @@ import ModalMenuAppearance from './ModalMenuAppearance'
 import ModalMenuFn from './ModalMenuFn'
 import ModalMenuMini from './ModalMenuMini'
 
-const CL_WITH_SCROLL_X = "with-scroll-x"
+const CL_WITH_SCROLL_X = crWithScrollCn("with-scroll-x")
 , CL_BT_R = `${CL_WITH_SCROLL_X}__bt-r`
 , MODAL_POPUP_STYLE_TOP = isWideWidth()
    ? 75
@@ -246,7 +249,7 @@ const ChartToolbar = ({
       {_modalMenuArr}
       <div
          ref={_refToolbar}
-         className={CL_WITH_SCROLL_X}        
+         className={CL_WITH_SCROLL_X}
       >
          {_btTabIndicator}
          {_btAppearance}

@@ -4,7 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_SCROLL = 'with-scroll scroll';
+const CL_SCROLL = (0, _styleFn.crWithScrollCn)();
 const ScrollPane = _ref => {
   let {
     refEl,

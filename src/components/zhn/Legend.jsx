@@ -3,7 +3,10 @@ import {
   useCallback
 } from '../uiApi';
 
-import { crStyle2 } from '../styleFn';
+import {
+  crStyle2,
+  crWithScrollCn
+} from '../styleFn';
 
 import useToggle from '../hooks/useToggle';
 
@@ -11,7 +14,7 @@ import Button from './Button';
 import ItemStack from './ItemStack';
 import LegendItem from './LegendItem';
 
-const CL_WITH_SCROLL = "with-scroll"
+const CL_WITH_SCROLL = crWithScrollCn()
 , CL_BT_ML = "bt-ml"
 , MORE_MAX = 12
 , S_MORE = {
