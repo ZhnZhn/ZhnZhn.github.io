@@ -93,13 +93,18 @@ const _crItemsWithFilters = (arr, filters) => arr.map(item => {
   if ((0, _uiApi.isStr)(not)) {
     const _filters = filters[not];
     if ((0, _uiApi.isArr)(_filters)) {
-      item.not = _filters;
+      if ((0, _uiApi.isArr)(item.nots)) {
+        item.not = _filters.concat(item.nots);
+        delete item.nots;
+      } else {
+        item.not = _filters;
+      }
     } else {
       delete item.not;
     }
   }
   return item;
-}, []);
+});
 const DF_OPTIONS_PROP_NAME = "items";
 const _crItems = (json, optionsPropName) => {
   const _arr = json[optionsPropName || DF_OPTIONS_PROP_NAME],

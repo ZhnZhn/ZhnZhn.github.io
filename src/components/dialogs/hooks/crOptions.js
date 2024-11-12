@@ -79,13 +79,18 @@ const _crItemsWithFilters = (
   if (isStr(not)) {
     const _filters = filters[not];
     if (isArr(_filters)) {
-      item.not = _filters
+      if (isArr(item.nots)) {
+        item.not = _filters.concat(item.nots)
+        delete item.nots
+      } else {
+        item.not = _filters
+      }
     } else {
       delete item.not
     }
   }
   return item;
-}, []);
+});
 
 const DF_OPTIONS_PROP_NAME = "items";
 const _crItems = (

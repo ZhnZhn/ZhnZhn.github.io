@@ -87,6 +87,11 @@ const CAPTION_OPTIONS = {
       c: "C5",
       v: "V5",
       not: ["A", "B"]
+    }, {
+      c: "C6",
+      v: "V6",
+      not: "a",
+      nots: ["C"]
     }]
   },
   _getItems = tuple => tuple[0],
@@ -187,6 +192,10 @@ describe('crOptions', () => {
       c: "C5",
       v: "V5",
       not: ["A", "B"]
+    }, {
+      c: "C6",
+      v: "V6",
+      not: ["A", "C"]
     }]);
   });
 });
