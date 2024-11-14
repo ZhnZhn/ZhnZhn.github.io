@@ -11,6 +11,7 @@ import { sortDescCategory } from '../compareByFn';
 import {
   getJsonData,
   getDataSeries,
+  getRefAreaIndex,
   getDataDimensions
 } from './fnAdapter';
 
@@ -20,13 +21,15 @@ const crData = (
 ) => {
   const data = getJsonData(json)
   , series = getDataSeries(data)
+  , _refAreaIndex = getRefAreaIndex(option)
   , dimension = getByPropsFrom(
-     getDataDimensions(data), "series", 0, "values"
+     getDataDimensions(data), "series", _refAreaIndex, "values"
   ) || []
-  , _crValue = fCrValue(option);
-  return sortDescCategory(getObjectKeys(series)
+  , _crValue = fCrValue(option)
+  , _categories = []
+  , _data = getObjectKeys(series)
    .reduce((data, itemKey) => {
-      const _categoryIndex = parseFloat(itemKey.split(":")[0])
+      const _categoryIndex = parseFloat(itemKey.split(":")[_refAreaIndex])
       , categoryValue = getByPropsFrom(series[itemKey], "observations", "0", 0)
       , categoryName = isNumber(_categoryIndex)
           ? (dimension[_categoryIndex] || {}).name
@@ -36,9 +39,14 @@ const crData = (
           _crValue(categoryValue),
           categoryName
         ))
+        _categories.push({
+          name: categoryName,
+          id: (dimension[_categoryIndex] || {}).id
+        })
       }
       return data;
-   }, []));
+   }, []);
+  return sortDescCategory(_data);
 }
 , toCategoryAdapter = crAdapterCategory(crData);
 
