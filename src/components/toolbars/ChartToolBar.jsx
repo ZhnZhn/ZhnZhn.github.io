@@ -24,7 +24,8 @@ import ModalMenuAppearance from './ModalMenuAppearance'
 import ModalMenuFn from './ModalMenuFn'
 import ModalMenuMini from './ModalMenuMini'
 
-const CL_WITH_SCROLL_X = crWithScrollCn("with-scroll-x")
+const CL_WITH_SCROLL_X = "with-scroll-x"
+, CL_SCROLL_X = crWithScrollCn(CL_WITH_SCROLL_X)
 , CL_BT_R = `${CL_WITH_SCROLL_X}__bt-r`
 , MODAL_POPUP_STYLE_TOP = isWideWidth()
    ? 75
@@ -145,7 +146,7 @@ const ChartToolbar = ({
     return (
       <div
          ref={_refToolbar}
-         className={CL_WITH_SCROLL_X}
+         className={CL_SCROLL_X}
       >
         {_btInfo}
       </div>
@@ -177,7 +178,6 @@ const ChartToolbar = ({
       _btAppearance = (<ButtonTab
         style={S_BT_APPEARANCE}
         caption="Appearance"
-        isShow={isShowAppearance}
         isMenu={true}
         onClick={toggleAppearance}
       />)
@@ -196,7 +196,6 @@ const ChartToolbar = ({
     _btTabIndicator = (<ButtonTab
        style= {S_BT_IND}
        caption={_tabIndCaption}
-       isShow={isShowInd}
        isMenu={true}
        onClick={toggleInd}
     />)
@@ -214,7 +213,6 @@ const ChartToolbar = ({
     _btTabMini = (<ButtonTab
        style= {S_BT_MINI}
        caption="Mini"
-       isShow={isShowMini}
        isMenu={true}
        onClick={toggleMini}
     />)
@@ -249,7 +247,7 @@ const ChartToolbar = ({
       {_modalMenuArr}
       <div
          ref={_refToolbar}
-         className={CL_WITH_SCROLL_X}
+         className={CL_SCROLL_X}
       >
          {_btTabIndicator}
          {_btAppearance}
@@ -257,7 +255,6 @@ const ChartToolbar = ({
          <ButtonTab
            style={_btAppearance ? S_BT_FN_APPEARANCE : S_BT_FN}
            caption="Fn"
-           isShow={isShowFn}
            isMenu={true}
            onClick={toggleFn}
          />

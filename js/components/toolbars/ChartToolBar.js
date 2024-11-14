@@ -17,7 +17,8 @@ var _ModalMenuMini = _interopRequireDefault(require("./ModalMenuMini"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const CL_WITH_SCROLL_X = (0, _styleFn.crWithScrollCn)("with-scroll-x"),
+const CL_WITH_SCROLL_X = "with-scroll-x",
+  CL_SCROLL_X = (0, _styleFn.crWithScrollCn)(CL_WITH_SCROLL_X),
   CL_BT_R = `${CL_WITH_SCROLL_X}__bt-r`,
   MODAL_POPUP_STYLE_TOP = (0, _has.isWideWidth)() ? 75 : 65,
   _crModalPopupStyle = left => ({
@@ -123,7 +124,7 @@ const ChartToolbar = _ref2 => {
   if (hasError) {
     return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       ref: _refToolbar,
-      className: CL_WITH_SCROLL_X,
+      className: CL_SCROLL_X,
       children: _btInfo
     });
   }
@@ -150,7 +151,6 @@ const ChartToolbar = _ref2 => {
       _btAppearance = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
         style: S_BT_APPEARANCE,
         caption: "Appearance",
-        isShow: isShowAppearance,
         isMenu: true,
         onClick: toggleAppearance
       });
@@ -168,7 +168,6 @@ const ChartToolbar = _ref2 => {
     _btTabIndicator = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
       style: S_BT_IND,
       caption: _tabIndCaption,
-      isShow: isShowInd,
       isMenu: true,
       onClick: toggleInd
     });
@@ -184,7 +183,6 @@ const ChartToolbar = _ref2 => {
     _btTabMini = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
       style: S_BT_MINI,
       caption: "Mini",
-      isShow: isShowMini,
       isMenu: true,
       onClick: toggleMini
     });
@@ -215,11 +213,10 @@ const ChartToolbar = _ref2 => {
       onClose: toggleFn
     }), _modalMenuArr, /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       ref: _refToolbar,
-      className: CL_WITH_SCROLL_X,
+      className: CL_SCROLL_X,
       children: [_btTabIndicator, _btAppearance, _btLegend, /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
         style: _btAppearance ? S_BT_FN_APPEARANCE : S_BT_FN,
         caption: "Fn",
-        isShow: isShowFn,
         isMenu: true,
         onClick: toggleFn
       }), _btInfo, _btTabMini, /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {

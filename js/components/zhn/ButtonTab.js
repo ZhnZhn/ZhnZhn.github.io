@@ -11,7 +11,6 @@ const CL_BT_TAB = "not-selected bt bt-tab",
 const ButtonTab = _ref => {
   let {
     is = true,
-    isShow,
     isMenu,
     className,
     style,

@@ -7,23 +7,20 @@ const CL_BT_TAB = "not-selected bt bt-tab"
 
 const ButtonTab = ({
   is=true,
-  isShow,
   isMenu,
   className,
   style,
   caption,
   onClick
-}) => {
-  return is ? (
-    <Button
-      className={crCn(CL_BT_TAB, className)}
-      style={style}
-      onClick={onClick}
-    >
-       {caption}
-       {isMenu && <span className={CL_ARROW_DOWN} />}
-    </Button>
-  ) : null;
-};
+}) => is ? (
+  <Button
+    className={crCn(CL_BT_TAB, className)}
+    style={style}
+    onClick={onClick}
+  >
+     {caption}
+     {isMenu && <span className={CL_ARROW_DOWN} />}
+  </Button>
+) : null;
 
 export default ButtonTab
