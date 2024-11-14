@@ -17,6 +17,11 @@ const _crItemId = (
   items
 ) => `${_getRefArea(isCategory, items)}.Q.${getValue(items[1])}.IX`;
 
+const _crItemIdHhi = (
+  isCategory,
+  items
+) => `Q.${_getRefArea(isCategory, items)}.${getValue(items[1])}`;
+
 const _crItemIdMdf = (
   isCategory,
   items
@@ -43,6 +48,7 @@ const _hmCrItemId = {
   nvr: _crItemIdNvr,
   mvt: _crItemIdMvt,
   cpi: _crItemIdCpi,
+  hhi: _crItemIdHhi,
   ep: _crItemIdEp
 }
 , _getCrItemId = crGetRoute(_hmCrItemId, _crItemId);
@@ -58,6 +64,12 @@ export const getJsonData = (
 export const getDataSeries = (
   data
 ) => getByPropsFrom(data, "dataSets", 0, "series") || {}
+
+export const getRefAreaIndex = (
+  option
+) => option.dfFn === "hhi"
+  ? 1
+  : 0
 
 export const getDataDimensions = (
   data
