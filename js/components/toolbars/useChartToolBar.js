@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _has = require("../has");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _ButtonTab = _interopRequireDefault(require("../zhn/ButtonTab"));
@@ -30,18 +29,12 @@ const _isArr = Array.isArray,
   S_BT_LEGEND = _crLeftStyle(115),
   S_BT_FN_APPEARANCE = _crLeftStyle(230),
   S_BT_FN = _crLeftStyle(190),
-  S_M_FN = _crModalPopupStyle(159),
+  S_M_FN = _crModalPopupStyle(160),
   S_BT_MINI = {
     left: 350,
     width: 68
   },
   S_M_MINI = _crModalPopupStyle(290);
-const _crModalMenuStyle = (ref, left) => {
-  const node = (0, _uiApi.getRefValue)(ref);
-  return node && (0, _uiApi.isNumber)(node.scrollLeft) ? {
-    left: left - node.scrollLeft
-  } : void 0;
-};
 const LINE_TYPES = ['area', 'spline', 'line'];
 const _isColumnCategoryConfig = function (_temp) {
   let {
@@ -57,7 +50,7 @@ const _isIndicatorTab = (_ref, isWithoutIndicator) => {
   } = _ref;
   return !isWithoutIndicator && _isArr(series) && series[0] && (LINE_TYPES.indexOf(series[0].type) !== -1 || _isColumnCategoryConfig(xAxis));
 };
-const useChartToolBar = (hasError, _refToolbar, config, getChart, onClickInfo, onClickLegend, onAddToWatch, onAddMfi, onRemoveMfi, onMiniChart, chartHandlers) => {
+const useChartToolBar = (hasError, _crModalMenuLeftStyle, config, getChart, onClickInfo, onClickLegend, onAddToWatch, onAddMfi, onRemoveMfi, onMiniChart, chartHandlers) => {
   const {
       zhConfig,
       info,
@@ -68,10 +61,10 @@ const useChartToolBar = (hasError, _refToolbar, config, getChart, onClickInfo, o
       itemConf,
       legend
     } = zhConfig || {},
-    [isShowInd, toggleInd] = (0, _useToggle.default)(false),
-    [isShowAppearance, toggleAppearance] = (0, _useToggle.default)(false),
-    [isShowFn, toggleFn] = (0, _useToggle.default)(false),
-    [isShowMini, toggleMini] = (0, _useToggle.default)(false),
+    [isShowInd, toggleInd] = (0, _useToggle.default)(),
+    [isShowAppearance, toggleAppearance] = (0, _useToggle.default)(),
+    [isShowFn, toggleFn] = (0, _useToggle.default)(),
+    [isShowMini, toggleMini] = (0, _useToggle.default)(),
     _modalMenuArr = [];
   const _btInfo = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
     is: !!info,
@@ -81,13 +74,12 @@ const useChartToolBar = (hasError, _refToolbar, config, getChart, onClickInfo, o
   if (hasError) {
     return [_btInfo];
   }
-  const _fnStyle = isShowFn ? _crModalMenuStyle(_refToolbar, S_BT_FN.left) : void 0;
   _modalMenuArr.push(/*#__PURE__*/(0, _react.createElement)(_ModalMenuFn.default, {
     ...chartHandlers,
     isShow: isShowFn,
     style: {
       ...S_M_FN,
-      ..._fnStyle
+      ..._crModalMenuLeftStyle(isShowFn, S_BT_FN)
     },
     config: config,
     getChart: getChart,
@@ -153,12 +145,11 @@ const useChartToolBar = (hasError, _refToolbar, config, getChart, onClickInfo, o
       isMenu: true,
       onClick: toggleMini
     });
-    const _miniStyle = isShowMini ? _crModalMenuStyle(_refToolbar, S_M_MINI.left) : void 0;
     _modalMenuArr.push(/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalMenuMini.default, {
       isShow: isShowMini,
       style: {
         ...S_M_MINI,
-        ..._miniStyle
+        ..._crModalMenuLeftStyle(isShowMini, S_M_MINI)
       },
       configs: zhMiniConfigs,
       onClickItem: onMiniChart,

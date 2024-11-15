@@ -16,17 +16,17 @@ const CL_WITH_SCROLL_X = "with-scroll-x",
     left: 440,
     width: 36
   };
-const _isHrzScrollable = node => node && node.scrollWidth > node.clientWidth;
+const _isHrzScrollable = nodeEl => nodeEl && nodeEl.scrollWidth > nodeEl.clientWidth;
 const _scrollNodeToLeft = (ref, left) => {
-  const node = (0, _uiApi.getRefValue)(ref);
-  if (_isHrzScrollable(node)) {
-    if ((0, _uiApi.isFn)(node.scroll)) {
-      node.scroll({
+  const nodeEl = (0, _uiApi.getRefValue)(ref);
+  if (_isHrzScrollable(nodeEl)) {
+    if ((0, _uiApi.isFn)(nodeEl.scroll)) {
+      nodeEl.scroll({
         left,
-        behavior: 'smooth'
+        behavior: "smooth"
       });
     } else {
-      node.scrollLeft = left;
+      nodeEl.scrollLeft = left;
     }
   }
 };
@@ -47,10 +47,21 @@ const ChartToolbar = _ref => {
   } = _ref;
   const _refToolbar = (0, _uiApi.useRef)(),
     chartHandlers = (0, _useChartMethods.default)(getChart, onZoom, onCopy, onPasteTo),
-    _hClickR = (0, _uiApi.useCallback)(() => {
+    [_crModalMenuLeftStyle, _hClickR] = (0, _uiApi.useMemo)(() => [(isShow, style) => {
+      if (!isShow) {
+        return;
+      }
+      const nodeEl = (0, _uiApi.getRefValue)(_refToolbar),
+        {
+          scrollLeft
+        } = nodeEl || {};
+      return (0, _uiApi.isNumber)(scrollLeft) ? {
+        left: style.left - scrollLeft
+      } : void 0;
+    }, () => {
       _scrollNodeToLeft(_refToolbar, 0);
-    }, []);
-  const [_btInfo, _btTabIndicator, _btAppearance, _btLegend, _btFn, _btTabMini, _modalMenuArr] = (0, _useChartToolBar.default)(hasError, _refToolbar, config, getChart, onClickInfo, onClickLegend, onAddToWatch, onAddMfi, onRemoveMfi, onMiniChart, chartHandlers);
+    }], []);
+  const [_btInfo, _btTabIndicator, _btAppearance, _btLegend, _btFn, _btTabMini, _modalMenuArr] = (0, _useChartToolBar.default)(hasError, _crModalMenuLeftStyle, config, getChart, onClickInfo, onClickLegend, onAddToWatch, onAddMfi, onRemoveMfi, onMiniChart, chartHandlers);
   if (hasError) {
     return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       ref: _refToolbar,

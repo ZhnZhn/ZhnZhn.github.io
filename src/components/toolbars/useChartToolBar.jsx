@@ -1,8 +1,3 @@
-import {
-  getRefValue,
-  isNumber
-} from '../uiApi';
-
 import { isWideWidth } from '../has';
 
 import useToggle from '../hooks/useToggle';
@@ -35,23 +30,13 @@ const _isArr = Array.isArray
 
 , S_BT_FN_APPEARANCE = _crLeftStyle(230)
 , S_BT_FN = _crLeftStyle(190)
-, S_M_FN = _crModalPopupStyle(159)
+, S_M_FN = _crModalPopupStyle(160)
 
 , S_BT_MINI = {
   left: 350,
   width: 68
 }
 , S_M_MINI = _crModalPopupStyle(290);
-
-const _crModalMenuStyle = (
-  ref,
-  left
-) => {
-  const node = getRefValue(ref);
-  return node && isNumber(node.scrollLeft)
-    ? { left: left - node.scrollLeft }
-    : void 0;
-};
 
 const LINE_TYPES = ['area', 'spline', 'line'];
 const _isColumnCategoryConfig = (
@@ -66,7 +51,7 @@ const _isIndicatorTab = ({ series, xAxis }, isWithoutIndicator) => !isWithoutInd
 
 const useChartToolBar = (
   hasError,
-  _refToolbar,
+  _crModalMenuLeftStyle,
   config,
   getChart,
   onClickInfo,
@@ -87,10 +72,10 @@ const useChartToolBar = (
     itemConf,
     legend
   } = zhConfig || {}
-  , [isShowInd, toggleInd] = useToggle(false)
-  , [isShowAppearance, toggleAppearance] = useToggle(false)
-  , [isShowFn, toggleFn] = useToggle(false)
-  , [isShowMini, toggleMini] = useToggle(false)
+  , [isShowInd, toggleInd] = useToggle()
+  , [isShowAppearance, toggleAppearance] = useToggle()
+  , [isShowFn, toggleFn] = useToggle()
+  , [isShowMini, toggleMini] = useToggle()
   , _modalMenuArr = [];
 
   const _btInfo = (<ButtonTab
@@ -103,14 +88,10 @@ const useChartToolBar = (
     return [_btInfo];
   }
 
-  const _fnStyle = isShowFn
-    ? _crModalMenuStyle(_refToolbar, S_BT_FN.left)
-    : void 0;
-
   _modalMenuArr.push(<ModalMenuFn
     {...chartHandlers}
     isShow={isShowFn}
-    style={{...S_M_FN, ..._fnStyle}}
+    style={{...S_M_FN, ..._crModalMenuLeftStyle(isShowFn, S_BT_FN)}}
     config={config}
     getChart={getChart}
     onAddToWatch={itemConf ? onAddToWatch : void 0}
@@ -182,16 +163,14 @@ const useChartToolBar = (
        isMenu={true}
        onClick={toggleMini}
     />)
-    const _miniStyle = isShowMini
-      ? _crModalMenuStyle(_refToolbar, S_M_MINI.left)
-      : void 0;
-   _modalMenuArr.push(<ModalMenuMini
-      key="mini"
-      isShow={isShowMini}
-      style={{...S_M_MINI, ..._miniStyle}}
-      configs={zhMiniConfigs}
-      onClickItem={onMiniChart}
-      onClose={toggleMini}
+
+    _modalMenuArr.push(<ModalMenuMini
+       key="mini"
+       isShow={isShowMini}
+       style={{...S_M_MINI, ..._crModalMenuLeftStyle(isShowMini, S_M_MINI)}}
+       configs={zhMiniConfigs}
+       onClickItem={onMiniChart}
+       onClose={toggleMini}
     />)
   }
 

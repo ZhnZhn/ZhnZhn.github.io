@@ -1,8 +1,9 @@
 import {
   useRef,
-  useCallback,
+  useMemo,
   getRefValue,
-  isFn
+  isFn,
+  isNumber
 } from '../uiApi';
 
 import { crWithScrollCn } from '../styleFn';
@@ -20,20 +21,21 @@ const CL_WITH_SCROLL_X = "with-scroll-x"
   width: 36
 };
 
-const _isHrzScrollable = node => node
-  && node.scrollWidth > node.clientWidth;
+const _isHrzScrollable = (
+  nodeEl
+) => nodeEl && nodeEl.scrollWidth > nodeEl.clientWidth;
 
 const _scrollNodeToLeft = (
   ref,
   left
 ) => {
-  const node = getRefValue(ref);
-  if (_isHrzScrollable(node)) {
-   if (isFn(node.scroll)) {
-     node.scroll({ left, behavior: 'smooth'})
-   } else {
-     node.scrollLeft = left
-   }
+  const nodeEl = getRefValue(ref);
+  if (_isHrzScrollable(nodeEl)) {
+    if (isFn(nodeEl.scroll)) {
+      nodeEl.scroll({ left, behavior: "smooth"})
+    } else {
+      nodeEl.scrollLeft = left
+    }
   }
 };
 
@@ -58,9 +60,22 @@ const ChartToolbar = ({
      onCopy,
      onPasteTo
   )
-  , _hClickR = useCallback(() => {
+  , [
+    _crModalMenuLeftStyle,
+    _hClickR
+  ] = useMemo(() => [
+    (isShow, style) => {
+      if (!isShow) { return; }
+      const nodeEl = getRefValue(_refToolbar)
+      , { scrollLeft } = nodeEl || {};
+      return isNumber(scrollLeft)
+        ? {left: style.left - scrollLeft}
+        : void 0;
+    },
+    () => {
       _scrollNodeToLeft(_refToolbar, 0)
-  }, []);
+    }
+  ], []);
 
   const  [
     _btInfo,
@@ -72,7 +87,7 @@ const ChartToolbar = ({
     _modalMenuArr
   ] = useChartToolBar(
     hasError,
-    _refToolbar,
+    _crModalMenuLeftStyle,
     config,
     getChart,
     onClickInfo,
