@@ -10,7 +10,7 @@ import {
 } from './storeFn';
 
 import { crKeyForConfig } from '../logic/LogicFn';
-import LoadImpl from '../logic/LoadImpl';
+import { getLoadImpl } from '../logic/LoadImpl';
 
 import {
   isChartExist as isChartExistImpl,
@@ -240,7 +240,7 @@ export const loadItem = (confItem, option) => {
     _isLoading = true;
     _idLoading = key
     setLoading()
-    LoadImpl[loadId].loadItem(
+    getLoadImpl(loadId).loadItem(
       option,
       _loadItemCompleted,
       _loadItemAdded,
@@ -257,7 +257,7 @@ export const loadItemByQuery = (option) => {
   const { loadId } = option;
   option.proxy = getProxy(loadId)
 
-  const impl = LoadImpl[loadId];
+  const impl = getLoadImpl(loadId);
   if (impl) {
     const { addPropsTo } = impl;
     if (isFn(addPropsTo)){

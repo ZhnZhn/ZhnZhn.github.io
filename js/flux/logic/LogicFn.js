@@ -1,12 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.crKeyForConfig = exports.clearPrototypeOf = void 0;
 var _clearPrototypeOf = require("../../utils/clearPrototypeOf");
 exports.clearPrototypeOf = _clearPrototypeOf.clearPrototypeOf;
 var _LoadType = require("../../constants/LoadType");
-var _LoadImpl = _interopRequireDefault(require("./LoadImpl"));
+var _LoadImpl = require("./LoadImpl");
 const _isFn = fn => typeof fn === 'function';
 const _crNdlKey = _ref => {
   let {
@@ -25,7 +24,7 @@ const _crItemKey = option => {
       value,
       _itemKey
     } = option,
-    loadConfig = _LoadImpl.default[loadId] || {},
+    loadConfig = (0, _LoadImpl.getLoadImpl)(loadId) || {},
     {
       crKey
     } = loadConfig;

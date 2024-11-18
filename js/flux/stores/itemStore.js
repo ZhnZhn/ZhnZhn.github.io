@@ -1,12 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.useMsItemLoaded = exports.useMsInit = exports.updateMv = exports.sortItemsBy = exports.showItemsContainer = exports.removeItemsAll = exports.moveToTop = exports.loadItemByQuery = exports.loadItem = exports.isChartExist = exports.hideItemsContainer = exports.getConfigs = exports.closeChartItem = void 0;
 var _Msg = require("../../constants/Msg");
 var _storeFn = require("./storeFn");
 var _LogicFn = require("../logic/LogicFn");
-var _LoadImpl = _interopRequireDefault(require("../logic/LoadImpl"));
+var _LoadImpl = require("../logic/LoadImpl");
 var _ChartLogic = require("./chart/ChartLogic");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
 var _dialogLogic = require("./dialogLogic");
@@ -149,7 +148,7 @@ const loadItem = (confItem, option) => {
     _isLoading = true;
     _idLoading = key;
     (0, _loadingStore.setLoading)();
-    _LoadImpl.default[loadId].loadItem(option, _loadItemCompleted, _loadItemAdded, _loadItemFailed);
+    (0, _LoadImpl.getLoadImpl)(loadId).loadItem(option, _loadItemCompleted, _loadItemAdded, _loadItemFailed);
   }
 };
 exports.loadItem = loadItem;
@@ -161,7 +160,7 @@ const loadItemByQuery = option => {
     loadId
   } = option;
   option.proxy = (0, _settingStore.getProxy)(loadId);
-  const impl = _LoadImpl.default[loadId];
+  const impl = (0, _LoadImpl.getLoadImpl)(loadId);
   if (impl) {
     const {
       addPropsTo

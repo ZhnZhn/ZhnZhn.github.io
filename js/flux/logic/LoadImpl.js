@@ -1,24 +1,17 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports.default = void 0;
-
+exports.getLoadImpl = void 0;
 var _RouterAdapter = _interopRequireDefault(require("../../adapters/RouterAdapter"));
-
 var _loadItem = _interopRequireDefault(require("./loadItem"));
-
-const LoadImpl = (() => {
-  const _conf = {};
-
+const _hmLoadImpl = Object.create(null);
+const _initHmLoadImpl = () => {
   for (let key in _RouterAdapter.default) {
-    _conf[key] = (0, _loadItem.default)(_RouterAdapter.default[key]);
+    _hmLoadImpl[key] = (0, _loadItem.default)(_RouterAdapter.default[key]);
   }
-
-  return _conf;
-})();
-
-var _default = LoadImpl;
-exports.default = _default;
+};
+_initHmLoadImpl();
+const getLoadImpl = loadId => _hmLoadImpl[loadId];
+exports.getLoadImpl = getLoadImpl;
 //# sourceMappingURL=LoadImpl.js.map

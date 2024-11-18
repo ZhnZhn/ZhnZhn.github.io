@@ -1,13 +1,12 @@
-import Adapter from '../../adapters/RouterAdapter'
+import Adapter from '../../adapters/RouterAdapter';
+import fLoadItem from './loadItem';
 
-import f from './loadItem'
-
-const LoadImpl = (() => {
-  const _conf = {};  
+const _hmLoadImpl = Object.create(null);
+const _initHmLoadImpl = () => {
   for (let key in Adapter) {
-    _conf[key] = f(Adapter[key])
+    _hmLoadImpl[key] = fLoadItem(Adapter[key])
   }
-  return _conf;
-})();
+};
+_initHmLoadImpl()
 
-export default LoadImpl
+export const getLoadImpl = loadId => _hmLoadImpl[loadId]

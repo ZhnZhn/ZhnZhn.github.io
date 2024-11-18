@@ -7,7 +7,7 @@ import {
   LT_WL
 } from '../../constants/LoadType';
 
-import LoadImpl from './LoadImpl';
+import { getLoadImpl } from './LoadImpl';
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -26,7 +26,7 @@ const _crItemKey = (option) => {
     value,
     _itemKey
   } = option
-  , loadConfig = LoadImpl[loadId] || {}
+  , loadConfig = getLoadImpl(loadId) || {}
   , { crKey } = loadConfig;
   return _isFn(crKey)
     ? crKey(option)
