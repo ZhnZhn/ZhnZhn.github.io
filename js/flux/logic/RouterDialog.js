@@ -12,6 +12,10 @@ var _DialogSelectN = _interopRequireDefault(require("../../components/dialogs/Di
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 const _resolve = Promise.resolve.bind(Promise);
+const _resolveDialogs = (df, loadType, router) => {
+  (0, _LoadImpl.addLoadImpl)(loadType, df._a);
+  return router[loadType] = _resolve(df);
+};
 const _router = {
   DF: _DialogSelectN.default,
   DialogSelectN: _DialogSelectN.default,
@@ -40,8 +44,7 @@ const _router = {
         let {
           default: df
         } = _ref;
-        (0, _LoadImpl.addLoadImpl)(_LoadType.LT_UN, df._a);
-        return this.UN = _resolve(df);
+        return _resolveDialogs(df, _LoadType.LT_UN, this);
       }).catch(err => console.log(_Msg.MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
@@ -51,12 +54,11 @@ const _router = {
       let {
         default: df
       } = _ref2;
-      (0, _LoadImpl.addLoadImpl)(_LoadType.LT_UN, df._a);
-      return this.UN = _resolve(df);
+      return _resolveDialogs(df, _LoadType.LT_UN, this);
     }).catch(err => console.log(_Msg.MSG_OFFLINE));
   },
   getUN() {
-    return this.UN || this._loadUN();
+    return this[_LoadType.LT_UN] || this._loadUN();
   },
   get UnDialog5() {
     return this.getUN().then(D => D.UnDialog5);

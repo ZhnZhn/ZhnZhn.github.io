@@ -18,6 +18,15 @@ import DialogSelectN from '../../components/dialogs/DialogSelectN';
 
 const _resolve = Promise.resolve.bind(Promise);
 
+const _resolveDialogs = (
+  df,
+  loadType,
+  router
+) => {
+  addLoadImpl(loadType, df._a)
+  return router[loadType] = _resolve(df);
+};
+
 const _router = {
   DF: DialogSelectN,
   DialogSelectN: DialogSelectN,
@@ -51,10 +60,7 @@ const _router = {
      if ( process.env.NODE_ENV === '_development' ) {
        //
        return import("js/components/uncomtrade/UnDialogs.js")
-         .then(({ default: df }) => {
-           addLoadImpl(LT_UN, df._a)
-           return this.UN = _resolve(df);
-         })
+         .then(({ default: df }) => _resolveDialogs(df, LT_UN, this))
          .catch(err => console.log(MSG_OFFLINE));
     /*eslint-enable no-undef */
     }
@@ -63,14 +69,11 @@ const _router = {
        /* webpackMode: "lazy" */
         "../../components/uncomtrade/UnDialogs"
        )
-      .then(({ default:df }) => {
-        addLoadImpl(LT_UN, df._a)
-        return this.UN = _resolve(df);
-      })
+      .then(({ default:df }) => _resolveDialogs(df, LT_UN, this))
       .catch(err => console.log(MSG_OFFLINE));
   },
   getUN(){
-    return this.UN || this._loadUN();
+    return this[LT_UN] || this._loadUN();
   },
   get UnDialog5() {
     return this.getUN().then(D => D.UnDialog5);
