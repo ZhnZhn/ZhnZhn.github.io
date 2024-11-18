@@ -43,7 +43,6 @@ import {
   LT_HT,
   LT_KX,
   LT_BB,
-  LT_UN,
   LT_FAO,
   LT_WB,
   LT_WT,
@@ -52,7 +51,6 @@ import {
 } from '../constants/LoadType';
 
 import EuroStat from './eurostat/EuroStat'
-import UnComtrade from './uncomtrade/UnComtrade'
 import FaoStat from './faostat/FaoStat'
 import WorldBank from './world-bank/WorldBank'
 import Wt from './wto/Wt'
@@ -117,7 +115,6 @@ const RouterAdapter = {
   [LT_IRE]: Irena,
   [LT_EN]: En,
 
-  [LT_UN]: UnComtrade,
   [LT_FAO]: FaoStat,
   [LT_WB]: WorldBank,
   [LT_WT]: Wt,

@@ -5,7 +5,6 @@ exports.__esModule = true;
 exports.default = void 0;
 var _LoadType = require("../constants/LoadType");
 var _EuroStat = _interopRequireDefault(require("./eurostat/EuroStat"));
-var _UnComtrade = _interopRequireDefault(require("./uncomtrade/UnComtrade"));
 var _FaoStat = _interopRequireDefault(require("./faostat/FaoStat"));
 var _WorldBank = _interopRequireDefault(require("./world-bank/WorldBank"));
 var _Wt = _interopRequireDefault(require("./wto/Wt"));
@@ -63,7 +62,6 @@ const RouterAdapter = {
   [_LoadType.LT_EMB]: _Ember.default,
   [_LoadType.LT_IRE]: _Irena.default,
   [_LoadType.LT_EN]: _En.default,
-  [_LoadType.LT_UN]: _UnComtrade.default,
   [_LoadType.LT_FAO]: _FaoStat.default,
   [_LoadType.LT_WB]: _WorldBank.default,
   [_LoadType.LT_WT]: _Wt.default,

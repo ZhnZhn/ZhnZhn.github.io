@@ -1,3 +1,4 @@
+import { addLoadImpl } from './LoadImpl';
 import { clearPrototypeOf } from './LogicFn';
 
 import {
@@ -6,6 +7,9 @@ import {
   BT_SWEDEN_STAT,
   BT_UN_COMTRADE
 } from '../../constants/BrowserType';
+import {
+  LT_UN
+} from '../../constants/LoadType';
 import {
   MSG_OFFLINE
 } from '../../constants/Msg';
@@ -47,7 +51,10 @@ const _router = {
      if ( process.env.NODE_ENV === '_development' ) {
        //
        return import("js/components/uncomtrade/UnDialogs.js")
-         .then(module => this.UN = _resolve(module.default))
+         .then(({ default: df }) => {
+           addLoadImpl(LT_UN, df._a)
+           return this.UN = _resolve(df);
+         })
          .catch(err => console.log(MSG_OFFLINE));
     /*eslint-enable no-undef */
     }
@@ -56,7 +63,10 @@ const _router = {
        /* webpackMode: "lazy" */
         "../../components/uncomtrade/UnDialogs"
        )
-      .then(module => this.UN = _resolve(module.default))
+      .then(({ default:df }) => {
+        addLoadImpl(LT_UN, df._a)
+        return this.UN = _resolve(df);
+      })
       .catch(err => console.log(MSG_OFFLINE));
   },
   getUN(){
