@@ -1,13 +1,13 @@
 export { clearPrototypeOf } from '../../utils/clearPrototypeOf';
 
 import {
-  LT_Q,  
+  LT_Q,
   LT_EU_STAT,
   LT_EIA,
   LT_WL
 } from '../../constants/LoadType';
 
-import LoadConfig from './LoadConfig';
+import LoadImpl from './LoadImpl';
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -20,13 +20,13 @@ const _crNdlKey = ({
   viewKey
 }) => viewKey || value;
 
-const _crKey = (option) => {
+const _crItemKey = (option) => {
   const {
     loadId,
     value,
     _itemKey
   } = option
-  , loadConfig = LoadConfig[loadId] || {}
+  , loadConfig = LoadImpl[loadId] || {}
   , { crKey } = loadConfig;
   return _isFn(crKey)
     ? crKey(option)
@@ -34,13 +34,13 @@ const _crKey = (option) => {
 };
 
 export const crKeyForConfig = (option) => {
-  const { loadId, _itemKey, id } = option;
-  switch (loadId) {
+  const { _itemKey } = option;
+  switch (option.loadId) {
     case LT_Q:
       return _itemKey || _crNdlKey(option);
     case LT_EU_STAT: case LT_EIA: case LT_WL:
-      return _itemKey || id;
+      return _itemKey || option.id;
     default:
-      return _crKey(option);
+      return _crItemKey(option);
   }
 }

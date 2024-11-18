@@ -6,7 +6,7 @@ exports.useMsItemLoaded = exports.useMsInit = exports.updateMv = exports.sortIte
 var _Msg = require("../../constants/Msg");
 var _storeFn = require("./storeFn");
 var _LogicFn = require("../logic/LogicFn");
-var _LoadConfig = _interopRequireDefault(require("../logic/LoadConfig"));
+var _LoadImpl = _interopRequireDefault(require("../logic/LoadImpl"));
 var _ChartLogic = require("./chart/ChartLogic");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
 var _dialogLogic = require("./dialogLogic");
@@ -149,7 +149,7 @@ const loadItem = (confItem, option) => {
     _isLoading = true;
     _idLoading = key;
     (0, _loadingStore.setLoading)();
-    _LoadConfig.default[loadId].loadItem(option, _loadItemCompleted, _loadItemAdded, _loadItemFailed);
+    _LoadImpl.default[loadId].loadItem(option, _loadItemCompleted, _loadItemAdded, _loadItemFailed);
   }
 };
 exports.loadItem = loadItem;
@@ -161,7 +161,7 @@ const loadItemByQuery = option => {
     loadId
   } = option;
   option.proxy = (0, _settingStore.getProxy)(loadId);
-  const impl = _LoadConfig.default[loadId];
+  const impl = _LoadImpl.default[loadId];
   if (impl) {
     const {
       addPropsTo

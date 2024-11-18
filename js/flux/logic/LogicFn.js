@@ -6,7 +6,7 @@ exports.crKeyForConfig = exports.clearPrototypeOf = void 0;
 var _clearPrototypeOf = require("../../utils/clearPrototypeOf");
 exports.clearPrototypeOf = _clearPrototypeOf.clearPrototypeOf;
 var _LoadType = require("../../constants/LoadType");
-var _LoadConfig = _interopRequireDefault(require("./LoadConfig"));
+var _LoadImpl = _interopRequireDefault(require("./LoadImpl"));
 const _isFn = fn => typeof fn === 'function';
 const _crNdlKey = _ref => {
   let {
@@ -19,13 +19,13 @@ const _crNdlKey = _ref => {
   } = _ref;
   return viewKey || value;
 };
-const _crKey = option => {
+const _crItemKey = option => {
   const {
       loadId,
       value,
       _itemKey
     } = option,
-    loadConfig = _LoadConfig.default[loadId] || {},
+    loadConfig = _LoadImpl.default[loadId] || {},
     {
       crKey
     } = loadConfig;
@@ -33,19 +33,17 @@ const _crKey = option => {
 };
 const crKeyForConfig = option => {
   const {
-    loadId,
-    _itemKey,
-    id
+    _itemKey
   } = option;
-  switch (loadId) {
+  switch (option.loadId) {
     case _LoadType.LT_Q:
       return _itemKey || _crNdlKey(option);
     case _LoadType.LT_EU_STAT:
     case _LoadType.LT_EIA:
     case _LoadType.LT_WL:
-      return _itemKey || id;
+      return _itemKey || option.id;
     default:
-      return _crKey(option);
+      return _crItemKey(option);
   }
 };
 exports.crKeyForConfig = crKeyForConfig;
