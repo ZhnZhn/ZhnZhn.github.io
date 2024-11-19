@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/av-blockchain/AvBlockchain.js"
+ ],
+ "file": "../../../src/adapters/av-blockchain/AvBlockchain.js",
+ "names": [
+  "_AvBlockchainApi",
+  "_interopRequireDefault",
+  "require",
+  "_AvBlockchainAdapter",
+  "AvBlockchain",
+  "api",
+  "adapter",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,gBAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,oBAAA,GAAAF,sBAAA,CAAAC,OAAA;AAEA,MAAME,YAAY,GAAG;EACnBC,GAAG,EAAHA,wBAAG;EACHC,OAAO,EAAPA;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaL,YAAY"
+}
