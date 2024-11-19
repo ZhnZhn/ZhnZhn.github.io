@@ -8,7 +8,8 @@ import {
   BT_UN_COMTRADE
 } from '../../constants/BrowserType';
 import {
-  LT_UN
+  LT_UN,
+  LT_AV
 } from '../../constants/LoadType';
 import {
   MSG_OFFLINE
@@ -86,21 +87,21 @@ const _router = {
   _loadSM() {
      /*eslint-disable no-undef */
      if ( process.env.NODE_ENV === '_development' ) {
-       return import("js/components/stock-markets/AlphaDialogs.js")
-         .then(module => this.SM = _resolve(module.default))
+       return import("js/components/stock-markets/AvDialogs.js")
+         .then(({ default: df }) => _resolveDialogs(df, LT_AV, this))
          .catch(err => console.log(MSG_OFFLINE));
     /*eslint-enable no-undef */
      }
      return import(
          /* webpackChunkName: "av-dialogs" */
          /* webpackMode: "lazy" */
-         "../../components/stock-markets/AlphaDialogs"
+         "../../components/stock-markets/AvDialogs"
        )
-      .then(module => this.SM = _resolve(module.default))
+      .then(({ default: df }) => _resolveDialogs(df, LT_AV, this))
       .catch(err => console.log(MSG_OFFLINE));
   },
   getSM(){
-    return this.SM || this._loadSM();
+    return this[LT_AV] || this._loadSM();
   },
   get AlphaIndicatorDialog() {
     return this.getSM().then(D => D.Indicator);

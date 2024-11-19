@@ -14,7 +14,9 @@ import {
   LT_ECB,
   LT_SNB,
   LT_Q,
-  LT_AL,
+  LT_AV,
+  LT_AV_BLCH,
+  LT_AV_ECON,
   LT_FMP,
   LT_INTR,
   LT_TW,
@@ -41,7 +43,8 @@ const _createObject = () => Object.create(null)
 , _assign = Object.assign;
 
 const _withApiKey = [
-  LT_AL, LT_FMP, LT_INTR, LT_TW,
+  LT_AV, LT_AV_BLCH, LT_AV_ECON,
+  LT_FMP, LT_INTR, LT_TW,
   LT_BEA, LT_EIA,
   LT_WT
 ];
@@ -65,9 +68,12 @@ const _withProxyServer2 = [
   LT_KX
 ];
 
+const ALPHA_VANTAGE = 'Alpha Vantage';
 const _apiTitle = {
   DF: '',
-  [LT_AL]: 'Alpha Vantage',
+  [LT_AV]: ALPHA_VANTAGE,
+  [LT_AV_BLCH]: ALPHA_VANTAGE,
+  [LT_AV_ECON]: ALPHA_VANTAGE,
   [LT_BEA]: 'BEA',
   [LT_EIA]: 'EIA',
   [LT_FMP]: 'FMP',
@@ -96,6 +102,8 @@ export const getKey = (id) => {
   switch(id){
     case LT_WL:
        return _API_KEYS[LT_Q];
+    case LT_AV_BLCH: case LT_AV_ECON:
+       return _API_KEYS[LT_AV];
     default:
        return _API_KEYS[id];
   }
@@ -191,7 +199,7 @@ export const exportSettingFn = () => ({
   key3: _fSetKey(LT_BEA),
   key4: _fSetKey(LT_BLS),
   key5: _fSetKey(LT_EIA),
-  key6: _fSetKey(LT_AL),
+  key6: _fSetKey(LT_AV),
   key7: _fSetKey(LT_FMP),
   key8: _fSetKey(LT_INTR),
   key9: _fSetKey(LT_TW),

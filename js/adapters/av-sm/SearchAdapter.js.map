@@ -1,0 +1,32 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/av-sm/SearchAdapter.js"
+ ],
+ "file": "../../../src/adapters/av-sm/SearchAdapter.js",
+ "names": [
+  "API_URL",
+  "FN_SEARCH",
+  "SearchAdapter",
+  "crUrl",
+  "value",
+  "_ref",
+  "apiKey",
+  "crOptions",
+  "json",
+  "Array",
+  "isArray",
+  "bestMatches",
+  "Error",
+  "map",
+  "item",
+  "name",
+  "type",
+  "region",
+  "currency",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AACA,MAAMA,OAAO,GAAG,0CAA0C;EACxDC,SAAS,GAAG,wBAAwB;AAEtC,MAAMC,aAAa,GAAG;EACpBC,KAAK,EAAEA,CAACC,KAAK,EAAAC,IAAA;IAAA,IAAE;MAAEC,MAAM,GAAC;IAAG,CAAC,GAAAD,IAAA;IAAA,OAAK,GAAGL,OAAO,IAAIC,SAAS,aAAaG,KAAK,WAAWE,MAAM,EAAE;EAAA;EAC7FC,SAAS,EAAEC,IAAI,IAAI;IACjB,IAAI,CAACA,IAAI,IAAI,CAACC,KAAK,CAACC,OAAO,CAACF,IAAI,CAACG,WAAW,CAAC,EAAE;MAC7C,MAAM,IAAIC,KAAK,CAAC,8BAA8B,CAAC;IACjD;IACA,OAAOJ,IAAI,CAACG,WAAW,CAACE,GAAG,CAACC,IAAI,KAAK;MACnCV,KAAK,EAAEU,IAAI,CAAC,WAAW,CAAC;MACxBC,IAAI,EAAED,IAAI,CAAC,SAAS,CAAC;MACrBE,IAAI,EAAEF,IAAI,CAAC,SAAS,CAAC;MACrBG,MAAM,EAAEH,IAAI,CAAC,WAAW,CAAC;MACzBI,QAAQ,EAAEJ,IAAI,CAAC,aAAa;IAC9B,CAAC,CAAC,CAAC;EACL;AACF,CAAC;AAAC,IAAAK,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEanB,aAAa"
+}

@@ -5,12 +5,15 @@
  ],
  "file": "../../../src/components/stock-markets/AlphaDialogs.js",
  "names": [
-  "_AlphaIndicatorDialog",
+  "_AlphaVantage",
   "_interopRequireDefault",
   "require",
+  "_AlphaIndicatorDialog",
   "_AlphaTopDialog",
   "_AlphaSearchDialog",
   "AlphaDialog",
+  "_a",
+  "AlphaVantage",
   "Indicator",
   "Top",
   "Search",
@@ -18,5 +21,5 @@
   "exports",
   "default"
  ],
- "mappings": ";;;;;AACA,IAAAA,qBAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,eAAA,GAAAF,sBAAA,CAAAC,OAAA;AACA,IAAAE,kBAAA,GAAAH,sBAAA,CAAAC,OAAA;AAEA,MAAMG,WAAW,GAAG;EAClBC,SAAS,EAATA,6BAAS;EACTC,GAAG,EAAHA,uBAAG;EACHC,MAAM,EAANA;AACF,CAAC;AAAC,IAAAC,QAAA,GAEaJ,WAAW;AAAAK,OAAA,CAAAC,OAAA,GAAAF,QAAA"
+ "mappings": ";;;;;AAAA,IAAAA,aAAA,GAAAC,sBAAA,CAAAC,OAAA;AAEA,IAAAC,qBAAA,GAAAF,sBAAA,CAAAC,OAAA;AACA,IAAAE,eAAA,GAAAH,sBAAA,CAAAC,OAAA;AACA,IAAAG,kBAAA,GAAAJ,sBAAA,CAAAC,OAAA;AAEA,MAAMI,WAAW,GAAG;EAClBC,EAAE,EAAEC,qBAAY;EAChBC,SAAS,EAATA,6BAAS;EACTC,GAAG,EAAHA,uBAAG;EACHC,MAAM,EAANA;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaR,WAAW"
 }

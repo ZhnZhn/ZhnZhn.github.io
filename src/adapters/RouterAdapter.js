@@ -10,7 +10,6 @@ import {
   LT_EMB,
   LT_IRE,
   LT_EN,
-  LT_AL,
   LT_FMP,
   LT_TW,
   LT_EU_STAT,
@@ -27,6 +26,8 @@ import {
   LT_BLS,
   LT_EIA,
   LT_INTR,
+  LT_AV_BLCH,
+  LT_AV_ECON,
   LT_CRC,
   LT_CG,
   LT_CM,
@@ -65,7 +66,7 @@ import StatFinland from './stat-finland/StatFinland'
 import StatDenmark from './stat-denmark/StatDenmark'
 import StatIreland from './stat-ireland/StatIreland'
 import StatSwiss from './stat-swiss/StatSwiss'
-import AlphaVantage from './alpha/AlphaVantage'
+
 import Fmp from './fmp/Fmp'
 import Tw from './twelve/Tw'
 import Bea from './bea/Bea'
@@ -83,6 +84,10 @@ import Ei from './ei/Ei'
 import Ember from './ember/Ember'
 import En from './environment/En'
 import Irena from './irena/Irena'
+
+import AvBlockchain from './av-blockchain/AvBlockchain'
+import AvEconomics from './av-economics/AvEconomics'
+
 import Crc from './crypto-compare/Crc'
 import Cg from './coin-gecko/Cg'
 import Cm from './coin-metrics/Cm'
@@ -130,7 +135,6 @@ const RouterAdapter = {
   [LT_SIR]: StatIreland,
   [LT_FSO]: StatSwiss,
 
-  [LT_AL]: AlphaVantage,
   [LT_FMP]: Fmp,
   [LT_TW]: Tw,
 
@@ -138,6 +142,9 @@ const RouterAdapter = {
   [LT_BLS]: Bls,
   [LT_EIA]: Eia,
   [LT_INTR]: Intrinio,
+
+  [LT_AV_BLCH]: AvBlockchain,
+  [LT_AV_ECON]: AvEconomics,
 
   [LT_CRC]: Crc,
   [LT_CG]: Cg,

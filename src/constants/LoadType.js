@@ -1,6 +1,9 @@
 export const LT_Q = 'Q'
 
-export const LT_AL = 'AL'
+export const LT_AV = 'AV'
+export const LT_AV_BLCH = 'AV_BLCH'
+export const LT_AV_ECON = 'AV_ECON'
+
 export const LT_FMP = 'FMP'
 export const LT_TW = 'TW'
 export const LT_DBN = 'DBN'

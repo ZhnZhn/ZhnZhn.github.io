@@ -69,15 +69,25 @@ const _router = {
   _loadSM() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/stock-markets/AlphaDialogs.js"))).then(module => this.SM = _resolve(module.default)).catch(err => console.log(_Msg.MSG_OFFLINE));
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/stock-markets/AvDialogs.js"))).then(_ref3 => {
+        let {
+          default: df
+        } = _ref3;
+        return _resolveDialogs(df, _LoadType.LT_AV, this);
+      }).catch(err => console.log(_Msg.MSG_OFFLINE));
       /*eslint-enable no-undef */
     }
     return Promise.resolve().then(() => _interopRequireWildcard(require(/* webpackChunkName: "av-dialogs" */
     /* webpackMode: "lazy" */
-    "../../components/stock-markets/AlphaDialogs"))).then(module => this.SM = _resolve(module.default)).catch(err => console.log(_Msg.MSG_OFFLINE));
+    "../../components/stock-markets/AvDialogs"))).then(_ref4 => {
+      let {
+        default: df
+      } = _ref4;
+      return _resolveDialogs(df, _LoadType.LT_AV, this);
+    }).catch(err => console.log(_Msg.MSG_OFFLINE));
   },
   getSM() {
-    return this.SM || this._loadSM();
+    return this[_LoadType.LT_AV] || this._loadSM();
   },
   get AlphaIndicatorDialog() {
     return this.getSM().then(D => D.Indicator);

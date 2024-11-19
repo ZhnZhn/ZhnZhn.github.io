@@ -16,7 +16,6 @@ var _StatFinland = _interopRequireDefault(require("./stat-finland/StatFinland"))
 var _StatDenmark = _interopRequireDefault(require("./stat-denmark/StatDenmark"));
 var _StatIreland = _interopRequireDefault(require("./stat-ireland/StatIreland"));
 var _StatSwiss = _interopRequireDefault(require("./stat-swiss/StatSwiss"));
-var _AlphaVantage = _interopRequireDefault(require("./alpha/AlphaVantage"));
 var _Fmp = _interopRequireDefault(require("./fmp/Fmp"));
 var _Tw = _interopRequireDefault(require("./twelve/Tw"));
 var _Bea = _interopRequireDefault(require("./bea/Bea"));
@@ -34,6 +33,8 @@ var _Ei = _interopRequireDefault(require("./ei/Ei"));
 var _Ember = _interopRequireDefault(require("./ember/Ember"));
 var _En = _interopRequireDefault(require("./environment/En"));
 var _Irena = _interopRequireDefault(require("./irena/Irena"));
+var _AvBlockchain = _interopRequireDefault(require("./av-blockchain/AvBlockchain"));
+var _AvEconomics = _interopRequireDefault(require("./av-economics/AvEconomics"));
 var _Crc = _interopRequireDefault(require("./crypto-compare/Crc"));
 var _Cg = _interopRequireDefault(require("./coin-gecko/Cg"));
 var _Cm = _interopRequireDefault(require("./coin-metrics/Cm"));
@@ -75,13 +76,14 @@ const RouterAdapter = {
   [_LoadType.LT_SDN]: _StatDenmark.default,
   [_LoadType.LT_SIR]: _StatIreland.default,
   [_LoadType.LT_FSO]: _StatSwiss.default,
-  [_LoadType.LT_AL]: _AlphaVantage.default,
   [_LoadType.LT_FMP]: _Fmp.default,
   [_LoadType.LT_TW]: _Tw.default,
   [_LoadType.LT_BEA]: _Bea.default,
   [_LoadType.LT_BLS]: _Bls.default,
   [_LoadType.LT_EIA]: _Eia.default,
   [_LoadType.LT_INTR]: _Intrinio.default,
+  [_LoadType.LT_AV_BLCH]: _AvBlockchain.default,
+  [_LoadType.LT_AV_ECON]: _AvEconomics.default,
   [_LoadType.LT_CRC]: _Crc.default,
   [_LoadType.LT_CG]: _Cg.default,
   [_LoadType.LT_CM]: _Cm.default,
