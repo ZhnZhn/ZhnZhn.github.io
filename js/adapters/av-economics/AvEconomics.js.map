@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/av-economics/AvEconomics.js"
+ ],
+ "file": "../../../src/adapters/av-economics/AvEconomics.js",
+ "names": [
+  "_AvEconomicsApi",
+  "_interopRequireDefault",
+  "require",
+  "_AvEconomicsAdapter",
+  "AvEconomics",
+  "api",
+  "adapter",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,eAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,mBAAA,GAAAF,sBAAA,CAAAC,OAAA;AAEA,MAAME,WAAW,GAAG;EAClBC,GAAG,EAAHA,uBAAG;EACHC,OAAO,EAAPA;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaL,WAAW"
+}
