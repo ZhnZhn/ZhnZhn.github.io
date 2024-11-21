@@ -29,7 +29,7 @@ const _isArr = Array.isArray
 , S_BT_LEGEND = _crLeftStyle(115)
 
 , S_BT_FN_APPEARANCE = _crLeftStyle(230)
-, S_BT_FN = _crLeftStyle(190)
+, S_BT_FN = _crLeftStyle(175)
 , S_M_FN = _crModalPopupStyle(160)
 
 , S_BT_MINI = {
