@@ -25,8 +25,7 @@ const crData = (
   , dimension = getByPropsFrom(
      getDataDimensions(data), "series", _refAreaIndex, "values"
   ) || []
-  , _crValue = fCrValue(option)
-  , _categories = []
+  , _crValue = fCrValue(option)  
   , _data = getObjectKeys(series)
    .reduce((data, itemKey) => {
       const _categoryIndex = parseFloat(itemKey.split(":")[_refAreaIndex])
@@ -39,10 +38,6 @@ const crData = (
           _crValue(categoryValue),
           categoryName
         ))
-        _categories.push({
-          name: categoryName,
-          id: (dimension[_categoryIndex] || {}).id
-        })
       }
       return data;
    }, []);

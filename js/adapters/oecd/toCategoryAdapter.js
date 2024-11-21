@@ -14,17 +14,12 @@ const crData = (json, option) => {
       _refAreaIndex = (0, _fnAdapter.getRefAreaIndex)(option),
       dimension = (0, _AdapterFn.getByPropsFrom)((0, _fnAdapter.getDataDimensions)(data), "series", _refAreaIndex, "values") || [],
       _crValue = (0, _AdapterFn.fCrValue)(option),
-      _categories = [],
       _data = (0, _AdapterFn.getObjectKeys)(series).reduce((data, itemKey) => {
         const _categoryIndex = parseFloat(itemKey.split(":")[_refAreaIndex]),
           categoryValue = (0, _AdapterFn.getByPropsFrom)(series[itemKey], "observations", "0", 0),
           categoryName = (0, _AdapterFn.isNumber)(_categoryIndex) ? (dimension[_categoryIndex] || {}).name : null;
         if ((0, _AdapterFn.isNumber)(categoryValue) && (0, _AdapterFn.isStr)(categoryName)) {
           data.push((0, _CategoryFn.crCategoryPoint)(_crValue(categoryValue), categoryName));
-          _categories.push({
-            name: categoryName,
-            id: (dimension[_categoryIndex] || {}).id
-          });
         }
         return data;
       }, []);
