@@ -6,7 +6,7 @@ const S_ITEM = { position: 'relative' }
   top: 0,
   left: 16
 }
-, S_TITLE = { paddingLeft: 16 };
+, S_TITLE = { paddingLeft: 22 };
 
 const MenuTitle = ({
   refEl,

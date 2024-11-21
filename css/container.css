@@ -51,7 +51,7 @@
 
 .row__pane-topic {
   line-height: 2.2;
-  padding: 0 16px;    
+  padding: 0 12px;    
   border-bottom: 2px solid transparent;  
 }
 .row__pane-topic:hover {

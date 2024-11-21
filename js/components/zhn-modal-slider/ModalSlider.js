@@ -11,17 +11,20 @@ var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _MenuPage = _interopRequireDefault(require("./MenuPage"));
 var _MenuPages = _interopRequireDefault(require("./MenuPages"));
 var _jsxRuntime = require("react/jsx-runtime");
-const S_SHOW_HIDE = {
+const CL_SLIDER_PAGES = "slider-pages",
+  S_SHOW_HIDE = {
     position: 'absolute',
     overflow: 'hidden'
-  },
-  S_PAGES = {
+  }
+  /*
+  , S_PAGES = {
     display: 'flex',
     flexFlow: 'row nowrap',
     alignItems: 'flex-start',
     overflowX: 'hidden',
     transition: 'all 750ms ease-out'
-  },
+  }
+  */,
   DF_INIT_ID = 'p0',
   DF_MODEL = {
     pageWidth: 100,
@@ -33,7 +36,7 @@ const _crWidthStyle = v => ({
   width: v
 });
 const _addPage = (model, pages, id, title) => {
-  pages.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPage.default, {
+  pages.push(/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPage.default, {
     title: title,
     items: model[id],
     titleCl: model.titleCl,
@@ -119,7 +122,7 @@ const ModalSlider = _ref => {
       ...pageStyle
     },
     _divStyle = {
-      ...S_PAGES,
+      //...S_PAGES,
       ...pagesStyle,
       ..._crTransformStyle(pageWidth, pageCurrent)
     };
@@ -132,6 +135,7 @@ const ModalSlider = _ref => {
       style: _showHideStyle,
       isShow: isShow,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        className: CL_SLIDER_PAGES,
         style: _divStyle,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPages.default, {
           isShow: isShow,

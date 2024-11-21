@@ -9,10 +9,12 @@ import ShowHide from '../zhn/ShowHide';
 import MenuPage from './MenuPage';
 import MenuPages from './MenuPages';
 
-const S_SHOW_HIDE = {
+const CL_SLIDER_PAGES = "slider-pages"
+, S_SHOW_HIDE = {
   position: 'absolute',
   overflow: 'hidden'
 }
+/*
 , S_PAGES = {
   display: 'flex',
   flexFlow: 'row nowrap',
@@ -20,6 +22,7 @@ const S_SHOW_HIDE = {
   overflowX: 'hidden',
   transition: 'all 750ms ease-out'
 }
+*/
 
 , DF_INIT_ID = 'p0'
 , DF_MODEL = {
@@ -145,7 +148,7 @@ const ModalSlider = ({
     ...S_SHOW_HIDE,
     ...pageStyle
   }, _divStyle = {
-    ...S_PAGES,
+    //...S_PAGES,
     ...pagesStyle,
     ..._crTransformStyle(pageWidth, pageCurrent)
   };
@@ -161,7 +164,7 @@ const ModalSlider = ({
           style={_showHideStyle}
           isShow={isShow}
         >
-          <div style={_divStyle}>
+          <div className={CL_SLIDER_PAGES} style={_divStyle}>
             <MenuPages
               isShow={isShow}
               style={pageStyle}

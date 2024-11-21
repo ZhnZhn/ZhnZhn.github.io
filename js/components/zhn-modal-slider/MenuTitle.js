@@ -14,7 +14,7 @@ const S_ITEM = {
     left: 16
   },
   S_TITLE = {
-    paddingLeft: 16
+    paddingLeft: 22
   };
 const MenuTitle = _ref => {
   let {
