@@ -18,8 +18,7 @@ import {
   valueMoving,
   crError,
   fCrValue,
-  fCrLazyValue,
-  crRouters
+  fCrLazyValue
 } from '../AdapterFn';
 import {
   DT_EMPTY,
@@ -328,18 +327,5 @@ describe("fCrLazyValue", ()=>{
     expect(_value).toEqual(_crValue())
     expect(_getValue()).toBe(_value)
     expect(_getValue()).toBe(_value)
-  })
-})
-
-describe('crHm', ()=>{
-  it('should create object with null prototype', ()=>{
-    const routers = crRouters();
-    expect(Object.getPrototypeOf(routers)).toBe(null)
-    expect(routers.toString).toBe(void 0)
-    expect(routers.valueOf).toBe(void 0)
-  })
-  it('should add props from arg', ()=>{
-    const props = { a: 'a', b: 'b' };
-    expect(crRouters(props)).toEqual(props)
   })
 })

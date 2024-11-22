@@ -24,7 +24,7 @@ const crItemConf = option => ITEM_CONF_PROP_NAMES.reduce((itemConf, pn) => {
     })) : _value;
   }
   return itemConf;
-}, (0, _AdapterFn.crRouters)());
+}, (0, _AdapterFn.crRouter)());
 exports.crItemConf = crItemConf;
 const crValueConf = data => {
   const _p = data[data.length - 1];

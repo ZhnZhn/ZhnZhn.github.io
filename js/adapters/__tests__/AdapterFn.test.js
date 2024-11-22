@@ -390,19 +390,4 @@ describe("fCrLazyValue", () => {
     expect(_getValue()).toBe(_value);
   });
 });
-describe('crHm', () => {
-  it('should create object with null prototype', () => {
-    const routers = (0, _AdapterFn.crRouters)();
-    expect(Object.getPrototypeOf(routers)).toBe(null);
-    expect(routers.toString).toBe(void 0);
-    expect(routers.valueOf).toBe(void 0);
-  });
-  it('should add props from arg', () => {
-    const props = {
-      a: 'a',
-      b: 'b'
-    };
-    expect((0, _AdapterFn.crRouters)(props)).toEqual(props);
-  });
-});
 //# sourceMappingURL=AdapterFn.test.js.map

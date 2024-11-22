@@ -4,7 +4,7 @@ import {
 import {
   isArr,
   bindTo,
-  crRouters
+  crRouter
 } from './AdapterFn';
 import {
   getPointDate,
@@ -52,7 +52,7 @@ export const crItemConf = (
       : _value
   }
   return itemConf;
-}, crRouters());
+}, crRouter());
 
 export const crValueConf = data => {
   const _p = data[data.length-1];

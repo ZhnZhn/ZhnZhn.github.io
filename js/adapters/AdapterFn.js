@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isUndef = exports.isTokenInStr = exports.isSeriesDataCase = exports.isPositiveNumber = exports.isNumberOrNull = exports.isNotEmptyArr = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.domSanitize = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crRouters = exports.crGetRoute = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTd = exports.toFloatOrEmpty = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isUndef = exports.isTokenInStr = exports.isSeriesDataCase = exports.isPositiveNumber = exports.isNumberOrNull = exports.isNotEmptyArr = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.domSanitize = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crRouter = exports.crGetRoute = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -13,6 +13,9 @@ var _domSanitize = require("../utils/domSanitize");
 exports.domSanitize = _domSanitize.domSanitize;
 var _isTokenInStr = require("../utils/isTokenInStr");
 exports.isTokenInStr = _isTokenInStr.isTokenInStr;
+var _crRouter = require("../utils/crRouter");
+exports.crRouter = _crRouter.crRouter;
+exports.crGetRoute = _crRouter.crGetRoute;
 var _arrFn = require("../utils/arrFn");
 exports.isInArrStr = _arrFn.isInArrStr;
 exports.joinBy = _arrFn.joinBy;
@@ -250,11 +253,4 @@ const addSeriesDataTypeTo = data => {
 exports.addSeriesDataTypeTo = addSeriesDataTypeTo;
 const isSeriesDataCase = data => (data || {})._type === SERIES_DATA_TYPE;
 exports.isSeriesDataCase = isSeriesDataCase;
-const crRouters = obj => assign(Object.create(null), obj);
-exports.crRouters = crRouters;
-const crGetRoute = (routes, dfRoute) => {
-  const _routes = crRouters(routes);
-  return routeId => routeId && _routes[routeId] || dfRoute;
-};
-exports.crGetRoute = crGetRoute;
 //# sourceMappingURL=AdapterFn.js.map
