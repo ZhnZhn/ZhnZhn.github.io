@@ -29,7 +29,7 @@ const _isZoom = getChart => {
   });
   return !(from === to && to === EPOCH_DMY);
 };
-const _crModelMore = (props, isItemZoom) => (0, _menuModelFn.crSliderMenu)(_styleFn.CL_ROW_PANE_TOPIC, 180, 2, {
+const _crModelMore = (props, isItemZoom) => (0, _menuModelFn.crSliderMenu)(_styleFn.CL_ROW_PANE_TOPIC, 125, 2, {
   p0: [(0, _menuModelFn.crSubItem)("p1", "Chart"), (0, _uiApi.isFn)(props.onAddToWatch) ? (0, _menuModelFn.crItem)("Add To", props.onAddToWatch) : void 0, _isMinMax(props.config) ? (0, _menuModelFn.crItem)("MinMax", props.onMinMax, false) : void 0, isItemZoom ? (0, _menuModelFn.crItem)("Zoom", props.onZoom) : void 0, (0, _menuModelFn.crItem)("Copy", props.onCopy), (0, _menuModelFn.crItem)("PasteTo", props.onPasteTo)].filter(Boolean),
   p1: [(0, _menuModelFn.crItem)("x2 Height", props.onX2H, false), (0, _menuModelFn.crItem)("Full Screen", props.onFullScreen), (0, _menuModelFn.crItem)("Export As", props.onExport), (0, _menuModelFn.crItem)("Print", props.onPrint)]
 });

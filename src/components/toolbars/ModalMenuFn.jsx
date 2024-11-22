@@ -37,7 +37,7 @@ const _crModelMore = (
   isItemZoom
 ) => crSliderMenu(
   CL_ROW_PANE_TOPIC,
-  180,
+  125,
   2, {
   p0: [
     crSubItem("p1", "Chart"),

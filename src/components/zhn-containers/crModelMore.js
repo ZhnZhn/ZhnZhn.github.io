@@ -32,7 +32,7 @@ const crModelMore = (isAdminMode, {
   }
   return crSliderMenu(
     CL_ROW_PANE_TOPIC,
-    180,
+    170,
     2, {
       p0: P0,
       p1: p1,

@@ -22,7 +22,7 @@ const crModelMore = (isAdminMode, _ref) => {
   if (isAdminMode) {
     p1.push((0, _menuModelFn.crItem)('CompareTo', onCompareTo));
   }
-  return (0, _menuModelFn.crSliderMenu)(_styleFn.CL_ROW_PANE_TOPIC, 180, 2, {
+  return (0, _menuModelFn.crSliderMenu)(_styleFn.CL_ROW_PANE_TOPIC, 170, 2, {
     p0: P0,
     p1: p1,
     p2: [(0, _menuModelFn.crItem)('Value', (0, _uiApi.bindTo)(onSortBy, '_value')), (0, _menuModelFn.crItem)('Percent', (0, _uiApi.bindTo)(onSortBy, '_percentAbs')), (0, _menuModelFn.crItem)('Delta', (0, _uiApi.bindTo)(onSortBy, '_deltaAbs')), (0, _menuModelFn.crItem)('Reverse', onSortBy)],
