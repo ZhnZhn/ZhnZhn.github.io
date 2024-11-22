@@ -1,5 +1,6 @@
-export { clearPrototypeOf } from '../../utils/clearPrototypeOf';
+export { crRouter } from '../../utils/crRouter';
 
+import { isFn } from '../../utils/isTypeFn';
 import {
   LT_Q,
   LT_EU_STAT,
@@ -9,7 +10,6 @@ import {
 
 import { getLoadImpl } from './LoadImpl';
 
-const _isFn = fn => typeof fn === 'function';
 
 const _crNdlKey = ({
   loadId,
@@ -28,7 +28,7 @@ const _crItemKey = (option) => {
   } = option
   , loadConfig = getLoadImpl(loadId) || {}
   , { crKey } = loadConfig;
-  return _isFn(crKey)
+  return isFn(crKey)
     ? crKey(option)
     : _itemKey || value || 'key';
 };

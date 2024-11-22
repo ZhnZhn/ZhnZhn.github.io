@@ -1,6 +1,6 @@
-import { clearPrototypeOf } from './LogicFn';
+import { crRouter } from './LogicFn';
 
-const RouterFnValue = {
+const RouterFnValue = crRouter({
   ROne : (one) => one,
   RTwo : (one, two) => `${two}`,
   ROneTwo : (one, two) => `${one}/${two}`,
@@ -9,8 +9,6 @@ const RouterFnValue = {
   RPrefixOneEmptyTwo : (prefix, one, two) => `${prefix}/${two}`,
   RPrefixTwoOne : (prefix, one, two) => `${prefix}/${two}_${one}`,
   RZillow : (one, three) => `indicator_id=${one}&region_id=${three}`
-}
-
-clearPrototypeOf(RouterFnValue)
+});
 
 export default RouterFnValue

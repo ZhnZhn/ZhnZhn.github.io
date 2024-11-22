@@ -1,12 +1,12 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crKeyForConfig = exports.clearPrototypeOf = void 0;
-var _clearPrototypeOf = require("../../utils/clearPrototypeOf");
-exports.clearPrototypeOf = _clearPrototypeOf.clearPrototypeOf;
+exports.crRouter = exports.crKeyForConfig = void 0;
+var _crRouter = require("../../utils/crRouter");
+exports.crRouter = _crRouter.crRouter;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _LoadType = require("../../constants/LoadType");
 var _LoadImpl = require("./LoadImpl");
-const _isFn = fn => typeof fn === 'function';
 const _crNdlKey = _ref => {
   let {
     loadId,
@@ -28,7 +28,7 @@ const _crItemKey = option => {
     {
       crKey
     } = loadConfig;
-  return _isFn(crKey) ? crKey(option) : _itemKey || value || 'key';
+  return (0, _isTypeFn.isFn)(crKey) ? crKey(option) : _itemKey || value || 'key';
 };
 const crKeyForConfig = option => {
   const {

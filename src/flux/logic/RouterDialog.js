@@ -1,5 +1,5 @@
 import { addLoadImpl } from './LoadImpl';
-import { clearPrototypeOf } from './LogicFn';
+import { crRouter } from './LogicFn';
 
 import {
   BT_STOCK_MARKETS,
@@ -28,7 +28,7 @@ const _resolveDialogs = (
   return router[loadType] = _resolve(df);
 };
 
-const _router = {
+const _router = crRouter({
   DF: DialogSelectN,
   DialogSelectN: DialogSelectN,
 
@@ -171,9 +171,7 @@ const _router = {
       default: return;
     }
   }
-};
-
-clearPrototypeOf(_router)
+});
 
 export const getDialog = (
   type

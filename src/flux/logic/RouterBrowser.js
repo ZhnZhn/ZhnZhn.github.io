@@ -1,4 +1,4 @@
-import { clearPrototypeOf } from './LogicFn';
+import { crRouter } from './LogicFn';
 
 import {
   BT_NYSE_STOCKS,
@@ -9,7 +9,7 @@ import {
 import SourceBrowserDynamic from '../../components/browser-container/SourceBrowserDynamic';
 import SourceBrowserDynamic2 from '../../components/browser-container/SourceBrowserDynamic2';
 
-const RouterBrowser = {
+const RouterBrowser = crRouter({
   DEFAULT: SourceBrowserDynamic,
 
   [BT_NYSE_STOCKS]: SourceBrowserDynamic2,
@@ -46,8 +46,6 @@ const RouterBrowser = {
   get STAT_ALL() {
     return this._BrowserSlider;
   }
-}
-
-clearPrototypeOf(RouterBrowser)
+});
 
 export default RouterBrowser

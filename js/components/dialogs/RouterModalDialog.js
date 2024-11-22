@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.loadModalDialogs = exports.getModalDialog = void 0;
-var _clearPrototypeOf = require("../../utils/clearPrototypeOf");
+var _crRouter = require("../../utils/crRouter");
 var _BrowserType = require("../../constants/BrowserType");
 var _ModalDialogType = require("../../constants/ModalDialogType");
 var _AskDialog = _interopRequireDefault(require("./AskDialog"));
@@ -19,7 +19,7 @@ function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return 
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
-const _router = {
+const _router = (0, _crRouter.crRouter)({
   [_ModalDialogType.MDT_ASK]: _AskDialog.default,
   [_ModalDialogType.MDT_RELOAD]: _ReloadDialog.default,
   [_ModalDialogType.MDT_INFO]: _InfoDialog.default,
@@ -35,7 +35,7 @@ const _router = {
       return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/dialogs-modal/ModalDialogs.js"))).then(module => this.MD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     } else {
-      return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "modal-dialogs" */
+      return Promise.resolve().then(() => _interopRequireWildcard(require(/* webpackChunkName: "modal-dialogs" */
       /* webpackMode: "lazy" */
       "../../components/dialogs-modal/ModalDialogs"))).then(module => this.MD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
     }
@@ -58,7 +58,7 @@ const _router = {
       return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/watch-browser/ModalDialogs.js"))).then(module => this.WL = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     } else {
-      return Promise.resolve().then(() => _interopRequireWildcard(require( /* webpackChunkName: "watch-dialogs" */
+      return Promise.resolve().then(() => _interopRequireWildcard(require(/* webpackChunkName: "watch-dialogs" */
       /* webpackMode: "lazy" */
       "../../components/watch-browser/ModalDialogs"))).then(module => this.WL = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
     }
@@ -84,8 +84,7 @@ const _router = {
         return;
     }
   }
-};
-(0, _clearPrototypeOf.clearPrototypeOf)(_router);
+});
 const getModalDialog = id => _resolve(id ? _router[id] : void 0);
 exports.getModalDialog = getModalDialog;
 const loadModalDialogs = id => {

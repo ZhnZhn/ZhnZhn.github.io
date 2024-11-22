@@ -1,6 +1,6 @@
 import {
-  clearPrototypeOf
-} from '../../utils/clearPrototypeOf';
+  crRouter
+} from '../../utils/crRouter';
 import {
   BT_WATCH_LIST
 } from '../../constants/BrowserType';
@@ -37,7 +37,7 @@ import PasteToModalDialog from '../dialogs-modal/PasteToModalDialog';
 const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
 
-const _router = {
+const _router = crRouter({
   [MDT_ASK]: AskDialog,
   [MDT_RELOAD]: ReloadDialog,
   [MDT_INFO]: InfoDialog,
@@ -115,9 +115,7 @@ const _router = {
       default: return;
     }
   }
-}
-
-clearPrototypeOf(_router)
+});
 
 export const getModalDialog = (
   id

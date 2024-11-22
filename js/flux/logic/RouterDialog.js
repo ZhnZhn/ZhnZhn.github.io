@@ -16,7 +16,7 @@ const _resolveDialogs = (df, loadType, router) => {
   (0, _LoadImpl.addLoadImpl)(loadType, df._a);
   return router[loadType] = _resolve(df);
 };
-const _router = {
+const _router = (0, _LogicFn.crRouter)({
   DF: _DialogSelectN.default,
   DialogSelectN: _DialogSelectN.default,
   _loadD() {
@@ -146,8 +146,7 @@ const _router = {
         return;
     }
   }
-};
-(0, _LogicFn.clearPrototypeOf)(_router);
+});
 const getDialog = type => _resolve(type && _router[type] || _router.DF);
 exports.getDialog = getDialog;
 const loadDialogs = browserType => {

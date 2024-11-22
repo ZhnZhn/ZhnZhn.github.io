@@ -8,15 +8,14 @@ var _selectN = _interopRequireDefault(require("../creaters/selectN"));
 var _statN = _interopRequireDefault(require("../creaters/statN"));
 var _un = _interopRequireDefault(require("../creaters/un5"));
 const FN_NOOP = () => {};
-const _r = {
+const _r = (0, _LogicFn.crRouter)({
   DF: _selectN.default,
   DialogSelectN: _selectN.default,
   DialogQuery: _selectN.default,
   DialogStatN: _statN.default,
   UnDialog5: _un.default,
   UnDialogAgg: _un.default
-};
-(0, _LogicFn.clearPrototypeOf)(_r);
+});
 const RouterLoadFn = {
   getFn: (loadFnType, dialogType) => loadFnType ? _r[loadFnType] || FN_NOOP : dialogType && _r[dialogType] || _r.DF
 };
