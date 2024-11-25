@@ -1,4 +1,7 @@
-export { crRouter } from '../../utils/crRouter';
+export {
+  crRouter,
+  crGetRoute
+} from '../../utils/crRouter';
 
 import { isFn } from '../../utils/isTypeFn';
 import {
