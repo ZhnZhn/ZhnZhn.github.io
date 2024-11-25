@@ -1,6 +1,6 @@
-import { crRouter } from './LogicFn';
+import { crGetRoute } from './LogicFn';
 
-const RouterFnValue = crRouter({
+export const getCrValue = crGetRoute({
   ROne : (one) => one,
   RTwo : (one, two) => `${two}`,
   ROneTwo : (one, two) => `${one}/${two}`,
@@ -9,6 +9,4 @@ const RouterFnValue = crRouter({
   RPrefixOneEmptyTwo : (prefix, one, two) => `${prefix}/${two}`,
   RPrefixTwoOne : (prefix, one, two) => `${prefix}/${two}_${one}`,
   RZillow : (one, three) => `indicator_id=${one}&region_id=${three}`
-});
-
-export default RouterFnValue
+})

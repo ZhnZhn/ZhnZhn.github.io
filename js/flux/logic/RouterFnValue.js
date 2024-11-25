@@ -1,9 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.getCrValue = void 0;
 var _LogicFn = require("./LogicFn");
-const RouterFnValue = (0, _LogicFn.crRouter)({
+const getCrValue = exports.getCrValue = (0, _LogicFn.crGetRoute)({
   ROne: one => one,
   RTwo: (one, two) => `${two}`,
   ROneTwo: (one, two) => `${one}/${two}`,
@@ -13,5 +13,4 @@ const RouterFnValue = (0, _LogicFn.crRouter)({
   RPrefixTwoOne: (prefix, one, two) => `${prefix}/${two}_${one}`,
   RZillow: (one, three) => `indicator_id=${one}&region_id=${three}`
 });
-var _default = exports.default = RouterFnValue;
 //# sourceMappingURL=RouterFnValue.js.map
