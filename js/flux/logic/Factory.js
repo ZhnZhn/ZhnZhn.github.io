@@ -1,14 +1,13 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.crOptionDialog = exports.crDialog = exports.crAsyncBrowser = void 0;
 var _fBrowser = require("./fBrowser");
 exports.crAsyncBrowser = _fBrowser.crAsyncBrowser;
 var _uiApi = require("../../components/uiApi");
 var _RouterDialog = require("./RouterDialog");
-var _RouterLoadFn = _interopRequireDefault(require("./RouterLoadFn"));
-var _RouterFnValue = _interopRequireDefault(require("./RouterFnValue"));
+var _RouterLoadFn = require("./RouterLoadFn");
+var _RouterFnValue = require("./RouterFnValue");
 var _Msg = require("../../constants/Msg");
 var _LoadType = require("../../constants/LoadType");
 var _ComponentActions = require("../actions/ComponentActions");
@@ -22,14 +21,8 @@ const HAS_WIDE_WIDTH = (0, _has.isWideWidth)(600),
   _initFromDate = (0, _dateFn.getFromDate)(2),
   initToDate = (0, _dateFn.getToDate)();
 const _crFnValue = (valueFn, valueFnPrefix) => {
-  if (!valueFn) {
-    return;
-  }
-  const _crValue = _RouterFnValue.default[valueFn];
-  if (!_crValue) {
-    return;
-  }
-  return valueFnPrefix ? (0, _uiApi.bindTo)(_crValue, valueFnPrefix) : _crValue;
+  const _crValue = (0, _RouterFnValue.getCrValue)(valueFn);
+  return _crValue ? valueFnPrefix ? (0, _uiApi.bindTo)(_crValue, valueFnPrefix) : _crValue : void 0;
 };
 const _crFromDate = nInitFromDate => nInitFromDate ? nInitFromDate === '1y+1d' //Coinpaprika
 ? (0, _dateFn.addDaysToYmd)((0, _dateFn.getFromDate)(1), 1) : (0, _dateFn.getFromDate)(nInitFromDate) : _initFromDate;
@@ -118,7 +111,7 @@ const crDialog = (browserType, dialogConf) => {
     } = dialogProps,
     _dialogType = _getDialogType(dialogType, dialogProps),
     onAbout = _crClickAbout(dialogProps),
-    loadFn = _RouterLoadFn.default.getFn(loadFnType, _dialogType),
+    loadFn = (0, _RouterLoadFn.getLoadFn)(loadFnType, _dialogType),
     proxy = isProxy ? (0, _settingStore.getProxy)() : void 0,
     _getKey = isGetKey && _settingStore.getKey,
     onError = isGetKey && _onError,

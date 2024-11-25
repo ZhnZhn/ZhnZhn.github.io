@@ -7,8 +7,8 @@ import {
 } from '../../components/uiApi';
 
 import { getDialog } from './RouterDialog';
-import RouterLoadFn from './RouterLoadFn';
-import RouterFnValue from './RouterFnValue';
+import { getLoadFn } from './RouterLoadFn';
+import { getCrValue } from './RouterFnValue';
 
 import {
   YMD_DATE_OR_EMPTY,
@@ -53,18 +53,13 @@ const _crFnValue = (
   valueFn,
   valueFnPrefix
 ) => {
-  if (!valueFn) {
-    return;
-  }
-  const _crValue = RouterFnValue[valueFn];
-  if (!_crValue) {
-    return;
-  }
-  return valueFnPrefix
-    ? bindTo(_crValue, valueFnPrefix)
-    : _crValue;
+  const _crValue = getCrValue(valueFn);
+  return _crValue
+    ? valueFnPrefix
+        ? bindTo(_crValue, valueFnPrefix)
+        : _crValue
+    : void 0;
 };
-
 
 const _crFromDate = (
   nInitFromDate,
@@ -169,7 +164,7 @@ export const crDialog = (
    } = dialogProps
    , _dialogType = _getDialogType(dialogType, dialogProps)
    , onAbout = _crClickAbout(dialogProps)
-   , loadFn = RouterLoadFn.getFn(loadFnType, _dialogType)
+   , loadFn = getLoadFn(loadFnType, _dialogType)
    , proxy = isProxy
         ? getProxy()
         : void 0
