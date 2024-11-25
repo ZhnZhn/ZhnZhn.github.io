@@ -35,7 +35,7 @@ import {
   BT_IRELAND_STAT_ALL
 } from '../../constants/BrowserType';
 
-import RouterBrowser from './RouterBrowser';
+import { getBrowserComp } from './RouterBrowser';
 
 import RouterItemOption from '../../components/zhn-select/RouterItemOption';
 import RouterBrowserItem from '../../components/browser-items/RouterBrowserItem';
@@ -117,23 +117,19 @@ const STAT_ALL_TYPES = [
 const _isStatAll = browserType => STAT_ALL_TYPES
   .indexOf(browserType) !== -1;
 
-
 export const crAsyncBrowser = (
   option
 ) => {
   const bT = option.browserType;
   if (bT === BT_WATCH_LIST) {
-    return RouterBrowser[BT_WATCH_LIST]
+    return getBrowserComp(BT_WATCH_LIST)
       .then(_crBrowserWatchList);
   }
   if (_isStatAll(bT)) {
-    return RouterBrowser.STAT_ALL
+    return getBrowserComp("STAT_ALL")
       .then(Comp => _crBrowserDynamic(Comp, option));
   }
   return Promise.resolve(
-     _crBrowserDynamic(
-       RouterBrowser[bT] || RouterBrowser.DEFAULT,
-       option
-     )
+     _crBrowserDynamic(getBrowserComp(bT), option)
   );
 }

@@ -11,7 +11,7 @@ var _watchListStore = require("../watch-list/watchListStore");
 var _settingStore = require("../stores/settingStore");
 var _itemStore = require("../stores/itemStore");
 var _BrowserType = require("../../constants/BrowserType");
-var _RouterBrowser = _interopRequireDefault(require("./RouterBrowser"));
+var _RouterBrowser = require("./RouterBrowser");
 var _RouterItemOption = _interopRequireDefault(require("../../components/zhn-select/RouterItemOption"));
 var _RouterBrowserItem = _interopRequireDefault(require("../../components/browser-items/RouterBrowserItem"));
 const _crBrowserWatchList = Comp => (0, _uiApi.createElement)(Comp, {
@@ -76,12 +76,12 @@ const _isStatAll = browserType => STAT_ALL_TYPES.indexOf(browserType) !== -1;
 const crAsyncBrowser = option => {
   const bT = option.browserType;
   if (bT === _BrowserType.BT_WATCH_LIST) {
-    return _RouterBrowser.default[_BrowserType.BT_WATCH_LIST].then(_crBrowserWatchList);
+    return (0, _RouterBrowser.getBrowserComp)(_BrowserType.BT_WATCH_LIST).then(_crBrowserWatchList);
   }
   if (_isStatAll(bT)) {
-    return _RouterBrowser.default.STAT_ALL.then(Comp => _crBrowserDynamic(Comp, option));
+    return (0, _RouterBrowser.getBrowserComp)("STAT_ALL").then(Comp => _crBrowserDynamic(Comp, option));
   }
-  return Promise.resolve(_crBrowserDynamic(_RouterBrowser.default[bT] || _RouterBrowser.default.DEFAULT, option));
+  return Promise.resolve(_crBrowserDynamic((0, _RouterBrowser.getBrowserComp)(bT), option));
 };
 exports.crAsyncBrowser = crAsyncBrowser;
 //# sourceMappingURL=fBrowser.js.map
