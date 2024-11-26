@@ -83,7 +83,7 @@
   color: green;
   background-color: #d5d5bc;
   width: 100%;
-  padding: 6px 0 6px 5px;
+  padding: 6px 10px;  
   border-bottom: solid 2px transparent;
   cursor: pointer;
 }
