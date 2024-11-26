@@ -21,17 +21,18 @@ const crData = (
 ) => {
   const data = getJsonData(json)
   , series = getDataSeries(data)
-  , _refAreaIndex = getRefAreaIndex(option)
-  , dimension = getByPropsFrom(
-     getDataDimensions(data), "series", _refAreaIndex, "values"
+  , dataDimensions = getDataDimensions(data)
+  , _refAreaIndex = getRefAreaIndex(dataDimensions)
+  , dimensionValues = getByPropsFrom(
+     dataDimensions, "series", _refAreaIndex, "values"
   ) || []
-  , _crValue = fCrValue(option)  
+  , _crValue = fCrValue(option)
   , _data = getObjectKeys(series)
    .reduce((data, itemKey) => {
       const _categoryIndex = parseFloat(itemKey.split(":")[_refAreaIndex])
       , categoryValue = getByPropsFrom(series[itemKey], "observations", "0", 0)
       , categoryName = isNumber(_categoryIndex)
-          ? (dimension[_categoryIndex] || {}).name
+          ? (dimensionValues[_categoryIndex] || {}).name
           : null;
       if (isNumber(categoryValue) && isStr(categoryName)) {
         data.push(crCategoryPoint(
