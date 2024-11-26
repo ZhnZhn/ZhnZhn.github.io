@@ -1,1 +1,22 @@
-{"version":3,"sources":["../../../src/components/browser-items/RouterBrowserItem.js"],"names":["RouterBrowserItem","DEFAULT","Item","ItemWithCap","ItemLse"],"mappings":";;;;;;;AAAA;;AACA;;AACA;;AAEA,IAAMA,iBAAiB,GAAG;AACxBC,EAAAA,OAAO,EAAGC,gBADc;AAGxBA,EAAAA,IAAI,EAAGA,gBAHiB;AAIxBC,EAAAA,WAAW,EAAGA,uBAJU;AAKxBC,EAAAA,OAAO,EAAGA;AALc,CAA1B;eAQeJ,iB","sourcesContent":["import Item from './Item';\r\nimport ItemWithCap from './ItemWithCap';\r\nimport ItemLse from './ItemLse';\r\n\r\nconst RouterBrowserItem = {\r\n  DEFAULT : Item,\r\n\r\n  Item : Item,\r\n  ItemWithCap : ItemWithCap,\r\n  ItemLse : ItemLse\r\n};\r\n\r\nexport default RouterBrowserItem\r\n"],"file":"RouterBrowserItem.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-items/RouterBrowserItem.js"
+ ],
+ "file": "../../../src/components/browser-items/RouterBrowserItem.js",
+ "names": [
+  "_crRouter",
+  "require",
+  "_Item",
+  "_interopRequireDefault",
+  "_ItemWithCap",
+  "_ItemLse",
+  "getBrowserItemComp",
+  "exports",
+  "crGetRoute",
+  "Item",
+  "ItemWithCap",
+  "ItemLse"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,SAAA,GAAAC,OAAA;AAEA,IAAAC,KAAA,GAAAC,sBAAA,CAAAF,OAAA;AACA,IAAAG,YAAA,GAAAD,sBAAA,CAAAF,OAAA;AACA,IAAAI,QAAA,GAAAF,sBAAA,CAAAF,OAAA;AAEO,MAAMK,kBAAkB,GAAAC,OAAA,CAAAD,kBAAA,GAAG,IAAAE,oBAAU,EAAC;EAC3CC,IAAI,EAAJA,aAAI;EACJC,WAAW,EAAXA,oBAAW;EACXC,OAAO,EAAPA;AACF,CAAC,CAAC"
+}

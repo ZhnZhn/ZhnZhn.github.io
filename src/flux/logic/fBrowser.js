@@ -38,7 +38,7 @@ import {
 import { getBrowserComp } from './RouterBrowser';
 
 import RouterItemOption from '../../components/zhn-select/RouterItemOption';
-import RouterBrowserItem from '../../components/browser-items/RouterBrowserItem';
+import { getBrowserItemComp } from '../../components/browser-items/RouterBrowserItem';
 
 const _crBrowserWatchList = (
   Comp
@@ -69,11 +69,9 @@ const _crBrowserDynamic = (
      dfProps
     } = option
     , ItemOptionComp = itemOptionType
-        ? RouterItemOption[itemOptionType] || RouterBrowserItem.DF
-        : RouterBrowserItem.DF
-    , ItemComp = itemType
-        ? RouterBrowserItem[itemType] || RouterBrowserItem.DEFAULT
+        ? RouterItemOption[itemOptionType] || void 0
         : void 0
+    , ItemComp = getBrowserItemComp(itemType)      
     , onClickInfo = isUndef(ItemComp)
          ? void 0
          : showDescription
