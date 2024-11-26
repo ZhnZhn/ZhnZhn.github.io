@@ -42,6 +42,10 @@ const _crItemIdEp = (
   isCategory,
   items
 ) => `${_getRefArea(isCategory, items)}..${getValue(items[1])}._T`
+const _crItemIdGdpq = (
+  isCategory,
+  items
+) => `Q..${_getRefArea(isCategory, items)}.S1..${getValue(items[1])}......${getValue(items[2])}.`
 
 const _hmCrItemId = {
   mdf: _crItemIdMdf,
@@ -49,6 +53,7 @@ const _hmCrItemId = {
   mvt: _crItemIdMvt,
   cpi: _crItemIdCpi,
   hhi: _crItemIdHhi,
+  gdpq: _crItemIdGdpq,
   ep: _crItemIdEp
 }
 , _getCrItemId = crGetRoute(_hmCrItemId, _crItemId);
@@ -65,11 +70,15 @@ export const getDataSeries = (
   data
 ) => getByPropsFrom(data, "dataSets", 0, "series") || {}
 
-export const getRefAreaIndex = (
-  option
-) => option.dfFn === "hhi"
-  ? 1
-  : 0
+export const getRefAreaIndex = dimensions => {
+  const _series = (dimensions || {}).series || [];
+  for (let i = 0; i<_series.length; i++) {
+    if ((_series[i] || {}).id === "REF_AREA") {
+      return i;
+    }
+  }
+  return 0;
+}
 
 export const getDataDimensions = (
   data
