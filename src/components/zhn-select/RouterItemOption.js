@@ -1,11 +1,10 @@
+import { crGetRoute } from '../../utils/crRouter';
 
 import ItemOption from './ItemOption';
 import ItemTopicOption from './ItemTopicOption';
 
-const RouterItemOption = {
+export const getItemOptionComp = crGetRoute({
   DF: ItemOption,
   ItemOption,
   ItemTopicOption
-};
-
-export default RouterItemOption
+})

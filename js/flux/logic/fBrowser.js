@@ -1,6 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.crAsyncBrowser = void 0;
 var _uiApi = require("../../components/uiApi");
@@ -12,7 +11,7 @@ var _settingStore = require("../stores/settingStore");
 var _itemStore = require("../stores/itemStore");
 var _BrowserType = require("../../constants/BrowserType");
 var _RouterBrowser = require("./RouterBrowser");
-var _RouterItemOption = _interopRequireDefault(require("../../components/zhn-select/RouterItemOption"));
+var _RouterItemOption = require("../../components/zhn-select/RouterItemOption");
 var _RouterBrowserItem = require("../../components/browser-items/RouterBrowserItem");
 const _crBrowserWatchList = Comp => (0, _uiApi.createElement)(Comp, {
   key: _BrowserType.BT_WATCH_LIST,
@@ -36,7 +35,7 @@ const _crBrowserDynamic = (Comp, option) => {
       descrUrl,
       dfProps
     } = option,
-    ItemOptionComp = itemOptionType ? _RouterItemOption.default[itemOptionType] || void 0 : void 0,
+    ItemOptionComp = (0, _RouterItemOption.getItemOptionComp)(itemOptionType),
     ItemComp = (0, _RouterBrowserItem.getBrowserItemComp)(itemType),
     onClickInfo = (0, _uiApi.isUndef)(ItemComp) ? void 0 : _ComponentActions.showDescription
     //for Type2
