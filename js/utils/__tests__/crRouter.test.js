@@ -1,7 +1,7 @@
 "use strict";
 
 var _crRouter = require("../crRouter");
-describe("crRouters", () => {
+describe("crRouter", () => {
   const fn = _crRouter.crRouter;
   it("should create object with null prototype", () => {
     const routers = fn();

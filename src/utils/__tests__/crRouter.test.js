@@ -3,7 +3,7 @@ import {
   crGetRoute
 } from '../crRouter';
 
-describe("crRouters", () => {
+describe("crRouter", () => {
   const fn = crRouter;
   it("should create object with null prototype", ()=>{
     const routers = fn();

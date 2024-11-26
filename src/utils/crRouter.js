@@ -1,3 +1,4 @@
+import { isStr } from './isTypeFn';
 
 export const crRouter = obj => Object
  .assign(Object.create(null), obj)
@@ -7,5 +8,7 @@ export const crRouter = obj => Object
    dfRoute
  ) => {
    const _router = crRouter(routes);
-   return routeId => routeId && _router[routeId] || dfRoute;
+   return routeId => isStr(routeId)
+     ? _router[routeId] || dfRoute
+     : dfRoute;
  }
