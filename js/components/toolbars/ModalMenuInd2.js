@@ -11,12 +11,11 @@ var _ModalMenu = require("./ModalMenu.Style");
 var _RowTypeA = _interopRequireDefault(require("./RowTypeA"));
 var _RowTypeB = _interopRequireDefault(require("./RowTypeB"));
 var _jsxRuntime = require("react/jsx-runtime");
-const DF_POWER_BY_10 = 0,
-  _isNumber = n => typeof n === 'number' && n - n === 0,
-  _isPowerBy = config => {
-    var _config$plotOptions;
-    return !(config != null && (_config$plotOptions = config.plotOptions) != null && (_config$plotOptions = _config$plotOptions.bar) != null && (_config$plotOptions = _config$plotOptions.dataLabels) != null && _config$plotOptions.enabled);
-  };
+const S_MENU_PANE = {
+    margin: '4px 10px 8px 8px'
+  },
+  DF_POWER_BY_10 = 0,
+  _isPowerBy = config => !config?.plotOptions?.bar?.dataLabels?.enabled;
 const ModalMenuInd2 = _ref => {
   let {
     style,
@@ -28,8 +27,8 @@ const ModalMenuInd2 = _ref => {
   const _hasPowerBy10 = (0, _useRefInit.default)(() => _isPowerBy(config)),
     _refPowerBy10 = (0, _uiApi.useRef)(DF_POWER_BY_10),
     _onPowerBy10 = () => {
-      const _by = parseFloat(_refPowerBy10.current.getValue());
-      if (_isNumber(_by)) {
+      const _by = parseFloat((0, _uiApi.getInputValue)(_refPowerBy10));
+      if ((0, _uiApi.isNumber)(_by)) {
         (0, _IndicatorBuilder.powerBy10)(getChart(), _by);
         return true;
       }
@@ -42,7 +41,7 @@ const ModalMenuInd2 = _ref => {
     isShow: isShow,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: _ModalMenu.S_MENU_PANE,
+      style: S_MENU_PANE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeA.default, {
         caption: "Rate (S1/S2)",
         mathFn: _IndicatorBuilder.addCategoryRateTo,
@@ -57,7 +56,7 @@ const ModalMenuInd2 = _ref => {
         getChart: getChart
       }), _hasPowerBy10 && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowTypeB.default, {
         refEl: _refPowerBy10,
-        caption: "S1*Power of 10",
+        caption: "S1*PowerOf 10",
         initValue: DF_POWER_BY_10,
         min: -9,
         max: 9,
