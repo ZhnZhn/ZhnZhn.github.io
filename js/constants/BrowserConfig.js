@@ -56,10 +56,10 @@ const BrowserConfig = {
   [_BrowserType.BT_OECD]: _crBrowserItem(_BrowserType.BT_OECD, 'OECD', 'oecd'),
   [_BrowserType.BT_FRANCE_STATISTICS]: _crBrowserItem(_BrowserType.BT_FRANCE_STATISTICS, 'INSEE: Statistics France', 'statistics-france'),
   [_BrowserType.BT_UK_STATISTICS]: _crBrowserItem(_BrowserType.BT_UK_STATISTICS, 'ONS: Statistics UK', 'statistics-uk'),
-  [_BrowserType.BT_NORWAY_STATISTICS]: _crBrowserItem(_BrowserType.BT_NORWAY_STATISTICS, 'Statistics Norway', 'statistics-norway'),
+  [_BrowserType.BT_NORWAY_STATISTICS]: _crBrowserItem(_BrowserType.BT_NORWAY_STATISTICS, 'Statistics Norway (A)', 'statistics-norway'),
   [_BrowserType.BT_NORWAY_STAT_ALL]: {
     browserType: _BrowserType.BT_NORWAY_STAT_ALL,
-    caption: 'Statistics Norway All',
+    caption: 'Statistics Norway',
     dfProps: {
       bT: _BrowserType.BT_NORWAY_STAT_ALL,
       lT: 'NST_2',
@@ -69,10 +69,10 @@ const BrowserConfig = {
       rootUrl: 'https://data.ssb.no/api/v0/en/table'
     }
   },
-  [_BrowserType.BT_SWEDEN_STAT]: _crBrowserItem(_BrowserType.BT_SWEDEN_STAT, 'Statistics Sweden', 'statistics-sweden'),
+  [_BrowserType.BT_SWEDEN_STAT]: _crBrowserItem(_BrowserType.BT_SWEDEN_STAT, 'Statistics Sweden (A)', 'statistics-sweden'),
   [_BrowserType.BT_SWEDEN_STAT_ALL]: {
     browserType: _BrowserType.BT_SWEDEN_STAT_ALL,
-    caption: 'Statistics Sweden All',
+    caption: 'Statistics Sweden',
     dfProps: {
       bT: _BrowserType.BT_SWEDEN_STAT_ALL,
       lT: 'SWS',
@@ -85,7 +85,7 @@ const BrowserConfig = {
   [_BrowserType.BT_SWISS_STAT]: _crBrowserItem(_BrowserType.BT_SWISS_STAT, 'FSO: Statistics Swiss', 'statistics-swiss'),
   [_BrowserType.BT_FINLAND_STAT_ALL]: {
     browserType: _BrowserType.BT_FINLAND_STAT_ALL,
-    caption: 'Statistics Finland All',
+    caption: 'Statistics Finland',
     dfProps: {
       bT: _BrowserType.BT_FINLAND_STAT_ALL,
       lT: 'SFL',
@@ -98,7 +98,7 @@ const BrowserConfig = {
   },
   [_BrowserType.BT_DENMARK_STAT_ALL]: {
     browserType: _BrowserType.BT_DENMARK_STAT_ALL,
-    caption: 'Statistics Denmark All',
+    caption: 'Statistics Denmark',
     dfProps: {
       bT: _BrowserType.BT_DENMARK_STAT_ALL,
       lT: 'SDN',
@@ -113,7 +113,7 @@ const BrowserConfig = {
   },
   [_BrowserType.BT_IRELAND_STAT_ALL]: {
     browserType: _BrowserType.BT_IRELAND_STAT_ALL,
-    caption: 'CSO: Statistics Ireland All',
+    caption: 'CSO: Statistics Ireland',
     dfProps: {
       bT: _BrowserType.BT_IRELAND_STAT_ALL,
       lT: 'SIR',

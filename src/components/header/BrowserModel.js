@@ -94,13 +94,13 @@ const PAGE_CONFIGS_1 = [
 , PAGE_CONFIGS_3 = [
   [CL_ORG, 'INSEE: Statistics France', BT_FRANCE_STATISTICS],
   [CL_ORG, 'ONS: Statistics UK', BT_UK_STATISTICS],
-  [CL_ORG, 'Statistics Norway', BT_NORWAY_STATISTICS],
-  [CL_ORG, 'Statistics Norway All', BT_NORWAY_STAT_ALL],
-  [CL_ORG, 'Statistics Sweden', BT_SWEDEN_STAT],
-  [CL_ORG, 'Statistics Sweden All', BT_SWEDEN_STAT_ALL],
-  [CL_ORG, 'Statistics Finland All', BT_FINLAND_STAT_ALL],
-  [CL_ORG, 'Statistics Denmark All', BT_DENMARK_STAT_ALL],
-  [CL_ORG, 'CSO: Statistics Ireland All', BT_IRELAND_STAT_ALL],
+  [CL_ORG, 'Statistics Norway', BT_NORWAY_STAT_ALL],
+  [CL_ORG, 'Statistics Norway (A)', BT_NORWAY_STATISTICS],
+  [CL_ORG, 'Statistics Sweden', BT_SWEDEN_STAT_ALL],
+  [CL_ORG, 'Statistics Sweden (A)', BT_SWEDEN_STAT],
+  [CL_ORG, 'Statistics Finland', BT_FINLAND_STAT_ALL],
+  [CL_ORG, 'Statistics Denmark', BT_DENMARK_STAT_ALL],
+  [CL_ORG, 'CSO: Statistics Ireland', BT_IRELAND_STAT_ALL],
   [CL_ORG, 'FSO: Statistics Swiss', BT_SWISS_STAT]
 ]
 , PAGE_CONFIGS_4 = [
@@ -117,7 +117,7 @@ const PAGE_CONFIGS_1 = [
 
 const crBrowserModel = () => crSliderMenu(
   CL_BR,
-  235,
+  215,
   2, {
     p0: [
       _crSubMenuItem('p1', 'Economics'),

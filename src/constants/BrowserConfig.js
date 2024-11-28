@@ -181,12 +181,12 @@ const BrowserConfig = {
   ),
   [BT_NORWAY_STATISTICS]: _crBrowserItem(
     BT_NORWAY_STATISTICS,
-    'Statistics Norway',
+    'Statistics Norway (A)',
     'statistics-norway'
   ),
   [BT_NORWAY_STAT_ALL]: {
     browserType: BT_NORWAY_STAT_ALL,
-    caption: 'Statistics Norway All',
+    caption: 'Statistics Norway',
     dfProps: {
       bT: BT_NORWAY_STAT_ALL,
       lT: 'NST_2',
@@ -198,12 +198,12 @@ const BrowserConfig = {
   },
   [BT_SWEDEN_STAT]: _crBrowserItem(
     BT_SWEDEN_STAT,
-    'Statistics Sweden',
+    'Statistics Sweden (A)',
     'statistics-sweden'
   ),
   [BT_SWEDEN_STAT_ALL]: {
     browserType: BT_SWEDEN_STAT_ALL,
-    caption: 'Statistics Sweden All',
+    caption: 'Statistics Sweden',
     dfProps: {
       bT: BT_SWEDEN_STAT_ALL,
       lT: 'SWS',
@@ -220,7 +220,7 @@ const BrowserConfig = {
   ),
   [BT_FINLAND_STAT_ALL]: {
     browserType: BT_FINLAND_STAT_ALL,
-    caption: 'Statistics Finland All',
+    caption: 'Statistics Finland',
     dfProps: {
       bT: BT_FINLAND_STAT_ALL,
       lT: 'SFL',
@@ -233,7 +233,7 @@ const BrowserConfig = {
   },
   [BT_DENMARK_STAT_ALL]: {
     browserType: BT_DENMARK_STAT_ALL,
-    caption: 'Statistics Denmark All',
+    caption: 'Statistics Denmark',
     dfProps: {
       bT: BT_DENMARK_STAT_ALL,
       lT: 'SDN',
@@ -248,7 +248,7 @@ const BrowserConfig = {
   },
   [BT_IRELAND_STAT_ALL]: {
     browserType: BT_IRELAND_STAT_ALL,
-    caption: 'CSO: Statistics Ireland All',
+    caption: 'CSO: Statistics Ireland',
     dfProps: {
       bT: BT_IRELAND_STAT_ALL,
       lT: 'SIR',
