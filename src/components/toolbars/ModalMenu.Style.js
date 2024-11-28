@@ -9,7 +9,3 @@ export const S_MODAL_MENU = {
   borderRadius: 5,
   boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 0 5px'
 }
-
-export const S_MENU_PANE = {
-   margin: '6px 10px 6px 6px'
-}

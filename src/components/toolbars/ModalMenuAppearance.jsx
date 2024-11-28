@@ -11,17 +11,21 @@ import {
 import ModalPopup from '../zhn-moleculs/ModalPopup';
 import RowCheckBox1 from '../dialogs/rows/RowCheckBox1';
 import RowCaptionInput from './RowCaptionInput'
-import {
-  S_MODAL_MENU,
-  S_MENU_PANE
-} from './ModalMenu.Style';
+import { S_MODAL_MENU } from './ModalMenu.Style';
 
-const S_CHB = { padding: 0 }
+const S_MENU_PANE = {
+  margin: "6px 2px 8px 6px"
+},
+S_CHB = {
+  padding: 0
+}
 , S_ROW_INPUT = {
   paddingTop: 5,
   paddingLeft: 5
 }
-, S_CAPTION_STYLE = { width: void 0};
+, S_CAPTION_STYLE = {
+  width: void 0
+};
 
 const ModalMenuAppearance = ({
   style,
@@ -73,7 +77,7 @@ const ModalMenuAppearance = ({
           caption="Point Width"
           isBtAdd={false}
           style={S_ROW_INPUT}
-          captionStyle={S_CAPTION_STYLE}          
+          captionStyle={S_CAPTION_STYLE}
           initValue={4}
           maxLength={2}
           onAdd={_onPointWidth}

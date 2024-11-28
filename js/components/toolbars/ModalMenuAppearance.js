@@ -10,7 +10,10 @@ var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox1"
 var _RowCaptionInput = _interopRequireDefault(require("./RowCaptionInput"));
 var _ModalMenu = require("./ModalMenu.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const S_CHB = {
+const S_MENU_PANE = {
+    margin: "6px 2px 8px 6px"
+  },
+  S_CHB = {
     padding: 0
   },
   S_ROW_INPUT = {
@@ -51,7 +54,7 @@ const ModalMenuAppearance = _ref => {
     isShow: isShow,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: _ModalMenu.S_MENU_PANE,
+      style: S_MENU_PANE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
         caption: "Data Labels",
         style: S_CHB,
