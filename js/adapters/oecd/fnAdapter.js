@@ -13,11 +13,13 @@ const _crItemIdMvt = (isCategory, items) => `${_getRefArea(isCategory, items)}.Q
 const _crItemIdCpi = (isCategory, items) => `${_getRefArea(isCategory, items)}.M.${(0, _AdapterFn.getValue)(items[1])}.CPI.IX._T.N._Z`;
 const _crItemIdEp = (isCategory, items) => `${_getRefArea(isCategory, items)}..${(0, _AdapterFn.getValue)(items[1])}._T`;
 const _crItemIdGdpq = (isCategory, items) => `Q..${_getRefArea(isCategory, items)}.S1..${(0, _AdapterFn.getValue)(items[1])}......${(0, _AdapterFn.getValue)(items[2])}.`;
+const _crItemIdMtf = (isCategory, items) => `${_getRefArea(isCategory, items)}..${(0, _AdapterFn.getValue)(items[1])}..${(0, _AdapterFn.getValue)(items[2])}.USD_EXC.N.N`;
 const _hmCrItemId = {
     mdf: _crItemIdMdf,
     nvr: _crItemIdNvr,
     mvt: _crItemIdMvt,
     cpi: _crItemIdCpi,
+    mtf: _crItemIdMtf,
     hhi: _crItemIdHhi,
     gdpq: _crItemIdGdpq,
     ep: _crItemIdEp

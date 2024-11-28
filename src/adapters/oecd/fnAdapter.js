@@ -46,12 +46,17 @@ const _crItemIdGdpq = (
   isCategory,
   items
 ) => `Q..${_getRefArea(isCategory, items)}.S1..${getValue(items[1])}......${getValue(items[2])}.`
+const _crItemIdMtf = (
+  isCategory,
+  items
+) => `${_getRefArea(isCategory, items)}..${getValue(items[1])}..${getValue(items[2])}.USD_EXC.N.N`
 
 const _hmCrItemId = {
   mdf: _crItemIdMdf,
   nvr: _crItemIdNvr,
   mvt: _crItemIdMvt,
   cpi: _crItemIdCpi,
+  mtf: _crItemIdMtf,
   hhi: _crItemIdHhi,
   gdpq: _crItemIdGdpq,
   ep: _crItemIdEp
