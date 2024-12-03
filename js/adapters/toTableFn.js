@@ -1,11 +1,10 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crTableRows = exports.crTableOptions = exports.crTableConfig = exports.crNumberProps = exports.crNameProps = void 0;
+exports.crTableRows = exports.crTableOptions = exports.crTableConfig = exports.crStyleBold = exports.crNumberProps = exports.crNameProps = void 0;
 var _AdapterFn = require("./AdapterFn");
-const _isStr = v => typeof v === 'string';
 const crNameProps = (name, pnOrIsHideOrVoid, isHideOrVoid) => {
-  const [pn, isHide] = _isStr(pnOrIsHideOrVoid) ? [pnOrIsHideOrVoid, isHideOrVoid] : [name.toLowerCase(), pnOrIsHideOrVoid];
+  const [pn, isHide] = (0, _AdapterFn.isStr)(pnOrIsHideOrVoid) ? [pnOrIsHideOrVoid, isHideOrVoid] : [name.toLowerCase(), pnOrIsHideOrVoid];
   return {
     name,
     pn,
@@ -13,12 +12,16 @@ const crNameProps = (name, pnOrIsHideOrVoid, isHideOrVoid) => {
   };
 };
 exports.crNameProps = crNameProps;
-const crNumberProps = n => ({
-  toN: [n],
-  isF: true,
+const crStyleBold = () => ({
   style: {
     fontWeight: 'bold'
   }
+});
+exports.crStyleBold = crStyleBold;
+const crNumberProps = n => ({
+  toN: [n],
+  isF: true,
+  ...crStyleBold()
 });
 exports.crNumberProps = crNumberProps;
 const _replaceNaN = function (n, str) {

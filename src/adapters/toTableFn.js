@@ -1,17 +1,16 @@
 import {
   isTypeNumber,
+  isStr,
   numberFormat,
   roundBy
 } from './AdapterFn';
-
-const _isStr = v => typeof v === 'string';
 
 export const crNameProps = (
   name,
   pnOrIsHideOrVoid,
   isHideOrVoid
 ) => {
-  const [pn, isHide] = _isStr(pnOrIsHideOrVoid)
+  const [pn, isHide] = isStr(pnOrIsHideOrVoid)
     ? [pnOrIsHideOrVoid, isHideOrVoid]
     : [name.toLowerCase(), pnOrIsHideOrVoid];
   return {
@@ -21,12 +20,16 @@ export const crNameProps = (
   };
 };
 
-export const crNumberProps = (n) => ({
-  toN: [n],
-  isF: true,
+export const crStyleBold = () => ({
   style: {
     fontWeight: 'bold'
   }
+})
+
+export const crNumberProps = (n) => ({
+  toN: [n],
+  isF: true,
+  ...crStyleBold()
 })
 
 const _replaceNaN = (
