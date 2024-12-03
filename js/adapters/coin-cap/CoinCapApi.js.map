@@ -1,0 +1,32 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-cap/CoinCapApi.js"
+ ],
+ "file": "../../../src/adapters/coin-cap/CoinCapApi.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "API_URL",
+  "_setTitleTo",
+  "option",
+  "title",
+  "assign",
+  "CoinCapApi",
+  "getRequestUrl",
+  "items",
+  "offset",
+  "getValue",
+  "limit",
+  "parseInt",
+  "checkResponse",
+  "json",
+  "isArr",
+  "data",
+  "crError",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAOA,MAAMC,OAAO,GAAG,2BAA2B;AAE3C,MAAMC,WAAW,GAAGA,CAClBC,MAAM,EACNC,KAAK,KACF,IAAAC,iBAAM,EAACF,MAAM,EAAE;EAClBC;AACF,CAAC,CAAC;AAEF,MAAME,UAAU,GAAG;EACjBC,aAAaA,CAACJ,MAAM,EAAC;IACnB,MAAM;QAAEK;MAAM,CAAC,GAAGL,MAAM;MACtBM,MAAM,GAAG,IAAAC,mBAAQ,EAACF,KAAK,CAAC,CAAC,CAAC,CAAC;MAC3BG,KAAK,GAAG,IAAAD,mBAAQ,EAACF,KAAK,CAAC,CAAC,CAAC,CAAC;IAE5BN,WAAW,CAACC,MAAM,EAChB,2BAA2BM,MAAM,KAAKE,KAAK,GAC5C,CAAC;IACF,OAAO,GAAGV,OAAO,iBAAiBU,KAAK,WAAW,CAACC,QAAQ,CAACH,MAAM,CAAC,GAAC,CAAC,IAAGG,QAAQ,CAACD,KAAK,CAAE,EAAE;EAC5F,CAAC;EAEDE,aAAaA,CAACC,IAAI,EAAC;IACjB,IAAI,CAAC,IAAAC,gBAAK,EAAC,CAACD,IAAI,IAAI,CAAC,CAAC,EAAEE,IAAI,CAAC,EAAE;MAC7B,MAAM,IAAAC,kBAAO,EAAC,CAAC;IACjB;EACF;AACF,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEad,UAAU"
+}

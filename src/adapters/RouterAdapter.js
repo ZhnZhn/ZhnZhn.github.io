@@ -29,6 +29,7 @@ import {
   LT_AV_BLCH,
   LT_AV_ECON,
   LT_CRC,
+  LT_CCI,
   LT_CG,
   LT_CM,
   LT_CP,
@@ -89,6 +90,7 @@ import AvBlockchain from './av-blockchain/AvBlockchain'
 import AvEconomics from './av-economics/AvEconomics'
 
 import Crc from './crypto-compare/Crc'
+import Cci from './coin-cap/CoinCap'
 import Cg from './coin-gecko/Cg'
 import Cm from './coin-metrics/Cm'
 import Cp from './coin-paprika/Cp'
@@ -147,6 +149,7 @@ const RouterAdapter = {
   [LT_AV_ECON]: AvEconomics,
 
   [LT_CRC]: Crc,
+  [LT_CCI]: Cci,
   [LT_CG]: Cg,
   [LT_CM]: Cm,
   [LT_CP]: Cp,

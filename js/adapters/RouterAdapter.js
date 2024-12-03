@@ -36,6 +36,7 @@ var _Irena = _interopRequireDefault(require("./irena/Irena"));
 var _AvBlockchain = _interopRequireDefault(require("./av-blockchain/AvBlockchain"));
 var _AvEconomics = _interopRequireDefault(require("./av-economics/AvEconomics"));
 var _Crc = _interopRequireDefault(require("./crypto-compare/Crc"));
+var _CoinCap = _interopRequireDefault(require("./coin-cap/CoinCap"));
 var _Cg = _interopRequireDefault(require("./coin-gecko/Cg"));
 var _Cm = _interopRequireDefault(require("./coin-metrics/Cm"));
 var _Cp = _interopRequireDefault(require("./coin-paprika/Cp"));
@@ -85,6 +86,7 @@ const RouterAdapter = {
   [_LoadType.LT_AV_BLCH]: _AvBlockchain.default,
   [_LoadType.LT_AV_ECON]: _AvEconomics.default,
   [_LoadType.LT_CRC]: _Crc.default,
+  [_LoadType.LT_CCI]: _CoinCap.default,
   [_LoadType.LT_CG]: _Cg.default,
   [_LoadType.LT_CM]: _Cm.default,
   [_LoadType.LT_CP]: _Cp.default,
