@@ -1,4 +1,7 @@
-import { toHref } from '../uiApi';
+import {
+  isFn,
+  toHref
+} from '../uiApi';
 import {
   crTdStyle,
   toFormatValue
@@ -9,10 +12,12 @@ import {
   CL_BLACK
 } from './Style'
 
-const _isFn = fn => typeof fn === 'function';
-
-const _crLinkEl = (id, title, fn) => {
-  const _href = _isFn(fn)
+const _crLinkEl = (
+  id,
+  title,
+  fn
+) => {
+  const _href = isFn(fn)
     ? fn(id, title)
     : void 0;
   return (
@@ -26,8 +31,15 @@ const _crLinkEl = (id, title, fn) => {
 };
 
 
-const _crTdStyle = (r, h) => {
-  const { pn, style, isR } = h
+const _crTdStyle = (
+  r,
+  h
+) => {
+  const {
+    pn,
+    style,
+    isR
+  } = h
   , v = r[pn]
   , _tdStyle = crTdStyle({ v, isR })
   ,  tdStyle  = (r.style || {})[pn];
@@ -38,17 +50,32 @@ const _crTdStyle = (r, h) => {
     ...tdStyle
   };
 }
-const _crTdElOrTitle = (r, h, numberFormat, valueToHref) => {
-  const { pn, isHref } = h
+const _crTdElOrTitle = (
+  r,
+  h,
+  numberFormat,
+  valueToHref
+) => {
+  const {
+    pn,
+    isHref
+  } = h
   , v = r[pn]
-  , _v = toFormatValue({ h, v, fn: numberFormat })
+  , _v = toFormatValue({
+    h, v,
+    fn: h.fn || numberFormat
+  })
   return  isHref
     ? _crLinkEl(r.id, _v, valueToHref)
     : _v;
 }
 
 const _renderRows = (props) => {
-  const { headers, rows, tableFn } = props
+  const {
+    headers,
+    rows,
+    tableFn
+  } = props
   , {
       numberFormat,
       valueToHref
@@ -66,7 +93,6 @@ const _renderRows = (props) => {
       return (
         <td
           key={_key}
-          role="cell"
           style={{...S_TD, ..._style}}
         >
           {_elOrTitle}

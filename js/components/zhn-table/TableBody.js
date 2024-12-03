@@ -6,9 +6,8 @@ var _uiApi = require("../uiApi");
 var _tableFn = require("./tableFn");
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const _isFn = fn => typeof fn === 'function';
 const _crLinkEl = (id, title, fn) => {
-  const _href = _isFn(fn) ? fn(id, title) : void 0;
+  const _href = (0, _uiApi.isFn)(fn) ? fn(id, title) : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
     className: _Style.CL_LINK,
     href: (0, _uiApi.toHref)(_href),
@@ -42,7 +41,7 @@ const _crTdElOrTitle = (r, h, numberFormat, valueToHref) => {
     _v = (0, _tableFn.toFormatValue)({
       h,
       v,
-      fn: numberFormat
+      fn: h.fn || numberFormat
     });
   return isHref ? _crLinkEl(r.id, _v, valueToHref) : _v;
 };
@@ -66,7 +65,6 @@ const _renderRows = props => {
           _style = _crTdStyle(r, h),
           _elOrTitle = _crTdElOrTitle(r, h, numberFormat, valueToHref);
         return /*#__PURE__*/(0, _jsxRuntime.jsx)("td", {
-          role: "cell",
           style: {
             ..._Style.S_TD,
             ..._style
