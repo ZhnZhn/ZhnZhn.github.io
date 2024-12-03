@@ -101,9 +101,10 @@ export const toFixedNumber = (
   ? value
   : roundBy(
       value,
-      value<10 ? 4
-       : value<10000 ? 2
-          : 0
+      value<0.0001 ? 8
+        : value<10 ? 4
+        : value<10000 ? 2
+        : 0
   )
 
 export const crId = (prefix) => (

@@ -84,7 +84,7 @@ const toFixed = value => {
   return bValue.gt('10') ? parseInt(bValue.toFixed(0), 10) : parseFloat(bValue.toFixed(2));
 };
 exports.toFixed = toFixed;
-const toFixedNumber = value => !(0, _isTypeFn.isNumber)(value) ? value : roundBy(value, value < 10 ? 4 : value < 10000 ? 2 : 0);
+const toFixedNumber = value => !(0, _isTypeFn.isNumber)(value) ? value : roundBy(value, value < 0.0001 ? 8 : value < 10 ? 4 : value < 10000 ? 2 : 0);
 exports.toFixedNumber = toFixedNumber;
 const crId = prefix => (prefix || '') + Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
 exports.crId = crId;

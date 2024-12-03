@@ -205,6 +205,8 @@ describe('toFixed', () => {
 describe('toFixedNumber', ()=>{
   const fn = toFixedNumber;
   test('should return number rounded depend of value', ()=>{
+    expect(fn(0.00000095)).toBe(0.00000095)
+    expect(fn(0.00095)).toBe(0.001)
     expect(fn(9.00005)).toBe(9.0001)
     expect(fn(9000.005)).toBe(9000.01)
     expect(fn(10000.005)).toBe(10000)
