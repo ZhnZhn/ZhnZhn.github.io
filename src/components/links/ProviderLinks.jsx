@@ -36,6 +36,7 @@ const LINK_CONFIGS = [
  ["StatDenmark","Statistics Denmark", _crUrl("www.dst.dk/en/")],
  ["StatIreland","CSO: Statistics Ireland", _crUrl("www.cso.ie/en/")],
  ["FSO","FSO: Statistics Swiss", _crUrl("www.bfs.admin.ch/bfs/en/home.html")],
+ ["CoinCap", _crUrl("coincap.io")],
  ["CoinGecko", _crUrl("www.coingecko.com/en/")],
  ["CoinMetrics", _crUrl("coinmetrics.io")],
  ["CoinLore", _crUrl("www.coinlore.com")],
