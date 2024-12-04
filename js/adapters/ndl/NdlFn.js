@@ -19,6 +19,22 @@ const _crItemCaption = _ref => {
 const _isStrEqTo = (str, strTo) => (0, _AdapterFn.isStr)(str) && str.toLowerCase() === strTo;
 const _crLinkId = (database_code, dataset_code) => database_code && dataset_code ? `${database_code}/${dataset_code}` : void 0;
 const _getData = obj => obj.data || [];
+const _getItemIndexTuple = columns => {
+  let dateIndex = 0,
+    valueIndex = 1;
+  for (let i = 0; i < columns.length; i++) {
+    const {
+      name
+    } = columns[i] || {};
+    if (name === "date") {
+      dateIndex = i;
+    }
+    if (name === "value") {
+      valueIndex = i;
+    }
+  }
+  return [dateIndex, valueIndex];
+};
 const getData = _ref2 => {
   let {
     dataset,
@@ -28,7 +44,8 @@ const getData = _ref2 => {
     return _getData(dataset);
   }
   if (datatable) {
-    return _getData(datatable).map(arrItem => [arrItem[arrItem.length - 2], arrItem[arrItem.length - 1]]);
+    const [dateIndex, valueIndex] = _getItemIndexTuple(datatable.columns || []);
+    return _getData(datatable).map(arrItem => [arrItem[dateIndex], parseFloat(arrItem[valueIndex])]);
   }
   return [];
 };

@@ -41,6 +41,24 @@ const _crLinkId = (
 
 const _getData = obj => obj.data || [];
 
+const _getItemIndexTuple = (columns) => {
+  let dateIndex = 0,
+  valueIndex = 1
+  for(let i=0; i<columns.length;i++){
+    const { name } = columns[i] || {};
+    if (name === "date") {
+      dateIndex = i
+    }
+    if (name === "value") {
+      valueIndex = i
+    }
+  }
+  return [
+    dateIndex,
+    valueIndex
+  ];
+}
+
 export const getData = ({
   dataset,
   datatable
@@ -49,9 +67,13 @@ export const getData = ({
     return _getData(dataset);
   }
   if (datatable) {
+    const [
+      dateIndex,
+      valueIndex
+    ] = _getItemIndexTuple(datatable.columns || [])
     return _getData(datatable).map(arrItem => [
-      arrItem[arrItem.length - 2],
-      arrItem[arrItem.length - 1]
+      arrItem[dateIndex],
+      parseFloat(arrItem[valueIndex])
     ]);
   }
   return [];
