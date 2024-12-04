@@ -51,14 +51,14 @@ const DP = [
   Link.Binance, Link.Bitstamp, Link.Coinbase
 ]
 , DP_KEY = [
-  [Link.Ndl, '50 000'],
+  Link.Ndl,
   Link.AlphaVantage,
   Link.Fmp, Link.Tw, Link.Intrinio,
   Link.WTO,
   [Link.Bsl, '500'], Link.Eia, Link.Bea
 ]
 , DP_PR = [
-  [Link.Ndl, '50'],
+  Link.Ndl,
   Link.BIS,
   Link.ECB,
   Link.SNB,

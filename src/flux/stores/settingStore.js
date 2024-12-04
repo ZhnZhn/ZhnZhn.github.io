@@ -43,6 +43,7 @@ const _createObject = () => Object.create(null)
 , _assign = Object.assign;
 
 const _withApiKey = [
+  LT_Q,
   LT_AV, LT_AV_BLCH, LT_AV_ECON,
   LT_FMP, LT_INTR, LT_TW,
   LT_BEA, LT_EIA,
