@@ -31,19 +31,40 @@ const _crSetUrl = option => {
     _apiKeyQuery = _crApiKeyQuery(option);
   return `${proxy}${SET_URL}${tokenPath}${id}.json?sort_order=asc${_apiKeyQuery}${_trimStartQuery}`;
 };
+const _rTableQuery = {
+  jo: _ref => {
+    let {
+      items
+    } = _ref;
+    return `energy=OIL&country=${(0, _AdapterFn.getValue)(items[0])}&code=${(0, _AdapterFn.getValue)(items[1])}${(0, _AdapterFn.getValue)(items[2])}${(0, _AdapterFn.getValue)(items[3])}`;
+  },
+  jg: _ref2 => {
+    let {
+      items
+    } = _ref2;
+    return `energy=GAS&country=${(0, _AdapterFn.getValue)(items[0])}&code=${(0, _AdapterFn.getValue)(items[1])}${(0, _AdapterFn.getValue)(items[2])}`;
+  }
+};
+const _crTableQuery = option => {
+  const {
+      dfIdFn
+    } = option,
+    _crQuery = dfIdFn && _rTableQuery[dfIdFn];
+  return _crQuery ? _crQuery(option) : option.value;
+};
 const _crTableUrl = option => {
   const {
       proxy,
       dfTable,
       dfFromDate,
-      value,
       key,
       fromDate
     } = option,
+    value = _crTableQuery(option),
     _apiKeyQuery = _crApiKeyQuery(option),
     _dateQuery = dfFromDate ? _crQueryToken('date.gte', fromDate) : '';
   option.key = key || value;
-  return `${proxy}${TABLE_URL}${dfTable}.json?${value || ''}${_apiKeyQuery}${_dateQuery}`;
+  return `${proxy}${TABLE_URL}${dfTable}?${value || ''}${_apiKeyQuery}${_dateQuery}`;
 };
 const _checkErr = err => {
   if (err) {

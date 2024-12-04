@@ -43,6 +43,21 @@ const _crSetUrl = (option) => {
   return `${proxy}${SET_URL}${tokenPath}${id}.json?sort_order=asc${_apiKeyQuery}${_trimStartQuery}`;
 };
 
+const _rTableQuery = {
+  jo: ({ items }) => `energy=OIL&country=${getValue(items[0])}&code=${getValue(items[1])}${getValue(items[2])}${getValue(items[3])}`,
+  jg: ({ items }) => `energy=GAS&country=${getValue(items[0])}&code=${getValue(items[1])}${getValue(items[2])}`
+};
+
+const _crTableQuery = (
+  option
+) => {
+  const { dfIdFn } = option
+  , _crQuery = dfIdFn && _rTableQuery[dfIdFn];
+  return _crQuery
+    ? _crQuery(option)
+    : option.value;
+};
+
 const _crTableUrl = (
   option
 ) => {
@@ -50,16 +65,16 @@ const _crTableUrl = (
     proxy,
     dfTable,
     dfFromDate,
-    value,
     key,
     fromDate,
   } = option
+  , value = _crTableQuery(option)
   , _apiKeyQuery = _crApiKeyQuery(option)
   , _dateQuery = dfFromDate
       ? _crQueryToken('date.gte', fromDate)
       : '';
   option.key = key || value
-  return `${proxy}${TABLE_URL}${dfTable}.json?${value || ''}${_apiKeyQuery}${_dateQuery}`;
+  return `${proxy}${TABLE_URL}${dfTable}?${value || ''}${_apiKeyQuery}${_dateQuery}`;
 };
 
 const _checkErr = (err) => {
