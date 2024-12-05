@@ -18,9 +18,6 @@ After closing a **Chart container** all charts remains. In one time max three **
 
 Some open and private data providers require user's API Key.   
 
-For example, for loading data from Nasdaq Data Link without API Key exists some restriction on frequency and amount of queries (50 per day/1 at a time) and can be deprecated, according to Nasdaq Data Link.
-With API Key it is possible to make (50 000 per day/1 at a time). It's free of charge to receive.  
-
 Data providers API Keys can be set on the **tab ApiKeys, dialog Settings**. For loading data from data providers without CORS required local HTTP proxy server, could be set in the **dialog Settings**.  
 
 There is three UI theme in the web app ERC: **Dark**, **Light**, and **Sand** can be set on **tab Options, dialog Settings**. All user's settings keep in browser's memory only for a current web session.  

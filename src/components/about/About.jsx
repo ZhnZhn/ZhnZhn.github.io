@@ -18,7 +18,6 @@ import DataProviders from './DataProviders';
 
 import StepTitles from '../zhn/StepTitles';
 import { SpanBlack } from '../zhn/SpanToken';
-import Link from '../links/ProviderLinks';
 import LogosBar from './LogosBar';
 
 const CL_ABOUT = crBsContainerCn("about-container")
@@ -43,7 +42,6 @@ const CL_ABOUT = crBsContainerCn("about-container")
 , S_MT_4 = { marginTop: 4 }
 , S_BT_X_PLATFORM = { marginLeft: 12 }
 , S_GREEN = { color: '#80c040' }
-, S_BLUE_DARK = { color: '#2f7ed8' }
 , S_RED = { color: '#f44336' }
 
 , STEP_TITLES = [
@@ -136,16 +134,6 @@ const About = () => {
             </p>
             <p style={S_MB_8EM}>
               Some open and private data providers require user's <SpanBlack>API Key</SpanBlack>.
-            </p>
-            <p style={S_MB_8EM}>
-              <span>For example, for loading data from&nbsp;</span>
-              <Link.Ndl/>
-              <span>
-              &nbsp;without API Key exists some restriction
-              on frequency and amount of queries (<span style={S_BLUE_DARK}>50 per day/1 at a time</span>) and can be deprecated,
-              according to Nasdaq Data Link. With <SpanBlack>API Key</SpanBlack> it is possible to make (<span style={S_BLUE_DARK}>50 000 per day/1 at a time</span>).
-              It's free of charge to receive.
-              </span>
             </p>
             <p style={S_MB_8EM}>
               Data providers API Keys can be set on the <SpanBlack>tab ApiKeys, dialog Settings [s]</SpanBlack>.

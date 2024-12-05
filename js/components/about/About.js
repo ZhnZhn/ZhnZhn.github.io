@@ -15,7 +15,6 @@ var _XPlatformLink = _interopRequireDefault(require("./XPlatformLink"));
 var _DataProviders = _interopRequireDefault(require("./DataProviders"));
 var _StepTitles = _interopRequireDefault(require("../zhn/StepTitles"));
 var _SpanToken = require("../zhn/SpanToken");
-var _ProviderLinks = _interopRequireDefault(require("../links/ProviderLinks"));
 var _LogosBar = _interopRequireDefault(require("./LogosBar"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_ABOUT = (0, _styleFn.crBsContainerCn)("about-container"),
@@ -56,9 +55,6 @@ const CL_ABOUT = (0, _styleFn.crBsContainerCn)("about-container"),
   },
   S_GREEN = {
     color: '#80c040'
-  },
-  S_BLUE_DARK = {
-    color: '#2f7ed8'
   },
   S_RED = {
     color: '#f44336'
@@ -148,21 +144,6 @@ const About = () => {
             children: ["Some open and private data providers require user's ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
               children: "API Key"
             }), "."]
-          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
-            style: S_MB_8EM,
-            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              children: "For example, for loading data from\xA0"
-            }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ProviderLinks.default.Ndl, {}), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
-              children: ["\xA0without API Key exists some restriction on frequency and amount of queries (", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-                style: S_BLUE_DARK,
-                children: "50 per day/1 at a time"
-              }), ") and can be deprecated, according to Nasdaq Data Link. With ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-                children: "API Key"
-              }), " it is possible to make (", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-                style: S_BLUE_DARK,
-                children: "50 000 per day/1 at a time"
-              }), "). It's free of charge to receive."]
-            })]
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
             style: S_MB_8EM,
             children: ["Data providers API Keys can be set on the ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
