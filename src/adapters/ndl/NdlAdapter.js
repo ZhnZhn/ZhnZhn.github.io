@@ -4,33 +4,21 @@ import {
   CHT_LINE,
   CHT_COLUMN,
   CHT_YEARLY,
-  CHT_AREA_YEARLY,
-  CHT_SCATTER,
-  CHT_SCATTER_UP,
-  CHT_SCATTER_DOWN
+  CHT_AREA_YEARLY
 } from '../../constants/ChartType';
-import {
-  crSeriaConfig
-} from '../../charts/ChartConfigFn';
+import { crSeriaConfig } from '../../charts/ChartConfigFn';
 
 import {
+  crGetRoute,
   ymdToUTC,
   findMinY
 } from '../AdapterFn';
-import {
-  compareByDate
-} from '../compareByFn';
-import {
-  getData,
-  getDataColumnIndex
-} from './NdlFn';
+import { compareByDate } from '../compareByFn';
+
+import { getData } from './NdlFn';
 
 import toArea from './toArea';
 import crYearlyConfig from '../toYearsByMonths';
-import {
-  toScatterConfig,
-  toScatterSeria
-} from './toScatter';
 
 const _fToConfig = crConfig => (
   json,
@@ -39,33 +27,21 @@ const _fToConfig = crConfig => (
   config: crConfig(getData(json), option)
 });
 
-const _fToSeria = crSeria => (
-  json,
-  option,
-  chart
-) => crSeria(getData(json), option, chart);
-
-const _crScatterConfig = _fToConfig(toScatterConfig);
-const _toYearlyByMonth = _fToConfig(crYearlyConfig);
-const _rToConfig = {
+const _toYearlyByMonth = _fToConfig(crYearlyConfig)
+, _getCrConfig = crGetRoute({
   [CHT_AREA]: toArea,
   [CHT_SPLINE]: toArea,
   [CHT_LINE]: toArea,
   [CHT_COLUMN]: toArea,
 
   [CHT_YEARLY]: _toYearlyByMonth,
-  [CHT_AREA_YEARLY]: _toYearlyByMonth,
-
-  [CHT_SCATTER]: _crScatterConfig,
-  [CHT_SCATTER_UP]: _crScatterConfig,
-  [CHT_SCATTER_DOWN]: _crScatterConfig
-};
+  [CHT_AREA_YEARLY]: _toYearlyByMonth
+}, toArea);
 
 const _crSeriaData = (
-  data,
-  yIndex
+  data
 ) => data
-  .map(p => [ ymdToUTC(p[0]), p[yIndex] ])
+  .map(p => [ ymdToUTC(p[0]), p[1] ])
   .sort(compareByDate);
 
 const _toSeria = (
@@ -73,8 +49,7 @@ const _toSeria = (
   option
 ) => {
   const { value:chartId } = option
-  , yPointIndex = getDataColumnIndex(json, option)
-  , data = _crSeriaData(getData(json), yPointIndex);
+  , data = _crSeriaData(getData(json));
   return crSeriaConfig({
       name: chartId.substring(0,12),
       data: data,
@@ -82,23 +57,12 @@ const _toSeria = (
   });
 };
 
-const _crScatterSeria = _fToSeria(toScatterSeria);
-const _rToSeria = {
-  DF: _toSeria,
-  [CHT_SCATTER]: _crScatterSeria,
-  [CHT_SCATTER_UP]: _crScatterSeria,
-  [CHT_SCATTER_DOWN]: _crScatterSeria
-};
-
 const NdlAdapter = {
   toConfig(json, option){
-     const { seriaType=CHT_AREA } = option;
-     return _rToConfig[seriaType](json, option);
+     return _getCrConfig(option.seriaType)(json, option);
   },
 
   toSeries(json, option, chart){
-    const { seriaType } = option
-    , _toSeria = _rToSeria[seriaType] || _rToSeria.DF;
     return _toSeria(json, option, chart);
   }
 };
