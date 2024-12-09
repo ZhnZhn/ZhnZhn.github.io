@@ -5,66 +5,26 @@ import {
   CHT_COLUMN,
   CHT_YEARLY,
   CHT_AREA_YEARLY
-} from '../../constants/ChartType';
-import { crSeriaConfig } from '../../charts/ChartConfigFn';
+} from "../../constants/ChartType";
 
-import {
-  crGetRoute,
-  ymdToUTC,
-  findMinY
-} from '../AdapterFn';
-import { compareByDate } from '../compareByFn';
+import { crGetRoute } from "../AdapterFn";
+import { crAdapterRouter } from "../crAdapterRouter";
 
-import { getData } from './NdlFn';
+import { toLineAdapter } from "./toLineAdapter";
+import { toYearlyAdapter } from "./toYearlyAdapter";
 
-import toArea from './toArea';
-import crYearlyConfig from '../toYearsByMonths';
+const _getAdapterRoute = crGetRoute({
+  [CHT_AREA]: toLineAdapter,
+  [CHT_SPLINE]: toLineAdapter,
+  [CHT_LINE]: toLineAdapter,
+  [CHT_COLUMN]: toLineAdapter,
 
-const _fToConfig = crConfig => (
-  json,
-  option
-) => ({
-  config: crConfig(getData(json), option)
+  [CHT_YEARLY]:  toYearlyAdapter,
+  [CHT_AREA_YEARLY]: toYearlyAdapter
+}, toLineAdapter)
+
+const NdlAdapter = crAdapterRouter({
+  getRoute: ({ seriaType }) => _getAdapterRoute(seriaType)
 });
-
-const _toYearlyByMonth = _fToConfig(crYearlyConfig)
-, _getCrConfig = crGetRoute({
-  [CHT_AREA]: toArea,
-  [CHT_SPLINE]: toArea,
-  [CHT_LINE]: toArea,
-  [CHT_COLUMN]: toArea,
-
-  [CHT_YEARLY]: _toYearlyByMonth,
-  [CHT_AREA_YEARLY]: _toYearlyByMonth
-}, toArea);
-
-const _crSeriaData = (
-  data
-) => data
-  .map(p => [ ymdToUTC(p[0]), p[1] ])
-  .sort(compareByDate);
-
-const _toSeria = (
-  json,
-  option
-) => {
-  const { value:chartId } = option
-  , data = _crSeriaData(getData(json));
-  return crSeriaConfig({
-      name: chartId.substring(0,12),
-      data: data,
-      minY: findMinY(data)
-  });
-};
-
-const NdlAdapter = {
-  toConfig(json, option){
-     return _getCrConfig(option.seriaType)(json, option);
-  },
-
-  toSeries(json, option, chart){
-    return _toSeria(json, option, chart);
-  }
-};
 
 export default NdlAdapter

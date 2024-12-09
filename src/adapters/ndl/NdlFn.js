@@ -46,7 +46,6 @@ export const getItemIndexTuple = (columns) => {
 }
 
 export const getData = ({
-  dataset,
   datatable
 }) => {
   if (datatable) {

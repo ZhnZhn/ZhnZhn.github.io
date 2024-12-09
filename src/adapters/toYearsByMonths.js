@@ -252,8 +252,9 @@ const _crZhConfig = (
     dataSource,
     linkFn,
     item,
+    key
   } = option
-  , _id = value + '_' + 'YEARLY';
+  , _id = key || value + '_' + 'YEARLY';
   return {
     id: _id,
     key: _id,

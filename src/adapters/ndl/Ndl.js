@@ -1,8 +1,8 @@
-import api from './NdlApi'
-import adapter from './NdlAdapter'
+import api from "./NdlApi"
+import adapter from "./NdlAdapter"
 
 const Ndl = {
-  id: 'Q',
+  id: "Q",
   api,
   adapter
 };
