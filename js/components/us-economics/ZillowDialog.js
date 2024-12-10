@@ -11,14 +11,13 @@ var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _checkAreDatesValid = _interopRequireDefault(require("../dialogs/hooks/checkAreDatesValid"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _jsxRuntime = require("react/jsx-runtime");
-const DATA_NOTE = '*Data present not for all zip codes';
+const DATA_NOTE = "*Data present not for all zip codes";
 const S_TIP = {
   margin: 10,
   marginTop: 16,
-  fontWeight: 'bold'
+  fontWeight: "bold"
 };
-const _isFn = fn => typeof fn === 'function';
-const _isByZipCode = item => !!item && item.v === 'Z';
+const _isByZipCode = item => !!item && item.v === "Z";
 const _reZipCode = /^\d{5}$/;
 const _isZipCode = value => _reZipCode.test(value.trim());
 const ZillowDialog = (0, _memoIsShow.default)(_ref => {
@@ -27,23 +26,20 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
     caption,
     oneCaption,
     oneURI,
-    oneJsonProp,
     twoCaption,
     twoURI,
-    twoJsonProp,
     threeCaption,
     msgOnNotSelected,
     initFromDate,
     initToDate,
     msgOnNotValidFormat,
     onTestDate,
-    dataColumn,
     loadId,
     dfTable,
+    dfIdFn,
     dataSource,
     toTopLayer,
     onAbout,
-    fnValue,
     onLoad,
     onShow,
     onClose
@@ -78,7 +74,7 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
       }
       if (_isByZipCode(one)) {
         if (!_zipCodeInst.isValid()) {
-          msgs.push('Zip Code is not valid');
+          msgs.push("Zip Code is not valid");
         }
       } else {
         const {
@@ -100,25 +96,24 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
             v: zipCode,
             c: zipCode
           },
-          value = _isFn(fnValue) ? fnValue(metric.v, _three.v) : void 0,
           _datesInst = (0, _uiApi.getRefValue)(_refDates);
         onLoad({
           ..._datesInst.getValues(),
-          title: two.c + ": " + _three.c,
+          items: [metric, _three],
+          title: `${two.c}: ${_three.c}`,
           subtitle: metric.c,
           itemCaption: _three.c,
           isKeyFeature: _hasZipCode,
-          value,
-          dataColumn,
           loadId,
           dfTable,
+          dfIdFn,
           dataSource
         });
       }
       setValidationMessages(msgs);
     }, []);
   // oneCaption, msgOnNotSelected,
-  // fnValue, dataColumn, loadId, dataSource, onLoad,
+  // loadId, dfTable, dfIdFn, dataSource, onLoad,
   // getMetric,
   // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
@@ -138,9 +133,7 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: oneURI,
-      jsonProp: oneJsonProp,
       caption: oneCaption,
-      optionNames: "Items",
       onSelect: setMetric
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectOneTwo, {
       refEl: _refTypeCode,
@@ -149,7 +142,6 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
       isHideTwo: isShowPattern,
       uri: twoURI,
       oneCaption: twoCaption,
-      oneJsonProp: twoJsonProp,
       twoCaption: threeCaption,
       propCaption: "c",
       msgOnNotSelected: msgOnNotSelected,

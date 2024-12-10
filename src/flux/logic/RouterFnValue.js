@@ -1,4 +1,4 @@
-import { crGetRoute } from './LogicFn';
+import { crGetRoute } from "../../utils/crRouter";
 
 export const getCrValue = crGetRoute({
   ROne : (one) => one,
@@ -7,6 +7,5 @@ export const getCrValue = crGetRoute({
   RPrefixOne : (prefix, one) => `${prefix}/${one}`,
   RPrefixOneTwo : (prefix, one, two) => `${prefix}/${one}_${two}`,
   RPrefixOneEmptyTwo : (prefix, one, two) => `${prefix}/${two}`,
-  RPrefixTwoOne : (prefix, one, two) => `${prefix}/${two}_${one}`,
-  RZillow : (one, three) => `indicator_id=${one}&region_id=${three}`
+  RPrefixTwoOne : (prefix, one, two) => `${prefix}/${two}_${one}`
 })

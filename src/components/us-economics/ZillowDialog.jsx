@@ -2,26 +2,25 @@ import {
   useRef,
   useCallback,
   getRefValue
-} from '../uiApi';
+} from "../uiApi";
 
-import memoIsShow from '../hoc/memoIsShow';
-import useToggle from '../hooks/useToggle';
-import useProperty from '../hooks/useProperty';
-import useDialog from '../dialogs/hooks/useDialog';
-import checkAreDatesValid from '../dialogs/hooks/checkAreDatesValid';
+import memoIsShow from "../hoc/memoIsShow";
+import useToggle from "../hooks/useToggle";
+import useProperty from "../hooks/useProperty";
+import useDialog from "../dialogs/hooks/useDialog";
+import checkAreDatesValid from "../dialogs/hooks/checkAreDatesValid";
 
-import D from '../dialogs/DialogCell';
+import D from "../dialogs/DialogCell";
 
-const DATA_NOTE = '*Data present not for all zip codes';
+const DATA_NOTE = "*Data present not for all zip codes";
 const S_TIP = {
   margin: 10,
   marginTop: 16,
-  fontWeight: 'bold'
+  fontWeight: "bold"
 };
 
-const _isFn = fn => typeof fn === 'function';
 const _isByZipCode = item => !!item
-  && item.v === 'Z';
+  && item.v === "Z";
 
 const _reZipCode = /^\d{5}$/;
 const _isZipCode = value => _reZipCode.test(value.trim());
@@ -32,10 +31,8 @@ const ZillowDialog = memoIsShow(({
   caption,
   oneCaption,
   oneURI,
-  oneJsonProp,
   twoCaption,
   twoURI,
-  twoJsonProp,
   threeCaption,
   msgOnNotSelected,
   initFromDate,
@@ -43,15 +40,14 @@ const ZillowDialog = memoIsShow(({
   msgOnNotValidFormat,
   onTestDate,
 
-  dataColumn,
   loadId,
   dfTable,
+  dfIdFn,
   dataSource,
 
   toTopLayer,
   onAbout,
 
-  fnValue,
   onLoad,
   onShow,
   onClose
@@ -101,7 +97,7 @@ const ZillowDialog = memoIsShow(({
     }
     if (_isByZipCode(one)) {
       if (!_zipCodeInst.isValid()){
-        msgs.push('Zip Code is not valid')
+        msgs.push("Zip Code is not valid")
       }
     } else {
       const { msg=[] } = _typeCodeInst.getValidation();
@@ -121,28 +117,25 @@ const ZillowDialog = memoIsShow(({
       , _three = !_hasZipCode
           ? three
           : { v: zipCode, c: zipCode }
-      , value = _isFn(fnValue)
-          ? fnValue(metric.v, _three.v)
-          : void 0
       , _datesInst = getRefValue(_refDates);
 
       onLoad({
         ..._datesInst.getValues(),
+        items: [metric, _three],
         title: `${two.c}: ${_three.c}`,
         subtitle: metric.c,
         itemCaption: _three.c,
         isKeyFeature: _hasZipCode,
-        value,
-        dataColumn,
         loadId,
         dfTable,
+        dfIdFn,
         dataSource
       })
     }
     setValidationMessages(msgs)
   }, []);
   // oneCaption, msgOnNotSelected,
-  // fnValue, dataColumn, loadId, dataSource, onLoad,
+  // loadId, dfTable, dfIdFn, dataSource, onLoad,
   // getMetric,
   // setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
@@ -165,9 +158,7 @@ const ZillowDialog = memoIsShow(({
          isShow={isShow}
          isShowLabels={isShowLabels}
          uri={oneURI}
-         jsonProp={oneJsonProp}
          caption={oneCaption}
-         optionNames="Items"
          onSelect={setMetric}
       />
       <D.SelectOneTwo
@@ -177,7 +168,6 @@ const ZillowDialog = memoIsShow(({
          isHideTwo={isShowPattern}
          uri={twoURI}
          oneCaption={twoCaption}
-         oneJsonProp={twoJsonProp}
          twoCaption={threeCaption}
          propCaption="c"
          msgOnNotSelected={msgOnNotSelected}
