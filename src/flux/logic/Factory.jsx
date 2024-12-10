@@ -1,48 +1,39 @@
-export { crAsyncBrowser } from './fBrowser';
+export { crAsyncBrowser } from "./fBrowser";
 
-import {
-  isArr,
-  bindTo,
-  createElement
-} from '../../components/uiApi';
-
-import { getDialog } from './RouterDialog';
-import { getLoadFn } from './RouterLoadFn';
-import { getCrValue } from './RouterFnValue';
-
-import {
-  YMD_DATE_OR_EMPTY,
-  NOT_SELECTED,
-  NOT_VALID_FORMAT
-} from '../../constants/Msg';
-import {
-  LT_Q,
-  LT_EU_STAT
-} from '../../constants/LoadType';
-import {
-  showDescription
-} from '../actions/ComponentActions';
-
-import {
-  loadItem,
-  showItemsContainer
-} from '../stores/itemStore';
-
+import { isArr } from "../../utils/isTypeFn";
+import { bindTo } from "../../utils/bindTo";
 import {
   getFromDate,
   getToDate,
   isYmd,
   isYmdOrEmpty,
   addDaysToYmd
-} from '../../utils/dateFn';
-import { isWideWidth } from '../../components/has';
+} from "../../utils/dateFn";
+
 import {
-  showAlertDialog
-} from '../stores/compStore';
+  YMD_DATE_OR_EMPTY,
+  NOT_SELECTED,
+  NOT_VALID_FORMAT
+} from "../../constants/Msg";
 import {
-  getProxy,
-  getKey
-} from '../stores/settingStore';
+  LT_Q,
+  LT_EU_STAT
+} from "../../constants/LoadType";
+
+import { isWideWidth } from "../../components/has";
+
+import { showDescription } from "../actions/ComponentActions";
+
+import {
+  loadItem,
+  showItemsContainer
+} from "../stores/itemStore";
+import { showAlertDialog } from "../stores/compStore";
+import { getKey } from "../stores/settingStore";
+
+import { getDialog } from "./RouterDialog";
+import { getLoadFn } from "./RouterLoadFn";
+import { getCrValue } from "./RouterFnValue";
 
 const HAS_WIDE_WIDTH = isWideWidth(600)
 , _assign = Object.assign
@@ -64,7 +55,7 @@ const _crFnValue = (
 const _crFromDate = (
   nInitFromDate,
 ) => nInitFromDate
-  ? nInitFromDate === '1y+1d' //Coinpaprika
+  ? nInitFromDate === "1y+1d" //Coinpaprika
      ? addDaysToYmd(getFromDate(1), 1)
      : getFromDate(nInitFromDate)
   : _initFromDate;
@@ -93,7 +84,7 @@ const _crDateProps = (dialogProps) => {
 
 const _onError = (
   alertDescr,
-  alertCaption='Request Error'
+  alertCaption="Request Error"
 ) => {
   showAlertDialog({
     alertDescr,
@@ -114,8 +105,8 @@ const _crClickAbout = ({
     : void 0;
 };
 
-const D_SELECT_N = 'DialogSelectN'
-, D_STAT_N = 'DialogStatN';
+const D_SELECT_N = "DialogSelectN"
+, D_STAT_N = "DialogStatN";
 
 const _getDialogType = (
   dialogType, {
@@ -137,7 +128,7 @@ const _modifyDialogPropsByLoadId = (
     const { dfProps } = dialogProps
     , { mapFrequency } = dfProps || {};
     dialogProps.dfProps = _assign({}, dfProps, {
-       mapFrequency:  mapFrequency || 'M'
+       mapFrequency:  mapFrequency || "M"
     })
   }
 };
@@ -159,56 +150,33 @@ export const crDialog = (
      valueFnPrefix,
      loadFnType,
      loadId,
-     isProxy,
      isGetKey
    } = dialogProps
-   , _dialogType = _getDialogType(dialogType, dialogProps)
-   , onAbout = _crClickAbout(dialogProps)
-   , loadFn = getLoadFn(loadFnType, _dialogType)
-   , proxy = isProxy
-        ? getProxy()
-        : void 0
-   , _getKey = isGetKey && getKey
-   , onError = isGetKey && _onError
-   , onLoad = bindTo(loadItem, {
-         chartType: itemKey,
-         browserType, dialogConf
-      })
-   , onShow = bindTo(showItemsContainer,
-       itemKey,
-       browserType,
-       dialogConf
-     );
+   , _dialogType = _getDialogType(dialogType, dialogProps);
 
   _modifyDialogPropsByLoadId(dialogProps, loadId)
 
   return getDialog(_dialogType)
-    .then(Comp =>
-       createElement(Comp, {
-          ...dialogProps,
-          //initFromDate, initToDate, onTestDate,
-          //errNotYmdOrEmpty, isYmdOrEmpty
-          ..._crDateProps(dialogProps),
-          key: itemKey,
-          caption: dialogCaption || menuTitle,
-          msgOnNotSelected: NOT_SELECTED,
-          msgOnNotValidFormat: NOT_VALID_FORMAT,
-          fnValue: _crFnValue(valueFn, valueFnPrefix),
-          getKey: _getKey,
-          onAbout,
-          onLoad,
-          onShow,
-          loadFn,
-          proxy,
-          onError
-       })
-   );
+    .then(Comp => (<Comp
+      {...dialogProps}
+      //initFromDate, initToDate, onTestDate,
+      //errNotYmdOrEmpty, isYmdOrEmpty
+      {..._crDateProps(dialogProps)}
+      key={itemKey}
+      caption={dialogCaption || menuTitle}
+      msgOnNotSelected={NOT_SELECTED}
+      msgOnNotValidFormat={NOT_VALID_FORMAT}
+      fnValue={_crFnValue(valueFn, valueFnPrefix)}
+      getKey={isGetKey ? getKey : void 0}
+      loadFn={getLoadFn(loadFnType, _dialogType)}
+      onAbout={_crClickAbout(dialogProps)}
+      onLoad={bindTo(loadItem, {chartType: itemKey, browserType, dialogConf})}
+      onShow={bindTo(showItemsContainer, itemKey, browserType, dialogConf)}
+      onError={isGetKey ? _onError : void 0}
+    />));
 }
 
-//option
 export const crOptionDialog = ({
   dialogType
 }) => getDialog(dialogType)
-  .then(Comp =>
-     createElement(Comp, {key: dialogType})
-   );
+  .then(Comp => <Comp key={dialogType} />);

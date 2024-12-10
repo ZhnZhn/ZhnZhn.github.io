@@ -9,7 +9,6 @@ export {
   Component,
   Children,
   createRef,
-  createElement,
   cloneElement,
   memo,
 

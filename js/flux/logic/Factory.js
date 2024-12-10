@@ -4,27 +4,30 @@ exports.__esModule = true;
 exports.crOptionDialog = exports.crDialog = exports.crAsyncBrowser = void 0;
 var _fBrowser = require("./fBrowser");
 exports.crAsyncBrowser = _fBrowser.crAsyncBrowser;
-var _uiApi = require("../../components/uiApi");
+var _isTypeFn = require("../../utils/isTypeFn");
+var _bindTo = require("../../utils/bindTo");
+var _dateFn = require("../../utils/dateFn");
+var _Msg = require("../../constants/Msg");
+var _LoadType = require("../../constants/LoadType");
+var _has = require("../../components/has");
+var _ComponentActions = require("../actions/ComponentActions");
+var _itemStore = require("../stores/itemStore");
+var _compStore = require("../stores/compStore");
+var _settingStore = require("../stores/settingStore");
 var _RouterDialog = require("./RouterDialog");
 var _RouterLoadFn = require("./RouterLoadFn");
 var _RouterFnValue = require("./RouterFnValue");
-var _Msg = require("../../constants/Msg");
-var _LoadType = require("../../constants/LoadType");
-var _ComponentActions = require("../actions/ComponentActions");
-var _itemStore = require("../stores/itemStore");
-var _dateFn = require("../../utils/dateFn");
-var _has = require("../../components/has");
-var _compStore = require("../stores/compStore");
-var _settingStore = require("../stores/settingStore");
+var _react = require("react");
+var _jsxRuntime = require("react/jsx-runtime");
 const HAS_WIDE_WIDTH = (0, _has.isWideWidth)(600),
   _assign = Object.assign,
   _initFromDate = (0, _dateFn.getFromDate)(2),
   initToDate = (0, _dateFn.getToDate)();
 const _crFnValue = (valueFn, valueFnPrefix) => {
   const _crValue = (0, _RouterFnValue.getCrValue)(valueFn);
-  return _crValue ? valueFnPrefix ? (0, _uiApi.bindTo)(_crValue, valueFnPrefix) : _crValue : void 0;
+  return _crValue ? valueFnPrefix ? (0, _bindTo.bindTo)(_crValue, valueFnPrefix) : _crValue : void 0;
 };
-const _crFromDate = nInitFromDate => nInitFromDate ? nInitFromDate === '1y+1d' //Coinpaprika
+const _crFromDate = nInitFromDate => nInitFromDate ? nInitFromDate === "1y+1d" //Coinpaprika
 ? (0, _dateFn.addDaysToYmd)((0, _dateFn.getFromDate)(1), 1) : (0, _dateFn.getFromDate)(nInitFromDate) : _initFromDate;
 const _crInitFromDate = _ref => {
   let {
@@ -47,7 +50,7 @@ const _crDateProps = dialogProps => {
 };
 const _onError = function (alertDescr, alertCaption) {
   if (alertCaption === void 0) {
-    alertCaption = 'Request Error';
+    alertCaption = "Request Error";
   }
   (0, _compStore.showAlertDialog)({
     alertDescr,
@@ -61,19 +64,19 @@ const _crClickAbout = _ref2 => {
     descrUrl
   } = _ref2;
   const _descrUrl = descr && rootUri ? `${rootUri}${descr}.html` : descrUrl;
-  return _descrUrl ? (0, _uiApi.bindTo)(_ComponentActions.showDescription, {
+  return _descrUrl ? (0, _bindTo.bindTo)(_ComponentActions.showDescription, {
     descrUrl: _descrUrl
   }) : void 0;
 };
-const D_SELECT_N = 'DialogSelectN',
-  D_STAT_N = 'DialogStatN';
+const D_SELECT_N = "DialogSelectN",
+  D_STAT_N = "DialogStatN";
 const _getDialogType = (dialogType, _ref3) => {
   let {
     selectProps,
     dims,
     dfProps
   } = _ref3;
-  return dialogType || ((0, _uiApi.isArr)(selectProps) ? D_SELECT_N : void 0) || ((0, _uiApi.isArr)(dims) || (dfProps || {}).dfId ? D_STAT_N : void 0);
+  return dialogType || ((0, _isTypeFn.isArr)(selectProps) ? D_SELECT_N : void 0) || ((0, _isTypeFn.isArr)(dims) || (dfProps || {}).dfId ? D_STAT_N : void 0);
 };
 const _modifyDialogPropsByLoadId = (dialogProps, loadId) => {
   if (!loadId) {
@@ -87,7 +90,7 @@ const _modifyDialogPropsByLoadId = (dialogProps, loadId) => {
         mapFrequency
       } = dfProps || {};
     dialogProps.dfProps = _assign({}, dfProps, {
-      mapFrequency: mapFrequency || 'M'
+      mapFrequency: mapFrequency || "M"
     });
   }
 };
@@ -106,51 +109,36 @@ const crDialog = (browserType, dialogConf) => {
       valueFnPrefix,
       loadFnType,
       loadId,
-      isProxy,
       isGetKey
     } = dialogProps,
-    _dialogType = _getDialogType(dialogType, dialogProps),
-    onAbout = _crClickAbout(dialogProps),
-    loadFn = (0, _RouterLoadFn.getLoadFn)(loadFnType, _dialogType),
-    proxy = isProxy ? (0, _settingStore.getProxy)() : void 0,
-    _getKey = isGetKey && _settingStore.getKey,
-    onError = isGetKey && _onError,
-    onLoad = (0, _uiApi.bindTo)(_itemStore.loadItem, {
-      chartType: itemKey,
-      browserType,
-      dialogConf
-    }),
-    onShow = (0, _uiApi.bindTo)(_itemStore.showItemsContainer, itemKey, browserType, dialogConf);
+    _dialogType = _getDialogType(dialogType, dialogProps);
   _modifyDialogPropsByLoadId(dialogProps, loadId);
-  return (0, _RouterDialog.getDialog)(_dialogType).then(Comp => (0, _uiApi.createElement)(Comp, {
+  return (0, _RouterDialog.getDialog)(_dialogType).then(Comp => /*#__PURE__*/(0, _react.createElement)(Comp, {
     ...dialogProps,
-    //initFromDate, initToDate, onTestDate,
-    //errNotYmdOrEmpty, isYmdOrEmpty
     ..._crDateProps(dialogProps),
     key: itemKey,
     caption: dialogCaption || menuTitle,
     msgOnNotSelected: _Msg.NOT_SELECTED,
     msgOnNotValidFormat: _Msg.NOT_VALID_FORMAT,
     fnValue: _crFnValue(valueFn, valueFnPrefix),
-    getKey: _getKey,
-    onAbout,
-    onLoad,
-    onShow,
-    loadFn,
-    proxy,
-    onError
+    getKey: isGetKey ? _settingStore.getKey : void 0,
+    loadFn: (0, _RouterLoadFn.getLoadFn)(loadFnType, _dialogType),
+    onAbout: _crClickAbout(dialogProps),
+    onLoad: (0, _bindTo.bindTo)(_itemStore.loadItem, {
+      chartType: itemKey,
+      browserType,
+      dialogConf
+    }),
+    onShow: (0, _bindTo.bindTo)(_itemStore.showItemsContainer, itemKey, browserType, dialogConf),
+    onError: isGetKey ? _onError : void 0
   }));
 };
-
-//option
 exports.crDialog = crDialog;
 const crOptionDialog = _ref4 => {
   let {
     dialogType
   } = _ref4;
-  return (0, _RouterDialog.getDialog)(dialogType).then(Comp => (0, _uiApi.createElement)(Comp, {
-    key: dialogType
-  }));
+  return (0, _RouterDialog.getDialog)(dialogType).then(Comp => /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {}, dialogType));
 };
 exports.crOptionDialog = crOptionDialog;
 //# sourceMappingURL=Factory.js.map

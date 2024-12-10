@@ -2,29 +2,31 @@
 
 exports.__esModule = true;
 exports.crAsyncBrowser = void 0;
-var _uiApi = require("../../components/uiApi");
+var _isTypeFn = require("../../utils/isTypeFn");
+var _bindTo = require("../../utils/bindTo");
+var _arrFn = require("../../utils/arrFn");
+var _BrowserType = require("../../constants/BrowserType");
 var _ComponentActions = require("../actions/ComponentActions");
 var _compStore = require("../stores/compStore");
+var _itemStore = require("../stores/itemStore");
+var _settingStore = require("../stores/settingStore");
 var _browserStore = require("../stores/browserStore");
 var _watchListStore = require("../watch-list/watchListStore");
-var _settingStore = require("../stores/settingStore");
-var _itemStore = require("../stores/itemStore");
-var _BrowserType = require("../../constants/BrowserType");
-var _RouterBrowser = require("./RouterBrowser");
 var _RouterItemOption = require("../../components/zhn-select/RouterItemOption");
 var _RouterBrowserItem = require("../../components/browser-items/RouterBrowserItem");
-const _crBrowserWatchList = Comp => (0, _uiApi.createElement)(Comp, {
-  key: _BrowserType.BT_WATCH_LIST,
+var _RouterBrowser = require("./RouterBrowser");
+var _jsxRuntime = require("react/jsx-runtime");
+const _crBrowserWatchList = Comp => /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
+  isInitShow: true,
   browserType: _BrowserType.BT_WATCH_LIST,
   caption: "Watch List",
-  isInitShow: true,
   useMsBrowserShow: _browserStore.useMsBrowserShow,
   useWatchList: _watchListStore.useWatchList
-});
+}, _BrowserType.BT_WATCH_LIST);
 const _crBrowserDynamic = (Comp, option) => {
   const {
       browserType,
-      caption = 'Source Browser',
+      caption = "Source Browser",
       itemStyle,
       topicStyle,
       sourceMenuUrl,
@@ -35,52 +37,39 @@ const _crBrowserDynamic = (Comp, option) => {
       descrUrl,
       dfProps
     } = option,
-    ItemOptionComp = (0, _RouterItemOption.getItemOptionComp)(itemOptionType),
-    ItemComp = (0, _RouterBrowserItem.getBrowserItemComp)(itemType),
-    onClickInfo = (0, _uiApi.isUndef)(ItemComp) ? void 0 : _ComponentActions.showDescription
-    //for Type2
-    ,
-    onShowLoadDialog = chartContainerType ? item => (0, _compStore.showModalDialog)(modalDialogType, {
-      item,
-      browserType,
-      chartContainerType,
-      onShow: (0, _uiApi.bindTo)(_itemStore.showItemsContainer, chartContainerType, browserType)
-    }) : void 0;
-  return (0, _uiApi.createElement)(Comp, {
-    dfProps,
-    key: browserType,
-    browserType,
+    ItemComp = (0, _RouterBrowserItem.getBrowserItemComp)(itemType);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
     isInitShow: true,
-    caption,
-    itemStyle,
-    topicStyle,
-    ItemOptionComp,
-    ItemComp,
-    descrUrl,
-    onClickInfo,
+    dfProps: dfProps,
+    browserType: browserType,
+    caption: caption,
+    descrUrl: descrUrl,
+    itemStyle: itemStyle,
+    topicStyle: topicStyle,
+    ItemOptionComp: (0, _RouterItemOption.getItemOptionComp)(itemOptionType),
+    ItemComp: ItemComp,
+    onClickInfo: (0, _isTypeFn.isUndef)(ItemComp) ? void 0 : _ComponentActions.showDescription,
     useMsBrowserShow: _browserStore.useMsBrowserShow,
     useMsBrowserLoad: _browserStore.useMsBrowserLoad,
-    onLoadMenu: (0, _uiApi.bindTo)(_browserStore.loadBrowser, {
+    onLoadMenu: (0, _bindTo.bindTo)(_browserStore.loadBrowser, {
       browserType,
       caption,
       sourceMenuUrl
     }),
-    onShowLoadDialog,
-    //for Type2
+    onShowLoadDialog: chartContainerType ? item => (0, _compStore.showModalDialog)(modalDialogType, {
+      item,
+      browserType,
+      chartContainerType,
+      onShow: (0, _bindTo.bindTo)(_itemStore.showItemsContainer, chartContainerType, browserType)
+    }) : void 0 //for Type2
+    ,
     getProxy: _settingStore.getProxy // for BrowserSlider
-  });
+  }, browserType);
 };
-const STAT_ALL_TYPES = [_BrowserType.BT_SWEDEN_STAT_ALL, _BrowserType.BT_NORWAY_STAT_ALL, _BrowserType.BT_FINLAND_STAT_ALL, _BrowserType.BT_DENMARK_STAT_ALL, _BrowserType.BT_IRELAND_STAT_ALL];
-const _isStatAll = browserType => STAT_ALL_TYPES.indexOf(browserType) !== -1;
+const _isStatAllBrowserType = (0, _arrFn.isInArrStr)([_BrowserType.BT_SWEDEN_STAT_ALL, _BrowserType.BT_NORWAY_STAT_ALL, _BrowserType.BT_FINLAND_STAT_ALL, _BrowserType.BT_DENMARK_STAT_ALL, _BrowserType.BT_IRELAND_STAT_ALL]);
 const crAsyncBrowser = option => {
   const bT = option.browserType;
-  if (bT === _BrowserType.BT_WATCH_LIST) {
-    return (0, _RouterBrowser.getBrowserComp)(_BrowserType.BT_WATCH_LIST).then(_crBrowserWatchList);
-  }
-  if (_isStatAll(bT)) {
-    return (0, _RouterBrowser.getBrowserComp)("STAT_ALL").then(Comp => _crBrowserDynamic(Comp, option));
-  }
-  return Promise.resolve(_crBrowserDynamic((0, _RouterBrowser.getBrowserComp)(bT), option));
+  return bT === _BrowserType.BT_WATCH_LIST ? (0, _RouterBrowser.getBrowserComp)(_BrowserType.BT_WATCH_LIST).then(_crBrowserWatchList) : _isStatAllBrowserType(bT) ? (0, _RouterBrowser.getBrowserComp)("STAT_ALL").then(Comp => _crBrowserDynamic(Comp, option)) : Promise.resolve(_crBrowserDynamic((0, _RouterBrowser.getBrowserComp)(bT), option));
 };
 exports.crAsyncBrowser = crAsyncBrowser;
 //# sourceMappingURL=fBrowser.js.map
