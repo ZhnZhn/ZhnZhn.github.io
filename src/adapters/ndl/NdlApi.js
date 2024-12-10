@@ -16,9 +16,15 @@ const _crQueryToken = (
 ) => value
   ? `${name}=${value}`
   : ""
+, _crQueryOneTwo = (
+  pn1,
+  pn2,
+  items
+) => `${pn1}=${getValue(items[0])}&${pn2}=${getValue(items[1])}`
 , _getCrTableQuery = crGetRoute({
-  jo: ({ items }) => `energy=OIL&country=${getValue(items[0])}&code=${getValue(items[1])}${getValue(items[2])}${getValue(items[3])}`,
-  jg: ({ items }) => `energy=GAS&country=${getValue(items[0])}&code=${getValue(items[1])}${getValue(items[2])}`
+  jo: ({ items }) => `energy=OIL&${_crQueryOneTwo("country", "code", items)}${getValue(items[2])}${getValue(items[3])}`,
+  jg: ({ items }) => `energy=GAS&${_crQueryOneTwo("country", "code", items)}${getValue(items[2])}`,
+  zl: ({ items }) => `${_crQueryOneTwo("indicator_id", "region_id", items)}`
 }, ({ value }) => value);
 
 const _crTableUrl = (
@@ -28,7 +34,6 @@ const _crTableUrl = (
     proxy,
     dfTable,
     dfFromDate,
-    key,
     fromDate,
   } = option
   , value = _getCrTableQuery(option.dfIdFn)(option)
@@ -38,7 +43,6 @@ const _crTableUrl = (
       : "";
 
   option.apiKey = null
-  option.key = key || value
 
   return `${proxy}${TABLE_URL}/${dfTable}?${joinBy("&", value, _apiKeyQuery, _dateQuery)}`;
 };
@@ -52,7 +56,7 @@ const _checkDataset = (
     oldest_available_date
   } = datatable;
   if (!isNotEmptyArr(data)) {
-    throw crError('',
+    throw crError("",
        `Result dataset for request is empty:
         Newest Date: ${newest_available_date || ""}
         Oldest Date: ${oldest_available_date || ""}`

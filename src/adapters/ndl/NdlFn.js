@@ -69,7 +69,6 @@ export const crZhConfig = (
     items,
     title,
     subtitle="",
-    value:id,
     key,
     fromDate,
     dataSource
@@ -83,10 +82,10 @@ export const crZhConfig = (
     item: _item,
     title,
     subtitle,
-    id,
+    id: key,
     key,
     itemConf: {
-      _itemKey: id,
+      _itemKey: key,
       fromDate
     },
     itemCaption: _itemCaption,

@@ -35,7 +35,6 @@ const getItemIndexTuple = columns => {
 exports.getItemIndexTuple = getItemIndexTuple;
 const getData = _ref2 => {
   let {
-    dataset,
     datatable
   } = _ref2;
   if (datatable) {
@@ -51,7 +50,6 @@ const crZhConfig = option => {
       items,
       title,
       subtitle = "",
-      value: id,
       key,
       fromDate,
       dataSource
@@ -63,10 +61,10 @@ const crZhConfig = option => {
     item: _item,
     title,
     subtitle,
-    id,
+    id: key,
     key,
     itemConf: {
-      _itemKey: id,
+      _itemKey: key,
       fromDate
     },
     itemCaption: _itemCaption,
