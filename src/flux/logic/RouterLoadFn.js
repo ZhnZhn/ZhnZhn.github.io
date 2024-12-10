@@ -1,4 +1,4 @@
-import { crRouter } from './LogicFn';
+import { crGetRoute } from '../../utils/crRouter';
 
 import fnSelectN from '../creaters/selectN';
 import fnStatN from '../creaters/statN';
@@ -6,7 +6,7 @@ import fnStatN from '../creaters/statN';
 import fnUn5 from '../creaters/un5';
 
 const FN_NOOP = () => {};
-const _r = crRouter({
+const _getLoadFn = crGetRoute({
   DialogSelectN: fnSelectN,
   DialogQuery: fnSelectN,
   DialogStatN: fnStatN,
@@ -19,5 +19,5 @@ export const getLoadFn = (
   loadFnType,
   dialogType
 ) => loadFnType
-  ? _r[loadFnType] || FN_NOOP
-  : dialogType && _r[dialogType] || fnSelectN
+  ? _getLoadFn(loadFnType) || FN_NOOP
+  : _getLoadFn(dialogType) || fnSelectN
