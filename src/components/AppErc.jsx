@@ -1,35 +1,35 @@
 import {
   bindTo,
   useEffect
-} from './uiApi';
+} from "./uiApi";
 
-import { crFlexRowCn } from './styleFn';
+import { crFlexRowCn } from "./styleFn";
 
-import { showAskDialogIf } from '../flux/logic/LocationSearch';
-import { exportSettingFn } from '../flux/stores/settingStore';
+import { showAskDialogIf } from "../flux/logic/LocationSearch";
+import { exportSettingFn } from "../flux/stores/settingStore";
 
 import {
   showSettings,
   showReload
-} from '../flux/actions/ComponentActions';
+} from "../flux/actions/ComponentActions";
 import {
   useMsInitBrowser
-} from '../flux/stores/browserStore';
+} from "../flux/stores/browserStore";
 import {
   useMsInit
-} from '../flux/stores/itemStore';
+} from "../flux/stores/itemStore";
 
-import useHotKeysHandler from './hotkeys/useHotKeysHandler';
+import useHotKeysHandler from "./hotkeys/useHotKeysHandler";
 
-import HeaderBar from './header/HeaderBar';
-import BrowserContainer from './browser-container/BrowserContainer';
-import About from './about/About';
-import CompContainer from './zhn-containers/CompContainer';
-import DialogContainer from './dialogs/DialogContainer';
+import HeaderBar from "./header/HeaderBar";
+import BrowserContainer from "./browser-container/BrowserContainer";
+import About from "./about/About";
+import CompContainer from "./zhn-containers/CompContainer";
+import DialogContainer from "./dialogs/DialogContainer";
 
-import checkBuild from './checkBuild';
+import checkBuild from "./checkBuild";
 
-const BUILD_DATE = '05-12-2024'
+const BUILD_DATE = "10-12-2024"
 , CL_COMP_CONTAINER = crFlexRowCn("app-container");
 
 const _showSettings = bindTo(
