@@ -1,8 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports.updateVisible = exports.findCompIndex = exports.filterArrByKey = exports.doVisible = void 0;
-const findCompIndex = (arr, key) => {
+exports.updateVisible = exports.findElementIndexByKey = exports.filterArrByKey = exports.doVisible = void 0;
+const findElementIndexByKey = (arr, key) => {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].key === key) {
       return i;
@@ -10,10 +10,10 @@ const findCompIndex = (arr, key) => {
   }
   return -1;
 };
-exports.findCompIndex = findCompIndex;
+exports.findElementIndexByKey = findElementIndexByKey;
 const doVisible = (arr, keyValue) => {
-  const _compIndex = findCompIndex(arr, keyValue);
-  return _compIndex > -1 ? [...arr.slice(0, _compIndex), ...arr.slice(_compIndex + 1), arr[_compIndex]] : arr;
+  const _elementIndex = findElementIndexByKey(arr, keyValue);
+  return _elementIndex > -1 ? [...arr.slice(0, _elementIndex), ...arr.slice(_elementIndex + 1), arr[_elementIndex]] : arr;
 };
 exports.doVisible = doVisible;
 const updateVisible = (hmIs, visibleDialogs, key, maxDialog) => {

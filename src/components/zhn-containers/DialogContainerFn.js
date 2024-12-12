@@ -1,4 +1,4 @@
-export const findCompIndex = (
+export const findElementIndexByKey = (
   arr,
   key
 ) => {
@@ -14,11 +14,11 @@ export const doVisible = (
   arr,
   keyValue
 ) => {
-  const _compIndex = findCompIndex(arr, keyValue);
-  return _compIndex > -1 ? [
-    ...arr.slice(0, _compIndex),
-    ...arr.slice(_compIndex+1),
-    arr[_compIndex]
+  const _elementIndex = findElementIndexByKey(arr, keyValue);
+  return _elementIndex > -1 ? [
+    ...arr.slice(0, _elementIndex),
+    ...arr.slice(_elementIndex+1),
+    arr[_elementIndex]
   ] : arr;
 }
 

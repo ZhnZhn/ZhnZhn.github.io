@@ -20,7 +20,7 @@ const fUpdateState = maxDialog => (msShowDialog, setState) => {
       setState(prevState => {
         const visibleDialogs = prevState.visibleDialogs;
         if (visibleDialogs[visibleDialogs.length - 1] !== key) {
-          prevState.compDialogs = (0, _DialogContainerFn.doVisible)(prevState.compDialogs, key);
+          prevState.elementDialogs = (0, _DialogContainerFn.doVisible)(prevState.elementDialogs, key);
           (0, _DialogContainerFn.filterArrByKey)(visibleDialogs, key);
           visibleDialogs.push(key);
           return {
@@ -35,12 +35,12 @@ const fUpdateState = maxDialog => (msShowDialog, setState) => {
       setState(prevState => {
         const {
           hmIs,
-          compDialogs
+          elementDialogs
         } = prevState;
         if (hmIs[key]) {
-          const _compIndex = (0, _DialogContainerFn.findCompIndex)(compDialogs, key);
-          if (_compIndex > -1) {
-            setTimeout(() => (0, _compStore.closeDialog)(compDialogs[_compIndex]), 200);
+          const _elementIndex = (0, _DialogContainerFn.findElementIndexByKey)(elementDialogs, key);
+          if (_elementIndex > -1) {
+            setTimeout(() => (0, _compStore.closeDialog)(elementDialogs[_elementIndex]), 200);
           }
         }
         hmIs[key] = !hmIs[key];
@@ -60,19 +60,19 @@ const fUpdateState = maxDialog => (msShowDialog, setState) => {
           data
         } = msShowDialog,
         {
-          compDialogs
+          elementDialogs
         } = prevState;
-      if (Comp && (0, _DialogContainerFn.findCompIndex)(compDialogs, key) > -1) {
+      if (Comp && (0, _DialogContainerFn.findElementIndexByKey)(elementDialogs, key) > -1) {
         return prevState;
       }
       (0, _DialogContainerFn.updateVisible)(prevState.hmIs, prevState.visibleDialogs, key, maxDialog);
       if (!Comp) {
-        prevState.compDialogs = (0, _DialogContainerFn.doVisible)(compDialogs, key);
+        prevState.elementDialogs = (0, _DialogContainerFn.doVisible)(elementDialogs, key);
       } else {
-        compDialogs.push(Comp);
+        elementDialogs.push(Comp);
       }
-      if (!prevState.compProps[key]) {
-        prevState.compProps[key] = {
+      if (!prevState.elementProps[key]) {
+        prevState.elementProps[key] = {
           toTopLayer: () => _hToTopLayer(key),
           onClose: () => _hToggleDialog(key)
         };
@@ -92,24 +92,25 @@ const DialogContainer = _ref => {
     {
       hmIs,
       hmData,
-      compProps,
-      compDialogs
+      elementProps,
+      elementDialogs
     } = (0, _useStoreState.default)(() => ({
       hmIs: (0, _uiApi.crObjWithNullPrototype)(),
       hmData: (0, _uiApi.crObjWithNullPrototype)(),
-      compProps: (0, _uiApi.crObjWithNullPrototype)(),
-      compDialogs: [],
+      elementProps: (0, _uiApi.crObjWithNullPrototype)(),
+      elementDialogs: [],
       visibleDialogs: []
     }), _compStore.useMsShowDialog, _upateState)[0];
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     style: S_ROOT,
-    children: (0, _uiApi.safeMap)(compDialogs, Comp => {
-      const key = Comp.key;
-      return (0, _uiApi.cloneElement)(Comp, {
+    children: (0, _uiApi.safeMap)(elementDialogs, DialogElement => {
+      const key = DialogElement.key;
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)(DialogElement.type, {
+        ...DialogElement.props,
         isShow: hmIs[key],
         optionData: hmData[key],
-        ...compProps[key]
-      });
+        ...elementProps[key]
+      }, key);
     })
   });
 };
