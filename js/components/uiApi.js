@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useId = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.safeMap = exports.memo = exports.lazy = exports.joinBy = exports.isUndef = exports.isTokenInStr = exports.isStr = exports.isObj = exports.isNumber = exports.isInputValid = exports.isBool = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getEventComposedPath = exports.getComboboxElement = exports.getClientY = exports.getClientX = exports.focusRefElement = exports.focusHtmlElement = exports.focusElementById = exports.createRef = exports.createContext = exports.crObjWithNullPrototype = exports.cloneUiElement = exports.cloneElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = exports.Children = void 0;
+exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useId = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.safeMapElements = exports.safeMap = exports.memo = exports.lazy = exports.joinBy = exports.isUndef = exports.isTokenInStr = exports.isStr = exports.isNumber = exports.isInputValid = exports.isBool = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getEventComposedPath = exports.getComboboxElement = exports.getClientY = exports.getClientX = exports.focusRefElement = exports.focusHtmlElement = exports.focusElementById = exports.createRef = exports.createContext = exports.crObjWithNullPrototype = exports.cloneUiElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = void 0;
 var _isTokenInStr = require("../utils/isTokenInStr");
 exports.isTokenInStr = _isTokenInStr.isTokenInStr;
 var _bindTo = require("../utils/bindTo");
@@ -12,9 +12,7 @@ var _react = require("react");
 exports.Suspense = _react.Suspense;
 exports.lazy = _react.lazy;
 exports.Component = _react.Component;
-exports.Children = _react.Children;
 exports.createRef = _react.createRef;
-exports.cloneElement = _react.cloneElement;
 exports.memo = _react.memo;
 exports.createContext = _react.createContext;
 exports.useContext = _react.useContext;
@@ -41,6 +39,8 @@ const crObjWithNullPrototype = () => Object.create(null);
 exports.crObjWithNullPrototype = crObjWithNullPrototype;
 const safeMap = (items, crElement) => (0, _isTypeFn.isArr)(items) && items.length > 0 ? items.map(crElement) : null;
 exports.safeMap = safeMap;
+const safeMapElements = (elementsOrElement, crElement) => !(0, _isTypeFn.isArr)(elementsOrElement) && (0, _isTypeFn.isObj)(elementsOrElement) ? crElement(elementsOrElement, 0) : safeMap(elementsOrElement, crElement);
+exports.safeMapElements = safeMapElements;
 const cloneUiElement = function (Element, overrideProps, key) {
   if (key === void 0) {
     key = Element.key;

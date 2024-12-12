@@ -1,5 +1,6 @@
 import {
   useState,
+  safeMapElements,
   cloneUiElement,
   isBool,
   focusElementById,
@@ -84,7 +85,7 @@ const TabPane = ({
         aria-orientation="horizontal"
         style={S_TABS}
       >
-         {children.map((TabElement, index) => {
+         {safeMapElements(children, (TabElement, index) => {
             const isSelected = _isSelectedTabIndex(index);
             return cloneUiElement(TabElement, {
               isSelected,
@@ -97,7 +98,7 @@ const TabPane = ({
         })}
       </div>
       <div style={S_COMPONENTS}>
-         {children.map((tab, index) => {
+         {safeMapElements(children, (tab, index) => {
              const _isSelected = _isSelectedTabIndex(index);
              return (
                 <div

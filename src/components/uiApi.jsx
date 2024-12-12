@@ -7,9 +7,7 @@ export {
   lazy,
 
   Component,
-  Children,
   createRef,
-  cloneElement,
   memo,
 
   createContext,
@@ -37,7 +35,8 @@ export {
 } from '../utils/isTypeFn';
 import {
   isArr,
-  isFn
+  isFn,
+  isObj
 } from '../utils/isTypeFn';
 
 export const crObjWithNullPrototype = () => Object.create(null)
@@ -48,6 +47,13 @@ export const safeMap = (
 ) => isArr(items) && items.length > 0
   ? items.map(crElement)
   : null
+
+export const safeMapElements = (
+  elementsOrElement,
+  crElement
+) => !isArr(elementsOrElement) && isObj(elementsOrElement)
+  ? crElement(elementsOrElement, 0)
+  : safeMap(elementsOrElement, crElement)
 
 export const cloneUiElement = (
   Element,
