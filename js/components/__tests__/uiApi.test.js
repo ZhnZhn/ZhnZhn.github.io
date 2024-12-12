@@ -22,6 +22,7 @@ describe("safeMap", () => {
     expect(fn(1)).toBe(null);
     expect(fn('str')).toBe(null);
     expect(fn({})).toBe(null);
+    expect(fn([])).toBe(null);
   });
 });
 describe("getRefValue", () => {

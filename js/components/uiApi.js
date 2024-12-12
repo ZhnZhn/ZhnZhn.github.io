@@ -39,7 +39,7 @@ exports.isObj = _isTypeFn.isObj;
 var _jsxRuntime = require("react/jsx-runtime");
 const crObjWithNullPrototype = () => Object.create(null);
 exports.crObjWithNullPrototype = crObjWithNullPrototype;
-const safeMap = (items, crElement) => (0, _isTypeFn.isArr)(items) ? items.map(crElement) : null;
+const safeMap = (items, crElement) => (0, _isTypeFn.isArr)(items) && items.length > 0 ? items.map(crElement) : null;
 exports.safeMap = safeMap;
 const cloneUiElement = (Element, overrideProps, key) => /*#__PURE__*/(0, _jsxRuntime.jsx)(Element.type, {
   ...Element.props,

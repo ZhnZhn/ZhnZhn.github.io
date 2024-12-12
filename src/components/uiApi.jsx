@@ -45,7 +45,7 @@ export const crObjWithNullPrototype = () => Object.create(null)
 export const safeMap = (
   items,
   crElement
-) => isArr(items)
+) => isArr(items) && items.length > 0
   ? items.map(crElement)
   : null
 
