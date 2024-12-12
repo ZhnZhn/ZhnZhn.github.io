@@ -15,8 +15,6 @@ var _dataToPoints = _interopRequireDefault(require("./dataProcessing/dataToPoint
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from 'prop-types';
 
-//fork https://github.com/borisyankov/react-sparklines
-const _isArr = Array.isArray;
 const DF_WIDTH = 240,
   DF_HEIGHT = 60,
   DF_RATIO = 'none',
@@ -36,7 +34,7 @@ const SparkView = (0, _uiApi.memo)(_ref => {
     max,
     children
   } = _ref;
-  if (!_isArr(data) || data.length === 0) {
+  if (!(0, _uiApi.isArr)(data) || data.length === 0) {
     return null;
   }
   const points = (0, _dataToPoints.default)({
@@ -51,19 +49,19 @@ const SparkView = (0, _uiApi.memo)(_ref => {
     svgOpts = {
       style,
       preserveAspectRatio,
-      viewBox: "0 0 " + width + " " + height,
+      viewBox: `0 0 ${width} ${height}`,
       width: svgWidth > 0 ? svgWidth : void 0,
       height: svgHeight > 0 ? svgHeight : void 0
     };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("svg", {
     ...svgOpts,
-    children: _uiApi.Children.map(children, child => (0, _uiApi.cloneElement)(child, {
+    children: (0, _uiApi.safeMapElements)(children, (childElement, index) => (0, _uiApi.cloneUiElement)(childElement, {
       data,
       points,
       width,
       height,
       margin
-    }))
+    }, childElement.key || index))
   });
 });
 
@@ -82,7 +80,7 @@ static propTypes = {
   max: PropTypes.number
 }
 */
-var _default = {
+var _default = exports.default = {
   SparkView,
   Line: _Line.default,
   Bars: _Bars.default,
@@ -92,5 +90,4 @@ var _default = {
   MinLabel: _MinLabel.default,
   MaxLabel: _MaxLabel.default
 };
-exports.default = _default;
 //# sourceMappingURL=Sparklines.js.map

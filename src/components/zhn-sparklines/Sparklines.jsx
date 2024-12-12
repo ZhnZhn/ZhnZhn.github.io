@@ -1,8 +1,9 @@
 //import PropTypes from 'prop-types';
 import {
+  isArr,
   memo,
-  Children,
-  cloneElement
+  safeMapElements,
+  cloneUiElement
 } from '../uiApi';
 
 import Line from './Line';
@@ -15,10 +16,6 @@ import MinLabel from './MinLabel';
 import MaxLabel from './MaxLabel';
 
 import dataToPoints from './dataProcessing/dataToPoints';
-
-//fork https://github.com/borisyankov/react-sparklines
-
-const _isArr = Array.isArray;
 
 const DF_WIDTH = 240
 , DF_HEIGHT = 60
@@ -40,26 +37,38 @@ const SparkView = memo(({
   children
 }) => {
 
-  if (!_isArr(data) || data.length === 0) {
+  if (!isArr(data) || data.length === 0) {
     return null;
   }
 
-  const points = dataToPoints({ data, limit, width, height, margin, max, min })
+  const points = dataToPoints({
+    data,
+    limit,
+    width,
+    height,
+    margin,
+    max,
+    min
+  })
   , svgOpts = {
-     style, preserveAspectRatio,
+     style,
+     preserveAspectRatio,
      viewBox: `0 0 ${width} ${height}`,
      width: svgWidth > 0 ? svgWidth : void 0,
      height: svgHeight > 0 ? svgHeight : void 0
   };
 
   return (
-    <svg {...svgOpts} >
-      {Children.map(children, child =>
-          cloneElement(child, { data, points, width, height, margin })
-      )}
+    <svg {...svgOpts}>
+      {safeMapElements(children, (childElement, index) => cloneUiElement(
+        childElement,
+        { data, points, width, height, margin },
+        childElement.key || index
+      ))}
     </svg>
   );
 });
+
 
 /*
 static propTypes = {
