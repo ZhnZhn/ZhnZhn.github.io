@@ -1,6 +1,6 @@
 import {
-  cloneElement,
   useState,
+  cloneUiElement,
   isBool,
   focusElementById,
   stopDefaultFor
@@ -84,17 +84,16 @@ const TabPane = ({
         aria-orientation="horizontal"
         style={S_TABS}
       >
-         {children.map((tab, index) => {
+         {children.map((TabElement, index) => {
             const isSelected = _isSelectedTabIndex(index);
-            return cloneElement(tab, {
-              key: index,
+            return cloneUiElement(TabElement, {
               isSelected,
               tabId: crTabId(id, index),
               tabPanelId: crTabPanelId(id, index),
               className: crTabCn(isSelected),
               onClick: () => setSelectedTabIndex(index),
               onKeyDown: (evt) => _hKeyDown(index, evt)
-           });
+            }, index);
         })}
       </div>
       <div style={S_COMPONENTS}>
@@ -108,7 +107,7 @@ const TabPane = ({
                   id={crTabPanelId(id, index)}
                   aria-labelledby={crTabId(id, index)}
                 >
-                   {cloneElement(tab.props.children, {
+                   {cloneUiElement(tab.props.children, {
                      isVisible: isBool(isShow)
                        ? isShow && _isSelected
                        : _isSelected,
@@ -120,6 +119,6 @@ const TabPane = ({
       </div>
     </div>
   );
-}
+};
 
 export default TabPane

@@ -55,17 +55,16 @@ const TabPane = _ref => {
       "aria-label": ariaLabel,
       "aria-orientation": "horizontal",
       style: S_TABS,
-      children: children.map((tab, index) => {
+      children: children.map((TabElement, index) => {
         const isSelected = _isSelectedTabIndex(index);
-        return (0, _uiApi.cloneElement)(tab, {
-          key: index,
+        return (0, _uiApi.cloneUiElement)(TabElement, {
           isSelected,
           tabId: (0, _tabPaneFn.crTabId)(id, index),
           tabPanelId: (0, _tabPaneFn.crTabPanelId)(id, index),
           className: (0, _tabPaneFn.crTabCn)(isSelected),
           onClick: () => setSelectedTabIndex(index),
           onKeyDown: evt => _hKeyDown(index, evt)
-        });
+        }, index);
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_COMPONENTS,
@@ -76,7 +75,7 @@ const TabPane = _ref => {
           role: "tabpanel",
           id: (0, _tabPaneFn.crTabPanelId)(id, index),
           "aria-labelledby": (0, _tabPaneFn.crTabId)(id, index),
-          children: (0, _uiApi.cloneElement)(tab.props.children, {
+          children: (0, _uiApi.cloneUiElement)(tab.props.children, {
             isVisible: (0, _uiApi.isBool)(isShow) ? isShow && _isSelected : _isSelected,
             ...restTapPanelProps
           })
