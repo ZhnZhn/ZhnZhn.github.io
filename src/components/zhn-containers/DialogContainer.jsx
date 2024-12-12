@@ -129,8 +129,7 @@ const DialogContainer = ({
              isShow: hmIs[key],
              optionData: hmData[key],
              ...elementProps[key]
-           }, key
-         );
+         });
       })}
     </div>
   );

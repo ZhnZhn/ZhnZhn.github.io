@@ -41,10 +41,15 @@ const crObjWithNullPrototype = () => Object.create(null);
 exports.crObjWithNullPrototype = crObjWithNullPrototype;
 const safeMap = (items, crElement) => (0, _isTypeFn.isArr)(items) && items.length > 0 ? items.map(crElement) : null;
 exports.safeMap = safeMap;
-const cloneUiElement = (Element, overrideProps, key) => /*#__PURE__*/(0, _jsxRuntime.jsx)(Element.type, {
-  ...Element.props,
-  ...overrideProps
-}, key);
+const cloneUiElement = function (Element, overrideProps, key) {
+  if (key === void 0) {
+    key = Element.key;
+  }
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(Element.type, {
+    ...Element.props,
+    ...overrideProps
+  }, key);
+};
 exports.cloneUiElement = cloneUiElement;
 const getRefValue = ref => (ref || {}).current;
 exports.getRefValue = getRefValue;

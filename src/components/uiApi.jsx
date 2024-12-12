@@ -52,7 +52,7 @@ export const safeMap = (
 export const cloneUiElement = (
   Element,
   overrideProps,
-  key
+  key=Element.key
 ) => (<Element.type
   key={key}
   {...Element.props}
