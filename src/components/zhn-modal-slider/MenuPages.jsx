@@ -1,4 +1,7 @@
-import { safeMap, cloneElement } from '../uiApi';
+import {
+  safeMap,
+  cloneUiElement
+} from '../uiApi';
 
 const MenuPages = ({
   isShow,
@@ -8,7 +11,7 @@ const MenuPages = ({
   onNextPage,
   onPrevPage,
   onClose
-}) => safeMap(pages, (Page, index) => cloneElement(Page, {
+}) => safeMap(pages, (Page, index) => cloneUiElement(Page, {
   style,
   isVisible: isShow && (index + 1 === pageCurrent),
   pageNumber: index + 1,
