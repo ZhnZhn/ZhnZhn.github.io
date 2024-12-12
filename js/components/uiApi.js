@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useId = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.safeMap = exports.memo = exports.lazy = exports.joinBy = exports.isUndef = exports.isTokenInStr = exports.isStr = exports.isObj = exports.isNumber = exports.isInputValid = exports.isBool = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getEventComposedPath = exports.getComboboxElement = exports.getClientY = exports.getClientX = exports.focusRefElement = exports.focusHtmlElement = exports.focusElementById = exports.createRef = exports.createContext = exports.crObjWithNullPrototype = exports.cloneElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = exports.Children = void 0;
+exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useId = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.safeMap = exports.memo = exports.lazy = exports.joinBy = exports.isUndef = exports.isTokenInStr = exports.isStr = exports.isObj = exports.isNumber = exports.isInputValid = exports.isBool = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getEventComposedPath = exports.getComboboxElement = exports.getClientY = exports.getClientX = exports.focusRefElement = exports.focusHtmlElement = exports.focusElementById = exports.createRef = exports.createContext = exports.crObjWithNullPrototype = exports.cloneUiElement = exports.cloneElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = exports.Children = void 0;
 var _isTokenInStr = require("../utils/isTokenInStr");
 exports.isTokenInStr = _isTokenInStr.isTokenInStr;
 var _bindTo = require("../utils/bindTo");
@@ -36,10 +36,16 @@ exports.isNumber = _isTypeFn.isNumber;
 exports.isStr = _isTypeFn.isStr;
 exports.isUndef = _isTypeFn.isUndef;
 exports.isObj = _isTypeFn.isObj;
+var _jsxRuntime = require("react/jsx-runtime");
 const crObjWithNullPrototype = () => Object.create(null);
 exports.crObjWithNullPrototype = crObjWithNullPrototype;
 const safeMap = (items, crElement) => (0, _isTypeFn.isArr)(items) ? items.map(crElement) : null;
 exports.safeMap = safeMap;
+const cloneUiElement = (Element, overrideProps, key) => /*#__PURE__*/(0, _jsxRuntime.jsx)(Element.type, {
+  ...Element.props,
+  ...overrideProps
+}, key);
+exports.cloneUiElement = cloneUiElement;
 const getRefValue = ref => (ref || {}).current;
 exports.getRefValue = getRefValue;
 const setRefValue = (ref, value) => {

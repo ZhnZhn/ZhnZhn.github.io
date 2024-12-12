@@ -49,6 +49,16 @@ export const safeMap = (
   ? items.map(crElement)
   : null
 
+export const cloneUiElement = (
+  Element,
+  overrideProps,
+  key
+) => (<Element.type
+  key={key}
+  {...Element.props}
+  {...overrideProps}
+/>)
+
 export const getRefValue = (
   ref
 ) => (ref || {}).current

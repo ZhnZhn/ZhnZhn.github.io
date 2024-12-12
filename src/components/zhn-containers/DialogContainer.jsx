@@ -1,5 +1,6 @@
 import {
   safeMap,
+  cloneUiElement,
   crObjWithNullPrototype
 } from '../uiApi';
 
@@ -123,13 +124,13 @@ const DialogContainer = ({
     <div style={S_ROOT}>
       {safeMap(elementDialogs, DialogElement => {
          const key = DialogElement.key;
-         return (<DialogElement.type
-           key={key}
-           {...DialogElement.props}
-           isShow={hmIs[key]}
-           optionData={hmData[key]}
-           {...elementProps[key]}
-         />);
+         return cloneUiElement(
+           DialogElement, {
+             isShow: hmIs[key],
+             optionData: hmData[key],
+             ...elementProps[key]
+           }, key
+         );
       })}
     </div>
   );

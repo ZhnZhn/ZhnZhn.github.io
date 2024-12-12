@@ -105,8 +105,7 @@ const DialogContainer = _ref => {
     style: S_ROOT,
     children: (0, _uiApi.safeMap)(elementDialogs, DialogElement => {
       const key = DialogElement.key;
-      return /*#__PURE__*/(0, _jsxRuntime.jsx)(DialogElement.type, {
-        ...DialogElement.props,
+      return (0, _uiApi.cloneUiElement)(DialogElement, {
         isShow: hmIs[key],
         optionData: hmData[key],
         ...elementProps[key]
