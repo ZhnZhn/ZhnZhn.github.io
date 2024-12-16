@@ -4,8 +4,8 @@ exports.__esModule = true;
 exports.default = void 0;
 var _toTableFn = require("../toTableFn");
 var _fnAdapter = require("./fnAdapter");
-const ID = 'alp_perf',
-  DATA_SOURCE = 'Alpha Vantage',
+const ID = "alp_perf",
+  DATA_SOURCE = "Alpha Vantage",
   S_DS = {
     paddingTop: 6
   },
@@ -14,15 +14,13 @@ const ID = 'alp_perf',
     name,
     pn
   }),
-  HEADERS = [_crHeaderItem('Ticker', 'id'), _crHeaderItem('Price', 'p'), _crHeaderItem('1d Amount', 'cha', {
+  HEADERS = [_crHeaderItem("Ticker", "id"), _crHeaderItem("Price", "p"), _crHeaderItem("1d Amount", "cha", {
     isHide: true
-  }), _crHeaderItem('1d %', 'chp', {
+  }), _crHeaderItem("1d %", "chp", {
     isR: true
-  }), _crHeaderItem('Volume', 'v', {
-    isF: true,
-    style: {
-      fontWeight: 'bold'
-    }
+  }), _crHeaderItem("Volume", "v", {
+    ...(0, _toTableFn.crStyleBold)(),
+    isF: true
   })],
   _crTableOptions = (id, title, rows) => ({
     ...(0, _toTableFn.crTableOptions)(id, title, [...HEADERS], rows, DATA_SOURCE),
@@ -33,7 +31,7 @@ const _crRows = rows => (0, _fnAdapter.isArr)(rows) ? rows.map(item => ({
   id: item.ticker,
   p: _roundBy2(item.price),
   cha: _roundBy2(item.change_amount),
-  chp: _roundBy2((item.change_percentage || '').replace('%')),
+  chp: _roundBy2((item.change_percentage || "").replace("%")),
   v: parseInt(item.volume, 10)
 })) : [];
 const _crConfig = json => [_crRows(json.top_gainers), _crRows(json.top_losers), _crRows(json.most_actively_traded)];
@@ -43,11 +41,11 @@ const TopGainersLosersAdapter = {
   },
   toConfig(json, option) {
     const id = ID,
-      _updated = json.last_updated || '',
+      _updated = json.last_updated || "",
       [gainers, losers, mostActiveTraded] = _crConfig(json),
       config = {
         id: id,
-        zhCompType: 'ALPHA_PERF',
+        zhCompType: "ALPHA_PERF",
         zhConfig: {
           id: id,
           key: id

@@ -1,14 +1,15 @@
 import {
+  crStyleBold,
   crTableOptions
-} from '../toTableFn';
+} from "../toTableFn";
 
 import {
   isArr,
   roundBy
-} from './fnAdapter';
+} from "./fnAdapter";
 
-const ID = 'alp_perf'
-, DATA_SOURCE = 'Alpha Vantage'
+const ID = "alp_perf"
+, DATA_SOURCE = "Alpha Vantage"
 , S_DS = { paddingTop: 6 }
 , _crHeaderItem = (
   name,
@@ -20,11 +21,11 @@ const ID = 'alp_perf'
   pn
 })
 , HEADERS = [
-  _crHeaderItem('Ticker', 'id'),
-  _crHeaderItem('Price', 'p'),
-  _crHeaderItem('1d Amount', 'cha', { isHide: true }),
-  _crHeaderItem('1d %', 'chp', { isR: true }),
-  _crHeaderItem('Volume', 'v', { isF: true, style: { fontWeight: 'bold' }})
+  _crHeaderItem("Ticker", "id"),
+  _crHeaderItem("Price", "p"),
+  _crHeaderItem("1d Amount", "cha", { isHide: true }),
+  _crHeaderItem("1d %", "chp", { isR: true }),
+  _crHeaderItem("Volume", "v", { ...crStyleBold(), isF: true })
 ]
 , _crTableOptions = (
   id,
@@ -51,7 +52,7 @@ const _crRows = (
   id: item.ticker,
   p: _roundBy2(item.price),
   cha: _roundBy2(item.change_amount),
-  chp: _roundBy2((item.change_percentage || '').replace('%')),
+  chp: _roundBy2((item.change_percentage || "").replace("%")),
   v: parseInt(item.volume, 10)
 })): [];
 
@@ -69,7 +70,7 @@ const TopGainersLosersAdapter = {
   },
   toConfig(json, option) {
     const id = ID
-    , _updated = json.last_updated || ''
+    , _updated = json.last_updated || ""
     , [
       gainers,
       losers,
@@ -77,7 +78,7 @@ const TopGainersLosersAdapter = {
     ] = _crConfig(json)
     , config = {
       id: id,
-      zhCompType: 'ALPHA_PERF',
+      zhCompType: "ALPHA_PERF",
       zhConfig: {
         id: id,
         key: id
