@@ -6,17 +6,16 @@ exports.default = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _AdapterFn = require("./AdapterFn");
 var _toTableFn = require("./toTableFn");
-const _crBgStyleProps = isLeft => isLeft ? ['to left', '#184416'] : ['to right', '#6c3632'];
+const _crBgStyleProps = isLeft => isLeft ? ["to left", "#184416"] : ["to right", "#6c3632"];
 const _crItemHeader = (name, pn, color) => ({
   name,
   pn,
   toN: [],
-  style: {
-    color,
-    fontWeight: 'bold'
-  }
+  ...(0, _toTableFn.crStyleBold)({
+    color
+  })
 });
-const _crTableHeaders = isOrderNumber => [_crItemHeader('Bid', 'b_p', '#4caf50'), isOrderNumber ? _crItemHeader('BN', 'b_n') : void 0, _crItemHeader('Bid QTY', 'b_q'), _crItemHeader('Ask QTY', 'a_q'), isOrderNumber ? _crItemHeader('AN', 'a_n') : void 0, _crItemHeader('Ask', 'a_p', '#f44336')].filter(Boolean);
+const _crTableHeaders = isOrderNumber => [_crItemHeader("Bid", "b_p", "#4caf50"), isOrderNumber ? _crItemHeader("BN", "b_n") : void 0, _crItemHeader("Bid QTY", "b_q"), _crItemHeader("Ask QTY", "a_q"), isOrderNumber ? _crItemHeader("AN", "a_n") : void 0, _crItemHeader("Ask", "a_p", "#f44336")].filter(Boolean);
 const _calcTotal = (arr, valueIndex, len) => {
   let _total = (0, _big.default)(0),
     i = 0;

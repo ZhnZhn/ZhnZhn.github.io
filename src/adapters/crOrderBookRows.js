@@ -1,27 +1,36 @@
-import Big from 'big.js';
-import { isNumber, bindTo } from './AdapterFn';
-import { crTableRows } from './toTableFn';
+import Big from "big.js";
+import {
+  isNumber,
+  bindTo
+} from "./AdapterFn";
+import {
+  crStyleBold,
+  crTableRows
+} from "./toTableFn";
 
-const _crBgStyleProps = isLeft => isLeft
-  ? ['to left', '#184416']
-  : ['to right', '#6c3632'];
+const _crBgStyleProps = (
+  isLeft
+) => isLeft
+  ? ["to left", "#184416"]
+  : ["to right", "#6c3632"];
 
-const _crItemHeader = (name, pn, color) => ({
+const _crItemHeader = (
+  name,
+  pn,
+  color
+) => ({
    name, pn,
    toN: [],
-   style: {
-     color,
-     fontWeight: 'bold'
-   }
+   ...crStyleBold({ color })
 })
 
 const _crTableHeaders = (isOrderNumber) => [
-  _crItemHeader('Bid', 'b_p', '#4caf50')
-  , isOrderNumber ? _crItemHeader('BN', 'b_n') : void 0
-  , _crItemHeader('Bid QTY', 'b_q')
-  , _crItemHeader('Ask QTY', 'a_q')
-  , isOrderNumber ? _crItemHeader('AN', 'a_n') : void 0
-  , _crItemHeader('Ask', 'a_p', '#f44336')
+  _crItemHeader("Bid", "b_p", "#4caf50")
+  , isOrderNumber ? _crItemHeader("BN", "b_n") : void 0
+  , _crItemHeader("Bid QTY", "b_q")
+  , _crItemHeader("Ask QTY", "a_q")
+  , isOrderNumber ? _crItemHeader("AN", "a_n") : void 0
+  , _crItemHeader("Ask", "a_p", "#f44336")
 ].filter(Boolean);
 
 const _calcTotal = (arr, valueIndex, len) => {
