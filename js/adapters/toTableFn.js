@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crTableRows = exports.crTableOptions = exports.crTableFlatHeaders = exports.crTableConfig = exports.crStyleBold = exports.crNumberProps = exports.crNameProps = void 0;
+exports.crTableRows = exports.crTableOptions = exports.crTableFlatHeaders = exports.crTableConfig = exports.crStyleCenter = exports.crStyleBold = exports.crNumberProps = exports.crNameProps = void 0;
 var _AdapterFn = require("./AdapterFn");
 const crNameProps = (name, pnOrIsHideOrVoid, isHideOrVoid) => {
   const [pn, isHide] = (0, _AdapterFn.isStr)(pnOrIsHideOrVoid) ? [pnOrIsHideOrVoid, isHideOrVoid] : [name.toLowerCase(), pnOrIsHideOrVoid];
@@ -12,13 +12,19 @@ const crNameProps = (name, pnOrIsHideOrVoid, isHideOrVoid) => {
   };
 };
 exports.crNameProps = crNameProps;
-const crStyleBold = styleProps => ({
-  style: {
-    fontWeight: "bold",
-    ...styleProps
-  }
+const _crStyle = styleProps => ({
+  style: styleProps
+});
+const crStyleBold = styleProps => _crStyle({
+  fontWeight: "bold",
+  ...styleProps
 });
 exports.crStyleBold = crStyleBold;
+const crStyleCenter = styleProps => _crStyle({
+  textAlign: "center",
+  ...styleProps
+});
+exports.crStyleCenter = crStyleCenter;
 const crNumberProps = n => ({
   toN: [n],
   isF: true,

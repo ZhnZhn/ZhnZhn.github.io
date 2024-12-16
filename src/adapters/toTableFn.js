@@ -21,13 +21,24 @@ export const crNameProps = (
   };
 };
 
-export const crStyleBold = (
+const _crStyle = (
   styleProps
 ) => ({
-  style: {
-    fontWeight: "bold",
-    ...styleProps
-  }
+  style: styleProps
+})
+
+export const crStyleBold = (
+  styleProps
+) => _crStyle({
+  fontWeight: "bold",
+  ...styleProps
+})
+
+export const crStyleCenter = (
+  styleProps
+) => _crStyle({
+  textAlign: "center",
+  ...styleProps
 })
 
 export const crNumberProps = (n) => ({

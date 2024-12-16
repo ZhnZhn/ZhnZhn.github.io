@@ -32,6 +32,37 @@ describe("crStyleBold", () => {
     });
   });
 });
+describe("crStyleCenter", () => {
+  const fn = _toTableFn.crStyleCenter;
+  test("should return style center", () => {
+    expect(fn()).toStrictEqual({
+      style: {
+        textAlign: "center"
+      }
+    });
+  });
+  test("should use style props", () => {
+    expect(fn({
+      transform: "uppercase"
+    })).toStrictEqual({
+      style: {
+        textAlign: "center",
+        transform: "uppercase"
+      }
+    });
+  });
+  test("should override style center by style props", () => {
+    expect(fn({
+      textAlign: "left",
+      transform: "uppercase"
+    })).toStrictEqual({
+      style: {
+        textAlign: "left",
+        transform: "uppercase"
+      }
+    });
+  });
+});
 describe("crNameProps", () => {
   const fn = _toTableFn.crNameProps;
   test("should return table name props", () => {

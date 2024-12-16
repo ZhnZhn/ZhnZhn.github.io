@@ -1,5 +1,6 @@
 import {
   crStyleBold,
+  crStyleCenter,
   crNameProps,
   crNumberProps,
   crTableFlatHeaders
@@ -32,6 +33,38 @@ describe("crStyleBold", ()=>{
     })).toStrictEqual({
       style: {
         fontWeight: "normal",
+        transform: "uppercase"
+      }
+    })
+  })
+})
+
+describe("crStyleCenter", ()=>{
+  const fn = crStyleCenter;
+  test("should return style center", () => {
+    expect(fn()).toStrictEqual({
+      style: {
+        textAlign: "center"
+      }
+    })
+  })
+
+  test("should use style props", () => {
+    expect(fn({ transform: "uppercase" })).toStrictEqual({
+      style: {
+        textAlign: "center",
+        transform: "uppercase"
+      }
+    })
+  })
+
+  test("should override style center by style props", () => {
+    expect(fn({
+      textAlign: "left",
+      transform: "uppercase"
+    })).toStrictEqual({
+      style: {
+        textAlign: "left",
         transform: "uppercase"
       }
     })
