@@ -1,41 +1,42 @@
 import {
   toTd,
   roundByOHLC
-} from '../AdapterFn';
+} from "../AdapterFn";
 import {
+  crStyleCenter,
   crNameProps,
   crNumberProps,
   crTableConfig,
   crTableRows
-} from '../toTableFn';
+} from "../toTableFn";
 
-const _pnTurnoverUsd = 'turnover'
+const _pnTurnoverUsd = "turnover"
 , HEADERS = [{
-  ...crNameProps('Rank', 'id'),
-  style: { textAlign: 'center' }
+  ...crNameProps("Rank", "id"),
+  ...crStyleCenter()
 }
-, crNameProps('Base')
-, crNameProps('Quote')
+, crNameProps("Base")
+, crNameProps("Quote")
 , {
-  ...crNameProps('Volume'),
+  ...crNameProps("Volume"),
   ...crNumberProps(0)
 },{
-  ...crNameProps('Price'),
+  ...crNameProps("Price"),
   ...crNumberProps()
 },{
-  ...crNameProps('Price USD', 'price_usd', true),
+  ...crNameProps("Price USD", "price_usd", true),
   ...crNumberProps()
 },{
-  ...crNameProps('V*P USD', _pnTurnoverUsd, true),
+  ...crNameProps("V*P USD", _pnTurnoverUsd, true),
   ...crNumberProps(0)
 }
-, crNameProps('Time', true)
-, crNameProps('Date', true)
+, crNameProps("Time", true)
+, crNameProps("Date", true)
 ];
 
 const _crTimeDate = (
   time
-) => toTd(time*1000).split(' ')
+) => toTd(time*1000).split(" ")
 // base = null or quote = null or volume = 0
 , _isNotEmptyPair = ({
   base,
@@ -55,11 +56,11 @@ const _crTimeDate = (
     item = pairs[i]
     if (_isNotEmptyPair(item)) {
       const _time  = item.time
-      , [time='', date=''] = _crTimeDate(_time)
+      , [time="", date=""] = _crTimeDate(_time)
       , _priceUsd = item.price_usd;
       _rows.push({
         ...item,
-        'price_usd': roundByOHLC(_priceUsd),
+        "price_usd": roundByOHLC(_priceUsd),
         [_pnTurnoverUsd]: item.volume * _priceUsd,
         time,
         date,
@@ -78,8 +79,8 @@ const _crTimeDate = (
 _crTimePeriod = (tMin, tMax) => {
   const tdMin = toTd(tMin*1000)
   , tdMax = toTd(tMax*1000)
-  , minArr = tdMin.split(' ')
-  , maxArr = tdMax.split(' ')
+  , minArr = tdMin.split(" ")
+  , maxArr = tdMax.split(" ")
   , dmy = minArr[1] === maxArr[1]
       ? minArr[1]
       : void 0;

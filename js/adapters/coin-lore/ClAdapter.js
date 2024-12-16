@@ -4,26 +4,24 @@ exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _toTableFn = require("../toTableFn");
-const _pnTurnoverUsd = 'turnover',
+const _pnTurnoverUsd = "turnover",
   HEADERS = [{
-    ...(0, _toTableFn.crNameProps)('Rank', 'id'),
-    style: {
-      textAlign: 'center'
-    }
-  }, (0, _toTableFn.crNameProps)('Base'), (0, _toTableFn.crNameProps)('Quote'), {
-    ...(0, _toTableFn.crNameProps)('Volume'),
+    ...(0, _toTableFn.crNameProps)("Rank", "id"),
+    ...(0, _toTableFn.crStyleCenter)()
+  }, (0, _toTableFn.crNameProps)("Base"), (0, _toTableFn.crNameProps)("Quote"), {
+    ...(0, _toTableFn.crNameProps)("Volume"),
     ...(0, _toTableFn.crNumberProps)(0)
   }, {
-    ...(0, _toTableFn.crNameProps)('Price'),
+    ...(0, _toTableFn.crNameProps)("Price"),
     ...(0, _toTableFn.crNumberProps)()
   }, {
-    ...(0, _toTableFn.crNameProps)('Price USD', 'price_usd', true),
+    ...(0, _toTableFn.crNameProps)("Price USD", "price_usd", true),
     ...(0, _toTableFn.crNumberProps)()
   }, {
-    ...(0, _toTableFn.crNameProps)('V*P USD', _pnTurnoverUsd, true),
+    ...(0, _toTableFn.crNameProps)("V*P USD", _pnTurnoverUsd, true),
     ...(0, _toTableFn.crNumberProps)(0)
-  }, (0, _toTableFn.crNameProps)('Time', true), (0, _toTableFn.crNameProps)('Date', true)];
-const _crTimeDate = time => (0, _AdapterFn.toTd)(time * 1000).split(' ')
+  }, (0, _toTableFn.crNameProps)("Time", true), (0, _toTableFn.crNameProps)("Date", true)];
+const _crTimeDate = time => (0, _AdapterFn.toTd)(time * 1000).split(" ")
   // base = null or quote = null or volume = 0
   ,
   _isNotEmptyPair = _ref => {
@@ -49,11 +47,11 @@ const _crTimeDate = time => (0, _AdapterFn.toTd)(time * 1000).split(' ')
       item = pairs[i];
       if (_isNotEmptyPair(item)) {
         const _time = item.time,
-          [time = '', date = ''] = _crTimeDate(_time),
+          [time = "", date = ""] = _crTimeDate(_time),
           _priceUsd = item.price_usd;
         _rows.push({
           ...item,
-          'price_usd': (0, _AdapterFn.roundByOHLC)(_priceUsd),
+          "price_usd": (0, _AdapterFn.roundByOHLC)(_priceUsd),
           [_pnTurnoverUsd]: item.volume * _priceUsd,
           time,
           date,
@@ -73,8 +71,8 @@ const _crTimeDate = time => (0, _AdapterFn.toTd)(time * 1000).split(' ')
   _crTimePeriod = (tMin, tMax) => {
     const tdMin = (0, _AdapterFn.toTd)(tMin * 1000),
       tdMax = (0, _AdapterFn.toTd)(tMax * 1000),
-      minArr = tdMin.split(' '),
-      maxArr = tdMax.split(' '),
+      minArr = tdMin.split(" "),
+      maxArr = tdMax.split(" "),
       dmy = minArr[1] === maxArr[1] ? minArr[1] : void 0;
     return dmy ? `${minArr[0]} - ${maxArr[0]} ${dmy}` : `${tdMin} ${tdMax}`;
   },
