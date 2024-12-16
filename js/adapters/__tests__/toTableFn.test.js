@@ -1,6 +1,37 @@
 "use strict";
 
 var _toTableFn = require("../toTableFn");
+describe("crStyleBold", () => {
+  const fn = _toTableFn.crStyleBold;
+  test("should return style bold", () => {
+    expect(fn()).toStrictEqual({
+      style: {
+        fontWeight: "bold"
+      }
+    });
+  });
+  test("should use style props", () => {
+    expect(fn({
+      transform: "uppercase"
+    })).toStrictEqual({
+      style: {
+        fontWeight: "bold",
+        transform: "uppercase"
+      }
+    });
+  });
+  test("should override style bold by style props", () => {
+    expect(fn({
+      fontWeight: "normal",
+      transform: "uppercase"
+    })).toStrictEqual({
+      style: {
+        fontWeight: "normal",
+        transform: "uppercase"
+      }
+    });
+  });
+});
 describe("crNameProps", () => {
   const fn = _toTableFn.crNameProps;
   test("should return table name props", () => {
