@@ -33,16 +33,48 @@ describe("crNumberProps", () => {
       toN: [void 0],
       isF: true,
       style: {
-        fontWeight: 'bold'
+        fontWeight: "bold"
       }
     });
     expect(fn(2)).toStrictEqual({
       toN: [2],
       isF: true,
       style: {
-        fontWeight: 'bold'
+        fontWeight: "bold"
       }
     });
+  });
+});
+describe("crTableFlatHeaders", () => {
+  const fn = _toTableFn.crTableFlatHeaders;
+  test("should create flat table headers with index ids from table heades", () => {
+    expect(fn([{
+      name: "Item 0"
+    }, {
+      name: "Item 1"
+    }, {
+      items: [{
+        name: "Item 2"
+      }, {
+        name: "Item 3"
+      }]
+    }, {
+      name: "Item 4"
+    }])).toStrictEqual([{
+      name: "Item 0"
+    }, {
+      name: "Item 1",
+      id: 1
+    }, {
+      name: "Item 2",
+      id: 2
+    }, {
+      name: "Item 3",
+      id: 3
+    }, {
+      name: "Item 4",
+      id: 4
+    }]);
   });
 });
 //# sourceMappingURL=toTableFn.test.js.map

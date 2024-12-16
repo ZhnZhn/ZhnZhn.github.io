@@ -1,9 +1,10 @@
 import {
+  isArr,
   isTypeNumber,
   isStr,
   numberFormat,
   roundBy
-} from './AdapterFn';
+} from "./AdapterFn";
 
 export const crNameProps = (
   name,
@@ -20,9 +21,12 @@ export const crNameProps = (
   };
 };
 
-export const crStyleBold = () => ({
+export const crStyleBold = (
+  styleProps
+) => ({
   style: {
-    fontWeight: 'bold'
+    fontWeight: "bold",
+    ...styleProps
   }
 })
 
@@ -53,6 +57,7 @@ export const crTableOptions = (
   id,
   title,
   headers,
+  flatHeaders,
   rows,
   dataSource,
   fns
@@ -60,6 +65,7 @@ export const crTableOptions = (
   id,
   title,
   headers,
+  flatHeaders,
   rows,
   dataSource,
   tableFn: {
@@ -72,6 +78,7 @@ export const crTableConfig = ({
   id,
   title,
   headers,
+  flatHeaders,
   rows,
   dataSource,
   fns
@@ -80,20 +87,22 @@ export const crTableConfig = ({
     id,
     title,
     headers,
+    flatHeaders,
     rows,
     dataSource,
     fns
   ),
-  zhCompType: 'TABLE',
+  zhCompType: "TABLE",
   zhConfig: {
-    id: id, key: id
+    id: id,
+    key: id
   }
 })
 
 export const crTableRows = (
   headers=[],
   rows=[],
-  idPropName='id'
+  idPropName="id"
 ) => rows
   .map((r, rIndex) => {
      headers.forEach(h => {
@@ -102,3 +111,38 @@ export const crTableRows = (
      r.id = r[idPropName] || `id${rIndex}`
      return r;
   })
+
+const _setIdToHeaderItem = (
+  id,
+  item
+) => {
+  if (id !== 0) {
+    item.id = id
+  }
+  return item;
+}
+, _addItemTo = (
+  arr,
+  item,
+  id
+) => {
+  arr.push(_setIdToHeaderItem(id, item))
+  return id + 1;
+};
+
+export const crTableFlatHeaders = (
+  headers
+) => {
+  const _arr = [];
+  let id = 0;
+  for(const header of headers){
+    if (isArr(header.items)) {
+      for(const headerItem of header.items){
+        id = _addItemTo(_arr, headerItem, id)
+      }
+    } else {
+      id = _addItemTo(_arr, header, id)
+    }
+  }
+  return _arr;
+}

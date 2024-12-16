@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crTableRows = exports.crTableOptions = exports.crTableConfig = exports.crStyleBold = exports.crNumberProps = exports.crNameProps = void 0;
+exports.crTableRows = exports.crTableOptions = exports.crTableFlatHeaders = exports.crTableConfig = exports.crStyleBold = exports.crNumberProps = exports.crNameProps = void 0;
 var _AdapterFn = require("./AdapterFn");
 const crNameProps = (name, pnOrIsHideOrVoid, isHideOrVoid) => {
   const [pn, isHide] = (0, _AdapterFn.isStr)(pnOrIsHideOrVoid) ? [pnOrIsHideOrVoid, isHideOrVoid] : [name.toLowerCase(), pnOrIsHideOrVoid];
@@ -12,9 +12,10 @@ const crNameProps = (name, pnOrIsHideOrVoid, isHideOrVoid) => {
   };
 };
 exports.crNameProps = crNameProps;
-const crStyleBold = () => ({
+const crStyleBold = styleProps => ({
   style: {
-    fontWeight: 'bold'
+    fontWeight: "bold",
+    ...styleProps
   }
 });
 exports.crStyleBold = crStyleBold;
@@ -40,10 +41,11 @@ const _getCellValue = (r, h) => {
     _strV = r[pn];
   return _isToNumber ? (0, _AdapterFn.isTypeNumber)(_toFixedBy) ? (0, _AdapterFn.roundBy)(_strV, _toFixedBy) : _replaceNaN(parseFloat(_strV)) : _strV;
 };
-const crTableOptions = (id, title, headers, rows, dataSource, fns) => ({
+const crTableOptions = (id, title, headers, flatHeaders, rows, dataSource, fns) => ({
   id,
   title,
   headers,
+  flatHeaders,
   rows,
   dataSource,
   tableFn: {
@@ -57,13 +59,14 @@ const crTableConfig = _ref => {
     id,
     title,
     headers,
+    flatHeaders,
     rows,
     dataSource,
     fns
   } = _ref;
   return {
-    ...crTableOptions(id, title, headers, rows, dataSource, fns),
-    zhCompType: 'TABLE',
+    ...crTableOptions(id, title, headers, flatHeaders, rows, dataSource, fns),
+    zhCompType: "TABLE",
     zhConfig: {
       id: id,
       key: id
@@ -79,7 +82,7 @@ const crTableRows = function (headers, rows, idPropName) {
     rows = [];
   }
   if (idPropName === void 0) {
-    idPropName = 'id';
+    idPropName = "id";
   }
   return rows.map((r, rIndex) => {
     headers.forEach(h => {
@@ -90,4 +93,29 @@ const crTableRows = function (headers, rows, idPropName) {
   });
 };
 exports.crTableRows = crTableRows;
+const _setIdToHeaderItem = (id, item) => {
+    if (id !== 0) {
+      item.id = id;
+    }
+    return item;
+  },
+  _addItemTo = (arr, item, id) => {
+    arr.push(_setIdToHeaderItem(id, item));
+    return id + 1;
+  };
+const crTableFlatHeaders = headers => {
+  const _arr = [];
+  let id = 0;
+  for (const header of headers) {
+    if ((0, _AdapterFn.isArr)(header.items)) {
+      for (const headerItem of header.items) {
+        id = _addItemTo(_arr, headerItem, id);
+      }
+    } else {
+      id = _addItemTo(_arr, header, id);
+    }
+  }
+  return _arr;
+};
+exports.crTableFlatHeaders = crTableFlatHeaders;
 //# sourceMappingURL=toTableFn.js.map
