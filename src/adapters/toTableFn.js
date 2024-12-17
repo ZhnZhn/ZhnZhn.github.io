@@ -123,6 +123,14 @@ export const crTableRows = (
      return r;
   })
 
+export const crCaptionItemsProps = (
+  caption,
+  items
+) => ({
+  caption,
+  items
+})
+
 const _setIdToHeaderItem = (
   id,
   item

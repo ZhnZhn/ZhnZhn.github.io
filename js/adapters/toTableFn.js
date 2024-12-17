@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crTableRows = exports.crTableOptions = exports.crTableFlatHeaders = exports.crTableConfig = exports.crStyleCenter = exports.crStyleBold = exports.crNumberProps = exports.crNameProps = void 0;
+exports.crTableRows = exports.crTableOptions = exports.crTableFlatHeaders = exports.crTableConfig = exports.crStyleCenter = exports.crStyleBold = exports.crNumberProps = exports.crNameProps = exports.crCaptionItemsProps = void 0;
 var _AdapterFn = require("./AdapterFn");
 const crNameProps = (name, pnOrIsHideOrVoid, isHideOrVoid) => {
   const [pn, isHide] = (0, _AdapterFn.isStr)(pnOrIsHideOrVoid) ? [pnOrIsHideOrVoid, isHideOrVoid] : [name.toLowerCase(), pnOrIsHideOrVoid];
@@ -99,6 +99,11 @@ const crTableRows = function (headers, rows, idPropName) {
   });
 };
 exports.crTableRows = crTableRows;
+const crCaptionItemsProps = (caption, items) => ({
+  caption,
+  items
+});
+exports.crCaptionItemsProps = crCaptionItemsProps;
 const _setIdToHeaderItem = (id, item) => {
     if (id !== 0) {
       item.id = id;

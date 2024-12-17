@@ -107,6 +107,23 @@ describe("crNumberProps", () => {
     });
   });
 });
+describe("crCaptionItemsProps", () => {
+  const fn = _toTableFn.crCaptionItemsProps;
+  test("should return caption items props", () => {
+    expect(fn("Items", [{
+      name: "Item1"
+    }, {
+      name: "Item2"
+    }])).toStrictEqual({
+      caption: "Items",
+      items: [{
+        name: "Item1"
+      }, {
+        name: "Item2"
+      }]
+    });
+  });
+});
 describe("crTableFlatHeaders", () => {
   const fn = _toTableFn.crTableFlatHeaders;
   test("should create flat table headers with index ids from table heades", () => {
