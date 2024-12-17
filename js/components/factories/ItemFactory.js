@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.crItem = void 0;
 var _uiApi = require("../uiApi");
+var _crRouter = require("../../utils/crRouter");
 var _ChartFn = require("../../charts/ChartFn");
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 var _chartCheckBoxLogic = require("../../flux/stores/chartCheckBoxLogic");
@@ -76,25 +77,15 @@ const _fItem = Comp => _ref3 => {
     ...props
   }, config.id);
 };
-const _rCrItem = {
-  DF: _crAreaChart,
+const _getCrItem = (0, _crRouter.crGetRoute)({
   [_CompItemType.CIT_EUROSTAT_MAP]: _crMapChart,
   [_CompItemType.CIT_TABLE]: _fItem(_Items.TableItem),
   [_CompItemType.CIT_ALPHA_PERF]: _fItem(_Items.AlphaPerfItem),
   [_CompItemType.CIT_INFO_ITEM]: _fItem(_Items.InfoItem),
   [_CompItemType.CIT_TW_LIST]: _fItem(_Items.TwListItem)
-};
+}, _crAreaChart);
 
 /* { config, index, chartType, props, store } */
-const crItem = itemOptions => {
-  const {
-      config
-    } = itemOptions,
-    {
-      zhCompType
-    } = config || {},
-    _crItem = _rCrItem[zhCompType] || _rCrItem.DF;
-  return _crItem(itemOptions);
-};
+const crItem = itemOptions => _getCrItem((itemOptions.config || {}).zhCompType)(itemOptions);
 exports.crItem = crItem;
 //# sourceMappingURL=ItemFactory.js.map

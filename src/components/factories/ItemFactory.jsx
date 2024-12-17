@@ -1,27 +1,26 @@
-import {
-  bindTo
-} from '../uiApi';
+import { bindTo } from "../uiApi";
+import { crGetRoute } from "../../utils/crRouter";
 
 import {
   crValueMoving,
   crId
-} from '../../charts/ChartFn';
+} from "../../charts/ChartFn";
 
 import {
   showAddToWatch,
   showPasteTo,
   showZoom
-} from '../../flux/actions/ComponentActions';
+} from "../../flux/actions/ComponentActions";
 import {
   setActiveCheckbox
-} from '../../flux/stores/chartCheckBoxLogic';
+} from "../../flux/stores/chartCheckBoxLogic";
 import {
   moveToTop
-} from '../../flux/stores/itemStore';
+} from "../../flux/stores/itemStore";
 import {
   copyChart,
   getCopyFromChart
-} from '../../flux/stores/propertyFromChart';
+} from "../../flux/stores/propertyFromChart";
 
 import {
   CIT_EUROSTAT_MAP,
@@ -29,7 +28,7 @@ import {
   CIT_ALPHA_PERF,
   CIT_INFO_ITEM,
   CIT_TW_LIST
-} from '../../constants/CompItemType';
+} from "../../constants/CompItemType";
 
 import {
   ChartItem,
@@ -38,7 +37,7 @@ import {
   AlphaPerfItem,
   InfoItem,
   TwListItem
-} from '../items/Items';
+} from "../items/Items";
 
 const _getIdKey = (
   config,
@@ -117,19 +116,17 @@ const _fItem = (Comp) => ({
   />
 );
 
-const _rCrItem = {
-  DF: _crAreaChart,
+const _getCrItem = crGetRoute({
   [CIT_EUROSTAT_MAP]: _crMapChart,
   [CIT_TABLE]: _fItem(TableItem),
   [CIT_ALPHA_PERF]: _fItem(AlphaPerfItem),
   [CIT_INFO_ITEM]: _fItem(InfoItem),
   [CIT_TW_LIST]: _fItem(TwListItem)
-};
+}, _crAreaChart);
 
 /* { config, index, chartType, props, store } */
-export const crItem = (itemOptions) => {
-  const { config } = itemOptions
-  , { zhCompType } = config || {}
-  , _crItem = _rCrItem[zhCompType] || _rCrItem.DF;
-  return _crItem(itemOptions);
-}
+export const crItem = (
+  itemOptions
+) => _getCrItem(
+  (itemOptions.config || {}).zhCompType
+)(itemOptions)
