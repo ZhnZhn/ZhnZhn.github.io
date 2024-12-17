@@ -1,29 +1,52 @@
-import { fCrLazyValue } from "../AdapterFn";
+import {
+  toTimeDate,
+  fCrLazyValue
+} from "../AdapterFn";
 
 import {
   crStyleBold,
   crStyleCenter,
   crNameProps,
+  crCaptionItemsProps,
   crTableFlatHeaders,
   crTableRows,
   crTableConfig
 } from "../toTableFn";
 import { crPageConfig } from "./fnAdapter";
 
-const _crPriceChangeItem = (
+const CHANGE_PERCENTAGE = "change_percentage"
+, PERCENT_PROPS = {
+  toN: [2],
+  isR: true
+}
+, _crPriceChangeItem = (
   name,
   pnSuffix,
   isHide
 ) => ({
   ...crNameProps(
     name,
-    `price_change_percentage_${pnSuffix}`,
+    `price_${CHANGE_PERCENTAGE}_${pnSuffix}`,
     isHide
   ),
-  toN: [2],
-  isR: true
-});
-const _crStyleItem = (name, pn, options) => ({
+  ...PERCENT_PROPS
+})
+, _crChangePercentageItem = (
+  name,
+  pnPrefix
+) => ({
+  ...crNameProps(
+    name,
+    `${pnPrefix}_${CHANGE_PERCENTAGE}`,
+    true
+  ),
+  ...PERCENT_PROPS
+})
+, _crStyleItem = (
+  name,
+  pn,
+  options
+) => ({
   ...crNameProps(name, pn),
   ...crStyleBold(),
   toN: [],
@@ -42,15 +65,23 @@ const _getTableHeaders = fCrLazyValue(() => {
       ...crNameProps("Symbol", true),
       ...crStyleBold({ textTransform: "uppercase" })
     },
-    { caption: "Price Change %", items: [
+    crCaptionItemsProps("Price Change %", [
        _crPriceChangeItem("1h %", "1h_in_currency"),
        _crPriceChangeItem("24h %", "24h"),
        _crPriceChangeItem("7d %", "7d_in_currency"),
        _crPriceChangeItem("30d %", "30d_in_currency", true),
-       _crPriceChangeItem("1y %", "1y_in_currency", true)
-     ]
-    },
-    _crStyleItem("Price", "current_price"),
+       _crPriceChangeItem("1y %", "1y_in_currency", true),
+       _crStyleItem("Price", "current_price")
+    ]),
+    crCaptionItemsProps("ATH, ATL", [
+      _crStyleItem("ATH", "ath", { isHide: true }),
+      _crChangePercentageItem("ATH %", "ath"),
+      crNameProps("ATH Date UTC", "ath_date", true),
+
+      _crStyleItem("ATL", "atl", { isHide: true }),
+      _crChangePercentageItem("ATL %", "atl"),
+      crNameProps("ATL Date UTC", "atl_date", true)
+    ]),
     _crStyleItem("MarketCap", "market_cap", { isF: true }),
     crNameProps("Updated UTC", "last_updated", true)
   ];
@@ -60,25 +91,21 @@ const _getTableHeaders = fCrLazyValue(() => {
   ];
 });
 
-
-const _toDate = rowDate => (rowDate || "")
-  .replace("T", " ")
-  .split(".")[0];
-
 const _transformDate = json => json
  .map(item => {
-   item.last_updated = _toDate(item.last_updated)
+   item.last_updated = toTimeDate(item.last_updated)
+   item.ath_date = toTimeDate(item.ath_date)
+   item.atl_date = toTimeDate(item.atl_date)
    return item;
  });
 
-
-const _crDataSource = (rows) => {
-  return `CoinGecko ${rows[0].last_updated} UTC`;
-};
+const _crDataSource = (
+  rows
+) => `CoinGecko ${rows[0].last_updated} UTC`;
 
 const toMarketCapList = {
   crKey(option){
-    option.key = crPageConfig(option).join('_');
+    option.key = crPageConfig(option).join("_");
     return option.key;
   },
 
