@@ -1,21 +1,22 @@
-import useToggle from '../hooks/useToggle';
+import useToggle from "../hooks/useToggle";
 
-import ShowHide from '../zhn/ShowHide';
-import Table from '../zhn-table/Table';
-import ItemHeader from './ItemHeader';
+import ShowHide from "../zhn/ShowHide";
+import Table from "../zhn-table/Table";
+import ItemHeader from "./ItemHeader";
 
 const S_ROOT = { paddingBottom: 8 }
 , S_HEADER = {
-  position: 'sticky',
+  position: "sticky",
   top: -1,
   zIndex: 1,
-  willChange: 'transform'
-}, S_CAPTION = { width: '100%' }
-, S_SHOW_HIDE = { padding: '8px 0' }
+  willChange: "transform"
+}
+, S_CAPTION = { width: "100%" }
+, S_SHOW_HIDE = { padding: "8px 0" }
 , S_DATA_SOURCE = {
-  padding: '2px 0 0 12px',
-  color: '#909090',
-  fontSize: '11px'
+  padding: "2px 0 0 12px",
+  color: "#909090",
+  fontSize: "11px"
 };
 
 export const TableItem = ({
@@ -32,6 +33,7 @@ export const TableItem = ({
       id,
       title,
       headers,
+      flatHeaders,
       rows,
       tableFn,
       dataSource,
@@ -56,6 +58,7 @@ export const TableItem = ({
           gridId={_gridId}
           thMoreStyle={thMoreStyle}
           headers={headers}
+          flatHeaders={flatHeaders}
           rows={rows}
           tableFn={tableFn}
         />

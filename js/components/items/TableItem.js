@@ -12,21 +12,21 @@ const S_ROOT = {
     paddingBottom: 8
   },
   S_HEADER = {
-    position: 'sticky',
+    position: "sticky",
     top: -1,
     zIndex: 1,
-    willChange: 'transform'
+    willChange: "transform"
   },
   S_CAPTION = {
-    width: '100%'
+    width: "100%"
   },
   S_SHOW_HIDE = {
-    padding: '8px 0'
+    padding: "8px 0"
   },
   S_DATA_SOURCE = {
-    padding: '2px 0 0 12px',
-    color: '#909090',
-    fontSize: '11px'
+    padding: "2px 0 0 12px",
+    color: "#909090",
+    fontSize: "11px"
   };
 const TableItem = _ref => {
   let {
@@ -40,12 +40,13 @@ const TableItem = _ref => {
       id,
       title,
       headers,
+      flatHeaders,
       rows,
       tableFn,
       dataSource,
       dsStyle
     } = config,
-    _gridId = "tb_" + id;
+    _gridId = `tb_${id}`;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemHeader.default, {
@@ -62,6 +63,7 @@ const TableItem = _ref => {
         gridId: _gridId,
         thMoreStyle: thMoreStyle,
         headers: headers,
+        flatHeaders: flatHeaders,
         rows: rows,
         tableFn: tableFn
       }), dataSource && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
