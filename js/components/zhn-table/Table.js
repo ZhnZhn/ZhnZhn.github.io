@@ -20,11 +20,12 @@ const Table = _ref => {
     thMoreStyle,
     rows,
     headers,
+    flatHeaders,
     tableFn
   } = _ref;
   const [isGridLine, toogleGridLine] = (0, _useToggle.default)(true),
     [isMenuMore, toggleMenuMore] = (0, _useTable.useMenu)(),
-    [_headers, toggleColumn] = (0, _useTable.useColumn)(headers),
+    [_headers, toggleColumn] = (0, _useTable.useColumn)(flatHeaders || headers),
     [{
       _rows,
       sortBy,
@@ -39,7 +40,7 @@ const Table = _ref => {
       onClose: toggleMenuMore,
       isGridLine: isGridLine,
       onToggleGrid: toogleGridLine,
-      headers: _headers,
+      headers: headers,
       onToggle: toggleColumn
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("table", {
       role: "grid",
@@ -82,14 +83,15 @@ Table.propTypes = {
       isF: PropTypes.bool,
       isHref: PropTypes.bool,
       style: PropTypes.object
+      id: PropTypes.int
     })
   ),
+  flatHeaders: PropTypes.arrayOf(),
   tableFn: PropTypes.shape({
      numberFormat: PropTypes.func,
      valueToHref: PropTypes.func
   })
 }
 */
-var _default = Table;
-exports.default = _default;
+var _default = exports.default = Table;
 //# sourceMappingURL=Table.js.map

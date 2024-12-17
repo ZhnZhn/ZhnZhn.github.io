@@ -1,23 +1,23 @@
 //import PropTypes from "prop-types";
-import { crCn } from '../styleFn';
+import { crCn } from "../styleFn";
 
-import useToggle from '../hooks/useToggle';
+import useToggle from "../hooks/useToggle";
 import {
   useMenu,
   useColumn,
   useSort
-} from './useTable';
+} from "./useTable";
 
-import ModalMenu from './ModalMenu';
-import TableHead from './TableHead';
-import TableBody from './TableBody';
+import ModalMenu from "./ModalMenu";
+import TableHead from "./TableHead";
+import TableBody from "./TableBody";
 
 import {
   CL_GRID,
   S_TABLE,
   S_MENU_MORE,
   S_WRAPPER_DIV
-} from './Style';
+} from "./Style";
 
 const Table = ({
   className,
@@ -25,14 +25,14 @@ const Table = ({
   thMoreStyle,
   rows,
   headers,
+  flatHeaders,
   tableFn
 }) => {
   const [isGridLine, toogleGridLine] = useToggle(true)
   , [isMenuMore, toggleMenuMore] = useMenu()
-  , [_headers, toggleColumn] = useColumn(headers)
+  , [_headers, toggleColumn] = useColumn(flatHeaders || headers)
   , [{_rows, sortBy, sortTo}, sortByPn] = useSort(rows)
   , _tableCn = crCn([isGridLine, CL_GRID], className);
-
   return (
     <div style={S_WRAPPER_DIV}>
       <ModalMenu
@@ -41,7 +41,7 @@ const Table = ({
         onClose={toggleMenuMore}
         isGridLine={isGridLine}
         onToggleGrid={toogleGridLine}
-        headers={_headers}
+        headers={headers}
         onToggle={toggleColumn}
       />
       <table
@@ -88,8 +88,10 @@ Table.propTypes = {
       isF: PropTypes.bool,
       isHref: PropTypes.bool,
       style: PropTypes.object
+      id: PropTypes.int
     })
   ),
+  flatHeaders: PropTypes.arrayOf(),
   tableFn: PropTypes.shape({
      numberFormat: PropTypes.func,
      valueToHref: PropTypes.func
