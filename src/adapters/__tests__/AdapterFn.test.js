@@ -18,7 +18,8 @@ import {
   valueMoving,
   crError,
   fCrValue,
-  fCrLazyValue
+  fCrLazyValue,
+  toTimeDate
 } from '../AdapterFn';
 import {
   DT_EMPTY,
@@ -327,5 +328,23 @@ describe("fCrLazyValue", ()=>{
     expect(_value).toEqual(_crValue())
     expect(_getValue()).toBe(_value)
     expect(_getValue()).toBe(_value)
+  })
+})
+
+describe("toTimeDate", ()=>{
+  const fn = toTimeDate;
+  test("should return str in format time DD-MM-YYYY from strDate", ()=>{
+    expect(fn("2024-12-16T18:31:00.851Z")).toBe("18:31:00 16-12-2024")
+    expect(fn("2014-05-22T00:00:00.000Z")).toBe("00:00:00 22-05-2014")
+    expect(fn("2021-09-02T06:00:10.474Z")).toBe("06:00:10 02-09-2021")
+  })
+  test("should return empty string in edge cases", ()=>{
+    expect(fn()).toBe("")
+    expect(fn(null)).toBe("")
+
+    expect(fn("")).toBe("")
+    
+    expect(fn(0)).toBe("")
+    expect(fn(true)).toBe("")
   })
 })
