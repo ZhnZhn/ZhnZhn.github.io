@@ -21,9 +21,16 @@ const _crQueryToken = (
   pn2,
   items
 ) => `${pn1}=${getValue(items[0])}&${pn2}=${getValue(items[1])}`
+, _crQueryCountryCode = (
+  items
+) => _crQueryOneTwo(
+  "country",
+  "code",
+  items
+)
 , _getCrTableQuery = crGetRoute({
-  jo: ({ items }) => `energy=OIL&${_crQueryOneTwo("country", "code", items)}${getValue(items[2])}${getValue(items[3])}`,
-  jg: ({ items }) => `energy=GAS&${_crQueryOneTwo("country", "code", items)}${getValue(items[2])}`,
+  jo: ({ items }) => `energy=OIL&${_crQueryCountryCode(items)}${getValue(items[2])}${getValue(items[3])}`,
+  jg: ({ items }) => `energy=GAS&${_crQueryCountryCode(items)}${getValue(items[2])}`,
   zl: ({ items }) => `${_crQueryOneTwo("indicator_id", "region_id", items)}`
 }, ({ value }) => value);
 

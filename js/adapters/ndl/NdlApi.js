@@ -8,18 +8,19 @@ const API_V3 = "https://data.nasdaq.com/api/v3",
   LIMIT_REMAINING = "X-RateLimit-Remaining";
 const _crQueryToken = (name, value) => value ? `${name}=${value}` : "",
   _crQueryOneTwo = (pn1, pn2, items) => `${pn1}=${(0, _AdapterFn.getValue)(items[0])}&${pn2}=${(0, _AdapterFn.getValue)(items[1])}`,
+  _crQueryCountryCode = items => _crQueryOneTwo("country", "code", items),
   _getCrTableQuery = (0, _AdapterFn.crGetRoute)({
     jo: _ref => {
       let {
         items
       } = _ref;
-      return `energy=OIL&${_crQueryOneTwo("country", "code", items)}${(0, _AdapterFn.getValue)(items[2])}${(0, _AdapterFn.getValue)(items[3])}`;
+      return `energy=OIL&${_crQueryCountryCode(items)}${(0, _AdapterFn.getValue)(items[2])}${(0, _AdapterFn.getValue)(items[3])}`;
     },
     jg: _ref2 => {
       let {
         items
       } = _ref2;
-      return `energy=GAS&${_crQueryOneTwo("country", "code", items)}${(0, _AdapterFn.getValue)(items[2])}`;
+      return `energy=GAS&${_crQueryCountryCode(items)}${(0, _AdapterFn.getValue)(items[2])}`;
     },
     zl: _ref3 => {
       let {
