@@ -7,6 +7,7 @@ import {
   crStyleBold,
   crStyleCenter,
   crNameProps,
+  crNumberProps,
   crCaptionItemsProps,
   crTableFlatHeaders,
   crTableRows,
@@ -42,15 +43,22 @@ const CHANGE_PERCENTAGE = "change_percentage"
   ),
   ...PERCENT_PROPS
 })
-, _crStyleItem = (
+, _crNumberItem = (
   name,
   pn,
   options
 ) => ({
   ...crNameProps(name, pn),
-  ...crStyleBold(),
-  toN: [],
+  ...crNumberProps(),
   ...options
+})
+, _crUtcItem = (
+  name,
+  pn
+) => ({
+  ...crNameProps(name, pn, true),
+  isF: true,
+  fn: toTimeDate
 });
 
 const _getTableHeaders = fCrLazyValue(() => {
@@ -71,33 +79,25 @@ const _getTableHeaders = fCrLazyValue(() => {
        _crPriceChangeItem("7d %", "7d_in_currency"),
        _crPriceChangeItem("30d %", "30d_in_currency", true),
        _crPriceChangeItem("1y %", "1y_in_currency", true),
-       _crStyleItem("Price", "current_price")
+       _crNumberItem("Price", "current_price")
     ]),
     crCaptionItemsProps("ATH, ATL", [
-      _crStyleItem("ATH", "ath", { isHide: true }),
+      _crNumberItem("ATH", "ath", { isHide: true }),
       _crChangePercentageItem("ATH %", "ath"),
-      crNameProps("ATH Date UTC", "ath_date", true),
+      _crUtcItem("ATH Date UTC", "ath_date"),
 
-      _crStyleItem("ATL", "atl", { isHide: true }),
+      _crNumberItem("ATL", "atl", { isHide: true }),
       _crChangePercentageItem("ATL %", "atl"),
-      crNameProps("ATL Date UTC", "atl_date", true)
+      _crUtcItem("ATL Date UTC", "atl_date")
     ]),
-    _crStyleItem("MarketCap", "market_cap", { isF: true }),
-    crNameProps("Updated UTC", "last_updated", true)
+    _crNumberItem("MarketCap", "market_cap"),
+    _crUtcItem("Updated UTC", "last_updated")
   ];
   return [
     headers,
     crTableFlatHeaders(headers)
   ];
 });
-
-const _transformDate = json => json
- .map(item => {
-   item.last_updated = toTimeDate(item.last_updated)
-   item.ath_date = toTimeDate(item.ath_date)
-   item.atl_date = toTimeDate(item.atl_date)
-   return item;
- });
 
 const _crDataSource = (
   rows
@@ -110,12 +110,11 @@ const toMarketCapList = {
   },
 
   toConfig(json, option){
-    const _json = _transformDate(json)
-    , [
+    const [
       headers,
       flatHeaders
     ] = _getTableHeaders()
-    , rows = crTableRows(flatHeaders, _json)
+    , rows = crTableRows(flatHeaders, json)
     , config = crTableConfig({
       id: option.key,
       title: option.title,

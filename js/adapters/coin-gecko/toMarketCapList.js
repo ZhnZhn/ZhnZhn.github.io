@@ -18,11 +18,15 @@ const CHANGE_PERCENTAGE = "change_percentage",
     ...(0, _toTableFn.crNameProps)(name, `${pnPrefix}_${CHANGE_PERCENTAGE}`, true),
     ...PERCENT_PROPS
   }),
-  _crStyleItem = (name, pn, options) => ({
+  _crNumberItem = (name, pn, options) => ({
     ...(0, _toTableFn.crNameProps)(name, pn),
-    ...(0, _toTableFn.crStyleBold)(),
-    toN: [],
+    ...(0, _toTableFn.crNumberProps)(),
     ...options
+  }),
+  _crUtcItem = (name, pn) => ({
+    ...(0, _toTableFn.crNameProps)(name, pn, true),
+    isF: true,
+    fn: _AdapterFn.toTimeDate
   });
 const _getTableHeaders = (0, _AdapterFn.fCrLazyValue)(() => {
   const headers = [{
@@ -34,20 +38,12 @@ const _getTableHeaders = (0, _AdapterFn.fCrLazyValue)(() => {
     ...(0, _toTableFn.crStyleBold)({
       textTransform: "uppercase"
     })
-  }, (0, _toTableFn.crCaptionItemsProps)("Price Change %", [_crPriceChangeItem("1h %", "1h_in_currency"), _crPriceChangeItem("24h %", "24h"), _crPriceChangeItem("7d %", "7d_in_currency"), _crPriceChangeItem("30d %", "30d_in_currency", true), _crPriceChangeItem("1y %", "1y_in_currency", true), _crStyleItem("Price", "current_price")]), (0, _toTableFn.crCaptionItemsProps)("ATH, ATL", [_crStyleItem("ATH", "ath", {
+  }, (0, _toTableFn.crCaptionItemsProps)("Price Change %", [_crPriceChangeItem("1h %", "1h_in_currency"), _crPriceChangeItem("24h %", "24h"), _crPriceChangeItem("7d %", "7d_in_currency"), _crPriceChangeItem("30d %", "30d_in_currency", true), _crPriceChangeItem("1y %", "1y_in_currency", true), _crNumberItem("Price", "current_price")]), (0, _toTableFn.crCaptionItemsProps)("ATH, ATL", [_crNumberItem("ATH", "ath", {
     isHide: true
-  }), _crChangePercentageItem("ATH %", "ath"), (0, _toTableFn.crNameProps)("ATH Date UTC", "ath_date", true), _crStyleItem("ATL", "atl", {
+  }), _crChangePercentageItem("ATH %", "ath"), _crUtcItem("ATH Date UTC", "ath_date"), _crNumberItem("ATL", "atl", {
     isHide: true
-  }), _crChangePercentageItem("ATL %", "atl"), (0, _toTableFn.crNameProps)("ATL Date UTC", "atl_date", true)]), _crStyleItem("MarketCap", "market_cap", {
-    isF: true
-  }), (0, _toTableFn.crNameProps)("Updated UTC", "last_updated", true)];
+  }), _crChangePercentageItem("ATL %", "atl"), _crUtcItem("ATL Date UTC", "atl_date")]), _crNumberItem("MarketCap", "market_cap"), _crUtcItem("Updated UTC", "last_updated")];
   return [headers, (0, _toTableFn.crTableFlatHeaders)(headers)];
-});
-const _transformDate = json => json.map(item => {
-  item.last_updated = (0, _AdapterFn.toTimeDate)(item.last_updated);
-  item.ath_date = (0, _AdapterFn.toTimeDate)(item.ath_date);
-  item.atl_date = (0, _AdapterFn.toTimeDate)(item.atl_date);
-  return item;
 });
 const _crDataSource = rows => `CoinGecko ${rows[0].last_updated} UTC`;
 const toMarketCapList = {
@@ -56,9 +52,8 @@ const toMarketCapList = {
     return option.key;
   },
   toConfig(json, option) {
-    const _json = _transformDate(json),
-      [headers, flatHeaders] = _getTableHeaders(),
-      rows = (0, _toTableFn.crTableRows)(flatHeaders, _json),
+    const [headers, flatHeaders] = _getTableHeaders(),
+      rows = (0, _toTableFn.crTableRows)(flatHeaders, json),
       config = (0, _toTableFn.crTableConfig)({
         id: option.key,
         title: option.title,
