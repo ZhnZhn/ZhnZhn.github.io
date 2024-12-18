@@ -46,12 +46,21 @@ const CHANGE_PERCENTAGE = "change_percentage"
 , _crNumberItem = (
   name,
   pn,
-  options
+  isHide,
+  n
 ) => ({
   ...crNameProps(name, pn),
-  ...crNumberProps(),
-  ...options
+  ...crNumberProps(n),
+  isHide: !!isHide
 })
+, _crSupplyItem = (
+  name
+) => _crNumberItem(
+  name,
+  `${name.split(" ")[0].toLowerCase()}_supply`,
+  true,
+  0
+)
 , _crUtcItem = (
   name,
   pn
@@ -79,16 +88,25 @@ const _getTableHeaders = fCrLazyValue(() => {
        _crPriceChangeItem("7d %", "7d_in_currency"),
        _crPriceChangeItem("30d %", "30d_in_currency", true),
        _crPriceChangeItem("1y %", "1y_in_currency", true),
-       _crNumberItem("Price", "current_price")
+    ]),
+    crCaptionItemsProps("Price", [
+      _crNumberItem("High 24h", "high_24h", true),
+      _crNumberItem("Price", "current_price"),
+      _crNumberItem("Low 24h", "low_24h", true)
     ]),
     crCaptionItemsProps("ATH, ATL", [
-      _crNumberItem("ATH", "ath", { isHide: true }),
+      _crNumberItem("ATH", "ath", true),
       _crChangePercentageItem("ATH %", "ath"),
       _crUtcItem("ATH Date UTC", "ath_date"),
 
-      _crNumberItem("ATL", "atl", { isHide: true }),
+      _crNumberItem("ATL", "atl", true),
       _crChangePercentageItem("ATL %", "atl"),
       _crUtcItem("ATL Date UTC", "atl_date")
+    ]),
+    crCaptionItemsProps("Supply", [
+      _crSupplyItem("Circulating"),
+      _crSupplyItem("Total Supply"),
+      _crSupplyItem("Max Supply")
     ]),
     _crNumberItem("MarketCap", "market_cap"),
     _crUtcItem("Updated UTC", "last_updated")
@@ -101,7 +119,7 @@ const _getTableHeaders = fCrLazyValue(() => {
 
 const _crDataSource = (
   rows
-) => `CoinGecko ${rows[0].last_updated} UTC`;
+) => `CoinGecko ${toTimeDate((rows[0] || {}).last_updated)} UTC`;
 
 const toMarketCapList = {
   crKey(option){
