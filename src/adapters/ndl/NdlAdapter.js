@@ -1,30 +1,21 @@
-import {
-  CHT_AREA,
-  CHT_SPLINE,
-  CHT_LINE,
-  CHT_COLUMN,
-  CHT_YEARLY,
-  CHT_AREA_YEARLY
-} from "../../constants/ChartType";
+import { CHT_AREA_YEARLY } from "../../constants/ChartType";
 
 import { crGetRoute } from "../AdapterFn";
+import { isCategory } from "../CategoryFn";
 import { crAdapterRouter } from "../crAdapterRouter";
 
 import { toLineAdapter } from "./toLineAdapter";
 import { toYearlyAdapter } from "./toYearlyAdapter";
+import { toCategoryAdapter } from "./toCategoryAdapter";
 
 const _getAdapterRoute = crGetRoute({
-  [CHT_AREA]: toLineAdapter,
-  [CHT_SPLINE]: toLineAdapter,
-  [CHT_LINE]: toLineAdapter,
-  [CHT_COLUMN]: toLineAdapter,
-
-  [CHT_YEARLY]:  toYearlyAdapter,
   [CHT_AREA_YEARLY]: toYearlyAdapter
-}, toLineAdapter)
+}, toLineAdapter);
 
 const NdlAdapter = crAdapterRouter({
-  getRoute: ({ seriaType }) => _getAdapterRoute(seriaType)
+  getRoute: ({ seriaType }) => isCategory(seriaType)
+   ? toCategoryAdapter
+   : _getAdapterRoute(seriaType)
 });
 
 export default NdlAdapter

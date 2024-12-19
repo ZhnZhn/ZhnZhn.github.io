@@ -5,11 +5,12 @@ export {
 
 import {
   isArr,
-  isNumber,
-  joinBy,
+  isNumber
 } from "../AdapterFn";
 
-const NDL_DATA_SOURCE = "NDL";
+import {
+  isCategory
+} from "../CategoryFn";
 
 const _crItemCaption = ({
   dfItemCaption,
@@ -47,14 +48,20 @@ export const getItemIndexTuple = (columns) => {
 
 export const getData = ({
   datatable
-}) => {
+}, {
+  dfCi,
+  seriaType
+} = {}) => {
   if (datatable) {
     const [
       dateIndex,
       valueIndex
     ] = getItemIndexTuple(datatable.columns)
+    , _dateIndex = isCategory(seriaType) && isNumber(dfCi)
+       ? dfCi
+       : dateIndex;
     return _getData(datatable).map(arrItem => [
-      arrItem[dateIndex],
+      arrItem[_dateIndex],
       parseFloat(arrItem[valueIndex])
     ]);
   }
@@ -73,7 +80,6 @@ export const crZhConfig = (
     fromDate,
     dataSource
   } = option
-  , _dataSource = joinBy(" ", NDL_DATA_SOURCE, dataSource)
   , _itemCaption = _crItemCaption(option)
   , _item = isArr(items)
      ? items[0]
@@ -89,6 +95,6 @@ export const crZhConfig = (
       fromDate
     },
     itemCaption: _itemCaption,
-    dataSource: _dataSource
+    dataSource
   };
 }

@@ -5,7 +5,7 @@ exports.valueMoving = exports.getItemIndexTuple = exports.getData = exports.crZh
 var _AdapterFn = require("../AdapterFn");
 exports.valueMoving = _AdapterFn.valueMoving;
 exports.crValueMoving = _AdapterFn.crValueMoving;
-const NDL_DATA_SOURCE = "NDL";
+var _CategoryFn = require("../CategoryFn");
 const _crItemCaption = _ref => {
   let {
     dfItemCaption,
@@ -33,13 +33,18 @@ const getItemIndexTuple = columns => {
   return [dateIndex, valueIndex];
 };
 exports.getItemIndexTuple = getItemIndexTuple;
-const getData = _ref2 => {
+const getData = function (_ref2, _temp) {
   let {
     datatable
   } = _ref2;
+  let {
+    dfCi,
+    seriaType
+  } = _temp === void 0 ? {} : _temp;
   if (datatable) {
-    const [dateIndex, valueIndex] = getItemIndexTuple(datatable.columns);
-    return _getData(datatable).map(arrItem => [arrItem[dateIndex], parseFloat(arrItem[valueIndex])]);
+    const [dateIndex, valueIndex] = getItemIndexTuple(datatable.columns),
+      _dateIndex = (0, _CategoryFn.isCategory)(seriaType) && (0, _AdapterFn.isNumber)(dfCi) ? dfCi : dateIndex;
+    return _getData(datatable).map(arrItem => [arrItem[_dateIndex], parseFloat(arrItem[valueIndex])]);
   }
   return [];
 };
@@ -54,7 +59,6 @@ const crZhConfig = option => {
       fromDate,
       dataSource
     } = option,
-    _dataSource = (0, _AdapterFn.joinBy)(" ", NDL_DATA_SOURCE, dataSource),
     _itemCaption = _crItemCaption(option),
     _item = (0, _AdapterFn.isArr)(items) ? items[0] : item || {};
   return {
@@ -68,7 +72,7 @@ const crZhConfig = option => {
       fromDate
     },
     itemCaption: _itemCaption,
-    dataSource: _dataSource
+    dataSource
   };
 };
 exports.crZhConfig = crZhConfig;

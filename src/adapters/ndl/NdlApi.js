@@ -9,11 +9,15 @@ import {
 
 import { isCategory } from "../CategoryFn";
 
-const API_V3 = "https://data.nasdaq.com/api/v3"
+const NDL_DATA_SOURCE = "NDL"
+, API_V3 = "https://data.nasdaq.com/api/v3"
 , TABLE_URL = `${API_V3}/datatables`
 , LIMIT_REMAINING = "X-RateLimit-Remaining";
 
-const _crDate = (
+const _crDataSource = ({
+  dataSource
+}) => joinBy(" ", NDL_DATA_SOURCE, dataSource)
+, _crDate = (
   time
 ) => {
   const arrDate = time.split("-");
@@ -58,6 +62,7 @@ const _crTableUrl = (
           : "";
 
   option.apiKey = null
+  option.dataSource = _crDataSource(option)
 
   return `${proxy}${TABLE_URL}/${dfTable}?${joinBy("&", value, _apiKeyQuery, _dateQuery)}`;
 };

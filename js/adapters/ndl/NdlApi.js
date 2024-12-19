@@ -5,10 +5,17 @@ exports.default = void 0;
 var _dateFn = require("../../utils/dateFn");
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
-const API_V3 = "https://data.nasdaq.com/api/v3",
+const NDL_DATA_SOURCE = "NDL",
+  API_V3 = "https://data.nasdaq.com/api/v3",
   TABLE_URL = `${API_V3}/datatables`,
   LIMIT_REMAINING = "X-RateLimit-Remaining";
-const _crDate = time => {
+const _crDataSource = _ref => {
+    let {
+      dataSource
+    } = _ref;
+    return (0, _AdapterFn.joinBy)(" ", NDL_DATA_SOURCE, dataSource);
+  },
+  _crDate = time => {
     const arrDate = time.split("-");
     return `${time}-${(0, _dateFn.getNumberOfDays)(arrDate[0], arrDate[1])}`;
   },
@@ -16,30 +23,30 @@ const _crDate = time => {
   _crQueryOneTwo = (pn1, pn2, items) => `${pn1}=${(0, _AdapterFn.getValue)(items[0])}&${pn2}=${(0, _AdapterFn.getValue)(items[1])}`,
   _crQueryCountryCode = (items, seriaType) => (0, _CategoryFn.isCategory)(seriaType) ? _crQueryToken("code", (0, _AdapterFn.getValue)(items[1])) : _crQueryOneTwo("country", "code", items),
   _getCrTableQuery = (0, _AdapterFn.crGetRoute)({
-    jo: _ref => {
-      let {
-        items,
-        seriaType
-      } = _ref;
-      return `energy=OIL&${_crQueryCountryCode(items, seriaType)}${(0, _AdapterFn.getValue)(items[2])}${(0, _AdapterFn.getValue)(items[3])}`;
-    },
-    jg: _ref2 => {
+    jo: _ref2 => {
       let {
         items,
         seriaType
       } = _ref2;
+      return `energy=OIL&${_crQueryCountryCode(items, seriaType)}${(0, _AdapterFn.getValue)(items[2])}${(0, _AdapterFn.getValue)(items[3])}`;
+    },
+    jg: _ref3 => {
+      let {
+        items,
+        seriaType
+      } = _ref3;
       return `energy=GAS&${_crQueryCountryCode(items, seriaType)}${(0, _AdapterFn.getValue)(items[2])}`;
     },
-    zl: _ref3 => {
+    zl: _ref4 => {
       let {
         items
-      } = _ref3;
+      } = _ref4;
       return `${_crQueryOneTwo("indicator_id", "region_id", items)}`;
     }
-  }, _ref4 => {
+  }, _ref5 => {
     let {
       value
-    } = _ref4;
+    } = _ref5;
     return value;
   });
 const _crTableUrl = option => {
@@ -51,6 +58,7 @@ const _crTableUrl = option => {
     _apiKeyQuery = _crQueryToken("api_key", option.apiKey),
     _dateQuery = (0, _CategoryFn.isCategory)(option.seriaType) ? _crQueryToken("date", _crDate(option.time)) : option.dfFromDate ? _crQueryToken("date.gte", option.fromDate) : "";
   option.apiKey = null;
+  option.dataSource = _crDataSource(option);
   return `${proxy}${TABLE_URL}/${dfTable}?${(0, _AdapterFn.joinBy)("&", value, _apiKeyQuery, _dateQuery)}`;
 };
 const _checkDataset = datatable => {
