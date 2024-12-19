@@ -1,7 +1,7 @@
-export const CHT_AREA = 'AREA'
-, CHT_SPLINE = 'SPLINE'
-, CHT_LINE = 'LINE'
-, CHT_COLUMN = 'COLUMN'
+export const CHT_AREA = "AREA"
+, CHT_SPLINE = "SPLINE"
+, CHT_LINE = "LINE"
+, CHT_COLUMN = "COLUMN"
 
 const _crClusterType = chartType => `${chartType}_CLUSTER`
 , _crSetType = chartType => `${chartType}_SET`;
@@ -16,12 +16,9 @@ export const CHT_BAR = "BAR"
 , CHT_TREE_MAP_CLUSTER = _crClusterType(CHT_TREE_MAP)
 , CHT_BAR_TREE_MAP = `BAR_${CHT_TREE_MAP}`
 
-export const CHT_MAP = 'MAP'
-, CHT_DOT_SET = 'DOT_SET'
+export const CHT_MAP = "MAP"
+, CHT_DOT_SET = "DOT_SET"
 
-export const CHT_YEARLY = 'YEARLY'
-export const CHT_AREA_YEARLY = 'AREA_YEARLY'
+export const CHT_AREA_YEARLY = "AREA_YEARLY"
 
-export const CHT_SCATTER = 'SCATTER'
-export const CHT_SCATTER_UP = 'SCATTER_UP'
-export const CHT_SCATTER_DOWN = 'SCATTER_DOWN'
+export const CHT_SCATTER = "SCATTER"
