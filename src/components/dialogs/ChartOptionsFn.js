@@ -166,7 +166,7 @@ const _crT3B = (
   [oneCaption],
   mapFrequency
 ) => [
-  _crItem(_crDfConfig(SPLINE_CONFIG)),
+  ..._crT2(),
   _crYearlyByMonthItem(mapFrequency),
   ..._crColumBarClusterItems(oneCaption)
 ];

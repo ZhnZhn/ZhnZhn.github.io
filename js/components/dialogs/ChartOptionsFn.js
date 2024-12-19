@@ -65,7 +65,7 @@ const _crT3C2 = _ref3 => {
 const _crT3CA = () => _crT3C(["Dim"]);
 const _crT3B = (_ref4, mapFrequency) => {
   let [oneCaption] = _ref4;
-  return [_crItem(_crDfConfig(SPLINE_CONFIG)), _crYearlyByMonthItem(mapFrequency), ..._crColumBarClusterItems(oneCaption)];
+  return [..._crT2(), _crYearlyByMonthItem(mapFrequency), ..._crColumBarClusterItems(oneCaption)];
 };
 const _crTreeMapItem = (caption, id) => _crItem([`TreeMap: By ${caption}`, _ChartType.CHT_TREE_MAP, caption, void 0, id]);
 const _crBarTreeMapItem = (caption, id) => _crItem([`Bar: By ${caption}`, _ChartType.CHT_BAR_TREE_MAP, caption, void 0, id]);
