@@ -1,3 +1,4 @@
+import { getNumberOfDays } from "../../utils/dateFn";
 import {
   isNotEmptyArr,
   getValue,
@@ -6,11 +7,19 @@ import {
   joinBy
 } from "../AdapterFn";
 
+import { isCategory } from "../CategoryFn";
+
 const API_V3 = "https://data.nasdaq.com/api/v3"
 , TABLE_URL = `${API_V3}/datatables`
 , LIMIT_REMAINING = "X-RateLimit-Remaining";
 
-const _crQueryToken = (
+const _crDate = (
+  time
+) => {
+  const arrDate = time.split("-");
+  return `${time}-${getNumberOfDays(arrDate[0], arrDate[1])}`;
+}
+, _crQueryToken = (
   name,
   value
 ) => value
@@ -22,15 +31,14 @@ const _crQueryToken = (
   items
 ) => `${pn1}=${getValue(items[0])}&${pn2}=${getValue(items[1])}`
 , _crQueryCountryCode = (
-  items
-) => _crQueryOneTwo(
-  "country",
-  "code",
-  items
-)
+  items,
+  seriaType
+) => isCategory(seriaType)
+ ? _crQueryToken("code", getValue(items[1]))
+ : _crQueryOneTwo("country", "code", items)
 , _getCrTableQuery = crGetRoute({
-  jo: ({ items }) => `energy=OIL&${_crQueryCountryCode(items)}${getValue(items[2])}${getValue(items[3])}`,
-  jg: ({ items }) => `energy=GAS&${_crQueryCountryCode(items)}${getValue(items[2])}`,
+  jo: ({ items, seriaType }) => `energy=OIL&${_crQueryCountryCode(items, seriaType)}${getValue(items[2])}${getValue(items[3])}`,
+  jg: ({ items, seriaType }) => `energy=GAS&${_crQueryCountryCode(items, seriaType)}${getValue(items[2])}`,
   zl: ({ items }) => `${_crQueryOneTwo("indicator_id", "region_id", items)}`
 }, ({ value }) => value);
 
@@ -39,15 +47,15 @@ const _crTableUrl = (
 ) => {
   const {
     proxy,
-    dfTable,
-    dfFromDate,
-    fromDate,
+    dfTable
   } = option
   , value = _getCrTableQuery(option.dfIdFn)(option)
   , _apiKeyQuery = _crQueryToken("api_key", option.apiKey)
-  , _dateQuery = dfFromDate
-      ? _crQueryToken("date.gte", fromDate)
-      : "";
+  , _dateQuery = isCategory(option.seriaType)
+       ? _crQueryToken("date", _crDate(option.time))
+       : option.dfFromDate
+          ? _crQueryToken("date.gte", option.fromDate)
+          : "";
 
   option.apiKey = null
 
