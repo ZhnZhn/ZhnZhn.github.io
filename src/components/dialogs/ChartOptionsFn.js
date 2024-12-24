@@ -201,10 +201,6 @@ const _crT3AC = ([oneCaption]) => [
   _crItem([`TreeMap (60, 90): By ${oneCaption}`, CHT_TREE_MAP_CLUSTER, oneCaption])
 ];
 
-const _crT3A2 = ([oneCaption]) => [
-  ..._crT3A([oneCaption])
-];
-
 const _r = {
   DF: _crDF,
   tes: _crTes,
@@ -215,8 +211,7 @@ const _r = {
   t2a: _crT2A,
   t2ae: _crT2AE,
   t3: _crT3,
-  t3a: _crT3A,
-  t3a2: _crT3A2,
+  t3a: _crT3A,  
   t3b: _crT3B,
   [TYPE_T3AB]: _crT3AB,
   t3ab2: _crT3AB2,

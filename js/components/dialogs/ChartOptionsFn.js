@@ -85,10 +85,6 @@ const _crT3AC = _ref8 => {
   let [oneCaption] = _ref8;
   return [..._crT3([oneCaption]), _crItem([`TreeMap (60, 90): By ${oneCaption}`, _ChartType.CHT_TREE_MAP_CLUSTER, oneCaption])];
 };
-const _crT3A2 = _ref9 => {
-  let [oneCaption] = _ref9;
-  return [..._crT3A([oneCaption])];
-};
 const _r = {
   DF: _crDF,
   tes: _crTes,
@@ -100,7 +96,6 @@ const _r = {
   t2ae: _crT2AE,
   t3: _crT3,
   t3a: _crT3A,
-  t3a2: _crT3A2,
   t3b: _crT3B,
   [_ChartOptionsTypes.TYPE_T3AB]: _crT3AB,
   t3ab2: _crT3AB2,
