@@ -28,6 +28,7 @@ import { TYPE_T3AB } from "./ChartOptionsTypes";
 
 const _isArr = Array.isArray
 , BLANK_CAPTION = ""
+, DIM_CAPTION = "Dim"
 
 , CATEGORY_TYPES = [
     CHT_MAP,
@@ -65,6 +66,21 @@ const _isMonthly = (
   mapFrequency
 ) => !mapFrequency || mapFrequency === "M";
 
+const _fCrCaptionBy = (
+  prefix
+) => (
+  sufix,
+  isCluster
+) => `${prefix}: By ${sufix}${isCluster ? ": Cluster" : ""}`
+, _crCaptionBarBy = _fCrCaptionBy("Bar")
+, _crCaptionColumnBy = _fCrCaptionBy("Column")
+, _crCaptionTreeMapBy = _fCrCaptionBy("TreeMap")
+
+, _crCaptionBarLabelsBy = _fCrCaptionBy("Bar+Labels")
+, _crCaptionDotsBy = _fCrCaptionBy("Dots")
+, _crCaptionMapBy = _fCrCaptionBy("Map")
+, _crCaptionTreeMap6090 = _fCrCaptionBy("TreeMap (60, 90)")
+
 const _crDF3 = (
   oneCaption,
   mapFrequency
@@ -74,20 +90,20 @@ const _crDF3 = (
   _isMonthly(mapFrequency) && YEARLY_BY_MONTH_CONFIG,
   AREA_CONFIG,
   COLUMN_CONFIG,
-  [`Bar: By ${oneCaption}`, CHT_BAR_SET],
-  [`Bar+Labels: By ${oneCaption}`, CHT_BAR_WITH_LABELS],
-  [`Column: By ${oneCaption}`, CHT_COLUMN_SET],
-  [`Dots: By ${oneCaption}`, CHT_DOT_SET]
+  [_crCaptionBarBy(oneCaption), CHT_BAR_SET],
+  [_crCaptionBarLabelsBy(oneCaption), CHT_BAR_WITH_LABELS],
+  [_crCaptionColumnBy(oneCaption), CHT_COLUMN_SET],
+  [_crCaptionDotsBy(oneCaption), CHT_DOT_SET]
 ]);
 
 const _crDF = (
   captions,
   mapFrequency
 ) => {
-  const oneCaption = toPlural(captions[0]) || "Dim";
+  const oneCaption = toPlural(captions[0]) || DIM_CAPTION;
   return _crDF3(oneCaption, mapFrequency)
     .concat(_crItems([
-       [`Map: By ${oneCaption}` , CHT_MAP, void 0, CIT_EUROSTAT_MAP]
+       [_crCaptionMapBy(oneCaption), CHT_MAP, void 0, CIT_EUROSTAT_MAP]
     ]));
 };
 
@@ -97,9 +113,9 @@ const _crTes = (
   selectProps
 ) => {
   const chartOptions = _crDF(captions, mapFrequency)
-  , twoCaption = captions[1] || "Dim";
+  , twoCaption = captions[1] || DIM_CAPTION;
   chartOptions.splice(7, 0, _crItem(
-    [`Bar: By ${toPlural(twoCaption)}`, CHT_BAR_SET, twoCaption, void 0, void 0, (selectProps[1] || {}).id]
+    [_crCaptionBarBy(toPlural(twoCaption)), CHT_BAR_SET, twoCaption, void 0, void 0, (selectProps[1] || {}).id]
   ))
   return chartOptions;
 };
@@ -131,15 +147,15 @@ const _crT2A = (_, mapFrequency) => [
 ];
 
 const _crColumBarItems = (oneCaption) => _crItems([
-  [`Column: By ${oneCaption}`, CHT_COLUMN_SET, oneCaption],
-  [`Bar: By ${oneCaption}`, CHT_BAR_SET, oneCaption],
+  [_crCaptionColumnBy(oneCaption), CHT_COLUMN_SET, oneCaption],
+  [_crCaptionBarBy(oneCaption), CHT_BAR_SET, oneCaption],
 ]);
 
 const _crColumBarClusterItems = (oneCaption) => _crItems([
-  [`Column: By ${oneCaption}`, CHT_COLUMN_SET, oneCaption],
-  [`Column: By ${oneCaption}: Cluster`, CHT_COLUMN_CLUSTER, oneCaption],
-  [`Bar: By ${oneCaption}`, CHT_BAR_SET, oneCaption],
-  [`Bar: By ${oneCaption}: Cluster`, CHT_BAR_CLUSTER, oneCaption]
+  [_crCaptionColumnBy(oneCaption), CHT_COLUMN_SET, oneCaption],
+  [_crCaptionColumnBy(oneCaption, !0), CHT_COLUMN_CLUSTER, oneCaption],
+  [_crCaptionBarBy(oneCaption), CHT_BAR_SET, oneCaption],
+  [_crCaptionBarBy(oneCaption, !0), CHT_BAR_CLUSTER, oneCaption]
 ]);
 
 const _crT2AE = (
@@ -147,7 +163,7 @@ const _crT2AE = (
   mapFrequency
 ) => [
   ..._crT2A(captions, mapFrequency),
-  ..._crColumBarClusterItems("Dim")
+  ..._crColumBarClusterItems(DIM_CAPTION)
 ];
 
 const _crT3 = ([oneCaption]) => [
@@ -162,7 +178,7 @@ const _crT3C2 = ([oneCaption, twoCaption]) => [
   ..._crT3C([oneCaption]),
   ..._crColumBarItems(twoCaption)
 ];
-const _crT3CA = () => _crT3C(["Dim"])
+const _crT3CA = () => _crT3C([DIM_CAPTION])
 
 const _crT3B = (
   [oneCaption],
@@ -176,16 +192,16 @@ const _crT3B = (
 const _crTreeMapItem = (
   caption,
   id
-) => _crItem([`TreeMap: By ${caption}`, CHT_TREE_MAP, caption, void 0, id]);
+) => _crItem([_crCaptionTreeMapBy(caption), CHT_TREE_MAP, caption, void 0, id]);
 const _crBarTreeMapItem = (
   caption,
   id
-) => _crItem([`Bar: By ${caption}`, CHT_BAR_TREE_MAP, caption, void 0, id]);
+) => _crItem([_crCaptionBarBy(caption), CHT_BAR_TREE_MAP, caption, void 0, id]);
 
 const _crT3A = ([oneCaption]) => [
   ..._crT3([oneCaption]),
   _crTreeMapItem(oneCaption),
-  _crItem([`TreeMap: By ${oneCaption}: Cluster`, CHT_TREE_MAP_CLUSTER, oneCaption])
+  _crItem([_crCaptionTreeMapBy(oneCaption, !0), CHT_TREE_MAP_CLUSTER, oneCaption])
 ];
 
 const _crT3AB = ([oneCaption, twoCaption]) => [
@@ -200,7 +216,7 @@ const _crT3AB2 = ([oneCaption, twoCaption]) => [
 
 const _crT3AC = ([oneCaption]) => [
   ..._crT3([oneCaption]),
-  _crItem([`TreeMap (60, 90): By ${oneCaption}`, CHT_TREE_MAP_CLUSTER, oneCaption])
+  _crItem([_crCaptionTreeMap6090(oneCaption), CHT_TREE_MAP_CLUSTER, oneCaption])
 ];
 
 const _getCrChartOptions = crGetRoute({
