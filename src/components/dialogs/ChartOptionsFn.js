@@ -45,18 +45,18 @@ const _isArr = Array.isArray
 , COLUMN_CONFIG = ["Column", CHT_COLUMN]
 , YEARLY_BY_MONTH_CONFIG = ["Yearly by Months" , CHT_AREA_YEARLY];
 
-const _crDfConfig = configArr => {
-  const _dfConfigArr = [...configArr];
-  _dfConfigArr[0] = `Default: ${configArr[0]}`
-  return _dfConfigArr;
+const _crDfConfig = arrConfig => {
+  const _arrDfConfig = [...arrConfig];
+  _arrDfConfig[0] = `Default: ${arrConfig[0]}`
+  return _arrDfConfig;
 }
-const _crItem = configArr => ({
-  caption: configArr[0],
-  value: configArr[1],
-  dim: configArr[2],
-  compType: configArr[3],
-  id: configArr[4],
-  cId: configArr[5]
+const _crItem = arrConfig => ({
+  caption: arrConfig[0],
+  value: arrConfig[1],
+  dim: arrConfig[2],
+  compType: arrConfig[3],
+  id: arrConfig[4],
+  cId: arrConfig[5]
 });
 const _crItems = (arr) => arr
   .filter(Boolean)
@@ -81,6 +81,21 @@ const _fCrCaptionBy = (
 , _crCaptionMapBy = _fCrCaptionBy("Map")
 , _crCaptionTreeMap6090 = _fCrCaptionBy("TreeMap (60, 90)")
 
+, _fCrItem = (
+  crCaption,
+  chartType,
+  isCluster
+) => (
+  caption,
+  id
+) => _crItem([
+  crCaption(caption, isCluster),
+  chartType,
+  caption,
+  void 0,
+  id
+]);
+
 const _crDF3 = (
   oneCaption,
   mapFrequency
@@ -102,9 +117,9 @@ const _crDF = (
 ) => {
   const oneCaption = toPlural(captions[0]) || DIM_CAPTION;
   return _crDF3(oneCaption, mapFrequency)
-    .concat(_crItems([
-       [_crCaptionMapBy(oneCaption), CHT_MAP, void 0, CIT_EUROSTAT_MAP]
-    ]));
+    .concat([
+      _crItem([_crCaptionMapBy(oneCaption), CHT_MAP, void 0, CIT_EUROSTAT_MAP])
+    ]);
 };
 
 const _crTes = (
@@ -146,17 +161,26 @@ const _crT2A = (_, mapFrequency) => [
   _crYearlyByMonthItem(mapFrequency)
 ];
 
-const _crColumBarItems = (oneCaption) => _crItems([
-  [_crCaptionColumnBy(oneCaption), CHT_COLUMN_SET, oneCaption],
-  [_crCaptionBarBy(oneCaption), CHT_BAR_SET, oneCaption],
-]);
+const _crColumnSetItem = _fCrItem(_crCaptionColumnBy, CHT_COLUMN_SET)
+, _crColumnClusterItem = _fCrItem(_crCaptionColumnBy, CHT_COLUMN_CLUSTER, !0)
+, _crBarSetItem = _fCrItem(_crCaptionBarBy, CHT_BAR_SET)
+, _crBarClusterItem = _fCrItem(_crCaptionBarBy, CHT_BAR_CLUSTER, !0);
 
-const _crColumBarClusterItems = (oneCaption) => _crItems([
-  [_crCaptionColumnBy(oneCaption), CHT_COLUMN_SET, oneCaption],
-  [_crCaptionColumnBy(oneCaption, !0), CHT_COLUMN_CLUSTER, oneCaption],
-  [_crCaptionBarBy(oneCaption), CHT_BAR_SET, oneCaption],
-  [_crCaptionBarBy(oneCaption, !0), CHT_BAR_CLUSTER, oneCaption]
-]);
+const _crColumBarItems = (
+  oneCaption
+) => [
+  _crColumnSetItem(oneCaption),
+  _crBarSetItem(oneCaption)
+];
+
+const _crColumBarClusterItems = (
+  oneCaption
+) => [
+  _crColumnSetItem(oneCaption),
+  _crColumnClusterItem(oneCaption),
+  _crBarSetItem(oneCaption),
+  _crBarClusterItem(oneCaption)
+];
 
 const _crT2AE = (
   captions,
@@ -189,19 +213,15 @@ const _crT3B = (
   ..._crColumBarClusterItems(oneCaption)
 ];
 
-const _crTreeMapItem = (
-  caption,
-  id
-) => _crItem([_crCaptionTreeMapBy(caption), CHT_TREE_MAP, caption, void 0, id]);
-const _crBarTreeMapItem = (
-  caption,
-  id
-) => _crItem([_crCaptionBarBy(caption), CHT_BAR_TREE_MAP, caption, void 0, id]);
+const _crTreeMapItem = _fCrItem(_crCaptionTreeMapBy, CHT_TREE_MAP)
+, _crTreeMapClusterItem = _fCrItem(_crCaptionTreeMapBy, CHT_TREE_MAP_CLUSTER, !0)
+, _crTreeMap6090Item = _fCrItem(_crCaptionTreeMap6090, CHT_TREE_MAP_CLUSTER)
+, _crBarTreeMapItem = _fCrItem(_crCaptionBarBy, CHT_BAR_TREE_MAP);
 
 const _crT3A = ([oneCaption]) => [
   ..._crT3([oneCaption]),
   _crTreeMapItem(oneCaption),
-  _crItem([_crCaptionTreeMapBy(oneCaption, !0), CHT_TREE_MAP_CLUSTER, oneCaption])
+  _crTreeMapClusterItem(oneCaption)
 ];
 
 const _crT3AB = ([oneCaption, twoCaption]) => [
@@ -216,7 +236,7 @@ const _crT3AB2 = ([oneCaption, twoCaption]) => [
 
 const _crT3AC = ([oneCaption]) => [
   ..._crT3([oneCaption]),
-  _crItem([_crCaptionTreeMap6090(oneCaption), CHT_TREE_MAP_CLUSTER, oneCaption])
+  _crTreeMap6090Item(oneCaption)
 ];
 
 const _getCrChartOptions = crGetRoute({
