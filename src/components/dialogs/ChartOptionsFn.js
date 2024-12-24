@@ -1,6 +1,8 @@
-import toPlural from '../../utils/toPlural';
-import { isInArrStr } from '../../utils/arrFn';
-import { CIT_EUROSTAT_MAP } from '../../constants/CompItemType';
+import { isInArrStr } from "../../utils/arrFn";
+import { crGetRoute } from "../../utils/crRouter";
+import toPlural from "../../utils/toPlural";
+
+import { CIT_EUROSTAT_MAP } from "../../constants/CompItemType";
 import {
   CHT_AREA,
   CHT_SPLINE,
@@ -20,12 +22,12 @@ import {
 
   CHT_MAP,
   CHT_DOT_SET
-} from '../../constants/ChartType';
+} from "../../constants/ChartType";
 
-import { TYPE_T3AB } from './ChartOptionsTypes';
+import { TYPE_T3AB } from "./ChartOptionsTypes";
 
 const _isArr = Array.isArray
-, BLANK_CAPTION = ''
+, BLANK_CAPTION = ""
 
 , CATEGORY_TYPES = [
     CHT_MAP,
@@ -36,11 +38,11 @@ const _isArr = Array.isArray
     CHT_BAR_TREE_MAP
 ]
 
-, SPLINE_CONFIG = ['Spline', CHT_SPLINE]
-, LINE_CONFIG = ['Line', CHT_LINE]
-, AREA_CONFIG = ['Area', CHT_AREA]
-, COLUMN_CONFIG = ['Column', CHT_COLUMN]
-, YEARLY_BY_MONTH_CONFIG = ['Yearly by Months' , CHT_AREA_YEARLY];
+, SPLINE_CONFIG = ["Spline", CHT_SPLINE]
+, LINE_CONFIG = ["Line", CHT_LINE]
+, AREA_CONFIG = ["Area", CHT_AREA]
+, COLUMN_CONFIG = ["Column", CHT_COLUMN]
+, YEARLY_BY_MONTH_CONFIG = ["Yearly by Months" , CHT_AREA_YEARLY];
 
 const _crDfConfig = configArr => {
   const _dfConfigArr = [...configArr];
@@ -61,7 +63,7 @@ const _crItems = (arr) => arr
 
 const _isMonthly = (
   mapFrequency
-) => !mapFrequency || mapFrequency === 'M';
+) => !mapFrequency || mapFrequency === "M";
 
 const _crDF3 = (
   oneCaption,
@@ -82,7 +84,7 @@ const _crDF = (
   captions,
   mapFrequency
 ) => {
-  const oneCaption = toPlural(captions[0]) || 'Dim';
+  const oneCaption = toPlural(captions[0]) || "Dim";
   return _crDF3(oneCaption, mapFrequency)
     .concat(_crItems([
        [`Map: By ${oneCaption}` , CHT_MAP, void 0, CIT_EUROSTAT_MAP]
@@ -95,7 +97,7 @@ const _crTes = (
   selectProps
 ) => {
   const chartOptions = _crDF(captions, mapFrequency)
-  , twoCaption = captions[1] || 'Dim';
+  , twoCaption = captions[1] || "Dim";
   chartOptions.splice(7, 0, _crItem(
     [`Bar: By ${toPlural(twoCaption)}`, CHT_BAR_SET, twoCaption, void 0, void 0, (selectProps[1] || {}).id]
   ))
@@ -201,8 +203,7 @@ const _crT3AC = ([oneCaption]) => [
   _crItem([`TreeMap (60, 90): By ${oneCaption}`, CHT_TREE_MAP_CLUSTER, oneCaption])
 ];
 
-const _r = {
-  DF: _crDF,
+const _getCrChartOptions = crGetRoute({
   tes: _crTes,
   tc: _crColumBarClusterItems,
   t1: _crT1,
@@ -211,7 +212,7 @@ const _r = {
   t2a: _crT2A,
   t2ae: _crT2AE,
   t3: _crT3,
-  t3a: _crT3A,  
+  t3a: _crT3A,
   t3b: _crT3B,
   [TYPE_T3AB]: _crT3AB,
   t3ab2: _crT3AB2,
@@ -220,7 +221,7 @@ const _r = {
   t3c2: _crT3C2,
   t3ca: _crT3CA,
   df3: _crDF3
-};
+}, _crDF);
 
 const _crCaptions = (
   selectPropsOrConfigs
@@ -233,12 +234,11 @@ const _crChartOptionsImpl = (
   captions,
   mapFrequency,
   selectProps
-) => (_r[chartsType] || _r.DF)(
+) => _getCrChartOptions(chartsType)(
   captions,
   mapFrequency,
   selectProps
 ).filter(Boolean);
-
 
 export const crChartOptions = (
   selectPropsOrConfigs,
