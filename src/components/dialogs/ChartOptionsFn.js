@@ -50,14 +50,27 @@ const _crDfConfig = arrConfig => {
   _arrDfConfig[0] = `Default: ${arrConfig[0]}`
   return _arrDfConfig;
 }
-const _crItem = arrConfig => ({
-  caption: arrConfig[0],
-  value: arrConfig[1],
-  dim: arrConfig[2],
-  compType: arrConfig[3],
-  id: arrConfig[4],
-  cId: arrConfig[5]
-});
+const _addPropertyTo = (
+  obj,
+  propName,
+  value
+) => {
+  if (value != null) {
+    obj[propName] = value
+  }
+};
+const _crItem = arrConfig => {
+  const item = {
+    caption: arrConfig[0],
+    value: arrConfig[1]
+  };
+  _addPropertyTo(item, "dim", arrConfig[2])
+  _addPropertyTo(item, "compType", arrConfig[3])
+  _addPropertyTo(item, "id", arrConfig[4])
+  _addPropertyTo(item, "cId", arrConfig[5])
+  return item;
+};
+
 const _crItems = (arr) => arr
   .filter(Boolean)
   .map(_crItem);
