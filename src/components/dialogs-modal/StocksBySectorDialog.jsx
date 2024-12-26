@@ -1,8 +1,11 @@
 import {
   useRef,
   getRefValue,
-  getInputValue
+  getInputValue,
+  isFn
 } from '../uiApi';
+
+import { LT_AV } from '../../constants/LoadType';
 
 import memoIsShow from '../hoc/memoIsShow';
 import useToggle from '../hooks/useToggle';
@@ -49,15 +52,14 @@ const S_ROOT_NOT_LABELS = { width: 280 }
 , S_LINK = { paddingTop: 0 }
 , S_LINK_NOT_LABELS = { marginLeft: 8 };
 
-const TS = 'TIME_SERIES'
-, ADJUSTED = 'ADJUSTED'
+const _crTsAdjToken = period => `TIME_SERIES_${period}_ADJUSTED`
 , AV_DATA_FEEDS = [
-  {c: 'Daily Adjusted (100)', r: `${TS}_DAILY_${ADJUSTED}&outputsize=compact`},
-  {c: 'Weekly Adjusted', r: `${TS}_WEEKLY_${ADJUSTED}`},
-  {c: 'Monthly Adjusted', r: `${TS}_MONTHLY_${ADJUSTED}`}
+  {c: 'Daily Adjusted (100)', r: `${_crTsAdjToken('DAILY')}&outputsize=compact`},
+  {c: 'Weekly Adjusted', r: _crTsAdjToken('WEEKLY')},
+  {c: 'Monthly Adjusted', r: _crTsAdjToken('MONTHLY')}
 ].map(({c, r})=>({
   caption: `Alpha Vantage: ${c}`,
-  value: 'AL',
+  value: LT_AV,
   route: r,
   dfProps: {
     dfFn: 'EOD',
@@ -69,9 +71,7 @@ const TS = 'TIME_SERIES'
 ];
 
 const DF_DATA_SOURCE = DATA_SOURCE_OPTIONS[0];
-const _isFn = fn => typeof fn === 'function';
-
-const CHART_OPTIONS = crChartOptions(void 0, 't1a')
+const CHART_OPTIONS = crChartOptions(void 0, 't1')
 
 const StocksBySectorDialog = memoIsShow(({
   isShow,
@@ -105,7 +105,7 @@ const StocksBySectorDialog = memoIsShow(({
     getChartType
   ] = useProperty()
   , _hShow = useEventCallback(()=>{
-    if (data && _isFn(data.onShow)) {
+    if (data && isFn(data.onShow)) {
       data.onShow()
     }
   })

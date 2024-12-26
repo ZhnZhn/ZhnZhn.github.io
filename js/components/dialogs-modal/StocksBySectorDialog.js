@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _LoadType = require("../../constants/LoadType");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
@@ -49,17 +50,16 @@ const S_ROOT_NOT_LABELS = {
   S_LINK_NOT_LABELS = {
     marginLeft: 8
   };
-const TS = 'TIME_SERIES',
-  ADJUSTED = 'ADJUSTED',
+const _crTsAdjToken = period => `TIME_SERIES_${period}_ADJUSTED`,
   AV_DATA_FEEDS = [{
     c: 'Daily Adjusted (100)',
-    r: `${TS}_DAILY_${ADJUSTED}&outputsize=compact`
+    r: `${_crTsAdjToken('DAILY')}&outputsize=compact`
   }, {
     c: 'Weekly Adjusted',
-    r: `${TS}_WEEKLY_${ADJUSTED}`
+    r: _crTsAdjToken('WEEKLY')
   }, {
     c: 'Monthly Adjusted',
-    r: `${TS}_MONTHLY_${ADJUSTED}`
+    r: _crTsAdjToken('MONTHLY')
   }].map(_ref => {
     let {
       c,
@@ -67,7 +67,7 @@ const TS = 'TIME_SERIES',
     } = _ref;
     return {
       caption: `Alpha Vantage: ${c}`,
-      value: 'AL',
+      value: _LoadType.LT_AV,
       route: r,
       dfProps: {
         dfFn: 'EOD',
@@ -77,8 +77,7 @@ const TS = 'TIME_SERIES',
   }),
   DATA_SOURCE_OPTIONS = [...AV_DATA_FEEDS];
 const DF_DATA_SOURCE = DATA_SOURCE_OPTIONS[0];
-const _isFn = fn => typeof fn === 'function';
-const CHART_OPTIONS = (0, _ChartOptionsFn.crChartOptions)(void 0, 't1a');
+const CHART_OPTIONS = (0, _ChartOptionsFn.crChartOptions)(void 0, 't1');
 const StocksBySectorDialog = (0, _memoIsShow.default)(_ref2 => {
   let {
     isShow,
@@ -100,7 +99,7 @@ const StocksBySectorDialog = (0, _memoIsShow.default)(_ref2 => {
     [setDataSource, getDataSource] = (0, _useProperty.default)(),
     [setChartType, getChartType] = (0, _useProperty.default)(),
     _hShow = (0, _useEventCallback.default)(() => {
-      if (data && _isFn(data.onShow)) {
+      if (data && (0, _uiApi.isFn)(data.onShow)) {
         data.onShow();
       }
     }),
