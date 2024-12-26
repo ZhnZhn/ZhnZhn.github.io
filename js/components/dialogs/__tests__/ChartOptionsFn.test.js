@@ -16,19 +16,6 @@ describe("crChartOptions", () => {
     }];
     expect(fn([], "t1")).toEqual(chartOptionsT1);
   });
-  test("should return array with chart options t1a", () => {
-    const chartOptionsT1a = [{
-      caption: "Default: Area",
-      value: "AREA"
-    }, {
-      caption: "Line",
-      value: "LINE"
-    }, {
-      caption: "Spline",
-      value: "SPLINE"
-    }];
-    expect(fn([], "t1a")).toEqual(chartOptionsT1a);
-  });
   test("should return array with chart options t2", () => {
     const chartOptionsT2 = [{
       caption: "Default: Spline",

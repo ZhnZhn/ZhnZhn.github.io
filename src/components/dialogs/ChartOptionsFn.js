@@ -153,11 +153,6 @@ const _crT1 = () => _crItems([
   LINE_CONFIG,
   AREA_CONFIG
 ]);
-const _crT1A = () => _crItems([
-  _crDfConfig(AREA_CONFIG),
-  LINE_CONFIG,
-  SPLINE_CONFIG
-]);
 
 const _crT2 = () => [
   ..._crT1(),
@@ -256,7 +251,6 @@ const _getCrChartOptions = crGetRoute({
   tes: _crTes,
   tc: _crColumBarClusterItems,
   t1: _crT1,
-  t1a: _crT1A,
   t2: _crT2,
   t2a: _crT2A,
   t2ae: _crT2AE,

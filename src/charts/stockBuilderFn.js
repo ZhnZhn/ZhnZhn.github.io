@@ -134,7 +134,7 @@ export const _fSetStockSerias = (
   dL,
   dO
 ) => config => {
-  const type = crType(seriaType, 'area');
+  const type = crType(seriaType);
   setSeriaDataTo(config, dC, 0, 'Close', {
     type, lineWidth
   })
@@ -173,7 +173,7 @@ export const crStockConfig = (
         maxY: maxClose,
         isNotZoomToMinMax,
         isDrawDeltaExtrems
-     }),     
+     }),
      fAddMiniVolume({ id, data: dV, dColumn: dVc }),
      fAddMiniATH({ id, data: dATH }),
      _fSetStockSerias(seriaType, seriaWidth, dC, dH, dL, dO)

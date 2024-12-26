@@ -42,7 +42,7 @@ const _crSeriaOption = (color, lineWidth) => ({
   }
 });
 const _fSetStockSerias = (seriaType, lineWidth, dC, dH, dL, dO) => config => {
-  const type = (0, _Chart.crType)(seriaType, 'area');
+  const type = (0, _Chart.crType)(seriaType);
   (0, _ChartConfigFn.setSeriaDataTo)(config, dC, 0, 'Close', {
     type,
     lineWidth
