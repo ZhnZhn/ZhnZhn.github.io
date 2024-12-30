@@ -5,7 +5,7 @@ import {
 
 import {
   isNumber,
-  getMetricValue
+  crGetItemLabelValue
 } from './fnAdapter';
 
 const ARR_VARIABLES = [
@@ -22,13 +22,13 @@ const ARR_VARIABLES = [
 , _isFuel = label => ARR_VARIABLES.indexOf(label) !== -1;
 
 const crToTreeMapAdapter = (option) => {
-  const metric = getMetricValue(option)
-  , getItemValue = item => item[metric]
-  , getItemLabel = item => item.variable
+  const getItemLabelValue = crGetItemLabelValue(option)
   , getDataTotalTuple = json => json
       .reduce((tuple, item) => {
-         const label = getItemLabel(item)
-         , value = getItemValue(item);
+         const [
+           label,
+           value
+         ] = getItemLabelValue(item);
          if (_isFuel(label) && isNumber(value)) {
            item.label = label
            item.value = value

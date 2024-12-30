@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdToUTC = exports.roundBy = exports.reduceToHmBy = exports.isUsRoute = exports.isTotalVariable = exports.isTotalData = exports.isEuRoute = exports.isArr = exports.getSourceValue = exports.getMetricValue = exports.getMetricCaption = exports.getGeoCaption = exports.fGetCategory = exports.crError = exports.crDataImpl = void 0;
+exports.ymdToUTC = exports.roundBy = exports.reduceToHmBy = exports.isUsRoute = exports.isTotalVariable = exports.isTotalData = exports.isEuRoute = exports.isArr = exports.getSourceValue = exports.getMetricValue = exports.getMetricCaption = exports.getGeoCaption = exports.fGetCategory = exports.crGetItemLabelValue = exports.crError = exports.crDataImpl = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isArr = _AdapterFn.isArr;
 exports.isNumber = _AdapterFn.isNumber;
@@ -46,4 +46,11 @@ const crDataImpl = (items, getValue, crDataPoint, isValue) => {
   }, []);
 };
 exports.crDataImpl = crDataImpl;
+const _getItemVariable = item => item.variable;
+const crGetItemLabelValue = option => {
+  const metric = getMetricValue(option),
+    getItemValue = item => item[metric];
+  return item => (0, _AdapterFn.isObj)(item) ? [_getItemVariable(item), getItemValue(item)] : [];
+};
+exports.crGetItemLabelValue = crGetItemLabelValue;
 //# sourceMappingURL=fnAdapter.js.map

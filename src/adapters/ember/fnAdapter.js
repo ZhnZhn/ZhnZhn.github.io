@@ -8,6 +8,7 @@ export {
 
 import {
   isNumber,
+  isObj,
   getCaption,
   getValue
 } from '../AdapterFn';
@@ -87,4 +88,16 @@ export const crDataImpl = (
     }
     return data;
   }, []);
+}
+
+const _getItemVariable = item => item.variable;
+export const crGetItemLabelValue = (
+  option
+) => {
+  const metric = getMetricValue(option)
+  , getItemValue = item => item[metric];
+  return (item) => isObj(item) ? [
+    _getItemVariable(item),
+    getItemValue(item)
+  ] : [];
 }
