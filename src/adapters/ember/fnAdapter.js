@@ -4,14 +4,15 @@ export {
   crError,
   roundBy,
   ymdToUTC
-} from '../AdapterFn';
+} from "../AdapterFn";
 
 import {
   isNumber,
   isObj,
+  isInArrStr,
   getCaption,
   getValue
-} from '../AdapterFn';
+} from "../AdapterFn";
 
 export const isEuRoute = (
   option
@@ -24,13 +25,13 @@ export const isUsRoute = (
 const _getCountryOrRegionCategory = (
   item
 ) => item.country_code
-  ? item.country_or_region || ''
-  : ''
+  ? item.country_or_region || ""
+  : ""
 const _getStateCategory = (
   item
 ) => item.country && item.state !== "US Total"
-  ? item.state || ''
-  : ''
+  ? item.state || ""
+  : ""
 
 export const fGetCategory = (
   option
@@ -52,16 +53,16 @@ const _getMetricValue = _fGetItemsValueBy(2);
 export const getMetricValue = (
   options
 ) => isEuRoute(options)
-  ? 'day_ahead_price_eur_per_mwh'
+  ? "day_ahead_price_eur_per_mwh"
   : _getMetricValue(options)
 
-const SOURCE_TOTAL = 'Total';
+const SOURCE_TOTAL = "Total";
 export const isTotalData = (
   source
 ) => source === SOURCE_TOTAL
 
-const SOURCE_FOSSIL = 'Fossil'
-, SOURCE_CLEAN = 'Clean';
+const SOURCE_FOSSIL = "Fossil"
+, SOURCE_CLEAN = "Clean";
 export const isTotalVariable = (
   item
 ) => item.variable === SOURCE_FOSSIL
@@ -101,3 +102,20 @@ export const crGetItemLabelValue = (
     getItemValue(item)
   ] : [];
 }
+
+const ARR_VARIABLES = [
+  "Coal",
+  "Gas",
+  "Other Fossil",
+  "Nuclear",
+  "Other Renewables",
+  "Bioenergy",
+  "Hydro",
+  "Solar",
+  "Wind"
+]
+, _isLabelFuel = isInArrStr(ARR_VARIABLES);
+export const isTreeMapItem = (
+  label,
+  value
+) => _isLabelFuel(label) && isNumber(value)

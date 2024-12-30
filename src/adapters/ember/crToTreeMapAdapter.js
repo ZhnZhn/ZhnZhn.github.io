@@ -1,25 +1,12 @@
 import {
   crItemColor,
   fToTreeMapAdapter
-} from '../fToTreeMapAdapter';
+} from "../fToTreeMapAdapter";
 
 import {
-  isNumber,
-  crGetItemLabelValue
-} from './fnAdapter';
-
-const ARR_VARIABLES = [
-  "Coal",
-  "Gas",
-  "Other Fossil",
-  "Nuclear",
-  "Other Renewables",
-  "Bioenergy",
-  "Hydro",
-  "Solar",
-  "Wind"
-]
-, _isFuel = label => ARR_VARIABLES.indexOf(label) !== -1;
+  crGetItemLabelValue,
+  isTreeMapItem
+} from "./fnAdapter";
 
 const crToTreeMapAdapter = (option) => {
   const getItemLabelValue = crGetItemLabelValue(option)
@@ -29,7 +16,7 @@ const crToTreeMapAdapter = (option) => {
            label,
            value
          ] = getItemLabelValue(item);
-         if (_isFuel(label) && isNumber(value)) {
+         if (isTreeMapItem(label, value)) {
            item.label = label
            item.value = value
            item.color = crItemColor(label)
@@ -40,7 +27,7 @@ const crToTreeMapAdapter = (option) => {
       }, [[], 0]);
   return fToTreeMapAdapter(
      getDataTotalTuple
-  )
-}
+  );
+};
 
 export default crToTreeMapAdapter
