@@ -24,8 +24,6 @@ import {
   CHT_DOT_SET
 } from "../../constants/ChartType";
 
-import { TYPE_T3AB } from "./ChartOptionsTypes";
-
 const _isArr = Array.isArray
 , BLANK_CAPTION = ""
 , DIM_CAPTION = "Dim"
@@ -66,8 +64,7 @@ const _crItem = arrConfig => {
   };
   _addPropertyTo(item, "dim", arrConfig[2])
   _addPropertyTo(item, "compType", arrConfig[3])
-  _addPropertyTo(item, "id", arrConfig[4])
-  _addPropertyTo(item, "cId", arrConfig[5])
+  _addPropertyTo(item, "cId", arrConfig[4])
   return item;
 };
 
@@ -99,14 +96,11 @@ const _fCrCaptionBy = (
   chartType,
   isCluster
 ) => (
-  caption,
-  id
+  caption
 ) => _crItem([
   crCaption(caption, isCluster),
   chartType,
-  caption,
-  void 0,
-  id
+  caption
 ]);
 
 const _crDF3 = (
@@ -143,7 +137,7 @@ const _crTes = (
   const chartOptions = _crDF(captions, mapFrequency)
   , twoCaption = captions[1] || DIM_CAPTION;
   chartOptions.splice(7, 0, _crItem(
-    [_crCaptionBarBy(toPlural(twoCaption)), CHT_BAR_SET, twoCaption, void 0, void 0, (selectProps[1] || {}).id]
+    [_crCaptionBarBy(toPlural(twoCaption)), CHT_BAR_SET, twoCaption, void 0, (selectProps[1] || {}).id]
   ))
   return chartOptions;
 };
@@ -206,7 +200,10 @@ const _crT3C = ([oneCaption]) => [
   ..._crT2(),
   ..._crColumBarItems(oneCaption)
 ];
-const _crT3C2 = ([oneCaption, twoCaption]) => [
+const _crT3C2 = ([
+  oneCaption,
+  twoCaption
+]) => [
   ..._crT3C([oneCaption]),
   ..._crColumBarItems(twoCaption)
 ];
@@ -232,14 +229,20 @@ const _crT3A = ([oneCaption]) => [
   _crTreeMapClusterItem(oneCaption)
 ];
 
-const _crT3AB = ([oneCaption, twoCaption]) => [
+const _crT3AB = ([
+  oneCaption,
+  twoCaption
+]) => [
   ..._crT3([oneCaption]),
-  _crTreeMapItem(twoCaption, TYPE_T3AB)
+  _crTreeMapItem(twoCaption)
 ];
-const _crT3AB2 = ([oneCaption, twoCaption]) => [
+const _crT3AB2 = ([
+  oneCaption,
+  twoCaption
+]) => [
   ..._crT3([oneCaption]),
-  _crBarTreeMapItem(twoCaption, TYPE_T3AB),
-  _crTreeMapItem(twoCaption, TYPE_T3AB)
+  _crBarTreeMapItem(twoCaption),
+  _crTreeMapItem(twoCaption)
 ];
 
 const _crT3AC = ([oneCaption]) => [
@@ -257,7 +260,7 @@ const _getCrChartOptions = crGetRoute({
   t3: _crT3,
   t3a: _crT3A,
   t3b: _crT3B,
-  [TYPE_T3AB]: _crT3AB,
+  t3ab: _crT3AB,
   t3ab2: _crT3AB2,
   t3ac: _crT3AC,
   t3c: _crT3C,

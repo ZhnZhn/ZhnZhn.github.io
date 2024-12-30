@@ -1,5 +1,4 @@
 import { isCategoryItem } from './ChartOptionsFn';
-import { TYPE_T3AB } from './ChartOptionsTypes';
 
 export const getItemValue = (
   item
@@ -10,11 +9,7 @@ const _geSelectPropsCaption = (
   index
 ) => selectProps[index].caption;
 
-const _isChartTypeT3AB = (
-  chartType
-) => chartType && chartType.id === TYPE_T3AB;
-
-const _isItemDf = () => true
+const _isItemDf = () => true;
 
 const _crMsgs = (
   items,
@@ -50,11 +45,9 @@ const _fIsItem = (
 const _crIsItem = (
   chartType,
   selectProps
-) => _isChartTypeT3AB(chartType)
-  ? i => i !== 1
-  : isCategoryItem(chartType)
-     ? _fIsItem(chartType, selectProps)
-     : void 0
+) => isCategoryItem(chartType)
+  ? _fIsItem(chartType, selectProps)
+  : void 0
 
 export const crMsgs = (
   chartType,

@@ -8,7 +8,6 @@ var _crRouter = require("../../utils/crRouter");
 var _toPlural = _interopRequireDefault(require("../../utils/toPlural"));
 var _CompItemType = require("../../constants/CompItemType");
 var _ChartType = require("../../constants/ChartType");
-var _ChartOptionsTypes = require("./ChartOptionsTypes");
 const _isArr = Array.isArray,
   BLANK_CAPTION = "",
   DIM_CAPTION = "Dim",
@@ -35,8 +34,7 @@ const _crItem = arrConfig => {
   };
   _addPropertyTo(item, "dim", arrConfig[2]);
   _addPropertyTo(item, "compType", arrConfig[3]);
-  _addPropertyTo(item, "id", arrConfig[4]);
-  _addPropertyTo(item, "cId", arrConfig[5]);
+  _addPropertyTo(item, "cId", arrConfig[4]);
   return item;
 };
 const _crItems = arr => arr.filter(Boolean).map(_crItem);
@@ -49,7 +47,7 @@ const _fCrCaptionBy = prefix => (sufix, isCluster) => `${prefix}: By ${sufix}${i
   _crCaptionDotsBy = _fCrCaptionBy("Dots"),
   _crCaptionMapBy = _fCrCaptionBy("Map"),
   _crCaptionTreeMap6090 = _fCrCaptionBy("TreeMap (60, 90)"),
-  _fCrItem = (crCaption, chartType, isCluster) => (caption, id) => _crItem([crCaption(caption, isCluster), chartType, caption, void 0, id]);
+  _fCrItem = (crCaption, chartType, isCluster) => caption => _crItem([crCaption(caption, isCluster), chartType, caption]);
 const _crDF3 = (oneCaption, mapFrequency) => _crItems([_crDfConfig(SPLINE_CONFIG), LINE_CONFIG, _isMonthly(mapFrequency) && YEARLY_BY_MONTH_CONFIG, AREA_CONFIG, COLUMN_CONFIG, [_crCaptionBarBy(oneCaption), _ChartType.CHT_BAR_SET], [_crCaptionBarLabelsBy(oneCaption), _ChartType.CHT_BAR_WITH_LABELS], [_crCaptionColumnBy(oneCaption), _ChartType.CHT_COLUMN_SET], [_crCaptionDotsBy(oneCaption), _ChartType.CHT_DOT_SET]]);
 const _crDF = (captions, mapFrequency) => {
   const oneCaption = (0, _toPlural.default)(captions[0]) || DIM_CAPTION;
@@ -58,7 +56,7 @@ const _crDF = (captions, mapFrequency) => {
 const _crTes = (captions, mapFrequency, selectProps) => {
   const chartOptions = _crDF(captions, mapFrequency),
     twoCaption = captions[1] || DIM_CAPTION;
-  chartOptions.splice(7, 0, _crItem([_crCaptionBarBy((0, _toPlural.default)(twoCaption)), _ChartType.CHT_BAR_SET, twoCaption, void 0, void 0, (selectProps[1] || {}).id]));
+  chartOptions.splice(7, 0, _crItem([_crCaptionBarBy((0, _toPlural.default)(twoCaption)), _ChartType.CHT_BAR_SET, twoCaption, void 0, (selectProps[1] || {}).id]));
   return chartOptions;
 };
 const _crT1 = () => _crItems([_crDfConfig(SPLINE_CONFIG), LINE_CONFIG, AREA_CONFIG]);
@@ -99,11 +97,11 @@ const _crT3A = _ref5 => {
 };
 const _crT3AB = _ref6 => {
   let [oneCaption, twoCaption] = _ref6;
-  return [..._crT3([oneCaption]), _crTreeMapItem(twoCaption, _ChartOptionsTypes.TYPE_T3AB)];
+  return [..._crT3([oneCaption]), _crTreeMapItem(twoCaption)];
 };
 const _crT3AB2 = _ref7 => {
   let [oneCaption, twoCaption] = _ref7;
-  return [..._crT3([oneCaption]), _crBarTreeMapItem(twoCaption, _ChartOptionsTypes.TYPE_T3AB), _crTreeMapItem(twoCaption, _ChartOptionsTypes.TYPE_T3AB)];
+  return [..._crT3([oneCaption]), _crBarTreeMapItem(twoCaption), _crTreeMapItem(twoCaption)];
 };
 const _crT3AC = _ref8 => {
   let [oneCaption] = _ref8;
@@ -119,7 +117,7 @@ const _getCrChartOptions = (0, _crRouter.crGetRoute)({
   t3: _crT3,
   t3a: _crT3A,
   t3b: _crT3B,
-  [_ChartOptionsTypes.TYPE_T3AB]: _crT3AB,
+  t3ab: _crT3AB,
   t3ab2: _crT3AB2,
   t3ac: _crT3AC,
   t3c: _crT3C,

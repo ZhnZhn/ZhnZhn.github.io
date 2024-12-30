@@ -3,11 +3,9 @@
 exports.__esModule = true;
 exports.getItemValue = exports.crMsgs = void 0;
 var _ChartOptionsFn = require("./ChartOptionsFn");
-var _ChartOptionsTypes = require("./ChartOptionsTypes");
 const getItemValue = item => (item || {}).value;
 exports.getItemValue = getItemValue;
 const _geSelectPropsCaption = (selectProps, index) => selectProps[index].caption;
-const _isChartTypeT3AB = chartType => chartType && chartType.id === _ChartOptionsTypes.TYPE_T3AB;
 const _isItemDf = () => true;
 const _crMsgs = function (items, selectProps, msgOnNotSelected, isItem) {
   if (isItem === void 0) {
@@ -31,7 +29,7 @@ const _fIsItem = (chartType, selectProps) => {
   }
   return dfIsItem;
 };
-const _crIsItem = (chartType, selectProps) => _isChartTypeT3AB(chartType) ? i => i !== 1 : (0, _ChartOptionsFn.isCategoryItem)(chartType) ? _fIsItem(chartType, selectProps) : void 0;
+const _crIsItem = (chartType, selectProps) => (0, _ChartOptionsFn.isCategoryItem)(chartType) ? _fIsItem(chartType, selectProps) : void 0;
 const crMsgs = (chartType, items, selectProps, msgOnNotSelected) => _crMsgs(items, selectProps, msgOnNotSelected, _crIsItem(chartType, selectProps));
 exports.crMsgs = crMsgs;
 //# sourceMappingURL=dialogFn.js.map
