@@ -1,7 +1,8 @@
 import {
   isTreeMap,
+  isBarTreeMap,
   isCategory
-} from '../CategoryFn';
+} from "../CategoryFn";
 import {
   isArr,
   isEuRoute,
@@ -11,9 +12,9 @@ import {
   getMetricCaption,
   getSourceValue,
   isTotalData
-} from './fnAdapter';
+} from "./fnAdapter";
 
-const API_URL = 'https://ember-data-api-scg3n.ondigitalocean.app/ember'
+const API_URL = "https://ember-data-api-scg3n.ondigitalocean.app/ember"
 , GENERATION = "generation"
 , JSON_TOKEN = "json"
 , YEARLY_SUFFIX= `yearly.${JSON_TOKEN}`
@@ -26,15 +27,15 @@ const API_URL = 'https://ember-data-api-scg3n.ondigitalocean.app/ember'
 , API_URL_EU = `${API_URL}/${EU_MONTHLY_JSON}`
 //, QUERY_TAIL = "&_sort=rowid&_shape=array"
 , QUERY_ARRAY_TAIL = "&_shape=array"
-, DATE = 'date'
-, YEAR = 'year';
+, DATE = "date"
+, YEAR = "year";
 
 const _fCrProperty = (suffix) => (
   name,
   value
 ) => `${name}__${suffix}=${value}`
-, _crExactProperty = _fCrProperty('exact')
-, _crGteProperty = _fCrProperty('gte')
+, _crExactProperty = _fCrProperty("exact")
+, _crGteProperty = _fCrProperty("gte")
 , _crDateProperty = (
   options
 ) => _crExactProperty(options.pnDate, options.time);
@@ -45,8 +46,8 @@ const _crSourceQueryParam = (
 ) => {
   const source = getSourceValue(option);
   return isTotalData(source)
-    ? ''
-    : `&${_crExactProperty('variable', source)}`;
+    ? ""
+    : `&${_crExactProperty("variable", source)}`;
 }
 
 const _fCrUrl = (
@@ -119,7 +120,7 @@ const _crLineUrl = (
 ) => {
   const queryDateParam = isMonthlyRoute
      ? `&${_crGteProperty(DATE, option.fromDate)}`
-     : '';
+     : "";
 
   return isEuRoute(option)
     ? `${API_URL_EU}?${_crExactProperty("country_or_region", getGeoCaption(option))}${queryDateParam}${QUERY_ARRAY_TAIL}`
@@ -128,8 +129,8 @@ const _crLineUrl = (
 
 const EmberApi = {
   getRequestUrl(option) {
-    const _isMonthlyRoute = option.dfRId === 'M'
-    , _crUrl = isTreeMap(option)
+    const _isMonthlyRoute = option.dfRId === "M"
+    , _crUrl = isTreeMap(option) || isBarTreeMap(option)
        ? _crTreeMapUrl
        : isCategory(option)
           ? _crCategoryUrl
@@ -140,7 +141,7 @@ const EmberApi = {
       : YEAR;
 
     if (_isMonthlyRoute) {
-      option.time = option.time + '-01'
+      option.time = option.time + "-01"
     }
 
     return _crUrl(_isMonthlyRoute, option);

@@ -118,4 +118,6 @@ const ARR_VARIABLES = [
 export const isTreeMapItem = (
   label,
   value
-) => _isLabelFuel(label) && isNumber(value)
+) => _isLabelFuel(label)
+  && isNumber(value)
+  && value > 0

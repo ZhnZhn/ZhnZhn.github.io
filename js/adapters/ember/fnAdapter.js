@@ -55,6 +55,6 @@ const crGetItemLabelValue = option => {
 exports.crGetItemLabelValue = crGetItemLabelValue;
 const ARR_VARIABLES = ["Coal", "Gas", "Other Fossil", "Nuclear", "Other Renewables", "Bioenergy", "Hydro", "Solar", "Wind"],
   _isLabelFuel = (0, _AdapterFn.isInArrStr)(ARR_VARIABLES);
-const isTreeMapItem = (label, value) => _isLabelFuel(label) && (0, _AdapterFn.isNumber)(value);
+const isTreeMapItem = (label, value) => _isLabelFuel(label) && (0, _AdapterFn.isNumber)(value) && value > 0;
 exports.isTreeMapItem = isTreeMapItem;
 //# sourceMappingURL=fnAdapter.js.map
