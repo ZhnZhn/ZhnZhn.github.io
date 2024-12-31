@@ -168,6 +168,50 @@ describe("crChartOptions", () => {
       caption: "Item"
     }], "t3")).toEqual(chartOptionsT3);
   });
+  test("should return array with chart options t3ab", () => {
+    const chartOptionsT3ab = [{
+      caption: "Default: Spline",
+      value: "SPLINE"
+    }, {
+      caption: "Line",
+      value: "LINE"
+    }, {
+      caption: "Area",
+      value: "AREA"
+    }, {
+      caption: "Column",
+      value: "COLUMN"
+    }, {
+      caption: "Column: By Item1",
+      value: "COLUMN_SET",
+      dim: "Item1"
+    }, {
+      caption: "Column: By Item1: Cluster",
+      value: "COLUMN_CLUSTER",
+      dim: "Item1"
+    }, {
+      caption: "Bar: By Item1",
+      value: "BAR_SET",
+      dim: "Item1"
+    }, {
+      caption: "Bar: By Item1: Cluster",
+      value: "BAR_CLUSTER",
+      dim: "Item1"
+    }, {
+      caption: "Bar: By Item2",
+      value: "BAR_TREE_MAP",
+      dim: "Item2"
+    }, {
+      caption: "TreeMap: By Item2",
+      value: "TREE_MAP",
+      dim: "Item2"
+    }];
+    expect(fn([{
+      caption: "Item1"
+    }, {
+      caption: "Item2"
+    }], "t3ab")).toEqual(chartOptionsT3ab);
+  });
   test("should return array with chart options t3c", () => {
     const chartOptionsT3c = [{
       caption: "Default: Spline",

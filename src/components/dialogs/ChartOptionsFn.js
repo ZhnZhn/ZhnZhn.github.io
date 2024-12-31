@@ -234,13 +234,6 @@ const _crT3AB = ([
   twoCaption
 ]) => [
   ..._crT3([oneCaption]),
-  _crTreeMapItem(twoCaption)
-];
-const _crT3AB2 = ([
-  oneCaption,
-  twoCaption
-]) => [
-  ..._crT3([oneCaption]),
   _crBarTreeMapItem(twoCaption),
   _crTreeMapItem(twoCaption)
 ];
@@ -261,7 +254,6 @@ const _getCrChartOptions = crGetRoute({
   t3a: _crT3A,
   t3b: _crT3B,
   t3ab: _crT3AB,
-  t3ab2: _crT3AB2,
   t3ac: _crT3AC,
   t3c: _crT3C,
   t3c2: _crT3C2,

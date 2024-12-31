@@ -97,14 +97,10 @@ const _crT3A = _ref5 => {
 };
 const _crT3AB = _ref6 => {
   let [oneCaption, twoCaption] = _ref6;
-  return [..._crT3([oneCaption]), _crTreeMapItem(twoCaption)];
-};
-const _crT3AB2 = _ref7 => {
-  let [oneCaption, twoCaption] = _ref7;
   return [..._crT3([oneCaption]), _crBarTreeMapItem(twoCaption), _crTreeMapItem(twoCaption)];
 };
-const _crT3AC = _ref8 => {
-  let [oneCaption] = _ref8;
+const _crT3AC = _ref7 => {
+  let [oneCaption] = _ref7;
   return [..._crT3([oneCaption]), _crTreeMap6090Item(oneCaption)];
 };
 const _getCrChartOptions = (0, _crRouter.crGetRoute)({
@@ -118,7 +114,6 @@ const _getCrChartOptions = (0, _crRouter.crGetRoute)({
   t3a: _crT3A,
   t3b: _crT3B,
   t3ab: _crT3AB,
-  t3ab2: _crT3AB2,
   t3ac: _crT3AC,
   t3c: _crT3C,
   t3c2: _crT3C2,
