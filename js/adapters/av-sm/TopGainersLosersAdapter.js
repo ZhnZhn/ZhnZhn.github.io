@@ -23,7 +23,7 @@ const ID = "alp_perf",
     isF: true
   })],
   _crTableOptions = (id, title, rows) => ({
-    ...(0, _toTableFn.crTableOptions)(id, title, [...HEADERS], rows, DATA_SOURCE),
+    ...(0, _toTableFn.crTableOptions)(id, title, [...HEADERS], void 0, rows, DATA_SOURCE),
     dsStyle: S_DS
   });
 const _roundBy2 = str => (0, _fnAdapter.roundBy)(parseFloat(str), 2);

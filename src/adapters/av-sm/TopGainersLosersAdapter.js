@@ -36,6 +36,7 @@ const ID = "alp_perf"
     id,
     title,
     [...HEADERS],
+    void 0,
     rows,
     DATA_SOURCE,
   ),
