@@ -27,8 +27,8 @@ const _crFnValue = (valueFn, valueFnPrefix) => {
   const _crValue = (0, _RouterFnValue.getCrValue)(valueFn);
   return _crValue ? valueFnPrefix ? (0, _bindTo.bindTo)(_crValue, valueFnPrefix) : _crValue : void 0;
 };
-const _crFromDate = nInitFromDate => nInitFromDate ? nInitFromDate === "1y+1d" //Coinpaprika
-? (0, _dateFn.addDaysToYmd)((0, _dateFn.getFromDate)(1), 1) : (0, _dateFn.getFromDate)(nInitFromDate) : _initFromDate;
+const _crFromDate = nInitFromDate => nInitFromDate ? nInitFromDate === "1y+2d" //Coinpaprika
+? (0, _dateFn.addDaysToYmd)((0, _dateFn.getFromDate)(1), 2) : (0, _dateFn.getFromDate)(nInitFromDate) : _initFromDate;
 const _crInitFromDate = _ref => {
   let {
     isFdw,

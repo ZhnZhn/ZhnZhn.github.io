@@ -55,8 +55,8 @@ const _crFnValue = (
 const _crFromDate = (
   nInitFromDate,
 ) => nInitFromDate
-  ? nInitFromDate === "1y+1d" //Coinpaprika
-     ? addDaysToYmd(getFromDate(1), 1)
+  ? nInitFromDate === "1y+2d" //Coinpaprika
+     ? addDaysToYmd(getFromDate(1), 2)
      : getFromDate(nInitFromDate)
   : _initFromDate;
 
