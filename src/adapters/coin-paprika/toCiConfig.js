@@ -1,5 +1,4 @@
 import {
-  getValue,
   joinBy,
   toUpperCaseFirst
 } from './fnAdapter';
@@ -58,11 +57,6 @@ const _crLinks = ({ links, links_extended }) => {
 };
 
 const toCiConfig = {
-  crKey(option){
-    const { items=[] } = option;
-    return (option._itemKey = getValue(items[0]));
-  },
-
   toConfig(json, option) {
     const { _itemKey } = option
     , config = {

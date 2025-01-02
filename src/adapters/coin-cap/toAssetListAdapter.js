@@ -84,9 +84,5 @@ export const toAssetListAdapter = {
       dataSource: `CoinCap ${getYmdhmUTC()}`
     });
     return { config };
-  },
-
-  crKey(option){
-    return option._itemKey;
   }
 }

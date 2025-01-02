@@ -1,5 +1,7 @@
-import api from './AvStockMarketsApi'
 import { crAdapterRouter } from '../crAdapterRouter'
+import { crDfItemKey } from '../AdapterFn'
+
+import api from './AvStockMarketsApi'
 import IndicatorAdapter from './IndicatorAdapter'
 import IntradayAdapter from './IntradayAdapter'
 import SearchAdapter from './SearchAdapter'
@@ -20,7 +22,7 @@ const adapter = crAdapterRouter({
     EP: EtfProfileAdapter,
     OV: OverviewAdapter
   },
-  isKey: true
+  crDfKey: crDfItemKey
 })
 , AlphaVantage = { api, adapter };
 

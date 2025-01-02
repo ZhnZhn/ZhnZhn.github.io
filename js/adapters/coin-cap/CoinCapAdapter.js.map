@@ -5,8 +5,9 @@
  ],
  "file": "../../../src/adapters/coin-cap/CoinCapAdapter.js",
  "names": [
-  "_crAdapterRouter",
+  "_AdapterFn",
   "require",
+  "_crAdapterRouter",
   "_toAssetListAdapter",
   "_toHistoryChartAdapter",
   "CoinCapAdapter",
@@ -16,10 +17,11 @@
   "toAssetListAdapter",
   "HMC",
   "toHistoryChartAdapter",
-  "isKey",
+  "crDfKey",
+  "crDfItemKey",
   "_default",
   "exports",
   "default"
  ],
- "mappings": ";;;;AAAA,IAAAA,gBAAA,GAAAC,OAAA;AAEA,IAAAC,mBAAA,GAAAD,OAAA;AACA,IAAAE,sBAAA,GAAAF,OAAA;AAEA,MAAMG,cAAc,GAAG,IAAAC,gCAAe,EAAC;EACrCC,QAAQ,EAAE;IACRC,GAAG,EAAEC,sCAAkB;IACvBC,GAAG,EAAEC;EACP,CAAC;EACDC,KAAK,EAAE;AACT,CAAC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYV,cAAc"
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AACA,IAAAC,gBAAA,GAAAD,OAAA;AAEA,IAAAE,mBAAA,GAAAF,OAAA;AACA,IAAAG,sBAAA,GAAAH,OAAA;AAEA,MAAMI,cAAc,GAAG,IAAAC,gCAAe,EAAC;EACrCC,QAAQ,EAAE;IACRC,GAAG,EAAEC,sCAAkB;IACvBC,GAAG,EAAEC;EACP,CAAC;EACDC,OAAO,EAAEC;AACX,CAAC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYX,cAAc"
 }

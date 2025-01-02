@@ -71,9 +71,6 @@ const toAssetListAdapter = exports.toAssetListAdapter = {
     return {
       config
     };
-  },
-  crKey(option) {
-    return option._itemKey;
   }
 };
 //# sourceMappingURL=toAssetListAdapter.js.map

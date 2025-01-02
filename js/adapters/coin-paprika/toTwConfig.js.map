@@ -1,1 +1,42 @@
-{"version":3,"sources":["../../../src/adapters/coin-paprika/toTwConfig.js"],"names":["_crItems","json","items","i","length","user_name","date","status_id","status_link","status","retweet_count","like_count","push","id","user","link","replace","text","retweet","like","toTwConfig","crKey","option","_itemKey","toConfig","title","config","zhCompType","zhConfig","key"],"mappings":";;;;;AAAA;;AAEA,MAAMA,QAAQ,GAAGC,IAAI,IAAI;AACvB,QAAMC,KAAK,GAAG,EAAd;AACA,MAAIC,CAAJ;;AACA,OAAIA,CAAC,GAAC,CAAN,EAASA,CAAC,GAACF,IAAI,CAACG,MAAhB,EAAwBD,CAAC,EAAzB,EAA4B;AAC1B,UAAM;AACJE,MAAAA,SADI;AACOC,MAAAA,IADP;AACaC,MAAAA,SADb;AAEJC,MAAAA,WAFI;AAESC,MAAAA,MAFT;AAGJC,MAAAA,aAHI;AAGWC,MAAAA;AAHX,QAIFV,IAAI,CAACE,CAAD,CAJR;;AAKA,QAAIG,IAAI,IAAIC,SAAZ,EAAuB;AACrBL,MAAAA,KAAK,CAACU,IAAN,CAAW;AACTC,QAAAA,EAAE,EAAEN,SADK;AAETO,QAAAA,IAAI,EAAE,MAAMT,SAFH;AAGTU,QAAAA,IAAI,EAAEP,WAHG;AAITF,QAAAA,IAAI,EAAEA,IAAI,CAACU,OAAL,CAAa,GAAb,EAAkB,GAAlB,EAAuBA,OAAvB,CAA+B,GAA/B,EAAoC,EAApC,CAJG;AAKTC,QAAAA,IAAI,EAAER,MALG;AAMTS,QAAAA,OAAO,EAAER,aANA;AAOTS,QAAAA,IAAI,EAAER;AAPG,OAAX;AASD;AACF;;AACD,SAAOT,KAAP;AACD,CAtBD;;AAwBA,MAAMkB,UAAU,GAAG;AACjBC,EAAAA,KAAK,CAACC,MAAD,EAAQ;AACX,UAAM;AAAEpB,MAAAA,KAAK,GAAC;AAAR,QAAeoB,MAArB;AACA,WAAQA,MAAM,CAACC,QAAP,GAAkB,yBAASrB,KAAK,CAAC,CAAD,CAAd,CAA1B;AACD,GAJgB;;AAMjBsB,EAAAA,QAAQ,CAACvB,IAAD,EAAOqB,MAAP,EAAc;AACpB,UAAM;AAAEC,MAAAA,QAAF;AAAYE,MAAAA;AAAZ,QAAsBH,MAA5B;AAAA,UACEI,MAAM,GAAG;AACPb,MAAAA,EAAE,EAAEU,QADG;AAEPE,MAAAA,KAAK,EAAEA,KAFA;AAGPvB,MAAAA,KAAK,EAAEF,QAAQ,CAACC,IAAD,CAHR;AAIP0B,MAAAA,UAAU,EAAE,SAJL;AAKPC,MAAAA,QAAQ,EAAE;AACRf,QAAAA,EAAE,EAAEU,QADI;AACMM,QAAAA,GAAG,EAAEN;AADX;AALH,KADX;AAUA,WAAO;AAAEG,MAAAA;AAAF,KAAP;AACD;;AAlBgB,CAAnB;eAqBeN,U","sourcesContent":["import { getValue } from './fnAdapter';\r\n\r\nconst _crItems = json => {\r\n  const items = [];\r\n  let i;\r\n  for(i=0; i<json.length; i++){\r\n    const {\r\n      user_name, date, status_id,\r\n      status_link, status,\r\n      retweet_count, like_count\r\n    } = json[i];\r\n    if (date && status_id) {\r\n      items.push({\r\n        id: status_id,\r\n        user: '@' + user_name,\r\n        link: status_link,\r\n        date: date.replace('T', ' ').replace('Z', ''),\r\n        text: status,\r\n        retweet: retweet_count,\r\n        like: like_count\r\n      })\r\n    }\r\n  }\r\n  return items;\r\n}\r\n\r\nconst toTwConfig = {\r\n  crKey(option){\r\n    const { items=[] } = option;\r\n    return (option._itemKey = getValue(items[0]));\r\n  },\r\n\r\n  toConfig(json, option){\r\n    const { _itemKey, title } = option\r\n    , config = {\r\n        id: _itemKey,\r\n        title: title,\r\n        items: _crItems(json),\r\n        zhCompType: 'TW_LIST',\r\n        zhConfig: {\r\n          id: _itemKey, key: _itemKey\r\n        }\r\n      };\r\n    return { config };\r\n  }\r\n}\r\n\r\nexport default toTwConfig\r\n"],"file":"toTwConfig.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-paprika/toTwConfig.js"
+ ],
+ "file": "../../../src/adapters/coin-paprika/toTwConfig.js",
+ "names": [
+  "_crItems",
+  "json",
+  "items",
+  "i",
+  "length",
+  "user_name",
+  "date",
+  "status_id",
+  "status_link",
+  "status",
+  "retweet_count",
+  "like_count",
+  "push",
+  "id",
+  "user",
+  "link",
+  "replace",
+  "text",
+  "retweet",
+  "like",
+  "toTwConfig",
+  "toConfig",
+  "option",
+  "_itemKey",
+  "title",
+  "config",
+  "zhCompType",
+  "zhConfig",
+  "key",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,MAAMA,QAAQ,GAAGC,IAAI,IAAI;EACvB,MAAMC,KAAK,GAAG,EAAE;EAChB,IAAIC,CAAC;EACL,KAAIA,CAAC,GAAC,CAAC,EAAEA,CAAC,GAACF,IAAI,CAACG,MAAM,EAAED,CAAC,EAAE,EAAC;IAC1B,MAAM;MACJE,SAAS;MACTC,IAAI;MACJC,SAAS;MACTC,WAAW;MACXC,MAAM;MACNC,aAAa;MACbC;IACF,CAAC,GAAGV,IAAI,CAACE,CAAC,CAAC;IACX,IAAIG,IAAI,IAAIC,SAAS,EAAE;MACrBL,KAAK,CAACU,IAAI,CAAC;QACTC,EAAE,EAAEN,SAAS;QACbO,IAAI,EAAE,GAAG,GAAGT,SAAS;QACrBU,IAAI,EAAEP,WAAW;QACjBF,IAAI,EAAEA,IAAI,CAACU,OAAO,CAAC,GAAG,EAAE,GAAG,CAAC,CAACA,OAAO,CAAC,GAAG,EAAE,EAAE,CAAC;QAC7CC,IAAI,EAAER,MAAM;QACZS,OAAO,EAAER,aAAa;QACtBS,IAAI,EAAER;MACR,CAAC,CAAC;IACJ;EACF;EACA,OAAOT,KAAK;AACd,CAAC;AAED,MAAMkB,UAAU,GAAG;EACjBC,QAAQA,CAACpB,IAAI,EAAEqB,MAAM,EAAC;IACpB,MAAM;QACJC,QAAQ;QACRC;MACF,CAAC,GAAGF,MAAM;MACRG,MAAM,GAAG;QACPZ,EAAE,EAAEU,QAAQ;QACZC,KAAK,EAAEA,KAAK;QACZtB,KAAK,EAAEF,QAAQ,CAACC,IAAI,CAAC;QACrByB,UAAU,EAAE,SAAS;QACrBC,QAAQ,EAAE;UACRd,EAAE,EAAEU,QAAQ;UACZK,GAAG,EAAEL;QACP;MACF,CAAC;IACH,OAAO;MAAEE;IAAO,CAAC;EACnB;AACF,CAAC;AAAA,IAAAI,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEcX,UAAU"
+}

@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _crAdapterRouter = require("../crAdapterRouter");
+var _AdapterFn = require("../AdapterFn");
 var _toChart = _interopRequireDefault(require("./toChart"));
 var _toExchangeList = _interopRequireDefault(require("./toExchangeList"));
 var _toExchangeVolume = _interopRequireDefault(require("./toExchangeVolume"));
@@ -15,7 +16,7 @@ const CgAdapter = (0, _crAdapterRouter.crAdapterRouter)({
     EV: _toExchangeVolume.default,
     MCL: _toMarketCapList.default
   },
-  isKey: true
+  crDfKey: _AdapterFn.crDfItemKey
 });
 var _default = exports.default = CgAdapter;
 //# sourceMappingURL=CgAdapter.js.map

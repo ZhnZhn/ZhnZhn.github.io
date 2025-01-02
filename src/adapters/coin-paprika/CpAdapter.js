@@ -1,16 +1,17 @@
-import { crAdapterRouter } from '../crAdapterRouter'
+import { crDfItemKey } from "../AdapterFn";
+import { crAdapterRouter } from "../crAdapterRouter";
 
-import toChartConfig from './toChartConfig'
-import toTwConfig from './toTwConfig'
-import toCiConfig from './toCiConfig'
+import toChartConfig from "./toChartConfig";
+import toTwConfig from "./toTwConfig";
+import toCiConfig from "./toCiConfig";
 
-const CpAdapter = crAdapterRouter({ 
+const CpAdapter = crAdapterRouter({
   rAdapter: {
     DF: toChartConfig,
     TW: toTwConfig,
     CI: toCiConfig
   },
-  isKey: true
+  crDfKey: crDfItemKey
 });
 
 export default CpAdapter

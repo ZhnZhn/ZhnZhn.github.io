@@ -1,9 +1,10 @@
-import { crAdapterRouter } from '../crAdapterRouter'
+import { crAdapterRouter } from "../crAdapterRouter"
+import { crDfItemKey } from "../AdapterFn"
 
-import toChart from './toChart'
-import toExchangeList from './toExchangeList'
-import toExchangeVolume from './toExchangeVolume'
-import toMarketCapList from './toMarketCapList'
+import toChart from "./toChart"
+import toExchangeList from "./toExchangeList"
+import toExchangeVolume from "./toExchangeVolume"
+import toMarketCapList from "./toMarketCapList"
 
 const CgAdapter = crAdapterRouter({
   rAdapter: {
@@ -12,7 +13,7 @@ const CgAdapter = crAdapterRouter({
     EV: toExchangeVolume,
     MCL: toMarketCapList
   },
-  isKey: true
+  crDfKey: crDfItemKey
 });
 
 export default CgAdapter

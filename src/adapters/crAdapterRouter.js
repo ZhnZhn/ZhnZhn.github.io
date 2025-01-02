@@ -85,20 +85,13 @@ const _fGetAdapter = (
 export const crAdapterRouter = ({
   rAdapter,
   getRoute,
-  isKey,
   crDfKey
 }) => {
   const _getRoute = getRoute || _fGetRouteDf(rAdapter)
   , _getAdapter = _fGetAdapter(_getRoute);
   const _adapter = {
-    crKey: isKey || crDfKey
-      ? (option) => {
-          const _crKey = _getAdapter(option).crKey
-            || crDfKey;
-          return _isFn(_crKey)
-            ? _crKey(option)
-            : void 0;
-        }
+    crKey: _isFn(crDfKey)
+      ? (option) => (_getAdapter(option).crKey || crDfKey)(option)
       : void 0,
 
     toConfig: (json, option) => _getAdapter(option)
