@@ -3,12 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.loadDialogs = exports.getDialog = void 0;
-var _LoadImpl = require("./LoadImpl");
-var _LogicFn = require("./LogicFn");
+var _crRouter = require("../../utils/crRouter");
 var _BrowserType = require("../../constants/BrowserType");
 var _LoadType = require("../../constants/LoadType");
 var _Msg = require("../../constants/Msg");
 var _DialogSelectN = _interopRequireDefault(require("../../components/dialogs/DialogSelectN"));
+var _LoadImpl = require("./LoadImpl");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 const _resolve = Promise.resolve.bind(Promise);
@@ -16,7 +16,7 @@ const _resolveDialogs = (df, loadType, router) => {
   (0, _LoadImpl.addLoadImpl)(loadType, df._a);
   return router[loadType] = _resolve(df);
 };
-const _router = (0, _LogicFn.crRouter)({
+const _router = (0, _crRouter.crRouter)({
   DF: _DialogSelectN.default,
   DialogSelectN: _DialogSelectN.default,
   _loadD() {

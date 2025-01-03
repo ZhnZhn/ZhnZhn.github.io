@@ -1,5 +1,4 @@
-import { addLoadImpl } from './LoadImpl';
-import { crRouter } from './LogicFn';
+import { crRouter } from '../../utils/crRouter';
 
 import {
   BT_STOCK_MARKETS,
@@ -16,6 +15,7 @@ import {
 } from '../../constants/Msg';
 
 import DialogSelectN from '../../components/dialogs/DialogSelectN';
+import { addLoadImpl } from './LoadImpl';
 
 const _resolve = Promise.resolve.bind(Promise);
 

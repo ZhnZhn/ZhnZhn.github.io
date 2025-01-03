@@ -1,9 +1,5 @@
-export {
-  crRouter,
-  crGetRoute
-} from '../../utils/crRouter';
-
 import { isFn } from '../../utils/isTypeFn';
+
 import {
   LT_EU_STAT,
   LT_EIA,

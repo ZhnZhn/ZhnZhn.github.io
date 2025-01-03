@@ -3,13 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.getBrowserComp = void 0;
-var _LogicFn = require("./LogicFn");
+var _crRouter = require("../../utils/crRouter");
 var _BrowserType = require("../../constants/BrowserType");
 var _SourceBrowserDynamic = _interopRequireDefault(require("../../components/browser-container/SourceBrowserDynamic"));
 var _SourceBrowserDynamic2 = _interopRequireDefault(require("../../components/browser-container/SourceBrowserDynamic2"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-const getBrowserComp = exports.getBrowserComp = (0, _LogicFn.crGetRoute)({
+const getBrowserComp = exports.getBrowserComp = (0, _crRouter.crGetRoute)({
   [_BrowserType.BT_NYSE_STOCKS]: _SourceBrowserDynamic2.default,
   [_BrowserType.BT_NASDAQ_STOCKS]: _SourceBrowserDynamic2.default,
   get [_BrowserType.BT_WATCH_LIST]() {

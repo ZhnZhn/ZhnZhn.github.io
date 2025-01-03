@@ -1,10 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crRouter = exports.crKeyForConfig = exports.crGetRoute = void 0;
-var _crRouter = require("../../utils/crRouter");
-exports.crRouter = _crRouter.crRouter;
-exports.crGetRoute = _crRouter.crGetRoute;
+exports.crKeyForConfig = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _LoadType = require("../../constants/LoadType");
 var _LoadImpl = require("./LoadImpl");
