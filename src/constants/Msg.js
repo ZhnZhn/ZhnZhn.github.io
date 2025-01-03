@@ -41,10 +41,6 @@ export const ERR_LOADING_IN_PROGRESS = _crMsg(
   'Loading In Progress Error',
   'Loading the chart for this item-code in progress.\nIt seems several clicks on button Load repeatedly happend.'
 )
-export const ERR_DOUBLE_LOAD_META = _crMsg(
-  'Double Load Meta Error',
-  'Meta data for this code already have been loaded.'
-)
 export const ERR_PREMIUM_WITHOUT_KEY = _crMsg(
   WITHOUT_API_KEY,
   `403 : Forbidden\n\nYou have attempted to view a premium database in anonymous mode, i.e., without providing a ${NDL} key. Please register for a free ${NDL} account, and then enter your API in dialog SETTINGS [s].`

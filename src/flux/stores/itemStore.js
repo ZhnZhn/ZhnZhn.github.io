@@ -1,13 +1,10 @@
 import {
   setAlertMsg,
   ERR_ALREADY_EXIST,
-  ERR_DOUBLE_LOAD_META,
   ERR_LOADING_IN_PROGRESS,
 } from '../../constants/Msg';
 
-import {
-  logErrorToConsole
-} from './storeFn';
+import { logErrorToConsole } from './storeFn';
 
 import { crKeyForConfig } from '../logic/LogicFn';
 import { getLoadImpl } from '../logic/LoadImpl';
@@ -104,11 +101,11 @@ export const isChartExist = option => {
   return isChartExistImpl(CHARTS, chartType, key);
 }
 
-let _isLoading = false
+let _isLoading = !1
 , _idLoading = void 0
 
 const _setLoadingDone = () => {
-  _isLoading = false
+  _isLoading = !1
 }
 
 const _loadItemFailed = (option) => {
@@ -156,18 +153,11 @@ const _cancelLoad = (
   }
 }
 
-const META_SUFFIX = '_Meta'
-const _crMetaDataKey = key => key + META_SUFFIX;
-
 const _isShouldEmit = (
   confItem={},
   option={}
 ) => {
-  const _key = crKeyForConfig(option)
-  , { isLoadMeta } = option
-  , key = isLoadMeta
-     ? _crMetaDataKey(_key)
-     : _key
+  const key = crKeyForConfig(option)
   , _isDoublingLoad = _isLoading
       && key === _idLoading
   , _isTs = isLoadToChart();
@@ -176,17 +166,15 @@ const _isShouldEmit = (
   addSettingsTo(option, confItem, { key, _isTs })
 
   const _alertMsg = crMsgSetting(option)
-   || (isLoadMeta && _isDoublingLoad
-        ? ERR_DOUBLE_LOAD_META
-        : _isDoublingLoad
+   || ( _isDoublingLoad
            ? ERR_LOADING_IN_PROGRESS
            : !_isTs && isChartExist(option)
                ? ERR_ALREADY_EXIST
                : '');
 
   return _alertMsg
-    ? (_cancelLoad(option, _alertMsg), false)
-    : true;
+    ? (_cancelLoad(option, _alertMsg), !1)
+    : !0;
 }
 
 const _loadItemCompleted = (
@@ -237,7 +225,7 @@ const _loadItemAdded = (option={}) => {
 export const loadItem = (confItem, option) => {
   if (_isShouldEmit(confItem, option)) {
     const { key, loadId='Q' } = option;
-    _isLoading = true;
+    _isLoading = !0;
     _idLoading = key
     setLoading()
     getLoadImpl(loadId).loadItem(

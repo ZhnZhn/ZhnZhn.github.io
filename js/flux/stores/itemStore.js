@@ -47,10 +47,10 @@ const isChartExist = option => {
   return (0, _ChartLogic.isChartExist)(CHARTS, chartType, key);
 };
 exports.isChartExist = isChartExist;
-let _isLoading = false,
+let _isLoading = !1,
   _idLoading = void 0;
 const _setLoadingDone = () => {
-  _isLoading = false;
+  _isLoading = !1;
 };
 const _loadItemFailed = option => {
   (0, _loadingStore.setLoadingFailed)();
@@ -80,8 +80,6 @@ const _cancelLoad = (option, alertMsg) => {
     option.onCancel();
   }
 };
-const META_SUFFIX = '_Meta';
-const _crMetaDataKey = key => key + META_SUFFIX;
 const _isShouldEmit = function (confItem, option) {
   if (confItem === void 0) {
     confItem = {};
@@ -89,11 +87,7 @@ const _isShouldEmit = function (confItem, option) {
   if (option === void 0) {
     option = {};
   }
-  const _key = (0, _LogicFn.crKeyForConfig)(option),
-    {
-      isLoadMeta
-    } = option,
-    key = isLoadMeta ? _crMetaDataKey(_key) : _key,
+  const key = (0, _LogicFn.crKeyForConfig)(option),
     _isDoublingLoad = _isLoading && key === _idLoading,
     _isTs = (0, _chartCheckBoxLogic.isLoadToChart)();
 
@@ -102,8 +96,8 @@ const _isShouldEmit = function (confItem, option) {
     key,
     _isTs
   });
-  const _alertMsg = (0, _itemStoreFn.crMsgSetting)(option) || (isLoadMeta && _isDoublingLoad ? _Msg.ERR_DOUBLE_LOAD_META : _isDoublingLoad ? _Msg.ERR_LOADING_IN_PROGRESS : !_isTs && isChartExist(option) ? _Msg.ERR_ALREADY_EXIST : '');
-  return _alertMsg ? (_cancelLoad(option, _alertMsg), false) : true;
+  const _alertMsg = (0, _itemStoreFn.crMsgSetting)(option) || (_isDoublingLoad ? _Msg.ERR_LOADING_IN_PROGRESS : !_isTs && isChartExist(option) ? _Msg.ERR_ALREADY_EXIST : '');
+  return _alertMsg ? (_cancelLoad(option, _alertMsg), !1) : !0;
 };
 const _loadItemCompleted = (option, config) => {
   const {
@@ -145,7 +139,7 @@ const loadItem = (confItem, option) => {
       key,
       loadId = 'Q'
     } = option;
-    _isLoading = true;
+    _isLoading = !0;
     _idLoading = key;
     (0, _loadingStore.setLoading)();
     (0, _LoadImpl.getLoadImpl)(loadId).loadItem(option, _loadItemCompleted, _loadItemAdded, _loadItemFailed);
