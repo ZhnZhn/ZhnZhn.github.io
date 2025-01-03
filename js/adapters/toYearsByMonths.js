@@ -293,10 +293,7 @@ const _crValueMoving = (nowSeria, prevSeria) => {
 const _checkIfEnoughData = data => {
   const _len = data?.length;
   if (_len <= 12) {
-    throw {
-      errCaption: "Data Error",
-      message: `Not enough data for chart (${_len})`
-    };
+    throw (0, _AdapterFn.crError)("Data Error", `Not enough data for chart (${_len})`);
   }
 };
 const crYearlyConfig = (data, option) => {

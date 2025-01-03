@@ -14,6 +14,7 @@ import {
 } from '../charts/Tooltip';
 import {
   getColorBlack,
+  crError,
   crValueMoving,
   roundBy,
   numberFormat
@@ -308,13 +309,12 @@ const _crValueMoving = (
 const _checkIfEnoughData = data => {
   const _len = data?.length;
   if (_len<=12) {
-    throw {
-      errCaption: "Data Error",
-      message: `Not enough data for chart (${_len})`
-    };
+    throw crError(
+      "Data Error",
+      `Not enough data for chart (${_len})`
+    );
   }
 };
-
 
 const crYearlyConfig = (
   data,
