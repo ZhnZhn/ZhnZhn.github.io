@@ -1,4 +1,3 @@
-//import PropTypes from "prop-types";
 import memoIsShow from '../hoc/memoIsShow';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import DivEllipsis from '../zhn/DivEllipsis';
@@ -18,7 +17,7 @@ const S_ROW_CAPTION = {
 , S_ITEM_ID = {
   display: 'inline-block',
   color: '#a487d4',
-  width: 140
+  width: 190
 }
 , S_DESCR = {
   color: 'grey',
@@ -27,20 +26,7 @@ const S_ROW_CAPTION = {
   fontWeight: 'bold',
   whiteSpace: 'pre-line',
   wordWrap: 'break-word'
-}
-
-
-/*
-AlertDialog.propTypes = {
-  isShow: PropTypes.bool,
-  data: PropTypes.shape({
-    alertCaption: PropTypes.string,
-    alertItemId: PropTypes.string,
-    alertDescr: PropTypes.string
-  }),
-  onClose: PropTypes.func
-}
-*/
+};
 
 const AlertDialog = memoIsShow(({
   isShow,
@@ -49,10 +35,12 @@ const AlertDialog = memoIsShow(({
 }) => {
    const {
      alertCaption='Item',
-     alertItemId='',
+     alertItemId,
      alertDescr
    } = data
-   , _caption = alertCaption + ': ';
+   , _caption = alertItemId
+      ? alertCaption + ': '
+      : alertCaption;
    return (
      <ModalDialog
        caption="Alert"
@@ -63,11 +51,11 @@ const AlertDialog = memoIsShow(({
            <span style={S_CAPTION}>
              {_caption}
            </span>
-           <DivEllipsis
+           {alertItemId && <DivEllipsis
              style={S_ITEM_ID}
              text={alertItemId}
              title={alertItemId}
-           />
+           />}
         </div>
         <p style={S_DESCR}>
           {alertDescr}
