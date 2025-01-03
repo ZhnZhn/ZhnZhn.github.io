@@ -95,13 +95,3 @@ export const crRoundTo = (
     ? _rt
     : void 0;
 }
-
-export const crAlertConf = (
-  alertItemId,
-  alertGeo,
-  alertMetric
-) => ({
-  alertItemId,
-  alertGeo,
-  alertMetric
-})

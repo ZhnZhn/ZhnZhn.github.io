@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _createrFns = require("./createrFns");
 const TYPE = 'selectN';
 const TABLE_ID = 'table';
@@ -75,6 +76,7 @@ const createLoadOptions = (props, options) => {
     _itemKey: _itemKey,
     _rt: (0, _createrFns.crRoundTo)(_rt),
     itemCaption,
+    alertItemId: (0, _arrFn.joinBy)(": ", itemCaption, threeC),
     zhCompType: compType,
     fromDate,
     time: date,
@@ -86,7 +88,6 @@ const createLoadOptions = (props, options) => {
     linkFn,
     title,
     subtitle,
-    ...(0, _createrFns.crAlertConf)(`${itemCaption}: ${threeC}`, itemCaption, threeC),
     dataSource
   };
 };

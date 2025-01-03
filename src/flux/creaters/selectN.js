@@ -1,8 +1,9 @@
+import { joinBy } from '../../utils/arrFn';
+
 import {
   crCaptions,
   crItemKey,
-  crRoundTo,
-  crAlertConf
+  crRoundTo
 } from './createrFns';
 
 const TYPE = 'selectN';
@@ -104,6 +105,7 @@ const createLoadOptions = (
     _itemKey: _itemKey,
     _rt: crRoundTo(_rt),
     itemCaption,
+    alertItemId: joinBy(": ", itemCaption, threeC),
     zhCompType: compType,
     fromDate,
     time: date,
@@ -115,9 +117,8 @@ const createLoadOptions = (
     linkFn,
     title,
     subtitle,
-    ...crAlertConf(`${itemCaption}: ${threeC}`, itemCaption, threeC),
     dataSource
-  }
+  };
 };
 
 export default createLoadOptions

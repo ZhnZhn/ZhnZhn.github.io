@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isFn = exports.getV = exports.getC = exports.crRoundTo = exports.crItemKey = exports.crCaptions = exports.crAlertConf = void 0;
+exports.isFn = exports.getV = exports.getC = exports.crRoundTo = exports.crItemKey = exports.crCaptions = void 0;
 var _getPropertyFn = require("../../utils/getPropertyFn");
 var _toUpperCaseFirst = require("../../utils/toUpperCaseFirst");
 const getC = exports.getC = _getPropertyFn.getC;
@@ -54,10 +54,4 @@ const crRoundTo = rt => {
   return _rt > -1 && _rt < 4 ? _rt : void 0;
 };
 exports.crRoundTo = crRoundTo;
-const crAlertConf = (alertItemId, alertGeo, alertMetric) => ({
-  alertItemId,
-  alertGeo,
-  alertMetric
-});
-exports.crAlertConf = crAlertConf;
 //# sourceMappingURL=createrFns.js.map
