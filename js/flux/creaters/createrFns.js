@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.isFn = exports.getV = exports.getC = exports.crRoundTo = exports.crItemKey = exports.crCaptions = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _getPropertyFn = require("../../utils/getPropertyFn");
 var _toUpperCaseFirst = require("../../utils/toUpperCaseFirst");
 const getC = exports.getC = _getPropertyFn.getC;
@@ -10,12 +11,12 @@ const isFn = fn => typeof fn === 'function';
 exports.isFn = isFn;
 const _getC = item => (0, _toUpperCaseFirst.toUpperCaseFirst)(item && item.sc || getC(item));
 const _isArr = Array.isArray;
-const _join = arr => arr.filter(Boolean).join(': ');
+const _joinByColon = arrStr => (0, _arrFn.joinBy)(": ", ...arrStr);
 const _crItemCaption = (items, titles) => {
   if (!_isArr(titles) || titles.length === 0) {
     titles = [0];
   }
-  return titles.map(titleIndex => _getC(items[titleIndex])).join(': ');
+  return _joinByColon(titles.map(titleIndex => _getC(items[titleIndex])));
 };
 const _crCaptionItems = items => (items || []).map(item => _getC(item));
 const crItemKey = function (items) {
@@ -23,7 +24,7 @@ const crItemKey = function (items) {
   for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     args[_key - 1] = arguments[_key];
   }
-  return [_prefix, ...args].filter(Boolean).join('_');
+  return (0, _arrFn.joinBy)("_", _prefix, ...args);
 };
 
 //[itemCaption, title, subtitle, threeC]
@@ -39,14 +40,14 @@ const crCaptions = (items, titles) => {
   let _title = oneC,
     _subtitle;
   if (fourC) {
-    _title = _join([oneC, twoC]);
-    _subtitle = _join([threeC, fourC, ..._crCaptionItems(restItems)]);
+    _title = _joinByColon([oneC, twoC]);
+    _subtitle = _joinByColon([threeC, fourC, ..._crCaptionItems(restItems)]);
   } else if (threeC) {
-    _subtitle = _join([twoC, threeC]);
+    _subtitle = _joinByColon([twoC, threeC]);
   } else if (twoC) {
     _subtitle = twoC;
   }
-  return [itemCaption, _title || _subtitle, _title ? _subtitle : void 0, threeC];
+  return [itemCaption, _title || _subtitle, _title ? _subtitle : void 0, threeC || twoC];
 };
 exports.crCaptions = crCaptions;
 const crRoundTo = rt => {
