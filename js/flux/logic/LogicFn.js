@@ -8,17 +8,6 @@ exports.crGetRoute = _crRouter.crGetRoute;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _LoadType = require("../../constants/LoadType");
 var _LoadImpl = require("./LoadImpl");
-const _crNdlKey = _ref => {
-  let {
-    loadId,
-    isLoadMeta,
-    value,
-    dataColumn,
-    seriaType,
-    viewKey
-  } = _ref;
-  return viewKey || value;
-};
 const _crItemKey = option => {
   const {
       loadId,
@@ -36,8 +25,6 @@ const crKeyForConfig = option => {
     _itemKey
   } = option;
   switch (option.loadId) {
-    case _LoadType.LT_Q:
-      return _itemKey || _crNdlKey(option);
     case _LoadType.LT_EU_STAT:
     case _LoadType.LT_EIA:
     case _LoadType.LT_WL:
