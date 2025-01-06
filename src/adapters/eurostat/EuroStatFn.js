@@ -63,30 +63,35 @@ const OBS_PERIOD_OVERALL_ = 'OBS_PERIOD_OVERALL_'
 , OLDEST_DATE = `${OBS_PERIOD_OVERALL_}OLDEST`
 , LATEST_DATE = `${OBS_PERIOD_OVERALL_}LATEST`;
 
+const _getAnnotationTitle = (
+  annotationItem
+) => (annotationItem || {}).title || "";
+
 const _getObsOverallPeriods = (
   extension
 ) => {
   const { annotation } = extension || {}
-  let _fromDate=''
-  , _toDate=''
-  , _annotationType
-  , i;
+  let _fromDate = ""
+  , _toDate = ""
+  , _annotationItem
+  , _annotationType;
+
   if (_isArr(annotation)) {
-    for(i = 0; i<annotation.length; i++) {
-      _annotationType = (annotation[i] || {}).type
+    for(_annotationItem of annotation) {
+      _annotationType = (_annotationItem || {}).type
       if (_annotationType === OLDEST_DATE) {
-        _fromDate = annotation[i].title
-      }
-      if (_annotationType === LATEST_DATE) {
-        _toDate = annotation[i].title
+        _fromDate = _getAnnotationTitle(_annotationItem)
+      } else if (_annotationType === LATEST_DATE) {
+        _toDate = _getAnnotationTitle(_annotationItem)
       }
     }
   }
+  
   return [
     _fromDate,
     _toDate
   ];
-}
+};
 
 export const crDatasetInfo = ({
   label,
