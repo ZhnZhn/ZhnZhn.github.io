@@ -26,9 +26,9 @@ import { crItemConf } from '../crFn';
 
 import convertToUTC from './convertToUTC';
 
-const COLOR_EU = "#001489"
-, COLOR_EA = "#cca300"
-, COLOR_NOT_EU_MEMBER = '#8085e9'
+const EU_COLOR = "#001489"
+, EA_COLOR = "#cca300"
+, NOT_EU_MEMBER_COLOR = '#8085e9'
 , EU_MEMBER = [
     "Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus",
     "Czechia", "Denmark", "Estonia", "Finland", "France",
@@ -108,22 +108,9 @@ export const crDatasetInfo = ({
 const _fIsCode = (
   token
 ) => str => str.toLowerCase().indexOf(token) !== -1
-const _isEUCode = _fIsCode("union")
-const _isEACode = _fIsCode("euro area")
-const _isNotEUMember = str => EU_MEMBER.indexOf(str) === -1
-
-const _colorSeriaIn = (
-  config,
-  isPredicate,
-  color
-) => {
-  const data = config.series[0].data;
-  data.forEach(p => {
-     if (!p.color && isPredicate(p.c || "")) {
-       p.color = color
-     }
-  })
-};
+, _isEUCode = _fIsCode("union")
+, _isEACode = _fIsCode("euro area")
+, _isNotEUMember = str => EU_MEMBER.indexOf(str) === -1;
 
 const _filterZeroCategories = (
   data,
@@ -280,10 +267,20 @@ const _setCategories = ({
    setBarConfigHeightIf(config)
 }
 
-const _colorSeries = (config) => {
-  _colorSeriaIn(config, _isEUCode, COLOR_EU)
-  _colorSeriaIn(config, _isEACode, COLOR_EA)
-  _colorSeriaIn(config, _isNotEUMember, COLOR_NOT_EU_MEMBER)
+const _colorSeries = (config) => {  
+  config.series[0].data.forEach(p => {
+    const _caption = p.c || ""
+    , color = _isEUCode(_caption)
+      ? EU_COLOR
+      : _isEACode(_caption)
+      ? EA_COLOR
+      : _isNotEUMember(_caption)
+      ? NOT_EU_MEMBER_COLOR
+      : void 0;
+    if (color) {
+      p.color = color
+    }
+  })
 }
 
 export const addToCategoryConfig = (

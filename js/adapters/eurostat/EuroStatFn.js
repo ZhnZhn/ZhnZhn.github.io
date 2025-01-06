@@ -13,9 +13,9 @@ var _JsonStatFn = require("../JsonStatFn");
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
 var _convertToUTC = _interopRequireDefault(require("./convertToUTC"));
-const COLOR_EU = "#001489",
-  COLOR_EA = "#cca300",
-  COLOR_NOT_EU_MEMBER = '#8085e9',
+const EU_COLOR = "#001489",
+  EA_COLOR = "#cca300",
+  NOT_EU_MEMBER_COLOR = '#8085e9',
   EU_MEMBER = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"];
 const _assign = Object.assign,
   _isStr = str => typeof str === 'string',
@@ -71,18 +71,10 @@ const crDatasetInfo = _ref => {
   };
 };
 exports.crDatasetInfo = crDatasetInfo;
-const _fIsCode = token => str => str.toLowerCase().indexOf(token) !== -1;
-const _isEUCode = _fIsCode("union");
-const _isEACode = _fIsCode("euro area");
-const _isNotEUMember = str => EU_MEMBER.indexOf(str) === -1;
-const _colorSeriaIn = (config, isPredicate, color) => {
-  const data = config.series[0].data;
-  data.forEach(p => {
-    if (!p.color && isPredicate(p.c || "")) {
-      p.color = color;
-    }
-  });
-};
+const _fIsCode = token => str => str.toLowerCase().indexOf(token) !== -1,
+  _isEUCode = _fIsCode("union"),
+  _isEACode = _fIsCode("euro area"),
+  _isNotEUMember = str => EU_MEMBER.indexOf(str) === -1;
 const _filterZeroCategories = (data, categories) => {
   const _data = [],
     _arrC = [];
@@ -202,9 +194,13 @@ const _setCategories = _ref6 => {
   (0, _configBuilderFn.setBarConfigHeightIf)(config);
 };
 const _colorSeries = config => {
-  _colorSeriaIn(config, _isEUCode, COLOR_EU);
-  _colorSeriaIn(config, _isEACode, COLOR_EA);
-  _colorSeriaIn(config, _isNotEUMember, COLOR_NOT_EU_MEMBER);
+  config.series[0].data.forEach(p => {
+    const _caption = p.c || "",
+      color = _isEUCode(_caption) ? EU_COLOR : _isEACode(_caption) ? EA_COLOR : _isNotEUMember(_caption) ? NOT_EU_MEMBER_COLOR : void 0;
+    if (color) {
+      p.color = color;
+    }
+  });
 };
 const addToCategoryConfig = (config, _ref7) => {
   let {
