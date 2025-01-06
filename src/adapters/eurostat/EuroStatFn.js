@@ -267,8 +267,8 @@ const _setCategories = ({
    setBarConfigHeightIf(config)
 }
 
-const _colorSeries = (config) => {
-  config.series[0].data.forEach(p => {
+const _colorCategories = (data) => {
+  data.forEach(p => {
     const _caption = p.c || ""
     , color = _isEUCode(_caption)
       ? EU_COLOR
@@ -296,7 +296,7 @@ export const addToCategoryConfig = (
 
     setDataAndInfo({ data: _data, config, json, option })
     _setCategories({ categories: _categories, config, min, option })
-    _colorSeries(config)
+    _colorCategories(config.series[0].data)
 }
 
 export const crCategoryTooltip = () => fTooltip(tooltipCategorySimple)

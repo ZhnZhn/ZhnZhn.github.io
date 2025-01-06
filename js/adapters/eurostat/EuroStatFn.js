@@ -178,8 +178,8 @@ const _setCategories = _ref4 => {
   });
   (0, _configBuilderFn.setBarConfigHeightIf)(config);
 };
-const _colorSeries = config => {
-  config.series[0].data.forEach(p => {
+const _colorCategories = data => {
+  data.forEach(p => {
     const _caption = p.c || "",
       color = _isEUCode(_caption) ? EU_COLOR : _isEACode(_caption) ? EA_COLOR : _isNotEUMember(_caption) ? NOT_EU_MEMBER_COLOR : void 0;
     if (color) {
@@ -208,7 +208,7 @@ const addToCategoryConfig = (config, _ref5) => {
     min,
     option
   });
-  _colorSeries(config);
+  _colorCategories(config.series[0].data);
 };
 exports.addToCategoryConfig = addToCategoryConfig;
 const crCategoryTooltip = () => (0, _Chart.fTooltip)(_Tooltip.tooltipCategorySimple);
