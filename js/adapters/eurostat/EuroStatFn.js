@@ -14,10 +14,8 @@ var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
 var _convertToUTC = _interopRequireDefault(require("./convertToUTC"));
 const COLOR_EU = "#001489",
-  COLOR_EA = "#ffdd00",
+  COLOR_EA = "#cca300",
   COLOR_NOT_EU_MEMBER = '#8085e9',
-  EU_CODES = ["EU", "EU28", "EU27_2020", "G20", "Group of Twenty"],
-  EA_CODES = ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19", "EA20", "EUROZONE"],
   EU_MEMBER = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"];
 const _assign = Object.assign,
   _isStr = str => typeof str === 'string',
@@ -73,14 +71,14 @@ const crDatasetInfo = _ref => {
   };
 };
 exports.crDatasetInfo = crDatasetInfo;
-const _fIsCode = codes => p => codes.indexOf(p.c) !== -1;
-const _isEUCode = _fIsCode(EU_CODES);
-const _isEACode = _fIsCode(EA_CODES);
-const _isNotEUMember = p => EU_MEMBER.indexOf(p.c) === -1;
+const _fIsCode = token => str => str.toLowerCase().indexOf(token) !== -1;
+const _isEUCode = _fIsCode("union");
+const _isEACode = _fIsCode("euro area");
+const _isNotEUMember = str => EU_MEMBER.indexOf(str) === -1;
 const _colorSeriaIn = (config, isPredicate, color) => {
   const data = config.series[0].data;
   data.forEach(p => {
-    if (!p.color && isPredicate(p)) {
+    if (!p.color && isPredicate(p.c || "")) {
       p.color = color;
     }
   });
