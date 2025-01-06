@@ -159,19 +159,13 @@ const setDataAndInfo = _ref3 => {
   setInfoTo(config, json);
 };
 exports.setDataAndInfo = setDataAndInfo;
-const _crItemCaption = _ref4 => {
-  let {
-    title = 'EU'
-  } = _ref4;
-  return title;
-};
-const _setCategories = _ref5 => {
+const _setCategories = _ref4 => {
   let {
     config,
     categories,
     min,
     option
-  } = _ref5;
+  } = _ref4;
   const {
     time
   } = option;
@@ -179,7 +173,7 @@ const _setCategories = _ref5 => {
   _setZoomMinMaxTo(config, option.isNotZoomToMinMax, min);
   config.series[0].name = time;
   _assign(config.zhConfig, {
-    itemCaption: _crItemCaption(option),
+    itemCaption: option.title || "EU",
     itemTime: time
   });
   (0, _configBuilderFn.setBarConfigHeightIf)(config);
@@ -193,14 +187,14 @@ const _colorSeries = config => {
     }
   });
 };
-const addToCategoryConfig = (config, _ref6) => {
+const addToCategoryConfig = (config, _ref5) => {
   let {
     json,
     option,
     data,
     categories,
     min
-  } = _ref6;
+  } = _ref5;
   const [_data, _categories] = option.isFilterZero ? _filterZeroCategories(data, categories) : [data, categories];
   setDataAndInfo({
     data: _data,

@@ -246,8 +246,6 @@ export const setDataAndInfo = ({
   setInfoTo(config, json)
 }
 
-const _crItemCaption = ({ title='EU' }) => title
-
 const _setCategories = ({
   config,
   categories,
@@ -263,7 +261,7 @@ const _setCategories = ({
    config.series[0].name = time
 
    _assign(config.zhConfig, {
-     itemCaption: _crItemCaption(option),
+     itemCaption: option.title || "EU",
      itemTime: time
    })
    setBarConfigHeightIf(config)
