@@ -19,11 +19,7 @@ const crAreaYearlyConfig = (json, option) => {
       dataSource: (0, _EuroStatFn.crDataSource)(option),
       ...(0, _EuroStatFn.crLinkConf)(option)
     });
-  (0, _EuroStatFn.setInfo)({
-    config,
-    json,
-    option
-  });
+  (0, _EuroStatFn.setInfoTo)(config, json);
   return config;
 };
 exports.crAreaYearlyConfig = crAreaYearlyConfig;

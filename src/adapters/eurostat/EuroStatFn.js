@@ -222,26 +222,28 @@ export const crZhConfig = (option) => {
   };
 }
 
+export const setInfoTo = (
+  config,
+  json
+) => {
+  config.info = crDatasetInfo(json);
+}
+
 export const setDataAndInfo = ({
   config,
   data,
   json,
   option
 }) => {
-  const { title, subtitle } = option;
-  setDefaultTitle(config, title, subtitle);
 
-  config.zhConfig = crZhConfig(option);
-  config.info = crDatasetInfo(json);
-  config.series[0].data = data;
-}
+  setDefaultTitle(config,
+    option.title,
+    option.subtitle
+  )
 
-export const setInfo = ({
-  config,
-  json,
-  option
-}) => {
-  config.info = crDatasetInfo(json);
+  config.series[0].data = data
+  config.zhConfig = crZhConfig(option)
+  setInfoTo(config, json)
 }
 
 const _crItemCaption = ({ title='EU' }) => title
@@ -267,7 +269,7 @@ const _setCategories = ({
    setBarConfigHeightIf(config)
 }
 
-const _colorSeries = (config) => {  
+const _colorSeries = (config) => {
   config.series[0].data.forEach(p => {
     const _caption = p.c || ""
     , color = _isEUCode(_caption)

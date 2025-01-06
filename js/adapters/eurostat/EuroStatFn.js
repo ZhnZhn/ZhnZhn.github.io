@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toPointArr = exports.setInfo = exports.setDataAndInfo = exports.isNotGeoOrReporter = exports.getColorBlack = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
+exports.toPointArr = exports.setInfoTo = exports.setDataAndInfo = exports.isNotGeoOrReporter = exports.getColorBlack = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.getColorBlack = _AdapterFn.getColorBlack;
 exports.findMinY = _AdapterFn.findMinY;
@@ -142,6 +142,10 @@ const crZhConfig = option => {
   };
 };
 exports.crZhConfig = crZhConfig;
+const setInfoTo = (config, json) => {
+  config.info = crDatasetInfo(json);
+};
+exports.setInfoTo = setInfoTo;
 const setDataAndInfo = _ref3 => {
   let {
     config,
@@ -149,38 +153,25 @@ const setDataAndInfo = _ref3 => {
     json,
     option
   } = _ref3;
-  const {
-    title,
-    subtitle
-  } = option;
-  (0, _Chart.setDefaultTitle)(config, title, subtitle);
-  config.zhConfig = crZhConfig(option);
-  config.info = crDatasetInfo(json);
+  (0, _Chart.setDefaultTitle)(config, option.title, option.subtitle);
   config.series[0].data = data;
+  config.zhConfig = crZhConfig(option);
+  setInfoTo(config, json);
 };
 exports.setDataAndInfo = setDataAndInfo;
-const setInfo = _ref4 => {
-  let {
-    config,
-    json,
-    option
-  } = _ref4;
-  config.info = crDatasetInfo(json);
-};
-exports.setInfo = setInfo;
-const _crItemCaption = _ref5 => {
+const _crItemCaption = _ref4 => {
   let {
     title = 'EU'
-  } = _ref5;
+  } = _ref4;
   return title;
 };
-const _setCategories = _ref6 => {
+const _setCategories = _ref5 => {
   let {
     config,
     categories,
     min,
     option
-  } = _ref6;
+  } = _ref5;
   const {
     time
   } = option;
@@ -202,14 +193,14 @@ const _colorSeries = config => {
     }
   });
 };
-const addToCategoryConfig = (config, _ref7) => {
+const addToCategoryConfig = (config, _ref6) => {
   let {
     json,
     option,
     data,
     categories,
     min
-  } = _ref7;
+  } = _ref6;
   const [_data, _categories] = option.isFilterZero ? _filterZeroCategories(data, categories) : [data, categories];
   setDataAndInfo({
     data: _data,

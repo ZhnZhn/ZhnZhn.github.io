@@ -2,7 +2,7 @@ import {
   toPointArr,
   crDataSource,
   crLinkConf,
-  setInfo
+  setInfoTo
 } from './EuroStatFn';
 import crYearlyConfig from '../toYearsByMonths';
 
@@ -24,6 +24,6 @@ export const crAreaYearlyConfig = (
        dataSource: crDataSource(option),
        ...crLinkConf(option)
    });
-   setInfo({ config, json, option })
+   setInfoTo(config, json)
    return config;
 }
