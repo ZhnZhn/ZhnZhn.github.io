@@ -19,6 +19,7 @@ const LINK_CONFIGS = [
  ["Fmp", "Financial Modeling Prep", _crUrl("financialmodelingprep.com")],
  ["Tw", "Twelve Data", _crUrl("twelvedata.com")],
  ["AlphaVantage", "Alpha Vantage", _crUrl("www.alphavantage.co")],
+ ["Plg", "Polygon.io", _crUrl("polygon.io")],
  ["Eurostat", _crUrl("ec.europa.eu/eurostat/")],
  ["UnComtrade", "UN Comtrade", _crUrl("comtrade.un.org")],
  ["WorldBank","World Bank", _crUrl("data.worldbank.org")],
