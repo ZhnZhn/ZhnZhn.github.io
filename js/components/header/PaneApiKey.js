@@ -14,7 +14,7 @@ var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from 'prop-types'
 
-const MAX_KEY = 10;
+const MAX_KEY = 11;
 const S_SCROLL_PANE = {
     overflowY: 'auto',
     maxHeight: 360,
@@ -29,7 +29,7 @@ const S_SCROLL_PANE = {
   S_BT_SET = {
     margin: '0 2px'
   };
-const CONF_SM_ARR = [["AV", "alpha-vantage", "Alpha Vantage"], ["FMP", "fmp", "Financial Modeling Prep", "32"], ["Intrinio", "intrinio", "Intrinio", "32"], ["Twelve", "twelve", "Twelve Data"]];
+const CONF_SM_ARR = [["AV", "alpha-vantage", "Alpha Vantage"], ["FMP", "fmp", "Financial Modeling Prep", "32"], ["Intrinio", "intrinio", "Intrinio", "32"], ["Twelve", "twelve", "Twelve Data"], ["PLG", "polygon-io", "Polygon.io"]];
 const CONF_EC_ARR = [["NDL", "nasdaq-data-link", "Nasdaq Data Link"], ["WTO", "wto", "WTO", "32"]];
 const CONF_EC_USA_ARR = [["BEA", "bea", "BEA", "36"], ["BLS", "bls", "BLS", "32"], ["EIA", "eia", "EIA", "32"]];
 const _crPwdItem = (item, index, _ref) => {
@@ -92,6 +92,7 @@ class PaneApiKey extends _uiApi.Component {
   _ref8 = n => this.iComp8 = n;
   _ref9 = n => this.iComp9 = n;
   _ref10 = n => this.iComp10 = n;
+  _ref11 = n => this.iComp11 = n;
   render() {
     const {
       isVisible,

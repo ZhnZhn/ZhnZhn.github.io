@@ -9,7 +9,7 @@ import FlatButton from '../zhn-m/FlatButton'
 import RowSecret from '../dialogs/RowSecret'
 import RowButtons from './RowButtons'
 
-const MAX_KEY = 10;
+const MAX_KEY = 11;
 
 const S_SCROLL_PANE = {
   overflowY: 'auto',
@@ -24,7 +24,8 @@ const CONF_SM_ARR = [
   ["AV", "alpha-vantage", "Alpha Vantage"],
   ["FMP","fmp","Financial Modeling Prep","32"],
   ["Intrinio","intrinio","Intrinio","32"],
-  ["Twelve", "twelve", "Twelve Data"]
+  ["Twelve", "twelve", "Twelve Data"],
+  ["PLG", "polygon-io", "Polygon.io"]
 ];
 
 const CONF_EC_ARR = [
@@ -106,6 +107,7 @@ class PaneApiKey extends Component {
   _ref8 = n => this.iComp8 = n
   _ref9 = n => this.iComp9 = n
   _ref10 = n => this.iComp10 = n
+  _ref11 = n => this.iComp11 = n
 
   render(){
     const {

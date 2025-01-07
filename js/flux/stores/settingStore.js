@@ -8,7 +8,7 @@ var _storeApi = require("../storeApi");
 var _LoadType = require("../../constants/LoadType");
 const _createObject = () => Object.create(null),
   _assign = Object.assign;
-const _withApiKey = [_LoadType.LT_Q, _LoadType.LT_AV, _LoadType.LT_AV_BLCH, _LoadType.LT_AV_ECON, _LoadType.LT_FMP, _LoadType.LT_INTR, _LoadType.LT_TW, _LoadType.LT_BEA, _LoadType.LT_EIA, _LoadType.LT_WT];
+const _withApiKey = [_LoadType.LT_Q, _LoadType.LT_AV, _LoadType.LT_AV_BLCH, _LoadType.LT_AV_ECON, _LoadType.LT_FMP, _LoadType.LT_INTR, _LoadType.LT_TW, _LoadType.LT_PLG, _LoadType.LT_BEA, _LoadType.LT_EIA, _LoadType.LT_WT];
 const _withProxyServer = [_LoadType.LT_BIS, _LoadType.LT_ECB, _LoadType.LT_SNB, _LoadType.LT_Q, _LoadType.LT_UN, _LoadType.LT_BB, _LoadType.LT_WT];
 const _withProxyServer2 = [..._withProxyServer, _LoadType.LT_CR, _LoadType.LT_BF, _LoadType.LT_KR, _LoadType.LT_KC, _LoadType.LT_GT, _LoadType.LT_HT, _LoadType.LT_KX];
 const ALPHA_VANTAGE = 'Alpha Vantage';
@@ -22,6 +22,7 @@ const _apiTitle = {
   [_LoadType.LT_FMP]: 'FMP',
   [_LoadType.LT_INTR]: 'Intrinio',
   [_LoadType.LT_TW]: 'Twelve Data',
+  [_LoadType.LT_PLG]: 'Polygon.io',
   [_LoadType.LT_WT]: 'WTO',
   [_LoadType.LT_CRC]: 'CryptoCompare Information'
 };
@@ -114,6 +115,7 @@ const exportSettingFn = () => ({
   key7: _fSetKey(_LoadType.LT_FMP),
   key8: _fSetKey(_LoadType.LT_INTR),
   key9: _fSetKey(_LoadType.LT_TW),
+  key10: _fSetKey(_LoadType.LT_PLG),
   setProxy: _setProxy,
   getProxy,
   [PN_IS_ADMIN_MODE]: isAdminMode,
