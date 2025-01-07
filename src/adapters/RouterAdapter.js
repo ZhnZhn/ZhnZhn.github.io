@@ -12,6 +12,7 @@ import {
   LT_EN,
   LT_FMP,
   LT_TW,
+  LT_PLG,
   LT_EU_STAT,
   LT_FS,
   LT_UKS,
@@ -70,6 +71,7 @@ import StatSwiss from './stat-swiss/StatSwiss'
 
 import Fmp from './fmp/Fmp'
 import Tw from './twelve/Tw'
+import Plg from './plg/Plg'
 import Bea from './bea/Bea'
 import Bls from './bls/Bls'
 import Eia from './eia/Eia'
@@ -139,6 +141,7 @@ const RouterAdapter = {
 
   [LT_FMP]: Fmp,
   [LT_TW]: Tw,
+  [LT_PLG]: Plg,
 
   [LT_BEA]: Bea,
   [LT_BLS]: Bls,

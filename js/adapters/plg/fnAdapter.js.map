@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/plg/fnAdapter.js"
+ ],
+ "file": "../../../src/adapters/plg/fnAdapter.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "crAddConfig",
+  "_ref",
+  "option",
+  "zhConfig",
+  "crZhConfig",
+  "exports"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAEO,MAAMC,WAAW,GAAGC,IAAA;EAAA,IAAC;IAC1BC;EACF,CAAC,GAAAD,IAAA;EAAA,OAAM;IACLE,QAAQ,EAAE,IAAAC,qBAAU,EAACF,MAAM;EAC7B,CAAC;AAAA,CAAC;AAAAG,OAAA,CAAAL,WAAA,GAAAA,WAAA"
+}

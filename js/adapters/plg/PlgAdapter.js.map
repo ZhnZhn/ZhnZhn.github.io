@@ -1,0 +1,37 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/plg/PlgAdapter.js"
+ ],
+ "file": "../../../src/adapters/plg/PlgAdapter.js",
+ "names": [
+  "_crAdapterOHLCV",
+  "_interopRequireDefault",
+  "require",
+  "_fnAdapter",
+  "_getData",
+  "_ref",
+  "results",
+  "map",
+  "_ref2",
+  "t",
+  "v",
+  "l",
+  "h",
+  "c",
+  "o",
+  "date",
+  "volume",
+  "low",
+  "high",
+  "open",
+  "close",
+  "PlgAdapter",
+  "exports",
+  "crAdapterOHLCV",
+  "getArr",
+  "crAddConfig",
+  "toDate"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,eAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,UAAA,GAAAD,OAAA;AAKA,MAAME,QAAQ,GAAGC,IAAA;EAAA,IAAC;IAAEC;EAAQ,CAAC,GAAAD,IAAA;EAAA,OAAKC,OAAO,CACtCC,GAAG,CAACC,KAAA;IAAA,IAAC;MAAEC,CAAC;MAAEC,CAAC;MAAEC,CAAC;MAAEC,CAAC;MAAEC,CAAC;MAAEC;IAAE,CAAC,GAAAN,KAAA;IAAA,OAAM;MAC7BO,IAAI,EAAEN,CAAC;MACPO,MAAM,EAAEN,CAAC;MACTO,GAAG,EAAEN,CAAC;MACNO,IAAI,EAAEN,CAAC;MACPO,IAAI,EAAEL,CAAC;MACPM,KAAK,EAAEP;IACV,CAAC;EAAA,CAAC,CAAC;AAAA;AAEE,MAAMQ,UAAU,GAAAC,OAAA,CAAAD,UAAA,GAAG,IAAAE,uBAAc,EAAC;EACvC;EACAC,MAAM,EAAEpB,QAAQ;EAChBqB,WAAW,EAAXA,sBAAW;EACXC,MAAM,EAAEjB,CAAC,IAAIA;AACf,CAAC,CAAC"
+}

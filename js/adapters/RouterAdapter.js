@@ -18,6 +18,7 @@ var _StatIreland = _interopRequireDefault(require("./stat-ireland/StatIreland"))
 var _StatSwiss = _interopRequireDefault(require("./stat-swiss/StatSwiss"));
 var _Fmp = _interopRequireDefault(require("./fmp/Fmp"));
 var _Tw = _interopRequireDefault(require("./twelve/Tw"));
+var _Plg = _interopRequireDefault(require("./plg/Plg"));
 var _Bea = _interopRequireDefault(require("./bea/Bea"));
 var _Bls = _interopRequireDefault(require("./bls/Bls"));
 var _Eia = _interopRequireDefault(require("./eia/Eia"));
@@ -79,6 +80,7 @@ const RouterAdapter = {
   [_LoadType.LT_FSO]: _StatSwiss.default,
   [_LoadType.LT_FMP]: _Fmp.default,
   [_LoadType.LT_TW]: _Tw.default,
+  [_LoadType.LT_PLG]: _Plg.default,
   [_LoadType.LT_BEA]: _Bea.default,
   [_LoadType.LT_BLS]: _Bls.default,
   [_LoadType.LT_EIA]: _Eia.default,
