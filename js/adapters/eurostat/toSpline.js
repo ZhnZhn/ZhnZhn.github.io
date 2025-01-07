@@ -3,16 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.crSplineSeria = exports.crSplineConfig = void 0;
+var _ChartType = require("../../constants/ChartType");
 var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 var _ChartConfigFn = require("../../charts/ChartConfigFn");
 var _EuroStatFn = require("./EuroStatFn");
-const DF_SERIA_TYPE = 'spline';
-const _crSeriaType = function (option, dfSeriaType) {
-  if (dfSeriaType === void 0) {
-    dfSeriaType = DF_SERIA_TYPE;
-  }
-  return (option.seriaType || dfSeriaType).toLowerCase();
-};
+const _crSeriaType = option => option.seriaType || _ChartType.CHT_SPLINE;
 const crSplineConfig = (json, option) => {
   const [data, minY, maxY] = (0, _EuroStatFn.crData)(json, option);
   option.seriaType = _crSeriaType(option);

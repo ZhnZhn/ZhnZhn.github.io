@@ -1,19 +1,17 @@
+import { CHT_SPLINE } from '../../constants/ChartType';
+
 import crConfigType1 from '../../charts/crConfigType1';
-import {
-  crSeriaConfig
-} from '../../charts/ChartConfigFn';
+import { crSeriaConfig } from '../../charts/ChartConfigFn';
+
 import {
   crData,
   crZhConfig,
   crDatasetInfo
 } from './EuroStatFn';
 
-const DF_SERIA_TYPE = 'spline';
 const _crSeriaType = (
-  option,
-  dfSeriaType=DF_SERIA_TYPE
-) => (option.seriaType || dfSeriaType)
-   .toLowerCase();
+  option
+) => option.seriaType || CHT_SPLINE;
 
 export const crSplineConfig = (
   json,
