@@ -19,11 +19,6 @@ var _seriaBuilderHelpers = require("./seriaBuilderHelpers");
 var _configBuilderHelpers = require("./configBuilderHelpers");
 const _isArr = Array.isArray,
   _assign = Object.assign;
-const setDataSourceTo = (config, dataSource) => {
-  config.zhConfig.dataSource = dataSource;
-  return config;
-};
-exports.setDataSourceTo = setDataSourceTo;
 const fAddCaption = (title, subtitle) => config => {
   config.title = (0, _Chart.fTitle)({
     text: title || subtitle
@@ -48,10 +43,13 @@ const fAdd = (propName, option) => config => {
   return config;
 };
 exports.fAdd = fAdd;
-const fAddTooltip = tooltip => config => {
-  config.tooltip = (0, _Chart.fTooltip)(tooltip);
-  return config;
-};
+const setDataSourceTo = (config, dataSource) => fAdd({
+  zhConfig: {
+    dataSource
+  }
+})(config);
+exports.setDataSourceTo = setDataSourceTo;
+const fAddTooltip = tooltip => config => fAdd('tooltip', (0, _Chart.fTooltip)(tooltip))(config);
 exports.fAddTooltip = fAddTooltip;
 const fAddLegend = legend => config => (0, _isTypeFn.isNotEmptyArr)(legend) ? fAdd('zhConfig', {
   legend

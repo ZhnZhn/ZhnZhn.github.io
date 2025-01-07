@@ -62,14 +62,6 @@ import {
 const _isArr = Array.isArray
 , _assign = Object.assign;
 
-export const setDataSourceTo = (
-  config,
-  dataSource
-) => {
-  config.zhConfig.dataSource = dataSource
-  return config;
-}
-
 export const fAddCaption = (
   title,
   subtitle
@@ -96,12 +88,14 @@ export const fAdd = (
   return config;
 }
 
+export const setDataSourceTo = (
+  config,
+  dataSource
+) => fAdd({zhConfig: { dataSource }})(config)
+
 export const fAddTooltip = (
   tooltip
-) => config => {
-  config.tooltip = fTooltip(tooltip)
-  return config;
-}
+) => config => fAdd('tooltip', fTooltip(tooltip))(config)
 
 export const fAddLegend = (
   legend

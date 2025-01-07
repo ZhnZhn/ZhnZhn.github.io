@@ -6,18 +6,22 @@
 
 import {
   fAddCaption,
-  fAdd
+  fAdd,
+  setDataSourceTo
 } from '../configBuilderFn';
 
 describe('fAddCaption',()=>{
   const fn = fAddCaption;
   test('should add caption', ()=>{
     const title = 'title'
-    , subtitle = 'subtitle'
-    , config = fn(title, subtitle)({});
+    , subtitle = 'subtitle';
 
-    expect(config.title.text).toBe(title)
-    expect(config.subtitle.text).toBe(subtitle)
+    const config1 = fn(title, subtitle)({});
+    expect(config1.title.text).toBe(title)
+    expect(config1.subtitle.text).toBe(subtitle)
+
+    const config2 = fn('', subtitle)({});
+    expect(config2.title.text).toBe(subtitle)
   })
 
   // <7.2.2 || >=8.0.0 <8.1.1
@@ -42,17 +46,18 @@ describe('fAdd', ()=>{
       'abc', {a: 'a', b: 'b'}
     )({});
 
-    expect(config.abc.a).toBe('a')
-    expect(config.abc.b).toBe('b')
+    expect(config).toEqual({
+      abc: {a: 'a', b: 'b'}
+    })
   })
   test('should add option by propName, value', () =>{
     const config = fn(
       'abc', {a: 'a', b: 'b'}
     )({abc: {a: 1, b: 2, c: 3}});
 
-    expect(config.abc.a).toBe('a')
-    expect(config.abc.b).toBe('b')
-    expect(config.abc.c).toBe(3)
+    expect(config).toEqual({
+      abc: {a: 'a', b: 'b', c: 3}
+    })
   })
 
   test('should add options by obj with new propName-value', ()=>{
@@ -61,8 +66,10 @@ describe('fAdd', ()=>{
       b: {bb: 'bb'}
     })({});
 
-    expect(config.a.aa).toBe('aa')
-    expect(config.b.bb).toBe('bb')
+    expect(config).toEqual({
+      a: {aa: 'aa'},
+      b: {bb: 'bb'}
+    })
   })
   test('should add by option obj with propName-value', ()=>{
     const config = fn({
@@ -74,45 +81,81 @@ describe('fAdd', ()=>{
       c: {cc: 33, c: 'c'}
     });
 
-    expect(config.a.aa).toBe('aa')
-    expect(config.a.a).toBe('a')
-
-    expect(config.b.bb).toBe('bb')
-    expect(config.b.b).toBe('b')
-
-    expect(config.c.cc).toBe(33)
-    expect(config.c.c).toBe('c')
+    expect(config).toEqual({
+      a: {aa: 'aa', a: 'a'},
+      b: {bb: 'bb', b: 'b'},
+      c: {cc: 33, c: 'c'}
+    })
   })
   test('should add by option obj array, string, number, boolean values', ()=>{
-     const data = ['a']
-     , str = 'str'
-     , bool = true
-     , n=10
-     , config = fn({
-       a: data,
-       b: str,
-       c: bool,
-       d: n
+     const config = fn({
+       a: ['a'],
+       b: 'str',
+       c: true,
+       d: 10
      })({});
 
-     expect(config.a).toEqual(data)
-     expect(config.b).toBe(str)
-     expect(config.c).toBe(bool)
-     expect(config.d).toBe(n)
+     expect(config).toEqual({
+       a: ['a'],
+       b: 'str',
+       c: true,
+       d: 10
+     })
   })
   test('should add array, string, number, boolean values', ()=>{
      const data = ['a']
      , str = 'str'
      , bool = true
-     , n=10
-     , config1 = fn('a', data)({})
-     , config2 = fn('b', str)(config1)
-     , config3 = fn('c', bool)(config2)
-     , config = fn('d', n)(config3)
+     , n=10;
 
-     expect(config.a).toEqual(data)
-     expect(config.b).toBe(str)
-     expect(config.c).toBe(bool)
-     expect(config.d).toBe(n)
+     const config1 = fn('a', data)({});
+     expect(config1).toEqual({
+       a: ['a']
+     })
+
+     const config2 = fn('b', str)(config1);
+     expect(config2).toEqual({
+       a: ['a'],
+       b: 'str'
+     })
+
+     const config3 = fn('c', bool)(config2);
+     expect(config3).toEqual({
+       a: ['a'],
+       b: 'str',
+       c: true
+     })
+
+     const config = fn('d', n)(config3);
+     expect(config).toEqual({
+       a: ['a'],
+       b: 'str',
+       c: true,
+       d: 10
+     })
+  })
+})
+
+describe('setDataSourceTo', ()=>{
+  const fn = setDataSourceTo;
+  test('should set zhConfig dataSource to config', ()=>{
+    const config1 = fn({}, 'DataProvider')
+    expect(config1).toEqual({
+      zhConfig: { dataSource: 'DataProvider'}
+    })
+
+    const config2 = fn({zhConfig: {_itemKey: 'itenKey'}}, 'DataProvider');
+    expect(config2).toEqual({
+      zhConfig: {
+        _itemKey: 'itenKey',
+        dataSource: 'DataProvider'
+      }
+    })
+
+    const config3 = fn({zhConfig: { dataSource: 'ds'}}, 'DataProvider');
+    expect(config3).toEqual({
+      zhConfig: { dataSource: 'DataProvider' }
+    })
+
   })
 })
