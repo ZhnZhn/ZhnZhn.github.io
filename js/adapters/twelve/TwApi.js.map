@@ -5,7 +5,7 @@
  ],
  "file": "../../../src/adapters/twelve/TwApi.js",
  "names": [
-  "_fnAdapter",
+  "_AdapterFn",
   "require",
   "URL",
   "QUERY_TAIL",

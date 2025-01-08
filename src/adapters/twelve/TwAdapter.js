@@ -1,23 +1,23 @@
-import crAdapterOHLCV  from '../crAdapterOHLCV';
-import {
-  crAddConfig,
+import { ymdhmsToUTC } from '../AdapterFn';
+import { fToKline } from '../fToKline';
+
+import { crCaption } from './fnAdapter';
+
+const _crNumber = str => parseFloat(str);
+
+const TwAdapter = fToKline({
+  isAth: true,
+  getData: json => json.values,
+  d: 'datetime',
+  v: 'volume',
+  l: 'low',
+  h: 'high',
+  c: 'close',
+  o: 'open',
+  crDate: ymdhmsToUTC,
+  crValue: _crNumber,
+  crVolume: _crNumber,
   crCaption
-} from './fnAdapter';
-
-const _getData = ({ values }) => values
-  .map(({ datetime, volume, low, high, close, open }) => ({
-     date: datetime,
-     volume: parseFloat(volume),
-     low: parseFloat(low),
-     high: parseFloat(high),
-     open: parseFloat(open),
-     close: parseFloat(close)
-  }));
-
-const TwAdapter = crAdapterOHLCV({
-  crCaption,
-  getArr: _getData,
-  crAddConfig
 });
 
 export default TwAdapter

@@ -1,7 +1,7 @@
 import {
   getValue,
   crError
-} from './fnAdapter';
+} from '../AdapterFn';
 
 const URL = 'https://api.twelvedata.com'
 , QUERY_TAIL = 'dp=2&order=ASC&timezone=UTC';

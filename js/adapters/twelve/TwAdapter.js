@@ -1,43 +1,24 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
-var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
-
+var _AdapterFn = require("../AdapterFn");
+var _fToKline = require("../fToKline");
 var _fnAdapter = require("./fnAdapter");
-
-const _getData = _ref => {
-  let {
-    values
-  } = _ref;
-  return values.map(_ref2 => {
-    let {
-      datetime,
-      volume,
-      low,
-      high,
-      close,
-      open
-    } = _ref2;
-    return {
-      date: datetime,
-      volume: parseFloat(volume),
-      low: parseFloat(low),
-      high: parseFloat(high),
-      open: parseFloat(open),
-      close: parseFloat(close)
-    };
-  });
-};
-
-const TwAdapter = (0, _crAdapterOHLCV.default)({
-  crCaption: _fnAdapter.crCaption,
-  getArr: _getData,
-  crAddConfig: _fnAdapter.crAddConfig
+const _crNumber = str => parseFloat(str);
+const TwAdapter = (0, _fToKline.fToKline)({
+  isAth: true,
+  getData: json => json.values,
+  d: 'datetime',
+  v: 'volume',
+  l: 'low',
+  h: 'high',
+  c: 'close',
+  o: 'open',
+  crDate: _AdapterFn.ymdhmsToUTC,
+  crValue: _crNumber,
+  crVolume: _crNumber,
+  crCaption: _fnAdapter.crCaption
 });
-var _default = TwAdapter;
-exports.default = _default;
+var _default = exports.default = TwAdapter;
 //# sourceMappingURL=TwAdapter.js.map

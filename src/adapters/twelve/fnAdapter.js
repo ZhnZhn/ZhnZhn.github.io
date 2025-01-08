@@ -1,14 +1,4 @@
-export {
-  getValue,
-  crError
-} from '../AdapterFn';
-
-import {
-  crZhConfig,
-  joinBy
-} from '../AdapterFn';
-
-const _joinBy = joinBy.bind(null, ': ');
+import { joinBy } from '../AdapterFn';
 
 export const crCaption = (
   option,
@@ -21,12 +11,6 @@ export const crCaption = (
     currency
   } = meta || {};
   return {
-    title: _joinBy(exchange, symbol, type, currency)
+    title: joinBy(": ", exchange, symbol, type, currency)
   };
 }
-
-export const crAddConfig = ({
-  option
-}) => ({
-  zhConfig: crZhConfig(option)
-})
