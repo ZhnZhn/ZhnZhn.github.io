@@ -10,8 +10,8 @@ import crAdapterOHLCV from './crAdapterOHLCV';
 
 const _fCrAddConfig = (
   crAddConfig=FN_NOOP
-) => ({ option }) => ({
-  ...crAddConfig(option),
+) => ({ option, json }) => ({
+  ...crAddConfig(option, json),
   zhConfig: crZhConfig(option)
 })
 , _compareByDate = (a, b) => a.date - b.date
@@ -24,19 +24,20 @@ const _fCrAddConfig = (
   v=5,
   crDate=FN_IDENTITY,
   crValue=FN_IDENTITY,
-  crVolume=FN_IDENTITY
+  crVolume=FN_IDENTITY,
+  getData=FN_IDENTITY
 }) => (json, option) => {
   try {
-    const _data = json.reduce((data, arrItem) => {
-      const date = crDate(arrItem[d]);
+    const _data = getData(json).reduce((data, item) => {
+      const date = crDate(item[d]);
       if (isTypeNumber(date)) {
         data.push({
            date,
-           open: crValue(arrItem[o]),
-           high: crValue(arrItem[h]),
-           low: crValue(arrItem[l]),
-           close: crValue(arrItem[c]),
-           volume: crVolume(arrItem[v])
+           open: crValue(item[o]),
+           high: crValue(item[h]),
+           low: crValue(item[l]),
+           close: crValue(item[c]),
+           volume: crVolume(item[v])
          })
       }
       return data;
@@ -60,7 +61,7 @@ export const crOptionsFromStr = (
 }
 
 export const fToKline = (options) => crAdapterOHLCV({
-  isAth: false,
+  isAth: options.isAth || false,
   isVolume: !options.isNotVolume,
   getArr: options.getArr || _fCrDataOHLCV(options),
   toDate: FN_IDENTITY,

@@ -11,10 +11,11 @@ const _fCrAddConfig = function (crAddConfig) {
     }
     return _ref => {
       let {
-        option
+        option,
+        json
       } = _ref;
       return {
-        ...crAddConfig(option),
+        ...crAddConfig(option, json),
         zhConfig: (0, _AdapterFn.crZhConfig)(option)
       };
     };
@@ -30,20 +31,21 @@ const _fCrAddConfig = function (crAddConfig) {
       v = 5,
       crDate = _AdapterFn.FN_IDENTITY,
       crValue = _AdapterFn.FN_IDENTITY,
-      crVolume = _AdapterFn.FN_IDENTITY
+      crVolume = _AdapterFn.FN_IDENTITY,
+      getData = _AdapterFn.FN_IDENTITY
     } = _ref2;
     return (json, option) => {
       try {
-        const _data = json.reduce((data, arrItem) => {
-          const date = crDate(arrItem[d]);
+        const _data = getData(json).reduce((data, item) => {
+          const date = crDate(item[d]);
           if ((0, _AdapterFn.isTypeNumber)(date)) {
             data.push({
               date,
-              open: crValue(arrItem[o]),
-              high: crValue(arrItem[h]),
-              low: crValue(arrItem[l]),
-              close: crValue(arrItem[c]),
-              volume: crVolume(arrItem[v])
+              open: crValue(item[o]),
+              high: crValue(item[h]),
+              low: crValue(item[l]),
+              close: crValue(item[c]),
+              volume: crVolume(item[v])
             });
           }
           return data;
@@ -68,7 +70,7 @@ const crOptionsFromStr = function (isSeconds) {
 };
 exports.crOptionsFromStr = crOptionsFromStr;
 const fToKline = options => (0, _crAdapterOHLCV.default)({
-  isAth: false,
+  isAth: options.isAth || false,
   isVolume: !options.isNotVolume,
   getArr: options.getArr || _fCrDataOHLCV(options),
   toDate: _AdapterFn.FN_IDENTITY,
