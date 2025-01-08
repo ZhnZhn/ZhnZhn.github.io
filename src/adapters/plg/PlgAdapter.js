@@ -1,22 +1,12 @@
-import crAdapterOHLCV  from '../crAdapterOHLCV';
-import {
-  crAddConfig,
-  //crCaption
-} from './fnAdapter';
+import { fToKline } from '../fToKline';
 
-const _getData = ({ results }) => results
-  .map(({ t, v, l, h, c, o }) => ({
-     date: t,
-     volume: v,
-     low: l,
-     high: h,
-     open: o,
-     close: c
-  }));
-
-export const PlgAdapter = crAdapterOHLCV({
-  //crCaption,
-  getArr: _getData,
-  crAddConfig,
-  toDate: t => t
+export const PlgAdapter = fToKline({
+  isAth: true,
+  getData: json => json.results,
+  d: 't',
+  v: 'v',
+  l: 'l',
+  h: 'h',
+  c: 'c',
+  o: 'o'
 })
