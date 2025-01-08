@@ -134,10 +134,11 @@ export const toTimeDate = (
 
 const _getDataDf = json => (json || {}).data
 export const fCheckResponse = (
-  getData=_getDataDf
+  getData=_getDataDf,
+  getErrMsg=FN_NOOP
 ) => json => {
   if ( !isArr(getData(json)) ) {
-    throw crError();
+    throw crError('', getErrMsg(json));
   }
 }
 

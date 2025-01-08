@@ -102,13 +102,16 @@ exports.crErrorByMessage = crErrorByMessage;
 const toTimeDate = strDateOr => (0, _isTypeFn.isStr)(strDateOr) && strDateOr ? `${strDateOr.slice(11, 19)} ${strDateOr.slice(8, 10)}-${strDateOr.slice(5, 7)}-${strDateOr.slice(0, 4)}` : "";
 exports.toTimeDate = toTimeDate;
 const _getDataDf = json => (json || {}).data;
-const fCheckResponse = function (getData) {
+const fCheckResponse = function (getData, getErrMsg) {
   if (getData === void 0) {
     getData = _getDataDf;
   }
+  if (getErrMsg === void 0) {
+    getErrMsg = FN_NOOP;
+  }
   return json => {
     if (!(0, _isTypeFn.isArr)(getData(json))) {
-      throw crError();
+      throw crError('', getErrMsg(json));
     }
   };
 };
