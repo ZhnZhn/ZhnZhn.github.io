@@ -1,1 +1,26 @@
-{"version":3,"sources":["../../../src/adapters/fmp/toHistorical.js"],"names":["_getData","json","dfPn","reverse","toChart","crCaption","getArr","crAddConfig","crHistOption"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,MAAMA,QAAQ,GAAG,CACfC,IADe;AAAA,MAEf;AAAEC,IAAAA;AAAF,GAFe;AAAA,SAGZ,CAACD,IAAI,CAACC,IAAD,CAAJ,IAAcD,IAAf,EAAqBE,OAArB,EAHY;AAAA,CAAjB;;AAKA,MAAMC,OAAO,GAAG,6BAAe;AAC7BC,EAAAA,SAAS,EAATA,oBAD6B;AAE7BC,EAAAA,MAAM,EAAEN,QAFqB;AAG7BO,EAAAA,WAAW,EAAEC;AAHgB,CAAf,CAAhB;eAMeJ,O","sourcesContent":["import { crCaption, crHistOption } from './fnAdapter';\r\nimport crAdapterOHLCV  from '../crAdapterOHLCV';\r\n\r\nconst _getData = (\r\n  json,\r\n  { dfPn }\r\n) => (json[dfPn] || json).reverse();\r\n\r\nconst toChart = crAdapterOHLCV({\r\n  crCaption,\r\n  getArr: _getData,\r\n  crAddConfig: crHistOption\r\n})\r\n\r\nexport default toChart\r\n"],"file":"toHistorical.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/fmp/toHistorical.js"
+ ],
+ "file": "../../../src/adapters/fmp/toHistorical.js",
+ "names": [
+  "_fToKline",
+  "require",
+  "_fnAdapter",
+  "_getData",
+  "json",
+  "_ref",
+  "dfPn",
+  "reverse",
+  "toHistorical",
+  "fToKline",
+  "klineOptions",
+  "getData",
+  "c",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,SAAA,GAAAC,OAAA;AACA,IAAAC,UAAA,GAAAD,OAAA;AAEA,MAAME,QAAQ,GAAGA,CACfC,IAAI,EAAAC,IAAA;EAAA,IACJ;IAAEC;EAAK,CAAC,GAAAD,IAAA;EAAA,OACLD,IAAI,CAACE,IAAI,CAAC,CAACC,OAAO,CAAC,CAAC;AAAA;AAEzB,MAAMC,YAAY,GAAG,IAAAC,kBAAQ,EAAC;EAC5B,GAAGC,uBAAY;EACfC,OAAO,EAAER,QAAQ;EACjBS,CAAC,EAAE;AACL,CAAC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYP,YAAY"
+}

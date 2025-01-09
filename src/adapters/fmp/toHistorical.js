@@ -1,15 +1,15 @@
-import { crCaption, crHistOption } from './fnAdapter';
-import crAdapterOHLCV  from '../crAdapterOHLCV';
+import { fToKline } from '../fToKline';
+import { klineOptions } from './fnAdapter';
 
 const _getData = (
   json,
   { dfPn }
-) => (json[dfPn] || json).reverse();
+) => json[dfPn].reverse();
 
-const toChart = crAdapterOHLCV({
-  crCaption,
-  getArr: _getData,
-  crAddConfig: crHistOption
-})
+const toHistorical = fToKline({
+  ...klineOptions,
+  getData: _getData,
+  c: 'adjClose'
+});
 
-export default toChart
+export default toHistorical

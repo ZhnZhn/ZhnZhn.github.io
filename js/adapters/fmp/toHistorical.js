@@ -1,26 +1,19 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
+var _fToKline = require("../fToKline");
 var _fnAdapter = require("./fnAdapter");
-
-var _crAdapterOHLCV = _interopRequireDefault(require("../crAdapterOHLCV"));
-
 const _getData = (json, _ref) => {
   let {
     dfPn
   } = _ref;
-  return (json[dfPn] || json).reverse();
+  return json[dfPn].reverse();
 };
-
-const toChart = (0, _crAdapterOHLCV.default)({
-  crCaption: _fnAdapter.crCaption,
-  getArr: _getData,
-  crAddConfig: _fnAdapter.crHistOption
+const toHistorical = (0, _fToKline.fToKline)({
+  ..._fnAdapter.klineOptions,
+  getData: _getData,
+  c: 'adjClose'
 });
-var _default = toChart;
-exports.default = _default;
+var _default = exports.default = toHistorical;
 //# sourceMappingURL=toHistorical.js.map
