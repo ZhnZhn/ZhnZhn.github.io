@@ -36,7 +36,7 @@ const _fCrAddConfig = function (crAddConfig) {
     } = _ref2;
     return (json, option) => {
       try {
-        const _data = getData(json).reduce((data, item) => {
+        const _data = getData(json, option).reduce((data, item) => {
           const date = crDate(item[d]);
           if ((0, _AdapterFn.isTypeNumber)(date)) {
             data.push({
