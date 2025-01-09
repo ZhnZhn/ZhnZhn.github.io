@@ -1,13 +1,13 @@
 import {
-  _assign,
+  isArr,
+  assign,
   getCaption,
   getValue,
   crError,
   getFromDate
-} from './fnAdapter';
+} from '../AdapterFn';
 
 const URI = 'https://financialmodelingprep.com/api/v3';
-const _isArr = Array.isArray
 
 const _crDataSource = ({
   dataSource,
@@ -37,7 +37,7 @@ const _assignDf = option => {
       : ''
   , _itemUrl = `${URI}/${dfT}/${_symbol}?${_query}`;
 
-  _assign(option, {
+  assign(option, {
     _symbol,
     _itemUrl, _period,
     _propName,
@@ -48,17 +48,18 @@ const _assignDf = option => {
 
 const _assignHp = option => {
   const {
-     dfT, items=[], fromDate
+     dfT,
+     items=[],
+     fromDate
   } = option
   , _fromDate = fromDate || getFromDate(3)
   , _symbol = getValue(items[0], {isUpper: true})
   //, _itemUrl = `${C.URI}/${dfT}/${_symbol}?from=${_fromDate}&serietype=line`;
   , _itemUrl = `${URI}/${dfT}/${_symbol}?from=${_fromDate}`;
 
-  _assign(option, {
+  assign(option, {
     _symbol,
     _itemUrl,
-    _propName: 'close',
     itemCaption: _symbol,
     dataSource: _crDataSource(option)
   })
@@ -66,16 +67,16 @@ const _assignHp = option => {
 
 const _assignCp = option => {
   const {
-     dfT, items=[]
+     dfT,
+     items=[]
   } = option
   , _symbol = getValue(items[0], {isUpper: true})
   , _interval = getValue(items[1])
   , _itemUrl = `${URI}/${dfT}/${_interval}/${_symbol}`;
 
-  _assign(option, {
+  assign(option, {
     _symbol,
     _itemUrl,
-    _propName: 'close',
     itemCaption: _symbol,
     dataSource: _crDataSource(option)
   })
@@ -92,19 +93,22 @@ const FmpApi = {
     const _assignTo = _rAssign[option.dfPn]
       || _rAssign.DF;
     _assignTo(option)
+
     const { apiKey } = option
     , _delimeter = option._itemUrl.indexOf('?') === -1
          ? '?' : '&';
+
+    option.apiKey = null;
     return `${option._itemUrl}${_delimeter}apikey=${apiKey}`;
   },
 
   checkResponse(json, options){
     const { dfPn, _symbol } = options
     , _json = json || {};
-    if (!dfPn && _isArr(json) && _json[0].symbol === _symbol
-     || dfPn === 'intraday' && _isArr(_json)
-     || _isArr(_json[dfPn]) && _json.symbol === _symbol) {
-       return json;
+    if (!dfPn && isArr(json) && _json[0].symbol === _symbol
+     || dfPn === 'intraday' && isArr(_json)
+     || isArr(_json[dfPn]) && _json.symbol === _symbol) {
+       return;
     }
     throw crError(_symbol, _json.Error);
   }

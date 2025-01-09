@@ -2,9 +2,8 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _fnAdapter = require("./fnAdapter");
+var _AdapterFn = require("../AdapterFn");
 const URI = 'https://financialmodelingprep.com/api/v3';
-const _isArr = Array.isArray;
 const _crDataSource = _ref => {
   let {
     dataSource,
@@ -15,7 +14,7 @@ const _crDataSource = _ref => {
 const REG_BLANKS = /\s/g;
 const _toLowerCamelCase = str => str[0].toLowerCase() + str.replace(REG_BLANKS, '').substring(1);
 const _crDfPropName = (item, dfT) => {
-  const _caption = (0, _fnAdapter.getCaption)(item);
+  const _caption = (0, _AdapterFn.getCaption)(item);
   return dfT !== "ratios" ? _caption : _toLowerCamelCase(_caption);
 };
 const _assignDf = option => {
@@ -24,14 +23,14 @@ const _assignDf = option => {
       items = []
     } = option,
     [it1, it2, it3] = items,
-    _symbol = (0, _fnAdapter.getValue)(it1, {
+    _symbol = (0, _AdapterFn.getValue)(it1, {
       isUpper: true
     }),
-    _period = (0, _fnAdapter.getValue)(it3),
+    _period = (0, _AdapterFn.getValue)(it3),
     _propName = _crDfPropName(it2, dfT),
     _query = _period ? `period=${_period}` : '',
     _itemUrl = `${URI}/${dfT}/${_symbol}?${_query}`;
-  (0, _fnAdapter._assign)(option, {
+  (0, _AdapterFn.assign)(option, {
     _symbol,
     _itemUrl,
     _period,
@@ -46,17 +45,16 @@ const _assignHp = option => {
       items = [],
       fromDate
     } = option,
-    _fromDate = fromDate || (0, _fnAdapter.getFromDate)(3),
-    _symbol = (0, _fnAdapter.getValue)(items[0], {
+    _fromDate = fromDate || (0, _AdapterFn.getFromDate)(3),
+    _symbol = (0, _AdapterFn.getValue)(items[0], {
       isUpper: true
     })
     //, _itemUrl = `${C.URI}/${dfT}/${_symbol}?from=${_fromDate}&serietype=line`;
     ,
     _itemUrl = `${URI}/${dfT}/${_symbol}?from=${_fromDate}`;
-  (0, _fnAdapter._assign)(option, {
+  (0, _AdapterFn.assign)(option, {
     _symbol,
     _itemUrl,
-    _propName: 'close',
     itemCaption: _symbol,
     dataSource: _crDataSource(option)
   });
@@ -66,15 +64,14 @@ const _assignCp = option => {
       dfT,
       items = []
     } = option,
-    _symbol = (0, _fnAdapter.getValue)(items[0], {
+    _symbol = (0, _AdapterFn.getValue)(items[0], {
       isUpper: true
     }),
-    _interval = (0, _fnAdapter.getValue)(items[1]),
+    _interval = (0, _AdapterFn.getValue)(items[1]),
     _itemUrl = `${URI}/${dfT}/${_interval}/${_symbol}`;
-  (0, _fnAdapter._assign)(option, {
+  (0, _AdapterFn.assign)(option, {
     _symbol,
     _itemUrl,
-    _propName: 'close',
     itemCaption: _symbol,
     dataSource: _crDataSource(option)
   });
@@ -92,6 +89,7 @@ const FmpApi = {
         apiKey
       } = option,
       _delimeter = option._itemUrl.indexOf('?') === -1 ? '?' : '&';
+    option.apiKey = null;
     return `${option._itemUrl}${_delimeter}apikey=${apiKey}`;
   },
   checkResponse(json, options) {
@@ -100,10 +98,10 @@ const FmpApi = {
         _symbol
       } = options,
       _json = json || {};
-    if (!dfPn && _isArr(json) && _json[0].symbol === _symbol || dfPn === 'intraday' && _isArr(_json) || _isArr(_json[dfPn]) && _json.symbol === _symbol) {
-      return json;
+    if (!dfPn && (0, _AdapterFn.isArr)(json) && _json[0].symbol === _symbol || dfPn === 'intraday' && (0, _AdapterFn.isArr)(_json) || (0, _AdapterFn.isArr)(_json[dfPn]) && _json.symbol === _symbol) {
+      return;
     }
-    throw (0, _fnAdapter.crError)(_symbol, _json.Error);
+    throw (0, _AdapterFn.crError)(_symbol, _json.Error);
   }
 };
 var _default = exports.default = FmpApi;
