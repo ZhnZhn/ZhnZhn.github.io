@@ -14,16 +14,6 @@ const CL_SLIDER_PAGES = "slider-pages"
   position: 'absolute',
   overflow: 'hidden'
 }
-/*
-, S_PAGES = {
-  display: 'flex',
-  flexFlow: 'row nowrap',
-  alignItems: 'flex-start',
-  overflowX: 'hidden',
-  transition: 'all 750ms ease-out'
-}
-*/
-
 , DF_INIT_ID = 'p0'
 , DF_MODEL = {
   pageWidth: 100,
@@ -55,13 +45,11 @@ const _addPage = (
 
 const _initState = model => {
   const _pW = model.pageWidth
-  , _maxP = model.maxPages
   , _initId = model.initId || DF_INIT_ID;
 
   return {
     addPage: bindTo(_addPage, model),
     pageWidth: _pW,
-    pagesStyle: _crWidthStyle(_maxP*_pW),
     pageStyle: _crWidthStyle(_pW),
     pageCurrent: 1,
     pages: [
@@ -102,7 +90,6 @@ const ModalSlider = ({
   )
   , {
      pageWidth,
-     pagesStyle,
      pageStyle,
      pageCurrent,
      pages
@@ -147,11 +134,11 @@ const ModalSlider = ({
     ...style,
     ...S_SHOW_HIDE,
     ...pageStyle
-  }, _divStyle = {
-    //...S_PAGES,
-    ...pagesStyle,
-    ..._crTransformStyle(pageWidth, pageCurrent)
-  };
+  }
+  , _divStyle = _crTransformStyle(
+     pageWidth,
+     pageCurrent
+  );
 
   return (
       <ModalPane

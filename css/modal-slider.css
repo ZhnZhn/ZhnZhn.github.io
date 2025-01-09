@@ -4,6 +4,7 @@
   flex-flow: row nowrap;
   align-items: flex-start;
   overflow-x: hidden;
+  width: fit-content;
   transition: .7s ease-out;
   will-change: transform;
 }
