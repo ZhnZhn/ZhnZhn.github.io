@@ -72,7 +72,7 @@ exports.crOptionsFromStr = crOptionsFromStr;
 const fToKline = options => (0, _crAdapterOHLCV.default)({
   isAth: options.isAth || false,
   isVolume: !options.isNotVolume,
-  getArr: options.getArr || _fCrDataOHLCV(options),
+  getArr: _fCrDataOHLCV(options),
   toDate: _AdapterFn.FN_IDENTITY,
   crCaption: options.crCaption,
   crAddConfig: _fCrAddConfig(options.crAddConfig)
