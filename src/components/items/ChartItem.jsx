@@ -58,7 +58,6 @@ export const ChartItem = memoEqual(({
   chartType,
   onSetActive,
 
-  onShowConfigDialog,
   crValueMoving,
   onToTop
 }) => {
@@ -174,32 +173,32 @@ export const ChartItem = memoEqual(({
          withoutAnimation={true}
          style={S_ML_8}
       >
-         {isShowChart && <ShowHide
-              isShow={isShowToolbar}
-              withoutAnimation={true}
-           >
-             <ChartToolBar
-               hasError={hasError}
-               config={config}
-               getChart={getMainChart}
-               onMiniChart={_hMiniChart}
-               onAddMfi={_addMfi}
-               onRemoveMfi={_removeMfi}
-               onClickLegend={toggleLegend}
-               onAddToWatch={onAddToWatch}
-               onClickInfo={_hClickInfo}
-               onCopy={onCopy}
-               onPasteTo={onPasteTo}
-               onZoom={onZoom}
-              />
-           </ShowHide>
-         }
-         <ErrorBoundary
-            FallbackComp={<MsgRenderErr
+        <ShowHide
+          isShow={isShowToolbar && isShowChart}
+          withoutAnimation={true}
+        >
+          <ChartToolBar
+            hasError={hasError}
+            config={config}
+            getChart={getMainChart}
+            onMiniChart={_hMiniChart}
+            onAddMfi={_addMfi}
+            onRemoveMfi={_removeMfi}
+            onClickLegend={toggleLegend}
+            onAddToWatch={onAddToWatch}
+            onClickInfo={_hClickInfo}
+            onCopy={onCopy}
+            onPasteTo={onPasteTo}
+            onZoom={onZoom}
+          />
+        </ShowHide>
+
+        <ErrorBoundary
+           FallbackComp={<MsgRenderErr
                isShow={isShowChart}
                msg="chart"
-            />}
-            onError={_hError}
+           />}
+           onError={_hError}
          >
             <ShowHide
               isShow={isShowChart}

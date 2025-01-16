@@ -52,7 +52,6 @@ const ChartItem = exports.ChartItem = (0, _memoEqual.default)(_ref => {
     onPasteTo,
     chartType,
     onSetActive,
-    onShowConfigDialog,
     crValueMoving,
     onToTop
   } = _ref;
@@ -145,8 +144,8 @@ const ChartItem = exports.ChartItem = (0, _memoEqual.default)(_ref => {
       isShow: isOpen,
       withoutAnimation: true,
       style: S_ML_8,
-      children: [isShowChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
-        isShow: isShowToolbar,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
+        isShow: isShowToolbar && isShowChart,
         withoutAnimation: true,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ChartToolBar.default, {
           hasError: hasError,
