@@ -1,3 +1,8 @@
+import {
+  setItemCaptionTo,
+  crShortItemCaption
+} from '../AdapterFn';
+
 import { fCrItemLinkByCaption } from '../crFn';
 import { fToKline } from '../fToKline';
 import { CL_PB_8 } from '../CL';
@@ -43,9 +48,10 @@ const toKline = fToKline({
   c: 4,
   crValue: _crValue,
   crVolume: _crValue,
-  crAddConfig: option => ({
-    info: _crInfo(option)
-  })
+  crAddConfig: option => {
+    setItemCaptionTo(option, crShortItemCaption(option.title))
+    return { info: _crInfo(option) };
+  }
 });
 
 export default toKline

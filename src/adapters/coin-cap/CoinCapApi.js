@@ -3,7 +3,8 @@ import {
   assign,
   crError,
   getValue,
-  crGetRoute
+  crGetRoute,
+  setItemCaptionTo
 } from "../AdapterFn";
 
 const API_URL = "https://api.coincap.io/v2";
@@ -44,7 +45,7 @@ const _crHistoricalMarketUrl = (
     timeframe
   ] = _getOneTwoItemValues(option);
 
-  option.itemCaption = `${option.items[0].s}/USD`
+  setItemCaptionTo(option, `${option.items[0].s}/USD`)
   return `${API_URL}/assets/${id}/history?interval=${timeframe}`;
 };
 

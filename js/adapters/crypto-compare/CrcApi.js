@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
 const URL = `https://min-api.${_fnAdapter.CRYPTOCOMPARE_COM}`
   //, HD: 'data/histoday'
@@ -29,6 +30,7 @@ const _hdUrl = option => {
     exchange,
     tsym
   });
+  (0, _AdapterFn.setItemCaptionTo)(option, `${value}/${tsym}`);
   return `${URL}/data/${interval}?fsym=${value}&e=${exchange}&tsym=${tsym}&limit=600&${QUERY_TAIL}`;
 };
 const _rUrl = {
@@ -45,7 +47,7 @@ const CrcApi = {
   },
   checkResponse(json) {
     if (!json || json.Response === 'Error') {
-      throw (0, _fnAdapter.crError)('', json && json.Message);
+      throw (0, _AdapterFn.crError)('', json && json.Message);
     }
   }
 };

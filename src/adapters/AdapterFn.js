@@ -151,6 +151,13 @@ export const crShortItemCaption = (itemCaption) => {
     : itemCaption;
 }
 
+export const setItemCaptionTo = (
+  option,
+  itemCaption
+) => {
+  option.itemCaption = itemCaption
+}
+
 export const crValueMoving = ({
   bNowValue=Big('0.0'),
   bPrevValue=Big('0.0'),

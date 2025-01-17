@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _AdapterFn = require("../AdapterFn");
 var _crFn = require("../crFn");
 var _fToKline = require("../fToKline");
 var _CL = require("../CL");
@@ -46,9 +47,12 @@ const toKline = (0, _fToKline.fToKline)({
   c: 4,
   crValue: _crValue,
   crVolume: _crValue,
-  crAddConfig: option => ({
-    info: _crInfo(option)
-  })
+  crAddConfig: option => {
+    (0, _AdapterFn.setItemCaptionTo)(option, (0, _AdapterFn.crShortItemCaption)(option.title));
+    return {
+      info: _crInfo(option)
+    };
+  }
 });
 var _default = exports.default = toKline;
 //# sourceMappingURL=toKline.js.map

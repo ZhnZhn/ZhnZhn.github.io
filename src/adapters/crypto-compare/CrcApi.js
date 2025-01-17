@@ -1,7 +1,11 @@
 import {
+  setItemCaptionTo,
+  crError
+} from '../AdapterFn';
+
+import {
   CRYPTOCOMPARE_COM,
   assign,
-  crError,
   getValue
 } from './fnAdapter';
 
@@ -24,6 +28,7 @@ const _hdUrl = (option) => {
   , interval = _getInterval(items)
   , tsym = exchange === 'Binance' ? 'USDT' : 'USD';
   assign(option, { value, exchange, tsym })
+  setItemCaptionTo(option, `${value}/${tsym}`)
   return `${URL}/data/${interval}?fsym=${value}&e=${exchange}&tsym=${tsym}&limit=600&${QUERY_TAIL}`;
 };
 

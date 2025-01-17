@@ -1,7 +1,10 @@
 import {
   crError,
-  getCoinId
-} from './fnAdapter';
+  setItemCaptionTo,
+  crShortItemCaption
+} from '../AdapterFn';
+
+import { getCoinId } from './fnAdapter';
 
 const URL = 'https://api.coinpaprika.com/v1';
 
@@ -10,6 +13,7 @@ const _isArr = Array.isArray;
 const _crUrlDf = option => {
   const { fromDate } = option
   , _coinId = getCoinId(option);
+  setItemCaptionTo(option, `${crShortItemCaption(option.title)}/USD`)
   return `${URL}/tickers/${_coinId}/historical?start=${fromDate}&interval=1d`;
 };
 

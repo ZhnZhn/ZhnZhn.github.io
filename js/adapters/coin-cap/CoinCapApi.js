@@ -15,7 +15,7 @@ const _crAssetListUrl = option => {
 };
 const _crHistoricalMarketUrl = option => {
   const [id, timeframe] = _getOneTwoItemValues(option);
-  option.itemCaption = `${option.items[0].s}/USD`;
+  (0, _AdapterFn.setItemCaptionTo)(option, `${option.items[0].s}/USD`);
   return `${API_URL}/assets/${id}/history?interval=${timeframe}`;
 };
 const getCrUrl = (0, _AdapterFn.crGetRoute)({

@@ -1,7 +1,6 @@
 export {
   assign,
-  getValue,
-  crError
+  getValue
 } from '../AdapterFn';
 
 import {
