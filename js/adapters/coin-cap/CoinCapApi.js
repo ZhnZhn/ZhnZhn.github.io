@@ -14,9 +14,13 @@ const _crAssetListUrl = option => {
   return `${API_URL}/assets?limit=${limit}&offset=${(parseInt(offset) - 1) * parseInt(limit)}`;
 };
 const _crHistoricalMarketUrl = option => {
-  const [id, timeframe] = _getOneTwoItemValues(option);
+  const [id, timeframe] = _getOneTwoItemValues(option),
+    {
+      fromDate
+    } = option,
+    _queryPeriod = timeframe === "d1" && fromDate ? `&start=${(0, _AdapterFn.ymdToUTC)(fromDate)}&end=${Date.now()}` : "";
   (0, _AdapterFn.setItemCaptionTo)(option, `${option.items[0].s}/USD`);
-  return `${API_URL}/assets/${id}/history?interval=${timeframe}`;
+  return `${API_URL}/assets/${id}/history?interval=${timeframe}${_queryPeriod}`;
 };
 const getCrUrl = (0, _AdapterFn.crGetRoute)({
   MCL: _crAssetListUrl,

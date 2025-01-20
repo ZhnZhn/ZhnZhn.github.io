@@ -4,7 +4,8 @@ import {
   crError,
   getValue,
   crGetRoute,
-  setItemCaptionTo
+  setItemCaptionTo,
+  ymdToUTC
 } from "../AdapterFn";
 
 const API_URL = "https://api.coincap.io/v2";
@@ -43,10 +44,14 @@ const _crHistoricalMarketUrl = (
   const [
     id,
     timeframe
-  ] = _getOneTwoItemValues(option);
+  ] = _getOneTwoItemValues(option)
+  , { fromDate } = option
+  , _queryPeriod = timeframe === "d1" && fromDate
+    ? `&start=${ymdToUTC(fromDate)}&end=${Date.now()}`
+    : "";
 
   setItemCaptionTo(option, `${option.items[0].s}/USD`)
-  return `${API_URL}/assets/${id}/history?interval=${timeframe}`;
+  return `${API_URL}/assets/${id}/history?interval=${timeframe}${_queryPeriod}`;
 };
 
 const getCrUrl = crGetRoute({
