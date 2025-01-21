@@ -73,7 +73,7 @@ const HEADERS = [{
   ..._crFormatNumberProps()
 }];
 
-export const toAssetListAdapter = {
+export const toAssetList = {
   toConfig(json, option){
     const { key, title } = option
     , _rows = crTableRows(HEADERS, json.data)

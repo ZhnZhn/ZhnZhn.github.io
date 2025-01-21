@@ -1,0 +1,25 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/coin-cap/toHistoryChart.js"
+ ],
+ "file": "../../../src/adapters/coin-cap/toHistoryChart.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "_crAdapterType",
+  "crData",
+  "fCrDataType1",
+  "json",
+  "data",
+  "item",
+  "time",
+  "roundByOHLC",
+  "parseFloat",
+  "priceUsd",
+  "toHistoryChart",
+  "exports",
+  "crAdapterType1"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AACA,IAAAC,cAAA,GAAAD,OAAA;AAKA,MAAME,MAAM,GAAG,IAAAC,2BAAY,EACzBC,IAAI,IAAIA,IAAI,CAACC,IAAI,EACjB,MAAMC,IAAI,IAAI,CACZA,IAAI,CAACC,IAAI,EACT,IAAAC,sBAAW,EAACC,UAAU,CAACH,IAAI,CAACI,QAAQ,CAAC,CAAC,CAE1C,CAAC;AAEM,MAAMC,cAAc,GAAAC,OAAA,CAAAD,cAAA,GAAG,IAAAE,6BAAc,EAAC;EAC3CX;AACF,CAAC,CAAC"
+}

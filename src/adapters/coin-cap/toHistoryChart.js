@@ -12,6 +12,6 @@ const crData = fCrDataType1(
   ]
 );
 
-export const toHistoryChartAdapter = crAdapterType1({
+export const toHistoryChart = crAdapterType1({
   crData
 })

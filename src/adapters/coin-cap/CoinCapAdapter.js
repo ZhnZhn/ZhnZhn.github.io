@@ -1,13 +1,15 @@
 import { crDfItemKey } from "../AdapterFn";
 import { crAdapterRouter } from "../crAdapterRouter";
 
-import { toAssetListAdapter } from "./toAssetListAdapter";
-import { toHistoryChartAdapter } from "./toHistoryChartAdapter";
+import { toAssetList } from "./toAssetList";
+import { toExchangeList } from "./toExchangeList";
+import { toHistoryChart } from "./toHistoryChart";
 
 const CoinCapAdapter = crAdapterRouter({
   rAdapter: {
-    MCL: toAssetListAdapter,
-    HMC: toHistoryChartAdapter
+    MCL: toAssetList,
+    EVL: toExchangeList,
+    HMC: toHistoryChart
   },
   crDfKey: crDfItemKey
 });

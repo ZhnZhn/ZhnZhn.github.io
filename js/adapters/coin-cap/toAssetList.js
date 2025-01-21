@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toAssetListAdapter = void 0;
+exports.toAssetList = void 0;
 var _mathFn = require("../../math/mathFn");
 var _AdapterFn = require("../AdapterFn");
 var _toTableFn = require("../toTableFn");
@@ -54,7 +54,7 @@ const HEADERS = [{
   ...(0, _toTableFn.crNameProps)("Volume USD 24h", "volumeUsd24Hr"),
   ..._crFormatNumberProps()
 }];
-const toAssetListAdapter = exports.toAssetListAdapter = {
+const toAssetList = exports.toAssetList = {
   toConfig(json, option) {
     const {
         key,
@@ -73,4 +73,4 @@ const toAssetListAdapter = exports.toAssetListAdapter = {
     };
   }
 };
-//# sourceMappingURL=toAssetListAdapter.js.map
+//# sourceMappingURL=toAssetList.js.map
