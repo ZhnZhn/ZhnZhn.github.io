@@ -13,6 +13,14 @@ const _crAssetListUrl = option => {
   _setTitleTo(option, `By USD Market Cap Page: ${offset} (${limit})`);
   return `${API_URL}/assets?limit=${limit}&offset=${(parseInt(offset) - 1) * parseInt(limit)}`;
 };
+const _crExchangeListUrl = option => {
+  const {
+      items
+    } = option,
+    pageNumber = (0, _AdapterFn.getValue)(items[0]);
+  _setTitleTo(option, `Exchange List: Page ${pageNumber}`);
+  return `${API_URL}/exchanges`;
+};
 const _crHistoricalMarketUrl = option => {
   const [id, timeframe] = _getOneTwoItemValues(option),
     {
@@ -24,6 +32,7 @@ const _crHistoricalMarketUrl = option => {
 };
 const getCrUrl = (0, _AdapterFn.crGetRoute)({
   MCL: _crAssetListUrl,
+  EVL: _crExchangeListUrl,
   HMC: _crHistoricalMarketUrl
 });
 const CoinCapApi = {

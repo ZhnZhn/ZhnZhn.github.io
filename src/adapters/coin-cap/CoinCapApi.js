@@ -38,6 +38,18 @@ const _crAssetListUrl = (
   return `${API_URL}/assets?limit=${limit}&offset=${(parseInt(offset)-1)*(parseInt(limit))}`;
 };
 
+const _crExchangeListUrl = (
+  option
+) => {
+  const { items } = option
+  , pageNumber = getValue(items[0]);
+
+  _setTitleTo(option,
+    `Exchange List: Page ${pageNumber}`
+  )
+  return `${API_URL}/exchanges`;
+};
+
 const _crHistoricalMarketUrl = (
   option
 ) => {
@@ -56,6 +68,7 @@ const _crHistoricalMarketUrl = (
 
 const getCrUrl = crGetRoute({
   MCL: _crAssetListUrl,
+  EVL: _crExchangeListUrl,
   HMC: _crHistoricalMarketUrl
 });
 
