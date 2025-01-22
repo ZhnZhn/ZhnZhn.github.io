@@ -405,4 +405,35 @@ describe("toTimeDate", () => {
     expect(fn(true)).toBe("");
   });
 });
+describe("getItemsValue", () => {
+  const fn = _AdapterFn.getItemsValue;
+  test("should return option items value by item index", () => {
+    expect(fn({
+      items: [{
+        v: "someValue"
+      }]
+    })).toBe("someValue");
+    expect(fn({
+      items: [{
+        v: "someValue1"
+      }, {
+        v: "someValue2"
+      }]
+    })).toBe("someValue1");
+    expect(fn({
+      items: [{
+        v: "someValue1"
+      }, {
+        v: "someValue2"
+      }]
+    }, 1)).toBe("someValue2");
+    expect(fn({
+      items: [{
+        v: "someValue1"
+      }, {
+        v: "someValue2"
+      }]
+    }, 2)).toBe("");
+  });
+});
 //# sourceMappingURL=AdapterFn.test.js.map

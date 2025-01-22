@@ -104,6 +104,7 @@ const _fToFloatOr = dfValue => str => {
   return isNaN(_v) ? dfValue : _v;
 };
 
+
 export const toTd = (mls) => isNumber(mls)
   ? _toTd(mls)
   : ''
@@ -111,6 +112,11 @@ export const toTd = (mls) => isNumber(mls)
 export const getCaption = getC
 export const getValue = getV
 export const getValueCaption = getVc
+
+export const getItemsValue = (
+  option,
+  itemIndex=0
+) => getV(option.items[itemIndex])
 
 export const numberFormat = formatAllNumber
 export const isYNumber = _fIsNumber('y')

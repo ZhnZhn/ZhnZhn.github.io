@@ -7,18 +7,14 @@ const API_URL = "https://api.coincap.io/v2";
 const _setTitleTo = (option, title) => (0, _AdapterFn.assign)(option, {
   title
 });
-const _getOneTwoItemValues = option => [(0, _AdapterFn.getValue)(option.items[0]), (0, _AdapterFn.getValue)(option.items[1])];
+const _getOneTwoItemValues = option => [(0, _AdapterFn.getItemsValue)(option), (0, _AdapterFn.getItemsValue)(option, 1)];
 const _crAssetListUrl = option => {
   const [offset, limit] = _getOneTwoItemValues(option);
   _setTitleTo(option, `By USD Market Cap Page: ${offset} (${limit})`);
   return `${API_URL}/assets?limit=${limit}&offset=${(parseInt(offset) - 1) * parseInt(limit)}`;
 };
 const _crExchangeListUrl = option => {
-  const {
-      items
-    } = option,
-    pageNumber = (0, _AdapterFn.getValue)(items[0]);
-  _setTitleTo(option, `Exchange List: Page ${pageNumber}`);
+  _setTitleTo(option, `Exchange List: Page ${(0, _AdapterFn.getItemsValue)(option)}`);
   return `${API_URL}/exchanges`;
 };
 const _crHistoricalMarketUrl = option => {

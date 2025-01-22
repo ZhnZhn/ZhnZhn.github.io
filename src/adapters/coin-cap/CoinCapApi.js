@@ -2,7 +2,7 @@ import {
   isArr,
   assign,
   crError,
-  getValue,
+  getItemsValue,
   crGetRoute,
   setItemCaptionTo,
   ymdToUTC
@@ -20,8 +20,8 @@ const _setTitleTo = (
 const _getOneTwoItemValues = (
   option
 ) => [
-  getValue(option.items[0]),
-  getValue(option.items[1])
+  getItemsValue(option),
+  getItemsValue(option, 1)
 ];
 
 const _crAssetListUrl = (
@@ -41,11 +41,8 @@ const _crAssetListUrl = (
 const _crExchangeListUrl = (
   option
 ) => {
-  const { items } = option
-  , pageNumber = getValue(items[0]);
-
   _setTitleTo(option,
-    `Exchange List: Page ${pageNumber}`
+    `Exchange List: Page ${getItemsValue(option)}`
   )
   return `${API_URL}/exchanges`;
 };

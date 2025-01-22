@@ -19,10 +19,7 @@ const HEADERS = [(0, _toTableFn.crRankProps)(), {
 }];
 const NUMBER_PER_PAGE_ITEMS = 10;
 const _filterData = (data, option) => {
-  const {
-      items
-    } = option,
-    pageNumber = (0, _AdapterFn.getValue)(items[0]),
+  const pageNumber = parseInt((0, _AdapterFn.getItemsValue)(option)) || 1,
     _fromRank = (pageNumber - 1) * NUMBER_PER_PAGE_ITEMS,
     _toRank = pageNumber * NUMBER_PER_PAGE_ITEMS;
   return data.filter(item => {
