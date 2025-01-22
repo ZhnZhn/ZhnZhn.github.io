@@ -3,7 +3,7 @@ import {
   roundByOHLC
 } from "../AdapterFn";
 import {
-  crStyleCenter,
+  crRankProps,  
   crNameProps,
   crNumberProps,
   crTableConfig,
@@ -11,10 +11,8 @@ import {
 } from "../toTableFn";
 
 const _pnTurnoverUsd = "turnover"
-, HEADERS = [{
-  ...crNameProps("Rank", "id"),
-  ...crStyleCenter()
-}
+, HEADERS = [
+  crRankProps("Rank", "id")
 , crNameProps("Base")
 , crNameProps("Quote")
 , {

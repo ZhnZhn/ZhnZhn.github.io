@@ -4,16 +4,7 @@ exports.__esModule = true;
 exports.toExchangeList = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _toTableFn = require("../toTableFn");
-const _crNumberCenterProps = () => ({
-  toN: [],
-  style: {
-    textAlign: "center"
-  }
-});
-const HEADERS = [{
-  ...(0, _toTableFn.crNameProps)("Rank"),
-  ..._crNumberCenterProps()
-}, {
+const HEADERS = [(0, _toTableFn.crRankProps)(), {
   ...(0, _toTableFn.crNameProps)("Name"),
   ...(0, _toTableFn.crStyleBold)()
 }, {

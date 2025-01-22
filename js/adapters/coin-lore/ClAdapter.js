@@ -5,10 +5,7 @@ exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _toTableFn = require("../toTableFn");
 const _pnTurnoverUsd = "turnover",
-  HEADERS = [{
-    ...(0, _toTableFn.crNameProps)("Rank", "id"),
-    ...(0, _toTableFn.crStyleCenter)()
-  }, (0, _toTableFn.crNameProps)("Base"), (0, _toTableFn.crNameProps)("Quote"), {
+  HEADERS = [(0, _toTableFn.crRankProps)("Rank", "id"), (0, _toTableFn.crNameProps)("Base"), (0, _toTableFn.crNameProps)("Quote"), {
     ...(0, _toTableFn.crNameProps)("Volume"),
     ...(0, _toTableFn.crNumberProps)(0)
   }, {

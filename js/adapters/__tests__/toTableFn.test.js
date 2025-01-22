@@ -107,6 +107,29 @@ describe("crNumberProps", () => {
     });
   });
 });
+describe("crRankProps", () => {
+  const fn = _toTableFn.crRankProps;
+  test("should return table rank props", () => {
+    expect(fn()).toStrictEqual({
+      name: "Rank",
+      pn: "rank",
+      isHide: void 0,
+      toN: [],
+      style: {
+        textAlign: "center"
+      }
+    });
+    expect(fn("Rank Title", "somePropName")).toStrictEqual({
+      name: "Rank Title",
+      pn: "somePropName",
+      isHide: void 0,
+      toN: [],
+      style: {
+        textAlign: "center"
+      }
+    });
+  });
+});
 describe("crCaptionItemsProps", () => {
   const fn = _toTableFn.crCaptionItemsProps;
   test("should return caption items props", () => {

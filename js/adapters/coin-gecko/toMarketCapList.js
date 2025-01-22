@@ -30,11 +30,7 @@ const CHANGE_PERCENTAGE = "change_percentage",
     fn: _AdapterFn.toTimeDate
   });
 const _getTableHeaders = (0, _AdapterFn.fCrLazyValue)(() => {
-  const headers = [{
-    ...(0, _toTableFn.crStyleCenter)(),
-    ...(0, _toTableFn.crNameProps)("Rank", "market_cap_rank"),
-    toN: []
-  }, (0, _toTableFn.crNameProps)("Name"), {
+  const headers = [(0, _toTableFn.crRankProps)("Rank", "market_cap_rank"), (0, _toTableFn.crNameProps)("Name"), {
     ...(0, _toTableFn.crNameProps)("Symbol", true),
     ...(0, _toTableFn.crStyleBold)({
       textTransform: "uppercase"

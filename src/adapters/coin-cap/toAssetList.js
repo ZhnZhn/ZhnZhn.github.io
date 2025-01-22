@@ -2,6 +2,7 @@ import { toFixedNumber } from "../../math/mathFn";
 import { getYmdhmUTC } from "../AdapterFn";
 
 import {
+  crRankProps,
   crNameProps,
   crNumberProps,
   crStyleBold,
@@ -26,10 +27,6 @@ const _crPriceChangeItem = (
   toN: [2],
   isR: true
 })
-, _crNumberCenterProps = () => ({
-  toN: [],
-  style: { textAlign: "center" }
-})
 , _crStrToFixedNumberProps = () => ({
   isF: true,
   fn: _formatStrToFixedNumber,
@@ -41,10 +38,8 @@ const _crPriceChangeItem = (
   ...crStyleBold()
 });
 
-const HEADERS = [{
-  ...crNameProps("Rank"),
-  ..._crNumberCenterProps()
-}
+const HEADERS = [
+  crRankProps()
 , {
   ...crNameProps("Sybmol", "symbol"),
   ...crStyleBold()

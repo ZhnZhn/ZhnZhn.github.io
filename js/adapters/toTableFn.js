@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crTableRows = exports.crTableOptions = exports.crTableFlatHeaders = exports.crTableConfig = exports.crStyleCenter = exports.crStyleBold = exports.crNumberProps = exports.crNameProps = exports.crCaptionItemsProps = void 0;
+exports.crTableRows = exports.crTableOptions = exports.crTableFlatHeaders = exports.crTableConfig = exports.crStyleCenter = exports.crStyleBold = exports.crRankProps = exports.crNumberProps = exports.crNameProps = exports.crCaptionItemsProps = void 0;
 var _AdapterFn = require("./AdapterFn");
 const crNameProps = (name, pnOrIsHideOrVoid, isHideOrVoid) => {
   const [pn, isHide] = (0, _AdapterFn.isStr)(pnOrIsHideOrVoid) ? [pnOrIsHideOrVoid, isHideOrVoid] : [name.toLowerCase(), pnOrIsHideOrVoid];
@@ -31,6 +31,17 @@ const crNumberProps = n => ({
   ...crStyleBold()
 });
 exports.crNumberProps = crNumberProps;
+const crRankProps = function (title, propName) {
+  if (title === void 0) {
+    title = "Rank";
+  }
+  return {
+    ...crNameProps(title, propName),
+    toN: [],
+    ...crStyleCenter()
+  };
+};
+exports.crRankProps = crRankProps;
 const _replaceNaN = function (n, str) {
   if (str === void 0) {
     str = '';

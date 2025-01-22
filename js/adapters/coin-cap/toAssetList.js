@@ -11,12 +11,6 @@ const _crPriceChangeItem = (name, propName, isHide) => ({
     toN: [2],
     isR: true
   }),
-  _crNumberCenterProps = () => ({
-    toN: [],
-    style: {
-      textAlign: "center"
-    }
-  }),
   _crStrToFixedNumberProps = () => ({
     isF: true,
     fn: _formatStrToFixedNumber,
@@ -27,10 +21,7 @@ const _crPriceChangeItem = (name, propName, isHide) => ({
     isF: true,
     ...(0, _toTableFn.crStyleBold)()
   });
-const HEADERS = [{
-  ...(0, _toTableFn.crNameProps)("Rank"),
-  ..._crNumberCenterProps()
-}, {
+const HEADERS = [(0, _toTableFn.crRankProps)(), {
   ...(0, _toTableFn.crNameProps)("Sybmol", "symbol"),
   ...(0, _toTableFn.crStyleBold)()
 }, (0, _toTableFn.crNameProps)("Name", true), {

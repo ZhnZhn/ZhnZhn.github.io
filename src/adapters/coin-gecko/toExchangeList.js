@@ -1,4 +1,5 @@
 import {
+  crRankProps,
   crStyleCenter,
   crNameProps,
   crNumberProps,
@@ -10,16 +11,10 @@ import {
   getYmdhmUTC
 } from "./fnAdapter";
 
-const _crNumberCenterProps = () => ({
-  toN: [],
-  ...crStyleCenter()
-})
-, PN_TRADE_VOLUME_24H_BTC = "trade_volume_24h_btc"
+const PN_TRADE_VOLUME_24H_BTC = "trade_volume_24h_btc"
 , PN_TRADE_VOLUME_24H_BTC_NORM = `${PN_TRADE_VOLUME_24H_BTC}_normalized`
-, HEADERS = [{
-  ...crNameProps("Trust Rank", "trust_score_rank"),
-  ..._crNumberCenterProps()
-}
+, HEADERS = [
+  crRankProps("Trust Rank", "trust_score_rank")
 , crNameProps("Name")
 , {
   ...crNameProps("24h BTC", PN_TRADE_VOLUME_24H_BTC),
@@ -27,10 +22,9 @@ const _crNumberCenterProps = () => ({
 },{
   ...crNameProps("24h BTC Norm.", PN_TRADE_VOLUME_24H_BTC_NORM),
   ...crNumberProps(0)
-},{
-  ...crNameProps("Trust Score", "trust_score"),
-  ..._crNumberCenterProps()
-},{
+}
+, crRankProps("Trust Score", "trust_score")
+, {
   ...crNameProps("Year Estb.", "year_established", true),
   ...crStyleCenter()
 }

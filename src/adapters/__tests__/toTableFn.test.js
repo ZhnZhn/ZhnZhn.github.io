@@ -3,10 +3,10 @@ import {
   crStyleCenter,
   crNameProps,
   crNumberProps,
+  crRankProps,
   crCaptionItemsProps,
   crTableFlatHeaders
 } from "../toTableFn";
-
 
 describe("crStyleBold", ()=>{
   const fn = crStyleBold;
@@ -113,6 +113,31 @@ describe("crNumberProps", () => {
       isF: true,
       style: {
         fontWeight: "bold"
+      }
+    })
+  })
+})
+
+describe("crRankProps",()=>{
+  const fn = crRankProps;
+  test("should return table rank props", ()=>{
+    expect(fn()).toStrictEqual({
+      name: "Rank",
+      pn: "rank",
+      isHide: void 0,
+      toN: [],
+      style: {
+        textAlign: "center"
+      }
+    })
+
+    expect(fn("Rank Title", "somePropName")).toStrictEqual({
+      name: "Rank Title",
+      pn: "somePropName",
+      isHide: void 0,
+      toN: [],
+      style: {
+        textAlign: "center"
       }
     })
   })

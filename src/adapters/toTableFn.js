@@ -47,6 +47,15 @@ export const crNumberProps = (n) => ({
   ...crStyleBold()
 })
 
+export const crRankProps = (
+  title="Rank",
+  propName
+) => ({
+  ...crNameProps(title, propName),
+  toN: [],
+  ...crStyleCenter()
+})
+
 const _replaceNaN = (
   n,
   str=''

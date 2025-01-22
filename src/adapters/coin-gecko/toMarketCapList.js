@@ -4,8 +4,8 @@ import {
 } from "../AdapterFn";
 
 import {
-  crStyleBold,
-  crStyleCenter,
+  crRankProps,
+  crStyleBold,  
   crNameProps,
   crNumberProps,
   crCaptionItemsProps,
@@ -72,11 +72,7 @@ const CHANGE_PERCENTAGE = "change_percentage"
 
 const _getTableHeaders = fCrLazyValue(() => {
   const headers = [
-    {
-      ...crStyleCenter(),
-      ...crNameProps("Rank", "market_cap_rank"),
-      toN: []
-    },
+    crRankProps("Rank", "market_cap_rank"),
     crNameProps("Name"),
     {
       ...crNameProps("Symbol", true),

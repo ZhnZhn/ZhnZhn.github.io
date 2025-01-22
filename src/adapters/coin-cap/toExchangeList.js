@@ -7,20 +7,14 @@ import {
 import {
   crNameProps,
   crNumberProps,
+  crRankProps,
   crStyleBold,
   crTableRows,
   crTableConfig
 } from "../toTableFn";
 
-const _crNumberCenterProps = () => ({
-  toN: [],
-  style: { textAlign: "center" }
-})
-
-const HEADERS = [{
-  ...crNameProps("Rank"),
-  ..._crNumberCenterProps()
-},{
+const HEADERS = [
+  crRankProps(),{
   ...crNameProps("Name"),
   ...crStyleBold()
 },{
