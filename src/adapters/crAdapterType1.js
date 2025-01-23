@@ -8,8 +8,7 @@ import {
   isObj,
   isNumber,
   assign,
-  getCaption,
-  crShortItemCaption
+  crItemCaptionCurrencyRate
 } from './AdapterFn';
 
 const _crZhConfig = ({
@@ -25,22 +24,12 @@ const _crZhConfig = ({
   zhConfig: _crZhConfig(option)
 });
 
-const _crItemCaptionCurrencyRate = (
-  option,
-  toCurrency
-) => {
-  const _fromCurrency = crShortItemCaption(
-    getCaption(option.items[0])
-  );
-  return `${_fromCurrency}/${toCurrency}`;
-}
-
 export const fCrConfOptionExchangeRate = (
   toCurrency,
   exchangeRateCaseId="EXR"
 ) => option => {
   if (option.dfCase === exchangeRateCaseId) {
-    option.itemCaption = _crItemCaptionCurrencyRate(option, toCurrency)
+    option.itemCaption = crItemCaptionCurrencyRate(option, toCurrency)
   }
   return crConfOptionDf(option);
 }

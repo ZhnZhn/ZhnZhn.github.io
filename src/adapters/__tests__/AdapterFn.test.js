@@ -10,6 +10,7 @@ import {
   isYNumber,
   isNumberOrNull,
   crShortItemCaption,
+  crItemCaptionCurrencyRate,
   getObjectKeys,
   toFloatOrEmpty,
   findMinY,
@@ -155,6 +156,15 @@ describe('crShortItemCaption', () => {
     expect(fn(null)).toBe("")
     expect(fn({})).toBe("")
     expect(fn(NaN)).toBe("")
+  })
+})
+
+describe("crItemCaptionCurrencyRate", ()=>{
+  const fn = crItemCaptionCurrencyRate;
+  test("should create str currency rate", ()=>{
+    expect(fn({
+      items: [{c: "European euro (EUR)"}]
+    }, "USD")).toBe("EUR/USD")
   })
 })
 

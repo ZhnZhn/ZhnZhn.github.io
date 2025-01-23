@@ -157,6 +157,16 @@ export const crShortItemCaption = (itemCaption) => {
     : itemCaption;
 }
 
+export const crItemCaptionCurrencyRate = (
+  option,
+  toCurrency
+) => {
+  const _fromCurrency = crShortItemCaption(
+    getCaption(option.items[0])
+  );
+  return `${_fromCurrency}/${toCurrency}`;
+}
+
 export const setItemCaptionTo = (
   option,
   itemCaption

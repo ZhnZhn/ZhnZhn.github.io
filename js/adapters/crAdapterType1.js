@@ -22,17 +22,13 @@ const _crZhConfig = _ref => {
   crConfOptionDf = option => ({
     zhConfig: _crZhConfig(option)
   });
-const _crItemCaptionCurrencyRate = (option, toCurrency) => {
-  const _fromCurrency = (0, _AdapterFn.crShortItemCaption)((0, _AdapterFn.getCaption)(option.items[0]));
-  return `${_fromCurrency}/${toCurrency}`;
-};
 const fCrConfOptionExchangeRate = function (toCurrency, exchangeRateCaseId) {
   if (exchangeRateCaseId === void 0) {
     exchangeRateCaseId = "EXR";
   }
   return option => {
     if (option.dfCase === exchangeRateCaseId) {
-      option.itemCaption = _crItemCaptionCurrencyRate(option, toCurrency);
+      option.itemCaption = (0, _AdapterFn.crItemCaptionCurrencyRate)(option, toCurrency);
     }
     return crConfOptionDf(option);
   };

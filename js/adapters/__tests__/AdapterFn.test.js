@@ -198,6 +198,16 @@ describe('crShortItemCaption', () => {
     expect(fn(NaN)).toBe("");
   });
 });
+describe("crItemCaptionCurrencyRate", () => {
+  const fn = _AdapterFn.crItemCaptionCurrencyRate;
+  test("should create str currency rate", () => {
+    expect(fn({
+      items: [{
+        c: "European euro (EUR)"
+      }]
+    }, "USD")).toBe("EUR/USD");
+  });
+});
 describe('getObjectKeys', () => {
   const fn = _AdapterFn.getObjectKeys;
   test("should return array with object keys or empty array for not object types", () => {
