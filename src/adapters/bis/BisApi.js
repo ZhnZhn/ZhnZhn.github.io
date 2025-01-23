@@ -1,3 +1,4 @@
+import { setItemCaptionCurrencyRateTo } from '../AdapterFn';
 import { isCategory } from '../CategoryFn';
 import { crItemId } from './fnAdapter';
 
@@ -7,7 +8,12 @@ const BisApi = {
   getRequestUrl(option){
     const queryToken = isCategory(option)
       ? `c%5BTIME_PERIOD%5D=${option.time}`
-      : `c%5BTIME_PERIOD%5D=ge%3A${option.fromDate}`
+      : `c%5BTIME_PERIOD%5D=ge%3A${option.fromDate}`;
+
+    if (option.dfTopic === "XRU") {
+      setItemCaptionCurrencyRateTo(option, "USD")
+    }
+
     return `${option.proxy}${BIS_API}/${option.dfCase}/1.0/${crItemId(option)}?${queryToken}`;
   }
 };

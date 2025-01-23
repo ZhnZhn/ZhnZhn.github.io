@@ -198,14 +198,16 @@ describe('crShortItemCaption', () => {
     expect(fn(NaN)).toBe("");
   });
 });
-describe("crItemCaptionCurrencyRate", () => {
-  const fn = _AdapterFn.crItemCaptionCurrencyRate;
+describe("setItemCaptionCurrencyRateTo", () => {
+  const fn = _AdapterFn.setItemCaptionCurrencyRateTo;
   test("should create str currency rate", () => {
-    expect(fn({
+    const option = {
       items: [{
         c: "European euro (EUR)"
       }]
-    }, "USD")).toBe("EUR/USD");
+    };
+    fn(option, "USD");
+    expect(option.itemCaption).toBe("EUR/USD");
   });
 });
 describe('getObjectKeys', () => {

@@ -8,7 +8,7 @@ import {
   isObj,
   isNumber,
   assign,
-  crItemCaptionCurrencyRate
+  setItemCaptionCurrencyRateTo
 } from './AdapterFn';
 
 const _crZhConfig = ({
@@ -29,7 +29,7 @@ export const fCrConfOptionExchangeRate = (
   exchangeRateCaseId="EXR"
 ) => option => {
   if (option.dfCase === exchangeRateCaseId) {
-    option.itemCaption = crItemCaptionCurrencyRate(option, toCurrency)
+    setItemCaptionCurrencyRateTo(option, toCurrency)    
   }
   return crConfOptionDf(option);
 }

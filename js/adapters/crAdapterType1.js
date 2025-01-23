@@ -28,7 +28,7 @@ const fCrConfOptionExchangeRate = function (toCurrency, exchangeRateCaseId) {
   }
   return option => {
     if (option.dfCase === exchangeRateCaseId) {
-      option.itemCaption = (0, _AdapterFn.crItemCaptionCurrencyRate)(option, toCurrency);
+      (0, _AdapterFn.setItemCaptionCurrencyRateTo)(option, toCurrency);
     }
     return crConfOptionDf(option);
   };
