@@ -1,36 +1,54 @@
 import {
+  joinByDot
+} from "../../utils/arrFn";
+
+import {
   FN_IDENTITY,
   crGetRoute,
-  joinBy,
   getValue,
   crXmlDocument,
   ymdToUTC
-} from '../AdapterFn';
+} from "../AdapterFn";
 import {
   isCategory
-} from '../CategoryFn';
+} from "../CategoryFn";
 
-const _crItemIdDf = ({
+const _crCategoryToken = (
+  seriaType,
+  item
+) => isCategory(seriaType)
+  ? "*"
+  : getValue(item)
+, _crItemIdDf = ({
   dfPrefix,
   items,
   seriaType,
   dfSuffix
-}) => joinBy('.',
+}) => joinByDot(
   dfPrefix,
-  isCategory(seriaType) ? '*' : getValue(items[0]),
+  _crCategoryToken(seriaType, items[0]),
   getValue(items[1]),
   dfSuffix
 )
 , _crItemId312 = ({
   items,
   seriaType
-}) => joinBy('.',
+}) => joinByDot(
   getValue(items[2]),
-  isCategory(seriaType) ? '*' : getValue(items[0]),
+  _crCategoryToken(seriaType, items[0]),
   getValue(items[1])
 )
+, _crItemId21 = ({
+  items,
+  dfSuffix
+}) => joinByDot(
+  getValue(items[1]),
+  getValue(items[0]),
+  dfSuffix
+)
 , _getCrItemId = crGetRoute({
-  s312: _crItemId312
+  s312: _crItemId312,
+  s21: _crItemId21
 }, _crItemIdDf);
 
 export const crItemId = (
@@ -40,11 +58,11 @@ export const crItemId = (
 export const getSeriesCollection = (
   str
 ) => crXmlDocument(str)
-  .getElementsByTagName('Series') || []
+  .getElementsByTagName("Series") || []
 
 const _fGetAttribute = (
   propName,
-  transformValue=FN_IDENTITY
+  transformValue
 ) => element => element
   ? transformValue(element.getAttribute(propName))
   : null;
@@ -59,7 +77,10 @@ export const getTimePeriod = _fGetAttribute(
   ymdToUTC
 )
 
-export const getRefArea = _fGetAttribute("REF_AREA")
+export const getRefArea = _fGetAttribute(
+  "REF_AREA",
+  FN_IDENTITY
+)
 export const fCrCategoryName = ({
   dfCategory
 }) => dfCategory
