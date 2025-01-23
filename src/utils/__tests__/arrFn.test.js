@@ -2,7 +2,8 @@ import {
   arrFactoryFindIndexByProp,
   arrFactoryIsSameByProp,
   isInArrStr,
-  joinBy
+  joinBy,
+  joinByDot
 } from '../arrFn';
 
 const propName = 'caption'
@@ -78,14 +79,29 @@ describe('isInArrStr', () => {
 })
 
 describe('joinBy', () => {
+  const fn = joinBy;
   test('should join by delimeter', () => {
-    expect(joinBy('.')).toBe('')
-    expect(joinBy('.', 'a')).toBe('a')
-    expect(joinBy('.', 'a', 'b')).toBe('a.b')
+    expect(fn('.')).toBe('')
+    expect(fn('.', 'a')).toBe('a')
+    expect(fn('.', 'a', 'b')).toBe('a.b')
   })
   test('should filter falsy values', () => {
-    expect(joinBy('.', '', 'b', 'c')).toBe('b.c')
-    expect(joinBy('.', null, 'b', 'c')).toBe('b.c')
-    expect(joinBy('.', void 0, 'b', 'c')).toBe('b.c')
+    expect(fn('.', '', 'b', 'c')).toBe('b.c')
+    expect(fn('.', null, 'b', 'c')).toBe('b.c')
+    expect(fn('.', void 0, 'b', 'c')).toBe('b.c')
+  })
+})
+
+describe('joinByDot', () => {
+  const fn = joinByDot;
+  test('should join by dot delimeter', () => {
+    expect(fn()).toBe('')
+    expect(fn('a')).toBe('a')
+    expect(fn('a', 'b')).toBe('a.b')
+  })
+  test('should filter falsy values', () => {
+    expect(fn('', 'b', 'c')).toBe('b.c')
+    expect(fn(null, 'b', 'c')).toBe('b.c')
+    expect(fn(void 0, 'b', 'c')).toBe('b.c')
   })
 })

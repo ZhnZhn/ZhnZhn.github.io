@@ -64,15 +64,29 @@ describe('isInArrStr', () => {
   });
 });
 describe('joinBy', () => {
+  const fn = _arrFn.joinBy;
   test('should join by delimeter', () => {
-    expect((0, _arrFn.joinBy)('.')).toBe('');
-    expect((0, _arrFn.joinBy)('.', 'a')).toBe('a');
-    expect((0, _arrFn.joinBy)('.', 'a', 'b')).toBe('a.b');
+    expect(fn('.')).toBe('');
+    expect(fn('.', 'a')).toBe('a');
+    expect(fn('.', 'a', 'b')).toBe('a.b');
   });
   test('should filter falsy values', () => {
-    expect((0, _arrFn.joinBy)('.', '', 'b', 'c')).toBe('b.c');
-    expect((0, _arrFn.joinBy)('.', null, 'b', 'c')).toBe('b.c');
-    expect((0, _arrFn.joinBy)('.', void 0, 'b', 'c')).toBe('b.c');
+    expect(fn('.', '', 'b', 'c')).toBe('b.c');
+    expect(fn('.', null, 'b', 'c')).toBe('b.c');
+    expect(fn('.', void 0, 'b', 'c')).toBe('b.c');
+  });
+});
+describe('joinByDot', () => {
+  const fn = _arrFn.joinByDot;
+  test('should join by dot delimeter', () => {
+    expect(fn()).toBe('');
+    expect(fn('a')).toBe('a');
+    expect(fn('a', 'b')).toBe('a.b');
+  });
+  test('should filter falsy values', () => {
+    expect(fn('', 'b', 'c')).toBe('b.c');
+    expect(fn(null, 'b', 'c')).toBe('b.c');
+    expect(fn(void 0, 'b', 'c')).toBe('b.c');
   });
 });
 //# sourceMappingURL=arrFn.test.js.map

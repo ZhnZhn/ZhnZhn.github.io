@@ -1,8 +1,15 @@
+import { bindTo } from "./bindTo";
+
 const _isArr = Array.isArray
-, _fIsItem = (propName, propValue) =>
-    item => item[propName] === propValue
-, _findArrIndexBy = (arr, propName, propValue) =>
-    arr.findIndex(_fIsItem(propName, propValue));
+, _fIsItem = (
+  propName,
+  propValue
+) => item => item[propName] === propValue
+, _findArrIndexBy = (
+  arr,
+  propName,
+  propValue
+) => arr.findIndex(_fIsItem(propName, propValue));
 
 export const isInArrStr = (
   arr
@@ -28,3 +35,5 @@ export const joinBy = (
 ) => restItems
   .filter(Boolean)
   .join(delimeter)
+
+export const joinByDot = bindTo(joinBy, ".")
