@@ -8,9 +8,13 @@ var _fnAdapter = require("./fnAdapter");
 const BIS_API = "https://stats.bis.org/api/v2/data/dataflow/BIS";
 const BisApi = {
   getRequestUrl(option) {
-    const queryToken = (0, _CategoryFn.isCategory)(option) ? `c%5BTIME_PERIOD%5D=${option.time}` : `c%5BTIME_PERIOD%5D=ge%3A${option.fromDate}`;
+    const _isCategoryChart = (0, _CategoryFn.isCategory)(option),
+      queryToken = _isCategoryChart ? `c%5BTIME_PERIOD%5D=${option.time}` : `c%5BTIME_PERIOD%5D=ge%3A${option.fromDate}`;
     if (option.dfTopic === "XRU") {
       (0, _AdapterFn.setItemCaptionCurrencyRateTo)(option, "USD");
+      if (_isCategoryChart) {
+        option.items[1].v = "M";
+      }
     }
     return `${option.proxy}${BIS_API}/${option.dfCase}/1.0/${(0, _fnAdapter.crItemId)(option)}?${queryToken}`;
   }
