@@ -1,19 +1,15 @@
 "use strict";
 
 exports.__esModule = true;
-exports.mergeToChartPoints = exports.isNumber = exports.getZeroIndexFromEnd = exports.getZeroCountFromStart = exports.fGetY = exports.crPointGetter = exports.crDataArrays = void 0;
+exports.mergeToChartPoints = exports.getZeroIndexFromEnd = exports.getZeroCountFromStart = exports.fGetY = exports.crPointGetter = exports.crDataArrays = void 0;
+var _isTypeFn = require("../utils/isTypeFn");
 var _mathFn = require("./mathFn");
-const _isArr = Array.isArray,
-  _isNumber = n => typeof n === "number" && n - n === 0,
-  _isObj = obj => typeof obj === "object" && obj !== null;
-const isNumber = _isNumber;
-exports.isNumber = isNumber;
 const _getDataPoint = arr => {
-  if (!_isArr(arr)) {
+  if (!(0, _isTypeFn.isArr)(arr)) {
     return;
   }
   for (let i = 0; i < arr.length; i++) {
-    if (_isObj(arr[i])) {
+    if ((0, _isTypeFn.isObj)(arr[i])) {
       return arr[i];
     }
   }
@@ -21,17 +17,17 @@ const _getDataPoint = arr => {
 };
 const crPointGetter = data => {
   const _dataPoint = _getDataPoint(data);
-  return _dataPoint ? _isArr(_dataPoint) ? [p => p[0], p => p[1]] : [p => p.x, p => p.y] : [];
+  return _dataPoint ? (0, _isTypeFn.isArr)(_dataPoint) ? [p => p[0], p => p[1]] : [p => p.x, p => p.y] : [];
 };
 exports.crPointGetter = crPointGetter;
 const fGetY = point => {
   if (!point) {
     return;
   }
-  if (_isArr(point)) {
+  if ((0, _isTypeFn.isArr)(point)) {
     return p => p[1];
   }
-  if (_isNumber(point.y)) {
+  if ((0, _isTypeFn.isNumber)(point.y)) {
     return p => p.y;
   }
   return;
@@ -75,7 +71,7 @@ const crDataArrays = data => {
   if (getX) {
     data.forEach(p => {
       y = getY(p);
-      if (isNumber(y)) {
+      if ((0, _isTypeFn.isNumber)(y)) {
         _data.push(y);
         _dataX.push(getX(p));
       }

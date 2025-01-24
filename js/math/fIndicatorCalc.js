@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../utils/isTypeFn");
 var _seriaHelperFn = require("./seriaHelperFn");
 const _crIndicatorData = (d, rt, calc, getX, getY) => {
   const _d = [],
@@ -23,11 +24,10 @@ const fIndicatorCalc = calc => function (d, rt) {
   }
   const [getX, getY] = (0, _seriaHelperFn.crPointGetter)(d),
     _rt = parseInt(rt, 10);
-  if (!(getX && (0, _seriaHelperFn.isNumber)(_rt) && _rt > 0 && d.length > _rt)) {
+  if (!(getX && (0, _isTypeFn.isNumber)(_rt) && _rt > 0 && d.length > _rt)) {
     return [];
   }
   return _crIndicatorData(d, _rt, calc, getX, getY);
 };
-var _default = fIndicatorCalc;
-exports.default = _default;
+var _default = exports.default = fIndicatorCalc;
 //# sourceMappingURL=fIndicatorCalc.js.map

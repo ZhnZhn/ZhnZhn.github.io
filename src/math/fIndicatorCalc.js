@@ -1,7 +1,5 @@
-import {
-  isNumber,
-  crPointGetter
-} from './seriaHelperFn';
+import { isNumber } from '../utils/isTypeFn';
+import { crPointGetter } from './seriaHelperFn';
 
 const _crIndicatorData = (
   d,

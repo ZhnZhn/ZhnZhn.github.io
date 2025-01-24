@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _big = _interopRequireDefault(require("big.js"));
+var _isTypeFn = require("../utils/isTypeFn");
 var _seriaHelperFn = require("./seriaHelperFn");
 const sma = function (data, period) {
   if (period === void 0) {
@@ -13,7 +14,7 @@ const sma = function (data, period) {
     _dataLength = _data.length,
     _period = parseInt(period, 10) - 1,
     dataSma = [];
-  if (_dataLength === 0 || !(0, _seriaHelperFn.isNumber)(_period) || _period > _dataLength) {
+  if (_dataLength === 0 || !(0, _isTypeFn.isNumber)(_period) || _period > _dataLength) {
     return dataSma;
   }
   if (_period <= 0) {
@@ -32,6 +33,5 @@ const sma = function (data, period) {
   }
   return dataSma;
 };
-var _default = sma;
-exports.default = _default;
+var _default = exports.default = sma;
 //# sourceMappingURL=sma.js.map

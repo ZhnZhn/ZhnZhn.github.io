@@ -4,14 +4,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.normalize = exports.median = exports.mean = exports.hasZeroOrLessValue = exports.growthRate = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.changesBetween = void 0;
 var _big = _interopRequireDefault(require("big.js"));
+var _isTypeFn = require("../utils/isTypeFn");
 var _mathFn = require("./mathFn");
 var _fIndicatorCalc = _interopRequireDefault(require("./fIndicatorCalc"));
 var _diff = _interopRequireDefault(require("./diff"));
 var _roc = _interopRequireDefault(require("./roc"));
 var _seriaHelperFn = require("./seriaHelperFn");
-const _isArr = Array.isArray,
-  _isNaN = Number.isNaN;
-const _calcChanges = (yPrev, yNext) => !(0, _seriaHelperFn.isNumber)(yPrev) || !(0, _seriaHelperFn.isNumber)(yNext) ? null : (0, _diff.default)(yNext, yPrev);
+const _calcChanges = (yPrev, yNext) => !(0, _isTypeFn.isNumber)(yPrev) || !(0, _isTypeFn.isNumber)(yNext) ? null : (0, _diff.default)(yNext, yPrev);
 const _fFindY = (initialValue, findY) => data => {
   const getY = (0, _seriaHelperFn.crPointGetter)(data)[1];
   if (!getY) {
@@ -28,19 +27,17 @@ const _fFindY = (initialValue, findY) => data => {
   }
   return resultY !== initialValue ? (0, _mathFn.toFixedNumber)(resultY) : void 0;
 };
-const _findMinY = (y, min) => (0, _seriaHelperFn.isNumber)(y) && y < min ? y : min;
-const _findMaxY = (y, max) => (0, _seriaHelperFn.isNumber)(y) && y > max ? y : max;
-const growthRate = (0, _fIndicatorCalc.default)(_roc.default);
-exports.growthRate = growthRate;
-const changesBetween = (0, _fIndicatorCalc.default)(_calcChanges);
-exports.changesBetween = changesBetween;
+const _findMinY = (y, min) => (0, _isTypeFn.isNumber)(y) && y < min ? y : min;
+const _findMaxY = (y, max) => (0, _isTypeFn.isNumber)(y) && y > max ? y : max;
+const growthRate = exports.growthRate = (0, _fIndicatorCalc.default)(_roc.default);
+const changesBetween = exports.changesBetween = (0, _fIndicatorCalc.default)(_calcChanges);
 const normalize = d => {
   const [getX, getY] = (0, _seriaHelperFn.crPointGetter)(d);
   if (!getX) {
     return [];
   }
   const _y0 = getY(d[0]);
-  if (!((0, _seriaHelperFn.isNumber)(_y0) && _y0 !== 0)) {
+  if (!((0, _isTypeFn.isNumber)(_y0) && _y0 !== 0)) {
     return [];
   }
   const _d = [];
@@ -51,12 +48,10 @@ const normalize = d => {
   return _d;
 };
 exports.normalize = normalize;
-const findMinY = _fFindY(Number.POSITIVE_INFINITY, _findMinY);
-exports.findMinY = findMinY;
-const findMaxY = _fFindY(Number.NEGATIVE_INFINITY, _findMaxY);
-exports.findMaxY = findMaxY;
+const findMinY = exports.findMinY = _fFindY(Number.POSITIVE_INFINITY, _findMinY);
+const findMaxY = exports.findMaxY = _fFindY(Number.NEGATIVE_INFINITY, _findMaxY);
 const filterTrimZero = data => {
-  if (!_isArr(data)) {
+  if (!(0, _isTypeFn.isArr)(data)) {
     return data;
   }
   const _getY = (0, _seriaHelperFn.fGetY)(data[0]);
@@ -75,7 +70,7 @@ const filterTrimZero = data => {
 };
 exports.filterTrimZero = filterTrimZero;
 const hasZeroOrLessValue = data => {
-  if (!_isArr(data)) {
+  if (!(0, _isTypeFn.isArr)(data)) {
     return false;
   }
   const _getY = (0, _seriaHelperFn.fGetY)(data[0]);
@@ -98,14 +93,14 @@ const mean = data => {
     _y;
   for (; i < data.length; i++) {
     _y = getY(data[i]);
-    if ((0, _seriaHelperFn.isNumber)(_y)) {
+    if ((0, _isTypeFn.isNumber)(_y)) {
       _sum = _sum.add(_y);
       _numberOfPoints++;
     }
   }
   const _maxIndex = data.length - 1,
     _avg = _numberOfPoints !== 0 ? parseInt(_sum.div(_numberOfPoints).toFixed(0), 10) : NaN;
-  return _isNaN(_avg) ? [] : [[getX(data[0]), _avg], [getX(data[_maxIndex]), _avg]];
+  return (0, _isTypeFn.isNaN)(_avg) ? [] : [[getX(data[0]), _avg], [getX(data[_maxIndex]), _avg]];
 };
 exports.mean = mean;
 const median = data => {

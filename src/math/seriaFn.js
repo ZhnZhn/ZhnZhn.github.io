@@ -1,19 +1,21 @@
 import Big from 'big.js';
 
+import {
+  isArr,
+  isNaN,
+  isNumber
+} from '../utils/isTypeFn';
+
 import { toFixedNumber } from './mathFn';
 import fIndicatorCalc from './fIndicatorCalc';
 import diff from './diff';
 import roc from './roc';
 import {
-  isNumber,
   crPointGetter,
   fGetY,
   getZeroCountFromStart,
   getZeroIndexFromEnd
 } from './seriaHelperFn';
-
-const _isArr = Array.isArray
-, _isNaN = Number.isNaN;
 
 const _calcChanges = (
   yPrev,
@@ -83,7 +85,7 @@ export const findMinY = _fFindY(Number.POSITIVE_INFINITY, _findMinY)
 export const findMaxY = _fFindY(Number.NEGATIVE_INFINITY, _findMaxY)
 
 export const filterTrimZero = (data) => {
-  if (!_isArr(data)) { return data; }
+  if (!isArr(data)) { return data; }
 
   const _getY = fGetY(data[0]);
   if (!_getY) { return data; }
@@ -100,7 +102,7 @@ export const filterTrimZero = (data) => {
 }
 
 export const hasZeroOrLessValue = data => {
-  if (!_isArr(data)) { return false; }
+  if (!isArr(data)) { return false; }
   const _getY = fGetY(data[0]);
   for(let i=0; i<data.length; i++){
     if (_getY(data[i]) <= 0) {
@@ -131,7 +133,7 @@ export const mean = (data) => {
   , _avg = _numberOfPoints !== 0
       ? parseInt(_sum.div(_numberOfPoints).toFixed(0), 10)
       : NaN;
-  return _isNaN(_avg) ? []
+  return isNaN(_avg) ? []
    : [
        [getX(data[0]), _avg],
        [getX(data[_maxIndex]), _avg]

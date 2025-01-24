@@ -1,17 +1,14 @@
+import {
+  isArr,
+  isNumber,
+  isObj
+} from '../utils/isTypeFn';
 import { roundBy } from './mathFn';
 
-const _isArr = Array.isArray
-, _isNumber = n => typeof n === "number"
-  && (n-n === 0)
-, _isObj = obj => typeof obj === "object"
-  && obj !== null;
-
-export const isNumber = _isNumber
-
 const _getDataPoint = arr => {
-  if (!_isArr(arr)) { return; }
+  if (!isArr(arr)) { return; }
   for (let i=0; i<arr.length; i++){
-    if (_isObj(arr[i])) { return arr[i]; }
+    if (isObj(arr[i])) { return arr[i]; }
   }
   return;
 }
@@ -19,7 +16,7 @@ const _getDataPoint = arr => {
 export const crPointGetter = data => {
   const _dataPoint = _getDataPoint(data);
   return _dataPoint
-    ? _isArr(_dataPoint)
+    ? isArr(_dataPoint)
        ? [p => p[0], p => p[1]]
        : [p => p.x, p => p.y]
     : [];
@@ -27,10 +24,10 @@ export const crPointGetter = data => {
 
 export const fGetY = (point) => {
   if (!point) { return; }
-  if (_isArr(point)) {
+  if (isArr(point)) {
     return p => p[1];
   }
-  if (_isNumber(point.y)) {
+  if (isNumber(point.y)) {
     return p => p.y;
   }
   return;

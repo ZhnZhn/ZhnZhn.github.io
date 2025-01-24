@@ -1,9 +1,7 @@
 import Big from 'big.js';
 
-import {
-  isNumber,
-  crDataArrays
-} from './seriaHelperFn';
+import { isNumber } from '../utils/isTypeFn';
+import { crDataArrays } from './seriaHelperFn';
 
 const sma = (
   data,
