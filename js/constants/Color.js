@@ -1,13 +1,10 @@
 "use strict";
 
 exports.__esModule = true;
-exports.COLOR_Y_TICK = exports.COLOR_Y_LINE = exports.COLOR_Y_LABEL = exports.COLOR_Y_GRID_LINE = exports.COLOR_X_TICK = exports.COLOR_X_LINE = exports.COLOR_X_LABEL = exports.COLOR_X_GRID_LINE = exports.COLOR_WHITE = exports.COLOR_TOOLTIP = exports.COLOR_TITLE_SHOW = exports.COLOR_TITLE_HIDE = exports.COLOR_S_VOLUME = exports.COLOR_S_TURNOVER = exports.COLOR_S_TRADES = exports.COLOR_S_STOCK_CLOSE = exports.COLOR_S_PRE_SETTLE = exports.COLOR_S_OPEN_INTEREST = exports.COLOR_S_OPEN = exports.COLOR_S_LOW = exports.COLOR_S_IMPORTS = exports.COLOR_S_HIGH = exports.COLOR_S_EXPORTS = exports.COLOR_S_CLOSE = exports.COLOR_S_BALANCE = exports.COLOR_S_ADJ_CLOSE = exports.COLOR_SPLIT_RATIO = exports.COLOR_RED = exports.COLOR_PLOT_PRINT = exports.COLOR_PLOT_G3 = exports.COLOR_PLOT_G2 = exports.COLOR_PLOT_G1 = exports.COLOR_PLOT = exports.COLOR_MONO_BASE3 = exports.COLOR_MONO_BASE2 = exports.COLOR_MONO_BASE1 = exports.COLOR_METRIC_TITLE = exports.COLOR_MARKER_HOVER_LINE = exports.COLOR_MARKER_HOVER_FILL = exports.COLOR_MARKER_HOVER = exports.COLOR_LOW = exports.COLOR_LINE_PRINT = exports.COLOR_LEGEND_ITEM_HOVER = exports.COLOR_LEGEND_ITEM_HIDDEN = exports.COLOR_LEGEND_ITEM = exports.COLOR_LABEL_LINK = exports.COLOR_HOVER = exports.COLOR_HIGH = exports.COLOR_HALO_BASE = exports.COLOR_GRID_LINE_PRINT = exports.COLOR_GREY = exports.COLOR_GREEN = exports.COLOR_EX_DIVIDEND = exports.COLOR_DATE = exports.COLOR_CROSSHAIR = exports.COLOR_COLUMN_MARKER_LINE = exports.COLOR_COLUMN_HOVER_LINE = exports.COLOR_CHART_TITLE = exports.COLOR_CHART_SUBTITLE = exports.COLOR_CHART_PRINT = exports.COLOR_CHART = exports.COLOR_BLUE = exports.COLOR_BG_TITLE = exports.COLOR_AREA_MARKER_LINE = exports.COLOR_AREA_HOVER_LINE = exports.COLOR_AREA_FILL_PRINT = void 0;
+exports.COLOR_Y_TICK = exports.COLOR_Y_LINE = exports.COLOR_Y_LABEL = exports.COLOR_Y_GRID_LINE = exports.COLOR_X_TICK = exports.COLOR_X_LINE = exports.COLOR_X_LABEL = exports.COLOR_X_GRID_LINE = exports.COLOR_WHITE = exports.COLOR_TOOLTIP = exports.COLOR_TITLE_SHOW = exports.COLOR_TITLE_HIDE = exports.COLOR_S_STOCK_CLOSE = exports.COLOR_S_OPEN = exports.COLOR_S_LOW = exports.COLOR_S_HIGH = exports.COLOR_SPLIT_RATIO = exports.COLOR_RED = exports.COLOR_PLOT_PRINT = exports.COLOR_PLOT_G3 = exports.COLOR_PLOT_G2 = exports.COLOR_PLOT_G1 = exports.COLOR_PLOT = exports.COLOR_MONO_BASE3 = exports.COLOR_MONO_BASE2 = exports.COLOR_MONO_BASE1 = exports.COLOR_METRIC_TITLE = exports.COLOR_MARKER_HOVER_LINE = exports.COLOR_MARKER_HOVER_FILL = exports.COLOR_MARKER_HOVER = exports.COLOR_LOW = exports.COLOR_LINE_PRINT = exports.COLOR_LEGEND_ITEM_HOVER = exports.COLOR_LEGEND_ITEM_HIDDEN = exports.COLOR_LEGEND_ITEM = exports.COLOR_LABEL_LINK = exports.COLOR_HOVER = exports.COLOR_HIGH = exports.COLOR_HALO_BASE = exports.COLOR_GRID_LINE_PRINT = exports.COLOR_GREY = exports.COLOR_GREEN = exports.COLOR_EX_DIVIDEND = exports.COLOR_DATE = exports.COLOR_CROSSHAIR = exports.COLOR_COLUMN_MARKER_LINE = exports.COLOR_COLUMN_HOVER_LINE = exports.COLOR_CHART_TITLE = exports.COLOR_CHART_SUBTITLE = exports.COLOR_CHART_PRINT = exports.COLOR_CHART = exports.COLOR_BLUE = exports.COLOR_BG_TITLE = exports.COLOR_AREA_MARKER_LINE = exports.COLOR_AREA_HOVER_LINE = exports.COLOR_AREA_FILL_PRINT = void 0;
 const P_HIGH = '#4caf50',
   P_RED = '#f44336',
-  P_GREEN = '#4da54c',
   P_BLUE = '#2f7ed8',
-  P_ORANGE = '#e77f32',
-  P_PURPLE = '#9f588e',
   P_SIREN = '#a487d4',
   P_YELLOW = '#f1d600',
   P_GREY = 'grey',
@@ -72,15 +69,5 @@ const COLOR_MARKER_HOVER_LINE = exports.COLOR_MARKER_HOVER_LINE = '#ff0';
 const COLOR_S_OPEN = exports.COLOR_S_OPEN = '#90ed7d';
 const COLOR_S_HIGH = exports.COLOR_S_HIGH = P_HIGH;
 const COLOR_S_LOW = exports.COLOR_S_LOW = P_RED;
-const COLOR_S_VOLUME = exports.COLOR_S_VOLUME = '#f7a35c';
-const COLOR_S_ADJ_CLOSE = exports.COLOR_S_ADJ_CLOSE = '#f15c80';
-const COLOR_S_OPEN_INTEREST = exports.COLOR_S_OPEN_INTEREST = '#8085e9';
-const COLOR_S_TURNOVER = exports.COLOR_S_TURNOVER = '#6b8f4b';
-const COLOR_S_PRE_SETTLE = exports.COLOR_S_PRE_SETTLE = '#e77f32';
-const COLOR_S_CLOSE = exports.COLOR_S_CLOSE = P_BLACK;
 const COLOR_S_STOCK_CLOSE = exports.COLOR_S_STOCK_CLOSE = '#7cb5ec';
-const COLOR_S_TRADES = exports.COLOR_S_TRADES = P_BLACK;
-const COLOR_S_BALANCE = exports.COLOR_S_BALANCE = P_PURPLE;
-const COLOR_S_IMPORTS = exports.COLOR_S_IMPORTS = P_GREEN;
-const COLOR_S_EXPORTS = exports.COLOR_S_EXPORTS = P_ORANGE;
 //# sourceMappingURL=Color.js.map
