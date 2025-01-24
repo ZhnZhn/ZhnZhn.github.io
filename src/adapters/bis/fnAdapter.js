@@ -15,9 +15,10 @@ import {
 
 const _crCategoryToken = (
   seriaType,
-  item
+  item,
+  numberOfToken=1
 ) => isCategory(seriaType)
-  ? "*"
+  ? numberOfToken === 1 ? "*" : "*.*"
   : getValue(item)
 , _crItemIdDf = ({
   dfPrefix,
@@ -40,10 +41,11 @@ const _crCategoryToken = (
 )
 , _crItemId21 = ({
   items,
+  seriaType,
   dfSuffix
 }) => joinByDot(
   getValue(items[1]),
-  getValue(items[0]),
+  _crCategoryToken(seriaType, items[0], 2),
   dfSuffix
 )
 , _getCrItemId = crGetRoute({
@@ -62,7 +64,7 @@ export const getSeriesCollection = (
 
 const _fGetAttribute = (
   propName,
-  transformValue
+  transformValue=FN_IDENTITY
 ) => element => element
   ? transformValue(element.getAttribute(propName))
   : null;
@@ -78,8 +80,7 @@ export const getTimePeriod = _fGetAttribute(
 )
 
 export const getRefArea = _fGetAttribute(
-  "REF_AREA",
-  FN_IDENTITY
+  "REF_AREA"
 )
 export const fCrCategoryName = ({
   dfCategory
