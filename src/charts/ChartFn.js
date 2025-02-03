@@ -15,21 +15,22 @@ import {
   calcPercent,
   crId
 } from '../math/mathFn';
+import {
+  findDateIndex
+} from '../math/seriaFn';
+
+import {
+  isFn,
+  isNumber,
+  isArr
+} from '../utils/isTypeFn';
 import formatNumber from '../utils/formatNumber';
 import formatAllNumber from '../utils/formatAllNumber';
-
-import { arrFactoryFindIndexByProp } from '../utils/arrFn';
-import { dmyToUTC } from '../utils/dateFn';
 
 import { fSecondYAxis } from './Chart';
 
 
-const _isFn = fn => typeof fn === 'function'
-, _isNumber = n => typeof n === 'number'
-    && n-n===0
-, _isArr = Array.isArray
-, _assign = Object.assign
-, _findIndexByX = arrFactoryFindIndexByProp('x')
+const _assign = Object.assign
 
 , INITIAL_MAX_NUMBER = Number.NEGATIVE_INFINITY
 , INITIAL_MIN_NUMBER = Number.POSITIVE_INFINITY
@@ -66,7 +67,7 @@ const _addSeries = ({ chart, series, label, hasSecondYAxis }) => {
     series.color = _color
   }
 
-  if (_isArr(series)){
+  if (isArr(series)){
     const _max = series.length - 1;
     series.forEach((seria, index) => {
       if (hasSecondYAxis) {
@@ -124,8 +125,8 @@ const _getMinMaxFromSeries = (series, options) => {
   , _min = min>minY ? minY : min
   , _max = max<maxY ? maxY : max;
   return [
-    _isNumber(_min) ? _min : null,
-    _isNumber(_max) ? _max : null
+    isNumber(_min) ? _min : null,
+    isNumber(_max) ? _max : null
   ];
 }
 
@@ -134,7 +135,7 @@ const _updateYAxisMinMax = (
   options
 ) => {
   const _yAxis = chart?.yAxis?.[0];
-  if (!hasSecondYAxis && _isFn(_yAxis?.update)) {
+  if (!hasSecondYAxis && isFn(_yAxis?.update)) {
     const [min, max] = _getMinMaxFromSeries(series, options);
     _yAxis.setExtremes(min, max, true)
   }
@@ -219,15 +220,12 @@ export const crValueMoving = (
 ) => {
   const _id = (chart.userOptions.zhConfig || {}).id
   , points = chart.series[0].data
-  , mlsUTC = dmyToUTC(dateTo)
-  , index = _isNumber(mlsUTC)
-      ? _findIndexByX(points, mlsUTC)
-      : -1
+  , index = findDateIndex(points, dateTo)
   , valueTo = index === -1
       ? void 0
       : points[index].y;
 
-  return _isNumber(valueTo)
+  return isNumber(valueTo)
     ? _assign({}, prev,
         crVm({
           nowValue: prev.value,

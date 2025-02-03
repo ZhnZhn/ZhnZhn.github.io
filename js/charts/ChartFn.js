@@ -12,16 +12,12 @@ exports.toTdmyIf = _dateFormat.toTdmyIf;
 var _mathFn = require("../math/mathFn");
 exports.crId = _mathFn.crId;
 var _big = _interopRequireDefault(require("big.js"));
+var _seriaFn = require("../math/seriaFn");
+var _isTypeFn = require("../utils/isTypeFn");
 var _formatNumber2 = _interopRequireDefault(require("../utils/formatNumber"));
 var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
-var _arrFn = require("../utils/arrFn");
-var _dateFn = require("../utils/dateFn");
 var _Chart = require("./Chart");
-const _isFn = fn => typeof fn === 'function',
-  _isNumber = n => typeof n === 'number' && n - n === 0,
-  _isArr = Array.isArray,
-  _assign = Object.assign,
-  _findIndexByX = (0, _arrFn.arrFactoryFindIndexByProp)('x'),
+const _assign = Object.assign,
   INITIAL_MAX_NUMBER = Number.NEGATIVE_INFINITY,
   INITIAL_MIN_NUMBER = Number.POSITIVE_INFINITY,
   C1_SECOND_Y_AXIS = '#f45b5b',
@@ -57,7 +53,7 @@ const _addSeries = _ref => {
     series.yAxis = label;
     series.color = _color;
   }
-  if (_isArr(series)) {
+  if ((0, _isTypeFn.isArr)(series)) {
     const _max = series.length - 1;
     series.forEach((seria, index) => {
       if (hasSecondYAxis) {
@@ -95,29 +91,27 @@ const _renderSeriesLabel = (chart, labelText, x, y, color) => chart.renderer.tex
   'font-weight': 800
 }).add();
 const _getMinMaxFromSeries = (series, options) => {
-  var _options$yAxis;
   const {
       minY,
       maxY
     } = series || {},
-    _optionYAxis = options == null || (_options$yAxis = options.yAxis) == null ? void 0 : _options$yAxis[0],
+    _optionYAxis = options?.yAxis?.[0],
     {
       min,
       max
     } = _optionYAxis || {},
     _min = min > minY ? minY : min,
     _max = max < maxY ? maxY : max;
-  return [_isNumber(_min) ? _min : null, _isNumber(_max) ? _max : null];
+  return [(0, _isTypeFn.isNumber)(_min) ? _min : null, (0, _isTypeFn.isNumber)(_max) ? _max : null];
 };
 const _updateYAxisMinMax = (_ref2, options) => {
-  var _chart$yAxis;
   let {
     hasSecondYAxis,
     series,
     chart
   } = _ref2;
-  const _yAxis = chart == null || (_chart$yAxis = chart.yAxis) == null ? void 0 : _chart$yAxis[0];
-  if (!hasSecondYAxis && _isFn(_yAxis == null ? void 0 : _yAxis.update)) {
+  const _yAxis = chart?.yAxis?.[0];
+  if (!hasSecondYAxis && (0, _isTypeFn.isFn)(_yAxis?.update)) {
     const [min, max] = _getMinMaxFromSeries(series, options);
     _yAxis.setExtremes(min, max, true);
   }
@@ -129,10 +123,10 @@ const _setPlotLine = function (plotLine, value, delta) {
   }
   if (plotLine) {
     plotLine.value = value;
-    plotLine.label.text = "" + _formatNumber(value) + delta;
+    plotLine.label.text = `${_formatNumber(value)}${delta}`;
   }
 };
-const _crDelta = perToValue => "\xA0\xA0\u0394 " + perToValue + "%",
+const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`,
   _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10),
   _calcPerTo = (bFrom, bValue, bTotal) => (0, _mathFn.calcPercent)({
     bValue: bFrom.minus(bValue),
@@ -187,10 +181,9 @@ exports.afterSetExtremesYAxis = afterSetExtremesYAxis;
 const crValueMoving = (chart, prev, dateTo) => {
   const _id = (chart.userOptions.zhConfig || {}).id,
     points = chart.series[0].data,
-    mlsUTC = (0, _dateFn.dmyToUTC)(dateTo),
-    index = _isNumber(mlsUTC) ? _findIndexByX(points, mlsUTC) : -1,
+    index = (0, _seriaFn.findDateIndex)(points, dateTo),
     valueTo = index === -1 ? void 0 : points[index].y;
-  return _isNumber(valueTo) ? _assign({}, prev, (0, _mathFn.crValueMoving)({
+  return (0, _isTypeFn.isNumber)(valueTo) ? _assign({}, prev, (0, _mathFn.crValueMoving)({
     nowValue: prev.value,
     prevValue: valueTo,
     fnFormat: _formatAllNumber.default

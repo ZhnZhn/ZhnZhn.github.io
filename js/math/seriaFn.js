@@ -2,9 +2,10 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.normalize = exports.median = exports.mean = exports.hasZeroOrLessValue = exports.growthRate = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.changesBetween = void 0;
+exports.normalize = exports.median = exports.mean = exports.hasZeroOrLessValue = exports.growthRate = exports.findMinY = exports.findMaxY = exports.findDateIndex = exports.filterTrimZero = exports.changesBetween = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _isTypeFn = require("../utils/isTypeFn");
+var _dateFn = require("../utils/dateFn");
 var _mathFn = require("./mathFn");
 var _fIndicatorCalc = _interopRequireDefault(require("./fIndicatorCalc"));
 var _diff = _interopRequireDefault(require("./diff"));
@@ -31,6 +32,20 @@ const _findMinY = (y, min) => (0, _isTypeFn.isNumber)(y) && y < min ? y : min;
 const _findMaxY = (y, max) => (0, _isTypeFn.isNumber)(y) && y > max ? y : max;
 const growthRate = exports.growthRate = (0, _fIndicatorCalc.default)(_roc.default);
 const changesBetween = exports.changesBetween = (0, _fIndicatorCalc.default)(_calcChanges);
+const findDateIndex = (points, strDmy) => {
+  const getX = (0, _seriaHelperFn.crPointGetter)(points)[0],
+    mlsUTC = (0, _dateFn.dmyToUTC)(strDmy);
+  if (!(0, _isTypeFn.isNumber)(mlsUTC)) {
+    return -1;
+  }
+  for (let i = 0; i < points.length; i++) {
+    if (getX(points[i]) === mlsUTC) {
+      return i;
+    }
+  }
+  return -1;
+};
+exports.findDateIndex = findDateIndex;
 const normalize = d => {
   const [getX, getY] = (0, _seriaHelperFn.crPointGetter)(d);
   if (!getX) {

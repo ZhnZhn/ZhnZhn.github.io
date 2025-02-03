@@ -6,6 +6,8 @@ import {
   isNumber
 } from '../utils/isTypeFn';
 
+import { dmyToUTC } from '../utils/dateFn';
+
 import { toFixedNumber } from './mathFn';
 import fIndicatorCalc from './fIndicatorCalc';
 import diff from './diff';
@@ -53,6 +55,23 @@ const _findMaxY = (y, max) => isNumber(y) && y>max
 
 export const growthRate = fIndicatorCalc(roc)
 export const changesBetween = fIndicatorCalc(_calcChanges)
+
+export const findDateIndex = (
+  points,
+  strDmy
+) => {
+  const getX = crPointGetter(points)[0]
+  , mlsUTC = dmyToUTC(strDmy);
+  if (!isNumber(mlsUTC)) {
+    return -1;
+  }
+  for(let i=0; i<points.length; i++){
+    if (getX(points[i]) === mlsUTC) {
+      return i;
+    }
+  }
+  return -1;
+}
 
 export const normalize = (d) => {
   const [getX, getY] = crPointGetter(d);
