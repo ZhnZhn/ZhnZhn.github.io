@@ -6,10 +6,10 @@ import {
   useEffect,
   isBool,
   isFn,
+  isInputValid,
   focusRefElement
 } from '../uiApi';
 
-import { isDmy } from '../../utils/dateFn';
 import formatAllNumber from '../../utils/formatAllNumber';
 
 import ModalPopup from '../zhn-moleculs/ModalPopup';
@@ -80,7 +80,7 @@ const ValueMovingModal = (
   , _refInput = useRef()
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hEnterDate = useCallback(dateTo => {
-    if (isDmy(dateTo)){
+    if (isInputValid(_refInput)){
       setMsgDateTo(updateDateTo(dateTo)
          ? ''
          : `No data for ${dateTo}`
@@ -117,7 +117,6 @@ const ValueMovingModal = (
          refEl={_refInput}
          initialValue={dateTo}
          msgErr={msgDateTo}
-         onTest={isDmy}
          onEnter={_hEnterDate}
       />}
     </ModalPopup>

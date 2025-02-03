@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _dateFn = require("../../utils/dateFn");
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _SpanToken = require("../zhn/SpanToken");
@@ -64,8 +63,8 @@ const ValueMovingModal = props => {
     _refInput = (0, _uiApi.useRef)()
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hEnterDate = (0, _uiApi.useCallback)(dateTo => {
-      if ((0, _dateFn.isDmy)(dateTo)) {
-        setMsgDateTo(updateDateTo(dateTo) ? '' : "No data for " + dateTo);
+      if ((0, _uiApi.isInputValid)(_refInput)) {
+        setMsgDateTo(updateDateTo(dateTo) ? '' : `No data for ${dateTo}`);
       }
     }, []);
   /*eslint-disable react-hooks/exhaustive-deps */
@@ -97,7 +96,6 @@ const ValueMovingModal = props => {
       refEl: _refInput,
       initialValue: dateTo,
       msgErr: msgDateTo,
-      onTest: _dateFn.isDmy,
       onEnter: _hEnterDate
     })]
   });
