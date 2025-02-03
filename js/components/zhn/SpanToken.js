@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.SpanValue = exports.SpanLabel = exports.SpanInputLabel = exports.SpanDate = exports.SpanBlack = exports.CL_SP_INPUT_LABEL = void 0;
+exports.SpanValue = exports.SpanLabel = exports.SpanInputLabel = exports.SpanDate = exports.SpanBoldBlack = exports.SpanBlack = exports.CL_SP_INPUT_LABEL = void 0;
 var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const _fSpanToken = className => _ref => {
@@ -21,7 +21,8 @@ const SpanValue = exports.SpanValue = _fSpanToken((0, _styleFn.crBoldCn)("sp-val
 const SpanDate = exports.SpanDate = _fSpanToken((0, _styleFn.crBoldCn)("sp-date"));
 const CL_SP_LABEL = (0, _styleFn.crCnNotSelected)("sp-label");
 const SpanLabel = exports.SpanLabel = _fSpanToken((0, _styleFn.crBoldCn)(CL_SP_LABEL));
-const CL_SP_INPUT_LABEL = exports.CL_SP_INPUT_LABEL = CL_SP_LABEL + " sp-input";
+const CL_SP_INPUT_LABEL = exports.CL_SP_INPUT_LABEL = `${CL_SP_LABEL} sp-input`;
 const SpanInputLabel = exports.SpanInputLabel = _fSpanToken((0, _styleFn.crBoldCn)(CL_SP_INPUT_LABEL));
 const SpanBlack = exports.SpanBlack = _fSpanToken(_styleFn.CL_BLACK);
+const SpanBoldBlack = exports.SpanBoldBlack = _fSpanToken((0, _styleFn.crBoldCn)(_styleFn.CL_BLACK));
 //# sourceMappingURL=SpanToken.js.map
