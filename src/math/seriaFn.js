@@ -73,24 +73,32 @@ export const findDateIndex = (
   return -1;
 }
 
-export const normalize = (d) => {
+export const normalize = (
+  d,
+  strDmy
+) => {
   const [getX, getY] = crPointGetter(d);
   if (!getX) {
     return [];
   }
 
-  const _y0 = getY(d[0]);
-  if ( !(isNumber(_y0) && _y0 !== 0) ) {
+  const _dmyIndex = strDmy
+    ? findDateIndex(d, strDmy)
+    : -1
+  , _dateIndex = _dmyIndex === -1
+    ? 0
+    : _dmyIndex
+  , _y = getY(d[_dateIndex]);
+  if (!isNumber(_y) || _y === 0) {
     return [];
   }
 
   const _d = [];
-  let i = 0;
-  for(; i<d.length; i++) {
+  for (let p of d){
     _d.push([
-      getX(d[i]),
+      getX(p),
       parseFloat(
-        Big(getY(d[i])).div(_y0)
+        Big(getY(p)).div(_y)
          .times(100)
          .toFixed(2)
       )

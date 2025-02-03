@@ -46,19 +46,20 @@ const findDateIndex = (points, strDmy) => {
   return -1;
 };
 exports.findDateIndex = findDateIndex;
-const normalize = d => {
+const normalize = (d, strDmy) => {
   const [getX, getY] = (0, _seriaHelperFn.crPointGetter)(d);
   if (!getX) {
     return [];
   }
-  const _y0 = getY(d[0]);
-  if (!((0, _isTypeFn.isNumber)(_y0) && _y0 !== 0)) {
+  const _dmyIndex = strDmy ? findDateIndex(d, strDmy) : -1,
+    _dateIndex = _dmyIndex === -1 ? 0 : _dmyIndex,
+    _y = getY(d[_dateIndex]);
+  if (!(0, _isTypeFn.isNumber)(_y) || _y === 0) {
     return [];
   }
   const _d = [];
-  let i = 0;
-  for (; i < d.length; i++) {
-    _d.push([getX(d[i]), parseFloat((0, _big.default)(getY(d[i])).div(_y0).times(100).toFixed(2))]);
+  for (let p of d) {
+    _d.push([getX(p), parseFloat((0, _big.default)(getY(p)).div(_y).times(100).toFixed(2))]);
   }
   return _d;
 };
