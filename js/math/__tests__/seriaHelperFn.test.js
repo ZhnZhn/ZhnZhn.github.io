@@ -1,20 +1,6 @@
 "use strict";
 
 var _seriaHelperFn = require("../seriaHelperFn");
-describe("isNumber", () => {
-  const fn = _seriaHelperFn.isNumber;
-  test("should check is value number type", () => {
-    expect(fn(0.1)).toBe(true);
-    expect(fn(0)).toBe(true);
-    expect(fn(-0)).toBe(true);
-    expect(fn(+0)).toBe(true);
-    expect(fn(NaN)).toBe(false);
-    expect(fn(null)).toBe(false);
-    expect(fn(undefined)).toBe(false);
-    expect(fn('')).toBe(false);
-    expect(fn({})).toBe(false);
-  });
-});
 describe("crPointGetter", () => {
   const fn = _seriaHelperFn.crPointGetter;
   test("should return array with two functions", () => {

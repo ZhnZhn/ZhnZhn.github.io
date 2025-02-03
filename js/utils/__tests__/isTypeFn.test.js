@@ -18,7 +18,14 @@ describe('isNumber', () => {
   test('should return true for number otherwise false', () => {
     expect(fn(-0.2)).toBe(true);
     expect(fn(2)).toBe(true);
+    expect(fn(0)).toBe(true);
+    expect(fn(-0)).toBe(true);
+    expect(fn(+0)).toBe(true);
     expect(fn(NaN)).toBe(false);
+    expect(fn(null)).toBe(false);
+    expect(fn(undefined)).toBe(false);
+    expect(fn('')).toBe(false);
+    expect(fn({})).toBe(false);
   });
 });
 describe('isPositiveNumber', () => {
