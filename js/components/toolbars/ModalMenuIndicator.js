@@ -9,7 +9,7 @@ var _IndicatorType = require("./IndicatorType");
 var _ModalMenu = require("./ModalMenu.Style");
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _RowFnType = _interopRequireDefault(require("./RowFnType1"));
-var _RowFnPlusMinus = _interopRequireDefault(require("./RowFnPlusMinus"));
+var _RowNorm = _interopRequireDefault(require("./RowNorm"));
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 const C_GROW = '#90ed7d',
@@ -19,7 +19,7 @@ const C_GROW = '#90ed7d',
   };
 const FN_ROC = ['ROC', C_GROW, _seriaFn.growthRate, true],
   FN_DIFF = ['DIFF', C_GROW, _seriaFn.changesBetween, true],
-  FN_NORM = ['NORM', C_GROW, _seriaFn.normalize, false];
+  FN_NORM = ['NORM', C_GROW, _seriaFn.normalize, true];
 const NORM_CAPTION_EL = /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
   children: ["Normalize (100*y", /*#__PURE__*/(0, _jsxRuntime.jsx)("sub", {
     children: "t"
@@ -56,7 +56,7 @@ const ModalMenuIndicator = _ref => {
         caption: "Growth Rate",
         configArr: FN_ROC,
         getChart: getChart
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowFnPlusMinus.default, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowNorm.default, {
         caption: NORM_CAPTION_EL,
         configArr: FN_NORM,
         getChart: getChart
@@ -77,6 +77,5 @@ const ModalMenuIndicator = _ref => {
     })
   });
 };
-var _default = ModalMenuIndicator;
-exports.default = _default;
+var _default = exports.default = ModalMenuIndicator;
 //# sourceMappingURL=ModalMenuIndicator.js.map

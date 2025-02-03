@@ -11,7 +11,7 @@ import { S_MODAL_MENU } from './ModalMenu.Style';
 
 import ModalPopup from '../zhn-moleculs/ModalPopup';
 import RowFnType1 from './RowFnType1';
-import RowFnPlusMinus from './RowFnPlusMinus';
+import RowNorm from './RowNorm';
 
 const C_GROW = '#90ed7d'
 , S_PANE = {
@@ -21,7 +21,7 @@ const C_GROW = '#90ed7d'
 
 const FN_ROC = ['ROC', C_GROW, growthRate, true]
 , FN_DIFF = ['DIFF', C_GROW, changesBetween, true]
-, FN_NORM = ['NORM', C_GROW, normalize, false];
+, FN_NORM = ['NORM', C_GROW, normalize, true];
 
 const NORM_CAPTION_EL = (
   <>
@@ -59,10 +59,10 @@ const ModalMenuIndicator = ({
            configArr={FN_ROC}
            getChart={getChart}
         />
-        <RowFnPlusMinus
-          caption={NORM_CAPTION_EL}
-          configArr={FN_NORM}
-          getChart={getChart}
+        <RowNorm
+           caption={NORM_CAPTION_EL}
+           configArr={FN_NORM}
+           getChart={getChart}
         />
         {
           indicatorConfigs.map(([RowComp, key, type]) => {
