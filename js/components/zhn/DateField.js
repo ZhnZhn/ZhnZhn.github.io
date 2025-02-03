@@ -43,7 +43,7 @@ const DateField = _ref => {
     _hKeyDown = (0, _useInputKeyDown.default)({
       onEnter,
       onDelete: () => setState(_initState(initialValue))
-    }, [initialValue]);
+    }, [initialValue, onEnter]);
   (0, _uiApi.useEffect)(() => setState(_initState(initialValue)), [initialValue]);
   (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValue: () => value,

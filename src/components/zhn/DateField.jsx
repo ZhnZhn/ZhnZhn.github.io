@@ -69,7 +69,7 @@ const DateField = ({
   , _hKeyDown = useInputKeyDown({
       onEnter,
       onDelete: () => setState(_initState(initialValue))
-  }, [initialValue]);
+  }, [initialValue, onEnter]);
 
   useEffect(
     () => setState(_initState(initialValue)),
