@@ -78,6 +78,16 @@ export const setRefValue = (
   }
 }
 
+export const isRefElementContaintsEvtTarget = (
+  ref,
+  evt
+) => {
+  const _el = getRefValue(ref);
+  return _el
+    && isFn(_el.contains)
+    && _el.contains(evt.target);
+}
+
 export const getRefElementStyle = (
   ref
 ) => (getRefValue(ref) || {}).style

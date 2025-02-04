@@ -3,7 +3,8 @@ import {
   useCallback,
   useEffect,
   getRefValue,
-  setRefValue
+  setRefValue,
+  isRefElementContaintsEvtTarget
 } from '../uiApi';
 
 const _removeClickListener = (
@@ -23,13 +24,11 @@ const useClickOutside = (
   const _ref = useRef(null)
   , _refIs = useRef(null)
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hClickOutside = useCallback(event => {
-      const _el = getRefValue(_ref);
-      if ( _el && _el.contains
-        && !_el.contains(event.target)
-      ){
-        event.stopPropagation()
-        onClickOutside(event)
+  , _hClickOutside = useCallback(evt => {
+      //const _el = getRefValue(_ref);
+      if (!isRefElementContaintsEvtTarget(_ref, evt)){
+        evt.stopPropagation()
+        onClickOutside(evt)
       }
   }, [])
   // onClickOutside
@@ -38,7 +37,7 @@ const useClickOutside = (
   useEffect(() => {
     if (isShow && !getRefValue(_refIs)) {
       document.addEventListener('click', _hClickOutside, true)
-      setRefValue(_refIs, true)      
+      setRefValue(_refIs, true)
     } else if (!isShow) {
       _removeClickListener(_hClickOutside, _refIs)
     }
