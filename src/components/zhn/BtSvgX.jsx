@@ -1,29 +1,35 @@
-import { crAriaLabelProp } from '../a11yFn';
 import { crBtSvgCn } from '../styleFn';
 
-import Button from './Button';
 import SvgX from './svg/SvgX';
 
-const _fBtSvgX = (
+const _fCrBtSvgX = (
   className,
-  dfAriaLabel
-) => (props) => (
-  <Button
-    {...crAriaLabelProp(props, dfAriaLabel)}
+  dfAriaLabel,
+  crProps
+) => (
+  props
+) => (
+  <button
+    {...crProps(props)}
+    aria-label={props.ariaLabel || dfAriaLabel}
+    type="button"
     tabIndex="-1"
     className={className}
     style={props.style}
     onClick={props.onClick}
   >
     <SvgX />
-  </Button>
+  </button>
 );
 
-export const BtSvgClear = _fBtSvgX(
+export const BtSvgClear = _fCrBtSvgX(
   crBtSvgCn("clear"),
-  "Clear input"
+  "Clear input",
+  props => ({ref: props.refEl})
 )
-export const BtSvgClose = _fBtSvgX(
+
+export const BtSvgClose = _fCrBtSvgX(
   crBtSvgCn("close"),
-  "Close"
+  "Close",
+  () => {}
 )
