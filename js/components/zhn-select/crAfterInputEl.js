@@ -15,13 +15,14 @@ const S_SVG_CLEAR = {
   right: 8,
   stroke: '#1b75bb'
 };
-const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isBtSvgClear, isShowOption, labelId, optionsViewId, _hClear, _hToggleOptions, propsOptions) => {
+const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isBtSvgClear, isShowOption, labelId, optionsViewId, _refBtClear, _hClear, _hToggleOptions, propsOptions) => {
   const _optionNames = optionNames || optionName || '';
   let _placeholder,
     _afterInputEl = null;
   if (!isLoading && !isLoadingFailed) {
     if (isBtSvgClear) {
       _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClear, {
+        refEl: _refBtClear,
         style: S_SVG_CLEAR,
         onClick: _hClear
       });

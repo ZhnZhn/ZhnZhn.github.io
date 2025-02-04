@@ -60,7 +60,7 @@ const InputSelect = _ref => {
     _getItemCaption = (0, _uiApi.useMemo)(() => item => (0, _InputSelectFn.crValue)((item || {})[propCaption]), [propCaption])
 
     /*eslint-disable react-hooks/exhaustive-deps */,
-    [_hideOptions, _getCurrentComp, _decorateCurrentComp, _setSelectedItemIndex, _selectItem] = (0, _uiApi.useMemo)(() => [() => toggleIsShowOption(false), () => {
+    [_getCurrentComp, _decorateCurrentComp, _setSelectedItemIndex, _selectItem] = (0, _uiApi.useMemo)(() => [() => {
       const _optionsEl = (0, _uiApi.getRefValue)(_refOptionsComp);
       return _optionsEl ? _optionsEl.childNodes.item((0, _uiApi.getRefValue)(_refIndexActive)) : void 0;
     }, () => {
@@ -195,13 +195,21 @@ const InputSelect = _ref => {
     /*eslint-enable react-hooks/exhaustive-deps */
 
     /*eslint-disable react-hooks/exhaustive-deps */,
-    [_focusInput, _hClear] = (0, _uiApi.useMemo)(() => [() => {
+    [_focusInput, _hClear, _hideOptions] = (0, _uiApi.useMemo)(() => [() => {
       (0, _uiApi.focusRefElement)(_refInput);
     }, () => {
       _clearInput();
       _focusInput();
-    }
+    },
     // _clearInput
+    evt => {
+      toggleIsShowOption(false);
+      const _btClear = (0, _uiApi.getRefValue)(_refBtClear);
+      if ((0, _uiApi.isRefElementContaintsEvtTarget)(_refBtClear, evt)) {
+        _hClear();
+      }
+    }
+    // _hClear
     ], []);
   /*eslint-enable react-hooks/exhaustive-deps */
 
@@ -226,7 +234,8 @@ const InputSelect = _ref => {
 
   (0, _InputSelectFn.updateOptionsIfFilters)(state, setState, filters, propCaption, onSelect, _setSelectedItemIndex);
   const _rootWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, style),
-    [afterInputEl, _placeholder] = (0, _crAfterInputEl.default)(isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isFocused && value, isShowOption, labelId, _optionsViewId, _hClear, toggleIsShowOption, propsOptions),
+    _refBtClear = (0, _uiApi.useRef)(),
+    [afterInputEl, _placeholder] = (0, _crAfterInputEl.default)(isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, !!(isFocused && value), isShowOption, labelId, _optionsViewId, _refBtClear, _hClear, toggleIsShowOption, propsOptions),
     _optionViewWidthStyle = (0, _InputSelectFn.crWidthStyle)(width, isShowOption ? _styleFn.S_BLOCK : _styleFn.S_NONE);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: _CL.CL_ROOT,

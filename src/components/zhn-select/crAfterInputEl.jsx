@@ -28,6 +28,7 @@ const crAfterInputEl = (
   labelId,
   optionsViewId,
 
+  _refBtClear,
   _hClear,
   _hToggleOptions,
   propsOptions
@@ -39,6 +40,7 @@ const crAfterInputEl = (
      if (isBtSvgClear) {
        _afterInputEl = (
           <BtSvgClear
+             refEl={_refBtClear}
              style={S_SVG_CLEAR}
              onClick={_hClear}
           />

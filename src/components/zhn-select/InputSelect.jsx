@@ -9,7 +9,8 @@ import {
 
   setRefValue,
   getRefValue,
-  focusRefElement
+  focusRefElement,
+  isRefElementContaintsEvtTarget
 } from '../uiApi';
 import {
   crAriaExpandedProps,
@@ -123,13 +124,11 @@ const InputSelect = ({
 
   /*eslint-disable react-hooks/exhaustive-deps */
   , [
-    _hideOptions,
     _getCurrentComp,
     _decorateCurrentComp,
     _setSelectedItemIndex,
     _selectItem
   ] = useMemo(() => [
-    () => toggleIsShowOption(false),
     () => {
       const _optionsEl = getRefValue(_refOptionsComp);
       return _optionsEl
@@ -290,7 +289,8 @@ const InputSelect = ({
   /*eslint-disable react-hooks/exhaustive-deps */
   , [
     _focusInput,
-    _hClear
+    _hClear,
+    _hideOptions
   ] = useMemo(() => [
     () => {
       focusRefElement(_refInput)
@@ -298,8 +298,16 @@ const InputSelect = ({
     () => {
       _clearInput()
       _focusInput()
-    }
+    },
     // _clearInput
+    (evt) => {
+      toggleIsShowOption(false)
+      const _btClear = getRefValue(_refBtClear);
+      if (isRefElementContaintsEvtTarget(_refBtClear, evt)) {
+        _hClear()
+      }
+    }
+    // _hClear
   ], []);
   /*eslint-enable react-hooks/exhaustive-deps */
 
@@ -339,6 +347,7 @@ const InputSelect = ({
   )
 
   const _rootWidthStyle = crWidthStyle(width, style)
+  , _refBtClear = useRef()
   , [
     afterInputEl,
     _placeholder
@@ -350,11 +359,12 @@ const InputSelect = ({
     optionNames,
     onLoadOption,
 
-    isFocused && value,
+    !!(isFocused && value),
     isShowOption,
     labelId,
     _optionsViewId,
 
+    _refBtClear,
     _hClear,
     toggleIsShowOption,
     propsOptions
