@@ -50,18 +50,21 @@ const DF_FROM_CHART = {
       zhConfig
     } = userOptions || {},
     {
+      itemCaption,
       id = 'id'
     } = zhConfig || {};
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ScrollPane.default, {
-    style: style,
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_PasteToTitle.default, {
-      chartId: id
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_PasteToSeriaList.default, {
-      chartId: id,
-      series: series,
-      options: _yAxisOptions,
-      onReg: _regSeriaRow,
-      onUnReg: _unregSeriaRow
+      text: itemCaption
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ScrollPane.default, {
+      style: style,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PasteToSeriaList.default, {
+        chartId: id,
+        series: series,
+        options: _yAxisOptions,
+        onReg: _regSeriaRow,
+        onUnReg: _unregSeriaRow
+      })
     })]
   });
 };

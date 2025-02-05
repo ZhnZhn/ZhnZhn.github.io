@@ -68,19 +68,23 @@ const SeriesPane = ({
     series
   } = fromChart || {}
   , { zhConfig } = userOptions || {}
-  , { id='id' } = zhConfig || {};
-
+  , {
+    itemCaption,
+    id='id'
+  } = zhConfig || {};
   return (
-    <ScrollPane style={style}>
-       <PasteToTitle chartId={id} />
-       <PasteToSeriaList
+    <>
+      <PasteToTitle text={itemCaption} />
+      <ScrollPane style={style}>
+        <PasteToSeriaList
           chartId={id}
           series={series}
           options={_yAxisOptions}
           onReg={_regSeriaRow}
           onUnReg={_unregSeriaRow}
-       />
-    </ScrollPane>
+        />
+      </ScrollPane>
+   </>
   );
 };
 

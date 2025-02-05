@@ -8,19 +8,19 @@ var _SpanToken = require("../zhn/SpanToken");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_TITLE = {
     paddingBottom: 4,
-    margin: '0 0 8px 16px',
+    margin: '10px 6px 8px 8px',
     borderBottom: '2px solid black'
   },
   S_CHART_ID = {
     display: 'inline-block',
     color: '#a487d4',
-    width: 200,
+    width: 240,
     verticalAlign: 'bottom',
     fontWeight: 'bold'
   };
 const PasteToTitle = _ref => {
   let {
-    chartId
+    text
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_TITLE,
@@ -28,7 +28,7 @@ const PasteToTitle = _ref => {
       children: "From Chart:\xA0"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
       style: S_CHART_ID,
-      text: chartId
+      text: text
     })]
   });
 };

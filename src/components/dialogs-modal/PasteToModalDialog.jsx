@@ -11,8 +11,8 @@ const S_MODAL = {
   margin: '70px auto 0px'
 }, S_SERIES_PANE = {
   overflowY: 'auto',
-  height: 250,
-  padding: '8px 10px 0 0'
+  height: 210,
+  padding: '8px 10px 135px 0'
 };
 
 const DF_DATA = {};
