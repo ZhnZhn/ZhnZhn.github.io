@@ -38,9 +38,10 @@ const DF_COLOR = '#2b908f',
     paddingLeft: 10
   },
   S_CAPTION_STYLE = {
-    ..._Row.S_INLINE_BLOCK_BOLD,
     width: 85,
-    paddingLeft: 5
+    paddingLeft: 5,
+    display: 'inline-block',
+    fontWeight: 'bold'
   },
   crSpanStyle = color => ({
     color,

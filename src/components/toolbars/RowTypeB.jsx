@@ -2,12 +2,9 @@ import { useState } from '../uiApi';
 
 import InputText from '../zhn/InputText';
 import { SvgPlus } from '../zhn/BtSvgCircle';
-import { SpanBlack } from '../zhn/SpanToken';
-
-import { S_INLINE_BLOCK_BOLD } from './Row.Style';
+import { SpanBoldBlack } from '../zhn/SpanToken';
 
 const S_CAPTION = {
-  ...S_INLINE_BLOCK_BOLD,
   width: 120
 }
 , S_INPUT_TEXT = {
@@ -33,9 +30,9 @@ const RowTypeB = ({
   } : void 0;
   return (
     <div>
-      <SpanBlack style={S_CAPTION}>
+      <SpanBoldBlack style={S_CAPTION}>
         {caption}
-      </SpanBlack>
+      </SpanBoldBlack>
       <InputText
          refEl={refEl}
          type="number"

@@ -9,14 +9,14 @@ var _jsxRuntime = require("react/jsx-runtime");
 const S_TITLE = {
     paddingBottom: 4,
     margin: '0 0 8px 16px',
-    fontWeight: 'bold',
     borderBottom: '2px solid black'
   },
   S_CHART_ID = {
     display: 'inline-block',
     color: '#a487d4',
     width: 200,
-    verticalAlign: 'bottom'
+    verticalAlign: 'bottom',
+    fontWeight: 'bold'
   };
 const PasteToTitle = _ref => {
   let {
@@ -24,7 +24,7 @@ const PasteToTitle = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_TITLE,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBoldBlack, {
       children: "From Chart:\xA0"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivEllipsis.default, {
       style: S_CHART_ID,

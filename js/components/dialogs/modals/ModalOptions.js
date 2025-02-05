@@ -15,8 +15,7 @@ const S_DIV_INPUT = {
 };
 const S_CAPTION = {
   paddingRight: 4,
-  fontSize: '16px',
-  fontWeight: 'bold'
+  fontSize: '16px'
 };
 const MIN_RT = 0,
   MAX_RT = 3;
@@ -43,7 +42,7 @@ const ModalOptions = _ref => {
     children: [onRoundTo && _isRt(dfRt) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_DIV_INPUT,
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBoldBlack, {
           style: S_CAPTION,
           children: "Round Decimals to"
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {

@@ -6,10 +6,8 @@ exports.default = void 0;
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _SpanToken = require("../zhn/SpanToken");
-var _Row = require("./Row.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_CAPTION = {
-    ..._Row.S_INLINE_BLOCK_BOLD,
     width: 48
   },
   S_INPUT_TEXT = {
@@ -29,7 +27,7 @@ const RowCaptionInput = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: style,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBoldBlack, {
       style: {
         ...S_CAPTION,
         ...captionStyle

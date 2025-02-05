@@ -1,11 +1,8 @@
 import InputText from '../zhn/InputText';
 import { SvgPlus } from '../zhn/BtSvgCircle';
-import { SpanBlack } from '../zhn/SpanToken';
+import { SpanBoldBlack } from '../zhn/SpanToken';
 
-import { S_INLINE_BLOCK_BOLD } from './Row.Style';
-
-const S_CAPTION = {
-  ...S_INLINE_BLOCK_BOLD,
+const S_CAPTION = {  
   width: 48
 },
 S_INPUT_TEXT = {
@@ -24,11 +21,11 @@ const RowCaptionInput = ({
   onAdd
 }) => (
   <div style={style}>
-    <SpanBlack
+    <SpanBoldBlack
       style={{...S_CAPTION, ...captionStyle}}
     >
       {caption}
-    </SpanBlack>
+    </SpanBoldBlack>
     <InputText
        refEl={refEl}
        type="number"

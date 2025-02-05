@@ -21,8 +21,7 @@ import InputText from '../zhn/InputText';
 import OpenClose from '../zhn/OpenClose';
 import {
   S_OPEN_CLOSE,
-  S_OC_STYLE,
-  S_INLINE_BLOCK_BOLD
+  S_OC_STYLE
 } from './Row.Style'
 
 const DF_COLOR = '#2b908f'
@@ -41,9 +40,10 @@ const DF_COLOR = '#2b908f'
 , S_PL_8 = { paddingLeft: 8 }
 , S_PL_10 = { paddingLeft: 10 }
 , S_CAPTION_STYLE = {
-   ...S_INLINE_BLOCK_BOLD,
    width: 85,
-   paddingLeft: 5
+   paddingLeft: 5,
+   display: 'inline-block',
+   fontWeight: 'bold'
 }
 , crSpanStyle = color => ({
   color,

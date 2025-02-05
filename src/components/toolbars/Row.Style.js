@@ -12,8 +12,3 @@ export const S_OC_STYLE = {
   paddingTop: 4,
   paddingRight: 8
 }
-
-export const S_INLINE_BLOCK_BOLD = {
-  display: 'inline-block',
-  fontWeight: 'bold'
-}

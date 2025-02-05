@@ -5,7 +5,7 @@ import {
 
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import InputText from '../../zhn/InputText';
-import { SpanBlack } from '../../zhn/SpanToken';
+import { SpanBoldBlack } from '../../zhn/SpanToken';
 import RowCheckBox2 from '../rows/RowCheckBox2';
 import {
   CL_POPUP_MENU,
@@ -18,8 +18,7 @@ const S_DIV_INPUT = {
 }
 const S_CAPTION = {
   paddingRight: 4,
-  fontSize: '16px',
-  fontWeight: 'bold'
+  fontSize: '16px'
 };
 
 const MIN_RT = 0, MAX_RT = 3;
@@ -52,7 +51,7 @@ const ModalOptions = ({
     {/*eslint-disable jsx-a11y/label-has-associated-control*/}
     {onRoundTo && _isRt(dfRt) && <div style={S_DIV_INPUT}>
         <label>
-          <SpanBlack style={S_CAPTION}>Round Decimals to</SpanBlack>
+          <SpanBoldBlack style={S_CAPTION}>Round Decimals to</SpanBoldBlack>
           <InputText
             type="number"
             initValue={dfRt}
