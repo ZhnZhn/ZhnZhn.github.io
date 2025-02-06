@@ -2,7 +2,8 @@ import InputText from '../zhn/InputText';
 import { SvgPlus } from '../zhn/BtSvgCircle';
 import { SpanBoldBlack } from '../zhn/SpanToken';
 
-const S_CAPTION = {  
+const S_CAPTION = {
+  display: 'inline-block',
   width: 48
 },
 S_INPUT_TEXT = {

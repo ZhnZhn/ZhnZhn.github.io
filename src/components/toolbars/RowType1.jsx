@@ -31,6 +31,7 @@ const DF_COLOR = '#2b908f'
 
 , S_PERIOD_INPUT = {
   width: 56,
+  marginLeft: 0,
   marginRight: 12
 }
 , S_SERIA_INPUT = { width: 36 }

@@ -8,6 +8,7 @@ var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _SpanToken = require("../zhn/SpanToken");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_CAPTION = {
+    display: 'inline-block',
     width: 48
   },
   S_INPUT_TEXT = {

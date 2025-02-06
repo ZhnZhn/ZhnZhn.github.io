@@ -10,5 +10,6 @@ export const S_OC_STYLE = {
   width: 'auto',
   height: 32,
   paddingTop: 4,
-  paddingRight: 8
+  paddingRight: 8,
+  marginRight: 5
 }
