@@ -1,11 +1,6 @@
 import { useMemo } from '../uiApi';
 
 import {
-  INDICATOR_TYPE_1,
-  INDICATOR_TYPE_2
-} from './IndicatorType';
-
-import {
   RowSma,
   RowRsi
 } from './fRowTaType1';
@@ -13,28 +8,34 @@ import {
 import RowMfi from './RowMfi';
 import RowMomAth from './RowMomAth';
 
-//[[RowComp, key, type], ...]
+//[[RowComp, key, props], ...]
+/*eslint-disable react-hooks/exhaustive-deps */
 const useModalMenuIndicators = (
-  config
+  config,
+  onAddMfi,
+  onRemoveMfi
 ) => useMemo(() => {
   const _isMfi = !!config.zhIsMfi
-  , { btTitle } = (config.zhMiniConfigs || [])[0] || {};
+  , { btTitle } = (config.zhMiniConfigs || [])[0] || {}
+  , _propsType1 = { config }
+  , _propsType2 = { onAddMfi, onRemoveMfi };
 
   return [
     !(config.zhConfig || {}).isWithoutSma ? [
-      RowSma, 'sma', INDICATOR_TYPE_1
+      RowSma, 'sma', {..._propsType1}
     ] : '',
     _isMfi ? [
-      RowMfi, 'mfi', INDICATOR_TYPE_2
+      RowMfi, 'mfi', {..._propsType2}
     ] : '',
     config.zhIsMomAth ? [
-      RowMomAth, 'ath', INDICATOR_TYPE_2
+      RowMomAth, 'ath', {..._propsType1}
     ] : '',
     _isMfi || (btTitle || '').indexOf('Volume') !== -1 ? [
-      RowRsi, 'rsi', INDICATOR_TYPE_1
-    ] : '' 
+      RowRsi, 'rsi', {..._propsType1}
+    ] : ''
   ].filter(Boolean);
 }, [config]);
-
+// onAddMfi, onRemoveMfi
+/*eslint-enable react-hooks/exhaustive-deps */
 
 export default useModalMenuIndicators
