@@ -3,28 +3,21 @@ import {
   isInputValid,
   getInputValidValue
 } from '../uiApi';
-import {
-  CL_OPEN_CLOSE_BLACK,
-  S_INLINE,
-} from '../styleFn';
 
-import OpenClose from '../zhn/OpenClose';
+import { S_INLINE, } from '../styleFn';
+
 import {
   SvgMinus,
   SvgPlus
 } from '../zhn/BtSvgCircle';
-import {
-  S_OPEN_CLOSE,
-  S_OC_STYLE
-} from './Row.Style'
-
 import InputDmy from '../zhn/InputDmy';
 
 import fRowFn from './fRowFn';
+import { RowOpenClose } from './RowOpenClose'
 
 const S_PL_12 = {
   paddingLeft: 12
-}
+};
 
 const RowNorm = ({
   is,
@@ -46,11 +39,8 @@ const RowNorm = ({
     }
   };
   return (
-    <OpenClose
+    <RowOpenClose
       caption={caption}
-      className={CL_OPEN_CLOSE_BLACK}
-      style={S_OPEN_CLOSE}
-      ocStyle={S_OC_STYLE}
       CompAfter={
         is ? <SvgMinus
                style={S_INLINE}
@@ -69,7 +59,7 @@ const RowNorm = ({
            onEnter={_onEnter}
         />
       </div>
-    </OpenClose>
+    </RowOpenClose>
   );
 }
 

@@ -5,7 +5,6 @@ import {
 } from '../uiApi';
 import {
   S_INLINE,
-  CL_OPEN_CLOSE_BLACK,
   CL_CHB_BLACK,
   CL_BLACK
 } from '../styleFn';
@@ -18,11 +17,7 @@ import {
   SvgPlus
 } from '../zhn/BtSvgCircle';
 import InputText from '../zhn/InputText';
-import OpenClose from '../zhn/OpenClose';
-import {
-  S_OPEN_CLOSE,
-  S_OC_STYLE
-} from './Row.Style'
+import { RowOpenClose } from './RowOpenClose';
 
 const DF_COLOR = '#2b908f'
 
@@ -131,11 +126,8 @@ const RowType1 = ({
     }, getRefValue(_refPeriod));
 
   return (
-  <OpenClose
+  <RowOpenClose
     caption={caption}
-    className={CL_OPEN_CLOSE_BLACK}
-    style={S_OPEN_CLOSE}
-    ocStyle={S_OC_STYLE}
     CompAfter={
       is ? <MinusPeriod
               color={getRefValue(_refColor)}
@@ -189,7 +181,7 @@ const RowType1 = ({
         />
        </div>
     </div>
-  </OpenClose>
+  </RowOpenClose>
   );
 };
 

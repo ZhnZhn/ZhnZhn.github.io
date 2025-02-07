@@ -5,11 +5,10 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _BtSvgCircle = require("../zhn/BtSvgCircle");
-var _Row = require("./Row.Style");
 var _InputDmy = _interopRequireDefault(require("../zhn/InputDmy"));
 var _fRowFn = _interopRequireDefault(require("./fRowFn"));
+var _RowOpenClose = require("./RowOpenClose");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_PL_12 = {
   paddingLeft: 12
@@ -34,11 +33,8 @@ const RowNorm = _ref => {
         }
       }
     };
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowOpenClose.RowOpenClose, {
     caption: caption,
-    className: _styleFn.CL_OPEN_CLOSE_BLACK,
-    style: _Row.S_OPEN_CLOSE,
-    ocStyle: _Row.S_OC_STYLE,
     CompAfter: is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgMinus, {
       style: _styleFn.S_INLINE,
       onClick: onMinus

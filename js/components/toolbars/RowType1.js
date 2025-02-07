@@ -9,8 +9,7 @@ var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox2"));
 var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
-var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
-var _Row = require("./Row.Style");
+var _RowOpenClose = require("./RowOpenClose");
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_COLOR = '#2b908f',
   DF_PERIOD = 1,
@@ -122,11 +121,8 @@ const RowType1 = _ref3 => {
       type: (0, _uiApi.getRefValue)(_refSeriaType),
       zIndex: (0, _uiApi.getRefValue)(_refOnTop) ? void 0 : -1
     }, (0, _uiApi.getRefValue)(_refPeriod));
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowOpenClose.RowOpenClose, {
     caption: caption,
-    className: _styleFn.CL_OPEN_CLOSE_BLACK,
-    style: _Row.S_OPEN_CLOSE,
-    ocStyle: _Row.S_OC_STYLE,
     CompAfter: is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MinusPeriod, {
       color: (0, _uiApi.getRefValue)(_refColor),
       period: (0, _uiApi.getRefValue)(_refPeriod),
