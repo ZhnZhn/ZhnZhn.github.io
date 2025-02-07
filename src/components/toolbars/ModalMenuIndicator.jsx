@@ -40,9 +40,10 @@ const ModalMenuIndicator = ({
    onAddMfi,
    onRemoveMfi
 }) => {
-  const indicatorConfigs = useModalMenuIndicators(config);
+  const indicatorConfigs = useModalMenuIndicators(config)
+  , _chartInst = getChart();
 
-  return (
+  return _chartInst ? (
     <ModalPopup
       style={{...S_MODAL_MENU, ...style}}
       isShow={isShow}
@@ -79,7 +80,7 @@ const ModalMenuIndicator = ({
         }
       </div>
     </ModalPopup>
-  );
+  ) : null;
 };
 
 export default ModalMenuIndicator

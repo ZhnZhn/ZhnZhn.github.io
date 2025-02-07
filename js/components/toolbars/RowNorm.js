@@ -5,6 +5,9 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
+var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
+var _getByPropsFrom = require("../../utils/getByPropsFrom");
+var _dateFn = require("../../utils/dateFn");
 var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _InputDmy = _interopRequireDefault(require("../zhn/InputDmy"));
 var _fRowFn = _interopRequireDefault(require("./fRowFn"));
@@ -17,10 +20,12 @@ const RowNorm = _ref => {
   let {
     is,
     caption,
+    getChart,
     onPlus,
     onMinus
   } = _ref;
   const refEl = (0, _uiApi.useRef)(),
+    _inputDmyInitialValue = (0, _useRefInit.default)(() => (0, _dateFn.mlsToDmy)((0, _getByPropsFrom.getByPropsFrom)(getChart(), "series", 0, "data", 0, "x"))),
     _onPlus = () => {
       onPlus({}, (0, _uiApi.getInputValidValue)(refEl));
     },
@@ -47,6 +52,7 @@ const RowNorm = _ref => {
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputDmy.default, {
         refEl: refEl,
         caption: "CompareTo:",
+        initialValue: _inputDmyInitialValue,
         onEnter: _onEnter
       })
     })

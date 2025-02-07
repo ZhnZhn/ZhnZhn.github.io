@@ -3,8 +3,12 @@ import {
   isInputValid,
   getInputValidValue
 } from '../uiApi';
+import { S_INLINE } from '../styleFn';
 
-import { S_INLINE, } from '../styleFn';
+import useRefInit from '../hooks/useRefInit';
+
+import { getByPropsFrom } from '../../utils/getByPropsFrom';
+import { mlsToDmy } from '../../utils/dateFn';
 
 import {
   SvgMinus,
@@ -22,10 +26,14 @@ const S_PL_12 = {
 const RowNorm = ({
   is,
   caption,
+  getChart,
   onPlus,
   onMinus
 }) => {
   const refEl = useRef()
+  , _inputDmyInitialValue = useRefInit(() => mlsToDmy(
+    getByPropsFrom(getChart(), "series", 0, "data", 0, "x")
+  ))
   , _onPlus = () => {
     onPlus({}, getInputValidValue(refEl))
   }
@@ -38,6 +46,7 @@ const RowNorm = ({
       }
     }
   };
+
   return (
     <RowOpenClose
       caption={caption}
@@ -56,6 +65,7 @@ const RowNorm = ({
         <InputDmy
            refEl={refEl}
            caption="CompareTo:"
+           initialValue={_inputDmyInitialValue}
            onEnter={_onEnter}
         />
       </div>

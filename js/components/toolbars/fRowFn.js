@@ -15,10 +15,10 @@ const fRowFn = Row => _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(Row, {
     is: isSeria,
     caption: caption,
+    getChart: getChart,
     onPlus: addSeria,
     onMinus: removeSeria
   });
 };
-var _default = fRowFn;
-exports.default = _default;
+var _default = exports.default = fRowFn;
 //# sourceMappingURL=fRowFn.js.map

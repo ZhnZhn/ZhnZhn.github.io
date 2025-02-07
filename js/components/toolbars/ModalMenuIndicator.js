@@ -38,8 +38,9 @@ const ModalMenuIndicator = _ref => {
     onAddMfi,
     onRemoveMfi
   } = _ref;
-  const indicatorConfigs = (0, _useModalMenuIndicators.default)(config);
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
+  const indicatorConfigs = (0, _useModalMenuIndicators.default)(config),
+    _chartInst = getChart();
+  return _chartInst ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
     style: {
       ..._ModalMenu.S_MODAL_MENU,
       ...style
@@ -75,7 +76,7 @@ const ModalMenuIndicator = _ref => {
         });
       })]
     })
-  });
+  }) : null;
 };
 var _default = exports.default = ModalMenuIndicator;
 //# sourceMappingURL=ModalMenuIndicator.js.map

@@ -14,6 +14,7 @@ const fRowFn = Row => ({
     <Row
       is={isSeria}
       caption={caption}
+      getChart={getChart}
       onPlus={addSeria}
       onMinus={removeSeria}
     />
