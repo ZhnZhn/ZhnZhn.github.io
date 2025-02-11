@@ -53,10 +53,10 @@ const _setRadius = (value, seria) => {
   options.marker.radius = value;
   seria.update(options, false);
 };
-const _fHeValue = (propName, min, max) => function (v) {
+const _fHeValue = (ref, min, max) => v => {
   const _ = parseInt(v, 10);
   if (_ > min && _ < max) {
-    this[propName] = v;
+    (0, _uiApi.setRefValue)(ref, v);
   }
 };
 const _crSeriaOptions = pointWidth => ({
@@ -66,53 +66,22 @@ const _crSeriaOptions = pointWidth => ({
   }
 });
 class ColumnRangeDialog extends _uiApi.Component {
-  constructor(_props) {
-    super(_props);
-    this._hAdd = () => {
-      const {
-          _fromIndex,
-          _toIndex,
-          _color,
-          props
-        } = this,
-        {
-          data,
-          onClose
-        } = props,
-        {
-          chart
-        } = data,
-        _series = chart.series,
-        _s1 = _series[_fromIndex],
-        _s2 = _series[_toIndex],
-        _d = (0, _seriaFns.columnRange)(_s1.data, _s2.data);
-      this._heWidth((0, _uiApi.getInputValue)(this._refW));
-      this._heRadius1((0, _uiApi.getInputValue)(this._refR1));
-      this._heRadius2((0, _uiApi.getInputValue)(this._refR2));
-      _setRadius(this._r1, _s1);
-      _setRadius(this._r2, _s2);
-      chart.zhAddSeriaToYAxis({
-        data: _d,
-        color: _color,
-        yIndex: 0
-      }, _crSeriaOptions(this._pointWidth));
-      chart.zhDataLabels(true);
-      onClose();
-    };
-    this._heColor = color => {
-      this._color = color;
-    };
+  constructor(props) {
+    super(props);
     this._commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "Yes, Connect",
       isPrimary: true,
       onClick: this._hAdd
     }, "yes")];
-    this._heWidth = _fHeValue('_pointWidth', -1, 7).bind(this);
-    this._heRadius1 = _fHeValue('_r1', -1, 9).bind(this);
-    this._heRadius2 = _fHeValue('_r2', -1, 9).bind(this);
-    this._r1 = DF_R1;
-    this._r2 = DF_R2;
-    this._pointWidth = DF_POIN_WIDTH;
+    this._refPointWidth = (0, _uiApi.createRef)(DF_POIN_WIDTH);
+    this._refR1 = (0, _uiApi.createRef)(DF_R1);
+    this._refR2 = (0, _uiApi.createRef)(DF_R2);
+    this._heWidth = _fHeValue(this._refPointWidth, -1, 7);
+    this._heRadius1 = _fHeValue(this._refR1, -1, 9);
+    this._heRadius2 = _fHeValue(this._refR2, -1, 9);
+    this._refColor = (0, _uiApi.createRef)();
+    this._refFromIndex = (0, _uiApi.createRef)();
+    this._refToIndex = (0, _uiApi.createRef)();
     this._refW = (0, _uiApi.createRef)();
     this._refR1 = (0, _uiApi.createRef)();
     this._refR2 = (0, _uiApi.createRef)();
@@ -123,6 +92,34 @@ class ColumnRangeDialog extends _uiApi.Component {
     }
     return true;
   }
+  _hAdd = () => {
+    const {
+        data,
+        onClose
+      } = this.props,
+      {
+        chart
+      } = data,
+      _series = chart.series,
+      _s1 = _series[(0, _uiApi.getRefValue)(this._refFromIndex)],
+      _s2 = _series[(0, _uiApi.getRefValue)(this._refToIndex)],
+      _d = (0, _seriaFns.columnRange)(_s1.data, _s2.data);
+    this._heWidth((0, _uiApi.getInputValue)(this._refW));
+    this._heRadius1((0, _uiApi.getInputValue)(this._refR1));
+    this._heRadius2((0, _uiApi.getInputValue)(this._refR2));
+    _setRadius((0, _uiApi.getRefValue)(this._refR1), _s1);
+    _setRadius((0, _uiApi.getRefValue)(this._refR2), _s2);
+    chart.zhAddSeriaToYAxis({
+      data: _d,
+      color: (0, _uiApi.getRefValue)(this._refColor),
+      yIndex: 0
+    }, _crSeriaOptions((0, _uiApi.getRefValue)(this._refPointWidth)));
+    chart.zhDataLabels(true);
+    onClose();
+  };
+  _heColor = color => {
+    (0, _uiApi.setRefValue)(this._refColor, color);
+  };
   render() {
     const {
         isShow,
@@ -138,9 +135,9 @@ class ColumnRangeDialog extends _uiApi.Component {
       [n1, n2, fromIndex, toIndex] = _getNames(series),
       c1 = _getColor(series, fromIndex),
       c2 = _getColor(series, toIndex);
-    this._fromIndex = fromIndex;
-    this._toIndex = toIndex;
-    this._color = c1;
+    (0, _uiApi.setRefValue)(this._refFromIndex, fromIndex);
+    (0, _uiApi.setRefValue)(this._refToIndex, toIndex);
+    (0, _uiApi.setRefValue)(this._refColor, c1);
     return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
       caption: "Add ColumnRange",
       isShow: isShow,
@@ -182,7 +179,7 @@ class ColumnRangeDialog extends _uiApi.Component {
             }
           },
           styleInput: S_INPUT,
-          caption: "R " + n1,
+          caption: `R ${n1}`,
           initValue: DF_R1,
           type: "number",
           maxLength: 2
@@ -196,7 +193,7 @@ class ColumnRangeDialog extends _uiApi.Component {
             }
           },
           styleInput: S_INPUT,
-          caption: "R " + n2,
+          caption: `R ${n2}`,
           initValue: DF_R2,
           type: "number",
           maxLength: 2

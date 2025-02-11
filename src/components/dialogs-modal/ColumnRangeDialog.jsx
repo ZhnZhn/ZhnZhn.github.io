@@ -1,7 +1,9 @@
 import {
   Component,
   createRef,
-  getInputValue
+  getInputValue,
+  setRefValue,
+  getRefValue
 } from '../uiApi';
 
 import { columnRange } from '../../charts/seriaFns';
@@ -56,13 +58,13 @@ const _setRadius = (
 }
 
 const _fHeValue = (
-  propName,
+  ref,
   min,
   max
-) => function(v) {
+) => (v) => {
   const _ = parseInt(v, 10);
   if ( _>min && _<max) {
-    this[propName] = v
+    setRefValue(ref, v)
   }
 }
 
@@ -86,12 +88,17 @@ class ColumnRangeDialog extends Component {
          onClick={this._hAdd}
       />
     ]
-    this._heWidth = _fHeValue('_pointWidth', -1, 7).bind(this)
-    this._heRadius1 = _fHeValue('_r1', -1, 9).bind(this)
-    this._heRadius2 = _fHeValue('_r2', -1, 9).bind(this)
-    this._r1 = DF_R1
-    this._r2 = DF_R2
-    this._pointWidth = DF_POIN_WIDTH
+
+    this._refPointWidth = createRef(DF_POIN_WIDTH)
+    this._refR1 = createRef(DF_R1)
+    this._refR2 = createRef(DF_R2)
+    this._heWidth = _fHeValue(this._refPointWidth, -1, 7)
+    this._heRadius1 = _fHeValue(this._refR1, -1, 9)
+    this._heRadius2 = _fHeValue(this._refR2, -1, 9)
+
+    this._refColor = createRef()
+    this._refFromIndex = createRef()
+    this._refToIndex = createRef()
 
     this._refW = createRef()
     this._refR1 = createRef()
@@ -108,40 +115,34 @@ class ColumnRangeDialog extends Component {
 
   _hAdd = () => {
     const {
-      _fromIndex,
-      _toIndex,
-      _color,
-      props
-    } = this
-    , {
       data,
       onClose
-    } = props
+    } = this.props
     , { chart } = data
     , _series = chart.series
-    , _s1 = _series[_fromIndex]
-    , _s2 = _series[_toIndex]
+    , _s1 = _series[getRefValue(this._refFromIndex)]
+    , _s2 = _series[getRefValue(this._refToIndex)]
     , _d = columnRange(_s1.data, _s2.data);
 
      this._heWidth(getInputValue(this._refW))
      this._heRadius1(getInputValue(this._refR1))
      this._heRadius2(getInputValue(this._refR2))
 
-     _setRadius(this._r1, _s1)
-     _setRadius(this._r2, _s2)
+     _setRadius(getRefValue(this._refR1), _s1)
+     _setRadius(getRefValue(this._refR2), _s2)
 
      chart.zhAddSeriaToYAxis({
        data: _d,
-       color: _color,
+       color: getRefValue(this._refColor),
        yIndex: 0,
-     }, _crSeriaOptions(this._pointWidth))
+     }, _crSeriaOptions(getRefValue(this._refPointWidth)))
 
      chart.zhDataLabels(true)
      onClose()
   }
 
   _heColor = (color) => {
-    this._color = color
+    setRefValue(this._refColor, color)
   }
 
   render(){
@@ -161,9 +162,9 @@ class ColumnRangeDialog extends Component {
     , c1 = _getColor(series, fromIndex)
     , c2 = _getColor(series, toIndex);
 
-    this._fromIndex = fromIndex
-    this._toIndex = toIndex
-    this._color = c1
+    setRefValue(this._refFromIndex, fromIndex)
+    setRefValue(this._refToIndex, toIndex)
+    setRefValue(this._refColor, c1)
     return(
       <ModalDialog
         caption="Add ColumnRange"
