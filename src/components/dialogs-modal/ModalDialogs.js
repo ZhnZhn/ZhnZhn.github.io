@@ -1,6 +1,6 @@
 import CeDialog from './CustomizeExportDialog'
 import SbsDialog from './StocksBySectorDialog'
-import CrDialog from './ColumnRangeDialog'
+import CrDialog from './StyleDotSeriesDialog'
 
 const ModalDialogs = {
   CeDialog,
