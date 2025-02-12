@@ -83,13 +83,17 @@ const _crColumnConfig = option => pipe(
   toConfig
 );
 
+const _crBarYAxisLegend = () => ({
+  yAxis: _crBarYAxis(),
+  legend: _crLegend(28)
+});
+
 const _crBarConfig = (option) => {
   const config = pipe(
     crBarOrColumnConfig('BAR'),
     fAdd({
+      ..._crBarYAxisLegend(),
       chart: {...BAR_CHART},
-      yAxis: _crBarYAxis(),
-      legend: _crLegend(28),
       plotOptions: _crPlotOptionsBar(option)
     }),
     toConfig
@@ -106,8 +110,8 @@ const _crDotConfig = (option) => {
   const config = pipe(
     crBarOrColumnConfig(),
     fAdd({
-      chart: {...SCATTER_CHART},
-      legend: _crLegend(28)
+      ..._crBarYAxisLegend(),
+      chart: {...SCATTER_CHART}
     }),
     toConfig
   );

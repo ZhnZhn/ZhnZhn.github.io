@@ -77,13 +77,16 @@ const _crColumnConfig = option => (0, _pipe.default)((0, _configBuilderFn.crBarO
   legend: _crLegend(),
   plotOptions: _crPlotOptionsColumn(option)
 }), _configBuilderFn.toConfig);
+const _crBarYAxisLegend = () => ({
+  yAxis: _crBarYAxis(),
+  legend: _crLegend(28)
+});
 const _crBarConfig = option => {
   const config = (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)('BAR'), (0, _configBuilderFn.fAdd)({
+    ..._crBarYAxisLegend(),
     chart: {
       ...BAR_CHART
     },
-    yAxis: _crBarYAxis(),
-    legend: _crLegend(28),
     plotOptions: _crPlotOptionsBar(option)
   }), _configBuilderFn.toConfig);
   if (option.seriaType === _ChartType.CHT_BAR_WITH_LABELS) {
@@ -96,10 +99,10 @@ const _crDotConfig = option => {
     seriaColor
   } = option;
   const config = (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)(), (0, _configBuilderFn.fAdd)({
+    ..._crBarYAxisLegend(),
     chart: {
       ...SCATTER_CHART
-    },
-    legend: _crLegend(28)
+    }
   }), _configBuilderFn.toConfig);
   _assign(config.series[0], {
     color: seriaColor,
