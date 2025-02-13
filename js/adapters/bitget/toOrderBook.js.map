@@ -1,0 +1,28 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bitget/toOrderBook.js"
+ ],
+ "file": "../../../src/adapters/bitget/toOrderBook.js",
+ "names": [
+  "_crAdapterOrderBook",
+  "_interopRequireDefault",
+  "require",
+  "_AdapterFn",
+  "crTitle",
+  "_ref",
+  "_ref2",
+  "items",
+  "ts",
+  "strDate",
+  "toTd",
+  "parseInt",
+  "c",
+  "toOrderBook",
+  "crAdapterOrderBook",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,mBAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,UAAA,GAAAD,OAAA;AAEA,MAAME,OAAO,GAAGA,CAAAC,IAAA,EAAAC,KAAA,KAAuB;EAAA,IAAtB;IAAEC;EAAM,CAAC,GAAAF,IAAA;EAAA,IAAE;IAAEG;EAAG,CAAC,GAAAF,KAAA;EAChC,MAAMG,OAAO,GAAG,IAAAC,eAAI,EAACC,QAAQ,CAACH,EAAE,EAAE,EAAE,CAAC,CAAC;EACtC,OAAO,GAAGD,KAAK,CAAC,CAAC,CAAC,CAACK,CAAC,IAAIH,OAAO,EAAE;AACnC,CAAC;AAED,MAAMI,WAAW,GAAG,IAAAC,2BAAkB,EAAC;EACrCV;AACF,CAAC,CAAC;AAAC,IAAAW,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYJ,WAAW"
+}

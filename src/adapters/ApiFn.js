@@ -1,5 +1,6 @@
 import {
   LT_BN,
+  LT_BG,
   LT_BT,
   LT_CB
 } from '../constants/LoadType';
@@ -15,6 +16,7 @@ import {
 
 const _isWithCORS = isInArrStr([
   LT_BN,
+  LT_BG,
   LT_BT,
   LT_CB
 ]);

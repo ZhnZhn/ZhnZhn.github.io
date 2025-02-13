@@ -61,7 +61,7 @@ const _fCrItems = crValue => arr => arr.map(c => {
   vc: _crVcItems,
   //cb-items, kc-items, kx-items
   t1: _fCrItems(_crValueT1),
-  //bf-items, kr-items
+  //bf-items, kr-items, bg-items
   t2: _fCrItems(_crValueT2),
   //bt-items, ht-items
   t2l: _fCrItems(_crValueT2L),

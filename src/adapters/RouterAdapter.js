@@ -36,6 +36,7 @@ import {
   LT_CP,
   LT_CL,
   LT_BN,
+  LT_BG,
   LT_CB,
   LT_BT,
   LT_CR,
@@ -98,6 +99,7 @@ import Cm from './coin-metrics/Cm'
 import Cp from './coin-paprika/Cp'
 import Cl from './coin-lore/Cl'
 import Bn from './binance/Bn'
+import Bg from './bitget/Bg'
 import Cb from './coinbase/Cb'
 import Bt from './bitstamp/Bt'
 import Bf from './bitfinex/Bf'
@@ -158,6 +160,7 @@ const RouterAdapter = {
   [LT_CP]: Cp,
   [LT_CL]: Cl,
   [LT_BN]: Bn,
+  [LT_BG]: Bg,
   [LT_CB]: Cb,
   [LT_BT]: Bt,
   [LT_CR]: Cr,

@@ -4,7 +4,7 @@ exports.__esModule = true;
 exports.fGetRequestUrl = exports.fCrObUrl = exports.fCrDfUrl = exports.crRouteDfObApi = void 0;
 var _LoadType = require("../constants/LoadType");
 var _AdapterFn = require("./AdapterFn");
-const _isWithCORS = (0, _AdapterFn.isInArrStr)([_LoadType.LT_BN, _LoadType.LT_BT, _LoadType.LT_CB]);
+const _isWithCORS = (0, _AdapterFn.isInArrStr)([_LoadType.LT_BN, _LoadType.LT_BG, _LoadType.LT_BT, _LoadType.LT_CB]);
 const _crAllOriginsUrl = (url, _ref) => {
   let {
     proxy,

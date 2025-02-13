@@ -48,6 +48,7 @@ export const LT_CP = "CP"
 export const LT_CL = "CL"
 
 export const LT_BN = "BN"
+export const LT_BG = "BG"
 export const LT_CB = "CB"
 export const LT_BF = "BF"
 export const LT_BT = "BT"

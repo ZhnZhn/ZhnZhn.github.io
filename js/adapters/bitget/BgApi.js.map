@@ -1,0 +1,28 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bitget/BgApi.js"
+ ],
+ "file": "../../../src/adapters/bitget/BgApi.js",
+ "names": [
+  "_ApiFn",
+  "require",
+  "API_URL",
+  "_crDfUrl",
+  "pair",
+  "timeframe",
+  "limit",
+  "Date",
+  "now",
+  "_crObUrl",
+  "_getData",
+  "json",
+  "data",
+  "BgApi",
+  "crRouteDfObApi",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAEA,MAAMC,OAAO,GAAG,2CAA2C;AAE3D,MAAMC,QAAQ,GAAGA,CACfC,IAAI,EACJC,SAAS,EACTC,KAAK,KACF,GAAGJ,OAAO,2BAA2BE,IAAI,gBAAgBC,SAAS,YAAYE,IAAI,CAACC,GAAG,CAAC,CAAC,UAAUF,KAAK,EAAE;AAE9G,MAAMG,QAAQ,GAAGA,CACfL,IAAI,EACJE,KAAK,KACF,GAAGJ,OAAO,qBAAqBE,IAAI,qBAAqBE,KAAK,EAAE;AAEpE,MAAMI,QAAQ,GAAIC,IAAI,IAAK,CAACA,IAAI,IAAI,CAAC,CAAC,EAAEC,IAAI;AAE5C,MAAMC,KAAK,GAAG,IAAAC,qBAAc,EAC1BX,QAAQ,EACRM,QAAQ,EACRC,QACF,CAAC;AAAC,IAAAK,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaJ,KAAK"
+}
