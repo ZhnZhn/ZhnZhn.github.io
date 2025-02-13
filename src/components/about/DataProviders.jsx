@@ -48,7 +48,7 @@ const DP = [
   [Link.Bsl, '25'],
   Link.CryptoCompare, Link.CoinCap, Link.CoinGecko, Link.CoinMetrics,
   Link.CoinLore, Link.Coinpaprika,
-  Link.Binance, Link.Bitstamp, Link.Coinbase
+  Link.Binance, Link.Bitget, Link.Bitstamp, Link.Coinbase
 ]
 , DP_KEY = [
   Link.Ndl,
@@ -112,7 +112,7 @@ const _crListCaption = (
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 48):"
+     caption="Data Providers (All 49):"
      childStyle={S_ROOT_CHILD}
   >
     <div>
