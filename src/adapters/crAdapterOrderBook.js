@@ -5,11 +5,13 @@ import {
 import { crTableConfig } from './toTableFn';
 import crOrderBookRows from './crOrderBookRows';
 
+const _crTitleDf = ({ items }) => items[0].c;
+
 const crAdapterOrderBook = ({
-  crTitle,
+  crTitle=_crTitleDf,
   crLimit=FN_NOOP,
   crOrderBook=FN_IDENTITY
-}) => ({
+}={}) => ({
    toConfig(json, option){
      const { _itemKey, dataSource } = option
      , title = crTitle(option, json)

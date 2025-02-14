@@ -6,12 +6,18 @@ exports.default = void 0;
 var _AdapterFn = require("./AdapterFn");
 var _toTableFn = require("./toTableFn");
 var _crOrderBookRows = _interopRequireDefault(require("./crOrderBookRows"));
-const crAdapterOrderBook = _ref => {
+const _crTitleDf = _ref => {
   let {
-    crTitle,
+    items
+  } = _ref;
+  return items[0].c;
+};
+const crAdapterOrderBook = function (_temp) {
+  let {
+    crTitle = _crTitleDf,
     crLimit = _AdapterFn.FN_NOOP,
     crOrderBook = _AdapterFn.FN_IDENTITY
-  } = _ref;
+  } = _temp === void 0 ? {} : _temp;
   return {
     toConfig(json, option) {
       const {

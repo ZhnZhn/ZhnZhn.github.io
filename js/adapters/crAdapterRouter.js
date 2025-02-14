@@ -44,15 +44,7 @@ const crAdapterRouter = _ref => {
   return _adapter;
 };
 exports.crAdapterRouter = crAdapterRouter;
-const crTitle = _ref2 => {
-  let {
-    items
-  } = _ref2;
-  return items[0].c;
-};
-const _toOrderBookDf = (0, _crAdapterOrderBook.default)({
-  crTitle
-});
+const _toOrderBookDf = (0, _crAdapterOrderBook.default)();
 const crAdapterRouterDfOb = (toKline, toOrderBook) => crAdapterRouter({
   rAdapter: {
     DF: toKline,

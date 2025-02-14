@@ -106,9 +106,7 @@ export const crAdapterRouter = ({
    return _adapter;
 }
 
-const crTitle = ({ items }) => items[0].c;
-const _toOrderBookDf = crAdapterOrderBook({ crTitle });
-
+const _toOrderBookDf = crAdapterOrderBook();
 export const crAdapterRouterDfOb = (
   toKline,
   toOrderBook
