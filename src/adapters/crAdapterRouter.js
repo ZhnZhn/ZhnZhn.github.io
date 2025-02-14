@@ -6,7 +6,7 @@ import {
   isBarTreeMap
 } from './CategoryFn';
 
-import crAdapterOrderBook from './crAdapterOrderBook';
+import { crAdapterOrderBook } from './crAdapterOrderBook';
 
 const _getCategoryAdapter = (
   toCategoryAdapter,

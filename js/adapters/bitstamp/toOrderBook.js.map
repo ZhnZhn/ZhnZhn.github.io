@@ -1,1 +1,24 @@
-{"version":3,"sources":["../../../src/adapters/bitstamp/toOrderBook.js"],"names":["crTitle","items","timestamp","strDate","parseInt","c","crLimit","v","toOrderBook"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,MAAMA,OAAO,GAAG,iBAA8B;AAAA,MAA7B;AAAEC,IAAAA;AAAF,GAA6B;AAAA,MAAlB;AAAEC,IAAAA;AAAF,GAAkB;AAC5C,QAAMC,OAAO,GAAG,qBAAKC,QAAQ,CAACF,SAAD,EAAY,EAAZ,CAAR,GAAwB,IAA7B,CAAhB;AACA,SAAUD,KAAK,CAAC,CAAD,CAAL,CAASI,CAAnB,SAAwBF,OAAxB;AACD,CAHD;AAAA,MAIEG,OAAO,GAAG;AAAA,MAAC;AAAEL,IAAAA;AAAF,GAAD;AAAA,SAAeG,QAAQ,CAACH,KAAK,CAAC,CAAD,CAAL,CAASM,CAAV,EAAa,EAAb,CAAvB;AAAA,CAJZ;;AAMA,MAAMC,WAAW,GAAG,iCAAmB;AAAER,EAAAA,OAAF;AAAWM,EAAAA;AAAX,CAAnB,CAApB;eAEeE,W","sourcesContent":["import crAdapterOrderBook from '../crAdapterOrderBook';\r\nimport { toTd } from '../AdapterFn';\r\n\r\nconst crTitle = ({ items }, { timestamp }) => {\r\n  const strDate = toTd(parseInt(timestamp, 10)*1000);\r\n  return `${items[0].c} ${strDate}`;\r\n}\r\n, crLimit = ({ items }) => parseInt(items[1].v, 10);\r\n\r\nconst toOrderBook = crAdapterOrderBook({ crTitle, crLimit });\r\n\r\nexport default toOrderBook\r\n"],"file":"toOrderBook.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/bitstamp/toOrderBook.js"
+ ],
+ "file": "../../../src/adapters/bitstamp/toOrderBook.js",
+ "names": [
+  "_crAdapterOrderBook",
+  "require",
+  "toOrderBook",
+  "crAdapterOrderBook",
+  "crTitle",
+  "fCrTitle",
+  "crLimit",
+  "_ref",
+  "items",
+  "parseInt",
+  "v",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,mBAAA,GAAAC,OAAA;AAKA,MAAMC,WAAW,GAAG,IAAAC,sCAAkB,EAAC;EACrCC,OAAO,EAAE,IAAAC,4BAAQ,EAAC,WAAW,EAAE,IAAI,CAAC;EACpCC,OAAO,EAAEC,IAAA;IAAA,IAAC;MAAEC;IAAM,CAAC,GAAAD,IAAA;IAAA,OAAKE,QAAQ,CAACD,KAAK,CAAC,CAAC,CAAC,CAACE,CAAC,EAAE,EAAE,CAAC;EAAA;AAClD,CAAC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYX,WAAW"
+}

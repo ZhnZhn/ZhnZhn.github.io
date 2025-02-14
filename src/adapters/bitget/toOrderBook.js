@@ -1,13 +1,10 @@
-import crAdapterOrderBook from '../crAdapterOrderBook';
-import { toTd } from '../AdapterFn';
-
-const crTitle = ({ items }, { ts }) => {
-  const strDate = toTd(parseInt(ts, 10));
-  return `${items[0].c} ${strDate}`;
-};
+import {
+  fCrTitle,
+  crAdapterOrderBook
+} from '../crAdapterOrderBook';
 
 const toOrderBook = crAdapterOrderBook({
-  crTitle
+  crTitle: fCrTitle("ts")
 });
 
 export default toOrderBook

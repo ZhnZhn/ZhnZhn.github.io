@@ -2,19 +2,26 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.default = void 0;
+exports.fCrTitle = exports.default = exports.crTitleDf = exports.crAdapterOrderBook = void 0;
 var _AdapterFn = require("./AdapterFn");
 var _toTableFn = require("./toTableFn");
 var _crOrderBookRows = _interopRequireDefault(require("./crOrderBookRows"));
-const _crTitleDf = _ref => {
+const crTitleDf = _ref => {
   let {
     items
   } = _ref;
   return items[0].c;
 };
+exports.crTitleDf = crTitleDf;
+const fCrTitle = (jsonPn, isSeconds) => (option, json) => {
+  const _multipleBy = isSeconds ? 1000 : 1,
+    strDate = (0, _AdapterFn.toTd)(parseInt(json[jsonPn], 10) * _multipleBy);
+  return `${crTitleDf(option)} ${strDate}`;
+};
+exports.fCrTitle = fCrTitle;
 const crAdapterOrderBook = function (_temp) {
   let {
-    crTitle = _crTitleDf,
+    crTitle = crTitleDf,
     crLimit = _AdapterFn.FN_NOOP,
     crOrderBook = _AdapterFn.FN_IDENTITY
   } = _temp === void 0 ? {} : _temp;
@@ -41,5 +48,6 @@ const crAdapterOrderBook = function (_temp) {
     }
   };
 };
+exports.crAdapterOrderBook = crAdapterOrderBook;
 var _default = exports.default = crAdapterOrderBook;
 //# sourceMappingURL=crAdapterOrderBook.js.map

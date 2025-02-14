@@ -1,14 +1,24 @@
 import {
   FN_IDENTITY,
-  FN_NOOP
+  FN_NOOP,
+  toTd
 } from './AdapterFn';
 import { crTableConfig } from './toTableFn';
 import crOrderBookRows from './crOrderBookRows';
 
-const _crTitleDf = ({ items }) => items[0].c;
+export const crTitleDf = ({ items }) => items[0].c;
 
-const crAdapterOrderBook = ({
-  crTitle=_crTitleDf,
+export const fCrTitle = (
+  jsonPn,
+  isSeconds
+) => (option, json) => {
+  const _multipleBy = isSeconds ? 1000 : 1
+  , strDate = toTd(parseInt(json[jsonPn], 10)*_multipleBy);
+  return `${crTitleDf(option)} ${strDate}`;
+}
+
+export const crAdapterOrderBook = ({
+  crTitle=crTitleDf,
   crLimit=FN_NOOP,
   crOrderBook=FN_IDENTITY
 }={}) => ({

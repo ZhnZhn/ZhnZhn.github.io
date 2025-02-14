@@ -1,22 +1,12 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _AdapterFn = require("../AdapterFn");
-
-var _crAdapterOrderBook = _interopRequireDefault(require("../crAdapterOrderBook"));
-
+var _crAdapterOrderBook = require("../crAdapterOrderBook");
 const _compareByPrice = (a, b) => a[0] - b[0];
+const crTitle = option => (0, _crAdapterOrderBook.crTitleDf)(option) + ' P0';
 
-const crTitle = _ref => {
-  let {
-    items
-  } = _ref;
-  return items[0].c + ' P0';
-};
 /*
 From Bitfinex Documentation
 [[
@@ -27,10 +17,9 @@ From Bitfinex Documentation
 if AMOUNT > 0 then bid else ask.
 */
 
-
 const crOrderBook = json => {
   const asks = [],
-        bids = [];
+    bids = [];
   json.forEach(arrItem => {
     if ((0, _AdapterFn.isTypeNumber)(arrItem[0])) {
       if (arrItem[2] > 0) {
@@ -45,11 +34,9 @@ const crOrderBook = json => {
     bids: bids.sort(_compareByPrice).reverse()
   };
 };
-
-const toOrderBook = (0, _crAdapterOrderBook.default)({
+const toOrderBook = (0, _crAdapterOrderBook.crAdapterOrderBook)({
   crTitle,
   crOrderBook
 });
-var _default = toOrderBook;
-exports.default = _default;
+var _default = exports.default = toOrderBook;
 //# sourceMappingURL=toOrderBook.js.map

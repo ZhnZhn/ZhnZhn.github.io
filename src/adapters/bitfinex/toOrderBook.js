@@ -1,9 +1,12 @@
 import { isTypeNumber } from '../AdapterFn';
-import crAdapterOrderBook from '../crAdapterOrderBook';
+import {
+  crTitleDf,
+  crAdapterOrderBook
+} from '../crAdapterOrderBook';
 
 const _compareByPrice = (a, b) => a[0] - b[0];
 
-const crTitle = ({ items }) => items[0].c + ' P0';
+const crTitle = (option) => crTitleDf(option) + ' P0';
 
 /*
 From Bitfinex Documentation

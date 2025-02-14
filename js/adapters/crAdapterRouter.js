@@ -1,11 +1,10 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.fGetRouteTreeMap = exports.fGetRouteCategory = exports.fGetRouteBarTreeMap = exports.crAdapterRouterDfOb = exports.crAdapterRouter = void 0;
 var _isTypeFn = require("../utils/isTypeFn");
 var _CategoryFn = require("./CategoryFn");
-var _crAdapterOrderBook = _interopRequireDefault(require("./crAdapterOrderBook"));
+var _crAdapterOrderBook = require("./crAdapterOrderBook");
 const _getCategoryAdapter = (toCategoryAdapter, toLineAdapter, option) => (0, _CategoryFn.isCategory)(option) ? toCategoryAdapter : toLineAdapter;
 const fGetRouteCategory = (toCategoryAdapter, toLineAdapter) => option => _getCategoryAdapter(toCategoryAdapter, toLineAdapter, option);
 exports.fGetRouteCategory = fGetRouteCategory;
@@ -44,7 +43,7 @@ const crAdapterRouter = _ref => {
   return _adapter;
 };
 exports.crAdapterRouter = crAdapterRouter;
-const _toOrderBookDf = (0, _crAdapterOrderBook.default)();
+const _toOrderBookDf = (0, _crAdapterOrderBook.crAdapterOrderBook)();
 const crAdapterRouterDfOb = (toKline, toOrderBook) => crAdapterRouter({
   rAdapter: {
     DF: toKline,
