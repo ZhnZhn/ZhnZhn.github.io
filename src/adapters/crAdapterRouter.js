@@ -1,11 +1,12 @@
+import { isFn } from '../utils/isTypeFn';
+
 import {
   isCategory,
   isTreeMap,
   isBarTreeMap
 } from './CategoryFn';
-import toOrderBookDf from './toOrderBookDf';
 
-const _isFn = fn => typeof fn === 'function';
+import crAdapterOrderBook from './crAdapterOrderBook';
 
 const _getCategoryAdapter = (
   toCategoryAdapter,
@@ -33,7 +34,7 @@ export const fGetRouteTreeMap = (
 ) => (
   option
 ) => isTreeMap(option)
-  ? _isFn(toTreeMapAdapter)
+  ? isFn(toTreeMapAdapter)
       ? toTreeMapAdapter(option)
       : toTreeMapAdapter
   : _getCategoryAdapter(
@@ -77,7 +78,7 @@ const _fGetAdapter = (
   option
 ) => {
   const routeAdapter = getRoute(option)
-  return _isFn(routeAdapter)
+  return isFn(routeAdapter)
     ? routeAdapter()
     : routeAdapter;
 };
@@ -90,14 +91,14 @@ export const crAdapterRouter = ({
   const _getRoute = getRoute || _fGetRouteDf(rAdapter)
   , _getAdapter = _fGetAdapter(_getRoute);
   const _adapter = {
-    crKey: _isFn(crDfKey)
+    crKey: isFn(crDfKey)
       ? (option) => (_getAdapter(option).crKey || crDfKey)(option)
       : void 0,
 
     toConfig: (json, option) => _getAdapter(option)
       .toConfig(json, option),
 
-    isAdd: (option) => _isFn(_getAdapter(option).toSeries),
+    isAdd: (option) => isFn(_getAdapter(option).toSeries),
 
     toSeries: (json, option, chart) => _getAdapter(option)
       .toSeries(json, option, chart)
@@ -105,12 +106,15 @@ export const crAdapterRouter = ({
    return _adapter;
 }
 
+const crTitle = ({ items }) => items[0].c;
+const _toOrderBookDf = crAdapterOrderBook({ crTitle });
+
 export const crAdapterRouterDfOb = (
   toKline,
   toOrderBook
 ) => crAdapterRouter({
   rAdapter: {
     DF: toKline,
-    OB: toOrderBook || toOrderBookDf
+    OB: toOrderBook || _toOrderBookDf
   }
 })
