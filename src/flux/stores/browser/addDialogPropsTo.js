@@ -1,8 +1,12 @@
+import {
+  isArr,
+  isObj
+} from '../../../utils/isTypeFn';
+
 import crAddProps from './crAddProps';
 import crSelectProps from './crSelectProps';
 
-const _isArr = Array.isArray
-, _keys = Object.keys;
+const _getObjectKeys = Object.keys;
 
 const _checkItemDfIdCase = item => {
   const {
@@ -29,17 +33,46 @@ const _checkItemDfIdCase = item => {
   _checkItemDfIdCase(item)
   return item.dialogProps;
 }
+, VALID_ITEM_ID_TYPE_REGEX = RegExp("^[A-Z_]*$")
+, _setItemFromTupleTo = (
+  items,
+  tuple,
+  props
+) => {
+  const _idType = ""+tuple[0];
+  if (VALID_ITEM_ID_TYPE_REGEX.test(_idType)) {
+    items[_idType] = {
+      ...props,
+      type: _idType,
+      menuTitle: tuple[1],
+      dfId: tuple[2]
+    }
+  }
+}
+, _setItemsFromTuples = (
+  items,
+  tuples,
+  itemProp
+) => {
+  if (isArr(tuples)) {
+    tuples.forEach(tuple => {
+      _setItemFromTupleTo(items, tuple, itemProp)
+    })
+  }
+}
 , _checkItemsTuplesCase = (
   items,
   tuples
 ) => {
-  if (_isArr(tuples)) {
-    tuples.forEach(tuple => {
-      items[tuple[0]] = {
-        type: tuple[0],
-        menuTitle: tuple[1],
-        dfId: tuple[2]
-      }
+  _setItemsFromTuples(items, tuples)
+}
+, _checkItemsIdTupleCase = (
+  items,
+  idTuple
+) => {
+  if (isObj(idTuple)) {
+    _getObjectKeys(idTuple).forEach(key => {
+      _setItemsFromTuples(items, idTuple[key], {addProps: key})
     })
   }
 };
@@ -50,10 +83,12 @@ const addDialogPropsTo = (
 ) => {
   const {
     dfAddProps,
-    tuples
+    tuples,
+    idTuple
   } = df || {};
   _checkItemsTuplesCase(items, tuples)
-  _keys(items).forEach(pnId => {
+  _checkItemsIdTupleCase(items, idTuple)
+  _getObjectKeys(items).forEach(pnId => {
     const item = items[pnId]
     , addPropsId = item.addProps || dfAddProps;
     if (addPropsId && item.type) {

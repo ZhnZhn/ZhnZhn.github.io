@@ -3,10 +3,10 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../../utils/isTypeFn");
 var _crAddProps = _interopRequireDefault(require("./crAddProps"));
 var _crSelectProps = _interopRequireDefault(require("./crSelectProps"));
-const _isArr = Array.isArray,
-  _keys = Object.keys;
+const _getObjectKeys = Object.keys;
 const _checkItemDfIdCase = item => {
     const {
       dfId,
@@ -32,24 +32,46 @@ const _checkItemDfIdCase = item => {
     _checkItemDfIdCase(item);
     return item.dialogProps;
   },
-  _checkItemsTuplesCase = (items, tuples) => {
-    if (_isArr(tuples)) {
+  VALID_ITEM_ID_TYPE_REGEX = RegExp("^[A-Z_]*$"),
+  _setItemFromTupleTo = (items, tuple, props) => {
+    const _idType = "" + tuple[0];
+    if (VALID_ITEM_ID_TYPE_REGEX.test(_idType)) {
+      items[_idType] = {
+        ...props,
+        type: _idType,
+        menuTitle: tuple[1],
+        dfId: tuple[2]
+      };
+    }
+  },
+  _setItemsFromTuples = (items, tuples, itemProp) => {
+    if ((0, _isTypeFn.isArr)(tuples)) {
       tuples.forEach(tuple => {
-        items[tuple[0]] = {
-          type: tuple[0],
-          menuTitle: tuple[1],
-          dfId: tuple[2]
-        };
+        _setItemFromTupleTo(items, tuple, itemProp);
+      });
+    }
+  },
+  _checkItemsTuplesCase = (items, tuples) => {
+    _setItemsFromTuples(items, tuples);
+  },
+  _checkItemsIdTupleCase = (items, idTuple) => {
+    if ((0, _isTypeFn.isObj)(idTuple)) {
+      _getObjectKeys(idTuple).forEach(key => {
+        _setItemsFromTuples(items, idTuple[key], {
+          addProps: key
+        });
       });
     }
   };
 const addDialogPropsTo = (items, df) => {
   const {
     dfAddProps,
-    tuples
+    tuples,
+    idTuple
   } = df || {};
   _checkItemsTuplesCase(items, tuples);
-  _keys(items).forEach(pnId => {
+  _checkItemsIdTupleCase(items, idTuple);
+  _getObjectKeys(items).forEach(pnId => {
     const item = items[pnId],
       addPropsId = item.addProps || dfAddProps;
     if (addPropsId && item.type) {
