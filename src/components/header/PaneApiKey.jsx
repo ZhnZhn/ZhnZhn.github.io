@@ -1,5 +1,7 @@
-//import PropTypes from 'prop-types'
-import { Component } from '../uiApi';
+import {
+  useRef,
+  useMemo
+} from '../uiApi';
 
 import getFnByPropName from '../../utils/getFnByPropName'
 import ScrollPane from '../zhn/ScrollPane'
@@ -18,7 +20,7 @@ const S_SCROLL_PANE = {
 }
 , S_OC_CHILD = { paddingLeft: 8 }
 , S_ROW_BTS = { margLeft: 0 }
-, S_BT_SET = { margin: '0 2px' };
+, S_BT_SET = { margin: '0 6px' };
 
 const CONF_SM_ARR = [
   ["AV", "alpha-vantage", "Alpha Vantage"],
@@ -45,131 +47,123 @@ const _crPwdItem = (
     isShowLabels,
     titleStyle,
     i,
-    comp
+    elRefs,
+    fOnEnter
   }) => {
     const _i = index + i;
     return (
       <RowSecret
          key={item[0]}
-         refEl={comp['_ref'+_i]}
+         refEl={elRefs[_i]}
          isTitle={isShowLabels}
          titleStyle={titleStyle}
          title={item[0]}
          name={item[1]}
          placeholder={`${item[2]} API Key`}
          maxLength={item[3]}
-         onEnter={comp['_setKey'+_i]}
+         onEnter={fOnEnter(_i)}
       />
   );
 };
 
-
-class PaneApiKey extends Component {
-  /*
-  static propTypes = {
-    isVisible: PropTypes.bool,
-    titleStyle: PropTypes.object,
-    btStyle: PropTypes.object,
-    data: PropTypes.object,
-    onClose: PropTypes.func
-  }
-  */
-
-  constructor(props){
-    super(props)
-    const { data } = props;
-
-    for(let i = 1; i<MAX_KEY; i++){
-      this['_setKey'+i] = getFnByPropName(data, 'key'+i)
+const PaneApiKey = ({
+  isVisible,
+  isShowLabels,
+  titleStyle,
+  btStyle,
+  data,
+  onClose,
+  setRefFocusLast
+}) => {
+  const _ref1 = useRef()
+  , _ref2 = useRef()
+  , _ref3 = useRef()
+  , _ref4 = useRef()
+  , _ref5 = useRef()
+  , _ref6 = useRef()
+  , _ref7 = useRef()
+  , _ref8 = useRef()
+  , _ref9 = useRef()
+  , _ref10 = useRef()
+  , _ref11 = useRef()
+  /*eslint-disable react-hooks/exhaustive-deps*/
+  , [
+    _refs,
+    fSetApiKey,
+    _hSetAll,
+    _hClearAll
+  ] = useMemo(() => [
+    [_ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9, _ref10, _ref11],
+    i => getFnByPropName(data, 'key'+i),
+    () => {
+      for(let i = 1; i<MAX_KEY; i++) {
+        fSetApiKey(i)(_refs[i].current.getValue())
+      }
+    },
+    () => {
+      for(let i = 1; i<MAX_KEY; i++) {
+        fSetApiKey(i)("")
+        _refs[i].current.clear()
+      }
     }
-  }
+  ], []);
+  /*eslint-enable react-hooks/exhaustive-deps*/
+  //data
 
-  _hSetAll = () => {
-    for(let i = 1; i<MAX_KEY; i++) {
-      this['_setKey'+i](this['iComp'+i].getValue())
-    }
-  }
-
-  _hClearAll = () => {
-    for(let i = 1; i<MAX_KEY; i++) {
-      this['_setKey'+i]('')
-      this['iComp'+i].clear()
-    }
-  }
-
-  _ref1 = n => this.iComp1 = n
-  _ref2 = n => this.iComp2 = n
-  _ref3 = n => this.iComp3 = n
-  _ref4 = n => this.iComp4 = n
-  _ref5 = n => this.iComp5 = n
-  _ref6 = n => this.iComp6 = n
-  _ref7 = n => this.iComp7 = n
-  _ref8 = n => this.iComp8 = n
-  _ref9 = n => this.iComp9 = n
-  _ref10 = n => this.iComp10 = n
-  _ref11 = n => this.iComp11 = n
-
-  render(){
-    const {
-      isVisible,
-      isShowLabels,
-      titleStyle,
-      btStyle,
-      onClose,
-      setRefFocusLast
-    } = this.props;
-    return isVisible ? (
-      <ScrollPane style={S_SCROLL_PANE}>
-        <OpenClose caption="Economics" childStyle={S_OC_CHILD}>
-          <ItemStack
-            items={CONF_EC_ARR}
-            crItem={_crPwdItem}
-            isShowLabels={isShowLabels}
-            titleStyle={titleStyle}
-            i={1}
-            comp={this}
-          />
-        </OpenClose>
-        <OpenClose caption="U.S. Economics" childStyle={S_OC_CHILD}>
-           <ItemStack
-             items={CONF_EC_USA_ARR}
-             crItem={_crPwdItem}
-             isShowLabels={isShowLabels}
-             titleStyle={titleStyle}
-             i={3}
-             comp={this}
-           />
-        </OpenClose>
-        <OpenClose caption="Stock Market" childStyle={S_OC_CHILD}>
-          <ItemStack
-            items={CONF_SM_ARR}
-            crItem={_crPwdItem}
-            isShowLabels={isShowLabels}
-            titleStyle={titleStyle}
-            i={6}
-            comp={this}
-          />
-        </OpenClose>
-        <RowButtons
-           style={S_ROW_BTS}
-           btStyle={btStyle}
-           onClose={onClose}
-           setRefFocusLast={setRefFocusLast}
-        >
-          <FlatButton
-            style={btStyle}
-            caption="CLEAR ALL"
-            onClick={this._hClearAll}
-          />
-          <FlatButton
-            style={{...btStyle, ...S_BT_SET}}
-            caption="SET ALL"
-            onClick={this._hSetAll}
-          />
-        </RowButtons>
-      </ScrollPane>
-    ) : null;
-  }
-}
+  return isVisible ? (
+    <ScrollPane style={S_SCROLL_PANE}>
+      <OpenClose caption="Economics" childStyle={S_OC_CHILD}>
+        <ItemStack
+          items={CONF_EC_ARR}
+          crItem={_crPwdItem}
+          isShowLabels={isShowLabels}
+          titleStyle={titleStyle}
+          i={1}
+          elRefs={_refs}
+          fOnEnter={fSetApiKey}
+        />
+      </OpenClose>
+      <OpenClose caption="U.S. Economics" childStyle={S_OC_CHILD}>
+         <ItemStack
+           items={CONF_EC_USA_ARR}
+           crItem={_crPwdItem}
+           isShowLabels={isShowLabels}
+           titleStyle={titleStyle}
+           i={3}
+           elRefs={_refs}
+           fOnEnter={fSetApiKey}
+         />
+      </OpenClose>
+      <OpenClose caption="Stock Market" childStyle={S_OC_CHILD}>
+        <ItemStack
+          items={CONF_SM_ARR}
+          crItem={_crPwdItem}
+          isShowLabels={isShowLabels}
+          titleStyle={titleStyle}
+          i={6}
+          elRefs={_refs}
+          fOnEnter={fSetApiKey}
+        />
+      </OpenClose>
+      <RowButtons
+         style={S_ROW_BTS}
+         btStyle={btStyle}
+         onClose={onClose}
+         setRefFocusLast={setRefFocusLast}
+      >
+        <FlatButton
+          style={btStyle}
+          caption="CLEAR ALL"
+          onClick={_hClearAll}
+        />
+        <FlatButton
+          style={{...btStyle, ...S_BT_SET}}
+          caption="SET ALL"
+          onClick={_hSetAll}
+        />
+      </RowButtons>
+    </ScrollPane>
+  ) : null;
+};
 
 export default PaneApiKey
