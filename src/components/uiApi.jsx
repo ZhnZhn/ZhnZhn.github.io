@@ -7,10 +7,10 @@ export {
   lazy,
 
   Component,
-  createRef,
-  memo,
 
+  memo,
   createContext,
+
   useContext,
   useRef,
   useId,
@@ -18,6 +18,7 @@ export {
   useReducer,
   useCallback,
   useMemo,
+
   useLayoutEffect,
   useEffect,
   useSyncExternalStore,
