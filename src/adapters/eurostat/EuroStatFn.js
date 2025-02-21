@@ -4,6 +4,13 @@ export {
 } from '../AdapterFn';
 
 import {
+  isArr,
+  isObj,
+  isStr,
+  isPositiveNumber
+} from '../../utils/isTypeFn';
+
+import {
   fTooltip,
   setDefaultTitle
 } from '../../charts/Chart';
@@ -38,15 +45,13 @@ const EU_COLOR = "#001489"
     "Spain", "Sweden"
   ];
 
-const _assign = Object.assign
-, _isStr = str => typeof str === 'string'
-, _isArr = Array.isArray;
+const _assign = Object.assign;
 
 const _crDescr = (
   updated,
   extension
 ) => {
-  const _updated = _isStr(updated)
+  const _updated = isStr(updated)
      ? `Updated: ${updated.replace('T', ' ')}`
      : ''
   , _ext = extension || {}
@@ -76,7 +81,7 @@ const _getObsOverallPeriods = (
   , _annotationItem
   , _annotationType;
 
-  if (_isArr(annotation)) {
+  if (isArr(annotation)) {
     for(_annotationItem of annotation) {
       _annotationType = (_annotationItem || {}).type
       if (_annotationType === OLDEST_DATE) {
@@ -86,7 +91,7 @@ const _getObsOverallPeriods = (
       }
     }
   }
-  
+
   return [
     _fromDate,
     _toDate
@@ -124,17 +129,17 @@ const _filterZeroCategories = (
   const _data = []
   , _arrC = [];
   data.forEach(p => {
-    if (p.y !== 0) {
+    if (isObj(p)
+      && isPositiveNumber(p.y)
+      && isStr(p.c)
+    ) {
       _data.push(p)
-    } else {
       _arrC.push(p.c)
     }
   })
   return [
     _data,
-    _arrC.length !== 0
-       ? categories.filter(c => _arrC.indexOf(c) === -1)
-       : categories
+    _arrC
   ];
 };
 

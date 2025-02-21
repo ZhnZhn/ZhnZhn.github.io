@@ -6,6 +6,7 @@ exports.toPointArr = exports.setInfoTo = exports.setDataAndInfo = exports.isNotG
 var _AdapterFn = require("../AdapterFn");
 exports.getColorBlack = _AdapterFn.getColorBlack;
 exports.findMinY = _AdapterFn.findMinY;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _Chart = require("../../charts/Chart");
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _Tooltip = require("../../charts/Tooltip");
@@ -17,11 +18,9 @@ const EU_COLOR = "#001489",
   EA_COLOR = "#cca300",
   NOT_EU_MEMBER_COLOR = '#8085e9',
   EU_MEMBER = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"];
-const _assign = Object.assign,
-  _isStr = str => typeof str === 'string',
-  _isArr = Array.isArray;
+const _assign = Object.assign;
 const _crDescr = (updated, extension) => {
-  const _updated = _isStr(updated) ? `Updated: ${updated.replace('T', ' ')}` : '',
+  const _updated = (0, _isTypeFn.isStr)(updated) ? `Updated: ${updated.replace('T', ' ')}` : '',
     _ext = extension || {},
     {
       id,
@@ -44,7 +43,7 @@ const _getObsOverallPeriods = extension => {
     _toDate = "",
     _annotationItem,
     _annotationType;
-  if (_isArr(annotation)) {
+  if ((0, _isTypeFn.isArr)(annotation)) {
     for (_annotationItem of annotation) {
       _annotationType = (_annotationItem || {}).type;
       if (_annotationType === OLDEST_DATE) {
@@ -79,13 +78,12 @@ const _filterZeroCategories = (data, categories) => {
   const _data = [],
     _arrC = [];
   data.forEach(p => {
-    if (p.y !== 0) {
+    if ((0, _isTypeFn.isObj)(p) && (0, _isTypeFn.isPositiveNumber)(p.y) && (0, _isTypeFn.isStr)(p.c)) {
       _data.push(p);
-    } else {
       _arrC.push(p.c);
     }
   });
-  return [_data, _arrC.length !== 0 ? categories.filter(c => _arrC.indexOf(c) === -1) : categories];
+  return [_data, _arrC];
 };
 const _crStatusOfPoint = status => status && status !== ':' && status.length === 1 ? status : void 0;
 const _crDataPoint = (v, time, status) => [(0, _convertToUTC.default)(time), v, _crStatusOfPoint(status)];
