@@ -133,26 +133,19 @@ export const getEventComposedPath = evt => isFn(evt.composedPath)
   ? evt.composedPath()
   : evt.path || []
 
-export const isInputValid = ref => {
-  const inputComp = getRefValue(ref);
-  return inputComp && isFn(inputComp.isValid)
-    ? inputComp.isValid()
-    : false;
-}
+const _fGetByPropName = (
+  propName,
+  dfValue
+) => ref => {
+  const _inst = getRefValue(ref);
+  return _inst && isFn(_inst[propName])
+    ? _inst[propName]()
+    : dfValue;
+};
 
-export const getInputValue = ref => {
-  const inputInst = getRefValue(ref);
-  return inputInst && isFn(inputInst.getValue)
-    ? inputInst.getValue()
-    : void 0
-}
-
-export const clearInputValue = ref => {
-  const inputInst = getRefValue(ref);
-  if (inputInst && isFn(inputInst.setValue)) {
-    inputInst.setValue('')
-  }
-}
+export const getRefOptions = _fGetByPropName("getOptions")
+export const isInputValid = _fGetByPropName("isValid", false)
+export const getInputValue = _fGetByPropName("getValue")
 
 export const getInputValidValue = (
   ref,
@@ -161,13 +154,11 @@ export const getInputValidValue = (
  ? getInputValue(ref)
  : dfValue
 
-export const getRefOptions = (
-  ref
-) => {
-  const _inst = getRefValue(ref)
-  return _inst && isFn(_inst.getOptions)
-    ? _inst.getOptions()
-    : void 0
+export const clearInputValue = ref => {
+  const inputInst = getRefValue(ref);
+  if (inputInst && isFn(inputInst.setValue)) {
+    inputInst.setValue('')
+  }
 }
 
 const _getFirstTouches = (
