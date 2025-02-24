@@ -21,39 +21,23 @@ const _crNumberOfOptionsToken = propsOptions => {
 };
 const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isBtSvgClear, isShowOption, labelId, optionsViewId, _refBtClear, _hClear, _hToggleOptions, propsOptions) => {
   const _optionNames = optionNames || optionName || '';
-  let _placeholder,
-    _afterInputEl = null;
-  if (!isLoading && !isLoadingFailed) {
-    if (isBtSvgClear) {
-      _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClear, {
-        refEl: _refBtClear,
-        style: S_SVG_CLEAR,
-        onClick: _hClear
-      });
-    } else {
-      _placeholder = placeholder || (0, _arrFn.joinBy)(' ', 'Select', optionName, _crNumberOfOptionsToken(propsOptions), '...');
-      _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell.default, {
-        isShowOption: isShowOption,
-        labelId: labelId,
-        controlsId: optionsViewId,
-        onClick: _hToggleOptions
-      });
-    }
-  } else if (isLoading) {
-    _placeholder = (0, _arrFn.joinBy)(' ', 'Loading', _optionNames, '...');
-    _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      className: _CL.CL_SPINNER,
-      "data-loader": "circle"
-    });
-  } else if (isLoadingFailed) {
-    _placeholder = (0, _arrFn.joinBy)(' ', 'Loading', _optionNames, 'Failed');
-    _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
-      className: _CL.CL_SPINNER_FAILED,
-      dataLoader: "circle-failed",
-      onClick: onLoadOption
-    });
-  }
-  return [_afterInputEl, _placeholder];
+  return isLoading ? [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    className: _CL.CL_SPINNER,
+    "data-loader": "circle"
+  }), (0, _arrFn.joinByBlank)('Loading', _optionNames, '...')] : isLoadingFailed ? [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
+    className: _CL.CL_SPINNER_FAILED,
+    dataLoader: "circle-failed",
+    onClick: onLoadOption
+  }), (0, _arrFn.joinByBlank)('Loading', _optionNames, 'Failed')] : isBtSvgClear ? [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClear, {
+    refEl: _refBtClear,
+    style: S_SVG_CLEAR,
+    onClick: _hClear
+  })] : [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell.default, {
+    isShowOption: isShowOption,
+    labelId: labelId,
+    controlsId: optionsViewId,
+    onClick: _hToggleOptions
+  }), placeholder || (0, _arrFn.joinByBlank)('Select', optionName, _crNumberOfOptionsToken(propsOptions), '...')];
 };
 var _default = exports.default = crAfterInputEl;
 //# sourceMappingURL=crAfterInputEl.js.map

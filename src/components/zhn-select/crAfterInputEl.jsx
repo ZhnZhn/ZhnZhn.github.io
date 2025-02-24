@@ -1,4 +1,4 @@
-import { joinBy } from '../../utils/arrFn';
+import { joinByBlank } from '../../utils/arrFn';
 import { BtSvgClear } from '../zhn/BtSvgX';
 import ButtonCircle2 from '../zhn/ButtonCircle2';
 import ArrowCell from './ArrowCell';
@@ -44,51 +44,35 @@ const crAfterInputEl = (
 ) => {
   const _optionNames = optionNames || optionName || '';
 
-  let _placeholder, _afterInputEl = null;
-  if (!isLoading && !isLoadingFailed){
-     if (isBtSvgClear) {
-       _afterInputEl = (
-          <BtSvgClear
-             refEl={_refBtClear}
-             style={S_SVG_CLEAR}
-             onClick={_hClear}
-          />
-        )
-     } else {
-       _placeholder = placeholder
-         || joinBy(' ', 'Select', optionName, _crNumberOfOptionsToken(propsOptions), '...');
-       _afterInputEl = (
-         <ArrowCell
+  return isLoading
+    ? [
+        (<span
+           className={CL_SPINNER}
+           data-loader="circle"
+        />),
+        joinByBlank('Loading', _optionNames, '...')]
+    : isLoadingFailed ? [
+        (<ButtonCircle2
+           className={CL_SPINNER_FAILED}
+           dataLoader="circle-failed"
+           onClick={onLoadOption}
+        />),
+        joinByBlank('Loading', _optionNames, 'Failed')
+    ] : isBtSvgClear ? [
+       (<BtSvgClear
+           refEl={_refBtClear}
+           style={S_SVG_CLEAR}
+           onClick={_hClear}
+       />)
+    ] : [
+       (<ArrowCell
            isShowOption={isShowOption}
            labelId={labelId}
            controlsId={optionsViewId}
            onClick={_hToggleOptions}
-         />
-      );
-    }
-
-  } else if (isLoading){
-    _placeholder = joinBy(' ', 'Loading', _optionNames, '...');
-    _afterInputEl = (
-      <span
-        className={CL_SPINNER}
-        data-loader="circle"
-      />
-    );
-  } else if (isLoadingFailed) {
-     _placeholder = joinBy(' ', 'Loading', _optionNames, 'Failed');
-     _afterInputEl = (
-       <ButtonCircle2
-         className={CL_SPINNER_FAILED}
-         dataLoader="circle-failed"
-         onClick={onLoadOption}
-       />
-     )
-  }
-  return [
-    _afterInputEl,
-    _placeholder
-  ];
-}
+       />),
+      placeholder || joinByBlank('Select', optionName, _crNumberOfOptionsToken(propsOptions), '...')
+    ];
+};
 
 export default crAfterInputEl

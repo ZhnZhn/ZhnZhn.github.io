@@ -36,4 +36,5 @@ export const joinBy = (
   .filter(Boolean)
   .join(delimeter)
 
+export const joinByBlank = bindTo(joinBy, " ")
 export const joinByDot = bindTo(joinBy, ".")

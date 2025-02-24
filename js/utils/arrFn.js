@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.joinByDot = exports.joinBy = exports.isInArrStr = exports.arrFactoryIsSameByProp = exports.arrFactoryFindIndexByProp = void 0;
+exports.joinByDot = exports.joinByBlank = exports.joinBy = exports.isInArrStr = exports.arrFactoryIsSameByProp = exports.arrFactoryFindIndexByProp = void 0;
 var _bindTo = require("./bindTo");
 const _isArr = Array.isArray,
   _fIsItem = (propName, propValue) => item => item[propName] === propValue,
@@ -19,5 +19,6 @@ const joinBy = function (delimeter) {
   return restItems.filter(Boolean).join(delimeter);
 };
 exports.joinBy = joinBy;
+const joinByBlank = exports.joinByBlank = (0, _bindTo.bindTo)(joinBy, " ");
 const joinByDot = exports.joinByDot = (0, _bindTo.bindTo)(joinBy, ".");
 //# sourceMappingURL=arrFn.js.map
