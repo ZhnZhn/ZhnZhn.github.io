@@ -3,12 +3,13 @@
 exports.__esModule = true;
 exports.updateOptionsIfFilters = exports.undecorateComp = exports.stepUpOption = exports.stepDownOption = exports.makeVisible = exports.decorateCurrentComp = exports.crWidthStyle = exports.crValue = exports.crOptionsFromInitialOptions = exports.crInitialStateFromProps = exports.crFilterOptions = exports.NO_ITEMS_FOUND_VALUE = void 0;
 var _uiApi = require("../uiApi");
+var _isTokenInStr = require("../../utils/isTokenInStr");
 var _CL = require("./CL");
 const NO_ITEMS_FOUND_CAPTION = "No items found";
 const NO_ITEMS_FOUND_VALUE = exports.NO_ITEMS_FOUND_VALUE = NO_ITEMS_FOUND_CAPTION;
 const crWidthStyle = (width, style) => width ? {
   ...style,
-  width: width + ((0, _uiApi.isTokenInStr)("" + width, "%") ? "" : "px")
+  width: width + ((0, _isTokenInStr.isTokenInStr)("" + width, "%") ? "" : "px")
 } : null;
 exports.crWidthStyle = crWidthStyle;
 const INPUT_PREFIX = "From input:",

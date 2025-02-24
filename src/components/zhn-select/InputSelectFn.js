@@ -1,8 +1,9 @@
-import {
-  isTokenInStr,
+import {  
   getRefValue,
   setRefValue
 } from '../uiApi';
+
+import { isTokenInStr } from '../../utils/isTokenInStr';
 
 import { CL_OPTIONS_ROW_ACTIVE } from './CL';
 
