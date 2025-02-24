@@ -55,13 +55,13 @@ const PREFIX_CL_ROW_ITEM = `${CL_ROW__PANE_TOPIC} item__`
 , CL_W = `${PREFIX_CL_ROW_ITEM}watch`;
 
 const _crSubMenuItem = (
-  id,
-  name
-) => crSubItem(id, name, CL_BR)
-, _crMenuItem = (
-  cn,
   name,
   id
+) => crSubItem(id, name, CL_BR)
+, _crMenuItem = (
+  name,
+  id,
+  cn
 ) => crItem(
   name,
   () => showBrowser(id),
@@ -72,47 +72,47 @@ const _crSubMenuItem = (
 const _crMenuItems = (
   configs
 ) => configs
-  .map(([cn, name, id]) => _crMenuItem(cn, name, id))
+  .map(([name, id]) => _crMenuItem(name, id, CL_ORG))
 
 const PAGE_CONFIGS_1 = [
-  [CL_ORG, 'Central Banks', BT_CENTRAL_BANKS],
-  [CL_ORG, 'DBnomics', BT_DB_NOMICS],
-  [CL_ORG, 'Energy', BT_ENERGY],
-  [CL_ORG, 'U.S. Economics', BT_US_ECONOMICS],
-  [CL_ORG, 'Commodities', BT_COMMODITIES],
-  [CL_ORG, 'OECD', BT_OECD]
+  ['Central Banks', BT_CENTRAL_BANKS],
+  ['DBnomics', BT_DB_NOMICS],
+  ['Energy', BT_ENERGY],
+  ['U.S. Economics', BT_US_ECONOMICS],
+  ['Commodities', BT_COMMODITIES],
+  ['OECD', BT_OECD]
 ]
 , PAGE_CONFIGS_2 = [
-  [CL_ORG, 'Overview', BT_EUROSTAT],
-  [CL_ORG, 'Circular Economy', BT_CEI],
-  [CL_ORG, 'Euro Indicators / PEEIs', BT_PE],
-  [CL_ORG, 'EU Comext', BT_COMEXT],
-  [CL_ORG, 'EU FIGARO', BT_FGR],
-  [CL_ORG, 'EU MIP', BT_MIP],
-  [CL_ORG, 'EU SDG', BT_SDG],
+  ['Overview', BT_EUROSTAT],
+  ['Circular Economy', BT_CEI],
+  ['Euro Indicators / PEEIs', BT_PE],
+  ['EU Comext', BT_COMEXT],
+  ['EU FIGARO', BT_FGR],
+  ['EU MIP', BT_MIP],
+  ['EU SDG', BT_SDG],
 ]
 , PAGE_CONFIGS_3 = [
-  [CL_ORG, 'INSEE: Statistics France', BT_FRANCE_STATISTICS],
-  [CL_ORG, 'ONS: Statistics UK', BT_UK_STATISTICS],
-  [CL_ORG, 'Statistics Norway', BT_NORWAY_STAT_ALL],
-  [CL_ORG, 'Statistics Norway (A)', BT_NORWAY_STATISTICS],
-  [CL_ORG, 'Statistics Sweden', BT_SWEDEN_STAT_ALL],
-  [CL_ORG, 'Statistics Sweden (A)', BT_SWEDEN_STAT],
-  [CL_ORG, 'Statistics Finland', BT_FINLAND_STAT_ALL],
-  [CL_ORG, 'Statistics Denmark', BT_DENMARK_STAT_ALL],
-  [CL_ORG, 'CSO: Statistics Ireland', BT_IRELAND_STAT_ALL],
-  [CL_ORG, 'FSO: Statistics Swiss', BT_SWISS_STAT]
+  ['INSEE: Statistics France', BT_FRANCE_STATISTICS],
+  ['ONS: Statistics UK', BT_UK_STATISTICS],
+  ['Statistics Norway', BT_NORWAY_STAT_ALL],
+  ['Statistics Norway (A)', BT_NORWAY_STATISTICS],
+  ['Statistics Sweden', BT_SWEDEN_STAT_ALL],
+  ['Statistics Sweden (A)', BT_SWEDEN_STAT],
+  ['Statistics Finland', BT_FINLAND_STAT_ALL],
+  ['Statistics Denmark', BT_DENMARK_STAT_ALL],
+  ['CSO: Statistics Ireland', BT_IRELAND_STAT_ALL],
+  ['FSO: Statistics Swiss', BT_SWISS_STAT]
 ]
 , PAGE_CONFIGS_4 = [
-  [CL_ORG, 'Stock Markets', BT_STOCK_MARKETS],
-  [CL_ORG, 'NYSE by Sectors', BT_NYSE_STOCKS],
-  [CL_ORG, 'NASDAQ by Sectors', BT_NASDAQ_STOCKS]
+  ['Stock Markets', BT_STOCK_MARKETS],
+  ['NYSE by Sectors', BT_NYSE_STOCKS],
+  ['NASDAQ by Sectors', BT_NASDAQ_STOCKS]
 ]
 , PAGE_CONFIGS_5 = [
-  [CL_ORG, 'FAOSTAT', BT_FAOSTAT],
-  [CL_ORG, 'UN Comtrade', BT_UN_COMTRADE],
-  [CL_ORG, 'World Bank', BT_WORLD_BANK],
-  [CL_ORG, 'WTO', BT_WTO]
+  ['FAOSTAT', BT_FAOSTAT],
+  ['UN Comtrade', BT_UN_COMTRADE],
+  ['World Bank', BT_WORLD_BANK],
+  ['WTO', BT_WTO]
 ];
 
 const crBrowserModel = () => crSliderMenu(
@@ -120,14 +120,14 @@ const crBrowserModel = () => crSliderMenu(
   215,
   2, {
     p0: [
-      _crSubMenuItem('p1', 'Economics'),
-      _crSubMenuItem('p2', 'Eurostat'),
-      _crSubMenuItem('p3', 'Statistics Agencies'),
-      _crSubMenuItem('p4', 'Stock Markets'),
-      _crSubMenuItem('p5', 'World Organizations'),
-      _crMenuItem(CL_BR, 'Blockchains', BT_BLOCKCHAIN),
-      _crMenuItem(CL_BR, 'Currencies', BT_CURRENCY),
-      _crMenuItem(CL_W, 'Watch List', BT_WATCH_LIST),
+      _crSubMenuItem('Economics', 'p1'),
+      _crSubMenuItem('Eurostat', 'p2'),
+      _crSubMenuItem('Statistics Agencies', 'p3'),
+      _crSubMenuItem('Stock Markets', 'p4'),
+      _crSubMenuItem('World Organizations', 'p5'),
+      _crMenuItem('Blockchains', BT_BLOCKCHAIN, CL_BR),
+      _crMenuItem('Currencies', BT_CURRENCY, CL_BR),
+      _crMenuItem('Watch List', BT_WATCH_LIST, CL_W),
       crItem('About', showAbout, true, CL_BR)
     ],
     p1: _crMenuItems(PAGE_CONFIGS_1),
