@@ -15,6 +15,15 @@ const S_SVG_CLEAR = {
   stroke: '#1b75bb'
 };
 
+const _crNumberOfOptionsToken = (
+  propsOptions
+) => {
+  const _propsOptionsLength = (propsOptions || []).length
+  return _propsOptionsLength > 999
+    ? `(${_propsOptionsLength})`
+    : '';
+};
+
 const crAfterInputEl = (
   isLoading,
   isLoadingFailed,
@@ -46,12 +55,8 @@ const crAfterInputEl = (
           />
         )
      } else {
-       const _propsOptionsLength = (propsOptions || []).length
-       , _numberOfOptions = _propsOptionsLength > 1000
-           ? `(${_propsOptionsLength})`
-           : '';
        _placeholder = placeholder
-         || joinBy(' ', 'Select', optionName, _numberOfOptions, '...');
+         || joinBy(' ', 'Select', optionName, _crNumberOfOptionsToken(propsOptions), '...');
        _afterInputEl = (
          <ArrowCell
            isShowOption={isShowOption}

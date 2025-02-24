@@ -15,6 +15,10 @@ const S_SVG_CLEAR = {
   right: 8,
   stroke: '#1b75bb'
 };
+const _crNumberOfOptionsToken = propsOptions => {
+  const _propsOptionsLength = (propsOptions || []).length;
+  return _propsOptionsLength > 999 ? `(${_propsOptionsLength})` : '';
+};
 const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, optionNames, onLoadOption, isBtSvgClear, isShowOption, labelId, optionsViewId, _refBtClear, _hClear, _hToggleOptions, propsOptions) => {
   const _optionNames = optionNames || optionName || '';
   let _placeholder,
@@ -27,9 +31,7 @@ const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, opt
         onClick: _hClear
       });
     } else {
-      const _propsOptionsLength = (propsOptions || []).length,
-        _numberOfOptions = _propsOptionsLength > 1000 ? `(${_propsOptionsLength})` : '';
-      _placeholder = placeholder || (0, _arrFn.joinBy)(' ', 'Select', optionName, _numberOfOptions, '...');
+      _placeholder = placeholder || (0, _arrFn.joinBy)(' ', 'Select', optionName, _crNumberOfOptionsToken(propsOptions), '...');
       _afterInputEl = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ArrowCell.default, {
         isShowOption: isShowOption,
         labelId: labelId,
