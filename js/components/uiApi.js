@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useId = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.safeMapElements = exports.safeMap = exports.memo = exports.lazy = exports.isUndef = exports.isStr = exports.isRefElementContaintsEvtTarget = exports.isNumber = exports.isInputValid = exports.isBool = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getEventComposedPath = exports.getComboboxElement = exports.getClientY = exports.getClientX = exports.focusRefElement = exports.focusHtmlElement = exports.focusElementById = exports.createContext = exports.crObjWithNullPrototype = exports.cloneUiElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = void 0;
+exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useId = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.safeMap = exports.memo = exports.lazy = exports.isStr = exports.isRefElementContaintsEvtTarget = exports.isNumber = exports.isInputValid = exports.isBool = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getEventComposedPath = exports.getComboboxElement = exports.getClientY = exports.getClientX = exports.focusRefElement = exports.focusHtmlElement = exports.focusElementById = exports.createContext = exports.crObjWithNullPrototype = exports.cloneUiElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = void 0;
 var _bindTo = require("../utils/bindTo");
 exports.bindTo = _bindTo.bindTo;
 var _react = require("react");
@@ -27,15 +27,12 @@ exports.isBool = _isTypeFn.isBool;
 exports.isFn = _isTypeFn.isFn;
 exports.isNumber = _isTypeFn.isNumber;
 exports.isStr = _isTypeFn.isStr;
-exports.isUndef = _isTypeFn.isUndef;
 exports.isObj = _isTypeFn.isObj;
 var _jsxRuntime = require("react/jsx-runtime");
 const crObjWithNullPrototype = () => Object.create(null);
 exports.crObjWithNullPrototype = crObjWithNullPrototype;
-const safeMap = (items, crElement) => (0, _isTypeFn.isArr)(items) && items.length > 0 ? items.map(crElement) : null;
+const safeMap = (itemsOrItem, crElement) => (0, _isTypeFn.isArr)(itemsOrItem) ? itemsOrItem.length > 0 ? itemsOrItem.map(crElement) : null : (0, _isTypeFn.isObj)(itemsOrItem) ? crElement(itemsOrItem, 0) : null;
 exports.safeMap = safeMap;
-const safeMapElements = (elementsOrElement, crElement) => !(0, _isTypeFn.isArr)(elementsOrElement) && (0, _isTypeFn.isObj)(elementsOrElement) ? crElement(elementsOrElement, 0) : safeMap(elementsOrElement, crElement);
-exports.safeMapElements = safeMapElements;
 const cloneUiElement = function (Element, overrideProps, key) {
   if (key === void 0) {
     key = Element.key;

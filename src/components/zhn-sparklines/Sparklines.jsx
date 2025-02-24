@@ -2,7 +2,7 @@
 import {
   isArr,
   memo,
-  safeMapElements,
+  safeMap,
   cloneUiElement
 } from '../uiApi';
 
@@ -60,7 +60,7 @@ const SparkView = memo(({
 
   return (
     <svg {...svgOpts}>
-      {safeMapElements(children, (childElement, index) => cloneUiElement(
+      {safeMap(children, (childElement, index) => cloneUiElement(
         childElement,
         { data, points, width, height, margin },
         childElement.key || index

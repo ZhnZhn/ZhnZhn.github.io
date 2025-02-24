@@ -55,7 +55,7 @@ const TabPane = _ref => {
       "aria-label": ariaLabel,
       "aria-orientation": "horizontal",
       style: S_TABS,
-      children: (0, _uiApi.safeMapElements)(children, (TabElement, index) => {
+      children: (0, _uiApi.safeMap)(children, (TabElement, index) => {
         const isSelected = _isSelectedTabIndex(index);
         return (0, _uiApi.cloneUiElement)(TabElement, {
           isSelected,
@@ -68,7 +68,7 @@ const TabPane = _ref => {
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_COMPONENTS,
-      children: (0, _uiApi.safeMapElements)(children, (tab, index) => {
+      children: (0, _uiApi.safeMap)(children, (tab, index) => {
         const _isSelected = _isSelectedTabIndex(index);
         return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           style: _isSelected ? S_COMPONENTS_BLOCK : _styleFn.S_NONE,

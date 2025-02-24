@@ -29,7 +29,6 @@ export {
   isFn,
   isNumber,
   isStr,
-  isUndef,
   isObj
 } from '../utils/isTypeFn';
 import {
@@ -41,18 +40,15 @@ import {
 export const crObjWithNullPrototype = () => Object.create(null)
 
 export const safeMap = (
-  items,
+  itemsOrItem,
   crElement
-) => isArr(items) && items.length > 0
-  ? items.map(crElement)
+) => isArr(itemsOrItem)
+  ? itemsOrItem.length > 0
+      ? itemsOrItem.map(crElement)
+      : null
+  : isObj(itemsOrItem)
+  ? crElement(itemsOrItem, 0)
   : null
-
-export const safeMapElements = (
-  elementsOrElement,
-  crElement
-) => !isArr(elementsOrElement) && isObj(elementsOrElement)
-  ? crElement(elementsOrElement, 0)
-  : safeMap(elementsOrElement, crElement)
 
 export const cloneUiElement = (
   Element,

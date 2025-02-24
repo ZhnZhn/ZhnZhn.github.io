@@ -26,6 +26,9 @@ describe("safeMap", ()=>{
       1,3,5
     ])
   })
+  test("should map object item by crElement function", () => {
+    expect(fn({n: 1}, (obj, index) => obj.n+index)).toBe(1)
+  })
   test("should return null for items type edge cases", ()=>{
     expect(fn()).toBe(null)
     expect(fn(null)).toBe(null)
@@ -34,7 +37,6 @@ describe("safeMap", ()=>{
     expect(fn(1)).toBe(null)
     expect(fn('str')).toBe(null)
 
-    expect(fn({})).toBe(null)
     expect(fn([])).toBe(null)
   })
 })

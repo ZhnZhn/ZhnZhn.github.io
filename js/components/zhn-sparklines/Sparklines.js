@@ -55,7 +55,7 @@ const SparkView = (0, _uiApi.memo)(_ref => {
     };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("svg", {
     ...svgOpts,
-    children: (0, _uiApi.safeMapElements)(children, (childElement, index) => (0, _uiApi.cloneUiElement)(childElement, {
+    children: (0, _uiApi.safeMap)(children, (childElement, index) => (0, _uiApi.cloneUiElement)(childElement, {
       data,
       points,
       width,
