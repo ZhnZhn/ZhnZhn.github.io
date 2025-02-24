@@ -2,7 +2,6 @@ import { isStr } from '../uiApi';
 import Link from '../zhn/Link';
 
 const CL_LINK = "data-provider-link";
-const S_COMPARE = { color: '#49d87c' };
 const _crUrl = domain => `https://${domain}`;
 
 const LINK_CONFIGS = [
@@ -38,6 +37,7 @@ const LINK_CONFIGS = [
  ["StatIreland","CSO: Statistics Ireland", _crUrl("www.cso.ie/en/")],
  ["FSO","FSO: Statistics Swiss", _crUrl("www.bfs.admin.ch/bfs/en/home.html")],
  ["CoinCap", _crUrl("coincap.io")],
+ ["CryptoCompare", _crUrl("www.cryptocompare.com")],
  ["CoinGecko", _crUrl("www.coingecko.com/en/")],
  ["CoinMetrics", _crUrl("coinmetrics.io")],
  ["CoinLore", _crUrl("www.coinlore.com")],
@@ -56,28 +56,16 @@ const LINK_CONFIGS = [
  ["CryptoCom", "Crypto.com", _crUrl("crypto.com")]
 ];
 
-const Links = {
-  CryptoCompare: () => (
-    <Link
-      className={CL_LINK}
-      href="https://www.cryptocompare.com"
-      title="Crypto"
-    >
-      <span style={S_COMPARE}>Compare</span>
-    </Link>
-  )
-};
-
-LINK_CONFIGS.forEach(conf => {
-  Links[conf[0]] = () => {
+const Links = LINK_CONFIGS.reduce((result, conf) => {
+  result[conf[0]] = () => {
     const _confIndex = isStr(conf[2]) ? 1 : 0;
     return (<Link
       className={CL_LINK}
       title={conf[_confIndex]}
       href={conf[_confIndex+1]}
-      style={conf[_confIndex+2]}
    />);
   }
-})
+  return result;
+}, {});
 
 export default Links
