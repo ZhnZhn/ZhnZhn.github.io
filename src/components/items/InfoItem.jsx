@@ -1,4 +1,4 @@
-import { joinBy } from '../uiApi';
+import { joinBy } from '../../utils/arrFn';
 import useToggle from '../hooks/useToggle';
 
 import OpenClose from '../zhn/OpenClose';

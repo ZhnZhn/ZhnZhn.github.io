@@ -1,6 +1,5 @@
 export { isTokenInStr } from '../utils/isTokenInStr';
 export { bindTo } from '../utils/bindTo';
-export { joinBy } from '../utils/arrFn';
 
 export {
   Suspense,

@@ -1,4 +1,4 @@
-import { joinBy } from '../uiApi';
+import { joinBy } from '../../utils/arrFn';
 import { BtSvgClear } from '../zhn/BtSvgX';
 import ButtonCircle2 from '../zhn/ButtonCircle2';
 import ArrowCell from './ArrowCell';

@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.InfoItem = void 0;
-var _uiApi = require("../uiApi");
+var _arrFn = require("../../utils/arrFn");
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _ItemList = _interopRequireDefault(require("../zhn/ItemList"));
@@ -37,7 +37,7 @@ const _crLinkItem = _ref => {
     caption
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-    caption: (0, _uiApi.joinBy)(": ", caption, href),
+    caption: (0, _arrFn.joinBy)(": ", caption, href),
     href: href
   });
 };
