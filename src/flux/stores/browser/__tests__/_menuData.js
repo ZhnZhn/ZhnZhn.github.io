@@ -3,7 +3,7 @@ describe('_menuData', ()=>{
   test('', ()=>expect('').toBe(''))
 })
 
-const items = {
+export const items = {
   B1: {
     dialogProps: {
       rootUri: './data/',
@@ -70,10 +70,9 @@ const items = {
   }
 }
 
-const result = {
+export const result = {
   ID_TOPIC_1: {
       type: 'ID_TOPIC_1',
-      addProps: 'B3',
       dialogType: 'DialogTypeB3',
       dialogProps: {
         rootUri: './data/',
@@ -105,7 +104,6 @@ const result = {
   },
   ID_TOPIC_2: {
       type: 'ID_TOPIC_2',
-      addProps: 'B2',
       dialogProps: {
         rootUri: './data/',
         b1: 'b1',
@@ -129,7 +127,6 @@ const result = {
   },
   ID_TOPIC_3: {
     type: 'ID_TOPIC_3',
-    addProps: 'B1',
     dialogProps: {
       rootUri: './data/',
       b1: 'b1',
@@ -139,6 +136,76 @@ const result = {
       }
     }
   }
-};
+}
 
-export default { items, result }
+export const items_idTuple = {
+  AAA_B : {
+    dialogProps: {
+      a1: 'a1',
+      b1: 'b1'
+    }
+  }
+}
+export const df_idTuple = {
+  idTuple: {
+    AAA_B: [
+      ["AAA_BB_1", "Topic 1", "t1"],
+      ["AAA_BB_2", "Topic 2", "t2"]
+    ]
+  }
+}
+export const result_idTuple = {
+  AAA_BB_1 : {
+    type: 'AAA_BB_1',
+    menuTitle: 'Topic 1',
+    dialogProps: {
+      a1: 'a1',
+      b1: 'b1',
+      dfProps: {
+        dfId: 't1'
+      }
+    }
+  },
+  AAA_BB_2 : {
+    type: 'AAA_BB_2',
+    menuTitle: 'Topic 2',
+    dialogProps: {
+      a1: 'a1',
+      b1: 'b1',
+      dfProps: {
+        dfId: 't2'
+      }
+    }
+  },
+}
+
+export const items_dfAddProps = {
+  AAA_B: {
+    dialogProps: {
+      a1: 'a1',
+      b1: 'b1'
+    }
+  },
+  AAA_BB_3: {
+    type: 'AAA_BB_3',
+    menuTitle: 'Topic 3',
+    dialogProps: {
+      c1: 'c1'
+    }
+  }
+}
+export const df_dfAddProps = {
+  dfAddProps: 'AAA_B'
+}
+export const result_dfAddProps = {
+  AAA_BB_3: {
+    type: 'AAA_BB_3',
+    menuTitle: 'Topic 3',
+    dialogProps: {
+      a1: 'a1',
+      b1: 'b1',
+      c1: 'c1',
+      dfProps: {}
+    }
+  }
+}

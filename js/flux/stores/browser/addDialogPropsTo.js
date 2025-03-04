@@ -26,13 +26,14 @@ const _checkItemDfIdCase = item => {
           dfId
         }
       };
+      delete item.dfId;
     }
   },
   _getItemDialogProps = item => {
     _checkItemDfIdCase(item);
     return item.dialogProps;
   },
-  VALID_ITEM_ID_TYPE_REGEX = RegExp("^[A-Z_]*$"),
+  VALID_ITEM_ID_TYPE_REGEX = RegExp("^[A-Z_0-9]+$"),
   _setItemFromTupleTo = (items, tuple, props) => {
     const _idType = "" + tuple[0];
     if (VALID_ITEM_ID_TYPE_REGEX.test(_idType)) {
@@ -51,9 +52,6 @@ const _checkItemDfIdCase = item => {
       });
     }
   },
-  _checkItemsTuplesCase = (items, tuples) => {
-    _setItemsFromTuples(items, tuples);
-  },
   _checkItemsIdTupleCase = (items, idTuple) => {
     if ((0, _isTypeFn.isObj)(idTuple)) {
       _getObjectKeys(idTuple).forEach(key => {
@@ -66,10 +64,8 @@ const _checkItemDfIdCase = item => {
 const addDialogPropsTo = (items, df) => {
   const {
     dfAddProps,
-    tuples,
     idTuple
   } = df || {};
-  _checkItemsTuplesCase(items, tuples);
   _checkItemsIdTupleCase(items, idTuple);
   _getObjectKeys(items).forEach(pnId => {
     const item = items[pnId],
@@ -88,6 +84,7 @@ const addDialogPropsTo = (items, df) => {
         ...addProps.dfProps,
         ...dialogProps.dfProps
       };
+      delete item.addProps;
     }
   });
 };

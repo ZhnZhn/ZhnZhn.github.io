@@ -1,11 +1,11 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.result_idTuple = exports.result_dfAddProps = exports.result = exports.items_idTuple = exports.items_dfAddProps = exports.items = exports.df_idTuple = exports.df_dfAddProps = void 0;
 describe('_menuData', () => {
   test('', () => expect('').toBe(''));
 });
-const items = {
+const items = exports.items = {
   B1: {
     dialogProps: {
       rootUri: './data/',
@@ -63,10 +63,9 @@ const items = {
     }
   }
 };
-const result = {
+const result = exports.result = {
   ID_TOPIC_1: {
     type: 'ID_TOPIC_1',
-    addProps: 'B3',
     dialogType: 'DialogTypeB3',
     dialogProps: {
       rootUri: './data/',
@@ -98,7 +97,6 @@ const result = {
   },
   ID_TOPIC_2: {
     type: 'ID_TOPIC_2',
-    addProps: 'B2',
     dialogProps: {
       rootUri: './data/',
       b1: 'b1',
@@ -122,7 +120,6 @@ const result = {
   },
   ID_TOPIC_3: {
     type: 'ID_TOPIC_3',
-    addProps: 'B1',
     dialogProps: {
       rootUri: './data/',
       b1: 'b1',
@@ -133,9 +130,71 @@ const result = {
     }
   }
 };
-var _default = {
-  items,
-  result
+const items_idTuple = exports.items_idTuple = {
+  AAA_B: {
+    dialogProps: {
+      a1: 'a1',
+      b1: 'b1'
+    }
+  }
 };
-exports.default = _default;
+const df_idTuple = exports.df_idTuple = {
+  idTuple: {
+    AAA_B: [["AAA_BB_1", "Topic 1", "t1"], ["AAA_BB_2", "Topic 2", "t2"]]
+  }
+};
+const result_idTuple = exports.result_idTuple = {
+  AAA_BB_1: {
+    type: 'AAA_BB_1',
+    menuTitle: 'Topic 1',
+    dialogProps: {
+      a1: 'a1',
+      b1: 'b1',
+      dfProps: {
+        dfId: 't1'
+      }
+    }
+  },
+  AAA_BB_2: {
+    type: 'AAA_BB_2',
+    menuTitle: 'Topic 2',
+    dialogProps: {
+      a1: 'a1',
+      b1: 'b1',
+      dfProps: {
+        dfId: 't2'
+      }
+    }
+  }
+};
+const items_dfAddProps = exports.items_dfAddProps = {
+  AAA_B: {
+    dialogProps: {
+      a1: 'a1',
+      b1: 'b1'
+    }
+  },
+  AAA_BB_3: {
+    type: 'AAA_BB_3',
+    menuTitle: 'Topic 3',
+    dialogProps: {
+      c1: 'c1'
+    }
+  }
+};
+const df_dfAddProps = exports.df_dfAddProps = {
+  dfAddProps: 'AAA_B'
+};
+const result_dfAddProps = exports.result_dfAddProps = {
+  AAA_BB_3: {
+    type: 'AAA_BB_3',
+    menuTitle: 'Topic 3',
+    dialogProps: {
+      a1: 'a1',
+      b1: 'b1',
+      c1: 'c1',
+      dfProps: {}
+    }
+  }
+};
 //# sourceMappingURL=_menuData.js.map
