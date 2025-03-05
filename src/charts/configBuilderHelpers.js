@@ -46,6 +46,6 @@ export const calcYAxisMin = (
   min,
   max,
   noZoom
-) => noZoom && min > 0
+) => noZoom && min >= 0
    ? 0
    : calcMinY(min, max);

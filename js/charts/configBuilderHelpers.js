@@ -13,16 +13,11 @@ const assignTo = (obj, propName, value) => {
 exports.assignTo = assignTo;
 const getYFromPoint = point => _isArr(point) ? point[1] : point && point.y || 0;
 exports.getYFromPoint = getYFromPoint;
-const getFirstSeriaData = obj => {
-  var _obj$config, _obj$config$series;
-  return ((_obj$config = obj.config) == null ? void 0 : (_obj$config$series = _obj$config.series) == null ? void 0 : _obj$config$series[0].data) || [];
-};
+const getFirstSeriaData = obj => obj.config?.series?.[0].data || [];
 exports.getFirstSeriaData = getFirstSeriaData;
 const _fFindY = findY => (y, data) => (0, _isTypeFn.isNumber)(y) ? y : findY(data);
-const findMinYData = _fFindY(_seriaFn.findMinY);
-exports.findMinYData = findMinYData;
-const findMaxYData = _fFindY(_seriaFn.findMaxY);
-exports.findMaxYData = findMaxYData;
-const calcYAxisMin = (min, max, noZoom) => noZoom && min > 0 ? 0 : (0, _ChartFn.calcMinY)(min, max);
+const findMinYData = exports.findMinYData = _fFindY(_seriaFn.findMinY);
+const findMaxYData = exports.findMaxYData = _fFindY(_seriaFn.findMaxY);
+const calcYAxisMin = (min, max, noZoom) => noZoom && min >= 0 ? 0 : (0, _ChartFn.calcMinY)(min, max);
 exports.calcYAxisMin = calcYAxisMin;
 //# sourceMappingURL=configBuilderHelpers.js.map
