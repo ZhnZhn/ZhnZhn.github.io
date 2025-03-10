@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _AdapterFn = require("../AdapterFn");
 var _crAdapterType = require("../crAdapterType1");
 var _fnAdapter = require("./fnAdapter");
@@ -10,7 +11,7 @@ const DF_SUB_ID = "uvo";
 const _fCrItemTuple = () => item => [(0, _AdapterFn.ymdToUTC)(item.date), item.value],
   crData = (0, _crAdapterType.fCrDataType1)(_fnAdapter.getTimeSeriesValues, _fCrItemTuple),
   trOption = option => {
-    option.subtitle = (0, _AdapterFn.joinBy)(', ', option.subtitle, option.dfSubtitle);
+    option.subtitle = (0, _arrFn.joinByComma)(option.subtitle, option.dfSubtitle);
   },
   addToConfig = (config, json, option) => {
     (0, _AdapterFn.addToConfigInfo)(config, option);

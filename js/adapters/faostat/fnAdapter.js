@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crCategoryTitle = void 0;
 var _fnDescr = require("./fnDescr");
 exports.toInfo = _fnDescr.toInfo;
+var _arrFn = require("../../utils/arrFn");
 var _AdapterFn = require("../AdapterFn");
 const BLANK = ' ',
   MM_DD = '-12-31',
@@ -89,13 +90,13 @@ const crTitle = (json, option) => {
     return `${subtitle} ${_crUnit(json)}: ${title}`;
   }
   if (title) {
-    return (0, _AdapterFn.joinBy)(': ', dfTitle, title);
+    return (0, _arrFn.joinByColon)(dfTitle, title);
   }
   const {
       data
     } = json,
     p = data[data.length - 1];
-  return (0, _AdapterFn.isObj)(p) ? (0, _AdapterFn.joinBy)(' ', p.Area, p.Item, p.Element) : DF_TITLE;
+  return (0, _AdapterFn.isObj)(p) ? (0, _arrFn.joinByBlank)(p.Area, p.Item, p.Element) : DF_TITLE;
 };
 exports.crTitle = crTitle;
 const crSubtitle = (json, option) => option.dfSubtitle || `${option.subtitle}: ${_crUnit(json)}`;
@@ -127,7 +128,7 @@ const isSeriesReq = exports.isSeriesReq = _getSeriesPropName;
 const isQueryAllowed = exports.isQueryAllowed = _isListForList;
 const crCategoryTitle = (title, json) => {
   const _unit = (json.data[0] || {}).Unit;
-  return (0, _AdapterFn.joinBy)(', ', title, (0, _AdapterFn.isStr)(_unit) ? _unit.length > 2 ? _unit : _unit.toUpperCase() : '');
+  return (0, _arrFn.joinByComma)(title, (0, _AdapterFn.isStr)(_unit) ? _unit.length > 2 ? _unit : _unit.toUpperCase() : '');
 };
 exports.crCategoryTitle = crCategoryTitle;
 //# sourceMappingURL=fnAdapter.js.map

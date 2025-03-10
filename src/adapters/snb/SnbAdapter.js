@@ -1,6 +1,7 @@
+import { joinByComma } from '../../utils/arrFn';
+
 import {
   ymdToUTC,
-  joinBy,
   addToConfigInfo,
   addToConfigDfLink
 } from '../AdapterFn';
@@ -23,7 +24,7 @@ const _fCrItemTuple = () => item => [
 ]
 , crData = fCrDataType1(getTimeSeriesValues, _fCrItemTuple)
 , trOption = (option) => {
-    option.subtitle = joinBy(', ',
+    option.subtitle = joinByComma(
       option.subtitle,
       option.dfSubtitle
     )

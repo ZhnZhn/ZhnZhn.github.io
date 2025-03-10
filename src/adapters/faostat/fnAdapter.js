@@ -1,6 +1,12 @@
 export { toInfo } from './fnDescr';
 
 import {
+  joinByBlank,
+  joinByColon,
+  joinByComma
+} from '../../utils/arrFn';
+
+import {
   isArr,
   isObj,
   isNumber,
@@ -8,7 +14,6 @@ import {
   isYNumber,
   getValue,
   getObjectKeys,
-  joinBy,
   toUpperCaseFirst,
   monthIndex,
   ymdToUTC,
@@ -151,12 +156,12 @@ export const crTitle = (
     return `${subtitle} ${_crUnit(json)}: ${title}`;
   }
   if (title) {
-    return joinBy(': ', dfTitle, title);
+    return joinByColon(dfTitle, title);
   }
   const { data } = json
   , p = data[data.length-1];
   return isObj(p)
-    ? joinBy(' ', p.Area, p.Item, p.Element)
+    ? joinByBlank(p.Area, p.Item, p.Element)
     : DF_TITLE;
 }
 
@@ -205,7 +210,7 @@ export const crCategoryTitle = (
   json
 ) => {
   const _unit = (json.data[0] || {}).Unit;
-  return joinBy(', ',
+  return joinByComma(
     title,
     isStr(_unit)
       ? _unit.length > 2
