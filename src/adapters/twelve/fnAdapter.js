@@ -1,4 +1,4 @@
-import { joinBy } from '../AdapterFn';
+import { joinByColon } from '../../utils/arrFn';
 
 export const crCaption = (
   option,
@@ -11,6 +11,6 @@ export const crCaption = (
     currency
   } = meta || {};
   return {
-    title: joinBy(": ", exchange, symbol, type, currency)
+    title: joinByColon(exchange, symbol, type, currency)
   };
 }

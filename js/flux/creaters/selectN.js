@@ -76,7 +76,7 @@ const createLoadOptions = (props, options) => {
     _itemKey: _itemKey,
     _rt: (0, _createrFns.crRoundTo)(_rt),
     itemCaption,
-    alertItemId: (0, _arrFn.joinBy)(": ", itemCaption, threeC),
+    alertItemId: (0, _arrFn.joinByColon)(itemCaption, threeC),
     zhCompType: compType,
     fromDate,
     time: date,

@@ -1,4 +1,4 @@
-import { joinBy } from '../../utils/arrFn';
+import { joinByColon } from '../../utils/arrFn';
 import useToggle from '../hooks/useToggle';
 
 import OpenClose from '../zhn/OpenClose';
@@ -26,7 +26,7 @@ const _crLinkItem = ({
   caption
 }) => (
  <Link
-    caption={joinBy(": ", caption, href)}
+    caption={joinByColon(caption, href)}
     href={href}
  />
 );

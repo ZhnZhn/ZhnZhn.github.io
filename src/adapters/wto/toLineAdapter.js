@@ -1,8 +1,9 @@
+import { joinByColon } from '../../utils/arrFn';
+
 import {
   isStr,
   assign,
   getCaption,
-  joinBy,
   ymdToUTC
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
@@ -24,8 +25,8 @@ const crTitle = (
   , _product = getCaption(items[1])
   , item = getDataset(json)[0] || {};
   return {
-    title: joinBy(": ", _reporting, dfT),
-    subtitle: joinBy(": ", _product, item.Unit)
+    title: joinByColon(_reporting, dfT),
+    subtitle: joinByColon(_product, item.Unit)
   };
 };
 

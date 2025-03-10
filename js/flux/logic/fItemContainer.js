@@ -29,7 +29,7 @@ const _crCaption = (dialogConf, browserType) => {
       dataSource
     } = dialogProps || {};
   _caption = (0, _isTypeFn.isStr)(contCaption) ? contCaption : dialogCaption || menuTitle || "Item Container";
-  return (0, _arrFn.joinBy)(": ", ds || dataSource, _caption);
+  return (0, _arrFn.joinByColon)(ds || dataSource, _caption);
 };
 const crItemContainerEl = _ref => {
   let {

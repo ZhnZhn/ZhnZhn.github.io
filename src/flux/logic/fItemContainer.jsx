@@ -1,5 +1,5 @@
 import { isStr } from "../../utils/isTypeFn";
-import { joinBy } from "../../utils/arrFn";
+import { joinByColon } from "../../utils/arrFn";
 import { bindTo } from "../../utils/bindTo";
 
 import BrowserConfig from "../../constants/BrowserConfig";
@@ -38,7 +38,7 @@ const _crCaption = (
   _caption = isStr(contCaption)
      ? contCaption
      : dialogCaption || menuTitle || "Item Container";
-  return joinBy(": ", ds || dataSource, _caption);
+  return joinByColon(ds || dataSource, _caption);
 };
 
 export const crItemContainerEl = ({

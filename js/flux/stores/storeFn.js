@@ -13,7 +13,7 @@ const logErrorToConsole = _ref => {
     alertItemId,
     alertDescr
   } = _ref;
-  _consoleLogErr((0, _arrFn.joinBy)(": ", alertCaption, alertItemId));
+  _consoleLogErr((0, _arrFn.joinByColon)(alertCaption, alertItemId));
   _consoleLogErr(alertDescr);
 };
 exports.logErrorToConsole = logErrorToConsole;

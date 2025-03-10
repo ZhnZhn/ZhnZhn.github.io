@@ -1,7 +1,7 @@
+import { joinByColon } from '../../utils/arrFn';
 import {
   isNumber,
-  ymdToUTC,
-  joinBy
+  ymdToUTC
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import { fCrItemLinkByCaption } from '../crFn';
@@ -66,7 +66,7 @@ const _crName = (
  { unit_of_measure }, {
    title,
    subtitle
-}) => joinBy(': ', subtitle, title, unit_of_measure);
+}) => joinByColon(subtitle, title, unit_of_measure);
 
 const _crDescr = ({
   links

@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _crAdapterType = require("../crAdapterType1");
@@ -15,8 +16,8 @@ const crTitle = (option, json) => {
     _product = (0, _AdapterFn.getCaption)(items[1]),
     item = (0, _fnAdapter.getDataset)(json)[0] || {};
   return {
-    title: (0, _AdapterFn.joinBy)(": ", _reporting, dfT),
-    subtitle: (0, _AdapterFn.joinBy)(": ", _product, item.Unit)
+    title: (0, _arrFn.joinByColon)(_reporting, dfT),
+    subtitle: (0, _arrFn.joinByColon)(_product, item.Unit)
   };
 };
 const trOption = (option, json) => {

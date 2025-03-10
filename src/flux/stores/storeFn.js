@@ -1,4 +1,4 @@
-import { joinBy } from '../../utils/arrFn';
+import { joinByColon } from '../../utils/arrFn';
 
 const LOG_ERR_COLOR = 'color:rgb(237, 88, 19);'
 , _consoleLogErr = str => {
@@ -10,6 +10,6 @@ export const logErrorToConsole = ({
   alertItemId,
   alertDescr
 }) => {
-  _consoleLogErr(joinBy(": ", alertCaption, alertItemId));
+  _consoleLogErr(joinByColon(alertCaption, alertItemId));
   _consoleLogErr(alertDescr);
 }

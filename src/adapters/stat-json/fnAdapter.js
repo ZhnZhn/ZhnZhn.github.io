@@ -8,10 +8,8 @@ export {
   crId
 } from '../crFn';
 
-import {
-  valueMoving,
-  joinBy
-} from '../AdapterFn';
+import { joinByColon } from '../../utils/arrFn';
+import { valueMoving } from '../AdapterFn';
 import {
   getDatasetLabel,
   getDatasetUpdated,
@@ -141,7 +139,7 @@ export const crTitle = (
     case 'SWS_ALL':
       return TITLE_SWS;
     case 'ES':
-      return joinBy(": ", option.title, option.subtitle)
+      return joinByColon(option.title, option.subtitle)
     default:
       return '';
   }

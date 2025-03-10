@@ -1,4 +1,4 @@
-import { joinBy } from '../../utils/arrFn';
+import { joinByColon } from '../../utils/arrFn';
 
 import {
   crCaptions,
@@ -105,7 +105,7 @@ const createLoadOptions = (
     _itemKey: _itemKey,
     _rt: crRoundTo(_rt),
     itemCaption,
-    alertItemId: joinBy(": ", itemCaption, threeC),
+    alertItemId: joinByColon(itemCaption, threeC),
     zhCompType: compType,
     fromDate,
     time: date,

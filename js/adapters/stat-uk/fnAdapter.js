@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.crData = exports.addConfOption = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
@@ -58,7 +59,7 @@ const _crName = (_ref, _ref2) => {
     title,
     subtitle
   } = _ref2;
-  return (0, _AdapterFn.joinBy)(': ', subtitle, title, unit_of_measure);
+  return (0, _arrFn.joinByColon)(subtitle, title, unit_of_measure);
 };
 const _crDescr = _ref3 => {
   let {

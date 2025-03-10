@@ -38,3 +38,4 @@ export const joinBy = (
 
 export const joinByBlank = bindTo(joinBy, " ")
 export const joinByDot = bindTo(joinBy, ".")
+export const joinByColon = bindTo(joinBy, ": ")

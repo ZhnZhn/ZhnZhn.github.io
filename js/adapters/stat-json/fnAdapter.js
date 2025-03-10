@@ -9,6 +9,7 @@ exports.toUpperCaseFirst = _AdapterFn.toUpperCaseFirst;
 exports.crErrorByMessage = _AdapterFn.crErrorByMessage;
 var _crFn = require("../crFn");
 exports.crId = _crFn.crId;
+var _arrFn = require("../../utils/arrFn");
 var _JsonStatFn = require("../JsonStatFn");
 const _crTitle = country => `Statisctics ${country}: All Items`,
   TITLE_NST = _crTitle('Norway'),
@@ -98,7 +99,7 @@ const crTitle = option => {
     case 'SWS_ALL':
       return TITLE_SWS;
     case 'ES':
-      return (0, _AdapterFn.joinBy)(": ", option.title, option.subtitle);
+      return (0, _arrFn.joinByColon)(option.title, option.subtitle);
     default:
       return '';
   }
