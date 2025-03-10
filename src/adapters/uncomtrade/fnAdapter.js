@@ -7,11 +7,15 @@ export {
 } from '../AdapterFn';
 
 import {
+  joinByBlank,
+  joinByUndescore
+} from '../../utils/arrFn';
+
+import {
   isArr,
   isNumber,
   isPositiveNumber,
-  domSanitize,
-  joinBy
+  domSanitize
 } from '../AdapterFn';
 import {
   isColumnOrBarCategory
@@ -168,9 +172,7 @@ export const crCategoryData = (
 export const crCategoryTitle = ({
   title,
   period
-}) => joinBy(" ",
-  title, "in", period
-)
+}) => joinByBlank(title, "in", period)
 
 export const crChartId = ({
   value,
@@ -181,7 +183,7 @@ export const crChartId = ({
   period,
   chart,
   time,
-}) => joinBy("_",
+}) => joinByUndescore(
   value, rg, measure, tp, freq, period, chart, time
 )
 

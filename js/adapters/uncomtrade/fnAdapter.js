@@ -9,6 +9,7 @@ exports.isPositiveNumber = _AdapterFn.isPositiveNumber;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.valueMoving = _AdapterFn.valueMoving;
 exports.roundBy = _AdapterFn.roundBy;
+var _arrFn = require("../../utils/arrFn");
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 exports.sortDescByPnValue = _compareByFn.sortDescByPnValue;
@@ -102,7 +103,7 @@ const crCategoryTitle = _ref2 => {
     title,
     period
   } = _ref2;
-  return (0, _AdapterFn.joinBy)(" ", title, "in", period);
+  return (0, _arrFn.joinByBlank)(title, "in", period);
 };
 exports.crCategoryTitle = crCategoryTitle;
 const crChartId = _ref3 => {
@@ -116,7 +117,7 @@ const crChartId = _ref3 => {
     chart,
     time
   } = _ref3;
-  return (0, _AdapterFn.joinBy)("_", value, rg, measure, tp, freq, period, chart, time);
+  return (0, _arrFn.joinByUndescore)(value, rg, measure, tp, freq, period, chart, time);
 };
 exports.crChartId = crChartId;
 const crInfo = (json, option) => ({
