@@ -1,10 +1,10 @@
-import { joinBy } from "../utils/arrFn";
+import { joinByBlank } from "../utils/arrFn";
 
 const WITHOUT_API_KEY = "Without Api Key";
 
 const _crForReqToken = (
   providerName
-) => joinBy(" ", "For this type of", providerName, "request");
+) => joinByBlank("For this type of", providerName, "request");
 
 const AND_THEN_ENTER_KEY = "and then enter your API key in dialog SETTINGS [s].";
 

@@ -4,7 +4,7 @@ exports.__esModule = true;
 exports.withoutProxy = exports.withoutApiKey = exports.setAlertMsg = exports.YMD_DATE_OR_EMPTY = exports.NOT_VALID_FORMAT = exports.NOT_SELECTED = exports.MSG_OFFLINE = exports.ERR_TOO_MANY_REQUEST = exports.ERR_PREMIUM_WITHOUT_KEY = exports.ERR_NETWORK = exports.ERR_LOADING_IN_PROGRESS = exports.ERR_FEATURE_WITHOUT_KEY = exports.ERR_ALREADY_EXIST = exports.ERR_10 = void 0;
 var _arrFn = require("../utils/arrFn");
 const WITHOUT_API_KEY = "Without Api Key";
-const _crForReqToken = providerName => (0, _arrFn.joinBy)(" ", "For this type of", providerName, "request");
+const _crForReqToken = providerName => (0, _arrFn.joinByBlank)("For this type of", providerName, "request");
 const AND_THEN_ENTER_KEY = "and then enter your API key in dialog SETTINGS [s].";
 const _crMsg = (caption, descr) => ({
   caption,
