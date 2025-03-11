@@ -1,8 +1,9 @@
+import { isFn } from '../../utils/isTypeFn';
+
 import {
-  getV,
   getC,
-  isFn
-} from './createrFns';
+  getV
+} from '../../utils/getPropertyFn';
 
 const MAX_SUBTITLE = 60;
 

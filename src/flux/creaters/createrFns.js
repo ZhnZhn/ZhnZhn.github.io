@@ -3,14 +3,10 @@ import {
   joinByUndescore
 } from '../../utils/arrFn';
 import {
-  getC as _gC,
-  getV as _gV
+  getC,
+  getV
 } from '../../utils/getPropertyFn';
 import { toUpperCaseFirst } from '../../utils/toUpperCaseFirst';
-
-export const getC = _gC
-export const getV = _gV
-export const isFn = fn => typeof fn === 'function'
 
 const _getC = item => toUpperCaseFirst(
   item && item.sc || getC(item)

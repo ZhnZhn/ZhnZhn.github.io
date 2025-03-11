@@ -1,15 +1,11 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isFn = exports.getV = exports.getC = exports.crRoundTo = exports.crItemKey = exports.crCaptions = void 0;
+exports.crRoundTo = exports.crItemKey = exports.crCaptions = void 0;
 var _arrFn = require("../../utils/arrFn");
 var _getPropertyFn = require("../../utils/getPropertyFn");
 var _toUpperCaseFirst = require("../../utils/toUpperCaseFirst");
-const getC = exports.getC = _getPropertyFn.getC;
-const getV = exports.getV = _getPropertyFn.getV;
-const isFn = fn => typeof fn === 'function';
-exports.isFn = isFn;
-const _getC = item => (0, _toUpperCaseFirst.toUpperCaseFirst)(item && item.sc || getC(item));
+const _getC = item => (0, _toUpperCaseFirst.toUpperCaseFirst)(item && item.sc || (0, _getPropertyFn.getC)(item));
 const _isArr = Array.isArray;
 const _crItemCaption = (items, titles) => {
   if (!_isArr(titles) || titles.length === 0) {
@@ -19,7 +15,7 @@ const _crItemCaption = (items, titles) => {
 };
 const _crCaptionItems = items => (items || []).map(item => _getC(item));
 const crItemKey = function (items) {
-  const _prefix = items.filter(Boolean).map(item => getV(item) || getC(item) || item).join('_');
+  const _prefix = items.filter(Boolean).map(item => (0, _getPropertyFn.getV)(item) || (0, _getPropertyFn.getC)(item) || item).join('_');
   for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     args[_key - 1] = arguments[_key];
   }
@@ -30,7 +26,7 @@ const crItemKey = function (items) {
 exports.crItemKey = crItemKey;
 const crCaptions = (items, titles) => {
   const itemCaption = _crItemCaption(items, titles),
-    _items = items.filter(getC),
+    _items = items.filter(_getPropertyFn.getC),
     [item1, item2, item3, item4, ...restItems] = _items,
     oneC = _getC(item1),
     twoC = _getC(item2),
