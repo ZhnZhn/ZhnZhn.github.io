@@ -1,4 +1,7 @@
-import { joinBy } from '../../utils/arrFn';
+import {
+  joinByColon,
+  joinByUndescore
+} from '../../utils/arrFn';
 import {
   getC as _gC,
   getV as _gV
@@ -14,7 +17,6 @@ const _getC = item => toUpperCaseFirst(
 );
 
 const _isArr = Array.isArray;
-const _joinByColon = (arrStr) => joinBy(": ", ...arrStr);
 
 const _crItemCaption = (
   items,
@@ -23,7 +25,7 @@ const _crItemCaption = (
   if (!_isArr(titles) || titles.length === 0) {
     titles = [0]
   }
-  return _joinByColon(titles
+  return joinByColon(...titles
     .map(titleIndex => _getC(items[titleIndex]))
   );
 };
@@ -41,7 +43,7 @@ export const crItemKey = (
     .filter(Boolean)
     .map(item => getV(item) || getC(item) || item)
     .join('_');
-  return joinBy("_", _prefix, ...args);
+  return joinByUndescore("_", _prefix, ...args);
 }
 
 //[itemCaption, title, subtitle, threeC]
@@ -65,10 +67,10 @@ export const crCaptions = (
 
   let _title = oneC, _subtitle;
   if (fourC) {
-    _title = _joinByColon([oneC, twoC])
-    _subtitle = _joinByColon([threeC, fourC, ..._crCaptionItems(restItems)])
+    _title = joinByColon(oneC, twoC)
+    _subtitle = joinByColon(threeC, fourC, ..._crCaptionItems(restItems))
   } else if (threeC) {
-    _subtitle = _joinByColon([twoC, threeC])
+    _subtitle = joinByColon(twoC, threeC)
   } else if (twoC) {
     _subtitle = twoC
   }
