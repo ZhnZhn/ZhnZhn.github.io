@@ -1,10 +1,13 @@
 import { getNumberOfDays } from "../../utils/dateFn";
 import {
+  joinBy,
+  joinByBlank
+} from "../../utils/arrFn";
+import {
   isNotEmptyArr,
   getValue,
   crError,
-  crGetRoute,
-  joinBy
+  crGetRoute
 } from "../AdapterFn";
 
 import { isCategory } from "../CategoryFn";
@@ -16,7 +19,7 @@ const NDL_DATA_SOURCE = "NDL"
 
 const _crDataSource = ({
   dataSource
-}) => joinBy(" ", NDL_DATA_SOURCE, dataSource)
+}) => joinByBlank(NDL_DATA_SOURCE, dataSource)
 , _crDate = (
   time
 ) => {

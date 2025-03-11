@@ -1,8 +1,9 @@
+import { joinByDot } from '../../utils/arrFn';
+
 import {
   getValue,
   getObjectKeys,
   getByPropsFrom,
-  joinBy,
   crGetRoute
 } from '../AdapterFn';
 import {
@@ -39,7 +40,7 @@ const _crItemDf = items => {
 ) => `${isCategory(seriaType) ? "" : getValue(items[0])}.${getValue(items[1])}`
 , _crItem312 = (
   items
-) => joinBy(".",
+) => joinByDot(
   getValue(items[2]),
   getValue(items[0]),
   getValue(items[1])
@@ -55,7 +56,7 @@ const _crItemDf = items => {
 
 export const crItemId = option => {
   const _crItemId = _getCrItemId(option.dfFnUrl);
-  return joinBy(".",
+  return joinByDot(
     option.dfPrefix,
     _crItemId(option.items, option.seriaType)
   );

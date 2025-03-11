@@ -1,3 +1,5 @@
+import { joinByColon } from '../../utils/arrFn';
+
 import {
   isNaN,
   isArr,
@@ -7,7 +9,6 @@ import {
   getValue,
   getCaption,
   crDfLink,
-  joinBy,
   ymdToUTC
 } from '../AdapterFn';
 
@@ -34,7 +35,7 @@ const _getResultsInfo = Results => isArr(Results)
   ? Results[0]
   : Results;
 
-const _crName = info => joinBy(": ",
+const _crName = info => joinByColon(
   info.Statistic,
   (info.UTCProductionTime || "").replace("T", " ")
 );

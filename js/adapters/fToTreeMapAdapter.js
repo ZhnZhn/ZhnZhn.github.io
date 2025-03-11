@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.fToTreeMapAdapter = exports.crRoundedSubTotal = exports.crItemColor = void 0;
+var _arrFn = require("../utils/arrFn");
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
 var _configBuilderFn = require("../charts/configBuilderFn");
@@ -111,7 +112,7 @@ const _crCaption = (data, option, total, totalRt, onePercent) => {
     [ffPerc, nffPerc] = crRoundedSubTotal(ffTotal / onePercent, nffTotal / onePercent, 100),
     _titleF = _crTotalToken("Fossil Fuels", ffTotal, ffPerc),
     _titleNf = _crTotalToken('Not Fossil Fuels', nffTotal, nffPerc);
-  return [(0, _AdapterFn.joinBy)(": ", option.title, option.dfTmTitle), _arrTotal[0] > _arrTotal[1] ? `${_titleF}, ${_titleNf}` : `${_titleNf}, ${_titleF}`];
+  return [(0, _arrFn.joinByColon)(option.title, option.dfTmTitle), _arrTotal[0] > _arrTotal[1] ? `${_titleF}, ${_titleNf}` : `${_titleNf}, ${_titleF}`];
 };
 const fToTreeMapAdapter = function (getDataTotalTuple, crCaption) {
   if (crCaption === void 0) {

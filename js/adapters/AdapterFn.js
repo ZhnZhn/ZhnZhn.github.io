@@ -18,7 +18,6 @@ exports.crRouter = _crRouter.crRouter;
 exports.crGetRoute = _crRouter.crGetRoute;
 var _arrFn = require("../utils/arrFn");
 exports.isInArrStr = _arrFn.isInArrStr;
-exports.joinBy = _arrFn.joinBy;
 var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
 var _getPropertyFn = require("../utils/getPropertyFn");
 var _dateFn = require("../utils/dateFn");
@@ -245,7 +244,7 @@ const crXmlDocument = str => {
 exports.crXmlDocument = crXmlDocument;
 const addToConfigInfo = (config, option) => {
   config.info = {
-    name: (0, _arrFn.joinBy)(", ", option.title, option.subtitle)
+    name: (0, _arrFn.joinByComma)(option.title, option.subtitle)
   };
 };
 exports.addToConfigInfo = addToConfigInfo;

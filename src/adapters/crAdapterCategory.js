@@ -1,11 +1,12 @@
-import { joinBy } from './AdapterFn';
+import { joinByColon } from '../utils/arrFn';
+
 import crCategoryConfig from './crCategoryConfig';
 import fToCategorySeries from './fToCategorySeries';
 
 const crItemCaptionDf = ({
   subtitle,
   title
-}) => joinBy(': ', subtitle, title);
+}) => joinByColon(subtitle, title);
 
 const crAdapterCategory = (
   crData,

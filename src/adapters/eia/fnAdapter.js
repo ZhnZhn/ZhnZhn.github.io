@@ -1,7 +1,8 @@
+import { joinByColon } from '../../utils/arrFn';
+
 import {
   isNumber,
   getCaption,
-  joinBy,
   ymdToUTC
 } from '../AdapterFn';
 
@@ -21,7 +22,7 @@ const _crInfo = (
   { response },
   option
 ) => ({
-  name: joinBy(': ', option.title, option.subtitle),
+  name: joinByColon(option.title, option.subtitle),
   description: response.description
    || (response.data[0] || {})["series-description"]
    || ''
@@ -31,8 +32,8 @@ export const crTitle = ({
   items=[],
   dfTitle
 }) => ({
-  title: joinBy(': ', getCaption(items[0]), dfTitle),
-  subtitle: joinBy(': ', getCaption(items[1]), getCaption(items[2]))
+  title: joinByColon(getCaption(items[0]), dfTitle),
+  subtitle: joinByColon(getCaption(items[1]), getCaption(items[2]))
 })
 
 const _toNumber = str => {

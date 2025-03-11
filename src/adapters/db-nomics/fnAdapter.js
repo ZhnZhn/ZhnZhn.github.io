@@ -2,15 +2,18 @@ export {
   isArr,
   assign,
   getValue,
-  crErrorByMessage,
-  joinBy
+  crErrorByMessage
 } from '../AdapterFn';
+
+import {
+  joinBy,
+  joinByColon
+} from '../../utils/arrFn';
 
 import {
   isNumber,
   isTokenInStr,
   crZhConfig,
-  joinBy,
   ymdToUTC,
 } from '../AdapterFn';
 import {
@@ -106,7 +109,7 @@ export const crTitle = (
   return {
     title: getTitle(json),
     subtitle: _subtitle.length > SUBT_MAX
-      ? joinBy(': ', title, subtitle)
+      ? joinByColon(title, subtitle)
       : _subtitle
   };
 }

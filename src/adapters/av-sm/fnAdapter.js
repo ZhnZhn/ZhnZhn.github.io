@@ -10,7 +10,6 @@ export {
   getCaption,
   getValueCaption,
   toUpperCaseFirst,
-  joinBy,
   valueMoving,
   ymdToUTC,
   ymdhmsToUTC,

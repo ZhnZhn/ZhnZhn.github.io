@@ -1,8 +1,9 @@
+import { joinByColon } from '../../utils/arrFn';
+
 import {
   isArr,
   assign,
   getValue,
-  joinBy,
   crError
 } from '../AdapterFn';
 import {
@@ -10,7 +11,7 @@ import {
   getFrequency,
   getResError,
   getResults,
-  getResultsData  
+  getResultsData
 } from './fnAdapter';
 
 const API_URL = `${BEA_DATA_URL}/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID`;
@@ -24,7 +25,7 @@ const _setCaptionTo = option => {
   assign(option, {
     itemCaption: title,
     title: dfTitle,
-    subtitle: joinBy(": ", title, subtitle)
+    subtitle: joinByColon(title, subtitle)
   })
 };
 

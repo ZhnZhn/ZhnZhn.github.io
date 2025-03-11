@@ -1,7 +1,6 @@
-import {
-  joinBy,
-  toUpperCaseFirst
-} from './fnAdapter';
+import { joinByBlank } from '../../utils/arrFn';
+
+import { toUpperCaseFirst } from './fnAdapter';
 
 const _crCaption = ({ name='', symbol='', rank='' }) =>
   `${name} (${symbol}) (${rank})`;
@@ -32,7 +31,7 @@ const _crTokens = ({
 
 const _crOpenSource = is => is ? 'OpenSource': 'not OpenSource';
 const _crIsActive = is => is ? 'Active': 'not Active';
-const _crTokensCaption = ({ type, open_source, is_active}) => joinBy(' ',
+const _crTokensCaption = ({ type, open_source, is_active}) => joinByBlank(
   toUpperCaseFirst(type),
   _crOpenSource(open_source),
   _crIsActive(is_active)

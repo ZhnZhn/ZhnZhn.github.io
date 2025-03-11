@@ -1,3 +1,4 @@
+import { joinByColon } from '../utils/arrFn';
 import pipe from '../utils/pipe';
 import formatNumber from '../utils/formatNumber';
 
@@ -11,8 +12,7 @@ import {
 import {
   isNumber,
   domSanitize,
-  roundBy,
-  joinBy
+  roundBy
 } from './AdapterFn';
 import {
   getCrPointName
@@ -228,7 +228,7 @@ const _crCaption = (
   , _titleF = _crTotalToken("Fossil Fuels", ffTotal, ffPerc)
   , _titleNf =  _crTotalToken('Not Fossil Fuels', nffTotal, nffPerc);
   return [
-    joinBy(": ", option.title, option.dfTmTitle),
+    joinByColon(option.title, option.dfTmTitle),
     _arrTotal[0] > _arrTotal[1]
        ? `${_titleF}, ${_titleNf}`
        : `${_titleNf}, ${_titleF}`

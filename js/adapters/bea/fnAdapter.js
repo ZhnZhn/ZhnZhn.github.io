@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.getResultsData = exports.getResults = exports.getResError = exports.getFrequency = exports.crData = exports.crConfOption = exports.BEA_DATA_URL = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _AdapterFn = require("../AdapterFn");
 const BEA_DATA_URL = exports.BEA_DATA_URL = "https://apps.bea.gov";
 const INDUSTRY_FACTSHEET_URL = `${BEA_DATA_URL}/industry/factsheet/factsheet.html`;
@@ -15,7 +16,7 @@ exports.getResultsData = getResultsData;
 exports.getResError = getResError;
 exports.getResults = getResults;
 const _getResultsInfo = Results => (0, _AdapterFn.isArr)(Results) ? Results[0] : Results;
-const _crName = info => (0, _AdapterFn.joinBy)(": ", info.Statistic, (info.UTCProductionTime || "").replace("T", " "));
+const _crName = info => (0, _arrFn.joinByColon)(info.Statistic, (info.UTCProductionTime || "").replace("T", " "));
 const _crDescr = info => (info.Notes || []).map(note => {
   const {
     NoteRef = '',

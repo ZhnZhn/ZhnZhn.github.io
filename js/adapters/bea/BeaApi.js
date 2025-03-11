@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
 const API_URL = `${_fnAdapter.BEA_DATA_URL}/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID`;
@@ -14,7 +15,7 @@ const _setCaptionTo = option => {
   (0, _AdapterFn.assign)(option, {
     itemCaption: title,
     title: dfTitle,
-    subtitle: (0, _AdapterFn.joinBy)(": ", title, subtitle)
+    subtitle: (0, _arrFn.joinByColon)(title, subtitle)
   });
 };
 const BeaApi = {

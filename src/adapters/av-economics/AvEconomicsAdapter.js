@@ -1,4 +1,4 @@
-import { joinBy } from '../AdapterFn';
+import { joinByComma } from '../../utils/arrFn';
 import { crAdapterType1 } from '../crAdapterType1';
 import { fCrData } from '../av/AvFn';
 
@@ -10,7 +10,7 @@ const _crData = fCrData('value', 'date')
 ) => {
   const { title } = option
   , { unit } = json;
-  option.title = joinBy(', ', title, unit)
+  option.title = joinByComma(title, unit)
 };
 
 const AvEconomicsAdapter = crAdapterType1({

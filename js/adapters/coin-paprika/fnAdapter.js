@@ -1,10 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toUpperCaseFirst = exports.joinBy = exports.getCoinId = exports.crData = exports.addConfOption = void 0;
+exports.toUpperCaseFirst = exports.getCoinId = exports.crData = exports.addConfOption = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.getValue = _AdapterFn.getValue;
-exports.joinBy = _AdapterFn.joinBy;
 exports.toUpperCaseFirst = _AdapterFn.toUpperCaseFirst;
 var _crFn = require("../crFn");
 const DF_ID = 'btc-bitcoin',

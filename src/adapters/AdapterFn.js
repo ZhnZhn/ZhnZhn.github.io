@@ -12,10 +12,9 @@ export {
   crGetRoute
 } from '../utils/crRouter';
 export {
-  isInArrStr,
-  joinBy
+  isInArrStr
 } from '../utils/arrFn';
-import { joinBy } from '../utils/arrFn';
+import { joinByComma } from '../utils/arrFn';
 import formatAllNumber from '../utils/formatAllNumber';
 import {
   getC,
@@ -334,7 +333,7 @@ export const addToConfigInfo = (
   option
 ) => {
   config.info = {
-     name: joinBy(", ", option.title, option.subtitle)
+     name: joinByComma(option.title, option.subtitle)
   }
 }
 

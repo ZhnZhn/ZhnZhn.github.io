@@ -10,12 +10,11 @@ import {
   isYNumber,
   isNumberOrNull,
   crShortItemCaption,
-  setItemCaptionCurrencyRateTo,  
+  setItemCaptionCurrencyRateTo,
   getObjectKeys,
   toFloatOrEmpty,
   findMinY,
   findMaxY,
-  joinBy,
   valueMoving,
   crError,
   fCrValue,
@@ -226,12 +225,6 @@ describe('findMaxY', ()=>{
     expect(fn([])).toBe(undefined)
     expect(fn([[0]])).toBe(undefined)
     expect(fn([{x:0}])).toBe(undefined)
-  })
-})
-
-describe('joinBy', () => {
-  test('joinBy should be function', () => {
-    expect(typeof joinBy).toBe('function')
   })
 })
 

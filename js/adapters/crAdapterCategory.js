@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _AdapterFn = require("./AdapterFn");
+var _arrFn = require("../utils/arrFn");
 var _crCategoryConfig = _interopRequireDefault(require("./crCategoryConfig"));
 var _fToCategorySeries = _interopRequireDefault(require("./fToCategorySeries"));
 const crItemCaptionDf = _ref => {
@@ -11,7 +11,7 @@ const crItemCaptionDf = _ref => {
     subtitle,
     title
   } = _ref;
-  return (0, _AdapterFn.joinBy)(': ', subtitle, title);
+  return (0, _arrFn.joinByColon)(subtitle, title);
 };
 const crAdapterCategory = function (crData,
 //UNCOMTRADE, AV ETF_PROFILE (json)

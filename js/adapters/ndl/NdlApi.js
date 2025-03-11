@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _dateFn = require("../../utils/dateFn");
+var _arrFn = require("../../utils/arrFn");
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 const NDL_DATA_SOURCE = "NDL",
@@ -13,7 +14,7 @@ const _crDataSource = _ref => {
     let {
       dataSource
     } = _ref;
-    return (0, _AdapterFn.joinBy)(" ", NDL_DATA_SOURCE, dataSource);
+    return (0, _arrFn.joinByBlank)(NDL_DATA_SOURCE, dataSource);
   },
   _crDate = time => {
     const arrDate = time.split("-");
@@ -59,7 +60,7 @@ const _crTableUrl = option => {
     _dateQuery = (0, _CategoryFn.isCategory)(option.seriaType) ? _crQueryToken("date", _crDate(option.time)) : option.dfFromDate ? _crQueryToken("date.gte", option.fromDate) : "";
   option.apiKey = null;
   option.dataSource = _crDataSource(option);
-  return `${proxy}${TABLE_URL}/${dfTable}?${(0, _AdapterFn.joinBy)("&", value, _apiKeyQuery, _dateQuery)}`;
+  return `${proxy}${TABLE_URL}/${dfTable}?${(0, _arrFn.joinBy)("&", value, _apiKeyQuery, _dateQuery)}`;
 };
 const _checkDataset = datatable => {
   const {

@@ -1,6 +1,5 @@
 export {
   getValue,
-  joinBy,
   toUpperCaseFirst
 } from '../AdapterFn';
 

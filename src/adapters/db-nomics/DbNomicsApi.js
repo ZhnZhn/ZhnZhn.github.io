@@ -1,10 +1,14 @@
 import {
+  joinBy,
+  joinByDot
+} from '../../utils/arrFn';
+
+import {
   isArr,
   assign,
   crErrorByMessage,
   getValue,
   getDocs,
-  joinBy
 } from './fnAdapter';
 
 const URL = 'https://api.db.nomics.world/v22/series'
@@ -65,7 +69,7 @@ const _idFnUrl = (option) => {
 const _crSeriaId = ({
   dfPrefix,
   dfSufix
-}, values) => joinBy('.',
+}, values) => joinByDot(
   dfPrefix,
   ...values,
   dfSufix

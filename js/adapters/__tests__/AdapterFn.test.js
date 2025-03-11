@@ -278,11 +278,6 @@ describe('findMaxY', () => {
     }])).toBe(undefined);
   });
 });
-describe('joinBy', () => {
-  test('joinBy should be function', () => {
-    expect(typeof _AdapterFn.joinBy).toBe('function');
-  });
-});
 describe('valueMoving', () => {
   const fn = _AdapterFn.valueMoving;
   it('should return echo data and direction empty for !arr input', () => {

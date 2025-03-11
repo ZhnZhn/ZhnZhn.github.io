@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _AdapterFn = require("../AdapterFn");
+var _arrFn = require("../../utils/arrFn");
 var _crAdapterType = require("../crAdapterType1");
 var _AvFn = require("../av/AvFn");
 const _crData = (0, _AvFn.fCrData)('value', 'date'),
@@ -19,7 +19,7 @@ const _crData = (0, _AvFn.fCrData)('value', 'date'),
       {
         unit
       } = json;
-    option.title = (0, _AdapterFn.joinBy)(', ', title, unit);
+    option.title = (0, _arrFn.joinByComma)(title, unit);
   };
 const AvEconomicsAdapter = (0, _crAdapterType.crAdapterType1)({
   crData,

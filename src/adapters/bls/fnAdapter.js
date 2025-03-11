@@ -1,7 +1,8 @@
+import { joinByColon } from '../../utils/arrFn';
+
 import {
   isTypeNumber,
-  ymdToUTC,
-  joinBy
+  ymdToUTC
 } from '../AdapterFn';
 
 const _crZhConfig = ({
@@ -16,7 +17,7 @@ const _crZhConfig = ({
   item: { ...linkItem },
   linkFn: 'DF',
   itemCaption,
-  dataSource: joinBy(": ", dataSource, dfTitle)
+  dataSource: joinByColon(dataSource, dfTitle)
 });
 
 const _crInfo = ({

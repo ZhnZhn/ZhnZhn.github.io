@@ -1,3 +1,5 @@
+import { joinByComma } from '../../utils/arrFn';
+
 import {
   fCrConfOptionExchangeRate,
   crAdapterType1
@@ -6,8 +8,7 @@ import {
   isNumber,
   getObjectKeys,
   ymdToUTC,
-  fAddToConfigInfoAndDfLink,
-  joinBy
+  fAddToConfigInfoAndDfLink
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import {
@@ -41,7 +42,7 @@ const trOption = option => {
     dfSubt
   } = option;
   if (dfSubt) {
-    option.subtitle = joinBy(', ', option.subtitle, dfSubt)
+    option.subtitle = joinByComma(option.subtitle, dfSubt)
   }
 };
 

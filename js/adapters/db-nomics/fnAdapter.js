@@ -7,7 +7,7 @@ exports.isArr = _AdapterFn.isArr;
 exports.assign = _AdapterFn.assign;
 exports.getValue = _AdapterFn.getValue;
 exports.crErrorByMessage = _AdapterFn.crErrorByMessage;
-exports.joinBy = _AdapterFn.joinBy;
+var _arrFn = require("../../utils/arrFn");
 var _crFn = require("../crFn");
 var _fnSelector = require("./fnSelector");
 const CHART_URL = 'https://db.nomics.world',
@@ -20,7 +20,7 @@ const _crId = _ref => {
     dfCode,
     seriaId
   } = _ref;
-  return (0, _AdapterFn.joinBy)('/', dfProvider, dfCode, seriaId);
+  return (0, _arrFn.joinBy)('/', dfProvider, dfCode, seriaId);
 };
 const _crItemLink = (0, _crFn.fCrItemLinkByCaption)('DBnomics Chart');
 const _crUpdatedDate = json => {
@@ -74,7 +74,7 @@ const crTitle = (_ref2, json) => {
   const _subtitle = (0, _fnSelector.getSubtitle)(json);
   return {
     title: (0, _fnSelector.getTitle)(json),
-    subtitle: _subtitle.length > SUBT_MAX ? (0, _AdapterFn.joinBy)(': ', title, subtitle) : _subtitle
+    subtitle: _subtitle.length > SUBT_MAX ? (0, _arrFn.joinByColon)(title, subtitle) : _subtitle
   };
 };
 exports.crTitle = crTitle;

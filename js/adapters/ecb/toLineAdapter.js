@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _crAdapterType = require("../crAdapterType1");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
@@ -24,7 +25,7 @@ const trOption = option => {
     dfSubt
   } = option;
   if (dfSubt) {
-    option.subtitle = (0, _AdapterFn.joinBy)(', ', option.subtitle, dfSubt);
+    option.subtitle = (0, _arrFn.joinByComma)(option.subtitle, dfSubt);
   }
 };
 const _crDfLink = option => `${ITEM_URL}/${option.dfR}/${option.dfR}.${(0, _fnAdapter.crItemId)(option)}`;
