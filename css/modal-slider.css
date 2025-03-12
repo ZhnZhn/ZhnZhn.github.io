@@ -5,12 +5,12 @@
   align-items: flex-start;
   overflow-x: hidden;
   width: fit-content;
-  transition: .7s ease-out;
+  transition: .3s ease-out;
   will-change: transform;
 }
 
 @media only screen and (max-width: 375px) {
   .slider-pages {
-    transition: all .3s ease-out;
+    transition: all .1s ease-out;
   }  
 }
