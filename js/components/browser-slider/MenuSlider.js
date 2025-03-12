@@ -20,7 +20,7 @@ const S_ROOT = {
     display: 'flex',
     flexFlow: 'row nowrap',
     alignItems: 'flex-start',
-    transition: 'all 750ms ease-out'
+    transition: 'all .3s ease-out'
   },
   S_PAGE = {
     width: PAGE_WIDTH
@@ -35,7 +35,7 @@ const _crPagesStyle = (refMenu, refDirection) => {
     dX = _direction !== 0 && _menuNode ? ((0, _uiApi.setRefValue)(refDirection, 0), _getTranslateX(_menuNode) - 1 * _direction * PAGE_WIDTH) : _direction === 0 && _menuNode ? _getTranslateX(_menuNode) : 0;
   return {
     ...S_PAGES,
-    transform: "translateX(" + dX + "px)"
+    transform: `translateX(${dX}px)`
   };
 };
 const MenuSlider = _ref => {

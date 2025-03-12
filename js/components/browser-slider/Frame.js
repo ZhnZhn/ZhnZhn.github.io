@@ -9,7 +9,7 @@ var _Page = _interopRequireDefault(require("./Page"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const _isArr = Array.isArray,
-  FOCUS_FIRST_MLS = 1000;
+  FOCUS_FIRST_MLS = 350;
 const _crId = (dfProps, rootId, id) => dfProps.lT === 'SDN' ? id || rootId : rootId ? `${rootId}/${id}` : id;
 const _fOnClick = (proxy, rootId, dfProps, pageNumber, onClickNext, fOnClickItem, item) => {
   const {

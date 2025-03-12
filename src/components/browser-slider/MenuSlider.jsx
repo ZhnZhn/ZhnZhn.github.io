@@ -23,7 +23,7 @@ const S_ROOT = {
   display: 'flex',
   flexFlow: 'row nowrap',
   alignItems: 'flex-start',
-  transition: 'all 750ms ease-out'
+  transition: 'all .3s ease-out'
 }
 , S_PAGE = { width: PAGE_WIDTH };
 

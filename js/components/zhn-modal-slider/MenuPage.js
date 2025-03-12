@@ -12,6 +12,7 @@ var _MenuTitle = _interopRequireDefault(require("./MenuTitle"));
 var _MenuItemList = _interopRequireDefault(require("./MenuItemList"));
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_ITEMS = [];
+const FOCUS_ITEM_MLS = 350;
 const MenuPage = _ref => {
   let {
     isVisible,
@@ -32,7 +33,7 @@ const MenuPage = _ref => {
     _hClickTitle = (0, _uiApi.useCallback)(() => {
       onPrevPage(pageNumber);
     }, [onPrevPage, pageNumber]);
-  (0, _useFocus.useAsyncFocusIf)(isVisible, _getFocusFirstItem);
+  (0, _useFocus.useAsyncFocusIf)(isVisible, _getFocusFirstItem, FOCUS_ITEM_MLS);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     style: style,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_FocusTrap.default, {

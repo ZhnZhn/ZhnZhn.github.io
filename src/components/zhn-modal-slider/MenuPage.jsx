@@ -12,6 +12,7 @@ import MenuTitle from './MenuTitle';
 import MenuItemList from './MenuItemList';
 
 const DF_ITEMS = [];
+const FOCUS_ITEM_MLS = 350;
 
 const MenuPage = ({
   isVisible,
@@ -42,7 +43,8 @@ const MenuPage = ({
 
   useAsyncFocusIf(
     isVisible,
-    _getFocusFirstItem
+    _getFocusFirstItem,
+    FOCUS_ITEM_MLS
   );
 
   return (

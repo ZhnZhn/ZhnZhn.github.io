@@ -14,7 +14,7 @@ import Page from './Page';
 import { S_FRAME } from './Style';
 
 const _isArr = Array.isArray
-, FOCUS_FIRST_MLS = 1000;
+, FOCUS_FIRST_MLS = 350;
 
 const _crId = (
   dfProps,
