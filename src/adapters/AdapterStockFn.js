@@ -1,7 +1,11 @@
 import {
-  FN_NOOP,
+  isNumber,
   isUndef,
-  isNotEmptyArr,
+  isNotEmptyArr
+} from '../utils/isTypeFn';
+
+import {
+  FN_NOOP,
   ymdhmsToUTC
 } from './AdapterFn';
 import {
@@ -33,8 +37,7 @@ const _fAddAthPointTo = () => {
 };
 
 export const toStockSeriesData = ({
-  isAth=true,
-  isVolume=true,
+  isAth,
   toDate=ymdhmsToUTC,
   arr,
   seriaOption,
@@ -54,6 +57,8 @@ export const toStockSeriesData = ({
   , dC = [], dO = [], dH = [], dL = []
   , dV = [], dVc = []
   , dATH = [], dMfi = []
+  , _arr = _getNotEmptyArr(arr) || []
+  , _isVolume = isNumber(arr[0].volume)
   , _addATHPointTo = isAth
      ? _fAddAthPointTo()
      : FN_NOOP;
@@ -61,13 +66,12 @@ export const toStockSeriesData = ({
   let minClose = Number.POSITIVE_INFINITY
   , maxClose = Number.NEGATIVE_INFINITY;
 
-  (arr || []).forEach(item => {
+  _arr.forEach(item => {
     const {
       open,
       high,
       low,
-      close,
-      volume
+      close
     } = item
     , _date = toDate(item[pnDate] || '');
 
@@ -80,7 +84,8 @@ export const toStockSeriesData = ({
       dH.push([_date, high])
       dL.push([_date, low])
 
-      if (isVolume) {
+      if (_isVolume) {
+        const volume = item.volume;
         dV.push([_date, volume])
         dVc.push(
           crVolumePoint({

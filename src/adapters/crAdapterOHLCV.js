@@ -30,7 +30,6 @@ const _crCaptionDf = ({
 
 const crAdapterOHLCV = ({
   isAth,
-  isVolume,
   seriaOption={},
   crCaption=_crCaptionDf,
   crId=crDfItemKey,
@@ -46,7 +45,6 @@ const crAdapterOHLCV = ({
     , id = crId(option)
     , dataOption = toStockSeriesData({
         isAth,
-        isVolume,
         arr: getArr(json, option),
         toDate,
         seriaOption, option

@@ -28,7 +28,8 @@ const _fCrAddConfig = (
   getData=FN_IDENTITY
 }) => (json, option) => {
   try {
-    const _data = getData(json, option).reduce((data, item) => {
+    const _isVolume = v !== -1
+    , _data = getData(json, option).reduce((data, item) => {
       const date = crDate(item[d]);
       if (isTypeNumber(date)) {
         data.push({
@@ -37,7 +38,7 @@ const _fCrAddConfig = (
            high: crValue(item[h]),
            low: crValue(item[l]),
            close: crValue(item[c]),
-           volume: crVolume(item[v])
+           volume: _isVolume ? crVolume(item[v]) : void 0
          })
       }
       return data;
@@ -61,8 +62,7 @@ export const crOptionsFromStr = (
 }
 
 export const fToKline = (options) => crAdapterOHLCV({
-  isAth: options.isAth || false,
-  isVolume: !options.isNotVolume,
+  isAth: options.isAth,
   getArr: _fCrDataOHLCV(options),
   toDate: FN_IDENTITY,
   crCaption: options.crCaption,

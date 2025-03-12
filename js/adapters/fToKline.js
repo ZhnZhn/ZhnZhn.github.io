@@ -36,20 +36,21 @@ const _fCrAddConfig = function (crAddConfig) {
     } = _ref2;
     return (json, option) => {
       try {
-        const _data = getData(json, option).reduce((data, item) => {
-          const date = crDate(item[d]);
-          if ((0, _AdapterFn.isTypeNumber)(date)) {
-            data.push({
-              date,
-              open: crValue(item[o]),
-              high: crValue(item[h]),
-              low: crValue(item[l]),
-              close: crValue(item[c]),
-              volume: crVolume(item[v])
-            });
-          }
-          return data;
-        }, []).sort(_compareByDate);
+        const _isVolume = v !== -1,
+          _data = getData(json, option).reduce((data, item) => {
+            const date = crDate(item[d]);
+            if ((0, _AdapterFn.isTypeNumber)(date)) {
+              data.push({
+                date,
+                open: crValue(item[o]),
+                high: crValue(item[h]),
+                low: crValue(item[l]),
+                close: crValue(item[c]),
+                volume: _isVolume ? crVolume(item[v]) : void 0
+              });
+            }
+            return data;
+          }, []).sort(_compareByDate);
         return _data;
       } catch (err) {
         throw (0, _AdapterFn.crError)();
@@ -70,8 +71,7 @@ const crOptionsFromStr = function (isSeconds) {
 };
 exports.crOptionsFromStr = crOptionsFromStr;
 const fToKline = options => (0, _crAdapterOHLCV.default)({
-  isAth: options.isAth || false,
-  isVolume: !options.isNotVolume,
+  isAth: options.isAth,
   getArr: _fCrDataOHLCV(options),
   toDate: _AdapterFn.FN_IDENTITY,
   crCaption: options.crCaption,

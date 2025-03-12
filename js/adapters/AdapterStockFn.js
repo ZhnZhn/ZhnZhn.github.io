@@ -2,13 +2,14 @@
 
 exports.__esModule = true;
 exports.toStockSeriesData = void 0;
+var _isTypeFn = require("../utils/isTypeFn");
 var _AdapterFn = require("./AdapterFn");
 var _pointFn = require("./pointFn");
-const _getNotEmptyArr = arr => (0, _AdapterFn.isNotEmptyArr)(arr) ? arr : void 0;
+const _getNotEmptyArr = arr => (0, _isTypeFn.isNotEmptyArr)(arr) ? arr : void 0;
 const _fAddAthPointTo = () => {
   let _prevClose;
   return (dATH, _date, open, close) => {
-    dATH.push((0, _AdapterFn.isUndef)(_prevClose) ? (0, _pointFn.crAthPoint)({
+    dATH.push((0, _isTypeFn.isUndef)(_prevClose) ? (0, _pointFn.crAthPoint)({
       date: _date,
       close: close,
       open: close
@@ -22,8 +23,7 @@ const _fAddAthPointTo = () => {
 };
 const toStockSeriesData = _ref => {
   let {
-    isAth = true,
-    isVolume = true,
+    isAth,
     toDate = _AdapterFn.ymdhmsToUTC,
     arr,
     seriaOption,
@@ -48,16 +48,17 @@ const toStockSeriesData = _ref => {
     dVc = [],
     dATH = [],
     dMfi = [],
+    _arr = _getNotEmptyArr(arr) || [],
+    _isVolume = (0, _isTypeFn.isNumber)(arr[0].volume),
     _addATHPointTo = isAth ? _fAddAthPointTo() : _AdapterFn.FN_NOOP;
   let minClose = Number.POSITIVE_INFINITY,
     maxClose = Number.NEGATIVE_INFINITY;
-  (arr || []).forEach(item => {
+  _arr.forEach(item => {
     const {
         open,
         high,
         low,
-        close,
-        volume
+        close
       } = item,
       _date = toDate(item[pnDate] || '');
     dC.push([_date, close]);
@@ -71,7 +72,8 @@ const toStockSeriesData = _ref => {
       dO.push([_date, open]);
       dH.push([_date, high]);
       dL.push([_date, low]);
-      if (isVolume) {
+      if (_isVolume) {
+        const volume = item.volume;
         dV.push([_date, volume]);
         dVc.push((0, _pointFn.crVolumePoint)({
           open,

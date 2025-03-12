@@ -17,10 +17,10 @@ From OKX Documentation
 
 const toKline = fToKline({
   ...crOptionsFromStr(false),
-  isNotVolume: true,
   h:2,
   l:3,
-  c:4
+  c:4,
+  v:-1
 });
 
 export default toKline

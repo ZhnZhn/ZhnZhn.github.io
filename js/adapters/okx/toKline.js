@@ -17,10 +17,10 @@ From OKX Documentation
 
 const toKline = (0, _fToKline.fToKline)({
   ...(0, _fToKline.crOptionsFromStr)(false),
-  isNotVolume: true,
   h: 2,
   l: 3,
-  c: 4
+  c: 4,
+  v: -1
 });
 var _default = exports.default = toKline;
 //# sourceMappingURL=toKline.js.map
