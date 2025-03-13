@@ -30,30 +30,38 @@ const _crCaptionDf = ({
 
 const crAdapterOHLCV = ({
   isAth,
-  seriaOption={},
   crCaption=_crCaptionDf,
-  crId=crDfItemKey,
   getArr=FN_IDENTITY,
-  crAddConfig=FN_NOOP,
-  toDate
+  crAddConfig=FN_NOOP
 }) => ({
   toConfig(json, option){
     const {
+      isNotZoomToMinMax,
+      isDrawDeltaExtrems,
+      seriaType,
+      //seriaColor,
+      seriaWidth
+    } = option
+    , {
       title,
       subtitle
     } = crCaption(option, json)
-    , id = crId(option)
+    , id = crDfItemKey(option)
     , dataOption = toStockSeriesData({
         isAth,
         arr: getArr(json, option),
-        toDate,
-        seriaOption, option
       })
     , { dC, dMfi } = dataOption;
 
     return {
       config: pipe(
-        crStockConfig(id, dataOption),
+        crStockConfig(id, {...dataOption,
+          isNotZoomToMinMax,
+          isDrawDeltaExtrems,
+          seriaType,
+          //seriaColor,
+          seriaWidth
+        }),
         fAddCaption(title, subtitle),
         fAdd({
           valueMoving: valueMoving(dC),
@@ -69,14 +77,12 @@ const crAdapterOHLCV = ({
   },
 
   toSeries(json, option){
-    const id = crId(option)
-    , { data } = toStockSeriesData({
-       arr: getArr(json, option),
-       toDate,
-       seriaOption: { ...seriaOption, isAllSeries: false },
-       option
+    const id = crDfItemKey(option)
+    , { dC } = toStockSeriesData({
+       isAllSeries: false,
+       arr: getArr(json, option)
     });
-    return crStockSeriaConfig(id, data);
+    return crStockSeriaConfig(id, dC);
   }
 })
 

@@ -22,33 +22,41 @@ const _crCaptionDf = _ref => {
 const crAdapterOHLCV = _ref2 => {
   let {
     isAth,
-    seriaOption = {},
     crCaption = _crCaptionDf,
-    crId = _AdapterFn.crDfItemKey,
     getArr = _AdapterFn.FN_IDENTITY,
-    crAddConfig = _AdapterFn.FN_NOOP,
-    toDate
+    crAddConfig = _AdapterFn.FN_NOOP
   } = _ref2;
   return {
     toConfig(json, option) {
       const {
+          isNotZoomToMinMax,
+          isDrawDeltaExtrems,
+          seriaType,
+          //seriaColor,
+          seriaWidth
+        } = option,
+        {
           title,
           subtitle
         } = crCaption(option, json),
-        id = crId(option),
+        id = (0, _AdapterFn.crDfItemKey)(option),
         dataOption = (0, _AdapterStockFn.toStockSeriesData)({
           isAth,
-          arr: getArr(json, option),
-          toDate,
-          seriaOption,
-          option
+          arr: getArr(json, option)
         }),
         {
           dC,
           dMfi
         } = dataOption;
       return {
-        config: (0, _pipe.default)((0, _stockBuilderFn.crStockConfig)(id, dataOption), (0, _configBuilderFn.fAddCaption)(title, subtitle), (0, _configBuilderFn.fAdd)({
+        config: (0, _pipe.default)((0, _stockBuilderFn.crStockConfig)(id, {
+          ...dataOption,
+          isNotZoomToMinMax,
+          isDrawDeltaExtrems,
+          seriaType,
+          //seriaColor,
+          seriaWidth
+        }), (0, _configBuilderFn.fAddCaption)(title, subtitle), (0, _configBuilderFn.fAdd)({
           valueMoving: (0, _AdapterFn.valueMoving)(dC),
           ...crAddConfig({
             json,
@@ -64,19 +72,14 @@ const crAdapterOHLCV = _ref2 => {
       };
     },
     toSeries(json, option) {
-      const id = crId(option),
+      const id = (0, _AdapterFn.crDfItemKey)(option),
         {
-          data
+          dC
         } = (0, _AdapterStockFn.toStockSeriesData)({
-          arr: getArr(json, option),
-          toDate,
-          seriaOption: {
-            ...seriaOption,
-            isAllSeries: false
-          },
-          option
+          isAllSeries: false,
+          arr: getArr(json, option)
         });
-      return (0, _stockBuilderFn.crStockSeriaConfig)(id, data);
+      return (0, _stockBuilderFn.crStockSeriaConfig)(id, dC);
     }
   };
 };

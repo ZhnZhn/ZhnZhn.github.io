@@ -14,7 +14,7 @@ const _fCrAddConfig = (
   ...crAddConfig(option, json),
   zhConfig: crZhConfig(option)
 })
-, _compareByDate = (a, b) => a.date - b.date
+, _compareByDate = (a, b) => a[0] - b[0]
 , _fCrDataOHLCV = ({
   d=0,
   o=1,
@@ -32,14 +32,14 @@ const _fCrAddConfig = (
     , _data = getData(json, option).reduce((data, item) => {
       const date = crDate(item[d]);
       if (isTypeNumber(date)) {
-        data.push({
+        data.push([
            date,
-           open: crValue(item[o]),
-           high: crValue(item[h]),
-           low: crValue(item[l]),
-           close: crValue(item[c]),
-           volume: _isVolume ? crVolume(item[v]) : void 0
-         })
+           crValue(item[o]),
+           crValue(item[h]),
+           crValue(item[l]),
+           crValue(item[c]),
+           _isVolume ? crVolume(item[v]) : void 0
+         ])
       }
       return data;
     }, []).sort(_compareByDate);
@@ -63,8 +63,7 @@ export const crOptionsFromStr = (
 
 export const fToKline = (options) => crAdapterOHLCV({
   isAth: options.isAth,
-  getArr: _fCrDataOHLCV(options),
-  toDate: FN_IDENTITY,
   crCaption: options.crCaption,
+  getArr: _fCrDataOHLCV(options),
   crAddConfig: _fCrAddConfig(options.crAddConfig)
 })

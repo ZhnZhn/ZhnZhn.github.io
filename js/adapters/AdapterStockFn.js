@@ -24,23 +24,10 @@ const _fAddAthPointTo = () => {
 const toStockSeriesData = _ref => {
   let {
     isAth,
-    toDate = _AdapterFn.ymdhmsToUTC,
-    arr,
-    seriaOption,
-    option
+    isAllSeries = true,
+    arr
   } = _ref;
-  const {
-      isAllSeries = true,
-      pnDate = 'date'
-    } = seriaOption || {},
-    {
-      isNotZoomToMinMax,
-      isDrawDeltaExtrems,
-      seriaType,
-      seriaColor,
-      seriaWidth
-    } = option || {},
-    dC = [],
+  const dC = [],
     dO = [],
     dH = [],
     dL = [],
@@ -49,19 +36,13 @@ const toStockSeriesData = _ref => {
     dATH = [],
     dMfi = [],
     _arr = _getNotEmptyArr(arr) || [],
-    _isVolume = (0, _isTypeFn.isNumber)(arr[0].volume),
+    _isVolume = (0, _isTypeFn.isNumber)(arr[0][5]),
     _addATHPointTo = isAth ? _fAddAthPointTo() : _AdapterFn.FN_NOOP;
   let minClose = Number.POSITIVE_INFINITY,
     maxClose = Number.NEGATIVE_INFINITY;
   _arr.forEach(item => {
-    const {
-        open,
-        high,
-        low,
-        close
-      } = item,
-      _date = toDate(item[pnDate] || '');
-    dC.push([_date, close]);
+    const [date, open, high, low, close, volume] = item;
+    dC.push([date, close]);
     if (minClose > close) {
       minClose = close;
     }
@@ -69,25 +50,24 @@ const toStockSeriesData = _ref => {
       maxClose = close;
     }
     if (isAllSeries) {
-      dO.push([_date, open]);
-      dH.push([_date, high]);
-      dL.push([_date, low]);
+      dO.push([date, open]);
+      dH.push([date, high]);
+      dL.push([date, low]);
       if (_isVolume) {
-        const volume = item.volume;
-        dV.push([_date, volume]);
+        dV.push([date, volume]);
         dVc.push((0, _pointFn.crVolumePoint)({
           open,
           close,
           volume,
-          date: _date,
+          date,
           option: {
             _high: high,
             _low: low
           }
         }));
-        dMfi.push([_date, close, high, low, close, volume]);
+        dMfi.push([date, close, high, low, close, volume]);
       }
-      _addATHPointTo(dATH, _date, open, close);
+      _addATHPointTo(dATH, date, open, close);
     }
   });
   return {
@@ -100,12 +80,7 @@ const toStockSeriesData = _ref => {
     dVc: _getNotEmptyArr(dVc),
     dV: _getNotEmptyArr(dV),
     dATH: _getNotEmptyArr(dATH),
-    dMfi: _getNotEmptyArr(dMfi),
-    isNotZoomToMinMax,
-    isDrawDeltaExtrems,
-    seriaType,
-    seriaColor,
-    seriaWidth
+    dMfi: _getNotEmptyArr(dMfi)
   };
 };
 exports.toStockSeriesData = toStockSeriesData;
