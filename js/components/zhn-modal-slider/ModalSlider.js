@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useInitStateFromProps = _interopRequireDefault(require("../hooks/useInitStateFromProps"));
 var _useThrottleCallback = _interopRequireDefault(require("../hooks/useThrottleCallback"));
 var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
@@ -47,12 +48,6 @@ const _initState = model => {
       titleCl: model.titleCl,
       itemCl: model.itemCl
     }, _initId)]
-  };
-};
-const _crTransformStyle = (pageWidth, pageCurrent) => {
-  const _dX = -1 * pageWidth * (pageCurrent - 1) + 0;
-  return {
-    transform: `translateX(${_dX}px)`
   };
 };
 const ModalSlider = _ref => {
@@ -109,7 +104,7 @@ const ModalSlider = _ref => {
       ...S_SHOW_HIDE,
       ...pageStyle
     },
-    _divStyle = _crTransformStyle(pageWidth, pageCurrent);
+    _divStyle = (0, _styleFn.crSliderTransformStyle)(pageWidth, pageCurrent);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane.default, {
     isShow: isShow,
     style: rootStyle,

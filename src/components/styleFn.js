@@ -150,3 +150,11 @@ export const crBtSvgCn = token => `bt-svg-${token}`
 
 export const crFlexRowCn = _fCrCn("flex-row")
 export const CL_HRZ_CONTAINER = crFlexRowCn("hrz-container")
+
+const _crTransformTranslateX = (x) => ({
+  transform: `matrix(1, 0, 0, 1, ${x}, 0)`
+});
+export const crSliderTransformStyle = (
+  pageWidth,
+  pageCurrent
+) => _crTransformTranslateX(-1*pageWidth*(pageCurrent - 1) + 0)

@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useThrottleCallback = _interopRequireDefault(require("../hooks/useThrottleCallback"));
 var _factoryClickItem = _interopRequireDefault(require("./factoryClickItem"));
 var _loadItems = _interopRequireDefault(require("./loadItems"));
@@ -25,27 +26,12 @@ const S_ROOT = {
   S_PAGE = {
     width: PAGE_WIDTH
   };
-const _getTranslateX = element => {
-  const _prevStr = element.style.transform.trim().slice(11).replace('px', '').replace(')', '');
-  return parseInt(_prevStr, 10);
-};
-const _crPagesStyle = (refMenu, refDirection) => {
-  const _menuNode = (0, _uiApi.getRefValue)(refMenu),
-    _direction = (0, _uiApi.getRefValue)(refDirection),
-    dX = _direction !== 0 && _menuNode ? ((0, _uiApi.setRefValue)(refDirection, 0), _getTranslateX(_menuNode) - 1 * _direction * PAGE_WIDTH) : _direction === 0 && _menuNode ? _getTranslateX(_menuNode) : 0;
-  return {
-    ...S_PAGES,
-    transform: `translateX(${dX}px)`
-  };
-};
 const MenuSlider = _ref => {
   let {
     dfProps,
     getProxy
   } = _ref;
-  const _refMenu = (0, _uiApi.useRef)(),
-    _refDirection = (0, _uiApi.useRef)(0),
-    [{
+  const [{
       pageCurrent,
       pages
     }, setState] = (0, _uiApi.useState)({
@@ -60,7 +46,7 @@ const MenuSlider = _ref => {
         const {
           pageCurrent
         } = prevState;
-        return pageCurrent === 0 || pageCurrent !== pageNumber ? prevState : (0, _uiApi.setRefValue)(_refDirection, -1), {
+        return pageCurrent === 0 || pageCurrent !== pageNumber ? prevState : {
           ...prevState,
           pageCurrent: pageNumber - 1
         };
@@ -86,18 +72,19 @@ const MenuSlider = _ref => {
             title
           });
         }
-        (0, _uiApi.setRefValue)(_refDirection, 1);
         return {
           pages,
           pageCurrent: pageNumber + 1
         };
       });
     }, [_hPrevPage]),
-    _pagesStyle = _crPagesStyle(_refMenu, _refDirection);
+    _pagesStyle = {
+      ...S_PAGES,
+      ...(0, _styleFn.crSliderTransformStyle)(PAGE_WIDTH, pageCurrent + 1)
+    };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     style: S_ROOT,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      ref: _refMenu,
       style: _pagesStyle,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PageList.default, {
         pages: pages,

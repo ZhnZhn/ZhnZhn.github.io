@@ -1,9 +1,5 @@
-import {
-  useRef,
-  useState,
-  getRefValue,
-  setRefValue
-} from '../uiApi';
+import { useState } from '../uiApi';
+import { crSliderTransformStyle } from '../styleFn';
 
 import useThrottleCallback from '../hooks/useThrottleCallback';
 
@@ -27,46 +23,13 @@ const S_ROOT = {
 }
 , S_PAGE = { width: PAGE_WIDTH };
 
-const _getTranslateX = (element) => {
-  const _prevStr = element
-    .style.transform
-    .trim()
-    .slice(11)
-    .replace('px', '')
-    .replace(')', '');
-  return parseInt(_prevStr, 10);
-}
-
-const _crPagesStyle = (
-  refMenu,
-  refDirection
-) => {
-  const _menuNode = getRefValue(refMenu)
-  , _direction = getRefValue(refDirection)
-  , dX = _direction !== 0 && _menuNode
-     ? (
-         setRefValue(refDirection, 0),
-         _getTranslateX(_menuNode) - 1 * _direction * PAGE_WIDTH
-       )
-     : _direction === 0 && _menuNode
-          ? _getTranslateX(_menuNode)
-          : 0;
-
-  return {
-    ...S_PAGES,
-    transform: `translateX(${dX}px)`
-  };
-};
-
 const MenuSlider = ({
   dfProps,
   getProxy
 }) => {
-  const _refMenu = useRef()
-  , _refDirection = useRef(0)
-  , [{
-       pageCurrent,
-       pages
+  const [{
+      pageCurrent,
+      pages
     },
     setState
   ] = useState({
@@ -81,7 +44,7 @@ const MenuSlider = ({
          const { pageCurrent } = prevState;
          return pageCurrent === 0 || pageCurrent !== pageNumber
            ? prevState
-           : setRefValue(_refDirection, -1), {
+           : {
               ...prevState,
               pageCurrent: pageNumber - 1
            };
@@ -103,21 +66,20 @@ const MenuSlider = ({
           pages.splice(_nextPageNumber)
           pages.push({ id, title })
         }
-        setRefValue(_refDirection, 1)
         return {
           pages,
           pageCurrent: pageNumber + 1
         };
      })
   }, [_hPrevPage])
-  , _pagesStyle = _crPagesStyle(_refMenu, _refDirection);
+  , _pagesStyle = {
+    ...S_PAGES,
+    ...crSliderTransformStyle(PAGE_WIDTH, pageCurrent + 1)
+  };
 
   return (
     <div style={S_ROOT}>
-      <div
-        ref={_refMenu}
-        style={_pagesStyle}
-      >
+      <div style={_pagesStyle}>
         <PageList
           pages={pages}
           pageCurrent={pageCurrent}

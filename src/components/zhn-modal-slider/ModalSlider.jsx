@@ -1,4 +1,5 @@
 import { bindTo } from '../uiApi';
+import { crSliderTransformStyle } from '../styleFn';
 
 import useInitStateFromProps from '../hooks/useInitStateFromProps';
 import useThrottleCallback from '../hooks/useThrottleCallback';
@@ -60,16 +61,6 @@ const _initState = model => {
         itemCl={model.itemCl}
       />
     ]
-  };
-};
-
-const _crTransformStyle = (
-  pageWidth,
-  pageCurrent
-) => {
-  const _dX = -1*pageWidth*(pageCurrent - 1)+0;
-  return {
-    transform: `translateX(${_dX}px)`
   };
 };
 
@@ -135,7 +126,7 @@ const ModalSlider = ({
     ...S_SHOW_HIDE,
     ...pageStyle
   }
-  , _divStyle = _crTransformStyle(
+  , _divStyle = crSliderTransformStyle(
      pageWidth,
      pageCurrent
   );
