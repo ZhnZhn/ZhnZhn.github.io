@@ -12,7 +12,10 @@ export const isStr = _fIsTypeof("string")
 export const isUndef = _fIsTypeof("undefined")
 export const isFn = _fIsTypeof("function")
 
-export const isObj = v => typeof v === 'object'
+export const isStrOrNumber = v => v !== ""
+  && (isStr(v) || isNumber(v))
+
+export const isObj = v => typeof v === "object"
   && v !== null
 
 export const isArr = Array.isArray

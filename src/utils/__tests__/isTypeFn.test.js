@@ -6,6 +6,7 @@ import {
   isInt,
   isBool,
   isStr,
+  isStrOrNumber,
   isUndef,
   isFn,
   isObj,
@@ -110,6 +111,21 @@ describe('isStr',()=>{
     expect(fn(null)).toBe(false)
     expect(fn(true)).toBe(false)
     expect(fn(2)).toBe(false)
+  })
+})
+
+describe('isStrOrNumber', () => {
+  const fn = isStrOrNumber;
+  test('should return true for not empty string of number othewise false', ()=>{
+    expect(fn('str')).toBe(true)
+    expect(fn(0)).toBe(true)
+
+    expect(fn('')).toBe(false)
+    expect(fn(NaN)).toBe(false)
+    expect(fn(new String())).toBe(false)
+    expect(fn()).toBe(false)
+    expect(fn(null)).toBe(false)
+    expect(fn(true)).toBe(false)
   })
 })
 

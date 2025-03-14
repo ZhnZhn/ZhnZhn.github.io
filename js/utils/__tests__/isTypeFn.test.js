@@ -86,6 +86,19 @@ describe('isStr', () => {
     expect(fn(2)).toBe(false);
   });
 });
+describe('isStrOrNumber', () => {
+  const fn = _isTypeFn.isStrOrNumber;
+  test('should return true for not empty string of number othewise false', () => {
+    expect(fn('str')).toBe(true);
+    expect(fn(0)).toBe(true);
+    expect(fn('')).toBe(false);
+    expect(fn(NaN)).toBe(false);
+    expect(fn(new String())).toBe(false);
+    expect(fn()).toBe(false);
+    expect(fn(null)).toBe(false);
+    expect(fn(true)).toBe(false);
+  });
+});
 describe('isUndef', () => {
   const fn = _isTypeFn.isUndef;
   test('should return true for undefined value otherwise false', () => {
