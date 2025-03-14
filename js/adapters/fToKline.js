@@ -20,7 +20,7 @@ const _fCrAddConfig = function (crAddConfig) {
       };
     };
   },
-  _compareByDate = (a, b) => a.date - b.date,
+  _compareByDate = (a, b) => a[0] - b[0],
   _fCrDataOHLCV = _ref2 => {
     let {
       d = 0,
@@ -36,18 +36,11 @@ const _fCrAddConfig = function (crAddConfig) {
     } = _ref2;
     return (json, option) => {
       try {
-        const _isVolume = v !== -1,
+        const _crVolume = v === -1 ? () => void 0 : item => crVolume(item[v]),
           _data = getData(json, option).reduce((data, item) => {
             const date = crDate(item[d]);
             if ((0, _AdapterFn.isTypeNumber)(date)) {
-              data.push({
-                date,
-                open: crValue(item[o]),
-                high: crValue(item[h]),
-                low: crValue(item[l]),
-                close: crValue(item[c]),
-                volume: _isVolume ? crVolume(item[v]) : void 0
-              });
+              data.push([date, crValue(item[o]), crValue(item[h]), crValue(item[l]), crValue(item[c]), _crVolume(item)]);
             }
             return data;
           }, []).sort(_compareByDate);
@@ -72,9 +65,8 @@ const crOptionsFromStr = function (isSeconds) {
 exports.crOptionsFromStr = crOptionsFromStr;
 const fToKline = options => (0, _crAdapterOHLCV.default)({
   isAth: options.isAth,
-  getArr: _fCrDataOHLCV(options),
-  toDate: _AdapterFn.FN_IDENTITY,
   crCaption: options.crCaption,
+  getArr: _fCrDataOHLCV(options),
   crAddConfig: _fCrAddConfig(options.crAddConfig)
 });
 exports.fToKline = fToKline;

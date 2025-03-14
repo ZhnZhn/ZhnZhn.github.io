@@ -28,7 +28,9 @@ const _fCrAddConfig = (
   getData=FN_IDENTITY
 }) => (json, option) => {
   try {
-    const _isVolume = v !== -1
+    const _crVolume = v === -1
+      ? () => void 0
+      : item => crVolume(item[v])
     , _data = getData(json, option).reduce((data, item) => {
       const date = crDate(item[d]);
       if (isTypeNumber(date)) {
@@ -38,8 +40,8 @@ const _fCrAddConfig = (
            crValue(item[h]),
            crValue(item[l]),
            crValue(item[c]),
-           _isVolume ? crVolume(item[v]) : void 0
-         ])
+           _crVolume(item)
+        ])
       }
       return data;
     }, []).sort(_compareByDate);
