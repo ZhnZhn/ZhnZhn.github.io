@@ -11,6 +11,7 @@ const PlgAdapter = exports.PlgAdapter = (0, _fToKline.fToKline)({
   l: 'l',
   h: 'h',
   c: 'c',
-  o: 'o'
+  o: 'o',
+  n: 'n'
 });
 //# sourceMappingURL=PlgAdapter.js.map

@@ -8,5 +8,6 @@ export const PlgAdapter = fToKline({
   l: 'l',
   h: 'h',
   c: 'c',
-  o: 'o'
+  o: 'o',
+  n: 'n'
 })

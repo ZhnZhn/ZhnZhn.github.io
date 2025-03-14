@@ -43,8 +43,10 @@ export const toStockSeriesData = ({
   const dC = [], dO = [], dH = [], dL = []
   , dV = [], dVc = []
   , dATH = [], dMfi = []
+  , dN = []
   , _arr = _getNotEmptyArr(arr) || []
   , _isVolume = isNumber(arr[0][5])
+  , _isNumberOfTrades = isNumber(arr[0][6])
   , _addATHPointTo = isAth
      ? _fAddAthPointTo()
      : FN_NOOP;
@@ -60,7 +62,8 @@ export const toStockSeriesData = ({
       high,
       low,
       close,
-      volume
+      volume,
+      numberOfTrades
     ] = item;
 
     dC.push([date, close])
@@ -82,6 +85,9 @@ export const toStockSeriesData = ({
         )
         dMfi.push([date, close, high, low, close, volume])
       }
+      if (_isNumberOfTrades) {
+        dN.push([date, numberOfTrades])
+      }
 
       _addATHPointTo(dATH, date, open, close)
    }
@@ -94,6 +100,7 @@ export const toStockSeriesData = ({
     dVc: _getNotEmptyArr(dVc),
     dV: _getNotEmptyArr(dV),
     dATH: _getNotEmptyArr(dATH),
-    dMfi: _getNotEmptyArr(dMfi)
+    dMfi: _getNotEmptyArr(dMfi),
+    dN: _getNotEmptyArr(dN)
   };
 }

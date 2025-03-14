@@ -35,13 +35,15 @@ const toStockSeriesData = _ref => {
     dVc = [],
     dATH = [],
     dMfi = [],
+    dN = [],
     _arr = _getNotEmptyArr(arr) || [],
     _isVolume = (0, _isTypeFn.isNumber)(arr[0][5]),
+    _isNumberOfTrades = (0, _isTypeFn.isNumber)(arr[0][6]),
     _addATHPointTo = isAth ? _fAddAthPointTo() : _AdapterFn.FN_NOOP;
   let minClose = Number.POSITIVE_INFINITY,
     maxClose = Number.NEGATIVE_INFINITY;
   _arr.forEach(item => {
-    const [date, open, high, low, close, volume] = item;
+    const [date, open, high, low, close, volume, numberOfTrades] = item;
     dC.push([date, close]);
     if (minClose > close) {
       minClose = close;
@@ -67,6 +69,9 @@ const toStockSeriesData = _ref => {
         }));
         dMfi.push([date, close, high, low, close, volume]);
       }
+      if (_isNumberOfTrades) {
+        dN.push([date, numberOfTrades]);
+      }
       _addATHPointTo(dATH, date, open, close);
     }
   });
@@ -80,7 +85,8 @@ const toStockSeriesData = _ref => {
     dVc: _getNotEmptyArr(dVc),
     dV: _getNotEmptyArr(dV),
     dATH: _getNotEmptyArr(dATH),
-    dMfi: _getNotEmptyArr(dMfi)
+    dMfi: _getNotEmptyArr(dMfi),
+    dN: _getNotEmptyArr(dN)
   };
 };
 exports.toStockSeriesData = toStockSeriesData;

@@ -1,7 +1,11 @@
 import {
+  isTypeNumber,
+  isStrOrNumber
+} from '../utils/isTypeFn';
+
+import {
   FN_IDENTITY,
   FN_NOOP,
-  isTypeNumber,
   crError,
   crZhConfig,
   roundByOHLC
@@ -25,12 +29,16 @@ const _fCrAddConfig = (
   crDate=FN_IDENTITY,
   crValue=FN_IDENTITY,
   crVolume=FN_IDENTITY,
-  getData=FN_IDENTITY
+  getData=FN_IDENTITY,
+  n
 }) => (json, option) => {
   try {
     const _crVolume = v === -1
       ? () => void 0
       : item => crVolume(item[v])
+    , _crNumberOfTrades = isStrOrNumber(n)
+      ? item => item[n]
+      : () => void 0
     , _data = getData(json, option).reduce((data, item) => {
       const date = crDate(item[d]);
       if (isTypeNumber(date)) {
@@ -40,7 +48,8 @@ const _fCrAddConfig = (
            crValue(item[h]),
            crValue(item[l]),
            crValue(item[c]),
-           _crVolume(item)
+           _crVolume(item),
+           _crNumberOfTrades(item)
         ])
       }
       return data;

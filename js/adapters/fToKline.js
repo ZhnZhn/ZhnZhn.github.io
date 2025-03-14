@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.fToKline = exports.crOptionsFromStr = void 0;
+var _isTypeFn = require("../utils/isTypeFn");
 var _AdapterFn = require("./AdapterFn");
 var _crAdapterOHLCV = _interopRequireDefault(require("./crAdapterOHLCV"));
 const _fCrAddConfig = function (crAddConfig) {
@@ -32,15 +33,17 @@ const _fCrAddConfig = function (crAddConfig) {
       crDate = _AdapterFn.FN_IDENTITY,
       crValue = _AdapterFn.FN_IDENTITY,
       crVolume = _AdapterFn.FN_IDENTITY,
-      getData = _AdapterFn.FN_IDENTITY
+      getData = _AdapterFn.FN_IDENTITY,
+      n
     } = _ref2;
     return (json, option) => {
       try {
         const _crVolume = v === -1 ? () => void 0 : item => crVolume(item[v]),
+          _crNumberOfTrades = (0, _isTypeFn.isStrOrNumber)(n) ? item => item[n] : () => void 0,
           _data = getData(json, option).reduce((data, item) => {
             const date = crDate(item[d]);
-            if ((0, _AdapterFn.isTypeNumber)(date)) {
-              data.push([date, crValue(item[o]), crValue(item[h]), crValue(item[l]), crValue(item[c]), _crVolume(item)]);
+            if ((0, _isTypeFn.isTypeNumber)(date)) {
+              data.push([date, crValue(item[o]), crValue(item[h]), crValue(item[l]), crValue(item[c]), _crVolume(item), _crNumberOfTrades(item)]);
             }
             return data;
           }, []).sort(_compareByDate);
