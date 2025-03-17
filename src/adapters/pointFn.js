@@ -8,27 +8,40 @@ import {
 
 const _assign = Object.assign
 
+const _crVolumeColor = (
+  open,
+  close
+) => open && close>open
+  ? COLOR_GREEN
+  : open && close<open
+     ? COLOR_RED
+     : COLOR_GREY
+
+export const crVolumeColorPoint = (
+  date,
+  open,
+  close,
+  volume
+) => ({
+  x: date,
+  y: volume,
+  color: _crVolumeColor(open, close)
+})
+
 export const crVolumePoint = ({
   date,
   open,
   close,
   volume,
   option
-}) => {
-  const _color = open && close>open
-    ? COLOR_GREEN
-    : open && close<open
-       ? COLOR_RED
-       : COLOR_GREY;
+}) => _assign({
+  x: date,
+  y: volume,
+  color: _crVolumeColor(open, close),
+  _open: open,
+  _close: close
+}, option)
 
-  return _assign({
-    x: date,
-    y: volume,
-    color: _color,
-    _open: open,
-    _close: close
-  }, option);
-}
 
 //date, prevClose as close, open
 export const crAthPoint = ({
