@@ -12,7 +12,6 @@ import {
   scatterExValue
 } from './tp/tpScatter';
 import {
-  stockVolumeTdmyIf,
   stockAth
 } from './tp/tpStock';
 import {
@@ -85,7 +84,6 @@ export const tooltipExDividend = _fFormatter({...scatterExDividend})
 export const tooltipSplitRatio = _fFormatter({...scatterSplitRatio})
 export const tooltipExValue = _fFormatter({...scatterExValue})
 
-export const tooltipVolumeTdmyIf = _fFormatter({...stockVolumeTdmyIf})
 export const tooltipAth = _fFormatter({...stockAth})
 
 export const tooltipDonut = _fFormatter({...donutValue})
