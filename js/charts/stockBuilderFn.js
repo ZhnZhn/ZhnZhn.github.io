@@ -26,6 +26,7 @@ const fAddMiniVolumes = arrOption => config => {
   return config;
 };
 exports.fAddMiniVolumes = fAddMiniVolumes;
+const _fAddMiniNumberOfTrades = _factoryAddMini('data', _crMiniConfigFn.crMiniNumberOfTradesConfig);
 const fAddMiniATH = exports.fAddMiniATH = _factoryAddMini('data', _crMiniConfigFn.crMiniATHConfig);
 const fAddMiniHL = exports.fAddMiniHL = _factoryAddMini('data', _crMiniConfigFn.crMiniHLConfig);
 const _factoryAddScatterBottom = (crSeria, seriaName) => (data, min, max) => config => (0, _configBuilderFn._fAddScatterBottom)(crSeria(data), seriaName, min, max)(config);
@@ -67,13 +68,19 @@ const crStockConfig = (id, option) => {
     maxClose,
     dVc,
     dV,
-    dATH
+    dATH,
+    dN,
+    dNc
   } = option;
   return (0, _pipe.default)((0, _configBuilderFn.crAreaConfig)(), (0, _configBuilderFn.fAddTooltip)(_Tooltip.tooltipValueTdmyIf), (0, _configBuilderFn.fAddMinMax)(dC, {
     minY: minClose,
     maxY: maxClose,
     isNotZoomToMinMax,
     isDrawDeltaExtrems
+  }), _fAddMiniNumberOfTrades({
+    id: "N of Trades",
+    data: dN,
+    dColumn: dNc
   }), fAddMiniVolume({
     id,
     data: dV,

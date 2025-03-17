@@ -25,6 +25,7 @@ import {
 } from './Tooltip';
 
 import {
+  crMiniNumberOfTradesConfig,
   crMiniVolumeConfig,
   crMiniATHConfig,
   crMiniHLConfig
@@ -81,6 +82,12 @@ export const fAddMiniVolumes = (
   )
   return config;
 }
+
+
+const _fAddMiniNumberOfTrades = _factoryAddMini(
+  'data',
+  crMiniNumberOfTradesConfig
+)
 
 export const fAddMiniATH = _factoryAddMini(
   'data',
@@ -163,7 +170,8 @@ export const crStockConfig = (
     minClose,
     maxClose,
     dVc, dV,
-    dATH
+    dATH,
+    dN, dNc
   } = option;
   return pipe(
      crAreaConfig(),
@@ -174,6 +182,7 @@ export const crStockConfig = (
         isNotZoomToMinMax,
         isDrawDeltaExtrems
      }),
+     _fAddMiniNumberOfTrades({ id: "N of Trades", data: dN, dColumn: dNc }),
      fAddMiniVolume({ id, data: dV, dColumn: dVc }),
      fAddMiniATH({ id, data: dATH }),
      _fSetStockSerias(seriaType, seriaWidth, dC, dH, dL, dO)
