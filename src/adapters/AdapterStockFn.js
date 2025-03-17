@@ -8,7 +8,7 @@ import {
   FN_NOOP,
 } from './AdapterFn';
 import {
-  crVolumePoint,
+  crVolumeColorPoint,
   crAthPoint
 } from './pointFn';
 
@@ -43,7 +43,7 @@ export const toStockSeriesData = ({
   const dC = [], dO = [], dH = [], dL = []
   , dV = [], dVc = []
   , dATH = [], dMfi = []
-  , dN = []
+  , dN = [], dNc = []
   , _arr = _getNotEmptyArr(arr) || []
   , _isVolume = isNumber(arr[0][5])
   , _isNumberOfTrades = isNumber(arr[0][6])
@@ -77,16 +77,22 @@ export const toStockSeriesData = ({
 
       if (_isVolume) {
         dV.push([date, volume])
-        dVc.push(
-          crVolumePoint({
-             open, close, volume, date,
-             option: { _high: high, _low: low }
-          })
-        )
+        dVc.push(crVolumeColorPoint(
+          date,
+          open,
+          close,
+          volume
+        ))
         dMfi.push([date, close, high, low, close, volume])
       }
       if (_isNumberOfTrades) {
         dN.push([date, numberOfTrades])
+        dNc.push(crVolumeColorPoint(
+          date,
+          open,
+          close,
+          numberOfTrades
+        ))
       }
 
       _addATHPointTo(dATH, date, open, close)
@@ -101,6 +107,7 @@ export const toStockSeriesData = ({
     dV: _getNotEmptyArr(dV),
     dATH: _getNotEmptyArr(dATH),
     dMfi: _getNotEmptyArr(dMfi),
-    dN: _getNotEmptyArr(dN)
+    dN: _getNotEmptyArr(dN),
+    dNc: _getNotEmptyArr(dNc)
   };
 }

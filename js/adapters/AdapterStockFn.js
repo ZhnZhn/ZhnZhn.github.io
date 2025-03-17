@@ -36,6 +36,7 @@ const toStockSeriesData = _ref => {
     dATH = [],
     dMfi = [],
     dN = [],
+    dNc = [],
     _arr = _getNotEmptyArr(arr) || [],
     _isVolume = (0, _isTypeFn.isNumber)(arr[0][5]),
     _isNumberOfTrades = (0, _isTypeFn.isNumber)(arr[0][6]),
@@ -57,20 +58,12 @@ const toStockSeriesData = _ref => {
       dL.push([date, low]);
       if (_isVolume) {
         dV.push([date, volume]);
-        dVc.push((0, _pointFn.crVolumePoint)({
-          open,
-          close,
-          volume,
-          date,
-          option: {
-            _high: high,
-            _low: low
-          }
-        }));
+        dVc.push((0, _pointFn.crVolumeColorPoint)(date, open, close, volume));
         dMfi.push([date, close, high, low, close, volume]);
       }
       if (_isNumberOfTrades) {
         dN.push([date, numberOfTrades]);
+        dNc.push((0, _pointFn.crVolumeColorPoint)(date, open, close, numberOfTrades));
       }
       _addATHPointTo(dATH, date, open, close);
     }
@@ -86,7 +79,8 @@ const toStockSeriesData = _ref => {
     dV: _getNotEmptyArr(dV),
     dATH: _getNotEmptyArr(dATH),
     dMfi: _getNotEmptyArr(dMfi),
-    dN: _getNotEmptyArr(dN)
+    dN: _getNotEmptyArr(dN),
+    dNc: _getNotEmptyArr(dNc)
   };
 };
 exports.toStockSeriesData = toStockSeriesData;
