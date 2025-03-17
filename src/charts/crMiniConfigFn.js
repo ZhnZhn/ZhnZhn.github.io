@@ -18,7 +18,6 @@ import {
 import {
   tooltipValueDmy,
   tooltipValueTdmyIf,
-  tooltipVolumeTdmyIf,
   tooltipAth
 } from './Tooltip';
 import {
@@ -50,27 +49,37 @@ const _crHighLowData = data => {
   return [highData, lowData];
 };
 
-export const crMiniMfiConfig = (
+const _fCrSplineMiniConfig = (
+  name,
+  color
+) => ({
   id,
   title,
   data
-) => pipe(
-  crIndicatorConfig({
-    title: crIndicatorTitle(title),
-    chartOption: CROSS_LABEL
-  }),
-  fAssignToSeries(0, {
-    name: "MFI",
-    type: "spline",
-    color: COLOR_MFI,
-    zhValueText: id,
-    data: data,
-    point: fEventsMouseOver(handleMouseOver)
-  })
-)
+}) => ({
+  btTitle: name,
+  config: pipe(
+    crIndicatorConfig({
+      title: crIndicatorTitle(title || name),
+      chartOption: CROSS_LABEL
+    }),
+    fAssignToSeries(0, {
+      name,
+      color,
+      data,
+      type: "spline",
+      zhValueText: id,
+      point: fEventsMouseOver(handleMouseOver)
+    })
+  )
+});
 
-export const crMiniVolumeConfig = ({
-  btTitle='Volume',
+export const crMiniMfiConfig = _fCrSplineMiniConfig("MFI", COLOR_MFI)
+
+const _fCrSplineColumnMiniConfig = (
+  name
+) => ({
+  btTitle=name,
   title,
   data,
   dColumn=[],
@@ -88,7 +97,7 @@ export const crMiniVolumeConfig = ({
     }),
     fAssignToSeries(0, {
       data,
-      zhValueText: "Volume",
+      zhValueText: name,
       visible: !_hasColumn,
       name: "Spline",
       point: fEventsMouseOver(handleMouseOver)
@@ -98,7 +107,7 @@ export const crMiniVolumeConfig = ({
 
   if (_hasColumn) {
     series.push({
-      zhValueText: "Volume",
+      zhValueText: name,
       turboThreshold: 20000,
       type: "column",
       name: "Column",
@@ -112,7 +121,7 @@ export const crMiniVolumeConfig = ({
           brightness: 0.07
         }
       },
-      tooltip: tooltipColumn || fTooltip(tooltipVolumeTdmyIf)
+      tooltip: tooltipColumn || fTooltip(tooltipValueTdmyIf)
     });
     series.push(crIndicatorLineSeria(
       'Median',
@@ -130,7 +139,10 @@ export const crMiniVolumeConfig = ({
     btTitle,
     config
   };
-}
+};
+
+export const crMiniVolumeConfig = _fCrSplineColumnMiniConfig("Volume")
+export const crMiniNumberOfTradesConfig = _fCrSplineColumnMiniConfig("N of Trades")
 
 export const crMiniATHConfig = ({
    btTitle="ATH",

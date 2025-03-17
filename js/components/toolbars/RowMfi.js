@@ -26,7 +26,9 @@ const RowMfi = _ref => {
         _id = _crId(_period);
       if (!_isInArrObjWithId(mfiConfs, _id)) {
         const chart = getChart(),
-          config = (0, _IndicatorBuilder.crMfiConfig)(chart, _period, _id);
+          {
+            config
+          } = (0, _IndicatorBuilder.crMfiConfig)(chart, _period, _id);
         if (config) {
           onAddMfi(config, _id);
           setMfiConfs([...mfiConfs, _crMfiConfig(_id)]);

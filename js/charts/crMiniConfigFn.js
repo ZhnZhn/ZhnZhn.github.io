@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.crMiniVolumeConfig = exports.crMiniMomAthConfig = exports.crMiniMfiConfig = exports.crMiniHLConfig = exports.crMiniATHConfig = void 0;
+exports.crMiniVolumeConfig = exports.crMiniNumberOfTradesConfig = exports.crMiniMomAthConfig = exports.crMiniMfiConfig = exports.crMiniHLConfig = exports.crMiniATHConfig = void 0;
 var _seriaFn = require("../math/seriaFn");
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _indicatorBuilderFn = require("./indicatorBuilderFn");
@@ -34,26 +34,36 @@ const _crHighLowData = data => {
   }
   return [highData, lowData];
 };
-const crMiniMfiConfig = (id, title, data) => (0, _pipe.default)((0, _indicatorBuilderFn.crIndicatorConfig)({
-  title: (0, _indicatorBuilderFn.crIndicatorTitle)(title),
-  chartOption: CROSS_LABEL
-}), (0, _indicatorBuilderFn.fAssignToSeries)(0, {
-  name: "MFI",
-  type: "spline",
-  color: COLOR_MFI,
-  zhValueText: id,
-  data: data,
-  point: (0, _Chart.fEventsMouseOver)(_handleMouseOver.default)
-}));
-exports.crMiniMfiConfig = crMiniMfiConfig;
-const crMiniVolumeConfig = _ref => {
+const _fCrSplineMiniConfig = (name, color) => _ref => {
   let {
-    btTitle = 'Volume',
+    id,
+    title,
+    data
+  } = _ref;
+  return {
+    btTitle: name,
+    config: (0, _pipe.default)((0, _indicatorBuilderFn.crIndicatorConfig)({
+      title: (0, _indicatorBuilderFn.crIndicatorTitle)(title || name),
+      chartOption: CROSS_LABEL
+    }), (0, _indicatorBuilderFn.fAssignToSeries)(0, {
+      name,
+      color,
+      data,
+      type: "spline",
+      zhValueText: id,
+      point: (0, _Chart.fEventsMouseOver)(_handleMouseOver.default)
+    }))
+  };
+};
+const crMiniMfiConfig = exports.crMiniMfiConfig = _fCrSplineMiniConfig("MFI", COLOR_MFI);
+const _fCrSplineColumnMiniConfig = name => _ref2 => {
+  let {
+    btTitle = name,
     title,
     data,
     dColumn = [],
     tooltipColumn
-  } = _ref;
+  } = _ref2;
   const _title = title || btTitle,
     _hasColumn = dColumn.length !== 0,
     config = (0, _pipe.default)((0, _indicatorBuilderFn.crIndicatorConfig)({
@@ -63,7 +73,7 @@ const crMiniVolumeConfig = _ref => {
       legend: (0, _indicatorBuilderFn.crLegendVolume)(_title)
     }), (0, _indicatorBuilderFn.fAssignToSeries)(0, {
       data,
-      zhValueText: "Volume",
+      zhValueText: name,
       visible: !_hasColumn,
       name: "Spline",
       point: (0, _Chart.fEventsMouseOver)(_handleMouseOver.default)
@@ -73,7 +83,7 @@ const crMiniVolumeConfig = _ref => {
     } = config;
   if (_hasColumn) {
     series.push({
-      zhValueText: "Volume",
+      zhValueText: name,
       turboThreshold: 20000,
       type: "column",
       name: "Column",
@@ -87,7 +97,7 @@ const crMiniVolumeConfig = _ref => {
           brightness: 0.07
         }
       },
-      tooltip: tooltipColumn || (0, _Chart.fTooltip)(_Tooltip.tooltipVolumeTdmyIf)
+      tooltip: tooltipColumn || (0, _Chart.fTooltip)(_Tooltip.tooltipValueTdmyIf)
     });
     series.push((0, _indicatorBuilderFn.crIndicatorLineSeria)('Median', COLOR_MEDIAN, (0, _seriaFn.median)(data)));
     series.push((0, _indicatorBuilderFn.crIndicatorLineSeria)('Mean', COLOR_MEAN, (0, _seriaFn.mean)(data)));
@@ -97,12 +107,13 @@ const crMiniVolumeConfig = _ref => {
     config
   };
 };
-exports.crMiniVolumeConfig = crMiniVolumeConfig;
-const crMiniATHConfig = _ref2 => {
+const crMiniVolumeConfig = exports.crMiniVolumeConfig = _fCrSplineColumnMiniConfig("Volume");
+const crMiniNumberOfTradesConfig = exports.crMiniNumberOfTradesConfig = _fCrSplineColumnMiniConfig("N of Trades");
+const crMiniATHConfig = _ref3 => {
   let {
     btTitle = "ATH",
     data
-  } = _ref2;
+  } = _ref3;
   const config = (0, _pipe.default)((0, _indicatorBuilderFn.crIndicatorConfig)({
     title: (0, _indicatorBuilderFn.crIndicatorTitle)('ATH')
   }), (0, _indicatorBuilderFn.fAddColumnSeria)({
@@ -120,12 +131,12 @@ const crMiniATHConfig = _ref2 => {
   };
 };
 exports.crMiniATHConfig = crMiniATHConfig;
-const crMiniMomAthConfig = _ref3 => {
+const crMiniMomAthConfig = _ref4 => {
   let {
     dataMom,
     dataAth,
     dataSum
-  } = _ref3;
+  } = _ref4;
   return (0, _pipe.default)((0, _indicatorBuilderFn.crIndicatorConfig)(), (0, _indicatorBuilderFn.fAssign)({
     title: (0, _indicatorBuilderFn.crIndicatorTitle)(),
     legend: (0, _indicatorBuilderFn.crLegendVolume)(),
@@ -162,11 +173,11 @@ const crMiniMomAthConfig = _ref3 => {
   }));
 };
 exports.crMiniMomAthConfig = crMiniMomAthConfig;
-const crMiniHLConfig = _ref4 => {
+const crMiniHLConfig = _ref5 => {
   let {
     btTitle = "Daily HighLow",
     data
-  } = _ref4;
+  } = _ref5;
   const [highData, lowData] = _crHighLowData(data),
     config = (0, _pipe.default)((0, _indicatorBuilderFn.crIndicatorConfig)({
       title: (0, _indicatorBuilderFn.crIndicatorTitle)('HighLow')
