@@ -71,19 +71,16 @@ const removeSeriaFrom = (chart, zhValueText) => {
   return false;
 };
 exports.removeSeriaFrom = removeSeriaFrom;
-const addCategoryRateTo = _fCategoryCalc(_tsIndicators.categoryRate, 'Rate S1/S2');
-exports.addCategoryRateTo = addCategoryRateTo;
-const addCategoryDiffTo = _fCategoryCalc(_tsIndicators.categoryDiff, 'Diff S1-S2');
-exports.addCategoryDiffTo = addCategoryDiffTo;
-const addCategoryRocTo = _fCategoryCalc(_tsIndicators.categoryRoc, 'ROC S1 from S2');
-exports.addCategoryRocTo = addCategoryRocTo;
+const addCategoryRateTo = exports.addCategoryRateTo = _fCategoryCalc(_tsIndicators.categoryRate, 'Rate S1/S2');
+const addCategoryDiffTo = exports.addCategoryDiffTo = _fCategoryCalc(_tsIndicators.categoryDiff, 'Diff S1-S2');
+const addCategoryRocTo = exports.addCategoryRocTo = _fCategoryCalc(_tsIndicators.categoryRoc, 'ROC S1 from S2');
 const powerBy10 = (chart, power) => {
   const seria = chart.series[0],
     name = seria.getName(),
     [dataP, by] = (0, _tsIndicators.pby10)(seria.data, power);
   seria.update({
     data: dataP,
-    name: name + "*" + by
+    name: `${name}*${by}`
   }, true);
 };
 exports.powerBy10 = powerBy10;
@@ -94,7 +91,7 @@ const _fAddTaTo = (taName, taFn, yaxisOptions) => (chart, option) => {
     } = option,
     _data = chart.series[0].data,
     data = taFn(_data, period),
-    name = taName + "(" + period + ")",
+    name = `${taName}(${period})`,
     seriaOption = {
       zhValueText: id,
       lineWidth: 2,
@@ -111,23 +108,22 @@ const _fAddTaTo = (taName, taFn, yaxisOptions) => (chart, option) => {
     lineWidth: 2
   })) || {}).color : _addToChartSeria(chart, seriaOption) : console.log('It seems, there are not enough data for ' + name);
 };
-const addSmaTo = _fAddTaTo('SMA', _tsIndicators.sma);
-exports.addSmaTo = addSmaTo;
-const addRsiTo = _fAddTaTo('RSI', _tsIndicators.rsi, {
+const addSmaTo = exports.addSmaTo = _fAddTaTo('SMA', _tsIndicators.sma);
+const addRsiTo = exports.addRsiTo = _fAddTaTo('RSI', _tsIndicators.rsi, {
   min: 0,
   max: 100
 });
-exports.addRsiTo = addRsiTo;
+const _getZhPoints = chart => ((chart || {}).options || {}).zhPoints;
 const crMfiConfig = (chart, period, id) => {
-  const data = chart.options.zhPoints,
-    [dataMfi, nNotFullPoint] = (0, _tsIndicators.mfi)(data, period),
-    titleNotFullPoint = nNotFullPoint !== 0 ? ' Not Full Data HL:' + nNotFullPoint : '';
-  return (0, _crMiniConfigFn.crMiniMfiConfig)(id, id + titleNotFullPoint, dataMfi);
+  const [data, numberOfNotFullPoint] = (0, _tsIndicators.mfi)(_getZhPoints(chart), period),
+    titleNotFullPoint = numberOfNotFullPoint === 0 ? '' : ' Not Full Data HL:' + numberOfNotFullPoint;
+  return (0, _crMiniConfigFn.crMiniMfiConfig)({
+    id,
+    title: id + titleNotFullPoint,
+    data
+  });
 };
 exports.crMfiConfig = crMfiConfig;
-const crMomAthConfig = chart => {
-  const data = chart.options.zhPoints;
-  return (0, _crMiniConfigFn.crMiniMomAthConfig)((0, _tsIndicators.momAth)(data));
-};
+const crMomAthConfig = chart => (0, _crMiniConfigFn.crMiniMomAthConfig)((0, _tsIndicators.momAth)(_getZhPoints(chart)));
 exports.crMomAthConfig = crMomAthConfig;
 //# sourceMappingURL=IndicatorBuilder.js.map

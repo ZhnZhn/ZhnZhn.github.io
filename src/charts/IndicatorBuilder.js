@@ -149,26 +149,29 @@ const _fAddTaTo = (
 export const addSmaTo = _fAddTaTo('SMA', sma)
 export const addRsiTo = _fAddTaTo('RSI', rsi, { min: 0, max: 100 })
 
+const _getZhPoints = chart => ((chart || {}).options || {}).zhPoints;
+
 export const crMfiConfig = (
   chart,
   period,
   id
 ) => {
-  const data = chart.options.zhPoints
-  , [dataMfi, nNotFullPoint] = mfi(data, period)
-  , titleNotFullPoint = (nNotFullPoint !== 0)
-      ? ' Not Full Data HL:' + nNotFullPoint
-      : '';
-  return crMiniMfiConfig(
-     id,
-     id + titleNotFullPoint,
-     dataMfi
-  );
+  const [
+    data,
+    numberOfNotFullPoint
+  ] = mfi(_getZhPoints(chart), period)
+  , titleNotFullPoint = numberOfNotFullPoint === 0
+      ? ''
+      : ' Not Full Data HL:' + numberOfNotFullPoint;
+  return crMiniMfiConfig({
+    id,
+    title: id + titleNotFullPoint,
+    data
+  });
 }
 
 export const crMomAthConfig = (
   chart
-) => {
-  const data = chart.options.zhPoints;
-  return crMiniMomAthConfig(momAth(data));
-}
+) => crMiniMomAthConfig(
+  momAth(_getZhPoints(chart))
+);
