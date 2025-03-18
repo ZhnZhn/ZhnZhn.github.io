@@ -7,6 +7,7 @@
 import {
   fAddCaption,
   fAdd,
+  fAddSeriaBy,
   setDataSourceTo
 } from '../configBuilderFn';
 
@@ -133,6 +134,44 @@ describe('fAdd', ()=>{
        c: true,
        d: 10
      })
+  })
+})
+
+describe('fAddSeriaBy', ()=>{
+  const fn = fAddSeriaBy;
+  test('should add seria to config series by index', ()=>{
+    const config = {
+      series: [
+        { r: 1, a: 'a'}
+      ]
+    }
+    expect(fn(0, {r: 2, b: 'b'})(config)).toEqual({
+      series: [
+        { r: 2, a: 'a', b: 'b'}
+      ]
+    })
+    expect(fn(1, {c: 'c'})(config)).toEqual({
+      series: [
+        { r: 2, a: 'a', b: 'b'},
+        { c: 'c'}
+      ]
+    })
+  })
+  test('should add series by index', ()=>{
+    const config = {
+      series: []
+    }
+    expect(fn(0, {r: 2, b: 'b'})(config)).toEqual({
+      series: [
+        { r: 2, b: 'b'}
+      ]
+    })
+    expect(fn(1, {c: 'c'})(config)).toEqual({
+      series: [
+        { r: 2, b: 'b'},
+        { c: 'c'}
+      ]
+    })
   })
 })
 

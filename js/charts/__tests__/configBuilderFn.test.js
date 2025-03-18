@@ -161,6 +161,62 @@ describe('fAdd', () => {
     });
   });
 });
+describe('fAddSeriaBy', () => {
+  const fn = _configBuilderFn.fAddSeriaBy;
+  test('should add seria to config series by index', () => {
+    const config = {
+      series: [{
+        r: 1,
+        a: 'a'
+      }]
+    };
+    expect(fn(0, {
+      r: 2,
+      b: 'b'
+    })(config)).toEqual({
+      series: [{
+        r: 2,
+        a: 'a',
+        b: 'b'
+      }]
+    });
+    expect(fn(1, {
+      c: 'c'
+    })(config)).toEqual({
+      series: [{
+        r: 2,
+        a: 'a',
+        b: 'b'
+      }, {
+        c: 'c'
+      }]
+    });
+  });
+  test('should add series by index', () => {
+    const config = {
+      series: []
+    };
+    expect(fn(0, {
+      r: 2,
+      b: 'b'
+    })(config)).toEqual({
+      series: [{
+        r: 2,
+        b: 'b'
+      }]
+    });
+    expect(fn(1, {
+      c: 'c'
+    })(config)).toEqual({
+      series: [{
+        r: 2,
+        b: 'b'
+      }, {
+        c: 'c'
+      }]
+    });
+  });
+});
 describe('setDataSourceTo', () => {
   const fn = _configBuilderFn.setDataSourceTo;
   test('should set zhConfig dataSource to config', () => {

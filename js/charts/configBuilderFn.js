@@ -154,11 +154,12 @@ const fAddZhPoints = function (data, propName) {
   })(config) : config;
 };
 exports.fAddZhPoints = fAddZhPoints;
-const fAddSeriaBy = (index, obj) => config => {
-  if (config.series[index]) {
-    _assign(config.series[index], obj);
+const fAddSeriaBy = (index, seriaConfig) => config => {
+  const _series = config.series;
+  if (_series[index]) {
+    _assign(_series[index], seriaConfig);
   } else {
-    config.series.push(obj);
+    _series.push(seriaConfig);
   }
   return config;
 };
