@@ -359,7 +359,6 @@ export const crSeriaConfigFromAdapter = ({
   return _seria;
 }
 
-export const crAreaDfConfig = _crAreaConfig
 export const crAreaConfig = (
   option
 ) => _crAreaConfig({

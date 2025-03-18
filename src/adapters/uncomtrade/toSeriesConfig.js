@@ -1,6 +1,6 @@
 import pipe from '../../utils/pipe';
 import {
-  crAreaDfConfig,
+  crAreaConfig,
   fAdd,
   fAddCaption,
   fAddTooltip,
@@ -180,7 +180,7 @@ const _crSeriesConfig = (
 ) => {
   const { title, subtitle } = option;
   return pipe(
-    crAreaDfConfig(),
+    crAreaConfig(),
     fAdd({
       chart: S_CHART,
       xAxis: X_AXIS,
@@ -227,6 +227,7 @@ const toSeriesConfig = (
   if ((config.series || []).length === 1) {
     _transformToDatetime(config)
   }
+  console.log(config)
   return config;
 }
 

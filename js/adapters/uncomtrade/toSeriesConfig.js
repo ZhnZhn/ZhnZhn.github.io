@@ -126,7 +126,7 @@ const _crSeriesConfig = (json, option) => {
     title,
     subtitle
   } = option;
-  return (0, _pipe.default)((0, _configBuilderFn.crAreaDfConfig)(), (0, _configBuilderFn.fAdd)({
+  return (0, _pipe.default)((0, _configBuilderFn.crAreaConfig)(), (0, _configBuilderFn.fAdd)({
     chart: _conf.S_CHART,
     xAxis: _conf.X_AXIS,
     yAxis: _conf.Y_AXIS
@@ -164,8 +164,8 @@ const toSeriesConfig = (json, option) => {
   if ((config.series || []).length === 1) {
     _transformToDatetime(config);
   }
+  console.log(config);
   return config;
 };
-var _default = toSeriesConfig;
-exports.default = _default;
+var _default = exports.default = toSeriesConfig;
 //# sourceMappingURL=toSeriesConfig.js.map
