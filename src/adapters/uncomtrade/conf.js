@@ -15,7 +15,6 @@ export const DESCR_EMPTY = ''
 export const WORLD_COLOR = '#7cb5ec'
 
 export const S_CHART = {
-  spacingTop: 24,
   marginTop: 42,
   marginBottom: 38
 }

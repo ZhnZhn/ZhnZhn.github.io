@@ -2,44 +2,29 @@
 
 exports.__esModule = true;
 exports.Y_AXIS = exports.X_AXIS = exports.WORLD_ITEM_NAME = exports.WORLD_COLOR = exports.WORLD_CODE = exports.WORLD = exports.S_CHART = exports.SPLINE_NOT_VISIBLE = exports.SPLINE = exports.QUANTITY = exports.NET_WEIGHT = exports.MAX_SHOW = exports.DESCR_EMPTY = exports.AVG_PER_W = exports.AVG_PER_Q = exports.ALL = void 0;
-const MAX_SHOW = 6;
-exports.MAX_SHOW = MAX_SHOW;
-const WORLD = 'World';
-exports.WORLD = WORLD;
-const WORLD_CODE = '0';
-exports.WORLD_CODE = WORLD_CODE;
-const WORLD_ITEM_NAME = WORLD + " (" + WORLD_CODE + ")";
-exports.WORLD_ITEM_NAME = WORLD_ITEM_NAME;
-const ALL = 'all';
-exports.ALL = ALL;
-const NET_WEIGHT = 'netWgt';
-exports.NET_WEIGHT = NET_WEIGHT;
-const QUANTITY = 'qty';
-exports.QUANTITY = QUANTITY;
-const AVG_PER_W = 'avgPerWeight';
-exports.AVG_PER_W = AVG_PER_W;
-const AVG_PER_Q = 'avgPerQuantity';
-exports.AVG_PER_Q = AVG_PER_Q;
-const DESCR_EMPTY = '';
-exports.DESCR_EMPTY = DESCR_EMPTY;
-const WORLD_COLOR = '#7cb5ec';
-exports.WORLD_COLOR = WORLD_COLOR;
-const S_CHART = {
-  spacingTop: 24,
+const MAX_SHOW = exports.MAX_SHOW = 6;
+const WORLD = exports.WORLD = 'World';
+const WORLD_CODE = exports.WORLD_CODE = '0';
+const WORLD_ITEM_NAME = exports.WORLD_ITEM_NAME = `${WORLD} (${WORLD_CODE})`;
+const ALL = exports.ALL = 'all';
+const NET_WEIGHT = exports.NET_WEIGHT = 'netWgt';
+const QUANTITY = exports.QUANTITY = 'qty';
+const AVG_PER_W = exports.AVG_PER_W = 'avgPerWeight';
+const AVG_PER_Q = exports.AVG_PER_Q = 'avgPerQuantity';
+const DESCR_EMPTY = exports.DESCR_EMPTY = '';
+const WORLD_COLOR = exports.WORLD_COLOR = '#7cb5ec';
+const S_CHART = exports.S_CHART = {
   marginTop: 42,
   marginBottom: 38
 };
-exports.S_CHART = S_CHART;
-const SPLINE = {
+const SPLINE = exports.SPLINE = {
   type: 'spline'
 };
-exports.SPLINE = SPLINE;
-const SPLINE_NOT_VISIBLE = {
+const SPLINE_NOT_VISIBLE = exports.SPLINE_NOT_VISIBLE = {
   type: 'spline',
   visible: false
 };
-exports.SPLINE_NOT_VISIBLE = SPLINE_NOT_VISIBLE;
-const X_AXIS = {
+const X_AXIS = exports.X_AXIS = {
   type: 'category',
   opposite: false,
   labels: {
@@ -53,8 +38,7 @@ const X_AXIS = {
   //tickPosition: 'inside',
   gridLineWidth: 0
 };
-exports.X_AXIS = X_AXIS;
-const Y_AXIS = {
+const Y_AXIS = exports.Y_AXIS = {
   lineWidth: 0,
   tickLength: 0,
   startOnTick: true,
@@ -66,5 +50,4 @@ const Y_AXIS = {
     x: 3
   }
 };
-exports.Y_AXIS = Y_AXIS;
 //# sourceMappingURL=conf.js.map
