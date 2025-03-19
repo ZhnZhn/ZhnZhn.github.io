@@ -8,7 +8,9 @@ import {
   CHT_BAR_CLUSTER,
   CHT_BAR_SET,
   CHT_COLUMN_SET,
-  CHT_COLUMN_CLUSTER
+  CHT_COLUMN_CLUSTER,
+
+  CHT_DOT_SET
 } from '../constants/ChartType';
 
 import {
@@ -36,9 +38,12 @@ export const isTreeMap = _fIsSeriaType(
   isInArrStr(TREE_MAP_CHART_TYPES)
 )
 
-export const isBarTreeMap = (
+const _fIsSeriaTypeEqual = seriaType => (
   optionOrStr
-) => _getSeriaType(optionOrStr) === CHT_BAR_TREE_MAP
+) => _getSeriaType(optionOrStr) === seriaType;
+
+export const isBarTreeMap = _fIsSeriaTypeEqual(CHT_BAR_TREE_MAP)
+export const isDotSet = _fIsSeriaTypeEqual(CHT_DOT_SET)
 
 const COLUMN_BAR_CATEGORY_CHART_TYPES = [
   CHT_BAR_CLUSTER,

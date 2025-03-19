@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isTreeMap = exports.isColumnOrBarCategory = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.fCrTreeMapPoint = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
+exports.isTreeMap = exports.isDotSet = exports.isColumnOrBarCategory = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.fCrTreeMapPoint = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
 var _arrFn = require("../utils/arrFn");
 var _ChartType = require("../constants/ChartType");
 var _AdapterFn = require("./AdapterFn");
@@ -9,8 +9,9 @@ const _getSeriaType = optionOrStr => (0, _AdapterFn.isObj)(optionOrStr) ? option
   _fIsSeriaType = isSeriaType => optionOrStr => isSeriaType(_getSeriaType(optionOrStr));
 const TREE_MAP_CHART_TYPES = [_ChartType.CHT_TREE_MAP, _ChartType.CHT_TREE_MAP_CLUSTER];
 const isTreeMap = exports.isTreeMap = _fIsSeriaType((0, _arrFn.isInArrStr)(TREE_MAP_CHART_TYPES));
-const isBarTreeMap = optionOrStr => _getSeriaType(optionOrStr) === _ChartType.CHT_BAR_TREE_MAP;
-exports.isBarTreeMap = isBarTreeMap;
+const _fIsSeriaTypeEqual = seriaType => optionOrStr => _getSeriaType(optionOrStr) === seriaType;
+const isBarTreeMap = exports.isBarTreeMap = _fIsSeriaTypeEqual(_ChartType.CHT_BAR_TREE_MAP);
+const isDotSet = exports.isDotSet = _fIsSeriaTypeEqual(_ChartType.CHT_DOT_SET);
 const COLUMN_BAR_CATEGORY_CHART_TYPES = [_ChartType.CHT_BAR_CLUSTER, _ChartType.CHT_BAR_SET, _ChartType.CHT_COLUMN_SET, _ChartType.CHT_COLUMN_CLUSTER];
 const isColumnOrBarCategory = exports.isColumnOrBarCategory = _fIsSeriaType((0, _arrFn.isInArrStr)(COLUMN_BAR_CATEGORY_CHART_TYPES));
 const isCategory = optionOrStr => isColumnOrBarCategory(optionOrStr) || isTreeMap(optionOrStr);
