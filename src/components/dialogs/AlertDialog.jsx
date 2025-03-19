@@ -12,7 +12,8 @@ const S_ROW_CAPTION = {
 , S_CAPTION = {
   display: 'inline-block',
   color: '#f44336',
-  padding: '0 10px 0 8px'
+  padding: '0 10px 0 8px',
+  whiteSpace: 'nowrap'
 }
 , S_ITEM_ID = {
   display: 'inline-block',
