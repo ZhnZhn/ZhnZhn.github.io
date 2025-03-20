@@ -10,8 +10,8 @@ import {
 } from '../TreeMapFn';
 
 import {
+  isAggregateByHs,
   isPositiveNumber,
-  isTotalByAll,
   getItemTradeValue,
   getItemCmdCode,
   getItemCmdDescE,
@@ -76,9 +76,10 @@ const toTreeMap = (
   const [
     data,
     itemValue
-  ] = isTotalByAll(option)
-    ? _crDataByCountry(json, option)
-    : _crTreeMapData(json);
+  ] = isAggregateByHs(option)
+    ? _crTreeMapData(json)
+    : _crDataByCountry(json, option);
+
   return pipe(
     crTreeMapConfig(data),
     fAddCaption(

@@ -200,7 +200,7 @@ const _toMls = yyyymm => {
   const _str = '' + yyyymm
   , _ym = _str.length === 4
       ? _str
-      : _str.substring(0,4) + '-' + _str.substring(4)
+      : _str.slice(0,4) + '-' + _str.slice(4, 6)
   return ymdToUTC(_ym);
 }
 
@@ -215,8 +215,7 @@ const _transformToDatetime = config => {
   config.tooltip = fTooltip(tooltipValueDmy)
   config.valueMoving = valueMoving(_data)
   config.zhConfig.isWithoutIndicator = false
-}
-
+};
 
 const toSeriesConfig = (
   json,
@@ -227,7 +226,6 @@ const toSeriesConfig = (
   if ((config.series || []).length === 1) {
     _transformToDatetime(config)
   }
-  console.log(config)
   return config;
 }
 

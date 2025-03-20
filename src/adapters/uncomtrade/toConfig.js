@@ -1,13 +1,11 @@
 import {
-  isAggrByTotalWorld,
-  isAggr,
-  isCategorySet
-} from './fnAdapter';
+  isTreeMap,
+  isDotSet
+} from '../CategoryFn';
 
 import toTreeMap from './toTreeMap';
 import toCategory from './toCategory';
 import toSeriesConfig from './toSeriesConfig';
-import toCategorySet from './toCategorySet';
 
 const _fToConfig = (
   toConfig
@@ -17,19 +15,14 @@ const _fToConfig = (
 
 const toConfig = (
   option
-) => {
-  if (isCategorySet(option)) {
-    option.seriaType = option.chType.value
-    return toCategorySet;
-  }
-  const toConfig = isAggr(option.two) || isAggrByTotalWorld(option)
-    ? option.chart === 'BAR'
-       ? toCategory
-       : toTreeMap
-    : toSeriesConfig;
-  return {
-    toConfig: _fToConfig(toConfig)
-  };
-}
+) => ({
+  toConfig: _fToConfig(
+    isTreeMap(option)
+      ? toTreeMap
+      : isDotSet(option)
+      ? toSeriesConfig
+      : toCategory
+  )
+});
 
 export default toConfig

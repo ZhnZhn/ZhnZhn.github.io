@@ -139,7 +139,7 @@ const _crSeriesConfig = (json, option) => {
 };
 const _toMls = yyyymm => {
   const _str = '' + yyyymm,
-    _ym = _str.length === 4 ? _str : _str.substring(0, 4) + '-' + _str.substring(4);
+    _ym = _str.length === 4 ? _str : _str.slice(0, 4) + '-' + _str.slice(4, 6);
   return (0, _fnAdapter.ymdToUTC)(_ym);
 };
 const _transformToDatetime = config => {
@@ -164,7 +164,6 @@ const toSeriesConfig = (json, option) => {
   if ((config.series || []).length === 1) {
     _transformToDatetime(config);
   }
-  console.log(config);
   return config;
 };
 var _default = exports.default = toSeriesConfig;

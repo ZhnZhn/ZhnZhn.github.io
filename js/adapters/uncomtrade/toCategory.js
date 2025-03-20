@@ -70,9 +70,9 @@ const _toCategoryByCountry = (json, option) => {
     categories = _crCategoriesAndAddColors(data, totalOfWorld);
   return _crConfig(json, option, data, categories, totalOfWorld);
 };
-const toCategory = (json, option) => (0, _fnAdapter.isTotalByAll)(option) ? _toCategoryByCountry(json, option) : _crAsyncData(json).then(_ref => {
+const toCategory = (json, option) => (0, _fnAdapter.isAggregateByHs)(option) ? _crAsyncData(json).then(_ref => {
   let [data, categories, total] = _ref;
   return _crConfig(json, option, data, categories, total);
-});
+}) : _toCategoryByCountry(json, option);
 var _default = exports.default = toCategory;
 //# sourceMappingURL=toCategory.js.map

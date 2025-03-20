@@ -4,18 +4,13 @@ import {
   assign,
   crError
 } from '../AdapterFn';
-import {
-  isAggrCalculatedCase,
-  isAggrByTotalWorld,
-  isAggr,
-  isCategorySet
-} from './fnAdapter';
+
+import { WORLD_CODE } from './conf';
+import { isAggregateByHs } from './fnAdapter';
 
 const API_URL = 'https://comtradeapi.un.org/public/v1/preview/C'
-, ALL = 'all'
 , DF_RG = 'X'
-, DF_MEASURE = 'primaryValue'
-, DF_MOT_AND_CUSTOMS_CODE = 'motCode=0&customsCode=C00';
+, DF_MEASURE = 'primaryValue';
 
 const _checkReq = (option) => {
   if (option._isTs) {
@@ -23,101 +18,42 @@ const _checkReq = (option) => {
   }
 };
 
-const DF_SHORT_PERIOD = 'period=2023,2022,2021'
-, DF_LONG_QUERY_TAIL = `${DF_SHORT_PERIOD},2020,2019,2018,2017,2016`
+const _crReporterCodeQuery = (
+  reporterCode
+) => reporterCode === WORLD_CODE
+  ? ''
+  : `&reporterCode=${reporterCode}`;
 
-const _crPeriodQuery = (
-  tp
-) => tp === ALL
-  ? DF_SHORT_PERIOD
-  : DF_LONG_QUERY_TAIL;
-
-const _crReporterToTradePartnerQuery = (
-  tp
-) => {
-  const _tpCode = tp === ALL
-    ? ''
-    : tp || '0'
-  return _tpCode
-    ? `&partnerCode=${_tpCode}&partner2Code=${_tpCode}`
-    : '';
-};
-
-const _crAggrTotalUrl = (
+const _crCategoryByPartnerUrl = (
   proxy,
   reporterCode,
   cmdCode,
   flowCode,
-  period,
-  tfType
-) => {
-  const _url = `${proxy}${API_URL}/A/HS?${DF_MOT_AND_CUSTOMS_CODE}&cmdCode=${cmdCode}&flowCode=${flowCode}&period=${period}&partner2Code=0`;
-  // t1: trade flow calculated cases and reporter World case
-  return isAggrCalculatedCase(reporterCode, tfType)
-    ? `${_url}&partnerCode=${reporterCode}`
-    : `${_url}&reporterCode=${reporterCode}`;
-};
+  time,
+) => `${proxy}${API_URL}/A/HS/?motCode=0&customsCode=C00&cmdCode=${cmdCode}&flowCode=${flowCode}&period=${time}${_crReporterCodeQuery(reporterCode)}`;
 
-const _crCmdFlowUrl = (
-  proxy,
-  freq,
-  cmdCode,
-  flowCode
-) => `${proxy}${API_URL}/${freq}/HS?${DF_MOT_AND_CUSTOMS_CODE}&cmdCode=${cmdCode}&flowCode=${flowCode}`
+const _crAggregateOrWorldPatnerQuery = (
+  option,
+  one
+) => isAggregateByHs(option) || one === WORLD_CODE
+  ? '&partnerCode=0&partner2Code=0'
+  : '';
 
 const UnComtradeApi = {
   getRequestUrl(option){
     _checkReq(option)
     const {
-      one=ALL,
-      two,
+      one=WORLD_CODE,
       rg=DF_RG,
-      tfType,
-      tp,
-      freq,
-      period,
-      proxy
     } = option;
 
-    if (isAggrByTotalWorld(option)) {
-      return _crAggrTotalUrl(
-        proxy,
-        one,
-        two,
-        rg,
-        period,
-        tfType
-      );
-    }
-    if (isAggr(two)) {
-      return _crAggrTotalUrl(
-        proxy,
-        one,
-        two,
-        rg,
-        period,
-        tfType
-      ) + (isAggrCalculatedCase(one, tfType)
-             ? ''
-             : `&partnerCode=${tp || 0}`
-          );
-    }
-
-    // All Reporter to TradePartner (Default TradePartner: World)
-    if (one === ALL) {
-      const _tpCode = tp === ALL
-        ? '0'
-        : tp || '0'
-      , _periodQuery = isCategorySet(option)
-        ? `period=${option.time}`
-        : DF_SHORT_PERIOD;
-      return `${_crCmdFlowUrl(proxy, freq, two, rg)}&partnerCode=${_tpCode}&partner2Code=${_tpCode}&${_periodQuery}`;
-    }
-
-    // Reporter to TradePartner (Default TradePartner: All)
-    const _reporterQuery = `reporterCode=${one}${_crReporterToTradePartnerQuery(tp)}`
-    , _periodQuery = _crPeriodQuery(tp);
-    return `${_crCmdFlowUrl(proxy, freq, two, rg)}&${_reporterQuery}&${_periodQuery}`;
+    return _crCategoryByPartnerUrl(
+      option.proxy,
+      one,
+      option.two,
+      rg,
+      option.time
+    ) + _crAggregateOrWorldPatnerQuery(option, one);
   },
 
   checkResponse(json){
@@ -144,7 +80,7 @@ const UnComtradeApi = {
 
   addPropsTo(option){
     const {
-      one,
+      one=WORLD_CODE,
       v,
       rg=DF_RG,
       measure=DF_MEASURE

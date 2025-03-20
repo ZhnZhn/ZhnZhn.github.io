@@ -10,7 +10,7 @@ import { addColorsTo } from '../TreeMapFn';
 import { sortDescCategory } from '../compareByFn';
 
 import {
-  isTotalByAll,
+  isAggregateByHs,
   isPositiveNumber,
   getItemTradeValue,
   getItemCmdCode,
@@ -37,7 +37,10 @@ const _crConfig = (
     ),
     fAdd({
       info: crInfo(json, option),
-      zhConfig: crZhConfig(option, { itemValue, isWi: false })
+      zhConfig: crZhConfig(option, {
+        itemValue,
+        isWi: false
+      })
     }),
     fAddSeriaBy(0, {
       data: data,
@@ -137,11 +140,11 @@ const _toCategoryByCountry = (
 const toCategory = (
   json,
   option
-) => isTotalByAll(option)
- ? _toCategoryByCountry(json, option)
- : _crAsyncData(json)
-     .then(([data, categories, total]) =>
-       _crConfig(json, option, data, categories, total)
-      );
+) => isAggregateByHs(option)
+  ? _crAsyncData(json)
+      .then(([data, categories, total]) =>
+        _crConfig(json, option, data, categories, total)
+      )
+  : _toCategoryByCountry(json, option);
 
 export default toCategory

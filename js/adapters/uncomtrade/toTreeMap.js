@@ -35,7 +35,7 @@ const _crDataByCountry = (json, option) => {
   return [data, totalOfWorld];
 };
 const toTreeMap = (json, option) => {
-  const [data, itemValue] = (0, _fnAdapter.isTotalByAll)(option) ? _crDataByCountry(json, option) : _crTreeMapData(json);
+  const [data, itemValue] = (0, _fnAdapter.isAggregateByHs)(option) ? _crTreeMapData(json) : _crDataByCountry(json, option);
   return (0, _pipe.default)((0, _configBuilderFn.crTreeMapConfig)(data), (0, _configBuilderFn.fAddCaption)((0, _fnAdapter.crCategoryTitle)(option), option.subtitle), (0, _configBuilderFn.fAdd)({
     info: (0, _fnAdapter.crInfo)(json, option),
     zhConfig: (0, _fnAdapter.crZhConfig)(option, {

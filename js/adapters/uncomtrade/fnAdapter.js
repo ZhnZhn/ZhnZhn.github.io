@@ -2,13 +2,14 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdToUTC = exports.valueMoving = exports.sortDescByPnValue = exports.roundBy = exports.isTotalByAll = exports.isCategorySet = exports.isAggrCalculatedCase = exports.isAggrByTotalWorld = exports.isAggr = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = void 0;
+exports.ymdToUTC = exports.valueMoving = exports.sortDescByPnValue = exports.roundBy = exports.isCategoryByPartnerCase = exports.isAggregateByHs = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isNumber = _AdapterFn.isNumber;
 exports.isPositiveNumber = _AdapterFn.isPositiveNumber;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.valueMoving = _AdapterFn.valueMoving;
 exports.roundBy = _AdapterFn.roundBy;
+var _ChartType = require("../../constants/ChartType");
 var _arrFn = require("../../utils/arrFn");
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
@@ -19,19 +20,10 @@ var _conf = require("./conf");
 const _sanitizeNumber = v => (0, _AdapterFn.isNumber)(v) ? '' + v : (0, _AdapterFn.domSanitize)(v);
 const crEmptyHmObject = () => Object.create(null);
 exports.crEmptyHmObject = crEmptyHmObject;
-const isAggr = v => v === 'AG2';
-exports.isAggr = isAggr;
-const isTotalByAll = option => option.two === 'TOTAL';
-exports.isTotalByAll = isTotalByAll;
-const isAggrByTotalWorld = option => isTotalByAll(option) && (!option.tp || option.tp === '0') && option.chart !== 'SPLINE';
-exports.isAggrByTotalWorld = isAggrByTotalWorld;
-const isCategorySet = _ref => {
-  let {
-    chType
-  } = _ref;
-  return chType && (0, _CategoryFn.isColumnOrBarCategory)(chType.value);
-};
-exports.isCategorySet = isCategorySet;
+const isAggregateByHs = option => option.two === 'AG2';
+exports.isAggregateByHs = isAggregateByHs;
+const isCategoryByPartnerCase = option => (0, _CategoryFn.isCategory)(option) || option.seriaType === _ChartType.CHT_DOT_SET;
+exports.isCategoryByPartnerCase = isCategoryByPartnerCase;
 const getItemTradeValue = item => Math.round((item || {}).primaryValue || 0) || 0;
 exports.getItemTradeValue = getItemTradeValue;
 const getItemCmdCode = item => {
@@ -58,7 +50,7 @@ const getHmTradePartners = tradePartners => {
   }
   _hmTradePartner = tradePartners.reduce((hm, item) => {
     if (item && item.v && item.v.length < 4 && item.c) {
-      hm[item.v] = (0, _AdapterFn.domSanitize)(item.c);
+      hm[item.v] = (0, _AdapterFn.domSanitize)(item.c).replace(`(${item.v})`, '').trim();
     }
     return hm;
   }, crEmptyHmObject());
@@ -73,10 +65,9 @@ const _getItemTradeReporterFromHm = (hmTradePartners, item) => {
   const reporterCode = _getItemReporterCode(item);
   return hmTradePartners[reporterCode] || reporterCode;
 };
-const isAggrCalculatedCase = (reporterCode, tfType) => reporterCode === '0' || tfType === 't1';
-exports.isAggrCalculatedCase = isAggrCalculatedCase;
+const _isAggrCalculatedCase = (reporterCode, tfType) => reporterCode === '0' || tfType === 't1';
 const _fCrCategoryDataPoint = (option, crDataPoint) => {
-  const _crCategory = isAggrCalculatedCase(option.one, option.tfType) ? _getItemTradeReporterFromHm : _getItemTradePartnerFromHm;
+  const _crCategory = _isAggrCalculatedCase(option.one, option.tfType) ? _getItemTradeReporterFromHm : _getItemTradePartnerFromHm;
   return (value, hmTradePartners, item) => crDataPoint(value, _crCategory(hmTradePartners, item), item);
 };
 const crCategoryData = (json, option, crDataPoint) => {
@@ -98,26 +89,24 @@ const crCategoryData = (json, option, crDataPoint) => {
   return [data, totalOfWorld || totalOfItems];
 };
 exports.crCategoryData = crCategoryData;
-const crCategoryTitle = _ref2 => {
+const crCategoryTitle = _ref => {
   let {
-    title,
-    period
-  } = _ref2;
-  return (0, _arrFn.joinByBlank)(title, "in", period);
+    title
+  } = _ref;
+  return title;
 };
 exports.crCategoryTitle = crCategoryTitle;
-const crChartId = _ref3 => {
+const crChartId = _ref2 => {
   let {
     value,
     rg = 2,
     measure,
     tp,
     freq,
-    period,
     chart,
     time
-  } = _ref3;
-  return (0, _arrFn.joinByUndescore)(value, rg, measure, tp, freq, period, chart, time);
+  } = _ref2;
+  return (0, _arrFn.joinByUndescore)(value, rg, measure, tp, freq, chart, time);
 };
 exports.crChartId = crChartId;
 const crInfo = (json, option) => ({
@@ -131,21 +120,16 @@ const crZhConfig = function (option, _temp) {
     isLegend,
     isWi = true
   } = _temp === void 0 ? {} : _temp;
-  const {
-      oneC,
-      period,
-      dataSource
-    } = option,
-    _id = crChartId(option);
+  const _id = crChartId(option);
   return {
     id: _id,
     key: _id,
-    itemCaption: oneC,
+    itemCaption: option.oneC,
     itemValue: itemValue && (0, _formatNumber.default)(itemValue),
-    itemTime: period,
+    itemTime: option.time,
     legend: isLegend ? [] : void 0,
     isWithoutIndicator: isWi,
-    dataSource
+    dataSource: option.dataSource
   };
 };
 exports.crZhConfig = crZhConfig;

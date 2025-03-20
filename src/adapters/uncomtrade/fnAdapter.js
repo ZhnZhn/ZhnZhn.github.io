@@ -7,7 +7,10 @@ export {
 } from '../AdapterFn';
 
 import {
-  joinByBlank,
+  CHT_DOT_SET
+} from '../../constants/ChartType';
+
+import {
   joinByUndescore
 } from '../../utils/arrFn';
 
@@ -18,7 +21,7 @@ import {
   domSanitize
 } from '../AdapterFn';
 import {
-  isColumnOrBarCategory
+  isCategory
 } from '../CategoryFn';
 export {
   sortDescByPnValue
@@ -34,18 +37,12 @@ const _sanitizeNumber = (v) => isNumber(v)
 
 export const crEmptyHmObject = () => Object.create(null)
 
-export const isAggr = (v) => v === 'AG2'
-export const isTotalByAll = (option) => option.two === 'TOTAL';
+export const isAggregateByHs = option => option.two === 'AG2'
 
-export const isAggrByTotalWorld = (
-  option
-) => isTotalByAll(option)
-  && (!option.tp || option.tp === '0')
-  && option.chart !== 'SPLINE'
-
-export const isCategorySet = ({
-  chType
-}) => chType && isColumnOrBarCategory(chType.value)
+export const isCategoryByPartnerCase = (
+ option
+) => isCategory(option)
+  || option.seriaType === CHT_DOT_SET
 
 export const getItemTradeValue = (
   item
@@ -95,6 +92,8 @@ export const getHmTradePartners = (
   _hmTradePartner = tradePartners.reduce((hm, item) => {
     if (item && item.v && item.v.length < 4 && item.c) {
       hm[item.v] = domSanitize(item.c)
+        .replace(`(${item.v})`, '')
+        .trim()
     }
     return hm;
   }, crEmptyHmObject());
@@ -116,7 +115,7 @@ const _getItemTradeReporterFromHm = (
   return hmTradePartners[reporterCode] || reporterCode;
 };
 
-export const isAggrCalculatedCase = (
+const _isAggrCalculatedCase = (
   reporterCode,
   tfType
 ) => reporterCode === '0' || tfType === 't1';
@@ -125,7 +124,7 @@ const _fCrCategoryDataPoint = (
   option,
   crDataPoint
 ) => {
-  const _crCategory = isAggrCalculatedCase(option.one, option.tfType)
+  const _crCategory = _isAggrCalculatedCase(option.one, option.tfType)
     ? _getItemTradeReporterFromHm
     : _getItemTradePartnerFromHm;
   return (
@@ -170,9 +169,8 @@ export const crCategoryData = (
 }
 
 export const crCategoryTitle = ({
-  title,
-  period
-}) => joinByBlank(title, "in", period)
+  title
+}) => title
 
 export const crChartId = ({
   value,
@@ -180,11 +178,10 @@ export const crChartId = ({
   measure,
   tp,
   freq,
-  period,
   chart,
   time,
 }) => joinByUndescore(
-  value, rg, measure, tp, freq, period, chart, time
+  value, rg, measure, tp, freq, chart, time
 )
 
 export const crInfo = (
@@ -204,20 +201,15 @@ export const crZhConfig = (
    isWi = true
   } = {}
 ) => {
-  const {
-    oneC,
-    period,
-    dataSource
-  } = option
-  , _id = crChartId(option);
+  const _id = crChartId(option);
   return {
     id: _id,
     key: _id,
-    itemCaption: oneC,
+    itemCaption: option.oneC,
     itemValue: itemValue && formatNumber(itemValue),
-    itemTime: period,
+    itemTime: option.time,
     legend: isLegend ? [] : void 0,
     isWithoutIndicator: isWi,
-    dataSource
+    dataSource: option.dataSource
   };
 }
