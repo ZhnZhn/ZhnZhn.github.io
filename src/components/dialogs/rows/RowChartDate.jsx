@@ -10,6 +10,7 @@ const RowChartDate = ({
   selectWidth,
   isShowChart,
   chartOptions,
+  chartDefault,
   onSelectChart,
   isShowDate,
   noDate=false,
@@ -27,6 +28,7 @@ const RowChartDate = ({
         chartType={chartType}
         isShowLabels={isShowLabels}
         labelStyle={labelStyle}
+        placeholder={chartDefault}
         selectWidth={selectWidth}
         options={chartOptions}
         onSelectChart={onSelectChart}

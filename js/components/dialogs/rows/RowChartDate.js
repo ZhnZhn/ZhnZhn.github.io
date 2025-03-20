@@ -16,6 +16,7 @@ const RowChartDate = _ref => {
     selectWidth,
     isShowChart,
     chartOptions,
+    chartDefault,
     onSelectChart,
     isShowDate,
     noDate = false,
@@ -34,6 +35,7 @@ const RowChartDate = _ref => {
         chartType: chartType,
         isShowLabels: isShowLabels,
         labelStyle: labelStyle,
+        placeholder: chartDefault,
         selectWidth: selectWidth,
         options: chartOptions,
         onSelectChart: onSelectChart
@@ -58,6 +60,5 @@ const RowChartDate = _ref => {
     })]
   });
 };
-var _default = RowChartDate;
-exports.default = _default;
+var _default = exports.default = RowChartDate;
 //# sourceMappingURL=RowChartDate.js.map
