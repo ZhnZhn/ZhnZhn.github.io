@@ -1,15 +1,14 @@
-
-const _crInpuSelectPlaceholder = (
-  item
-) => `Default: ${item.c}`;
+import {
+  getC
+} from '../../utils/getPropertyFn';
 
 export const crInputSelectDfProps = (
   options,
   dfItemIndex=0
 ) => {
-  const dfItems = options[dfItemIndex];
+  const dfItem = options[dfItemIndex];
   return [
-    dfItems,
-    _crInpuSelectPlaceholder(dfItems)
+    dfItem,
+    `Default: ${getC(dfItem)}`
   ];
 }

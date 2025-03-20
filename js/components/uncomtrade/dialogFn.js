@@ -2,13 +2,13 @@
 
 exports.__esModule = true;
 exports.crInputSelectDfProps = void 0;
-const _crInpuSelectPlaceholder = item => "Default: " + item.c;
+var _getPropertyFn = require("../../utils/getPropertyFn");
 const crInputSelectDfProps = function (options, dfItemIndex) {
   if (dfItemIndex === void 0) {
     dfItemIndex = 0;
   }
-  const dfItems = options[dfItemIndex];
-  return [dfItems, _crInpuSelectPlaceholder(dfItems)];
+  const dfItem = options[dfItemIndex];
+  return [dfItem, `Default: ${(0, _getPropertyFn.getC)(dfItem)}`];
 };
 exports.crInputSelectDfProps = crInputSelectDfProps;
 //# sourceMappingURL=dialogFn.js.map

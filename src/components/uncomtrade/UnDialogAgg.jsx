@@ -2,21 +2,29 @@ import {
   useRef,
   useCallback,
   getRefOptions
-} from '../uiApi';
+} from "../uiApi";
 
-import memoIsShow from '../hoc/memoIsShow';
-import useToggle from '../hooks/useToggle';
-import useProperty from '../hooks/useProperty';
-import useDialog from '../dialogs/hooks/useDialog';
+import {
+  getV
+} from "../../utils/getPropertyFn";
 
-import useInputToggle from './useInputToggle';
-import useInputChart from './useInputChart';
-import { crInputSelectDfProps } from './dialogFn';
+import memoIsShow from "../hoc/memoIsShow";
+import useToggle from "../hooks/useToggle";
+import useProperty from "../hooks/useProperty";
+import useDialog from "../dialogs/hooks/useDialog";
 
-import D from '../dialogs/DialogCell';
-import ModalInputToggle from './ModalInputToggle';
+import useInputToggle from "./useInputToggle";
+import useInputChart from "./useInputChart";
+import { crInputSelectDfProps } from "./dialogFn";
 
-const AGG_OPTIONS = [
+import D from "../dialogs/DialogCell";
+import ModalInputToggle from "./ModalInputToggle";
+
+const [
+  DF_REPORTER = { c: "World", v: "0"},
+  REPORTER_PLACEHOLDER
+] = crInputSelectDfProps([{ c: "World", v: "0"}])
+, AGG_OPTIONS = [
   {c: "Total of trade partner", v: "TOTAL"},
   {c: "All 2-digit HS commodities", v: "AG2"}
 ]
@@ -27,7 +35,7 @@ const AGG_OPTIONS = [
 , PERIOD_OPTIONS = (() => {
   const arr = [];
   for (let i=0; i<23; i++) {
-    const _v = '' + (2023 - i);
+    const _v = "" + (2023 - i);
     arr.push({c: _v, v: _v})
   }
   return arr;
@@ -37,10 +45,10 @@ const AGG_OPTIONS = [
   PERIOD_PLACEHOLDER
 ] = crInputSelectDfProps(PERIOD_OPTIONS, 1)
 , TRADE_FLOW_OPTIONS = [
-  { c: "Export Value", v: { rg: 'X', measure: "primaryValue" } },
-  { c: "Calculated Export Value by Reporter Imports", v: { rg: 'M', measure: "primaryValue", tfType: 't1'} },
-  { c: "Import Value", v: { rg: 'M', measure: "primaryValue" } },
-  { c: "Calculated Import Value by Reporter Exports", v: { rg: 'M', measure: "primaryValue", tfType: 't1' } }
+  { c: "Export Value", v: { rg: "X", measure: "primaryValue" } },
+  //{ c: "Calculated Export Value by Reporter Imports", v: { rg: "M", measure: "primaryValue", tfType: "t1"} },
+  { c: "Import Value", v: { rg: "M", measure: "primaryValue" } },
+  //{ c: "Calculated Import Value by Reporter Exports", v: { rg: "M", measure: "primaryValue", tfType: "t1" } }
 ]
 , [
   DF_TRADE_FLOW,
@@ -55,7 +63,7 @@ const AGG_OPTIONS = [
 const _isAggrAll = (
   tp,
   aggr
-) => tp.v === 'all' &&  aggr.v !== 'total';
+) => getV(tp) === "all" &&  getV(aggr) !== "total";
 
 const UnDialogAgg = memoIsShow((
   props
@@ -98,15 +106,17 @@ const UnDialogAgg = memoIsShow((
     isFlow,
     toggleFlow
   ] = useToggle(true)
+  /*
   , [
     isPartner,
     togglePartner
   ] = useToggle()
+  */
   //, [isAggr, toggleAggr] = useToggle(true)
   , [
     setOne,
     getOne
-  ] = useProperty()
+  ] = useProperty(DF_REPORTER, DF_REPORTER)
   , [
     setTradePartner,
     getTradePartner
@@ -163,17 +173,17 @@ const UnDialogAgg = memoIsShow((
     , chart = getChart()
     , msgs = [];
     if (!one) {
-      msgs.push(msgOnNotSelected('Reporter'))
+      msgs.push(msgOnNotSelected("Reporter"))
     }
-    if (one && one.v === 'all'
+    if (one && getV(one) === "all"
         || _isAggrAll(tradePartner, three)) {
-      msgs.push('Query All is too complex')
+      msgs.push("Query All is too complex")
     }
-    if (one && one.v === "0" && three.v === "AG2") {
-      msgs.push('Query World by AG2 is too complex')
+    if (one && getV(one) === "0" && getV(three) === "AG2") {
+      msgs.push("Query World by AG2 is too complex")
     }
-    if (tradeFlow.v.tfType === 't1'
-        && (tradePartner.v !== "0" || chart.v === 'SPLINE')) {
+    if ((getV(tradeFlow) || {}).tfType === "t1"
+        && (getV(tradePartner) !== "0" || getV(chart) === "SPLINE")) {
       msgs.push("Query trade flow calculated values is only for category charts of trade partner World")
     }
     if (msgs.length === 0) {
@@ -182,8 +192,9 @@ const UnDialogAgg = memoIsShow((
         three,
         tradeFlow,
         tradePartner,
-        period: getPeriod(),
         chart,
+        chType: chart,
+        time: getV(getPeriod()),
         freq: DF_FREQ,
         tradePartners: getRefOptions(_refTradePartner)
       }))
@@ -212,9 +223,9 @@ const UnDialogAgg = memoIsShow((
      <ModalInputToggle
        isShow={isShowToggle}
        configs={[
-         ['Trade Flow', isFlow, toggleFlow],
-         ['Partner', isPartner, togglePartner]
-         /*['Aggregation', isAggr, toggleAggr]*/
+         ["Trade Flow", isFlow, toggleFlow],
+         /*["Partner", isPartner, togglePartner]*/
+         /*["Aggregation", isAggr, toggleAggr]*/
        ]}
        onClose={hideToggle}
      />
@@ -223,6 +234,7 @@ const UnDialogAgg = memoIsShow((
         isShowLabels={isShowLabels}
         uri={oneURI}
         caption="Reporter"
+        placeholder={REPORTER_PLACEHOLDER}
         onSelect={setOne}
      />
      <D.ShowHide isShow={isFlow}>
@@ -235,7 +247,7 @@ const UnDialogAgg = memoIsShow((
           onSelect={setTradeFlow}
         />
      </D.ShowHide>
-     <D.ShowHide isShow={isPartner}>
+     <D.ShowHide isShow={false}>
        <D.SelectWithLoad
           refEl={_refTradePartner}
           isShowLabels={isShowLabels}
@@ -266,7 +278,8 @@ const UnDialogAgg = memoIsShow((
          <D.ShowHide isShow={isPeriod}>
             <D.RowInputSelect
               isShowLabels={isShowLabels}
-              caption="Period"
+              //caption="Period"
+              caption="For Date"
               placeholder={PERIOD_PLACEHOLDER}
               propCaption="c"
               options={PERIOD_OPTIONS}

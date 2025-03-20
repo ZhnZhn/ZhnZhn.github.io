@@ -5,45 +5,49 @@ import {
   getRefValue,
   getRefOptions,
   getInputValue
-} from '../uiApi';
+} from "../uiApi";
 
 import {
-  CHT_SPLINE,
-  CHT_BAR_SET
-} from '../../constants/ChartType';
+  CHT_BAR_SET,
+  CHT_TREE_MAP,
+  CHT_DOT_SET
+} from "../../constants/ChartType";
 
-import memoIsShow from '../hoc/memoIsShow';
-import useToggle from '../hooks/useToggle';
-import useProperty from '../hooks/useProperty';
-import useDialog from '../dialogs/hooks/useDialog';
-import useInputToggle from './useInputToggle';
+import {
+  getV
+} from "../../utils/getPropertyFn";
 
-import D from '../dialogs/DialogCell';
-import { isCategoryItem } from '../dialogs/ChartOptionsFn';
-import crDateConfig from '../dialogs/fns/crDateConfig';
-import ModalInputToggle from './ModalInputToggle';
-import { crInputSelectDfProps } from './dialogFn';
+import memoIsShow from "../hoc/memoIsShow";
+import useToggle from "../hooks/useToggle";
+import useProperty from "../hooks/useProperty";
+import useDialog from "../dialogs/hooks/useDialog";
+import useInputToggle from "./useInputToggle";
+
+import D from "../dialogs/DialogCell";
+import crDateConfig from "../dialogs/fns/crDateConfig";
+import ModalInputToggle from "./ModalInputToggle";
+import { crInputSelectDfProps } from "./dialogFn";
 
 const TRADE_FLOW_OPTIONS = [
-  { c: "Export Value", v: { rg: 'X', measure: "primaryValue" } },
-  { c: "Export Weight", v: { rg: 'X', measure: "netWgt" } },
-  { c: "Export Quantity", v: { rg: 'X', measure: "qty" } },
-  { c: "Export Average Value Per Weight", v: { rg: 'X', measure: "avgPerWeight" } },
-  { c: "Export Average Value Per Quantity", v: { rg: 'X', measure: "avgPerQuantity" } },
-  { c: "Import Value", v: { rg: 'M', measure: "primaryValue" } },
-  { c: "Import Weight", v: { rg: 'M', measure: "netWgt" } },
-  { c: "Import Quantity", v: { rg: 'M', measure: "qty" } },
-  { c: "Import Average Value Per Weight", v: { rg: 'M', measure: "avgPerWeight" } },
-  { c: "Import Average Value Per Quantity", v: { rg: 'M', measure: "avgPerQuantity" } }
+  { c: "Export Value", v: { rg: "X", measure: "primaryValue" } },
+  { c: "Export Weight", v: { rg: "X", measure: "netWgt" } },
+  { c: "Export Quantity", v: { rg: "X", measure: "qty" } },
+  { c: "Export Average Value Per Weight", v: { rg: "X", measure: "avgPerWeight" } },
+  { c: "Export Average Value Per Quantity", v: { rg: "X", measure: "avgPerQuantity" } },
+  { c: "Import Value", v: { rg: "M", measure: "primaryValue" } },
+  { c: "Import Weight", v: { rg: "M", measure: "netWgt" } },
+  { c: "Import Quantity", v: { rg: "M", measure: "qty" } },
+  { c: "Import Average Value Per Weight", v: { rg: "M", measure: "avgPerWeight" } },
+  { c: "Import Average Value Per Quantity", v: { rg: "M", measure: "avgPerQuantity" } }
 ]
 , [
   DF_TRADE_FLOW,
   TRADE_FLOW_PLACEHOLDER
 ] = crInputSelectDfProps(TRADE_FLOW_OPTIONS)
 , [
-  DF_REPORTER = { c: 'All', v: 'all'},
+  DF_REPORTER = { c: "World", v: "0"},
   REPORTER_PLACEHOLDER
-] = crInputSelectDfProps([{ c: 'All', v: 'all'}])
+] = crInputSelectDfProps([{ c: "World", v: "0"}])
 , FREQUENCY_OPTIONS = [
   {c: "Annual",  v: "A"},
   {c: "Monthly", v: "M"}
@@ -54,17 +58,24 @@ const TRADE_FLOW_OPTIONS = [
 ] = crInputSelectDfProps(FREQUENCY_OPTIONS)
 , _crOptionItem = (caption, value) => ({
   caption,
-  value,
+  value
 })
 , CHART_OPTIONS = [
-  _crOptionItem('Spline', CHT_SPLINE),
-  _crOptionItem('Bar by Reporter', CHT_BAR_SET)
+  _crOptionItem("Bar (60, 90): By Partners", CHT_BAR_SET),
+  _crOptionItem("Tree Map (60, 90): By Partners", CHT_TREE_MAP),
+  _crOptionItem("Dots: By Partners", CHT_DOT_SET)
 ]
 , [
+    DF_CHART,
+    CHART_PLACEHOLDER
+  ] = crInputSelectDfProps(CHART_OPTIONS)
+, [
   DATE_OPTIONS,
-  DATE_DEFAULT
-] = crDateConfig("Y", 1)
-, DATE_DF = _crOptionItem(DATE_DEFAULT, DATE_DEFAULT);
+] = crDateConfig("Y", 2)
+, [
+  DATE_DF,
+  DATE_PLACEHOLDER
+] = crInputSelectDfProps(DATE_OPTIONS, 1);
 
 const UnDialog5 = memoIsShow((
   props
@@ -88,7 +99,7 @@ const UnDialog5 = memoIsShow((
    , [
      seriaType,
      setSeriaType
-   ] = useState()
+   ] = useState(DF_CHART)
    , [
      isShowToggle,
      toggleInputs,
@@ -108,7 +119,7 @@ const UnDialog5 = memoIsShow((
      toggleInputs
    })
    , [isHeading, toggleHeading] = useToggle(true)
-   , [isPartner, togglePartner] = useToggle(false)
+   /*, [isPartner, togglePartner] = useToggle(false)*/
    , [isFlow, toggleFlow] = useToggle(true)
    , [isChart, toggleChart] = useToggle(false)
    //, [isFreq, toggleFreq] = useToggle(false)
@@ -118,41 +129,38 @@ const UnDialog5 = memoIsShow((
    , [
      setOne,
      getOne
-   ] = useProperty()
+   ] = useProperty(DF_REPORTER, DF_REPORTER)
    , [
      setTradeFlow,
      getTradeFlow
-   ] = useProperty()
-   , [
-     setTradePartner,
-     getTradePartner
-   ] = useProperty()
+   ] = useProperty(DF_TRADE_FLOW, DF_TRADE_FLOW)
+   , getTradePartner = useProperty()[1]
    , [
      setPropertyTime,
      getPropertyTime
-   ] = useProperty(DATE_DF)
+   ] = useProperty(DATE_DF, DATE_DF)
 
    /*eslint-disable no-unused-vars*/
    , [
      setFreq,
      getFreq
-   ] = useProperty()
+   ] = useProperty(DF_FREQ, DF_FREQ)
    /*eslint-enable no-unused-vars*/
 
    /*eslint-disable react-hooks/exhaustive-deps */
    , _hLoad = useCallback(() => {
      const _groupItemInst = getRefValue(_refGroupItem)
      , { msg=[] } = _groupItemInst.getValidation()
-     , one = getOne() || DF_REPORTER
-     , _oneValue = one.v
+     , one = getOne()
+     , _oneValue = getV(one)
      , tradePartner = getTradePartner()
-     , _tradePartnerValue = tradePartner && tradePartner.v
-     , freq = getFreq() || DF_FREQ;
-     if (_oneValue === 'all' && _tradePartnerValue === 'all') {
-       msg.push('Query All to All is too complex')
+     , _tradePartnerValue = getV(tradePartner)
+     , freq = getFreq();
+     if (_oneValue === "all" && _tradePartnerValue === "all") {
+       msg.push("Query All to All is too complex")
      }
-     if (_oneValue === 'all' && freq.v === 'M') {
-       msg.push('Query All Monthly is too complex')
+     if (_oneValue === "all" && getV(freq) === "M") {
+       msg.push("Query All Monthly is too complex")
      }
      if (msg.length === 0) {
        const {
@@ -164,11 +172,11 @@ const UnDialog5 = memoIsShow((
          one,
          two,
          three,
-         tradeFlow: getTradeFlow() || DF_TRADE_FLOW,
+         tradeFlow: getTradeFlow(),
          tradePartner,
          freq,
          chType: seriaType,
-         time: getPropertyTime().value,
+         time: getV(getPropertyTime()),
          tradePartners: getRefOptions(_refTradePartner)
        }))
      }
@@ -178,7 +186,6 @@ const UnDialog5 = memoIsShow((
    // getOne, getTradeFlow,
    // setValidationMessages
    /*eslint-enable react-hooks/exhaustive-deps */
-   , _isShowDate = isChart && isCategoryItem(seriaType);
 
    return (
      <D.DraggableDialog
@@ -197,11 +204,11 @@ const UnDialog5 = memoIsShow((
       <ModalInputToggle
         isShow={isShowToggle}
         configs={[
-          ['Partner', isPartner, togglePartner],
-          ['Heading', isHeading, toggleHeading],
-          ['Trade Flow', isFlow, toggleFlow],
-          ['Chart', isChart, toggleChart]
-          /*['Frequency', isFreq, toggleFreq]*/
+          /*["Partner", isPartner, togglePartner],*/
+          ["Heading", isHeading, toggleHeading],
+          ["Trade Flow", isFlow, toggleFlow],
+          ["Chart", isChart, toggleChart]
+          /*["Frequency", isFreq, toggleFreq]*/
         ]}
         onClose={hideToggle}
       />
@@ -213,14 +220,14 @@ const UnDialog5 = memoIsShow((
          placeholder={REPORTER_PLACEHOLDER}
          onSelect={setOne}
       />
-      <D.ShowHide isShow={isPartner}>
+      <D.ShowHide isShow={false}>
         <D.SelectWithLoad
            refEl={_refTradePartner}
            isShowLabels={isShowLabels}
            uri={tpURI}
            caption="Partner"
            placeholder="Default: World"
-           onSelect={setTradePartner}
+           //onSelect={setTradePartner}
         />
       </D.ShowHide>
       <D.ShowHide isShow={isHeading}>
@@ -256,13 +263,14 @@ const UnDialog5 = memoIsShow((
       </D.ShowHide>
       <D.RowChartDate
          isShowChart={isChart}
-         isShowDate={_isShowDate}
+         isShowDate={isChart}
          refSeriaColor={_refSeriaColor}
          chartType={seriaType}
          isShowLabels={isShowLabels}
          chartOptions={CHART_OPTIONS}
+         chartDefault={CHART_PLACEHOLDER}
          onSelectChart={setSeriaType}
-         dateDefault={DATE_DEFAULT}
+         dateDefault={DATE_PLACEHOLDER}
          dateOptions={DATE_OPTIONS}
          onSelectDate={setPropertyTime}
       />

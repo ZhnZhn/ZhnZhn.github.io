@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _getPropertyFn = require("../../utils/getPropertyFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
@@ -14,7 +15,14 @@ var _dialogFn = require("./dialogFn");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _ModalInputToggle = _interopRequireDefault(require("./ModalInputToggle"));
 var _jsxRuntime = require("react/jsx-runtime");
-const AGG_OPTIONS = [{
+const [DF_REPORTER = {
+    c: "World",
+    v: "0"
+  }, REPORTER_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)([{
+    c: "World",
+    v: "0"
+  }]),
+  AGG_OPTIONS = [{
     c: "Total of trade partner",
     v: "TOTAL"
   }, {
@@ -25,7 +33,7 @@ const AGG_OPTIONS = [{
   PERIOD_OPTIONS = (() => {
     const arr = [];
     for (let i = 0; i < 23; i++) {
-      const _v = '' + (2023 - i);
+      const _v = "" + (2023 - i);
       arr.push({
         c: _v,
         v: _v
@@ -37,30 +45,20 @@ const AGG_OPTIONS = [{
   TRADE_FLOW_OPTIONS = [{
     c: "Export Value",
     v: {
-      rg: 'X',
+      rg: "X",
       measure: "primaryValue"
     }
-  }, {
-    c: "Calculated Export Value by Reporter Imports",
-    v: {
-      rg: 'M',
-      measure: "primaryValue",
-      tfType: 't1'
-    }
-  }, {
+  },
+  //{ c: "Calculated Export Value by Reporter Imports", v: { rg: "M", measure: "primaryValue", tfType: "t1"} },
+  {
     c: "Import Value",
     v: {
-      rg: 'M',
+      rg: "M",
       measure: "primaryValue"
     }
-  }, {
-    c: "Calculated Import Value by Reporter Exports",
-    v: {
-      rg: 'M',
-      measure: "primaryValue",
-      tfType: 't1'
-    }
-  }],
+  }
+  //{ c: "Calculated Import Value by Reporter Exports", v: { rg: "M", measure: "primaryValue", tfType: "t1" } }
+  ],
   [DF_TRADE_FLOW, TRADE_FLOW_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)(TRADE_FLOW_OPTIONS),
   [DF_PARTNER = {
     c: "World",
@@ -73,7 +71,7 @@ const AGG_OPTIONS = [{
     c: "Annual",
     v: "A"
   };
-const _isAggrAll = (tp, aggr) => tp.v === 'all' && aggr.v !== 'total';
+const _isAggrAll = (tp, aggr) => (0, _getPropertyFn.getV)(tp) === "all" && (0, _getPropertyFn.getV)(aggr) !== "total";
 const UnDialogAgg = (0, _memoIsShow.default)(props => {
   const {
       isShow,
@@ -95,11 +93,16 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       onClose,
       toggleInputs
     }),
-    [isFlow, toggleFlow] = (0, _useToggle.default)(true),
-    [isPartner, togglePartner] = (0, _useToggle.default)()
+    [isFlow, toggleFlow] = (0, _useToggle.default)(true)
+    /*
+    , [
+      isPartner,
+      togglePartner
+    ] = useToggle()
+    */
     //, [isAggr, toggleAggr] = useToggle(true)
     ,
-    [setOne, getOne] = (0, _useProperty.default)(),
+    [setOne, getOne] = (0, _useProperty.default)(DF_REPORTER, DF_REPORTER),
     [setTradePartner, getTradePartner] = (0, _useProperty.default)(DF_PARTNER, DF_PARTNER),
     [setAggregation, getAggregation] = (0, _useProperty.default)(DF_AGGREGATION, DF_AGGREGATION),
     [CHART_PLACEHOLDER, isInputChart, isPeriod, toggleInputChart, setChart, getChart, chartOptions] = (0, _useInputChart.default)(getTradePartner, getAggregation),
@@ -128,15 +131,15 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         chart = getChart(),
         msgs = [];
       if (!one) {
-        msgs.push(msgOnNotSelected('Reporter'));
+        msgs.push(msgOnNotSelected("Reporter"));
       }
-      if (one && one.v === 'all' || _isAggrAll(tradePartner, three)) {
-        msgs.push('Query All is too complex');
+      if (one && (0, _getPropertyFn.getV)(one) === "all" || _isAggrAll(tradePartner, three)) {
+        msgs.push("Query All is too complex");
       }
-      if (one && one.v === "0" && three.v === "AG2") {
-        msgs.push('Query World by AG2 is too complex');
+      if (one && (0, _getPropertyFn.getV)(one) === "0" && (0, _getPropertyFn.getV)(three) === "AG2") {
+        msgs.push("Query World by AG2 is too complex");
       }
-      if (tradeFlow.v.tfType === 't1' && (tradePartner.v !== "0" || chart.v === 'SPLINE')) {
+      if (((0, _getPropertyFn.getV)(tradeFlow) || {}).tfType === "t1" && ((0, _getPropertyFn.getV)(tradePartner) !== "0" || (0, _getPropertyFn.getV)(chart) === "SPLINE")) {
         msgs.push("Query trade flow calculated values is only for category charts of trade partner World");
       }
       if (msgs.length === 0) {
@@ -145,8 +148,9 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
           three,
           tradeFlow,
           tradePartner,
-          period: getPeriod(),
           chart,
+          chType: chart,
+          time: (0, _getPropertyFn.getV)(getPeriod()),
           freq: DF_FREQ,
           tradePartners: (0, _uiApi.getRefOptions)(_refTradePartner)
         }));
@@ -171,14 +175,16 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       buttons: toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalInputToggle.default, {
       isShow: isShowToggle,
-      configs: [['Trade Flow', isFlow, toggleFlow], ['Partner', isPartner, togglePartner]
-      /*['Aggregation', isAggr, toggleAggr]*/],
+      configs: [["Trade Flow", isFlow, toggleFlow]
+      /*["Partner", isPartner, togglePartner]*/
+      /*["Aggregation", isAggr, toggleAggr]*/],
       onClose: hideToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: oneURI,
       caption: "Reporter",
+      placeholder: REPORTER_PLACEHOLDER,
       onSelect: setOne
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isFlow,
@@ -191,7 +197,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         onSelect: setTradeFlow
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-      isShow: isPartner,
+      isShow: false,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
         refEl: _refTradePartner,
         isShowLabels: isShowLabels,
@@ -221,8 +227,10 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
           isShow: isPeriod,
           children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
-            isShowLabels: isShowLabels,
-            caption: "Period",
+            isShowLabels: isShowLabels
+            //caption="Period"
+            ,
+            caption: "For Date",
             placeholder: PERIOD_PLACEHOLDER,
             propCaption: "c",
             options: PERIOD_OPTIONS,

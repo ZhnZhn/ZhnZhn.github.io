@@ -1,20 +1,26 @@
 import {
   useState,
   useCallback
-} from '../uiApi';
+} from "../uiApi";
 
-import useProperty from '../hooks/useProperty';
+import {
+  getV
+} from "../../utils/getPropertyFn";
 
-import { crInputSelectDfProps } from './dialogFn';
+import {
+  CHT_BAR_SET,
+  CHT_TREE_MAP
+} from "../../constants/ChartType";
+
+import useProperty from "../hooks/useProperty";
+
+import { crInputSelectDfProps } from "./dialogFn";
 
 const CHART_OPTIONS = [
-  { c: "TreeMap (60, 90)", v: "TREE_MAP"},
-  { c: "Bar (60, 90)", v: "BAR"}
+  { c: "Bar (60, 90): By Partners", v: CHT_BAR_SET},
+  { c: "TreeMap (60, 90): By Partners", v: CHT_TREE_MAP}
 ]
-, WORLD_CASE_CHART_OPTIONS = [
-  ...CHART_OPTIONS,
-  { c: "Spline", v: 'SPLINE' }
-]
+, WORLD_CASE_CHART_OPTIONS = CHART_OPTIONS
 , [
   DF_CHART,
   CHART_PLACEHOLDER
@@ -23,18 +29,20 @@ const CHART_OPTIONS = [
 const _isInputChart = (
   tp,
   aggr
-) => !(tp.v !== '0' && aggr.v === 'TOTAL');
+) => !(getV(tp) !== "0" && getV(aggr) === "TOTAL");
 
 const _crChartOptions = (
   tradePartner,
   tradeAggr
-) => tradePartner.v === "0" && tradeAggr.v === "TOTAL"
+) => getV(tradePartner) === "0" && getV(tradeAggr) === "TOTAL"
   ? WORLD_CASE_CHART_OPTIONS
   : CHART_OPTIONS
 
+/*
 const _isPeriod = (
   itemChart
-)  => !(itemChart && itemChart.v === 'SPLINE');
+)  => !(itemChart && itemChart.v === "SPLINE");
+*/
 
 const useInputChart = (
   getTradePartner,
@@ -54,7 +62,7 @@ const useInputChart = (
   /*eslint-disable react-hooks/exhaustive-deps */
   , _setChart = useCallback(itemChart => {
      setChart(itemChart)
-     setIsPeriod(() => _isPeriod(itemChart))
+     //setIsPeriod(() => _isPeriod(itemChart))
   }, [])
   // setChart
   /*eslint-enable react-hooks/exhaustive-deps */

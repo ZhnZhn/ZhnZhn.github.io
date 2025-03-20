@@ -4,30 +4,35 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _getPropertyFn = require("../../utils/getPropertyFn");
+var _ChartType = require("../../constants/ChartType");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _dialogFn = require("./dialogFn");
 const CHART_OPTIONS = [{
-    c: "TreeMap (60, 90)",
-    v: "TREE_MAP"
+    c: "Bar (60, 90): By Partners",
+    v: _ChartType.CHT_BAR_SET
   }, {
-    c: "Bar (60, 90)",
-    v: "BAR"
+    c: "TreeMap (60, 90): By Partners",
+    v: _ChartType.CHT_TREE_MAP
   }],
-  WORLD_CASE_CHART_OPTIONS = [...CHART_OPTIONS, {
-    c: "Spline",
-    v: 'SPLINE'
-  }],
+  WORLD_CASE_CHART_OPTIONS = CHART_OPTIONS,
   [DF_CHART, CHART_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)(CHART_OPTIONS);
-const _isInputChart = (tp, aggr) => !(tp.v !== '0' && aggr.v === 'TOTAL');
-const _crChartOptions = (tradePartner, tradeAggr) => tradePartner.v === "0" && tradeAggr.v === "TOTAL" ? WORLD_CASE_CHART_OPTIONS : CHART_OPTIONS;
-const _isPeriod = itemChart => !(itemChart && itemChart.v === 'SPLINE');
+const _isInputChart = (tp, aggr) => !((0, _getPropertyFn.getV)(tp) !== "0" && (0, _getPropertyFn.getV)(aggr) === "TOTAL");
+const _crChartOptions = (tradePartner, tradeAggr) => (0, _getPropertyFn.getV)(tradePartner) === "0" && (0, _getPropertyFn.getV)(tradeAggr) === "TOTAL" ? WORLD_CASE_CHART_OPTIONS : CHART_OPTIONS;
+
+/*
+const _isPeriod = (
+  itemChart
+)  => !(itemChart && itemChart.v === "SPLINE");
+*/
+
 const useInputChart = (getTradePartner, getTradeAggregaton) => {
   const [setChart, getChart] = (0, _useProperty.default)(DF_CHART, DF_CHART),
     [isPeriod, setIsPeriod] = (0, _uiApi.useState)(true)
     /*eslint-disable react-hooks/exhaustive-deps */,
     _setChart = (0, _uiApi.useCallback)(itemChart => {
       setChart(itemChart);
-      setIsPeriod(() => _isPeriod(itemChart));
+      //setIsPeriod(() => _isPeriod(itemChart))
     }, [])
     // setChart
     /*eslint-enable react-hooks/exhaustive-deps */,
@@ -51,6 +56,5 @@ const useInputChart = (getTradePartner, getTradeAggregaton) => {
   /*eslint-enable react-hooks/exhaustive-deps */
   return [CHART_PLACEHOLDER, isInputChart, isPeriod, toggleInputChart, _setChart, getChart, chartOptions];
 };
-var _default = useInputChart;
-exports.default = _default;
+var _default = exports.default = useInputChart;
 //# sourceMappingURL=useInputChart.js.map
