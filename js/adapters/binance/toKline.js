@@ -45,6 +45,7 @@ const toKline = (0, _fToKline.fToKline)({
   h: 2,
   l: 3,
   c: 4,
+  n: 8,
   crValue: _crValue,
   crVolume: _crValue,
   crAddConfig: option => {
