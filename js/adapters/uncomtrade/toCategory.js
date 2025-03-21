@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _fGetLazyValue = require("../../utils/fGetLazyValue");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _TreeMapFn = require("../TreeMapFn");
@@ -23,15 +24,13 @@ const _crConfig = (json, option, data, categories, itemValue) => {
   return config;
 };
 const URL_HS_CHAPTERS = './data/uncomtrade/hs-chapters.json';
-let _hmHs;
-const _fetchHs = () => _hmHs ? Promise.resolve(_hmHs) : fetch(URL_HS_CHAPTERS).then(res => {
+const _crAsyncHmHs = setHmHs => fetch(URL_HS_CHAPTERS).then(res => {
   if (!res.ok) {
     throw new Error("Network response was not OK");
   }
   return res.json();
-}).then(json => {
-  return _hmHs = (json || {}).hm;
-}).catch(() => void 0);
+}).then(json => setHmHs((json || {}).hm)).catch(() => void 0);
+const _getHmHs = (0, _fGetLazyValue.fGetLazyValue)(_crAsyncHmHs, true);
 const _crCategoriesAndAddColors = (data, total) => {
   (0, _compareByFn.sortDescCategory)(data);
   (0, _TreeMapFn.addColorsTo)({
@@ -60,7 +59,7 @@ const _crHsData = (json, hmHs) => {
   const categories = _crCategoriesAndAddColors(data, total);
   return [data, categories, total];
 };
-const _crAsyncData = json => _fetchHs().then(hmHs => _crHsData(json, hmHs));
+const _crAsyncData = json => _getHmHs().then(hmHs => _crHsData(json, hmHs));
 const _crDataPoint = (y, c) => ({
   y,
   c

@@ -1,4 +1,6 @@
+import { fGetLazyValue } from '../../utils/fGetLazyValue';
 import pipe from '../../utils/pipe';
+
 import {
   crBarOrColumnConfig,
   fAddCaption,
@@ -52,21 +54,17 @@ const _crConfig = (
 }
 
 const URL_HS_CHAPTERS = './data/uncomtrade/hs-chapters.json';
+const _crAsyncHmHs = (setHmHs) => fetch(URL_HS_CHAPTERS)
+  .then(res => {
+    if (!res.ok) {
+      throw new Error("Network response was not OK")
+    }
+    return res.json();
+  })
+  .then(json => setHmHs((json || {}).hm))
+  .catch(() => void 0);
 
-let _hmHs;
-const _fetchHs = () => _hmHs
- ? Promise.resolve(_hmHs)
- : fetch(URL_HS_CHAPTERS)
-     .then(res => {
-       if (!res.ok) {
-         throw new Error("Network response was not OK")
-       }
-       return res.json();
-     })
-     .then(json => {
-       return (_hmHs = (json || {}).hm);
-     })
-     .catch(() => void 0)
+const _getHmHs = fGetLazyValue(_crAsyncHmHs, true);
 
 const _crCategoriesAndAddColors = (
   data,
@@ -104,7 +102,7 @@ const _crHsData = (
 
 const _crAsyncData = (
   json
-) => _fetchHs()
+) => _getHmHs()
   .then(hmHs => _crHsData(json, hmHs));
 
 const _crDataPoint = (
