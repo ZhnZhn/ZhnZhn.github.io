@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTimeDate = exports.toTd = exports.toFloatOrEmpty = exports.setItemCaptionTo = exports.setItemCaptionCurrencyRateTo = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isUndef = exports.isTokenInStr = exports.isSeriesDataCase = exports.isPositiveNumber = exports.isNumberOrNull = exports.isNotEmptyArr = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getItemsValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCrLazyValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.domSanitize = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crRouter = exports.crGetRoute = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTimeDate = exports.toTd = exports.toFloatOrEmpty = exports.setItemCaptionTo = exports.setItemCaptionCurrencyRateTo = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isUndef = exports.isTokenInStr = exports.isSeriesDataCase = exports.isPositiveNumber = exports.isNumberOrNull = exports.isNotEmptyArr = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValueCaption = exports.getValue = exports.getObjectKeys = exports.getItemsValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getColorBlack = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.domSanitize = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crRouter = exports.crGetRoute = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _styleFn = require("../components/styleFn");
 exports.getColorBlack = _styleFn.getColorBlack;
 var _big = _interopRequireDefault(require("big.js"));
@@ -229,11 +229,6 @@ const crZhConfig = (_ref3, configOptions) => {
   };
 };
 exports.crZhConfig = crZhConfig;
-const fCrLazyValue = crValue => {
-  let value;
-  return () => value === void 0 ? value = crValue() : value;
-};
-exports.fCrLazyValue = fCrLazyValue;
 let _parser;
 const crXmlDocument = str => {
   if (!_parser) {

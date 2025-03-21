@@ -313,13 +313,6 @@ export const crZhConfig = ({
   dataSource
 })
 
-export const fCrLazyValue = crValue => {
-  let value;
-  return () => value === void 0
-    ? (value = crValue())
-    : value;
-}
-
 let _parser;
 export const crXmlDocument = str => {
   if (!_parser) {

@@ -18,7 +18,6 @@ import {
   valueMoving,
   crError,
   fCrValue,
-  fCrLazyValue,
   toTimeDate,
   getItemsValue
 } from '../AdapterFn';
@@ -322,18 +321,6 @@ describe('fCrValue', ()=>{
     expect(typeof _crEchoValue2).toBe("function")
     expect(_crEchoValue2(1.554)).toBe(1.554)
     expect(_crEchoValue2(1.555)).toBe(1.555)
-  })
-})
-
-describe("fCrLazyValue", ()=>{
-  const fn = fCrLazyValue;
-  test("should return function that get value created only once", () => {
-    const _crValue = () => ({ v: "value" })
-    , _getValue = fn(_crValue)
-    , _value = _getValue();
-    expect(_value).toEqual(_crValue())
-    expect(_getValue()).toBe(_value)
-    expect(_getValue()).toBe(_value)
   })
 })
 

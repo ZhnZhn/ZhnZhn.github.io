@@ -1,11 +1,9 @@
-import {
-  toTimeDate,
-  fCrLazyValue
-} from "../AdapterFn";
+import { fGetLazyValue } from "../../utils/fGetLazyValue"
+import { toTimeDate } from "../AdapterFn";
 
 import {
   crRankProps,
-  crStyleBold,  
+  crStyleBold,
   crNameProps,
   crNumberProps,
   crCaptionItemsProps,
@@ -70,7 +68,7 @@ const CHANGE_PERCENTAGE = "change_percentage"
   fn: toTimeDate
 });
 
-const _getTableHeaders = fCrLazyValue(() => {
+const _getTableHeaders = fGetLazyValue(() => {
   const headers = [
     crRankProps("Rank", "market_cap_rank"),
     crNameProps("Name"),

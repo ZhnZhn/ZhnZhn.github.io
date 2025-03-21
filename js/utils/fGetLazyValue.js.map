@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/fGetLazyValue.js"
+ ],
+ "file": "../../src/utils/fGetLazyValue.js",
+ "names": [
+  "fGetLazyValue",
+  "crValue",
+  "isPromisify",
+  "value",
+  "Promise",
+  "resolve",
+  "exports"
+ ],
+ "mappings": ";;;;AACO,MAAMA,aAAa,GAAGA,CAC3BC,OAAO,EACPC,WAAW,KACR;EACH,IAAIC,KAAK;EACT,OAAO,MAAMA,KAAK,KAAK,KAAK,CAAC,GACxBA,KAAK,GAAGF,OAAO,CAAC,CAAC,GAClBC,WAAW,GACXE,OAAO,CAACC,OAAO,CAACF,KAAK,CAAC,GACtBA,KAAK;AACX,CAAC;AAAAG,OAAA,CAAAN,aAAA,GAAAA,aAAA"
+}

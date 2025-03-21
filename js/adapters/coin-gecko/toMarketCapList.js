@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _fGetLazyValue = require("../../utils/fGetLazyValue");
 var _AdapterFn = require("../AdapterFn");
 var _toTableFn = require("../toTableFn");
 var _fnAdapter = require("./fnAdapter");
@@ -29,7 +30,7 @@ const CHANGE_PERCENTAGE = "change_percentage",
     isF: true,
     fn: _AdapterFn.toTimeDate
   });
-const _getTableHeaders = (0, _AdapterFn.fCrLazyValue)(() => {
+const _getTableHeaders = (0, _fGetLazyValue.fGetLazyValue)(() => {
   const headers = [(0, _toTableFn.crRankProps)("Rank", "market_cap_rank"), (0, _toTableFn.crNameProps)("Name"), {
     ...(0, _toTableFn.crNameProps)("Symbol", true),
     ...(0, _toTableFn.crStyleBold)({
