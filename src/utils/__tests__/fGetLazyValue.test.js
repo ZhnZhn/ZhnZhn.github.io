@@ -15,11 +15,31 @@ describe("fGetLazyValue", ()=>{
   })
 
   test("should promisify value n case of argument isPromosify", () => {
-    const _crValue = jest.fn(() => Promise.resolve({ v: "value" }))
-    , _getValue = fn(_crValue, true)
+    const _crValue = jest.fn((setValue) => Promise
+      .resolve(setValue({ v: "value" }))
+    )
+    , _getValue = fn(_crValue, true);
 
     expect(typeof _getValue().then).toBe("function")
     expect(typeof _getValue().then).toBe("function")
+    expect(typeof _getValue().then).toBe("function")
     expect(_crValue).toBeCalledTimes(1)
+  })
+
+  test("should try recreat value in case promisify set void 0", () => {
+    let i = 0;
+    const _crValue = jest.fn((setValue) => Promise
+      .resolve(setValue(i<2 ? (i++, void 0) : i))
+    )
+    , _getValue = fn(_crValue, true);
+
+    expect(typeof _getValue().then).toBe("function")
+    expect(typeof _getValue().then).toBe("function")
+    expect(typeof _getValue().then).toBe("function")
+
+    expect(typeof _getValue().then).toBe("function")    
+    expect(typeof _getValue().then).toBe("function")
+
+    expect(_crValue).toBeCalledTimes(3)
   })
 })
