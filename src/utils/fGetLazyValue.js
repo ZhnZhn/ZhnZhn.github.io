@@ -1,4 +1,3 @@
-import { bindTo } from './bindTo'
 
 const _fGetLazyValue = (
   crValue
@@ -9,13 +8,11 @@ const _fGetLazyValue = (
     : value;
 }
 
-const _fGetLazyPromisifyValue = crValue => {
+const _fGetLazyPromisifyValue = crPromiseValue => {
   let value;
-  return bindTo((setValue) => value === void 0
-    ? crValue(setValue)
-    : Promise.resolve(value),
-    _v => (value = _v)
-  );
+  return () => value === void 0
+    ? crPromiseValue().then(v => (value = v))
+    : Promise.resolve(value)
 }
 
 export const fGetLazyValue = (

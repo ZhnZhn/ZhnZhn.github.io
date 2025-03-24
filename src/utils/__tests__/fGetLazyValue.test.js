@@ -16,8 +16,8 @@ describe("fGetLazyValue", ()=>{
 
   test("should promisify value n case of argument isPromosify", async () => {
     const _value = { v: "value" }
-    , _crValue = jest.fn((setValue) => Promise
-      .resolve(setValue(_value))
+    , _crValue = jest.fn(() => Promise
+      .resolve(_value)
     )
     , _getValue = fn(_crValue, true);
 
@@ -32,8 +32,8 @@ describe("fGetLazyValue", ()=>{
 
   test("should try recreat value in case promisify set void 0", async () => {
     let i = 0;
-    const _crValue = jest.fn((setValue) => Promise
-      .resolve(setValue(i<2 ? (i++, void 0) : i))
+    const _crValue = jest.fn(() => Promise
+      .resolve(i<2 ? (i++, void 0) : i)
     )
     , _getValue = fn(_crValue, true);
 
@@ -47,7 +47,7 @@ describe("fGetLazyValue", ()=>{
     _result = await _getValue();
     expect(_result).toBe(2)
     _result = await _getValue();
-    expect(_result).toBe(2)            
+    expect(_result).toBe(2)
 
     expect(_crValue).toBeCalledTimes(3)
   })
