@@ -10,12 +10,11 @@ import {
 } from './compareByFn';
 
 import {
-  COLOR_PERIOD,
-  COLOR_BASE1,
-  COLOR_BASE2,
-  COLOR_BASE3,
-  crMonoColor
-} from '../charts/MonoColorFn';
+  COLOR_CATEGORY_LEVEL1,
+  COLOR_CATEGORY_LEVEL2,
+  COLOR_CATEGORY_LEVEL3
+} from '../constants/Color'
+
 import {
   CL_TREE_MAP_PERCENT_BLACK
 } from './CL';
@@ -58,36 +57,37 @@ const _findLevelIndex = (
   , _v1 = _onePercent * level1
   , _v2 = _onePercent * level2
   , [index1, sum1] = _findLevelBy(data, 0, 0, _v1, propName)
-  , [index2] = _findLevelBy(data, index1, sum1, _v2, propName);
+  , [index2, sum2] = _findLevelBy(data, index1, sum1, _v2, propName);
   return [
     index1,
-    index2
+    index2,
+    roundBy(sum1 / _onePercent, 1),
+    roundBy(sum2 / _onePercent, 1)
   ];
 };
+
+const _setColorLevelTo = (
+  point,
+  colorLevel,
+  level
+) => {
+  point.color = colorLevel
+  point._level = level
+}
 
 const _addColor = (
   data,
   levelIndex1,
   levelIndex2
 ) => {
-  const _numberOfPoints2 = levelIndex2 - levelIndex1
-  , _numberOfPoints3 = data.length - levelIndex2;
-  let deltaColor;
   data.forEach((point, pointIndex) => {
-     if (pointIndex < levelIndex1){
-       deltaColor = pointIndex * ( COLOR_PERIOD / levelIndex1 );
-       point.color = crMonoColor(COLOR_BASE1, deltaColor);
-       point._level = 1;
-     } else if ( pointIndex < levelIndex2 ) {
-       deltaColor = (pointIndex-levelIndex1) * ( COLOR_PERIOD / _numberOfPoints2 );
-       point.color = crMonoColor(COLOR_BASE2, deltaColor);
-       point._level = 2;
-     } else {
-       deltaColor = (pointIndex - levelIndex2) * ( COLOR_PERIOD / _numberOfPoints3 );
-       point.color = crMonoColor(COLOR_BASE3, deltaColor);
-       point._level = 3;
-     }
-   })
+    _setColorLevelTo(point, ...(pointIndex < levelIndex1
+      ? [COLOR_CATEGORY_LEVEL1, 1]
+      : pointIndex < levelIndex2
+      ? [COLOR_CATEGORY_LEVEL2, 2]
+      : [COLOR_CATEGORY_LEVEL3, 3]
+    ))
+  })
 };
 
 export const addColorsTo = ({
@@ -99,7 +99,9 @@ export const addColorsTo = ({
 }) => {
   const [
     leveIndex1,
-    levelIndex2
+    levelIndex2,
+    sumOfPercentLevel1,
+    sumOfPercentLevel2
   ] = _findLevelIndex(
     data,
     total,
@@ -108,6 +110,10 @@ export const addColorsTo = ({
     propName
   );
   _addColor(data, leveIndex1, levelIndex2)
+  return [
+    sumOfPercentLevel1,
+    sumOfPercentLevel2
+  ];
 }
 
 const _crValuePercentToken = (
@@ -157,6 +163,6 @@ export const addPercentAndColorToData = (
       )
     })
     sortDescByPnValue(data)
-    addColorsTo({ data, total })
+    return addColorsTo({ data, total });
   }
 }
