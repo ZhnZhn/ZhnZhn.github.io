@@ -18,11 +18,24 @@ import {
   getItemPeriod,
   crCategoryData,
   crCategoryTitle,
+  addSumOfPercentToSubtitle,
   crInfo,
   crZhConfig
 } from './fnAdapter';
 
-const _crTreeMapData = json => {
+const _addColorAndPercentLevelsTo = (
+  data,
+  total,
+  option
+) => addSumOfPercentToSubtitle(
+  option,
+  ...addPercentAndColorToData(data, total)
+);
+
+const _crTreeMapData = (
+  json,
+  option
+) => {
   const data = [];
   let total = 0;
   json.data.forEach(item => {
@@ -36,7 +49,12 @@ const _crTreeMapData = json => {
       })
     }
   })
-  addPercentAndColorToData(data, total)
+
+  _addColorAndPercentLevelsTo(
+    data,
+    total,
+    option
+  )
   return [data, total];
 }
 
@@ -61,8 +79,14 @@ const _crDataByCountry = (
     json,
     option,
     _crDataPoint
-  )
-  addPercentAndColorToData(data, totalOfWorld)
+  );
+
+  _addColorAndPercentLevelsTo(
+    data,
+    totalOfWorld,
+    option
+  );
+
   return [
     data,
     totalOfWorld
@@ -77,7 +101,7 @@ const toTreeMap = (
     data,
     itemValue
   ] = isAggregateByHs(option)
-    ? _crTreeMapData(json)
+    ? _crTreeMapData(json, option)
     : _crDataByCountry(json, option);
 
   return pipe(

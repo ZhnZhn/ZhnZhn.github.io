@@ -7,7 +7,8 @@ var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _TreeMapFn = require("../TreeMapFn");
 var _fnAdapter = require("./fnAdapter");
-const _crTreeMapData = json => {
+const _addColorAndPercentLevelsTo = (data, total, option) => (0, _fnAdapter.addSumOfPercentToSubtitle)(option, ...(0, _TreeMapFn.addPercentAndColorToData)(data, total));
+const _crTreeMapData = (json, option) => {
   const data = [];
   let total = 0;
   json.data.forEach(item => {
@@ -21,7 +22,7 @@ const _crTreeMapData = json => {
       });
     }
   });
-  (0, _TreeMapFn.addPercentAndColorToData)(data, total);
+  _addColorAndPercentLevelsTo(data, total, option);
   return [data, total];
 };
 const _crDataPoint = (value, label, item) => ({
@@ -31,11 +32,11 @@ const _crDataPoint = (value, label, item) => ({
 });
 const _crDataByCountry = (json, option) => {
   const [data, totalOfWorld] = (0, _fnAdapter.crCategoryData)(json, option, _crDataPoint);
-  (0, _TreeMapFn.addPercentAndColorToData)(data, totalOfWorld);
+  _addColorAndPercentLevelsTo(data, totalOfWorld, option);
   return [data, totalOfWorld];
 };
 const toTreeMap = (json, option) => {
-  const [data, itemValue] = (0, _fnAdapter.isAggregateByHs)(option) ? _crTreeMapData(json) : _crDataByCountry(json, option);
+  const [data, itemValue] = (0, _fnAdapter.isAggregateByHs)(option) ? _crTreeMapData(json, option) : _crDataByCountry(json, option);
   return (0, _pipe.default)((0, _configBuilderFn.crTreeMapConfig)(data), (0, _configBuilderFn.fAddCaption)((0, _fnAdapter.crCategoryTitle)(option), option.subtitle), (0, _configBuilderFn.fAdd)({
     info: (0, _fnAdapter.crInfo)(json, option),
     zhConfig: (0, _fnAdapter.crZhConfig)(option, {
