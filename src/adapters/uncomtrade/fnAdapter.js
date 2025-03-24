@@ -172,6 +172,14 @@ export const crCategoryTitle = ({
   title
 }) => title
 
+export const addSumOfPercentToSubtitle = (
+  option,
+  sumOfPercentLevel1,
+  sumOfPercentLevel2
+) => {
+  option.subtitle = (option.subtitle || '') + ` (${sumOfPercentLevel1}%, ${sumOfPercentLevel2}%)`
+}
+
 export const crChartId = ({
   value,
   rg=2,
@@ -197,7 +205,6 @@ export const crInfo = (
 export const crZhConfig = (
   option, {
    itemValue,
-   isLegend,
    isWi = true
   } = {}
 ) => {
@@ -208,7 +215,6 @@ export const crZhConfig = (
     itemCaption: option.oneC,
     itemValue: itemValue && formatNumber(itemValue),
     itemTime: option.time,
-    legend: isLegend ? [] : void 0,
     isWithoutIndicator: isWi,
     dataSource: option.dataSource
   };

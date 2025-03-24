@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdToUTC = exports.valueMoving = exports.sortDescByPnValue = exports.roundBy = exports.isCategoryByPartnerCase = exports.isAggregateByHs = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = void 0;
+exports.ymdToUTC = exports.valueMoving = exports.sortDescByPnValue = exports.roundBy = exports.isCategoryByPartnerCase = exports.isAggregateByHs = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = exports.addSumOfPercentToSubtitle = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isNumber = _AdapterFn.isNumber;
 exports.isPositiveNumber = _AdapterFn.isPositiveNumber;
@@ -96,6 +96,10 @@ const crCategoryTitle = _ref => {
   return title;
 };
 exports.crCategoryTitle = crCategoryTitle;
+const addSumOfPercentToSubtitle = (option, sumOfPercentLevel1, sumOfPercentLevel2) => {
+  option.subtitle = (option.subtitle || '') + ` (${sumOfPercentLevel1}%, ${sumOfPercentLevel2}%)`;
+};
+exports.addSumOfPercentToSubtitle = addSumOfPercentToSubtitle;
 const crChartId = _ref2 => {
   let {
     value,
@@ -117,7 +121,6 @@ exports.crInfo = crInfo;
 const crZhConfig = function (option, _temp) {
   let {
     itemValue,
-    isLegend,
     isWi = true
   } = _temp === void 0 ? {} : _temp;
   const _id = crChartId(option);
@@ -127,7 +130,6 @@ const crZhConfig = function (option, _temp) {
     itemCaption: option.oneC,
     itemValue: itemValue && (0, _formatNumber.default)(itemValue),
     itemTime: option.time,
-    legend: isLegend ? [] : void 0,
     isWithoutIndicator: isWi,
     dataSource: option.dataSource
   };

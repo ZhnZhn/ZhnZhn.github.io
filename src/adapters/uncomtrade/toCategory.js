@@ -18,6 +18,7 @@ import {
   getItemCmdCode,
   crCategoryData,
   crCategoryTitle,
+  addSumOfPercentToSubtitle,
   crInfo,
   crZhConfig
 } from './fnAdapter';
@@ -30,8 +31,7 @@ const _crConfig = (
   itemValue
 ) => {
   const title = crCategoryTitle(option);
-
-  const config = pipe(
+  return pipe(
     crBarOrColumnConfig('BAR', categories),
     fAddCaption(
       title,
@@ -50,34 +50,43 @@ const _crConfig = (
     }),
     toConfig
   );
-  return config;
 }
 
 const URL_HS_CHAPTERS = './data/uncomtrade/hs-chapters.json';
-const _crAsyncHmHs = (setHmHs) => fetch(URL_HS_CHAPTERS)
+const _crAsyncHmHs = () => fetch(URL_HS_CHAPTERS)
   .then(res => {
     if (!res.ok) {
       throw new Error("Network response was not OK")
     }
     return res.json();
   })
-  .then(json => setHmHs((json || {}).hm))
+  .then(json => (json || {}).hm)
   .catch(() => void 0);
 
 const _getHmHs = fGetLazyValue(_crAsyncHmHs, true);
 
-const _crCategoriesAndAddColors = (
+const _addLevelColorsTo = (
   data,
-  total
+  total,
+  option
 ) => {
   sortDescCategory(data)
-  addColorsTo({ data, total, propName: "y" })
-  return data.map(p => p.c);
-}
+  addSumOfPercentToSubtitle(
+    option,
+    ...addColorsTo({
+      data,
+      total,
+      propName: "y"
+    })
+  )
+};
+
+const _crCategoriesFrom = data => data.map(p => p.c)
 
 const _crHsData = (
+  hmHs,
   json,
-  hmHs
+  option
 ) => {
   const isHs = !!hmHs
   , data = []
@@ -96,14 +105,25 @@ const _crHsData = (
       })
     }
   })
-  const categories = _crCategoriesAndAddColors(data, total)
-  return [data, categories, total];
+
+  _addLevelColorsTo(
+    data,
+    total,
+    option
+  );
+
+  return [
+    data,
+    _crCategoriesFrom(data),
+    total
+  ];
 }
 
 const _crAsyncData = (
-  json
+  json,
+  option
 ) => _getHmHs()
-  .then(hmHs => _crHsData(json, hmHs));
+  .then(hmHs => _crHsData(hmHs, json, option));
 
 const _crDataPoint = (
   y,
@@ -122,15 +142,18 @@ const _toCategoryByCountry = (
     option,
     _crDataPoint
   )
-  , categories = _crCategoriesAndAddColors(
-      data,
-      totalOfWorld
-    );
+
+  _addLevelColorsTo(
+    data,
+    totalOfWorld,
+    option
+  );
+
   return _crConfig(
     json,
     option,
     data,
-    categories,
+    _crCategoriesFrom(data),
     totalOfWorld
   );
 };

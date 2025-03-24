@@ -11,7 +11,7 @@ var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
 const _crConfig = (json, option, data, categories, itemValue) => {
   const title = (0, _fnAdapter.crCategoryTitle)(option);
-  const config = (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)('BAR', categories), (0, _configBuilderFn.fAddCaption)(title, option.subtitle), (0, _configBuilderFn.fAdd)({
+  return (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)('BAR', categories), (0, _configBuilderFn.fAddCaption)(title, option.subtitle), (0, _configBuilderFn.fAdd)({
     info: (0, _fnAdapter.crInfo)(json, option),
     zhConfig: (0, _fnAdapter.crZhConfig)(option, {
       itemValue,
@@ -21,26 +21,25 @@ const _crConfig = (json, option, data, categories, itemValue) => {
     data: data,
     name: title
   }), _configBuilderFn.toConfig);
-  return config;
 };
 const URL_HS_CHAPTERS = './data/uncomtrade/hs-chapters.json';
-const _crAsyncHmHs = setHmHs => fetch(URL_HS_CHAPTERS).then(res => {
+const _crAsyncHmHs = () => fetch(URL_HS_CHAPTERS).then(res => {
   if (!res.ok) {
     throw new Error("Network response was not OK");
   }
   return res.json();
-}).then(json => setHmHs((json || {}).hm)).catch(() => void 0);
+}).then(json => (json || {}).hm).catch(() => void 0);
 const _getHmHs = (0, _fGetLazyValue.fGetLazyValue)(_crAsyncHmHs, true);
-const _crCategoriesAndAddColors = (data, total) => {
+const _addLevelColorsTo = (data, total, option) => {
   (0, _compareByFn.sortDescCategory)(data);
-  (0, _TreeMapFn.addColorsTo)({
+  (0, _fnAdapter.addSumOfPercentToSubtitle)(option, ...(0, _TreeMapFn.addColorsTo)({
     data,
     total,
     propName: "y"
-  });
-  return data.map(p => p.c);
+  }));
 };
-const _crHsData = (json, hmHs) => {
+const _crCategoriesFrom = data => data.map(p => p.c);
+const _crHsData = (hmHs, json, option) => {
   const isHs = !!hmHs,
     data = [];
   let total = 0;
@@ -56,18 +55,18 @@ const _crHsData = (json, hmHs) => {
       });
     }
   });
-  const categories = _crCategoriesAndAddColors(data, total);
-  return [data, categories, total];
+  _addLevelColorsTo(data, total, option);
+  return [data, _crCategoriesFrom(data), total];
 };
-const _crAsyncData = json => _getHmHs().then(hmHs => _crHsData(json, hmHs));
+const _crAsyncData = (json, option) => _getHmHs().then(hmHs => _crHsData(hmHs, json, option));
 const _crDataPoint = (y, c) => ({
   y,
   c
 });
 const _toCategoryByCountry = (json, option) => {
-  const [data, totalOfWorld] = (0, _fnAdapter.crCategoryData)(json, option, _crDataPoint),
-    categories = _crCategoriesAndAddColors(data, totalOfWorld);
-  return _crConfig(json, option, data, categories, totalOfWorld);
+  const [data, totalOfWorld] = (0, _fnAdapter.crCategoryData)(json, option, _crDataPoint);
+  _addLevelColorsTo(data, totalOfWorld, option);
+  return _crConfig(json, option, data, _crCategoriesFrom(data), totalOfWorld);
 };
 const toCategory = (json, option) => (0, _fnAdapter.isAggregateByHs)(option) ? _crAsyncData(json).then(_ref => {
   let [data, categories, total] = _ref;
