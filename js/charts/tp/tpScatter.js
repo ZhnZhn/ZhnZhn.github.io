@@ -2,8 +2,8 @@
 
 exports.__esModule = true;
 exports.scatterExValue = exports.scatterExDividend = void 0;
+var _Color = require("../../constants/Color");
 var _tpFn = require("./tpFn");
-var _Colors = require("./Colors");
 const _crExDividend = _ref => {
   let {
     date,
@@ -19,7 +19,7 @@ const _crExDividend = _ref => {
   return `${(0, _tpFn.crHeader)(date, id)}
   <div class="tp__body">
     ${(0, _tpFn.crRow)('Ex-Dividend', exValue, {
-    color: _Colors.EX_DIVIDEND_COLOR
+    color: _Color.COLOR_EX_DIVIDEND
   })}
     ${(0, _tpFn.crRow)('Close', price)}
   </div>`;

@@ -1,9 +1,12 @@
 import { render } from 'react-dom';
 
+
 import {
   crSparkLines,
   crSparkBars
 } from '../../components/factories/SparkFactory';
+
+import { COLOR_DATE } from '../../constants/Color';
 
 import {
   crHeader,
@@ -11,8 +14,6 @@ import {
   toNumberFormat,
   addHideHandler
 } from './tpFn';
-
-import { YEAR_COLOR } from './Colors';
 
 const SPARKLINES_SUFFIX_ID = 'sparklines'
 , SPARKLINES_BAR_SUFFIX_ID = 'sparklines_bar'
@@ -48,7 +49,7 @@ const _crTooltipSparkType4 = ({
   return `<div class="tp__body">
   <div class="tp__body__part1" style="width:${fullWidth}px;" >
     <div ${_style}>
-      ${crRow('Year', year, { color: YEAR_COLOR })}
+      ${crRow('Year', year, { color: COLOR_DATE })}
       ${crRow('Value', value)}
     </div>
     <div id="${id}_${SPARKLINES_SUFFIX_ID}" class="tp__body__sparklines">

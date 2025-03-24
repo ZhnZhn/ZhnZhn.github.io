@@ -1,10 +1,11 @@
 import {
+  COLOR_EX_DIVIDEND
+} from '../../constants/Color';
+
+import {
   crHeader,
   crRow,
 } from './tpFn';
-import {
-  EX_DIVIDEND_COLOR
-} from './Colors';
 
 const _crExDividend = ({
   date,
@@ -16,7 +17,7 @@ const _crExDividend = ({
   const { exValue, price } = point;
   return `${crHeader(date, id)}
   <div class="tp__body">
-    ${crRow('Ex-Dividend', exValue, { color: EX_DIVIDEND_COLOR })}
+    ${crRow('Ex-Dividend', exValue, { color: COLOR_EX_DIVIDEND })}
     ${crRow('Close', price)}
   </div>`;
 };

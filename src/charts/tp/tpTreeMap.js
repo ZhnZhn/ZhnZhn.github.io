@@ -1,9 +1,12 @@
 import {
+  COLOR_DATE
+} from '../../constants/Color';
+
+import {
   crHeader,
   crRow,
   toNumberFormatAll
 } from './tpFn';
-import { YEAR_COLOR } from './Colors';
 
 const _crTreeMap = ({
   id,
@@ -20,7 +23,7 @@ const _crTreeMap = ({
   return `${crHeader(title, id)}
   <div class="tp_body">
     ${crRow('', label)}
-    ${crRow('', _value, { color: YEAR_COLOR })}
+    ${crRow('', _value, { color: COLOR_DATE })}
   </div>
   `;
 }

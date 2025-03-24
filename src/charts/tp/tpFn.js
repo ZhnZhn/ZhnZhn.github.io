@@ -6,12 +6,14 @@ export {
   toTdmyIf
 } from '../ChartFn';
 
-import isSupportOptions from '../../utils/isSupportOptions';
-import { toNumberFormatAll } from '../ChartFn';
-
 import {
-  VALUE_COLOR
-} from './Colors';
+  COLOR_VALUE
+} from '../../constants/Color';
+
+import isSupportOptions from '../../utils/isSupportOptions';
+import { isFn } from '../../utils/isTypeFn';
+
+import { toNumberFormatAll } from '../ChartFn';
 
 import {
   CL_TP_HEADER,
@@ -21,17 +23,14 @@ import {
   CL_TP_TITLE
 } from '../CL';
 
-
 const VALUE_STYLE = 'padding-right:5px;'
 , STATUS_STYLE = 'padding-left:4px;'
-
-const _isFn = fn => typeof fn === 'function';
 
 const _fHideTooltip = (point={}, fn) => () => {
   if (point.series) {
      point.series.chart.zhTooltip.hide();
   }
-  if (_isFn(fn)) {
+  if (isFn(fn)) {
     fn(point)
   }
 };
@@ -56,7 +55,7 @@ const _crSpanStyle = (
 export const crSpan = (
   t,
   v='',
-  {color=VALUE_COLOR, status}={}
+  {color=COLOR_VALUE, status}={}
 ) => {
   const _vStyle = _crSpanStyle(color, VALUE_STYLE)
   , _t = t ? `${t}: `: ''
