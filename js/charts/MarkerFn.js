@@ -1,10 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crMarkerSplitRatio = exports.crMarkerExDividend = void 0;
-
+exports.crMarkerExDividend = void 0;
 var _Color = require("../constants/Color");
-
 const _crMarker = (color, formatterPointPropName) => ({
   y: 0,
   exValue: 0.5,
@@ -44,12 +42,6 @@ const _crMarker = (color, formatterPointPropName) => ({
     }
   }
 });
-
 const crMarkerExDividend = () => _crMarker(_Color.COLOR_EX_DIVIDEND, 'exValue');
-
 exports.crMarkerExDividend = crMarkerExDividend;
-
-const crMarkerSplitRatio = () => _crMarker(_Color.COLOR_SPLIT_RATIO, 'splitRatio');
-
-exports.crMarkerSplitRatio = crMarkerSplitRatio;
 //# sourceMappingURL=MarkerFn.js.map

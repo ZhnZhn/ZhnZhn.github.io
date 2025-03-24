@@ -4,8 +4,7 @@ import {
   COLOR_S_OPEN,
   COLOR_S_HIGH,
   COLOR_S_LOW,
-  COLOR_EX_DIVIDEND,
-  COLOR_SPLIT_RATIO
+  COLOR_EX_DIVIDEND
 } from '../constants/Color';
 
 import { findMinY } from '../math/seriaFn';
@@ -20,8 +19,7 @@ import {
 } from './ChartConfigFn';
 import {
   tooltipValueTdmyIf,
-  tooltipExDividend,
-  tooltipSplitRatio
+  tooltipExDividend
 } from './Tooltip';
 
 import {
@@ -53,11 +51,6 @@ const _crScatterSeria = (
   tooltipExDividend,
   data
 )
-, _crSplitRatioSeria = (data) => _crScatterSeria(
-  COLOR_SPLIT_RATIO,
-  tooltipSplitRatio,
-  data
-);
 
 const _factoryAddMini = (
   propName,
@@ -82,7 +75,6 @@ export const fAddMiniVolumes = (
   )
   return config;
 }
-
 
 const _fAddMiniNumberOfTrades = _factoryAddMini(
   'data',
@@ -112,11 +104,6 @@ const _factoryAddScatterBottom = (
 export const fAddDividend = _factoryAddScatterBottom(
   _crDividendSeria,
   'Dividend'
-)
-
-export const fAddSplitRatio = _factoryAddScatterBottom(
-  _crSplitRatioSeria,
-  'Split Ratio'
 )
 
 const _crSeriaOption = (

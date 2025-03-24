@@ -1,7 +1,6 @@
 import {
   COLOR_PLOT,
-  COLOR_EX_DIVIDEND,
-  COLOR_SPLIT_RATIO
+  COLOR_EX_DIVIDEND
 } from '../constants/Color';
 
 const _crMarker = (
@@ -47,8 +46,7 @@ const _crMarker = (
   }
 });
 
-export const crMarkerExDividend =
-  () => _crMarker(COLOR_EX_DIVIDEND, 'exValue')
-
-export const crMarkerSplitRatio =
-  () => _crMarker(COLOR_SPLIT_RATIO, 'splitRatio')
+export const crMarkerExDividend = () => _crMarker(
+  COLOR_EX_DIVIDEND,
+  'exValue'
+)

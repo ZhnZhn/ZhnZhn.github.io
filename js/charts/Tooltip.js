@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.tooltipValueTdmyIf = exports.tooltipValueDmy = exports.tooltipTreeMap = exports.tooltipSplitRatio = exports.tooltipSparkTreeMap = exports.tooltipSparkStackedArea = exports.tooltipExValue = exports.tooltipExDividend = exports.tooltipDonut = exports.tooltipCategorySimple = exports.tooltipCategory = exports.tooltipAth = void 0;
+exports.tooltipValueTdmyIf = exports.tooltipValueDmy = exports.tooltipTreeMap = exports.tooltipSparkTreeMap = exports.tooltipSparkStackedArea = exports.tooltipExValue = exports.tooltipExDividend = exports.tooltipDonut = exports.tooltipCategorySimple = exports.tooltipCategory = exports.tooltipAth = void 0;
 var _tpSpline = require("./tp/tpSpline");
 var _tpCategory = require("./tp/tpCategory");
 var _tpScatter = require("./tp/tpScatter");
@@ -59,9 +59,6 @@ const tooltipCategory = exports.tooltipCategory = _fFormatter({
 });
 const tooltipExDividend = exports.tooltipExDividend = _fFormatter({
   ..._tpScatter.scatterExDividend
-});
-const tooltipSplitRatio = exports.tooltipSplitRatio = _fFormatter({
-  ..._tpScatter.scatterSplitRatio
 });
 const tooltipExValue = exports.tooltipExValue = _fFormatter({
   ..._tpScatter.scatterExValue

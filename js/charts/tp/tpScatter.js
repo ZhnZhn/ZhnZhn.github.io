@@ -1,12 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.scatterSplitRatio = exports.scatterExValue = exports.scatterExDividend = void 0;
-
+exports.scatterExValue = exports.scatterExDividend = void 0;
 var _tpFn = require("./tpFn");
-
 var _Colors = require("./Colors");
-
 const _crExDividend = _ref => {
   let {
     date,
@@ -19,50 +16,32 @@ const _crExDividend = _ref => {
     exValue,
     price
   } = point;
-  return (0, _tpFn.crHeader)(date, id) + "\n  <div class=\"tp__body\">\n    " + (0, _tpFn.crRow)('Ex-Dividend', exValue, {
+  return `${(0, _tpFn.crHeader)(date, id)}
+  <div class="tp__body">
+    ${(0, _tpFn.crRow)('Ex-Dividend', exValue, {
     color: _Colors.EX_DIVIDEND_COLOR
-  }) + "\n    " + (0, _tpFn.crRow)('Close', price) + "\n  </div>";
+  })}
+    ${(0, _tpFn.crRow)('Close', price)}
+  </div>`;
 };
-
-const _crSplitRatio = _ref2 => {
+const _crExValue = _ref2 => {
   let {
     date,
     id,
-    valueText,
-    value,
     point
   } = _ref2;
   const {
-    splitRatio,
-    price
-  } = point;
-  return (0, _tpFn.crHeader)(date, id) + "\n  <div class=\"tp__body\">\n    " + (0, _tpFn.crRow)('Split Ratio', splitRatio, {
-    color: _Colors.SPLIT_RATIO_COLOR
-  }) + "\n    " + (0, _tpFn.crRow)('Close', price) + "\n  </div>";
-};
-
-const _crExValue = _ref3 => {
-  let {
-    date,
-    id,
-    point
-  } = _ref3;
-  const {
     exValue
   } = point;
-  return (0, _tpFn.crHeader)(date, id) + "\n  <div class=\"tp__body\">\n    " + (0, _tpFn.crRow)('Value', exValue) + "\n  </div>";
+  return `${(0, _tpFn.crHeader)(date, id)}
+  <div class="tp__body">
+    ${(0, _tpFn.crRow)('Value', exValue)}
+  </div>`;
 };
-
-const scatterExDividend = {
+const scatterExDividend = exports.scatterExDividend = {
   fnTemplate: _crExDividend
 };
-exports.scatterExDividend = scatterExDividend;
-const scatterSplitRatio = {
-  fnTemplate: _crSplitRatio
-};
-exports.scatterSplitRatio = scatterSplitRatio;
-const scatterExValue = {
+const scatterExValue = exports.scatterExValue = {
   fnTemplate: _crExValue
 };
-exports.scatterExValue = scatterExValue;
 //# sourceMappingURL=tpScatter.js.map

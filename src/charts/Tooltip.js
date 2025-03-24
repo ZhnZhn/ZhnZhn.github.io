@@ -8,7 +8,6 @@ import {
 } from './tp/tpCategory';
 import {
   scatterExDividend,
-  scatterSplitRatio,
   scatterExValue
 } from './tp/tpScatter';
 import {
@@ -81,7 +80,6 @@ export const tooltipCategorySimple = _fFormatter({...categorySimple})
 export const tooltipCategory = _fFormatter({...categoryRemove})
 
 export const tooltipExDividend = _fFormatter({...scatterExDividend})
-export const tooltipSplitRatio = _fFormatter({...scatterSplitRatio})
 export const tooltipExValue = _fFormatter({...scatterExValue})
 
 export const tooltipAth = _fFormatter({...stockAth})

@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.fAddSplitRatio = exports.fAddMiniVolumes = exports.fAddMiniVolume = exports.fAddMiniHL = exports.fAddMiniATH = exports.fAddDividend = exports.crStockSeriaConfig = exports.crStockConfig = exports._fSetStockSerias = void 0;
+exports.fAddMiniVolumes = exports.fAddMiniVolume = exports.fAddMiniHL = exports.fAddMiniATH = exports.fAddDividend = exports.crStockSeriaConfig = exports.crStockConfig = exports._fSetStockSerias = void 0;
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _Color = require("../constants/Color");
 var _seriaFn = require("../math/seriaFn");
@@ -17,8 +17,7 @@ const _crScatterSeria = (color, pointFormatter, data) => ({
     data,
     tooltip: (0, _Chart.fTooltip)(pointFormatter)
   }),
-  _crDividendSeria = data => _crScatterSeria(_Color.COLOR_EX_DIVIDEND, _Tooltip.tooltipExDividend, data),
-  _crSplitRatioSeria = data => _crScatterSeria(_Color.COLOR_SPLIT_RATIO, _Tooltip.tooltipSplitRatio, data);
+  _crDividendSeria = data => _crScatterSeria(_Color.COLOR_EX_DIVIDEND, _Tooltip.tooltipExDividend, data);
 const _factoryAddMini = (propName, crMiniConfig) => option => config => (0, _configBuilderFn._addMini)(option[propName], option, crMiniConfig, config);
 const fAddMiniVolume = exports.fAddMiniVolume = _factoryAddMini('data', _crMiniConfigFn.crMiniVolumeConfig);
 const fAddMiniVolumes = arrOption => config => {
@@ -31,7 +30,6 @@ const fAddMiniATH = exports.fAddMiniATH = _factoryAddMini('data', _crMiniConfigF
 const fAddMiniHL = exports.fAddMiniHL = _factoryAddMini('data', _crMiniConfigFn.crMiniHLConfig);
 const _factoryAddScatterBottom = (crSeria, seriaName) => (data, min, max) => config => (0, _configBuilderFn._fAddScatterBottom)(crSeria(data), seriaName, min, max)(config);
 const fAddDividend = exports.fAddDividend = _factoryAddScatterBottom(_crDividendSeria, 'Dividend');
-const fAddSplitRatio = exports.fAddSplitRatio = _factoryAddScatterBottom(_crSplitRatioSeria, 'Split Ratio');
 const _crSeriaOption = (color, lineWidth) => ({
   type: 'line',
   visible: false,
