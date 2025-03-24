@@ -7,6 +7,7 @@
 import {
   fAddCaption,
   fAdd,
+  fAddLegend,
   fAddSeriaBy,
   setDataSourceTo
 } from '../configBuilderFn';
@@ -134,6 +135,48 @@ describe('fAdd', ()=>{
        c: true,
        d: 10
      })
+  })
+})
+
+describe('fAddLegend', () => {
+  const fn = fAddLegend;
+  test('should add not empty array of custom chart legend to config', ()=>{
+    expect(fn(['item 1'])({})).toEqual({
+      zhConfig: {
+        legend: ['item 1']
+      }
+    })
+    expect(fn(['item 1'])({zhConfig: { id: 'id' }})).toEqual({
+      zhConfig: {
+        id: 'id',
+        legend: ['item 1']
+      }
+    })
+  })
+
+  test('should add empty array of custom chart legend to config in argument isAddEmpty', () => {
+    expect(fn([], true)({})).toEqual({
+      zhConfig: {
+        legend: []
+      }
+    })
+    expect(fn([], true)({zhConfig: { id: 'id' }})).toEqual({
+      zhConfig: {
+        id: 'id',
+        legend: []
+      }
+    })
+  })
+
+  test('should return same config in case argument legend is not array with items', ()=>{
+    expect(fn([])({})).toEqual({})
+    expect(fn({})({})).toEqual({})
+    expect(fn(null)({})).toEqual({})
+    expect(fn()({})).toEqual({})
+
+    expect(fn({}, true)({})).toEqual({})
+    expect(fn(null, true)({})).toEqual({})
+    expect(fn(void 0, true)({})).toEqual({})
   })
 })
 

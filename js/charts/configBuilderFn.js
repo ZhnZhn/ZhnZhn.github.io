@@ -50,27 +50,22 @@ const setDataSourceTo = (config, dataSource) => fAdd({
 })(config);
 exports.setDataSourceTo = setDataSourceTo;
 const fAddTooltip = tooltip => config => fAdd('tooltip', (0, _Chart.fTooltip)(tooltip))(config);
+
+//isAddEmpty: UN Comtrade toSeriesConfig case
 exports.fAddTooltip = fAddTooltip;
-const fAddLegend = legend => config => (0, _isTypeFn.isNotEmptyArr)(legend) ? fAdd('zhConfig', {
+const fAddLegend = (legend, isAddEmpty) => config => (0, _isTypeFn.isNotEmptyArr)(legend) || isAddEmpty && (0, _isTypeFn.isArr)(legend) ? fAdd('zhConfig', {
   legend
 })(config) : config;
 exports.fAddLegend = fAddLegend;
-const fAddSeries = function (series, isWithoutLegend) {
-  if (isWithoutLegend === void 0) {
-    isWithoutLegend = false;
+const fAddSeries = series => config => {
+  const _to = _isArr(config.series) ? config.series : config.series = [];
+  if (_isArr(series)) {
+    const _legend = (0, _seriaBuilderHelpers.addSeriesImpl)(_to, series);
+    fAddLegend(_legend)(config);
+  } else if ((0, _isTypeFn.isObj)(series)) {
+    _to[0] = series;
   }
-  return config => {
-    const _to = _isArr(config.series) ? config.series : config.series = [];
-    if (_isArr(series)) {
-      const _legend = (0, _seriaBuilderHelpers.addSeriesImpl)(_to, series);
-      if (!isWithoutLegend) {
-        fAddLegend(_legend)(config);
-      }
-    } else if ((0, _isTypeFn.isObj)(series)) {
-      _to[0] = series;
-    }
-    return config;
-  };
+  return config;
 };
 exports.fAddSeries = fAddSeries;
 const _fAddZhMiniConfig = miniConfig => config => {

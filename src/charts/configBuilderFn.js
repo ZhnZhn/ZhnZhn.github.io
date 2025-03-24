@@ -13,6 +13,7 @@ import {
   isNumber,
   isStr,
   isObj,
+  isArr,
   isNotEmptyArr
 } from '../utils/isTypeFn';
 
@@ -97,24 +98,23 @@ export const fAddTooltip = (
   tooltip
 ) => config => fAdd('tooltip', fTooltip(tooltip))(config)
 
+//isAddEmpty: UN Comtrade toSeriesConfig case
 export const fAddLegend = (
-  legend
-) => config => isNotEmptyArr(legend)
+  legend,
+  isAddEmpty
+) => config => isNotEmptyArr(legend) || (isAddEmpty && isArr(legend))
   ? fAdd('zhConfig', { legend })(config)
   : config;
 
 export const fAddSeries = (
-  series,
-  isWithoutLegend=false
+  series
 ) => config => {
   const _to =_isArr(config.series)
      ? config.series
      : config.series = [];
   if (_isArr(series)){
     const _legend = addSeriesImpl(_to, series);
-    if (!isWithoutLegend) {
-      fAddLegend(_legend)(config)
-    }
+    fAddLegend(_legend)(config)
   } else if (isObj(series)) {
     _to[0] = series
   }
