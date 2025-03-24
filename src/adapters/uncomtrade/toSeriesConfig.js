@@ -4,6 +4,7 @@ import {
   fAdd,
   fAddCaption,
   fAddTooltip,
+  fAddLegend,
   toConfig
 } from '../../charts/configBuilderFn';
 import { fTooltip } from '../../charts/Chart';
@@ -190,8 +191,9 @@ const _crSeriesConfig = (
     fAddTooltip(tooltipCategorySimple),
     fAdd({
       info: crInfo(json, option),
-      zhConfig: crZhConfig(option, {isLegend: true})
+      zhConfig: crZhConfig(option)
     }),
+    fAddLegend([], true),
     toConfig
   );
 }

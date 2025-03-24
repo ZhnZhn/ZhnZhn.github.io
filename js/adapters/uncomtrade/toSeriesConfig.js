@@ -132,10 +132,8 @@ const _crSeriesConfig = (json, option) => {
     yAxis: _conf.Y_AXIS
   }), (0, _configBuilderFn.fAddCaption)(title, subtitle), (0, _configBuilderFn.fAddTooltip)(_Tooltip.tooltipCategorySimple), (0, _configBuilderFn.fAdd)({
     info: (0, _fnAdapter.crInfo)(json, option),
-    zhConfig: (0, _fnAdapter.crZhConfig)(option, {
-      isLegend: true
-    })
-  }), _configBuilderFn.toConfig);
+    zhConfig: (0, _fnAdapter.crZhConfig)(option)
+  }), (0, _configBuilderFn.fAddLegend)([], true), _configBuilderFn.toConfig);
 };
 const _toMls = yyyymm => {
   const _str = '' + yyyymm,
