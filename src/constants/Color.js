@@ -14,6 +14,7 @@ export const COLOR_GREEN = "#80c040"
 export const COLOR_RED = P_RED
 export const COLOR_WHITE = "white"
 export const COLOR_GREY = '#607d8b'
+export const COLOR_VALUE = P_BLUE
 export const COLOR_DATE = P_DATE
 
 export const COLOR_CHART_PRINT = P_WHITE
@@ -55,11 +56,11 @@ export const COLOR_HIGH = P_HIGH
 export const COLOR_LOW = P_RED
 
 export const COLOR_EX_DIVIDEND = P_HIGH
-export const COLOR_SPLIT_RATIO = '#f7a35c'
+//export const COLOR_EX_DIVIDEND = '#90ed7d'
 
-export const COLOR_MONO_BASE1 = '#7cb5ec'
-export const COLOR_MONO_BASE2 = '#90ed7d'
-export const COLOR_MONO_BASE3 = P_SIREN
+export const COLOR_CATEGORY_LEVEL1 = '#7cb5ec'
+export const COLOR_CATEGORY_LEVEL2 = '#90ed7d'
+export const COLOR_CATEGORY_LEVEL3 = P_SIREN
 
 export const COLOR_MARKER_HOVER = P_YELLOW
 export const COLOR_CROSSHAIR = P_YELLOW

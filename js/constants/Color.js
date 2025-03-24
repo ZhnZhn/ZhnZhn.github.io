@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.COLOR_Y_TICK = exports.COLOR_Y_LINE = exports.COLOR_Y_LABEL = exports.COLOR_Y_GRID_LINE = exports.COLOR_X_TICK = exports.COLOR_X_LINE = exports.COLOR_X_LABEL = exports.COLOR_X_GRID_LINE = exports.COLOR_WHITE = exports.COLOR_TOOLTIP = exports.COLOR_TITLE_SHOW = exports.COLOR_TITLE_HIDE = exports.COLOR_S_STOCK_CLOSE = exports.COLOR_S_OPEN = exports.COLOR_S_LOW = exports.COLOR_S_HIGH = exports.COLOR_SPLIT_RATIO = exports.COLOR_RED = exports.COLOR_PLOT_PRINT = exports.COLOR_PLOT_G3 = exports.COLOR_PLOT_G2 = exports.COLOR_PLOT_G1 = exports.COLOR_PLOT = exports.COLOR_MONO_BASE3 = exports.COLOR_MONO_BASE2 = exports.COLOR_MONO_BASE1 = exports.COLOR_METRIC_TITLE = exports.COLOR_MARKER_HOVER_LINE = exports.COLOR_MARKER_HOVER_FILL = exports.COLOR_MARKER_HOVER = exports.COLOR_LOW = exports.COLOR_LINE_PRINT = exports.COLOR_LEGEND_ITEM_HOVER = exports.COLOR_LEGEND_ITEM_HIDDEN = exports.COLOR_LEGEND_ITEM = exports.COLOR_LABEL_LINK = exports.COLOR_HOVER = exports.COLOR_HIGH = exports.COLOR_HALO_BASE = exports.COLOR_GRID_LINE_PRINT = exports.COLOR_GREY = exports.COLOR_GREEN = exports.COLOR_EX_DIVIDEND = exports.COLOR_DATE = exports.COLOR_CROSSHAIR = exports.COLOR_COLUMN_MARKER_LINE = exports.COLOR_COLUMN_HOVER_LINE = exports.COLOR_CHART_TITLE = exports.COLOR_CHART_SUBTITLE = exports.COLOR_CHART_PRINT = exports.COLOR_CHART = exports.COLOR_BLUE = exports.COLOR_BG_TITLE = exports.COLOR_AREA_MARKER_LINE = exports.COLOR_AREA_HOVER_LINE = exports.COLOR_AREA_FILL_PRINT = void 0;
+exports.COLOR_Y_TICK = exports.COLOR_Y_LINE = exports.COLOR_Y_LABEL = exports.COLOR_Y_GRID_LINE = exports.COLOR_X_TICK = exports.COLOR_X_LINE = exports.COLOR_X_LABEL = exports.COLOR_X_GRID_LINE = exports.COLOR_WHITE = exports.COLOR_VALUE = exports.COLOR_TOOLTIP = exports.COLOR_TITLE_SHOW = exports.COLOR_TITLE_HIDE = exports.COLOR_S_STOCK_CLOSE = exports.COLOR_S_OPEN = exports.COLOR_S_LOW = exports.COLOR_S_HIGH = exports.COLOR_RED = exports.COLOR_PLOT_PRINT = exports.COLOR_PLOT_G3 = exports.COLOR_PLOT_G2 = exports.COLOR_PLOT_G1 = exports.COLOR_PLOT = exports.COLOR_METRIC_TITLE = exports.COLOR_MARKER_HOVER_LINE = exports.COLOR_MARKER_HOVER_FILL = exports.COLOR_MARKER_HOVER = exports.COLOR_LOW = exports.COLOR_LINE_PRINT = exports.COLOR_LEGEND_ITEM_HOVER = exports.COLOR_LEGEND_ITEM_HIDDEN = exports.COLOR_LEGEND_ITEM = exports.COLOR_LABEL_LINK = exports.COLOR_HOVER = exports.COLOR_HIGH = exports.COLOR_HALO_BASE = exports.COLOR_GRID_LINE_PRINT = exports.COLOR_GREY = exports.COLOR_GREEN = exports.COLOR_EX_DIVIDEND = exports.COLOR_DATE = exports.COLOR_CROSSHAIR = exports.COLOR_COLUMN_MARKER_LINE = exports.COLOR_COLUMN_HOVER_LINE = exports.COLOR_CHART_TITLE = exports.COLOR_CHART_SUBTITLE = exports.COLOR_CHART_PRINT = exports.COLOR_CHART = exports.COLOR_CATEGORY_LEVEL3 = exports.COLOR_CATEGORY_LEVEL2 = exports.COLOR_CATEGORY_LEVEL1 = exports.COLOR_BLUE = exports.COLOR_BG_TITLE = exports.COLOR_AREA_MARKER_LINE = exports.COLOR_AREA_HOVER_LINE = exports.COLOR_AREA_FILL_PRINT = void 0;
 const P_HIGH = '#4caf50',
   P_RED = '#f44336',
   P_BLUE = '#2f7ed8',
@@ -17,6 +17,7 @@ const COLOR_GREEN = exports.COLOR_GREEN = "#80c040";
 const COLOR_RED = exports.COLOR_RED = P_RED;
 const COLOR_WHITE = exports.COLOR_WHITE = "white";
 const COLOR_GREY = exports.COLOR_GREY = '#607d8b';
+const COLOR_VALUE = exports.COLOR_VALUE = P_BLUE;
 const COLOR_DATE = exports.COLOR_DATE = P_DATE;
 const COLOR_CHART_PRINT = exports.COLOR_CHART_PRINT = P_WHITE;
 const COLOR_PLOT_PRINT = exports.COLOR_PLOT_PRINT = P_WHITE;
@@ -50,10 +51,11 @@ const COLOR_TOOLTIP = exports.COLOR_TOOLTIP = 'rgba(0,0,0, 0.5)';
 const COLOR_HIGH = exports.COLOR_HIGH = P_HIGH;
 const COLOR_LOW = exports.COLOR_LOW = P_RED;
 const COLOR_EX_DIVIDEND = exports.COLOR_EX_DIVIDEND = P_HIGH;
-const COLOR_SPLIT_RATIO = exports.COLOR_SPLIT_RATIO = '#f7a35c';
-const COLOR_MONO_BASE1 = exports.COLOR_MONO_BASE1 = '#7cb5ec';
-const COLOR_MONO_BASE2 = exports.COLOR_MONO_BASE2 = '#90ed7d';
-const COLOR_MONO_BASE3 = exports.COLOR_MONO_BASE3 = P_SIREN;
+//export const COLOR_EX_DIVIDEND = '#90ed7d'
+
+const COLOR_CATEGORY_LEVEL1 = exports.COLOR_CATEGORY_LEVEL1 = '#7cb5ec';
+const COLOR_CATEGORY_LEVEL2 = exports.COLOR_CATEGORY_LEVEL2 = '#90ed7d';
+const COLOR_CATEGORY_LEVEL3 = exports.COLOR_CATEGORY_LEVEL3 = P_SIREN;
 const COLOR_MARKER_HOVER = exports.COLOR_MARKER_HOVER = P_YELLOW;
 const COLOR_CROSSHAIR = exports.COLOR_CROSSHAIR = P_YELLOW;
 const COLOR_HALO_BASE = exports.COLOR_HALO_BASE = P_YELLOW;
