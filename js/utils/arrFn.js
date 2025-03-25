@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.joinByUndescore = exports.joinByDot = exports.joinByComma = exports.joinByColon = exports.joinByBlank = exports.joinBy = exports.isInArrStr = exports.arrFactoryIsSameByProp = exports.arrFactoryFindIndexByProp = void 0;
+exports.joinByUndescore = exports.joinByNbsp = exports.joinByDot = exports.joinByComma = exports.joinByColon = exports.joinByBlank = exports.joinBy = exports.isInArrStr = exports.arrFactoryIsSameByProp = exports.arrFactoryFindIndexByProp = void 0;
 var _bindTo = require("./bindTo");
 const _isArr = Array.isArray,
   _fIsItem = (propName, propValue) => item => item[propName] === propValue,
@@ -20,6 +20,7 @@ const joinBy = function (delimeter) {
 };
 exports.joinBy = joinBy;
 const joinByBlank = exports.joinByBlank = (0, _bindTo.bindTo)(joinBy, " ");
+const joinByNbsp = exports.joinByNbsp = (0, _bindTo.bindTo)(joinBy, "\u00A0");
 const joinByDot = exports.joinByDot = (0, _bindTo.bindTo)(joinBy, ".");
 const joinByColon = exports.joinByColon = (0, _bindTo.bindTo)(joinBy, ": ");
 const joinByComma = exports.joinByComma = (0, _bindTo.bindTo)(joinBy, ", ");

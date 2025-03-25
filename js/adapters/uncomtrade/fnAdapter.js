@@ -97,7 +97,7 @@ const crCategoryTitle = _ref => {
 };
 exports.crCategoryTitle = crCategoryTitle;
 const addSumOfPercentToSubtitle = (option, sumOfPercentLevel1, sumOfPercentLevel2) => {
-  option.subtitle = (0, _arrFn.joinByBlank)(option.subtitle, `(${sumOfPercentLevel1}%, ${sumOfPercentLevel2}%)`);
+  option.subtitle = (0, _arrFn.joinByBlank)(option.subtitle, (0, _arrFn.joinByNbsp)(`(${sumOfPercentLevel1}%,`, `${sumOfPercentLevel2}%)`));
 };
 exports.addSumOfPercentToSubtitle = addSumOfPercentToSubtitle;
 const crChartId = _ref2 => {

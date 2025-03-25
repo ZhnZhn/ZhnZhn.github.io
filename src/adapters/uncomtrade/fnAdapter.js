@@ -12,7 +12,8 @@ import {
 
 import {
   joinByUndescore,
-  joinByBlank
+  joinByBlank,
+  joinByNbsp
 } from '../../utils/arrFn';
 
 import {
@@ -180,7 +181,10 @@ export const addSumOfPercentToSubtitle = (
 ) => {
   option.subtitle = joinByBlank(
     option.subtitle,
-    `(${sumOfPercentLevel1}%, ${sumOfPercentLevel2}%)`
+    joinByNbsp(
+      `(${sumOfPercentLevel1}%,`,
+      `${sumOfPercentLevel2}%)`
+    )
   )
 }
 

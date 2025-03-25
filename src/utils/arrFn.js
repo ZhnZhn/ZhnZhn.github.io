@@ -37,6 +37,7 @@ export const joinBy = (
   .join(delimeter)
 
 export const joinByBlank = bindTo(joinBy, " ")
+export const joinByNbsp = bindTo(joinBy, "\u00A0")
 export const joinByDot = bindTo(joinBy, ".")
 export const joinByColon = bindTo(joinBy, ": ")
 export const joinByComma = bindTo(joinBy, ", ")
