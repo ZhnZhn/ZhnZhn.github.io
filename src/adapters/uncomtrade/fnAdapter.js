@@ -11,7 +11,8 @@ import {
 } from '../../constants/ChartType';
 
 import {
-  joinByUndescore
+  joinByUndescore,
+  joinByBlank
 } from '../../utils/arrFn';
 
 import {
@@ -177,7 +178,10 @@ export const addSumOfPercentToSubtitle = (
   sumOfPercentLevel1,
   sumOfPercentLevel2
 ) => {
-  option.subtitle = (option.subtitle || '') + ` (${sumOfPercentLevel1}%, ${sumOfPercentLevel2}%)`
+  option.subtitle = joinByBlank(
+    option.subtitle,
+    `(${sumOfPercentLevel1}%, ${sumOfPercentLevel2}%)`
+  )
 }
 
 export const crChartId = ({
