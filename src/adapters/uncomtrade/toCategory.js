@@ -8,6 +8,8 @@ import {
   fAddSeriaBy,
   toConfig
 } from '../../charts/configBuilderFn';
+
+import { crCategories } from '../CategoryFn';
 import { addColorsTo } from '../TreeMapFn';
 import { sortDescCategory } from '../compareByFn';
 
@@ -23,7 +25,7 @@ import {
   crZhConfig
 } from './fnAdapter';
 
-const _crConfig = (
+const _crCategoryConfig = (
   json,
   option,
   data,
@@ -81,8 +83,6 @@ const _addLevelColorsTo = (
   )
 };
 
-const _crCategoriesFrom = data => data.map(p => p.c)
-
 const _crHsData = (
   hmHs,
   json,
@@ -114,16 +114,21 @@ const _crHsData = (
 
   return [
     data,
-    _crCategoriesFrom(data),
+    crCategories(data),
     total
   ];
 }
 
-const _crAsyncData = (
+const _toCategoryByHs = (
   json,
   option
 ) => _getHmHs()
-  .then(hmHs => _crHsData(hmHs, json, option));
+  .then(hmHs => _crHsData(hmHs, json, option))
+  .then(dataConfigTuple => _crCategoryConfig(
+    json,
+    option,
+    ...dataConfigTuple
+  ));
 
 const _crDataPoint = (
   y,
@@ -149,11 +154,11 @@ const _toCategoryByCountry = (
     option
   );
 
-  return _crConfig(
+  return _crCategoryConfig(
     json,
     option,
     data,
-    _crCategoriesFrom(data),
+    crCategories(data),
     totalOfWorld
   );
 };
@@ -161,11 +166,8 @@ const _toCategoryByCountry = (
 const toCategory = (
   json,
   option
-) => isAggregateByHs(option)
-  ? _crAsyncData(json)
-      .then(([data, categories, total]) =>
-        _crConfig(json, option, data, categories, total)
-      )
-  : _toCategoryByCountry(json, option);
+) => (isAggregateByHs(option)
+  ? _toCategoryByHs
+  : _toCategoryByCountry)(json, option);
 
 export default toCategory

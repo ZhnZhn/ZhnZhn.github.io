@@ -6,10 +6,11 @@ exports.default = void 0;
 var _fGetLazyValue = require("../../utils/fGetLazyValue");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
+var _CategoryFn = require("../CategoryFn");
 var _TreeMapFn = require("../TreeMapFn");
 var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
-const _crConfig = (json, option, data, categories, itemValue) => {
+const _crCategoryConfig = (json, option, data, categories, itemValue) => {
   const title = (0, _fnAdapter.crCategoryTitle)(option);
   return (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)('BAR', categories), (0, _configBuilderFn.fAddCaption)(title, option.subtitle), (0, _configBuilderFn.fAdd)({
     info: (0, _fnAdapter.crInfo)(json, option),
@@ -38,7 +39,6 @@ const _addLevelColorsTo = (data, total, option) => {
     propName: "y"
   }));
 };
-const _crCategoriesFrom = data => data.map(p => p.c);
 const _crHsData = (hmHs, json, option) => {
   const isHs = !!hmHs,
     data = [];
@@ -56,9 +56,9 @@ const _crHsData = (hmHs, json, option) => {
     }
   });
   _addLevelColorsTo(data, total, option);
-  return [data, _crCategoriesFrom(data), total];
+  return [data, (0, _CategoryFn.crCategories)(data), total];
 };
-const _crAsyncData = (json, option) => _getHmHs().then(hmHs => _crHsData(hmHs, json, option));
+const _toCategoryByHs = (json, option) => _getHmHs().then(hmHs => _crHsData(hmHs, json, option)).then(dataConfigTuple => _crCategoryConfig(json, option, ...dataConfigTuple));
 const _crDataPoint = (y, c) => ({
   y,
   c
@@ -66,11 +66,8 @@ const _crDataPoint = (y, c) => ({
 const _toCategoryByCountry = (json, option) => {
   const [data, totalOfWorld] = (0, _fnAdapter.crCategoryData)(json, option, _crDataPoint);
   _addLevelColorsTo(data, totalOfWorld, option);
-  return _crConfig(json, option, data, _crCategoriesFrom(data), totalOfWorld);
+  return _crCategoryConfig(json, option, data, (0, _CategoryFn.crCategories)(data), totalOfWorld);
 };
-const toCategory = (json, option) => (0, _fnAdapter.isAggregateByHs)(option) ? _crAsyncData(json).then(_ref => {
-  let [data, categories, total] = _ref;
-  return _crConfig(json, option, data, categories, total);
-}) : _toCategoryByCountry(json, option);
+const toCategory = (json, option) => ((0, _fnAdapter.isAggregateByHs)(option) ? _toCategoryByHs : _toCategoryByCountry)(json, option);
 var _default = exports.default = toCategory;
 //# sourceMappingURL=toCategory.js.map
