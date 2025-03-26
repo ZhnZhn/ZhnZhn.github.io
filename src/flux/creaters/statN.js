@@ -1,10 +1,10 @@
+import { getObjectKeys } from '../../utils/isTypeFn';
+
 import {
   crCaptions,
   crItemKey,
   crRoundTo
 } from './createrFns';
-
-const _getObjectKeys = Object.keys;
 
 const _toIds = (
   { dfId },
@@ -13,7 +13,7 @@ const _toIds = (
   const _arr = [dfId];
   items.forEach(({ slice, value }={}) => {
     if (slice) {
-      _arr.push(slice[_getObjectKeys(slice)[0]])
+      _arr.push(slice[getObjectKeys(slice)[0]])
     } else if (value) {
       //Eurostat case
       _arr.push(value)

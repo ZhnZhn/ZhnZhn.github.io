@@ -2,8 +2,8 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _createrFns = require("./createrFns");
-const _getObjectKeys = Object.keys;
 const _toIds = (_ref, items) => {
   let {
     dfId
@@ -15,7 +15,7 @@ const _toIds = (_ref, items) => {
       value
     } = _temp === void 0 ? {} : _temp;
     if (slice) {
-      _arr.push(slice[_getObjectKeys(slice)[0]]);
+      _arr.push(slice[(0, _isTypeFn.getObjectKeys)(slice)[0]]);
     } else if (value) {
       //Eurostat case
       _arr.push(value);
@@ -73,6 +73,5 @@ const createLoadOptions = (props, options) => {
     selectOptions
   };
 };
-var _default = createLoadOptions;
-exports.default = _default;
+var _default = exports.default = createLoadOptions;
 //# sourceMappingURL=statN.js.map
