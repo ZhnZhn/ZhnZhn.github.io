@@ -1,3 +1,4 @@
+import { getObjectKeys } from '../../utils/isTypeFn';
 import { roundBy } from '../AdapterFn';
 
 import {
@@ -12,7 +13,6 @@ import {
   sortDescByPnValue
 } from './fnAdapter';
 
-const _getObjectKeys = Object.keys;
 const _crHm = () => Object.create(null);
 
 const DF_PN_COUNTRY = 'partnerCode';
@@ -20,7 +20,7 @@ const DF_PN_VALUE = 'primaryValue';
 
 const _toSortedArr = (
   obj
-) => _getObjectKeys(obj)
+) => getObjectKeys(obj)
   .map(propName => obj[propName])
   .sort();
 
@@ -97,7 +97,7 @@ export const toSeriaNames = (
   hm,
   compareBy
 ) => sortDescByPnValue(
-  _getObjectKeys(hm)
+  getObjectKeys(hm)
     .map(propName => ({
       value: _getRecentValueForSort(hm[propName]),
       name: propName

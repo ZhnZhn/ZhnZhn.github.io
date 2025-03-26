@@ -2,14 +2,14 @@
 
 exports.__esModule = true;
 exports.toSeriaNames = exports.toHmCategories = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 var _conf = require("./conf");
 var _fnAdapter = require("./fnAdapter");
-const _getObjectKeys = Object.keys;
 const _crHm = () => Object.create(null);
 const DF_PN_COUNTRY = 'partnerCode';
 const DF_PN_VALUE = 'primaryValue';
-const _toSortedArr = obj => _getObjectKeys(obj).map(propName => obj[propName]).sort();
+const _toSortedArr = obj => (0, _isTypeFn.getObjectKeys)(obj).map(propName => obj[propName]).sort();
 const _crPoint = (y, forSort) => ({
   y,
   forSort: forSort !== void 0 ? forSort : y
@@ -50,7 +50,7 @@ const _getRecentValueForSort = points => {
   const len = points && points.length;
   return len && len > 0 ? points[len - 1].forSort : void 0;
 };
-const toSeriaNames = (hm, compareBy) => (0, _fnAdapter.sortDescByPnValue)(_getObjectKeys(hm).map(propName => ({
+const toSeriaNames = (hm, compareBy) => (0, _fnAdapter.sortDescByPnValue)((0, _isTypeFn.getObjectKeys)(hm).map(propName => ({
   value: _getRecentValueForSort(hm[propName]),
   name: propName
 })));

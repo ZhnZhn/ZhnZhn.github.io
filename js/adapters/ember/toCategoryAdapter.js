@@ -3,12 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"));
 var _fnAdapter = require("./fnAdapter");
-const _getObjectKeys = Object.keys,
-  FN_IDENTITY = value => value,
+const FN_IDENTITY = value => value,
   _fCrDataPoint = (transformValue, getCategory) => (value, item) => (0, _CategoryFn.crCategoryPoint)(transformValue(value), getCategory(item)),
   _crDataImpl = (items, getValue, getCategory, transformValue, isValue) => (0, _fnAdapter.crDataImpl)(items, getValue, _fCrDataPoint(transformValue, getCategory), isValue),
   _crTotalData = (json, getCategory, pnMetric) => {
@@ -19,7 +19,7 @@ const _getObjectKeys = Object.keys,
       }
       return _hm;
     }, json);
-    return _crDataImpl(_getObjectKeys(hm), itemKey => hm[itemKey], FN_IDENTITY, value => (0, _fnAdapter.roundBy)(value, 2));
+    return _crDataImpl((0, _isTypeFn.getObjectKeys)(hm), itemKey => hm[itemKey], FN_IDENTITY, value => (0, _fnAdapter.roundBy)(value, 2));
   },
   _crSourceData = (json, getCategory, pnMetric) => _crDataImpl(json, item => item[pnMetric], getCategory, FN_IDENTITY, item => !!getCategory(item)),
   _crData = (json, options) => {

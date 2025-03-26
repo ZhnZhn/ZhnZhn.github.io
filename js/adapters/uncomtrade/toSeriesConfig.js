@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _Chart = require("../../charts/Chart");
@@ -15,7 +16,6 @@ var _fnLegend = require("./fnLegend");
 var _fnAdapter = require("./fnAdapter");
 var _conf = require("./conf");
 const _assign = Object.assign;
-const _getObjectKeys = Object.keys;
 const _crMarker = color => ({
   fillColor: color,
   lineColor: color,
@@ -74,7 +74,7 @@ const _addSeriesFromHmTo = _ref2 => {
 };
 const _compareByPeriod = (a, b) => (a || {}).period - (b || {}).period;
 const _crHmNames = (hmData, hmTradePartners) => {
-  return _getObjectKeys(hmData).reduce((_hm, tpKey) => {
+  return (0, _isTypeFn.getObjectKeys)(hmData).reduce((_hm, tpKey) => {
     _hm[hmTradePartners[tpKey] || tpKey] = hmData[tpKey];
     return _hm;
   }, (0, _fnAdapter.crEmptyHmObject)());

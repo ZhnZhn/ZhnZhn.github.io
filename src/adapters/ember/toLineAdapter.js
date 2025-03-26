@@ -1,3 +1,5 @@
+import { getObjectKeys } from '../../utils/isTypeFn';
+
 import { crAdapterType1 } from '../crAdapterType1';
 import { compareByDate } from '../compareByFn';
 
@@ -12,8 +14,7 @@ import {
   crDataImpl
 } from './fnAdapter';
 
-const _getObjectKeys = Object.keys
-, _fCrDataPoint = (
+const _fCrDataPoint = (
   getDate
 ) => (value, item) => [
   ymdToUTC(getDate(item)),
@@ -43,7 +44,7 @@ const _getObjectKeys = Object.keys
     return hm;
   }, json);
   return _crDataImpl(
-    _getObjectKeys(_hm),
+    getObjectKeys(_hm),
     dateKey => _hm[dateKey],
     dateKey => dateKey
   );

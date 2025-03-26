@@ -1,3 +1,5 @@
+import { getObjectKeys } from '../../utils/isTypeFn';
+
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
 import crAdapterCategory from '../crAdapterCategory';
@@ -13,8 +15,7 @@ import {
   crDataImpl
 } from './fnAdapter';
 
-const _getObjectKeys = Object.keys
-, FN_IDENTITY = value => value
+const FN_IDENTITY = value => value
 , _fCrDataPoint = (
   transformValue,
   getCategory
@@ -50,7 +51,7 @@ const _getObjectKeys = Object.keys
     return _hm;
   }, json);
   return _crDataImpl(
-    _getObjectKeys(hm),
+    getObjectKeys(hm),
     itemKey => hm[itemKey],
     FN_IDENTITY,
     value => roundBy(value, 2)

@@ -2,11 +2,11 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _crAdapterType = require("../crAdapterType1");
 var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
-const _getObjectKeys = Object.keys,
-  _fCrDataPoint = getDate => (value, item) => [(0, _fnAdapter.ymdToUTC)(getDate(item)), value],
+const _fCrDataPoint = getDate => (value, item) => [(0, _fnAdapter.ymdToUTC)(getDate(item)), value],
   _crDataImpl = (items, getValue, getDate, isValue) => (0, _fnAdapter.crDataImpl)(items, getValue, _fCrDataPoint(getDate), isValue),
   _crTotalData = (json, metric, pnDate) => {
     const _hm = (0, _fnAdapter.reduceToHmBy)((hm, item) => {
@@ -16,7 +16,7 @@ const _getObjectKeys = Object.keys,
       }
       return hm;
     }, json);
-    return _crDataImpl(_getObjectKeys(_hm), dateKey => _hm[dateKey], dateKey => dateKey);
+    return _crDataImpl((0, _isTypeFn.getObjectKeys)(_hm), dateKey => _hm[dateKey], dateKey => dateKey);
   },
   _crSourceData = (json, metric, pnDate, source, options) => _crDataImpl(json, item => item[metric], item => item[pnDate], (0, _fnAdapter.isEuRoute)(options) ? void 0 : item => item.variable === source);
 const crData = (json, options) => {

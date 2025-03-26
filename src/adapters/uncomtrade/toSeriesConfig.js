@@ -1,4 +1,6 @@
+import { getObjectKeys } from '../../utils/isTypeFn';
 import pipe from '../../utils/pipe';
+
 import {
   crAreaConfig,
   fAdd,
@@ -49,7 +51,6 @@ import {
 } from './conf';
 
 const _assign = Object.assign;
-const _getObjectKeys = Object.keys;
 
 const _crMarker = color => ({
   fillColor: color,
@@ -119,7 +120,7 @@ const _crHmNames = (
   hmData,
   hmTradePartners
 ) => {
-  return _getObjectKeys(hmData)
+  return getObjectKeys(hmData)
    .reduce((_hm, tpKey) => {
       _hm[hmTradePartners[tpKey] || tpKey] = hmData[tpKey]
       return _hm;
