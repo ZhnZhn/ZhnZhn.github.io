@@ -1,15 +1,14 @@
-const _getObjectKeys = Object.keys;
+import { getObjectKeys } from '../../utils/isTypeFn';
 
 const forEachInstance = (
   hmInstances,
   onInstance
-) => _getObjectKeys(hmInstances)
+) => getObjectKeys(hmInstances)
   .reduce((numberOfInstance, propName) => {
      const _refInstance = hmInstances[propName];
      return _refInstance
        ? (onInstance(_refInstance), ++numberOfInstance)
        : numberOfInstance;
   }, 0);
-
 
 export default forEachInstance

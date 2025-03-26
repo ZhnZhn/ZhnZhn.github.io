@@ -2,8 +2,8 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-const _getObjectKeys = Object.keys;
-const forEachInstance = (hmInstances, onInstance) => _getObjectKeys(hmInstances).reduce((numberOfInstance, propName) => {
+var _isTypeFn = require("../../utils/isTypeFn");
+const forEachInstance = (hmInstances, onInstance) => (0, _isTypeFn.getObjectKeys)(hmInstances).reduce((numberOfInstance, propName) => {
   const _refInstance = hmInstances[propName];
   return _refInstance ? (onInstance(_refInstance), ++numberOfInstance) : numberOfInstance;
 }, 0);
