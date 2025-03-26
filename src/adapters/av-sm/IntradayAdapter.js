@@ -1,3 +1,4 @@
+import { getObjectKeys } from '../../utils/isTypeFn';
 import pipe from '../../utils/pipe';
 
 import {
@@ -16,12 +17,9 @@ import { crVolumePoint } from '../pointFn';
 import { crMarkerColor } from '../IntradayFns';
 import {
   isTokenInStr,
-  //crDfItemKey,
   ymdhmsToUTC,
   crIntradayConfigOption
 } from './fnAdapter';
-
-const _getObjectKeys = Object.keys;
 
 const _crSeriaOptions = ({
   isFilterZero,
@@ -89,9 +87,7 @@ const _crSeriaData = (
   option
 ) => {
   const _objValues = _getObjValues(json, option)
-  , _dateKeys = _objValues
-      ? _getObjectKeys(_objValues).sort()
-      : []
+  , _dateKeys = getObjectKeys(_objValues).sort()
   , dC = []
   , dH = []
   , dL = []

@@ -1,4 +1,4 @@
-import { isObj } from '../../../utils/isTypeFn';
+import { getObjectKeys } from '../../../utils/isTypeFn';
 import { safeLoopOfArray } from '../../../utils/arrFn';
 
 import crAddProps from './crAddProps';
@@ -63,7 +63,7 @@ const _checkItemDfIdCase = item => {
   idTuple,
   idCase
 ) => {
-  safeLoopOfArray(isObj(idTuple) && _getObjectKeys(idTuple), tuplesKey => {
+  safeLoopOfArray(getObjectKeys(idTuple), tuplesKey => {
     safeLoopOfArray(idTuple[tuplesKey], tuple => _setItemFromTupleTo(
       items,
       tuplesKey,

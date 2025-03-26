@@ -48,7 +48,7 @@ const _checkItemDfIdCase = item => {
     dfId: tuple[2]
   }),
   _checkItemsIdTupleCase = (items, idTuple, idCase) => {
-    (0, _arrFn.safeLoopOfArray)((0, _isTypeFn.isObj)(idTuple) && _getObjectKeys(idTuple), tuplesKey => {
+    (0, _arrFn.safeLoopOfArray)((0, _isTypeFn.getObjectKeys)(idTuple), tuplesKey => {
       (0, _arrFn.safeLoopOfArray)(idTuple[tuplesKey], tuple => _setItemFromTupleTo(items, tuplesKey, tuple, _crDialogItemDf));
     });
   };

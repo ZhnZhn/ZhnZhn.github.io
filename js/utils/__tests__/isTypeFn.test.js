@@ -136,4 +136,23 @@ describe('isNotEmptyArr', () => {
     expect(fn(null)).toBe(false);
   });
 });
+describe('getObjectKeys', () => {
+  const fn = _isTypeFn.getObjectKeys;
+  test('should return array with argument object keys', () => {
+    expect(fn({
+      a: 1,
+      b: 2
+    })).toEqual(['a', 'b']);
+    expect(fn({})).toEqual([]);
+  });
+  test('should return empty array in edge cases', () => {
+    expect(fn({})).toEqual([]);
+    expect(fn(null)).toEqual([]);
+    expect(fn([1, 2, 3])).toEqual([]);
+    expect(fn([])).toEqual([]);
+    expect(fn(void 0)).toEqual([]);
+    expect(fn('str')).toEqual([]);
+    expect(fn('')).toEqual([]);
+  });
+});
 //# sourceMappingURL=isTypeFn.test.js.map

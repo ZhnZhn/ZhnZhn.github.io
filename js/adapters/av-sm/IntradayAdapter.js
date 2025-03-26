@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _stockBuilderFn = require("../../charts/stockBuilderFn");
 var _configBuilderFn = require("../../charts/configBuilderFn");
@@ -10,7 +11,6 @@ var _MarkerFn = require("../../charts/MarkerFn");
 var _pointFn = require("../pointFn");
 var _IntradayFns = require("../IntradayFns");
 var _fnAdapter = require("./fnAdapter");
-const _getObjectKeys = Object.keys;
 const _crSeriaOptions = _ref => {
   let {
     isFilterZero,
@@ -53,7 +53,7 @@ const _getJsonDataPropName = _ref2 => {
 const _getObjValues = (json, option) => json[_getJsonDataPropName(option)];
 const _crSeriaData = (json, option) => {
   const _objValues = _getObjValues(json, option),
-    _dateKeys = _objValues ? _getObjectKeys(_objValues).sort() : [],
+    _dateKeys = (0, _isTypeFn.getObjectKeys)(_objValues).sort(),
     dC = [],
     dH = [],
     dL = [],
@@ -135,7 +135,8 @@ const _crSeriaData = (json, option) => {
   };
 };
 const IntradayAdapter = {
-  crKey: _fnAdapter.crDfItemKey,
+  //crKey: crDfItemKey,
+
   toConfig(json, option) {
     const {
         _itemKey,

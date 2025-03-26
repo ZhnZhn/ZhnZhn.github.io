@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isUndef = exports.isTypeNumber = exports.isStrOrNumber = exports.isStr = exports.isPositiveNumber = exports.isObj = exports.isNumber = exports.isNotEmptyArr = exports.isNaN = exports.isInt = exports.isFn = exports.isBool = exports.isArr = void 0;
+exports.isUndef = exports.isTypeNumber = exports.isStrOrNumber = exports.isStr = exports.isPositiveNumber = exports.isObj = exports.isNumber = exports.isNotEmptyArr = exports.isNaN = exports.isInt = exports.isFn = exports.isBool = exports.isArr = exports.getObjectKeys = void 0;
 const _fIsTypeof = strType => v => typeof v === strType;
 const isTypeNumber = exports.isTypeNumber = _fIsTypeof("number");
 const isNumber = v => isTypeNumber(v) && v - v === 0;
@@ -21,4 +21,7 @@ exports.isObj = isObj;
 const isArr = exports.isArr = Array.isArray;
 const isNotEmptyArr = arr => isArr(arr) && arr.length > 0;
 exports.isNotEmptyArr = isNotEmptyArr;
+const _getObjectKeys = Object.keys;
+const getObjectKeys = value => isObj(value) && !isArr(value) ? _getObjectKeys(value) : [];
+exports.getObjectKeys = getObjectKeys;
 //# sourceMappingURL=isTypeFn.js.map

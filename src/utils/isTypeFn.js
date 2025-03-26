@@ -20,4 +20,9 @@ export const isObj = v => typeof v === "object"
 
 export const isArr = Array.isArray
 export const isNotEmptyArr = arr => isArr(arr)
-  && arr.length > 0;
+  && arr.length > 0
+
+const _getObjectKeys = Object.keys;
+export const getObjectKeys = value => isObj(value) && !isArr(value)
+  ? _getObjectKeys(value)
+  : []
