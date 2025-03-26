@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.crTableRows = exports.crTableOptions = exports.crTableFlatHeaders = exports.crTableConfig = exports.crStyleCenter = exports.crStyleBold = exports.crRankProps = exports.crNumberProps = exports.crNameProps = exports.crCaptionItemsProps = void 0;
+var _arrFn = require("../utils/arrFn");
 var _AdapterFn = require("./AdapterFn");
 const crNameProps = (name, pnOrIsHideOrVoid, isHideOrVoid) => {
   const [pn, isHide] = (0, _AdapterFn.isStr)(pnOrIsHideOrVoid) ? [pnOrIsHideOrVoid, isHideOrVoid] : [name.toLowerCase(), pnOrIsHideOrVoid];
@@ -128,15 +129,13 @@ const _setIdToHeaderItem = (id, item) => {
 const crTableFlatHeaders = headers => {
   const _arr = [];
   let id = 0;
-  for (const header of headers) {
-    if ((0, _AdapterFn.isArr)(header.items)) {
-      for (const headerItem of header.items) {
-        id = _addItemTo(_arr, headerItem, id);
-      }
-    } else {
+  (0, _arrFn.safeLoopOfArray)(headers, header => {
+    if (!(0, _arrFn.safeLoopOfArray)(header.items, headerItem => {
+      id = _addItemTo(_arr, headerItem, id);
+    })) {
       id = _addItemTo(_arr, header, id);
     }
-  }
+  });
   return _arr;
 };
 exports.crTableFlatHeaders = crTableFlatHeaders;

@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.joinByUndescore = exports.joinByNbsp = exports.joinByDot = exports.joinByComma = exports.joinByColon = exports.joinByBlank = exports.joinBy = exports.isInArrStr = exports.arrFactoryIsSameByProp = exports.arrFactoryFindIndexByProp = void 0;
+exports.safeLoopOfArray = exports.joinByUndescore = exports.joinByNbsp = exports.joinByDot = exports.joinByComma = exports.joinByColon = exports.joinByBlank = exports.joinBy = exports.isInArrStr = exports.arrFactoryIsSameByProp = exports.arrFactoryFindIndexByProp = void 0;
 var _bindTo = require("./bindTo");
 const _isArr = Array.isArray,
   _fIsItem = (propName, propValue) => item => item[propName] === propValue,
@@ -25,4 +25,13 @@ const joinByDot = exports.joinByDot = (0, _bindTo.bindTo)(joinBy, ".");
 const joinByColon = exports.joinByColon = (0, _bindTo.bindTo)(joinBy, ": ");
 const joinByComma = exports.joinByComma = (0, _bindTo.bindTo)(joinBy, ", ");
 const joinByUndescore = exports.joinByUndescore = (0, _bindTo.bindTo)(joinBy, "_");
+const safeLoopOfArray = (items, onItem) => {
+  if (_isArr(items)) {
+    for (let item of items) {
+      onItem(item);
+    }
+    return !0;
+  }
+};
+exports.safeLoopOfArray = safeLoopOfArray;
 //# sourceMappingURL=arrFn.js.map

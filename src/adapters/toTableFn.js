@@ -1,5 +1,8 @@
 import {
-  isArr,
+  safeLoopOfArray
+} from "../utils/arrFn";
+
+import {
   isTypeNumber,
   isStr,
   numberFormat,
@@ -163,14 +166,12 @@ export const crTableFlatHeaders = (
 ) => {
   const _arr = [];
   let id = 0;
-  for(const header of headers){
-    if (isArr(header.items)) {
-      for(const headerItem of header.items){
-        id = _addItemTo(_arr, headerItem, id)
-      }
-    } else {
+  safeLoopOfArray(headers, header => {    
+    if (!safeLoopOfArray(header.items, headerItem => {
+      id = _addItemTo(_arr, headerItem, id)
+    })) {
       id = _addItemTo(_arr, header, id)
     }
-  }
+  })
   return _arr;
 }

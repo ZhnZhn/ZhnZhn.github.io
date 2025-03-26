@@ -1,7 +1,5 @@
-import {
-  isArr,
-  isObj
-} from '../../../utils/isTypeFn';
+import { isObj } from '../../../utils/isTypeFn';
+import { safeLoopOfArray } from '../../../utils/arrFn';
 
 import crAddProps from './crAddProps';
 import crSelectProps from './crSelectProps';
@@ -37,39 +35,42 @@ const _checkItemDfIdCase = item => {
 , VALID_ITEM_ID_TYPE_REGEX = RegExp("^[A-Z_0-9]+$")
 , _setItemFromTupleTo = (
   items,
+  tuplesKey,
   tuple,
-  props
+  crDialogItem
 ) => {
   const _idType = ""+tuple[0];
   if (VALID_ITEM_ID_TYPE_REGEX.test(_idType)) {
-    items[_idType] = {
-      ...props,
-      type: _idType,
-      menuTitle: tuple[1],
-      dfId: tuple[2]
-    }
+    items[_idType] = crDialogItem(
+      _idType,
+      tuplesKey,
+      tuple
+    )
   }
 }
-, _setItemsFromTuples = (
-  items,
-  tuples,
-  itemProp
-) => {
-  if (isArr(tuples)) {
-    tuples.forEach(tuple => {
-      _setItemFromTupleTo(items, tuple, itemProp)
-    })
-  }
-}
+, _crDialogItemDf = (
+  type,
+  tuplesKey,
+  tuple
+) => ({
+  type,
+  addProps: tuplesKey,
+  menuTitle: tuple[1],
+  dfId: tuple[2]
+})
 , _checkItemsIdTupleCase = (
   items,
-  idTuple
+  idTuple,
+  idCase
 ) => {
-  if (isObj(idTuple)) {
-    _getObjectKeys(idTuple).forEach(key => {
-      _setItemsFromTuples(items, idTuple[key], {addProps: key})
-    })
-  }
+  safeLoopOfArray(isObj(idTuple) && _getObjectKeys(idTuple), tuplesKey => {
+    safeLoopOfArray(idTuple[tuplesKey], tuple => _setItemFromTupleTo(
+      items,
+      tuplesKey,
+      tuple,
+      _crDialogItemDf
+    ))
+  })
 };
 
 const addDialogPropsTo = (

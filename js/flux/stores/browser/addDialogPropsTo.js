@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../../utils/isTypeFn");
+var _arrFn = require("../../../utils/arrFn");
 var _crAddProps = _interopRequireDefault(require("./crAddProps"));
 var _crSelectProps = _interopRequireDefault(require("./crSelectProps"));
 const _getObjectKeys = Object.keys;
@@ -34,32 +35,22 @@ const _checkItemDfIdCase = item => {
     return item.dialogProps;
   },
   VALID_ITEM_ID_TYPE_REGEX = RegExp("^[A-Z_0-9]+$"),
-  _setItemFromTupleTo = (items, tuple, props) => {
+  _setItemFromTupleTo = (items, tuplesKey, tuple, crDialogItem) => {
     const _idType = "" + tuple[0];
     if (VALID_ITEM_ID_TYPE_REGEX.test(_idType)) {
-      items[_idType] = {
-        ...props,
-        type: _idType,
-        menuTitle: tuple[1],
-        dfId: tuple[2]
-      };
+      items[_idType] = crDialogItem(_idType, tuplesKey, tuple);
     }
   },
-  _setItemsFromTuples = (items, tuples, itemProp) => {
-    if ((0, _isTypeFn.isArr)(tuples)) {
-      tuples.forEach(tuple => {
-        _setItemFromTupleTo(items, tuple, itemProp);
-      });
-    }
-  },
-  _checkItemsIdTupleCase = (items, idTuple) => {
-    if ((0, _isTypeFn.isObj)(idTuple)) {
-      _getObjectKeys(idTuple).forEach(key => {
-        _setItemsFromTuples(items, idTuple[key], {
-          addProps: key
-        });
-      });
-    }
+  _crDialogItemDf = (type, tuplesKey, tuple) => ({
+    type,
+    addProps: tuplesKey,
+    menuTitle: tuple[1],
+    dfId: tuple[2]
+  }),
+  _checkItemsIdTupleCase = (items, idTuple, idCase) => {
+    (0, _arrFn.safeLoopOfArray)((0, _isTypeFn.isObj)(idTuple) && _getObjectKeys(idTuple), tuplesKey => {
+      (0, _arrFn.safeLoopOfArray)(idTuple[tuplesKey], tuple => _setItemFromTupleTo(items, tuplesKey, tuple, _crDialogItemDf));
+    });
   };
 const addDialogPropsTo = (items, df) => {
   const {

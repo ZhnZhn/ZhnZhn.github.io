@@ -42,3 +42,15 @@ export const joinByDot = bindTo(joinBy, ".")
 export const joinByColon = bindTo(joinBy, ": ")
 export const joinByComma = bindTo(joinBy, ", ")
 export const joinByUndescore = bindTo(joinBy, "_")
+
+export const safeLoopOfArray = (
+  items,
+  onItem
+) => {
+  if (_isArr(items)) {
+    for (let item of items) {
+      onItem(item)
+    }
+    return !0;
+  }
+}

@@ -3,7 +3,8 @@ import {
   arrFactoryIsSameByProp,
   isInArrStr,
   joinBy,
-  joinByDot
+  joinByDot,
+  safeLoopOfArray
 } from '../arrFn';
 
 const propName = 'caption'
@@ -103,5 +104,26 @@ describe('joinByDot', () => {
     expect(fn('', 'b', 'c')).toBe('b.c')
     expect(fn(null, 'b', 'c')).toBe('b.c')
     expect(fn(void 0, 'b', 'c')).toBe('b.c')
+  })
+})
+
+describe('safeLoopOfArray', ()=>{
+  const fn = safeLoopOfArray;
+  test('should safe loop over array of items', ()=>{
+    let sum = 0;
+    const onItem = number => {
+      sum = sum + number;
+    };
+
+    expect(fn([1, 2, 3], onItem)).toBe(true)
+    expect(sum).toBe(6)
+
+    expect(fn(null, onItem)).toBe(void 0)
+    expect(fn(void 0, onItem)).toBe(void 0)
+    expect(fn('', onItem)).toBe(void 0)
+    expect(fn(false, onItem)).toBe(void 0)
+    expect(fn(1, onItem)).toBe(void 0)
+    expect(fn({}, onItem)).toBe(void 0)
+    expect(sum).toBe(6)
   })
 })
