@@ -75,7 +75,8 @@ const TRADE_FLOW_OPTIONS = [
 , [
   DATE_DF,
   DATE_PLACEHOLDER
-] = crInputSelectDfProps(DATE_OPTIONS, 1);
+] = crInputSelectDfProps(DATE_OPTIONS, 1)
+, _crTwoUri = dfId => `./data/uncomtrade/${dfId}.json`;
 
 const UnDialog5 = memoIsShow((
   props
@@ -83,9 +84,9 @@ const UnDialog5 = memoIsShow((
    const {
      isShow,
      caption,
-     oneURI,
-     twoURI,
+     oneURI,     
      tpURI,
+     dfProps,
      msgOnNotSelected,
 
      toTopLayer,
@@ -96,6 +97,7 @@ const UnDialog5 = memoIsShow((
      onShow,
      onClose
    } = props
+   , { dfId } = dfProps || {}
    , [
      seriaType,
      setSeriaType
@@ -235,7 +237,7 @@ const UnDialog5 = memoIsShow((
            refEl={_refGroupItem}
            isShow={isShow}
            isShowLabels={isShowLabels}
-           uri={twoURI}
+           uri={_crTwoUri(dfId)}
            oneCaption="Heading"
            twoCaption="Subheading"
            msgOnNotSelected={msgOnNotSelected}

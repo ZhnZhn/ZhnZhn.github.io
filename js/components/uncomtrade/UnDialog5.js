@@ -100,14 +100,15 @@ const TRADE_FLOW_OPTIONS = [{
   CHART_OPTIONS = [_crOptionItem("Bar (60, 90): By Partners", _ChartType.CHT_BAR_SET), _crOptionItem("Tree Map (60, 90): By Partners", _ChartType.CHT_TREE_MAP), _crOptionItem("Dots: By Partners", _ChartType.CHT_DOT_SET)],
   [DF_CHART, CHART_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)(CHART_OPTIONS),
   [DATE_OPTIONS] = (0, _crDateConfig.default)("Y", 2),
-  [DATE_DF, DATE_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)(DATE_OPTIONS, 1);
+  [DATE_DF, DATE_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)(DATE_OPTIONS, 1),
+  _crTwoUri = dfId => `./data/uncomtrade/${dfId}.json`;
 const UnDialog5 = (0, _memoIsShow.default)(props => {
   const {
       isShow,
       caption,
       oneURI,
-      twoURI,
       tpURI,
+      dfProps,
       msgOnNotSelected,
       toTopLayer,
       onAbout,
@@ -116,6 +117,9 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
       onShow,
       onClose
     } = props,
+    {
+      dfId
+    } = dfProps || {},
     [seriaType, setSeriaType] = (0, _uiApi.useState)(DF_CHART),
     [isShowToggle, toggleInputs, hideToggle] = (0, _useInputToggle.default)(),
     [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
@@ -223,7 +227,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
         refEl: _refGroupItem,
         isShow: isShow,
         isShowLabels: isShowLabels,
-        uri: twoURI,
+        uri: _crTwoUri(dfId),
         oneCaption: "Heading",
         twoCaption: "Subheading",
         msgOnNotSelected: msgOnNotSelected
