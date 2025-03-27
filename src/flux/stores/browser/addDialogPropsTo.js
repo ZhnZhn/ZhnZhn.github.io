@@ -1,10 +1,8 @@
-import { getObjectKeys } from '../../../utils/isTypeFn';
-import { safeLoopOfArray } from '../../../utils/arrFn';
+import { getObjectKeys } from "../../../utils/isTypeFn";
+import { safeLoopOfArray } from "../../../utils/arrFn";
 
-import crAddProps from './crAddProps';
-import crSelectProps from './crSelectProps';
-
-const _getObjectKeys = Object.keys;
+import crAddProps from "./crAddProps";
+import crSelectProps from "./crSelectProps";
 
 const _checkItemDfIdCase = item => {
   const {
@@ -39,25 +37,38 @@ const _checkItemDfIdCase = item => {
   tuple,
   crDialogItem
 ) => {
-  const _idType = ""+tuple[0];
+  const _idType = "" + tuple[0];
   if (VALID_ITEM_ID_TYPE_REGEX.test(_idType)) {
-    items[_idType] = crDialogItem(
-      _idType,
-      tuplesKey,
-      tuple
-    )
+    items[_idType] = {
+      ...crDialogItem(tuple),
+      type: _idType,
+      menuTitle: tuple[1],
+      addProps: tuplesKey,
+    }
   }
 }
+, _crUnTwoUriPath = (
+  tuple,
+  typeSuffix
+) => typeSuffix + "-" + (tuple[2] || "").toLowerCase().replaceAll(",", "").replaceAll(" ", "-")
+, _crDialogItemUn = (
+  tuple
+) => {
+  const _typeSuffix = (tuple[0] || "").split("_")[1];
+  return {
+    contFullCaption: `UN Comtrade: ${tuple[2]}: ${_typeSuffix}`,
+    dialogType: "UnDialog5",
+    dfId: _crUnTwoUriPath(tuple, _typeSuffix),
+  };
+}
 , _crDialogItemDf = (
-  type,
-  tuplesKey,
   tuple
 ) => ({
-  type,
-  addProps: tuplesKey,
-  menuTitle: tuple[1],
   dfId: tuple[2]
 })
+, _fCrDialogItem = idCase => idCase === "UN"
+  ? _crDialogItemUn
+  : _crDialogItemDf
 , _checkItemsIdTupleCase = (
   items,
   idTuple,
@@ -68,7 +79,7 @@ const _checkItemDfIdCase = item => {
       items,
       tuplesKey,
       tuple,
-      _crDialogItemDf
+      _fCrDialogItem(idCase)
     ))
   })
 };
@@ -79,10 +90,11 @@ const addDialogPropsTo = (
 ) => {
   const {
     dfAddProps,
-    idTuple
+    idTuple,
+    idCase
   } = df || {};
-  _checkItemsIdTupleCase(items, idTuple)
-  _getObjectKeys(items).forEach(pnId => {
+  _checkItemsIdTupleCase(items, idTuple, idCase)
+  getObjectKeys(items).forEach(pnId => {
     const item = items[pnId]
     , addPropsId = item.addProps || dfAddProps;
     if (addPropsId && item.type) {
