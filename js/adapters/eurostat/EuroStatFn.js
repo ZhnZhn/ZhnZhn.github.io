@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toPointArr = exports.setInfoTo = exports.setDataAndInfo = exports.isNotGeoOrReporter = exports.getColorBlack = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
+exports.toPointArr = exports.setInfoTo = exports.setDataAndInfo = exports.isNotGeoOrReporter = exports.isEuGeoEntity = exports.isEuCaption = exports.getColorBlack = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.getColorBlack = _AdapterFn.getColorBlack;
 exports.findMinY = _AdapterFn.findMinY;
@@ -71,9 +71,11 @@ const crDatasetInfo = _ref => {
 };
 exports.crDatasetInfo = crDatasetInfo;
 const _fIsCode = token => str => str.toLowerCase().indexOf(token) !== -1,
-  _isEUCode = _fIsCode("union"),
-  _isEACode = _fIsCode("euro area"),
-  _isNotEUMember = str => EU_MEMBER.indexOf(str) === -1;
+  _isEaCaption = _fIsCode("euro area"),
+  _isEuMember = str => EU_MEMBER.indexOf(str) !== -1;
+const isEuCaption = exports.isEuCaption = _fIsCode("union");
+const isEuGeoEntity = str => _isEaCaption(str) || isEuCaption(str) || _isEuMember(str);
+exports.isEuGeoEntity = isEuGeoEntity;
 const _filterZeroCategories = (data, categories) => {
   const _data = [],
     _arrC = [];
@@ -179,7 +181,7 @@ const _setCategories = _ref4 => {
 const _colorCategories = data => {
   data.forEach(p => {
     const _caption = p.c || "",
-      color = _isEUCode(_caption) ? EU_COLOR : _isEACode(_caption) ? EA_COLOR : _isNotEUMember(_caption) ? NOT_EU_MEMBER_COLOR : void 0;
+      color = isEuCaption(_caption) ? EU_COLOR : _isEaCaption(_caption) ? EA_COLOR : _isEuMember(_caption) ? void 0 : NOT_EU_MEMBER_COLOR;
     if (color) {
       p.color = color;
     }

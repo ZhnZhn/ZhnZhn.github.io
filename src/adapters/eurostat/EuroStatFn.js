@@ -118,9 +118,13 @@ export const crDatasetInfo = ({
 const _fIsCode = (
   token
 ) => str => str.toLowerCase().indexOf(token) !== -1
-, _isEUCode = _fIsCode("union")
-, _isEACode = _fIsCode("euro area")
-, _isNotEUMember = str => EU_MEMBER.indexOf(str) === -1;
+, _isEaCaption = _fIsCode("euro area")
+, _isEuMember = str => EU_MEMBER.indexOf(str) !== -1;
+
+export const isEuCaption = _fIsCode("union")
+export const isEuGeoEntity = str => _isEaCaption(str)
+  || isEuCaption(str)
+  || _isEuMember(str)
 
 const _filterZeroCategories = (
   data,
@@ -280,13 +284,13 @@ const _setCategories = ({
 const _colorCategories = (data) => {
   data.forEach(p => {
     const _caption = p.c || ""
-    , color = _isEUCode(_caption)
+    , color = isEuCaption(_caption)
       ? EU_COLOR
-      : _isEACode(_caption)
+      : _isEaCaption(_caption)
       ? EA_COLOR
-      : _isNotEUMember(_caption)
-      ? NOT_EU_MEMBER_COLOR
-      : void 0;
+      : _isEuMember(_caption)
+      ? void 0
+      : NOT_EU_MEMBER_COLOR;
     if (color) {
       p.color = color
     }
