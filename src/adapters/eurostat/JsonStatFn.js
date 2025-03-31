@@ -7,23 +7,29 @@ import {
   getCountryById
 } from './fetchHmIdCountry';
 
-const _splitForConfig = (arr) => {
+const FN_TRUE = () => true;
+const _splitForConfig = (
+  arr,
+  isAddToCategories = FN_TRUE
+) => {
    const categories = []
    , data = [];
    let max = Number.NEGATIVE_INFINITY
    , min = Number.POSITIVE_INFINITY;
    arr.forEach((item) => {
      const { id, value, status } = item
-     , country = getCountryById(id);
-     categories.push(country);
-     data.push({
-       y: value,
-       c: country,
-       id: country,
-       status
-     })
-     if (value>=max) { max = value; }
-     if (value<=min) { min = value; }
+     , geoEntity = getCountryById(id);
+     if (isAddToCategories(geoEntity)) {
+       categories.push(geoEntity);
+       data.push({
+         y: value,
+         c: geoEntity,
+         id: geoEntity,
+         status
+       })
+       if (value>=max) { max = value; }
+       if (value<=min) { min = value; }
+     }
     })
    return {
      categories,
@@ -66,12 +72,13 @@ const _crCategoryPoint = (
 });
 
 export const trJsonToCategory = (
-  json
+  json,
+  isAddToCategories
 ) => fetchHmIdCountry()
  .then(() => pipe(
     crData(_crCategoryPoint, json),
     arr => arr.sort(compareByValueId),
-    _splitForConfig
+    arr => _splitForConfig(arr, isAddToCategories)
  ))
 
 export const trJsonToSeria = (
