@@ -1,7 +1,8 @@
 import {
   FN_IDENTITY,
   isNumber,
-  fCrValue
+  fCrValue,
+  getCaption
 } from '../AdapterFn';
 import routerColumnBarSet from '../stat-json/toColumn';
 
@@ -12,6 +13,8 @@ import {
 } from './JsonStatFn';
 import {
   isNotGeoOrReporter,
+  isEuCaption,
+  isEuGeoEntity,
   addToCategoryConfig,
   findMinY,
   crCategoryTooltip
@@ -63,7 +66,10 @@ export const crCategoryConfig = (
     }
     return _crConfig(json, option);
   }
-  return trJsonToCategory(json)
+  const _isAddToCategories = isEuCaption(getCaption(option.items[0]))
+    ? isEuGeoEntity
+    : void 0;
+  return trJsonToCategory(json, _isAddToCategories)
     .then(({ categories, data, min }) => {
       const config = FactoryChart.createConfig(option);
       addToCategoryConfig(config, {

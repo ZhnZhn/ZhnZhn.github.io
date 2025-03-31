@@ -41,7 +41,8 @@ const crCategoryConfig = (json, option) => {
     }
     return _crConfig(json, option);
   }
-  return (0, _JsonStatFn.trJsonToCategory)(json).then(_ref => {
+  const _isAddToCategories = (0, _EuroStatFn.isEuCaption)((0, _AdapterFn.getCaption)(option.items[0])) ? _EuroStatFn.isEuGeoEntity : void 0;
+  return (0, _JsonStatFn.trJsonToCategory)(json, _isAddToCategories).then(_ref => {
     let {
       categories,
       data,
