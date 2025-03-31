@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.toSeriaNames = exports.toHmCategories = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _bindTo = require("../../utils/bindTo");
 var _AdapterFn = require("../AdapterFn");
 var _conf = require("./conf");
 var _fnAdapter = require("./fnAdapter");
@@ -20,16 +21,16 @@ const _fCrPoint = (pn, item) => {
     _y = _w !== 0 ? _w : item.TradeValue ? void 0 : 0;
   return _crPoint(_y);
 };
-const _crNetWeightPoint = _fCrPoint.bind(null, _conf.NET_WEIGHT);
-const _crQuantityPoint = _fCrPoint.bind(null, _conf.QUANTITY);
+const _crNetWeightPoint = (0, _bindTo.bindTo)(_fCrPoint, _conf.NET_WEIGHT);
+const _crQuantityPoint = (0, _bindTo.bindTo)(_fCrPoint, _conf.QUANTITY);
 const _fCrAvgPoint = (pn, item) => {
   const tradeValue = (0, _fnAdapter.getItemTradeValue)(item),
     _v = item[pn],
     _y = _v && tradeValue != null ? (0, _AdapterFn.roundBy)(tradeValue / _v, 2) : void 0;
   return _crPoint(_y, _v);
 };
-const _crAvgValuePerWeight = _fCrAvgPoint.bind(null, _conf.NET_WEIGHT);
-const _crAvgValuePerQuantity = _fCrAvgPoint.bind(null, _conf.QUANTITY);
+const _crAvgValuePerWeight = (0, _bindTo.bindTo)(_fCrAvgPoint, _conf.NET_WEIGHT);
+const _crAvgValuePerQuantity = (0, _bindTo.bindTo)(_fCrAvgPoint, _conf.QUANTITY);
 const _rCrPoint = {
   fDf: _fCrValuePoint,
   [_conf.NET_WEIGHT]: _crNetWeightPoint,

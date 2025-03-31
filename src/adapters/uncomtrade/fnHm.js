@@ -1,4 +1,5 @@
 import { getObjectKeys } from '../../utils/isTypeFn';
+import { bindTo } from '../../utils/bindTo';
 import { roundBy } from '../AdapterFn';
 
 import {
@@ -49,8 +50,8 @@ const _fCrPoint = (
   return _crPoint(_y);
 };
 
-const _crNetWeightPoint = _fCrPoint.bind(null, NET_WEIGHT)
-const _crQuantityPoint = _fCrPoint.bind(null, QUANTITY)
+const _crNetWeightPoint = bindTo(_fCrPoint, NET_WEIGHT)
+const _crQuantityPoint = bindTo(_fCrPoint, QUANTITY)
 
 const _fCrAvgPoint = (
   pn,
@@ -64,8 +65,8 @@ const _fCrAvgPoint = (
   return _crPoint(_y, _v);
 }
 
-const _crAvgValuePerWeight = _fCrAvgPoint.bind(null, NET_WEIGHT)
-const _crAvgValuePerQuantity = _fCrAvgPoint.bind(null, QUANTITY)
+const _crAvgValuePerWeight = bindTo(_fCrAvgPoint, NET_WEIGHT)
+const _crAvgValuePerQuantity = bindTo(_fCrAvgPoint, QUANTITY)
 
 const _rCrPoint = {
   fDf: _fCrValuePoint,
