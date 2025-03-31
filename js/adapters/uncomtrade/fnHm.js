@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.toSeriaNames = exports.toHmCategories = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _bindTo = require("../../utils/bindTo");
+var _crRouter = require("../../utils/crRouter");
 var _AdapterFn = require("../AdapterFn");
 var _conf = require("./conf");
 var _fnAdapter = require("./fnAdapter");
@@ -31,13 +32,13 @@ const _fCrAvgPoint = (pn, item) => {
 };
 const _crAvgValuePerWeight = (0, _bindTo.bindTo)(_fCrAvgPoint, _conf.NET_WEIGHT);
 const _crAvgValuePerQuantity = (0, _bindTo.bindTo)(_fCrAvgPoint, _conf.QUANTITY);
-const _rCrPoint = {
+const _rCrPoint = (0, _crRouter.crRouter)({
   fDf: _fCrValuePoint,
   [_conf.NET_WEIGHT]: _crNetWeightPoint,
   [_conf.QUANTITY]: _crQuantityPoint,
   [_conf.AVG_PER_W]: _crAvgValuePerWeight,
   [_conf.AVG_PER_Q]: _crAvgValuePerQuantity
-};
+});
 const _fPoint = pnValue => {
   const _crPoint = _rCrPoint[pnValue] || _rCrPoint.fDf(pnValue);
   return item => ({
