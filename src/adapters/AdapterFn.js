@@ -70,7 +70,6 @@ export {
   isNotEmptyArr
 } from '../utils/isTypeFn';
 import {
-  isObj,
   isArr,
   isNaN,
   isTypeNumber,
@@ -81,9 +80,6 @@ import {
 export const isNumberOrNull = v => isNumber(v) || v === null
 
 export const assign = Object.assign
-export const getObjectKeys = obj => isObj(obj) && !isArr(obj)
-  ? Object.keys(obj)
-  : []
 export const FN_IDENTITY = v => v
 export const FN_NOOP = () => {}
 

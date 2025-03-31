@@ -1,10 +1,13 @@
 import {
+  isNumber,
+  getObjectKeys
+} from '../../utils/isTypeFn';
+
+import {
   crAdapterType1
 } from '../crAdapterType1';
 import {
-  isNumber,
   getByPropsFrom,
-  getObjectKeys,
   ymdToUTC,
 } from '../AdapterFn';
 import {
@@ -15,7 +18,7 @@ import {
   getJsonData,
   getDataSeries,
   getDataDimensions
-} from './fnAdapter'
+} from './fnAdapter';
 
 const crData = (
   json,

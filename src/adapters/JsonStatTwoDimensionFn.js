@@ -1,7 +1,7 @@
 import {
   isNumber,
   getObjectKeys
-} from './AdapterFn';
+} from '../utils/isTypeFn';
 
 import {
   _getDatasetDimension,

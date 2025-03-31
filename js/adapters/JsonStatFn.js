@@ -2,8 +2,8 @@
 
 exports.__esModule = true;
 exports.getDatasetUpdated = exports.getDatasetSource = exports.getDatasetLabel = exports.fCrSplinePoint = exports.crYearlyData = exports.crData = exports.crCategoryData = exports._getIdSizeTuple = exports._getDimensionCategory = exports._getDatasetValue = exports._getDatasetStatus = exports._getDatasetDimension = void 0;
+var _isTypeFn = require("../utils/isTypeFn");
 var _fnUtil = require("./stat-json/fnUtil");
-var _AdapterFn = require("./AdapterFn");
 var _CategoryFn = require("./CategoryFn");
 const _compareByPropNameY = (a, b) => b.y - a.y;
 const _isDatasetVersion2 = json => json.class === "dataset" && json.version === "2.0",
@@ -46,12 +46,12 @@ const crData = (crPoint, json) => {
     } = _getCategoryIndexLabel(id, size, dimension),
     hmLabels = {};
   let _valueIndex;
-  return (0, _AdapterFn.isObj)(index) && (0, _AdapterFn.isObj)(label) ? (0, _AdapterFn.getObjectKeys)(label).reduce((data, labelKey) => {
+  return (0, _isTypeFn.isObj)(index) && (0, _isTypeFn.isObj)(label) ? (0, _isTypeFn.getObjectKeys)(label).reduce((data, labelKey) => {
     _valueIndex = index[labelKey];
     if (_valueIndex != null) {
       const y = value[_valueIndex],
         categoryLabel = label[labelKey];
-      if ((0, _AdapterFn.isNumber)(y) && (0, _AdapterFn.isStr)(categoryLabel)) {
+      if ((0, _isTypeFn.isNumber)(y) && (0, _isTypeFn.isStr)(categoryLabel)) {
         data.push(crPoint(y, _crCategoryLabel(categoryLabel, hmLabels), status[_valueIndex]));
       }
     }

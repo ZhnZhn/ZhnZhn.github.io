@@ -1,14 +1,14 @@
 import {
-  toUTC,
-  toYMD
-} from './stat-json/fnUtil';
-
-import {
   isObj,
   isNumber,
   isStr,
   getObjectKeys
-} from './AdapterFn';
+} from '../utils/isTypeFn';
+
+import {
+  toUTC,
+  toYMD
+} from './stat-json/fnUtil';
 
 import {
   crCategoryPoint

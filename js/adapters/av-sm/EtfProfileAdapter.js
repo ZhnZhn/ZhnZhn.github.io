@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"));
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
@@ -23,10 +24,10 @@ const crData = (json, option) => {
       asset_allocation
     } = json || {},
     data = (holdings || {}).map(item => (0, _CategoryFn.crCategoryPoint)(parseFloat(item.weight), item.symbol), []);
-  (0, _AdapterFn.getObjectKeys)(asset_allocation).forEach(key => {
+  (0, _isTypeFn.getObjectKeys)(asset_allocation).forEach(key => {
     if (key !== DOMESTIC_EQUITIES) {
       const value = parseFloat(asset_allocation[key]);
-      if ((0, _AdapterFn.isPositiveNumber)(value)) {
+      if ((0, _isTypeFn.isPositiveNumber)(value)) {
         data.push((0, _CategoryFn.crCategoryPoint)(value, key === FOREIGN_EQUITIES ? FOREIGN_EQUITIES_SHORT_FORM : (0, _AdapterFn.toUpperCaseFirst)(key)));
       }
     }

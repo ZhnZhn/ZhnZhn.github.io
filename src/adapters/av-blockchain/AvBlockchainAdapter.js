@@ -1,7 +1,6 @@
-import {
-  getObjectKeys,
-  ymdToUTC
-} from '../AdapterFn';
+import { getObjectKeys } from '../../utils/isTypeFn';
+
+import { ymdToUTC } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import { crAdapterType1 } from '../crAdapterType1';
 

@@ -1,12 +1,14 @@
 import { joinByComma } from '../../utils/arrFn';
+import {
+  isNumber,
+  getObjectKeys,
+} from '../../utils/isTypeFn';
 
 import {
   fCrConfOptionExchangeRate,
   crAdapterType1
 } from '../crAdapterType1';
 import {
-  isNumber,
-  getObjectKeys,
   ymdToUTC,
   fAddToConfigInfoAndDfLink
 } from '../AdapterFn';

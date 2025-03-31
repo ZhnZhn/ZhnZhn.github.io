@@ -210,21 +210,6 @@ describe("setItemCaptionCurrencyRateTo", () => {
     expect(option.itemCaption).toBe("EUR/USD");
   });
 });
-describe('getObjectKeys', () => {
-  const fn = _AdapterFn.getObjectKeys;
-  test("should return array with object keys or empty array for not object types", () => {
-    expect(fn({
-      a: 'a'
-    })).toEqual(['a']);
-    expect(fn([1, 2])).toEqual([]);
-    expect(fn(1)).toEqual([]);
-    expect(fn('str')).toEqual([]);
-    expect(fn(true)).toEqual([]);
-    expect(fn()).toEqual([]);
-    expect(fn(null)).toEqual([]);
-    expect(fn(() => {})).toEqual([]);
-  });
-});
 describe('toFloatOrEmpty', () => {
   const fn = _AdapterFn.toFloatOrEmpty;
   it('should convert input to float or return empty str', () => {

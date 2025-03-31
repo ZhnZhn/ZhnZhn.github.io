@@ -1,8 +1,8 @@
 import { joinByDot } from '../../utils/arrFn';
+import { getObjectKeys } from '../../utils/isTypeFn';
 
 import {
   getValue,
-  getObjectKeys,
   getByPropsFrom,
   crGetRoute
 } from '../AdapterFn';

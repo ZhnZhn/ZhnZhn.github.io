@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crCategoryTitle = void 0;
 var _fnDescr = require("./fnDescr");
 exports.toInfo = _fnDescr.toInfo;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _arrFn = require("../../utils/arrFn");
 var _AdapterFn = require("../AdapterFn");
 const BLANK = ' ',
@@ -41,7 +42,7 @@ const _crHm = (data, prName) => data.reduce((hm, item) => {
   return hm;
 }, _createObject());
 const _compareByY = (a, b) => b.y - a.y;
-const _crRefLegend = hm => (0, _AdapterFn.getObjectKeys)(hm).map(propName => {
+const _crRefLegend = hm => (0, _isTypeFn.getObjectKeys)(hm).map(propName => {
   const _arr = hm[propName];
   return {
     ..._arr[_arr.length - 1],
@@ -65,7 +66,7 @@ const _crSeriesData = (data, prName) => {
   return (0, _AdapterFn.addSeriesDataTypeTo)(_data.slice(0, _notEmptyIndex + 1));
 };
 const _compareByX = (a, b) => a.x - b.x;
-const _crSeriaData = (data, option) => (0, _AdapterFn.isArr)(data) ? data.map(_crPoint).filter(p => (0, _AdapterFn.isNumber)(p.y)).sort(_compareByX) : [];
+const _crSeriaData = (data, option) => (0, _isTypeFn.isArr)(data) ? data.map(_crPoint).filter(p => (0, _isTypeFn.isNumber)(p.y)).sort(_compareByX) : [];
 const _isItemList = item => (0, _AdapterFn.getValue)(item).indexOf('>') !== -1;
 const _getSeriesPropName = _ref2 => {
   let {
@@ -96,7 +97,7 @@ const crTitle = (json, option) => {
       data
     } = json,
     p = data[data.length - 1];
-  return (0, _AdapterFn.isObj)(p) ? (0, _arrFn.joinByBlank)(p.Area, p.Item, p.Element) : DF_TITLE;
+  return (0, _isTypeFn.isObj)(p) ? (0, _arrFn.joinByBlank)(p.Area, p.Item, p.Element) : DF_TITLE;
 };
 exports.crTitle = crTitle;
 const crSubtitle = (json, option) => option.dfSubtitle || `${option.subtitle}: ${_crUnit(json)}`;
@@ -122,13 +123,13 @@ const crZhConfig = _ref4 => {
   };
 };
 exports.crZhConfig = crZhConfig;
-const crValueMoving = points => (0, _AdapterFn.isArr)(points) && !(0, _AdapterFn.isArr)(points[0]) ? (0, _AdapterFn.valueMoving)(points) : void 0;
+const crValueMoving = points => (0, _isTypeFn.isArr)(points) && !(0, _isTypeFn.isArr)(points[0]) ? (0, _AdapterFn.valueMoving)(points) : void 0;
 exports.crValueMoving = crValueMoving;
 const isSeriesReq = exports.isSeriesReq = _getSeriesPropName;
 const isQueryAllowed = exports.isQueryAllowed = _isListForList;
 const crCategoryTitle = (title, json) => {
   const _unit = (json.data[0] || {}).Unit;
-  return (0, _arrFn.joinByComma)(title, (0, _AdapterFn.isStr)(_unit) ? _unit.length > 2 ? _unit : _unit.toUpperCase() : '');
+  return (0, _arrFn.joinByComma)(title, (0, _isTypeFn.isStr)(_unit) ? _unit.length > 2 ? _unit : _unit.toUpperCase() : '');
 };
 exports.crCategoryTitle = crCategoryTitle;
 //# sourceMappingURL=fnAdapter.js.map

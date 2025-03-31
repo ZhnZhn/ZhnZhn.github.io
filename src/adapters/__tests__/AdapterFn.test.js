@@ -11,7 +11,6 @@ import {
   isNumberOrNull,
   crShortItemCaption,
   setItemCaptionCurrencyRateTo,
-  getObjectKeys,
   toFloatOrEmpty,
   findMinY,
   findMaxY,
@@ -165,21 +164,6 @@ describe("setItemCaptionCurrencyRateTo", ()=>{
     };
     fn(option, "USD")
     expect(option.itemCaption).toBe("EUR/USD")
-  })
-})
-
-describe('getObjectKeys', ()=>{
-  const fn = getObjectKeys;
-  test("should return array with object keys or empty array for not object types", () => {
-    expect(fn({a: 'a'})).toEqual(['a'])
-
-    expect(fn([1, 2])).toEqual([])
-    expect(fn(1)).toEqual([])
-    expect(fn('str')).toEqual([])
-    expect(fn(true)).toEqual([])
-    expect(fn()).toEqual([])
-    expect(fn(null)).toEqual([])
-    expect(fn(()=>{})).toEqual([])
   })
 })
 

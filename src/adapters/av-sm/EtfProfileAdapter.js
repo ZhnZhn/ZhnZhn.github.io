@@ -1,10 +1,13 @@
-import crAdapterCategory from '../crAdapterCategory';
 import {
   isPositiveNumber,
+  getObjectKeys
+} from '../../utils/isTypeFn';
+
+import crAdapterCategory from '../crAdapterCategory';
+import {
   numberFormat,
   toUpperCaseFirst,
-  crShortItemCaption,
-  getObjectKeys
+  crShortItemCaption
 } from '../AdapterFn';
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';

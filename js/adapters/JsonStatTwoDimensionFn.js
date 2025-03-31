@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.crGeoSlice = exports.crGeoSeria = void 0;
-var _AdapterFn = require("./AdapterFn");
+var _isTypeFn = require("../utils/isTypeFn");
 var _JsonStatFn = require("./JsonStatFn");
 const _getGeoTuples = json => {
   const [id, size] = (0, _JsonStatFn._getIdSizeTuple)(json);
@@ -24,7 +24,7 @@ const _crGeoTupple = (value, status, geoIndex, _timeSize, _recentSliceDiff) => {
   const dGeo = [],
     sGeo = [];
   let valueIndex;
-  (0, _AdapterFn.getObjectKeys)(geoIndex).forEach(id => {
+  (0, _isTypeFn.getObjectKeys)(geoIndex).forEach(id => {
     valueIndex = _timeSize * geoIndex[id] + _recentSliceDiff;
     dGeo.push(id);
     sGeo.push({
@@ -46,7 +46,7 @@ const crGeoSlice = (json, timeId) => {
       index: timeIndex
     } = (0, _JsonStatFn._getDimensionCategory)(dimension, timeTuple[0]),
     sliceDiff = timeIndex[timeId];
-  return (0, _AdapterFn.isNumber)(sliceDiff) ? _crGeoTupple(value, status, index, timeTuple[1], sliceDiff) : [[], []];
+  return (0, _isTypeFn.isNumber)(sliceDiff) ? _crGeoTupple(value, status, index, timeTuple[1], sliceDiff) : [[], []];
 };
 exports.crGeoSlice = crGeoSlice;
 const _getTimeSize = json => {
@@ -70,16 +70,16 @@ const crGeoSeria = (json, geoId) => {
   }
   let fromIndex = 0;
   for (; fromIndex < data.length; fromIndex++) {
-    if ((0, _AdapterFn.isNumber)(data[fromIndex])) break;
+    if ((0, _isTypeFn.isNumber)(data[fromIndex])) break;
   }
   let toIndex = data.length - 1;
   for (; toIndex > -1; toIndex--) {
-    if ((0, _AdapterFn.isNumber)(data[toIndex])) break;
+    if ((0, _isTypeFn.isNumber)(data[toIndex])) break;
   }
   return {
     data: data.slice(fromIndex, toIndex + 1),
     date: {
-      id: (0, _AdapterFn.getObjectKeys)(timeIndex).slice(fromIndex, toIndex + 1)
+      id: (0, _isTypeFn.getObjectKeys)(timeIndex).slice(fromIndex, toIndex + 1)
     }
   };
 };

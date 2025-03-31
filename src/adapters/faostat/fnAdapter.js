@@ -1,19 +1,22 @@
 export { toInfo } from './fnDescr';
 
 import {
+  isArr,
+  isObj,
+  isNumber,
+  isStr,
+  getObjectKeys
+} from '../../utils/isTypeFn';
+
+import {
   joinByBlank,
   joinByColon,
   joinByComma
 } from '../../utils/arrFn';
 
 import {
-  isArr,
-  isObj,
-  isNumber,
-  isStr,
   isYNumber,
   getValue,
-  getObjectKeys,
   toUpperCaseFirst,
   monthIndex,
   ymdToUTC,
