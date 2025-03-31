@@ -3,10 +3,10 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _LoadType = require("../../../constants/LoadType");
-const YEAR_MAX = 12,
-  BI_YEAR_MAX = 24,
-  Q_YEAR_MAX = 8,
-  M_YEAR_MAX = 4;
+const YEAR_MAX = 25,
+  BI_YEAR_MAX = 36,
+  Q_YEAR_MAX = 12,
+  M_YEAR_MAX = 6;
 const _getCurrentDate = () => new Date(),
   _getYear = date => date.getUTCFullYear(),
   _getCurrentYear = () => _getYear(_getCurrentDate()),
