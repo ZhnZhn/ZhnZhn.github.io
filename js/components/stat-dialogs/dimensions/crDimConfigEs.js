@@ -2,15 +2,16 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../../utils/arrFn");
+var _isTypeFn = require("../../../utils/isTypeFn");
 var _EsConfig = require("./EsConfig");
 var _dimConfigFn = require("./dimConfigFn");
-const _keys = Object.keys;
 const _crC = label => (label || '').split('_').map(_dimConfigFn.toUpperCaseFirst).join(' ');
 const _crEsOptions = (category, id) => {
   const {
     label
   } = category || {};
-  return _keys(label || {}).map(k => ({
+  return (0, _isTypeFn.getObjectKeys)(label).map(k => ({
     caption: label[k],
     value: k,
     id
@@ -32,7 +33,7 @@ const _getMapFrequency = dims => {
 const crDimConfigEs = dimension => {
   const dims = [null],
     adjDims = [];
-  _keys(dimension).forEach(k => {
+  (0, _isTypeFn.getObjectKeys)(dimension).forEach(k => {
     if (k !== _EsConfig.TIME_ID) {
       const _dim = dimension[k],
         {
@@ -56,7 +57,7 @@ const crDimConfigEs = dimension => {
       }
     }
   });
-  const _dims = dims.filter(Boolean).concat(adjDims);
+  const _dims = (0, _arrFn.filterBoolean)(dims).concat(adjDims);
   return {
     dims: _dims,
     mapFrequency: _getMapFrequency(_dims),

@@ -2,13 +2,14 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _isTypeFn = require("../../utils/isTypeFn");
 var _CategoryFn = require("../CategoryFn");
 const _crVariable = (code, value) => ({
   code,
   values: [value]
 });
-const _crVariables = items => items.filter(Boolean).map(_ref => {
+const _crVariables = items => (0, _arrFn.filterBoolean)(items).map(_ref => {
   let {
     slice
   } = _ref;

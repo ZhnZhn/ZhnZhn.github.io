@@ -1,3 +1,4 @@
+import { filterBoolean } from '../../utils/arrFn';
 import { useMemo } from '../uiApi';
 
 import {
@@ -20,7 +21,7 @@ const useModalMenuIndicators = (
   , _propsType1 = { config }
   , _propsType2 = { onAddMfi, onRemoveMfi };
 
-  return [
+  return filterBoolean([
     !(config.zhConfig || {}).isWithoutSma ? [
       RowSma, 'sma', {..._propsType1}
     ] : '',
@@ -33,7 +34,7 @@ const useModalMenuIndicators = (
     _isMfi || (btTitle || '').indexOf('Volume') !== -1 ? [
       RowRsi, 'rsi', {..._propsType1}
     ] : ''
-  ].filter(Boolean);
+  ]);
 }, [config]);
 // onAddMfi, onRemoveMfi
 /*eslint-enable react-hooks/exhaustive-deps */

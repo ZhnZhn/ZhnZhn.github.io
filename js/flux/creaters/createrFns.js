@@ -15,11 +15,11 @@ const _crItemCaption = (items, titles) => {
 };
 const _crCaptionItems = items => (items || []).map(item => _getC(item));
 const crItemKey = function (items) {
-  const _prefix = items.filter(Boolean).map(item => (0, _getPropertyFn.getV)(item) || (0, _getPropertyFn.getC)(item) || item).join('_');
+  const _prefix = (0, _arrFn.joinByUndescore)((0, _arrFn.filterBoolean)(items).map(item => (0, _getPropertyFn.getV)(item) || (0, _getPropertyFn.getC)(item) || item));
   for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     args[_key - 1] = arguments[_key];
   }
-  return (0, _arrFn.joinByUndescore)("_", _prefix, ...args);
+  return (0, _arrFn.joinByUndescore)(_prefix, ...args);
 };
 
 //[itemCaption, title, subtitle, threeC]

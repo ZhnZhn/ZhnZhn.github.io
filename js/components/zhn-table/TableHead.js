@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _fUseKey = require("../hooks/fUseKey");
 var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
 var _tableFn = require("./tableFn");
@@ -40,7 +41,7 @@ const _renderHeader = (props, _hThKeyDown) => {
     onSort,
     onMenuMore
   } = props;
-  return headers.map((h, hIndex) => {
+  return (0, _arrFn.filterBoolean)(headers.map((h, hIndex) => {
     if (h.isHide) {
       return null;
     }
@@ -82,12 +83,12 @@ const _renderHeader = (props, _hThKeyDown) => {
       onKeyDown: event => _hThKeyDown(event, pn),
       children: _nameOrEl
     }, h.name);
-  }).filter(Boolean);
+  }));
 };
 const TableHead = props => {
   const _hThKeyEnter = (evt, pn) => {
     if ((0, _fUseKey.isKeyEnterOrBlank)(evt)) {
-      props == null || props.onSort(pn);
+      props?.onSort(pn);
     }
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("thead", {

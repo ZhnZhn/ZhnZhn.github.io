@@ -1,21 +1,25 @@
 import { STAT_API_URL } from '../../../adapters/eurostat/api/apiFn';
+import { filterBoolean } from '../../../utils/arrFn';
 
-const _crMetaTime = mapFrequency => {
-  if (mapFrequency === 'M') { return '2019-01'; }
-  if (mapFrequency === 'S') { return '2019-S1'; }
-  if (mapFrequency === 'Q') { return '2019-Q1'; }
-  return '2019';
-};
+const _crMetaTime = (
+  mapFrequency
+) => mapFrequency === 'M'
+  ? '2019-01'
+  : mapFrequency === 'S'
+  ? '2019-S1'
+  : mapFrequency === 'Q'
+  ? '2019-Q1'
+  : '2019';
 
 const crDimUrlEs = ({
   dfNonTime,
   mapFrequency,
   dfId
 }, queryTail) => {
-  const _queryTail = [queryTail, (dfNonTime
+  const _queryTail = filterBoolean([queryTail, (dfNonTime
     ? ''
     : `time=${_crMetaTime(mapFrequency)}`)
-  ].filter(Boolean).join('&')
+  ]).join('&')
   , _qT = _queryTail ? '?' + _queryTail : '';
 
   return `${STAT_API_URL}/${dfId}${_qT}`;

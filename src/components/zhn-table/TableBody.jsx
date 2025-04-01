@@ -1,4 +1,8 @@
 import {
+  filterBoolean
+} from '../../utils/arrFn';
+
+import {
   isFn,
   toHref
 } from '../uiApi';
@@ -83,7 +87,7 @@ const _renderRows = (props) => {
 
   return rows.map(r => {
     const _rId = r.id
-    , _elTds = headers.map((h, hIndex) => {
+    , _elTds = filterBoolean(headers.map((h, hIndex) => {
       if (h.isHide) {
         return null;
       }
@@ -98,7 +102,7 @@ const _renderRows = (props) => {
           {_elOrTitle}
         </td>
       );
-    }).filter(Boolean);
+    }));
 
     return (
       <tr key={_rId} role="row">

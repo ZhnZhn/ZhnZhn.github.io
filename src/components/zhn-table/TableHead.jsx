@@ -1,3 +1,5 @@
+import { filterBoolean } from '../../utils/arrFn';
+
 import { isKeyEnterOrBlank } from '../hooks/fUseKey';
 import SvgMore from '../zhn/SvgMore';
 
@@ -42,17 +44,22 @@ const _renderHeader = (props, _hThKeyDown) => {
     onSort,
     onMenuMore
   } = props;
-  return headers.map((h, hIndex) => {
+  return filterBoolean(headers.map((h, hIndex) => {
     if (h.isHide) {
       return null;
     }
-    const { name, pn } = h
+    const {
+      name,
+      pn
+    } = h
     , {
-        style,
-        ariaSort, ariaLabel
-      } = crAppearance({
-        C, pn, name, sortBy, sortTo
-      })
+      style,
+      ariaSort,
+      ariaLabel
+    } = crAppearance({
+      C, pn, name,
+      sortBy, sortTo
+    })
     , _nameOrEl = hIndex === 0
         ? (<ThMore
              name={name}
@@ -78,7 +85,7 @@ const _renderHeader = (props, _hThKeyDown) => {
         {_nameOrEl}
       </th>
     );
-  }).filter(Boolean);
+  }));
 }
 
 const TableHead = (props) => {

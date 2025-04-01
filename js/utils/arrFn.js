@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.safeLoopOfArray = exports.joinByUndescore = exports.joinByNbsp = exports.joinByDot = exports.joinByComma = exports.joinByColon = exports.joinByBlank = exports.joinBy = exports.isInArrStr = exports.arrFactoryIsSameByProp = exports.arrFactoryFindIndexByProp = void 0;
+exports.safeLoopOfArray = exports.joinByUndescore = exports.joinByNbsp = exports.joinByDot = exports.joinByComma = exports.joinByColon = exports.joinByBlank = exports.joinBy = exports.isInArrStr = exports.filterBoolean = exports.arrFactoryIsSameByProp = exports.arrFactoryFindIndexByProp = void 0;
 var _bindTo = require("./bindTo");
 const _isArr = Array.isArray,
   _fIsItem = (propName, propValue) => item => item[propName] === propValue,
@@ -12,6 +12,8 @@ const arrFactoryIsSameByProp = propName => (arr, propValue) => _isArr(arr) ? _fi
 exports.arrFactoryIsSameByProp = arrFactoryIsSameByProp;
 const arrFactoryFindIndexByProp = propName => (arr, propValue) => _isArr(arr) ? _findArrIndexBy(arr, propName, propValue) : -1;
 exports.arrFactoryFindIndexByProp = arrFactoryFindIndexByProp;
+const filterBoolean = items => items.filter(Boolean);
+exports.filterBoolean = filterBoolean;
 const joinBy = function (delimeter) {
   for (var _len = arguments.length, restItems = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     restItems[_key - 1] = arguments[_key];

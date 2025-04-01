@@ -24,7 +24,7 @@ const _crTokens = _ref2 => {
     proof_type,
     platform
   } = _ref2;
-  return [_crToken('Started At', _getDate(started_at)), _crToken('Dev Status', development_status), _crToken('Org', org_structure), _crToken('Hardware Wallet', hardware_wallet), _crToken('Hash Alg.', hash_algorithm), _crToken('Proof Type', proof_type), _crToken('Platform', platform)].filter(Boolean);
+  return (0, _arrFn.filterBoolean)([_crToken('Started At', _getDate(started_at)), _crToken('Dev Status', development_status), _crToken('Org', org_structure), _crToken('Hardware Wallet', hardware_wallet), _crToken('Hash Alg.', hash_algorithm), _crToken('Proof Type', proof_type), _crToken('Platform', platform)]);
 };
 const _crOpenSource = is => is ? 'OpenSource' : 'not OpenSource';
 const _crIsActive = is => is ? 'Active' : 'not Active';

@@ -1,3 +1,5 @@
+import { filterBoolean } from '../../utils/arrFn';
+
 import { isFn, useCallback } from '../uiApi';
 import forEachInstance from './forEachInstance';
 
@@ -12,7 +14,7 @@ const useCompareTo = (
       _valueMoves.push(refInst.compareTo(dateTo))
     }
   })
-  , _numberOfNotUpdatedValueMoves = itemsLength - _valueMoves.filter(Boolean).length;
+  , _numberOfNotUpdatedValueMoves = itemsLength - filterBoolean(_valueMoves).length;
   if (itemsLength > 0 && _numberOfNotUpdatedValueMoves === 0) {
     updateMovingValues(_valueMoves)
   }

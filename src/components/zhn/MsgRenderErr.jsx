@@ -1,8 +1,10 @@
+import { filterBoolean } from '../../utils/arrFn';
+
 const CL_ERR_MSG = "err-msg";
 
-const _crMsgErr = msg => [
+const _crMsgErr = msg => filterBoolean([
   'Error occured during rendering', msg
-].filter(Boolean).join(' ') + '.';
+]).join(' ') + '.';
 
 const MsgRenderErr = ({
   isShow,

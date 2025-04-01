@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _uiApi = require("../uiApi");
 var _forEachInstance = _interopRequireDefault(require("./forEachInstance"));
 /*eslint-disable react-hooks/exhaustive-deps */
@@ -13,7 +14,7 @@ const useCompareTo = (hmInstances, updateMovingValues) => (0, _uiApi.useCallback
         _valueMoves.push(refInst.compareTo(dateTo));
       }
     }),
-    _numberOfNotUpdatedValueMoves = itemsLength - _valueMoves.filter(Boolean).length;
+    _numberOfNotUpdatedValueMoves = itemsLength - (0, _arrFn.filterBoolean)(_valueMoves).length;
   if (itemsLength > 0 && _numberOfNotUpdatedValueMoves === 0) {
     updateMovingValues(_valueMoves);
   }

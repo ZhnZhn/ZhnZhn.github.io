@@ -1,8 +1,15 @@
-import { isInArrStr } from "../../utils/arrFn";
-import { crGetRoute } from "../../utils/crRouter";
+import {
+  isInArrStr,
+  filterBoolean
+} from "../../utils/arrFn";
+import {
+  crGetRoute
+} from "../../utils/crRouter";
 import toPlural from "../../utils/toPlural";
 
-import { CIT_EUROSTAT_MAP } from "../../constants/CompItemType";
+import {
+  CIT_EUROSTAT_MAP
+} from "../../constants/CompItemType";
 import {
   CHT_AREA,
   CHT_SPLINE,
@@ -68,9 +75,9 @@ const _crItem = arrConfig => {
   return item;
 };
 
-const _crItems = (arr) => arr
-  .filter(Boolean)
-  .map(_crItem);
+const _crItems = (
+  arr
+) => filterBoolean(arr).map(_crItem);
 
 const _isMonthly = (
   mapFrequency
@@ -272,11 +279,11 @@ const _crChartOptionsImpl = (
   captions,
   mapFrequency,
   selectProps
-) => _getCrChartOptions(chartsType)(
+) => filterBoolean(_getCrChartOptions(chartsType)(
   captions,
   mapFrequency,
   selectProps
-).filter(Boolean);
+));
 
 export const crChartOptions = (
   selectPropsOrConfigs,

@@ -1,3 +1,5 @@
+import { filterBoolean } from '../../../utils/arrFn';
+
 import useRefInit from '../../hooks/useRefInit';
 import crToolbarItem from './crToolbarItem';
 
@@ -9,7 +11,7 @@ const useToolbar = ({
   toggleOptions,
   toggleDate,
   onAbout
-}) => useRefInit(() => [
+}) => useRefInit(() => filterBoolean([
   toggleLabels
     ? crToolbarItem('L', `${CLICK_TO_TOGGLE} input labels`, toggleLabels)
     : void 0,
@@ -23,6 +25,6 @@ const useToolbar = ({
     ? crToolbarItem('D', `${CLICK_TO_TOGGLE} date input`, toggleDate)
     : void 0,
   crToolbarItem('A', 'About data source', onAbout)
-].filter(Boolean))
+]))
 
 export default useToolbar

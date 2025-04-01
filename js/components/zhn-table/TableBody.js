@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _uiApi = require("../uiApi");
 var _tableFn = require("./tableFn");
 var _Style = require("./Style");
@@ -57,7 +58,7 @@ const _renderRows = props => {
     } = tableFn || {};
   return rows.map(r => {
     const _rId = r.id,
-      _elTds = headers.map((h, hIndex) => {
+      _elTds = (0, _arrFn.filterBoolean)(headers.map((h, hIndex) => {
         if (h.isHide) {
           return null;
         }
@@ -71,7 +72,7 @@ const _renderRows = props => {
           },
           children: _elOrTitle
         }, _key);
-      }).filter(Boolean);
+      }));
     return /*#__PURE__*/(0, _jsxRuntime.jsx)("tr", {
       role: "row",
       children: _elTds

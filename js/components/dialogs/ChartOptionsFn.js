@@ -37,7 +37,7 @@ const _crItem = arrConfig => {
   _addPropertyTo(item, "cId", arrConfig[4]);
   return item;
 };
-const _crItems = arr => arr.filter(Boolean).map(_crItem);
+const _crItems = arr => (0, _arrFn.filterBoolean)(arr).map(_crItem);
 const _isMonthly = mapFrequency => !mapFrequency || mapFrequency === "M";
 const _fCrCaptionBy = prefix => (sufix, isCluster) => `${prefix}: By ${sufix}${isCluster ? ": Cluster" : ""}`,
   _crCaptionBarBy = _fCrCaptionBy("Bar"),
@@ -121,7 +121,7 @@ const _getCrChartOptions = (0, _crRouter.crGetRoute)({
   df3: _crDF3
 }, _crDF);
 const _crCaptions = selectPropsOrConfigs => _isArr(selectPropsOrConfigs) ? selectPropsOrConfigs.map(item => item.caption || BLANK_CAPTION) : [BLANK_CAPTION, BLANK_CAPTION];
-const _crChartOptionsImpl = (chartsType, captions, mapFrequency, selectProps) => _getCrChartOptions(chartsType)(captions, mapFrequency, selectProps).filter(Boolean);
+const _crChartOptionsImpl = (chartsType, captions, mapFrequency, selectProps) => (0, _arrFn.filterBoolean)(_getCrChartOptions(chartsType)(captions, mapFrequency, selectProps));
 const crChartOptions = (selectPropsOrConfigs, chartsType, mapFrequency) => _crChartOptionsImpl(chartsType, _crCaptions(selectPropsOrConfigs), mapFrequency, selectPropsOrConfigs);
 exports.crChartOptions = crChartOptions;
 const _isCategory = (0, _arrFn.isInArrStr)(CATEGORY_TYPES);

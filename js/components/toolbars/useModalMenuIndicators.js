@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _uiApi = require("../uiApi");
 var _fRowTaType = require("./fRowTaType1");
 var _RowMfi = _interopRequireDefault(require("./RowMfi"));
@@ -21,7 +22,7 @@ const useModalMenuIndicators = (config, onAddMfi, onRemoveMfi) => (0, _uiApi.use
       onAddMfi,
       onRemoveMfi
     };
-  return [!(config.zhConfig || {}).isWithoutSma ? [_fRowTaType.RowSma, 'sma', {
+  return (0, _arrFn.filterBoolean)([!(config.zhConfig || {}).isWithoutSma ? [_fRowTaType.RowSma, 'sma', {
     ..._propsType1
   }] : '', _isMfi ? [_RowMfi.default, 'mfi', {
     ..._propsType2
@@ -29,7 +30,7 @@ const useModalMenuIndicators = (config, onAddMfi, onRemoveMfi) => (0, _uiApi.use
     ..._propsType1
   }] : '', _isMfi || (btTitle || '').indexOf('Volume') !== -1 ? [_fRowTaType.RowRsi, 'rsi', {
     ..._propsType1
-  }] : ''].filter(Boolean);
+  }] : '']);
 }, [config]);
 // onAddMfi, onRemoveMfi
 /*eslint-enable react-hooks/exhaustive-deps */

@@ -1,4 +1,5 @@
 import {
+  filterBoolean,
   joinByColon,
   joinByUndescore
 } from '../../utils/arrFn';
@@ -6,7 +7,9 @@ import {
   getC,
   getV
 } from '../../utils/getPropertyFn';
-import { toUpperCaseFirst } from '../../utils/toUpperCaseFirst';
+import {
+  toUpperCaseFirst
+} from '../../utils/toUpperCaseFirst';
 
 const _getC = item => toUpperCaseFirst(
   item && item.sc || getC(item)
@@ -35,11 +38,11 @@ export const crItemKey = (
   items,
   ...args
 ) => {
-  const _prefix = items
-    .filter(Boolean)
-    .map(item => getV(item) || getC(item) || item)
-    .join('_');
-  return joinByUndescore("_", _prefix, ...args);
+  const _prefix = joinByUndescore(
+    filterBoolean(items)
+      .map(item => getV(item) || getC(item) || item)
+  );
+  return joinByUndescore(_prefix, ...args);
 }
 
 //[itemCaption, title, subtitle, threeC]

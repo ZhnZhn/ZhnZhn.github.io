@@ -1,4 +1,6 @@
+import { filterBoolean } from '../../utils/arrFn';
 import { getObjectKeys } from '../../utils/isTypeFn';
+
 import { isCategory } from '../CategoryFn';
 
 const _crVariable = (
@@ -9,8 +11,7 @@ const _crVariable = (
   values: [value]
 });
 
-const _crVariables = items => items
-  .filter(Boolean)
+const _crVariables = items => filterBoolean(items)
   .map(({ slice }) => {
      const code = getObjectKeys(slice)[0];
      return _crVariable(code, slice[code]);

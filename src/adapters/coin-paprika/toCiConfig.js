@@ -1,14 +1,23 @@
-import { joinByBlank } from '../../utils/arrFn';
+import {
+  joinByBlank,
+  filterBoolean
+} from '../../utils/arrFn';
 
 import { toUpperCaseFirst } from './fnAdapter';
 
-const _crCaption = ({ name='', symbol='', rank='' }) =>
-  `${name} (${symbol}) (${rank})`;
+const _crCaption = ({
+  name='',
+  symbol='',
+  rank=''
+}) => `${name} (${symbol}) (${rank})`;
 
 const _getDate = str => str
   ? (''+str).split('T')[0]
   : '';
-const _crToken = (name, value) => value
+const _crToken = (
+  name,
+  value
+) => value
   ? `${name}: ${value}`
   : '';
 const _crTokens = ({
@@ -19,7 +28,7 @@ const _crTokens = ({
   hash_algorithm,
   proof_type,
   platform
-}) => [
+}) => filterBoolean([
   _crToken('Started At', _getDate(started_at)),
   _crToken('Dev Status', development_status),
   _crToken('Org', org_structure),
@@ -27,7 +36,7 @@ const _crTokens = ({
   _crToken('Hash Alg.', hash_algorithm),
   _crToken('Proof Type', proof_type),
   _crToken('Platform', platform)
-].filter(Boolean);
+]);
 
 const _crOpenSource = is => is ? 'OpenSource': 'not OpenSource';
 const _crIsActive = is => is ? 'Active': 'not Active';

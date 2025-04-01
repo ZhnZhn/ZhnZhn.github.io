@@ -1,3 +1,6 @@
+import { filterBoolean } from '../../../utils/arrFn';
+import { getObjectKeys } from '../../../utils/isTypeFn';
+
 import {
   TIME_ID,
   GEO_ID,
@@ -7,8 +10,6 @@ import {
 } from './EsConfig';
 import { toUpperCaseFirst } from './dimConfigFn';
 
-const _keys = Object.keys;
-
 const _crC = label => (label || '')
   .split('_')
   .map(toUpperCaseFirst)
@@ -16,7 +17,7 @@ const _crC = label => (label || '')
 
 const _crEsOptions = (category, id) => {
   const { label } = category || {};
-  return _keys(label || {}).map(k => ({
+  return getObjectKeys(label).map(k => ({
     caption: label[k],
     value: k,
     id
@@ -42,7 +43,7 @@ const _getMapFrequency = dims => {
 const crDimConfigEs = dimension => {
   const dims = [null]
   , adjDims = [];
-  _keys(dimension).forEach(k => {
+  getObjectKeys(dimension).forEach(k => {
     if (k !== TIME_ID) {
       const _dim = dimension[k]
       , {label, category} = _dim || {}
@@ -63,8 +64,7 @@ const crDimConfigEs = dimension => {
       }
     }
   })
-  const _dims = dims
-    .filter(Boolean)
+  const _dims = filterBoolean(dims)
     .concat(adjDims);
   return {
     dims: _dims,

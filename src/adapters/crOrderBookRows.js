@@ -1,4 +1,9 @@
 import Big from "big.js";
+
+import {
+  filterBoolean
+} from "../utils/arrFn";
+
 import {
   isNumber,
   bindTo
@@ -24,14 +29,16 @@ const _crItemHeader = (
    ...crStyleBold({ color })
 })
 
-const _crTableHeaders = (isOrderNumber) => [
+const _crTableHeaders = (
+  isOrderNumber
+) => filterBoolean([
   _crItemHeader("Bid", "b_p", "#4caf50")
   , isOrderNumber ? _crItemHeader("BN", "b_n") : void 0
   , _crItemHeader("Bid QTY", "b_q")
   , _crItemHeader("Ask QTY", "a_q")
   , isOrderNumber ? _crItemHeader("AN", "a_n") : void 0
   , _crItemHeader("Ask", "a_p", "#f44336")
-].filter(Boolean);
+]);
 
 const _calcTotal = (arr, valueIndex, len) => {
   let _total = Big(0), i = 0;

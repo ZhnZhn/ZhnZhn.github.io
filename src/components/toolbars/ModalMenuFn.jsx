@@ -1,6 +1,9 @@
+import { filterBoolean } from '../../utils/arrFn';
+import { mlsToDmy } from '../../utils/dateFn';
+
 import { isFn, useMemo } from '../uiApi';
 import { CL_ROW_PANE_TOPIC, crElementBorderCn } from '../styleFn';
-import { mlsToDmy } from '../../utils/dateFn';
+
 
 import {
   crSubItem,
@@ -39,7 +42,7 @@ const _crModelMore = (
   CL_ROW_PANE_TOPIC,
   125,
   2, {
-  p0: [
+  p0: filterBoolean([
     crSubItem("p1", "Chart"),
     isFn(props.onAddToWatch)
       ? crItem("Add To", props.onAddToWatch) : void 0,
@@ -49,7 +52,7 @@ const _crModelMore = (
       ? crItem("Zoom", props.onZoom) : void 0,
     crItem("Copy", props.onCopy),
     crItem("PasteTo", props.onPasteTo)
-  ].filter(Boolean),
+  ]),
   p1: [
     crItem("x2 Height", props.onX2H, false),
     crItem("Full Screen", props.onFullScreen),
