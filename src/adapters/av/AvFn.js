@@ -1,7 +1,8 @@
 import isEmpty from '../../utils/isEmpty';
+import { isNumber } from '../../utils/isTypeFn';
+
 import {
   crError,
-  isNaN,
   roundBy,
   ymdToUTC
 } from '../AdapterFn';
@@ -59,7 +60,7 @@ export const fCrData = (
   return (data || [])
     .reduce((arr, item={}) => {
        const _y = _crY(item[paramNameY]);
-       if (!isNaN(_y)) {
+       if (isNumber(_y)) {
          arr.push([ymdToUTC(item[paramNameX]), _y])
        }
        return arr;

@@ -1,10 +1,11 @@
 import { joinByColon } from '../../utils/arrFn';
-
-import {
-  isNaN,
+import {  
   isArr,
   isObj,
-  isNumber,
+  isNumber
+} from '../../utils/isTypeFn';
+
+import {
   getByPropsFrom,
   getValue,
   getCaption,
@@ -110,7 +111,7 @@ export const crData = (
          if ( isNumber(dateMls) && !(isFilter && item[dfFilterName] !== two) ) {
            data.push({
              x: dateMls,
-             y: isNaN(v) ? null : v
+             y: isNumber(v) ? v : null
            })
          }
        }

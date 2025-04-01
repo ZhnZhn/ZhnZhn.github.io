@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 var _AdapterFn = require("../AdapterFn");
@@ -44,7 +45,7 @@ const _toData = str => {
     _childNodes = _seria.childNodes || [];
     _childNodes.forEach(node => {
       _v = parseFloat(node.getAttribute('OBS_VALUE'));
-      if (!(0, _AdapterFn.isNaN)(_v)) {
+      if ((0, _isTypeFn.isNumber)(_v)) {
         data.push([(0, _AdapterFn.ymdToUTC)(node.getAttribute('TIME_PERIOD')), _v, _crValueStatus(node)]);
       }
     });

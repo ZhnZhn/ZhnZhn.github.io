@@ -61,7 +61,6 @@ import {
 export {
   isObj,
   isArr,
-  isNaN,
   isUndef,
   isTypeNumber,
   isNumber,

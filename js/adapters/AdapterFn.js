@@ -46,7 +46,6 @@ var _getterPointFn = require("./getterPointFn");
 var _isTypeFn = require("../utils/isTypeFn");
 exports.isObj = _isTypeFn.isObj;
 exports.isArr = _isTypeFn.isArr;
-exports.isNaN = _isTypeFn.isNaN;
 exports.isUndef = _isTypeFn.isUndef;
 exports.isTypeNumber = _isTypeFn.isTypeNumber;
 exports.isNumber = _isTypeFn.isNumber;

@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.getResultsData = exports.getResults = exports.getResError = exports.getFrequency = exports.crData = exports.crConfOption = exports.BEA_DATA_URL = void 0;
 var _arrFn = require("../../utils/arrFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 const BEA_DATA_URL = exports.BEA_DATA_URL = "https://apps.bea.gov";
 const INDUSTRY_FACTSHEET_URL = `${BEA_DATA_URL}/industry/factsheet/factsheet.html`;
@@ -11,11 +12,11 @@ exports.getFrequency = getFrequency;
 const _getBeaapi = json => (json || {}).BEAAPI || {};
 const getResults = json => _getBeaapi(json).Results,
   getResError = json => _getBeaapi(json).Error,
-  getResultsData = Results => (0, _AdapterFn.getByPropsFrom)(Results, ...((0, _AdapterFn.isArr)(Results) ? [0, "Data"] : ["Data"]));
+  getResultsData = Results => (0, _AdapterFn.getByPropsFrom)(Results, ...((0, _isTypeFn.isArr)(Results) ? [0, "Data"] : ["Data"]));
 exports.getResultsData = getResultsData;
 exports.getResError = getResError;
 exports.getResults = getResults;
-const _getResultsInfo = Results => (0, _AdapterFn.isArr)(Results) ? Results[0] : Results;
+const _getResultsInfo = Results => (0, _isTypeFn.isArr)(Results) ? Results[0] : Results;
 const _crName = info => (0, _arrFn.joinByColon)(info.Statistic, (info.UTCProductionTime || "").replace("T", " "));
 const _crDescr = info => (info.Notes || []).map(note => {
   const {
@@ -67,13 +68,13 @@ const crData = (json, option) => {
     two = (0, _AdapterFn.getValue)(items[1]),
     isFilter = dfFilterName ? true : false;
   return (getResultsData(Results) || []).reduce((data, item) => {
-    if ((0, _AdapterFn.isObj)(item)) {
+    if ((0, _isTypeFn.isObj)(item)) {
       const v = parseFloat(item.DataValue),
         dateMls = _crUTC(item);
-      if ((0, _AdapterFn.isNumber)(dateMls) && !(isFilter && item[dfFilterName] !== two)) {
+      if ((0, _isTypeFn.isNumber)(dateMls) && !(isFilter && item[dfFilterName] !== two)) {
         data.push({
           x: dateMls,
-          y: (0, _AdapterFn.isNaN)(v) ? null : v
+          y: (0, _isTypeFn.isNumber)(v) ? v : null
         });
       }
     }
