@@ -1,11 +1,14 @@
+import {
+  isStr,
+  isTypeNumber,
+} from '../../utils/isTypeFn';
+
 export {
   assign,
   getValue
 } from '../AdapterFn';
 
-import {
-  isStr,
-  isTypeNumber,
+import {  
   roundBy,
   crZhConfig,
   crDfLink

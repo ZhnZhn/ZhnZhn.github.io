@@ -3,9 +3,10 @@
 exports.__esModule = true;
 exports.crTableRows = exports.crTableOptions = exports.crTableFlatHeaders = exports.crTableConfig = exports.crStyleCenter = exports.crStyleBold = exports.crRankProps = exports.crNumberProps = exports.crNameProps = exports.crCaptionItemsProps = void 0;
 var _arrFn = require("../utils/arrFn");
+var _isTypeFn = require("../utils/isTypeFn");
 var _AdapterFn = require("./AdapterFn");
 const crNameProps = (name, pnOrIsHideOrVoid, isHideOrVoid) => {
-  const [pn, isHide] = (0, _AdapterFn.isStr)(pnOrIsHideOrVoid) ? [pnOrIsHideOrVoid, isHideOrVoid] : [name.toLowerCase(), pnOrIsHideOrVoid];
+  const [pn, isHide] = (0, _isTypeFn.isStr)(pnOrIsHideOrVoid) ? [pnOrIsHideOrVoid, isHideOrVoid] : [name.toLowerCase(), pnOrIsHideOrVoid];
   return {
     name,
     pn,
@@ -57,7 +58,7 @@ const _getCellValue = (r, h) => {
     _isToNumber = !!toN,
     _toFixedBy = _isToNumber && toN[0],
     _strV = r[pn];
-  return _isToNumber ? (0, _AdapterFn.isTypeNumber)(_toFixedBy) ? (0, _AdapterFn.roundBy)(_strV, _toFixedBy) : _replaceNaN(parseFloat(_strV)) : _strV;
+  return _isToNumber ? (0, _isTypeFn.isTypeNumber)(_toFixedBy) ? (0, _AdapterFn.roundBy)(_strV, _toFixedBy) : _replaceNaN(parseFloat(_strV)) : _strV;
 };
 const crTableOptions = (id, title, headers, flatHeaders, rows, dataSource, fns) => ({
   id,

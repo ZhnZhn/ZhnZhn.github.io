@@ -1,10 +1,12 @@
 import {
   safeLoopOfArray
 } from "../utils/arrFn";
-
 import {
   isTypeNumber,
-  isStr,
+  isStr
+} from "../utils/isTypeFn";
+
+import {
   numberFormat,
   roundBy
 } from "./AdapterFn";
@@ -166,7 +168,7 @@ export const crTableFlatHeaders = (
 ) => {
   const _arr = [];
   let id = 0;
-  safeLoopOfArray(headers, header => {    
+  safeLoopOfArray(headers, header => {
     if (!safeLoopOfArray(header.items, headerItem => {
       id = _addItemTo(_arr, headerItem, id)
     })) {

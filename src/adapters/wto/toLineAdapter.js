@@ -1,7 +1,7 @@
 import { joinByColon } from '../../utils/arrFn';
+import { isStr } from '../../utils/isTypeFn';
 
 import {
-  isStr,
   assign,
   getCaption,
   ymdToUTC

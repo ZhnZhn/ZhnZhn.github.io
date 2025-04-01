@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _AdapterFn = require("../AdapterFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"));
@@ -17,7 +17,7 @@ const _crData = (json, option) => (0, _compareByFn.sortDescCategory)((0, _fnAdap
       Value,
       ReportingEconomy
     } = item || {};
-    if ((0, _AdapterFn.isNumber)(Value) && (0, _AdapterFn.isStr)(ReportingEconomy)) {
+    if ((0, _isTypeFn.isNumber)(Value) && (0, _isTypeFn.isStr)(ReportingEconomy)) {
       data.push((0, _CategoryFn.crCategoryPoint)(item.Value, _crReportingEconomy(item.ReportingEconomy)));
     }
     return data;

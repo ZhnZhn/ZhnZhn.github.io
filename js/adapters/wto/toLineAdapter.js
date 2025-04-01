@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _arrFn = require("../../utils/arrFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _crAdapterType = require("../crAdapterType1");
@@ -23,7 +24,7 @@ const crTitle = (option, json) => {
 const trOption = (option, json) => {
   (0, _AdapterFn.assign)(option, crTitle(option, json));
 };
-const _getPeriodCode = periodCode => periodCode === "A" ? "" : (0, _AdapterFn.isStr)(periodCode) ? "-" + periodCode.replace("M", "") : "-NN";
+const _getPeriodCode = periodCode => periodCode === "A" ? "" : (0, _isTypeFn.isStr)(periodCode) ? "-" + periodCode.replace("M", "") : "-NN";
 const _fCrItemTuple = () => item => [(0, _AdapterFn.ymdToUTC)('' + item.Year + _getPeriodCode(item.PeriodCode)), item.Value],
   _crData = (0, _crAdapterType.fCrDataType1)(_fnAdapter.getDataset, _fCrItemTuple),
   crData = json => _crData(json).sort(_compareByFn.compareByDate);

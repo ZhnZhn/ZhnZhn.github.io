@@ -4,12 +4,14 @@ import {
   LT_BT,
   LT_CB
 } from '../constants/LoadType';
+import {
+  isArr,
+  isStr
+} from '../utils/isTypeFn';
 
 import {
   FN_IDENTITY,
-  isArr,
   isInArrStr,
-  isStr,
   getValue,
   crError
 } from './AdapterFn';

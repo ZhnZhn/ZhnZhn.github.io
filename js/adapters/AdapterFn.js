@@ -47,7 +47,6 @@ var _isTypeFn = require("../utils/isTypeFn");
 exports.isArr = _isTypeFn.isArr;
 exports.isTypeNumber = _isTypeFn.isTypeNumber;
 exports.isNumber = _isTypeFn.isNumber;
-exports.isStr = _isTypeFn.isStr;
 const isNumberOrNull = v => (0, _isTypeFn.isNumber)(v) || v === null;
 exports.isNumberOrNull = isNumberOrNull;
 const assign = exports.assign = Object.assign;

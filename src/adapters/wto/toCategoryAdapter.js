@@ -1,4 +1,5 @@
-import { isNumber, isStr } from '../AdapterFn';
+import { isNumber, isStr } from '../../utils/isTypeFn';
+
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
 import crAdapterCategory from '../crAdapterCategory';

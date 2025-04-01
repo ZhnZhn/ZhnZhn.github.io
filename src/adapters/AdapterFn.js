@@ -61,8 +61,7 @@ import {
 export {
   isArr,
   isTypeNumber,
-  isNumber,
-  isStr
+  isNumber
 } from '../utils/isTypeFn';
 import {
   isArr,

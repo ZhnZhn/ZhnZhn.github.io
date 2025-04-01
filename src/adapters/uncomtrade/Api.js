@@ -1,6 +1,9 @@
 import {
   isArr,
-  isStr,
+  isStr
+} from '../../utils/isTypeFn';
+
+import {  
   assign,
   crError
 } from '../AdapterFn';

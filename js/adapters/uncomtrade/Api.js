@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 var _conf = require("./conf");
 var _fnAdapter = require("./fnAdapter");
@@ -26,7 +27,7 @@ const UnComtradeApi = {
     return _crCategoryByPartnerUrl(option.proxy, one, option.two, rg, option.time) + _crAggregateOrWorldPatnerQuery(option, one);
   },
   checkResponse(json) {
-    if (json && (0, _AdapterFn.isArr)(json.data)) {
+    if (json && (0, _isTypeFn.isArr)(json.data)) {
       return json;
     }
     const {
@@ -34,10 +35,10 @@ const UnComtradeApi = {
       message,
       statusCode
     } = json || {};
-    if ((0, _AdapterFn.isStr)(error)) {
+    if ((0, _isTypeFn.isStr)(error)) {
       throw (0, _AdapterFn.crError)('', error);
     }
-    if ((0, _AdapterFn.isStr)(message)) {
+    if ((0, _isTypeFn.isStr)(message)) {
       throw (0, _AdapterFn.crError)('', statusCode === 429 ? `${statusCode}: ${message.replace('in 1 seconds', 'in 1 minutes')}` : message);
     }
     throw (0, _AdapterFn.crError)();

@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.getValue = exports.crData = exports.crConfOption = exports.assign = exports.CRYPTOCOMPARE_COM = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 exports.assign = _AdapterFn.assign;
 exports.getValue = _AdapterFn.getValue;
@@ -9,16 +10,16 @@ var _pointFn = require("../pointFn");
 const CRYPTOCOMPARE_COM = exports.CRYPTOCOMPARE_COM = 'cryptocompare.com';
 const ITEM_URL = `https://${CRYPTOCOMPARE_COM}/coins`,
   CRYPTOCOMPARE_OVERVIEW = "CryptoCompare Overview",
-  _crDfLinkTuple = value => value && (0, _AdapterFn.isStr)(value) ? [`${CRYPTOCOMPARE_OVERVIEW} (${value})`, `${ITEM_URL}/${value.toLowerCase()}/overview`] : [CRYPTOCOMPARE_OVERVIEW, ITEM_URL];
-const _isHLOC = p => (0, _AdapterFn.isTypeNumber)(p.open) && (0, _AdapterFn.isTypeNumber)(p.high) && (0, _AdapterFn.isTypeNumber)(p.low) && (0, _AdapterFn.isTypeNumber)(p.close);
+  _crDfLinkTuple = value => value && (0, _isTypeFn.isStr)(value) ? [`${CRYPTOCOMPARE_OVERVIEW} (${value})`, `${ITEM_URL}/${value.toLowerCase()}/overview`] : [CRYPTOCOMPARE_OVERVIEW, ITEM_URL];
+const _isHLOC = p => (0, _isTypeFn.isTypeNumber)(p.open) && (0, _isTypeFn.isTypeNumber)(p.high) && (0, _isTypeFn.isTypeNumber)(p.low) && (0, _isTypeFn.isTypeNumber)(p.close);
 const _addPointTo = (arr, d, value) => {
-  if ((0, _AdapterFn.isTypeNumber)(value)) {
+  if ((0, _isTypeFn.isTypeNumber)(value)) {
     //arr.push({ x: d, y: value })
     arr.push([d, value]);
   }
 };
 const _addColumnPointTo = (arr, date, p, volume) => {
-  if ((0, _AdapterFn.isTypeNumber)(volume)) {
+  if ((0, _isTypeFn.isTypeNumber)(volume)) {
     arr.push((0, _pointFn.crVolumePoint)({
       date: date,
       open: p.open,
@@ -49,7 +50,7 @@ const crData = json => {
     dToVolume = [],
     dHL = [];
   json.Data.forEach(p => {
-    if ((0, _AdapterFn.isTypeNumber)(p.time)) {
+    if ((0, _isTypeFn.isTypeNumber)(p.time)) {
       const _date = p.time * 1000;
       _addPointTo(data, _date, p.close);
       _addPointTo(dVolume, _date, p.volumefrom);

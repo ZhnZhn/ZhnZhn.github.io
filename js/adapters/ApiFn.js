@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.fGetRequestUrl = exports.fCrObUrl = exports.fCrDfUrl = exports.crRouteDfObApi = void 0;
 var _LoadType = require("../constants/LoadType");
+var _isTypeFn = require("../utils/isTypeFn");
 var _AdapterFn = require("./AdapterFn");
 const _isWithCORS = (0, _AdapterFn.isInArrStr)([_LoadType.LT_BN, _LoadType.LT_BG, _LoadType.LT_BT, _LoadType.LT_CB]);
 const _crAllOriginsUrl = (url, _ref) => {
@@ -32,12 +33,12 @@ const _getBlockchainData = function (json, option, getData) {
   if (getData === void 0) {
     getData = _AdapterFn.FN_IDENTITY;
   }
-  return getData(json && (0, _AdapterFn.isStr)(json.contents) ? JSON.parse(json.contents) : json, option);
+  return getData(json && (0, _isTypeFn.isStr)(json.contents) ? JSON.parse(json.contents) : json, option);
 };
 const _fCheckResponse = getData => (json, option) => {
   try {
     const _data = _getBlockchainData(json, option, getData);
-    if ((0, _AdapterFn.isArr)(_data) || _data && (0, _AdapterFn.isArr)(_data.asks) && (0, _AdapterFn.isArr)(_data.bids)) {
+    if ((0, _isTypeFn.isArr)(_data) || _data && (0, _isTypeFn.isArr)(_data.asks) && (0, _isTypeFn.isArr)(_data.bids)) {
       return _data;
     }
     throw (0, _AdapterFn.crError)();
