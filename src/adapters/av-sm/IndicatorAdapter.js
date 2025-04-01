@@ -1,3 +1,4 @@
+import { getColorBlack } from '../../components/styleFn';
 import pipe from '../../utils/pipe';
 
 import {
@@ -11,7 +12,6 @@ import { crSeriaConfig } from '../../charts/ChartConfigFn';
 import {
   assign,
   crGetRoute,
-  getColorBlack,
   ymdToUTC
 } from './fnAdapter';
 

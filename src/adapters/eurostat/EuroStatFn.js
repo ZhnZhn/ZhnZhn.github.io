@@ -1,7 +1,4 @@
-export {
-  getColorBlack,
-  findMinY
-} from '../AdapterFn';
+export { findMinY } from '../AdapterFn';
 
 import {
   isArr,

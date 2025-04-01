@@ -6,6 +6,7 @@ exports.default = void 0;
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _configBuilderFn = require("../charts/configBuilderFn");
 var _Tooltip = require("../charts/Tooltip");
+var _styleFn = require("../components/styleFn");
 var _AdapterFn = require("./AdapterFn");
 const CATEGORIES = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 const MIN_MAX_COLOR = '#008b8b',
@@ -19,7 +20,7 @@ const MIN_MAX_COLOR = '#008b8b',
   },
   _crConfigAvg = () => ({
     index: 4,
-    color: (0, _AdapterFn.getColorBlack)(),
+    color: (0, _styleFn.getColorBlack)(),
     isVisible: false
   });
 const _getYear = str => str.split("-")[0];

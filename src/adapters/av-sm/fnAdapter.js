@@ -1,5 +1,4 @@
 export {
-  getColorBlack,
   assign,
   isArr,
   isInArrStr,

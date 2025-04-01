@@ -2,9 +2,8 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toPointArr = exports.setInfoTo = exports.setDataAndInfo = exports.isNotGeoOrReporter = exports.isEuGeoEntity = exports.isEuCaption = exports.getColorBlack = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
+exports.toPointArr = exports.setInfoTo = exports.setDataAndInfo = exports.isNotGeoOrReporter = exports.isEuGeoEntity = exports.isEuCaption = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
 var _AdapterFn = require("../AdapterFn");
-exports.getColorBlack = _AdapterFn.getColorBlack;
 exports.findMinY = _AdapterFn.findMinY;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _Chart = require("../../charts/Chart");

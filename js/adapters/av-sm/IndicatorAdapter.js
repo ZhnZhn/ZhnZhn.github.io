@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../../components/styleFn");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _ChartConfigFn = require("../../charts/ChartConfigFn");
@@ -20,7 +21,7 @@ const TWO_YEARS_DAYS = 501,
   BBANDS_M = 'Real Middle Band',
   BBANDS_L = 'Real Lower Band',
   _crColorBlackStyle = {
-    color: (0, _fnAdapter.getColorBlack)()
+    color: (0, _styleFn.getColorBlack)()
   },
   S_RED = {
     color: '#f44336'

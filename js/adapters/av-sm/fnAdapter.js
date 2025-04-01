@@ -1,9 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.toUpperCaseFirst = exports.roundBy = exports.isTokenInStr = exports.isInArrStr = exports.isArr = exports.getValueCaption = exports.getValue = exports.getColorBlack = exports.getCaption = exports.fCrData = exports.crIntradayConfigOption = exports.crGetRoute = exports.crError = exports.crDfItemKey = exports.assign = exports.DF_FN_EOD = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.toUpperCaseFirst = exports.roundBy = exports.isTokenInStr = exports.isInArrStr = exports.isArr = exports.getValueCaption = exports.getValue = exports.getCaption = exports.fCrData = exports.crIntradayConfigOption = exports.crGetRoute = exports.crError = exports.crDfItemKey = exports.assign = exports.DF_FN_EOD = void 0;
 var _AdapterFn = require("../AdapterFn");
-exports.getColorBlack = _AdapterFn.getColorBlack;
 exports.assign = _AdapterFn.assign;
 exports.isArr = _AdapterFn.isArr;
 exports.isInArrStr = _AdapterFn.isInArrStr;

@@ -1,19 +1,23 @@
 import pipe from '../utils/pipe';
+
 import {
   crCategoryConfig,
   fAddSeries,
   fAddTooltip,
   fAdd
 } from '../charts/configBuilderFn';
-
 import {
   crSplineSeriaConfig
 } from '../charts/configBuilderFn';
 import {
   tooltipCategorySimple
 } from '../charts/Tooltip';
+
 import {
-  getColorBlack,
+  getColorBlack
+} from '../components/styleFn';
+
+import {
   crError,
   crValueMoving,
   roundBy,
