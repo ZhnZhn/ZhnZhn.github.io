@@ -1,4 +1,6 @@
 import { getColorBlack } from '../../components/styleFn';
+
+import { getObjectKeys } from '../../utils/isTypeFn';
 import pipe from '../../utils/pipe';
 
 import {
@@ -50,21 +52,28 @@ const _crValuePropName = (indicator) => {
   }
 };
 
-const _crValue = ( json, option ) => {
+const _crValue = (
+  json,
+  option
+) => {
   const {
-          indicator,
-          forDays=TWO_YEARS_DAYS
-        } = option
-      , _indicator = _crValuePropName(indicator)
-      , value = json[`${TA} ${_indicator}`]
-      , dateKeys = value
-           ? Object.keys(value).sort().reverse()
-           : []
-      , _len = dateKeys.length
-      , max = _len < forDays
-          ? _len-1
-          : forDays;
-    return { value, dateKeys, max };
+    indicator,
+    forDays=TWO_YEARS_DAYS
+  } = option
+  , _indicator = _crValuePropName(indicator)
+  , value = json[`${TA} ${_indicator}`]
+  , dateKeys = getObjectKeys(value)
+     .sort()
+     .reverse()
+  , _len = dateKeys.length
+  , max = _len < forDays
+     ? _len-1
+     : forDays;
+  return {
+    value,
+    dateKeys,
+    max
+  };
 }
 
 const _toDataArrs = ({dateKeys, value, max}, arrProp) => {

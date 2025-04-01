@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _CategoryFn = require("../CategoryFn");
 const _crVariable = (code, value) => ({
   code,
@@ -11,13 +12,13 @@ const _crVariables = items => items.filter(Boolean).map(_ref => {
   let {
     slice
   } = _ref;
-  const code = Object.keys(slice)[0];
+  const code = (0, _isTypeFn.getObjectKeys)(slice)[0];
   return _crVariable(code, slice[code]);
 });
 const _crTimeVariable = (seriaType, time, dfC) => {
   const _isCategory = (0, _CategoryFn.isCategory)(seriaType),
     _tidValue = _isCategory ? time : "*",
-    _arr = [_crVariable('Tid', _tidValue)];
+    _arr = [_crVariable("Tid", _tidValue)];
   if (_isCategory) {
     _arr.push(_crVariable(dfC, "*"));
   }

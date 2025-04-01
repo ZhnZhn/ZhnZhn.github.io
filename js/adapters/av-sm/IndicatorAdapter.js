@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../../components/styleFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _ChartConfigFn = require("../../charts/ChartConfigFn");
@@ -54,7 +55,7 @@ const _crValue = (json, option) => {
     } = option,
     _indicator = _crValuePropName(indicator),
     value = json[`${TA} ${_indicator}`],
-    dateKeys = value ? Object.keys(value).sort().reverse() : [],
+    dateKeys = (0, _isTypeFn.getObjectKeys)(value).sort().reverse(),
     _len = dateKeys.length,
     max = _len < forDays ? _len - 1 : forDays;
   return {

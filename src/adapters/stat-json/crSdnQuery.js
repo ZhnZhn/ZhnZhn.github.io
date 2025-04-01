@@ -1,6 +1,10 @@
+import { getObjectKeys } from '../../utils/isTypeFn';
 import { isCategory } from '../CategoryFn';
 
-const _crVariable = (code, value) => ({
+const _crVariable = (
+  code,
+  value
+) => ({
   code,
   values: [value]
 });
@@ -8,7 +12,7 @@ const _crVariable = (code, value) => ({
 const _crVariables = items => items
   .filter(Boolean)
   .map(({ slice }) => {
-     const code = Object.keys(slice)[0];
+     const code = getObjectKeys(slice)[0];
      return _crVariable(code, slice[code]);
   });
 
@@ -19,7 +23,7 @@ const _crTimeVariable = (
 ) => {
    const _isCategory = isCategory(seriaType)
    , _tidValue = _isCategory ? time : "*"
-   , _arr = [_crVariable('Tid', _tidValue)];
+   , _arr = [_crVariable("Tid", _tidValue)];
    if (_isCategory){
      _arr.push(_crVariable(dfC, "*"))
    }
