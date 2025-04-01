@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.fCrDataType1 = exports.fCrConfOptionExchangeRate = exports.crAdapterType1 = void 0;
 var _crConfigType = _interopRequireDefault(require("../charts/crConfigType1"));
 var _configBuilderFn = require("../charts/configBuilderFn");
+var _isTypeFn = require("../utils/isTypeFn");
 var _AdapterFn = require("./AdapterFn");
 const _crZhConfig = _ref => {
     let {
@@ -37,8 +38,8 @@ exports.fCrConfOptionExchangeRate = fCrConfOptionExchangeRate;
 const fCrDataType1 = (getItems, fCrItemTuple) => (json, options) => {
   const _crItemTuple = fCrItemTuple(options);
   return getItems(json).reduce((data, item) => {
-    const p = (0, _AdapterFn.isObj)(item) ? _crItemTuple(item) : void 0;
-    if (p && (0, _AdapterFn.isNumber)(p[0]) && (0, _AdapterFn.isNumber)(p[1])) {
+    const p = (0, _isTypeFn.isObj)(item) ? _crItemTuple(item) : void 0;
+    if (p && (0, _isTypeFn.isNumber)(p[0]) && (0, _isTypeFn.isNumber)(p[1])) {
       data.push(p);
     }
     return data;
@@ -58,7 +59,7 @@ const crAdapterType1 = _ref2 => {
     crKey,
     toConfig(json, option) {
       const _data = crData(json, option),
-        data = (0, _AdapterFn.isArr)(_data) ? _data : (_data || {}).data,
+        data = (0, _isTypeFn.isArr)(_data) ? _data : (_data || {}).data,
         confOption = (0, _AdapterFn.assign)(crConfOption(option, json, _data), addConfOption(option, json));
       trOption(option, json);
       return {

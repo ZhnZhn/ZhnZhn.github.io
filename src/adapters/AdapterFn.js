@@ -59,7 +59,6 @@ import {
 } from './getterPointFn';
 
 export {
-  isObj,
   isArr,
   isTypeNumber,
   isNumber,

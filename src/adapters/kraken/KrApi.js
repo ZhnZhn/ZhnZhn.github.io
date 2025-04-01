@@ -1,7 +1,8 @@
 import {
   isArr,
   isObj
-} from '../AdapterFn';
+} from '../../utils/isTypeFn';
+
 import {
   crRouteDfObApi
 } from '../ApiFn';

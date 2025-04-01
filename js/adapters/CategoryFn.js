@@ -3,9 +3,10 @@
 exports.__esModule = true;
 exports.isTreeMap = exports.isDotSet = exports.isColumnOrBarCategory = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.fCrTreeMapPoint = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
 var _arrFn = require("../utils/arrFn");
+var _isTypeFn = require("../utils/isTypeFn");
 var _ChartType = require("../constants/ChartType");
 var _AdapterFn = require("./AdapterFn");
-const _getSeriaType = optionOrStr => (0, _AdapterFn.isObj)(optionOrStr) ? optionOrStr.seriaType : optionOrStr,
+const _getSeriaType = optionOrStr => (0, _isTypeFn.isObj)(optionOrStr) ? optionOrStr.seriaType : optionOrStr,
   _fIsSeriaType = isSeriaType => optionOrStr => isSeriaType(_getSeriaType(optionOrStr));
 const TREE_MAP_CHART_TYPES = [_ChartType.CHT_TREE_MAP, _ChartType.CHT_TREE_MAP_CLUSTER];
 const isTreeMap = exports.isTreeMap = _fIsSeriaType((0, _arrFn.isInArrStr)(TREE_MAP_CHART_TYPES));
@@ -29,7 +30,7 @@ const arrangeSeriaByCategories = (series, categories) => {
 exports.arrangeSeriaByCategories = arrangeSeriaByCategories;
 const getCategories = chart => ((chart.xAxis || [])[0] || {}).categories;
 exports.getCategories = getCategories;
-const isCategoryCase = (config, categories) => (0, _AdapterFn.isArr)((config.xAxis || {}).categories) && (0, _AdapterFn.isArr)(categories);
+const isCategoryCase = (config, categories) => (0, _isTypeFn.isArr)((config.xAxis || {}).categories) && (0, _isTypeFn.isArr)(categories);
 exports.isCategoryCase = isCategoryCase;
 const crCategories = data => data.map(item => (0, _AdapterFn.domSanitize)(item.c));
 exports.crCategories = crCategories;

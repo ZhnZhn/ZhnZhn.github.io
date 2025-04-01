@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 var _fnAdapter = require("./fnAdapter");
@@ -12,7 +13,7 @@ const EcbApi = {
     return `${option.proxy}${API_URL}/${option.dfR}/${(0, _fnAdapter.crItemId)(option)}?format=jsondata&detail=dataonly&${_queryDate}`;
   },
   checkResponse(json) {
-    if (!(0, _AdapterFn.isObj)((0, _fnAdapter.getSeriesObservertions)(json))) {
+    if (!(0, _isTypeFn.isObj)((0, _fnAdapter.getSeriesObservertions)(json))) {
       throw (0, _AdapterFn.crError)();
     }
   }

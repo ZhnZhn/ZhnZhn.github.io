@@ -1,12 +1,16 @@
 import crConfigType1 from '../charts/crConfigType1';
 import { crSeriaConfigFromAdapter } from '../charts/configBuilderFn';
+
+import {
+  isArr,
+  isObj,
+  isNumber
+} from '../utils/isTypeFn';
+
 import {
   FN_IDENTITY,
   FN_NOOP,
   crDfItemKey,
-  isArr,
-  isObj,
-  isNumber,
   assign,
   setItemCaptionCurrencyRateTo
 } from './AdapterFn';
@@ -29,7 +33,7 @@ export const fCrConfOptionExchangeRate = (
   exchangeRateCaseId="EXR"
 ) => option => {
   if (option.dfCase === exchangeRateCaseId) {
-    setItemCaptionCurrencyRateTo(option, toCurrency)    
+    setItemCaptionCurrencyRateTo(option, toCurrency)
   }
   return crConfOptionDf(option);
 }

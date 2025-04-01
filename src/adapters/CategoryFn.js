@@ -1,4 +1,8 @@
 import { isInArrStr } from '../utils/arrFn';
+import {
+  isArr,
+  isObj
+} from '../utils/isTypeFn';
 
 import {
   CHT_TREE_MAP,
@@ -13,11 +17,7 @@ import {
   CHT_DOT_SET
 } from '../constants/ChartType';
 
-import {
-  isArr,
-  isObj,
-  domSanitize
-} from './AdapterFn';
+import { domSanitize } from './AdapterFn';
 
 const _getSeriaType = (
   optionOrStr

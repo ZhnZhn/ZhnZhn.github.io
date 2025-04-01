@@ -2,20 +2,20 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _AdapterFn = require("../AdapterFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _ApiFn = require("../ApiFn");
 const API_URL = "https://api.kraken.com/0/public";
 const _getData = json => {
   const {
     result
   } = json || {};
-  if (!(0, _AdapterFn.isObj)(result)) {
+  if (!(0, _isTypeFn.isObj)(result)) {
     return;
   }
   let _propName, _data;
   for (_propName in result) {
     _data = result[_propName];
-    if ((0, _AdapterFn.isArr)(_data) || (0, _AdapterFn.isObj)(_data) && (0, _AdapterFn.isArr)(_data.asks) && (0, _AdapterFn.isArr)(_data.bids)) {
+    if ((0, _isTypeFn.isArr)(_data) || (0, _isTypeFn.isObj)(_data) && (0, _isTypeFn.isArr)(_data.asks) && (0, _isTypeFn.isArr)(_data.bids)) {
       return _data;
     }
   }

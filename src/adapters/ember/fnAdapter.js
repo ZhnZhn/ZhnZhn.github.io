@@ -7,8 +7,10 @@ export {
 } from "../AdapterFn";
 
 import {
-  isNumber,
   isObj,
+  isNumber
+} from "../../utils/isTypeFn";
+import {
   isInArrStr,
   getCaption,
   getValue

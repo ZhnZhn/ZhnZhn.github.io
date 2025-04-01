@@ -8,6 +8,8 @@ exports.isNumber = _AdapterFn.isNumber;
 exports.crError = _AdapterFn.crError;
 exports.roundBy = _AdapterFn.roundBy;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
+var _isTypeFn = require("../../utils/isTypeFn");
+exports.isNumber = _isTypeFn.isNumber;
 const isEuRoute = option => option.dfId === "EU";
 exports.isEuRoute = isEuRoute;
 const isUsRoute = option => option.dfId === "US";
@@ -36,7 +38,7 @@ exports.isTotalVariable = isTotalVariable;
 const reduceToHmBy = (fn, arr) => arr.reduce(fn, Object.create(null));
 exports.reduceToHmBy = reduceToHmBy;
 const crDataImpl = (items, getValue, crDataPoint, isValue) => {
-  const _isValue = isValue ? (value, item) => (0, _AdapterFn.isNumber)(value) && isValue(item) : _AdapterFn.isNumber;
+  const _isValue = isValue ? (value, item) => (0, _isTypeFn.isNumber)(value) && isValue(item) : _isTypeFn.isNumber;
   return items.reduce((data, item) => {
     const value = getValue(item);
     if (_isValue(value, item)) {
@@ -50,11 +52,11 @@ const _getItemVariable = item => item.variable;
 const crGetItemLabelValue = option => {
   const metric = getMetricValue(option),
     getItemValue = item => item[metric];
-  return item => (0, _AdapterFn.isObj)(item) ? [_getItemVariable(item), getItemValue(item)] : [];
+  return item => (0, _isTypeFn.isObj)(item) ? [_getItemVariable(item), getItemValue(item)] : [];
 };
 exports.crGetItemLabelValue = crGetItemLabelValue;
 const ARR_VARIABLES = ["Coal", "Gas", "Other Fossil", "Nuclear", "Other Renewables", "Bioenergy", "Hydro", "Solar", "Wind"],
   _isLabelFuel = (0, _AdapterFn.isInArrStr)(ARR_VARIABLES);
-const isTreeMapItem = (label, value) => _isLabelFuel(label) && (0, _AdapterFn.isNumber)(value) && value > 0;
+const isTreeMapItem = (label, value) => _isLabelFuel(label) && (0, _isTypeFn.isNumber)(value) && value > 0;
 exports.isTreeMapItem = isTreeMapItem;
 //# sourceMappingURL=fnAdapter.js.map

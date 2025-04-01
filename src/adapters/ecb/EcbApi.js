@@ -1,10 +1,7 @@
-import {
-  isObj,
-  crError
-} from '../AdapterFn';
-import {
-  isCategory
-} from '../CategoryFn';
+import { isObj } from '../../utils/isTypeFn';
+
+import { crError } from '../AdapterFn';
+import { isCategory } from '../CategoryFn';
 import {
   ECB_EUROPA_EU,
   crItemId,
