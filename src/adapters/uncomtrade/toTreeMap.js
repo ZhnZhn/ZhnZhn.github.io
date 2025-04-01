@@ -1,4 +1,6 @@
+import { isPositiveNumber } from '../../utils/isTypeFn';
 import pipe from '../../utils/pipe';
+
 import {
   crTreeMapConfig,
   fAddCaption,
@@ -10,8 +12,7 @@ import {
 } from '../TreeMapFn';
 
 import {
-  isAggregateByHs,
-  isPositiveNumber,
+  isAggregateByHs,  
   getItemTradeValue,
   getItemCmdCode,
   getItemCmdDescE,

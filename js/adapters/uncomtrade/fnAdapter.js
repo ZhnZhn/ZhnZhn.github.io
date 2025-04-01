@@ -5,19 +5,20 @@ exports.__esModule = true;
 exports.ymdToUTC = exports.valueMoving = exports.sortDescByPnValue = exports.roundBy = exports.isCategoryByPartnerCase = exports.isAggregateByHs = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = exports.addSumOfPercentToSubtitle = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isNumber = _AdapterFn.isNumber;
-exports.isPositiveNumber = _AdapterFn.isPositiveNumber;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.valueMoving = _AdapterFn.valueMoving;
 exports.roundBy = _AdapterFn.roundBy;
 var _ChartType = require("../../constants/ChartType");
 var _arrFn = require("../../utils/arrFn");
+var _isTypeFn = require("../../utils/isTypeFn");
+exports.isNumber = _isTypeFn.isNumber;
+var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 exports.sortDescByPnValue = _compareByFn.sortDescByPnValue;
-var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 var _fnDescr = require("./fnDescr");
 var _conf = require("./conf");
-const _sanitizeNumber = v => (0, _AdapterFn.isNumber)(v) ? '' + v : (0, _AdapterFn.domSanitize)(v);
+const _sanitizeNumber = v => (0, _isTypeFn.isNumber)(v) ? '' + v : (0, _AdapterFn.domSanitize)(v);
 const crEmptyHmObject = () => Object.create(null);
 exports.crEmptyHmObject = crEmptyHmObject;
 const isAggregateByHs = option => option.two === 'AG2';
@@ -45,7 +46,7 @@ const getHmTradePartners = tradePartners => {
   if (_hmTradePartner) {
     return _hmTradePartner;
   }
-  if (!(0, _AdapterFn.isArr)(tradePartners)) {
+  if (!(0, _isTypeFn.isArr)(tradePartners)) {
     return crEmptyHmObject();
   }
   _hmTradePartner = tradePartners.reduce((hm, item) => {
@@ -81,7 +82,7 @@ const crCategoryData = (json, option, crDataPoint) => {
       partnerCode = _getItemPartnerCode(item);
     if (option.one !== _conf.WORLD_CODE && partnerCode === _conf.WORLD_CODE && _isSameTradePartnerCode(item)) {
       totalOfWorld = value;
-    } else if ((0, _AdapterFn.isPositiveNumber)(value) && _isSameTradePartnerCode(item)) {
+    } else if ((0, _isTypeFn.isPositiveNumber)(value) && _isSameTradePartnerCode(item)) {
       totalOfItems += value;
       data.push(_crDataPoint(value, _hmTradePartners, item));
     }

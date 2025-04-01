@@ -60,11 +60,9 @@ import {
 
 export {
   isObj,
-  isArr,
-  isUndef,
+  isArr,  
   isTypeNumber,
   isNumber,
-  isPositiveNumber,
   isStr,
   isNotEmptyArr
 } from '../utils/isTypeFn';

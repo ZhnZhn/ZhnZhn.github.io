@@ -1,3 +1,4 @@
+import { isPositiveNumber } from '../../utils/isTypeFn';
 import { fGetLazyValue } from '../../utils/fGetLazyValue';
 import pipe from '../../utils/pipe';
 
@@ -15,7 +16,6 @@ import { sortDescCategory } from '../compareByFn';
 
 import {
   isAggregateByHs,
-  isPositiveNumber,
   getItemTradeValue,
   getItemCmdCode,
   crCategoryData,

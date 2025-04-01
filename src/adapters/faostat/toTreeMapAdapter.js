@@ -1,4 +1,4 @@
-import { isPositiveNumber } from '../AdapterFn';
+import { isPositiveNumber } from '../../utils/isTypeFn';
 import { addPercentAndColorToData } from '../TreeMapFn';
 import { fToTreeMapAdapter } from '../fToTreeMapAdapter';
 

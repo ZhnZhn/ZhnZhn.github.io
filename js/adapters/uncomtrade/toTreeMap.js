@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _TreeMapFn = require("../TreeMapFn");
@@ -13,7 +14,7 @@ const _crTreeMapData = (json, option) => {
   let total = 0;
   json.data.forEach(item => {
     const value = (0, _fnAdapter.getItemTradeValue)(item);
-    if ((0, _fnAdapter.isPositiveNumber)(value)) {
+    if ((0, _isTypeFn.isPositiveNumber)(value)) {
       total += value;
       data.push({
         value,

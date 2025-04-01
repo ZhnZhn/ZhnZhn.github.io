@@ -1,6 +1,5 @@
 export {
   isNumber,
-  isPositiveNumber,
   ymdToUTC,
   valueMoving,
   roundBy
@@ -20,16 +19,16 @@ import {
   isArr,
   isNumber,
   isPositiveNumber,
-  domSanitize
-} from '../AdapterFn';
-import {
-  isCategory
-} from '../CategoryFn';
+} from '../../utils/isTypeFn';
+import formatNumber from '../../utils/formatNumber';
+
+import { domSanitize } from '../AdapterFn';
+import { isCategory } from '../CategoryFn';
+
 export {
   sortDescByPnValue
 } from '../compareByFn';
 
-import formatNumber from '../../utils/formatNumber';
 import { toDescr } from './fnDescr';
 import { WORLD_CODE } from './conf';
 

@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _AdapterFn = require("../AdapterFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _TreeMapFn = require("../TreeMapFn");
 var _fToTreeMapAdapter = require("../fToTreeMapAdapter");
 var _fnAdapter = require("./fnAdapter");
@@ -14,7 +14,7 @@ const _crTreeMapTupleDataTotal = (json, option) => {
       } = option;
     json.data.forEach(item => {
       const _value = parseFloat(item.Value);
-      if ((0, _AdapterFn.isPositiveNumber)(_value) && item.Area) {
+      if ((0, _isTypeFn.isPositiveNumber)(_value) && item.Area) {
         total += _value;
         data.push({
           value: _value,

@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _fGetLazyValue = require("../../utils/fGetLazyValue");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
@@ -45,7 +46,7 @@ const _crHsData = (hmHs, json, option) => {
   let total = 0;
   json.data.forEach(item => {
     const value = (0, _fnAdapter.getItemTradeValue)(item);
-    if ((0, _fnAdapter.isPositiveNumber)(value)) {
+    if ((0, _isTypeFn.isPositiveNumber)(value)) {
       const cmdCode = (0, _fnAdapter.getItemCmdCode)(item),
         descr = isHs && hmHs[cmdCode];
       total += value;
