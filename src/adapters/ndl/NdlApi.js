@@ -1,10 +1,11 @@
+import { isNotEmptyArr } from "../../utils/isTypeFn";
 import { getNumberOfDays } from "../../utils/dateFn";
 import {
   joinBy,
   joinByBlank
 } from "../../utils/arrFn";
+
 import {
-  isNotEmptyArr,
   getValue,
   crError,
   crGetRoute

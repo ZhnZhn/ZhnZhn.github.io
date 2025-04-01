@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _dateFn = require("../../utils/dateFn");
 var _arrFn = require("../../utils/arrFn");
 var _AdapterFn = require("../AdapterFn");
@@ -68,7 +69,7 @@ const _checkDataset = datatable => {
     newest_available_date,
     oldest_available_date
   } = datatable;
-  if (!(0, _AdapterFn.isNotEmptyArr)(data)) {
+  if (!(0, _isTypeFn.isNotEmptyArr)(data)) {
     throw (0, _AdapterFn.crError)("", `Result dataset for request is empty:
         Newest Date: ${newest_available_date || ""}
         Oldest Date: ${oldest_available_date || ""}`);
