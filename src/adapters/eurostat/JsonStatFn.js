@@ -1,13 +1,16 @@
-import { crData } from '../JsonStatFn';
-
-import { compareByValueId } from '../compareByFn';
+import { fetchJsonHm } from '../../utils/fnFetch';
+import { fGetLazyValue } from '../../utils/fGetLazyValue';
 import pipe from '../../utils/pipe';
-import {
-  getAsyncHmIdCountry,
-  getCountryById
-} from './fetchHmIdCountry';
 
-const FN_TRUE = () => true;
+import { crData } from '../JsonStatFn';
+import { compareByValueId } from '../compareByFn';
+
+const FN_TRUE = () => true
+, URL_ID_COUNTRY = './data/eurostat/id-country.json'
+, _crHmIdCountry = () => fetchJsonHm(URL_ID_COUNTRY)
+, _getAsyncHmIdCountry = fGetLazyValue(_crHmIdCountry, true)
+, _getCountryById = id => (_getAsyncHmIdCountry(true) || {})[id] || id;
+
 const _splitForConfig = (
   arr,
   isAddToCategories = FN_TRUE
@@ -18,7 +21,7 @@ const _splitForConfig = (
    , min = Number.POSITIVE_INFINITY;
    arr.forEach((item) => {
      const { id, value, status } = item
-     , geoEntity = getCountryById(id);
+     , geoEntity = _getCountryById(id);
      if (isAddToCategories(geoEntity)) {
        categories.push(geoEntity);
        data.push({
@@ -27,8 +30,8 @@ const _splitForConfig = (
          id: geoEntity,
          status
        })
-       if (value>=max) { max = value; }
-       if (value<=min) { min = value; }
+       if (value > max) { max = value; }
+       if (value < min) { min = value; }
      }
     })
    return {
@@ -46,7 +49,7 @@ const _combineToHm = (
   data.forEach((point) => {
     const { value, id } = point;
     if (value != null){
-      hm[getCountryById(id)] = value;
+      hm[_getCountryById(id)] = value;
     }
   })
   return hm;
@@ -74,7 +77,7 @@ const _crCategoryPoint = (
 export const trJsonToCategory = (
   json,
   isAddToCategories
-) => getAsyncHmIdCountry()
+) => _getAsyncHmIdCountry()
  .then(() => pipe(
     crData(_crCategoryPoint, json),
     arr => arr.sort(compareByValueId),

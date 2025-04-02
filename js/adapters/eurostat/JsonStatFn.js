@@ -3,11 +3,16 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.trJsonToSeria = exports.trJsonToCategory = void 0;
+var _fnFetch = require("../../utils/fnFetch");
+var _fGetLazyValue = require("../../utils/fGetLazyValue");
+var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _JsonStatFn = require("../JsonStatFn");
 var _compareByFn = require("../compareByFn");
-var _pipe = _interopRequireDefault(require("../../utils/pipe"));
-var _fetchHmIdCountry = require("./fetchHmIdCountry");
-const FN_TRUE = () => true;
+const FN_TRUE = () => true,
+  URL_ID_COUNTRY = './data/eurostat/id-country.json',
+  _crHmIdCountry = () => (0, _fnFetch.fetchJsonHm)(URL_ID_COUNTRY),
+  _getAsyncHmIdCountry = (0, _fGetLazyValue.fGetLazyValue)(_crHmIdCountry, true),
+  _getCountryById = id => (_getAsyncHmIdCountry(true) || {})[id] || id;
 const _splitForConfig = function (arr, isAddToCategories) {
   if (isAddToCategories === void 0) {
     isAddToCategories = FN_TRUE;
@@ -22,7 +27,7 @@ const _splitForConfig = function (arr, isAddToCategories) {
         value,
         status
       } = item,
-      geoEntity = (0, _fetchHmIdCountry.getCountryById)(id);
+      geoEntity = _getCountryById(id);
     if (isAddToCategories(geoEntity)) {
       categories.push(geoEntity);
       data.push({
@@ -31,10 +36,10 @@ const _splitForConfig = function (arr, isAddToCategories) {
         id: geoEntity,
         status
       });
-      if (value >= max) {
+      if (value > max) {
         max = value;
       }
-      if (value <= min) {
+      if (value < min) {
         min = value;
       }
     }
@@ -54,7 +59,7 @@ const _combineToHm = data => {
       id
     } = point;
     if (value != null) {
-      hm[(0, _fetchHmIdCountry.getCountryById)(id)] = value;
+      hm[_getCountryById(id)] = value;
     }
   });
   return hm;
@@ -68,7 +73,7 @@ const _crCategoryPoint = (value, label, status) => ({
   value,
   status
 });
-const trJsonToCategory = (json, isAddToCategories) => (0, _fetchHmIdCountry.getAsyncHmIdCountry)().then(() => (0, _pipe.default)((0, _JsonStatFn.crData)(_crCategoryPoint, json), arr => arr.sort(_compareByFn.compareByValueId), arr => _splitForConfig(arr, isAddToCategories)));
+const trJsonToCategory = (json, isAddToCategories) => _getAsyncHmIdCountry().then(() => (0, _pipe.default)((0, _JsonStatFn.crData)(_crCategoryPoint, json), arr => arr.sort(_compareByFn.compareByValueId), arr => _splitForConfig(arr, isAddToCategories)));
 exports.trJsonToCategory = trJsonToCategory;
 const trJsonToSeria = (json, categories) => (0, _pipe.default)(_combineToHm((0, _JsonStatFn.crData)(_crCategoryPoint, json)), hm => _trHmToData(hm, categories));
 exports.trJsonToSeria = trJsonToSeria;
