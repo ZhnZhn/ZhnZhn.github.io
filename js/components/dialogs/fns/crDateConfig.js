@@ -4,7 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _LoadType = require("../../../constants/LoadType");
 const YEAR_MAX = 25,
-  BI_YEAR_MAX = 36,
+  BI_YEAR_MAX = 25,
   Q_YEAR_MAX = 12,
   M_YEAR_MAX = 6;
 const _getCurrentDate = () => new Date(),

@@ -6,10 +6,9 @@ import {
 
 import mockDateBeforeAll from '../../../../utils/__tests__/mockDateBeforeAll';
 
-
-const ANNUAL_LENGTH = 12;
-const SEMI_ANNUAL_LENGTH = 48;
-const QUARTER_LENGTH = 32;
+const ANNUAL_LENGTH = 25;
+const SEMI_ANNUAL_LENGTH = 50;
+const QUARTER_LENGTH = 48;
 
 const _testQuarterConfig = (_r, _dfDate) => {
   expect(_r[0]).toEqual({"caption": "2023-Q4", "value": "2023-Q4"})

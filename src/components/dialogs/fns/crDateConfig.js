@@ -4,7 +4,7 @@ import {
 } from '../../../constants/LoadType';
 
 const YEAR_MAX = 25
-, BI_YEAR_MAX = 36
+, BI_YEAR_MAX = 25
 , Q_YEAR_MAX = 12
 , M_YEAR_MAX = 6;
 
