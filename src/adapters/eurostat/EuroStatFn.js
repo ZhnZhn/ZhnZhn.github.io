@@ -1,5 +1,3 @@
-export { findMinY } from '../AdapterFn';
-
 import {
   isArr,
   isObj,

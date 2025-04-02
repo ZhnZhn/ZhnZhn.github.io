@@ -2,6 +2,7 @@ import {
   FN_IDENTITY,
   isNumber,
   fCrValue,
+  findMinY,
   getCaption
 } from '../AdapterFn';
 import routerColumnBarSet from '../stat-json/toColumn';
@@ -16,7 +17,6 @@ import {
   isEuCaption,
   isEuGeoEntity,
   addToCategoryConfig,
-  findMinY,
   crCategoryTooltip
 } from './EuroStatFn';
 

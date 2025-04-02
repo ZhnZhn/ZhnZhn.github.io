@@ -76,7 +76,7 @@ const crCategorySeria = (json, option, chart) => {
     data = _crSeriaData(json, option, categories);
   return {
     data,
-    minY: (0, _EuroStatFn.findMinY)(data),
+    minY: (0, _AdapterFn.findMinY)(data),
     name: configSlice.time || time,
     color: seriaColor,
     tooltip: (0, _EuroStatFn.crCategoryTooltip)(),

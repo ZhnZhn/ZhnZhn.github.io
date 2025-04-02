@@ -3,12 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.toPointArr = exports.setInfoTo = exports.setDataAndInfo = exports.isNotGeoOrReporter = exports.isEuGeoEntity = exports.isEuCaption = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
-var _AdapterFn = require("../AdapterFn");
-exports.findMinY = _AdapterFn.findMinY;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _Chart = require("../../charts/Chart");
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _Tooltip = require("../../charts/Tooltip");
+var _AdapterFn = require("../AdapterFn");
 var _JsonStatFn = require("../JsonStatFn");
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
