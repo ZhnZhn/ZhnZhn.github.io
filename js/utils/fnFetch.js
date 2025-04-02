@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.fetchTxt = exports.fetchJson = void 0;
+exports.fetchTxt = exports.fetchJsonHm = exports.fetchJson = void 0;
 //LIMIT_REMAINING: 'X-RateLimit-Remaining',
 const REQ_ERR = 'Request Error',
   RESP_ERR = 'Response Error',
@@ -124,4 +124,11 @@ const _fFetch = propName => function (_ref2) {
 };
 const fetchJson = exports.fetchJson = _fFetch('json');
 const fetchTxt = exports.fetchTxt = _fFetch('text');
+const fetchJsonHm = (url, onCatch) => fetch(url).then(res => {
+  if (!res.ok) {
+    throw new Error(`Network response error: ${res.status}`);
+  }
+  return res.json();
+}).then(json => (json || {}).hm);
+exports.fetchJsonHm = fetchJsonHm;
 //# sourceMappingURL=fnFetch.js.map

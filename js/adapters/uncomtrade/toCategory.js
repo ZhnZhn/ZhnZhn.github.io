@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _fnFetch = require("../../utils/fnFetch");
 var _fGetLazyValue = require("../../utils/fGetLazyValue");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
@@ -25,13 +26,8 @@ const _crCategoryConfig = (json, option, data, categories, itemValue) => {
   }), _configBuilderFn.toConfig);
 };
 const URL_HS_CHAPTERS = './data/uncomtrade/hs-chapters.json';
-const _crAsyncHmHs = () => fetch(URL_HS_CHAPTERS).then(res => {
-  if (!res.ok) {
-    throw new Error("Network response was not OK");
-  }
-  return res.json();
-}).then(json => (json || {}).hm).catch(() => void 0);
-const _getHmHs = (0, _fGetLazyValue.fGetLazyValue)(_crAsyncHmHs, true);
+const _crAsyncHmHs = () => (0, _fnFetch.fetchJsonHm)(URL_HS_CHAPTERS),
+  _getAsyncHmHs = (0, _fGetLazyValue.fGetLazyValue)(_crAsyncHmHs, true);
 const _addLevelColorsTo = (data, total, option) => {
   (0, _compareByFn.sortDescCategory)(data);
   (0, _fnAdapter.addSumOfPercentToSubtitle)(option, ...(0, _TreeMapFn.addColorsTo)({
@@ -59,7 +55,7 @@ const _crHsData = (hmHs, json, option) => {
   _addLevelColorsTo(data, total, option);
   return [data, (0, _CategoryFn.crCategories)(data), total];
 };
-const _toCategoryByHs = (json, option) => _getHmHs().then(hmHs => _crHsData(hmHs, json, option)).then(dataConfigTuple => _crCategoryConfig(json, option, ...dataConfigTuple));
+const _toCategoryByHs = (json, option) => _getAsyncHmHs().then(hmHs => _crHsData(hmHs, json, option)).then(dataConfigTuple => _crCategoryConfig(json, option, ...dataConfigTuple));
 const _crDataPoint = (y, c) => ({
   y,
   c

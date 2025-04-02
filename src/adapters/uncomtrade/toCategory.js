@@ -1,4 +1,5 @@
 import { isPositiveNumber } from '../../utils/isTypeFn';
+import { fetchJsonHm } from '../../utils/fnFetch';
 import { fGetLazyValue } from '../../utils/fGetLazyValue';
 import pipe from '../../utils/pipe';
 
@@ -55,17 +56,8 @@ const _crCategoryConfig = (
 }
 
 const URL_HS_CHAPTERS = './data/uncomtrade/hs-chapters.json';
-const _crAsyncHmHs = () => fetch(URL_HS_CHAPTERS)
-  .then(res => {
-    if (!res.ok) {
-      throw new Error("Network response was not OK")
-    }
-    return res.json();
-  })
-  .then(json => (json || {}).hm)
-  .catch(() => void 0);
-
-const _getHmHs = fGetLazyValue(_crAsyncHmHs, true);
+const _crAsyncHmHs = () => fetchJsonHm(URL_HS_CHAPTERS)
+, _getAsyncHmHs = fGetLazyValue(_crAsyncHmHs, true);
 
 const _addLevelColorsTo = (
   data,
@@ -122,7 +114,7 @@ const _crHsData = (
 const _toCategoryByHs = (
   json,
   option
-) => _getHmHs()
+) => _getAsyncHmHs()
   .then(hmHs => _crHsData(hmHs, json, option))
   .then(dataConfigTuple => _crCategoryConfig(
     json,

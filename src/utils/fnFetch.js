@@ -129,5 +129,17 @@ const _fFetch = (propName) => function({
     })
 };
 
-export const fetchJson = _fFetch('json');
-export const fetchTxt = _fFetch('text');
+export const fetchJson = _fFetch('json')
+export const fetchTxt = _fFetch('text')
+
+export const fetchJsonHm = (
+  url,
+  onCatch
+) => fetch(url)
+  .then(res => {
+    if (!res.ok) {
+      throw new Error(`Network response error: ${res.status}`)
+    }
+    return res.json();
+  })
+  .then(json => (json || {}).hm)
