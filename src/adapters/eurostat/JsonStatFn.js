@@ -1,5 +1,5 @@
 import { fetchJsonHm } from '../../utils/fnFetch';
-import { fGetLazyValue } from '../../utils/fGetLazyValue';
+import { fGetLazyValueAsync } from '../../utils/fGetLazyValue';
 import pipe from '../../utils/pipe';
 
 import { crData } from '../JsonStatFn';
@@ -8,7 +8,7 @@ import { compareByValueId } from '../compareByFn';
 const FN_TRUE = () => true
 , URL_ID_COUNTRY = './data/eurostat/id-country.json'
 , _crHmIdCountry = () => fetchJsonHm(URL_ID_COUNTRY)
-, _getAsyncHmIdCountry = fGetLazyValue(_crHmIdCountry, true)
+, _getAsyncHmIdCountry = fGetLazyValueAsync(_crHmIdCountry)
 , _getCountryById = id => (_getAsyncHmIdCountry(true) || {})[id] || id;
 
 const _splitForConfig = (

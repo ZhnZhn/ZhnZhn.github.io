@@ -1,5 +1,5 @@
 
-const _fGetLazyValue = (
+export const fGetLazyValue = (
   crValue
 ) => {
   let value;
@@ -8,7 +8,7 @@ const _fGetLazyValue = (
     : value;
 }
 
-const _fGetLazyPromisifyValue = crPromiseValue => {
+export const fGetLazyValueAsync = crPromiseValue => {
   let value;
   return (isGetValueSync) => value === void 0
     ? crPromiseValue()
@@ -18,10 +18,3 @@ const _fGetLazyPromisifyValue = crPromiseValue => {
     ? value
     : Promise.resolve(value);
 }
-
-export const fGetLazyValue = (
-  crValue,
-  isPromisify
-) => isPromisify
-  ? _fGetLazyPromisifyValue(crValue)
-  : _fGetLazyValue(crValue)

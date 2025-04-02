@@ -27,7 +27,7 @@ const _crCategoryConfig = (json, option, data, categories, itemValue) => {
 };
 const URL_HS_CHAPTERS = './data/uncomtrade/hs-chapters.json';
 const _crAsyncHmHs = () => (0, _fnFetch.fetchJsonHm)(URL_HS_CHAPTERS),
-  _getAsyncHmHs = (0, _fGetLazyValue.fGetLazyValue)(_crAsyncHmHs, true);
+  _getAsyncHmHs = (0, _fGetLazyValue.fGetLazyValueAsync)(_crAsyncHmHs);
 const _addLevelColorsTo = (data, total, option) => {
   (0, _compareByFn.sortDescCategory)(data);
   (0, _fnAdapter.addSumOfPercentToSubtitle)(option, ...(0, _TreeMapFn.addColorsTo)({

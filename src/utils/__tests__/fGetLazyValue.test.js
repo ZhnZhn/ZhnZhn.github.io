@@ -1,4 +1,7 @@
-import { fGetLazyValue } from "../fGetLazyValue";
+import {
+  fGetLazyValue,
+  fGetLazyValueAsync
+} from "../fGetLazyValue";
 
 describe("fGetLazyValue", ()=>{
   const fn = fGetLazyValue;
@@ -13,13 +16,16 @@ describe("fGetLazyValue", ()=>{
     expect(_getValue()).toBe(_value)
     expect(_crValue).toBeCalledTimes(2)
   })
+})
 
-  test("should promisify value n case of argument isPromosify", async () => {
+describe("fGetLazyValueAsync", ()=>{
+  const fn = fGetLazyValueAsync;
+  test("should return promisify value", async () => {
     const _value = { v: "value" }
     , _crValue = jest.fn(() => Promise
       .resolve(_value)
     )
-    , _getValue = fn(_crValue, true);
+    , _getValue = fn(_crValue);
 
     let _result = await _getValue();
     expect(_result).toBe(_value)
@@ -30,12 +36,30 @@ describe("fGetLazyValue", ()=>{
     expect(_crValue).toBeCalledTimes(1)
   })
 
+  test("should get sync value after creating in case isGetValueSync argument", async () => {
+    const _value = { v: "value" }
+    , _crValue = jest.fn(() => Promise
+      .resolve(_value)
+    )
+    , _getValue = fn(_crValue);
+
+    let _result = await _getValue();
+    expect(_result).toBe(_value)
+    _result = _getValue(true);
+    expect(_result).toBe(_value)
+    _result = await _getValue();
+    expect(_result).toBe(_value)
+    _result = _getValue(true);
+    expect(_result).toBe(_value)
+    expect(_crValue).toBeCalledTimes(1)
+  })
+
   test("should try recreat value in case promisify set void 0", async () => {
     let i = 0;
     const _crValue = jest.fn(() => Promise
       .resolve(i<2 ? (i++, void 0) : i)
     )
-    , _getValue = fn(_crValue, true);
+    , _getValue = fn(_crValue);
 
     let _result = await _getValue();
     expect(_result).toBe()
