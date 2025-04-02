@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.crCategorySeria = exports.crCategoryConfig = void 0;
 var _AdapterFn = require("../AdapterFn");
+var _CategoryFn = require("../CategoryFn");
 var _toColumn = _interopRequireDefault(require("../stat-json/toColumn"));
 var _FactoryChart = _interopRequireDefault(require("./FactoryChart"));
 var _JsonStatFn = require("./JsonStatFn");
@@ -66,7 +67,7 @@ const _crSeriaData = (json, option, categories) => {
 };
 const _crSeriaProps = (seriaType, seriaColor) => seriaType === 'DOT_SET' ? _crScatterProps(seriaColor) : void 0;
 const crCategorySeria = (json, option, chart) => {
-  const categories = chart.options.xAxis[0].categories,
+  const categories = (0, _CategoryFn.getCategories)(chart),
     {
       zhMapSlice: configSlice,
       time,

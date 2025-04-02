@@ -5,6 +5,9 @@ import {
   findMinY,
   getCaption
 } from '../AdapterFn';
+import {
+  getCategories
+} from '../CategoryFn';
 import routerColumnBarSet from '../stat-json/toColumn';
 
 import FactoryChart from './FactoryChart';
@@ -107,7 +110,7 @@ export const crCategorySeria = (
   option,
   chart
 ) => {
-  const categories = chart.options.xAxis[0].categories
+  const categories = getCategories(chart) 
   , {
      zhMapSlice:configSlice,
      time,
