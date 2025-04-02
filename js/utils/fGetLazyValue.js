@@ -8,7 +8,7 @@ const _fGetLazyValue = crValue => {
 };
 const _fGetLazyPromisifyValue = crPromiseValue => {
   let value;
-  return () => value === void 0 ? crPromiseValue().then(v => value = v) : Promise.resolve(value);
+  return isGetValueSync => value === void 0 ? crPromiseValue().catch(err => console.log(err)).then(v => value = v) : isGetValueSync ? value : Promise.resolve(value);
 };
 const fGetLazyValue = (crValue, isPromisify) => isPromisify ? _fGetLazyPromisifyValue(crValue) : _fGetLazyValue(crValue);
 exports.fGetLazyValue = fGetLazyValue;
