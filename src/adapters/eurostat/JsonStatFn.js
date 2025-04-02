@@ -3,7 +3,7 @@ import { crData } from '../JsonStatFn';
 import { compareByValueId } from '../compareByFn';
 import pipe from '../../utils/pipe';
 import {
-  fetchHmIdCountry,
+  getAsyncHmIdCountry,
   getCountryById
 } from './fetchHmIdCountry';
 
@@ -74,7 +74,7 @@ const _crCategoryPoint = (
 export const trJsonToCategory = (
   json,
   isAddToCategories
-) => fetchHmIdCountry()
+) => getAsyncHmIdCountry()
  .then(() => pipe(
     crData(_crCategoryPoint, json),
     arr => arr.sort(compareByValueId),

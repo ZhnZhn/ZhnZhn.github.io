@@ -1,18 +1,8 @@
+import { fetchJsonHm } from '../../utils/fnFetch';
+import { fGetLazyValue } from '../../utils/fGetLazyValue';
 
 const URL_ID_COUNTRY = './data/eurostat/id-country.json';
+const _fetchHmIdCountry = () => fetchJsonHm(URL_ID_COUNTRY);
 
-let hmIdCountry = {};
-let isHmFetched = false;
-
-export const fetchHmIdCountry = () => isHmFetched
-  ? Promise.resolve(hmIdCountry)
-  : fetch(URL_ID_COUNTRY)
-      .then(res => res.json())
-      .then(json => {
-         hmIdCountry = json.hm;
-         isHmFetched = true;
-         return hmIdCountry;
-      })
-      .catch((err) => { return hmIdCountry; });
-
-export const getCountryById = id => hmIdCountry[id] || id;
+export const getAsyncHmIdCountry = fGetLazyValue(_fetchHmIdCountry, true)
+export const getCountryById = id => (getAsyncHmIdCountry(true) || {})[id] || id

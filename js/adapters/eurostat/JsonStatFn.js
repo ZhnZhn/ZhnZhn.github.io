@@ -68,7 +68,7 @@ const _crCategoryPoint = (value, label, status) => ({
   value,
   status
 });
-const trJsonToCategory = (json, isAddToCategories) => (0, _fetchHmIdCountry.fetchHmIdCountry)().then(() => (0, _pipe.default)((0, _JsonStatFn.crData)(_crCategoryPoint, json), arr => arr.sort(_compareByFn.compareByValueId), arr => _splitForConfig(arr, isAddToCategories)));
+const trJsonToCategory = (json, isAddToCategories) => (0, _fetchHmIdCountry.getAsyncHmIdCountry)().then(() => (0, _pipe.default)((0, _JsonStatFn.crData)(_crCategoryPoint, json), arr => arr.sort(_compareByFn.compareByValueId), arr => _splitForConfig(arr, isAddToCategories)));
 exports.trJsonToCategory = trJsonToCategory;
 const trJsonToSeria = (json, categories) => (0, _pipe.default)(_combineToHm((0, _JsonStatFn.crData)(_crCategoryPoint, json)), hm => _trHmToData(hm, categories));
 exports.trJsonToSeria = trJsonToSeria;
