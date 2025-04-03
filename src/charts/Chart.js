@@ -86,7 +86,6 @@ export const STACKED_HEIGHT = 500
 export const LEGEND_ROW_HEIGHT = 32
 
 export const SPACING_TOP = 20
-export const STACKED_SPACING_TOP = 25
 export const SPACING_BOTTOM = 24
 
 export const SEMIDONUT_TITLE_Y = 15
@@ -120,16 +119,6 @@ const _fCrTitle = y => (
 
 export const fTitle = _fCrTitle(-10)
 export const fSubtitle = _fCrTitle(10)
-
-export const setDefaultTitle = (
-  config,
-  title,
-  subtitle
-) => {
-   config.chart.spacingTop = STACKED_SPACING_TOP;
-   config.title = fTitle({ text: title });
-   config.subtitle = fSubtitle({ text: subtitle });
-}
 
 export const fNavigation = () => ({
   buttonOptions: {

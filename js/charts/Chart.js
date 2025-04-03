@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.setDefaultTitle = exports.fYAxisOpposite = exports.fXAxisOpposite = exports.fTooltip = exports.fTitle = exports.fSubtitle = exports.fSeriaMarker = exports.fSecondYAxis = exports.fPlotOptionsSeries = exports.fPlotOptionsColumn = exports.fPlotOptionsArea = exports.fPlotLine = exports.fNavigation = exports.fLegend = exports.fEventsMouseOver = exports.fCrosshair = exports.fCreditsRightBottom = exports.crType = exports.crCategoryDataLabels = exports.crAreaConfig = exports.STACKED_SPACING_TOP = exports.STACKED_HEIGHT = exports.SPACING_TOP = exports.SPACING_BOTTOM = exports.SEMIDONUT_TITLE_Y = exports.SEMIDONUT_SUBTITLE_Y = exports.MARGIN_RIGHT = exports.LEGEND_ROW_HEIGHT = exports.CHART_HEIGHT = void 0;
+exports.fYAxisOpposite = exports.fXAxisOpposite = exports.fTooltip = exports.fTitle = exports.fSubtitle = exports.fSeriaMarker = exports.fSecondYAxis = exports.fPlotOptionsSeries = exports.fPlotOptionsColumn = exports.fPlotOptionsArea = exports.fPlotLine = exports.fNavigation = exports.fLegend = exports.fEventsMouseOver = exports.fCrosshair = exports.fCreditsRightBottom = exports.crType = exports.crCategoryDataLabels = exports.crAreaConfig = exports.STACKED_HEIGHT = exports.SPACING_TOP = exports.SPACING_BOTTOM = exports.SEMIDONUT_TITLE_Y = exports.SEMIDONUT_SUBTITLE_Y = exports.MARGIN_RIGHT = exports.LEGEND_ROW_HEIGHT = exports.CHART_HEIGHT = void 0;
 var _styleFn = require("../components/styleFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _domSanitize = require("../utils/domSanitize");
@@ -72,7 +72,6 @@ const MARGIN_RIGHT = exports.MARGIN_RIGHT = 50;
 const STACKED_HEIGHT = exports.STACKED_HEIGHT = 500;
 const LEGEND_ROW_HEIGHT = exports.LEGEND_ROW_HEIGHT = 32;
 const SPACING_TOP = exports.SPACING_TOP = 20;
-const STACKED_SPACING_TOP = exports.STACKED_SPACING_TOP = 25;
 const SPACING_BOTTOM = exports.SPACING_BOTTOM = 24;
 const SEMIDONUT_TITLE_Y = exports.SEMIDONUT_TITLE_Y = 15;
 const SEMIDONUT_SUBTITLE_Y = exports.SEMIDONUT_SUBTITLE_Y = 35;
@@ -94,16 +93,6 @@ const _fCrTitle = y => option => (0, _merge.default)(false, {
 }, _sanitizeOptionText(option));
 const fTitle = exports.fTitle = _fCrTitle(-10);
 const fSubtitle = exports.fSubtitle = _fCrTitle(10);
-const setDefaultTitle = (config, title, subtitle) => {
-  config.chart.spacingTop = STACKED_SPACING_TOP;
-  config.title = fTitle({
-    text: title
-  });
-  config.subtitle = fSubtitle({
-    text: subtitle
-  });
-};
-exports.setDefaultTitle = setDefaultTitle;
 const fNavigation = () => ({
   buttonOptions: {
     y: 5
