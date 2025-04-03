@@ -1,8 +1,7 @@
 import {
   isArr,
-  isObj,
   isStr,
-  isPositiveNumber
+  isNumber
 } from '../../utils/isTypeFn';
 
 import {
@@ -17,6 +16,8 @@ import {
 } from '../../charts/Tooltip';
 
 import {
+  FN_IDENTITY,
+  fCrValue,
   findMinY,
   findMaxY,
   filterTrimZero,
@@ -26,6 +27,7 @@ import { crData as crJsonStatData } from '../JsonStatFn';
 import { compareByDate } from '../compareByFn';
 import { crItemConf } from '../crFn';
 
+import FactoryChart from './FactoryChart';
 import convertToUTC from './convertToUTC';
 
 const EU_COLOR = "#001489"
@@ -120,27 +122,6 @@ export const isEuCaption = _fIsCode("union")
 export const isEuGeoEntity = str => _isEaCaption(str)
   || isEuCaption(str)
   || _isEuMember(str)
-
-const _filterZeroCategories = (
-  data,
-  categories
-) => {
-  const _data = []
-  , _arrC = [];
-  data.forEach(p => {
-    if (isObj(p)
-      && isPositiveNumber(p.y)
-      && isStr(p.c)
-    ) {
-      _data.push(p)
-      _arrC.push(p.c)
-    }
-  })
-  return [
-    _data,
-    _arrC
-  ];
-};
 
 const _crStatusOfPoint = (
   status
@@ -292,20 +273,41 @@ const _colorCategories = (data) => {
   })
 }
 
-export const addToCategoryConfig = (
-  config,
-  { json, option, data, categories, min }
+const _fRoundByIf = (
+  option
 ) => {
-    const [
-      _data,
-      _categories
-    ] = option.isFilterZero
-      ? _filterZeroCategories(data, categories)
-      : [data, categories];
+  const crValue = fCrValue(option, FN_IDENTITY)
+  return crValue !== FN_IDENTITY
+    ? point => isNumber(point && point.y)
+       ? point.y = crValue(point.y)
+       : void 0
+    : void 0;
+}
 
-    setDataAndInfo({ data: _data, config, json, option })
-    _setCategories({ categories: _categories, config, min, option })
-    _colorCategories(config.series[0].data)
+export const roundByDataIf = (
+  data,
+  option
+) => {
+  const _roundBy = _fRoundByIf(option);
+  return _roundBy
+    ? (data.forEach(_roundBy), data)
+    : data;
+}
+
+export const crCategoryConfigImpl = ({
+  json,
+  option,
+  data,
+  categories,
+  min
+}) => {
+  const config = FactoryChart.createConfig(option)
+  , _data = roundByDataIf(data, option);
+
+  setDataAndInfo({ data: _data, config, json, option })
+  _setCategories({ categories, config, min, option })
+  _colorCategories(config.series[0].data)
+  return config;
 }
 
 export const crCategoryTooltip = () => fTooltip(tooltipCategorySimple)

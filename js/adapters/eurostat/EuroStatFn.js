@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toPointArr = exports.setInfoTo = exports.setDataAndInfo = exports.isNotGeoOrReporter = exports.isEuGeoEntity = exports.isEuCaption = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.addToCategoryConfig = void 0;
+exports.toPointArr = exports.setInfoTo = exports.setDataAndInfo = exports.roundByDataIf = exports.isNotGeoOrReporter = exports.isEuGeoEntity = exports.isEuCaption = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.crCategoryConfigImpl = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _Chart = require("../../charts/Chart");
 var _configBuilderFn = require("../../charts/configBuilderFn");
@@ -11,6 +11,7 @@ var _AdapterFn = require("../AdapterFn");
 var _JsonStatFn = require("../JsonStatFn");
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
+var _FactoryChart = _interopRequireDefault(require("./FactoryChart"));
 var _convertToUTC = _interopRequireDefault(require("./convertToUTC"));
 const EU_COLOR = "#001489",
   EA_COLOR = "#cca300",
@@ -74,17 +75,6 @@ const _fIsCode = token => str => str.toLowerCase().indexOf(token) !== -1,
 const isEuCaption = exports.isEuCaption = _fIsCode("union");
 const isEuGeoEntity = str => _isEaCaption(str) || isEuCaption(str) || _isEuMember(str);
 exports.isEuGeoEntity = isEuGeoEntity;
-const _filterZeroCategories = (data, categories) => {
-  const _data = [],
-    _arrC = [];
-  data.forEach(p => {
-    if ((0, _isTypeFn.isObj)(p) && (0, _isTypeFn.isPositiveNumber)(p.y) && (0, _isTypeFn.isStr)(p.c)) {
-      _data.push(p);
-      _arrC.push(p.c);
-    }
-  });
-  return [_data, _arrC];
-};
 const _crStatusOfPoint = status => status && status !== ':' && status.length === 1 ? status : void 0;
 const _crDataPoint = (v, time, status) => [(0, _convertToUTC.default)(time), v, _crStatusOfPoint(status)];
 const _setZoomMinMaxTo = (config, isNotZoomToMinMax, min) => {
@@ -185,7 +175,16 @@ const _colorCategories = data => {
     }
   });
 };
-const addToCategoryConfig = (config, _ref5) => {
+const _fRoundByIf = option => {
+  const crValue = (0, _AdapterFn.fCrValue)(option, _AdapterFn.FN_IDENTITY);
+  return crValue !== _AdapterFn.FN_IDENTITY ? point => (0, _isTypeFn.isNumber)(point && point.y) ? point.y = crValue(point.y) : void 0 : void 0;
+};
+const roundByDataIf = (data, option) => {
+  const _roundBy = _fRoundByIf(option);
+  return _roundBy ? (data.forEach(_roundBy), data) : data;
+};
+exports.roundByDataIf = roundByDataIf;
+const crCategoryConfigImpl = _ref5 => {
   let {
     json,
     option,
@@ -193,7 +192,8 @@ const addToCategoryConfig = (config, _ref5) => {
     categories,
     min
   } = _ref5;
-  const [_data, _categories] = option.isFilterZero ? _filterZeroCategories(data, categories) : [data, categories];
+  const config = _FactoryChart.default.createConfig(option),
+    _data = roundByDataIf(data, option);
   setDataAndInfo({
     data: _data,
     config,
@@ -201,14 +201,15 @@ const addToCategoryConfig = (config, _ref5) => {
     option
   });
   _setCategories({
-    categories: _categories,
+    categories,
     config,
     min,
     option
   });
   _colorCategories(config.series[0].data);
+  return config;
 };
-exports.addToCategoryConfig = addToCategoryConfig;
+exports.crCategoryConfigImpl = crCategoryConfigImpl;
 const crCategoryTooltip = () => (0, _Chart.fTooltip)(_Tooltip.tooltipCategorySimple);
 exports.crCategoryTooltip = crCategoryTooltip;
 const crDataSource = dfProps => {
