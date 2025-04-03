@@ -1,7 +1,4 @@
 import {
-  FN_IDENTITY,
-  isNumber,
-  fCrValue,
   findMinY,
   getCaption
 } from '../AdapterFn';
@@ -10,7 +7,6 @@ import {
 } from '../CategoryFn';
 import routerColumnBarSet from '../stat-json/toColumn';
 
-import FactoryChart from './FactoryChart';
 import {
   trJsonToCategory,
   trJsonToSeria
@@ -19,26 +15,10 @@ import {
   isNotGeoOrReporter,
   isEuCaption,
   isEuGeoEntity,
-  addToCategoryConfig,
-  crCategoryTooltip
+  crCategoryConfigImpl,
+  crCategoryTooltip,
+  roundByDataIf
 } from './EuroStatFn';
-
-const _filterZeroAndRoundByIf = (
-  data,
-  option
-) => {
-  const { isFilterZero } = option
-  , crValue = fCrValue(option, FN_IDENTITY)
-  , _roundValue = point => isNumber(point && point.y)
-     ? (point.y = crValue(point.y), point)
-     : point
-  , _crCategoryPoint = isFilterZero
-     ? point => (!point || point.y === 0) ? null : _roundValue(point)
-     : _roundValue;
-  return _crCategoryPoint === FN_IDENTITY
-    ? data
-    : data.map(_crCategoryPoint);
-};
 
 const _crScatterProps = (
   seriaColor
@@ -55,6 +35,20 @@ const _crRouteIsNotExistMsg = (
   seriaType
 ) => `Chart ${seriaType} route isn't exist`
 
+const FN_TRUE = () => true;
+const _fIsAddToCategories = option => {
+  const _isGeoEntity = isEuCaption(getCaption(option.items[0]))
+    ? isEuGeoEntity
+    : FN_TRUE
+  , _isValue = option.isFilterZero
+    ? value => value !== 0
+    : FN_TRUE;
+  return (
+    geoEntity,
+    value
+  ) => _isGeoEntity(geoEntity) && _isValue(value);
+};
+
 export const crCategoryConfig = (
   json,
   option
@@ -69,21 +63,14 @@ export const crCategoryConfig = (
     }
     return _crConfig(json, option);
   }
-  const _isAddToCategories = isEuCaption(getCaption(option.items[0]))
-    ? isEuGeoEntity
-    : void 0;
-  return trJsonToCategory(json, _isAddToCategories)
-    .then(({ categories, data, min }) => {
-      const config = FactoryChart.createConfig(option);
-      addToCategoryConfig(config, {
-        json,
-        option,
-        data: _filterZeroAndRoundByIf(data, option),
-        categories,
-        min
-      })
-      return config;
-    });
+  return trJsonToCategory(json, _fIsAddToCategories(option))
+    .then(({ categories, data, min }) => crCategoryConfigImpl({
+      json,
+      option,
+      min,
+      data,
+      categories
+    }));
 }
 
 const _crSeriaData = (
@@ -95,7 +82,10 @@ const _crSeriaData = (
     json,
     categories
   );
-  return _filterZeroAndRoundByIf(data, option);
+  return roundByDataIf(
+    data,
+    option
+  );
 }
 
 const _crSeriaProps = (
@@ -110,7 +100,7 @@ export const crCategorySeria = (
   option,
   chart
 ) => {
-  const categories = getCategories(chart) 
+  const categories = getCategories(chart)
   , {
      zhMapSlice:configSlice,
      time,

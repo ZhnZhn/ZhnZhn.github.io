@@ -22,7 +22,7 @@ const _splitForConfig = (
    arr.forEach((item) => {
      const { id, value, status } = item
      , geoEntity = _getCountryById(id);
-     if (isAddToCategories(geoEntity)) {
+     if (isAddToCategories(geoEntity, value)) {
        categories.push(geoEntity);
        data.push({
          y: value,

@@ -6,18 +6,8 @@ exports.crCategorySeria = exports.crCategoryConfig = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 var _toColumn = _interopRequireDefault(require("../stat-json/toColumn"));
-var _FactoryChart = _interopRequireDefault(require("./FactoryChart"));
 var _JsonStatFn = require("./JsonStatFn");
 var _EuroStatFn = require("./EuroStatFn");
-const _filterZeroAndRoundByIf = (data, option) => {
-  const {
-      isFilterZero
-    } = option,
-    crValue = (0, _AdapterFn.fCrValue)(option, _AdapterFn.FN_IDENTITY),
-    _roundValue = point => (0, _AdapterFn.isNumber)(point && point.y) ? (point.y = crValue(point.y), point) : point,
-    _crCategoryPoint = isFilterZero ? point => !point || point.y === 0 ? null : _roundValue(point) : _roundValue;
-  return _crCategoryPoint === _AdapterFn.FN_IDENTITY ? data : data.map(_crCategoryPoint);
-};
 const _crScatterProps = seriaColor => ({
   type: 'scatter',
   marker: {
@@ -27,6 +17,12 @@ const _crScatterProps = seriaColor => ({
   }
 });
 const _crRouteIsNotExistMsg = seriaType => `Chart ${seriaType} route isn't exist`;
+const FN_TRUE = () => true;
+const _fIsAddToCategories = option => {
+  const _isGeoEntity = (0, _EuroStatFn.isEuCaption)((0, _AdapterFn.getCaption)(option.items[0])) ? _EuroStatFn.isEuGeoEntity : FN_TRUE,
+    _isValue = option.isFilterZero ? value => value !== 0 : FN_TRUE;
+  return (geoEntity, value) => _isGeoEntity(geoEntity) && _isValue(value);
+};
 const crCategoryConfig = (json, option) => {
   // By Dim route
   const {
@@ -42,28 +38,25 @@ const crCategoryConfig = (json, option) => {
     }
     return _crConfig(json, option);
   }
-  const _isAddToCategories = (0, _EuroStatFn.isEuCaption)((0, _AdapterFn.getCaption)(option.items[0])) ? _EuroStatFn.isEuGeoEntity : void 0;
-  return (0, _JsonStatFn.trJsonToCategory)(json, _isAddToCategories).then(_ref => {
+  return (0, _JsonStatFn.trJsonToCategory)(json, _fIsAddToCategories(option)).then(_ref => {
     let {
       categories,
       data,
       min
     } = _ref;
-    const config = _FactoryChart.default.createConfig(option);
-    (0, _EuroStatFn.addToCategoryConfig)(config, {
+    return (0, _EuroStatFn.crCategoryConfigImpl)({
       json,
       option,
-      data: _filterZeroAndRoundByIf(data, option),
-      categories,
-      min
+      min,
+      data,
+      categories
     });
-    return config;
   });
 };
 exports.crCategoryConfig = crCategoryConfig;
 const _crSeriaData = (json, option, categories) => {
   const data = (0, _JsonStatFn.trJsonToSeria)(json, categories);
-  return _filterZeroAndRoundByIf(data, option);
+  return (0, _EuroStatFn.roundByDataIf)(data, option);
 };
 const _crSeriaProps = (seriaType, seriaColor) => seriaType === 'DOT_SET' ? _crScatterProps(seriaColor) : void 0;
 const crCategorySeria = (json, option, chart) => {
