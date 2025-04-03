@@ -12,16 +12,13 @@ const crMapConfig = (json, option) => {
   const data = (0, _EuroStatFn.crData)(json)[0],
     config = (0, _ChartConfigFn.crAreaConfig)();
   _addItemCaptionTo(option);
-  (0, _EuroStatFn.setDataAndInfo)({
-    config,
-    data,
-    json,
-    option
-  });
+  config.series[0].data = data;
   _assign(config, {
     zhDialog: option,
     json: json,
-    zhMapSlice: option.zhMapSlice
+    zhMapSlice: option.zhMapSlice,
+    info: (0, _EuroStatFn.crDatasetInfo)(json),
+    zhConfig: (0, _EuroStatFn.crZhConfig)(option)
   });
   return config;
 };

@@ -2,22 +2,13 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toPointArr = exports.setInfoTo = exports.setDataAndInfo = exports.roundByDataIf = exports.isNotGeoOrReporter = exports.isEuGeoEntity = exports.isEuCaption = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = exports.crCategoryTooltip = exports.crCategoryConfigImpl = void 0;
+exports.toPointArr = exports.setInfoTo = exports.isNotGeoOrReporter = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
-var _Chart = require("../../charts/Chart");
-var _configBuilderFn = require("../../charts/configBuilderFn");
-var _Tooltip = require("../../charts/Tooltip");
 var _AdapterFn = require("../AdapterFn");
 var _JsonStatFn = require("../JsonStatFn");
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
-var _FactoryChart = _interopRequireDefault(require("./FactoryChart"));
 var _convertToUTC = _interopRequireDefault(require("./convertToUTC"));
-const EU_COLOR = "#001489",
-  EA_COLOR = "#cca300",
-  NOT_EU_MEMBER_COLOR = '#8085e9',
-  EU_MEMBER = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"];
-const _assign = Object.assign;
 const _crDescr = (updated, extension) => {
   const _updated = (0, _isTypeFn.isStr)(updated) ? `Updated: ${updated.replace('T', ' ')}` : '',
     _ext = extension || {},
@@ -69,22 +60,8 @@ const crDatasetInfo = _ref => {
   };
 };
 exports.crDatasetInfo = crDatasetInfo;
-const _fIsCode = token => str => str.toLowerCase().indexOf(token) !== -1,
-  _isEaCaption = _fIsCode("euro area"),
-  _isEuMember = str => EU_MEMBER.indexOf(str) !== -1;
-const isEuCaption = exports.isEuCaption = _fIsCode("union");
-const isEuGeoEntity = str => _isEaCaption(str) || isEuCaption(str) || _isEuMember(str);
-exports.isEuGeoEntity = isEuGeoEntity;
 const _crStatusOfPoint = status => status && status !== ':' && status.length === 1 ? status : void 0;
 const _crDataPoint = (v, time, status) => [(0, _convertToUTC.default)(time), v, _crStatusOfPoint(status)];
-const _setZoomMinMaxTo = (config, isNotZoomToMinMax, min) => {
-  const yAxis = config.yAxis;
-  if (isNotZoomToMinMax) {
-    yAxis.zhNotZoomToMinMax = true;
-  } else {
-    yAxis.min = min;
-  }
-};
 const _getTableId = _ref2 => {
   let {
     dfId,
@@ -134,84 +111,6 @@ const setInfoTo = (config, json) => {
   config.info = crDatasetInfo(json);
 };
 exports.setInfoTo = setInfoTo;
-const setDataAndInfo = _ref3 => {
-  let {
-    config,
-    data,
-    json,
-    option
-  } = _ref3;
-  (0, _Chart.setDefaultTitle)(config, option.title, option.subtitle);
-  config.series[0].data = data;
-  config.zhConfig = crZhConfig(option);
-  setInfoTo(config, json);
-};
-exports.setDataAndInfo = setDataAndInfo;
-const _setCategories = _ref4 => {
-  let {
-    config,
-    categories,
-    min,
-    option
-  } = _ref4;
-  const {
-    time
-  } = option;
-  config.xAxis.categories = categories;
-  _setZoomMinMaxTo(config, option.isNotZoomToMinMax, min);
-  config.series[0].name = time;
-  _assign(config.zhConfig, {
-    itemCaption: option.title || "EU",
-    itemTime: time
-  });
-  (0, _configBuilderFn.setBarConfigHeightIf)(config);
-};
-const _colorCategories = data => {
-  data.forEach(p => {
-    const _caption = p.c || "",
-      color = isEuCaption(_caption) ? EU_COLOR : _isEaCaption(_caption) ? EA_COLOR : _isEuMember(_caption) ? void 0 : NOT_EU_MEMBER_COLOR;
-    if (color) {
-      p.color = color;
-    }
-  });
-};
-const _fRoundByIf = option => {
-  const crValue = (0, _AdapterFn.fCrValue)(option, _AdapterFn.FN_IDENTITY);
-  return crValue !== _AdapterFn.FN_IDENTITY ? point => (0, _isTypeFn.isNumber)(point && point.y) ? point.y = crValue(point.y) : void 0 : void 0;
-};
-const roundByDataIf = (data, option) => {
-  const _roundBy = _fRoundByIf(option);
-  return _roundBy ? (data.forEach(_roundBy), data) : data;
-};
-exports.roundByDataIf = roundByDataIf;
-const crCategoryConfigImpl = _ref5 => {
-  let {
-    json,
-    option,
-    data,
-    categories,
-    min
-  } = _ref5;
-  const config = _FactoryChart.default.createConfig(option),
-    _data = roundByDataIf(data, option);
-  setDataAndInfo({
-    data: _data,
-    config,
-    json,
-    option
-  });
-  _setCategories({
-    categories,
-    config,
-    min,
-    option
-  });
-  _colorCategories(config.series[0].data);
-  return config;
-};
-exports.crCategoryConfigImpl = crCategoryConfigImpl;
-const crCategoryTooltip = () => (0, _Chart.fTooltip)(_Tooltip.tooltipCategorySimple);
-exports.crCategoryTooltip = crCategoryTooltip;
 const crDataSource = dfProps => {
   const _ds = dfProps.dataSource,
     _prefix = _ds && _ds.indexOf('Eurostat') !== -1 ? _ds : 'Eurostat';

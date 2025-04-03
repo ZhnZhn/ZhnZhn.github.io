@@ -3,7 +3,8 @@ import {
 } from '../../charts/ChartConfigFn';
 import {
   crData,
-  setDataAndInfo
+  crZhConfig,
+  crDatasetInfo
 } from './EuroStatFn';
 
 const _assign = Object.assign;
@@ -23,16 +24,14 @@ export const crMapConfig = (
    , config = crAreaConfig();
 
    _addItemCaptionTo(option)
-   setDataAndInfo({
-      config,
-      data,
-      json,
-      option
-   });
+   config.series[0].data = data
+
    _assign(config, {
       zhDialog: option,
       json: json,
-      zhMapSlice: option.zhMapSlice
+      zhMapSlice: option.zhMapSlice,
+      info: crDatasetInfo(json),
+      zhConfig: crZhConfig(option)
     })
     return config;
 }
