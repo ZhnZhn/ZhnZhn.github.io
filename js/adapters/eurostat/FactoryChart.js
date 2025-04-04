@@ -73,7 +73,7 @@ const _crBarYAxis = () => ({
     x: 3
   }
 });
-const _crColumnConfig = option => (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)(), (0, _configBuilderFn.fAdd)({
+const _crColumnConfig = (option, categories) => (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)(void 0, categories), (0, _configBuilderFn.fAdd)({
   legend: _crLegend(),
   plotOptions: _crPlotOptionsColumn(option)
 }), _configBuilderFn.toConfig);
@@ -81,8 +81,8 @@ const _crBarYAxisLegend = () => ({
   yAxis: _crBarYAxis(),
   legend: _crLegend(28)
 });
-const _crBarConfig = option => {
-  const config = (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)('BAR'), (0, _configBuilderFn.fAdd)({
+const _crBarConfig = (option, categories) => {
+  const config = (0, _pipe.default)((0, _configBuilderFn.crBarOrColumnConfig)('BAR', categories), (0, _configBuilderFn.fAdd)({
     ..._crBarYAxisLegend(),
     chart: {
       ...BAR_CHART
@@ -120,12 +120,15 @@ const _r = {
   [_ChartType.CHT_DOT_SET]: _crDotConfig
 };
 const FactoryChart = {
-  createConfig: option => {
+  createConfig: function (option) {
     const {
         seriaType
       } = option || {},
       _crConfig = seriaType && _r[seriaType];
-    return _crConfig ? _crConfig(option) : {};
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+    return _crConfig ? _crConfig(option, ...args) : {};
   }
 };
 var _default = exports.default = FactoryChart;

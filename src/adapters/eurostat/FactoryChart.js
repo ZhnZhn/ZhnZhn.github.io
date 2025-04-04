@@ -74,8 +74,11 @@ const _crBarYAxis = () => ({
   labels: { x: 3 }
 })
 
-const _crColumnConfig = option => pipe(
-  crBarOrColumnConfig(),
+const _crColumnConfig = (
+  option,
+  categories
+) => pipe(
+  crBarOrColumnConfig(void 0, categories),
   fAdd({
     legend: _crLegend(),
     plotOptions: _crPlotOptionsColumn(option)
@@ -88,9 +91,12 @@ const _crBarYAxisLegend = () => ({
   legend: _crLegend(28)
 });
 
-const _crBarConfig = (option) => {
+const _crBarConfig = (
+  option,
+  categories
+) => {
   const config = pipe(
-    crBarOrColumnConfig('BAR'),
+    crBarOrColumnConfig('BAR', categories),
     fAdd({
       ..._crBarYAxisLegend(),
       chart: {...BAR_CHART},
@@ -134,11 +140,11 @@ const _r = {
 };
 
 const FactoryChart = {
-  createConfig: (option) => {
+  createConfig: (option, ...args) => {
     const { seriaType } = option || {}
     , _crConfig = seriaType && _r[seriaType];
     return _crConfig
-      ? _crConfig(option)
+      ? _crConfig(option, ...args)
       : {};
   }
 };
