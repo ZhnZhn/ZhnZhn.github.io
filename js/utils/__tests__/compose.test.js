@@ -21,6 +21,22 @@ describe('compose', () => {
     expect(resultFn(1, 2)).toBe(3);
     expect(resultFn(2, 3)).toBe(5);
   });
+  test('should return second argument function in case one input void 0 and second function', () => {
+    const add = (a, b) => a + b,
+      resultFn = fn(void 0, add);
+    expect(_isFn(resultFn)).toBe(true);
+    expect(resultFn === add).toBe(true);
+    expect(resultFn(1, 2)).toBe(3);
+    expect(resultFn(2, 3)).toBe(5);
+  });
+  test('should return first argument function in case one input function and second void 0', () => {
+    const add = (a, b) => a + b,
+      resultFn = fn(add, void 0);
+    expect(_isFn(resultFn)).toBe(true);
+    expect(resultFn === add).toBe(true);
+    expect(resultFn(1, 2)).toBe(3);
+    expect(resultFn(2, 3)).toBe(5);
+  });
   test('should return new identity function in case empty input', () => {
     const resultFn = fn();
     expect(_isFn(resultFn)).toBe(true);

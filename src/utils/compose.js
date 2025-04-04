@@ -1,3 +1,5 @@
+import { filterBoolean } from './arrFn';
+
 /**
  * from redux compose
  *
@@ -12,10 +14,13 @@
 
 const compose = (
   ...fns
-) => fns.length === 0
-  ? arg => arg
-  : fns.length === 1
-     ? fns[0]
-     : fns.reduce((a, b) => (...args) => a(b(...args)));
+) => {
+  const _fns = filterBoolean(fns);
+  return _fns.length === 0
+    ? arg => arg
+    : _fns.length === 1
+    ? _fns[0]
+    : _fns.reduce((a, b) => (...args) => a(b(...args)));
+}
 
 export default compose
