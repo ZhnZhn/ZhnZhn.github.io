@@ -17,7 +17,11 @@ import {
   CHT_DOT_SET
 } from '../constants/ChartType';
 
-import { domSanitize } from './AdapterFn';
+import {
+  FN_IDENTITY,
+  domSanitize,
+  fCrValue
+} from './AdapterFn';
 
 const _getSeriaType = (
   optionOrStr
@@ -114,4 +118,23 @@ export const fCrTreeMapPoint = (title) => {
     label: domSanitize(label),
     title: _title
   });
+}
+
+export const fRoundByIf = (
+  option
+) => {
+  const crValue = fCrValue(option, FN_IDENTITY);
+  return crValue === FN_IDENTITY
+    ? void 0
+    : point => point.y = crValue(point.y)
+}
+
+export const roundByDataIf = (
+  data,
+  option
+) => {
+  const _roundBy = fRoundByIf(option);
+  return _roundBy
+    ? (data.forEach(_roundBy), data)
+    : data;
 }

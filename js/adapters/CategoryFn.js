@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isTreeMap = exports.isDotSet = exports.isColumnOrBarCategory = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.fCrTreeMapPoint = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
+exports.roundByDataIf = exports.isTreeMap = exports.isDotSet = exports.isColumnOrBarCategory = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.fRoundByIf = exports.fCrTreeMapPoint = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
 var _arrFn = require("../utils/arrFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _ChartType = require("../constants/ChartType");
@@ -52,4 +52,14 @@ const fCrTreeMapPoint = title => {
   });
 };
 exports.fCrTreeMapPoint = fCrTreeMapPoint;
+const fRoundByIf = option => {
+  const crValue = (0, _AdapterFn.fCrValue)(option, _AdapterFn.FN_IDENTITY);
+  return crValue === _AdapterFn.FN_IDENTITY ? void 0 : point => point.y = crValue(point.y);
+};
+exports.fRoundByIf = fRoundByIf;
+const roundByDataIf = (data, option) => {
+  const _roundBy = fRoundByIf(option);
+  return _roundBy ? (data.forEach(_roundBy), data) : data;
+};
+exports.roundByDataIf = roundByDataIf;
 //# sourceMappingURL=CategoryFn.js.map
