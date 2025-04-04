@@ -1,9 +1,7 @@
+import { findMinY } from '../AdapterFn';
 import {
-  findMinY,
-  getCaption
-} from '../AdapterFn';
-import {
-  getCategories
+  getCategories,
+  roundByDataIf
 } from '../CategoryFn';
 import routerColumnBarSet from '../stat-json/toColumn';
 
@@ -12,13 +10,13 @@ import {
   trJsonToSeria
 } from './JsonStatFn';
 import {
-  isNotGeoOrReporter,
-  isEuCaption,
-  isEuGeoEntity,
-  crCategoryConfigImpl,
-  crCategoryTooltip,
-  roundByDataIf
+  isNotGeoOrReporter
 } from './EuroStatFn';
+import {
+  fIsAddToCategories,
+  crCategoryConfigImpl,
+  crCategoryTooltip
+} from './toCategoryFn';
 
 const _crScatterProps = (
   seriaColor
@@ -35,20 +33,6 @@ const _crRouteIsNotExistMsg = (
   seriaType
 ) => `Chart ${seriaType} route isn't exist`
 
-const FN_TRUE = () => true;
-const _fIsAddToCategories = option => {
-  const _isGeoEntity = isEuCaption(getCaption(option.items[0]))
-    ? isEuGeoEntity
-    : FN_TRUE
-  , _isValue = option.isFilterZero
-    ? value => value !== 0
-    : FN_TRUE;
-  return (
-    geoEntity,
-    value
-  ) => _isGeoEntity(geoEntity) && _isValue(value);
-};
-
 export const crCategoryConfig = (
   json,
   option
@@ -63,7 +47,7 @@ export const crCategoryConfig = (
     }
     return _crConfig(json, option);
   }
-  return trJsonToCategory(json, _fIsAddToCategories(option))
+  return trJsonToCategory(json, fIsAddToCategories(option))
     .then(({ categories, data, min }) => crCategoryConfigImpl({
       json,
       option,
