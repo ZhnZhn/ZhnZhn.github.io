@@ -4,11 +4,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useBool = require("../hooks/useBool");
 var _dateFn = require("../../utils/dateFn");
 var _DirectionType = require("../../constants/DirectionType");
 var _Button = _interopRequireDefault(require("../zhn/Button"));
-var _SvgMove = require("../zhn/SvgMove");
 var _SpanToken = require("../zhn/SpanToken");
 var _ValueMovingModal = _interopRequireDefault(require("./ValueMovingModal"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -19,14 +19,6 @@ const S_ROOT = {
     position: 'relative',
     display: 'inline-block',
     marginLeft: 10
-  },
-  S_SPAN = {
-    marginLeft: 5,
-    fontWeight: 'bold'
-  },
-  S_W5 = {
-    display: 'inline-block',
-    width: 5
   },
   S_DATE = {
     padding: '4px 5px 2px 5px'
@@ -41,10 +33,10 @@ const S_ROOT = {
     color: '#2f7ed8'
   };
 const _hmDirection = {
-  DF: [null],
-  [_DirectionType.DT_DOWN]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMove.SvgDown, {}), S_DOWN],
-  [_DirectionType.DT_UP]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMove.SvgUp, {}), S_UP],
-  [_DirectionType.DT_EQUAL]: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMove.SvgEqual, {}), S_EQUAL]
+  DF: [""],
+  [_DirectionType.DT_DOWN]: ["-", S_DOWN],
+  [_DirectionType.DT_UP]: ["+", S_UP],
+  [_DirectionType.DT_EQUAL]: ["=", S_EQUAL]
 };
 const _getDirection = direction => _hmDirection[direction] || _hmDirection.DF;
 const DF_VALUE_MOVING = {
@@ -81,23 +73,23 @@ const ValueMovingBadge = _ref => {
       percent,
       direction
     } = vm,
-    [_svgDirection, _dStyle] = _getDirection(direction),
-    _spanStyle = {
-      ...S_SPAN,
-      ..._dStyle
-    };
+    [_strMove, _moveStyle] = _getDirection(direction);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
     style: S_ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanValue, {
       children: value
-    }), _svgDirection, /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: _spanStyle,
-      children: percent
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: _spanStyle,
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanGap, {
+      width: 10
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBold, {
+      style: _moveStyle,
+      children: `${_strMove}${_styleFn.NBSP}${percent}`
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanGap, {
+      width: 8
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBold, {
+      style: _moveStyle,
       children: delta
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: S_W5
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanGap, {
+      width: 8
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
       className: CL_BT,
       onClick: _toggleModal,
@@ -105,7 +97,7 @@ const ValueMovingBadge = _ref => {
         style: S_DATE,
         children: _date
       })
-    }), _svgDirection && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingModal.default, {
+    }), _strMove && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingModal.default, {
       isShow: isShowModal,
       isAdminMode: isAdminMode,
       valueMoving: vm,

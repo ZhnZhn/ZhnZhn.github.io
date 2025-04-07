@@ -5,6 +5,10 @@ import {
   useImperativeHandle
 } from '../uiApi';
 
+import {
+  NBSP
+} from '../styleFn';
+
 import { useToggleFalse } from '../hooks/useBool';
 import { getDateFromVm } from '../../utils/dateFn';
 
@@ -16,13 +20,10 @@ import {
 
 import Button from '../zhn/Button';
 import {
-  SvgDown,
-  SvgEqual,
-  SvgUp
-} from '../zhn/SvgMove';
-import {
   SpanValue,
-  SpanDate
+  SpanBold,
+  SpanDate,
+  SpanGap
 } from '../zhn/SpanToken';
 
 import ValueMovingModal from './ValueMovingModal';
@@ -33,14 +34,6 @@ const S_ROOT = {
   position: 'relative',
   display: 'inline-block',
   marginLeft: 10
-},
-S_SPAN = {
-  marginLeft: 5,
-  fontWeight: 'bold'
-},
-S_W5 = {
-  display: 'inline-block',
-  width: 5
 },
 S_DATE = {
   padding: '4px 5px 2px 5px'
@@ -56,10 +49,10 @@ S_EQUAL = {
 };
 
 const _hmDirection = {
-  DF: [null],
-  [DT_DOWN]: [<SvgDown />, S_DOWN],
-  [DT_UP]: [<SvgUp />, S_UP],
-  [DT_EQUAL]: [<SvgEqual />, S_EQUAL]
+  DF: [""],
+  [DT_DOWN]: ["-", S_DOWN],
+  [DT_UP]: ["+", S_UP],
+  [DT_EQUAL]: ["=", S_EQUAL]
 };
 
 const _getDirection = (
@@ -109,28 +102,28 @@ const ValueMovingBadge = ({
   }), [_updateDateTo])
 
   const {
-     value,
-     delta,
-     percent,
-     direction
-   } = vm
-   , [
-     _svgDirection,
-     _dStyle
-   ] = _getDirection(direction)
-   , _spanStyle = {...S_SPAN, ..._dStyle};
+    value,
+    delta,
+    percent,
+    direction
+  } = vm
+  , [
+   _strMove,
+   _moveStyle
+  ] = _getDirection(direction);
 
   return (
     <span style={S_ROOT}>
        <SpanValue>{value}</SpanValue>
-       {_svgDirection}
-       <span style={_spanStyle}>
-         {percent}
-       </span>
-       <span style={_spanStyle}>
+       <SpanGap width={10} />
+       <SpanBold style={_moveStyle}>
+         {`${_strMove}${NBSP}${percent}`}
+       </SpanBold>
+       <SpanGap width={8} />
+       <SpanBold style={_moveStyle}>
          {delta}
-       </span>
-       <span style={S_W5} />
+       </SpanBold>
+       <SpanGap width={8} />
        <Button
          className={CL_BT}
          onClick={_toggleModal}
@@ -140,7 +133,7 @@ const ValueMovingBadge = ({
          </SpanDate>
        </Button>
        {
-         _svgDirection && <ValueMovingModal
+         _strMove && <ValueMovingModal
             isShow={isShowModal}
             isAdminMode={isAdminMode}
             valueMoving={vm}
