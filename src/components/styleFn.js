@@ -34,6 +34,8 @@ export const CL_NOT_SELECTED = "not-selected"
 export const CL_TEXT_ELLIPSIS= "text-ellipsis"
 export const CL_WIDTH_100_PERCENT = "w-100"
 
+export const NBSP = "\u00A0"
+
 export const crBold16Cn = _fCrCn("bold-16")
 export const crWithScrollCn = _fCrCn("with-scroll")
 

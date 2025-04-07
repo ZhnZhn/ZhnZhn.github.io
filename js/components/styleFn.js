@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getColorBlack = exports.crWithScrollCn = exports.crStyle3 = exports.crStyle2 = exports.crStepStyle = exports.crSliderTransformStyle = exports.crShowHide = exports.crScrollYCn = exports.crItemCaptionCn = exports.crFlexRowCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCnNotSelected = exports.crCn = exports.crBtSvgCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.crBoldCn = exports.crBold16Cn = exports.S_OPEN_CLOSE_LEVEL_2 = exports.S_NONE = exports.S_INLINE = exports.S_BORDER_RADIUS_2 = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TOGGLE_ARROW = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW__PANE_TOPIC = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE = exports.CL_NOT_SELECTED = exports.CL_HRZ_CONTAINER = exports.CL_CHB_BLACK = exports.CL_BLACK = void 0;
+exports.getColorBlack = exports.crWithScrollCn = exports.crStyle3 = exports.crStyle2 = exports.crStepStyle = exports.crSliderTransformStyle = exports.crShowHide = exports.crScrollYCn = exports.crItemCaptionCn = exports.crFlexRowCn = exports.crElementCn = exports.crElementBorderCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crCnNotSelected = exports.crCn = exports.crBtSvgCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.crBoldCn = exports.crBold16Cn = exports.S_OPEN_CLOSE_LEVEL_2 = exports.S_NONE = exports.S_INLINE = exports.S_BORDER_RADIUS_2 = exports.S_BLOCK = exports.NBSP = exports.CL_WIDTH_100_PERCENT = exports.CL_TOGGLE_ARROW = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW__PANE_TOPIC = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE = exports.CL_NOT_SELECTED = exports.CL_HRZ_CONTAINER = exports.CL_CHB_BLACK = exports.CL_BLACK = void 0;
 var _uiApi = require("./uiApi");
 var _uiTheme = require("./styles/uiTheme");
 exports.getColorBlack = _uiTheme.getColorBlack;
@@ -20,6 +20,7 @@ const CL_CHB_BLACK = exports.CL_CHB_BLACK = "chb-bl";
 const CL_NOT_SELECTED = exports.CL_NOT_SELECTED = "not-selected";
 const CL_TEXT_ELLIPSIS = exports.CL_TEXT_ELLIPSIS = "text-ellipsis";
 const CL_WIDTH_100_PERCENT = exports.CL_WIDTH_100_PERCENT = "w-100";
+const NBSP = exports.NBSP = "\u00A0";
 const crBold16Cn = exports.crBold16Cn = _fCrCn("bold-16");
 const crWithScrollCn = exports.crWithScrollCn = _fCrCn("with-scroll");
 const crCnNotSelected = exports.crCnNotSelected = _fCrCn(CL_NOT_SELECTED);
