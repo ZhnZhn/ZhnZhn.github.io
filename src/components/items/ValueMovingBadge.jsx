@@ -5,6 +5,10 @@ import {
   useImperativeHandle
 } from '../uiApi';
 
+import {
+  crColorStyle
+} from '../styleFn';
+
 import { useToggleFalse } from '../hooks/useBool';
 import { getDateFromVm } from '../../utils/dateFn';
 
@@ -17,14 +21,13 @@ import {
 import Button from '../zhn/Button';
 import {
   SpanValue,
-  SpanBold,
+  SpanMove,
   SpanDate,
   SpanGap
 } from '../zhn/SpanToken';
 
 import ValueMovingModal from './ValueMovingModal';
-
-const CL_BT = 'bt';
+import { CL_VM_BADGE_BT } from './Item.Style';
 
 const S_ROOT = {
   position: 'relative',
@@ -34,15 +37,9 @@ const S_ROOT = {
 S_DATE = {
   padding: '4px 5px 2px 5px'
 },
-S_UP = {
-  color: '#4caf50'
-},
-S_DOWN = {
-  color: '#f44336'
-},
-S_EQUAL = {
-  color: '#2f7ed8'
-};
+S_UP = crColorStyle('#4caf50'),
+S_DOWN = crColorStyle('#f44336'),
+S_EQUAL = crColorStyle('#2f7ed8');
 
 const _hmDirection = {
   DF: [null],
@@ -113,33 +110,33 @@ const ValueMovingBadge = ({
 
   return (
     <span style={S_ROOT}>
-       <SpanValue>{value}</SpanValue>
-       <SpanGap width={10} />
-       <SpanBold style={_moveStyle}>
-        {_percentToken}
-       </SpanBold>
-       <SpanGap width={8} />
-       <SpanBold style={_moveStyle}>
-         {delta}
-       </SpanBold>
-       <SpanGap width={8} />
-       <Button
-         className={CL_BT}
-         onClick={_toggleModal}
-       >
-         <SpanDate style={S_DATE}>
-           {_date}
-         </SpanDate>
-       </Button>
-       {
-         _strMove && <ValueMovingModal
-            isShow={isShowModal}
-            isAdminMode={isAdminMode}
-            valueMoving={vm}
-            updateDateTo={_updateDateTo}
-            onClose={_closeModal}
-          />
-       }
+      <SpanValue>{value}</SpanValue>
+      <SpanGap width={10} />
+      <SpanMove style={_moveStyle}>
+      {_percentToken}
+      </SpanMove>
+      <SpanGap width={8} />
+      <SpanMove style={_moveStyle}>
+       {delta}
+      </SpanMove>
+      <SpanGap width={8} />
+      <Button
+       className={CL_VM_BADGE_BT}
+       onClick={_toggleModal}
+      >
+       <SpanDate style={S_DATE}>
+         {_date}
+       </SpanDate>
+      </Button>
+      {
+       _strMove && <ValueMovingModal
+          isShow={isShowModal}
+          isAdminMode={isAdminMode}
+          valueMoving={vm}
+          updateDateTo={_updateDateTo}
+          onClose={_closeModal}
+        />
+      }
     </span>
   );
 };

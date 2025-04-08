@@ -4,16 +4,17 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useBool = require("../hooks/useBool");
 var _dateFn = require("../../utils/dateFn");
 var _DirectionType = require("../../constants/DirectionType");
 var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _SpanToken = require("../zhn/SpanToken");
 var _ValueMovingModal = _interopRequireDefault(require("./ValueMovingModal"));
+var _Item = require("./Item.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const CL_BT = 'bt';
 const S_ROOT = {
     position: 'relative',
     display: 'inline-block',
@@ -22,15 +23,9 @@ const S_ROOT = {
   S_DATE = {
     padding: '4px 5px 2px 5px'
   },
-  S_UP = {
-    color: '#4caf50'
-  },
-  S_DOWN = {
-    color: '#f44336'
-  },
-  S_EQUAL = {
-    color: '#2f7ed8'
-  };
+  S_UP = (0, _styleFn.crColorStyle)('#4caf50'),
+  S_DOWN = (0, _styleFn.crColorStyle)('#f44336'),
+  S_EQUAL = (0, _styleFn.crColorStyle)('#2f7ed8');
 const _hmDirection = {
   DF: [null],
   [_DirectionType.DT_DOWN]: ["-", S_DOWN],
@@ -80,18 +75,18 @@ const ValueMovingBadge = _ref => {
       children: value
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanGap, {
       width: 10
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBold, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanMove, {
       style: _moveStyle,
       children: _percentToken
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanGap, {
       width: 8
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBold, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanMove, {
       style: _moveStyle,
       children: delta
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanGap, {
       width: 8
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-      className: CL_BT,
+      className: _Item.CL_VM_BADGE_BT,
       onClick: _toggleModal,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanDate, {
         style: S_DATE,
