@@ -38,6 +38,14 @@
   background: rgba(128, 128, 128, 0.3);
 }
 
+.bt-sl-18 {
+  border-radius: 2px;
+  font-size: 18px;
+}
+.bt-sl-18:focus {
+  background: rgba(128, 128, 128, 0.3);
+}
+
 .bt-left {
   padding-left: 2px;
   text-align: left;
