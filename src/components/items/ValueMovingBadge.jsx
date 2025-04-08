@@ -5,10 +5,6 @@ import {
   useImperativeHandle
 } from '../uiApi';
 
-import {
-  NBSP
-} from '../styleFn';
-
 import { useToggleFalse } from '../hooks/useBool';
 import { getDateFromVm } from '../../utils/dateFn';
 
@@ -49,10 +45,10 @@ S_EQUAL = {
 };
 
 const _hmDirection = {
-  DF: [""],
+  DF: [null],
   [DT_DOWN]: ["-", S_DOWN],
   [DT_UP]: ["+", S_UP],
-  [DT_EQUAL]: ["=", S_EQUAL]
+  [DT_EQUAL]: ["", S_EQUAL]
 };
 
 const _getDirection = (
@@ -110,14 +106,17 @@ const ValueMovingBadge = ({
   , [
    _strMove,
    _moveStyle
-  ] = _getDirection(direction);
+  ] = _getDirection(direction)
+  , _percentToken = _strMove == null
+     ? percent
+     : `${_strMove}${percent}`;
 
   return (
     <span style={S_ROOT}>
        <SpanValue>{value}</SpanValue>
        <SpanGap width={10} />
        <SpanBold style={_moveStyle}>
-         {`${_strMove}${NBSP}${percent}`}
+        {_percentToken}
        </SpanBold>
        <SpanGap width={8} />
        <SpanBold style={_moveStyle}>

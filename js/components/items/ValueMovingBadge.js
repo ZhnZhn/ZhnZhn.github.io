@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _styleFn = require("../styleFn");
 var _useBool = require("../hooks/useBool");
 var _dateFn = require("../../utils/dateFn");
 var _DirectionType = require("../../constants/DirectionType");
@@ -33,10 +32,10 @@ const S_ROOT = {
     color: '#2f7ed8'
   };
 const _hmDirection = {
-  DF: [""],
+  DF: [null],
   [_DirectionType.DT_DOWN]: ["-", S_DOWN],
   [_DirectionType.DT_UP]: ["+", S_UP],
-  [_DirectionType.DT_EQUAL]: ["=", S_EQUAL]
+  [_DirectionType.DT_EQUAL]: ["", S_EQUAL]
 };
 const _getDirection = direction => _hmDirection[direction] || _hmDirection.DF;
 const DF_VALUE_MOVING = {
@@ -73,7 +72,8 @@ const ValueMovingBadge = _ref => {
       percent,
       direction
     } = vm,
-    [_strMove, _moveStyle] = _getDirection(direction);
+    [_strMove, _moveStyle] = _getDirection(direction),
+    _percentToken = _strMove == null ? percent : `${_strMove}${percent}`;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
     style: S_ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanValue, {
@@ -82,7 +82,7 @@ const ValueMovingBadge = _ref => {
       width: 10
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBold, {
       style: _moveStyle,
-      children: `${_strMove}${_styleFn.NBSP}${percent}`
+      children: _percentToken
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanGap, {
       width: 8
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBold, {
