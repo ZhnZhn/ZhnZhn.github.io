@@ -9,7 +9,7 @@ export const isWideWidth = (
 export const HAS_TOUCH_EVENTS = document
     && 'ontouchstart' in document.documentElement;
 
-const HAS_WIDE_SCREEN = isWideWidth();
+export const HAS_WIDE_SCREEN = isWideWidth();
 export const HAS_KEYBOARD_FOCUS = !HAS_TOUCH_EVENTS
   || HAS_WIDE_SCREEN
 
