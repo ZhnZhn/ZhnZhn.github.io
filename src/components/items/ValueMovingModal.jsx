@@ -21,13 +21,12 @@ import DivCompareTo from './DivCompareTo';
 
 const S_MODAL_POPUP = {
   position: 'absolute',
-  top: 25,
+  top: 30,
   left: 0,
   zIndex: 20,
   width: 'auto',
   backgroundColor: 'inherit',
   padding: '5px 10px 10px 10px',
-  border: '2px solid #1b2836',
   borderRadius: 5,
   boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
   cursor: 'auto'
