@@ -1,10 +1,11 @@
 import {
-  useReducer,
   isBool,
   isFn,
   isStr,
   isObj
-} from '../uiApi';
+} from '../../utils/isTypeFn';
+
+import { useReducer } from '../uiApi';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty
 , _isNotOwnBooleanPropsEqual = (

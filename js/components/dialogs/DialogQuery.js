@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _isStrNotBlank = require("../../utils/isStrNotBlank");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
@@ -20,7 +20,7 @@ const ERR_MSG = 'Empty or Id format is not valid',
   S_ID_ROOT = {
     width: 270
   };
-const _testId = value => (0, _isStrNotBlank.isStrNotBlank)(value) && (0, _isStrNotBlank.isStrNotBlank)(value.split('/')[2]);
+const _testId = value => (0, _isTypeFn.isStrNotBlank)(value) && (0, _isTypeFn.isStrNotBlank)(value.split('/')[2]);
 const CHART_OPTIONS = (0, _ChartOptionsFn.crChartOptions)(void 0, 't2');
 const DialogQuery = (0, _memoIsShow.default)(props => {
   const {

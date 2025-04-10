@@ -2,7 +2,7 @@ import {
   isArr,
   isObj,
   isStr
-} from '../../uiApi';
+} from '../../../utils/isTypeFn';
 
 const _notNullOrUndef = v => v != null;
 

@@ -28,7 +28,6 @@ export {
   isBool,
   isFn,
   isNumber,
-  isStr,
   isObj
 } from '../utils/isTypeFn';
 import {

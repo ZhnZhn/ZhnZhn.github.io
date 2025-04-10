@@ -1,6 +1,6 @@
 import {
   isStrNotBlank
-} from '../../utils/isStrNotBlank';
+} from '../../utils/isTypeFn';
 
 import {
   useRef,

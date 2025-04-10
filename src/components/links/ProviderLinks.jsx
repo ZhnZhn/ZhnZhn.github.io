@@ -1,4 +1,5 @@
-import { isStr } from '../uiApi';
+import { isStr } from '../../utils/isTypeFn';
+
 import Link from '../zhn/Link';
 
 const CL_LINK = "data-provider-link";

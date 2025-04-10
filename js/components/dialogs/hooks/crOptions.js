@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../../uiApi");
+var _isTypeFn = require("../../../utils/isTypeFn");
 const _notNullOrUndef = v => v != null;
 const _crCvItems = arr => arr.map(_ref => {
   let {
@@ -28,7 +28,7 @@ const _crSItems = arr => arr.map(_ref2 => {
     s
   };
 });
-const _crVcItems = arr => arr.map(v => (0, _uiApi.isObj)(v) ? v : {
+const _crVcItems = arr => arr.map(v => (0, _isTypeFn.isObj)(v) ? v : {
   c: v,
   v
 });
@@ -40,7 +40,7 @@ const _crNbqItems = arr => {
       b,
       q
     } = _ref3;
-    if ((0, _uiApi.isArr)(q)) {
+    if ((0, _isTypeFn.isArr)(q)) {
       q.forEach(to => {
         const s = `${b}/${to}`;
         items.push({
@@ -79,7 +79,7 @@ const _fCrItems = crValue => arr => arr.map(c => {
     vc: _crVcItems,
     //cb-items, kc-items, kx-items
     t1: _fCrItems(_crValueT1),
-    //bf-items, kr-items
+    //bf-items, kr-items, bg-items
     t2: _fCrItems(_crValueT2),
     //bt-items, ht-items
     t2l: _fCrItems(_crValueT2L),
@@ -90,10 +90,10 @@ const _fCrItems = crValue => arr => arr.map(c => {
   };
 const _crItemsWithFilters = (arr, filters) => arr.map(item => {
   const not = item.not;
-  if ((0, _uiApi.isStr)(not)) {
+  if ((0, _isTypeFn.isStr)(not)) {
     const _filters = filters[not];
-    if ((0, _uiApi.isArr)(_filters)) {
-      if ((0, _uiApi.isArr)(item.nots)) {
+    if ((0, _isTypeFn.isArr)(_filters)) {
+      if ((0, _isTypeFn.isArr)(item.nots)) {
         item.not = _filters.concat(item.nots);
         delete item.nots;
       } else {
@@ -109,9 +109,9 @@ const DF_OPTIONS_PROP_NAME = "items";
 const _crItems = (json, optionsPropName) => {
   const _arr = json[optionsPropName || DF_OPTIONS_PROP_NAME],
     _crItems = json.isCv ? _crCvItems : json.isCp ? _crCpItems : _rCrItems[json.type];
-  return _crItems ? _crItems(_arr) : _arr[0] && _notNullOrUndef(_arr[0].s) ? _crSItems(_arr) : (0, _uiApi.isObj)(json.filters) ? _crItemsWithFilters(_arr, json.filters) : _arr;
+  return _crItems ? _crItems(_arr) : _arr[0] && _notNullOrUndef(_arr[0].s) ? _crSItems(_arr) : (0, _isTypeFn.isObj)(json.filters) ? _crItemsWithFilters(_arr, json.filters) : _arr;
 };
-const _crPropCaption = arr => !(0, _uiApi.isArr)(arr) || arr.length === 0 ? void 0 : _notNullOrUndef(arr[0].c) ? 'c' : void 0;
+const _crPropCaption = arr => !(0, _isTypeFn.isArr)(arr) || arr.length === 0 ? void 0 : _notNullOrUndef(arr[0].c) ? 'c' : void 0;
 const _addPrefixSuffixTo = (arr, json) => {
   const {
     prefix,
@@ -127,7 +127,7 @@ const _addPrefixSuffixTo = (arr, json) => {
 
 //[items, propCaption]
 const crOptions = (json, optionsPropName) => {
-  if (!(0, _uiApi.isObj)(json)) {
+  if (!(0, _isTypeFn.isObj)(json)) {
     return [];
   }
   const items = _addPrefixSuffixTo(_crItems(json, optionsPropName), json);
