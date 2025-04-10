@@ -3,18 +3,17 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _DirectionType = require("../../constants/DirectionType");
+var _isTypeFn = require("../../utils/isTypeFn");
+var _dateFn = require("../../utils/dateFn");
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useBool = require("../hooks/useBool");
-var _dateFn = require("../../utils/dateFn");
-var _DirectionType = require("../../constants/DirectionType");
 var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _SpanToken = require("../zhn/SpanToken");
 var _ValueMovingModal = _interopRequireDefault(require("./ValueMovingModal"));
 var _Item = require("./Item.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-//import PropTypes from "prop-types";
-
 const S_ROOT = {
     position: 'relative',
     display: 'inline-block',
@@ -68,7 +67,7 @@ const ValueMovingBadge = _ref => {
       direction
     } = vm,
     [_strMove, _moveStyle] = _getDirection(direction),
-    _percentToken = _strMove == null ? percent : `${_strMove}${percent}`;
+    _percentToken = (0, _isTypeFn.isStr)(_strMove) ? `${_strMove}${percent}` : percent;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
     style: S_ROOT,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanValue, {
@@ -92,7 +91,7 @@ const ValueMovingBadge = _ref => {
         style: S_DATE,
         children: _date
       })
-    }), _strMove && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingModal.default, {
+    }), (0, _isTypeFn.isStr)(_strMove) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingModal.default, {
       isShow: isShowModal,
       isAdminMode: isAdminMode,
       valueMoving: vm,

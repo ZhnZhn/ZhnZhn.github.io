@@ -1,22 +1,21 @@
-//import PropTypes from "prop-types";
+import {
+  DT_UP,
+  DT_DOWN,
+  DT_EQUAL
+} from '../../constants/DirectionType';
+
+import { isStr } from '../../utils/isTypeFn';
+import { getDateFromVm } from '../../utils/dateFn';
+
 import {
   useState,
   useMemo,
   useImperativeHandle
 } from '../uiApi';
 
-import {
-  crColorStyle
-} from '../styleFn';
+import { crColorStyle } from '../styleFn';
 
 import { useToggleFalse } from '../hooks/useBool';
-import { getDateFromVm } from '../../utils/dateFn';
-
-import {
-  DT_UP,
-  DT_DOWN,
-  DT_EQUAL
-} from '../../constants/DirectionType';
 
 import Button from '../zhn/Button';
 import {
@@ -104,9 +103,9 @@ const ValueMovingBadge = ({
    _strMove,
    _moveStyle
   ] = _getDirection(direction)
-  , _percentToken = _strMove == null
-     ? percent
-     : `${_strMove}${percent}`;
+  , _percentToken = isStr(_strMove)
+     ? `${_strMove}${percent}`
+     : percent;
 
   return (
     <span style={S_ROOT}>
@@ -129,7 +128,7 @@ const ValueMovingBadge = ({
        </SpanDate>
       </Button>
       {
-       _strMove && <ValueMovingModal
+       isStr(_strMove) && <ValueMovingModal
           isShow={isShowModal}
           isAdminMode={isAdminMode}
           valueMoving={vm}
