@@ -1,7 +1,9 @@
 const COLOR_SILVER = "silver"
 , COLOR_DARK_BLUE = "#1b2836"
+, COLOR_LIGHT_BLUE = "#bcd8f5"
 , COLOR_DARK_CYAN = "#009688"
 , COLOR_GREY = "grey"
+, COLOR_THISTLE = "thistle"
 , COLOR_DARK_GREY = "#5b5b5b"
 , COLOR_BLACK = "black";
 
@@ -71,7 +73,7 @@ const P_GREY_VALUES = [
 
 const EL_BG_WHITE = "#dce1e5"
 , LB_BC_LIGHT = COLOR_GREY;
-const P_WHITE_VALUES = [
+const P_WHITE_GREY_VALUES = [
   "#e1e1e1",
 
   DF_S_C1,
@@ -81,8 +83,8 @@ const P_WHITE_VALUES = [
   DF_BH_C,
   LB_BC_LIGHT,
 
-  EL_BG_WHITE,
-  "#212020",
+  "#dcdcdc",
+  "#789",
 
   "#5d869a",
   DF_C_BLACK
@@ -109,6 +111,7 @@ const P_SAND_L_VALUES = [
 
 const _crLightThemeId = id => "Light " + id
 , _crDarkThemeId = id => " Dark " + id
+, _crWhiteThemeId = color => "White - " + color
 , _GREY_THEME_ID = "Grey"
 , _GREY_L_THEME_ID = _crLightThemeId(_GREY_THEME_ID)
 , _GREY_D_THEME_ID = _crDarkThemeId(_GREY_THEME_ID)
@@ -116,12 +119,16 @@ const _crLightThemeId = id => "Light " + id
 , _SAND_THEME_ID = "Sand"
 , _SAND_L_THEME_ID = _crLightThemeId(_SAND_THEME_ID)
 
-, _WHITE_THEME_ID = "White"
+, _WHITE_GREY_THEME_ID = _crWhiteThemeId("Grey")
+, _WHITE_BLUE_THEME_ID = _crWhiteThemeId("Blue")
+, _WHITE_THISTLE_THEME_ID = _crWhiteThemeId("Thistle")
 , _BLACK_THEME_ID = "Black";
 
 export const UI_THEME_OPTIONS = [
   _GREY_THEME_ID,
-  _WHITE_THEME_ID,
+  _WHITE_BLUE_THEME_ID,
+  _WHITE_GREY_THEME_ID,
+  _WHITE_THISTLE_THEME_ID,
   _GREY_L_THEME_ID,
   _SAND_L_THEME_ID,
   _SAND_THEME_ID,
@@ -135,14 +142,15 @@ const PALETTE_VALUES = {
   [_GREY_D_THEME_ID]: P_GREY_VALUES,
   [_BLACK_THEME_ID]: P_GREY_VALUES,
 
-  [_GREY_L_THEME_ID]: P_WHITE_VALUES,
-  [_WHITE_THEME_ID]: P_WHITE_VALUES,
+  [_WHITE_GREY_THEME_ID]: P_WHITE_GREY_VALUES,
+  [_WHITE_BLUE_THEME_ID]: P_WHITE_GREY_VALUES,
+  [_WHITE_THISTLE_THEME_ID]: P_WHITE_GREY_VALUES,
+  [_GREY_L_THEME_ID]: P_WHITE_GREY_VALUES,
 
   [_SAND_THEME_ID]: P_SAND_L_VALUES,
   [_SAND_L_THEME_ID]: P_SAND_L_VALUES
 };
 
-const EL_BG_GREY_L = "#c0c4c6";
 const DARK_THEME_PROPS = {
   [PROPERTY_B_BG]: "#202328",
   [PROPERTY_EL_BG]: "#004d4d",
@@ -150,12 +158,30 @@ const DARK_THEME_PROPS = {
   [PROPERTY_BTF_C]: COLOR_DARK_CYAN,
   [PROPERTY_COLOR_BLACK]: COLOR_GREY
 };
-const PALETTE_CHANGES = {
-  [_GREY_L_THEME_ID]: {
-    [PROPERTY_C_BG]: "#d3d3d3",
 
-    [PROPERTY_S_C2]: EL_BG_GREY_L,
-    [PROPERTY_EL_BG]: EL_BG_GREY_L,
+const _crWhiteThemeConfig = (
+  bgColor,
+  btColor
+) => ({
+  [PROPERTY_S_C2]: bgColor,
+  [PROPERTY_EL_BG]: bgColor,
+  [PROPERTY_BTF_C]: btColor
+});
+
+const PALETTE_CHANGES = {
+  [_WHITE_BLUE_THEME_ID]: _crWhiteThemeConfig(
+    COLOR_LIGHT_BLUE,
+    "#7cb5ec"
+  ),
+  [_WHITE_THISTLE_THEME_ID]: _crWhiteThemeConfig(
+    COLOR_THISTLE,
+    "#9c27b0"
+  ),
+  [_GREY_L_THEME_ID]: {
+    [PROPERTY_C_BG]: "#d9d9d9",
+
+    [PROPERTY_S_C2]: COLOR_SILVER,
+    [PROPERTY_EL_BG]: COLOR_SILVER,
 
     [PROPERTY_BH_C]: COLOR_DARK_GREY
   },
