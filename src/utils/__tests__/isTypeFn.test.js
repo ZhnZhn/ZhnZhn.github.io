@@ -6,6 +6,7 @@ import {
   isInt,
   isBool,
   isStr,
+  isStrNotBlank,
   isStrOrNumber,
   isUndef,
   isFn,
@@ -112,6 +113,24 @@ describe('isStr',()=>{
     expect(fn(null)).toBe(false)
     expect(fn(true)).toBe(false)
     expect(fn(2)).toBe(false)
+  })
+})
+
+describe('isStrNotBlank', ()=>{
+  const fn = isStrNotBlank;
+  test('should return true for not blank str', ()=>{
+    expect(fn()).toBe(false)
+    expect(fn(null)).toBe(false)
+    expect(fn(true)).toBe(false)
+    expect(fn(1)).toBe(false)
+    expect(fn({})).toBe(false)
+    expect(fn('')).toBe(false)
+    expect(fn('  ')).toBe(false)
+    expect(fn('          ')).toBe(false)
+
+    expect(fn('str')).toBe(true)
+    expect(fn('0')).toBe(true)
+    expect(fn('1')).toBe(true)
   })
 })
 

@@ -1,4 +1,8 @@
 import {
+  isStrNotBlank
+} from '../../utils/isStrNotBlank';
+
+import {
   useRef,
   useState,
   getRefValue,
@@ -18,11 +22,10 @@ const ERR_MSG = 'Empty or Id format is not valid'
 , S_ID_CAPTION = { width: 85 }
 , S_ID_ROOT = { width: 270 };
 
-const _isStrNotBlank = str => typeof str === 'string'
-  && str.trim();
-
-const _testId = (value) => _isStrNotBlank(value)
-  && _isStrNotBlank(value.split('/')[2]);
+const _testId = (
+  value
+) => isStrNotBlank(value)
+  && isStrNotBlank(value.split('/')[2]);
 
 const CHART_OPTIONS = crChartOptions(void 0, 't2');
 

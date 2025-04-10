@@ -86,6 +86,22 @@ describe('isStr', () => {
     expect(fn(2)).toBe(false);
   });
 });
+describe('isStrNotBlank', () => {
+  const fn = _isTypeFn.isStrNotBlank;
+  test('should return true for not blank str', () => {
+    expect(fn()).toBe(false);
+    expect(fn(null)).toBe(false);
+    expect(fn(true)).toBe(false);
+    expect(fn(1)).toBe(false);
+    expect(fn({})).toBe(false);
+    expect(fn('')).toBe(false);
+    expect(fn('  ')).toBe(false);
+    expect(fn('          ')).toBe(false);
+    expect(fn('str')).toBe(true);
+    expect(fn('0')).toBe(true);
+    expect(fn('1')).toBe(true);
+  });
+});
 describe('isStrOrNumber', () => {
   const fn = _isTypeFn.isStrOrNumber;
   test('should return true for not empty string of number othewise false', () => {

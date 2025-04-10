@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isUndef = exports.isTypeNumber = exports.isStrOrNumber = exports.isStr = exports.isPositiveNumber = exports.isObj = exports.isNumber = exports.isNotEmptyArr = exports.isNaN = exports.isInt = exports.isFn = exports.isBool = exports.isArr = exports.getObjectKeys = void 0;
+exports.isUndef = exports.isTypeNumber = exports.isStrOrNumber = exports.isStrNotBlank = exports.isStr = exports.isPositiveNumber = exports.isObj = exports.isNumber = exports.isNotEmptyArr = exports.isNaN = exports.isInt = exports.isFn = exports.isBool = exports.isArr = exports.getObjectKeys = void 0;
 const _fIsTypeof = strType => v => typeof v === strType;
 const isTypeNumber = exports.isTypeNumber = _fIsTypeof("number");
 const isNumber = v => isTypeNumber(v) && v - v === 0;
@@ -14,6 +14,8 @@ const isBool = exports.isBool = _fIsTypeof("boolean");
 const isStr = exports.isStr = _fIsTypeof("string");
 const isUndef = exports.isUndef = _fIsTypeof("undefined");
 const isFn = exports.isFn = _fIsTypeof("function");
+const isStrNotBlank = v => isStr(v) && !!v.trim();
+exports.isStrNotBlank = isStrNotBlank;
 const isStrOrNumber = v => v !== "" && (isStr(v) || isNumber(v));
 exports.isStrOrNumber = isStrOrNumber;
 const isObj = v => typeof v === "object" && v !== null;

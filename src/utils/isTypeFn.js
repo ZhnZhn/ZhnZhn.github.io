@@ -12,6 +12,8 @@ export const isStr = _fIsTypeof("string")
 export const isUndef = _fIsTypeof("undefined")
 export const isFn = _fIsTypeof("function")
 
+export const isStrNotBlank = v => isStr(v) && !!v.trim()
+
 export const isStrOrNumber = v => v !== ""
   && (isStr(v) || isNumber(v))
 
