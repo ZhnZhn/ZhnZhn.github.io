@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
+var _useProperty = require("../hooks/useProperty");
 var _IndicatorBuilder = require("../../charts/IndicatorBuilder");
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _ModalMenu = require("./ModalMenu.Style");
@@ -24,7 +24,7 @@ const ModalMenuInd2 = _ref => {
     getChart,
     config
   } = _ref;
-  const _hasPowerBy10 = (0, _useRefInit.default)(() => _isPowerBy(config)),
+  const _hasPowerBy10 = (0, _useProperty.useRefInit)(() => _isPowerBy(config)),
     _refPowerBy10 = (0, _uiApi.useRef)(DF_POWER_BY_10),
     _onPowerBy10 = () => {
       const _by = parseFloat((0, _uiApi.getInputValue)(_refPowerBy10));

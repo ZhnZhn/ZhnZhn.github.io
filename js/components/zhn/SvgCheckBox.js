@@ -6,7 +6,7 @@ exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
+var _useProperty = require("../hooks/useProperty");
 var _fUseKey = require("../hooks/fUseKey");
 var _Color = require("../styles/Color");
 var _Svg = _interopRequireDefault(require("./svg/Svg100"));
@@ -53,7 +53,7 @@ const SvgCheckBox = props => {
       onUnCheck = FN_NOOP
     } = props,
     [valueState, setValueState] = (0, _uiApi.useState)(() => (0, _isTypeFn.isBool)(value) ? void 0 : !!initialValue),
-    _isValueState = (0, _useRefInit.default)(() => (0, _isTypeFn.isBool)(valueState)),
+    _isValueState = (0, _useProperty.useRefInit)(() => (0, _isTypeFn.isBool)(valueState)),
     _value = _isValueState ? valueState : value,
     _comp = (0, _uiApi.useMemo)(() => ({
       setUnchecked: () => setValueState(false)

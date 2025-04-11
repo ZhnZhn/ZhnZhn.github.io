@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.ChartItem = void 0;
 var _uiApi = require("../uiApi");
 var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useProperty = require("../hooks/useProperty");
 var _useToggle = require("../hooks/useToggle");
 var _useBool = require("../hooks/useBool");
 var _useVm = _interopRequireDefault(require("./useVm"));
@@ -69,7 +69,7 @@ const ChartItem = exports.ChartItem = (0, _memoEqual.default)(_ref => {
       legend
     } = zhConfig || {},
     [_refVm, compareTo] = (0, _useVm.default)(),
-    [_hLoaded, getMainChart] = (0, _useProperty.default)(),
+    [_hLoaded, getMainChart] = (0, _useProperty.useProperty)(),
     [hasError, _hError] = (0, _useBool.useBool)(),
     [isShowChart, showChart, hideChart] = (0, _useBool.useBool)(true),
     isShowInfo = !isShowChart,

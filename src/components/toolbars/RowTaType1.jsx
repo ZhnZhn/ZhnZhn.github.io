@@ -1,14 +1,12 @@
+import { removeSeriaFrom } from '../../charts/IndicatorBuilder';
+
 import {
   useRef,
   useState,
   getInputValue
 } from '../uiApi';
-import useRefInit from '../hooks/useRefInit';
 
-import {
-  removeSeriaFrom
-} from '../../charts/IndicatorBuilder';
-
+import { useRefInit } from '../hooks/useProperty';
 import RowType2 from './RowType2';
 
 const _isInArrObjWithId = (

@@ -3,13 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
-var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
 var _IndicatorBuilder = require("../../charts/IndicatorBuilder");
+var _uiApi = require("../uiApi");
+var _useProperty = require("../hooks/useProperty");
 var _RowType = _interopRequireDefault(require("./RowType2"));
 var _jsxRuntime = require("react/jsx-runtime");
 const _isInArrObjWithId = (arrObj, id) => !!arrObj.find(obj => obj.id === id);
-const _crId = (caption, period) => caption + "(" + period + ")";
+const _crId = (caption, period) => `${caption}(${period})`;
 const RowTaType1 = _ref => {
   let {
     caption,
@@ -18,7 +18,7 @@ const RowTaType1 = _ref => {
     crInitialPeriod,
     addTaTo
   } = _ref;
-  const _initialTaPeriod = (0, _useRefInit.default)(() => crInitialPeriod(config)),
+  const _initialTaPeriod = (0, _useProperty.useRefInit)(() => crInitialPeriod(config)),
     _refPeriodInput = (0, _uiApi.useRef)(),
     [taConfs, setTaConfs] = (0, _uiApi.useState)([]),
     _onAddTa = () => {

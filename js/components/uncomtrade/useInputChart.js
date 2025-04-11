@@ -1,12 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _getPropertyFn = require("../../utils/getPropertyFn");
 var _ChartType = require("../../constants/ChartType");
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useProperty = require("../hooks/useProperty");
 var _dialogFn = require("./dialogFn");
 const CHART_OPTIONS = [{
     c: "Bar (60, 90): By Partners",
@@ -27,7 +26,7 @@ const _isPeriod = (
 */
 
 const useInputChart = (getTradePartner, getTradeAggregaton) => {
-  const [setChart, getChart] = (0, _useProperty.default)(DF_CHART, DF_CHART),
+  const [setChart, getChart] = (0, _useProperty.useProperty)(DF_CHART, DF_CHART),
     [isPeriod, setIsPeriod] = (0, _uiApi.useState)(true)
     /*eslint-disable react-hooks/exhaustive-deps */,
     _setChart = (0, _uiApi.useCallback)(itemChart => {

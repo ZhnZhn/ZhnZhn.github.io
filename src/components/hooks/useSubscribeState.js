@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from '../uiApi';
-import useRefInit from './useRefInit';
+import { useRefInit } from './useProperty';
 
 const useSubscribeState = (
   store,

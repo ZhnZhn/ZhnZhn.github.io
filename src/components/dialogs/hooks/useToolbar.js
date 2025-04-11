@@ -1,6 +1,6 @@
 import { filterBoolean } from '../../../utils/arrFn';
 
-import useRefInit from '../../hooks/useRefInit';
+import { useRefInit } from '../../hooks/useProperty';
 import crToolbarItem from './crToolbarItem';
 
 const CLICK_TO_TOGGLE = 'Click to toggle';

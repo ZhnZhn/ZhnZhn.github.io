@@ -4,7 +4,7 @@ import {
   getRefValue
 } from '../uiApi';
 
-import useProperty from '../hooks/useProperty';
+import { useProperty } from '../hooks/useProperty';
 import FlatButton from '../zhn-m/FlatButton';
 
 const usePasteTo = (

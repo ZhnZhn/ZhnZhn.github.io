@@ -1,3 +1,6 @@
+import { getByPropsFrom } from '../../utils/getByPropsFrom';
+import { mlsToDmy } from '../../utils/dateFn';
+
 import {
   useRef,
   isInputValid,
@@ -5,11 +8,7 @@ import {
 } from '../uiApi';
 import { S_INLINE } from '../styleFn';
 
-import useRefInit from '../hooks/useRefInit';
-
-import { getByPropsFrom } from '../../utils/getByPropsFrom';
-import { mlsToDmy } from '../../utils/dateFn';
-
+import { useRefInit } from '../hooks/useProperty';
 import {
   SvgMinus,
   SvgPlus

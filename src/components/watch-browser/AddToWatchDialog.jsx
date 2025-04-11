@@ -7,7 +7,7 @@ import {
 
 import memoIsShow from '../hoc/memoIsShow';
 import useHasBeenOpen from '../hooks/useHasBeenOpen';
-import useProperty from '../hooks/useProperty';
+import { useProperty } from '../hooks/useProperty';
 
 import {
   WAT_ADD_ITEM

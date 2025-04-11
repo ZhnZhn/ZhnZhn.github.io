@@ -4,14 +4,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
+var _useProperty = require("../hooks/useProperty");
 var _ResizeElementImpl = _interopRequireDefault(require("./ResizeElementImpl"));
 const useResizeElement = _ref => {
   let {
     refEl,
     ...restProps
   } = _ref;
-  const resizeImpl = (0, _useRefInit.default)(() => {
+  const resizeImpl = (0, _useProperty.useRefInit)(() => {
     return new _ResizeElementImpl.default(restProps);
   });
 

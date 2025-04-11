@@ -1,8 +1,7 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 var _react = require("@testing-library/react");
-var _useRefInit = _interopRequireDefault(require("../useRefInit"));
+var _useProperty = require("../useProperty");
 const _getValue = result => result.current;
 
 /* eslint-disable react-hooks/rules-of-hooks */
@@ -10,7 +9,7 @@ const _testRenderAndRerender = (init, expectedValue) => {
   const {
     result: r1,
     rerender: rr1
-  } = (0, _react.renderHook)(() => (0, _useRefInit.default)(init));
+  } = (0, _react.renderHook)(() => (0, _useProperty.useRefInit)(init));
   expect(_getValue(r1)).toBe(expectedValue);
   rr1();
   expect(_getValue(r1)).toBe(expectedValue);

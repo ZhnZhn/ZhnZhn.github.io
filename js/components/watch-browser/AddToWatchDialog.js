@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useHasBeenOpen = _interopRequireDefault(require("../hooks/useHasBeenOpen"));
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useProperty = require("../hooks/useProperty");
 var _WatchActions = require("../../flux/actions/WatchActions");
 var _watchListStore = require("../../flux/watch-list/watchListStore");
 var _MsgWatch = require("../../constants/MsgWatch");
@@ -31,8 +31,8 @@ const AddToWatchDialog = (0, _memoIsShow.default)(_ref => {
     onClose
   } = _ref;
   const _hasBeenOpen = (0, _useHasBeenOpen.default)(isShow),
-    [setGroupCaption, getGroupCaption] = (0, _useProperty.default)(null),
-    [setListCaption, getListCaption] = (0, _useProperty.default)(null),
+    [setGroupCaption, getGroupCaption] = (0, _useProperty.useProperty)(null),
+    [setListCaption, getListCaption] = (0, _useProperty.useProperty)(null),
     [validationMessages, setValidationMessages] = (0, _uiApi.useState)([]),
     [state, setState] = (0, _uiApi.useState)(() => ({
       groupOptions: (0, _watchListStore.getWatchGroups)(),

@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
-var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
+var _useProperty = require("../hooks/useProperty");
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
 var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
 var _SearchAdapter = _interopRequireDefault(require("../../adapters/av-sm/SearchAdapter"));
@@ -30,7 +30,7 @@ const AvSearchDialog = (0, _memoIsShow.default)(_ref => {
       toggleLabels,
       onAbout
     }),
-    _searchApi = (0, _useRefInit.default)(() => ({
+    _searchApi = (0, _useProperty.useRefInit)(() => ({
       ..._SearchAdapter.default,
       onError,
       crUrlOptions: () => {

@@ -6,8 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
-var _useRefBool = _interopRequireDefault(require("../hooks/useRefBool"));
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useProperty = require("../hooks/useProperty");
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
 var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
@@ -63,8 +62,8 @@ const AvIndicatorDialog = (0, _memoIsShow.default)(_ref => {
     _refTicket = (0, _uiApi.useRef)(),
     _refPeriod = (0, _uiApi.useRef)(),
     _refForDays = (0, _uiApi.useRef)(),
-    [_refIsSecondYAxis, _hCheckSecondYAxis, _hUnCheckSecondYAxis] = (0, _useRefBool.default)(false),
-    [setIndicator, getIndicator] = (0, _useProperty.default)()
+    [_refIsSecondYAxis, _hCheckSecondYAxis, _hUnCheckSecondYAxis] = (0, _useProperty.useRefBool)(false),
+    [setIndicator, getIndicator] = (0, _useProperty.useProperty)()
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hLoad = (0, _uiApi.useCallback)(() => {
       const period = (0, _uiApi.getInputValidValue)(_refPeriod) || DF_PERIOD,

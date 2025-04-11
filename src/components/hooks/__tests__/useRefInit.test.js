@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import useRefInit from '../useRefInit';
+import { useRefInit } from '../useProperty';
 
 const _getValue = result => result.current;
 

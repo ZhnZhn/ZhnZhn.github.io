@@ -14,8 +14,10 @@ import {
   crCn
 } from '../styleFn';
 
-import useProperty from '../hooks/useProperty';
-import useRefBool from '../hooks/useRefBool';
+import {
+  useProperty,
+  useRefBool
+} from '../hooks/useProperty';
 
 import Model from '../../constants/Model';
 

@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useProperty = require("../hooks/useProperty");
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _checkAreDatesValid = _interopRequireDefault(require("../dialogs/hooks/checkAreDatesValid"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
@@ -54,7 +54,7 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
     _refTypeCode = (0, _uiApi.useRef)(),
     _refZip = (0, _uiApi.useRef)(),
     _refDates = (0, _uiApi.useRef)(),
-    [setMetric, getMetric] = (0, _useProperty.default)()
+    [setMetric, getMetric] = (0, _useProperty.useProperty)()
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hSelectType = (0, _uiApi.useCallback)(type => {
       togglePattern(_isByZipCode(type));

@@ -10,7 +10,7 @@ import {
 import memoIsShow from '../hoc/memoIsShow';
 import { useToggle } from '../hooks/useToggle';
 import { useToggleFalse } from '../hooks/useBool';
-import useProperty from '../hooks/useProperty';
+import { useProperty } from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';
 
 import useIsShowInput from './hooks/useIsShowInput';

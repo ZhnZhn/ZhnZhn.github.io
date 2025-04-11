@@ -5,8 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
-var _useRefBool = _interopRequireDefault(require("../hooks/useRefBool"));
+var _useProperty = require("../hooks/useProperty");
 var _Model = _interopRequireDefault(require("../../constants/Model"));
 var _SvgCheckBox = _interopRequireDefault(require("../zhn/SvgCheckBox"));
 var _InputColor = _interopRequireDefault(require("../zhn-moleculs/InputColor"));
@@ -56,8 +55,8 @@ const SeriaRow = props => {
     } = seria,
     ref = (0, _uiApi.useRef)(),
     _captionId = (0, _uiApi.useId)(),
-    [setYAxis, getYAxis] = (0, _useProperty.default)(),
-    [_refIsChecked, _hCheck, _hUnCheck] = (0, _useRefBool.default)(false),
+    [setYAxis, getYAxis] = (0, _useProperty.useProperty)(),
+    [_refIsChecked, _hCheck, _hUnCheck] = (0, _useProperty.useRefBool)(false),
     [_color, _setColor] = (0, _uiApi.useState)(() => color || DF_COLOR);
 
   /*eslint-disable react-hooks/exhaustive-deps */

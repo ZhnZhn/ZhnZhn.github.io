@@ -3,7 +3,7 @@ import {
   useMemo
 } from '../uiApi';
 
-const useProperty = (
+export const useProperty = (
   initialValue,
   dfValue
 ) => {
@@ -17,6 +17,24 @@ const useProperty = (
   ], []);
   // dfValue
   /*eslint-enable react-hooks/exhaustive-deps */
-};
+}
 
-export default useProperty
+export const useRefBool = initialValue => {
+  const ref = useRef(initialValue)
+  , [
+    setTrue,
+    setFalse
+  ] = useMemo(() => [
+    () => ref.current = true,
+    () => ref.current = false
+  ], []);
+  return [ref, setTrue, setFalse];
+}
+
+export const useRefInit = crValue => {
+  const ref = useRef(null);
+  if (ref.current === null) {
+    ref.current = crValue()
+  }
+  return ref.current;
+}

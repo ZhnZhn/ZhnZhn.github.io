@@ -7,7 +7,7 @@ import {
 } from '../uiApi';
 import { crCn } from '../styleFn';
 
-import useRefInit from '../hooks/useRefInit';
+import { useRefInit } from '../hooks/useProperty';
 import { useKeyEnter } from '../hooks/fUseKey';
 
 import {

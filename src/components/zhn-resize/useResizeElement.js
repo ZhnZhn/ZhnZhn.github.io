@@ -2,7 +2,8 @@ import {
   useEffect,
   useImperativeHandle
 } from '../uiApi';
-import useRefInit from '../hooks/useRefInit';
+
+import { useRefInit } from '../hooks/useProperty';
 
 import ResizeElementImpl from './ResizeElementImpl';
 

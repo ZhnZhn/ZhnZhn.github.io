@@ -1,5 +1,5 @@
 import { useState } from '../uiApi';
-import useProperty from '../hooks/useProperty';
+import { useProperty } from '../hooks/useProperty';
 
 import { SvgPlus } from '../zhn/BtSvgCircle';
 import D from '../dialogs/DialogCell';
@@ -48,7 +48,7 @@ const RowTypeA = ({
 
   return (
     <RowOpenClose
-      caption={caption}      
+      caption={caption}
       CompAfter={compAfter}
     >
       <D.RowInputColor

@@ -1,6 +1,7 @@
-import { isFn } from '../uiApi';
-import useRefInit from '../hooks/useRefInit';
 import { showCustomizeExport } from '../../flux/actions/ComponentActions';
+
+import { isFn } from '../uiApi';
+import { useRefInit } from '../hooks/useProperty';
 
 const useChartMethods = (
   getChart,

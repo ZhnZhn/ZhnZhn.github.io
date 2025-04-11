@@ -7,7 +7,7 @@ var _uiApi = require("../uiApi");
 var _getPropertyFn = require("../../utils/getPropertyFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useProperty = require("../hooks/useProperty");
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _useInputToggle = _interopRequireDefault(require("./useInputToggle"));
 var _useInputChart = _interopRequireDefault(require("./useInputChart"));
@@ -102,12 +102,12 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
     */
     //, [isAggr, toggleAggr] = useToggle(true)
     ,
-    [setOne, getOne] = (0, _useProperty.default)(DF_REPORTER, DF_REPORTER),
-    [setTradePartner, getTradePartner] = (0, _useProperty.default)(DF_PARTNER, DF_PARTNER),
-    [setAggregation, getAggregation] = (0, _useProperty.default)(DF_AGGREGATION, DF_AGGREGATION),
+    [setOne, getOne] = (0, _useProperty.useProperty)(DF_REPORTER, DF_REPORTER),
+    [setTradePartner, getTradePartner] = (0, _useProperty.useProperty)(DF_PARTNER, DF_PARTNER),
+    [setAggregation, getAggregation] = (0, _useProperty.useProperty)(DF_AGGREGATION, DF_AGGREGATION),
     [CHART_PLACEHOLDER, isInputChart, isPeriod, toggleInputChart, setChart, getChart, chartOptions] = (0, _useInputChart.default)(getTradePartner, getAggregation),
-    [setTradeFlow, getTradeFlow] = (0, _useProperty.default)(DF_TRADE_FLOW, DF_TRADE_FLOW),
-    [setPeriod, getPeriod] = (0, _useProperty.default)(DF_PERIOD, DF_PERIOD)
+    [setTradeFlow, getTradeFlow] = (0, _useProperty.useProperty)(DF_TRADE_FLOW, DF_TRADE_FLOW),
+    [setPeriod, getPeriod] = (0, _useProperty.useProperty)(DF_PERIOD, DF_PERIOD)
     /*eslint-disable react-hooks/exhaustive-deps */,
     _setTradePartner = (0, _uiApi.useCallback)(item => {
       setTradePartner(item);

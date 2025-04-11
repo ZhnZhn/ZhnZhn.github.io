@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
+var _useProperty = require("../hooks/useProperty");
 var _useStoreState = _interopRequireDefault(require("../hooks/useStoreState"));
 var _compStore = require("../../flux/stores/compStore");
 var _DialogContainerFn = require("./DialogContainerFn");
@@ -88,7 +88,7 @@ const DialogContainer = _ref => {
   let {
     maxDialog = 3
   } = _ref;
-  const _upateState = (0, _useRefInit.default)(() => fUpdateState(maxDialog)),
+  const _upateState = (0, _useProperty.useRefInit)(() => fUpdateState(maxDialog)),
     {
       hmIs,
       hmData,

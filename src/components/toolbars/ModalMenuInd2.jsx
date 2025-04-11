@@ -3,19 +3,21 @@ import {
   useRef,
   getInputValue
 } from '../uiApi';
-import useRefInit from '../hooks/useRefInit'
+
+import { useRefInit } from '../hooks/useProperty';
+
 import {
   addCategoryRateTo,
   addCategoryDiffTo,
   addCategoryRocTo,
   powerBy10
-} from '../../charts/IndicatorBuilder'
+} from '../../charts/IndicatorBuilder';
 
-import ModalPopup from '../zhn-moleculs/ModalPopup'
-import { S_MODAL_MENU } from './ModalMenu.Style'
+import ModalPopup from '../zhn-moleculs/ModalPopup';
+import { S_MODAL_MENU } from './ModalMenu.Style';
 
-import RowTypeA from './RowTypeA'
-import RowTypeB from './RowTypeB'
+import RowTypeA from './RowTypeA';
+import RowTypeB from './RowTypeB';
 
 const S_MENU_PANE = {
   margin: '4px 10px 8px 8px'

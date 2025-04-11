@@ -1,6 +1,6 @@
 import { useCallback } from '../uiApi';
 
-import useRefInit from '../hooks/useRefInit';
+import { useRefInit } from '../hooks/useProperty';
 
 const _crItemRefPropName = id => 'chart' + id
 , _crInitialValue = () => Object.create(null);

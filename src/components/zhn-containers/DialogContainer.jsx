@@ -4,7 +4,7 @@ import {
   crObjWithNullPrototype
 } from '../uiApi';
 
-import useRefInit from '../hooks/useRefInit';
+import { useRefInit } from '../hooks/useProperty';
 import useStoreState from '../hooks/useStoreState';
 
 import {

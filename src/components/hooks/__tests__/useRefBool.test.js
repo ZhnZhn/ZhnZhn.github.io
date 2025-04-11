@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import useRefBool from '../useRefBool';
+import { useRefBool } from '../useProperty';
 
 const _getRef = result => result.current[0];
 const _getSetTrue = result => result.current[1];

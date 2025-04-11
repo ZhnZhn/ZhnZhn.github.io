@@ -1,8 +1,7 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 var _react = require("@testing-library/react");
-var _useProperty = _interopRequireDefault(require("../useProperty"));
+var _useProperty = require("../useProperty");
 const _getSetValue = result => result.current[0];
 const _getGetValue = result => result.current[1];
 describe('useProperty', () => {
@@ -12,7 +11,7 @@ describe('useProperty', () => {
       {
         result,
         rerender
-      } = (0, _react.renderHook)(() => (0, _useProperty.default)(initialValue, dfValue));
+      } = (0, _react.renderHook)(() => (0, _useProperty.useProperty)(initialValue, dfValue));
 
     //1 Initial render and return value
     const _getValue1 = _getGetValue(result),

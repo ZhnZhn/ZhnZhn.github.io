@@ -9,7 +9,7 @@ import {
   getRefValue
 } from '../uiApi';
 
-import useProperty from '../hooks/useProperty';
+import { useProperty } from '../hooks/useProperty';
 import useSelectItem from './hooks/useSelectItem';
 
 import RowInputSelect from './RowInputSelect';

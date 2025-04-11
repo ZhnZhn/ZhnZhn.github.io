@@ -13,7 +13,7 @@ var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _crSelectItem = _interopRequireDefault(require("./crSelectItem"));
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useProperty = require("../hooks/useProperty");
 var _useValidationMessages = _interopRequireDefault(require("../dialogs/hooks/useValidationMessages"));
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
 var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
@@ -90,9 +90,9 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     [chartType, setChartType] = (0, _uiApi.useState)(),
     [_refItems, _fSelectItem] = (0, _useRefByIndex.default)(),
     _refSeriaColor = (0, _uiApi.useRef)(),
-    [setDate, getDate] = (0, _useProperty.default)(),
-    [setDim, getDim] = (0, _useProperty.default)(),
-    [_setRoundTo, _getRoundTo] = (0, _useProperty.default)(dfRt),
+    [setDate, getDate] = (0, _useProperty.useProperty)(),
+    [setDim, getDim] = (0, _useProperty.useProperty)(),
+    [_setRoundTo, _getRoundTo] = (0, _useProperty.useProperty)(dfRt),
     [validationMessages, setValidationMessages, _hClose] = (0, _useValidationMessages.default)(onClose),
     [state, isLoading, isLoadFailed] = (0, _useLoadDims.default)(props, setValidationMessages),
     {

@@ -11,7 +11,7 @@ import {
 
 import memoIsShow from '../hoc/memoIsShow';
 import { useToggle } from '../hooks/useToggle';
-import useRefInit from '../hooks/useRefInit';
+import { useRefInit } from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';
 
 import { crExportStyleOptions } from '../../charts/ChartExportConfig';

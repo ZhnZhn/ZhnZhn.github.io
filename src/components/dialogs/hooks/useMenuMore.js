@@ -1,5 +1,5 @@
 import { useToggle } from '../../hooks/useToggle';
-import useRefInit from '../../hooks/useRefInit';
+import { useRefInit } from '../../hooks/useProperty';
 
 import crMenuMore from './crMenuMore';
 

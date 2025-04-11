@@ -7,7 +7,7 @@ var _uiApi = require("../uiApi");
 var _LoadType = require("../../constants/LoadType");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useProperty = require("../hooks/useProperty");
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
 var _itemStore = require("../../flux/stores/itemStore");
 var _Buttons = require("../dialogs/Buttons");
@@ -96,8 +96,8 @@ const StocksBySectorDialog = (0, _memoIsShow.default)(_ref2 => {
       title: 'Click to toggle options',
       onClick: toggleLink
     }]),
-    [setDataSource, getDataSource] = (0, _useProperty.default)(),
-    [setChartType, getChartType] = (0, _useProperty.default)(),
+    [setDataSource, getDataSource] = (0, _useProperty.useProperty)(),
+    [setChartType, getChartType] = (0, _useProperty.useProperty)(),
     _hShow = (0, _useEventCallback.default)(() => {
       if (data && (0, _uiApi.isFn)(data.onShow)) {
         data.onShow();

@@ -12,7 +12,7 @@ import {
   CHT_TREE_MAP
 } from "../../constants/ChartType";
 
-import useProperty from "../hooks/useProperty";
+import { useProperty } from "../hooks/useProperty";
 
 import { crInputSelectDfProps } from "./dialogFn";
 

@@ -1,8 +1,7 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 var _react = require("@testing-library/react");
-var _useRefBool = _interopRequireDefault(require("../useRefBool"));
+var _useProperty = require("../useProperty");
 const _getRef = result => result.current[0];
 const _getSetTrue = result => result.current[1];
 const _getSetFalse = result => result.current[2];
@@ -12,7 +11,7 @@ describe('useRefBool', () => {
       {
         result,
         rerender
-      } = (0, _react.renderHook)(() => (0, _useRefBool.default)(initialValue));
+      } = (0, _react.renderHook)(() => (0, _useProperty.useRefBool)(initialValue));
 
     //1 Initial render and return value
     const _ref = _getRef(result),

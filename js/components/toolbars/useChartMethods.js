@@ -1,12 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
-var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
 var _ComponentActions = require("../../flux/actions/ComponentActions");
-const useChartMethods = (getChart, onZoom, onCopy, onPasteTo) => (0, _useRefInit.default)(() => ({
+var _uiApi = require("../uiApi");
+var _useProperty = require("../hooks/useProperty");
+const useChartMethods = (getChart, onZoom, onCopy, onPasteTo) => (0, _useProperty.useRefInit)(() => ({
   onExport: () => {
     (0, _ComponentActions.showCustomizeExport)({
       chart: getChart()

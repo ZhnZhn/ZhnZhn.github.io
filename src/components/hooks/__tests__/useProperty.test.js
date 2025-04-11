@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import useProperty from '../useProperty';
+import { useProperty } from '../useProperty';
 
 const _getSetValue = result => result.current[0];
 const _getGetValue = result => result.current[1];

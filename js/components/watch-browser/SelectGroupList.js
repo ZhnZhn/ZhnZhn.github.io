@@ -4,14 +4,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useProperty = require("../hooks/useProperty");
 var _useSelectItem = _interopRequireDefault(require("./hooks/useSelectItem"));
 var _RowInputSelect = _interopRequireDefault(require("./RowInputSelect"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
 const SelectGroupList = props => {
-  const [_setPrevProps, _getPrevProps] = (0, _useProperty.default)(props),
+  const [_setPrevProps, _getPrevProps] = (0, _useProperty.useProperty)(props),
     {
       refEl,
       getWatchListsByGroup,

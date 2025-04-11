@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useProperty = require("../hooks/useProperty");
 var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _RowOpenClose = require("./RowOpenClose");
@@ -15,7 +15,7 @@ const DF_COLOR = '#2b908f',
   };
 const useRowTypeA = (mathFn, getChart, dfColor) => {
   const [is, setIs] = (0, _uiApi.useState)(false),
-    [setColor, getColor] = (0, _useProperty.default)(dfColor),
+    [setColor, getColor] = (0, _useProperty.useProperty)(dfColor),
     _onPlus = () => {
       setIs(mathFn(getChart(), getColor()));
     },

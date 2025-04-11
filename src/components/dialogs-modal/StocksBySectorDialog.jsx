@@ -9,7 +9,7 @@ import { LT_AV } from '../../constants/LoadType';
 
 import memoIsShow from '../hoc/memoIsShow';
 import { useToggle } from '../hooks/useToggle';
-import useProperty from '../hooks/useProperty';
+import { useProperty } from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';
 
 import { loadItem } from '../../flux/stores/itemStore';

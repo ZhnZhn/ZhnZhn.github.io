@@ -4,11 +4,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useProperty = require("../hooks/useProperty");
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _jsxRuntime = require("react/jsx-runtime");
 const usePasteTo = (data, onClose) => {
-  const [setToChart, getToChart] = (0, _useProperty.default)();
+  const [setToChart, getToChart] = (0, _useProperty.useProperty)();
   setToChart(data.toChart);
   const _refCompSeries = (0, _uiApi.useRef)()
     /*eslint-disable react-hooks/exhaustive-deps */,
@@ -32,6 +32,5 @@ const usePasteTo = (data, onClose) => {
     }, "paste"), [_hPasteTo]);
   return [getToChart(), _refCompSeries, _commandButtons];
 };
-var _default = usePasteTo;
-exports.default = _default;
+var _default = exports.default = usePasteTo;
 //# sourceMappingURL=usePasteTo.js.map

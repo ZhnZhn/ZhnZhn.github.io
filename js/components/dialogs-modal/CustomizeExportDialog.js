@@ -8,7 +8,7 @@ var _mathFn = require("../../math/mathFn");
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
-var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
+var _useProperty = require("../hooks/useProperty");
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
 var _ChartExportConfig = require("../../charts/ChartExportConfig");
 var _RowFlex = require("../dialogs/rows/RowFlex");
@@ -120,7 +120,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
       caption: 'S',
       onClick: toggleStyle
     }]),
-    _optionStyles = (0, _useRefInit.default)(() => (0, _ChartExportConfig.crExportStyleOptions)()),
+    _optionStyles = (0, _useProperty.useRefInit)(() => (0, _ChartExportConfig.crExportStyleOptions)()),
     _refInputWidth = (0, _uiApi.useRef)(),
     _refInputHeight = (0, _uiApi.useRef)(),
     _refInputTitle = (0, _uiApi.useRef)(),

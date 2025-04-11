@@ -8,7 +8,7 @@ var _ChartType = require("../../constants/ChartType");
 var _getPropertyFn = require("../../utils/getPropertyFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
-var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
+var _useProperty = require("../hooks/useProperty");
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _useInputToggle = _interopRequireDefault(require("./useInputToggle"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
@@ -136,13 +136,13 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     _refTradePartner = (0, _uiApi.useRef)(),
     _refGroupItem = (0, _uiApi.useRef)(),
     _refSeriaColor = (0, _uiApi.useRef)(),
-    [setOne, getOne] = (0, _useProperty.default)(DF_REPORTER, DF_REPORTER),
-    [setTradeFlow, getTradeFlow] = (0, _useProperty.default)(DF_TRADE_FLOW, DF_TRADE_FLOW),
-    getTradePartner = (0, _useProperty.default)()[1],
-    [setPropertyTime, getPropertyTime] = (0, _useProperty.default)(DATE_DF, DATE_DF)
+    [setOne, getOne] = (0, _useProperty.useProperty)(DF_REPORTER, DF_REPORTER),
+    [setTradeFlow, getTradeFlow] = (0, _useProperty.useProperty)(DF_TRADE_FLOW, DF_TRADE_FLOW),
+    getTradePartner = (0, _useProperty.useProperty)()[1],
+    [setPropertyTime, getPropertyTime] = (0, _useProperty.useProperty)(DATE_DF, DATE_DF)
 
     /*eslint-disable no-unused-vars*/,
-    [setFreq, getFreq] = (0, _useProperty.default)(DF_FREQ, DF_FREQ)
+    [setFreq, getFreq] = (0, _useProperty.useProperty)(DF_FREQ, DF_FREQ)
     /*eslint-enable no-unused-vars*/
 
     /*eslint-disable react-hooks/exhaustive-deps */,
