@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
@@ -10,8 +11,6 @@ var _fUseKey = require("../hooks/fUseKey");
 var _Color = require("../styles/Color");
 var _Svg = _interopRequireDefault(require("./svg/Svg100"));
 var _jsxRuntime = require("react/jsx-runtime");
-//import PropTypes from "prop-types";
-
 const CL_CHB = 'chb',
   CL_CHB_CHECKED = 'chb-checked',
   S_SVG = {
@@ -53,8 +52,8 @@ const SvgCheckBox = props => {
       onCheck = FN_NOOP,
       onUnCheck = FN_NOOP
     } = props,
-    [valueState, setValueState] = (0, _uiApi.useState)(() => (0, _uiApi.isBool)(value) ? void 0 : !!initialValue),
-    _isValueState = (0, _useRefInit.default)(() => (0, _uiApi.isBool)(valueState)),
+    [valueState, setValueState] = (0, _uiApi.useState)(() => (0, _isTypeFn.isBool)(value) ? void 0 : !!initialValue),
+    _isValueState = (0, _useRefInit.default)(() => (0, _isTypeFn.isBool)(valueState)),
     _value = _isValueState ? valueState : value,
     _comp = (0, _uiApi.useMemo)(() => ({
       setUnchecked: () => setValueState(false)

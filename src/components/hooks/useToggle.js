@@ -1,7 +1,5 @@
-import {
-  useReducer,
-  isBool
-} from '../uiApi';
+import { isBool } from '../../utils/isTypeFn';
+import { useReducer } from '../uiApi';
 
 const _initState = initialValue => !!initialValue
 , _reducer = (

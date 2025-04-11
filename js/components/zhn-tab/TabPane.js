@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _tabPaneFn = require("./tabPaneFn");
@@ -76,7 +77,7 @@ const TabPane = _ref => {
           id: (0, _tabPaneFn.crTabPanelId)(id, index),
           "aria-labelledby": (0, _tabPaneFn.crTabId)(id, index),
           children: (0, _uiApi.cloneUiElement)(tab.props.children, {
-            isVisible: (0, _uiApi.isBool)(isShow) ? isShow && _isSelected : _isSelected,
+            isVisible: (0, _isTypeFn.isBool)(isShow) ? isShow && _isSelected : _isSelected,
             ...restTapPanelProps
           })
         }, index);

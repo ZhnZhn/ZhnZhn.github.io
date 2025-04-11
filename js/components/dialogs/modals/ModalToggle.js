@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../../uiApi");
+var _isTypeFn = require("../../../utils/isTypeFn");
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
 var _ItemStack = _interopRequireDefault(require("../../zhn/ItemStack"));
 var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox1"));
@@ -28,7 +28,7 @@ const S_ROW_FLEX = {
     display: 'inline-block',
     padding: '0 0 0 40px'
   };
-const _crChbToggleInitValue = isRow => (0, _uiApi.isBool)(isRow) ? isRow : true;
+const _crChbToggleInitValue = isRow => (0, _isTypeFn.isBool)(isRow) ? isRow : true;
 const _crCheckBoxItem = (item, index, _ref) => {
   let {
     onToggle,

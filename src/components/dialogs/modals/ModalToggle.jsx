@@ -1,4 +1,4 @@
-import { isBool } from '../../uiApi';
+import { isBool } from '../../../utils/isTypeFn';
 
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import ItemStack from '../../zhn/ItemStack';

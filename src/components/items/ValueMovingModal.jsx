@@ -1,11 +1,13 @@
-//import PropTypes from "prop-types";
+import {
+  isBool,
+  isFn
+} from '../../utils/isTypeFn';
+
 import {
   useState,
   useRef,
   useCallback,
-  useEffect,
-  isBool,
-  isFn,
+  useEffect,  
   isInputValid,
   focusRefElement
 } from '../uiApi';

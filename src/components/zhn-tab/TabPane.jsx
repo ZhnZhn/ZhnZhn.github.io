@@ -1,8 +1,9 @@
+import { isBool } from '../../utils/isTypeFn';
+
 import {
   useState,
   safeMap,
   cloneUiElement,
-  isBool,
   focusElementById,
   stopDefaultFor
 } from '../uiApi';

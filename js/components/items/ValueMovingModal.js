@@ -3,14 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _SpanToken = require("../zhn/SpanToken");
 var _DivCompareTo = _interopRequireDefault(require("./DivCompareTo"));
 var _jsxRuntime = require("react/jsx-runtime");
-//import PropTypes from "prop-types";
-
 const S_MODAL_POPUP = {
     position: 'absolute',
     top: 30,
@@ -32,7 +31,7 @@ const S_MODAL_POPUP = {
     whiteSpace: 'nowrap'
   };
 const _isCompareTo = (isAdminMode, isDenyToChange) => {
-  const _isAdminMode = (0, _uiApi.isFn)(isAdminMode) ? isAdminMode() : (0, _uiApi.isBool)(isAdminMode) ? isAdminMode : false;
+  const _isAdminMode = (0, _isTypeFn.isFn)(isAdminMode) ? isAdminMode() : (0, _isTypeFn.isBool)(isAdminMode) ? isAdminMode : false;
   return _isAdminMode && !isDenyToChange;
 };
 const RowValueDate = _ref => {

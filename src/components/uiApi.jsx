@@ -25,7 +25,6 @@ export {
 
 export {
   isArr,
-  isBool,
   isFn,
   isNumber
 } from '../utils/isTypeFn';

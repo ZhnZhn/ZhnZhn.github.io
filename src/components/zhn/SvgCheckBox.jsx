@@ -1,9 +1,9 @@
-//import PropTypes from "prop-types";
+import { isBool } from '../../utils/isTypeFn';
+
 import {
   useState,
   useMemo,
-  useCallback,
-  isBool
+  useCallback
 } from '../uiApi';
 import { crCn } from '../styleFn';
 
