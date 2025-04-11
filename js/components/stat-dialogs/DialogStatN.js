@@ -12,7 +12,7 @@ var _Spinner = require("../zhn/Spinner");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _crSelectItem = _interopRequireDefault(require("./crSelectItem"));
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useValidationMessages = _interopRequireDefault(require("../dialogs/hooks/useValidationMessages"));
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
@@ -104,7 +104,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       dateDf = {},
       timeId
     } = state,
-    [isShowLabels, toggleLabels] = (0, _useToggle.default)(IS_SHOW_LABELS),
+    [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(IS_SHOW_LABELS),
     [_modalToggleEl, _refTitles, isRow, toggleInputs] = (0, _useModalToggle.default)(configs),
     {
       isShowChart

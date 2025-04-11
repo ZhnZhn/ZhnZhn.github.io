@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.TableItem = void 0;
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _Table = _interopRequireDefault(require("../zhn-table/Table"));
 var _ItemHeader = _interopRequireDefault(require("./ItemHeader"));
@@ -35,7 +35,7 @@ const TableItem = _ref => {
     config,
     onCloseItem
   } = _ref;
-  const [isOpen, toggleIsOpen] = (0, _useToggle.default)(!isInitialClose),
+  const [isOpen, toggleIsOpen] = (0, _useToggle.useToggle)(!isInitialClose),
     {
       id,
       title,

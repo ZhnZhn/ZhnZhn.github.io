@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _has = require("../has");
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _ButtonTab = _interopRequireDefault(require("../zhn/ButtonTab"));
 var _ModalMenuFn = _interopRequireDefault(require("./ModalMenuFn"));
 var _ModalMenuIndicator = _interopRequireDefault(require("./ModalMenuIndicator"));
@@ -61,10 +61,10 @@ const useChartToolBar = (hasError, _crModalMenuLeftStyle, config, getChart, onCl
       itemConf,
       legend
     } = zhConfig || {},
-    [isShowInd, toggleInd] = (0, _useToggle.default)(),
-    [isShowAppearance, toggleAppearance] = (0, _useToggle.default)(),
-    [isShowFn, toggleFn] = (0, _useToggle.default)(),
-    [isShowMini, toggleMini] = (0, _useToggle.default)(),
+    [isShowInd, toggleInd] = (0, _useToggle.useToggle)(),
+    [isShowAppearance, toggleAppearance] = (0, _useToggle.useToggle)(),
+    [isShowFn, toggleFn] = (0, _useToggle.useToggle)(),
+    [isShowMini, toggleMini] = (0, _useToggle.useToggle)(),
     _modalMenuArr = [];
   const _btInfo = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
     is: !!info,

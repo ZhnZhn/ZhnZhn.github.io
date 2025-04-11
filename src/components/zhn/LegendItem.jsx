@@ -1,5 +1,5 @@
 //import PropTypes from "prop-types";
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 
 import Button from './Button';
 

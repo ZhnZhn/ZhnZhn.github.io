@@ -4,10 +4,10 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useToggleState = _interopRequireDefault(require("../hooks/useToggleState"));
+var _useToggle = require("../hooks/useToggle");
 var _crIsId = _interopRequireDefault(require("./crIsId"));
 const useRowToggle = configs => {
-  const [_isRow, _toggleIsRow] = (0, _useToggleState.default)({
+  const [_isRow, _toggleIsRow] = (0, _useToggle.useToggleState)({
     isShowChart: true
   });
   (0, _uiApi.useEffect)(() => {
@@ -21,6 +21,5 @@ const useRowToggle = configs => {
   }, [configs, _toggleIsRow]);
   return [_isRow, _toggleIsRow];
 };
-var _default = useRowToggle;
-exports.default = _default;
+var _default = exports.default = useRowToggle;
 //# sourceMappingURL=useRowToggle.js.map

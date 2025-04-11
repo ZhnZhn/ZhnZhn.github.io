@@ -1,5 +1,5 @@
 import { toHref } from '../uiApi';
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 
 import ShowHide from '../zhn/ShowHide';
 import ItemStack from '../zhn/ItemStack';

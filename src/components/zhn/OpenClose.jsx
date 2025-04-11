@@ -12,7 +12,7 @@ import {
 
 import { TRANSPARENT_COLOR } from '../styles/Color';
 
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 import { useKeyEnter } from '../hooks/fUseKey';
 
 import Svg from './svg/Svg';
@@ -88,7 +88,7 @@ const OpenClose = ({
           {...crAriaExpandedProps(isOpen, _childrenWrapperId)}
           role={role}
           tabIndex="0"
-          ref={refItem}                    
+          ref={refItem}
           className={className || CL_OPEN_CLOSE}
           style={ocStyle}
           onClick={toggleIsOpen}

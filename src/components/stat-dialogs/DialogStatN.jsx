@@ -19,7 +19,7 @@ import D from '../dialogs/DialogCell';
 import crSelectItem from './crSelectItem';
 
 import memoIsShow from '../hoc/memoIsShow';
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 import useProperty from '../hooks/useProperty';
 import useValidationMessages from '../dialogs/hooks/useValidationMessages';
 import useMenuMore from '../dialogs/hooks/useMenuMore';

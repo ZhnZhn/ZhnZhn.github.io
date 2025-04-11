@@ -7,7 +7,7 @@ var _uiApi = require("../uiApi");
 var _ariaFn = require("../ariaFn");
 var _styleFn = require("../styleFn");
 var _Color = require("../styles/Color");
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _fUseKey = require("../hooks/fUseKey");
 var _Svg = _interopRequireDefault(require("./svg/Svg"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -49,7 +49,7 @@ const OpenClose = _ref => {
     children
   } = _ref;
   const _childrenWrapperId = (0, _uiApi.useId)(),
-    [isOpen, toggleIsOpen] = (0, _useToggle.default)(!isClose),
+    [isOpen, toggleIsOpen] = (0, _useToggle.useToggle)(!isClose),
     _hKeyDown = (0, _fUseKey.useKeyEnter)(toggleIsOpen),
     [_pathV, _fillV, _childCl, _childStyle] = _crConf(isOpen, openColor);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {

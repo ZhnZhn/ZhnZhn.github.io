@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _LoadType = require("../../constants/LoadType");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
 var _itemStore = require("../../flux/stores/itemStore");
@@ -85,8 +85,8 @@ const StocksBySectorDialog = (0, _memoIsShow.default)(_ref2 => {
     onClose
   } = _ref2;
   const refSeriaColor = (0, _uiApi.useRef)(),
-    [isShowLabels, toggleLabels] = (0, _useToggle.default)(true),
-    [isShowLink, toggleLink] = (0, _useToggle.default)(),
+    [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(true),
+    [isShowLink, toggleLink] = (0, _useToggle.useToggle)(),
     _refToolbarButtons = (0, _uiApi.useRef)([{
       caption: 'L',
       title: 'Click to toggle labels',

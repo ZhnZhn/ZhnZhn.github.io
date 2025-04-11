@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _fFilterNotActive = _interopRequireDefault(require("./fFilterNotActive"));
 var _Browser = _interopRequireDefault(require("../zhn/Browser"));
 var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
@@ -36,8 +36,8 @@ const BrowserSlider = (0, _uiApi.memo)(props => {
       caption
     } = props,
     [isShow, hide, hKeyDown] = (0, _useBrowserShow.default)(props),
-    [isMenuMore, toggleMenuMore] = (0, _useToggle.default)(),
-    [isFilterNotActive, toggleFilterNotActive] = (0, _useToggle.default)()
+    [isMenuMore, toggleMenuMore] = (0, _useToggle.useToggle)(),
+    [isFilterNotActive, toggleFilterNotActive] = (0, _useToggle.useToggle)()
     /*eslint-disable react-hooks/exhaustive-deps */,
     _browserContext = (0, _uiApi.useMemo)(() => (0, _fFilterNotActive.default)(isFilterNotActive, props.dfProps.lT), [isFilterNotActive]);
   //props.dfProps.lT

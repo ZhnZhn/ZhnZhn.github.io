@@ -4,7 +4,7 @@ import {
   useEffect
 } from '../uiApi';
 
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 import { useBool } from '../hooks/useBool';
 
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';

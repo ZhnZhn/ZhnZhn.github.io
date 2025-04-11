@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
 var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
@@ -25,7 +25,7 @@ const AvSearchDialog = (0, _memoIsShow.default)(_ref => {
     onClose
   } = _ref;
   const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
-    [isShowLabels, toggleLabels] = (0, _useToggle.default)(true),
+    [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(true),
     _toolbarButtons = (0, _useToolbar.default)({
       toggleLabels,
       onAbout

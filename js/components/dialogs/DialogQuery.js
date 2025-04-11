@@ -6,7 +6,7 @@ exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
 var _useDialog = _interopRequireDefault(require("./hooks/useDialog"));
 var _useDialogOptions = _interopRequireDefault(require("./hooks/useDialogOptions"));
@@ -41,7 +41,7 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
       onClose
     } = props,
     [chartType, setChartType] = (0, _uiApi.useState)('SPLINE'),
-    [isShowDate, toggleDate] = (0, _useToggle.default)(true),
+    [isShowDate, toggleDate] = (0, _useToggle.useToggle)(true),
     [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
     [isToolbar, isShowLabels, menuMoreModel, toolbarButtons] = (0, _useDialog.default)({
       onAbout,

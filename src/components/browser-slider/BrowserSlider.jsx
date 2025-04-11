@@ -6,7 +6,7 @@ import {
 import { crScrollYCn } from '../styleFn'
 
 import useBrowserShow from '../hooks/useBrowserShow';
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 
 import fFilterNotActive from './fFilterNotActive';
 
@@ -58,7 +58,7 @@ const BrowserSlider = memo((props) => {
   return (
     <BrowserContext.Provider value={_browserContext}>
       <Browser
-         isShow={isShow}         
+         isShow={isShow}
          onKeyDown={hKeyDown}
        >
         <BrowserMenuMore

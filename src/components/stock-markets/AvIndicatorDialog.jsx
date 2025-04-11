@@ -6,7 +6,7 @@ import {
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 import useRefBool from '../hooks/useRefBool';
 import useProperty from '../hooks/useProperty';
 import useMenuMore from '../dialogs/hooks/useMenuMore';

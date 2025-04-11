@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _Button = _interopRequireDefault(require("./Button"));
 var _ItemStack = _interopRequireDefault(require("./ItemStack"));
 var _LegendItem = _interopRequireDefault(require("./LegendItem"));
@@ -49,7 +49,7 @@ const Legend = (0, _uiApi.memo)(_ref2 => {
     legend = [],
     onClickItem
   } = _ref2;
-  const [isMore, toggleIsMore] = (0, _useToggle.default)(false),
+  const [isMore, toggleIsMore] = (0, _useToggle.useToggle)(false),
     _crStackItem = (0, _uiApi.useCallback)((item, index) => _crLegendItem(item, index, onClickItem), [onClickItem]),
     _legendItems = isMore ? legend : legend.slice(0, MORE_MAX),
     _style = (0, _styleFn.crStyle2)(S_MORE, !isMore && S_LESS);

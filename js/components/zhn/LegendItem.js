@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _Button = _interopRequireDefault(require("./Button"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -47,8 +47,8 @@ const LegendItem = _ref => {
       color,
       name,
       isVisible
-    } = item != null ? item : {},
-    [is, toggleIs] = (0, _useToggle.default)(isVisible),
+    } = item ?? {},
+    [is, toggleIs] = (0, _useToggle.useToggle)(isVisible),
     [btStyle, circleStyle] = _crStyles(is, color),
     _hClick = () => {
       onClickItem(item);
@@ -80,6 +80,5 @@ LegendItem.propTypes = {
   onClickItem: PropTypes.func
 }
 */
-var _default = LegendItem;
-exports.default = _default;
+var _default = exports.default = LegendItem;
 //# sourceMappingURL=LegendItem.js.map

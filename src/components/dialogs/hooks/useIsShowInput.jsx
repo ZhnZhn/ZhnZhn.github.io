@@ -1,5 +1,5 @@
 import { useCallback } from '../../uiApi';
-import useToggleState from '../../hooks/useToggleState';
+import { useToggleState } from '../../hooks/useToggle';
 
 const crIsId = id => `is${id}Select`;
 const crIsToggleInit = selectProps => selectProps

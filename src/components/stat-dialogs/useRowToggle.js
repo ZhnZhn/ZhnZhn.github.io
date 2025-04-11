@@ -1,6 +1,6 @@
 import { useEffect } from '../uiApi';
 
-import useToggleState from '../hooks/useToggleState';
+import { useToggleState } from '../hooks/useToggle';
 
 import crIsId from './crIsId';
 

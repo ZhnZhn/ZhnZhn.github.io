@@ -1,4 +1,4 @@
-import useToggle from "../hooks/useToggle";
+import { useToggle } from "../hooks/useToggle";
 
 import ShowHide from "../zhn/ShowHide";
 import Table from "../zhn-table/Table";

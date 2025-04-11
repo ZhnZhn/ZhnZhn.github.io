@@ -8,7 +8,7 @@ import {
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 import { useToggleFalse } from '../hooks/useBool';
 import useProperty from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';

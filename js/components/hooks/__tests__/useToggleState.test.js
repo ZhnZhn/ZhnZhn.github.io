@@ -1,8 +1,7 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 var _react = require("@testing-library/react");
-var _useToggleState = _interopRequireDefault(require("../useToggleState"));
+var _useToggle = require("../useToggle");
 const _getState = result => result.current[0],
   _getToggle = result => result.current[1];
 
@@ -10,7 +9,7 @@ const _getState = result => result.current[0],
 const _renderInitialTest = (initialValue, expectedValue) => {
   const {
     result
-  } = (0, _react.renderHook)(() => (0, _useToggleState.default)(initialValue));
+  } = (0, _react.renderHook)(() => (0, _useToggle.useToggleState)(initialValue));
   expect(_getState(result)).toEqual(expectedValue);
   const toggle = _getToggle(result);
   expect(typeof toggle).toBe('function');

@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
 var _Handlers = require("./Handlers");
 var _Browser = _interopRequireDefault(require("../zhn/Browser"));
@@ -25,7 +25,7 @@ const WatchBrowser = props => {
       caption,
       useWatchList
     } = props,
-    [isModeEdit, _toggleEditMode] = (0, _useToggle.default)(),
+    [isModeEdit, _toggleEditMode] = (0, _useToggle.useToggle)(),
     [isShow, _hHide, hKeyDown] = (0, _useBrowserShow.default)(props),
     watchList = useWatchList(),
     {

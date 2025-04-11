@@ -2,7 +2,7 @@ import {
   useState,
   useCallback
 } from '../../uiApi';
-import useToggle from '../../hooks/useToggle';
+import { useToggle } from '../../hooks/useToggle';
 
 import { isCategoryItem } from '../ChartOptionsFn';
 

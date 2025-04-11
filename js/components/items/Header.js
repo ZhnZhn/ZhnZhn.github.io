@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useFocus = require("../hooks/useFocus");
 var _Color = require("../styles/Color");
 var _Button = _interopRequireDefault(require("../zhn/Button"));
@@ -82,7 +82,7 @@ const Header = _ref2 => {
     onClose
   } = _ref2;
   const _captionId = (0, _uiApi.useId)(),
-    [isMore, _toggleMore] = (0, _useToggle.default)(false),
+    [isMore, _toggleMore] = (0, _useToggle.useToggle)(false),
     _captionStyle = (0, _styleFn.crStyle2)(S_CAPTION, !valueMoving && S_CAPTION_WIDTH),
     _btTitle = itemCaption.length > 15 ? itemCaption : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {

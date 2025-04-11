@@ -5,7 +5,7 @@ import {
 } from "../uiApi";
 
 import memoIsShow from "../hoc/memoIsShow";
-import useToggle from "../hooks/useToggle";
+import { useToggle } from "../hooks/useToggle";
 import useProperty from "../hooks/useProperty";
 import useDialog from "../dialogs/hooks/useDialog";
 import checkAreDatesValid from "../dialogs/hooks/checkAreDatesValid";

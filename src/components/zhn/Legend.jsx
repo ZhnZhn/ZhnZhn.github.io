@@ -8,7 +8,7 @@ import {
   crWithScrollCn
 } from '../styleFn';
 
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 
 import Button from './Button';
 import ItemStack from './ItemStack';

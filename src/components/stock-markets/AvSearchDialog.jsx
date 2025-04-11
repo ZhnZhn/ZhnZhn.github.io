@@ -1,5 +1,5 @@
 import memoIsShow from '../hoc/memoIsShow';
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 import useRefInit from '../hooks/useRefInit';
 import useMenuMore from '../dialogs/hooks/useMenuMore';
 import useToolbar from '../dialogs/hooks/useToolbar';

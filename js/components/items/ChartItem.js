@@ -6,7 +6,7 @@ exports.ChartItem = void 0;
 var _uiApi = require("../uiApi");
 var _memoEqual = _interopRequireDefault(require("../hoc/memoEqual"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useBool = require("../hooks/useBool");
 var _useVm = _interopRequireDefault(require("./useVm"));
 var _useSetCheckBox = _interopRequireDefault(require("./useSetCheckBox"));
@@ -73,9 +73,9 @@ const ChartItem = exports.ChartItem = (0, _memoEqual.default)(_ref => {
     [hasError, _hError] = (0, _useBool.useBool)(),
     [isShowChart, showChart, hideChart] = (0, _useBool.useBool)(true),
     isShowInfo = !isShowChart,
-    [isOpen, toggleOpen] = (0, _useToggle.default)(true),
-    [isShowLegend, toggleLegend] = (0, _useToggle.default)(),
-    [isShowToolbar, toggleToolbar] = (0, _useToggle.default)(true),
+    [isOpen, toggleOpen] = (0, _useToggle.useToggle)(true),
+    [isShowLegend, toggleLegend] = (0, _useToggle.useToggle)(),
+    [isShowToolbar, toggleToolbar] = (0, _useToggle.useToggle)(true),
     [itemCaption] = (0, _uiApi.useState)(() => _itemCaption || caption || ''),
     [isCaption, showCaption, hideCaption] = (0, _useCaption.default)(getMainChart, toggleToolbar),
     [onCheckItem, onUnCheckItem] = (0, _useSetCheckBox.default)(getMainChart, chartType, onSetActive),

@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _getPropertyFn = require("../../utils/getPropertyFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _useInputToggle = _interopRequireDefault(require("./useInputToggle"));
@@ -93,7 +93,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       onClose,
       toggleInputs
     }),
-    [isFlow, toggleFlow] = (0, _useToggle.default)(true)
+    [isFlow, toggleFlow] = (0, _useToggle.useToggle)(true)
     /*
     , [
       isPartner,

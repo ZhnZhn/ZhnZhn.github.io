@@ -2,9 +2,8 @@ import { useMemo } from '../uiApi';
 import { CL_ROW_TYPE2_TOPIC } from '../styleFn';
 
 import useBrowserShow from '../hooks/useBrowserShow';
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 import useLoadMenu from './useLoadMenu';
-
 
 import Browser from '../zhn/Browser';
 import BrowserCaption from '../zhn/BrowserCaption';

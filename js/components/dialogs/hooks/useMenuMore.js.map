@@ -5,10 +5,21 @@
  ],
  "file": "../../../../src/components/dialogs/hooks/useMenuMore.js",
  "names": [
+  "_useToggle",
+  "require",
+  "_useRefInit",
+  "_interopRequireDefault",
+  "_crMenuMore",
   "useMenuMore",
   "onAbout",
   "isToolbar",
-  "toggleToolbar"
+  "toggleToolbar",
+  "useToggle",
+  "useRefInit",
+  "crMenuMore",
+  "_default",
+  "exports",
+  "default"
  ],
- "mappings": ";;;;;;;AAAA;;AACA;;AAEA;;AAEA,MAAMA,WAAW,GACfC,OADkB,IAEf;AACH,QAAM,CACJC,SADI,EAEJC,aAFI,IAGF,wBAAU,IAAV,CAHJ;AAIA,SAAO,CACLD,SADK,EAEL,yBAAW,MAAM,yBACfC,aADe,EAEfF,OAFe,CAAjB,CAFK,CAAP;AAOD,CAdD;;eAgBeD,W"
+ "mappings": ";;;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AACA,IAAAC,WAAA,GAAAC,sBAAA,CAAAF,OAAA;AAEA,IAAAG,WAAA,GAAAD,sBAAA,CAAAF,OAAA;AAEA,MAAMI,WAAW,GACfC,OAAO,IACJ;EACH,MAAM,CACJC,SAAS,EACTC,aAAa,CACd,GAAG,IAAAC,oBAAS,EAAC,IAAI,CAAC;EACnB,OAAO,CACLF,SAAS,EACT,IAAAG,mBAAU,EAAC,MAAM,IAAAC,mBAAU,EACzBH,aAAa,EACbF,OACH,CAAC,CAAC,CACH;AACF,CAAC;AAAA,IAAAM,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEcT,WAAW"
 }

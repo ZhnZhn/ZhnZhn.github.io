@@ -1,5 +1,5 @@
 import { useCallback } from '../uiApi';
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 
 const useInputToggle = () => {
   const [

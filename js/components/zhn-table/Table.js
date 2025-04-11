@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useTable = require("./useTable");
 var _ModalMenu = _interopRequireDefault(require("./ModalMenu"));
 var _TableHead = _interopRequireDefault(require("./TableHead"));
@@ -23,7 +23,7 @@ const Table = _ref => {
     flatHeaders,
     tableFn
   } = _ref;
-  const [isGridLine, toogleGridLine] = (0, _useToggle.default)(true),
+  const [isGridLine, toogleGridLine] = (0, _useToggle.useToggle)(true),
     [isMenuMore, toggleMenuMore] = (0, _useTable.useMenu)(),
     [_headers, toggleColumn] = (0, _useTable.useColumn)(flatHeaders || headers),
     [{

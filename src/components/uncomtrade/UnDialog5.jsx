@@ -18,7 +18,7 @@ import {
 } from "../../utils/getPropertyFn";
 
 import memoIsShow from "../hoc/memoIsShow";
-import useToggle from "../hooks/useToggle";
+import { useToggle } from "../hooks/useToggle";
 import useProperty from "../hooks/useProperty";
 import useDialog from "../dialogs/hooks/useDialog";
 import useInputToggle from "./useInputToggle";
@@ -84,7 +84,7 @@ const UnDialog5 = memoIsShow((
    const {
      isShow,
      caption,
-     oneURI,     
+     oneURI,
      tpURI,
      dfProps,
      msgOnNotSelected,

@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.InfoItem = void 0;
 var _arrFn = require("../../utils/arrFn");
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _ItemList = _interopRequireDefault(require("../zhn/ItemList"));
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
@@ -75,7 +75,7 @@ const InfoItem = _ref3 => {
     config,
     onCloseItem
   } = _ref3;
-  const [isOpen, toggleIsOpen] = (0, _useToggle.default)(true),
+  const [isOpen, toggleIsOpen] = (0, _useToggle.useToggle)(true),
     {
       caption,
       items

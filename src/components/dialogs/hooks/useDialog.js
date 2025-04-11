@@ -1,4 +1,4 @@
-import useToggle from '../../hooks/useToggle';
+import { useToggle } from '../../hooks/useToggle';
 import { isWideWidth } from '../../has';
 
 import useMenuMore from './useMenuMore';

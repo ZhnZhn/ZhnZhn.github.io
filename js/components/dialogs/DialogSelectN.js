@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useBool = require("../hooks/useBool");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
@@ -52,7 +52,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     {
       dfRt
     } = dfProps || {},
-    [isShowChart, toggleIsShowChart] = (0, _useToggle.default)(true),
+    [isShowChart, toggleIsShowChart] = (0, _useToggle.useToggle)(true),
     [toggleInputById, isShowInputById] = (0, _useIsShowInput.default)(selectProps),
     [isShowFd, toggleIsShowFd, chartType, _hSelectChartType] = (0, _useSelectChartType.default)(),
     [_setPropertyRoundTo, _getPropertyRoundTo] = (0, _useProperty.default)(dfRt),

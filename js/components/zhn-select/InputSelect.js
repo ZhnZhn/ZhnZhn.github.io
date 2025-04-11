@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _ariaFn = require("../ariaFn");
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _styleFn = require("../styleFn");
 var _crAfterInputEl = _interopRequireDefault(require("./crAfterInputEl"));
 var _InputSelectFn = require("./InputSelectFn");
@@ -49,7 +49,7 @@ const InputSelect = _ref => {
     _refIndexNode = (0, _uiApi.useRef)(),
     _refIndexActive = (0, _uiApi.useRef)(0),
     [isFocused, touchHandlers] = (0, _useTouchHandlers.default)(),
-    [isShowOption, toggleIsShowOption] = (0, _useToggle.default)(),
+    [isShowOption, toggleIsShowOption] = (0, _useToggle.useToggle)(),
     [state, setState] = (0, _uiApi.useState)(() => (0, _InputSelectFn.crInitialStateFromProps)(propCaption, propsOptions)),
     {
       value,

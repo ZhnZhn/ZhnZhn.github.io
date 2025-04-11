@@ -1,13 +1,12 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../../uiApi");
-var _useToggle = _interopRequireDefault(require("../../hooks/useToggle"));
+var _useToggle = require("../../hooks/useToggle");
 var _ChartOptionsFn = require("../ChartOptionsFn");
 const useSelectChartType = () => {
-  const [isShowFd, toggleIsShowFd] = (0, _useToggle.default)(),
+  const [isShowFd, toggleIsShowFd] = (0, _useToggle.useToggle)(),
     [chartType, setChartType] = (0, _uiApi.useState)()
     /*eslint-disable react-hooks/exhaustive-deps */,
     hSelectChartType = (0, _uiApi.useCallback)(chartType => {

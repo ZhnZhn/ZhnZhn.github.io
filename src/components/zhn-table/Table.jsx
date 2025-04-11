@@ -1,7 +1,7 @@
 //import PropTypes from "prop-types";
 import { crCn } from "../styleFn";
 
-import useToggle from "../hooks/useToggle";
+import { useToggle } from "../hooks/useToggle";
 import {
   useMenu,
   useColumn,

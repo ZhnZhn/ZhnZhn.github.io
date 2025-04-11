@@ -23,7 +23,7 @@ import {
   HK_ABOUT
 } from '../hotkeys/hotkeys';
 
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 import { useFnFocus } from '../hooks/useFocus';
 
 import FlatButton from '../zhn-m/FlatButton';

@@ -7,7 +7,7 @@ import {
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 
 import {
   getFromDate,

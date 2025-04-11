@@ -1,6 +1,6 @@
 import { isWideWidth } from '../has';
 
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 import ButtonTab from '../zhn/ButtonTab';
 
 import ModalMenuFn from './ModalMenuFn';

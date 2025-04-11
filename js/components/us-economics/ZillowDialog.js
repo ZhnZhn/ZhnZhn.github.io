@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _checkAreDatesValid = _interopRequireDefault(require("../dialogs/hooks/checkAreDatesValid"));
@@ -44,8 +44,8 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
     onShow,
     onClose
   } = _ref;
-  const [isShowPattern, togglePattern] = (0, _useToggle.default)(false),
-    [isShowDate, toggleDate] = (0, _useToggle.default)(false),
+  const [isShowPattern, togglePattern] = (0, _useToggle.useToggle)(false),
+    [isShowDate, toggleDate] = (0, _useToggle.useToggle)(false),
     [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
       onAbout,
       onClose,

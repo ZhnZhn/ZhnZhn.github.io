@@ -1,11 +1,11 @@
 import { useMemo } from '../uiApi';
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 
 import { isWideWidth } from '../has';
 import {
   crItem,
   crSliderMenu
-} from '../menuModelFn'
+} from '../menuModelFn';
 
 const IS_WIDE_WIDTH = isWideWidth();
 

@@ -2,7 +2,7 @@ import {
   renderHook,
   act
 } from '@testing-library/react';
-import useToggleState from '../useToggleState';
+import { useToggleState } from '../useToggle';
 
 const _getState = result => result.current[0]
 , _getToggle = result => result.current[1];
@@ -98,7 +98,7 @@ describe('useToggleState', () =>{
     expect(_getState(result)).toBe(_result1)
 
     act(() => toggle(true))
-    expect(_getState(result)).toBe(_result1)    
+    expect(_getState(result)).toBe(_result1)
 
     act(() => toggle({ prop3: true }))
     expect(_getState(result)).toEqual({

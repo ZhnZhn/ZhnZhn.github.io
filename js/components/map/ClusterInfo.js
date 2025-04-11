@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _fUseKey = require("../hooks/fUseKey");
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _SparklinesLazy = _interopRequireDefault(require("../zhn-lazy/SparklinesLazy"));
@@ -113,7 +113,7 @@ const ClusterItem = _ref3 => {
   } = _ref3;
   const _refData = (0, _uiApi.useRef)(point.seria.data || []),
     _refPointIndex = (0, _uiApi.useRef)(_refData.current.length - 1),
-    [isShowChart, toggleIsShowChart] = (0, _useToggle.default)(index < 3);
+    [isShowChart, toggleIsShowChart] = (0, _useToggle.useToggle)(index < 3);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Item, {
       title: point.id,
@@ -200,7 +200,7 @@ const ClusterInfo = _ref5 => {
     from,
     to
   } = _ref5;
-  const [isShowRange, onClick] = (0, _useToggle.default)(false);
+  const [isShowRange, onClick] = (0, _useToggle.useToggle)(false);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Caption, {
       color,

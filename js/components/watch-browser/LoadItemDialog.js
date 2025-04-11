@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _dateFn = require("../../utils/dateFn");
 var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 var _has = require("../has");
@@ -39,7 +39,7 @@ const _crValue = function (x, y) {
   if (y === void 0) {
     y = '';
   }
-  return ((0, _formatNumber.default)(y) + " " + (0, _dateFn.mlsToDmy)(x)).trim();
+  return `${(0, _formatNumber.default)(y)} ${(0, _dateFn.mlsToDmy)(x)}`.trim();
 };
 const HAS_WIDE_WIDTH = (0, _has.isWideWidth)(),
   DF_DATA = {},
@@ -64,9 +64,9 @@ const LoadItemDialog = (0, _memoIsShow.default)(_ref => {
       x,
       y
     } = itemConf || {},
-    [isShowLabels, _toggleIsShowLabels] = (0, _useToggle.default)(HAS_WIDE_WIDTH),
-    [isValue, _toggleIsValue] = (0, _useToggle.default)(_isNumber(x)),
-    [isShowDate, _toggleIsShowDate] = (0, _useToggle.default)(),
+    [isShowLabels, _toggleIsShowLabels] = (0, _useToggle.useToggle)(HAS_WIDE_WIDTH),
+    [isValue, _toggleIsValue] = (0, _useToggle.useToggle)(_isNumber(x)),
+    [isShowDate, _toggleIsShowDate] = (0, _useToggle.useToggle)(),
     _toolbarButtons = (0, _uiApi.getRefValue)((0, _uiApi.useRef)([{
       caption: 'L',
       title: 'Click to toggle input labels',

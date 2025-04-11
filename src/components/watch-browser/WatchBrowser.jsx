@@ -1,6 +1,6 @@
 import { crScrollYCn } from '../styleFn';
 
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 import useBrowserShow from '../hooks/useBrowserShow';
 
 import {

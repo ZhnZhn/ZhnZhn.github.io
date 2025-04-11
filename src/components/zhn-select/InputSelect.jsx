@@ -17,7 +17,7 @@ import {
   crAriaComboboxProps
 } from '../ariaFn';
 
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 
 import {
   S_NONE,

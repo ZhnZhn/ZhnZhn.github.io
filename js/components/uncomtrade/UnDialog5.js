@@ -7,7 +7,7 @@ var _uiApi = require("../uiApi");
 var _ChartType = require("../../constants/ChartType");
 var _getPropertyFn = require("../../utils/getPropertyFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _useInputToggle = _interopRequireDefault(require("./useInputToggle"));
@@ -127,10 +127,10 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
       onClose,
       toggleInputs
     }),
-    [isHeading, toggleHeading] = (0, _useToggle.default)(true)
+    [isHeading, toggleHeading] = (0, _useToggle.useToggle)(true)
     /*, [isPartner, togglePartner] = useToggle(false)*/,
-    [isFlow, toggleFlow] = (0, _useToggle.default)(true),
-    [isChart, toggleChart] = (0, _useToggle.default)(false)
+    [isFlow, toggleFlow] = (0, _useToggle.useToggle)(true),
+    [isChart, toggleChart] = (0, _useToggle.useToggle)(false)
     //, [isFreq, toggleFreq] = useToggle(false)
     ,
     _refTradePartner = (0, _uiApi.useRef)(),

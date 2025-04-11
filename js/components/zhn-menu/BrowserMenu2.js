@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
 var _Browser = _interopRequireDefault(require("../zhn/Browser"));
 var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
@@ -57,7 +57,7 @@ const BrowserMenu2 = props => {
       children
     } = props,
     [isShow, hideBrowser, hKeyDown] = (0, _useBrowserShow.default)(props),
-    [isShowSearch, toggleSearch] = (0, _useToggle.default)(),
+    [isShowSearch, toggleSearch] = (0, _useToggle.useToggle)(),
     _toolbarButtons = useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
     [isLoading, menu] = (0, _useLoadMenu.default)(isShow, onLoadMenu, useMsBrowserLoad, browserType),
     _scrollClass = isShowSearch ? CL_BROWSER_WITH_SEARCH : CL_BROWSER;

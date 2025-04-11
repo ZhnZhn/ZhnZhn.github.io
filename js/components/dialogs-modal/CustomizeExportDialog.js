@@ -7,7 +7,7 @@ var _merge = _interopRequireDefault(require("../../utils/merge"));
 var _mathFn = require("../../math/mathFn");
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useRefInit = _interopRequireDefault(require("../hooks/useRefInit"));
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
 var _ChartExportConfig = require("../../charts/ChartExportConfig");
@@ -105,9 +105,9 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     data = DF_DATA,
     onClose
   } = _ref2;
-  const [isShowDimension, toggleDimension] = (0, _useToggle.default)(true),
-    [isShowTitle, toggleTitle] = (0, _useToggle.default)(true),
-    [isShowStyle, toggleStyle] = (0, _useToggle.default)(true),
+  const [isShowDimension, toggleDimension] = (0, _useToggle.useToggle)(true),
+    [isShowTitle, toggleTitle] = (0, _useToggle.useToggle)(true),
+    [isShowStyle, toggleStyle] = (0, _useToggle.useToggle)(true),
     _refExportStyle = (0, _uiApi.useRef)({}),
     _refExportFormat = (0, _uiApi.useRef)(null),
     _refToolbarButtons = (0, _uiApi.useRef)([{

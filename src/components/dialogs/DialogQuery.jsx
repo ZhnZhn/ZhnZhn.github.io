@@ -10,7 +10,7 @@ import {
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
-import useToggle from '../hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 import useEventCallback from '../hooks/useEventCallback';
 import useDialog from './hooks/useDialog';
 import useDialogOptions from './hooks/useDialogOptions';

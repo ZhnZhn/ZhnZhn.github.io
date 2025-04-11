@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.MapChartItem = void 0;
 var _uiApi = require("../uiApi");
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useBool = require("../hooks/useBool");
 var _ChoroplethMap = _interopRequireDefault(require("../../adapters/eurostat/ChoroplethMap"));
 var _ButtonTab = _interopRequireDefault(require("../zhn/ButtonTab"));
@@ -82,7 +82,7 @@ const MapChartItem = _ref2 => {
       time,
       isErr
     } = state,
-    [isOpen, toggleIsOpen] = (0, _useToggle.default)(true),
+    [isOpen, toggleIsOpen] = (0, _useToggle.useToggle)(true),
     [isShowInfo, showInfo, hideInfo] = (0, _useBool.useBool)();
   (0, _uiApi.useEffect)(() => {
     const {

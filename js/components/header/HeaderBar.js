@@ -7,7 +7,7 @@ var _compStore = require("../../flux/stores/compStore");
 var _browserStore = require("../../flux/stores/browserStore");
 var _styleFn = require("../styleFn");
 var _hotkeys = require("../hotkeys/hotkeys");
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useFocus = require("../hooks/useFocus");
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _SvgSettings = _interopRequireDefault(require("../zhn/svg/SvgSettings"));
@@ -41,7 +41,7 @@ const HeaderBar = _ref => {
   let {
     showSettings
   } = _ref;
-  const [isTopics, toggleTopics] = (0, _useToggle.default)(),
+  const [isTopics, toggleTopics] = (0, _useToggle.useToggle)(),
     [refBt, _toggleTopics] = (0, _useFocus.useFnFocus)(toggleTopics);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_HEADER_BAR,

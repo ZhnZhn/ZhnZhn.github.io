@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = _interopRequireDefault(require("../hooks/useToggle"));
+var _useToggle = require("../hooks/useToggle");
 var _useRefBool = _interopRequireDefault(require("../hooks/useRefBool"));
 var _useProperty = _interopRequireDefault(require("../hooks/useProperty"));
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
@@ -53,8 +53,8 @@ const AvIndicatorDialog = (0, _memoIsShow.default)(_ref => {
     onClose
   } = _ref;
   const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
-    [isShowOptions, toggleOptions] = (0, _useToggle.default)(),
-    [isShowLabels, toggleLabels] = (0, _useToggle.default)(true),
+    [isShowOptions, toggleOptions] = (0, _useToggle.useToggle)(),
+    [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(true),
     _toolbarButtons = (0, _useToolbar.default)({
       toggleLabels,
       toggleOptions,
