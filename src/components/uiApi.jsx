@@ -27,8 +27,7 @@ export {
   isArr,
   isBool,
   isFn,
-  isNumber,
-  isObj
+  isNumber
 } from '../utils/isTypeFn';
 import {
   isArr,

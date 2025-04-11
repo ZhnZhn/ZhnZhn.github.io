@@ -26,7 +26,6 @@ exports.isArr = _isTypeFn.isArr;
 exports.isBool = _isTypeFn.isBool;
 exports.isFn = _isTypeFn.isFn;
 exports.isNumber = _isTypeFn.isNumber;
-exports.isObj = _isTypeFn.isObj;
 var _jsxRuntime = require("react/jsx-runtime");
 const crObjWithNullPrototype = () => Object.create(null);
 exports.crObjWithNullPrototype = crObjWithNullPrototype;
