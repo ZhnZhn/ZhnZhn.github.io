@@ -12,7 +12,7 @@ export const crSubItem = (
 export const crItem = (
   name,
   onClick,
-  isClose=true,
+  isClose=!0,
   cn
 ) => ({
   name,
@@ -20,6 +20,11 @@ export const crItem = (
   isClose,
   cn
 })
+
+export const addToggleTo = (
+  item,
+  isInitial
+) => (item.isInitial = !!isInitial, item)
 
 export const crSliderMenu = (
   titleCl,
