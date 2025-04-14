@@ -4,6 +4,7 @@ import { useToggle } from '../hooks/useToggle';
 import { isWideWidth } from '../has';
 import {
   crItem,
+  addToggleTo,
   crSliderMenu
 } from '../menuModelFn';
 
@@ -17,10 +18,10 @@ const useSettingsMenuMore = (CL_ROW) => {
   /*eslint-disable react-hooks/exhaustive-deps */
   , menuModel = useMemo(() => crSliderMenu(
     CL_ROW,
-    190,
+    150,
     1, {
       p0: [
-        crItem("Toggle Input Labels", toggleLabels, true, CL_ROW)
+        addToggleTo(crItem("Input Labels", toggleLabels, !1), IS_WIDE_WIDTH)
       ]
     }
   ), [])

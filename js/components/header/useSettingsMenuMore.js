@@ -10,8 +10,8 @@ const IS_WIDE_WIDTH = (0, _has.isWideWidth)();
 const useSettingsMenuMore = CL_ROW => {
   const [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(IS_WIDE_WIDTH)
     /*eslint-disable react-hooks/exhaustive-deps */,
-    menuModel = (0, _uiApi.useMemo)(() => (0, _menuModelFn.crSliderMenu)(CL_ROW, 190, 1, {
-      p0: [(0, _menuModelFn.crItem)("Toggle Input Labels", toggleLabels, true, CL_ROW)]
+    menuModel = (0, _uiApi.useMemo)(() => (0, _menuModelFn.crSliderMenu)(CL_ROW, 150, 1, {
+      p0: [(0, _menuModelFn.addToggleTo)((0, _menuModelFn.crItem)("Input Labels", toggleLabels, !1), IS_WIDE_WIDTH)]
     }), []);
   //toggleLabels, CL_ROW
   /*eslint-enable react-hooks/exhaustive-deps */
