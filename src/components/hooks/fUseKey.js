@@ -11,16 +11,30 @@ const isKeyEscape = (
   evt
 ) => evt.keyCode === 27 || evt.key === 'Escape';
 
-/*eslint-disable react-hooks/exhaustive-deps */
-const fUseKey = isKey => (
+const _onKeyFnEvt = (
+  isKey,
   fn,
-  deps
-) => useCallback(evt => {
+  evt
+) => {
   if (isKey(evt)) {
     evt.preventDefault()
     evt.stopPropagation()
     fn(evt)
   }
+};
+
+const _fOnKey = isKey => fn => evt => {
+  _onKeyFnEvt(isKey, fn, evt)
+};
+
+export const fOnKeyEnter = _fOnKey(isKeyEnterOrBlank)
+
+/*eslint-disable react-hooks/exhaustive-deps */
+const fUseKey = isKey => (
+  fn,
+  deps
+) => useCallback(evt => {
+  _onKeyFnEvt(isKey, fn, evt)
 }, deps || []);
 /*eslint-enable react-hooks/exhaustive-deps */
 
