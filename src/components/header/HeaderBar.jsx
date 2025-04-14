@@ -29,7 +29,7 @@ import { useFnFocus } from '../hooks/useFocus';
 import FlatButton from '../zhn-m/FlatButton';
 import SvgSettings from '../zhn/svg/SvgSettings';
 import SvgInfo from '../zhn/svg/SvgInfo';
-import ModalSlider from '../zhn-modal-slider/ModalSlider';
+import { ModalSlider } from '../zhn-modal-slider/ModalSlider';
 
 import ProgressLoading from './ProgressLoading';
 import AppLabel from './AppLabel';

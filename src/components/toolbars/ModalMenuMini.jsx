@@ -9,9 +9,12 @@ import {
 
 import {
   crItem,
+  addToggleTo,
   crSliderMenu
 } from '../menuModelFn';
-import ModalSlider from '../zhn-modal-slider/ModalSlider';
+import {
+  ModalSliderMemoIsShow
+} from '../zhn-modal-slider/ModalSlider';
 
 import { S_MODAL_MENU } from './ModalMenu.Style';
 
@@ -24,9 +27,11 @@ const _crModel = (
   CL_ROW_PANE_TOPIC,
   160,
   1, {
-    p0: (configs || []).map(({ btTitle }) => {
-      return crItem(btTitle, bindTo(onClickItem, btTitle), false)
-    })
+    p0: (configs || []).map(({ btTitle }) => addToggleTo(crItem(
+      btTitle,
+      bindTo(onClickItem, btTitle),
+      !1
+    )))
   }
 );
 
@@ -42,7 +47,7 @@ const ModalMenuMini = ({
     [configs, onClickItem]
   );
   return (
-    <ModalSlider
+    <ModalSliderMemoIsShow
       isShow={isShow}
       className={CL_MENU_SLIDER}
       style={{...S_MODAL_MENU, ...style}}

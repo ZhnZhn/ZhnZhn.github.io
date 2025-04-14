@@ -1,21 +1,20 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _menuModelFn = require("../menuModelFn");
-var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
+var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _ModalMenu = require("./ModalMenu.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_MENU_SLIDER = (0, _styleFn.crElementBorderCn)();
-const _crModel = (configs, onClickItem) => (0, _menuModelFn.crSliderMenu)(_styleFn.CL_ROW_PANE_TOPIC, 140, 1, {
+const _crModel = (configs, onClickItem) => (0, _menuModelFn.crSliderMenu)(_styleFn.CL_ROW_PANE_TOPIC, 160, 1, {
   p0: (configs || []).map(_ref => {
     let {
       btTitle
     } = _ref;
-    return (0, _menuModelFn.crItem)(btTitle, (0, _uiApi.bindTo)(onClickItem, btTitle), false);
+    return (0, _menuModelFn.addToggleTo)((0, _menuModelFn.crItem)(btTitle, (0, _uiApi.bindTo)(onClickItem, btTitle), !1));
   })
 });
 const ModalMenuMini = _ref2 => {
@@ -27,7 +26,7 @@ const ModalMenuMini = _ref2 => {
     onClickItem
   } = _ref2;
   const _model = (0, _uiApi.useMemo)(() => _crModel(configs, onClickItem), [configs, onClickItem]);
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.ModalSliderMemoIsShow, {
     isShow: isShow,
     className: CL_MENU_SLIDER,
     style: {

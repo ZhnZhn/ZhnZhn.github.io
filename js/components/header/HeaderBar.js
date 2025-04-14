@@ -12,7 +12,7 @@ var _useFocus = require("../hooks/useFocus");
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _SvgSettings = _interopRequireDefault(require("../zhn/svg/SvgSettings"));
 var _SvgInfo = _interopRequireDefault(require("../zhn/svg/SvgInfo"));
-var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
+var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _ProgressLoading = _interopRequireDefault(require("./ProgressLoading"));
 var _AppLabel = _interopRequireDefault(require("./AppLabel"));
 var _IconLogoErc = _interopRequireDefault(require("./IconLogoErc"));
@@ -101,7 +101,7 @@ const HeaderBar = _ref => {
           style: S_SVG_BT
         })
       })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.ModalSlider, {
       isShow: isTopics,
       className: CL_BROWSER_MENU,
       model: MODEL,

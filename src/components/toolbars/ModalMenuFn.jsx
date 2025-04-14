@@ -1,16 +1,24 @@
 import { filterBoolean } from '../../utils/arrFn';
 import { mlsToDmy } from '../../utils/dateFn';
 
-import { isFn, useMemo } from '../uiApi';
-import { CL_ROW_PANE_TOPIC, crElementBorderCn } from '../styleFn';
-
+import {
+  isFn,
+  useMemo
+} from '../uiApi';
+import {
+  CL_ROW_PANE_TOPIC,
+  crElementBorderCn
+} from '../styleFn';
 
 import {
   crSubItem,
   crItem,
+  addToggleTo,
   crSliderMenu
 } from '../menuModelFn';
-import ModalSlider from '../zhn-modal-slider/ModalSlider';
+import {
+  ModalSliderMemoIsShow
+} from '../zhn-modal-slider/ModalSlider';
 import { S_MODAL_MENU } from './ModalMenu.Style';
 
 const CL_MENU_SLIDER = crElementBorderCn();
@@ -22,11 +30,11 @@ const _isMinMax = (
 const EPOCH_DMY = '01-01-1970';
 const _isZoom = (getChart) => {
   if (!isFn(getChart)) {
-    return false;
+    return !1;
   }
   const chart = getChart();
   if (!chart || !isFn(chart.zhGetFromToDates)) {
-    return false;
+    return !1;
   }
   const { from, to } = chart.zhGetFromToDates({
     format: mlsToDmy
@@ -45,16 +53,19 @@ const _crModelMore = (
   p0: filterBoolean([
     crSubItem("p1", "Chart"),
     isFn(props.onAddToWatch)
-      ? crItem("Add To", props.onAddToWatch) : void 0,
+      ? crItem("Add To", props.onAddToWatch)
+      : void 0,
     _isMinMax(props.config)
-      ? crItem("MinMax", props.onMinMax, false) : void 0,
+      ? addToggleTo(crItem("MinMax", props.onMinMax, !1), !0)
+      : void 0,
     isItemZoom
-      ? crItem("Zoom", props.onZoom) : void 0,
+      ? crItem("Zoom", props.onZoom)
+      : void 0,
     crItem("Copy", props.onCopy),
     crItem("PasteTo", props.onPasteTo)
   ]),
   p1: [
-    crItem("x2 Height", props.onX2H, false),
+    addToggleTo(crItem("x2 Height", props.onX2H, !1)),
     crItem("Full Screen", props.onFullScreen),
     crItem("Export As", props.onExport),
     crItem("Print", props.onPrint)
@@ -76,7 +87,7 @@ const ModalMenuFn = (props) => {
   );
   /*eslint-enable react-hooks/exhaustive-deps*/
  return (
-   <ModalSlider
+   <ModalSliderMemoIsShow
      isShow={isShow}
      className={CL_MENU_SLIDER}
      style={{...S_MODAL_MENU, ...style}}

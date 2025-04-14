@@ -16,7 +16,9 @@ import Button from '../zhn/Button';
 import { BtSvgClose } from '../zhn/BtSvgX';
 import SvgCheckBox from '../zhn/SvgCheckBox';
 import SvgMore from '../zhn/SvgMore';
-import ModalSlider from '../zhn-modal-slider/ModalSlider';
+import {
+  ModalSliderMemoIsShow
+} from '../zhn-modal-slider/ModalSlider';
 
 import ValueMovingBadge from './ValueMovingBadge';
 import ValueDate from './ValueDate';
@@ -69,7 +71,7 @@ const MenuMore = ({
         svgStyle={S_SVG_MORE}
         onClick={onToggle}
       />
-      <ModalSlider
+      <ModalSliderMemoIsShow
         isShow={isMore}
         rootStyle={S_INLINE}
         className={CL_CHARTS_MENU_MORE}

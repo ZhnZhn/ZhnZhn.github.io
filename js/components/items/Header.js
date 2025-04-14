@@ -12,7 +12,7 @@ var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _BtSvgX = require("../zhn/BtSvgX");
 var _SvgCheckBox = _interopRequireDefault(require("../zhn/SvgCheckBox"));
 var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
-var _ModalSlider = _interopRequireDefault(require("../zhn-modal-slider/ModalSlider"));
+var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _ValueMovingBadge = _interopRequireDefault(require("./ValueMovingBadge"));
 var _ValueDate = _interopRequireDefault(require("./ValueDate"));
 var _Item = require("./Item.Style");
@@ -56,7 +56,7 @@ const MenuMore = _ref => {
       style: S_BT_MORE,
       svgStyle: S_SVG_MORE,
       onClick: onToggle
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.ModalSliderMemoIsShow, {
       isShow: isMore,
       rootStyle: _styleFn.S_INLINE,
       className: CL_CHARTS_MENU_MORE,
