@@ -1,6 +1,8 @@
 import { bindTo } from '../uiApi';
 import { crSliderTransformStyle } from '../styleFn';
 
+import memoIsShow from '../hoc/memoIsShow';
+
 import useInitStateFromProps from '../hooks/useInitStateFromProps';
 import useThrottleCallback from '../hooks/useThrottleCallback';
 
@@ -64,7 +66,7 @@ const _initState = model => {
   };
 };
 
-const ModalSlider = ({
+export const ModalSlider = ({
   model=DF_MODEL,
   isShow,
   className,
@@ -130,7 +132,6 @@ const ModalSlider = ({
      pageWidth,
      pageCurrent
   );
-
   return (
       <ModalPane
         isShow={isShow}
@@ -156,6 +157,6 @@ const ModalSlider = ({
         </ShowHide>
       </ModalPane>
   );
-};
+}
 
-export default ModalSlider
+export const ModalSliderMemoIsShow = memoIsShow(ModalSlider)

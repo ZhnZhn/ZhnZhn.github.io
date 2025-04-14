@@ -2,9 +2,10 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.default = void 0;
+exports.ModalSliderMemoIsShow = exports.ModalSlider = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useInitStateFromProps = _interopRequireDefault(require("../hooks/useInitStateFromProps"));
 var _useThrottleCallback = _interopRequireDefault(require("../hooks/useThrottleCallback"));
 var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
@@ -129,5 +130,6 @@ const ModalSlider = _ref => {
     })
   });
 };
-var _default = exports.default = ModalSlider;
+exports.ModalSlider = ModalSlider;
+const ModalSliderMemoIsShow = exports.ModalSliderMemoIsShow = (0, _memoIsShow.default)(ModalSlider);
 //# sourceMappingURL=ModalSlider.js.map
