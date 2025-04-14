@@ -20,3 +20,11 @@
   display: inline-block;
   white-space: nowrap;
 }
+
+.sp-svg-checked {
+  color: #1b75bb;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  padding-left: 8px;
+}

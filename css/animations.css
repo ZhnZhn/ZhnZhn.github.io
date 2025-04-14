@@ -43,6 +43,17 @@
   }
 }
 
+.check-in {
+  stroke-dasharray: 26;
+  stroke-dashoffset: 26;  
+  animation: checking 150ms ease-in forwards;  
+}
+
+@keyframes checking {
+  from { stroke-offset: 26; }
+  to { stroke-dashoffset: 0 }
+}
+
 @media screen and (max-width: 540px) {
   .show-modal {
     animation: showing-modal 200ms linear;
@@ -52,5 +63,8 @@
   }
   .show-cont {
     animation: showing-cont 200ms ease-out;
+  }
+  .check-in {    
+    animation: checking 0.1s ease-in forwards;  
   } 
 }
