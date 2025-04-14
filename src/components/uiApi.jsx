@@ -57,6 +57,13 @@ export const cloneUiElement = (
   {...overrideProps}
 />)
 
+export const renderChildren = (
+  children,
+  ...args
+) => isFn(children)
+  ? children(...args)
+  : children
+
 export const getRefValue = (
   ref
 ) => (ref || {}).current

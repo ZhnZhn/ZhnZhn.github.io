@@ -1,13 +1,28 @@
-import { useKeyEnter } from '../hooks/fUseKey';
+import {
+  isBool
+} from '../../utils/isTypeFn';
+
+import {
+  useState,
+  renderChildren
+} from '../uiApi';
+import {
+  fOnKeyEnter
+} from '../hooks/fUseKey';
 
 const MenuAriaItem = ({
   refEl,
   className,
   style,
+  isInitial,
   children,
   onClick
 }) => {
-  const _hKeyDown = useKeyEnter(onClick);
+  const [is, setIs] = useState(isInitial)
+  , _onClick = isBool(isInitial)
+    ? () => { onClick(); setIs(is => !is); }
+    : onClick
+  , _hKeyDown = fOnKeyEnter(_onClick);
 
   return (
     <div
@@ -16,10 +31,10 @@ const MenuAriaItem = ({
       style={style}
       role="menuitem"
       tabIndex="0"
-      onClick={onClick}
+      onClick={_onClick}
       onKeyDown={_hKeyDown}
     >
-      {children}
+      {renderChildren(children, is)}
     </div>
   );
 };
