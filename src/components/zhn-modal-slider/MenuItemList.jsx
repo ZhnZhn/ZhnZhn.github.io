@@ -1,9 +1,13 @@
 import { isFn, safeMap, bindTo } from '../uiApi';
 
+import SvgChecked from '../zhn/SvgChecked';
 import MenuAriaItem from './MenuAriaItem';
 
 const SUB_MENU = 'sub'
-, S_ITEM = { position: 'relative' }
+, CL_SP_SVG_CHECKED = 'sp-svg-checked'
+, S_ITEM = {
+  position: 'relative'
+}
 , S_NEXT_PAGE = {
   display: 'inline-block',
   position: 'absolute',
@@ -46,6 +50,7 @@ const MenuItemList = ({
        type,
        id,
        isClose,
+       isInitial,
        onClick
      } = item
      , _onClick = type === SUB_MENU
@@ -57,10 +62,16 @@ const MenuItemList = ({
          refEl={getRefFocus(index)}
          className={cn || itemCl}
          style={S_ITEM}
+         isInitial={isInitial}
          onClick={_onClick}
        >
-         <span>{name}</span>
-         <NextPageArrow type={type} />
+         {(is) => (
+           <>
+             <span>{name}</span>
+             {is ? <SvgChecked className={CL_SP_SVG_CHECKED} /> : null}
+             <NextPageArrow type={type} />
+           </>
+        )}
        </MenuAriaItem>
      );
     })}

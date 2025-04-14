@@ -4,9 +4,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _SvgChecked = _interopRequireDefault(require("../zhn/SvgChecked"));
 var _MenuAriaItem = _interopRequireDefault(require("./MenuAriaItem"));
 var _jsxRuntime = require("react/jsx-runtime");
 const SUB_MENU = 'sub',
+  CL_SP_SVG_CHECKED = 'sp-svg-checked',
   S_ITEM = {
     position: 'relative'
   },
@@ -56,6 +58,7 @@ const MenuItemList = _ref3 => {
           type,
           id,
           isClose,
+          isInitial,
           onClick
         } = item,
         _onClick = type === SUB_MENU ? (0, _uiApi.bindTo)(onNextPage, id, name, pageNumber) : _fClick({
@@ -63,16 +66,21 @@ const MenuItemList = _ref3 => {
           onClick,
           onClose
         });
-      return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_MenuAriaItem.default, {
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuAriaItem.default, {
         refEl: getRefFocus(index),
         className: cn || itemCl,
         style: S_ITEM,
+        isInitial: isInitial,
         onClick: _onClick,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          children: name
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(NextPageArrow, {
-          type: type
-        })]
+        children: is => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            children: name
+          }), is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgChecked.default, {
+            className: CL_SP_SVG_CHECKED
+          }) : null, /*#__PURE__*/(0, _jsxRuntime.jsx)(NextPageArrow, {
+            type: type
+          })]
+        })
       }, name);
     })
   });
