@@ -27,8 +27,10 @@ import { useToggle } from '../hooks/useToggle';
 import { useFnFocus } from '../hooks/useFocus';
 
 import FlatButton from '../zhn-m/FlatButton';
-import SvgSettings from '../zhn/svg/SvgSettings';
-import SvgInfo from '../zhn/svg/SvgInfo';
+import { 
+  SvgSettings,
+  SvgInfo
+} from '../zhn/svg/SvgIcon';
 import { ModalSlider } from '../zhn-modal-slider/ModalSlider';
 
 import ProgressLoading from './ProgressLoading';

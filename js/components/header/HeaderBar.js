@@ -10,8 +10,7 @@ var _hotkeys = require("../hotkeys/hotkeys");
 var _useToggle = require("../hooks/useToggle");
 var _useFocus = require("../hooks/useFocus");
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
-var _SvgSettings = _interopRequireDefault(require("../zhn/svg/SvgSettings"));
-var _SvgInfo = _interopRequireDefault(require("../zhn/svg/SvgInfo"));
+var _SvgIcon = require("../zhn/svg/SvgIcon");
 var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _ProgressLoading = _interopRequireDefault(require("./ProgressLoading"));
 var _AppLabel = _interopRequireDefault(require("./AppLabel"));
@@ -88,7 +87,7 @@ const HeaderBar = _ref => {
         hotKey: _hotkeys.HK_SETTINGS,
         timeout: 500,
         onClick: showSettings,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgSettings.default, {
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgIcon.SvgSettings, {
           style: S_SVG_BT
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
@@ -97,7 +96,7 @@ const HeaderBar = _ref => {
         hotKey: _hotkeys.HK_ABOUT,
         timeout: 0,
         onClick: _compStore.showAbout,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgInfo.default, {
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgIcon.SvgInfo, {
           style: S_SVG_BT
         })
       })]
