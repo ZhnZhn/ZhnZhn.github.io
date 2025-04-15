@@ -14,23 +14,12 @@ import {
   TRANSPARENT_COLOR
 } from '../styles/Color';
 import Svg100 from './svg/Svg100';
+import { PathCheckIn } from './svg/Path';
 
 const CL_CHB = 'chb'
 , CL_CHB_CHECKED = 'chb-checked'
 , S_SVG = { display: 'inline-block' }
 , C_GREY = "#777777";
-
-const SvgChecked = ({
-  className
-}) => (
-  <path
-      className={className}
-      d="M 2,5 L 8,14 14,1"
-      strokeWidth="2"
-      strokeLinecap="round"
-      fill={TRANSPARENT_COLOR}
-  />
-);
 
 const FN_NOOP = () => {};
 const _crAriaLabelledByProp = ({
@@ -117,7 +106,7 @@ const SvgCheckBox = (props) => {
            fill={_restFill}
         />
         { _value
-           ? <SvgChecked className={cnChecked} />
+           ? <PathCheckIn cn={cnChecked} />
            : null
         }
       </Svg100>

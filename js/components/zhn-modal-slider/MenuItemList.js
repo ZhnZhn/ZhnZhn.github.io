@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _SvgChecked = _interopRequireDefault(require("../zhn/SvgChecked"));
+var _SvgCheckIn = _interopRequireDefault(require("../zhn/SvgCheckIn"));
 var _MenuAriaItem = _interopRequireDefault(require("./MenuAriaItem"));
 var _jsxRuntime = require("react/jsx-runtime");
 const SUB_MENU = 'sub',
@@ -75,9 +75,10 @@ const MenuItemList = _ref3 => {
         children: is => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
           children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
             children: name
-          }), is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgChecked.default, {
-            className: CL_SP_SVG_CHECKED
-          }) : null, /*#__PURE__*/(0, _jsxRuntime.jsx)(NextPageArrow, {
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckIn.default, {
+            is: is,
+            cn: CL_SP_SVG_CHECKED
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(NextPageArrow, {
             type: type
           })]
         })

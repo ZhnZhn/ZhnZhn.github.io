@@ -1,6 +1,6 @@
 import { isFn, safeMap, bindTo } from '../uiApi';
 
-import SvgChecked from '../zhn/SvgChecked';
+import SvgCheckIn from '../zhn/SvgCheckIn';
 import MenuAriaItem from './MenuAriaItem';
 
 const SUB_MENU = 'sub'
@@ -68,7 +68,7 @@ const MenuItemList = ({
          {(is) => (
            <>
              <span>{name}</span>
-             {is ? <SvgChecked className={CL_SP_SVG_CHECKED} /> : null}
+             <SvgCheckIn is={is} cn={CL_SP_SVG_CHECKED} />
              <NextPageArrow type={type} />
            </>
         )}

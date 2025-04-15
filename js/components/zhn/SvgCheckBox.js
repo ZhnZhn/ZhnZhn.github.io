@@ -10,6 +10,7 @@ var _useProperty = require("../hooks/useProperty");
 var _fUseKey = require("../hooks/fUseKey");
 var _Color = require("../styles/Color");
 var _Svg = _interopRequireDefault(require("./svg/Svg100"));
+var _Path = require("./svg/Path");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_CHB = 'chb',
   CL_CHB_CHECKED = 'chb-checked',
@@ -17,24 +18,12 @@ const CL_CHB = 'chb',
     display: 'inline-block'
   },
   C_GREY = "#777777";
-const SvgChecked = _ref => {
-  let {
-    className
-  } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
-    className: className,
-    d: "M 2,5 L 8,14 14,1",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    fill: _Color.TRANSPARENT_COLOR
-  });
-};
 const FN_NOOP = () => {};
-const _crAriaLabelledByProp = _ref2 => {
+const _crAriaLabelledByProp = _ref => {
   let {
     labelId,
     ariaLabel
-  } = _ref2;
+  } = _ref;
   return labelId ? {
     "aria-labelledby": labelId
   } : {
@@ -93,8 +82,8 @@ const SvgCheckBox = props => {
         rx: "3",
         stroke: _restStroke,
         fill: _restFill
-      }), _value ? /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgChecked, {
-        className: cnChecked
+      }), _value ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Path.PathCheckIn, {
+        cn: cnChecked
       }) : null]
     })
   });
