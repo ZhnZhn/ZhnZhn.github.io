@@ -14,7 +14,7 @@ const LINK_CONFIGS = [
  ["Ndl", "Nasdaq Data Link", _crUrl("data.nasdaq.com")],
  ["DBnomics", _crUrl("db.nomics.world")],
  ["EI", "Energy Institute", _crUrl("www.energyinst.org")],
- ["Ember", _crUrl("ember-climate.org")],
+ ["Ember", _crUrl("ember-energy.org")],
  ["IRENA", _crUrl("www.irena.org")],
  ["Fmp", "Financial Modeling Prep", _crUrl("financialmodelingprep.com")],
  ["Tw", "Twelve Data", _crUrl("twelvedata.com")],
