@@ -1,15 +1,13 @@
 import {
   CL_BLACK,
   S_INLINE,
+  getScreenCase,
   crNotSelectedCn,
   crBoldCn,
   crBold16Cn,
   crFs18Cn
 } from '../styleFn';
 
-import {
-  HAS_WIDE_SCREEN
-} from '../has';
 
 const _fSpanToken = (
   className
@@ -25,9 +23,7 @@ const _fSpanToken = (
   >{children}</span>
 );
 
-const _crVmTokenCn = HAS_WIDE_SCREEN
-  ? crFs18Cn
-  : crBold16Cn;
+const _crVmTokenCn = getScreenCase(crFs18Cn, crBold16Cn);
 
 export const SpanValue = _fSpanToken(_crVmTokenCn("sp-value"))
 export const SpanMove = _fSpanToken(_crVmTokenCn())
