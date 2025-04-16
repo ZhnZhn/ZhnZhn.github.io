@@ -1,4 +1,4 @@
-import Svg from '../zhn/svg/Svg';
+import { Svg } from '../zhn/svg/Svg';
 
 const IconLogoErc = ({
   className,

@@ -1,15 +1,13 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _ariaFn = require("../ariaFn");
 var _styleFn = require("../styleFn");
-var _Color = require("../styles/Color");
 var _useToggle = require("../hooks/useToggle");
 var _fUseKey = require("../hooks/fUseKey");
-var _Svg = _interopRequireDefault(require("./svg/Svg"));
+var _Svg = require("./svg/Svg");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROOT_DIV = {
     lineHeight: 2
@@ -29,7 +27,7 @@ const S_ROOT_DIV = {
   PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
 //_pathV, _fillV, _childCl, _childStyle
-const _crConf = (isOpen, openColor) => isOpen ? [PATH_OPEN, openColor, `${_styleFn.CL_OPEN_CLOSE_EXP} ${_styleFn.CL_SHOW_POPUP}`, _styleFn.S_BLOCK] : [PATH_CLOSE, _Color.TRANSPARENT_COLOR, _styleFn.CL_OPEN_CLOSE_EXP, _styleFn.S_NONE];
+const _crConf = (isOpen, openColor) => isOpen ? [PATH_OPEN, openColor, `${_styleFn.CL_OPEN_CLOSE_EXP} ${_styleFn.CL_SHOW_POPUP}`, _styleFn.S_BLOCK] : [PATH_CLOSE, _Svg.FILL_NONE, _styleFn.CL_OPEN_CLOSE_EXP, _styleFn.S_NONE];
 const OpenClose = _ref => {
   let {
     refItem,
@@ -70,7 +68,7 @@ const OpenClose = _ref => {
         style: ocStyle,
         onClick: toggleIsOpen,
         onKeyDown: _hKeyDown,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.default, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.Svg, {
           w: "16",
           style: S_SVG,
           children: /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {

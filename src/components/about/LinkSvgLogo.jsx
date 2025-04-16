@@ -1,7 +1,7 @@
 import { toHref } from '../uiApi';
 import { crCn } from '../styleFn';
 
-import Svg100 from '../zhn/svg/Svg100';
+import { Svg100 } from '../zhn/svg/Svg';
 import UseLogoById from './UseLogoById';
 
 const CL_LI = 'logo-item';

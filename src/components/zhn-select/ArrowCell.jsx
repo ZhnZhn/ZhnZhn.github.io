@@ -1,5 +1,5 @@
 import { crAriaExpandedProps } from '../ariaFn';
-import Svg from '../zhn/svg/Svg';
+import { Svg } from '../zhn/svg/Svg';
 import { CL_BT_ARROW } from './CL';
 
 const S_SVG_OPEN = {

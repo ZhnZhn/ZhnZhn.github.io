@@ -10,12 +10,13 @@ import {
   CL_OPEN_CLOSE_EXP
 } from '../styleFn';
 
-import { TRANSPARENT_COLOR } from '../styles/Color';
-
 import { useToggle } from '../hooks/useToggle';
 import { useKeyEnter } from '../hooks/fUseKey';
 
-import Svg from './svg/Svg';
+import {
+  FILL_NONE,
+  Svg
+} from './svg/Svg';
 
 const S_ROOT_DIV = { lineHeight: 2 }
 , S_SVG = {
@@ -46,7 +47,7 @@ const _crConf = (
     ]
   : [
       PATH_CLOSE,
-      TRANSPARENT_COLOR,
+      FILL_NONE,
       CL_OPEN_CLOSE_EXP,
       S_NONE
     ];

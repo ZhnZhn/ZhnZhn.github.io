@@ -1,4 +1,7 @@
-import Svg from './Svg';
+import {
+  FILL_NONE,
+  Svg
+} from './Svg';
 
 const SvgIcon = ({
   style,
@@ -10,7 +13,7 @@ const SvgIcon = ({
       w={size}
       style={style}
       stroke={color}
-      fill="none"
+      fill={FILL_NONE}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"

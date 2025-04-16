@@ -11,9 +11,9 @@ import { useRefInit } from '../hooks/useProperty';
 import { useKeyEnter } from '../hooks/fUseKey';
 
 import {
-  TRANSPARENT_COLOR
-} from '../styles/Color';
-import Svg100 from './svg/Svg100';
+  FILL_NONE,
+  Svg100
+} from './svg/Svg';
 import { PathCheckIn } from './svg/Path';
 
 const CL_CHB = 'chb'
@@ -80,8 +80,8 @@ const SvgCheckBox = (props) => {
   ] = _className
     ? []
     : _value
-        ? [color || C_GREY, color || TRANSPARENT_COLOR ]
-        : [C_GREY, TRANSPARENT_COLOR];
+        ? [color || C_GREY, color || FILL_NONE ]
+        : [C_GREY, FILL_NONE];
 
   return (
     <div

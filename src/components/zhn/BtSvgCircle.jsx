@@ -2,7 +2,7 @@ import { crAriaLabelProp } from '../a11yFn';
 import { crBtSvgCn } from '../styleFn';
 
 import Button from './Button';
-import Svg from './svg/Svg';
+import { Svg } from './svg/Svg';
 
 const CL_BT_SVG_CIRCLE = crBtSvgCn("circle")
 , _fBtCircleSvg = (

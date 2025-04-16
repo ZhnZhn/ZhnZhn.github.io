@@ -1,4 +1,7 @@
-import Svg100 from '../zhn/svg/Svg100';
+import {
+  FILL_NONE,
+  Svg100
+} from '../zhn/svg/Svg';
 
 const CL_BT_RESIZE = "bt-resize not-selected";
 
@@ -24,7 +27,7 @@ const BtResize = ({
        w="12"
        strokeWidth="2"
        strokeLinecap="round"
-       fill="none"
+       fill={FILL_NONE}
      >
         <path d="M 1,6 L 11,6" />
         <path d="M 6,2 L 1,6 6,10" />

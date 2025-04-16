@@ -1,10 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _ariaFn = require("../ariaFn");
-var _Svg = _interopRequireDefault(require("../zhn/svg/Svg"));
+var _Svg = require("../zhn/svg/Svg");
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_SVG_OPEN = {
@@ -29,7 +28,7 @@ const ArrowCell = _ref => {
     tabIndex: "-1",
     className: _CL.CL_BT_ARROW,
     onClick: onClick,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.default, {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.Svg, {
       w: "20",
       "aria-hidden": "true",
       focusable: "false",

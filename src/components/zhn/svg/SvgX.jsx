@@ -1,4 +1,4 @@
-import Svg100 from './Svg100';
+import { Svg100 } from './Svg';
 
 const S_SVG = { padding: 3 };
 

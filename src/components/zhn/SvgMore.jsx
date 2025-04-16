@@ -1,4 +1,4 @@
-import Svg from './svg/Svg';
+import { Svg } from './svg/Svg';
 
 const CL_BT_MORE = 'bt-more';
 

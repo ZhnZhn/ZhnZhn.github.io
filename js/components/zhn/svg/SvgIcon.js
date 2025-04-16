@@ -1,9 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.SvgSettings = exports.SvgInfo = void 0;
-var _Svg = _interopRequireDefault(require("./Svg"));
+var _Svg = require("./Svg");
 var _jsxRuntime = require("react/jsx-runtime");
 const SvgIcon = _ref => {
   let {
@@ -12,11 +11,11 @@ const SvgIcon = _ref => {
     size = '24',
     children
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.Svg, {
     w: size,
     style: style,
     stroke: color,
-    fill: "none",
+    fill: _Svg.FILL_NONE,
     strokeWidth: "2",
     strokeLinecap: "round",
     strokeLinejoin: "round",

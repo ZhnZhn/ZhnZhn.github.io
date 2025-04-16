@@ -1,5 +1,5 @@
-import Svg from './svg/Svg';
-import { PathCheckIn } from './svg/Path'
+import { Svg } from './svg/Svg';
+import { PathCheckIn } from './svg/Path';
 
 const CL_CHECK_IN = "check-in";
 

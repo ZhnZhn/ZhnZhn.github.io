@@ -1,6 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
@@ -8,8 +7,7 @@ var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useProperty = require("../hooks/useProperty");
 var _fUseKey = require("../hooks/fUseKey");
-var _Color = require("../styles/Color");
-var _Svg = _interopRequireDefault(require("./svg/Svg100"));
+var _Svg = require("./svg/Svg");
 var _Path = require("./svg/Path");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_CHB = 'chb',
@@ -60,7 +58,7 @@ const SvgCheckBox = props => {
     /*eslint-enable react-hooks/exhaustive-deps */,
     _hKeyDown = (0, _fUseKey.useKeyEnter)(_hToggle, [_hToggle]),
     _className = _value ? className : void 0,
-    [_restStroke, _restFill] = _className ? [] : _value ? [color || C_GREY, color || _Color.TRANSPARENT_COLOR] : [C_GREY, _Color.TRANSPARENT_COLOR];
+    [_restStroke, _restFill] = _className ? [] : _value ? [color || C_GREY, color || _Svg.FILL_NONE] : [C_GREY, _Svg.FILL_NONE];
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ..._crAriaLabelledByProp(props),
     role: "checkbox",
@@ -70,7 +68,7 @@ const SvgCheckBox = props => {
     style: style,
     onClick: _hToggle,
     onKeyDown: _hKeyDown,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Svg.default, {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Svg.Svg100, {
       w: "16",
       style: S_SVG,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("rect", {
