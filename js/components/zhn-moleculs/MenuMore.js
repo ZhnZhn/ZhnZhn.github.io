@@ -3,15 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
 var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_MENU_MORE = 'popup-menu dialog__menu-more el-b',
-  S_BT_MORE = {
-    position: 'absolute',
-    top: 1,
-    left: 2
-  };
+  S_BT_MORE = (0, _styleFn.crAbsoluteTopLeftStyle)(1, 2);
 const MenuMore = _ref => {
   let {
     refEl,

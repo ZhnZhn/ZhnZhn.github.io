@@ -2,11 +2,10 @@
 
 exports.__esModule = true;
 exports.S_MODAL_MENU = void 0;
+var _styleFn = require("../styleFn");
 const S_MODAL_MENU = exports.S_MODAL_MENU = {
-  position: 'absolute',
+  ...(0, _styleFn.crAbsoluteTopLeftStyle)(30, -5),
   zIndex: 1010,
-  top: 30,
-  left: -5,
   backgroundColor: 'inherit',
   stroke: 'inherit',
   borderRadius: 5,

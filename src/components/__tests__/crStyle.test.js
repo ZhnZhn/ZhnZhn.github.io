@@ -1,6 +1,7 @@
 import {
   crStyle2,
-  crStyle3
+  crStyle3,
+  crAbsoluteTopLeftStyle
 } from '../styleFn';
 
 describe('crStyle2',()=>{
@@ -46,5 +47,33 @@ describe('crStyle3',()=>{
     expect(fn(_s1, null && _s2, void 0 && _s3)).toBe(_s1)
     expect(fn(_s1, '' && _s2, 0 && _s3)).toBe(_s1)
     expect(fn(_s1, NaN && _s2, -0 && _s3)).toBe(_s1)
+  })
+})
+
+describe('crAbsoluteTopLeftStyle', ()=>{
+  const fn = crAbsoluteTopLeftStyle;
+  test('should return aabsolute top let style', ()=>{
+    expect(fn(0, 5)).toEqual({
+      position: 'absolute',
+      top: 0,
+      left: 5
+    })
+  })
+  test('should use case arguments isRight, isBottom', ()=>{
+    expect(fn(0, 5, !0)).toEqual({
+      position: 'absolute',
+      top: 0,
+      right: 5
+    })
+    expect(fn(0, 5, !1, !0)).toEqual({
+      position: 'absolute',
+      bottom: 0,
+      left: 5
+    })
+    expect(fn(0, 5, !0, !0)).toEqual({
+      position: 'absolute',
+      bottom: 0,
+      right: 5
+    })
   })
 })

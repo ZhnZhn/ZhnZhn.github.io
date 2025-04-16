@@ -3,16 +3,15 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
-var _useFocus = require("../hooks/useFocus");
 var _dateFn = require("../../utils/dateFn");
+var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
+var _useFocus = require("../hooks/useFocus");
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _DivCompareTo = _interopRequireDefault(require("../items/DivCompareTo"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_MODAL_POPUP = {
-  position: 'absolute',
-  top: 38,
-  left: 6,
+  ...(0, _styleFn.crAbsoluteTopLeftStyle)(38, 6),
   zIndex: 20,
   width: 'auto',
   padding: '5px 10px 12px 10px',
@@ -33,7 +32,7 @@ const ModalCompareTo = _ref => {
     _onEnterDateTo = (0, _uiApi.useCallback)(dateTo => {
       if ((0, _dateFn.isDmy)(dateTo)) {
         const _r = onCompareTo(dateTo),
-          _msgErr = _r !== 0 ? "No " + _r + " data for " + dateTo : '';
+          _msgErr = _r !== 0 ? `No ${_r} data for ${dateTo}` : '';
         setMsgErr(_msgErr);
       }
     }, [onCompareTo]);

@@ -4,16 +4,15 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useProperty = require("../hooks/useProperty");
 var _useStoreState = _interopRequireDefault(require("../hooks/useStoreState"));
 var _compStore = require("../../flux/stores/compStore");
 var _DialogContainerFn = require("./DialogContainerFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROOT = {
-  zIndex: 1030,
-  position: 'absolute',
-  top: 70,
-  left: 10
+  ...(0, _styleFn.crAbsoluteTopLeftStyle)(70, 10),
+  zIndex: 1030
 };
 const fUpdateState = maxDialog => (msShowDialog, setState) => {
   const _hToTopLayer = key => {

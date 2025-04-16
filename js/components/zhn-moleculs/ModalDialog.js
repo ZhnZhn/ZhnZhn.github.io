@@ -17,10 +17,8 @@ var _jsxRuntime = require("react/jsx-runtime");
 const CL_MODAL_DIALOG = (0, _styleFn.crDialogCn)('modal-dialog'),
   S_ROOT_DIV_MODAL = {
     ..._Dialog.S_ROOT_DIV,
+    ...(0, _styleFn.crAbsoluteTopLeftStyle)('20%', '50%'),
     display: 'block',
-    position: 'absolute',
-    top: '20%',
-    left: '50%',
     width: 380,
     marginLeft: -190,
     zIndex: 10

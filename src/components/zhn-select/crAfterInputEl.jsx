@@ -1,4 +1,9 @@
 import { joinByBlank } from '../../utils/arrFn';
+
+import {
+  crAbsoluteTopLeftStyle
+} from '../styleFn';
+
 import { BtSvgClear } from '../zhn/BtSvgX';
 import ButtonCircle2 from '../zhn/ButtonCircle2';
 import ArrowCell from './ArrowCell';
@@ -9,9 +14,7 @@ import {
 } from './CL';
 
 const S_SVG_CLEAR = {
-  position: 'absolute',
-  top: 5,
-  right: 8,
+  ...crAbsoluteTopLeftStyle(5, 8, !0),  
   stroke: '#1b75bb'
 };
 

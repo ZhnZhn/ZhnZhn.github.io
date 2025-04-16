@@ -1,18 +1,24 @@
 import {
+  isDmy
+} from '../../utils/dateFn';
+
+import {
   useState,
   useCallback
 } from '../uiApi';
 
-import { useRefFocusIf } from '../hooks/useFocus';
-import { isDmy } from '../../utils/dateFn';
+import {
+  crAbsoluteTopLeftStyle
+} from '../styleFn';
+import {
+  useRefFocusIf
+} from '../hooks/useFocus';
 
 import ModalPopup from '../zhn-moleculs/ModalPopup';
 import DivCompareTo from '../items/DivCompareTo';
 
 const S_MODAL_POPUP = {
-  position: 'absolute',
-  top: 38,
-  left: 6,
+  ...crAbsoluteTopLeftStyle(38, 6),
   zIndex : 20,
   width: 'auto',
   padding: '5px 10px 12px 10px',

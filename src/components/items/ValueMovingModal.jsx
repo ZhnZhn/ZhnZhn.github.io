@@ -3,16 +3,20 @@ import {
   isFn
 } from '../../utils/isTypeFn';
 
+import formatAllNumber from '../../utils/formatAllNumber';
+
 import {
   useState,
   useRef,
   useCallback,
-  useEffect,  
+  useEffect,
   isInputValid,
   focusRefElement
 } from '../uiApi';
 
-import formatAllNumber from '../../utils/formatAllNumber';
+import {
+  crAbsoluteTopLeftStyle
+} from '../styleFn';
 
 import ModalPopup from '../zhn-moleculs/ModalPopup';
 import {
@@ -22,9 +26,7 @@ import {
 import DivCompareTo from './DivCompareTo';
 
 const S_MODAL_POPUP = {
-  position: 'absolute',
-  top: 30,
-  left: 0,
+  ...crAbsoluteTopLeftStyle(30, 0),  
   zIndex: 20,
   width: 'auto',
   backgroundColor: 'inherit',

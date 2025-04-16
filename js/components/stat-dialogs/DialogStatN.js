@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _has = require("../has");
+var _styleFn = require("../styleFn");
 var _ChartOptionsFn = require("../dialogs/ChartOptionsFn");
 var _FocusFirstCombobox = _interopRequireDefault(require("../zhn-moleculs/FocusFirstCombobox"));
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
@@ -26,9 +27,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.",
   MSG_DIMS_LOADING = "Dims is loading",
   S_SPINNER = {
-    position: 'absolute',
-    top: 80,
-    left: '45%',
+    ...(0, _styleFn.crAbsoluteTopLeftStyle)(80, '45%'),
     width: 32,
     height: 32,
     zIndex: 8

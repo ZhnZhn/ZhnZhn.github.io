@@ -1,4 +1,13 @@
-import { isFn, safeMap, bindTo } from '../uiApi';
+import {
+  isFn,
+  safeMap,
+  bindTo
+} from '../uiApi';
+
+import {
+  S_INLINE,
+  crAbsoluteTopLeftStyle
+} from '../styleFn';
 
 import SvgCheckIn from '../zhn/SvgCheckIn';
 import MenuAriaItem from './MenuAriaItem';
@@ -9,10 +18,8 @@ const SUB_MENU = 'sub'
   position: 'relative'
 }
 , S_NEXT_PAGE = {
-  display: 'inline-block',
-  position: 'absolute',
-  top: 0,
-  right: 4,
+  ...S_INLINE,  
+  ...crAbsoluteTopLeftStyle(0, 4, !0),
   color: 'inherit',
   padding: '1px 16px 1px 0px',
   fontWeight: 'bold'

@@ -4,6 +4,10 @@ import {
   crObjWithNullPrototype
 } from '../uiApi';
 
+import {
+  crAbsoluteTopLeftStyle
+} from '../styleFn';
+
 import { useRefInit } from '../hooks/useProperty';
 import useStoreState from '../hooks/useStoreState';
 
@@ -20,10 +24,8 @@ import {
 } from './DialogContainerFn';
 
 const S_ROOT = {
-  zIndex: 1030,
-  position: 'absolute',
-  top: 70,
-  left: 10
+  ...crAbsoluteTopLeftStyle(70, 10),
+  zIndex: 1030  
 };
 
 const fUpdateState = maxDialog => (

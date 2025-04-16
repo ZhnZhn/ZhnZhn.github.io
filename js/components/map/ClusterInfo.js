@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useToggle = require("../hooks/useToggle");
 var _fUseKey = require("../hooks/fUseKey");
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
@@ -34,9 +35,7 @@ const S_CAPTION = {
     opacity: 0.7
   },
   S_CAPTION_BT = {
-    position: 'absolute',
-    top: 4,
-    right: 8,
+    ...(0, _styleFn.crAbsoluteTopLeftStyle)(4, 8, !0),
     fontSize: '18px',
     fontWeight: 'bold',
     cursor: 'pointer'

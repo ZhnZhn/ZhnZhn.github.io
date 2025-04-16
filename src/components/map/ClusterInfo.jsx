@@ -1,5 +1,7 @@
 //import PropTypes from 'prop-types'
 import { useRef } from '../uiApi';
+import { crAbsoluteTopLeftStyle } from '../styleFn';
+
 import { useToggle } from '../hooks/useToggle';
 import { useKeyEnter } from '../hooks/fUseKey';
 
@@ -27,9 +29,7 @@ const S_CAPTION = {
   opacity: 0.7
 },
 S_CAPTION_BT = {
-  position: 'absolute',
-  top: 4,
-  right: 8,
+  ...crAbsoluteTopLeftStyle(4, 8, !0),  
   fontSize: '18px',
   fontWeight: 'bold',
   cursor: 'pointer'

@@ -55,9 +55,7 @@ const crNaNStyle = () => ({
 });
 exports.crNaNStyle = crNaNStyle;
 const S_MENU_MORE = exports.S_MENU_MORE = {
-  position: 'absolute',
-  top: 36,
-  left: 0,
+  ...(0, _styleFn.crAbsoluteTopLeftStyle)(36, 0),
   zIndex: 1010,
   backgroundColor: 'inherit',
   padding: '4px 12px 6px',

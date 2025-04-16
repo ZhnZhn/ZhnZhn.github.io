@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _SvgCheckIn = _interopRequireDefault(require("../zhn/SvgCheckIn"));
 var _MenuAriaItem = _interopRequireDefault(require("./MenuAriaItem"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -13,10 +14,8 @@ const SUB_MENU = 'sub',
     position: 'relative'
   },
   S_NEXT_PAGE = {
-    display: 'inline-block',
-    position: 'absolute',
-    top: 0,
-    right: 4,
+    ..._styleFn.S_INLINE,
+    ...(0, _styleFn.crAbsoluteTopLeftStyle)(0, 4, !0),
     color: 'inherit',
     padding: '1px 16px 1px 0px',
     fontWeight: 'bold'

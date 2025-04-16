@@ -1,12 +1,9 @@
+import { crAbsoluteTopLeftStyle } from '../styleFn';
 import MenuAriaItem from './MenuAriaItem';
 
 const S_ITEM = { position: 'relative' }
-, S_PREV_PAGE = {
-  position: 'absolute',
-  top: 0,
-  left: 16
-}
-, S_TITLE = { paddingLeft: 22 };
+, S_PREV_PAGE = crAbsoluteTopLeftStyle(0, 16)
+  , S_TITLE = { paddingLeft: 22 };
 
 const MenuTitle = ({
   refEl,

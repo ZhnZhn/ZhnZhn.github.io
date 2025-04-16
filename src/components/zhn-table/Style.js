@@ -1,5 +1,9 @@
 export { CL_BLACK, getColorBlack } from '../styleFn';
-import { getColorBlack } from '../styleFn';
+
+import {
+  getColorBlack,
+  crAbsoluteTopLeftStyle
+} from '../styleFn';
 
 export const TOKEN_NAN = '―'
 export const CL_LINK = "native-link"
@@ -44,9 +48,7 @@ export const crNaNStyle = () => ({
 })
 
 export const S_MENU_MORE = {
-  position: 'absolute',
-  top: 36,
-  left: 0,
+  ...crAbsoluteTopLeftStyle(36, 0),  
   zIndex: 1010,
   backgroundColor: 'inherit',
   padding: '4px 12px 6px',

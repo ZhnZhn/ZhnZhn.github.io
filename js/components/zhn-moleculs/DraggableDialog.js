@@ -17,9 +17,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 const CL_DRAGGABLE_DIALOG = (0, _styleFn.crDialogCn)("draggable-dialog"),
   S_DIALOG_DIV = {
     ..._Dialog.S_ROOT_DIV,
-    position: 'absolute',
-    top: 30,
-    left: 50,
+    ...(0, _styleFn.crAbsoluteTopLeftStyle)(30, 50),
     zIndex: 10
   };
 const CommandButtons = _ref => {

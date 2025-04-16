@@ -3,16 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _MenuAriaItem = _interopRequireDefault(require("./MenuAriaItem"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ITEM = {
     position: 'relative'
   },
-  S_PREV_PAGE = {
-    position: 'absolute',
-    top: 0,
-    left: 16
-  },
+  S_PREV_PAGE = (0, _styleFn.crAbsoluteTopLeftStyle)(0, 16),
   S_TITLE = {
     paddingLeft: 22
   };

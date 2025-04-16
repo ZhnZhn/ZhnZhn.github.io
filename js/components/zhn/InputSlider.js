@@ -3,10 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
-var _useBool = require("../hooks/useBool");
-var _has = require("../has");
 var _mathFn = require("../../math/mathFn");
+var _uiApi = require("../uiApi");
+var _has = require("../has");
+var _styleFn = require("../styleFn");
+var _useBool = require("../hooks/useBool");
 var _CircleInner = _interopRequireDefault(require("./CircleInner"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -20,15 +21,12 @@ const S_ROOT = {
     cursor: 'default'
   },
   S_ROOT_LINE = {
-    position: 'absolute',
-    top: 8,
-    left: 0,
+    ...(0, _styleFn.crAbsoluteTopLeftStyle)(8, 0),
     width: '100%',
     height: 2
   },
   S_LINE_BEFORE = {
-    position: 'absolute',
-    left: 0,
+    ...(0, _styleFn.crAbsoluteTopLeftStyle)(0, 0),
     width: 'calc(15%)',
     height: '100%',
     marginRight: 6,
@@ -36,8 +34,7 @@ const S_ROOT = {
     transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
   },
   S_LINE_AFTER = {
-    position: 'absolute',
-    right: 0,
+    ...(0, _styleFn.crAbsoluteTopLeftStyle)(0, 0, !0),
     width: 'calc(85%)',
     height: '100%',
     marginLeft: 6,
@@ -49,11 +46,8 @@ const S_ROOT = {
     backgroundColor: '#9e9e9e'
   },
   S_ROOT_CIRCLE = {
-    boxSizing: 'border-box',
+    ...(0, _styleFn.crAbsoluteTopLeftStyle)(0, '15%'),
     zIndex: '1',
-    position: 'absolute',
-    top: 0,
-    left: '15%',
     width: 12,
     height: 12,
     cursor: 'pointer',
@@ -98,7 +92,7 @@ const _isNaN = Number.isNaN,
   _calcValueByKeyCode = (value, step, keyCode) => _isUp(keyCode) ? value + step : _isDown(keyCode) ? value - step : void 0,
   _isNumber = n => typeof n === 'number' && n - n === 0,
   _getRefValue = ref => ref.current;
-const _useMouseDown = setValueFromPosition => {
+const useMouseDown = setValueFromPosition => {
   const [isDragged, setDraggedTrue, setDraggedFalse] = (0, _useBool.useBool)(false),
     _refDragRunning = (0, _uiApi.useRef)(false),
     _hDragMouseMove = event => {
@@ -173,7 +167,7 @@ const InputSlider = _ref => {
         _updateValue(v);
       }
     },
-    [isDragged, _hMouseDown] = _useMouseDown(_setValueFromPosition);
+    [isDragged, _hMouseDown] = useMouseDown(_setValueFromPosition);
   const [_sliderHandlers, _btHandlers] = _has.HAS_TOUCH_EVENTS ? [{
       onTouchStart: _hMouseDown
     }, void 0] : [{

@@ -8,7 +8,8 @@ import { crDialogRole } from '../a11yFn';
 import {
   CL_TOGGLE_ARROW,
   crDialogCn,
-  crShowHide
+  crShowHide,
+  crAbsoluteTopLeftStyle
 } from '../styleFn';
 
 import { useKeyEscape } from '../hooks/fUseKey';
@@ -27,9 +28,7 @@ import {
 const CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
 , S_DIALOG_DIV = {
   ...S_ROOT_DIV,
-  position: 'absolute',
-  top: 30,
-  left: 50,
+  ...crAbsoluteTopLeftStyle(30, 50),  
   zIndex: 10
 };
 

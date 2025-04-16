@@ -4,15 +4,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _arrFn = require("../../utils/arrFn");
+var _styleFn = require("../styleFn");
 var _BtSvgX = require("../zhn/BtSvgX");
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle2"));
 var _ArrowCell = _interopRequireDefault(require("./ArrowCell"));
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_SVG_CLEAR = {
-  position: 'absolute',
-  top: 5,
-  right: 8,
+  ...(0, _styleFn.crAbsoluteTopLeftStyle)(5, 8, !0),
   stroke: '#1b75bb'
 };
 const _crNumberOfOptionsToken = propsOptions => {

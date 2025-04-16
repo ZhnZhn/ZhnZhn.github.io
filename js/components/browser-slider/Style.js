@@ -18,11 +18,7 @@ const S_TITLE = exports.S_TITLE = {
   padding: '8px 0 4px 32px',
   cursor: 'pointer'
 };
-const S_TITLE_ARROW = exports.S_TITLE_ARROW = {
-  position: 'absolute',
-  top: 8,
-  left: 16
-};
+const S_TITLE_ARROW = exports.S_TITLE_ARROW = (0, _styleFn.crAbsoluteTopLeftStyle)(8, 16);
 const _CL_MENU_ITEM_BLACK = `${CL_MENU_ITEM} ${_styleFn.CL_BLACK}`,
   _S_ITEM_T = {
     padding: 8,

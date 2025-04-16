@@ -3,10 +3,12 @@ import {
   useCallback
 } from '../uiApi';
 
+import {
+  crAbsoluteTopLeftStyle
+} from '../styleFn';
+
 const S_DATA_SOURCE = {
-  position: 'absolute',
-  left: 5,
-  bottom: 0,
+  ...crAbsoluteTopLeftStyle(0, 5, !1, !0),
   color: '#909090',
   fontSize: '11px'
 };

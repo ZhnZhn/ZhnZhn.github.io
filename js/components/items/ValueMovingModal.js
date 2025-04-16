@@ -4,16 +4,15 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
-var _uiApi = require("../uiApi");
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
+var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _SpanToken = require("../zhn/SpanToken");
 var _DivCompareTo = _interopRequireDefault(require("./DivCompareTo"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_MODAL_POPUP = {
-    position: 'absolute',
-    top: 30,
-    left: 0,
+    ...(0, _styleFn.crAbsoluteTopLeftStyle)(30, 0),
     zIndex: 20,
     width: 'auto',
     backgroundColor: 'inherit',

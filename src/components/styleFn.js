@@ -86,6 +86,17 @@ export const S_OPEN_CLOSE_LEVEL_2 = {
   borderLeft: `solid 2px var(--btf-c)`
 }
 
+export const crAbsoluteTopLeftStyle = (
+  top,
+  left,
+  isRight,
+  isBottom
+) => ({
+  position: 'absolute',
+  [isBottom ? 'bottom' : 'top']: top,
+  [isRight ? 'right': 'left']: left
+})
+
 export const crColorStyle = (color) => ({
   color
 })

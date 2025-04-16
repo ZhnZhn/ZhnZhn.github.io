@@ -1,9 +1,8 @@
+import { crAbsoluteTopLeftStyle } from '../styleFn';
 
 export const S_MODAL_MENU = {
-  position: 'absolute',
+  ...crAbsoluteTopLeftStyle(30, -5),
   zIndex: 1010,
-  top: 30,
-  left: -5,
   backgroundColor: 'inherit',
   stroke: 'inherit',
   borderRadius: 5,

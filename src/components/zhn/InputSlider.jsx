@@ -1,13 +1,16 @@
 //import PropTypes from "prop-types";
+import { roundBy } from '../../math/mathFn';
+
 import {
   useRef,
   useState,
   getClientX
 } from '../uiApi';
 
-import { useBool } from '../hooks/useBool';
 import { HAS_TOUCH_EVENTS } from '../has';
-import { roundBy } from '../../math/mathFn';
+import { crAbsoluteTopLeftStyle } from '../styleFn';
+
+import { useBool } from '../hooks/useBool';
 
 import CircleInner from './CircleInner';
 
@@ -20,15 +23,12 @@ const S_ROOT = {
   cursor: 'default'
 },
 S_ROOT_LINE = {
-  position: 'absolute',
-  top: 8,
-  left: 0,
+  ...crAbsoluteTopLeftStyle(8, 0),
   width: '100%',
   height: 2
 },
 S_LINE_BEFORE = {
-  position: 'absolute',
-  left: 0,
+  ...crAbsoluteTopLeftStyle(0, 0),
   width: 'calc(15%)',
   height: '100%',
   marginRight: 6,
@@ -36,8 +36,7 @@ S_LINE_BEFORE = {
   transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
 },
 S_LINE_AFTER = {
-  position: 'absolute',
-  right: 0,
+  ...crAbsoluteTopLeftStyle(0, 0, !0),
   width: 'calc(85%)',
   height: '100%',
   marginLeft: 6,
@@ -49,11 +48,8 @@ S_LINE_AFTER_HOVERED = {
   backgroundColor: '#9e9e9e',
 },
 S_ROOT_CIRCLE = {
-  boxSizing: 'border-box',
+  ...crAbsoluteTopLeftStyle(0, '15%'),
   zIndex: '1',
-  position: 'absolute',
-  top: 0,
-  left: '15%',
   width: 12,
   height: 12,
   cursor: 'pointer',
@@ -107,7 +103,7 @@ const _isNaN = Number.isNaN
 , _isNumber = n => typeof n === 'number' && n-n === 0
 , _getRefValue = ref => ref.current;
 
-const _useMouseDown = (setValueFromPosition) => {
+const useMouseDown = (setValueFromPosition) => {
   const [isDragged, setDraggedTrue, setDraggedFalse] = useBool(false)
   , _refDragRunning = useRef(false)
   , _hDragMouseMove = (event) => {
@@ -185,7 +181,7 @@ const InputSlider = ({
       _updateValue(v)
     }
   }
-  , [isDragged, _hMouseDown] = _useMouseDown(_setValueFromPosition);
+  , [isDragged, _hMouseDown] = useMouseDown(_setValueFromPosition);
 
   const [_sliderHandlers, _btHandlers] = HAS_TOUCH_EVENTS
      ? [{onTouchStart: _hMouseDown}, void 0]

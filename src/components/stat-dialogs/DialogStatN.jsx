@@ -7,6 +7,8 @@ import {
 } from '../uiApi';
 
 import { isWideWidth } from '../has';
+import { crAbsoluteTopLeftStyle } from '../styleFn';
+
 import { isCategoryItem } from '../dialogs/ChartOptionsFn';
 
 import FocusFirstCombobox from '../zhn-moleculs/FocusFirstCombobox';
@@ -34,9 +36,7 @@ import { GEO_ENTITY } from './dimensions/EsConfig';
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again."
 , MSG_DIMS_LOADING = "Dims is loading"
 , S_SPINNER = {
-  position: 'absolute',
-  top: 80,
-  left: '45%',
+  ...crAbsoluteTopLeftStyle(80, '45%'),  
   width: 32,
   height: 32,
   zIndex: 8
