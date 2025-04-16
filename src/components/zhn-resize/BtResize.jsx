@@ -1,10 +1,13 @@
 import {
+  crNotSelectedCn
+} from '../styleFn';
+import {
   FILL_NONE,
   Svg100,
   STROKE_LINECAP_ROUND_PROPS
 } from '../zhn/svg/Svg';
 
-const CL_BT_RESIZE = "bt-resize not-selected";
+const CL_BT_RESIZE = crNotSelectedCn("bt-resize");
 
 const BtResize = ({
   style,
@@ -26,7 +29,7 @@ const BtResize = ({
   >
      <Svg100
        w="12"
-       {...STROKE_LINECAP_ROUND_PROPS}       
+       {...STROKE_LINECAP_ROUND_PROPS}
        fill={FILL_NONE}
      >
         <path d="M 1,6 L 11,6" />

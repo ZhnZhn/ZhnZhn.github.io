@@ -6,7 +6,7 @@ exports.default = void 0;
 var _styleFn = require("../styleFn");
 var _Button = _interopRequireDefault(require("./Button"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_BT_TAB = "not-selected bt bt-tab",
+const CL_BT_TAB = (0, _styleFn.crNotSelectedCn)("bt bt-tab"),
   CL_ARROW_DOWN = "arrow-down";
 const ButtonTab = _ref => {
   let {

@@ -39,16 +39,16 @@ export const CL_WIDTH_100_PERCENT = "w-100"
 export const crFs18Cn = _fCrCn("fs-18")
 export const crBold16Cn = _fCrCn("bold-16")
 export const crWithScrollCn = _fCrCn("with-scroll")
+export const crNotSelectedCn = _fCrCn(CL_NOT_SELECTED)
 
-export const crCnNotSelected = _fCrCn(CL_NOT_SELECTED)
 const _fCrCnNotSelected = (
   className1
 ) => (
   className2
-) => crCnNotSelected(`${className2} ${className1}`);
+) => crNotSelectedCn(`${className2} ${className1}`);
 
 const _crMenuItemCn = _fCrCn("menuitem");
-const _crNotSelectedBold16MenuItemCn = className => crCnNotSelected(
+const _crNotSelectedBold16MenuItemCn = className => crNotSelectedCn(
   crBold16Cn(_crMenuItemCn(className))
 );
 export const CL_ROW_TOPIC = _crNotSelectedBold16MenuItemCn("row__topic");

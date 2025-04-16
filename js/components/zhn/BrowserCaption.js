@@ -13,8 +13,8 @@ var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
 const CL_TEXT_CLIP = 'text-clip',
-  CL_BR_CAPTION = (0, _styleFn.crElementCn)("br-caption " + CL_TEXT_CLIP + " gap-right"),
-  CL_CAPTION = "not-selected " + CL_TEXT_CLIP,
+  CL_BR_CAPTION = (0, _styleFn.crElementCn)(`br-caption ${CL_TEXT_CLIP} gap-right`),
+  CL_CAPTION = (0, _styleFn.crNotSelectedCn)(CL_TEXT_CLIP),
   S_CAPTION = {
     paddingRight: 8,
     fontSize: '18px',

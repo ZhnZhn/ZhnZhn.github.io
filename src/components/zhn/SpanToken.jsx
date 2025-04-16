@@ -1,7 +1,7 @@
 import {
   CL_BLACK,
   S_INLINE,
-  crCnNotSelected,
+  crNotSelectedCn,
   crBoldCn,
   crBold16Cn,
   crFs18Cn
@@ -33,7 +33,7 @@ export const SpanValue = _fSpanToken(_crVmTokenCn("sp-value"))
 export const SpanMove = _fSpanToken(_crVmTokenCn())
 export const SpanDate = _fSpanToken(_crVmTokenCn("sp-date"))
 
-const CL_SP_LABEL = crCnNotSelected("sp-label");
+const CL_SP_LABEL = crNotSelectedCn("sp-label");
 export const SpanLabel = _fSpanToken(crBoldCn(CL_SP_LABEL))
 export const CL_SP_INPUT_LABEL = `${CL_SP_LABEL} sp-input`
 export const SpanInputLabel = _fSpanToken(crBoldCn(CL_SP_INPUT_LABEL))

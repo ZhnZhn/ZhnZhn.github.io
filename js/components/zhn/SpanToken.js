@@ -22,7 +22,7 @@ const _crVmTokenCn = _has.HAS_WIDE_SCREEN ? _styleFn.crFs18Cn : _styleFn.crBold1
 const SpanValue = exports.SpanValue = _fSpanToken(_crVmTokenCn("sp-value"));
 const SpanMove = exports.SpanMove = _fSpanToken(_crVmTokenCn());
 const SpanDate = exports.SpanDate = _fSpanToken(_crVmTokenCn("sp-date"));
-const CL_SP_LABEL = (0, _styleFn.crCnNotSelected)("sp-label");
+const CL_SP_LABEL = (0, _styleFn.crNotSelectedCn)("sp-label");
 const SpanLabel = exports.SpanLabel = _fSpanToken((0, _styleFn.crBoldCn)(CL_SP_LABEL));
 const CL_SP_INPUT_LABEL = exports.CL_SP_INPUT_LABEL = `${CL_SP_LABEL} sp-input`;
 const SpanInputLabel = exports.SpanInputLabel = _fSpanToken((0, _styleFn.crBoldCn)(CL_SP_INPUT_LABEL));

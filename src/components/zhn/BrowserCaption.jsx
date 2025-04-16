@@ -1,6 +1,9 @@
 //import PropTypes from "prop-types";
 import { isFn, useId } from '../uiApi';
-import { crElementCn } from '../styleFn';
+import {
+  crElementCn,
+  crNotSelectedCn
+} from '../styleFn';
 
 import { GREEN_COLOR } from '../styles/Color';
 
@@ -10,7 +13,7 @@ import { BtSvgClose } from './BtSvgX';
 
 const CL_TEXT_CLIP = 'text-clip'
 , CL_BR_CAPTION = crElementCn(`br-caption ${CL_TEXT_CLIP} gap-right`)
-, CL_CAPTION = `not-selected ${CL_TEXT_CLIP}`
+, CL_CAPTION = crNotSelectedCn(CL_TEXT_CLIP)
 
 , S_CAPTION = {
   paddingRight: 8,

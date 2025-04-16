@@ -1,8 +1,11 @@
-import { crCn } from '../styleFn';
+import {
+  crCn,
+  crNotSelectedCn
+} from '../styleFn';
 
 import Button from './Button';
 
-const CL_BT_TAB = "not-selected bt bt-tab"
+const CL_BT_TAB = crNotSelectedCn("bt bt-tab")
 , CL_ARROW_DOWN = "arrow-down";
 
 const ButtonTab = ({

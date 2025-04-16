@@ -2,9 +2,10 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _Svg = require("../zhn/svg/Svg");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_BT_RESIZE = "bt-resize not-selected";
+const CL_BT_RESIZE = (0, _styleFn.crNotSelectedCn)("bt-resize");
 const BtResize = _ref => {
   let {
     style,
