@@ -3,7 +3,7 @@ import {
   isStr
 } from '../../utils/isTypeFn';
 
-import {  
+import {
   assign,
   crError
 } from '../AdapterFn';
@@ -13,7 +13,8 @@ import { isAggregateByHs } from './fnAdapter';
 
 const API_URL = 'https://comtradeapi.un.org/public/v1/preview/C'
 , DF_RG = 'X'
-, DF_MEASURE = 'primaryValue';
+, DF_MEASURE = 'primaryValue'
+, PARTNER_2_CODE_WORLD_QUERY = "partner2Code=0";
 
 const _checkReq = (option) => {
   if (option._isTs) {
@@ -25,7 +26,7 @@ const _crReporterCodeQuery = (
   reporterCode
 ) => reporterCode === WORLD_CODE
   ? ''
-  : `&reporterCode=${reporterCode}`;
+  : `&reporterCode=${reporterCode}&${PARTNER_2_CODE_WORLD_QUERY}`;
 
 const _crCategoryByPartnerUrl = (
   proxy,
@@ -39,7 +40,7 @@ const _crAggregateOrWorldPatnerQuery = (
   option,
   one
 ) => isAggregateByHs(option) || one === WORLD_CODE
-  ? '&partnerCode=0&partner2Code=0'
+  ? `&partnerCode=0&${PARTNER_2_CODE_WORLD_QUERY}`
   : '';
 
 const UnComtradeApi = {

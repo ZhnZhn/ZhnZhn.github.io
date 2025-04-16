@@ -8,15 +8,16 @@ var _conf = require("./conf");
 var _fnAdapter = require("./fnAdapter");
 const API_URL = 'https://comtradeapi.un.org/public/v1/preview/C',
   DF_RG = 'X',
-  DF_MEASURE = 'primaryValue';
+  DF_MEASURE = 'primaryValue',
+  PARTNER_2_CODE_WORLD_QUERY = "partner2Code=0";
 const _checkReq = option => {
   if (option._isTs) {
     throw new Error('ERR_10');
   }
 };
-const _crReporterCodeQuery = reporterCode => reporterCode === _conf.WORLD_CODE ? '' : `&reporterCode=${reporterCode}`;
+const _crReporterCodeQuery = reporterCode => reporterCode === _conf.WORLD_CODE ? '' : `&reporterCode=${reporterCode}&${PARTNER_2_CODE_WORLD_QUERY}`;
 const _crCategoryByPartnerUrl = (proxy, reporterCode, cmdCode, flowCode, time) => `${proxy}${API_URL}/A/HS/?motCode=0&customsCode=C00&cmdCode=${cmdCode}&flowCode=${flowCode}&period=${time}${_crReporterCodeQuery(reporterCode)}`;
-const _crAggregateOrWorldPatnerQuery = (option, one) => (0, _fnAdapter.isAggregateByHs)(option) || one === _conf.WORLD_CODE ? '&partnerCode=0&partner2Code=0' : '';
+const _crAggregateOrWorldPatnerQuery = (option, one) => (0, _fnAdapter.isAggregateByHs)(option) || one === _conf.WORLD_CODE ? `&partnerCode=0&${PARTNER_2_CODE_WORLD_QUERY}` : '';
 const UnComtradeApi = {
   getRequestUrl(option) {
     _checkReq(option);
