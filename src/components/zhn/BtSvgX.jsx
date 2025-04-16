@@ -1,7 +1,11 @@
 import { crBtSvgCn } from '../styleFn';
 
-import SvgX from './svg/SvgX';
+import {
+  Svg100,
+  STROKE_LINECAP_ROUND_PROPS
+} from './svg/Svg';
 
+const S_SVG_X = { padding: 3 };
 const _fCrBtSvgX = (
   className,
   dfAriaLabel,
@@ -18,7 +22,14 @@ const _fCrBtSvgX = (
     style={props.style}
     onClick={props.onClick}
   >
-    <SvgX />
+    <Svg100
+      w="12"
+      style={S_SVG_X}
+      {...STROKE_LINECAP_ROUND_PROPS}
+     >
+       <path d="M 0,0 L 12,12" />
+       <path d="M 12,0 L 0,12" />
+    </Svg100>
   </button>
 );
 

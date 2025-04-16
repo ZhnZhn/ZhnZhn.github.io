@@ -16,8 +16,7 @@ const CL_BT_SVG_CIRCLE = (0, _styleFn.crBtSvgCn)("circle"),
     onClick: props.onClick,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.Svg, {
       w: "20",
-      strokeWidth: "2",
-      strokeLinecap: "round",
+      ..._Svg.STROKE_LINECAP_ROUND_PROPS,
       children: pathElement
     })
   });

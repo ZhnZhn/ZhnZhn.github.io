@@ -3,7 +3,6 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _Svg = require("./svg/Svg");
-var _Path = require("./svg/Path");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_CHECK_IN = "check-in";
 const SvgCheckIn = _ref => {
@@ -15,7 +14,7 @@ const SvgCheckIn = _ref => {
     className: cn,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.Svg, {
       w: "16",
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Path.PathCheckIn, {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.PathCheckIn, {
         cn: CL_CHECK_IN,
         sw: "3"
       })

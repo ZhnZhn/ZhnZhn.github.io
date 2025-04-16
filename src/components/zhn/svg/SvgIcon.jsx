@@ -1,6 +1,7 @@
 import {
   FILL_NONE,
-  Svg
+  Svg,
+  STROKE_LINECAP_ROUND_PROPS
 } from './Svg';
 
 const SvgIcon = ({
@@ -14,8 +15,7 @@ const SvgIcon = ({
       style={style}
       stroke={color}
       fill={FILL_NONE}
-      strokeWidth="2"
-      strokeLinecap="round"
+      {...STROKE_LINECAP_ROUND_PROPS}      
       strokeLinejoin="round"
     >
       {children}

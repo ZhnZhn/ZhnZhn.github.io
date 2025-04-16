@@ -25,8 +25,7 @@ const BtResize = _ref => {
     onTouchEnd: stopResize,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Svg.Svg100, {
       w: "12",
-      strokeWidth: "2",
-      strokeLinecap: "round",
+      ..._Svg.STROKE_LINECAP_ROUND_PROPS,
       fill: _Svg.FILL_NONE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
         d: "M 1,6 L 11,6"

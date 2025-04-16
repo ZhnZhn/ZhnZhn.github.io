@@ -8,7 +8,6 @@ var _styleFn = require("../styleFn");
 var _useProperty = require("../hooks/useProperty");
 var _fUseKey = require("../hooks/fUseKey");
 var _Svg = require("./svg/Svg");
-var _Path = require("./svg/Path");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_CHB = 'chb',
   CL_CHB_CHECKED = 'chb-checked',
@@ -80,7 +79,7 @@ const SvgCheckBox = props => {
         rx: "3",
         stroke: _restStroke,
         fill: _restFill
-      }), _value ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Path.PathCheckIn, {
+      }), _value ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.PathCheckIn, {
         cn: cnChecked
       }) : null]
     })

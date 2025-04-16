@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.Svg100 = exports.Svg = exports.FILL_NONE = void 0;
+exports.Svg100 = exports.Svg = exports.STROKE_LINECAP_ROUND_PROPS = exports.PathCheckIn = exports.FILL_NONE = void 0;
 var _jsxRuntime = require("react/jsx-runtime");
 const FILL_NONE = exports.FILL_NONE = "none";
 const _crWidthHeightViewBoxProps = (width, height, viewBox) => ({
@@ -39,4 +39,26 @@ const Svg100 = _ref2 => {
   });
 };
 exports.Svg100 = Svg100;
+const _crStrokeLinecapRound = function (sw) {
+  if (sw === void 0) {
+    sw = "2";
+  }
+  return {
+    strokeWidth: sw,
+    strokeLinecap: "round"
+  };
+};
+const STROKE_LINECAP_ROUND_PROPS = exports.STROKE_LINECAP_ROUND_PROPS = _crStrokeLinecapRound();
+const PathCheckIn = _ref3 => {
+  let {
+    cn,
+    sw = "2"
+  } = _ref3;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+    className: cn,
+    d: "M 2,5 L 8,14 M 8,14 L 14,1",
+    ..._crStrokeLinecapRound(sw)
+  });
+};
+exports.PathCheckIn = PathCheckIn;
 //# sourceMappingURL=Svg.js.map

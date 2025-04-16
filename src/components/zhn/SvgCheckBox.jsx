@@ -12,9 +12,9 @@ import { useKeyEnter } from '../hooks/fUseKey';
 
 import {
   FILL_NONE,
-  Svg100
+  Svg100,
+  PathCheckIn
 } from './svg/Svg';
-import { PathCheckIn } from './svg/Path';
 
 const CL_CHB = 'chb'
 , CL_CHB_CHECKED = 'chb-checked'

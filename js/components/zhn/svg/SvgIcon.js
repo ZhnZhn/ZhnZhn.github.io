@@ -16,8 +16,7 @@ const SvgIcon = _ref => {
     style: style,
     stroke: color,
     fill: _Svg.FILL_NONE,
-    strokeWidth: "2",
-    strokeLinecap: "round",
+    ..._Svg.STROKE_LINECAP_ROUND_PROPS,
     strokeLinejoin: "round",
     children: children
   });

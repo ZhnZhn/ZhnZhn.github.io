@@ -2,7 +2,10 @@ import { crAriaLabelProp } from '../a11yFn';
 import { crBtSvgCn } from '../styleFn';
 
 import Button from './Button';
-import { Svg } from './svg/Svg';
+import {
+  Svg,
+  STROKE_LINECAP_ROUND_PROPS
+} from './svg/Svg';
 
 const CL_BT_SVG_CIRCLE = crBtSvgCn("circle")
 , _fBtCircleSvg = (
@@ -17,8 +20,7 @@ const CL_BT_SVG_CIRCLE = crBtSvgCn("circle")
   >
      <Svg
        w="20"
-       strokeWidth="2"
-       strokeLinecap="round"
+       {...STROKE_LINECAP_ROUND_PROPS}       
      >
        {pathElement}
      </Svg>

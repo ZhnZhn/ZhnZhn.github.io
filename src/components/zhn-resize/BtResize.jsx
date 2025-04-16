@@ -1,6 +1,7 @@
 import {
   FILL_NONE,
-  Svg100
+  Svg100,
+  STROKE_LINECAP_ROUND_PROPS
 } from '../zhn/svg/Svg';
 
 const CL_BT_RESIZE = "bt-resize not-selected";
@@ -25,8 +26,7 @@ const BtResize = ({
   >
      <Svg100
        w="12"
-       strokeWidth="2"
-       strokeLinecap="round"
+       {...STROKE_LINECAP_ROUND_PROPS}       
        fill={FILL_NONE}
      >
         <path d="M 1,6 L 11,6" />

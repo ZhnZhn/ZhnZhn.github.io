@@ -41,10 +41,27 @@ export const Svg100 = ({
       "100%",
       "100%",
       `0 0 ${w} ${h}`
-    )}    
+    )}
     preserveAspectRatio="none"
     {...restProps}
   >
     {children}
   </svg>
+)
+
+const _crStrokeLinecapRound = (sw="2") => ({
+  strokeWidth: sw,
+  strokeLinecap: "round"
+});
+export const STROKE_LINECAP_ROUND_PROPS = _crStrokeLinecapRound()
+
+export const PathCheckIn = ({
+  cn,
+  sw="2"
+}) => (
+  <path
+    className={cn}
+    d="M 2,5 L 8,14 M 8,14 L 14,1"
+    {..._crStrokeLinecapRound(sw)}
+  />
 )
