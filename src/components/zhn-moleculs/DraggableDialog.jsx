@@ -9,7 +9,8 @@ import {
   CL_TOGGLE_ARROW,
   crDialogCn,
   crShowHide,
-  crAbsoluteTopLeftStyle
+  crAbsoluteTopLeftStyle,
+  S_BOX_SHADOW
 } from '../styleFn';
 
 import { useKeyEscape } from '../hooks/fUseKey';
@@ -20,16 +21,14 @@ import { RowFlexEnd } from '../dialogs/rows/RowFlex';
 import FlatButton from '../zhn-m/FlatButton';
 import DialogCaption from './DialogCaption';
 
-import {
-  S_ROOT_DIV,
-  S_BT_LOAD
-} from './Dialog.Style';
-
 const CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
 , S_DIALOG_DIV = {
-  ...S_ROOT_DIV,
-  ...crAbsoluteTopLeftStyle(30, 50),  
+  ...S_BOX_SHADOW,
+  ...crAbsoluteTopLeftStyle(30, 50),
   zIndex: 10
+}
+, S_BT_LOAD = {
+  color: '#607d8b'
 };
 
 const CommandButtons = ({

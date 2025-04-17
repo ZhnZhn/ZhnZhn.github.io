@@ -15,6 +15,7 @@ import {
 } from '../uiApi';
 
 import {
+  S_BOX_SHADOW,
   crAbsoluteTopLeftStyle
 } from '../styleFn';
 
@@ -26,14 +27,11 @@ import {
 import DivCompareTo from './DivCompareTo';
 
 const S_MODAL_POPUP = {
-  ...crAbsoluteTopLeftStyle(30, 0),  
+  ...S_BOX_SHADOW,
+  ...crAbsoluteTopLeftStyle(30, 0),
   zIndex: 20,
-  width: 'auto',
   backgroundColor: 'inherit',
-  padding: '5px 10px 10px 10px',
-  borderRadius: 5,
-  boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
-  cursor: 'auto'
+  padding: '5px 10px 10px 10px'
 }
 , S_ROW = {
   display: 'flex',

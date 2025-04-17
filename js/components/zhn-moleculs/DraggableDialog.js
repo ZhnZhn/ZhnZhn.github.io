@@ -12,13 +12,15 @@ var _useDialogFocus = _interopRequireDefault(require("./useDialogFocus"));
 var _RowFlex = require("../dialogs/rows/RowFlex");
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _DialogCaption = _interopRequireDefault(require("./DialogCaption"));
-var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_DRAGGABLE_DIALOG = (0, _styleFn.crDialogCn)("draggable-dialog"),
   S_DIALOG_DIV = {
-    ..._Dialog.S_ROOT_DIV,
+    ..._styleFn.S_BOX_SHADOW,
     ...(0, _styleFn.crAbsoluteTopLeftStyle)(30, 50),
     zIndex: 10
+  },
+  S_BT_LOAD = {
+    color: '#607d8b'
   };
 const CommandButtons = _ref => {
   let {
@@ -29,7 +31,7 @@ const CommandButtons = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlexEnd, {
     children: [buttons, (0, _uiApi.isFn)(onLoad) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-      style: _Dialog.S_BT_LOAD,
+      style: S_BT_LOAD,
       caption: "Load",
       title: "Load item",
       onClick: onLoad

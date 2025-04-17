@@ -55,12 +55,11 @@ const crNaNStyle = () => ({
 });
 exports.crNaNStyle = crNaNStyle;
 const S_MENU_MORE = exports.S_MENU_MORE = {
+  ..._styleFn.S_BOX_SHADOW,
   ...(0, _styleFn.crAbsoluteTopLeftStyle)(36, 0),
   zIndex: 1010,
   backgroundColor: 'inherit',
-  padding: '4px 12px 6px',
-  borderRadius: 5,
-  boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 0 5px'
+  padding: '4px 12px 6px'
 };
 const S_TD = exports.S_TD = {
   padding: 6,

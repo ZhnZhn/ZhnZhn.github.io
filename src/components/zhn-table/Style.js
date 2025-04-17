@@ -1,6 +1,7 @@
 export { CL_BLACK, getColorBlack } from '../styleFn';
 
 import {
+  S_BOX_SHADOW,
   getColorBlack,
   crAbsoluteTopLeftStyle
 } from '../styleFn';
@@ -48,12 +49,11 @@ export const crNaNStyle = () => ({
 })
 
 export const S_MENU_MORE = {
-  ...crAbsoluteTopLeftStyle(36, 0),  
+  ...S_BOX_SHADOW,
+  ...crAbsoluteTopLeftStyle(36, 0),
   zIndex: 1010,
   backgroundColor: 'inherit',
-  padding: '4px 12px 6px',
-  borderRadius: 5,
-  boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 0 5px'
+  padding: '4px 12px 6px'
 }
 
 export const S_TD = {

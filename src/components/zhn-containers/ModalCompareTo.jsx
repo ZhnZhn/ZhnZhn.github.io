@@ -8,6 +8,7 @@ import {
 } from '../uiApi';
 
 import {
+  S_BOX_SHADOW,
   crAbsoluteTopLeftStyle
 } from '../styleFn';
 import {
@@ -18,15 +19,11 @@ import ModalPopup from '../zhn-moleculs/ModalPopup';
 import DivCompareTo from '../items/DivCompareTo';
 
 const S_MODAL_POPUP = {
+  ...S_BOX_SHADOW,
   ...crAbsoluteTopLeftStyle(38, 6),
-  zIndex : 20,
-  width: 'auto',
+  zIndex: 20,
   padding: '5px 10px 12px 10px',
-  backgroundColor: 'inherit',
-  border: '2px solid #1b2836',
-  borderRadius: 5,
-  boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
-  cursor: 'auto'
+  backgroundColor: 'inherit'
 };
 
 const ModalCompareTo = ({

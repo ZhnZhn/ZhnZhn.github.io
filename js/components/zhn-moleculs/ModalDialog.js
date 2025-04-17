@@ -12,13 +12,11 @@ var _RowFlex = require("../dialogs/rows/RowFlex");
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _FocusTrap = _interopRequireDefault(require("./FocusTrap"));
 var _DialogCaption = _interopRequireDefault(require("./DialogCaption"));
-var _Dialog = require("./Dialog.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_MODAL_DIALOG = (0, _styleFn.crDialogCn)('modal-dialog'),
   S_ROOT_DIV_MODAL = {
-    ..._Dialog.S_ROOT_DIV,
+    ..._styleFn.S_BOX_SHADOW,
     ...(0, _styleFn.crAbsoluteTopLeftStyle)('20%', '50%'),
-    display: 'block',
     width: 380,
     marginLeft: -190,
     zIndex: 10

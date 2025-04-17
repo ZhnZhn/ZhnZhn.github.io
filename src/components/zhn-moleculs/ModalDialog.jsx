@@ -4,7 +4,8 @@ import { crDialogRole } from '../a11yFn';
 import {
   crDialogCn,
   crShowHide,
-  crAbsoluteTopLeftStyle
+  crAbsoluteTopLeftStyle,
+  S_BOX_SHADOW
 } from '../styleFn';
 
 import { useKeyEscape } from '../hooks/fUseKey';
@@ -15,13 +16,10 @@ import FlatButton from '../zhn-m/FlatButton';
 import FocusTrap from './FocusTrap';
 import DialogCaption from './DialogCaption';
 
-import { S_ROOT_DIV } from './Dialog.Style';
-
 const CL_MODAL_DIALOG = crDialogCn('modal-dialog')
 , S_ROOT_DIV_MODAL = {
-  ...S_ROOT_DIV,
+  ...S_BOX_SHADOW,
   ...crAbsoluteTopLeftStyle('20%', '50%'),
-  display: 'block',  
   width: 380,
   marginLeft: -190,
   zIndex: 10
