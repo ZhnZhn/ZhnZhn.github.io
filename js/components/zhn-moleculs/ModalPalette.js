@@ -8,10 +8,8 @@ var _ModalPopup = _interopRequireDefault(require("./ModalPopup"));
 var _CellColorPane = _interopRequireDefault(require("./CellColorPane"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_MODAL_POPUP = {
-  ..._styleFn.S_BOX_SHADOW,
-  ...(0, _styleFn.crAbsoluteTopLeftStyle)(35, -10),
-  zIndex: 1010,
-  backgroundColor: 'inherit'
+  ...(0, _styleFn.crAbsoluteTopLeftStyle)(38, -10),
+  zIndex: 1010
 };
 const ModalPalette = _ref => {
   let {

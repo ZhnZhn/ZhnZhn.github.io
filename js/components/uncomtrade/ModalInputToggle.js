@@ -15,7 +15,6 @@ const ModalInputToggle = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
     isShow: isShow,
-    className: _Style.CL_POPUP_MENU,
     style: _Style.S_MODAL_POPUP,
     onClose: onClose,
     children: (configs || []).map(config => /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
@@ -27,6 +26,5 @@ const ModalInputToggle = _ref => {
     }, config[0]))
   });
 };
-var _default = ModalInputToggle;
-exports.default = _default;
+var _default = exports.default = ModalInputToggle;
 //# sourceMappingURL=ModalInputToggle.js.map

@@ -22,9 +22,7 @@ var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _ModalCompareTo = _interopRequireDefault(require("./ModalCompareTo"));
 var _ChartList = _interopRequireDefault(require("./ChartList"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_SCROLL_ITEMS = (0, _styleFn.crScrollYCn)('scroll-items'),
-  CL_MENU_MORE = "popup-menu charts__menu-more el-b"
-
+const CL_SCROLL_ITEMS = (0, _styleFn.crScrollYCn)('scroll-items')
   //, INITIAL_WIDTH = 635
   ,
   MAX_WIDTH = 1200,
@@ -115,7 +113,7 @@ const ChartContainer = props => {
     onKeyDown: _hKeyDown,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.ModalSliderMemoIsShow, {
       isShow: isMenuMore,
-      className: CL_MENU_MORE,
+      className: _styleFn.CL_CHARTS_MENU_MORE,
       model: _modelMore,
       onClose: _hideMenuMore
     }), _isAdminMode && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalCompareTo.default, {

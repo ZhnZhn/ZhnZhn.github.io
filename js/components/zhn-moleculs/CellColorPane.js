@@ -8,7 +8,7 @@ var _CellColor = _interopRequireDefault(require("./CellColor"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_INPUT_COLOR = "va-b",
   S_PANE = {
-    margin: 10
+    margin: 5
   },
   S_ROW = {
     width: 120
@@ -33,14 +33,14 @@ const CellColorPane = (0, _uiApi.memo)(_ref => {
     _idPrefix = colors[r * cols];
     for (c = 0; c < cols; c++) {
       _color = colors[r * cols + c];
-      _elCells.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor.default, {
+      _elCells.push(/*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColor.default, {
         className: CL_INPUT_COLOR,
         style: S_COLOR,
         color: _color,
         onClick: (0, _uiApi.bindTo)(onClickCell, _color)
       }, _color));
     }
-    _elRows.push( /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    _elRows.push(/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_ROW,
       children: _elCells
     }, _idPrefix + r));
@@ -50,6 +50,5 @@ const CellColorPane = (0, _uiApi.memo)(_ref => {
     children: _elRows
   });
 });
-var _default = CellColorPane;
-exports.default = _default;
+var _default = exports.default = CellColorPane;
 //# sourceMappingURL=CellColorPane.js.map

@@ -20,7 +20,6 @@ var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
 const CL_ITEM_HEADER = (0, _styleFn.crItemCaptionCn)("item-header"),
-  CL_CHARTS_MENU_MORE = (0, _styleFn.crElementBorderCn)("popup-menu charts__menu-more"),
   S_BT_MORE = {
     position: 'relative',
     top: 4,
@@ -59,7 +58,7 @@ const MenuMore = _ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.ModalSliderMemoIsShow, {
       isShow: isMore,
       rootStyle: _styleFn.S_INLINE,
-      className: CL_CHARTS_MENU_MORE,
+      className: _styleFn.CL_CHARTS_MENU_MORE,
       model: moreModel,
       onClose: toggleFocus
     })]

@@ -1,5 +1,3 @@
-export const CL_POPUP_MENU = 'popup-menu'
-
 export const S_MODAL_POPUP = {
   left: 5,
   zIndex: 100,

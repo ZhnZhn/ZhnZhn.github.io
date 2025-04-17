@@ -13,7 +13,7 @@ var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _MenuPage = _interopRequireDefault(require("./MenuPage"));
 var _MenuPages = _interopRequireDefault(require("./MenuPages"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_SLIDER_PAGES = "slider-pages",
+const CL_SLIDER_PAGES = 'slider-pages',
   S_SHOW_HIDE = {
     position: 'absolute',
     overflow: 'hidden'
@@ -111,7 +111,7 @@ const ModalSlider = _ref => {
     style: rootStyle,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
-      className: className,
+      className: (0, _styleFn.crCn)(_styleFn.CL_POPUP_MENU, className),
       style: _showHideStyle,
       isShow: isShow,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {

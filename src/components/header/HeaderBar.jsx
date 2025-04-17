@@ -27,7 +27,7 @@ import { useToggle } from '../hooks/useToggle';
 import { useFnFocus } from '../hooks/useFocus';
 
 import FlatButton from '../zhn-m/FlatButton';
-import { 
+import {
   SvgSettings,
   SvgInfo
 } from '../zhn/svg/SvgIcon';
@@ -52,7 +52,7 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
 , CL_WATCH = "hbt-watch"
 , CL_ABOUT = "hbt-about"
 , CL_BTS_RIGHT = `${CL_HEADER}__bts-right`
-, CL_BROWSER_MENU = `popup-menu ${CL_HEADER}__panel-browser`
+, CL_BROWSER_MENU = `${CL_HEADER}__panel-browser`
 
 , S_SVG_BT = {
   verticalAlign: 'middle',

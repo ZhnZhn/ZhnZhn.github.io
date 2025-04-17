@@ -1,5 +1,4 @@
 import {
-  S_BOX_SHADOW,
   crAbsoluteTopLeftStyle
 } from '../styleFn';
 
@@ -7,10 +6,8 @@ import ModalPopup from './ModalPopup';
 import CellColorPane from './CellColorPane';
 
 const S_MODAL_POPUP = {
-  ...S_BOX_SHADOW,
-  ...crAbsoluteTopLeftStyle(35, -10),
-  zIndex: 1010,
-  backgroundColor: 'inherit'
+  ...crAbsoluteTopLeftStyle(38, -10),
+  zIndex: 1010
 };
 
 const ModalPalette = ({

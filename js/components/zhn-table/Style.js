@@ -33,11 +33,12 @@ const S_TH_MORE_SPAN = exports.S_TH_MORE_SPAN = {
   position: 'relative',
   top: -2
 };
+const TH_BORDER_STYLE = '3px solid #f1d600';
 const S_TH_UP = exports.S_TH_UP = {
-  borderTop: '3px solid #f1d600'
+  borderTop: TH_BORDER_STYLE
 };
 const S_TH_DOWN = exports.S_TH_DOWN = {
-  borderBottom: '3px solid #f1d600'
+  borderBottom: TH_BORDER_STYLE
 };
 const S_BT_SVG_MORE = exports.S_BT_SVG_MORE = {
   position: 'relative',
@@ -55,10 +56,8 @@ const crNaNStyle = () => ({
 });
 exports.crNaNStyle = crNaNStyle;
 const S_MENU_MORE = exports.S_MENU_MORE = {
-  ..._styleFn.S_BOX_SHADOW,
   ...(0, _styleFn.crAbsoluteTopLeftStyle)(36, 0),
   zIndex: 1010,
-  backgroundColor: 'inherit',
   padding: '4px 12px 6px'
 };
 const S_TD = exports.S_TD = {

@@ -1,7 +1,7 @@
 import ModalPopup from '../zhn-moleculs/ModalPopup';
 import RowCheckBox2 from '../dialogs/rows/RowCheckBox2';
 
-const CL_MENU_MORE = 'popup-menu charts__menu-more'
+const CL_MENU_MORE = 'charts__menu-more'
 , S_MENU = {
   width: 240,
   paddingBottom: 8

@@ -11,6 +11,7 @@ import {
 } from '../a11yFn';
 
 import {
+  CL_CHARTS_MENU_MORE,
   crScrollYCn
 } from '../styleFn';
 
@@ -40,8 +41,6 @@ import ModalCompareTo from './ModalCompareTo';
 import ChartList from './ChartList';
 
 const CL_SCROLL_ITEMS = crScrollYCn('scroll-items')
-, CL_MENU_MORE = "popup-menu charts__menu-more el-b"
-
 //, INITIAL_WIDTH = 635
 , MAX_WIDTH = 1200
 , STEP = 10
@@ -200,7 +199,7 @@ const ChartContainer = (props) => {
   {/*eslint-enable jsx-a11y/no-static-element-interactions*/}
       <ModalSliderMemoIsShow
         isShow={isMenuMore}
-        className={CL_MENU_MORE}
+        className={CL_CHARTS_MENU_MORE}
         model={_modelMore}
         onClose={_hideMenuMore}
       />

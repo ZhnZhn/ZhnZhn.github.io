@@ -1,4 +1,8 @@
-import { crElementBorderCn } from '../styleFn';
+import {
+  CL_POPUP_MENU,
+  crCn,
+  crElementBorderCn
+} from '../styleFn';
 
 import ShowHide from '../zhn/ShowHide';
 import ModalPane from './ModalPane';
@@ -15,7 +19,7 @@ const ModalPopup = ({
     onClose={onClose}
   >
     <ShowHide
-      className={crElementBorderCn(className)}
+      className={crElementBorderCn(crCn(CL_POPUP_MENU, className))}
       style={style}
       isShow={isShow}
     >

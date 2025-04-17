@@ -6,7 +6,7 @@ exports.default = void 0;
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox2"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_MENU_MORE = 'popup-menu charts__menu-more',
+const CL_MENU_MORE = 'charts__menu-more',
   S_MENU = {
     width: 240,
     paddingBottom: 8
@@ -28,6 +28,5 @@ const BrowserMenuMore = _ref => {
     })
   });
 };
-var _default = BrowserMenuMore;
-exports.default = _default;
+var _default = exports.default = BrowserMenuMore;
 //# sourceMappingURL=BrowserMenuMore.js.map

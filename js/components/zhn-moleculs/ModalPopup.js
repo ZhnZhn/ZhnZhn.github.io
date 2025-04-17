@@ -19,13 +19,12 @@ const ModalPopup = _ref => {
     isShow: isShow,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
-      className: (0, _styleFn.crElementBorderCn)(className),
+      className: (0, _styleFn.crElementBorderCn)((0, _styleFn.crCn)(_styleFn.CL_POPUP_MENU, className)),
       style: style,
       isShow: isShow,
       children: children
     })
   });
 };
-var _default = ModalPopup;
-exports.default = _default;
+var _default = exports.default = ModalPopup;
 //# sourceMappingURL=ModalPopup.js.map

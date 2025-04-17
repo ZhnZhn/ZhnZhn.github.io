@@ -1,10 +1,10 @@
 //import PropTypes from "prop-types";
 import { useId } from '../uiApi';
 import {
+  CL_CHARTS_MENU_MORE,
   S_INLINE,
   crStyle2,
-  crItemCaptionCn,
-  crElementBorderCn
+  crItemCaptionCn
 } from '../styleFn';
 
 import { useToggle } from '../hooks/useToggle';
@@ -30,7 +30,6 @@ import {
 } from './Item.Style';
 
 const CL_ITEM_HEADER = crItemCaptionCn("item-header")
-, CL_CHARTS_MENU_MORE = crElementBorderCn("popup-menu charts__menu-more")
 , S_BT_MORE = {
   position: 'relative',
   top: 4,

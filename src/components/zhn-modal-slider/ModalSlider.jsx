@@ -1,5 +1,9 @@
 import { bindTo } from '../uiApi';
-import { crSliderTransformStyle } from '../styleFn';
+import {
+  CL_POPUP_MENU,
+  crCn,
+  crSliderTransformStyle
+} from '../styleFn';
 
 import memoIsShow from '../hoc/memoIsShow';
 
@@ -12,7 +16,7 @@ import ShowHide from '../zhn/ShowHide';
 import MenuPage from './MenuPage';
 import MenuPages from './MenuPages';
 
-const CL_SLIDER_PAGES = "slider-pages"
+const CL_SLIDER_PAGES = 'slider-pages'
 , S_SHOW_HIDE = {
   position: 'absolute',
   overflow: 'hidden'
@@ -139,7 +143,7 @@ export const ModalSlider = ({
         onClose={onClose}
       >
         <ShowHide
-          className={className}
+          className={crCn(CL_POPUP_MENU, className)}
           style={_showHideStyle}
           isShow={isShow}
         >

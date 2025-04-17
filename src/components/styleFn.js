@@ -42,6 +42,8 @@ export const CL_NOT_SELECTED = "not-selected"
 export const CL_TEXT_ELLIPSIS= "text-ellipsis"
 export const CL_WIDTH_100_PERCENT = "w-100"
 
+export const CL_POPUP_MENU = 'popup-menu'
+
 //export const NBSP = "\u00A0"
 
 export const crFs18Cn = _fCrCn("fs-18")
@@ -164,6 +166,8 @@ export const crScrollYCn = _fCrCn("scroll-container-y")
 const CL_EL_B = "el-b";
 export const crDialogCn = _fCrCn(`${CL_C_BG} ${CL_EL_B}`)
 export const crElementBorderCn = _fCrCn(CL_EL_B)
+
+export const CL_CHARTS_MENU_MORE = crElementBorderCn("charts__menu-more")
 
 const CL_EL_BG = "el-bg";
 const CL_EL_C = "el-c";

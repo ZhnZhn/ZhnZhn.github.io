@@ -8,7 +8,6 @@ import InputText from '../../zhn/InputText';
 import { SpanBoldBlack } from '../../zhn/SpanToken';
 import RowCheckBox2 from '../rows/RowCheckBox2';
 import {
-  CL_POPUP_MENU,
   S_MODAL_POPUP,
   S_ROW
 } from './Style';
@@ -36,7 +35,7 @@ const ROW_CHECKBOX_CONFIGS = [
 const ModalOptions = ({
   isShow,
   style,
-  className=CL_POPUP_MENU,
+  className,
   dfRt,
   onRoundTo,
   toggleOption,

@@ -57,7 +57,7 @@ const ModalToggle = _ref2 => {
   let {
     isShow,
     style,
-    className = _Style.CL_POPUP_MENU,
+    className,
     selectProps,
     isFd,
     isShowFd,

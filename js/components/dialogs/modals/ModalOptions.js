@@ -25,7 +25,7 @@ const ModalOptions = _ref => {
   let {
     isShow,
     style,
-    className = _Style.CL_POPUP_MENU,
+    className,
     dfRt,
     onRoundTo,
     toggleOption,

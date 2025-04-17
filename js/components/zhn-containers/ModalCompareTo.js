@@ -11,11 +11,9 @@ var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
 var _DivCompareTo = _interopRequireDefault(require("../items/DivCompareTo"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_MODAL_POPUP = {
-  ..._styleFn.S_BOX_SHADOW,
   ...(0, _styleFn.crAbsoluteTopLeftStyle)(38, 6),
   zIndex: 20,
-  padding: '5px 10px 12px 10px',
-  backgroundColor: 'inherit'
+  padding: '5px 10px 12px 10px'
 };
 const ModalCompareTo = _ref => {
   let {

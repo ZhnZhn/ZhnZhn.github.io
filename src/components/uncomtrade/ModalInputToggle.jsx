@@ -1,7 +1,6 @@
 import ModalPopup from '../zhn-moleculs/ModalPopup';
 import RowCheckBox3 from '../dialogs/rows/RowCheckBox3';
 import {
-  CL_POPUP_MENU,
   S_MODAL_POPUP,
   S_ROW,
   TOGGLE_INPUT_CHECKBOX_COLOR
@@ -14,7 +13,6 @@ const ModalInputToggle = ({
 }) => (
   <ModalPopup
     isShow={isShow}
-    className={CL_POPUP_MENU}
     style={S_MODAL_POPUP}
     onClose={onClose}
   >

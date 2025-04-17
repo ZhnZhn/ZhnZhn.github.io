@@ -1,7 +1,9 @@
-export { CL_BLACK, getColorBlack } from '../styleFn';
+export { 
+  CL_BLACK,
+  getColorBlack
+} from '../styleFn';
 
 import {
-  S_BOX_SHADOW,
   getColorBlack,
   crAbsoluteTopLeftStyle
 } from '../styleFn';
@@ -31,8 +33,9 @@ export const S_TH_MORE_SPAN = {
   position: 'relative',
   top: -2
 }
-export const S_TH_UP = { borderTop: '3px solid #f1d600' }
-export const S_TH_DOWN = { borderBottom: '3px solid #f1d600' }
+const TH_BORDER_STYLE = '3px solid #f1d600'
+export const S_TH_UP = { borderTop: TH_BORDER_STYLE }
+export const S_TH_DOWN = { borderBottom: TH_BORDER_STYLE }
 
 export const S_BT_SVG_MORE = {
   position: 'relative',
@@ -49,10 +52,8 @@ export const crNaNStyle = () => ({
 })
 
 export const S_MENU_MORE = {
-  ...S_BOX_SHADOW,
   ...crAbsoluteTopLeftStyle(36, 0),
   zIndex: 1010,
-  backgroundColor: 'inherit',
   padding: '4px 12px 6px'
 }
 

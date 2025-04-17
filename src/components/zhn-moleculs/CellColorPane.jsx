@@ -6,7 +6,7 @@ import {
 import CellColor from './CellColor';
 
 const CL_INPUT_COLOR = "va-b"
-, S_PANE = { margin: 10 }
+, S_PANE = { margin: 5 }
 , S_ROW = { width: 120 }
 , S_COLOR = { margin: 4 };
 

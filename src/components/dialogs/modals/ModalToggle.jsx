@@ -8,7 +8,6 @@ import RowCheckBox2 from '../rows/RowCheckBox2';
 import RowCheckBox3 from '../rows/RowCheckBox3';
 
 import {
-  CL_POPUP_MENU,
   S_MODAL_POPUP,
   S_ROW,
   TOGGLE_INPUT_CHECKBOX_COLOR,
@@ -69,7 +68,7 @@ const _crCheckBoxItem = (
 const ModalToggle = ({
   isShow,
   style,
-  className=CL_POPUP_MENU,
+  className,
   selectProps,
   isFd,
   isShowFd,

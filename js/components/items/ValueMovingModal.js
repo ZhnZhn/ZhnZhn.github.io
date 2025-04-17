@@ -12,10 +12,8 @@ var _SpanToken = require("../zhn/SpanToken");
 var _DivCompareTo = _interopRequireDefault(require("./DivCompareTo"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_MODAL_POPUP = {
-    ..._styleFn.S_BOX_SHADOW,
     ...(0, _styleFn.crAbsoluteTopLeftStyle)(30, 0),
     zIndex: 20,
-    backgroundColor: 'inherit',
     padding: '5px 10px 10px 10px'
   },
   S_ROW = {
