@@ -29,6 +29,7 @@
   top: 45px;
   left: 152px;
   z-index: 1010;
+  border-bottom: 4px solid #80c040;
 }
 
 .header__bts-right {
