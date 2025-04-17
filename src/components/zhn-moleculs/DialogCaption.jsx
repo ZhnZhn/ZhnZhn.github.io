@@ -7,12 +7,18 @@ import {
   CL_NOT_SELECTED,
   crElementCn
 } from '../styleFn';
-import {
-  S_CAPTION_DIV,
-  S_SVG_CLOSE
-} from './Dialog.Style';
 
-const CL_EL = crElementCn();
+const CL_EL = crElementCn()
+, S_CAPTION_DIV = {
+  position: 'relative',
+  padding: '5px 35px 5px 16px',
+  textAlign: 'center',
+  fontSize: '18px',
+  fontWeight: 500,
+}
+, S_SVG_CLOSE = {
+  top: 4
+};
 
 const DialogCaption = ({
   refBtMenuMore,
