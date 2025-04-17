@@ -11,13 +11,12 @@ var _jsxRuntime = require("react/jsx-runtime");
 const CL_EL = (0, _styleFn.crElementCn)(),
   S_CAPTION_DIV = {
     position: 'relative',
-    padding: '5px 35px 5px 16px',
+    padding: '8px 35px 5px 16px',
+    height: 34,
+    borderRadius: '5px 5px 0 0',
     textAlign: 'center',
     fontSize: '18px',
     fontWeight: 500
-  },
-  S_SVG_CLOSE = {
-    top: 4
   };
 const DialogCaption = _ref => {
   let {
@@ -39,7 +38,6 @@ const DialogCaption = _ref => {
       className: _styleFn.CL_NOT_SELECTED,
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
-      style: S_SVG_CLOSE,
       onClick: onClose
     })]
   });

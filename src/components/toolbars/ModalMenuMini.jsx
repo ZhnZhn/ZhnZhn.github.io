@@ -3,8 +3,7 @@ import {
   useMemo
 } from '../uiApi';
 import {
-  CL_ROW_PANE_TOPIC,
-  crElementBorderCn
+  CL_ROW_PANE_TOPIC
 } from '../styleFn';
 
 import {
@@ -16,9 +15,9 @@ import {
   ModalSliderMemoIsShow
 } from '../zhn-modal-slider/ModalSlider';
 
-import { S_MODAL_MENU } from './ModalMenu.Style';
-
-const CL_MENU_SLIDER = crElementBorderCn();
+import {
+  S_MODAL_MENU
+} from './ModalMenu.Style';
 
 const _crModel = (
   configs,
@@ -49,7 +48,6 @@ const ModalMenuMini = ({
   return (
     <ModalSliderMemoIsShow
       isShow={isShow}
-      className={CL_MENU_SLIDER}
       style={{...S_MODAL_MENU, ...style}}
       model={_model}
       onClose={onClose}

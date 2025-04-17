@@ -20,7 +20,7 @@ const TOKEN_USER_SETTINGS = "User Settings",
   S_MODAL = {
     position: 'static',
     width: 380,
-    maxHeight: 446,
+    maxHeight: 420,
     margin: '70px auto 0px'
   },
   S_MODAL_SMALL = {

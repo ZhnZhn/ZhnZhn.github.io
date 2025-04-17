@@ -1,7 +1,6 @@
 import {
   CL_POPUP_MENU,
-  crCn,
-  crElementBorderCn
+  crCn
 } from '../styleFn';
 
 import ShowHide from '../zhn/ShowHide';
@@ -19,7 +18,7 @@ const ModalPopup = ({
     onClose={onClose}
   >
     <ShowHide
-      className={crElementBorderCn(crCn(CL_POPUP_MENU, className))}
+      className={crCn(CL_POPUP_MENU, className)}
       style={style}
       isShow={isShow}
     >

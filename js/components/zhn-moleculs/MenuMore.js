@@ -7,8 +7,8 @@ var _styleFn = require("../styleFn");
 var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
 var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_MENU_MORE = (0, _styleFn.crElementBorderCn)('dialog__menu-more'),
-  S_BT_MORE = (0, _styleFn.crAbsoluteTopLeftStyle)(1, 2);
+const CL_MENU_MORE = 'dialog__menu-more',
+  S_BT_MORE = (0, _styleFn.crAbsoluteTopLeftStyle)(4, 2);
 const MenuMore = _ref => {
   let {
     refEl,

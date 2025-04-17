@@ -11,13 +11,12 @@ import {
 const CL_EL = crElementCn()
 , S_CAPTION_DIV = {
   position: 'relative',
-  padding: '5px 35px 5px 16px',
+  padding: '8px 35px 5px 16px',
+  height: 34,
+  borderRadius: '5px 5px 0 0',
   textAlign: 'center',
   fontSize: '18px',
   fontWeight: 500,
-}
-, S_SVG_CLOSE = {
-  top: 4
 };
 
 const DialogCaption = ({
@@ -41,10 +40,7 @@ const DialogCaption = ({
       <span className={CL_NOT_SELECTED}>
         {caption}
       </span>
-      <BtSvgClose
-         style={S_SVG_CLOSE}
-         onClick={onClose}
-      />
+      <BtSvgClose onClick={onClose} />
     </div>
   );
 }

@@ -10,7 +10,6 @@ var _menuModelFn = require("../menuModelFn");
 var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _ModalMenu = require("./ModalMenu.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_MENU_SLIDER = (0, _styleFn.crElementBorderCn)();
 const _isMinMax = config => ((config.yAxis || {}).plotLines || []).length > 0;
 const EPOCH_DMY = '01-01-1970';
 const _isZoom = getChart => {
@@ -46,7 +45,6 @@ const ModalMenuFn = props => {
   /*eslint-enable react-hooks/exhaustive-deps*/
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.ModalSliderMemoIsShow, {
     isShow: isShow,
-    className: CL_MENU_SLIDER,
     style: {
       ..._ModalMenu.S_MODAL_MENU,
       ...style

@@ -8,7 +8,6 @@ var _menuModelFn = require("../menuModelFn");
 var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _ModalMenu = require("./ModalMenu.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_MENU_SLIDER = (0, _styleFn.crElementBorderCn)();
 const _crModel = (configs, onClickItem) => (0, _menuModelFn.crSliderMenu)(_styleFn.CL_ROW_PANE_TOPIC, 160, 1, {
   p0: (configs || []).map(_ref => {
     let {
@@ -28,7 +27,6 @@ const ModalMenuMini = _ref2 => {
   const _model = (0, _uiApi.useMemo)(() => _crModel(configs, onClickItem), [configs, onClickItem]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.ModalSliderMemoIsShow, {
     isShow: isShow,
-    className: CL_MENU_SLIDER,
     style: {
       ..._ModalMenu.S_MODAL_MENU,
       ...style

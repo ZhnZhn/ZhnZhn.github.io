@@ -17,14 +17,14 @@ const _fRowFlex = initialStyle => _ref => {
 const S_ROW_FLEX = exports.S_ROW_FLEX = {
   display: 'flex',
   alignItems: 'center',
-  margin: 5
+  margin: '5px 8px'
 };
 const RowFlex = exports.RowFlex = _fRowFlex(S_ROW_FLEX);
 const S_ROW_FLEX_END = {
   display: 'flex',
   justifyContent: 'flex-end',
   flexWrap: 'wrap',
-  margin: '8px 4px 10px 0'
+  padding: '6px 4px 6px 0'
 };
 const RowFlexEnd = exports.RowFlexEnd = _fRowFlex(S_ROW_FLEX_END);
 //# sourceMappingURL=RowFlex.js.map

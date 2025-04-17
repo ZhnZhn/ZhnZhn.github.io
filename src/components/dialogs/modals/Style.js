@@ -1,5 +1,4 @@
 export const S_MODAL_POPUP = {
-  left: 5,
   zIndex: 100,
   padding: '6px 14px 10px 12px'
 }
