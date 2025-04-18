@@ -4,8 +4,7 @@ import { crDialogRole } from '../a11yFn';
 import {
   crDialogCn,
   crShowHide,
-  crAbsoluteTopLeftStyle,
-  S_BOX_SHADOW
+  crAbsoluteTopLeftStyle
 } from '../styleFn';
 
 import { useKeyEscape } from '../hooks/fUseKey';
@@ -18,7 +17,6 @@ import DialogCaption from './DialogCaption';
 
 const CL_MODAL_DIALOG = crDialogCn('modal-dialog')
 , S_ROOT_DIV_MODAL = {
-  ...S_BOX_SHADOW,
   ...crAbsoluteTopLeftStyle('20%', '50%'),
   width: 380,
   marginLeft: -190,

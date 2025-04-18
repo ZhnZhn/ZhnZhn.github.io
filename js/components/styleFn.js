@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getScreenCase = exports.getColorBlack = exports.crWithScrollCn = exports.crStyle3 = exports.crStyle2 = exports.crStepStyle = exports.crSliderTransformStyle = exports.crShowHide = exports.crScrollYCn = exports.crNotSelectedCn = exports.crItemCaptionCn = exports.crFs18Cn = exports.crFlexRowCn = exports.crElementCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crColorStyle = exports.crCn = exports.crBtSvgCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.crBoldCn = exports.crBold16Cn = exports.crAbsoluteTopLeftStyle = exports.S_OPEN_CLOSE_LEVEL_2 = exports.S_NONE = exports.S_INLINE = exports.S_BOX_SHADOW = exports.S_BORDER_RADIUS_2 = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TOGGLE_ARROW = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW__PANE_TOPIC = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_POPUP_MENU = exports.CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE = exports.CL_NOT_SELECTED = exports.CL_HRZ_CONTAINER = exports.CL_CHB_BLACK = exports.CL_CHARTS_MENU_MORE = exports.CL_BLACK = void 0;
+exports.getScreenCase = exports.getColorBlack = exports.crWithScrollCn = exports.crStyle3 = exports.crStyle2 = exports.crStepStyle = exports.crSliderTransformStyle = exports.crShowHide = exports.crScrollYCn = exports.crNotSelectedCn = exports.crItemCaptionCn = exports.crFs18Cn = exports.crFlexRowCn = exports.crElementCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crColorStyle = exports.crCn = exports.crBtSvgCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBsContainerCn = exports.crBoldCn = exports.crBold16Cn = exports.crAbsoluteTopLeftStyle = exports.S_OPEN_CLOSE_LEVEL_2 = exports.S_NONE = exports.S_INLINE = exports.S_BORDER_RADIUS_2 = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TOGGLE_ARROW = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW__PANE_TOPIC = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_POPUP_MENU = exports.CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE = exports.CL_NOT_SELECTED = exports.CL_HRZ_CONTAINER = exports.CL_CHB_BLACK = exports.CL_CHARTS_MENU_MORE = exports.CL_BLACK = void 0;
 var _uiApi = require("./uiApi");
 var _has = require("./has");
 var _uiTheme = require("./styles/uiTheme");
@@ -23,7 +23,8 @@ const CL_CHB_BLACK = exports.CL_CHB_BLACK = "chb-bl";
 const CL_NOT_SELECTED = exports.CL_NOT_SELECTED = "not-selected";
 const CL_TEXT_ELLIPSIS = exports.CL_TEXT_ELLIPSIS = "text-ellipsis";
 const CL_WIDTH_100_PERCENT = exports.CL_WIDTH_100_PERCENT = "w-100";
-const CL_POPUP_MENU = exports.CL_POPUP_MENU = 'popup-menu';
+const CL_BOX_SHADOW_5 = 'box-shadow-5';
+const CL_POPUP_MENU = exports.CL_POPUP_MENU = `popup-menu ${CL_BOX_SHADOW_5}`;
 
 //export const NBSP = "\u00A0"
 
@@ -54,10 +55,6 @@ const S_NONE = exports.S_NONE = {
 };
 const S_BORDER_RADIUS_2 = exports.S_BORDER_RADIUS_2 = {
   borderRadius: 2
-};
-const S_BOX_SHADOW = exports.S_BOX_SHADOW = {
-  borderRadius: 5,
-  boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px'
 };
 const S_OPEN_CLOSE_LEVEL_2 = exports.S_OPEN_CLOSE_LEVEL_2 = {
   marginLeft: 8,
@@ -103,7 +100,7 @@ const crContainerCn = exports.crContainerCn = _fCrCn(CL_C_BG);
 const crBsContainerCn = className => crContainerCn(crCn("bs-cont", className));
 exports.crBsContainerCn = crBsContainerCn;
 const crScrollYCn = exports.crScrollYCn = _fCrCn("scroll-container-y");
-const crDialogCn = exports.crDialogCn = _fCrCn(CL_C_BG);
+const crDialogCn = exports.crDialogCn = _fCrCn(`${CL_C_BG} ${CL_BOX_SHADOW_5}`);
 const CL_CHARTS_MENU_MORE = exports.CL_CHARTS_MENU_MORE = "charts__menu-more";
 const CL_EL_BG = "el-bg";
 const CL_EL_C = "el-c";

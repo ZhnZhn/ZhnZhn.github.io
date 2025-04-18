@@ -15,7 +15,6 @@ var _DialogCaption = _interopRequireDefault(require("./DialogCaption"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_MODAL_DIALOG = (0, _styleFn.crDialogCn)('modal-dialog'),
   S_ROOT_DIV_MODAL = {
-    ..._styleFn.S_BOX_SHADOW,
     ...(0, _styleFn.crAbsoluteTopLeftStyle)('20%', '50%'),
     width: 380,
     marginLeft: -190,

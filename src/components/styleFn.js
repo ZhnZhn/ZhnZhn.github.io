@@ -42,7 +42,8 @@ export const CL_NOT_SELECTED = "not-selected"
 export const CL_TEXT_ELLIPSIS= "text-ellipsis"
 export const CL_WIDTH_100_PERCENT = "w-100"
 
-export const CL_POPUP_MENU = 'popup-menu'
+const CL_BOX_SHADOW_5 = 'box-shadow-5'
+export const CL_POPUP_MENU = `popup-menu ${CL_BOX_SHADOW_5}`
 
 //export const NBSP = "\u00A0"
 
@@ -81,10 +82,6 @@ export const S_INLINE = { display: "inline-block" }
 export const S_NONE = { display: "none" }
 
 export const S_BORDER_RADIUS_2 = { borderRadius: 2 }
-export const S_BOX_SHADOW = {
-  borderRadius: 5,
-  boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px'
-}
 
 export const S_OPEN_CLOSE_LEVEL_2 = {
   marginLeft: 8,
@@ -163,7 +160,7 @@ export const crBsContainerCn = (
 
 export const crScrollYCn = _fCrCn("scroll-container-y")
 
-export const crDialogCn = _fCrCn(CL_C_BG)
+export const crDialogCn = _fCrCn(`${CL_C_BG} ${CL_BOX_SHADOW_5}`)
 export const CL_CHARTS_MENU_MORE = "charts__menu-more"
 
 const CL_EL_BG = "el-bg";

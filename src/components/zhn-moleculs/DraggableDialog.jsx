@@ -9,8 +9,7 @@ import {
   CL_TOGGLE_ARROW,
   crDialogCn,
   crShowHide,
-  crAbsoluteTopLeftStyle,
-  S_BOX_SHADOW
+  crAbsoluteTopLeftStyle
 } from '../styleFn';
 
 import { useKeyEscape } from '../hooks/fUseKey';
@@ -23,7 +22,6 @@ import DialogCaption from './DialogCaption';
 
 const CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
 , S_DIALOG_DIV = {
-  ...S_BOX_SHADOW,
   ...crAbsoluteTopLeftStyle(30, 50),
   zIndex: 10
 }

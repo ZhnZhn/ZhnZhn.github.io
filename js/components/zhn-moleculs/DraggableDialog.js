@@ -15,7 +15,6 @@ var _DialogCaption = _interopRequireDefault(require("./DialogCaption"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_DRAGGABLE_DIALOG = (0, _styleFn.crDialogCn)("draggable-dialog"),
   S_DIALOG_DIV = {
-    ..._styleFn.S_BOX_SHADOW,
     ...(0, _styleFn.crAbsoluteTopLeftStyle)(30, 50),
     zIndex: 10
   },
