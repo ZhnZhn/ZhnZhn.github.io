@@ -2,9 +2,8 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.default = void 0;
+exports.crToolbarButton = exports.ToolbarButtonCircle = void 0;
 var _ButtonCircle = _interopRequireDefault(require("./ButtonCircle"));
-var _ItemStack = _interopRequireDefault(require("./ItemStack"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_TOOLBAR = {
     display: 'flex',
@@ -14,44 +13,26 @@ const S_TOOLBAR = {
   S_BUTTON_CIRCLE = {
     marginLeft: 20
   };
-const _crButtonItem = (_ref, index) => {
+const crToolbarButton = (caption, title, onClick) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
+  style: S_BUTTON_CIRCLE,
+  caption: caption,
+  title: title,
+  onClick: onClick
+}, caption);
+exports.crToolbarButton = crToolbarButton;
+const ToolbarButtonCircle = _ref => {
   let {
-    caption,
-    title,
-    onClick
+    style,
+    children
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
-    style: S_BUTTON_CIRCLE,
-    caption: caption,
-    title: title,
-    onClick: onClick
-  }, caption + index);
-};
-const ToolbarButtonCircle = _ref2 => {
-  let {
-    buttons
-  } = _ref2;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    style: S_TOOLBAR,
+    style: {
+      ...S_TOOLBAR,
+      ...style
+    },
     role: "toolbar",
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
-      items: buttons,
-      crItem: _crButtonItem
-    })
+    children: children
   });
 };
-
-/*
-ToolbarButtonCircle.propTypes = {
-  buttons: PropTypes.arrayOf(
-     PropTypes.shape({
-      caption: PropTypes.string,
-      title: PropTypes.string,
-      onClick: PropTypes.func
-    })
-  ),
-}
-*/
-var _default = ToolbarButtonCircle;
-exports.default = _default;
+exports.ToolbarButtonCircle = ToolbarButtonCircle;
 //# sourceMappingURL=ToolbarButtonCircle.js.map
