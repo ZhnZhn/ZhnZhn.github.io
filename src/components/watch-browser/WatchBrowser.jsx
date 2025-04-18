@@ -1,3 +1,4 @@
+import { useMemo } from '../uiApi';
 import { crScrollYCn } from '../styleFn';
 
 import { useToggle } from '../hooks/useToggle';
@@ -11,17 +12,38 @@ import {
 
 import Browser from '../zhn/Browser';
 import BrowserCaption from '../zhn/BrowserCaption';
+import {
+  crToolbarButton,
+  ToolbarButtonCircle
+} from '../zhn/ToolbarButtonCircle';
 import ScrollPane from '../zhn/ScrollPane';
-import ButtonCircle from '../zhn/ButtonCircle';
+
 import EditBar from './EditBar';
 import WatchGroups from './WatchGroups';
 
 const CL_SCROLL_WATCH = crScrollYCn('scroll-watch')
-, S_BT_CIRCLE = {
-  position: 'relative',
-  top: -6,
-  marginLeft: 20
-};
+, S_TOOLBAR = { paddingTop: 0 };
+
+const useToolbarButtons = (
+  saveWatchList,
+  onClickInfo,
+  descrUrl
+/*eslint-disable react-hooks/exhaustive-deps */
+) => {
+  const [
+    isModeEdit,
+    _toggleEditMode
+  ] = useToggle();
+  return [
+    isModeEdit,
+    useMemo(() => [
+      crToolbarButton('S', 'Save to LocalStorage', saveWatchList),
+      crToolbarButton(isModeEdit ? 'V' : 'E' , 'Toggle Edit Mode: E/V', _toggleEditMode)
+    ], [isModeEdit])
+  ];
+}
+// saveWatchList, _toggleEditMode
+/*eslint-enable react-hooks/exhaustive-deps */
 
 const WatchBrowser = (props) => {
   const {
@@ -29,17 +51,16 @@ const WatchBrowser = (props) => {
     useWatchList,
   } = props
   , [
-    isModeEdit,
-    _toggleEditMode
-  ] = useToggle()
-  , [
     isShow,
     _hHide,
     hKeyDown
   ] = useBrowserShow(props)
   , watchList = useWatchList()
   , { groups } = watchList || {}
-  , _captionEV = isModeEdit ? 'V' : 'E';
+  , [
+    isModeEdit,
+    _toolbarButtons
+  ] = useToolbarButtons(saveWatchList);
 
   return (
     <Browser
@@ -49,20 +70,10 @@ const WatchBrowser = (props) => {
        <BrowserCaption
          caption={caption}
          onClose={_hHide}
-       >
-        <ButtonCircle
-          caption="S"
-          title="Save to LocalStorage"
-          style={S_BT_CIRCLE}
-          onClick={saveWatchList}
-        />
-        <ButtonCircle
-           caption={_captionEV}
-           title="Toggle Edit Mode: E/V"
-           style={S_BT_CIRCLE}
-           onClick={_toggleEditMode}
-        />
-      </BrowserCaption>
+       />
+      <ToolbarButtonCircle style={S_TOOLBAR}>
+        {_toolbarButtons}
+      </ToolbarButtonCircle>
       <EditBar
          isShow={isModeEdit}
          onClickGroup={showDialogEditGroups}
