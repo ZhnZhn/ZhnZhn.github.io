@@ -1,8 +1,9 @@
-import { useMemo } from '../uiApi';
+//import { useMemo } from '../uiApi';
 import { CL_ROW_TYPE2_TOPIC } from '../styleFn';
 
 import useBrowserShow from '../hooks/useBrowserShow';
 import { useToggle } from '../hooks/useToggle';
+import { useRefInit } from '../hooks/useProperty';
 import useLoadMenu from './useLoadMenu';
 
 import Browser from '../zhn/Browser';
@@ -10,7 +11,10 @@ import BrowserCaption from '../zhn/BrowserCaption';
 import ShowHide from '../zhn/ShowHide';
 import ScrollPane from '../zhn/ScrollPane';
 import { SpinnerLoading } from '../zhn/Spinner';
-import ToolbarButtonCircle from '../zhn/ToolbarButtonCircle';
+import {
+  crToolbarButton,
+  ToolbarButtonCircle
+} from '../zhn/ToolbarButtonCircle';
 import WrapperInputSearch from '../zhn-select/WrapperInputSearch';
 import MenuItems2 from './MenuItems2';
 
@@ -22,39 +26,14 @@ const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
   paddingBottom: 4,
   minWidth: 300
 }
+, S_TOOLBAR = {
+  paddingTop: 0
+}
 , S_WRAPPER_SEARCH = {
   width: '100%',
   paddingBottom: 8,
   paddingRight: 24
 };
-
-const _crToolbarButton = (
-  caption,
-  title,
-  onClick
-) => ({
-  caption,
-  title,
-  onClick
-});
-
-const useToolbarButtons = (
-  toggleSearch,
-  onClickInfo,
-  descrUrl
-/*eslint-disable react-hooks/exhaustive-deps */
-) => useMemo(() => [
-  _crToolbarButton('S',
-     'Click to toggle input search',
-     toggleSearch
-  ),
-  _crToolbarButton('A',
-     'About Datasources',
-     () => { onClickInfo({ descrUrl }) }
-   )
-], [])
-// toggleSearch, onClickInfo, descrUrl
-/*eslint-enable react-hooks/exhaustive-deps */
 
 const BrowserMenu2 = (props) => {
   const {
@@ -78,11 +57,10 @@ const BrowserMenu2 = (props) => {
     isShowSearch,
     toggleSearch
   ] = useToggle()
-  , _toolbarButtons = useToolbarButtons(
-    toggleSearch,
-    onClickInfo,
-    descrUrl
-  )
+  , _toolbarButtons = useRefInit(() => [
+    crToolbarButton('S','Click to toggle input search',toggleSearch),
+    crToolbarButton('A','About Datasources',() => { onClickInfo({ descrUrl }) })
+  ])
   , [
     isLoading,
     menu,
@@ -106,9 +84,9 @@ const BrowserMenu2 = (props) => {
           caption={caption}
           onClose={hideBrowser}
        />
-       <ToolbarButtonCircle
-          buttons={_toolbarButtons}
-       />
+       <ToolbarButtonCircle style={S_TOOLBAR}>
+          {_toolbarButtons}
+       </ToolbarButtonCircle>
        {menu && <ShowHide isShow={isShowSearch}>
           <WrapperInputSearch
              style={S_WRAPPER_SEARCH}

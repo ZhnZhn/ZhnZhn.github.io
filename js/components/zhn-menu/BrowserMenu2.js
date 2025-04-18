@@ -3,20 +3,22 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
 var _useToggle = require("../hooks/useToggle");
+var _useProperty = require("../hooks/useProperty");
 var _useLoadMenu = _interopRequireDefault(require("./useLoadMenu"));
 var _Browser = _interopRequireDefault(require("../zhn/Browser"));
 var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 var _Spinner = require("../zhn/Spinner");
-var _ToolbarButtonCircle = _interopRequireDefault(require("../zhn/ToolbarButtonCircle"));
+var _ToolbarButtonCircle = require("../zhn/ToolbarButtonCircle");
 var _WrapperInputSearch = _interopRequireDefault(require("../zhn-select/WrapperInputSearch"));
 var _MenuItems = _interopRequireDefault(require("./MenuItems2"));
 var _jsxRuntime = require("react/jsx-runtime");
+//import { useMemo } from '../uiApi';
+
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name",
   CL_BROWSER = "scroll-browser-by",
   CL_BROWSER_WITH_SEARCH = `${CL_BROWSER}--search`,
@@ -24,25 +26,14 @@ const SEARCH_PLACEHOLDER = "Search By Symbol Or Name",
     paddingBottom: 4,
     minWidth: 300
   },
+  S_TOOLBAR = {
+    paddingTop: 0
+  },
   S_WRAPPER_SEARCH = {
     width: '100%',
     paddingBottom: 8,
     paddingRight: 24
   };
-const _crToolbarButton = (caption, title, onClick) => ({
-  caption,
-  title,
-  onClick
-});
-const useToolbarButtons = (toggleSearch, onClickInfo, descrUrl
-/*eslint-disable react-hooks/exhaustive-deps */) => (0, _uiApi.useMemo)(() => [_crToolbarButton('S', 'Click to toggle input search', toggleSearch), _crToolbarButton('A', 'About Datasources', () => {
-  onClickInfo({
-    descrUrl
-  });
-})], []);
-// toggleSearch, onClickInfo, descrUrl
-/*eslint-enable react-hooks/exhaustive-deps */
-
 const BrowserMenu2 = props => {
   const {
       browserType,
@@ -58,7 +49,11 @@ const BrowserMenu2 = props => {
     } = props,
     [isShow, hideBrowser, hKeyDown] = (0, _useBrowserShow.default)(props),
     [isShowSearch, toggleSearch] = (0, _useToggle.useToggle)(),
-    _toolbarButtons = useToolbarButtons(toggleSearch, onClickInfo, descrUrl),
+    _toolbarButtons = (0, _useProperty.useRefInit)(() => [(0, _ToolbarButtonCircle.crToolbarButton)('S', 'Click to toggle input search', toggleSearch), (0, _ToolbarButtonCircle.crToolbarButton)('A', 'About Datasources', () => {
+      onClickInfo({
+        descrUrl
+      });
+    })]),
     [isLoading, menu] = (0, _useLoadMenu.default)(isShow, onLoadMenu, useMsBrowserLoad, browserType),
     _scrollClass = isShowSearch ? CL_BROWSER_WITH_SEARCH : CL_BROWSER;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Browser.default, {
@@ -68,8 +63,9 @@ const BrowserMenu2 = props => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserCaption.default, {
       caption: caption,
       onClose: hideBrowser
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle.default, {
-      buttons: _toolbarButtons
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle.ToolbarButtonCircle, {
+      style: S_TOOLBAR,
+      children: _toolbarButtons
     }), menu && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: isShowSearch,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_WrapperInputSearch.default, {
