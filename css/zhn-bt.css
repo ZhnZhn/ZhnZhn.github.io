@@ -5,21 +5,24 @@
   border-radius: 50%;       
   box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
 }
-.bt-circle-hf:hover,
-.bt-circle-hf:focus {
-  color: var(--btf-c) !important;
-  border-color: var(--btf-c) !important;
+.bt-circle-hf:hover {    
   background-color: rgba(128, 128, 128, 0.3);
   box-shadow: 0 5px 6px 0 rgba(0,0,0,0.3), 0 4px 15px 0 rgba(0,0,0,0.2);
+}
+.bt-circle-hf:focus {
+  color: #80c040;
+  border: 2px solid #80c040;
 }
 
 /* button circle customizations */
 .bt-c1 {
-  color: #80c040;
-  border: 2px solid #80c040;
-  width: 26px;
-  height: 26px;
-  background-color: transparent;
+  color: #1b2836;
+  border: 2px solid #1b2836;
+  color: var(--btf-c);
+  border: 2px solid var(--btf-c);  
+  width: 30px;
+  height: 30px;
+  font-weight: 600;
   transition: background-color 200ms ease-out;
 }
 
