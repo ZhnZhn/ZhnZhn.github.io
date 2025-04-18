@@ -27,7 +27,7 @@ const CL_INPUT_COLOR = 'va-b',
     marginRight: 16
   },
   S_TO_CELL = {
-    margin: '0 12px'
+    margin: '0 14px'
   };
 const _hasLineWidth = function (_temp) {
   let {

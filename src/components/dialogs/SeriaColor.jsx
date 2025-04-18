@@ -44,7 +44,7 @@ const CL_INPUT_COLOR = 'va-b'
   marginLeft: 14,
   marginRight: 16
 }
-, S_TO_CELL = { margin: '0 12px' };
+, S_TO_CELL = { margin: '0 14px' };
 
 const _hasLineWidth = ({
   value
