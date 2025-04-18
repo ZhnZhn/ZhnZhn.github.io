@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
-var _ToolbarButtonCircle = _interopRequireDefault(require("../zhn/ToolbarButtonCircle"));
+var _ToolbarButtonCircle = require("../zhn/ToolbarButtonCircle");
 var _jsxRuntime = require("react/jsx-runtime");
 const Toolbar = _ref => {
   let {
@@ -14,11 +14,10 @@ const Toolbar = _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
     isShow: isShow,
     withoutAnimation: true,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle.default, {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle.ToolbarButtonCircle, {
       buttons: buttons
     })
   });
 };
-var _default = Toolbar;
-exports.default = _default;
+var _default = exports.default = Toolbar;
 //# sourceMappingURL=Toolbar.js.map

@@ -1,9 +1,10 @@
 import { filterBoolean } from '../../../utils/arrFn';
 
 import { useRefInit } from '../../hooks/useProperty';
-import crToolbarItem from './crToolbarItem';
+import { crToolbarButton } from '../../zhn/ToolbarButtonCircle';
 
 const CLICK_TO_TOGGLE = 'Click to toggle';
+const _crDialogMenuTooltip = str => `Open dialog ${str} menu`
 
 const useToolbar = ({
   toggleLabels,
@@ -13,18 +14,18 @@ const useToolbar = ({
   onAbout
 }) => useRefInit(() => filterBoolean([
   toggleLabels
-    ? crToolbarItem('L', `${CLICK_TO_TOGGLE} input labels`, toggleLabels)
+    ? crToolbarButton('L', `${CLICK_TO_TOGGLE} input labels`, toggleLabels)
     : void 0,
   toggleInputs
-    ? crToolbarItem('T', `${CLICK_TO_TOGGLE} inputs`, toggleInputs)
+    ? crToolbarButton('I', _crDialogMenuTooltip('inputs'), toggleInputs)
     : void 0,
   toggleOptions
-    ? crToolbarItem('O', `${CLICK_TO_TOGGLE} dialog options`, toggleOptions)
+    ? crToolbarButton('O', _crDialogMenuTooltip('options'), toggleOptions)
     : void 0,
   toggleDate
-    ? crToolbarItem('D', `${CLICK_TO_TOGGLE} date input`, toggleDate)
+    ? crToolbarButton('D', `${CLICK_TO_TOGGLE} date input`, toggleDate)
     : void 0,
-  crToolbarItem('A', 'About data source', onAbout)
+  crToolbarButton('A', 'About data source', onAbout)
 ]))
 
 export default useToolbar
