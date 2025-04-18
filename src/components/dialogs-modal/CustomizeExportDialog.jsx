@@ -18,7 +18,10 @@ import { crExportStyleOptions } from '../../charts/ChartExportConfig';
 
 import { RowFlex } from '../dialogs/rows/RowFlex';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import ToolbarButtonCircle from '../zhn/ToolbarButtonCircle';
+import {
+  crToolbarButton,
+  ToolbarButtonCircle
+} from '../zhn/ToolbarButtonCircle';
 
 import ShowHide from '../zhn/ShowHide';
 import InputText from '../zhn/InputText';
@@ -105,6 +108,8 @@ const DF_DATA = {}
   text: getInputValue(refInput)
 });
 
+const _crToolbarToolip = str => `Toggle input ${str}`;
+
 const CustomizeExportDialog = memoIsShow(({
   isShow,
   data=DF_DATA,
@@ -124,10 +129,10 @@ const CustomizeExportDialog = memoIsShow(({
   ] = useToggle(true)
   , _refExportStyle = useRef({})
   , _refExportFormat = useRef(null)
-  , _refToolbarButtons = useRef([
-    { caption: 'D', onClick: toggleDimension },
-    { caption: 'T', onClick: toggleTitle },
-    { caption: 'S', onClick: toggleStyle }
+  , _toolbarButtons = useRefInit(() => [
+     crToolbarButton("D",_crToolbarToolip("dimension"), toggleDimension),
+     crToolbarButton("T",_crToolbarToolip("title"), toggleTitle),
+     crToolbarButton("S",_crToolbarToolip("style"), toggleStyle)
   ])
   , _optionStyles = useRefInit(() => crExportStyleOptions())
   , _refInputWidth = useRef()
@@ -200,9 +205,9 @@ const CustomizeExportDialog = memoIsShow(({
       commandButtons={getRefValue(_refCommandButtons)}
       onClose={onClose}
     >
-       <ToolbarButtonCircle
-         buttons={getRefValue(_refToolbarButtons)}
-       />
+       <ToolbarButtonCircle>
+         {_toolbarButtons}
+       </ToolbarButtonCircle>
        <ShowHide isShow={isShowDimension}>
          <RowFlex>
             <span style={S_LABEL}>Dimension:</span>

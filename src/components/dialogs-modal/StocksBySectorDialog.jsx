@@ -1,3 +1,6 @@
+import { LT_AV } from '../../constants/LoadType';
+import { loadItem } from '../../flux/stores/itemStore';
+
 import {
   useRef,
   getRefValue,
@@ -5,14 +8,13 @@ import {
   isFn
 } from '../uiApi';
 
-import { LT_AV } from '../../constants/LoadType';
-
 import memoIsShow from '../hoc/memoIsShow';
 import { useToggle } from '../hooks/useToggle';
-import { useProperty } from '../hooks/useProperty';
+import {
+  useProperty,
+  useRefInit
+} from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';
-
-import { loadItem } from '../../flux/stores/itemStore';
 
 import {
   ButtonLoad,
@@ -23,10 +25,15 @@ import RowChart from '../dialogs/rows/RowChart';
 import {
   crChartOptions
 } from '../dialogs/ChartOptionsFn';
-import ShowHide from '../zhn/ShowHide';
-import ToolbarButtonCircle from '../zhn/ToolbarButtonCircle';
-import ModalDialog from '../zhn-moleculs/ModalDialog';
+
 import NasdaqLink from '../native-links/NasdaqLink';
+
+import ShowHide from '../zhn/ShowHide';
+import {
+  crToolbarButton,
+  ToolbarButtonCircle
+} from '../zhn/ToolbarButtonCircle';
+import ModalDialog from '../zhn-moleculs/ModalDialog';
 
 const S_ROOT_NOT_LABELS = { width: 280 }
 , S_CAPTION = {
@@ -87,15 +94,10 @@ const StocksBySectorDialog = memoIsShow(({
     isShowLink,
     toggleLink
   ] = useToggle()
-  , _refToolbarButtons = useRef([{
-       caption: 'L',
-       title: 'Click to toggle labels',
-       onClick: toggleLabels
-     },{
-      caption: 'O',
-      title: 'Click to toggle options',
-      onClick: toggleLink
-   }])
+  , _toolbarButtons = useRefInit( () => [
+    crToolbarButton('L','Toggle labels',toggleLabels),
+    crToolbarButton('O','Toggle options',toggleLink)
+  ])
   , [
     setDataSource,
     getDataSource
@@ -183,9 +185,9 @@ const StocksBySectorDialog = memoIsShow(({
        commandButtons={getRefValue(_refCommandButtons)}
        onClose={onClose}
     >
-      <ToolbarButtonCircle
-        buttons={getRefValue(_refToolbarButtons)}
-      />
+      <ToolbarButtonCircle>
+        {_toolbarButtons}
+      </ToolbarButtonCircle>
       <RowInputSelect
          isShowLabels={isShowLabels}
          caption="Source"

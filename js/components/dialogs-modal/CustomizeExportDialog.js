@@ -13,7 +13,7 @@ var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallbac
 var _ChartExportConfig = require("../../charts/ChartExportConfig");
 var _RowFlex = require("../dialogs/rows/RowFlex");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
-var _ToolbarButtonCircle = _interopRequireDefault(require("../zhn/ToolbarButtonCircle"));
+var _ToolbarButtonCircle = require("../zhn/ToolbarButtonCircle");
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
@@ -99,6 +99,7 @@ const DF_DATA = {},
   _crCaptionText = refInput => ({
     text: (0, _uiApi.getInputValue)(refInput)
   });
+const _crToolbarToolip = str => `Toggle input ${str}`;
 const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
   let {
     isShow,
@@ -110,16 +111,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     [isShowStyle, toggleStyle] = (0, _useToggle.useToggle)(true),
     _refExportStyle = (0, _uiApi.useRef)({}),
     _refExportFormat = (0, _uiApi.useRef)(null),
-    _refToolbarButtons = (0, _uiApi.useRef)([{
-      caption: 'D',
-      onClick: toggleDimension
-    }, {
-      caption: 'T',
-      onClick: toggleTitle
-    }, {
-      caption: 'S',
-      onClick: toggleStyle
-    }]),
+    _toolbarButtons = (0, _useProperty.useRefInit)(() => [(0, _ToolbarButtonCircle.crToolbarButton)("D", _crToolbarToolip("dimension"), toggleDimension), (0, _ToolbarButtonCircle.crToolbarButton)("T", _crToolbarToolip("title"), toggleTitle), (0, _ToolbarButtonCircle.crToolbarButton)("S", _crToolbarToolip("style"), toggleStyle)]),
     _optionStyles = (0, _useProperty.useRefInit)(() => (0, _ChartExportConfig.crExportStyleOptions)()),
     _refInputWidth = (0, _uiApi.useRef)(),
     _refInputHeight = (0, _uiApi.useRef)(),
@@ -162,8 +154,8 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     isShow: isShow,
     commandButtons: (0, _uiApi.getRefValue)(_refCommandButtons),
     onClose: onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle.default, {
-      buttons: (0, _uiApi.getRefValue)(_refToolbarButtons)
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle.ToolbarButtonCircle, {
+      children: _toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: isShowDimension,
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlex, {

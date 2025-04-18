@@ -3,21 +3,21 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _LoadType = require("../../constants/LoadType");
+var _itemStore = require("../../flux/stores/itemStore");
+var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
-var _itemStore = require("../../flux/stores/itemStore");
 var _Buttons = require("../dialogs/Buttons");
 var _RowInputSelect = _interopRequireDefault(require("../dialogs/rows/RowInputSelect"));
 var _RowChart = _interopRequireDefault(require("../dialogs/rows/RowChart"));
 var _ChartOptionsFn = require("../dialogs/ChartOptionsFn");
-var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
-var _ToolbarButtonCircle = _interopRequireDefault(require("../zhn/ToolbarButtonCircle"));
-var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _NasdaqLink = _interopRequireDefault(require("../native-links/NasdaqLink"));
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
+var _ToolbarButtonCircle = require("../zhn/ToolbarButtonCircle");
+var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROOT_NOT_LABELS = {
     width: 280
@@ -87,15 +87,7 @@ const StocksBySectorDialog = (0, _memoIsShow.default)(_ref2 => {
   const refSeriaColor = (0, _uiApi.useRef)(),
     [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(true),
     [isShowLink, toggleLink] = (0, _useToggle.useToggle)(),
-    _refToolbarButtons = (0, _uiApi.useRef)([{
-      caption: 'L',
-      title: 'Click to toggle labels',
-      onClick: toggleLabels
-    }, {
-      caption: 'O',
-      title: 'Click to toggle options',
-      onClick: toggleLink
-    }]),
+    _toolbarButtons = (0, _useProperty.useRefInit)(() => [(0, _ToolbarButtonCircle.crToolbarButton)('L', 'Toggle labels', toggleLabels), (0, _ToolbarButtonCircle.crToolbarButton)('O', 'Toggle options', toggleLink)]),
     [setDataSource, getDataSource] = (0, _useProperty.useProperty)(),
     [setChartType, getChartType] = (0, _useProperty.useProperty)(),
     _hShow = (0, _useEventCallback.default)(() => {
@@ -173,8 +165,8 @@ const StocksBySectorDialog = (0, _memoIsShow.default)(_ref2 => {
     isShow: isShow,
     commandButtons: (0, _uiApi.getRefValue)(_refCommandButtons),
     onClose: onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle.default, {
-      buttons: (0, _uiApi.getRefValue)(_refToolbarButtons)
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle.ToolbarButtonCircle, {
+      children: _toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
       isShowLabels: isShowLabels,
       caption: "Source",
