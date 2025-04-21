@@ -6,15 +6,11 @@ exports.crToolbarButton = exports.ToolbarButtonCircle = void 0;
 var _ButtonCircle = _interopRequireDefault(require("./ButtonCircle"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_TOOLBAR = {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '6px 5px'
-  },
-  S_BUTTON_CIRCLE = {
-    marginLeft: 20
-  };
+  display: 'flex',
+  padding: '6px 5px 6px 15px',
+  gap: 15
+};
 const crToolbarButton = (caption, title, onClick) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
-  style: S_BUTTON_CIRCLE,
   caption: caption,
   title: title,
   onClick: onClick

@@ -2,11 +2,8 @@ import ButtonCircle from './ButtonCircle';
 
 const S_TOOLBAR = {
   display: 'flex',
-  alignItems: 'center',
-  padding: '6px 5px'
-}
-, S_BUTTON_CIRCLE = {
-  marginLeft: 20
+  padding: '6px 5px 6px 15px',
+  gap: 15
 };
 
 export const crToolbarButton = (
@@ -16,7 +13,6 @@ export const crToolbarButton = (
 ) => (
   <ButtonCircle
     key={caption}
-    style={S_BUTTON_CIRCLE}
     caption={caption}
     title={title}
     onClick={onClick}
