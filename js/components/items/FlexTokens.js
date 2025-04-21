@@ -3,16 +3,17 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_TOKENS = {
-    display: 'flex',
+    ..._styleFn.S_FLEX,
     flexFlow: 'wrap',
     lineHeight: 2
   },
   S_TOKEN = {
-    display: 'inline-block',
+    ..._styleFn.S_INLINE,
     padding: '0 8px',
     fontWeight: 600,
     whiteSpace: 'nowrap'

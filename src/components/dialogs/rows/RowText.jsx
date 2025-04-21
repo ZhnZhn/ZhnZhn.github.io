@@ -1,10 +1,13 @@
 import DivEllipsis from '../../zhn/DivEllipsis';
 import { SpanInputLabel } from '../../zhn/SpanToken';
-import { CL_BLACK } from '../../styleFn';
+import {
+  S_FLEX,
+  CL_BLACK
+} from '../../styleFn';
 import crRowLabelStyle from './crRowLabelStyle';
 
 const S_DIV = {
-  display: 'flex',
+  ...S_FLEX,
   margin: '5px 5px 5px 10px',
   lineHeight: 2
 }, S_TEXT = {

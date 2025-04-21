@@ -3,25 +3,26 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _DivEllipsis = _interopRequireDefault(require("../zhn/DivEllipsis"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW_CAPTION = {
-    display: 'flex',
+    ..._styleFn.S_FLEX,
     margin: 5,
     lineHeight: 2,
     fontSize: '18px',
     fontWeight: 'bold'
   },
   S_CAPTION = {
-    display: 'inline-block',
+    ..._styleFn.S_INLINE,
     color: '#f44336',
     padding: '0 10px 0 8px',
     whiteSpace: 'nowrap'
   },
   S_ITEM_ID = {
-    display: 'inline-block',
+    ..._styleFn.S_INLINE,
     color: '#a487d4',
     width: 190
   },

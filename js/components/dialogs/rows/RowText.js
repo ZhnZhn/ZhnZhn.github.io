@@ -9,7 +9,7 @@ var _styleFn = require("../../styleFn");
 var _crRowLabelStyle = _interopRequireDefault(require("./crRowLabelStyle"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_DIV = {
-    display: 'flex',
+    ..._styleFn.S_FLEX,
     margin: '5px 5px 5px 10px',
     lineHeight: 2
   },

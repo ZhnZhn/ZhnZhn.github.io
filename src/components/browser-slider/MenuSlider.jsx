@@ -1,5 +1,8 @@
 import { useState } from '../uiApi';
-import { crSliderTransformStyle } from '../styleFn';
+import {
+  S_FLEX,
+  crSliderTransformStyle
+} from '../styleFn';
 
 import useThrottleCallback from '../hooks/useThrottleCallback';
 
@@ -16,7 +19,7 @@ const S_ROOT = {
 , S_PAGES = {
   width: 5*PAGE_WIDTH,
   overflowX: 'hidden',
-  display: 'flex',
+  ...S_FLEX,
   flexFlow: 'row nowrap',
   alignItems: 'flex-start',
   transition: 'all .3s ease-out'

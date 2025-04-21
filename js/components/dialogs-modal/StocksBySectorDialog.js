@@ -6,6 +6,7 @@ exports.default = void 0;
 var _LoadType = require("../../constants/LoadType");
 var _itemStore = require("../../flux/stores/itemStore");
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
@@ -23,22 +24,22 @@ const S_ROOT_NOT_LABELS = {
     width: 280
   },
   S_CAPTION = {
-    display: 'inline-block',
+    ..._styleFn.S_INLINE,
     maxWidth: 295
   },
   S_LINK_SHOW_HIDE = {
     marginBottom: 10
   },
   S_LINK_ROOT = {
-    display: 'flex',
+    ..._styleFn.S_FLEX,
     alignItems: 'center',
     margin: '8px 5px 0 5px',
     lineHeight: 1.5,
     fontWeight: 'bold'
   },
   S_LINK_CAPTION = {
+    ..._styleFn.S_INLINE,
     color: '#1b75bb',
-    display: 'inline-block',
     width: 100,
     paddingRight: 5,
     textAlign: 'right',

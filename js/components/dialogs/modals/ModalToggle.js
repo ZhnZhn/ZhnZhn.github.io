@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../../utils/isTypeFn");
+var _styleFn = require("../../styleFn");
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
 var _ItemStack = _interopRequireDefault(require("../../zhn/ItemStack"));
 var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox1"));
@@ -13,7 +14,7 @@ var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW_FLEX = {
     ..._Style.S_ROW,
-    display: 'flex',
+    ..._styleFn.S_FLEX,
     justifyContent: 'space-between'
   },
   S_CAPTION = {
@@ -21,11 +22,11 @@ const S_ROW_FLEX = {
     textAlign: 'left'
   },
   S_CHB_TOGGLE = {
-    display: 'inline-block',
+    ..._styleFn.S_INLINE,
     padding: void 0
   },
   S_CHB_CAPTION = {
-    display: 'inline-block',
+    ..._styleFn.S_INLINE,
     padding: '0 0 0 40px'
   };
 const _crChbToggleInitValue = isRow => (0, _isTypeFn.isBool)(isRow) ? isRow : true;

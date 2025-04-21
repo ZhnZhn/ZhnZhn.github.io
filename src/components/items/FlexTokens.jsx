@@ -1,16 +1,21 @@
+import {
+  S_FLEX,
+  S_INLINE
+} from '../styleFn';
+
 import ItemStack from '../zhn/ItemStack';
 import OpenClose from '../zhn/OpenClose';
 
 const S_TOKENS = {
-  display: 'flex',
+  ...S_FLEX,
   flexFlow: 'wrap',
   lineHeight: 2
 }
 , S_TOKEN = {
-   display: 'inline-block',
-   padding: '0 8px',
-   fontWeight: 600,
-   whiteSpace: 'nowrap'
+  ...S_INLINE,
+  padding: '0 8px',
+  fontWeight: 600,
+  whiteSpace: 'nowrap'
 };
 
 const _crTokenItem = token => (

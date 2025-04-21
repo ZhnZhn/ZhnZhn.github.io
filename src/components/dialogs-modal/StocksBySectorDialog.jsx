@@ -8,6 +8,11 @@ import {
   isFn
 } from '../uiApi';
 
+import {
+  S_FLEX,
+  S_INLINE
+} from '../styleFn';
+
 import memoIsShow from '../hoc/memoIsShow';
 import { useToggle } from '../hooks/useToggle';
 import {
@@ -37,20 +42,20 @@ import ModalDialog from '../zhn-moleculs/ModalDialog';
 
 const S_ROOT_NOT_LABELS = { width: 280 }
 , S_CAPTION = {
-  display: 'inline-block',
+  ...S_INLINE,
   maxWidth: 295
 }
 , S_LINK_SHOW_HIDE = { marginBottom: 10 }
 , S_LINK_ROOT = {
-  display: 'flex',
+  ...S_FLEX,
   alignItems: 'center',
   margin: '8px 5px 0 5px',
   lineHeight: 1.5,
   fontWeight: 'bold'
 }
 , S_LINK_CAPTION = {
-  color: '#1b75bb',
-  display: 'inline-block',
+  ...S_INLINE,
+  color: '#1b75bb',  
   width: 100,
   paddingRight: 5,
   textAlign: 'right',

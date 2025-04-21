@@ -18,7 +18,7 @@ const S_ROOT = {
   S_PAGES = {
     width: 5 * PAGE_WIDTH,
     overflowX: 'hidden',
-    display: 'flex',
+    ..._styleFn.S_FLEX,
     flexFlow: 'row nowrap',
     alignItems: 'flex-start',
     transition: 'all .3s ease-out'

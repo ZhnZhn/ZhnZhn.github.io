@@ -1,8 +1,10 @@
+import { S_FLEX } from '../styleFn';
+
 import InputSecret from '../zhn/InputSecret';
 import { SpanInputLabel } from '../zhn/SpanToken';
 
 const S_LABEL = {
-  display: 'flex',
+  ...S_FLEX,
   margin: '5px 0'
 };
 

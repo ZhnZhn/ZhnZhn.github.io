@@ -1,22 +1,27 @@
+import {
+  S_FLEX,
+  S_INLINE
+} from '../styleFn';
+
 import memoIsShow from '../hoc/memoIsShow';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import DivEllipsis from '../zhn/DivEllipsis';
 
 const S_ROW_CAPTION = {
-  display: 'flex',
+  ...S_FLEX,
   margin: 5,
   lineHeight: 2,
   fontSize: '18px',
   fontWeight: 'bold'
 }
 , S_CAPTION = {
-  display: 'inline-block',
+  ...S_INLINE,
   color: '#f44336',
   padding: '0 10px 0 8px',
   whiteSpace: 'nowrap'
 }
 , S_ITEM_ID = {
-  display: 'inline-block',
+  ...S_INLINE,  
   color: '#a487d4',
   width: 190
 }

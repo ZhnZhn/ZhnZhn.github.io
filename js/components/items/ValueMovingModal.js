@@ -17,7 +17,7 @@ const S_MODAL_POPUP = {
     padding: '5px 10px 10px 10px'
   },
   S_ROW = {
-    display: 'flex',
+    ..._styleFn.S_FLEX,
     justifyContent: 'space-between'
   },
   S_DATE = {

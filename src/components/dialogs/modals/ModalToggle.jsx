@@ -1,5 +1,10 @@
 import { isBool } from '../../../utils/isTypeFn';
 
+import {
+  S_FLEX,
+  S_INLINE
+} from '../../styleFn';
+
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import ItemStack from '../../zhn/ItemStack';
 
@@ -16,7 +21,7 @@ import {
 
 const S_ROW_FLEX = {
   ...S_ROW,
-  display: 'flex',
+  ...S_FLEX,
   justifyContent: 'space-between'
 }
 , S_CAPTION = {
@@ -24,11 +29,11 @@ const S_ROW_FLEX = {
   textAlign: 'left'
 }
 , S_CHB_TOGGLE = {
-  display: 'inline-block',
+  ...S_INLINE,
   padding: void 0
 }
 , S_CHB_CAPTION = {
-  display: 'inline-block',
+  ...S_INLINE,
   padding: '0 0 0 40px'
 };
 

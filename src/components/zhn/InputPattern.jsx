@@ -8,6 +8,8 @@ import {
   focusRefElement
 } from '../uiApi';
 
+import { S_FLEX } from '../styleFn';
+
 import useInputKeyDown from './useInputKeyDown';
 
 import { BtSvgClear } from './BtSvgX';
@@ -18,10 +20,7 @@ import {
   getIsValidColor
 } from './Input.Style';
 
-const S_FLEX = {
-  display: 'flex'
-}
-, S_INPUT_PATTERN = {
+const S_INPUT_PATTERN = {
   ...S_INPUT,
   width: 'calc(100% - 50px)',
   paddingLeft: 0,

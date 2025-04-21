@@ -1,11 +1,13 @@
 import { isDmy } from '../../utils/dateFn';
 
+import { S_FLEX } from '../styleFn';
+
 import { SpanBoldBlack } from './SpanToken';
 import DateField from './DateField';
 import { S_BOX_SHADOW } from './Input.Style';
 
 const S_ROW_INPUT = {
-  display: 'flex',
+  ...S_FLEX,
   alignItems: 'center',
   marginTop: 8
 }

@@ -3,11 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _styleFn = require("../styleFn");
 var _InputSecret = _interopRequireDefault(require("../zhn/InputSecret"));
 var _SpanToken = require("../zhn/SpanToken");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_LABEL = {
-  display: 'flex',
+  ..._styleFn.S_FLEX,
   margin: '5px 0'
 };
 const RowSecret = _ref => {

@@ -1,7 +1,9 @@
+import { S_FLEX } from '../styleFn';
+
 import ButtonCircle from './ButtonCircle';
 
 const S_TOOLBAR = {
-  display: 'flex',
+  ...S_FLEX,
   padding: '6px 5px 6px 15px',
   gap: 15
 };

@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 var _BtSvgX = require("./BtSvgX");
 var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
@@ -11,10 +12,7 @@ var _Input = require("./Input.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
-const S_FLEX = {
-    display: 'flex'
-  },
-  S_INPUT_PATTERN = {
+const S_INPUT_PATTERN = {
     ..._Input.S_INPUT,
     width: 'calc(100% - 50px)',
     paddingLeft: 0,
@@ -117,7 +115,7 @@ const InputPattern = (_ref, ref) => {
       ...style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: S_FLEX,
+      style: _styleFn.S_FLEX,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
         type: "text",
         style: {

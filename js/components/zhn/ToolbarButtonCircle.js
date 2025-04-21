@@ -3,10 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.crToolbarButton = exports.ToolbarButtonCircle = void 0;
+var _styleFn = require("../styleFn");
 var _ButtonCircle = _interopRequireDefault(require("./ButtonCircle"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_TOOLBAR = {
-  display: 'flex',
+  ..._styleFn.S_FLEX,
   padding: '6px 5px 6px 15px',
   gap: 15
 };

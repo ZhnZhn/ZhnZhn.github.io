@@ -77,9 +77,16 @@ export const CL_OPEN_CLOSE = `${OPEN_CLOSE} cfs-dark`
 export const CL_OPEN_CLOSE_EXP = `${OPEN_CLOSE}__exp`
 export const CL_OPEN_CLOSE_BLACK = `${OPEN_CLOSE} cfs-black`
 
-export const S_BLOCK = { display: "block" }
-export const S_INLINE = { display: "inline-block" }
-export const S_NONE = { display: "none" }
+const _fCrStyle = propName => value => ({
+  [propName]: value
+})
+, _crDisplayStyle = _fCrStyle("display")
+export const S_BLOCK = _crDisplayStyle("block")
+export const S_INLINE = _crDisplayStyle("inline-block")
+export const S_NONE = _crDisplayStyle("none")
+export const S_FLEX = _crDisplayStyle("flex")
+
+export const crColorStyle = _fCrStyle("color")
 
 export const S_BORDER_RADIUS_2 = { borderRadius: 2 }
 
@@ -98,10 +105,6 @@ export const crAbsoluteTopLeftStyle = (
   position: 'absolute',
   [isBottom ? 'bottom' : 'top']: top,
   [isRight ? 'right': 'left']: left
-})
-
-export const crColorStyle = (color) => ({
-  color
 })
 
 export const crStepStyle = (

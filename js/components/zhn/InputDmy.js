@@ -4,12 +4,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _dateFn = require("../../utils/dateFn");
+var _styleFn = require("../styleFn");
 var _SpanToken = require("./SpanToken");
 var _DateField = _interopRequireDefault(require("./DateField"));
 var _Input = require("./Input.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW_INPUT = {
-    display: 'flex',
+    ..._styleFn.S_FLEX,
     alignItems: 'center',
     marginTop: 8
   },

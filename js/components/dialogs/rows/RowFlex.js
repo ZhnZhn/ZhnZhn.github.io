@@ -15,13 +15,13 @@ const _fRowFlex = initialStyle => _ref => {
   });
 };
 const S_ROW_FLEX = exports.S_ROW_FLEX = {
-  display: 'flex',
+  ..._styleFn.S_FLEX,
   alignItems: 'center',
   margin: '5px 8px'
 };
 const RowFlex = exports.RowFlex = _fRowFlex(S_ROW_FLEX);
 const S_ROW_FLEX_END = {
-  display: 'flex',
+  ..._styleFn.S_FLEX,
   justifyContent: 'flex-end',
   flexWrap: 'wrap',
   padding: '6px 4px 6px 0'

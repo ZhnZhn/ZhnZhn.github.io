@@ -15,6 +15,7 @@ import {
 } from '../uiApi';
 
 import {
+  S_FLEX,
   crAbsoluteTopLeftStyle
 } from '../styleFn';
 
@@ -31,7 +32,7 @@ const S_MODAL_POPUP = {
   padding: '5px 10px 10px 10px'
 }
 , S_ROW = {
-  display: 'flex',
+  ...S_FLEX,
   justifyContent: 'space-between'
 }
 , S_DATE = {
