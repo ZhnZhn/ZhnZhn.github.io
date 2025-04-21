@@ -33,3 +33,12 @@
   color: #f44336;
   font-weight: bold;
 }
+
+.step {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  border: solid 2px;
+  border-radius: 50%;
+}

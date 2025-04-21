@@ -35,7 +35,6 @@
 }
 
 .row__topic {
-  color: black;
   color: var(--c-bl);
  
   display: flex;
@@ -68,7 +67,6 @@
 
 
 .item__browser {
-  color: #1b2836;
   color: var(--btf-c);
 }
 

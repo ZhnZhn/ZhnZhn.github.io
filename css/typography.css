@@ -26,7 +26,6 @@
 }
 
 .descr-datasource h1 {
-  color: black;
   color: var(--c-bl);
   font-size: 18px;
   font-weight: normal;
@@ -39,7 +38,6 @@
   white-space: pre-line;
 }
 .descr-datasource span {
-  color: black;
   color: var(--c-bl);
 }
 

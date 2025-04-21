@@ -6,20 +6,12 @@
   cursor: pointer;
 }
 
-.cfs-dark {
-  color: #1b2836;
-  fill: #1b2836;
-  stroke: #1b2836;
-
+.cfs-dark {  
   color: var(--btf-c);
   fill: var(--btf-c);
   stroke: var(--btf-c);  
 }
-.cfs-black {
-  color: black;
-  fill: black;
-  stroke: black;
-
+.cfs-black {  
   color: var(--c-bl);
   fill: var(--c-bl);
   stroke: var(--c-bl);  

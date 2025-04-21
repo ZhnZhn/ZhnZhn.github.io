@@ -9,7 +9,6 @@
 }
 
 .twit > a {
-  color: black;  
   color: var(--c-bl);
   display: block; 
   text-decoration: none;
