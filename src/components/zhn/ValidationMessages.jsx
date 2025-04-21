@@ -1,22 +1,20 @@
-import { crStepStyle } from '../styleFn';
+import { COLOR_RED } from '../../constants/Color';
+
 import StepTitles from './StepTitles';
 
-const MSG_COLOR = "#f44336"
-, S_VM = {
-  color: MSG_COLOR,
+const S_VM = {
+  color: COLOR_RED,
   paddingLeft: 10,
   paddingTop: 4,
   fontWeight: "bold",
   lineHeight: 1.4
 }
-, S_VM_MSG_NUMBER = crStepStyle(MSG_COLOR);
 
 const ValidationMessages = ({
   validationMessages
 }) => (
   <StepTitles
     style={S_VM}
-    stepStyle={S_VM_MSG_NUMBER}
     titles={validationMessages}
   />
 );

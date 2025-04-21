@@ -1,12 +1,14 @@
+import { COLOR_GREEN } from '../../constants/Color';
+import { useMsAbout } from '../../flux/stores/compStore';
+
 import { isWideWidth } from '../has';
 import {
-  crStepStyle,
   crBsContainerCn,
-  crScrollYCn
+  crScrollYCn,
+  crColorStyle
 } from '../styleFn';
 
 import useShowHideComponent from '../hooks/useShowHideComponent';
-import { useMsAbout } from '../../flux/stores/compStore';
 
 import BrowserCaption from '../zhn/BrowserCaption';
 import ScrollPane from '../zhn/ScrollPane';
@@ -24,8 +26,6 @@ const CL_ABOUT = crBsContainerCn("about-container")
 , CL_SHOW_CONT = "show-cont"
 , CL_SCROLL_Y = crScrollYCn()
 , CL_BLACK = "black"
-
-, S_STEP = crStepStyle("#80c040")
 , S_SCROLL_DIV = { height: '94%' }
 , S_DIV_WRAPPER = {
   paddingLeft: 12,
@@ -41,8 +41,8 @@ const CL_ABOUT = crBsContainerCn("about-container")
 , S_MB_4 = { marginBottom: 4 }
 , S_MT_4 = { marginTop: 4 }
 , S_BT_X_PLATFORM = { marginLeft: 12 }
-, S_GREEN = { color: '#80c040' }
-, S_RED = { color: '#f44336' }
+, S_GREEN = crColorStyle(COLOR_GREEN)
+, S_RED = crColorStyle('#f44336')
 
 , STEP_TITLES = [
   "Please, choose a data source Browser from Topics [t]",
@@ -105,7 +105,7 @@ const About = () => {
          <DataProviders isClose={IS_CLOSE_PROVIDERS} />
          <StepTitles
            className={CL_BLACK}
-           stepStyle={S_STEP}
+           stepColor={COLOR_GREEN}
            titles={STEP_TITLES}
          />
           <p style={S_MT_4}>

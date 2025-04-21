@@ -3,10 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _Color = require("../../constants/Color");
+var _compStore = require("../../flux/stores/compStore");
 var _has = require("../has");
 var _styleFn = require("../styleFn");
 var _useShowHideComponent = _interopRequireDefault(require("../hooks/useShowHideComponent"));
-var _compStore = require("../../flux/stores/compStore");
 var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
 var _ScrollPane = _interopRequireDefault(require("../zhn/ScrollPane"));
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
@@ -21,7 +22,6 @@ const CL_ABOUT = (0, _styleFn.crBsContainerCn)("about-container"),
   CL_SHOW_CONT = "show-cont",
   CL_SCROLL_Y = (0, _styleFn.crScrollYCn)(),
   CL_BLACK = "black",
-  S_STEP = (0, _styleFn.crStepStyle)("#80c040"),
   S_SCROLL_DIV = {
     height: '94%'
   },
@@ -53,12 +53,8 @@ const CL_ABOUT = (0, _styleFn.crBsContainerCn)("about-container"),
   S_BT_X_PLATFORM = {
     marginLeft: 12
   },
-  S_GREEN = {
-    color: '#80c040'
-  },
-  S_RED = {
-    color: '#f44336'
-  },
+  S_GREEN = (0, _styleFn.crColorStyle)(_Color.COLOR_GREEN),
+  S_RED = (0, _styleFn.crColorStyle)('#f44336'),
   STEP_TITLES = ["Please, choose a data source Browser from Topics [t]", "Next, choose a dataset menu item in the the opended up Browser", "Select params and enter query date in the opened up draggable Dialog", "Click a button Load"],
   IS_CLOSE_PROVIDERS = !(0, _has.isWideWidth)();
 const About = () => {
@@ -102,7 +98,7 @@ const About = () => {
           isClose: IS_CLOSE_PROVIDERS
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitles.default, {
           className: CL_BLACK,
-          stepStyle: S_STEP,
+          stepColor: _Color.COLOR_GREEN,
           titles: STEP_TITLES
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
           style: S_MT_4,
