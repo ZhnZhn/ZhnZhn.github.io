@@ -1,22 +1,17 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
 exports.default = void 0;
-
 var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle"));
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 const CL_BT_WATCH_BAR = "bt__watch__bar";
 const S_EDIT_BAR = {
-  marginBottom: 10
-},
-      S_BT_LIST = {
-  marginLeft: 20
-};
-
+    margin: '4px 0'
+  },
+  S_BT_LIST = {
+    marginLeft: 15
+  };
 const EditBar = _ref => {
   let {
     isShow,
@@ -37,7 +32,5 @@ const EditBar = _ref => {
     })]
   }) : null;
 };
-
-var _default = EditBar;
-exports.default = _default;
+var _default = exports.default = EditBar;
 //# sourceMappingURL=EditBar.js.map

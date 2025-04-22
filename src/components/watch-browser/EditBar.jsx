@@ -3,12 +3,11 @@ import ButtonCircle from '../zhn/ButtonCircle';
 const CL_BT_WATCH_BAR = "bt__watch__bar";
 
 const S_EDIT_BAR = {
-  marginBottom: 10
+  margin: '4px 0'
 }
 , S_BT_LIST = {
-  marginLeft: 20
+  marginLeft: 15
 };
-
 
 const EditBar = ({
   isShow,
