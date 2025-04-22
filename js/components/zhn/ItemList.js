@@ -10,12 +10,16 @@ const UL_STYLE = {
   _crKeyDf = (_, index) => index;
 const ItemList = (0, _uiApi.memo)(_ref => {
   let {
+    style,
     items,
     crKey = _crKeyDf,
     crItem
   } = _ref;
   return (0, _uiApi.isArr)(items) ? /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
-    style: UL_STYLE,
+    style: {
+      ...UL_STYLE,
+      ...style
+    },
     children: items.map((item, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
       children: crItem(item)
     }, crKey(item, index)))
