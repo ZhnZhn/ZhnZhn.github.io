@@ -1,16 +1,4 @@
 
-.native-link {
-  color: #0b8fff;
-  margin-bottom: 2px;
-  border-bottom: 1px solid;
-  font-weight: bold;
-  text-decoration: none;
-}
-.native-link:hover {
-  margin-bottom: 0;
-  border-bottom-width: 3px;
-}
-
 .x-link {
   background-color: #1b95e0;
 }
@@ -41,27 +29,4 @@
   color: var(--c-bl);
 }
 
-/* Provider Links */
-.descr-datasource a,
-.info__descr a,
-.data-provider-link {
-  color: #009ae5;
-  font-weight: bold;
-  padding-bottom: 2px;
-  border-bottom: 1px solid;
-  text-decoration: none;
-  cursor: pointer;
-}
-.descr-datasource a:hover,
-.info__descr a:hover,
-.data-provider-link:hover {
-  border-bottom-width: 3px;
-}
-@media screen and (max-width: 600px) {
-  .descr-datasource a,
-  .info__descr a,
-  .native-link,
-  .data-provider-link {
-     border-bottom: 2px solid;
-  }
-}
+
