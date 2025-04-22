@@ -7,7 +7,6 @@
   width: 100%;
   min-width: 300px;
   padding: 8px 12px 4px;  
-  //background-color: #4d4d4d;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
@@ -28,8 +27,7 @@
 .header__panel-browser {
   top: 45px;
   left: 152px;
-  z-index: 1010;
-  border-bottom: 4px solid #80c040;
+  z-index: 10;  
 }
 
 .header__bts-right {
