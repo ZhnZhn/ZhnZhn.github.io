@@ -33,20 +33,18 @@ const S_ROOT_NOT_LABELS = {
   S_LINK_ROOT = {
     ..._styleFn.S_FLEX,
     alignItems: 'center',
-    margin: '8px 5px 0 5px',
-    lineHeight: 1.5,
+    margin: '10px 5px 0 5px',
+    lineHeight: 1.4,
     fontWeight: 'bold'
   },
   S_LINK_CAPTION = {
     ..._styleFn.S_INLINE,
-    color: '#1b75bb',
-    width: 100,
-    paddingRight: 5,
-    textAlign: 'right',
-    fontSize: '16px'
+    height: 24,
+    width: 100
   },
   S_LINK = {
-    paddingTop: 0
+    lineHeight: 1,
+    marginLeft: 3
   },
   S_LINK_NOT_LABELS = {
     marginLeft: 8
@@ -185,8 +183,7 @@ const StocksBySectorDialog = (0, _memoIsShow.default)(_ref2 => {
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: S_LINK_ROOT,
         children: [isShowLabels && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          style: S_LINK_CAPTION,
-          children: "Link:"
+          style: S_LINK_CAPTION
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_NasdaqLink.default, {
           style: _linkStyle,
           item: item,

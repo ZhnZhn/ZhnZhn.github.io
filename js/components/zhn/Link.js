@@ -1,26 +1,25 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-
-var _jsxRuntime = require("react/jsx-runtime.js");
-
-var Link = function Link(_ref) {
-  var _ref$className = _ref.className,
-      className = _ref$className === void 0 ? 'link' : _ref$className,
-      style = _ref.style,
-      title = _ref.title,
-      href = _ref.href,
-      children = _ref.children;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("a", {
+exports.default = void 0;
+var _uiApi = require("../uiApi");
+var _jsxRuntime = require("react/jsx-runtime");
+const Link = _ref => {
+  let {
+    className,
+    style,
+    caption,
+    href,
+    children
+  } = _ref;
+  const _href = (0, _uiApi.toHref)(href);
+  return _href && (caption || children) ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("a", {
     target: "_blank",
     className: className,
     style: style,
-    href: href,
-    children: [title, children]
-  });
+    href: _href,
+    children: [caption, children]
+  }) : null;
 };
-
-var _default = Link;
-exports["default"] = _default;
+var _default = exports.default = Link;
 //# sourceMappingURL=Link.js.map

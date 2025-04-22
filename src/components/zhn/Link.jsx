@@ -1,21 +1,24 @@
 import { toHref } from '../uiApi';
 
 const Link = ({
-  className='link',
+  className,
   style,
-  title,
+  caption,
   href,
   children
-}) => (
- <a
-   target="_blank"
-   className={className}
-   style={style}
-   href={toHref(href)}
- >
-    {title}
-    {children}
- </a>
-);
+}) => {
+  const _href = toHref(href);
+  return _href && (caption || children) ? (
+    <a
+      target="_blank"
+      className={className}
+      style={style}
+      href={_href}
+    >
+      {caption}
+      {children}
+    </a>
+  ) : null;
+}
 
 export default Link

@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _Link = _interopRequireDefault(require("./Link"));
+var _Link = _interopRequireDefault(require("../zhn/Link"));
 var _jsxRuntime = require("react/jsx-runtime");
 const DfLink = _ref => {
   let {
@@ -13,6 +13,5 @@ const DfLink = _ref => {
     ...item
   });
 };
-var _default = DfLink;
-exports.default = _default;
+var _default = exports.default = DfLink;
 //# sourceMappingURL=DfLink.js.map

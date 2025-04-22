@@ -1,4 +1,4 @@
-import Link from './Link';
+import Link from '../zhn/Link';
 
 const ROOT_URI = 'https://data.nasdaq.com/data/'
 , DF_CAPTION = 'Nasdaq Data Link';

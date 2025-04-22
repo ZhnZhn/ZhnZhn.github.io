@@ -48,20 +48,17 @@ const S_ROOT_NOT_LABELS = { width: 280 }
 , S_LINK_SHOW_HIDE = { marginBottom: 10 }
 , S_LINK_ROOT = {
   ...S_FLEX,
-  alignItems: 'center',
-  margin: '8px 5px 0 5px',
-  lineHeight: 1.5,
+  alignItems: 'flex-start',
+  margin: '10px 5px 0 5px',
+  lineHeight: 1.4,
   fontWeight: 'bold'
 }
 , S_LINK_CAPTION = {
   ...S_INLINE,
-  color: '#1b75bb',  
-  width: 100,
-  paddingRight: 5,
-  textAlign: 'right',
-  fontSize: '16px'
+  height: 24,
+  width: 100
 }
-, S_LINK = { paddingTop: 0 }
+, S_LINK = { lineHeight: 1, marginLeft: 3 }
 , S_LINK_NOT_LABELS = { marginLeft: 8 };
 
 const _crTsAdjToken = period => `TIME_SERIES_${period}_ADJUSTED`
@@ -212,9 +209,7 @@ const StocksBySectorDialog = memoIsShow(({
        >
          <div style={S_LINK_ROOT}>
            {
-             isShowLabels && <span style={S_LINK_CAPTION}>
-               Link:
-             </span>
+             isShowLabels && <span style={S_LINK_CAPTION} />
            }
            <NasdaqLink
               style={_linkStyle}

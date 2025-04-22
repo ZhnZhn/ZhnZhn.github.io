@@ -2,7 +2,6 @@ import { isStr } from '../../utils/isTypeFn';
 
 import Link from '../zhn/Link';
 
-const CL_LINK = "data-provider-link";
 const _crUrl = domain => `https://${domain}`;
 
 const LINK_CONFIGS = [
@@ -61,8 +60,7 @@ const Links = LINK_CONFIGS.reduce((result, conf) => {
   result[conf[0]] = () => {
     const _confIndex = isStr(conf[2]) ? 1 : 0;
     return (<Link
-      className={CL_LINK}
-      title={conf[_confIndex]}
+      caption={conf[_confIndex]}
       href={conf[_confIndex+1]}
    />);
   }

@@ -3,7 +3,7 @@ import {
   isObj
 } from '../../utils/isTypeFn';
 
-import Link from './Link';
+import Link from '../zhn/Link';
 
 const NASDAQ_BASE = 'https://www.nasdaq.com/symbol/'
 , CAPTION = 'NASDAQ Link';

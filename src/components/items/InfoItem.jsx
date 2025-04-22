@@ -6,7 +6,7 @@ import ItemList from '../zhn/ItemList';
 import ShowHide from '../zhn/ShowHide';
 import ItemStack from '../zhn/ItemStack';
 
-import Link from '../native-links/Link';
+import Link from '../zhn/Link';
 import ItemHeader from './ItemHeader';
 import FlexTokens from './FlexTokens';
 

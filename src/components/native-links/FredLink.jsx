@@ -1,4 +1,4 @@
-import Link from './Link';
+import Link from '../zhn/Link';
 
 const ROOT = 'https://fred.stlouisfed.org/';
 const URL_SEARCH = `${ROOT}search?st=`;

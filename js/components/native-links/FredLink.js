@@ -3,11 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _Link = _interopRequireDefault(require("./Link"));
+var _Link = _interopRequireDefault(require("../zhn/Link"));
 var _jsxRuntime = require("react/jsx-runtime");
 const ROOT = 'https://fred.stlouisfed.org/';
-const URL_SEARCH = ROOT + "search?st=";
-const URL_GRAPH = ROOT + "series/";
+const URL_SEARCH = `${ROOT}search?st=`;
+const URL_GRAPH = `${ROOT}series/`;
 const S_DELIMETER = {
   display: 'inline-block',
   width: 32
@@ -37,6 +37,5 @@ const FredLink = _ref => {
     })]
   });
 };
-var _default = FredLink;
-exports.default = _default;
+var _default = exports.default = FredLink;
 //# sourceMappingURL=FredLink.js.map
