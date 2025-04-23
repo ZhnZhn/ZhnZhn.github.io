@@ -1,7 +1,7 @@
 import { isStr } from './isTypeFn';
 
 export const crRouter = obj => Object
- .assign(Object.create(null), obj)
+  .setPrototypeOf(obj || {}, null)
 
  export const crGetRoute = (
    routes,

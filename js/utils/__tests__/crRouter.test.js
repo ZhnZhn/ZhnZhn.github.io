@@ -16,6 +16,21 @@ describe("crRouter", () => {
     };
     expect(fn(config)).toEqual(config);
   });
+  it("should not call getters during creation", () => {
+    const getA = jest.fn(),
+      getB = jest.fn(),
+      config = {
+        get a() {
+          return getA();
+        },
+        get b() {
+          return getB();
+        }
+      };
+    fn(config);
+    expect(getA).toBeCalledTimes(0);
+    expect(getB).toBeCalledTimes(0);
+  });
 });
 describe("crGetRoute", () => {
   const fn = _crRouter.crGetRoute;
