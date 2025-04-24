@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
+exports[`FlatButton Snap should renders correctly 1`] = `
 <button
   className="bt-flat bold-16"
   onClick={[Function]}
@@ -15,16 +15,11 @@ exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
 </button>
 `;
 
-exports[`FlatButton Snap should renders correctly with isPrimary true 1`] = `
+exports[`FlatButton Snap should renders correctly without title 1`] = `
 <button
   className="bt-flat bold-16"
   onClick={[Function]}
-  style={
-    {
-      "color": "#607d8b",
-    }
-  }
-  title="Click to load [l]"
+  title=" [l]"
   type="button"
 >
   <span

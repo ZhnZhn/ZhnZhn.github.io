@@ -5,8 +5,7 @@
 import renderer from 'react-test-renderer'
 import FlatButton from '../FlatButton'
 
-const _crDfProps = (option) => ({
-  isPrimary: true,
+const _crProps = (option) => ({
   caption: "Load",
   title: "Click to load",
   hotKey: "l",
@@ -15,21 +14,22 @@ const _crDfProps = (option) => ({
 });
 
 describe('FlatButton Snap', () => {
-  test('should renders correctly with isPrimary true', () => {
+  test('should renders correctly', () => {
     const tree = renderer
       .create((
         <FlatButton
-          {..._crDfProps({ isPrimary: true })}
+          {..._crProps()}
         />
       ))
       .toJSON()
     expect(tree).toMatchSnapshot()
   })
-  test('should renders correctly with isPrimary false', () => {
+
+  test('should renders correctly without title', () => {
     const tree = renderer
       .create((
         <FlatButton
-          {..._crDfProps({ isPrimary: false })}
+          {..._crProps({ title: void 0 })}
         />
       ))
       .toJSON()
