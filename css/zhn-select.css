@@ -65,6 +65,8 @@
 }
 
 .zhn-select__options__div {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
   max-height: 200px;
   overflow-x: hidden;
   overflow-y: auto;
