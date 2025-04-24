@@ -13,10 +13,10 @@ var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallbac
 var _ChartExportConfig = require("../../charts/ChartExportConfig");
 var _RowFlex = require("../dialogs/rows/RowFlex");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
+var _useCommandButtons = _interopRequireDefault(require("../zhn-moleculs/useCommandButtons"));
 var _ToolbarButtonCircle = require("../zhn/ToolbarButtonCircle");
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
-var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _InputSelect = _interopRequireDefault(require("../zhn-select/InputSelect"));
 var _jsxRuntime = require("react/jsx-runtime");
 const _S_LABEL = {
@@ -137,10 +137,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
       chart.exportChartLocal((0, _uiApi.getRefValue)(_refExportFormat), _customOption);
       onClose();
     }),
-    _refCommandButtons = (0, _uiApi.useRef)([/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-      caption: "Export",
-      onClick: _hExport
-    }, "export")]);
+    _commandButtons = (0, _useCommandButtons.default)(() => [["Export", _hExport]]);
   const {
       chartWidth,
       chartHeight,
@@ -151,7 +148,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
     caption: "Customize Export Chart",
     isShow: isShow,
-    commandButtons: (0, _uiApi.getRefValue)(_refCommandButtons),
+    commandButtons: _commandButtons,
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ToolbarButtonCircle.ToolbarButtonCircle, {
       children: _toolbarButtons

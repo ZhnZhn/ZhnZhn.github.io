@@ -1,11 +1,11 @@
 import {
   useRef,
-  useMemo,
+  useCallback,
   getRefValue
 } from '../uiApi';
 
 import { useProperty } from '../hooks/useProperty';
-import FlatButton from '../zhn-m/FlatButton';
+import useCommandButtons from '../zhn-moleculs/useCommandButtons';
 
 const usePasteTo = (
   data,
@@ -19,7 +19,7 @@ const usePasteTo = (
 
   const _refCompSeries = useRef()
   /*eslint-disable react-hooks/exhaustive-deps */
-  , _hPasteTo = useMemo(() => () => {
+  , _hPasteTo = useCallback(() => {
     const _toChart = getToChart()
     , _seriesInst = getRefValue(_refCompSeries);
     if (_toChart && _seriesInst) {
@@ -33,12 +33,9 @@ const usePasteTo = (
     onClose()
   }, [])
   //getToChart, onClose
-  /*eslint-enable react-hooks/exhaustive-deps */
-  , _commandButtons = useMemo(() => (<FlatButton
-      key="paste"
-      caption="Paste & Close"    
-      onClick={_hPasteTo}
-    />), [_hPasteTo]);
+  , _commandButtons = useCommandButtons(() => [
+    ["Paste & Close", _hPasteTo]
+  ]);
 
   return [
     getToChart(),

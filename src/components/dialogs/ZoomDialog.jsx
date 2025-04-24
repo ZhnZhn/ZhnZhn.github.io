@@ -1,7 +1,6 @@
 import {
   useRef,
   useCallback,
-  useMemo,
   getRefValue
 } from '../uiApi';
 
@@ -17,8 +16,9 @@ import {
   getYTDfromDmy
 } from '../../utils/dateFn';
 
-import FlatButton from '../zhn-m/FlatButton';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
+import useCommandButtons from '../zhn-moleculs/useCommandButtons';
+
 import D from './DialogCell';
 import ZoomDailyRow from './ZoomDailyRow';
 
@@ -74,14 +74,10 @@ const useZoom = (
     onClose()
   }, [])
   // getChart, refDates
-  , _commandButtons = useMemo(() => [
-    <FlatButton
-       key="zoom"
-       caption="Zoom"      
-       onClick={_hZoom}
-    />
-  ], [])
-  // _hZoom
+  , _commandButtons = useCommandButtons(() => [
+    ["Zoom", _hZoom]
+  ]);
+
   return [
     _hZoom,
     _commandButtons

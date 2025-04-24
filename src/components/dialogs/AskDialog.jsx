@@ -1,14 +1,15 @@
 //import PropTypes from "prop-types";
 import {
   useRef,
-  useMemo,
+  useCallback,
   getRefValue
 } from '../uiApi';
 import memoIsShow from '../hoc/memoIsShow';
 
-import FlatButton from '../zhn-m/FlatButton';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import MathCaptcha from '../zhn-moleculs/MathCaptcha';
+
+import useCommandButtons from '../zhn-moleculs/useCommandButtons';
 
 import { loadFromQuery } from '../../flux/actions/FactoryAction'
 
@@ -50,7 +51,7 @@ const AskDialog = memoIsShow(({
   onClose
 }) => {
   const _refCaptcha = useRef()
-  , _hLoad = useMemo(() => () => {
+  , _hLoad = useCallback(() => {
       const _captchaInst = getRefValue(_refCaptcha);
       if (_captchaInst && _captchaInst.isOk()){
         const { options } = data;
@@ -58,18 +59,10 @@ const AskDialog = memoIsShow(({
         onClose()
       }
     }, [data, onClose])
- , _commandButtons = useMemo(() => [
-     <FlatButton
-       key="k1"
-       caption="Yes, Load"
-       onClick={_hLoad}
-     />,
-     <FlatButton
-       key="k2"
-       caption="No, Close"
-       onClick={onClose}
-     />
- ], [_hLoad, onClose])
+ , _commandButtons = useCommandButtons(() => [
+   ["Yes, Load", _hLoad],
+   ["No, Close", onClose]
+ ])
  , _name = _getName(data);
 
   return (

@@ -5,9 +5,9 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _MathCaptcha = _interopRequireDefault(require("../zhn-moleculs/MathCaptcha"));
+var _useCommandButtons = _interopRequireDefault(require("../zhn-moleculs/useCommandButtons"));
 var _FactoryAction = require("../../flux/actions/FactoryAction");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -56,7 +56,7 @@ const AskDialog = (0, _memoIsShow.default)(_ref => {
     onClose
   } = _ref;
   const _refCaptcha = (0, _uiApi.useRef)(),
-    _hLoad = (0, _uiApi.useMemo)(() => () => {
+    _hLoad = (0, _uiApi.useCallback)(() => {
       const _captchaInst = (0, _uiApi.getRefValue)(_refCaptcha);
       if (_captchaInst && _captchaInst.isOk()) {
         const {
@@ -66,13 +66,7 @@ const AskDialog = (0, _memoIsShow.default)(_ref => {
         onClose();
       }
     }, [data, onClose]),
-    _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-      caption: "Yes, Load",
-      onClick: _hLoad
-    }, "k1"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-      caption: "No, Close",
-      onClick: onClose
-    }, "k2")], [_hLoad, onClose]),
+    _commandButtons = (0, _useCommandButtons.default)(() => [["Yes, Load", _hLoad], ["No, Close", onClose]]),
     _name = _getName(data);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
     style: S_MODAL,

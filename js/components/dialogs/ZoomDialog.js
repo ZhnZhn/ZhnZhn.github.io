@@ -7,8 +7,8 @@ var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
 var _dateFn = require("../../utils/dateFn");
-var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
+var _useCommandButtons = _interopRequireDefault(require("../zhn-moleculs/useCommandButtons"));
 var _DialogCell = _interopRequireDefault(require("./DialogCell"));
 var _ZoomDailyRow = _interopRequireDefault(require("./ZoomDailyRow"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -54,11 +54,7 @@ const useZoom = (getChart, refDates) => {
     }, [])
     // getChart, refDates
     ,
-    _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-      caption: "Zoom",
-      onClick: _hZoom
-    }, "zoom")], []);
-  // _hZoom
+    _commandButtons = (0, _useCommandButtons.default)(() => [["Zoom", _hZoom]]);
   return [_hZoom, _commandButtons];
 };
 /*eslint-enable react-hooks/exhaustive-deps */

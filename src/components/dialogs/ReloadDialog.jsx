@@ -1,10 +1,7 @@
-import {
-  useCallback,
-  useMemo
-} from '../uiApi';
+import { useCallback } from '../uiApi';
 
-import FlatButton from '../zhn-m/FlatButton';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
+import useCommandButtons from '../zhn-moleculs/useCommandButtons';
 
 const S_MODAL = {
   position: 'static',
@@ -29,21 +26,10 @@ const ReloadDialog = ({
     document.cookie="erc=1"
     window.location.reload(true)
   }, [])
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _commandButtons = useMemo(()=>[
-      <FlatButton
-        key="reload"
-        caption="Yes, Reload"
-        onClick={_hReload}
-      />,
-      <FlatButton
-        key="no"
-        caption="No"
-        onClick={onClose}
-      />
-    ], [onClose])
-  /* _hReload */
-  /*eslint-enable react-hooks/exhaustive-deps */
+  , _commandButtons = useCommandButtons(() => [
+    ["Yes, Reload", _hReload],
+    ["No", onClose]
+  ])
   , { buildDate='' } = data || {};
 
   return (

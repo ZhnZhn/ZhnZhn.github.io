@@ -18,6 +18,7 @@ import { crExportStyleOptions } from '../../charts/ChartExportConfig';
 
 import { RowFlex } from '../dialogs/rows/RowFlex';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
+import useCommandButtons from '../zhn-moleculs/useCommandButtons';
 import {
   crToolbarButton,
   ToolbarButtonCircle
@@ -25,7 +26,6 @@ import {
 
 import ShowHide from '../zhn/ShowHide';
 import InputText from '../zhn/InputText';
-import FlatButton from '../zhn-m/FlatButton';
 import InputSelect from '../zhn-select/InputSelect';
 
 const _S_LABEL = {
@@ -181,12 +181,8 @@ const CustomizeExportDialog = memoIsShow(({
       )
       onClose();
   })
-  , _refCommandButtons = useRef([
-       <FlatButton
-          key="export"
-          caption="Export"          
-          onClick={_hExport}
-       />
+  , _commandButtons = useCommandButtons(() => [
+    ["Export", _hExport]
   ]);
 
   const {
@@ -201,7 +197,7 @@ const CustomizeExportDialog = memoIsShow(({
     <ModalDialog
       caption="Customize Export Chart"
       isShow={isShow}
-      commandButtons={getRefValue(_refCommandButtons)}
+      commandButtons={_commandButtons}
       onClose={onClose}
     >
        <ToolbarButtonCircle>

@@ -4,8 +4,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
+var _useCommandButtons = _interopRequireDefault(require("../zhn-moleculs/useCommandButtons"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_MODAL = {
     position: 'static',
@@ -31,17 +31,8 @@ const ReloadDialog = _ref => {
   const _hReload = (0, _uiApi.useCallback)(() => {
       document.cookie = "erc=1";
       window.location.reload(true);
-    }, [])
-    /*eslint-disable react-hooks/exhaustive-deps */,
-    _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-      caption: "Yes, Reload",
-      onClick: _hReload
-    }, "reload"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-      caption: "No",
-      onClick: onClose
-    }, "no")], [onClose])
-    /* _hReload */
-    /*eslint-enable react-hooks/exhaustive-deps */,
+    }, []),
+    _commandButtons = (0, _useCommandButtons.default)(() => [["Yes, Reload", _hReload], ["No", onClose]]),
     {
       buildDate = ''
     } = data || {};

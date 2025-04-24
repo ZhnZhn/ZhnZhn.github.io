@@ -7,7 +7,7 @@ var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
-var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
+var _useCommandButtons = _interopRequireDefault(require("../zhn-moleculs/useCommandButtons"));
 var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox1"));
 var _RowInputText = _interopRequireDefault(require("../dialogs/RowInputText"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -99,10 +99,7 @@ const StyleDotSeriesDialog = (0, _memoIsShow.default)(_ref2 => {
       chart.zhDataLabels((0, _uiApi.getRefValue)(_refIsLabels));
       onClose();
     }, [data, onClose]),
-    _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-      caption: "Apply",
-      onClick: _hApply
-    }, "yes")], [_hApply]);
+    _commandButtons = (0, _useCommandButtons.default)(() => [["Apply", _hApply]]);
   const {
       chart
     } = data,

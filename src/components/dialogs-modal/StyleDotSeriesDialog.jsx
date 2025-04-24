@@ -10,10 +10,9 @@ import { S_INLINE } from '../styleFn';
 import memoIsShow from '../hoc/memoIsShow';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import FlatButton from '../zhn-m/FlatButton';
+import useCommandButtons from '../zhn-moleculs/useCommandButtons';
 import RowCheckBox1 from '../dialogs/rows/RowCheckBox1';
 import RowInputText from '../dialogs/RowInputText';
-
 
 const S_ROW = {
   paddingLeft: 8,
@@ -114,13 +113,9 @@ const StyleDotSeriesDialog = memoIsShow(({
 
     onClose()
   }, [data, onClose])
-  , _commandButtons = useMemo(() => [
-     <FlatButton
-        key="yes"
-        caption="Apply"        
-        onClick={_hApply}
-     />
-  ], [_hApply]);
+  , _commandButtons = useCommandButtons(() => [
+    ["Apply", _hApply]
+  ]);
 
   const { chart } = data
   , { series } = chart
