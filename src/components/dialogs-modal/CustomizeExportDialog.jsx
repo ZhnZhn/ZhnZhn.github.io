@@ -184,8 +184,7 @@ const CustomizeExportDialog = memoIsShow(({
   , _refCommandButtons = useRef([
        <FlatButton
           key="export"
-          caption="Export"
-          isPrimary={true}
+          caption="Export"          
           onClick={_hExport}
        />
   ]);

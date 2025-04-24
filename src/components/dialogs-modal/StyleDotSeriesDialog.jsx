@@ -117,8 +117,7 @@ const StyleDotSeriesDialog = memoIsShow(({
   , _commandButtons = useMemo(() => [
      <FlatButton
         key="yes"
-        caption="Apply"
-        isPrimary={true}
+        caption="Apply"        
         onClick={_hApply}
      />
   ], [_hApply]);

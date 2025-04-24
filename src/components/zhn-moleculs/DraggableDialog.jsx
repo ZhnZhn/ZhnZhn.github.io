@@ -24,9 +24,6 @@ const CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
 , S_DIALOG_DIV = {
   ...crAbsoluteTopLeftStyle(30, 50),
   zIndex: 10
-}
-, S_BT_LOAD = {
-  color: '#607d8b'
 };
 
 const CommandButtons = ({
@@ -39,8 +36,7 @@ const CommandButtons = ({
     {buttons}
     {
       isFn(onLoad) && <FlatButton
-        key="load"
-        style={S_BT_LOAD}
+        key="load"      
         caption="Load"
         title="Load item"
         onClick={onLoad}

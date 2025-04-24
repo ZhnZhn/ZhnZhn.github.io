@@ -28,7 +28,7 @@ const MSG_PREFIX = "Would you like load item",
     padding: '0 5px'
   },
   S_DESCR = {
-    color: 'gray',
+    color: 'grey',
     width: 400,
     padding: '5px 0 0 10px',
     lineHeight: 1.4,
@@ -68,7 +68,6 @@ const AskDialog = (0, _memoIsShow.default)(_ref => {
     }, [data, onClose]),
     _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "Yes, Load",
-      isPrimary: true,
       onClick: _hLoad
     }, "k1"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "No, Close",

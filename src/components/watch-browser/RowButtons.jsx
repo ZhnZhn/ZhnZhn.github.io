@@ -11,8 +11,7 @@ const RowButtons = ({
   onClose
 }) => (
   <RowFlexEnd>
-    <FlatButton
-       isPrimary={true}
+    <FlatButton      
        caption={caption}
        title={title}
        onClick={onPrimary}

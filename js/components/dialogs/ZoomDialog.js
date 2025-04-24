@@ -20,14 +20,11 @@ const S_DIALOG = {
     width: 120
   };
 const _isFn = fn => typeof fn === 'function';
-const _getFromToDates = chart => {
-  var _chart$zhGetFromToDat;
-  return (_chart$zhGetFromToDat = chart.zhGetFromToDates == null ? void 0 : chart.zhGetFromToDates({
-    format: _dateFn.mlsToDmy
-  })) != null ? _chart$zhGetFromToDat : {};
-};
+const _getFromToDates = chart => chart.zhGetFromToDates?.({
+  format: _dateFn.mlsToDmy
+}) ?? {};
 const _getMinYear = strDmy => strDmy.split('-')[2];
-const _crErrMsg = minYear => "DD-MM-YYYY format must be, min 01-01-" + minYear;
+const _crErrMsg = minYear => `DD-MM-YYYY format must be, min 01-01-${minYear}`;
 const _crOnTestDate = from => {
   const _minYear = _getMinYear(from);
   return [
@@ -39,7 +36,7 @@ const _crOnTestDate = from => {
 const DF_DATA = {};
 
 /*eslint-disable react-hooks/exhaustive-deps */
-const _useZoom = (getChart, refDates) => {
+const useZoom = (getChart, refDates) => {
   const _hZoom = (0, _uiApi.useCallback)(() => {
       const [chart, onClose] = getChart(),
         _datesInst = (0, _uiApi.getRefValue)(refDates);
@@ -59,7 +56,6 @@ const _useZoom = (getChart, refDates) => {
     ,
     _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "Zoom",
-      isPrimary: true,
       onClick: _hZoom
     }, "zoom")], []);
   // _hZoom
@@ -68,7 +64,7 @@ const _useZoom = (getChart, refDates) => {
 /*eslint-enable react-hooks/exhaustive-deps */
 
 /*eslint-disable react-hooks/exhaustive-deps */
-const _useZoomBy = (getChart, refDates, month) => (0, _uiApi.useCallback)(() => {
+const useZoomBy = (getChart, refDates, month) => (0, _uiApi.useCallback)(() => {
   const [chart] = getChart();
   if (_isFn(chart.zhZoomX)) {
     const {
@@ -100,12 +96,12 @@ const ZoomDialog = (0, _memoIsShow.default)(_ref => {
       } = data;
       return [chart, onClose];
     }),
-    [_hZoom, _commandButtons] = _useZoom(_getChart, _refDates),
-    _hZoom1M = _useZoomBy(_getChart, _refDates, -1),
-    _hZoom3M = _useZoomBy(_getChart, _refDates, -3),
-    _hZoom6M = _useZoomBy(_getChart, _refDates, -6),
-    _hZoom1Y = _useZoomBy(_getChart, _refDates, -12),
-    _hZoomYTD = _useZoomBy(_getChart, _refDates),
+    [_hZoom, _commandButtons] = useZoom(_getChart, _refDates),
+    _hZoom1M = useZoomBy(_getChart, _refDates, -1),
+    _hZoom3M = useZoomBy(_getChart, _refDates, -3),
+    _hZoom6M = useZoomBy(_getChart, _refDates, -6),
+    _hZoom1Y = useZoomBy(_getChart, _refDates, -12),
+    _hZoomYTD = useZoomBy(_getChart, _refDates),
     {
       chart = {}
     } = data,
@@ -114,8 +110,8 @@ const ZoomDialog = (0, _memoIsShow.default)(_ref => {
       to
     } = _getFromToDates(chart),
     [_onTestDate, _errMsgDateFrom] = _crOnTestDate(from),
-    id = chart.zhGetId == null ? void 0 : chart.zhGetId(),
-    _isDaily = chart.zhIsDaily == null ? void 0 : chart.zhIsDaily();
+    id = chart.zhGetId?.(),
+    _isDaily = chart.zhIsDaily?.();
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
     caption: "Zoom Chart",
     style: S_DIALOG,

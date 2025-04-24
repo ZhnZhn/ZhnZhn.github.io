@@ -14,16 +14,13 @@ const S_MODAL = {
     margin: '70px auto'
   },
   S_ROOT = {
-    color: 'gray',
+    color: 'grey',
     padding: '8px 0 0 16px',
     lineHeight: 1.7,
     fontWeight: 'bold'
   },
   S_DATE = {
     color: '#80c040'
-  },
-  S_CLOSE = {
-    color: '#232f3b'
   };
 const ReloadDialog = _ref => {
   let {
@@ -38,10 +35,8 @@ const ReloadDialog = _ref => {
     /*eslint-disable react-hooks/exhaustive-deps */,
     _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "Yes, Reload",
-      isPrimary: true,
       onClick: _hReload
     }, "reload"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-      style: S_CLOSE,
       caption: "No",
       onClick: onClose
     }, "no")], [onClose])
@@ -65,7 +60,7 @@ const ReloadDialog = _ref => {
         children: "Reload web app ERC to the new build?"
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
         style: S_DATE,
-        children: "New build " + buildDate + " is available."
+        children: `New build ${buildDate} is available.`
       })]
     })
   });
@@ -80,6 +75,5 @@ ReloadDialog.propTypes = {
   onClose: PropTypes.func
 }
 */
-var _default = ReloadDialog;
-exports.default = _default;
+var _default = exports.default = ReloadDialog;
 //# sourceMappingURL=ReloadDialog.js.map

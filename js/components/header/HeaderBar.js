@@ -82,7 +82,6 @@ const HeaderBar = _ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_BTS_RIGHT,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-        isPrimary: true,
         title: "User Settings Dialog",
         hotKey: _hotkeys.HK_SETTINGS,
         timeout: 500,

@@ -27,7 +27,7 @@ const MSG_PREFIX = "Would you like load item"
   padding: '0 5px'
 },
 S_DESCR = {
-  color: 'gray',
+  color: 'grey',
   width: 400,
   padding: '5px 0 0 10px',
   lineHeight: 1.4,
@@ -62,7 +62,6 @@ const AskDialog = memoIsShow(({
      <FlatButton
        key="k1"
        caption="Yes, Load"
-       isPrimary={true}
        onClick={_hLoad}
      />,
      <FlatButton

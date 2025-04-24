@@ -120,8 +120,7 @@ const HeaderBar = ({
        />
        <div className={CL_BTS_RIGHT}>
           <LimitRemainingLabel />
-          <FlatButton
-             isPrimary={true}
+          <FlatButton             
              title="User Settings Dialog"
              hotKey={HK_SETTINGS}
              timeout={500}

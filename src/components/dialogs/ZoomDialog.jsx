@@ -50,7 +50,7 @@ const _crOnTestDate = from => {
 const DF_DATA = {};
 
 /*eslint-disable react-hooks/exhaustive-deps */
-const _useZoom = (
+const useZoom = (
   getChart,
   refDates
 ) => {
@@ -77,8 +77,7 @@ const _useZoom = (
   , _commandButtons = useMemo(() => [
     <FlatButton
        key="zoom"
-       caption="Zoom"
-       isPrimary={true}
+       caption="Zoom"      
        onClick={_hZoom}
     />
   ], [])
@@ -91,7 +90,7 @@ const _useZoom = (
 /*eslint-enable react-hooks/exhaustive-deps */
 
 /*eslint-disable react-hooks/exhaustive-deps */
-const _useZoomBy = (
+const useZoomBy = (
   getChart,
   refDates,
   month
@@ -126,12 +125,12 @@ const ZoomDialog = memoIsShow(({
     return [chart, onClose];
   })
 
-  , [_hZoom, _commandButtons]  = _useZoom(_getChart, _refDates)
-  , _hZoom1M = _useZoomBy(_getChart, _refDates, -1)
-  , _hZoom3M = _useZoomBy(_getChart, _refDates, -3)
-  , _hZoom6M = _useZoomBy(_getChart, _refDates, -6)
-  , _hZoom1Y = _useZoomBy(_getChart, _refDates, -12)
-  , _hZoomYTD = _useZoomBy(_getChart, _refDates)
+  , [_hZoom, _commandButtons]  = useZoom(_getChart, _refDates)
+  , _hZoom1M = useZoomBy(_getChart, _refDates, -1)
+  , _hZoom3M = useZoomBy(_getChart, _refDates, -3)
+  , _hZoom6M = useZoomBy(_getChart, _refDates, -6)
+  , _hZoom1Y = useZoomBy(_getChart, _refDates, -12)
+  , _hZoomYTD = useZoomBy(_getChart, _refDates)
 
   , { chart={} } = data
   , { from, to } = _getFromToDates(chart)

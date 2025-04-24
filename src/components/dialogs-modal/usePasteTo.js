@@ -36,8 +36,7 @@ const usePasteTo = (
   /*eslint-enable react-hooks/exhaustive-deps */
   , _commandButtons = useMemo(() => (<FlatButton
       key="paste"
-      caption="Paste & Close"
-      isPrimary={true}
+      caption="Paste & Close"    
       onClick={_hPasteTo}
     />), [_hPasteTo]);
 

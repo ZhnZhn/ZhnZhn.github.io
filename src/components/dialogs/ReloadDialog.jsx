@@ -13,13 +13,12 @@ const S_MODAL = {
   margin: '70px auto'
 }
 , S_ROOT = {
-  color: 'gray',
+  color: 'grey',
   padding: '8px 0 0 16px',
   lineHeight: 1.7,
   fontWeight: 'bold'
 }
-, S_DATE = { color: '#80c040' }
-, S_CLOSE = { color: '#232f3b' };
+, S_DATE = { color: '#80c040' };
 
 const ReloadDialog = ({
   isShow,
@@ -35,12 +34,10 @@ const ReloadDialog = ({
       <FlatButton
         key="reload"
         caption="Yes, Reload"
-        isPrimary={true}
         onClick={_hReload}
       />,
       <FlatButton
         key="no"
-        style={S_CLOSE}
         caption="No"
         onClick={onClose}
       />

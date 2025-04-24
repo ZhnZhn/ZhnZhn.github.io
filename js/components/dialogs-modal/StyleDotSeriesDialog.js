@@ -101,7 +101,6 @@ const StyleDotSeriesDialog = (0, _memoIsShow.default)(_ref2 => {
     }, [data, onClose]),
     _commandButtons = (0, _uiApi.useMemo)(() => [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "Apply",
-      isPrimary: true,
       onClick: _hApply
     }, "yes")], [_hApply]);
   const {

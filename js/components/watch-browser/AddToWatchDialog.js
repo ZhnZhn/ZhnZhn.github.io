@@ -104,7 +104,6 @@ const AddToWatchDialog = (0, _memoIsShow.default)(_ref => {
     _commandButtons = [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "Add",
       title: "Add Item To Watch List",
-      isPrimary: true,
       onClick: _hAdd
     }, "add")],
     _hClose = (0, _uiApi.useCallback)(() => {

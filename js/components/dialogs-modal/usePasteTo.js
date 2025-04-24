@@ -27,7 +27,6 @@ const usePasteTo = (data, onClose) => {
     /*eslint-enable react-hooks/exhaustive-deps */,
     _commandButtons = (0, _uiApi.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "Paste & Close",
-      isPrimary: true,
       onClick: _hPasteTo
     }, "paste"), [_hPasteTo]);
   return [getToChart(), _refCompSeries, _commandButtons];

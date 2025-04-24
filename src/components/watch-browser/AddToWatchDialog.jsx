@@ -127,8 +127,7 @@ const AddToWatchDialog = memoIsShow(({
      <FlatButton
        key="add"
        caption="Add"
-       title="Add Item To Watch List"
-       isPrimary={true}
+       title="Add Item To Watch List"      
        onClick={_hAdd}
       />
   ]

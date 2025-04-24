@@ -18,7 +18,6 @@ const RowButtons = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlexEnd, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-      isPrimary: true,
       caption: caption,
       title: title,
       onClick: onPrimary

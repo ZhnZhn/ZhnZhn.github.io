@@ -139,7 +139,6 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     }),
     _refCommandButtons = (0, _uiApi.useRef)([/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "Export",
-      isPrimary: true,
       onClick: _hExport
     }, "export")]);
   const {
