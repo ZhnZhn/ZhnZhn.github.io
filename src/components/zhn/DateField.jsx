@@ -6,6 +6,10 @@ import {
   useImperativeHandle,
   focusRefElement
 } from '../uiApi';
+import {
+  crInputProps
+} from '../styleFn';
+
 import useInputKeyDown from './useInputKeyDown';
 
 import Hr from './Hr';
@@ -90,14 +94,10 @@ const DateField = ({
   return (
     <div style={{...S_ROW, ...style}}>
       <input
+         {...crInputProps()}
          ref={_refInput}
          style={{...S_INPUT, ...inputStyle}}
-         name={name}
-         autoComplete="off"
-         autoCorrect="off"
-         autoCapitalize="off"
-         spellCheck={false}
-         type="text"
+         name={name}         
          placeholder={placeholder}
          inputMode={inputmode}
          value={value}

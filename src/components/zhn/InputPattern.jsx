@@ -8,7 +8,10 @@ import {
   focusRefElement
 } from '../uiApi';
 
-import { S_FLEX } from '../styleFn';
+import {
+  S_FLEX,
+  crInputProps
+} from '../styleFn';
 
 import useInputKeyDown from './useInputKeyDown';
 
@@ -134,15 +137,10 @@ const InputPattern = ({
     <div style={{...S_ROW, ...style}}>
       <div style={S_FLEX}>
         <input
-           type="text"
+           {...crInputProps()}
            style={{...S_INPUT_PATTERN, ...inputStyle, ..._inputStyle }}
            ref={_refInput}
            name="text-date"
-           //autoComplete="new-text-date"
-           autoComplete="off"
-           autoCorrect="off"
-           autoCapitalize="off"
-           spellCheck={false}
            placeholder={placeholder}
            value={value}
            maxLength={maxLength}

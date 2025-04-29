@@ -3,6 +3,25 @@ import { HAS_WIDE_SCREEN } from './has';
 
 export { getColorBlack } from './styles/uiTheme';
 
+export const crInputProps = (
+  type = "text",
+  spellCheck = false
+) => {
+  const [
+    _autoCorrect,
+    _spellCheck
+  ] = spellCheck
+    ? ["on", "true"]
+    : ["off", "false"]
+  return {
+    type: type,
+    autoCapitalize: "off",
+    autoComplete: "off",
+    autoCorrect: _autoCorrect,
+    spellCheck: _spellCheck
+  };
+}
+
 export const getScreenCase = (
   wideScreenCase,
   narrowScreenCase

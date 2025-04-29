@@ -16,6 +16,10 @@ import {
   crAriaExpandedProps,
   crAriaComboboxProps
 } from '../a11yFn';
+import {
+  crInputProps
+} from '../styleFn';
+
 
 import { useToggle } from '../hooks/useToggle';
 
@@ -302,7 +306,6 @@ const InputSelect = ({
     // _clearInput
     (evt) => {
       toggleIsShowOption(false)
-      const _btClear = getRefValue(_refBtClear);
       if (isRefElementContaintsEvtTarget(_refBtClear, evt)) {
         _hClear()
       }
@@ -381,16 +384,11 @@ const InputSelect = ({
     >
       <input
          {...touchHandlers}
-
          {...crAriaExpandedProps(isShowOption, _optionsViewId)}
          {...crAriaComboboxProps(labelId)}
-
+         {...crInputProps()}
          ref={_refInput}
          className={CL_INPUT}
-         type="text"
-         autoComplete="off"
-         autoCorrect="off"
-         spellCheck={false}
          value={value}
          placeholder={_placeholder}
          onChange={_hInputChange}

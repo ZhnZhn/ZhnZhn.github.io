@@ -117,20 +117,14 @@ const InputPattern = (_ref, ref) => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: _styleFn.S_FLEX,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
-        type: "text",
+        ...(0, _styleFn.crInputProps)(),
         style: {
           ...S_INPUT_PATTERN,
           ...inputStyle,
           ..._inputStyle
         },
         ref: _refInput,
-        name: "text-date"
-        //autoComplete="new-text-date"
-        ,
-        autoComplete: "off",
-        autoCorrect: "off",
-        autoCapitalize: "off",
-        spellCheck: false,
+        name: "text-date",
         placeholder: placeholder,
         value: value,
         maxLength: maxLength,

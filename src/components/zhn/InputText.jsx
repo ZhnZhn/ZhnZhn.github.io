@@ -9,7 +9,10 @@ import {
 } from '../uiApi';
 import useInputKeyDown from './useInputKeyDown';
 
-import { S_BORDER_RADIUS_2 } from '../styleFn';
+import {
+  S_BORDER_RADIUS_2,
+  crInputProps
+} from '../styleFn';
 
 import {
   S_INPUT,
@@ -32,8 +35,6 @@ const S_INPUT_TEXT = {
 };
 
 const BLANK = ''
-, TEXT = 'text'
-, OFF = "off"
 , FN_NOOP = () => {};
 
 const _initValue = initialValue => initialValue != null
@@ -67,8 +68,8 @@ const InputText = ({
     setValue
   ] = useState(() => _initValue(initValue))
   , _refInput = useRef()
-  , _hChange = (event) => {
-      const { value } = event.target;
+  , _hChange = (evt) => {
+      const { value } = evt.target;
       if (value.length <= maxLength) {
         setValue(value)
         onChange(value)
@@ -91,26 +92,15 @@ const InputText = ({
     focus: () => focusRefElement(_refInput)
   }), [value])
 
-  const  [
-    _autoCorrect,
-    _spellCheck
-  ] = spellCheck
-    ? ["on", "true"]
-    : ["off", "false"]
-  , _className = _isMinMaxNumber(type, min, max)
-       ? CL_NUMBER_RANGE
-       : void 0;
+  const _className = _isMinMaxNumber(type, min, max)
+    ? CL_NUMBER_RANGE
+    : void 0;
   return (
     <input
+      {...crInputProps(type, spellCheck)}
       ref={_refInput}
       className={_className}
       style={{...S_INPUT_TEXT, ...style}}
-      type={type || TEXT}
-      name={TEXT}
-      autoCapitalize={OFF}
-      autoComplete={OFF}
-      autoCorrect={_autoCorrect}
-      spellCheck={_spellCheck}
       translate="false"
       value={value}
       placeholder={placeholder}

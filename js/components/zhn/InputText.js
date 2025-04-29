@@ -24,8 +24,6 @@ const S_INPUT_TEXT = {
   backgroundColor: '#e1e1cb'
 };
 const BLANK = '',
-  TEXT = 'text',
-  OFF = "off",
   FN_NOOP = () => {};
 const _initValue = initialValue => initialValue != null ? initialValue : BLANK;
 const _isMinMaxNumber = (type, min, max) => type === 'number' && (0, _uiApi.isNumber)(min) && (0, _uiApi.isNumber)(max);
@@ -46,10 +44,10 @@ const InputText = _ref => {
   } = _ref;
   const [value, setValue] = (0, _uiApi.useState)(() => _initValue(initValue)),
     _refInput = (0, _uiApi.useRef)(),
-    _hChange = event => {
+    _hChange = evt => {
       const {
         value
-      } = event.target;
+      } = evt.target;
       if (value.length <= maxLength) {
         setValue(value);
         onChange(value);
@@ -65,21 +63,15 @@ const InputText = _ref => {
     setValue,
     focus: () => (0, _uiApi.focusRefElement)(_refInput)
   }), [value]);
-  const [_autoCorrect, _spellCheck] = spellCheck ? ["on", "true"] : ["off", "false"],
-    _className = _isMinMaxNumber(type, min, max) ? CL_NUMBER_RANGE : void 0;
+  const _className = _isMinMaxNumber(type, min, max) ? CL_NUMBER_RANGE : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+    ...(0, _styleFn.crInputProps)(type, spellCheck),
     ref: _refInput,
     className: _className,
     style: {
       ...S_INPUT_TEXT,
       ...style
     },
-    type: type || TEXT,
-    name: TEXT,
-    autoCapitalize: OFF,
-    autoComplete: OFF,
-    autoCorrect: _autoCorrect,
-    spellCheck: _spellCheck,
     translate: "false",
     value: value,
     placeholder: placeholder,

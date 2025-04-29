@@ -5,8 +5,8 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _a11yFn = require("../a11yFn");
-var _useToggle = require("../hooks/useToggle");
 var _styleFn = require("../styleFn");
+var _useToggle = require("../hooks/useToggle");
 var _crAfterInputEl = _interopRequireDefault(require("./crAfterInputEl"));
 var _InputSelectFn = require("./InputSelectFn");
 var _ItemOptionDf = _interopRequireDefault(require("./ItemOptionDf"));
@@ -204,7 +204,6 @@ const InputSelect = _ref => {
     // _clearInput
     evt => {
       toggleIsShowOption(false);
-      const _btClear = (0, _uiApi.getRefValue)(_refBtClear);
       if ((0, _uiApi.isRefElementContaintsEvtTarget)(_refBtClear, evt)) {
         _hClear();
       }
@@ -244,12 +243,9 @@ const InputSelect = _ref => {
       ...touchHandlers,
       ...(0, _a11yFn.crAriaExpandedProps)(isShowOption, _optionsViewId),
       ...(0, _a11yFn.crAriaComboboxProps)(labelId),
+      ...(0, _styleFn.crInputProps)(),
       ref: _refInput,
       className: _CL.CL_INPUT,
-      type: "text",
-      autoComplete: "off",
-      autoCorrect: "off",
-      spellCheck: false,
       value: value,
       placeholder: _placeholder,
       onChange: _hInputChange,

@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 var _Hr = _interopRequireDefault(require("./Hr"));
 var _ErrMsg = _interopRequireDefault(require("./ErrMsg"));
@@ -61,17 +62,13 @@ const DateField = _ref => {
       ...style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+      ...(0, _styleFn.crInputProps)(),
       ref: _refInput,
       style: {
         ..._Input.S_INPUT,
         ...inputStyle
       },
       name: name,
-      autoComplete: "off",
-      autoCorrect: "off",
-      autoCapitalize: "off",
-      spellCheck: false,
-      type: "text",
       placeholder: placeholder,
       inputMode: inputmode,
       value: value,
