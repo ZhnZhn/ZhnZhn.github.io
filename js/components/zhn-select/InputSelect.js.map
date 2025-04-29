@@ -7,7 +7,7 @@
  "names": [
   "_uiApi",
   "require",
-  "_ariaFn",
+  "_a11yFn",
   "_useToggle",
   "_styleFn",
   "_crAfterInputEl",

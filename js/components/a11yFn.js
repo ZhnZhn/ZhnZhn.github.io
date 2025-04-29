@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crPresentationRole = exports.crDialogRole = exports.crAriaLabelProp = void 0;
+exports.crPresentationRole = exports.crDialogRole = exports.crAriaLabelProp = exports.crAriaExpandedProps = exports.crAriaComboboxProps = void 0;
 const crPresentationRole = isShow => ({
   role: "presentation",
   hidden: !isShow
@@ -23,4 +23,15 @@ const crAriaLabelProp = (_ref, dfAriaLabel) => {
   };
 };
 exports.crAriaLabelProp = crAriaLabelProp;
+const crAriaExpandedProps = (isExpaned, controlsId) => ({
+  "aria-expanded": isExpaned,
+  "aria-controls": isExpaned ? controlsId : void 0
+});
+exports.crAriaExpandedProps = crAriaExpandedProps;
+const crAriaComboboxProps = labelId => ({
+  role: "combobox",
+  "aria-autocomplete": "list",
+  "aria-labelledby": labelId
+});
+exports.crAriaComboboxProps = crAriaComboboxProps;
 //# sourceMappingURL=a11yFn.js.map

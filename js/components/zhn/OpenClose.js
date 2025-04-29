@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _ariaFn = require("../ariaFn");
+var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _useToggle = require("../hooks/useToggle");
 var _fUseKey = require("../hooks/fUseKey");
@@ -60,7 +60,7 @@ const OpenClose = _ref => {
       style: rowStyle,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         ...dndHandlers,
-        ...(0, _ariaFn.crAriaExpandedProps)(isOpen, _childrenWrapperId),
+        ...(0, _a11yFn.crAriaExpandedProps)(isOpen, _childrenWrapperId),
         role: role,
         tabIndex: "0",
         ref: refItem,

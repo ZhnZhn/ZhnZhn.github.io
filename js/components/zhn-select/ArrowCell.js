@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _ariaFn = require("../ariaFn");
+var _a11yFn = require("../a11yFn");
 var _Svg = require("../zhn/svg/Svg");
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -20,7 +20,7 @@ const ArrowCell = _ref => {
     onClick
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-    ...(0, _ariaFn.crAriaExpandedProps)(isShowOption, controlsId),
+    ...(0, _a11yFn.crAriaExpandedProps)(isShowOption, controlsId),
     "aria-labelledby": labelId,
     "aria-label": "Toggle suggestions",
     "aria-haspopup": "true",

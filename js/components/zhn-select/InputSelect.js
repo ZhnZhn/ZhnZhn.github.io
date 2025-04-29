@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _ariaFn = require("../ariaFn");
+var _a11yFn = require("../a11yFn");
 var _useToggle = require("../hooks/useToggle");
 var _styleFn = require("../styleFn");
 var _crAfterInputEl = _interopRequireDefault(require("./crAfterInputEl"));
@@ -242,8 +242,8 @@ const InputSelect = _ref => {
     style: _rootWidthStyle,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
       ...touchHandlers,
-      ...(0, _ariaFn.crAriaExpandedProps)(isShowOption, _optionsViewId),
-      ...(0, _ariaFn.crAriaComboboxProps)(labelId),
+      ...(0, _a11yFn.crAriaExpandedProps)(isShowOption, _optionsViewId),
+      ...(0, _a11yFn.crAriaComboboxProps)(labelId),
       ref: _refInput,
       className: _CL.CL_INPUT,
       type: "text",

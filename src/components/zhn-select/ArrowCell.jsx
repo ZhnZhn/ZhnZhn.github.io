@@ -1,4 +1,4 @@
-import { crAriaExpandedProps } from '../ariaFn';
+import { crAriaExpandedProps } from '../a11yFn';
 import { Svg } from '../zhn/svg/Svg';
 import { CL_BT_ARROW } from './CL';
 

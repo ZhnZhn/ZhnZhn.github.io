@@ -12,7 +12,7 @@ export const crDialogRole = (
 ) => ({
   role: "dialog",
   tabIndex: "-1",
-  hidden: !isShow,  
+  hidden: !isShow,
   "aria-label": caption
 })
 
@@ -21,4 +21,22 @@ export const crAriaLabelProp = (
   dfAriaLabel
 ) => ({
   ariaLabel: ariaLabel || dfAriaLabel
+})
+
+export const crAriaExpandedProps = (
+  isExpaned,
+  controlsId
+) => ({
+  "aria-expanded": isExpaned,
+  "aria-controls": isExpaned
+     ? controlsId
+     : void 0
+})
+
+export const crAriaComboboxProps = (
+  labelId
+) => ({
+  role: "combobox",
+  "aria-autocomplete": "list",
+  "aria-labelledby": labelId
 })

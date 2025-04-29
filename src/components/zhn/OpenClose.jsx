@@ -1,5 +1,5 @@
 import { useId } from '../uiApi';
-import { crAriaExpandedProps } from '../ariaFn';
+import { crAriaExpandedProps } from '../a11yFn';
 
 import {
   CL_SHOW_POPUP,
