@@ -29,7 +29,7 @@ import DialogContainer from "./dialogs/DialogContainer";
 
 import checkBuild from "./checkBuild";
 
-const BUILD_DATE = "24-04-2025"
+const BUILD_DATE = "02-05-2025"
 , CL_COMP_CONTAINER = crFlexRowCn("app-container");
 
 const _showSettings = bindTo(
@@ -47,18 +47,14 @@ const AppErc = () => {
   useHotKeysHandler()
 
   return (
-     <>
+    <>
       <HeaderBar showSettings={_showSettings} />
       <div className={CL_COMP_CONTAINER}>
-         <BrowserContainer
-            useMsInitBrowser={useMsInitBrowser}
-         />
-         <About />
-         <CompContainer
-            useMsInit={useMsInit}
-         />
-       </div>
-       <DialogContainer />
+        <BrowserContainer useMsInitBrowser={useMsInitBrowser} />
+        <About />
+        <CompContainer useMsInit={useMsInit} />
+      </div>
+      <DialogContainer />
     </>
   );
 };
