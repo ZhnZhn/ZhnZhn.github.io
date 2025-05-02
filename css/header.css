@@ -33,7 +33,7 @@
 .header__bts-right {
   margin-left: auto;
 }
-
+         
 .bt-hot {
   color: #c0c0c0;
   color: var(--bh-c);
@@ -41,10 +41,10 @@
 
 
 @media screen and (max-width: 1100px) {
-  .hbt-ndl {
+  .bt-dbn {
     display: none;
   }
-  .hbt-eurostat {
+  .bt-eurostat {
     display: none;
   }
 }
@@ -65,7 +65,7 @@
   .header__icon-erc {
     display: none;
   }  
-  .hbt-watch {
+  .bt-watch {
     display: none;
   }
 }
@@ -78,7 +78,7 @@
   .provider__note__br {
     display: none;
   }
-  .hbt-about {
+  .bt-about {
     display: none;
   }
 }
