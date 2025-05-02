@@ -18,6 +18,7 @@ const FlatButton = _ref => {
     refBt,
     isArrow,
     timeout = 3000,
+    ariaLabel,
     className,
     style,
     title,
@@ -29,6 +30,7 @@ const FlatButton = _ref => {
   const _hClick = (0, _useThrottleClick.default)(timeout, onClick),
     [_hotKey, _refBt] = (0, _useHotKey.default)(hotKey, _hClick, refBt);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+    "aria-label": ariaLabel,
     type: "button",
     ref: _refBt,
     className: (0, _styleFn.crCn)(CL_BT_FLAT, className),

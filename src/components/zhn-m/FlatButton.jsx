@@ -24,6 +24,7 @@ const FlatButton = ({
   refBt,
   isArrow,
   timeout=3000,
+  ariaLabel,
   className,
   style,
   title,
@@ -40,6 +41,7 @@ const FlatButton = ({
 
   return (
     <button
+      aria-label={ariaLabel}
       type="button"
       ref={_refBt}
       className={crCn(CL_BT_FLAT, className)}
