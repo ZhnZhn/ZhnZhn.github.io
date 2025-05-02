@@ -25,6 +25,7 @@
 
 .menuitem {
   line-height: 2;
+  border-left: 4px solid transparent;  
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -32,6 +33,9 @@
 .menuitem:active {
   background-color: rgba(128, 128, 128, 0.3);
   outline: 0;
+}
+.menuitem:hover {
+  border-left-color: #1b75bb;    
 }
 
 .row__topic {
@@ -41,28 +45,16 @@
   align-items: center;
   justify-content: space-between; 
 
-  padding-left: 8px;
-  border-left: 4px solid transparent;    
-}
-.row__topic:hover {
-  border-left-color: #1b75bb;  
+  padding-left: 8px;  
 }
 
 .row__pane-topic {
   line-height: 2.2;
-  padding: 0 12px;    
-  border-bottom: 2px solid transparent;  
-}
-.row__pane-topic:hover {
-  border-bottom-color: #1b75bb;  
+  padding: 0 8px;      
 }
 
 .row__type2-topic {    
-  padding-left: 4px;
-  border-left: 4px solid transparent;  
-}
-.row__type2-topic:hover {
-  border-left-color: #1b75bb;
+  padding-left: 4px;  
 }
 
 

@@ -6,13 +6,6 @@
   background-color: #0c7abf;
 }
 
-.x-link span {
-  border-bottom: thin solid;
-}
-.x-link:hover span {
-  border-bottom-width: medium;
-}
-
 .descr-datasource h1 {
   color: var(--c-bl);
   font-size: 18px;

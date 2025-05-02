@@ -27,7 +27,6 @@
 }
 
 .bt-c2 {
-  background-color: #949ab4;
   min-width: 32px;
   min-height: 32px;
   font-weight: bold;
@@ -76,11 +75,6 @@
   padding: 1px 5px;
   line-height: 1.4;      
 }
-/*
-.bt-tab:hover {
-  border-bottom: 2px solid #a487d4;
-}
-*/
 
 .arrow-down {
   display: inline-block;
