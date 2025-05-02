@@ -23,6 +23,14 @@ export const crAriaLabelProp = (
   ariaLabel: ariaLabel || dfAriaLabel
 })
 
+export const crBtAriaLabelProps = (
+  title,
+  ariaLabel = title
+) => ({
+  title,
+  ariaLabel
+})
+
 export const crAriaExpandedProps = (
   isExpaned,
   controlsId

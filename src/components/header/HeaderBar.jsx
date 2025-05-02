@@ -11,6 +11,10 @@ import {
 } from '../../flux/stores/browserStore';
 
 import {
+  crBtAriaLabelProps
+} from '../a11yFn';
+
+import {
   crContainerCn
 } from '../styleFn';
 
@@ -47,10 +51,10 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
 , CL_HEADER_BAR = crContainerCn(CL_HEADER)
 , CL_ICON = `${CL_HEADER}__icon-erc`
 , CL_LABEL = `${CL_HEADER}__app-label`
-, CL_NDL = "hbt-ndl"
-, CL_EUROSTAT = "hbt-eurostat"
-, CL_WATCH = "hbt-watch"
-, CL_ABOUT = "hbt-about"
+, CL_DBN = "bt-dbn"
+, CL_EUROSTAT = "bt-eurostat"
+, CL_WATCH = "bt-watch"
+, CL_ABOUT = "bt-about"
 , CL_BTS_RIGHT = `${CL_HEADER}__bts-right`
 , CL_BROWSER_MENU = `${CL_HEADER}__panel-browser`
 
@@ -58,6 +62,48 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
   verticalAlign: 'middle',
   margin: '0 8px 3px 8px'
 }
+
+, _crTitleOpen = strNoun => `Open ${strNoun}`
+, _crBtFlatProps = (
+  caption,
+  title,
+  hotKey,
+  className
+) => ({
+  ...crBtAriaLabelProps(title),
+  caption,  
+  hotKey,
+  className
+})
+, BT_TOPICS_PROPS = _crBtFlatProps(
+  "Topics",
+  _crTitleOpen("Topics Menu"),
+  HK_TOPICS
+)
+, BT_EUROSTAT_PROPS= _crBtFlatProps(
+  "Eurostat",
+  _crTitleOpen("Eurostat Browser"),
+  HK_EUROSTAT_BROWSER,
+  CL_EUROSTAT
+)
+, BT_DBN_PROPS = _crBtFlatProps(
+  "DBN",
+  _crTitleOpen("DBnomics Browser"),
+  HK_DBN_BROWSER,
+  CL_DBN
+)
+, BT_WATCH_PROPS = _crBtFlatProps(
+  "Watch",
+  _crTitleOpen("Watch List Browser"),
+  HK_WATCHLIST_BROWSER,
+  CL_WATCH
+)
+, BT_SETTINGS_PROPS = crBtAriaLabelProps(
+  _crTitleOpen("Settings")
+)
+, BT_ABOUT_PROPS = crBtAriaLabelProps(
+  _crTitleOpen("About")
+)
 
 , MODEL = crBrowserModel();
 
@@ -85,33 +131,22 @@ const HeaderBar = ({
           caption={CAPTION}
        />
        <FlatButton
+          {...BT_TOPICS_PROPS}
+          timeout={0}
           refBt={refBt}
           isArrow={true}
-          timeout={0}
-          caption="Topics"
-          title="Topics Menu"
-          hotKey={HK_TOPICS}
           onClick={_toggleTopics}
        />
        <FlatButton
-          className={CL_EUROSTAT}
-          caption="Eurostat"
-          title="Eurostat Browser"
-          hotKey={HK_EUROSTAT_BROWSER}
+          {...BT_EUROSTAT_PROPS}
           onClick={showEurostat}
        />
        <FlatButton
-          className={CL_NDL}
-          caption="DBN"
-          title="DBnomics Browser"
-          hotKey={HK_DBN_BROWSER}
+          {...BT_DBN_PROPS}
           onClick={showDbn}
        />
        <FlatButton
-          className={CL_WATCH}
-          caption="Watch"
-          title="Watch List Browser"
-          hotKey={HK_WATCHLIST_BROWSER}
+          {...BT_WATCH_PROPS}
           onClick={showWatch}
        />
        <HotBar
@@ -120,8 +155,8 @@ const HeaderBar = ({
        />
        <div className={CL_BTS_RIGHT}>
           <LimitRemainingLabel />
-          <FlatButton             
-             title="User Settings Dialog"
+          <FlatButton
+             {...BT_SETTINGS_PROPS}
              hotKey={HK_SETTINGS}
              timeout={500}
              onClick={showSettings}
@@ -129,8 +164,8 @@ const HeaderBar = ({
              <SvgSettings style={S_SVG_BT} />
           </FlatButton>
           <FlatButton
+             {...BT_ABOUT_PROPS}
              className={CL_ABOUT}
-             title="About Web Application ERC"
              hotKey={HK_ABOUT}
              timeout={0}
              onClick={showAbout}

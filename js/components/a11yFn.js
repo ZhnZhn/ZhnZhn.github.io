@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crPresentationRole = exports.crDialogRole = exports.crAriaLabelProp = exports.crAriaExpandedProps = exports.crAriaComboboxProps = void 0;
+exports.crPresentationRole = exports.crDialogRole = exports.crBtAriaLabelProps = exports.crAriaLabelProp = exports.crAriaExpandedProps = exports.crAriaComboboxProps = void 0;
 const crPresentationRole = isShow => ({
   role: "presentation",
   hidden: !isShow
@@ -23,6 +23,16 @@ const crAriaLabelProp = (_ref, dfAriaLabel) => {
   };
 };
 exports.crAriaLabelProp = crAriaLabelProp;
+const crBtAriaLabelProps = function (title, ariaLabel) {
+  if (ariaLabel === void 0) {
+    ariaLabel = title;
+  }
+  return {
+    title,
+    ariaLabel
+  };
+};
+exports.crBtAriaLabelProps = crBtAriaLabelProps;
 const crAriaExpandedProps = (isExpaned, controlsId) => ({
   "aria-expanded": isExpaned,
   "aria-controls": isExpaned ? controlsId : void 0

@@ -4,16 +4,15 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _a11yFn = require("../a11yFn");
+var _styleFn = require("../styleFn");
 var _useStoreState = _interopRequireDefault(require("../hooks/useStoreState"));
 var _has = require("../has");
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _react = require("react");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_BT_HOT = "bt-hot",
-  S_ROOT = {
-    display: 'inline-block'
-  };
+const CL_BT_HOT = "bt-hot";
 const _isIn = (arr, type) => {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].type === type) {
@@ -30,7 +29,7 @@ const _crBtProps = function (index, caption) {
   return {
     hotKey: _hotKey || void 0,
     caption: _hotKey + caption.slice(0, 3),
-    title: caption
+    ...(0, _a11yFn.crBtAriaLabelProps)(`Open ${caption} Dialog`)
   };
 };
 const _crHotBtItem = (conf, index, _ref) => {
@@ -62,6 +61,7 @@ const updateHotButtons = (msCloseDialog, setHotButtons) => {
     });
   }
 };
+const BT_CLEAR_HOT_BAR_PROPS = (0, _a11yFn.crBtAriaLabelProps)("Clear Hot Bar");
 const HotBar = _ref2 => {
   let {
     useMsCloseDialog,
@@ -74,16 +74,16 @@ const HotBar = _ref2 => {
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    style: S_ROOT,
+    style: _styleFn.S_INLINE,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
       items: hotButtons,
       crItem: _crHotBtItem,
       onShowDialog: onShowDialog
     }), hotButtons.length !== 0 && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+      ...BT_CLEAR_HOT_BAR_PROPS,
       timeout: 0,
       className: CL_BT_HOT,
       caption: "CL",
-      title: "Clean Hot Bar",
       onClick: _hClean
     }, "BT_CLEAN")]
   });

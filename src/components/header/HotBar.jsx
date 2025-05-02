@@ -3,6 +3,9 @@ import {
   useCallback
 } from '../uiApi';
 
+import { crBtAriaLabelProps } from '../a11yFn';
+import { S_INLINE } from '../styleFn';
+
 import useStoreState from '../hooks/useStoreState';
 
 import {
@@ -13,7 +16,6 @@ import ItemStack from '../zhn/ItemStack';
 import FlatButton from '../zhn-m/FlatButton';
 
 const CL_BT_HOT = "bt-hot"
-, S_ROOT = { display: 'inline-block' }
 
 const _isIn = (arr, type) => {
   for(let i=0; i<arr.length; i++){
@@ -34,7 +36,7 @@ const _crBtProps = (
    return {
      hotKey: _hotKey || void 0,
      caption: _hotKey + caption.slice(0, 3),
-     title: caption
+     ...crBtAriaLabelProps(`Open ${caption} Dialog`)     
    };
 };
 
@@ -79,6 +81,8 @@ const updateHotButtons = (
     })
 }}
 
+const BT_CLEAR_HOT_BAR_PROPS = crBtAriaLabelProps("Clear Hot Bar");
+
 const HotBar = ({
   useMsCloseDialog,
   onShowDialog
@@ -95,7 +99,7 @@ const HotBar = ({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
-    <div style={S_ROOT}>
+    <div style={S_INLINE}>
       <ItemStack
          items={hotButtons}
          crItem={_crHotBtItem}
@@ -103,10 +107,10 @@ const HotBar = ({
       />
       {hotButtons.length !== 0 && <FlatButton
          key="BT_CLEAN"
+         {...BT_CLEAR_HOT_BAR_PROPS}
          timeout={0}
          className={CL_BT_HOT}
          caption="CL"
-         title="Clean Hot Bar"
          onClick={_hClean}
       />}
     </div>
