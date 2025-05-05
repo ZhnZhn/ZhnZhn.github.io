@@ -1,19 +1,9 @@
-import { filterBoolean } from '../../utils/arrFn';
-
 const CL_ERR_MSG = "err-msg";
 
-const _crMsgErr = msg => filterBoolean([
-  'Error occured during rendering', msg
-]).join(' ') + '.';
-
-const MsgRenderErr = ({
-  isShow,
-  style,
-  msg
-}) => isShow
- ? <div className={CL_ERR_MSG} style={style}>
-     {_crMsgErr(msg)}
-   </div>
- : null;
+const MsgRenderErr = () => (
+  <div className={CL_ERR_MSG}>
+    {"Error occured during rendering chart."}
+  </div>
+);
 
  export default MsgRenderErr

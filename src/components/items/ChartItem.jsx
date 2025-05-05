@@ -22,6 +22,7 @@ import useDataSourceEl from './useDataSourceEl';
 
 import { isWideWidth } from '../has';
 
+import { IfTrue } from '../zhn/IfTrue';
 import ShowHide from '../zhn/ShowHide';
 import ErrorBoundary from '../zhn/ErrorBoundary';
 import MsgRenderErr from '../zhn/MsgRenderErr';
@@ -194,10 +195,11 @@ export const ChartItem = memoEqual(({
         </ShowHide>
 
         <ErrorBoundary
-           FallbackComp={<MsgRenderErr
-               isShow={isShowChart}
-               msg="chart"
-           />}
+           FallbackComp={
+             <IfTrue v={isShowChart}>
+               <MsgRenderErr/>
+              </IfTrue>
+           }
            onError={_hError}
          >
             <ShowHide

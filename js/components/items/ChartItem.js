@@ -16,6 +16,7 @@ var _useMiniTitles = _interopRequireDefault(require("./useMiniTitles"));
 var _useMiniHandles = _interopRequireDefault(require("./useMiniHandles"));
 var _useDataSourceEl = _interopRequireDefault(require("./useDataSourceEl"));
 var _has = require("../has");
+var _IfTrue = require("../zhn/IfTrue");
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _ErrorBoundary = _interopRequireDefault(require("../zhn/ErrorBoundary"));
 var _MsgRenderErr = _interopRequireDefault(require("../zhn/MsgRenderErr"));
@@ -162,9 +163,9 @@ const ChartItem = exports.ChartItem = (0, _memoEqual.default)(_ref => {
           onZoom: onZoom
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ErrorBoundary.default, {
-        FallbackComp: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MsgRenderErr.default, {
-          isShow: isShowChart,
-          msg: "chart"
+        FallbackComp: /*#__PURE__*/(0, _jsxRuntime.jsx)(_IfTrue.IfTrue, {
+          v: isShowChart,
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MsgRenderErr.default, {})
         }),
         onError: _hError,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
