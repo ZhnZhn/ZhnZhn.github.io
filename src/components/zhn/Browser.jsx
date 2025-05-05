@@ -8,29 +8,27 @@ import {
 
 const CL_BROWSER = crBsContainerCn('browser-container');
 
-const Browser = ({
-  isShow,
-  style,
-  onKeyDown,
-  children
-}) => {
+const Browser = (props) => {
   const [
     _cn,
     _style
-  ] = crShowHide(isShow, CL_BROWSER);
+  ] = crShowHide(
+    props.isShow,
+    CL_BROWSER
+  );
 
  /*eslint-disable jsx-a11y/no-static-element-interactions*/
   return (
     <div
-       {...crPresentationRole(isShow)}
+       {...crPresentationRole(props.isShow)}
        className={_cn}
        style={{
-         ...style,
+         ...props.style,
          ..._style
        }}
-       onKeyDown={onKeyDown}
+       onKeyDown={props.onKeyDown}
     >
-       {children}
+       {props.children}
     </div>
   );
   /*eslint-enable jsx-a11y/no-static-element-interactions*/
