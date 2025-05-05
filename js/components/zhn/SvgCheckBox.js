@@ -11,9 +11,6 @@ var _Svg = require("./svg/Svg");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_CHB = 'chb',
   CL_CHB_CHECKED = 'chb-checked',
-  S_SVG = {
-    display: 'inline-block'
-  },
   C_GREY = "#777777";
 const FN_NOOP = () => {};
 const _crAriaLabelledByProp = _ref => {
@@ -69,7 +66,7 @@ const SvgCheckBox = props => {
     onKeyDown: _hKeyDown,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Svg.Svg100, {
       w: "16",
-      style: S_SVG,
+      style: _styleFn.S_INLINE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("rect", {
         x: "1",
         y: "1",
@@ -79,9 +76,12 @@ const SvgCheckBox = props => {
         rx: "3",
         stroke: _restStroke,
         fill: _restFill
-      }), _value ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.PathCheckIn, {
-        cn: cnChecked
-      }) : null]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
+        v: _value,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.PathCheckIn, {
+          cn: cnChecked
+        })
+      })]
     })
   });
 };

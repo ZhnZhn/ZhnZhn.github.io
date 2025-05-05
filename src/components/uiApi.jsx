@@ -64,6 +64,19 @@ export const renderChildren = (
   ? children(...args)
   : children
 
+export const IfTrue = (
+  props
+) => props.v
+  ? props.children
+  : null
+
+export const IfTrueOr = ({
+  v,
+  children
+}) => v
+  ? children[0]
+  : children[1]
+
 export const getRefValue = (
   ref
 ) => (ref || {}).current

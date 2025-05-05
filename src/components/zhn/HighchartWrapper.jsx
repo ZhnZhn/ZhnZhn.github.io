@@ -4,9 +4,9 @@ import { isFn } from '../../utils/isTypeFn';
 
 import {
   useRef,
-  useLayoutEffect
+  useLayoutEffect,
+  IfTrue
 } from '../uiApi';
-import { IfTrue } from './IfTrue';
 
 const S_DIV = {
   position: 'relative',

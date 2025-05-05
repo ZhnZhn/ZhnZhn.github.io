@@ -1,3 +1,4 @@
+import { IfTrue } from '../uiApi';
 import {
   crCn,
   crBold16Cn
@@ -6,7 +7,6 @@ import {
 import useThrottleClick from '../hooks/useThrottleClick';
 import useHotKey from '../hotkeys/useHotKey';
 
-import { IfTrue } from '../zhn/IfTrue';
 import { BtCaption } from './BtCaption';
 
 const CL_ARROW = "arrow-down"
@@ -21,47 +21,42 @@ const _crTitle = (
   ? `${title || ''} [${hotKey.toLowerCase()}]`
   : title;
 
-const FlatButton = ({
-  refBt,
-  isArrow,
-  timeout=3000,
-  ariaLabel,
-  className,
-  style,
-  title,
-  caption,
-  hotKey,
-  children,
-  onClick
-}) => {
-  const _hClick = useThrottleClick(timeout, onClick)
+const FlatButton = (props) => {
+  const _hClick = useThrottleClick(
+    props.timeout ?? 3000,
+    props.onClick
+  )
   , [
     _hotKey,
     _refBt
-  ] = useHotKey(hotKey, _hClick, refBt);
+  ] = useHotKey(
+    props.hotKey,
+    _hClick,
+    props.refBt
+  );
 
   return (
     <button
-      aria-label={ariaLabel}
-      type="button"
       ref={_refBt}
-      className={crCn(CL_BT_FLAT, className)}
-      style={style}
-      title={_crTitle(title, _hotKey)}
+      type="button"
+      aria-label={props.ariaLabel}
+      title={_crTitle(props.title, _hotKey)}
+      className={crCn(CL_BT_FLAT, props.className)}
+      style={props.style}
       onClick={_hClick}
     >
-      <IfTrue v={caption}>
+      <IfTrue v={props.caption}>
         <BtCaption
           className={CL_BT_FLAT_CAPTION}
-          caption={caption}
+          caption={props.caption}
           hotKey={_hotKey}
         >
-          <IfTrue v={isArrow}>
+          <IfTrue v={props.isArrow}>
             <span className={CL_ARROW} />
           </IfTrue>
         </BtCaption>
       </IfTrue>
-      {children}
+      {props.children}
     </button>
   );
 };

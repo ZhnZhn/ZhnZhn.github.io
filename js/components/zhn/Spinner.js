@@ -3,55 +3,39 @@
 exports.__esModule = true;
 exports.crSpinnerStatus = exports.SpinnerLoading = exports.Spinner = exports.LoadFailedMsg = void 0;
 var _uiApi = require("../uiApi");
-var _IfTrue = require("./IfTrue");
 var _jsxRuntime = require("react/jsx-runtime");
-const SpinnerDiv = _ref => {
-  let {
-    style
-  } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    style: style,
-    "data-loader": "circle"
-  });
-};
+const SpinnerDiv = props => /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+  style: props.style,
+  "data-loader": "circle"
+});
 const S_SPINNER = {
   position: 'relative',
   width: 32,
   height: 32,
   margin: '32px auto 0'
 };
-const SpinnerLoading = _ref2 => {
-  let {
-    style
-  } = _ref2;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerDiv, {
-    style: {
-      ...S_SPINNER,
-      ...style
-    }
-  });
-};
+const SpinnerLoading = props => /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerDiv, {
+  style: {
+    ...S_SPINNER,
+    ...props.style
+  }
+});
 exports.SpinnerLoading = SpinnerLoading;
 const FAILED_LOAD_COLOR = '#f44336',
   CL_ERR_MSG = 'err-msg',
   S_ERR_MSG = {
     padding: 16
   };
-const LoadFailedMsg = _ref3 => {
-  let {
-    errMsg = ''
-  } = _ref3;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      "data-loader": "circle-failed",
-      style: S_SPINNER
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-      className: CL_ERR_MSG,
-      style: S_ERR_MSG,
-      children: `${errMsg}: Network error.`
-    })]
-  });
-};
+const LoadFailedMsg = props => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    "data-loader": "circle-failed",
+    style: S_SPINNER
+  }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+    className: CL_ERR_MSG,
+    style: S_ERR_MSG,
+    children: `${props.errMsg || ''}: Network error.`
+  })]
+});
 exports.LoadFailedMsg = LoadFailedMsg;
 const SPINNER_LOADING = 'L';
 const SPINNER_FAILED = 'F';
@@ -81,14 +65,14 @@ const useIsHide = status => {
   }, [status]);
   return isHide;
 };
-const Spinner = _ref4 => {
+const Spinner = _ref => {
   let {
     style,
     status
-  } = _ref4;
+  } = _ref;
   const isHide = useIsHide(status),
     _style = status === SPINNER_LOADING ? S_LOADING : status === SPINNER_FAILED ? S_FAILED : S_LOADED;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_IfTrue.IfTrue, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
     v: isHide,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(SpinnerDiv, {
       style: {

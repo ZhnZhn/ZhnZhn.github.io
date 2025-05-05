@@ -1,13 +1,12 @@
 import {
   useState,
-  useEffect
+  useEffect,
+  IfTrue
 } from '../uiApi';
 
-import { IfTrue } from './IfTrue';
-
-const SpinnerDiv = ({ style }) => (
+const SpinnerDiv = (props) => (
   <div
-    style={style}
+    style={props.style}
     data-loader="circle"
   />
 );
@@ -19,11 +18,9 @@ const S_SPINNER = {
   margin: '32px auto 0'
 };
 
-export const SpinnerLoading = ({
-  style
-}) => (
+export const SpinnerLoading = (props) => (
   <SpinnerDiv
-    style={{...S_SPINNER, ...style}}
+    style={{...S_SPINNER, ...props.style}}
   />
 )
 
@@ -33,16 +30,14 @@ const FAILED_LOAD_COLOR = '#f44336'
   padding: 16
 };
 
-export const LoadFailedMsg = ({
-  errMsg=''
-}) => (
+export const LoadFailedMsg = (props) => (
   <>
     <div
       data-loader="circle-failed"
       style={S_SPINNER}
     />
     <p className={CL_ERR_MSG} style={S_ERR_MSG}>
-      {`${errMsg}: Network error.`}
+      {`${props.errMsg || ''}: Network error.`}
     </p>
   </>
 )

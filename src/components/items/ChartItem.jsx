@@ -3,7 +3,8 @@ import {
   useState,
   useMemo,
   useEffect,
-  useImperativeHandle
+  useImperativeHandle,
+  IfTrue
 } from '../uiApi';
 
 import memoEqual from '../hoc/memoEqual';
@@ -22,7 +23,6 @@ import useDataSourceEl from './useDataSourceEl';
 
 import { isWideWidth } from '../has';
 
-import { IfTrue } from '../zhn/IfTrue';
 import ShowHide from '../zhn/ShowHide';
 import ErrorBoundary from '../zhn/ErrorBoundary';
 import MsgRenderErr from '../zhn/MsgRenderErr';

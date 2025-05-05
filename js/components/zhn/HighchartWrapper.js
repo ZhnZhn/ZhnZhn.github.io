@@ -6,7 +6,6 @@ exports.default = void 0;
 var _highcharts = _interopRequireDefault(require("highcharts"));
 var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
-var _IfTrue = require("./IfTrue");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_DIV = {
   position: 'relative',
@@ -46,7 +45,7 @@ const HighchartWrapper = _ref => {
     style: S_DIV,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       ref: _refChartElement
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_IfTrue.IfTrue, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
       v: isShowAbs,
       children: absComp
     })]

@@ -1,18 +1,16 @@
 import { domSanitize } from '../../utils/domSanitize';
-import { memo } from '../uiApi';
-import { IfTrue } from './IfTrue';
+import {
+  memo,
+  IfTrue
+} from '../uiApi';
 
-const DivHtml = memo(({
-  str,
-  className,
-  style
-}) => {
-  const __html = domSanitize(str);
+const DivHtml = memo(props => {
+  const __html = domSanitize(props.str);
   return (
     <IfTrue v={__html}>
       <div
-        className={className}
-        style={style}
+        className={props.className}
+        style={props.style}
         dangerouslySetInnerHTML={{__html}}
       />
     </IfTrue>

@@ -3,8 +3,8 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _IfTrue = require("./IfTrue");
 var _DivHtml = _interopRequireDefault(require("./DivHtml"));
 var _jsxRuntime = require("react/jsx-runtime");
 const InfoPart = _ref => {
@@ -17,17 +17,17 @@ const InfoPart = _ref => {
     textCn,
     textStyle
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_IfTrue.IfTrue, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
     v: text,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: style,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_IfTrue.IfTrue, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
         v: caption,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: captionStyle,
           children: caption + ":"
         })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_IfTrue.IfTrueOr, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_uiApi.IfTrueOr, {
         v: isHtml,
         children: ["[", /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivHtml.default, {
           className: textCn,

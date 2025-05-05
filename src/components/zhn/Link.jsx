@@ -1,5 +1,7 @@
-import { toHref } from '../uiApi';
-import { IfTrue } from './IfTrue';
+import {
+  IfTrue,
+  toHref
+} from '../uiApi';
 
 const Link = ({
   className,

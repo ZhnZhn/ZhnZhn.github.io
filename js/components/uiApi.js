@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useId = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.safeMap = exports.renderChildren = exports.memo = exports.lazy = exports.isRefElementContaintsEvtTarget = exports.isNumber = exports.isInputValid = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getEventComposedPath = exports.getComboboxElement = exports.getClientY = exports.getClientX = exports.focusRefElement = exports.focusHtmlElement = exports.focusElementById = exports.createContext = exports.crObjWithNullPrototype = exports.cloneUiElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.Component = void 0;
+exports.useSyncExternalStore = exports.useState = exports.useRef = exports.useReducer = exports.useMemo = exports.useLayoutEffect = exports.useImperativeHandle = exports.useId = exports.useEffect = exports.useContext = exports.useCallback = exports.toHref = exports.stopImmediatePropagation = exports.stopDefaultFor = exports.setRefValue = exports.safeMap = exports.renderChildren = exports.memo = exports.lazy = exports.isRefElementContaintsEvtTarget = exports.isNumber = exports.isInputValid = exports.getRefValue = exports.getRefOptions = exports.getRefElementStyle = exports.getInputValue = exports.getInputValidValue = exports.getEventComposedPath = exports.getComboboxElement = exports.getClientY = exports.getClientX = exports.focusRefElement = exports.focusHtmlElement = exports.focusElementById = exports.createContext = exports.crObjWithNullPrototype = exports.cloneUiElement = exports.clearInputValue = exports.bindTo = exports.Suspense = exports.IfTrueOr = exports.IfTrue = exports.Component = void 0;
 var _bindTo = require("../utils/bindTo");
 exports.bindTo = _bindTo.bindTo;
 var _react = require("react");
@@ -47,6 +47,16 @@ const renderChildren = function (children) {
   return (0, _isTypeFn.isFn)(children) ? children(...args) : children;
 };
 exports.renderChildren = renderChildren;
+const IfTrue = props => props.v ? props.children : null;
+exports.IfTrue = IfTrue;
+const IfTrueOr = _ref => {
+  let {
+    v,
+    children
+  } = _ref;
+  return v ? children[0] : children[1];
+};
+exports.IfTrueOr = IfTrueOr;
 const getRefValue = ref => (ref || {}).current;
 exports.getRefValue = getRefValue;
 const setRefValue = (ref, value) => {

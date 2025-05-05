@@ -1,6 +1,7 @@
 import {
   memo,
-  useCallback
+  useCallback,
+  IfTrue
 } from '../uiApi';
 
 import {
@@ -10,7 +11,6 @@ import {
 
 import { useToggle } from '../hooks/useToggle';
 
-import { IfTrue } from './IfTrue';
 import Button from './Button';
 import ItemStack from './ItemStack';
 import LegendItem from './LegendItem';
@@ -35,19 +35,15 @@ const _crBtCaption = (
  ? `Less: ${MORE_MAX}`
  : `More: ${len - MORE_MAX}`;
 
-const BtMoreOrLess = ({
-  isMore,
-  legend,
-  onClick
-}) => {
-  const _len = legend.length;
+const BtMoreOrLess = (props) => {
+  const _len = props.legend.length;
   return (
     <IfTrue v={_len > MORE_MAX}>
       <Button
           className={CL_BT_ML}
-          onClick={onClick}
+          onClick={props.onClick}
         >
-        {_crBtCaption(isMore, _len)}
+        {_crBtCaption(props.isMore, _len)}
       </Button>
     </IfTrue>
   );

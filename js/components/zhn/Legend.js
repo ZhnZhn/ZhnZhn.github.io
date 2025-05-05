@@ -6,7 +6,6 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useToggle = require("../hooks/useToggle");
-var _IfTrue = require("./IfTrue");
 var _Button = _interopRequireDefault(require("./Button"));
 var _ItemStack = _interopRequireDefault(require("./ItemStack"));
 var _LegendItem = _interopRequireDefault(require("./LegendItem"));
@@ -28,19 +27,14 @@ const CL_WITH_SCROLL = (0, _styleFn.crWithScrollCn)(),
     transform: 'scaleX(-1)'
   };
 const _crBtCaption = (isMore, len) => isMore ? `Less: ${MORE_MAX}` : `More: ${len - MORE_MAX}`;
-const BtMoreOrLess = _ref => {
-  let {
-    isMore,
-    legend,
-    onClick
-  } = _ref;
-  const _len = legend.length;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_IfTrue.IfTrue, {
+const BtMoreOrLess = props => {
+  const _len = props.legend.length;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
     v: _len > MORE_MAX,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
       className: CL_BT_ML,
-      onClick: onClick,
-      children: _crBtCaption(isMore, _len)
+      onClick: props.onClick,
+      children: _crBtCaption(props.isMore, _len)
     })
   });
 };
@@ -48,11 +42,11 @@ const _crLegendItem = (item, index, onClickItem) => /*#__PURE__*/(0, _jsxRuntime
   item: item,
   onClickItem: onClickItem
 }, item.name + index);
-const Legend = (0, _uiApi.memo)(_ref2 => {
+const Legend = (0, _uiApi.memo)(_ref => {
   let {
     legend = [],
     onClickItem
-  } = _ref2;
+  } = _ref;
   const [isMore, toggleIsMore] = (0, _useToggle.useToggle)(false),
     _crStackItem = (0, _uiApi.useCallback)((item, index) => _crLegendItem(item, index, onClickItem), [onClickItem]),
     _legendItems = isMore ? legend : legend.slice(0, MORE_MAX),

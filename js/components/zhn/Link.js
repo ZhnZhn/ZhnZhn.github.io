@@ -3,7 +3,6 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _IfTrue = require("./IfTrue");
 var _jsxRuntime = require("react/jsx-runtime");
 const Link = _ref => {
   let {
@@ -14,7 +13,7 @@ const Link = _ref => {
     children
   } = _ref;
   const _href = (0, _uiApi.toHref)(href);
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_IfTrue.IfTrue, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
     v: _href && (caption || children),
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("a", {
       target: "_blank",

@@ -3,9 +3,13 @@ import { isBool } from '../../utils/isTypeFn';
 import {
   useState,
   useMemo,
-  useCallback
+  useCallback,
+  IfTrue
 } from '../uiApi';
-import { crCn } from '../styleFn';
+import {
+  S_INLINE,
+  crCn
+} from '../styleFn';
 
 import { useRefInit } from '../hooks/useProperty';
 import { useKeyEnter } from '../hooks/fUseKey';
@@ -18,7 +22,6 @@ import {
 
 const CL_CHB = 'chb'
 , CL_CHB_CHECKED = 'chb-checked'
-, S_SVG = { display: 'inline-block' }
 , C_GREY = "#777777";
 
 const FN_NOOP = () => {};
@@ -96,7 +99,7 @@ const SvgCheckBox = (props) => {
     >
       <Svg100
         w="16"
-        style={S_SVG}
+        style={S_INLINE}
       >
         <rect
            x="1" y="1"
@@ -105,10 +108,9 @@ const SvgCheckBox = (props) => {
            stroke={_restStroke}
            fill={_restFill}
         />
-        { _value
-           ? <PathCheckIn cn={cnChecked} />
-           : null
-        }
+          <IfTrue v={_value}>
+            <PathCheckIn cn={cnChecked} />
+          </IfTrue>
       </Svg100>
     </div>
   );

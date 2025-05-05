@@ -1,5 +1,8 @@
-import { isArr, memo } from '../uiApi';
-import { IfTrue } from './IfTrue';
+import {
+  isArr,
+  memo,
+  IfTrue
+} from '../uiApi';
 
 const UL_STYLE = { listStyle: 'none' }
 , _crKeyDf = (_, index) => index;

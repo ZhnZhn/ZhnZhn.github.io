@@ -1,9 +1,9 @@
-import { S_INLINE } from '../styleFn';
-
 import {
   IfTrue,
   IfTrueOr
-} from './IfTrue';
+} from '../uiApi';
+import { S_INLINE } from '../styleFn';
+
 import DivHtml from './DivHtml';
 
 const InfoPart = ({
