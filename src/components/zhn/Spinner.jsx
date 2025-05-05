@@ -3,6 +3,8 @@ import {
   useEffect
 } from '../uiApi';
 
+import { IfTrue } from './IfTrue';
+
 const SpinnerDiv = ({ style }) => (
   <div
     style={style}
@@ -71,15 +73,15 @@ const TRANSITION_DURATION = 800
   opacity: 0
 };
 
-const _useIsHide = (status) => {
+const useIsHide = (status) => {
   const [
     isHide,
     setIsHide
-  ] = useState(false);
+  ] = useState(!1);
   useEffect(() => {
     if (!status) {
       setTimeout(
-        () => setIsHide(true),
+        () => setIsHide(!0),
         HIDE_TIMEOUT_MLS
       )
     }
@@ -91,18 +93,20 @@ export const Spinner = ({
   style,
   status
 }) => {
-  const isHide = _useIsHide(status)
+  const isHide = useIsHide(status)
   , _style = status === SPINNER_LOADING
     ? S_LOADING
     : status === SPINNER_FAILED
       ? S_FAILED
       : S_LOADED;
 
-  return isHide ? null : (
-    <SpinnerDiv style={{
-      ...S_SPINNER_TRANSITION,
-      ...style,
-      ..._style}}
-    />
+  return (
+    <IfTrue v={isHide}>
+      <SpinnerDiv style={{
+        ...S_SPINNER_TRANSITION,
+        ...style,
+        ..._style}}
+      />
+    </IfTrue>
   );
 }
