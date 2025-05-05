@@ -1,5 +1,6 @@
-import { memo } from '../uiApi';
 import { domSanitize } from '../../utils/domSanitize';
+import { memo } from '../uiApi';
+import { IfTrue } from './IfTrue';
 
 const DivHtml = memo(({
   str,
@@ -7,13 +8,15 @@ const DivHtml = memo(({
   style
 }) => {
   const __html = domSanitize(str);
-  return __html ? (
-    <div
-      className={className}
-      style={style}
-      dangerouslySetInnerHTML={{ __html }}
-    />
-  ) : null;
+  return (
+    <IfTrue v={__html}>
+      <div
+        className={className}
+        style={style}
+        dangerouslySetInnerHTML={{__html}}
+      />
+    </IfTrue>
+  );
 })
 DivHtml.isHtml = str => Boolean(domSanitize(str))
 
