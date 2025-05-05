@@ -6,7 +6,8 @@ exports.default = void 0;
 var _styleFn = require("../styleFn");
 var _useThrottleClick = _interopRequireDefault(require("../hooks/useThrottleClick"));
 var _useHotKey = _interopRequireDefault(require("../hotkeys/useHotKey"));
-var _BtCaption = _interopRequireDefault(require("./BtCaption"));
+var _IfTrue = require("../zhn/IfTrue");
+var _BtCaption = require("./BtCaption");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_ARROW = "arrow-down",
   TOKEN_BT_FLAT = 'bt-flat',
@@ -37,12 +38,18 @@ const FlatButton = _ref => {
     style: style,
     title: _crTitle(title, _hotKey),
     onClick: _hClick,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtCaption.default, {
-      className: CL_BT_FLAT_CAPTION,
-      caption: caption,
-      hotKey: _hotKey,
-      children: isArrow && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        className: CL_ARROW
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_IfTrue.IfTrue, {
+      v: caption,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtCaption.BtCaption, {
+        className: CL_BT_FLAT_CAPTION,
+        caption: caption,
+        hotKey: _hotKey,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_IfTrue.IfTrue, {
+          v: isArrow,
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: CL_ARROW
+          })
+        })
       })
     }), children]
   });

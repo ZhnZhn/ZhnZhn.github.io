@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.BtCaption = void 0;
 var _jsxRuntime = require("react/jsx-runtime");
 const S_HOT_KEY = {
   textDecoration: 'underline'
@@ -32,11 +32,10 @@ const BtCaption = _ref => {
     hotKey,
     children
   } = _ref;
-  return caption ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
     className: className,
     children: [_crCaption(hotKey, caption), children]
-  }) : null;
+  });
 };
-var _default = BtCaption;
-exports.default = _default;
+exports.BtCaption = BtCaption;
 //# sourceMappingURL=BtCaption.js.map

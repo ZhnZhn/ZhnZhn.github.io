@@ -25,16 +25,14 @@ const _crCaption = (
   );
 };
 
-const BtCaption = ({
+export const BtCaption = ({
   className,
   caption,
   hotKey,
   children
-}) => caption ? (
+}) => (
   <span className={className}>
     {_crCaption(hotKey, caption)}
     {children}
   </span>
-) : null;
-
-export default BtCaption
+)

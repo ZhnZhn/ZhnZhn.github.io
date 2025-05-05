@@ -6,7 +6,8 @@ import {
 import useThrottleClick from '../hooks/useThrottleClick';
 import useHotKey from '../hotkeys/useHotKey';
 
-import BtCaption from './BtCaption';
+import { IfTrue } from '../zhn/IfTrue';
+import { BtCaption } from './BtCaption';
 
 const CL_ARROW = "arrow-down"
 , TOKEN_BT_FLAT = 'bt-flat'
@@ -49,13 +50,17 @@ const FlatButton = ({
       title={_crTitle(title, _hotKey)}
       onClick={_hClick}
     >
-      <BtCaption
-        className={CL_BT_FLAT_CAPTION}
-        caption={caption}
-        hotKey={_hotKey}
-      >
-        {isArrow && <span className={CL_ARROW} />}
-      </BtCaption>
+      <IfTrue v={caption}>
+        <BtCaption
+          className={CL_BT_FLAT_CAPTION}
+          caption={caption}
+          hotKey={_hotKey}
+        >
+          <IfTrue v={isArrow}>
+            <span className={CL_ARROW} />
+          </IfTrue>
+        </BtCaption>
+      </IfTrue>
       {children}
     </button>
   );
