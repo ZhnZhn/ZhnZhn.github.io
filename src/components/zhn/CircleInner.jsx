@@ -1,4 +1,5 @@
 import { crAbsoluteTopLeftStyle } from '../styleFn';
+import { IfTrue } from './IfTrue';
 
 const S_CIRCLE_INNER = {
   ...crAbsoluteTopLeftStyle(0, 0),
@@ -7,7 +8,7 @@ const S_CIRCLE_INNER = {
   overflow: 'visible'
 }
 , S_CIRCLE_INNER_EL = {
-  ...crAbsoluteTopLeftStyle(-12, -12),  
+  ...crAbsoluteTopLeftStyle(-12, -12),
   width: '300%',
   height: 36,
   borderRadius: '50%',
@@ -20,10 +21,9 @@ const CircleInner = ({
    emberStyle
 }) => (
   <div style={{...S_CIRCLE_INNER, ...circleStyle}}>
-    {is
-      ? <div style={{...S_CIRCLE_INNER_EL, ...emberStyle}} />
-      : null
-    }
+    <IfTrue v={is}>
+      <div style={{...S_CIRCLE_INNER_EL, ...emberStyle}} />
+    </IfTrue>    
   </div>
 );
 

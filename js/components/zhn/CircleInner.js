@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
+var _IfTrue = require("./IfTrue");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_CIRCLE_INNER = {
     ...(0, _styleFn.crAbsoluteTopLeftStyle)(0, 0),
@@ -28,12 +29,15 @@ const CircleInner = _ref => {
       ...S_CIRCLE_INNER,
       ...circleStyle
     },
-    children: is ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: {
-        ...S_CIRCLE_INNER_EL,
-        ...emberStyle
-      }
-    }) : null
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_IfTrue.IfTrue, {
+      v: is,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        style: {
+          ...S_CIRCLE_INNER_EL,
+          ...emberStyle
+        }
+      })
+    })
   });
 };
 var _default = exports.default = CircleInner;
