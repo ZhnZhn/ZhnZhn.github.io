@@ -10,6 +10,7 @@ import {
 
 import { useToggle } from '../hooks/useToggle';
 
+import { IfTrue } from './IfTrue';
 import Button from './Button';
 import ItemStack from './ItemStack';
 import LegendItem from './LegendItem';
@@ -40,13 +41,16 @@ const BtMoreOrLess = ({
   onClick
 }) => {
   const _len = legend.length;
-  return _len > MORE_MAX
-    ? (<Button
+  return (
+    <IfTrue v={_len > MORE_MAX}>
+      <Button
           className={CL_BT_ML}
           onClick={onClick}
         >
         {_crBtCaption(isMore, _len)}
-      </Button>) : null;
+      </Button>
+    </IfTrue>
+  );
 };
 
 const _crLegendItem = (

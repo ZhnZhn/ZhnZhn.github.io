@@ -6,6 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useToggle = require("../hooks/useToggle");
+var _IfTrue = require("./IfTrue");
 var _Button = _interopRequireDefault(require("./Button"));
 var _ItemStack = _interopRequireDefault(require("./ItemStack"));
 var _LegendItem = _interopRequireDefault(require("./LegendItem"));
@@ -34,11 +35,14 @@ const BtMoreOrLess = _ref => {
     onClick
   } = _ref;
   const _len = legend.length;
-  return _len > MORE_MAX ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-    className: CL_BT_ML,
-    onClick: onClick,
-    children: _crBtCaption(isMore, _len)
-  }) : null;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_IfTrue.IfTrue, {
+    v: _len > MORE_MAX,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+      className: CL_BT_ML,
+      onClick: onClick,
+      children: _crBtCaption(isMore, _len)
+    })
+  });
 };
 const _crLegendItem = (item, index, onClickItem) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_LegendItem.default, {
   item: item,
