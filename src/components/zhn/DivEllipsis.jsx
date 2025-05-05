@@ -3,20 +3,14 @@ import {
   crCn
 } from '../styleFn';
 
-const DivEllipsis = ({
-  id,
-  className,
-  style,
-  text,
-  title
-}) => (
+const DivEllipsis = (props) => (
   <div
-    id={id}
-    className={crCn(CL_TEXT_ELLIPSIS, className)}
-    style={style}
-    title={title}
+    id={props.id}
+    className={crCn(CL_TEXT_ELLIPSIS, props.className)}
+    style={props.style}
+    title={props.title}
   >
-    {text}
+    {props.text}
   </div>
 );
 
