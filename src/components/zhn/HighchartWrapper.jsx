@@ -1,15 +1,17 @@
+import Highcharts from 'highcharts';
+
+import { isFn } from '../../utils/isTypeFn';
+
 import {
   useRef,
   useLayoutEffect
 } from '../uiApi';
-import Highcharts from 'highcharts';
+import { IfTrue } from './IfTrue';
 
 const S_DIV = {
   position: 'relative',
   zIndex: 1
 };
-
-const _isFn = fn => typeof fn === 'function';
 
 const HighchartWrapper = ({
   isShowAbs=true,
@@ -30,12 +32,12 @@ const HighchartWrapper = ({
       _refChartElement.current,
       config
     );
-    if (_chartInstance && _isFn(onLoaded)){
+    if (_chartInstance && isFn(onLoaded)){
       onLoaded(_chartInstance);
     }
 
     return () => {
-      if (_isFn(onWillUnLoaded)){
+      if (isFn(onWillUnLoaded)){
         onWillUnLoaded(_chartInstance);
       }
       if (_chartInstance) {
@@ -48,7 +50,9 @@ const HighchartWrapper = ({
   return (
     <div style={S_DIV}>
       <div ref={_refChartElement} />
-      {isShowAbs && absComp}
+      <IfTrue v={isShowAbs}>
+        {absComp}
+      </IfTrue>
     </div>
   );
 }
