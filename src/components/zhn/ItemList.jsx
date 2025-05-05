@@ -1,4 +1,5 @@
 import { isArr, memo } from '../uiApi';
+import { IfTrue } from './IfTrue';
 
 const UL_STYLE = { listStyle: 'none' }
 , _crKeyDf = (_, index) => index;
@@ -8,7 +9,8 @@ const ItemList = memo(({
   items,
   crKey=_crKeyDf,
   crItem
-}) => isArr(items) ? (
+}) => (
+  <IfTrue v={isArr(items)}>
     <ul style={{...UL_STYLE, ...style}}>
       {items.map((item, index) => (
         <li key={crKey(item, index)}>
@@ -16,7 +18,7 @@ const ItemList = memo(({
         </li>
       ))}
     </ul>
-  ) : null
-);
+  </IfTrue>
+));
 
 export default ItemList
