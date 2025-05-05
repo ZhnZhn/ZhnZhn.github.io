@@ -1,6 +1,10 @@
-import DivHtml from './DivHtml';
+import { S_INLINE } from '../styleFn';
 
-const S_INLINE = { display: 'inline-block' };
+import {
+  IfTrue,
+  IfTrueOr
+} from './IfTrue';
+import DivHtml from './DivHtml';
 
 const InfoPart = ({
   style,
@@ -10,31 +14,28 @@ const InfoPart = ({
   text,
   textCn,
   textStyle
-}) => {
-  if (!text) { return null; }
-  return (
+}) => (
+  <IfTrue v={text}>
     <div style={style}>
-      { caption &&
+      <IfTrue v={caption}>
         <span style={captionStyle}>
           {caption+":"}
         </span>
-      }
-      {
-        isHtml ? <DivHtml
-            className={textCn}
-            style={{...textStyle, ...S_INLINE}}
-            str={text}
-          />
-        : <span
-            className={textCn}
-            style={textStyle}
-          >
-            {text}
-          </span>
-      }
+      </IfTrue>
+      <IfTrueOr v={isHtml}>
+        [<DivHtml
+          className={textCn}
+          style={{...textStyle, ...S_INLINE}}
+          str={text}
+        />, <span
+          className={textCn}
+          style={textStyle}
+        >{text}</span>]
+      </IfTrueOr>
     </div>
-  );
-}
+  </IfTrue>
+);
+
 
 
 export default InfoPart
