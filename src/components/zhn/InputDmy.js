@@ -18,23 +18,17 @@ const S_ROW_INPUT = {
 }
 , REQUIRED_DATE_FORMAT = "DD-MM-YYYY";
 
-const InputDmy = ({
-  refEl,
-  caption,
-  initialValue,
-  onTest=isDmy,
-  onEnter
-}) => (
+const InputDmy = (props) => (
   <label style={S_ROW_INPUT} >
-    <SpanBoldBlack>{caption}</SpanBoldBlack>
+    <SpanBoldBlack>{props.caption}</SpanBoldBlack>
     <DateField
-      refEl={refEl}
+      refEl={props.refEl}
       style={S_DATE_FIELD}
-      initialValue={initialValue}
+      initialValue={props.initialValue}
       placeholder={REQUIRED_DATE_FORMAT}
       errorMsg={REQUIRED_DATE_FORMAT}
-      onTest={onTest}
-      onEnter={onEnter}
+      onTest={props.onTest || isDmy}
+      onEnter={props.onEnter}
     />
   </label>
 );

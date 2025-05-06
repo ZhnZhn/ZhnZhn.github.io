@@ -20,28 +20,19 @@ const S_ROW_INPUT = {
     marginLeft: 8
   },
   REQUIRED_DATE_FORMAT = "DD-MM-YYYY";
-const InputDmy = _ref => {
-  let {
-    refEl,
-    caption,
-    initialValue,
-    onTest = _dateFn.isDmy,
-    onEnter
-  } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-    style: S_ROW_INPUT,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBoldBlack, {
-      children: caption
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
-      refEl: refEl,
-      style: S_DATE_FIELD,
-      initialValue: initialValue,
-      placeholder: REQUIRED_DATE_FORMAT,
-      errorMsg: REQUIRED_DATE_FORMAT,
-      onTest: onTest,
-      onEnter: onEnter
-    })]
-  });
-};
+const InputDmy = props => /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+  style: S_ROW_INPUT,
+  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBoldBlack, {
+    children: props.caption
+  }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DateField.default, {
+    refEl: props.refEl,
+    style: S_DATE_FIELD,
+    initialValue: props.initialValue,
+    placeholder: REQUIRED_DATE_FORMAT,
+    errorMsg: REQUIRED_DATE_FORMAT,
+    onTest: props.onTest || _dateFn.isDmy,
+    onEnter: props.onEnter
+  })]
+});
 var _default = exports.default = InputDmy;
 //# sourceMappingURL=InputDmy.js.map
