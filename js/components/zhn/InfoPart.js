@@ -27,20 +27,17 @@ const InfoPart = _ref => {
           style: captionStyle,
           children: caption + ":"
         })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_uiApi.IfTrueOr, {
-        v: isHtml,
-        children: ["[", /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivHtml.default, {
-          className: textCn,
-          style: {
-            ...textStyle,
-            ..._styleFn.S_INLINE
-          },
-          str: text
-        }), ", ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          className: textCn,
-          style: textStyle,
-          children: text
-        }), "]"]
+      }), isHtml ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_DivHtml.default, {
+        className: textCn,
+        style: {
+          ...textStyle,
+          ..._styleFn.S_INLINE
+        },
+        str: text
+      }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: textCn,
+        style: textStyle,
+        children: text
       })]
     })
   });

@@ -70,13 +70,6 @@ export const IfTrue = (
   ? props.children
   : null
 
-export const IfTrueOr = ({
-  v,
-  children
-}) => v
-  ? children[0]
-  : children[1]
-
 export const getRefValue = (
   ref
 ) => (ref || {}).current
