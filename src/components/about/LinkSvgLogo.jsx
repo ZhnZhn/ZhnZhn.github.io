@@ -1,30 +1,23 @@
-import { toHref } from '../uiApi';
 import { crCn } from '../styleFn';
 
+import Link from '../zhn/Link';
 import { Svg100 } from '../zhn/svg/Svg';
 import UseLogoById from './UseLogoById';
 
 const CL_LI = 'logo-item';
 
-const LinkSvgLogo = ({
-  ariaLabel,
-  className,
-  href,
-  id,
-  svgProps
-}) => (
-  <a
-    aria-label={ariaLabel}
-    className={crCn(CL_LI, className)}
-    href={toHref(href)}
+const LinkSvgLogo = (props) => (
+  <Link
+    className={crCn(CL_LI, props.className)}
+    href={props.href}
   >
     <Svg100
-      {...svgProps}
+      {...props.svgProps}
       aria-hidden="true"
     >
-      <UseLogoById id={id} />
+      <UseLogoById id={props.id} />
     </Svg100>
-  </a>
+  </Link>
 );
 
 export default LinkSvgLogo

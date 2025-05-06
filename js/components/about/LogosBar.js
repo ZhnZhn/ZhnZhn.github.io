@@ -14,37 +14,35 @@ const CL_ROOT = 'logo-container',
     strokeLinejoin: "round",
     strokeMiterlimit: "1.414"
   };
-const LINK_SVG_LOGO_CONFS = [['Nasdaq Data Link', 'logo-ndl', 'https://data.nasdaq.com', 'NDLSemi', {
+const LINK_SVG_LOGO_CONFS = [['logo-ndl', 'https://data.nasdaq.com', 'NDLSemi', {
     w: '215',
     h: '36'
-  }], ['GitHub Repository', 'logo-github', 'https://github.com/ZhnZhn/ZhnZhn.github.io', 'GitHub', {
+  }], ['logo-github', 'https://github.com/ZhnZhn/ZhnZhn.github.io', 'GitHub', {
     ...LOGO_SVG_PROPS,
     w: '16'
-  }], ['React', 'logo-react', 'https://reactjs.org', 'React', {
+  }], ['logo-react', 'https://reactjs.org', 'React', {
     ...LOGO_SVG_PROPS,
     w: '600'
-  }], ['Highcharts', 'logo-highcharts', 'https://www.highcharts.com', 'Highcharts', {
+  }], ['logo-highcharts', 'https://www.highcharts.com', 'Highcharts', {
     ...LOGO_SVG_PROPS,
     w: '425.197',
     h: '141.732'
   }]],
-  LINK_LOGO_CONFS = [['https://ec.europa.eu/eurostat', 'eurostat', 'Eurostat'], ['https://comtrade.un.org', 'UN Comtrade'], ['https://www.fao.org/faostat/en/#data', 'FAOSTAT']];
+  LINK_LOGO_CONFS = [['https://ec.europa.eu/eurostat', 'eurostat'], ['https://comtrade.un.org', 'UN Comtrade'], ['https://www.fao.org/faostat/en/#data', 'FAOSTAT']];
 const _crLinkSvgLogo = _ref => {
-  let [ariaLabel, className, href, id, svgProps] = _ref;
+  let [className, href, id, svgProps] = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_LinkSvgLogo.default, {
-    ariaLabel: ariaLabel,
+    id: id,
     className: className,
     href: href,
-    id: id,
     svgProps: svgProps
   }, id);
 };
 const _crLinkLogo = _ref2 => {
-  let [href, caption, ariaLabel] = _ref2;
+  let [href, caption] = _ref2;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_LinkLogo.default, {
     href: href,
-    caption: caption,
-    ariaLabel: ariaLabel
+    caption: caption
   }, caption);
 };
 const LogosBar = () => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -57,6 +55,5 @@ const LogosBar = () => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     crItem: _crLinkLogo
   })]
 });
-var _default = LogosBar;
-exports.default = _default;
+var _default = exports.default = LogosBar;
 //# sourceMappingURL=LogosBar.js.map

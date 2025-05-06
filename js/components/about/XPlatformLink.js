@@ -1,7 +1,10 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _Link = _interopRequireDefault(require("../zhn/Link"));
+var _Svg = require("../zhn/svg/Svg");
 var _jsxRuntime = require("react/jsx-runtime");
 const COLOR = '#faebd7',
   X_URL = 'https://x.com',
@@ -14,10 +17,7 @@ const COLOR = '#faebd7',
     height: 28,
     padding: '1px 10px 1px 9px',
     borderRadius: 4,
-    outline: 0,
-    textDecoration: 'none',
-    userSelect: 'none',
-    cursor: 'pointer'
+    userSelect: 'none'
   },
   S_ICON = {
     fill: COLOR,
@@ -29,40 +29,27 @@ const COLOR = '#faebd7',
     height: 18,
     marginRight: 8
   };
-const TITLE = "X formerly known as Twitter";
-const XPlatformLink = _ref => {
-  let {
-    style,
-    iconStyle,
-    account,
-    title
-  } = _ref;
-  return account ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("a", {
-    className: CL_LINK_X,
+const XPlatformLink = props => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Link.default, {
+  href: `${X_URL}/${props.account}`,
+  className: CL_LINK_X,
+  style: {
+    ...S_LINK,
+    ...props.style
+  },
+  title: props.title,
+  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.Svg, {
+    w: "22",
     style: {
-      ...S_LINK,
-      ...style
+      ...S_ICON,
+      ...props.iconStyle
     },
-    target: "_blank",
-    href: X_URL + "/" + account,
-    title: title,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("svg", {
-      viewBox: "0 0 22 20",
-      xmlns: "http://www.w3.org/2000/svg",
-      style: {
-        ...S_ICON,
-        ...iconStyle
-      },
-      "aria-label": TITLE,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("title", {
-        children: TITLE
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
-        d: "M16.99 0H20.298L13.071 8.26L21.573 19.5H14.916L9.702 12.683L3.736 19.5H0.426L8.156 10.665L0 0H6.826L11.539 6.231L16.99 0ZM15.829 17.52H17.662L5.83 1.876H3.863L15.829 17.52Z"
-      })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
-      children: ["@", account]
-    })]
-  }) : null;
-};
+    "aria-hidden": true,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+      d: "M16.99 0H20.298L13.071 8.26L21.573 19.5H14.916L9.702 12.683L3.736 19.5H0.426L8.156 10.665L0 0H6.826L11.539 6.231L16.99 0ZM15.829 17.52H17.662L5.83 1.876H3.863L15.829 17.52Z"
+    })
+  }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+    children: ["@", props.account]
+  })]
+});
 var _default = exports.default = XPlatformLink;
 //# sourceMappingURL=XPlatformLink.js.map

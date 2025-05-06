@@ -12,25 +12,21 @@ const CL_ROOT = 'logo-container'
 
 const LINK_SVG_LOGO_CONFS = [
   [
-    'Nasdaq Data Link',
     'logo-ndl',
     'https://data.nasdaq.com',
     'NDLSemi',
     {w: '215', h: '36'}
   ],[
-    'GitHub Repository',
     'logo-github',
     'https://github.com/ZhnZhn/ZhnZhn.github.io',
     'GitHub',
     {...LOGO_SVG_PROPS, w: '16'}
   ],[
-    'React',
     'logo-react',
     'https://reactjs.org',
     'React',
     {...LOGO_SVG_PROPS, w: '600'}
   ],[
-    'Highcharts',
     'logo-highcharts',
     'https://www.highcharts.com',
     'Highcharts',
@@ -40,8 +36,7 @@ const LINK_SVG_LOGO_CONFS = [
 , LINK_LOGO_CONFS = [
   [
     'https://ec.europa.eu/eurostat',
-    'eurostat',
-    'Eurostat'
+    'eurostat'
   ],[
     'https://comtrade.un.org',
     'UN Comtrade'
@@ -52,7 +47,6 @@ const LINK_SVG_LOGO_CONFS = [
 ];
 
 const _crLinkSvgLogo = ([
-  ariaLabel,
   className,
   href,
   id,
@@ -60,24 +54,21 @@ const _crLinkSvgLogo = ([
 ]) => (
   <LinkSvgLogo
     key={id}
-    ariaLabel={ariaLabel}
+    id={id}
     className={className}
     href={href}
-    id={id}
     svgProps={svgProps}
   />
 );
 
 const _crLinkLogo = ([
   href,
-  caption,
-  ariaLabel
+  caption
 ]) => (
   <LinkLogo
     key={caption}
     href={href}
     caption={caption}
-    ariaLabel={ariaLabel}
   />
 );
 

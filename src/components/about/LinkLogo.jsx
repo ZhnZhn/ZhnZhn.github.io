@@ -1,20 +1,14 @@
-import { toHref } from '../uiApi';
+import Link from '../zhn/Link';
 
 const CL_LOGO = 'logo-item data-provider-logo';
 
-const LinkLogo = ({
-  className=CL_LOGO,
-  href,
-  caption,
-  ariaLabel=caption
-}) => (
-  <a
-    aria-label={ariaLabel}
-    className={className}
-    href={toHref(href)}
+const LinkLogo = (props) => (
+  <Link
+    className={props.className || CL_LOGO}
+    href={props.href}
   >
-   {caption}
-  </a>
+    {props.caption}
+  </Link>
 );
 
 export default LinkLogo

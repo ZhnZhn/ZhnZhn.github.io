@@ -8,9 +8,11 @@ const Link = props => {
   const _href = (0, _uiApi.toHref)(props.href);
   return _href && props.children ? /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
     target: "_blank",
+    href: _href,
     className: props.className,
     style: props.style,
-    href: _href,
+    title: props.title,
+    "aria-label": props.title,
     children: props.children
   }) : null;
 };
