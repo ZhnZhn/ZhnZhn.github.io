@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toFixedNumber = exports.toFixed = exports.roundBy = exports.isInRange = exports.crValueMoving = exports.crId = exports.calcPercent = void 0;
+exports.toFixedNumber = exports.toFixed = exports.roundBy = exports.isInRange = exports.crValueMoving = exports.crRandomInteger = exports.crId = exports.calcPercent = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _isTypeFn = require("../utils/isTypeFn");
 var _DirectionType = require("../constants/DirectionType");
@@ -86,7 +86,10 @@ const toFixed = value => {
 exports.toFixed = toFixed;
 const toFixedNumber = value => !(0, _isTypeFn.isNumber)(value) ? value : roundBy(value, value < 0.0001 ? 8 : value < 10 ? 4 : value < 10000 ? 2 : 0);
 exports.toFixedNumber = toFixedNumber;
-const crId = prefix => (prefix || '') + Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
+const _random = Math.random;
+const crRandomInteger = (min, max) => min + Math.floor((max - min + 1) * _random());
+exports.crRandomInteger = crRandomInteger;
+const crId = prefix => (prefix || '') + Date.now().toString(36) + _random().toString(36).slice(2, 9);
 exports.crId = crId;
 const isInRange = (v, min, max) => v > min && v < max;
 exports.isInRange = isInRange;

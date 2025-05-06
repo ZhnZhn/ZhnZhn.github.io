@@ -107,10 +107,17 @@ export const toFixedNumber = (
         : 0
   )
 
+const _random = Math.random;
+
+export const crRandomInteger = (
+  min,
+  max
+) => min + (Math.floor((max-min+1)*_random()));
+
 export const crId = (prefix) => (
   (prefix || '') +
   Date.now().toString(36) +
-  Math.random().toString(36).slice(2, 9)
+  _random().toString(36).slice(2, 9)
 )
 
 export const isInRange = (v, min, max) => v>min && v<max
