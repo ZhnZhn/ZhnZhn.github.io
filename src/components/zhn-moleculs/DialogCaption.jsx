@@ -19,28 +19,23 @@ const CL_EL = crElementCn()
   fontWeight: 500,
 };
 
-const DialogCaption = ({
-  refBtMenuMore,
-  menuModel,
-  caption,
-  onClose
-}) => {
+const DialogCaption = (props) => {
   const [
     isMenuMore,
     toggleMenuMore
-  ] = useMenuToggle(refBtMenuMore);
+  ] = useMenuToggle(props.refBtMenuMore);
   return (
     <div className={CL_EL} style={S_CAPTION_DIV}>
       <MenuMore
-         refEl={refBtMenuMore}
+         refEl={props.refBtMenuMore}
          isMore={isMenuMore}
-         menuModel={menuModel}
+         menuModel={props.menuModel}
          toggle={toggleMenuMore}
       />
       <span className={CL_NOT_SELECTED}>
-        {caption}
+        {props.caption}
       </span>
-      <BtSvgClose onClick={onClose} />
+      <BtSvgClose onClick={props.onClose} />
     </div>
   );
 }

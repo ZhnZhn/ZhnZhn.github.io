@@ -18,27 +18,21 @@ const CL_EL = (0, _styleFn.crElementCn)(),
     fontSize: '18px',
     fontWeight: 500
   };
-const DialogCaption = _ref => {
-  let {
-    refBtMenuMore,
-    menuModel,
-    caption,
-    onClose
-  } = _ref;
-  const [isMenuMore, toggleMenuMore] = (0, _useMenuToggle.default)(refBtMenuMore);
+const DialogCaption = props => {
+  const [isMenuMore, toggleMenuMore] = (0, _useMenuToggle.default)(props.refBtMenuMore);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_EL,
     style: S_CAPTION_DIV,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
-      refEl: refBtMenuMore,
+      refEl: props.refBtMenuMore,
       isMore: isMenuMore,
-      menuModel: menuModel,
+      menuModel: props.menuModel,
       toggle: toggleMenuMore
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       className: _styleFn.CL_NOT_SELECTED,
-      children: caption
+      children: props.caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClose, {
-      onClick: onClose
+      onClick: props.onClose
     })]
   });
 };
