@@ -26,14 +26,14 @@ const FredLink = _ref => {
   } = item;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-      caption: "FRED Search",
-      href: URL_SEARCH + id
+      href: URL_SEARCH + id,
+      children: "FRED Search"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Delimeter, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-      caption: "FRED Graph",
-      href: URL_GRAPH + id
+      href: URL_GRAPH + id,
+      children: "FRED Graph"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Delimeter, {}), article && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-      caption: "FRED Article",
-      href: article
+      href: article,
+      children: "FRED Article"
     })]
   });
 };

@@ -59,10 +59,9 @@ const LINK_CONFIGS = [
 const Links = LINK_CONFIGS.reduce((result, conf) => {
   result[conf[0]] = () => {
     const _confIndex = isStr(conf[2]) ? 1 : 0;
-    return (<Link
-      caption={conf[_confIndex]}
-      href={conf[_confIndex+1]}
-   />);
+    return (
+      <Link href={conf[_confIndex+1]}>{conf[_confIndex]}</Link>
+    );
   }
   return result;
 }, {});

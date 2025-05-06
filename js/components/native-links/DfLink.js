@@ -5,12 +5,14 @@ exports.__esModule = true;
 exports.default = void 0;
 var _Link = _interopRequireDefault(require("../zhn/Link"));
 var _jsxRuntime = require("react/jsx-runtime");
-const DfLink = _ref => {
-  let {
-    item
-  } = _ref;
+const DfLink = props => {
+  const {
+    caption,
+    ...restProps
+  } = props.item;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-    ...item
+    ...restProps,
+    children: caption
   });
 };
 var _default = exports.default = DfLink;

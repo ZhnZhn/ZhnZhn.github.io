@@ -12,8 +12,8 @@ const Links = LINK_CONFIGS.reduce((result, conf) => {
   result[conf[0]] = () => {
     const _confIndex = (0, _isTypeFn.isStr)(conf[2]) ? 1 : 0;
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-      caption: conf[_confIndex],
-      href: conf[_confIndex + 1]
+      href: conf[_confIndex + 1],
+      children: conf[_confIndex]
     });
   };
   return result;

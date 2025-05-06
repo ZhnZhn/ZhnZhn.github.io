@@ -9,26 +9,19 @@ const EUROSTAT_DATA = 'Eurostat Data'
    `${DATA_URL}/data/database?node_code=${dataset}`;
 
 const _crToolLinks = dataset => dataset
-  ? [{
-      caption: `${EUROSTAT_DATA} Browser`,
-      href: _crBrowserHref(dataset)
-    },{
-      caption: `${EUROSTAT_DATA}base Node`,
-      href: _crDatabaseNodeHref(dataset)
-    }]
-  : [];
+  ? [[
+      `${EUROSTAT_DATA} Browser`,
+      _crBrowserHref(dataset)
+    ],[
+      `${EUROSTAT_DATA}base Node`,
+      _crDatabaseNodeHref(dataset)
+    ]]
+  : void 0;
 
-const _crLinks = ({
-  href,
-  dataset
-}) => {
-  const _links = _crToolLinks(dataset);
-  return _links.length > 0
-    ? _links
-    : void 0;
-};
-
-const _crLink = item => <Link {...item} />
+const _crLink = ([
+  caption,
+  href
+]) => <Link href={href}>{caption}</Link>
 
 const S_UL = {
   lineHeight: 2
@@ -38,7 +31,7 @@ const EsLink = ({
 }) => item ? (
   <ItemList
     style={S_UL}
-    items={_crLinks(item)}
+    items={_crToolLinks(item.dataset)}
     crItem={_crLink}
   />
 ) : null;

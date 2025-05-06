@@ -14,7 +14,7 @@ const NdlLink = _ref => {
   } = _ref;
   return linkId ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
     href: `${ROOT_URI}${linkId}`,
-    caption: `${caption} ${linkId}`
+    children: `${caption} ${linkId}`
   }) : null;
 };
 var _default = exports.default = NdlLink;

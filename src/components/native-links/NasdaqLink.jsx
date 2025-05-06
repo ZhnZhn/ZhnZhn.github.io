@@ -25,9 +25,8 @@ const NasdaqLink = ({
   return (
     <Link
       style={style}
-      href={`${NASDAQ_BASE}${_ticket}`}
-      caption={`${caption} ${_ticket}`}
-    />
+      href={`${NASDAQ_BASE}${_ticket}`}      
+    >{`${caption} ${_ticket}`}</Link>
   );
 }
 

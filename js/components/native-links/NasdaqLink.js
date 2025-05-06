@@ -24,7 +24,7 @@ const NasdaqLink = _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
     style: style,
     href: `${NASDAQ_BASE}${_ticket}`,
-    caption: `${caption} ${_ticket}`
+    children: `${caption} ${_ticket}`
   });
 };
 var _default = exports.default = NasdaqLink;

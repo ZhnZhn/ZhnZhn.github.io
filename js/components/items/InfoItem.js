@@ -37,8 +37,8 @@ const _crLinkItem = _ref => {
     caption
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-    caption: (0, _arrFn.joinByColon)(caption, href),
-    href: href
+    href: href,
+    children: (0, _arrFn.joinByColon)(caption, href)
   });
 };
 const Descr = _ref2 => {

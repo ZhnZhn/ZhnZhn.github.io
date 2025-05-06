@@ -1,7 +1,15 @@
 import Link from '../zhn/Link';
 
-const DfLink = ({ item }) => (
-  <Link {...item} />
-);
+const DfLink = (
+  props
+) => {
+  const {
+    caption,
+    ...restProps
+  } = props.item;
+  return (
+    <Link {...restProps}>{caption}</Link>
+  );
+};
 
 export default DfLink

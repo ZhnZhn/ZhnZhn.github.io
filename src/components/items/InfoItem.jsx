@@ -25,10 +25,7 @@ const _crLinkItem = ({
   href,
   caption
 }) => (
- <Link
-    caption={joinByColon(caption, href)}
-    href={href}
- />
+ <Link href={href}>{joinByColon(caption, href)}</Link>
 );
 
 const Descr = ({

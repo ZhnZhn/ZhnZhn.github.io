@@ -22,21 +22,11 @@ const FredLink = ({
   } = item;
   return (
     <>
-      <Link
-        caption="FRED Search"
-        href={URL_SEARCH + id}
-      />
+      <Link href={URL_SEARCH + id}>FRED Search</Link>
       <Delimeter/>
-      <Link
-        caption="FRED Graph"
-        href={URL_GRAPH + id}
-      />
+      <Link href={URL_GRAPH + id}>FRED Graph</Link>
       <Delimeter/>
-      { article && <Link
-          caption="FRED Article"
-          href={article}
-        />
-      }
+      { article && <Link href={article}>FRED Article</Link> }
    </>
   );
 }

@@ -7,10 +7,7 @@ const NdlLink = ({
   linkId,
   caption=DF_CAPTION
 }) => linkId ? (
-   <Link
-      href={`${ROOT_URI}${linkId}`}
-      caption={`${caption} ${linkId}`}
-   />
+   <Link href={`${ROOT_URI}${linkId}`}>{`${caption} ${linkId}`}</Link>
   ) : null;
 
 export default NdlLink
