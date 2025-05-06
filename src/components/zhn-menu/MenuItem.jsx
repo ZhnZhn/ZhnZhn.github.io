@@ -1,38 +1,34 @@
+import { IfTrue } from '../uiApi';
 import { CL_ROW_TOPIC } from '../styleFn';
 import { useKeyEnter } from '../hooks/fUseKey';
+
 
 import LabelNew from './LabelNew';
 import MenuItemBadge from './MenuItemBadge';
 
-const MenuItem = ({
-  refItem,
-  isNew,
-  style,
-  title,
-  atomBadge,
-  onBadgeClick,
-  onBadgeClose,
-  onClick
-}) => {
-  const _hKeyDown = useKeyEnter(onClick);
+const MenuItem = (props) => {
+  const _hKeyDown = useKeyEnter(props.onClick);
   return (
-  <div
-      ref={refItem}
+    <div
+      ref={props.refItem}
       tabIndex="0"
       role="menuitem"
       className={CL_ROW_TOPIC}
-      style={style}
-      onClick={onClick}
+      style={props.style}
+      onClick={props.onClick}
       onKeyDown={_hKeyDown}
    >
-     {title}
-     {atomBadge != null && <MenuItemBadge
-          atomBadge={atomBadge}
-          onOpen={onBadgeClick}
-          onClose={onBadgeClose}
+     {props.title}
+     <IfTrue v={props.atomBadge}>
+       <MenuItemBadge
+          atomBadge={props.atomBadge}
+          onOpen={props.onBadgeClick}
+          onClose={props.onBadgeClose}
        />
-     }
-     {isNew ? <LabelNew /> : null}
+     </IfTrue>
+     <IfTrue v={props.isNew}>
+       <LabelNew />
+     </IfTrue>
   </div>
   );
 }
