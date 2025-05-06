@@ -5,9 +5,9 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _ButtonCircle = _interopRequireDefault(require("../zhn/ButtonCircle2"));
+var _Button = _interopRequireDefault(require("../zhn/Button"));
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_MENU_BADGE = (0, _styleFn.crElementBgCn)("menu__badge"),
+const CL_MENU_BADGE = (0, _styleFn.crBtCircle2Cn)((0, _styleFn.crElementBgCn)("menu__badge")),
   S_ITEM_OPEN = {
     color: '#a487d4'
   };
@@ -28,16 +28,13 @@ const MenuItemBadge = props => {
         onOpen();
       }
     }, [is, onOpen, onClose]);
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
-    v: value,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
-      tabIndex: "-1",
-      className: CL_MENU_BADGE,
-      style: is ? S_ITEM_OPEN : void 0,
-      caption: value,
-      onClick: _hClick
-    })
-  });
+  return value ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+    tabIndex: "-1",
+    className: CL_MENU_BADGE,
+    style: is ? S_ITEM_OPEN : void 0,
+    onClick: _hClick,
+    children: value
+  }) : null;
 };
 var _default = exports.default = MenuItemBadge;
 //# sourceMappingURL=MenuItemBadge.js.map

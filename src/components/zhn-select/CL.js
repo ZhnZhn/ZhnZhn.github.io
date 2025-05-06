@@ -1,10 +1,10 @@
-export { CL_NOT_SELECTED } from '../styleFn';
-
 import {
+  CL_NOT_SELECTED,
   CL_TEXT_ELLIPSIS,
   CL_WIDTH_100_PERCENT,
   crCn,
-  crBtCircleHfCn
+  crBtCircleHfCn,
+  crBtCircle2Cn
 } from '../styleFn';
 
 export const CL_ITEM_OPTION = crCn(
@@ -31,7 +31,7 @@ export const CL_OPTIONS_DIV = OPTIONS + '__div'
 export const CL_OPTIONS_ROW = OPTIONS_ROW
 export const CL_OPTIONS_ROW_ACTIVE = OPTIONS_ROW + '--active'
 
-export const CL_FOOTER = FOOTER
+export const CL_FOOTER = `${FOOTER} ${CL_NOT_SELECTED}`
 export const CL_FOOTER_INDEX = FOOTER + '__index'
 export const CL_FOOTER_BTS = FOOTER + '__bts'
-export const CL_FOOTER_BT = crBtCircleHfCn(FOOTER + '__bt')
+export const CL_FOOTER_BT = crBtCircle2Cn(crBtCircleHfCn(FOOTER + '__bt'))

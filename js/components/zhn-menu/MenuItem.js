@@ -3,7 +3,6 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _fUseKey = require("../hooks/fUseKey");
 var _LabelNew = _interopRequireDefault(require("./LabelNew"));
@@ -19,17 +18,11 @@ const MenuItem = props => {
     style: props.style,
     onClick: props.onClick,
     onKeyDown: _hKeyDown,
-    children: [props.title, /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
-      v: props.atomBadge,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItemBadge.default, {
-        atomBadge: props.atomBadge,
-        onOpen: props.onBadgeClick,
-        onClose: props.onBadgeClose
-      })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
-      v: props.isNew,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_LabelNew.default, {})
-    })]
+    children: [props.title, props.atomBadge ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuItemBadge.default, {
+      atomBadge: props.atomBadge,
+      onOpen: props.onBadgeClick,
+      onClose: props.onBadgeClose
+    }) : null, props.isNew ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_LabelNew.default, {}) : null]
   });
 };
 var _default = exports.default = MenuItem;

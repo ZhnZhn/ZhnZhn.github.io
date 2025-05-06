@@ -1,11 +1,12 @@
 import { joinByBlank } from '../../utils/arrFn';
 
 import {
-  crAbsoluteTopLeftStyle
+  crAbsoluteTopLeftStyle,
+  crBtCircle2Cn
 } from '../styleFn';
 
 import { BtSvgClear } from '../zhn/BtSvgX';
-import ButtonCircle2 from '../zhn/ButtonCircle2';
+import Button from '../zhn/Button';
 import ArrowCell from './ArrowCell';
 
 import {
@@ -13,8 +14,9 @@ import {
   CL_SPINNER_FAILED
 } from './CL';
 
-const S_SVG_CLEAR = {
-  ...crAbsoluteTopLeftStyle(5, 8, !0),  
+const CL_BT_SPINNER_FAILED = crBtCircle2Cn(CL_SPINNER_FAILED)
+, S_SVG_CLEAR = {
+  ...crAbsoluteTopLeftStyle(5, 8, !0),
   stroke: '#1b75bb'
 };
 
@@ -55,8 +57,8 @@ const crAfterInputEl = (
         />),
         joinByBlank('Loading', _optionNames, '...')]
     : isLoadingFailed ? [
-        (<ButtonCircle2
-           className={CL_SPINNER_FAILED}
+        (<Button
+           className={CL_BT_SPINNER_FAILED}
            dataLoader="circle-failed"
            onClick={onLoadOption}
         />),

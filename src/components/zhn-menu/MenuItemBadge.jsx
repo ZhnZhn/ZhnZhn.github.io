@@ -1,9 +1,12 @@
-import { useCallback, IfTrue } from '../uiApi';
-import { crElementBgCn } from '../styleFn';
+import { useCallback } from '../uiApi';
+import {
+  crElementBgCn,
+  crBtCircle2Cn
+} from '../styleFn';
 
-import ButtonCircle2 from '../zhn/ButtonCircle2';
+import Button from '../zhn/Button';
 
-const CL_MENU_BADGE = crElementBgCn("menu__badge")
+const CL_MENU_BADGE = crBtCircle2Cn(crElementBgCn("menu__badge"))
 , S_ITEM_OPEN = { color: '#a487d4'};
 
 const MenuItemBadge = (props) => {
@@ -23,17 +26,12 @@ const MenuItemBadge = (props) => {
       onOpen();
     }
   }, [is, onOpen, onClose]);
-  return (
-    <IfTrue v={value}>
-      <ButtonCircle2
-        tabIndex="-1"
-        className={CL_MENU_BADGE}
-        style={is ? S_ITEM_OPEN : void 0}
-        caption={value}
-        onClick={_hClick}
-      />
-    </IfTrue>
-  );
+  return value ? <Button
+    tabIndex="-1"
+    className={CL_MENU_BADGE}
+    style={is ? S_ITEM_OPEN : void 0}    
+    onClick={_hClick}
+  >{value}</Button> : null;
 };
 
 export default MenuItemBadge

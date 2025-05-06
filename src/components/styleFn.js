@@ -180,6 +180,7 @@ export const crItemCaptionCn = _fCrCn(`${CL_C_BG} ${CL_EL_C} el-bb`)
 
 export const crBtCircleHfCn = _fCrCn("bt-circle-hf")
 export const crBtCircleCn = _fCrCnNotSelected("bt-circle")
+export const crBtCircle2Cn = cn => crCn(crBtCircleCn("bt-c2"), cn)
 
 export const crBoldCn = _fCrCn("bold")
 

@@ -1,7 +1,5 @@
-import { IfTrue } from '../uiApi';
 import { CL_ROW_TOPIC } from '../styleFn';
 import { useKeyEnter } from '../hooks/fUseKey';
-
 
 import LabelNew from './LabelNew';
 import MenuItemBadge from './MenuItemBadge';
@@ -19,16 +17,12 @@ const MenuItem = (props) => {
       onKeyDown={_hKeyDown}
    >
      {props.title}
-     <IfTrue v={props.atomBadge}>
-       <MenuItemBadge
-          atomBadge={props.atomBadge}
-          onOpen={props.onBadgeClick}
-          onClose={props.onBadgeClose}
-       />
-     </IfTrue>
-     <IfTrue v={props.isNew}>
-       <LabelNew />
-     </IfTrue>
+     {props.atomBadge ? <MenuItemBadge
+        atomBadge={props.atomBadge}
+        onOpen={props.onBadgeClick}
+        onClose={props.onBadgeClose}
+     /> : null}
+     {props.isNew ? <LabelNew /> : null}     
   </div>
   );
 }
