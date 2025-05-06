@@ -1,18 +1,14 @@
 import { safeMap } from '../uiApi';
 import MenuTopic from './MenuTopic';
 
-const MenuTopicList = ({
-  refFirstItem,
-  menu,
-  itemStyle,
-  topicStyle
-}) => safeMap(menu, (menuTopicProps, index) => (
-  <MenuTopic
+const MenuTopicList = (props) => safeMap(
+  props.menu,
+  (menuTopicProps, index) => (<MenuTopic
      key={index}
      {...menuTopicProps}
-     itemStyle={itemStyle}
-     topicStyle={topicStyle}
-     refFirstItem={index ===0 ? refFirstItem : void 0}
+     itemStyle={props.itemStyle}
+     topicStyle={props.topicStyle}
+     refFirstItem={index === 0 ? props.refFirstItem : void 0}
   />
 ));
 
