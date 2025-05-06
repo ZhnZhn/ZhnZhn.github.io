@@ -52,46 +52,30 @@ const _crConf = (
       S_NONE
     ];
 
-const OpenClose = ({
-  refItem,
-  isClose=true,
-  role='button',
-  labelId,
-  className,
-  style,
-  rowStyle,
-  ocStyle,
-  caption,
-  captionStyle,
-  openColor,
-  CompAfter,
-  childStyle,
-  dndHandlers,
-  children
-}) => {
+const OpenClose = (props) => {
   const _childrenWrapperId = useId()
   , [
     isOpen,
     toggleIsOpen
-  ] = useToggle(!isClose)
+  ] = useToggle(!(props.isClose ?? true))
   , _hKeyDown = useKeyEnter(toggleIsOpen)
   , [
      _pathV,
      _fillV,
      _childCl,
      _childStyle
-  ] = _crConf(isOpen, openColor);
+  ] = _crConf(isOpen, props.openColor);
   return (
-    <div style={{...S_ROOT_DIV, ...style}}>
-      <div className={CL_NOT_SELECTED} style={rowStyle}>
+    <div style={{...S_ROOT_DIV, ...props.style}}>
+      <div className={CL_NOT_SELECTED} style={props.rowStyle}>
         <div
-          {...dndHandlers}
+          {...props.dndHandlers}
           {...crAriaExpandedProps(isOpen, _childrenWrapperId)}
-          role={role}
+          role={props.role || "button"}
           tabIndex="0"
-          ref={refItem}
-          className={className || CL_OPEN_CLOSE}
-          style={ocStyle}
+          ref={props.refItem}
+          className={props.className || CL_OPEN_CLOSE}
+          style={props.ocStyle}
           onClick={toggleIsOpen}
           onKeyDown={_hKeyDown}
         >
@@ -99,25 +83,25 @@ const OpenClose = ({
            <path
               fill={_fillV}
               strokeWidth="1"
-              stroke={openColor}
+              stroke={props.openColor}
               d={_pathV}
            />
          </Svg>
          <span
-           id={labelId}
-           style={{...S_CAPTION, ...captionStyle}}
+           id={props.labelId}
+           style={{...S_CAPTION, ...props.captionStyle}}
          >
-            {caption}
+            {props.caption}
          </span>
        </div>
-       {CompAfter}
+       {props.CompAfter}
     </div>
     <div
       id={_childrenWrapperId}
       className={_childCl}
-      style={{...childStyle, ..._childStyle}}
+      style={{...props.childStyle, ..._childStyle}}
     >
-      {children}
+      {props.children}
     </div>
    </div>
   );

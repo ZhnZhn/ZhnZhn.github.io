@@ -28,44 +28,27 @@ const S_ROOT_DIV = {
 
 //_pathV, _fillV, _childCl, _childStyle
 const _crConf = (isOpen, openColor) => isOpen ? [PATH_OPEN, openColor, `${_styleFn.CL_OPEN_CLOSE_EXP} ${_styleFn.CL_SHOW_POPUP}`, _styleFn.S_BLOCK] : [PATH_CLOSE, _Svg.FILL_NONE, _styleFn.CL_OPEN_CLOSE_EXP, _styleFn.S_NONE];
-const OpenClose = _ref => {
-  let {
-    refItem,
-    isClose = true,
-    role = 'button',
-    labelId,
-    className,
-    style,
-    rowStyle,
-    ocStyle,
-    caption,
-    captionStyle,
-    openColor,
-    CompAfter,
-    childStyle,
-    dndHandlers,
-    children
-  } = _ref;
+const OpenClose = props => {
   const _childrenWrapperId = (0, _uiApi.useId)(),
-    [isOpen, toggleIsOpen] = (0, _useToggle.useToggle)(!isClose),
+    [isOpen, toggleIsOpen] = (0, _useToggle.useToggle)(!(props.isClose ?? true)),
     _hKeyDown = (0, _fUseKey.useKeyEnter)(toggleIsOpen),
-    [_pathV, _fillV, _childCl, _childStyle] = _crConf(isOpen, openColor);
+    [_pathV, _fillV, _childCl, _childStyle] = _crConf(isOpen, props.openColor);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       ...S_ROOT_DIV,
-      ...style
+      ...props.style
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: _styleFn.CL_NOT_SELECTED,
-      style: rowStyle,
+      style: props.rowStyle,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        ...dndHandlers,
+        ...props.dndHandlers,
         ...(0, _a11yFn.crAriaExpandedProps)(isOpen, _childrenWrapperId),
-        role: role,
+        role: props.role || "button",
         tabIndex: "0",
-        ref: refItem,
-        className: className || _styleFn.CL_OPEN_CLOSE,
-        style: ocStyle,
+        ref: props.refItem,
+        className: props.className || _styleFn.CL_OPEN_CLOSE,
+        style: props.ocStyle,
         onClick: toggleIsOpen,
         onKeyDown: _hKeyDown,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.Svg, {
@@ -74,26 +57,26 @@ const OpenClose = _ref => {
           children: /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
             fill: _fillV,
             strokeWidth: "1",
-            stroke: openColor,
+            stroke: props.openColor,
             d: _pathV
           })
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          id: labelId,
+          id: props.labelId,
           style: {
             ...S_CAPTION,
-            ...captionStyle
+            ...props.captionStyle
           },
-          children: caption
+          children: props.caption
         })]
-      }), CompAfter]
+      }), props.CompAfter]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       id: _childrenWrapperId,
       className: _childCl,
       style: {
-        ...childStyle,
+        ...props.childStyle,
         ..._childStyle
       },
-      children: children
+      children: props.children
     })]
   });
 };
