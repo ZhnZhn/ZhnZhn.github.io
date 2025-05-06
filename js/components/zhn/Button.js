@@ -6,13 +6,11 @@ var _jsxRuntime = require("react/jsx-runtime");
 const Button = _ref => {
   let {
     ariaLabel,
-    dataLoader,
     children,
     ...restProps
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
     ...restProps,
-    "data-loader": dataLoader,
     "aria-label": ariaLabel,
     type: "button",
     children: children

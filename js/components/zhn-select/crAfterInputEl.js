@@ -26,7 +26,7 @@ const crAfterInputEl = (isLoading, isLoadingFailed, placeholder, optionName, opt
     "data-loader": "circle"
   }), (0, _arrFn.joinByBlank)('Loading', _optionNames, '...')] : isLoadingFailed ? [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
     className: CL_BT_SPINNER_FAILED,
-    dataLoader: "circle-failed",
+    "data-loader": "circle-failed",
     onClick: onLoadOption
   }), (0, _arrFn.joinByBlank)('Loading', _optionNames, 'Failed')] : isBtSvgClear ? [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgX.BtSvgClear, {
     refEl: _refBtClear,

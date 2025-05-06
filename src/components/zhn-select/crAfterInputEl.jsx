@@ -59,7 +59,7 @@ const crAfterInputEl = (
     : isLoadingFailed ? [
         (<Button
            className={CL_BT_SPINNER_FAILED}
-           dataLoader="circle-failed"
+           data-loader="circle-failed"
            onClick={onLoadOption}
         />),
         joinByBlank('Loading', _optionNames, 'Failed')
