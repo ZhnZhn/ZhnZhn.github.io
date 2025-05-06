@@ -38,20 +38,16 @@ const CL = 'bt-item',
       borderColor
     }];
   };
-const LegendItem = _ref => {
-  let {
-    item,
-    onClickItem
-  } = _ref;
+const LegendItem = props => {
   const {
       color,
       name,
       isVisible
-    } = item ?? {},
+    } = props.item ?? {},
     [is, toggleIs] = (0, _useToggle.useToggle)(isVisible),
     [btStyle, circleStyle] = _crStyles(is, color),
     _hClick = () => {
-      onClickItem(item);
+      props.onClickItem(props.item);
       toggleIs();
     };
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Button.default, {

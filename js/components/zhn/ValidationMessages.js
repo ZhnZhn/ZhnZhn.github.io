@@ -13,14 +13,9 @@ const S_VM = {
   fontWeight: "bold",
   lineHeight: 1.4
 };
-const ValidationMessages = _ref => {
-  let {
-    validationMessages
-  } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitles.default, {
-    style: S_VM,
-    titles: validationMessages
-  });
-};
+const ValidationMessages = props => /*#__PURE__*/(0, _jsxRuntime.jsx)(_StepTitles.default, {
+  style: S_VM,
+  titles: props.validationMessages
+});
 var _default = exports.default = ValidationMessages;
 //# sourceMappingURL=ValidationMessages.js.map

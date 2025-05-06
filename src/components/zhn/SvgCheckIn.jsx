@@ -5,11 +5,8 @@ import {
 
 const CL_CHECK_IN = "check-in";
 
-const SvgCheckIn = ({
-  is,
-  cn
-}) => is ? (
-  <span className={cn}>
+const SvgCheckIn = (props) => props.is ? (
+  <span className={props.cn}>
     <Svg w="16">
       <PathCheckIn cn={CL_CHECK_IN} sw="3" />
     </Svg>

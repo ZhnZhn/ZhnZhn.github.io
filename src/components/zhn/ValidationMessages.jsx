@@ -10,12 +10,10 @@ const S_VM = {
   lineHeight: 1.4
 }
 
-const ValidationMessages = ({
-  validationMessages
-}) => (
+const ValidationMessages = (props) => (
   <StepTitles
     style={S_VM}
-    titles={validationMessages}
+    titles={props.validationMessages}
   />
 );
 

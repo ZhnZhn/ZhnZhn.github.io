@@ -17,19 +17,13 @@ const crToolbarButton = (caption, title, onClick) => /*#__PURE__*/(0, _jsxRuntim
   onClick: onClick
 }, caption);
 exports.crToolbarButton = crToolbarButton;
-const ToolbarButtonCircle = _ref => {
-  let {
-    style,
-    children
-  } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    style: {
-      ...S_TOOLBAR,
-      ...style
-    },
-    role: "toolbar",
-    children: children
-  });
-};
+const ToolbarButtonCircle = props => /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+  style: {
+    ...S_TOOLBAR,
+    ...props.style
+  },
+  role: "toolbar",
+  children: props.children
+});
 exports.ToolbarButtonCircle = ToolbarButtonCircle;
 //# sourceMappingURL=ToolbarButtonCircle.js.map

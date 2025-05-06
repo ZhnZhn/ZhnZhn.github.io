@@ -21,11 +21,11 @@ export const crToolbarButton = (
   />
 )
 
-export const ToolbarButtonCircle = ({
-  style,
-  children
-}) => (
-  <div style={{...S_TOOLBAR, ...style}} role="toolbar">
-    {children}
+export const ToolbarButtonCircle = (props) => (
+  <div
+    style={{...S_TOOLBAR, ...props.style}}
+    role="toolbar"
+  >
+    {props.children}
   </div>
 )

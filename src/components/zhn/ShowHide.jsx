@@ -1,34 +1,26 @@
 import { crPresentationRole } from '../a11yFn';
 import { crShowHide } from '../styleFn';
 
-const ShowHide = ({
-  isShow,
-  className,
-  style,
-  withoutAnimation,
-  animationClass,
-  onKeyDown,
-  children
-}) => {
+const ShowHide = (props) => {
     const [
       _cn,
       _style
     ] = crShowHide(
-      isShow,
-      className,
-      withoutAnimation,
-      animationClass
+      props.isShow,
+      props.className,
+      props.withoutAnimation,
+      props.animationClass
     );
 
     /*eslint-disable jsx-a11y/no-static-element-interactions*/
     return (
       <div
-        {...crPresentationRole(isShow)}
+        {...crPresentationRole(props.isShow)}
         className={_cn}
-        style={{...style, ..._style}}
-        onKeyDown={onKeyDown}
+        style={{...props.style, ..._style}}
+        onKeyDown={props.onKeyDown}
       >
-        {children}
+        {props.children}
       </div>
     );
     /*eslint-enable jsx-a11y/no-static-element-interactions*/

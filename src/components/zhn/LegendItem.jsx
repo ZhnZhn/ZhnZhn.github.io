@@ -29,15 +29,12 @@ const CL = 'bt-item'
   ];
 };
 
-const LegendItem = ({
-  item,
-  onClickItem
-}) => {
+const LegendItem = (props) => {
   const {
     color,
     name,
     isVisible
-  } = item ?? {}
+  } = props.item ?? {}
   , [
     is,
     toggleIs
@@ -47,7 +44,7 @@ const LegendItem = ({
     circleStyle
   ] = _crStyles(is, color)
   , _hClick = () => {
-      onClickItem(item);
+      props.onClickItem(props.item);
       toggleIs();
   };
   return (
