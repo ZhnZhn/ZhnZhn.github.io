@@ -31,16 +31,20 @@ body {
 }
 
 button {
-  border: none;
+  border: 0;
   background-color: transparent;
   font-size: inherit;
   font-family: inherit;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+
+  appearance: none; 
+  -webkit-appearance: none;  
+
   text-decoration: none;
+
   user-select: none;
   -webkit-user-select: none;
+
+  touch-action: manipulation;
   cursor: pointer;
 }
 button:focus,
@@ -50,6 +54,10 @@ button:hover {
 button::-moz-focus-inner {
   border: 0;
   outline: 0;
+}
+
+[role="menuitem"] {
+  touch-action: manipulation;
 }
 
 input {
