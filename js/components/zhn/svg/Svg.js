@@ -1,9 +1,14 @@
 "use strict";
 
 exports.__esModule = true;
-exports.Svg100 = exports.Svg = exports.STROKE_LINECAP_ROUND_PROPS = exports.PathCheckIn = exports.FILL_NONE = void 0;
+exports.Svg100 = exports.Svg = exports.STROKE_LINECAP_ROUND_PROPS = exports.PathCheckIn = exports.FILL_NONE = exports.EVENODD_PROPS = void 0;
 var _jsxRuntime = require("react/jsx-runtime");
 const FILL_NONE = exports.FILL_NONE = "none";
+const EVENODD_PROPS = exports.EVENODD_PROPS = {
+  fillRule: "evenodd",
+  clipRule: "evenodd",
+  strokeLinejoin: "round"
+};
 const _crWidthHeightViewBoxProps = (width, height, viewBox) => ({
   xlmns: "http://www.w3.org/2000/svg",
   width,

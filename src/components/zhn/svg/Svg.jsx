@@ -1,6 +1,12 @@
 
 export const FILL_NONE = "none"
 
+export const EVENODD_PROPS = {
+  fillRule: "evenodd",
+  clipRule: "evenodd",
+  strokeLinejoin: "round"
+}
+
 const _crWidthHeightViewBoxProps = (
   width,
   height,

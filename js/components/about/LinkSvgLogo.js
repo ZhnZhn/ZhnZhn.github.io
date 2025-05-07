@@ -10,11 +10,11 @@ var _UseLogoById = _interopRequireDefault(require("./UseLogoById"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_LI = 'logo-item';
 const LinkSvgLogo = props => /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
+  ariaLabel: props.ariaLabel,
   className: (0, _styleFn.crCn)(CL_LI, props.className),
   href: props.href,
   children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.Svg100, {
     ...props.svgProps,
-    "aria-hidden": "true",
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_UseLogoById.default, {
       id: props.id
     })

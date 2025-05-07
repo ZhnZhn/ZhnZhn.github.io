@@ -8,13 +8,11 @@ const CL_LI = 'logo-item';
 
 const LinkSvgLogo = (props) => (
   <Link
+    ariaLabel={props.ariaLabel}
     className={crCn(CL_LI, props.className)}
     href={props.href}
   >
-    <Svg100
-      {...props.svgProps}
-      aria-hidden="true"
-    >
+    <Svg100 {...props.svgProps}>
       <UseLogoById id={props.id} />
     </Svg100>
   </Link>

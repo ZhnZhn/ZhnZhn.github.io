@@ -8,7 +8,7 @@ const Link = (props) => {
       className={props.className}
       style={props.style}
       title={props.title}
-      aria-label={props.title}
+      aria-label={props.ariaLabel || props.title}
     >
       {props.children}
     </a> : null;
