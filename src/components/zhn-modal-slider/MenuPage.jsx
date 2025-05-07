@@ -1,11 +1,5 @@
-import {
-  useRef,
-  useCallback
-} from '../uiApi';
-
-import {
-  HAS_KEYBOARD_FOCUS
-} from '../has';
+import { useRef } from '../uiApi';
+import { HAS_KEYBOARD_FOCUS } from '../has';
 
 import useItemsFocusTrap from '../hooks/useItemsFocusTrap';
 import useGetRefValue2 from '../hooks/useGetRefValue2';
@@ -15,63 +9,46 @@ import FocusTrap from '../zhn-moleculs/FocusTrap';
 import MenuTitle from './MenuTitle';
 import MenuItemList from './MenuItemList';
 
-const DF_ITEMS = [];
 const FOCUS_ITEM_MLS = 350;
-
-const MenuPage = ({
-  isVisible,
-  style,
-  title,
-  titleCl,
-  itemCl,
-  pageNumber,
-  items=DF_ITEMS,
-  onNextPage,
-  onPrevPage,
-  onClose,
-  children
-}) => {
+const MenuPage = (props) => {
   const _refTitle = useRef()
   , [
     _getRefFocus,
     _refLastItem,
     _refFirstItem
-  ] = useItemsFocusTrap(items)
+  ] = useItemsFocusTrap(props.items)
   , _getFocusFirstItem = useGetRefValue2(
     _refTitle,
     _refFirstItem
-  )
-  , _hClickTitle = useCallback(() => {
-      onPrevPage(pageNumber)
-  }, [onPrevPage, pageNumber]);
+  );
 
   useAsyncFocusIf(
-    HAS_KEYBOARD_FOCUS && isVisible,
+    HAS_KEYBOARD_FOCUS && props.isVisible,
     _getFocusFirstItem,
     FOCUS_ITEM_MLS
   );
 
   return (
-    <div style={style}>
+    <div style={props.style}>
       <FocusTrap
         refFirst={_getFocusFirstItem}
         refLast={_refLastItem}
       >
         <MenuTitle
           refEl={_refTitle}
-          titleCl={titleCl}
-          title={title}
-          onClick={_hClickTitle}
+          titleCl={props.titleCl}
+          title={props.title}
+          onClick={props.onPrevPage}
         />
         <MenuItemList
           getRefFocus={_getRefFocus}
-          items={items}
-          itemCl={itemCl || titleCl}
-          pageNumber={pageNumber}
-          onNextPage={onNextPage}
-          onClose={onClose}
+          items={props.items}
+          itemCl={props.itemCl}
+          pageNumber={props.pageNumber}
+          onNextPage={props.onNextPage}
+          onClose={props.onClose}
         />
-        {children}
+        {props.children}
       </FocusTrap>
     </div>
   );

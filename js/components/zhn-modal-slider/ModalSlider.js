@@ -28,13 +28,14 @@ const CL_SLIDER_PAGES = 'slider-pages',
 const _crWidthStyle = v => ({
   width: v
 });
+const _crMenuPage = (id, model, title) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPage.default, {
+  items: model[id],
+  titleCl: model.titleCl,
+  itemCl: model.itemCl || model.titleCl,
+  title: title
+}, id);
 const _addPage = (model, pages, id, title) => {
-  pages.push(/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPage.default, {
-    title: title,
-    items: model[id],
-    titleCl: model.titleCl,
-    itemCl: model.itemCl
-  }, id));
+  pages.push(_crMenuPage(id, model, title));
 };
 const _initState = model => {
   const _pW = model.pageWidth,
@@ -44,11 +45,7 @@ const _initState = model => {
     pageWidth: _pW,
     pageStyle: _crWidthStyle(_pW),
     pageCurrent: 1,
-    pages: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPage.default, {
-      items: model[_initId],
-      titleCl: model.titleCl,
-      itemCl: model.itemCl
-    }, _initId)]
+    pages: [_crMenuPage(_initId, model)]
   };
 };
 const ModalSlider = _ref => {

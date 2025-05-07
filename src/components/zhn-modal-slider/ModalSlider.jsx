@@ -33,21 +33,25 @@ const _crWidthStyle = (v) => ({
   width: v
 })
 
+const _crMenuPage = (
+  id,
+  model,
+  title
+) => (<MenuPage
+  key={id}
+  items={model[id]}
+  titleCl={model.titleCl}
+  itemCl={model.itemCl || model.titleCl}
+  title={title}
+/>);
+
 const _addPage = (
   model,
   pages,
   id,
   title
 ) => {
-  pages.push((
-    <MenuPage
-      key={id}
-      title={title}
-      items={model[id]}
-      titleCl={model.titleCl}
-      itemCl={model.itemCl}
-    />
-  ))
+  pages.push(_crMenuPage(id, model, title))
 };
 
 const _initState = model => {
@@ -59,14 +63,7 @@ const _initState = model => {
     pageWidth: _pW,
     pageStyle: _crWidthStyle(_pW),
     pageCurrent: 1,
-    pages: [
-      <MenuPage
-        key={_initId}
-        items={model[_initId]}
-        titleCl={model.titleCl}
-        itemCl={model.itemCl}
-      />
-    ]
+    pages: [_crMenuPage(_initId, model)]
   };
 };
 
