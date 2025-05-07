@@ -3,6 +3,10 @@ import {
   useCallback
 } from '../uiApi';
 
+import {
+  HAS_KEYBOARD_FOCUS
+} from '../has';
+
 import useItemsFocusTrap from '../hooks/useItemsFocusTrap';
 import useGetRefValue2 from '../hooks/useGetRefValue2';
 import { useAsyncFocusIf } from '../hooks/useFocus';
@@ -42,7 +46,7 @@ const MenuPage = ({
   }, [onPrevPage, pageNumber]);
 
   useAsyncFocusIf(
-    isVisible,
+    HAS_KEYBOARD_FOCUS && isVisible,
     _getFocusFirstItem,
     FOCUS_ITEM_MLS
   );

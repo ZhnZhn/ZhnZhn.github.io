@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _has = require("../has");
 var _useItemsFocusTrap = _interopRequireDefault(require("../hooks/useItemsFocusTrap"));
 var _useGetRefValue = _interopRequireDefault(require("../hooks/useGetRefValue2"));
 var _useFocus = require("../hooks/useFocus");
@@ -33,7 +34,7 @@ const MenuPage = _ref => {
     _hClickTitle = (0, _uiApi.useCallback)(() => {
       onPrevPage(pageNumber);
     }, [onPrevPage, pageNumber]);
-  (0, _useFocus.useAsyncFocusIf)(isVisible, _getFocusFirstItem, FOCUS_ITEM_MLS);
+  (0, _useFocus.useAsyncFocusIf)(_has.HAS_KEYBOARD_FOCUS && isVisible, _getFocusFirstItem, FOCUS_ITEM_MLS);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     style: style,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_FocusTrap.default, {
