@@ -5,8 +5,9 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _a11yFn = require("../a11yFn");
-var _styleFn = require("../styleFn");
+var _inputFn = require("../inputFn");
 var _useToggle = require("../hooks/useToggle");
+var _styleFn = require("../styleFn");
 var _crAfterInputEl = _interopRequireDefault(require("./crAfterInputEl"));
 var _InputSelectFn = require("./InputSelectFn");
 var _ItemOptionDf = _interopRequireDefault(require("./ItemOptionDf"));
@@ -243,7 +244,7 @@ const InputSelect = _ref => {
       ...touchHandlers,
       ...(0, _a11yFn.crAriaExpandedProps)(isShowOption, _optionsViewId),
       ...(0, _a11yFn.crAriaComboboxProps)(labelId),
-      ...(0, _styleFn.crInputProps)(),
+      ...(0, _inputFn.crInputProps)(),
       ref: _refInput,
       className: _CL.CL_INPUT,
       value: value,

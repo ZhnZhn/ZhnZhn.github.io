@@ -6,6 +6,7 @@ import {
   getRefValue
 } from '../uiApi';
 
+import { crInputNumberProps } from '../inputFn';
 import { S_INLINE } from '../styleFn';
 import memoIsShow from '../hoc/memoIsShow';
 
@@ -68,16 +69,12 @@ const RowInputRadius = ({
   initValue
 }) => (
   <RowInputText
+     {...crInputNumberProps(initValue, MIN_R, MAX_R)}
      refEl={refEl}
      styleRoot={S_INLINE}
      styleCaption={{...S_CAPTION, ...{ color }}}
      styleInput={S_INPUT}
-     caption={caption}
-     initValue={initValue}
-     type="number"
-     maxLength={2}
-     min={MIN_R}
-     max={MAX_R}
+     caption={caption}          
   />
 );
 

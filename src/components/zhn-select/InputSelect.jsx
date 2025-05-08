@@ -18,7 +18,7 @@ import {
 } from '../a11yFn';
 import {
   crInputProps
-} from '../styleFn';
+} from '../inputFn';
 
 
 import { useToggle } from '../hooks/useToggle';

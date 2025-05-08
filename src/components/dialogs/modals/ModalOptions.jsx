@@ -1,3 +1,4 @@
+import { crInputNumberProps } from '../../inputFn';
 import {
   CL_CHB_BLACK,
   CL_BLACK
@@ -52,12 +53,7 @@ const ModalOptions = ({
         <label>
           <SpanBoldBlack style={S_CAPTION}>Round Decimals to</SpanBoldBlack>
           <InputText
-            type="number"
-            initValue={dfRt}
-            min={MIN_RT}
-            max={MAX_RT}
-            step={1}
-            maxLength={2}
+            {...crInputNumberProps(dfRt, MIN_RT, MAX_RT)}
             onChange={onRoundTo}
             onEnter={onClose}
           />

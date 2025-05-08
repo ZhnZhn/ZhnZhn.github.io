@@ -1,4 +1,5 @@
 import { useState } from '../uiApi';
+import { crInputNumberProps } from '../inputFn';
 
 import InputText from '../zhn/InputText';
 import { SvgPlus } from '../zhn/BtSvgCircle';
@@ -18,7 +19,6 @@ const RowTypeB = ({
   initValue,
   min,
   max,
-  maxLength,
   onAdd
 }) => {
   const [
@@ -34,13 +34,9 @@ const RowTypeB = ({
         {caption}
       </SpanBoldBlack>
       <InputText
+         {...crInputNumberProps(initValue, min, max)}
          refEl={refEl}
-         type="number"
          style={S_INPUT_TEXT}
-         initValue={initValue}
-         maxLength={maxLength}
-         min={min}
-         max={max}
          onEnter={_onAdd}
       />
       {isPlus && <SvgPlus onClick={_onAdd} />}

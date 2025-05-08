@@ -6,6 +6,7 @@ exports.default = void 0;
 var _merge = _interopRequireDefault(require("../../utils/merge"));
 var _mathFn = require("../../math/mathFn");
 var _uiApi = require("../uiApi");
+var _inputFn = require("../inputFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
@@ -162,24 +163,18 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
           style: S_LABEL_WIDTH,
           children: "Width"
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
+          ...(0, _inputFn.crInputNumberProps)(chartWidth, W_MIN, W_MAX),
           refEl: _refInputWidth,
-          type: "number",
           placeholder: chartWidth,
-          initValue: chartWidth,
-          style: S_INPUT_NUMBER,
-          min: W_MIN,
-          max: W_MAX
+          style: S_INPUT_NUMBER
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: S_LABEL_WIDTH,
           children: "Height"
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
+          ...(0, _inputFn.crInputNumberProps)(chartHeight, H_MIN, H_MAX),
           refEl: _refInputHeight,
-          type: "number",
           placeholder: chartHeight,
-          initValue: chartHeight,
-          style: S_INPUT_NUMBER,
-          min: H_MIN,
-          max: H_MAX
+          style: S_INPUT_NUMBER
         })]
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide.default, {

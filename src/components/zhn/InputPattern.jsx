@@ -8,10 +8,8 @@ import {
   focusRefElement
 } from '../uiApi';
 
-import {
-  S_FLEX,
-  crInputProps
-} from '../styleFn';
+import { crInputProps } from '../inputFn';
+import { S_FLEX } from '../styleFn';
 
 import useInputKeyDown from './useInputKeyDown';
 

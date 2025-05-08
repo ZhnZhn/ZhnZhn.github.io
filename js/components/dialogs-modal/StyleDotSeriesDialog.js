@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _inputFn = require("../inputFn");
 var _styleFn = require("../styleFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
@@ -52,6 +53,7 @@ const RowInputRadius = _ref => {
     initValue
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputText.default, {
+    ...(0, _inputFn.crInputNumberProps)(initValue, MIN_R, MAX_R),
     refEl: refEl,
     styleRoot: _styleFn.S_INLINE,
     styleCaption: {
@@ -61,12 +63,7 @@ const RowInputRadius = _ref => {
       }
     },
     styleInput: S_INPUT,
-    caption: caption,
-    initValue: initValue,
-    type: "number",
-    maxLength: 2,
-    min: MIN_R,
-    max: MAX_R
+    caption: caption
   });
 };
 const StyleDotSeriesDialog = (0, _memoIsShow.default)(_ref2 => {

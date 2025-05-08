@@ -1,3 +1,5 @@
+import { crInputNumberProps } from '../inputFn';
+
 import InputText from '../zhn/InputText';
 import { SvgPlus } from '../zhn/BtSvgCircle';
 import { SpanBoldBlack } from '../zhn/SpanToken';
@@ -18,7 +20,8 @@ const RowCaptionInput = ({
   captionStyle,
   caption,
   initValue,
-  maxLength=3,
+  min=1,
+  max=999,
   onAdd
 }) => (
   <div style={style}>
@@ -28,11 +31,9 @@ const RowCaptionInput = ({
       {caption}
     </SpanBoldBlack>
     <InputText
+       {...crInputNumberProps(initValue, min, max)}
        refEl={refEl}
-       type="number"
-       style={S_INPUT_TEXT}
-       initValue={initValue}
-       maxLength={maxLength}
+       style={S_INPUT_TEXT}       
        onEnter={onAdd}
     />
     {isBtAdd ? <SvgPlus onClick={onAdd} /> : null}

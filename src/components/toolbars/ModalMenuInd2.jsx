@@ -71,8 +71,7 @@ const ModalMenuInd2 = ({
            caption="S1*PowerOf 10"
            initValue={DF_POWER_BY_10}
            min={-9}
-           max={9}
-           maxLength={2}
+           max={9}          
            onAdd={_onPowerBy10}
         />
        }

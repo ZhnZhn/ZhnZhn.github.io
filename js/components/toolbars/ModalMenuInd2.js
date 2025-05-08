@@ -60,7 +60,6 @@ const ModalMenuInd2 = _ref => {
         initValue: DF_POWER_BY_10,
         min: -9,
         max: 9,
-        maxLength: 2,
         onAdd: _onPowerBy10
       })]
     })

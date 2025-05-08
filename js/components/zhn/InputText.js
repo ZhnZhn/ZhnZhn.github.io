@@ -4,8 +4,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
+var _inputFn = require("../inputFn");
 var _styleFn = require("../styleFn");
+var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 var _Input = require("./Input.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
@@ -39,6 +40,7 @@ const InputText = _ref => {
     min,
     max,
     step,
+    inputMode,
     onChange = FN_NOOP,
     onEnter
   } = _ref;
@@ -65,7 +67,7 @@ const InputText = _ref => {
   }), [value]);
   const _className = _isMinMaxNumber(type, min, max) ? CL_NUMBER_RANGE : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
-    ...(0, _styleFn.crInputProps)(type, spellCheck),
+    ...(0, _inputFn.crInputProps)(type, spellCheck),
     ref: _refInput,
     className: _className,
     style: {
@@ -79,6 +81,7 @@ const InputText = _ref => {
     min: min,
     max: max,
     step: step,
+    inputMode: inputMode,
     onChange: _hChange,
     onKeyDown: _hKeyDown
   });

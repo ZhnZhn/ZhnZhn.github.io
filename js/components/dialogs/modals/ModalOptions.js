@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _inputFn = require("../../inputFn");
 var _styleFn = require("../../styleFn");
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
 var _InputText = _interopRequireDefault(require("../../zhn/InputText"));
@@ -46,12 +47,7 @@ const ModalOptions = _ref => {
           style: S_CAPTION,
           children: "Round Decimals to"
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
-          type: "number",
-          initValue: dfRt,
-          min: MIN_RT,
-          max: MAX_RT,
-          step: 1,
-          maxLength: 2,
+          ...(0, _inputFn.crInputNumberProps)(dfRt, MIN_RT, MAX_RT),
           onChange: onRoundTo,
           onEnter: onClose
         })]

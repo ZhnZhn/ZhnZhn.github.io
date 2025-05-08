@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _inputFn = require("../inputFn");
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _SpanToken = require("../zhn/SpanToken");
@@ -22,7 +23,6 @@ const RowTypeB = _ref => {
     initValue,
     min,
     max,
-    maxLength,
     onAdd
   } = _ref;
   const [isPlus, setIsPlus] = (0, _uiApi.useState)(true),
@@ -34,13 +34,9 @@ const RowTypeB = _ref => {
       style: S_CAPTION,
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
+      ...(0, _inputFn.crInputNumberProps)(initValue, min, max),
       refEl: refEl,
-      type: "number",
       style: S_INPUT_TEXT,
-      initValue: initValue,
-      maxLength: maxLength,
-      min: min,
-      max: max,
       onEnter: _onAdd
     }), isPlus && /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgPlus, {
       onClick: _onAdd

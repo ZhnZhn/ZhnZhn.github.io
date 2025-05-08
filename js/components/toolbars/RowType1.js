@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _inputFn = require("../inputFn");
 var _styleFn = require("../styleFn");
 var _RowInputColor = _interopRequireDefault(require("../dialogs/RowInputColor"));
 var _RowInputText = _interopRequireDefault(require("../dialogs/RowInputText"));
@@ -67,12 +68,8 @@ const InputPlus = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
+      ...(0, _inputFn.crInputNumberProps)(initValue, 1, 999),
       style: S_PERIOD_INPUT,
-      type: "number",
-      initValue: initValue,
-      min: 1,
-      max: 999,
-      maxLength: 3,
       onChange: onChangePeriod,
       onEnter: onPlus
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgPlus, {

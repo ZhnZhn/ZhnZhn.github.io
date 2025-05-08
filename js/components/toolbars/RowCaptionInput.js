@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _inputFn = require("../inputFn");
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
 var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _SpanToken = require("../zhn/SpanToken");
@@ -23,7 +24,8 @@ const RowCaptionInput = _ref => {
     captionStyle,
     caption,
     initValue,
-    maxLength = 3,
+    min = 1,
+    max = 999,
     onAdd
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -35,11 +37,9 @@ const RowCaptionInput = _ref => {
       },
       children: caption
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
+      ...(0, _inputFn.crInputNumberProps)(initValue, min, max),
       refEl: refEl,
-      type: "number",
       style: S_INPUT_TEXT,
-      initValue: initValue,
-      maxLength: maxLength,
       onEnter: onAdd
     }), isBtAdd ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtSvgCircle.SvgPlus, {
       onClick: onAdd

@@ -7,12 +7,11 @@ import {
   useImperativeHandle,
   focusRefElement
 } from '../uiApi';
-import useInputKeyDown from './useInputKeyDown';
 
-import {
-  S_BORDER_RADIUS_2,
-  crInputProps
-} from '../styleFn';
+import { crInputProps } from '../inputFn';
+import { S_BORDER_RADIUS_2 } from '../styleFn';
+
+import useInputKeyDown from './useInputKeyDown';
 
 import {
   S_INPUT,
@@ -60,6 +59,7 @@ const InputText = ({
   min,
   max,
   step,
+  inputMode,
   onChange=FN_NOOP,
   onEnter
 }) => {
@@ -108,6 +108,7 @@ const InputText = ({
       min={min}
       max={max}
       step={step}
+      inputMode={inputMode}
       onChange={_hChange}
       onKeyDown={_hKeyDown}
     />

@@ -8,6 +8,9 @@ import {
   setRefValue,
   getInputValue
 } from '../uiApi';
+import {
+  crInputNumberProps
+} from '../inputFn';
 
 import memoIsShow from '../hoc/memoIsShow';
 import { useToggle } from '../hooks/useToggle';
@@ -208,23 +211,17 @@ const CustomizeExportDialog = memoIsShow(({
             <span style={S_LABEL}>Dimension:</span>
             <span style={S_LABEL_WIDTH}>Width</span>
             <InputText
+              {...crInputNumberProps(chartWidth, W_MIN, W_MAX)}
               refEl={_refInputWidth}
-              type="number"
               placeholder={chartWidth}
-              initValue={chartWidth}
               style={S_INPUT_NUMBER}
-              min={W_MIN}
-              max={W_MAX}
             />
             <span style={S_LABEL_WIDTH}>Height</span>
             <InputText
+              {...crInputNumberProps(chartHeight, H_MIN, H_MAX)}
               refEl={_refInputHeight}
-              type="number"
               placeholder={chartHeight}
-              initValue={chartHeight}
-              style={S_INPUT_NUMBER}
-              min={H_MIN}
-              max={H_MAX}
+              style={S_INPUT_NUMBER}              
             />
          </RowFlex>
        </ShowHide>

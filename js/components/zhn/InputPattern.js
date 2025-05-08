@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _inputFn = require("../inputFn");
 var _styleFn = require("../styleFn");
 var _useInputKeyDown = _interopRequireDefault(require("./useInputKeyDown"));
 var _BtSvgX = require("./BtSvgX");
@@ -117,7 +118,7 @@ const InputPattern = (_ref, ref) => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: _styleFn.S_FLEX,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
-        ...(0, _styleFn.crInputProps)(),
+        ...(0, _inputFn.crInputProps)(),
         style: {
           ...S_INPUT_PATTERN,
           ...inputStyle,

@@ -8,7 +8,7 @@ import {
 } from '../uiApi';
 import {
   crInputProps
-} from '../styleFn';
+} from '../inputFn';
 
 import useInputKeyDown from './useInputKeyDown';
 
@@ -40,7 +40,7 @@ const DateField = ({
   inputStyle,
   initialValue='',
   placeholder='YYYY-MM-DD',
-  inputmode='numeric',
+  inputMode='numeric',
   name='text-date',
   maxLength=10,
   errorMsg=null,
@@ -97,9 +97,9 @@ const DateField = ({
          {...crInputProps()}
          ref={_refInput}
          style={{...S_INPUT, ...inputStyle}}
-         name={name}         
+         name={name}
          placeholder={placeholder}
-         inputMode={inputmode}
+         inputMode={inputMode}
          value={value}
          maxLength={maxLength}
          onChange={_hChangeValue}

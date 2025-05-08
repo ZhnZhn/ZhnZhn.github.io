@@ -4,6 +4,9 @@ import {
   setRefValue
 } from '../uiApi';
 import {
+  crInputNumberProps
+} from '../inputFn';
+import {
   S_INLINE,
   CL_CHB_BLACK,
   CL_BLACK
@@ -65,12 +68,8 @@ const InputPlus = ({
 }) => (
   <>
     <InputText
+      {...crInputNumberProps(initValue, 1, 999)}
       style={S_PERIOD_INPUT}
-      type="number"
-      initValue={initValue}
-      min={1}
-      max={999}
-      maxLength={3}
       onChange={onChangePeriod}
       onEnter={onPlus}
     />

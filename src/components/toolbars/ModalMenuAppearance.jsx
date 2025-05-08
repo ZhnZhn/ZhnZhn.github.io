@@ -79,7 +79,8 @@ const ModalMenuAppearance = ({
           style={S_ROW_INPUT}
           captionStyle={S_CAPTION_STYLE}
           initValue={4}
-          maxLength={2}
+          min={1}
+          max={99}
           onAdd={_onPointWidth}
         />
       </div>
