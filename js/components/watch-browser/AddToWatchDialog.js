@@ -10,10 +10,11 @@ var _useProperty = require("../hooks/useProperty");
 var _WatchActions = require("../../flux/actions/WatchActions");
 var _watchListStore = require("../../flux/watch-list/watchListStore");
 var _MsgWatch = require("../../constants/MsgWatch");
+var _RowInputSelect = _interopRequireDefault(require("../dialogs/rows/RowInputSelect"));
+var _RowText = _interopRequireDefault(require("../dialogs/rows/RowText"));
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from "prop-types";
 
@@ -157,17 +158,17 @@ const AddToWatchDialog = (0, _memoIsShow.default)(_ref => {
     isShow: isShow,
     commandButtons: _commandButtons,
     onClose: _hClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowText, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowText.default, {
       captionStyle: S_CAPTION,
       caption: "Item:",
       text: caption
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
       caption: "Group",
       captionStyle: S_CAPTION,
       width: SELECT_WIDTH,
       options: groupOptions,
       onSelect: _hSelectGroup
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
       caption: "List",
       captionStyle: S_CAPTION,
       width: SELECT_WIDTH,

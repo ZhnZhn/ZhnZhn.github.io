@@ -23,10 +23,12 @@ import {
   notSelected
 } from '../../constants/MsgWatch';
 
+import RowInputSelect from '../dialogs/rows/RowInputSelect';
+import RowText from '../dialogs/rows/RowText';
+
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import FlatButton from '../zhn-m/FlatButton';
 import ValidationMessages from '../zhn/ValidationMessages';
-import D from '../dialogs/DialogCell';
 
 const S_DIALOG = { width: 300 }
 , S_CAPTION = { width: 70 }
@@ -127,7 +129,7 @@ const AddToWatchDialog = memoIsShow(({
      <FlatButton
        key="add"
        caption="Add"
-       title="Add Item To Watch List"      
+       title="Add Item To Watch List"
        onClick={_hAdd}
       />
   ]
@@ -193,19 +195,19 @@ const AddToWatchDialog = memoIsShow(({
        commandButtons={_commandButtons}
        onClose={_hClose}
     >
-      <D.RowText
+      <RowText
         captionStyle={S_CAPTION}
         caption="Item:"
         text={caption}
       />
-      <D.RowInputSelect
+      <RowInputSelect
         caption="Group"
         captionStyle={S_CAPTION}
         width={SELECT_WIDTH}
         options={groupOptions}
         onSelect={_hSelectGroup}
       />
-      <D.RowInputSelect
+      <RowInputSelect
         caption="List"
         captionStyle={S_CAPTION}
         width={SELECT_WIDTH}

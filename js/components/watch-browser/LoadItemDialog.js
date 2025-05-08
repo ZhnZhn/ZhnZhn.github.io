@@ -3,22 +3,23 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
-var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = require("../hooks/useToggle");
-var _dateFn = require("../../utils/dateFn");
-var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
-var _has = require("../has");
-var _itemStore = require("../../flux/stores/itemStore");
 var _LoadType = require("../../constants/LoadType");
 var _BrowserType = require("../../constants/BrowserType");
+var _dateFn = require("../../utils/dateFn");
+var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
+var _itemStore = require("../../flux/stores/itemStore");
+var _uiApi = require("../uiApi");
+var _has = require("../has");
+var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
+var _useToggle = require("../hooks/useToggle");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _Toolbar = _interopRequireDefault(require("../dialogs/Toolbar"));
 var _Buttons = require("../dialogs/Buttons");
+var _InputPeriod = _interopRequireDefault(require("../dialogs/rows/InputPeriod"));
+var _RowText = _interopRequireDefault(require("../dialogs/rows/RowText"));
 var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _jsxRuntime = require("react/jsx-runtime");
-//import PropTypes from "prop-types";
-
 const S_DIALOG = {
     width: 365
   },
@@ -153,32 +154,32 @@ const LoadItemDialog = (0, _memoIsShow.default)(_ref => {
     caption: "Load Item",
     commandButtons: _commandButtons,
     onClose: _hClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Toolbar.default, {
       isShow: true,
       buttons: _toolbarButtons
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowText, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowText.default, {
       isShowLabels: isShowLabels,
       textStyle: S_ITEM_TEXT,
       caption: "Item:",
       text: caption
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: isValue,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowText, {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowText.default, {
         isShowLabels: isShowLabels,
         textStyle: S_ITEM_TEXT,
         caption: "Value:",
         text: _value
       })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: isShowDate,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.InputPeriod, {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPeriod.default, {
         refEl: _refDates,
         isShowLabels: isShowLabels,
         initFromDate: _initFromDate,
         initToDate: _initToDate,
         onTestDate: _onTestDate
       })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowText, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowText.default, {
       isShowLabels: isShowLabels,
       textStyle: S_ITEM_TEXT,
       caption: "Source:",

@@ -1,13 +1,10 @@
-//import PropTypes from "prop-types";
 import {
-  useRef,
-  useState,
-  useEffect,
-  getRefValue
-} from '../uiApi';
-
-import memoIsShow from '../hoc/memoIsShow';
-import { useToggle } from '../hooks/useToggle';
+  LT_WL,
+  LT_WATCH_LIST
+} from '../../constants/LoadType';
+import {
+  BT_WATCH_LIST
+} from '../../constants/BrowserType';
 
 import {
   getFromDate,
@@ -17,24 +14,31 @@ import {
 } from '../../utils/dateFn';
 import formatNumber from '../../utils/formatNumber';
 
-import { isWideWidth } from '../has';
-
 import {
   loadItem
 } from '../../flux/stores/itemStore';
 
 import {
-  LT_WL,
-  LT_WATCH_LIST
-} from '../../constants/LoadType';
-import {
-  BT_WATCH_LIST
-} from '../../constants/BrowserType';
+  useRef,
+  useState,
+  useEffect,
+  getRefValue
+} from '../uiApi';
+
+import { isWideWidth } from '../has';
+
+import memoIsShow from '../hoc/memoIsShow';
+import { useToggle } from '../hooks/useToggle';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog'
-import D from '../dialogs/DialogCell'
+
+import Toolbar from '../dialogs/Toolbar';
 import { ButtonLoad } from '../dialogs/Buttons';
+import InputPeriod from '../dialogs/rows/InputPeriod';
+import RowText from '../dialogs/rows/RowText';
+
 import ValidationMessages from '../zhn/ValidationMessages'
+import ShowHide from '../zhn/ShowHide';
 
 const S_DIALOG = { width: 365 }
 , S_DIALOG_SHORT = { width: 265 }
@@ -198,34 +202,34 @@ const LoadItemDialog = memoIsShow(({
        commandButtons={_commandButtons}
        onClose={_hClose}
     >
-      <D.Toolbar
+      <Toolbar
         isShow={true}
         buttons={_toolbarButtons}
       />
-      <D.RowText
+      <RowText
         isShowLabels={isShowLabels}
         textStyle={S_ITEM_TEXT}
         caption="Item:"
         text={caption}
       />
-      <D.ShowHide isShow={isValue}>
-        <D.RowText
+      <ShowHide isShow={isValue}>
+        <RowText
           isShowLabels={isShowLabels}
           textStyle={S_ITEM_TEXT}
           caption="Value:"
           text={_value}
         />
-      </D.ShowHide>
-      <D.ShowHide isShow={isShowDate}>
-        <D.InputPeriod
+      </ShowHide>
+      <ShowHide isShow={isShowDate}>
+        <InputPeriod
           refEl={_refDates}
           isShowLabels={isShowLabels}
           initFromDate={_initFromDate}
           initToDate={_initToDate}
           onTestDate={_onTestDate}
         />
-      </D.ShowHide>
-      <D.RowText
+      </ShowHide>
+      <RowText
         isShowLabels={isShowLabels}
         textStyle={S_ITEM_TEXT}
         caption="Source:"
