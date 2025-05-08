@@ -5,7 +5,8 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _RowInputColor = _interopRequireDefault(require("../dialogs/RowInputColor"));
+var _RowInputText = _interopRequireDefault(require("../dialogs/RowInputText"));
 var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox2"));
 var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
@@ -134,7 +135,7 @@ const RowType1 = _ref3 => {
     }),
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S_PL_8,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputColor, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputColor.default, {
         style: _styleFn.S_INLINE,
         initValue: DF_COLOR,
         onEnter: _onColor
@@ -148,7 +149,7 @@ const RowType1 = _ref3 => {
         onToggle: _onToggleColumn
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: S_ROW_2,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputText, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputText.default, {
           rootStyle: _styleFn.S_INLINE,
           caption: "For Seria",
           captionCn: _styleFn.CL_BLACK,

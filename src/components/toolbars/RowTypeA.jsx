@@ -2,7 +2,7 @@ import { useState } from '../uiApi';
 import { useProperty } from '../hooks/useProperty';
 
 import { SvgPlus } from '../zhn/BtSvgCircle';
-import D from '../dialogs/DialogCell';
+import RowInputColor from '../dialogs/RowInputColor';
 import { RowOpenClose } from './RowOpenClose';
 
 const DF_COLOR = '#2b908f'
@@ -11,7 +11,7 @@ const DF_COLOR = '#2b908f'
 const useRowTypeA = (
   mathFn,
   getChart,
-  dfColor
+  dfColor = DF_COLOR
 ) => {
   const [
     is,
@@ -28,30 +28,26 @@ const useRowTypeA = (
      ? null
      : <SvgPlus onClick={_onPlus} />;
 
-  return [compAfter, setColor];
+  return [dfColor, compAfter, setColor];
 };
 
-const RowTypeA = ({
-  caption,
-  dfColor=DF_COLOR,
-  mathFn,
-  getChart
-}) => {
+const RowTypeA = (props) => {
   const [
+    dfColor,
     compAfter,
     onColor
   ] = useRowTypeA(
-    mathFn,
-    getChart,
-    dfColor
+    props.mathFn,
+    props.getChart,
+    props.dfColor
   );
 
   return (
     <RowOpenClose
-      caption={caption}
+      caption={props.caption}
       CompAfter={compAfter}
     >
-      <D.RowInputColor
+      <RowInputColor
         style={S_INPUT_COLOR}
         initValue={dfColor}
         onEnter={onColor}

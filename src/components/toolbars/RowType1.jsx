@@ -9,7 +9,8 @@ import {
   CL_BLACK
 } from '../styleFn';
 
-import D from '../dialogs/DialogCell';
+import RowInputColor from '../dialogs/RowInputColor';
+import RowInputText from '../dialogs/RowInputText';
 import RowCheckBox2 from '../dialogs/rows/RowCheckBox2';
 
 import {
@@ -142,7 +143,7 @@ const RowType1 = ({
     }
   >
     <div style={S_PL_8}>
-      <D.RowInputColor
+      <RowInputColor
         style={S_INLINE}
         initValue={DF_COLOR}
         onEnter={_onColor}
@@ -157,7 +158,7 @@ const RowType1 = ({
         onToggle={_onToggleColumn}
       />
       <div style={S_ROW_2}>
-        <D.RowInputText
+        <RowInputText
           rootStyle={S_INLINE}
           caption="For Seria"
           captionCn={CL_BLACK}
