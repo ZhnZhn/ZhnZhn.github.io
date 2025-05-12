@@ -9,7 +9,6 @@ var _jsxRuntime = require("react/jsx-runtime");
 const BtCounter = _ref => {
   let {
     refEl,
-    isShow,
     style,
     title,
     initialValue = 1,
@@ -22,12 +21,12 @@ const BtCounter = _ref => {
   (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValue: () => value
   }), [value]);
-  return isShow ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
     style: style,
     title: title,
     caption: value,
     onClick: _onClick
-  }) : null;
+  });
 };
 var _default = exports.default = BtCounter;
 //# sourceMappingURL=BtCounter.js.map

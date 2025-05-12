@@ -8,7 +8,6 @@ import ButtonCircle from '../zhn/ButtonCircle';
 
 const BtCounter = ({
   refEl,
-  isShow,
   style,
   title,
   initialValue=1,
@@ -29,14 +28,14 @@ const BtCounter = ({
      getValue: () => value
   }), [value])
 
-  return isShow ? (
+  return (
     <ButtonCircle
       style={style}
       title={title}
       caption={value}
       onClick={_onClick}
     />
-  ) : null;
+  );
 };
 
 export default BtCounter

@@ -3,7 +3,8 @@ import {
   useState,
   useMemo,
   useImperativeHandle,
-  getInputValue
+  getInputValue,
+  IfTrue
 } from '../uiApi';
 
 import { crStyle2 } from '../styleFn';
@@ -40,10 +41,7 @@ const CL_INPUT_COLOR = 'va-b'
 , S_ROOT = { padding: '6px 0 4px 4px' }
 , S_ROW2 = { paddingTop: 4 }
 , S_ROW2_PADDING = { paddingLeft: 56 }
-, S_BT_COUNTER = {
-  marginLeft: 14,
-  marginRight: 16
-}
+, S_BT_COUNTER = { margin: '0 16px 0 14px' }
 , S_TO_CELL = { margin: '0 14px' };
 
 const _hasLineWidth = ({
@@ -78,9 +76,9 @@ const SeriaColor = ({
 
   useImperativeHandle(refEl, () => ({
     getValue: () => ({
-       seriaColor: color !== TRANSPARENT_COLOR
-          ? color
-          : void 0,
+       seriaColor: color === TRANSPARENT_COLOR
+         ? void 0
+         : color,
        seriaWidth: _hasLineWidth(chartType)
          ? getInputValue(_refLineWidth)
          : void 0
@@ -109,12 +107,13 @@ const SeriaColor = ({
         />
       </div>
       <div style={_rowStyle}>
-         <BtCounter
-            refEl={_refLineWidth}
-            isShow={_isLineWidth}
-            style={S_BT_COUNTER}
-            title="Line Width"
-          />
+         <IfTrue v={_isLineWidth}>
+           <BtCounter
+              refEl={_refLineWidth}
+              style={S_BT_COUNTER}
+              title="Line Width"
+            />
+          </IfTrue>
           <ColorList
             isLong={isLong}
             colors={COLORS2}

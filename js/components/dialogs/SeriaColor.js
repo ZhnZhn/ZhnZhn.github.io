@@ -23,8 +23,7 @@ const CL_INPUT_COLOR = 'va-b',
     paddingLeft: 56
   },
   S_BT_COUNTER = {
-    marginLeft: 14,
-    marginRight: 16
+    margin: '0 16px 0 14px'
   },
   S_TO_CELL = {
     margin: '0 14px'
@@ -52,7 +51,7 @@ const SeriaColor = _ref => {
     }], []);
   (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValue: () => ({
-      seriaColor: color !== _Color.TRANSPARENT_COLOR ? color : void 0,
+      seriaColor: color === _Color.TRANSPARENT_COLOR ? void 0 : color,
       seriaWidth: _hasLineWidth(chartType) ? (0, _uiApi.getInputValue)(_refLineWidth) : void 0
     })
   }), [color, chartType]);
@@ -73,11 +72,13 @@ const SeriaColor = _ref => {
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: _rowStyle,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BtCounter.default, {
-        refEl: _refLineWidth,
-        isShow: _isLineWidth,
-        style: S_BT_COUNTER,
-        title: "Line Width"
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
+        v: _isLineWidth,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_BtCounter.default, {
+          refEl: _refLineWidth,
+          style: S_BT_COUNTER,
+          title: "Line Width"
+        })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ColorList.default, {
         isLong: isLong,
         colors: COLORS2,
