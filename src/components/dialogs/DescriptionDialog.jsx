@@ -51,33 +51,31 @@ const DescriptionDialog = memoIsShow((props) => {
       descrHtml },
       setState
   ] = useState(() => _crState(
-    false,
-    false,
+    !1,
+    !1,
     '',
     INITIAL_DESCR
   ))
   , [_isNextProps] = useHasNotEqual(props)
   , [_isNextDescrUrl, isDescrUrlCurrentValue] = useHasNotEqual(descrUrl)
-  , _isLoadDescr = !isLoading && isShow && descrUrl && (
-      descrHtml === INITIAL_DESCR
-      || _isNextDescrUrl
-      || _isNextProps && isLoadFailed
+  , _isLoadDescr = isShow && descrUrl
+      && (_isNextDescrUrl || !isLoading
+        && (descrHtml === INITIAL_DESCR || _isNextProps && isLoadFailed)
   );
 
   useEffect(() => {
      if (_isLoadDescr) {
         setState(prevState => ({
           ...prevState,
-          isLoading: true
+          isLoading: !0
         }))
         fetchTxt({
           uri: descrUrl,
           onFetch: ({ json }={}) => isDescrUrlCurrentValue(descrUrl) && setState(
-             _crState(false, false, '', json || EMPTY_DESCR)
+            _crState(!1, !1, '', json || EMPTY_DESCR)
           ),
           onCatch: ({ error }={}) => isDescrUrlCurrentValue(descrUrl) && setState(
-            _crState(false, true, error.message, EMPTY_DESCR
-            )
+            _crState(!1, !0, error.message, EMPTY_DESCR)
           )
         })
      }

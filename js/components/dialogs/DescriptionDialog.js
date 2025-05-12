@@ -43,15 +43,15 @@ const DescriptionDialog = (0, _memoIsShow.default)(props => {
       isLoadFailed,
       errMsg,
       descrHtml
-    }, setState] = (0, _uiApi.useState)(() => _crState(false, false, '', INITIAL_DESCR)),
+    }, setState] = (0, _uiApi.useState)(() => _crState(!1, !1, '', INITIAL_DESCR)),
     [_isNextProps] = (0, _useHasNotEqual.default)(props),
     [_isNextDescrUrl, isDescrUrlCurrentValue] = (0, _useHasNotEqual.default)(descrUrl),
-    _isLoadDescr = !isLoading && isShow && descrUrl && (descrHtml === INITIAL_DESCR || _isNextDescrUrl || _isNextProps && isLoadFailed);
+    _isLoadDescr = isShow && descrUrl && (_isNextDescrUrl || !isLoading && (descrHtml === INITIAL_DESCR || _isNextProps && isLoadFailed));
   (0, _uiApi.useEffect)(() => {
     if (_isLoadDescr) {
       setState(prevState => ({
         ...prevState,
-        isLoading: true
+        isLoading: !0
       }));
       (0, _fnFetch.fetchTxt)({
         uri: descrUrl,
@@ -59,13 +59,13 @@ const DescriptionDialog = (0, _memoIsShow.default)(props => {
           let {
             json
           } = _temp === void 0 ? {} : _temp;
-          return isDescrUrlCurrentValue(descrUrl) && setState(_crState(false, false, '', json || EMPTY_DESCR));
+          return isDescrUrlCurrentValue(descrUrl) && setState(_crState(!1, !1, '', json || EMPTY_DESCR));
         },
         onCatch: function (_temp2) {
           let {
             error
           } = _temp2 === void 0 ? {} : _temp2;
-          return isDescrUrlCurrentValue(descrUrl) && setState(_crState(false, true, error.message, EMPTY_DESCR));
+          return isDescrUrlCurrentValue(descrUrl) && setState(_crState(!1, !0, error.message, EMPTY_DESCR));
         }
       });
     }
