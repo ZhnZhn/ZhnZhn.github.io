@@ -53,36 +53,31 @@ const DialogQuery = memoIsShow((
 
     //loadFn,
     //onLoad,
-    //onShow,
-
-    onAbout,
-    onClose
+    //onShow
   } = props
   , [
-    chartType,
-    setChartType
+    _chartType,
+    _setChartType
   ] = useState(CHT_SPLINE)
   , [
-    isShowDate,
-    toggleDate
+    _isShowDate,
+    _toggleDate
   ] = useToggle(!0)
   , [
-    refDialogOptions,
-    isShowOptions,
-    toggleOptions,
-    hideOptions,
-    toggleDialogOption
+    _refDialogOptions,
+    _isShowOptions,
+    _toggleOptions,
+    _hideOptions,
+    _toggleDialogOption
   ] = useDialogOptions()
   , [
-    isToolbar,
-    isShowLabels,
-    menuMoreModel,
-    toolbarButtons
-  ] = useDialog({
-    onAbout,
-    onClose,
-    toggleOptions,
-    toggleDate: noDate ? void 0 : toggleDate
+    _isToolbar,
+    _isShowLabels,
+    _menuMoreModel,
+    _toolbarButtons
+  ] = useDialog(props, {
+    toggleOptions: _toggleOptions,
+    toggleDate: noDate ? void 0 : _toggleDate
   })
   , _refIdInput = useRef()
   , _refDates = useRef()
@@ -95,8 +90,8 @@ const DialogQuery = memoIsShow((
          // seriaColor, seriaWidth
          ...getInputValue(_refSeriaColor),
          items: [{ c: _value, v: _value }],
-         dialogOptions: getRefValue(refDialogOptions),
-         chartType
+         dialogOptions: getRefValue(_refDialogOptions),
+         chartType: _chartType
        }));
      } else {
        _idInputInst.showErrMsg()
@@ -106,25 +101,25 @@ const DialogQuery = memoIsShow((
   return (
     <D.DraggableDialog
       isShow={props.isShow}
-      menuModel={menuMoreModel}
+      menuModel={_menuMoreModel}
       caption={props.caption}
       toTopLayer={props.toTopLayer}
       onLoad={_hLoad}
       onShow={props.onShow}
-      onClose={onClose}
+      onClose={props.onClose}
     >
       <D.Toolbar
-        isShow={isToolbar}
-        buttons={toolbarButtons}
+        isShow={_isToolbar}
+        buttons={_toolbarButtons}
       />
       <D.ModalOptions
-        isShow={isShowOptions}
-        toggleOption={toggleDialogOption}
-        onClose={hideOptions}
+        isShow={_isShowOptions}
+        toggleOption={_toggleDialogOption}
+        onClose={_hideOptions}
       />
       <D.RowPattern
         refEl={_refIdInput}
-        isShowLabels={isShowLabels}
+        isShowLabels={_isShowLabels}
         style={S_ID_ROOT}
         captionStyle={S_ID_CAPTION}
         placeholder={props.onePlaceholder}
@@ -134,20 +129,20 @@ const DialogQuery = memoIsShow((
       />
       <D.RowChartDate
         refSeriaColor={_refSeriaColor}
-        chartType={chartType}
-        isShowLabels={isShowLabels}
-        isShowChart={true}
+        chartType={_chartType}
+        isShowLabels={_isShowLabels}
+        isShowChart={!0}
         labelStyle={S_ID_CAPTION}
         selectWidth={S_ID_ROOT.width}
         chartOptions={CHART_OPTIONS}
-        onSelectChart={setChartType}
+        onSelectChart={_setChartType}
         noDate={noDate}
       />
       <IfTrue v={!noDate}>
-        <D.ShowHide isShow={isShowDate}>
+        <D.ShowHide isShow={_isShowDate}>
           <D.InputPeriod
             refEl={_refDates}
-            isShowLabels={isShowLabels}
+            isShowLabels={_isShowLabels}
             initFromDate={props.initFromDate}
             initToDate={props.initToDate}
             msgOnNotValidFormat={props.msgOnNotValidFormat}

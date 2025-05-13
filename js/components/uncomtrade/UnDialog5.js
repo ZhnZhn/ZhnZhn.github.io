@@ -111,27 +111,23 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
       dfProps,
       msgOnNotSelected,
       toTopLayer,
-      onAbout,
       loadFn,
       onLoad,
-      onShow,
-      onClose
+      onShow
     } = props,
     {
       dfId
     } = dfProps || {},
     [seriaType, setSeriaType] = (0, _uiApi.useState)(DF_CHART),
     [isShowToggle, toggleInputs, hideToggle] = (0, _useInputToggle.default)(),
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
-      onAbout,
-      onClose,
+    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)(props, {
       toggleInputs
     }),
-    [isHeading, toggleHeading] = (0, _useToggle.useToggle)(true)
-    /*, [isPartner, togglePartner] = useToggle(false)*/,
-    [isFlow, toggleFlow] = (0, _useToggle.useToggle)(true),
-    [isChart, toggleChart] = (0, _useToggle.useToggle)(false)
-    //, [isFreq, toggleFreq] = useToggle(false)
+    [isHeading, toggleHeading] = (0, _useToggle.useToggle)(!0)
+    /*, [isPartner, togglePartner] = useToggle(!1)*/,
+    [isFlow, toggleFlow] = (0, _useToggle.useToggle)(!0),
+    [isChart, toggleChart] = (0, _useToggle.useToggle)(!1)
+    //, [isFreq, toggleFreq] = useToggle(!1)
     ,
     _refTradePartner = (0, _uiApi.useRef)(),
     _refGroupItem = (0, _uiApi.useRef)(),
@@ -212,7 +208,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
       placeholder: REPORTER_PLACEHOLDER,
       onSelect: setOne
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-      isShow: false,
+      isShow: !1,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
         refEl: _refTradePartner,
         isShowLabels: isShowLabels,
@@ -243,7 +239,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
         onSelect: setTradeFlow
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-      isShow: false,
+      isShow: !1,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
         isShowLabels: isShowLabels,
         caption: "Frequency",

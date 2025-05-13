@@ -76,12 +76,10 @@ const UnDialogAgg = memoIsShow((
     msgOnNotSelected,
 
     toTopLayer,
-    onAbout,
 
     loadFn,
     onLoad,
     onShow,
-    onClose
   } = props
   , _refTradePartner = useRef()
   , [
@@ -97,22 +95,20 @@ const UnDialogAgg = memoIsShow((
     validationMessages,
     setValidationMessages,
     hClose
-  ] = useDialog({
-    onAbout,
-    onClose,
+  ] = useDialog(props, {
     toggleInputs
   })
   , [
     isFlow,
     toggleFlow
-  ] = useToggle(true)
+  ] = useToggle(!0)
   /*
   , [
     isPartner,
     togglePartner
   ] = useToggle()
   */
-  //, [isAggr, toggleAggr] = useToggle(true)
+  //, [isAggr, toggleAggr] = useToggle(!0)
   , [
     setOne,
     getOne
@@ -247,7 +243,7 @@ const UnDialogAgg = memoIsShow((
           onSelect={setTradeFlow}
         />
      </D.ShowHide>
-     <D.ShowHide isShow={false}>
+     <D.ShowHide isShow={!1}>
        <D.SelectWithLoad
           refEl={_refTradePartner}
           isShowLabels={isShowLabels}
@@ -257,7 +253,7 @@ const UnDialogAgg = memoIsShow((
           onSelect={_setTradePartner}
        />
      </D.ShowHide>
-     <D.ShowHide isShow={true}>
+     <D.ShowHide isShow={!0}>
        <D.RowInputSelect
          isShowLabels={isShowLabels}
          caption="Aggregation"

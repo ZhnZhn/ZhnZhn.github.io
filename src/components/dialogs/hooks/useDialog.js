@@ -5,32 +5,34 @@ import useMenuMore from './useMenuMore';
 import useToolbar from './useToolbar';
 import useValidationMessages from './useValidationMessages';
 
-const _isWideWidth = isWideWidth();
+const IS_WIDE_WIDTH = isWideWidth();
 
-const useDialog = ({
-  onAbout,
-  onClose,
-  ...toolbarHandlers
-}) => {
-  const [
-    isShowLabels,
-    toggleLabels
-  ] = useToggle(_isWideWidth)
+const useDialog = (
+  props,
+  toolbarHandlers
+) => {
+  const {
+    onAbout
+  } = props
   , [
-    isToolbar,
-    menuMoreModel
+    _isShowLabels,
+    _toggleLabels
+  ] = useToggle(IS_WIDE_WIDTH)
+  , [
+    _isToolbar,
+    _menuMoreModel
   ] = useMenuMore(onAbout)
-  , toolbarButtons = useToolbar({
+  , _toolbarButtons = useToolbar({
     ...toolbarHandlers,
-    toggleLabels,
+    toggleLabels: _toggleLabels,
     onAbout
   });
   return [
-    isToolbar,
-    isShowLabels,
-    menuMoreModel,
-    toolbarButtons,
-    ...useValidationMessages(onClose)
+    _isToolbar,
+    _isShowLabels,
+    _menuMoreModel,
+    _toolbarButtons,
+    ...useValidationMessages(props.onClose)
   ];
 }
 

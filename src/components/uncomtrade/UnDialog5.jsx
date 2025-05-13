@@ -90,12 +90,10 @@ const UnDialog5 = memoIsShow((
      msgOnNotSelected,
 
      toTopLayer,
-     onAbout,
 
      loadFn,
      onLoad,
-     onShow,
-     onClose
+     onShow
    } = props
    , { dfId } = dfProps || {}
    , [
@@ -115,16 +113,14 @@ const UnDialog5 = memoIsShow((
      validationMessages,
      setValidationMessages,
      hClose
-   ] = useDialog({
-     onAbout,
-     onClose,
+   ] = useDialog(props, {
      toggleInputs
    })
-   , [isHeading, toggleHeading] = useToggle(true)
-   /*, [isPartner, togglePartner] = useToggle(false)*/
-   , [isFlow, toggleFlow] = useToggle(true)
-   , [isChart, toggleChart] = useToggle(false)
-   //, [isFreq, toggleFreq] = useToggle(false)
+   , [isHeading, toggleHeading] = useToggle(!0)
+   /*, [isPartner, togglePartner] = useToggle(!1)*/
+   , [isFlow, toggleFlow] = useToggle(!0)
+   , [isChart, toggleChart] = useToggle(!1)
+   //, [isFreq, toggleFreq] = useToggle(!1)
    , _refTradePartner = useRef()
    , _refGroupItem = useRef()
    , _refSeriaColor = useRef()
@@ -222,7 +218,7 @@ const UnDialog5 = memoIsShow((
          placeholder={REPORTER_PLACEHOLDER}
          onSelect={setOne}
       />
-      <D.ShowHide isShow={false}>
+      <D.ShowHide isShow={!1}>
         <D.SelectWithLoad
            refEl={_refTradePartner}
            isShowLabels={isShowLabels}
@@ -253,7 +249,7 @@ const UnDialog5 = memoIsShow((
           onSelect={setTradeFlow}
         />
       </D.ShowHide>
-      <D.ShowHide isShow={false}>
+      <D.ShowHide isShow={!1}>
         <D.RowInputSelect
           isShowLabels={isShowLabels}
           caption="Frequency"

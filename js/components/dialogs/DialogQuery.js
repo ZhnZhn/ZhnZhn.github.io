@@ -26,7 +26,8 @@ const CHART_OPTIONS = (0, _ChartOptionsFn.crChartOptions)(void 0, 't2');
 const DialogQuery = (0, _memoIsShow.default)(props => {
   const {
       //isShow,
-      noDate,
+      noDate
+
       //caption,
       //oneCaption,
       //onePlaceholder,
@@ -39,19 +40,14 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
 
       //loadFn,
       //onLoad,
-      //onShow,
-
-      onAbout,
-      onClose
+      //onShow
     } = props,
-    [chartType, setChartType] = (0, _uiApi.useState)(_ChartType.CHT_SPLINE),
-    [isShowDate, toggleDate] = (0, _useToggle.useToggle)(!0),
-    [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons] = (0, _useDialog.default)({
-      onAbout,
-      onClose,
-      toggleOptions,
-      toggleDate: noDate ? void 0 : toggleDate
+    [_chartType, _setChartType] = (0, _uiApi.useState)(_ChartType.CHT_SPLINE),
+    [_isShowDate, _toggleDate] = (0, _useToggle.useToggle)(!0),
+    [_refDialogOptions, _isShowOptions, _toggleOptions, _hideOptions, _toggleDialogOption] = (0, _useDialogOptions.default)(),
+    [_isToolbar, _isShowLabels, _menuMoreModel, _toolbarButtons] = (0, _useDialog.default)(props, {
+      toggleOptions: _toggleOptions,
+      toggleDate: noDate ? void 0 : _toggleDate
     }),
     _refIdInput = (0, _uiApi.useRef)(),
     _refDates = (0, _uiApi.useRef)(),
@@ -67,8 +63,8 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
             c: _value,
             v: _value
           }],
-          dialogOptions: (0, _uiApi.getRefValue)(refDialogOptions),
-          chartType
+          dialogOptions: (0, _uiApi.getRefValue)(_refDialogOptions),
+          chartType: _chartType
         }));
       } else {
         _idInputInst.showErrMsg();
@@ -76,22 +72,22 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
     });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: props.isShow,
-    menuModel: menuMoreModel,
+    menuModel: _menuMoreModel,
     caption: props.caption,
     toTopLayer: props.toTopLayer,
     onLoad: _hLoad,
     onShow: props.onShow,
-    onClose: onClose,
+    onClose: props.onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
-      isShow: isToolbar,
-      buttons: toolbarButtons
+      isShow: _isToolbar,
+      buttons: _toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalOptions, {
-      isShow: isShowOptions,
-      toggleOption: toggleDialogOption,
-      onClose: hideOptions
+      isShow: _isShowOptions,
+      toggleOption: _toggleDialogOption,
+      onClose: _hideOptions
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
       refEl: _refIdInput,
-      isShowLabels: isShowLabels,
+      isShowLabels: _isShowLabels,
       style: S_ID_ROOT,
       captionStyle: S_ID_CAPTION,
       placeholder: props.onePlaceholder,
@@ -100,21 +96,21 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
       errorMsg: ERR_MSG
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
       refSeriaColor: _refSeriaColor,
-      chartType: chartType,
-      isShowLabels: isShowLabels,
-      isShowChart: true,
+      chartType: _chartType,
+      isShowLabels: _isShowLabels,
+      isShowChart: !0,
       labelStyle: S_ID_CAPTION,
       selectWidth: S_ID_ROOT.width,
       chartOptions: CHART_OPTIONS,
-      onSelectChart: setChartType,
+      onSelectChart: _setChartType,
       noDate: noDate
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
       v: !noDate,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-        isShow: isShowDate,
+        isShow: _isShowDate,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.InputPeriod, {
           refEl: _refDates,
-          isShowLabels: isShowLabels,
+          isShowLabels: _isShowLabels,
           initFromDate: props.initFromDate,
           initToDate: props.initToDate,
           msgOnNotValidFormat: props.msgOnNotValidFormat,

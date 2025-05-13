@@ -20,35 +20,33 @@ const S_TIP = {
 const _isByZipCode = item => !!item && item.v === "Z";
 const _reZipCode = /^\d{5}$/;
 const _isZipCode = value => _reZipCode.test(value.trim());
-const ZillowDialog = (0, _memoIsShow.default)(_ref => {
-  let {
-    isShow,
-    caption,
-    oneCaption,
-    oneURI,
-    twoCaption,
-    twoURI,
-    threeCaption,
-    msgOnNotSelected,
-    initFromDate,
-    initToDate,
-    msgOnNotValidFormat,
-    onTestDate,
-    loadId,
-    dfTable,
-    dfIdFn,
-    dataSource,
-    toTopLayer,
-    onAbout,
-    onLoad,
-    onShow,
-    onClose
-  } = _ref;
-  const [isShowPattern, togglePattern] = (0, _useToggle.useToggle)(false),
-    [isShowDate, toggleDate] = (0, _useToggle.useToggle)(false),
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
-      onAbout,
-      onClose,
+const ZillowDialog = (0, _memoIsShow.default)(props => {
+  const {
+      isShow,
+      //caption,
+      oneCaption,
+      //oneURI,
+      //twoCaption,
+      //twoURI,
+      //threeCaption,
+      msgOnNotSelected,
+      //initFromDate,
+      //initToDate,
+      //msgOnNotValidFormat,
+      //onTestDate,
+
+      loadId,
+      dfTable,
+      dfIdFn,
+      dataSource,
+      //toTopLayer,
+
+      onLoad,
+      onShow
+    } = props,
+    [isShowPattern, togglePattern] = (0, _useToggle.useToggle)(!1),
+    [isShowDate, toggleDate] = (0, _useToggle.useToggle)(!1),
+    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)(props, {
       toggleDate
     }),
     _refTypeCode = (0, _uiApi.useRef)(),
@@ -120,9 +118,9 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
 
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isShow: isShow,
-    caption: caption,
+    caption: props.caption,
     menuModel: menuMoreModel,
-    toTopLayer: toTopLayer,
+    toTopLayer: props.toTopLayer,
     onLoad: _hLoad,
     onShow: onShow,
     onClose: hClose,
@@ -132,7 +130,7 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,
-      uri: oneURI,
+      uri: props.oneURI,
       caption: oneCaption,
       onSelect: setMetric
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectOneTwo, {
@@ -140,9 +138,9 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
       isShow: isShow,
       isShowLabels: isShowLabels,
       isHideTwo: isShowPattern,
-      uri: twoURI,
-      oneCaption: twoCaption,
-      twoCaption: threeCaption,
+      uri: props.twoURI,
+      oneCaption: props.twoCaption,
+      twoCaption: props.threeCaption,
       propCaption: "c",
       msgOnNotSelected: msgOnNotSelected,
       onSelectOne: _hSelectType
@@ -161,10 +159,10 @@ const ZillowDialog = (0, _memoIsShow.default)(_ref => {
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.InputPeriod, {
         refEl: _refDates,
         isShowLabels: isShowLabels,
-        initFromDate: initFromDate,
-        initToDate: initToDate,
-        msgOnNotValidFormat: msgOnNotValidFormat,
-        onTestDate: onTestDate
+        initFromDate: props.initFromDate,
+        initToDate: props.initToDate,
+        msgOnNotValidFormat: props.msgOnNotValidFormat,
+        onTestDate: props.onTestDate
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: isShowPattern,

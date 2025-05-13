@@ -25,41 +25,40 @@ const _isByZipCode = item => !!item
 const _reZipCode = /^\d{5}$/;
 const _isZipCode = value => _reZipCode.test(value.trim());
 
-const ZillowDialog = memoIsShow(({
-  isShow,
+const ZillowDialog = memoIsShow(props => {
+  const {
+    isShow,
 
-  caption,
-  oneCaption,
-  oneURI,
-  twoCaption,
-  twoURI,
-  threeCaption,
-  msgOnNotSelected,
-  initFromDate,
-  initToDate,
-  msgOnNotValidFormat,
-  onTestDate,
+    //caption,
+    oneCaption,
+    //oneURI,
+    //twoCaption,
+    //twoURI,
+    //threeCaption,
+    msgOnNotSelected,
+    //initFromDate,
+    //initToDate,
+    //msgOnNotValidFormat,
+    //onTestDate,
 
-  loadId,
-  dfTable,
-  dfIdFn,
-  dataSource,
+    loadId,
+    dfTable,
+    dfIdFn,
+    dataSource,
 
-  toTopLayer,
-  onAbout,
+    //toTopLayer,
 
-  onLoad,
-  onShow,
-  onClose
-}) => {
-  const [
+    onLoad,
+    onShow
+  } = props
+  , [
     isShowPattern,
     togglePattern
-  ] = useToggle(false)
+  ] = useToggle(!1)
   , [
     isShowDate,
     toggleDate
-  ] = useToggle(false)
+  ] = useToggle(!1)
   , [
     isToolbar,
     isShowLabels,
@@ -68,9 +67,7 @@ const ZillowDialog = memoIsShow(({
     validationMessages,
     setValidationMessages,
     hClose
-  ] = useDialog({
-    onAbout,
-    onClose,
+  ] = useDialog(props, {
     toggleDate
   })
   , _refTypeCode = useRef()
@@ -143,9 +140,9 @@ const ZillowDialog = memoIsShow(({
   return (
     <D.DraggableDialog
        isShow={isShow}
-       caption={caption}
+       caption={props.caption}
        menuModel={menuMoreModel}
-       toTopLayer={toTopLayer}
+       toTopLayer={props.toTopLayer}
        onLoad={_hLoad}
        onShow={onShow}
        onClose={hClose}
@@ -157,7 +154,7 @@ const ZillowDialog = memoIsShow(({
       <D.SelectWithLoad
          isShow={isShow}
          isShowLabels={isShowLabels}
-         uri={oneURI}
+         uri={props.oneURI}
          caption={oneCaption}
          onSelect={setMetric}
       />
@@ -166,9 +163,9 @@ const ZillowDialog = memoIsShow(({
          isShow={isShow}
          isShowLabels={isShowLabels}
          isHideTwo={isShowPattern}
-         uri={twoURI}
-         oneCaption={twoCaption}
-         twoCaption={threeCaption}
+         uri={props.twoURI}
+         oneCaption={props.twoCaption}
+         twoCaption={props.threeCaption}
          propCaption="c"
          msgOnNotSelected={msgOnNotSelected}
          onSelectOne={_hSelectType}
@@ -187,10 +184,10 @@ const ZillowDialog = memoIsShow(({
         <D.InputPeriod
            refEl={_refDates}
            isShowLabels={isShowLabels}
-           initFromDate={initFromDate}
-           initToDate={initToDate}
-           msgOnNotValidFormat={msgOnNotValidFormat}
-           onTestDate={onTestDate}
+           initFromDate={props.initFromDate}
+           initToDate={props.initToDate}
+           msgOnNotValidFormat={props.msgOnNotValidFormat}
+           onTestDate={props.onTestDate}
         />
       </D.ShowHide>
       <D.ShowHide isShow={isShowPattern}>

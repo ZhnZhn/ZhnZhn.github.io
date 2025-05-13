@@ -80,27 +80,23 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       tpURI,
       msgOnNotSelected,
       toTopLayer,
-      onAbout,
       loadFn,
       onLoad,
-      onShow,
-      onClose
+      onShow
     } = props,
     _refTradePartner = (0, _uiApi.useRef)(),
     [isShowToggle, toggleInputs, hideToggle] = (0, _useInputToggle.default)(),
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
-      onAbout,
-      onClose,
+    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)(props, {
       toggleInputs
     }),
-    [isFlow, toggleFlow] = (0, _useToggle.useToggle)(true)
+    [isFlow, toggleFlow] = (0, _useToggle.useToggle)(!0)
     /*
     , [
       isPartner,
       togglePartner
     ] = useToggle()
     */
-    //, [isAggr, toggleAggr] = useToggle(true)
+    //, [isAggr, toggleAggr] = useToggle(!0)
     ,
     [setOne, getOne] = (0, _useProperty.useProperty)(DF_REPORTER, DF_REPORTER),
     [setTradePartner, getTradePartner] = (0, _useProperty.useProperty)(DF_PARTNER, DF_PARTNER),
@@ -197,7 +193,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         onSelect: setTradeFlow
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-      isShow: false,
+      isShow: !1,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
         refEl: _refTradePartner,
         isShowLabels: isShowLabels,
@@ -207,7 +203,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         onSelect: _setTradePartner
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.ShowHide, {
-      isShow: true,
+      isShow: !0,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
         isShowLabels: isShowLabels,
         caption: "Aggregation",
