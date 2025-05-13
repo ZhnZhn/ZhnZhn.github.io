@@ -3,10 +3,15 @@ import {
 } from '../../utils/isTypeFn';
 
 import {
+  CHT_SPLINE
+} from '../../constants/ChartType';
+
+import {
   useRef,
   useState,
   getRefValue,
-  getInputValue
+  getInputValue,
+  IfTrue
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
@@ -33,33 +38,34 @@ const DialogQuery = memoIsShow((
   props
 ) => {
   const {
-    isShow,
+    //isShow,
     noDate,
 
-    caption,
-    oneCaption,
-    onePlaceholder,
-    initFromDate,
-    initToDate,
-    msgOnNotValidFormat,
-    onTestDate,
+    //caption,
+    //oneCaption,
+    //onePlaceholder,
+    //initFromDate,
+    //initToDate,
+    //msgOnNotValidFormat,
+    //onTestDate,
 
-    toTopLayer,
+    //toTopLayer,
+
+    //loadFn,
+    //onLoad,
+    //onShow,
+
     onAbout,
-
-    loadFn,
-    onLoad,
-    onShow,
     onClose
   } = props
   , [
     chartType,
     setChartType
-  ] = useState('SPLINE')
+  ] = useState(CHT_SPLINE)
   , [
     isShowDate,
     toggleDate
-  ] = useToggle(true)
+  ] = useToggle(!0)
   , [
     refDialogOptions,
     isShowOptions,
@@ -85,7 +91,7 @@ const DialogQuery = memoIsShow((
      const _idInputInst = getRefValue(_refIdInput)
      if (_idInputInst && _idInputInst.isValid()){
        const _value = _idInputInst.getValue();
-       onLoad(loadFn(props, {
+       props.onLoad(props.loadFn(props, {
          // seriaColor, seriaWidth
          ...getInputValue(_refSeriaColor),
          items: [{ c: _value, v: _value }],
@@ -99,12 +105,12 @@ const DialogQuery = memoIsShow((
 
   return (
     <D.DraggableDialog
-      isShow={isShow}
+      isShow={props.isShow}
       menuModel={menuMoreModel}
-      caption={caption}
-      toTopLayer={toTopLayer}
+      caption={props.caption}
+      toTopLayer={props.toTopLayer}
       onLoad={_hLoad}
-      onShow={onShow}
+      onShow={props.onShow}
       onClose={onClose}
     >
       <D.Toolbar
@@ -118,12 +124,11 @@ const DialogQuery = memoIsShow((
       />
       <D.RowPattern
         refEl={_refIdInput}
-        isShow={isShow}
         isShowLabels={isShowLabels}
         style={S_ID_ROOT}
         captionStyle={S_ID_CAPTION}
-        placeholder={onePlaceholder}
-        caption={oneCaption}
+        placeholder={props.onePlaceholder}
+        caption={props.oneCaption}
         onTest={_testId}
         errorMsg={ERR_MSG}
       />
@@ -138,19 +143,18 @@ const DialogQuery = memoIsShow((
         onSelectChart={setChartType}
         noDate={noDate}
       />
-      {
-        !noDate &&
+      <IfTrue v={!noDate}>
         <D.ShowHide isShow={isShowDate}>
           <D.InputPeriod
             refEl={_refDates}
             isShowLabels={isShowLabels}
-            initFromDate={initFromDate}
-            initToDate={initToDate}
-            msgOnNotValidFormat={msgOnNotValidFormat}
-            onTestDate={onTestDate}
+            initFromDate={props.initFromDate}
+            initToDate={props.initToDate}
+            msgOnNotValidFormat={props.msgOnNotValidFormat}
+            onTestDate={props.onTestDate}
           />
         </D.ShowHide>
-      }
+      </IfTrue>
    </D.DraggableDialog>
   );
 });

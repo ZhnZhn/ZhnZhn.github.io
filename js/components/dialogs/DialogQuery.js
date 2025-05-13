@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _ChartType = require("../../constants/ChartType");
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
@@ -24,24 +25,27 @@ const _testId = value => (0, _isTypeFn.isStrNotBlank)(value) && (0, _isTypeFn.is
 const CHART_OPTIONS = (0, _ChartOptionsFn.crChartOptions)(void 0, 't2');
 const DialogQuery = (0, _memoIsShow.default)(props => {
   const {
-      isShow,
+      //isShow,
       noDate,
-      caption,
-      oneCaption,
-      onePlaceholder,
-      initFromDate,
-      initToDate,
-      msgOnNotValidFormat,
-      onTestDate,
-      toTopLayer,
+      //caption,
+      //oneCaption,
+      //onePlaceholder,
+      //initFromDate,
+      //initToDate,
+      //msgOnNotValidFormat,
+      //onTestDate,
+
+      //toTopLayer,
+
+      //loadFn,
+      //onLoad,
+      //onShow,
+
       onAbout,
-      loadFn,
-      onLoad,
-      onShow,
       onClose
     } = props,
-    [chartType, setChartType] = (0, _uiApi.useState)('SPLINE'),
-    [isShowDate, toggleDate] = (0, _useToggle.useToggle)(true),
+    [chartType, setChartType] = (0, _uiApi.useState)(_ChartType.CHT_SPLINE),
+    [isShowDate, toggleDate] = (0, _useToggle.useToggle)(!0),
     [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
     [isToolbar, isShowLabels, menuMoreModel, toolbarButtons] = (0, _useDialog.default)({
       onAbout,
@@ -56,7 +60,7 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
       const _idInputInst = (0, _uiApi.getRefValue)(_refIdInput);
       if (_idInputInst && _idInputInst.isValid()) {
         const _value = _idInputInst.getValue();
-        onLoad(loadFn(props, {
+        props.onLoad(props.loadFn(props, {
           // seriaColor, seriaWidth
           ...(0, _uiApi.getInputValue)(_refSeriaColor),
           items: [{
@@ -71,12 +75,12 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
       }
     });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
-    isShow: isShow,
+    isShow: props.isShow,
     menuModel: menuMoreModel,
-    caption: caption,
-    toTopLayer: toTopLayer,
+    caption: props.caption,
+    toTopLayer: props.toTopLayer,
     onLoad: _hLoad,
-    onShow: onShow,
+    onShow: props.onShow,
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,
@@ -87,12 +91,11 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
       onClose: hideOptions
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
       refEl: _refIdInput,
-      isShow: isShow,
       isShowLabels: isShowLabels,
       style: S_ID_ROOT,
       captionStyle: S_ID_CAPTION,
-      placeholder: onePlaceholder,
-      caption: oneCaption,
+      placeholder: props.onePlaceholder,
+      caption: props.oneCaption,
       onTest: _testId,
       errorMsg: ERR_MSG
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
@@ -105,15 +108,18 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
       chartOptions: CHART_OPTIONS,
       onSelectChart: setChartType,
       noDate: noDate
-    }), !noDate && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
-      isShow: isShowDate,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.InputPeriod, {
-        refEl: _refDates,
-        isShowLabels: isShowLabels,
-        initFromDate: initFromDate,
-        initToDate: initToDate,
-        msgOnNotValidFormat: msgOnNotValidFormat,
-        onTestDate: onTestDate
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
+      v: !noDate,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+        isShow: isShowDate,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.InputPeriod, {
+          refEl: _refDates,
+          isShowLabels: isShowLabels,
+          initFromDate: props.initFromDate,
+          initToDate: props.initToDate,
+          msgOnNotValidFormat: props.msgOnNotValidFormat,
+          onTestDate: props.onTestDate
+        })
       })
     })]
   });
