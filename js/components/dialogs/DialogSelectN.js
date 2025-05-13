@@ -28,144 +28,146 @@ const DF_INIT_FROM_DATE = '2010-01-01',
   DF_SELECT_PROPS = [];
 const DialogSelectN = (0, _memoIsShow.default)(props => {
   const {
-      isCh = true,
+      isCh = !0,
       isShow,
-      isOpt,
+      //isOpt,
       isFd,
       selectProps = DF_SELECT_PROPS,
-      dfProps,
-      chartsType,
-      msgOnNotSelected,
-      caption,
-      noDate,
-      initFromDate,
-      errNotYmdOrEmpty,
-      isYmdOrEmpty,
-      loadId,
-      toTopLayer,
-      onAbout,
-      loadFn,
-      onLoad,
-      onShow,
-      onClose
+      dfProps
+      //chartsType,
+      //msgOnNotSelected,
+
+      //caption,
+      //noDate,
+      //initFromDate,
+      //errNotYmdOrEmpty,
+      //isYmdOrEmpty,
+      //loadId,
+
+      //toTopLayer,
+
+      //loadFn,
+      //onLoad,
+      //onShow
     } = props,
     {
       dfRt
     } = dfProps || {},
-    [isShowChart, toggleIsShowChart] = (0, _useToggle.useToggle)(true),
-    [toggleInputById, isShowInputById] = (0, _useIsShowInput.default)(selectProps),
-    [isShowFd, toggleIsShowFd, chartType, _hSelectChartType] = (0, _useSelectChartType.default)(),
+    [_isShowChart, _toggleIsShowChart] = (0, _useToggle.useToggle)(!0),
+    [_toggleInputById, _isShowInputById] = (0, _useIsShowInput.default)(selectProps),
+    [_isShowFd, _toggleIsShowFd, _chartType, _hSelectChartType] = (0, _useSelectChartType.default)(),
     [_setPropertyRoundTo, _getPropertyRoundTo] = (0, _useProperty.useProperty)(dfRt),
     _refFromDate = (0, _uiApi.useRef)(),
     _refSeriaColor = (0, _uiApi.useRef)(),
-    [setPropertyDate, getPropertyDate] = (0, _useProperty.useProperty)()
+    [_setPropertyDate, _getPropertyDate] = (0, _useProperty.useProperty)()
 
     /*eslint-disable react-hooks/exhaustive-deps */,
     _onUpdateChartConfig = (0, _uiApi.useCallback)(() => {
-      setPropertyDate();
+      _setPropertyDate();
       _hSelectChartType();
     }, [])
     // setPropertyDate, _hSelectChartType
     /*eslint-enable react-hooks/exhaustive-deps */,
-    [_chartOptions, dateOptions, dateDefault, updateChartConfig] = (0, _useChartConfig.default)(selectProps, chartsType, loadId, dfProps, _onUpdateChartConfig),
-    [isToggle, toggleInputs, _hideToggle] = (0, _useBool.useToggleFalse)(),
-    [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)({
-      onAbout,
-      onClose,
-      toggleInputs: isFd || selectProps.length > 1 ? toggleInputs : void 0,
-      toggleOptions: isOpt || isCh ? toggleOptions : void 0
+    [_chartOptions, _dateOptions, _dateDefault, _updateChartConfig] = (0, _useChartConfig.default)(selectProps, props.chartsType, props.loadId, dfProps, _onUpdateChartConfig),
+    [_isToggle, _toggleInputs, _hideToggle] = (0, _useBool.useToggleFalse)(),
+    [_refDialogOptions, _isShowOptions, _toggleOptions, _hideOptions, _toggleDialogOption] = (0, _useDialogOptions.default)(),
+    [_isToolbar, _isShowLabels, _menuMoreModel, _toolbarButtons, _validationMessages, _setValidationMessages, _hClose] = (0, _useDialog.default)(props, {
+      toggleInputs: isFd || selectProps.length > 1 ? _toggleInputs : void 0,
+      toggleOptions: props.isOpt || isCh ? _toggleOptions : void 0
     }),
-    [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)(),
-    [_refItems, _hSelect, tupleFilter] = (0, _useSelectItem.default)(updateChartConfig),
+    [_refTitles, _addTitleIndex, _removeTitleIndex] = (0, _useTitles.default)(),
+    [_refItems, _hSelect, _tupleFilter] = (0, _useSelectItem.default)(_updateChartConfig),
     _hLoad = (0, _useEventCallback.default)(() => {
-      const msgs = (0, _dialogFn.crMsgs)(chartType, (0, _uiApi.getRefValue)(_refItems), selectProps, msgOnNotSelected);
+      const msgs = (0, _dialogFn.crMsgs)(_chartType, (0, _uiApi.getRefValue)(_refItems), selectProps, props.msgOnNotSelected);
       if (msgs.length === 0) {
-        onLoad(loadFn(props, {
+        props.onLoad(props.loadFn(props, {
           // seriaColor, seriaWidth
           ...(0, _uiApi.getInputValue)(_refSeriaColor),
-          chartType,
-          isCategory: (0, _ChartOptionsFn.isCategoryItem)(chartType),
+          chartType: _chartType,
+          isCategory: (0, _ChartOptionsFn.isCategoryItem)(_chartType),
           items: [...(0, _uiApi.getRefValue)(_refItems)],
-          titles: (0, _uiApi.getRefValue)(refTitles),
-          dialogOptions: (0, _uiApi.getRefValue)(refDialogOptions),
+          titles: (0, _uiApi.getRefValue)(_refTitles),
+          dialogOptions: (0, _uiApi.getRefValue)(_refDialogOptions),
           fromDate: (0, _uiApi.getInputValidValue)(_refFromDate, ''),
-          date: (0, _dialogFn.getItemValue)(getPropertyDate()) || dateDefault,
+          date: (0, _dialogFn.getItemValue)(_getPropertyDate()) || _dateDefault,
           _rt: _getPropertyRoundTo()
         }));
       }
-      setValidationMessages(msgs);
+      _setValidationMessages(msgs);
     }),
-    _isCategory = (0, _ChartOptionsFn.isCategoryItem)(chartType),
+    _isCategory = (0, _ChartOptionsFn.isCategoryItem)(_chartType),
     _isRowFd = isFd && !_isCategory,
-    _isShowFromDate = _isRowFd && isShowFd,
-    _initialValueFromDate = isFd ? initFromDate || DF_INIT_FROM_DATE : void 0,
-    _isShowDate = isShowChart && _isCategory;
+    _isShowFromDate = _isRowFd && _isShowFd,
+    _initialValueFromDate = isFd ? props.initFromDate || DF_INIT_FROM_DATE : void 0,
+    _isShowDate = _isShowChart && _isCategory;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
-    isFocusBtMenu: false,
+    isFocusBtMenu: !1,
     isShow: isShow,
-    caption: caption,
-    menuModel: menuMoreModel,
-    toTopLayer: toTopLayer,
+    caption: props.caption,
+    menuModel: _menuMoreModel,
+    toTopLayer: props.toTopLayer,
     onLoad: _hLoad,
-    onShow: onShow,
-    onClose: hClose,
+    onShow: props.onShow,
+    onClose: _hClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
-      isShow: isToolbar,
-      buttons: toolbarButtons
+      isShow: _isToolbar,
+      buttons: _toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalOptions, {
-      isShow: isShowOptions,
+      isShow: _isShowOptions,
       dfRt: dfRt,
       onRoundTo: _setPropertyRoundTo,
-      toggleOption: toggleDialogOption,
-      onClose: hideOptions
+      toggleOption: _toggleDialogOption,
+      onClose: _hideOptions
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalToggle, {
-      isShow: isToggle,
+      isShow: _isToggle,
       selectProps: selectProps,
       isFd: _isRowFd,
-      isShowFd: isShowFd,
+      isShowFd: _isShowFd,
       isCh: isCh,
-      isShowChart: isShowChart,
-      onToggle: toggleInputById,
-      onCheckCaption: addTitleIndex,
-      onUnCheckCaption: removeTitleIndex,
-      onToggleFd: toggleIsShowFd,
-      onToggleChart: toggleIsShowChart,
+      isShowChart: _isShowChart,
+      onToggle: _toggleInputById,
+      onCheckCaption: _addTitleIndex,
+      onUnCheckCaption: _removeTitleIndex,
+      onToggleFd: _toggleIsShowFd,
+      onToggleChart: _toggleIsShowChart,
       onClose: _hideToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FocusFirstCombobox.default, {
       is: isShow,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectList.default, {
         isShow: isShow,
-        isShowLabels: isShowLabels,
+        isShowLabels: _isShowLabels,
         selectProps: selectProps,
-        isShowById: isShowInputById,
+        isShowById: _isShowInputById,
         hSelect: _hSelect,
-        tupleFilter: tupleFilter
+        tupleFilter: _tupleFilter
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
       isShow: _isShowFromDate,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowDate, {
         innerRef: _refFromDate,
-        isShowLabels: isShowLabels,
+        isShowLabels: _isShowLabels,
         title: "From Date",
         initialValue: _initialValueFromDate,
-        errorMsg: errNotYmdOrEmpty,
-        onTest: isYmdOrEmpty
+        errorMsg: props.errNotYmdOrEmpty,
+        onTest: props.isYmdOrEmpty
       })
-    }), isCh && /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
-      refSeriaColor: _refSeriaColor,
-      chartType: chartType,
-      isShowLabels: isShowLabels,
-      isShowChart: isShowChart,
-      chartOptions: _chartOptions,
-      onSelectChart: _hSelectChartType,
-      noDate: noDate,
-      isShowDate: _isShowDate,
-      dateDefault: dateDefault,
-      dateOptions: dateOptions,
-      onSelectDate: setPropertyDate
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
+      v: isCh,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
+        refSeriaColor: _refSeriaColor,
+        chartType: _chartType,
+        isShowLabels: _isShowLabels,
+        isShowChart: _isShowChart,
+        chartOptions: _chartOptions,
+        onSelectChart: _hSelectChartType,
+        noDate: props.noDate,
+        isShowDate: _isShowDate,
+        dateDefault: _dateDefault,
+        dateOptions: _dateOptions,
+        onSelectDate: _setPropertyDate
+      })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
-      validationMessages: validationMessages
+      validationMessages: _validationMessages
     })]
   });
 });
@@ -197,9 +199,9 @@ DialogSelectN.propTypes = {
   onLoad: PropTypes.func,
 
   onShow: PropTypes.func,
-  onFront: PropTypes.func,
+  toTopLayer: PropTypes.func,
   onClose: PropTypes.func,
-  onClickInfo: PropTypes.func,
+  onAbout: PropTypes.func,
 }
 */
 var _default = exports.default = DialogSelectN;

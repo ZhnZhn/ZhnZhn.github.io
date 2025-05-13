@@ -4,7 +4,8 @@ import {
   useCallback,
   getRefValue,
   getInputValue,
-  getInputValidValue
+  getInputValidValue,
+  IfTrue
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
@@ -38,48 +39,45 @@ const DialogSelectN = memoIsShow((
   props
 ) => {
   const {
-    isCh=true,
+    isCh=!0,
     isShow,
-    isOpt,
+    //isOpt,
     isFd,
     selectProps=DF_SELECT_PROPS,
     dfProps,
-    chartsType,
-    msgOnNotSelected,
+    //chartsType,
+    //msgOnNotSelected,
 
-    caption,
-    noDate,
-    initFromDate,
-    errNotYmdOrEmpty,
-    isYmdOrEmpty,
-    loadId,
+    //caption,
+    //noDate,
+    //initFromDate,
+    //errNotYmdOrEmpty,
+    //isYmdOrEmpty,
+    //loadId,
 
-    toTopLayer,
-    onAbout,
+    //toTopLayer,
 
-    loadFn,
-    onLoad,
-    onShow,
-    onClose,
+    //loadFn,
+    //onLoad,
+    //onShow
   } = props
   , {
     dfRt
   } = dfProps || {}
   , [
-    isShowChart,
-    toggleIsShowChart
-  ] = useToggle(true)
+    _isShowChart,
+    _toggleIsShowChart
+  ] = useToggle(!0)
   , [
-    toggleInputById,
-    isShowInputById
+    _toggleInputById,
+    _isShowInputById
   ] = useIsShowInput(selectProps)
   , [
-    isShowFd,
-    toggleIsShowFd,
-    chartType,
+    _isShowFd,
+    _toggleIsShowFd,
+    _chartType,
     _hSelectChartType
   ] = useSelectChartType()
-
   , [
     _setPropertyRoundTo,
     _getPropertyRoundTo
@@ -87,13 +85,13 @@ const DialogSelectN = memoIsShow((
   , _refFromDate = useRef()
   , _refSeriaColor = useRef()
   , [
-    setPropertyDate,
-    getPropertyDate
+    _setPropertyDate,
+    _getPropertyDate
   ] = useProperty()
 
   /*eslint-disable react-hooks/exhaustive-deps */
   , _onUpdateChartConfig = useCallback(() => {
-     setPropertyDate()
+     _setPropertyDate()
      _hSelectChartType()
   }, [])
   // setPropertyDate, _hSelectChartType
@@ -101,161 +99,160 @@ const DialogSelectN = memoIsShow((
 
   , [
     _chartOptions,
-    dateOptions,
-    dateDefault,
-    updateChartConfig
+    _dateOptions,
+    _dateDefault,
+    _updateChartConfig
   ] = useChartConfig(
      selectProps,
-     chartsType,
-     loadId,
+     props.chartsType,
+     props.loadId,
      dfProps,
     _onUpdateChartConfig
   )
   , [
-    isToggle,
-    toggleInputs,
+    _isToggle,
+    _toggleInputs,
     _hideToggle
   ] = useToggleFalse()
   , [
-    refDialogOptions,
-    isShowOptions,
-    toggleOptions,
-    hideOptions,
-    toggleDialogOption
+    _refDialogOptions,
+    _isShowOptions,
+    _toggleOptions,
+    _hideOptions,
+    _toggleDialogOption
   ] = useDialogOptions()
   , [
-    isToolbar,
-    isShowLabels,
-    menuMoreModel,
-    toolbarButtons,
-    validationMessages,
-    setValidationMessages,
-    hClose
-  ] = useDialog({
-    onAbout,
-    onClose,
+    _isToolbar,
+    _isShowLabels,
+    _menuMoreModel,
+    _toolbarButtons,
+    _validationMessages,
+    _setValidationMessages,
+    _hClose
+  ] = useDialog(props, {
     toggleInputs: isFd || selectProps.length > 1
-       ? toggleInputs
+       ? _toggleInputs
        : void 0,
-    toggleOptions: isOpt || isCh
-       ? toggleOptions
+    toggleOptions: props.isOpt || isCh
+       ? _toggleOptions
        : void 0
   })
   , [
-    refTitles,
-    addTitleIndex,
-    removeTitleIndex
+    _refTitles,
+    _addTitleIndex,
+    _removeTitleIndex
   ] = useTitles()
   , [
     _refItems,
     _hSelect,
-    tupleFilter
-  ] = useSelectItem(updateChartConfig)
+    _tupleFilter
+  ] = useSelectItem(_updateChartConfig)
   , _hLoad = useEventCallback(() => {
       const msgs = crMsgs(
-        chartType,
+        _chartType,
         getRefValue(_refItems),
         selectProps,
-        msgOnNotSelected
+        props.msgOnNotSelected
       );
 
       if (msgs.length === 0) {
-        onLoad(loadFn(props, {
+        props.onLoad(props.loadFn(props, {
           // seriaColor, seriaWidth
           ...getInputValue(_refSeriaColor),
-          chartType,
-          isCategory: isCategoryItem(chartType),
+          chartType: _chartType,
+          isCategory: isCategoryItem(_chartType),
           items: [...getRefValue(_refItems)],
-          titles: getRefValue(refTitles),
-          dialogOptions: getRefValue(refDialogOptions),
+          titles: getRefValue(_refTitles),
+          dialogOptions: getRefValue(_refDialogOptions),
           fromDate: getInputValidValue(_refFromDate, ''),
-          date: getItemValue(getPropertyDate()) || dateDefault,
+          date: getItemValue(_getPropertyDate()) || _dateDefault,
           _rt: _getPropertyRoundTo()
         }))
       }
-      setValidationMessages(msgs)
+      _setValidationMessages(msgs)
   })
-  , _isCategory = isCategoryItem(chartType)
+  , _isCategory = isCategoryItem(_chartType)
   , _isRowFd = isFd && !_isCategory
-  , _isShowFromDate = _isRowFd && isShowFd
+  , _isShowFromDate = _isRowFd && _isShowFd
   , _initialValueFromDate = isFd
-       ? initFromDate || DF_INIT_FROM_DATE
+       ? props.initFromDate || DF_INIT_FROM_DATE
        : void 0
-  , _isShowDate = isShowChart && _isCategory;
+  , _isShowDate = _isShowChart && _isCategory;
 
   return (
     <D.DraggableDialog
-      isFocusBtMenu={false}
+      isFocusBtMenu={!1}
       isShow={isShow}
-      caption={caption}
-      menuModel={menuMoreModel}
-      toTopLayer={toTopLayer}
+      caption={props.caption}
+      menuModel={_menuMoreModel}
+      toTopLayer={props.toTopLayer}
       onLoad={_hLoad}
-      onShow={onShow}
-      onClose={hClose}
+      onShow={props.onShow}
+      onClose={_hClose}
    >
       <D.Toolbar
-        isShow={isToolbar}
-        buttons={toolbarButtons}
+        isShow={_isToolbar}
+        buttons={_toolbarButtons}
       />
       <D.ModalOptions
-        isShow={isShowOptions}
+        isShow={_isShowOptions}
         dfRt={dfRt}
         onRoundTo={_setPropertyRoundTo}
-        toggleOption={toggleDialogOption}
-        onClose={hideOptions}
+        toggleOption={_toggleDialogOption}
+        onClose={_hideOptions}
       />
       <D.ModalToggle
-        isShow={isToggle}
+        isShow={_isToggle}
         selectProps={selectProps}
         isFd={_isRowFd}
-        isShowFd={isShowFd}
+        isShowFd={_isShowFd}
         isCh={isCh}
-        isShowChart={isShowChart}
-        onToggle={toggleInputById}
-        onCheckCaption={addTitleIndex}
-        onUnCheckCaption={removeTitleIndex}
-        onToggleFd={toggleIsShowFd}
-        onToggleChart={toggleIsShowChart}
+        isShowChart={_isShowChart}
+        onToggle={_toggleInputById}
+        onCheckCaption={_addTitleIndex}
+        onUnCheckCaption={_removeTitleIndex}
+        onToggleFd={_toggleIsShowFd}
+        onToggleChart={_toggleIsShowChart}
         onClose={_hideToggle}
       />
       <FocusFirstCombobox is={isShow}>
         <SelectList
           isShow={isShow}
-          isShowLabels={isShowLabels}
+          isShowLabels={_isShowLabels}
           selectProps={selectProps}
-          isShowById={isShowInputById}
+          isShowById={_isShowInputById}
           hSelect={_hSelect}
-          tupleFilter={tupleFilter}
+          tupleFilter={_tupleFilter}
         />
       </FocusFirstCombobox>
       <D.ShowHide isShow={_isShowFromDate}>
         <D.RowDate
           innerRef={_refFromDate}
-          isShowLabels={isShowLabels}
+          isShowLabels={_isShowLabels}
           title="From Date"
           initialValue={_initialValueFromDate}
-          errorMsg={errNotYmdOrEmpty}
-          onTest={isYmdOrEmpty}
+          errorMsg={props.errNotYmdOrEmpty}
+          onTest={props.isYmdOrEmpty}
         />
       </D.ShowHide>
 
-      { isCh && <D.RowChartDate
+      <IfTrue v={isCh}>
+        <D.RowChartDate
           refSeriaColor={_refSeriaColor}
-          chartType={chartType}
-          isShowLabels={isShowLabels}
-          isShowChart={isShowChart}
+          chartType={_chartType}
+          isShowLabels={_isShowLabels}
+          isShowChart={_isShowChart}
           chartOptions={_chartOptions}
           onSelectChart={_hSelectChartType}
-          noDate={noDate}
+          noDate={props.noDate}
           isShowDate={_isShowDate}
-          dateDefault={dateDefault}
-          dateOptions={dateOptions}
-          onSelectDate={setPropertyDate}
+          dateDefault={_dateDefault}
+          dateOptions={_dateOptions}
+          onSelectDate={_setPropertyDate}
         />
-      }
+      </IfTrue>
       <D.ValidationMessages
-        validationMessages={validationMessages}
+        validationMessages={_validationMessages}
       />
     </D.DraggableDialog>
   );
@@ -288,9 +285,9 @@ DialogSelectN.propTypes = {
   onLoad: PropTypes.func,
 
   onShow: PropTypes.func,
-  onFront: PropTypes.func,
+  toTopLayer: PropTypes.func,
   onClose: PropTypes.func,
-  onClickInfo: PropTypes.func,
+  onAbout: PropTypes.func,
 }
 */
 
