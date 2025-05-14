@@ -17,6 +17,10 @@ const _crFnSymbolQuery = (
   symbol
 ) => `${crFunctionQuery(fnName)}&symbol=${symbol}`;
 
+const _getSymbol = (
+  option
+) => getValue(option.items[0]);
+
 const _getInterval = intervalValue => {
   const dfFn = intervalValue.split('&')[0]
   , dfT = (dfFn || '').replace('TIME_SERIES_', '')
@@ -109,6 +113,13 @@ const _crDfQuery = ({
   indicator='SMA'
 }) => `${_crFnSymbolQuery(indicator, ticket)}&interval=daily&time_period=${period}&series_type=close`;
 
+const _crInsiderTransactionsQuery = (
+  option
+) => _crFnSymbolQuery(
+  'INSIDER_TRANSACTIONS',
+  _getSymbol(option)
+);
+
 const _crTopGlQuery = () => crFunctionQuery('TOP_GAINERS_LOSERS')
 
 const _crCrQuery = (
@@ -120,19 +131,21 @@ const _crCrQuery = (
   assign(option, {
     itemCaption: `${symbol}/${market}`
   })
-  return `${crFunctionQuery('DIGITAL_CURRENCY_DAILY')}&symbol=${symbol}&market=${market}`;
+  return `${_crFnSymbolQuery('DIGITAL_CURRENCY_DAILY', symbol)}&market=${market}`;  
 };
 
-const _fCrQuery1 = fnName => option => {
-  const { items } = option
-  , symbol = getValue(items[0]);
-  return `${crFunctionQuery(fnName)}&symbol=${symbol}`;
-}
+const _fCrQuery1 = (
+  fnName
+) => option => _crFnSymbolQuery(
+  fnName,
+  _getSymbol(option)
+);
 
 const _getCrQuery = crGetRoute({
   CR: _crCrQuery,
 
   [DF_FN_EOD]: _crEodQuery,
+  INSTR: _crInsiderTransactionsQuery,
   GL: _crTopGlQuery,
 
   TIME_SERIES_INTRADAY: _crIntradayQuery,

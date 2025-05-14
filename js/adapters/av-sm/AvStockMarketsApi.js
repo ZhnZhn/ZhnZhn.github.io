@@ -5,6 +5,7 @@ exports.default = void 0;
 var _AvFn = require("../av/AvFn");
 var _fnAdapter = require("./fnAdapter");
 const _crFnSymbolQuery = (fnName, symbol) => `${(0, _AvFn.crFunctionQuery)(fnName)}&symbol=${symbol}`;
+const _getSymbol = option => (0, _fnAdapter.getValue)(option.items[0]);
 const _getInterval = intervalValue => {
   const dfFn = intervalValue.split('&')[0],
     dfT = (dfFn || '').replace('TIME_SERIES_', ''),
@@ -79,6 +80,7 @@ const _crDfQuery = _ref => {
   } = _ref;
   return `${_crFnSymbolQuery(indicator, ticket)}&interval=daily&time_period=${period}&series_type=close`;
 };
+const _crInsiderTransactionsQuery = option => _crFnSymbolQuery('INSIDER_TRANSACTIONS', _getSymbol(option));
 const _crTopGlQuery = () => (0, _AvFn.crFunctionQuery)('TOP_GAINERS_LOSERS');
 const _crCrQuery = option => {
   const {
@@ -89,18 +91,13 @@ const _crCrQuery = option => {
   (0, _fnAdapter.assign)(option, {
     itemCaption: `${symbol}/${market}`
   });
-  return `${(0, _AvFn.crFunctionQuery)('DIGITAL_CURRENCY_DAILY')}&symbol=${symbol}&market=${market}`;
+  return `${_crFnSymbolQuery('DIGITAL_CURRENCY_DAILY', symbol)}&market=${market}`;
 };
-const _fCrQuery1 = fnName => option => {
-  const {
-      items
-    } = option,
-    symbol = (0, _fnAdapter.getValue)(items[0]);
-  return `${(0, _AvFn.crFunctionQuery)(fnName)}&symbol=${symbol}`;
-};
+const _fCrQuery1 = fnName => option => _crFnSymbolQuery(fnName, _getSymbol(option));
 const _getCrQuery = (0, _fnAdapter.crGetRoute)({
   CR: _crCrQuery,
   [_fnAdapter.DF_FN_EOD]: _crEodQuery,
+  INSTR: _crInsiderTransactionsQuery,
   GL: _crTopGlQuery,
   TIME_SERIES_INTRADAY: _crIntradayQuery,
   INCOME_STATEMENT: _crIncomeQuery,
