@@ -4,6 +4,7 @@ import { crDfItemKey } from '../AdapterFn'
 import api from './AvStockMarketsApi'
 import IndicatorAdapter from './IndicatorAdapter'
 import IntradayAdapter from './IntradayAdapter'
+import InstrAdapter from './InstrAdapter'
 import SearchAdapter from './SearchAdapter'
 import FundAdapter from './FundAdapter'
 import EarnAdapter from './EarnAdapter'
@@ -15,6 +16,7 @@ const adapter = crAdapterRouter({
   rAdapter: {
     DF: IndicatorAdapter,
     I: IntradayAdapter,
+    INSTR: InstrAdapter,
     SR: SearchAdapter,
     F: FundAdapter,
     E: EarnAdapter,
