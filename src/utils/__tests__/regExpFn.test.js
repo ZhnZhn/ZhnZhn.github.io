@@ -1,0 +1,26 @@
+import {
+  REG_ONE_OR_MORE_BLANKS,
+  crRegExpReplacements
+} from '../regExpFn';
+
+describe("REG_ONE_OR_MORE_BLANKS", () => {
+  test("should replace all more then one blanks with one blank", () => {
+    expect("a  b   c    d e".replace(REG_ONE_OR_MORE_BLANKS, " "))
+     .toBe("a b c d e")
+  })
+})
+
+describe("crRegExpReplacements", () => {
+  const fn = crRegExpReplacements
+  test("should create RegExp replacements", () => {
+    const replacements = {
+      "aaa": "1",
+      "bbb": "2"
+    }
+    expect("aaa bbb aaaa"
+      .replace(
+         fn(replacements),
+         matcher => replacements[matcher])
+    ).toBe("1 2 1a")
+  })
+})

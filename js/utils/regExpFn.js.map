@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/regExpFn.js"
+ ],
+ "file": "../../src/utils/regExpFn.js",
+ "names": [
+  "REG_ONE_OR_MORE_BLANKS",
+  "exports",
+  "crRegExpReplacements",
+  "objReplacements",
+  "RegExp",
+  "Object",
+  "keys",
+  "join"
+ ],
+ "mappings": ";;;;AACO,MAAMA,sBAAsB,GAAAC,OAAA,CAAAD,sBAAA,GAAG,KAAK;AAEpC,MAAME,oBAAoB,GAC/BC,eAAe,IACZ,IAAIC,MAAM,CACbC,MAAM,CAACC,IAAI,CAACH,eAAe,CAAC,CAACI,IAAI,CAAC,GAAG,CAAC,EACtC,GACF,CAAC;AAAAN,OAAA,CAAAC,oBAAA,GAAAA,oBAAA"
+}
