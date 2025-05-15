@@ -1,8 +1,3 @@
-export {
-  getValue,
-  toUpperCaseFirst
-} from '../AdapterFn';
-
 import {
   getValue,
   ymdToUTC

@@ -3,7 +3,9 @@ import {
   filterBoolean
 } from '../../utils/arrFn';
 
-import { toUpperCaseFirst } from './fnAdapter';
+import {
+  toUpperCaseFirst
+} from '../AdapterFn';
 
 const _crCaption = ({
   name='',

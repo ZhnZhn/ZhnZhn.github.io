@@ -1,10 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toUpperCaseFirst = exports.getCoinId = exports.crData = exports.addConfOption = void 0;
+exports.getCoinId = exports.crData = exports.addConfOption = void 0;
 var _AdapterFn = require("../AdapterFn");
-exports.getValue = _AdapterFn.getValue;
-exports.toUpperCaseFirst = _AdapterFn.toUpperCaseFirst;
 var _crFn = require("../crFn");
 const DF_ID = 'btc-bitcoin',
   _crItemLink = (0, _crFn.fCrItemLinkByCaption)('Coinpaprika'),
