@@ -4,7 +4,7 @@ import {
   crError,
   getDaysFromYmd,
   getCaption,
-  getValue
+  getValues
 } from '../AdapterFn';
 import { crPageConfig } from './fnAdapter';
 
@@ -73,11 +73,14 @@ const _assignEl = option => {
 };
 
 const _assignEv = option => {
-  const items = option.items;
+  const [
+    exchange,
+    days
+  ] = getValues(option);
 
   _setTitleAndItemUrlTo(option,
-    `${getCaption(items[0])} historical trading volume in BTC`,
-    `${EXCHANGES_API_URL}/${getValue(items[0])}/volume_chart?days=${getValue(items[1])}`
+    `${getCaption(option.items[0])} historical trading volume in BTC`,
+    `${EXCHANGES_API_URL}/${exchange}/volume_chart?days=${days}`
   )
 };
 

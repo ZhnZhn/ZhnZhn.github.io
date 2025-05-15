@@ -22,27 +22,27 @@ const _assignDf = option => {
     {
       v: _currency
     } = item2,
-    _vs = s + "/" + _currency,
+    _vs = `${s}/${_currency}`,
     _days = Math.min(Math.max((0, _AdapterFn.getDaysFromYmd)(option.fromDate), 91), 365);
   (0, _AdapterFn.assign)(option, {
     itemCaption: _vs,
     subtitle: 'Values on 00:00 GMT',
     _currency: _currency,
-    _nativeUrl: PAGE_URL + "/" + value
+    _nativeUrl: `${PAGE_URL}/${value}`
   });
-  _setTitleAndItemUrlTo(option, c, COINS_API_URL + "/" + value + "/market_chart?vs_currency=" + _currency + "&days=" + _days);
+  _setTitleAndItemUrlTo(option, c, `${COINS_API_URL}/${value}/market_chart?vs_currency=${_currency}&days=${_days}`);
 };
 const _assignMcl = option => {
   const [page, perPage, currency] = (0, _fnAdapter.crPageConfig)(option);
-  _setTitleAndItemUrlTo(option, "By Market Cap Page: " + page + " (" + perPage + ")", COINS_API_URL + "/markets?order=market_cap_desc&page=" + page + "&per_page=" + perPage + "&vs_currency=" + currency + "&price_change_percentage=1h,7d,30d,1y");
+  _setTitleAndItemUrlTo(option, `By Market Cap Page: ${page} (${perPage})`, `${COINS_API_URL}/markets?order=market_cap_desc&page=${page}&per_page=${perPage}&vs_currency=${currency}&price_change_percentage=1h,7d,30d,1y`);
 };
 const _assignEl = option => {
   const [page, perPage] = (0, _fnAdapter.crPageConfig)(option);
-  _setTitleAndItemUrlTo(option, "By Exchages Page: " + page + " (" + perPage + ")", EXCHANGES_API_URL + "?page=" + page + "&per_page=" + perPage);
+  _setTitleAndItemUrlTo(option, `By Exchages Page: ${page} (${perPage})`, `${EXCHANGES_API_URL}?page=${page}&per_page=${perPage}`);
 };
 const _assignEv = option => {
-  const items = option.items;
-  _setTitleAndItemUrlTo(option, (0, _AdapterFn.getCaption)(items[0]) + " historical trading volume in BTC", EXCHANGES_API_URL + "/" + (0, _AdapterFn.getValue)(items[0]) + "/volume_chart?days=" + (0, _AdapterFn.getValue)(items[1]));
+  const [exchange, days] = (0, _AdapterFn.getValues)(option);
+  _setTitleAndItemUrlTo(option, `${(0, _AdapterFn.getCaption)(option.items[0])} historical trading volume in BTC`, `${EXCHANGES_API_URL}/${exchange}/volume_chart?days=${days}`);
 };
 const _rAssign = {
   DF: _assignDf,
