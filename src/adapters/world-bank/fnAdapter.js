@@ -1,7 +1,6 @@
 import {
   isArr,
-  ymdToUTC,
-  getValue
+  ymdToUTC  
 } from '../AdapterFn';
 
 const _crInfo = ({
@@ -10,15 +9,6 @@ const _crInfo = ({
 }) => ({
   name: `${title}: ${subtitle}`
 });
-
-export const getCi = ({
-  items=[]
-}) => [
-  //country
-  getValue(items[0]),
-  //indicator
-  getValue(items[1])
-]
 
 export const crData = (
   [metaData, data]

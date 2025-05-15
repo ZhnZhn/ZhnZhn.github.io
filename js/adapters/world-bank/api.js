@@ -4,13 +4,12 @@ exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
-var _fnAdapter = require("./fnAdapter");
 const URL = 'https://api.worldbank.org/v2',
   NATIVE_URL = 'https://data.worldbank.org/indicator',
   _crCountryIndicatorToken = (country, indicator) => `countries/${country}/indicators/${indicator}`;
 const api = {
   getRequestUrl(option) {
-    const [country, indicator] = (0, _fnAdapter.getCi)(option),
+    const [country, indicator] = (0, _AdapterFn.getValues)(option),
       _isCategory = (0, _CategoryFn.isCategory)(option),
       _locations = _isCategory ? "1W" : country;
     (0, _AdapterFn.assign)(option, {

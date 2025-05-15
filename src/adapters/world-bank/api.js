@@ -1,13 +1,12 @@
 import {
   isArr,
   assign,
-  crError
+  crError,
+  getValues
 } from '../AdapterFn';
 import {
   isCategory
 } from '../CategoryFn';
-
-import { getCi } from './fnAdapter';
 
 const URL = 'https://api.worldbank.org/v2'
 , NATIVE_URL = 'https://data.worldbank.org/indicator'
@@ -21,7 +20,7 @@ const api = {
     const [
       country,
       indicator
-    ] = getCi(option)
+    ] = getValues(option)
     , _isCategory = isCategory(option)
     , _locations = _isCategory ? "1W" : country;
 
