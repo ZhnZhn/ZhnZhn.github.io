@@ -1,15 +1,19 @@
 import {
+  assign,
+  crGetRoute,
+  getValues,
+  getValueCaption,
+  getCaption,
+  safeReplaceIn,
+  toUpperCaseFirst
+} from '../AdapterFn';
+
+import {
   crFunctionQuery,
   fAvApi
 } from '../av/AvFn';
 import {
-  DF_FN_EOD,
-  assign,
-  toUpperCaseFirst,
-  crGetRoute,
-  getValue,
-  getCaption,
-  getValueCaption
+  DF_FN_EOD
 } from './fnAdapter';
 
 const _crFnSymbolQuery = (
@@ -19,11 +23,11 @@ const _crFnSymbolQuery = (
 
 const _getSymbol = (
   option
-) => getValue(option.items[0]);
+) => getValues(option)[0];
 
 const _getInterval = intervalValue => {
   const dfFn = intervalValue.split('&')[0]
-  , dfT = (dfFn || '').replace('TIME_SERIES_', '')
+  , dfT = safeReplaceIn(dfFn, 'TIME_SERIES_', '')
   , interval = dfT
      .split('_')
      .map(token => toUpperCaseFirst(token.toLowerCase()))
@@ -36,17 +40,13 @@ const _crEodQuery = option => {
     items
   } = option
   , [
-    _stockItem,
-    _intervalItem
-  ] = items
-  , [
     ticket,
     title
-  ] = getValueCaption(_stockItem)
+  ] = getValueCaption(items[0])
   , [
     intervalValue,
     subtitle
-  ] = getValueCaption(_intervalItem)
+  ] = getValueCaption(items[1])
   , [
     dfT,
     interval
@@ -64,12 +64,10 @@ const _crEodQuery = option => {
 }
 
 const _crIntradayQuery = option => {
-  const {
-    dfFn,
-    items
-  } = option
-  , ticket = getValue(items[0])
-  , interval = getValue(items[1])
+  const [
+    ticket,
+    interval
+  ] = getValues(option)
   , title = `${ticket} (${interval})`;
   assign(option, {
     ticket,
@@ -77,35 +75,40 @@ const _crIntradayQuery = option => {
     title,
     itemCaption: title
   })
-  return `${_crFnSymbolQuery(dfFn, ticket)}&interval=${interval}`;
+  return `${_crFnSymbolQuery(option.dfFn, ticket)}&interval=${interval}`;
 };
 
 const _crIncomeQuery = option => {
   const {
-    items,
-    itemCaption,
-    dfFn
+    items
   } = option
-  , _symbol = getValue(items[0]);
+  , [
+    symbol,
+    dfItem,
+    dfPeriod
+  ] = getValues(option);
   assign(option, {
-    itemCaption: itemCaption.replace(getCaption(items[0]), _symbol),
-    dfItem: getValue(items[1]),
-    dfPeriod: getValue(items[2])
+    itemCaption: safeReplaceIn(
+      option.itemCaption,
+      getCaption(items[0]),
+      symbol
+    ),
+    dfItem,
+    dfPeriod
   })
-  return _crFnSymbolQuery(dfFn, _symbol);
+  return _crFnSymbolQuery(option.dfFn, symbol);
 };
 
 const _crEarningQuery = option => {
-  const {
-    items,
-    dfFn
-  } = option
-  , _symbol = getValue(items[0]);
+  const [
+    symbol,
+    dfPeriod
+  ] = getValues(option);
   assign(option, {
-    itemCaption: _symbol,
-    dfPeriod: getValue(items[1])
+    itemCaption: symbol,
+    dfPeriod
   })
-  return _crFnSymbolQuery(dfFn, _symbol);
+  return _crFnSymbolQuery(option.dfFn, symbol);
 };
 const _crDfQuery = ({
   ticket='MSFT',
@@ -125,13 +128,14 @@ const _crTopGlQuery = () => crFunctionQuery('TOP_GAINERS_LOSERS')
 const _crCrQuery = (
   option
 ) => {
-  const { items } = option
-  , symbol = getValue(items[0])
-  , market = getValue(items[1]);
+  const [
+    symbol,
+    market
+  ] = getValues(option);
   assign(option, {
     itemCaption: `${symbol}/${market}`
   })
-  return `${_crFnSymbolQuery('DIGITAL_CURRENCY_DAILY', symbol)}&market=${market}`;  
+  return `${_crFnSymbolQuery('DIGITAL_CURRENCY_DAILY', symbol)}&market=${market}`;
 };
 
 const _fCrQuery1 = (

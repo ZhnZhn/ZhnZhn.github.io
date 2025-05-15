@@ -8,7 +8,7 @@ var _isTypeFn = require("../../utils/isTypeFn");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _ChartConfigFn = require("../../charts/ChartConfigFn");
-var _fnAdapter = require("./fnAdapter");
+var _AdapterFn = require("../AdapterFn");
 const TWO_YEARS_DAYS = 501,
   TA = 'Technical Analysis:',
   MACD = 'MACD',
@@ -78,7 +78,7 @@ const _toDataArrs = (_ref, arrProp) => {
   }
   for (i = max; i > -1; i--) {
     _date = dateKeys[i];
-    _x = (0, _fnAdapter.ymdToUTC)(_date);
+    _x = (0, _AdapterFn.ymdToUTC)(_date);
     _v = value[_date];
     for (j = 0; j < _maxProp; j++) {
       result[j].push([_x, parseFloat(_v[arrProp[j]])]);
@@ -91,7 +91,7 @@ const _crSplineSeria = (_ref2, option) => {
     data,
     name
   } = _ref2;
-  return (0, _fnAdapter.assign)((0, _ChartConfigFn.crSeriaConfig)(), {
+  return (0, _AdapterFn.assign)((0, _ChartConfigFn.crSeriaConfig)(), {
     data,
     name,
     type: 'spline',
@@ -118,7 +118,7 @@ const _crSeriaData = (json, option) => {
   for (; i > -1; i--) {
     _date = dateKeys[i];
     _v = parseFloat(value[_date][_indicator]);
-    _data.push([(0, _fnAdapter.ymdToUTC)(_date), _v]);
+    _data.push([(0, _AdapterFn.ymdToUTC)(_date), _v]);
   }
   return _data;
 };
@@ -142,7 +142,7 @@ const _crMacdSeries = (json, option) => {
       data: _arrs[1],
       name: MACD_S
     }, S_RED),
-    sHist = (0, _fnAdapter.assign)((0, _ChartConfigFn.crSeriaConfig)(), {
+    sHist = (0, _AdapterFn.assign)((0, _ChartConfigFn.crSeriaConfig)(), {
       color: COLOR_BLUE_A,
       data: _arrs[2],
       name: MACD_H,
@@ -185,7 +185,7 @@ const _crBbandsSeries = (json, option) => {
     }, S_RED);
   return [sMiddle, sUpper, sLow];
 };
-const _getCrSeries = (0, _fnAdapter.crGetRoute)({
+const _getCrSeries = (0, _AdapterFn.crGetRoute)({
     [MACD]: _crMacdSeries,
     [STOCH]: _crStochSeries,
     [BBANDS]: _crBbandsSeries

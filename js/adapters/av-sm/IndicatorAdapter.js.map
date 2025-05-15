@@ -12,7 +12,7 @@
   "_interopRequireDefault",
   "_configBuilderFn",
   "_ChartConfigFn",
-  "_fnAdapter",
+  "_AdapterFn",
   "TWO_YEARS_DAYS",
   "TA",
   "MACD",

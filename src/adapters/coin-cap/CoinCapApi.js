@@ -2,7 +2,7 @@ import {
   isArr,
   assign,
   crError,
-  getItemsValue,
+  getValues,
   crGetRoute,
   setItemCaptionTo,
   ymdToUTC
@@ -17,32 +17,27 @@ const _setTitleTo = (
   title
 });
 
-const _getOneTwoItemValues = (
-  option
-) => [
-  getItemsValue(option),
-  getItemsValue(option, 1)
-];
-
 const _crAssetListUrl = (
   option
 ) => {
   const [
     offset,
     limit
-  ] = _getOneTwoItemValues(option);
+  ] = getValues(option);
 
   _setTitleTo(option,
     `By USD Market Cap Page: ${offset} (${limit})`
    )
-  return `${API_URL}/assets?limit=${limit}&offset=${(parseInt(offset)-1)*(parseInt(limit))}`;
+  return `${API_URL}/assets?limit=${limit}&offset=${(parseInt(offset, 10)-1)*(parseInt(limit, 10))}`;
 };
 
 const _crExchangeListUrl = (
   option
 ) => {
+  const _pageNumber = parseInt(getValues(option)[0], 10) || 1;
+  option.pageNumber = _pageNumber
   _setTitleTo(option,
-    `Exchange List: Page ${getItemsValue(option)}`
+    `Exchange List: Page ${_pageNumber}`
   )
   return `${API_URL}/exchanges`;
 };
@@ -53,7 +48,7 @@ const _crHistoricalMarketUrl = (
   const [
     id,
     timeframe
-  ] = _getOneTwoItemValues(option)
+  ] = getValues(option)
   , { fromDate } = option
   , _queryPeriod = timeframe === "d1" && fromDate
     ? `&start=${ymdToUTC(fromDate)}&end=${Date.now()}`

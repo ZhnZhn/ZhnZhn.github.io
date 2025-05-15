@@ -2,25 +2,25 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _AdapterFn = require("../AdapterFn");
 var _AvFn = require("../av/AvFn");
 var _fnAdapter = require("./fnAdapter");
 const _crFnSymbolQuery = (fnName, symbol) => `${(0, _AvFn.crFunctionQuery)(fnName)}&symbol=${symbol}`;
-const _getSymbol = option => (0, _fnAdapter.getValue)(option.items[0]);
+const _getSymbol = option => (0, _AdapterFn.getValues)(option)[0];
 const _getInterval = intervalValue => {
   const dfFn = intervalValue.split('&')[0],
-    dfT = (dfFn || '').replace('TIME_SERIES_', ''),
-    interval = dfT.split('_').map(token => (0, _fnAdapter.toUpperCaseFirst)(token.toLowerCase())).join(' ');
+    dfT = (0, _AdapterFn.safeReplaceIn)(dfFn, 'TIME_SERIES_', ''),
+    interval = dfT.split('_').map(token => (0, _AdapterFn.toUpperCaseFirst)(token.toLowerCase())).join(' ');
   return [dfT, interval];
 };
 const _crEodQuery = option => {
   const {
       items
     } = option,
-    [_stockItem, _intervalItem] = items,
-    [ticket, title] = (0, _fnAdapter.getValueCaption)(_stockItem),
-    [intervalValue, subtitle] = (0, _fnAdapter.getValueCaption)(_intervalItem),
+    [ticket, title] = (0, _AdapterFn.getValueCaption)(items[0]),
+    [intervalValue, subtitle] = (0, _AdapterFn.getValueCaption)(items[1]),
     [dfT, interval] = _getInterval(intervalValue);
-  (0, _fnAdapter.assign)(option, {
+  (0, _AdapterFn.assign)(option, {
     itemCaption: ticket,
     ticket,
     title,
@@ -31,46 +31,35 @@ const _crEodQuery = option => {
   return _crFnSymbolQuery(intervalValue, ticket);
 };
 const _crIntradayQuery = option => {
-  const {
-      dfFn,
-      items
-    } = option,
-    ticket = (0, _fnAdapter.getValue)(items[0]),
-    interval = (0, _fnAdapter.getValue)(items[1]),
+  const [ticket, interval] = (0, _AdapterFn.getValues)(option),
     title = `${ticket} (${interval})`;
-  (0, _fnAdapter.assign)(option, {
+  (0, _AdapterFn.assign)(option, {
     ticket,
     interval,
     title,
     itemCaption: title
   });
-  return `${_crFnSymbolQuery(dfFn, ticket)}&interval=${interval}`;
+  return `${_crFnSymbolQuery(option.dfFn, ticket)}&interval=${interval}`;
 };
 const _crIncomeQuery = option => {
   const {
-      items,
-      itemCaption,
-      dfFn
+      items
     } = option,
-    _symbol = (0, _fnAdapter.getValue)(items[0]);
-  (0, _fnAdapter.assign)(option, {
-    itemCaption: itemCaption.replace((0, _fnAdapter.getCaption)(items[0]), _symbol),
-    dfItem: (0, _fnAdapter.getValue)(items[1]),
-    dfPeriod: (0, _fnAdapter.getValue)(items[2])
+    [symbol, dfItem, dfPeriod] = (0, _AdapterFn.getValues)(option);
+  (0, _AdapterFn.assign)(option, {
+    itemCaption: (0, _AdapterFn.safeReplaceIn)(option.itemCaption, (0, _AdapterFn.getCaption)(items[0]), symbol),
+    dfItem,
+    dfPeriod
   });
-  return _crFnSymbolQuery(dfFn, _symbol);
+  return _crFnSymbolQuery(option.dfFn, symbol);
 };
 const _crEarningQuery = option => {
-  const {
-      items,
-      dfFn
-    } = option,
-    _symbol = (0, _fnAdapter.getValue)(items[0]);
-  (0, _fnAdapter.assign)(option, {
-    itemCaption: _symbol,
-    dfPeriod: (0, _fnAdapter.getValue)(items[1])
+  const [symbol, dfPeriod] = (0, _AdapterFn.getValues)(option);
+  (0, _AdapterFn.assign)(option, {
+    itemCaption: symbol,
+    dfPeriod
   });
-  return _crFnSymbolQuery(dfFn, _symbol);
+  return _crFnSymbolQuery(option.dfFn, symbol);
 };
 const _crDfQuery = _ref => {
   let {
@@ -83,18 +72,14 @@ const _crDfQuery = _ref => {
 const _crInsiderTransactionsQuery = option => _crFnSymbolQuery('INSIDER_TRANSACTIONS', _getSymbol(option));
 const _crTopGlQuery = () => (0, _AvFn.crFunctionQuery)('TOP_GAINERS_LOSERS');
 const _crCrQuery = option => {
-  const {
-      items
-    } = option,
-    symbol = (0, _fnAdapter.getValue)(items[0]),
-    market = (0, _fnAdapter.getValue)(items[1]);
-  (0, _fnAdapter.assign)(option, {
+  const [symbol, market] = (0, _AdapterFn.getValues)(option);
+  (0, _AdapterFn.assign)(option, {
     itemCaption: `${symbol}/${market}`
   });
   return `${_crFnSymbolQuery('DIGITAL_CURRENCY_DAILY', symbol)}&market=${market}`;
 };
 const _fCrQuery1 = fnName => option => _crFnSymbolQuery(fnName, _getSymbol(option));
-const _getCrQuery = (0, _fnAdapter.crGetRoute)({
+const _getCrQuery = (0, _AdapterFn.crGetRoute)({
   CR: _crCrQuery,
   [_fnAdapter.DF_FN_EOD]: _crEodQuery,
   INSTR: _crInsiderTransactionsQuery,

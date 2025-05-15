@@ -100,10 +100,12 @@ export const getCaption = getC
 export const getValue = getV
 export const getValueCaption = getVc
 
-export const getItemsValue = (
-  option,
-  itemIndex=0
-) => getV(option.items[itemIndex])
+export const getValues = option => option.items.map(getV)
+export const safeReplaceIn = (
+  str,
+  from,
+  to
+) => isStr(str) ? str.replace(from, to) : ''
 
 export const numberFormat = formatAllNumber
 export const isYNumber = _fIsNumber('y')

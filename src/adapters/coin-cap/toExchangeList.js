@@ -1,6 +1,5 @@
 import {
   isNumber,
-  getItemsValue,
   mlsToDmy
 } from "../AdapterFn";
 
@@ -33,7 +32,7 @@ const _filterData = (
   data,
   option
 ) => {
-  const pageNumber = parseInt(getItemsValue(option)) || 1
+  const { pageNumber } = option
   , _fromRank = (pageNumber-1)*NUMBER_PER_PAGE_ITEMS
   , _toRank = pageNumber*NUMBER_PER_PAGE_ITEMS;
   return data.filter(item => {

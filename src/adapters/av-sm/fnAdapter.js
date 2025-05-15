@@ -1,16 +1,9 @@
 export {
-  assign,
   isArr,
   isInArrStr,
   isTokenInStr,
   crDfItemKey,
-  crGetRoute,
-  getValue,
-  getCaption,
-  getValueCaption,
-  toUpperCaseFirst,
   valueMoving,
-  ymdToUTC,
   ymdhmsToUTC,
   roundBy,
   crError

@@ -15,7 +15,7 @@ import {
   assign,
   crGetRoute,
   ymdToUTC
-} from './fnAdapter';
+} from '../AdapterFn';
 
 const TWO_YEARS_DAYS = 501
 , TA = 'Technical Analysis:'

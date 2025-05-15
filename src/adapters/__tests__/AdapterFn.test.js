@@ -18,7 +18,8 @@ import {
   crError,
   fCrValue,
   toTimeDate,
-  getItemsValue
+  getValues,
+  safeReplaceIn
 } from '../AdapterFn';
 import {
   DT_EMPTY,
@@ -326,21 +327,31 @@ describe("toTimeDate", ()=>{
   })
 })
 
-describe("getItemsValue", ()=>{
-  const fn = getItemsValue;
-  test("should return option items value by item index", ()=>{
+describe("getValues", ()=>{
+  const fn = getValues;
+  test("should return option items values", ()=>{
     expect(fn({
       items: [{v: "someValue"}]
-    })).toBe("someValue")
+    })).toEqual(["someValue"])
 
     expect(fn({
       items: [{v: "someValue1"},{v: "someValue2"}]
-    })).toBe("someValue1")
-    expect(fn({
-      items: [{v: "someValue1"},{v: "someValue2"}]
-    }, 1)).toBe("someValue2")
-    expect(fn({
-      items: [{v: "someValue1"},{v: "someValue2"}]
-    }, 2)).toBe("")
+    })).toEqual(["someValue1", "someValue2"])
+  })
+})
+
+describe("safeReplaceIn", ()=>{
+  const fn = safeReplaceIn
+  test("should replace in str from-token to to-token", ()=>{
+    expect(fn("a b a", "a", "1")).toBe("1 b a")
+    expect(fn("a b a", "b", "2")).toBe("a 2 a")
+    expect(fn("a b a", "d", "2")).toBe("a b a")
+  })
+  test("should return empty str in edge cases", ()=>{
+    expect(fn(null, "a", "b")).toBe("")
+    expect(fn(void 0, "a", "b")).toBe("")
+    expect(fn(true, "a", "b")).toBe("")
+    expect(fn(1, "a", "b")).toBe("")
+    expect(fn({}, "a", "b")).toBe("")
   })
 })
