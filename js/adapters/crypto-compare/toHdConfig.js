@@ -3,10 +3,11 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _stockBuilderFn = require("../../charts/stockBuilderFn");
+var _AdapterFn = require("../AdapterFn");
 var _crAdapterType = require("../crAdapterType1");
 var _fnAdapter = require("./fnAdapter");
 const _crTitle = (title, items) => {
-  const _time = (0, _fnAdapter.getValue)(items[2]) === 'histoday' ? '00:00 GMT+0' : 'GMT+0';
+  const _time = (0, _AdapterFn.getValue)(items[2]) === 'histoday' ? '00:00 GMT+0' : 'GMT+0';
   return `${title}: Values on ${_time}`;
 };
 const _getTsym = (json, option) => {
@@ -49,7 +50,7 @@ const trOption = (option, json) => {
     title,
     items
   } = option;
-  (0, _fnAdapter.assign)(option, {
+  (0, _AdapterFn.assign)(option, {
     itemCaption: title,
     title: _crTitle(title, items),
     subtitle: _crSubtitle(json, option)

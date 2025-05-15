@@ -1,12 +1,12 @@
 import {
+  assign,
+  getValue,
   setItemCaptionTo,
   crError
 } from '../AdapterFn';
 
 import {
-  CRYPTOCOMPARE_COM,
-  assign,
-  getValue
+  CRYPTOCOMPARE_COM
 } from './fnAdapter';
 
 const URL = `https://min-api.${CRYPTOCOMPARE_COM}`

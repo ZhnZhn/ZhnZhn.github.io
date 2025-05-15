@@ -3,11 +3,6 @@ import {
   isTypeNumber,
 } from '../../utils/isTypeFn';
 
-export {
-  assign,
-  getValue
-} from '../AdapterFn';
-
 import {  
   roundBy,
   crZhConfig,

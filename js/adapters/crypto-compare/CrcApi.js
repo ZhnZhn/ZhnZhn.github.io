@@ -11,7 +11,7 @@ const URL = `https://min-api.${_fnAdapter.CRYPTOCOMPARE_COM}`
   DF_ID = 'BTC',
   DF_E = 'CCCAGG',
   DF_INTERVAL = 'histoday';
-const _fGetParam = (index, dfValue) => items => (0, _fnAdapter.getValue)(items[index], {
+const _fGetParam = (index, dfValue) => items => (0, _AdapterFn.getValue)(items[index], {
     dfValue
   }),
   _getFsym = _fGetParam(0, DF_ID),
@@ -25,7 +25,7 @@ const _hdUrl = option => {
     exchange = _getE(items),
     interval = _getInterval(items),
     tsym = exchange === 'Binance' ? 'USDT' : 'USD';
-  (0, _fnAdapter.assign)(option, {
+  (0, _AdapterFn.assign)(option, {
     value,
     exchange,
     tsym

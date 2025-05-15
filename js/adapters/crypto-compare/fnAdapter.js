@@ -1,11 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getValue = exports.crData = exports.crConfOption = exports.assign = exports.CRYPTOCOMPARE_COM = void 0;
+exports.crData = exports.crConfOption = exports.CRYPTOCOMPARE_COM = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
-exports.assign = _AdapterFn.assign;
-exports.getValue = _AdapterFn.getValue;
 var _pointFn = require("../pointFn");
 const CRYPTOCOMPARE_COM = exports.CRYPTOCOMPARE_COM = 'cryptocompare.com';
 const ITEM_URL = `https://${CRYPTOCOMPARE_COM}/coins`,

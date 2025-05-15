@@ -2,12 +2,18 @@ import {
   fAddMiniVolumes,
   fAddMiniHL
 } from '../../charts/stockBuilderFn';
-import { crAdapterType1 } from '../crAdapterType1';
+
 import {
   assign,
-  crData,
-  crConfOption,
   getValue
+} from '../AdapterFn';
+import {
+  crAdapterType1
+} from '../crAdapterType1';
+
+import {
+  crData,
+  crConfOption
 } from './fnAdapter';
 
 const _crTitle = (title, items) => {
