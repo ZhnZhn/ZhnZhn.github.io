@@ -1,5 +1,5 @@
 import {
-  getValue,
+  getValues,
   fCheckResponse
 } from '../AdapterFn';
 
@@ -7,11 +7,7 @@ const DATA_URL = './data/environment';
 
 const _crLineUrl = (
   option
-) => {
-  const { items } = option
-  , id = getValue(items[0]);
-  return `${DATA_URL}/${id}.json`;
-}
+) => `${DATA_URL}/${getValues(option)[0]}.json`;
 
 const EnApi = {
   getRequestUrl(option){
