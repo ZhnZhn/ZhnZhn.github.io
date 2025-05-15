@@ -1,5 +1,5 @@
 import {
-  getValue,
+  getValues,
   fCheckResponse
 } from '../AdapterFn';
 
@@ -9,12 +9,13 @@ const URL = 'https://api.twelvedata.com'
 const TwApi = {
   getRequestUrl(option){
     const {
-      apiKey,
-      items
+      apiKey
     } = option
-    , symbol = getValue(items[0], {isUpper: true})
-    , interval = getValue(items[1])
-    , outputsize = getValue(items[2]);
+    , [
+      symbol,
+      interval,
+      outputsize
+    ] = getValues(option);
 
     option.apiKey = null
     option.itemCaption = symbol

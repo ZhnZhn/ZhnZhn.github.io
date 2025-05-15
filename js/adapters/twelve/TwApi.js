@@ -8,14 +8,9 @@ const URL = 'https://api.twelvedata.com',
 const TwApi = {
   getRequestUrl(option) {
     const {
-        apiKey,
-        items
+        apiKey
       } = option,
-      symbol = (0, _AdapterFn.getValue)(items[0], {
-        isUpper: true
-      }),
-      interval = (0, _AdapterFn.getValue)(items[1]),
-      outputsize = (0, _AdapterFn.getValue)(items[2]);
+      [symbol, interval, outputsize] = (0, _AdapterFn.getValues)(option);
     option.apiKey = null;
     option.itemCaption = symbol;
     return `${URL}/time_series?symbol=${symbol}&apikey=${apiKey}&interval=${interval}&outputsize=${outputsize}&${QUERY_TAIL}`;
