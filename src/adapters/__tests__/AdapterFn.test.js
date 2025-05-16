@@ -11,7 +11,6 @@ import {
   isNumberOrNull,
   crShortItemCaption,
   setItemCaptionCurrencyRateTo,
-  toFloatOrEmpty,
   findMinY,
   findMaxY,
   valueMoving,
@@ -165,15 +164,6 @@ describe("setItemCaptionCurrencyRateTo", ()=>{
     };
     fn(option, "USD")
     expect(option.itemCaption).toBe("EUR/USD")
-  })
-})
-
-describe('toFloatOrEmpty', ()=>{
-  const fn = toFloatOrEmpty
-  it('should convert input to float or return empty str', ()=>{
-    expect(fn('1.23')).toBe(1.23)
-    expect(fn('')).toBe('')
-    expect(fn('str')).toBe('')
   })
 })
 

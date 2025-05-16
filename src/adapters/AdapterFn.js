@@ -63,7 +63,6 @@ export {
 } from '../utils/isTypeFn';
 import {
   isArr,
-  isNaN,
   isTypeNumber,
   isNumber,
   isStr
@@ -86,12 +85,6 @@ const _fIsNumber = (
 const _crBigValueFrom = point => Big(getPointValue(point));
 const _crDmyFrom = point => mlsToDmy(getPointDate(point));
 
-const _fToFloatOr = dfValue => str => {
-  const _v = parseFloat(str);
-  return isNaN(_v) ? dfValue : _v;
-};
-
-
 export const toTd = (mls) => isNumber(mls)
   ? _toTd(mls)
   : ''
@@ -109,7 +102,6 @@ export const safeReplaceIn = (
 
 export const numberFormat = formatAllNumber
 export const isYNumber = _fIsNumber('y')
-export const toFloatOrEmpty = _fToFloatOr('')
 
 const DF_ERR_MESSAGE = 'No data available for request.'
 export const crError = (

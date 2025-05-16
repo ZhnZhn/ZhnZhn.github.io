@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTimeDate = exports.toTd = exports.toFloatOrEmpty = exports.setItemCaptionTo = exports.setItemCaptionCurrencyRateTo = exports.safeReplaceIn = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isTokenInStr = exports.isSeriesDataCase = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValues = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.domSanitize = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crRouter = exports.crGetRoute = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toUpperCaseFirst = exports.toTimeDate = exports.toTd = exports.setItemCaptionTo = exports.setItemCaptionCurrencyRateTo = exports.safeReplaceIn = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isTokenInStr = exports.isSeriesDataCase = exports.isNumberOrNull = exports.isInRange = exports.isInArrStr = exports.getYmdhmUTC = exports.getYear = exports.getValues = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getCaption = exports.getByPropsFrom = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.domSanitize = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crRouter = exports.crGetRoute = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _dateFormat = require("../charts/dateFormat");
 var _bindTo = require("../utils/bindTo");
@@ -63,10 +63,6 @@ const EMPTY = '';
 const _fIsNumber = pn => p => (0, _isTypeFn.isTypeNumber)(p[pn]) && isFinite(p[pn]);
 const _crBigValueFrom = point => (0, _big.default)((0, _getterPointFn.getPointValue)(point));
 const _crDmyFrom = point => (0, _dateFn.mlsToDmy)((0, _getterPointFn.getPointDate)(point));
-const _fToFloatOr = dfValue => str => {
-  const _v = parseFloat(str);
-  return (0, _isTypeFn.isNaN)(_v) ? dfValue : _v;
-};
 const toTd = mls => (0, _isTypeFn.isNumber)(mls) ? (0, _dateFormat.toTd)(mls) : '';
 exports.toTd = toTd;
 const getCaption = exports.getCaption = _getPropertyFn.getC;
@@ -78,7 +74,6 @@ const safeReplaceIn = (str, from, to) => (0, _isTypeFn.isStr)(str) ? str.replace
 exports.safeReplaceIn = safeReplaceIn;
 const numberFormat = exports.numberFormat = _formatAllNumber.default;
 const isYNumber = exports.isYNumber = _fIsNumber('y');
-const toFloatOrEmpty = exports.toFloatOrEmpty = _fToFloatOr('');
 const DF_ERR_MESSAGE = 'No data available for request.';
 const crError = function (errCaption, message) {
   if (errCaption === void 0) {

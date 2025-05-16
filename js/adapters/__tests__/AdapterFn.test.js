@@ -210,14 +210,6 @@ describe("setItemCaptionCurrencyRateTo", () => {
     expect(option.itemCaption).toBe("EUR/USD");
   });
 });
-describe('toFloatOrEmpty', () => {
-  const fn = _AdapterFn.toFloatOrEmpty;
-  it('should convert input to float or return empty str', () => {
-    expect(fn('1.23')).toBe(1.23);
-    expect(fn('')).toBe('');
-    expect(fn('str')).toBe('');
-  });
-});
 const DATA_ARR = [[0, 0.3], [0, 0.31], [0, 0.29]];
 const DATA_POINT = [{
   x: 0,
