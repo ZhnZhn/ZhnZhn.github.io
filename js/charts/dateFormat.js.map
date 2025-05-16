@@ -1,1 +1,27 @@
-{"version":3,"sources":["../../src/charts/dateFormat.js"],"names":["format","Highcharts","dateFormat","DMY_FORMAT","TDMY_FORMAT","TD_FORMAT","formatDate","toDmy","bind","toTdmy","toTdmyIf","mls","toTd"],"mappings":";;;;;;;AAAA;;AAEA,MAAMA,MAAM,GAAGC,oBAAWC,UAA1B;AAAA,MACEC,UAAU,GAAG,eADf;AAAA,MAEEC,WAAW,GAAG,sBAFhB;AAAA,MAGEC,SAAS,GAAG,mBAHd;AAKO,MAAMC,UAAU,GAAGN,MAAnB;;AACA,MAAMO,KAAK,GAAGP,MAAM,CAACQ,IAAP,CAAY,IAAZ,EAAkBL,UAAlB,CAAd;;AACA,MAAMM,MAAM,GAAGT,MAAM,CAACQ,IAAP,CAAY,IAAZ,EAAkBJ,WAAlB,CAAf;;;AACA,MAAMM,QAAQ,GAAGC,GAAG,IAAIX,MAAM,CAAC,OAAD,EAAUW,GAAV,CAAN,KAAyB,OAAzB,GAC3BJ,KAAK,CAACI,GAAD,CADsB,GAE3BF,MAAM,CAACE,GAAD,CAFH;;;AAGA,MAAMC,IAAI,GAAGZ,MAAM,CAACQ,IAAP,CAAY,IAAZ,EAAkBH,SAAlB,CAAb","sourcesContent":["import Highcharts from 'highcharts';\r\n\r\nconst format = Highcharts.dateFormat\r\n, DMY_FORMAT = '%A, %b %d, %Y'\r\n, TDMY_FORMAT = '%H:%M, %A, %b %d, %Y'\r\n, TD_FORMAT = '%H:%M:%S %d-%m-%Y';\r\n\r\nexport const formatDate = format\r\nexport const toDmy = format.bind(null, DMY_FORMAT)\r\nexport const toTdmy = format.bind(null, TDMY_FORMAT)\r\nexport const toTdmyIf = mls => format('%H:%M', mls) === '00:00'\r\n  ? toDmy(mls)\r\n  : toTdmy(mls)\r\nexport const toTd = format.bind(null, TD_FORMAT)\r\n"],"file":"dateFormat.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/charts/dateFormat.js"
+ ],
+ "file": "../../src/charts/dateFormat.js",
+ "names": [
+  "_highcharts",
+  "_interopRequireDefault",
+  "require",
+  "_bindTo",
+  "formatDate",
+  "exports",
+  "Highcharts",
+  "dateFormat",
+  "DMY_FORMAT_CONFIG",
+  "TDMY_FORMAT_CONFIG",
+  "TD_FORMAT_CONFIG",
+  "toDmy",
+  "bindTo",
+  "toTdmy",
+  "toTdmyIf",
+  "mls",
+  "toTd"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,WAAA,GAAAC,sBAAA,CAAAC,OAAA;AACA,IAAAC,OAAA,GAAAD,OAAA;AAEO,MAAME,UAAU,GAAAC,OAAA,CAAAD,UAAA,GAAGE,mBAAU,CAACC,UAAU;AAE/C,MAAMC,iBAAiB,GAAG,eAAe;EACvCC,kBAAkB,GAAG,sBAAsB;EAC3CC,gBAAgB,GAAG,mBAAmB;AAEjC,MAAMC,KAAK,GAAAN,OAAA,CAAAM,KAAA,GAAG,IAAAC,cAAM,EAACR,UAAU,EAAEI,iBAAiB,CAAC;AACnD,MAAMK,MAAM,GAAAR,OAAA,CAAAQ,MAAA,GAAG,IAAAD,cAAM,EAACR,UAAU,EAAEK,kBAAkB,CAAC;AACrD,MAAMK,QAAQ,GAAGC,GAAG,IAAIX,UAAU,CAAC,OAAO,EAAEW,GAAG,CAAC,KAAK,OAAO,GAC/DJ,KAAK,CAACI,GAAG,CAAC,GACVF,MAAM,CAACE,GAAG,CAAC;AAAAV,OAAA,CAAAS,QAAA,GAAAA,QAAA;AACR,MAAME,IAAI,GAAAX,OAAA,CAAAW,IAAA,GAAG,IAAAJ,cAAM,EAACR,UAAU,EAAEM,gBAAgB,CAAC"
+}
