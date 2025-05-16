@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _AdapterFn = require("../AdapterFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _crAdapterOrderBook = require("../crAdapterOrderBook");
 const _compareByPrice = (a, b) => a[0] - b[0];
 const crTitle = option => (0, _crAdapterOrderBook.crTitleDf)(option) + ' P0';
@@ -21,7 +21,7 @@ const crOrderBook = json => {
   const asks = [],
     bids = [];
   json.forEach(arrItem => {
-    if ((0, _AdapterFn.isTypeNumber)(arrItem[0])) {
+    if ((0, _isTypeFn.isTypeNumber)(arrItem[0])) {
       if (arrItem[2] > 0) {
         bids.push([arrItem[0], arrItem[2], arrItem[1]]);
       } else {

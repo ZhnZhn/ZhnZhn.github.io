@@ -58,7 +58,6 @@ import {
 
 export {
   isArr,
-  isTypeNumber,
   isNumber
 } from '../utils/isTypeFn';
 import {

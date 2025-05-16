@@ -1,4 +1,4 @@
-import { isTypeNumber } from '../AdapterFn';
+import { isTypeNumber } from '../../utils/isTypeFn';
 import {
   crTitleDf,
   crAdapterOrderBook

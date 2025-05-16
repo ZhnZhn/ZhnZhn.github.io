@@ -43,7 +43,6 @@ var _DirectionType = require("../constants/DirectionType");
 var _getterPointFn = require("./getterPointFn");
 var _isTypeFn = require("../utils/isTypeFn");
 exports.isArr = _isTypeFn.isArr;
-exports.isTypeNumber = _isTypeFn.isTypeNumber;
 exports.isNumber = _isTypeFn.isNumber;
 const isNumberOrNull = v => (0, _isTypeFn.isNumber)(v) || v === null;
 exports.isNumberOrNull = isNumberOrNull;
