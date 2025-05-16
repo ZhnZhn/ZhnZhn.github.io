@@ -28,3 +28,5 @@ const _getObjectKeys = Object.keys;
 export const getObjectKeys = value => isObj(value) && !isArr(value)
   ? _getObjectKeys(value)
   : []
+
+export const parseIntBy10 = str => parseInt(str, 10)

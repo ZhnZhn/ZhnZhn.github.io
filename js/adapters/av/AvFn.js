@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.fCrData = exports.fAvApi = exports.crFunctionQuery = exports.REQ_ERROR = void 0;
 var _isEmpty = _interopRequireDefault(require("../../utils/isEmpty"));
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 const API_URL = 'https://www.alphavantage.co/query';
@@ -36,13 +37,13 @@ const fAvApi = getCrQuery => ({
 });
 exports.fAvApi = fAvApi;
 const fCrData = (paramNameY, paramNameX, yConfig) => data => {
-  const _crY = yConfig === '10' ? v => parseInt(v, 10) : yConfig === 'round' ? _AdapterFn.roundBy : parseFloat;
+  const _crY = yConfig === '10' ? _isTypeFn.parseIntBy10 : yConfig === 'round' ? _AdapterFn.roundBy : parseFloat;
   return (data || []).reduce(function (arr, item) {
     if (item === void 0) {
       item = {};
     }
     const _y = _crY(item[paramNameY]);
-    if (!(0, _AdapterFn.isNaN)(_y)) {
+    if ((0, _isTypeFn.isNumber)(_y)) {
       arr.push([(0, _AdapterFn.ymdToUTC)(item[paramNameX]), _y]);
     }
     return arr;

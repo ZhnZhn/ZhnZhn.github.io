@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 const API_URL = 'https://api.bls.gov/publicAPI',
   TS_DATA = 'timeseries/data',
@@ -62,9 +63,9 @@ const _crQueryPeriod = (queryKey, _ref3) => {
   if (!queryKey) {
     return '';
   }
-  const _startyear = parseInt((0, _AdapterFn.getYear)(fromDate), 10),
-    _endyear = parseInt((0, _AdapterFn.getCurrentYear)(), 10);
-  if ((0, _AdapterFn.isNumber)(_startyear) && (0, _AdapterFn.isNumber)(_endyear) && _endyear - _startyear < 21) {
+  const _startyear = (0, _isTypeFn.parseIntBy10)((0, _AdapterFn.getYear)(fromDate)),
+    _endyear = (0, _isTypeFn.parseIntBy10)((0, _AdapterFn.getCurrentYear)());
+  if ((0, _isTypeFn.isNumber)(_startyear) && (0, _isTypeFn.isNumber)(_endyear) && _endyear - _startyear < 21) {
     return `&startyear=${_startyear}&endyear=${_endyear}`;
   }
   return '';
@@ -88,7 +89,7 @@ const BlsApi = {
         series
       } = Results || {},
       _s = (series || [])[0];
-    if (_s && (0, _AdapterFn.isArr)(_s.data)) {
+    if (_s && (0, _isTypeFn.isArr)(_s.data)) {
       return;
     }
     throw (0, _AdapterFn.crError)('', message[0]);

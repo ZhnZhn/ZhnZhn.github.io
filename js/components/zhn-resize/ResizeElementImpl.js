@@ -2,10 +2,10 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _fUseKey = require("../hooks/fUseKey");
-const _isNaN = Number.isNaN,
-  _assign = Object.assign,
+const _assign = Object.assign,
   _initResizeProperties = inst => {
     _assign(inst, {
       id: null,
@@ -20,101 +20,12 @@ class ResizeElementImpl {
       initWidth,
       minWidth,
       maxWidth,
-      step: _step = 10,
-      onResizeAfter: _onResizeAfter
+      step = 10,
+      onResizeAfter
     } = _ref;
-    this._increaseDeltaStep = () => {
-      this.countStep += 1;
-      if (this.countStep > 30) {
-        this.deltaStep = 3;
-      } else if (this.countStep > 15) {
-        this.deltaStep = 2;
-      }
-      if (this.maxDelta - this.delta < 20 || this.delta - this.minDelta < 20) {
-        this.deltaStep = 1;
-      }
-    };
-    this._getStyle = () => {
-      return (0, _uiApi.getRefElementStyle)(this.elementRef) || {};
-    };
-    this._setWidth = width => {
-      this._getStyle().width = width + 'px';
-    };
-    this._getWidth = () => {
-      return parseInt(this._getStyle().width, 10);
-    };
-    this._onResizeAfter = () => {
-      const {
-        onResizeAfter
-      } = this;
-      if ((0, _uiApi.isFn)(onResizeAfter)) {
-        onResizeAfter(this._getWidth());
-      }
-    };
-    this.clearInterval = () => {
-      clearInterval(this.id);
-    };
-    this.toWidth = (width, isOnResizeAfter) => {
-      if (width >= this.minWidth && width <= this.maxWidth) {
-        this.delta = width - this.initWidth;
-        this._setWidth(width);
-        if (isOnResizeAfter) {
-          this._onResizeAfter();
-        }
-      }
-    };
-    this.resizeBy = step => {
-      if (step < 0 && this.delta > this.minDelta || step > 0 && this.delta < this.maxDelta) {
-        this.delta += step;
-        this._setWidth(this.initWidth + this.delta);
-      } else {
-        this.hStopResize();
-      }
-    };
-    this.hKdLeft = evt => {
-      if ((0, _fUseKey.isKeyEnterOrBlank)(evt)) {
-        evt.stopPropagation();
-        this.resizeBy(-this.step);
-      }
-    };
-    this._resizeLeft = () => {
-      this.resizeBy(-this.deltaStep);
-      this._increaseDeltaStep();
-    };
-    this.hKdRight = evt => {
-      if ((0, _fUseKey.isKeyEnterOrBlank)(evt)) {
-        evt.stopPropagation();
-        this.resizeBy(this.step);
-      }
-    };
-    this._resizeRight = () => {
-      this.resizeBy(this.deltaStep);
-      this._increaseDeltaStep();
-    };
-    this._updateDelta = () => {
-      const w = this._getWidth();
-      if (!_isNaN(w)) {
-        this.delta = w - this.initWidth;
-      }
-    };
-    this._startResize = fnResize => {
-      if (this.id !== null) {
-        this._stopResize();
-      }
-      this._updateDelta();
-      this.id = setInterval(fnResize, 5);
-    };
-    this._stopResize = () => {
-      this.clearInterval();
-      _initResizeProperties(this);
-    };
-    this.hStopResize = () => {
-      this._stopResize();
-      this._onResizeAfter();
-    };
     this.elementRef = elementRef;
-    this.step = _step;
-    this.onResizeAfter = _onResizeAfter;
+    this.step = step;
+    this.onResizeAfter = onResizeAfter;
     this.initWidth = initWidth;
     this.minWidth = minWidth;
     this.maxWidth = maxWidth;
@@ -125,6 +36,95 @@ class ResizeElementImpl {
     this.hStartResizeLeft = (0, _uiApi.bindTo)(this._startResize, this._resizeLeft);
     this.hStartResizeRight = (0, _uiApi.bindTo)(this._startResize, this._resizeRight);
   }
+  _increaseDeltaStep = () => {
+    this.countStep += 1;
+    if (this.countStep > 30) {
+      this.deltaStep = 3;
+    } else if (this.countStep > 15) {
+      this.deltaStep = 2;
+    }
+    if (this.maxDelta - this.delta < 20 || this.delta - this.minDelta < 20) {
+      this.deltaStep = 1;
+    }
+  };
+  _getStyle = () => {
+    return (0, _uiApi.getRefElementStyle)(this.elementRef) || {};
+  };
+  _setWidth = width => {
+    this._getStyle().width = width + 'px';
+  };
+  _getWidth = () => {
+    return (0, _isTypeFn.parseIntBy10)(this._getStyle().width);
+  };
+  _onResizeAfter = () => {
+    const {
+      onResizeAfter
+    } = this;
+    if ((0, _isTypeFn.isFn)(onResizeAfter)) {
+      onResizeAfter(this._getWidth());
+    }
+  };
+  clearInterval = () => {
+    clearInterval(this.id);
+  };
+  toWidth = (width, isOnResizeAfter) => {
+    if (width >= this.minWidth && width <= this.maxWidth) {
+      this.delta = width - this.initWidth;
+      this._setWidth(width);
+      if (isOnResizeAfter) {
+        this._onResizeAfter();
+      }
+    }
+  };
+  resizeBy = step => {
+    if (step < 0 && this.delta > this.minDelta || step > 0 && this.delta < this.maxDelta) {
+      this.delta += step;
+      this._setWidth(this.initWidth + this.delta);
+    } else {
+      this.hStopResize();
+    }
+  };
+  hKdLeft = evt => {
+    if ((0, _fUseKey.isKeyEnterOrBlank)(evt)) {
+      evt.stopPropagation();
+      this.resizeBy(-this.step);
+    }
+  };
+  _resizeLeft = () => {
+    this.resizeBy(-this.deltaStep);
+    this._increaseDeltaStep();
+  };
+  hKdRight = evt => {
+    if ((0, _fUseKey.isKeyEnterOrBlank)(evt)) {
+      evt.stopPropagation();
+      this.resizeBy(this.step);
+    }
+  };
+  _resizeRight = () => {
+    this.resizeBy(this.deltaStep);
+    this._increaseDeltaStep();
+  };
+  _updateDelta = () => {
+    const w = this._getWidth();
+    if ((0, _isTypeFn.isNumber)(w)) {
+      this.delta = w - this.initWidth;
+    }
+  };
+  _startResize = fnResize => {
+    if (this.id !== null) {
+      this._stopResize();
+    }
+    this._updateDelta();
+    this.id = setInterval(fnResize, 5);
+  };
+  _stopResize = () => {
+    this.clearInterval();
+    _initResizeProperties(this);
+  };
+  hStopResize = () => {
+    this._stopResize();
+    this._onResizeAfter();
+  };
 }
 var _default = exports.default = ResizeElementImpl;
 //# sourceMappingURL=ResizeElementImpl.js.map

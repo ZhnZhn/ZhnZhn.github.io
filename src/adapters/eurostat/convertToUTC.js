@@ -1,4 +1,7 @@
-import { isNumber } from '../../utils/isTypeFn';
+import {
+  isNumber,
+  parseIntBy10
+} from '../../utils/isTypeFn';
 import { getNumberOfDays } from '../../utils/dateFn';
 
 const _crUtcFromYm = (
@@ -7,14 +10,14 @@ const _crUtcFromYm = (
   monthMultiplyBy
 ) => {
   const arrDate = str.split(delimeter)
-  , _month = parseInt(arrDate[1], 10)*monthMultiplyBy
+  , _month = parseIntBy10(arrDate[1])*monthMultiplyBy
   , _day = getNumberOfDays(arrDate[0], _month)
   return Date.UTC(arrDate[0], _month-1, _day);
 }
 
 const _isDateByMonth = (
   period
-) => isNumber(parseInt(period, 10));
+) => isNumber(parseIntBy10(period));
 
 const _yearToUTC = (
   year
@@ -35,7 +38,7 @@ const convertToUTC = (str) => {
       : _yearToUTC(_arrS[0]);
   }
   return _yearToUTC(
-    parseInt(str, 10) > 1970
+    parseIntBy10(str) > 1970
       ? str
       : 1970
   );

@@ -1,4 +1,8 @@
 import {
+  parseIntBy10
+} from '../../utils/isTypeFn';
+
+import {
   isInRange,
   fCheckResponse
 } from '../AdapterFn';
@@ -44,7 +48,7 @@ const _crTreeMapUrl = (
   } = option
   , geo = items[0].v;
 
-  if (!isInRange(parseInt(time), 2018, 2024)) {
+  if (!isInRange(parseIntBy10(time), 2018, 2024)) {
     const _typeOfChartToken = _isTreeMap
       ? 'TreeMap'
       : 'Bar by metric';

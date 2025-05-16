@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.toExchangeList = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 var _toTableFn = require("../toTableFn");
 const HEADERS = [(0, _toTableFn.crRankProps)(), {
@@ -25,11 +26,11 @@ const _filterData = (data, option) => {
     _fromRank = (pageNumber - 1) * NUMBER_PER_PAGE_ITEMS,
     _toRank = pageNumber * NUMBER_PER_PAGE_ITEMS;
   return data.filter(item => {
-    const _rankNumber = parseInt(item.rank);
+    const _rankNumber = (0, _isTypeFn.parseIntBy10)(item.rank);
     return _rankNumber > _fromRank && _rankNumber <= _toRank;
   });
 };
-const _crOnDate = timestamp => (0, _AdapterFn.isNumber)(timestamp) ? (0, _AdapterFn.mlsToDmy)(timestamp) : "";
+const _crOnDate = timestamp => (0, _isTypeFn.isNumber)(timestamp) ? (0, _AdapterFn.mlsToDmy)(timestamp) : "";
 const toExchangeList = exports.toExchangeList = {
   toConfig(json, option) {
     const {

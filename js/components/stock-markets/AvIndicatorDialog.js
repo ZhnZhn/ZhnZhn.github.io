@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
@@ -11,7 +12,6 @@ var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"
 var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _jsxRuntime = require("react/jsx-runtime");
-const _isNaN = Number.isNaN;
 const DF_INDICATOR = 'SMA',
   DF_PERIOD = 30,
   DF_FOR_DAYS = 501,
@@ -20,10 +20,10 @@ const _isValueBlank = value => (value + '').trim() === '';
 const _testTicket = value => !_isValueBlank(value);
 const _testInRangeOrEmpty = (min, max) => value => {
   if (_isValueBlank(value)) {
-    return true;
+    return !0;
   }
-  const n = parseInt((value + '').trim(), 10);
-  return !_isNaN(n) && n > min && n < max;
+  const n = (0, _isTypeFn.parseIntBy10)((value + '').trim());
+  return !(0, _isTypeFn.isNumber)(n) && n > min && n < max;
 };
 const _testPeriod = _testInRangeOrEmpty(0, 201);
 const _testForDays = _testInRangeOrEmpty(250, 2500);
@@ -53,7 +53,7 @@ const AvIndicatorDialog = (0, _memoIsShow.default)(_ref => {
   } = _ref;
   const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
     [isShowOptions, toggleOptions] = (0, _useToggle.useToggle)(),
-    [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(true),
+    [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(!0),
     _toolbarButtons = (0, _useToolbar.default)({
       toggleLabels,
       toggleOptions,
@@ -62,7 +62,7 @@ const AvIndicatorDialog = (0, _memoIsShow.default)(_ref => {
     _refTicket = (0, _uiApi.useRef)(),
     _refPeriod = (0, _uiApi.useRef)(),
     _refForDays = (0, _uiApi.useRef)(),
-    [_refIsSecondYAxis, _hCheckSecondYAxis, _hUnCheckSecondYAxis] = (0, _useProperty.useRefBool)(false),
+    [_refIsSecondYAxis, _hCheckSecondYAxis, _hUnCheckSecondYAxis] = (0, _useProperty.useRefBool)(!1),
     [setIndicator, getIndicator] = (0, _useProperty.useProperty)()
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hLoad = (0, _uiApi.useCallback)(() => {

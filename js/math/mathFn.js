@@ -81,7 +81,7 @@ const crValueMoving = function (_temp) {
 exports.crValueMoving = crValueMoving;
 const toFixed = value => {
   const bValue = (0, _big.default)(value);
-  return bValue.gt('10') ? parseInt(bValue.toFixed(0), 10) : parseFloat(bValue.toFixed(2));
+  return bValue.gt('10') ? (0, _isTypeFn.parseIntBy10)(bValue.toFixed(0)) : parseFloat(bValue.toFixed(2));
 };
 exports.toFixed = toFixed;
 const toFixedNumber = value => !(0, _isTypeFn.isNumber)(value) ? value : roundBy(value, value < 0.0001 ? 8 : value < 10 ? 4 : value < 10000 ? 2 : 0);

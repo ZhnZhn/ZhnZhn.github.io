@@ -2,8 +2,8 @@ import Big from 'big.js';
 
 import {
   isArr,
-  isNaN,
-  isNumber
+  isNumber,
+  parseIntBy10
 } from '../utils/isTypeFn';
 
 import { dmyToUTC } from '../utils/dateFn';
@@ -157,14 +157,13 @@ export const mean = (data) => {
     }
   }
   const _maxIndex = data.length - 1
-  , _avg = _numberOfPoints !== 0
-      ? parseInt(_sum.div(_numberOfPoints).toFixed(0), 10)
-      : NaN;
-  return isNaN(_avg) ? []
-   : [
-       [getX(data[0]), _avg],
-       [getX(data[_maxIndex]), _avg]
-     ];
+  , _avg = _numberOfPoints === 0
+      ? ''
+      : parseIntBy10(_sum.div(_numberOfPoints).toFixed(0))
+  return isNumber(_avg) ? [
+      [getX(data[0]), _avg],
+      [getX(data[_maxIndex]), _avg]
+    ] : [];
 }
 
 export const median = (data) => {

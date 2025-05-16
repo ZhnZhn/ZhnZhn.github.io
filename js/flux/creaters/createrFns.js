@@ -3,8 +3,10 @@
 exports.__esModule = true;
 exports.crRoundTo = exports.crItemKey = exports.crCaptions = void 0;
 var _arrFn = require("../../utils/arrFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _getPropertyFn = require("../../utils/getPropertyFn");
 var _toUpperCaseFirst = require("../../utils/toUpperCaseFirst");
+var _mathFn = require("../../math/mathFn");
 const _getC = item => (0, _toUpperCaseFirst.toUpperCaseFirst)(item && item.sc || (0, _getPropertyFn.getC)(item));
 const _isArr = Array.isArray;
 const _crItemCaption = (items, titles) => {
@@ -46,8 +48,8 @@ const crCaptions = (items, titles) => {
 };
 exports.crCaptions = crCaptions;
 const crRoundTo = rt => {
-  const _rt = parseInt(rt, 10);
-  return _rt > -1 && _rt < 4 ? _rt : void 0;
+  const _rt = (0, _isTypeFn.parseIntBy10)(rt);
+  return (0, _mathFn.isInRange)(_rt, -1, 4) ? _rt : void 0;
 };
 exports.crRoundTo = crRoundTo;
 //# sourceMappingURL=createrFns.js.map

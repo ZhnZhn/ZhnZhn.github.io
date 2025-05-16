@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
@@ -45,7 +46,7 @@ const CL_SCROLL_ITEMS = (0, _styleFn.crScrollYCn)('scroll-items')
 const _isDataForContainer = (data, chartType) => data === chartType || data && data.chartType === chartType;
 const _hasBtsResize = (refEl, initialWidth, caption) => {
   const _style = (0, _uiApi.getRefElementStyle)(refEl),
-    _widthEl = _style ? parseInt(_style.width, 10) || initialWidth : initialWidth;
+    _widthEl = _style ? (0, _isTypeFn.parseIntBy10)(_style.width) || initialWidth : initialWidth;
   return _widthEl > caption.length * 10 + 155;
 };
 const DF_ONS_SET_ACTIVE = () => {};
@@ -69,7 +70,7 @@ const ChartContainer = props => {
     {
       configs
     } = state,
-    [isShow, showChartContainer, hideChartContainer] = (0, _useBool.useBool)(true)
+    [isShow, showChartContainer, hideChartContainer] = (0, _useBool.useBool)(!0)
 
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hHideChartContainer = (0, _uiApi.useCallback)(() => {

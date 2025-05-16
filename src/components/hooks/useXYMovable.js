@@ -1,6 +1,10 @@
 import {
   isArr,
   isFn,
+  parseIntBy10
+} from '../../utils/isTypeFn';
+
+import {
   useEffect,
   getRefValue,
   getClientX,
@@ -19,12 +23,12 @@ const _assign = Object.assign
 ? ['touchstart','touchmove','touchcancel','touchend']
 : ['mousedown','mousemove','mouseleave','mouseup'];
 
-const EVENT_OPTIONS = { passive: true }
-, MOVE_EVENT_OPTIONS = { passive: false };
+const EVENT_OPTIONS = { passive: !0 }
+, MOVE_EVENT_OPTIONS = { passive: !1 };
 
 const _fGetIntStyleProperty = (
   propName
-) => (style) => parseInt(style[propName], 10)
+) => (style) => parseIntBy10(style[propName])
 , _getIntStyleTop = _fGetIntStyleProperty('top')
 , _getIntStyleLeft = _fGetIntStyleProperty('left');
 
@@ -82,7 +86,7 @@ const _isInitEvent = (
     for(let i=0; i<_composedPath.length; i++){
       const _el = _composedPath[i];
       if (_isExcludeElement(_el)) {
-        return false;
+        return !1;
       }
       if (_el === element) {
         break;
@@ -90,7 +94,7 @@ const _isInitEvent = (
     }
   }
 
-  if (!HAS_TOUCH_EVENTS) { return true; }
+  if (!HAS_TOUCH_EVENTS) { return !0; }
 
   const {
     left,

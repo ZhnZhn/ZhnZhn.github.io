@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _inputFn = require("../inputFn");
 var _styleFn = require("../styleFn");
@@ -94,7 +95,7 @@ const MinusPeriod = _ref2 => {
     })]
   });
 };
-const _fChangeNumber = (ref, dfValue) => n => (0, _uiApi.setRefValue)(ref, parseInt(n, 10) || dfValue);
+const _fChangeNumber = (ref, dfValue) => n => (0, _uiApi.setRefValue)(ref, (0, _isTypeFn.parseIntBy10)(n) || dfValue);
 const RowType1 = _ref3 => {
   let {
     is,
@@ -107,7 +108,7 @@ const RowType1 = _ref3 => {
     _refPeriod = (0, _uiApi.useRef)(DF_PERIOD),
     _refSeriaType = (0, _uiApi.useRef)('column'),
     _refSeria = (0, _uiApi.useRef)(DF_SERIA),
-    _refOnTop = (0, _uiApi.useRef)(false),
+    _refOnTop = (0, _uiApi.useRef)(!1),
     _onColor = color => (0, _uiApi.setRefValue)(_refColor, color),
     _onChangePeriod = _fChangeNumber(_refPeriod, DF_PERIOD),
     _onToggleColumn = is => (0, _uiApi.setRefValue)(_refSeriaType, is ? 'column' : 'spline'),
@@ -142,7 +143,7 @@ const RowType1 = _ref3 => {
         captionStyle: S_PL_6,
         chbCn: _styleFn.CL_CHB_BLACK,
         btCn: _styleFn.CL_BLACK,
-        initialValue: true,
+        initialValue: !0,
         onToggle: _onToggleColumn
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: S_ROW_2,

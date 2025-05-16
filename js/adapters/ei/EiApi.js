@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 const DATA_URL = './data/ei';
@@ -32,7 +33,7 @@ const _crTreeMapUrl = (option, _isTreeMap) => {
       dfTmToken
     } = option,
     geo = items[0].v;
-  if (!(0, _AdapterFn.isInRange)(parseInt(time), 2018, 2024)) {
+  if (!(0, _AdapterFn.isInRange)((0, _isTypeFn.parseIntBy10)(time), 2018, 2024)) {
     const _typeOfChartToken = _isTreeMap ? 'TreeMap' : 'Bar by metric';
     throw {
       message: `${_typeOfChartToken} only available for 2019-2023`

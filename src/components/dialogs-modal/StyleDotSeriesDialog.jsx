@@ -1,4 +1,8 @@
 import {
+  parseIntBy10
+} from '../../utils/isTypeFn';
+
+import {
   useRef,
   useMemo,
   getInputValue,
@@ -42,7 +46,7 @@ const _setRadius = (
 ) => {
   const { options } = seria;
   options.marker.radius = value
-  seria.update(options, false)
+  seria.update(options, !1)
 };
 
 const _getInputValue = (
@@ -51,7 +55,7 @@ const _getInputValue = (
   max,
   dfValue
 ) => {
-  const value = parseInt(getInputValue(refInput), 10);
+  const value = parseIntBy10(getInputValue(refInput));
   return value>=min && value<=max
     ? value
     : dfValue;
@@ -74,7 +78,7 @@ const RowInputRadius = ({
      styleRoot={S_INLINE}
      styleCaption={{...S_CAPTION, ...{ color }}}
      styleInput={S_INPUT}
-     caption={caption}          
+     caption={caption}
   />
 );
 
@@ -88,13 +92,13 @@ const StyleDotSeriesDialog = memoIsShow(({
 
   , _refInputR1 = useRef()
   , _refInputR2 = useRef()
-  , _refIsLabels = useRef(false)
+  , _refIsLabels = useRef(!1)
   , [
     _hEnableLabels,
     _hDisableLabels
   ] = useMemo(() => [
-    () => { setRefValue(_refIsLabels, true) },
-    () => { setRefValue(_refIsLabels, false) }
+    () => { setRefValue(_refIsLabels, !0) },
+    () => { setRefValue(_refIsLabels, !1) }
   ], [])
   , _hApply = useMemo(() => () => {
     const { chart } = data

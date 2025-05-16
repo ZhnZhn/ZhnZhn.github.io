@@ -1,4 +1,8 @@
 import {
+  parseIntBy10
+} from '../../utils/isTypeFn';
+
+import {
   useRef,
   useState,
   useCallback,
@@ -74,7 +78,7 @@ const _hasBtsResize = (
 ) => {
   const _style = getRefElementStyle(refEl)
   , _widthEl = _style
-     ? parseInt(_style.width, 10) || initialWidth
+     ? parseIntBy10(_style.width) || initialWidth
      : initialWidth;
   return _widthEl > caption.length * 10 + 155;
 };
@@ -108,7 +112,7 @@ const ChartContainer = (props) => {
     isShow,
     showChartContainer,
     hideChartContainer
-  ] = useBool(true)
+  ] = useBool(!0)
 
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hHideChartContainer = useCallback(() => {

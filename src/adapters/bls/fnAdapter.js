@@ -1,7 +1,10 @@
 import { joinByColon } from '../../utils/arrFn';
-
 import {
   isTypeNumber,
+  parseIntBy10
+} from '../../utils/isTypeFn';
+
+import {
   ymdToUTC
 } from '../AdapterFn';
 
@@ -34,7 +37,7 @@ export const crData = (
     period='',
     value
   } = p
-  , _m = parseInt((''+period).replace('M',''), 10);
+  , _m = parseIntBy10((''+period).replace('M',''));
   if (isTypeNumber(_m) && _m>0 && _m<13) {
     _data.push({
        x: ymdToUTC(`${year}-${_m}`),

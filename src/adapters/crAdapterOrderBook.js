@@ -1,4 +1,8 @@
 import {
+  parseIntBy10
+} from '../utils/isTypeFn';
+
+import {
   FN_IDENTITY,
   FN_NOOP,
   toTd
@@ -13,7 +17,7 @@ export const fCrTitle = (
   isSeconds
 ) => (option, json) => {
   const _multipleBy = isSeconds ? 1000 : 1
-  , strDate = toTd(parseInt(json[jsonPn], 10)*_multipleBy);
+  , strDate = toTd(parseIntBy10(json[jsonPn])*_multipleBy);
   return `${crTitleDf(option)} ${strDate}`;
 }
 

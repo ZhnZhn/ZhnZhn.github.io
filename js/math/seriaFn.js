@@ -115,8 +115,8 @@ const mean = data => {
     }
   }
   const _maxIndex = data.length - 1,
-    _avg = _numberOfPoints !== 0 ? parseInt(_sum.div(_numberOfPoints).toFixed(0), 10) : NaN;
-  return (0, _isTypeFn.isNaN)(_avg) ? [] : [[getX(data[0]), _avg], [getX(data[_maxIndex]), _avg]];
+    _avg = _numberOfPoints === 0 ? '' : (0, _isTypeFn.parseIntBy10)(_sum.div(_numberOfPoints).toFixed(0));
+  return (0, _isTypeFn.isNumber)(_avg) ? [[getX(data[0]), _avg], [getX(data[_maxIndex]), _avg]] : [];
 };
 exports.mean = mean;
 const median = data => {

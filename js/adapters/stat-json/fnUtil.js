@@ -3,17 +3,18 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.toYMD = exports.toUTC = exports.compose = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _compose2 = _interopRequireDefault(require("../../utils/compose"));
 const _toUTC = Date.UTC;
 const _toDayUTC = str => {
   const _arrYear = str.split('M'),
     _arrMonth = _arrYear[1].split('D'),
-    _month = parseInt(_arrMonth[0], 10) - 1;
+    _month = (0, _isTypeFn.parseIntBy10)(_arrMonth[0]) - 1;
   return _toUTC(_arrYear[0], _month, _arrMonth[1]);
 };
 const _fToUTC = monthPeriod => (delimeterChart, str) => {
     const arrDate = str.split(delimeterChart),
-      _month = parseInt(arrDate[1], 10) * monthPeriod - 1,
+      _month = (0, _isTypeFn.parseIntBy10)(arrDate[1]) * monthPeriod - 1,
       _day = _month === 1 ? 28 : 30;
     return _toUTC(arrDate[0], _month, _day);
   },
@@ -43,7 +44,7 @@ const toUTC = (str, hasPerJanuary) => {
   const [_year, _month] = str.split(' '),
     _m = _month && _hmMonth[_month];
   if (_m) {
-    return _toMonthUTC('M', _year + "M" + _m);
+    return _toMonthUTC('M', `${_year}M${_m}`);
   }
   const _isInclude = _fIsInclude(str);
   if (_isInclude('M')) {

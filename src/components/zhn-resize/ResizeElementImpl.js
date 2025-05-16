@@ -1,13 +1,17 @@
 import {
   isFn,
+  isNumber,
+  parseIntBy10
+} from '../../utils/isTypeFn';
+
+import {
   bindTo,
   getRefElementStyle
 } from '../uiApi';
 
 import { isKeyEnterOrBlank } from '../hooks/fUseKey';
 
-const _isNaN = Number.isNaN
-, _assign = Object.assign
+const _assign = Object.assign
 , _initResizeProperties = inst => {
   _assign(inst, {
     id: null,
@@ -65,7 +69,7 @@ class ResizeElementImpl {
   }
 
   _getWidth = () => {
-    return parseInt(this._getStyle().width, 10)
+    return parseIntBy10(this._getStyle().width)
   }
 
   _onResizeAfter = () => {
@@ -122,7 +126,7 @@ class ResizeElementImpl {
 
   _updateDelta = () => {
     const w = this._getWidth();
-    if (!_isNaN(w)) {
+    if (isNumber(w)) {
       this.delta = w - this.initWidth
     }
   }

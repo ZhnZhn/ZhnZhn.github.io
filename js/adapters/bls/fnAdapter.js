@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.crData = exports.crConfOption = void 0;
 var _arrFn = require("../../utils/arrFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 const _crZhConfig = _ref => {
   let {
@@ -37,8 +38,8 @@ const crData = json => json.Results.series[0].data.reduce((_data, p) => {
       period = '',
       value
     } = p,
-    _m = parseInt(('' + period).replace('M', ''), 10);
-  if ((0, _AdapterFn.isTypeNumber)(_m) && _m > 0 && _m < 13) {
+    _m = (0, _isTypeFn.parseIntBy10)(('' + period).replace('M', ''));
+  if ((0, _isTypeFn.isTypeNumber)(_m) && _m > 0 && _m < 13) {
     _data.push({
       x: (0, _AdapterFn.ymdToUTC)(`${year}-${_m}`),
       y: parseFloat(value)

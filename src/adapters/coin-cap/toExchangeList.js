@@ -1,5 +1,9 @@
 import {
   isNumber,
+  parseIntBy10
+} from "../../utils/isTypeFn";
+
+import {
   mlsToDmy
 } from "../AdapterFn";
 
@@ -36,7 +40,7 @@ const _filterData = (
   , _fromRank = (pageNumber-1)*NUMBER_PER_PAGE_ITEMS
   , _toRank = pageNumber*NUMBER_PER_PAGE_ITEMS;
   return data.filter(item => {
-    const _rankNumber = parseInt(item.rank);
+    const _rankNumber = parseIntBy10(item.rank);
     return _rankNumber > _fromRank && _rankNumber <= _toRank;
   })
 };

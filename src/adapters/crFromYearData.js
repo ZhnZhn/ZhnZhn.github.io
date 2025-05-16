@@ -1,5 +1,9 @@
 import {
   isNumber,
+  parseIntBy10
+} from '../utils/isTypeFn';
+
+import {
   ymdToUTC
 } from './AdapterFn';
 
@@ -9,7 +13,7 @@ const crFromYearData = (
   json,
   option
 ) => {
-  const _fromYear = parseInt(json.fromYear, 10)
+  const _fromYear = parseIntBy10(json.fromYear)
   , _fromDateUTC = ymdToUTC(option.fromDate)
   , _isPoint = isNumber(_fromDateUTC)
      ? mls => mls > _fromDateUTC

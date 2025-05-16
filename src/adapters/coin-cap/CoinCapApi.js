@@ -1,5 +1,9 @@
 import {
   isArr,
+  parseIntBy10
+} from "../../utils/isTypeFn";
+
+import {
   assign,
   crError,
   getValues,
@@ -28,13 +32,13 @@ const _crAssetListUrl = (
   _setTitleTo(option,
     `By USD Market Cap Page: ${offset} (${limit})`
    )
-  return `${API_URL}/assets?limit=${limit}&offset=${(parseInt(offset, 10)-1)*(parseInt(limit, 10))}`;
+  return `${API_URL}/assets?limit=${limit}&offset=${(parseIntBy10(offset)-1)*(parseIntBy10(limit))}`;
 };
 
 const _crExchangeListUrl = (
   option
 ) => {
-  const _pageNumber = parseInt(getValues(option)[0], 10) || 1;
+  const _pageNumber = parseIntBy10(getValues(option)[0]) || 1;
   option.pageNumber = _pageNumber
   _setTitleTo(option,
     `Exchange List: Page ${_pageNumber}`

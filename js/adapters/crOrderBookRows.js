@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _arrFn = require("../utils/arrFn");
+var _isTypeFn = require("../utils/isTypeFn");
 var _AdapterFn = require("./AdapterFn");
 var _toTableFn = require("./toTableFn");
 const _crBgStyleProps = isLeft => isLeft ? ["to left", "#184416"] : ["to right", "#6c3632"];
@@ -27,7 +28,7 @@ const _calcTotal = (arr, valueIndex, len) => {
 };
 const _crBgStyle = (onePerc, strV, isLeft) => {
   try {
-    const perc = parseInt((0, _big.default)(strV).div(onePerc).toFixed(0), 10),
+    const perc = (0, _isTypeFn.parseIntBy10)((0, _big.default)(strV).div(onePerc).toFixed(0)),
       [to, color] = _crBgStyleProps(isLeft);
     return {
       background: `linear-gradient(${to}, ${color} ${perc}%, transparent ${perc}% ${100 - perc}%)`
@@ -57,7 +58,7 @@ const crOrderBookRows = (json, limit) => {
       bids,
       asks
     } = json,
-    _isOrderNumber = (0, _AdapterFn.isNumber)(asks[0][2]),
+    _isOrderNumber = (0, _isTypeFn.isNumber)(asks[0][2]),
     _len = limit || bids.length,
     rows = [],
     _totalBids = _calcTotal(bids, 1, _len),

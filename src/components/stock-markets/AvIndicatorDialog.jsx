@@ -1,4 +1,9 @@
 import {
+  isNumber,
+  parseIntBy10
+} from '../../utils/isTypeFn';
+
+import {
   useRef,
   useCallback,
   getRefValue,
@@ -16,8 +21,6 @@ import useToolbar from '../dialogs/hooks/useToolbar';
 
 import D from '../dialogs/DialogCell'
 
-const _isNaN = Number.isNaN;
-
 const DF_INDICATOR = 'SMA'
 , DF_PERIOD = 30
 , DF_FOR_DAYS = 501
@@ -33,10 +36,10 @@ const _testInRangeOrEmpty = (
   max
 ) => (value) => {
   if (_isValueBlank(value)) {
-    return true;
+    return !0;
   }
-  const n = parseInt((value+'').trim(), 10);
-  return !_isNaN(n)
+  const n = parseIntBy10((value+'').trim());
+  return !isNumber(n)
     && n>min
     && n<max;
 }
@@ -80,7 +83,7 @@ const AvIndicatorDialog = memoIsShow(({
   , [
     isShowLabels,
     toggleLabels
-  ] = useToggle(true)
+  ] = useToggle(!0)
   , _toolbarButtons = useToolbar({
     toggleLabels,
     toggleOptions,
@@ -93,7 +96,7 @@ const AvIndicatorDialog = memoIsShow(({
     _refIsSecondYAxis,
     _hCheckSecondYAxis,
     _hUnCheckSecondYAxis
-  ] = useRefBool(false)
+  ] = useRefBool(!1)
   , [
     setIndicator,
     getIndicator

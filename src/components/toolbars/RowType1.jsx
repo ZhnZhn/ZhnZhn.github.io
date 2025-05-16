@@ -1,4 +1,8 @@
 import {
+  parseIntBy10
+} from '../../utils/isTypeFn';
+
+import {
   useRef,
   getRefValue,
   setRefValue
@@ -99,7 +103,7 @@ const MinusPeriod = ({
 const _fChangeNumber = (
   ref,
   dfValue
-) => n => setRefValue(ref, parseInt(n, 10) || dfValue);
+) => n => setRefValue(ref, parseIntBy10(n) || dfValue);
 
 const RowType1 = ({
   is,
@@ -112,7 +116,7 @@ const RowType1 = ({
   , _refPeriod = useRef(DF_PERIOD)
   , _refSeriaType = useRef('column')
   , _refSeria = useRef(DF_SERIA)
-  , _refOnTop = useRef(false)
+  , _refOnTop = useRef(!1)
   , _onColor = color => setRefValue(_refColor, color)
   , _onChangePeriod = _fChangeNumber(_refPeriod, DF_PERIOD)
   , _onToggleColumn = is => setRefValue(_refSeriaType, is ? 'column' : 'spline')
@@ -153,7 +157,7 @@ const RowType1 = ({
         captionStyle={S_PL_6}
         chbCn={CL_CHB_BLACK}
         btCn={CL_BLACK}
-        initialValue={true}
+        initialValue={!0}
         onToggle={_onToggleColumn}
       />
       <div style={S_ROW_2}>

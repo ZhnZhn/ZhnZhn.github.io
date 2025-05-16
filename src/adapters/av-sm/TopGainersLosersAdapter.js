@@ -1,10 +1,14 @@
 import {
+  isArr,
+  parseIntBy10
+} from "../../utils/isTypeFn";
+
+import {
   crStyleBold,
   crTableOptions
 } from "../toTableFn";
 
 import {
-  isArr,
   roundBy
 } from "./fnAdapter";
 
@@ -54,7 +58,7 @@ const _crRows = (
   p: _roundBy2(item.price),
   cha: _roundBy2(item.change_amount),
   chp: _roundBy2((item.change_percentage || "").replace("%")),
-  v: parseInt(item.volume, 10)
+  v: parseIntBy10(item.volume)
 })): [];
 
 const _crConfig = (

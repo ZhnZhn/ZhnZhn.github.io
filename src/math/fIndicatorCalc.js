@@ -1,4 +1,8 @@
-import { isNumber } from '../utils/isTypeFn';
+import {
+  isNumber,
+  parseIntBy10
+} from '../utils/isTypeFn';
+
 import { crPointGetter } from './seriaHelperFn';
 
 const _crIndicatorData = (
@@ -28,7 +32,7 @@ const _crIndicatorData = (
 
 const fIndicatorCalc = (calc) => (d, rt=1) => {
   const [getX, getY] = crPointGetter(d)
-  , _rt = parseInt(rt, 10);
+  , _rt = parseIntBy10(rt);
   if (!(getX
         && isNumber(_rt)
         && _rt > 0

@@ -12,7 +12,7 @@ const sma = function (data, period) {
   }
   const [_data, _dataX] = (0, _seriaHelperFn.crDataArrays)(data),
     _dataLength = _data.length,
-    _period = parseInt(period, 10) - 1,
+    _period = (0, _isTypeFn.parseIntBy10)(period) - 1,
     dataSma = [];
   if (_dataLength === 0 || !(0, _isTypeFn.isNumber)(_period) || _period > _dataLength) {
     return dataSma;

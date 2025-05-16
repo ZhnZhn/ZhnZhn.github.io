@@ -1,5 +1,8 @@
 import isEmpty from '../../utils/isEmpty';
-import { isNumber } from '../../utils/isTypeFn';
+import {
+  isNumber,
+  parseIntBy10
+} from '../../utils/isTypeFn';
 
 import {
   crError,
@@ -53,7 +56,7 @@ export const fCrData = (
   yConfig
 ) => (data) => {
   const _crY = yConfig === '10'
-    ? (v) => parseInt(v, 10)
+    ? parseIntBy10
     : yConfig === 'round'
        ? roundBy
        : parseFloat;

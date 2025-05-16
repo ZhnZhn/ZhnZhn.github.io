@@ -1,5 +1,9 @@
 import {
   isFn,
+  parseIntBy10
+} from '../../utils/isTypeFn';
+
+import {
   useRef,
   useMemo,
   getRefValue,
@@ -69,7 +73,7 @@ const useChartContainerMenuMore = (
   , _fitToWidth = useMemo(() => () => {
     const { width } = getRefElementStyle(_refRootElement) || {};
     if (width) {
-      _hResizeAfter(parseInt(width, 10))
+      _hResizeAfter(parseIntBy10(width))
     }
   }, [])
   //_hResizeAfter

@@ -1,4 +1,5 @@
 //import PropTypes from 'prop-types';
+import { parseIntBy10 } from '../../utils/isTypeFn';
 
 import calcDirection from './dataProcessing/calcDirection';
 import COLORS  from './Colors';
@@ -8,9 +9,14 @@ const S_BARS = {fill: 'slategray'};
 const _ceil = Math.ceil
 , _max = Math.max;
 
-const _crWidth = (points, strokeWidth) =>
- points && points.length > 1
-   ? _ceil(_max(0, points[1].x - points[0].x - parseInt(strokeWidth, 10)))
+const _crWidth = (
+  points,
+  strokeWidth
+) => points && points.length > 1
+   ? _ceil(_max(
+       0,
+       points[1].x - points[0].x - parseIntBy10(strokeWidth)
+     ))
    : 0;
 
 const Bars = ({

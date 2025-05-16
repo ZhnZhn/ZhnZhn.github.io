@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _toTableFn = require("../toTableFn");
 var _fnAdapter = require("./fnAdapter");
 const ID = "alp_perf",
@@ -27,12 +28,12 @@ const ID = "alp_perf",
     dsStyle: S_DS
   });
 const _roundBy2 = str => (0, _fnAdapter.roundBy)(parseFloat(str), 2);
-const _crRows = rows => (0, _fnAdapter.isArr)(rows) ? rows.map(item => ({
+const _crRows = rows => (0, _isTypeFn.isArr)(rows) ? rows.map(item => ({
   id: item.ticker,
   p: _roundBy2(item.price),
   cha: _roundBy2(item.change_amount),
   chp: _roundBy2((item.change_percentage || "").replace("%")),
-  v: parseInt(item.volume, 10)
+  v: (0, _isTypeFn.parseIntBy10)(item.volume)
 })) : [];
 const _crConfig = json => [_crRows(json.top_gainers), _crRows(json.top_losers), _crRows(json.most_actively_traded)];
 const TopGainersLosersAdapter = {

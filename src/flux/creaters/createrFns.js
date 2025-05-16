@@ -4,12 +4,19 @@ import {
   joinByUndescore
 } from '../../utils/arrFn';
 import {
+  parseIntBy10
+} from '../../utils/isTypeFn';
+import {
   getC,
   getV
 } from '../../utils/getPropertyFn';
 import {
   toUpperCaseFirst
 } from '../../utils/toUpperCaseFirst';
+
+import {
+  isInRange
+} from '../../math/mathFn';
 
 const _getC = item => toUpperCaseFirst(
   item && item.sc || getC(item)
@@ -85,8 +92,8 @@ export const crCaptions = (
 export const crRoundTo = (
   rt
 ) => {
-  const _rt = parseInt(rt, 10);
-  return _rt>-1 && _rt<4
+  const _rt = parseIntBy10(rt);
+  return isInRange(_rt, -1, 4)
     ? _rt
     : void 0;
 }

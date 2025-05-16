@@ -1,5 +1,9 @@
 import Big from 'big.js';
-import { isNumber } from '../utils/isTypeFn';
+
+import {
+  isNumber,
+  parseIntBy10
+} from '../utils/isTypeFn';
 
 import {
   DT_UP,
@@ -91,7 +95,7 @@ export const crValueMoving = ({
 export const toFixed = (value) => {
   const bValue = Big(value);
   return bValue.gt('10')
-    ? parseInt(bValue.toFixed(0), 10)
+    ? parseIntBy10(bValue.toFixed(0))
     : parseFloat(bValue.toFixed(2));
 }
 

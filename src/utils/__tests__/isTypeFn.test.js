@@ -12,7 +12,8 @@ import {
   isFn,
   isObj,
   isNotEmptyArr,
-  getObjectKeys
+  getObjectKeys,
+  parseIntBy10
 } from '../isTypeFn';
 
 describe('isTypeNumber',()=>{
@@ -209,4 +210,18 @@ describe('getObjectKeys',()=>{
     expect(fn('str')).toEqual([])
     expect(fn('')).toEqual([])
   })
+})
+
+describe('parseIntBy10', ()=>{
+  const fn = parseIntBy10;
+  test('should return number', ()=>{
+    expect(fn("0")).toBe(0)
+    expect(fn(0)).toBe(0)
+    expect(fn("1")).toBe(1)
+    expect(fn(1)).toBe(1)
+    expect(fn("10")).toBe(10)
+    expect(fn(10)).toBe(10)
+    expect(fn("100")).toBe(100)
+    expect(fn(100)).toBe(100)
+})
 })

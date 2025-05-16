@@ -2,17 +2,18 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _has = require("../has");
 const _assign = Object.assign,
   [INIT_EVENT, MOVE_EVENT, CANCEL_EVENT, RESET_EVENT] = _has.HAS_TOUCH_EVENTS ? ['touchstart', 'touchmove', 'touchcancel', 'touchend'] : ['mousedown', 'mousemove', 'mouseleave', 'mouseup'];
 const EVENT_OPTIONS = {
-    passive: true
+    passive: !0
   },
   MOVE_EVENT_OPTIONS = {
-    passive: false
+    passive: !1
   };
-const _fGetIntStyleProperty = propName => style => parseInt(style[propName], 10),
+const _fGetIntStyleProperty = propName => style => (0, _isTypeFn.parseIntBy10)(style[propName]),
   _getIntStyleTop = _fGetIntStyleProperty('top'),
   _getIntStyleLeft = _fGetIntStyleProperty('left');
 const ABSOLUTE_TOP = 70,
@@ -26,15 +27,15 @@ const MIN_LEFT_GAP = 8;
 const _crMoveDoneLeftValue = (value, maxValue) => value > 0 ? value > maxValue ? maxValue - 2 * MIN_LEFT_GAP : value : MIN_LEFT_GAP;
 const START_EVENT_GAP = 22;
 const _isValueInGapRange = (from, to, value) => value - from > START_EVENT_GAP && to - value > START_EVENT_GAP;
-const _getComposedPath = evt => (0, _uiApi.isFn)(evt.composedPath) ? evt.composedPath() : void 0;
+const _getComposedPath = evt => (0, _isTypeFn.isFn)(evt.composedPath) ? evt.composedPath() : void 0;
 const _isExcludeElement = element => element.tagName === 'BUTTON' || element.dataset.scrollable;
 const _isInitEvent = (evt, initialEvtClientX, initialEvtClientY, element) => {
   const _composedPath = _getComposedPath(evt);
-  if ((0, _uiApi.isArr)(_composedPath)) {
+  if ((0, _isTypeFn.isArr)(_composedPath)) {
     for (let i = 0; i < _composedPath.length; i++) {
       const _el = _composedPath[i];
       if (_isExcludeElement(_el)) {
-        return false;
+        return !1;
       }
       if (_el === element) {
         break;
@@ -42,7 +43,7 @@ const _isInitEvent = (evt, initialEvtClientX, initialEvtClientY, element) => {
     }
   }
   if (!_has.HAS_TOUCH_EVENTS) {
-    return true;
+    return !0;
   }
   const {
     left,

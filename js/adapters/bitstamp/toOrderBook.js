@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _crAdapterOrderBook = require("../crAdapterOrderBook");
 const toOrderBook = (0, _crAdapterOrderBook.crAdapterOrderBook)({
   crTitle: (0, _crAdapterOrderBook.fCrTitle)("timestamp", true),
@@ -9,7 +10,7 @@ const toOrderBook = (0, _crAdapterOrderBook.crAdapterOrderBook)({
     let {
       items
     } = _ref;
-    return parseInt(items[1].v, 10);
+    return (0, _isTypeFn.parseIntBy10)(items[1].v);
   }
 });
 var _default = exports.default = toOrderBook;

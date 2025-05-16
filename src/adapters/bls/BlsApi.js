@@ -1,6 +1,10 @@
 import {
   isArr,
   isNumber,
+  parseIntBy10
+} from '../../utils/isTypeFn';
+
+import {
   assign,
   crGetRoute,
   getYear,
@@ -96,8 +100,8 @@ const _crQueryKey = ({ apiKey }) => apiKey
 
 const _crQueryPeriod = (queryKey, {fromDate}) => {
   if (!queryKey) { return ''; }
-  const _startyear = parseInt(getYear(fromDate), 10)
-  , _endyear = parseInt(getCurrentYear(), 10);
+  const _startyear = parseIntBy10(getYear(fromDate))
+  , _endyear = parseIntBy10(getCurrentYear());
   if (isNumber(_startyear) && isNumber(_endyear)
       && _endyear - _startyear < 21) {
     return `&startyear=${_startyear}&endyear=${_endyear}`;

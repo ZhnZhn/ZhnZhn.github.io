@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _inputFn = require("../inputFn");
 var _styleFn = require("../styleFn");
@@ -35,10 +36,10 @@ const _setRadius = (value, seria) => {
     options
   } = seria;
   options.marker.radius = value;
-  seria.update(options, false);
+  seria.update(options, !1);
 };
 const _getInputValue = (refInput, min, max, dfValue) => {
-  const value = parseInt((0, _uiApi.getInputValue)(refInput), 10);
+  const value = (0, _isTypeFn.parseIntBy10)((0, _uiApi.getInputValue)(refInput));
   return value >= min && value <= max ? value : dfValue;
 };
 const DF_R1 = 8,
@@ -76,11 +77,11 @@ const StyleDotSeriesDialog = (0, _memoIsShow.default)(_ref2 => {
     _refToIndex = (0, _uiApi.useRef)(),
     _refInputR1 = (0, _uiApi.useRef)(),
     _refInputR2 = (0, _uiApi.useRef)(),
-    _refIsLabels = (0, _uiApi.useRef)(false),
+    _refIsLabels = (0, _uiApi.useRef)(!1),
     [_hEnableLabels, _hDisableLabels] = (0, _uiApi.useMemo)(() => [() => {
-      (0, _uiApi.setRefValue)(_refIsLabels, true);
+      (0, _uiApi.setRefValue)(_refIsLabels, !0);
     }, () => {
-      (0, _uiApi.setRefValue)(_refIsLabels, false);
+      (0, _uiApi.setRefValue)(_refIsLabels, !1);
     }], []),
     _hApply = (0, _uiApi.useMemo)(() => () => {
       const {

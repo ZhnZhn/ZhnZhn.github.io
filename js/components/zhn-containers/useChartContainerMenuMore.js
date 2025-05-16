@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _crModelMore = _interopRequireDefault(require("./crModelMore"));
 var _forEachInstance = _interopRequireDefault(require("./forEachInstance"));
@@ -19,12 +20,12 @@ const _crFnByNameArgs = function (ref, methodName) {
   };
 };
 const _fReflowChartByRef = parentWidth => refItem => {
-  if ((0, _uiApi.isFn)(refItem.reflowChart)) {
+  if ((0, _isTypeFn.isFn)(refItem.reflowChart)) {
     refItem.reflowChart(parentWidth - CHILD_MARGIN);
   }
 };
 const _showCaptionByRef = refItem => {
-  if ((0, _uiApi.isFn)(refItem.showCaption)) {
+  if ((0, _isTypeFn.isFn)(refItem.showCaption)) {
     refItem.showCaption();
   }
 };
@@ -51,7 +52,7 @@ const useChartContainerMenuMore = (isAdminMode, props, INITIAL_WIDTH, MIN_WIDTH,
         width
       } = (0, _uiApi.getRefElementStyle)(_refRootElement) || {};
       if (width) {
-        _hResizeAfter(parseInt(width, 10));
+        _hResizeAfter((0, _isTypeFn.parseIntBy10)(width));
       }
     }, [])
     //_hResizeAfter

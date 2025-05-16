@@ -23,7 +23,7 @@ const fIndicatorCalc = calc => function (d, rt) {
     rt = 1;
   }
   const [getX, getY] = (0, _seriaHelperFn.crPointGetter)(d),
-    _rt = parseInt(rt, 10);
+    _rt = (0, _isTypeFn.parseIntBy10)(rt);
   if (!(getX && (0, _isTypeFn.isNumber)(_rt) && _rt > 0 && d.length > _rt)) {
     return [];
   }

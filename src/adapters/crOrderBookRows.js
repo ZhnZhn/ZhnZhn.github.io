@@ -3,9 +3,12 @@ import Big from "big.js";
 import {
   filterBoolean
 } from "../utils/arrFn";
-
 import {
   isNumber,
+  parseIntBy10
+} from "../utils/isTypeFn"
+
+import {
   bindTo
 } from "./AdapterFn";
 import {
@@ -50,9 +53,8 @@ const _calcTotal = (arr, valueIndex, len) => {
 
 const _crBgStyle = (onePerc, strV, isLeft) => {
   try {
-    const perc = parseInt(
+    const perc = parseIntBy10(
       Big(strV).div(onePerc).toFixed(0)
-      , 10
     )
     , [to, color] = _crBgStyleProps(isLeft);
     return {

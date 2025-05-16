@@ -2,23 +2,14 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
-const _isNumber = n => typeof n === 'number' && n - n === 0;
-
+var _isTypeFn = require("../../utils/isTypeFn");
 let _currentYear;
-
 const _getCurrentYear = () => _currentYear || (_currentYear = new Date().getUTCFullYear());
-
 const _filterNotActive = item => {
-  const _yUpdated = parseInt(('' + item.updated).trim().slice(0, 4), 10);
-
-  return _isNumber(_yUpdated) ? _getCurrentYear() - _yUpdated < 3 : true;
+  const _yUpdated = (0, _isTypeFn.parseIntBy10)(('' + item.updated).trim().slice(0, 4));
+  return (0, _isTypeFn.isNumber)(_yUpdated) ? _getCurrentYear() - _yUpdated < 3 : !0;
 };
-
 const _filterSdn = item => item.active;
-
 const fFilterNotActive = (is, lT) => is ? lT === 'SDN' ? _filterSdn : _filterNotActive : void 0;
-
-var _default = fFilterNotActive;
-exports.default = _default;
+var _default = exports.default = fFilterNotActive;
 //# sourceMappingURL=fFilterNotActive.js.map

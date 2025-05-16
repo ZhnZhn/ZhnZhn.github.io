@@ -1,4 +1,4 @@
-
+import { parseIntBy10 } from '../../utils/isTypeFn';
 import _compose from '../../utils/compose';
 
 const _toUTC = Date.UTC;
@@ -6,13 +6,13 @@ const _toUTC = Date.UTC;
 const _toDayUTC = str => {
   const _arrYear = str.split('M')
   , _arrMonth = _arrYear[1].split('D')
-  , _month =  parseInt(_arrMonth[0], 10)-1;
+  , _month =  parseIntBy10(_arrMonth[0])-1;
   return _toUTC(_arrYear[0], _month, _arrMonth[1]);
 };
 
 const _fToUTC = monthPeriod => (delimeterChart, str) => {
   const arrDate = str.split(delimeterChart)
-  , _month = (parseInt(arrDate[1], 10)*monthPeriod) - 1
+  , _month = (parseIntBy10(arrDate[1])*monthPeriod) - 1
   , _day = _month === 1 ? 28 : 30;
   return _toUTC(arrDate[0], _month, _day);
 }

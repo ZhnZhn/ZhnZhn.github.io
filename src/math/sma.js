@@ -1,6 +1,9 @@
 import Big from 'big.js';
 
-import { isNumber } from '../utils/isTypeFn';
+import {
+  isNumber,
+  parseIntBy10
+} from '../utils/isTypeFn';
 import { crDataArrays } from './seriaHelperFn';
 
 const sma = (
@@ -12,7 +15,7 @@ const sma = (
     _dataX
   ] = crDataArrays(data)
   , _dataLength = _data.length
-  , _period = parseInt(period, 10) - 1
+  , _period = parseIntBy10(period) - 1
   , dataSma = [];
 
   if ( _dataLength === 0
