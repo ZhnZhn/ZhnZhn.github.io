@@ -5,7 +5,7 @@ import {
 import {
   isTokenInStr,
   assign,
-  getValue,
+  getValues,
   getCaption,
   fCheckResponse
 } from '../AdapterFn';
@@ -18,7 +18,7 @@ import {
 import getMemoizedYear from './getMemoizedYear';
 
 const API_URL = 'https://faostatservices.fao.org/api/v1/en/data'
-, TAIL = '&area_cs=M49&item_cs=CPC&show_codes=true&show_unit=true&show_flags=true&show_notes=true&null_values=false&page_number=1&datasource=PRODUCTION_AWS&output_type=objects'
+, QUERY_TAIL = '&area_cs=M49&item_cs=CPC&show_codes=true&show_unit=true&show_flags=true&show_notes=true&null_values=false&page_number=1&datasource=PRODUCTION_AWS&output_type=objects'
 , WORLD_LIST_ID = '5000>';
 
 const _isTitle = (
@@ -49,14 +49,15 @@ const FaoStatApi = {
   getRequestUrl(option){
     _checkReq(option)
     const {
-      items,
       dfElement,
       dfDomain='QC',
       dfItemName='item'
     } = option
-    , _one = getValue(items[0])
-    , _two = getValue(items[1])
-    , _three = getValue(items[2])
+    , [
+      _one,
+      _two,
+      _three
+    ] = getValues(option)
     , _element = _three || dfElement
     , [
       _year,
@@ -73,7 +74,7 @@ const FaoStatApi = {
         ? `area=${_area}&year=${option.time}&page_size=300`
         : `area=${_area}&year=${_year}&page_size=${_pageSize}`
 
-    return `${_apiUrl}&${_apiQuery}${TAIL}`;
+    return `${_apiUrl}&${_apiQuery}${QUERY_TAIL}`;
   },
 
   checkResponse: fCheckResponse(),
