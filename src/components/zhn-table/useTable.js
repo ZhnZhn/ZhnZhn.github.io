@@ -1,11 +1,11 @@
-import { 
+import {
   useState,
   useCallback
 } from '../uiApi';
 
 import {
-  factoryCompareBy,
-  factoryOpCompareBy
+  fNegate,
+  fCompareBy
 } from './compareFactory';
 import { TOKEN_NAN } from './Style';
 
@@ -36,18 +36,26 @@ export const useColumn = (initialArr) => {
 }
 
 export const useSort = (initialRows) => {
-  const [state, _setRows] = useState({_rows: initialRows || []})
+  const [
+    state,
+    _setRows
+  ] = useState({
+    _rows: initialRows || []
+  })
   , sortByPn = useCallback((pn) => {
       _setRows(({ _rows, sortBy, sortTo }) => {
-        const _compBy = factoryCompareBy(TOKEN_NAN, pn)
-        if (pn === sortBy && sortTo === SORT_TO_UP) {
-          _rows = _rows.sort(factoryOpCompareBy(pn, _compBy))
-          sortTo = SORT_TO_DOWN
-        } else {
-          _rows = _rows.sort(_compBy)
-          sortTo = SORT_TO_UP
-        }
-        return { _rows, sortTo, sortBy: pn };
+        const _compBy = fCompareBy(TOKEN_NAN, pn)
+        , [
+          _compByNext,
+          _sortToNext
+        ] = pn === sortBy && sortTo === SORT_TO_UP
+          ? [fNegate(_compBy), SORT_TO_DOWN]
+          : [_compBy, SORT_TO_UP];
+        return {
+          _rows: _rows.sort(_compByNext),
+          sortTo: _sortToNext,
+          sortBy: pn
+        };
       })
     }, []);
     return [state, sortByPn];

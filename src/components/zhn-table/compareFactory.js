@@ -1,3 +1,7 @@
+export const fNegate = fn => (
+  ...args
+) => -1 * fn(...args)
+
 const _isNaN = Number.isNaN;
 
 const _compareMaybeNaN = (
@@ -23,7 +27,7 @@ const _compareNumber = (v1, v2) => {
     : _r;
 };
 
-export const factoryCompareBy = (
+export const fCompareBy = (
   TOKEN_NAN,
   pn
 ) => (a, b) => {
@@ -31,14 +35,4 @@ export const factoryCompareBy = (
   return (typeof v1 === 'number' || v1 === TOKEN_NAN)
     ? _compareNumber(v1, v2)
     : _compareValue(v1, v2);
-}
-
-export const factoryOpCompareBy = (
-  pn,
-  fn
-) => (a, b) => {
-  const _r = _compareMaybeNaN(a[pn], b[pn]);
-  return _r === 2
-    ? fn(b, a)
-    : _r;
 }
