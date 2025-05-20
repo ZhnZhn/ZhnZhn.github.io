@@ -44,12 +44,7 @@ const crRankProps = function (title, propName) {
   };
 };
 exports.crRankProps = crRankProps;
-const _replaceNaN = function (n, str) {
-  if (str === void 0) {
-    str = '';
-  }
-  return n - n === 0 ? n : str;
-};
+const _replaceNaN = n => n - n === 0 ? n : '―';
 const _getCellValue = (r, h) => {
   const {
       pn,

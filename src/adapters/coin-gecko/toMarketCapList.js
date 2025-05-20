@@ -132,7 +132,7 @@ const toMarketCapList = {
       title: option.title,
       headers, flatHeaders, rows,
       dataSource: _crDataSource(rows)
-    });
+    });    
     return { config };
   }
 }

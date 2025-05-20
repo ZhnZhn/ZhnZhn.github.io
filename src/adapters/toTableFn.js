@@ -62,9 +62,8 @@ export const crRankProps = (
 })
 
 const _replaceNaN = (
-  n,
-  str=''
-) => n - n === 0 ? n : str;
+  n
+) => n - n === 0 ? n : '―';
 
 const _getCellValue = (r, h) => {
   const { pn, toN } = h
