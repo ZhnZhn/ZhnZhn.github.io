@@ -38,7 +38,7 @@ const useSort = initialRows => {
           sortBy,
           sortTo
         } = _ref;
-        const _compBy = (0, _compareFactory.fCompareBy)(_Style.TOKEN_NAN, pn),
+        const _compBy = (0, _compareFactory.fCompareDescBy)(_Style.TOKEN_NAN, pn),
           [_compByNext, _sortToNext] = pn === sortBy && sortTo === SORT_TO_UP ? [(0, _compareFactory.fNegate)(_compBy), SORT_TO_DOWN] : [_compBy, SORT_TO_UP];
         return {
           _rows: _rows.sort(_compByNext),

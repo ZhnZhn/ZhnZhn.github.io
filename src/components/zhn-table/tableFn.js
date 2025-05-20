@@ -12,8 +12,6 @@ import {
   S_TH_DOWN
 } from './Style';
 
-//const _isNotNumber = v => Number.isNaN(v) || v == null;
-
 const _crThAriaLabel = (
   name,
   order
@@ -53,7 +51,7 @@ export const crAppearance = ({
     ? sortTo === C.UP
        ? [S_TH_UP, C.DESC, _crThAriaLabel(name, C.ASC)]
        : [S_TH_DOWN, C.ASC, _crThAriaLabel(name, C.DESC)]
-    : [void 0, void 0, _crThAriaLabel(name, C.ASC)];  
+    : [void 0, void 0, _crThAriaLabel(name, C.ASC)];
   return {
     style,
     ariaSort,

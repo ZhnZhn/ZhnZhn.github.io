@@ -4,8 +4,6 @@ exports.__esModule = true;
 exports.toFormatValue = exports.crTdStyle = exports.crAppearance = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _Style = require("./Style");
-//const _isNotNumber = v => Number.isNaN(v) || v == null;
-
 const _crThAriaLabel = (name, order) => `${name}: activate to sort column ${order}`;
 const crTdStyle = _ref => {
   let {

@@ -5,7 +5,7 @@ import {
 
 import {
   fNegate,
-  fCompareBy
+  fCompareDescBy
 } from './compareFactory';
 import { TOKEN_NAN } from './Style';
 
@@ -44,7 +44,7 @@ export const useSort = (initialRows) => {
   })
   , sortByPn = useCallback((pn) => {
       _setRows(({ _rows, sortBy, sortTo }) => {
-        const _compBy = fCompareBy(TOKEN_NAN, pn)
+        const _compBy = fCompareDescBy(TOKEN_NAN, pn)
         , [
           _compByNext,
           _sortToNext

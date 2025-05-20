@@ -1,17 +1,10 @@
+import { isNumber } from '../../utils/isTypeFn';
+
 export const fNegate = fn => (
   ...args
 ) => -1 * fn(...args)
 
-const _isNaN = Number.isNaN;
-
-const _compareMaybeNaN = (
-  v1,
-  v2
-) => _isNaN(v1)
-  ? _isNaN(v2) ? 0 : 1
-  : _isNaN(v2) ? -1 : 2;
-
-const _compareValue = (
+const _compareDescValue = (
   v1,
   v2
 ) => v1 < v2
@@ -20,19 +13,27 @@ const _compareValue = (
   ? -1
   : 0;
 
-const _compareNumber = (v1, v2) => {
-  const _r = _compareMaybeNaN(v1, v2);
-  return _r === 2
-    ? _compareValue(v1, v2)
-    : _r;
-};
+const _compareDescMaybeNumber = (
+  v1,
+  v2,
+  _isNumber1,
+  _isNumber2
+) => _isNumber1 && _isNumber2
+  ? _compareDescValue(v1, v2)
+  : !_isNumber1 && !_isNumber2
+  ? 0
+  : _isNumber1
+  ? -1
+  : 1;
 
-export const fCompareBy = (
+export const fCompareDescBy = (
   TOKEN_NAN,
   pn
 ) => (a, b) => {
-  const v1 = a[pn], v2 = b[pn];
-  return (typeof v1 === 'number' || v1 === TOKEN_NAN)
-    ? _compareNumber(v1, v2)
-    : _compareValue(v1, v2);
+  const v1 = a[pn]
+  , v2 = b[pn]
+  , _isNumber1 = isNumber(v1);
+  return _isNumber1 || v1 === TOKEN_NAN || v1 === null
+    ? _compareDescMaybeNumber(v1, v2, _isNumber1, isNumber(v2))
+    : _compareDescValue(v1, v2);
 }
