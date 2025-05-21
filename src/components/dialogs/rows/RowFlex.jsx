@@ -21,10 +21,25 @@ export const S_ROW_FLEX = {
 }
 export const RowFlex = _fRowFlex(S_ROW_FLEX)
 
-const S_ROW_FLEX_END = {
-  ...S_FLEX,
-  justifyContent: 'flex-end',
-  flexWrap: 'wrap',
-  padding: '6px 4px 6px 0'
+const _crJustifyContentStyle = (
+  justifyContent
+) => ({
+  justifyContent
+});
+
+const S_ROW_FLEX_PADDING = {
+  padding: '6px 8px 6px 0'
 };
-export const RowFlexEnd = _fRowFlex(S_ROW_FLEX_END)
+export const RowFlexEnd = _fRowFlex({
+  ...S_FLEX,
+  ...S_ROW_FLEX_PADDING,
+  ..._crJustifyContentStyle('flex-end'),
+  flexWrap: 'wrap',
+})
+
+export const RowFlexReverseStart = _fRowFlex({
+  ...S_FLEX,
+  ...S_ROW_FLEX_PADDING,
+  ..._crJustifyContentStyle('flex-start'),
+  flexFlow: 'row-reverse wrap'
+})
