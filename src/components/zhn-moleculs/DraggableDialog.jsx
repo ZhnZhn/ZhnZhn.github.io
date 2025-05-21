@@ -16,7 +16,7 @@ import { useKeyEscape } from '../hooks/fUseKey';
 import useXYMovable from '../hooks/useXYMovable';
 import useDialogFocus from './useDialogFocus';
 
-import { RowFlexEnd } from '../dialogs/rows/RowFlex';
+import { RowFlexReverseStart } from '../dialogs/rows/RowFlex';
 import FlatButton from '../zhn-m/FlatButton';
 import DialogCaption from './DialogCaption';
 
@@ -24,31 +24,23 @@ const CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
 , S_DIALOG_DIV = {
   ...crAbsoluteTopLeftStyle(30, 50),
   zIndex: 10
+}
+, S_BT_OPEN = {
+  marginRight: 57
 };
 
 const CommandButtons = ({
-  buttons,
   onLoad,
   onShow,
   onClose
 }) => (
-  <RowFlexEnd>
-    {buttons}
+  <RowFlexReverseStart>
     {
       isFn(onLoad) && <FlatButton
-        key="load"      
+        key="load"
         caption="Load"
         title="Load item"
         onClick={onLoad}
-      />
-    }
-    {
-      isFn(onShow) && <FlatButton
-        key="show"
-        timeout={0}
-        caption="Show"
-        title="Show items"
-        onClick={onShow}
       />
     }
     <FlatButton
@@ -58,7 +50,17 @@ const CommandButtons = ({
       title="Close dialog"
       onClick={onClose}
     />
-  </RowFlexEnd>
+    {
+      isFn(onShow) && <FlatButton
+        key="show"
+        timeout={0}
+        caption="Open"
+        title="Open items"
+        style={S_BT_OPEN}
+        onClick={onShow}
+      />
+    }
+  </RowFlexReverseStart>
 );
 
 const FN_NOOP = () => {};
@@ -73,7 +75,6 @@ const DraggableDialog = ({
   menuModel,
   caption,
   children,
-  commandButtons,
   toTopLayer,
   onLoad,
   onShow,
@@ -119,7 +120,6 @@ const DraggableDialog = ({
       />
       {children}
       <CommandButtons
-         buttons={commandButtons}
          onLoad={onLoad}
          onShow={onShow}
          onClose={onClose}

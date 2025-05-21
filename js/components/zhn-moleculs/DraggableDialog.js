@@ -17,30 +17,33 @@ const CL_DRAGGABLE_DIALOG = (0, _styleFn.crDialogCn)("draggable-dialog"),
   S_DIALOG_DIV = {
     ...(0, _styleFn.crAbsoluteTopLeftStyle)(30, 50),
     zIndex: 10
+  },
+  S_BT_OPEN = {
+    marginRight: 57
   };
 const CommandButtons = _ref => {
   let {
-    buttons,
     onLoad,
     onShow,
     onClose
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlexEnd, {
-    children: [buttons, (0, _uiApi.isFn)(onLoad) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlexReverseStart, {
+    children: [(0, _uiApi.isFn)(onLoad) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "Load",
       title: "Load item",
       onClick: onLoad
-    }, "load"), (0, _uiApi.isFn)(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-      timeout: 0,
-      caption: "Show",
-      title: "Show items",
-      onClick: onShow
-    }, "show"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+    }, "load"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       timeout: 0,
       caption: "Close",
       title: "Close dialog",
       onClick: onClose
-    }, "close")]
+    }, "close"), (0, _uiApi.isFn)(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+      timeout: 0,
+      caption: "Open",
+      title: "Open items",
+      style: S_BT_OPEN,
+      onClick: onShow
+    }, "show")]
   });
 };
 const FN_NOOP = () => {};
@@ -53,7 +56,6 @@ const DraggableDialog = _ref2 => {
     menuModel,
     caption,
     children,
-    commandButtons,
     toTopLayer,
     onLoad,
     onShow,
@@ -84,7 +86,6 @@ const DraggableDialog = _ref2 => {
       caption: caption,
       onClose: onClose
     }), children, /*#__PURE__*/(0, _jsxRuntime.jsx)(CommandButtons, {
-      buttons: commandButtons,
       onLoad: onLoad,
       onShow: onShow,
       onClose: onClose
