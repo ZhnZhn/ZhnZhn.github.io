@@ -4,6 +4,7 @@ import {
 } from '../uiApi';
 
 import {
+  fCompareBy2,
   fNegate,
   fCompareDescBy
 } from './compareFactory';
@@ -16,7 +17,7 @@ export const useMenu = () => {
   const [
     isMenuMore,
     _setIsMenuMore
-  ] = useState(false)
+  ] = useState(!1)
   , toggleMenuMore = useCallback((evt) => {
        evt.stopPropagation()
        _setIsMenuMore(is => !is)
@@ -40,19 +41,26 @@ export const useSort = (initialRows) => {
     state,
     _setRows
   ] = useState({
-    _rows: initialRows || []
+    _rows: initialRows || [],
+    _compByPrev: v => v
   })
   , sortByPn = useCallback((pn) => {
-      _setRows(({ _rows, sortBy, sortTo }) => {
-        const _compBy = fCompareDescBy(TOKEN_NAN, pn)
+      _setRows(({
+        _rows,
+        _compByPrev,
+        sortBy,
+        sortTo
+      }) => {
+        const _compByPn = fCompareDescBy(TOKEN_NAN, pn)
         , [
           _compByNext,
           _sortToNext
         ] = pn === sortBy && sortTo === SORT_TO_UP
-          ? [fNegate(_compBy), SORT_TO_DOWN]
-          : [_compBy, SORT_TO_UP];
+          ? [fNegate(_compByPn), SORT_TO_DOWN]
+          : [_compByPn, SORT_TO_UP];
         return {
-          _rows: _rows.sort(_compByNext),
+          _rows: _rows.sort(fCompareBy2(_compByNext, _compByPrev)),
+          _compByPrev: _compByNext,
           sortTo: _sortToNext,
           sortBy: pn
         };

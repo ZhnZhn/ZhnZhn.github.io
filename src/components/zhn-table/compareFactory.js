@@ -1,5 +1,13 @@
 import { isNumber } from '../../utils/isTypeFn';
 
+export const fCompareBy2 = (
+  compareBy1,
+  compareBy2
+) => (
+  a,
+  b
+) => compareBy1(a, b) || compareBy2(a, b)
+
 export const fNegate = fn => (
   ...args
 ) => -1 * fn(...args)

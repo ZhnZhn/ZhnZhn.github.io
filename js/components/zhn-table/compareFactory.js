@@ -1,8 +1,10 @@
 "use strict";
 
 exports.__esModule = true;
-exports.fNegate = exports.fCompareDescBy = void 0;
+exports.fNegate = exports.fCompareDescBy = exports.fCompareBy2 = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+const fCompareBy2 = (compareBy1, compareBy2) => (a, b) => compareBy1(a, b) || compareBy2(a, b);
+exports.fCompareBy2 = fCompareBy2;
 const fNegate = fn => function () {
   return -1 * fn(...arguments);
 };
