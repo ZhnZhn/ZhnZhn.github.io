@@ -1,13 +1,28 @@
-import { useCallback } from '../uiApi';
+import {
+  useCallback,
+  stopDefaultFor
+} from '../uiApi';
 import { HAS_KEYBOARD_FOCUS } from '../has';
 
+export const toUpperCase = str => str.toUpperCase();
+
 const FN_NOOP = () => {};
+const _isHotKey = (
+  evt
+) => (evt.altKey || evt.metaKey) && evt.key;
+
+export const isHotKey = (
+  evt,
+  keyChar
+) => keyChar
+  ? _isHotKey(evt) && toUpperCase(evt.key) === toUpperCase(keyChar)
+  : _isHotKey(evt)
 
 export const isKeyEnterOrBlank = ({
   keyCode
 }) => keyCode === 13 || keyCode === 32
 
-const isKeyEscape = (
+export const isKeyEscape = (
   evt
 ) => evt.keyCode === 27 || evt.key === 'Escape';
 
@@ -17,8 +32,7 @@ const _onKeyFnEvt = (
   evt
 ) => {
   if (isKey(evt)) {
-    evt.preventDefault()
-    evt.stopPropagation()
+    stopDefaultFor(evt)
     fn(evt)
   }
 };

@@ -1,6 +1,11 @@
 import { focusRefElement } from '../uiApi'
 import { HAS_TOUCH_EVENTS } from '../has';
 
+import {
+  isHotKey,
+  toUpperCase
+} from '../hooks/fUseKey';
+
 export const HAS_HOT_KEYS = !HAS_TOUCH_EVENTS
 export const HOT_KEY_EVENT = 'keydown'
 
@@ -22,18 +27,14 @@ export const clearHotKeys = () => {
   hmHotKeys = null
 }
 
-const _isHotKey = (
-  evt
-) => (evt.altKey || evt.metaKey) && evt.key
-
 export const onHotKey = (
   evt
 ) => {
-  if (_isHotKey(evt)) {
+  if (isHotKey(evt)) {
     const [
       _onKeyDownHotKey,
       _refEl
-    ] = hmHotKeys[evt.key.toUpperCase()] || [];
+    ] = hmHotKeys[toUpperCase(evt.key)] || [];
     if (typeof _onKeyDownHotKey === 'function') {
       evt.stopImmediatePropagation()
       focusRefElement(_refEl)
