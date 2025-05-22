@@ -1,9 +1,13 @@
 import {
   isFn,
   useRef,
-  getEventComposedPath
+  getEventComposedPath,
+  stopDefaultFor
 } from '../uiApi';
-import { crDialogRole } from '../a11yFn';
+
+import {
+  crDialogRole
+} from '../a11yFn';
 
 import {
   CL_TOGGLE_ARROW,
@@ -12,7 +16,10 @@ import {
   crAbsoluteTopLeftStyle
 } from '../styleFn';
 
-import { useKeyEscape } from '../hooks/fUseKey';
+import {
+  isKeyEscape,
+  isHotKey
+} from '../hooks/fUseKey';
 import useXYMovable from '../hooks/useXYMovable';
 import useDialogFocus from './useDialogFocus';
 
@@ -25,9 +32,12 @@ const CL_DRAGGABLE_DIALOG = crDialogCn("draggable-dialog")
   ...crAbsoluteTopLeftStyle(30, 50),
   zIndex: 10
 }
-, S_BT_OPEN = {
+, S_MR_57 = {
   marginRight: 57
-};
+}
+, BT_HOT_KEY_LOAD = "L"
+, BT_HOT_KEY_OPEN = "O"
+, BT_HOT_KEY_CLOSE = "C";
 
 const CommandButtons = ({
   onLoad,
@@ -40,26 +50,29 @@ const CommandButtons = ({
         key="load"
         caption="Load"
         title="Load item"
+        hotKey2={BT_HOT_KEY_LOAD}
         onClick={onLoad}
+      />
+    }
+    {
+      isFn(onShow) && <FlatButton
+        key="open"
+        timeout={0}
+        caption="Open"
+        title="Open items"
+        hotKey2={BT_HOT_KEY_OPEN}
+        onClick={onShow}
       />
     }
     <FlatButton
       key="close"
       timeout={0}
+      style={S_MR_57}
       caption="Close"
       title="Close dialog"
+      hotKey2={BT_HOT_KEY_CLOSE}
       onClick={onClose}
     />
-    {
-      isFn(onShow) && <FlatButton
-        key="show"
-        timeout={0}
-        caption="Open"
-        title="Open items"
-        style={S_BT_OPEN}
-        onClick={onShow}
-      />
-    }
   </RowFlexReverseStart>
 );
 
@@ -67,6 +80,13 @@ const FN_NOOP = () => {};
 const isExcludeElement = (
   evt
 ) => ((getEventComposedPath(evt))[1] || {}).className === CL_TOGGLE_ARROW
+
+const _applyHotKeyHandler = (evt, onFn) => {
+  stopDefaultFor(evt)
+  if (isFn(onFn)) {
+    onFn()
+  }
+}
 
 const DraggableDialog = ({
   isFocusBtMenu=true,
@@ -82,7 +102,15 @@ const DraggableDialog = ({
 }) => {
   const refRoot = useRef()
   , refBtMenu = useRef()
-  , _hKeyDown = useKeyEscape(onClose)
+  , _hKeyDown = (evt) => {
+    if (isKeyEscape(evt) || isHotKey(evt, BT_HOT_KEY_CLOSE)) {
+      _applyHotKeyHandler(evt, onClose)
+    } else if (isHotKey(evt, BT_HOT_KEY_LOAD)) {
+      _applyHotKeyHandler(evt, onLoad)
+    } else if (isHotKey(evt, BT_HOT_KEY_OPEN)) {
+      _applyHotKeyHandler(evt, onShow)
+    }
+  }
   , [
     _className,
     _showHideStyle

@@ -18,9 +18,12 @@ const CL_DRAGGABLE_DIALOG = (0, _styleFn.crDialogCn)("draggable-dialog"),
     ...(0, _styleFn.crAbsoluteTopLeftStyle)(30, 50),
     zIndex: 10
   },
-  S_BT_OPEN = {
+  S_MR_57 = {
     marginRight: 57
-  };
+  },
+  BT_HOT_KEY_LOAD = "L",
+  BT_HOT_KEY_OPEN = "O",
+  BT_HOT_KEY_CLOSE = "C";
 const CommandButtons = _ref => {
   let {
     onLoad,
@@ -31,23 +34,32 @@ const CommandButtons = _ref => {
     children: [(0, _uiApi.isFn)(onLoad) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       caption: "Load",
       title: "Load item",
+      hotKey2: BT_HOT_KEY_LOAD,
       onClick: onLoad
-    }, "load"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-      timeout: 0,
-      caption: "Close",
-      title: "Close dialog",
-      onClick: onClose
-    }, "close"), (0, _uiApi.isFn)(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+    }, "load"), (0, _uiApi.isFn)(onShow) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       timeout: 0,
       caption: "Open",
       title: "Open items",
-      style: S_BT_OPEN,
+      hotKey2: BT_HOT_KEY_OPEN,
       onClick: onShow
-    }, "show")]
+    }, "open"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+      timeout: 0,
+      style: S_MR_57,
+      caption: "Close",
+      title: "Close dialog",
+      hotKey2: BT_HOT_KEY_CLOSE,
+      onClick: onClose
+    }, "close")]
   });
 };
 const FN_NOOP = () => {};
 const isExcludeElement = evt => ((0, _uiApi.getEventComposedPath)(evt)[1] || {}).className === _styleFn.CL_TOGGLE_ARROW;
+const _applyHotKeyHandler = (evt, onFn) => {
+  (0, _uiApi.stopDefaultFor)(evt);
+  if ((0, _uiApi.isFn)(onFn)) {
+    onFn();
+  }
+};
 const DraggableDialog = _ref2 => {
   let {
     isFocusBtMenu = true,
@@ -63,7 +75,15 @@ const DraggableDialog = _ref2 => {
   } = _ref2;
   const refRoot = (0, _uiApi.useRef)(),
     refBtMenu = (0, _uiApi.useRef)(),
-    _hKeyDown = (0, _fUseKey.useKeyEscape)(onClose),
+    _hKeyDown = evt => {
+      if ((0, _fUseKey.isKeyEscape)(evt) || (0, _fUseKey.isHotKey)(evt, BT_HOT_KEY_CLOSE)) {
+        _applyHotKeyHandler(evt, onClose);
+      } else if ((0, _fUseKey.isHotKey)(evt, BT_HOT_KEY_LOAD)) {
+        _applyHotKeyHandler(evt, onLoad);
+      } else if ((0, _fUseKey.isHotKey)(evt, BT_HOT_KEY_OPEN)) {
+        _applyHotKeyHandler(evt, onShow);
+      }
+    },
     [_className, _showHideStyle] = (0, _styleFn.crShowHide)(isShow, CL_DRAGGABLE_DIALOG);
   (0, _useDialogFocus.default)(isShow, isFocusBtMenu ? refBtMenu : void 0);
   (0, _useXYMovable.default)(refRoot, isExcludeElement);
