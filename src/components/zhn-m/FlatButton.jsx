@@ -27,13 +27,14 @@ const FlatButton = (props) => {
     props.onClick
   )
   , [
-    _hotKey,
+    _appHotKey,
     _refBt
   ] = useHotKey(
     props.hotKey,
     _hClick,
     props.refBt
-  );
+  )
+  , _hotKey = _appHotKey || props.hotKey2;
 
   return (
     <button

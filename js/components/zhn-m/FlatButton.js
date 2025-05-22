@@ -16,7 +16,8 @@ const CL_ARROW = "arrow-down",
 const _crTitle = (title, hotKey) => hotKey ? `${title || ''} [${hotKey.toLowerCase()}]` : title;
 const FlatButton = props => {
   const _hClick = (0, _useThrottleClick.default)(props.timeout ?? 3000, props.onClick),
-    [_hotKey, _refBt] = (0, _useHotKey.default)(props.hotKey, _hClick, props.refBt);
+    [_appHotKey, _refBt] = (0, _useHotKey.default)(props.hotKey, _hClick, props.refBt),
+    _hotKey = _appHotKey || props.hotKey2;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
     ref: _refBt,
     type: "button",
