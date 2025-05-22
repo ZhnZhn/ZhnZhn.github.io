@@ -37,8 +37,14 @@ const _S_LABEL = {
   fontSize: '16px',
   fontWeight: 'bold'
 }
+, S_MODAL_DIALOG = {
+  width: 366
+}
 , S_MT_10 = {
   marginTop: 10
+}
+, S_ROW_INPUT_TEXT = {
+  margin: '10px 0 5px 8px'
 }
 , S_LABEL = {
   ..._S_LABEL,
@@ -57,7 +63,7 @@ const _S_LABEL = {
 }
 , S_INPUT_TEXT = {
   width: 250,
-  height: 30,
+  height: 34,
   marginLeft: 0
 };
 
@@ -198,6 +204,7 @@ const CustomizeExportDialog = memoIsShow(({
 
   return (
     <ModalDialog
+      style={S_MODAL_DIALOG}
       caption="Customize Export Chart"
       isShow={isShow}
       commandButtons={_commandButtons}
@@ -221,12 +228,12 @@ const CustomizeExportDialog = memoIsShow(({
               {...crInputNumberProps(chartHeight, H_MIN, H_MAX)}
               refEl={_refInputHeight}
               placeholder={chartHeight}
-              style={S_INPUT_NUMBER}              
+              style={S_INPUT_NUMBER}
             />
          </RowFlex>
        </ShowHide>
        <ShowHide isShow={isShowTitle}>
-         <RowFlex style={S_MT_10}>
+         <RowFlex style={S_ROW_INPUT_TEXT}>
            <span style={S_LABEL}>Title</span>
            <InputText
              refEl={_refInputTitle}
@@ -234,7 +241,7 @@ const CustomizeExportDialog = memoIsShow(({
              style={S_INPUT_TEXT}
            />
          </RowFlex>
-         <RowFlex>
+         <RowFlex style={S_ROW_INPUT_TEXT}>
            <span style={S_LABEL}>Subtitle</span>
            <InputText
              refEl={_refInputSubtitle}

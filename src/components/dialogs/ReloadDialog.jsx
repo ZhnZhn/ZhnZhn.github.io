@@ -24,11 +24,11 @@ const ReloadDialog = ({
 }) => {
   const _hReload = useCallback(() => {
     document.cookie="erc=1"
-    window.location.reload(true)
+    window.location.reload(!0)
   }, [])
   , _commandButtons = useCommandButtons(() => [
-    ["Yes, Reload", _hReload],
-    ["No", onClose]
+    ["No", onClose],
+    ["Yes, Reload", _hReload]
   ])
   , { buildDate='' } = data || {};
 

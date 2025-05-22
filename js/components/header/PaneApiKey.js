@@ -50,7 +50,7 @@ const _crPwdItem = (item, index, _ref) => {
     onEnter: fOnEnter(_i)
   }, item[0]);
 };
-const PaneApiKey = _ref12 => {
+const PaneApiKey = _ref0 => {
   let {
     isVisible,
     isShowLabels,
@@ -59,7 +59,7 @@ const PaneApiKey = _ref12 => {
     data,
     onClose,
     setRefFocusLast
-  } = _ref12;
+  } = _ref0;
   const _ref1 = (0, _uiApi.useRef)(),
     _ref2 = (0, _uiApi.useRef)(),
     _ref3 = (0, _uiApi.useRef)(),
@@ -129,16 +129,16 @@ const PaneApiKey = _ref12 => {
       onClose: onClose,
       setRefFocusLast: setRefFocusLast,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
-        style: btStyle,
-        caption: "CLEAR ALL",
-        onClick: _hClearAll
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
         style: {
           ...btStyle,
           ...S_BT_SET
         },
         caption: "SET ALL",
         onClick: _hSetAll
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+        style: btStyle,
+        caption: "CLEAR ALL",
+        onClick: _hClearAll
       })]
     })]
   }) : null;

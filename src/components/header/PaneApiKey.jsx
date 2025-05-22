@@ -152,15 +152,15 @@ const PaneApiKey = ({
          setRefFocusLast={setRefFocusLast}
       >
         <FlatButton
-          style={btStyle}
-          caption="CLEAR ALL"
-          onClick={_hClearAll}
-        />
-        <FlatButton
           style={{...btStyle, ...S_BT_SET}}
           caption="SET ALL"
           onClick={_hSetAll}
         />
+        <FlatButton
+          style={btStyle}
+          caption="CLEAR ALL"
+          onClick={_hClearAll}
+        />        
       </RowButtons>
     </ScrollPane>
   ) : null;

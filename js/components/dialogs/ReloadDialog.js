@@ -30,9 +30,9 @@ const ReloadDialog = _ref => {
   } = _ref;
   const _hReload = (0, _uiApi.useCallback)(() => {
       document.cookie = "erc=1";
-      window.location.reload(true);
+      window.location.reload(!0);
     }, []),
-    _commandButtons = (0, _useCommandButtons.default)(() => [["Yes, Reload", _hReload], ["No", onClose]]),
+    _commandButtons = (0, _useCommandButtons.default)(() => [["No", onClose], ["Yes, Reload", _hReload]]),
     {
       buildDate = ''
     } = data || {};

@@ -10,7 +10,7 @@ import {
 import { useKeyEscape } from '../hooks/fUseKey';
 import useDialogFocus from './useDialogFocus';
 
-import { RowFlexEnd } from '../dialogs/rows/RowFlex';
+import { RowFlexReverseStart } from '../dialogs/rows/RowFlex';
 import FlatButton from '../zhn-m/FlatButton';
 import FocusTrap from './FocusTrap';
 import DialogCaption from './DialogCaption';
@@ -29,7 +29,7 @@ const CommandButtons = ({
   withoutClose,
   onClose
 }) => (
-  <RowFlexEnd>
+  <RowFlexReverseStart>
     {commandButtons}
     {!withoutClose &&
        <FlatButton
@@ -41,7 +41,7 @@ const CommandButtons = ({
          onClick={onClose}
        />
     }
-  </RowFlexEnd>
+  </RowFlexReverseStart>
 );
 
 const FN_NOOP = () => {};

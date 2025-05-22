@@ -7,7 +7,7 @@ var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _RowFlex = require("../dialogs/rows/RowFlex");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW = {
-  marginRight: 0
+  paddingRight: 0
 };
 const RowButtons = _ref => {
   let {
@@ -17,7 +17,7 @@ const RowButtons = _ref => {
     btStyle,
     onClose
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlexEnd, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlexReverseStart, {
     style: {
       ...S_ROW,
       ...style

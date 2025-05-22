@@ -27,7 +27,7 @@ const CommandButtons = _ref => {
     withoutClose,
     onClose
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlexEnd, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlexReverseStart, {
     children: [commandButtons, !withoutClose && /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       refBt: refBtClose,
       caption: "Close",

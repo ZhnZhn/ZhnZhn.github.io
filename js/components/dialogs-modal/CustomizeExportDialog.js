@@ -26,8 +26,14 @@ const _S_LABEL = {
     fontSize: '16px',
     fontWeight: 'bold'
   },
+  S_MODAL_DIALOG = {
+    width: 366
+  },
   S_MT_10 = {
     marginTop: 10
+  },
+  S_ROW_INPUT_TEXT = {
+    margin: '10px 0 5px 8px'
   },
   S_LABEL = {
     ..._S_LABEL,
@@ -46,7 +52,7 @@ const _S_LABEL = {
   },
   S_INPUT_TEXT = {
     width: 250,
-    height: 30,
+    height: 34,
     marginLeft: 0
   };
 const APP_HTML = 'Web app ERC https://zhnzhn.github.io',
@@ -147,6 +153,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     title = options.title.text,
     subtitle = options.subtitle.text;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalDialog.default, {
+    style: S_MODAL_DIALOG,
     caption: "Customize Export Chart",
     isShow: isShow,
     commandButtons: _commandButtons,
@@ -180,7 +187,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide.default, {
       isShow: isShowTitle,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlex, {
-        style: S_MT_10,
+        style: S_ROW_INPUT_TEXT,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: S_LABEL,
           children: "Title"
@@ -190,6 +197,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
           style: S_INPUT_TEXT
         })]
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_RowFlex.RowFlex, {
+        style: S_ROW_INPUT_TEXT,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           style: S_LABEL,
           children: "Subtitle"

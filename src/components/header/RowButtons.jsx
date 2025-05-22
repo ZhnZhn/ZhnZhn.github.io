@@ -1,8 +1,8 @@
 import FlatButton from '../zhn-m/FlatButton';
-import { RowFlexEnd } from '../dialogs/rows/RowFlex';
+import { RowFlexReverseStart } from '../dialogs/rows/RowFlex';
 
 const S_ROW = {
-  marginRight: 0
+  paddingRight: 0
 };
 
 const RowButtons = ({
@@ -12,7 +12,7 @@ const RowButtons = ({
   btStyle,
   onClose
 }) => (
- <RowFlexEnd style={{...S_ROW, ...style}}>
+ <RowFlexReverseStart style={{...S_ROW, ...style}}>
    {children}
    <FlatButton
      refBt={setRefFocusLast}
@@ -20,7 +20,7 @@ const RowButtons = ({
      caption="Close"
      onClick={onClose}
    />
- </RowFlexEnd>
+ </RowFlexReverseStart>
 );
 
 export default RowButtons

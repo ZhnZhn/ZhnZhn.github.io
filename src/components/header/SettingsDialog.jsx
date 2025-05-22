@@ -23,7 +23,7 @@ import { CL_ROW_PANE_TOPIC } from '../styleFn';
 const TOKEN_USER_SETTINGS = "User Settings"
 , S_MODAL = {
   position: 'static',
-  width: 380,
+  width: 366,
   maxHeight: 420,
   margin: '70px auto 0px'
 }
