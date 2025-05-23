@@ -15,12 +15,11 @@ const MAX_KEY = 11;
 
 const S_SCROLL_PANE = {
   overflowY: 'auto',
-  maxHeight: 360,
+  maxHeight: 340,
   paddingRight: 10
 }
 , S_OC_CHILD = { paddingLeft: 8 }
-, S_ROW_BTS = { margLeft: 0 }
-, S_BT_SET = { margin: '0 6px' };
+, S_ROW_BTS = { margLeft: 0 };
 
 const CONF_SM_ARR = [
   ["AV", "alpha-vantage", "Alpha Vantage"],
@@ -152,7 +151,7 @@ const PaneApiKey = ({
          setRefFocusLast={setRefFocusLast}
       >
         <FlatButton
-          style={{...btStyle, ...S_BT_SET}}
+          style={btStyle}
           caption="SET ALL"
           onClick={_hSetAll}
         />
@@ -160,7 +159,7 @@ const PaneApiKey = ({
           style={btStyle}
           caption="CLEAR ALL"
           onClick={_hClearAll}
-        />        
+        />
       </RowButtons>
     </ScrollPane>
   ) : null;
