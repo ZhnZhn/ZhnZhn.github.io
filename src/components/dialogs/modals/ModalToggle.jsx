@@ -75,10 +75,12 @@ const ModalToggle = ({
   style,
   className,
   selectProps,
+  isShowLabels,
   isFd,
   isShowFd,
   isCh,
   isShowChart,
+  onToggleLabels,
   onToggle,
   onCheckCaption,
   onUnCheckCaption,
@@ -92,6 +94,14 @@ const ModalToggle = ({
     className={className}
     onClose={onClose}
   >
+    <RowCheckBox3
+      key="isShowLabels"
+      style={S_ROW}
+      color={TOGGLE_INPUT_CHECKBOX_COLOR}
+      caption="Input Labels"
+      value={isShowLabels}
+      onToggle={onToggleLabels}
+    />
     <ItemStack
       items={selectProps}
       crItem={_crCheckBoxItem}

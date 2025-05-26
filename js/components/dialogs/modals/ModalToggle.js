@@ -60,10 +60,12 @@ const ModalToggle = _ref2 => {
     style,
     className,
     selectProps,
+    isShowLabels,
     isFd,
     isShowFd,
     isCh,
     isShowChart,
+    onToggleLabels,
     onToggle,
     onCheckCaption,
     onUnCheckCaption,
@@ -79,7 +81,13 @@ const ModalToggle = _ref2 => {
     },
     className: className,
     onClose: onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox3.default, {
+      style: _Style.S_ROW,
+      color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
+      caption: "Input Labels",
+      value: isShowLabels,
+      onToggle: onToggleLabels
+    }, "isShowLabels"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
       items: selectProps,
       crItem: _crCheckBoxItem,
       onToggle: onToggle,
