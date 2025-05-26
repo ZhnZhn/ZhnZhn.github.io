@@ -8,8 +8,8 @@ var _ButtonCircle = _interopRequireDefault(require("./ButtonCircle"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_TOOLBAR = {
   ..._styleFn.S_FLEX,
-  padding: '6px 5px 6px 15px',
-  gap: 15
+  padding: 6,
+  gap: 6
 };
 const crToolbarButton = (caption, title, onClick) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonCircle.default, {
   caption: caption,

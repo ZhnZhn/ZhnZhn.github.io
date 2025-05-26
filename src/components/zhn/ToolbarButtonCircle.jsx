@@ -4,8 +4,8 @@ import ButtonCircle from './ButtonCircle';
 
 const S_TOOLBAR = {
   ...S_FLEX,
-  padding: '6px 5px 6px 15px',
-  gap: 15
+  padding: 6,
+  gap: 6
 };
 
 export const crToolbarButton = (
