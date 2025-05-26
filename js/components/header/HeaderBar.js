@@ -11,7 +11,7 @@ var _hotkeys = require("../hotkeys/hotkeys");
 var _useToggle = require("../hooks/useToggle");
 var _useFocus = require("../hooks/useFocus");
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
-var _SvgIcon = require("../zhn/svg/SvgIcon");
+var _FlatButtonSvg = require("../zhn-m/FlatButtonSvg");
 var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _ProgressLoading = _interopRequireDefault(require("./ProgressLoading"));
 var _AppLabel = _interopRequireDefault(require("./AppLabel"));
@@ -32,10 +32,6 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
   CL_ABOUT = "bt-about",
   CL_BTS_RIGHT = `${CL_HEADER}__bts-right`,
   CL_BROWSER_MENU = `${CL_HEADER}__panel-browser`,
-  S_SVG_BT = {
-    verticalAlign: 'middle',
-    margin: '0 8px 3px 8px'
-  },
   _crTitleOpen = strNoun => `Open ${strNoun}`,
   _crBtFlatProps = (caption, title, hotKey, className) => ({
     ...(0, _a11yFn.crBtAriaLabelProps)(title),
@@ -84,23 +80,16 @@ const HeaderBar = _ref => {
       onShowDialog: _compStore.showDialog
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_BTS_RIGHT,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_LimitRemainingLabel.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButtonSvg.FlatButtonSettings, {
         ...BT_SETTINGS_PROPS,
         hotKey: _hotkeys.HK_SETTINGS,
         timeout: 500,
-        onClick: showSettings,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgIcon.SvgSettings, {
-          style: S_SVG_BT
-        })
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
+        onClick: showSettings
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButtonSvg.FlatButtonInfo, {
         ...BT_ABOUT_PROPS,
         className: CL_ABOUT,
         hotKey: _hotkeys.HK_ABOUT,
-        timeout: 0,
-        onClick: _compStore.showAbout,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgIcon.SvgInfo, {
-          style: S_SVG_BT
-        })
+        onClick: _compStore.showAbout
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.ModalSlider, {
       isShow: isTopics,

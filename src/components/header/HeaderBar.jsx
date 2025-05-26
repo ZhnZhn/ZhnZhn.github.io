@@ -32,9 +32,9 @@ import { useFnFocus } from '../hooks/useFocus';
 
 import FlatButton from '../zhn-m/FlatButton';
 import {
-  SvgSettings,
-  SvgInfo
-} from '../zhn/svg/SvgIcon';
+  FlatButtonSettings,
+  FlatButtonInfo
+} from '../zhn-m/FlatButtonSvg';
 import { ModalSlider } from '../zhn-modal-slider/ModalSlider';
 
 import ProgressLoading from './ProgressLoading';
@@ -58,11 +58,6 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
 , CL_BTS_RIGHT = `${CL_HEADER}__bts-right`
 , CL_BROWSER_MENU = `${CL_HEADER}__panel-browser`
 
-, S_SVG_BT = {
-  verticalAlign: 'middle',
-  margin: '0 8px 3px 8px'
-}
-
 , _crTitleOpen = strNoun => `Open ${strNoun}`
 , _crBtFlatProps = (
   caption,
@@ -71,7 +66,7 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
   className
 ) => ({
   ...crBtAriaLabelProps(title),
-  caption,  
+  caption,
   hotKey,
   className
 })
@@ -155,23 +150,18 @@ const HeaderBar = ({
        />
        <div className={CL_BTS_RIGHT}>
           <LimitRemainingLabel />
-          <FlatButton
-             {...BT_SETTINGS_PROPS}
-             hotKey={HK_SETTINGS}
-             timeout={500}
-             onClick={showSettings}
-           >
-             <SvgSettings style={S_SVG_BT} />
-          </FlatButton>
-          <FlatButton
-             {...BT_ABOUT_PROPS}
-             className={CL_ABOUT}
-             hotKey={HK_ABOUT}
-             timeout={0}
-             onClick={showAbout}
-          >
-             <SvgInfo style={S_SVG_BT} />
-          </FlatButton>
+          <FlatButtonSettings
+            {...BT_SETTINGS_PROPS}
+            hotKey={HK_SETTINGS}
+            timeout={500}
+            onClick={showSettings}
+          />
+          <FlatButtonInfo
+            {...BT_ABOUT_PROPS}
+            className={CL_ABOUT}
+            hotKey={HK_ABOUT}
+            onClick={showAbout}
+          />
         </div>
         <ModalSlider
            isShow={isTopics}
