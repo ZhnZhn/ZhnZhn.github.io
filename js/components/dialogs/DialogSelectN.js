@@ -12,6 +12,7 @@ var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallbac
 var _useIsShowInput = _interopRequireDefault(require("./hooks/useIsShowInput"));
 var _useSelectChartType = _interopRequireDefault(require("./hooks/useSelectChartType"));
 var _useChartConfig = _interopRequireDefault(require("./hooks/useChartConfig"));
+var _useToggleLabels = _interopRequireDefault(require("./hooks/useToggleLabels"));
 var _useDialog = _interopRequireDefault(require("./hooks/useDialog"));
 var _useDialogOptions = _interopRequireDefault(require("./hooks/useDialogOptions"));
 var _useTitles = _interopRequireDefault(require("./hooks/useTitles"));
@@ -71,10 +72,11 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     [_chartOptions, _dateOptions, _dateDefault, _updateChartConfig] = (0, _useChartConfig.default)(selectProps, props.chartsType, props.loadId, dfProps, _onUpdateChartConfig),
     [_isToggle, _toggleInputs, _hideToggle] = (0, _useBool.useToggleFalse)(),
     [_refDialogOptions, _isShowOptions, _toggleOptions, _hideOptions, _toggleDialogOption] = (0, _useDialogOptions.default)(),
-    [_isToolbar, _isShowLabels, _menuMoreModel, _toolbarButtons, _validationMessages, _setValidationMessages, _hClose] = (0, _useDialog.default)(props, {
+    [_isShowLabels, _toggleLabels] = (0, _useToggleLabels.default)(),
+    [_isToolbar, _menuMoreModel, _toolbarButtons, _validationMessages, _setValidationMessages, _hClose] = (0, _useDialog.default)(props, {
       toggleInputs: isFd || selectProps.length > 1 ? _toggleInputs : void 0,
       toggleOptions: props.isOpt || isCh ? _toggleOptions : void 0
-    }),
+    }, _toggleLabels),
     [_refTitles, _addTitleIndex, _removeTitleIndex] = (0, _useTitles.default)(),
     [_refItems, _hSelect, _tupleFilter] = (0, _useSelectItem.default)(_updateChartConfig),
     _hLoad = (0, _useEventCallback.default)(() => {
@@ -121,10 +123,12 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalToggle, {
       isShow: _isToggle,
       selectProps: selectProps,
+      isShowLabels: _isShowLabels,
       isFd: _isRowFd,
       isShowFd: _isShowFd,
       isCh: isCh,
       isShowChart: _isShowChart,
+      onToggleLabels: _toggleLabels,
       onToggle: _toggleInputById,
       onCheckCaption: _addTitleIndex,
       onUnCheckCaption: _removeTitleIndex,

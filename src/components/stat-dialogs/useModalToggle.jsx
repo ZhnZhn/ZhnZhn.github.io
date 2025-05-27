@@ -1,6 +1,8 @@
 import { useMemo } from '../uiApi';
 
 import { useToggleFalse } from '../hooks/useBool';
+
+import useToggleLabels from '../dialogs/hooks/useToggleLabels';
 import useTitles from '../dialogs/hooks/useTitles';
 import useRowToggle from './useRowToggle';
 
@@ -11,6 +13,10 @@ const useModalToggle = (
   configs
 ) => {
   const [
+    isShowLabels,
+    toggleLabels
+  ] = useToggleLabels()
+  , [
     isToggle,
     toggleInputs,
     hideInputs
@@ -34,17 +40,20 @@ const useModalToggle = (
       <D.ModalToggle
         isShow={isToggle}
         selectProps={configs}
+        isShowLabels={isShowLabels}
         isShowChart={isShowChart}
         crIsId={crIsId}
+        onToggleLabels={toggleLabels}
         onToggle={toggleIsRow}
         onCheckCaption={addTitleIndex}
         onUnCheckCaption={removeTitleIndex}
         onClose={hideInputs}
       />
-    ), [isToggle, configs, isShowChart])
+    ), [isToggle, configs, isShowChart, isShowLabels])
     //toggleIsRow, checkCaptionBy, uncheckCaption, hideInputs
     /*eslint-enable react-hooks/exhaustive-deps */
     , refTitles
+    , isShowLabels
     , isRow
     , toggleInputs
   ];

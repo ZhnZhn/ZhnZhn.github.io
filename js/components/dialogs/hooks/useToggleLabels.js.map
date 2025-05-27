@@ -1,0 +1,19 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/hooks/useToggleLabels.js"
+ ],
+ "file": "../../../../src/components/dialogs/hooks/useToggleLabels.js",
+ "names": [
+  "_has",
+  "require",
+  "_useToggle",
+  "useToggleLabels",
+  "useToggle",
+  "HAS_WIDE_SCREEN",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,IAAA,GAAAC,OAAA;AACA,IAAAC,UAAA,GAAAD,OAAA;AAEA,MAAME,eAAe,GAAGA,CAAA,KAAM,IAAAC,oBAAS,EACrCC,oBACF,CAAC;AAAA,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEcL,eAAe"
+}

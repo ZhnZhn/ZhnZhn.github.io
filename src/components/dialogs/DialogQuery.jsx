@@ -17,6 +17,8 @@ import {
 import memoIsShow from '../hoc/memoIsShow';
 import { useToggle } from '../hooks/useToggle';
 import useEventCallback from '../hooks/useEventCallback';
+
+import useToggleLabels from './hooks/useToggleLabels';
 import useDialog from './hooks/useDialog';
 import useDialogOptions from './hooks/useDialogOptions';
 
@@ -71,14 +73,17 @@ const DialogQuery = memoIsShow((
     _toggleDialogOption
   ] = useDialogOptions()
   , [
-    _isToolbar,
     _isShowLabels,
+    _toggleLabels
+  ] = useToggleLabels()
+  , [
+    _isToolbar,
     _menuMoreModel,
     _toolbarButtons
   ] = useDialog(props, {
     toggleOptions: _toggleOptions,
     toggleDate: noDate ? void 0 : _toggleDate
-  })
+  }, _toggleLabels)
   , _refIdInput = useRef()
   , _refDates = useRef()
   , _refSeriaColor = useRef()

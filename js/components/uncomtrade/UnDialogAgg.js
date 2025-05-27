@@ -8,6 +8,7 @@ var _getPropertyFn = require("../../utils/getPropertyFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
+var _useToggleLabels = _interopRequireDefault(require("../dialogs/hooks/useToggleLabels"));
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _useInputToggle = _interopRequireDefault(require("./useInputToggle"));
 var _useInputChart = _interopRequireDefault(require("./useInputChart"));
@@ -86,7 +87,8 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
     } = props,
     _refTradePartner = (0, _uiApi.useRef)(),
     [isShowToggle, toggleInputs, hideToggle] = (0, _useInputToggle.default)(),
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)(props, {
+    [isShowLabels, toggleLabels] = (0, _useToggleLabels.default)(),
+    [isToolbar, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)(props, {
       toggleInputs
     }),
     [isFlow, toggleFlow] = (0, _useToggle.useToggle)(!0)
@@ -171,9 +173,11 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       buttons: toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalInputToggle.default, {
       isShow: isShowToggle,
+      isShowLabels: isShowLabels,
       configs: [["Trade Flow", isFlow, toggleFlow]
       /*["Partner", isPartner, togglePartner]*/
       /*["Aggregation", isAggr, toggleAggr]*/],
+      onToggleLabels: toggleLabels,
       onClose: hideToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,

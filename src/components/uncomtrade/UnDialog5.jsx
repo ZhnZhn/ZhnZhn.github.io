@@ -20,6 +20,7 @@ import {
 import memoIsShow from "../hoc/memoIsShow";
 import { useToggle } from "../hooks/useToggle";
 import { useProperty } from "../hooks/useProperty";
+import useToggleLabels from "../dialogs/hooks/useToggleLabels";
 import useDialog from "../dialogs/hooks/useDialog";
 import useInputToggle from "./useInputToggle";
 
@@ -106,8 +107,11 @@ const UnDialog5 = memoIsShow((
      hideToggle
    ] = useInputToggle()
    , [
-     isToolbar,
      isShowLabels,
+     toggleLabels
+   ] = useToggleLabels()
+   , [
+     isToolbar,
      menuMoreModel,
      toolbarButtons,
      validationMessages,
@@ -201,6 +205,7 @@ const UnDialog5 = memoIsShow((
       />
       <ModalInputToggle
         isShow={isShowToggle}
+        isShowLabels={isShowLabels}
         configs={[
           /*["Partner", isPartner, togglePartner],*/
           ["Heading", isHeading, toggleHeading],
@@ -208,6 +213,7 @@ const UnDialog5 = memoIsShow((
           ["Chart", isChart, toggleChart]
           /*["Frequency", isFreq, toggleFreq]*/
         ]}
+        onToggleLabels={toggleLabels}
         onClose={hideToggle}
       />
       <D.SelectWithLoad

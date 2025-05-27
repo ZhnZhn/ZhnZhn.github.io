@@ -7,6 +7,7 @@ var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
+var _useToggleLabels = _interopRequireDefault(require("../dialogs/hooks/useToggleLabels"));
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _checkAreDatesValid = _interopRequireDefault(require("../dialogs/hooks/checkAreDatesValid"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
@@ -46,9 +47,10 @@ const ZillowDialog = (0, _memoIsShow.default)(props => {
     } = props,
     [isShowPattern, togglePattern] = (0, _useToggle.useToggle)(!1),
     [isShowDate, toggleDate] = (0, _useToggle.useToggle)(!1),
-    [isToolbar, isShowLabels, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)(props, {
+    [isShowLabels, toggleLabels] = (0, _useToggleLabels.default)(),
+    [isToolbar, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)(props, {
       toggleDate
-    }),
+    }, toggleLabels),
     _refTypeCode = (0, _uiApi.useRef)(),
     _refZip = (0, _uiApi.useRef)(),
     _refDates = (0, _uiApi.useRef)(),

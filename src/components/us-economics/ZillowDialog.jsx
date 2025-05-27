@@ -7,6 +7,8 @@ import {
 import memoIsShow from "../hoc/memoIsShow";
 import { useToggle } from "../hooks/useToggle";
 import { useProperty } from "../hooks/useProperty";
+
+import useToggleLabels from "../dialogs/hooks/useToggleLabels";
 import useDialog from "../dialogs/hooks/useDialog";
 import checkAreDatesValid from "../dialogs/hooks/checkAreDatesValid";
 
@@ -60,8 +62,11 @@ const ZillowDialog = memoIsShow(props => {
     toggleDate
   ] = useToggle(!1)
   , [
-    isToolbar,
     isShowLabels,
+    toggleLabels
+  ] = useToggleLabels()
+  , [
+    isToolbar,
     menuMoreModel,
     toolbarButtons,
     validationMessages,
@@ -69,7 +74,7 @@ const ZillowDialog = memoIsShow(props => {
     hClose
   ] = useDialog(props, {
     toggleDate
-  })
+  }, toggleLabels)
   , _refTypeCode = useRef()
   , _refZip = useRef()
   , _refDates = useRef()

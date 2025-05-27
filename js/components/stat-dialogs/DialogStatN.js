@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _has = require("../has");
 var _styleFn = require("../styleFn");
 var _ChartOptionsFn = require("../dialogs/ChartOptionsFn");
 var _FocusFirstCombobox = _interopRequireDefault(require("../zhn-moleculs/FocusFirstCombobox"));
@@ -13,7 +12,6 @@ var _Spinner = require("../zhn/Spinner");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _crSelectItem = _interopRequireDefault(require("./crSelectItem"));
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
-var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
 var _useValidationMessages = _interopRequireDefault(require("../dialogs/hooks/useValidationMessages"));
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
@@ -33,10 +31,9 @@ const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open 
     zIndex: 8
   },
   _crDivLoadingStyle = isShowLabels => ({
-    width: isShowLabels ? 350 : 250,
+    width: isShowLabels ? 350 : 267,
     height: 72
   });
-const IS_SHOW_LABELS = (0, _has.isWideWidth)();
 const _crDfC = (props, dim) => props.dfC || (dim || {}).value;
 const _crDfTitle = (props, dim) => {
   if (props.dfC || !dim) {
@@ -103,15 +100,13 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       dateDf = {},
       timeId
     } = state,
-    [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(IS_SHOW_LABELS),
-    [_modalToggleEl, _refTitles, isRow, toggleInputs] = (0, _useModalToggle.default)(configs),
+    [_modalToggleEl, _refTitles, isShowLabels, isRow, toggleInputs] = (0, _useModalToggle.default)(configs),
     {
       isShowChart
     } = isRow,
     [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
     [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
     toolbarButtons = (0, _useToolbar.default)({
-      toggleLabels,
       toggleInputs,
       toggleOptions,
       onAbout

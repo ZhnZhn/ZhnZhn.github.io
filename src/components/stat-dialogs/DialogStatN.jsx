@@ -6,7 +6,6 @@ import {
   getInputValue
 } from '../uiApi';
 
-import { isWideWidth } from '../has';
 import { crAbsoluteTopLeftStyle } from '../styleFn';
 
 import { isCategoryItem } from '../dialogs/ChartOptionsFn';
@@ -21,12 +20,13 @@ import D from '../dialogs/DialogCell';
 import crSelectItem from './crSelectItem';
 
 import memoIsShow from '../hoc/memoIsShow';
-import { useToggle } from '../hooks/useToggle';
 import { useProperty } from '../hooks/useProperty';
+
 import useValidationMessages from '../dialogs/hooks/useValidationMessages';
 import useMenuMore from '../dialogs/hooks/useMenuMore';
 import useToolbar from '../dialogs/hooks/useToolbar';
 import useDialogOptions from '../dialogs/hooks/useDialogOptions';
+
 import useRefByIndex from './useRefByIndex';
 import useModalToggle from './useModalToggle';
 import useLoadDims from './useLoadDims';
@@ -36,7 +36,7 @@ import { GEO_ENTITY } from './dimensions/EsConfig';
 const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again."
 , MSG_DIMS_LOADING = "Dims is loading"
 , S_SPINNER = {
-  ...crAbsoluteTopLeftStyle(80, '45%'),  
+  ...crAbsoluteTopLeftStyle(80, '45%'),
   width: 32,
   height: 32,
   zIndex: 8
@@ -44,11 +44,9 @@ const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open 
 , _crDivLoadingStyle = (
   isShowLabels
 ) => ({
-  width: isShowLabels ? 350 : 250,
+  width: isShowLabels ? 350 : 267,
   height: 72
 });
-
-const IS_SHOW_LABELS = isWideWidth();
 
 const _crDfC = (props, dim) => props.dfC
   || (dim || {}).value;
@@ -152,12 +150,9 @@ const DialogStatN = memoIsShow((props) => {
       timeId,
    } = state
   , [
-    isShowLabels,
-    toggleLabels
-  ] = useToggle(IS_SHOW_LABELS)
-  , [
     _modalToggleEl,
     _refTitles,
+    isShowLabels,
     isRow,
     toggleInputs
   ] = useModalToggle(configs)
@@ -176,7 +171,6 @@ const DialogStatN = memoIsShow((props) => {
     toggleDialogOption
   ] = useDialogOptions()
   , toolbarButtons = useToolbar({
-     toggleLabels,
      toggleInputs,
      toggleOptions,
      onAbout

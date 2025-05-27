@@ -17,6 +17,7 @@ import useEventCallback from '../hooks/useEventCallback';
 import useIsShowInput from './hooks/useIsShowInput';
 import useSelectChartType from './hooks/useSelectChartType';
 import useChartConfig from './hooks/useChartConfig';
+import useToggleLabels from './hooks/useToggleLabels'
 import useDialog from './hooks/useDialog';
 import useDialogOptions from './hooks/useDialogOptions';
 import useTitles from './hooks/useTitles';
@@ -122,8 +123,11 @@ const DialogSelectN = memoIsShow((
     _toggleDialogOption
   ] = useDialogOptions()
   , [
-    _isToolbar,
     _isShowLabels,
+    _toggleLabels
+  ] = useToggleLabels()
+  , [
+    _isToolbar,
     _menuMoreModel,
     _toolbarButtons,
     _validationMessages,
@@ -136,7 +140,7 @@ const DialogSelectN = memoIsShow((
     toggleOptions: props.isOpt || isCh
        ? _toggleOptions
        : void 0
-  })
+  }, _toggleLabels)
   , [
     _refTitles,
     _addTitleIndex,
@@ -204,10 +208,12 @@ const DialogSelectN = memoIsShow((
       <D.ModalToggle
         isShow={_isToggle}
         selectProps={selectProps}
+        isShowLabels={_isShowLabels}
         isFd={_isRowFd}
         isShowFd={_isShowFd}
         isCh={isCh}
         isShowChart={_isShowChart}
+        onToggleLabels={_toggleLabels}
         onToggle={_toggleInputById}
         onCheckCaption={_addTitleIndex}
         onUnCheckCaption={_removeTitleIndex}
