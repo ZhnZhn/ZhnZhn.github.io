@@ -8,12 +8,12 @@ var _useToggle = require("../hooks/useToggle");
 var _crIsId = _interopRequireDefault(require("./crIsId"));
 const useRowToggle = configs => {
   const [_isRow, _toggleIsRow] = (0, _useToggle.useToggleState)({
-    isShowChart: true
+    isShowChart: !0
   });
   (0, _uiApi.useEffect)(() => {
     const _dfIs = configs.reduce((_r, config) => {
       if (config.dfItem) {
-        _r[(0, _crIsId.default)(config.id)] = true;
+        _r[(0, _crIsId.default)(config.id)] = !0;
       }
       return _r;
     }, {});

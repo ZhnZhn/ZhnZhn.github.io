@@ -6,7 +6,10 @@
  "file": "../../../src/components/stat-dialogs/crIsId.js",
  "names": [
   "crIsId",
-  "id"
+  "id",
+  "_default",
+  "exports",
+  "default"
  ],
- "mappings": ";;;;;AACA,MAAMA,MAAM,GAAGC,EAAE,WAASA,EAAT,WAAjB;;eAEeD,M"
+ "mappings": ";;;;AACA,MAAMA,MAAM,GAAGC,EAAE,IAAIA,EAAE;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAETJ,MAAM"
 }

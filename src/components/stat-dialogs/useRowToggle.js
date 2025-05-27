@@ -9,14 +9,14 @@ const useRowToggle = configs => {
     _isRow,
     _toggleIsRow
   ] = useToggleState({
-    isShowChart: true
+    isShowChart: !0
   });
 
   useEffect(() => {
     const _dfIs = configs
       .reduce((_r, config) => {
          if (config.dfItem) {
-           _r[crIsId(config.id)] = true
+           _r[crIsId(config.id)] = !0
          }
          return _r;
        }, {});

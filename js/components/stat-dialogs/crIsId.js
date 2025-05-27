@@ -2,9 +2,6 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
-const crIsId = id => "is" + id + "Select";
-
-var _default = crIsId;
-exports.default = _default;
+const crIsId = id => id;
+var _default = exports.default = crIsId;
 //# sourceMappingURL=crIsId.js.map

@@ -1,4 +1,4 @@
 
-const crIsId = id => `is${id}Select`;
+const crIsId = id => id;
 
 export default crIsId
