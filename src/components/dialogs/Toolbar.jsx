@@ -1,6 +1,6 @@
 import ShowHide from '../zhn/ShowHide';
 import {
-  ToolbarButtonCircle
+  ToolbarButtonSvg
 } from '../zhn/ToolbarButtonCircle';
 
 const Toolbar = ({
@@ -9,11 +9,11 @@ const Toolbar = ({
 }) => (
   <ShowHide
     isShow={isShow}
-    withoutAnimation={true}
+    withoutAnimation={!0}
   >
-    <ToolbarButtonCircle>
+    <ToolbarButtonSvg>
       {buttons}
-    </ToolbarButtonCircle>
+    </ToolbarButtonSvg>
   </ShowHide>
 );
 
