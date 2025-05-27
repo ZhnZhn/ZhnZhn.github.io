@@ -67,7 +67,7 @@ const CommandButtons = ({
     <FlatButton
       key="close"
       timeout={0}
-      style={S_MR_57}
+      style={isFn(onLoad) && isFn(onShow) ? S_MR_57 : void 0}
       caption="Close"
       title="Close dialog"
       hotKey2={BT_HOT_KEY_CLOSE}

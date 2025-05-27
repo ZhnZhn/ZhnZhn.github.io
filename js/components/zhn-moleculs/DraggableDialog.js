@@ -44,7 +44,7 @@ const CommandButtons = _ref => {
       onClick: onShow
     }, "open"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       timeout: 0,
-      style: S_MR_57,
+      style: (0, _uiApi.isFn)(onLoad) && (0, _uiApi.isFn)(onShow) ? S_MR_57 : void 0,
       caption: "Close",
       title: "Close dialog",
       hotKey2: BT_HOT_KEY_CLOSE,
