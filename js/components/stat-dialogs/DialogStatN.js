@@ -15,7 +15,7 @@ var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useProperty = require("../hooks/useProperty");
 var _useValidationMessages = _interopRequireDefault(require("../dialogs/hooks/useValidationMessages"));
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
-var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
+var _useToolbar = require("../dialogs/hooks/useToolbar");
 var _useDialogOptions = _interopRequireDefault(require("../dialogs/hooks/useDialogOptions"));
 var _useRefByIndex = _interopRequireDefault(require("./useRefByIndex"));
 var _useModalToggle = _interopRequireDefault(require("./useModalToggle"));
@@ -106,7 +106,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     } = isRow,
     [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
     [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
-    toolbarButtons = (0, _useToolbar.default)({
+    toolbarButtons = (0, _useToolbar.useToolbar)({
       toggleInputs,
       toggleOptions,
       onAbout

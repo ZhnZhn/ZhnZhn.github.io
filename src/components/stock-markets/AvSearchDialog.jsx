@@ -2,7 +2,10 @@ import memoIsShow from '../hoc/memoIsShow';
 import { useToggle } from '../hooks/useToggle';
 import { useRefInit } from '../hooks/useProperty';
 import useMenuMore from '../dialogs/hooks/useMenuMore';
-import useToolbar from '../dialogs/hooks/useToolbar';
+import {
+  TITLE_TOGGLE,
+  useToolbar
+} from '../dialogs/hooks/useToolbar';
 
 import SearchAdapter from '../../adapters/av-sm/SearchAdapter';
 import D from '../dialogs/DialogCell';
@@ -27,9 +30,10 @@ const AvSearchDialog = memoIsShow(({
   , [
     isShowLabels,
     toggleLabels
-  ] = useToggle(true)
+  ] = useToggle(!0)
   , _toolbarButtons = useToolbar({
-    toggleLabels,
+    titleToggle: TITLE_TOGGLE,
+    toggleInputs: toggleLabels,
     onAbout,
   })
   , _searchApi = useRefInit(() => ({
@@ -47,15 +51,15 @@ const AvSearchDialog = memoIsShow(({
 
   return (
     <D.DraggableDialog
-         isShow={isShow}
-         caption={caption}
-         menuModel={menuMoreModel}
-         toTopLayer={toTopLayer}
-         onClose={onClose}
-     >
+      isShow={isShow}
+      caption={caption}
+      menuModel={menuMoreModel}
+      toTopLayer={toTopLayer}
+      onClose={onClose}
+    >
        <D.Toolbar
-          isShow={isToolbar}
-          buttons={_toolbarButtons}
+         isShow={isToolbar}
+         buttons={_toolbarButtons}
        />
        <D.RowInputSearch
          isShowLabels={isShowLabels}
@@ -64,6 +68,6 @@ const AvSearchDialog = memoIsShow(({
        />
     </D.DraggableDialog>
   );
-})
+});
 
 export default AvSearchDialog

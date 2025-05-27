@@ -1,21 +1,37 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.useToolbar = exports.TITLE_TOGGLE = void 0;
 var _arrFn = require("../../../utils/arrFn");
+var _a11yFn = require("../../a11yFn");
 var _useProperty = require("../../hooks/useProperty");
 var _ToolbarButtonCircle = require("../../zhn/ToolbarButtonCircle");
-const CLICK_TO_TOGGLE = 'Click to toggle';
-const _crDialogMenuTooltip = str => `Open dialog ${str} menu`;
+var _FlatButtonSvg = require("../../zhn-m/FlatButtonSvg");
+var _jsxRuntime = require("react/jsx-runtime");
+const TITLE_TOGGLE = exports.TITLE_TOGGLE = "Toggle input labels";
+const LABEL_TOGGLE = "Open toggle inputs",
+  LABEL_OPTIONS = "Open dialog options",
+  LABEL_ABOUT = "Open about data source",
+  CLICK_TO_TOGGLE = 'Click to toggle';
 const useToolbar = _ref => {
   let {
-    toggleLabels,
+    titleToggle,
     toggleInputs,
     toggleOptions,
     toggleDate,
     onAbout
   } = _ref;
-  return (0, _useProperty.useRefInit)(() => (0, _arrFn.filterBoolean)([toggleLabels ? (0, _ToolbarButtonCircle.crToolbarButton)('L', `${CLICK_TO_TOGGLE} input labels`, toggleLabels) : void 0, toggleInputs ? (0, _ToolbarButtonCircle.crToolbarButton)('I', _crDialogMenuTooltip('inputs'), toggleInputs) : void 0, toggleOptions ? (0, _ToolbarButtonCircle.crToolbarButton)('O', _crDialogMenuTooltip('options'), toggleOptions) : void 0, toggleDate ? (0, _ToolbarButtonCircle.crToolbarButton)('D', `${CLICK_TO_TOGGLE} date input`, toggleDate) : void 0, (0, _ToolbarButtonCircle.crToolbarButton)('A', 'About data source', onAbout)]));
+  return (0, _useProperty.useRefInit)(() => (0, _arrFn.filterBoolean)([toggleInputs ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButtonSvg.FlatButtonToggleOn, {
+    ...(0, _a11yFn.crBtAriaLabelProps)(titleToggle || LABEL_TOGGLE),
+    onClick: toggleInputs
+  }, "t") : void 0, toggleOptions ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButtonSvg.FlatButtonSettings, {
+    ...(0, _a11yFn.crBtAriaLabelProps)(LABEL_OPTIONS),
+    timeout: 0,
+    onClick: toggleOptions
+  }, "o") : void 0, toggleDate ? (0, _ToolbarButtonCircle.crToolbarButton)('D', `${CLICK_TO_TOGGLE} date input`, toggleDate) : void 0, /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButtonSvg.FlatButtonInfo, {
+    ...(0, _a11yFn.crBtAriaLabelProps)(LABEL_ABOUT),
+    onClick: onAbout
+  }, "a")]));
 };
-var _default = exports.default = useToolbar;
+exports.useToolbar = useToolbar;
 //# sourceMappingURL=useToolbar.js.map

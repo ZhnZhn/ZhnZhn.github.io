@@ -2,7 +2,7 @@ import { useCallback } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
 import useMenuMore from '../dialogs/hooks/useMenuMore';
-import useToolbar from '../dialogs/hooks/useToolbar';
+import { useToolbar } from '../dialogs/hooks/useToolbar';
 
 import D from '../dialogs/DialogCell';
 

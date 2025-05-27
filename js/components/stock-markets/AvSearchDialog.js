@@ -7,7 +7,7 @@ var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
-var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
+var _useToolbar = require("../dialogs/hooks/useToolbar");
 var _SearchAdapter = _interopRequireDefault(require("../../adapters/av-sm/SearchAdapter"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -25,9 +25,10 @@ const AvSearchDialog = (0, _memoIsShow.default)(_ref => {
     onClose
   } = _ref;
   const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
-    [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(true),
-    _toolbarButtons = (0, _useToolbar.default)({
-      toggleLabels,
+    [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(!0),
+    _toolbarButtons = (0, _useToolbar.useToolbar)({
+      titleToggle: _useToolbar.TITLE_TOGGLE,
+      toggleInputs: toggleLabels,
       onAbout
     }),
     _searchApi = (0, _useProperty.useRefInit)(() => ({

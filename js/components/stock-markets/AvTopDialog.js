@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
-var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
+var _useToolbar = require("../dialogs/hooks/useToolbar");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_DIALOG = {
@@ -27,7 +27,7 @@ const AvTopDialog = (0, _memoIsShow.default)(_ref => {
     onClose
   } = _ref;
   const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
-    _toolbarButtons = (0, _useToolbar.default)({
+    _toolbarButtons = (0, _useToolbar.useToolbar)({
       onAbout
     })
     /*eslint-disable react-hooks/exhaustive-deps */,

@@ -24,7 +24,7 @@ import { useProperty } from '../hooks/useProperty';
 
 import useValidationMessages from '../dialogs/hooks/useValidationMessages';
 import useMenuMore from '../dialogs/hooks/useMenuMore';
-import useToolbar from '../dialogs/hooks/useToolbar';
+import { useToolbar } from '../dialogs/hooks/useToolbar';
 import useDialogOptions from '../dialogs/hooks/useDialogOptions';
 
 import useRefByIndex from './useRefByIndex';

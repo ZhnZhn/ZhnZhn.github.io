@@ -17,7 +17,10 @@ import {
   useRefBool
 } from '../hooks/useProperty';
 import useMenuMore from '../dialogs/hooks/useMenuMore';
-import useToolbar from '../dialogs/hooks/useToolbar';
+import {
+  TITLE_TOGGLE,
+  useToolbar
+} from '../dialogs/hooks/useToolbar';
 
 import D from '../dialogs/DialogCell'
 
@@ -85,7 +88,8 @@ const AvIndicatorDialog = memoIsShow(({
     toggleLabels
   ] = useToggle(!0)
   , _toolbarButtons = useToolbar({
-    toggleLabels,
+    titleToggle: TITLE_TOGGLE,
+    toggleInputs: toggleLabels,
     toggleOptions,
     onAbout
   })
@@ -172,7 +176,7 @@ const AvIndicatorDialog = memoIsShow(({
         />
       </D.ShowHide>
       <D.RowCheckBox1
-         caption="Add Seria with Second YAxis"
+         caption="Add Seria with YAxis2"
          onCheck={_hCheckSecondYAxis}
          onUnCheck={_hUnCheckSecondYAxis}
       />

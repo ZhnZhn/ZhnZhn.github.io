@@ -9,7 +9,7 @@ var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
-var _useToolbar = _interopRequireDefault(require("../dialogs/hooks/useToolbar"));
+var _useToolbar = require("../dialogs/hooks/useToolbar");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_INDICATOR = 'SMA',
@@ -54,8 +54,9 @@ const AvIndicatorDialog = (0, _memoIsShow.default)(_ref => {
   const [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
     [isShowOptions, toggleOptions] = (0, _useToggle.useToggle)(),
     [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(!0),
-    _toolbarButtons = (0, _useToolbar.default)({
-      toggleLabels,
+    _toolbarButtons = (0, _useToolbar.useToolbar)({
+      titleToggle: _useToolbar.TITLE_TOGGLE,
+      toggleInputs: toggleLabels,
       toggleOptions,
       onAbout
     }),
@@ -129,7 +130,7 @@ const AvIndicatorDialog = (0, _memoIsShow.default)(_ref => {
         errorMsg: "Number in range 250-2500"
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox1, {
-      caption: "Add Seria with Second YAxis",
+      caption: "Add Seria with YAxis2",
       onCheck: _hCheckSecondYAxis,
       onUnCheck: _hUnCheckSecondYAxis
     })]
