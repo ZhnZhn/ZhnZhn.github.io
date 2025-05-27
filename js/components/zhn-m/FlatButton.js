@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _has = require("../has");
 var _styleFn = require("../styleFn");
 var _useThrottleClick = _interopRequireDefault(require("../hooks/useThrottleClick"));
 var _useHotKey = _interopRequireDefault(require("../hotkeys/useHotKey"));
@@ -17,7 +18,7 @@ const _crTitle = (title, hotKey) => hotKey ? `${title || ''} [${hotKey.toLowerCa
 const FlatButton = props => {
   const _hClick = (0, _useThrottleClick.default)(props.timeout ?? 3000, props.onClick),
     [_appHotKey, _refBt] = (0, _useHotKey.default)(props.hotKey, _hClick, props.refBt),
-    _hotKey = _appHotKey || props.hotKey2;
+    _hotKey = _has.HAS_KEYBOARD_FOCUS ? _appHotKey || props.hotKey2 : void 0;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
     ref: _refBt,
     type: "button",

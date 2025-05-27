@@ -1,4 +1,5 @@
 import { IfTrue } from '../uiApi';
+import { HAS_KEYBOARD_FOCUS } from '../has';
 import {
   crCn,
   crBold16Cn
@@ -34,7 +35,9 @@ const FlatButton = (props) => {
     _hClick,
     props.refBt
   )
-  , _hotKey = _appHotKey || props.hotKey2;
+  , _hotKey = HAS_KEYBOARD_FOCUS
+    ? _appHotKey || props.hotKey2
+    : void 0;
 
   return (
     <button
