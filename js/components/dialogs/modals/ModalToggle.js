@@ -7,6 +7,7 @@ var _isTypeFn = require("../../../utils/isTypeFn");
 var _styleFn = require("../../styleFn");
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
 var _ItemStack = _interopRequireDefault(require("../../zhn/ItemStack"));
+var _RowCheckBoxInputLabels = _interopRequireDefault(require("../rows/RowCheckBoxInputLabels"));
 var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox1"));
 var _RowCheckBox2 = _interopRequireDefault(require("../rows/RowCheckBox2"));
 var _RowCheckBox3 = _interopRequireDefault(require("../rows/RowCheckBox3"));
@@ -81,13 +82,10 @@ const ModalToggle = _ref2 => {
     },
     className: className,
     onClose: onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox3.default, {
-      style: _Style.S_ROW,
-      color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
-      caption: "Input Labels",
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBoxInputLabels.default, {
       value: isShowLabels,
       onToggle: onToggleLabels
-    }, "isShowLabels"), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
       items: selectProps,
       crItem: _crCheckBoxItem,
       onToggle: onToggle,

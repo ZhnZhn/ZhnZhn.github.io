@@ -8,6 +8,7 @@ import {
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import ItemStack from '../../zhn/ItemStack';
 
+import RowCheckBoxInputLabels from '../rows/RowCheckBoxInputLabels';
 import RowCheckBox1 from '../rows/RowCheckBox1';
 import RowCheckBox2 from '../rows/RowCheckBox2';
 import RowCheckBox3 from '../rows/RowCheckBox3';
@@ -94,11 +95,7 @@ const ModalToggle = ({
     className={className}
     onClose={onClose}
   >
-    <RowCheckBox3
-      key="isShowLabels"
-      style={S_ROW}
-      color={TOGGLE_INPUT_CHECKBOX_COLOR}
-      caption="Input Labels"
+    <RowCheckBoxInputLabels
       value={isShowLabels}
       onToggle={onToggleLabels}
     />

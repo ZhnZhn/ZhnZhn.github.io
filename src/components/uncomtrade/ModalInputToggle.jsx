@@ -1,5 +1,9 @@
+import { safeMap } from '../uiApi';
+
 import ModalPopup from '../zhn-moleculs/ModalPopup';
+import RowCheckBoxInputLabels from '../dialogs/rows/RowCheckBoxInputLabels';
 import RowCheckBox3 from '../dialogs/rows/RowCheckBox3';
+
 import {
   S_MODAL_POPUP,
   S_ROW,
@@ -8,7 +12,9 @@ import {
 
 const ModalInputToggle = ({
   isShow,
+  isShowLabels,
   configs,
+  onToggleLabels,
   onClose
 }) => (
   <ModalPopup
@@ -16,7 +22,11 @@ const ModalInputToggle = ({
     style={S_MODAL_POPUP}
     onClose={onClose}
   >
-    {(configs || []).map(config => (
+    <RowCheckBoxInputLabels
+      value={isShowLabels}
+      onToggle={onToggleLabels}
+    />
+    {safeMap(configs, config => (
       <RowCheckBox3
         key={config[0]}
         style={S_ROW}
