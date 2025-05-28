@@ -1,0 +1,41 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/modals/ModalToggleInputs.js"
+ ],
+ "file": "../../../../src/components/dialogs/modals/ModalToggleInputs.js",
+ "names": [
+  "_uiApi",
+  "require",
+  "_ModalPopup",
+  "_interopRequireDefault",
+  "_RowCheckBoxInputLabels",
+  "_RowCheckBox",
+  "_Style",
+  "_jsxRuntime",
+  "ModalToggleInputs",
+  "_ref",
+  "isShow",
+  "isShowLabels",
+  "configs",
+  "onToggleLabels",
+  "onClose",
+  "jsxs",
+  "default",
+  "style",
+  "S_MODAL_POPUP",
+  "children",
+  "jsx",
+  "value",
+  "onToggle",
+  "safeMap",
+  "config",
+  "S_ROW",
+  "color",
+  "TOGGLE_INPUT_CHECKBOX_COLOR",
+  "caption",
+  "_default",
+  "exports"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAEA,IAAAC,WAAA,GAAAC,sBAAA,CAAAF,OAAA;AAEA,IAAAG,uBAAA,GAAAD,sBAAA,CAAAF,OAAA;AACA,IAAAI,YAAA,GAAAF,sBAAA,CAAAF,OAAA;AAEA,IAAAK,MAAA,GAAAL,OAAA;AAIiB,IAAAM,WAAA,GAAAN,OAAA;AAEjB,MAAMO,iBAAiB,GAAGC,IAAA;EAAA,IAAC;IACzBC,MAAM;IACNC,YAAY;IACZC,OAAO;IACPC,cAAc;IACdC;EACF,CAAC,GAAAL,IAAA;EAAA,oBACC,IAAAF,WAAA,CAAAQ,IAAA,EAACb,WAAA,CAAAc,OAAU;IACTN,MAAM,EAAEA,MAAO;IACfO,KAAK,EAAEC,oBAAc;IACrBJ,OAAO,EAAEA,OAAQ;IAAAK,QAAA,gBAEjB,IAAAZ,WAAA,CAAAa,GAAA,EAAChB,uBAAA,CAAAY,OAAsB;MACrBK,KAAK,EAAEV,YAAa;MACpBW,QAAQ,EAAET;IAAe,CAC1B,CAAC,EACD,IAAAU,cAAO,EAACX,OAAO,EAAEY,MAAM,iBACtB,IAAAjB,WAAA,CAAAa,GAAA,EAACf,YAAA,CAAAW,OAAY;MAEXC,KAAK,EAAEQ,YAAM;MACbC,KAAK,EAAEC,kCAA4B;MACnCC,OAAO,EAAEJ,MAAM,CAAC,CAAC,CAAE;MACnBH,KAAK,EAAEG,MAAM,CAAC,CAAC,CAAE;MACjBF,QAAQ,EAAEE,MAAM,CAAC,CAAC;IAAE,GALfA,MAAM,CAAC,CAAC,CAMd,CACF,CAAC;EAAA,CACQ,CAAC;AAAA,CACd;AAAC,IAAAK,QAAA,GAAAC,OAAA,CAAAd,OAAA,GAEaR,iBAAiB"
+}

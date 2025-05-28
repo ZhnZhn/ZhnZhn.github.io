@@ -5,6 +5,7 @@ import {
 } from "../uiApi";
 
 import memoIsShow from "../hoc/memoIsShow";
+import { useToggleFalse } from "../hooks/useBool";
 import { useToggle } from "../hooks/useToggle";
 import { useProperty } from "../hooks/useProperty";
 
@@ -13,6 +14,7 @@ import useDialog from "../dialogs/hooks/useDialog";
 import checkAreDatesValid from "../dialogs/hooks/checkAreDatesValid";
 
 import D from "../dialogs/DialogCell";
+import ModalToggleInputs from "../dialogs/modals/ModalToggleInputs";
 
 const DATA_NOTE = "*Data present not for all zip codes";
 const S_TIP = {
@@ -62,6 +64,11 @@ const ZillowDialog = memoIsShow(props => {
     toggleDate
   ] = useToggle(!1)
   , [
+    isShowToggle,
+    toggleInputs,
+    hideToggle
+  ] = useToggleFalse()
+  , [
     isShowLabels,
     toggleLabels
   ] = useToggleLabels()
@@ -73,8 +80,8 @@ const ZillowDialog = memoIsShow(props => {
     setValidationMessages,
     hClose
   ] = useDialog(props, {
-    toggleDate
-  }, toggleLabels)
+    toggleInputs
+  })
   , _refTypeCode = useRef()
   , _refZip = useRef()
   , _refDates = useRef()
@@ -155,6 +162,15 @@ const ZillowDialog = memoIsShow(props => {
       <D.Toolbar
          isShow={isToolbar}
          buttons={toolbarButtons}
+      />
+      <ModalToggleInputs
+        isShow={isShowToggle}
+        isShowLabels={isShowLabels}
+        configs={[
+          ["Date Period", isShowDate, toggleDate]
+        ]}
+        onToggleLabels={toggleLabels}
+        onClose={hideToggle}
       />
       <D.SelectWithLoad
          isShow={isShow}

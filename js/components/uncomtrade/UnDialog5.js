@@ -7,14 +7,14 @@ var _uiApi = require("../uiApi");
 var _ChartType = require("../../constants/ChartType");
 var _getPropertyFn = require("../../utils/getPropertyFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
+var _useBool = require("../hooks/useBool");
 var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
 var _useToggleLabels = _interopRequireDefault(require("../dialogs/hooks/useToggleLabels"));
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
-var _useInputToggle = _interopRequireDefault(require("./useInputToggle"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _ModalToggleInputs = _interopRequireDefault(require("../dialogs/modals/ModalToggleInputs"));
 var _crDateConfig = _interopRequireDefault(require("../dialogs/fns/crDateConfig"));
-var _ModalInputToggle = _interopRequireDefault(require("./ModalInputToggle"));
 var _dialogFn = require("./dialogFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const TRADE_FLOW_OPTIONS = [{
@@ -120,7 +120,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
       dfId
     } = dfProps || {},
     [seriaType, setSeriaType] = (0, _uiApi.useState)(DF_CHART),
-    [isShowToggle, toggleInputs, hideToggle] = (0, _useInputToggle.default)(),
+    [isShowToggle, toggleInputs, hideToggle] = (0, _useBool.useToggleFalse)(),
     [isShowLabels, toggleLabels] = (0, _useToggleLabels.default)(),
     [isToolbar, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)(props, {
       toggleInputs
@@ -196,7 +196,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,
       buttons: toolbarButtons
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalInputToggle.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalToggleInputs.default, {
       isShow: isShowToggle,
       isShowLabels: isShowLabels,
       configs: [/*["Partner", isPartner, togglePartner],*/

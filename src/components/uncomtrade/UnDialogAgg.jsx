@@ -9,18 +9,18 @@ import {
 } from "../../utils/getPropertyFn";
 
 import memoIsShow from "../hoc/memoIsShow";
+import { useToggleFalse } from "../hooks/useBool";
 import { useToggle } from "../hooks/useToggle";
 import { useProperty } from "../hooks/useProperty";
 
 import useToggleLabels from "../dialogs/hooks/useToggleLabels";
 import useDialog from "../dialogs/hooks/useDialog";
 
-import useInputToggle from "./useInputToggle";
+import D from "../dialogs/DialogCell";
+import ModalToggleInputs from "../dialogs/modals/ModalToggleInputs"
+
 import useInputChart from "./useInputChart";
 import { crInputSelectDfProps } from "./dialogFn";
-
-import D from "../dialogs/DialogCell";
-import ModalInputToggle from "./ModalInputToggle";
 
 const [
   DF_REPORTER = { c: "World", v: "0"},
@@ -88,7 +88,7 @@ const UnDialogAgg = memoIsShow((
     isShowToggle,
     toggleInputs,
     hideToggle
-  ] = useInputToggle()
+  ] = useToggleFalse()
   , [
     isShowLabels,
     toggleLabels
@@ -221,7 +221,7 @@ const UnDialogAgg = memoIsShow((
         isShow={isToolbar}
         buttons={toolbarButtons}
      />
-     <ModalInputToggle
+     <ModalToggleInputs
        isShow={isShowToggle}
        isShowLabels={isShowLabels}
        configs={[

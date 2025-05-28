@@ -3,13 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
-var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
-var _RowCheckBoxInputLabels = _interopRequireDefault(require("../dialogs/rows/RowCheckBoxInputLabels"));
-var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox3"));
-var _Style = require("../dialogs/modals/Style");
+var _uiApi = require("../../uiApi");
+var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
+var _RowCheckBoxInputLabels = _interopRequireDefault(require("../rows/RowCheckBoxInputLabels"));
+var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox3"));
+var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const ModalInputToggle = _ref => {
+const ModalToggleInputs = _ref => {
   let {
     isShow,
     isShowLabels,
@@ -33,5 +33,5 @@ const ModalInputToggle = _ref => {
     }, config[0]))]
   });
 };
-var _default = exports.default = ModalInputToggle;
-//# sourceMappingURL=ModalInputToggle.js.map
+var _default = exports.default = ModalToggleInputs;
+//# sourceMappingURL=ModalToggleInputs.js.map

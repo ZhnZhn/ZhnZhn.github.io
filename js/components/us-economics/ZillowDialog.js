@@ -5,12 +5,14 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
+var _useBool = require("../hooks/useBool");
 var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
 var _useToggleLabels = _interopRequireDefault(require("../dialogs/hooks/useToggleLabels"));
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
 var _checkAreDatesValid = _interopRequireDefault(require("../dialogs/hooks/checkAreDatesValid"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _ModalToggleInputs = _interopRequireDefault(require("../dialogs/modals/ModalToggleInputs"));
 var _jsxRuntime = require("react/jsx-runtime");
 const DATA_NOTE = "*Data present not for all zip codes";
 const S_TIP = {
@@ -47,10 +49,11 @@ const ZillowDialog = (0, _memoIsShow.default)(props => {
     } = props,
     [isShowPattern, togglePattern] = (0, _useToggle.useToggle)(!1),
     [isShowDate, toggleDate] = (0, _useToggle.useToggle)(!1),
+    [isShowToggle, toggleInputs, hideToggle] = (0, _useBool.useToggleFalse)(),
     [isShowLabels, toggleLabels] = (0, _useToggleLabels.default)(),
     [isToolbar, menuMoreModel, toolbarButtons, validationMessages, setValidationMessages, hClose] = (0, _useDialog.default)(props, {
-      toggleDate
-    }, toggleLabels),
+      toggleInputs
+    }),
     _refTypeCode = (0, _uiApi.useRef)(),
     _refZip = (0, _uiApi.useRef)(),
     _refDates = (0, _uiApi.useRef)(),
@@ -129,6 +132,12 @@ const ZillowDialog = (0, _memoIsShow.default)(props => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
       isShow: isToolbar,
       buttons: toolbarButtons
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalToggleInputs.default, {
+      isShow: isShowToggle,
+      isShowLabels: isShowLabels,
+      configs: [["Date Period", isShowDate, toggleDate]],
+      onToggleLabels: toggleLabels,
+      onClose: hideToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
       isShow: isShow,
       isShowLabels: isShowLabels,

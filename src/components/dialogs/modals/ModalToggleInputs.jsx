@@ -1,16 +1,17 @@
-import { safeMap } from '../uiApi';
+import { safeMap } from '../../uiApi';
 
-import ModalPopup from '../zhn-moleculs/ModalPopup';
-import RowCheckBoxInputLabels from '../dialogs/rows/RowCheckBoxInputLabels';
-import RowCheckBox3 from '../dialogs/rows/RowCheckBox3';
+import ModalPopup from '../../zhn-moleculs/ModalPopup';
+
+import RowCheckBoxInputLabels from '../rows/RowCheckBoxInputLabels';
+import RowCheckBox3 from '../rows/RowCheckBox3';
 
 import {
   S_MODAL_POPUP,
   S_ROW,
   TOGGLE_INPUT_CHECKBOX_COLOR
-} from '../dialogs/modals/Style';
+} from './Style';
 
-const ModalInputToggle = ({
+const ModalToggleInputs = ({
   isShow,
   isShowLabels,
   configs,
@@ -39,4 +40,4 @@ const ModalInputToggle = ({
   </ModalPopup>
 );
 
-export default ModalInputToggle
+export default ModalToggleInputs
