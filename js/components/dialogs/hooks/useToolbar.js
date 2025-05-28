@@ -5,20 +5,17 @@ exports.useToolbar = exports.TITLE_TOGGLE = void 0;
 var _arrFn = require("../../../utils/arrFn");
 var _a11yFn = require("../../a11yFn");
 var _useProperty = require("../../hooks/useProperty");
-var _ToolbarButtonCircle = require("../../zhn/ToolbarButtonCircle");
 var _FlatButtonSvg = require("../../zhn-m/FlatButtonSvg");
 var _jsxRuntime = require("react/jsx-runtime");
 const TITLE_TOGGLE = exports.TITLE_TOGGLE = "Toggle input labels";
 const LABEL_TOGGLE = "Open toggle inputs",
   LABEL_OPTIONS = "Open dialog options",
-  LABEL_ABOUT = "Open about data source",
-  CLICK_TO_TOGGLE = 'Click to toggle';
+  LABEL_ABOUT = "Open about data source";
 const useToolbar = _ref => {
   let {
     titleToggle,
     toggleInputs,
     toggleOptions,
-    toggleDate,
     onAbout
   } = _ref;
   return (0, _useProperty.useRefInit)(() => (0, _arrFn.filterBoolean)([toggleInputs ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButtonSvg.FlatButtonToggleOn, {
@@ -28,7 +25,7 @@ const useToolbar = _ref => {
     ...(0, _a11yFn.crBtAriaLabelProps)(LABEL_OPTIONS),
     timeout: 0,
     onClick: toggleOptions
-  }, "o") : void 0, toggleDate ? (0, _ToolbarButtonCircle.crToolbarButton)('D', `${CLICK_TO_TOGGLE} date input`, toggleDate) : void 0, /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButtonSvg.FlatButtonInfo, {
+  }, "o") : void 0, /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButtonSvg.FlatButtonInfo, {
     ...(0, _a11yFn.crBtAriaLabelProps)(LABEL_ABOUT),
     onClick: onAbout
   }, "a")]));

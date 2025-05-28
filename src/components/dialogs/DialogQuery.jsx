@@ -11,11 +11,11 @@ import {
   useState,
   getRefValue,
   getInputValue,
-  IfTrue
+  //IfTrue
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
-import { useToggle } from '../hooks/useToggle';
+//import { useToggle } from '../hooks/useToggle';
 import useEventCallback from '../hooks/useEventCallback';
 
 import useToggleLabels from './hooks/useToggleLabels';
@@ -61,10 +61,12 @@ const DialogQuery = memoIsShow((
     _chartType,
     _setChartType
   ] = useState(CHT_SPLINE)
+  /*
   , [
     _isShowDate,
     _toggleDate
   ] = useToggle(!0)
+  */
   , [
     _refDialogOptions,
     _isShowOptions,
@@ -82,10 +84,9 @@ const DialogQuery = memoIsShow((
     _toolbarButtons
   ] = useDialog(props, {
     toggleOptions: _toggleOptions,
-    toggleDate: noDate ? void 0 : _toggleDate
   }, _toggleLabels)
   , _refIdInput = useRef()
-  , _refDates = useRef()
+  //, _refDates = useRef()
   , _refSeriaColor = useRef()
   , _hLoad = useEventCallback(() => {
      const _idInputInst = getRefValue(_refIdInput)
@@ -143,6 +144,7 @@ const DialogQuery = memoIsShow((
         onSelectChart={_setChartType}
         noDate={noDate}
       />
+      {/*
       <IfTrue v={!noDate}>
         <D.ShowHide isShow={_isShowDate}>
           <D.InputPeriod
@@ -155,6 +157,7 @@ const DialogQuery = memoIsShow((
           />
         </D.ShowHide>
       </IfTrue>
+      */}
    </D.DraggableDialog>
   );
 });
