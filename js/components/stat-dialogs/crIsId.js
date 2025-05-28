@@ -1,7 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
-const crIsId = id => id;
-var _default = exports.default = crIsId;
+exports.crIsId = exports.PN_IS_SHOW_CHART = void 0;
+const PN_IS_SHOW_CHART = exports.PN_IS_SHOW_CHART = "_is";
+const crIsId = id => `is${id}`;
+exports.crIsId = crIsId;
 //# sourceMappingURL=crIsId.js.map

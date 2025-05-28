@@ -11,6 +11,7 @@ var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 var _Spinner = require("../zhn/Spinner");
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
 var _crSelectItem = _interopRequireDefault(require("./crSelectItem"));
+var _crIsId = require("./crIsId");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useProperty = require("../hooks/useProperty");
 var _useValidationMessages = _interopRequireDefault(require("../dialogs/hooks/useValidationMessages"));
@@ -101,9 +102,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
       timeId
     } = state,
     [_modalToggleEl, _refTitles, isShowLabels, isRow, toggleInputs] = (0, _useModalToggle.default)(configs),
-    {
-      isShowChart
-    } = isRow,
+    isShowChart = isRow[_crIsId.PN_IS_SHOW_CHART],
     [isToolbar, menuMoreModel] = (0, _useMenuMore.default)(onAbout),
     [refDialogOptions, isShowOptions, toggleOptions, hideOptions, toggleDialogOption] = (0, _useDialogOptions.default)(),
     toolbarButtons = (0, _useToolbar.useToolbar)({
@@ -177,7 +176,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     //loadFn, onLoad, props, clearValidationMessages, setValidationMessages
     /*eslint-enable react-hooks/exhaustive-deps */,
     _spinnerStatus = (0, _Spinner.crSpinnerStatus)(isLoading, isLoadFailed),
-    _isShowDate = (0, _ChartOptionsFn.isCategoryItem)(chartType);
+    _isShowDate = isShowChart && (0, _ChartOptionsFn.isCategoryItem)(chartType);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
     isFocusBtMenu: false,
     isShow: isShow,
@@ -214,9 +213,9 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
         chartType: chartType,
         isShowLabels: isShowLabels,
         isShowChart: isShowChart,
+        isShowDate: _isShowDate,
         chartOptions: chartOptions,
         onSelectChart: setChartType,
-        isShowDate: _isShowDate,
         dateDefault: dateDf.caption,
         dateOptions: dateOptions,
         onSelectDate: setDate,

@@ -18,6 +18,7 @@ import {
 } from '../zhn/Spinner';
 import D from '../dialogs/DialogCell';
 import crSelectItem from './crSelectItem';
+import { PN_IS_SHOW_CHART } from './crIsId';
 
 import memoIsShow from '../hoc/memoIsShow';
 import { useProperty } from '../hooks/useProperty';
@@ -156,9 +157,7 @@ const DialogStatN = memoIsShow((props) => {
     isRow,
     toggleInputs
   ] = useModalToggle(configs)
-  , {
-    isShowChart
-  } = isRow
+  , isShowChart = isRow[PN_IS_SHOW_CHART]
   , [
     isToolbar,
     menuMoreModel
@@ -248,8 +247,7 @@ const DialogStatN = memoIsShow((props) => {
   //loadFn, onLoad, props, clearValidationMessages, setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
   , _spinnerStatus = crSpinnerStatus(isLoading, isLoadFailed)
-  , _isShowDate = isCategoryItem(chartType);
-
+  , _isShowDate = isShowChart && isCategoryItem(chartType);
   return (
     <D.DraggableDialog
        isFocusBtMenu={false}
@@ -293,9 +291,9 @@ const DialogStatN = memoIsShow((props) => {
                  chartType={chartType}
                  isShowLabels={isShowLabels}
                  isShowChart={isShowChart}
+                 isShowDate={_isShowDate}
                  chartOptions={chartOptions}
                  onSelectChart={setChartType}
-                 isShowDate={_isShowDate}
                  dateDefault={dateDf.caption}
                  dateOptions={dateOptions}
                  onSelectDate={setDate}

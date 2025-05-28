@@ -7,7 +7,7 @@ import useTitles from '../dialogs/hooks/useTitles';
 import useRowToggle from './useRowToggle';
 
 import D from '../dialogs/DialogCell';
-import crIsId from './crIsId';
+import { PN_IS_SHOW_CHART } from './crIsId';
 
 const useModalToggle = (
   configs
@@ -23,11 +23,10 @@ const useModalToggle = (
   ] = useToggleFalse()
   , [
     isRow,
-    toggleIsRow
+    toggleIsRow,
+    toggleIsChart
   ] = useRowToggle(configs)
-  , {
-    isShowChart
-  } = isRow
+  , isShowChart = isRow[PN_IS_SHOW_CHART]
   , [
     refTitles,
     addTitleIndex,
@@ -42,14 +41,15 @@ const useModalToggle = (
         selectProps={configs}
         isShowLabels={isShowLabels}
         isShowChart={isShowChart}
-        crIsId={crIsId}
+        isCh={configs.length > 2}
         onToggleLabels={toggleLabels}
         onToggle={toggleIsRow}
+        onToggleChart={toggleIsChart}
         onCheckCaption={addTitleIndex}
         onUnCheckCaption={removeTitleIndex}
         onClose={hideInputs}
       />
-    ), [isToggle, configs, isShowChart, isShowLabels])
+    ), [isToggle, configs, isShowLabels, isShowChart])
     //toggleIsRow, checkCaptionBy, uncheckCaption, hideInputs
     /*eslint-enable react-hooks/exhaustive-deps */
     , refTitles

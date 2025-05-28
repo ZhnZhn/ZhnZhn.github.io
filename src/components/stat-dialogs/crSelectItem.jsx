@@ -1,6 +1,6 @@
 
 import D from '../dialogs/DialogCell';
-import crIsId from './crIsId';
+import { crIsId } from './crIsId';
 
 const S_CAPTION = {
   wordBreak: 'break-word'

@@ -9,15 +9,13 @@ var _useToggleLabels = _interopRequireDefault(require("../dialogs/hooks/useToggl
 var _useTitles = _interopRequireDefault(require("../dialogs/hooks/useTitles"));
 var _useRowToggle = _interopRequireDefault(require("./useRowToggle"));
 var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
-var _crIsId = _interopRequireDefault(require("./crIsId"));
+var _crIsId = require("./crIsId");
 var _jsxRuntime = require("react/jsx-runtime");
 const useModalToggle = configs => {
   const [isShowLabels, toggleLabels] = (0, _useToggleLabels.default)(),
     [isToggle, toggleInputs, hideInputs] = (0, _useBool.useToggleFalse)(),
-    [isRow, toggleIsRow] = (0, _useRowToggle.default)(configs),
-    {
-      isShowChart
-    } = isRow,
+    [isRow, toggleIsRow, toggleIsChart] = (0, _useRowToggle.default)(configs),
+    isShowChart = isRow[_crIsId.PN_IS_SHOW_CHART],
     [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)();
   return [/*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalToggle, {
@@ -25,13 +23,14 @@ const useModalToggle = configs => {
     selectProps: configs,
     isShowLabels: isShowLabels,
     isShowChart: isShowChart,
-    crIsId: _crIsId.default,
+    isCh: configs.length > 2,
     onToggleLabels: toggleLabels,
     onToggle: toggleIsRow,
+    onToggleChart: toggleIsChart,
     onCheckCaption: addTitleIndex,
     onUnCheckCaption: removeTitleIndex,
     onClose: hideInputs
-  }), [isToggle, configs, isShowChart, isShowLabels])
+  }), [isToggle, configs, isShowLabels, isShowChart])
   //toggleIsRow, checkCaptionBy, uncheckCaption, hideInputs
   /*eslint-enable react-hooks/exhaustive-deps */, refTitles, isShowLabels, isRow, toggleInputs];
 };

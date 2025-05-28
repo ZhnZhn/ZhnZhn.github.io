@@ -1,31 +1,45 @@
-import { useEffect } from '../uiApi';
+import {
+  useMemo,
+  useEffect
+} from '../uiApi';
 
 import { useToggleState } from '../hooks/useToggle';
 
-import crIsId from './crIsId';
+import {
+  PN_IS_SHOW_CHART,
+  crIsId
+} from './crIsId';
 
 const useRowToggle = configs => {
   const [
-    _isRow,
+    isRow,
     _toggleIsRow
   ] = useToggleState({
-    isShowChart: !0
-  });
+    [PN_IS_SHOW_CHART]: !0
+  })
+  , [
+    toggleIsRow,
+    toggleIsChart
+  ] = useMemo(() => [
+    id => _toggleIsRow(crIsId(id)),
+    () => _toggleIsRow(PN_IS_SHOW_CHART)
+  ], [_toggleIsRow]);
 
   useEffect(() => {
-    const _dfIs = configs
+    _toggleIsRow(configs
       .reduce((_r, config) => {
          if (config.dfItem) {
            _r[crIsId(config.id)] = !0
          }
          return _r;
-       }, {});
-    _toggleIsRow(_dfIs)
+       }, {})
+    );
   }, [configs, _toggleIsRow])
 
   return [
-    _isRow,
-    _toggleIsRow
+    isRow,
+    toggleIsRow,
+    toggleIsChart
   ];
 };
 
