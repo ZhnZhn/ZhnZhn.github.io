@@ -58,7 +58,7 @@ const CL_ABOUT = (0, _styleFn.crBsContainerCn)("about-container"),
   STEP_TITLES = ["Please, choose a data source Browser from Topics [t]", "Next, choose a dataset menu item in the the opended up Browser", "Select params and enter query date in the opened up draggable Dialog", "Click a button Load"],
   IS_CLOSE_PROVIDERS = !(0, _has.isWideWidth)();
 const About = () => {
-  const [isShow, show, hide, hKeyDown] = (0, _useShowHideComponent.default)(true);
+  const [isShow, show, hide, hKeyDown] = (0, _useShowHideComponent.default)(!0);
   (0, _compStore.useMsAbout)(msAbout => {
     if (msAbout) {
       if (msAbout.is) {
@@ -101,24 +101,20 @@ const About = () => {
           stepColor: _Color.COLOR_GREEN,
           titles: STEP_TITLES
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-          style: S_MT_4,
-          children: "The result will be shown in a chart in a resizebale container."
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-          style: S_MB_8EM,
-          children: "Also it's possible to export the chart to PNG, JPG, SVG or print to PDF."
+          style: {
+            ...S_MT_4,
+            ...S_MB_6EM
+          },
+          children: "The results will be displayed in a chart within a resizable container. It is also possible to export the chart in PNG, JPG, SVG formats, or to print it as a PDF."
         }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
           style: S_MB_6EM,
           children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
             style: S_RED,
-            children: "Attention:\xA0"
+            children: "Notice:\xA0"
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
-            children: ["For one item from ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "Dialog"
-            }), " can be only one ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "Chart item"
-            }), " in a container. More information about a dataset can be found on a ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "tab Info of Chart item."
-            })]
+            children: ["For each set of params from a dialog can be only one chart item within a chart container. Additional information about certain loaded dataset can be found in the ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.MarkBlack, {
+              children: "Info tab of the chart item"
+            }), "."]
           })]
         }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose.default, {
           caption: "More...",
@@ -126,42 +122,29 @@ const About = () => {
           ocStyle: S_LH_18,
           children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
             style: S_MB_8EM,
-            children: ["After clicking a ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "button Show"
-            }), " in a Dialog will be an opened up ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "Chart container"
-            }), " with charts or empty. After closing a ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "Chart container"
-            }), " all charts remains. In one time max three ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "Dialogs"
-            }), " can be opened."]
+            children: ["After clicking a ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.MarkBlack, {
+              children: "button Open"
+            }), " in a dialog, a chart container will appear. Upon closing a chart container all charts will remains accesible."]
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
             style: S_MB_8EM,
-            children: ["Some open and private data providers require user's ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "API Key"
+            children: ["Certain open and private data providers require the user's ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.MarkBlack, {
+              children: "API key"
+            }), ". API keys for data providers can be configured in the ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.MarkBlack, {
+              children: "ApiKeys tab of dialog Settings [s]"
             }), "."]
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
             style: S_MB_8EM,
-            children: ["Data providers API Keys can be set on the ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "tab ApiKeys, dialog Settings [s]"
+            children: ["For downloading data without CORS restriction from some data providers requires a ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.MarkBlack, {
+              children: "local HTTP proxy server"
+            }), ". It can be configured in the ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.MarkBlack, {
+              children: "Options tab of dialog Settings [s]"
             }), "."]
-          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
             style: S_MB_8EM,
-            children: ["Also for loading data from data providers with HTTP protocol required ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "HTTPS proxy server"
-            }), ", by default settled in the ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "tab Options, dialog Settings [s]"
-            }), "."]
-          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
-            style: S_MB_8EM,
-            children: ["There is three UI theme in the web app ERC: ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "Dark, Light, and Sand"
-            }), " can be set on ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
-              children: "tab Options, dialog Settings [s]"
-            }), ". All user's settings keep in browser's memory only for a current web session."]
+            children: "The web application ERC currently has nine distinct UI themes. All user settings are stored in the browser's memory and are retained only for the duration of the current web session."
           })]
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_LogosBar.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.MarkBlack, {
             children: "*Logos Fair Use."
           })
         })]

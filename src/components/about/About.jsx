@@ -19,7 +19,7 @@ import XPlatformLink from './XPlatformLink';
 import DataProviders from './DataProviders';
 
 import StepTitles from '../zhn/StepTitles';
-import { SpanBlack } from '../zhn/SpanToken';
+import { MarkBlack } from '../zhn/SpanToken';
 import LogosBar from './LogosBar';
 
 const CL_ABOUT = crBsContainerCn("about-container")
@@ -59,7 +59,7 @@ const About = () => {
     show,
     hide,
     hKeyDown
-  ] = useShowHideComponent(true);
+  ] = useShowHideComponent(!0);
 
   useMsAbout(msAbout => {
     if (msAbout) {
@@ -108,19 +108,17 @@ const About = () => {
            stepColor={COLOR_GREEN}
            titles={STEP_TITLES}
          />
-          <p style={S_MT_4}>
-            The result will be shown in a chart in a resizebale container.
-          </p>
-          <p style={S_MB_8EM}>
-            Also it's possible to export the chart to PNG, JPG, SVG or print to PDF.
+          <p style={{...S_MT_4, ...S_MB_6EM}}>
+            The results will be displayed in a chart within a resizable container.
+            It is also possible to export the chart in PNG, JPG, SVG formats, or to print it as a PDF.
           </p>
           <p style={S_MB_6EM}>
             <span style={S_RED}>
-               Attention:&nbsp;
+               Notice:&nbsp;
             </span>
             <span>
-              For one item from <SpanBlack>Dialog</SpanBlack> can be only one <SpanBlack>Chart item</SpanBlack> in a container.
-              More information about a dataset can be found on a <SpanBlack>tab Info of Chart item.</SpanBlack>
+              For each set of params from a dialog can be only one chart item within a chart container.
+              Additional information about certain loaded dataset can be found in the <MarkBlack>Info tab of the chart item</MarkBlack>.
             </span>
          </p>
           <OpenClose
@@ -129,28 +127,27 @@ const About = () => {
             ocStyle={S_LH_18}
           >
             <p style={S_MB_8EM}>
-              After clicking a <SpanBlack>button Show</SpanBlack> in a Dialog will be an opened up <SpanBlack>Chart container</SpanBlack> with charts or empty.
-              After closing a <SpanBlack>Chart container</SpanBlack> all charts remains. In one time max three <SpanBlack>Dialogs</SpanBlack> can be opened.
+              After clicking a <MarkBlack>button Open</MarkBlack> in a dialog, a chart container will appear.
+              Upon closing a chart container all charts will remains accesible.
             </p>
             <p style={S_MB_8EM}>
-              Some open and private data providers require user's <SpanBlack>API Key</SpanBlack>.
+              Certain open and private data providers require the user's <MarkBlack>API key</MarkBlack>.
+              API keys for data providers can be configured in the <MarkBlack>ApiKeys tab of dialog Settings [s]</MarkBlack>.
             </p>
             <p style={S_MB_8EM}>
-              Data providers API Keys can be set on the <SpanBlack>tab ApiKeys, dialog Settings [s]</SpanBlack>.
+              For downloading data without CORS restriction from some data providers requires a <MarkBlack>local HTTP proxy server</MarkBlack>.
+              It can be configured in the <MarkBlack>Options tab of dialog Settings [s]</MarkBlack>.
             </p>
             <p style={S_MB_8EM}>
-              Also for loading data from data providers with HTTP protocol required <SpanBlack>HTTPS proxy server</SpanBlack>,
-              by default settled in the <SpanBlack>tab Options, dialog Settings [s]</SpanBlack>.
-            </p>
-            <p style={S_MB_8EM}>
-              There is three UI theme in the web app ERC: <SpanBlack>Dark, Light, and Sand</SpanBlack> can be set on <SpanBlack>tab Options, dialog Settings [s]</SpanBlack>. All user's settings keep in browser's memory only for a current web session.
+              The web application ERC currently has nine distinct UI themes.
+              All user settings are stored in the browser's memory and are retained only for the duration of the current web session.
             </p>
          </OpenClose>
          <LogosBar />
          <p>
-           <SpanBlack>
+           <MarkBlack>
              *Logos Fair Use.
-           </SpanBlack>
+           </MarkBlack>
          </p>
          </div>
       </ScrollPane>
