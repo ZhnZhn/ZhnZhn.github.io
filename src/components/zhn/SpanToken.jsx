@@ -8,7 +8,6 @@ import {
   crFs18Cn
 } from '../styleFn';
 
-
 const _fSpanToken = (
   className
 ) => ({
@@ -34,11 +33,14 @@ export const SpanLabel = _fSpanToken(crBoldCn(CL_SP_LABEL))
 export const CL_SP_INPUT_LABEL = `${CL_SP_LABEL} sp-input`
 export const SpanInputLabel = _fSpanToken(crBoldCn(CL_SP_INPUT_LABEL))
 
-export const SpanBlack = _fSpanToken(CL_BLACK)
 export const SpanBoldBlack = _fSpanToken(crBoldCn(CL_BLACK))
 
 export const SpanGap = ({
   width
 }) => (
   <span style={{...S_INLINE, width}} />
+)
+
+export const MarkBlack = ({ children }) => (
+  <mark className="tk-black">{children}</mark>
 )

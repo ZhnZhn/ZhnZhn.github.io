@@ -3,7 +3,7 @@ import { GREEN_COLOR } from '../styles/Color';
 
 import Link from '../links/ProviderLinks';
 import OpenClose from '../zhn/OpenClose';
-import { SpanBlack } from '../zhn/SpanToken';
+import { MarkBlack } from '../zhn/SpanToken';
 
 const CL_NOTE_BR = "provider__note__br"
 , OPEN_COLOR_L2 = GREEN_COLOR
@@ -80,9 +80,9 @@ const LinkPer = ({
 }) => (
   <>
     <Comp />
-    <SpanBlack>
+    <MarkBlack>
       &nbsp;({per})
-    </SpanBlack>
+    </MarkBlack>
   </>
 );
 
@@ -130,13 +130,13 @@ const DataProviders = ({ isClose }) => (
       </p>
       <div style={S_NOTE}>
         <p>
-          <SpanBlack>Note:&nbsp;</SpanBlack>
+          <MarkBlack>Note:&nbsp;</MarkBlack>
           This product uses the Bureau of Economic Analysis (BEA) Data API but is not endorsed or certified by BEA.&nbsp;
         </p>
       </div>
       <div style={S_NOTE}>
         <p>
-          <SpanBlack>Note:&nbsp;</SpanBlack>
+          <MarkBlack>Note:&nbsp;</MarkBlack>
           User API key from data provider required for request.&nbsp;
           <br className={CL_NOTE_BR} />
           Can be set in <span style={S_SETTINGS}>SETTINGS&nbsp;[s]</span>.
@@ -154,7 +154,7 @@ const DataProviders = ({ isClose }) => (
         </p>
         <div style={S_NOTE}>
           <p>
-            <SpanBlack>Note:&nbsp;</SpanBlack>
+            <MarkBlack>Note:&nbsp;</MarkBlack>
             Local Http Proxy is required for data APIs without CORS.&nbsp;
             <br className={CL_NOTE_BR} />
             Could be set in <span style={S_SETTINGS}>SETTINGS&nbsp;[s]</span>.

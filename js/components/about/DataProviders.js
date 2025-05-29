@@ -51,7 +51,7 @@ const LinkPer = _ref => {
     per
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {}), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_SpanToken.SpanBlack, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {}), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_SpanToken.MarkBlack, {
       children: ["\xA0(", per, ")"]
     })]
   });
@@ -98,14 +98,14 @@ const DataProviders = _ref3 => {
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           style: S_NOTE,
           children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
-            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.MarkBlack, {
               children: "Note:\xA0"
             }), "This product uses the Bureau of Economic Analysis (BEA) Data API but is not endorsed or certified by BEA.\xA0"]
           })
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           style: S_NOTE,
           children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
-            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.MarkBlack, {
               children: "Note:\xA0"
             }), "User API key from data provider required for request.\xA0", /*#__PURE__*/(0, _jsxRuntime.jsx)("br", {
               className: CL_NOTE_BR
@@ -128,7 +128,7 @@ const DataProviders = _ref3 => {
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           style: S_NOTE,
           children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
-            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBlack, {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.MarkBlack, {
               children: "Note:\xA0"
             }), "Local Http Proxy is required for data APIs without CORS.\xA0", /*#__PURE__*/(0, _jsxRuntime.jsx)("br", {
               className: CL_NOTE_BR
