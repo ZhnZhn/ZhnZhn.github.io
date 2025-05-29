@@ -5,7 +5,8 @@ const COLOR_SILVER = "silver"
 , COLOR_GREY = "grey"
 , COLOR_THISTLE = "thistle"
 , COLOR_DARK_GREY = "#5b5b5b"
-, COLOR_BLACK = "black";
+, COLOR_BLACK = "black"
+, COLOR_BOX_SHADOW_LIGHT = "#aaa";
 
 const DF_B_BG = "#5f5f5f";
 
@@ -18,6 +19,7 @@ const DF_LB_BC = COLOR_DARK_BLUE;
 
 const DF_EL_BG = COLOR_DARK_BLUE;
 const DF_EL_C = COLOR_SILVER;
+const DF_BSH_C = "#7a7a7a";
 
 const DF_BTF_C = COLOR_DARK_BLUE;
 const DF_C_BLACK = COLOR_BLACK;
@@ -33,6 +35,7 @@ const PROPERTY_B_BG = "b-bg"
 
 , PROPERTY_EL_BG = "el-bg"
 , PROPERTY_EL_C = "el-c"
+, PROPERTY_SH_C = "sh-c"
 
 , PROPERTY_BTF_C = "btf-c"
 , PROPERTY_COLOR_BLACK = "c-bl";
@@ -49,6 +52,7 @@ const PALETTE_KEYS = [
 
   PROPERTY_EL_BG,
   PROPERTY_EL_C,
+  PROPERTY_SH_C,
 
   PROPERTY_BTF_C,
   PROPERTY_COLOR_BLACK
@@ -66,6 +70,7 @@ const P_GREY_VALUES = [
 
   DF_EL_BG,
   DF_EL_C,
+  DF_BSH_C,
 
   DF_BTF_C,
   DF_C_BLACK
@@ -85,6 +90,7 @@ const P_WHITE_GREY_VALUES = [
 
   "#dcdcdc",
   "#789",
+  COLOR_BOX_SHADOW_LIGHT,
 
   "#5d869a",
   DF_C_BLACK
@@ -104,6 +110,7 @@ const P_SAND_L_VALUES = [
 
   "#795548",
   COLOR_SILVER,
+  COLOR_BOX_SHADOW_LIGHT,
 
   BTF_C_SAND,
   DF_C_BLACK
@@ -194,7 +201,8 @@ const PALETTE_CHANGES = {
     [PROPERTY_C_BG]: COLOR_BLACK
   },
   [_SAND_THEME_ID]: {
-    [PROPERTY_C_BG]: "#e6d5a9"
+    [PROPERTY_C_BG]: "#e6d5a9",
+    [PROPERTY_SH_C]: "#898989"
   }
 };
 
