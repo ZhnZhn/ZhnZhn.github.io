@@ -25,6 +25,9 @@
    /*Element color (dialogs)*/
    --el-c: silver;
 
+   /*Box shadow color (dialogs, popups)*/
+   --sh-c: #7a7a7a;
+
    /*Button flat color, open close color, menu item color*/   
    --btf-c: #1b2836;
    /*Color black*/
@@ -39,3 +42,9 @@
      scroll-behavior: auto !important;
    }
  }      
+
+ @media (hover: none) {   
+   .menuitem:hover {
+     border-left-color: transparent;    
+   }
+ }

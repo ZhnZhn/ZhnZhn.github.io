@@ -20,7 +20,7 @@
 
 .box-shadow-5 {
   border-radius: 5px;
-  box-shadow: rgba(128, 128, 128, 0.7) 0 0 0 5px;
+  box-shadow: var(--sh-c) 0 0 0 5px;  
 }
 
 .charts__menu-more {
