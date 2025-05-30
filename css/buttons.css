@@ -119,6 +119,3 @@
 .menu-item:focus { 
   background-color: rgba(128, 128, 128, 0.3);
 }
-.menu-item:hover {
-  border-bottom: 2px solid #1b75bb;
-}

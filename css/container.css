@@ -34,9 +34,6 @@
   background-color: rgba(128, 128, 128, 0.3);
   outline: 0;
 }
-.menuitem:hover {
-  border-left-color: #1b75bb;    
-}
 
 .row__topic {
   color: var(--c-bl);
@@ -74,10 +71,6 @@
   margin-left: 4px;
 }
 
-.menu__badge:hover {
-  color: #1b75bb;
-}
-
 .bt-svg-close {
   position: absolute;
   top: 6px;
@@ -90,10 +83,6 @@
   will-change: transform;
   transform-origin: center center;
   transition: transform 0.3s ease-out;
-}
-
-.bt-svg-close:hover { 
-  transform: rotate(90deg) scale(1.3, 1.3) translateY(-3px);
 }
 
 .bt-svg-clear {  
