@@ -11,8 +11,8 @@ var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox3"
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW = {
-    paddingLeft: 0,
-    paddingBottom: 4
+    padding: '6px 0',
+    width: '105%'
   },
   _crHrStyle = () => ({
     borderColor: (0, _Style.getColorBlack)(),

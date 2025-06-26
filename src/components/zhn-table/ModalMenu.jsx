@@ -14,8 +14,8 @@ import RowCheckBox3 from "../dialogs/rows/RowCheckBox3";
 import { getColorBlack } from "./Style";
 
 const S_ROW = {
-  paddingLeft: 0,
-  paddingBottom: 4
+  padding: '6px 0',
+  width: '105%'  
 }
 , _crHrStyle = () => ({
   borderColor: getColorBlack(),
