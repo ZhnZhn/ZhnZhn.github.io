@@ -1,0 +1,49 @@
+.label-switch { 
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;  
+}
+
+.switch {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0; 
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.switch:focus-visible + .switch-track {
+  outline: 2px solid orange;
+  outline-offset: 2px;
+}
+
+.switch-track {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 20px;
+  margin-right: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.switch-thumb {
+  display: inline-block;
+  width: 14px;   
+  height: 14px;
+  border-radius: 50%;    
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.25s;
+}
+
+.switch-label {
+  display: inline-block;
+  vertical-align: bottom;
+  font-weight: bold;
+  user-select: none;
+}
