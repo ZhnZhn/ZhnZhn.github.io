@@ -7,10 +7,10 @@ var _isTypeFn = require("../../../utils/isTypeFn");
 var _styleFn = require("../../styleFn");
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
 var _ItemStack = _interopRequireDefault(require("../../zhn/ItemStack"));
+var _InputSwitch = _interopRequireDefault(require("../../zhn/InputSwitch"));
 var _RowCheckBoxInputLabels = _interopRequireDefault(require("../rows/RowCheckBoxInputLabels"));
 var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox1"));
-var _RowCheckBox2 = _interopRequireDefault(require("../rows/RowCheckBox2"));
-var _RowCheckBox3 = _interopRequireDefault(require("../rows/RowCheckBox3"));
+var _RowCheckBox2 = _interopRequireDefault(require("../rows/RowCheckBox3"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW_FLEX = {
@@ -18,17 +18,13 @@ const S_ROW_FLEX = {
     ..._styleFn.S_FLEX,
     justifyContent: 'space-between'
   },
-  S_CAPTION = {
-    maxWidth: 150,
-    textAlign: 'left'
-  },
-  S_CHB_TOGGLE = {
-    ..._styleFn.S_INLINE,
-    padding: void 0
-  },
   S_CHB_CAPTION = {
     ..._styleFn.S_INLINE,
     padding: '0 0 0 40px'
+  },
+  S_ROW_CHECK_BOX_3 = {
+    ..._Style.S_ROW,
+    ..._Style.S_INPUT_SWITCH
   };
 const _crChbToggleInitValue = isRow => (0, _isTypeFn.isBool)(isRow) ? isRow : true;
 const _crCheckBoxItem = (item, index, _ref) => {
@@ -39,13 +35,12 @@ const _crCheckBoxItem = (item, index, _ref) => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_ROW_FLEX,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox2.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
       initialValue: _crChbToggleInitValue(item.isRow),
-      style: S_CHB_TOGGLE,
-      color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
+      style: _Style.S_INPUT_SWITCH,
       caption: item.caption,
-      captionStyle: S_CAPTION,
-      onToggle: () => onToggle(item.id)
+      onCheck: () => onToggle(item.id, !0),
+      onUnCheck: () => onToggle(item.id, !1)
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       style: S_CHB_CAPTION,
       color: _Style.TOGGLE_CAPTION_CHECKBOX_COLOR,
@@ -91,15 +86,13 @@ const ModalToggle = _ref2 => {
       onToggle: onToggle,
       onCheckCaption: onCheckCaption,
       onUnCheckCaption: onUnCheckCaption
-    }), isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox3.default, {
-      style: _Style.S_ROW,
-      color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
+    }), isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox2.default, {
+      style: S_ROW_CHECK_BOX_3,
       caption: "From Date",
       value: isShowFd,
       onToggle: onToggleFd
-    }, "isShowFd"), isCh && onToggleChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox3.default, {
-      style: _Style.S_ROW,
-      color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
+    }, "isShowFd"), isCh && onToggleChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox2.default, {
+      style: S_ROW_CHECK_BOX_3,
       caption: "Chart",
       value: isShowChart,
       onToggle: onToggleChart
