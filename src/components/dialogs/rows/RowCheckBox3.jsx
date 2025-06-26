@@ -1,34 +1,23 @@
 //import PropTypes from "prop-types";
-import { useMemo } from '../../uiApi';
-
-import RowCheckBoxView from './RowCheckBoxView';
+import InputSwitch from '../../zhn/InputSwitch';
 
 const DF_ON_TOGGLE = () => {};
 
 const RowCheckBox3 = ({
-  onToggle=DF_ON_TOGGLE,
-  ...restProps
-}) => {
-  const [
-    _hCheck,
-    _hUnCheck
-  ] = useMemo(() => [
-    () => {
-      onToggle(true)
-    },
-    () => {
-      onToggle(false)
-    }
-  ], [onToggle]);
-
-  return (
-    <RowCheckBoxView
-      {...restProps}
-      hCheck={_hCheck}
-      hUnCheck={_hUnCheck}
-    />
-  );
-};
+  value,
+  style,
+  caption,
+  onToggle=DF_ON_TOGGLE
+}) => (
+  <InputSwitch
+    initialValue={!!value}
+    caption={caption}
+    style={style}
+    initialValue={!!value}
+    onCheck={() => onToggle(!0)}
+    onUnCheck={() => onToggle(!1)}
+  />
+);
 
 /*
 RowCheckBox.propTypes = {
