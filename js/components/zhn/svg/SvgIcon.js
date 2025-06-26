@@ -75,9 +75,9 @@ const SvgToggleOn = _ref4 => {
       rx: "7",
       ry: "7"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("circle", {
-      cx: "17",
+      cx: "15",
       cy: "12",
-      r: "3"
+      r: "4"
     })]
   });
 };
