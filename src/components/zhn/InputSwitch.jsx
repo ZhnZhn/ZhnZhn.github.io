@@ -45,13 +45,13 @@ const InputSwitch = ({
   style,
   caption,
   onCheck = FN_NOOP,
-  onUnCheck = FN_NOOP,
+  onUnCheck = FN_NOOP
 }) => {
   const _inputId = useId()
   , [
     _isChecked,
     _setIsChecked
-  ] = useState(initialValue)
+  ] = useState(() => !!initialValue)
   , _hChange = (evt) => {
       const _nextValue = !_isChecked
       , _onChange = _nextValue

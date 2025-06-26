@@ -38,7 +38,7 @@ const InputSwitch = _ref => {
     onUnCheck = FN_NOOP
   } = _ref;
   const _inputId = (0, _uiApi.useId)(),
-    [_isChecked, _setIsChecked] = (0, _uiApi.useState)(initialValue),
+    [_isChecked, _setIsChecked] = (0, _uiApi.useState)(() => !!initialValue),
     _hChange = evt => {
       const _nextValue = !_isChecked,
         _onChange = _nextValue ? onCheck : onUnCheck;
