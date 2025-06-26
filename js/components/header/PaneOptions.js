@@ -7,7 +7,7 @@ var _settingStore = require("../../flux/stores/settingStore");
 var _useInputData = _interopRequireDefault(require("./useInputData"));
 var _RowPattern = _interopRequireDefault(require("../dialogs/rows/RowPattern"));
 var _RowInputSelect = _interopRequireDefault(require("../dialogs/rows/RowInputSelect"));
-var _OptionCheckBoxStack = _interopRequireDefault(require("./OptionCheckBoxStack"));
+var _OptionInputSwitchStack = _interopRequireDefault(require("./OptionInputSwitchStack"));
 var _RowButtons = _interopRequireDefault(require("./RowButtons"));
 var _FlatButton = _interopRequireDefault(require("../zhn-m/FlatButton"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -56,7 +56,7 @@ const PaneOptions = _ref => {
       propCaption: "c",
       options: uiThemeOptions,
       onSelect: onChangeTheme
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionCheckBoxStack.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionInputSwitchStack.default, {
       data: data,
       configs: _settingStore.CHECKBOX_CONFIGS
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowButtons.default, {

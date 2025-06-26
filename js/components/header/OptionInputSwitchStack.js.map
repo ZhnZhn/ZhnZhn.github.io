@@ -1,0 +1,42 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/header/OptionInputSwitchStack.js"
+ ],
+ "file": "../../../src/components/header/OptionInputSwitchStack.js",
+ "names": [
+  "_uiApi",
+  "require",
+  "_getFnByPropName",
+  "_interopRequireDefault",
+  "_InputSwitch",
+  "_jsxRuntime",
+  "S_DIV_OPTIONS",
+  "padding",
+  "S_INPUT_SWITCH",
+  "paddingTop",
+  "OptionInputSwitchStack",
+  "_ref",
+  "data",
+  "configs",
+  "_hMode",
+  "fnName",
+  "mode",
+  "getFnByPropName",
+  "jsx",
+  "style",
+  "children",
+  "map",
+  "_ref2",
+  "caption",
+  "id",
+  "default",
+  "initialValue",
+  "onCheck",
+  "bindTo",
+  "onUnCheck",
+  "_default",
+  "exports"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AACA,IAAAC,gBAAA,GAAAC,sBAAA,CAAAF,OAAA;AAEA,IAAAG,YAAA,GAAAD,sBAAA,CAAAF,OAAA;AAA6C,IAAAI,WAAA,GAAAJ,OAAA;AAE7C,MAAMK,aAAa,GAAG;IACpBC,OAAO,EAAE;EACX,CAAC;EACCC,cAAc,GAAG;IACjBC,UAAU,EAAE;EACd,CAAC;AAED,MAAMC,sBAAsB,GAAGC,IAAA,IAGzB;EAAA,IAH0B;IAC9BC,IAAI;IACJC;EACF,CAAC,GAAAF,IAAA;EACA,MAAMG,MAAM,GAAGA,CACbC,MAAM,EACNC,IAAI,KACD,IAAAC,wBAAe,EAACL,IAAI,EAAEG,MAAM,CAAC,CAACC,IAAI,CAAC;EACxC,oBACE,IAAAX,WAAA,CAAAa,GAAA;IAAKC,KAAK,EAAEb,aAAc;IAAAc,QAAA,EACvBP,OAAO,CAACQ,GAAG,CAACC,KAAA;MAAA,IAAC,CAACC,OAAO,EAAEC,EAAE,CAAC,GAAAF,KAAA;MAAA,oBACzB,IAAAjB,WAAA,CAAAa,GAAA,EAACd,YAAA,CAAAqB,OAAW;QAEVN,KAAK,EAAEX,cAAe;QACtBe,OAAO,EAAEA,OAAQ;QACjBG,YAAY,EAAE,IAAAT,wBAAe,EAACL,IAAI,EAAEY,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAE;QAC9CG,OAAO,EAAE,IAAAC,aAAM,EAACd,MAAM,EAAEU,EAAE,EAAE,CAAC,CAAC,CAAE;QAChCK,SAAS,EAAE,IAAAD,aAAM,EAACd,MAAM,EAAEU,EAAE,EAAE,CAAC,CAAC;MAAE,GAL7BD,OAMN,CAAC;IAAA,CACH;EAAC,CACC,CAAC;AAET,CAAC;AAAA,IAAAO,QAAA,GAAAC,OAAA,CAAAN,OAAA,GAEcf,sBAAsB"
+}

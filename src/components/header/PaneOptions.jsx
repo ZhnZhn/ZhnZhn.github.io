@@ -4,7 +4,7 @@ import useInputData from './useInputData';
 
 import RowPattern from '../dialogs/rows/RowPattern';
 import RowInputSelect from '../dialogs/rows/RowInputSelect';
-import OptionCheckBoxStack from './OptionCheckBoxStack';
+import OptionInputSwitchStack from './OptionInputSwitchStack';
 import RowButtons from './RowButtons';
 import FlatButton from '../zhn-m/FlatButton';
 
@@ -64,7 +64,7 @@ const PaneOptions = ({
         options={uiThemeOptions}
         onSelect={onChangeTheme}
       />
-      <OptionCheckBoxStack
+      <OptionInputSwitchStack
         data={data}
         configs={CHECKBOX_CONFIGS}
       />
