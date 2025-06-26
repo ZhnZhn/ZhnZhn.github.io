@@ -8,7 +8,7 @@ import RowCheckBox3 from '../rows/RowCheckBox3';
 import {
   S_MODAL_POPUP,
   S_ROW,
-  TOGGLE_INPUT_CHECKBOX_COLOR
+  S_INPUT_SWITCH
 } from './Style';
 
 const ModalToggleInputs = ({
@@ -30,8 +30,7 @@ const ModalToggleInputs = ({
     {safeMap(configs, config => (
       <RowCheckBox3
         key={config[0]}
-        style={S_ROW}
-        color={TOGGLE_INPUT_CHECKBOX_COLOR}
+        style={{...S_ROW, ...S_INPUT_SWITCH}}
         caption={config[0]}
         value={config[1]}
         onToggle={config[2]}

@@ -25,8 +25,10 @@ const ModalToggleInputs = _ref => {
       value: isShowLabels,
       onToggle: onToggleLabels
     }), (0, _uiApi.safeMap)(configs, config => /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-      style: _Style.S_ROW,
-      color: _Style.TOGGLE_INPUT_CHECKBOX_COLOR,
+      style: {
+        ..._Style.S_ROW,
+        ..._Style.S_INPUT_SWITCH
+      },
       caption: config[0],
       value: config[1],
       onToggle: config[2]
