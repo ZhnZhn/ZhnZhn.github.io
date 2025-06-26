@@ -4,20 +4,22 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _inputFn = require("../../inputFn");
-var _styleFn = require("../../styleFn");
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
 var _InputText = _interopRequireDefault(require("../../zhn/InputText"));
 var _SpanToken = require("../../zhn/SpanToken");
-var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox2"));
+var _InputSwitch = _interopRequireDefault(require("../../zhn/InputSwitch"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_DIV_INPUT = {
-  margin: '6px 0'
-};
-const S_CAPTION = {
-  paddingRight: 4,
-  fontSize: '16px'
-};
+    margin: '6px 0 10px 0'
+  },
+  S_CAPTION = {
+    paddingRight: 4,
+    fontSize: '16px'
+  },
+  S_WIDTH_110 = {
+    width: '110%'
+  };
 const MIN_RT = 0,
   MAX_RT = 3;
 const _isRt = rt => rt === '' || rt >= MIN_RT && rt <= MAX_RT;
@@ -54,13 +56,14 @@ const ModalOptions = _ref => {
       })
     }), ROW_CHECKBOX_CONFIGS.map(_ref2 => {
       let [id, caption] = _ref2;
-      return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-        id: id,
-        style: _Style.S_ROW,
-        chbCn: _styleFn.CL_CHB_BLACK,
-        btCn: _styleFn.CL_BLACK,
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+        style: {
+          ..._Style.S_ROW,
+          ...S_WIDTH_110
+        },
         caption: caption,
-        onToggle: toggleOption
+        onCheck: () => toggleOption(!0, id),
+        onUnCheck: () => toggleOption(!1, id)
       }, id);
     })]
   });

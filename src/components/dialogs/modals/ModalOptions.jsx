@@ -1,24 +1,24 @@
 import { crInputNumberProps } from '../../inputFn';
-import {
-  CL_CHB_BLACK,
-  CL_BLACK
-} from '../../styleFn';
 
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import InputText from '../../zhn/InputText';
 import { SpanBoldBlack } from '../../zhn/SpanToken';
-import RowCheckBox2 from '../rows/RowCheckBox2';
+import InputSwitch from '../../zhn/InputSwitch';
+
 import {
   S_MODAL_POPUP,
   S_ROW
 } from './Style';
 
 const S_DIV_INPUT = {
-  margin: '6px 0'
+  margin: '6px 0 10px 0'
 }
-const S_CAPTION = {
+, S_CAPTION = {
   paddingRight: 4,
   fontSize: '16px'
+}
+, S_WIDTH_110 = {
+  width: '110%'
 };
 
 const MIN_RT = 0, MAX_RT = 3;
@@ -62,14 +62,12 @@ const ModalOptions = ({
     }
     {/*eslint-enable jsx-a11y/label-has-associated-control*/}
     {ROW_CHECKBOX_CONFIGS.map(([id, caption]) => (
-       <RowCheckBox2
+       <InputSwitch
           key={id}
-          id={id}
-          style={S_ROW}
-          chbCn={CL_CHB_BLACK}
-          btCn={CL_BLACK}
+          style={{...S_ROW, ...S_WIDTH_110}}
           caption={caption}
-          onToggle={toggleOption}
+          onCheck={() => toggleOption(!0, id)}
+          onUnCheck={() => toggleOption(!1, id)}
        />
     ))}
   </ModalPopup>
