@@ -1,30 +1,25 @@
-import {
-  parseIntBy10
-} from '../../utils/isTypeFn';
+import { parseIntBy10 } from '../../utils/isTypeFn';
 
 import {
   useRef,
   getRefValue,
   setRefValue
 } from '../uiApi';
-import {
-  crInputNumberProps
-} from '../inputFn';
+import { crInputNumberProps } from '../inputFn';
 import {
   S_INLINE,
-  CL_CHB_BLACK,
   CL_BLACK
 } from '../styleFn';
 
 import RowInputColor from '../dialogs/RowInputColor';
 import RowInputText from '../dialogs/RowInputText';
-import RowCheckBox2 from '../dialogs/rows/RowCheckBox2';
 
 import {
   SvgMinus,
   SvgPlus
 } from '../zhn/BtSvgCircle';
 import InputText from '../zhn/InputText';
+import InputSwitch from '../zhn/InputSwitch';
 import { RowOpenClose } from './RowOpenClose';
 
 const DF_COLOR = '#2b908f'
@@ -39,10 +34,7 @@ const DF_COLOR = '#2b908f'
 }
 , S_SERIA_INPUT = { width: 36 }
 , S_ROW_2 = { paddingBottom: 6 }
-, S_VA_M = { verticalAlign: 'middle' }
-, S_PL_6 = { paddingLeft: 6 }
 , S_PL_8 = { paddingLeft: 8 }
-, S_PL_10 = { paddingLeft: 10 }
 , S_CAPTION_STYLE = {
    width: 85,
    paddingLeft: 5,
@@ -54,15 +46,11 @@ const DF_COLOR = '#2b908f'
   paddingLeft: 8,
   fontWeight: 'bold'
 })
-, S1_COLUMN = {
-   ...S_INLINE,
-   ...S_VA_M,
-   ...S_PL_10
-}
-, S1_ON_TOP = {
-   ...S_INLINE,
-   ...S_VA_M,
-   ...S_PL_10
+, S_INLINE_INPUT_SWITCH = {
+  display: 'inline-flex',
+  width: '50%',
+  paddingLeft: 14,
+  lineHeight: 'initial'
 };
 
 const InputPlus = ({
@@ -151,14 +139,12 @@ const RowType1 = ({
         initValue={DF_COLOR}
         onEnter={_onColor}
       />
-      <RowCheckBox2
-        style={S1_COLUMN}
+      <InputSwitch
+        style={S_INLINE_INPUT_SWITCH}
         caption="Column"
-        captionStyle={S_PL_6}
-        chbCn={CL_CHB_BLACK}
-        btCn={CL_BLACK}
         initialValue={!0}
-        onToggle={_onToggleColumn}
+        onCheck={() => _onToggleColumn(!0)}
+        onUnCheck={() => _onToggleColumn(!1)}
       />
       <div style={S_ROW_2}>
         <RowInputText
@@ -175,19 +161,16 @@ const RowType1 = ({
           onChange={_onChangeSeria}
           onEnter={_onPlus}
         />
-        <RowCheckBox2
-          style={S1_ON_TOP}
+        <InputSwitch
+          style={S_INLINE_INPUT_SWITCH}
           caption="OnTop"
-          captionStyle={S_PL_6}
-          chbCn={CL_CHB_BLACK}
-          btCn={CL_BLACK}
-          onToggle={_onToggleTop}
+          onCheck={() => _onToggleTop(!0)}
+          onUnCheck={() => _onToggleTop(!1)}
         />
        </div>
     </div>
   </RowOpenClose>
   );
 };
-
 
 export default RowType1

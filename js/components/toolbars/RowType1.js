@@ -9,9 +9,9 @@ var _inputFn = require("../inputFn");
 var _styleFn = require("../styleFn");
 var _RowInputColor = _interopRequireDefault(require("../dialogs/RowInputColor"));
 var _RowInputText = _interopRequireDefault(require("../dialogs/RowInputText"));
-var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox2"));
 var _BtSvgCircle = require("../zhn/BtSvgCircle");
 var _InputText = _interopRequireDefault(require("../zhn/InputText"));
+var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
 var _RowOpenClose = require("./RowOpenClose");
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_COLOR = '#2b908f',
@@ -28,17 +28,8 @@ const DF_COLOR = '#2b908f',
   S_ROW_2 = {
     paddingBottom: 6
   },
-  S_VA_M = {
-    verticalAlign: 'middle'
-  },
-  S_PL_6 = {
-    paddingLeft: 6
-  },
   S_PL_8 = {
     paddingLeft: 8
-  },
-  S_PL_10 = {
-    paddingLeft: 10
   },
   S_CAPTION_STYLE = {
     width: 85,
@@ -51,15 +42,11 @@ const DF_COLOR = '#2b908f',
     paddingLeft: 8,
     fontWeight: 'bold'
   }),
-  S1_COLUMN = {
-    ..._styleFn.S_INLINE,
-    ...S_VA_M,
-    ...S_PL_10
-  },
-  S1_ON_TOP = {
-    ..._styleFn.S_INLINE,
-    ...S_VA_M,
-    ...S_PL_10
+  S_INLINE_INPUT_SWITCH = {
+    display: 'inline-flex',
+    width: '50%',
+    paddingLeft: 14,
+    lineHeight: 'initial'
   };
 const InputPlus = _ref => {
   let {
@@ -137,14 +124,12 @@ const RowType1 = _ref3 => {
         style: _styleFn.S_INLINE,
         initValue: DF_COLOR,
         onEnter: _onColor
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-        style: S1_COLUMN,
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+        style: S_INLINE_INPUT_SWITCH,
         caption: "Column",
-        captionStyle: S_PL_6,
-        chbCn: _styleFn.CL_CHB_BLACK,
-        btCn: _styleFn.CL_BLACK,
         initialValue: !0,
-        onToggle: _onToggleColumn
+        onCheck: () => _onToggleColumn(!0),
+        onUnCheck: () => _onToggleColumn(!1)
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: S_ROW_2,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputText.default, {
@@ -160,13 +145,11 @@ const RowType1 = _ref3 => {
           maxLength: 1,
           onChange: _onChangeSeria,
           onEnter: _onPlus
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-          style: S1_ON_TOP,
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+          style: S_INLINE_INPUT_SWITCH,
           caption: "OnTop",
-          captionStyle: S_PL_6,
-          chbCn: _styleFn.CL_CHB_BLACK,
-          btCn: _styleFn.CL_BLACK,
-          onToggle: _onToggleTop
+          onCheck: () => _onToggleTop(!0),
+          onUnCheck: () => _onToggleTop(!1)
         })]
       })]
     })
