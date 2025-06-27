@@ -12,15 +12,11 @@ import {
 } from "./fnAdapter";
 
 const PN_TRADE_VOLUME_24H_BTC = "trade_volume_24h_btc"
-, PN_TRADE_VOLUME_24H_BTC_NORM = `${PN_TRADE_VOLUME_24H_BTC}_normalized`
 , HEADERS = [
   crRankProps("Trust Rank", "trust_score_rank")
 , crNameProps("Name")
 , {
   ...crNameProps("24h BTC", PN_TRADE_VOLUME_24H_BTC),
-  ...crNumberProps(0)
-},{
-  ...crNameProps("24h BTC Norm.", PN_TRADE_VOLUME_24H_BTC_NORM),
   ...crNumberProps(0)
 }
 , crRankProps("Trust Score", "trust_score")
