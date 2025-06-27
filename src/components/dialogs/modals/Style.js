@@ -10,5 +10,9 @@ export const S_INPUT_SWITCH = {
   justifyContent: 'flex-start',
   alignItems: 'center'
 }
+export const S_ROW_INPUT_SWITCH = {
+  ...S_ROW,
+  ...S_INPUT_SWITCH
+}
 
 export const TOGGLE_CAPTION_CHECKBOX_COLOR = '#a487d4'
