@@ -5,18 +5,17 @@ import {
   S_INLINE
 } from '../../styleFn';
 
-import ModalPopup from '../../zhn-moleculs/ModalPopup';
 import ItemStack from '../../zhn/ItemStack';
 import InputSwitch from '../../zhn/InputSwitch';
 
-import RowCheckBoxInputLabels from '../rows/RowCheckBoxInputLabels';
+import ModalPopupInputs from './ModalPopupInputs';
 import RowCheckBox1 from '../rows/RowCheckBox1';
 import RowCheckBox3 from '../rows/RowCheckBox3';
 
 import {
-  S_MODAL_POPUP,
   S_ROW,
   S_INPUT_SWITCH,
+  S_ROW_INPUT_SWITCH,
   TOGGLE_CAPTION_CHECKBOX_COLOR
 } from './Style';
 
@@ -28,17 +27,13 @@ const S_ROW_FLEX = {
 , S_CHB_CAPTION = {
   ...S_INLINE,
   padding: '0 0 0 40px'
-}
-, S_ROW_CHECK_BOX_3 = {
-  ...S_ROW,
-  ...S_INPUT_SWITCH
 };
 
 const _crChbToggleInitValue = (
   isRow
 ) => isBool(isRow)
   ? isRow
-  : true;
+  : !0;
 
 const _crCheckBoxItem = (
   item,
@@ -66,58 +61,30 @@ const _crCheckBoxItem = (
   </div>
 );
 
-const ModalToggle = ({
-  isShow,
-  style,
-  className,
-  selectProps,
-  isShowLabels,
-  isFd,
-  isShowFd,
-  isCh,
-  isShowChart,
-  onToggleLabels,
-  onToggle,
-  onCheckCaption,
-  onUnCheckCaption,
-  onToggleFd,
-  onToggleChart,
-  onClose
-}) => (
-  <ModalPopup
-    isShow={isShow}
-    style={{...S_MODAL_POPUP, ...style}}
-    className={className}
-    onClose={onClose}
-  >
-    <RowCheckBoxInputLabels
-      value={isShowLabels}
-      onToggle={onToggleLabels}
-    />
+const ModalToggle = (props) => (
+  <ModalPopupInputs {...props}>
     <ItemStack
-      items={selectProps}
+      items={props.selectProps}
       crItem={_crCheckBoxItem}
-      onToggle={onToggle}
-      onCheckCaption={onCheckCaption}
-      onUnCheckCaption={onUnCheckCaption}
+      onToggle={props.onToggle}
+      onCheckCaption={props.onCheckCaption}
+      onUnCheckCaption={props.onUnCheckCaption}
     />
-    { isFd && <RowCheckBox3
-        key="isShowFd"
-        style={S_ROW_CHECK_BOX_3}
-        caption="From Date"
-        value={isShowFd}
-        onToggle={onToggleFd}
-      />
-    }
-    { isCh && onToggleChart && <RowCheckBox3
-        key="isShowChart"
-        style={S_ROW_CHECK_BOX_3}
-        caption="Chart"
-        value={isShowChart}
-        onToggle={onToggleChart}
-      />
-    }
-  </ModalPopup>
+    {props.isFd && <RowCheckBox3
+      key="isShowFd"
+      style={S_ROW_INPUT_SWITCH}
+      caption="From Date"
+      value={props.isShowFd}
+      onToggle={props.onToggleFd}
+    />}
+    {props.isCh && props.onToggleChart && <RowCheckBox3
+      key="isShowChart"
+      style={S_ROW_INPUT_SWITCH}
+      caption="Chart"
+      value={props.isShowChart}
+      onToggle={props.onToggleChart}
+    />}
+  </ModalPopupInputs>
 );
 
 export default ModalToggle
