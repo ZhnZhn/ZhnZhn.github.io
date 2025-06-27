@@ -1,10 +1,13 @@
 import ModalPopup from '../zhn-moleculs/ModalPopup';
-import RowCheckBox2 from '../dialogs/rows/RowCheckBox2';
+import InputSwitch from '../zhn/InputSwitch';
 
 const CL_MENU_MORE = 'charts__menu-more'
 , S_MENU = {
   width: 240,
   paddingBottom: 8
+}
+, S_FILTER_TOPIC = {
+  padding: '12px 0 0 12px'
 };
 
 const BrowserMenuMore = ({
@@ -18,7 +21,8 @@ const BrowserMenuMore = ({
     style={S_MENU}
     onClose={toggleMenu}
   >
-    <RowCheckBox2
+    <InputSwitch
+      style={S_FILTER_TOPIC}
       caption="Filter Not Active Topic"
       onToggle={toggleFilter}
     />
