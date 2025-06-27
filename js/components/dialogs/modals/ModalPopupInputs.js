@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
-var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox3"));
+var _InputSwitch = _interopRequireDefault(require("../../zhn/InputSwitch"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const ModalPopupInputs = props => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
@@ -15,10 +15,10 @@ const ModalPopupInputs = props => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup
   },
   className: props.className,
   onClose: props.onClose,
-  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
+  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
     style: _Style.S_ROW_INPUT_SWITCH,
     caption: "Input Labels",
-    value: props.isShowLabels,
+    initialValue: props.isShowLabels,
     onToggle: props.onToggleLabels
   }, "isShowLabels"), props.children]
 });

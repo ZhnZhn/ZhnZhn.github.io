@@ -8,14 +8,15 @@ import {
 } from "../styleFn";
 
 import OpenClose from "../zhn/OpenClose";
+import InputSwitch from "../zhn/InputSwitch";
 import ModalPopup from "../zhn-moleculs/ModalPopup";
-import RowCheckBox3 from "../dialogs/rows/RowCheckBox3";
 
 import { getColorBlack } from "./Style";
 
 const S_ROW = {
   padding: '6px 0',
-  width: '105%'  
+  width: '105%',
+  lineHeight: 'initial'
 }
 , _crHrStyle = () => ({
   borderColor: getColorBlack(),
@@ -31,12 +32,11 @@ const _crRowCheckBoxElement = (
   color,
   onToggle
 ) => (
-  <RowCheckBox3
+  <InputSwitch
     key={h.name}
     style={S_ROW}
-    color={color}
     caption={h.name}
-    value={!h.isHide}
+    initialValue={!h.isHide}
     onToggle={onToggle}
   />
 )
@@ -95,11 +95,10 @@ const ModalMenu = ({
      isShow={isShow}
      onClose={onClose}
    >
-     <RowCheckBox3
+     <InputSwitch
        style={S_ROW}
-       color={getColorBlack()}
        caption="withStripLines"
-       value={isGridLine}
+       initialValue={isGridLine}
        onToggle={onToggleGrid}
      />
      <hr style={_crHrStyle()} />

@@ -143,8 +143,7 @@ const RowType1 = ({
         style={S_INLINE_INPUT_SWITCH}
         caption="Column"
         initialValue={!0}
-        onCheck={() => _onToggleColumn(!0)}
-        onUnCheck={() => _onToggleColumn(!1)}
+        onToggle={_onToggleColumn}
       />
       <div style={S_ROW_2}>
         <RowInputText
@@ -164,8 +163,7 @@ const RowType1 = ({
         <InputSwitch
           style={S_INLINE_INPUT_SWITCH}
           caption="OnTop"
-          onCheck={() => _onToggleTop(!0)}
-          onUnCheck={() => _onToggleTop(!1)}
+          onToggle={_onToggleTop}          
         />
        </div>
     </div>

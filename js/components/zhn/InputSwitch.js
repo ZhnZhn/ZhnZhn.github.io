@@ -34,6 +34,7 @@ const InputSwitch = _ref => {
     initialValue,
     style,
     caption,
+    onToggle,
     onCheck = FN_NOOP,
     onUnCheck = FN_NOOP
   } = _ref;
@@ -41,8 +42,8 @@ const InputSwitch = _ref => {
     [_isChecked, _setIsChecked] = (0, _uiApi.useState)(() => !!initialValue),
     _hChange = evt => {
       const _nextValue = !_isChecked,
-        _onChange = _nextValue ? onCheck : onUnCheck;
-      _onChange();
+        _onChange = onToggle || (_nextValue ? onCheck : onUnCheck);
+      _onChange(_nextValue);
       _setIsChecked(_nextValue);
     },
     [_trackStyle, _thumbStyle, _labelStyle] = _crSwicthStyle(_isChecked);

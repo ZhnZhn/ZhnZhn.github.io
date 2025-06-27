@@ -128,8 +128,7 @@ const RowType1 = _ref3 => {
         style: S_INLINE_INPUT_SWITCH,
         caption: "Column",
         initialValue: !0,
-        onCheck: () => _onToggleColumn(!0),
-        onUnCheck: () => _onToggleColumn(!1)
+        onToggle: _onToggleColumn
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         style: S_ROW_2,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputText.default, {
@@ -148,8 +147,7 @@ const RowType1 = _ref3 => {
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
           style: S_INLINE_INPUT_SWITCH,
           caption: "OnTop",
-          onCheck: () => _onToggleTop(!0),
-          onUnCheck: () => _onToggleTop(!1)
+          onToggle: _onToggleTop
         })]
       })]
     })

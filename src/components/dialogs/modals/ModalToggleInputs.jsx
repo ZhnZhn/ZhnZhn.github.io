@@ -1,21 +1,18 @@
 import { safeMap } from '../../uiApi';
 
 import ModalPopupInputs from './ModalPopupInputs';
-import RowCheckBox3 from '../rows/RowCheckBox3';
+import InputSwitch from '../../zhn/InputSwitch';
 
-import {
-  S_ROW,
-  S_INPUT_SWITCH
-} from './Style';
+import { S_ROW_INPUT_SWITCH } from './Style';
 
 const ModalToggleInputs = (props) => (
   <ModalPopupInputs {...props}>
     {safeMap(props.configs, config => (
-      <RowCheckBox3
+      <InputSwitch
         key={config[0]}
-        style={{...S_ROW, ...S_INPUT_SWITCH}}
+        style={S_ROW_INPUT_SWITCH}
         caption={config[0]}
-        value={config[1]}
+        initialValue={config[1]}
         onToggle={config[2]}
       />
     ))}

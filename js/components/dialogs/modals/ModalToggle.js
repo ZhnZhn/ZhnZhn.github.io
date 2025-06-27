@@ -9,7 +9,6 @@ var _ItemStack = _interopRequireDefault(require("../../zhn/ItemStack"));
 var _InputSwitch = _interopRequireDefault(require("../../zhn/InputSwitch"));
 var _ModalPopupInputs = _interopRequireDefault(require("./ModalPopupInputs"));
 var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox1"));
-var _RowCheckBox2 = _interopRequireDefault(require("../rows/RowCheckBox3"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW_FLEX = {
@@ -53,15 +52,15 @@ const ModalToggle = props => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopupInput
     onToggle: props.onToggle,
     onCheckCaption: props.onCheckCaption,
     onUnCheckCaption: props.onUnCheckCaption
-  }), props.isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox2.default, {
+  }), props.isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
     style: _Style.S_ROW_INPUT_SWITCH,
     caption: "From Date",
-    value: props.isShowFd,
+    initialValue: props.isShowFd,
     onToggle: props.onToggleFd
-  }, "isShowFd"), props.isCh && props.onToggleChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox2.default, {
+  }, "isShowFd"), props.isCh && props.onToggleChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
     style: _Style.S_ROW_INPUT_SWITCH,
     caption: "Chart",
-    value: props.isShowChart,
+    initialValue: props.isShowChart,
     onToggle: props.onToggleChart
   }, "isShowChart")]
 });

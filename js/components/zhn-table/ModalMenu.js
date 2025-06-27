@@ -6,13 +6,14 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
+var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
 var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
-var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox3"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW = {
     padding: '6px 0',
-    width: '105%'
+    width: '105%',
+    lineHeight: 'initial'
   },
   _crHrStyle = () => ({
     borderColor: (0, _Style.getColorBlack)(),
@@ -22,11 +23,10 @@ const S_ROW = {
   S_OPEN_CLOSE = {
     lineHeight: 1.5
   };
-const _crRowCheckBoxElement = (h, color, onToggle) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
+const _crRowCheckBoxElement = (h, color, onToggle) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
   style: S_ROW,
-  color: color,
   caption: h.name,
-  value: !h.isHide,
+  initialValue: !h.isHide,
   onToggle: onToggle
 }, h.name);
 const MenuPart = _ref => {
@@ -71,11 +71,10 @@ const ModalMenu = _ref3 => {
     style: style,
     isShow: isShow,
     onClose: onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
       style: S_ROW,
-      color: (0, _Style.getColorBlack)(),
       caption: "withStripLines",
-      value: isGridLine,
+      initialValue: isGridLine,
       onToggle: onToggleGrid
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("hr", {
       style: _crHrStyle()

@@ -1,5 +1,5 @@
 import ModalPopup from '../../zhn-moleculs/ModalPopup';
-import RowCheckBox3 from '../rows/RowCheckBox3';
+import InputSwitch from '../../zhn/InputSwitch';
 
 import {
   S_MODAL_POPUP,
@@ -13,11 +13,11 @@ const ModalPopupInputs = (props) => (
     className={props.className}
     onClose={props.onClose}
   >
-    <RowCheckBox3
+    <InputSwitch
       key="isShowLabels"
       style={S_ROW_INPUT_SWITCH}
       caption="Input Labels"
-      value={props.isShowLabels}
+      initialValue={props.isShowLabels}
       onToggle={props.onToggleLabels}
     />
     {props.children}

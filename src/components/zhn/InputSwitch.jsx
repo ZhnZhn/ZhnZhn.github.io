@@ -44,6 +44,7 @@ const InputSwitch = ({
   initialValue,
   style,
   caption,
+  onToggle,
   onCheck = FN_NOOP,
   onUnCheck = FN_NOOP
 }) => {
@@ -54,10 +55,10 @@ const InputSwitch = ({
   ] = useState(() => !!initialValue)
   , _hChange = (evt) => {
       const _nextValue = !_isChecked
-      , _onChange = _nextValue
+      , _onChange = onToggle || (_nextValue
          ? onCheck
-         : onUnCheck;
-      _onChange()
+         : onUnCheck);
+      _onChange(_nextValue)
       _setIsChecked(_nextValue);
     }
   , [

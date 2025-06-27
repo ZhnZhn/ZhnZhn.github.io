@@ -10,7 +10,6 @@ import InputSwitch from '../../zhn/InputSwitch';
 
 import ModalPopupInputs from './ModalPopupInputs';
 import RowCheckBox1 from '../rows/RowCheckBox1';
-import RowCheckBox3 from '../rows/RowCheckBox3';
 
 import {
   S_ROW,
@@ -70,18 +69,18 @@ const ModalToggle = (props) => (
       onCheckCaption={props.onCheckCaption}
       onUnCheckCaption={props.onUnCheckCaption}
     />
-    {props.isFd && <RowCheckBox3
+    {props.isFd && <InputSwitch
       key="isShowFd"
       style={S_ROW_INPUT_SWITCH}
       caption="From Date"
-      value={props.isShowFd}
+      initialValue={props.isShowFd}
       onToggle={props.onToggleFd}
     />}
-    {props.isCh && props.onToggleChart && <RowCheckBox3
+    {props.isCh && props.onToggleChart && <InputSwitch
       key="isShowChart"
       style={S_ROW_INPUT_SWITCH}
       caption="Chart"
-      value={props.isShowChart}
+      initialValue={props.isShowChart}
       onToggle={props.onToggleChart}
     />}
   </ModalPopupInputs>
