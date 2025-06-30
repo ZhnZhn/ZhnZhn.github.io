@@ -4,7 +4,9 @@ import memoIsShow from '../hoc/memoIsShow';
 import useMenuMore from '../dialogs/hooks/useMenuMore';
 import { useToolbar } from '../dialogs/hooks/useToolbar';
 
-import D from '../dialogs/DialogCell';
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
+import Toolbar from '../dialogs/Toolbar';
+import RowText from '../dialogs/rows/RowText';
 
 const S_DIALOG = { width: 310 }
 , S_ROW_TEXT = { paddingRight: 16 };
@@ -36,7 +38,7 @@ const AvTopDialog = memoIsShow(({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
-    <D.DraggableDialog
+    <DraggableDialog
       isShow={isShow}
       style={S_DIALOG}
       caption={caption}
@@ -46,16 +48,16 @@ const AvTopDialog = memoIsShow(({
       onShow={onShow}
       onClose={onClose}
     >
-      <D.Toolbar
+      <Toolbar
         isShow={isToolbar}
         buttons={_toolbarButtons}
       />
-      <D.RowText
+      <RowText
         style={S_ROW_TEXT}
         caption="AV:"
         text="Top Gainers & Losers"
       />
-    </D.DraggableDialog>
+    </DraggableDialog>
   );
 })
 
