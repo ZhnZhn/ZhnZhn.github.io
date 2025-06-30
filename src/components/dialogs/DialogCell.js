@@ -1,6 +1,5 @@
 
 import Modals from './modals/Modals'
-import Rows from './rows/Rows'
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog'
 import ModalPopup from '../zhn-moleculs/ModalPopup'
@@ -21,8 +20,7 @@ const DialogCell = {
   Toolbar,
   RowInputText,
   RowInputColor,
-  SelectWithLoad,
-  ...Rows,
+  SelectWithLoad,  
   ...Modals
 };
 
