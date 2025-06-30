@@ -9,11 +9,9 @@ var _RowPattern = _interopRequireDefault(require("./RowPattern"));
 var _RowCheckBox = _interopRequireDefault(require("./RowCheckBox1"));
 var _RowText = _interopRequireDefault(require("./RowText"));
 var _RowDate = _interopRequireDefault(require("./RowDate"));
-var _InputPeriod = _interopRequireDefault(require("./InputPeriod"));
 const Rows = {
   RowChart: _RowChart.default,
   RowChartDate: _RowChartDate.default,
-  InputPeriod: _InputPeriod.default,
   RowPattern: _RowPattern.default,
   RowDate: _RowDate.default,
   RowCheckBox1: _RowCheckBox.default,

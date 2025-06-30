@@ -7,6 +7,7 @@ import {
 import memoIsShow from '../hoc/memoIsShow';
 import useEventCallback from '../hooks/useEventCallback';
 
+import { isFn } from '../../utils/isTypeFn';
 import {
   isDmy,
   dmyToUTC,
@@ -19,7 +20,7 @@ import {
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import useCommandButtons from '../zhn-moleculs/useCommandButtons';
 
-import D from './DialogCell';
+import InputPeriod from './rows/InputPeriod';
 import ZoomDailyRow from './ZoomDailyRow';
 
 const S_DIALOG = {
@@ -28,7 +29,6 @@ const S_DIALOG = {
 }
 , S_DATE = { width: 120 };
 
-const _isFn = fn => typeof fn === 'function';
 
 const _getFromToDates = (chart) => chart
   .zhGetFromToDates?.({ format: mlsToDmy })
@@ -60,7 +60,7 @@ const useZoom = (
       onClose
     ] = getChart()
     , _datesInst = getRefValue(refDates);
-    if ( _isFn(chart.zhZoomX)
+    if ( isFn(chart.zhZoomX)
          && _datesInst.getValidation().isValid ) {
       const {
         fromDate,
@@ -92,7 +92,7 @@ const useZoomBy = (
   month
 ) => useCallback(() => {
     const [ chart ] = getChart();
-    if (_isFn(chart.zhZoomX)) {
+    if (isFn(chart.zhZoomX)) {
       const { to } = _getFromToDates(chart)
       , _fromMls = month
           ? addToDmy(to, month).getTime()
@@ -145,7 +145,7 @@ const ZoomDialog = memoIsShow(({
       commandButtons={_commandButtons}
       onClose={onClose}
     >
-      <D.InputPeriod
+      <InputPeriod
          key={id}
          refEl={_refDates}
          dateStyle={S_DATE}

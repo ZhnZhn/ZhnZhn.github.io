@@ -23,7 +23,10 @@ import useDialog from './hooks/useDialog';
 import useDialogOptions from './hooks/useDialogOptions';
 
 import { crChartOptions } from './ChartOptionsFn';
+
+//import ShowHide from '../zhn/ShowHide';
 import D from './DialogCell';
+//import InputPeriod from './rows/InputPeriod';
 
 const ERR_MSG = 'Empty or Id format is not valid'
 , S_ID_CAPTION = { width: 85 }
@@ -146,8 +149,8 @@ const DialogQuery = memoIsShow((
       />
       {/*
       <IfTrue v={!noDate}>
-        <D.ShowHide isShow={_isShowDate}>
-          <D.InputPeriod
+        <ShowHide isShow={_isShowDate}>
+          <InputPeriod
             refEl={_refDates}
             isShowLabels={_isShowLabels}
             initFromDate={props.initFromDate}
@@ -155,7 +158,7 @@ const DialogQuery = memoIsShow((
             msgOnNotValidFormat={props.msgOnNotValidFormat}
             onTestDate={props.onTestDate}
           />
-        </D.ShowHide>
+        </ShowHide>
       </IfTrue>
       */}
    </D.DraggableDialog>

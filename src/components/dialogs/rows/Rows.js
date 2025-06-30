@@ -6,15 +6,10 @@ import RowCheckBox1 from './RowCheckBox1';
 import RowText from './RowText';
 import RowDate from './RowDate';
 
-import InputPeriod from './InputPeriod';
-
-
 const Rows = {
   RowChart,
   RowChartDate,
-
-  InputPeriod,
-
+  
   RowPattern,
   RowDate,
   RowCheckBox1,

@@ -6,10 +6,11 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
+var _isTypeFn = require("../../utils/isTypeFn");
 var _dateFn = require("../../utils/dateFn");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _useCommandButtons = _interopRequireDefault(require("../zhn-moleculs/useCommandButtons"));
-var _DialogCell = _interopRequireDefault(require("./DialogCell"));
+var _InputPeriod = _interopRequireDefault(require("./rows/InputPeriod"));
 var _ZoomDailyRow = _interopRequireDefault(require("./ZoomDailyRow"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_DIALOG = {
@@ -19,7 +20,6 @@ const S_DIALOG = {
   S_DATE = {
     width: 120
   };
-const _isFn = fn => typeof fn === 'function';
 const _getFromToDates = chart => chart.zhGetFromToDates?.({
   format: _dateFn.mlsToDmy
 }) ?? {};
@@ -40,7 +40,7 @@ const useZoom = (getChart, refDates) => {
   const _hZoom = (0, _uiApi.useCallback)(() => {
       const [chart, onClose] = getChart(),
         _datesInst = (0, _uiApi.getRefValue)(refDates);
-      if (_isFn(chart.zhZoomX) && _datesInst.getValidation().isValid) {
+      if ((0, _isTypeFn.isFn)(chart.zhZoomX) && _datesInst.getValidation().isValid) {
         const {
           fromDate,
           toDate
@@ -62,7 +62,7 @@ const useZoom = (getChart, refDates) => {
 /*eslint-disable react-hooks/exhaustive-deps */
 const useZoomBy = (getChart, refDates, month) => (0, _uiApi.useCallback)(() => {
   const [chart] = getChart();
-  if (_isFn(chart.zhZoomX)) {
+  if ((0, _isTypeFn.isFn)(chart.zhZoomX)) {
     const {
         to
       } = _getFromToDates(chart),
@@ -114,7 +114,7 @@ const ZoomDialog = (0, _memoIsShow.default)(_ref => {
     isShow: isShow,
     commandButtons: _commandButtons,
     onClose: onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.InputPeriod, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputPeriod.default, {
       refEl: _refDates,
       dateStyle: S_DATE,
       placeholder: "DD-MM-YYYY",
