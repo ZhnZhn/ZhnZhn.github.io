@@ -24,8 +24,13 @@ import useDialogOptions from './hooks/useDialogOptions';
 
 import { crChartOptions } from './ChartOptionsFn';
 
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 //import ShowHide from '../zhn/ShowHide';
-import D from './DialogCell';
+
+import Toolbar from './Toolbar';
+import ModalOptions from './modals/ModalOptions';
+import RowPattern from './rows/RowPattern';
+import RowChartDate from './rows/RowChartDate';
 //import InputPeriod from './rows/InputPeriod';
 
 const ERR_MSG = 'Empty or Id format is not valid'
@@ -108,7 +113,7 @@ const DialogQuery = memoIsShow((
   });
 
   return (
-    <D.DraggableDialog
+    <DraggableDialog
       isShow={props.isShow}
       menuModel={_menuMoreModel}
       caption={props.caption}
@@ -117,16 +122,16 @@ const DialogQuery = memoIsShow((
       onShow={props.onShow}
       onClose={props.onClose}
     >
-      <D.Toolbar
+      <Toolbar
         isShow={_isToolbar}
         buttons={_toolbarButtons}
       />
-      <D.ModalOptions
+      <ModalOptions
         isShow={_isShowOptions}
         toggleOption={_toggleDialogOption}
         onClose={_hideOptions}
       />
-      <D.RowPattern
+      <RowPattern
         refEl={_refIdInput}
         isShowLabels={_isShowLabels}
         style={S_ID_ROOT}
@@ -136,7 +141,7 @@ const DialogQuery = memoIsShow((
         onTest={_testId}
         errorMsg={ERR_MSG}
       />
-      <D.RowChartDate
+      <RowChartDate
         refSeriaColor={_refSeriaColor}
         chartType={_chartType}
         isShowLabels={_isShowLabels}
@@ -161,7 +166,7 @@ const DialogQuery = memoIsShow((
         </ShowHide>
       </IfTrue>
       */}
-   </D.DraggableDialog>
+   </DraggableDialog>
   );
 });
 

@@ -12,7 +12,11 @@ var _useToggleLabels = _interopRequireDefault(require("./hooks/useToggleLabels")
 var _useDialog = _interopRequireDefault(require("./hooks/useDialog"));
 var _useDialogOptions = _interopRequireDefault(require("./hooks/useDialogOptions"));
 var _ChartOptionsFn = require("./ChartOptionsFn");
-var _DialogCell = _interopRequireDefault(require("./DialogCell"));
+var _DraggableDialog = _interopRequireDefault(require("../zhn-moleculs/DraggableDialog"));
+var _Toolbar = _interopRequireDefault(require("./Toolbar"));
+var _ModalOptions = _interopRequireDefault(require("./modals/ModalOptions"));
+var _RowPattern = _interopRequireDefault(require("./rows/RowPattern"));
+var _RowChartDate = _interopRequireDefault(require("./rows/RowChartDate"));
 var _jsxRuntime = require("react/jsx-runtime");
 //import { useToggle } from '../hooks/useToggle';
 
@@ -81,7 +85,7 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
         _idInputInst.showErrMsg();
       }
     });
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DraggableDialog.default, {
     isShow: props.isShow,
     menuModel: _menuMoreModel,
     caption: props.caption,
@@ -89,14 +93,14 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
     onLoad: _hLoad,
     onShow: props.onShow,
     onClose: props.onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Toolbar.default, {
       isShow: _isToolbar,
       buttons: _toolbarButtons
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalOptions, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalOptions.default, {
       isShow: _isShowOptions,
       toggleOption: _toggleDialogOption,
       onClose: _hideOptions
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowPattern.default, {
       refEl: _refIdInput,
       isShowLabels: _isShowLabels,
       style: S_ID_ROOT,
@@ -105,7 +109,7 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
       caption: props.oneCaption,
       onTest: _testId,
       errorMsg: ERR_MSG
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowChartDate.default, {
       refSeriaColor: _refSeriaColor,
       chartType: _chartType,
       isShowLabels: _isShowLabels,
