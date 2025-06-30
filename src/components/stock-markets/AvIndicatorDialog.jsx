@@ -22,7 +22,12 @@ import {
   useToolbar
 } from '../dialogs/hooks/useToolbar';
 
-import D from '../dialogs/DialogCell'
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
+import ShowHide from '../zhn/ShowHide';
+import Toolbar from '../dialogs/Toolbar';
+import SelectWithLoad from '../dialogs/SelectWithLoad';
+import RowPattern from '../dialogs/rows/RowPattern';
+import RowCheckBox1 from '../dialogs/rows/RowCheckBox1';
 
 const DF_INDICATOR = 'SMA'
 , DF_PERIOD = 30
@@ -126,7 +131,7 @@ const AvIndicatorDialog = memoIsShow(({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
-    <D.DraggableDialog
+    <DraggableDialog
        isShow={isShow}
        caption={caption}
        menuModel={menuMoreModel}
@@ -135,11 +140,11 @@ const AvIndicatorDialog = memoIsShow(({
        onShow={onShow}
        onClose={onClose}
     >
-      <D.Toolbar
+      <Toolbar
         isShow={isToolbar}
         buttons={_toolbarButtons}
       />
-      <D.RowPattern
+      <RowPattern
         refEl={_refTicket}
         isShowLabels={isShowLabels}
         caption="Stock"
@@ -147,7 +152,7 @@ const AvIndicatorDialog = memoIsShow(({
         onTest={_testTicket}
         errorMsg="Not Empty"
       />
-      <D.SelectWithLoad
+      <SelectWithLoad
         isShow={isShow}
         isShowLabels={isShowLabels}
         uri={oneURI}
@@ -157,8 +162,8 @@ const AvIndicatorDialog = memoIsShow(({
         placeholder={INDICATOR_PLACEHOLDER}
         onSelect={setIndicator}
       />
-      <D.ShowHide isShow={isShowOptions}>
-         <D.RowPattern
+      <ShowHide isShow={isShowOptions}>
+         <RowPattern
            ref={_refPeriod}
            isShowLabels={isShowLabels}
            caption="Period"
@@ -166,7 +171,7 @@ const AvIndicatorDialog = memoIsShow(({
            onTest={_testPeriod}
            errorMsg="Number in range 1-200"
         />
-        <D.RowPattern
+        <RowPattern
            ref={_refForDays}
            isShowLabels={isShowLabels}
            caption="For Days"
@@ -174,13 +179,13 @@ const AvIndicatorDialog = memoIsShow(({
            onTest={_testForDays}
            errorMsg="Number in range 250-2500"
         />
-      </D.ShowHide>
-      <D.RowCheckBox1
+      </ShowHide>
+      <RowCheckBox1
          caption="Add Seria with YAxis2"
          onCheck={_hCheckSecondYAxis}
          onUnCheck={_hUnCheckSecondYAxis}
       />
-    </D.DraggableDialog>
+    </DraggableDialog>
   );
 });
 

@@ -10,7 +10,12 @@ var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
 var _useToolbar = require("../dialogs/hooks/useToolbar");
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _DraggableDialog = _interopRequireDefault(require("../zhn-moleculs/DraggableDialog"));
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
+var _Toolbar = _interopRequireDefault(require("../dialogs/Toolbar"));
+var _SelectWithLoad = _interopRequireDefault(require("../dialogs/SelectWithLoad"));
+var _RowPattern = _interopRequireDefault(require("../dialogs/rows/RowPattern"));
+var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox1"));
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_INDICATOR = 'SMA',
   DF_PERIOD = 30,
@@ -85,7 +90,7 @@ const AvIndicatorDialog = (0, _memoIsShow.default)(_ref => {
   // loadId, onLoad, getIndicator, getIsSecondYAxis
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DraggableDialog.default, {
     isShow: isShow,
     caption: caption,
     menuModel: menuMoreModel,
@@ -93,17 +98,17 @@ const AvIndicatorDialog = (0, _memoIsShow.default)(_ref => {
     onLoad: _hLoad,
     onShow: onShow,
     onClose: onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Toolbar.default, {
       isShow: isToolbar,
       buttons: _toolbarButtons
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowPattern.default, {
       refEl: _refTicket,
       isShowLabels: isShowLabels,
       caption: "Stock",
       placeholder: "Nyse or Nasdaq Symbol",
       onTest: _testTicket,
       errorMsg: "Not Empty"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectWithLoad.default, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: oneURI,
@@ -112,16 +117,16 @@ const AvIndicatorDialog = (0, _memoIsShow.default)(_ref => {
       optionNames: "Items",
       placeholder: INDICATOR_PLACEHOLDER,
       onSelect: setIndicator
-    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.ShowHide, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide.default, {
       isShow: isShowOptions,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowPattern.default, {
         ref: _refPeriod,
         isShowLabels: isShowLabels,
         caption: "Period",
         placeholder: `Default: ${DF_PERIOD}`,
         onTest: _testPeriod,
         errorMsg: "Number in range 1-200"
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowPattern, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowPattern.default, {
         ref: _refForDays,
         isShowLabels: isShowLabels,
         caption: "For Days",
@@ -129,7 +134,7 @@ const AvIndicatorDialog = (0, _memoIsShow.default)(_ref => {
         onTest: _testForDays,
         errorMsg: "Number in range 250-2500"
       })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowCheckBox1, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
       caption: "Add Seria with YAxis2",
       onCheck: _hCheckSecondYAxis,
       onUnCheck: _hUnCheckSecondYAxis
