@@ -4,10 +4,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _RowChart = _interopRequireDefault(require("./RowChart"));
-var _RowChartDate = _interopRequireDefault(require("./RowChartDate"));
 const Rows = {
-  RowChart: _RowChart.default,
-  RowChartDate: _RowChartDate.default
+  RowChart: _RowChart.default
 };
 var _default = exports.default = Rows;
 //# sourceMappingURL=Rows.js.map

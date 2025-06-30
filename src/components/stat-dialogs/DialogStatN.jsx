@@ -10,13 +10,19 @@ import { crAbsoluteTopLeftStyle } from '../styleFn';
 
 import { isCategoryItem } from '../dialogs/ChartOptionsFn';
 
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import FocusFirstCombobox from '../zhn-moleculs/FocusFirstCombobox';
-import ItemStack from '../zhn/ItemStack';
 import {
   crSpinnerStatus,
   Spinner
 } from '../zhn/Spinner';
-import D from '../dialogs/DialogCell';
+import ItemStack from '../zhn/ItemStack';
+import ValidationMessages from '../zhn/ValidationMessages';
+
+import Toolbar from '../dialogs/Toolbar';
+import ModalOptions from '../dialogs/modals/ModalOptions';
+import RowChartDate from '../dialogs/rows/RowChartDate';
+
 import crSelectItem from './crSelectItem';
 import { PN_IS_SHOW_CHART } from './crIsId';
 
@@ -249,8 +255,8 @@ const DialogStatN = memoIsShow((props) => {
   , _spinnerStatus = crSpinnerStatus(isLoading, isLoadFailed)
   , _isShowDate = isShowChart && isCategoryItem(chartType);
   return (
-    <D.DraggableDialog
-       isFocusBtMenu={false}
+    <DraggableDialog
+       isFocusBtMenu={!1}
        isShow={isShow}
        caption={caption}
        menuModel={menuMoreModel}
@@ -259,11 +265,11 @@ const DialogStatN = memoIsShow((props) => {
        onShow={onShow}
        onClose={_hClose}
     >
-       <D.Toolbar
+       <Toolbar
          isShow={isToolbar}
          buttons={toolbarButtons}
        />
-       <D.ModalOptions
+       <ModalOptions
          isShow={isShowOptions}
          dfRt={dfRt}
          onRoundTo={_setRoundTo}
@@ -286,7 +292,7 @@ const DialogStatN = memoIsShow((props) => {
                   isRow={isRow}
                   fSelect={_fSelectItem}
                />
-               <D.RowChartDate
+               <RowChartDate
                  refSeriaColor={_refSeriaColor}
                  chartType={chartType}
                  isShowLabels={isShowLabels}
@@ -303,10 +309,10 @@ const DialogStatN = memoIsShow((props) => {
                />
              </FocusFirstCombobox>)
        }
-       <D.ValidationMessages
+       <ValidationMessages
            validationMessages={validationMessages}
        />
-    </D.DraggableDialog>
+    </DraggableDialog>
   );
 })
 

@@ -6,10 +6,14 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _ChartOptionsFn = require("../dialogs/ChartOptionsFn");
+var _DraggableDialog = _interopRequireDefault(require("../zhn-moleculs/DraggableDialog"));
 var _FocusFirstCombobox = _interopRequireDefault(require("../zhn-moleculs/FocusFirstCombobox"));
-var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 var _Spinner = require("../zhn/Spinner");
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
+var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
+var _Toolbar = _interopRequireDefault(require("../dialogs/Toolbar"));
+var _ModalOptions = _interopRequireDefault(require("../dialogs/modals/ModalOptions"));
+var _RowChartDate = _interopRequireDefault(require("../dialogs/rows/RowChartDate"));
 var _crSelectItem = _interopRequireDefault(require("./crSelectItem"));
 var _crIsId = require("./crIsId");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
@@ -177,8 +181,8 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     /*eslint-enable react-hooks/exhaustive-deps */,
     _spinnerStatus = (0, _Spinner.crSpinnerStatus)(isLoading, isLoadFailed),
     _isShowDate = isShowChart && (0, _ChartOptionsFn.isCategoryItem)(chartType);
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
-    isFocusBtMenu: false,
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DraggableDialog.default, {
+    isFocusBtMenu: !1,
     isShow: isShow,
     caption: caption,
     menuModel: menuMoreModel,
@@ -186,10 +190,10 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     onLoad: _hLoad,
     onShow: onShow,
     onClose: _hClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Toolbar.default, {
       isShow: isToolbar,
       buttons: toolbarButtons
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalOptions, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalOptions.default, {
       isShow: isShowOptions,
       dfRt: dfRt,
       onRoundTo: _setRoundTo,
@@ -208,7 +212,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
         isShowLabels: isShowLabels,
         isRow: isRow,
         fSelect: _fSelectItem
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowChartDate, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowChartDate.default, {
         refSeriaColor: _refSeriaColor,
         chartType: chartType,
         isShowLabels: isShowLabels,
@@ -223,7 +227,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
         dimOptions: dimOptions,
         onSelectDim: setDim
       })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationMessages.default, {
       validationMessages: validationMessages
     })]
   });

@@ -1,9 +1,7 @@
 import RowChart from './RowChart';
-import RowChartDate from './RowChartDate';
 
 const Rows = {
-  RowChart,
-  RowChartDate
+  RowChart
 };
 
 export default Rows
