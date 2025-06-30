@@ -1,5 +1,8 @@
 import { safeMap } from '../uiApi';
-import D from './DialogCell';
+
+import ShowHide from '../zhn/ShowHide';
+import SelectWithLoad from './SelectWithLoad';
+import SelectOneTwo from './rows/SelectOneTwo';
 
 const SelectList = ({
   isShow,
@@ -12,13 +15,13 @@ const SelectList = ({
   const [filterId, filters] = tupleFilter || [];
   return safeMap(selectProps, ({type, id, ...restItem}, index) => {
     const Comp = !type
-      ? D.SelectWithLoad
+      ? SelectWithLoad
       : type === "two"
-      ? D.SelectOneTwo
+      ? SelectOneTwo
       : null
     , _onSelect = item => hSelect(id, index, item);
     return (
-      <D.ShowHide key={id} isShow={isShowById(id)}>
+      <ShowHide key={id} isShow={isShowById(id)}>
         {Comp && <Comp
           //uri, jsonProp, caption, isWithInput
           //uri, caption, oneCaption, twoCaption, isAddTitle
@@ -28,7 +31,7 @@ const SelectList = ({
           onSelect={_onSelect}
           filters={id === filterId ? void 0 : filters}
         />}
-      </D.ShowHide>
+      </ShowHide>
     );
   });
 };

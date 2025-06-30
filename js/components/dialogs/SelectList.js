@@ -4,7 +4,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _DialogCell = _interopRequireDefault(require("./DialogCell"));
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
+var _SelectWithLoad = _interopRequireDefault(require("./SelectWithLoad"));
+var _SelectOneTwo = _interopRequireDefault(require("./rows/SelectOneTwo"));
 var _jsxRuntime = require("react/jsx-runtime");
 const SelectList = _ref => {
   let {
@@ -22,9 +24,9 @@ const SelectList = _ref => {
       id,
       ...restItem
     } = _ref2;
-    const Comp = !type ? _DialogCell.default.SelectWithLoad : type === "two" ? _DialogCell.default.SelectOneTwo : null,
+    const Comp = !type ? _SelectWithLoad.default : type === "two" ? _SelectOneTwo.default : null,
       _onSelect = item => hSelect(id, index, item);
-    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: isShowById(id),
       children: Comp && /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp
       //uri, jsonProp, caption, isWithInput

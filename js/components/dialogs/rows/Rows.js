@@ -10,12 +10,10 @@ var _RowCheckBox = _interopRequireDefault(require("./RowCheckBox1"));
 var _RowText = _interopRequireDefault(require("./RowText"));
 var _RowDate = _interopRequireDefault(require("./RowDate"));
 var _InputPeriod = _interopRequireDefault(require("./InputPeriod"));
-var _SelectOneTwo = _interopRequireDefault(require("./SelectOneTwo"));
 const Rows = {
   RowChart: _RowChart.default,
   RowChartDate: _RowChartDate.default,
   InputPeriod: _InputPeriod.default,
-  SelectOneTwo: _SelectOneTwo.default,
   RowPattern: _RowPattern.default,
   RowDate: _RowDate.default,
   RowCheckBox1: _RowCheckBox.default,

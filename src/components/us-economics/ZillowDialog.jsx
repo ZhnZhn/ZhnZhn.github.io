@@ -13,8 +13,16 @@ import useToggleLabels from "../dialogs/hooks/useToggleLabels";
 import useDialog from "../dialogs/hooks/useDialog";
 import checkAreDatesValid from "../dialogs/hooks/checkAreDatesValid";
 
-import D from "../dialogs/DialogCell";
+import DraggableDialog from "../zhn-moleculs/DraggableDialog";
+import ShowHide from "../zhn/ShowHide";
+import ValidationMessages from "../zhn/ValidationMessages";
+
+import Toolbar from "../dialogs/Toolbar";
+import SelectWithLoad from "../dialogs/SelectWithLoad";
 import ModalToggleInputs from "../dialogs/modals/ModalToggleInputs";
+import SelectOneTwo from "../dialogs/rows/SelectOneTwo";
+import RowPattern from "../dialogs/rows/RowPattern";
+import InputPeriod from "../dialogs/rows/InputPeriod";
 
 const DATA_NOTE = "*Data present not for all zip codes";
 const S_TIP = {
@@ -150,7 +158,7 @@ const ZillowDialog = memoIsShow(props => {
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
-    <D.DraggableDialog
+    <DraggableDialog
        isShow={isShow}
        caption={props.caption}
        menuModel={menuMoreModel}
@@ -159,7 +167,7 @@ const ZillowDialog = memoIsShow(props => {
        onShow={onShow}
        onClose={hClose}
     >
-      <D.Toolbar
+      <Toolbar
          isShow={isToolbar}
          buttons={toolbarButtons}
       />
@@ -172,14 +180,14 @@ const ZillowDialog = memoIsShow(props => {
         onToggleLabels={toggleLabels}
         onClose={hideToggle}
       />
-      <D.SelectWithLoad
+      <SelectWithLoad
          isShow={isShow}
          isShowLabels={isShowLabels}
          uri={props.oneURI}
          caption={oneCaption}
          onSelect={setMetric}
       />
-      <D.SelectOneTwo
+      <SelectOneTwo
          refEl={_refTypeCode}
          isShow={isShow}
          isShowLabels={isShowLabels}
@@ -191,8 +199,8 @@ const ZillowDialog = memoIsShow(props => {
          msgOnNotSelected={msgOnNotSelected}
          onSelectOne={_hSelectType}
       />
-      <D.ShowHide isShow={isShowPattern}>
-         <D.RowPattern
+      <ShowHide isShow={isShowPattern}>
+         <RowPattern
             refEl={_refZip}
             isShowLabels={isShowLabels}
             caption="*Zip Code"
@@ -200,9 +208,9 @@ const ZillowDialog = memoIsShow(props => {
             onTest={_isZipCode}
             errorMsg="5 digits format is required"
          />
-      </D.ShowHide>
-      <D.ShowHide isShow={isShowDate}>
-        <D.InputPeriod
+      </ShowHide>
+      <ShowHide isShow={isShowDate}>
+        <InputPeriod
            refEl={_refDates}
            isShowLabels={isShowLabels}
            initFromDate={props.initFromDate}
@@ -210,16 +218,16 @@ const ZillowDialog = memoIsShow(props => {
            msgOnNotValidFormat={props.msgOnNotValidFormat}
            onTestDate={props.onTestDate}
         />
-      </D.ShowHide>
-      <D.ShowHide isShow={isShowPattern}>
+      </ShowHide>
+      <ShowHide isShow={isShowPattern}>
         <div style={S_TIP}>
           {DATA_NOTE}
         </div>
-      </D.ShowHide>
-      <D.ValidationMessages
+      </ShowHide>
+      <ValidationMessages
          validationMessages={validationMessages}
       />
-    </D.DraggableDialog>
+    </DraggableDialog>
   );
 });
 
