@@ -8,7 +8,10 @@ import {
 } from '../dialogs/hooks/useToolbar';
 
 import SearchAdapter from '../../adapters/av-sm/SearchAdapter';
-import D from '../dialogs/DialogCell';
+
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
+import Toolbar from '../dialogs/Toolbar';
+import RowInputSearch from '../dialogs/rows/RowInputSearch';
 
 const ERR_DESCR = 'API key from Alpha Vantage is required'
 , ERR_CAPTION = "Without API Key";
@@ -50,23 +53,23 @@ const AvSearchDialog = memoIsShow(({
   }))
 
   return (
-    <D.DraggableDialog
+    <DraggableDialog
       isShow={isShow}
       caption={caption}
       menuModel={menuMoreModel}
       toTopLayer={toTopLayer}
       onClose={onClose}
     >
-       <D.Toolbar
+       <Toolbar
          isShow={isToolbar}
          buttons={_toolbarButtons}
        />
-       <D.RowInputSearch
+       <RowInputSearch
          isShowLabels={isShowLabels}
          caption="Token"
          searchApi={_searchApi}
        />
-    </D.DraggableDialog>
+    </DraggableDialog>
   );
 });
 

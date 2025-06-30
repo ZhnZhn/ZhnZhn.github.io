@@ -9,7 +9,9 @@ var _useProperty = require("../hooks/useProperty");
 var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"));
 var _useToolbar = require("../dialogs/hooks/useToolbar");
 var _SearchAdapter = _interopRequireDefault(require("../../adapters/av-sm/SearchAdapter"));
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _DraggableDialog = _interopRequireDefault(require("../zhn-moleculs/DraggableDialog"));
+var _Toolbar = _interopRequireDefault(require("../dialogs/Toolbar"));
+var _RowInputSearch = _interopRequireDefault(require("../dialogs/rows/RowInputSearch"));
 var _jsxRuntime = require("react/jsx-runtime");
 const ERR_DESCR = 'API key from Alpha Vantage is required',
   ERR_CAPTION = "Without API Key";
@@ -45,16 +47,16 @@ const AvSearchDialog = (0, _memoIsShow.default)(_ref => {
         };
       }
     }));
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DraggableDialog.default, {
     isShow: isShow,
     caption: caption,
     menuModel: menuMoreModel,
     toTopLayer: toTopLayer,
     onClose: onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Toolbar.default, {
       isShow: isToolbar,
       buttons: _toolbarButtons
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSearch, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSearch.default, {
       isShowLabels: isShowLabels,
       caption: "Token",
       searchApi: _searchApi
