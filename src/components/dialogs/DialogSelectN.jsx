@@ -24,9 +24,18 @@ import useTitles from './hooks/useTitles';
 import useSelectItem from './hooks/useSelectItem';
 
 import { isCategoryItem } from './ChartOptionsFn';
+
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
+import ShowHide from '../zhn/ShowHide';
+import ValidationMessages from '../zhn/ValidationMessages';
 import FocusFirstCombobox from '../zhn-moleculs/FocusFirstCombobox';
-import D from './DialogCell';
+
+import Toolbar from './Toolbar';
 import SelectList from './SelectList';
+import ModalOptions from './modals/ModalOptions';
+import ModalToggle from './modals/ModalToggle';
+import RowChartDate from './rows/RowChartDate';
+import RowDate from './rows/RowDate';
 
 import {
   getItemValue,
@@ -184,7 +193,7 @@ const DialogSelectN = memoIsShow((
   , _isShowDate = _isShowChart && _isCategory;
 
   return (
-    <D.DraggableDialog
+    <DraggableDialog
       isFocusBtMenu={!1}
       isShow={isShow}
       caption={props.caption}
@@ -194,18 +203,18 @@ const DialogSelectN = memoIsShow((
       onShow={props.onShow}
       onClose={_hClose}
    >
-      <D.Toolbar
+      <Toolbar
         isShow={_isToolbar}
         buttons={_toolbarButtons}
       />
-      <D.ModalOptions
+      <ModalOptions
         isShow={_isShowOptions}
         dfRt={dfRt}
         onRoundTo={_setPropertyRoundTo}
         toggleOption={_toggleDialogOption}
         onClose={_hideOptions}
       />
-      <D.ModalToggle
+      <ModalToggle
         isShow={_isToggle}
         selectProps={selectProps}
         isShowLabels={_isShowLabels}
@@ -231,8 +240,8 @@ const DialogSelectN = memoIsShow((
           tupleFilter={_tupleFilter}
         />
       </FocusFirstCombobox>
-      <D.ShowHide isShow={_isShowFromDate}>
-        <D.RowDate
+      <ShowHide isShow={_isShowFromDate}>
+        <RowDate
           innerRef={_refFromDate}
           isShowLabels={_isShowLabels}
           title="From Date"
@@ -240,10 +249,10 @@ const DialogSelectN = memoIsShow((
           errorMsg={props.errNotYmdOrEmpty}
           onTest={props.isYmdOrEmpty}
         />
-      </D.ShowHide>
+      </ShowHide>
 
       <IfTrue v={isCh}>
-        <D.RowChartDate
+        <RowChartDate
           refSeriaColor={_refSeriaColor}
           chartType={_chartType}
           isShowLabels={_isShowLabels}
@@ -257,10 +266,10 @@ const DialogSelectN = memoIsShow((
           onSelectDate={_setPropertyDate}
         />
       </IfTrue>
-      <D.ValidationMessages
+      <ValidationMessages
         validationMessages={_validationMessages}
       />
-    </D.DraggableDialog>
+    </DraggableDialog>
   );
 })
 

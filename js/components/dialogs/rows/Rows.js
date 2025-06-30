@@ -8,12 +8,10 @@ var _RowChartDate = _interopRequireDefault(require("./RowChartDate"));
 var _RowPattern = _interopRequireDefault(require("./RowPattern"));
 var _RowCheckBox = _interopRequireDefault(require("./RowCheckBox1"));
 var _RowText = _interopRequireDefault(require("./RowText"));
-var _RowDate = _interopRequireDefault(require("./RowDate"));
 const Rows = {
   RowChart: _RowChart.default,
   RowChartDate: _RowChartDate.default,
   RowPattern: _RowPattern.default,
-  RowDate: _RowDate.default,
   RowCheckBox1: _RowCheckBox.default,
   RowText: _RowText.default
 };
