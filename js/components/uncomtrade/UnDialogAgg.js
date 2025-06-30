@@ -11,8 +11,13 @@ var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
 var _useToggleLabels = _interopRequireDefault(require("../dialogs/hooks/useToggleLabels"));
 var _useDialog = _interopRequireDefault(require("../dialogs/hooks/useDialog"));
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _DraggableDialog = _interopRequireDefault(require("../zhn-moleculs/DraggableDialog"));
+var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
+var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
+var _Toolbar = _interopRequireDefault(require("../dialogs/Toolbar"));
+var _SelectWithLoad = _interopRequireDefault(require("../dialogs/SelectWithLoad"));
 var _ModalToggleInputs = _interopRequireDefault(require("../dialogs/modals/ModalToggleInputs"));
+var _RowInputSelect = _interopRequireDefault(require("../dialogs/rows/RowInputSelect"));
 var _useInputChart = _interopRequireDefault(require("./useInputChart"));
 var _dialogFn = require("./dialogFn");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -160,7 +165,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
   // clearValidationMessages, setValidationMessages
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.DraggableDialog, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DraggableDialog.default, {
     isShow: isShow,
     caption: caption,
     menuModel: menuMoreModel,
@@ -168,7 +173,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
     onLoad: _hLoad,
     onShow: onShow,
     onClose: hClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.Toolbar, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Toolbar.default, {
       isShow: isToolbar,
       buttons: toolbarButtons
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalToggleInputs.default, {
@@ -179,16 +184,16 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       /*["Aggregation", isAggr, toggleAggr]*/],
       onToggleLabels: toggleLabels,
       onClose: hideToggle
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectWithLoad.default, {
       isShow: isShow,
       isShowLabels: isShowLabels,
       uri: oneURI,
       caption: "Reporter",
       placeholder: REPORTER_PLACEHOLDER,
       onSelect: setOne
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: isFlow,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
         isShowLabels: isShowLabels,
         caption: "Trade Flow",
         placeholder: TRADE_FLOW_PLACEHOLDER,
@@ -196,9 +201,9 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         options: TRADE_FLOW_OPTIONS,
         onSelect: setTradeFlow
       })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: !1,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.SelectWithLoad, {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectWithLoad.default, {
         refEl: _refTradePartner,
         isShowLabels: isShowLabels,
         uri: tpURI,
@@ -206,27 +211,27 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
         placeholder: PARTNER_PLACEHOLDER,
         onSelect: _setTradePartner
       })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.ShowHide, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide.default, {
       isShow: !0,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
         isShowLabels: isShowLabels,
         caption: "Aggregation",
         placeholder: AGGREGATION_PLACEHOLDER,
         propCaption: "c",
         options: AGG_OPTIONS,
         onSelect: _setAggregation
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_DialogCell.default.ShowHide, {
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide.default, {
         isShow: isInputChart,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
           isShowLabels: isShowLabels,
           caption: "Chart",
           placeholder: CHART_PLACEHOLDER,
           propCaption: "c",
           options: chartOptions,
           onSelect: setChart
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ShowHide, {
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
           isShow: isPeriod,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.RowInputSelect, {
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputSelect.default, {
             isShowLabels: isShowLabels
             //caption="Period"
             ,
@@ -238,7 +243,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
           })
         })]
       })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ValidationMessages, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationMessages.default, {
       validationMessages: validationMessages
     })]
   });

@@ -1,5 +1,5 @@
-
-import D from '../dialogs/DialogCell';
+import ShowHide from '../zhn/ShowHide';
+import RowInputSelect from '../dialogs/rows/RowInputSelect';
 import { crIsId } from './crIsId';
 
 const S_CAPTION = {
@@ -8,31 +8,22 @@ const S_CAPTION = {
 
 const crSelectItem = (
   conf,
-  index, {
-    isShowLabels,
-    isRow,
-    fSelect
-  }
-) => {
-  const {
-    id,
-    caption,
-    options,
-    placeholder
-  } = conf
-  , _isShow = !isRow[crIsId(id)];
-  return (
-    <D.ShowHide key={id} isShow={_isShow}>
-      <D.RowInputSelect
-        isShowLabels={isShowLabels}
-        caption={caption}
-        captionStyle={S_CAPTION}
-        placeholder={placeholder}
-        options={options}
-        onSelect={fSelect(index)}
-      />
-    </D.ShowHide>
-  );
-};
+  index,
+  props
+) => (
+  <ShowHide
+    key={conf.id}
+    isShow={!props.isRow[crIsId(conf.id)]}
+  >
+    <RowInputSelect
+      captionStyle={S_CAPTION}
+      caption={conf.caption}
+      placeholder={conf.placeholder}
+      options={conf.options}
+      isShowLabels={props.isShowLabels}
+      onSelect={props.fSelect(index)}
+    />
+  </ShowHide>
+);
 
 export default crSelectItem

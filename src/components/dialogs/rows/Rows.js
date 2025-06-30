@@ -1,4 +1,3 @@
-import RowInputSelect from './RowInputSelect';
 import RowInputSearch from './RowInputSearch';
 import RowChart from './RowChart';
 import RowChartDate from './RowChartDate';
@@ -12,7 +11,6 @@ import InputPeriod from './InputPeriod';
 import SelectOneTwo from './SelectOneTwo';
 
 const Rows = {
-  RowInputSelect,
   RowInputSearch,
   RowChart,
   RowChartDate,

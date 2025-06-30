@@ -25,8 +25,16 @@ import { useProperty } from "../hooks/useProperty";
 import useToggleLabels from "../dialogs/hooks/useToggleLabels";
 import useDialog from "../dialogs/hooks/useDialog";
 
-import D from "../dialogs/DialogCell";
+import DraggableDialog from "../zhn-moleculs/DraggableDialog";
+import ShowHide from "../zhn/ShowHide";
+import ValidationMessages from '../zhn/ValidationMessages';
+
+import Toolbar from "../dialogs/Toolbar";
+import SelectWithLoad from "../dialogs/SelectWithLoad";
 import ModalToggleInputs from "../dialogs/modals/ModalToggleInputs";
+import RowInputSelect from "../dialogs/rows/RowInputSelect";
+import RowChartDate from "../dialogs/rows/RowChartDate";
+import SelectOneTwo from "../dialogs/rows/SelectOneTwo";
 import crDateConfig from "../dialogs/fns/crDateConfig";
 import { crInputSelectDfProps } from "./dialogFn";
 
@@ -191,7 +199,7 @@ const UnDialog5 = memoIsShow((
    /*eslint-enable react-hooks/exhaustive-deps */
 
    return (
-     <D.DraggableDialog
+     <DraggableDialog
        isShow={isShow}
        caption={caption}
        menuModel={menuMoreModel}
@@ -200,7 +208,7 @@ const UnDialog5 = memoIsShow((
        onShow={onShow}
        onClose={hClose}
     >
-      <D.Toolbar
+      <Toolbar
          isShow={isToolbar}
          buttons={toolbarButtons}
       />
@@ -217,7 +225,7 @@ const UnDialog5 = memoIsShow((
         onToggleLabels={toggleLabels}
         onClose={hideToggle}
       />
-      <D.SelectWithLoad
+      <SelectWithLoad
          isShow={isShow}
          isShowLabels={isShowLabels}
          uri={oneURI}
@@ -225,8 +233,8 @@ const UnDialog5 = memoIsShow((
          placeholder={REPORTER_PLACEHOLDER}
          onSelect={setOne}
       />
-      <D.ShowHide isShow={!1}>
-        <D.SelectWithLoad
+      <ShowHide isShow={!1}>
+        <SelectWithLoad
            refEl={_refTradePartner}
            isShowLabels={isShowLabels}
            uri={tpURI}
@@ -234,9 +242,9 @@ const UnDialog5 = memoIsShow((
            placeholder="Default: World"
            //onSelect={setTradePartner}
         />
-      </D.ShowHide>
-      <D.ShowHide isShow={isHeading}>
-        <D.SelectOneTwo
+      </ShowHide>
+      <ShowHide isShow={isHeading}>
+        <SelectOneTwo
            refEl={_refGroupItem}
            isShow={isShow}
            isShowLabels={isShowLabels}
@@ -245,9 +253,9 @@ const UnDialog5 = memoIsShow((
            twoCaption="Subheading"
            msgOnNotSelected={msgOnNotSelected}
         />
-      </D.ShowHide>
-      <D.ShowHide isShow={isFlow}>
-        <D.RowInputSelect
+      </ShowHide>
+      <ShowHide isShow={isFlow}>
+        <RowInputSelect
           isShowLabels={isShowLabels}
           caption="Trade Flow"
           placeholder={TRADE_FLOW_PLACEHOLDER}
@@ -255,9 +263,9 @@ const UnDialog5 = memoIsShow((
           options={TRADE_FLOW_OPTIONS}
           onSelect={setTradeFlow}
         />
-      </D.ShowHide>
-      <D.ShowHide isShow={!1}>
-        <D.RowInputSelect
+      </ShowHide>
+      <ShowHide isShow={!1}>
+        <RowInputSelect
           isShowLabels={isShowLabels}
           caption="Frequency"
           placeholder={FREQUENCY_PLACEHOLDER}
@@ -265,8 +273,8 @@ const UnDialog5 = memoIsShow((
           options={FREQUENCY_OPTIONS}
           //onSelect={setFreq}
         />
-      </D.ShowHide>
-      <D.RowChartDate
+      </ShowHide>
+      <RowChartDate
          isShowChart={isChart}
          isShowDate={isChart}
          refSeriaColor={_refSeriaColor}
@@ -279,10 +287,10 @@ const UnDialog5 = memoIsShow((
          dateOptions={DATE_OPTIONS}
          onSelectDate={setPropertyTime}
       />
-      <D.ValidationMessages
+      <ValidationMessages
           validationMessages={validationMessages}
       />
-   </D.DraggableDialog>
+   </DraggableDialog>
   );
 })
 
