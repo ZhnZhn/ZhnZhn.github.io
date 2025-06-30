@@ -6,7 +6,7 @@ import useToggleLabels from '../dialogs/hooks/useToggleLabels';
 import useTitles from '../dialogs/hooks/useTitles';
 import useRowToggle from './useRowToggle';
 
-import D from '../dialogs/DialogCell';
+import ModalToggle from '../dialogs/modals/ModalToggle';
 import { PN_IS_SHOW_CHART } from './crIsId';
 
 const useModalToggle = (
@@ -36,7 +36,7 @@ const useModalToggle = (
   return [
     /*eslint-disable react-hooks/exhaustive-deps */
     useMemo(() => (
-      <D.ModalToggle
+      <ModalToggle
         isShow={isToggle}
         selectProps={configs}
         isShowLabels={isShowLabels}

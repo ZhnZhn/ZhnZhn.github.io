@@ -8,7 +8,7 @@ var _useBool = require("../hooks/useBool");
 var _useToggleLabels = _interopRequireDefault(require("../dialogs/hooks/useToggleLabels"));
 var _useTitles = _interopRequireDefault(require("../dialogs/hooks/useTitles"));
 var _useRowToggle = _interopRequireDefault(require("./useRowToggle"));
-var _DialogCell = _interopRequireDefault(require("../dialogs/DialogCell"));
+var _ModalToggle = _interopRequireDefault(require("../dialogs/modals/ModalToggle"));
 var _crIsId = require("./crIsId");
 var _jsxRuntime = require("react/jsx-runtime");
 const useModalToggle = configs => {
@@ -18,7 +18,7 @@ const useModalToggle = configs => {
     isShowChart = isRow[_crIsId.PN_IS_SHOW_CHART],
     [refTitles, addTitleIndex, removeTitleIndex] = (0, _useTitles.default)();
   return [/*eslint-disable react-hooks/exhaustive-deps */
-  (0, _uiApi.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_DialogCell.default.ModalToggle, {
+  (0, _uiApi.useMemo)(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalToggle.default, {
     isShow: isToggle,
     selectProps: configs,
     isShowLabels: isShowLabels,
