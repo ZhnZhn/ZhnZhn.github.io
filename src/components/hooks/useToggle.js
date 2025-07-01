@@ -5,7 +5,13 @@ import {
   isObj
 } from '../../utils/isTypeFn';
 
-import { useReducer } from '../uiApi';
+import {
+  useReducer,
+  useRef,
+  useEffect,
+  setRefValue,
+  getRefValue
+} from '../uiApi';
 
 const _initState = initialValue => !!initialValue
 , _reducer = (
@@ -22,6 +28,25 @@ export const useToggle = (
   initialValue,
   _initState
 )
+
+export const useToggleAsync = (
+  initialValue,
+  fn,
+  mls = 300
+) => {
+  const _refId = useRef()
+  , [is, toggle] = useToggle(initialValue);
+  /*eslint-disable react-hooks/exhaustive-deps*/
+  useEffect(() => {
+    if (isFn(fn)) {
+      setRefValue(_refId, setTimeout(fn, mls))
+    }
+    return () => clearTimeout(getRefValue(_refId));
+  }, [is]);
+  // fn, mls
+  /*eslint-enable react-hooks/exhaustive-deps*/
+  return [is, toggle];
+}
 
 const hasOwnProperty = Object.prototype.hasOwnProperty
 , _isNotOwnBooleanPropsEqual = (
