@@ -6,13 +6,12 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
-var _useBool = require("../hooks/useBool");
 var _useProperty = require("../hooks/useProperty");
 var _useEventCallback = _interopRequireDefault(require("../hooks/useEventCallback"));
 var _useIsShowInput = _interopRequireDefault(require("./hooks/useIsShowInput"));
 var _useSelectChartType = _interopRequireDefault(require("./hooks/useSelectChartType"));
 var _useChartConfig = _interopRequireDefault(require("./hooks/useChartConfig"));
-var _useToggleLabels = _interopRequireDefault(require("./hooks/useToggleLabels"));
+var _useModalToggle = _interopRequireDefault(require("./hooks/useModalToggle"));
 var _useDialog = _interopRequireDefault(require("./hooks/useDialog"));
 var _useDialogOptions = _interopRequireDefault(require("./hooks/useDialogOptions"));
 var _useTitles = _interopRequireDefault(require("./hooks/useTitles"));
@@ -77,9 +76,8 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     // setPropertyDate, _hSelectChartType
     /*eslint-enable react-hooks/exhaustive-deps */,
     [_chartOptions, _dateOptions, _dateDefault, _updateChartConfig] = (0, _useChartConfig.default)(selectProps, props.chartsType, props.loadId, dfProps, _onUpdateChartConfig),
-    [_isToggle, _toggleInputs, _hideToggle] = (0, _useBool.useToggleFalse)(),
+    [_isToggle, _toggleInputs, _hideToggle, _isShowLabels, _toggleLabels] = (0, _useModalToggle.default)(),
     [_refDialogOptions, _isShowOptions, _toggleOptions, _hideOptions, _toggleDialogOption] = (0, _useDialogOptions.default)(),
-    [_isShowLabels, _toggleLabels] = (0, _useToggleLabels.default)(),
     [_isToolbar, _menuMoreModel, _toolbarButtons, _validationMessages, _setValidationMessages, _hClose] = (0, _useDialog.default)(props, {
       toggleInputs: isFd || selectProps.length > 1 ? _toggleInputs : void 0,
       toggleOptions: props.isOpt || isCh ? _toggleOptions : void 0

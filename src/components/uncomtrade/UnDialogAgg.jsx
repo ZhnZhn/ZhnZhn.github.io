@@ -9,12 +9,11 @@ import {
 } from "../../utils/getPropertyFn";
 
 import memoIsShow from "../hoc/memoIsShow";
-import { useToggleFalse } from "../hooks/useBool";
 import { useToggle } from "../hooks/useToggle";
 import { useProperty } from "../hooks/useProperty";
 
-import useToggleLabels from "../dialogs/hooks/useToggleLabels";
 import useDialog from "../dialogs/hooks/useDialog";
+import useModalToggle from "../dialogs/hooks/useModalToggle";
 
 import DraggableDialog from "../zhn-moleculs/DraggableDialog";
 import ShowHide from "../zhn/ShowHide";
@@ -93,12 +92,10 @@ const UnDialogAgg = memoIsShow((
   , [
     isShowToggle,
     toggleInputs,
-    hideToggle
-  ] = useToggleFalse()
-  , [
+    hideToggle,
     isShowLabels,
     toggleLabels
-  ] = useToggleLabels()
+  ] = useModalToggle()
   , [
     isToolbar,
     menuMoreModel,

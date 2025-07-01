@@ -5,12 +5,11 @@ import {
 } from "../uiApi";
 
 import memoIsShow from "../hoc/memoIsShow";
-import { useToggleFalse } from "../hooks/useBool";
 import { useToggle } from "../hooks/useToggle";
 import { useProperty } from "../hooks/useProperty";
 
-import useToggleLabels from "../dialogs/hooks/useToggleLabels";
 import useDialog from "../dialogs/hooks/useDialog";
+import useModalToggle from "../dialogs/hooks/useModalToggle";
 import checkAreDatesValid from "../dialogs/hooks/checkAreDatesValid";
 
 import DraggableDialog from "../zhn-moleculs/DraggableDialog";
@@ -74,12 +73,10 @@ const ZillowDialog = memoIsShow(props => {
   , [
     isShowToggle,
     toggleInputs,
-    hideToggle
-  ] = useToggleFalse()
-  , [
+    hideToggle,
     isShowLabels,
     toggleLabels
-  ] = useToggleLabels()
+  ] = useModalToggle()
   , [
     isToolbar,
     menuMoreModel,

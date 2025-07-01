@@ -10,14 +10,13 @@ import {
 
 import memoIsShow from '../hoc/memoIsShow';
 import { useToggle } from '../hooks/useToggle';
-import { useToggleFalse } from '../hooks/useBool';
 import { useProperty } from '../hooks/useProperty';
 import useEventCallback from '../hooks/useEventCallback';
 
 import useIsShowInput from './hooks/useIsShowInput';
 import useSelectChartType from './hooks/useSelectChartType';
 import useChartConfig from './hooks/useChartConfig';
-import useToggleLabels from './hooks/useToggleLabels'
+import useModalToggle from './hooks/useModalToggle';
 import useDialog from './hooks/useDialog';
 import useDialogOptions from './hooks/useDialogOptions';
 import useTitles from './hooks/useTitles';
@@ -122,8 +121,10 @@ const DialogSelectN = memoIsShow((
   , [
     _isToggle,
     _toggleInputs,
-    _hideToggle
-  ] = useToggleFalse()
+    _hideToggle,
+    _isShowLabels,
+    _toggleLabels
+  ] = useModalToggle()
   , [
     _refDialogOptions,
     _isShowOptions,
@@ -131,10 +132,6 @@ const DialogSelectN = memoIsShow((
     _hideOptions,
     _toggleDialogOption
   ] = useDialogOptions()
-  , [
-    _isShowLabels,
-    _toggleLabels
-  ] = useToggleLabels()
   , [
     _isToolbar,
     _menuMoreModel,
