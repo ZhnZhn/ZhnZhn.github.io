@@ -9,11 +9,12 @@
   "require",
   "_useToggle",
   "useToggleLabels",
-  "useToggle",
+  "fnClose",
+  "useToggleAsync",
   "HAS_WIDE_SCREEN",
   "_default",
   "exports",
   "default"
  ],
- "mappings": ";;;;AAAA,IAAAA,IAAA,GAAAC,OAAA;AACA,IAAAC,UAAA,GAAAD,OAAA;AAEA,MAAME,eAAe,GAAGA,CAAA,KAAM,IAAAC,oBAAS,EACrCC,oBACF,CAAC;AAAA,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEcL,eAAe"
+ "mappings": ";;;;AAAA,IAAAA,IAAA,GAAAC,OAAA;AACA,IAAAC,UAAA,GAAAD,OAAA;AAEA,MAAME,eAAe,GACnBC,OAAO,IACJ,IAAAC,yBAAc,EACjBC,oBAAe,EACfF,OACF,CAAC;AAAA,IAAAG,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEcN,eAAe"
 }

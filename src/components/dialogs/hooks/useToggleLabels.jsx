@@ -1,8 +1,11 @@
 import { HAS_WIDE_SCREEN } from '../../has';
-import { useToggle } from '../../hooks/useToggle';
+import { useToggleAsync } from '../../hooks/useToggle';
 
-const useToggleLabels = () => useToggle(
-  HAS_WIDE_SCREEN
+const useToggleLabels = (
+  fnClose
+) => useToggleAsync(
+  HAS_WIDE_SCREEN,
+  fnClose
 )
 
 export default useToggleLabels
