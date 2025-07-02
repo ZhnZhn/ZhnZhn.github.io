@@ -1,15 +1,13 @@
 import { useRef } from '../uiApi';
-import { HAS_KEYBOARD_FOCUS } from '../has';
 
 import useItemsFocusTrap from '../hooks/useItemsFocusTrap';
 import useGetRefValue2 from '../hooks/useGetRefValue2';
-import { useAsyncFocusIf } from '../hooks/useFocus';
+import { useAsyncFocusFirstItemIf } from '../hooks/useFocus';
 
 import FocusTrap from '../zhn-moleculs/FocusTrap';
 import MenuTitle from './MenuTitle';
 import MenuItemList from './MenuItemList';
 
-const FOCUS_ITEM_MLS = 350;
 const MenuPage = (props) => {
   const _refTitle = useRef()
   , [
@@ -22,10 +20,9 @@ const MenuPage = (props) => {
     _refFirstItem
   );
 
-  useAsyncFocusIf(
-    HAS_KEYBOARD_FOCUS && props.isVisible,
-    _getFocusFirstItem,
-    FOCUS_ITEM_MLS
+  useAsyncFocusFirstItemIf(
+    props.isVisible,
+    _getFocusFirstItem
   );
 
   return (
