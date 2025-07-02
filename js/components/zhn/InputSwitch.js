@@ -31,6 +31,7 @@ const _crSwicthStyle = isChecked => {
 const FN_NOOP = () => {};
 const InputSwitch = _ref => {
   let {
+    refEl,
     initialValue,
     style,
     caption,
@@ -52,6 +53,7 @@ const InputSwitch = _ref => {
     style: style,
     htmlFor: _inputId,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+      ref: refEl,
       id: _inputId,
       type: "checkbox",
       role: "switch",

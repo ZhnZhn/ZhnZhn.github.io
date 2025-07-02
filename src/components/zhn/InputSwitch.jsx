@@ -41,6 +41,7 @@ const _crSwicthStyle = (
 const FN_NOOP = () => {}
 
 const InputSwitch = ({
+  refEl,
   initialValue,
   style,
   caption,
@@ -74,6 +75,7 @@ const InputSwitch = ({
       htmlFor={_inputId}
     >
       <input
+        ref={refEl}
         id={_inputId}
         type="checkbox"
         role="switch"
