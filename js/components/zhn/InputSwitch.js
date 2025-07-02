@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_SWICTH = "switch",
   CL_LABEL_SWITCH = `label-${CL_SWICTH}`,
@@ -33,6 +34,7 @@ const InputSwitch = _ref => {
   let {
     refEl,
     initialValue,
+    className,
     style,
     caption,
     onToggle,
@@ -49,7 +51,7 @@ const InputSwitch = _ref => {
     },
     [_trackStyle, _thumbStyle, _labelStyle] = _crSwicthStyle(_isChecked);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-    className: CL_LABEL_SWITCH,
+    className: (0, _styleFn.crCn)(CL_LABEL_SWITCH, className),
     style: style,
     htmlFor: _inputId,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {

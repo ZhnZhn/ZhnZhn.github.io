@@ -3,6 +3,10 @@ import {
   useState
 } from "../uiApi";
 
+import {
+  crCn
+} from '../styleFn';
+
 const CL_SWICTH = "switch"
 , CL_LABEL_SWITCH = `label-${CL_SWICTH}`
 , CL_SWICTH_TRACK = `${CL_SWICTH}-track`
@@ -43,6 +47,7 @@ const FN_NOOP = () => {}
 const InputSwitch = ({
   refEl,
   initialValue,
+  className,
   style,
   caption,
   onToggle,
@@ -70,7 +75,7 @@ const InputSwitch = ({
 
   return (
     <label
-      className={CL_LABEL_SWITCH}
+      className={crCn(CL_LABEL_SWITCH, className)}
       style={style}
       htmlFor={_inputId}
     >
