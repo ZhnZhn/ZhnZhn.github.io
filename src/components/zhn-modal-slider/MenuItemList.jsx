@@ -1,4 +1,8 @@
 import {
+  isBool
+} from '../../utils/isTypeFn';
+
+import {
   isFn,
   safeMap,
   bindTo
@@ -9,16 +13,20 @@ import {
   crAbsoluteTopLeftStyle
 } from '../styleFn';
 
-import SvgCheckIn from '../zhn/SvgCheckIn';
+import InputSwitch from '../zhn/InputSwitch';
 import MenuAriaItem from './MenuAriaItem';
 
 const SUB_MENU = 'sub'
-, CL_SP_SVG_CHECKED = 'sp-svg-checked'
 , S_ITEM = {
   position: 'relative'
 }
+, S_INPUT_SWITCH = {
+  lineHeight: 'initial',
+  height: 35,
+  paddingTop: 9
+}
 , S_NEXT_PAGE = {
-  ...S_INLINE,  
+  ...S_INLINE,
   ...crAbsoluteTopLeftStyle(0, 4, !0),
   color: 'inherit',
   padding: '1px 16px 1px 0px',
@@ -63,24 +71,26 @@ const MenuItemList = ({
      , _onClick = type === SUB_MENU
          ? bindTo(onNextPage, id, name, pageNumber)
          : _fClick({ isClose, onClick, onClose });
-     return (
-       <MenuAriaItem
-         key={name}
-         refEl={getRefFocus(index)}
-         className={cn || itemCl}
-         style={S_ITEM}
-         isInitial={isInitial}
-         onClick={_onClick}
-       >
-         {(is) => (
-           <>
-             <span>{name}</span>
-             <SvgCheckIn is={is} cn={CL_SP_SVG_CHECKED} />
-             <NextPageArrow type={type} />
-           </>
-        )}
-       </MenuAriaItem>
-     );
+     return isBool(isInitial)
+         ? <InputSwitch
+              key={name}
+              refEl={getRefFocus(index)}
+              className={cn || itemCl}
+              style={S_INPUT_SWITCH}
+              initialValue={isInitial}
+              caption={name}
+              onToggle={_onClick}
+           />
+         : (<MenuAriaItem
+              key={name}
+              refEl={getRefFocus(index)}
+              className={cn || itemCl}
+              style={S_ITEM}
+              onClick={_onClick}
+          >
+            <span>{name}</span>
+            <NextPageArrow type={type}/>
+          </MenuAriaItem>);
     })}
   </>
 );

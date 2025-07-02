@@ -24,7 +24,7 @@ const _crModel = (
   onClickItem
 ) => crSliderMenu(
   CL_ROW_PANE_TOPIC,
-  160,
+  185,
   1, {
     p0: (configs || []).map(({ btTitle }) => addToggleTo(crItem(
       btTitle,

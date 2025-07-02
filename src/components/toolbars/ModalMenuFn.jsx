@@ -47,7 +47,7 @@ const _crModelMore = (
   isItemZoom
 ) => crSliderMenu(
   CL_ROW_PANE_TOPIC,
-  125,
+  145,
   2, {
   p0: filterBoolean([
     crSubItem("p1", "Chart"),

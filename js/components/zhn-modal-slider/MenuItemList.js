@@ -3,15 +3,20 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _SvgCheckIn = _interopRequireDefault(require("../zhn/SvgCheckIn"));
+var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
 var _MenuAriaItem = _interopRequireDefault(require("./MenuAriaItem"));
 var _jsxRuntime = require("react/jsx-runtime");
 const SUB_MENU = 'sub',
-  CL_SP_SVG_CHECKED = 'sp-svg-checked',
   S_ITEM = {
     position: 'relative'
+  },
+  S_INPUT_SWITCH = {
+    lineHeight: 'initial',
+    height: 35,
+    paddingTop: 9
   },
   S_NEXT_PAGE = {
     ..._styleFn.S_INLINE,
@@ -65,22 +70,23 @@ const MenuItemList = _ref3 => {
           onClick,
           onClose
         });
-      return /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuAriaItem.default, {
+      return (0, _isTypeFn.isBool)(isInitial) ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+        refEl: getRefFocus(index),
+        className: cn || itemCl,
+        style: S_INPUT_SWITCH,
+        initialValue: isInitial,
+        caption: name,
+        onToggle: _onClick
+      }, name) : /*#__PURE__*/(0, _jsxRuntime.jsxs)(_MenuAriaItem.default, {
         refEl: getRefFocus(index),
         className: cn || itemCl,
         style: S_ITEM,
-        isInitial: isInitial,
         onClick: _onClick,
-        children: is => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            children: name
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckIn.default, {
-            is: is,
-            cn: CL_SP_SVG_CHECKED
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(NextPageArrow, {
-            type: type
-          })]
-        })
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          children: name
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(NextPageArrow, {
+          type: type
+        })]
       }, name);
     })
   });
