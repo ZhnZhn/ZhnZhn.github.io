@@ -1,8 +1,10 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.useRefFocusIf = exports.useRefFocusElement = exports.useFnFocus = exports.useAsyncFocusIf = void 0;
 var _uiApi = require("../uiApi");
+var _useEffectTimeout = _interopRequireDefault(require("./useEffectTimeout"));
 const useFnFocus = fn => {
   const _ref = (0, _uiApi.useRef)();
   return [_ref, /*eslint-disable react-hooks/exhaustive-deps */
@@ -33,14 +35,7 @@ const useRefFocusIf = isRefFocus => {
 };
 exports.useRefFocusIf = useRefFocusIf;
 const useAsyncFocusIf = (is, getFocusElement, mls) => {
-  /*eslint-disable react-hooks/exhaustive-deps */
-  (0, _uiApi.useEffect)(() => {
-    if (is) {
-      setTimeout(() => (0, _uiApi.focusRefElement)(getFocusElement), mls || 1000);
-    }
-  }, [is]);
-  // getFocusElement, mls
-  /*eslint-enable react-hooks/exhaustive-deps */
+  (0, _useEffectTimeout.default)(() => (0, _uiApi.focusRefElement)(getFocusElement), mls || 1000, [is], is);
 };
 exports.useAsyncFocusIf = useAsyncFocusIf;
 //# sourceMappingURL=useFocus.js.map

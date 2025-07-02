@@ -5,13 +5,8 @@ import {
   isObj
 } from '../../utils/isTypeFn';
 
-import {
-  useReducer,
-  useRef,
-  useEffect,
-  setRefValue,
-  getRefValue
-} from '../uiApi';
+import { useReducer } from '../uiApi';
+import useEffectTimeout from './useEffectTimeout';
 
 const _initState = initialValue => !!initialValue
 , _reducer = (
@@ -32,19 +27,15 @@ export const useToggle = (
 export const useToggleAsync = (
   initialValue,
   fn,
-  mls = 300
+  mls
 ) => {
-  const _refId = useRef()
-  , [is, toggle] = useToggle(initialValue);
-  /*eslint-disable react-hooks/exhaustive-deps*/
-  useEffect(() => {
-    if (isFn(fn)) {
-      setRefValue(_refId, setTimeout(fn, mls))
-    }
-    return () => clearTimeout(getRefValue(_refId));
-  }, [is]);
-  // fn, mls
-  /*eslint-enable react-hooks/exhaustive-deps*/
+  const [is, toggle] = useToggle(initialValue);
+  
+  useEffectTimeout(
+    fn,
+    mls || 300,
+    [is]
+  )
   return [is, toggle];
 }
 

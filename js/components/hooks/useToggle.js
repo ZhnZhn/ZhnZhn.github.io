@@ -1,28 +1,18 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.useToggleState = exports.useToggleAsync = exports.useToggle = exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
+var _useEffectTimeout = _interopRequireDefault(require("./useEffectTimeout"));
 const _initState = initialValue => !!initialValue,
   _reducer = (state, value) => (0, _isTypeFn.isBool)(value) ? value : !state;
 const useToggle = initialValue => (0, _uiApi.useReducer)(_reducer, initialValue, _initState);
 exports.useToggle = useToggle;
-const useToggleAsync = function (initialValue, fn, mls) {
-  if (mls === void 0) {
-    mls = 300;
-  }
-  const _refId = (0, _uiApi.useRef)(),
-    [is, toggle] = useToggle(initialValue);
-  /*eslint-disable react-hooks/exhaustive-deps*/
-  (0, _uiApi.useEffect)(() => {
-    if ((0, _isTypeFn.isFn)(fn)) {
-      (0, _uiApi.setRefValue)(_refId, setTimeout(fn, mls));
-    }
-    return () => clearTimeout((0, _uiApi.getRefValue)(_refId));
-  }, [is]);
-  // fn, mls
-  /*eslint-enable react-hooks/exhaustive-deps*/
+const useToggleAsync = (initialValue, fn, mls) => {
+  const [is, toggle] = useToggle(initialValue);
+  (0, _useEffectTimeout.default)(fn, mls || 300, [is]);
   return [is, toggle];
 };
 exports.useToggleAsync = useToggleAsync;

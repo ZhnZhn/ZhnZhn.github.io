@@ -6,6 +6,8 @@ import {
   focusRefElement
 } from '../uiApi';
 
+import useEffectTimeout from './useEffectTimeout';
+
 export const useFnFocus = (fn) => {
   const _ref = useRef();
   return [
@@ -48,15 +50,10 @@ export const useAsyncFocusIf = (
   getFocusElement,
   mls
 ) => {
-  /*eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
-    if (is) {
-      setTimeout(
-        () => focusRefElement(getFocusElement),
-        mls || 1000
-      )
-    }
-  }, [is])
-  // getFocusElement, mls
-  /*eslint-enable react-hooks/exhaustive-deps */
+  useEffectTimeout(
+    () => focusRefElement(getFocusElement),
+    mls || 1000,
+    [is],
+    is
+  )
 }
