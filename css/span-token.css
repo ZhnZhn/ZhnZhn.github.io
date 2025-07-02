@@ -21,14 +21,6 @@
   white-space: nowrap;
 }
 
-.sp-svg-checked {
-  stroke: #1b75bb;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  padding-left: 8px;
-}
-
 .tk-black {
   background-color: transparent;
   color: var(--c-bl);
