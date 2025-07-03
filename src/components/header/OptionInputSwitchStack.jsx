@@ -4,7 +4,7 @@ import getFnByPropName from '../../utils/getFnByPropName';
 import InputSwitch from '../zhn/InputSwitch';
 
 const S_DIV_OPTIONS = {
-  padding: '4px 0 8px 22px'
+  padding: '4px 12px 8px 22px'
 }
 , S_INPUT_SWITCH = {
   paddingTop: 12

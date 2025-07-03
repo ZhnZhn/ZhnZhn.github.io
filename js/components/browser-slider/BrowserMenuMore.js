@@ -12,7 +12,7 @@ const CL_MENU_MORE = 'charts__menu-more',
     paddingBottom: 8
   },
   S_FILTER_TOPIC = {
-    padding: '12px 0 0 12px'
+    padding: '12px 12px 0 12px'
   };
 const BrowserMenuMore = _ref => {
   let {

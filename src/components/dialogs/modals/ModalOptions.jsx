@@ -16,9 +16,6 @@ const S_DIV_INPUT = {
 , S_CAPTION = {
   paddingRight: 4,
   fontSize: '16px'
-}
-, S_WIDTH_110 = {
-  width: '110%'
 };
 
 const MIN_RT = 0, MAX_RT = 3;
@@ -64,7 +61,7 @@ const ModalOptions = ({
     {ROW_CHECKBOX_CONFIGS.map(([id, caption]) => (
        <InputSwitch
           key={id}
-          style={{...S_ROW, ...S_WIDTH_110}}
+          style={S_ROW}
           caption={caption}
           onCheck={() => toggleOption(!0, id)}
           onUnCheck={() => toggleOption(!1, id)}

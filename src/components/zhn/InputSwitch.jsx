@@ -5,16 +5,16 @@ import {
 
 import {
   crCn
-} from '../styleFn';
+} from "../styleFn";
 
-const CL_SWICTH = "switch"
-, CL_LABEL_SWITCH = `label-${CL_SWICTH}`
-, CL_SWICTH_TRACK = `${CL_SWICTH}-track`
-, CL_SWICTH_THUMB = `${CL_SWICTH}-thumb`
-, CL_SWITCH_LABEL = `${CL_SWICTH}-label`
+const CL_SWITCH = "switch"
+, CL_LABEL_SWITCH = `label-${CL_SWITCH}`
+, CL_SWITCH_TRACK = `${CL_SWITCH}-track`
+, CL_SWITCH_THUMB = `${CL_SWITCH}-thumb`
+, CL_SWITCH_LABEL = `${CL_SWITCH}-label`
 , TRACK_COLOR_CHECKED = "#2f7ed8"
 , THUMB_COLOR_CHECKED = "var(--c-bg, #4d4d4d)"
-, THUMB_POS_X_CHECKED = "14px"
+, THUMB_POS_X_CHECKED = "16px"
 , LABEL_COLOR_CHECKED = "var(--c-bl, black)"
 , TRACK_COLOR = "#9e9e9e"
 , THUMB_COLOR = "#d3d3d3"
@@ -84,18 +84,18 @@ const InputSwitch = ({
         id={_inputId}
         type="checkbox"
         role="switch"
-        className={CL_SWICTH}
+        className={CL_SWITCH}
         aria-checked={_isChecked}
         checked={_isChecked}
         onChange={_hChange}
       />
       <span
         aria-hidden="true"
-        className={CL_SWICTH_TRACK}
+        className={CL_SWITCH_TRACK}
         style={_trackStyle}
       >
         <span
-          className={CL_SWICTH_THUMB}
+          className={CL_SWITCH_THUMB}
           style={_thumbStyle}
         />
       </span>
@@ -107,6 +107,6 @@ const InputSwitch = ({
       </span>
     </label>
   );
-}
+};
 
 export default InputSwitch

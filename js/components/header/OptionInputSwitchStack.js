@@ -8,7 +8,7 @@ var _getFnByPropName = _interopRequireDefault(require("../../utils/getFnByPropNa
 var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_DIV_OPTIONS = {
-    padding: '4px 0 8px 22px'
+    padding: '4px 12px 8px 22px'
   },
   S_INPUT_SWITCH = {
     paddingTop: 12

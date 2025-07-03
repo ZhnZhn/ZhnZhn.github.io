@@ -12,7 +12,6 @@ var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW = {
     padding: '6px 0',
-    width: '105%',
     lineHeight: 'initial'
   },
   _crHrStyle = () => ({
