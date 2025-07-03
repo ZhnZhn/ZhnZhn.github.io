@@ -1,7 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crPresentationRole = exports.crDialogRole = exports.crBtAriaLabelProps = exports.crAriaLabelProp = exports.crAriaExpandedProps = exports.crAriaComboboxProps = void 0;
+exports.crPresentationRole = exports.crMenuItemRole = exports.crDialogRole = exports.crBtAriaLabelProps = exports.crAriaLabelProp = exports.crAriaExpandedProps = exports.crAriaComboboxProps = void 0;
+var _fUseKey = require("./hooks/fUseKey");
 const crPresentationRole = isShow => ({
   role: "presentation",
   hidden: !isShow
@@ -14,6 +15,13 @@ const crDialogRole = (isShow, caption) => ({
   "aria-label": caption
 });
 exports.crDialogRole = crDialogRole;
+const crMenuItemRole = (onClick, tabIndex) => ({
+  role: "menuitem",
+  tabIndex,
+  onClick,
+  onKeyDown: onClick ? (0, _fUseKey.fOnKeyEnter)(onClick) : void 0
+});
+exports.crMenuItemRole = crMenuItemRole;
 const crAriaLabelProp = (_ref, dfAriaLabel) => {
   let {
     ariaLabel

@@ -1,3 +1,4 @@
+import { fOnKeyEnter } from './hooks/fUseKey';
 
 export const crPresentationRole = (
   isShow
@@ -14,6 +15,16 @@ export const crDialogRole = (
   tabIndex: "-1",
   hidden: !isShow,
   "aria-label": caption
+})
+
+export const crMenuItemRole = (
+  onClick,
+  tabIndex
+) => ({
+  role: "menuitem",
+  tabIndex,
+  onClick,
+  onKeyDown: onClick ? fOnKeyEnter(onClick) : void 0
 })
 
 export const crAriaLabelProp = (
