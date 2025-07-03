@@ -10,7 +10,7 @@ var _fUseKey = require("../hooks/fUseKey");
 var _Svg = require("./svg/Svg");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_CHB = 'chb',
-  CL_CHB_CHECKED = 'chb-checked',
+  CL_CHB_CHECKED = `${CL_CHB}-checked`,
   C_GREY = "#777777";
 const FN_NOOP = () => {};
 const _crAriaLabelledByProp = _ref => {
@@ -39,7 +39,7 @@ const SvgCheckBox = props => {
     _isValueState = (0, _useProperty.useRefInit)(() => (0, _isTypeFn.isBool)(valueState)),
     _value = _isValueState ? valueState : value,
     _comp = (0, _uiApi.useMemo)(() => ({
-      setUnchecked: () => setValueState(false)
+      setUnchecked: () => setValueState(!1)
     }), [])
     /*eslint-disable react-hooks/exhaustive-deps */,
     _hToggle = (0, _uiApi.useCallback)(evt => {
@@ -65,21 +65,23 @@ const SvgCheckBox = props => {
     onClick: _hToggle,
     onKeyDown: _hKeyDown,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Svg.Svg100, {
-      w: "16",
+      w: "18",
       style: _styleFn.S_INLINE,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("rect", {
         x: "1",
         y: "1",
-        height: "14",
-        width: "14",
+        height: "16",
+        width: "16",
         strokeWidth: "2",
         rx: "3",
         stroke: _restStroke,
         fill: _restFill
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
         v: _value,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Svg.PathCheckIn, {
-          cn: cnChecked
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+          className: cnChecked,
+          d: "M 2,5 L 8,16 M 8,16 L 16,1",
+          ..._Svg.STROKE_LINECAP_ROUND_PROPS
         })
       })]
     })

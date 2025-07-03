@@ -16,12 +16,12 @@ import { useKeyEnter } from '../hooks/fUseKey';
 
 import {
   FILL_NONE,
-  Svg100,
-  PathCheckIn
+  STROKE_LINECAP_ROUND_PROPS,
+  Svg100
 } from './svg/Svg';
 
 const CL_CHB = 'chb'
-, CL_CHB_CHECKED = 'chb-checked'
+, CL_CHB_CHECKED = `${CL_CHB}-checked`
 , C_GREY = "#777777";
 
 const FN_NOOP = () => {};
@@ -58,7 +58,7 @@ const SvgCheckBox = (props) => {
      ? valueState
      : value
   , _comp = useMemo(() => ({
-     setUnchecked: () => setValueState(false)
+     setUnchecked: () => setValueState(!1)
   }), [])
   /*eslint-disable react-hooks/exhaustive-deps */
   , _hToggle = useCallback((evt) => {
@@ -98,18 +98,22 @@ const SvgCheckBox = (props) => {
        onKeyDown={_hKeyDown}
     >
       <Svg100
-        w="16"
+        w="18"
         style={S_INLINE}
       >
         <rect
            x="1" y="1"
-           height="14" width="14"
+           height="16" width="16"
            strokeWidth="2" rx="3"
            stroke={_restStroke}
            fill={_restFill}
         />
           <IfTrue v={_value}>
-            <PathCheckIn cn={cnChecked} />
+            <path
+              className={cnChecked}
+              d="M 2,5 L 8,16 M 8,16 L 16,1"
+              {...STROKE_LINECAP_ROUND_PROPS}
+            />
           </IfTrue>
       </Svg100>
     </div>

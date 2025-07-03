@@ -1,4 +1,3 @@
-
 export const FILL_NONE = "none"
 
 export const EVENODD_PROPS = {
@@ -6,6 +5,11 @@ export const EVENODD_PROPS = {
   clipRule: "evenodd",
   strokeLinejoin: "round"
 }
+
+export const STROKE_LINECAP_ROUND_PROPS = ({
+  strokeWidth: "2",
+  strokeLinecap: "round"
+})
 
 const _crWidthHeightViewBoxProps = (
   width,
@@ -53,21 +57,4 @@ export const Svg100 = ({
   >
     {children}
   </svg>
-)
-
-const _crStrokeLinecapRound = (sw="2") => ({
-  strokeWidth: sw,
-  strokeLinecap: "round"
-});
-export const STROKE_LINECAP_ROUND_PROPS = _crStrokeLinecapRound()
-
-export const PathCheckIn = ({
-  cn,
-  sw="2"
-}) => (
-  <path
-    className={cn}
-    d="M 2,5 L 8,14 M 8,14 L 14,1"
-    {..._crStrokeLinecapRound(sw)}
-  />
 )
