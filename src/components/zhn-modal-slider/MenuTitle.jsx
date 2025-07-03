@@ -1,9 +1,9 @@
+import { crMenuItemRole } from '../a11yFn';
 import { crAbsoluteTopLeftStyle } from '../styleFn';
-import MenuAriaItem from './MenuAriaItem';
 
 const S_ITEM = { position: 'relative' }
 , S_PREV_PAGE = crAbsoluteTopLeftStyle(0, 16)
-  , S_TITLE = { paddingLeft: 22 };
+, S_TITLE = { paddingLeft: 22 };
 
 const MenuTitle = ({
   refEl,
@@ -11,11 +11,11 @@ const MenuTitle = ({
   title,
   onClick
 }) => title ? (
-  <MenuAriaItem
-    refEl={refEl}
+  <div
+    ref={refEl}
     className={titleCl}
     style={S_ITEM}
-    onClick={onClick}
+    {...crMenuItemRole(onClick, "0")}
   >
     <span style={S_PREV_PAGE}>
       {"<"}
@@ -23,7 +23,7 @@ const MenuTitle = ({
     <span style={S_TITLE}>
       {title}
     </span>
-  </MenuAriaItem>
+  </div>
 ) : null;
 
 export default MenuTitle

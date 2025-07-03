@@ -1,12 +1,11 @@
-import {
-  isBool
-} from '../../utils/isTypeFn';
+import { isBool } from '../../utils/isTypeFn';
 
 import {
   isFn,
   safeMap,
   bindTo
 } from '../uiApi';
+import { crMenuItemRole } from '../a11yFn';
 
 import {
   S_INLINE,
@@ -14,7 +13,6 @@ import {
 } from '../styleFn';
 
 import InputSwitch from '../zhn/InputSwitch';
-import MenuAriaItem from './MenuAriaItem';
 
 const SUB_MENU = 'sub'
 , S_ITEM = {
@@ -69,28 +67,32 @@ const MenuItemList = ({
        onClick
      } = item
      , _onClick = type === SUB_MENU
-         ? bindTo(onNextPage, id, name, pageNumber)
-         : _fClick({ isClose, onClick, onClose });
+        ? bindTo(onNextPage, id, name, pageNumber)
+        : _fClick({ isClose, onClick, onClose });     
      return isBool(isInitial)
-         ? <InputSwitch
-              key={name}
-              refEl={getRefFocus(index)}
-              className={cn || itemCl}
-              style={S_INPUT_SWITCH}
-              initialValue={isInitial}
-              caption={name}
-              onToggle={_onClick}
+       ? (<div
+           key={name}
+           {...crMenuItemRole()}
+         >
+           <InputSwitch
+             refEl={getRefFocus(index)}
+             className={cn || itemCl}
+             style={S_INPUT_SWITCH}
+             initialValue={isInitial}
+             caption={name}
+             onToggle={_onClick}
            />
-         : (<MenuAriaItem
-              key={name}
-              refEl={getRefFocus(index)}
-              className={cn || itemCl}
-              style={S_ITEM}
-              onClick={_onClick}
+         </div>)
+       : (<div
+            key={name}
+            ref={getRefFocus(index)}
+            className={cn || itemCl}
+            style={S_ITEM}
+            {...crMenuItemRole(_onClick, "0")}
           >
             <span>{name}</span>
             <NextPageArrow type={type}/>
-          </MenuAriaItem>);
+          </div>);
     })}
   </>
 );

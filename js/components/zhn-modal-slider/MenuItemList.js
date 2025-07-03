@@ -5,9 +5,9 @@ exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
+var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
-var _MenuAriaItem = _interopRequireDefault(require("./MenuAriaItem"));
 var _jsxRuntime = require("react/jsx-runtime");
 const SUB_MENU = 'sub',
   S_ITEM = {
@@ -70,18 +70,21 @@ const MenuItemList = _ref3 => {
           onClick,
           onClose
         });
-      return (0, _isTypeFn.isBool)(isInitial) ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
-        refEl: getRefFocus(index),
-        className: cn || itemCl,
-        style: S_INPUT_SWITCH,
-        initialValue: isInitial,
-        caption: name,
-        onToggle: _onClick
-      }, name) : /*#__PURE__*/(0, _jsxRuntime.jsxs)(_MenuAriaItem.default, {
-        refEl: getRefFocus(index),
+      return (0, _isTypeFn.isBool)(isInitial) ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        ...(0, _a11yFn.crMenuItemRole)(),
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+          refEl: getRefFocus(index),
+          className: cn || itemCl,
+          style: S_INPUT_SWITCH,
+          initialValue: isInitial,
+          caption: name,
+          onToggle: _onClick
+        })
+      }, name) : /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        ref: getRefFocus(index),
         className: cn || itemCl,
         style: S_ITEM,
-        onClick: _onClick,
+        ...(0, _a11yFn.crMenuItemRole)(_onClick, "0"),
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           children: name
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(NextPageArrow, {

@@ -1,10 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
-var _MenuAriaItem = _interopRequireDefault(require("./MenuAriaItem"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ITEM = {
     position: 'relative'
@@ -20,11 +19,11 @@ const MenuTitle = _ref => {
     title,
     onClick
   } = _ref;
-  return title ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_MenuAriaItem.default, {
-    refEl: refEl,
+  return title ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    ref: refEl,
     className: titleCl,
     style: S_ITEM,
-    onClick: onClick,
+    ...(0, _a11yFn.crMenuItemRole)(onClick, "0"),
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       style: S_PREV_PAGE,
       children: "<"
