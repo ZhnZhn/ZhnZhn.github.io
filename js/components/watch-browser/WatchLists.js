@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _Color = require("../styles/Color");
 var _DnDListHandlers = require("./dnd-handlers/DnDListHandlers");
@@ -22,7 +23,7 @@ const WatchLists = _ref => {
       items
     } = _ref2;
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
-      role: "menuitem",
+      ...(0, _a11yFn.crMenuItemRole)(),
       style: _styleFn.S_OPEN_CLOSE_LEVEL_2,
       openColor: _Color.GREEN_COLOR,
       caption: caption,

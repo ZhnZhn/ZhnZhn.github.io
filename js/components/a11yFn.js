@@ -15,11 +15,11 @@ const crDialogRole = (isShow, caption) => ({
   "aria-label": caption
 });
 exports.crDialogRole = crDialogRole;
-const crMenuItemRole = (onClick, tabIndex) => ({
+const crMenuItemRole = (onClick, tabIndex, isKeyUp) => ({
   role: "menuitem",
   tabIndex,
   onClick,
-  onKeyDown: onClick ? (0, _fUseKey.fOnKeyEnter)(onClick) : void 0
+  [isKeyUp ? "onKeyUp" : "onKeyDown"]: onClick ? (0, _fUseKey.fOnKeyEnter)(onClick) : void 0
 });
 exports.crMenuItemRole = crMenuItemRole;
 const crAriaLabelProp = (_ref, dfAriaLabel) => {

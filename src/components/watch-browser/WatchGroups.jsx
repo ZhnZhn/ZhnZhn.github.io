@@ -1,4 +1,6 @@
 import { safeMap } from '../uiApi';
+import { crMenuItemRole } from '../a11yFn';
+
 import { crDnDGroupHandlers } from './dnd-handlers/DnDGroupHandlers';
 
 import OpenClose from '../zhn/OpenClose';
@@ -10,7 +12,7 @@ const WatchGroups = ({
 }) => safeMap(groups, ({ caption, lists }) => (
   <OpenClose
      key={caption}
-     role="menuitem"
+     {...crMenuItemRole()}     
      caption={caption}
      dndHandlers={crDnDGroupHandlers(isModeEdit, {caption})}
    >

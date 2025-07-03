@@ -19,12 +19,15 @@ export const crDialogRole = (
 
 export const crMenuItemRole = (
   onClick,
-  tabIndex
+  tabIndex,
+  isKeyUp
 ) => ({
   role: "menuitem",
   tabIndex,
   onClick,
-  onKeyDown: onClick ? fOnKeyEnter(onClick) : void 0
+  [isKeyUp ? "onKeyUp" : "onKeyDown"]: onClick
+    ? fOnKeyEnter(onClick)
+    : void 0
 })
 
 export const crAriaLabelProp = (

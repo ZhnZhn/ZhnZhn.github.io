@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _a11yFn = require("../a11yFn");
 var _DnDGroupHandlers = require("./dnd-handlers/DnDGroupHandlers");
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _WatchLists = _interopRequireDefault(require("./WatchLists"));
@@ -19,7 +20,7 @@ const WatchGroups = _ref => {
       lists
     } = _ref2;
     return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
-      role: "menuitem",
+      ...(0, _a11yFn.crMenuItemRole)(),
       caption: caption,
       dndHandlers: (0, _DnDGroupHandlers.crDnDGroupHandlers)(isModeEdit, {
         caption

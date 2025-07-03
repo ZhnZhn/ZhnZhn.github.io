@@ -1,9 +1,5 @@
-import {
-  bindTo,
-  useCallback
-} from '../uiApi';
-
-import { isKeyEnterOrBlank } from '../hooks/fUseKey';
+import { bindTo } from '../uiApi';
+import { crMenuItemRole } from '../a11yFn';
 
 import { BtSvgClose } from '../zhn/BtSvgX';
 import DivEllipsis from '../zhn/DivEllipsis';
@@ -20,9 +16,8 @@ const S_ITEM_DIV = {
 }
 , S_SVG_CLOSE = {
   top: 8
-};
-
-const EMPTY_ITEM_CAPTION = 'Not Found';
+}
+, EMPTY_ITEM_CAPTION = 'Not Found';
 
 const WatchItem = ({
   item,
@@ -42,34 +37,22 @@ const WatchItem = ({
          style={S_SVG_CLOSE}
          onClick={bindTo(onClose, option)}
        />)
-     : null
-  /*eslint-disable react-hooks/exhaustive-deps */
-  , _hClick = useCallback(() => onClick(item), [item])
-  //onClick
-  /*eslint-enable react-hooks/exhaustive-deps */
-  , _hKeyUp = useCallback(evt => {
-       if (isKeyEnterOrBlank(evt)) {
-         _hClick()
-       }
-  }, [_hClick])
+     : null;
 
  return (
-     <div
-       role="menuitem"
-       tabIndex="0"
-       className={className}
-       style={S_ITEM_DIV}
-       onClick={_hClick}
-       onKeyUp={_hKeyUp}
-       {...dndHandlers}
-     >
-       <DivEllipsis
-         style={S_CAPTION}
-         text={caption}
-       />
-       {_btClose}
-    </div>
-  );
+   <div
+     {...crMenuItemRole(() => onClick(item), "0", !0)}
+     className={className}
+     style={S_ITEM_DIV}
+     {...dndHandlers}
+   >
+     <DivEllipsis
+       style={S_CAPTION}
+       text={caption}
+     />
+     {_btClose}
+   </div>
+ );
 };
 
 export default WatchItem

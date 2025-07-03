@@ -1,5 +1,7 @@
 import { safeMap } from '../uiApi';
+import { crMenuItemRole } from '../a11yFn';
 import { S_OPEN_CLOSE_LEVEL_2 } from '../styleFn';
+
 import { GREEN_COLOR } from '../styles/Color';
 
 import { crDnDListHandlers } from './dnd-handlers/DnDListHandlers';
@@ -14,7 +16,7 @@ const WatchLists = ({
 }) => safeMap(lists, ({ caption, items }) => (
   <OpenClose
      key={caption}
-     role="menuitem"
+     {...crMenuItemRole()}     
      style={S_OPEN_CLOSE_LEVEL_2}
      openColor={GREEN_COLOR}
      caption={caption}
