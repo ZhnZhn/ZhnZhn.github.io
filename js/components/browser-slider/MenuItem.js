@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _fUseKey = require("../hooks/fUseKey");
+var _a11yFn = require("../a11yFn");
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const MenuItem = _ref => {
@@ -15,16 +15,12 @@ const MenuItem = _ref => {
       text,
       type
     } = item,
-    [_className, _style] = (0, _Style.getMenuItemStyle)(type),
-    _hKeyDown = (0, _fUseKey.useKeyEnter)(onClick, [onClick]);
+    [_className, _style] = (0, _Style.getMenuItemStyle)(type);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    ...(0, _a11yFn.crMenuItemRole)(onClick, "0"),
     ref: innerRef,
     className: _className,
     style: _style,
-    tabIndex: "0",
-    role: "menuitem",
-    onClick: onClick,
-    onKeyDown: _hKeyDown,
     children: text
   });
 };

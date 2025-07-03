@@ -1,5 +1,4 @@
-import { useKeyEnter }  from '../hooks/fUseKey';
-
+import { crMenuItemRole } from '../a11yFn';
 import { getMenuItemStyle } from './Style';
 
 const MenuItem = ({
@@ -15,21 +14,17 @@ const MenuItem = ({
     _className,
     _style
   ] = getMenuItemStyle(type)
-  , _hKeyDown = useKeyEnter(onClick, [onClick]);
 
   return (
     <div
+      {...crMenuItemRole(onClick, "0")}
       ref={innerRef}
       className={_className}
       style={_style}
-      tabIndex="0"
-      role="menuitem"
-      onClick={onClick}
-      onKeyDown={_hKeyDown}
    >
       {text}
     </div>
   );
-}
+};
 
 export default MenuItem

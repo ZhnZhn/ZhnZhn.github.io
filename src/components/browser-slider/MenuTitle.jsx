@@ -1,4 +1,4 @@
-import { useKeyEnter } from '../hooks/fUseKey';
+import { crMenuItemRole } from '../a11yFn';
 
 import {
   CL_MENU_ITEM,
@@ -10,25 +10,18 @@ const MenuTitle = ({
   innerRef,
   title,
   onClick
-}) => {
-  const _hKeyDown = useKeyEnter(onClick);
-
-  return (
-    <div
-      ref={innerRef}
-      className={CL_MENU_ITEM}
-      style={S_TITLE}
-      role="menuitem"
-      tabIndex="0"
-      onClick={onClick}
-      onKeyDown={_hKeyDown}
-    >
-      {title}
-      <span style={S_TITLE_ARROW}>
-        {'<'}
-      </span>
-    </div>
-  );
-}
+}) => (
+  <div
+    {...crMenuItemRole(onClick, "0")}
+    ref={innerRef}
+    className={CL_MENU_ITEM}
+    style={S_TITLE}
+  >
+    {title}
+    <span style={S_TITLE_ARROW}>
+      {'<'}
+    </span>
+  </div>
+);
 
 export default MenuTitle
