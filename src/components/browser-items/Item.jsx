@@ -1,6 +1,4 @@
-import { useCallback } from '../uiApi';
-
-import { useKeyEnter } from '../hooks/fUseKey';
+import { crMenuItemRole } from '../a11yFn';
 import DivEllipsis from '../zhn/DivEllipsis';
 
 const S_ITEM = {
@@ -20,28 +18,18 @@ const Item = ({
    item,
    onClickItem,
    children
-}) => {
-  /*eslint-disable react-hooks/exhaustive-deps*/
-  const _hClick = useCallback(() => onClickItem(item), [])
-  //onClickItem, item
-  /*eslint-enable react-hooks/exhaustive-deps*/
-  , _hKeyDown = useKeyEnter(_hClick);
-  return (
-    <div
-      role="menuitem"
-      tabIndex="0"
-      className={className}
-      style={S_ITEM}
-      onClick={_hClick}
-      onKeyDown={_hKeyDown}
-    >
-      <DivEllipsis
-        style={S_CAPTION}
-        text={caption}
-      />
-      {children}
-   </div>
-  );
-};
+}) => (
+  <div
+    {...crMenuItemRole(() => onClickItem(item), "0")}
+    className={className}
+    style={S_ITEM}
+  >
+    <DivEllipsis
+      style={S_CAPTION}
+      text={caption}
+    />
+    {children}
+  </div>
+);
 
 export default Item
