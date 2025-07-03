@@ -3,7 +3,7 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-start;
-  overflow-x: hidden;
+  overflow: hidden;
   width: fit-content;
   transition: .3s ease-out;
   will-change: transform;
