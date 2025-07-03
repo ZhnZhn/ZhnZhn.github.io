@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _a11yFn = require("../a11yFn");
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _MenuItems = _interopRequireDefault(require("./MenuItems"));
 var _MenuItem = _interopRequireDefault(require("./MenuItem"));
@@ -31,8 +32,8 @@ const MenuTopic = _ref => {
   } = _ref;
   return (0, _uiApi.isArr)(items) ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
     refItem: refFirstItem,
-    role: "menuitem",
-    isClose: !(isInitOpen === true),
+    ...(0, _a11yFn.crMenuItemRole)(),
+    isClose: !(isInitOpen === !0),
     style: style,
     ocStyle: {
       ...S_TOPIC_STYLE,

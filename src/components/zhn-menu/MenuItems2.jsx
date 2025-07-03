@@ -1,4 +1,5 @@
 import { safeMap, memo } from '../uiApi';
+import { crMenuItemRole } from '../a11yFn';
 
 import { S_OPEN_CLOSE_LEVEL_2 } from '../styleFn';
 import { GREEN_COLOR } from '../styles/Color';
@@ -36,7 +37,7 @@ const _renderLevel2 = (
 ) => safeMap(lists, (list, index) => (
   <OpenClose
      key={index}
-     role="menuitem"
+     {...crMenuItemRole()}
      style={S_OPEN_CLOSE_LEVEL_2}
      openColor={GREEN_COLOR}
      caption={list[captionProp]}
@@ -63,7 +64,7 @@ const _renderLevel1 = (props) => {
   return safeMap(groups, (group, index) => (
     <OpenClose
        key={index}
-       role="menuitem"
+       {...crMenuItemRole()}
        caption={group[_captionProp]}
     >
       {_renderLevel2(
@@ -76,7 +77,7 @@ const _renderLevel1 = (props) => {
   ))
 };
 
-const _areEqual = (
+const _arePropertyModelEqual = (
   prevProps,
   nextProps
 ) => prevProps.model === nextProps.model;
@@ -84,6 +85,6 @@ const MenuItems2 = memo(props => (
   <div>
      {_renderLevel1(props)}
   </div>
-), _areEqual);
+), _arePropertyModelEqual);
 
 export default MenuItems2

@@ -1,5 +1,6 @@
 //import PropTypes from 'prop-types'
 import { isArr } from '../uiApi';
+import { crMenuItemRole } from '../a11yFn';
 
 import OpenClose from '../zhn/OpenClose';
 import MenuItems from './MenuItems';
@@ -26,8 +27,8 @@ const MenuTopic = ({
 }) => isArr(items) ? (
   <OpenClose
      refItem={refFirstItem}
-     role="menuitem"
-     isClose={!(isInitOpen === true)}
+     {...crMenuItemRole()}
+     isClose={!(isInitOpen === !0)}
      style={style}
      ocStyle={{...S_TOPIC_STYLE, ...topicStyle}}
      openColor={openColor}
