@@ -15,6 +15,25 @@ const _testStateAndGetFn = (result, expectedResult) => {
   expect(typeof hookFn).toBe('function');
   return hookFn;
 };
+const _testUseSort = (result, expectedResult) => {
+  const {
+    _compByPrev,
+    ..._restResult
+  } = _getHookState(result);
+  expect(typeof _compByPrev).toBe("function");
+  expect(_restResult).toEqual(expectedResult);
+};
+const _testStateAndGetFn2 = (result, expectedResult) => {
+  const hookFn = _getHookFn(result);
+  _testUseSort(result, expectedResult);
+  expect(typeof hookFn).toBe('function');
+  return hookFn;
+};
+const _actFnByArgOne2 = (result, fn, argOne, expectedResult) => {
+  (0, _react.act)(() => fn(argOne));
+  _testUseSort(result, expectedResult);
+  expect(_getHookFn(result)).toEqual(fn);
+};
 describe('useTable', () => {
   test('useColumn should toggle property isHide by index for arr of obj', () => {
     const headers = [{}, {}],
@@ -41,12 +60,12 @@ describe('useTable', () => {
       {
         result
       } = (0, _react.renderHook)(() => (0, _useTable.useSort)(rows)),
-      sortByPn = _testStateAndGetFn(result, {
+      sortByPn = _testStateAndGetFn2(result, {
         _rows: rows,
         sortBy: void 0,
         sortTo: void 0
       });
-    const _actSortByPn = _actFnByArgOne.bind(null, result, sortByPn);
+    const _actSortByPn = _actFnByArgOne2.bind(null, result, sortByPn);
     _actSortByPn('name', {
       _rows: rows,
       sortBy: 'name',

@@ -13,7 +13,7 @@ const _testRenderAndRerender = (init, expectedValue) => {
   expect(_getValue(r1)).toBe(expectedValue);
   rr1();
   expect(_getValue(r1)).toBe(expectedValue);
-  expect(init).toBeCalledTimes(1);
+  expect(init).toHaveBeenCalledTimes(1);
 };
 /* eslint-enable react-hooks/rules-of-hooks */
 

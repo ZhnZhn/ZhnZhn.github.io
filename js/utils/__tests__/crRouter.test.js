@@ -28,8 +28,8 @@ describe("crRouter", () => {
         }
       };
     fn(config);
-    expect(getA).toBeCalledTimes(0);
-    expect(getB).toBeCalledTimes(0);
+    expect(getA).toHaveBeenCalledTimes(0);
+    expect(getB).toHaveBeenCalledTimes(0);
   });
 });
 describe("crGetRoute", () => {

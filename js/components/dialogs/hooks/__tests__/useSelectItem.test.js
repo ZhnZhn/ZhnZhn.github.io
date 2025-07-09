@@ -33,8 +33,8 @@ describe("useSelectItem", () => {
       id: id1
     }]);
     expect(_getTupleFilter(result)).toEqual([id1, _filters1]);
-    expect(setChartConfigFromItem).toBeCalledTimes(1);
-    expect(setChartConfigFromItem).toBeCalledWith({
+    expect(setChartConfigFromItem).toHaveBeenCalledTimes(1);
+    expect(setChartConfigFromItem).toHaveBeenCalledWith({
       ..._item1,
       id: id1
     });
@@ -57,8 +57,8 @@ describe("useSelectItem", () => {
       id: id1
     }]);
     expect(_getTupleFilter(result)).toEqual([id1, _filters2]);
-    expect(setChartConfigFromItem).toBeCalledTimes(2);
-    expect(setChartConfigFromItem).toBeCalledWith({
+    expect(setChartConfigFromItem).toHaveBeenCalledTimes(2);
+    expect(setChartConfigFromItem).toHaveBeenCalledWith({
       ..._item2,
       id: id1
     });
@@ -70,8 +70,8 @@ describe("useSelectItem", () => {
       id: id1
     }]);
     expect(_getTupleFilter(result)).toEqual([id1, _filters1]);
-    expect(setChartConfigFromItem).toBeCalledTimes(3);
-    expect(setChartConfigFromItem).toBeCalledWith({
+    expect(setChartConfigFromItem).toHaveBeenCalledTimes(3);
+    expect(setChartConfigFromItem).toHaveBeenCalledWith({
       ..._item1,
       id: id1
     });
@@ -98,8 +98,8 @@ describe("useSelectItem", () => {
       id: TABLE_ID
     }]);
     expect(_getTupleFilter(result)).toEqual([]);
-    expect(setChartConfigFromItem).toBeCalledTimes(4);
-    expect(setChartConfigFromItem).toBeCalledWith({
+    expect(setChartConfigFromItem).toHaveBeenCalledTimes(4);
+    expect(setChartConfigFromItem).toHaveBeenCalledWith({
       ..._itemTable,
       id: TABLE_ID
     });
@@ -108,7 +108,7 @@ describe("useSelectItem", () => {
     (0, _react.act)(() => _hSelect(TABLE_ID, 1, void 0));
     expect(_getRefItems(result).current).toEqual([void 0, void 0]);
     expect(_getTupleFilter(result)).toEqual([]);
-    expect(setChartConfigFromItem).toBeCalledTimes(4);
+    expect(setChartConfigFromItem).toHaveBeenCalledTimes(4);
   });
 });
 //# sourceMappingURL=useSelectItem.test.js.map

@@ -14,7 +14,7 @@ const _testRender = (
   fns,
   calledTimes
 ) => {
-  expect(renderSpy).toBeCalledTimes(calledTimes)
+  expect(renderSpy).toHaveBeenCalledTimes(calledTimes)
   expect(fns.size).toBe(1)
   expect(typeof (Array.from(fns))[0]).toBe('function')
 };

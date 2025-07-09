@@ -1,10 +1,10 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`FlatButton Snap should renders correctly 1`] = `
 <button
   className="bt-flat bold-16"
   onClick={[Function]}
-  title="Click to load [l]"
+  title="Click to load"
   type="button"
 >
   <span
@@ -19,7 +19,6 @@ exports[`FlatButton Snap should renders correctly without title 1`] = `
 <button
   className="bt-flat bold-16"
   onClick={[Function]}
-  title=" [l]"
   type="button"
 >
   <span

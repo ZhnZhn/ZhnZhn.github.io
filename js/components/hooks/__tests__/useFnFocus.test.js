@@ -7,8 +7,8 @@ const _getHookFn = result => result.current[1];
 const _actHookFn = (result, hookFn, fn, focus, timesFn, timesFocus) => {
   (0, _react.act)(hookFn);
   expect(_getHookFn(result)).toEqual(hookFn);
-  expect(fn).toBeCalledTimes(timesFn);
-  expect(focus).toBeCalledTimes(timesFocus);
+  expect(fn).toHaveBeenCalledTimes(timesFn);
+  expect(focus).toHaveBeenCalledTimes(timesFocus);
 };
 describe('useFnFocus', () => {
   test('should after call fn call ref focus', () => {

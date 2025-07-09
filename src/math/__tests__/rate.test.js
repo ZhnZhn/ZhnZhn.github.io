@@ -4,7 +4,7 @@ describe("rate", () => {
   const calc = rate;
   test("should calc rate", () => {
     expect(calc(100, 10)).toBe(10)
-    expect(() => calc(100, 0)).toThrowError('[big.js] Division by zero')
+    expect(() => calc(100, 0)).toThrow('[big.js] Division by zero')
   })
   test("should fixed calc rate by 2", () => {
     //3.3333...

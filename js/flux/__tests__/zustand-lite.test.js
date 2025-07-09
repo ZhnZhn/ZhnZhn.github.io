@@ -85,7 +85,7 @@ describe("createStore", () => {
       _onSubscribe = jest.fn();
     subscribe(_onSubscribe);
     setState(NaN);
-    expect(_onSubscribe).not.toBeCalled();
+    expect(_onSubscribe).not.toHaveBeenCalled();
   });
   test('can set the store without merging', () => {
     const {

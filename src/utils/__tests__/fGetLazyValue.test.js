@@ -14,7 +14,7 @@ describe("fGetLazyValue", ()=>{
     expect(_getValue()).toBe(_value)
     expect(_getValue()).toBe(_value)
     expect(_getValue()).toBe(_value)
-    expect(_crValue).toBeCalledTimes(2)
+    expect(_crValue).toHaveBeenCalledTimes(2)
   })
 })
 
@@ -33,7 +33,7 @@ describe("fGetLazyValueAsync", ()=>{
     expect(_result).toBe(_value)
     _result = await _getValue();
     expect(_result).toBe(_value)
-    expect(_crValue).toBeCalledTimes(1)
+    expect(_crValue).toHaveBeenCalledTimes(1)
   })
 
   test("should get sync value after creating in case isGetValueSync argument", async () => {
@@ -51,7 +51,7 @@ describe("fGetLazyValueAsync", ()=>{
     expect(_result).toBe(_value)
     _result = _getValue(true);
     expect(_result).toBe(_value)
-    expect(_crValue).toBeCalledTimes(1)
+    expect(_crValue).toHaveBeenCalledTimes(1)
   })
 
   test("should try recreat value in case promisify set void 0", async () => {
@@ -73,6 +73,6 @@ describe("fGetLazyValueAsync", ()=>{
     _result = await _getValue();
     expect(_result).toBe(2)
 
-    expect(_crValue).toBeCalledTimes(3)
+    expect(_crValue).toHaveBeenCalledTimes(3)
   })
 })

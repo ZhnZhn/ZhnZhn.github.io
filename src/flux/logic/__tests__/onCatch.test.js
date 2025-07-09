@@ -19,7 +19,7 @@ describe('onCatch', ()=>{
     , _callWithAndTestFor = (error, errDescr) => {
         onCatch({ error, option: {}, onFailed })
         expect(onFailed)
-          .toBeCalledWith(_crAlertDescrFrom(errDescr))
+          .toHaveBeenCalledWith(_crAlertDescrFrom(errDescr))
     };
 
     _callWithAndTestFor((new TypeError('fetch')), ERR_NETWORK)

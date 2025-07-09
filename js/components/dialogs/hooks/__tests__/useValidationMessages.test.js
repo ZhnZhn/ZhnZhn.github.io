@@ -41,12 +41,12 @@ describe('useValidationMessages', () => {
     expect(_msgs2.length).toBe(0);
     expect(_getSetMsgs(result)).toBe(_setMsgs1);
     expect(_getClose(result)).toBe(_close1);
-    expect(onClose).toBeCalledTimes(1);
+    expect(onClose).toHaveBeenCalledTimes(1);
     (0, _react.act)(() => _close1());
     expect(_getMsgs(result)).toBe(_msgs2);
     expect(_getSetMsgs(result)).toBe(_setMsgs1);
     expect(_getClose(result)).toBe(_close1);
-    expect(onClose).toBeCalledTimes(2);
+    expect(onClose).toHaveBeenCalledTimes(2);
   });
 });
 //# sourceMappingURL=useValidationMessages.test.js.map

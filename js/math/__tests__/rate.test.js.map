@@ -1,1 +1,20 @@
-{"version":3,"sources":["../../../src/math/__tests__/rate.test.js"],"names":["describe","calc","rate","test","expect","toBe","toThrowError"],"mappings":";;;;AAAA;;AAEAA,QAAQ,CAAC,MAAD,EAAS,MAAM;AACrB,QAAMC,IAAI,GAAGC,aAAb;AACAC,EAAAA,IAAI,CAAC,kBAAD,EAAqB,MAAM;AAC7BC,IAAAA,MAAM,CAACH,IAAI,CAAC,GAAD,EAAM,EAAN,CAAL,CAAN,CAAsBI,IAAtB,CAA2B,EAA3B;AACAD,IAAAA,MAAM,CAAC,MAAMH,IAAI,CAAC,GAAD,EAAM,CAAN,CAAX,CAAN,CAA2BK,YAA3B,CAAwC,2BAAxC;AACD,GAHG,CAAJ;AAIAH,EAAAA,IAAI,CAAC,6BAAD,EAAgC,MAAM;AACxC;AACAC,IAAAA,MAAM,CAACH,IAAI,CAAC,GAAD,EAAM,EAAN,CAAL,CAAN,CAAsBI,IAAtB,CAA2B,IAA3B,EAFwC,CAGxC;;AACAD,IAAAA,MAAM,CAACH,IAAI,CAAC,GAAD,EAAM,EAAN,CAAL,CAAN,CAAsBI,IAAtB,CAA2B,IAA3B,EAJwC,CAKxC;;AACAD,IAAAA,MAAM,CAACH,IAAI,CAAC,GAAD,EAAM,EAAN,CAAL,CAAN,CAAsBI,IAAtB,CAA2B,IAA3B;AACD,GAPG,CAAJ;AAQD,CAdO,CAAR","sourcesContent":["import rate from '../rate';\r\n\r\ndescribe(\"rate\", () => {\r\n  const calc = rate;\r\n  test(\"should calc rate\", () => {\r\n    expect(calc(100, 10)).toBe(10)\r\n    expect(() => calc(100, 0)).toThrowError('[big.js] Division by zero')\r\n  })\r\n  test(\"should fixed calc rate by 2\", () => {\r\n    //3.3333...\r\n    expect(calc(100, 30)).toBe(3.33)\r\n    //3.44827...\r\n    expect(calc(100, 29)).toBe(3.45)\r\n    //4.5454...\r\n    expect(calc(100, 22)).toBe(4.55)\r\n  })\r\n})\r\n"],"file":"rate.test.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/math/__tests__/rate.test.js"
+ ],
+ "file": "../../../src/math/__tests__/rate.test.js",
+ "names": [
+  "_rate",
+  "_interopRequireDefault",
+  "require",
+  "describe",
+  "calc",
+  "rate",
+  "test",
+  "expect",
+  "toBe",
+  "toThrow"
+ ],
+ "mappings": ";;;AAAA,IAAAA,KAAA,GAAAC,sBAAA,CAAAC,OAAA;AAEAC,QAAQ,CAAC,MAAM,EAAE,MAAM;EACrB,MAAMC,IAAI,GAAGC,aAAI;EACjBC,IAAI,CAAC,kBAAkB,EAAE,MAAM;IAC7BC,MAAM,CAACH,IAAI,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC,CAACI,IAAI,CAAC,EAAE,CAAC;IAC9BD,MAAM,CAAC,MAAMH,IAAI,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAACK,OAAO,CAAC,2BAA2B,CAAC;EACjE,CAAC,CAAC;EACFH,IAAI,CAAC,6BAA6B,EAAE,MAAM;IACxC;IACAC,MAAM,CAACH,IAAI,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC,CAACI,IAAI,CAAC,IAAI,CAAC;IAChC;IACAD,MAAM,CAACH,IAAI,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC,CAACI,IAAI,CAAC,IAAI,CAAC;IAChC;IACAD,MAAM,CAACH,IAAI,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC,CAACI,IAAI,CAAC,IAAI,CAAC;EAClC,CAAC,CAAC;AACJ,CAAC,CAAC"
+}

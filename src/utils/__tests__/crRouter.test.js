@@ -23,8 +23,8 @@ describe("crRouter", () => {
       get b() { return getB(); }
     };
     fn(config)
-    expect(getA).toBeCalledTimes(0)
-    expect(getB).toBeCalledTimes(0)
+    expect(getA).toHaveBeenCalledTimes(0)
+    expect(getB).toHaveBeenCalledTimes(0)
   })
 })
 
