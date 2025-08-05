@@ -7,7 +7,7 @@ var _isTypeFn = require("../../utils/isTypeFn");
 var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
+var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
 var _SpanToken = require("../zhn/SpanToken");
 var _DivCompareTo = _interopRequireDefault(require("./DivCompareTo"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -74,7 +74,7 @@ const ValueMovingModal = props => {
     dateTo,
     isDenyToChange
   } = valueMoving;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPane.default, {
     isShow: isShow,
     style: S_MODAL_POPUP,
     onClose: onClose,

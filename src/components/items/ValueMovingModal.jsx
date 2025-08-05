@@ -19,7 +19,7 @@ import {
   crAbsoluteTopLeftStyle
 } from '../styleFn';
 
-import ModalPopup from '../zhn-moleculs/ModalPopup';
+import ModalPane from '../zhn-moleculs/ModalPane';
 import {
   SpanValue,
   SpanDate
@@ -104,7 +104,7 @@ const ValueMovingModal = (
   } = valueMoving;
 
   return (
-    <ModalPopup
+    <ModalPane
       isShow={isShow}
       style={S_MODAL_POPUP}
       onClose={onClose}
@@ -118,7 +118,7 @@ const ValueMovingModal = (
          msgErr={msgDateTo}
          onEnter={_hEnterDate}
       />}
-    </ModalPopup>
+    </ModalPane>
   );
 }
 
