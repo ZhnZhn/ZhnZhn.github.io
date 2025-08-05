@@ -57,7 +57,6 @@ const MenuMore = _ref => {
       onClick: onToggle
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalSlider.ModalSliderMemoIsShow, {
       isShow: isMore,
-      rootStyle: _styleFn.S_INLINE,
       className: _styleFn.CL_CHARTS_MENU_MORE,
       model: moreModel,
       onClose: toggleFocus

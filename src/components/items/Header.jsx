@@ -2,7 +2,6 @@
 import { useId } from '../uiApi';
 import {
   CL_CHARTS_MENU_MORE,
-  S_INLINE,
   crStyle2,
   crItemCaptionCn
 } from '../styleFn';
@@ -72,7 +71,6 @@ const MenuMore = ({
       />
       <ModalSliderMemoIsShow
         isShow={isMore}
-        rootStyle={S_INLINE}
         className={CL_CHARTS_MENU_MORE}
         model={moreModel}
         onClose={toggleFocus}

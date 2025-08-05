@@ -1,9 +1,5 @@
 import { bindTo } from '../uiApi';
-import {
-  CL_POPUP_MENU,
-  crCn,
-  crSliderTransformStyle
-} from '../styleFn';
+import { crSliderTransformStyle } from '../styleFn';
 
 import memoIsShow from '../hoc/memoIsShow';
 
@@ -11,8 +7,6 @@ import useInitStateFromProps from '../hooks/useInitStateFromProps';
 import useThrottleCallback from '../hooks/useThrottleCallback';
 
 import ModalPane from '../zhn-moleculs/ModalPane';
-import ShowHide from '../zhn/ShowHide';
-
 import MenuPage from './MenuPage';
 import MenuPages from './MenuPages';
 
@@ -71,7 +65,6 @@ export const ModalSlider = ({
   model=DF_MODEL,
   isShow,
   className,
-  rootStyle,
   style,
   onClose
 }) => {
@@ -124,39 +117,35 @@ export const ModalSlider = ({
      })
   });
 
-  const _showHideStyle = {
-    ...style,
-    ...S_SHOW_HIDE,
-    ...pageStyle
-  }
-  , _divStyle = crSliderTransformStyle(
-     pageWidth,
-     pageCurrent
-  );
   return (
-      <ModalPane
-        isShow={isShow}
-        style={rootStyle}
-        onClose={onClose}
-      >
-        <ShowHide
-          className={crCn(CL_POPUP_MENU, className)}
-          style={_showHideStyle}
-          isShow={isShow}
+    <ModalPane
+      isShow={isShow}
+      className={className}
+      style={{
+        ...style,
+        ...S_SHOW_HIDE,
+        ...pageStyle
+      }}
+      onClose={onClose}
+    >
+        <div
+          className={CL_SLIDER_PAGES}
+          style={crSliderTransformStyle(
+            pageWidth,
+            pageCurrent
+          )}
         >
-          <div className={CL_SLIDER_PAGES} style={_divStyle}>
-            <MenuPages
-              isShow={isShow}
-              style={pageStyle}
-              pages={pages}
-              pageCurrent={pageCurrent}
-              onNextPage={hNextPage}
-              onPrevPage={hPrevPage}
-              onClose={onClose}
-            />
-          </div>
-        </ShowHide>
-      </ModalPane>
+          <MenuPages
+            isShow={isShow}
+            style={pageStyle}
+            pages={pages}
+            pageCurrent={pageCurrent}
+            onNextPage={hNextPage}
+            onPrevPage={hPrevPage}
+            onClose={onClose}
+          />
+        </div>
+    </ModalPane>
   );
 }
 

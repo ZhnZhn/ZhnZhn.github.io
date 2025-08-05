@@ -9,7 +9,6 @@ var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useInitStateFromProps = _interopRequireDefault(require("../hooks/useInitStateFromProps"));
 var _useThrottleCallback = _interopRequireDefault(require("../hooks/useThrottleCallback"));
 var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
-var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _MenuPage = _interopRequireDefault(require("./MenuPage"));
 var _MenuPages = _interopRequireDefault(require("./MenuPages"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -53,7 +52,6 @@ const ModalSlider = _ref => {
     model = DF_MODEL,
     isShow,
     className,
-    rootStyle,
     style,
     onClose
   } = _ref;
@@ -97,32 +95,26 @@ const ModalSlider = _ref => {
         };
       });
     });
-  const _showHideStyle = {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane.default, {
+    isShow: isShow,
+    className: className,
+    style: {
       ...style,
       ...S_SHOW_HIDE,
       ...pageStyle
     },
-    _divStyle = (0, _styleFn.crSliderTransformStyle)(pageWidth, pageCurrent);
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane.default, {
-    isShow: isShow,
-    style: rootStyle,
     onClose: onClose,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
-      className: (0, _styleFn.crCn)(_styleFn.CL_POPUP_MENU, className),
-      style: _showHideStyle,
-      isShow: isShow,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        className: CL_SLIDER_PAGES,
-        style: _divStyle,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPages.default, {
-          isShow: isShow,
-          style: pageStyle,
-          pages: pages,
-          pageCurrent: pageCurrent,
-          onNextPage: hNextPage,
-          onPrevPage: hPrevPage,
-          onClose: onClose
-        })
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      className: CL_SLIDER_PAGES,
+      style: (0, _styleFn.crSliderTransformStyle)(pageWidth, pageCurrent),
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuPages.default, {
+        isShow: isShow,
+        style: pageStyle,
+        pages: pages,
+        pageCurrent: pageCurrent,
+        onNextPage: hNextPage,
+        onPrevPage: hPrevPage,
+        onClose: onClose
       })
     })
   });
