@@ -8,7 +8,7 @@ var _styleFn = require("../styleFn");
 var _useClickOutside = _interopRequireDefault(require("../hooks/useClickOutside"));
 var _fUseKey = require("../hooks/fUseKey");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_MODAL_PANE = (0, _styleFn.crContainerCn)();
+const CL_MODAL_PANE = (0, _styleFn.crContainerCn)(_styleFn.CL_POPUP_MENU);
 const ModalPane = _ref => {
   let {
     isShow,

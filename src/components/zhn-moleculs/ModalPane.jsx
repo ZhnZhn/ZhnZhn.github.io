@@ -1,5 +1,6 @@
 import { crPresentationRole } from '../a11yFn';
 import {
+  CL_POPUP_MENU,
   crCn,
   crContainerCn
 } from '../styleFn';
@@ -7,7 +8,7 @@ import {
 import useClickOutside from '../hooks/useClickOutside';
 import { useKeyEscape } from '../hooks/fUseKey';
 
-const CL_MODAL_PANE = crContainerCn();
+const CL_MODAL_PANE = crContainerCn(CL_POPUP_MENU);
 
 const ModalPane = ({
   isShow,
