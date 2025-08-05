@@ -7,7 +7,7 @@ var _dateFn = require("../../utils/dateFn");
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useFocus = require("../hooks/useFocus");
-var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
+var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
 var _DivCompareTo = _interopRequireDefault(require("../items/DivCompareTo"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_MODAL_POPUP = {
@@ -30,7 +30,7 @@ const ModalCompareTo = _ref => {
         setMsgErr(_msgErr);
       }
     }, [onCompareTo]);
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane.default, {
     isShow: isShow,
     style: S_MODAL_POPUP,
     onClose: onClose,

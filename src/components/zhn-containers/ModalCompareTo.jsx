@@ -14,7 +14,7 @@ import {
   useRefFocusIf
 } from '../hooks/useFocus';
 
-import ModalPopup from '../zhn-moleculs/ModalPopup';
+import ModalPane from '../zhn-moleculs/ModalPane';
 import DivCompareTo from '../items/DivCompareTo';
 
 const S_MODAL_POPUP = {
@@ -41,7 +41,7 @@ const ModalCompareTo = ({
   }, [onCompareTo]);
 
   return (
-    <ModalPopup
+    <ModalPane
       isShow={isShow}
       style={S_MODAL_POPUP}
       onClose={onClose}
@@ -52,7 +52,7 @@ const ModalCompareTo = ({
         onTest={isDmy}
         onEnter={_onEnterDateTo}
       />
-    </ModalPopup>
+    </ModalPane>
   );
 };
 
