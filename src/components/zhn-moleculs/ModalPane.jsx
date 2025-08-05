@@ -1,5 +1,8 @@
 import { crPresentationRole } from '../a11yFn';
-import { crContainerCn } from '../styleFn';
+import {
+  crCn,
+  crContainerCn
+} from '../styleFn';
 
 import useClickOutside from '../hooks/useClickOutside';
 import { useKeyEscape } from '../hooks/fUseKey';
@@ -8,6 +11,7 @@ const CL_MODAL_PANE = crContainerCn();
 
 const ModalPane = ({
   isShow,
+  className,
   style,
   children,
   onClose
@@ -19,7 +23,7 @@ const ModalPane = ({
     <div
        {...crPresentationRole(isShow)}
        ref={_refNode}
-       className={CL_MODAL_PANE}
+       className={crCn(CL_MODAL_PANE, className)}
        style={style}
        onKeyDown={isShow ? _hKeyEscape : void 0}
     >
