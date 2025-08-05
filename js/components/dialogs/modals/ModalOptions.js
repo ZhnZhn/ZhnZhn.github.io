@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _inputFn = require("../../inputFn");
-var _ModalPopup = _interopRequireDefault(require("../../zhn-moleculs/ModalPopup"));
+var _ModalPane = _interopRequireDefault(require("../../zhn-moleculs/ModalPane"));
 var _InputText = _interopRequireDefault(require("../../zhn/InputText"));
 var _SpanToken = require("../../zhn/SpanToken");
 var _InputSwitch = _interopRequireDefault(require("../../zhn/InputSwitch"));
@@ -31,13 +31,13 @@ const ModalOptions = _ref => {
     toggleOption,
     onClose
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPane.default, {
     isShow: isShow,
+    className: className,
     style: {
       ..._Style.S_MODAL_POPUP,
       ...style
     },
-    className: className,
     onClose: onClose,
     children: [onRoundTo && _isRt(dfRt) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_DIV_INPUT,

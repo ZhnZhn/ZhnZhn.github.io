@@ -1,6 +1,6 @@
 import { crInputNumberProps } from '../../inputFn';
 
-import ModalPopup from '../../zhn-moleculs/ModalPopup';
+import ModalPane from '../../zhn-moleculs/ModalPane';
 import InputText from '../../zhn/InputText';
 import { SpanBoldBlack } from '../../zhn/SpanToken';
 import InputSwitch from '../../zhn/InputSwitch';
@@ -39,10 +39,10 @@ const ModalOptions = ({
   toggleOption,
   onClose
 }) => (
-  <ModalPopup
+  <ModalPane
     isShow={isShow}
-    style={{...S_MODAL_POPUP, ...style}}
     className={className}
+    style={{...S_MODAL_POPUP, ...style}}
     onClose={onClose}
   >
     {/*eslint-disable jsx-a11y/label-has-associated-control*/}
@@ -67,7 +67,7 @@ const ModalOptions = ({
           onUnCheck={() => toggleOption(!1, id)}
        />
     ))}
-  </ModalPopup>
+  </ModalPane>
 );
 
 export default ModalOptions

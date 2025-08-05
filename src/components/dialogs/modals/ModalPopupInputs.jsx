@@ -1,7 +1,7 @@
 import { useRef } from '../../uiApi';
 import { useAsyncFocusFirstItemIf } from '../../hooks/useFocus';
 
-import ModalPopup from '../../zhn-moleculs/ModalPopup';
+import ModalPane from '../../zhn-moleculs/ModalPane';
 import InputSwitch from '../../zhn/InputSwitch';
 
 import {
@@ -16,10 +16,10 @@ const ModalPopupInputs = (props) => {
     _refFirstItem
   );
   return (
-    <ModalPopup
+    <ModalPane
       isShow={props.isShow}
-      style={{...S_MODAL_POPUP, ...props.style}}
       className={props.className}
+      style={{...S_MODAL_POPUP, ...props.style}}
       onClose={props.onClose}
     >
       <InputSwitch
@@ -31,7 +31,7 @@ const ModalPopupInputs = (props) => {
         onToggle={props.onToggleLabels}
       />
       {props.children}
-    </ModalPopup>
+    </ModalPane>
   );
 }
 
