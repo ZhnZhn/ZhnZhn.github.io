@@ -70,6 +70,16 @@ export const IfTrue = (
   ? props.children
   : null
 
+export const fOnClick = (
+  onClick,
+  onClose,
+  isClose
+) => isFn(onClick)
+  ? isClose
+      ? () => { onClick(); onClose(); }
+      : onClick
+  : void 0
+
 export const getRefValue = (
   ref
 ) => (ref || {}).current

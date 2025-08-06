@@ -1,9 +1,9 @@
 import { isBool } from '../../utils/isTypeFn';
 
 import {
-  isFn,
   safeMap,
-  bindTo
+  bindTo,
+  fOnClick
 } from '../uiApi';
 import { crMenuItemRole } from '../a11yFn';
 
@@ -29,16 +29,6 @@ const SUB_MENU = 'sub'
   padding: '1px 16px 1px 0',
   fontWeight: 'bold'
 };
-
-const _fClick = ({
-  isClose,
-  onClick,
-  onClose
-}) => isFn(onClick)
-  ? isClose
-      ? () => { onClick(); onClose(); }
-      : onClick
-  : void 0;
 
 const NextPageArrow = ({
   type
@@ -67,7 +57,7 @@ const MenuItemList = ({
      } = item
      , _onClick = type === SUB_MENU
         ? bindTo(onNextPage, id, name, pageNumber)
-        : _fClick({ isClose, onClick, onClose });
+        : fOnClick(onClick, onClose, isClose);
      return isBool(isInitial)
        ? (<div
            key={name}

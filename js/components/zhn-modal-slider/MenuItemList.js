@@ -24,27 +24,16 @@ const SUB_MENU = 'sub',
     padding: '1px 16px 1px 0',
     fontWeight: 'bold'
   };
-const _fClick = _ref => {
-  let {
-    isClose,
-    onClick,
-    onClose
-  } = _ref;
-  return (0, _uiApi.isFn)(onClick) ? isClose ? () => {
-    onClick();
-    onClose();
-  } : onClick : void 0;
-};
-const NextPageArrow = _ref2 => {
+const NextPageArrow = _ref => {
   let {
     type
-  } = _ref2;
+  } = _ref;
   return type === SUB_MENU ? /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
     style: S_NEXT_PAGE,
     children: ">"
   }) : null;
 };
-const MenuItemList = _ref3 => {
+const MenuItemList = _ref2 => {
   let {
     getRefFocus,
     items,
@@ -52,7 +41,7 @@ const MenuItemList = _ref3 => {
     pageNumber,
     onNextPage,
     onClose
-  } = _ref3;
+  } = _ref2;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
     children: (0, _uiApi.safeMap)(items, (item, index) => {
       const {
@@ -64,11 +53,7 @@ const MenuItemList = _ref3 => {
           isInitial,
           onClick
         } = item,
-        _onClick = type === SUB_MENU ? (0, _uiApi.bindTo)(onNextPage, id, name, pageNumber) : _fClick({
-          isClose,
-          onClick,
-          onClose
-        });
+        _onClick = type === SUB_MENU ? (0, _uiApi.bindTo)(onNextPage, id, name, pageNumber) : (0, _uiApi.fOnClick)(onClick, onClose, isClose);
       return (0, _isTypeFn.isBool)(isInitial) ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         ...(0, _a11yFn.crMenuItemRole)(),
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
