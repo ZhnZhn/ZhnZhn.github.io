@@ -12,15 +12,21 @@ var _useMenuMore = _interopRequireDefault(require("../dialogs/hooks/useMenuMore"
 var _useToolbar = require("../dialogs/hooks/useToolbar");
 var _DraggableDialog = _interopRequireDefault(require("../zhn-moleculs/DraggableDialog"));
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
+var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
 var _Toolbar = _interopRequireDefault(require("../dialogs/Toolbar"));
 var _SelectWithLoad = _interopRequireDefault(require("../dialogs/SelectWithLoad"));
 var _RowPattern = _interopRequireDefault(require("../dialogs/rows/RowPattern"));
-var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox1"));
 var _jsxRuntime = require("react/jsx-runtime");
 const DF_INDICATOR = 'SMA',
   DF_PERIOD = 30,
   DF_FOR_DAYS = 501,
-  INDICATOR_PLACEHOLDER = `Default: ${DF_INDICATOR} (${DF_PERIOD})`;
+  INDICATOR_PLACEHOLDER = `Default: ${DF_INDICATOR} (${DF_PERIOD})`,
+  S_INPUT_SWITCH = {
+    flexDirection: 'row',
+    alignItems: 'end',
+    width: 'fit-content',
+    padding: '10px 0 6px 16px'
+  };
 const _isValueBlank = value => (value + '').trim() === '';
 const _testTicket = value => !_isValueBlank(value);
 const _testInRangeOrEmpty = (min, max) => value => {
@@ -120,21 +126,22 @@ const AvIndicatorDialog = (0, _memoIsShow.default)(_ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide.default, {
       isShow: isShowOptions,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowPattern.default, {
-        ref: _refPeriod,
+        refEl: _refPeriod,
         isShowLabels: isShowLabels,
         caption: "Period",
         placeholder: `Default: ${DF_PERIOD}`,
         onTest: _testPeriod,
         errorMsg: "Number in range 1-200"
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowPattern.default, {
-        ref: _refForDays,
+        refEl: _refForDays,
         isShowLabels: isShowLabels,
         caption: "For Days",
         placeholder: `Default: ${DF_FOR_DAYS} (2 Years)`,
         onTest: _testForDays,
         errorMsg: "Number in range 250-2500"
       })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+      style: S_INPUT_SWITCH,
       caption: "Add Seria with YAxis2",
       onCheck: _hCheckSecondYAxis,
       onUnCheck: _hUnCheckSecondYAxis

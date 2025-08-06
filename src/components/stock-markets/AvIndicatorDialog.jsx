@@ -24,15 +24,21 @@ import {
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ShowHide from '../zhn/ShowHide';
+import InputSwitch from '../zhn/InputSwitch';
 import Toolbar from '../dialogs/Toolbar';
 import SelectWithLoad from '../dialogs/SelectWithLoad';
 import RowPattern from '../dialogs/rows/RowPattern';
-import RowCheckBox1 from '../dialogs/rows/RowCheckBox1';
 
 const DF_INDICATOR = 'SMA'
 , DF_PERIOD = 30
 , DF_FOR_DAYS = 501
-, INDICATOR_PLACEHOLDER = `Default: ${DF_INDICATOR} (${DF_PERIOD})`;
+, INDICATOR_PLACEHOLDER = `Default: ${DF_INDICATOR} (${DF_PERIOD})`
+, S_INPUT_SWITCH = {
+  flexDirection: 'row',
+  alignItems: 'end',
+  width: 'fit-content',
+  padding: '10px 0 6px 16px'
+};
 
 const _isValueBlank = value => (value+'')
  .trim() === '';
@@ -164,7 +170,7 @@ const AvIndicatorDialog = memoIsShow(({
       />
       <ShowHide isShow={isShowOptions}>
          <RowPattern
-           ref={_refPeriod}
+           refEl={_refPeriod}
            isShowLabels={isShowLabels}
            caption="Period"
            placeholder={`Default: ${DF_PERIOD}`}
@@ -172,7 +178,7 @@ const AvIndicatorDialog = memoIsShow(({
            errorMsg="Number in range 1-200"
         />
         <RowPattern
-           ref={_refForDays}
+           refEl={_refForDays}
            isShowLabels={isShowLabels}
            caption="For Days"
            placeholder={`Default: ${DF_FOR_DAYS} (2 Years)`}
@@ -180,7 +186,8 @@ const AvIndicatorDialog = memoIsShow(({
            errorMsg="Number in range 250-2500"
         />
       </ShowHide>
-      <RowCheckBox1
+      <InputSwitch
+         style={S_INPUT_SWITCH}
          caption="Add Seria with YAxis2"
          onCheck={_hCheckSecondYAxis}
          onUnCheck={_hUnCheckSecondYAxis}
