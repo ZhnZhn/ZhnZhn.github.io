@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
+var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
 var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_MENU_MORE = 'charts__menu-more',
@@ -20,7 +20,7 @@ const BrowserMenuMore = _ref => {
     toggleMenu,
     toggleFilter
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane.default, {
     isShow: is,
     className: CL_MENU_MORE,
     style: S_MENU,

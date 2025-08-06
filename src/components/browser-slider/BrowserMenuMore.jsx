@@ -1,4 +1,4 @@
-import ModalPopup from '../zhn-moleculs/ModalPopup';
+import ModalPane from '../zhn-moleculs/ModalPane';
 import InputSwitch from '../zhn/InputSwitch';
 
 const CL_MENU_MORE = 'charts__menu-more'
@@ -15,7 +15,7 @@ const BrowserMenuMore = ({
   toggleMenu,
   toggleFilter
 }) => (
-  <ModalPopup
+  <ModalPane
     isShow={is}
     className={CL_MENU_MORE}
     style={S_MENU}
@@ -26,7 +26,7 @@ const BrowserMenuMore = ({
       caption="Filter Not Active Topic"
       onToggle={toggleFilter}
     />
-  </ModalPopup>
+  </ModalPane>
 );
 
 export default BrowserMenuMore
