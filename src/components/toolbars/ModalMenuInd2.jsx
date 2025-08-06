@@ -13,7 +13,7 @@ import {
   powerBy10
 } from '../../charts/IndicatorBuilder';
 
-import ModalPopup from '../zhn-moleculs/ModalPopup';
+import ModalPane from '../zhn-moleculs/ModalPane';
 import { S_MODAL_MENU } from './ModalMenu.Style';
 
 import RowTypeA from './RowTypeA';
@@ -45,9 +45,9 @@ const ModalMenuInd2 = ({
   };
 
   return (
-    <ModalPopup
-      style={{...S_MODAL_MENU, ...style}}
+    <ModalPane
       isShow={isShow}
+      style={{...S_MODAL_MENU, ...style}}
       onClose={onClose}
     >
       <div style={S_MENU_PANE}>
@@ -71,12 +71,12 @@ const ModalMenuInd2 = ({
            caption="S1*PowerOf 10"
            initValue={DF_POWER_BY_10}
            min={-9}
-           max={9}          
+           max={9}
            onAdd={_onPowerBy10}
         />
        }
       </div>
-    </ModalPopup>
+    </ModalPane>
   );
 };
 

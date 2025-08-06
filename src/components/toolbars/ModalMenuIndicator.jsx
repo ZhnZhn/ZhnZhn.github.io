@@ -6,7 +6,7 @@ import {
 
 import { S_MODAL_MENU } from './ModalMenu.Style';
 
-import ModalPopup from '../zhn-moleculs/ModalPopup';
+import ModalPane from '../zhn-moleculs/ModalPane';
 import RowFnType1 from './RowFnType1';
 import RowNorm from './RowNorm';
 import { RowIndicators } from './RowIndicators';
@@ -38,9 +38,9 @@ const ModalMenuIndicator = ({
    onAddMfi,
    onRemoveMfi
 }) => getChart() ? (
-  <ModalPopup
-    style={{...S_MODAL_MENU, ...style}}
+  <ModalPane
     isShow={isShow}
+    style={{...S_MODAL_MENU, ...style}}
     onClose={onClose}
   >
     <div style={S_PANE}>
@@ -66,7 +66,7 @@ const ModalMenuIndicator = ({
          onRemoveMfi={onRemoveMfi}
       />
     </div>
-  </ModalPopup>
+  </ModalPane>
 ) : null;
 
 export default ModalMenuIndicator

@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _seriaFn = require("../../math/seriaFn");
 var _ModalMenu = require("./ModalMenu.Style");
-var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
+var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
 var _RowFnType = _interopRequireDefault(require("./RowFnType1"));
 var _RowNorm = _interopRequireDefault(require("./RowNorm"));
 var _RowIndicators = require("./RowIndicators");
@@ -36,12 +36,12 @@ const ModalMenuIndicator = _ref => {
     onAddMfi,
     onRemoveMfi
   } = _ref;
-  return getChart() ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
+  return getChart() ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane.default, {
+    isShow: isShow,
     style: {
       ..._ModalMenu.S_MODAL_MENU,
       ...style
     },
-    isShow: isShow,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S_PANE,

@@ -6,7 +6,7 @@ exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _useProperty = require("../hooks/useProperty");
 var _IndicatorBuilder = require("../../charts/IndicatorBuilder");
-var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
+var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
 var _ModalMenu = require("./ModalMenu.Style");
 var _RowTypeA = _interopRequireDefault(require("./RowTypeA"));
 var _RowTypeB = _interopRequireDefault(require("./RowTypeB"));
@@ -33,12 +33,12 @@ const ModalMenuInd2 = _ref => {
         return true;
       }
     };
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane.default, {
+    isShow: isShow,
     style: {
       ..._ModalMenu.S_MODAL_MENU,
       ...style
     },
-    isShow: isShow,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S_MENU_PANE,

@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
-var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
+var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
 var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox1"));
 var _RowCaptionInput = _interopRequireDefault(require("./RowCaptionInput"));
 var _ModalMenu = require("./ModalMenu.Style");
@@ -34,9 +34,9 @@ const ModalMenuAppearance = _ref => {
   /*eslint-disable react-hooks/exhaustive-deps */
   const _refPointWidth = (0, _uiApi.useRef)(),
     [_enableCategoryLabels, _disableCategoryLabels, _onPointWidth] = (0, _uiApi.useMemo)(() => [() => {
-      getChart().zhDataLabels(true);
+      getChart().zhDataLabels(!0);
     }, () => {
-      getChart().zhDataLabels(false);
+      getChart().zhDataLabels(!1);
     }, () => {
       const pointWidth = parseFloat((0, _uiApi.getInputValue)(_refPointWidth));
       if (pointWidth > 0 && pointWidth < 21) {
@@ -46,12 +46,12 @@ const ModalMenuAppearance = _ref => {
   // getChart
   /*eslint-enable react-hooks/exhaustive-deps */
 
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane.default, {
+    isShow: isShow,
     style: {
       ..._ModalMenu.S_MODAL_MENU,
       ...style
     },
-    isShow: isShow,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       style: S_MENU_PANE,
@@ -65,7 +65,7 @@ const ModalMenuAppearance = _ref => {
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCaptionInput.default, {
         refEl: _refPointWidth,
         caption: "Point Width",
-        isBtAdd: false,
+        isBtAdd: !1,
         style: S_ROW_INPUT,
         captionStyle: S_CAPTION_STYLE,
         initValue: 4,

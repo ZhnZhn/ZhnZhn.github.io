@@ -8,7 +8,7 @@ import {
   CL_BLACK
 } from '../styleFn';
 
-import ModalPopup from '../zhn-moleculs/ModalPopup';
+import ModalPane from '../zhn-moleculs/ModalPane';
 import RowCheckBox1 from '../dialogs/rows/RowCheckBox1';
 import RowCaptionInput from './RowCaptionInput'
 import { S_MODAL_MENU } from './ModalMenu.Style';
@@ -42,10 +42,10 @@ const ModalMenuAppearance = ({
     _onPointWidth
   ]= useMemo(() => [
     () => {
-      getChart().zhDataLabels(true)
+      getChart().zhDataLabels(!0)
     },
     () => {
-      getChart().zhDataLabels(false)
+      getChart().zhDataLabels(!1)
     },
     () => {
       const pointWidth = parseFloat(getInputValue(_refPointWidth));
@@ -58,9 +58,9 @@ const ModalMenuAppearance = ({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
-    <ModalPopup
-      style={{...S_MODAL_MENU, ...style}}
+    <ModalPane
       isShow={isShow}
+      style={{...S_MODAL_MENU, ...style}}
       onClose={onClose}
     >
       <div style={S_MENU_PANE}>
@@ -75,7 +75,7 @@ const ModalMenuAppearance = ({
         <RowCaptionInput
           refEl={_refPointWidth}
           caption="Point Width"
-          isBtAdd={false}
+          isBtAdd={!1}
           style={S_ROW_INPUT}
           captionStyle={S_CAPTION_STYLE}
           initValue={4}
@@ -84,7 +84,7 @@ const ModalMenuAppearance = ({
           onAdd={_onPointWidth}
         />
       </div>
-    </ModalPopup>
+    </ModalPane>
   );
 };
 
