@@ -7,7 +7,7 @@ var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
-var _ModalPopup = _interopRequireDefault(require("../zhn-moleculs/ModalPopup"));
+var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROW = {
@@ -66,9 +66,9 @@ const ModalMenu = _ref3 => {
     onToggle,
     onClose
   } = _ref3;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopup.default, {
-    style: style,
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPane.default, {
     isShow: isShow,
+    style: style,
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
       style: S_ROW,

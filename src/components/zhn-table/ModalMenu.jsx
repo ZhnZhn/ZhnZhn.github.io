@@ -9,7 +9,7 @@ import {
 
 import OpenClose from "../zhn/OpenClose";
 import InputSwitch from "../zhn/InputSwitch";
-import ModalPopup from "../zhn-moleculs/ModalPopup";
+import ModalPane from "../zhn-moleculs/ModalPane";
 
 import { getColorBlack } from "./Style";
 
@@ -89,9 +89,9 @@ const ModalMenu = ({
   onToggle,
   onClose
 }) => (
-  <ModalPopup
-     style={style}
+  <ModalPane
      isShow={isShow}
+     style={style}
      onClose={onClose}
    >
      <InputSwitch
@@ -105,7 +105,7 @@ const ModalMenu = ({
        headers={headers}
        onToggle={onToggle}
      />
-  </ModalPopup>
+  </ModalPane>
 );
 
 export default ModalMenu
