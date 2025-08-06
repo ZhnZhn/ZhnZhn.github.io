@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
-var _ModalPopup = _interopRequireDefault(require("./ModalPopup"));
+var _ModalPane = _interopRequireDefault(require("./ModalPane"));
 var _CellColorPane = _interopRequireDefault(require("./CellColorPane"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_MODAL_POPUP = {
@@ -18,9 +18,9 @@ const ModalPalette = _ref => {
     onClickCell,
     onClose
   } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopup.default, {
-    style: S_MODAL_POPUP,
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane.default, {
     isShow: isShow,
+    style: S_MODAL_POPUP,
     onClose: onClose,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_CellColorPane.default, {
       model: model,

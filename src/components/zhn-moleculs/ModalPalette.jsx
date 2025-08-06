@@ -2,7 +2,7 @@ import {
   crAbsoluteTopLeftStyle
 } from '../styleFn';
 
-import ModalPopup from './ModalPopup';
+import ModalPane from './ModalPane';
 import CellColorPane from './CellColorPane';
 
 const S_MODAL_POPUP = {
@@ -16,16 +16,16 @@ const ModalPalette = ({
   onClickCell,
   onClose
 }) => (
-  <ModalPopup
-    style={S_MODAL_POPUP}
+  <ModalPane
     isShow={isShow}
+    style={S_MODAL_POPUP}
     onClose={onClose}
   >
     <CellColorPane
        model={model}
        onClickCell={onClickCell}
     />
-  </ModalPopup>
+  </ModalPane>
 );
 
 export default ModalPalette
