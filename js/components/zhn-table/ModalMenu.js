@@ -10,9 +10,8 @@ var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
 var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const S_ROW = {
-    padding: '6px 0',
-    lineHeight: 'initial'
+const S_INPUT_SWITCH = {
+    padding: '6px 0'
   },
   _crHrStyle = () => ({
     borderColor: (0, _Style.getColorBlack)(),
@@ -23,7 +22,7 @@ const S_ROW = {
     lineHeight: 1.5
   };
 const _crRowCheckBoxElement = (h, color, onToggle) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
-  style: S_ROW,
+  style: S_INPUT_SWITCH,
   caption: h.name,
   initialValue: !h.isHide,
   onToggle: onToggle
@@ -71,7 +70,7 @@ const ModalMenu = _ref3 => {
     style: style,
     onClose: onClose,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
-      style: S_ROW,
+      style: S_INPUT_SWITCH,
       caption: "withStripLines",
       initialValue: isGridLine,
       onToggle: onToggleGrid

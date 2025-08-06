@@ -49,8 +49,7 @@ const DF_COLOR = '#2b908f'
 , S_INLINE_INPUT_SWITCH = {
   display: 'inline-flex',
   width: '50%',
-  paddingLeft: 14,
-  lineHeight: 'initial'
+  paddingLeft: 14
 };
 
 const InputPlus = ({
@@ -163,7 +162,7 @@ const RowType1 = ({
         <InputSwitch
           style={S_INLINE_INPUT_SWITCH}
           caption="OnTop"
-          onToggle={_onToggleTop}          
+          onToggle={_onToggleTop}
         />
        </div>
     </div>

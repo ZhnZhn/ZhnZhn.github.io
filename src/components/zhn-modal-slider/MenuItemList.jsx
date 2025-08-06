@@ -19,7 +19,6 @@ const SUB_MENU = 'sub'
   position: 'relative'
 }
 , S_INPUT_SWITCH = {
-  lineHeight: 'initial',
   height: 35,
   paddingTop: 9
 }
@@ -27,7 +26,7 @@ const SUB_MENU = 'sub'
   ...S_INLINE,
   ...crAbsoluteTopLeftStyle(0, 4, !0),
   color: 'inherit',
-  padding: '1px 16px 1px 0px',
+  padding: '1px 16px 1px 0',
   fontWeight: 'bold'
 };
 
@@ -68,7 +67,7 @@ const MenuItemList = ({
      } = item
      , _onClick = type === SUB_MENU
         ? bindTo(onNextPage, id, name, pageNumber)
-        : _fClick({ isClose, onClick, onClose });     
+        : _fClick({ isClose, onClick, onClose });
      return isBool(isInitial)
        ? (<div
            key={name}

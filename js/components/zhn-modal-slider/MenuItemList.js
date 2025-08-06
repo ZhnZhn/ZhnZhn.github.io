@@ -14,7 +14,6 @@ const SUB_MENU = 'sub',
     position: 'relative'
   },
   S_INPUT_SWITCH = {
-    lineHeight: 'initial',
     height: 35,
     paddingTop: 9
   },
@@ -22,7 +21,7 @@ const SUB_MENU = 'sub',
     ..._styleFn.S_INLINE,
     ...(0, _styleFn.crAbsoluteTopLeftStyle)(0, 4, !0),
     color: 'inherit',
-    padding: '1px 16px 1px 0px',
+    padding: '1px 16px 1px 0',
     fontWeight: 'bold'
   };
 const _fClick = _ref => {

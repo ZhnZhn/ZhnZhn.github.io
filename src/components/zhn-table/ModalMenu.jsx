@@ -13,9 +13,8 @@ import ModalPane from "../zhn-moleculs/ModalPane";
 
 import { getColorBlack } from "./Style";
 
-const S_ROW = {
-  padding: '6px 0',
-  lineHeight: 'initial'
+const S_INPUT_SWITCH = {
+  padding: '6px 0'
 }
 , _crHrStyle = () => ({
   borderColor: getColorBlack(),
@@ -33,7 +32,7 @@ const _crRowCheckBoxElement = (
 ) => (
   <InputSwitch
     key={h.name}
-    style={S_ROW}
+    style={S_INPUT_SWITCH}
     caption={h.name}
     initialValue={!h.isHide}
     onToggle={onToggle}
@@ -95,7 +94,7 @@ const ModalMenu = ({
      onClose={onClose}
    >
      <InputSwitch
-       style={S_ROW}
+       style={S_INPUT_SWITCH}
        caption="withStripLines"
        initialValue={isGridLine}
        onToggle={onToggleGrid}

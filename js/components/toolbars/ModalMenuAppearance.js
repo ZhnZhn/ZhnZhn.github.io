@@ -10,11 +10,10 @@ var _RowCaptionInput = _interopRequireDefault(require("./RowCaptionInput"));
 var _ModalMenu = require("./ModalMenu.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_MENU_PANE = {
-    margin: "12px 0px 10px 10px"
+    margin: "12px 0 10px 10px"
   },
   S_INPUT_SWITCH = {
-    lineHeight: 'initial',
-    padding: '0px 12px 14px 0px'
+    padding: '0 12px 14px 0'
   },
   S_CAPTION_STYLE = {
     width: void 0,
