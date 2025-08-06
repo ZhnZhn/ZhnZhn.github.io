@@ -52,8 +52,5 @@
   }
   .show-cont {
     animation: showing-cont 200ms ease-out;
-  }
-  .check-in {    
-    animation: checking 0.1s ease-in forwards;  
-  } 
+  }  
 }

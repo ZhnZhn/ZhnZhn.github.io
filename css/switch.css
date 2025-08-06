@@ -3,6 +3,7 @@
   flex-direction: row-reverse;
   justify-content: space-between;  
   column-gap: 12px;
+  line-height: initial;
 }
 
 .switch {
