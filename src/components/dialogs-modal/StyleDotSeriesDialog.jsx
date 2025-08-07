@@ -16,10 +16,14 @@ import memoIsShow from '../hoc/memoIsShow';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import useCommandButtons from '../zhn-moleculs/useCommandButtons';
-import RowCheckBox1 from '../dialogs/rows/RowCheckBox1';
+import InputSwitch from '../zhn/InputSwitch';
 import RowInputText from '../dialogs/RowInputText';
 
-const S_ROW = {
+const S_INPUT_SWITCH = {
+  width: 'fit-content',
+  padding: '16px 0 14px 28px'
+}
+, S_ROW_INPUT = {
   paddingLeft: 8,
   paddingBottom: 8
 }
@@ -93,13 +97,9 @@ const StyleDotSeriesDialog = memoIsShow(({
   , _refInputR1 = useRef()
   , _refInputR2 = useRef()
   , _refIsLabels = useRef(!1)
-  , [
-    _hEnableLabels,
-    _hDisableLabels
-  ] = useMemo(() => [
-    () => { setRefValue(_refIsLabels, !0) },
-    () => { setRefValue(_refIsLabels, !1) }
-  ], [])
+  ,  _toggleEnableLabels = useMemo(() =>
+      (is) => { setRefValue(_refIsLabels, is) }
+  , [])
   , _hApply = useMemo(() => () => {
     const { chart } = data
     , _series = chart.series
@@ -139,14 +139,13 @@ const StyleDotSeriesDialog = memoIsShow(({
       commandButtons={_commandButtons}
       onClose={onClose}
     >
-      <div style={S_ROW}>
-        <RowCheckBox1
-          caption="Enable Labels"
-          onCheck={_hEnableLabels}
-          onUnCheck={_hDisableLabels}
-        />
-      </div>
-      <div style={S_ROW}>
+
+      <InputSwitch
+        style={S_INPUT_SWITCH}
+        caption="Enable Labels"
+        onToggle={_toggleEnableLabels}
+      />
+      <div style={S_ROW_INPUT}>
         <RowInputRadius
            refEl={_refInputR1}
            color={c1}

@@ -10,10 +10,14 @@ var _styleFn = require("../styleFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _useCommandButtons = _interopRequireDefault(require("../zhn-moleculs/useCommandButtons"));
-var _RowCheckBox = _interopRequireDefault(require("../dialogs/rows/RowCheckBox1"));
+var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
 var _RowInputText = _interopRequireDefault(require("../dialogs/RowInputText"));
 var _jsxRuntime = require("react/jsx-runtime");
-const S_ROW = {
+const S_INPUT_SWITCH = {
+    width: 'fit-content',
+    padding: '16px 0 14px 28px'
+  },
+  S_ROW_INPUT = {
     paddingLeft: 8,
     paddingBottom: 8
   },
@@ -78,11 +82,9 @@ const StyleDotSeriesDialog = (0, _memoIsShow.default)(_ref2 => {
     _refInputR1 = (0, _uiApi.useRef)(),
     _refInputR2 = (0, _uiApi.useRef)(),
     _refIsLabels = (0, _uiApi.useRef)(!1),
-    [_hEnableLabels, _hDisableLabels] = (0, _uiApi.useMemo)(() => [() => {
-      (0, _uiApi.setRefValue)(_refIsLabels, !0);
-    }, () => {
-      (0, _uiApi.setRefValue)(_refIsLabels, !1);
-    }], []),
+    _toggleEnableLabels = (0, _uiApi.useMemo)(() => is => {
+      (0, _uiApi.setRefValue)(_refIsLabels, is);
+    }, []),
     _hApply = (0, _uiApi.useMemo)(() => () => {
       const {
           chart
@@ -114,15 +116,12 @@ const StyleDotSeriesDialog = (0, _memoIsShow.default)(_ref2 => {
     isShow: isShow,
     commandButtons: _commandButtons,
     onClose: onClose,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      style: S_ROW,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCheckBox.default, {
-        caption: "Enable Labels",
-        onCheck: _hEnableLabels,
-        onUnCheck: _hDisableLabels
-      })
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+      style: S_INPUT_SWITCH,
+      caption: "Enable Labels",
+      onToggle: _toggleEnableLabels
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: S_ROW,
+      style: S_ROW_INPUT,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(RowInputRadius, {
         refEl: _refInputR1,
         color: c1,
