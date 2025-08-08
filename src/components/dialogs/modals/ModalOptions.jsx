@@ -1,8 +1,11 @@
+import { useRef } from '../../uiApi';
+import { S_INLINE } from '../../styleFn';
 import { crInputNumberProps } from '../../inputFn';
 
 import { useFocusFirstItem } from '../../hooks/useFocus';
 
 import ModalPane from '../../zhn-moleculs/ModalPane';
+import FocusTrap from '../../zhn-moleculs/FocusTrap';
 import InputText from '../../zhn/InputText';
 import { SpanBoldBlack } from '../../zhn/SpanToken';
 import InputSwitch from '../../zhn/InputSwitch';
@@ -12,12 +15,13 @@ import {
   S_ROW
 } from './Style';
 
-const S_DIV_INPUT = {
-  margin: '6px 0 10px 0'
+const S_LABEL_ROUND_TO = {
+  ...S_INLINE,
+  margin: '8px 0'
 }
 , S_CAPTION = {
-  paddingRight: 4,
-  fontSize: '16px'
+  paddingRight: 4
+  //fontSize: '16px'
 };
 
 const MIN_RT = 0, MAX_RT = 3;
@@ -42,6 +46,7 @@ const ModalOptions = ({
   onClose
 }) => {
   const _refFirstItem = useFocusFirstItem(isShow)
+  , _refLastItem = useRef()
   , _isInputRoundTo = onRoundTo && _isRt(dfRt);
   return (
     <ModalPane
@@ -50,9 +55,12 @@ const ModalOptions = ({
       style={{...S_MODAL_POPUP, ...style}}
       onClose={onClose}
     >
-      {/*eslint-disable jsx-a11y/label-has-associated-control*/}
-      {_isInputRoundTo && <div style={S_DIV_INPUT}>
-          <label>
+      <FocusTrap
+        refFirst={_refFirstItem}
+        refLast={_refLastItem}
+      >
+        {/*eslint-disable jsx-a11y/label-has-associated-control*/}
+        {_isInputRoundTo && <label style={S_LABEL_ROUND_TO}>
             <SpanBoldBlack style={S_CAPTION}>Round Decimals to</SpanBoldBlack>
             <InputText
               {...crInputNumberProps(dfRt, MIN_RT, MAX_RT)}
@@ -61,19 +69,23 @@ const ModalOptions = ({
               onEnter={onClose}
             />
           </label>
-        </div>
-      }
-      {/*eslint-enable jsx-a11y/label-has-associated-control*/}
-      {ROW_CHECKBOX_CONFIGS.map(([id, caption], index) => (
-         <InputSwitch
-            key={id}
-            refEl={index === 0 && !_isInputRoundTo ? _refFirstItem : void 0}
-            style={S_ROW}
-            caption={caption}
-            onCheck={() => toggleOption(!0, id)}
-            onUnCheck={() => toggleOption(!1, id)}
-         />
-      ))}
+        }
+        {/*eslint-enable jsx-a11y/label-has-associated-control*/}
+        {ROW_CHECKBOX_CONFIGS.map(([id, caption], index) => (
+           <InputSwitch
+              key={id}
+              refEl={index === 0 && !_isInputRoundTo
+                ? _refFirstItem
+                : index === ROW_CHECKBOX_CONFIGS.length - 1
+                ? _refLastItem
+                : void 0}
+              style={S_ROW}
+              caption={caption}
+              onCheck={() => toggleOption(!0, id)}
+              onUnCheck={() => toggleOption(!1, id)}
+           />
+        ))}
+      </FocusTrap>
     </ModalPane>
   );
 }
