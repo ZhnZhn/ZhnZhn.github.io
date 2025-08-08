@@ -59,3 +59,14 @@ export const useAsyncFocusFirstItemIf = (
     _isFocus
   )
 }
+
+export const useFocusFirstItem = (
+  isFocus
+) => {
+  const _refFirstItem = useRef();
+  useAsyncFocusFirstItemIf(
+    isFocus,
+    _refFirstItem
+  );
+  return _refFirstItem
+}

@@ -11,9 +11,8 @@ var _InputSwitch = _interopRequireDefault(require("../../zhn/InputSwitch"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const ModalPopupInputs = props => {
-  const _refFirstItem = (0, _uiApi.useRef)(),
+  const _refFirstItem = (0, _useFocus.useFocusFirstItem)(props.isShow),
     _refLastItem = (0, _uiApi.useRef)();
-  (0, _useFocus.useAsyncFocusFirstItemIf)(props.isShow, _refFirstItem);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane.default, {
     isShow: props.isShow,
     className: props.className,

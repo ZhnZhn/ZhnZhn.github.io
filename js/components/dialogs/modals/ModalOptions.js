@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _inputFn = require("../../inputFn");
+var _useFocus = require("../../hooks/useFocus");
 var _ModalPane = _interopRequireDefault(require("../../zhn-moleculs/ModalPane"));
 var _InputText = _interopRequireDefault(require("../../zhn/InputText"));
 var _SpanToken = require("../../zhn/SpanToken");
@@ -31,6 +32,8 @@ const ModalOptions = _ref => {
     toggleOption,
     onClose
   } = _ref;
+  const _refFirstItem = (0, _useFocus.useFocusFirstItem)(isShow),
+    _isInputRoundTo = onRoundTo && _isRt(dfRt);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPane.default, {
     isShow: isShow,
     className: className,
@@ -39,7 +42,7 @@ const ModalOptions = _ref => {
       ...style
     },
     onClose: onClose,
-    children: [onRoundTo && _isRt(dfRt) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    children: [_isInputRoundTo && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       style: S_DIV_INPUT,
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanBoldBlack, {
@@ -47,13 +50,15 @@ const ModalOptions = _ref => {
           children: "Round Decimals to"
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
           ...(0, _inputFn.crInputNumberProps)(dfRt, MIN_RT, MAX_RT),
+          refEl: _refFirstItem,
           onChange: onRoundTo,
           onEnter: onClose
         })]
       })
-    }), ROW_CHECKBOX_CONFIGS.map(_ref2 => {
+    }), ROW_CHECKBOX_CONFIGS.map((_ref2, index) => {
       let [id, caption] = _ref2;
       return /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+        refEl: index === 0 && !_isInputRoundTo ? _refFirstItem : void 0,
         style: _Style.S_ROW,
         caption: caption,
         onCheck: () => toggleOption(!0, id),

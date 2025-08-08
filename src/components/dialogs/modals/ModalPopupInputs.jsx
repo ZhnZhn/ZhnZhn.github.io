@@ -1,5 +1,5 @@
 import { useRef } from '../../uiApi';
-import { useAsyncFocusFirstItemIf } from '../../hooks/useFocus';
+import { useFocusFirstItem } from '../../hooks/useFocus';
 
 import ModalPane from '../../zhn-moleculs/ModalPane';
 import FocusTrap from '../../zhn-moleculs/FocusTrap';
@@ -11,12 +11,8 @@ import {
 } from './Style';
 
 const ModalPopupInputs = (props) => {
-  const _refFirstItem = useRef()
+  const _refFirstItem = useFocusFirstItem(props.isShow)
   , _refLastItem = useRef();
-  useAsyncFocusFirstItemIf(
-    props.isShow,
-    _refFirstItem
-  );
   return (
     <ModalPane
       isShow={props.isShow}

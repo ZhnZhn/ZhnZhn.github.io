@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.useRefFocusIf = exports.useRefFocusElement = exports.useFnFocus = exports.useAsyncFocusFirstItemIf = void 0;
+exports.useRefFocusIf = exports.useRefFocusElement = exports.useFocusFirstItem = exports.useFnFocus = exports.useAsyncFocusFirstItemIf = void 0;
 var _uiApi = require("../uiApi");
 var _has = require("../has");
 var _useEffectTimeout = _interopRequireDefault(require("./useEffectTimeout"));
@@ -43,4 +43,10 @@ const useAsyncFocusFirstItemIf = function (isVisible, getFirstElement, mls) {
   (0, _useEffectTimeout.default)(() => (0, _uiApi.focusRefElement)(getFirstElement), mls, [_isFocus], _isFocus);
 };
 exports.useAsyncFocusFirstItemIf = useAsyncFocusFirstItemIf;
+const useFocusFirstItem = isFocus => {
+  const _refFirstItem = (0, _uiApi.useRef)();
+  useAsyncFocusFirstItemIf(isFocus, _refFirstItem);
+  return _refFirstItem;
+};
+exports.useFocusFirstItem = useFocusFirstItem;
 //# sourceMappingURL=useFocus.js.map

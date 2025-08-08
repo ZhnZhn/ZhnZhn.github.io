@@ -1,5 +1,7 @@
 import { crInputNumberProps } from '../../inputFn';
 
+import { useFocusFirstItem } from '../../hooks/useFocus';
+
 import ModalPane from '../../zhn-moleculs/ModalPane';
 import InputText from '../../zhn/InputText';
 import { SpanBoldBlack } from '../../zhn/SpanToken';
@@ -38,36 +40,42 @@ const ModalOptions = ({
   onRoundTo,
   toggleOption,
   onClose
-}) => (
-  <ModalPane
-    isShow={isShow}
-    className={className}
-    style={{...S_MODAL_POPUP, ...style}}
-    onClose={onClose}
-  >
-    {/*eslint-disable jsx-a11y/label-has-associated-control*/}
-    {onRoundTo && _isRt(dfRt) && <div style={S_DIV_INPUT}>
-        <label>
-          <SpanBoldBlack style={S_CAPTION}>Round Decimals to</SpanBoldBlack>
-          <InputText
-            {...crInputNumberProps(dfRt, MIN_RT, MAX_RT)}
-            onChange={onRoundTo}
-            onEnter={onClose}
-          />
-        </label>
-      </div>
-    }
-    {/*eslint-enable jsx-a11y/label-has-associated-control*/}
-    {ROW_CHECKBOX_CONFIGS.map(([id, caption]) => (
-       <InputSwitch
-          key={id}
-          style={S_ROW}
-          caption={caption}
-          onCheck={() => toggleOption(!0, id)}
-          onUnCheck={() => toggleOption(!1, id)}
-       />
-    ))}
-  </ModalPane>
-);
+}) => {
+  const _refFirstItem = useFocusFirstItem(isShow)
+  , _isInputRoundTo = onRoundTo && _isRt(dfRt);
+  return (
+    <ModalPane
+      isShow={isShow}
+      className={className}
+      style={{...S_MODAL_POPUP, ...style}}
+      onClose={onClose}
+    >
+      {/*eslint-disable jsx-a11y/label-has-associated-control*/}
+      {_isInputRoundTo && <div style={S_DIV_INPUT}>
+          <label>
+            <SpanBoldBlack style={S_CAPTION}>Round Decimals to</SpanBoldBlack>
+            <InputText
+              {...crInputNumberProps(dfRt, MIN_RT, MAX_RT)}
+              refEl={_refFirstItem}
+              onChange={onRoundTo}
+              onEnter={onClose}
+            />
+          </label>
+        </div>
+      }
+      {/*eslint-enable jsx-a11y/label-has-associated-control*/}
+      {ROW_CHECKBOX_CONFIGS.map(([id, caption], index) => (
+         <InputSwitch
+            key={id}
+            refEl={index === 0 && !_isInputRoundTo ? _refFirstItem : void 0}
+            style={S_ROW}
+            caption={caption}
+            onCheck={() => toggleOption(!0, id)}
+            onUnCheck={() => toggleOption(!1, id)}
+         />
+      ))}
+    </ModalPane>
+  );
+}
 
 export default ModalOptions
