@@ -44,25 +44,29 @@ const _crCheckBoxItem = (item, index, _ref) => {
     })]
   }, item.id);
 };
-const ModalToggle = props => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ModalPopupInputs.default, {
+const ModalToggle = props => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopupInputs.default, {
   ...props,
-  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
-    items: props.selectProps,
-    crItem: _crCheckBoxItem,
-    onToggle: props.onToggle,
-    onCheckCaption: props.onCheckCaption,
-    onUnCheckCaption: props.onUnCheckCaption
-  }), props.isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
-    style: _Style.S_ROW_INPUT_SWITCH,
-    caption: "From Date",
-    initialValue: props.isShowFd,
-    onToggle: props.onToggleFd
-  }, "isShowFd"), props.isCh && props.onToggleChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
-    style: _Style.S_ROW_INPUT_SWITCH,
-    caption: "Chart",
-    initialValue: props.isShowChart,
-    onToggle: props.onToggleChart
-  }, "isShowChart")]
+  children: refLastItem => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {
+      items: props.selectProps,
+      crItem: _crCheckBoxItem,
+      onToggle: props.onToggle,
+      onCheckCaption: props.onCheckCaption,
+      onUnCheckCaption: props.onUnCheckCaption
+    }), props.isFd && /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+      refEl: refLastItem,
+      style: _Style.S_ROW_INPUT_SWITCH,
+      caption: "From Date",
+      initialValue: props.isShowFd,
+      onToggle: props.onToggleFd
+    }, "isShowFd"), props.isCh && props.onToggleChart && /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+      refEl: refLastItem,
+      style: _Style.S_ROW_INPUT_SWITCH,
+      caption: "Chart",
+      initialValue: props.isShowChart,
+      onToggle: props.onToggleChart
+    }, "isShowChart")]
+  })
 });
 var _default = exports.default = ModalToggle;
 //# sourceMappingURL=ModalToggle.js.map

@@ -2,6 +2,7 @@ import { useRef } from '../../uiApi';
 import { useAsyncFocusFirstItemIf } from '../../hooks/useFocus';
 
 import ModalPane from '../../zhn-moleculs/ModalPane';
+import FocusTrap from '../../zhn-moleculs/FocusTrap';
 import InputSwitch from '../../zhn/InputSwitch';
 
 import {
@@ -10,7 +11,8 @@ import {
 } from './Style';
 
 const ModalPopupInputs = (props) => {
-  const _refFirstItem = useRef();
+  const _refFirstItem = useRef()
+  , _refLastItem = useRef();
   useAsyncFocusFirstItemIf(
     props.isShow,
     _refFirstItem
@@ -22,15 +24,20 @@ const ModalPopupInputs = (props) => {
       style={{...S_MODAL_POPUP, ...props.style}}
       onClose={props.onClose}
     >
-      <InputSwitch
-        key="isShowLabels"
-        refEl={_refFirstItem}
-        style={S_ROW_INPUT_SWITCH}
-        caption="Input Labels"
-        initialValue={props.isShowLabels}
-        onToggle={props.onToggleLabels}
-      />
-      {props.children}
+      <FocusTrap
+        refFirst={_refFirstItem}
+        refLast={_refLastItem}
+      >
+        <InputSwitch
+          key="isShowLabels"
+          refEl={_refFirstItem}
+          style={S_ROW_INPUT_SWITCH}
+          caption="Input Labels"
+          initialValue={props.isShowLabels}
+          onToggle={props.onToggleLabels}
+        />
+        {props.children(_refLastItem)}
+      </FocusTrap>
     </ModalPane>
   );
 }

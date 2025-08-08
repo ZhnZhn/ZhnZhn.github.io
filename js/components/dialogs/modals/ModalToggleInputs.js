@@ -10,7 +10,8 @@ var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const ModalToggleInputs = props => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopupInputs.default, {
   ...props,
-  children: (0, _uiApi.safeMap)(props.configs, config => /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+  children: refLastItem => (0, _uiApi.safeMap)(props.configs, (config, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+    refEl: index === props.configs.length - 1 ? refLastItem : void 0,
     style: _Style.S_ROW_INPUT_SWITCH,
     caption: config[0],
     initialValue: config[1],

@@ -62,27 +62,31 @@ const _crCheckBoxItem = (
 
 const ModalToggle = (props) => (
   <ModalPopupInputs {...props}>
-    <ItemStack
-      items={props.selectProps}
-      crItem={_crCheckBoxItem}
-      onToggle={props.onToggle}
-      onCheckCaption={props.onCheckCaption}
-      onUnCheckCaption={props.onUnCheckCaption}
-    />
-    {props.isFd && <InputSwitch
-      key="isShowFd"
-      style={S_ROW_INPUT_SWITCH}
-      caption="From Date"
-      initialValue={props.isShowFd}
-      onToggle={props.onToggleFd}
-    />}
-    {props.isCh && props.onToggleChart && <InputSwitch
-      key="isShowChart"
-      style={S_ROW_INPUT_SWITCH}
-      caption="Chart"
-      initialValue={props.isShowChart}
-      onToggle={props.onToggleChart}
-    />}
+    {(refLastItem) => (<>
+      <ItemStack
+        items={props.selectProps}
+        crItem={_crCheckBoxItem}
+        onToggle={props.onToggle}
+        onCheckCaption={props.onCheckCaption}
+        onUnCheckCaption={props.onUnCheckCaption}
+      />
+      {props.isFd && <InputSwitch
+        key="isShowFd"
+        refEl={refLastItem}
+        style={S_ROW_INPUT_SWITCH}
+        caption="From Date"
+        initialValue={props.isShowFd}
+        onToggle={props.onToggleFd}
+      />}
+      {props.isCh && props.onToggleChart && <InputSwitch
+        key="isShowChart"
+        refEl={refLastItem}
+        style={S_ROW_INPUT_SWITCH}
+        caption="Chart"
+        initialValue={props.isShowChart}
+        onToggle={props.onToggleChart}
+      />}
+    </>)}
   </ModalPopupInputs>
 );
 

@@ -7,9 +7,10 @@ import { S_ROW_INPUT_SWITCH } from './Style';
 
 const ModalToggleInputs = (props) => (
   <ModalPopupInputs {...props}>
-    {safeMap(props.configs, config => (
+    {(refLastItem) => safeMap(props.configs, (config, index) => (
       <InputSwitch
         key={config[0]}
+        refEl={index === props.configs.length - 1 ? refLastItem : void 0}
         style={S_ROW_INPUT_SWITCH}
         caption={config[0]}
         initialValue={config[1]}
