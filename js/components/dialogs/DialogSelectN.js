@@ -153,7 +153,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: _isShowFromDate,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowDate.default, {
-        innerRef: _refFromDate,
+        refEl: _refFromDate,
         isShowLabels: _isShowLabels,
         title: "From Date",
         initialValue: _initialValueFromDate,

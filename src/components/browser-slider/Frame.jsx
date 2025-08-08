@@ -116,7 +116,7 @@ const Frame = ({
   return (
     <div style={{...S_FRAME, ...style}}>
       { _isTitle && <MenuTitle
-          innerRef={_refTitle}
+          refEl={_refTitle}
           title={title}
           onClick={bindTo(onClickPrev, pageNumber)}
         />

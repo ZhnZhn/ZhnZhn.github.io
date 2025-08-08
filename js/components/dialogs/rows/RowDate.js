@@ -13,14 +13,14 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 const RowDate = props => {
   const {
-      innerRef,
+      refEl,
       title = '',
       initialValue,
       errorMsg,
       onTest
     } = props,
     _refDate = (0, _uiApi.useRef)(null);
-  (0, _uiApi.useImperativeHandle)(innerRef, () => ({
+  (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValue: () => (0, _uiApi.getInputValue)(_refDate),
     isValid: () => (0, _uiApi.isInputValid)(_refDate)
   }), []);
@@ -39,7 +39,7 @@ const RowDate = props => {
 
 /*
 RowDate.propTypes = {
-  innerRef: PropTypes.object,
+  refEl: PropTypes.object,
   isShowLabels: PropTypes.bool,
   title: PropTypes.string,
   initialValue: PropTypes.string,

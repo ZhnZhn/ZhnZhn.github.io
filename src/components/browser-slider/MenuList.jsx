@@ -27,8 +27,8 @@ const MenuList = memo(({
     <div>
       {_model.map((item, index) => (
          <MenuItem
-           innerRef={index === 0 ? refFirstItem : void 0}
            key={item.id}
+           refEl={index === 0 ? refFirstItem : void 0}           
            item={item}
            onClick={fOnClickItem(item)}
          />

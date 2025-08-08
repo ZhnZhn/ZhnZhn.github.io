@@ -7,7 +7,7 @@ var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const MenuItem = _ref => {
   let {
-    innerRef,
+    refEl,
     item,
     onClick
   } = _ref;
@@ -18,7 +18,7 @@ const MenuItem = _ref => {
     [_className, _style] = (0, _Style.getMenuItemStyle)(type);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ...(0, _a11yFn.crMenuItemRole)(onClick, "0"),
-    ref: innerRef,
+    ref: refEl,
     className: _className,
     style: _style,
     children: text

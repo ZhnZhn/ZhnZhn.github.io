@@ -14,7 +14,7 @@ import crRowLabelStyle from './crRowLabelStyle';
 
 const RowDate = (props) => {
  const {
-   innerRef,
+   refEl,
    title='',
    initialValue,
    errorMsg,
@@ -22,7 +22,7 @@ const RowDate = (props) => {
  } = props
  , _refDate = useRef(null);
 
- useImperativeHandle(innerRef, () => ({
+ useImperativeHandle(refEl, () => ({
    getValue: () => getInputValue(_refDate),
    isValid: () => isInputValid(_refDate)
  }), []);
@@ -44,7 +44,7 @@ const RowDate = (props) => {
 
 /*
 RowDate.propTypes = {
-  innerRef: PropTypes.object,
+  refEl: PropTypes.object,
   isShowLabels: PropTypes.bool,
   title: PropTypes.string,
   initialValue: PropTypes.string,

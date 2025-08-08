@@ -7,13 +7,13 @@ import {
 } from './Style';
 
 const MenuTitle = ({
-  innerRef,
+  refEl,
   title,
   onClick
 }) => (
   <div
     {...crMenuItemRole(onClick, "0")}
-    ref={innerRef}
+    ref={refEl}
     className={CL_MENU_ITEM}
     style={S_TITLE}
   >

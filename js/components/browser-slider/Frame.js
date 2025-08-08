@@ -88,7 +88,7 @@ const Frame = _ref => {
       ...style
     },
     children: [_isTitle && /*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuTitle.default, {
-      innerRef: _refTitle,
+      refEl: _refTitle,
       title: title,
       onClick: (0, _uiApi.bindTo)(onClickPrev, pageNumber)
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Page.default, {

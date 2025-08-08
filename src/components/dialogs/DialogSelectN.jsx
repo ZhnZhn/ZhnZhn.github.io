@@ -239,7 +239,7 @@ const DialogSelectN = memoIsShow((
       </FocusFirstCombobox>
       <ShowHide isShow={_isShowFromDate}>
         <RowDate
-          innerRef={_refFromDate}
+          refEl={_refFromDate}
           isShowLabels={_isShowLabels}
           title="From Date"
           initialValue={_initialValueFromDate}

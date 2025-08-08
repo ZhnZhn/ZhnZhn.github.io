@@ -2,7 +2,7 @@ import { crMenuItemRole } from '../a11yFn';
 import { getMenuItemStyle } from './Style';
 
 const MenuItem = ({
-  innerRef,
+  refEl,
   item,
   onClick
 }) => {
@@ -13,12 +13,12 @@ const MenuItem = ({
   , [
     _className,
     _style
-  ] = getMenuItemStyle(type)
+  ] = getMenuItemStyle(type);
 
   return (
     <div
       {...crMenuItemRole(onClick, "0")}
-      ref={innerRef}
+      ref={refEl}
       className={_className}
       style={_style}
    >
