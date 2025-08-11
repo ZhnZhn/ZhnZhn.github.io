@@ -4,11 +4,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../../uiApi");
-var _ModalPopupInputs = _interopRequireDefault(require("./ModalPopupInputs"));
+var _ModalPopups = require("./ModalPopups");
 var _InputSwitch = _interopRequireDefault(require("../../zhn/InputSwitch"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const ModalToggleInputs = props => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopupInputs.default, {
+const ModalToggleInputs = props => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopups.ModalPopupInputs, {
   ...props,
   children: refLastItem => (0, _uiApi.safeMap)(props.configs, (config, index) => /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
     refEl: index === props.configs.length - 1 ? refLastItem : void 0,

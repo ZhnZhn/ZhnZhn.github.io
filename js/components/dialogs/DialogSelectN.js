@@ -23,7 +23,7 @@ var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessa
 var _FocusFirstCombobox = _interopRequireDefault(require("../zhn-moleculs/FocusFirstCombobox"));
 var _Toolbar = _interopRequireDefault(require("./Toolbar"));
 var _SelectList = _interopRequireDefault(require("./SelectList"));
-var _ModalOptions = _interopRequireDefault(require("./modals/ModalOptions"));
+var _ModalPopups = require("./modals/ModalPopups");
 var _ModalToggle = _interopRequireDefault(require("./modals/ModalToggle"));
 var _RowChartDate = _interopRequireDefault(require("./rows/RowChartDate"));
 var _RowDate = _interopRequireDefault(require("./rows/RowDate"));
@@ -119,7 +119,7 @@ const DialogSelectN = (0, _memoIsShow.default)(props => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Toolbar.default, {
       isShow: _isToolbar,
       buttons: _toolbarButtons
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalOptions.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopups.ModalOptions, {
       isShow: _isShowOptions,
       dfRt: dfRt,
       onRoundTo: _setPropertyRoundTo,

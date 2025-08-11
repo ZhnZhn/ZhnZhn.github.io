@@ -20,7 +20,7 @@ import ItemStack from '../zhn/ItemStack';
 import ValidationMessages from '../zhn/ValidationMessages';
 
 import Toolbar from '../dialogs/Toolbar';
-import ModalOptions from '../dialogs/modals/ModalOptions';
+import { ModalOptions } from '../dialogs/modals/ModalPopups';
 import RowChartDate from '../dialogs/rows/RowChartDate';
 
 import crSelectItem from './crSelectItem';

@@ -1,6 +1,6 @@
 import { safeMap } from '../../uiApi';
 
-import ModalPopupInputs from './ModalPopupInputs';
+import { ModalPopupInputs } from './ModalPopups';
 import InputSwitch from '../../zhn/InputSwitch';
 
 import { S_ROW_INPUT_SWITCH } from './Style';

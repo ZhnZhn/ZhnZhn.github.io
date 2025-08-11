@@ -7,7 +7,7 @@ var _isTypeFn = require("../../../utils/isTypeFn");
 var _styleFn = require("../../styleFn");
 var _ItemStack = _interopRequireDefault(require("../../zhn/ItemStack"));
 var _InputSwitch = _interopRequireDefault(require("../../zhn/InputSwitch"));
-var _ModalPopupInputs = _interopRequireDefault(require("./ModalPopupInputs"));
+var _ModalPopups = require("./ModalPopups");
 var _RowCheckBox = _interopRequireDefault(require("../rows/RowCheckBox1"));
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -44,7 +44,7 @@ const _crCheckBoxItem = (item, index, _ref) => {
     })]
   }, item.id);
 };
-const ModalToggle = props => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopupInputs.default, {
+const ModalToggle = props => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopups.ModalPopupInputs, {
   ...props,
   children: refLastItem => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ItemStack.default, {

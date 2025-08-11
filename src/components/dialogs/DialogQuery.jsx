@@ -1,21 +1,14 @@
-import {
-  isStrNotBlank
-} from '../../utils/isTypeFn';
-
-import {
-  CHT_SPLINE
-} from '../../constants/ChartType';
+import { isStrNotBlank } from '../../utils/isTypeFn';
+import { CHT_SPLINE } from '../../constants/ChartType';
 
 import {
   useRef,
   useState,
   getRefValue,
   getInputValue,
-  //IfTrue
 } from '../uiApi';
 
 import memoIsShow from '../hoc/memoIsShow';
-//import { useToggle } from '../hooks/useToggle';
 import useEventCallback from '../hooks/useEventCallback';
 
 import useToggleLabels from './hooks/useToggleLabels';
@@ -25,13 +18,11 @@ import useDialogOptions from './hooks/useDialogOptions';
 import { crChartOptions } from './ChartOptionsFn';
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-//import ShowHide from '../zhn/ShowHide';
 
 import Toolbar from './Toolbar';
-import ModalOptions from './modals/ModalOptions';
+import { ModalOptions } from './modals/ModalPopups';
 import RowPattern from './rows/RowPattern';
 import RowChartDate from './rows/RowChartDate';
-//import InputPeriod from './rows/InputPeriod';
 
 const ERR_MSG = 'Empty or Id format is not valid'
 , S_ID_CAPTION = { width: 85 }

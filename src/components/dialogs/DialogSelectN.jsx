@@ -31,7 +31,7 @@ import FocusFirstCombobox from '../zhn-moleculs/FocusFirstCombobox';
 
 import Toolbar from './Toolbar';
 import SelectList from './SelectList';
-import ModalOptions from './modals/ModalOptions';
+import { ModalOptions } from './modals/ModalPopups';
 import ModalToggle from './modals/ModalToggle';
 import RowChartDate from './rows/RowChartDate';
 import RowDate from './rows/RowDate';

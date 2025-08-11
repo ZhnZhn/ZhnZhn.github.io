@@ -14,15 +14,10 @@ var _useDialogOptions = _interopRequireDefault(require("./hooks/useDialogOptions
 var _ChartOptionsFn = require("./ChartOptionsFn");
 var _DraggableDialog = _interopRequireDefault(require("../zhn-moleculs/DraggableDialog"));
 var _Toolbar = _interopRequireDefault(require("./Toolbar"));
-var _ModalOptions = _interopRequireDefault(require("./modals/ModalOptions"));
+var _ModalPopups = require("./modals/ModalPopups");
 var _RowPattern = _interopRequireDefault(require("./rows/RowPattern"));
 var _RowChartDate = _interopRequireDefault(require("./rows/RowChartDate"));
 var _jsxRuntime = require("react/jsx-runtime");
-//import { useToggle } from '../hooks/useToggle';
-
-//import ShowHide from '../zhn/ShowHide';
-
-//import InputPeriod from './rows/InputPeriod';
 const ERR_MSG = 'Empty or Id format is not valid',
   S_ID_CAPTION = {
     width: 85
@@ -96,7 +91,7 @@ const DialogQuery = (0, _memoIsShow.default)(props => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Toolbar.default, {
       isShow: _isToolbar,
       buttons: _toolbarButtons
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalOptions.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopups.ModalOptions, {
       isShow: _isShowOptions,
       toggleOption: _toggleDialogOption,
       onClose: _hideOptions

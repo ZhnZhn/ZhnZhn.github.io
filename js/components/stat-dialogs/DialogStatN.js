@@ -12,7 +12,7 @@ var _Spinner = require("../zhn/Spinner");
 var _ItemStack = _interopRequireDefault(require("../zhn/ItemStack"));
 var _ValidationMessages = _interopRequireDefault(require("../zhn/ValidationMessages"));
 var _Toolbar = _interopRequireDefault(require("../dialogs/Toolbar"));
-var _ModalOptions = _interopRequireDefault(require("../dialogs/modals/ModalOptions"));
+var _ModalPopups = require("../dialogs/modals/ModalPopups");
 var _RowChartDate = _interopRequireDefault(require("../dialogs/rows/RowChartDate"));
 var _crSelectItem = _interopRequireDefault(require("./crSelectItem"));
 var _crIsId = require("./crIsId");
@@ -193,7 +193,7 @@ const DialogStatN = (0, _memoIsShow.default)(props => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Toolbar.default, {
       isShow: isToolbar,
       buttons: toolbarButtons
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalOptions.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPopups.ModalOptions, {
       isShow: isShowOptions,
       dfRt: dfRt,
       onRoundTo: _setRoundTo,

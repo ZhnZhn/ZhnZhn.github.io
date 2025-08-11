@@ -8,7 +8,7 @@ import {
 import ItemStack from '../../zhn/ItemStack';
 import InputSwitch from '../../zhn/InputSwitch';
 
-import ModalPopupInputs from './ModalPopupInputs';
+import { ModalPopupInputs } from './ModalPopups';
 import RowCheckBox1 from '../rows/RowCheckBox1';
 
 import {
