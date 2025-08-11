@@ -1,0 +1,36 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/modals/ModalPopupInputsView.js"
+ ],
+ "file": "../../../../src/components/dialogs/modals/ModalPopupInputsView.js",
+ "names": [
+  "_ModalPopup",
+  "require",
+  "_InputSwitch",
+  "_interopRequireDefault",
+  "_Style",
+  "_jsxRuntime",
+  "ModalPopupInputsView",
+  "props",
+  "refFirstItem",
+  "refLastItem",
+  "useModalPopup",
+  "jsxs",
+  "Fragment",
+  "children",
+  "jsx",
+  "default",
+  "refEl",
+  "style",
+  "S_ROW_INPUT_SWITCH",
+  "caption",
+  "initialValue",
+  "isShowLabels",
+  "onToggle",
+  "onToggleLabels",
+  "_default",
+  "exports"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,WAAA,GAAAC,OAAA;AAEA,IAAAC,YAAA,GAAAC,sBAAA,CAAAF,OAAA;AACA,IAAAG,MAAA,GAAAH,OAAA;AAA6C,IAAAI,WAAA,GAAAJ,OAAA;AAE7C,MAAMK,oBAAoB,GAAIC,KAAK,IAAK;EACtC,MAAM,CACJC,YAAY,EACZC,WAAW,CACZ,GAAG,IAAAC,yBAAa,EAAC,CAAC;EACnB,oBAAQ,IAAAL,WAAA,CAAAM,IAAA,EAAAN,WAAA,CAAAO,QAAA;IAAAC,QAAA,gBACN,IAAAR,WAAA,CAAAS,GAAA,EAACZ,YAAA,CAAAa,OAAW;MAEVC,KAAK,EAAER,YAAa;MACpBS,KAAK,EAAEC,yBAAmB;MAC1BC,OAAO,EAAC,cAAc;MACtBC,YAAY,EAAEb,KAAK,CAACc,YAAa;MACjCC,QAAQ,EAAEf,KAAK,CAACgB;IAAe,GAL3B,cAML,CAAC,EACDhB,KAAK,CAACM,QAAQ,CAACJ,WAAW,CAAC;EAAA,CAC5B,CAAC;AACL,CAAC;AAAA,IAAAe,QAAA,GAAAC,OAAA,CAAAV,OAAA,GAEcT,oBAAoB"
+}
