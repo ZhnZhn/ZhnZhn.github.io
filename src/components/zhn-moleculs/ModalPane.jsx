@@ -1,4 +1,3 @@
-import { crPresentationRole } from '../a11yFn';
 import {
   CL_POPUP_MENU,
   crCn,
@@ -15,17 +14,19 @@ const ModalPane = ({
   className,
   style,
   children,
-  onClose
+  onClose,
+  ...restProps
 }) => {
   const _refNode = useClickOutside(isShow, onClose)
   , _hKeyEscape = useKeyEscape(onClose);
   /*eslint-disable jsx-a11y/no-static-element-interactions*/
   return (
     <div
-       {...crPresentationRole(isShow)}
+       {...restProps}
        ref={_refNode}
        className={crCn(CL_MODAL_PANE, className)}
        style={style}
+       hidden={!isShow}
        onKeyDown={isShow ? _hKeyEscape : void 0}
     >
       {children}
