@@ -4,8 +4,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _seriaFn = require("../../math/seriaFn");
-var _ModalMenu = require("./ModalMenu.Style");
-var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
+var _ModalPopup = require("../zhn-moleculs/ModalPopup");
+var _crModalPopup = _interopRequireDefault(require("./crModalPopup"));
 var _RowFnType = _interopRequireDefault(require("./RowFnType1"));
 var _RowNorm = _interopRequireDefault(require("./RowNorm"));
 var _RowIndicators = require("./RowIndicators");
@@ -26,7 +26,7 @@ const NORM_CAPTION_EL = /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment,
   }), ")"]
 });
 const DF_GET_GHART = () => {};
-const ModalMenuIndicator = _ref => {
+const ModalMenuIndicatorView = _ref => {
   let {
     isShow,
     style,
@@ -36,35 +36,29 @@ const ModalMenuIndicator = _ref => {
     onAddMfi,
     onRemoveMfi
   } = _ref;
-  return getChart() ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalPane.default, {
-    isShow: isShow,
-    style: {
-      ..._ModalMenu.S_MODAL_MENU,
-      ...style
-    },
-    onClose: onClose,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      style: S_PANE,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowFnType.default, {
-        caption: "Changes Between",
-        configArr: FN_DIFF,
-        getChart: getChart
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowFnType.default, {
-        caption: "Growth Rate",
-        configArr: FN_ROC,
-        getChart: getChart
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowNorm.default, {
-        caption: NORM_CAPTION_EL,
-        configArr: FN_NORM,
-        getChart: getChart
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowIndicators.RowIndicators, {
-        config: config,
-        getChart: getChart,
-        onAddMfi: onAddMfi,
-        onRemoveMfi: onRemoveMfi
-      })]
-    })
+  const refFirstItem = (0, _ModalPopup.useModalPopup)()[0];
+  return getChart() ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    style: S_PANE,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_RowFnType.default, {
+      refEl: refFirstItem,
+      caption: "Changes Between",
+      configArr: FN_DIFF,
+      getChart: getChart
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowFnType.default, {
+      caption: "Growth Rate",
+      configArr: FN_ROC,
+      getChart: getChart
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowNorm.default, {
+      caption: NORM_CAPTION_EL,
+      configArr: FN_NORM,
+      getChart: getChart
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowIndicators.RowIndicators, {
+      config: config,
+      getChart: getChart,
+      onAddMfi: onAddMfi,
+      onRemoveMfi: onRemoveMfi
+    })]
   }) : null;
 };
-var _default = exports.default = ModalMenuIndicator;
+var _default = exports.default = (0, _crModalPopup.default)(ModalMenuIndicatorView);
 //# sourceMappingURL=ModalMenuIndicator.js.map

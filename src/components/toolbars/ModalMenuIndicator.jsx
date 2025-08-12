@@ -4,9 +4,9 @@ import {
   normalize
 } from '../../math/seriaFn';
 
-import { S_MODAL_MENU } from './ModalMenu.Style';
+import { useModalPopup } from '../zhn-moleculs/ModalPopup';
+import crModalPopup from './crModalPopup';
 
-import ModalPane from '../zhn-moleculs/ModalPane';
 import RowFnType1 from './RowFnType1';
 import RowNorm from './RowNorm';
 import { RowIndicators } from './RowIndicators';
@@ -29,22 +29,20 @@ const NORM_CAPTION_EL = (
 
 const DF_GET_GHART = () => {};
 
-const ModalMenuIndicator = ({
-   isShow,
-   style,
-   config,
-   getChart=DF_GET_GHART,
-   onClose,
-   onAddMfi,
-   onRemoveMfi
-}) => getChart() ? (
-  <ModalPane
-    isShow={isShow}
-    style={{...S_MODAL_MENU, ...style}}
-    onClose={onClose}
-  >
+const ModalMenuIndicatorView = ({
+  isShow,
+  style,
+  config,
+  getChart=DF_GET_GHART,
+  onClose,
+  onAddMfi,
+  onRemoveMfi
+}) => {
+  const refFirstItem = useModalPopup()[0];
+  return getChart() ? (
     <div style={S_PANE}>
       <RowFnType1
+         refEl={refFirstItem}
          caption="Changes Between"
          configArr={FN_DIFF}
          getChart={getChart}
@@ -66,7 +64,7 @@ const ModalMenuIndicator = ({
          onRemoveMfi={onRemoveMfi}
       />
     </div>
-  </ModalPane>
-) : null;
+  ) : null;
+};
 
-export default ModalMenuIndicator
+export default crModalPopup(ModalMenuIndicatorView)

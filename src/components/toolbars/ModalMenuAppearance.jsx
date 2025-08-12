@@ -1,13 +1,13 @@
 import {
-  useRef,
   useMemo,
   getInputValue
 } from '../uiApi';
 
-import ModalPane from '../zhn-moleculs/ModalPane';
+import { useModalPopup } from '../zhn-moleculs/ModalPopup';
+import crModalPopup from './crModalPopup';
+
 import InputSwitch from '../zhn/InputSwitch';
 import RowCaptionInput from './RowCaptionInput';
-import { S_MODAL_MENU } from './ModalMenu.Style';
 
 const S_MENU_PANE = {
   margin: "12px 0 10px 10px"
@@ -20,15 +20,18 @@ const S_MENU_PANE = {
   paddingRight: 4
 };
 
-const ModalMenuAppearance = ({
+const ModalMenuAppearanceView = ({
   style,
   isShow,
   onClose,
   getChart,
   config
 }) => {
+  const [
+    refFirstItem,
+    _refPointWidth
+  ] = useModalPopup()
   /*eslint-disable react-hooks/exhaustive-deps */
-  const _refPointWidth = useRef()
   , [
     _toggleDataLabels,
     _onPointWidth
@@ -45,30 +48,25 @@ const ModalMenuAppearance = ({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   return (
-    <ModalPane
-      isShow={isShow}
-      style={{...S_MODAL_MENU, ...style}}
-      onClose={onClose}
-    >
-      <div style={S_MENU_PANE}>
-        <InputSwitch
-          caption="Data Labels"
-          style={S_INPUT_SWITCH}
-          onToggle={_toggleDataLabels}
-        />
-        <RowCaptionInput
-          refEl={_refPointWidth}
-          caption="Point Width"
-          isBtAdd={!1}
-          captionStyle={S_CAPTION_STYLE}
-          initValue={4}
-          min={1}
-          max={99}
-          onAdd={_onPointWidth}
-        />
-      </div>
-    </ModalPane>
+    <div style={S_MENU_PANE}>
+      <InputSwitch
+        refEl={refFirstItem}
+        caption="Data Labels"
+        style={S_INPUT_SWITCH}
+        onToggle={_toggleDataLabels}
+      />
+      <RowCaptionInput
+        refEl={_refPointWidth}
+        caption="Point Width"
+        isBtAdd={!1}
+        captionStyle={S_CAPTION_STYLE}
+        initValue={4}
+        min={1}
+        max={99}
+        onAdd={_onPointWidth}
+      />
+    </div>
   );
 };
 
-export default ModalMenuAppearance
+export default crModalPopup(ModalMenuAppearanceView)

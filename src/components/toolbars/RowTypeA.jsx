@@ -44,6 +44,7 @@ const RowTypeA = (props) => {
 
   return (
     <RowOpenClose
+      refEl={props.refEl}
       caption={props.caption}
       CompAfter={compAfter}
     >

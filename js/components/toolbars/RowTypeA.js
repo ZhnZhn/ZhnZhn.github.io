@@ -30,6 +30,7 @@ const useRowTypeA = function (mathFn, getChart, dfColor) {
 const RowTypeA = props => {
   const [dfColor, compAfter, onColor] = useRowTypeA(props.mathFn, props.getChart, props.dfColor);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowOpenClose.RowOpenClose, {
+    refEl: props.refEl,
     caption: props.caption,
     CompAfter: compAfter,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowInputColor.default, {
