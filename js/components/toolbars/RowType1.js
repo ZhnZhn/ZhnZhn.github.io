@@ -84,6 +84,7 @@ const MinusPeriod = _ref2 => {
 const _fChangeNumber = (ref, dfValue) => n => (0, _uiApi.setRefValue)(ref, (0, _isTypeFn.parseIntBy10)(n) || dfValue);
 const RowType1 = _ref3 => {
   let {
+    refEl,
     is,
     caption,
     dfColor = DF_COLOR,
@@ -107,6 +108,7 @@ const RowType1 = _ref3 => {
       zIndex: (0, _uiApi.getRefValue)(_refOnTop) ? void 0 : -1
     }, (0, _uiApi.getRefValue)(_refPeriod));
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowOpenClose.RowOpenClose, {
+    refEl: refEl,
     caption: caption,
     CompAfter: is ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MinusPeriod, {
       color: (0, _uiApi.getRefValue)(_refColor),

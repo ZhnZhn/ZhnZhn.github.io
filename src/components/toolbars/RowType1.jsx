@@ -93,6 +93,7 @@ const _fChangeNumber = (
 ) => n => setRefValue(ref, parseIntBy10(n) || dfValue);
 
 const RowType1 = ({
+  refEl,
   is,
   caption,
   dfColor=DF_COLOR,
@@ -118,6 +119,7 @@ const RowType1 = ({
 
   return (
   <RowOpenClose
+    refEl={refEl}
     caption={caption}
     CompAfter={
       is ? <MinusPeriod
