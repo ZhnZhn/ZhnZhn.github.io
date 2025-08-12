@@ -1,3 +1,4 @@
+import { safeMap } from '../uiApi';
 import useModalMenuIndicators from './useModalMenuIndicators';
 
 export const RowIndicators = ({
@@ -11,11 +12,13 @@ export const RowIndicators = ({
     onAddMfi,
     onRemoveMfi
   );
-  return indicatorConfigs.map(([RowComp, key, props]) => (
-    <RowComp
-      key={key}
-      {...props}
-      getChart={getChart}
-    />
+  return safeMap(
+    indicatorConfigs,
+    ([RowComp, key, props], index) => (
+      <RowComp
+        key={key}
+        {...props}
+        getChart={getChart}
+      />
   ));
 }
