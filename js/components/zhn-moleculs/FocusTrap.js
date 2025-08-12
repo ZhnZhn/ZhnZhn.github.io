@@ -41,6 +41,5 @@ const FocusTrap = _ref2 => {
     })]
   }) : children;
 };
-var _default = FocusTrap;
-exports.default = _default;
+var _default = exports.default = FocusTrap;
 //# sourceMappingURL=FocusTrap.js.map

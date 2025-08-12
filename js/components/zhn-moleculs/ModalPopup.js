@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.useModalPopup = exports.ModalPopup = void 0;
+exports.useModalPopup = exports.fCrModalPopup = exports.ModalPopup = void 0;
 var _uiApi = require("../uiApi");
 var _useFocus = require("../hooks/useFocus");
 var _ModalPane = _interopRequireDefault(require("./ModalPane"));
@@ -28,6 +28,7 @@ const ModalPopup = props => {
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalPopupProvider, {
       value: modalPopupContextValue,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_FocusTrap.default, {
+        refEl: modalPopupContextValue[0],
         refFirst: modalPopupContextValue[0],
         refLast: modalPopupContextValue[1],
         children: props.children
@@ -36,4 +37,22 @@ const ModalPopup = props => {
   });
 };
 exports.ModalPopup = ModalPopup;
+const fCrModalPopup = crStyle => CompView => _ref => {
+  let {
+    isShow,
+    style,
+    className,
+    onClose,
+    ...restProps
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(ModalPopup, {
+    ...crStyle(className, style),
+    isShow: isShow,
+    onClose: onClose,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(CompView, {
+      ...restProps
+    })
+  });
+};
+exports.fCrModalPopup = fCrModalPopup;
 //# sourceMappingURL=ModalPopup.js.map

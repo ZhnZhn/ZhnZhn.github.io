@@ -36,6 +36,7 @@ export const ModalPopup = (props) => {
     >
       <ModalPopupProvider value={modalPopupContextValue}>
         <FocusTrap
+          refEl={modalPopupContextValue[0]}
           refFirst={modalPopupContextValue[0]}
           refLast={modalPopupContextValue[1]}
         >
@@ -45,3 +46,19 @@ export const ModalPopup = (props) => {
     </ModalPane>
   );
 }
+
+export const fCrModalPopup = crStyle => CompView => ({
+  isShow,
+  style,
+  className,
+  onClose,
+  ...restProps
+}) => (
+  <ModalPopup
+    {...crStyle(className, style)}
+    isShow={isShow}
+    onClose={onClose}
+  >
+    <CompView {...restProps} />
+  </ModalPopup>
+);
