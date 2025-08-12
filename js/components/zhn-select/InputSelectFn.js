@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.updateOptionsIfFilters = exports.undecorateComp = exports.stepUpOption = exports.stepDownOption = exports.makeVisible = exports.decorateCurrentComp = exports.crWidthStyle = exports.crValue = exports.crOptionsFromInitialOptions = exports.crInitialStateFromProps = exports.crFilterOptions = exports.NO_ITEMS_FOUND_VALUE = void 0;
+exports.updateOptionsIfFilters = exports.undecorateComp = exports.stepUpOption = exports.stepHomeOption = exports.stepEndOption = exports.stepDownOption = exports.makeVisible = exports.decorateCurrentComp = exports.crWidthStyle = exports.crValue = exports.crOptionsFromInitialOptions = exports.crInitialStateFromProps = exports.crFilterOptions = exports.NO_ITEMS_FOUND_VALUE = void 0;
 var _uiApi = require("../uiApi");
 var _isTokenInStr = require("../../utils/isTokenInStr");
 var _CL = require("./CL");
@@ -126,11 +126,7 @@ const decorateCurrentComp = (comp, indexEl, indexActive) => {
   }
 };
 exports.decorateCurrentComp = decorateCurrentComp;
-const undecorateComp = comp => {
-  if (comp) {
-    comp.classList.remove(_CL.CL_OPTIONS_ROW_ACTIVE);
-  }
-};
+const undecorateComp = comp => comp ? (comp.classList.remove(_CL.CL_OPTIONS_ROW_ACTIVE), !0) : !1;
 exports.undecorateComp = undecorateComp;
 const _predicateStepDown = delta => delta > OPTIONS_SCROLL_TOP,
   _predicateStepUp = delta => delta < OPTIONS_SCROLL_TOP,
@@ -142,10 +138,9 @@ const _predicateStepDown = delta => delta > OPTIONS_SCROLL_TOP,
     }
   };
 const _getChildNodesLength = el => el.childNodes.length;
+const FN_FALSE = () => !1;
 const stepDownOption = (getCurrentComp, refIndexActive, indexEl, optionsEl) => {
-  const prevComp = getCurrentComp();
-  if (prevComp) {
-    undecorateComp(prevComp);
+  if (undecorateComp(getCurrentComp())) {
     (0, _uiApi.setRefValue)(refIndexActive, (0, _uiApi.getRefValue)(refIndexActive) + 1);
     if ((0, _uiApi.getRefValue)(refIndexActive) >= _getChildNodesLength(optionsEl)) {
       (0, _uiApi.setRefValue)(refIndexActive, 0);
@@ -155,10 +150,16 @@ const stepDownOption = (getCurrentComp, refIndexActive, indexEl, optionsEl) => {
   }
 };
 exports.stepDownOption = stepDownOption;
+const stepHomeOption = (getCurrentComp, refIndexActive, indexEl, optionsEl) => {
+  if (undecorateComp(getCurrentComp())) {
+    (0, _uiApi.setRefValue)(refIndexActive, 0);
+    optionsEl.scrollTop = 0;
+    _decorateByStep(FN_FALSE, getCurrentComp(), indexEl, (0, _uiApi.getRefValue)(refIndexActive), optionsEl);
+  }
+};
+exports.stepHomeOption = stepHomeOption;
 const stepUpOption = (getCurrentComp, refIndexActive, indexEl, optionsEl) => {
-  const prevComp = getCurrentComp();
-  if (prevComp) {
-    undecorateComp(prevComp);
+  if (undecorateComp(getCurrentComp())) {
     (0, _uiApi.setRefValue)(refIndexActive, (0, _uiApi.getRefValue)(refIndexActive) - 1);
     if ((0, _uiApi.getRefValue)(refIndexActive) < 0) {
       (0, _uiApi.setRefValue)(refIndexActive, _getChildNodesLength(optionsEl) - 1);
@@ -169,4 +170,13 @@ const stepUpOption = (getCurrentComp, refIndexActive, indexEl, optionsEl) => {
   }
 };
 exports.stepUpOption = stepUpOption;
+const stepEndOption = (getCurrentComp, refIndexActive, indexEl, optionsEl) => {
+  if (undecorateComp(getCurrentComp())) {
+    (0, _uiApi.setRefValue)(refIndexActive, _getChildNodesLength(optionsEl) - 1);
+    const bottomComp = getCurrentComp();
+    optionsEl.scrollTop = bottomComp.offsetTop;
+    _decorateByStep(FN_FALSE, getCurrentComp(), indexEl, (0, _uiApi.getRefValue)(refIndexActive), optionsEl);
+  }
+};
+exports.stepEndOption = stepEndOption;
 //# sourceMappingURL=InputSelectFn.js.map

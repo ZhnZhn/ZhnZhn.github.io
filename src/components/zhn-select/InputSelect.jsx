@@ -44,7 +44,9 @@ import {
   undecorateComp,
 
   stepDownOption,
-  stepUpOption
+  stepUpOption,
+  stepHomeOption,
+  stepEndOption
 } from './InputSelectFn';
 import ItemOptionDf from './ItemOptionDf';
 import OptionsView from './OptionsView';
@@ -61,7 +63,7 @@ const FN_NOOP = () => {}
 , _crItemFromInput = value => value ? {
    [DF_PROP_NAME_CAPTION]: value,
    value: value,
-   isInput: true
+   isInput: !0
 } : void 0;
 
 const InputSelect = ({
@@ -70,7 +72,7 @@ const InputSelect = ({
   ItemOptionComp=ItemOptionDf,
   options: propsOptions,
   optionName="",
-  isWithInput=false,
+  isWithInput=!1,
   maxInput=10,
   regInput=/[A-Za-z0-9()^ ]/,
 
@@ -205,7 +207,7 @@ const InputSelect = ({
           filters
         })
       }))
-      toggleIsShowOption(true)
+      toggleIsShowOption(!0)
     }
   }
 
@@ -214,7 +216,7 @@ const InputSelect = ({
      _setSelectedItemIndex(0)
      _selectItem()
 
-     toggleIsShowOption(false)
+     toggleIsShowOption(!1)
      setState(prevState => ({
        ...prevState,
        options: crOptionsFromInitialOptions(prevState),
@@ -225,13 +227,14 @@ const InputSelect = ({
   /*eslint-enable react-hooks/exhaustive-deps */
 
   , _hInputKeyDown = (evt) => {
+    let _stepOption;
     switch(evt.keyCode){
       // enter
       case 13:{
          const item = options[getRefValue(_refIndexActive)]
          , _value = _getItemCaption(item);
          if (_value){
-           toggleIsShowOption(false)
+           toggleIsShowOption(!1)
            setState(prevState => ({
              ...prevState,
              value: _value
@@ -252,27 +255,23 @@ const InputSelect = ({
         if (!isShowOption){
           toggleIsShowOption()
         } else {
-          evt.preventDefault()
-          stepDownOption(
-            _getCurrentComp,
-            _refIndexActive,
-            getRefValue(_refIndexNode),
-            getRefValue(_refOptionsComp)
-          )
+          _stepOption = stepDownOption
         }
-        break;
-      case 38: //up
-        if (isShowOption){
-          evt.preventDefault()
-          stepUpOption(
-            _getCurrentComp,
-            _refIndexActive,
-            getRefValue(_refIndexNode),
-            getRefValue(_refOptionsComp)
-          )
-        }
-        break;
-      default: return;
+      break;
+      case 38: _stepOption = stepUpOption; break;
+      case 36: _stepOption = stepHomeOption; break;
+      case 35: _stepOption = stepEndOption; break;
+      default: void 0;
+    }
+
+    if (isShowOption && _stepOption) {
+      evt.preventDefault()
+      _stepOption(
+        _getCurrentComp,
+        _refIndexActive,
+        getRefValue(_refIndexNode),
+        getRefValue(_refOptionsComp)
+      )
     }
   }
 
@@ -280,7 +279,7 @@ const InputSelect = ({
   , _hClickItem = useMemo(() => (item, index) => {
     _setSelectedItemIndex(index)
 
-    toggleIsShowOption(false)
+    toggleIsShowOption(!1)
     setState(prevState => ({
       ...prevState,
       value: _getItemCaption(item)
@@ -305,7 +304,7 @@ const InputSelect = ({
     },
     // _clearInput
     (evt) => {
-      toggleIsShowOption(false)
+      toggleIsShowOption(!1)
       if (isRefElementContaintsEvtTarget(_refBtClear, evt)) {
         _hClear()
       }
@@ -317,7 +316,7 @@ const InputSelect = ({
   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     _setSelectedItemIndex(0)
-    toggleIsShowOption(false)
+    toggleIsShowOption(!1)
     setState(crInitialStateFromProps(
       propCaption,
       propsOptions

@@ -1,4 +1,4 @@
-import {  
+import {
   getRefValue,
   setRefValue
 } from '../uiApi';
@@ -192,11 +192,11 @@ export const decorateCurrentComp = (
   }
 };
 
-export const undecorateComp = (comp) => {
-  if (comp){
-    comp.classList.remove(CL_OPTIONS_ROW_ACTIVE);
-  }
-};
+export const undecorateComp = (
+  comp
+) => comp
+  ? (comp.classList.remove(CL_OPTIONS_ROW_ACTIVE), !0)
+  : !1
 
 const _predicateStepDown = delta => delta > OPTIONS_SCROLL_TOP
 , _predicateStepUp = delta => delta < OPTIONS_SCROLL_TOP
@@ -216,17 +216,15 @@ const _predicateStepDown = delta => delta > OPTIONS_SCROLL_TOP
 
 const _getChildNodesLength = el => el.childNodes.length;
 
+const FN_FALSE = () => !1;
+
 export const stepDownOption = (
   getCurrentComp,
   refIndexActive,
   indexEl,
   optionsEl
 ) => {
-  const prevComp = getCurrentComp();
-
-  if (prevComp){
-     undecorateComp(prevComp);
-
+  if (undecorateComp(getCurrentComp())){
      setRefValue(refIndexActive, getRefValue(refIndexActive) + 1)
      if (getRefValue(refIndexActive)>=_getChildNodesLength(optionsEl)){
         setRefValue(refIndexActive, 0)
@@ -243,16 +241,33 @@ export const stepDownOption = (
   }
 }
 
+export const stepHomeOption = (
+  getCurrentComp,
+  refIndexActive,
+  indexEl,
+  optionsEl
+) => {
+  if (undecorateComp(getCurrentComp())){
+     setRefValue(refIndexActive, 0)
+     optionsEl.scrollTop = 0;
+
+     _decorateByStep(
+       FN_FALSE,
+       getCurrentComp(),
+       indexEl,
+       getRefValue(refIndexActive),
+       optionsEl
+     )
+  }
+}
+
 export const stepUpOption = (
   getCurrentComp,
   refIndexActive,
   indexEl,
   optionsEl
 ) => {
-  const prevComp = getCurrentComp();
-  if (prevComp){
-    undecorateComp(prevComp);
-
+  if (undecorateComp(getCurrentComp())){
     setRefValue(refIndexActive, getRefValue(refIndexActive) - 1)
     if (getRefValue(refIndexActive) < 0){
       setRefValue(refIndexActive, _getChildNodesLength(optionsEl) - 1)
@@ -262,6 +277,27 @@ export const stepUpOption = (
 
     _decorateByStep(
       _predicateStepUp,
+      getCurrentComp(),
+      indexEl,
+      getRefValue(refIndexActive),
+      optionsEl
+    )
+  }
+}
+
+export const stepEndOption = (
+  getCurrentComp,
+  refIndexActive,
+  indexEl,
+  optionsEl
+) => {
+  if (undecorateComp(getCurrentComp())){
+    setRefValue(refIndexActive, _getChildNodesLength(optionsEl) - 1)
+    const bottomComp = getCurrentComp();
+    optionsEl.scrollTop = bottomComp.offsetTop
+
+    _decorateByStep(
+      FN_FALSE,
       getCurrentComp(),
       indexEl,
       getRefValue(refIndexActive),
