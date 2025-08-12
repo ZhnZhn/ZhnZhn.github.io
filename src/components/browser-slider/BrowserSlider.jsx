@@ -62,9 +62,9 @@ const BrowserSlider = memo((props) => {
          onKeyDown={hKeyDown}
        >
         <BrowserMenuMore
-           is={isMenuMore}
-           toggleMenu={toggleMenuMore}
+           isShow={isMenuMore}
            toggleFilter={toggleFilterNotActive}
+           onClose={toggleMenuMore}
         />
         <BrowserCaption
            style={S_BR_CAPTION}

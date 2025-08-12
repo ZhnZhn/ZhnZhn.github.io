@@ -1,4 +1,7 @@
-import ModalPane from '../zhn-moleculs/ModalPane';
+import {
+  fCrModalPopup,
+  useModalPopup
+} from '../zhn-moleculs/ModalPopup';
 import InputSwitch from '../zhn/InputSwitch';
 
 const CL_MENU_MORE = 'charts__menu-more'
@@ -10,23 +13,23 @@ const CL_MENU_MORE = 'charts__menu-more'
   padding: '12px 12px 0 12px'
 };
 
-const BrowserMenuMore = ({
-  is,
-  toggleMenu,
+const BrowserMenuMoreView = ({
   toggleFilter
-}) => (
-  <ModalPane
-    isShow={is}
-    className={CL_MENU_MORE}
-    style={S_MENU}
-    onClose={toggleMenu}
-  >
+}) => {
+  const refFirstItem = useModalPopup()[0];
+  return (
     <InputSwitch
+      refEl={refFirstItem}
       style={S_FILTER_TOPIC}
       caption="Filter Not Active Topic"
       onToggle={toggleFilter}
     />
-  </ModalPane>
-);
+  );
+};
+
+const BrowserMenuMore = fCrModalPopup(()=>({
+  className: CL_MENU_MORE,
+  style: S_MENU
+}))(BrowserMenuMoreView)
 
 export default BrowserMenuMore

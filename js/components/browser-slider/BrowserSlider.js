@@ -49,9 +49,9 @@ const BrowserSlider = (0, _uiApi.memo)(props => {
       isShow: isShow,
       onKeyDown: hKeyDown,
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserMenuMore.default, {
-        is: isMenuMore,
-        toggleMenu: toggleMenuMore,
-        toggleFilter: toggleFilterNotActive
+        isShow: isMenuMore,
+        toggleFilter: toggleFilterNotActive,
+        onClose: toggleMenuMore
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserCaption.default, {
         style: S_BR_CAPTION,
         caption: caption,
