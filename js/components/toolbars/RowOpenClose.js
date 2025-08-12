@@ -9,11 +9,13 @@ var _Row = require("./Row.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const RowOpenClose = _ref => {
   let {
+    refEl,
     caption,
     CompAfter,
     children
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
+    refItem: refEl,
     caption: caption,
     className: _styleFn.CL_OPEN_CLOSE_BLACK,
     style: _Row.S_OPEN_CLOSE,

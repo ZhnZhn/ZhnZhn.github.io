@@ -6,11 +6,13 @@ import {
 } from './Row.Style';
 
 export const RowOpenClose = ({
+  refEl,
   caption,
   CompAfter,
   children
 }) => (
   <OpenClose
+    refItem={refEl}
     caption={caption}
     className={CL_OPEN_CLOSE_BLACK}
     style={S_OPEN_CLOSE}
