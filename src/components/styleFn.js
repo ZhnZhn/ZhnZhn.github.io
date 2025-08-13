@@ -170,6 +170,12 @@ export const crBtSvgCn = token => `bt-svg-${token}`
 export const crFlexRowCn = _fCrCn("flex-row")
 export const CL_HRZ_CONTAINER = crFlexRowCn("hrz-container")
 
+export const crVisibilityHidden = (
+  isVisible
+) => isVisible
+  ? void 0
+  : { visibility: 'hidden' }
+
 const _crTransformTranslateX = (x) => ({
   transform: `matrix(1, 0, 0, 1, ${x}, 0)`
 });

@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getScreenCase = exports.getColorBlack = exports.crWithScrollCn = exports.crStyle3 = exports.crStyle2 = exports.crSliderTransformStyle = exports.crShowHide = exports.crScrollYCn = exports.crNotSelectedCn = exports.crItemCaptionCn = exports.crFs18Cn = exports.crFlexRowCn = exports.crElementCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crColorStyle = exports.crCn = exports.crBtSvgCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBtCircle2Cn = exports.crBsContainerCn = exports.crBoldCn = exports.crBold16Cn = exports.crAbsoluteTopLeftStyle = exports.S_OPEN_CLOSE_LEVEL_2 = exports.S_NONE = exports.S_INLINE = exports.S_FLEX = exports.S_BORDER_RADIUS_2 = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TOGGLE_ARROW = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW__PANE_TOPIC = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_POPUP_MENU = exports.CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE = exports.CL_NOT_SELECTED = exports.CL_HRZ_CONTAINER = exports.CL_CHB_BLACK = exports.CL_CHARTS_MENU_MORE = exports.CL_BLACK = void 0;
+exports.getScreenCase = exports.getColorBlack = exports.crWithScrollCn = exports.crVisibilityHidden = exports.crStyle3 = exports.crStyle2 = exports.crSliderTransformStyle = exports.crShowHide = exports.crScrollYCn = exports.crNotSelectedCn = exports.crItemCaptionCn = exports.crFs18Cn = exports.crFlexRowCn = exports.crElementCn = exports.crElementBgCn = exports.crDialogCn = exports.crContainerCn = exports.crColorStyle = exports.crCn = exports.crBtSvgCn = exports.crBtCircleHfCn = exports.crBtCircleCn = exports.crBtCircle2Cn = exports.crBsContainerCn = exports.crBoldCn = exports.crBold16Cn = exports.crAbsoluteTopLeftStyle = exports.S_OPEN_CLOSE_LEVEL_2 = exports.S_NONE = exports.S_INLINE = exports.S_FLEX = exports.S_BORDER_RADIUS_2 = exports.S_BLOCK = exports.CL_WIDTH_100_PERCENT = exports.CL_TOGGLE_ARROW = exports.CL_TEXT_ELLIPSIS = exports.CL_SHOW_POPUP = exports.CL_ROW__PANE_TOPIC = exports.CL_ROW_TYPE2_TOPIC = exports.CL_ROW_TOPIC = exports.CL_ROW_PANE_TOPIC = exports.CL_POPUP_MENU = exports.CL_OPEN_CLOSE_EXP = exports.CL_OPEN_CLOSE_BLACK = exports.CL_OPEN_CLOSE = exports.CL_NOT_SELECTED = exports.CL_HRZ_CONTAINER = exports.CL_CHB_BLACK = exports.CL_CHARTS_MENU_MORE = exports.CL_BLACK = void 0;
 var _uiApi = require("./uiApi");
 var _has = require("./has");
 var _uiTheme = require("./styles/uiTheme");
@@ -97,6 +97,10 @@ const crBtSvgCn = token => `bt-svg-${token}`;
 exports.crBtSvgCn = crBtSvgCn;
 const crFlexRowCn = exports.crFlexRowCn = _fCrCn("flex-row");
 const CL_HRZ_CONTAINER = exports.CL_HRZ_CONTAINER = crFlexRowCn("hrz-container");
+const crVisibilityHidden = isVisible => isVisible ? void 0 : {
+  visibility: 'hidden'
+};
+exports.crVisibilityHidden = crVisibilityHidden;
 const _crTransformTranslateX = x => ({
   transform: `matrix(1, 0, 0, 1, ${x}, 0)`
 });
