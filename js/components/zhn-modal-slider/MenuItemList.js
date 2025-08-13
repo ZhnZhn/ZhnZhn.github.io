@@ -35,7 +35,7 @@ const NextPageArrow = _ref => {
 };
 const MenuItemList = _ref2 => {
   let {
-    getRefFocus,
+    getRefItem,
     items,
     itemCl,
     pageNumber,
@@ -57,7 +57,7 @@ const MenuItemList = _ref2 => {
       return (0, _isTypeFn.isBool)(isInitial) ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         ...(0, _a11yFn.crMenuItemRole)(),
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
-          refEl: getRefFocus(index),
+          refEl: getRefItem(index),
           className: cn || itemCl,
           style: S_INPUT_SWITCH,
           initialValue: isInitial,
@@ -65,7 +65,7 @@ const MenuItemList = _ref2 => {
           onToggle: _onClick
         })
       }, name) : /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        ref: getRefFocus(index),
+        ref: getRefItem(index),
         className: cn || itemCl,
         style: S_ITEM,
         ...(0, _a11yFn.crMenuItemRole)(_onClick, "0"),
@@ -84,6 +84,7 @@ MenuItemList.propTypes = {
   items: PropTypes.array,
   itemCl: PropTypes.string,
   pageNumber: PropTypes.number,
+  getRefItem: PropTypes.func,
   onNextPage: PropTypes.func,
   onClose: PropTypes.func
 }

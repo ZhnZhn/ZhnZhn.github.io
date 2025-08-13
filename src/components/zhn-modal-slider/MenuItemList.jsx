@@ -37,7 +37,7 @@ const NextPageArrow = ({
  : null;
 
 const MenuItemList = ({
-  getRefFocus,
+  getRefItem,
   items,
   itemCl,
   pageNumber,
@@ -64,7 +64,7 @@ const MenuItemList = ({
            {...crMenuItemRole()}
          >
            <InputSwitch
-             refEl={getRefFocus(index)}
+             refEl={getRefItem(index)}
              className={cn || itemCl}
              style={S_INPUT_SWITCH}
              initialValue={isInitial}
@@ -74,7 +74,7 @@ const MenuItemList = ({
          </div>)
        : (<div
             key={name}
-            ref={getRefFocus(index)}
+            ref={getRefItem(index)}
             className={cn || itemCl}
             style={S_ITEM}
             {...crMenuItemRole(_onClick, "0")}
@@ -91,6 +91,7 @@ MenuItemList.propTypes = {
   items: PropTypes.array,
   itemCl: PropTypes.string,
   pageNumber: PropTypes.number,
+  getRefItem: PropTypes.func,
   onNextPage: PropTypes.func,
   onClose: PropTypes.func
 }

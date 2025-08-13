@@ -46,7 +46,18 @@ export const useRefFocusIf = (
   return ref;
 }
 
-export const useAsyncFocusFirstItemIf = (
+export const useFocusFirstItem = (
+  isFocus
+) => {
+  const _refFirstItem = useRef();
+  useAsyncFocusFirstItemIf(
+    isFocus,
+    _refFirstItem
+  );
+  return _refFirstItem
+}
+
+const useAsyncFocusFirstItemIf = (
   isVisible,
   getFirstElement,
   mls = 350
@@ -59,13 +70,27 @@ export const useAsyncFocusFirstItemIf = (
   )
 }
 
-export const useFocusFirstItem = (
-  isFocus
+export const useItemsFocusTrap = (
+  items,
+  isVisible,
+  isFirstItem = !0
 ) => {
-  const _refFirstItem = useRef();
+  const _refFirstItem = useRef()
+  , _refLastItem = useRef()
+  , _getRefItem = index => isFirstItem && index === 0
+    ? _refFirstItem
+    : index === items.length - 1
+    ? _refLastItem
+    : void 0;
+
   useAsyncFocusFirstItemIf(
-    isFocus,
+    isVisible,
     _refFirstItem
-  );
-  return _refFirstItem
+  )
+
+  return [
+    _refFirstItem,
+    _refLastItem,
+    _getRefItem
+  ];
 }
