@@ -1,8 +1,10 @@
 import { useRef } from '../uiApi';
+import { crVisibilityHidden } from '../styleFn';
 
 import useItemsFocusTrap from '../hooks/useItemsFocusTrap';
 import useGetRefValue2 from '../hooks/useGetRefValue2';
 import { useAsyncFocusFirstItemIf } from '../hooks/useFocus';
+import useCanBeHidden from './useCanBeHidden';
 
 import FocusTrap from '../zhn-moleculs/FocusTrap';
 import MenuTitle from './MenuTitle';
@@ -18,6 +20,9 @@ const MenuPage = (props) => {
   , _getFocusFirstItem = useGetRefValue2(
     _refTitle,
     _refFirstItem
+  )
+  , _style = useCanBeHidden(
+    props.canBeHidden
   );
 
   useAsyncFocusFirstItemIf(
@@ -26,7 +31,11 @@ const MenuPage = (props) => {
   );
 
   return (
-    <div style={props.style}>
+    <div style={{
+      ...props.style,
+      ...crVisibilityHidden(props.isVisible),
+      ..._style
+    }}>
       <FocusTrap
         refFirst={_getFocusFirstItem}
         refLast={_refLastItem}
@@ -54,6 +63,7 @@ const MenuPage = (props) => {
 /*
 MenuPage.propTypes = {
   isVisible: PropTypes.bool,
+  canBeHidden: PropTypes.bool,
   style: PropTypes.object,
   title: PropTypes.string,
   titleCl: PropTypes.string,

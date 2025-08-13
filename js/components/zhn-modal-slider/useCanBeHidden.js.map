@@ -1,0 +1,27 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-modal-slider/useCanBeHidden.js"
+ ],
+ "file": "../../../src/components/zhn-modal-slider/useCanBeHidden.js",
+ "names": [
+  "_uiApi",
+  "require",
+  "_styleFn",
+  "_useEffectTimeoutIf",
+  "_interopRequireDefault",
+  "useCanBeHidden",
+  "canBeHidden",
+  "hasBeenHidden",
+  "setHasBeenHidden",
+  "useState",
+  "useEffectTimeoutIf",
+  "useEffect",
+  "S_NONE",
+  "S_BLOCK",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AAKA,IAAAC,QAAA,GAAAD,OAAA;AAKA,IAAAE,mBAAA,GAAAC,sBAAA,CAAAH,OAAA;AAEA,MAAMI,cAAc,GAClBC,WAAW,IACR;EACH,MAAM,CACJC,aAAa,EACbC,gBAAgB,CACjB,GAAG,IAAAC,eAAQ,EAAC,CAAC,CAAC,CAAC;EAEhB,IAAAC,2BAAkB,EAChBJ,WAAW,EACX,MAAME,gBAAgB,CAAC,CAAC,CAAC,CAAC,EAC1B,GACF,CAAC;EAED,IAAAG,gBAAS,EAAC,MAAM;IACd,IAAI,CAACL,WAAW,EAAE;MAChBE,gBAAgB,CAAC,CAAC,CAAC,CAAC;IACtB;EACF,CAAC,EAAE,CAACF,WAAW,CAAC,CAAC;EAEjB,OAAOC,aAAa,GAChBK,eAAM,GACNC,gBAAO;AACb,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaX,cAAc"
+}
