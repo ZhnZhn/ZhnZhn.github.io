@@ -5,14 +5,14 @@ exports.__esModule = true;
 exports.useToggleState = exports.useToggleAsync = exports.useToggle = exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _uiApi = require("../uiApi");
-var _useEffectTimeout = _interopRequireDefault(require("./useEffectTimeout"));
+var _useEffectTimeoutIf = _interopRequireDefault(require("./useEffectTimeoutIf"));
 const _initState = initialValue => !!initialValue,
   _reducer = (state, value) => (0, _isTypeFn.isBool)(value) ? value : !state;
 const useToggle = initialValue => (0, _uiApi.useReducer)(_reducer, initialValue, _initState);
 exports.useToggle = useToggle;
 const useToggleAsync = (initialValue, fn, mls) => {
   const [is, toggle] = useToggle(initialValue);
-  (0, _useEffectTimeout.default)(fn, mls || 300, [is]);
+  (0, _useEffectTimeoutIf.default)(!is, fn, mls || 300);
   return [is, toggle];
 };
 exports.useToggleAsync = useToggleAsync;

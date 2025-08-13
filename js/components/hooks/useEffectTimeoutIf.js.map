@@ -1,0 +1,28 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useEffectTimeoutIf.js"
+ ],
+ "file": "../../../src/components/hooks/useEffectTimeoutIf.js",
+ "names": [
+  "_isTypeFn",
+  "require",
+  "_uiApi",
+  "useEffectTimeoutIf",
+  "is",
+  "fn",
+  "mls",
+  "_refId",
+  "useRef",
+  "useEffect",
+  "isFn",
+  "setRefValue",
+  "setTimeout",
+  "clearTimeout",
+  "getRefValue",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,SAAA,GAAAC,OAAA;AAEA,IAAAC,MAAA,GAAAD,OAAA;AAOA,MAAME,kBAAkB,GAAGA,CACzBC,EAAE,EACFC,EAAE,EACFC,GAAG,KACA;EACH,MAAMC,MAAM,GAAG,IAAAC,aAAM,EAAC,CAAC;EACvB;EACA,IAAAC,gBAAS,EAAC,MAAM;IACd,IAAIL,EAAE,IAAI,IAAAM,cAAI,EAACL,EAAE,CAAC,IAAIC,GAAG,IAAI,CAAC,EAAE;MAC9B,IAAAK,kBAAW,EAACJ,MAAM,EAAEK,UAAU,CAACP,EAAE,EAAEC,GAAG,CAAC,CAAC;IAC1C;IACA,OAAO,MAAMO,YAAY,CAAC,IAAAC,kBAAW,EAACP,MAAM,CAAC,CAAC;EAChD,CAAC,EAAE,CAACH,EAAE,CAAC,CAAC;EACR;EACA;AACF,CAAC;AAAA,IAAAW,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEcd,kBAAkB"
+}

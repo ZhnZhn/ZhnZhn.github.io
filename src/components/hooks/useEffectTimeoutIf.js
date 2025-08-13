@@ -7,22 +7,21 @@ import {
   getRefValue
 } from '../uiApi';
 
-const useEffectTimeout = (
+const useEffectTimeoutIf = (
+  is,
   fn,
-  mls,
-  deps = [],
-  predicate = true
+  mls
 ) => {
   const _refId = useRef();
   /*eslint-disable react-hooks/exhaustive-deps*/
   useEffect(() => {
-    if (predicate && isFn(fn) && mls >=0) {
+    if (is && isFn(fn) && mls >= 0) {
       setRefValue(_refId, setTimeout(fn, mls))
     }
     return () => clearTimeout(getRefValue(_refId));
-  }, deps)
-  // fn, mls, predicate
+  }, [is])
+  // fn, mls
   /*eslint-enable react-hooks/exhaustive-deps*/
 }
 
-export default useEffectTimeout
+export default useEffectTimeoutIf

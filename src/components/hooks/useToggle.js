@@ -6,7 +6,7 @@ import {
 } from '../../utils/isTypeFn';
 
 import { useReducer } from '../uiApi';
-import useEffectTimeout from './useEffectTimeout';
+import useEffectTimeoutIf from './useEffectTimeoutIf';
 
 const _initState = initialValue => !!initialValue
 , _reducer = (
@@ -30,11 +30,11 @@ export const useToggleAsync = (
   mls
 ) => {
   const [is, toggle] = useToggle(initialValue);
-  
-  useEffectTimeout(
+
+  useEffectTimeoutIf(
+    !is,
     fn,
     mls || 300,
-    [is]
   )
   return [is, toggle];
 }
