@@ -6,6 +6,7 @@ import {
 
 import useClickOutside from '../hooks/useClickOutside';
 import { useKeyEscape } from '../hooks/fUseKey';
+import { useFocusPrevElement } from '../hooks/useFocus';
 
 const CL_MODAL_PANE = crContainerCn(CL_POPUP_MENU);
 
@@ -19,6 +20,7 @@ const ModalPane = ({
 }) => {
   const _refNode = useClickOutside(isShow, onClose)
   , _hKeyEscape = useKeyEscape(onClose);
+  useFocusPrevElement(isShow)
   /*eslint-disable jsx-a11y/no-static-element-interactions*/
   return (
     <div

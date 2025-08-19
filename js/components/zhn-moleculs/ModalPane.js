@@ -6,6 +6,7 @@ exports.default = void 0;
 var _styleFn = require("../styleFn");
 var _useClickOutside = _interopRequireDefault(require("../hooks/useClickOutside"));
 var _fUseKey = require("../hooks/fUseKey");
+var _useFocus = require("../hooks/useFocus");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_MODAL_PANE = (0, _styleFn.crContainerCn)(_styleFn.CL_POPUP_MENU);
 const ModalPane = _ref => {
@@ -19,6 +20,7 @@ const ModalPane = _ref => {
   } = _ref;
   const _refNode = (0, _useClickOutside.default)(isShow, onClose),
     _hKeyEscape = (0, _fUseKey.useKeyEscape)(onClose);
+  (0, _useFocus.useFocusPrevElement)(isShow);
   /*eslint-disable jsx-a11y/no-static-element-interactions*/
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ...restProps,
