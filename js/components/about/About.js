@@ -61,11 +61,7 @@ const About = () => {
   const [isShow, show, hide, hKeyDown] = (0, _useShowHideComponent.default)(!0);
   (0, _compStore.useMsAbout)(msAbout => {
     if (msAbout) {
-      if (msAbout.is) {
-        show();
-      } else {
-        hide();
-      }
+      (msAbout.is ? show : hide)();
     }
   });
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ShowHide.default, {

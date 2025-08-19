@@ -63,11 +63,7 @@ const About = () => {
 
   useMsAbout(msAbout => {
     if (msAbout) {
-      if (msAbout.is) {
-        show()
-      } else {
-        hide()
-      }
+      (msAbout.is ? show : hide)()
     }
   })
 
