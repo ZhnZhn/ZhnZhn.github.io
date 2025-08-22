@@ -1,3 +1,5 @@
+import { CL_ROW_PANE_TOPIC } from './styleFn';
+
 export const crSubItem = (
   id,
   name,
@@ -27,10 +29,10 @@ export const addToggleTo = (
 ) => (item.isInitial = !!isInitial, item)
 
 export const crSliderMenu = (
-  titleCl,
   pageWidth,
-  maxPages,
-  items
+  items,
+  maxPages = 1,
+  titleCl = CL_ROW_PANE_TOPIC
 ) => ({
   ...items,
   titleCl,

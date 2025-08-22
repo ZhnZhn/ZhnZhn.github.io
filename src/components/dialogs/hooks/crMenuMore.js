@@ -1,8 +1,4 @@
 import {
-  CL_ROW_PANE_TOPIC
-} from '../../styleFn';
-
-import {
   crItem,
   addToggleTo,
   crSliderMenu
@@ -12,9 +8,7 @@ const crMenuMore = (
   onToggleToolbar,
   onAbout
 ) => crSliderMenu(
-  CL_ROW_PANE_TOPIC,
-  185,
-  1, {
+  185, {
     p0: [
       addToggleTo(crItem('Toolbar', onToggleToolbar, !1), !0),
       crItem('About Data Source', onAbout)

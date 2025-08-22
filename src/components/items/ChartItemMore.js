@@ -1,4 +1,3 @@
-import { CL_ROW_PANE_TOPIC } from '../styleFn';
 import {
   crItem,
   addToggleTo,
@@ -10,9 +9,7 @@ const crModel = (
   onToTop,
   hideCaption
 ) => crSliderMenu(
-  CL_ROW_PANE_TOPIC,
-  150,
-  1, {
+  150, {
   p0: [
     crItem('Move to Top', onToTop),
     addToggleTo(crItem('Caption', hideCaption), !0),

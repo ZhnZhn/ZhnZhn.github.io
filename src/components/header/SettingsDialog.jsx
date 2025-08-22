@@ -18,8 +18,6 @@ import Tab from '../zhn-tab/Tab';
 import PaneApiKey from './PaneApiKey';
 import PaneOptions from './PaneOptions';
 
-import { CL_ROW_PANE_TOPIC } from '../styleFn';
-
 const TOKEN_USER_SETTINGS = "User Settings"
 , S_MODAL = {
   position: 'static',
@@ -51,7 +49,7 @@ const SettingsDialog = memoIsShow(({
   , [
     isShowLabels,
     menuModel
-  ] = useSettingsMenuMore(CL_ROW_PANE_TOPIC)
+  ] = useSettingsMenuMore()
   , _style = crStyle2(
     S_MODAL,
     !isShowLabels && S_MODAL_SMALL

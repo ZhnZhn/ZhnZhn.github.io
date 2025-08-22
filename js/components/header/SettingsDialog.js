@@ -47,7 +47,7 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
     }, [])
     // rerender
     /*eslint-enable react-hooks/exhaustive-deps */,
-    [isShowLabels, menuModel] = (0, _useSettingsMenuMore.default)(_styleFn.CL_ROW_PANE_TOPIC),
+    [isShowLabels, menuModel] = (0, _useSettingsMenuMore.default)(),
     _style = (0, _styleFn.crStyle2)(S_MODAL, !isShowLabels && S_MODAL_SMALL);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
     refFocusLast: refFocusLast,

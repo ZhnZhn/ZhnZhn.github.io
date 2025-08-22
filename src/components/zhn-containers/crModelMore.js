@@ -1,5 +1,4 @@
 import { bindTo } from '../uiApi';
-import { CL_ROW_PANE_TOPIC } from '../styleFn';
 import {
   crSubItem,
   crItem,
@@ -25,15 +24,13 @@ const crModelMore = (isAdminMode, {
 }) => {
   const p1 = [
     crItem('Remove All', onRemoveAll),
-    crItem('Show Caption', onShowCaptions, false)
+    crItem('Show Caption', onShowCaptions, !1)
   ];
   if (isAdminMode) {
     p1.push(crItem('CompareTo', onCompareTo))
   }
   return crSliderMenu(
-    CL_ROW_PANE_TOPIC,
-    170,
-    2, {
+    170, {
       p0: P0,
       p1: p1,
       p2: [
@@ -43,13 +40,14 @@ const crModelMore = (isAdminMode, {
         crItem('Reverse', onSortBy)
       ],
       p3: [
-        crItem('to MinWidth', onMinWidth, false),
-        crItem('to InitialWidth', onInitWidth, false),
-        crItem('+10px to Width', onPlusWidth, false),
-        crItem('-10px to Width', onMinusWidth, false),
-        crItem('Fit Items to Width', onFit, false)
+        crItem('to MinWidth', onMinWidth, !1),
+        crItem('to InitialWidth', onInitWidth, !1),
+        crItem('+10px to Width', onPlusWidth, !1),
+        crItem('-10px to Width', onMinusWidth, !1),
+        crItem('Fit Items to Width', onFit, !1)
       ]
-    }
+    },
+    2
   )
 };
 

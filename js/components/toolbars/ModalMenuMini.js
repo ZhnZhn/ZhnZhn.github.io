@@ -3,12 +3,11 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _styleFn = require("../styleFn");
 var _menuModelFn = require("../menuModelFn");
 var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _ModalMenu = require("./ModalMenu.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const _crModel = (configs, onClickItem) => (0, _menuModelFn.crSliderMenu)(_styleFn.CL_ROW_PANE_TOPIC, 185, 1, {
+const _crModel = (configs, onClickItem) => (0, _menuModelFn.crSliderMenu)(185, {
   p0: (configs || []).map(_ref => {
     let {
       btTitle

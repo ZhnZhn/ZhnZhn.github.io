@@ -7,10 +7,10 @@ var _useToggle = require("../hooks/useToggle");
 var _has = require("../has");
 var _menuModelFn = require("../menuModelFn");
 const IS_WIDE_WIDTH = (0, _has.isWideWidth)();
-const useSettingsMenuMore = CL_ROW => {
+const useSettingsMenuMore = () => {
   const [isShowLabels, toggleLabels] = (0, _useToggle.useToggle)(IS_WIDE_WIDTH)
     /*eslint-disable react-hooks/exhaustive-deps */,
-    menuModel = (0, _uiApi.useMemo)(() => (0, _menuModelFn.crSliderMenu)(CL_ROW, 170, 1, {
+    menuModel = (0, _uiApi.useMemo)(() => (0, _menuModelFn.crSliderMenu)(170, {
       p0: [(0, _menuModelFn.addToggleTo)((0, _menuModelFn.crItem)("Input Labels", toggleLabels, !1), IS_WIDE_WIDTH)]
     }), []);
   //toggleLabels, CL_ROW

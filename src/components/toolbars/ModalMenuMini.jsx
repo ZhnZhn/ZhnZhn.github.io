@@ -2,9 +2,6 @@ import {
   bindTo,
   useMemo
 } from '../uiApi';
-import {
-  CL_ROW_PANE_TOPIC
-} from '../styleFn';
 
 import {
   crItem,
@@ -23,9 +20,7 @@ const _crModel = (
   configs,
   onClickItem
 ) => crSliderMenu(
-  CL_ROW_PANE_TOPIC,
-  185,
-  1, {
+  185, {
     p0: (configs || []).map(({ btTitle }) => addToggleTo(crItem(
       btTitle,
       bindTo(onClickItem, btTitle),

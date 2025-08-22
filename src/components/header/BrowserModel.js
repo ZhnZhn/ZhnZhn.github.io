@@ -116,9 +116,7 @@ const PAGE_CONFIGS_1 = [
 ];
 
 const crBrowserModel = () => crSliderMenu(
-  CL_BR,
-  215,
-  2, {
+  215, {
     p0: [
       _crSubMenuItem('Economics', 'p1'),
       _crSubMenuItem('Eurostat', 'p2'),
@@ -135,7 +133,9 @@ const crBrowserModel = () => crSliderMenu(
     p3: _crMenuItems(PAGE_CONFIGS_3),
     p4: _crMenuItems(PAGE_CONFIGS_4),
     p5: _crMenuItems(PAGE_CONFIGS_5)
-  }
+  },
+  2,
+  CL_BR
 );
 
 export default crBrowserModel

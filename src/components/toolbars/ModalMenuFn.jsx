@@ -5,9 +5,6 @@ import {
   isFn,
   useMemo
 } from '../uiApi';
-import {
-  CL_ROW_PANE_TOPIC
-} from '../styleFn';
 
 import {
   crSubItem,
@@ -46,9 +43,7 @@ const _crModelMore = (
   props,
   isItemZoom
 ) => crSliderMenu(
-  CL_ROW_PANE_TOPIC,
-  145,
-  2, {
+  145, {
   p0: filterBoolean([
     crSubItem("p1", "Chart"),
     isFn(props.onAddToWatch)
@@ -68,7 +63,8 @@ const _crModelMore = (
     crItem("Full Screen", props.onFullScreen),
     crItem("Export As", props.onExport),
     crItem("Print", props.onPrint)
-  ]}
+  ]},
+  2
 );
 
 const ModalMenuFn = (props) => {
