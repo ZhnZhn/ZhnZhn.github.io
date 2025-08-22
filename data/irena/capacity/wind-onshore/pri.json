@@ -1,1 +1,1 @@
-{"geo":"Puerto Rico","code":"pri","type":"Wind Offshore","value":"Capacity in MW","fromYear":"2000","data":[0,0,0,0,0,0,0,0,0,0,0,0.005,98.4,98.4,99,99,99,99,99,99,99,99,99,99]}
+{"geo":"Puerto Rico","code":"pri","type":"Wind Onshore","value":"Capacity in MW","fromYear":"2000","data":[0,0,0,0,0,0,0,0,0,0,0,0.01,98.4,98.4,99,99,99,99,99,99,99,99,99,99,127.8]}
