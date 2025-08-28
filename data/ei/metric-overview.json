@@ -1,6 +1,6 @@
 {"items":[    
-  {"c":"Primary energy consumption in exajoules (EJ)","v":"primary-energy-consumption-ej"},
-  {"c":"Primary energy consumption in gigajoule per capita (GJPC)","v":"primary-energy-consumption-gjpc"},
+  {"c":"Total energy supply in exajoules (EJ)","v":"total-energy-supply-ej"},
+  {"c":"Total energy supply in gigajoule per capita (GJPC)","v":"total-energy-supply-gjpc"},
   {"c":"Coal consumption in exajoules (EJ)","v":"coal-consumption-ej"},
   {"c":"Coal production in exajoules (EJ)","v":"coal-production-ej"},
   {"c":"Coal production in million tons (Mt)","v":"coal-production-mt"},  
@@ -17,8 +17,9 @@
   {"c":"Refinary throughput in 1k barrels per day (KBPD)", "v":"refinary-throughput-kbd"},
   {"c":"Nuclear energy consumption in EJ, on input-equivalent basis","v":"nuclear-energy-ej"},
   {"c":"Hydroelectricity consumption in EJ, on input-equivalent basis","v":"hydro-ej"},
-  {"c":"Renewables energy consumption in EJ, on input-equivalent basis","v":"renewables-ej"},  
+  {"c":"Renewables energy consumption in EJ, on input-equivalent basis","v":"renewables-excluding-hydro-ej"},  
   {"c":"Solar energy consumption in EJ, on input-equivalent basis","v":"solar-ej"},
-  {"c":"Wind energy consumption in EJ, on input-equivalent basis","v":"wind-ej"}
+  {"c":"Wind energy consumption in EJ, on input-equivalent basis","v":"wind-ej"},
+  {"c":"Renewables energy consumption in EJ including hydro, on input-equivalent basis","v":"renewables-ej"}  
  ]
 }

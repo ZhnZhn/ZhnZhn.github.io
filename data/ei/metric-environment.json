@@ -2,6 +2,7 @@
   {"c":"CO2 emissions in Mt from energy","v":"co2-combust-mtco2"},
   {"c":"CO2 emissions in Mt per EJ energy","v":"co2-combust-per-ej"},
   {"c":"CO2 emissions in Mt from gas flared","v":"gas-flared-mtco2"},      
-  {"c":"Gas flared in Bcm","v":"gas-flared-bcm"}
+  {"c":"Gas flared in Bcm","v":"gas-flared-bcm"},
+  {"c":"CO2 equivalent emissions from energy, process emissions, methane and flaring in Mt", "v":"co2-equivalent-emissions-mtco2"}
  ]
 }
