@@ -33,7 +33,7 @@ const _crTreeMapUrl = (option, _isTreeMap) => {
       dfTmToken
     } = option,
     geo = items[0].v;
-  if (!(0, _AdapterFn.isInRange)((0, _isTypeFn.parseIntBy10)(time), 2018, 2024)) {
+  if (!(0, _AdapterFn.isInRange)((0, _isTypeFn.parseIntBy10)(time), 2018, 2025)) {
     const _typeOfChartToken = _isTreeMap ? 'TreeMap' : 'Bar by metric';
     throw {
       message: `${_typeOfChartToken} only available for 2019-2023`

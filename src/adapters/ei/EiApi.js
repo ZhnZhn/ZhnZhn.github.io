@@ -48,7 +48,7 @@ const _crTreeMapUrl = (
   } = option
   , geo = items[0].v;
 
-  if (!isInRange(parseIntBy10(time), 2018, 2024)) {
+  if (!isInRange(parseIntBy10(time), 2018, 2025)) {
     const _typeOfChartToken = _isTreeMap
       ? 'TreeMap'
       : 'Bar by metric';
