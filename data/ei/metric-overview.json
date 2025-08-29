@@ -21,6 +21,7 @@
   {"c":"Solar energy consumption in EJ, on input-equivalent basis","v":"solar-ej"},
   {"c":"Wind energy consumption in EJ, on input-equivalent basis","v":"wind-ej"},
   {"c":"Geothermal energy consumption in EJ, on input-equivalent basis","v":"biogeo-ej"},
+  {"c":"Biofuels energy consumption in EJ, on input-equivalent basis","v":"biofuels-consumption-ej"},
   {"c":"Renewables energy consumption in EJ including hydro, on input-equivalent basis","v":"renewables-ej"}  
  ]
 }
