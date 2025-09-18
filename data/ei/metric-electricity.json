@@ -1,4 +1,5 @@
 {"items":[      
+  {"c":"Total electricity gross generation in TWh","v":"electricity-total-twh"},
   {"c":"Electricity gross generation by oil in TWh","v":"electricity-by-oil-twh"},
   {"c":"Electricity gross generation by coal in TWh","v":"electricity-by-coal-twh"},
   {"c":"Electricity gross generation by natural gas in TWh","v":"electricity-by-natural-gas-twh"},
@@ -8,9 +9,7 @@
   {"c":"Hydroelectricity net generation in TWh","v":"electricity-by-hydro-net-twh"},
   {"c":"Electricity gross generation by renewables in TWh","v":"electricity-by-renewables-twh"},
   {"c":"Electricity net generation by renewables in TWh","v":"electricity-by-renewables-net-twh"},
-  {"c":"Electricity gross generation by other in TWh","v":"electricity-by-other-twh"},
-  {"c":"Electricity gross generation by total in TWh","v":"electricity-by-total-twh"},
-  {"c":"Total electricity gross generation in TWh","v":"electricity-total-twh"},
+  {"c":"Electricity gross generation by other in TWh","v":"electricity-by-other-twh"},  
   {"c":"Electricity gross generation by solar in TWh","v":"electricity-by-solar-twh"},
   {"c":"Electricity net generation by solar in TWh","v":"electricity-by-solar-net-twh"},
   {"c":"Electricity gross generation by wind in TWh","v":"electricity-by-wind-twh"},
