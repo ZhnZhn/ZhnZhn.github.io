@@ -1,6 +1,4 @@
-import {
-  parseIntBy10
-} from '../../utils/isTypeFn';
+import { parseIntBy10 } from '../../utils/isTypeFn';
 
 import {
   isInRange,
@@ -12,30 +10,13 @@ import {
   isCategory
 } from '../CategoryFn';
 
+import fCrLineCategoryUrl from '../fCrLineCategoryUrl';
+
 const DATA_URL = './data/ei';
-
-const _crApiUrl = (
-  option
-) => {
-  const { items } = option
-  , metric = items[1].v
-  return `${DATA_URL}/${metric}`;
-}
-
-const _crLineUrl = (
-  option
-) => {
-  const { items } = option
-  , geo = items[0].v;
-  return `${_crApiUrl(option)}/${geo}.json`;
-};
-
-const _crCategoryUrl = (
-  option
-) => {
-  const { time } = option;
-  return `${_crApiUrl(option)}/by-geo-${time}.json`;
-}
+const [
+  _crLineUrl,
+  _crCategoryUrl
+] = fCrLineCategoryUrl(DATA_URL);
 
 const _crTreeMapUrl = (
   option,
