@@ -11,6 +11,7 @@ import {
   getUTCTime,
   addToDmy,
   addDaysToYmd,
+  getNextMonthDmy,
   getYTDfromDmy,
   getYear,
   getNumberOfDays,
@@ -321,6 +322,19 @@ describe('getNumberOfDays',()=>{
     expect(fn(2012, 10)).toBe(31)
     expect(fn(2012, 11)).toBe(30)
     expect(fn(2012, 12)).toBe(31)
+  })
+})
+
+describe("getNextMonthDmy", ()=>{
+  const fn = getNextMonthDmy;
+  it('should return dmy for next month', ()=>{
+    expect(fn('31-10-2018')).toBe('30-11-2018')
+    expect(fn('30-11-2018')).toBe('31-12-2018')
+    expect(fn('31-12-2018')).toBe('31-01-2019')
+    expect(fn('31-01-2019')).toBe('28-02-2019')
+    expect(fn('28-02-2019')).toBe('31-03-2019')
+    expect(fn('31-03-2019')).toBe('30-04-2019')
+    expect(fn('30-04-2019')).toBe('31-05-2019')
   })
 })
 

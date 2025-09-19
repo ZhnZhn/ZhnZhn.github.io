@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.monthIndex = exports.mlsToYmd = exports.mlsToDmy = exports.isYmdOrEmpty = exports.isYmd = exports.isDmyPeriod = exports.isDmy = exports.getYmdhmUTC = exports.getYear = exports.getYTDfromDmy = exports.getUTCTime = exports.getToDate = exports.getNumberOfDays = exports.getFromDate = exports.getDaysFromYmd = exports.getDateFromVm = exports.getCurrentYear = exports.formatStrDate = exports.dmyToUTC = exports.addToDmy = exports.addDaysToYmd = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.monthIndex = exports.mlsToYmd = exports.mlsToDmy = exports.isYmdOrEmpty = exports.isYmd = exports.isDmyPeriod = exports.isDmy = exports.getYmdhmUTC = exports.getYear = exports.getYTDfromDmy = exports.getUTCTime = exports.getToDate = exports.getNumberOfDays = exports.getNextMonthDmy = exports.getFromDate = exports.getDaysFromYmd = exports.getDateFromVm = exports.getCurrentYear = exports.formatStrDate = exports.dmyToUTC = exports.addToDmy = exports.addDaysToYmd = void 0;
 var _isTypeFn = require("./isTypeFn");
 const MIN_YEAR = 1990;
 const DF_FORECAST_DATE = 0;
@@ -110,6 +110,13 @@ const isDmy = (str, minYear) => {
 exports.isDmy = isDmy;
 const getNumberOfDays = (year, month) => new Date(year, month, 0).getDate();
 exports.getNumberOfDays = getNumberOfDays;
+const getNextMonthDmy = dmy => {
+  const _arr = dmy.split("-"),
+    month = (0, _isTypeFn.parseIntBy10)(_arr[1]),
+    year = (0, _isTypeFn.parseIntBy10)(_arr[2]);
+  return month < 12 ? `${getNumberOfDays(year, month + 1)}-${_pad2(month + 1)}-${year}` : `31-01-${year + 1}`;
+};
+exports.getNextMonthDmy = getNextMonthDmy;
 const ymdToUTC = function (dateStrOrNumberYYYY, option) {
   if (option === void 0) {
     option = {};

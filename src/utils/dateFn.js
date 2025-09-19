@@ -165,6 +165,15 @@ export const getNumberOfDays = (
   month
 ) => new Date(year, month, 0).getDate();
 
+export const getNextMonthDmy = dmy => {
+  const _arr = dmy.split("-")
+  , month = parseIntBy10(_arr[1])
+  , year = parseIntBy10(_arr[2]);
+  return month < 12
+    ? `${getNumberOfDays(year, month + 1)}-${_pad2(month+1)}-${year}`
+    : `31-01-${year+1}`;
+}
+
 export const ymdToUTC = (
   dateStrOrNumberYYYY,
   option={}
