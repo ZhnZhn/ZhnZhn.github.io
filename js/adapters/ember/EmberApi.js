@@ -1,9 +1,11 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _CategoryFn = require("../CategoryFn");
 var _fnAdapter = require("./fnAdapter");
+var _fCrLineCategoryUrl = _interopRequireDefault(require("../fCrLineCategoryUrl"));
 const API_URL = "https://ember-data-api-scg3n.ondigitalocean.app/ember",
   GENERATION = "generation",
   JSON_TOKEN = "json",
@@ -20,6 +22,7 @@ const API_URL = "https://ember-data-api-scg3n.ondigitalocean.app/ember",
   QUERY_ARRAY_TAIL = "&_shape=array",
   DATE = "date",
   YEAR = "year";
+const [_crTsLineUrl, _crTsCategoryUrl] = (0, _fCrLineCategoryUrl.default)("./data/ember");
 const _fCrProperty = suffix => (name, value) => `${name}__${suffix}=${value}`,
   _crExactProperty = _fCrProperty("exact"),
   _crGteProperty = _fCrProperty("gte"),
@@ -58,6 +61,9 @@ const _crLineUrl = (isMonthlyRoute, option) => {
 };
 const EmberApi = {
   getRequestUrl(option) {
+    if ((0, _fnAdapter.isTsRoute)(option)) {
+      return (0, _CategoryFn.isCategory)(option) ? _crTsCategoryUrl(option) : _crTsLineUrl(option);
+    }
     const _isMonthlyRoute = option.dfRId === "M",
       _crUrl = (0, _CategoryFn.isTreeMap)(option) || (0, _CategoryFn.isBarTreeMap)(option) ? _crTreeMapUrl : (0, _CategoryFn.isCategory)(option) ? _crCategoryUrl : _crLineUrl;
     option.pnDate = _isMonthlyRoute ? DATE : YEAR;
@@ -67,7 +73,7 @@ const EmberApi = {
     return _crUrl(_isMonthlyRoute, option);
   },
   checkResponse(json) {
-    if (!(0, _fnAdapter.isArr)(json)) {
+    if (!(0, _fnAdapter.isArr)(json) && !(0, _fnAdapter.isArr)((json || {}).data)) {
       throw (0, _fnAdapter.crError)();
     }
   }

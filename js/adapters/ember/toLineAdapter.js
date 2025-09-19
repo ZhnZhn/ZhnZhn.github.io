@@ -1,10 +1,12 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _crAdapterType = require("../crAdapterType1");
 var _compareByFn = require("../compareByFn");
+var _crTsFromData = _interopRequireDefault(require("../crTsFromData"));
 var _fnAdapter = require("./fnAdapter");
 const _fCrDataPoint = getDate => (value, item) => [(0, _fnAdapter.ymdToUTC)(getDate(item)), value],
   _crDataImpl = (items, getValue, getDate, isValue) => (0, _fnAdapter.crDataImpl)(items, getValue, _fCrDataPoint(getDate), isValue),
@@ -20,6 +22,9 @@ const _fCrDataPoint = getDate => (value, item) => [(0, _fnAdapter.ymdToUTC)(getD
   },
   _crSourceData = (json, metric, pnDate, source, options) => _crDataImpl(json, item => item[metric], item => item[pnDate], (0, _fnAdapter.isEuRoute)(options) ? void 0 : item => item.variable === source);
 const crData = (json, options) => {
+  if ((0, _fnAdapter.isTsRoute)(options)) {
+    return (0, _crTsFromData.default)(json);
+  }
   const source = (0, _fnAdapter.getSourceValue)(options),
     _crData = (0, _fnAdapter.isTotalData)(source) ? _crTotalData : _crSourceData;
   return _crData(json, (0, _fnAdapter.getMetricValue)(options), options.pnDate, source, options).sort(_compareByFn.compareByDate);

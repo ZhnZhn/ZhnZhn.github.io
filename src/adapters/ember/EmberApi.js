@@ -5,6 +5,7 @@ import {
 } from "../CategoryFn";
 import {
   isArr,
+  isTsRoute,
   isEuRoute,
   isUsRoute,
   crError,
@@ -13,6 +14,8 @@ import {
   getSourceValue,
   isTotalData
 } from "./fnAdapter";
+
+import fCrLineCategoryUrl from "../fCrLineCategoryUrl";
 
 const API_URL = "https://ember-data-api-scg3n.ondigitalocean.app/ember"
 , GENERATION = "generation"
@@ -29,6 +32,11 @@ const API_URL = "https://ember-data-api-scg3n.ondigitalocean.app/ember"
 , QUERY_ARRAY_TAIL = "&_shape=array"
 , DATE = "date"
 , YEAR = "year";
+
+const [
+  _crTsLineUrl,
+  _crTsCategoryUrl
+] = fCrLineCategoryUrl("./data/ember");
 
 const _fCrProperty = (suffix) => (
   name,
@@ -129,6 +137,11 @@ const _crLineUrl = (
 
 const EmberApi = {
   getRequestUrl(option) {
+    if (isTsRoute(option)) {
+      return isCategory(option)
+        ? _crTsCategoryUrl(option)
+        : _crTsLineUrl(option);
+    }
     const _isMonthlyRoute = option.dfRId === "M"
     , _crUrl = isTreeMap(option) || isBarTreeMap(option)
        ? _crTreeMapUrl
@@ -148,7 +161,7 @@ const EmberApi = {
   },
 
   checkResponse(json) {
-    if (!isArr(json)) {
+    if (!isArr(json) && !isArr((json || {}).data)) {
       throw crError();
     }
   }

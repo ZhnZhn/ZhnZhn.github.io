@@ -3,8 +3,10 @@ import { getObjectKeys } from '../../utils/isTypeFn';
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
 import crAdapterCategory from '../crAdapterCategory';
+import { crTsCategoryData } from '../toTsCategoryAdapter';
 
 import {
+  isTsRoute,
   isTotalVariable,
   isTotalData,
   fGetCategory,
@@ -72,6 +74,9 @@ const FN_IDENTITY = value => value
   json,
   options
 ) => {
+  if (isTsRoute(options)) {
+    return crTsCategoryData(json, options);
+  }
   const source = getSourceValue(options)
   , pnMetric = getMetricValue(options)
   , getCategory = fGetCategory(options)

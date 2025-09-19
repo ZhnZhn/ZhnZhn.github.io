@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdToUTC = exports.roundBy = exports.reduceToHmBy = exports.isUsRoute = exports.isTreeMapItem = exports.isTotalVariable = exports.isTotalData = exports.isEuRoute = exports.isArr = exports.getSourceValue = exports.getMetricValue = exports.getMetricCaption = exports.getGeoCaption = exports.fGetCategory = exports.crGetItemLabelValue = exports.crError = exports.crDataImpl = void 0;
+exports.ymdToUTC = exports.roundBy = exports.reduceToHmBy = exports.isUsRoute = exports.isTsRoute = exports.isTreeMapItem = exports.isTotalVariable = exports.isTotalData = exports.isEuRoute = exports.isArr = exports.getSourceValue = exports.getMetricValue = exports.getMetricCaption = exports.getGeoCaption = exports.fGetCategory = exports.crGetItemLabelValue = exports.crError = exports.crDataImpl = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isArr = _AdapterFn.isArr;
 exports.isNumber = _AdapterFn.isNumber;
@@ -10,6 +10,8 @@ exports.roundBy = _AdapterFn.roundBy;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 var _isTypeFn = require("../../utils/isTypeFn");
 exports.isNumber = _isTypeFn.isNumber;
+const isTsRoute = option => option.dfId === "EU";
+exports.isTsRoute = isTsRoute;
 const isEuRoute = option => option.dfId === "EU";
 exports.isEuRoute = isEuRoute;
 const isUsRoute = option => option.dfId === "US";

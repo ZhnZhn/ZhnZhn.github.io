@@ -2,8 +2,10 @@ import { getObjectKeys } from '../../utils/isTypeFn';
 
 import { crAdapterType1 } from '../crAdapterType1';
 import { compareByDate } from '../compareByFn';
+import crTsFromData from '../crTsFromData';
 
 import {
+  isTsRoute,
   isTotalVariable,
   isEuRoute,
   isTotalData,
@@ -68,6 +70,9 @@ const crData = (
   json,
   options
 ) => {
+  if (isTsRoute(options)) {
+    return crTsFromData(json);
+  }
   const source = getSourceValue(options)
   , _crData = isTotalData(source)
      ? _crTotalData
