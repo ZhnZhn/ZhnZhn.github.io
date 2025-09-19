@@ -1,0 +1,27 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/adapters/toTsCategoryAdapter.js"
+ ],
+ "file": "../../src/adapters/toTsCategoryAdapter.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "_CategoryFn",
+  "_crAdapterCategory",
+  "_interopRequireDefault",
+  "crTsCategoryData",
+  "json",
+  "option",
+  "_crValue",
+  "fCrValue",
+  "data",
+  "map",
+  "arrP",
+  "crCategoryPoint",
+  "exports",
+  "toTsCategoryAdapter",
+  "crAdapterCategory"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAEA,IAAAC,WAAA,GAAAD,OAAA;AACA,IAAAE,kBAAA,GAAAC,sBAAA,CAAAH,OAAA;AAEO,MAAMI,gBAAgB,GAAGA,CAC9BC,IAAI,EACJC,MAAM,KACH;EACH,MAAMC,QAAQ,GAAG,IAAAC,mBAAQ,EAACF,MAAM,CAAC;EACjC,OAAOD,IAAI,CAACI,IAAI,CACdC,GAAG,CAACC,IAAI,IAAI,IAAAC,2BAAe,EAC1BL,QAAQ,CAACI,IAAI,CAAC,CAAC,CAAC,CAAC,EACjBA,IAAI,CAAC,CAAC,CACR,CAAC,CAAC;AACL,CAAC;AAAAE,OAAA,CAAAT,gBAAA,GAAAA,gBAAA;AAEM,MAAMU,mBAAmB,GAAAD,OAAA,CAAAC,mBAAA,GAAG,IAAAC,0BAAiB,EAACX,gBAAgB,CAAC"
+}

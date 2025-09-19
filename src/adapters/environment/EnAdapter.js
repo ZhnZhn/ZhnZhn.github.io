@@ -1,10 +1,10 @@
 import { setDataSourceTo } from '../../charts/configBuilderFn';
 import { crAdapterType1 } from '../crAdapterType1';
-import crFromYearData from '../crFromYearData';
+import crTsFromData from '../crTsFromData';
 import { crAdapterRouter } from '../crAdapterRouter';
 
 const toLineAdapter = crAdapterType1({
-  crData: crFromYearData,
+  crData: crTsFromData,
   addToConfig: (config, json) => setDataSourceTo(config, json.source)
 })
 , EnAdapter = crAdapterRouter({

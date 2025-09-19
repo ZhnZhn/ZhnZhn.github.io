@@ -1,6 +1,6 @@
 import { crAdapterType1 } from '../crAdapterType1';
-import crFromYearData from '../crFromYearData';
-import toCategoryAdapter from '../toCategoryAdapter';
+import crTsFromData from '../crTsFromData';
+import { toTsCategoryAdapter } from '../toTsCategoryAdapter';
 import {
   fGetRouteBarTreeMap,
   crAdapterRouter
@@ -10,13 +10,13 @@ import toTreeMapAdapter from './toTreeMapAdapter';
 import toBarTreeMapAdapter from './toBarTreeMapAdapter';
 
 const toLineAdapter = crAdapterType1({
-  crData: crFromYearData
+  crData: crTsFromData
 })
 , IeAdapter = crAdapterRouter({
   getRoute: fGetRouteBarTreeMap(
     toBarTreeMapAdapter,
     toTreeMapAdapter,
-    toCategoryAdapter,
+    toTsCategoryAdapter,
     toLineAdapter
   )
 });

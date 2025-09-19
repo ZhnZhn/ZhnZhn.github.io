@@ -3,7 +3,7 @@ import { fCrValue } from './AdapterFn';
 import { crCategoryPoint } from './CategoryFn';
 import crAdapterCategory from './crAdapterCategory';
 
-const _crData = (
+export const crTsCategoryData = (
   json,
   option
 ) => {
@@ -14,6 +14,5 @@ const _crData = (
      arrP[0]
    ));
 }
-, toCategoryAdapter = crAdapterCategory(_crData)
 
-export default toCategoryAdapter
+export const toTsCategoryAdapter = crAdapterCategory(crTsCategoryData)
