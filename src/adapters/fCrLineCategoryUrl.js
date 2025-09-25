@@ -1,23 +1,33 @@
+import { getV as getValue } from '../utils/getPropertyFn';
+
+const TS_TYPE_21 = 21;
+
+const _crApiUrl = (
+  items
+) => getValue(items[1]);
+const _crBaApiUrl = (
+  items
+) => `${getValue(items[2])}-${getValue(items[1])}`;
 
 const fCrLineCategoryUrl = (dataUrl) => {
-  const _crApiUrl = (
-    items
-  ) => {
-    const metric = items[1].v;
-    return `${dataUrl}/${metric}`;
+  const _crApiToken = option => {
+    const _crToken = option.dfTs === TS_TYPE_21
+      ? _crBaApiUrl
+      : _crApiUrl;
+    return `${dataUrl}/${_crToken(option.items)}`;
   };
 
   const _crLineUrl = (
     option
   ) => {
     const { items } = option
-    , geo = items[0].v;
-    return `${_crApiUrl(items)}/${geo}.json`;
+    , geo = getValue(items[0]);
+    return `${_crApiToken(option)}/${geo}.json`;
   };
 
   const _crCategoryUrl = (
     option
-  ) => `${_crApiUrl(option.items)}/by-geo-${option.time}.json`;
+  ) => `${_crApiToken(option)}/by-geo-${option.time}.json`;
 
   return [
     _crLineUrl,
