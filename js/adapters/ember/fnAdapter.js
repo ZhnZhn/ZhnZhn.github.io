@@ -10,7 +10,12 @@ exports.roundBy = _AdapterFn.roundBy;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 var _isTypeFn = require("../../utils/isTypeFn");
 exports.isNumber = _isTypeFn.isNumber;
-const isTsRoute = option => option.dfId === "EU";
+const isTsRoute = _ref => {
+  let {
+    dfId
+  } = _ref;
+  return dfId === "EU" || dfId === "EG";
+};
 exports.isTsRoute = isTsRoute;
 const isEuRoute = option => option.dfId === "EU";
 exports.isEuRoute = isEuRoute;
