@@ -5,6 +5,9 @@ exports.default = void 0;
 var _fToTreeMapAdapter = require("../fToTreeMapAdapter");
 var _fnAdapter = require("./fnAdapter");
 const crToTreeMapAdapter = option => {
+  if ((0, _fnAdapter.isTsRoute)(option)) {
+    return _fToTreeMapAdapter.toTimeSeriesTreeMapAdapter;
+  }
   const getItemLabelValue = (0, _fnAdapter.crGetItemLabelValue)(option),
     getDataTotalTuple = json => json.reduce((tuple, item) => {
       const [label, value] = getItemLabelValue(item);

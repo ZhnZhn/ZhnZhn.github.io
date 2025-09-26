@@ -1,14 +1,19 @@
 import {
   crItemColor,
-  fToTreeMapAdapter
+  fToTreeMapAdapter,
+  toTimeSeriesTreeMapAdapter
 } from "../fToTreeMapAdapter";
 
 import {
   crGetItemLabelValue,
-  isTreeMapItem
+  isTreeMapItem,
+  isTsRoute,
 } from "./fnAdapter";
 
 const crToTreeMapAdapter = (option) => {
+  if (isTsRoute(option)) {
+    return toTimeSeriesTreeMapAdapter;
+  }
   const getItemLabelValue = crGetItemLabelValue(option)
   , getDataTotalTuple = json => json
       .reduce((tuple, item) => {
