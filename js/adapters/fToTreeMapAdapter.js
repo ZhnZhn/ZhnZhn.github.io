@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.fToTreeMapAdapter = exports.crRoundedSubTotal = exports.crItemColor = void 0;
+exports.toTimeSeriesTreeMapAdapter = exports.fToTreeMapAdapter = exports.crRoundedSubTotal = exports.crItemColor = void 0;
 var _arrFn = require("../utils/arrFn");
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
@@ -146,4 +146,17 @@ const fToTreeMapAdapter = function (getDataTotalTuple, crCaption) {
   };
 };
 exports.fToTreeMapAdapter = fToTreeMapAdapter;
+const _getDataTotalTuple = json => json.data.reduce((tuple, item) => {
+  const [label, value] = item || [];
+  if ((0, _AdapterFn.isNumber)(value)) {
+    tuple[0].push({
+      label,
+      value,
+      color: crItemColor(label)
+    });
+    tuple[1] += value;
+  }
+  return tuple;
+}, [[], 0]);
+const toTimeSeriesTreeMapAdapter = exports.toTimeSeriesTreeMapAdapter = fToTreeMapAdapter(_getDataTotalTuple)();
 //# sourceMappingURL=fToTreeMapAdapter.js.map

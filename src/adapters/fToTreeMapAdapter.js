@@ -292,3 +292,25 @@ export const fToTreeMapAdapter = (
   };
   return adapter;
 }
+
+const _getDataTotalTuple = (
+  json
+) => json.data.reduce((tuple, item) => {
+     const [
+       label,
+       value
+     ] = item || [];
+     if (isNumber(value)) {
+       tuple[0].push({
+         label,
+         value,
+         color: crItemColor(label)}
+       )
+       tuple[1] += value
+     }
+     return tuple;
+  }, [[], 0]);
+
+export const toTimeSeriesTreeMapAdapter = fToTreeMapAdapter(
+  _getDataTotalTuple
+)();

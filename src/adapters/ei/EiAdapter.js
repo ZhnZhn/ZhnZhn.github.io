@@ -6,7 +6,8 @@ import {
   crAdapterRouter
 } from '../crAdapterRouter';
 
-import toTreeMapAdapter from './toTreeMapAdapter';
+//import toTreeMapAdapter from './toTreeMapAdapter';
+import { toTimeSeriesTreeMapAdapter } from '../fToTreeMapAdapter'
 import toBarTreeMapAdapter from './toBarTreeMapAdapter';
 
 const toLineAdapter = crAdapterType1({
@@ -15,7 +16,7 @@ const toLineAdapter = crAdapterType1({
 , IeAdapter = crAdapterRouter({
   getRoute: fGetRouteBarTreeMap(
     toBarTreeMapAdapter,
-    toTreeMapAdapter,
+    toTimeSeriesTreeMapAdapter,
     toTsCategoryAdapter,
     toLineAdapter
   )
