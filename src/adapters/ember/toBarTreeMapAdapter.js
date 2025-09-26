@@ -2,10 +2,12 @@ import crAdapterCategory from "../crAdapterCategory";
 import { crCategoryPoint } from "../CategoryFn";
 import { sortDescCategory } from "../compareByFn";
 import { crItemColor } from "../fToTreeMapAdapter";
+import toBarTreeMapAdapter from "../toBarTreeMapAdapter";
 
 import {
   crGetItemLabelValue,
-  isTreeMapItem
+  isTreeMapItem,
+  isTsRoute
 } from "./fnAdapter";
 
 const crData = (
@@ -30,4 +32,10 @@ const crData = (
   }, []));
 };
 
-export const toBarTreeMapAdapter = crAdapterCategory(crData)
+const _toBarTreeMapAdapter = crAdapterCategory(crData);
+
+export const crToBarTreeMapAdapter = (
+  option
+) => isTsRoute(option)
+  ? toBarTreeMapAdapter
+  : _toBarTreeMapAdapter

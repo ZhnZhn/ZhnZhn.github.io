@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/adapters/ei/toBarTreeMapAdapter.js"
+  "../../src/adapters/toBarTreeMapAdapter.js"
  ],
- "file": "../../../src/adapters/ei/toBarTreeMapAdapter.js",
+ "file": "../../src/adapters/toBarTreeMapAdapter.js",
  "names": [
   "_crAdapterCategory",
   "_interopRequireDefault",

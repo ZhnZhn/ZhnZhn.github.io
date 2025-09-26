@@ -4,13 +4,13 @@ import {
 } from "../crAdapterRouter";
 
 import crToTreeMapAdapter from "./crToTreeMapAdapter";
-import { toBarTreeMapAdapter } from "./toBarTreeMapAdapter";
+import { crToBarTreeMapAdapter } from "./toBarTreeMapAdapter";
 import toCategoryAdapter from "./toCategoryAdapter";
 import toLineAdapter from "./toLineAdapter";
 
 const EmberAdapter = crAdapterRouter({
   getRoute: fGetRouteBarTreeMap(
-    toBarTreeMapAdapter,
+    crToBarTreeMapAdapter,
     crToTreeMapAdapter,
     toCategoryAdapter,
     toLineAdapter

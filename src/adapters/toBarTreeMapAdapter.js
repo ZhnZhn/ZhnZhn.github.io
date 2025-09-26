@@ -1,7 +1,7 @@
-import crAdapterCategory from '../crAdapterCategory';
-import { crCategoryPoint } from '../CategoryFn';
-import { sortDescCategory } from '../compareByFn';
-import { crItemColor } from '../fToTreeMapAdapter';
+import crAdapterCategory from './crAdapterCategory';
+import { crCategoryPoint } from './CategoryFn';
+import { sortDescCategory } from './compareByFn';
+import { crItemColor } from './fToTreeMapAdapter';
 
 const crData = (json, option) => {
   return sortDescCategory(

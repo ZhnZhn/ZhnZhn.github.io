@@ -3,10 +3,10 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"));
-var _CategoryFn = require("../CategoryFn");
-var _compareByFn = require("../compareByFn");
-var _fToTreeMapAdapter = require("../fToTreeMapAdapter");
+var _crAdapterCategory = _interopRequireDefault(require("./crAdapterCategory"));
+var _CategoryFn = require("./CategoryFn");
+var _compareByFn = require("./compareByFn");
+var _fToTreeMapAdapter = require("./fToTreeMapAdapter");
 const crData = (json, option) => {
   return (0, _compareByFn.sortDescCategory)(json.data.map(item => {
     const point = (0, _CategoryFn.crCategoryPoint)(item[1], item[0]);

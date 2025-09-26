@@ -70,9 +70,9 @@ const _crTimeSeriesTreeMapUrl = (option, _isTreeMap) => {
   if (metricItem.isTm !== 1) {
     throw (0, _AdapterFn.crErrorByMessage)(`TreeMap and Bar charts by Source for ${metricCaption} not available`);
   }
-  if (!(0, _AdapterFn.isInRange)((0, _isTypeFn.parseIntBy10)(time), 2021, 2025)) {
-    const _typeOfChartToken = _isTreeMap ? 'TreeMap' : 'Bar by metric';
-    throw (0, _AdapterFn.crErrorByMessage)(`${_typeOfChartToken} only available for 2019-2023`);
+  if (!(0, _AdapterFn.isInRange)((0, _isTypeFn.parseIntBy10)(time), 2020, 2025)) {
+    const _typeOfChartToken = _isTreeMap ? 'TreeMap' : 'Bar by Source';
+    throw (0, _AdapterFn.crErrorByMessage)(`${_typeOfChartToken} only available for 2021-2024`);
   }
   if (!_isTreeMap) {
     option.subtitle = option.title;

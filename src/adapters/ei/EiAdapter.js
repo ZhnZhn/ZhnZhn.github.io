@@ -7,7 +7,7 @@ import {
 } from '../crAdapterRouter';
 
 import { toTimeSeriesTreeMapAdapter } from '../fToTreeMapAdapter'
-import toBarTreeMapAdapter from './toBarTreeMapAdapter';
+import toBarTreeMapAdapter from '../toBarTreeMapAdapter';
 
 const toLineAdapter = crAdapterType1({
   crData: crTsFromData

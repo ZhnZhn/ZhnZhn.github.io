@@ -153,11 +153,11 @@ const _crTimeSeriesTreeMapUrl = (
     throw crErrorByMessage(`TreeMap and Bar charts by Source for ${metricCaption} not available`)
   }
 
-  if (!isInRange(parseIntBy10(time), 2021, 2025)) {
+  if (!isInRange(parseIntBy10(time), 2020, 2025)) {
     const _typeOfChartToken = _isTreeMap
       ? 'TreeMap'
-      : 'Bar by metric';
-    throw crErrorByMessage(`${_typeOfChartToken} only available for 2019-2023`);
+      : 'Bar by Source';
+    throw crErrorByMessage(`${_typeOfChartToken} only available for 2021-2024`);
   }
 
   if (!_isTreeMap) {
