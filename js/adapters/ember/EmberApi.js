@@ -3,7 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _CategoryFn = require("../CategoryFn");
+var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
 var _fCrLineCategoryUrl = _interopRequireDefault(require("../fCrLineCategoryUrl"));
 const API_URL = "https://ember-data-api-scg3n.ondigitalocean.app/ember",
@@ -15,14 +17,11 @@ const API_URL = "https://ember-data-api-scg3n.ondigitalocean.app/ember",
   MONTHLY_JSON = `${GENERATION}_${MONTHLY_SUFFIX}`,
   US_YEARLY_JSON = `${GENERATION}_usa_${YEARLY_SUFFIX}`,
   US_MONTHLY_JSON = `${GENERATION}_usa_${MONTHLY_SUFFIX}`,
-  EU_MONTHLY_JSON = "price_monthly.json",
-  API_URL_EU = `${API_URL}/${EU_MONTHLY_JSON}`
-  //, QUERY_TAIL = "&_sort=rowid&_shape=array"
-  ,
   QUERY_ARRAY_TAIL = "&_shape=array",
   DATE = "date",
   YEAR = "year";
-const [_crTsLineUrl, _crTsCategoryUrl] = (0, _fCrLineCategoryUrl.default)("./data/ember");
+const DATA_URL = "./data/ember",
+  [_crTimeSeriesLineUrl, _crTimeSeriesCategoryUrl] = (0, _fCrLineCategoryUrl.default)(DATA_URL);
 const _fCrProperty = suffix => (name, value) => `${name}__${suffix}=${value}`,
   _crExactProperty = _fCrProperty("exact"),
   _crGteProperty = _fCrProperty("gte"),
@@ -49,7 +48,7 @@ const _crCategoryUrl = (isMonthlyRoute, option) => {
   const _sourceQuery = _crSourceQueryParam(option),
     _queryToken = `${_crDateProperty(option)}${QUERY_ARRAY_TAIL}`,
     pathToken = _getPathToken(isMonthlyRoute, option);
-  return (0, _fnAdapter.isEuRoute)(option) ? `${API_URL_EU}?${_queryToken}` : `${API_URL}/${pathToken}?${_queryToken}${_sourceQuery}`;
+  return `${API_URL}/${pathToken}?${_queryToken}${_sourceQuery}`;
 };
 const _crTreeMapUrl = (isMonthlyRoute, option) => {
   option.dfTmTitle = (0, _fnAdapter.getMetricCaption)(option);
@@ -57,12 +56,35 @@ const _crTreeMapUrl = (isMonthlyRoute, option) => {
 };
 const _crLineUrl = (isMonthlyRoute, option) => {
   const queryDateParam = isMonthlyRoute ? `&${_crGteProperty(DATE, option.fromDate)}` : "";
-  return (0, _fnAdapter.isEuRoute)(option) ? `${API_URL_EU}?${_crExactProperty("country_or_region", (0, _fnAdapter.getGeoCaption)(option))}${queryDateParam}${QUERY_ARRAY_TAIL}` : `${_crRouteApiUrl(isMonthlyRoute, option)}${_crSourceQueryParam(option)}${queryDateParam}`;
+  return `${_crRouteApiUrl(isMonthlyRoute, option)}${_crSourceQueryParam(option)}${queryDateParam}`;
+};
+const _crTimeSeriesTreeMapUrl = (option, _isTreeMap) => {
+  const {
+      items,
+      time
+    } = option,
+    geo = (0, _AdapterFn.getValue)(items[0]),
+    metricItem = items[2],
+    metricCaption = (0, _AdapterFn.getCaption)(metricItem),
+    metricValue = (0, _AdapterFn.getValue)(metricItem);
+  if (metricItem.isTm !== 1) {
+    throw (0, _AdapterFn.crErrorByMessage)(`TreeMap and Bar charts by Source for ${metricCaption} not available`);
+  }
+  if (!(0, _AdapterFn.isInRange)((0, _isTypeFn.parseIntBy10)(time), 2021, 2025)) {
+    const _typeOfChartToken = _isTreeMap ? 'TreeMap' : 'Bar by metric';
+    throw (0, _AdapterFn.crErrorByMessage)(`${_typeOfChartToken} only available for 2019-2023`);
+  }
+  if (!_isTreeMap) {
+    option.subtitle = option.title;
+    option.title = metricCaption;
+  }
+  return `${DATA_URL}/${metricValue}-tm/${geo}-${time}.json`;
 };
 const EmberApi = {
   getRequestUrl(option) {
     if ((0, _fnAdapter.isTsRoute)(option)) {
-      return (0, _CategoryFn.isCategory)(option) ? _crTsCategoryUrl(option) : _crTsLineUrl(option);
+      const _isTreeMap = (0, _CategoryFn.isTreeMap)(option);
+      return _isTreeMap || (0, _CategoryFn.isBarTreeMap)(option) ? _crTimeSeriesTreeMapUrl(option, _isTreeMap) : (0, _CategoryFn.isCategory)(option) ? _crTimeSeriesCategoryUrl(option) : _crTimeSeriesLineUrl(option);
     }
     const _isMonthlyRoute = option.dfRId === "M",
       _crUrl = (0, _CategoryFn.isTreeMap)(option) || (0, _CategoryFn.isBarTreeMap)(option) ? _crTreeMapUrl : (0, _CategoryFn.isCategory)(option) ? _crCategoryUrl : _crLineUrl;
