@@ -39,13 +39,20 @@ const crTsFromData = (
   if (!isArr(data)) {
     return [];
   }
-  const _fromYear = parseIntBy10(json.fromYear);
-  if (isNumber(_fromYear)) {
-    return _crTsFromYearData(_fromYear, data);
+
+  const _fromYear = parseIntBy10(json.fromYear)
+  , _from = json.from
+  , _tsFromYear = isNumber(_fromYear)
+      ? _fromYear
+      : isNumber(_from)
+      ? _from
+      : !1;
+  if (isNumber(_tsFromYear)) {
+    return _crTsFromYearData(_tsFromYear, data);
   }
-  const _dmy = json.from;
-  if (isDmy(_dmy)) {
-    return _crTsFromMonthData(_dmy, data);
+
+  if (isDmy(_from)) {
+    return _crTsFromMonthData(_from, data);
   }
   return [];
 };

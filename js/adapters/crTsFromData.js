@@ -19,13 +19,14 @@ const crTsFromData = (json, option) => {
   if (!(0, _isTypeFn.isArr)(data)) {
     return [];
   }
-  const _fromYear = (0, _isTypeFn.parseIntBy10)(json.fromYear);
-  if ((0, _isTypeFn.isNumber)(_fromYear)) {
-    return _crTsFromYearData(_fromYear, data);
+  const _fromYear = (0, _isTypeFn.parseIntBy10)(json.fromYear),
+    _from = json.from,
+    _tsFromYear = (0, _isTypeFn.isNumber)(_fromYear) ? _fromYear : (0, _isTypeFn.isNumber)(_from) ? _from : !1;
+  if ((0, _isTypeFn.isNumber)(_tsFromYear)) {
+    return _crTsFromYearData(_tsFromYear, data);
   }
-  const _dmy = json.from;
-  if ((0, _dateFn.isDmy)(_dmy)) {
-    return _crTsFromMonthData(_dmy, data);
+  if ((0, _dateFn.isDmy)(_from)) {
+    return _crTsFromMonthData(_from, data);
   }
   return [];
 };

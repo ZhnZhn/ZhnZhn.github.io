@@ -6,7 +6,6 @@ import {
   crAdapterRouter
 } from '../crAdapterRouter';
 
-//import toTreeMapAdapter from './toTreeMapAdapter';
 import { toTimeSeriesTreeMapAdapter } from '../fToTreeMapAdapter'
 import toBarTreeMapAdapter from './toBarTreeMapAdapter';
 

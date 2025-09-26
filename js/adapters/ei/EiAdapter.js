@@ -9,8 +9,6 @@ var _toTsCategoryAdapter = require("../toTsCategoryAdapter");
 var _crAdapterRouter = require("../crAdapterRouter");
 var _fToTreeMapAdapter = require("../fToTreeMapAdapter");
 var _toBarTreeMapAdapter = _interopRequireDefault(require("./toBarTreeMapAdapter"));
-//import toTreeMapAdapter from './toTreeMapAdapter';
-
 const toLineAdapter = (0, _crAdapterType.crAdapterType1)({
     crData: _crTsFromData.default
   }),
