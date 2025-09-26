@@ -20,10 +20,6 @@ export const isTsRoute = ({
   dfId
 }) => dfId === "EU" || dfId === "EG"
 
-export const isEuRoute = (
-  option
-) => option.dfId === "EU"
-
 export const isUsRoute = (
   option
 ) => option.dfId === "US"
@@ -58,9 +54,7 @@ export const getMetricCaption = _fGetItemsCaptionBy(2)
 const _getMetricValue = _fGetItemsValueBy(2);
 export const getMetricValue = (
   options
-) => isEuRoute(options)
-  ? "day_ahead_price_eur_per_mwh"
-  : _getMetricValue(options)
+) => _getMetricValue(options)
 
 const SOURCE_TOTAL = "Total";
 export const isTotalData = (

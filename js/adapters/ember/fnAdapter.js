@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdToUTC = exports.roundBy = exports.reduceToHmBy = exports.isUsRoute = exports.isTsRoute = exports.isTreeMapItem = exports.isTotalVariable = exports.isTotalData = exports.isEuRoute = exports.isArr = exports.getSourceValue = exports.getMetricValue = exports.getMetricCaption = exports.getGeoCaption = exports.fGetCategory = exports.crGetItemLabelValue = exports.crError = exports.crDataImpl = void 0;
+exports.ymdToUTC = exports.roundBy = exports.reduceToHmBy = exports.isUsRoute = exports.isTsRoute = exports.isTreeMapItem = exports.isTotalVariable = exports.isTotalData = exports.isArr = exports.getSourceValue = exports.getMetricValue = exports.getMetricCaption = exports.getGeoCaption = exports.fGetCategory = exports.crGetItemLabelValue = exports.crError = exports.crDataImpl = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isArr = _AdapterFn.isArr;
 exports.isNumber = _AdapterFn.isNumber;
@@ -17,8 +17,6 @@ const isTsRoute = _ref => {
   return dfId === "EU" || dfId === "EG";
 };
 exports.isTsRoute = isTsRoute;
-const isEuRoute = option => option.dfId === "EU";
-exports.isEuRoute = isEuRoute;
 const isUsRoute = option => option.dfId === "US";
 exports.isUsRoute = isUsRoute;
 const _getCountryOrRegionCategory = item => item.country_code ? item.country_or_region || "" : "";
@@ -33,7 +31,7 @@ const getGeoCaption = exports.getGeoCaption = _fGetItemsCaptionBy(0);
 const getSourceValue = exports.getSourceValue = _fGetItemsValueBy(1);
 const getMetricCaption = exports.getMetricCaption = _fGetItemsCaptionBy(2);
 const _getMetricValue = _fGetItemsValueBy(2);
-const getMetricValue = options => isEuRoute(options) ? "day_ahead_price_eur_per_mwh" : _getMetricValue(options);
+const getMetricValue = options => _getMetricValue(options);
 exports.getMetricValue = getMetricValue;
 const SOURCE_TOTAL = "Total";
 const isTotalData = source => source === SOURCE_TOTAL;

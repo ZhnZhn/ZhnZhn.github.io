@@ -7,7 +7,6 @@ import crTsFromData from '../crTsFromData';
 import {
   isTsRoute,
   isTotalVariable,
-  isEuRoute,
   isTotalData,
   ymdToUTC,
   getSourceValue,
@@ -61,9 +60,7 @@ const _fCrDataPoint = (
   json,
   item => item[metric],
   item => item[pnDate],
-  isEuRoute(options)
-    ? void 0
-    : item => item.variable === source
+  item => item.variable === source
 );
 
 const crData = (

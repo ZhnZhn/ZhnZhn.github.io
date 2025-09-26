@@ -20,7 +20,7 @@ const _fCrDataPoint = getDate => (value, item) => [(0, _fnAdapter.ymdToUTC)(getD
     }, json);
     return _crDataImpl((0, _isTypeFn.getObjectKeys)(_hm), dateKey => _hm[dateKey], dateKey => dateKey);
   },
-  _crSourceData = (json, metric, pnDate, source, options) => _crDataImpl(json, item => item[metric], item => item[pnDate], (0, _fnAdapter.isEuRoute)(options) ? void 0 : item => item.variable === source);
+  _crSourceData = (json, metric, pnDate, source, options) => _crDataImpl(json, item => item[metric], item => item[pnDate], item => item.variable === source);
 const crData = (json, options) => {
   if ((0, _fnAdapter.isTsRoute)(options)) {
     return (0, _crTsFromData.default)(json);
