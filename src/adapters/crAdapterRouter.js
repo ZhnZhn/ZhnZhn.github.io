@@ -27,6 +27,13 @@ export const fGetRouteCategory = (
   option
 )
 
+const _getConfigAdapter = (
+  adapterOrFactory,
+  option
+) => isFn(adapterOrFactory)
+  ? adapterOrFactory(option)
+  : adapterOrFactory;
+
 export const fGetRouteTreeMap = (
   toTreeMapAdapter,
   toCategoryAdapter,
@@ -34,9 +41,7 @@ export const fGetRouteTreeMap = (
 ) => (
   option
 ) => isTreeMap(option)
-  ? isFn(toTreeMapAdapter)
-      ? toTreeMapAdapter(option)
-      : toTreeMapAdapter
+  ? _getConfigAdapter(toTreeMapAdapter, option)
   : _getCategoryAdapter(
       toCategoryAdapter,
       toLineAdapter,
@@ -55,7 +60,7 @@ export const fGetRouteBarTreeMap = (
     toLineAdapter
   );
   return option => isBarTreeMap(option.seriaType)
-    ? toBarTreeMapAdapter
+    ? _getConfigAdapter(toBarTreeMapAdapter, option)
     : _toRouteTreeMap(option);
 }
 
@@ -78,9 +83,7 @@ const _fGetAdapter = (
   option
 ) => {
   const routeAdapter = getRoute(option)
-  return isFn(routeAdapter)
-    ? routeAdapter()
-    : routeAdapter;
+  return _getConfigAdapter(routeAdapter);
 };
 
 export const crAdapterRouter = ({
