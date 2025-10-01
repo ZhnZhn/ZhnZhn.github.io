@@ -14,7 +14,7 @@ const isTsRoute = _ref => {
   let {
     dfId
   } = _ref;
-  return dfId === "EU" || dfId === "EG";
+  return dfId === "EU" || dfId === "EG" || dfId === "PV";
 };
 exports.isTsRoute = isTsRoute;
 const isUsRoute = option => option.dfId === "US";

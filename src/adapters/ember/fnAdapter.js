@@ -18,7 +18,9 @@ import {
 
 export const isTsRoute = ({
   dfId
-}) => dfId === "EU" || dfId === "EG"
+}) => dfId === "EU"
+  || dfId === "EG"
+  || dfId === "PV"
 
 export const isUsRoute = (
   option
