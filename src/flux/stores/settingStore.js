@@ -20,7 +20,7 @@ import {
   LT_FMP,
   LT_INTR,
   LT_TW,
-  LT_PLG,
+  LT_MSV,
   LT_BEA,
   LT_EIA,
   LT_CRC,
@@ -46,7 +46,7 @@ const _createObject = () => Object.create(null)
 const _withApiKey = [
   LT_Q,
   LT_AV, LT_AV_BLCH, LT_AV_ECON,
-  LT_FMP, LT_INTR, LT_TW, LT_PLG,
+  LT_FMP, LT_INTR, LT_TW, LT_MSV,
   LT_BEA, LT_EIA,
   LT_WT
 ];
@@ -81,7 +81,7 @@ const _apiTitle = {
   [LT_FMP]: 'FMP',
   [LT_INTR]: 'Intrinio',
   [LT_TW]: 'Twelve Data',
-  [LT_PLG]: 'Polygon.io',
+  [LT_MSV]: 'Massive',
   [LT_WT]: 'WTO',
 
   [LT_CRC]: 'CryptoCompare Information'
@@ -206,7 +206,7 @@ export const exportSettingFn = () => ({
   key7: _fSetKey(LT_FMP),
   key8: _fSetKey(LT_INTR),
   key9: _fSetKey(LT_TW),
-  key10: _fSetKey(LT_PLG),
+  key10: _fSetKey(LT_MSV),
   setProxy: _setProxy,
   getProxy,
   [PN_IS_ADMIN_MODE]: isAdminMode,

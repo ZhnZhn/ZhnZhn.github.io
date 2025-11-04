@@ -1,13 +1,13 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/adapters/plg/PlgAdapter.js"
+  "../../../src/adapters/msv/PlgAdapter.js"
  ],
- "file": "../../../src/adapters/plg/PlgAdapter.js",
+ "file": "../../../src/adapters/msv/PlgAdapter.js",
  "names": [
   "_fToKline",
   "require",
-  "PlgAdapter",
+  "MsvAdapter",
   "exports",
   "fToKline",
   "isAth",

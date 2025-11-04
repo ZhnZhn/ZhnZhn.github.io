@@ -26,7 +26,7 @@ const CONF_SM_ARR = [
   ["FMP","fmp","Financial Modeling Prep","32"],
   ["Intrinio","intrinio","Intrinio","32"],
   ["Twelve", "twelve", "Twelve Data"],
-  ["PLG", "polygon-io", "Polygon.io"]
+  ["Massive", "massive", "Massive"]
 ];
 
 const CONF_EC_ARR = [

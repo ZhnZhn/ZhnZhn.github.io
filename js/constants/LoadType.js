@@ -1,14 +1,14 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isEstat = exports.isDateDelimeterDash = exports.LT_WT = exports.LT_WL = exports.LT_WB = exports.LT_WATCH_LIST = exports.LT_UN = exports.LT_UKS = exports.LT_TW = exports.LT_SWS = exports.LT_SNB = exports.LT_SIR = exports.LT_SFL = exports.LT_SDN = exports.LT_Q = exports.LT_PLG = exports.LT_OE = exports.LT_NST_2 = exports.LT_NST = exports.LT_KX = exports.LT_KR = exports.LT_KC = exports.LT_IRE = exports.LT_INTR = exports.LT_HT = exports.LT_GT = exports.LT_FSO = exports.LT_FS = exports.LT_FMP = exports.LT_FAO = exports.LT_EU_STAT = exports.LT_EN = exports.LT_EMB = exports.LT_EIA = exports.LT_EI = exports.LT_ECB = exports.LT_DBN = exports.LT_CRC = exports.LT_CR = exports.LT_CP = exports.LT_CM = exports.LT_CL = exports.LT_CG = exports.LT_CCI = exports.LT_CB = exports.LT_BT = exports.LT_BOC = exports.LT_BN = exports.LT_BLS = exports.LT_BIS = exports.LT_BG = exports.LT_BF = exports.LT_BEA = exports.LT_BB = exports.LT_AV_ECON = exports.LT_AV_BLCH = exports.LT_AV = void 0;
+exports.isEstat = exports.isDateDelimeterDash = exports.LT_WT = exports.LT_WL = exports.LT_WB = exports.LT_WATCH_LIST = exports.LT_UN = exports.LT_UKS = exports.LT_TW = exports.LT_SWS = exports.LT_SNB = exports.LT_SIR = exports.LT_SFL = exports.LT_SDN = exports.LT_Q = exports.LT_OE = exports.LT_NST_2 = exports.LT_NST = exports.LT_MSV = exports.LT_KX = exports.LT_KR = exports.LT_KC = exports.LT_IRE = exports.LT_INTR = exports.LT_HT = exports.LT_GT = exports.LT_FSO = exports.LT_FS = exports.LT_FMP = exports.LT_FAO = exports.LT_EU_STAT = exports.LT_EN = exports.LT_EMB = exports.LT_EIA = exports.LT_EI = exports.LT_ECB = exports.LT_DBN = exports.LT_CRC = exports.LT_CR = exports.LT_CP = exports.LT_CM = exports.LT_CL = exports.LT_CG = exports.LT_CCI = exports.LT_CB = exports.LT_BT = exports.LT_BOC = exports.LT_BN = exports.LT_BLS = exports.LT_BIS = exports.LT_BG = exports.LT_BF = exports.LT_BEA = exports.LT_BB = exports.LT_AV_ECON = exports.LT_AV_BLCH = exports.LT_AV = void 0;
 const LT_Q = exports.LT_Q = "Q";
 const LT_AV = exports.LT_AV = "AV";
 const LT_AV_BLCH = exports.LT_AV_BLCH = "AV_BLCH";
 const LT_AV_ECON = exports.LT_AV_ECON = "AV_ECON";
 const LT_FMP = exports.LT_FMP = "FMP";
 const LT_TW = exports.LT_TW = "TW";
-const LT_PLG = exports.LT_PLG = "PLG";
+const LT_MSV = exports.LT_MSV = "MSV";
 const LT_DBN = exports.LT_DBN = "DBN";
 const LT_OE = exports.LT_OE = "OE";
 const LT_EI = exports.LT_EI = "EI";

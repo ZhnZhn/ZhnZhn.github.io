@@ -1,6 +1,6 @@
 import { fToKline } from '../fToKline';
 
-export const PlgAdapter = fToKline({
+export const MsvAdapter = fToKline({
   isAth: true,
   getData: json => json.results,
   d: 't',

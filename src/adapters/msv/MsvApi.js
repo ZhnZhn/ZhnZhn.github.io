@@ -4,10 +4,10 @@ import {
   fCheckResponse
 } from '../AdapterFn';
 
-const API_URL = "https://api.polygon.io/v2";
-const TO_DATE = getFromDate(0)
+const API_URL = "https://api.massive.com/v2";
+const TO_DATE = getFromDate(0);
 
-export const PlgApi = {
+export const MsvApi = {
   getRequestUrl(option){
     const {
       apiKey,

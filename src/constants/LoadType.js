@@ -6,7 +6,7 @@ export const LT_AV_ECON = "AV_ECON"
 
 export const LT_FMP = "FMP"
 export const LT_TW = "TW"
-export const LT_PLG = "PLG"
+export const LT_MSV = "MSV"
 export const LT_DBN = "DBN"
 
 export const LT_OE = "OE"
