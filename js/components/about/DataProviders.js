@@ -5,9 +5,9 @@ exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../styleFn");
 var _Color = require("../styles/Color");
-var _ProviderLinks = _interopRequireDefault(require("../links/ProviderLinks"));
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _SpanToken = require("../zhn/SpanToken");
+var _ProviderLinks = require("../links/ProviderLinks");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_NOTE_BR = "provider__note__br",
   OPEN_COLOR_L2 = _Color.GREEN_COLOR,
@@ -42,9 +42,9 @@ const CL_NOTE_BR = "provider__note__br",
     color: '#607d8b'
   };
 const _isArr = Array.isArray;
-const DP = [_ProviderLinks.default.DBnomics, _ProviderLinks.default.EI, _ProviderLinks.default.Ember, _ProviderLinks.default.IRENA, _ProviderLinks.default.Eurostat, _ProviderLinks.default.FaoStat, _ProviderLinks.default.WorldBank, _ProviderLinks.default.BOC, _ProviderLinks.default.Insee, _ProviderLinks.default.ONS, _ProviderLinks.default.StatNorway, _ProviderLinks.default.StatSweden, _ProviderLinks.default.StatFinland, _ProviderLinks.default.StatDenmark, _ProviderLinks.default.StatIreland, _ProviderLinks.default.FSO, _ProviderLinks.default.OECD, [_ProviderLinks.default.Bsl, '25'], _ProviderLinks.default.CryptoCompare, _ProviderLinks.default.CoinCap, _ProviderLinks.default.CoinGecko, _ProviderLinks.default.CoinMetrics, _ProviderLinks.default.CoinLore, _ProviderLinks.default.Coinpaprika, _ProviderLinks.default.Binance, _ProviderLinks.default.Bitget, _ProviderLinks.default.Bitstamp, _ProviderLinks.default.Coinbase],
-  DP_KEY = [_ProviderLinks.default.Ndl, _ProviderLinks.default.AlphaVantage, _ProviderLinks.default.Fmp, _ProviderLinks.default.Tw, _ProviderLinks.default.Msv, _ProviderLinks.default.Intrinio, _ProviderLinks.default.WTO, [_ProviderLinks.default.Bsl, '500'], _ProviderLinks.default.Eia, _ProviderLinks.default.Bea],
-  DP_PR = [_ProviderLinks.default.Ndl, _ProviderLinks.default.BIS, _ProviderLinks.default.ECB, _ProviderLinks.default.SNB, _ProviderLinks.default.UnComtrade, _ProviderLinks.default.WTO, _ProviderLinks.default.Bitfinex, _ProviderLinks.default.CryptoCom, _ProviderLinks.default.GateIo, _ProviderLinks.default.Kraken, _ProviderLinks.default.KuCoin, _ProviderLinks.default.OKX, _ProviderLinks.default.Bybit, _ProviderLinks.default.HTX];
+const DP = [_ProviderLinks.LINK_DBNOMICS, _ProviderLinks.LINK_EI, _ProviderLinks.LINK_EMBER, _ProviderLinks.LINK_IRENA, _ProviderLinks.LINK_EUROSTAT, _ProviderLinks.LINK_FAOSTAT, _ProviderLinks.LINK_WORLBANK, _ProviderLinks.LINK_BOC, _ProviderLinks.LINK_STAT_FRANCE, _ProviderLinks.LINK_STAT_UK, _ProviderLinks.LINK_STAT_NORWAY, _ProviderLinks.LINK_STAT_SWEDEN, _ProviderLinks.LINK_STAT_FINLAND, _ProviderLinks.LINK_STAT_DENMARK, _ProviderLinks.LINK_STAT_IRELAND, _ProviderLinks.LINK_STAT_SWISS, _ProviderLinks.LINK_OECD, [_ProviderLinks.LINK_BLS, '25'], _ProviderLinks.LINK_CRYPTO_COMPARE, _ProviderLinks.LINK_COIN_CAP, _ProviderLinks.LINK_COIN_GECKO, _ProviderLinks.LINK_COIN_METRICS, _ProviderLinks.LINK_COIN_LORE, _ProviderLinks.LINK_COINPAPRIKA, _ProviderLinks.LINK_BINANCE, _ProviderLinks.LINK_BITGET, _ProviderLinks.LINK_BITSTAMP, _ProviderLinks.LINK_COINBASE],
+  DP_KEY = [_ProviderLinks.LINK_NDL, _ProviderLinks.LINK_AV, _ProviderLinks.LINK_FMP, _ProviderLinks.LINK_TW, _ProviderLinks.LINK_MSV, _ProviderLinks.LINK_INTRINIO, _ProviderLinks.LINK_WTO, [_ProviderLinks.LINK_BLS, '500'], _ProviderLinks.LINK_EIA, _ProviderLinks.LINK_BEA],
+  DP_PR = [_ProviderLinks.LINK_NDL, _ProviderLinks.LINK_BIS, _ProviderLinks.LINK_ECB, _ProviderLinks.LINK_SNB, _ProviderLinks.LINK_UNCOMTRADE, _ProviderLinks.LINK_WTO, _ProviderLinks.LINK_BITFINEX, _ProviderLinks.LINK_CRYPTOCOM, _ProviderLinks.LINK_GATEIO, _ProviderLinks.LINK_KRAKEN, _ProviderLinks.LINK_KUCOIN, _ProviderLinks.LINK_OKX, _ProviderLinks.LINK_BYBIT, _ProviderLinks.LINK_HTX];
 const LinkPer = _ref => {
   let {
     Comp,
