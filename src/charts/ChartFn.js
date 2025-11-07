@@ -18,6 +18,9 @@ import {
 import {
   findDateIndex
 } from '../math/seriaFn';
+import {
+  getPointValue
+} from '../math/seriaHelperFn';
 
 import {
   isFn,
@@ -222,8 +225,8 @@ export const crValueMoving = (
   , points = chart.series[0].data
   , index = findDateIndex(points, dateTo)
   , valueTo = index === -1
-      ? void 0
-      : points[index].y;
+     ? void 0
+     : getPointValue(points[index]);
 
   return isNumber(valueTo)
     ? _assign({}, prev,
