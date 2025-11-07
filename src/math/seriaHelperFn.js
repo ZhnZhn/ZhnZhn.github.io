@@ -5,6 +5,18 @@ import {
 } from '../utils/isTypeFn';
 import { roundBy } from './mathFn';
 
+export const getPointDate = point => isArr(point)
+  ? point[0]
+  : (point || {}).x
+
+export const getPointValue = point => isArr(point)
+  ? isNumber(point[1])
+    ? point[1]
+    : '0.0'
+  : point && isNumber(point.y)
+    ? point.y
+    : '0.0'
+
 const _getDataPoint = arr => {
   if (!isArr(arr)) { return; }
   for (let i=0; i<arr.length; i++){

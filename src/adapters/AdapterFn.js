@@ -50,11 +50,12 @@ export {
   filterTrimZero
 } from '../math/seriaFn';
 
-import { DT_EMPTY } from '../constants/DirectionType';
 import {
   getPointDate,
   getPointValue
-} from './getterPointFn';
+} from '../math/seriaHelperFn';
+
+import { DT_EMPTY } from '../constants/DirectionType';
 
 export {
   isArr,

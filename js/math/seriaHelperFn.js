@@ -1,9 +1,13 @@
 "use strict";
 
 exports.__esModule = true;
-exports.mergeToChartPoints = exports.getZeroIndexFromEnd = exports.getZeroCountFromStart = exports.fGetY = exports.crPointGetter = exports.crDataArrays = void 0;
+exports.mergeToChartPoints = exports.getZeroIndexFromEnd = exports.getZeroCountFromStart = exports.getPointValue = exports.getPointDate = exports.fGetY = exports.crPointGetter = exports.crDataArrays = void 0;
 var _isTypeFn = require("../utils/isTypeFn");
 var _mathFn = require("./mathFn");
+const getPointDate = point => (0, _isTypeFn.isArr)(point) ? point[0] : (point || {}).x;
+exports.getPointDate = getPointDate;
+const getPointValue = point => (0, _isTypeFn.isArr)(point) ? (0, _isTypeFn.isNumber)(point[1]) ? point[1] : '0.0' : point && (0, _isTypeFn.isNumber)(point.y) ? point.y : '0.0';
+exports.getPointValue = getPointValue;
 const _getDataPoint = arr => {
   if (!(0, _isTypeFn.isArr)(arr)) {
     return;

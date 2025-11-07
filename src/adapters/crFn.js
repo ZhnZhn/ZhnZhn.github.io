@@ -2,14 +2,15 @@ import {
   crId as _crId
 } from '../math/mathFn';
 import {
+  getPointDate,
+  getPointValue
+} from '../math/seriaHelperFn';
+
+import {
   isArr,
   bindTo,
   crRouter
 } from './AdapterFn';
-import {
-  getPointDate,
-  getPointValue
-} from './getterPointFn';
 
 const _crPTag = className => className
   ? `<p class="${className}">`

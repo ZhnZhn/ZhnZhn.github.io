@@ -39,8 +39,8 @@ var _seriaFn = require("../math/seriaFn");
 exports.findMinY = _seriaFn.findMinY;
 exports.findMaxY = _seriaFn.findMaxY;
 exports.filterTrimZero = _seriaFn.filterTrimZero;
+var _seriaHelperFn = require("../math/seriaHelperFn");
 var _DirectionType = require("../constants/DirectionType");
-var _getterPointFn = require("./getterPointFn");
 var _isTypeFn = require("../utils/isTypeFn");
 exports.isArr = _isTypeFn.isArr;
 exports.isNumber = _isTypeFn.isNumber;
@@ -60,8 +60,8 @@ const crDfItemKey = _ref => {
 exports.crDfItemKey = crDfItemKey;
 const EMPTY = '';
 const _fIsNumber = pn => p => (0, _isTypeFn.isTypeNumber)(p[pn]) && isFinite(p[pn]);
-const _crBigValueFrom = point => (0, _big.default)((0, _getterPointFn.getPointValue)(point));
-const _crDmyFrom = point => (0, _dateFn.mlsToDmy)((0, _getterPointFn.getPointDate)(point));
+const _crBigValueFrom = point => (0, _big.default)((0, _seriaHelperFn.getPointValue)(point));
+const _crDmyFrom = point => (0, _dateFn.mlsToDmy)((0, _seriaHelperFn.getPointDate)(point));
 const toTd = mls => (0, _isTypeFn.isNumber)(mls) ? (0, _dateFormat.toTd)(mls) : '';
 exports.toTd = toTd;
 const getCaption = exports.getCaption = _getPropertyFn.getC;
@@ -86,7 +86,7 @@ const crError = function (errCaption, message) {
 exports.crError = crError;
 const crErrorByMessage = message => crError('', message);
 exports.crErrorByMessage = crErrorByMessage;
-const toTimeDate = strDateOr => (0, _isTypeFn.isStr)(strDateOr) && strDateOr ? `${strDateOr.slice(11, 19)} ${strDateOr.slice(8, 10)}-${strDateOr.slice(5, 7)}-${strDateOr.slice(0, 4)}` : "";
+const toTimeDate = strDateOr => (0, _isTypeFn.isStr)(strDateOr) && strDateOr ? strDateOr.slice(11, 19) + " " + strDateOr.slice(8, 10) + "-" + strDateOr.slice(5, 7) + "-" + strDateOr.slice(0, 4) : "";
 exports.toTimeDate = toTimeDate;
 const _getDataDf = json => (json || {}).data;
 const fCheckResponse = function (getData, getErrMsg) {
@@ -112,7 +112,7 @@ const crShortItemCaption = itemCaption => {
 exports.crShortItemCaption = crShortItemCaption;
 const _crItemCaptionCurrencyRate = (option, toCurrency) => {
   const _fromCurrency = crShortItemCaption(getCaption(option.items[0]));
-  return `${_fromCurrency}/${toCurrency}`;
+  return _fromCurrency + "/" + toCurrency;
 };
 const setItemCaptionTo = (option, itemCaption) => {
   option.itemCaption = itemCaption;
@@ -138,7 +138,7 @@ const crValueMoving = _ref2 => {
 exports.crValueMoving = crValueMoving;
 const _calcSumOfSlice = (data, sliceIndex, date) => data.reduce((bSum, _seriesData) => {
   const point = _seriesData[_seriesData.length - sliceIndex];
-  return date === _crDmyFrom(point) ? bSum.plus('' + (0, _getterPointFn.getPointValue)(point)) : bSum;
+  return date === _crDmyFrom(point) ? bSum.plus('' + (0, _seriaHelperFn.getPointValue)(point)) : bSum;
 }, (0, _big.default)('0')).toString();
 const _getRecentDataPoints = data => {
   const _length = data.length,
@@ -171,16 +171,15 @@ const valueMoving = (data, dfR) => {
     };
   }
   const [bNowValue, bPrevValue, date, dateTo] = isSeriesDataCase(data) ? _crSeriesDataRecentTuple(data, dfR) : _crSeriaDataRecentTuple(data);
-  return {
-    ...crValueMoving({
-      bNowValue,
-      bPrevValue,
-      dfR
-    }),
+  return Object.assign({}, crValueMoving({
+    bNowValue,
+    bPrevValue,
+    dfR
+  }), {
     valueTo: (0, _formatAllNumber.default)(bPrevValue),
     date,
     dateTo
-  };
+  });
 };
 exports.valueMoving = valueMoving;
 const fCrValue = (option, crValueDf) => {
@@ -201,13 +200,12 @@ const crZhConfig = (_ref3, configOptions) => {
     itemCaption,
     dataSource
   } = _ref3;
-  return {
-    ...configOptions,
+  return Object.assign({}, configOptions, {
     id: _itemKey,
     key: _itemKey,
     itemCaption,
     dataSource
-  };
+  });
 };
 exports.crZhConfig = crZhConfig;
 let _parser;
@@ -238,7 +236,7 @@ const addToConfigDfLink = (config, caption, href) => {
 exports.addToConfigDfLink = addToConfigDfLink;
 const fAddToConfigInfoAndDfLink = (title, crDfLink) => (config, json, option) => {
   addToConfigInfo(config, option);
-  addToConfigDfLink(config, `${title} Data Portal`, crDfLink(option));
+  addToConfigDfLink(config, title + " Data Portal", crDfLink(option));
   return config;
 };
 
