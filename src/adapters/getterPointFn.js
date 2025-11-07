@@ -1,9 +1,9 @@
-import { 
+import {
   isArr,
   isNumber
 } from './AdapterFn';
 
-export const getPointDate = point =>isArr(point)
+export const getPointDate = point => isArr(point)
   ? point[0]
   : (point || {}).x;
 
