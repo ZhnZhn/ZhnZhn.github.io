@@ -1,15 +1,15 @@
 import { fToKline } from '../fToKline';
-import { klineOptions } from './fnAdapter';
+import {
+  getData,
+  klineOptions
+} from './fnAdapter';
 
-const _getData = (
-  json,
-  { dfPn }
-) => json[dfPn].reverse();
+
 
 const toHistorical = fToKline({
   ...klineOptions,
-  getData: _getData,
-  c: 'adjClose'
+  getData,
+  c: 'close'
 });
 
 export default toHistorical

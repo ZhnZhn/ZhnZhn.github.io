@@ -2,8 +2,9 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
-const URI = 'https://financialmodelingprep.com/api/v3';
+const URI = 'https://financialmodelingprep.com/stable';
 const _crDataSource = _ref => {
   let {
     dataSource,
@@ -28,8 +29,8 @@ const _assignDf = option => {
     }),
     _period = (0, _AdapterFn.getValue)(it3),
     _propName = _crDfPropName(it2, dfT),
-    _query = _period ? `period=${_period}` : '',
-    _itemUrl = `${URI}/${dfT}/${_symbol}?${_query}`;
+    _query = _period ? "&period=" + _period : '',
+    _itemUrl = URI + "/" + dfT + "?symbol=" + _symbol + _query;
   (0, _AdapterFn.assign)(option, {
     _symbol,
     _itemUrl,
@@ -48,10 +49,8 @@ const _assignHp = option => {
     _fromDate = fromDate || (0, _AdapterFn.getFromDate)(3),
     _symbol = (0, _AdapterFn.getValue)(items[0], {
       isUpper: true
-    })
-    //, _itemUrl = `${C.URI}/${dfT}/${_symbol}?from=${_fromDate}&serietype=line`;
-    ,
-    _itemUrl = `${URI}/${dfT}/${_symbol}?from=${_fromDate}`;
+    }),
+    _itemUrl = URI + "/" + dfT + "/?symbol=" + _symbol + "&from=" + _fromDate;
   (0, _AdapterFn.assign)(option, {
     _symbol,
     _itemUrl,
@@ -68,7 +67,7 @@ const _assignCp = option => {
       isUpper: true
     }),
     _interval = (0, _AdapterFn.getValue)(items[1]),
-    _itemUrl = `${URI}/${dfT}/${_interval}/${_symbol}`;
+    _itemUrl = URI + "/" + dfT + "/" + _interval + "?symbol=" + _symbol;
   (0, _AdapterFn.assign)(option, {
     _symbol,
     _itemUrl,
@@ -90,18 +89,13 @@ const FmpApi = {
       } = option,
       _delimeter = option._itemUrl.indexOf('?') === -1 ? '?' : '&';
     option.apiKey = null;
-    return `${option._itemUrl}${_delimeter}apikey=${apiKey}`;
+    return "" + option._itemUrl + _delimeter + "apikey=" + apiKey;
   },
   checkResponse(json, options) {
-    const {
-        dfPn,
-        _symbol
-      } = options,
-      _json = json || {};
-    if (!dfPn && (0, _AdapterFn.isArr)(json) && _json[0].symbol === _symbol || dfPn === 'intraday' && (0, _AdapterFn.isArr)(_json) || (0, _AdapterFn.isArr)(_json[dfPn]) && _json.symbol === _symbol) {
+    if ((0, _isTypeFn.isArr)(json)) {
       return;
     }
-    throw (0, _AdapterFn.crError)(_symbol, _json.Error);
+    throw (0, _AdapterFn.crError)(options._symbol, (0, _isTypeFn.isStr)(json) ? json : '');
   }
 };
 var _default = exports.default = FmpApi;

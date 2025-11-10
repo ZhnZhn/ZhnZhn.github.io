@@ -1,5 +1,9 @@
 import {
   isArr,
+  isStr
+} from '../../utils/isTypeFn';
+
+import {
   assign,
   getCaption,
   getValue,
@@ -7,7 +11,7 @@ import {
   getFromDate
 } from '../AdapterFn';
 
-const URI = 'https://financialmodelingprep.com/api/v3';
+const URI = 'https://financialmodelingprep.com/stable';
 
 const _crDataSource = ({
   dataSource,
@@ -33,9 +37,9 @@ const _assignDf = option => {
   , _period = getValue(it3)
   , _propName = _crDfPropName(it2, dfT)
   , _query = _period
-      ? `period=${_period}`
+      ? `&period=${_period}`
       : ''
-  , _itemUrl = `${URI}/${dfT}/${_symbol}?${_query}`;
+  , _itemUrl = `${URI}/${dfT}?symbol=${_symbol}${_query}`;
 
   assign(option, {
     _symbol,
@@ -54,8 +58,7 @@ const _assignHp = option => {
   } = option
   , _fromDate = fromDate || getFromDate(3)
   , _symbol = getValue(items[0], {isUpper: true})
-  //, _itemUrl = `${C.URI}/${dfT}/${_symbol}?from=${_fromDate}&serietype=line`;
-  , _itemUrl = `${URI}/${dfT}/${_symbol}?from=${_fromDate}`;
+  , _itemUrl = `${URI}/${dfT}/?symbol=${_symbol}&from=${_fromDate}`;
 
   assign(option, {
     _symbol,
@@ -72,7 +75,7 @@ const _assignCp = option => {
   } = option
   , _symbol = getValue(items[0], {isUpper: true})
   , _interval = getValue(items[1])
-  , _itemUrl = `${URI}/${dfT}/${_interval}/${_symbol}`;
+  , _itemUrl = `${URI}/${dfT}/${_interval}?symbol=${_symbol}`;
 
   assign(option, {
     _symbol,
@@ -103,14 +106,13 @@ const FmpApi = {
   },
 
   checkResponse(json, options){
-    const { dfPn, _symbol } = options
-    , _json = json || {};
-    if (!dfPn && isArr(json) && _json[0].symbol === _symbol
-     || dfPn === 'intraday' && isArr(_json)
-     || isArr(_json[dfPn]) && _json.symbol === _symbol) {
+    if (isArr(json)) {
        return;
     }
-    throw crError(_symbol, _json.Error);
+    throw crError(
+      options._symbol,
+      isStr(json) ? json : ''      
+    );
   }
 };
 

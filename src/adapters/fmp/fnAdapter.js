@@ -7,14 +7,15 @@ import {
   compareByDate
 } from '../compareByFn';
 
+export const getData = json => json.reverse()
+
 export const crData = (
   json,
   option
 ) => {
-  const { dfPn, _propName } = option
-  , _metrics = dfPn ? json[dfPn] : json
+  const { _propName } = option  
   , _data = [];
-  _metrics.forEach(item => {
+  json.forEach(item => {
     const _v = parseFloat(item[_propName]);
     if (isNumber(_v)) {
       _data.push([ymdToUTC(item.date), _v])
