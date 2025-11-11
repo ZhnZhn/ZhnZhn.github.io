@@ -10,7 +10,6 @@ export {
 } from '../AdapterFn';
 export { fCrData } from '../av/AvFn';
 
-import { valueMoving } from '../AdapterFn';
 import {
   crItemConf,
   crValueConf
@@ -72,5 +71,4 @@ export const crIntradayConfigOption = (
   option
 ) => ({
   zhConfig: _crZhConfig(config, option),
-  valueMoving: valueMoving(config.data)
 })

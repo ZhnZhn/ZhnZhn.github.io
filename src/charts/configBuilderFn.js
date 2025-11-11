@@ -1,7 +1,8 @@
 export { crSeriaConfig } from './ChartConfigFn';
 
 import {
-  isSeriesDataCase
+  isSeriesDataCase,
+  valueMoving
 } from '../adapters/AdapterFn';
 import pipe from '../utils/pipe';
 import {
@@ -200,6 +201,14 @@ const _setYAxisType = (
   }
 }
 
+const _setValueMoving = (
+  _rt,
+  data,
+  config
+) => {
+  config.valueMoving = valueMoving(data, _rt)
+}
+
 export const fAddMinMax = (
   data,
   option
@@ -210,7 +219,8 @@ export const fAddMinMax = (
     isFilterZero,
     isLogarithmic,
     minY,
-    maxY
+    maxY,
+    _rt
   } = option
   , _data = isFilterZero
       ? filterTrimZero(data)
@@ -221,6 +231,7 @@ export const fAddMinMax = (
   _setMinMax(min, max, isNotZoomToMinMax, config);
   _setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems, config);
   _setYAxisType(isLogarithmic, _data, config);
+  _setValueMoving(_rt, _data, config);
 
   return config;
 }

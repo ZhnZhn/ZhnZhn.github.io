@@ -20,7 +20,6 @@ import {
   toUpperCaseFirst,
   monthIndex,
   ymdToUTC,
-  valueMoving,
   addSeriesDataTypeTo
 } from '../AdapterFn';
 import { DATASET_EMPTY } from './fnDescr';
@@ -198,12 +197,6 @@ export const crZhConfig = ({
   dataSource: "FAOSTAT",
   itemCaption
 })
-
-export const crValueMoving = (
-  points
-) => isArr(points) && !isArr(points[0])
-  ? valueMoving(points)
-  : void 0;
 
 export const isSeriesReq = _getSeriesPropName
 export const isQueryAllowed = _isListForList

@@ -11,10 +11,10 @@ var _crFn = require("../crFn");
 exports.crId = _crFn.crId;
 var _arrFn = require("../../utils/arrFn");
 var _JsonStatFn = require("../JsonStatFn");
-const _crTitle = country => `Statisctics ${country}: All Items`,
+const _crTitle = country => "Statisctics " + country + ": All Items",
   TITLE_NST = _crTitle('Norway'),
   TITLE_SWS = _crTitle('Sweden');
-const _crSearchTitle = country => `Statistics ${country} Search`;
+const _crSearchTitle = country => "Statistics " + country + " Search";
 const SEARCH_NST = ['https://www.ssb.no/en/sok?sok=', _crSearchTitle('Norway')],
   SEARCH_SWS = ['https://www.scb.se/en/finding-statistics/search/?query=', _crSearchTitle('Sweden')],
   SEARCH_SFL = ['https://statfin.stat.fi/PXWeb/pxweb/en/StatFin/', "Statistics Finland's PX-Web"],
@@ -24,7 +24,7 @@ const SEARCH_NST = ['https://www.ssb.no/en/sok?sok=', _crSearchTitle('Norway')],
     let {
       dfId
     } = _ref;
-    return [`https://www.pxweb.bfs.admin.ch/pxweb/en/${dfId}/-/${dfId}.px/`, 'Statistics Swiss Stat-Tab'];
+    return ["https://www.pxweb.bfs.admin.ch/pxweb/en/" + dfId + "/-/" + dfId + ".px/", 'Statistics Swiss Stat-Tab'];
   };
 const MAX_SOURCE_ID_LENGTH = 9;
 const _crSearchToken = label => {
@@ -36,7 +36,7 @@ const _crLink = function (_ref2, token) {
   if (token === void 0) {
     token = '';
   }
-  return `<a class="native-link" href="${url}${token}">${title}</a>`;
+  return "<a class=\"native-link\" href=\"" + url + token + "\">" + title + "</a>";
 };
 const _crSflSearchToken = _ref3 => {
   let {
@@ -45,7 +45,7 @@ const _crSflSearchToken = _ref3 => {
   const arr = ('' + dfId).split('/'),
     id = arr.pop(),
     prefix = arr.join('__');
-  return prefix && id ? `StatFin__${prefix}/${id}` : '';
+  return prefix && id ? "StatFin__" + prefix + "/" + id : '';
 };
 const _crSearchLink = (label, option) => {
   const _token = _crSearchToken(label);
@@ -74,21 +74,21 @@ const _crDescr = (option, json) => {
     } = option,
     _elSearchLink = _crSearchLink((0, _JsonStatFn.getDatasetLabel)(json), option),
     _source = (0, _JsonStatFn.getDatasetSource)(json);
-  return dfId && _source ? `TableId: ${dfId}<BR/>${_source}: ${_date}<BR/>${_elSearchLink}` : _elSearchLink;
+  return dfId && _source ? "TableId: " + dfId + "<BR/>" + _source + ": " + _date + "<BR/>" + _elSearchLink : _elSearchLink;
 };
 const _crItemCaption = _ref4 => {
   let {
     items,
     dfId
   } = _ref4;
-  return `${dfId || 'id'}_${(items[0] || {}).caption || 'All Items'}`;
+  return (dfId || 'id') + "_" + ((items[0] || {}).caption || 'All Items');
 };
 const _crDataSource = _ref5 => {
   let {
     dataSource,
     dfId
   } = _ref5;
-  return dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? `${dataSource} (${dfId})` : dataSource;
+  return dfId && ('' + dfId).length < MAX_SOURCE_ID_LENGTH ? dataSource + " (" + dfId + ")" : dataSource;
 };
 const crTitle = option => {
   switch (option.browserType) {
@@ -122,16 +122,16 @@ const crZhConfig = option => {
     } = option,
     key = _itemKey || (0, _crFn.crId)(),
     itemCaption = option.itemCaption || _crItemCaption(option),
-    itemConf = url ? {
-      _itemKey: key,
-      ...(0, _crFn.crItemConf)(option),
+    itemConf = url ? Object.assign({
+      _itemKey: key
+    }, (0, _crFn.crItemConf)(option), {
       optionFetch,
       items,
       dataSource,
       //sfl
       dfId,
       timeId
-    } : void 0;
+    }) : void 0;
   return {
     id: key,
     key,
@@ -146,9 +146,8 @@ const crConfOption = (option, json) => ({
   zhConfig: crZhConfig(option)
 });
 exports.crConfOption = crConfOption;
-const crChartOption = (data, option, json) => ({
-  valueMoving: (0, _AdapterFn.valueMoving)(data),
-  ...crConfOption(option, json)
-});
+const crChartOption = (data, option, json) => Object.assign({
+  valueMoving: (0, _AdapterFn.valueMoving)(data)
+}, crConfOption(option, json));
 exports.crChartOption = crChartOption;
 //# sourceMappingURL=fnAdapter.js.map

@@ -23,10 +23,7 @@ const crConfigType1 = _ref => {
     _rt
   } = option;
   ifCaseRoundBy(_rt, data);
-  return (0, _pipe.default)((0, _configBuilderFn.crSplineConfig)(data, option), (0, _configBuilderFn.fAddMinMax)(data, option), (0, _configBuilderFn.fAdd)({
-    valueMoving: (0, _AdapterFn.valueMoving)(data, _rt)
-  }), (0, _configBuilderFn.fAdd)(confOption), _configBuilderFn.toConfig);
+  return (0, _pipe.default)((0, _configBuilderFn.crSplineConfig)(data, option), (0, _configBuilderFn.fAddMinMax)(data, option), (0, _configBuilderFn.fAdd)(confOption), _configBuilderFn.toConfig);
 };
-var _default = crConfigType1;
-exports.default = _default;
+var _default = exports.default = crConfigType1;
 //# sourceMappingURL=crConfigType1.js.map

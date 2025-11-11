@@ -14,9 +14,8 @@ import {
 import {
   FN_IDENTITY,
   FN_NOOP,
-  crDfItemKey,
-  valueMoving
-} from './AdapterFn'
+  crDfItemKey
+} from './AdapterFn';
 import { stockSeriesLegend } from './legendFn';
 import { toStockSeriesData } from './AdapterStockFn';
 
@@ -63,13 +62,10 @@ const crAdapterOHLCV = ({
           seriaWidth
         }),
         fAddCaption(title, subtitle),
-        fAdd({
-          valueMoving: valueMoving(dC),
-          ...crAddConfig({
-             json, option, data: dC,
-             id, title, subtitle
-          })
-        }),
+        fAdd(crAddConfig({
+          json, option, data: dC,
+          id, title, subtitle
+        })),
         fAddZhPoints(dMfi),
         fAdd('zhConfig', { legend: stockSeriesLegend() }),
         toConfig

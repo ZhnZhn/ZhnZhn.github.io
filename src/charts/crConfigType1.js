@@ -3,8 +3,7 @@ import pipe from '../utils/pipe';
 import {
   isArr,
   isNumber,
-  roundBy,
-  valueMoving
+  roundBy
 } from '../adapters/AdapterFn';
 import {
   crSplineConfig,
@@ -38,7 +37,6 @@ const crConfigType1 = ({
   return pipe(
     crSplineConfig(data, option),
     fAddMinMax(data, option),
-    fAdd({ valueMoving: valueMoving(data, _rt) }),
     fAdd(confOption),
     toConfig
   );

@@ -49,24 +49,20 @@ const crAdapterOHLCV = _ref2 => {
           dMfi
         } = dataOption;
       return {
-        config: (0, _pipe.default)((0, _stockBuilderFn.crStockConfig)(id, {
-          ...dataOption,
+        config: (0, _pipe.default)((0, _stockBuilderFn.crStockConfig)(id, Object.assign({}, dataOption, {
           isNotZoomToMinMax,
           isDrawDeltaExtrems,
           seriaType,
           //seriaColor,
           seriaWidth
-        }), (0, _configBuilderFn.fAddCaption)(title, subtitle), (0, _configBuilderFn.fAdd)({
-          valueMoving: (0, _AdapterFn.valueMoving)(dC),
-          ...crAddConfig({
-            json,
-            option,
-            data: dC,
-            id,
-            title,
-            subtitle
-          })
-        }), (0, _configBuilderFn.fAddZhPoints)(dMfi), (0, _configBuilderFn.fAdd)('zhConfig', {
+        })), (0, _configBuilderFn.fAddCaption)(title, subtitle), (0, _configBuilderFn.fAdd)(crAddConfig({
+          json,
+          option,
+          data: dC,
+          id,
+          title,
+          subtitle
+        })), (0, _configBuilderFn.fAddZhPoints)(dMfi), (0, _configBuilderFn.fAdd)('zhConfig', {
           legend: (0, _legendFn.stockSeriesLegend)()
         }), _configBuilderFn.toConfig)
       };

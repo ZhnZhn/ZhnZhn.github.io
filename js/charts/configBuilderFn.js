@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.toConfig = exports.setDataSourceTo = exports.setBarConfigHeightIf = exports.fSetSeriaBy = exports.fAddZhPoints = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSplineConfig = exports.crSeriaConfigFromAdapter = exports.crScatterSeriaConfig = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 var _ChartConfigFn = require("./ChartConfigFn");
 exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
 var _AdapterFn = require("../adapters/AdapterFn");
@@ -17,6 +18,7 @@ var _ChartFactory = require("./ChartFactory");
 var _Tooltip = require("./Tooltip");
 var _seriaBuilderHelpers = require("./seriaBuilderHelpers");
 var _configBuilderHelpers = require("./configBuilderHelpers");
+const _excluded = ["data"];
 const _isArr = Array.isArray,
   _assign = Object.assign;
 const fAddCaption = (title, subtitle) => config => {
@@ -121,6 +123,9 @@ const _setYAxisType = (isLogarithmic, data, config) => {
     }
   }
 };
+const _setValueMoving = (_rt, data, config) => {
+  config.valueMoving = (0, _AdapterFn.valueMoving)(data, _rt);
+};
 const fAddMinMax = (data, option) => config => {
   const {
       isNotZoomToMinMax,
@@ -128,7 +133,8 @@ const fAddMinMax = (data, option) => config => {
       isFilterZero,
       isLogarithmic,
       minY,
-      maxY
+      maxY,
+      _rt
     } = option,
     _data = isFilterZero ? (0, _seriaFn.filterTrimZero)(data) : data,
     min = (0, _configBuilderHelpers.findMinYData)(minY, _data),
@@ -136,6 +142,7 @@ const fAddMinMax = (data, option) => config => {
   _setMinMax(min, max, isNotZoomToMinMax, config);
   _setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems, config);
   _setYAxisType(isLogarithmic, _data, config);
+  _setValueMoving(_rt, _data, config);
   return config;
 };
 exports.fAddMinMax = fAddMinMax;
@@ -277,10 +284,9 @@ const crSeriaConfigFromAdapter = _ref => {
   return _seria;
 };
 exports.crSeriaConfigFromAdapter = crSeriaConfigFromAdapter;
-const crAreaConfig = option => (0, _ChartConfigFn.crAreaConfig)({
-  spacingTop: 25,
-  ...option
-});
+const crAreaConfig = option => (0, _ChartConfigFn.crAreaConfig)(Object.assign({
+  spacingTop: 25
+}, option));
 exports.crAreaConfig = crAreaConfig;
 const crArea2Config = (title, subtitle) => {
   const config = fAddCaption(title, subtitle)(crAreaConfig());
@@ -317,12 +323,9 @@ const CATEGORIES_X_AXIS = {
 
 //toYearsByMonths
 const crCategoryConfig = (categories, title, subtitle) => fAdd({
-  xAxis: {
-    ...CATEGORIES_X_AXIS,
-    ...{
-      categories
-    }
-  },
+  xAxis: Object.assign({}, CATEGORIES_X_AXIS, {
+    categories
+  }),
   yAxis: CATEGORIES_Y_AXIS
 })(crArea2Config(title, subtitle));
 exports.crCategoryConfig = crCategoryConfig;
@@ -365,30 +368,23 @@ const CONFIG_SERIA = {
 const MAX_NUMBER_OF_VISIBLE_SERIES = 8;
 const crSplineSeriaConfig = _ref2 => {
   let {
-    data,
-    ...restOption
-  } = _ref2;
-  return (0, _AdapterFn.isSeriesDataCase)(data) ? data.map((seriaData, i) => (0, _ChartConfigFn.crSeriaConfig)({
-    ...CONFIG_SERIA,
-    ...restOption,
+      data
+    } = _ref2,
+    restOption = (0, _objectWithoutPropertiesLoose2.default)(_ref2, _excluded);
+  return (0, _AdapterFn.isSeriesDataCase)(data) ? data.map((seriaData, i) => (0, _ChartConfigFn.crSeriaConfig)(Object.assign({}, CONFIG_SERIA, restOption, {
     data: seriaData,
     color: seriaData.color || (0, _ChartTheme.getSeriaColorByIndex)(i),
     name: seriaData.seriaName,
     visible: i < MAX_NUMBER_OF_VISIBLE_SERIES
-  })) : (0, _ChartConfigFn.crSeriaConfig)({
-    ...CONFIG_SERIA,
-    ...restOption,
+  }))) : (0, _ChartConfigFn.crSeriaConfig)(Object.assign({}, CONFIG_SERIA, restOption, {
     data
-  });
+  }));
 };
 exports.crSplineSeriaConfig = crSplineSeriaConfig;
 const CONFIG_SCATTER = {
   type: 'scatter'
 };
-const crScatterSeriaConfig = (tooltip, option) => fAdd('tooltip', (0, _Chart.fTooltip)(tooltip))({
-  ...CONFIG_SCATTER,
-  ...option
-});
+const crScatterSeriaConfig = (tooltip, option) => fAdd('tooltip', (0, _Chart.fTooltip)(tooltip))(Object.assign({}, CONFIG_SCATTER, option));
 exports.crScatterSeriaConfig = crScatterSeriaConfig;
 const crSplineConfig = (data, option) => {
   const {

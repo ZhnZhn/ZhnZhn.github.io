@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.crZhConfig = exports.crValueMoving = exports.crTitle = exports.crSubtitle = exports.crCategoryTitle = void 0;
+exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.crZhConfig = exports.crTitle = exports.crSubtitle = exports.crCategoryTitle = void 0;
 var _fnDescr = require("./fnDescr");
 exports.toInfo = _fnDescr.toInfo;
 var _isTypeFn = require("../../utils/isTypeFn");
@@ -26,7 +26,7 @@ const _crPoint = _ref => {
     Value
   } = _ref;
   const m = Months ? (0, _AdapterFn.monthIndex)(Months) + 1 : 0,
-    Tail = m !== 0 ? `-${m}` : MM_DD;
+    Tail = m !== 0 ? "-" + m : MM_DD;
   return {
     x: (0, _AdapterFn.ymdToUTC)('' + Year + Tail),
     y: parseFloat(Value)
@@ -44,10 +44,9 @@ const _crHm = (data, prName) => data.reduce((hm, item) => {
 const _compareByY = (a, b) => b.y - a.y;
 const _crRefLegend = hm => (0, _isTypeFn.getObjectKeys)(hm).map(propName => {
   const _arr = hm[propName];
-  return {
-    ..._arr[_arr.length - 1],
+  return Object.assign({}, _arr[_arr.length - 1], {
     listPn: propName
-  };
+  });
 }).filter(_AdapterFn.isYNumber).sort(_compareByY);
 const _hmToPoints = (hm, arr) => arr.map(item => hm[item.listPn]);
 const _getNotEmptySeriaIndex = _data => {
@@ -88,7 +87,7 @@ const crTitle = (json, option) => {
     subtitle
   } = option;
   if (dfSubtitle) {
-    return `${subtitle} ${_crUnit(json)}: ${title}`;
+    return subtitle + " " + _crUnit(json) + ": " + title;
   }
   if (title) {
     return (0, _arrFn.joinByColon)(dfTitle, title);
@@ -100,7 +99,7 @@ const crTitle = (json, option) => {
   return (0, _isTypeFn.isObj)(p) ? (0, _arrFn.joinByBlank)(p.Area, p.Item, p.Element) : DF_TITLE;
 };
 exports.crTitle = crTitle;
-const crSubtitle = (json, option) => option.dfSubtitle || `${option.subtitle}: ${_crUnit(json)}`;
+const crSubtitle = (json, option) => option.dfSubtitle || option.subtitle + ": " + _crUnit(json);
 exports.crSubtitle = crSubtitle;
 const toDataPoints = (json, option) => {
   const _prName = _getSeriesPropName(option),
@@ -123,8 +122,6 @@ const crZhConfig = _ref4 => {
   };
 };
 exports.crZhConfig = crZhConfig;
-const crValueMoving = points => (0, _isTypeFn.isArr)(points) && !(0, _isTypeFn.isArr)(points[0]) ? (0, _AdapterFn.valueMoving)(points) : void 0;
-exports.crValueMoving = crValueMoving;
 const isSeriesReq = exports.isSeriesReq = _getSeriesPropName;
 const isQueryAllowed = exports.isQueryAllowed = _isListForList;
 const crCategoryTitle = (title, json) => {

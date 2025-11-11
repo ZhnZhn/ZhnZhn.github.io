@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.roundBy = exports.isTokenInStr = exports.isInArrStr = exports.isArr = exports.fCrData = exports.crIntradayConfigOption = exports.crError = exports.crDfItemKey = exports.DF_FN_EOD = void 0;
+exports.ymdhmsToUTC = exports.valueMoving = exports.roundBy = exports.isTokenInStr = exports.isInArrStr = exports.isArr = exports.fCrData = exports.crIntradayConfigOption = exports.crError = exports.crDfItemKey = exports.DF_FN_EOD = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isArr = _AdapterFn.isArr;
 exports.isInArrStr = _AdapterFn.isInArrStr;
@@ -27,15 +27,14 @@ const _crItemConf = (_ref, option) => {
     items,
     dataSource
   } = option;
-  return dfFn === DF_FN_EOD ? {
-    _itemKey,
-    ...(0, _crFn.crItemConf)(option),
-    ...(0, _crFn.crValueConf)(data),
+  return dfFn === DF_FN_EOD ? Object.assign({
+    _itemKey
+  }, (0, _crFn.crItemConf)(option), (0, _crFn.crValueConf)(data), {
     items: [...(items || [])],
     dfFn,
     dfSubId,
     dataSource
-  } : void 0;
+  }) : void 0;
 };
 const _crZhConfig = (config, option) => {
   const {
@@ -58,8 +57,7 @@ const _crZhConfig = (config, option) => {
   };
 };
 const crIntradayConfigOption = (config, option) => ({
-  zhConfig: _crZhConfig(config, option),
-  valueMoving: (0, _AdapterFn.valueMoving)(config.data)
+  zhConfig: _crZhConfig(config, option)
 });
 exports.crIntradayConfigOption = crIntradayConfigOption;
 //# sourceMappingURL=fnAdapter.js.map
