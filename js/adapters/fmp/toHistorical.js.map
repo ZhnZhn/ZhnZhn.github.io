@@ -5,19 +5,26 @@
  ],
  "file": "../../../src/adapters/fmp/toHistorical.js",
  "names": [
-  "_fToKline",
+  "_AdapterFn",
   "require",
-  "_fnAdapter",
+  "_fToKline",
   "toHistorical",
   "fToKline",
-  "Object",
-  "assign",
-  "klineOptions",
-  "getData",
+  "isAth",
+  "d",
+  "v",
+  "l",
+  "h",
+  "o",
   "c",
+  "crDate",
+  "ymdhmsToUTC",
+  "getData",
+  "json",
+  "reverse",
   "_default",
   "exports",
   "default"
  ],
- "mappings": ";;;;AAAA,IAAAA,SAAA,GAAAC,OAAA;AACA,IAAAC,UAAA,GAAAD,OAAA;AAOA,MAAME,YAAY,GAAG,IAAAC,kBAAQ,EAAAC,MAAA,CAAAC,MAAA,KACxBC,uBAAY;EACfC,OAAO,EAAPA,kBAAO;EACPC,CAAC,EAAE;AAAO,EACX,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYT,YAAY"
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AACA,IAAAC,SAAA,GAAAD,OAAA;AAGA,MAAME,YAAY,GAAG,IAAAC,kBAAQ,EAAC;EAC5BC,KAAK,EAAE,IAAI;EACXC,CAAC,EAAE,MAAM;EACTC,CAAC,EAAE,QAAQ;EACXC,CAAC,EAAE,KAAK;EACRC,CAAC,EAAE,MAAM;EACTC,CAAC,EAAE,MAAM;EACTC,CAAC,EAAE,OAAO;EACVC,MAAM,EAAEC,sBAAW;EACnBC,OAAO,EAAEC,IAAI,IAAIA,IAAI,CAACC,OAAO,CAAC;AAChC,CAAC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEYhB,YAAY"
 }

@@ -1,1 +1,1 @@
-{"items":[{"c":"Stock Price"},{"c":"Number of Shares"},{"c":"Market Capitalization"},{"c":"- Cash & Cash Equivalents"},{"c":"+ Total Debt"},{"c":"Enterprise Value"}]}
+{"items":[{"c":"Stock Price","v":"stockPrice"},{"c":"Number of Shares","v":"numberOfShares"},{"c":"Market Capitalization","v":"marketCapitalization"},{"c":"Minus Cash and Cash Equivalents","v":"minusCashAndCashEquivalents"},{"c":"Add Total Debt","v":"addTotalDebt"},{"c":"Enterprise Value","v":"enterpriseValue"}]}

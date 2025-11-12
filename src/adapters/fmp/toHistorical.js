@@ -1,15 +1,17 @@
+import { ymdhmsToUTC } from '../AdapterFn';
 import { fToKline } from '../fToKline';
-import {
-  getData,
-  klineOptions
-} from './fnAdapter';
-
 
 
 const toHistorical = fToKline({
-  ...klineOptions,
-  getData,
-  c: 'close'
+  isAth: true,
+  d: 'date',
+  v: 'volume',
+  l: 'low',
+  h: 'high',
+  o: 'open',
+  c: 'close',
+  crDate: ymdhmsToUTC,
+  getData: json => json.reverse()
 });
 
 export default toHistorical

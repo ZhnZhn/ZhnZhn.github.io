@@ -5,7 +5,6 @@ import {
 
 import {
   assign,
-  getCaption,
   getValue,
   crError,
   getFromDate
@@ -19,23 +18,12 @@ const _crDataSource = ({
 }) => dataSource
  || (dialogConf || {}).contFullCaption || '';
 
-const REG_BLANKS = /\s/g;
-const _toLowerCamelCase = str => str[0].toLowerCase()
-  + str.replace(REG_BLANKS,'').substring(1);
-
-const _crDfPropName = (item, dfT) => {
-  const _caption = getCaption(item);
-  return dfT !== "ratios"
-    ? _caption
-    : _toLowerCamelCase(_caption);
-};
-
 const _assignDf = option => {
   const { dfT, items=[] } = option
   , [ it1, it2 , it3 ] = items
   , _symbol = getValue(it1, {isUpper: true})
   , _period = getValue(it3)
-  , _propName = _crDfPropName(it2, dfT)
+  , _propName = getValue(it2)
   , _query = _period
       ? `&period=${_period}`
       : ''
@@ -111,7 +99,7 @@ const FmpApi = {
     }
     throw crError(
       options._symbol,
-      isStr(json) ? json : ''      
+      isStr(json) ? json : ''
     );
   }
 };
