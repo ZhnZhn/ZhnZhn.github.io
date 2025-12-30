@@ -11,19 +11,34 @@ var _compareByFn = require("../compareByFn");
 const DOMESTIC_EQUITIES = "domestic_equities";
 const FOREIGN_EQUITIES = "foreign_equities";
 const FOREIGN_EQUITIES_SHORT_FORM = "For. Eq.";
-const _getByProps = (json, propName) => (json || {})[propName] || "n/a";
+const NA = "n/a";
+const _getByProps = (json, propName) => (json || {})[propName] || NA;
 const crItemCaption = (_ref, json) => {
   let {
     itemCaption
   } = _ref;
   return `${(0, _AdapterFn.crShortItemCaption)(itemCaption)} ${(0, _AdapterFn.numberFormat)(_getByProps(json, "net_assets"), "")}`;
 };
+const _crHoldingDescription = (item, index) => {
+  const _description = _getByProps(item, "description");
+  return _description === NA ? NA + " " + index : _description.slice(0, 20);
+};
 const crData = (json, option) => {
   const {
       holdings,
       asset_allocation
     } = json || {},
-    data = (holdings || {}).map(item => (0, _CategoryFn.crCategoryPoint)(parseFloat(item.weight), item.symbol), []);
+    data = [];
+  if ((0, _isTypeFn.isArr)(holdings)) {
+    holdings.forEach((item, index) => {
+      if ((0, _isTypeFn.isObj)(item)) {
+        const _weight = parseFloat(item.weight);
+        if (_weight !== 0) {
+          data.push((0, _CategoryFn.crCategoryPoint)(_weight, item.symbol === NA ? _crHoldingDescription(item, index) : item.symbol));
+        }
+      }
+    });
+  }
   (0, _isTypeFn.getObjectKeys)(asset_allocation).forEach(key => {
     if (key !== DOMESTIC_EQUITIES) {
       const value = parseFloat(asset_allocation[key]);

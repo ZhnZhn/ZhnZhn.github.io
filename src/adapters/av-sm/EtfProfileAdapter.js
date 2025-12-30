@@ -1,4 +1,6 @@
 import {
+  isArr,
+  isObj,
   isPositiveNumber,
   getObjectKeys
 } from '../../utils/isTypeFn';
@@ -15,25 +17,49 @@ import { sortDescCategory } from '../compareByFn';
 const DOMESTIC_EQUITIES = "domestic_equities";
 const FOREIGN_EQUITIES = "foreign_equities";
 const FOREIGN_EQUITIES_SHORT_FORM = "For. Eq.";
+const NA = "n/a";
 
 const _getByProps = (
   json,
   propName
-) => (json || {})[propName] || "n/a";
+) => (json || {})[propName] || NA;
 
 const crItemCaption = ({
   itemCaption
 }, json) => `${crShortItemCaption(itemCaption)} ${numberFormat(_getByProps(json, "net_assets"), "")}`;
+
+const _crHoldingDescription = (
+  item,
+  index
+) => {
+  const _description = _getByProps(item, "description");
+  return _description === NA
+    ? NA + " " + index
+    : _description.slice(0, 20);
+}
 
 const crData = (json, option) => {
   const {
     holdings,
     asset_allocation
   } = json || {}
-  , data = (holdings || {}).map(item => crCategoryPoint(
-      parseFloat(item.weight),
-      item.symbol
-  ), []);
+  , data = [];
+
+  if (isArr(holdings)) {
+    holdings.forEach((item, index) => {
+      if (isObj(item)) {
+        const _weight = parseFloat(item.weight);
+        if (_weight !== 0) {
+          data.push(crCategoryPoint(
+            _weight,
+            item.symbol === NA
+              ? _crHoldingDescription(item, index)
+              : item.symbol
+          ))
+        }
+      }
+    })
+  }
 
   getObjectKeys(asset_allocation)
     .forEach(key => {
