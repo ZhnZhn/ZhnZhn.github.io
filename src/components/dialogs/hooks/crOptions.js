@@ -49,6 +49,11 @@ const _crCpItems = arr => arr
     v: id || (`${v}-${(c || '').replace(REG_BLANKS, '-')}`).toLowerCase()
 }));
 
+const _crTupleItems = arr => arr.map(tuple => ({
+  c: tuple[0],
+  v: tuple[1]
+}));
+
 const _fCrItems = crValue => arr => arr.map(c => {
   const [b, q] = c.split('/');
   return {c, v: crValue(b, q)};
@@ -68,7 +73,9 @@ const _fCrItems = crValue => arr => arr.map(c => {
   //gt-items
   t3: _fCrItems(_crValueT3),
   //bn-items
-  nbq: _crNbqItems
+  nbq: _crNbqItems,
+  //ember
+  t: _crTupleItems
 };
 
 const _crItemsWithFilters = (
