@@ -46,6 +46,16 @@ export const crStyleCenter = (
   ...styleProps
 })
 
+export const crStyleEllipsis = (
+  maxWidth
+) => _crStyle({
+  display: "inline-block",
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  maxWidth
+})
+
 export const crNumberProps = (n) => ({
   toN: [n],
   isF: true,

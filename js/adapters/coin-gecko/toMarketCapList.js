@@ -31,7 +31,10 @@ const CHANGE_PERCENTAGE = "change_percentage",
     fn: _AdapterFn.toTimeDate
   });
 const _getTableHeaders = (0, _fGetLazyValue.fGetLazyValue)(() => {
-  const headers = [(0, _toTableFn.crRankProps)("Rank", "market_cap_rank"), (0, _toTableFn.crNameProps)("Name"), {
+  const headers = [(0, _toTableFn.crRankProps)("Rank", "market_cap_rank"), {
+    ...(0, _toTableFn.crNameProps)("Name"),
+    ...(0, _toTableFn.crStyleEllipsis)(150)
+  }, {
     ...(0, _toTableFn.crNameProps)("Symbol", true),
     ...(0, _toTableFn.crStyleBold)({
       textTransform: "uppercase"

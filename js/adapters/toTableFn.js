@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crTableRows = exports.crTableOptions = exports.crTableFlatHeaders = exports.crTableConfig = exports.crStyleCenter = exports.crStyleBold = exports.crRankProps = exports.crNumberProps = exports.crNameProps = exports.crCaptionItemsProps = void 0;
+exports.crTableRows = exports.crTableOptions = exports.crTableFlatHeaders = exports.crTableConfig = exports.crStyleEllipsis = exports.crStyleCenter = exports.crStyleBold = exports.crRankProps = exports.crNumberProps = exports.crNameProps = exports.crCaptionItemsProps = void 0;
 var _arrFn = require("../utils/arrFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _AdapterFn = require("./AdapterFn");
@@ -27,6 +27,14 @@ const crStyleCenter = styleProps => _crStyle({
   ...styleProps
 });
 exports.crStyleCenter = crStyleCenter;
+const crStyleEllipsis = maxWidth => _crStyle({
+  display: "inline-block",
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  maxWidth
+});
+exports.crStyleEllipsis = crStyleEllipsis;
 const crNumberProps = n => ({
   toN: [n],
   isF: true,

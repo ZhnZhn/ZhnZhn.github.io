@@ -3,6 +3,7 @@ import { toTimeDate } from "../AdapterFn";
 
 import {
   crRankProps,
+  crStyleEllipsis,
   crStyleBold,
   crNameProps,
   crNumberProps,
@@ -71,7 +72,10 @@ const CHANGE_PERCENTAGE = "change_percentage"
 const _getTableHeaders = fGetLazyValue(() => {
   const headers = [
     crRankProps("Rank", "market_cap_rank"),
-    crNameProps("Name"),
+    {
+      ...crNameProps("Name"),
+      ...crStyleEllipsis(150)
+    },
     {
       ...crNameProps("Symbol", true),
       ...crStyleBold({ textTransform: "uppercase" })
@@ -132,7 +136,7 @@ const toMarketCapList = {
       title: option.title,
       headers, flatHeaders, rows,
       dataSource: _crDataSource(rows)
-    });    
+    });
     return { config };
   }
 }
