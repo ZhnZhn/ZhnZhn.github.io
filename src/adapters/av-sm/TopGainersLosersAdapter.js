@@ -4,13 +4,13 @@ import {
 } from "../../utils/isTypeFn";
 
 import {
+  roundBy
+} from "../../math/mathFn";
+
+import {
   crStyleBold,
   crTableOptions
 } from "../toTableFn";
-
-import {
-  roundBy
-} from "./fnAdapter";
 
 const ID = "alp_perf"
 , DATA_SOURCE = "Alpha Vantage"

@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.crData = exports.crConfOption = exports.CRYPTOCOMPARE_COM = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _mathFn = require("../../math/mathFn");
 var _AdapterFn = require("../AdapterFn");
 var _pointFn = require("../pointFn");
 const CRYPTOCOMPARE_COM = exports.CRYPTOCOMPARE_COM = 'cryptocompare.com';
@@ -33,8 +34,8 @@ const _addColumnPointTo = (arr, date, p, volume) => {
 const _addHLPointTo = (arr, date, p) => {
   arr.push({
     x: date,
-    high: (0, _AdapterFn.roundBy)(p.high - p.close, 2),
-    low: (0, _AdapterFn.roundBy)(p.low - p.close, 2),
+    high: (0, _mathFn.roundBy)(p.high - p.close, 2),
+    low: (0, _mathFn.roundBy)(p.low - p.close, 2),
     open: p.open,
     dayHigh: p.high,
     dayLow: p.low,

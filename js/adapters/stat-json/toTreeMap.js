@@ -6,6 +6,7 @@ exports.default = void 0;
 var _ChartType = require("../../constants/ChartType");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _configBuilderFn = require("../../charts/configBuilderFn");
+var _mathFn = require("../../math/mathFn");
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 var _JsonStatFn = require("../JsonStatFn");
@@ -31,7 +32,7 @@ const _addPercent = data => {
   const _total = data.reduce((acc, item) => acc + item.value, 0),
     _onePercent = _total / 100;
   return [data.map(p => {
-    p.percent = (0, _fnAdapter.roundBy)(p.value / _onePercent);
+    p.percent = (0, _mathFn.roundBy)(p.value / _onePercent);
     p.name = (0, _TreeMapFn.crPointName)(p.label, p.percent);
     return p;
   }), _total];

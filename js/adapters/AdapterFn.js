@@ -33,7 +33,6 @@ exports.getByPropsFrom = _getByPropsFrom.getByPropsFrom;
 var _toUpperCaseFirst = require("../utils/toUpperCaseFirst");
 exports.toUpperCaseFirst = _toUpperCaseFirst.toUpperCaseFirst;
 var _mathFn = require("../math/mathFn");
-exports.roundBy = _mathFn.roundBy;
 exports.isInRange = _mathFn.isInRange;
 var _seriaFn = require("../math/seriaFn");
 exports.findMinY = _seriaFn.findMinY;

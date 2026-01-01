@@ -5,8 +5,11 @@ import {
 } from '../../utils/isTypeFn';
 
 import {
+  roundBy
+} from '../../math/mathFn';
+
+import {
   crError,
-  roundBy,
   ymdToUTC
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';

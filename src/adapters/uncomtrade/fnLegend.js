@@ -1,4 +1,4 @@
-import { roundBy } from '../AdapterFn';
+import { roundBy } from '../../math/mathFn';
 import {
   WORLD,
   AVG_PER_Q,

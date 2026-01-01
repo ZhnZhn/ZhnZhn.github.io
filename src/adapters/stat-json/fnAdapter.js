@@ -1,6 +1,5 @@
 export {
   isYNumber,
-  roundBy,
   toUpperCaseFirst,
   crErrorByMessage,
 } from '../AdapterFn';

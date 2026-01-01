@@ -3,8 +3,8 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _mathFn = require("../../math/mathFn");
 var _toTableFn = require("../toTableFn");
-var _fnAdapter = require("./fnAdapter");
 const ID = "alp_perf",
   DATA_SOURCE = "Alpha Vantage",
   S_DS = {
@@ -27,7 +27,7 @@ const ID = "alp_perf",
     ...(0, _toTableFn.crTableOptions)(id, title, [...HEADERS], void 0, rows, DATA_SOURCE),
     dsStyle: S_DS
   });
-const _roundBy2 = str => (0, _fnAdapter.roundBy)(parseFloat(str), 2);
+const _roundBy2 = str => (0, _mathFn.roundBy)(parseFloat(str), 2);
 const _crRows = rows => (0, _isTypeFn.isArr)(rows) ? rows.map(item => ({
   id: item.ticker,
   p: _roundBy2(item.price),

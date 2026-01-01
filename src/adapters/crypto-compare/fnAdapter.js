@@ -3,8 +3,11 @@ import {
   isTypeNumber,
 } from '../../utils/isTypeFn';
 
+import {
+  roundBy
+} from '../../math/mathFn';
+
 import {  
-  roundBy,
   crZhConfig,
   crDfLink
 } from '../AdapterFn';

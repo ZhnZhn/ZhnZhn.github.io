@@ -7,6 +7,7 @@ var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _configBuilderFn = require("../charts/configBuilderFn");
 var _Tooltip = require("../charts/Tooltip");
 var _styleFn = require("../components/styleFn");
+var _mathFn = require("../math/mathFn");
 var _AdapterFn = require("./AdapterFn");
 const CATEGORIES = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 const MIN_MAX_COLOR = '#008b8b',
@@ -83,7 +84,7 @@ const _crHighLowPoint = (key, arr) => ({
 });
 const _calcAvg = arr => {
   const sum = arr.reduce((acc, a) => acc + a, 0);
-  return arr.length !== 0 ? (0, _AdapterFn.roundBy)(sum / arr.length, 4) : 0;
+  return arr.length !== 0 ? (0, _mathFn.roundBy)(sum / arr.length, 4) : 0;
 };
 const _crAvgPoint = (key, arr) => ({
   y: _calcAvg(arr),

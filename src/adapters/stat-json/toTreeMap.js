@@ -11,6 +11,8 @@ import {
   toConfig
 } from '../../charts/configBuilderFn';
 
+import { roundBy } from '../../math/mathFn';
+
 import { fCrTreeMapPoint } from '../CategoryFn';
 import { sortDescByPnValue } from '../compareByFn';
 import { crData } from '../JsonStatFn';
@@ -20,8 +22,7 @@ import {
 } from '../TreeMapFn';
 import {
   crTitle,
-  crChartOption,
-  roundBy
+  crChartOption
 } from './fnAdapter';
 
 const _toHm = (arr) => {

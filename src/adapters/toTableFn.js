@@ -7,8 +7,11 @@ import {
 } from "../utils/isTypeFn";
 
 import {
-  numberFormat,
   roundBy
+} from "../math/mathFn";
+
+import {
+  numberFormat
 } from "./AdapterFn";
 
 export const crNameProps = (

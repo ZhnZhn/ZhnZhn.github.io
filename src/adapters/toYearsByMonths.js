@@ -18,9 +18,12 @@ import {
 } from '../components/styleFn';
 
 import {
+  roundBy
+} from '../math/mathFn';
+
+import {
   crError,
   crValueMoving,
-  roundBy,
   numberFormat
 } from './AdapterFn';
 

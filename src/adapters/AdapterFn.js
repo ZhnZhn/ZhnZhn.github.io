@@ -40,7 +40,6 @@ import {
   roundBy,
 } from '../math/mathFn';
 export {
-  roundBy,
   isInRange
 } from '../math/mathFn';
 

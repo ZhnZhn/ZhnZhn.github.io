@@ -5,7 +5,7 @@ exports.toSeriaNames = exports.toHmCategories = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _bindTo = require("../../utils/bindTo");
 var _crRouter = require("../../utils/crRouter");
-var _AdapterFn = require("../AdapterFn");
+var _mathFn = require("../../math/mathFn");
 var _conf = require("./conf");
 var _fnAdapter = require("./fnAdapter");
 const _crHm = () => Object.create(null);
@@ -27,7 +27,7 @@ const _crQuantityPoint = (0, _bindTo.bindTo)(_fCrPoint, _conf.QUANTITY);
 const _fCrAvgPoint = (pn, item) => {
   const tradeValue = (0, _fnAdapter.getItemTradeValue)(item),
     _v = item[pn],
-    _y = _v && tradeValue != null ? (0, _AdapterFn.roundBy)(tradeValue / _v, 2) : void 0;
+    _y = _v && tradeValue != null ? (0, _mathFn.roundBy)(tradeValue / _v, 2) : void 0;
   return _crPoint(_y, _v);
 };
 const _crAvgValuePerWeight = (0, _bindTo.bindTo)(_fCrAvgPoint, _conf.NET_WEIGHT);

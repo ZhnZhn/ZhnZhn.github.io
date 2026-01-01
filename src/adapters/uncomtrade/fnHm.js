@@ -1,7 +1,8 @@
 import { getObjectKeys } from '../../utils/isTypeFn';
 import { bindTo } from '../../utils/bindTo';
 import { crRouter } from '../../utils/crRouter';
-import { roundBy } from '../AdapterFn';
+
+import { roundBy } from '../../math/mathFn';
 
 import {
   NET_WEIGHT,

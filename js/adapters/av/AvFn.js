@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.fCrData = exports.fAvApi = exports.crFunctionQuery = exports.REQ_ERROR = void 0;
 var _isEmpty = _interopRequireDefault(require("../../utils/isEmpty"));
 var _isTypeFn = require("../../utils/isTypeFn");
+var _mathFn = require("../../math/mathFn");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 const API_URL = 'https://www.alphavantage.co/query';
@@ -37,7 +38,7 @@ const fAvApi = getCrQuery => ({
 });
 exports.fAvApi = fAvApi;
 const fCrData = (paramNameY, paramNameX, yConfig) => data => {
-  const _crY = yConfig === '10' ? _isTypeFn.parseIntBy10 : yConfig === 'round' ? _AdapterFn.roundBy : parseFloat;
+  const _crY = yConfig === '10' ? _isTypeFn.parseIntBy10 : yConfig === 'round' ? _mathFn.roundBy : parseFloat;
   return (data || []).reduce(function (arr, item) {
     if (item === void 0) {
       item = {};

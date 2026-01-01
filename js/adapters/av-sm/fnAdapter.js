@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.valueMoving = exports.roundBy = exports.isTokenInStr = exports.isInArrStr = exports.isArr = exports.fCrData = exports.crIntradayConfigOption = exports.crError = exports.crDfItemKey = exports.DF_FN_EOD = void 0;
+exports.ymdhmsToUTC = exports.valueMoving = exports.isTokenInStr = exports.isInArrStr = exports.isArr = exports.fCrData = exports.crIntradayConfigOption = exports.crError = exports.crDfItemKey = exports.DF_FN_EOD = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isArr = _AdapterFn.isArr;
 exports.isInArrStr = _AdapterFn.isInArrStr;
@@ -9,7 +9,6 @@ exports.isTokenInStr = _AdapterFn.isTokenInStr;
 exports.crDfItemKey = _AdapterFn.crDfItemKey;
 exports.valueMoving = _AdapterFn.valueMoving;
 exports.ymdhmsToUTC = _AdapterFn.ymdhmsToUTC;
-exports.roundBy = _AdapterFn.roundBy;
 exports.crError = _AdapterFn.crError;
 var _AvFn = require("../av/AvFn");
 exports.fCrData = _AvFn.fCrData;
@@ -27,14 +26,15 @@ const _crItemConf = (_ref, option) => {
     items,
     dataSource
   } = option;
-  return dfFn === DF_FN_EOD ? Object.assign({
-    _itemKey
-  }, (0, _crFn.crItemConf)(option), (0, _crFn.crValueConf)(data), {
+  return dfFn === DF_FN_EOD ? {
+    _itemKey,
+    ...(0, _crFn.crItemConf)(option),
+    ...(0, _crFn.crValueConf)(data),
     items: [...(items || [])],
     dfFn,
     dfSubId,
     dataSource
-  }) : void 0;
+  } : void 0;
 };
 const _crZhConfig = (config, option) => {
   const {

@@ -5,7 +5,6 @@ export {
   crDfItemKey,
   valueMoving,
   ymdhmsToUTC,
-  roundBy,
   crError
 } from '../AdapterFn';
 export { fCrData } from '../av/AvFn';

@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.toWorldLegend = exports.toAllLegend = void 0;
-var _AdapterFn = require("../AdapterFn");
+var _mathFn = require("../../math/mathFn");
 var _conf = require("./conf");
 const _fItemWithRatio = (hm, sum) => item => {
   const {
@@ -10,7 +10,7 @@ const _fItemWithRatio = (hm, sum) => item => {
     } = item,
     _points = hm[name],
     _p = _points[_points.length - 1],
-    _ratio = _p ? (0, _AdapterFn.roundBy)(_p.y / sum * 100, 1) + '%' : '';
+    _ratio = _p ? (0, _mathFn.roundBy)(_p.y / sum * 100, 1) + '%' : '';
   return {
     ...item,
     name: _ratio + ' ' + name
