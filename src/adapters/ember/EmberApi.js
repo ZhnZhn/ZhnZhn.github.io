@@ -4,12 +4,15 @@ import {
 } from '../../utils/isTypeFn';
 
 import {
+  isInRange
+} from '../../math/mathFn';
+
+import {
   isTreeMap,
   isBarTreeMap,
   isCategory
 } from "../CategoryFn";
 import {
-  isInRange,
   getValue,
   getCaption,
   crErrorByMessage

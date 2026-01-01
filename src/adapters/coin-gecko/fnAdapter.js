@@ -1,9 +1,7 @@
 export { getYmdhmUTC } from '../AdapterFn';
 
-import {
-  getValues,
-  isInRange
-} from '../AdapterFn';
+import { isInRange } from '../../math/mathFn';
+import { getValues } from '../AdapterFn';
 
 const DF_PAGE = 1
 , DF_PER_PAGE = 10

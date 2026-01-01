@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _mathFn = require("../../math/mathFn");
 var _CategoryFn = require("../CategoryFn");
 var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
@@ -70,7 +71,7 @@ const _crTimeSeriesTreeMapUrl = (option, _isTreeMap) => {
   if (metricItem.isTm !== 1) {
     throw (0, _AdapterFn.crErrorByMessage)(`TreeMap and Bar charts by Source for ${metricCaption} not available`);
   }
-  if (!(0, _AdapterFn.isInRange)((0, _isTypeFn.parseIntBy10)(time), 2020, 2025)) {
+  if (!(0, _mathFn.isInRange)((0, _isTypeFn.parseIntBy10)(time), 2020, 2025)) {
     const _typeOfChartToken = _isTreeMap ? 'TreeMap' : 'Bar by Source';
     throw (0, _AdapterFn.crErrorByMessage)(`${_typeOfChartToken} only available for 2021-2024`);
   }

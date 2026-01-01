@@ -1,9 +1,7 @@
 import { parseIntBy10 } from '../../utils/isTypeFn';
+import { isInRange } from '../../math/mathFn';
 
-import {
-  isInRange,
-  fCheckResponse
-} from '../AdapterFn';
+import { fCheckResponse } from '../AdapterFn';
 import {
   isTreeMap,
   isBarTreeMap,

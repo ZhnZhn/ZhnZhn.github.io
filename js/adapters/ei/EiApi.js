@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _mathFn = require("../../math/mathFn");
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 var _fCrLineCategoryUrl = _interopRequireDefault(require("../fCrLineCategoryUrl"));
@@ -16,7 +17,7 @@ const _crTreeMapUrl = (option, _isTreeMap) => {
       dfTmToken
     } = option,
     geo = items[0].v;
-  if (!(0, _AdapterFn.isInRange)((0, _isTypeFn.parseIntBy10)(time), 2018, 2025)) {
+  if (!(0, _mathFn.isInRange)((0, _isTypeFn.parseIntBy10)(time), 2018, 2025)) {
     const _typeOfChartToken = _isTreeMap ? 'TreeMap' : 'Bar by metric';
     throw {
       message: `${_typeOfChartToken} only available for 2019-2023`

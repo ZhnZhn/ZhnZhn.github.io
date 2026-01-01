@@ -39,9 +39,6 @@ import {
   crValueMoving as _crVm,
   roundBy,
 } from '../math/mathFn';
-export {
-  isInRange
-} from '../math/mathFn';
 
 export {
   findMinY,
