@@ -1,5 +1,5 @@
 export { getValue } from '../../AdapterFn';
-import { isInArrStr } from '../../AdapterFn';
+import { isInArrStr } from '../../../utils/arrFn';
 
 export { isNotGeoOrReporter } from '../EuroStatFn';
 

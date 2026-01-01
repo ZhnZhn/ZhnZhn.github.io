@@ -8,10 +8,12 @@ import {
   isArr,
   isStr
 } from '../utils/isTypeFn';
+import {
+  isInArrStr
+} from '../utils/arrFn';
 
 import {
   FN_IDENTITY,
-  isInArrStr,
   getValue,
   crError
 } from './AdapterFn';

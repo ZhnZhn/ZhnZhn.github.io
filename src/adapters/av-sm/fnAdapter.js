@@ -1,6 +1,5 @@
 export {
   isArr,
-  isInArrStr,
   isTokenInStr,
   crDfItemKey,
   valueMoving,

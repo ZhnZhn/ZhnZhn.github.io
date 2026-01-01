@@ -9,9 +9,7 @@ export {
   crRouter,
   crGetRoute
 } from '../utils/crRouter';
-export {
-  isInArrStr
-} from '../utils/arrFn';
+
 import { joinByComma } from '../utils/arrFn';
 import formatAllNumber from '../utils/formatAllNumber';
 import {

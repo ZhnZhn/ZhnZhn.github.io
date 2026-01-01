@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _AvFn = require("../av/AvFn");
 var _AdapterFn = require("../AdapterFn");
 const _crEconomicsQuery = option => {
@@ -14,8 +15,8 @@ const _crEconomicsQuery = option => {
   });
   return (0, _AvFn.crFunctionQuery)(value);
 };
-const _isDailyInterval = (0, _AdapterFn.isInArrStr)(['daily', 'weekly']),
-  _isQuarterlyInterval = (0, _AdapterFn.isInArrStr)(['quarterly', 'annual']);
+const _isDailyInterval = (0, _arrFn.isInArrStr)(['daily', 'weekly']),
+  _isQuarterlyInterval = (0, _arrFn.isInArrStr)(['quarterly', 'annual']);
 const _checkCommoditiesParams = (item, interval) => {
   const [itemId, itemCaption] = (0, _AdapterFn.getValueCaption)(item),
     [intervalId, _intervalCaption] = (0, _AdapterFn.getValueCaption)(interval);

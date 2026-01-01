@@ -8,7 +8,10 @@ import {
   isNumber
 } from "../../utils/isTypeFn";
 import {
-  isInArrStr,
+  isInArrStr
+} from "../../utils/arrFn";
+
+import {
   getCaption,
   getValue
 } from "../AdapterFn";

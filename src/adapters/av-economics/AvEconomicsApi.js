@@ -1,4 +1,8 @@
 import {
+  isInArrStr
+} from '../../utils/arrFn';
+
+import {
   REQ_ERROR,
   fAvApi,
   crFunctionQuery
@@ -6,7 +10,6 @@ import {
 
 import {
   assign,
-  isInArrStr,
   getValueCaption,
   crError,
   crGetRoute
