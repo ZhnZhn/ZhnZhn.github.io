@@ -1,5 +1,7 @@
 import { getObjectKeys } from '../../utils/isTypeFn';
 
+import { roundBy } from '../../math/mathFn';
+
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
 import crAdapterCategory from '../crAdapterCategory';
@@ -13,7 +15,6 @@ import {
   reduceToHmBy,
   getSourceValue,
   getMetricValue,
-  roundBy,
   crDataImpl
 } from './fnAdapter';
 

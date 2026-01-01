@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.crData = exports.addConfOption = void 0;
 var _arrFn = require("../../utils/arrFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
@@ -89,7 +90,7 @@ const crData = json => {
       } = _getTimeObj(dimensions),
       _x = _toMsl(id),
       _y = parseFloat(observation);
-    if ((0, _AdapterFn.isNumber)(_x) && (0, _AdapterFn.isNumber)(_y)) {
+    if ((0, _isTypeFn.isNumber)(_x) && (0, _isTypeFn.isNumber)(_y)) {
       _data.push([_x, _y]);
     }
     return _data;

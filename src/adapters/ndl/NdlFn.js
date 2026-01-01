@@ -3,10 +3,11 @@ export {
   crValueMoving
 } from "../AdapterFn";
 
+
 import {
   isArr,
   isNumber
-} from "../AdapterFn";
+} from "../../utils/isTypeFn";
 
 import {
   isCategory

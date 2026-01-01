@@ -1,4 +1,7 @@
-import { parseIntBy10 } from '../../utils/isTypeFn';
+import {
+  isArr,
+  parseIntBy10
+} from '../../utils/isTypeFn';
 
 import {
   isTreeMap,
@@ -12,7 +15,6 @@ import {
   crErrorByMessage
 } from "../AdapterFn";
 import {
-  isArr,
   isTsRoute,
   isUsRoute,
   crError,

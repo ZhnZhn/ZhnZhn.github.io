@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.getResponseData = exports.crTitle = exports.crData = exports.crConfOption = void 0;
 var _arrFn = require("../../utils/arrFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 const _crZhConfig = (json, _ref) => {
   let {
@@ -37,7 +38,7 @@ const crTitle = _ref3 => {
 exports.crTitle = crTitle;
 const _toNumber = str => {
   const _n = parseFloat(str);
-  return (0, _AdapterFn.isNumber)(_n) ? _n : null;
+  return (0, _isTypeFn.isNumber)(_n) ? _n : null;
 };
 const getResponseData = json => ((json || {}).response || {}).data;
 exports.getResponseData = getResponseData;

@@ -5,6 +5,7 @@ exports.valueMoving = exports.getItemIndexTuple = exports.getData = exports.crZh
 var _AdapterFn = require("../AdapterFn");
 exports.valueMoving = _AdapterFn.valueMoving;
 exports.crValueMoving = _AdapterFn.crValueMoving;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _CategoryFn = require("../CategoryFn");
 const _crItemCaption = _ref => {
   let {
@@ -12,13 +13,13 @@ const _crItemCaption = _ref => {
     items,
     itemCaption
   } = _ref;
-  return (0, _AdapterFn.isNumber)(dfItemCaption) && (0, _AdapterFn.isArr)(items) && items[dfItemCaption - 1] ? items[dfItemCaption - 1].caption || itemCaption : itemCaption;
+  return (0, _isTypeFn.isNumber)(dfItemCaption) && (0, _isTypeFn.isArr)(items) && items[dfItemCaption - 1] ? items[dfItemCaption - 1].caption || itemCaption : itemCaption;
 };
 const _getData = obj => obj.data || [];
 const getItemIndexTuple = columns => {
   let dateIndex = 0,
     valueIndex = 1;
-  const _columns = (0, _AdapterFn.isArr)(columns) ? columns : [];
+  const _columns = (0, _isTypeFn.isArr)(columns) ? columns : [];
   for (let i = 0; i < _columns.length; i++) {
     const {
       name
@@ -43,7 +44,7 @@ const getData = function (_ref2, _temp) {
   } = _temp === void 0 ? {} : _temp;
   if (datatable) {
     const [dateIndex, valueIndex] = getItemIndexTuple(datatable.columns),
-      _dateIndex = (0, _CategoryFn.isCategory)(seriaType) && (0, _AdapterFn.isNumber)(dfCi) ? dfCi : dateIndex;
+      _dateIndex = (0, _CategoryFn.isCategory)(seriaType) && (0, _isTypeFn.isNumber)(dfCi) ? dfCi : dateIndex;
     return _getData(datatable).map(arrItem => [arrItem[_dateIndex], parseFloat(arrItem[valueIndex])]);
   }
   return [];
@@ -60,7 +61,7 @@ const crZhConfig = option => {
       dataSource
     } = option,
     _itemCaption = _crItemCaption(option),
-    _item = (0, _AdapterFn.isArr)(items) ? items[0] : item || {};
+    _item = (0, _isTypeFn.isArr)(items) ? items[0] : item || {};
   return {
     item: _item,
     title,

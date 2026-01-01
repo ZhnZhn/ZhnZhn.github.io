@@ -1,9 +1,10 @@
 import {
   isArr,
-  isNumber,
-  isInArrStr,
-  fCrValue
-} from '../AdapterFn';
+  isNumber
+} from '../../utils/isTypeFn';
+import { isInArrStr } from '../../utils/arrFn';
+
+import { fCrValue } from '../AdapterFn';
 
 import { sortDescCategory } from '../compareByFn';
 import { crCategoryPoint } from '../CategoryFn';

@@ -1,13 +1,10 @@
+import { isNumber } from '../utils/isTypeFn';
 import formatNumber from '../utils/formatNumber';
 
-import {
-  isNumber,
-  domSanitize,
-  roundBy
-} from './AdapterFn';
-import {
-  sortDescByPnValue
-} from './compareByFn';
+import { roundBy } from '../math/mathFn';
+
+import { domSanitize } from './AdapterFn';
+import { sortDescByPnValue } from './compareByFn';
 
 import {
   COLOR_CATEGORY_LEVEL1,

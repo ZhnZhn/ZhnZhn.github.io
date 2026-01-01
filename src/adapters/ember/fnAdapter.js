@@ -1,8 +1,5 @@
 export {
-  isArr,
-  isNumber,
   crError,
-  roundBy,
   ymdToUTC
 } from "../AdapterFn";
 

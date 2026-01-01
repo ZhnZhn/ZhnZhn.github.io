@@ -2,9 +2,11 @@ import {
   joinBy,
   joinByDot
 } from '../../utils/arrFn';
+import {
+  isArr
+} from '../../utils/isTypeFn';
 
 import {
-  isArr,
   assign,
   crErrorByMessage,
   getValue,

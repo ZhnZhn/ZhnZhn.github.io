@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"));
 var _CategoryFn = require("../CategoryFn");
@@ -17,7 +18,7 @@ const _crData = (json, option) => {
         Area
       } = item || {},
       _value = _crValue(parseFloat(Value));
-    if ((0, _AdapterFn.isNumber)(_value) && _value !== 0 && Area) {
+    if ((0, _isTypeFn.isNumber)(_value) && _value !== 0 && Area) {
       _data.push((0, _CategoryFn.crCategoryPoint)(_value, Area));
     }
     return _data;

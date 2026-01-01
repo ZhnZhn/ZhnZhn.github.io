@@ -3,7 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.getCrPointName = exports.crPointName = exports.addPercentAndColorToData = exports.addColorsTo = void 0;
+var _isTypeFn = require("../utils/isTypeFn");
 var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
+var _mathFn = require("../math/mathFn");
 var _AdapterFn = require("./AdapterFn");
 var _compareByFn = require("./compareByFn");
 var _Color = require("../constants/Color");
@@ -33,7 +35,7 @@ const _findLevelIndex = (data, total, level1, level2, propName) => {
     _v2 = _onePercent * level2,
     [index1, sum1] = _findLevelBy(data, 0, 0, _v1, propName),
     [index2, sum2] = _findLevelBy(data, index1, sum1, _v2, propName);
-  return [index1, index2, (0, _AdapterFn.roundBy)(sum1 / _onePercent, 1), (0, _AdapterFn.roundBy)(sum2 / _onePercent, 1)];
+  return [index1, index2, (0, _mathFn.roundBy)(sum1 / _onePercent, 1), (0, _mathFn.roundBy)(sum2 / _onePercent, 1)];
 };
 const _setColorLevelTo = (point, colorLevel, level) => {
   point.color = colorLevel;
@@ -65,13 +67,13 @@ const _crValuePercentToken = (percent, value) => `${(0, _formatNumber.default)(v
   _isPercentName = data => data.length > 8 && data[0].value > 1000;
 const getCrPointName = data => _isPercentName(data) ? _crPercentName : _crValuePercentName;
 exports.getCrPointName = getCrPointName;
-const _crPointName = percent => (0, _AdapterFn.isNumber)(percent) ? `${percent}%` : "";
+const _crPointName = percent => (0, _isTypeFn.isNumber)(percent) ? `${percent}%` : "";
 const crPointName = exports.crPointName = _fCrName(_crPointName);
 const addPercentAndColorToData = (data, total) => {
   if (total !== 0) {
     const _onePercent = total / 100;
     data.forEach(item => {
-      item.percent = (0, _AdapterFn.roundBy)(item.value / _onePercent);
+      item.percent = (0, _mathFn.roundBy)(item.value / _onePercent);
       item.name = crPointName(item.label, item.percent > 1 ? item.percent : "");
     });
     (0, _compareByFn.sortDescByPnValue)(data);

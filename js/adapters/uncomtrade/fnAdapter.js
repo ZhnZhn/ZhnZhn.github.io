@@ -2,16 +2,13 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdToUTC = exports.valueMoving = exports.sortDescByPnValue = exports.roundBy = exports.isCategoryByPartnerCase = exports.isAggregateByHs = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = exports.addSumOfPercentToSubtitle = void 0;
+exports.ymdToUTC = exports.valueMoving = exports.sortDescByPnValue = exports.isCategoryByPartnerCase = exports.isAggregateByHs = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = exports.addSumOfPercentToSubtitle = void 0;
 var _AdapterFn = require("../AdapterFn");
-exports.isNumber = _AdapterFn.isNumber;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 exports.valueMoving = _AdapterFn.valueMoving;
-exports.roundBy = _AdapterFn.roundBy;
 var _ChartType = require("../../constants/ChartType");
 var _arrFn = require("../../utils/arrFn");
 var _isTypeFn = require("../../utils/isTypeFn");
-exports.isNumber = _isTypeFn.isNumber;
 var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");

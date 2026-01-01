@@ -38,8 +38,9 @@ const toStockSeriesData = _ref => {
     dN = [],
     dNc = [],
     _arr = _getNotEmptyArr(arr) || [],
-    _isVolume = (0, _isTypeFn.isNumber)(arr[0][5]),
-    _isNumberOfTrades = (0, _isTypeFn.isNumber)(arr[0][6]),
+    _itemFirst = _arr[0] || [],
+    _isVolume = (0, _isTypeFn.isNumber)(_itemFirst[5]),
+    _isNumberOfTrades = (0, _isTypeFn.isNumber)(_itemFirst[6]),
     _addATHPointTo = isAth ? _fAddAthPointTo() : _AdapterFn.FN_NOOP;
   let minClose = Number.POSITIVE_INFINITY,
     maxClose = Number.NEGATIVE_INFINITY;

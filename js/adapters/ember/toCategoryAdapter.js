@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _mathFn = require("../../math/mathFn");
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"));
@@ -20,7 +21,7 @@ const FN_IDENTITY = value => value,
       }
       return _hm;
     }, json);
-    return _crDataImpl((0, _isTypeFn.getObjectKeys)(hm), itemKey => hm[itemKey], FN_IDENTITY, value => (0, _fnAdapter.roundBy)(value, 2));
+    return _crDataImpl((0, _isTypeFn.getObjectKeys)(hm), itemKey => hm[itemKey], FN_IDENTITY, value => (0, _mathFn.roundBy)(value, 2));
   },
   _crSourceData = (json, getCategory, pnMetric) => _crDataImpl(json, item => item[pnMetric], getCategory, FN_IDENTITY, item => !!getCategory(item)),
   _crData = (json, options) => {

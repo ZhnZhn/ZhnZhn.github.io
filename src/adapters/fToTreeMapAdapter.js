@@ -1,6 +1,9 @@
 import { joinByColon } from '../utils/arrFn';
+import { isNumber } from '../utils/isTypeFn';
 import pipe from '../utils/pipe';
 import formatNumber from '../utils/formatNumber';
+
+import { roundBy } from '../math/mathFn';
 
 import {
   crTreeMapConfig,
@@ -9,14 +12,8 @@ import {
   toConfig
 } from '../charts/configBuilderFn';
 
-import {
-  isNumber,
-  domSanitize,
-  roundBy
-} from './AdapterFn';
-import {
-  getCrPointName
-} from './TreeMapFn'
+import { domSanitize } from './AdapterFn';
+import { getCrPointName } from './TreeMapFn'
 
 const COLOR_FOSSIL_FUEL = "#658fb9"
 , COLOR_NOT_FOSSIL_FUEL = "#6ea3d7";

@@ -1,13 +1,13 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isArr = exports.getValue = exports.getDocs = exports.crTitle = exports.crErrorByMessage = exports.crData = exports.crConfOption = exports.assign = void 0;
+exports.getValue = exports.getDocs = exports.crTitle = exports.crErrorByMessage = exports.crData = exports.crConfOption = exports.assign = void 0;
 var _AdapterFn = require("../AdapterFn");
-exports.isArr = _AdapterFn.isArr;
 exports.assign = _AdapterFn.assign;
 exports.getValue = _AdapterFn.getValue;
 exports.crErrorByMessage = _AdapterFn.crErrorByMessage;
 var _arrFn = require("../../utils/arrFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _crFn = require("../crFn");
 var _fnSelector = require("./fnSelector");
 const CHART_URL = 'https://db.nomics.world',
@@ -89,7 +89,7 @@ const crData = (json, option) => {
   let _arrPoint;
   return period.reduce((_data, periodItem, index) => {
     _arrPoint = crPoint(periodItem, value[index]);
-    if (_arrPoint[0] > _xFrom && (0, _AdapterFn.isNumber)(_arrPoint[1]) && _arrPoint[0] !== _getRecentPoint(_data)[0]) {
+    if (_arrPoint[0] > _xFrom && (0, _isTypeFn.isNumber)(_arrPoint[1]) && _arrPoint[0] !== _getRecentPoint(_data)[0]) {
       _data.push(_arrPoint);
     }
     return _data;

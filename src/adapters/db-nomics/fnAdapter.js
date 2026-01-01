@@ -1,5 +1,4 @@
 export {
-  isArr,
   assign,
   getValue,
   crErrorByMessage
@@ -9,9 +8,11 @@ import {
   joinBy,
   joinByColon
 } from '../../utils/arrFn';
+import {
+  isNumber
+} from '../../utils/isTypeFn';
 
 import {
-  isNumber,
   isTokenInStr,
   crZhConfig,
   ymdToUTC,

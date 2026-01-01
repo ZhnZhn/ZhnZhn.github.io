@@ -95,7 +95,7 @@ const EmberApi = {
     return _crUrl(_isMonthlyRoute, option);
   },
   checkResponse(json) {
-    if (!(0, _fnAdapter.isArr)(json) && !(0, _fnAdapter.isArr)((json || {}).data)) {
+    if (!(0, _isTypeFn.isArr)(json) && !(0, _isTypeFn.isArr)((json || {}).data)) {
       throw (0, _fnAdapter.crError)();
     }
   }

@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.toLineAdapter = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _crAdapterType = require("../crAdapterType1");
@@ -11,7 +12,7 @@ const crData = (json, option) => {
     data = [];
   for (const point of points) {
     const value = point[1];
-    if ((0, _AdapterFn.isNumber)(value)) {
+    if ((0, _isTypeFn.isNumber)(value)) {
       data.push([(0, _AdapterFn.ymdToUTC)(point[0]), value]);
     }
   }

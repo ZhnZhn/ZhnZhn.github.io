@@ -1,8 +1,6 @@
 export {
-  isNumber,
   ymdToUTC,
-  valueMoving,
-  roundBy
+  valueMoving
 } from '../AdapterFn';
 
 import {

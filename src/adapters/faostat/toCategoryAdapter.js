@@ -1,7 +1,6 @@
-import {
-  isNumber,
-  fCrValue
-} from '../AdapterFn';
+import { isNumber } from "../../utils/isTypeFn";
+
+import { fCrValue } from '../AdapterFn';
 import crAdapterCategory from '../crAdapterCategory';
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';

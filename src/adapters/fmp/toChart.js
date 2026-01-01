@@ -1,8 +1,6 @@
-import {
-  isNumber,
-  ymdToUTC
-} from '../AdapterFn';
+import { isNumber } from "../../utils/isTypeFn";
 
+import { ymdToUTC } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
 import { crAdapterType1 } from '../crAdapterType1';
 

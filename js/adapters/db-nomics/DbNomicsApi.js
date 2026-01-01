@@ -2,12 +2,14 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _fnAdapter = require("./fnAdapter");
 const URL = 'https://api.db.nomics.world/v22/series',
   TAIL = 'observations=1&format=json&metadata=false',
   DF_ID = 'ECB/EXR/A.USD.EUR.SP00.A';
 const _crUrlImpl = (dfProvider, dfCode, seriaId) => {
-  const _seriesId = dfProvider && seriaId ? (0, _fnAdapter.joinBy)('/', dfProvider, dfCode, seriaId) : `${DF_ID}`;
+  const _seriesId = dfProvider && seriaId ? (0, _arrFn.joinBy)('/', dfProvider, dfCode, seriaId) : `${DF_ID}`;
   return `${URL}?series_ids=${_seriesId}&${TAIL}`;
 };
 const _crUrl = (seriaId, option) => {
@@ -18,7 +20,7 @@ const _crUrl = (seriaId, option) => {
   option.seriaId = seriaId;
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
-const _dfFnUrl = option => (0, _fnAdapter.isArr)(option.items) ? _crUrl((0, _fnAdapter.getValue)(option.items[0]), option) : _crUrl('', option);
+const _dfFnUrl = option => (0, _isTypeFn.isArr)(option.items) ? _crUrl((0, _fnAdapter.getValue)(option.items[0]), option) : _crUrl('', option);
 const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
   (0, _fnAdapter.assign)(option, {
     seriaId,
@@ -41,7 +43,7 @@ const _crSeriaId = (_ref, values) => {
     dfPrefix,
     dfSufix
   } = _ref;
-  return (0, _fnAdapter.joinBy)('.', dfPrefix, ...values, dfSufix);
+  return (0, _arrFn.joinByDot)(dfPrefix, ...values, dfSufix);
 };
 const _fCrUrl = crValues => option => _crUrl(_crSeriaId(option, crValues(option)), option);
 const _crValuesS1 = _ref2 => {
@@ -139,12 +141,12 @@ const DbNomicsApi = {
     const {
       errors
     } = json || {};
-    if ((0, _fnAdapter.isArr)(errors)) {
+    if ((0, _isTypeFn.isArr)(errors)) {
       throw (0, _fnAdapter.crErrorByMessage)((errors[0] || {}).message);
     }
     const docs = (0, _fnAdapter.getDocs)(json),
-      _ts = (0, _fnAdapter.isArr)(docs) ? docs[0] : '';
-    if (!_ts || !(0, _fnAdapter.isArr)(_ts.period) || !(0, _fnAdapter.isArr)(_ts.value)) {
+      _ts = (0, _isTypeFn.isArr)(docs) ? docs[0] : '';
+    if (!_ts || !(0, _isTypeFn.isArr)(_ts.period) || !(0, _isTypeFn.isArr)(_ts.value)) {
       throw (0, _fnAdapter.crErrorByMessage)();
     }
   }

@@ -58,8 +58,7 @@ import {
 import { DT_EMPTY } from '../constants/DirectionType';
 
 export {
-  isArr,
-  isNumber
+  isArr
 } from '../utils/isTypeFn';
 import {
   isArr,

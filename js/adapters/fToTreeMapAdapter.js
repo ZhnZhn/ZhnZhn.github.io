@@ -4,8 +4,10 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.toTimeSeriesTreeMapAdapter = exports.fToTreeMapAdapter = exports.crRoundedSubTotal = exports.crItemColor = void 0;
 var _arrFn = require("../utils/arrFn");
+var _isTypeFn = require("../utils/isTypeFn");
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
+var _mathFn = require("../math/mathFn");
 var _configBuilderFn = require("../charts/configBuilderFn");
 var _AdapterFn = require("./AdapterFn");
 var _TreeMapFn = require("./TreeMapFn");
@@ -23,12 +25,12 @@ const _fSumBy = propName => (total, item) => total + item[propName],
 const _crTotalConfig = total => {
   const onePercent = total / 100,
     _totalRt = onePercent > 1 ? 0 : 2,
-    _total = (0, _AdapterFn.roundBy)(total, _totalRt),
+    _total = (0, _mathFn.roundBy)(total, _totalRt),
     _onePercent = _total / 100;
   return [_total, _totalRt, _onePercent];
 };
 const _crItemRt = (value, rt) => value >= 10 ? rt : value >= 0.01 ? 2 : value >= 0.0001 ? 4 : 6;
-const _crValue = (value, totalRt) => (0, _AdapterFn.roundBy)(value, _crItemRt(value, totalRt));
+const _crValue = (value, totalRt) => (0, _mathFn.roundBy)(value, _crItemRt(value, totalRt));
 const _initPercentLevelFor = option => {
   option._ps60 = 0;
   option._ps90 = 0;
@@ -44,8 +46,8 @@ const _sumPercentLevelTo = (option, level, percent) => {
   }
 };
 const _roundByPercentLevel = (option, percRt) => {
-  option._ps60 = (0, _AdapterFn.roundBy)(option._ps60, percRt);
-  option._ps90 = (0, _AdapterFn.roundBy)(option._ps90, percRt);
+  option._ps60 = (0, _mathFn.roundBy)(option._ps60, percRt);
+  option._ps90 = (0, _mathFn.roundBy)(option._ps90, percRt);
 };
 const _crDataImpl = (data, option, totalRt, onePercent, percRt) => {
   const {
@@ -61,7 +63,7 @@ const _crDataImpl = (data, option, totalRt, onePercent, percRt) => {
         label
       } = item,
       _value = _crValue(value, totalRt),
-      _percent = (0, _AdapterFn.roundBy)(value / onePercent, percRt);
+      _percent = (0, _mathFn.roundBy)(value / onePercent, percRt);
     _sumPercentLevelTo(option, _level, _percent);
     _data.push({
       color: item.color,
@@ -85,17 +87,17 @@ const _crData = function () {
   return _crTotalPerc(_data) === 100 ? _data : _crDataImpl(...args, 1);
 };
 const _crTotalToken = (title, value, perc) => `${title} ${(0, _formatNumber.default)(value, true)} (${perc}%)`;
-const _crSubTotalRt = (value, rt) => (0, _AdapterFn.isNumber)(rt) ? _crItemRt(value, rt) : 0;
-const _crSubValue = v => (0, _AdapterFn.isNumber)(v) ? v : 0;
+const _crSubTotalRt = (value, rt) => (0, _isTypeFn.isNumber)(rt) ? _crItemRt(value, rt) : 0;
+const _crSubValue = v => (0, _isTypeFn.isNumber)(v) ? v : 0;
 const _isZeroValueCase = (v, sum) => sum === 0 && v !== 0;
 const crRoundedSubTotal = (v1, v2, total, totalRt) => {
   const _v1 = _crSubValue(v1),
     _v2 = _crSubValue(v2),
     _rt1 = _crSubTotalRt(_v1, totalRt),
     _rt2 = _crSubTotalRt(_v2, totalRt),
-    _sum1 = (0, _AdapterFn.roundBy)(_v1, _rt1),
-    _sum2 = (0, _AdapterFn.roundBy)(_v2, _rt2);
-  return _sum1 + _sum2 > total || _isZeroValueCase(_v1, _sum1) || _isZeroValueCase(_v2, _sum2) ? [(0, _AdapterFn.roundBy)(_v1, _rt1 + 1), (0, _AdapterFn.roundBy)(_v2, _rt2 + 1)] : [_sum1, _sum2];
+    _sum1 = (0, _mathFn.roundBy)(_v1, _rt1),
+    _sum2 = (0, _mathFn.roundBy)(_v2, _rt2);
+  return _sum1 + _sum2 > total || _isZeroValueCase(_v1, _sum1) || _isZeroValueCase(_v2, _sum2) ? [(0, _mathFn.roundBy)(_v1, _rt1 + 1), (0, _mathFn.roundBy)(_v2, _rt2 + 1)] : [_sum1, _sum2];
 };
 exports.crRoundedSubTotal = crRoundedSubTotal;
 const _crCaption = (data, option, total, totalRt, onePercent) => {
@@ -148,7 +150,7 @@ const fToTreeMapAdapter = function (getDataTotalTuple, crCaption) {
 exports.fToTreeMapAdapter = fToTreeMapAdapter;
 const _getDataTotalTuple = json => json.data.reduce((tuple, item) => {
   const [label, value] = item || [];
-  if ((0, _AdapterFn.isNumber)(value)) {
+  if ((0, _isTypeFn.isNumber)(value)) {
     tuple[0].push({
       label,
       value,

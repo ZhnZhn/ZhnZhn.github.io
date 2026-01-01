@@ -45,8 +45,9 @@ export const toStockSeriesData = ({
   , dATH = [], dMfi = []
   , dN = [], dNc = []
   , _arr = _getNotEmptyArr(arr) || []
-  , _isVolume = isNumber(arr[0][5])
-  , _isNumberOfTrades = isNumber(arr[0][6])
+  , _itemFirst = _arr[0] || []
+  , _isVolume = isNumber(_itemFirst[5])
+  , _isNumberOfTrades = isNumber(_itemFirst[6])
   , _addATHPointTo = isAth
      ? _fAddAthPointTo()
      : FN_NOOP;
