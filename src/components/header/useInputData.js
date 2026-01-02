@@ -2,7 +2,9 @@ import {
   useRef,
   getRefValue
 } from '../uiApi';
-import getFnByPropName from '../../utils/getFnByPropName';
+import {
+  getFnByPropName
+} from '../../utils/objFn';
 
 const useInputData = (data, id) => {
   const _refInput = useRef()

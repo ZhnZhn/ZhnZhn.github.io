@@ -1,5 +1,8 @@
 import Highcharts from 'highcharts'
-import { isStr } from './isTypeFn';
+import {
+  isStr,
+  isFn
+} from './isTypeFn';
 
 export const merge = Highcharts.merge
 
@@ -11,3 +14,11 @@ export const getByPropsFrom = (
    nextObj,
    propName
  ) => (nextObj || (isStr(propName) ? {} : []))[propName], obj)
+
+export const getFnByPropName = (
+  obj,
+  propName,
+  dfValue
+) => !obj || !isFn(obj[propName])
+  ? () => dfValue
+  : obj[propName]

@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.merge = exports.getByPropsFrom = void 0;
+exports.merge = exports.getFnByPropName = exports.getByPropsFrom = void 0;
 var _highcharts = _interopRequireDefault(require("highcharts"));
 var _isTypeFn = require("./isTypeFn");
 const merge = exports.merge = _highcharts.default.merge;
@@ -13,4 +13,6 @@ const getByPropsFrom = function (obj) {
   return (props || []).reduce((nextObj, propName) => (nextObj || ((0, _isTypeFn.isStr)(propName) ? {} : []))[propName], obj);
 };
 exports.getByPropsFrom = getByPropsFrom;
+const getFnByPropName = (obj, propName, dfValue) => !obj || !(0, _isTypeFn.isFn)(obj[propName]) ? () => dfValue : obj[propName];
+exports.getFnByPropName = getFnByPropName;
 //# sourceMappingURL=objFn.js.map

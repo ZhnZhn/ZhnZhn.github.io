@@ -3,7 +3,8 @@ import {
   useMemo
 } from '../uiApi';
 
-import getFnByPropName from '../../utils/getFnByPropName'
+import { getFnByPropName } from '../../utils/objFn';
+
 import ScrollPane from '../zhn/ScrollPane'
 import OpenClose from '../zhn/OpenClose'
 import ItemStack from '../zhn/ItemStack'

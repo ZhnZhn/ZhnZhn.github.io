@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _getFnByPropName = _interopRequireDefault(require("../../utils/getFnByPropName"));
+var _objFn = require("../../utils/objFn");
 var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
 var _jsxRuntime = require("react/jsx-runtime");
 const S_DIV_OPTIONS = {
@@ -18,7 +18,7 @@ const OptionInputSwitchStack = _ref => {
     data,
     configs
   } = _ref;
-  const _hMode = (fnName, mode) => (0, _getFnByPropName.default)(data, fnName)(mode);
+  const _hMode = (fnName, mode) => (0, _objFn.getFnByPropName)(data, fnName)(mode);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     style: S_DIV_OPTIONS,
     children: configs.map(_ref2 => {
@@ -26,7 +26,7 @@ const OptionInputSwitchStack = _ref => {
       return /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
         style: S_INPUT_SWITCH,
         caption: caption,
-        initialValue: (0, _getFnByPropName.default)(data, id, !1)(),
+        initialValue: (0, _objFn.getFnByPropName)(data, id, !1)(),
         onCheck: (0, _uiApi.bindTo)(_hMode, id, !0),
         onUnCheck: (0, _uiApi.bindTo)(_hMode, id, !1)
       }, caption);

@@ -1,13 +1,12 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _getFnByPropName = _interopRequireDefault(require("../../utils/getFnByPropName"));
+var _objFn = require("../../utils/objFn");
 const useInputData = (data, id) => {
   const _refInput = (0, _uiApi.useRef)(),
-    _setInput = (0, _getFnByPropName.default)(data, id),
+    _setInput = (0, _objFn.getFnByPropName)(data, id),
     _dataValue = data[id]();
   return [_refInput, _dataValue, () => {
     const _inputInst = (0, _uiApi.getRefValue)(_refInput);
@@ -16,6 +15,5 @@ const useInputData = (data, id) => {
     }
   }, () => _setInput('')];
 };
-var _default = useInputData;
-exports.default = _default;
+var _default = exports.default = useInputData;
 //# sourceMappingURL=useInputData.js.map

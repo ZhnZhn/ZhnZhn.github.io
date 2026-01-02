@@ -1,5 +1,5 @@
 import { bindTo } from '../uiApi';
-import getFnByPropName from '../../utils/getFnByPropName';
+import { getFnByPropName } from '../../utils/objFn';
 
 import InputSwitch from '../zhn/InputSwitch';
 
