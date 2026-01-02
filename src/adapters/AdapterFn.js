@@ -75,7 +75,6 @@ const _fIsNumber = (
   pn
 ) => (p) => isTypeNumber(p[pn]) && isFinite(p[pn]);
 
-const _crBigValueFrom = point => Big(getPointValue(point));
 const _crDmyFrom = point => mlsToDmy(getPointDate(point));
 
 export const toTd = (mls) => isNumber(mls)
@@ -189,10 +188,27 @@ const _getRecentDataPoints = data => {
   ];
 };
 
-const _crBigValue = (
-  nOrStr,
+const _crSeriaDataTuple = (
+  valueNow,
+  valuePrev,
+  pointNow,
+  pointPrev
+) => [
+  Big(valueNow),         //bNowValue
+  Big(valuePrev),        //bPrevValue
+  _crDmyFrom(pointNow),  //date
+  _crDmyFrom(pointPrev)  //dateTo
+];
+
+const _crSeriesValue = (
+  data,
+  index,
+  point,
   dfR
-) => Big(roundBy(nOrStr, dfR));
+) => roundBy(
+  _calcSumOfSlice(data, index, _crDmyFrom(point)),
+  dfR
+);
 
 const _crSeriesDataRecentTuple = (
   data,
@@ -202,16 +218,13 @@ const _crSeriesDataRecentTuple = (
     _pointNow,
     _pointPrev
   ] = _getRecentDataPoints(data[0] || [])
-  , date = _crDmyFrom(_pointNow)
-  , dateTo = _crDmyFrom(_pointPrev)
-  , bNowValue = _crBigValue(_calcSumOfSlice(data, 1, date), dfR)
-  , bPrevValue = _crBigValue(_calcSumOfSlice(data, 2, dateTo), dfR);
-  return [
-    bNowValue,
-    bPrevValue,
-    date,
-    dateTo
-  ];
+
+  return _crSeriaDataTuple(
+    _crSeriesValue(data, 1, _pointNow, dfR),
+    _crSeriesValue(data, 2, _pointPrev, dfR),
+    _pointNow,
+    _pointPrev
+  );
 }
 
 const _crSeriaDataRecentTuple = (
@@ -220,17 +233,13 @@ const _crSeriaDataRecentTuple = (
   const [
     _pointNow,
     _pointPrev
-  ] = _getRecentDataPoints(data)
-  , bNowValue = _crBigValueFrom(_pointNow)
-  , bPrevValue = _crBigValueFrom(_pointPrev)
-  , date = _crDmyFrom(_pointNow)
-  , dateTo = _crDmyFrom(_pointPrev);
-  return [
-    bNowValue,
-    bPrevValue,
-    date,
-    dateTo
-  ];
+  ] = _getRecentDataPoints(data);
+  return _crSeriaDataTuple(
+    getPointValue(_pointNow),
+    getPointValue(_pointPrev),
+    _pointNow,
+    _pointPrev
+  )
 };
 
 export const valueMoving = (
@@ -254,7 +263,11 @@ export const valueMoving = (
     : _crSeriaDataRecentTuple(data);
 
   return {
-    ...crValueMoving({ bNowValue, bPrevValue, dfR }),
+    ...crValueMoving({
+      bNowValue,
+      bPrevValue,
+      dfR
+    }),
     valueTo: formatAllNumber(bPrevValue),
     date,
     dateTo

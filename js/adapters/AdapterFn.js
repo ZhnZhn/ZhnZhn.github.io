@@ -56,7 +56,6 @@ const crDfItemKey = _ref => {
 exports.crDfItemKey = crDfItemKey;
 const EMPTY = '';
 const _fIsNumber = pn => p => (0, _isTypeFn.isTypeNumber)(p[pn]) && isFinite(p[pn]);
-const _crBigValueFrom = point => (0, _big.default)((0, _seriaHelperFn.getPointValue)(point));
 const _crDmyFrom = point => (0, _dateFn.mlsToDmy)((0, _seriaHelperFn.getPointDate)(point));
 const toTd = mls => (0, _isTypeFn.isNumber)(mls) ? (0, _dateFormat.toTd)(mls) : '';
 exports.toTd = toTd;
@@ -142,22 +141,22 @@ const _getRecentDataPoints = data => {
     _pointPrev = data[_length - 2] || _pointNow;
   return [_pointNow, _pointPrev];
 };
-const _crBigValue = (nOrStr, dfR) => (0, _big.default)((0, _mathFn.roundBy)(nOrStr, dfR));
+const _crSeriaDataTuple = (valueNow, valuePrev, pointNow, pointPrev) => [(0, _big.default)(valueNow),
+//bNowValue
+(0, _big.default)(valuePrev),
+//bPrevValue
+_crDmyFrom(pointNow),
+//date
+_crDmyFrom(pointPrev) //dateTo
+];
+const _crSeriesValue = (data, index, point, dfR) => (0, _mathFn.roundBy)(_calcSumOfSlice(data, index, _crDmyFrom(point)), dfR);
 const _crSeriesDataRecentTuple = (data, dfR) => {
-  const [_pointNow, _pointPrev] = _getRecentDataPoints(data[0] || []),
-    date = _crDmyFrom(_pointNow),
-    dateTo = _crDmyFrom(_pointPrev),
-    bNowValue = _crBigValue(_calcSumOfSlice(data, 1, date), dfR),
-    bPrevValue = _crBigValue(_calcSumOfSlice(data, 2, dateTo), dfR);
-  return [bNowValue, bPrevValue, date, dateTo];
+  const [_pointNow, _pointPrev] = _getRecentDataPoints(data[0] || []);
+  return _crSeriaDataTuple(_crSeriesValue(data, 1, _pointNow, dfR), _crSeriesValue(data, 2, _pointPrev, dfR), _pointNow, _pointPrev);
 };
 const _crSeriaDataRecentTuple = data => {
-  const [_pointNow, _pointPrev] = _getRecentDataPoints(data),
-    bNowValue = _crBigValueFrom(_pointNow),
-    bPrevValue = _crBigValueFrom(_pointPrev),
-    date = _crDmyFrom(_pointNow),
-    dateTo = _crDmyFrom(_pointPrev);
-  return [bNowValue, bPrevValue, date, dateTo];
+  const [_pointNow, _pointPrev] = _getRecentDataPoints(data);
+  return _crSeriaDataTuple((0, _seriaHelperFn.getPointValue)(_pointNow), (0, _seriaHelperFn.getPointValue)(_pointPrev), _pointNow, _pointPrev);
 };
 const valueMoving = (data, dfR) => {
   if (!(0, _isTypeFn.isArr)(data)) {
