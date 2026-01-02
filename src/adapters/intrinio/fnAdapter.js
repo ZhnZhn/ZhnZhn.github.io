@@ -1,7 +1,5 @@
-import {
-  isNumberOrNull,
-  ymdToUTC,
-} from '../AdapterFn';
+import { isNumber } from '../../utils/isTypeFn';
+import { ymdToUTC } from '../AdapterFn';
 
 const FRED = 'FRED';
 
@@ -61,13 +59,10 @@ export const crSubtitle = ({
 export const crData = (
   json
 ) => json.data.reduce((_data, p) => {
-  const {
-    date,
-    value
-  } = p;
-  if (isNumberOrNull(value)) {
+  const { value } = p;
+  if (isNumber(value) || value === null) {
     _data.push({
-       x: ymdToUTC(date),
+       x: ymdToUTC(p.date),
        y: value
     });
   }

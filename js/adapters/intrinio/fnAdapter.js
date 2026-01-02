@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.crSubtitle = exports.crData = exports.crConfigOption = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 const FRED = 'FRED';
 const _crId = _ref => {
@@ -59,12 +60,11 @@ const crSubtitle = _ref4 => {
 exports.crSubtitle = crSubtitle;
 const crData = json => json.data.reduce((_data, p) => {
   const {
-    date,
     value
   } = p;
-  if ((0, _AdapterFn.isNumberOrNull)(value)) {
+  if ((0, _isTypeFn.isNumber)(value) || value === null) {
     _data.push({
-      x: (0, _AdapterFn.ymdToUTC)(date),
+      x: (0, _AdapterFn.ymdToUTC)(p.date),
       y: value
     });
   }

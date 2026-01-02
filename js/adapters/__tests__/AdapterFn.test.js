@@ -149,18 +149,6 @@ describe('isYNumber', () => {
     })).toBe(false);
   });
 });
-describe('isNumberOrNull', () => {
-  const fn = _AdapterFn.isNumberOrNull;
-  it('should return true for number and null or false', () => {
-    expect(fn(123)).toBe(true);
-    expect(fn(12.3)).toBe(true);
-    expect(fn(1.23)).toBe(true);
-    expect(fn(null)).toBe(true);
-    expect(fn('123')).toBe(false);
-    expect(fn()).toBe(false);
-    expect(fn(NaN)).toBe(false);
-  });
-});
 describe('crShortItemCaption', () => {
   const fn = _AdapterFn.crShortItemCaption;
   test("should create short item caption", () => {
