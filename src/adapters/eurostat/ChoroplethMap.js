@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 
+import { domSanitize } from '../../utils/domFn';
 import { merge } from '../../utils/objFn';
 import clusterMaker from '../../math/k-means';
 import { toFixed } from '../../math/mathFn';
@@ -9,7 +10,6 @@ import {
   crClusterInfo
 } from '../../components/factories/MapFactory';
 
-import { domSanitize } from '../AdapterFn';
 import {
   crGeoSlice,
   crGeoSeria

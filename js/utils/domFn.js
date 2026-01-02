@@ -12,4 +12,4 @@ const domSanitize = str => _sanitize(str, {
   }
 });
 exports.domSanitize = domSanitize;
-//# sourceMappingURL=domSanitize.js.map
+//# sourceMappingURL=domFn.js.map

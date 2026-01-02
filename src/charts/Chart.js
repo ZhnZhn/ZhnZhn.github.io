@@ -4,7 +4,7 @@ import {
   isObj,
   isStr
 } from '../utils/isTypeFn';
-import { domSanitize } from '../utils/domSanitize';
+import { domSanitize } from '../utils/domFn';
 import { merge } from '../utils/objFn';
 
 import {

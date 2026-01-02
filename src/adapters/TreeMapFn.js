@@ -1,20 +1,17 @@
-import { isNumber } from '../utils/isTypeFn';
-import formatNumber from '../utils/formatNumber';
-
-import { roundBy } from '../math/mathFn';
-
-import { domSanitize } from './AdapterFn';
-import { sortDescByPnValue } from './compareByFn';
-
 import {
   COLOR_CATEGORY_LEVEL1,
   COLOR_CATEGORY_LEVEL2,
   COLOR_CATEGORY_LEVEL3
-} from '../constants/Color'
+} from '../constants/Color';
 
-import {
-  CL_TREE_MAP_PERCENT_BLACK
-} from './CL';
+import { isNumber } from '../utils/isTypeFn';
+import { domSanitize } from '../utils/domFn';
+import formatNumber from '../utils/formatNumber';
+
+import { roundBy } from '../math/mathFn';
+
+import { sortDescByPnValue } from './compareByFn';
+import { CL_TREE_MAP_PERCENT_BLACK } from './CL';
 
 const _findLevelBy = (
   data,

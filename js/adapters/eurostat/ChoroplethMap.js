@@ -4,11 +4,11 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _client = require("react-dom/client");
+var _domFn = require("../../utils/domFn");
 var _objFn = require("../../utils/objFn");
 var _kMeans = _interopRequireDefault(require("../../math/k-means"));
 var _mathFn = require("../../math/mathFn");
 var _MapFactory = require("../../components/factories/MapFactory");
-var _AdapterFn = require("../AdapterFn");
 var _JsonStatTwoDimensionFn = require("../JsonStatTwoDimensionFn");
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 const URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
@@ -155,8 +155,8 @@ const _crRowEl = (color, from, to, cluster, wg) => {
   el.addEventListener('click', function (event) {
     wg.updateCluster(cluster, color, from, to);
   });
-  el.innerHTML = `<span>${(0, _AdapterFn.domSanitize)(from)}&ndash;${(0, _AdapterFn.domSanitize)(to)}<span>
-                  <span style="float: right; color: black; padding-left: 16px">${(0, _AdapterFn.domSanitize)(_n)}</span>`;
+  el.innerHTML = `<span>${(0, _domFn.domSanitize)(from)}&ndash;${(0, _domFn.domSanitize)(to)}<span>
+                  <span style="float: right; color: black; padding-left: 16px">${(0, _domFn.domSanitize)(_n)}</span>`;
   return el;
 };
 const _crFooterEl = () => {

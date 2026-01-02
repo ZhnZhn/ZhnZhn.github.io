@@ -4,7 +4,7 @@ exports.__esModule = true;
 exports.fYAxisOpposite = exports.fXAxisOpposite = exports.fTooltip = exports.fTitle = exports.fSubtitle = exports.fSeriaMarker = exports.fSecondYAxis = exports.fPlotOptionsSeries = exports.fPlotOptionsColumn = exports.fPlotOptionsArea = exports.fPlotLine = exports.fNavigation = exports.fLegend = exports.fEventsMouseOver = exports.fCrosshair = exports.fCreditsRightBottom = exports.crType = exports.crCategoryDataLabels = exports.crAreaConfig = exports.STACKED_HEIGHT = exports.SPACING_TOP = exports.SPACING_BOTTOM = exports.SEMIDONUT_TITLE_Y = exports.SEMIDONUT_SUBTITLE_Y = exports.MARGIN_RIGHT = exports.LEGEND_ROW_HEIGHT = exports.CHART_HEIGHT = void 0;
 var _styleFn = require("../components/styleFn");
 var _isTypeFn = require("../utils/isTypeFn");
-var _domSanitize = require("../utils/domSanitize");
+var _domFn = require("../utils/domFn");
 var _objFn = require("../utils/objFn");
 var _Color = require("../constants/Color");
 var _Tooltip = require("./Tooltip");
@@ -49,12 +49,12 @@ const FONT_STYLE = {
   });
 const _sanitizeOptionText = option => {
   if ((0, _isTypeFn.isObj)(option)) {
-    option.text = (0, _domSanitize.domSanitize)(option.text);
+    option.text = (0, _domFn.domSanitize)(option.text);
   }
   return option;
 };
 const _crTitle = title => (0, _isTypeFn.isStr)(title) ? {
-    text: (0, _domSanitize.domSanitize)(title)
+    text: (0, _domFn.domSanitize)(title)
   } : _sanitizeOptionText(title),
   _crCrosshair = function (is) {
     if (is === void 0) {

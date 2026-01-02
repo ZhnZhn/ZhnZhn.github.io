@@ -2,12 +2,12 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _domSanitize = require("../../utils/domSanitize");
+var _domFn = require("../../utils/domFn");
 var _dateFn = require("../../utils/dateFn");
 const _toOptions = params => {
   const _options = Object.create(null);
   params.forEach((value, key) => {
-    _options[key] = (0, _domSanitize.domSanitize)(value);
+    _options[key] = (0, _domFn.domSanitize)(value);
   });
   return _options;
 };

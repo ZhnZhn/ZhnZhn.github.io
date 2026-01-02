@@ -3,9 +3,9 @@
  */
 "use strict";
 
-var _domSanitize = require("../domSanitize");
+var _domFn = require("../domFn");
 describe("domSanitize", () => {
-  const fn = _domSanitize.domSanitize;
+  const fn = _domFn.domSanitize;
   test('should return empty string for void 0 && null inputs', () => {
     expect(fn()).toBe('');
     expect(fn(null)).toBe('');
@@ -16,4 +16,4 @@ describe("domSanitize", () => {
     expect(fn('<div><a href="javascript:alert(document.title)"><img src="cid:123"/></a></div>')).toBe('<div><a><img src="cid:123"></a></div>');
   });
 });
-//# sourceMappingURL=domSanitize.test.js.map
+//# sourceMappingURL=domFn.test.js.map

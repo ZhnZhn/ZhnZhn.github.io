@@ -18,9 +18,9 @@ import {
   isNumber,
   isPositiveNumber,
 } from '../../utils/isTypeFn';
+import { domSanitize } from '../../utils/domFn';
 import formatNumber from '../../utils/formatNumber';
 
-import { domSanitize } from '../AdapterFn';
 import { isCategory } from '../CategoryFn';
 
 export {

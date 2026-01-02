@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.roundByDataIf = exports.isTreeMap = exports.isDotSet = exports.isColumnOrBarCategory = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.fRoundByIf = exports.fCrTreeMapPoint = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
 var _arrFn = require("../utils/arrFn");
+var _domFn = require("../utils/domFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _ChartType = require("../constants/ChartType");
 var _AdapterFn = require("./AdapterFn");
@@ -32,10 +33,10 @@ const getCategories = chart => ((chart.xAxis || [])[0] || {}).categories;
 exports.getCategories = getCategories;
 const isCategoryCase = (config, categories) => (0, _isTypeFn.isArr)((config.xAxis || {}).categories) && (0, _isTypeFn.isArr)(categories);
 exports.isCategoryCase = isCategoryCase;
-const crCategories = data => data.map(item => (0, _AdapterFn.domSanitize)(item.c));
+const crCategories = data => data.map(item => (0, _domFn.domSanitize)(item.c));
 exports.crCategories = crCategories;
 const crCategoryPoint = (y, n) => {
-  const c = (0, _AdapterFn.domSanitize)(n);
+  const c = (0, _domFn.domSanitize)(n);
   return {
     y,
     name: c,
@@ -44,10 +45,10 @@ const crCategoryPoint = (y, n) => {
 };
 exports.crCategoryPoint = crCategoryPoint;
 const fCrTreeMapPoint = title => {
-  const _title = (0, _AdapterFn.domSanitize)(title);
+  const _title = (0, _domFn.domSanitize)(title);
   return (value, label) => ({
     value,
-    label: (0, _AdapterFn.domSanitize)(label),
+    label: (0, _domFn.domSanitize)(label),
     title: _title
   });
 };

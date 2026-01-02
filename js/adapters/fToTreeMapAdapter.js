@@ -3,13 +3,13 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.toTimeSeriesTreeMapAdapter = exports.fToTreeMapAdapter = exports.crRoundedSubTotal = exports.crItemColor = void 0;
-var _arrFn = require("../utils/arrFn");
 var _isTypeFn = require("../utils/isTypeFn");
+var _arrFn = require("../utils/arrFn");
+var _domFn = require("../utils/domFn");
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
 var _mathFn = require("../math/mathFn");
 var _configBuilderFn = require("../charts/configBuilderFn");
-var _AdapterFn = require("./AdapterFn");
 var _TreeMapFn = require("./TreeMapFn");
 const COLOR_FOSSIL_FUEL = "#658fb9",
   COLOR_NOT_FOSSIL_FUEL = "#6ea3d7";
@@ -70,9 +70,9 @@ const _crDataImpl = (data, option, totalRt, onePercent, percRt) => {
       value: _value,
       _value: value,
       _perc: _percent,
-      _label: (0, _AdapterFn.domSanitize)(label),
-      title: (0, _AdapterFn.domSanitize)(title),
-      label: (0, _AdapterFn.domSanitize)(`${label} (${_percent}%)`),
+      _label: (0, _domFn.domSanitize)(label),
+      title: (0, _domFn.domSanitize)(title),
+      label: (0, _domFn.domSanitize)(`${label} (${_percent}%)`),
       name: _level === 3 && _percent < 1 ? void 0 : _crPointName(label, _percent, _value)
     });
   });

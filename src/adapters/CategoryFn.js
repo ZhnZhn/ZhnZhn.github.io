@@ -1,4 +1,5 @@
 import { isInArrStr } from '../utils/arrFn';
+import { domSanitize } from '../utils/domFn';
 import {
   isArr,
   isObj
@@ -19,7 +20,6 @@ import {
 
 import {
   FN_IDENTITY,
-  domSanitize,
   fCrValue
 } from './AdapterFn';
 

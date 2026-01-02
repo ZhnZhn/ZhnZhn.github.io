@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../src/utils/domSanitize.js"
+  "../../src/utils/domFn.js"
  ],
- "file": "../../src/utils/domSanitize.js",
+ "file": "../../src/utils/domFn.js",
  "names": [
   "_dompurify",
   "_interopRequireDefault",

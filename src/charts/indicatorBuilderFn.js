@@ -1,4 +1,4 @@
-import { domSanitize } from '../utils/domSanitize';
+import { domSanitize } from '../utils/domFn';
 import pipe from '../utils/pipe';
 
 import {
