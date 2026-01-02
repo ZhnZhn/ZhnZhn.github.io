@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../src/utils/getByPropsFrom.js"
+  "../../src/utils/objFn.js"
  ],
- "file": "../../src/utils/getByPropsFrom.js",
+ "file": "../../src/utils/objFn.js",
  "names": [
   "_isTypeFn",
   "require",

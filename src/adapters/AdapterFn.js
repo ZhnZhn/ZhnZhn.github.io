@@ -30,7 +30,6 @@ export {
   mlsToDmy,
   monthIndex
 } from '../utils/dateFn';
-export { getByPropsFrom } from '../utils/getByPropsFrom';
 
 import {
   crValueMoving as _crVm,

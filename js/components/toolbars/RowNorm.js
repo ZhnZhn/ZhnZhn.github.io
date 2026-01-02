@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _getByPropsFrom = require("../../utils/getByPropsFrom");
+var _objFn = require("../../utils/objFn");
 var _dateFn = require("../../utils/dateFn");
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
@@ -25,7 +25,7 @@ const RowNorm = _ref => {
     onMinus
   } = _ref;
   const refEl = (0, _uiApi.useRef)(),
-    _inputDmyInitialValue = (0, _useProperty.useRefInit)(() => (0, _dateFn.mlsToDmy)((0, _getByPropsFrom.getByPropsFrom)(getChart(), "series", 0, "data", 0, "x"))),
+    _inputDmyInitialValue = (0, _useProperty.useRefInit)(() => (0, _dateFn.mlsToDmy)((0, _objFn.getByPropsFrom)(getChart(), "series", 0, "data", 0, "x"))),
     _onPlus = () => {
       onPlus({}, (0, _uiApi.getInputValidValue)(refEl));
     },

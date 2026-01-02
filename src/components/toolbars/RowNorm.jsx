@@ -1,4 +1,4 @@
-import { getByPropsFrom } from '../../utils/getByPropsFrom';
+import { getByPropsFrom } from '../../utils/objFn';
 import { mlsToDmy } from '../../utils/dateFn';
 
 import {

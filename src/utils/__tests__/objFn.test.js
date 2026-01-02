@@ -1,4 +1,4 @@
-import { getByPropsFrom } from '../getByPropsFrom';
+import { getByPropsFrom } from '../objFn';
 
 describe("getByPropsFrom", ()=>{
   const fn = getByPropsFrom;

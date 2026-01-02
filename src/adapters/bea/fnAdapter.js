@@ -1,12 +1,13 @@
-import { joinByColon } from '../../utils/arrFn';
-import {  
+import {
   isArr,
   isObj,
   isNumber
 } from '../../utils/isTypeFn';
 
+import { joinByColon } from '../../utils/arrFn';
+import { getByPropsFrom } from '../../utils/objFn';
+
 import {
-  getByPropsFrom,
   getValue,
   getCaption,
   crDfLink,

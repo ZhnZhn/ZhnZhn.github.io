@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.getRefAreaIndex = exports.getJsonData = exports.getDataSeries = exports.getDataDimensions = exports.crObservationPropName = exports.crItemId = void 0;
+var _objFn = require("../../utils/objFn");
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 const _getRefArea = (isCategory, items) => isCategory ? "" : (0, _AdapterFn.getValue)(items[0]);
@@ -29,7 +30,7 @@ const crItemId = option => _getCrItemId(option.dfFn)((0, _CategoryFn.isCategory)
 exports.crItemId = crItemId;
 const getJsonData = json => (json || {}).data || {};
 exports.getJsonData = getJsonData;
-const getDataSeries = data => (0, _AdapterFn.getByPropsFrom)(data, "dataSets", 0, "series") || {};
+const getDataSeries = data => (0, _objFn.getByPropsFrom)(data, "dataSets", 0, "series") || {};
 exports.getDataSeries = getDataSeries;
 const getRefAreaIndex = dimensions => {
   const _series = (dimensions || {}).series || [];
@@ -41,7 +42,7 @@ const getRefAreaIndex = dimensions => {
   return 0;
 };
 exports.getRefAreaIndex = getRefAreaIndex;
-const getDataDimensions = data => (0, _AdapterFn.getByPropsFrom)(data, "structures", 0, "dimensions");
+const getDataDimensions = data => (0, _objFn.getByPropsFrom)(data, "structures", 0, "dimensions");
 exports.getDataDimensions = getDataDimensions;
 const crObservationPropName = option => crItemId(option).split(".").reduce((pn, _) => pn + ":0", "").slice(1);
 exports.crObservationPropName = crObservationPropName;

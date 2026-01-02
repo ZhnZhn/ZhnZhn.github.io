@@ -2,9 +2,11 @@ import {
   isStr,
   getObjectKeys
 } from '../../utils/isTypeFn';
+import {
+  getByPropsFrom
+} from '../../utils/objFn';
 
 import crAdapterCategory from '../crAdapterCategory';
-import { getByPropsFrom } from '../AdapterFn';
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
 import {

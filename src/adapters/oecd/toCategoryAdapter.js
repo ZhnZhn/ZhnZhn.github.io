@@ -3,14 +3,15 @@ import {
   isStr,
   getObjectKeys
 } from '../../utils/isTypeFn';
-
 import {
-  getByPropsFrom,
-  fCrValue
-} from '../AdapterFn';
+  getByPropsFrom
+} from '../../utils/objFn';
+
+import { fCrValue } from '../AdapterFn';
 import crAdapterCategory from '../crAdapterCategory';
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
+
 import {
   getJsonData,
   getDataSeries,

@@ -2,8 +2,9 @@
 
 exports.__esModule = true;
 exports.getResultsData = exports.getResults = exports.getResError = exports.getFrequency = exports.crData = exports.crConfOption = exports.BEA_DATA_URL = void 0;
-var _arrFn = require("../../utils/arrFn");
 var _isTypeFn = require("../../utils/isTypeFn");
+var _arrFn = require("../../utils/arrFn");
+var _objFn = require("../../utils/objFn");
 var _AdapterFn = require("../AdapterFn");
 const BEA_DATA_URL = exports.BEA_DATA_URL = "https://apps.bea.gov";
 const INDUSTRY_FACTSHEET_URL = `${BEA_DATA_URL}/industry/factsheet/factsheet.html`;
@@ -12,7 +13,7 @@ exports.getFrequency = getFrequency;
 const _getBeaapi = json => (json || {}).BEAAPI || {};
 const getResults = json => _getBeaapi(json).Results,
   getResError = json => _getBeaapi(json).Error,
-  getResultsData = Results => (0, _AdapterFn.getByPropsFrom)(Results, ...((0, _isTypeFn.isArr)(Results) ? [0, "Data"] : ["Data"]));
+  getResultsData = Results => (0, _objFn.getByPropsFrom)(Results, ...((0, _isTypeFn.isArr)(Results) ? [0, "Data"] : ["Data"]));
 exports.getResultsData = getResultsData;
 exports.getResError = getResError;
 exports.getResults = getResults;

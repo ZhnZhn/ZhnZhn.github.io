@@ -4,19 +4,20 @@ exports.__esModule = true;
 exports.getSeriesObservertions = exports.getSeries = exports.getObservationValues = exports.getDimensions = exports.findCategoryIndex = exports.crItemId = exports.ECB_EUROPA_EU = void 0;
 var _arrFn = require("../../utils/arrFn");
 var _isTypeFn = require("../../utils/isTypeFn");
+var _objFn = require("../../utils/objFn");
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 const ECB_EUROPA_EU = exports.ECB_EUROPA_EU = "ecb.europa.eu";
-const getSeries = json => (0, _AdapterFn.getByPropsFrom)(json, "dataSets", 0, "series");
+const getSeries = json => (0, _objFn.getByPropsFrom)(json, "dataSets", 0, "series");
 exports.getSeries = getSeries;
 const getSeriesObservertions = json => {
   const _series = getSeries(json);
   return (_series[(0, _isTypeFn.getObjectKeys)(_series)[0]] || {}).observations;
 };
 exports.getSeriesObservertions = getSeriesObservertions;
-const getDimensions = json => (0, _AdapterFn.getByPropsFrom)(json, "structure", "dimensions");
+const getDimensions = json => (0, _objFn.getByPropsFrom)(json, "structure", "dimensions");
 exports.getDimensions = getDimensions;
-const getObservationValues = json => (0, _AdapterFn.getByPropsFrom)(getDimensions(json), "observation", 0, "values");
+const getObservationValues = json => (0, _objFn.getByPropsFrom)(getDimensions(json), "observation", 0, "values");
 exports.getObservationValues = getObservationValues;
 const _crItemDf = items => {
     const _v0 = (0, _AdapterFn.getValue)(items[0]);

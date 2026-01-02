@@ -3,14 +3,15 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _objFn = require("../../utils/objFn");
 var _crAdapterType = require("../crAdapterType1");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
 const crData = (json, option) => {
   const data = (0, _fnAdapter.getJsonData)(json),
-    observations = (0, _AdapterFn.getByPropsFrom)((0, _fnAdapter.getDataSeries)(data), (0, _fnAdapter.crObservationPropName)(option), "observations") || {},
-    dates = (0, _AdapterFn.getByPropsFrom)((0, _fnAdapter.getDataDimensions)(data), "observation", 0, "values") || [];
+    observations = (0, _objFn.getByPropsFrom)((0, _fnAdapter.getDataSeries)(data), (0, _fnAdapter.crObservationPropName)(option), "observations") || {},
+    dates = (0, _objFn.getByPropsFrom)((0, _fnAdapter.getDataDimensions)(data), "observation", 0, "values") || [];
   return (0, _isTypeFn.getObjectKeys)(observations).reduce((_arr, valueKey) => {
     const dateMls = (0, _AdapterFn.ymdToUTC)((dates[valueKey] || {}).id),
       value = parseFloat(observations[valueKey]);

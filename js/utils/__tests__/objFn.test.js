@@ -1,8 +1,8 @@
 "use strict";
 
-var _getByPropsFrom = require("../getByPropsFrom");
+var _objFn = require("../objFn");
 describe("getByPropsFrom", () => {
-  const fn = _getByPropsFrom.getByPropsFrom;
+  const fn = _objFn.getByPropsFrom;
   test("should return value from object by list parameters of prop names", () => {
     const obj = {
       prop1: [{
@@ -18,4 +18,4 @@ describe("getByPropsFrom", () => {
     expect(fn(obj, "prop4", 1, "prop5", "value")).toBe(void 0);
   });
 });
-//# sourceMappingURL=getByPropsFrom.test.js.map
+//# sourceMappingURL=objFn.test.js.map

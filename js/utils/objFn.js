@@ -10,4 +10,4 @@ const getByPropsFrom = function (obj) {
   return (props || []).reduce((nextObj, propName) => (nextObj || ((0, _isTypeFn.isStr)(propName) ? {} : []))[propName], obj);
 };
 exports.getByPropsFrom = getByPropsFrom;
-//# sourceMappingURL=getByPropsFrom.js.map
+//# sourceMappingURL=objFn.js.map
