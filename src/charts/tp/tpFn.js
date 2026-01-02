@@ -10,7 +10,7 @@ import {
   COLOR_VALUE
 } from '../../constants/Color';
 
-import isSupportOptions from '../../utils/isSupportOptions';
+import { isSupportOptions } from '../../utils/domFn';
 import { isFn } from '../../utils/isTypeFn';
 
 import { toNumberFormatAll } from '../ChartFn';

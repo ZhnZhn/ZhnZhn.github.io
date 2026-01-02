@@ -1,6 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.toTdmyIf = exports.toNumberFormat = exports.toDmy = exports.getStatus = exports.crTpId = exports.crSpan = exports.crRow = exports.crNotEmptySpan = exports.crHeader = exports.addHideHandler = void 0;
 var _ChartFn = require("../ChartFn");
@@ -10,7 +9,7 @@ exports.toNumberFormatAll = _ChartFn.toNumberFormatAll;
 exports.toDmy = _ChartFn.toDmy;
 exports.toTdmyIf = _ChartFn.toTdmyIf;
 var _Color = require("../../constants/Color");
-var _isSupportOptions = _interopRequireDefault(require("../../utils/isSupportOptions"));
+var _domFn = require("../../utils/domFn");
 var _isTypeFn = require("../../utils/isTypeFn");
 var _CL = require("../CL");
 const VALUE_STYLE = 'padding-right:5px;',
@@ -31,7 +30,7 @@ const _fHideTooltip = function (point, fn) {
 const _addClickOnceById = (id, listener) => {
   const node = document.getElementById(id);
   if (node) {
-    node.addEventListener('click', listener, _isSupportOptions.default ? {
+    node.addEventListener('click', listener, _domFn.isSupportOptions ? {
       once: true
     } : false);
   }
