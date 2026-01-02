@@ -1,12 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.fYAxisOpposite = exports.fXAxisOpposite = exports.fTooltip = exports.fTitle = exports.fSubtitle = exports.fSeriaMarker = exports.fSecondYAxis = exports.fPlotOptionsSeries = exports.fPlotOptionsColumn = exports.fPlotOptionsArea = exports.fPlotLine = exports.fNavigation = exports.fLegend = exports.fEventsMouseOver = exports.fCrosshair = exports.fCreditsRightBottom = exports.crType = exports.crCategoryDataLabels = exports.crAreaConfig = exports.STACKED_HEIGHT = exports.SPACING_TOP = exports.SPACING_BOTTOM = exports.SEMIDONUT_TITLE_Y = exports.SEMIDONUT_SUBTITLE_Y = exports.MARGIN_RIGHT = exports.LEGEND_ROW_HEIGHT = exports.CHART_HEIGHT = void 0;
 var _styleFn = require("../components/styleFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _domSanitize = require("../utils/domSanitize");
-var _merge = _interopRequireDefault(require("../utils/merge"));
+var _objFn = require("../utils/objFn");
 var _Color = require("../constants/Color");
 var _Tooltip = require("./Tooltip");
 const FONT_STYLE = {
@@ -77,7 +76,7 @@ const SEMIDONUT_TITLE_Y = exports.SEMIDONUT_TITLE_Y = 15;
 const SEMIDONUT_SUBTITLE_Y = exports.SEMIDONUT_SUBTITLE_Y = 35;
 const crType = (seriaType, dfType) => seriaType && (0, _isTypeFn.isStr)(seriaType) ? seriaType.toLowerCase() : dfType || 'spline';
 exports.crType = crType;
-const fCreditsRightBottom = option => (0, _merge.default)(false, {
+const fCreditsRightBottom = option => (0, _objFn.merge)(false, {
   enabled: true,
   position: {
     align: 'right',
@@ -87,7 +86,7 @@ const fCreditsRightBottom = option => (0, _merge.default)(false, {
   }
 }, option);
 exports.fCreditsRightBottom = fCreditsRightBottom;
-const _fCrTitle = y => option => (0, _merge.default)(false, {
+const _fCrTitle = y => option => (0, _objFn.merge)(false, {
   ...CAPTION_CONFIG,
   y
 }, _sanitizeOptionText(option));
@@ -185,7 +184,7 @@ const fPlotLine = (color, text) => ({
   }
 });
 exports.fPlotLine = fPlotLine;
-const fXAxisOpposite = option => (0, _merge.default)(false, {
+const fXAxisOpposite = option => (0, _objFn.merge)(false, {
   opposite: true,
   tickLength: 0,
   tickPosition: 'inside',
@@ -194,7 +193,7 @@ const fXAxisOpposite = option => (0, _merge.default)(false, {
   }
 }, option);
 exports.fXAxisOpposite = fXAxisOpposite;
-const fYAxisOpposite = option => (0, _merge.default)(false, {
+const fYAxisOpposite = option => (0, _objFn.merge)(false, {
   opposite: true,
   title: {
     text: ''
@@ -218,10 +217,10 @@ const fSecondYAxis = (name, color) => ({
   }
 });
 exports.fSecondYAxis = fSecondYAxis;
-const _fCrPlotOptions = (colorHoverLine, colorMarkerLine) => option => (0, _merge.default)(false, _crPlotOption(colorHoverLine, colorMarkerLine), option || {});
+const _fCrPlotOptions = (colorHoverLine, colorMarkerLine) => option => (0, _objFn.merge)(false, _crPlotOption(colorHoverLine, colorMarkerLine), option || {});
 const fPlotOptionsArea = exports.fPlotOptionsArea = _fCrPlotOptions(_Color.COLOR_AREA_HOVER_LINE, _Color.COLOR_AREA_MARKER_LINE);
 const fPlotOptionsColumn = exports.fPlotOptionsColumn = _fCrPlotOptions(_Color.COLOR_COLUMN_HOVER_LINE, _Color.COLOR_COLUMN_MARKER_LINE);
-const fPlotOptionsSeries = option => (0, _merge.default)(false, {
+const fPlotOptionsSeries = option => (0, _objFn.merge)(false, {
   states: {
     hover: {
       halo: {
@@ -235,7 +234,7 @@ const fPlotOptionsSeries = option => (0, _merge.default)(false, {
   }
 }, option);
 exports.fPlotOptionsSeries = fPlotOptionsSeries;
-const fLegend = option => (0, _merge.default)(false, {
+const fLegend = option => (0, _objFn.merge)(false, {
   useHTML: true,
   symbolHeight: 14,
   symbolWidth: 14,

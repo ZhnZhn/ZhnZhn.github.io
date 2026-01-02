@@ -1,8 +1,11 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.getByPropsFrom = void 0;
+exports.merge = exports.getByPropsFrom = void 0;
+var _highcharts = _interopRequireDefault(require("highcharts"));
 var _isTypeFn = require("./isTypeFn");
+const merge = exports.merge = _highcharts.default.merge;
 const getByPropsFrom = function (obj) {
   for (var _len = arguments.length, props = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     props[_key - 1] = arguments[_key];

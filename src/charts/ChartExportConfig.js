@@ -1,4 +1,4 @@
-import merge from '../utils/merge';
+import { merge } from '../utils/objFn';
 
 const _STYLE_COLOR_BLACK = {
   style: {
@@ -58,5 +58,5 @@ export const crExportStyleOptions = () => [
   _crStyleItem('Default', {}),
   _crStyleItem('Default + Black Axis', _crStyleBlackAxis()),
   _crStyleItem('Default + Black Axis + Black Title', _crStyleBlackAxisTitle()),
-  _crStyleItem('All Black', _crStyleBlackAll())  
+  _crStyleItem('All Black', _crStyleBlackAll())
 ]

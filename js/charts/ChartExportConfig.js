@@ -1,9 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.crExportStyleOptions = void 0;
-var _merge = _interopRequireDefault(require("../utils/merge"));
+var _objFn = require("../utils/objFn");
 const _STYLE_COLOR_BLACK = {
   style: {
     color: 'black'
@@ -34,9 +33,9 @@ const BLACK_SERIES = {
     }
   }
 };
-const _crStyleBlackAxis = () => (0, _merge.default)(false, {}, BLACK_AXIS),
-  _crStyleBlackAxisTitle = () => (0, _merge.default)(false, {}, BLACK_AXIS, BLACK_TITLE),
-  _crStyleBlackAll = () => (0, _merge.default)(false, {}, BLACK_AXIS, BLACK_TITLE, BLACK_SERIES);
+const _crStyleBlackAxis = () => (0, _objFn.merge)(false, {}, BLACK_AXIS),
+  _crStyleBlackAxisTitle = () => (0, _objFn.merge)(false, {}, BLACK_AXIS, BLACK_TITLE),
+  _crStyleBlackAll = () => (0, _objFn.merge)(false, {}, BLACK_AXIS, BLACK_TITLE, BLACK_SERIES);
 const _crStyleItem = (caption, value) => ({
   caption,
   value

@@ -1,19 +1,19 @@
 import { createRoot } from 'react-dom/client';
 
-import { domSanitize } from '../AdapterFn';
-import {
-  crGeoSlice,
-  crGeoSeria
-} from '../JsonStatTwoDimensionFn';
-
+import { merge } from '../../utils/objFn';
 import clusterMaker from '../../math/k-means';
 import { toFixed } from '../../math/mathFn';
-import merge from '../../utils/merge';
 
 import {
   crInfo,
   crClusterInfo
 } from '../../components/factories/MapFactory';
+
+import { domSanitize } from '../AdapterFn';
+import {
+  crGeoSlice,
+  crGeoSeria
+} from '../JsonStatTwoDimensionFn';
 
 const URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json'
 , NUMBER_OF_CLUSTERS = 6

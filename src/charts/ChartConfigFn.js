@@ -1,8 +1,9 @@
-import merge from '../utils/merge';
+import { merge } from '../utils/objFn';
 import {
   COLOR_HIGH,
   COLOR_LOW
 } from '../constants/Color';
+
 import {
   crAreaConfig as _crAreaConfig,
   fEventsMouseOver,

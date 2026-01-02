@@ -4,14 +4,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _client = require("react-dom/client");
-var _AdapterFn = require("../AdapterFn");
-var _JsonStatTwoDimensionFn = require("../JsonStatTwoDimensionFn");
+var _objFn = require("../../utils/objFn");
 var _kMeans = _interopRequireDefault(require("../../math/k-means"));
 var _mathFn = require("../../math/mathFn");
-var _merge = _interopRequireDefault(require("../../utils/merge"));
 var _MapFactory = require("../../components/factories/MapFactory");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+var _AdapterFn = require("../AdapterFn");
+var _JsonStatTwoDimensionFn = require("../JsonStatTwoDimensionFn");
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 const URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
   NUMBER_OF_CLUSTERS = 6,
   NUMBER_OF_ITERATION = 100,
@@ -235,7 +234,7 @@ const _crChoroplethMap = option => {
   return option;
 };
 const _crGeoJson = geoJson => {
-  const _geoJson = (0, _merge.default)(true, {}, geoJson);
+  const _geoJson = (0, _objFn.merge)(true, {}, geoJson);
   _geoJson.features.forEach(feature => {
     feature.properties.value = null;
   });

@@ -1,4 +1,7 @@
+import Highcharts from 'highcharts'
 import { isStr } from './isTypeFn';
+
+export const merge = Highcharts.merge
 
 export const getByPropsFrom = (
   obj,

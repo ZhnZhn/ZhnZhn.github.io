@@ -5,7 +5,7 @@ import {
   isStr
 } from '../utils/isTypeFn';
 import { domSanitize } from '../utils/domSanitize';
-import merge from '../utils/merge';
+import { merge } from '../utils/objFn';
 
 import {
   COLOR_CHART_TITLE,

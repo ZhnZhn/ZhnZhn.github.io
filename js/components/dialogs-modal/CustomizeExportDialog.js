@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _merge = _interopRequireDefault(require("../../utils/merge"));
+var _objFn = require("../../utils/objFn");
 var _mathFn = require("../../math/mathFn");
 var _uiApi = require("../uiApi");
 var _inputFn = require("../inputFn");
@@ -130,7 +130,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     } = data,
     _hExport = (0, _useEventCallback.default)(() => {
       const [width, height] = _getDimension(chart, (0, _uiApi.getInputValue)(_refInputWidth), (0, _uiApi.getInputValue)(_refInputHeight)),
-        _customOption = (0, _merge.default)(true, {
+        _customOption = (0, _objFn.merge)(true, {
           chart: {
             width,
             height

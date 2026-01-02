@@ -1,4 +1,4 @@
-import merge from '../../utils/merge';
+import { merge } from '../../utils/objFn';
 import { isInRange } from '../../math/mathFn';
 
 import {
