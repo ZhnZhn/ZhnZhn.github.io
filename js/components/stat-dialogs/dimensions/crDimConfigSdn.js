@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _strFn = require("../../../utils/strFn");
 var _dimConfigFn = require("./dimConfigFn");
 const _crSdnOptions = _ref => {
   let {
@@ -34,7 +35,7 @@ const crDimConfigSdn = variables => {
       }).reverse();
     } else {
       dims.push({
-        c: (0, _dimConfigFn.toUpperCaseFirst)(text),
+        c: (0, _strFn.toUpperCaseFirst)(text),
         v: id,
         options: _crSdnOptions(item)
       });

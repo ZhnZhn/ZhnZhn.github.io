@@ -1,7 +1,5 @@
-import {
-  crDimItem,
-  toUpperCaseFirst
-} from './dimConfigFn';
+import { toUpperCaseFirst } from '../../../utils/strFn';
+import { crDimItem } from './dimConfigFn';
 
 const _isArr = Array.isArray;
 

@@ -5,10 +5,13 @@ import {
   getObjectKeys
 } from '../../utils/isTypeFn';
 
+import {
+  toUpperCaseFirst
+} from '../../utils/strFn';
+
 import crAdapterCategory from '../crAdapterCategory';
 import {
   numberFormat,
-  toUpperCaseFirst,
   crShortItemCaption
 } from '../AdapterFn';
 import { crCategoryPoint } from '../CategoryFn';

@@ -1,9 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toUpperCaseFirst = exports.crDimItem = void 0;
-var _toUpperCaseFirst = require("../../../utils/toUpperCaseFirst");
-exports.toUpperCaseFirst = _toUpperCaseFirst.toUpperCaseFirst;
+exports.crDimItem = void 0;
 const crDimItem = (caption, sliceId, value) => ({
   caption,
   slice: {

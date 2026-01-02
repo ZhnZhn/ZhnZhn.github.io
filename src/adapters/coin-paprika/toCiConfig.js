@@ -5,7 +5,7 @@ import {
 
 import {
   toUpperCaseFirst
-} from '../AdapterFn';
+} from '../../utils/strFn';
 
 const _crCaption = ({
   name='',

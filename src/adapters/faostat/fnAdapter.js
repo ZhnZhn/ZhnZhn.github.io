@@ -15,9 +15,12 @@ import {
 } from '../../utils/arrFn';
 
 import {
+  toUpperCaseFirst
+} from '../../utils/strFn';
+
+import {
   isYNumber,
   getValue,
-  toUpperCaseFirst,
   monthIndex,
   ymdToUTC,
   addSeriesDataTypeTo

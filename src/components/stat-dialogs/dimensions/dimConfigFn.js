@@ -1,5 +1,3 @@
-export { toUpperCaseFirst } from '../../../utils/toUpperCaseFirst'
-
 export const crDimItem = (
   caption,
   sliceId,

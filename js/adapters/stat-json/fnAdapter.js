@@ -1,10 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toUpperCaseFirst = exports.isYNumber = exports.crZhConfig = exports.crTitle = exports.crInfo = exports.crErrorByMessage = exports.crConfOption = exports.crChartOption = void 0;
+exports.isYNumber = exports.crZhConfig = exports.crTitle = exports.crInfo = exports.crErrorByMessage = exports.crConfOption = exports.crChartOption = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isYNumber = _AdapterFn.isYNumber;
-exports.toUpperCaseFirst = _AdapterFn.toUpperCaseFirst;
 exports.crErrorByMessage = _AdapterFn.crErrorByMessage;
 var _crFn = require("../crFn");
 exports.crId = _crFn.crId;

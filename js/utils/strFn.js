@@ -3,6 +3,6 @@
 exports.__esModule = true;
 exports.toUpperCaseFirst = void 0;
 var _isTypeFn = require("./isTypeFn");
-const toUpperCaseFirst = v => (0, _isTypeFn.isStr)(v) && v ? v[0].toUpperCase() + v.slice(1) : '';
+const toUpperCaseFirst = strOr => (0, _isTypeFn.isStr)(strOr) && strOr ? strOr[0].toUpperCase() + strOr.slice(1) : '';
 exports.toUpperCaseFirst = toUpperCaseFirst;
-//# sourceMappingURL=toUpperCaseFirst.js.map
+//# sourceMappingURL=strFn.js.map

@@ -12,7 +12,7 @@ import {
 } from '../../utils/getPropertyFn';
 import {
   toUpperCaseFirst
-} from '../../utils/toUpperCaseFirst';
+} from '../../utils/strFn';
 
 import {
   isInRange

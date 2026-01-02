@@ -1,6 +1,5 @@
 export {
   isYNumber,
-  toUpperCaseFirst,
   crErrorByMessage,
 } from '../AdapterFn';
 export {

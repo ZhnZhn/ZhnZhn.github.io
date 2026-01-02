@@ -1,5 +1,3 @@
-import { crCategoryData } from '../JsonStatFn';
-
 import {
   CHT_BAR,
   CHT_COLUMN,
@@ -9,12 +7,14 @@ import {
   CHT_BAR_CLUSTER
 } from '../../constants/ChartType';
 
+import { toUpperCaseFirst } from '../../utils/strFn';
+
+import { crCategoryData } from '../JsonStatFn';
 import crCategoryConfig from '../crCategoryConfig';
 
 import {
   crTitle,
-  crChartOption,
-  toUpperCaseFirst
+  crChartOption
 } from './fnAdapter';
 
 const _assign = Object.assign;

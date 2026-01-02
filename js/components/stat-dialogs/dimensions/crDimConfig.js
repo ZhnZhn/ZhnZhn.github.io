@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _strFn = require("../../../utils/strFn");
 var _dimConfigFn = require("./dimConfigFn");
 const _isArr = Array.isArray;
 const FREQUENCY_HM = {
@@ -54,7 +55,7 @@ const crDimConfig = variables => {
       _text = item.text || '';
     if (_isNotTimeDimension(time, code)) {
       dims.push({
-        c: (0, _dimConfigFn.toUpperCaseFirst)(_text),
+        c: (0, _strFn.toUpperCaseFirst)(_text),
         v: code,
         options: _crDimOptions(item)
       });

@@ -1,4 +1,5 @@
 import { filterBoolean } from '../../../utils/arrFn';
+import { toUpperCaseFirst } from '../../../utils/strFn';
 import { getObjectKeys } from '../../../utils/isTypeFn';
 
 import {
@@ -8,7 +9,6 @@ import {
   ADJ_ID,
   GEO_ENTITY
 } from './EsConfig';
-import { toUpperCaseFirst } from './dimConfigFn';
 
 const _crC = label => (label || '')
   .split('_')

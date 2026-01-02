@@ -3,10 +3,10 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _arrFn = require("../../../utils/arrFn");
+var _strFn = require("../../../utils/strFn");
 var _isTypeFn = require("../../../utils/isTypeFn");
 var _EsConfig = require("./EsConfig");
-var _dimConfigFn = require("./dimConfigFn");
-const _crC = label => (label || '').split('_').map(_dimConfigFn.toUpperCaseFirst).join(' ');
+const _crC = label => (label || '').split('_').map(_strFn.toUpperCaseFirst).join(' ');
 const _crEsOptions = (category, id) => {
   const {
     label

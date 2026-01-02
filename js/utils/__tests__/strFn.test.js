@@ -1,8 +1,8 @@
 "use strict";
 
-var _toUpperCaseFirst = require("../toUpperCaseFirst");
+var _strFn = require("../strFn");
 describe('toUpperCaseFirst', () => {
-  const fn = _toUpperCaseFirst.toUpperCaseFirst;
+  const fn = _strFn.toUpperCaseFirst;
   const EMPTY = '';
   test('should return string with first upper case letter for string or String input', () => {
     expect(fn('abc')).toBe('Abc');
@@ -28,4 +28,4 @@ describe('toUpperCaseFirst', () => {
     expect(fn(Date.now())).toBe(EMPTY);
   });
 });
-//# sourceMappingURL=toUpperCaseFirst.test.js.map
+//# sourceMappingURL=strFn.test.js.map

@@ -31,7 +31,7 @@ export {
   monthIndex
 } from '../utils/dateFn';
 export { getByPropsFrom } from '../utils/getByPropsFrom';
-export { toUpperCaseFirst } from '../utils/toUpperCaseFirst';
+//export { toUpperCaseFirst } from '../utils/toUpperCaseFirst';
 
 import {
   crValueMoving as _crVm,

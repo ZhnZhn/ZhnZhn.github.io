@@ -1,4 +1,4 @@
-import { toUpperCaseFirst } from '../AdapterFn';
+import { toUpperCaseFirst } from '../../utils/strFn';
 
 export const DATASET_EMPTY = "Dataset is empty"
 

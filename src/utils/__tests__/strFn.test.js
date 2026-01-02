@@ -1,4 +1,6 @@
-import { toUpperCaseFirst } from '../toUpperCaseFirst';
+import {
+  toUpperCaseFirst
+} from '../strFn';
 
 describe('toUpperCaseFirst', ()=> {
   const fn = toUpperCaseFirst;

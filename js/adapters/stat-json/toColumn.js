@@ -3,8 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _JsonStatFn = require("../JsonStatFn");
 var _ChartType = require("../../constants/ChartType");
+var _strFn = require("../../utils/strFn");
+var _JsonStatFn = require("../JsonStatFn");
 var _crCategoryConfig = _interopRequireDefault(require("../crCategoryConfig"));
 var _fnAdapter = require("./fnAdapter");
 const _assign = Object.assign;
@@ -17,7 +18,7 @@ const _crSubtitle = (items, category) => {
       caption
     } = item || {};
     if (slice && !slice[category] && caption) {
-      _arr.push((0, _fnAdapter.toUpperCaseFirst)(caption));
+      _arr.push((0, _strFn.toUpperCaseFirst)(caption));
     }
   });
   return _arr.join(": ");

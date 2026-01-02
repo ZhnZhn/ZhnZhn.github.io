@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _strFn = require("../../utils/strFn");
 var _AdapterFn = require("../AdapterFn");
 var _AvFn = require("../av/AvFn");
 var _fnAdapter = require("./fnAdapter");
@@ -10,7 +11,7 @@ const _getSymbol = option => (0, _AdapterFn.getValues)(option)[0];
 const _getInterval = intervalValue => {
   const dfFn = intervalValue.split('&')[0],
     dfT = (0, _AdapterFn.safeReplaceIn)(dfFn, 'TIME_SERIES_', ''),
-    interval = dfT.split('_').map(token => (0, _AdapterFn.toUpperCaseFirst)(token.toLowerCase())).join(' ');
+    interval = dfT.split('_').map(token => (0, _strFn.toUpperCaseFirst)(token.toLowerCase())).join(' ');
   return [dfT, interval];
 };
 const _crEodQuery = option => {

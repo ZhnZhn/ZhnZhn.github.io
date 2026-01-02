@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _arrFn = require("../../utils/arrFn");
-var _AdapterFn = require("../AdapterFn");
+var _strFn = require("../../utils/strFn");
 const _crCaption = _ref => {
   let {
     name = '',
@@ -34,7 +34,7 @@ const _crTokensCaption = _ref3 => {
     open_source,
     is_active
   } = _ref3;
-  return (0, _arrFn.joinByBlank)((0, _AdapterFn.toUpperCaseFirst)(type), _crOpenSource(open_source), _crIsActive(is_active));
+  return (0, _arrFn.joinByBlank)((0, _strFn.toUpperCaseFirst)(type), _crOpenSource(open_source), _crIsActive(is_active));
 };
 const _crDescr = json => json.description || '';
 const _crBlogLinks = links_extended => (links_extended || []).filter(item => item.type === 'blog').map(item => ({

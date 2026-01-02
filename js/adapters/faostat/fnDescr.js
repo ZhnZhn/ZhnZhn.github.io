@@ -2,51 +2,46 @@
 
 exports.__esModule = true;
 exports.toInfo = exports.DATASET_EMPTY = void 0;
-
-var _AdapterFn = require("../AdapterFn");
-
-const DATASET_EMPTY = "Dataset is empty";
-exports.DATASET_EMPTY = DATASET_EMPTY;
-
-const _crBlackSpan = text => text ? "<span style='color:black;'>" + text + "</span>" : '';
-
-const _crWrSpan = text => text ? "<span style='display:inline-block;width:75px;text-align:right;'>" + text + "</span>" : '';
-
+var _strFn = require("../../utils/strFn");
+const DATASET_EMPTY = exports.DATASET_EMPTY = "Dataset is empty";
+const _crBlackSpan = text => text ? `<span style='color:black;'>${text}</span>` : '';
+const _crWrSpan = text => text ? `<span style='display:inline-block;width:75px;text-align:right;'>${text}</span>` : '';
 const _crDescrRow = function (title, value, code) {
   if (code === void 0) {
     code = '';
   }
-
-  const _codeText = code ? " (Code: " + code + ")" : '';
-
-  return value ? "<div>" + _crWrSpan(title + ':') + " " + _crBlackSpan(value) + _codeText + "</div>" : '';
+  const _codeText = code ? ` (Code: ${code})` : '';
+  return value ? `<div>${_crWrSpan(title + ':')} ${_crBlackSpan(value)}${_codeText}</div>` : '';
 };
-
 const _toDescr = (item, title) => {
   const _isList = title.indexOf('> (List)') !== -1,
-        {
-    Area = '',
-    Domain = '',
-    Item = '',
-    Element = '',
-    Unit
-  } = item,
-        _areaDescrRow = _isList ? '' : _crDescrRow('Area', Area, item['Area Code']),
-        _Unit = (0, _AdapterFn.toUpperCaseFirst)(Unit);
-
-  return "<div>\n    " + _areaDescrRow + "\n    " + _crDescrRow('Domain', Domain, item['Domain Code']) + "\n    " + _crDescrRow('Item', Item, item['Item Code']) + "\n    " + _crDescrRow('Element', Element, item['Element Code']) + "\n    " + _crDescrRow('Unit', _Unit) + "\n    <div>" + (item['Flag Description'] || DATASET_EMPTY) + "</div>\n  </div>";
+    {
+      Area = '',
+      Domain = '',
+      Item = '',
+      Element = '',
+      Unit
+    } = item,
+    _areaDescrRow = _isList ? '' : _crDescrRow('Area', Area, item['Area Code']),
+    _Unit = (0, _strFn.toUpperCaseFirst)(Unit);
+  return `<div>
+    ${_areaDescrRow}
+    ${_crDescrRow('Domain', Domain, item['Domain Code'])}
+    ${_crDescrRow('Item', Item, item['Item Code'])}
+    ${_crDescrRow('Element', Element, item['Element Code'])}
+    ${_crDescrRow('Unit', _Unit)}
+    <div>${item['Flag Description'] || DATASET_EMPTY}</div>
+  </div>`;
 };
-
 const toInfo = (json, title, subtitle) => {
   const {
-    data
-  } = json,
-        _itemNewest = data[data.length - 1] || {},
-        _itemOldest = data[0] || {},
-        _dateNewest = _itemNewest.Year || '',
-        _dateOldest = _itemOldest.Year || '',
-        _descr = _toDescr(_itemNewest, title);
-
+      data
+    } = json,
+    _itemNewest = data[data.length - 1] || {},
+    _itemOldest = data[0] || {},
+    _dateNewest = _itemNewest.Year || '',
+    _dateOldest = _itemOldest.Year || '',
+    _descr = _toDescr(_itemNewest, title);
   return {
     description: _descr,
     frequency: "Annual",
@@ -55,6 +50,5 @@ const toInfo = (json, title, subtitle) => {
     fromDate: _dateOldest
   };
 };
-
 exports.toInfo = toInfo;
 //# sourceMappingURL=fnDescr.js.map
