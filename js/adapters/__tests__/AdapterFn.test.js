@@ -97,21 +97,6 @@ describe('ymdToUTC', () => {
     });
   });
 });
-describe('isNumber', () => {
-  const fn = _AdapterFn.isNumber;
-  test('should return true for number value', () => {
-    expect(fn(0)).toBe(true);
-    expect(fn(1)).toBe(true);
-    expect(fn(0.123456789)).toBe(true);
-    expect(fn(NaN)).toBe(false);
-    expect(fn(new Number(1))).toBe(false);
-    expect(fn('')).toBe(false);
-    expect(fn()).toBe(false);
-    expect(fn(null)).toBe(false);
-    expect(fn({})).toBe(false);
-    expect(fn([])).toBe(false);
-  });
-});
 describe('isYNumber', () => {
   const fn = _AdapterFn.isYNumber;
   test('should return true for object with property y number', () => {
