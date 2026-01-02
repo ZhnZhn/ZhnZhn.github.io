@@ -1,13 +1,4 @@
 import {
-  isInArrStr,
-  filterBoolean
-} from "../../utils/arrFn";
-import {
-  crGetRoute
-} from "../../utils/crRouter";
-import toPlural from "../../utils/toPlural";
-
-import {
   CIT_EUROSTAT_MAP
 } from "../../constants/CompItemType";
 import {
@@ -30,6 +21,13 @@ import {
   CHT_MAP,
   CHT_DOT_SET
 } from "../../constants/ChartType";
+
+import {
+  isInArrStr,
+  filterBoolean
+} from "../../utils/arrFn";
+import { toPlural } from "../../utils/strFn";
+import { crGetRoute } from "../../utils/crRouter";
 
 const _isArr = Array.isArray
 , BLANK_CAPTION = ""

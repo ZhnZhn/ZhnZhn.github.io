@@ -1,13 +1,12 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.isCategoryItem = exports.crChartOptions = void 0;
-var _arrFn = require("../../utils/arrFn");
-var _crRouter = require("../../utils/crRouter");
-var _toPlural = _interopRequireDefault(require("../../utils/toPlural"));
 var _CompItemType = require("../../constants/CompItemType");
 var _ChartType = require("../../constants/ChartType");
+var _arrFn = require("../../utils/arrFn");
+var _strFn = require("../../utils/strFn");
+var _crRouter = require("../../utils/crRouter");
 const _isArr = Array.isArray,
   BLANK_CAPTION = "",
   DIM_CAPTION = "Dim",
@@ -50,13 +49,13 @@ const _fCrCaptionBy = prefix => (sufix, isCluster) => `${prefix}: By ${sufix}${i
   _fCrItem = (crCaption, chartType, isCluster) => caption => _crItem([crCaption(caption, isCluster), chartType, caption]);
 const _crDF3 = (oneCaption, mapFrequency) => _crItems([_crDfConfig(SPLINE_CONFIG), LINE_CONFIG, _isMonthly(mapFrequency) && YEARLY_BY_MONTH_CONFIG, AREA_CONFIG, COLUMN_CONFIG, [_crCaptionBarBy(oneCaption), _ChartType.CHT_BAR_SET], [_crCaptionBarLabelsBy(oneCaption), _ChartType.CHT_BAR_WITH_LABELS], [_crCaptionColumnBy(oneCaption), _ChartType.CHT_COLUMN_SET], [_crCaptionDotsBy(oneCaption), _ChartType.CHT_DOT_SET]]);
 const _crDF = (captions, mapFrequency) => {
-  const oneCaption = (0, _toPlural.default)(captions[0]) || DIM_CAPTION;
+  const oneCaption = (0, _strFn.toPlural)(captions[0]) || DIM_CAPTION;
   return _crDF3(oneCaption, mapFrequency).concat([_crItem([_crCaptionMapBy(oneCaption), _ChartType.CHT_MAP, void 0, _CompItemType.CIT_EUROSTAT_MAP])]);
 };
 const _crTes = (captions, mapFrequency, selectProps) => {
   const chartOptions = _crDF(captions, mapFrequency),
     twoCaption = captions[1] || DIM_CAPTION;
-  chartOptions.splice(7, 0, _crItem([_crCaptionBarBy((0, _toPlural.default)(twoCaption)), _ChartType.CHT_BAR_SET, twoCaption, void 0, (selectProps[1] || {}).id]));
+  chartOptions.splice(7, 0, _crItem([_crCaptionBarBy((0, _strFn.toPlural)(twoCaption)), _ChartType.CHT_BAR_SET, twoCaption, void 0, (selectProps[1] || {}).id]));
   return chartOptions;
 };
 const _crT1 = () => _crItems([_crDfConfig(SPLINE_CONFIG), LINE_CONFIG, AREA_CONFIG]);
