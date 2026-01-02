@@ -28,4 +28,19 @@ describe('toUpperCaseFirst', () => {
     expect(fn(Date.now())).toBe(EMPTY);
   });
 });
+describe("safeReplaceIn", () => {
+  const fn = _strFn.safeReplaceIn;
+  test("should replace in str from-token to to-token", () => {
+    expect(fn("a b a", "a", "1")).toBe("1 b a");
+    expect(fn("a b a", "b", "2")).toBe("a 2 a");
+    expect(fn("a b a", "d", "2")).toBe("a b a");
+  });
+  test("should return empty str in edge cases", () => {
+    expect(fn(null, "a", "b")).toBe("");
+    expect(fn(void 0, "a", "b")).toBe("");
+    expect(fn(true, "a", "b")).toBe("");
+    expect(fn(1, "a", "b")).toBe("");
+    expect(fn({}, "a", "b")).toBe("");
+  });
+});
 //# sourceMappingURL=strFn.test.js.map

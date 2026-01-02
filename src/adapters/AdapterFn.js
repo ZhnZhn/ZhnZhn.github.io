@@ -31,7 +31,6 @@ export {
   monthIndex
 } from '../utils/dateFn';
 export { getByPropsFrom } from '../utils/getByPropsFrom';
-//export { toUpperCaseFirst } from '../utils/toUpperCaseFirst';
 
 import {
   crValueMoving as _crVm,
@@ -84,11 +83,6 @@ export const getValue = getV
 export const getValueCaption = getVc
 
 export const getValues = option => option.items.map(getV)
-export const safeReplaceIn = (
-  str,
-  from,
-  to
-) => isStr(str) ? str.replace(from, to) : ''
 
 export const numberFormat = formatAllNumber
 export const isYNumber = _fIsNumber('y')

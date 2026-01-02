@@ -10,7 +10,7 @@ const _crFnSymbolQuery = (fnName, symbol) => `${(0, _AvFn.crFunctionQuery)(fnNam
 const _getSymbol = option => (0, _AdapterFn.getValues)(option)[0];
 const _getInterval = intervalValue => {
   const dfFn = intervalValue.split('&')[0],
-    dfT = (0, _AdapterFn.safeReplaceIn)(dfFn, 'TIME_SERIES_', ''),
+    dfT = (0, _strFn.safeReplaceIn)(dfFn, 'TIME_SERIES_', ''),
     interval = dfT.split('_').map(token => (0, _strFn.toUpperCaseFirst)(token.toLowerCase())).join(' ');
   return [dfT, interval];
 };
@@ -48,7 +48,7 @@ const _crIncomeQuery = option => {
     } = option,
     [symbol, dfItem, dfPeriod] = (0, _AdapterFn.getValues)(option);
   (0, _AdapterFn.assign)(option, {
-    itemCaption: (0, _AdapterFn.safeReplaceIn)(option.itemCaption, (0, _AdapterFn.getCaption)(items[0]), symbol),
+    itemCaption: (0, _strFn.safeReplaceIn)(option.itemCaption, (0, _AdapterFn.getCaption)(items[0]), symbol),
     dfItem,
     dfPeriod
   });

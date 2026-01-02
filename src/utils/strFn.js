@@ -5,3 +5,11 @@ export const toUpperCaseFirst = (
 ) => isStr(strOr) && strOr
   ? strOr[0].toUpperCase() + strOr.slice(1)
   : ''
+
+export const safeReplaceIn = (
+  str,
+  from,
+  to
+) => isStr(str)
+  ? str.replace(from, to)
+  : ''  

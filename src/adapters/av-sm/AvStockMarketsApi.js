@@ -1,5 +1,6 @@
 import {
-  toUpperCaseFirst
+  toUpperCaseFirst,
+  safeReplaceIn
 } from '../../utils/strFn';
 
 import {
@@ -7,8 +8,7 @@ import {
   crGetRoute,
   getValues,
   getValueCaption,
-  getCaption,
-  safeReplaceIn
+  getCaption
 } from '../AdapterFn';
 
 import {
