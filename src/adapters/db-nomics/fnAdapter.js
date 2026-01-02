@@ -8,12 +8,10 @@ import {
   joinBy,
   joinByColon
 } from '../../utils/arrFn';
-import {
-  isNumber
-} from '../../utils/isTypeFn';
+import { isTokenInStr } from '../../utils/strFn';
+import { isNumber } from '../../utils/isTypeFn';
 
 import {
-  isTokenInStr,
   crZhConfig,
   ymdToUTC,
 } from '../AdapterFn';

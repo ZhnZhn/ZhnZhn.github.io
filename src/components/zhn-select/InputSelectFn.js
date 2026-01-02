@@ -3,7 +3,7 @@ import {
   setRefValue
 } from '../uiApi';
 
-import { isTokenInStr } from '../../utils/isTokenInStr';
+import { isTokenInStr } from '../../utils/strFn';
 
 import { CL_OPTIONS_ROW_ACTIVE } from './CL';
 

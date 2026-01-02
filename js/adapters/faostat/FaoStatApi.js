@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _strFn = require("../../utils/strFn");
 var _CategoryFn = require("../CategoryFn");
 var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
@@ -10,7 +11,7 @@ var _getMemoizedYear = _interopRequireDefault(require("./getMemoizedYear"));
 const API_URL = 'https://faostatservices.fao.org/api/v1/en/data',
   QUERY_TAIL = '&area_cs=M49&item_cs=CPC&show_codes=true&show_unit=true&show_flags=true&show_notes=true&null_values=false&page_number=1&datasource=PRODUCTION_AWS&output_type=objects',
   WORLD_LIST_ID = '5000>';
-const _isTitle = qT => (0, _AdapterFn.isTokenInStr)(qT, 'World') && qT.length < 22;
+const _isTitle = qT => (0, _strFn.isTokenInStr)(qT, 'World') && qT.length < 22;
 const _checkReq = option => {
   if (option._isTs && (0, _fnAdapter.isSeriesReq)(option)) {
     throw new Error('ERR_10');
@@ -23,7 +24,7 @@ const _checkReq = option => {
     throw new Error(`TreeMap for ${(0, _AdapterFn.getCaption)(_element)} is not exist.`);
   }
 };
-const _getListId = geoId => (0, _AdapterFn.isTokenInStr)(geoId, '>') ? geoId : WORLD_LIST_ID;
+const _getListId = geoId => (0, _strFn.isTokenInStr)(geoId, '>') ? geoId : WORLD_LIST_ID;
 const FaoStatApi = {
   getRequestUrl(option) {
     _checkReq(option);

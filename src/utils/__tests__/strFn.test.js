@@ -1,8 +1,23 @@
 import {
+  isTokenInStr,
   toUpperCaseFirst,
   safeReplaceIn,
   toPlural
 } from '../strFn';
+
+describe('isTokenInStr', () => {
+  const fn = isTokenInStr;
+  test('should return correct boolean', () => {
+    expect(fn('aaa bbb ccc', 'b')).toBe(true)
+    expect(fn('aaa bbb ccc', 'bb')).toBe(true)
+    expect(fn('aaa bbb ccc', 'bbb')).toBe(true)
+    expect(fn('aaa bbb ccc', 'bbbb')).toBe(false)
+  })
+  test('should return false for null and undefined', ()=>{
+    expect(fn(void 0, 'token')).toBe(false)
+    expect(fn(null, 'token')).toBe(false)
+  })
+})
 
 describe('toUpperCaseFirst', ()=> {
   const fn = toUpperCaseFirst;

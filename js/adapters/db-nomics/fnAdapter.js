@@ -7,6 +7,7 @@ exports.assign = _AdapterFn.assign;
 exports.getValue = _AdapterFn.getValue;
 exports.crErrorByMessage = _AdapterFn.crErrorByMessage;
 var _arrFn = require("../../utils/arrFn");
+var _strFn = require("../../utils/strFn");
 var _isTypeFn = require("../../utils/isTypeFn");
 var _crFn = require("../crFn");
 var _fnSelector = require("./fnSelector");
@@ -62,7 +63,7 @@ const _crInfo = (json, option) => ({
   name: (0, _fnSelector.getSubtitle)(json),
   description: _crDescr(json, option)
 });
-const _isQuarter = str => (0, _AdapterFn.isTokenInStr)(str, "Q");
+const _isQuarter = str => (0, _strFn.isTokenInStr)(str, "Q");
 const _isAnnualQuarter = period => !_isQuarter(period[0]) && _isQuarter(period[1]);
 const _crPoint = (date, y) => [(0, _AdapterFn.ymdToUTC)(date), y];
 const _crAqPoint = (date, y) => _isQuarter(date) ? _crPoint(date, y) : [];

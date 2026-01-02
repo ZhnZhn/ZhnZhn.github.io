@@ -4,7 +4,6 @@ import { toTd as _toTd } from '../charts/dateFormat';
 
 export { bindTo } from '../utils/bindTo';
 export { domSanitize } from '../utils/domSanitize';
-export { isTokenInStr } from '../utils/isTokenInStr';
 export {
   crRouter,
   crGetRoute

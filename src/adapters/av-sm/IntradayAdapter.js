@@ -1,4 +1,5 @@
 import { getObjectKeys } from '../../utils/isTypeFn';
+import { isTokenInStr } from '../../utils/strFn';
 import pipe from '../../utils/pipe';
 
 import {
@@ -16,7 +17,6 @@ import { crMarkerExDividend } from '../../charts/MarkerFn';
 import { crVolumePoint } from '../pointFn';
 import { crMarkerColor } from '../IntradayFns';
 import {
-  isTokenInStr,
   ymdhmsToUTC,
   crIntradayConfigOption
 } from './fnAdapter';

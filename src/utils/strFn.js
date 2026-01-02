@@ -1,5 +1,10 @@
 import { isStr } from './isTypeFn';
 
+export const isTokenInStr = (
+  str,
+  token
+) => (str || '').indexOf(token) !== -1
+
 export const toUpperCaseFirst = (
   strOr
 ) => isStr(strOr) && strOr

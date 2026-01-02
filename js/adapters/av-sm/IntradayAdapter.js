@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _strFn = require("../../utils/strFn");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _stockBuilderFn = require("../../charts/stockBuilderFn");
 var _configBuilderFn = require("../../charts/configBuilderFn");
@@ -16,7 +17,7 @@ const _crSeriaOptions = _ref => {
     isFilterZero,
     dfT
   } = _ref;
-  const _isAdjusted = (0, _fnAdapter.isTokenInStr)(dfT, 'ADJUSTED');
+  const _isAdjusted = (0, _strFn.isTokenInStr)(dfT, 'ADJUSTED');
   return {
     notFilterZero: !isFilterZero,
     isDividend: _isAdjusted,
@@ -42,7 +43,7 @@ const _addDividendPointTo = (arr, dateMs, p) => {
   }
 };
 const _notZeros = (v1, v2) => v1 !== 0 && v2 !== 0;
-const _isWeeklyOrMonthly = str => (0, _fnAdapter.isTokenInStr)(str, 'Weekly') || (0, _fnAdapter.isTokenInStr)(str, 'Monthly');
+const _isWeeklyOrMonthly = str => (0, _strFn.isTokenInStr)(str, 'Weekly') || (0, _strFn.isTokenInStr)(str, 'Monthly');
 const TIME_SERIES = 'Time Series';
 const _getJsonDataPropName = _ref2 => {
   let {

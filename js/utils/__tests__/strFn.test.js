@@ -1,6 +1,19 @@
 "use strict";
 
 var _strFn = require("../strFn");
+describe('isTokenInStr', () => {
+  const fn = _strFn.isTokenInStr;
+  test('should return correct boolean', () => {
+    expect(fn('aaa bbb ccc', 'b')).toBe(true);
+    expect(fn('aaa bbb ccc', 'bb')).toBe(true);
+    expect(fn('aaa bbb ccc', 'bbb')).toBe(true);
+    expect(fn('aaa bbb ccc', 'bbbb')).toBe(false);
+  });
+  test('should return false for null and undefined', () => {
+    expect(fn(void 0, 'token')).toBe(false);
+    expect(fn(null, 'token')).toBe(false);
+  });
+});
 describe('toUpperCaseFirst', () => {
   const fn = _strFn.toUpperCaseFirst;
   const EMPTY = '';

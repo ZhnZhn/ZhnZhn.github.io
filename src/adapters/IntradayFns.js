@@ -1,4 +1,4 @@
-import { isTokenInStr } from './AdapterFn';
+import { isTokenInStr } from '../utils/strFn';
 
 const TIME_START_DAY = '09:30:00'
 , TIME_CLOSE_DAY = '16:00:00'

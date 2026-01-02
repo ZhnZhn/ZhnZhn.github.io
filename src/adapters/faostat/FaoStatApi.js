@@ -1,9 +1,12 @@
 import {
+  isTokenInStr
+} from '../../utils/strFn';
+
+import {
   isCategory,
   isTreeMap
 } from '../CategoryFn';
 import {
-  isTokenInStr,
   assign,
   getValues,
   getCaption,
