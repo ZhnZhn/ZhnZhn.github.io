@@ -1,10 +1,12 @@
+import {
+  isArr,
+  isNumber
+} from '../utils/isTypeFn';
 import pipe from '../utils/pipe';
 
 import {
-  isArr,
-  isNumber,
   roundBy
-} from '../adapters/AdapterFn';
+} from '../math/mathFn';
 import {
   crSplineConfig,
   fAddMinMax,

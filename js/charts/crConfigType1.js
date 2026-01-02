@@ -3,13 +3,14 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../utils/isTypeFn");
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
-var _AdapterFn = require("../adapters/AdapterFn");
+var _mathFn = require("../math/mathFn");
 var _configBuilderFn = require("./configBuilderFn");
 const ifCaseRoundBy = (rt, data) => {
-  if ((0, _AdapterFn.isNumber)(rt) && (0, _AdapterFn.isArr)(data[0])) {
+  if ((0, _isTypeFn.isNumber)(rt) && (0, _isTypeFn.isArr)(data[0])) {
     data.forEach(p => {
-      p[1] = (0, _AdapterFn.roundBy)(p[1], rt);
+      p[1] = (0, _mathFn.roundBy)(p[1], rt);
     });
   }
 };
