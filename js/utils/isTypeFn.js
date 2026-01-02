@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.parseIntBy10 = exports.isUndef = exports.isTypeNumber = exports.isStrOrNumber = exports.isStrNotBlank = exports.isStr = exports.isPositiveNumber = exports.isObj = exports.isNumber = exports.isNotEmptyArr = exports.isNaN = exports.isInt = exports.isFn = exports.isBool = exports.isArr = exports.getObjectKeys = void 0;
+exports.parseIntBy10 = exports.isUndef = exports.isTypeNumber = exports.isStrOrNumber = exports.isStrNotBlank = exports.isStr = exports.isPositiveNumber = exports.isObj = exports.isNumber = exports.isNotEmptyArr = exports.isNaN = exports.isInt = exports.isFn = exports.isEmpty = exports.isBool = exports.isArr = exports.getObjectKeys = void 0;
 const _fIsTypeof = strType => v => typeof v === strType;
 const isTypeNumber = exports.isTypeNumber = _fIsTypeof("number");
 const isNumber = v => isTypeNumber(v) && v - v === 0;
@@ -26,6 +26,8 @@ exports.isNotEmptyArr = isNotEmptyArr;
 const _getObjectKeys = Object.keys;
 const getObjectKeys = value => isObj(value) && !isArr(value) ? _getObjectKeys(value) : [];
 exports.getObjectKeys = getObjectKeys;
+const isEmpty = obj => obj == null || _getObjectKeys(obj).length === 0;
+exports.isEmpty = isEmpty;
 const parseIntBy10 = str => parseInt(str, 10);
 exports.parseIntBy10 = parseIntBy10;
 //# sourceMappingURL=isTypeFn.js.map

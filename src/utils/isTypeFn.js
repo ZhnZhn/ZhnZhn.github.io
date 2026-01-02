@@ -29,4 +29,9 @@ export const getObjectKeys = value => isObj(value) && !isArr(value)
   ? _getObjectKeys(value)
   : []
 
+export const isEmpty = (
+  obj
+) => obj == null
+  || _getObjectKeys(obj).length === 0
+
 export const parseIntBy10 = str => parseInt(str, 10)

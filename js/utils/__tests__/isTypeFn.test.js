@@ -152,6 +152,23 @@ describe('isNotEmptyArr', () => {
     expect(fn(null)).toBe(false);
   });
 });
+describe('isEmpty', () => {
+  const fn = _isTypeFn.isEmpty;
+  test('for {} should return true', () => {
+    expect(fn({})).toBe(true);
+  });
+  test('for obj with prop should return false', () => {
+    expect(fn({
+      a: 'a'
+    })).toBe(false);
+  });
+  test('for null should return true', () => {
+    expect(fn(null)).toBe(true);
+  });
+  test('for undefined should return true', () => {
+    expect(fn()).toBe(true);
+  });
+});
 describe('getObjectKeys', () => {
   const fn = _isTypeFn.getObjectKeys;
   test('should return array with argument object keys', () => {

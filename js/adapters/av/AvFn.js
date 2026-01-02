@@ -1,9 +1,7 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.fCrData = exports.fAvApi = exports.crFunctionQuery = exports.REQ_ERROR = void 0;
-var _isEmpty = _interopRequireDefault(require("../../utils/isEmpty"));
 var _isTypeFn = require("../../utils/isTypeFn");
 var _mathFn = require("../../math/mathFn");
 var _AdapterFn = require("../AdapterFn");
@@ -24,7 +22,7 @@ const ERR_PROP = 'Error Message',
   INFO_PROP = 'Information';
 const REQ_ERROR = exports.REQ_ERROR = 'Request Error';
 const checkResponse = json => {
-  if ((0, _isEmpty.default)(json)) {
+  if ((0, _isTypeFn.isEmpty)(json)) {
     throw (0, _AdapterFn.crError)();
   }
   const _msg = json[ERR_PROP] || json[INFO_PROP];

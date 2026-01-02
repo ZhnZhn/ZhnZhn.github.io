@@ -12,6 +12,7 @@ import {
   isFn,
   isObj,
   isNotEmptyArr,
+  isEmpty,
   getObjectKeys,
   parseIntBy10
 } from '../isTypeFn';
@@ -192,6 +193,23 @@ describe('isNotEmptyArr',()=>{
     expect(fn({})).toBe(false)
     expect(fn()).toBe(false)
     expect(fn(null)).toBe(false)
+  })
+})
+
+describe('isEmpty', ()=>{
+  const fn = isEmpty;
+  test('for {} should return true', ()=>{
+    expect(fn({})).toBe(true)
+  })
+  test('for obj with prop should return false', ()=>{
+    expect(fn({a: 'a'})).toBe(false)
+  })
+
+  test('for null should return true', ()=>{
+    expect(fn(null)).toBe(true)
+  })
+  test('for undefined should return true', ()=>{
+    expect(fn()).toBe(true)
   })
 })
 

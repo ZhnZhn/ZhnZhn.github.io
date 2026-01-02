@@ -1,6 +1,6 @@
-import isEmpty from '../../utils/isEmpty';
 import {
   isNumber,
+  isEmpty,
   parseIntBy10
 } from '../../utils/isTypeFn';
 
