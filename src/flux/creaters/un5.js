@@ -1,15 +1,18 @@
 import { isFn } from '../../utils/isTypeFn';
 
 import {
-  getC,
-  getV
-} from '../../utils/getPropertyFn';
+  getCaption,
+  getValue
+} from '../../utils/itemFn';
+import {
+  isTokenInStr
+} from '../../utils/strFn';
 
 const MAX_SUBTITLE = 60;
 
 const _crDirection = (
   tradeFlowCaption
-) => tradeFlowCaption.indexOf('Export') !== -1
+) => isTokenInStr(tradeFlowCaption, 'Export')
   ? 'to'
   : 'from';
 
@@ -18,18 +21,18 @@ const _crTitle = (
   tradeFlow,
   tradePartner
 ) => {
-  const _tradeFlowCaption = getC(tradeFlow)
-  , _title = getC(one) + ': ' + _tradeFlowCaption
-  , _tradePartnerCapion = getC(tradePartner);
+  const _tradeFlowCaption = getCaption(tradeFlow)
+  , _title = getCaption(one) + ': ' + _tradeFlowCaption
+  , _tradePartnerCapion = getCaption(tradePartner);
   return _tradePartnerCapion
    ? `${_title} ${_crDirection(_tradeFlowCaption)} ${_tradePartnerCapion}`
    : _title;
 };
 
 const _crSubtitle = three => {
-  const _threeCaption = getC(three);
+  const _threeCaption = getCaption(three);
   return _threeCaption.length > MAX_SUBTITLE
-    ? _threeCaption.substring(0, MAX_SUBTITLE) + '...'
+    ? _threeCaption.slice(0, MAX_SUBTITLE) + '...'
     : _threeCaption;
 };
 
@@ -56,8 +59,8 @@ const crLoadOptions = (
     seriaWidth,
     tradePartners
   } = options || {}
-  , _oneValue = getV(one)
-  , _two = getV(three) || getV(two)
+  , _oneValue = getValue(one)
+  , _two = getValue(three) || getValue(two)
   , _value = isFn(fnValue)
        ? fnValue(_oneValue, _two)
        : void 0;
@@ -68,16 +71,16 @@ const crLoadOptions = (
     value: _value,
     title: _crTitle(one, tradeFlow, tradePartner),
     subtitle: _crSubtitle(three),
-    oneC: getC(one),
+    oneC: getCaption(one),
     one: _oneValue,
     two: _two,
-    ...getV(tradeFlow),
-    tp: getV(tradePartner),
-    freq: getV(freq),
-    chart: getV(chart),
+    ...getValue(tradeFlow),
+    tp: getValue(tradePartner),
+    freq: getValue(freq),
+    chart: getValue(chart),
     chType,
     time,
-    seriaType: getV(chType),
+    seriaType: getValue(chType),
     seriaColor,
     seriaWidth,
     tradePartners
