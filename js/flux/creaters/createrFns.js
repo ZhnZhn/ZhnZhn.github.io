@@ -2,22 +2,21 @@
 
 exports.__esModule = true;
 exports.crRoundTo = exports.crItemKey = exports.crCaptions = void 0;
-var _arrFn = require("../../utils/arrFn");
 var _isTypeFn = require("../../utils/isTypeFn");
-var _getPropertyFn = require("../../utils/getPropertyFn");
+var _arrFn = require("../../utils/arrFn");
+var _itemFn = require("../../utils/itemFn");
 var _strFn = require("../../utils/strFn");
 var _mathFn = require("../../math/mathFn");
-const _getC = item => (0, _strFn.toUpperCaseFirst)(item && item.sc || (0, _getPropertyFn.getC)(item));
-const _isArr = Array.isArray;
+const _getCaption = item => (0, _strFn.toUpperCaseFirst)(item && item.sc || (0, _itemFn.getCaption)(item));
 const _crItemCaption = (items, titles) => {
-  if (!_isArr(titles) || titles.length === 0) {
+  if (!(0, _isTypeFn.isNotEmptyArr)(titles)) {
     titles = [0];
   }
-  return (0, _arrFn.joinByColon)(...titles.map(titleIndex => _getC(items[titleIndex])));
+  return (0, _arrFn.joinByColon)(...titles.map(titleIndex => _getCaption(items[titleIndex])));
 };
-const _crCaptionItems = items => (items || []).map(item => _getC(item));
+const _crCaptionItems = items => (items || []).map(item => _getCaption(item));
 const crItemKey = function (items) {
-  const _prefix = (0, _arrFn.joinByUndescore)((0, _arrFn.filterBoolean)(items).map(item => (0, _getPropertyFn.getV)(item) || (0, _getPropertyFn.getC)(item) || item));
+  const _prefix = (0, _arrFn.joinByUndescore)((0, _arrFn.filterBoolean)(items).map(item => (0, _itemFn.getValue)(item) || (0, _itemFn.getCaption)(item) || item));
   for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     args[_key - 1] = arguments[_key];
   }
@@ -28,12 +27,12 @@ const crItemKey = function (items) {
 exports.crItemKey = crItemKey;
 const crCaptions = (items, titles) => {
   const itemCaption = _crItemCaption(items, titles),
-    _items = items.filter(_getPropertyFn.getC),
+    _items = items.filter(_itemFn.getCaption),
     [item1, item2, item3, item4, ...restItems] = _items,
-    oneC = _getC(item1),
-    twoC = _getC(item2),
-    threeC = _getC(item3),
-    fourC = _getC(item4);
+    oneC = _getCaption(item1),
+    twoC = _getCaption(item2),
+    threeC = _getCaption(item3),
+    fourC = _getCaption(item4);
   let _title = oneC,
     _subtitle;
   if (fourC) {

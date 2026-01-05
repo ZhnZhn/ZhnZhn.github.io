@@ -1,15 +1,16 @@
+import {  
+  isNotEmptyArr,
+  parseIntBy10
+} from '../../utils/isTypeFn';
 import {
   filterBoolean,
   joinByColon,
   joinByUndescore
 } from '../../utils/arrFn';
 import {
-  parseIntBy10
-} from '../../utils/isTypeFn';
-import {
-  getC,
-  getV
-} from '../../utils/getPropertyFn';
+  getCaption,
+  getValue
+} from '../../utils/itemFn';
 import {
   toUpperCaseFirst
 } from '../../utils/strFn';
@@ -18,28 +19,26 @@ import {
   isInRange
 } from '../../math/mathFn';
 
-const _getC = item => toUpperCaseFirst(
-  item && item.sc || getC(item)
+const _getCaption = item => toUpperCaseFirst(
+  item && item.sc || getCaption(item)
 );
-
-const _isArr = Array.isArray;
 
 const _crItemCaption = (
   items,
   titles
 ) => {
-  if (!_isArr(titles) || titles.length === 0) {
+  if (!isNotEmptyArr(titles)) {
     titles = [0]
   }
   return joinByColon(...titles
-    .map(titleIndex => _getC(items[titleIndex]))
+    .map(titleIndex => _getCaption(items[titleIndex]))
   );
 };
 
 const _crCaptionItems = (
   items
 ) => (items || [])
-  .map(item => _getC(item));
+  .map(item => _getCaption(item));
 
 export const crItemKey = (
   items,
@@ -47,7 +46,7 @@ export const crItemKey = (
 ) => {
   const _prefix = joinByUndescore(
     filterBoolean(items)
-      .map(item => getV(item) || getC(item) || item)
+      .map(item => getValue(item) || getCaption(item) || item)
   );
   return joinByUndescore(_prefix, ...args);
 }
@@ -58,7 +57,7 @@ export const crCaptions = (
   titles
 ) => {
   const itemCaption = _crItemCaption(items, titles)
-  , _items = items.filter(getC)
+  , _items = items.filter(getCaption)
   , [
     item1,
     item2,
@@ -66,10 +65,10 @@ export const crCaptions = (
     item4,
     ...restItems
   ] = _items
-  , oneC = _getC(item1)
-  , twoC = _getC(item2)
-  , threeC = _getC(item3)
-  , fourC = _getC(item4);
+  , oneC = _getCaption(item1)
+  , twoC = _getCaption(item2)
+  , threeC = _getCaption(item3)
+  , fourC = _getCaption(item4);
 
   let _title = oneC, _subtitle;
   if (fourC) {
