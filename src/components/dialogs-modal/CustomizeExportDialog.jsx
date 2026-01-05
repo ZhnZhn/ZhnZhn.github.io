@@ -1,3 +1,4 @@
+import { getValue } from '../../utils/itemFn';
 import { merge } from '../../utils/objFn';
 import { isInRange } from '../../math/mathFn';
 
@@ -109,10 +110,6 @@ const DF_DATA = {}
   {caption: "SVG vector image", value: { type: "image/svg+xml"}}
 ]
 , DF_EXPORT_FORMAT = _optionFormats[0]
-, _getItemValue = (
-  item,
-  dfValue
-) => item && item.value || dfValue
 , _crCaptionText = refInput => ({
   text: getInputValue(refInput)
 });
@@ -154,11 +151,11 @@ const CustomizeExportDialog = memoIsShow(({
   ] = useMemo(() => [
     item => setRefValue(
       _refExportStyle,
-      _getItemValue(item, {})
+      getValue(item, {})
     ),
     item => setRefValue(
       _refExportFormat,
-      _getItemValue(item, null)
+      getValue(item, null)
     )
   ], [])
   , { chart } = data

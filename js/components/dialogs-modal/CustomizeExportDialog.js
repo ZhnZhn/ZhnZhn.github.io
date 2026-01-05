@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _itemFn = require("../../utils/itemFn");
 var _objFn = require("../../utils/objFn");
 var _mathFn = require("../../math/mathFn");
 var _uiApi = require("../uiApi");
@@ -102,7 +103,6 @@ const DF_DATA = {},
     }
   }],
   DF_EXPORT_FORMAT = _optionFormats[0],
-  _getItemValue = (item, dfValue) => item && item.value || dfValue,
   _crCaptionText = refInput => ({
     text: (0, _uiApi.getInputValue)(refInput)
   });
@@ -124,7 +124,7 @@ const CustomizeExportDialog = (0, _memoIsShow.default)(_ref2 => {
     _refInputHeight = (0, _uiApi.useRef)(),
     _refInputTitle = (0, _uiApi.useRef)(),
     _refInputSubtitle = (0, _uiApi.useRef)(),
-    [_hSelectStyle, _hSelectFormat] = (0, _uiApi.useMemo)(() => [item => (0, _uiApi.setRefValue)(_refExportStyle, _getItemValue(item, {})), item => (0, _uiApi.setRefValue)(_refExportFormat, _getItemValue(item, null))], []),
+    [_hSelectStyle, _hSelectFormat] = (0, _uiApi.useMemo)(() => [item => (0, _uiApi.setRefValue)(_refExportStyle, (0, _itemFn.getValue)(item, {})), item => (0, _uiApi.setRefValue)(_refExportFormat, (0, _itemFn.getValue)(item, null))], []),
     {
       chart
     } = data,
