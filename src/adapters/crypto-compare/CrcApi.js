@@ -1,6 +1,9 @@
 import {
+  getValue
+} from '../../utils/itemFn';
+
+import {
   assign,
-  getValue,
   setItemCaptionTo,
   crError
 } from '../AdapterFn';
@@ -16,7 +19,7 @@ const URL = `https://min-api.${CRYPTOCOMPARE_COM}`
 , DF_E = 'CCCAGG'
 , DF_INTERVAL = 'histoday';
 
-const _fGetParam = (index, dfValue) => items => getValue(items[index], { dfValue })
+const _fGetParam = (index, dfValue) => items => getValue(items[index], dfValue)
 , _getFsym = _fGetParam(0, DF_ID)
 , _getE = _fGetParam(1, DF_E)
 , _getInterval = _fGetParam(2, DF_INTERVAL)

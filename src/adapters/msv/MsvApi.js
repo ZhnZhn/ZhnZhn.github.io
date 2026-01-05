@@ -1,6 +1,9 @@
 import {
+  getValueUpperCase
+} from '../../utils/itemFn';
+
+import {
   getFromDate,
-  getValue,
   fCheckResponse
 } from '../AdapterFn';
 
@@ -14,7 +17,7 @@ export const MsvApi = {
       items,
       fromDate
     } = option
-    , item1 = getValue(items[0], {isUpper: true});
+    , item1 = getValueUpperCase(items[0]);
 
     option.apiKey = null
     option.itemCaption = item1

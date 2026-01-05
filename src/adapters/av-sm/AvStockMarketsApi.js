@@ -1,4 +1,9 @@
 import {
+  getValueAndCaption,
+  getCaption
+} from '../../utils/itemFn';
+
+import {
   toUpperCaseFirst,
   safeReplaceIn
 } from '../../utils/strFn';
@@ -6,9 +11,7 @@ import {
 import {
   assign,
   crGetRoute,
-  getValues,
-  getValueCaption,
-  getCaption
+  getValues
 } from '../AdapterFn';
 
 import {
@@ -45,11 +48,11 @@ const _crEodQuery = option => {
   , [
     ticket,
     title
-  ] = getValueCaption(items[0])
+  ] = getValueAndCaption(items[0])
   , [
     intervalValue,
     subtitle
-  ] = getValueCaption(items[1])
+  ] = getValueAndCaption(items[1])
   , [
     dfT,
     interval

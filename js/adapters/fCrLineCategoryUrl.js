@@ -2,10 +2,10 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _getPropertyFn = require("../utils/getPropertyFn");
+var _itemFn = require("../utils/itemFn");
 const TS_TYPE_21 = 21;
-const _crApiUrl = items => (0, _getPropertyFn.getV)(items[1]);
-const _crBaApiUrl = items => `${(0, _getPropertyFn.getV)(items[2])}-${(0, _getPropertyFn.getV)(items[1])}`;
+const _crApiUrl = items => (0, _itemFn.getValue)(items[1]);
+const _crBaApiUrl = items => `${(0, _itemFn.getValue)(items[2])}-${(0, _itemFn.getValue)(items[1])}`;
 const fCrLineCategoryUrl = dataUrl => {
   const _crApiToken = option => {
     const _crToken = option.dfTs === TS_TYPE_21 ? _crBaApiUrl : _crApiUrl;
@@ -15,7 +15,7 @@ const fCrLineCategoryUrl = dataUrl => {
     const {
         items
       } = option,
-      geo = (0, _getPropertyFn.getV)(items[0]);
+      geo = (0, _itemFn.getValue)(items[0]);
     return `${_crApiToken(option)}/${geo}.json`;
   };
   const _crCategoryUrl = option => `${_crApiToken(option)}/by-geo-${option.time}.json`;

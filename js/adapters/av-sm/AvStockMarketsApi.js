@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _itemFn = require("../../utils/itemFn");
 var _strFn = require("../../utils/strFn");
 var _AdapterFn = require("../AdapterFn");
 var _AvFn = require("../av/AvFn");
@@ -18,8 +19,8 @@ const _crEodQuery = option => {
   const {
       items
     } = option,
-    [ticket, title] = (0, _AdapterFn.getValueCaption)(items[0]),
-    [intervalValue, subtitle] = (0, _AdapterFn.getValueCaption)(items[1]),
+    [ticket, title] = (0, _itemFn.getValueAndCaption)(items[0]),
+    [intervalValue, subtitle] = (0, _itemFn.getValueAndCaption)(items[1]),
     [dfT, interval] = _getInterval(intervalValue);
   (0, _AdapterFn.assign)(option, {
     itemCaption: ticket,
@@ -48,7 +49,7 @@ const _crIncomeQuery = option => {
     } = option,
     [symbol, dfItem, dfPeriod] = (0, _AdapterFn.getValues)(option);
   (0, _AdapterFn.assign)(option, {
-    itemCaption: (0, _strFn.safeReplaceIn)(option.itemCaption, (0, _AdapterFn.getCaption)(items[0]), symbol),
+    itemCaption: (0, _strFn.safeReplaceIn)(option.itemCaption, (0, _itemFn.getCaption)(items[0]), symbol),
     dfItem,
     dfPeriod
   });

@@ -10,11 +10,15 @@ export {
 
 import { joinByComma } from '../utils/arrFn';
 import formatAllNumber from '../utils/formatAllNumber';
+
+export {
+  getValue,
+  getCaption
+} from '../utils/itemFn';
 import {
-  getC,
-  getV,
-  getVc
-} from '../utils/getPropertyFn';
+  getCaption,
+  getValue
+} from '../utils/itemFn';
 
 import { mlsToDmy } from '../utils/dateFn';
 export {
@@ -75,11 +79,7 @@ export const toTd = (mls) => isNumber(mls)
   ? _toTd(mls)
   : ''
 
-export const getCaption = getC
-export const getValue = getV
-export const getValueCaption = getVc
-
-export const getValues = option => option.items.map(getV)
+export const getValues = option => option.items.map(getValue)
 
 export const numberFormat = formatAllNumber
 export const isYNumber = _fIsNumber('y')

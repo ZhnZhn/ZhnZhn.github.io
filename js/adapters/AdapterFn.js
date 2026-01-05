@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toTimeDate = exports.toTd = exports.setItemCaptionTo = exports.setItemCaptionCurrencyRateTo = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isSeriesDataCase = exports.getYmdhmUTC = exports.getYear = exports.getValues = exports.getValueCaption = exports.getValue = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.getCaption = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crRouter = exports.crGetRoute = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toTimeDate = exports.toTd = exports.setItemCaptionTo = exports.setItemCaptionCurrencyRateTo = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isSeriesDataCase = exports.getYmdhmUTC = exports.getYear = exports.getValues = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crRouter = exports.crGetRoute = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _dateFormat = require("../charts/dateFormat");
 var _bindTo = require("../utils/bindTo");
@@ -12,7 +12,9 @@ exports.crRouter = _crRouter.crRouter;
 exports.crGetRoute = _crRouter.crGetRoute;
 var _arrFn = require("../utils/arrFn");
 var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
-var _getPropertyFn = require("../utils/getPropertyFn");
+var _itemFn = require("../utils/itemFn");
+exports.getValue = _itemFn.getValue;
+exports.getCaption = _itemFn.getCaption;
 var _dateFn = require("../utils/dateFn");
 exports.mlsToDmy = _dateFn.mlsToDmy;
 exports.ymdToUTC = _dateFn.ymdToUTC;
@@ -49,10 +51,7 @@ const _fIsNumber = pn => p => (0, _isTypeFn.isTypeNumber)(p[pn]) && isFinite(p[p
 const _crDmyFrom = point => (0, _dateFn.mlsToDmy)((0, _seriaHelperFn.getPointDate)(point));
 const toTd = mls => (0, _isTypeFn.isNumber)(mls) ? (0, _dateFormat.toTd)(mls) : '';
 exports.toTd = toTd;
-const getCaption = exports.getCaption = _getPropertyFn.getC;
-const getValue = exports.getValue = _getPropertyFn.getV;
-const getValueCaption = exports.getValueCaption = _getPropertyFn.getVc;
-const getValues = option => option.items.map(_getPropertyFn.getV);
+const getValues = option => option.items.map(_itemFn.getValue);
 exports.getValues = getValues;
 const numberFormat = exports.numberFormat = _formatAllNumber.default;
 const isYNumber = exports.isYNumber = _fIsNumber('y');
@@ -94,7 +93,7 @@ const crShortItemCaption = itemCaption => {
 };
 exports.crShortItemCaption = crShortItemCaption;
 const _crItemCaptionCurrencyRate = (option, toCurrency) => {
-  const _fromCurrency = crShortItemCaption(getCaption(option.items[0]));
+  const _fromCurrency = crShortItemCaption((0, _itemFn.getCaption)(option.items[0]));
   return `${_fromCurrency}/${toCurrency}`;
 };
 const setItemCaptionTo = (option, itemCaption) => {

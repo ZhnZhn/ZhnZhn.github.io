@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _itemFn = require("../../utils/itemFn");
 var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
 const URL = `https://min-api.${_fnAdapter.CRYPTOCOMPARE_COM}`
@@ -11,9 +12,7 @@ const URL = `https://min-api.${_fnAdapter.CRYPTOCOMPARE_COM}`
   DF_ID = 'BTC',
   DF_E = 'CCCAGG',
   DF_INTERVAL = 'histoday';
-const _fGetParam = (index, dfValue) => items => (0, _AdapterFn.getValue)(items[index], {
-    dfValue
-  }),
+const _fGetParam = (index, dfValue) => items => (0, _itemFn.getValue)(items[index], dfValue),
   _getFsym = _fGetParam(0, DF_ID),
   _getE = _fGetParam(1, DF_E),
   _getInterval = _fGetParam(2, DF_INTERVAL);

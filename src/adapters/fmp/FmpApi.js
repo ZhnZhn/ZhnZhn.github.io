@@ -4,8 +4,12 @@ import {
 } from '../../utils/isTypeFn';
 
 import {
-  assign,
   getValue,
+  getValueUpperCase
+} from '../../utils/itemFn';
+
+import {
+  assign,
   crError,
   getFromDate
 } from '../AdapterFn';
@@ -21,7 +25,7 @@ const _crDataSource = ({
 const _assignDf = option => {
   const { dfT, items=[] } = option
   , [ it1, it2 , it3 ] = items
-  , _symbol = getValue(it1, {isUpper: true})
+  , _symbol = getValueUpperCase(it1)
   , _period = getValue(it3)
   , _propName = getValue(it2)
   , _query = _period
@@ -45,7 +49,7 @@ const _assignHp = option => {
      fromDate
   } = option
   , _fromDate = fromDate || getFromDate(3)
-  , _symbol = getValue(items[0], {isUpper: true})
+  , _symbol = getValueUpperCase(items[0])
   , _itemUrl = `${URI}/${dfT}/?symbol=${_symbol}&from=${_fromDate}`;
 
   assign(option, {
@@ -61,7 +65,7 @@ const _assignCp = option => {
      dfT,
      items=[]
   } = option
-  , _symbol = getValue(items[0], {isUpper: true})
+  , _symbol = getValueUpperCase(items[0])
   , _interval = getValue(items[1])
   , _itemUrl = `${URI}/${dfT}/${_interval}?symbol=${_symbol}`;
 

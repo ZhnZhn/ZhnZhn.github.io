@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _itemFn = require("../../utils/itemFn");
 var _AdapterFn = require("../AdapterFn");
 const URI = 'https://financialmodelingprep.com/stable';
 const _crDataSource = _ref => {
@@ -18,13 +19,11 @@ const _assignDf = option => {
       items = []
     } = option,
     [it1, it2, it3] = items,
-    _symbol = (0, _AdapterFn.getValue)(it1, {
-      isUpper: true
-    }),
-    _period = (0, _AdapterFn.getValue)(it3),
-    _propName = (0, _AdapterFn.getValue)(it2),
-    _query = _period ? "&period=" + _period : '',
-    _itemUrl = URI + "/" + dfT + "?symbol=" + _symbol + _query;
+    _symbol = (0, _itemFn.getValueUpperCase)(it1),
+    _period = (0, _itemFn.getValue)(it3),
+    _propName = (0, _itemFn.getValue)(it2),
+    _query = _period ? `&period=${_period}` : '',
+    _itemUrl = `${URI}/${dfT}?symbol=${_symbol}${_query}`;
   (0, _AdapterFn.assign)(option, {
     _symbol,
     _itemUrl,
@@ -41,10 +40,8 @@ const _assignHp = option => {
       fromDate
     } = option,
     _fromDate = fromDate || (0, _AdapterFn.getFromDate)(3),
-    _symbol = (0, _AdapterFn.getValue)(items[0], {
-      isUpper: true
-    }),
-    _itemUrl = URI + "/" + dfT + "/?symbol=" + _symbol + "&from=" + _fromDate;
+    _symbol = (0, _itemFn.getValueUpperCase)(items[0]),
+    _itemUrl = `${URI}/${dfT}/?symbol=${_symbol}&from=${_fromDate}`;
   (0, _AdapterFn.assign)(option, {
     _symbol,
     _itemUrl,
@@ -57,11 +54,9 @@ const _assignCp = option => {
       dfT,
       items = []
     } = option,
-    _symbol = (0, _AdapterFn.getValue)(items[0], {
-      isUpper: true
-    }),
-    _interval = (0, _AdapterFn.getValue)(items[1]),
-    _itemUrl = URI + "/" + dfT + "/" + _interval + "?symbol=" + _symbol;
+    _symbol = (0, _itemFn.getValueUpperCase)(items[0]),
+    _interval = (0, _itemFn.getValue)(items[1]),
+    _itemUrl = `${URI}/${dfT}/${_interval}?symbol=${_symbol}`;
   (0, _AdapterFn.assign)(option, {
     _symbol,
     _itemUrl,
@@ -83,7 +78,7 @@ const FmpApi = {
       } = option,
       _delimeter = option._itemUrl.indexOf('?') === -1 ? '?' : '&';
     option.apiKey = null;
-    return "" + option._itemUrl + _delimeter + "apikey=" + apiKey;
+    return `${option._itemUrl}${_delimeter}apikey=${apiKey}`;
   },
   checkResponse(json, options) {
     if ((0, _isTypeFn.isArr)(json)) {

@@ -1,4 +1,4 @@
-import { getV as getValue } from '../utils/getPropertyFn';
+import { getValue } from '../utils/itemFn';
 
 const TS_TYPE_21 = 21;
 

@@ -1,16 +1,13 @@
-import {
-  getValue,
-  ymdToUTC
-} from '../AdapterFn';
-import {
-  fCrItemLinkByCaption
-} from '../crFn';
+import { getValue } from'../../utils/itemFn';
+
+import { ymdToUTC } from '../AdapterFn';
+import { fCrItemLinkByCaption } from '../crFn';
 
 const DF_ID = 'btc-bitcoin'
 , _crItemLink = fCrItemLinkByCaption('Coinpaprika')
 , _getCoinId = ({
   items=[]
-}) => getValue(items[0], { dfValue: DF_ID });
+}) => getValue(items[0], DF_ID);
 
 const COIN_URL = 'https://coinpaprika.com/coin'
 , _crCoinUrl = option => `${COIN_URL}/${_getCoinId(option)}/`

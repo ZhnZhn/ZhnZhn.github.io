@@ -1,6 +1,5 @@
-import {
-  isInArrStr
-} from '../../utils/arrFn';
+import { isInArrStr } from '../../utils/arrFn';
+import { getValueAndCaption } from '../../utils/itemFn';
 
 import {
   REQ_ERROR,
@@ -10,7 +9,6 @@ import {
 
 import {
   assign,
-  getValueCaption,
   crError,
   crGetRoute
 } from '../AdapterFn';
@@ -24,7 +22,7 @@ const _crEconomicsQuery = (
   , [
     value,
     itemCaption
-  ] = getValueCaption(items[0]);
+  ] = getValueAndCaption(items[0]);
   assign(option, {
     itemCaption
   })
@@ -47,11 +45,11 @@ const _checkCommoditiesParams = (
   const [
     itemId,
     itemCaption
-  ] = getValueCaption(item)
+  ] = getValueAndCaption(item)
   , [
     intervalId,
     _intervalCaption
-  ] = getValueCaption(interval);
+  ] = getValueAndCaption(interval);
   if ((!item.dw && _isDailyInterval(intervalId))
    || (item.dw && _isQuarterlyInterval(intervalId))
   ) {

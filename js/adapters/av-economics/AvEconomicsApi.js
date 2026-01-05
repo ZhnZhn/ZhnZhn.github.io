@@ -3,13 +3,14 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _arrFn = require("../../utils/arrFn");
+var _itemFn = require("../../utils/itemFn");
 var _AvFn = require("../av/AvFn");
 var _AdapterFn = require("../AdapterFn");
 const _crEconomicsQuery = option => {
   const {
       items
     } = option,
-    [value, itemCaption] = (0, _AdapterFn.getValueCaption)(items[0]);
+    [value, itemCaption] = (0, _itemFn.getValueAndCaption)(items[0]);
   (0, _AdapterFn.assign)(option, {
     itemCaption
   });
@@ -18,8 +19,8 @@ const _crEconomicsQuery = option => {
 const _isDailyInterval = (0, _arrFn.isInArrStr)(['daily', 'weekly']),
   _isQuarterlyInterval = (0, _arrFn.isInArrStr)(['quarterly', 'annual']);
 const _checkCommoditiesParams = (item, interval) => {
-  const [itemId, itemCaption] = (0, _AdapterFn.getValueCaption)(item),
-    [intervalId, _intervalCaption] = (0, _AdapterFn.getValueCaption)(interval);
+  const [itemId, itemCaption] = (0, _itemFn.getValueAndCaption)(item),
+    [intervalId, _intervalCaption] = (0, _itemFn.getValueAndCaption)(interval);
   if (!item.dw && _isDailyInterval(intervalId) || item.dw && _isQuarterlyInterval(intervalId)) {
     throw (0, _AdapterFn.crError)(_AvFn.REQ_ERROR, `Interval ${_intervalCaption} is absent for ${itemCaption}`);
   }
