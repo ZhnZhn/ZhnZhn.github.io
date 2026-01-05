@@ -3,8 +3,8 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _itemFn = require("../../utils/itemFn");
 var _uiApi = require("../uiApi");
-var _getPropertyFn = require("../../utils/getPropertyFn");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
@@ -75,8 +75,10 @@ const [DF_REPORTER = {
   DF_FREQ = {
     c: "Annual",
     v: "A"
-  };
-const _isAggrAll = (tp, aggr) => (0, _getPropertyFn.getV)(tp) === "all" && (0, _getPropertyFn.getV)(aggr) !== "total";
+  },
+  _isItemValueAll = (0, _itemFn.fIsValueEqual)("all"),
+  _isItemValueZero = (0, _itemFn.fIsValueEqual)("0");
+const _isAggrAll = (tp, aggr) => _isItemValueAll(tp) && (0, _itemFn.getValue)(aggr) !== "total";
 const UnDialogAgg = (0, _memoIsShow.default)(props => {
   const {
       isShow,
@@ -134,13 +136,13 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       if (!one) {
         msgs.push(msgOnNotSelected("Reporter"));
       }
-      if (one && (0, _getPropertyFn.getV)(one) === "all" || _isAggrAll(tradePartner, three)) {
+      if (_isItemValueAll(one) || _isAggrAll(tradePartner, three)) {
         msgs.push("Query All is too complex");
       }
-      if (one && (0, _getPropertyFn.getV)(one) === "0" && (0, _getPropertyFn.getV)(three) === "AG2") {
+      if (_isItemValueZero(one) && (0, _itemFn.getValue)(three) === "AG2") {
         msgs.push("Query World by AG2 is too complex");
       }
-      if (((0, _getPropertyFn.getV)(tradeFlow) || {}).tfType === "t1" && ((0, _getPropertyFn.getV)(tradePartner) !== "0" || (0, _getPropertyFn.getV)(chart) === "SPLINE")) {
+      if (((0, _itemFn.getValue)(tradeFlow) || {}).tfType === "t1" && (!_isItemValueZero(tradePartner) || (0, _itemFn.getValue)(chart) === "SPLINE")) {
         msgs.push("Query trade flow calculated values is only for category charts of trade partner World");
       }
       if (msgs.length === 0) {
@@ -151,7 +153,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
           tradePartner,
           chart,
           chType: chart,
-          time: (0, _getPropertyFn.getV)(getPeriod()),
+          time: (0, _itemFn.getValue)(getPeriod()),
           freq: DF_FREQ,
           tradePartners: (0, _uiApi.getRefOptions)(_refTradePartner)
         }));

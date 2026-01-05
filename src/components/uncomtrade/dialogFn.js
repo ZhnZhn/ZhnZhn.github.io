@@ -1,6 +1,6 @@
 import {
-  getC
-} from '../../utils/getPropertyFn';
+  getCaption
+} from '../../utils/itemFn';
 
 export const crInputSelectDfProps = (
   options,
@@ -9,6 +9,6 @@ export const crInputSelectDfProps = (
   const dfItem = options[dfItemIndex];
   return [
     dfItem,
-    `Default: ${getC(dfItem)}`
+    `Default: ${getCaption(dfItem)}`
   ];
 }

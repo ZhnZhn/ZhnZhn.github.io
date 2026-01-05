@@ -4,8 +4,8 @@ import {
 } from "../uiApi";
 
 import {
-  getV
-} from "../../utils/getPropertyFn";
+  fIsValueEqual
+} from "../../utils/itemFn";
 
 import {
   CHT_BAR_SET,
@@ -24,17 +24,19 @@ const CHART_OPTIONS = [
 , [
   DF_CHART,
   CHART_PLACEHOLDER
-] = crInputSelectDfProps(CHART_OPTIONS);
+] = crInputSelectDfProps(CHART_OPTIONS)
+, _isItemValueTotal = fIsValueEqual("TOTAL")
+, _isItemValueZero = fIsValueEqual("0");
 
 const _isInputChart = (
   tp,
   aggr
-) => !(getV(tp) !== "0" && getV(aggr) === "TOTAL");
+) => !(!_isItemValueZero(tp) && _isItemValueTotal(aggr));
 
 const _crChartOptions = (
   tradePartner,
   tradeAggr
-) => getV(tradePartner) === "0" && getV(tradeAggr) === "TOTAL"
+) => _isItemValueZero(tradePartner) && _isItemValueTotal(tradeAggr)
   ? WORLD_CASE_CHART_OPTIONS
   : CHART_OPTIONS
 

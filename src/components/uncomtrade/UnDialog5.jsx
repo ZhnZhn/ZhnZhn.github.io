@@ -1,4 +1,14 @@
 import {
+  CHT_BAR_SET,
+  CHT_TREE_MAP,
+  CHT_DOT_SET
+} from "../../constants/ChartType";
+
+import {
+  getValue
+} from "../../utils/itemFn";
+
+import {
   useRef,
   useState,
   useCallback,
@@ -6,16 +16,6 @@ import {
   getRefOptions,
   getInputValue
 } from "../uiApi";
-
-import {
-  CHT_BAR_SET,
-  CHT_TREE_MAP,
-  CHT_DOT_SET
-} from "../../constants/ChartType";
-
-import {
-  getV
-} from "../../utils/getPropertyFn";
 
 import memoIsShow from "../hoc/memoIsShow";
 import { useToggle } from "../hooks/useToggle";
@@ -160,14 +160,14 @@ const UnDialog5 = memoIsShow((
      const _groupItemInst = getRefValue(_refGroupItem)
      , { msg=[] } = _groupItemInst.getValidation()
      , one = getOne()
-     , _oneValue = getV(one)
+     , _oneValue = getValue(one)
      , tradePartner = getTradePartner()
-     , _tradePartnerValue = getV(tradePartner)
+     , _tradePartnerValue = getValue(tradePartner)
      , freq = getFreq();
      if (_oneValue === "all" && _tradePartnerValue === "all") {
        msg.push("Query All to All is too complex")
      }
-     if (_oneValue === "all" && getV(freq) === "M") {
+     if (_oneValue === "all" && getValue(freq) === "M") {
        msg.push("Query All Monthly is too complex")
      }
      if (msg.length === 0) {
@@ -184,7 +184,7 @@ const UnDialog5 = memoIsShow((
          tradePartner,
          freq,
          chType: seriaType,
-         time: getV(getPropertyTime()),
+         time: getValue(getPropertyTime()),
          tradePartners: getRefOptions(_refTradePartner)
        }))
      }

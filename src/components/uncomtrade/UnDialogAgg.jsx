@@ -1,12 +1,13 @@
 import {
+  getValue,
+  fIsValueEqual
+} from "../../utils/itemFn";
+
+import {
   useRef,
   useCallback,
   getRefOptions
 } from "../uiApi";
-
-import {
-  getV
-} from "../../utils/getPropertyFn";
 
 import memoIsShow from "../hoc/memoIsShow";
 import { useToggle } from "../hooks/useToggle";
@@ -65,12 +66,14 @@ const [
   DF_PARTNER = {c: "World",  v: "0"},
   PARTNER_PLACEHOLDER
 ] = crInputSelectDfProps([{c: "World",  v: "0"}])
-, DF_FREQ = {c: "Annual",  v: "A"};
+, DF_FREQ = {c: "Annual",  v: "A"}
+, _isItemValueAll = fIsValueEqual("all")
+, _isItemValueZero = fIsValueEqual("0");
 
 const _isAggrAll = (
   tp,
   aggr
-) => getV(tp) === "all" &&  getV(aggr) !== "total";
+) => _isItemValueAll(tp) &&  getValue(aggr) !== "total";
 
 const UnDialogAgg = memoIsShow((
   props
@@ -179,15 +182,15 @@ const UnDialogAgg = memoIsShow((
     if (!one) {
       msgs.push(msgOnNotSelected("Reporter"))
     }
-    if (one && getV(one) === "all"
+    if (_isItemValueAll(one)
         || _isAggrAll(tradePartner, three)) {
       msgs.push("Query All is too complex")
     }
-    if (one && getV(one) === "0" && getV(three) === "AG2") {
+    if (_isItemValueZero(one) && getValue(three) === "AG2") {
       msgs.push("Query World by AG2 is too complex")
     }
-    if ((getV(tradeFlow) || {}).tfType === "t1"
-        && (getV(tradePartner) !== "0" || getV(chart) === "SPLINE")) {
+    if ((getValue(tradeFlow) || {}).tfType === "t1"
+        && (!_isItemValueZero(tradePartner) || getValue(chart) === "SPLINE")) {
       msgs.push("Query trade flow calculated values is only for category charts of trade partner World")
     }
     if (msgs.length === 0) {
@@ -198,7 +201,7 @@ const UnDialogAgg = memoIsShow((
         tradePartner,
         chart,
         chType: chart,
-        time: getV(getPeriod()),
+        time: getValue(getPeriod()),
         freq: DF_FREQ,
         tradePartners: getRefOptions(_refTradePartner)
       }))

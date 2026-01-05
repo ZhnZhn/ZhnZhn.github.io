@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _getPropertyFn = require("../../utils/getPropertyFn");
+var _itemFn = require("../../utils/itemFn");
 var _ChartType = require("../../constants/ChartType");
 var _useProperty = require("../hooks/useProperty");
 var _dialogFn = require("./dialogFn");
@@ -15,9 +15,11 @@ const CHART_OPTIONS = [{
     v: _ChartType.CHT_TREE_MAP
   }],
   WORLD_CASE_CHART_OPTIONS = CHART_OPTIONS,
-  [DF_CHART, CHART_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)(CHART_OPTIONS);
-const _isInputChart = (tp, aggr) => !((0, _getPropertyFn.getV)(tp) !== "0" && (0, _getPropertyFn.getV)(aggr) === "TOTAL");
-const _crChartOptions = (tradePartner, tradeAggr) => (0, _getPropertyFn.getV)(tradePartner) === "0" && (0, _getPropertyFn.getV)(tradeAggr) === "TOTAL" ? WORLD_CASE_CHART_OPTIONS : CHART_OPTIONS;
+  [DF_CHART, CHART_PLACEHOLDER] = (0, _dialogFn.crInputSelectDfProps)(CHART_OPTIONS),
+  _isItemValueTotal = (0, _itemFn.fIsValueEqual)("TOTAL"),
+  _isItemValueZero = (0, _itemFn.fIsValueEqual)("0");
+const _isInputChart = (tp, aggr) => !(!_isItemValueZero(tp) && _isItemValueTotal(aggr));
+const _crChartOptions = (tradePartner, tradeAggr) => _isItemValueZero(tradePartner) && _isItemValueTotal(tradeAggr) ? WORLD_CASE_CHART_OPTIONS : CHART_OPTIONS;
 
 /*
 const _isPeriod = (

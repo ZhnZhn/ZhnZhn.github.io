@@ -3,9 +3,9 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _uiApi = require("../uiApi");
 var _ChartType = require("../../constants/ChartType");
-var _getPropertyFn = require("../../utils/getPropertyFn");
+var _itemFn = require("../../utils/itemFn");
+var _uiApi = require("../uiApi");
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useToggle = require("../hooks/useToggle");
 var _useProperty = require("../hooks/useProperty");
@@ -155,14 +155,14 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
           msg = []
         } = _groupItemInst.getValidation(),
         one = getOne(),
-        _oneValue = (0, _getPropertyFn.getV)(one),
+        _oneValue = (0, _itemFn.getValue)(one),
         tradePartner = getTradePartner(),
-        _tradePartnerValue = (0, _getPropertyFn.getV)(tradePartner),
+        _tradePartnerValue = (0, _itemFn.getValue)(tradePartner),
         freq = getFreq();
       if (_oneValue === "all" && _tradePartnerValue === "all") {
         msg.push("Query All to All is too complex");
       }
-      if (_oneValue === "all" && (0, _getPropertyFn.getV)(freq) === "M") {
+      if (_oneValue === "all" && (0, _itemFn.getValue)(freq) === "M") {
         msg.push("Query All Monthly is too complex");
       }
       if (msg.length === 0) {
@@ -179,7 +179,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
           tradePartner,
           freq,
           chType: seriaType,
-          time: (0, _getPropertyFn.getV)(getPropertyTime()),
+          time: (0, _itemFn.getValue)(getPropertyTime()),
           tradePartners: (0, _uiApi.getRefOptions)(_refTradePartner)
         }));
       }
