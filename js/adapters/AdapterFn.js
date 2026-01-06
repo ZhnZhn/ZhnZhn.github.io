@@ -2,11 +2,9 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toTimeDate = exports.toTd = exports.setItemCaptionTo = exports.setItemCaptionCurrencyRateTo = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isSeriesDataCase = exports.getYmdhmUTC = exports.getYear = exports.getValues = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.bindTo = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toTimeDate = exports.toTd = exports.setItemCaptionTo = exports.setItemCaptionCurrencyRateTo = exports.roundByOHLC = exports.numberFormat = exports.monthIndex = exports.isYNumber = exports.isSeriesDataCase = exports.getYmdhmUTC = exports.getYear = exports.getValues = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.findMinY = exports.findMaxY = exports.filterTrimZero = exports.fCrValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _dateFormat = require("../charts/dateFormat");
-var _bindTo = require("../utils/bindTo");
-exports.bindTo = _bindTo.bindTo;
 var _arrFn = require("../utils/arrFn");
 var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
 var _itemFn = require("../utils/itemFn");
@@ -31,6 +29,8 @@ var _seriaHelperFn = require("../math/seriaHelperFn");
 var _DirectionType = require("../constants/DirectionType");
 var _isTypeFn = require("../utils/isTypeFn");
 exports.isArr = _isTypeFn.isArr;
+//export { bindTo } from '../utils/bindTo';
+
 const assign = exports.assign = Object.assign;
 const FN_IDENTITY = v => v;
 exports.FN_IDENTITY = FN_IDENTITY;

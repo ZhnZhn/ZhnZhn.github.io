@@ -1,19 +1,12 @@
-import {
-  crId as _crId
-} from '../math/mathFn';
+import { isArr } from '../utils/isTypeFn';
+import { bindTo } from '../utils/bindTo';
+import { crRouter } from '../utils/crRouter';
+
+import { crId as _crId } from '../math/mathFn';
 import {
   getPointDate,
   getPointValue
 } from '../math/seriaHelperFn';
-
-import {
-  crRouter
-} from '../utils/crRouter';
-
-import {
-  isArr,
-  bindTo
-} from './AdapterFn';
 
 const _crPTag = className => className
   ? `<p class="${className}">`

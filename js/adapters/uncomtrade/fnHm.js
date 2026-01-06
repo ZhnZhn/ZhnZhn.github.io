@@ -8,7 +8,6 @@ var _crRouter = require("../../utils/crRouter");
 var _mathFn = require("../../math/mathFn");
 var _conf = require("./conf");
 var _fnAdapter = require("./fnAdapter");
-const _crHm = () => Object.create(null);
 const DF_PN_COUNTRY = 'partnerCode';
 const DF_PN_VALUE = 'primaryValue';
 const _toSortedArr = obj => (0, _isTypeFn.getObjectKeys)(obj).map(propName => obj[propName]).sort();
@@ -64,8 +63,8 @@ const toHmCategories = function (dataset, pnCountry, pnValue) {
   if (pnValue === void 0) {
     pnValue = DF_PN_VALUE;
   }
-  const _hm = _crHm(),
-    _category = _crHm(),
+  const _hm = (0, _crRouter.crRouter)(),
+    _category = (0, _crRouter.crRouter)(),
     _crPoint = _fPoint(pnValue);
   let _point;
   dataset.forEach(item => {

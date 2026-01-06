@@ -1,7 +1,13 @@
-import { isStr } from './isTypeFn';
+import {
+  isObj,
+  isStr
+} from './isTypeFn';
 
-export const crRouter = obj => Object
-  .setPrototypeOf(obj || {}, null)
+export const crRouter = (
+  obj
+) => isObj(obj)
+  ? Object.setPrototypeOf(obj, null)
+  : Object.create(null)
 
 export const crGetRoute = (
   routes,

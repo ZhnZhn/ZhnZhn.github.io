@@ -2,25 +2,26 @@
 
 exports.__esModule = true;
 exports.fCrItemLinkByUrl = exports.fCrItemLinkByCaption = exports.crValueConf = exports.crItemConf = exports.crId = void 0;
+var _isTypeFn = require("../utils/isTypeFn");
+var _bindTo = require("../utils/bindTo");
+var _crRouter = require("../utils/crRouter");
 var _mathFn = require("../math/mathFn");
 var _seriaHelperFn = require("../math/seriaHelperFn");
-var _crRouter = require("../utils/crRouter");
-var _AdapterFn = require("./AdapterFn");
 const _crPTag = className => className ? `<p class="${className}">` : '<p>';
 
 // Ndl toScatter, Stat-Json
 const crId = () => (0, _mathFn.crId)().toUpperCase();
 exports.crId = crId;
 const _crItemLink = (caption, itemUrl, className) => `${_crPTag(className)}<a href="${itemUrl}">${caption}</a></p>`;
-const fCrItemLinkByCaption = caption => (0, _AdapterFn.bindTo)(_crItemLink, caption);
+const fCrItemLinkByCaption = caption => (0, _bindTo.bindTo)(_crItemLink, caption);
 exports.fCrItemLinkByCaption = fCrItemLinkByCaption;
-const fCrItemLinkByUrl = (caption, url) => (0, _AdapterFn.bindTo)(_crItemLink, caption, url);
+const fCrItemLinkByUrl = (caption, url) => (0, _bindTo.bindTo)(_crItemLink, caption, url);
 exports.fCrItemLinkByUrl = fCrItemLinkByUrl;
 const ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
 const crItemConf = option => ITEM_CONF_PROP_NAMES.reduce((itemConf, pn) => {
   const _value = option[pn];
   if (_value != null) {
-    itemConf[pn] = (0, _AdapterFn.isArr)(_value) ? _value.map(obj => ({
+    itemConf[pn] = (0, _isTypeFn.isArr)(_value) ? _value.map(obj => ({
       ...obj
     })) : _value;
   }

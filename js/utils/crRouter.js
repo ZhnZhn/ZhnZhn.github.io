@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.crRouter = exports.crGetRoute = void 0;
 var _isTypeFn = require("./isTypeFn");
-const crRouter = obj => Object.setPrototypeOf(obj || {}, null);
+const crRouter = obj => (0, _isTypeFn.isObj)(obj) ? Object.setPrototypeOf(obj, null) : Object.create(null);
 exports.crRouter = crRouter;
 const crGetRoute = (routes, dfRoute) => {
   const _router = crRouter(routes);

@@ -16,8 +16,6 @@ import {
   sortDescByPnValue
 } from './fnAdapter';
 
-const _crHm = () => Object.create(null);
-
 const DF_PN_COUNTRY = 'partnerCode';
 const DF_PN_VALUE = 'primaryValue';
 
@@ -112,8 +110,8 @@ export const toHmCategories = (
   pnCountry=DF_PN_COUNTRY,
   pnValue=DF_PN_VALUE
 ) => {
-  const _hm = _crHm()
-  , _category = _crHm()
+  const _hm = crRouter()
+  , _category = crRouter()
   , _crPoint = _fPoint(pnValue);
 
   let _point;

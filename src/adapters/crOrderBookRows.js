@@ -1,16 +1,12 @@
 import Big from "big.js";
 
 import {
-  filterBoolean
-} from "../utils/arrFn";
-import {
   isNumber,
   parseIntBy10
 } from "../utils/isTypeFn"
+import { filterBoolean } from "../utils/arrFn";
+import { bindTo } from "../utils/bindTo";
 
-import {
-  bindTo
-} from "./AdapterFn";
 import {
   crStyleBold,
   crTableRows
