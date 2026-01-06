@@ -10,7 +10,6 @@ import {
   getValue
 } from '../utils/itemFn';
 
-import { mlsToDmy } from '../utils/dateFn';
 export {
   ymdToUTC,
   ymdhmsToUTC,
@@ -22,17 +21,12 @@ export {
   mlsToDmy,
   monthIndex
 } from '../utils/dateFn';
+import { mlsToDmy } from '../utils/dateFn';
 
 import {
   crValueMoving as _crVm,
   roundBy,
 } from '../math/mathFn';
-
-export {
-  findMinY,
-  findMaxY,
-  filterTrimZero
-} from '../math/seriaFn';
 
 import {
   getPointDate,

@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.toPointArr = exports.setInfoTo = exports.isNotGeoOrReporter = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
-var _AdapterFn = require("../AdapterFn");
+var _seriaFn = require("../../math/seriaFn");
 var _JsonStatFn = require("../JsonStatFn");
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
@@ -77,9 +77,9 @@ const crData = function (json, _temp) {
   } = _temp === void 0 ? {} : _temp;
   let data = (0, _JsonStatFn.crData)(_crDataPoint, json).sort(_compareByFn.compareByDate);
   if (isFilterZero) {
-    data = (0, _AdapterFn.filterTrimZero)(data);
+    data = (0, _seriaFn.filterTrimZero)(data);
   }
-  return [data, (0, _AdapterFn.findMinY)(data), (0, _AdapterFn.findMaxY)(data)];
+  return [data, (0, _seriaFn.findMinY)(data), (0, _seriaFn.findMaxY)(data)];
 };
 exports.crData = crData;
 const _crPointArr = (value, time, status) => [time.replace('M', '-'), value, _crStatusOfPoint(status)];

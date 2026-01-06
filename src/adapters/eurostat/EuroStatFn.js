@@ -6,8 +6,8 @@ import {
 import {
   findMinY,
   findMaxY,
-  filterTrimZero,
-} from '../AdapterFn';
+  filterTrimZero
+} from '../../math/seriaFn';
 
 import { crData as crJsonStatData } from '../JsonStatFn';
 import { compareByDate } from '../compareByFn';

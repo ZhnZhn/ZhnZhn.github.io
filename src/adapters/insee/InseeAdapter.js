@@ -1,10 +1,10 @@
 import { isNumber } from '../../utils/isTypeFn';
 import { crSeriaConfig } from '../../charts/configBuilderFn';
 import crConfigType1 from '../../charts/crConfigType1';
+import { findMinY } from '../../math/seriaFn';
 
 import {
   ymdToUTC,
-  findMinY,
   crXmlDocument
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';

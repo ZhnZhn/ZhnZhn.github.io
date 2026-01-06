@@ -6,6 +6,7 @@ exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
+var _seriaFn = require("../../math/seriaFn");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _fnDescr = require("./fnDescr");
@@ -76,7 +77,7 @@ const InseeAdapter = {
       data = _toData(str)[0];
     return (0, _configBuilderFn.crSeriaConfig)({
       data,
-      minY: (0, _AdapterFn.findMinY)(data),
+      minY: (0, _seriaFn.findMinY)(data),
       zhValueText: subtitle || title || value
     });
   }

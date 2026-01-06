@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.crCategorySeria = exports.crCategoryConfig = void 0;
-var _AdapterFn = require("../AdapterFn");
+var _seriaFn = require("../../math/seriaFn");
 var _CategoryFn = require("../CategoryFn");
 var _toColumn = _interopRequireDefault(require("../stat-json/toColumn"));
 var _JsonStatFn = require("./JsonStatFn");
@@ -65,7 +65,7 @@ const crCategorySeria = (json, option, chart) => {
     data = _crSeriaData(json, option, categories);
   return {
     data,
-    minY: (0, _AdapterFn.findMinY)(data),
+    minY: (0, _seriaFn.findMinY)(data),
     name: configSlice.time || time,
     color: seriaColor,
     tooltip: (0, _toCategoryFn.crCategoryTooltip)(),

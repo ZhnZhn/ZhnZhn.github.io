@@ -1,4 +1,5 @@
-import { findMinY } from '../AdapterFn';
+import { findMinY } from '../../math/seriaFn';
+
 import {
   getCategories,
   roundByDataIf
