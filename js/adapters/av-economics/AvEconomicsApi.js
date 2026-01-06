@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _arrFn = require("../../utils/arrFn");
 var _itemFn = require("../../utils/itemFn");
+var _crRouter = require("../../utils/crRouter");
 var _AvFn = require("../av/AvFn");
 var _AdapterFn = require("../AdapterFn");
 const _crEconomicsQuery = option => {
@@ -37,7 +38,7 @@ const _crCommoditiesQuery = option => {
   });
   return `${(0, _AvFn.crFunctionQuery)(itemId)}&interval=${intervalId}`;
 };
-const _getCrQuery = (0, _AdapterFn.crGetRoute)({
+const _getCrQuery = (0, _crRouter.crGetRoute)({
   EC: _crEconomicsQuery,
   CM: _crCommoditiesQuery
 });

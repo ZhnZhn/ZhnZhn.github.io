@@ -3,10 +3,12 @@ import {
   isNumber,
   parseIntBy10
 } from '../../utils/isTypeFn';
+import {
+  crGetRoute
+} from '../../utils/crRouter';
 
 import {
   assign,
-  crGetRoute,
   getYear,
   getCurrentYear,
   crError

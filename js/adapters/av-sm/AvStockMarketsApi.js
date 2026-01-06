@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _itemFn = require("../../utils/itemFn");
 var _strFn = require("../../utils/strFn");
+var _crRouter = require("../../utils/crRouter");
 var _AdapterFn = require("../AdapterFn");
 var _AvFn = require("../av/AvFn");
 var _fnAdapter = require("./fnAdapter");
@@ -81,7 +82,7 @@ const _crCrQuery = option => {
   return `${_crFnSymbolQuery('DIGITAL_CURRENCY_DAILY', symbol)}&market=${market}`;
 };
 const _fCrQuery1 = fnName => option => _crFnSymbolQuery(fnName, _getSymbol(option));
-const _getCrQuery = (0, _AdapterFn.crGetRoute)({
+const _getCrQuery = (0, _crRouter.crGetRoute)({
   CR: _crCrQuery,
   [_fnAdapter.DF_FN_EOD]: _crEodQuery,
   INSTR: _crInsiderTransactionsQuery,

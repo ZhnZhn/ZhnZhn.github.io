@@ -5,6 +5,8 @@ exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _dateFn = require("../../utils/dateFn");
 var _arrFn = require("../../utils/arrFn");
+var _itemFn = require("../../utils/itemFn");
+var _crRouter = require("../../utils/crRouter");
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 const NDL_DATA_SOURCE = "NDL",
@@ -22,22 +24,22 @@ const _crDataSource = _ref => {
     return `${time}-${(0, _dateFn.getNumberOfDays)(arrDate[0], arrDate[1])}`;
   },
   _crQueryToken = (name, value) => value ? `${name}=${value}` : "",
-  _crQueryOneTwo = (pn1, pn2, items) => `${pn1}=${(0, _AdapterFn.getValue)(items[0])}&${pn2}=${(0, _AdapterFn.getValue)(items[1])}`,
-  _crQueryCountryCode = (items, seriaType) => (0, _CategoryFn.isCategory)(seriaType) ? _crQueryToken("code", (0, _AdapterFn.getValue)(items[1])) : _crQueryOneTwo("country", "code", items),
-  _getCrTableQuery = (0, _AdapterFn.crGetRoute)({
+  _crQueryOneTwo = (pn1, pn2, items) => `${pn1}=${(0, _itemFn.getValue)(items[0])}&${pn2}=${(0, _itemFn.getValue)(items[1])}`,
+  _crQueryCountryCode = (items, seriaType) => (0, _CategoryFn.isCategory)(seriaType) ? _crQueryToken("code", (0, _itemFn.getValue)(items[1])) : _crQueryOneTwo("country", "code", items),
+  _getCrTableQuery = (0, _crRouter.crGetRoute)({
     jo: _ref2 => {
       let {
         items,
         seriaType
       } = _ref2;
-      return `energy=OIL&${_crQueryCountryCode(items, seriaType)}${(0, _AdapterFn.getValue)(items[2])}${(0, _AdapterFn.getValue)(items[3])}`;
+      return `energy=OIL&${_crQueryCountryCode(items, seriaType)}${(0, _itemFn.getValue)(items[2])}${(0, _itemFn.getValue)(items[3])}`;
     },
     jg: _ref3 => {
       let {
         items,
         seriaType
       } = _ref3;
-      return `energy=GAS&${_crQueryCountryCode(items, seriaType)}${(0, _AdapterFn.getValue)(items[2])}`;
+      return `energy=GAS&${_crQueryCountryCode(items, seriaType)}${(0, _itemFn.getValue)(items[2])}`;
     },
     zl: _ref4 => {
       let {

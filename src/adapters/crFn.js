@@ -7,9 +7,12 @@ import {
 } from '../math/seriaHelperFn';
 
 import {
-  isArr,
-  bindTo,
   crRouter
+} from '../utils/crRouter';
+
+import {
+  isArr,
+  bindTo
 } from './AdapterFn';
 
 const _crPTag = className => className

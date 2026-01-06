@@ -1,6 +1,6 @@
 import { CHT_AREA_YEARLY } from "../../constants/ChartType";
+import { crGetRoute } from "../../utils/crRouter";
 
-import { crGetRoute } from "../AdapterFn";
 import { isCategory } from "../CategoryFn";
 import { crAdapterRouter } from "../crAdapterRouter";
 

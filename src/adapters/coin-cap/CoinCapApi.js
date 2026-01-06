@@ -2,12 +2,14 @@ import {
   isArr,
   parseIntBy10
 } from "../../utils/isTypeFn";
+import {
+  crGetRoute
+} from "../../utils/crRouter";
 
 import {
   assign,
   crError,
   getValues,
-  crGetRoute,
   setItemCaptionTo,
   ymdToUTC
 } from "../AdapterFn";

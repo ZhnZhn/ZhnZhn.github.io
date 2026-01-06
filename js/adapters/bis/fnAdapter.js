@@ -3,13 +3,15 @@
 exports.__esModule = true;
 exports.getTimePeriod = exports.getSeriesCollection = exports.getRefArea = exports.getObsValue = exports.fCrCategoryName = exports.crItemId = void 0;
 var _arrFn = require("../../utils/arrFn");
+var _itemFn = require("../../utils/itemFn");
+var _crRouter = require("../../utils/crRouter");
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 const _crCategoryToken = function (seriaType, item, numberOfToken) {
     if (numberOfToken === void 0) {
       numberOfToken = 1;
     }
-    return (0, _CategoryFn.isCategory)(seriaType) ? numberOfToken === 1 ? "*" : "*.*" : (0, _AdapterFn.getValue)(item);
+    return (0, _CategoryFn.isCategory)(seriaType) ? numberOfToken === 1 ? "*" : "*.*" : (0, _itemFn.getValue)(item);
   },
   _crItemIdDf = _ref => {
     let {
@@ -18,14 +20,14 @@ const _crCategoryToken = function (seriaType, item, numberOfToken) {
       seriaType,
       dfSuffix
     } = _ref;
-    return (0, _arrFn.joinByDot)(dfPrefix, _crCategoryToken(seriaType, items[0]), (0, _AdapterFn.getValue)(items[1]), dfSuffix);
+    return (0, _arrFn.joinByDot)(dfPrefix, _crCategoryToken(seriaType, items[0]), (0, _itemFn.getValue)(items[1]), dfSuffix);
   },
   _crItemId312 = _ref2 => {
     let {
       items,
       seriaType
     } = _ref2;
-    return (0, _arrFn.joinByDot)((0, _AdapterFn.getValue)(items[2]), _crCategoryToken(seriaType, items[0]), (0, _AdapterFn.getValue)(items[1]));
+    return (0, _arrFn.joinByDot)((0, _itemFn.getValue)(items[2]), _crCategoryToken(seriaType, items[0]), (0, _itemFn.getValue)(items[1]));
   },
   _crItemId21 = _ref3 => {
     let {
@@ -33,9 +35,9 @@ const _crCategoryToken = function (seriaType, item, numberOfToken) {
       seriaType,
       dfSuffix
     } = _ref3;
-    return (0, _arrFn.joinByDot)((0, _AdapterFn.getValue)(items[1]), _crCategoryToken(seriaType, items[0], 2), dfSuffix);
+    return (0, _arrFn.joinByDot)((0, _itemFn.getValue)(items[1]), _crCategoryToken(seriaType, items[0], 2), dfSuffix);
   },
-  _getCrItemId = (0, _AdapterFn.crGetRoute)({
+  _getCrItemId = (0, _crRouter.crGetRoute)({
     s312: _crItemId312,
     s21: _crItemId21
   }, _crItemIdDf);

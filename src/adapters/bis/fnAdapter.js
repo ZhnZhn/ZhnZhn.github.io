@@ -1,11 +1,9 @@
-import {
-  joinByDot
-} from "../../utils/arrFn";
+import { joinByDot } from "../../utils/arrFn";
+import { getValue } from "../../utils/itemFn";
+import { crGetRoute } from "../../utils/crRouter";
 
 import {
   FN_IDENTITY,
-  crGetRoute,
-  getValue,
   crXmlDocument,
   ymdToUTC
 } from "../AdapterFn";

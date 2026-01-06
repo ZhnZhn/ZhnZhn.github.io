@@ -6,6 +6,7 @@ exports.default = void 0;
 var _styleFn = require("../../components/styleFn");
 var _isTypeFn = require("../../utils/isTypeFn");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
+var _crRouter = require("../../utils/crRouter");
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _ChartConfigFn = require("../../charts/ChartConfigFn");
 var _AdapterFn = require("../AdapterFn");
@@ -185,7 +186,7 @@ const _crBbandsSeries = (json, option) => {
     }, S_RED);
   return [sMiddle, sUpper, sLow];
 };
-const _getCrSeries = (0, _AdapterFn.crGetRoute)({
+const _getCrSeries = (0, _crRouter.crGetRoute)({
     [MACD]: _crMacdSeries,
     [STOCH]: _crStochSeries,
     [BBANDS]: _crBbandsSeries

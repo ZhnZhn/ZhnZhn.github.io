@@ -1,5 +1,6 @@
 import { isInArrStr } from '../../utils/arrFn';
 import { getValueAndCaption } from '../../utils/itemFn';
+import { crGetRoute } from '../../utils/crRouter';
 
 import {
   REQ_ERROR,
@@ -9,8 +10,7 @@ import {
 
 import {
   assign,
-  crError,
-  crGetRoute
+  crError
 } from '../AdapterFn';
 
 const _crEconomicsQuery = (

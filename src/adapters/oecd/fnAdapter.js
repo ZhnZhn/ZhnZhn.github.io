@@ -1,14 +1,8 @@
-import {
-  getByPropsFrom
-} from '../../utils/objFn';
+import { getValue } from '../../utils/itemFn';
+import { getByPropsFrom } from '../../utils/objFn';
+import { crGetRoute } from '../../utils/crRouter';
 
-import {
-  getValue,
-  crGetRoute
-} from '../AdapterFn';
-import {
-  isCategory
-} from '../CategoryFn';
+import { isCategory } from '../CategoryFn';
 
 const _getRefArea = (
   isCategory,

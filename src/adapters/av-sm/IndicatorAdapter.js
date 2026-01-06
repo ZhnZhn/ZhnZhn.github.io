@@ -2,6 +2,7 @@ import { getColorBlack } from '../../components/styleFn';
 
 import { getObjectKeys } from '../../utils/isTypeFn';
 import pipe from '../../utils/pipe';
+import { crGetRoute } from '../../utils/crRouter';
 
 import {
   crArea2Config,
@@ -13,7 +14,6 @@ import { crSeriaConfig } from '../../charts/ChartConfigFn';
 
 import {
   assign,
-  crGetRoute,
   ymdToUTC
 } from '../AdapterFn';
 

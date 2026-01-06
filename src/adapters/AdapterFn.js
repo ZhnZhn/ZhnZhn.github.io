@@ -3,10 +3,6 @@ import Big from 'big.js';
 import { toTd as _toTd } from '../charts/dateFormat';
 
 export { bindTo } from '../utils/bindTo';
-export {
-  crRouter,
-  crGetRoute
-} from '../utils/crRouter';
 
 import { joinByComma } from '../utils/arrFn';
 import formatAllNumber from '../utils/formatAllNumber';

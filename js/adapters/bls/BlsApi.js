@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _crRouter = require("../../utils/crRouter");
 var _AdapterFn = require("../AdapterFn");
 const API_URL = 'https://api.bls.gov/publicAPI',
   TS_DATA = 'timeseries/data',
@@ -13,7 +14,7 @@ const _crSeriaIdRoutes = {
     CW: _fCrId321('CW')
   },
   _crDfSeriaId = items => items[0].v,
-  _getCrSeriaId = (0, _AdapterFn.crGetRoute)(_crSeriaIdRoutes, _crDfSeriaId);
+  _getCrSeriaId = (0, _crRouter.crGetRoute)(_crSeriaIdRoutes, _crDfSeriaId);
 const _getSeriaId = _ref => {
   let {
     items = [],
@@ -39,7 +40,7 @@ const _crCaptionImpl = (title, subtitle) => ({
     CW: _crCaption321
   },
   _crDfCaption = (dfTitle, items, option) => _crCaptionImpl(dfTitle || option.subtitle, option.title),
-  _getCrCaption = (0, _AdapterFn.crGetRoute)(_routesCrCaption, _crDfCaption);
+  _getCrCaption = (0, _crRouter.crGetRoute)(_routesCrCaption, _crDfCaption);
 const _crCaption = option => _getCrCaption(option.dfCode)(option.dfTitle, option.items, option);
 const _setCaptionTo = option => {
   const {

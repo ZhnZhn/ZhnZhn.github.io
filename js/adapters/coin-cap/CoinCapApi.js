@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _crRouter = require("../../utils/crRouter");
 var _AdapterFn = require("../AdapterFn");
 const API_URL = "https://api.coincap.io/v2";
 const _setTitleTo = (option, title) => (0, _AdapterFn.assign)(option, {
@@ -28,7 +29,7 @@ const _crHistoricalMarketUrl = option => {
   (0, _AdapterFn.setItemCaptionTo)(option, `${option.items[0].s}/USD`);
   return `${API_URL}/assets/${id}/history?interval=${timeframe}${_queryPeriod}`;
 };
-const getCrUrl = (0, _AdapterFn.crGetRoute)({
+const getCrUrl = (0, _crRouter.crGetRoute)({
   MCL: _crAssetListUrl,
   EVL: _crExchangeListUrl,
   HMC: _crHistoricalMarketUrl

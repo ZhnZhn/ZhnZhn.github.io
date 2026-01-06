@@ -9,8 +9,11 @@ import {
 } from '../../utils/strFn';
 
 import {
+  crGetRoute
+} from '../../utils/crRouter';
+
+import {
   assign,
-  crGetRoute,
   getValues
 } from '../AdapterFn';
 
