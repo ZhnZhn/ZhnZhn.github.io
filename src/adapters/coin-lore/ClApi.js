@@ -1,7 +1,5 @@
-import {
-  isArr,
-  crError
-} from '../AdapterFn';
+import { isArr } from '../../utils/isTypeFn'
+import { crError } from '../AdapterFn';
 
 const API_URL = 'https://api.coinlore.net/api';
 

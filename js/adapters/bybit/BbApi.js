@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _AdapterFn = require("../AdapterFn");
+var _isTypeFn = require("../../utils/isTypeFn");
 var _ApiFn = require("../ApiFn");
 const API_URL = "https://api.bybit.com/v5/market";
 const SYMBOL = "category=spot&symbol";
@@ -12,7 +12,7 @@ const _getData = json => {
     a,
     b
   } = (json || {}).result || {};
-  return (0, _AdapterFn.isArr)(list) ? list : (0, _AdapterFn.isArr)(a) && (0, _AdapterFn.isArr)(b) ? {
+  return (0, _isTypeFn.isArr)(list) ? list : (0, _isTypeFn.isArr)(a) && (0, _isTypeFn.isArr)(b) ? {
     asks: a,
     bids: b
   } : void 0;

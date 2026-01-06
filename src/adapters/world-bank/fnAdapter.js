@@ -1,7 +1,5 @@
-import {
-  isArr,
-  ymdToUTC  
-} from '../AdapterFn';
+import { isArr } from '../../utils/isTypeFn';
+import { ymdToUTC } from '../AdapterFn';
 
 const _crInfo = ({
   title,

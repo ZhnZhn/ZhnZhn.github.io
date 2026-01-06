@@ -35,9 +35,6 @@ import {
 
 import { DT_EMPTY } from '../constants/DirectionType';
 
-export {
-  isArr
-} from '../utils/isTypeFn';
 import {
   isArr,
   isTypeNumber,

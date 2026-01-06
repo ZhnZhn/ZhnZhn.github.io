@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
 const URL = 'https://api.worldbank.org/v2',
@@ -21,7 +22,7 @@ const api = {
     return _isCategory ? `${URL}/${_crCountryIndicatorToken("all", indicator)}?date=${option.time}&format=json&per_page=305` : `${URL}/${_crCountryIndicatorToken(country, indicator)}?date=1990:2023&format=json`;
   },
   checkResponse(json) {
-    if (!(0, _AdapterFn.isArr)(json)) {
+    if (!(0, _isTypeFn.isArr)(json)) {
       throw (0, _AdapterFn.crError)();
     }
   }

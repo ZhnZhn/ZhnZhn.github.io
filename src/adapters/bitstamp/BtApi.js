@@ -1,4 +1,4 @@
-import { isArr } from '../AdapterFn';
+import { isArr } from '../../utils/isTypeFn';
 import { crRouteDfObApi } from '../ApiFn';
 
 const API_URL = "https://www.bitstamp.net/api/v2";

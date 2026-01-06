@@ -22,7 +22,6 @@ var _mathFn = require("../math/mathFn");
 var _seriaHelperFn = require("../math/seriaHelperFn");
 var _DirectionType = require("../constants/DirectionType");
 var _isTypeFn = require("../utils/isTypeFn");
-exports.isArr = _isTypeFn.isArr;
 const assign = exports.assign = Object.assign;
 const FN_IDENTITY = v => v;
 exports.FN_IDENTITY = FN_IDENTITY;

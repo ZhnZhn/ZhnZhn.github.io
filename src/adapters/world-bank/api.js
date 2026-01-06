@@ -1,5 +1,6 @@
+import { isArr } from '../../utils/isTypeFn';
+
 import {
-  isArr,
   assign,
   crError,
   getValues

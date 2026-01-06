@@ -1,9 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.valueMoving = exports.isArr = exports.fCrData = exports.crIntradayConfigOption = exports.crError = exports.crDfItemKey = exports.DF_FN_EOD = void 0;
+exports.ymdhmsToUTC = exports.valueMoving = exports.fCrData = exports.crIntradayConfigOption = exports.crError = exports.crDfItemKey = exports.DF_FN_EOD = void 0;
 var _AdapterFn = require("../AdapterFn");
-exports.isArr = _AdapterFn.isArr;
 exports.crDfItemKey = _AdapterFn.crDfItemKey;
 exports.valueMoving = _AdapterFn.valueMoving;
 exports.ymdhmsToUTC = _AdapterFn.ymdhmsToUTC;

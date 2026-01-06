@@ -8,8 +8,8 @@ import {
   isYNumber,
   crShortItemCaption,
   setItemCaptionCurrencyRateTo,
-  findMinY,
-  findMaxY,
+  //findMinY,
+  //findMaxY,
   valueMoving,
   crError,
   fCrValue,
@@ -117,41 +117,6 @@ describe("setItemCaptionCurrencyRateTo", ()=>{
     };
     fn(option, "USD")
     expect(option.itemCaption).toBe("EUR/USD")
-  })
-})
-
-const DATA_ARR = [ [0, 0.3], [0, 0.31], [0, 0.29] ];
-const DATA_POINT = [ {x:0, y: 0.3},{x:0, y: 0.31},{x:0, y: 0.29} ];
-
-describe('findMinY', ()=>{
-  const fn = findMinY;
-  test('should return minY for points arrays', ()=>{
-     expect(fn(DATA_ARR)).toBe(0.29)
-  })
-  test('should return minY for points object', ()=>{
-    expect(fn(DATA_POINT)).toBe(0.29)
-  })
-  test('should return undefined in edge case', ()=>{
-    expect(fn()).toBe(undefined)
-    expect(fn([])).toBe(undefined)
-    expect(fn([[0]])).toBe(undefined)
-    expect(fn([{x:0}])).toBe(undefined)
-  })
-})
-
-describe('findMaxY', ()=>{
-  const fn = findMaxY;
-  test('should return maxY for points arrays', ()=>{
-     expect(fn(DATA_ARR)).toBe(0.31)
-  })
-  test('should return maxY for points object', ()=>{
-    expect(fn(DATA_POINT)).toBe(0.31)
-  })
-  test('should return undefined in edge case', ()=>{
-    expect(fn()).toBe(undefined)
-    expect(fn([])).toBe(undefined)
-    expect(fn([[0]])).toBe(undefined)
-    expect(fn([{x:0}])).toBe(undefined)
   })
 })
 

@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 const API_URL = 'https://api.coinlore.net/api';
 const ClApi = {
@@ -18,7 +19,7 @@ const ClApi = {
     const {
       pairs
     } = json || {};
-    if (!(0, _AdapterFn.isArr)(pairs)) {
+    if (!(0, _isTypeFn.isArr)(pairs)) {
       throw (0, _AdapterFn.crError)();
     }
   }
