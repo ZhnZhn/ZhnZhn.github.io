@@ -4,9 +4,10 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _itemFn = require("../../utils/itemFn");
 var _mathFn = require("../../math/mathFn");
-var _CategoryFn = require("../CategoryFn");
 var _AdapterFn = require("../AdapterFn");
+var _CategoryFn = require("../CategoryFn");
 var _fnAdapter = require("./fnAdapter");
 var _fCrLineCategoryUrl = _interopRequireDefault(require("../fCrLineCategoryUrl"));
 const API_URL = "https://ember-data-api-scg3n.ondigitalocean.app/ember",
@@ -64,10 +65,10 @@ const _crTimeSeriesTreeMapUrl = (option, _isTreeMap) => {
       items,
       time
     } = option,
-    geo = (0, _AdapterFn.getValue)(items[0]),
+    geo = (0, _itemFn.getValue)(items[0]),
     metricItem = items[2],
-    metricCaption = (0, _AdapterFn.getCaption)(metricItem),
-    metricValue = (0, _AdapterFn.getValue)(metricItem);
+    metricCaption = (0, _itemFn.getCaption)(metricItem),
+    metricValue = (0, _itemFn.getValue)(metricItem);
   if (metricItem.isTm !== 1) {
     throw (0, _AdapterFn.crErrorByMessage)(`TreeMap and Bar charts by Source for ${metricCaption} not available`);
   }

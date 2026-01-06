@@ -2,7 +2,9 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _arrFn = require("../../utils/arrFn");
+var _itemFn = require("../../utils/itemFn");
 var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
 const API_URL = `${_fnAdapter.BEA_DATA_URL}/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID`;
@@ -27,7 +29,7 @@ const BeaApi = {
         ValueName,
         items = []
       } = option,
-      value = (0, _AdapterFn.getValue)(items[0]),
+      value = (0, _itemFn.getValue)(items[0]),
       _Frequncy = (0, _fnAdapter.getFrequency)(items[0]);
     _setCaptionTo(option);
     return `${API_URL}=${apiKey}&TableID=${TableID}&DataSetName=${DataSetName}&Frequency=${_Frequncy}&${ValueName}=${value}`;
@@ -38,7 +40,7 @@ const BeaApi = {
       throw (0, _AdapterFn.crError)(ResError.APIErrorCode, (ResError.ErrorDetail || {}).Description || ResError.APIErrorDescription);
     }
     const Results = (0, _fnAdapter.getResults)(json);
-    if (!Results || Results.Error || !(0, _AdapterFn.isArr)((0, _fnAdapter.getResultsData)(Results))) {
+    if (!Results || Results.Error || !(0, _isTypeFn.isArr)((0, _fnAdapter.getResultsData)(Results))) {
       throw (0, _AdapterFn.crError)();
     }
   }

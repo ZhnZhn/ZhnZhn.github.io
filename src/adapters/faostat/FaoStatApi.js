@@ -1,6 +1,5 @@
-import {
-  isTokenInStr
-} from '../../utils/strFn';
+import { getCaption } from '../../utils/itemFn';
+import { isTokenInStr } from '../../utils/strFn';
 
 import {
   isCategory,
@@ -9,7 +8,6 @@ import {
 import {
   assign,
   getValues,
-  getCaption,
   fCheckResponse
 } from '../AdapterFn';
 

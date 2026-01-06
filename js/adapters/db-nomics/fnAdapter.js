@@ -1,14 +1,13 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getValue = exports.getDocs = exports.crTitle = exports.crErrorByMessage = exports.crData = exports.crConfOption = exports.assign = void 0;
+exports.getDocs = exports.crTitle = exports.crErrorByMessage = exports.crData = exports.crConfOption = exports.assign = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.assign = _AdapterFn.assign;
-exports.getValue = _AdapterFn.getValue;
 exports.crErrorByMessage = _AdapterFn.crErrorByMessage;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _arrFn = require("../../utils/arrFn");
 var _strFn = require("../../utils/strFn");
-var _isTypeFn = require("../../utils/isTypeFn");
 var _crFn = require("../crFn");
 var _fnSelector = require("./fnSelector");
 const CHART_URL = 'https://db.nomics.world',

@@ -8,8 +8,6 @@ var _dateFormat = require("../charts/dateFormat");
 var _arrFn = require("../utils/arrFn");
 var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
 var _itemFn = require("../utils/itemFn");
-exports.getValue = _itemFn.getValue;
-exports.getCaption = _itemFn.getCaption;
 var _dateFn = require("../utils/dateFn");
 exports.mlsToDmy = _dateFn.mlsToDmy;
 exports.ymdToUTC = _dateFn.ymdToUTC;
@@ -29,8 +27,6 @@ var _seriaHelperFn = require("../math/seriaHelperFn");
 var _DirectionType = require("../constants/DirectionType");
 var _isTypeFn = require("../utils/isTypeFn");
 exports.isArr = _isTypeFn.isArr;
-//export { bindTo } from '../utils/bindTo';
-
 const assign = exports.assign = Object.assign;
 const FN_IDENTITY = v => v;
 exports.FN_IDENTITY = FN_IDENTITY;

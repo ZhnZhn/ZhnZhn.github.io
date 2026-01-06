@@ -8,13 +8,11 @@ import {
   isArr,
   isStr
 } from '../utils/isTypeFn';
-import {
-  isInArrStr
-} from '../utils/arrFn';
+import { isInArrStr } from '../utils/arrFn';
+import { getValue } from '../utils/itemFn';
 
 import {
   FN_IDENTITY,
-  getValue,
   crError
 } from './AdapterFn';
 

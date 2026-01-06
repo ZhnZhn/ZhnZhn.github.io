@@ -1,15 +1,14 @@
 export {
   assign,
-  getValue,
   crErrorByMessage
 } from '../AdapterFn';
 
+import { isNumber } from '../../utils/isTypeFn';
 import {
   joinBy,
   joinByColon
 } from '../../utils/arrFn';
 import { isTokenInStr } from '../../utils/strFn';
-import { isNumber } from '../../utils/isTypeFn';
 
 import {
   crZhConfig,

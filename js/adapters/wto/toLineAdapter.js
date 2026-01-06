@@ -2,8 +2,9 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _arrFn = require("../../utils/arrFn");
 var _isTypeFn = require("../../utils/isTypeFn");
+var _arrFn = require("../../utils/arrFn");
+var _itemFn = require("../../utils/itemFn");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _crAdapterType = require("../crAdapterType1");
@@ -13,8 +14,8 @@ const crTitle = (option, json) => {
       items,
       dfT
     } = option,
-    _reporting = (0, _AdapterFn.getCaption)(items[0]),
-    _product = (0, _AdapterFn.getCaption)(items[1]),
+    _reporting = (0, _itemFn.getCaption)(items[0]),
+    _product = (0, _itemFn.getCaption)(items[1]),
     item = (0, _fnAdapter.getDataset)(json)[0] || {};
   return {
     title: (0, _arrFn.joinByColon)(_reporting, dfT),

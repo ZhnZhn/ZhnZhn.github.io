@@ -5,6 +5,7 @@ exports.fGetRequestUrl = exports.fCrObUrl = exports.fCrDfUrl = exports.crRouteDf
 var _LoadType = require("../constants/LoadType");
 var _isTypeFn = require("../utils/isTypeFn");
 var _arrFn = require("../utils/arrFn");
+var _itemFn = require("../utils/itemFn");
 var _AdapterFn = require("./AdapterFn");
 const _isWithCORS = (0, _arrFn.isInArrStr)([_LoadType.LT_BN, _LoadType.LT_BG, _LoadType.LT_BT, _LoadType.LT_CB]);
 const _crAllOriginsUrl = (url, _ref) => {
@@ -18,16 +19,16 @@ const fCrDfUrl = crDfUrl => option => {
   const {
       items = []
     } = option,
-    timeframe = (0, _AdapterFn.getValue)(items[1]);
+    timeframe = (0, _itemFn.getValue)(items[1]);
   option.timeframe = timeframe;
-  return _crAllOriginsUrl(crDfUrl((0, _AdapterFn.getValue)(items[0]), timeframe, (0, _AdapterFn.getValue)(items[2]), option, items), option);
+  return _crAllOriginsUrl(crDfUrl((0, _itemFn.getValue)(items[0]), timeframe, (0, _itemFn.getValue)(items[2]), option, items), option);
 };
 exports.fCrDfUrl = fCrDfUrl;
 const fCrObUrl = crObUrl => option => {
   const {
     items = []
   } = option;
-  return _crAllOriginsUrl(crObUrl((0, _AdapterFn.getValue)(items[0]), (0, _AdapterFn.getValue)(items[1])), option);
+  return _crAllOriginsUrl(crObUrl((0, _itemFn.getValue)(items[0]), (0, _itemFn.getValue)(items[1])), option);
 };
 exports.fCrObUrl = fCrObUrl;
 const _getBlockchainData = function (json, option, getData) {

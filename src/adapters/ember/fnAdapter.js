@@ -14,7 +14,7 @@ import {
 import {
   getCaption,
   getValue
-} from "../AdapterFn";
+} from "../../utils/itemFn";
 
 export const isTsRoute = ({
   dfId

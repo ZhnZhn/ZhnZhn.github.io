@@ -1,10 +1,11 @@
+import { getValue } from '../../../utils/itemFn';
+
 import {
   DF_TAIL,
   isCategory,
   isMap,
   isNotGeoOrReporter,
-  crUrl,
-  getValue
+  crUrl
 } from './apiFn';
 
 const _isNotEmptyStr = str => str &&

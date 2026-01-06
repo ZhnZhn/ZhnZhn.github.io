@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _itemFn = require("../../utils/itemFn");
 var _strFn = require("../../utils/strFn");
 var _CategoryFn = require("../CategoryFn");
 var _AdapterFn = require("../AdapterFn");
@@ -21,7 +22,7 @@ const _checkReq = option => {
   }
   const _element = option.items[2] || {};
   if ((0, _CategoryFn.isTreeMap)(option) && !_element.isTm) {
-    throw new Error(`TreeMap for ${(0, _AdapterFn.getCaption)(_element)} is not exist.`);
+    throw new Error(`TreeMap for ${(0, _itemFn.getCaption)(_element)} is not exist.`);
   }
 };
 const _getListId = geoId => (0, _strFn.isTokenInStr)(geoId, '>') ? geoId : WORLD_LIST_ID;

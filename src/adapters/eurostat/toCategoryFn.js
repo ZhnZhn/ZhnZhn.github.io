@@ -1,3 +1,4 @@
+import { getCaption } from '../../utils/itemFn';
 import compose from '../../utils/compose';
 import pipe from '../../utils/pipe';
 
@@ -11,7 +12,6 @@ import {
 import { fTooltip } from '../../charts/Chart';
 import { tooltipCategorySimple } from '../../charts/Tooltip';
 
-import { getCaption } from '../AdapterFn';
 import { fRoundByIf } from '../CategoryFn';
 
 import {

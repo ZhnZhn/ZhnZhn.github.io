@@ -2,15 +2,9 @@ import Big from 'big.js';
 
 import { toTd as _toTd } from '../charts/dateFormat';
 
-//export { bindTo } from '../utils/bindTo';
-
 import { joinByComma } from '../utils/arrFn';
 import formatAllNumber from '../utils/formatAllNumber';
 
-export {
-  getValue,
-  getCaption
-} from '../utils/itemFn';
 import {
   getCaption,
   getValue

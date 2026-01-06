@@ -1,10 +1,8 @@
-import { joinByColon } from '../../utils/arrFn';
 import { isNumber } from '../../utils/isTypeFn';
+import { joinByColon } from '../../utils/arrFn';
+import { getCaption } from '../../utils/itemFn';
 
-import {
-  getCaption,
-  ymdToUTC
-} from '../AdapterFn';
+import { ymdToUTC } from '../AdapterFn';
 
 const _crZhConfig = (
   json,

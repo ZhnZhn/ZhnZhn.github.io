@@ -1,11 +1,8 @@
-import {
-  getToDate
-} from '../../utils/dateFn';
-import {
-  isArr,
-  getValue,
-  crError
-} from '../AdapterFn';
+import { isArr } from '../../utils/isTypeFn';
+import { getToDate } from '../../utils/dateFn';
+import { getValue } from '../../utils/itemFn';
+
+import { crError } from '../AdapterFn';
 
 const API_URL = 'https://api.intrinio.com/historical_data'
 , RES_ERR_STATUS = [ 401 ]

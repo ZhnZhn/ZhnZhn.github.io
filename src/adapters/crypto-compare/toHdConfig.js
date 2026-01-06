@@ -2,14 +2,12 @@ import {
   fAddMiniVolumes,
   fAddMiniHL
 } from '../../charts/stockBuilderFn';
-
 import {
-  assign,
   getValue
-} from '../AdapterFn';
-import {
-  crAdapterType1
-} from '../crAdapterType1';
+} from '../../utils/itemFn';
+
+import { assign } from '../AdapterFn';
+import { crAdapterType1 } from '../crAdapterType1';
 
 import {
   crData,

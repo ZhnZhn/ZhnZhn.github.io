@@ -6,6 +6,7 @@ var _fnDescr = require("./fnDescr");
 exports.toInfo = _fnDescr.toInfo;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _arrFn = require("../../utils/arrFn");
+var _itemFn = require("../../utils/itemFn");
 var _strFn = require("../../utils/strFn");
 var _AdapterFn = require("../AdapterFn");
 const BLANK = ' ',
@@ -68,7 +69,7 @@ const _crSeriesData = (data, prName) => {
 };
 const _compareByX = (a, b) => a.x - b.x;
 const _crSeriaData = (data, option) => (0, _isTypeFn.isArr)(data) ? data.map(_crPoint).filter(p => (0, _isTypeFn.isNumber)(p.y)).sort(_compareByX) : [];
-const _isItemList = item => (0, _AdapterFn.getValue)(item).indexOf('>') !== -1;
+const _isItemList = item => (0, _itemFn.getValue)(item).indexOf('>') !== -1;
 const _getSeriesPropName = _ref2 => {
   let {
     items
@@ -105,7 +106,7 @@ const crSubtitle = (json, option) => option.dfSubtitle || `${option.subtitle}: $
 exports.crSubtitle = crSubtitle;
 const toDataPoints = (json, option) => {
   const _prName = _getSeriesPropName(option),
-    _itemCode = (0, _AdapterFn.getValue)(option.items[1]),
+    _itemCode = (0, _itemFn.getValue)(option.items[1]),
     _data = json.data.filter(item => {
       const _itemCodeFao = (item['Item Code (FAO)'] || '').trim();
       return _itemCodeFao ? _itemCodeFao === _itemCode : true;

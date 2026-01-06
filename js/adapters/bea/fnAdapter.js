@@ -4,11 +4,12 @@ exports.__esModule = true;
 exports.getResultsData = exports.getResults = exports.getResError = exports.getFrequency = exports.crData = exports.crConfOption = exports.BEA_DATA_URL = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _arrFn = require("../../utils/arrFn");
+var _itemFn = require("../../utils/itemFn");
 var _objFn = require("../../utils/objFn");
 var _AdapterFn = require("../AdapterFn");
 const BEA_DATA_URL = exports.BEA_DATA_URL = "https://apps.bea.gov";
 const INDUSTRY_FACTSHEET_URL = `${BEA_DATA_URL}/industry/factsheet/factsheet.html`;
-const getFrequency = item => (0, _AdapterFn.getCaption)(item, "").indexOf("(A,Q)") === -1 ? "A" : "Q";
+const getFrequency = item => (0, _itemFn.getCaption)(item, "").indexOf("(A,Q)") === -1 ? "A" : "Q";
 exports.getFrequency = getFrequency;
 const _getBeaapi = json => (json || {}).BEAAPI || {};
 const getResults = json => _getBeaapi(json).Results,
@@ -33,7 +34,7 @@ const _crInfo = Results => {
     description: _crDescr(_info)
   };
 };
-const _crDfLinkCondig = (ValueName, industryItem) => ValueName === "Industry" && getFrequency(industryItem) === "Q" ? (0, _AdapterFn.crDfLink)(`BEA ${(0, _AdapterFn.getCaption)(industryItem)}`, `${INDUSTRY_FACTSHEET_URL}#${(0, _AdapterFn.getValue)(industryItem)}`) : void 0;
+const _crDfLinkCondig = (ValueName, industryItem) => ValueName === "Industry" && getFrequency(industryItem) === "Q" ? (0, _AdapterFn.crDfLink)(`BEA ${(0, _itemFn.getCaption)(industryItem)}`, `${INDUSTRY_FACTSHEET_URL}#${(0, _itemFn.getValue)(industryItem)}`) : void 0;
 const _crZhConfig = _ref => {
   let {
     ValueName,
@@ -66,7 +67,7 @@ const crData = (json, option) => {
       dfFilterName,
       items
     } = option,
-    two = (0, _AdapterFn.getValue)(items[1]),
+    two = (0, _itemFn.getValue)(items[1]),
     isFilter = dfFilterName ? true : false;
   return (getResultsData(Results) || []).reduce((data, item) => {
     if ((0, _isTypeFn.isObj)(item)) {

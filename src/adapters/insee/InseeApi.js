@@ -1,4 +1,5 @@
-import { isArr, getValue } from '../AdapterFn';
+import { isArr } from '../../utils/isTypeFn';
+import { getValue } from '../../utils/itemFn';
 
 const DATA_URL = 'https://bdm.insee.fr/series/sdmx/data/SERIES_BDM';
 const _crUrl = (

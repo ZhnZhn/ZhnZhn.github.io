@@ -1,9 +1,9 @@
-import { joinByColon } from '../../utils/arrFn';
 import { isStr } from '../../utils/isTypeFn';
+import { joinByColon } from '../../utils/arrFn';
+import { getCaption } from '../../utils/itemFn';
 
 import {
   assign,
-  getCaption,
   ymdToUTC
 } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
@@ -11,6 +11,7 @@ import {
   fCrDataType1,
   crAdapterType1
 } from '../crAdapterType1';
+
 import { getDataset } from './fnAdapter';
 
 const crTitle = (

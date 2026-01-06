@@ -2,8 +2,9 @@
 
 exports.__esModule = true;
 exports.getResponseData = exports.crTitle = exports.crData = exports.crConfOption = void 0;
-var _arrFn = require("../../utils/arrFn");
 var _isTypeFn = require("../../utils/isTypeFn");
+var _arrFn = require("../../utils/arrFn");
+var _itemFn = require("../../utils/itemFn");
 var _AdapterFn = require("../AdapterFn");
 const _crZhConfig = (json, _ref) => {
   let {
@@ -31,8 +32,8 @@ const crTitle = _ref3 => {
     dfTitle
   } = _ref3;
   return {
-    title: (0, _arrFn.joinByColon)((0, _AdapterFn.getCaption)(items[0]), dfTitle),
-    subtitle: (0, _arrFn.joinByColon)((0, _AdapterFn.getCaption)(items[1]), (0, _AdapterFn.getCaption)(items[2]))
+    title: (0, _arrFn.joinByColon)((0, _itemFn.getCaption)(items[0]), dfTitle),
+    subtitle: (0, _arrFn.joinByColon)((0, _itemFn.getCaption)(items[1]), (0, _itemFn.getCaption)(items[2]))
   };
 };
 exports.crTitle = crTitle;

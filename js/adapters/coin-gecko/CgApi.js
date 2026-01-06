@@ -2,6 +2,8 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
+var _itemFn = require("../../utils/itemFn");
 var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
 const API_URL = 'https://api.coingecko.com/api/v3',
@@ -42,7 +44,7 @@ const _assignEl = option => {
 };
 const _assignEv = option => {
   const [exchange, days] = (0, _AdapterFn.getValues)(option);
-  _setTitleAndItemUrlTo(option, `${(0, _AdapterFn.getCaption)(option.items[0])} historical trading volume in BTC`, `${EXCHANGES_API_URL}/${exchange}/volume_chart?days=${days}`);
+  _setTitleAndItemUrlTo(option, `${(0, _itemFn.getCaption)(option.items[0])} historical trading volume in BTC`, `${EXCHANGES_API_URL}/${exchange}/volume_chart?days=${days}`);
 };
 const _rAssign = {
   DF: _assignDf,
@@ -59,10 +61,10 @@ const CgApi = {
     const {
       dfSubId
     } = option;
-    if ((dfSubId === 'MCL' || dfSubId === 'EL' || dfSubId === 'EV') && (0, _AdapterFn.isArr)(json) && json.length > 1) {
+    if ((dfSubId === 'MCL' || dfSubId === 'EL' || dfSubId === 'EV') && (0, _isTypeFn.isArr)(json) && json.length > 1) {
       return json;
     }
-    if (json && (0, _AdapterFn.isArr)(json.prices)) {
+    if (json && (0, _isTypeFn.isArr)(json.prices)) {
       return json;
     }
     throw (0, _AdapterFn.crError)();

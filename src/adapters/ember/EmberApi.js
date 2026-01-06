@@ -2,21 +2,24 @@ import {
   isArr,
   parseIntBy10
 } from '../../utils/isTypeFn';
+import {
+  getValue,
+  getCaption
+} from '../../utils/itemFn';
 
 import {
   isInRange
 } from '../../math/mathFn';
 
 import {
+  crErrorByMessage
+} from "../AdapterFn";
+import {
   isTreeMap,
   isBarTreeMap,
   isCategory
 } from "../CategoryFn";
-import {
-  getValue,
-  getCaption,
-  crErrorByMessage
-} from "../AdapterFn";
+
 import {
   isTsRoute,
   isUsRoute,

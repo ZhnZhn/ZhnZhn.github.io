@@ -1,15 +1,17 @@
 import {
+  isArr
+} from '../../utils/isTypeFn';
+import {
   joinBy,
   joinByDot
 } from '../../utils/arrFn';
 import {
-  isArr
-} from '../../utils/isTypeFn';
+  getValue
+} from '../../utils/itemFn';
 
 import {
   assign,
   crErrorByMessage,
-  getValue,
   getDocs,
 } from './fnAdapter';
 

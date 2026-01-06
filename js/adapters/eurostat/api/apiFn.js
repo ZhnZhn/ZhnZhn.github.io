@@ -1,9 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isNotGeoOrReporter = exports.isMap = exports.isCategory = exports.getValue = exports.crUrl = exports.STAT_API_URL = exports.QUERY_TAIL = exports.DF_TAIL = void 0;
-var _AdapterFn = require("../../AdapterFn");
-exports.getValue = _AdapterFn.getValue;
+exports.isNotGeoOrReporter = exports.isMap = exports.isCategory = exports.crUrl = exports.STAT_API_URL = exports.QUERY_TAIL = exports.DF_TAIL = void 0;
 var _arrFn = require("../../../utils/arrFn");
 var _EuroStatFn = require("../EuroStatFn");
 exports.isNotGeoOrReporter = _EuroStatFn.isNotGeoOrReporter;

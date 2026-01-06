@@ -1,9 +1,11 @@
 import {
   getValue,
-  getCaption,
-  fCheckResponse
-} from '../AdapterFn';
+  getCaption
+} from '../../utils/itemFn';
+
+import { fCheckResponse } from '../AdapterFn';
 import { isCategory } from '../CategoryFn';
+
 import { getDataset } from './fnAdapter';
 
 const API_URL = 'https://api.wto.org/timeseries/v1/data';

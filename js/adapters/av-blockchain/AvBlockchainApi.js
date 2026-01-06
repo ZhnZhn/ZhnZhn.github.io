@@ -2,14 +2,15 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _itemFn = require("../../utils/itemFn");
 var _AvFn = require("../av/AvFn");
 var _AdapterFn = require("../AdapterFn");
 const _crQuery = option => {
   const {
       items
     } = option,
-    symbol = (0, _AdapterFn.getValue)(items[0]),
-    market = (0, _AdapterFn.getValue)(items[1]);
+    symbol = (0, _itemFn.getValue)(items[0]),
+    market = (0, _itemFn.getValue)(items[1]);
   (0, _AdapterFn.assign)(option, {
     itemCaption: `${symbol}/${market}`
   });

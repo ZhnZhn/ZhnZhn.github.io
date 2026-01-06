@@ -7,6 +7,7 @@ exports.crError = _AdapterFn.crError;
 exports.ymdToUTC = _AdapterFn.ymdToUTC;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _arrFn = require("../../utils/arrFn");
+var _itemFn = require("../../utils/itemFn");
 const isTsRoute = _ref => {
   let {
     dfId
@@ -22,8 +23,8 @@ const fGetCategory = option => isUsRoute(option) ? _getStateCategory : _getCount
 exports.fGetCategory = fGetCategory;
 const _getItems = option => option.items,
   _fGetItemsBy = fn => itemIndex => option => fn(_getItems(option)[itemIndex]),
-  _fGetItemsCaptionBy = _fGetItemsBy(_AdapterFn.getCaption),
-  _fGetItemsValueBy = _fGetItemsBy(_AdapterFn.getValue);
+  _fGetItemsCaptionBy = _fGetItemsBy(_itemFn.getCaption),
+  _fGetItemsValueBy = _fGetItemsBy(_itemFn.getValue);
 const getGeoCaption = exports.getGeoCaption = _fGetItemsCaptionBy(0);
 const getSourceValue = exports.getSourceValue = _fGetItemsValueBy(1);
 const getMetricCaption = exports.getMetricCaption = _fGetItemsCaptionBy(2);

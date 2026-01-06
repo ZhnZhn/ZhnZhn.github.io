@@ -2,8 +2,9 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _arrFn = require("../../utils/arrFn");
 var _isTypeFn = require("../../utils/isTypeFn");
+var _arrFn = require("../../utils/arrFn");
+var _itemFn = require("../../utils/itemFn");
 var _fnAdapter = require("./fnAdapter");
 const URL = 'https://api.db.nomics.world/v22/series',
   TAIL = 'observations=1&format=json&metadata=false',
@@ -20,7 +21,7 @@ const _crUrl = (seriaId, option) => {
   option.seriaId = seriaId;
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
-const _dfFnUrl = option => (0, _isTypeFn.isArr)(option.items) ? _crUrl((0, _fnAdapter.getValue)(option.items[0]), option) : _crUrl('', option);
+const _dfFnUrl = option => (0, _isTypeFn.isArr)(option.items) ? _crUrl((0, _itemFn.getValue)(option.items[0]), option) : _crUrl('', option);
 const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
   (0, _fnAdapter.assign)(option, {
     seriaId,
@@ -34,7 +35,7 @@ const _idFnUrl = option => {
   const {
       items
     } = option,
-    value = (0, _fnAdapter.getValue)(items[0]),
+    value = (0, _itemFn.getValue)(items[0]),
     arr = value.split('/');
   return _crIdUrl(option, _trimStr(arr[0]), _trimStr(arr[1]), _trimStr(arr[2]));
 };
@@ -50,7 +51,7 @@ const _crValuesS1 = _ref2 => {
     let {
       items
     } = _ref2;
-    return [(0, _fnAdapter.getValue)(items[0])];
+    return [(0, _itemFn.getValue)(items[0])];
   },
   _s1FnUrl = _fCrUrl(_crValuesS1),
   _crValuesS21 = _ref3 => {
@@ -59,7 +60,7 @@ const _crValuesS1 = _ref2 => {
       df1Prefix,
       df2Prefix
     } = _ref3;
-    return [df1Prefix, (0, _fnAdapter.getValue)(items[1]), df2Prefix, (0, _fnAdapter.getValue)(items[0])];
+    return [df1Prefix, (0, _itemFn.getValue)(items[1]), df2Prefix, (0, _itemFn.getValue)(items[0])];
   },
   _s21FnUrl = _fCrUrl(_crValuesS21),
   _crValuesS12 = _ref4 => {
@@ -68,7 +69,7 @@ const _crValuesS1 = _ref2 => {
       df1Prefix,
       df2Prefix
     } = _ref4;
-    return [df1Prefix, (0, _fnAdapter.getValue)(items[0]), df2Prefix, (0, _fnAdapter.getValue)(items[1])];
+    return [df1Prefix, (0, _itemFn.getValue)(items[0]), df2Prefix, (0, _itemFn.getValue)(items[1])];
   },
   _s12FnUrl = _fCrUrl(_crValuesS12),
   _crValuesS123B = _ref5 => {
@@ -76,7 +77,7 @@ const _crValuesS1 = _ref2 => {
       items,
       df2Prefix
     } = _ref5;
-    return [(0, _fnAdapter.getValue)(items[0]), df2Prefix, (0, _fnAdapter.getValue)(items[1]), (0, _fnAdapter.getValue)(items[2])];
+    return [(0, _itemFn.getValue)(items[0]), df2Prefix, (0, _itemFn.getValue)(items[1]), (0, _itemFn.getValue)(items[2])];
   },
   _s123BFnUrl = _fCrUrl(_crValuesS123B),
   _crValuesS123 = _ref6 => {
@@ -92,7 +93,7 @@ const _crValuesS1 = _ref2 => {
     let {
       items
     } = _ref7;
-    return [(0, _fnAdapter.getValue)(items[2]), (0, _fnAdapter.getValue)(items[0]), (0, _fnAdapter.getValue)(items[1])];
+    return [(0, _itemFn.getValue)(items[2]), (0, _itemFn.getValue)(items[0]), (0, _itemFn.getValue)(items[1])];
   },
   _s231FnUrl = _fCrUrl(_crValuesS231);
 const _crValues3S12 = _ref8 => {
@@ -110,7 +111,7 @@ const _crValues3S12 = _ref8 => {
       subtitle
     } = option;
     (0, _fnAdapter.assign)(option, {
-      dfCode: `${dfCode}:${(0, _fnAdapter.getValue)(items[2])}`,
+      dfCode: `${dfCode}:${(0, _itemFn.getValue)(items[2])}`,
       subtitle: (subtitle || "").split(':')[0] || ''
     });
     return _fCrUrl(_crValues3S12)(option);

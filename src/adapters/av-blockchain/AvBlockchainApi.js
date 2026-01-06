@@ -1,10 +1,13 @@
 import {
+  getValue
+} from '../../utils/itemFn';
+
+import {
   fAvApi,
   crFunctionQuery
 } from '../av/AvFn';
 import {
-  assign,
-  getValue
+  assign
 } from '../AdapterFn';
 
 const _crQuery = (
