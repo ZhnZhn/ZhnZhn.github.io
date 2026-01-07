@@ -1,15 +1,13 @@
+import { isStrNotBlank } from '../../../utils/isTypeFn';
 import { getValue } from '../../../utils/itemFn';
+import { isNotGeoOrReporter } from '../EuroStatFn';
 
 import {
   DF_TAIL,
   isCategory,
   isMap,
-  isNotGeoOrReporter,
   crUrl
 } from './apiFn';
-
-const _isNotEmptyStr = str => str &&
-  typeof str === 'string';
 
 const _addDfTailTo = (
   mapSlice,
@@ -31,15 +29,20 @@ const _crMapSlice = (
   items.forEach(item => {
     mapSlice[item.id] = getValue(item)
   })
-  if (_isNotEmptyStr(dfTail)) {
+  if (isStrNotBlank(dfTail)) {
     _addDfTailTo(mapSlice, dfTail)
   }
   return mapSlice;
 };
 
-const _notEmptyOrGeo = (
-  item
-) => Boolean(item) && isNotGeoOrReporter(item.id);
+const _crItemsFilter = (
+  dfC,
+  dfCmx
+) => dfC
+  ? item => Boolean(item) && item.id !== dfC
+  : dfCmx
+  ? item => item
+  : item => Boolean(item) && isNotGeoOrReporter(item.id);
 const _crItems = ({
   seriaType,
   dfC,
@@ -48,17 +51,13 @@ const _crItems = ({
   time
 }) => {
   if (isCategory(seriaType)) {
-    const _filterItemsBy = dfC
-      ? item => Boolean(item) && item.id !== dfC
-      : dfCmx
-         ? item => item
-         : _notEmptyOrGeo
-    , _items = items.filter(_filterItemsBy);
+    const _items = items
+      .filter(_crItemsFilter(dfC, dfCmx));
     return isMap(seriaType)
       ? _items
       : _items.concat([{ id: 'time', value: time }])
   }
- return items;
+  return items;
 };
 
 const _crQuery = (

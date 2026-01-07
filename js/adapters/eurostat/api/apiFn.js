@@ -1,10 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isNotGeoOrReporter = exports.isMap = exports.isCategory = exports.crUrl = exports.STAT_API_URL = exports.QUERY_TAIL = exports.DF_TAIL = void 0;
+exports.isMap = exports.isCategory = exports.crUrl = exports.STAT_API_URL = exports.QUERY_TAIL = exports.DF_TAIL = void 0;
 var _arrFn = require("../../../utils/arrFn");
-var _EuroStatFn = require("../EuroStatFn");
-exports.isNotGeoOrReporter = _EuroStatFn.isNotGeoOrReporter;
 var _ChartType = require("../../../constants/ChartType");
 const CATEGORY_TYPES = [_ChartType.CHT_MAP, _ChartType.CHT_COLUMN_SET, _ChartType.CHT_BAR_SET, _ChartType.CHT_BAR_WITH_LABELS, _ChartType.CHT_DOT_SET];
 const API_URL = "https://ec.europa.eu/eurostat/api";

@@ -2,9 +2,10 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../../utils/isTypeFn");
 var _itemFn = require("../../../utils/itemFn");
+var _EuroStatFn = require("../EuroStatFn");
 var _apiFn = require("./apiFn");
-const _isNotEmptyStr = str => str && typeof str === 'string';
 const _addDfTailTo = (mapSlice, dfTail) => {
   dfTail.split('&').forEach(param => {
     const _arr = param.split('=');
@@ -21,12 +22,12 @@ const _crMapSlice = (items, _ref) => {
   items.forEach(item => {
     mapSlice[item.id] = (0, _itemFn.getValue)(item);
   });
-  if (_isNotEmptyStr(dfTail)) {
+  if ((0, _isTypeFn.isStrNotBlank)(dfTail)) {
     _addDfTailTo(mapSlice, dfTail);
   }
   return mapSlice;
 };
-const _notEmptyOrGeo = item => Boolean(item) && (0, _apiFn.isNotGeoOrReporter)(item.id);
+const _crItemsFilter = (dfC, dfCmx) => dfC ? item => Boolean(item) && item.id !== dfC : dfCmx ? item => item : item => Boolean(item) && (0, _EuroStatFn.isNotGeoOrReporter)(item.id);
 const _crItems = _ref2 => {
   let {
     seriaType,
@@ -36,8 +37,7 @@ const _crItems = _ref2 => {
     time
   } = _ref2;
   if ((0, _apiFn.isCategory)(seriaType)) {
-    const _filterItemsBy = dfC ? item => Boolean(item) && item.id !== dfC : dfCmx ? item => item : _notEmptyOrGeo,
-      _items = items.filter(_filterItemsBy);
+    const _items = items.filter(_crItemsFilter(dfC, dfCmx));
     return (0, _apiFn.isMap)(seriaType) ? _items : _items.concat([{
       id: 'time',
       value: time

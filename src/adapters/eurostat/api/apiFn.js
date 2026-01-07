@@ -1,7 +1,5 @@
 import { isInArrStr } from '../../../utils/arrFn';
 
-export { isNotGeoOrReporter } from '../EuroStatFn';
-
 import {
   CHT_MAP,
   CHT_COLUMN_SET,
