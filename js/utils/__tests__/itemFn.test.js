@@ -104,6 +104,41 @@ describe('getValueUpperCase', () => {
     expect(fn(null)).toBe('');
   });
 });
+describe('fIsValueEqual', () => {
+  const fn = _itemFn.fIsValueEqual;
+  test('should return function that check equals of string token to value of item', () => {
+    const isItemValue = fn('token');
+    expect(typeof isItemValue).toEqual('function');
+    expect(isItemValue({
+      v: 'token'
+    })).toBe(true);
+    expect(isItemValue({
+      value: 'token'
+    })).toBe(true);
+    expect(isItemValue({
+      v: 'Token'
+    })).toBe(false);
+  });
+  test('should return function that return false for edge cases', () => {
+    const isItemValue = fn('str');
+    expect(typeof isItemValue).toEqual('function');
+    expect(isItemValue()).toBe(false);
+    expect(isItemValue(null)).toBe(false);
+    expect(isItemValue({})).toBe(false);
+    expect(isItemValue({
+      v: null
+    })).toBe(false);
+    expect(isItemValue({
+      value: null
+    })).toBe(false);
+    expect(isItemValue({
+      v: void 0
+    })).toBe(false);
+    expect(isItemValue({
+      value: void 0
+    })).toBe(false);
+  });
+});
 describe('getValueAndCaption', () => {
   const fn = _itemFn.getValueAndCaption;
   test('should return array with value, caption from item, options', () => {
