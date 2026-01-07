@@ -1,10 +1,10 @@
-import fCompareByTwoProps from '../fCompareByTwoProps'
+import { fCompareByTwoProps } from '../compareBy';
 
 describe('fCompareByTwoProps', ()=>{
   const fn = fCompareByTwoProps
   it('should create fn for comparing by two props', ()=>{
     const _compare = fn('v', 'id')
-    , arr = [      
+    , arr = [
       {v:3, id: 'a'},
       {v:4, id: 'a'},
       {v:1, id: 'a'},

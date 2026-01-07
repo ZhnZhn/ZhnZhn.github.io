@@ -1,5 +1,7 @@
-import fCompareBy from '../utils/fCompareBy';
-import fCompareByTwoProps from '../utils/fCompareByTwoProps';
+import {
+  fCompareBy,
+  fCompareByTwoProps
+} from '../utils/compareBy';
 
 const _compareByPnValue = fCompareBy('value')
 , _compareByPnYAndName = fCompareByTwoProps('y', 'name')

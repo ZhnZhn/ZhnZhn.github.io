@@ -1,9 +1,8 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-var _fCompareBy = _interopRequireDefault(require("../fCompareBy"));
+var _compareBy = require("../compareBy");
 describe('fCompareBy', () => {
-  const fn = _fCompareBy.default;
+  const fn = _compareBy.fCompareBy;
   it('should create fn for comparing arr by index', () => {
     const _compare = fn(0),
       arr = [[3, 0], [4, 0], [2, 0], [2, 1], [1, 0]];

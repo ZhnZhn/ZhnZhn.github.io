@@ -1,4 +1,4 @@
-import fCompareBy from '../fCompareBy'
+import { fCompareBy } from '../compareBy';
 
 describe('fCompareBy', ()=>{
   const fn = fCompareBy
