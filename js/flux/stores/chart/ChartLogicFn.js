@@ -1,23 +1,16 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.updateMovingValues = exports.toTop = exports.removeConfig = exports.removeAll = exports.isChartExist = void 0;
-var _getSlice = _interopRequireDefault(require("./getSlice"));
-const _notConfById = id => c => c.zhConfig.id !== id;
-const _confById = id => c => c.zhConfig.id === id;
+var _getSubSliceOf = require("./getSubSliceOf");
+const _getConfigId = c => c.zhConfig.id;
+const _notConfById = id => c => _getConfigId(c) !== id;
+const _confById = id => c => _getConfigId(c) === id;
+const _getConfigKey = c => c.zhConfig.key;
 const isChartExist = (slice, chartType, key) => {
-  const {
-    chartSlice,
-    configs
-  } = (0, _getSlice.default)(slice, chartType);
-  if (!chartSlice) {
-    return false;
-  }
-  const _max = configs.length;
-  let i = 0;
-  for (; i < _max; i++) {
-    if (configs[i].zhConfig.key === key) {
+  const configs = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType)[1];
+  for (let config of configs) {
+    if (_getConfigKey(config) === key) {
       return true;
     }
   }
@@ -25,10 +18,7 @@ const isChartExist = (slice, chartType, key) => {
 };
 exports.isChartExist = isChartExist;
 const removeConfig = (slice, chartType, id) => {
-  const {
-    chartSlice,
-    configs
-  } = (0, _getSlice.default)(slice, chartType);
+  const [chartSlice, configs] = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType);
   chartSlice.configs = configs.filter(_notConfById(id));
   return {
     chartSlice,
@@ -37,10 +27,7 @@ const removeConfig = (slice, chartType, id) => {
 };
 exports.removeConfig = removeConfig;
 const toTop = (slice, chartType, id) => {
-  const {
-      chartSlice,
-      configs
-    } = (0, _getSlice.default)(slice, chartType),
+  const [chartSlice, configs] = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType),
     _conf = configs.find(_confById(id));
   if (_conf) {
     const arrWithout = configs.filter(_notConfById(id));
@@ -55,14 +42,16 @@ const removeAll = (slice, chartType) => {
   return _slice;
 };
 exports.removeAll = removeAll;
+const _isRequireUpdateMovingValues = (configs, movingValues) => configs.length === movingValues.length;
 const updateMovingValues = (slice, chartType, movingValues) => {
-  const {
-      configs
-    } = (0, _getSlice.default)(slice, chartType),
-    _maxConfigs = configs.length;
-  if (_maxConfigs === movingValues.length) {
+  const configs = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType)[1];
+  if (_isRequireUpdateMovingValues(configs, movingValues)) {
+    const _hmConfigs = configs.reduce((hm, config) => {
+      hm[_getConfigId(config)] = config;
+      return hm;
+    }, Object.create(null));
     movingValues.forEach(mv => {
-      const _config = configs.find(_confById(mv._id));
+      const _config = _hmConfigs[mv._id];
       if (_config) {
         _config.valueMoving = mv;
       }
