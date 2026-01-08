@@ -10,7 +10,7 @@ import { crKeyForConfig } from '../logic/LogicFn';
 import { getLoadImpl } from '../logic/LoadImpl';
 
 import {
-  isChartExist as isChartExistImpl,
+  isChartExistImpl,
   removeConfig,
   toTop,
   removeAll,

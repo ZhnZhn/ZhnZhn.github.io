@@ -44,7 +44,7 @@ const isChartExist = option => {
     chartType,
     key
   } = option;
-  return (0, _ChartLogic.isChartExist)(CHARTS, chartType, key);
+  return (0, _ChartLogic.isChartExistImpl)(CHARTS, chartType, key);
 };
 exports.isChartExist = isChartExist;
 let _isLoading = !1,

@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.updateMovingValues = exports.toTop = exports.sortBy = exports.showChart = exports.setAlertItemIdTo = exports.scanPostAdded = exports.removeConfig = exports.removeAll = exports.loadConfig = exports.isChartExist = exports.checkBrowserChartTypes = void 0;
+exports.updateMovingValues = exports.toTop = exports.sortBy = exports.showChart = exports.setAlertItemIdTo = exports.scanPostAdded = exports.removeConfig = exports.removeAll = exports.loadConfig = exports.isChartExistImpl = exports.checkBrowserChartTypes = void 0;
 var _ModalDialogType = require("../../../constants/ModalDialogType");
 var _isTypeFn = require("../../../utils/isTypeFn");
 var _fItemContainer = require("../../logic/fItemContainer");
@@ -102,7 +102,7 @@ const _getConfigId = c => c.zhConfig.id;
 const _notConfById = id => c => _getConfigId(c) !== id;
 const _confById = id => c => _getConfigId(c) === id;
 const _getConfigKey = c => c.zhConfig.key;
-const isChartExist = (slice, chartType, key) => {
+const isChartExistImpl = (slice, chartType, key) => {
   const configs = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType)[1];
   for (let config of configs) {
     if (_getConfigKey(config) === key) {
@@ -111,7 +111,7 @@ const isChartExist = (slice, chartType, key) => {
   }
   return false;
 };
-exports.isChartExist = isChartExist;
+exports.isChartExistImpl = isChartExistImpl;
 const removeConfig = (slice, chartType, id) => {
   const [chartSlice, configs] = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType);
   chartSlice.configs = configs.filter(_notConfById(id));

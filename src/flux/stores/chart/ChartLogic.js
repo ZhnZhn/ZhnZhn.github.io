@@ -128,7 +128,7 @@ const _notConfById = id => c => _getConfigId(c) !== id;
 const _confById = id => c => _getConfigId(c) === id;
 const _getConfigKey = c => c.zhConfig.key;
 
-export const isChartExist = (
+export const isChartExistImpl = (
   slice,
   chartType,
   key
