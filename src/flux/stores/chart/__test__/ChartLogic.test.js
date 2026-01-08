@@ -4,7 +4,7 @@ import {
   toTop,
   removeAll,
   updateMovingValues
-} from '../ChartLogicFn';
+} from '../ChartLogic';
 
 const CHART_TYPE = "AA_BB";
 const _crChartsConfig = (chartType=CHART_TYPE) => ({

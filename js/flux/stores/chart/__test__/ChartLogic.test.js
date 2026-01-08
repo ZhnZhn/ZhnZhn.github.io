@@ -1,6 +1,6 @@
 "use strict";
 
-var _ChartLogicFn = require("../ChartLogicFn");
+var _ChartLogic = require("../ChartLogic");
 const CHART_TYPE = "AA_BB";
 const _crChartsConfig = function (chartType) {
   if (chartType === void 0) {
@@ -35,45 +35,45 @@ const _getVm = (chartsConfig, chartType, index) => chartsConfig[chartType].confi
 describe('isChartExist', () => {
   test('should return true if config for chartType and key exists', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
-    expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, "k1")).toBe(true);
-    expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, "k2")).toBe(true);
+    expect((0, _ChartLogic.isChartExist)(_chartsConfig, CHART_TYPE, "k1")).toBe(true);
+    expect((0, _ChartLogic.isChartExist)(_chartsConfig, CHART_TYPE, "k2")).toBe(true);
   });
   test('should return false if config for chartType and key does not exist', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
-    expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, "k5")).toBe(false);
-    expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, "k6")).toBe(false);
+    expect((0, _ChartLogic.isChartExist)(_chartsConfig, CHART_TYPE, "k5")).toBe(false);
+    expect((0, _ChartLogic.isChartExist)(_chartsConfig, CHART_TYPE, "k6")).toBe(false);
   });
   test('should return false if configs for chartType does not exist', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
     const _NOT_EXIST_CHART_TYPE = 'NOT_EXIST_' + CHART_TYPE;
-    expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, _NOT_EXIST_CHART_TYPE, "k1")).toBe(false);
-    expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, _NOT_EXIST_CHART_TYPE, "k2")).toBe(false);
-    expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, _NOT_EXIST_CHART_TYPE, "k5")).toBe(false);
+    expect((0, _ChartLogic.isChartExist)(_chartsConfig, _NOT_EXIST_CHART_TYPE, "k1")).toBe(false);
+    expect((0, _ChartLogic.isChartExist)(_chartsConfig, _NOT_EXIST_CHART_TYPE, "k2")).toBe(false);
+    expect((0, _ChartLogic.isChartExist)(_chartsConfig, _NOT_EXIST_CHART_TYPE, "k5")).toBe(false);
   });
 });
 describe('removeConfig', () => {
   test('should remove config from configs by id', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
     const _idOrKey = 'k1';
-    expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, _idOrKey)).toBe(true);
+    expect((0, _ChartLogic.isChartExist)(_chartsConfig, CHART_TYPE, _idOrKey)).toBe(true);
     const {
       chartSlice,
       isRemoved
-    } = (0, _ChartLogicFn.removeConfig)(_chartsConfig, CHART_TYPE, _idOrKey);
+    } = (0, _ChartLogic.removeConfig)(_chartsConfig, CHART_TYPE, _idOrKey);
     expect(isRemoved).toBe(true);
-    expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, _idOrKey)).toBe(false);
+    expect((0, _ChartLogic.isChartExist)(_chartsConfig, CHART_TYPE, _idOrKey)).toBe(false);
     expect(chartSlice).toBe(_chartsConfig[CHART_TYPE]);
   });
   test('should return object with isRemoved false for not existed id', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
     const _idOrKey = 'k5';
-    expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, _idOrKey)).toBe(false);
+    expect((0, _ChartLogic.isChartExist)(_chartsConfig, CHART_TYPE, _idOrKey)).toBe(false);
     const {
       chartSlice,
       isRemoved
-    } = (0, _ChartLogicFn.removeConfig)(_chartsConfig, CHART_TYPE, _idOrKey);
+    } = (0, _ChartLogic.removeConfig)(_chartsConfig, CHART_TYPE, _idOrKey);
     expect(isRemoved).toBe(false);
-    expect((0, _ChartLogicFn.isChartExist)(_chartsConfig, CHART_TYPE, _idOrKey)).toBe(false);
+    expect((0, _ChartLogic.isChartExist)(_chartsConfig, CHART_TYPE, _idOrKey)).toBe(false);
     expect(chartSlice).toBe(_chartsConfig[CHART_TYPE]);
   });
 });
@@ -82,7 +82,7 @@ describe('toTop', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
     const _idOrKey = 'k3';
     expect(_chartsConfig[CHART_TYPE].configs[0].zhConfig.id).not.toBe(_idOrKey);
-    const chartSlice = (0, _ChartLogicFn.toTop)(_chartsConfig, CHART_TYPE, _idOrKey);
+    const chartSlice = (0, _ChartLogic.toTop)(_chartsConfig, CHART_TYPE, _idOrKey);
     expect(_chartsConfig[CHART_TYPE].configs[0].zhConfig.id).toBe(_idOrKey);
     expect(chartSlice.configs[0].zhConfig.id).toBe(_idOrKey);
   });
@@ -91,7 +91,7 @@ describe('removeAll', () => {
   test('should set and return chartSlice with empty configs array', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
     expect(_chartsConfig[CHART_TYPE].configs.length).not.toBe(0);
-    const chartSlice = (0, _ChartLogicFn.removeAll)(_chartsConfig, CHART_TYPE);
+    const chartSlice = (0, _ChartLogic.removeAll)(_chartsConfig, CHART_TYPE);
     expect(_chartsConfig[CHART_TYPE].configs.length).toBe(0);
     expect(chartSlice.configs.length).toBe(0);
   });
@@ -111,7 +111,7 @@ describe('updateMovingValues', () => {
       _id: "k3"
     };
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
-    (0, _ChartLogicFn.updateMovingValues)(_chartsConfig, CHART_TYPE, [VM0, VM1, VM2]);
+    (0, _ChartLogic.updateMovingValues)(_chartsConfig, CHART_TYPE, [VM0, VM1, VM2]);
     expect(_getVm(_chartsConfig, CHART_TYPE, 0)).toBe(VM0);
     expect(_getVm(_chartsConfig, CHART_TYPE, 1)).toBe(VM1);
     expect(_getVm(_chartsConfig, CHART_TYPE, 2)).toBe(VM2);
@@ -128,11 +128,11 @@ describe('updateMovingValues', () => {
     const _chartsConfig = _crChartsConfig(CHART_TYPE);
     const _prevVm0 = _getVm(_chartsConfig, CHART_TYPE, 0);
     const _prevVm1 = _getVm(_chartsConfig, CHART_TYPE, 1);
-    (0, _ChartLogicFn.updateMovingValues)(_chartsConfig, CHART_TYPE, [VM0, VM1]);
+    (0, _ChartLogic.updateMovingValues)(_chartsConfig, CHART_TYPE, [VM0, VM1]);
     expect(_getVm(_chartsConfig, CHART_TYPE, 0)).not.toBe(VM0);
     expect(_getVm(_chartsConfig, CHART_TYPE, 0)).toBe(_prevVm0);
     expect(_getVm(_chartsConfig, CHART_TYPE, 1)).not.toBe(VM1);
     expect(_getVm(_chartsConfig, CHART_TYPE, 1)).toBe(_prevVm1);
   });
 });
-//# sourceMappingURL=ChartLogicFn.test.js.map
+//# sourceMappingURL=ChartLogic.test.js.map

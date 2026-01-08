@@ -3,25 +3,19 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.updateMovingValues = exports.toTop = exports.sortBy = exports.showChart = exports.setAlertItemIdTo = exports.scanPostAdded = exports.removeConfig = exports.removeAll = exports.loadConfig = exports.isChartExist = exports.checkBrowserChartTypes = void 0;
-var _ChartLogicFn = require("./ChartLogicFn");
-exports.isChartExist = _ChartLogicFn.isChartExist;
-exports.removeConfig = _ChartLogicFn.removeConfig;
-exports.toTop = _ChartLogicFn.toTop;
-exports.removeAll = _ChartLogicFn.removeAll;
-exports.updateMovingValues = _ChartLogicFn.updateMovingValues;
 var _ModalDialogType = require("../../../constants/ModalDialogType");
+var _isTypeFn = require("../../../utils/isTypeFn");
+var _fItemContainer = require("../../logic/fItemContainer");
 var _compStore = require("../compStore");
 var _chartCheckBoxLogic = require("../chartCheckBoxLogic");
 var _contCheckBoxLogic = require("../contCheckBoxLogic");
-var _fItemContainer = require("../../logic/fItemContainer");
-var _storeApi = require("../../storeApi");
 var _getSubSliceOf = require("./getSubSliceOf");
 var _fCompareBy = _interopRequireDefault(require("./fCompareBy"));
 const _isSecondDotCase = (series, _ref) => {
   let {
     seriaType
   } = _ref;
-  return seriaType === 'DOT_SET' && (0, _storeApi.isArr)(series) && series[0].type === 'scatter' && series.length === 2;
+  return seriaType === 'DOT_SET' && (0, _isTypeFn.isArr)(series) && series[0].type === 'scatter' && series.length === 2;
 };
 const _initChartSlice = (slice, chartType, config) => {
   if (!slice[chartType]) {
@@ -32,6 +26,12 @@ const _initChartSlice = (slice, chartType, config) => {
     };
   }
 };
+const _crItemContainerEl = (browserType, dialogConf) => ({
+  Comp: (0, _fItemContainer.crItemContainerEl)({
+    browserType,
+    dialogConf
+  })
+});
 const loadConfig = (slice, config, option, dialogConf) => {
   const {
       chartType,
@@ -46,12 +46,7 @@ const loadConfig = (slice, config, option, dialogConf) => {
     };
   } else {
     _initChartSlice(slice, chartType, config);
-    return {
-      Comp: (0, _fItemContainer.crItemContainerEl)({
-        browserType,
-        dialogConf
-      })
-    };
+    return _crItemContainerEl(browserType, dialogConf);
   }
 };
 exports.loadConfig = loadConfig;
@@ -64,12 +59,7 @@ const showChart = (slice, chartType, browserType, dialogConf) => {
     };
   } else {
     _initChartSlice(slice, chartType);
-    return {
-      Comp: (0, _fItemContainer.crItemContainerEl)({
-        browserType,
-        dialogConf
-      })
-    };
+    return _crItemContainerEl(browserType, dialogConf);
   }
 };
 exports.showChart = showChart;
@@ -105,7 +95,63 @@ const setAlertItemIdTo = option => {
     alertItemId,
     value
   } = option;
-  option.alertItemId = (0, _storeApi.isStr)(alertItemId) ? alertItemId : (0, _storeApi.isStr)(value) ? value : void 0;
+  option.alertItemId = (0, _isTypeFn.isStr)(alertItemId) ? alertItemId : (0, _isTypeFn.isStr)(value) ? value : void 0;
 };
 exports.setAlertItemIdTo = setAlertItemIdTo;
+const _getConfigId = c => c.zhConfig.id;
+const _notConfById = id => c => _getConfigId(c) !== id;
+const _confById = id => c => _getConfigId(c) === id;
+const _getConfigKey = c => c.zhConfig.key;
+const isChartExist = (slice, chartType, key) => {
+  const configs = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType)[1];
+  for (let config of configs) {
+    if (_getConfigKey(config) === key) {
+      return true;
+    }
+  }
+  return false;
+};
+exports.isChartExist = isChartExist;
+const removeConfig = (slice, chartType, id) => {
+  const [chartSlice, configs] = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType);
+  chartSlice.configs = configs.filter(_notConfById(id));
+  return {
+    chartSlice,
+    isRemoved: configs.length > chartSlice.configs.length
+  };
+};
+exports.removeConfig = removeConfig;
+const toTop = (slice, chartType, id) => {
+  const [chartSlice, configs] = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType),
+    _conf = configs.find(_confById(id));
+  if (_conf) {
+    const arrWithout = configs.filter(_notConfById(id));
+    chartSlice.configs = [_conf, ...arrWithout];
+  }
+  return chartSlice;
+};
+exports.toTop = toTop;
+const removeAll = (slice, chartType) => {
+  const _slice = slice[chartType] || {};
+  _slice.configs = [];
+  return _slice;
+};
+exports.removeAll = removeAll;
+const _isRequireUpdateMovingValues = (configs, movingValues) => configs.length === movingValues.length;
+const updateMovingValues = (slice, chartType, movingValues) => {
+  const configs = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType)[1];
+  if (_isRequireUpdateMovingValues(configs, movingValues)) {
+    const _hmConfigs = configs.reduce((hm, config) => {
+      hm[_getConfigId(config)] = config;
+      return hm;
+    }, Object.create(null));
+    movingValues.forEach(mv => {
+      const _config = _hmConfigs[mv._id];
+      if (_config) {
+        _config.valueMoving = mv;
+      }
+    });
+  }
+};
+exports.updateMovingValues = updateMovingValues;
 //# sourceMappingURL=ChartLogic.js.map
