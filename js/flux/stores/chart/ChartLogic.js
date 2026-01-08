@@ -15,7 +15,7 @@ var _chartCheckBoxLogic = require("../chartCheckBoxLogic");
 var _contCheckBoxLogic = require("../contCheckBoxLogic");
 var _fItemContainer = require("../../logic/fItemContainer");
 var _storeApi = require("../../storeApi");
-var _getSlice = _interopRequireDefault(require("./getSlice"));
+var _getSubSliceOf = require("./getSubSliceOf");
 var _fCompareBy = _interopRequireDefault(require("./fCompareBy"));
 const _isSecondDotCase = (series, _ref) => {
   let {
@@ -37,10 +37,7 @@ const loadConfig = (slice, config, option, dialogConf) => {
       chartType,
       browserType
     } = option,
-    {
-      chartSlice,
-      configs
-    } = (0, _getSlice.default)(slice, chartType);
+    [chartSlice, configs] = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType);
   if (chartSlice) {
     configs.unshift(config);
     chartSlice.isShow = true;
@@ -59,9 +56,7 @@ const loadConfig = (slice, config, option, dialogConf) => {
 };
 exports.loadConfig = loadConfig;
 const showChart = (slice, chartType, browserType, dialogConf) => {
-  const {
-    chartSlice
-  } = (0, _getSlice.default)(slice, chartType);
+  const chartSlice = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType)[0];
   if (chartSlice) {
     chartSlice.isShow = true;
     return {
@@ -79,10 +74,7 @@ const showChart = (slice, chartType, browserType, dialogConf) => {
 };
 exports.showChart = showChart;
 const sortBy = (slice, chartType, by) => {
-  const {
-    chartSlice,
-    configs
-  } = (0, _getSlice.default)(slice, chartType);
+  const [chartSlice, configs] = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType);
   if (by) {
     configs.sort((0, _fCompareBy.default)(by));
   } else {

@@ -16,7 +16,7 @@ import { getActiveContCheckBox } from '../contCheckBoxLogic';
 import { crItemContainerEl } from '../../logic/fItemContainer';
 import { isArr, isStr } from '../../storeApi';
 
-import getSlice from './getSlice';
+import { getSubSliceOf } from './getSubSliceOf';
 import fCompareBy from './fCompareBy';
 
 const _isSecondDotCase = (
@@ -51,10 +51,10 @@ export const loadConfig = (
       chartType,
       browserType
     } = option
-    , {
+    , [
       chartSlice,
       configs
-    } = getSlice(slice, chartType);
+    ] = getSubSliceOf(slice, chartType);
     if (chartSlice){
       configs.unshift(config);
       chartSlice.isShow = true;
@@ -73,7 +73,7 @@ export const showChart = (
   browserType,
   dialogConf
 ) => {
-   const { chartSlice } = getSlice(slice, chartType);
+   const chartSlice = getSubSliceOf(slice, chartType)[0];
    if (chartSlice){
      chartSlice.isShow = true;
      return { chartSlice };
@@ -90,10 +90,10 @@ export const sortBy = (
   chartType,
   by
 ) => {
-  const {
+  const [
     chartSlice,
     configs
-  } = getSlice(slice, chartType);
+  ] = getSubSliceOf(slice, chartType);
   if (by) {
     configs.sort(fCompareBy(by))
   } else {
