@@ -1,6 +1,7 @@
 import {
   crRouter,
-  crGetRoute
+  crGetRoute,
+  crIdLookup
 } from '../crRouter';
 
 describe("crRouter", () => {
@@ -47,4 +48,17 @@ describe("crGetRoute", ()=>{
     expect(getRoute("d")).toBe("c")
   })
 
+})
+
+describe('crIdLookup', ()=>{
+  const fn = crIdLookup;
+  test('should return object as id lookup from array and getId function',()=>{
+    const arr = [{id:1},{id:2},{id:3}]
+    , getId = item => item.id;
+    expect(fn(arr, getId)).toEqual({
+      1: {id: 1},
+      2: {id: 2},
+      3: {id: 3}
+    })
+  })
 })

@@ -1,5 +1,6 @@
 import { MDT_COLUMN_RANGE } from '../../../constants/ModalDialogType';
 import { isArr, isStr } from '../../../utils/isTypeFn';
+import { crIdLookup } from '../../../utils/crRouter';
 
 import { crItemContainerEl } from '../../logic/fItemContainer';
 
@@ -198,11 +199,7 @@ export const updateMovingValues = (
 ) => {
   const configs = getSubSliceOf(slice, chartType)[1];
   if (_isRequireUpdateMovingValues(configs, movingValues)) {
-    const _hmConfigs = configs.reduce((hm, config) => {
-      hm[_getConfigId(config)] = config;
-      return hm;
-    }, Object.create(null));
-
+    const _hmConfigs = crIdLookup(configs, _getConfigId);    
     movingValues.forEach(mv => {
       const _config = _hmConfigs[mv._id];
       if (_config) {

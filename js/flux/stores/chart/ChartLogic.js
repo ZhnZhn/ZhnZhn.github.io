@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.updateMovingValues = exports.toTop = exports.sortBy = exports.showChart = exports.setAlertItemIdTo = exports.scanPostAdded = exports.removeConfig = exports.removeAll = exports.loadConfig = exports.isChartExistImpl = exports.checkBrowserChartTypes = void 0;
 var _ModalDialogType = require("../../../constants/ModalDialogType");
 var _isTypeFn = require("../../../utils/isTypeFn");
+var _crRouter = require("../../../utils/crRouter");
 var _fItemContainer = require("../../logic/fItemContainer");
 var _compStore = require("../compStore");
 var _chartCheckBoxLogic = require("../chartCheckBoxLogic");
@@ -141,10 +142,7 @@ const _isRequireUpdateMovingValues = (configs, movingValues) => configs.length =
 const updateMovingValues = (slice, chartType, movingValues) => {
   const configs = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType)[1];
   if (_isRequireUpdateMovingValues(configs, movingValues)) {
-    const _hmConfigs = configs.reduce((hm, config) => {
-      hm[_getConfigId(config)] = config;
-      return hm;
-    }, Object.create(null));
+    const _hmConfigs = (0, _crRouter.crIdLookup)(configs, _getConfigId);
     movingValues.forEach(mv => {
       const _config = _hmConfigs[mv._id];
       if (_config) {

@@ -3,11 +3,12 @@ import {
   isStr
 } from './isTypeFn';
 
+const _crObjectWithNullPrototype = () => Object.create(null)
 export const crRouter = (
   obj
 ) => isObj(obj)
   ? Object.setPrototypeOf(obj, null)
-  : Object.create(null)
+  : _crObjectWithNullPrototype()
 
 export const crGetRoute = (
   routes,
@@ -18,3 +19,11 @@ export const crGetRoute = (
     ? _router[routeId] || dfRoute
     : dfRoute;
 }
+
+export const crIdLookup = (
+  arr,
+  getId
+) => arr.reduce((idLookup, item) => {
+  idLookup[getId(item)] = item
+  return idLookup;
+}, _crObjectWithNullPrototype())
