@@ -1,12 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.getCrPointName = exports.crPointName = exports.addPercentAndColorToData = exports.addColorsTo = void 0;
 var _Color = require("../constants/Color");
 var _isTypeFn = require("../utils/isTypeFn");
 var _domFn = require("../utils/domFn");
-var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
+var _formatNumberFn = require("../utils/formatNumberFn");
 var _mathFn = require("../math/mathFn");
 var _compareByFn = require("./compareByFn");
 var _CL = require("./CL");
@@ -59,7 +58,7 @@ const addColorsTo = _ref => {
   return [sumOfPercentLevel1, sumOfPercentLevel2];
 };
 exports.addColorsTo = addColorsTo;
-const _crValuePercentToken = (percent, value) => `${(0, _formatNumber.default)(value)} (${percent}%)`,
+const _crValuePercentToken = (percent, value) => `${(0, _formatNumberFn.formatNumber)(value)} (${percent}%)`,
   _crPercentToken = percent => percent >= 1 ? `${percent}%` : `.${('' + percent).split(".")[1]}%`,
   _fCrName = crToken => (label, percent, value) => (0, _domFn.domSanitize)(`${label}<br/><span class="${_CL.CL_TREE_MAP_PERCENT_BLACK}">${crToken(percent, value)}</span>`),
   _crValuePercentName = _fCrName(_crValuePercentToken),

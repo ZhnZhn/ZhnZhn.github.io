@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
-var _formatAllNumber = _interopRequireDefault(require("../../utils/formatAllNumber"));
+var _formatNumberFn = require("../../utils/formatNumberFn");
 var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
@@ -36,7 +36,7 @@ const RowValueDate = _ref => {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: S_ROW,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanValue, {
-      children: (0, _formatAllNumber.default)(value)
+      children: (0, _formatNumberFn.formatAllNumber)(value)
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SpanToken.SpanDate, {
       style: S_DATE,
       children: date

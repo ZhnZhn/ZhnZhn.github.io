@@ -15,8 +15,7 @@ var _big = _interopRequireDefault(require("big.js"));
 var _seriaFn = require("../math/seriaFn");
 var _seriaHelperFn = require("../math/seriaHelperFn");
 var _isTypeFn = require("../utils/isTypeFn");
-var _formatNumber2 = _interopRequireDefault(require("../utils/formatNumber"));
-var _formatAllNumber = _interopRequireDefault(require("../utils/formatAllNumber"));
+var _formatNumberFn = require("../utils/formatNumberFn");
 var _Chart = require("./Chart");
 const _assign = Object.assign,
   INITIAL_MAX_NUMBER = Number.NEGATIVE_INFINITY,
@@ -92,12 +91,11 @@ const _renderSeriesLabel = (chart, labelText, x, y, color) => chart.renderer.tex
   'font-weight': 800
 }).add();
 const _getMinMaxFromSeries = (series, options) => {
-  var _options$yAxis;
   const {
       minY,
       maxY
     } = series || {},
-    _optionYAxis = options == null || (_options$yAxis = options.yAxis) == null ? void 0 : _options$yAxis[0],
+    _optionYAxis = options?.yAxis?.[0],
     {
       min,
       max
@@ -107,29 +105,28 @@ const _getMinMaxFromSeries = (series, options) => {
   return [(0, _isTypeFn.isNumber)(_min) ? _min : null, (0, _isTypeFn.isNumber)(_max) ? _max : null];
 };
 const _updateYAxisMinMax = (_ref2, options) => {
-  var _chart$yAxis;
   let {
     hasSecondYAxis,
     series,
     chart
   } = _ref2;
-  const _yAxis = chart == null || (_chart$yAxis = chart.yAxis) == null ? void 0 : _chart$yAxis[0];
-  if (!hasSecondYAxis && (0, _isTypeFn.isFn)(_yAxis == null ? void 0 : _yAxis.update)) {
+  const _yAxis = chart?.yAxis?.[0];
+  if (!hasSecondYAxis && (0, _isTypeFn.isFn)(_yAxis?.update)) {
     const [min, max] = _getMinMaxFromSeries(series, options);
     _yAxis.setExtremes(min, max, true);
   }
 };
-const _formatNumber = n => (0, _formatAllNumber.default)((0, _mathFn.toFixedNumber)(n));
+const _formatNumber = n => (0, _formatNumberFn.formatAllNumber)((0, _mathFn.toFixedNumber)(n));
 const _setPlotLine = function (plotLine, value, delta) {
   if (delta === void 0) {
     delta = '';
   }
   if (plotLine) {
     plotLine.value = value;
-    plotLine.label.text = "" + _formatNumber(value) + delta;
+    plotLine.label.text = `${_formatNumber(value)}${delta}`;
   }
 };
-const _crDelta = perToValue => "\xA0\xA0\u0394 " + perToValue + "%",
+const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`,
   _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10),
   _calcPerTo = (bFrom, bValue, bTotal) => (0, _mathFn.calcPercent)({
     bValue: bFrom.minus(bValue),
@@ -189,7 +186,7 @@ const crValueMoving = (chart, prev, dateTo) => {
   return (0, _isTypeFn.isNumber)(valueTo) ? _assign({}, prev, (0, _mathFn.crValueMoving)({
     nowValue: prev.value,
     prevValue: valueTo,
-    fnFormat: _formatAllNumber.default
+    fnFormat: _formatNumberFn.formatAllNumber
   }), {
     valueTo,
     dateTo,
@@ -197,8 +194,8 @@ const crValueMoving = (chart, prev, dateTo) => {
   }) : void 0;
 };
 exports.crValueMoving = crValueMoving;
-const toNumberFormat = exports.toNumberFormat = _formatNumber2.default;
-const toNumberFormatAll = exports.toNumberFormatAll = _formatAllNumber.default;
+const toNumberFormat = exports.toNumberFormat = _formatNumberFn.formatNumber;
+const toNumberFormatAll = exports.toNumberFormatAll = _formatNumberFn.formatAllNumber;
 const crTpId = () => (0, _mathFn.crId)('TP_');
 exports.crTpId = crTpId;
 const setPlotLinesMinMax = _ref4 => {

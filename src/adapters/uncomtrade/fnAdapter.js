@@ -19,7 +19,7 @@ import {
   isPositiveNumber,
 } from '../../utils/isTypeFn';
 import { domSanitize } from '../../utils/domFn';
-import formatNumber from '../../utils/formatNumber';
+import { formatNumber } from '../../utils/formatNumberFn';
 
 import { isCategory } from '../CategoryFn';
 

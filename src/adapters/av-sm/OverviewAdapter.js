@@ -1,5 +1,5 @@
 import { CIT_INFO_ITEM } from '../../constants/CompItemType';
-import { numberFormat } from '../AdapterFn';
+import { formatAllNumber } from '../../utils/formatNumberFn';
 
 const DESCR_STYLE = {
   lineHeight: 1.5,
@@ -21,7 +21,7 @@ const _getProp = (
 , _crMetricToken = (
   name,
   json
-) => `${name} ${numberFormat(json[name])}`
+) => `${name} ${formatAllNumber(json[name])}`
 , _crIncomeMetricsTokens = json => [
   `${_crMetricToken("RevenueTTM", json)}`,
   `${_crMetricToken("RevenuePerShareTTM", json)}`,

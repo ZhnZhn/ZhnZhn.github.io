@@ -1,1 +1,35 @@
-{"version":3,"sources":["../../src/utils/crCurrencyFormatter.js"],"names":["LOCALE","_getLocale","Array","isArray","navigator","languages","language","_crCurrencyFormatter","currency","restProps","_f","Intl","NumberFormat","style","format","number","crCurrencyFormatter","options","formatNumber"],"mappings":";;;;;;;;;;;AAAA;;AAEA,IAAIA,MAAJ;;AAEA,IAAMC,UAAU,GAAG,SAAbA,UAAa;AAAA,SAAMD,MAAM,KAC9BA,MAAM,GAAGE,KAAK,CAACC,OAAN,CAAcC,SAAS,CAACC,SAAxB,IACLD,SAAS,CAACC,SAAV,CAAoB,CAApB,CADK,GAELD,SAAS,CAACE,QAAV,IAAsB,IAF1B,EAEgCN,MAHF,CAAZ;AAAA,CAAnB;;AAKA,IAAMO,oBAAoB,GAAG,SAAvBA,oBAAuB;AAAA,gCAG3B,EAH2B;AAAA,2BAC3BC,QAD2B;AAAA,MAC3BA,QAD2B,8BAClB,KADkB;AAAA,MAExBC,SAFwB;;AAAA,SAGnB;AACRC,IAAAA,EAAE,EAAE,IAAIC,IAAI,CAACC,YAAT,CAAsBX,UAAU,EAAhC;AACDY,MAAAA,KAAK,EAAE,UADN;AAEDL,MAAAA,QAAQ,EAARA;AAFC,OAGEC,SAHF,EADI;AAMRK,IAAAA,MAAM,EAAE,gBAASC,MAAT,EAAiB;AACvB,aAAOA,MAAM,IAAI,IAAV,GACH,KAAKL,EAAL,CAAQI,MAAR,CAAe,CAAf,CADG,GAEH,KAAKJ,EAAL,CAAQI,MAAR,CAAeC,MAAf,CAFJ;AAGD;AAVO,GAHmB;AAAA,CAA7B;;AAgBA,IAAMC,mBAAmB,GAAG,SAAtBA,mBAAsB,CAACC,OAAD,EAAa;AACvC,SAAON,IAAI,IAAIA,IAAI,CAACC,YAAb,GACHL,oBAAoB,CAACU,OAAD,CADjB,GAEH;AAAEH,IAAAA,MAAM,EAAEI;AAAV,GAFJ;AAGD,CAJD;;eAMeF,mB","sourcesContent":["import formatNumber from './formatNumber'\r\n\r\nlet LOCALE;\r\n\r\nconst _getLocale = () => LOCALE || (\r\n LOCALE = Array.isArray(navigator.languages)\r\n   ? navigator.languages[0]\r\n   : navigator.language || 'en', LOCALE);\r\n\r\nconst _crCurrencyFormatter = ({\r\n  currency='USD',\r\n  ...restProps\r\n}={}) => ({\r\n  _f: new Intl.NumberFormat(_getLocale(), {\r\n     style: 'currency',\r\n     currency,\r\n     ...restProps\r\n  }),\r\n  format: function(number) {\r\n    return number == null\r\n      ? this._f.format(0)\r\n      : this._f.format(number);\r\n  }\r\n})\r\n\r\nconst crCurrencyFormatter = (options) => {\r\n  return Intl && Intl.NumberFormat\r\n    ? _crCurrencyFormatter(options)\r\n    : { format: formatNumber };\r\n};\r\n\r\nexport default crCurrencyFormatter\r\n"],"file":"crCurrencyFormatter.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/crCurrencyFormatter.js"
+ ],
+ "file": "../../src/utils/crCurrencyFormatter.js",
+ "names": [
+  "_formatNumberFn",
+  "require",
+  "LOCALE",
+  "_getLocale",
+  "Array",
+  "isArray",
+  "navigator",
+  "languages",
+  "language",
+  "_crCurrencyFormatter",
+  "_temp",
+  "currency",
+  "restProps",
+  "_f",
+  "Intl",
+  "NumberFormat",
+  "style",
+  "format",
+  "number",
+  "crCurrencyFormatter",
+  "options",
+  "formatNumber",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,eAAA,GAAAC,OAAA;AAEA,IAAIC,MAAM;AAEV,MAAMC,UAAU,GAAGA,CAAA,KAAMD,MAAM,KAC9BA,MAAM,GAAGE,KAAK,CAACC,OAAO,CAACC,SAAS,CAACC,SAAS,CAAC,GACvCD,SAAS,CAACC,SAAS,CAAC,CAAC,CAAC,GACtBD,SAAS,CAACE,QAAQ,IAAI,IAAI,EAAEN,MAAM,CAAC;AAExC,MAAMO,oBAAoB,GAAG,SAAAA,CAAAC,KAAA;EAAA,IAAC;IAC5BC,QAAQ,GAAC,KAAK;IACd,GAAGC;EACL,CAAC,GAAAF,KAAA,cAAC,CAAC,CAAC,GAAAA,KAAA;EAAA,OAAM;IACRG,EAAE,EAAE,IAAIC,IAAI,CAACC,YAAY,CAACZ,UAAU,CAAC,CAAC,EAAE;MACrCa,KAAK,EAAE,UAAU;MACjBL,QAAQ;MACR,GAAGC;IACN,CAAC,CAAC;IACFK,MAAM,EAAE,SAAAA,CAASC,MAAM,EAAE;MACvB,OAAOA,MAAM,IAAI,IAAI,GACjB,IAAI,CAACL,EAAE,CAACI,MAAM,CAAC,CAAC,CAAC,GACjB,IAAI,CAACJ,EAAE,CAACI,MAAM,CAACC,MAAM,CAAC;IAC5B;EACF,CAAC;AAAA,CAAC;AAEF,MAAMC,mBAAmB,GAAIC,OAAO,IAAK;EACvC,OAAON,IAAI,IAAIA,IAAI,CAACC,YAAY,GAC5BN,oBAAoB,CAACW,OAAO,CAAC,GAC7B;IAAEH,MAAM,EAAEI;EAAa,CAAC;AAC9B,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaL,mBAAmB"
+}

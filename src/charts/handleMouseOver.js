@@ -1,4 +1,4 @@
-import formatNumber from '../utils/formatNumber';
+import { formatNumber } from '../utils/formatNumberFn';
 
 import { formatDate } from './dateFormat';
 import calcYAxisOffset from './calcYAxisOffset';

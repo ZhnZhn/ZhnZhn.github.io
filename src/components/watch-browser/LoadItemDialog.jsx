@@ -12,7 +12,9 @@ import {
   isYmd,
   mlsToDmy
 } from '../../utils/dateFn';
-import formatNumber from '../../utils/formatNumber';
+import {
+  formatNumber
+} from '../../utils/formatNumberFn';
 
 import {
   loadItem

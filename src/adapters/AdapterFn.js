@@ -3,7 +3,7 @@ import Big from 'big.js';
 import { toTd as _toTd } from '../charts/dateFormat';
 
 import { joinByComma } from '../utils/arrFn';
-import formatAllNumber from '../utils/formatAllNumber';
+import { formatAllNumber } from '../utils/formatNumberFn';
 
 import {
   getCaption,
@@ -61,8 +61,6 @@ export const toTd = (mls) => isNumber(mls)
   : ''
 
 export const getValues = option => option.items.map(getValue)
-
-export const numberFormat = formatAllNumber
 export const isYNumber = _fIsNumber('y')
 
 const DF_ERR_MESSAGE = 'No data available for request.'

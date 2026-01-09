@@ -1,6 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.ymdToUTC = exports.valueMoving = exports.sortDescByPnValue = exports.isCategoryByPartnerCase = exports.isAggregateByHs = exports.getItemTradeValue = exports.getItemPeriod = exports.getItemCmdDescE = exports.getItemCmdCode = exports.getHmTradePartners = exports.crZhConfig = exports.crInfo = exports.crEmptyHmObject = exports.crChartId = exports.crCategoryTitle = exports.crCategoryData = exports.addSumOfPercentToSubtitle = void 0;
 var _AdapterFn = require("../AdapterFn");
@@ -10,7 +9,7 @@ var _ChartType = require("../../constants/ChartType");
 var _arrFn = require("../../utils/arrFn");
 var _isTypeFn = require("../../utils/isTypeFn");
 var _domFn = require("../../utils/domFn");
-var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
+var _formatNumberFn = require("../../utils/formatNumberFn");
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 exports.sortDescByPnValue = _compareByFn.sortDescByPnValue;
@@ -127,7 +126,7 @@ const crZhConfig = function (option, _temp) {
     id: _id,
     key: _id,
     itemCaption: option.oneC,
-    itemValue: itemValue && (0, _formatNumber.default)(itemValue),
+    itemValue: itemValue && (0, _formatNumberFn.formatNumber)(itemValue),
     itemTime: option.time,
     isWithoutIndicator: isWi,
     dataSource: option.dataSource

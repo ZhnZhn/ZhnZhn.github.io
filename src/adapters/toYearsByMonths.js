@@ -1,4 +1,7 @@
 import pipe from '../utils/pipe';
+import {
+  formatAllNumber
+} from '../utils/formatNumberFn';
 
 import {
   crCategoryConfig,
@@ -23,8 +26,7 @@ import {
 
 import {
   crError,
-  crValueMoving,
-  numberFormat
+  crValueMoving
 } from './AdapterFn';
 
 const CATEGORIES = [
@@ -308,7 +310,7 @@ const _crValueMoving = (
     ...moving,
     date,
     dateTo,
-    valueTo: numberFormat(bPrevValue),
+    valueTo: formatAllNumber(bPrevValue),
     isDenyToChange: true
   };
 };

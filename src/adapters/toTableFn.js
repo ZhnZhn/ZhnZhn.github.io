@@ -1,18 +1,17 @@
 import {
-  safeLoopOfArray
-} from "../utils/arrFn";
-import {
   isTypeNumber,
   isStr
 } from "../utils/isTypeFn";
+import {
+  safeLoopOfArray
+} from "../utils/arrFn";
+import {
+  formatAllNumber
+} from "../utils/formatNumberFn";
 
 import {
   roundBy
 } from "../math/mathFn";
-
-import {
-  numberFormat
-} from "./AdapterFn";
 
 export const crNameProps = (
   name,
@@ -106,7 +105,7 @@ export const crTableOptions = (
   rows,
   dataSource,
   tableFn: {
-    numberFormat,
+    numberFormat: formatAllNumber,
     ...fns
   }
 })

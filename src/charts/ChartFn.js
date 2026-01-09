@@ -27,11 +27,12 @@ import {
   isNumber,
   isArr
 } from '../utils/isTypeFn';
-import formatNumber from '../utils/formatNumber';
-import formatAllNumber from '../utils/formatAllNumber';
+import {
+  formatNumber,
+  formatAllNumber
+} from '../utils/formatNumberFn';
 
 import { fSecondYAxis } from './Chart';
-
 
 const _assign = Object.assign
 

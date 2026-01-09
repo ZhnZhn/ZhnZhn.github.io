@@ -6,7 +6,7 @@ exports.default = void 0;
 var _LoadType = require("../../constants/LoadType");
 var _BrowserType = require("../../constants/BrowserType");
 var _dateFn = require("../../utils/dateFn");
-var _formatNumber = _interopRequireDefault(require("../../utils/formatNumber"));
+var _formatNumberFn = require("../../utils/formatNumberFn");
 var _itemStore = require("../../flux/stores/itemStore");
 var _uiApi = require("../uiApi");
 var _has = require("../has");
@@ -40,7 +40,7 @@ const _crValue = function (x, y) {
   if (y === void 0) {
     y = '';
   }
-  return `${(0, _formatNumber.default)(y)} ${(0, _dateFn.mlsToDmy)(x)}`.trim();
+  return `${(0, _formatNumberFn.formatNumber)(y)} ${(0, _dateFn.mlsToDmy)(x)}`.trim();
 };
 const HAS_WIDE_WIDTH = (0, _has.isWideWidth)(),
   DF_DATA = {},

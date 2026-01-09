@@ -4,16 +4,15 @@ import {
   isPositiveNumber,
   getObjectKeys
 } from '../../utils/isTypeFn';
-
 import {
   toUpperCaseFirst
 } from '../../utils/strFn';
+import {
+  formatAllNumber
+} from '../../utils/formatNumberFn';
 
 import crAdapterCategory from '../crAdapterCategory';
-import {
-  numberFormat,
-  crShortItemCaption
-} from '../AdapterFn';
+import { crShortItemCaption } from '../AdapterFn';
 import { crCategoryPoint } from '../CategoryFn';
 import { sortDescCategory } from '../compareByFn';
 
@@ -29,7 +28,7 @@ const _getByProps = (
 
 const crItemCaption = ({
   itemCaption
-}, json) => `${crShortItemCaption(itemCaption)} ${numberFormat(_getByProps(json, "net_assets"), "")}`;
+}, json) => `${crShortItemCaption(itemCaption)} ${formatAllNumber(_getByProps(json, "net_assets"), "")}`;
 
 const _crHoldingDescription = (
   item,

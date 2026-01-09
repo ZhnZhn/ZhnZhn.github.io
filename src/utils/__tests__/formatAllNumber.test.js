@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 "use strict";
-import fn from '../formatAllNumber'
+import { formatAllNumber } from '../formatNumberFn'
 
 describe('formatAllNumber', ()=>{
+  const fn = formatAllNumber;
   test('should format value without decimals to str with blanks', ()=>{
     expect(fn(1)).toBe('1')
     expect(fn(10)).toBe('10')

@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 "use strict";
-import fn from "../formatNumber";
+import { formatNumber } from "../formatNumberFn";
 
 describe("formatNumber", ()=>{
+  const fn = formatNumber;
   test("should return str 0.00 for not number", () => {
     expect(fn(NaN)).toBe("0.00")
     expect(fn()).toBe("0.00")

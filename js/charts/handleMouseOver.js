@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _formatNumber = _interopRequireDefault(require("../utils/formatNumber"));
+var _formatNumberFn = require("../utils/formatNumberFn");
 var _dateFormat = require("./dateFormat");
 var _calcYAxisOffset = _interopRequireDefault(require("./calcYAxisOffset"));
 var _CL = require("./CL");
@@ -43,7 +43,7 @@ const _crCrossParam = (point, chart) => {
   };
 };
 const _crCategoryCrossParam = (point, chart) => ({
-  y: (0, _formatNumber.default)(point.y),
+  y: (0, _formatNumberFn.formatNumber)(point.y),
   date: point.x,
   ..._crDelta(chart, DX_CATEGORY, DY_CATEGORY)
 });

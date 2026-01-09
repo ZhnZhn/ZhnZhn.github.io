@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _CompItemType = require("../../constants/CompItemType");
-var _AdapterFn = require("../AdapterFn");
+var _formatNumberFn = require("../../utils/formatNumberFn");
 const DESCR_STYLE = {
     lineHeight: 1.5,
     fontWeight: 'bold'
@@ -13,7 +13,7 @@ const DESCR_STYLE = {
 const _getProp = (propName, json) => json[propName] || '',
   _fGetProp = json => propName => _getProp(propName, json),
   _crAnalystToken = (name, prefix, json) => `${name} ${json[prefix + name]}`,
-  _crMetricToken = (name, json) => `${name} ${(0, _AdapterFn.numberFormat)(json[name])}`,
+  _crMetricToken = (name, json) => `${name} ${(0, _formatNumberFn.formatAllNumber)(json[name])}`,
   _crIncomeMetricsTokens = json => [`${_crMetricToken("RevenueTTM", json)}`, `${_crMetricToken("RevenuePerShareTTM", json)}`, `${_crMetricToken("EBITDA", json)}`, `${_crMetricToken("EPS", json)}`, `${_crMetricToken("DilutedEPSTTM", json)}`, `Q RevenueGrowthYOY ${_getProp("QuarterlyRevenueGrowthYOY", json)}`, `Q EarningsGrowthYOY ${_getProp("QuarterlyEarningsGrowthYOY", json)}`],
   _crAnalystTokens = json => [`${_crAnalystToken("StrongBuy", ANALYST_RATING, json)}`, `${_crAnalystToken("Buy", ANALYST_RATING, json)}`, `${_crAnalystToken("Hold", ANALYST_RATING, json)}`, `${_crAnalystToken("Sell", ANALYST_RATING, json)}`, `${_crAnalystToken("StrongSell", ANALYST_RATING, json)}`],
   _crMarketCapTokens = _getJsonProp => [`50D MA ${_getJsonProp("50DayMovingAverage")}`, `200D MA ${_getJsonProp("200DayMovingAverage")}`, `52W Low ${_getJsonProp("52WeekLow")}`, `52W High ${_getJsonProp("52WeekHigh")}`],

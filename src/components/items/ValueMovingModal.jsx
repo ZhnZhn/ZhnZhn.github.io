@@ -2,8 +2,9 @@ import {
   isBool,
   isFn
 } from '../../utils/isTypeFn';
-
-import formatAllNumber from '../../utils/formatAllNumber';
+import {
+  formatAllNumber
+} from '../../utils/formatNumberFn';
 
 import {
   useState,
