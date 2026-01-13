@@ -40,7 +40,7 @@
     "cryptocurrency-prices"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.28.4",
+    "@babel/runtime": "^7.28.6",
     "big.js": "^6.2.2",
     "dompurify": "^3.3.1",
     "highcharts": "^9.1.2",
@@ -51,11 +51,11 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.5",
-    "@babel/eslint-parser": "^7.28.5",
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.28.6",
+    "@babel/eslint-parser": "^7.28.6",
     "@babel/plugin-transform-runtime": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-env": "^7.28.6",
     "@babel/preset-react": "^7.28.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
     "@testing-library/dom": "^10.4.1",
