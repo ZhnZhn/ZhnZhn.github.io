@@ -49,6 +49,15 @@ export const roundBy = (nOrStr, by=2) => {
     : _floatOrNaN;
 }
 
+export const calcAvg = (
+  arr
+) => arr.length === 0
+  ? 0
+  : parseFloat('' + arr
+      .reduce((bAcc, a) => bAcc.add(a), Big(0))
+      .div(arr.length)
+  )
+
 export const calcPercent = ({
   bValue=Big(0),
   bTotal=Big(0)

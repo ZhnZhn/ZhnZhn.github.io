@@ -21,6 +21,7 @@ import {
 } from '../components/styleFn';
 
 import {
+  calcAvg,
   roundBy
 } from '../math/mathFn';
 
@@ -99,14 +100,8 @@ const _crHighLowPoint = (key, arr) => ({
   c: key,
   ..._findHighLow(arr)
 });
-const _calcAvg = (arr) => {
-  const sum = arr.reduce((acc, a) => acc + a, 0)
-  return arr.length !== 0
-    ? roundBy(sum/arr.length, 4)
-    : 0;
-};
 const _crAvgPoint = (key, arr) => ({
-  y: _calcAvg(arr),
+  y: roundBy(calcAvg(arr), 4),
   c: key
 });
 

@@ -1,6 +1,7 @@
 import Big from 'big.js';
 import {
   roundBy,
+  calcAvg,
   calcPercent,
   crValueMoving,
   toFixed,
@@ -40,6 +41,7 @@ describe('roundBy', () => {
     expect(fn('1.005', 2)).toBe(1.01)
 
     expect(fn(0)).toBe(0)
+    expect(fn(0, 2)).toBe(0)
   })
   test('should return null for null or undefined', ()=>{
     expect(fn(null)).toBe(null)
@@ -51,6 +53,20 @@ describe('roundBy', () => {
     expect(fn(true)).toBeNaN()
     expect(fn({})).toBeNaN()
     expect(fn([])).toBeNaN()
+  })
+})
+
+describe('calcAvg', ()=>{
+  const fn = calcAvg;
+  test('should calculate average from array of numbers', ()=>{
+    expect(fn([1,1,1])).toBe(1)
+    expect(fn([2,2,2,2])).toBe(2)
+    expect(fn([3.01,3.01,3.01,3.01])).toBe(3.01)
+
+    expect(fn([1.1,2.2,3.3])).toBe(2.2)
+    expect(fn([1.11,2.22,3.33])).toBe(2.22)
+    expect(fn([1.111,2.222,3.333])).toBe(2.222)
+    expect(fn([1.1111,2.2222,3.3333])).toBe(2.2222)
   })
 })
 

@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toFixedNumber = exports.toFixed = exports.roundBy = exports.isInRange = exports.crValueMoving = exports.crRandomInteger = exports.crId = exports.calcPercent = void 0;
+exports.toFixedNumber = exports.toFixed = exports.roundBy = exports.isInRange = exports.crValueMoving = exports.crRandomInteger = exports.crId = exports.calcPercent = exports.calcAvg = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _isTypeFn = require("../utils/isTypeFn");
 var _DirectionType = require("../constants/DirectionType");
@@ -40,6 +40,8 @@ const roundBy = function (nOrStr, by) {
   return _floatOrNaN - _floatOrNaN === 0 ? parseFloat((0, _big.default)(nOrStr).toFixed(by)) : _floatOrNaN;
 };
 exports.roundBy = roundBy;
+const calcAvg = arr => arr.length === 0 ? 0 : parseFloat('' + arr.reduce((bAcc, a) => bAcc.add(a), (0, _big.default)(0)).div(arr.length));
+exports.calcAvg = calcAvg;
 const calcPercent = _ref => {
   let {
     bValue = (0, _big.default)(0),
