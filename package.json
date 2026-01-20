@@ -70,7 +70,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-testing-library": "^6.5.0",
-    "html-webpack-plugin": "^5.6.5",
+    "html-webpack-plugin": "^5.6.6",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
     "react-refresh": "^0.18.0",
@@ -79,7 +79,7 @@
     "webpack": "^5.104.1",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.2"
+    "webpack-dev-server": "^5.2.3"
   },
   "overrides": {
     "js-yaml": "~4.1.1",
