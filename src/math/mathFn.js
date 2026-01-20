@@ -11,6 +11,9 @@ import {
   DT_EQUAL
 } from '../constants/DirectionType';
 
+export const NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY
+export const POSITIVE_INFINITY = Number.POSITIVE_INFINITY
+
 const MAX_TO_ROUND = 1000000;
 const FN_ECHO = value => value;
 

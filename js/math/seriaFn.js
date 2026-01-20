@@ -64,8 +64,8 @@ const normalize = (d, strDmy) => {
   return _d;
 };
 exports.normalize = normalize;
-const findMinY = exports.findMinY = _fFindY(Number.POSITIVE_INFINITY, _findMinY);
-const findMaxY = exports.findMaxY = _fFindY(Number.NEGATIVE_INFINITY, _findMaxY);
+const findMinY = exports.findMinY = _fFindY(_mathFn.POSITIVE_INFINITY, _findMinY);
+const findMaxY = exports.findMaxY = _fFindY(_mathFn.NEGATIVE_INFINITY, _findMaxY);
 const filterTrimZero = data => {
   if (!(0, _isTypeFn.isArr)(data)) {
     return data;

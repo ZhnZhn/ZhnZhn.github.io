@@ -10,6 +10,8 @@ export { crId } from '../math/mathFn';
 import Big from 'big.js';
 
 import {
+  NEGATIVE_INFINITY,
+  POSITIVE_INFINITY,
   crValueMoving as crVm,
   toFixedNumber,
   calcPercent,
@@ -35,9 +37,6 @@ import {
 import { fSecondYAxis } from './Chart';
 
 const _assign = Object.assign
-
-, INITIAL_MAX_NUMBER = Number.NEGATIVE_INFINITY
-, INITIAL_MIN_NUMBER = Number.POSITIVE_INFINITY
 
 , C1_SECOND_Y_AXIS = '#f45b5b'
 , C2_SECOND_Y_AXIS = '#f7a35c'
@@ -251,10 +250,10 @@ export const setPlotLinesMinMax = ({
    min,
    max
  }) => {
-  if ( max>INITIAL_MAX_NUMBER ){
+  if ( max>POSITIVE_INFINITY ){
     _setPlotLine(plotLines[0], max)
   }
-  if ( min<INITIAL_MIN_NUMBER ){
+  if ( min<NEGATIVE_INFINITY ){
     _setPlotLine(plotLines[1], min)
   }
 }
@@ -265,8 +264,8 @@ export const setPlotLinesDeltas = ({
   max,
   value
 }) => {
-  const _bMax = _crBigValueOrZero(max, INITIAL_MAX_NUMBER)
-  , _bMin = _crBigValueOrZero(min, INITIAL_MIN_NUMBER)
+  const _bMax = _crBigValueOrZero(max, POSITIVE_INFINITY)
+  , _bMin = _crBigValueOrZero(min, NEGATIVE_INFINITY)
   , _bValue = _crBigValueOrZero(value, null)
   , _perToMax = _calcPerTo(_bMax, _bValue, _bValue)
   , _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
@@ -278,8 +277,8 @@ export const setPlotLinesDeltas = ({
 export const calcMinY = (
   min,
   max
-) => max>INITIAL_MAX_NUMBER
-  && min<INITIAL_MIN_NUMBER
+) => max>POSITIVE_INFINITY
+  && min<NEGATIVE_INFINITY
     ? min - ((max-min)*1/6)
     : void 0
 

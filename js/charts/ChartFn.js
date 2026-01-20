@@ -18,8 +18,6 @@ var _isTypeFn = require("../utils/isTypeFn");
 var _formatNumberFn = require("../utils/formatNumberFn");
 var _Chart = require("./Chart");
 const _assign = Object.assign,
-  INITIAL_MAX_NUMBER = Number.NEGATIVE_INFINITY,
-  INITIAL_MIN_NUMBER = Number.POSITIVE_INFINITY,
   C1_SECOND_Y_AXIS = '#f45b5b',
   C2_SECOND_Y_AXIS = '#f7a35c',
   SERIA_LABEL_CHARS = 14,
@@ -204,10 +202,10 @@ const setPlotLinesMinMax = _ref4 => {
     min,
     max
   } = _ref4;
-  if (max > INITIAL_MAX_NUMBER) {
+  if (max > _mathFn.POSITIVE_INFINITY) {
     _setPlotLine(plotLines[0], max);
   }
-  if (min < INITIAL_MIN_NUMBER) {
+  if (min < _mathFn.NEGATIVE_INFINITY) {
     _setPlotLine(plotLines[1], min);
   }
 };
@@ -219,8 +217,8 @@ const setPlotLinesDeltas = _ref5 => {
     max,
     value
   } = _ref5;
-  const _bMax = _crBigValueOrZero(max, INITIAL_MAX_NUMBER),
-    _bMin = _crBigValueOrZero(min, INITIAL_MIN_NUMBER),
+  const _bMax = _crBigValueOrZero(max, _mathFn.POSITIVE_INFINITY),
+    _bMin = _crBigValueOrZero(min, _mathFn.NEGATIVE_INFINITY),
     _bValue = _crBigValueOrZero(value, null),
     _perToMax = _calcPerTo(_bMax, _bValue, _bValue),
     _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
@@ -228,7 +226,7 @@ const setPlotLinesDeltas = _ref5 => {
   _setPlotLine(plotLines[1], _crPoint(_bMin), _crDelta(_perToMin));
 };
 exports.setPlotLinesDeltas = setPlotLinesDeltas;
-const calcMinY = (min, max) => max > INITIAL_MAX_NUMBER && min < INITIAL_MIN_NUMBER ? min - (max - min) * 1 / 6 : void 0;
+const calcMinY = (min, max) => max > _mathFn.POSITIVE_INFINITY && min < _mathFn.NEGATIVE_INFINITY ? min - (max - min) * 1 / 6 : void 0;
 exports.calcMinY = calcMinY;
 const setYToPoints = (data, y) => {
   if (y == null) {

@@ -6,6 +6,7 @@ exports.trJsonToSeria = exports.trJsonToCategory = void 0;
 var _fnFetch = require("../../utils/fnFetch");
 var _fGetLazyValue = require("../../utils/fGetLazyValue");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
+var _mathFn = require("../../math/mathFn");
 var _JsonStatFn = require("../JsonStatFn");
 var _compareByFn = require("../compareByFn");
 const FN_TRUE = () => true,
@@ -19,8 +20,8 @@ const _splitForConfig = function (arr, isAddToCategories) {
   }
   const categories = [],
     data = [];
-  let max = Number.NEGATIVE_INFINITY,
-    min = Number.POSITIVE_INFINITY;
+  let max = _mathFn.NEGATIVE_INFINITY,
+    min = _mathFn.POSITIVE_INFINITY;
   arr.forEach(item => {
     const {
         id,

@@ -2,6 +2,11 @@ import { fetchJsonHm } from '../../utils/fnFetch';
 import { fGetLazyValueAsync } from '../../utils/fGetLazyValue';
 import pipe from '../../utils/pipe';
 
+import {
+  NEGATIVE_INFINITY,
+  POSITIVE_INFINITY
+} from '../../math/mathFn';
+
 import { crData } from '../JsonStatFn';
 import { compareByValueId } from '../compareByFn';
 
@@ -17,8 +22,8 @@ const _splitForConfig = (
 ) => {
    const categories = []
    , data = [];
-   let max = Number.NEGATIVE_INFINITY
-   , min = Number.POSITIVE_INFINITY;
+   let max = NEGATIVE_INFINITY
+   , min = POSITIVE_INFINITY;
    arr.forEach((item) => {
      const { id, value, status } = item
      , geoEntity = _getCountryById(id);

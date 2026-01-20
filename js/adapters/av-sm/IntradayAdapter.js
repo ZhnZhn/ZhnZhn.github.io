@@ -9,6 +9,7 @@ var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _stockBuilderFn = require("../../charts/stockBuilderFn");
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _MarkerFn = require("../../charts/MarkerFn");
+var _mathFn = require("../../math/mathFn");
 var _pointFn = require("../pointFn");
 var _IntradayFns = require("../IntradayFns");
 var _fnAdapter = require("./fnAdapter");
@@ -71,8 +72,8 @@ const _crSeriaData = (json, option) => {
     } = _crSeriaOptions(option);
   let i = 0,
     _max = _dateKeys.length,
-    minClose = Number.POSITIVE_INFINITY,
-    maxClose = Number.NEGATIVE_INFINITY,
+    minClose = _mathFn.POSITIVE_INFINITY,
+    maxClose = _mathFn.NEGATIVE_INFINITY,
     _dateMs,
     _date,
     _point,

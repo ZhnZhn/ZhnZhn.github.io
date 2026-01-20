@@ -5,6 +5,11 @@ import {
 } from '../utils/isTypeFn';
 
 import {
+  NEGATIVE_INFINITY,
+  POSITIVE_INFINITY
+} from '../math/mathFn';
+
+import {
   FN_NOOP,
 } from './AdapterFn';
 import {
@@ -53,8 +58,8 @@ export const toStockSeriesData = ({
      : FN_NOOP;
 
 
-  let minClose = Number.POSITIVE_INFINITY
-  , maxClose = Number.NEGATIVE_INFINITY;
+  let minClose = POSITIVE_INFINITY
+  , maxClose = NEGATIVE_INFINITY;
 
   _arr.forEach(item => {
     const [

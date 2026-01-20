@@ -3,7 +3,11 @@ import { createRoot } from 'react-dom/client';
 import { domSanitize } from '../../utils/domFn';
 import { merge } from '../../utils/objFn';
 import clusterMaker from '../../math/k-means';
-import { toFixed } from '../../math/mathFn';
+import {
+  NEGATIVE_INFINITY,
+  POSITIVE_INFINITY,
+  toFixed
+} from '../../math/mathFn';
 
 import {
   crInfo,
@@ -51,8 +55,8 @@ const _mergeGeoAndValue = (
   json
 ) => {
   const points = [];
-  let minValue = Number.POSITIVE_INFINITY
-  , maxValue = Number.NEGATIVE_INFINITY;
+  let minValue = POSITIVE_INFINITY
+  , maxValue = NEGATIVE_INFINITY;
   sGeo.forEach((cell, index) => {
     const feature = _findFeature(json.features, dGeo[index])
     , { value, status } = cell;

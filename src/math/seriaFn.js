@@ -8,7 +8,11 @@ import {
 
 import { dmyToUTC } from '../utils/dateFn';
 
-import { toFixedNumber } from './mathFn';
+import {
+  NEGATIVE_INFINITY,
+  POSITIVE_INFINITY,
+  toFixedNumber
+} from './mathFn';
 import fIndicatorCalc from './fIndicatorCalc';
 import diff from './diff';
 import roc from './roc';
@@ -108,8 +112,8 @@ export const normalize = (
   return _d;
 }
 
-export const findMinY = _fFindY(Number.POSITIVE_INFINITY, _findMinY)
-export const findMaxY = _fFindY(Number.NEGATIVE_INFINITY, _findMaxY)
+export const findMinY = _fFindY(POSITIVE_INFINITY, _findMinY)
+export const findMaxY = _fFindY(NEGATIVE_INFINITY, _findMaxY)
 
 export const filterTrimZero = (data) => {
   if (!isArr(data)) { return data; }

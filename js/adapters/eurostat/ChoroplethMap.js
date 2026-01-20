@@ -32,8 +32,8 @@ const _findFeature = (features, id) => {
 };
 const _mergeGeoAndValue = (sGeo, dGeo, json) => {
   const points = [];
-  let minValue = Number.POSITIVE_INFINITY,
-    maxValue = Number.NEGATIVE_INFINITY;
+  let minValue = _mathFn.POSITIVE_INFINITY,
+    maxValue = _mathFn.NEGATIVE_INFINITY;
   sGeo.forEach((cell, index) => {
     const feature = _findFeature(json.features, dGeo[index]),
       {

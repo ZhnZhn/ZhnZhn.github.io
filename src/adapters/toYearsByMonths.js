@@ -21,6 +21,8 @@ import {
 } from '../components/styleFn';
 
 import {
+  NEGATIVE_INFINITY,
+  POSITIVE_INFINITY,
   calcAvg,
   roundBy
 } from '../math/mathFn';
@@ -77,8 +79,8 @@ const _crValueYearPoint = item => ({
   status: item[2]
 });
 const _findHighLow = (arr) => {
-  let h = { v: Number.NEGATIVE_INFINITY, y: '' },
-      l = { v: Number.POSITIVE_INFINITY, y: '' };
+  let h = { v: NEGATIVE_INFINITY, y: '' },
+      l = { v: POSITIVE_INFINITY, y: '' };
   arr.forEach(item => {
     if (item.v > h.v) {
       h = item

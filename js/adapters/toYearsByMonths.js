@@ -55,11 +55,11 @@ const _crValueYearPoint = item => ({
 });
 const _findHighLow = arr => {
   let h = {
-      v: Number.NEGATIVE_INFINITY,
+      v: _mathFn.NEGATIVE_INFINITY,
       y: ''
     },
     l = {
-      v: Number.POSITIVE_INFINITY,
+      v: _mathFn.POSITIVE_INFINITY,
       y: ''
     };
   arr.forEach(item => {

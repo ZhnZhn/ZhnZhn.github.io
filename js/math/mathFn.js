@@ -2,10 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.toFixedNumber = exports.toFixed = exports.roundBy = exports.isInRange = exports.crValueMoving = exports.crRandomInteger = exports.crId = exports.calcPercent = exports.calcAvg = void 0;
+exports.toFixedNumber = exports.toFixed = exports.roundBy = exports.isInRange = exports.crValueMoving = exports.crRandomInteger = exports.crId = exports.calcPercent = exports.calcAvg = exports.POSITIVE_INFINITY = exports.NEGATIVE_INFINITY = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _isTypeFn = require("../utils/isTypeFn");
 var _DirectionType = require("../constants/DirectionType");
+const NEGATIVE_INFINITY = exports.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
+const POSITIVE_INFINITY = exports.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
 const MAX_TO_ROUND = 1000000;
 const FN_ECHO = value => value;
 const _formatedToBig = function (v, dfR) {

@@ -14,6 +14,11 @@ import {
 } from '../../charts/configBuilderFn';
 import { crMarkerExDividend } from '../../charts/MarkerFn';
 
+import {
+  NEGATIVE_INFINITY,
+  POSITIVE_INFINITY
+} from '../../math/mathFn';
+
 import { crVolumePoint } from '../pointFn';
 import { crMarkerColor } from '../IntradayFns';
 import {
@@ -105,8 +110,8 @@ const _crSeriaData = (
 
   let i = 0
   , _max = _dateKeys.length
-  , minClose = Number.POSITIVE_INFINITY
-  , maxClose = Number.NEGATIVE_INFINITY
+  , minClose = POSITIVE_INFINITY
+  , maxClose = NEGATIVE_INFINITY
   , _dateMs
   , _date
   , _point

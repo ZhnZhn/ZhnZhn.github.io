@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.toStockSeriesData = void 0;
 var _isTypeFn = require("../utils/isTypeFn");
+var _mathFn = require("../math/mathFn");
 var _AdapterFn = require("./AdapterFn");
 var _pointFn = require("./pointFn");
 const _getNotEmptyArr = arr => (0, _isTypeFn.isNotEmptyArr)(arr) ? arr : void 0;
@@ -42,8 +43,8 @@ const toStockSeriesData = _ref => {
     _isVolume = (0, _isTypeFn.isNumber)(_itemFirst[5]),
     _isNumberOfTrades = (0, _isTypeFn.isNumber)(_itemFirst[6]),
     _addATHPointTo = isAth ? _fAddAthPointTo() : _AdapterFn.FN_NOOP;
-  let minClose = Number.POSITIVE_INFINITY,
-    maxClose = Number.NEGATIVE_INFINITY;
+  let minClose = _mathFn.POSITIVE_INFINITY,
+    maxClose = _mathFn.NEGATIVE_INFINITY;
   _arr.forEach(item => {
     const [date, open, high, low, close, volume, numberOfTrades] = item;
     dC.push([date, close]);
