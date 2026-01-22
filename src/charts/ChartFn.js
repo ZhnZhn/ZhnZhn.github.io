@@ -250,10 +250,10 @@ export const setPlotLinesMinMax = ({
    min,
    max
  }) => {
-  if ( max>POSITIVE_INFINITY ){
+  if ( max>NEGATIVE_INFINITY ){
     _setPlotLine(plotLines[0], max)
   }
-  if ( min<NEGATIVE_INFINITY ){
+  if ( min<POSITIVE_INFINITY ){
     _setPlotLine(plotLines[1], min)
   }
 }
@@ -264,8 +264,8 @@ export const setPlotLinesDeltas = ({
   max,
   value
 }) => {
-  const _bMax = _crBigValueOrZero(max, POSITIVE_INFINITY)
-  , _bMin = _crBigValueOrZero(min, NEGATIVE_INFINITY)
+  const _bMax = _crBigValueOrZero(max, NEGATIVE_INFINITY)
+  , _bMin = _crBigValueOrZero(min, POSITIVE_INFINITY)
   , _bValue = _crBigValueOrZero(value, null)
   , _perToMax = _calcPerTo(_bMax, _bValue, _bValue)
   , _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
@@ -277,9 +277,11 @@ export const setPlotLinesDeltas = ({
 export const calcMinY = (
   min,
   max
-) => max>POSITIVE_INFINITY
-  && min<NEGATIVE_INFINITY
-    ? min - ((max-min)*1/6)
+) => max>NEGATIVE_INFINITY
+  && min<POSITIVE_INFINITY
+    ? min >= 0 && min <= (max-min)/6
+        ? void 0
+        : min - ((max-min)/6)
     : void 0
 
 export const setYToPoints = (

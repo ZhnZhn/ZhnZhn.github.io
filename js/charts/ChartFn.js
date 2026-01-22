@@ -202,10 +202,10 @@ const setPlotLinesMinMax = _ref4 => {
     min,
     max
   } = _ref4;
-  if (max > _mathFn.POSITIVE_INFINITY) {
+  if (max > _mathFn.NEGATIVE_INFINITY) {
     _setPlotLine(plotLines[0], max);
   }
-  if (min < _mathFn.NEGATIVE_INFINITY) {
+  if (min < _mathFn.POSITIVE_INFINITY) {
     _setPlotLine(plotLines[1], min);
   }
 };
@@ -217,8 +217,8 @@ const setPlotLinesDeltas = _ref5 => {
     max,
     value
   } = _ref5;
-  const _bMax = _crBigValueOrZero(max, _mathFn.POSITIVE_INFINITY),
-    _bMin = _crBigValueOrZero(min, _mathFn.NEGATIVE_INFINITY),
+  const _bMax = _crBigValueOrZero(max, _mathFn.NEGATIVE_INFINITY),
+    _bMin = _crBigValueOrZero(min, _mathFn.POSITIVE_INFINITY),
     _bValue = _crBigValueOrZero(value, null),
     _perToMax = _calcPerTo(_bMax, _bValue, _bValue),
     _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
@@ -226,7 +226,7 @@ const setPlotLinesDeltas = _ref5 => {
   _setPlotLine(plotLines[1], _crPoint(_bMin), _crDelta(_perToMin));
 };
 exports.setPlotLinesDeltas = setPlotLinesDeltas;
-const calcMinY = (min, max) => max > _mathFn.POSITIVE_INFINITY && min < _mathFn.NEGATIVE_INFINITY ? min - (max - min) * 1 / 6 : void 0;
+const calcMinY = (min, max) => max > _mathFn.NEGATIVE_INFINITY && min < _mathFn.POSITIVE_INFINITY ? min >= 0 && min <= (max - min) / 6 ? void 0 : min - (max - min) / 6 : void 0;
 exports.calcMinY = calcMinY;
 const setYToPoints = (data, y) => {
   if (y == null) {
