@@ -5,7 +5,7 @@
  ],
  "file": "../../src/charts/TreeMapConfigFn.js",
  "names": [
-  "_ChartFn",
+  "_styleFn",
   "require",
   "_Chart",
   "_Tooltip",

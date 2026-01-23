@@ -2,9 +2,11 @@ export {
   crTpId,
   toNumberFormat,
   toNumberFormatAll,
+} from '../ChartFn';
+export {
   toDmy,
   toTdmyIf
-} from '../ChartFn';
+} from '../dateFormat';
 
 import {
   COLOR_VALUE

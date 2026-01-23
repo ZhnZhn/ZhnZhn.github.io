@@ -1,4 +1,4 @@
-import { getColorBlack } from './ChartFn';
+import { getColorBlack } from '../components/styleFn';
 
 import {
   fTitle,
@@ -17,7 +17,7 @@ export const CONFIG_TREE_MAP = {
   dataLabels: {
     align: 'left',
     verticalAlign: 'top',
-    style: {      
+    style: {
       fontSize: '15px',
       fontWeight: 'bold',
       color: getColorBlack(),

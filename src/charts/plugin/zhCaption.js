@@ -1,4 +1,4 @@
-import { getColorBlack } from '../ChartFn';
+import { getColorBlack } from '../../components/styleFn';
 
 const _crTextStyle = () => ({
   color: getColorBlack(),

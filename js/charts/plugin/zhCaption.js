@@ -2,9 +2,9 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _ChartFn = require("../ChartFn");
+var _styleFn = require("../../components/styleFn");
 const _crTextStyle = () => ({
-    color: (0, _ChartFn.getColorBlack)(),
+    color: (0, _styleFn.getColorBlack)(),
     'font-size': '16px',
     'font-weight': 800
   }),

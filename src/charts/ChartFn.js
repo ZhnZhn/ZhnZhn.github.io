@@ -1,12 +1,3 @@
-export { getColorBlack } from '../components/styleFn';
-
-export {
-  toDmy,
-  toTdmy,
-  toTdmyIf
-} from './dateFormat';
-export { crId } from '../math/mathFn';
-
 import Big from 'big.js';
 
 import {

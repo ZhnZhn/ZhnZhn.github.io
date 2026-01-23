@@ -5,6 +5,7 @@ exports.crItem = void 0;
 var _uiApi = require("../uiApi");
 var _crRouter = require("../../utils/crRouter");
 var _ChartFn = require("../../charts/ChartFn");
+var _mathFn = require("../../math/mathFn");
 var _ComponentActions = require("../../flux/actions/ComponentActions");
 var _chartCheckBoxLogic = require("../../flux/stores/chartCheckBoxLogic");
 var _itemStore = require("../../flux/stores/itemStore");
@@ -20,7 +21,7 @@ const _getIdKey = (config, index) => {
       id,
       key
     } = zhConfig || {};
-  return [id || `Id:${index}`, key || id || (0, _ChartFn.crId)()];
+  return [id || `Id:${index}`, key || id || (0, _mathFn.crId)()];
 };
 const _fAddToWatch = (caption, config) => () => (0, _ComponentActions.showAddToWatch)({
   caption,

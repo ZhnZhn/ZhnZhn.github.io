@@ -1,10 +1,8 @@
 import { bindTo } from "../uiApi";
 import { crGetRoute } from "../../utils/crRouter";
 
-import {
-  crValueMoving,
-  crId
-} from "../../charts/ChartFn";
+import { crValueMoving } from "../../charts/ChartFn";
+import { crId } from "../../math/mathFn";
 
 import {
   showAddToWatch,

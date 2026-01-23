@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.crTreeMapSeria = exports.crTreeMapConfig = exports.CONFIG_TREE_MAP = void 0;
-var _ChartFn = require("./ChartFn");
+var _styleFn = require("../components/styleFn");
 var _Chart = require("./Chart");
 var _Tooltip = require("./Tooltip");
 const CONFIG_TREE_MAP = exports.CONFIG_TREE_MAP = {
@@ -17,7 +17,7 @@ const CONFIG_TREE_MAP = exports.CONFIG_TREE_MAP = {
     style: {
       fontSize: '15px',
       fontWeight: 'bold',
-      color: (0, _ChartFn.getColorBlack)(),
+      color: (0, _styleFn.getColorBlack)(),
       textShadow: 'none'
     }
   },

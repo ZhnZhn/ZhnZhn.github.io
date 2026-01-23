@@ -2,16 +2,9 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.zoomIndicatorCharts = exports.toTdmyIf = exports.toTdmy = exports.toNumberFormatAll = exports.toNumberFormat = exports.toDmy = exports.setYToPoints = exports.setPlotLinesMinMax = exports.setPlotLinesDeltas = exports.getColorBlack = exports.crValueMoving = exports.crTpId = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = void 0;
-var _styleFn = require("../components/styleFn");
-exports.getColorBlack = _styleFn.getColorBlack;
-var _dateFormat = require("./dateFormat");
-exports.toDmy = _dateFormat.toDmy;
-exports.toTdmy = _dateFormat.toTdmy;
-exports.toTdmyIf = _dateFormat.toTdmyIf;
-var _mathFn = require("../math/mathFn");
-exports.crId = _mathFn.crId;
+exports.zoomIndicatorCharts = exports.toNumberFormatAll = exports.toNumberFormat = exports.setYToPoints = exports.setPlotLinesMinMax = exports.setPlotLinesDeltas = exports.crValueMoving = exports.crTpId = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = void 0;
 var _big = _interopRequireDefault(require("big.js"));
+var _mathFn = require("../math/mathFn");
 var _seriaFn = require("../math/seriaFn");
 var _seriaHelperFn = require("../math/seriaHelperFn");
 var _isTypeFn = require("../utils/isTypeFn");
