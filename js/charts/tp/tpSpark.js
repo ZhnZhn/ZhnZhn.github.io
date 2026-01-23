@@ -5,6 +5,7 @@ exports.sparkTreeMap = exports.sparkStackedArea = void 0;
 var _reactDom = require("react-dom");
 var _SparkFactory = require("../../components/factories/SparkFactory");
 var _Color = require("../../constants/Color");
+var _ChartFn = require("../ChartFn");
 var _tpFn = require("./tpFn");
 const SPARKLINES_SUFFIX_ID = 'sparklines',
   SPARKLINES_BAR_SUFFIX_ID = 'sparklines_bar',
@@ -102,7 +103,7 @@ const _crStackedArea = _ref2 => {
       percent = '0.0',
       total = 0
     } = point,
-    _total = (0, _tpFn.toNumberFormat)(total),
+    _total = (0, _ChartFn.toNumberFormat)(total),
     [fullWidth, width] = _calcWidthSparkType4(value, _total);
   return (0, _tpFn.crHeader)(nameFull, id) + _crTooltipSparkType4({
     id,
@@ -126,8 +127,8 @@ const _crTreeMap = _ref3 => {
       percent = '0.0',
       total = 0
     } = point,
-    _value = (0, _tpFn.toNumberFormat)(value),
-    _total = (0, _tpFn.toNumberFormat)(total),
+    _value = (0, _ChartFn.toNumberFormat)(value),
+    _total = (0, _ChartFn.toNumberFormat)(total),
     [fullWidth, width] = _calcWidthSparkType4(_value, _total);
   return (0, _tpFn.crHeader)(nameFull, id) + _crTooltipSparkType4({
     id,

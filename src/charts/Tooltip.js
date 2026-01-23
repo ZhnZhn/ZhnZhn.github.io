@@ -19,13 +19,15 @@ import {
 } from './tp/tpSpark';
 import { treeMapValue } from './tp/tpTreeMap';
 import { donutValue } from './tp/tpDonut';
+import { addHideHandler } from './tp/tpFn';
 
 import {
   crTpId,
-  toNumberFormat,
-  toDmy,
-  addHideHandler
-} from './tp/tpFn';
+  toNumberFormat
+} from './ChartFn';
+import {
+  toDmy
+} from './dateFormat';
 
 const _addCloseHandler = (
   id,

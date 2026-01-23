@@ -2,9 +2,8 @@
 
 exports.__esModule = true;
 exports.splineValueTdmyIf = exports.splineValueDmy = void 0;
-
+var _dateFormat = require("../dateFormat");
 var _tpFn = require("./tpFn");
-
 const _crValue = _ref => {
   let {
     date,
@@ -15,22 +14,23 @@ const _crValue = _ref => {
     point
   } = _ref;
   const status = (0, _tpFn.getStatus)(point);
-  return (0, _tpFn.crHeader)(date, id) + "\n  <div class=\"tp__body\">\n    " + (0, _tpFn.crRow)(valueText, value, {
+  return `${(0, _tpFn.crHeader)(date, id)}
+  <div class="tp__body">
+    ${(0, _tpFn.crRow)(valueText, value, {
     color,
     status
-  }) + "\n  </div>";
+  })}
+  </div>`;
 };
-
 const _splineOptions = {
   fnTemplate: _crValue,
   isWithColor: true,
   isWithValueText: true,
   isWithValue: true
 };
-const splineValueDmy = _splineOptions;
-exports.splineValueDmy = splineValueDmy;
-const splineValueTdmyIf = { ..._splineOptions,
-  fnDateFormat: _tpFn.toTdmyIf
+const splineValueDmy = exports.splineValueDmy = _splineOptions;
+const splineValueTdmyIf = exports.splineValueTdmyIf = {
+  ..._splineOptions,
+  fnDateFormat: _dateFormat.toTdmyIf
 };
-exports.splineValueTdmyIf = splineValueTdmyIf;
 //# sourceMappingURL=tpSpline.js.map

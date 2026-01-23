@@ -10,6 +10,8 @@ var _tpSpark = require("./tp/tpSpark");
 var _tpTreeMap = require("./tp/tpTreeMap");
 var _tpDonut = require("./tp/tpDonut");
 var _tpFn = require("./tp/tpFn");
+var _ChartFn = require("./ChartFn");
+var _dateFormat = require("./dateFormat");
 const _addCloseHandler = (id, point) => {
   setTimeout(() => (0, _tpFn.addHideHandler)(id, point), 1);
 };
@@ -17,7 +19,7 @@ const _fFormatter = option => function () {
   const {
       fnTemplate,
       onAfterRender = _addCloseHandler,
-      fnDateFormat = _tpFn.toDmy,
+      fnDateFormat = _dateFormat.toDmy,
       isWithColor,
       isWithValueText,
       isWithValue
@@ -33,8 +35,8 @@ const _fFormatter = option => function () {
     date = fnDateFormat(point.x),
     color = isWithColor ? point.color || series.color : void 0,
     valueText = isWithValueText ? zhValueText || name : 'Value',
-    value = isWithValue ? (0, _tpFn.toNumberFormat)(point.y) : null,
-    id = (0, _tpFn.crTpId)();
+    value = isWithValue ? (0, _ChartFn.toNumberFormat)(point.y) : null,
+    id = (0, _ChartFn.crTpId)();
   onAfterRender(id, point);
   return fnTemplate({
     id,

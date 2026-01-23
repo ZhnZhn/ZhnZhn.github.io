@@ -1,17 +1,16 @@
 import { render } from 'react-dom';
 
-
 import {
   crSparkLines,
   crSparkBars
 } from '../../components/factories/SparkFactory';
 
 import { COLOR_DATE } from '../../constants/Color';
+import { toNumberFormat } from '../ChartFn';
 
 import {
   crHeader,
   crRow,
-  toNumberFormat,
   addHideHandler
 } from './tpFn';
 

@@ -1,11 +1,9 @@
-import {
-  COLOR_DATE
-} from '../../constants/Color';
+import { COLOR_DATE } from '../../constants/Color';
+import { toNumberFormatAll } from '../ChartFn';
 
 import {
   crHeader,
-  crRow,
-  toNumberFormatAll
+  crRow
 } from './tpFn';
 
 const _crTreeMap = ({

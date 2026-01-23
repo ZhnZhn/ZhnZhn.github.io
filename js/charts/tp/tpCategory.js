@@ -2,37 +2,37 @@
 
 exports.__esModule = true;
 exports.categorySimple = exports.categoryRemove = void 0;
-
+var _ChartFn = require("../ChartFn");
 var _tpFn = require("./tpFn");
-
 const _crSimple = _ref => {
   let {
     id,
     point
   } = _ref;
-
   const {
-    y,
-    status,
-    d,
-    category,
-    c,
-    series
-  } = point,
-        {
-    name,
-    color
-  } = series || {},
-        _c = category || c,
-        _date = d ? _c + "-" + d : _c;
-
-  return (0, _tpFn.crHeader)(_date, id) + "\n   <div class=\"tp__body\">\n     " + (0, _tpFn.crRow)('Value', (0, _tpFn.toNumberFormatAll)(y), {
+      y,
+      status,
+      d,
+      category,
+      c,
+      series
+    } = point,
+    {
+      name,
+      color
+    } = series || {},
+    _c = category || c,
+    _date = d ? `${_c}-${d}` : _c;
+  return `${(0, _tpFn.crHeader)(_date, id)}
+   <div class="tp__body">
+     ${(0, _tpFn.crRow)('Value', (0, _ChartFn.toNumberFormatAll)(y), {
     status
-  }) + "\n     " + (0, _tpFn.crRow)('Seria', name, {
+  })}
+     ${(0, _tpFn.crRow)('Seria', name, {
     color
-  }) + "\n   </div>";
+  })}
+   </div>`;
 };
-
 const _crRemove = _ref2 => {
   let {
     id,
@@ -44,27 +44,28 @@ const _crRemove = _ref2 => {
     category,
     status
   } = point;
-  return (0, _tpFn.crHeader)(c || category, id) + "\n  <div class=\"tp__body\">\n    " + (0, _tpFn.crRow)('Value', (0, _tpFn.toNumberFormatAll)(y), {
+  return `${(0, _tpFn.crHeader)(c || category, id)}
+  <div class="tp__body">
+    ${(0, _tpFn.crRow)('Value', (0, _ChartFn.toNumberFormatAll)(y), {
     status
-  }) + "\n    <div class='tp__bt' id=" + (id + '_R') + ">\n         Remove\n    </div>\n  </div>";
+  })}
+    <div class='tp__bt' id=${id + '_R'}>
+         Remove
+    </div>
+  </div>`;
 };
-
 const _addCategoryHandlersImpl = (id, point) => {
   (0, _tpFn.addHideHandler)(id, point);
   (0, _tpFn.addHideHandler)(id + '_R', point, _point => _point.series.chart.zhRemoveCategory(point.category));
 };
-
 const _addCategoryHandlers = (id, point) => {
   setTimeout(() => _addCategoryHandlersImpl(id, point), 1);
 };
-
-const categorySimple = {
+const categorySimple = exports.categorySimple = {
   fnTemplate: _crSimple
 };
-exports.categorySimple = categorySimple;
-const categoryRemove = {
+const categoryRemove = exports.categoryRemove = {
   fnTemplate: _crRemove,
   onAfterRender: _addCategoryHandlers
 };
-exports.categoryRemove = categoryRemove;
 //# sourceMappingURL=tpCategory.js.map

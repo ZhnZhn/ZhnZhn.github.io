@@ -1,16 +1,4 @@
-export {
-  crTpId,
-  toNumberFormat,
-  toNumberFormatAll,
-} from '../ChartFn';
-export {
-  toDmy,
-  toTdmyIf
-} from '../dateFormat';
-
-import {
-  COLOR_VALUE
-} from '../../constants/Color';
+import { COLOR_VALUE } from '../../constants/Color';
 
 import { isSupportOptions } from '../../utils/domFn';
 import { isFn } from '../../utils/isTypeFn';

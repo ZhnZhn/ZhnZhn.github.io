@@ -1,17 +1,11 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toTdmyIf = exports.toNumberFormat = exports.toDmy = exports.getStatus = exports.crTpId = exports.crSpan = exports.crRow = exports.crNotEmptySpan = exports.crHeader = exports.addHideHandler = void 0;
-var _ChartFn = require("../ChartFn");
-exports.crTpId = _ChartFn.crTpId;
-exports.toNumberFormat = _ChartFn.toNumberFormat;
-exports.toNumberFormatAll = _ChartFn.toNumberFormatAll;
-var _dateFormat = require("../dateFormat");
-exports.toDmy = _dateFormat.toDmy;
-exports.toTdmyIf = _dateFormat.toTdmyIf;
+exports.getStatus = exports.crSpan = exports.crRow = exports.crNotEmptySpan = exports.crHeader = exports.addHideHandler = void 0;
 var _Color = require("../../constants/Color");
 var _domFn = require("../../utils/domFn");
 var _isTypeFn = require("../../utils/isTypeFn");
+var _ChartFn = require("../ChartFn");
 var _CL = require("../CL");
 const VALUE_STYLE = 'padding-right:5px;',
   STATUS_STYLE = 'padding-left:4px;';

@@ -1,7 +1,7 @@
+import { toNumberFormatAll } from '../ChartFn';
 import {
    crHeader,
    crRow,
-   toNumberFormatAll,
    addHideHandler
  } from './tpFn';
 

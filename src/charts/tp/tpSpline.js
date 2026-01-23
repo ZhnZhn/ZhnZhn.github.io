@@ -1,7 +1,7 @@
+import { toTdmyIf } from '../dateFormat';
 import {
   crHeader,
   crRow,
-  toTdmyIf,
   getStatus
 } from './tpFn';
 
