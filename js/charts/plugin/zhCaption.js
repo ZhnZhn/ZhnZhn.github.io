@@ -8,57 +8,35 @@ const _crTextStyle = () => ({
     'font-size': '16px',
     'font-weight': 800
   }),
-  S_INLINE = {
-    display: 'inline'
-  },
-  S_NONE = {
-    display: 'none'
-  },
-  CONFIG_HIDE = {
-    chart: {
-      spacingTop: 0,
-      marginTop: 18
-    },
+  _crChartProps = (spacingTop, marginTop) => ({
+    spacingTop,
+    marginTop
+  }),
+  _crConfig = (chart, isExportingEnable, style) => ({
+    chart,
     exporting: {
-      enabled: false
+      enabled: isExportingEnable
     },
     subtitle: {
       style: {
-        display: 'none'
+        ...style
       }
     },
     title: {
       style: {
-        display: 'none'
+        ...style
       }
     }
-  },
-  CONFIG_SHOW = {
-    chart: {
-      spacingTop: 25,
-      marginTop: 70
-    },
-    exporting: {
-      enabled: true
-    },
-    subtitle: {
-      style: {
-        display: 'inline-block'
-      }
-    },
-    title: {
-      style: {
-        display: 'inline-block'
-      }
-    }
-  },
+  }),
+  CONFIG_HIDE = _crConfig(_crChartProps(0, 18), false, _styleFn.S_NONE),
+  CONFIG_SHOW = _crConfig(_crChartProps(25, 70), true, _styleFn.S_INLINE),
   PN_TITLE = 'zhElTitle',
   PN_SUBTITLE = 'zhElSubtitle';
 const _renderTextTo = (chart, objText, x, y, propName) => {
   const _el = chart[propName];
   if (_el && _el.css) {
     _el.css({
-      ...S_INLINE
+      display: 'inline'
     });
     return;
   }
@@ -73,7 +51,7 @@ const _hideEl = (chart, propName) => {
   const _el = chart[propName];
   if (_el && _el.css) {
     _el.css({
-      ...S_NONE
+      ..._styleFn.S_NONE
     });
   }
 };

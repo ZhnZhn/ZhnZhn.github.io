@@ -1,36 +1,41 @@
-import { getColorBlack } from '../../components/styleFn';
+import {
+  S_INLINE,
+  S_NONE,
+  getColorBlack
+} from '../../components/styleFn';
 
 const _crTextStyle = () => ({
   color: getColorBlack(),
   'font-size': '16px',
   'font-weight': 800
 })
-, S_INLINE = {
-  display: 'inline'
-}
-, S_NONE = {
-  display: 'none'
-}
-
-, CONFIG_HIDE = {
-  chart: {
-    spacingTop: 0,
-    marginTop: 18
-  },
-  exporting: { enabled: false },
-  subtitle: { style: { display: 'none'}},
-  title: { style: { display: 'none'}}
-}
-, CONFIG_SHOW = {
-  chart: {
-    spacingTop: 25,
-    marginTop: 70
-  },
-  exporting: { enabled: true },
-  subtitle: { style: { display: 'inline-block'}},
-  title: { style: { display: 'inline-block'}}
-}
-
+, _crChartProps = (
+  spacingTop,
+  marginTop
+) => ({
+  spacingTop,
+  marginTop
+})
+, _crConfig = (
+  chart,
+  isExportingEnable,
+  style
+) => ({
+  chart,
+  exporting: { enabled: isExportingEnable },
+  subtitle: { style: { ...style }},
+  title: { style: { ...style }}
+})
+, CONFIG_HIDE = _crConfig(
+  _crChartProps(0, 18),
+  false,
+  S_NONE
+)
+, CONFIG_SHOW = _crConfig(
+  _crChartProps(25, 70),
+  true,
+  S_INLINE
+)
 , PN_TITLE = 'zhElTitle'
 , PN_SUBTITLE = 'zhElSubtitle';
 
@@ -43,7 +48,7 @@ const _renderTextTo = (
 ) => {
   const _el = chart[propName];
   if (_el && _el.css) {
-    _el.css({...S_INLINE})
+    _el.css({ display: 'inline' })
     return;
   }
   const { text } = objText || {};
