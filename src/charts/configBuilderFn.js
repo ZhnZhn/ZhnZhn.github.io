@@ -1,5 +1,3 @@
-export { crSeriaConfig } from './ChartConfigFn';
-
 import {
   isSeriesDataCase,
   valueMoving

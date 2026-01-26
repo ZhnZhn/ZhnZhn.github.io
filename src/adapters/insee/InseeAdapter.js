@@ -1,5 +1,5 @@
 import { isNumber } from '../../utils/isTypeFn';
-import { crSeriaConfig } from '../../charts/configBuilderFn';
+import { crSeriaConfig } from '../../charts/ChartConfigFn';
 import crConfigType1 from '../../charts/crConfigType1';
 import { findMinY } from '../../math/seriaFn';
 

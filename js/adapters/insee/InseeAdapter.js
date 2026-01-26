@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
-var _configBuilderFn = require("../../charts/configBuilderFn");
+var _ChartConfigFn = require("../../charts/ChartConfigFn");
 var _crConfigType = _interopRequireDefault(require("../../charts/crConfigType1"));
 var _seriaFn = require("../../math/seriaFn");
 var _AdapterFn = require("../AdapterFn");
@@ -75,7 +75,7 @@ const InseeAdapter = {
         subtitle
       } = option,
       data = _toData(str)[0];
-    return (0, _configBuilderFn.crSeriaConfig)({
+    return (0, _ChartConfigFn.crSeriaConfig)({
       data,
       minY: (0, _seriaFn.findMinY)(data),
       zhValueText: subtitle || title || value

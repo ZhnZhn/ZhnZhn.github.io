@@ -3,13 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.toConfig = exports.setDataSourceTo = exports.setBarConfigHeightIf = exports.fSetSeriaBy = exports.fAddZhPoints = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSplineConfig = exports.crSeriaConfigFromAdapter = exports.crScatterSeriaConfig = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-var _ChartConfigFn = require("./ChartConfigFn");
-exports.crSeriaConfig = _ChartConfigFn.crSeriaConfig;
 var _AdapterFn = require("../adapters/AdapterFn");
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _seriaFn = require("../math/seriaFn");
 var _isTypeFn = require("../utils/isTypeFn");
+var _ChartConfigFn = require("./ChartConfigFn");
 var _TreeMapConfigFn = require("./TreeMapConfigFn");
 var _Chart = require("./Chart");
 var _ChartTheme = require("./ChartTheme");
@@ -18,7 +16,6 @@ var _ChartFactory = require("./ChartFactory");
 var _Tooltip = require("./Tooltip");
 var _seriaBuilderHelpers = require("./seriaBuilderHelpers");
 var _configBuilderHelpers = require("./configBuilderHelpers");
-const _excluded = ["data"];
 const _isArr = Array.isArray,
   _assign = Object.assign;
 const fAddCaption = (title, subtitle) => config => {
@@ -284,9 +281,10 @@ const crSeriaConfigFromAdapter = _ref => {
   return _seria;
 };
 exports.crSeriaConfigFromAdapter = crSeriaConfigFromAdapter;
-const crAreaConfig = option => (0, _ChartConfigFn.crAreaConfig)(Object.assign({
-  spacingTop: 25
-}, option));
+const crAreaConfig = option => (0, _ChartConfigFn.crAreaConfig)({
+  spacingTop: 25,
+  ...option
+});
 exports.crAreaConfig = crAreaConfig;
 const crArea2Config = (title, subtitle) => {
   const config = fAddCaption(title, subtitle)(crAreaConfig());
@@ -323,9 +321,12 @@ const CATEGORIES_X_AXIS = {
 
 //toYearsByMonths
 const crCategoryConfig = (categories, title, subtitle) => fAdd({
-  xAxis: Object.assign({}, CATEGORIES_X_AXIS, {
-    categories
-  }),
+  xAxis: {
+    ...CATEGORIES_X_AXIS,
+    ...{
+      categories
+    }
+  },
   yAxis: CATEGORIES_Y_AXIS
 })(crArea2Config(title, subtitle));
 exports.crCategoryConfig = crCategoryConfig;
@@ -368,23 +369,30 @@ const CONFIG_SERIA = {
 const MAX_NUMBER_OF_VISIBLE_SERIES = 8;
 const crSplineSeriaConfig = _ref2 => {
   let {
-      data
-    } = _ref2,
-    restOption = (0, _objectWithoutPropertiesLoose2.default)(_ref2, _excluded);
-  return (0, _AdapterFn.isSeriesDataCase)(data) ? data.map((seriaData, i) => (0, _ChartConfigFn.crSeriaConfig)(Object.assign({}, CONFIG_SERIA, restOption, {
+    data,
+    ...restOption
+  } = _ref2;
+  return (0, _AdapterFn.isSeriesDataCase)(data) ? data.map((seriaData, i) => (0, _ChartConfigFn.crSeriaConfig)({
+    ...CONFIG_SERIA,
+    ...restOption,
     data: seriaData,
     color: seriaData.color || (0, _ChartTheme.getSeriaColorByIndex)(i),
     name: seriaData.seriaName,
     visible: i < MAX_NUMBER_OF_VISIBLE_SERIES
-  }))) : (0, _ChartConfigFn.crSeriaConfig)(Object.assign({}, CONFIG_SERIA, restOption, {
+  })) : (0, _ChartConfigFn.crSeriaConfig)({
+    ...CONFIG_SERIA,
+    ...restOption,
     data
-  }));
+  });
 };
 exports.crSplineSeriaConfig = crSplineSeriaConfig;
 const CONFIG_SCATTER = {
   type: 'scatter'
 };
-const crScatterSeriaConfig = (tooltip, option) => fAdd('tooltip', (0, _Chart.fTooltip)(tooltip))(Object.assign({}, CONFIG_SCATTER, option));
+const crScatterSeriaConfig = (tooltip, option) => fAdd('tooltip', (0, _Chart.fTooltip)(tooltip))({
+  ...CONFIG_SCATTER,
+  ...option
+});
 exports.crScatterSeriaConfig = crScatterSeriaConfig;
 const crSplineConfig = (data, option) => {
   const {
