@@ -4,7 +4,7 @@ import handleMouseOver from './handleMouseOver';
 
 import {
   COLOR_TOOLTIP,
-  COLOR_BG_TITLE,  
+  COLOR_BG_TITLE,
   COLOR_TITLE_SHOW,
   COLOR_HOVER,
   COLOR_CHART_PRINT,
@@ -59,6 +59,31 @@ const _crAxisLabelStyle = (
     fontSize,
     fontWeight: "bold"
   }
+});
+
+const _crExportAxisProps = () => ({
+  lineWidth: 2,
+  lineColor: COLOR_LINE_PRINT,
+  gridLineColor: COLOR_GRID_LINE_PRINT
+});
+
+const _crChartAxisProps = (
+  lineColor,
+  tickColor,
+  gridLineColor,
+  labelColor
+) => ({
+  lineColor,
+  lineWidth: 3,
+  tickColor,
+
+  //tickWidth: 3,
+  //tickLenght: 5,
+
+  tickWidth: 0,
+  gridLineColor,
+  gridLineDashStyle: "Dot",
+  labels: _crAxisLabelStyle(labelColor, "15px")
 });
 
 export const ChartTheme = {
@@ -160,16 +185,8 @@ export const ChartTheme = {
           fillColor: COLOR_AREA_FILL_PRINT
         }
       },
-      xAxis: {
-        lineWidth: 2,
-        lineColor: COLOR_LINE_PRINT,
-        gridLineColor: COLOR_GRID_LINE_PRINT
-      },
-      yAxis: {
-        lineWidth: 2,
-        lineColor: COLOR_LINE_PRINT,
-        gridLineColor: COLOR_GRID_LINE_PRINT
-      }
+      xAxis: _crExportAxisProps(),
+      yAxis: _crExportAxisProps()        
     }
   },
   navigation: {
@@ -265,27 +282,18 @@ export const ChartTheme = {
                  `<span class="${CL_TP_VALUE}">{point.y}</span><br/>`
   },
   xAxis: {
-    lineColor: COLOR_X_LINE,
-    lineWidth: 3,
-    tickColor: COLOR_X_TICK,
-    //tickWidth: 3,
-    //tickLenght: 5,
-    tickWidth: 0,
-    gridLineColor: COLOR_X_GRID_LINE,
-    gridLineDashStyle: "Dot",
-    //gridLineDashStyle: "ShortDashDotDot",
-    gridLineWidth: 1,
-    labels: _crAxisLabelStyle(COLOR_X_LABEL, "15px")
+    ..._crChartAxisProps(
+      COLOR_X_LINE,
+      COLOR_X_TICK,
+      COLOR_X_GRID_LINE,
+      COLOR_X_LABEL
+    ),
+    gridLineWidth: 1
   },
-  yAxis: {
-      lineColor: COLOR_Y_LINE,
-      lineWidth: 3,
-      tickColor: COLOR_Y_TICK,
-      //tickWidth: 3,
-      //tickLenght: 5,
-      tickWidth: 0,
-      gridLineColor: COLOR_Y_GRID_LINE,
-      gridLineDashStyle: "Dot",
-      labels: _crAxisLabelStyle(COLOR_Y_LABEL, "15px")
-  }
+  yAxis: _crChartAxisProps(
+    COLOR_Y_LINE,
+    COLOR_Y_TICK,
+    COLOR_Y_GRID_LINE,
+    COLOR_Y_LABEL
+  )
 };
