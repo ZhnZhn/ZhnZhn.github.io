@@ -2,8 +2,7 @@ import { COLOR_VALUE } from '../../constants/Color';
 
 import { isSupportOptions } from '../../utils/domFn';
 import { isFn } from '../../utils/isTypeFn';
-
-import { toNumberFormatAll } from '../ChartFn';
+import { formatAllNumber } from '../../utils/formatNumberFn';
 
 import {
   CL_TP_HEADER,
@@ -63,7 +62,7 @@ export const crNotEmptySpan = (
   v
 ) => _isValueEmpty(v)
   ? ''
-  : crSpan(title, toNumberFormatAll(v))
+  : crSpan(title, formatAllNumber(v))
 
 export const crRow = (
   t='',

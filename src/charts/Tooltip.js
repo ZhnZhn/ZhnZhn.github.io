@@ -1,4 +1,8 @@
 import {
+  formatNumber
+} from '../utils/formatNumberFn';
+
+import {
   splineValueDmy,
   splineValueTdmyIf
 } from './tp/tpSpline';
@@ -23,7 +27,7 @@ import { addHideHandler } from './tp/tpFn';
 
 import {
   crTpId,
-  toNumberFormat
+  //toNumberFormat
 } from './ChartFn';
 import {
   toDmy
@@ -59,7 +63,8 @@ const _fFormatter = (option) => function(){
         ? zhValueText || name
         : 'Value'
    , value = isWithValue
-        ? toNumberFormat(point.y)
+        //? toNumberFormat(point.y)
+        ? formatNumber(point.y)
         : null
    , id = crTpId();
 

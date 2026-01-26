@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.zoomIndicatorCharts = exports.toNumberFormatAll = exports.toNumberFormat = exports.setYToPoints = exports.setPlotLinesMinMax = exports.setPlotLinesDeltas = exports.crValueMoving = exports.crTpId = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = void 0;
+exports.zoomIndicatorCharts = exports.setYToPoints = exports.setPlotLinesMinMax = exports.setPlotLinesDeltas = exports.crValueMoving = exports.crTpId = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _mathFn = require("../math/mathFn");
 var _seriaFn = require("../math/seriaFn");
@@ -185,8 +185,6 @@ const crValueMoving = (chart, prev, dateTo) => {
   }) : void 0;
 };
 exports.crValueMoving = crValueMoving;
-const toNumberFormat = exports.toNumberFormat = _formatNumberFn.formatNumber;
-const toNumberFormatAll = exports.toNumberFormatAll = _formatNumberFn.formatAllNumber;
 const crTpId = () => (0, _mathFn.crId)('TP_');
 exports.crTpId = crTpId;
 const setPlotLinesMinMax = _ref4 => {

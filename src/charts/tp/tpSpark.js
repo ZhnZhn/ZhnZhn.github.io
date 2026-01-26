@@ -1,12 +1,13 @@
 import { render } from 'react-dom';
 
 import {
+  formatNumber
+} from '../../utils/formatNumberFn';
+import {
   crSparkLines,
   crSparkBars
 } from '../../components/factories/SparkFactory';
-
 import { COLOR_DATE } from '../../constants/Color';
-import { toNumberFormat } from '../ChartFn';
 
 import {
   crHeader,
@@ -120,7 +121,7 @@ const _crStackedArea = ({
     percent='0.0',
     total=0
   } = point
-  , _total = toNumberFormat(total)
+  , _total = formatNumber(total)
   , [
     fullWidth,
     width
@@ -148,8 +149,8 @@ const _crTreeMap = ({
     percent='0.0',
     total=0
   } = point
-  , _value = toNumberFormat(value)
-  , _total = toNumberFormat(total)
+  , _value = formatNumber(value)
+  , _total = formatNumber(total)
   , [
     fullWidth,
     width

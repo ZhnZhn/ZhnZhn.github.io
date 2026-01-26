@@ -21,7 +21,6 @@ import {
   isArr
 } from '../utils/isTypeFn';
 import {
-  formatNumber,
   formatAllNumber
 } from '../utils/formatNumberFn';
 
@@ -230,9 +229,6 @@ export const crValueMoving = (
       )
    : void 0;
 }
-
-export const toNumberFormat = formatNumber
-export const toNumberFormatAll = formatAllNumber
 
 export const crTpId = () => crId('TP_')
 

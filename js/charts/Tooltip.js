@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.tooltipValueTdmyIf = exports.tooltipValueDmy = exports.tooltipTreeMap = exports.tooltipSparkTreeMap = exports.tooltipSparkStackedArea = exports.tooltipExValue = exports.tooltipExDividend = exports.tooltipDonut = exports.tooltipCategorySimple = exports.tooltipCategory = exports.tooltipAth = void 0;
+var _formatNumberFn = require("../utils/formatNumberFn");
 var _tpSpline = require("./tp/tpSpline");
 var _tpCategory = require("./tp/tpCategory");
 var _tpScatter = require("./tp/tpScatter");
@@ -35,7 +36,9 @@ const _fFormatter = option => function () {
     date = fnDateFormat(point.x),
     color = isWithColor ? point.color || series.color : void 0,
     valueText = isWithValueText ? zhValueText || name : 'Value',
-    value = isWithValue ? (0, _ChartFn.toNumberFormat)(point.y) : null,
+    value = isWithValue
+    //? toNumberFormat(point.y)
+    ? (0, _formatNumberFn.formatNumber)(point.y) : null,
     id = (0, _ChartFn.crTpId)();
   onAfterRender(id, point);
   return fnTemplate({

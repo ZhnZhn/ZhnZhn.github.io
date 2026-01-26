@@ -1,5 +1,6 @@
 import { COLOR_DATE } from '../../constants/Color';
-import { toNumberFormatAll } from '../ChartFn';
+import { formatAllNumber } from '../../utils/formatNumberFn';
+
 
 import {
   crHeader,
@@ -17,7 +18,7 @@ const _crTreeMap = ({
     percent=''
   } = point
   , _percent = percent ? `(${percent}%)` : ''
-  , _value = `${toNumberFormatAll(value)} ${_percent}`;
+  , _value = `${formatAllNumber(value)} ${_percent}`;
   return `${crHeader(title, id)}
   <div class="tp_body">
     ${crRow('', label)}

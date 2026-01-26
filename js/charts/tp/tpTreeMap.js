@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.treeMapValue = void 0;
 var _Color = require("../../constants/Color");
-var _ChartFn = require("../ChartFn");
+var _formatNumberFn = require("../../utils/formatNumberFn");
 var _tpFn = require("./tpFn");
 const _crTreeMap = _ref => {
   let {
@@ -17,7 +17,7 @@ const _crTreeMap = _ref => {
       percent = ''
     } = point,
     _percent = percent ? `(${percent}%)` : '',
-    _value = `${(0, _ChartFn.toNumberFormatAll)(value)} ${_percent}`;
+    _value = `${(0, _formatNumberFn.formatAllNumber)(value)} ${_percent}`;
   return `${(0, _tpFn.crHeader)(title, id)}
   <div class="tp_body">
     ${(0, _tpFn.crRow)('', label)}

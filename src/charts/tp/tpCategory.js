@@ -1,4 +1,6 @@
-import { toNumberFormatAll } from '../ChartFn';
+import {
+  formatAllNumber
+} from '../../utils/formatNumberFn';
 import {
    crHeader,
    crRow,
@@ -22,7 +24,7 @@ const _crSimple = ({
    , _date = d ? `${_c}-${d}` : _c
    return `${crHeader(_date, id)}
    <div class="tp__body">
-     ${crRow('Value', toNumberFormatAll(y), { status })}
+     ${crRow('Value', formatAllNumber(y), { status })}
      ${crRow('Seria', name, { color })}
    </div>`;
  };
@@ -34,7 +36,7 @@ const _crRemove = ({
   const { y, c, category, status } = point;
   return `${crHeader(c || category, id)}
   <div class="tp__body">
-    ${crRow('Value', toNumberFormatAll(y), { status })}
+    ${crRow('Value', formatAllNumber(y), { status })}
     <div class='tp__bt' id=${id+'_R'}>
          Remove
     </div>
