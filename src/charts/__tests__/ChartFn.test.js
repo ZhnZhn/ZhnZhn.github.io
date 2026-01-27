@@ -29,7 +29,7 @@ describe('setPlotLinesMinMax',()=>{
   const fn = setPlotLinesMinMax;
   test('should set min max values to plotLines object', ()=>{
     const plotLines = [{label:{}}, {label:{}}];
-    fn({plotLines, max: 20, min: 10});
+    fn(plotLines, 10, 20);
     expect(plotLines).toEqual([
       {value: 20, label: {text: '20'}},
       {value: 10, label: {text: '10'}}
@@ -37,21 +37,21 @@ describe('setPlotLinesMinMax',()=>{
   })
   test('should not set min or max for edge cases', ()=>{
     const plotLinesOnlyMax = [{label:{}}, {label:{}}];
-    fn({plotLines: plotLinesOnlyMax, max: 20, min: POSITIVE_INFINITY});
+    fn(plotLinesOnlyMax, POSITIVE_INFINITY, 20);
     expect(plotLinesOnlyMax).toEqual([
       {value: 20, label: {text: '20'}},
       {label:{}}
     ])
 
     const plotLinesOnlyMin = [{label:{}}, {label:{}}];
-    fn({plotLines: plotLinesOnlyMin, max: NEGATIVE_INFINITY, min: 10});
+    fn(plotLinesOnlyMin, 10, NEGATIVE_INFINITY);
     expect(plotLinesOnlyMin).toEqual([
       {label:{}},
       {value: 10, label: {text: '10'}}
     ])
 
     const plotLinesNeither = [{label:{}}, {label:{}}];
-    fn({plotLines: plotLinesNeither, max:NEGATIVE_INFINITY, min: POSITIVE_INFINITY});
+    fn(plotLinesNeither, POSITIVE_INFINITY, NEGATIVE_INFINITY);
     expect(plotLinesNeither).toEqual([
       {label:{}},
       {label:{}}

@@ -29,11 +29,7 @@ describe('setPlotLinesMinMax', () => {
     }, {
       label: {}
     }];
-    fn({
-      plotLines,
-      max: 20,
-      min: 10
-    });
+    fn(plotLines, 10, 20);
     expect(plotLines).toEqual([{
       value: 20,
       label: {
@@ -52,11 +48,7 @@ describe('setPlotLinesMinMax', () => {
     }, {
       label: {}
     }];
-    fn({
-      plotLines: plotLinesOnlyMax,
-      max: 20,
-      min: POSITIVE_INFINITY
-    });
+    fn(plotLinesOnlyMax, POSITIVE_INFINITY, 20);
     expect(plotLinesOnlyMax).toEqual([{
       value: 20,
       label: {
@@ -70,11 +62,7 @@ describe('setPlotLinesMinMax', () => {
     }, {
       label: {}
     }];
-    fn({
-      plotLines: plotLinesOnlyMin,
-      max: NEGATIVE_INFINITY,
-      min: 10
-    });
+    fn(plotLinesOnlyMin, 10, NEGATIVE_INFINITY);
     expect(plotLinesOnlyMin).toEqual([{
       label: {}
     }, {
@@ -88,11 +76,7 @@ describe('setPlotLinesMinMax', () => {
     }, {
       label: {}
     }];
-    fn({
-      plotLines: plotLinesNeither,
-      max: NEGATIVE_INFINITY,
-      min: POSITIVE_INFINITY
-    });
+    fn(plotLinesNeither, POSITIVE_INFINITY, NEGATIVE_INFINITY);
     expect(plotLinesNeither).toEqual([{
       label: {}
     }, {

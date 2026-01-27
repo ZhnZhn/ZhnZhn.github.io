@@ -141,17 +141,18 @@ export const _addMini = (
   ? _fAddZhMiniConfig(crConfig(option))(toConfig)
   : toConfig;
 
+const _getPlotLines = config => config.yAxis.plotLines;
 const _setMinMax = (
   min,
   max,
   noZoom,
   config
 ) => {
-  setPlotLinesMinMax({
-    plotLines: config.yAxis.plotLines,
+  setPlotLinesMinMax(
+    _getPlotLines(config),
     min,
     max
-  })
+  )
   fAdd('yAxis', {
     min: calcYAxisMin(min, max, noZoom),
     maxPadding: 0.15,
@@ -171,12 +172,12 @@ const _setMinMaxDeltas = (
   if (isDrawDeltaExtrems) {
     const _recentIndex = data.length-1;
     if (_recentIndex > 0) {
-      setPlotLinesDeltas({
-        plotLines: config.yAxis.plotLines,
+      setPlotLinesDeltas(
+        _getPlotLines(config),
         min,
         max,
-        value: getYFromPoint(data[_recentIndex])
-      })
+        getYFromPoint(data[_recentIndex])
+      )
     }
   }
 }

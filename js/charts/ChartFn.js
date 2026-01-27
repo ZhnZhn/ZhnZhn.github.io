@@ -187,12 +187,7 @@ const crValueMoving = (chart, prev, dateTo) => {
 exports.crValueMoving = crValueMoving;
 const crTpId = () => (0, _mathFn.crId)('TP_');
 exports.crTpId = crTpId;
-const setPlotLinesMinMax = _ref4 => {
-  let {
-    plotLines,
-    min,
-    max
-  } = _ref4;
+const setPlotLinesMinMax = (plotLines, min, max) => {
   if (max > _mathFn.NEGATIVE_INFINITY) {
     _setPlotLine(plotLines[0], max);
   }
@@ -201,13 +196,7 @@ const setPlotLinesMinMax = _ref4 => {
   }
 };
 exports.setPlotLinesMinMax = setPlotLinesMinMax;
-const setPlotLinesDeltas = _ref5 => {
-  let {
-    plotLines,
-    min,
-    max,
-    value
-  } = _ref5;
+const setPlotLinesDeltas = (plotLines, min, max, value) => {
   const _bMax = _crBigValueOrZero(max, _mathFn.NEGATIVE_INFINITY),
     _bMin = _crBigValueOrZero(min, _mathFn.POSITIVE_INFINITY),
     _bValue = _crBigValueOrZero(value, null),

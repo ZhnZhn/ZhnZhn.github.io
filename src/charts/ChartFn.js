@@ -232,11 +232,11 @@ export const crValueMoving = (
 
 export const crTpId = () => crId('TP_')
 
-export const setPlotLinesMinMax = ({
-   plotLines,
-   min,
-   max
- }) => {
+export const setPlotLinesMinMax = (
+  plotLines,
+  min,
+  max
+) => {
   if ( max>NEGATIVE_INFINITY ){
     _setPlotLine(plotLines[0], max)
   }
@@ -245,12 +245,12 @@ export const setPlotLinesMinMax = ({
   }
 }
 
-export const setPlotLinesDeltas = ({
+export const setPlotLinesDeltas = (
   plotLines,
   min,
   max,
   value
-}) => {
+) => {
   const _bMax = _crBigValueOrZero(max, NEGATIVE_INFINITY)
   , _bMin = _crBigValueOrZero(min, POSITIVE_INFINITY)
   , _bValue = _crBigValueOrZero(value, null)

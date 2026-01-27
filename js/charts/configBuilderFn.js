@@ -78,12 +78,9 @@ const _fAddZhMiniConfig = miniConfig => config => {
 };
 const _addMini = (data, option, crConfig, toConfig) => data && data.length > 0 ? _fAddZhMiniConfig(crConfig(option))(toConfig) : toConfig;
 exports._addMini = _addMini;
+const _getPlotLines = config => config.yAxis.plotLines;
 const _setMinMax = (min, max, noZoom, config) => {
-  (0, _ChartFn.setPlotLinesMinMax)({
-    plotLines: config.yAxis.plotLines,
-    min,
-    max
-  });
+  (0, _ChartFn.setPlotLinesMinMax)(_getPlotLines(config), min, max);
   fAdd('yAxis', {
     min: (0, _configBuilderHelpers.calcYAxisMin)(min, max, noZoom),
     maxPadding: 0.15,
@@ -96,12 +93,7 @@ const _setMinMaxDeltas = (min, max, data, isDrawDeltaExtrems, config) => {
   if (isDrawDeltaExtrems) {
     const _recentIndex = data.length - 1;
     if (_recentIndex > 0) {
-      (0, _ChartFn.setPlotLinesDeltas)({
-        plotLines: config.yAxis.plotLines,
-        min,
-        max,
-        value: (0, _configBuilderHelpers.getYFromPoint)(data[_recentIndex])
-      });
+      (0, _ChartFn.setPlotLinesDeltas)(_getPlotLines(config), min, max, (0, _configBuilderHelpers.getYFromPoint)(data[_recentIndex]));
     }
   }
 };
