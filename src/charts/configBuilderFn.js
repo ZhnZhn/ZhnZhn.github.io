@@ -35,6 +35,7 @@ import {
 } from './ChartTheme';
 import {
   calcMinY,
+  calcYAxisMin,
   setYToPoints,
   setPlotLinesMinMax,
   setPlotLinesDeltas
@@ -54,7 +55,6 @@ import {
   assignTo,
   findMinYData,
   findMaxYData,
-  calcYAxisMin,
   getYFromPoint,
   getFirstSeriaData
 } from './configBuilderHelpers';

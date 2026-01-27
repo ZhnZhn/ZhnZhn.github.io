@@ -271,6 +271,14 @@ export const calcMinY = (
         : min - ((max-min)/6)
     : void 0
 
+export const calcYAxisMin = (
+  min,
+  max,
+  noZoom
+) => noZoom && min >= 0
+   ? 0
+   : calcMinY(min, max)
+
 export const setYToPoints = (
   data,
   y

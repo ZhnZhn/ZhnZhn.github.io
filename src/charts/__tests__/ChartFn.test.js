@@ -1,5 +1,6 @@
 import {
   calcMinY,
+  calcYAxisMin,
   setPlotLinesMinMax
 } from '../ChartFn';
 
@@ -22,6 +23,20 @@ describe('calcMinY', () => {
     expect(fn(POSITIVE_INFINITY, 6)).toBe(void 0);
     expect(fn(0, NEGATIVE_INFINITY)).toBe(void 0);
     expect(fn(POSITIVE_INFINITY, NEGATIVE_INFINITY)).toBe(void 0);
+  })
+})
+
+describe('calcYAxisMin',()=>{
+  const fn = calcYAxisMin;
+  test('should calculate min value for yaxis from min, max, noZoom', ()=>{
+    expect(fn(2, 8, true)).toBe(0);
+    expect(fn(2, 8)).toBe(1);
+
+    expect(fn(100, 640, true)).toBe(0);
+    expect(fn(100, 640)).toBe(10);
+
+    expect(fn(0, 6, true)).toBe(0);
+    expect(fn(0, 6)).toBe(void 0);
   })
 })
 

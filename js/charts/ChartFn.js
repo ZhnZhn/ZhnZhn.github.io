@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.zoomIndicatorCharts = exports.setYToPoints = exports.setPlotLinesMinMax = exports.setPlotLinesDeltas = exports.crValueMoving = exports.crTpId = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = void 0;
+exports.zoomIndicatorCharts = exports.setYToPoints = exports.setPlotLinesMinMax = exports.setPlotLinesDeltas = exports.crValueMoving = exports.crTpId = exports.calcYAxisMin = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _mathFn = require("../math/mathFn");
 var _seriaFn = require("../math/seriaFn");
@@ -208,6 +208,8 @@ const setPlotLinesDeltas = (plotLines, min, max, value) => {
 exports.setPlotLinesDeltas = setPlotLinesDeltas;
 const calcMinY = (min, max) => max > _mathFn.NEGATIVE_INFINITY && min < _mathFn.POSITIVE_INFINITY ? min >= 0 && min <= (max - min) / 6 ? void 0 : min - (max - min) / 6 : void 0;
 exports.calcMinY = calcMinY;
+const calcYAxisMin = (min, max, noZoom) => noZoom && min >= 0 ? 0 : calcMinY(min, max);
+exports.calcYAxisMin = calcYAxisMin;
 const setYToPoints = (data, y) => {
   if (y == null) {
     return;

@@ -81,7 +81,7 @@ const _getPlotLines = config => config.yAxis.plotLines;
 const _setMinMax = (min, max, noZoom, config) => {
   (0, _ChartFn.setPlotLinesMinMax)(_getPlotLines(config), min, max);
   fAdd('yAxis', {
-    min: (0, _configBuilderHelpers.calcYAxisMin)(min, max, noZoom),
+    min: (0, _ChartFn.calcYAxisMin)(min, max, noZoom),
     maxPadding: 0.15,
     minPadding: 0.15,
     endOnTick: false,

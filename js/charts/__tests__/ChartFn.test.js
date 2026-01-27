@@ -21,6 +21,17 @@ describe('calcMinY', () => {
     expect(fn(POSITIVE_INFINITY, NEGATIVE_INFINITY)).toBe(void 0);
   });
 });
+describe('calcYAxisMin', () => {
+  const fn = _ChartFn.calcYAxisMin;
+  test('should calculate min value for yaxis from min, max, noZoom', () => {
+    expect(fn(2, 8, true)).toBe(0);
+    expect(fn(2, 8)).toBe(1);
+    expect(fn(100, 640, true)).toBe(0);
+    expect(fn(100, 640)).toBe(10);
+    expect(fn(0, 6, true)).toBe(0);
+    expect(fn(0, 6)).toBe(void 0);
+  });
+});
 describe('setPlotLinesMinMax', () => {
   const fn = _ChartFn.setPlotLinesMinMax;
   test('should set min max values to plotLines object', () => {
