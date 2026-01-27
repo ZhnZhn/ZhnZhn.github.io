@@ -59,8 +59,7 @@ import {
   getFirstSeriaData
 } from './configBuilderHelpers';
 
-const _isArr = Array.isArray
-, _assign = Object.assign;
+const _assign = Object.assign;
 
 export const fAddCaption = (
   title,
@@ -108,10 +107,10 @@ export const fAddLegend = (
 export const fAddSeries = (
   series
 ) => config => {
-  const _to =_isArr(config.series)
+  const _to = isArr(config.series)
      ? config.series
      : config.series = [];
-  if (_isArr(series)){
+  if (isArr(series)){
     const _legend = addSeriesImpl(_to, series);
     fAddLegend(_legend)(config)
   } else if (isObj(series)) {
@@ -124,7 +123,7 @@ const _fAddZhMiniConfig = (
   miniConfig
 ) => config => {
   const _configs = config.zhMiniConfigs;
-  if (_isArr(_configs)){
+  if (isArr(_configs)){
     _configs.push(miniConfig)
   } else {
     config.zhMiniConfigs = [miniConfig]
@@ -137,9 +136,9 @@ export const _addMini = (
   option,
   crConfig,
   toConfig
-) => data && data.length > 0
+) => isNotEmptyArr(data)
   ? _fAddZhMiniConfig(crConfig(option))(toConfig)
-  : toConfig;
+  : toConfig
 
 const _getPlotLines = config => config.yAxis.plotLines;
 const _setMinMax = (
@@ -297,7 +296,7 @@ const _fAddSeriaPoints = (
 export const fAddPointsToConfig = (
   points
 ) => config => points[0]
-  && _isArr(points[0])
+  && isArr(points[0])
   && points[0][0]
   && !isNumber(points[0][0])
   ? _fAddSeriaPoints(points)(config)
@@ -315,7 +314,7 @@ export const _fAddScatterBottom = (
   max
 ) => config => {
   const { data } = seria;
-  if (_isArr(data) && data.length > 0) {
+  if (isNotEmptyArr(data)) {
    const {
      series,
      chart,

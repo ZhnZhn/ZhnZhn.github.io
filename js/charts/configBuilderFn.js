@@ -16,8 +16,7 @@ var _ChartFactory = require("./ChartFactory");
 var _Tooltip = require("./Tooltip");
 var _seriaBuilderHelpers = require("./seriaBuilderHelpers");
 var _configBuilderHelpers = require("./configBuilderHelpers");
-const _isArr = Array.isArray,
-  _assign = Object.assign;
+const _assign = Object.assign;
 const fAddCaption = (title, subtitle) => config => {
   config.title = (0, _Chart.fTitle)({
     text: title || subtitle
@@ -57,8 +56,8 @@ const fAddLegend = (legend, isAddEmpty) => config => (0, _isTypeFn.isNotEmptyArr
 })(config) : config;
 exports.fAddLegend = fAddLegend;
 const fAddSeries = series => config => {
-  const _to = _isArr(config.series) ? config.series : config.series = [];
-  if (_isArr(series)) {
+  const _to = (0, _isTypeFn.isArr)(config.series) ? config.series : config.series = [];
+  if ((0, _isTypeFn.isArr)(series)) {
     const _legend = (0, _seriaBuilderHelpers.addSeriesImpl)(_to, series);
     fAddLegend(_legend)(config);
   } else if ((0, _isTypeFn.isObj)(series)) {
@@ -69,14 +68,14 @@ const fAddSeries = series => config => {
 exports.fAddSeries = fAddSeries;
 const _fAddZhMiniConfig = miniConfig => config => {
   const _configs = config.zhMiniConfigs;
-  if (_isArr(_configs)) {
+  if ((0, _isTypeFn.isArr)(_configs)) {
     _configs.push(miniConfig);
   } else {
     config.zhMiniConfigs = [miniConfig];
   }
   return config;
 };
-const _addMini = (data, option, crConfig, toConfig) => data && data.length > 0 ? _fAddZhMiniConfig(crConfig(option))(toConfig) : toConfig;
+const _addMini = (data, option, crConfig, toConfig) => (0, _isTypeFn.isNotEmptyArr)(data) ? _fAddZhMiniConfig(crConfig(option))(toConfig) : toConfig;
 exports._addMini = _addMini;
 const _getPlotLines = config => config.yAxis.plotLines;
 const _setMinMax = (min, max, noZoom, config) => {
@@ -197,7 +196,7 @@ const _fAddSeriaPoints = function (points, _temp) {
 };
 
 //FAOSTAT
-const fAddPointsToConfig = points => config => points[0] && _isArr(points[0]) && points[0][0] && !(0, _isTypeFn.isNumber)(points[0][0]) ? _fAddSeriaPoints(points)(config) : fAddSeriaBy(0, {
+const fAddPointsToConfig = points => config => points[0] && (0, _isTypeFn.isArr)(points[0]) && points[0][0] && !(0, _isTypeFn.isNumber)(points[0][0]) ? _fAddSeriaPoints(points)(config) : fAddSeriaBy(0, {
   type: 'spline',
   data: points
 })(config);
@@ -208,7 +207,7 @@ const _fAddScatterBottom = (seria, name, min, max) => config => {
   const {
     data
   } = seria;
-  if (_isArr(data) && data.length > 0) {
+  if ((0, _isTypeFn.isNotEmptyArr)(data)) {
     const {
       series,
       chart,
