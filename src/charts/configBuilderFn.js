@@ -1,20 +1,25 @@
 import {
-  isSeriesDataCase,
-  valueMoving
-} from '../adapters/AdapterFn';
-import pipe from '../utils/pipe';
-import {
-  filterTrimZero,
-  findMinY,
-  hasZeroOrLessValue
-} from '../math/seriaFn';
-import {
   isNumber,
   isStr,
   isObj,
   isArr,
   isNotEmptyArr
 } from '../utils/isTypeFn';
+import pipe from '../utils/pipe';
+
+import {
+  filterTrimZero,
+  findMinY,
+  hasZeroOrLessValue
+} from '../math/seriaFn';
+import {
+  getPointValue
+} from '../math/seriaHelperFn';
+
+import {
+  isSeriesDataCase,
+  valueMoving
+} from '../adapters/AdapterFn';
 
 import {
   crAreaConfig as _crAreaConfig,
@@ -54,7 +59,6 @@ import {
   assignTo,
   findMinYData,
   findMaxYData,
-  getYFromPoint,
   getFirstSeriaData
 } from './configBuilderHelpers';
 
@@ -183,7 +187,7 @@ const _getDeltaValue = (
   isDrawDeltaExtrems,
   data
 ) => isDrawDeltaExtrems && data.length > 1
-  ? getYFromPoint(data[data.length - 1])
+  ? getPointValue(data[data.length - 1], 0)
   : void 0;
 
 export const fAddMinMax = (

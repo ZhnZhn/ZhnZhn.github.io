@@ -21,12 +21,6 @@ export const assignTo = (
     : value
 };
 
-export const getYFromPoint = (
-  point
-) => isArr(point)
-  ? point[1]
-  : point && point.y || 0;
-
 export const getFirstSeriaData = obj => obj.config?.series?.[0].data
  || [];
 

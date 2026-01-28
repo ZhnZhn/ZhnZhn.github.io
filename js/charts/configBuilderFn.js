@@ -3,10 +3,11 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.toConfig = exports.setDataSourceTo = exports.setBarConfigHeightIf = exports.fSetSeriaBy = exports.fAddZhPoints = exports.fAddTooltip = exports.fAddSeries = exports.fAddSeriaBy = exports.fAddPointsToConfig = exports.fAddMinMax = exports.fAddLegend = exports.fAddCaption = exports.fAdd = exports.crTreeMapConfig = exports.crSplineSeriaConfig = exports.crSplineConfig = exports.crSeriaConfigFromAdapter = exports.crScatterSeriaConfig = exports.crCategoryConfig = exports.crBarOrColumnConfig = exports.crAreaConfig = exports.crArea2Config = exports._fAddScatterBottom = exports._addMini = void 0;
-var _AdapterFn = require("../adapters/AdapterFn");
+var _isTypeFn = require("../utils/isTypeFn");
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
 var _seriaFn = require("../math/seriaFn");
-var _isTypeFn = require("../utils/isTypeFn");
+var _seriaHelperFn = require("../math/seriaHelperFn");
+var _AdapterFn = require("../adapters/AdapterFn");
 var _ChartConfigFn = require("./ChartConfigFn");
 var _TreeMapConfigFn = require("./TreeMapConfigFn");
 var _Chart = require("./Chart");
@@ -104,7 +105,7 @@ const _setYAxisType = (isLogarithmic, data, config) => {
 const _setValueMoving = (_rt, data, config) => {
   config.valueMoving = (0, _AdapterFn.valueMoving)(data, _rt);
 };
-const _getDeltaValue = (isDrawDeltaExtrems, data) => isDrawDeltaExtrems && data.length > 1 ? (0, _configBuilderHelpers.getYFromPoint)(data[data.length - 1]) : void 0;
+const _getDeltaValue = (isDrawDeltaExtrems, data) => isDrawDeltaExtrems && data.length > 1 ? (0, _seriaHelperFn.getPointValue)(data[data.length - 1], 0) : void 0;
 const fAddMinMax = (data, option) => config => {
   const {
       isNotZoomToMinMax,
