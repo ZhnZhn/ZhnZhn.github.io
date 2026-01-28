@@ -9,13 +9,21 @@ export const getPointDate = point => isArr(point)
   ? point[0]
   : (point || {}).x
 
-export const getPointValue = point => isArr(point)
+const _getDfPointValue = (
+  dfValue
+) => isNumber(dfValue)
+ ? dfValue
+ : '0.0';
+export const getPointValue = (
+  point,
+  dfValue
+) => isArr(point)
   ? isNumber(point[1])
     ? point[1]
-    : '0.0'
+    : _getDfPointValue(dfValue)
   : point && isNumber(point.y)
     ? point.y
-    : '0.0'
+    : _getDfPointValue(dfValue)
 
 const _getDataPoint = arr => {
   if (!isArr(arr)) { return; }

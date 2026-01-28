@@ -30,6 +30,15 @@ describe('getPointValue', () => {
     expect(fn(_arrPoint)).toBe(10);
     expect(fn(_objPoint)).toBe(10);
   });
+  test('should use number dfValue', () => {
+    expect(fn([], 0)).toBe(0);
+    expect(fn({}, 0)).toBe(0);
+    expect(fn(void 0, 0)).toBe(0);
+    expect(fn([UTC_MLS_2010_12_31, 'str'], 0)).toBe(0);
+    expect(fn([{
+      y: null
+    }], 0)).toBe(0);
+  });
   test('should return string 0.0 in edge cases', () => {
     expect(fn([])).toBe('0.0');
     expect(fn({})).toBe('0.0');

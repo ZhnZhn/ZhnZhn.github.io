@@ -6,7 +6,8 @@ var _isTypeFn = require("../utils/isTypeFn");
 var _mathFn = require("./mathFn");
 const getPointDate = point => (0, _isTypeFn.isArr)(point) ? point[0] : (point || {}).x;
 exports.getPointDate = getPointDate;
-const getPointValue = point => (0, _isTypeFn.isArr)(point) ? (0, _isTypeFn.isNumber)(point[1]) ? point[1] : '0.0' : point && (0, _isTypeFn.isNumber)(point.y) ? point.y : '0.0';
+const _getDfPointValue = dfValue => (0, _isTypeFn.isNumber)(dfValue) ? dfValue : '0.0';
+const getPointValue = (point, dfValue) => (0, _isTypeFn.isArr)(point) ? (0, _isTypeFn.isNumber)(point[1]) ? point[1] : _getDfPointValue(dfValue) : point && (0, _isTypeFn.isNumber)(point.y) ? point.y : _getDfPointValue(dfValue);
 exports.getPointValue = getPointValue;
 const _getDataPoint = arr => {
   if (!(0, _isTypeFn.isArr)(arr)) {
