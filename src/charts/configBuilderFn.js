@@ -37,8 +37,7 @@ import {
   calcMinY,
   calcYAxisMin,
   setYToPoints,
-  setPlotLinesMinMax,
-  setPlotLinesDeltas
+  setPlotLinesMinMax
 } from './ChartFn';
 import {
   crBarOrColumnConfigImpl
@@ -140,46 +139,19 @@ export const _addMini = (
   ? _fAddZhMiniConfig(crConfig(option))(toConfig)
   : toConfig
 
-const _getPlotLines = config => config.yAxis.plotLines;
-const _setMinMax = (
-  min,
-  max,
-  noZoom,
+
+const _setYAxisMin = (
+  yAxisMinValue,
   config
 ) => {
-  setPlotLinesMinMax(
-    _getPlotLines(config),
-    min,
-    max
-  )
   fAdd('yAxis', {
-    min: calcYAxisMin(min, max, noZoom),
+    min: yAxisMinValue,
     maxPadding: 0.15,
     minPadding: 0.15,
     endOnTick: false,
     startOnTick: false
   })(config)
-}
-
-const _setMinMaxDeltas = (
-  min,
-  max,
-  data,
-  isDrawDeltaExtrems,
-  config
-) => {
-  if (isDrawDeltaExtrems) {
-    const _recentIndex = data.length-1;
-    if (_recentIndex > 0) {
-      setPlotLinesDeltas(
-        _getPlotLines(config),
-        min,
-        max,
-        getYFromPoint(data[_recentIndex])
-      )
-    }
-  }
-}
+};
 
 const _setYAxisType = (
   isLogarithmic,
@@ -207,6 +179,13 @@ const _setValueMoving = (
   config.valueMoving = valueMoving(data, _rt)
 }
 
+const _getDeltaValue = (
+  isDrawDeltaExtrems,
+  data
+) => isDrawDeltaExtrems && data.length > 1
+  ? getYFromPoint(data[data.length - 1])
+  : void 0;
+
 export const fAddMinMax = (
   data,
   option
@@ -224,10 +203,15 @@ export const fAddMinMax = (
       ? filterTrimZero(data)
       : data
   , min = findMinYData(minY, _data)
-  , max = findMaxYData(maxY, _data);
+  , max = findMaxYData(maxY, _data)
+  , yAxisMinValue = calcYAxisMin(min, max, isNotZoomToMinMax);
 
-  _setMinMax(min, max, isNotZoomToMinMax, config);
-  _setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems, config);
+  _setYAxisMin(yAxisMinValue, config);
+  setPlotLinesMinMax(
+    config.yAxis.plotLines,
+    min, max,
+    _getDeltaValue(isDrawDeltaExtrems, _data)
+  );
   _setYAxisType(isLogarithmic, _data, config);
   _setValueMoving(_rt, _data, config);
 

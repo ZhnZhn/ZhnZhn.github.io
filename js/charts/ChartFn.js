@@ -2,7 +2,7 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.zoomIndicatorCharts = exports.setYToPoints = exports.setPlotLinesMinMax = exports.setPlotLinesDeltas = exports.crValueMoving = exports.crTpId = exports.calcYAxisMin = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = void 0;
+exports.zoomIndicatorCharts = exports.setYToPoints = exports.setPlotLinesMinMax = exports.crValueMoving = exports.crTpId = exports.calcYAxisMin = exports.calcMinY = exports.afterSetExtremesYAxis = exports.addSeriaWithRenderLabel = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _mathFn = require("../math/mathFn");
 var _seriaFn = require("../math/seriaFn");
@@ -117,8 +117,9 @@ const _setPlotLine = function (plotLine, value, delta) {
     plotLine.label.text = `${_formatNumber(value)}${delta}`;
   }
 };
-const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`,
-  _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10),
+const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`
+  //, _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10)
+  ,
   _calcPerTo = (bFrom, bValue, bTotal) => (0, _mathFn.calcPercent)({
     bValue: bFrom.minus(bValue),
     bTotal
@@ -187,25 +188,24 @@ const crValueMoving = (chart, prev, dateTo) => {
 exports.crValueMoving = crValueMoving;
 const crTpId = () => (0, _mathFn.crId)('TP_');
 exports.crTpId = crTpId;
-const setPlotLinesMinMax = (plotLines, min, max) => {
+const _calcMinMaxDeltas = (min, max, value) => {
+  const _bMax = _crBigValueOrZero(max, _mathFn.NEGATIVE_INFINITY),
+    _bMin = _crBigValueOrZero(min, _mathFn.POSITIVE_INFINITY),
+    _bValue = (0, _big.default)(value),
+    _perToMax = _calcPerTo(_bMax, _bValue, _bValue),
+    _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
+  return [_crDelta(_perToMax), _crDelta(_perToMin)];
+};
+const setPlotLinesMinMax = (plotLines, min, max, value) => {
+  const [strDeltaMax, strDeltaMin] = (0, _isTypeFn.isNumber)(value) ? _calcMinMaxDeltas(min, max, value) : [];
   if (max > _mathFn.NEGATIVE_INFINITY) {
-    _setPlotLine(plotLines[0], max);
+    _setPlotLine(plotLines[0], max, strDeltaMax);
   }
   if (min < _mathFn.POSITIVE_INFINITY) {
-    _setPlotLine(plotLines[1], min);
+    _setPlotLine(plotLines[1], min, strDeltaMin);
   }
 };
 exports.setPlotLinesMinMax = setPlotLinesMinMax;
-const setPlotLinesDeltas = (plotLines, min, max, value) => {
-  const _bMax = _crBigValueOrZero(max, _mathFn.NEGATIVE_INFINITY),
-    _bMin = _crBigValueOrZero(min, _mathFn.POSITIVE_INFINITY),
-    _bValue = _crBigValueOrZero(value, null),
-    _perToMax = _calcPerTo(_bMax, _bValue, _bValue),
-    _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
-  _setPlotLine(plotLines[0], _crPoint(_bMax), _crDelta(_perToMax));
-  _setPlotLine(plotLines[1], _crPoint(_bMin), _crDelta(_perToMin));
-};
-exports.setPlotLinesDeltas = setPlotLinesDeltas;
 const calcMinY = (min, max) => max > _mathFn.NEGATIVE_INFINITY && min < _mathFn.POSITIVE_INFINITY ? min >= 0 && min <= (max - min) / 6 ? void 0 : min - (max - min) / 6 : void 0;
 exports.calcMinY = calcMinY;
 const calcYAxisMin = (min, max, noZoom) => noZoom && min >= 0 ? 0 : calcMinY(min, max);

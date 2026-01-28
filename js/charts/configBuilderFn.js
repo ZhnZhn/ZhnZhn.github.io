@@ -77,24 +77,14 @@ const _fAddZhMiniConfig = miniConfig => config => {
 };
 const _addMini = (data, option, crConfig, toConfig) => (0, _isTypeFn.isNotEmptyArr)(data) ? _fAddZhMiniConfig(crConfig(option))(toConfig) : toConfig;
 exports._addMini = _addMini;
-const _getPlotLines = config => config.yAxis.plotLines;
-const _setMinMax = (min, max, noZoom, config) => {
-  (0, _ChartFn.setPlotLinesMinMax)(_getPlotLines(config), min, max);
+const _setYAxisMin = (yAxisMinValue, config) => {
   fAdd('yAxis', {
-    min: (0, _ChartFn.calcYAxisMin)(min, max, noZoom),
+    min: yAxisMinValue,
     maxPadding: 0.15,
     minPadding: 0.15,
     endOnTick: false,
     startOnTick: false
   })(config);
-};
-const _setMinMaxDeltas = (min, max, data, isDrawDeltaExtrems, config) => {
-  if (isDrawDeltaExtrems) {
-    const _recentIndex = data.length - 1;
-    if (_recentIndex > 0) {
-      (0, _ChartFn.setPlotLinesDeltas)(_getPlotLines(config), min, max, (0, _configBuilderHelpers.getYFromPoint)(data[_recentIndex]));
-    }
-  }
 };
 const _setYAxisType = (isLogarithmic, data, config) => {
   if (isLogarithmic) {
@@ -114,6 +104,7 @@ const _setYAxisType = (isLogarithmic, data, config) => {
 const _setValueMoving = (_rt, data, config) => {
   config.valueMoving = (0, _AdapterFn.valueMoving)(data, _rt);
 };
+const _getDeltaValue = (isDrawDeltaExtrems, data) => isDrawDeltaExtrems && data.length > 1 ? (0, _configBuilderHelpers.getYFromPoint)(data[data.length - 1]) : void 0;
 const fAddMinMax = (data, option) => config => {
   const {
       isNotZoomToMinMax,
@@ -126,9 +117,10 @@ const fAddMinMax = (data, option) => config => {
     } = option,
     _data = isFilterZero ? (0, _seriaFn.filterTrimZero)(data) : data,
     min = (0, _configBuilderHelpers.findMinYData)(minY, _data),
-    max = (0, _configBuilderHelpers.findMaxYData)(maxY, _data);
-  _setMinMax(min, max, isNotZoomToMinMax, config);
-  _setMinMaxDeltas(min, max, _data, isDrawDeltaExtrems, config);
+    max = (0, _configBuilderHelpers.findMaxYData)(maxY, _data),
+    yAxisMinValue = (0, _ChartFn.calcYAxisMin)(min, max, isNotZoomToMinMax);
+  _setYAxisMin(yAxisMinValue, config);
+  (0, _ChartFn.setPlotLinesMinMax)(config.yAxis.plotLines, min, max, _getDeltaValue(isDrawDeltaExtrems, _data));
   _setYAxisType(isLogarithmic, _data, config);
   _setValueMoving(_rt, _data, config);
   return config;

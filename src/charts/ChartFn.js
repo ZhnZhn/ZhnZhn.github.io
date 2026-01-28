@@ -143,7 +143,7 @@ const _setPlotLine = (plotLine, value, delta='') => {
 };
 
 const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`
-, _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10)
+//, _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10)
 , _calcPerTo = (bFrom, bValue, bTotal) => calcPercent({
    bValue: bFrom.minus(bValue),
    bTotal
@@ -232,33 +232,39 @@ export const crValueMoving = (
 
 export const crTpId = () => crId('TP_')
 
-export const setPlotLinesMinMax = (
-  plotLines,
-  min,
-  max
+const _calcMinMaxDeltas = (
+  min, max, value
 ) => {
-  if ( max>NEGATIVE_INFINITY ){
-    _setPlotLine(plotLines[0], max)
-  }
-  if ( min<POSITIVE_INFINITY ){
-    _setPlotLine(plotLines[1], min)
-  }
-}
+  const _bMax = _crBigValueOrZero(max, NEGATIVE_INFINITY)
+  , _bMin = _crBigValueOrZero(min, POSITIVE_INFINITY)
+  , _bValue = Big(value)
+  , _perToMax = _calcPerTo(_bMax, _bValue, _bValue)
+  , _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
 
-export const setPlotLinesDeltas = (
+  return [
+    _crDelta(_perToMax),
+    _crDelta(_perToMin)
+  ];
+};
+
+export const setPlotLinesMinMax = (
   plotLines,
   min,
   max,
   value
 ) => {
-  const _bMax = _crBigValueOrZero(max, NEGATIVE_INFINITY)
-  , _bMin = _crBigValueOrZero(min, POSITIVE_INFINITY)
-  , _bValue = _crBigValueOrZero(value, null)
-  , _perToMax = _calcPerTo(_bMax, _bValue, _bValue)
-  , _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
-
-  _setPlotLine(plotLines[0], _crPoint(_bMax), _crDelta(_perToMax))
-  _setPlotLine(plotLines[1], _crPoint(_bMin), _crDelta(_perToMin))
+  const [
+    strDeltaMax,
+    strDeltaMin
+  ] = isNumber(value)
+    ? _calcMinMaxDeltas(min, max, value)
+    : [];
+  if ( max>NEGATIVE_INFINITY ){
+    _setPlotLine(plotLines[0], max, strDeltaMax)
+  }
+  if ( min<POSITIVE_INFINITY ){
+    _setPlotLine(plotLines[1], min, strDeltaMin)
+  }
 }
 
 export const calcMinY = (
