@@ -134,29 +134,6 @@ const _updateYAxisMinMax = (
   }
 };
 
-const _formatNumber = n => formatAllNumber(toFixedNumber(n));
-const _setPlotLine = (plotLine, value, delta='') => {
-  if (plotLine) {
-    plotLine.value = value
-    plotLine.label.text = `${_formatNumber(value)}${delta}`
-  }
-};
-
-const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`
-//, _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10)
-, _calcPerTo = (bFrom, bValue, bTotal) => calcPercent({
-   bValue: bFrom.minus(bValue),
-   bTotal
-});
-
-
-const _crBigValueOrZero = (
-  value,
-  initialValue
-) => value !== initialValue
-  ? Big(value)
-  : Big(0);
-
 const _getMinMaxFromEvent = ({
   userMin,
   userMax,
@@ -232,18 +209,48 @@ export const crValueMoving = (
 
 export const crTpId = () => crId('TP_')
 
+const _formatNumber = n => formatAllNumber(toFixedNumber(n));
+const _setPlotLine = (
+  plotLine,
+  value,
+  delta=''
+) => {
+  if (plotLine) {
+    plotLine.value = value
+    plotLine.label.text = `${_formatNumber(value)}${delta}`
+  }
+};
+
+const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`
+//, _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10)
+, _crStrDelta = (
+  bFrom,
+  bValue,
+  bTotal
+) => _crDelta(calcPercent({
+   bValue: bFrom.minus(bValue),
+   bTotal
+}));
+
+const _crBigValueOrZero = (
+  value,
+  initialValue
+) => value !== initialValue
+  ? Big(value)
+  : Big(0);
+
 const _calcMinMaxDeltas = (
-  min, max, value
+  min,
+  max,
+  value
 ) => {
   const _bMax = _crBigValueOrZero(max, NEGATIVE_INFINITY)
   , _bMin = _crBigValueOrZero(min, POSITIVE_INFINITY)
-  , _bValue = Big(value)
-  , _perToMax = _calcPerTo(_bMax, _bValue, _bValue)
-  , _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
+  , _bValue = Big(value);
 
   return [
-    _crDelta(_perToMax),
-    _crDelta(_perToMin)
+    _crStrDelta(_bMax, _bValue, _bValue),
+    _crStrDelta(_bValue, _bMin, _bValue)
   ];
 };
 

@@ -107,24 +107,6 @@ const _updateYAxisMinMax = (_ref2, options) => {
     _yAxis.setExtremes(min, max, true);
   }
 };
-const _formatNumber = n => (0, _formatNumberFn.formatAllNumber)((0, _mathFn.toFixedNumber)(n));
-const _setPlotLine = function (plotLine, value, delta) {
-  if (delta === void 0) {
-    delta = '';
-  }
-  if (plotLine) {
-    plotLine.value = value;
-    plotLine.label.text = `${_formatNumber(value)}${delta}`;
-  }
-};
-const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`
-  //, _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10)
-  ,
-  _calcPerTo = (bFrom, bValue, bTotal) => (0, _mathFn.calcPercent)({
-    bValue: bFrom.minus(bValue),
-    bTotal
-  });
-const _crBigValueOrZero = (value, initialValue) => value !== initialValue ? (0, _big.default)(value) : (0, _big.default)(0);
 const _getMinMaxFromEvent = _ref3 => {
   let {
     userMin,
@@ -188,13 +170,29 @@ const crValueMoving = (chart, prev, dateTo) => {
 exports.crValueMoving = crValueMoving;
 const crTpId = () => (0, _mathFn.crId)('TP_');
 exports.crTpId = crTpId;
+const _formatNumber = n => (0, _formatNumberFn.formatAllNumber)((0, _mathFn.toFixedNumber)(n));
+const _setPlotLine = function (plotLine, value, delta) {
+  if (delta === void 0) {
+    delta = '';
+  }
+  if (plotLine) {
+    plotLine.value = value;
+    plotLine.label.text = `${_formatNumber(value)}${delta}`;
+  }
+};
+const _crDelta = perToValue => `\u00A0\u00A0Δ ${perToValue}%`
+  //, _crPoint = bValue => parseFloat(bValue.round(4).toString(), 10)
+  ,
+  _crStrDelta = (bFrom, bValue, bTotal) => _crDelta((0, _mathFn.calcPercent)({
+    bValue: bFrom.minus(bValue),
+    bTotal
+  }));
+const _crBigValueOrZero = (value, initialValue) => value !== initialValue ? (0, _big.default)(value) : (0, _big.default)(0);
 const _calcMinMaxDeltas = (min, max, value) => {
   const _bMax = _crBigValueOrZero(max, _mathFn.NEGATIVE_INFINITY),
     _bMin = _crBigValueOrZero(min, _mathFn.POSITIVE_INFINITY),
-    _bValue = (0, _big.default)(value),
-    _perToMax = _calcPerTo(_bMax, _bValue, _bValue),
-    _perToMin = _calcPerTo(_bValue, _bMin, _bValue);
-  return [_crDelta(_perToMax), _crDelta(_perToMin)];
+    _bValue = (0, _big.default)(value);
+  return [_crStrDelta(_bMax, _bValue, _bValue), _crStrDelta(_bValue, _bMin, _bValue)];
 };
 const setPlotLinesMinMax = (plotLines, min, max, value) => {
   const [strDeltaMax, strDeltaMin] = (0, _isTypeFn.isNumber)(value) ? _calcMinMaxDeltas(min, max, value) : [];

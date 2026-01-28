@@ -16,8 +16,13 @@ var _ChartFn = require("./ChartFn");
 var _ChartFactory = require("./ChartFactory");
 var _Tooltip = require("./Tooltip");
 var _seriaBuilderHelpers = require("./seriaBuilderHelpers");
-var _configBuilderHelpers = require("./configBuilderHelpers");
 const _assign = Object.assign;
+const assignTo = (obj, propName, value) => {
+  obj[propName] = (0, _isTypeFn.isObj)(value) && !(0, _isTypeFn.isArr)(value) ? _assign(obj[propName] || {}, value) : value;
+};
+const _fFindY = findY => (y, data) => (0, _isTypeFn.isNumber)(y) ? y : findY(data),
+  findMinYData = _fFindY(_seriaFn.findMinY),
+  findMaxYData = _fFindY(_seriaFn.findMaxY);
 const fAddCaption = (title, subtitle) => config => {
   config.title = (0, _Chart.fTitle)({
     text: title || subtitle
@@ -32,11 +37,11 @@ const fAddCaption = (title, subtitle) => config => {
 exports.fAddCaption = fAddCaption;
 const fAdd = (propName, option) => config => {
   if ((0, _isTypeFn.isStr)(propName)) {
-    (0, _configBuilderHelpers.assignTo)(config, propName, option);
+    assignTo(config, propName, option);
   } else if ((0, _isTypeFn.isObj)(propName)) {
     let _propName;
     for (_propName in propName) {
-      (0, _configBuilderHelpers.assignTo)(config, _propName, propName[_propName]);
+      assignTo(config, _propName, propName[_propName]);
     }
   }
   return config;
@@ -117,8 +122,8 @@ const fAddMinMax = (data, option) => config => {
       _rt
     } = option,
     _data = isFilterZero ? (0, _seriaFn.filterTrimZero)(data) : data,
-    min = (0, _configBuilderHelpers.findMinYData)(minY, _data),
-    max = (0, _configBuilderHelpers.findMaxYData)(maxY, _data),
+    min = findMinYData(minY, _data),
+    max = findMaxYData(maxY, _data),
     yAxisMinValue = (0, _ChartFn.calcYAxisMin)(min, max, isNotZoomToMinMax);
   _setYAxisMin(yAxisMinValue, config);
   (0, _ChartFn.setPlotLinesMinMax)(config.yAxis.plotLines, min, max, _getDeltaValue(isDrawDeltaExtrems, _data));
@@ -235,9 +240,7 @@ const _disableAnimation = config => {
   })(config);
 };
 const _checkDataLength = config => {
-  const data = (0, _configBuilderHelpers.getFirstSeriaData)({
-    config
-  });
+  const data = config?.series?.[0].data || [];
   if (data.length > 3000) {
     _disableAnimation(config);
   }

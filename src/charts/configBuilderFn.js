@@ -10,6 +10,7 @@ import pipe from '../utils/pipe';
 import {
   filterTrimZero,
   findMinY,
+  findMaxY,
   hasZeroOrLessValue
 } from '../math/seriaFn';
 import {
@@ -55,14 +56,23 @@ import {
   crLegendItem
 } from './seriaBuilderHelpers';
 
-import {
-  assignTo,
-  findMinYData,
-  findMaxYData,
-  getFirstSeriaData
-} from './configBuilderHelpers';
-
 const _assign = Object.assign;
+const assignTo = (
+  obj,
+  propName,
+  value
+) => {
+  obj[propName] = isObj(value) && !isArr(value)
+    ? _assign(obj[propName] || {}, value)
+    : value
+};
+
+const _fFindY = findY => (
+  y,
+  data
+) => isNumber(y) ? y : findY(data)
+, findMinYData = _fFindY(findMinY)
+, findMaxYData = _fFindY(findMaxY);
 
 export const fAddCaption = (
   title,
@@ -330,7 +340,7 @@ const _disableAnimation = (config) => {
 }
 
 const _checkDataLength = (config) => {
-  const data = getFirstSeriaData({ config });
+  const data = config?.series?.[0].data || [];
   if (data.length > 3000){
     _disableAnimation(config)
   }
