@@ -1,7 +1,5 @@
 import Big from 'big.js';
 
-import { toTd as _toTd } from '../charts/dateFormat';
-
 import { joinByComma } from '../utils/arrFn';
 import { formatAllNumber } from '../utils/formatNumberFn';
 
@@ -55,10 +53,6 @@ const _fIsNumber = (
 ) => (p) => isTypeNumber(p[pn]) && isFinite(p[pn]);
 
 const _crDmyFrom = point => mlsToDmy(getPointDate(point));
-
-export const toTd = (mls) => isNumber(mls)
-  ? _toTd(mls)
-  : ''
 
 export const getValues = option => option.items.map(getValue)
 export const isYNumber = _fIsNumber('y')

@@ -1,6 +1,5 @@
-import {
-  formatNumber
-} from '../utils/formatNumberFn';
+import { formatNumber } from '../utils/formatNumberFn';
+import { toWmdy } from '../utils/dateFormatFn';
 
 import {
   splineValueDmy,
@@ -25,13 +24,7 @@ import { treeMapValue } from './tp/tpTreeMap';
 import { donutValue } from './tp/tpDonut';
 import { addHideHandler } from './tp/tpFn';
 
-import {
-  crTpId,
-  //toNumberFormat
-} from './ChartFn';
-import {
-  toDmy
-} from './dateFormat';
+import { crTpId } from './ChartFn';
 
 const _addCloseHandler = (
   id,
@@ -44,7 +37,7 @@ const _fFormatter = (option) => function(){
    const {
       fnTemplate,
       onAfterRender=_addCloseHandler,
-      fnDateFormat=toDmy,
+      fnDateFormat=toWmdy,
       isWithColor,
       isWithValueText,
       isWithValue

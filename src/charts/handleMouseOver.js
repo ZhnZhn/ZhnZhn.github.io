@@ -1,12 +1,10 @@
 import { formatNumber } from '../utils/formatNumberFn';
+import { toDmy } from '../utils/dateFormatFn';
 
-import { formatDate } from './dateFormat';
 import calcYAxisOffset from './calcYAxisOffset';
 import { CL_HC_GL } from './CL';
 
-const STR_DATE_PATTERN = "%d-%m-%Y"
-, STR_DATE_EMPTY = "01-01-1970"
-, ATTR_LABEL = {
+const ATTR_LABEL = {
   zIndex: 100
 }
 
@@ -37,14 +35,11 @@ const _crDelta = (
 const _crCrossParam = (
   point,
   chart
-) => {
-  const _d = formatDate(STR_DATE_PATTERN, point.x);
-  return {
-    y: point.y,
-    date: _d !== STR_DATE_EMPTY ? _d : '',
-    ..._crDelta(chart)
-  };
-};
+) => ({
+  y: point.y,
+  date: toDmy(point.x),
+  ..._crDelta(chart)
+});
 
 const _crCategoryCrossParam = (
   point,
@@ -55,8 +50,9 @@ const _crCategoryCrossParam = (
   ..._crDelta(chart, DX_CATEGORY, DY_CATEGORY)
 });
 
-const _isCrossParam = point =>
-  !point.isCategory || point.c;
+const _isCrossParam = (
+  point
+) => !point.isCategory || point.c;
 
 const _getCrCrossParam = (
   point
@@ -88,7 +84,12 @@ const _crYCrossLabelY = (
 ) => plotY + chart.plotTop + Y_DY;
 
 
-const _crCrossLabel = (chart, text, x, y) => chart
+const _crCrossLabel = (
+  chart,
+  text,
+  x,
+  y
+) => chart
  .renderer
  .text(text, x, y)
  .attr(ATTR_LABEL)
@@ -96,10 +97,22 @@ const _crCrossLabel = (chart, text, x, y) => chart
  .add();
 
 const handleMouserOverPoint = function(event){
-  const { plotX, plotY, series } = this
+  const {
+    plotX,
+    plotY,
+    series
+  } = this
   , chart = series.chart
-  , { xCrossLabel, yCrossLabel } = chart
-  , { y, date, dX, dY } = _getCrCrossParam(this)(this, chart)
+  , {
+    xCrossLabel,
+    yCrossLabel
+  } = chart
+  , {
+     y,
+     date,
+     dX,
+     dY
+   } = _getCrCrossParam(this)(this, chart)
   , xLX = _crXCrossLabelX(chart, plotX)
   , yLX = _crXCrossLabelY(chart, dY)
   , xLY = _crYCrossLabelX(chart, dX)

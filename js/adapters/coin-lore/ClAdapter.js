@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _dateFormatFn = require("../../utils/dateFormatFn");
 var _AdapterFn = require("../AdapterFn");
 var _toTableFn = require("../toTableFn");
 const _pnTurnoverUsd = "turnover",
@@ -18,7 +19,7 @@ const _pnTurnoverUsd = "turnover",
     ...(0, _toTableFn.crNameProps)("V*P USD", _pnTurnoverUsd, true),
     ...(0, _toTableFn.crNumberProps)(0)
   }, (0, _toTableFn.crNameProps)("Time", true), (0, _toTableFn.crNameProps)("Date", true)];
-const _crTimeDate = time => (0, _AdapterFn.toTd)(time * 1000).split(" ")
+const _crTimeDate = time => (0, _dateFormatFn.toTdSafe)(time * 1000).split(" ")
   // base = null or quote = null or volume = 0
   ,
   _isNotEmptyPair = _ref => {
@@ -66,8 +67,8 @@ const _crTimeDate = time => (0, _AdapterFn.toTd)(time * 1000).split(" ")
     };
   },
   _crTimePeriod = (tMin, tMax) => {
-    const tdMin = (0, _AdapterFn.toTd)(tMin * 1000),
-      tdMax = (0, _AdapterFn.toTd)(tMax * 1000),
+    const tdMin = (0, _dateFormatFn.toTdSafe)(tMin * 1000),
+      tdMax = (0, _dateFormatFn.toTdSafe)(tMax * 1000),
       minArr = tdMin.split(" "),
       maxArr = tdMax.split(" "),
       dmy = minArr[1] === maxArr[1] ? minArr[1] : void 0;

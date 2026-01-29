@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.splineValueTdmyIf = exports.splineValueDmy = void 0;
-var _dateFormat = require("../dateFormat");
+var _dateFormatFn = require("../../utils/dateFormatFn");
 var _tpFn = require("./tpFn");
 const _crValue = _ref => {
   let {
@@ -31,6 +31,6 @@ const _splineOptions = {
 const splineValueDmy = exports.splineValueDmy = _splineOptions;
 const splineValueTdmyIf = exports.splineValueTdmyIf = {
   ..._splineOptions,
-  fnDateFormat: _dateFormat.toTdmyIf
+  fnDateFormat: _dateFormatFn.toTdmyIf
 };
 //# sourceMappingURL=tpSpline.js.map

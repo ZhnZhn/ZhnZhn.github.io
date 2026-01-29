@@ -4,12 +4,10 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _formatNumberFn = require("../utils/formatNumberFn");
-var _dateFormat = require("./dateFormat");
+var _dateFormatFn = require("../utils/dateFormatFn");
 var _calcYAxisOffset = _interopRequireDefault(require("./calcYAxisOffset"));
 var _CL = require("./CL");
-const STR_DATE_PATTERN = "%d-%m-%Y",
-  STR_DATE_EMPTY = "01-01-1970",
-  ATTR_LABEL = {
+const ATTR_LABEL = {
     zIndex: 100
   },
   X_DX = -10,
@@ -34,14 +32,11 @@ const _crDelta = function (chart, dX, dY) {
     dY: yDeltaCrossLabel - dY
   };
 };
-const _crCrossParam = (point, chart) => {
-  const _d = (0, _dateFormat.formatDate)(STR_DATE_PATTERN, point.x);
-  return {
-    y: point.y,
-    date: _d !== STR_DATE_EMPTY ? _d : '',
-    ..._crDelta(chart)
-  };
-};
+const _crCrossParam = (point, chart) => ({
+  y: point.y,
+  date: (0, _dateFormatFn.toDmy)(point.x),
+  ..._crDelta(chart)
+});
 const _crCategoryCrossParam = (point, chart) => ({
   y: (0, _formatNumberFn.formatNumber)(point.y),
   date: point.x,

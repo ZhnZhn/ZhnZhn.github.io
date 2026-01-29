@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.tooltipValueTdmyIf = exports.tooltipValueDmy = exports.tooltipTreeMap = exports.tooltipSparkTreeMap = exports.tooltipSparkStackedArea = exports.tooltipExValue = exports.tooltipExDividend = exports.tooltipDonut = exports.tooltipCategorySimple = exports.tooltipCategory = exports.tooltipAth = void 0;
 var _formatNumberFn = require("../utils/formatNumberFn");
+var _dateFormatFn = require("../utils/dateFormatFn");
 var _tpSpline = require("./tp/tpSpline");
 var _tpCategory = require("./tp/tpCategory");
 var _tpScatter = require("./tp/tpScatter");
@@ -12,7 +13,6 @@ var _tpTreeMap = require("./tp/tpTreeMap");
 var _tpDonut = require("./tp/tpDonut");
 var _tpFn = require("./tp/tpFn");
 var _ChartFn = require("./ChartFn");
-var _dateFormat = require("./dateFormat");
 const _addCloseHandler = (id, point) => {
   setTimeout(() => (0, _tpFn.addHideHandler)(id, point), 1);
 };
@@ -20,7 +20,7 @@ const _fFormatter = option => function () {
   const {
       fnTemplate,
       onAfterRender = _addCloseHandler,
-      fnDateFormat = _dateFormat.toDmy,
+      fnDateFormat = _dateFormatFn.toWmdy,
       isWithColor,
       isWithValueText,
       isWithValue

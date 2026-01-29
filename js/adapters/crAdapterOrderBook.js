@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.fCrTitle = exports.default = exports.crTitleDf = exports.crAdapterOrderBook = void 0;
 var _isTypeFn = require("../utils/isTypeFn");
+var _dateFormatFn = require("../utils/dateFormatFn");
 var _AdapterFn = require("./AdapterFn");
 var _toTableFn = require("./toTableFn");
 var _crOrderBookRows = _interopRequireDefault(require("./crOrderBookRows"));
@@ -16,7 +17,7 @@ const crTitleDf = _ref => {
 exports.crTitleDf = crTitleDf;
 const fCrTitle = (jsonPn, isSeconds) => (option, json) => {
   const _multipleBy = isSeconds ? 1000 : 1,
-    strDate = (0, _AdapterFn.toTd)((0, _isTypeFn.parseIntBy10)(json[jsonPn]) * _multipleBy);
+    strDate = (0, _dateFormatFn.toTdSafe)((0, _isTypeFn.parseIntBy10)(json[jsonPn]) * _multipleBy);
   return `${crTitleDf(option)} ${strDate}`;
 };
 exports.fCrTitle = fCrTitle;

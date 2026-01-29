@@ -2,9 +2,8 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toTimeDate = exports.toTd = exports.setItemCaptionTo = exports.setItemCaptionCurrencyRateTo = exports.roundByOHLC = exports.monthIndex = exports.isYNumber = exports.isSeriesDataCase = exports.getYmdhmUTC = exports.getYear = exports.getValues = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.fCrValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
+exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toTimeDate = exports.setItemCaptionTo = exports.setItemCaptionCurrencyRateTo = exports.roundByOHLC = exports.monthIndex = exports.isYNumber = exports.isSeriesDataCase = exports.getYmdhmUTC = exports.getYear = exports.getValues = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.fCrValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _big = _interopRequireDefault(require("big.js"));
-var _dateFormat = require("../charts/dateFormat");
 var _arrFn = require("../utils/arrFn");
 var _formatNumberFn = require("../utils/formatNumberFn");
 var _itemFn = require("../utils/itemFn");
@@ -37,8 +36,6 @@ exports.crDfItemKey = crDfItemKey;
 const EMPTY = '';
 const _fIsNumber = pn => p => (0, _isTypeFn.isTypeNumber)(p[pn]) && isFinite(p[pn]);
 const _crDmyFrom = point => (0, _dateFn.mlsToDmy)((0, _seriaHelperFn.getPointDate)(point));
-const toTd = mls => (0, _isTypeFn.isNumber)(mls) ? (0, _dateFormat.toTd)(mls) : '';
-exports.toTd = toTd;
 const getValues = option => option.items.map(_itemFn.getValue);
 exports.getValues = getValues;
 const isYNumber = exports.isYNumber = _fIsNumber('y');

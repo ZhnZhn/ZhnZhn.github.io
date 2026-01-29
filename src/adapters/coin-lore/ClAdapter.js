@@ -1,9 +1,12 @@
 import {
-  toTd,
+  toTdSafe
+} from "../../utils/dateFormatFn";
+
+import {
   roundByOHLC
 } from "../AdapterFn";
 import {
-  crRankProps,  
+  crRankProps,
   crNameProps,
   crNumberProps,
   crTableConfig,
@@ -34,7 +37,7 @@ const _pnTurnoverUsd = "turnover"
 
 const _crTimeDate = (
   time
-) => toTd(time*1000).split(" ")
+) => toTdSafe(time*1000).split(" ")
 // base = null or quote = null or volume = 0
 , _isNotEmptyPair = ({
   base,
@@ -75,8 +78,8 @@ const _crTimeDate = (
   };
 },
 _crTimePeriod = (tMin, tMax) => {
-  const tdMin = toTd(tMin*1000)
-  , tdMax = toTd(tMax*1000)
+  const tdMin = toTdSafe(tMin*1000)
+  , tdMax = toTdSafe(tMax*1000)
   , minArr = tdMin.split(" ")
   , maxArr = tdMax.split(" ")
   , dmy = minArr[1] === maxArr[1]

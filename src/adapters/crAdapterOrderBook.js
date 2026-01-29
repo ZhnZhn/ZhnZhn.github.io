@@ -1,11 +1,9 @@
-import {
-  parseIntBy10
-} from '../utils/isTypeFn';
+import { parseIntBy10 } from '../utils/isTypeFn';
+import { toTdSafe } from '../utils/dateFormatFn';
 
 import {
   FN_IDENTITY,
-  FN_NOOP,
-  toTd
+  FN_NOOP
 } from './AdapterFn';
 import { crTableConfig } from './toTableFn';
 import crOrderBookRows from './crOrderBookRows';
@@ -17,7 +15,7 @@ export const fCrTitle = (
   isSeconds
 ) => (option, json) => {
   const _multipleBy = isSeconds ? 1000 : 1
-  , strDate = toTd(parseIntBy10(json[jsonPn])*_multipleBy);
+  , strDate = toTdSafe(parseIntBy10(json[jsonPn]) * _multipleBy);
   return `${crTitleDf(option)} ${strDate}`;
 }
 
