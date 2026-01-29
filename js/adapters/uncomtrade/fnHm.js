@@ -6,6 +6,7 @@ var _isTypeFn = require("../../utils/isTypeFn");
 var _bindTo = require("../../utils/bindTo");
 var _crRouter = require("../../utils/crRouter");
 var _mathFn = require("../../math/mathFn");
+var _compareByFn = require("../compareByFn");
 var _conf = require("./conf");
 var _fnAdapter = require("./fnAdapter");
 const DF_PN_COUNTRY = 'partnerCode';
@@ -51,7 +52,7 @@ const _getRecentValueForSort = points => {
   const len = points && points.length;
   return len && len > 0 ? points[len - 1].forSort : void 0;
 };
-const toSeriaNames = (hm, compareBy) => (0, _fnAdapter.sortDescByPnValue)((0, _isTypeFn.getObjectKeys)(hm).map(propName => ({
+const toSeriaNames = (hm, compareBy) => (0, _compareByFn.sortDescByPnValue)((0, _isTypeFn.getObjectKeys)(hm).map(propName => ({
   value: _getRecentValueForSort(hm[propName]),
   name: propName
 })));

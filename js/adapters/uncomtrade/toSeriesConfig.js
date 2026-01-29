@@ -10,6 +10,7 @@ var _Chart = require("../../charts/Chart");
 var _Tooltip = require("../../charts/Tooltip");
 var _ChartTheme = require("../../charts/ChartTheme");
 var _ChartConfigFn = require("../../charts/ChartConfigFn");
+var _AdapterFn = require("../AdapterFn");
 var _legendFn = require("../legendFn");
 var _fnHm = require("./fnHm");
 var _fnLegend = require("./fnLegend");
@@ -138,7 +139,7 @@ const _crSeriesConfig = (json, option) => {
 const _toMls = yyyymm => {
   const _str = '' + yyyymm,
     _ym = _str.length === 4 ? _str : _str.slice(0, 4) + '-' + _str.slice(4, 6);
-  return (0, _fnAdapter.ymdToUTC)(_ym);
+  return (0, _AdapterFn.ymdToUTC)(_ym);
 };
 const _transformToDatetime = config => {
   const {
@@ -153,7 +154,7 @@ const _transformToDatetime = config => {
   config.xAxis.categories = void 0;
   config.xAxis.type = 'datetime';
   config.tooltip = (0, _Chart.fTooltip)(_Tooltip.tooltipValueDmy);
-  config.valueMoving = (0, _fnAdapter.valueMoving)(_data);
+  config.valueMoving = (0, _AdapterFn.valueMoving)(_data);
   config.zhConfig.isWithoutIndicator = false;
 };
 const toSeriesConfig = (json, option) => {

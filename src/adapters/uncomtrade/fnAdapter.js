@@ -1,31 +1,21 @@
-export {
-  ymdToUTC,
-  valueMoving
-} from '../AdapterFn';
-
-import {
-  CHT_DOT_SET
-} from '../../constants/ChartType';
-
-import {
-  joinByUndescore,
-  joinByBlank,
-  joinByNbsp
-} from '../../utils/arrFn';
-
 import {
   isArr,
   isNumber,
   isPositiveNumber,
 } from '../../utils/isTypeFn';
+import {
+  joinByUndescore,
+  joinByBlank,
+  joinByNbsp
+} from '../../utils/arrFn';
 import { domSanitize } from '../../utils/domFn';
 import { formatNumber } from '../../utils/numberFormatFn';
 
-import { isCategory } from '../CategoryFn';
+import {
+  CHT_DOT_SET
+} from '../../constants/ChartType';
 
-export {
-  sortDescByPnValue
-} from '../compareByFn';
+import { isCategory } from '../CategoryFn';
 
 import { toDescr } from './fnDescr';
 import { WORLD_CODE } from './conf';

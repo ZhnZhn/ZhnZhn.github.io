@@ -3,6 +3,7 @@ import { bindTo } from '../../utils/bindTo';
 import { crRouter } from '../../utils/crRouter';
 
 import { roundBy } from '../../math/mathFn';
+import { sortDescByPnValue } from '../compareByFn';
 
 import {
   NET_WEIGHT,
@@ -12,8 +13,7 @@ import {
 } from './conf';
 
 import {
-  getItemTradeValue,
-  sortDescByPnValue
+  getItemTradeValue
 } from './fnAdapter';
 
 const DF_PN_COUNTRY = 'partnerCode';

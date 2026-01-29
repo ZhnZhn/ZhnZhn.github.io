@@ -18,6 +18,10 @@ import {
 import { getSeriaColorByIndex } from '../../charts/ChartTheme';
 import { setSeriaDataTo } from '../../charts/ChartConfigFn';
 
+import {
+  valueMoving,
+  ymdToUTC
+} from '../AdapterFn';
 import { legendItem } from '../legendFn'
 
 import {
@@ -30,12 +34,10 @@ import {
 } from './fnLegend';
 
 import {
-  ymdToUTC,
-  valueMoving,
-  getHmTradePartners,
   crEmptyHmObject,
   crInfo,
-  crZhConfig
+  crZhConfig,
+  getHmTradePartners
 } from './fnAdapter';
 
 import {
