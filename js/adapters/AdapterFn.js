@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.ymdhmsToUTC = exports.ymdToUTC = exports.valueMoving = exports.toTimeDate = exports.setItemCaptionTo = exports.setItemCaptionCurrencyRateTo = exports.roundByOHLC = exports.monthIndex = exports.isYNumber = exports.isSeriesDataCase = exports.getYmdhmUTC = exports.getYear = exports.getValues = exports.getFromDate = exports.getDaysFromYmd = exports.getCurrentYear = exports.fCrValue = exports.fCheckResponse = exports.fAddToConfigInfoAndDfLink = exports.crZhConfig = exports.crXmlDocument = exports.crValueMoving = exports.crShortItemCaption = exports.crErrorByMessage = exports.crError = exports.crDfLink = exports.crDfItemKey = exports.assign = exports.addToConfigInfo = exports.addToConfigDfLink = exports.addSeriesDataTypeTo = exports.FN_NOOP = exports.FN_IDENTITY = void 0;
 var _big = _interopRequireDefault(require("big.js"));
 var _arrFn = require("../utils/arrFn");
-var _formatNumberFn = require("../utils/formatNumberFn");
+var _numberFormatFn = require("../utils/numberFormatFn");
 var _itemFn = require("../utils/itemFn");
 var _dateFn = require("../utils/dateFn");
 exports.ymdToUTC = _dateFn.ymdToUTC;
@@ -97,7 +97,7 @@ const crValueMoving = _ref2 => {
   return (0, _mathFn.crValueMoving)({
     nowValue: bNowValue,
     prevValue: bPrevValue,
-    fnFormat: _formatNumberFn.formatAllNumber,
+    fnFormat: _numberFormatFn.formatAllNumber,
     dfR
   });
 };
@@ -143,7 +143,7 @@ const valueMoving = (data, dfR) => {
       bPrevValue,
       dfR
     }),
-    valueTo: (0, _formatNumberFn.formatAllNumber)(bPrevValue),
+    valueTo: (0, _numberFormatFn.formatAllNumber)(bPrevValue),
     date,
     dateTo
   };

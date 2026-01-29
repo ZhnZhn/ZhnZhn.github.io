@@ -1,6 +1,5 @@
 import { COLOR_DATE } from '../../constants/Color';
-import { formatAllNumber } from '../../utils/formatNumberFn';
-
+import { formatAllNumber } from '../../utils/numberFormatFn';
 
 import {
   crHeader,

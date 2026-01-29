@@ -7,7 +7,7 @@
  "names": [
   "_reactDom",
   "require",
-  "_formatNumberFn",
+  "_numberFormatFn",
   "_SparkFactory",
   "_Color",
   "_tpFn",

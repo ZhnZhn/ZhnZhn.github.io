@@ -2,10 +2,10 @@
 
 exports.__esModule = true;
 exports.getStatus = exports.crSpan = exports.crRow = exports.crNotEmptySpan = exports.crHeader = exports.addHideHandler = void 0;
-var _Color = require("../../constants/Color");
-var _domFn = require("../../utils/domFn");
 var _isTypeFn = require("../../utils/isTypeFn");
-var _formatNumberFn = require("../../utils/formatNumberFn");
+var _domFn = require("../../utils/domFn");
+var _numberFormatFn = require("../../utils/numberFormatFn");
+var _Color = require("../../constants/Color");
 var _CL = require("../CL");
 const VALUE_STYLE = 'padding-right:5px;',
   STATUS_STYLE = 'padding-left:4px;';
@@ -54,7 +54,7 @@ const crSpan = function (t, v, _temp) {
   <span ${_vStyle}>${_v}</span>${_statusSpan}`;
 };
 exports.crSpan = crSpan;
-const crNotEmptySpan = (title, v) => _isValueEmpty(v) ? '' : crSpan(title, (0, _formatNumberFn.formatAllNumber)(v));
+const crNotEmptySpan = (title, v) => _isValueEmpty(v) ? '' : crSpan(title, (0, _numberFormatFn.formatAllNumber)(v));
 exports.crNotEmptySpan = crNotEmptySpan;
 const crRow = function (t, v, option) {
   if (t === void 0) {

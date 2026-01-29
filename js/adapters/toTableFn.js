@@ -4,7 +4,7 @@ exports.__esModule = true;
 exports.crTableRows = exports.crTableOptions = exports.crTableFlatHeaders = exports.crTableConfig = exports.crStyleEllipsis = exports.crStyleCenter = exports.crStyleBold = exports.crRankProps = exports.crNumberProps = exports.crNameProps = exports.crCaptionItemsProps = void 0;
 var _isTypeFn = require("../utils/isTypeFn");
 var _arrFn = require("../utils/arrFn");
-var _formatNumberFn = require("../utils/formatNumberFn");
+var _numberFormatFn = require("../utils/numberFormatFn");
 var _mathFn = require("../math/mathFn");
 const crNameProps = (name, pnOrIsHideOrVoid, isHideOrVoid) => {
   const [pn, isHide] = (0, _isTypeFn.isStr)(pnOrIsHideOrVoid) ? [pnOrIsHideOrVoid, isHideOrVoid] : [name.toLowerCase(), pnOrIsHideOrVoid];
@@ -72,7 +72,7 @@ const crTableOptions = (id, title, headers, flatHeaders, rows, dataSource, fns) 
   rows,
   dataSource,
   tableFn: {
-    numberFormat: _formatNumberFn.formatAllNumber,
+    numberFormat: _numberFormatFn.formatAllNumber,
     ...fns
   }
 });

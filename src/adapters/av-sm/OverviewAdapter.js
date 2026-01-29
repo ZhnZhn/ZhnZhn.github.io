@@ -1,5 +1,5 @@
 import { CIT_INFO_ITEM } from '../../constants/CompItemType';
-import { formatAllNumber } from '../../utils/formatNumberFn';
+import { formatAllNumber } from '../../utils/numberFormatFn';
 
 const DESCR_STYLE = {
   lineHeight: 1.5,

@@ -8,7 +8,7 @@
   "_pipe",
   "_interopRequireDefault",
   "require",
-  "_formatNumberFn",
+  "_numberFormatFn",
   "_configBuilderFn",
   "_Tooltip",
   "_styleFn",

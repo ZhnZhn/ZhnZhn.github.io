@@ -6,8 +6,8 @@ exports.toTimeSeriesTreeMapAdapter = exports.fToTreeMapAdapter = exports.crRound
 var _isTypeFn = require("../utils/isTypeFn");
 var _arrFn = require("../utils/arrFn");
 var _domFn = require("../utils/domFn");
+var _numberFormatFn = require("../utils/numberFormatFn");
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
-var _formatNumberFn = require("../utils/formatNumberFn");
 var _mathFn = require("../math/mathFn");
 var _configBuilderFn = require("../charts/configBuilderFn");
 var _TreeMapFn = require("./TreeMapFn");
@@ -86,7 +86,7 @@ const _crData = function () {
   const _data = _crDataImpl(...args, 0);
   return _crTotalPerc(_data) === 100 ? _data : _crDataImpl(...args, 1);
 };
-const _crTotalToken = (title, value, perc) => `${title} ${(0, _formatNumberFn.formatNumber)(value, true)} (${perc}%)`;
+const _crTotalToken = (title, value, perc) => `${title} ${(0, _numberFormatFn.formatNumber)(value, true)} (${perc}%)`;
 const _crSubTotalRt = (value, rt) => (0, _isTypeFn.isNumber)(rt) ? _crItemRt(value, rt) : 0;
 const _crSubValue = v => (0, _isTypeFn.isNumber)(v) ? v : 0;
 const _isZeroValueCase = (v, sum) => sum === 0 && v !== 0;
@@ -137,7 +137,7 @@ const fToTreeMapAdapter = function (getDataTotalTuple, crCaption) {
               key: _itemKey,
               itemCaption: option.title,
               itemTime: option.time,
-              itemValue: (0, _formatNumberFn.formatNumber)(_total),
+              itemValue: (0, _numberFormatFn.formatNumber)(_total),
               dataSource: option.dataSource
             }
           }), _configBuilderFn.toConfig)

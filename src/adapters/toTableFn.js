@@ -2,16 +2,10 @@ import {
   isTypeNumber,
   isStr
 } from "../utils/isTypeFn";
-import {
-  safeLoopOfArray
-} from "../utils/arrFn";
-import {
-  formatAllNumber
-} from "../utils/formatNumberFn";
+import { safeLoopOfArray } from "../utils/arrFn";
+import { formatAllNumber } from "../utils/numberFormatFn";
 
-import {
-  roundBy
-} from "../math/mathFn";
+import { roundBy } from "../math/mathFn";
 
 export const crNameProps = (
   name,

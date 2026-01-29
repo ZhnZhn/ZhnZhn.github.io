@@ -7,7 +7,7 @@
  "names": [
   "_isTypeFn",
   "require",
-  "_formatNumberFn",
+  "_numberFormatFn",
   "_uiApi",
   "_styleFn",
   "_ModalPane",

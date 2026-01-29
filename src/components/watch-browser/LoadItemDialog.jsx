@@ -14,7 +14,7 @@ import {
 } from '../../utils/dateFn';
 import {
   formatNumber
-} from '../../utils/formatNumberFn';
+} from '../../utils/numberFormatFn';
 
 import {
   loadItem

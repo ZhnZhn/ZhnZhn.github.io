@@ -9,7 +9,7 @@
   "_interopRequireDefault",
   "require",
   "_arrFn",
-  "_formatNumberFn",
+  "_numberFormatFn",
   "_itemFn",
   "_dateFn",
   "exports",

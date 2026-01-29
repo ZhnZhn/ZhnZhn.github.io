@@ -4,12 +4,8 @@ import {
   isPositiveNumber,
   getObjectKeys
 } from '../../utils/isTypeFn';
-import {
-  toUpperCaseFirst
-} from '../../utils/strFn';
-import {
-  formatAllNumber
-} from '../../utils/formatNumberFn';
+import { toUpperCaseFirst } from '../../utils/strFn';
+import { formatAllNumber } from '../../utils/numberFormatFn';
 
 import crAdapterCategory from '../crAdapterCategory';
 import { crShortItemCaption } from '../AdapterFn';

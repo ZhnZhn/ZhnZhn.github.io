@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _pipe = _interopRequireDefault(require("../utils/pipe"));
-var _formatNumberFn = require("../utils/formatNumberFn");
+var _numberFormatFn = require("../utils/numberFormatFn");
 var _configBuilderFn = require("../charts/configBuilderFn");
 var _Tooltip = require("../charts/Tooltip");
 var _styleFn = require("../components/styleFn");
@@ -285,7 +285,7 @@ const _crValueMoving = (nowSeria, prevSeria) => {
     ...moving,
     date,
     dateTo,
-    valueTo: (0, _formatNumberFn.formatAllNumber)(bPrevValue),
+    valueTo: (0, _numberFormatFn.formatAllNumber)(bPrevValue),
     isDenyToChange: true
   };
 };

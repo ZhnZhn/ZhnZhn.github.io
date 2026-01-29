@@ -8,7 +8,7 @@ var _mathFn = require("../math/mathFn");
 var _seriaFn = require("../math/seriaFn");
 var _seriaHelperFn = require("../math/seriaHelperFn");
 var _isTypeFn = require("../utils/isTypeFn");
-var _formatNumberFn = require("../utils/formatNumberFn");
+var _numberFormatFn = require("../utils/numberFormatFn");
 var _Chart = require("./Chart");
 const _assign = Object.assign,
   C1_SECOND_Y_AXIS = '#f45b5b',
@@ -160,7 +160,7 @@ const crValueMoving = (chart, prev, dateTo) => {
   return (0, _isTypeFn.isNumber)(valueTo) ? _assign({}, prev, (0, _mathFn.crValueMoving)({
     nowValue: prev.value,
     prevValue: valueTo,
-    fnFormat: _formatNumberFn.formatAllNumber
+    fnFormat: _numberFormatFn.formatAllNumber
   }), {
     valueTo,
     dateTo,
@@ -170,7 +170,7 @@ const crValueMoving = (chart, prev, dateTo) => {
 exports.crValueMoving = crValueMoving;
 const crTpId = () => (0, _mathFn.crId)('TP_');
 exports.crTpId = crTpId;
-const _formatNumber = n => (0, _formatNumberFn.formatAllNumber)((0, _mathFn.toFixedNumber)(n));
+const _formatNumber = n => (0, _numberFormatFn.formatAllNumber)((0, _mathFn.toFixedNumber)(n));
 const _setPlotLine = function (plotLine, value, delta) {
   if (delta === void 0) {
     delta = '';

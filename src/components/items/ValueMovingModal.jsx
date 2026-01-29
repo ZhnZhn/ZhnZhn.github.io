@@ -4,7 +4,7 @@ import {
 } from '../../utils/isTypeFn';
 import {
   formatAllNumber
-} from '../../utils/formatNumberFn';
+} from '../../utils/numberFormatFn';
 
 import {
   useState,

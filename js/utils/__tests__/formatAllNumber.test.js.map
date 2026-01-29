@@ -5,7 +5,7 @@
  ],
  "file": "../../../src/utils/__tests__/formatAllNumber.test.js",
  "names": [
-  "_formatNumberFn",
+  "_numberFormatFn",
   "require",
   "describe",
   "fn",

@@ -1,4 +1,4 @@
-import { formatNumber } from './formatNumberFn';
+import { formatNumber } from './numberFormatFn';
 
 let LOCALE;
 

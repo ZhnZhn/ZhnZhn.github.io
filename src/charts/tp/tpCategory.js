@@ -1,6 +1,7 @@
 import {
   formatAllNumber
-} from '../../utils/formatNumberFn';
+} from '../../utils/numberFormatFn';
+
 import {
    crHeader,
    crRow,

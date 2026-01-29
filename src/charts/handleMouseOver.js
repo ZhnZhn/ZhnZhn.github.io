@@ -1,5 +1,5 @@
-import { formatNumber } from '../utils/formatNumberFn';
 import { toDmy } from '../utils/dateFormatFn';
+import { formatNumber } from '../utils/numberFormatFn';
 
 import calcYAxisOffset from './calcYAxisOffset';
 import { CL_HC_GL } from './CL';

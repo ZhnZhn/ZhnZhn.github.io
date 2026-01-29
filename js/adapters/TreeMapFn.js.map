@@ -9,7 +9,7 @@
   "require",
   "_isTypeFn",
   "_domFn",
-  "_formatNumberFn",
+  "_numberFormatFn",
   "_mathFn",
   "_compareByFn",
   "_CL",

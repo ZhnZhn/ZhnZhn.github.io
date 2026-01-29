@@ -14,7 +14,7 @@
   "_arrFn",
   "_isTypeFn",
   "_domFn",
-  "_formatNumberFn",
+  "_numberFormatFn",
   "_CategoryFn",
   "_compareByFn",
   "sortDescByPnValue",

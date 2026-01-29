@@ -2,7 +2,7 @@ import { render } from 'react-dom';
 
 import {
   formatNumber
-} from '../../utils/formatNumberFn';
+} from '../../utils/numberFormatFn';
 import {
   crSparkLines,
   crSparkBars

@@ -9,7 +9,7 @@
   "require",
   "_BrowserType",
   "_dateFn",
-  "_formatNumberFn",
+  "_numberFormatFn",
   "_itemStore",
   "_uiApi",
   "_has",

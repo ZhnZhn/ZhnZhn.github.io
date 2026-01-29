@@ -1,8 +1,8 @@
-import { COLOR_VALUE } from '../../constants/Color';
-
-import { isSupportOptions } from '../../utils/domFn';
 import { isFn } from '../../utils/isTypeFn';
-import { formatAllNumber } from '../../utils/formatNumberFn';
+import { isSupportOptions } from '../../utils/domFn';
+import { formatAllNumber } from '../../utils/numberFormatFn';
+
+import { COLOR_VALUE } from '../../constants/Color';
 
 import {
   CL_TP_HEADER,

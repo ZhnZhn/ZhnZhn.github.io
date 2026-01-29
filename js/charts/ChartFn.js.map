@@ -12,7 +12,7 @@
   "_seriaFn",
   "_seriaHelperFn",
   "_isTypeFn",
-  "_formatNumberFn",
+  "_numberFormatFn",
   "_Chart",
   "_assign",
   "Object",

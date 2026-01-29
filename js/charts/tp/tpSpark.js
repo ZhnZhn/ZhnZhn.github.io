@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.sparkTreeMap = exports.sparkStackedArea = void 0;
 var _reactDom = require("react-dom");
-var _formatNumberFn = require("../../utils/formatNumberFn");
+var _numberFormatFn = require("../../utils/numberFormatFn");
 var _SparkFactory = require("../../components/factories/SparkFactory");
 var _Color = require("../../constants/Color");
 var _tpFn = require("./tpFn");
@@ -103,7 +103,7 @@ const _crStackedArea = _ref2 => {
       percent = '0.0',
       total = 0
     } = point,
-    _total = (0, _formatNumberFn.formatNumber)(total),
+    _total = (0, _numberFormatFn.formatNumber)(total),
     [fullWidth, width] = _calcWidthSparkType4(value, _total);
   return (0, _tpFn.crHeader)(nameFull, id) + _crTooltipSparkType4({
     id,
@@ -127,8 +127,8 @@ const _crTreeMap = _ref3 => {
       percent = '0.0',
       total = 0
     } = point,
-    _value = (0, _formatNumberFn.formatNumber)(value),
-    _total = (0, _formatNumberFn.formatNumber)(total),
+    _value = (0, _numberFormatFn.formatNumber)(value),
+    _total = (0, _numberFormatFn.formatNumber)(total),
     [fullWidth, width] = _calcWidthSparkType4(_value, _total);
   return (0, _tpFn.crHeader)(nameFull, id) + _crTooltipSparkType4({
     id,

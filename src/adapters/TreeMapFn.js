@@ -6,7 +6,7 @@ import {
 
 import { isNumber } from '../utils/isTypeFn';
 import { domSanitize } from '../utils/domFn';
-import { formatNumber } from '../utils/formatNumberFn';
+import { formatNumber } from '../utils/numberFormatFn';
 
 import { roundBy } from '../math/mathFn';
 

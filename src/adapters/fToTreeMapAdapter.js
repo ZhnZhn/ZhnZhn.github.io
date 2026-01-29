@@ -1,8 +1,8 @@
 import { isNumber } from '../utils/isTypeFn';
 import { joinByColon } from '../utils/arrFn';
 import { domSanitize } from '../utils/domFn';
+import { formatNumber } from '../utils/numberFormatFn';
 import pipe from '../utils/pipe';
-import { formatNumber } from '../utils/formatNumberFn';
 
 import { roundBy } from '../math/mathFn';
 

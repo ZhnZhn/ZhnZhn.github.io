@@ -1,7 +1,7 @@
 import pipe from '../utils/pipe';
 import {
   formatAllNumber
-} from '../utils/formatNumberFn';
+} from '../utils/numberFormatFn';
 
 import {
   crCategoryConfig,

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 "use strict";
-import { formatNumber } from "../formatNumberFn";
+import { formatNumber } from "../numberFormatFn";
 
 describe("formatNumber", ()=>{
   const fn = formatNumber;

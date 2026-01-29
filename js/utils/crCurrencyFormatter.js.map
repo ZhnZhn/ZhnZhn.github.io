@@ -5,7 +5,7 @@
  ],
  "file": "../../src/utils/crCurrencyFormatter.js",
  "names": [
-  "_formatNumberFn",
+  "_numberFormatFn",
   "require",
   "LOCALE",
   "_getLocale",

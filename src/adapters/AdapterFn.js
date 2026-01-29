@@ -1,7 +1,7 @@
 import Big from 'big.js';
 
 import { joinByComma } from '../utils/arrFn';
-import { formatAllNumber } from '../utils/formatNumberFn';
+import { formatAllNumber } from '../utils/numberFormatFn';
 
 import {
   getCaption,

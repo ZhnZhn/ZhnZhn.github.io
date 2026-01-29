@@ -3,9 +3,9 @@
  */
 "use strict";
 
-var _formatNumberFn = require("../formatNumberFn");
+var _numberFormatFn = require("../numberFormatFn");
 describe('formatAllNumber', () => {
-  const fn = _formatNumberFn.formatAllNumber;
+  const fn = _numberFormatFn.formatAllNumber;
   test('should format value without decimals to str with blanks', () => {
     expect(fn(1)).toBe('1');
     expect(fn(10)).toBe('10');

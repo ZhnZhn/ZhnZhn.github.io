@@ -9,7 +9,7 @@ var _ChartType = require("../../constants/ChartType");
 var _arrFn = require("../../utils/arrFn");
 var _isTypeFn = require("../../utils/isTypeFn");
 var _domFn = require("../../utils/domFn");
-var _formatNumberFn = require("../../utils/formatNumberFn");
+var _numberFormatFn = require("../../utils/numberFormatFn");
 var _CategoryFn = require("../CategoryFn");
 var _compareByFn = require("../compareByFn");
 exports.sortDescByPnValue = _compareByFn.sortDescByPnValue;
@@ -126,7 +126,7 @@ const crZhConfig = function (option, _temp) {
     id: _id,
     key: _id,
     itemCaption: option.oneC,
-    itemValue: itemValue && (0, _formatNumberFn.formatNumber)(itemValue),
+    itemValue: itemValue && (0, _numberFormatFn.formatNumber)(itemValue),
     itemTime: option.time,
     isWithoutIndicator: isWi,
     dataSource: option.dataSource

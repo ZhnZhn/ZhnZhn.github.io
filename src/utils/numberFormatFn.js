@@ -1,9 +1,15 @@
 import Highcharts from 'highcharts';
+
 import {
   isNumber,
   isStr
 } from './isTypeFn';
 
+const _formatNumber = Highcharts.numberFormat
+, _formatNumberImpl = (
+  numberOr,
+  precision
+) => _formatNumber(numberOr, precision, '.', ' ');
 const _isNumberInRange = (
   v,
   min,
@@ -36,17 +42,15 @@ export const formatNumber = (
   ? '0.00'
   : _isNumberInRange(numberOr, -0.01, 0.01)
   ? ''+numberOr
-  : Highcharts.numberFormat(
+  : _formatNumberImpl(
       numberOr,
       isSamePrecision
         ? _findPrecision(numberOr)
-        : _crPrecision(numberOr),
-      '.', ' '
+        : _crPrecision(numberOr)
     )
 
 const REG_BLANKS = /\s/g
 , STR_ZERO = '0'
-, DELIMETER = ' ';
 
 export const formatAllNumber = (
   value,
@@ -65,10 +69,8 @@ export const formatAllNumber = (
   }
 
   const _value = (''+value).replace(REG_BLANKS, '');
-  return Highcharts
-    .numberFormat(
-      _value,
-      _findPrecision(_value),
-      '.', DELIMETER
+  return _formatNumberImpl(
+    _value,
+    _findPrecision(_value)
   );
 }

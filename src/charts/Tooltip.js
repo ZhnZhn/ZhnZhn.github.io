@@ -1,5 +1,5 @@
-import { formatNumber } from '../utils/formatNumberFn';
 import { toWmdy } from '../utils/dateFormatFn';
+import { formatNumber } from '../utils/numberFormatFn';
 
 import {
   splineValueDmy,

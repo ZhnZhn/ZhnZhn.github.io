@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _strFn = require("../../utils/strFn");
-var _formatNumberFn = require("../../utils/formatNumberFn");
+var _numberFormatFn = require("../../utils/numberFormatFn");
 var _crAdapterCategory = _interopRequireDefault(require("../crAdapterCategory"));
 var _AdapterFn = require("../AdapterFn");
 var _CategoryFn = require("../CategoryFn");
@@ -19,7 +19,7 @@ const crItemCaption = (_ref, json) => {
   let {
     itemCaption
   } = _ref;
-  return `${(0, _AdapterFn.crShortItemCaption)(itemCaption)} ${(0, _formatNumberFn.formatAllNumber)(_getByProps(json, "net_assets"), "")}`;
+  return `${(0, _AdapterFn.crShortItemCaption)(itemCaption)} ${(0, _numberFormatFn.formatAllNumber)(_getByProps(json, "net_assets"), "")}`;
 };
 const _crHoldingDescription = (item, index) => {
   const _description = _getByProps(item, "description");

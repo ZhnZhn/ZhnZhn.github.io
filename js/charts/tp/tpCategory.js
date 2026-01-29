@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.categorySimple = exports.categoryRemove = void 0;
-var _formatNumberFn = require("../../utils/formatNumberFn");
+var _numberFormatFn = require("../../utils/numberFormatFn");
 var _tpFn = require("./tpFn");
 const _crSimple = _ref => {
   let {
@@ -25,7 +25,7 @@ const _crSimple = _ref => {
     _date = d ? `${_c}-${d}` : _c;
   return `${(0, _tpFn.crHeader)(_date, id)}
    <div class="tp__body">
-     ${(0, _tpFn.crRow)('Value', (0, _formatNumberFn.formatAllNumber)(y), {
+     ${(0, _tpFn.crRow)('Value', (0, _numberFormatFn.formatAllNumber)(y), {
     status
   })}
      ${(0, _tpFn.crRow)('Seria', name, {
@@ -46,7 +46,7 @@ const _crRemove = _ref2 => {
   } = point;
   return `${(0, _tpFn.crHeader)(c || category, id)}
   <div class="tp__body">
-    ${(0, _tpFn.crRow)('Value', (0, _formatNumberFn.formatAllNumber)(y), {
+    ${(0, _tpFn.crRow)('Value', (0, _numberFormatFn.formatAllNumber)(y), {
     status
   })}
     <div class='tp__bt' id=${id + '_R'}>

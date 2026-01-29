@@ -7,7 +7,7 @@
  "names": [
   "_CompItemType",
   "require",
-  "_formatNumberFn",
+  "_numberFormatFn",
   "DESCR_STYLE",
   "lineHeight",
   "fontWeight",

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 "use strict";
-import { formatAllNumber } from '../formatNumberFn'
+import { formatAllNumber } from '../numberFormatFn';
 
 describe('formatAllNumber', ()=>{
   const fn = formatAllNumber;
