@@ -1,5 +1,8 @@
 import { isInArrStr } from '../../utils/arrFn';
-import { getValueAndCaption } from '../../utils/itemFn';
+import {
+  getValueAndCaption,
+  getValue
+} from '../../utils/itemFn';
 import { crGetRoute } from '../../utils/crRouter';
 
 import {
@@ -82,14 +85,23 @@ const _crCommoditiesQuery = (
   );
 
   assign(option, {
+    dataSource: item.ds,
     itemCaption
   })
   return `${crFunctionQuery(itemId)}&interval=${intervalId}`;
 }
 
+const _crPreciousMetalQuery = (option) => {
+  const { items } = option
+  , _symbol = getValue(items[0])
+  , _interval = getValue(items[1]);
+  return `${crFunctionQuery("GOLD_SILVER_HISTORY")}&symbol=${_symbol}&interval=${_interval}`
+};
+
 const _getCrQuery = crGetRoute({
   EC: _crEconomicsQuery,
-  CM: _crCommoditiesQuery
+  CM: _crCommoditiesQuery,
+  PM: _crPreciousMetalQuery
 })
 
 const AvEconomicsApi = fAvApi(

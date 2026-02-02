@@ -34,13 +34,23 @@ const _crCommoditiesQuery = option => {
     [item, interval] = items,
     [itemId, itemCaption, intervalId] = _checkCommoditiesParams(item, interval);
   (0, _AdapterFn.assign)(option, {
+    dataSource: item.ds,
     itemCaption
   });
   return `${(0, _AvFn.crFunctionQuery)(itemId)}&interval=${intervalId}`;
 };
+const _crPreciousMetalQuery = option => {
+  const {
+      items
+    } = option,
+    _symbol = (0, _itemFn.getValue)(items[0]),
+    _interval = (0, _itemFn.getValue)(items[1]);
+  return `${(0, _AvFn.crFunctionQuery)("GOLD_SILVER_HISTORY")}&symbol=${_symbol}&interval=${_interval}`;
+};
 const _getCrQuery = (0, _crRouter.crGetRoute)({
   EC: _crEconomicsQuery,
-  CM: _crCommoditiesQuery
+  CM: _crCommoditiesQuery,
+  PM: _crPreciousMetalQuery
 });
 const AvEconomicsApi = (0, _AvFn.fAvApi)(option => _getCrQuery(option.dfFn));
 var _default = exports.default = AvEconomicsApi;
