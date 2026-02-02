@@ -14,6 +14,7 @@ import {
   isNotEmptyArr,
   isEmpty,
   getObjectKeys,
+  hasOwnProperty,
   parseIntBy10
 } from '../isTypeFn';
 
@@ -227,6 +228,23 @@ describe('getObjectKeys',()=>{
     expect(fn(void 0)).toEqual([])
     expect(fn('str')).toEqual([])
     expect(fn('')).toEqual([])
+  })
+})
+
+describe('hasOwnProperty',()=>{
+  const fn = hasOwnProperty;
+  test("should return boolean for test object own property", ()=>{
+    expect(fn({a: "a"}, "a")).toBe(true)
+
+    expect(fn({}, "b")).toBe(false)    
+    expect(fn({a: "a"}, "b")).toBe(false)
+  })
+  test("should return false in edge case", ()=>{
+    expect(fn(null, "a")).toBe(false)
+    expect(fn(void 0, "a")).toBe(false)
+    expect(fn(1, "a")).toBe(false)
+    expect(fn({a: "a"}, 1)).toBe(false)
+    expect(fn({a: "a"}, true)).toBe(false)
   })
 })
 

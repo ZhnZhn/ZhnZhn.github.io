@@ -16,11 +16,10 @@ const useToggleAsync = (initialValue, fn, mls) => {
   return [is, toggle];
 };
 exports.useToggleAsync = useToggleAsync;
-const hasOwnProperty = Object.prototype.hasOwnProperty,
-  _isNotOwnBooleanPropsEqual = (state, stateSlice) => {
+const _isNotOwnBooleanPropsEqual = (state, stateSlice) => {
     let propName;
     for (propName in stateSlice) {
-      if (hasOwnProperty.call(stateSlice, propName)) {
+      if ((0, _isTypeFn.hasOwnProperty)(stateSlice, propName)) {
         if (!(0, _isTypeFn.isBool)(stateSlice[propName])) {
           return;
         }

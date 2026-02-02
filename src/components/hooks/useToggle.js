@@ -2,7 +2,8 @@ import {
   isBool,
   isFn,
   isStr,
-  isObj
+  isObj,
+  hasOwnProperty
 } from '../../utils/isTypeFn';
 
 import { useReducer } from '../uiApi';
@@ -39,14 +40,13 @@ export const useToggleAsync = (
   return [is, toggle];
 }
 
-const hasOwnProperty = Object.prototype.hasOwnProperty
-, _isNotOwnBooleanPropsEqual = (
+const _isNotOwnBooleanPropsEqual = (
   state,
   stateSlice
 ) => {
   let propName;
   for(propName in stateSlice) {
-    if (hasOwnProperty.call(stateSlice, propName)) {
+    if (hasOwnProperty(stateSlice, propName)) {
       if (!isBool(stateSlice[propName])) {
         return;
       }

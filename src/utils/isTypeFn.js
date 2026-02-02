@@ -34,4 +34,12 @@ export const isEmpty = (
 ) => obj == null
   || _getObjectKeys(obj).length === 0
 
+const _hasOwnProperty = Object.prototype.hasOwnProperty
+export const hasOwnProperty = (
+  item,
+  propName
+) => isObj(item)
+ && isStr(propName)
+ && _hasOwnProperty.call(item, propName)
+
 export const parseIntBy10 = str => parseInt(str, 10)
