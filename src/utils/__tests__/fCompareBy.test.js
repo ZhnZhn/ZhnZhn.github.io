@@ -2,7 +2,7 @@ import { fCompareBy } from '../compareBy';
 
 describe('fCompareBy', ()=>{
   const fn = fCompareBy
-  it('should create fn for comparing arr by index', ()=>{
+  test('should create fn for comparing arr by index', ()=>{
     const _compare = fn(0)
     , arr = [
        [3, 0],
@@ -23,7 +23,7 @@ describe('fCompareBy', ()=>{
       ])
   })
 
-  it('should create fn for comparing by propName', ()=>{
+  test('should create fn for comparing by propName', ()=>{
     const _compare = fn('y')
     , arr = [
       {y: 3, x: 0},
@@ -44,7 +44,7 @@ describe('fCompareBy', ()=>{
       ])
   })
 
-  it('should create fn which compare with falsy items', ()=>{
+  test('should create fn which compare with falsy items', ()=>{
     const _compareByIndex0 = fn(0)
     , arr1 = [
        [3, 0],

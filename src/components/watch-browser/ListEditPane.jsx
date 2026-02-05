@@ -32,8 +32,7 @@ const ListEditPane = (props) => {
     props,
     setValidationMessages,
     _hClear
-  )
-  /*eslint-disable react-hooks/exhaustive-deps */
+  )  
   , _hRename = () => {
     const {
       captionGroup,

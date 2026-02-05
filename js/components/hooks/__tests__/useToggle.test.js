@@ -4,8 +4,6 @@ var _react = require("@testing-library/react");
 var _useToggle = require("../useToggle");
 const _getState = result => result.current[0],
   _getToggle = result => result.current[1];
-
-/* eslint-disable react-hooks/rules-of-hooks */
 const _renderInitialTest = (initialValue, expectedValue) => {
   const {
     result
@@ -15,8 +13,6 @@ const _renderInitialTest = (initialValue, expectedValue) => {
   expect(typeof toggle).toBe('function');
   return [result, toggle];
 };
-/* eslint-enable react-hooks/rules-of-hooks */
-
 const _testToggle = (result, toggle) => {
   const beforeState = _getState(result);
   expect(typeof beforeState).toBe('boolean');

@@ -56,7 +56,7 @@ const _crBgStyle = (onePerc, strV, isLeft) => {
     return {
       background: `linear-gradient(${to}, ${color} ${perc}%, transparent ${perc}% ${100-perc}%)`
     };
-  } catch(err) {
+  } catch {
     return;
   }
 };

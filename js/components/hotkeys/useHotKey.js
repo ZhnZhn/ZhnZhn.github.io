@@ -9,9 +9,8 @@ const useHotKey = (hotKey, onKeyDown, refEl) => {
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => _hmHotkeys.HAS_HOT_KEYS && hotKey ? ((0, _hmHotkeys.addHotKey)(hotKey, onKeyDown, refEl || ref), () => (0, _hmHotkeys.removeHotKey)(hotKey)) : void 0, []);
   //hotKey, onKeyDown, refEl
-  /*eslint-disable react-hooks/exhaustive-deps */
+  /*eslint-enable react-hooks/exhaustive-deps */
   return [_hmHotkeys.HAS_HOT_KEYS && hotKey ? hotKey : '', refEl || ref];
 };
-var _default = useHotKey;
-exports.default = _default;
+var _default = exports.default = useHotKey;
 //# sourceMappingURL=useHotKey.js.map

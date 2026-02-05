@@ -55,7 +55,7 @@ const _fCrAddConfig = (
       return data;
     }, []).sort(_compareByDate);
     return _data;
-  } catch(err) {
+  } catch {
     throw crError();
   }
 }

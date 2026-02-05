@@ -8,7 +8,6 @@ const _getState = result => result.current[0]
 , _getToggle = result => result.current[1]
 , _getSetFalse = result => result.current[2];
 
-/* eslint-disable react-hooks/rules-of-hooks */
 const _renderInitialTest = (
   initialValue,
   expectedValue
@@ -28,7 +27,6 @@ const _renderInitialTest = (
     setFalse
   ];
 };
-/* eslint-enable react-hooks/rules-of-hooks */
 
 describe('useToggleFalse', ()=>{
   test('should return tuple with boolean state, by default false, and reference equal functions toggle, setFalse',() => {

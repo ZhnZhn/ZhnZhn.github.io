@@ -17,13 +17,13 @@ const _formatedToBig = function (v, dfR) {
   const _b = (0, _big.default)(v.toString().replace(/\s/g, ''));
   return (0, _isTypeFn.isNumber)(dfR) ? _b.round(dfR) : _b;
 };
-const _toBig = bValue => {
-  if (bValue instanceof _big.default) {
-    return bValue;
+const _toBig = bValueOr => {
+  if (bValueOr instanceof _big.default) {
+    return bValueOr;
   }
   try {
-    return new _big.default(bValue);
-  } catch (err) {
+    return new _big.default(bValueOr);
+  } catch {
     return new _big.default(0);
   }
 };
@@ -90,11 +90,12 @@ const toFixed = value => {
 exports.toFixed = toFixed;
 const toFixedNumber = value => !(0, _isTypeFn.isNumber)(value) ? value : roundBy(value, value < 0.0001 ? 8 : value < 10 ? 4 : value < 10000 ? 2 : 0);
 exports.toFixedNumber = toFixedNumber;
-const _random = Math.random;
-const crRandomInteger = (min, max) => min + Math.floor((max - min + 1) * _random());
+const _random = Math.random,
+  _floor = Math.floor;
+const crRandomInteger = (min, max) => min + _floor((max - min + 1) * _random());
 exports.crRandomInteger = crRandomInteger;
 const crId = prefix => (prefix || '') + Date.now().toString(36) + _random().toString(36).slice(2, 9);
 exports.crId = crId;
-const isInRange = (v, min, max) => v > min && v < max;
+const isInRange = (number, min, max) => number > min && number < max;
 exports.isInRange = isInRange;
 //# sourceMappingURL=mathFn.js.map

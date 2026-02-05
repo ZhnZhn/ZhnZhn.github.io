@@ -3,7 +3,7 @@
 var _crFn = require("../crFn");
 describe('crItemConf', () => {
   const fn = _crFn.crItemConf;
-  it('should create obj with item conf', () => {
+  test('should create obj with item conf', () => {
     expect(fn({
       title: 'title',
       subtitle: null,
@@ -15,7 +15,7 @@ describe('crItemConf', () => {
 });
 describe('crValueConf', () => {
   const fn = _crFn.crValueConf;
-  it('should return {x, y} recent point from data', () => {
+  test('should return {x, y} recent point from data', () => {
     expect(fn([[3, 3], [1, 2]])).toEqual({
       x: 1,
       y: 2
@@ -31,7 +31,7 @@ describe('crValueConf', () => {
       y: 2
     });
   });
-  it('should use str 0.0 for y not number', () => {
+  test('should use str 0.0 for y not number', () => {
     expect(fn([[3, 3], [1, null]])).toEqual({
       x: 1,
       y: '0.0'

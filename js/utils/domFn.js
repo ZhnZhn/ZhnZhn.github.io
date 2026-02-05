@@ -27,7 +27,7 @@ const isSupportOptions = () => {
   try {
     window.addEventListener('test', onceOptions, onceOptions);
     window.removeEventListener('test', onceOptions, onceOptions);
-  } catch (err) {
+  } catch {
     _isSupportOptions = false;
   }
   return _isSupportOptions;

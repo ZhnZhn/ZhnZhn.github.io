@@ -7,18 +7,22 @@ import { useToggle } from '../useToggle';
 const _getState = result => result.current[0]
 , _getToggle = result => result.current[1];
 
-/* eslint-disable react-hooks/rules-of-hooks */
-const _renderInitialTest = (initialValue, expectedValue) => {
-  const {result} = renderHook(() => useToggle(initialValue));
+const _renderInitialTest = (
+  initialValue,
+  expectedValue
+) => {
+  const { result } = renderHook(() => useToggle(initialValue));
   expect(_getState(result)).toBe(expectedValue)
 
   const toggle = _getToggle(result);
   expect(typeof toggle).toBe('function')
   return [result, toggle];
 };
-/* eslint-enable react-hooks/rules-of-hooks */
 
-const _testToggle = (result, toggle) => {
+const _testToggle = (
+  result,
+  toggle
+) => {
   const beforeState = _getState(result);
   expect(typeof beforeState).toBe('boolean')
   act(toggle)

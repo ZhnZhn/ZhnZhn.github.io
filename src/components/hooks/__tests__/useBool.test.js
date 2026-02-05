@@ -8,12 +8,13 @@ const _getIs = result => result.current[0]
 , _getSetTrue = result => result.current[1]
 , _getSetFalse = result => result.current[2];
 
-/* eslint-disable react-hooks/rules-of-hooks */
-const _testInitialValue = (initialValue, expectedValue) => {
+const _testInitialValue = (
+  initialValue,
+  expectedValue
+) => {
   const {result: r1} = renderHook(()=>useBool(initialValue))
   expect(_getIs(r1)).toBe(expectedValue)
 }
-/* eslint-enable react-hooks/rules-of-hooks */
 
 const _actSetValue = (r, setTrue, setFalse, setValue, expectedValue) => {
   act(setValue)

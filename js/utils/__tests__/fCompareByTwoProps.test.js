@@ -3,7 +3,7 @@
 var _compareBy = require("../compareBy");
 describe('fCompareByTwoProps', () => {
   const fn = _compareBy.fCompareByTwoProps;
-  it('should create fn for comparing by two props', () => {
+  test('should create fn for comparing by two props', () => {
     const _compare = fn('v', 'id'),
       arr = [{
         v: 3,

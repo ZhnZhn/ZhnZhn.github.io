@@ -31,8 +31,7 @@ const ListDeletePane = (props) => {
   , [
     groupOptions,
     setGroupOptions
-  ] = useState(() => getWatchGroups())
-  /*eslint-disable react-hooks/exhaustive-deps */
+  ] = useState(() => getWatchGroups())  
   , _hDelete = () => {
     const {
       captionGroup,

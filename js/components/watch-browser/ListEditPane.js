@@ -23,8 +23,7 @@ const ListEditPane = props => {
     } = props,
     _refSelectGroupList = (0, _uiApi.useRef)(),
     [validationMessages, setValidationMessages, _hClear, _refInputText] = (0, _useValidationMessages.default)(),
-    groupOptions = (0, _useGroupOptions.default)(props, setValidationMessages, _hClear)
-    /*eslint-disable react-hooks/exhaustive-deps */,
+    groupOptions = (0, _useGroupOptions.default)(props, setValidationMessages, _hClear),
     _hRename = () => {
       const {
           captionGroup,

@@ -327,7 +327,7 @@ describe('getNumberOfDays',()=>{
 
 describe("getNextMonthDmy", ()=>{
   const fn = getNextMonthDmy;
-  it('should return dmy for next month', ()=>{
+  test('should return dmy for next month', ()=>{
     expect(fn('31-10-2018')).toBe('30-11-2018')
     expect(fn('30-11-2018')).toBe('31-12-2018')
     expect(fn('31-12-2018')).toBe('31-01-2019')
@@ -340,13 +340,13 @@ describe("getNextMonthDmy", ()=>{
 
 describe('monthIndex', ()=>{
   const fn = monthIndex
-  it('should return month index from 0 from str', ()=>{
+  test('should return month index from 0 from str', ()=>{
     expect(fn('january')).toBe(0)
     expect(fn('January')).toBe(0)
     expect(fn('december')).toBe(11)
     expect(fn('December')).toBe(11)
   })
-  it('should return -1 for edge cases', ()=>{
+  test('should return -1 for edge cases', ()=>{
     expect(fn('str')).toBe(-1)
     expect(fn('Jan')).toBe(-1)
     expect(fn('decembe')).toBe(-1)
@@ -362,7 +362,7 @@ describe('monthIndex', ()=>{
 
 describe("getYmdhms", ()=>{
   const fn = getYmdhmUTC
-  it("should return str in format YYYY-MM-DD HH:MM UTC", ()=>{
+  test("should return str in format YYYY-MM-DD HH:MM UTC", ()=>{
     expect(fn(new Date(Date.UTC(2010, 0, 1)))).toBe('2010-01-01 00:00 UTC')
     expect(fn(new Date(Date.UTC(2010, 0, 1, 1)))).toBe('2010-01-01 01:00 UTC')
   })
@@ -370,13 +370,13 @@ describe("getYmdhms", ()=>{
 
 describe("getDateFromVm",()=>{
   const fn = getDateFromVm;
-  it("should return str year from annual valueMoving", ()=>{
+  test("should return str year from annual valueMoving", ()=>{
     expect(fn({
         date: '31-12-2010',
       dateTo: '31-12-2009'
     })).toBe('2010')
   })
-  it('should return str quarter date from quarterly valueMoving', ()=>{
+  test('should return str quarter date from quarterly valueMoving', ()=>{
     expect(fn({
         date: '31-03-2010',
       dateTo: '31-12-2009'
@@ -401,7 +401,7 @@ describe("getDateFromVm",()=>{
     })).toBe('31-11-2010')
   })
 
-  it('should return otherwise property date of valueMoving', ()=>{
+  test('should return otherwise property date of valueMoving', ()=>{
     expect(fn({
         date: '31-12-2010',
       dateTo: '30-11-2010'
@@ -412,7 +412,7 @@ describe("getDateFromVm",()=>{
     })).toBe('31-12-2010')
   })
 
-  it('should return property date of valueMoving in edge cases', ()=>{
+  test('should return property date of valueMoving in edge cases', ()=>{
     expect(fn({date: '31-12-2010'})).toBe('31-12-2010')
     expect(fn({date: '31-12-2010', dateTo: null})).toBe('31-12-2010')
     expect(fn({})).toBe(void 0)
@@ -421,17 +421,17 @@ describe("getDateFromVm",()=>{
 
 describe('formatStrDate', () => {
   const fn = formatStrDate;
-  it('should format str date to quarterly format', ()=>{
+  test('should format str date to quarterly format', ()=>{
     expect(fn('2010-Q1')).toBe('Q1 2010')
     expect(fn('2010-Q2')).toBe('Q2 2010')
   })
-  it('should format str date to MM-YYYY format', ()=>{
+  test('should format str date to MM-YYYY format', ()=>{
     expect(fn('2010-10')).toBe('10-2010')
     expect(fn('10-2010')).toBe('10-2010')
     expect(fn('2010-09')).toBe('09-2010')
     expect(fn('09-2010')).toBe('09-2010')
   })
-  it('should return same str date in other cases', ()=>{
+  test('should return same str date in other cases', ()=>{
     expect(fn('2010')).toBe('2010')
     expect(fn('2010-10-01')).toBe('2010-10-01')
   })

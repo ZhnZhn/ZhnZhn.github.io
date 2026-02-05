@@ -26,8 +26,8 @@ const useDialogFocus = (
     }
     setRefValue(_refIsShowPrev, isShow)
   }, [isShow])
-  //refElementFocus
-  /*eslint-disable react-hooks/exhaustive-deps */
+  //refElementFocus1, refElementFocus2
+  /*eslint-enable react-hooks/exhaustive-deps */
 };
 
 export default useDialogFocus

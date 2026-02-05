@@ -44,7 +44,7 @@ const _fCheckResponse = getData => (json, option) => {
       return _data;
     }
     throw (0, _AdapterFn.crError)();
-  } catch (err) {
+  } catch {
     throw (0, _AdapterFn.crError)();
   }
 };

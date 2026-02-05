@@ -175,7 +175,7 @@ describe("setItemCaptionCurrencyRateTo", () => {
 });
 describe('valueMoving', () => {
   const fn = _AdapterFn.valueMoving;
-  it('should return echo data and direction empty for !arr input', () => {
+  test('should return echo data and direction empty for !arr input', () => {
     const direction = {
       direction: _DirectionType.DT_EMPTY
     };
@@ -200,7 +200,7 @@ describe('valueMoving', () => {
       ...direction
     });
   });
-  it('should return valueMoving obj for arr input', () => {
+  test('should return valueMoving obj for arr input', () => {
     expect(fn([[Date.UTC(2018, 11, 31), 10000], [Date.UTC(2019, 11, 31), 20000]])).toEqual({
       value: '20 000',
       _value: '20000',
@@ -214,7 +214,7 @@ describe('valueMoving', () => {
       dateTo: '31-12-2018'
     });
   });
-  it('should return valueMoving obj for arr input with 1 point', () => {
+  test('should return valueMoving obj for arr input with 1 point', () => {
     expect(fn([[Date.UTC(2019, 11, 31), 20000]])).toEqual({
       value: '20 000',
       _value: '20000',
@@ -228,7 +228,7 @@ describe('valueMoving', () => {
       dateTo: '31-12-2019'
     });
   });
-  it('should return valueMoving obj for empty arr', () => {
+  test('should return valueMoving obj for empty arr', () => {
     expect(fn([])).toEqual({
       value: '0',
       _value: '0',
@@ -245,13 +245,13 @@ describe('valueMoving', () => {
 });
 describe('crError', () => {
   const fn = _AdapterFn.crError;
-  it('should create err obj', () => {
+  test('should create err obj', () => {
     expect(fn('caption', 'msg')).toEqual({
       errCaption: 'caption',
       message: 'msg'
     });
   });
-  it('should replace void 0 values by default values', () => {
+  test('should replace void 0 values by default values', () => {
     expect(fn()).toEqual({
       errCaption: '',
       message: 'No data available for request.'
@@ -260,7 +260,7 @@ describe('crError', () => {
 });
 describe('fCrValue', () => {
   const fn = _AdapterFn.fCrValue;
-  it('should return function that create value depend on option property _rt', () => {
+  test('should return function that create value depend on option property _rt', () => {
     const _crEchoValue = fn({});
     expect(typeof _crEchoValue).toBe("function");
     expect(_crEchoValue(1.554)).toBe(1.554);

@@ -23,8 +23,7 @@ const ListCreatePane = props => {
     } = props,
     [validationMessages, setValidationMessages, _hClear, _refInputText] = (0, _useValidationMessages.default)(),
     groupOptions = (0, _useGroupOptions.default)(props, setValidationMessages, _hClear),
-    [_refCaptionGroup, _hSelectGroup] = (0, _useSelectItem.default)()
-    /*eslint-disable react-hooks/exhaustive-deps */,
+    [_refCaptionGroup, _hSelectGroup] = (0, _useSelectItem.default)(),
     _hCreate = () => {
       const captionList = (0, _uiApi.getInputValue)(_refInputText),
         captionGroup = (0, _uiApi.getRefValue)(_refCaptionGroup);

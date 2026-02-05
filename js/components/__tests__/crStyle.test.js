@@ -10,7 +10,8 @@ describe('crStyle2', () => {
       _s2 = {
         width: 20,
         height: 20
-      };
+      },
+      _isFalseStyle = false;
     const _r = fn(_s1, _s2);
     expect(_r).toEqual({
       ..._s1,
@@ -18,7 +19,7 @@ describe('crStyle2', () => {
     });
     expect(_r).not.toBe(_s1);
     expect(_r).not.toBe(_s2);
-    expect(fn(_s1, false && _s2)).toBe(_s1);
+    expect(fn(_s1, _isFalseStyle && _s2)).toBe(_s1);
   });
 });
 describe('crStyle3', () => {
@@ -33,7 +34,8 @@ describe('crStyle3', () => {
       },
       _s3 = {
         height: 30
-      };
+      },
+      _isFalseStyle = false;
     const _r1 = fn(_s1, _s2, _s3);
     expect(_r1).toEqual({
       ..._s1,
@@ -43,7 +45,7 @@ describe('crStyle3', () => {
     expect(_r1).not.toBe(_s1);
     expect(_r1).not.toBe(_s2);
     expect(_r1).not.toBe(_s3);
-    const _r2 = fn(_s1, _s2, false && _s3);
+    const _r2 = fn(_s1, _s2, _isFalseStyle && _s3);
     expect(_r2).toEqual({
       ..._s1,
       ..._s2
@@ -51,7 +53,7 @@ describe('crStyle3', () => {
     expect(_r2).not.toBe(_s1);
     expect(_r2).not.toBe(_s2);
     expect(_r2).not.toBe(_s3);
-    const _r3 = fn(_s1, false && _s2, _s3);
+    const _r3 = fn(_s1, _isFalseStyle && _s2, _s3);
     expect(_r3).toEqual({
       ..._s1,
       ..._s3
@@ -59,9 +61,12 @@ describe('crStyle3', () => {
     expect(_r3).not.toBe(_s1);
     expect(_r3).not.toBe(_s2);
     expect(_r3).not.toBe(_s3);
+
+    /*eslint-disable no-constant-binary-expression*/
     expect(fn(_s1, null && _s2, void 0 && _s3)).toBe(_s1);
     expect(fn(_s1, '' && _s2, 0 && _s3)).toBe(_s1);
     expect(fn(_s1, NaN && _s2, -0 && _s3)).toBe(_s1);
+    /*eslint-enable no-constant-binary-expression*/
   });
 });
 describe('crAbsoluteTopLeftStyle', () => {

@@ -42,7 +42,7 @@ const _reducer = (
   }
 }
 
-const _useReducer = (
+const useGroupsReducer = (
   getWatchGroups,
   msgOnNotSelect
 ) => {
@@ -76,7 +76,7 @@ const GroupDeletePane = (props) => {
     errs,
     updateGroups,
     setErrs
-  ] = _useReducer(
+  ] = useGroupsReducer(
     getWatchGroups,
     msgOnNotSelect
   )

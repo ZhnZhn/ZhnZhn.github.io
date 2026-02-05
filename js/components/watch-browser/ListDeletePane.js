@@ -23,8 +23,7 @@ const ListDeletePane = props => {
     } = props,
     _refSelectGroupList = (0, _uiApi.useRef)(),
     [validationMessages, setValidationMessages, _hClear] = (0, _useValidationMessages.default)(),
-    [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => getWatchGroups())
-    /*eslint-disable react-hooks/exhaustive-deps */,
+    [groupOptions, setGroupOptions] = (0, _uiApi.useState)(() => getWatchGroups()),
     _hDelete = () => {
       const {
         captionGroup,

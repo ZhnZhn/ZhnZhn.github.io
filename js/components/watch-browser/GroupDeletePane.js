@@ -40,7 +40,7 @@ const _reducer = (state, _ref) => {
       return state;
   }
 };
-const _useReducer = (getWatchGroups, msgOnNotSelect) => {
+const useGroupsReducer = (getWatchGroups, msgOnNotSelect) => {
   const [{
     groups,
     errs
@@ -56,7 +56,7 @@ const GroupDeletePane = props => {
       onClose
     } = props,
     _refCaption = (0, _uiApi.useRef)(null),
-    [groups, errs, updateGroups, setErrs] = _useReducer(getWatchGroups, msgOnNotSelect),
+    [groups, errs, updateGroups, setErrs] = useGroupsReducer(getWatchGroups, msgOnNotSelect),
     _hDeleteGroup = () => {
       const caption = (0, _uiApi.getRefValue)(_refCaption);
       if (caption) {

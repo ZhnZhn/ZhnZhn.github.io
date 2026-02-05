@@ -1,9 +1,7 @@
 "use strict";
 
 var _pointFn = require("../pointFn");
-
 var _Color = require("../../constants/Color");
-
 describe('crVolumePoint', () => {
   const fn = _pointFn.crVolumePoint;
   const _p = {
@@ -14,8 +12,9 @@ describe('crVolumePoint', () => {
     _high: 2.2,
     _low: 0.8
   };
-  it('should cr volume point with option', () => {
-    expect(fn({ ..._p,
+  test('should cr volume point with option', () => {
+    expect(fn({
+      ..._p,
       open: 1,
       close: 2,
       option
@@ -27,7 +26,8 @@ describe('crVolumePoint', () => {
       _close: 2,
       ...option
     });
-    expect(fn({ ..._p,
+    expect(fn({
+      ..._p,
       open: 2,
       close: 1,
       option
@@ -39,7 +39,8 @@ describe('crVolumePoint', () => {
       _close: 1,
       ...option
     });
-    expect(fn({ ..._p,
+    expect(fn({
+      ..._p,
       open: 2,
       close: 2,
       option
@@ -52,8 +53,9 @@ describe('crVolumePoint', () => {
       ...option
     });
   });
-  it('should cr point C.GRAY for open falsy edge case', () => {
-    expect(fn({ ..._p,
+  test('should cr point C.GRAY for open falsy edge case', () => {
+    expect(fn({
+      ..._p,
       open: null,
       close: 2
     })).toEqual({
@@ -63,7 +65,8 @@ describe('crVolumePoint', () => {
       _open: null,
       _close: 2
     });
-    expect(fn({ ..._p,
+    expect(fn({
+      ..._p,
       open: void 0,
       close: 2
     })).toEqual({
@@ -73,7 +76,8 @@ describe('crVolumePoint', () => {
       _open: void 0,
       _close: 2
     });
-    expect(fn({ ..._p,
+    expect(fn({
+      ..._p,
       open: 0,
       close: 2
     })).toEqual({
@@ -83,7 +87,8 @@ describe('crVolumePoint', () => {
       _open: 0,
       _close: 2
     });
-    expect(fn({ ..._p,
+    expect(fn({
+      ..._p,
       open: NaN,
       close: 2
     })).toEqual({
@@ -100,12 +105,13 @@ describe('crAthPoint', () => {
   const _p = {
     date: 12345
   };
-  it('should cr ath point', () => {
+  test('should cr ath point', () => {
     const _upBy10 = {
       close: 100,
       open: 110
     };
-    expect(fn({ ..._p,
+    expect(fn({
+      ..._p,
       ..._upBy10
     })).toEqual({
       x: _p.date,
@@ -117,7 +123,8 @@ describe('crAthPoint', () => {
       close: 100,
       open: 90
     };
-    expect(fn({ ..._p,
+    expect(fn({
+      ..._p,
       ..._downBy10
     })).toEqual({
       x: _p.date,
@@ -129,7 +136,8 @@ describe('crAthPoint', () => {
       close: 100,
       open: 100
     };
-    expect(fn({ ..._p,
+    expect(fn({
+      ..._p,
       ..._equal
     })).toEqual({
       x: _p.date,
@@ -138,12 +146,13 @@ describe('crAthPoint', () => {
       color: _Color.COLOR_GREY
     });
   });
-  it('should return point with y=0 for falsy prevClose', () => {
+  test('should return point with y=0 for falsy prevClose', () => {
     const _pUndef = {
       close: void 0,
       open: 100
     };
-    expect(fn({ ..._p,
+    expect(fn({
+      ..._p,
       ..._pUndef
     })).toEqual({
       x: _p.date,
@@ -155,7 +164,8 @@ describe('crAthPoint', () => {
       close: null,
       open: 100
     };
-    expect(fn({ ..._p,
+    expect(fn({
+      ..._p,
       ..._pNull
     })).toEqual({
       x: _p.date,
@@ -167,7 +177,8 @@ describe('crAthPoint', () => {
       close: 0,
       open: 100
     };
-    expect(fn({ ..._p,
+    expect(fn({
+      ..._p,
       ..._pZero
     })).toEqual({
       x: _p.date,
@@ -176,8 +187,9 @@ describe('crAthPoint', () => {
       color: _Color.COLOR_GREY
     });
   });
-  it('should return point with color=C.WHITE && open=Unknown for falsy open', () => {
-    expect(fn({ ..._p,
+  test('should return point with color=C.WHITE && open=Unknown for falsy open', () => {
+    expect(fn({
+      ..._p,
       close: 100,
       open: null
     })).toEqual({
@@ -187,7 +199,8 @@ describe('crAthPoint', () => {
       open: 'Unknown',
       color: _Color.COLOR_WHITE
     });
-    expect(fn({ ..._p,
+    expect(fn({
+      ..._p,
       close: 100,
       open: 0
     })).toEqual({

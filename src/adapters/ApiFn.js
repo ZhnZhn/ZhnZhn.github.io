@@ -76,7 +76,7 @@ const _fCheckResponse = (getData) => (
       return _data;
     }
     throw crError();
-  } catch(err) {
+  } catch {
     throw crError();
   }
 }

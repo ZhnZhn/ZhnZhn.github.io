@@ -39,7 +39,7 @@ const _crLoadingState = () => ({
   isLoading: true,
   isLoadFailed: false
 });
-const _useIsLoadDims = (props, isLoadFailed) => {
+const useIsLoadDims = (props, isLoadFailed) => {
   const _hasBeenOpen = (0, _useHasBeenOpen.default)(props.isShow);
   return isLoadFailed && _hasBeenOpen;
 };
@@ -116,7 +116,7 @@ const useLoadDims = (props, setValidationMessages) => {
         setValidationMessages([errMsg]);
       }
     }, [chartsType, _mapFrequency, _mapDateDf, loadId, setValidationMessages]),
-    _isLoadDims = _useIsLoadDims(props, isLoadFailed);
+    _isLoadDims = useIsLoadDims(props, isLoadFailed);
 
   /*eslint-disable react-hooks/exhaustive-deps */
   (0, _uiApi.useEffect)(() => {

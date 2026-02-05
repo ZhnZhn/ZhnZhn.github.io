@@ -5,16 +5,12 @@ var _useBool = require("../useBool");
 const _getIs = result => result.current[0],
   _getSetTrue = result => result.current[1],
   _getSetFalse = result => result.current[2];
-
-/* eslint-disable react-hooks/rules-of-hooks */
 const _testInitialValue = (initialValue, expectedValue) => {
   const {
     result: r1
   } = (0, _react.renderHook)(() => (0, _useBool.useBool)(initialValue));
   expect(_getIs(r1)).toBe(expectedValue);
 };
-/* eslint-enable react-hooks/rules-of-hooks */
-
 const _actSetValue = (r, setTrue, setFalse, setValue, expectedValue) => {
   (0, _react.act)(setValue);
   expect(_getIs(r)).toBe(expectedValue);

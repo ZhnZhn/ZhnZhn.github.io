@@ -2,18 +2,19 @@ import {
   crVolumePoint,
   crAthPoint
 } from '../pointFn';
+
 import {
   COLOR_WHITE,
   COLOR_GREY,
   COLOR_GREEN,
   COLOR_RED
-} from '../../constants/Color'
+} from '../../constants/Color';
 
 describe('crVolumePoint', ()=>{
-  const fn = crVolumePoint
-  const _p = { date: 12345, volume: 10 }
-  const option = { _high: 2.2, _low: 0.8 }
-  it('should cr volume point with option', ()=>{
+  const fn = crVolumePoint;
+  const _p = { date: 12345, volume: 10 };
+  const option = { _high: 2.2, _low: 0.8 };
+  test('should cr volume point with option', ()=>{
     expect(fn({ ..._p, open: 1, close: 2, option })).toEqual({
       x: _p.date, y: _p.volume,
       color: COLOR_GREEN, _open: 1, _close: 2,
@@ -30,7 +31,7 @@ describe('crVolumePoint', ()=>{
       ...option
     })
   })
-  it('should cr point C.GRAY for open falsy edge case', ()=>{
+  test('should cr point C.GRAY for open falsy edge case', ()=>{
     expect(fn({ ..._p, open: null, close: 2 })).toEqual({
       x: _p.date, y: _p.volume,
       color: COLOR_GREY, _open: null, _close: 2,
@@ -51,9 +52,9 @@ describe('crVolumePoint', ()=>{
 })
 
 describe('crAthPoint',()=>{
-  const fn = crAthPoint
-  const _p = { date: 12345 }
-  it('should cr ath point',()=>{
+  const fn = crAthPoint;
+  const _p = { date: 12345 };
+  test('should cr ath point',()=>{
     const _upBy10 = { close: 100, open: 110}
     expect(fn({..._p, ..._upBy10 })).toEqual({
       x: _p.date,
@@ -72,7 +73,7 @@ describe('crAthPoint',()=>{
       y: 0, ..._equal, color: COLOR_GREY
     })
   })
-  it('should return point with y=0 for falsy prevClose', ()=>{
+  test('should return point with y=0 for falsy prevClose', ()=>{
     const _pUndef = { close: void 0, open: 100 }
     expect(fn({..._p, ..._pUndef })).toEqual({
       x: _p.date,
@@ -89,7 +90,7 @@ describe('crAthPoint',()=>{
       y: 0, ..._pZero, color: COLOR_GREY
     })
   })
-  it('should return point with color=C.WHITE && open=Unknown for falsy open',()=>{
+  test('should return point with color=C.WHITE && open=Unknown for falsy open',()=>{
     expect(fn({..._p, close: 100, open: null })).toEqual({
       x: _p.date, y: 0,
       close: 100, open: 'Unknown',

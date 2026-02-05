@@ -48,7 +48,7 @@ const _fCrAddConfig = function (crAddConfig) {
             return data;
           }, []).sort(_compareByDate);
         return _data;
-      } catch (err) {
+      } catch {
         throw (0, _AdapterFn.crError)();
       }
     };

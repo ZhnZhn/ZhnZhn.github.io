@@ -36,7 +36,6 @@ const ListCreatePane = (props) => {
     _refCaptionGroup,
     _hSelectGroup
   ] = useSelectItem()
-  /*eslint-disable react-hooks/exhaustive-deps */
   , _hCreate = () => {
       const captionList = getInputValue(_refInputText)
       , captionGroup = getRefValue(_refCaptionGroup);
@@ -49,7 +48,6 @@ const ListCreatePane = (props) => {
         setValidationMessages(msg)
       }
   };
-
   return (
     <WatchPane
       validationMessages={validationMessages}

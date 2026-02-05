@@ -24,13 +24,13 @@ const _formatedToBig = (v=0, dfR) => {
     : _b;
 }
 
-const _toBig = (bValue) => {
-  if (bValue instanceof Big) {
-    return bValue;
+const _toBig = (bValueOr) => {
+  if (bValueOr instanceof Big) {
+    return bValueOr;
   }
   try {
-    return new Big(bValue);
-  } catch(err) {
+    return new Big(bValueOr);
+  } catch {
     return new Big(0);
   }
 };
@@ -123,12 +123,13 @@ export const toFixedNumber = (
         : 0
   )
 
-const _random = Math.random;
+const _random = Math.random
+, _floor = Math.floor;
 
 export const crRandomInteger = (
   min,
   max
-) => min + (Math.floor((max-min+1)*_random()));
+) => min + _floor((max-min+1)*_random())
 
 export const crId = (prefix) => (
   (prefix || '') +
@@ -136,4 +137,8 @@ export const crId = (prefix) => (
   _random().toString(36).slice(2, 9)
 )
 
-export const isInRange = (v, min, max) => v>min && v<max
+export const isInRange = (
+  number,
+  min,
+  max
+) => number>min && number<max

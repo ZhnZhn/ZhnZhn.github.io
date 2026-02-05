@@ -19,8 +19,8 @@ const useDialogFocus = (isShow, refElementFocus1, refElementFocus2) => {
     }
     (0, _uiApi.setRefValue)(_refIsShowPrev, isShow);
   }, [isShow]);
-  //refElementFocus
-  /*eslint-disable react-hooks/exhaustive-deps */
+  //refElementFocus1, refElementFocus2
+  /*eslint-enable react-hooks/exhaustive-deps */
 };
 var _default = exports.default = useDialogFocus;
 //# sourceMappingURL=useDialogFocus.js.map
