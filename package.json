@@ -74,8 +74,8 @@
     "jest-environment-jsdom": "^30.2.0",
     "react-refresh": "^0.18.0",
     "react-test-renderer": "^18.3.1",
-    "terser-webpack-plugin": "^5.3.16",
-    "webpack": "^5.105.3",
+    "terser-webpack-plugin": "^5.3.17",
+    "webpack": "^5.105.4",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.3"
