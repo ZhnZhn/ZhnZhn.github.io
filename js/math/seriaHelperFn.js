@@ -25,17 +25,13 @@ const crPointGetter = data => {
   return _dataPoint ? (0, _isTypeFn.isArr)(_dataPoint) ? [p => p[0], p => p[1]] : [p => p.x, p => p.y] : [];
 };
 exports.crPointGetter = crPointGetter;
-const fGetY = point => {
-  if (!point) {
+const _isValueType = value => (0, _isTypeFn.isNumber)(value) || value === null;
+const fGetY = data => {
+  if (!(0, _isTypeFn.isArr)(data)) {
     return;
   }
-  if ((0, _isTypeFn.isArr)(point)) {
-    return p => p[1];
-  }
-  if ((0, _isTypeFn.isNumber)(point.y)) {
-    return p => p.y;
-  }
-  return;
+  const point = data[0];
+  return !point ? void 0 : (0, _isTypeFn.isArr)(point) && _isValueType(point[1]) ? p => p[1] : _isValueType(point.y) ? p => p.y : void 0;
 };
 exports.fGetY = fGetY;
 const getZeroCountFromStart = (arr, getY) => {

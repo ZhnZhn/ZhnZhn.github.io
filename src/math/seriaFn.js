@@ -1,7 +1,6 @@
 import Big from 'big.js';
 
 import {
-  isArr,
   isNumber,
   parseIntBy10
 } from '../utils/isTypeFn';
@@ -116,9 +115,7 @@ export const findMinY = _fFindY(POSITIVE_INFINITY, _findMinY)
 export const findMaxY = _fFindY(NEGATIVE_INFINITY, _findMaxY)
 
 export const filterTrimZero = (data) => {
-  if (!isArr(data)) { return data; }
-
-  const _getY = fGetY(data[0]);
+  const _getY = fGetY(data);
   if (!_getY) { return data; }
 
   const _countZero = getZeroCountFromStart(data, _getY)
@@ -133,10 +130,10 @@ export const filterTrimZero = (data) => {
 }
 
 export const hasZeroOrLessValue = data => {
-  if (!isArr(data)) { return false; }
-  const _getY = fGetY(data[0]);
-  for(let i=0; i<data.length; i++){
-    if (_getY(data[i]) <= 0) {
+  const _getY = fGetY(data);
+  if (!_getY) { return false; }
+  for (let point of data) {
+    if (_getY(point) <= 0) {
       return true;
     }
   }

@@ -96,30 +96,41 @@ describe("fGetY", () => {
   const fn = _seriaHelperFn.fGetY;
   test("should return function for getting y for arr point", () => {
     const point = [1, 2],
-      getY = fn(point);
+      getY = fn([point]);
     expect(typeof getY).toBe('function');
     expect(getY(point)).toBe(point[1]);
   });
-  test("should return function for getting y for obj point", () => {
+  test("should return function for getting y for obj point with number value", () => {
     const point = {
         y: 2
       },
-      getY = fn(point);
+      getY = fn([point]);
+    expect(typeof getY).toBe('function');
+    expect(getY(point)).toBe(point.y);
+  });
+  test("should return function for getting y for obj point with null value", () => {
+    const point = {
+        y: null
+      },
+      getY = fn([point]);
     expect(typeof getY).toBe('function');
     expect(getY(point)).toBe(point.y);
   });
   test('should return undefined for edge case', () => {
     expect(fn(null)).toBe(undefined);
     expect(fn({})).toBe(undefined);
+    expect(fn([null])).toBe(undefined);
+    expect(fn([[]])).toBe(undefined);
+    expect(fn([{}])).toBe(undefined);
   });
 });
 describe('getZeroCountFromStart', () => {
   const fn = _seriaHelperFn.getZeroCountFromStart;
   test('should return number of points with y 0 or null from data start', () => {
     const dataArr = [[1, 0], [2, null]];
-    expect(fn(dataArr, (0, _seriaHelperFn.fGetY)(dataArr[0]))).toBe(2);
+    expect(fn(dataArr, (0, _seriaHelperFn.fGetY)(dataArr))).toBe(2);
     const dataArr2 = [[1, 0], [2, null], [-1, 1]];
-    expect(fn(dataArr2, (0, _seriaHelperFn.fGetY)(dataArr2[0]))).toBe(2);
+    expect(fn(dataArr2, (0, _seriaHelperFn.fGetY)(dataArr2))).toBe(2);
     const dataObj = [{
       x: 1,
       y: 0
@@ -127,14 +138,14 @@ describe('getZeroCountFromStart', () => {
       x: 2,
       y: null
     }];
-    expect(fn(dataObj, (0, _seriaHelperFn.fGetY)(dataObj[0]))).toBe(2);
+    expect(fn(dataObj, (0, _seriaHelperFn.fGetY)(dataObj))).toBe(2);
   });
 });
 describe('getZeroIndexFromEnd', () => {
   const fn = _seriaHelperFn.getZeroIndexFromEnd;
   test('should return index of last y 0 or null from data end', () => {
     const dataArr = [[-1, -1], [1, 0], [2, null]];
-    expect(fn(dataArr, (0, _seriaHelperFn.fGetY)(dataArr[0]))).toBe(1);
+    expect(fn(dataArr, (0, _seriaHelperFn.fGetY)(dataArr))).toBe(1);
     const dataObj = [{
       x: -1,
       y: -1
@@ -145,7 +156,7 @@ describe('getZeroIndexFromEnd', () => {
       x: 2,
       y: null
     }];
-    expect(fn(dataObj, (0, _seriaHelperFn.fGetY)(dataObj[0]))).toBe(1);
+    expect(fn(dataObj, (0, _seriaHelperFn.fGetY)(dataObj))).toBe(1);
   });
 });
 describe('crDataArrays', () => {

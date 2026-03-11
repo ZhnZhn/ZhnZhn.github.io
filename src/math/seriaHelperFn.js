@@ -42,15 +42,18 @@ export const crPointGetter = data => {
     : [];
 }
 
-export const fGetY = (point) => {
-  if (!point) { return; }
-  if (isArr(point)) {
-    return p => p[1];
-  }
-  if (isNumber(point.y)) {
-    return p => p.y;
-  }
-  return;
+const _isValueType = value => isNumber(value)
+ || value === null;
+export const fGetY = (data) => {
+  if (!isArr(data)) {return; }
+  const point = data[0];
+  return !point
+    ? void 0
+    : isArr(point) && _isValueType(point[1])
+    ? p => p[1]
+    : _isValueType(point.y)
+    ? p => p.y
+    : void 0;
 }
 
 export const getZeroCountFromStart = (arr, getY) => {

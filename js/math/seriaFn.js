@@ -67,10 +67,7 @@ exports.normalize = normalize;
 const findMinY = exports.findMinY = _fFindY(_mathFn.POSITIVE_INFINITY, _findMinY);
 const findMaxY = exports.findMaxY = _fFindY(_mathFn.NEGATIVE_INFINITY, _findMaxY);
 const filterTrimZero = data => {
-  if (!(0, _isTypeFn.isArr)(data)) {
-    return data;
-  }
-  const _getY = (0, _seriaHelperFn.fGetY)(data[0]);
+  const _getY = (0, _seriaHelperFn.fGetY)(data);
   if (!_getY) {
     return data;
   }
@@ -86,12 +83,12 @@ const filterTrimZero = data => {
 };
 exports.filterTrimZero = filterTrimZero;
 const hasZeroOrLessValue = data => {
-  if (!(0, _isTypeFn.isArr)(data)) {
+  const _getY = (0, _seriaHelperFn.fGetY)(data);
+  if (!_getY) {
     return false;
   }
-  const _getY = (0, _seriaHelperFn.fGetY)(data[0]);
-  for (let i = 0; i < data.length; i++) {
-    if (_getY(data[i]) <= 0) {
+  for (let point of data) {
+    if (_getY(point) <= 0) {
       return true;
     }
   }
