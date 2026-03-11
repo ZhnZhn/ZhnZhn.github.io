@@ -89,7 +89,10 @@ describe("crPointGetter", () => {
     expect(fn(true)).toEqual([]);
     expect(fn(() => {})).toEqual([]);
     expect(fn([])).toEqual([]);
-    expect(fn([null, void 0, 'str', 1, true])).toEqual([]);
+    expect(fn([null])).toEqual([]);
+    expect(fn(['str'])).toEqual([]);
+    expect(fn([1])).toEqual([]);
+    expect(fn([true])).toEqual([]);
   });
 });
 describe("fGetY", () => {

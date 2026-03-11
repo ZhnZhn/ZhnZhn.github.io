@@ -25,28 +25,23 @@ export const getPointValue = (
     ? point.y
     : _getDfPointValue(dfValue)
 
-const _getDataPoint = arr => {
-  if (!isArr(arr)) { return; }
-  for (let i=0; i<arr.length; i++){
-    if (isObj(arr[i])) { return arr[i]; }
-  }
-  return;
-}
+const _getFirstPointFrom = data => isArr(data)
+  && isObj(data[0])
+  && data[0];
 
 export const crPointGetter = data => {
-  const _dataPoint = _getDataPoint(data);
-  return _dataPoint
-    ? isArr(_dataPoint)
-       ? [p => p[0], p => p[1]]
-       : [p => p.x, p => p.y]
+  const _point = _getFirstPointFrom(data);
+  return isArr(_point)
+    ? [p => p[0], p => p[1]]
+    : isObj(_point)
+    ? [p => p.x, p => p.y]
     : [];
 }
 
 const _isValueType = value => isNumber(value)
  || value === null;
 export const fGetY = (data) => {
-  if (!isArr(data)) {return; }
-  const point = data[0];
+  const point = _getFirstPointFrom(data);
   return !point
     ? void 0
     : isArr(point) && _isValueType(point[1])

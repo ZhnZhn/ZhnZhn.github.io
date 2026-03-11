@@ -9,28 +9,15 @@ exports.getPointDate = getPointDate;
 const _getDfPointValue = dfValue => (0, _isTypeFn.isNumber)(dfValue) ? dfValue : '0.0';
 const getPointValue = (point, dfValue) => (0, _isTypeFn.isArr)(point) ? (0, _isTypeFn.isNumber)(point[1]) ? point[1] : _getDfPointValue(dfValue) : point && (0, _isTypeFn.isNumber)(point.y) ? point.y : _getDfPointValue(dfValue);
 exports.getPointValue = getPointValue;
-const _getDataPoint = arr => {
-  if (!(0, _isTypeFn.isArr)(arr)) {
-    return;
-  }
-  for (let i = 0; i < arr.length; i++) {
-    if ((0, _isTypeFn.isObj)(arr[i])) {
-      return arr[i];
-    }
-  }
-  return;
-};
+const _getFirstPointFrom = data => (0, _isTypeFn.isArr)(data) && (0, _isTypeFn.isObj)(data[0]) && data[0];
 const crPointGetter = data => {
-  const _dataPoint = _getDataPoint(data);
-  return _dataPoint ? (0, _isTypeFn.isArr)(_dataPoint) ? [p => p[0], p => p[1]] : [p => p.x, p => p.y] : [];
+  const _point = _getFirstPointFrom(data);
+  return (0, _isTypeFn.isArr)(_point) ? [p => p[0], p => p[1]] : (0, _isTypeFn.isObj)(_point) ? [p => p.x, p => p.y] : [];
 };
 exports.crPointGetter = crPointGetter;
 const _isValueType = value => (0, _isTypeFn.isNumber)(value) || value === null;
 const fGetY = data => {
-  if (!(0, _isTypeFn.isArr)(data)) {
-    return;
-  }
-  const point = data[0];
+  const point = _getFirstPointFrom(data);
   return !point ? void 0 : (0, _isTypeFn.isArr)(point) && _isValueType(point[1]) ? p => p[1] : _isValueType(point.y) ? p => p.y : void 0;
 };
 exports.fGetY = fGetY;
