@@ -2,7 +2,10 @@ import { createRoot } from 'react-dom/client';
 
 import { domSanitize } from '../../utils/domFn';
 import { merge } from '../../utils/objFn';
-import clusterMaker from '../../math/k-means';
+import {
+  K_MEANS,
+  loadMath
+} from '../../math/loadMath';
 import {
   NEGATIVE_INFINITY,
   POSITIVE_INFINITY,
@@ -272,29 +275,38 @@ const _crChoroplethMap = (option) => {
     mapId,
     time
   } = option
-  , [dGeo, sGeo] = crGeoSlice(statJson, time)
-  , { minValue, maxValue, points } = _mergeGeoAndValue(sGeo, dGeo, geoJson)
-  , _points = _addGeoSeria(points, statJson)
-  , _clusters = clusterMaker.crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
-  , _hmIdCluster = _crHmIdCluster(_clusters);
+  , [
+    dGeo,
+    sGeo
+  ] = crGeoSlice(statJson, time)
+  , {
+    minValue,
+    maxValue,
+    points
+  } = _mergeGeoAndValue(sGeo, dGeo, geoJson)
+  , _points = _addGeoSeria(points, statJson);
+  return loadMath(K_MEANS).then(clusterMaker => {
+    const _clusters = clusterMaker.crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
+    , _hmIdCluster = _crHmIdCluster(_clusters);
 
-  _mergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
-  const infoControl = _crInfoControl(L, mapId);
-  infoControl.addTo(map);
+    _mergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
+    const infoControl = _crInfoControl(L, mapId);
+    infoControl.addTo(map);
 
-  L.geoJSON(geoJson, {
-     style: _crStyle,
-     onEachFeature: _fnOnEachFeature.bind(null, infoControl)
-  }).addTo(map);
+    L.geoJSON(geoJson, {
+       style: _crStyle,
+       onEachFeature: _fnOnEachFeature.bind(null, infoControl)
+    }).addTo(map);
 
-  if ( _points.length > 1) {
-    const gradeControl = _crGradeControl(
-      minValue, maxValue, _clusters, L, infoControl
-    )
-    gradeControl.addTo(map);
-  }
-  return option;
-}
+    if ( _points.length > 1) {
+      const gradeControl = _crGradeControl(
+        minValue, maxValue, _clusters, L, infoControl
+      )
+      gradeControl.addTo(map);
+    }
+    return option;
+  });
+};
 
 const _crGeoJson = (geoJson) => {
   const _geoJson = merge(true, {}, geoJson)
@@ -370,38 +382,39 @@ const ChoroplethMap = {
 
   _draw({ id, jsonCube, zhMapSlice, time }){
     return this.getLeaflet()
-       .then( (L) => {
-          const map = L.map(id, this.mapOption)
-            .setView([58.00, 10.00], 3);
+      .then(L => {
+        const map = L.map(id, this.mapOption)
+          .setView([58.00, 10.00], 3);
 
-          /*
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-               id: 'addis',
-               attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-               errorTileUrl: ''
-          }).addTo(map);
-          */
+        /*
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+             id: 'addis',
+             attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+             errorTileUrl: ''
+        }).addTo(map);
+        */
 
-          L.tileLayer('', {
-               id: id + '_tile'
-          }).addTo(map);
+        L.tileLayer('', {
+             id: id + '_tile'
+        }).addTo(map);
 
-          return {
-            jsonCube, zhMapSlice, time,
-            L, map, mapId: id
-          };
-       })
-       .then(option => {
-          return this.getGeoJson(URL_EU_GEOJSON)
-           .then(geoJson => {
-              option.geoJson = geoJson;
-              return option;
-           });
-       })
-       .then(option => _crPromise(
-         _crChoroplethMap(option)
-       ));
-  }
+        return {
+          jsonCube,
+          zhMapSlice,
+          time,
+          L, map,
+          mapId: id
+        };
+      })
+      .then(option => {
+        return this.getGeoJson(URL_EU_GEOJSON)
+         .then(geoJson => {
+            option.geoJson = geoJson;
+            return option;
+         });
+      })
+      .then(_crChoroplethMap)
+    }
 };
 
 export default ChoroplethMap

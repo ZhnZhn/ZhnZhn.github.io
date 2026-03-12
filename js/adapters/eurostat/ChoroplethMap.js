@@ -1,12 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
 var _client = require("react-dom/client");
 var _domFn = require("../../utils/domFn");
 var _objFn = require("../../utils/objFn");
-var _kMeans = _interopRequireDefault(require("../../math/k-means"));
+var _loadMath = require("../../math/loadMath");
 var _mathFn = require("../../math/mathFn");
 var _MapFactory = require("../../components/factories/MapFactory");
 var _JsonStatTwoDimensionFn = require("../JsonStatTwoDimensionFn");
@@ -217,21 +216,23 @@ const _crChoroplethMap = option => {
       maxValue,
       points
     } = _mergeGeoAndValue(sGeo, dGeo, geoJson),
-    _points = _addGeoSeria(points, statJson),
-    _clusters = _kMeans.default.crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION),
-    _hmIdCluster = _crHmIdCluster(_clusters);
-  _mergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
-  const infoControl = _crInfoControl(L, mapId);
-  infoControl.addTo(map);
-  L.geoJSON(geoJson, {
-    style: _crStyle,
-    onEachFeature: _fnOnEachFeature.bind(null, infoControl)
-  }).addTo(map);
-  if (_points.length > 1) {
-    const gradeControl = _crGradeControl(minValue, maxValue, _clusters, L, infoControl);
-    gradeControl.addTo(map);
-  }
-  return option;
+    _points = _addGeoSeria(points, statJson);
+  return (0, _loadMath.loadMath)(_loadMath.K_MEANS).then(clusterMaker => {
+    const _clusters = clusterMaker.crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION),
+      _hmIdCluster = _crHmIdCluster(_clusters);
+    _mergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
+    const infoControl = _crInfoControl(L, mapId);
+    infoControl.addTo(map);
+    L.geoJSON(geoJson, {
+      style: _crStyle,
+      onEachFeature: _fnOnEachFeature.bind(null, infoControl)
+    }).addTo(map);
+    if (_points.length > 1) {
+      const gradeControl = _crGradeControl(minValue, maxValue, _clusters, L, infoControl);
+      gradeControl.addTo(map);
+    }
+    return option;
+  });
 };
 const _crGeoJson = geoJson => {
   const _geoJson = (0, _objFn.merge)(true, {}, geoJson);
@@ -329,7 +330,7 @@ const ChoroplethMap = {
         option.geoJson = geoJson;
         return option;
       });
-    }).then(option => _crPromise(_crChoroplethMap(option)));
+    }).then(_crChoroplethMap);
   }
 };
 var _default = exports.default = ChoroplethMap;
