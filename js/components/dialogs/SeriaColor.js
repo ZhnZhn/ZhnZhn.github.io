@@ -20,7 +20,7 @@ const CL_INPUT_COLOR = 'va-b',
     paddingTop: 4
   },
   S_ROW2_PADDING = {
-    paddingLeft: 56
+    paddingLeft: 60
   },
   S_BT_COUNTER = {
     margin: '0 16px 0 14px'

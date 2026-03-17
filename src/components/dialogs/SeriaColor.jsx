@@ -40,7 +40,7 @@ const COLORS2 = [
 const CL_INPUT_COLOR = 'va-b'
 , S_ROOT = { padding: '6px 0 4px 4px' }
 , S_ROW2 = { paddingTop: 4 }
-, S_ROW2_PADDING = { paddingLeft: 56 }
+, S_ROW2_PADDING = { paddingLeft: 60 }
 , S_BT_COUNTER = { margin: '0 16px 0 14px' }
 , S_TO_CELL = { margin: '0 14px' };
 
