@@ -10,6 +10,7 @@ var _zhToggleSeria = _interopRequireDefault(require("./zhToggleSeria"));
 var _zhTogglePlotLines = _interopRequireDefault(require("./zhTogglePlotLines"));
 var _zhToggle2H = _interopRequireDefault(require("./zhToggle2H"));
 var _zhDataLabels = _interopRequireDefault(require("./zhDataLabels"));
+var _zhDataClusters = _interopRequireDefault(require("./zhDataClusters"));
 var _zhSetPointWidth = _interopRequireDefault(require("./zhSetPointWidth"));
 var _zhZoomX = _interopRequireDefault(require("./zhZoomX"));
 var _zhIs = _interopRequireDefault(require("./zhIs"));
@@ -29,6 +30,7 @@ const HighchartsZhn = Highcharts => {
     zhReflowCharts: _zhReflowCharts.default,
     zhUpdateSpacing: _zhUpdateSpacing.default,
     zhDataLabels: _zhDataLabels.default,
+    zhDataClusters: _zhDataClusters.default,
     zhSetPointWidth: _zhSetPointWidth.default,
     zhToggleSeria: _zhToggleSeria.default,
     zhToggle2H: _zhToggle2H.default,
