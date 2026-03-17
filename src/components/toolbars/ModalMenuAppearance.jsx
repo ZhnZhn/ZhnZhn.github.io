@@ -34,9 +34,11 @@ const ModalMenuAppearanceView = ({
   /*eslint-disable react-hooks/exhaustive-deps */
   , [
     _toggleDataLabels,
+    _toggleDataClusters,
     _onPointWidth
   ]= useMemo(() => [
     (is) => getChart().zhDataLabels(is),
+    (is) => getChart().zhDataClusters(is),
     () => {
       const pointWidth = parseFloat(getInputValue(_refPointWidth));
       if (pointWidth > 0 && pointWidth < 21) {
@@ -54,6 +56,11 @@ const ModalMenuAppearanceView = ({
         caption="Data Labels"
         style={S_INPUT_SWITCH}
         onToggle={_toggleDataLabels}
+      />
+      <InputSwitch
+        caption="Data Clusters"
+        style={S_INPUT_SWITCH}
+        onToggle={_toggleDataClusters}
       />
       <RowCaptionInput
         refEl={_refPointWidth}

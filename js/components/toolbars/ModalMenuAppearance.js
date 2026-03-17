@@ -29,7 +29,7 @@ const ModalMenuAppearanceView = _ref => {
   } = _ref;
   const [refFirstItem, _refPointWidth] = (0, _ModalPopup.useModalPopup)()
     /*eslint-disable react-hooks/exhaustive-deps */,
-    [_toggleDataLabels, _onPointWidth] = (0, _uiApi.useMemo)(() => [is => getChart().zhDataLabels(is), () => {
+    [_toggleDataLabels, _toggleDataClusters, _onPointWidth] = (0, _uiApi.useMemo)(() => [is => getChart().zhDataLabels(is), is => getChart().zhDataClusters(is), () => {
       const pointWidth = parseFloat((0, _uiApi.getInputValue)(_refPointWidth));
       if (pointWidth > 0 && pointWidth < 21) {
         getChart().zhSetPointWidth(pointWidth);
@@ -45,6 +45,10 @@ const ModalMenuAppearanceView = _ref => {
       caption: "Data Labels",
       style: S_INPUT_SWITCH,
       onToggle: _toggleDataLabels
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
+      caption: "Data Clusters",
+      style: S_INPUT_SWITCH,
+      onToggle: _toggleDataClusters
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCaptionInput.default, {
       refEl: _refPointWidth,
       caption: "Point Width",
