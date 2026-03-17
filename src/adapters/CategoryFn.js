@@ -10,11 +10,8 @@ import {
   CHT_TREE_MAP_CLUSTER,
   CHT_BAR_TREE_MAP,
 
-  CHT_BAR_CLUSTER,
   CHT_BAR_SET,
   CHT_COLUMN_SET,
-  CHT_COLUMN_CLUSTER,
-
   CHT_DOT_SET
 } from '../constants/ChartType';
 
@@ -50,10 +47,8 @@ export const isBarTreeMap = _fIsSeriaTypeEqual(CHT_BAR_TREE_MAP)
 export const isDotSet = _fIsSeriaTypeEqual(CHT_DOT_SET)
 
 const COLUMN_BAR_CATEGORY_CHART_TYPES = [
-  CHT_BAR_CLUSTER,
   CHT_BAR_SET,
-  CHT_COLUMN_SET,
-  CHT_COLUMN_CLUSTER
+  CHT_COLUMN_SET
 ];
 export const isColumnOrBarCategory = _fIsSeriaType(
   isInArrStr(COLUMN_BAR_CATEGORY_CHART_TYPES)
@@ -63,10 +58,6 @@ export const isCategory = (
   optionOrStr
 ) => isColumnOrBarCategory(optionOrStr)
  || isTreeMap(optionOrStr)
-
-export const isCategoryCluster = (
-   seriaType
- ) => (seriaType || '').indexOf('CLUSTER') !== -1
 
 const _addToHm = (
   hm,

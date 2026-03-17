@@ -30,9 +30,7 @@ const _crConfig = (json, option) => _assign((0, _crCategoryConfig.default)(_crTi
   });
 const routerColumnBarSet = {
   [_ChartType.CHT_COLUMN_SET]: _fCrConfig(_ChartType.CHT_COLUMN),
-  [_ChartType.CHT_COLUMN_CLUSTER]: _fCrConfig(_ChartType.CHT_COLUMN_CLUSTER),
-  [_ChartType.CHT_BAR_SET]: _fCrConfig(_ChartType.CHT_BAR),
-  [_ChartType.CHT_BAR_CLUSTER]: _fCrConfig(_ChartType.CHT_BAR_CLUSTER)
+  [_ChartType.CHT_BAR_SET]: _fCrConfig(_ChartType.CHT_BAR)
 };
 var _default = exports.default = routerColumnBarSet;
 //# sourceMappingURL=toColumn.js.map

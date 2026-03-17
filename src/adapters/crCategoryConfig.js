@@ -6,9 +6,8 @@ import {
   setBarConfigHeightIf,
   toConfig
 } from '../charts/configBuilderFn';
-import addJenksColorTo from '../math/addJenksColorTo';
+
 import {
-  isCategoryCluster,
   crCategories
 } from './CategoryFn';
 
@@ -30,9 +29,7 @@ const crCategoryConfig = (
   fAddCaption(title, subtitle),
   fAddSeriaBy(0, {
     color: seriaColor,
-    data: isCategoryCluster(seriaType)
-      ? addJenksColorTo(data)
-      : data
+    data,    
   }),
   setBarConfigHeightIf,
   toConfig

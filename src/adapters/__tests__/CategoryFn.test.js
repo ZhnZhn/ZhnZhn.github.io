@@ -5,9 +5,7 @@ import {
   CHT_COLUMN,
 
   CHT_BAR_SET,
-  CHT_BAR_CLUSTER,
   CHT_COLUMN_SET,
-  CHT_COLUMN_CLUSTER,
   CHT_TREE_MAP,
   CHT_TREE_MAP_CLUSTER
 } from "../../constants/ChartType";
@@ -20,9 +18,7 @@ describe("isCategory", () => {
   const fn = isCategory;
   test("should return boolean from string", () => {
     expect(fn(CHT_BAR_SET)).toBe(true)
-    expect(fn(CHT_BAR_CLUSTER)).toBe(true)
     expect(fn(CHT_COLUMN_SET)).toBe(true)
-    expect(fn(CHT_COLUMN_CLUSTER)).toBe(true)
     expect(fn(CHT_TREE_MAP)).toBe(true)
     expect(fn(CHT_TREE_MAP_CLUSTER)).toBe(true)
 
@@ -34,7 +30,7 @@ describe("isCategory", () => {
 
   test("should return boolean from object with property seriaType", () => {
     expect(fn({seriaType: CHT_COLUMN_SET})).toBe(true)
-    expect(fn({seriaType: CHT_COLUMN_CLUSTER})).toBe(true)
+    expect(fn({seriaType: CHT_BAR_SET})).toBe(true)
 
     expect(fn({seriaType: CHT_SPLINE})).toBe(false)
     expect(fn({seriaType: CHT_LINE})).toBe(false)

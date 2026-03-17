@@ -2,9 +2,7 @@ import {
   CHT_BAR,
   CHT_COLUMN,
   CHT_COLUMN_SET,
-  CHT_BAR_SET,
-  CHT_COLUMN_CLUSTER,
-  CHT_BAR_CLUSTER
+  CHT_BAR_SET
 } from '../../constants/ChartType';
 
 import { toUpperCaseFirst } from '../../utils/strFn';
@@ -65,9 +63,7 @@ const _crConfig = (
 
 const routerColumnBarSet = {
   [CHT_COLUMN_SET]: _fCrConfig(CHT_COLUMN),
-  [CHT_COLUMN_CLUSTER]: _fCrConfig(CHT_COLUMN_CLUSTER),
-  [CHT_BAR_SET]: _fCrConfig(CHT_BAR),
-  [CHT_BAR_CLUSTER]: _fCrConfig(CHT_BAR_CLUSTER)
+  [CHT_BAR_SET]: _fCrConfig(CHT_BAR)  
 };
 
 export default routerColumnBarSet

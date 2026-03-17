@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.roundByDataIf = exports.isTreeMap = exports.isDotSet = exports.isColumnOrBarCategory = exports.isCategoryCluster = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.fRoundByIf = exports.fCrTreeMapPoint = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
+exports.roundByDataIf = exports.isTreeMap = exports.isDotSet = exports.isColumnOrBarCategory = exports.isCategoryCase = exports.isCategory = exports.isBarTreeMap = exports.getCategories = exports.fRoundByIf = exports.fCrTreeMapPoint = exports.crCategoryPoint = exports.crCategories = exports.arrangeSeriaByCategories = void 0;
 var _arrFn = require("../utils/arrFn");
 var _domFn = require("../utils/domFn");
 var _isTypeFn = require("../utils/isTypeFn");
@@ -14,12 +14,10 @@ const isTreeMap = exports.isTreeMap = _fIsSeriaType((0, _arrFn.isInArrStr)(TREE_
 const _fIsSeriaTypeEqual = seriaType => optionOrStr => _getSeriaType(optionOrStr) === seriaType;
 const isBarTreeMap = exports.isBarTreeMap = _fIsSeriaTypeEqual(_ChartType.CHT_BAR_TREE_MAP);
 const isDotSet = exports.isDotSet = _fIsSeriaTypeEqual(_ChartType.CHT_DOT_SET);
-const COLUMN_BAR_CATEGORY_CHART_TYPES = [_ChartType.CHT_BAR_CLUSTER, _ChartType.CHT_BAR_SET, _ChartType.CHT_COLUMN_SET, _ChartType.CHT_COLUMN_CLUSTER];
+const COLUMN_BAR_CATEGORY_CHART_TYPES = [_ChartType.CHT_BAR_SET, _ChartType.CHT_COLUMN_SET];
 const isColumnOrBarCategory = exports.isColumnOrBarCategory = _fIsSeriaType((0, _arrFn.isInArrStr)(COLUMN_BAR_CATEGORY_CHART_TYPES));
 const isCategory = optionOrStr => isColumnOrBarCategory(optionOrStr) || isTreeMap(optionOrStr);
 exports.isCategory = isCategory;
-const isCategoryCluster = seriaType => (seriaType || '').indexOf('CLUSTER') !== -1;
-exports.isCategoryCluster = isCategoryCluster;
 const _addToHm = (hm, p) => (hm[p.c] = p, hm);
 const arrangeSeriaByCategories = (series, categories) => {
   const _hmPoints = (series.data || []).reduce(_addToHm, {});

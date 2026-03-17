@@ -53,9 +53,7 @@ describe("crChartOptions", () => {
       {caption: "Column", value: "COLUMN"},
       {caption: "Yearly by Months", value: "AREA_YEARLY"},
       {caption: "Column: By Dim", value: "COLUMN_SET", dim: "Dim"},
-      {caption: "Column: By Dim: Cluster", value: "COLUMN_CLUSTER", dim: "Dim"},
       {caption: "Bar: By Dim", value: "BAR_SET", dim: "Dim"},
-      {caption: "Bar: By Dim: Cluster", value: "BAR_CLUSTER", dim: "Dim"}
     ]
     , notMonthlyChartOptionsT2ae = [
       {caption: "Default: Spline", value: "SPLINE"},
@@ -63,9 +61,7 @@ describe("crChartOptions", () => {
       {caption: "Area", value: "AREA"},
       {caption: "Column", value: "COLUMN"},
       {caption: "Column: By Dim", value: "COLUMN_SET", dim: "Dim"},
-      {caption: "Column: By Dim: Cluster", value: "COLUMN_CLUSTER", dim: "Dim"},
       {caption: "Bar: By Dim", value: "BAR_SET", dim: "Dim"},
-      {caption: "Bar: By Dim: Cluster", value: "BAR_CLUSTER", dim: "Dim"}
     ];
 
     expect(fn([],"t2ae")).toEqual(monthlyChartOptionsT2ae)
@@ -83,9 +79,7 @@ describe("crChartOptions", () => {
       {caption: "Column", value: "COLUMN"},
 
       {caption: "Column: By Item", value: "COLUMN_SET", dim: "Item"},
-      {caption: "Column: By Item: Cluster", value: "COLUMN_CLUSTER", dim: "Item"},
       {caption: "Bar: By Item", value: "BAR_SET", dim: "Item"},
-      {caption: "Bar: By Item: Cluster", value: "BAR_CLUSTER", dim: "Item"}
     ];
 
     expect(fn(
@@ -102,9 +96,7 @@ describe("crChartOptions", () => {
       {caption: "Column", value: "COLUMN"},
 
       {caption: "Column: By Item1", value: "COLUMN_SET", dim: "Item1"},
-      {caption: "Column: By Item1: Cluster", value: "COLUMN_CLUSTER", dim: "Item1"},
       {caption: "Bar: By Item1", value: "BAR_SET", dim: "Item1"},
-      {caption: "Bar: By Item1: Cluster", value: "BAR_CLUSTER", dim: "Item1"},
 
       {caption: "Bar: By Item2", value: "BAR_TREE_MAP", dim: "Item2"},
       {caption: "TreeMap: By Item2", value: "TREE_MAP", dim: "Item2"}
@@ -173,9 +165,7 @@ describe("isCategoryItem", () => {
   test("should return boolean isCategoryItem", () => {
     expect(fn({value: "MAP"})).toBe(true)
     expect(fn({value: "COLUMN_SET"})).toBe(true)
-    expect(fn({value: "COLUMN_CLUSTER"})).toBe(true)
     expect(fn({value: "BAR_SET"})).toBe(true)
-    expect(fn({value: "BAR_CLUSTER"})).toBe(true)
     expect(fn({value: "BAR_WITH_LABELS"})).toBe(true)
     expect(fn({value: "DOT_SET"})).toBe(true)
     expect(fn({value: "TREE_MAP"})).toBe(true)

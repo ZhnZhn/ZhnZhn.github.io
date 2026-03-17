@@ -6,9 +6,7 @@ describe("isCategory", () => {
   const fn = _CategoryFn.isCategory;
   test("should return boolean from string", () => {
     expect(fn(_ChartType.CHT_BAR_SET)).toBe(true);
-    expect(fn(_ChartType.CHT_BAR_CLUSTER)).toBe(true);
     expect(fn(_ChartType.CHT_COLUMN_SET)).toBe(true);
-    expect(fn(_ChartType.CHT_COLUMN_CLUSTER)).toBe(true);
     expect(fn(_ChartType.CHT_TREE_MAP)).toBe(true);
     expect(fn(_ChartType.CHT_TREE_MAP_CLUSTER)).toBe(true);
     expect(fn(_ChartType.CHT_SPLINE)).toBe(false);
@@ -21,7 +19,7 @@ describe("isCategory", () => {
       seriaType: _ChartType.CHT_COLUMN_SET
     })).toBe(true);
     expect(fn({
-      seriaType: _ChartType.CHT_COLUMN_CLUSTER
+      seriaType: _ChartType.CHT_BAR_SET
     })).toBe(true);
     expect(fn({
       seriaType: _ChartType.CHT_SPLINE
