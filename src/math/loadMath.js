@@ -20,14 +20,14 @@ export const loadMath = crGetRoute({
   get [JENKS]() {
     /*eslint-disable no-undef */
     if ( process.env.NODE_ENV === '_development') {
-      return import("js/math/addJenksColorTo.js")
+      return import("js/math/jenksModule.js")
         .then(module => module.default)
     }
     /*eslint-enable no-undef */
     return import(
        /* webpackChunkName: "math-jenks" */
        /* webpackMode: "lazy" */
-       "./addJenksColorTo"
+       "./jenksModule"
      ).then(module => module.default)
   },
 })

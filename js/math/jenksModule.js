@@ -53,4 +53,4 @@ const jenksModule = {
   removeJenksColorFrom
 };
 var _default = exports.default = jenksModule;
-//# sourceMappingURL=addJenksColorTo.js.map
+//# sourceMappingURL=jenksModule.js.map

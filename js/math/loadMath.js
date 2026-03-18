@@ -20,12 +20,12 @@ const loadMath = exports.loadMath = (0, _crRouter.crGetRoute)({
   get [JENKS]() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/math/addJenksColorTo.js"))).then(module => module.default);
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/math/jenksModule.js"))).then(module => module.default);
     }
     /*eslint-enable no-undef */
     return Promise.resolve().then(() => _interopRequireWildcard(require(/* webpackChunkName: "math-jenks" */
     /* webpackMode: "lazy" */
-    "./addJenksColorTo"))).then(module => module.default);
+    "./jenksModule"))).then(module => module.default);
   }
 });
 const loadKmeans = () => loadMath(K_MEANS);

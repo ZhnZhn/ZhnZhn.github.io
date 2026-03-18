@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../src/math/addJenksColorTo.js"
+  "../../src/math/jenksModule.js"
  ],
- "file": "../../src/math/addJenksColorTo.js",
+ "file": "../../src/math/jenksModule.js",
  "names": [
   "_jenks",
   "_interopRequireDefault",
