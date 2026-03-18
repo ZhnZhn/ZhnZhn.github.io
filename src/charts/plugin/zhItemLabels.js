@@ -1,10 +1,10 @@
 import { crCategoryDataLabels } from '../Chart';
-import {  
+import {
   tryUpdate,
   crPlotOptions
 } from './pluginFn';
 
-const zhDataLabels = function(isEnabled) {
+export default function(isEnabled) {
   tryUpdate(
     this,
     crPlotOptions(
@@ -13,6 +13,4 @@ const zhDataLabels = function(isEnabled) {
       crCategoryDataLabels(isEnabled)
     )
   )
-};
-
-export default zhDataLabels
+}

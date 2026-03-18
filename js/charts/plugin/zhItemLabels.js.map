@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/plugin/zhItemLabels.js"
+ ],
+ "file": "../../../src/charts/plugin/zhItemLabels.js",
+ "names": [
+  "_Chart",
+  "require",
+  "_pluginFn",
+  "_default",
+  "isEnabled",
+  "tryUpdate",
+  "crPlotOptions",
+  "crCategoryDataLabels"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AACA,IAAAC,SAAA,GAAAD,OAAA;AAKe,SAAAE,SAASC,SAAS,EAAE;EACjC,IAAAC,mBAAS,EACP,IAAI,EACJ,IAAAC,uBAAa,EACX,IAAI,EACJ,YAAY,EACZ,IAAAC,2BAAoB,EAACH,SAAS,CAChC,CACF,CAAC;AACH"
+}

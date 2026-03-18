@@ -3,7 +3,7 @@ import {
   crPlotOptions
 } from './pluginFn';
 
-const zhSetPointWidth = function(pointWidth) {
+export default function(pointWidth) {
   tryUpdate(
     this,
     crPlotOptions(
@@ -12,6 +12,4 @@ const zhSetPointWidth = function(pointWidth) {
       pointWidth
     )
   )
-};
-
-export default zhSetPointWidth
+}

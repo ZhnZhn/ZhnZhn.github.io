@@ -1,0 +1,31 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/plugin/zhJenksGroup.js"
+ ],
+ "file": "../../../src/charts/plugin/zhJenksGroup.js",
+ "names": [
+  "_loadMath",
+  "require",
+  "_pluginFn",
+  "_default",
+  "isEnabled",
+  "loadJenks",
+  "then",
+  "jenksModule",
+  "series",
+  "options",
+  "seria",
+  "transformFn",
+  "addJenksColorTo",
+  "removeJenksColorFrom",
+  "data",
+  "tryUpdate",
+  "slice",
+  "catch",
+  "err",
+  "console",
+  "log"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,SAAA,GAAAC,OAAA;AACA,IAAAC,SAAA,GAAAD,OAAA;AAKe,SAAAE,SAASC,SAAS,EAAE;EACjC,IAAAC,mBAAS,EAAC,CAAC,CAACC,IAAI,CAACC,WAAW,IAAI;IAC9B,MAAMC,MAAM,GAAG,IAAI,CAACC,OAAO,CAACD,MAAM;MAChCE,KAAK,GAAGF,MAAM,CAAC,CAAC,CAAC;MACjBG,WAAW,GAAGP,SAAS,GACrBG,WAAW,CAACK,eAAe,GAC3BL,WAAW,CAACM,oBAAoB;IACpCH,KAAK,CAACI,IAAI,GAAGH,WAAW,CAACD,KAAK,CAACI,IAAI,CAAC;IACpC,IAAAC,mBAAS,EAAC,IAAI,EAAE;MACdP,MAAM,EAAE,CACNE,KAAK,EACL,GAAGF,MAAM,CAACQ,KAAK,CAAC,CAAC,CAAC;IAEtB,CAAC,CAAC;EACJ,CAAC,CAAC,CAACC,KAAK,CAACC,GAAG,IAAI;IACdC,OAAO,CAACC,GAAG,CAACF,GAAG,CAAC;EAClB,CAAC,CAAC;AACJ"
+}

@@ -5,9 +5,9 @@ import zhToggleSeria from './zhToggleSeria'
 import zhTogglePlotLines from './zhTogglePlotLines'
 import zhToggle2H from './zhToggle2H'
 
-import zhDataLabels from './zhDataLabels'
-import zhDataClusters from './zhDataClusters'
-import zhSetPointWidth from './zhSetPointWidth'
+import zhJenksGroup from './zhJenksGroup'
+import zhItemLabels from './zhItemLabels'
+import zhSetItemWidth from './zhSetItemWidth'
 
 import zhZoomX from './zhZoomX'
 import zhIs from './zhIs'
@@ -26,9 +26,9 @@ const HighchartsZhn = (Highcharts) => {
     zhReflowCharts,
     zhUpdateSpacing,
 
-    zhDataLabels,
-    zhDataClusters,
-    zhSetPointWidth,
+    zhJenksGroup,
+    zhItemLabels,
+    zhSetItemWidth,
 
     zhToggleSeria,
     zhToggle2H,

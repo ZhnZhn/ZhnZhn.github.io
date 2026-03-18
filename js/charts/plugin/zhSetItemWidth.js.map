@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/plugin/zhSetItemWidth.js"
+ ],
+ "file": "../../../src/charts/plugin/zhSetItemWidth.js",
+ "names": [
+  "_pluginFn",
+  "require",
+  "_default",
+  "pointWidth",
+  "tryUpdate",
+  "crPlotOptions"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,SAAA,GAAAC,OAAA;AAKe,SAAAC,SAASC,UAAU,EAAE;EAClC,IAAAC,mBAAS,EACP,IAAI,EACJ,IAAAC,uBAAa,EACX,IAAI,EACJ,YAAY,EACZF,UACF,CACF,CAAC;AACH"
+}
