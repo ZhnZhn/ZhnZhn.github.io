@@ -27,12 +27,12 @@ const ModalMenuAppearanceView = _ref => {
     getChart,
     config
   } = _ref;
-  const [refFirstItem, _refPointWidth] = (0, _ModalPopup.useModalPopup)()
+  const [refFirstItem, _refItemWidth] = (0, _ModalPopup.useModalPopup)()
     /*eslint-disable react-hooks/exhaustive-deps */,
-    [_toggleDataLabels, _toggleDataClusters, _onPointWidth] = (0, _uiApi.useMemo)(() => [is => getChart().zhDataLabels(is), is => getChart().zhDataClusters(is), () => {
-      const pointWidth = parseFloat((0, _uiApi.getInputValue)(_refPointWidth));
+    [_toggleJenksGroup, _toggleItemLabels, _onItemWidth] = (0, _uiApi.useMemo)(() => [is => getChart().zhJenksGroup(is), is => getChart().zhItemLabels(is), () => {
+      const pointWidth = parseFloat((0, _uiApi.getInputValue)(_refItemWidth));
       if (pointWidth > 0 && pointWidth < 21) {
-        getChart().zhSetPointWidth(pointWidth);
+        getChart().zhSetItemWidth(pointWidth);
       }
     }], []);
   // getChart
@@ -42,22 +42,22 @@ const ModalMenuAppearanceView = _ref => {
     style: S_MENU_PANE,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
       refEl: refFirstItem,
-      caption: "Data Labels",
+      caption: "Item Labels",
       style: S_INPUT_SWITCH,
-      onToggle: _toggleDataLabels
+      onToggle: _toggleItemLabels
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSwitch.default, {
-      caption: "Data Clusters",
+      caption: "Jenks Group",
       style: S_INPUT_SWITCH,
-      onToggle: _toggleDataClusters
+      onToggle: _toggleJenksGroup
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowCaptionInput.default, {
-      refEl: _refPointWidth,
-      caption: "Point Width",
+      refEl: _refItemWidth,
+      caption: "Item Width",
       isBtAdd: !1,
       captionStyle: S_CAPTION_STYLE,
       initValue: 4,
       min: 1,
       max: 99,
-      onAdd: _onPointWidth
+      onAdd: _onItemWidth
     })]
   });
 };

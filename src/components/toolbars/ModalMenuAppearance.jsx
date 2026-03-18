@@ -29,20 +29,20 @@ const ModalMenuAppearanceView = ({
 }) => {
   const [
     refFirstItem,
-    _refPointWidth
+    _refItemWidth
   ] = useModalPopup()
   /*eslint-disable react-hooks/exhaustive-deps */
   , [
-    _toggleDataLabels,
-    _toggleDataClusters,
-    _onPointWidth
+    _toggleJenksGroup,
+    _toggleItemLabels,
+    _onItemWidth
   ]= useMemo(() => [
-    (is) => getChart().zhDataLabels(is),
-    (is) => getChart().zhDataClusters(is),
+    (is) => getChart().zhJenksGroup(is),
+    (is) => getChart().zhItemLabels(is),
     () => {
-      const pointWidth = parseFloat(getInputValue(_refPointWidth));
+      const pointWidth = parseFloat(getInputValue(_refItemWidth));
       if (pointWidth > 0 && pointWidth < 21) {
-        getChart().zhSetPointWidth(pointWidth)
+        getChart().zhSetItemWidth(pointWidth)
       }
     }
   ], []);
@@ -53,24 +53,24 @@ const ModalMenuAppearanceView = ({
     <div style={S_MENU_PANE}>
       <InputSwitch
         refEl={refFirstItem}
-        caption="Data Labels"
+        caption="Item Labels"
         style={S_INPUT_SWITCH}
-        onToggle={_toggleDataLabels}
+        onToggle={_toggleItemLabels}
       />
       <InputSwitch
-        caption="Data Clusters"
+        caption="Jenks Group"
         style={S_INPUT_SWITCH}
-        onToggle={_toggleDataClusters}
+        onToggle={_toggleJenksGroup}
       />
       <RowCaptionInput
-        refEl={_refPointWidth}
-        caption="Point Width"
+        refEl={_refItemWidth}
+        caption="Item Width"
         isBtAdd={!1}
         captionStyle={S_CAPTION_STYLE}
         initValue={4}
         min={1}
         max={99}
-        onAdd={_onPointWidth}
+        onAdd={_onItemWidth}
       />
     </div>
   );
