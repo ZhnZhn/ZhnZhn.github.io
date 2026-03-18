@@ -217,8 +217,8 @@ const _crChoroplethMap = option => {
       points
     } = _mergeGeoAndValue(sGeo, dGeo, geoJson),
     _points = _addGeoSeria(points, statJson);
-  return (0, _loadMath.loadMath)(_loadMath.K_MEANS).then(clusterMaker => {
-    const _clusters = clusterMaker.crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION),
+  return (0, _loadMath.loadKmeans)().then(kmeansMaker => {
+    const _clusters = kmeansMaker.crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION),
       _hmIdCluster = _crHmIdCluster(_clusters);
     _mergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
     const infoControl = _crInfoControl(L, mapId);

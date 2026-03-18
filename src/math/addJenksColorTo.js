@@ -45,10 +45,24 @@ const addJenksColorTo = (
 
   if (_isArr(_intervals)) {
     data.forEach(p => {
+      p._prevColor = p.color
       p.color = colors[_getIntervalIndex(_intervals, p.y)]
     })
   }
   return data;
 }
 
-export default addJenksColorTo
+const removeJenksColorFrom = (data) => {
+  if (!_isArr(data)) return [];
+  data.forEach(point => {
+    point.color = point._prevColor
+  })
+  return data;
+}
+
+const jenksModule = {
+  addJenksColorTo,
+  removeJenksColorFrom
+};
+
+export default jenksModule

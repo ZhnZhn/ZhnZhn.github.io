@@ -2,10 +2,7 @@ import { createRoot } from 'react-dom/client';
 
 import { domSanitize } from '../../utils/domFn';
 import { merge } from '../../utils/objFn';
-import {
-  K_MEANS,
-  loadMath
-} from '../../math/loadMath';
+import { loadKmeans } from '../../math/loadMath';
 import {
   NEGATIVE_INFINITY,
   POSITIVE_INFINITY,
@@ -285,8 +282,8 @@ const _crChoroplethMap = (option) => {
     points
   } = _mergeGeoAndValue(sGeo, dGeo, geoJson)
   , _points = _addGeoSeria(points, statJson);
-  return loadMath(K_MEANS).then(clusterMaker => {
-    const _clusters = clusterMaker.crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
+  return loadKmeans().then(kmeansMaker => {
+    const _clusters = kmeansMaker.crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
     , _hmIdCluster = _crHmIdCluster(_clusters);
 
     _mergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);

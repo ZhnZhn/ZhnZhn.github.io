@@ -1,7 +1,7 @@
 import { crGetRoute } from '../utils/crRouter';
 
-export const K_MEANS = "kmeans"
-export const JENKS = "jenks"
+const K_MEANS = "kmeans"
+const JENKS = "jenks"
 
 export const loadMath = crGetRoute({
   get [K_MEANS]() {
@@ -31,3 +31,6 @@ export const loadMath = crGetRoute({
      ).then(module => module.default)
   },
 })
+
+export const loadKmeans = () => loadMath(K_MEANS)
+export const loadJenks = () => loadMath(JENKS)
