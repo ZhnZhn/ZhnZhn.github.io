@@ -1,4 +1,5 @@
 import { crGetRoute } from '../utils/crRouter';
+import { catchDynamicLoad } from '../utils/catchFn';
 
 const K_MEANS = "kmeans"
 const JENKS = "jenks"
@@ -16,6 +17,8 @@ export const loadMath = crGetRoute({
        /* webpackMode: "lazy" */
        "./k-means"
      ).then(module => module.default)
+      .catch(catchDynamicLoad)
+
   },
   get [JENKS]() {
     /*eslint-disable no-undef */
@@ -29,6 +32,7 @@ export const loadMath = crGetRoute({
        /* webpackMode: "lazy" */
        "./jenksModule"
      ).then(module => module.default)
+      .catch(catchDynamicLoad)
   },
 })
 
