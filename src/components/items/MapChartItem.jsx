@@ -1,4 +1,6 @@
-//import PropTypes from "prop-types";
+import { drawChoroplethMapAsync } from '../../adapters/eurostat/ChoroplethMap';
+import { catchLogErr } from '../../utils/catchFn';
+
 import {
   useState,
   useEffect
@@ -6,8 +8,6 @@ import {
 
 import { useToggle } from '../hooks/useToggle';
 import { useBool } from '../hooks/useBool';
-
-import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
 import ButtonTab from '../zhn/ButtonTab';
 import ShowHide from '../zhn/ShowHide';
@@ -95,14 +95,17 @@ export const MapChartItem = ({
     , { time } = zhDialog || {};
 
    /*eslint-disable react-hooks/exhaustive-deps */
-    ChoroplethMap.draw({
+    drawChoroplethMapAsync({
       id: _crMapId(caption),
-      jsonCube, zhMapSlice, time
+      jsonCube,
+      zhMapSlice,
+      time
     }).then(({ time }) => {
          setState({ isLoading: false, time })
        })
        .catch(err => {
          setState({ isLoading: false, isErr: true })
+         catchLogErr(err)
        });
    }, [])
    // config, caption

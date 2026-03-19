@@ -3,18 +3,17 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.MapChartItem = void 0;
+var _ChoroplethMap = require("../../adapters/eurostat/ChoroplethMap");
+var _catchFn = require("../../utils/catchFn");
 var _uiApi = require("../uiApi");
 var _useToggle = require("../hooks/useToggle");
 var _useBool = require("../hooks/useBool");
-var _ChoroplethMap = _interopRequireDefault(require("../../adapters/eurostat/ChoroplethMap"));
 var _ButtonTab = _interopRequireDefault(require("../zhn/ButtonTab"));
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _Spinner = require("../zhn/Spinner");
 var _ItemHeader = _interopRequireDefault(require("./ItemHeader"));
 var _PanelDataInfo = _interopRequireDefault(require("./PanelDataInfo"));
 var _jsxRuntime = require("react/jsx-runtime");
-//import PropTypes from "prop-types";
-
 const S_ROOT_DIV = {
     position: 'relative',
     margin: '0 12px 10px 0'
@@ -95,7 +94,7 @@ const MapChartItem = _ref2 => {
       } = zhDialog || {};
 
     /*eslint-disable react-hooks/exhaustive-deps */
-    _ChoroplethMap.default.draw({
+    (0, _ChoroplethMap.drawChoroplethMapAsync)({
       id: _crMapId(caption),
       jsonCube,
       zhMapSlice,
@@ -113,6 +112,7 @@ const MapChartItem = _ref2 => {
         isLoading: false,
         isErr: true
       });
+      (0, _catchFn.catchLogErr)(err);
     });
   }, []);
   // config, caption

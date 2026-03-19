@@ -1,8 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.drawChoroplethMapAsync = void 0;
 var _client = require("react-dom/client");
+var _catchFn = require("../../utils/catchFn");
 var _domFn = require("../../utils/domFn");
 var _objFn = require("../../utils/objFn");
 var _loadMath = require("../../math/loadMath");
@@ -17,8 +18,7 @@ const URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
 const _isArr = Array.isArray,
   _assign = Object.assign,
   _crElement = tag => document.createElement(tag),
-  _getElementById = id => document.getElementById(id),
-  _crPromise = value => Promise.resolve(value);
+  _getElementById = id => document.getElementById(id);
 const _findFeature = (features, id) => {
   if (!_isArr(features)) {
     return;
@@ -241,97 +241,77 @@ const _crGeoJson = geoJson => {
   });
   return _geoJson;
 };
-const ChoroplethMap = {
-  hmUrlGeoJson: {},
-  L: void 0,
-  mapOption: {
-    doubleClickZoom: false,
-    zoomSnap: 0.5,
-    minZoom: 1,
-    maxZoom: 4
-  },
-  getLeaflet() {
-    if (this.L) {
-      return _crPromise(this.L);
-    } else {
-      return Promise.resolve().then(() => _interopRequireWildcard(require(/* webpackChunkName: "leaflet" */
-      /* webpackMode: "lazy" */
-      'leaflet'))).then(L => {
-        return this.L = L;
-      });
+const _getLeafletAsync = () => Promise.resolve().then(() => _interopRequireWildcard(require(/* webpackChunkName: "leaflet" */
+/* webpackMode: "lazy" */
+'leaflet'))).catch(_catchFn.catchDynamicLoad);
+let hmUrlGeoJson = {};
+const _getGeoJsonAsync = url => {
+  const geoJson = hmUrlGeoJson[url];
+  return geoJson ? (0, _catchFn.resolvePromise)(_crGeoJson(geoJson)) : fetch(url).then(response => response.json()).then(geoJson => hmUrlGeoJson[url] = geoJson);
+};
+let _isCss;
+const _loadCssAsync = () => _isCss ? (0, _catchFn.resolvePromise)() : new Promise((resolve, reject) => {
+  const _linkEl = _assign(_crElement("link"), {
+    rel: "stylesheet",
+    href: "css/leaflet.css",
+    onload: () => {
+      _isCss = true;
+      resolve();
+    },
+    onerror: () => {
+      _linkEl.remove();
+      reject();
     }
-  },
-  getGeoJson(url) {
-    const geoJson = this.hmUrlGeoJson[url];
-    if (geoJson) {
-      return _crPromise(_crGeoJson(geoJson));
-    } else {
-      return fetch(url).then(response => response.json()).then(geoJson => this.hmUrlGeoJson[url] = geoJson);
-    }
-  },
-  draw(options) {
-    return this._loadCss().then(() => this._draw(options));
-  },
-  _loadCss() {
-    return this._isCss ? _crPromise() : new Promise((resolve, reject) => {
-      const _linkEl = _assign(_crElement("link"), {
-        rel: "stylesheet",
-        href: "css/leaflet.css",
-        onload: () => {
-          this._isCss = true;
-          resolve();
-        },
-        onerror: () => {
-          _linkEl.remove();
-          reject();
-        }
-      });
-      // Insert it at the end of the head in a legacy-friendly manner
-      const {
-          head
-        } = document,
-        {
-          childNodes
-        } = head;
-      head.insertBefore(_linkEl, childNodes[childNodes.length - 1].nextSibling);
-    });
-  },
-  _draw(_ref) {
-    let {
-      id,
+  });
+  // Insert it at the end of the head in a legacy-friendly manner
+  const {
+      head
+    } = document,
+    {
+      childNodes
+    } = head;
+  head.insertBefore(_linkEl, childNodes[childNodes.length - 1].nextSibling);
+});
+const _drawChoroplethMapAsync = _ref => {
+  let {
+    id,
+    jsonCube,
+    zhMapSlice,
+    time
+  } = _ref;
+  return _getLeafletAsync().then(L => {
+    const map = L.map(id, MAP_OPTION).setView([58.00, 10.00], 3);
+    /*
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+         id: 'addis',
+         attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+         errorTileUrl: ''
+    }).addTo(map);
+    */
+    L.tileLayer('', {
+      id: id + '_tile'
+    }).addTo(map);
+    return {
       jsonCube,
       zhMapSlice,
-      time
-    } = _ref;
-    return this.getLeaflet().then(L => {
-      const map = L.map(id, this.mapOption).setView([58.00, 10.00], 3);
-
-      /*
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-           id: 'addis',
-           attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-           errorTileUrl: ''
-      }).addTo(map);
-      */
-
-      L.tileLayer('', {
-        id: id + '_tile'
-      }).addTo(map);
-      return {
-        jsonCube,
-        zhMapSlice,
-        time,
-        L,
-        map,
-        mapId: id
-      };
-    }).then(option => {
-      return this.getGeoJson(URL_EU_GEOJSON).then(geoJson => {
-        option.geoJson = geoJson;
-        return option;
-      });
-    }).then(_crChoroplethMap);
-  }
+      time,
+      L,
+      map,
+      mapId: id
+    };
+  }).then(option => {
+    return _getGeoJsonAsync(URL_EU_GEOJSON).then(geoJson => {
+      option.geoJson = geoJson;
+      return option;
+    });
+  }).then(_crChoroplethMap);
 };
-var _default = exports.default = ChoroplethMap;
+const MAP_OPTION = {
+  doubleClickZoom: false,
+  zoomSnap: 0.5,
+  minZoom: 1,
+  maxZoom: 4
+};
+const drawChoroplethMapAsync = options => _loadCssAsync().then(() => _drawChoroplethMapAsync(options));
+exports.drawChoroplethMapAsync = drawChoroplethMapAsync;
 //# sourceMappingURL=ChoroplethMap.js.map
