@@ -1,0 +1,25 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/catchFn.js"
+ ],
+ "file": "../../src/utils/catchFn.js",
+ "names": [
+  "_Msg",
+  "require",
+  "resolvePromise",
+  "exports",
+  "Promise",
+  "resolve",
+  "bind",
+  "catchDynamicLoad",
+  "Error",
+  "MSG_OFFLINE",
+  "catchLogErr",
+  "err",
+  "console",
+  "log",
+  "message"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,IAAA,GAAAC,OAAA;AAEO,MAAMC,cAAc,GAAAC,OAAA,CAAAD,cAAA,GAAGE,OAAO,CAACC,OAAO,CAACC,IAAI,CAACF,OAAO,CAAC;AAEpD,MAAMG,gBAAgB,GAAGA,CAAA,KAAM;EACpC,MAAM,IAAIC,KAAK,CAACC,gBAAW,CAAC;AAC9B,CAAC;AAAAN,OAAA,CAAAI,gBAAA,GAAAA,gBAAA;AAEM,MAAMG,WAAW,GAAGC,GAAG,IAAI;EAChCC,OAAO,CAACC,GAAG,CAACF,GAAG,CAACG,OAAO,CAAC;AAC1B,CAAC;AAAAX,OAAA,CAAAO,WAAA,GAAAA,WAAA"
+}
