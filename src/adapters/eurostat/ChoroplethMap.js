@@ -2,9 +2,10 @@ import { createRoot } from 'react-dom/client';
 
 import {
   resolvePromise,
-  catchDynamicLoad
-} from '../../utils/catchFn';
+  throwErrOffline
+} from '../../utils/asyncFn';
 import { domSanitize } from '../../utils/domFn';
+import { loadCss } from '../../utils/loadCss';
 import { merge } from '../../utils/objFn';
 import { loadKmeans } from '../../math/loadMath';
 import {
@@ -320,7 +321,7 @@ const _getLeafletAsync = () => import(
   /* webpackChunkName: "leaflet" */
   /* webpackMode: "lazy" */
   'leaflet'
-).catch(catchDynamicLoad);
+).catch(throwErrOffline);
 
 let hmUrlGeoJson = {};
 const _getGeoJsonAsync = (url) => {
@@ -332,6 +333,8 @@ const _getGeoJsonAsync = (url) => {
      .then(geoJson => hmUrlGeoJson[url] = geoJson);
 };
 
+
+/*
 let _isCss;
 const _loadCssAsync = () => _isCss
   ? resolvePromise()
@@ -353,6 +356,14 @@ const _loadCssAsync = () => _isCss
       , { childNodes } = head;
       head.insertBefore(_linkEl, childNodes[childNodes.length - 1].nextSibling);
   });
+*/
+
+const MAP_OPTION = {
+  doubleClickZoom: false,
+  zoomSnap: 0.5,
+  minZoom: 1,
+  maxZoom: 4
+};
 
 const _drawChoroplethMapAsync = ({
   id,
@@ -390,14 +401,7 @@ const _drawChoroplethMapAsync = ({
   })
   .then(_crChoroplethMap);
 
-const MAP_OPTION = {
-  doubleClickZoom: false,
-  zoomSnap: 0.5,
-  minZoom: 1,
-  maxZoom: 4
-};
-
 export const drawChoroplethMapAsync = (
   options
-) => _loadCssAsync()
+) => loadCss("css/leaflet.css")
   .then(() => _drawChoroplethMapAsync(options))

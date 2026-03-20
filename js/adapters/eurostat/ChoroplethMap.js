@@ -3,8 +3,9 @@
 exports.__esModule = true;
 exports.drawChoroplethMapAsync = void 0;
 var _client = require("react-dom/client");
-var _catchFn = require("../../utils/catchFn");
+var _asyncFn = require("../../utils/asyncFn");
 var _domFn = require("../../utils/domFn");
+var _loadCss = require("../../utils/loadCss");
 var _objFn = require("../../utils/objFn");
 var _loadMath = require("../../math/loadMath");
 var _mathFn = require("../../math/mathFn");
@@ -243,35 +244,43 @@ const _crGeoJson = geoJson => {
 };
 const _getLeafletAsync = () => Promise.resolve().then(() => _interopRequireWildcard(require(/* webpackChunkName: "leaflet" */
 /* webpackMode: "lazy" */
-'leaflet'))).catch(_catchFn.catchDynamicLoad);
+'leaflet'))).catch(_asyncFn.throwErrOffline);
 let hmUrlGeoJson = {};
 const _getGeoJsonAsync = url => {
   const geoJson = hmUrlGeoJson[url];
-  return geoJson ? (0, _catchFn.resolvePromise)(_crGeoJson(geoJson)) : fetch(url).then(response => response.json()).then(geoJson => hmUrlGeoJson[url] = geoJson);
+  return geoJson ? (0, _asyncFn.resolvePromise)(_crGeoJson(geoJson)) : fetch(url).then(response => response.json()).then(geoJson => hmUrlGeoJson[url] = geoJson);
 };
+
+/*
 let _isCss;
-const _loadCssAsync = () => _isCss ? (0, _catchFn.resolvePromise)() : new Promise((resolve, reject) => {
-  const _linkEl = _assign(_crElement("link"), {
-    rel: "stylesheet",
-    href: "css/leaflet.css",
-    onload: () => {
-      _isCss = true;
-      resolve();
-    },
-    onerror: () => {
-      _linkEl.remove();
-      reject();
-    }
+const _loadCssAsync = () => _isCss
+  ? resolvePromise()
+  : new Promise((resolve, reject) => {
+      const _linkEl = _assign(_crElement("link"), {
+        rel: "stylesheet",
+        href: "css/leaflet.css",
+        onload: () => {
+          _isCss = true
+          resolve()
+        },
+        onerror: () => {
+          _linkEl.remove()
+          reject()
+        }
+      })
+      // Insert it at the end of the head in a legacy-friendly manner
+      const { head } = document
+      , { childNodes } = head;
+      head.insertBefore(_linkEl, childNodes[childNodes.length - 1].nextSibling);
   });
-  // Insert it at the end of the head in a legacy-friendly manner
-  const {
-      head
-    } = document,
-    {
-      childNodes
-    } = head;
-  head.insertBefore(_linkEl, childNodes[childNodes.length - 1].nextSibling);
-});
+*/
+
+const MAP_OPTION = {
+  doubleClickZoom: false,
+  zoomSnap: 0.5,
+  minZoom: 1,
+  maxZoom: 4
+};
 const _drawChoroplethMapAsync = _ref => {
   let {
     id,
@@ -306,12 +315,6 @@ const _drawChoroplethMapAsync = _ref => {
     });
   }).then(_crChoroplethMap);
 };
-const MAP_OPTION = {
-  doubleClickZoom: false,
-  zoomSnap: 0.5,
-  minZoom: 1,
-  maxZoom: 4
-};
-const drawChoroplethMapAsync = options => _loadCssAsync().then(() => _drawChoroplethMapAsync(options));
+const drawChoroplethMapAsync = options => (0, _loadCss.loadCss)("css/leaflet.css").then(() => _drawChoroplethMapAsync(options));
 exports.drawChoroplethMapAsync = drawChoroplethMapAsync;
 //# sourceMappingURL=ChoroplethMap.js.map
