@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.showOptionDialogImpl = exports.showDialogImpl = exports.getDialogConf = void 0;
+var _asyncFn = require("../../utils/asyncFn");
 var _Factory = require("../logic/Factory");
 var _browserLogic = require("./browserLogic");
 const getDialogConf = (conf, chartType) => {
@@ -19,7 +20,7 @@ const showDialogImpl = (slice, _ref) => {
     browserType,
     dialogConfOr
   } = _ref;
-  return slice[type] ? Promise.resolve({
+  return slice[type] ? (0, _asyncFn.resolvePromise)({
     key: type
   }) : (0, _Factory.crDialog)(browserType, getDialogConf(dialogConfOr, type)).then(Comp => {
     slice[type] = true;
@@ -27,7 +28,7 @@ const showDialogImpl = (slice, _ref) => {
       key: type,
       Comp
     };
-  });
+  }).catch(_asyncFn.logErrMsg);
 };
 exports.showDialogImpl = showDialogImpl;
 const showOptionDialogImpl = (slice, options) => {
@@ -36,7 +37,7 @@ const showOptionDialogImpl = (slice, options) => {
     data
   } = options;
   if (slice[type]) {
-    return Promise.resolve({
+    return (0, _asyncFn.resolvePromise)({
       key: type,
       data
     });
@@ -49,7 +50,7 @@ const showOptionDialogImpl = (slice, options) => {
         Comp,
         data
       };
-    });
+    }).catch(_asyncFn.logErrMsg);
   }
 };
 exports.showOptionDialogImpl = showOptionDialogImpl;

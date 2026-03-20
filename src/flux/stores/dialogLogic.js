@@ -1,4 +1,9 @@
 import {
+  resolvePromise,
+  logErrMsg
+} from '../../utils/asyncFn';
+
+import {
   crDialog,
   crOptionDialog
 } from '../logic/Factory';
@@ -18,12 +23,13 @@ export const showDialogImpl = (
   slice,
   { type, browserType, dialogConfOr }
 ) => slice[type]
- ? Promise.resolve({ key: type })
+ ? resolvePromise({ key: type })
  : crDialog(browserType, getDialogConf(dialogConfOr, type))
      .then(Comp => {
         slice[type] = true
         return { key:type, Comp };
-   });
+     })
+     .catch(logErrMsg);
 
 export const showOptionDialogImpl = (
   slice,
@@ -34,7 +40,7 @@ export const showOptionDialogImpl = (
      data
    } = options;
    if (slice[type]) {
-     return Promise.resolve({ key: type, data });
+     return resolvePromise({ key: type, data });
    } else {
      options.dialogType = type
      return crOptionDialog(options)
@@ -42,5 +48,6 @@ export const showOptionDialogImpl = (
             slice[type] = true
             return { key: type, Comp, data };
         })
+        .catch(logErrMsg);
    }
 }

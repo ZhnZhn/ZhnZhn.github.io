@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.default = _default;
 var _loadMath = require("../../math/loadMath");
-var _catchFn = require("../../utils/catchFn");
+var _asyncFn = require("../../utils/asyncFn");
 var _pluginFn = require("./pluginFn");
 function _default(isEnabled) {
   (0, _loadMath.loadJenks)().then(jenksModule => {
@@ -14,6 +14,6 @@ function _default(isEnabled) {
     (0, _pluginFn.tryUpdate)(this, {
       series: [seria, ...series.slice(1)]
     });
-  }).catch(_catchFn.catchLogErr);
+  }).catch(_asyncFn.logErrMsg);
 }
 //# sourceMappingURL=zhJenksGroup.js.map

@@ -1,4 +1,9 @@
+import { isStr } from '../../utils/isTypeFn';
 import { crRouter } from '../../utils/crRouter';
+import {
+  resolvePromise,
+  throwErrOffline
+} from '../../utils/asyncFn';
 
 import {
   BT_STOCK_MARKETS,
@@ -10,35 +15,31 @@ import {
   LT_UN,
   LT_AV
 } from '../../constants/LoadType';
-import {
-  MSG_OFFLINE
-} from '../../constants/Msg';
 
 import DialogSelectN from '../../components/dialogs/DialogSelectN';
 import { addLoadImpl } from './LoadImpl';
 
-const _resolve = Promise.resolve.bind(Promise);
-
 const _resolveDialogs = (
-  df,
+  module,
   loadType,
   router
 ) => {
+  const df = module.default;
   addLoadImpl(loadType, df._a)
-  return router[loadType] = _resolve(df);
+  return router[loadType] = resolvePromise(df);
 };
 
 const _router = crRouter({
-  DF: DialogSelectN,
-  DialogSelectN: DialogSelectN,
+  DF: resolvePromise(DialogSelectN),
+  DialogSelectN: resolvePromise(DialogSelectN),
 
   _loadD(){
     /*eslint-disable no-undef */
     if ( process.env.NODE_ENV === '_development' ) {
       //
       return import("js/components/dialogs/Dialogs.js")
-        .then(module => this.D = _resolve(module.default))
-        .catch(err => console.log(MSG_OFFLINE));
+        .then(module => this.D = resolvePromise(module.default))
+        .catch(throwErrOffline);
    /*eslint-enable no-undef */
    }
    return import(
@@ -46,8 +47,8 @@ const _router = crRouter({
       /* webpackMode: "lazy" */
        "../../components/dialogs/Dialogs"
       )
-     .then(module => this.D = _resolve(module.default))
-     .catch(err => console.log(MSG_OFFLINE));
+     .then(module => this.D = resolvePromise(module.default))
+     .catch(throwErrOffline);
   },
   getD(){
     return this.D || this._loadD();
@@ -61,8 +62,8 @@ const _router = crRouter({
      if ( process.env.NODE_ENV === '_development' ) {
        //
        return import("js/components/uncomtrade/UnDialogs.js")
-         .then(({ default: df }) => _resolveDialogs(df, LT_UN, this))
-         .catch(err => console.log(MSG_OFFLINE));
+         .then(module => _resolveDialogs(module, LT_UN, this))
+         .catch(throwErrOffline);
     /*eslint-enable no-undef */
     }
     return import(
@@ -70,8 +71,8 @@ const _router = crRouter({
        /* webpackMode: "lazy" */
         "../../components/uncomtrade/UnDialogs"
        )
-      .then(({ default:df }) => _resolveDialogs(df, LT_UN, this))
-      .catch(err => console.log(MSG_OFFLINE));
+      .then(module => _resolveDialogs(module, LT_UN, this))
+      .catch(throwErrOffline);
   },
   getUN(){
     return this[LT_UN] || this._loadUN();
@@ -88,8 +89,8 @@ const _router = crRouter({
      /*eslint-disable no-undef */
      if ( process.env.NODE_ENV === '_development' ) {
        return import("js/components/stock-markets/AvDialogs.js")
-         .then(({ default: df }) => _resolveDialogs(df, LT_AV, this))
-         .catch(err => console.log(MSG_OFFLINE));
+         .then(module => _resolveDialogs(module, LT_AV, this))
+         .catch(throwErrOffline);
     /*eslint-enable no-undef */
      }
      return import(
@@ -97,8 +98,8 @@ const _router = crRouter({
          /* webpackMode: "lazy" */
          "../../components/stock-markets/AvDialogs"
        )
-      .then(({ default: df }) => _resolveDialogs(df, LT_AV, this))
-      .catch(err => console.log(MSG_OFFLINE));
+      .then(module => _resolveDialogs(module, LT_AV, this))
+      .catch(throwErrOffline);
   },
   getSM(){
     return this[LT_AV] || this._loadSM();
@@ -117,8 +118,8 @@ const _router = crRouter({
      /*eslint-disable no-undef */
      if ( process.env.NODE_ENV === '_development' ) {
        return import("js/components/stat-dialogs/StatDialogs.js")
-         .then(module => this.SD = _resolve(module.default))
-         .catch(err => console.log(MSG_OFFLINE));
+         .then(module => this.SD = resolvePromise(module.default))
+         .catch(throwErrOffline);
     /*eslint-enable no-undef */
      }
      return import(
@@ -126,8 +127,8 @@ const _router = crRouter({
        /* webpackMode: "lazy" */
         "../../components/stat-dialogs/StatDialogs"
        )
-      .then(module => this.SD = _resolve(module.default))
-      .catch(err => console.log(MSG_OFFLINE));
+      .then(module => this.SD = resolvePromise(module.default))
+      .catch(throwErrOffline);
   },
   getSD() {
     return this.SD || this._loadSD();
@@ -140,8 +141,8 @@ const _router = crRouter({
      /*eslint-disable no-undef */
      if ( process.env.NODE_ENV === '_development' ) {
        return import("js/components/us-economics/UsDialogs.js")
-         .then(module => this.US = _resolve(module.default))
-         .catch(err => console.log(MSG_OFFLINE));
+         .then(module => this.US = resolvePromise(module.default))
+         .catch(throwErrOffline);
     /*eslint-enable no-undef */
     }
     return import(
@@ -149,8 +150,8 @@ const _router = crRouter({
        /* webpackMode: "lazy" */
         "../../components/us-economics/UsDialogs"
        )
-      .then(module => this.US = _resolve(module.default))
-      .catch(err => console.log(MSG_OFFLINE));
+      .then(module => this.US = resolvePromise(module.default))
+      .catch(throwErrOffline);
   },
   getUS(){
     return this.US || this._loadUS();
@@ -160,9 +161,7 @@ const _router = crRouter({
   },
 
   loadDialogs(browserType) {
-    switch(browserType){
-      case BT_STOCK_MARKETS:
-        this._loadSM(); break;
+    switch(browserType){      
       case BT_NORWAY_STATISTICS:
       case BT_SWEDEN_STAT:
          this._loadSD(); break;
@@ -175,10 +174,9 @@ const _router = crRouter({
 
 export const getDialog = (
   type
-) => _resolve(
-  (type && _router[type])
-  || _router.DF
-)
+) => isStr(type)
+  ? _router[type]
+  : _router.DF
 
 export const loadDialogs = (
   browserType

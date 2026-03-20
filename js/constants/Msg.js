@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.withoutProxy = exports.withoutApiKey = exports.setAlertMsg = exports.YMD_DATE_OR_EMPTY = exports.NOT_VALID_FORMAT = exports.NOT_SELECTED = exports.MSG_OFFLINE = exports.ERR_TOO_MANY_REQUEST = exports.ERR_PREMIUM_WITHOUT_KEY = exports.ERR_NETWORK = exports.ERR_LOADING_IN_PROGRESS = exports.ERR_FEATURE_WITHOUT_KEY = exports.ERR_ALREADY_EXIST = exports.ERR_10 = void 0;
+exports.withoutProxy = exports.withoutApiKey = exports.setAlertMsg = exports.YMD_DATE_OR_EMPTY = exports.NOT_VALID_FORMAT = exports.NOT_SELECTED = exports.NETWORK_ERROR = exports.MSG_OFFLINE = exports.ERR_TOO_MANY_REQUEST = exports.ERR_PREMIUM_WITHOUT_KEY = exports.ERR_NETWORK = exports.ERR_LOADING_IN_PROGRESS = exports.ERR_FEATURE_WITHOUT_KEY = exports.ERR_ALREADY_EXIST = exports.ERR_10 = void 0;
 var _arrFn = require("../utils/arrFn");
 const WITHOUT_API_KEY = "Without Api Key";
 const _crForReqToken = providerName => (0, _arrFn.joinByBlank)("For this type of", providerName, "request");
@@ -32,10 +32,11 @@ exports.withoutApiKey = withoutApiKey;
 const withoutProxy = providerName => _crMsg("Without Proxy Server", `${_crForReqToken(providerName)} local HTTP proxy server is required. Could be set in dialog SETTINGS [s].`);
 exports.withoutProxy = withoutProxy;
 const ERR_TOO_MANY_REQUEST = exports.ERR_TOO_MANY_REQUEST = _crMsg("Http Code 429", "Too many request in a given amount of time (rate limiting)");
-const ERR_NETWORK = exports.ERR_NETWORK = _crMsg("Network Error", "Network error is encountered. Failed to fetch. Maybe you are offline or a DNS lookup failure or a data provider does not respond.");
+const NETWORK_ERROR = exports.NETWORK_ERROR = "Network Error";
+const ERR_NETWORK = exports.ERR_NETWORK = _crMsg(NETWORK_ERROR, "Network error is encountered. Failed to fetch. Maybe you are offline or a DNS lookup failure or a data provider does not respond.");
+const MSG_OFFLINE = exports.MSG_OFFLINE = "It seems you are offline";
 const ERR_10 = exports.ERR_10 = {
   ..._crMsg("Not Allowed to Add", "This type of request isn't allowed to be added to selected chart. It can be loaded in his own chart or view item."),
   token: "ERR_10"
 };
-const MSG_OFFLINE = exports.MSG_OFFLINE = "It seems you are offline";
 //# sourceMappingURL=Msg.js.map

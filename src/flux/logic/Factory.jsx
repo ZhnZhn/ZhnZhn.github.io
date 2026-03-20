@@ -28,7 +28,7 @@ import {
   loadItem,
   showItemsContainer
 } from "../stores/itemStore";
-import { showAlertDialog } from "../stores/compStore";
+import { showAlertDialogBy } from "../stores/compStore";
 import { getKey } from "../stores/settingStore";
 
 import { getDialog } from "./RouterDialog";
@@ -86,10 +86,10 @@ const _onError = (
   alertDescr,
   alertCaption="Request Error"
 ) => {
-  showAlertDialog({
+  showAlertDialogBy(
     alertDescr,
     alertCaption
-  })
+  )
 };
 
 const _crClickAbout = ({
@@ -179,4 +179,4 @@ export const crDialog = (
 export const crOptionDialog = ({
   dialogType
 }) => getDialog(dialogType)
-  .then(Comp => <Comp key={dialogType} />);
+  .then(Comp => <Comp key={dialogType} />)

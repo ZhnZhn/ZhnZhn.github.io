@@ -52,10 +52,7 @@ const _onError = function (alertDescr, alertCaption) {
   if (alertCaption === void 0) {
     alertCaption = "Request Error";
   }
-  (0, _compStore.showAlertDialog)({
-    alertDescr,
-    alertCaption
-  });
+  (0, _compStore.showAlertDialogBy)(alertDescr, alertCaption);
 };
 const _crClickAbout = _ref2 => {
   let {

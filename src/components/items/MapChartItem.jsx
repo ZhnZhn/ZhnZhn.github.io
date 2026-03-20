@@ -1,5 +1,5 @@
 import { drawChoroplethMapAsync } from '../../adapters/eurostat/ChoroplethMap';
-import { catchLogErr } from '../../utils/catchFn';
+import { logErrMsg } from '../../utils/asyncFn';
 
 import {
   useState,
@@ -105,7 +105,7 @@ export const MapChartItem = ({
        })
        .catch(err => {
          setState({ isLoading: false, isErr: true })
-         catchLogErr(err)
+         logErrMsg(err)
        });
    }, [])
    // config, caption

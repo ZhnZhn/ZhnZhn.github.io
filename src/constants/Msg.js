@@ -64,10 +64,16 @@ export const ERR_TOO_MANY_REQUEST = _crMsg(
   "Http Code 429",
   "Too many request in a given amount of time (rate limiting)"
 )
+
+export const NETWORK_ERROR = "Network Error";
 export const ERR_NETWORK = _crMsg(
-  "Network Error",
+  NETWORK_ERROR,
   "Network error is encountered. Failed to fetch. Maybe you are offline or a DNS lookup failure or a data provider does not respond."
 )
+
+export const MSG_OFFLINE = "It seems you are offline"
+
+
 export const ERR_10 = {
   ..._crMsg(
     "Not Allowed to Add",
@@ -75,5 +81,3 @@ export const ERR_10 = {
   ),
   token: "ERR_10"
 }
-
-export const MSG_OFFLINE = "It seems you are offline"

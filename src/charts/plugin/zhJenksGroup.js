@@ -1,5 +1,5 @@
 import { loadJenks } from '../../math/loadMath';
-import { catchLogErr } from '../../utils/catchFn';
+import { logErrMsg } from '../../utils/asyncFn';
 import { tryUpdate } from './pluginFn';
 
 export default function(isEnabled) {
@@ -18,5 +18,5 @@ export default function(isEnabled) {
          ]
        })
     })
-    .catch(catchLogErr)
+    .catch(logErrMsg)
 }

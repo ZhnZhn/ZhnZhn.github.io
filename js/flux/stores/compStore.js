@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useMsShowDialog = exports.useMsCloseDialog = exports.useMsAbout = exports.useMdOption = exports.showOptionDialog = exports.showModalDialog = exports.showDialog = exports.showAlertDialog = exports.showAbout = exports.hideAbout = exports.closeDialog = exports.closeChartContainer = void 0;
+exports.useMsShowDialog = exports.useMsCloseDialog = exports.useMsAbout = exports.useMdOption = exports.showOptionDialog = exports.showModalDialog = exports.showDialog = exports.showAlertDialogBy = exports.showAlertDialog = exports.showAbout = exports.hideAbout = exports.closeDialog = exports.closeChartContainer = void 0;
 var _storeApi = require("../storeApi");
 var _ModalDialogType = require("../../constants/ModalDialogType");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
@@ -42,6 +42,11 @@ const showModalDialog = function (modalDialogType, option) {
 };
 exports.showModalDialog = showModalDialog;
 const showAlertDialog = exports.showAlertDialog = (0, _storeApi.bindTo)(showModalDialog, _ModalDialogType.MDT_ALERT);
+const showAlertDialogBy = (alertCaption, alertDescr) => showAlertDialog({
+  alertCaption,
+  alertDescr
+});
+exports.showAlertDialogBy = showAlertDialogBy;
 const INITED_DIALOGS = {};
 const useMsShowDialog = exports.useMsShowDialog = (0, _storeApi.fCrUse)(_compStore, _selectMsShowDialog);
 const showDialog = (type, browserType, dialogConfOr) => {
@@ -61,10 +66,7 @@ const showOptionDialog = (type, option) => {
   }).then(r => {
     _set(_crMsShowDialog(r));
   }).catch(err => {
-    showAlertDialog({
-      alertCaption: 'Failed Load',
-      alertDescr: err.message
-    });
+    showAlertDialogBy('Failed Load', err.message);
   });
 };
 exports.showOptionDialog = showOptionDialog;

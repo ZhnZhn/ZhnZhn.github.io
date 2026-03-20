@@ -63,6 +63,13 @@ export const showModalDialog = (
   _set(_crMdOption({...option}))
 }
 export const showAlertDialog = bindTo(showModalDialog, MDT_ALERT)
+export const showAlertDialogBy = (
+  alertCaption,
+  alertDescr
+) => showAlertDialog({
+  alertCaption,
+  alertDescr
+})
 
 const INITED_DIALOGS = {};
 export const useMsShowDialog = fCrUse(_compStore, _selectMsShowDialog)
@@ -80,10 +87,10 @@ export const showOptionDialog = (type, option) => {
     _set(_crMsShowDialog(r))
   })
   .catch(err => {
-    showAlertDialog({
-      alertCaption: 'Failed Load',
-      alertDescr: err.message
-    })
+    showAlertDialogBy(
+      'Failed Load',
+      err.message
+    )
   });
 }
 

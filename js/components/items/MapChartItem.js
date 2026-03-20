@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.MapChartItem = void 0;
 var _ChoroplethMap = require("../../adapters/eurostat/ChoroplethMap");
-var _catchFn = require("../../utils/catchFn");
+var _asyncFn = require("../../utils/asyncFn");
 var _uiApi = require("../uiApi");
 var _useToggle = require("../hooks/useToggle");
 var _useBool = require("../hooks/useBool");
@@ -112,7 +112,7 @@ const MapChartItem = _ref2 => {
         isLoading: false,
         isErr: true
       });
-      (0, _catchFn.catchLogErr)(err);
+      (0, _asyncFn.logErrMsg)(err);
     });
   }, []);
   // config, caption
