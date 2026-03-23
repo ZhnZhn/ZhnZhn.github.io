@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crAsyncBrowser = void 0;
+exports.crBrowserAsync = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _bindTo = require("../../utils/bindTo");
 var _arrFn = require("../../utils/arrFn");
@@ -14,8 +14,9 @@ var _browserStore = require("../stores/browserStore");
 var _watchListStore = require("../watch-list/watchListStore");
 var _RouterItemOption = require("../../components/zhn-select/RouterItemOption");
 var _RouterBrowserItem = require("../../components/browser-items/RouterBrowserItem");
-var _RouterBrowser = require("./RouterBrowser");
+var _loadBrowser = require("../../routers/loadBrowser");
 var _jsxRuntime = require("react/jsx-runtime");
+//import { getBrowserComp } from "./RouterBrowser";
 const _crBrowserWatchList = Comp => /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
   isInitShow: true,
   browserType: _BrowserType.BT_WATCH_LIST,
@@ -67,9 +68,9 @@ const _crBrowserDynamic = (Comp, option) => {
   }, browserType);
 };
 const _isStatAllBrowserType = (0, _arrFn.isInArrStr)([_BrowserType.BT_SWEDEN_STAT_ALL, _BrowserType.BT_NORWAY_STAT_ALL, _BrowserType.BT_FINLAND_STAT_ALL, _BrowserType.BT_DENMARK_STAT_ALL, _BrowserType.BT_IRELAND_STAT_ALL]);
-const crAsyncBrowser = option => {
+const crBrowserAsync = option => {
   const bT = option.browserType;
-  return bT === _BrowserType.BT_WATCH_LIST ? (0, _RouterBrowser.getBrowserComp)(_BrowserType.BT_WATCH_LIST).then(_crBrowserWatchList) : _isStatAllBrowserType(bT) ? (0, _RouterBrowser.getBrowserComp)("STAT_ALL").then(Comp => _crBrowserDynamic(Comp, option)) : Promise.resolve(_crBrowserDynamic((0, _RouterBrowser.getBrowserComp)(bT), option));
+  return bT === _BrowserType.BT_WATCH_LIST ? (0, _loadBrowser.loadBrowserComp)(_BrowserType.BT_WATCH_LIST).then(_crBrowserWatchList) : (0, _loadBrowser.loadBrowserComp)(_isStatAllBrowserType(bT) ? _BrowserType.BT_STAT_ALL : bT).then(Comp => _crBrowserDynamic(Comp, option));
 };
-exports.crAsyncBrowser = crAsyncBrowser;
+exports.crBrowserAsync = crBrowserAsync;
 //# sourceMappingURL=fBrowser.js.map

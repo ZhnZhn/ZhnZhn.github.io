@@ -3,12 +3,13 @@ import { bindTo } from "../../utils/bindTo";
 import { isInArrStr } from "../../utils/arrFn";
 
 import {
-  BT_WATCH_LIST,
   BT_SWEDEN_STAT_ALL,
   BT_NORWAY_STAT_ALL,
   BT_FINLAND_STAT_ALL,
   BT_DENMARK_STAT_ALL,
-  BT_IRELAND_STAT_ALL
+  BT_IRELAND_STAT_ALL,
+  BT_WATCH_LIST,
+  BT_STAT_ALL
 } from "../../constants/BrowserType";
 
 import { showDescription } from "../actions/ComponentActions";
@@ -26,7 +27,8 @@ import { useWatchList } from "../watch-list/watchListStore";
 import { getItemOptionComp } from "../../components/zhn-select/RouterItemOption";
 import { getBrowserItemComp } from "../../components/browser-items/RouterBrowserItem";
 
-import { getBrowserComp } from "./RouterBrowser";
+import { loadBrowserComp } from "../../routers/loadBrowser";
+//import { getBrowserComp } from "./RouterBrowser";
 
 const _crBrowserWatchList = (
   Comp
@@ -97,13 +99,12 @@ const _isStatAllBrowserType = isInArrStr([
   BT_IRELAND_STAT_ALL
 ]);
 
-export const crAsyncBrowser = (
+export const crBrowserAsync = (
   option
 ) => {
   const bT = option.browserType;
   return bT === BT_WATCH_LIST
-    ? getBrowserComp(BT_WATCH_LIST).then(_crBrowserWatchList)
-    : _isStatAllBrowserType(bT)
-       ? getBrowserComp("STAT_ALL").then(Comp => _crBrowserDynamic(Comp, option))
-       : Promise.resolve(_crBrowserDynamic(getBrowserComp(bT), option));
+    ? loadBrowserComp(BT_WATCH_LIST).then(_crBrowserWatchList)
+    : loadBrowserComp(_isStatAllBrowserType(bT) ? BT_STAT_ALL : bT)
+        .then(Comp => _crBrowserDynamic(Comp, option));
 }

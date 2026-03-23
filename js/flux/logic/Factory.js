@@ -1,9 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crOptionDialog = exports.crDialog = exports.crAsyncBrowser = void 0;
-var _fBrowser = require("./fBrowser");
-exports.crAsyncBrowser = _fBrowser.crAsyncBrowser;
+exports.crOptionDialog = exports.crDialog = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _bindTo = require("../../utils/bindTo");
 var _dateFn = require("../../utils/dateFn");

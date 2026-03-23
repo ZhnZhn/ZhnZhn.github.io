@@ -20,7 +20,7 @@ import {
   getBrowserMenu
 } from './browserLogic';
 
-import { crAsyncBrowser } from '../logic/Factory';
+import { crBrowserAsync } from '../logic/fBrowser';
 import BrowserConfig from '../../constants/BrowserConfig';
 import {
   BT_EUROSTAT,
@@ -142,7 +142,7 @@ export const showBrowser = (option={}) => {
         loadModalDialogs(bT),
         loadDialogs(bT)
       ])
-      .then(() => crAsyncBrowser(config))
+      .then(() => crBrowserAsync(config))
       .then(elBrowser => {
         _initBrowser(elBrowser, config)
       })

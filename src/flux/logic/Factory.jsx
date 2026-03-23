@@ -1,5 +1,3 @@
-export { crAsyncBrowser } from "./fBrowser";
-
 import { isArr } from "../../utils/isTypeFn";
 import { bindTo } from "../../utils/bindTo";
 import {

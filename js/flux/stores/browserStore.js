@@ -10,7 +10,7 @@ var _compStore = require("./compStore");
 var _isWithItemCounter = _interopRequireDefault(require("./browser/isWithItemCounter"));
 var _initBrowserMenu = _interopRequireDefault(require("./browser/initBrowserMenu"));
 var _browserLogic = require("./browserLogic");
-var _Factory = require("../logic/Factory");
+var _fBrowser = require("../logic/fBrowser");
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 var _BrowserType = require("../../constants/BrowserType");
 var _RouterModalDialog = require("../../components/dialogs/RouterModalDialog");
@@ -118,7 +118,7 @@ const showBrowser = function (option) {
         browserType: _option.browserType
       }));
     } else {
-      Promise.all([(0, _RouterModalDialog.loadModalDialogs)(bT), (0, _loadDialog.loadDialogs)(bT)]).then(() => (0, _Factory.crAsyncBrowser)(config)).then(elBrowser => {
+      Promise.all([(0, _RouterModalDialog.loadModalDialogs)(bT), (0, _loadDialog.loadDialogs)(bT)]).then(() => (0, _fBrowser.crBrowserAsync)(config)).then(elBrowser => {
         _initBrowser(elBrowser, config);
       }).catch(() => {
         _showBrowserFailed({

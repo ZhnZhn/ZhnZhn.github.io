@@ -38,3 +38,4 @@ export const BT_CURRENCY = 'CR'
 export const BT_OECD = 'OE'
 
 export const BT_WATCH_LIST = 'WL'
+export const BT_STAT_ALL = 'STAT_ALL'
