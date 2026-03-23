@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.loadCss = void 0;
-var _isTypeFn = require("./isTypeFn");
+var _isTypeFn = require("../utils/isTypeFn");
 var _asyncFn = require("./asyncFn");
 const _assign = Object.assign,
   _crElement = tag => document.createElement(tag);

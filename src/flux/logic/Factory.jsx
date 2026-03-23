@@ -31,7 +31,7 @@ import {
 import { showAlertDialogBy } from "../stores/compStore";
 import { getKey } from "../stores/settingStore";
 
-import { getDialog } from "./RouterDialog";
+import { getDialog } from "../../routers/loadDialog";
 import { getLoadFn } from "./RouterLoadFn";
 import { getCrValue } from "./RouterFnValue";
 

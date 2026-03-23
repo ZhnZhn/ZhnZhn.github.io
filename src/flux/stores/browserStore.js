@@ -22,14 +22,14 @@ import {
 
 import { crAsyncBrowser } from '../logic/Factory';
 import BrowserConfig from '../../constants/BrowserConfig';
-import {  
+import {
   BT_EUROSTAT,
   BT_DB_NOMICS,
   BT_WATCH_LIST
 } from '../../constants/BrowserType';
 
 import { loadModalDialogs } from '../../components/dialogs/RouterModalDialog';
-import { loadDialogs } from '../logic/RouterDialog';
+import { loadDialogs } from '../../routers/loadDialog';
 
 const [
   _crMsBrowserLoad,

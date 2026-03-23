@@ -1,5 +1,5 @@
 import { drawChoroplethMapAsync } from '../../adapters/eurostat/ChoroplethMap';
-import { logErrMsg } from '../../utils/asyncFn';
+import { logErrMsg } from '../../routers/asyncFn';
 
 import {
   useState,

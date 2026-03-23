@@ -14,7 +14,7 @@ var _Factory = require("../logic/Factory");
 var _BrowserConfig = _interopRequireDefault(require("../../constants/BrowserConfig"));
 var _BrowserType = require("../../constants/BrowserType");
 var _RouterModalDialog = require("../../components/dialogs/RouterModalDialog");
-var _RouterDialog = require("../logic/RouterDialog");
+var _loadDialog = require("../../routers/loadDialog");
 const [_crMsBrowserLoad, _selectMsBrowserLoad] = (0, _storeApi.fCrStoreSlice)("msBrowserLoad"),
   [_crMsBrowserShow, _selectMsBrowserShow] = (0, _storeApi.fCrStoreSlice)("msBrowserShow"),
   [_crMsInitBrowser, _selectMsInitBrowser] = (0, _storeApi.fCrStoreSlice)("msInitBrowser");
@@ -118,7 +118,7 @@ const showBrowser = function (option) {
         browserType: _option.browserType
       }));
     } else {
-      Promise.all([(0, _RouterModalDialog.loadModalDialogs)(bT), (0, _RouterDialog.loadDialogs)(bT)]).then(() => (0, _Factory.crAsyncBrowser)(config)).then(elBrowser => {
+      Promise.all([(0, _RouterModalDialog.loadModalDialogs)(bT), (0, _loadDialog.loadDialogs)(bT)]).then(() => (0, _Factory.crAsyncBrowser)(config)).then(elBrowser => {
         _initBrowser(elBrowser, config);
       }).catch(() => {
         _showBrowserFailed({

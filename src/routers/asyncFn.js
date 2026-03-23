@@ -2,7 +2,9 @@ import {
   MSG_OFFLINE,
   NETWORK_ERROR
 } from '../constants/Msg';
-import { showAlertDialogBy } from '../flux/stores/compStore';
+import {
+  showAlertDialogBy
+} from '../flux/stores/compStore';
 
 export const resolvePromise = Promise.resolve.bind(Promise)
 

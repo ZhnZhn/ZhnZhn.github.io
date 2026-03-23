@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.showOptionDialogImpl = exports.showDialogImpl = exports.getDialogConf = void 0;
-var _asyncFn = require("../../utils/asyncFn");
+var _asyncFn = require("../../routers/asyncFn");
 var _Factory = require("../logic/Factory");
 var _browserLogic = require("./browserLogic");
 const getDialogConf = (conf, chartType) => {

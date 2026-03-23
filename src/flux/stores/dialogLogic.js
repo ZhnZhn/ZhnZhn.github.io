@@ -1,7 +1,7 @@
 import {
   resolvePromise,
   logErrMsg
-} from '../../utils/asyncFn';
+} from '../../routers/asyncFn';
 
 import {
   crDialog,

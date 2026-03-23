@@ -1,23 +1,24 @@
-import { isStr } from '../../utils/isTypeFn';
-import { crRouter } from '../../utils/crRouter';
-import {
-  resolvePromise,
-  throwErrOffline
-} from '../../utils/asyncFn';
-
 import {
   BT_STOCK_MARKETS,
   BT_NORWAY_STATISTICS,
   BT_SWEDEN_STAT,
   BT_UN_COMTRADE
-} from '../../constants/BrowserType';
+} from "../constants/BrowserType";
 import {
   LT_UN,
   LT_AV
-} from '../../constants/LoadType';
+} from "../constants/LoadType";
 
-import DialogSelectN from '../../components/dialogs/DialogSelectN';
-import { addLoadImpl } from './LoadImpl';
+import { isStr } from "../utils/isTypeFn";
+import { crRouter } from "../utils/crRouter";
+
+import DialogSelectN from "../components/dialogs/DialogSelectN";
+import { addLoadImpl } from "../flux/logic/LoadImpl";
+
+import {
+  resolvePromise,
+  throwErrOffline
+} from "./asyncFn";
 
 const _resolveDialogs = (
   module,
@@ -35,7 +36,7 @@ const _router = crRouter({
 
   _loadD(){
     /*eslint-disable no-undef */
-    if ( process.env.NODE_ENV === '_development' ) {
+    if ( process.env.NODE_ENV === "_development" ) {
       //
       return import("js/components/dialogs/Dialogs.js")
         .then(module => this.D = resolvePromise(module.default))
@@ -45,7 +46,7 @@ const _router = crRouter({
    return import(
       /* webpackChunkName: "dialogs" */
       /* webpackMode: "lazy" */
-       "../../components/dialogs/Dialogs"
+       "../components/dialogs/Dialogs"
       )
      .then(module => this.D = resolvePromise(module.default))
      .catch(throwErrOffline);
@@ -59,7 +60,7 @@ const _router = crRouter({
 
   _loadUN() {
      /*eslint-disable no-undef */
-     if ( process.env.NODE_ENV === '_development' ) {
+     if ( process.env.NODE_ENV === "_development" ) {
        //
        return import("js/components/uncomtrade/UnDialogs.js")
          .then(module => _resolveDialogs(module, LT_UN, this))
@@ -69,7 +70,7 @@ const _router = crRouter({
     return import(
        /* webpackChunkName: "un-dialogs" */
        /* webpackMode: "lazy" */
-        "../../components/uncomtrade/UnDialogs"
+        "../components/uncomtrade/UnDialogs"
        )
       .then(module => _resolveDialogs(module, LT_UN, this))
       .catch(throwErrOffline);
@@ -87,7 +88,7 @@ const _router = crRouter({
 
   _loadSM() {
      /*eslint-disable no-undef */
-     if ( process.env.NODE_ENV === '_development' ) {
+     if ( process.env.NODE_ENV === "_development" ) {
        return import("js/components/stock-markets/AvDialogs.js")
          .then(module => _resolveDialogs(module, LT_AV, this))
          .catch(throwErrOffline);
@@ -96,7 +97,7 @@ const _router = crRouter({
      return import(
          /* webpackChunkName: "av-dialogs" */
          /* webpackMode: "lazy" */
-         "../../components/stock-markets/AvDialogs"
+         "../components/stock-markets/AvDialogs"
        )
       .then(module => _resolveDialogs(module, LT_AV, this))
       .catch(throwErrOffline);
@@ -116,7 +117,7 @@ const _router = crRouter({
 
   _loadSD() {
      /*eslint-disable no-undef */
-     if ( process.env.NODE_ENV === '_development' ) {
+     if ( process.env.NODE_ENV === "_development" ) {
        return import("js/components/stat-dialogs/StatDialogs.js")
          .then(module => this.SD = resolvePromise(module.default))
          .catch(throwErrOffline);
@@ -125,7 +126,7 @@ const _router = crRouter({
      return import(
        /* webpackChunkName: "stat-dialogs" */
        /* webpackMode: "lazy" */
-        "../../components/stat-dialogs/StatDialogs"
+        "../components/stat-dialogs/StatDialogs"
        )
       .then(module => this.SD = resolvePromise(module.default))
       .catch(throwErrOffline);
@@ -139,7 +140,7 @@ const _router = crRouter({
 
   _loadUS() {
      /*eslint-disable no-undef */
-     if ( process.env.NODE_ENV === '_development' ) {
+     if ( process.env.NODE_ENV === "_development" ) {
        return import("js/components/us-economics/UsDialogs.js")
          .then(module => this.US = resolvePromise(module.default))
          .catch(throwErrOffline);
@@ -148,7 +149,7 @@ const _router = crRouter({
     return import(
        /* webpackChunkName: "us-economics-dialogs" */
        /* webpackMode: "lazy" */
-        "../../components/us-economics/UsDialogs"
+        "../components/us-economics/UsDialogs"
        )
       .then(module => this.US = resolvePromise(module.default))
       .catch(throwErrOffline);
@@ -161,7 +162,7 @@ const _router = crRouter({
   },
 
   loadDialogs(browserType) {
-    switch(browserType){      
+    switch(browserType){
       case BT_NORWAY_STATISTICS:
       case BT_SWEDEN_STAT:
          this._loadSD(); break;

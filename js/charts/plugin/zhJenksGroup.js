@@ -2,8 +2,8 @@
 
 exports.__esModule = true;
 exports.default = _default;
-var _loadMath = require("../../math/loadMath");
-var _asyncFn = require("../../utils/asyncFn");
+var _asyncFn = require("../../routers/asyncFn");
+var _loadMath = require("../../routers/loadMath");
 var _pluginFn = require("./pluginFn");
 function _default(isEnabled) {
   (0, _loadMath.loadJenks)().then(jenksModule => {

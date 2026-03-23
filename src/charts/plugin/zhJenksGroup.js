@@ -1,5 +1,5 @@
-import { loadJenks } from '../../math/loadMath';
-import { logErrMsg } from '../../utils/asyncFn';
+import { logErrMsg } from '../../routers/asyncFn';
+import { loadJenks } from '../../routers/loadMath';
 import { tryUpdate } from './pluginFn';
 
 export default function(isEnabled) {

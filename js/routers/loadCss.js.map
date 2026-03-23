@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../src/utils/loadCss.js"
+  "../../src/routers/loadCss.js"
  ],
- "file": "../../src/utils/loadCss.js",
+ "file": "../../src/routers/loadCss.js",
  "names": [
   "_isTypeFn",
   "require",

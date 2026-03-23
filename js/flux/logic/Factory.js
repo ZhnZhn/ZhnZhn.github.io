@@ -14,7 +14,7 @@ var _ComponentActions = require("../actions/ComponentActions");
 var _itemStore = require("../stores/itemStore");
 var _compStore = require("../stores/compStore");
 var _settingStore = require("../stores/settingStore");
-var _RouterDialog = require("./RouterDialog");
+var _loadDialog = require("../../routers/loadDialog");
 var _RouterLoadFn = require("./RouterLoadFn");
 var _RouterFnValue = require("./RouterFnValue");
 var _react = require("react");
@@ -110,7 +110,7 @@ const crDialog = (browserType, dialogConf) => {
     } = dialogProps,
     _dialogType = _getDialogType(dialogType, dialogProps);
   _modifyDialogPropsByLoadId(dialogProps, loadId);
-  return (0, _RouterDialog.getDialog)(_dialogType).then(Comp => /*#__PURE__*/(0, _react.createElement)(Comp, {
+  return (0, _loadDialog.getDialog)(_dialogType).then(Comp => /*#__PURE__*/(0, _react.createElement)(Comp, {
     ...dialogProps,
     ..._crDateProps(dialogProps),
     key: itemKey,
@@ -135,7 +135,7 @@ const crOptionDialog = _ref4 => {
   let {
     dialogType
   } = _ref4;
-  return (0, _RouterDialog.getDialog)(dialogType).then(Comp => /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {}, dialogType));
+  return (0, _loadDialog.getDialog)(dialogType).then(Comp => /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {}, dialogType));
 };
 exports.crOptionDialog = crOptionDialog;
 //# sourceMappingURL=Factory.js.map

@@ -1,5 +1,5 @@
 import { crGetRoute } from '../utils/crRouter';
-import { throwErrOffline } from '../utils/asyncFn';
+import { throwErrOffline } from './asyncFn';
 
 const K_MEANS = "kmeans";
 const JENKS = "jenks";
@@ -15,7 +15,7 @@ export const loadMath = crGetRoute({
     return import(
        /* webpackChunkName: "math-kmeans" */
        /* webpackMode: "lazy" */
-       "./k-means"
+       "../math/k-means"
      ).then(module => module.default)
       .catch(throwErrOffline)
 
@@ -30,7 +30,7 @@ export const loadMath = crGetRoute({
     return import(
        /* webpackChunkName: "math-jenks" */
        /* webpackMode: "lazy" */
-       "./jenksModule"
+       "../math/jenksModule"
      ).then(module => module.default)
       .catch(throwErrOffline)
   },

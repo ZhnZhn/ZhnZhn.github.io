@@ -3,15 +3,15 @@
 exports.__esModule = true;
 exports.drawChoroplethMapAsync = void 0;
 var _client = require("react-dom/client");
-var _asyncFn = require("../../utils/asyncFn");
 var _domFn = require("../../utils/domFn");
-var _loadCss = require("../../utils/loadCss");
 var _objFn = require("../../utils/objFn");
-var _loadMath = require("../../math/loadMath");
+var _asyncFn = require("../../routers/asyncFn");
+var _loadCss = require("../../routers/loadCss");
+var _loadLeaflet = require("../../routers/loadLeaflet");
+var _loadMath = require("../../routers/loadMath");
 var _mathFn = require("../../math/mathFn");
 var _MapFactory = require("../../components/factories/MapFactory");
 var _JsonStatTwoDimensionFn = require("../JsonStatTwoDimensionFn");
-function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 const URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
   NUMBER_OF_CLUSTERS = 6,
   NUMBER_OF_ITERATION = 100,
@@ -242,9 +242,6 @@ const _crGeoJson = geoJson => {
   });
   return _geoJson;
 };
-const _getLeafletAsync = () => Promise.resolve().then(() => _interopRequireWildcard(require(/* webpackChunkName: "leaflet" */
-/* webpackMode: "lazy" */
-'leaflet'))).catch(_asyncFn.throwErrOffline);
 let hmUrlGeoJson = {};
 const _getGeoJsonAsync = url => {
   const geoJson = hmUrlGeoJson[url];
@@ -288,7 +285,7 @@ const _drawChoroplethMapAsync = _ref => {
     zhMapSlice,
     time
   } = _ref;
-  return _getLeafletAsync().then(L => {
+  return (0, _loadLeaflet.loadLeaflet)().then(L => {
     const map = L.map(id, MAP_OPTION).setView([58.00, 10.00], 3);
     /*
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

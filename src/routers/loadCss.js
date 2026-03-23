@@ -1,4 +1,4 @@
-import { isStr } from './isTypeFn';
+import { isStr } from '../utils/isTypeFn';
 import { resolvePromise } from './asyncFn';
 
 const _assign = Object.assign

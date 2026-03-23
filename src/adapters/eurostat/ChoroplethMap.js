@@ -1,13 +1,13 @@
 import { createRoot } from 'react-dom/client';
 
-import {
-  resolvePromise,
-  throwErrOffline
-} from '../../utils/asyncFn';
 import { domSanitize } from '../../utils/domFn';
-import { loadCss } from '../../utils/loadCss';
 import { merge } from '../../utils/objFn';
-import { loadKmeans } from '../../math/loadMath';
+
+import { resolvePromise } from '../../routers/asyncFn';
+import { loadCss } from '../../routers/loadCss';
+import { loadLeaflet } from '../../routers/loadLeaflet';
+import { loadKmeans } from '../../routers/loadMath';
+
 import {
   NEGATIVE_INFINITY,
   POSITIVE_INFINITY,
@@ -317,12 +317,6 @@ const _crGeoJson = (geoJson) => {
   return _geoJson;
 }
 
-const _getLeafletAsync = () => import(
-  /* webpackChunkName: "leaflet" */
-  /* webpackMode: "lazy" */
-  'leaflet'
-).catch(throwErrOffline);
-
 let hmUrlGeoJson = {};
 const _getGeoJsonAsync = (url) => {
   const geoJson = hmUrlGeoJson[url];
@@ -370,7 +364,7 @@ const _drawChoroplethMapAsync = ({
   jsonCube,
   zhMapSlice,
   time
-}) => _getLeafletAsync()
+}) => loadLeaflet()
   .then(L => {
     const map = L.map(id, MAP_OPTION)
       .setView([58.00, 10.00], 3);
