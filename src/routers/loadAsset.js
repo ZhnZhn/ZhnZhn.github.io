@@ -41,3 +41,20 @@ export const loadSparklines = () => import(
   /* webpackMode: "lazy" */
   '../components/zhn-sparklines/Sparklines'
 ).then(getModuleDefault)
+
+export const loadHighchartsTreeMap = () => {
+  /*eslint-disable no-undef */
+  if ( process.env.NODE_ENV === '_development' ) {
+    return import("highcharts/modules/treemap")
+      .then(getModuleDefault)
+      .catch(throwErrOffline);
+ /*eslint-enable no-undef */
+ }
+ return import(
+    /* webpackChunkName: "treemap" */
+    /* webpackMode: "lazy" */
+     "highcharts/modules/treemap"
+    )
+   .then(getModuleDefault)
+   .catch(throwErrOffline);
+}

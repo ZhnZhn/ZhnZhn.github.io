@@ -9,7 +9,8 @@ import HighchartsZhn from './plugin/zhn-highcharts';
 //import HighchartsExporting from 'highcharts/lib/modules/exporting';
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 
-import { MSG_OFFLINE } from '../constants/Msg';
+import { logErrMsg } from '../routers/asyncFn';
+import { loadHighchartsTreeMap } from '../routers/loadAsset';
 import { ChartTheme } from './ChartTheme';
 
 export const initChartTheme = () => {
@@ -21,20 +22,6 @@ export const initChartTheme = () => {
   Highcharts.setOptions(ChartTheme)
 };
 
-export const loadTreeMap = () => {
-  /*eslint-disable no-undef */
-  if ( process.env.NODE_ENV === '_development' ) {
-    //
-    return import("highcharts/modules/treemap")
-      .then(module => (module.default)(Highcharts))
-      .catch(err => console.log(MSG_OFFLINE));
- /*eslint-enable no-undef */
- }
- return import(
-    /* webpackChunkName: "treemap" */
-    /* webpackMode: "lazy" */
-     "highcharts/modules/treemap"
-    )
-   .then(module => (module.default)(Highcharts))
-   .catch(err => console.log(MSG_OFFLINE));
-}
+export const loadTreeMap = () => loadHighchartsTreeMap()
+  .then(moduleDefault => moduleDefault(Highcharts))
+  .catch(logErrMsg)

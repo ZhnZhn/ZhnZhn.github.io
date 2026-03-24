@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.loadSparklines = exports.loadLeaflet = exports.loadCss = void 0;
+exports.loadSparklines = exports.loadLeaflet = exports.loadHighchartsTreeMap = exports.loadCss = void 0;
 var _isTypeFn = require("../utils/isTypeFn");
 var _asyncFn = require("./asyncFn");
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
@@ -39,4 +39,15 @@ const loadSparklines = () => Promise.resolve().then(() => _interopRequireWildcar
 /* webpackMode: "lazy" */
 '../components/zhn-sparklines/Sparklines'))).then(_asyncFn.getModuleDefault);
 exports.loadSparklines = loadSparklines;
+const loadHighchartsTreeMap = () => {
+  /*eslint-disable no-undef */
+  if (process.env.NODE_ENV === '_development') {
+    return Promise.resolve().then(() => _interopRequireWildcard(require("highcharts/modules/treemap"))).then(_asyncFn.getModuleDefault).catch(_asyncFn.throwErrOffline);
+    /*eslint-enable no-undef */
+  }
+  return Promise.resolve().then(() => _interopRequireWildcard(require(/* webpackChunkName: "treemap" */
+  /* webpackMode: "lazy" */
+  "highcharts/modules/treemap"))).then(_asyncFn.getModuleDefault).catch(_asyncFn.throwErrOffline);
+};
+exports.loadHighchartsTreeMap = loadHighchartsTreeMap;
 //# sourceMappingURL=loadAsset.js.map
