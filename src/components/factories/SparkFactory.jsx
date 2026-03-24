@@ -2,8 +2,17 @@ import {
   YELLOW_COLOR
 } from '../styles/Color';
 
-import SparklinesLazy from '../zhn-lazy/SparklinesLazy';
+//import SparklinesLazy from '../zhn-lazy/SparklinesLazy';
+import {
+  SparkView,
+  Line,
+  Spots,
+  Spot,
+  ReferenceLine,
+  Bars
+} from '../zhn-lazy/SparklinesLazy';
 
+/*
 const {
   SparkView,
   Line,
@@ -12,6 +21,7 @@ const {
   ReferenceLine,
   Bars
 } = SparklinesLazy;
+*/
 
 const S_REF_LINE = {
   stroke: 'red',

@@ -8,9 +8,12 @@ var _styleFn = require("../styleFn");
 var _useToggle = require("../hooks/useToggle");
 var _fUseKey = require("../hooks/fUseKey");
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
-var _SparklinesLazy = _interopRequireDefault(require("../zhn-lazy/SparklinesLazy"));
+var _SparklinesLazy = require("../zhn-lazy/SparklinesLazy");
 var _jsxRuntime = require("react/jsx-runtime");
 //import PropTypes from 'prop-types'
+
+/*
+import SparklinesLazy from '../zhn-lazy/SparklinesLazy';
 
 const {
   SparkView,
@@ -18,8 +21,8 @@ const {
   Spot,
   MaxLabel,
   MinLabel
-} = _SparklinesLazy.default;
-const COLOR_MAX = "#8bc34a";
+} = SparklinesLazy;
+*/const COLOR_MAX = "#8bc34a";
 const COLOR_MIN = "#f44336";
 const COLOR_EQUAL = 'black';
 const SPOT_COLORS = {
@@ -121,7 +124,7 @@ const ClusterItem = _ref3 => {
       onClick: toggleIsShowChart
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
       isShow: isShowChart,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(SparkView, {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_SparklinesLazy.SparkView, {
         height: 32,
         width: 140,
         svgHeight: 32,
@@ -130,15 +133,15 @@ const ClusterItem = _ref3 => {
         margin: 3
         //marginLeft={20}
         ,
-        children: [isShowRange ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MaxLabel, {
+        children: [isShowRange ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SparklinesLazy.MaxLabel, {
           color: COLOR_MAX,
           fontSize: 14
-        }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {}), isShowRange ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MinLabel, {
+        }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {}), isShowRange ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_SparklinesLazy.MinLabel, {
           color: COLOR_MIN,
           fontSize: 14
-        }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(Line, {
+        }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SparklinesLazy.Line, {
           color: color
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Spot, {
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_SparklinesLazy.Spot, {
           pointIndex: _refPointIndex.current,
           size: 3,
           spotColors: SPOT_COLORS

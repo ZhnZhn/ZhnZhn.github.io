@@ -6,8 +6,7 @@ var _client = require("react-dom/client");
 var _domFn = require("../../utils/domFn");
 var _objFn = require("../../utils/objFn");
 var _asyncFn = require("../../routers/asyncFn");
-var _loadCss = require("../../routers/loadCss");
-var _loadLeaflet = require("../../routers/loadLeaflet");
+var _loadAsset = require("../../routers/loadAsset");
 var _loadMath = require("../../routers/loadMath");
 var _mathFn = require("../../math/mathFn");
 var _MapFactory = require("../../components/factories/MapFactory");
@@ -285,7 +284,7 @@ const _drawChoroplethMapAsync = _ref => {
     zhMapSlice,
     time
   } = _ref;
-  return (0, _loadLeaflet.loadLeaflet)().then(L => {
+  return (0, _loadAsset.loadLeaflet)().then(L => {
     const map = L.map(id, MAP_OPTION).setView([58.00, 10.00], 3);
     /*
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -312,6 +311,6 @@ const _drawChoroplethMapAsync = _ref => {
     });
   }).then(_crChoroplethMap);
 };
-const drawChoroplethMapAsync = options => (0, _loadCss.loadCss)("css/leaflet.css").then(() => _drawChoroplethMapAsync(options));
+const drawChoroplethMapAsync = options => (0, _loadAsset.loadCss)("css/leaflet.css").then(() => _drawChoroplethMapAsync(options));
 exports.drawChoroplethMapAsync = drawChoroplethMapAsync;
 //# sourceMappingURL=ChoroplethMap.js.map

@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
+exports.default = exports.crRetryableLazy = exports.crModuleDefault = void 0;
 var _uiApi = require("../uiApi");
 var _useBool = require("../hooks/useBool");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -28,6 +28,10 @@ const DfErrorRetryView = _ref => {
     children: "Retry"
   });
 };
+const crModuleDefault = Comp => ({
+  default: Comp
+});
+exports.crModuleDefault = crModuleDefault;
 const crRetryableLazy = function (crLoadPromise, LoaderView, ErrorRetryView) {
   if (LoaderView === void 0) {
     LoaderView = DfLoaderView;
@@ -40,11 +44,9 @@ const crRetryableLazy = function (crLoadPromise, LoaderView, ErrorRetryView) {
       /*eslint-disable react-hooks/exhaustive-deps */,
       LazyComponent = (0, _uiApi.useMemo)(() => (0, _uiApi.lazy)(() => crLoadPromise().catch(() => {
         setLoadingFalse();
-        return {
-          default: () => /*#__PURE__*/(0, _jsxRuntime.jsx)(ErrorRetryView, {
-            retry: retry
-          })
-        };
+        return crModuleDefault(() => /*#__PURE__*/(0, _jsxRuntime.jsx)(ErrorRetryView, {
+          retry: retry
+        }));
       })), [loading]);
     // crLoadPromise, retry
     /*eslint-enable react-hooks/exhaustive-deps */
@@ -58,5 +60,6 @@ const crRetryableLazy = function (crLoadPromise, LoaderView, ErrorRetryView) {
   };
   return RetryableLazy;
 };
+exports.crRetryableLazy = crRetryableLazy;
 var _default = exports.default = crRetryableLazy;
 //# sourceMappingURL=crRetryableLazy.js.map

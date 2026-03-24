@@ -26,7 +26,11 @@ const DfErrorRetryView = ({
   </button>
 );
 
-const crRetryableLazy = (
+export const crModuleDefault = Comp => ({
+  default: Comp
+})
+
+export const crRetryableLazy = (
 	crLoadPromise,
 	LoaderView = DfLoaderView,
 	ErrorRetryView = DfErrorRetryView
@@ -41,10 +45,10 @@ const crRetryableLazy = (
 		, LazyComponent = useMemo(() =>
        lazy(() => crLoadPromise()
          .catch(() => {
-            setLoadingFalse()
-					    return {
-                default: () => <ErrorRetryView retry={retry} />
-              };
+             setLoadingFalse()
+					   return crModuleDefault(
+               () => <ErrorRetryView retry={retry} />
+             );
 					})
 			 ), [loading]);
     // crLoadPromise, retry

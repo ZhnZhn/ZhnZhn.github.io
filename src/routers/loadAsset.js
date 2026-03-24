@@ -1,5 +1,9 @@
 import { isStr } from '../utils/isTypeFn';
-import { resolvePromise } from './asyncFn';
+import {
+  resolvePromise,
+  throwErrOffline,
+  getModuleDefault
+} from './asyncFn';
 
 const _assign = Object.assign
 , _crElement = tag => document.createElement(tag);
@@ -25,3 +29,15 @@ export const loadCss = href => isCss[href] || !isStr(href)
       , { childNodes } = head;
       head.insertBefore(_elLink, childNodes[childNodes.length - 1].nextSibling);
   })
+
+export const loadLeaflet = () => import(
+  /* webpackChunkName: "leaflet" */
+  /* webpackMode: "lazy" */
+  'leaflet'
+).catch(throwErrOffline)
+
+export const loadSparklines = () => import(
+  /* webpackChunkName: "sparklines" */
+  /* webpackMode: "lazy" */
+  '../components/zhn-sparklines/Sparklines'
+).then(getModuleDefault)

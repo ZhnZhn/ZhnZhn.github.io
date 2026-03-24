@@ -4,8 +4,10 @@ import { domSanitize } from '../../utils/domFn';
 import { merge } from '../../utils/objFn';
 
 import { resolvePromise } from '../../routers/asyncFn';
-import { loadCss } from '../../routers/loadCss';
-import { loadLeaflet } from '../../routers/loadLeaflet';
+import {
+  loadCss,
+  loadLeaflet
+} from '../../routers/loadAsset';
 import { loadKmeans } from '../../routers/loadMath';
 
 import {

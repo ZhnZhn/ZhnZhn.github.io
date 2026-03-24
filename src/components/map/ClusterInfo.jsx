@@ -6,6 +6,16 @@ import { useToggle } from '../hooks/useToggle';
 import { useKeyEnter } from '../hooks/fUseKey';
 
 import ShowHide from '../zhn/ShowHide';
+
+import {
+  SparkView,
+  Line,
+  Spot,
+  MaxLabel,
+  MinLabel
+} from '../zhn-lazy/SparklinesLazy';
+
+/*
 import SparklinesLazy from '../zhn-lazy/SparklinesLazy';
 
 const {
@@ -15,6 +25,7 @@ const {
   MaxLabel,
   MinLabel
 } = SparklinesLazy;
+*/
 
 const COLOR_MAX = "#8bc34a";
 const COLOR_MIN = "#f44336";
@@ -29,7 +40,7 @@ const S_CAPTION = {
   opacity: 0.7
 },
 S_CAPTION_BT = {
-  ...crAbsoluteTopLeftStyle(4, 8, !0),  
+  ...crAbsoluteTopLeftStyle(4, 8, !0),
   fontSize: '18px',
   fontWeight: 'bold',
   cursor: 'pointer'
