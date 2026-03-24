@@ -12,10 +12,9 @@ import SourceBrowserDynamic2 from "../components/browser-container/SourceBrowser
 
 import {
   resolvePromise,
+  getModuleDefault,
   throwErrOffline
 } from "./asyncFn";
-
-const _getModuleDefault = module => module.default;
 
 const browserDynamic2 = resolvePromise(SourceBrowserDynamic2);
 export const loadBrowserComp = crGetRoute({
@@ -26,7 +25,7 @@ export const loadBrowserComp = crGetRoute({
     /*eslint-disable no-undef */
     if ( process.env.NODE_ENV === "_development") {
       return import("js/components/watch-browser/WatchBrowser.js")
-        .then(_getModuleDefault)
+        .then(getModuleDefault)
         .catch(throwErrOffline)
     }
     /*eslint-enable no-undef */
@@ -34,7 +33,7 @@ export const loadBrowserComp = crGetRoute({
        /* webpackChunkName: "watch-browser" */
        /* webpackMode: "lazy" */
        "../components/watch-browser/WatchBrowser"
-     ).then(_getModuleDefault)
+     ).then(getModuleDefault)
       .catch(throwErrOffline)
   },
 
@@ -42,7 +41,7 @@ export const loadBrowserComp = crGetRoute({
     /*eslint-disable no-undef */
     if ( process.env.NODE_ENV === "_development") {
       return import("js/components/browser-slider/BrowserSlider.js")
-        .then(_getModuleDefault)
+        .then(getModuleDefault)
         .catch(throwErrOffline)
     }
     /*eslint-enable no-undef */
@@ -50,7 +49,7 @@ export const loadBrowserComp = crGetRoute({
        /* webpackChunkName: "browser-slider" */
        /* webpackMode: "lazy" */
        "../components/browser-slider/BrowserSlider"
-     ).then(_getModuleDefault)
+     ).then(getModuleDefault)
       .catch(throwErrOffline)
   },
 

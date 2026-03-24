@@ -8,6 +8,8 @@ import {
 
 export const resolvePromise = Promise.resolve.bind(Promise)
 
+export const getModuleDefault = module => module.default;
+
 export const throwErrOffline = () => {
   throw new Error(MSG_OFFLINE);
 }
