@@ -42,8 +42,8 @@ describe('isPositiveNumber', () => {
     expect(fn("")).toBe(false);
   });
 });
-describe('isNaN', () => {
-  const fn = _isTypeFn.isNaN;
+describe('isNumberNaN', () => {
+  const fn = _isTypeFn.isNumberNaN;
   test('should return true for NaN value otherwise false', () => {
     expect(fn(NaN)).toBe(true);
     expect(fn(2)).toBe(false);

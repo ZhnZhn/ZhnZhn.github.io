@@ -11,7 +11,7 @@ const _pad2 = n => n < 10 ? '0' + n : '' + n;
 const _toIntMonth = str => (0, _isTypeFn.parseIntBy10)(str) - 1;
 const _splitStrByDash = str => (0, _isTypeFn.isStr)(str) ? str.split('-') : [];
 const _isLikelyQuarter = str => (0, _isTypeFn.isStr)(str) && str[0].toUpperCase() === 'Q';
-const _notInIntervalStrict = (n, min, max) => (0, _isTypeFn.isNaN)(n) || n < min || n > max;
+const _notInIntervalStrict = (n, min, max) => (0, _isTypeFn.isNumberNaN)(n) || n < min || n > max;
 const _notInLengthMinMax = (str, length, min, max) => (0, _isTypeFn.isStr)(str) && str.length !== length || _notInIntervalStrict((0, _isTypeFn.parseIntBy10)(str), min, max);
 const _isYmd = function (yStr, mStr, dStr, minYear, nForecastDate) {
   if (minYear === void 0) {
@@ -129,13 +129,13 @@ const ymdToUTC = function (dateStrOrNumberYYYY, option) {
   }
   if (_len === 2 && mStr !== '') {
     const _m = (0, _isTypeFn.parseIntBy10)(mStr);
-    if (!(0, _isTypeFn.isNaN)(_m)) {
+    if (!(0, _isTypeFn.isNumberNaN)(_m)) {
       const _d = getNumberOfDays(yearStr, _m);
       return Date.UTC(yearStr, _m - 1, _d);
       // YYYY-Q format
     } else if (_isLikelyQuarter(_arr[1])) {
       const _q = (0, _isTypeFn.parseIntBy10)(_arr[1][1]);
-      if ((0, _isTypeFn.isNaN)(_q)) {
+      if ((0, _isTypeFn.isNumberNaN)(_q)) {
         return _q;
       }
       const _d = getNumberOfDays(_arr[0], _q * 3);
@@ -149,7 +149,7 @@ const ymdToUTC = function (dateStrOrNumberYYYY, option) {
         y = 0
       } = option,
       _y = (0, _isTypeFn.parseIntBy10)(yearStr) - y;
-    return !(0, _isTypeFn.isNaN)(_y) ? Date.UTC(_y, 11, 31) : _y;
+    return !(0, _isTypeFn.isNumberNaN)(_y) ? Date.UTC(_y, 11, 31) : _y;
   }
   return (0, _isTypeFn.isTypeNumber)(dateStrOrNumberYYYY) ? Date.UTC(dateStrOrNumberYYYY, 11, 31) : Date.UTC(yearStr, _toIntMonth(mStr), dStr);
 };

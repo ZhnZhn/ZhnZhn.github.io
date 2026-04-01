@@ -2,7 +2,7 @@ import {
   isTypeNumber,
   isNumber,
   isPositiveNumber,
-  isNaN,
+  isNumberNaN,
   isInt,
   isBool,
   isStr,
@@ -67,8 +67,8 @@ describe('isPositiveNumber',()=>{
 })
 
 
-describe('isNaN',()=>{
-  const fn = isNaN;
+describe('isNumberNaN',()=>{
+  const fn = isNumberNaN;
   test('should return true for NaN value otherwise false',()=>{
     expect(fn(NaN)).toBe(true)
 

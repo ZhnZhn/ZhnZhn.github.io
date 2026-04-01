@@ -77,7 +77,7 @@ S_EMBER = {
 };
 
 
-const _isNaN = Number.isNaN
+const _isNumberNaN = Number.isNaN
 , _FN_NOOP = () => {}
 , [EVENT_NAME_MOVE, EVENT_NAME_UP] = HAS_TOUCH_EVENTS
     ? ['touchmove','touchend']
@@ -87,7 +87,7 @@ const _isNaN = Number.isNaN
     : value < min ? min : value
 , _toPercent = (value, min, max) => {
     const _percent = (value - min) / (max - min);
-    return _isNaN(_percent) ? 0 : _percent*100;
+    return _isNumberNaN(_percent) ? 0 : _percent*100;
 }
 , _crWidthStyle = percent => ({
     width: `calc(${percent}%)`

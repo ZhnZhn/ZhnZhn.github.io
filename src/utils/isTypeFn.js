@@ -4,7 +4,7 @@ const _fIsTypeof = strType => v => typeof v === strType;
 export const isTypeNumber = _fIsTypeof("number")
 export const isNumber = v => isTypeNumber(v) && v-v === 0
 export const isPositiveNumber = v => isNumber(v) && v > 0
-export const isNaN = Number.isNaN
+export const isNumberNaN = Number.isNaN
 export const isInt = Number.isInteger
 
 export const isBool = _fIsTypeof("boolean")
@@ -35,7 +35,7 @@ export const isEmpty = (
   || _getObjectKeys(obj).length === 0
 
 const _hasOwnProperty = Object.prototype.hasOwnProperty
-export const hasOwnProperty = (
+export const hasOwnPropertySafe = (
   item,
   propName
 ) => isObj(item)

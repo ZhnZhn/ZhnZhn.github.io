@@ -1,6 +1,6 @@
 import {
   isTypeNumber,
-  isNaN,
+  isNumberNaN,
   isInt,
   isStr,
   isUndef,
@@ -27,7 +27,7 @@ const _notInIntervalStrict = (
   n,
   min,
   max
-) => isNaN(n) || (n<min || n>max);
+) => isNumberNaN(n) || (n<min || n>max);
 const _notInLengthMinMax = (
   str,
   length,
@@ -188,13 +188,13 @@ export const ymdToUTC = (
 
   if (_len === 2 && mStr !== ''){
 	 const _m = parseIntBy10(mStr);
-	 if (!isNaN(_m)) {
+	 if (!isNumberNaN(_m)) {
 			const _d = getNumberOfDays(yearStr, _m);
 	    return Date.UTC(yearStr, _m - 1, _d);
 	 // YYYY-Q format
 	  } else if (_isLikelyQuarter(_arr[1])) {
 		  const _q = parseIntBy10(_arr[1][1]);
-      if (isNaN(_q)) { return _q; }
+      if (isNumberNaN(_q)) { return _q; }
       const _d = getNumberOfDays(_arr[0], _q*3);
 			return Date.UTC( _arr[0], _q*3 - 1, _d);
 	 } else {
@@ -205,7 +205,7 @@ export const ymdToUTC = (
   if (_len === 1) {
    const { y=0 } = option
    , _y = parseIntBy10(yearStr) - y;
-	 return !isNaN(_y)
+	 return !isNumberNaN(_y)
      ? Date.UTC(_y, 11, 31)
      : _y;
 	}

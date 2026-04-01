@@ -73,13 +73,13 @@ const S_ROOT = {
     height: 44,
     border: '1px solid #4caf50'
   };
-const _isNaN = Number.isNaN,
+const _isNumberNaN = Number.isNaN,
   _FN_NOOP = () => {},
   [EVENT_NAME_MOVE, EVENT_NAME_UP] = _has.HAS_TOUCH_EVENTS ? ['touchmove', 'touchend'] : ['mousemove', 'mouseup'],
   _checkValueInMinMax = (min, max, value) => value > max ? max : value < min ? min : value,
   _toPercent = (value, min, max) => {
     const _percent = (value - min) / (max - min);
-    return _isNaN(_percent) ? 0 : _percent * 100;
+    return _isNumberNaN(_percent) ? 0 : _percent * 100;
   },
   _crWidthStyle = percent => ({
     width: `calc(${percent}%)`
