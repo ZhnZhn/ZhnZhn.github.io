@@ -188,8 +188,8 @@ describe('getObjectKeys', () => {
     expect(fn('')).toEqual([]);
   });
 });
-describe('hasOwnProperty', () => {
-  const fn = _isTypeFn.hasOwnProperty;
+describe('hasOwnPropertySafe', () => {
+  const fn = _isTypeFn.hasOwnPropertySafe;
   test("should return boolean for test object own property", () => {
     expect(fn({
       a: "a"

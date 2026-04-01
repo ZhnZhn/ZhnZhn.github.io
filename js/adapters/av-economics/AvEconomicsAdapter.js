@@ -16,7 +16,7 @@ const PN_VALUE = 'value',
       data
     } = _ref;
     const item = data[0],
-      _crData = (0, _isTypeFn.hasOwnProperty)(item, PN_VALUE) ? _crDataByValue : (0, _isTypeFn.hasOwnProperty)(item, PN_PRICE) ? _crDataByPrice : void 0;
+      _crData = (0, _isTypeFn.hasOwnPropertySafe)(item, PN_VALUE) ? _crDataByValue : (0, _isTypeFn.hasOwnPropertySafe)(item, PN_PRICE) ? _crDataByPrice : void 0;
     return _crData ? _crData(data) : [];
   },
   trOption = (option, json) => {

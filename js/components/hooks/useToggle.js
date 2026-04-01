@@ -19,7 +19,7 @@ exports.useToggleAsync = useToggleAsync;
 const _isNotOwnBooleanPropsEqual = (state, stateSlice) => {
     let propName;
     for (propName in stateSlice) {
-      if ((0, _isTypeFn.hasOwnProperty)(stateSlice, propName)) {
+      if ((0, _isTypeFn.hasOwnPropertySafe)(stateSlice, propName)) {
         if (!(0, _isTypeFn.isBool)(stateSlice[propName])) {
           return;
         }

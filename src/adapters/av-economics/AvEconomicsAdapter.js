@@ -1,4 +1,4 @@
-import { hasOwnProperty } from '../../utils/isTypeFn';
+import { hasOwnPropertySafe } from '../../utils/isTypeFn';
 import { joinByComma } from '../../utils/arrFn';
 import { crAdapterType1 } from '../crAdapterType1';
 import { fCrData } from '../av/AvFn';
@@ -10,9 +10,9 @@ const PN_VALUE = 'value'
 , _crDataByPrice = fCrData(PN_PRICE, PN_DATE)
 , crData = ({ data }) => {
   const item = data[0]
-  , _crData = hasOwnProperty(item, PN_VALUE)
+  , _crData = hasOwnPropertySafe(item, PN_VALUE)
     ? _crDataByValue
-    : hasOwnProperty(item, PN_PRICE)
+    : hasOwnPropertySafe(item, PN_PRICE)
     ? _crDataByPrice
     : void 0;
   return _crData

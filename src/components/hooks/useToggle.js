@@ -3,7 +3,7 @@ import {
   isFn,
   isStr,
   isObj,
-  hasOwnProperty
+  hasOwnPropertySafe
 } from '../../utils/isTypeFn';
 
 import { useReducer } from '../uiApi';
@@ -46,7 +46,7 @@ const _isNotOwnBooleanPropsEqual = (
 ) => {
   let propName;
   for(propName in stateSlice) {
-    if (hasOwnProperty(stateSlice, propName)) {
+    if (hasOwnPropertySafe(stateSlice, propName)) {
       if (!isBool(stateSlice[propName])) {
         return;
       }
