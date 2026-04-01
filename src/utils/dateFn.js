@@ -1,6 +1,7 @@
 import {
   isTypeNumber,
   isNumberNaN,
+  isNumberFinite,
   isInt,
   isStr,
   isUndef,
@@ -119,7 +120,7 @@ export const getYmdhmUTC = (date) => {
 }
 
 export const mlsToDmy = (mlsUTC) => {
-	if ( !(isTypeNumber(mlsUTC) && isFinite(mlsUTC)) ) {
+	if ( !(isTypeNumber(mlsUTC) && isNumberFinite(mlsUTC)) ) {
 		return '';
 	}
 	const d = new Date(mlsUTC);

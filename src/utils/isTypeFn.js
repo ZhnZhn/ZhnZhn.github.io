@@ -5,6 +5,7 @@ export const isTypeNumber = _fIsTypeof("number")
 export const isNumber = v => isTypeNumber(v) && v-v === 0
 export const isPositiveNumber = v => isNumber(v) && v > 0
 export const isNumberNaN = Number.isNaN
+export const isNumberFinite = Number.isFinite
 export const isInt = Number.isInteger
 
 export const isBool = _fIsTypeof("boolean")

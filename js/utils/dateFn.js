@@ -77,7 +77,7 @@ const getYmdhmUTC = date => {
 };
 exports.getYmdhmUTC = getYmdhmUTC;
 const mlsToDmy = mlsUTC => {
-  if (!((0, _isTypeFn.isTypeNumber)(mlsUTC) && isFinite(mlsUTC))) {
+  if (!((0, _isTypeFn.isTypeNumber)(mlsUTC) && (0, _isTypeFn.isNumberFinite)(mlsUTC))) {
     return '';
   }
   const d = new Date(mlsUTC);
