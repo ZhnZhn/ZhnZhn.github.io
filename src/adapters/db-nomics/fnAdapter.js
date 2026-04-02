@@ -1,14 +1,13 @@
-export {
-  assign,
-  crErrorByMessage
-} from '../AdapterFn';
-
-import { isNumber } from '../../utils/isTypeFn';
+import {
+  isNumber
+} from '../../utils/isTypeFn';
 import {
   joinBy,
   joinByColon
 } from '../../utils/arrFn';
-import { isTokenInStr } from '../../utils/strFn';
+import {
+  isTokenInStr
+} from '../../utils/strFn';
 
 import {
   crZhConfig,
@@ -18,19 +17,31 @@ import {
   fCrItemLinkByCaption,
   crItemConf
 } from '../crFn';
-import {
-  getPeriodAndValue,
-  getTitle,
-  getSubtitle,
-  getIndexedAt
-} from './fnSelector';
 
 const CHART_URL = 'https://db.nomics.world'
 , SUBT_MAX = 60;
 
 export const getDocs = (
   json
-) => ((json || {}).series || {}).docs || {};
+) => json?.series?.docs;
+
+const _getByPropName = (
+  json,
+  propName
+) => getDocs(json)?.[0]?.[propName] || '';
+
+const _fGetByPropName = (
+  propName
+) => json => _getByPropName(json, propName);
+
+export const getPeriodAndValue = json => [
+  _getByPropName(json, 'period'),
+  _getByPropName(json, 'value')
+]
+export const getTitle = _fGetByPropName('dataset_name')
+export const getSubtitle = _fGetByPropName('series_name')
+export const getIndexedAt = _fGetByPropName('indexed_at')
+
 
 const _crId = ({
   dfProvider,

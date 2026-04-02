@@ -5,6 +5,7 @@ exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _arrFn = require("../../utils/arrFn");
 var _itemFn = require("../../utils/itemFn");
+var _AdapterFn = require("../AdapterFn");
 var _fnAdapter = require("./fnAdapter");
 const URL = 'https://api.db.nomics.world/v22/series',
   TAIL = 'observations=1&format=json&metadata=false',
@@ -23,7 +24,7 @@ const _crUrl = (seriaId, option) => {
 };
 const _dfFnUrl = option => (0, _isTypeFn.isArr)(option.items) ? _crUrl((0, _itemFn.getValue)(option.items[0]), option) : _crUrl('', option);
 const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
-  (0, _fnAdapter.assign)(option, {
+  (0, _AdapterFn.assign)(option, {
     seriaId,
     dfProvider,
     dfCode
@@ -110,7 +111,7 @@ const _crValues3S12 = _ref8 => {
       dfCode,
       subtitle
     } = option;
-    (0, _fnAdapter.assign)(option, {
+    (0, _AdapterFn.assign)(option, {
       dfCode: `${dfCode}:${(0, _itemFn.getValue)(items[2])}`,
       subtitle: (subtitle || "").split(':')[0] || ''
     });
@@ -143,12 +144,12 @@ const DbNomicsApi = {
       errors
     } = json || {};
     if ((0, _isTypeFn.isArr)(errors)) {
-      throw (0, _fnAdapter.crErrorByMessage)((errors[0] || {}).message);
+      throw (0, _AdapterFn.crErrorByMessage)((errors[0] || {}).message);
     }
     const docs = (0, _fnAdapter.getDocs)(json),
       _ts = (0, _isTypeFn.isArr)(docs) ? docs[0] : '';
     if (!_ts || !(0, _isTypeFn.isArr)(_ts.period) || !(0, _isTypeFn.isArr)(_ts.value)) {
-      throw (0, _fnAdapter.crErrorByMessage)();
+      throw (0, _AdapterFn.crErrorByMessage)();
     }
   }
 };

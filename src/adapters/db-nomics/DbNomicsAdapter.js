@@ -1,6 +1,10 @@
-import { crAdapterType1 } from '../crAdapterType1';
 import {
-  assign,
+  assign
+} from '../AdapterFn';
+import {
+  crAdapterType1
+} from '../crAdapterType1';
+import {
   crData,
   crTitle,
   crConfOption

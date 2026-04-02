@@ -11,8 +11,10 @@ import {
 
 import {
   assign,
-  crErrorByMessage,
-  getDocs,
+  crErrorByMessage
+} from '../AdapterFn';
+import {  
+  getDocs
 } from './fnAdapter';
 
 const URL = 'https://api.db.nomics.world/v22/series'

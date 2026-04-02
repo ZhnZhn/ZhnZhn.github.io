@@ -1,19 +1,23 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getDocs = exports.crTitle = exports.crErrorByMessage = exports.crData = exports.crConfOption = exports.assign = void 0;
-var _AdapterFn = require("../AdapterFn");
-exports.assign = _AdapterFn.assign;
-exports.crErrorByMessage = _AdapterFn.crErrorByMessage;
+exports.getTitle = exports.getSubtitle = exports.getPeriodAndValue = exports.getIndexedAt = exports.getDocs = exports.crTitle = exports.crData = exports.crConfOption = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _arrFn = require("../../utils/arrFn");
 var _strFn = require("../../utils/strFn");
+var _AdapterFn = require("../AdapterFn");
 var _crFn = require("../crFn");
-var _fnSelector = require("./fnSelector");
 const CHART_URL = 'https://db.nomics.world',
   SUBT_MAX = 60;
-const getDocs = json => ((json || {}).series || {}).docs || {};
+const getDocs = json => json?.series?.docs;
 exports.getDocs = getDocs;
+const _getByPropName = (json, propName) => getDocs(json)?.[0]?.[propName] || '';
+const _fGetByPropName = propName => json => _getByPropName(json, propName);
+const getPeriodAndValue = json => [_getByPropName(json, 'period'), _getByPropName(json, 'value')];
+exports.getPeriodAndValue = getPeriodAndValue;
+const getTitle = exports.getTitle = _fGetByPropName('dataset_name');
+const getSubtitle = exports.getSubtitle = _fGetByPropName('series_name');
+const getIndexedAt = exports.getIndexedAt = _fGetByPropName('indexed_at');
 const _crId = _ref => {
   let {
     dfProvider,
@@ -24,7 +28,7 @@ const _crId = _ref => {
 };
 const _crItemLink = (0, _crFn.fCrItemLinkByCaption)('DBnomics Chart');
 const _crUpdatedDate = json => {
-  const _date = (0, _fnSelector.getIndexedAt)(json).split('T')[0];
+  const _date = getIndexedAt(json).split('T')[0];
   return _date ? `<p>Updated by DBnomics on ${_date}</p>` : '';
 };
 const _crDescr = (json, option) => {
@@ -59,7 +63,7 @@ const _crZhConfig = option => {
   };
 };
 const _crInfo = (json, option) => ({
-  name: (0, _fnSelector.getSubtitle)(json),
+  name: getSubtitle(json),
   description: _crDescr(json, option)
 });
 const _isQuarter = str => (0, _strFn.isTokenInStr)(str, "Q");
@@ -71,9 +75,9 @@ const crTitle = (_ref2, json) => {
     title,
     subtitle
   } = _ref2;
-  const _subtitle = (0, _fnSelector.getSubtitle)(json);
+  const _subtitle = getSubtitle(json);
   return {
-    title: (0, _fnSelector.getTitle)(json),
+    title: getTitle(json),
     subtitle: _subtitle.length > SUBT_MAX ? (0, _arrFn.joinByColon)(title, subtitle) : _subtitle
   };
 };
@@ -84,7 +88,7 @@ const crData = (json, option) => {
       fromDate
     } = option,
     _xFrom = fromDate ? (0, _AdapterFn.ymdToUTC)(fromDate) : 0,
-    [period, value] = (0, _fnSelector.getPeriodAndValue)(json),
+    [period, value] = getPeriodAndValue(json),
     crPoint = _isAnnualQuarter(period) ? _crAqPoint : _crPoint;
   let _arrPoint;
   return period.reduce((_data, periodItem, index) => {
