@@ -16,6 +16,7 @@ dev
 webpack.dev.js
 webpack.dev.dll.js
 webpack.dev.dll-jsx.js
+rspack.dev.js
 ut
 template/index-dev.ejs
 template/a-index-dev.ejs
