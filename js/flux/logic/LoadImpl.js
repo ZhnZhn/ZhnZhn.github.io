@@ -15,7 +15,7 @@ exports.addLoadImpl = addLoadImpl;
 const getLoadImpl = loadId => _hmLoadImpl[loadId];
 exports.getLoadImpl = getLoadImpl;
 const _initHmLoadImpl = () => {
-  for (let key in _RouterAdapter.default) {
+  for (const key in _RouterAdapter.default) {
     addLoadImpl(key, _RouterAdapter.default[key]);
   }
 };

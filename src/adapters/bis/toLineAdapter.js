@@ -12,7 +12,7 @@ const ITEM_URL = "https://data.bis.org/topics";
 
 const crData = (
   str,
-  option
+  _option
 ) => {
   const seriesCollection = getSeriesCollection(str)[0] || {}
   , elementCount = seriesCollection.childElementCount

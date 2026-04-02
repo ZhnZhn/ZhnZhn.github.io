@@ -13,7 +13,7 @@ export const toWmdy = bindTo(formatDate, WMDY_FORMAT_CONFIG)
 
 const toTdmy = bindTo(formatDate, TDMY_FORMAT_CONFIG);
 export const toTdmyIf = mls => {
-  let _strDate = toTdmy(mls);
+  const _strDate = toTdmy(mls);
   return _strDate.slice(0, 5) === "00:00"
     ? _strDate.slice(7)
     : _strDate;

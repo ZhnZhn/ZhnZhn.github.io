@@ -270,7 +270,7 @@ const _fAddSeriaPoints = (
 ) => config => {
   const _legend = [];
   points.forEach((data, index) => {
-    const is = index<maxVisible ? true : false
+    const is = index<maxVisible
     , color = getSeriaColorByIndex(index)
     , { seriaName } = data;
     _legend.push(crLegendItem({

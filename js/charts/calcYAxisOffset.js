@@ -2,24 +2,20 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-
-const calcYAxisOffset = function (chart) {
+const calcYAxisOffset = chart => {
   let offset = 0;
   chart.yAxis.forEach(_yAxis => {
     if (!_yAxis.opposite) {
       const {
-        max
-      } = _yAxis.getExtremes(),
-            _maxLen = max ? ('' + max).length : 0,
-            _maxLabelLenght = _yAxis.maxLabelLength,
-            _dx = offset === 0 ? 25 : 15;
-
+          max
+        } = _yAxis.getExtremes(),
+        _maxLen = max ? ('' + max).length : 0,
+        _maxLabelLenght = _yAxis.maxLabelLength,
+        _dx = offset === 0 ? 25 : 15;
       offset = _maxLen !== 0 ? offset + _dx + Math.round(_maxLabelLenght) : offset;
     }
   });
   return offset;
 };
-
-var _default = calcYAxisOffset;
-exports.default = _default;
+var _default = exports.default = calcYAxisOffset;
 //# sourceMappingURL=calcYAxisOffset.js.map

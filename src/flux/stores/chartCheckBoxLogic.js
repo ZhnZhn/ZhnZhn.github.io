@@ -42,7 +42,7 @@ export const resetActiveChart = (
   id
 ) => {
   const _id = isLoadToChart();
-  if (_id && _id == id) {
+  if (_id && _id === id) {
     _SLICE.chart = null
   }
 }

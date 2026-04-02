@@ -15,7 +15,7 @@ const ClApi = {
       } = items[0];
     return `${API_URL}/exchange/?id=${id}`;
   },
-  checkResponse(json, option) {
+  checkResponse(json, _option) {
     const {
       pairs
     } = json || {};

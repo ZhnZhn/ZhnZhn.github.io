@@ -1,13 +1,14 @@
 "use strict";
 
 exports.__esModule = true;
-exports.fYAxisOpposite = exports.fXAxisOpposite = exports.fTooltip = exports.fTitle = exports.fSubtitle = exports.fSeriaMarker = exports.fSecondYAxis = exports.fPlotOptionsSeries = exports.fPlotOptionsColumn = exports.fPlotOptionsArea = exports.fPlotLine = exports.fNavigation = exports.fLegend = exports.fEventsMouseOver = exports.fCrosshair = exports.fCreditsRightBottom = exports.crType = exports.crCategoryDataLabels = exports.crAreaConfig = exports.STACKED_HEIGHT = exports.SPACING_TOP = exports.SPACING_BOTTOM = exports.SEMIDONUT_TITLE_Y = exports.SEMIDONUT_SUBTITLE_Y = exports.MARGIN_RIGHT = exports.LEGEND_ROW_HEIGHT = exports.CHART_HEIGHT = void 0;
+exports.fYAxisOpposite = exports.fXAxisOpposite = exports.fTooltip = exports.fTitle = exports.fSubtitle = exports.fSeriaMarker = exports.fPlotOptionsSeries = exports.fPlotOptionsColumn = exports.fPlotOptionsArea = exports.fPlotLine = exports.fNavigation = exports.fLegend = exports.fEventsMouseOver = exports.fCrosshair = exports.fCreditsRightBottom = exports.crType = exports.crCategoryDataLabels = exports.crAreaConfig = exports.STACKED_HEIGHT = exports.SPACING_TOP = exports.SPACING_BOTTOM = exports.SEMIDONUT_TITLE_Y = exports.SEMIDONUT_SUBTITLE_Y = exports.MARGIN_RIGHT = exports.LEGEND_ROW_HEIGHT = exports.CHART_HEIGHT = void 0;
 var _styleFn = require("../components/styleFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _domFn = require("../utils/domFn");
 var _objFn = require("../utils/objFn");
 var _Color = require("../constants/Color");
 var _Tooltip = require("./Tooltip");
+var _chartConfigs = require("./chartConfigs");
 const FONT_STYLE = {
     fontSize: '16px',
     fontWeight: 'bold'
@@ -22,15 +23,6 @@ const FONT_STYLE = {
       stroke: 'transparent',
       color: _Color.COLOR_CHART_TITLE,
       fill: _Color.COLOR_CHART_TITLE
-    }
-  },
-  YAXIS_CONFIG = {
-    endOnTick: false,
-    maxPadding: 0.15,
-    startOnTick: false,
-    minPadding: 0.15,
-    title: {
-      text: ''
     }
   },
   _crPlotOption = (lineColor, markerLineColor) => ({
@@ -130,7 +122,7 @@ const crAreaConfig = function (_temp) {
       crosshair: _crCrosshair(isCrosshair)
     },
     yAxis: {
-      ...YAXIS_CONFIG,
+      ..._chartConfigs.YAXIS_CONFIG,
       crosshair: _crCrosshair(isCrosshair),
       opposite: true,
       showEmpty: true
@@ -200,23 +192,6 @@ const fYAxisOpposite = option => (0, _objFn.merge)(false, {
   }
 }, option);
 exports.fYAxisOpposite = fYAxisOpposite;
-const fSecondYAxis = (name, color) => ({
-  //crosshair : fCrosshair(),
-  ...YAXIS_CONFIG,
-  id: name,
-  lineColor: color,
-  tickColor: color,
-  gridLineWidth: 0,
-  lineWidth: 2,
-  labels: {
-    style: {
-      color: color,
-      fontWeight: "bold",
-      fontSize: "15px"
-    }
-  }
-});
-exports.fSecondYAxis = fSecondYAxis;
 const _fCrPlotOptions = (colorHoverLine, colorMarkerLine) => option => (0, _objFn.merge)(false, _crPlotOption(colorHoverLine, colorMarkerLine), option || {});
 const fPlotOptionsArea = exports.fPlotOptionsArea = _fCrPlotOptions(_Color.COLOR_AREA_HOVER_LINE, _Color.COLOR_AREA_MARKER_LINE);
 const fPlotOptionsColumn = exports.fPlotOptionsColumn = _fCrPlotOptions(_Color.COLOR_COLUMN_HOVER_LINE, _Color.COLOR_COLUMN_MARKER_LINE);

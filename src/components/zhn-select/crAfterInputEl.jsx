@@ -14,7 +14,9 @@ import {
   CL_SPINNER_FAILED
 } from './CL';
 
-const CL_BT_SPINNER_FAILED = crBtCircle2Cn(CL_SPINNER_FAILED)
+const DATA_LOADER_LOADING = "circle"
+, DATA_LOADER_ERR = `${DATA_LOADER_LOADING}-failed`
+, CL_BT_SPINNER_FAILED = crBtCircle2Cn(CL_SPINNER_FAILED)
 , S_SVG_CLEAR = {
   ...crAbsoluteTopLeftStyle(5, 8, !0),
   stroke: '#1b75bb'
@@ -52,25 +54,29 @@ const crAfterInputEl = (
   return isLoading
     ? [
         (<span
+           key={DATA_LOADER_LOADING}
+           data-loader={DATA_LOADER_LOADING}
            className={CL_SPINNER}
-           data-loader="circle"
         />),
         joinByBlank('Loading', _optionNames, '...')]
     : isLoadingFailed ? [
         (<Button
+           key={DATA_LOADER_ERR}
+           data-loader={DATA_LOADER_ERR}
            className={CL_BT_SPINNER_FAILED}
-           data-loader="circle-failed"
            onClick={onLoadOption}
         />),
         joinByBlank('Loading', _optionNames, 'Failed')
     ] : isBtSvgClear ? [
        (<BtSvgClear
+           key="c"
            refEl={_refBtClear}
            style={S_SVG_CLEAR}
            onClick={_hClear}
        />)
     ] : [
        (<ArrowCell
+           key="a"
            isShowOption={isShowOption}
            labelId={labelId}
            controlsId={optionsViewId}

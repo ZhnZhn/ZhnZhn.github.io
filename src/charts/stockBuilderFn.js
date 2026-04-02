@@ -70,9 +70,9 @@ export const fAddMiniVolume = _factoryAddMini(
 export const fAddMiniVolumes = (
   arrOption
 ) => config => {
-  arrOption.forEach(
-    option => fAddMiniVolume(option)(config)
-  )
+  arrOption.forEach(option => {
+    fAddMiniVolume(option)(config);
+  })  
   return config;
 }
 

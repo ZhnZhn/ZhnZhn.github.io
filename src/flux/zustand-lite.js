@@ -16,7 +16,9 @@ const _createStoreImpl = (createState) => {
       state = (replace != null ? replace : (typeof nextState !== "object" || nextState === null))
          ? nextState
          : _assign({}, state, nextState);
-      listeners.forEach(listener => listener(state, previousState));
+      listeners.forEach(listener => {
+        listener(state, previousState)
+      });
     }
   };
 
@@ -29,7 +31,7 @@ const _createStoreImpl = (createState) => {
 
   const api = {
     getState,
-    setState,  
+    setState,
     subscribe
   };
   state = createState(setState, getState, api);

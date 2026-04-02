@@ -8,6 +8,7 @@ const Link = props => {
   const _href = (0, _uiApi.toHref)(props.href);
   return _href && props.children ? /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
     target: "_blank",
+    rel: "noopener",
     href: _href,
     className: props.className,
     style: props.style,

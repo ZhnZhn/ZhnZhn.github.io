@@ -68,7 +68,7 @@ const crData = (json, option) => {
       items
     } = option,
     two = (0, _itemFn.getValue)(items[1]),
-    isFilter = dfFilterName ? true : false;
+    isFilter = !!dfFilterName;
   return (getResultsData(Results) || []).reduce((data, item) => {
     if ((0, _isTypeFn.isObj)(item)) {
       const v = parseFloat(item.DataValue),

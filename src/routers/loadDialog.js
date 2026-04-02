@@ -29,9 +29,10 @@ const _resolveDialogs = (
   return router[loadType] = resolvePromise(df);
 };
 
+const _promiseDialogSelectN = Promise.resolve(DialogSelectN);
 const _router = crRouter({
-  DF: resolvePromise(DialogSelectN),
-  DialogSelectN: resolvePromise(DialogSelectN),
+  DF: _promiseDialogSelectN,
+  DialogSelectN: _promiseDialogSelectN,
 
   _loadD(){
     /*eslint-disable no-undef */

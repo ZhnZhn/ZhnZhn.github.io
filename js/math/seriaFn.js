@@ -58,7 +58,7 @@ const normalize = (d, strDmy) => {
     return [];
   }
   const _d = [];
-  for (let p of d) {
+  for (const p of d) {
     _d.push([getX(p), parseFloat((0, _big.default)(getY(p)).div(_y).times(100).toFixed(2))]);
   }
   return _d;
@@ -87,7 +87,7 @@ const hasZeroOrLessValue = data => {
   if (!_getY) {
     return false;
   }
-  for (let point of data) {
+  for (const point of data) {
     if (_getY(point) <= 0) {
       return true;
     }

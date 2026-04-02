@@ -32,7 +32,7 @@ describe("InputText", () => {
        onChange={onChange}
        onEnter={onEnter}
     />)
-    let input = screen.getByRole('textbox')
+    const input = screen.getByRole('textbox')
     expect(input).toHaveValue(initValue)
 
     //2 Test event handlers

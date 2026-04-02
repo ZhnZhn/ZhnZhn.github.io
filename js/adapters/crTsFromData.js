@@ -14,7 +14,7 @@ const _crTsFromMonthData = (dmy, data) => data.reduce((arr, value) => {
   dmy = (0, _dateFn.getNextMonthDmy)(dmy);
   return arr;
 }, []);
-const crTsFromData = (json, option) => {
+const crTsFromData = (json, _option) => {
   const data = json.data;
   if (!(0, _isTypeFn.isArr)(data)) {
     return [];

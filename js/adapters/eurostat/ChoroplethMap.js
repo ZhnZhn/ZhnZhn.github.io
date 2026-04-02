@@ -151,7 +151,7 @@ const _calcUpper = (clusters, index, maxValue) => {
 const _crRowEl = (color, from, to, cluster, wg) => {
   const _n = cluster?.points?.length ?? 0,
     el = _crEl('p', '', `opacity: 0.7; background: ${color}; padding: 5px 6px; cursor: pointer;`);
-  el.addEventListener('click', function (event) {
+  el.addEventListener('click', _evt => {
     wg.updateCluster(cluster, color, from, to);
   });
   el.innerHTML = `<span>${(0, _domFn.domSanitize)(from)}&ndash;${(0, _domFn.domSanitize)(to)}<span>
@@ -241,7 +241,7 @@ const _crGeoJson = geoJson => {
   });
   return _geoJson;
 };
-let hmUrlGeoJson = {};
+const hmUrlGeoJson = {};
 const _getGeoJsonAsync = url => {
   const geoJson = hmUrlGeoJson[url];
   return geoJson ? (0, _asyncFn.resolvePromise)(_crGeoJson(geoJson)) : fetch(url).then(response => response.json()).then(geoJson => hmUrlGeoJson[url] = geoJson);

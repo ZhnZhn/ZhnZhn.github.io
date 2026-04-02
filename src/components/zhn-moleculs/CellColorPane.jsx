@@ -23,7 +23,7 @@ const CellColorPane = memo(({
 
    let r, c, _color, _idPrefix;
    for(r=0; r<rows; r++){
-     let _elCells = [];
+     const _elCells = [];
      _idPrefix = colors[r*cols]
      for(c=0; c<cols; c++){
        _color = colors[r*cols + c]

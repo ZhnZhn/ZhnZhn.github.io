@@ -7,7 +7,7 @@ var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
 const ITEM_URL = "https://data.bis.org/topics";
-const crData = (str, option) => {
+const crData = (str, _option) => {
   const seriesCollection = (0, _fnAdapter.getSeriesCollection)(str)[0] || {},
     elementCount = seriesCollection.childElementCount,
     data = [];

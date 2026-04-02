@@ -1,5 +1,5 @@
 
-const calcYAxisOffset = function(chart) {
+const calcYAxisOffset = (chart) => {
   let offset = 0;
   chart.yAxis.forEach(_yAxis => {
     if (!_yAxis.opposite) {

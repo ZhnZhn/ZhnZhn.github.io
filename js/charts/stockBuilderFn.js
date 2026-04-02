@@ -21,7 +21,9 @@ const _crScatterSeria = (color, pointFormatter, data) => ({
 const _factoryAddMini = (propName, crMiniConfig) => option => config => (0, _configBuilderFn._addMini)(option[propName], option, crMiniConfig, config);
 const fAddMiniVolume = exports.fAddMiniVolume = _factoryAddMini('data', _crMiniConfigFn.crMiniVolumeConfig);
 const fAddMiniVolumes = arrOption => config => {
-  arrOption.forEach(option => fAddMiniVolume(option)(config));
+  arrOption.forEach(option => {
+    fAddMiniVolume(option)(config);
+  });
   return config;
 };
 exports.fAddMiniVolumes = fAddMiniVolumes;

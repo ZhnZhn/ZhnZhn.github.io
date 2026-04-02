@@ -31,7 +31,7 @@ describe('useInputKeyDown', ()=>{
     )
 
     //1 Test return type
-    let onKeyDown = result.current
+    const onKeyDown = result.current
     expect(typeof onKeyDown).toBe('function')
 
     //2.1 Test onEnter with event.target.value

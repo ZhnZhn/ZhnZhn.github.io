@@ -58,7 +58,7 @@ const _promiseAll = ({
   ]);
 };
 
-const _fFetch = (propName) => function({
+const _fFetch = (propName) => ({
    uri,
    option={},
    optionFetch,
@@ -68,7 +68,7 @@ const _fFetch = (propName) => function({
    onCompleted,
    onFailed,
    onCatch
- }){
+ }) => {
   if (!uri) {
     if (_isFn(onFailed)) {
       setTimeout(()=>onFailed(_assign(option, {
@@ -133,8 +133,7 @@ export const fetchJson = _fFetch('json')
 export const fetchTxt = _fFetch('text')
 
 export const fetchJsonHm = (
-  url,
-  onCatch
+  url
 ) => fetch(url)
   .then(res => {
     if (!res.ok) {

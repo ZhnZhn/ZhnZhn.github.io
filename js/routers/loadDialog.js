@@ -16,9 +16,10 @@ const _resolveDialogs = (module, loadType, router) => {
   (0, _LoadImpl.addLoadImpl)(loadType, df._a);
   return router[loadType] = (0, _asyncFn.resolvePromise)(df);
 };
+const _promiseDialogSelectN = Promise.resolve(_DialogSelectN.default);
 const _router = (0, _crRouter.crRouter)({
-  DF: (0, _asyncFn.resolvePromise)(_DialogSelectN.default),
-  DialogSelectN: (0, _asyncFn.resolvePromise)(_DialogSelectN.default),
+  DF: _promiseDialogSelectN,
+  DialogSelectN: _promiseDialogSelectN,
   _loadD() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === "_development") {

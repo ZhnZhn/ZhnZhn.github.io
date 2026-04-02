@@ -15,7 +15,7 @@ const _rsi = (
   , _len = closePrices.length
   , i;
   for (i = 1; i < _len; i++) {
-    let diff = closePrices[i] - closePrices[i-1];
+    const diff = closePrices[i] - closePrices[i-1];
     gains.push(diff >= 0 ? diff : 0);
     loss.push(diff < 0 ? -diff : 0);
   }

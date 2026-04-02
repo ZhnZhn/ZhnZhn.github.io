@@ -42,7 +42,7 @@ export const crData = (
 
 export const crConfOption = (
   option,
-  json,
+  _json,
   data
 ) => ({
   zhConfig: _crZhConfig(option, data)

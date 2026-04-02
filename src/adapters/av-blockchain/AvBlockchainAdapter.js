@@ -6,7 +6,7 @@ import { crAdapterType1 } from '../crAdapterType1';
 
 const crData = (
   json,
-  option
+  _option
 ) => {
   const _objData = json["Time Series (Digital Currency Daily)"];
   return getObjectKeys(_objData)

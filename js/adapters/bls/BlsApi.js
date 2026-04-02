@@ -39,7 +39,7 @@ const _crCaptionImpl = (title, subtitle) => ({
     CU: _crCaption321,
     CW: _crCaption321
   },
-  _crDfCaption = (dfTitle, items, option) => _crCaptionImpl(dfTitle || option.subtitle, option.title),
+  _crDfCaption = (dfTitle, _items, option) => _crCaptionImpl(dfTitle || option.subtitle, option.title),
   _getCrCaption = (0, _crRouter.crGetRoute)(_routesCrCaption, _crDfCaption);
 const _crCaption = option => _getCrCaption(option.dfCode)(option.dfTitle, option.items, option);
 const _setCaptionTo = option => {

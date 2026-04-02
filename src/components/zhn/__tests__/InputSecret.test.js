@@ -32,7 +32,7 @@ describe('InputSecret', () =>{
        placeholder={placeholder}
        onEnter={onEnter}
     />);
-    let input = screen.getByPlaceholderText(placeholder)
+    const input = screen.getByPlaceholderText(placeholder)
 
     //2 Test onChange handle and removed attribute value
     const _changeValue = 'abcd';

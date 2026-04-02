@@ -24,7 +24,7 @@ import {
 } from './chart/ChartLogic';
 
 import { isLoadToChart } from './chartCheckBoxLogic';
-import { getDialogConf } from './dialogLogic';
+import { getDialogConf } from './getDialogConf';
 import {
   setMenuItemOpen,
   addMenuItemCounter,

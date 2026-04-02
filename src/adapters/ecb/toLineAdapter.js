@@ -24,7 +24,7 @@ const ITEM_URL = `https://data.${ECB_EUROPA_EU}/data/datasets`
 
 const crData = (
   json,
-  option
+  _option
 ) => {
   const _observations = getSeriesObservertions(json)
   , _values = getObservationValues(json);

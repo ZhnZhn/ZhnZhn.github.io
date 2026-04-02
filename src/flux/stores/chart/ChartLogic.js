@@ -135,7 +135,7 @@ export const isChartExistImpl = (
   key
 ) => {
   const configs = getSubSliceOf(slice, chartType)[1];
-  for (let config of configs){
+  for (const config of configs){
     if (_getConfigKey(config) === key){
       return true;
     }
@@ -199,7 +199,7 @@ export const updateMovingValues = (
 ) => {
   const configs = getSubSliceOf(slice, chartType)[1];
   if (_isRequireUpdateMovingValues(configs, movingValues)) {
-    const _hmConfigs = crIdLookup(configs, _getConfigId);    
+    const _hmConfigs = crIdLookup(configs, _getConfigId);
     movingValues.forEach(mv => {
       const _config = _hmConfigs[mv._id];
       if (_config) {

@@ -69,7 +69,7 @@ const _crCaptionImpl = (
 }
 , _crDfCaption = (
   dfTitle,
-  items,
+  _items,
   option
 ) => _crCaptionImpl(
   dfTitle || option.subtitle,

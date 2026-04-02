@@ -8,7 +8,7 @@ const _crWebsiteLink = (0, _crFn.fCrItemLinkByUrl)("Website UN Comtrade Data", "
 
 //Caution: The results depend on available reported data, and the level of details may vary.
 
-const _crDescr = json => _conf.DESCR_EMPTY;
+const _crDescr = _json => _conf.DESCR_EMPTY;
 const toDescr = (json, option) => option.period ? option.subtitle + _crWebsiteLink() : _crDescr(json) + _crWebsiteLink();
 exports.toDescr = toDescr;
 //# sourceMappingURL=fnDescr.js.map

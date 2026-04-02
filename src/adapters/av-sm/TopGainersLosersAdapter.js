@@ -73,7 +73,7 @@ const TopGainersLosersAdapter = {
   crKey(){
     return ID;
   },
-  toConfig(json, option) {
+  toConfig(json, _option) {
     const id = ID
     , _updated = json.last_updated || ""
     , [

@@ -53,7 +53,7 @@ const _router = crRouter({
     if (process.env.NODE_ENV === '_development') {
       return import("js/components/dialogs-modal/ModalDialogs.js")
         .then(module => this.MD = _resolve(module.default))
-        .catch(err => console.log(MSG_OFFLINE))
+        .catch(_err => console.log(MSG_OFFLINE))
    /*eslint-enable no-undef */
     } else {
      return import(
@@ -62,7 +62,7 @@ const _router = crRouter({
           "../../components/dialogs-modal/ModalDialogs"
         )
        .then(module => this.MD = _resolve(module.default))
-       .catch(err => console.log(MSG_OFFLINE))
+       .catch(_err => console.log(MSG_OFFLINE))
      }
   },
   getMD(){
@@ -83,7 +83,7 @@ const _router = crRouter({
     if (process.env.NODE_ENV === '_development') {
       return import("js/components/watch-browser/ModalDialogs.js")
         .then(module => this.WL = _resolve(module.default))
-        .catch(err => console.log(MSG_OFFLINE))
+        .catch(_err => console.log(MSG_OFFLINE))
    /*eslint-enable no-undef */
     } else {
      return import(
@@ -92,7 +92,7 @@ const _router = crRouter({
           "../../components/watch-browser/ModalDialogs"
         )
        .then(module => this.WL = _resolve(module.default))
-       .catch(err => console.log(MSG_OFFLINE))
+       .catch(_err => console.log(MSG_OFFLINE))
      }
   },
   getWL() {

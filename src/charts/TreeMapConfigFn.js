@@ -6,7 +6,18 @@ import {
   fTooltip,
   fCreditsRightBottom
 } from './Chart';
-import { tooltipSparkTreeMap } from './Tooltip';
+
+import {
+  //sparkStackedArea,
+  sparkTreeMap
+} from './tp/tpSpark';
+
+import _fFormatter from './crTooltipFormatter';
+//import { tooltipSparkTreeMap } from './Tooltip';
+
+
+const tooltipSparkTreeMap = _fFormatter({...sparkTreeMap})
+
 
 export const CONFIG_TREE_MAP = {
   //data : data,

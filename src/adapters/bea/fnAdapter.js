@@ -108,7 +108,7 @@ export const crData = (
     items
   } = option
   , two = getValue(items[1])
-  , isFilter = dfFilterName ? true : false;
+  , isFilter = !!dfFilterName;
 
   return  (getResultsData(Results) || [])
     .reduce((data, item) => {

@@ -62,7 +62,7 @@ const MenuItems = ({
   onToggle
 }) => {
   /*eslint-disable no-unused-vars*/
-  const [rank, ...restHeader] = headers
+  const [_rank, ...restHeader] = headers
   /*eslint-enable no-unused-vars*/
   , _colorBlack = getColorBlack();
   return safeMap(restHeader, (h, index) => isArr(h.items)

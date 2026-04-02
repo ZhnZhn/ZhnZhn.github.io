@@ -41,6 +41,7 @@ describe('useForceUpdate', ()=>{
       return (
         <button
           data-testid="bt"
+          type="button"
           onClick={_rerender}
         >
           Rerender

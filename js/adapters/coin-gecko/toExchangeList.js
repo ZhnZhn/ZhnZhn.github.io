@@ -33,7 +33,7 @@ const toExchangeList = {
         rows: _rows,
         dataSource: `CoinGecko ${(0, _fnAdapter.getYmdhmUTC)()}`,
         fns: {
-          valueToHref: (id, v) => v
+          valueToHref: (_id, v) => v
         }
       });
     return {

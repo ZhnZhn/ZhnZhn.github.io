@@ -105,7 +105,7 @@ const _renderRows = (props) => {
     }));
 
     return (
-      <tr key={_rId} role="row">
+      <tr key={_rId}>
         {_elTds}
       </tr>
     );

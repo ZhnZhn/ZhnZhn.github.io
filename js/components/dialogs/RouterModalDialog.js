@@ -15,8 +15,7 @@ var _ZoomDialog = _interopRequireDefault(require("./ZoomDialog"));
 var _SettingsDialog = _interopRequireDefault(require("../header/SettingsDialog"));
 var _AddToWatchDialog = _interopRequireDefault(require("../watch-browser/AddToWatchDialog"));
 var _PasteToModalDialog = _interopRequireDefault(require("../dialogs-modal/PasteToModalDialog"));
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 const MSG_OFFLINE = 'It seems you are offline';
 const _resolve = Promise.resolve.bind(Promise);
 const _router = (0, _crRouter.crRouter)({
@@ -32,12 +31,12 @@ const _router = (0, _crRouter.crRouter)({
   _loadMD() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/dialogs-modal/ModalDialogs.js"))).then(module => this.MD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/dialogs-modal/ModalDialogs.js"))).then(module => this.MD = _resolve(module.default)).catch(_err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     } else {
       return Promise.resolve().then(() => _interopRequireWildcard(require(/* webpackChunkName: "modal-dialogs" */
       /* webpackMode: "lazy" */
-      "../../components/dialogs-modal/ModalDialogs"))).then(module => this.MD = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      "../../components/dialogs-modal/ModalDialogs"))).then(module => this.MD = _resolve(module.default)).catch(_err => console.log(MSG_OFFLINE));
     }
   },
   getMD() {
@@ -55,12 +54,12 @@ const _router = (0, _crRouter.crRouter)({
   _loadWL() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === '_development') {
-      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/watch-browser/ModalDialogs.js"))).then(module => this.WL = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      return Promise.resolve().then(() => _interopRequireWildcard(require("js/components/watch-browser/ModalDialogs.js"))).then(module => this.WL = _resolve(module.default)).catch(_err => console.log(MSG_OFFLINE));
       /*eslint-enable no-undef */
     } else {
       return Promise.resolve().then(() => _interopRequireWildcard(require(/* webpackChunkName: "watch-dialogs" */
       /* webpackMode: "lazy" */
-      "../../components/watch-browser/ModalDialogs"))).then(module => this.WL = _resolve(module.default)).catch(err => console.log(MSG_OFFLINE));
+      "../../components/watch-browser/ModalDialogs"))).then(module => this.WL = _resolve(module.default)).catch(_err => console.log(MSG_OFFLINE));
     }
   },
   getWL() {

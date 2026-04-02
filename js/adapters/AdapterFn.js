@@ -34,7 +34,7 @@ const crDfItemKey = _ref => {
 };
 exports.crDfItemKey = crDfItemKey;
 const EMPTY = '';
-const _fIsNumber = pn => p => (0, _isTypeFn.isTypeNumber)(p[pn]) && isFinite(p[pn]);
+const _fIsNumber = pn => p => (0, _isTypeFn.isTypeNumber)(p[pn]) && (0, _isTypeFn.isNumberFinite)(p[pn]);
 const _crDmyFrom = point => (0, _dateFn.mlsToDmy)((0, _seriaHelperFn.getPointDate)(point));
 const getValues = option => option.items.map(_itemFn.getValue);
 exports.getValues = getValues;

@@ -4,5 +4,5 @@ export const getSeriesId = (
 
 export const getObservationsData = (
   json,
-  options
+  _options
 ) => (json || {}).observations

@@ -7,7 +7,7 @@ var _AppErc = _interopRequireDefault(require("./components/AppErc"));
 var _initChartTheme = require("./charts/initChartTheme");
 var _jsxRuntime = require("react/jsx-runtime");
 const _isHighchartsWarning = str => typeof str === 'string' && str.indexOf('Highcharts warning') !== -1;
-let consoleWarn = (console || {}).warn;
+const consoleWarn = (console || {}).warn;
 const _clearHighchartsWarning = () => {
   if (consoleWarn) {
     console.warn = function () {
@@ -18,7 +18,7 @@ const _clearHighchartsWarning = () => {
     };
   }
 };
-const _initRaven = function () {
+const _initRaven = () => {
   /* eslint-disable no-undef */
   if (process.env.NODE_ENV === 'production') {
     /* eslint-enable no-undef */
@@ -35,7 +35,7 @@ const _renderApp = () => {
   if (preloaderEl) {
     document.body.removeChild(document.getElementById('preloader'));
   }
-  (0, _client.createRoot)(document.getElementById('app')).render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_AppErc.default, {}));
+  (0, _client.createRoot)(document.getElementById('app')).render(/*#__PURE__*/(0, _jsxRuntime.jsx)(_AppErc.default, {}));
 };
 const _runLoadingApp = () => {
   const preloader = window.preloader;

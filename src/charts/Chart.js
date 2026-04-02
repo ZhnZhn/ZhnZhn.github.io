@@ -20,6 +20,7 @@ import {
   COLOR_MARKER_HOVER_FILL
 } from '../constants/Color';
 import { tooltipValueTdmyIf } from './Tooltip';
+import { YAXIS_CONFIG } from './chartConfigs';
 
 const FONT_STYLE = {
   fontSize: '16px',
@@ -36,13 +37,6 @@ const FONT_STYLE = {
     color: COLOR_CHART_TITLE,
     fill: COLOR_CHART_TITLE,
   }
-}
-, YAXIS_CONFIG = {
-  endOnTick: false,
-  maxPadding: 0.15,
-  startOnTick: false,
-  minPadding: 0.15,
-  title: { text: '' }
 }
 , _crPlotOption = (
   lineColor,
@@ -239,26 +233,6 @@ export const fYAxisOpposite = (
       text: ''
    }
 }, option)
-
-export const fSecondYAxis = (
-  name,
-  color
-) => ({
-   //crosshair : fCrosshair(),
-   ...YAXIS_CONFIG,
-   id: name,
-   lineColor: color,
-   tickColor: color,
-   gridLineWidth: 0,
-   lineWidth: 2,
-   labels: {
-     style: {
-       color: color,
-       fontWeight: "bold",
-       fontSize: "15px"
-     }
-   }
-})
 
 const _fCrPlotOptions = (
   colorHoverLine,

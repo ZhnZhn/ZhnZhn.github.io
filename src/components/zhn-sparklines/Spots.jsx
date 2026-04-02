@@ -1,15 +1,15 @@
-import COLORS  from './Colors'
-//import PropTypes from 'prop-types'
+import COLORS  from './Colors';
 
 if (!Math.sign) {
-  Math.sign = function(x) { return x > 0 ? 1 : -1; }
+  Math.sign = (x) => x > 0 ? 1 : -1;
 }
 
-const calcEndSpotDirection = function(points) {
-  return points.length < 2
-    ? 0
-    : Math.sign(points[points.length - 2].y - points[points.length - 1].y);
-}
+const _calcEndSpotDirection = (
+  points
+) => points.length < 2
+  ? 0
+  : Math.sign(points[points.length - 2].y - points[points.length - 1].y);
+
 
 const Spots = ({
   points,
@@ -30,7 +30,7 @@ const Spots = ({
                   cx={points[points.length - 1].x}
                   cy={points[points.length - 1].y}
                   r={size}
-                  style={style || { fill: spotColors[calcEndSpotDirection(points)] }}
+                  style={style || { fill: spotColors[_calcEndSpotDirection(points)] }}
                />
         );
 

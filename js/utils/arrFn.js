@@ -29,7 +29,7 @@ const joinByComma = exports.joinByComma = (0, _bindTo.bindTo)(joinBy, ", ");
 const joinByUndescore = exports.joinByUndescore = (0, _bindTo.bindTo)(joinBy, "_");
 const safeLoopOfArray = (items, onItem) => {
   if (_isArr(items)) {
-    for (let item of items) {
+    for (const item of items) {
       onItem(item);
     }
     return !0;

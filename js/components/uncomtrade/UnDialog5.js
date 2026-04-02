@@ -145,7 +145,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
     [setPropertyTime, getPropertyTime] = (0, _useProperty.useProperty)(DATE_DF, DATE_DF)
 
     /*eslint-disable no-unused-vars*/,
-    [setFreq, getFreq] = (0, _useProperty.useProperty)(DF_FREQ, DF_FREQ)
+    [_setFreq, getFreq] = (0, _useProperty.useProperty)(DF_FREQ, DF_FREQ)
     /*eslint-enable no-unused-vars*/
 
     /*eslint-disable react-hooks/exhaustive-deps */,
@@ -255,7 +255,7 @@ const UnDialog5 = (0, _memoIsShow.default)(props => {
         placeholder: FREQUENCY_PLACEHOLDER,
         propCaption: "c",
         options: FREQUENCY_OPTIONS
-        //onSelect={setFreq}
+        //onSelect={_setFreq}
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowChartDate.default, {
       isShowChart: isChart,

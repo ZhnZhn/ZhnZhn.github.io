@@ -37,6 +37,7 @@ import {
   isArr,
   isTypeNumber,
   isNumber,
+  isNumberFinite,
   isStr
 } from '../utils/isTypeFn';
 
@@ -50,7 +51,7 @@ const EMPTY = '';
 
 const _fIsNumber = (
   pn
-) => (p) => isTypeNumber(p[pn]) && isFinite(p[pn]);
+) => (p) => isTypeNumber(p[pn]) && isNumberFinite(p[pn]);
 
 const _crDmyFrom = point => mlsToDmy(getPointDate(point));
 

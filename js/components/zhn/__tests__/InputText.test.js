@@ -28,13 +28,13 @@ describe("InputText", () => {
       {
         user,
         rerender
-      } = setupUserEvent( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
+      } = setupUserEvent(/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
         refEl: refEl,
         initValue: initValue,
         onChange: onChange,
         onEnter: onEnter
       }));
-    let input = screen.getByRole('textbox');
+    const input = screen.getByRole('textbox');
     expect(input).toHaveValue(initValue);
 
     //2 Test event handlers
@@ -67,7 +67,7 @@ describe("InputText", () => {
 
     //4 Test rerender with new initValue without optional handlers
     const _initValue = "abcde";
-    rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
+    rerender(/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputText.default, {
       initValue: _initValue
     }));
     expect(input).toHaveValue(_initValue);

@@ -2,21 +2,16 @@
 
 exports.__esModule = true;
 exports.getDaysFromYmd = exports.crError = exports.crData = exports.crConfOption = void 0;
-
 var _AdapterFn = require("../AdapterFn");
-
 exports.getDaysFromYmd = _AdapterFn.getDaysFromYmd;
 exports.crError = _AdapterFn.crError;
-
 var _crFn = require("../crFn");
-
 const _crZhConfig = (option, data) => {
   const {
-    _itemKey,
-    dataSource
-  } = option,
-        _config = (0, _AdapterFn.crZhConfig)(option);
-
+      _itemKey,
+      dataSource
+    } = option,
+    _config = (0, _AdapterFn.crZhConfig)(option);
   _config.itemConf = {
     _itemKey,
     ...(0, _crFn.crItemConf)(option),
@@ -25,7 +20,6 @@ const _crZhConfig = (option, data) => {
   };
   return _config;
 };
-
 const crData = (json, _ref) => {
   let {
     metric
@@ -34,16 +28,12 @@ const crData = (json, _ref) => {
     if (item === void 0) {
       item = {};
     }
-
     return [(0, _AdapterFn.ymdhmsToUTC)((item.time || '').replace('Z', ''), 'T'), parseFloat(item[metric])];
   });
 };
-
 exports.crData = crData;
-
-const crConfOption = (option, json, data) => ({
+const crConfOption = (option, _json, data) => ({
   zhConfig: _crZhConfig(option, data)
 });
-
 exports.crConfOption = crConfOption;
 //# sourceMappingURL=fnAdapter.js.map

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 //Highcharts dateFormat from AdapterFn require jsdom
-"use strict";
+"use strict"
 import {
   ymdToUTC,
   isYNumber,

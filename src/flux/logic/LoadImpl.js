@@ -13,7 +13,7 @@ export const addLoadImpl = (
 export const getLoadImpl = loadId => _hmLoadImpl[loadId]
 
 const _initHmLoadImpl = () => {
-  for (let key in Adapter) {
+  for (const key in Adapter) {
     addLoadImpl(key, Adapter[key])
   }
 };

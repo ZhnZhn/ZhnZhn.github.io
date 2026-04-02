@@ -9,7 +9,7 @@ var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
 var _fnAdapter = require("./fnAdapter");
 const ITEM_URL = `https://data.${_fnAdapter.ECB_EUROPA_EU}/data/datasets`;
-const crData = (json, option) => {
+const crData = (json, _option) => {
   const _observations = (0, _fnAdapter.getSeriesObservertions)(json),
     _values = (0, _fnAdapter.getObservationValues)(json);
   return (0, _isTypeFn.getObjectKeys)(_observations).reduce((data, prName) => {

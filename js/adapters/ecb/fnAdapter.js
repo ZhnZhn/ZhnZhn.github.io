@@ -36,6 +36,6 @@ const crItemId = option => {
   return (0, _arrFn.joinByDot)(option.dfPrefix, _crItemId(option.items, option.seriaType));
 };
 exports.crItemId = crItemId;
-const findCategoryIndex = option => crItemId(option).split(".").findIndex(token => token === "");
+const findCategoryIndex = option => crItemId(option).split(".").indexOf("");
 exports.findCategoryIndex = findCategoryIndex;
 //# sourceMappingURL=fnAdapter.js.map

@@ -1,5 +1,5 @@
 
-let _memoizedYears = Object.create(null);
+const _memoizedYears = Object.create(null);
 const _crYear = (fromYear) => {
   const year = (new Date()).getUTCFullYear()
   , arr = [];

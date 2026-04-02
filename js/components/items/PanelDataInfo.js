@@ -55,7 +55,7 @@ const InfoPartWithStyle = _ref => {
 };
 const _renderNdlLink = linkId => {
   if (!linkId) return null;
-  const Comp = _RouterNativeLink.default['NDL'];
+  const Comp = _RouterNativeLink.default.NDL;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
     linkId: linkId
   });

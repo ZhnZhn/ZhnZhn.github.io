@@ -1,19 +1,10 @@
 "use strict";
 
 exports.__esModule = true;
-exports.showOptionDialogImpl = exports.showDialogImpl = exports.getDialogConf = void 0;
+exports.showOptionDialogImpl = exports.showDialogImpl = void 0;
 var _asyncFn = require("../../routers/asyncFn");
 var _Factory = require("../logic/Factory");
-var _browserLogic = require("./browserLogic");
-const getDialogConf = (conf, chartType) => {
-  //DialogStatN
-  if (conf && conf.dialogConf) {
-    return conf;
-  }
-  const _browserId = chartType.split('_')[0];
-  return (0, _browserLogic.getSourceConfig)(_browserId, chartType);
-};
-exports.getDialogConf = getDialogConf;
+var _getDialogConf = require("./getDialogConf");
 const showDialogImpl = (slice, _ref) => {
   let {
     type,
@@ -22,7 +13,7 @@ const showDialogImpl = (slice, _ref) => {
   } = _ref;
   return slice[type] ? (0, _asyncFn.resolvePromise)({
     key: type
-  }) : (0, _Factory.crDialog)(browserType, getDialogConf(dialogConfOr, type)).then(Comp => {
+  }) : (0, _Factory.crDialog)(browserType, (0, _getDialogConf.getDialogConf)(dialogConfOr, type)).then(Comp => {
     slice[type] = true;
     return {
       key: type,

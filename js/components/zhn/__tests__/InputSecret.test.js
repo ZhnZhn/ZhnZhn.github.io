@@ -29,12 +29,12 @@ describe('InputSecret', () => {
       {
         user,
         rerender
-      } = setupUserEvent( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSecret.default, {
+      } = setupUserEvent(/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSecret.default, {
         refEl: refEl,
         placeholder: placeholder,
         onEnter: onEnter
       }));
-    let input = screen.getByPlaceholderText(placeholder);
+    const input = screen.getByPlaceholderText(placeholder);
 
     //2 Test onChange handle and removed attribute value
     const _changeValue = 'abcd';
@@ -67,7 +67,7 @@ describe('InputSecret', () => {
     const _onEnterTimes = 2;
     await user.type(input, _changeValue);
     //5.1 Test render
-    rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSecret.default, {
+    rerender(/*#__PURE__*/(0, _jsxRuntime.jsx)(_InputSecret.default, {
       refEl: refEl,
       placeholder: placeholder
     }));

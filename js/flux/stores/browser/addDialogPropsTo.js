@@ -33,7 +33,7 @@ const _checkItemDfIdCase = item => {
     _checkItemDfIdCase(item);
     return item.dialogProps;
   },
-  VALID_ITEM_ID_TYPE_REGEX = RegExp("^[A-Z_0-9]+$"),
+  VALID_ITEM_ID_TYPE_REGEX = /^[A-Z_0-9]+$/,
   _setItemFromTupleTo = (items, tuplesKey, tuple, crDialogItem) => {
     const _idType = "" + tuple[0];
     if (VALID_ITEM_ID_TYPE_REGEX.test(_idType)) {

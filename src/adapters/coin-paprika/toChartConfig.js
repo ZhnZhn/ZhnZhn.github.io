@@ -15,8 +15,8 @@ const _crMvOption = (
 
 const addToConfig = (
   config,
-  json,
-  option,
+  _json,
+  _option,
   data
 ) => {
   const {

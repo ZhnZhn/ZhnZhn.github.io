@@ -9,7 +9,7 @@ const getterSetter = function(
 ) {
   let value = initialValue;
   const _fnIsValid = validator || FN_TRUE;
-  return function(newValue) {
+  return (newValue) => {
     if (typeof newValue === 'undefined') {
       return value;
     }
@@ -23,7 +23,7 @@ const sumOfSquareDiffs = (
   oneVector,
   anotherVector
 ) => oneVector
- .map((component, i) => Math.pow(component - anotherVector[i], 2))
+ .map((component, i) => (component - anotherVector[i]) ** 2)
  //squareDiffs
  .reduce((a, b) => a + b, 0);
 
@@ -66,7 +66,7 @@ const Centroid = function(initialLocation, label) {
   this.label = getterSetter(label);
   this.updateLocation = points => {
     const pointsWithThisCentroid = points
-      .filter(point => point.label() == this.label());
+      .filter(point => point.label() === this.label());
     if (pointsWithThisCentroid.length > 0) {
       this.location(averageLocation(pointsWithThisCentroid));
     }
@@ -74,7 +74,10 @@ const Centroid = function(initialLocation, label) {
 };
 
 
-const kmeans = function(data, config) {
+const kmeans = (
+  data,
+  config
+) => {
   // default k
   const k = config.k || Math.round(Math.sqrt(data.length / 2))
   , iterations = config.iterations;
@@ -107,7 +110,7 @@ const kmeans = function(data, config) {
 const compareUnaryCentroid = (a, b) => a.centroid[0] - b.centroid[0];
 const compareUnaryPoint = (a, b) => a[0] - b[0];
 
-const _isValidValue = value => value % 1 == 0 & value > 0;
+const _isValidValue = value => value % 1 === 0 & value > 0;
 
 const clusterMaker = {
 
@@ -117,7 +120,7 @@ const clusterMaker = {
   data: getterSetter([], arrayOfArrays => {
     const n = arrayOfArrays[0].length;
     return arrayOfArrays
-      .map(array => array.length == n)
+      .map(array => array.length === n)
       .reduce((boolA, boolB) => boolA & boolB, true);
   }),
 
@@ -133,7 +136,7 @@ const clusterMaker = {
     return centroids.map(centroid => ({
       centroid: centroid.location(),
       points: points.reduce((arr, point) => {
-        if (point.label() == centroid.label()) {
+        if (point.label() === centroid.label()) {
           arr.push(point.location())
         }
         return arr;

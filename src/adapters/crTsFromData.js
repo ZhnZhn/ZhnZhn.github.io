@@ -33,7 +33,7 @@ const _crTsFromMonthData = (
 
 const crTsFromData = (
   json,
-  option
+  _option
 ) => {
   const data = json.data;
   if (!isArr(data)) {

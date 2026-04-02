@@ -1,1 +1,46 @@
-{"version":3,"sources":["../../../src/flux/logic/onCatch.js"],"names":["FETCH","CODE_429","ERROR","_assign","Object","assign","_addErrDescrTo","option","msg","caption","descr","alertCaption","alertDescr","_crDfErrDescr","error","errCaption","message","indexOf","ERR_10","token","_isMsgByCode","err","code","_crErrDescr","TypeError","ERR_TOO_MANY_REQUEST","ERR_NETWORK","onCatch","onFailed","_errDescr"],"mappings":";;;;;AAAA;;AAMA,MAAMA,KAAK,GAAG,OAAd;AAAA,MACEC,QAAQ,GAAG,KADb;AAAA,MAEEC,KAAK,GAAG,OAFV;AAIA,MAAMC,OAAO,GAAGC,MAAM,CAACC,MAAvB;;AAEA,MAAMC,cAAc,GAAG,CAACC,MAAD,EAASC,GAAT,KAAiB;AACtC,QAAM;AAAEC,IAAAA,OAAF;AAAWC,IAAAA;AAAX,MAAqBF,GAA3B;;AACAL,EAAAA,OAAO,CAACI,MAAD,EAAS;AACdI,IAAAA,YAAY,EAAEF,OADA;AAEdG,IAAAA,UAAU,EAAEF;AAFE,GAAT,CAAP;AAID,CAND;;AAQA,MAAMG,aAAa,GAAIC,KAAD,IAAY;AAChC,QAAM;AAAEC,IAAAA,UAAF;AAAcC,IAAAA,OAAO,GAAC;AAAtB,MAA6BF,KAAK,IAAI,EAA5C;AAAA,QACEL,OAAO,GAAGM,UAAU,IAAIb,KAD1B;AAEA,SAAOc,OAAO,CAACC,OAAR,CAAgBC,YAAOC,KAAvB,MAAkC,CAAC,CAAnC,GACHD,WADG,GAEH;AAAET,IAAAA,OAAF;AAAWC,IAAAA,KAAK,EAAEM;AAAlB,GAFJ;AAGD,CAND;;AAQA,MAAMI,YAAY,GAAG,CAACC,GAAD,EAAMC,IAAN,KAAeD,GAAG,CACrCL,OADkC,CAC1BC,OAD0B,CAClBK,IADkB,MACR,CAAC,CAD7B;;AAGA,MAAMC,WAAW,GAAIT,KAAD,IAAW;AAC7B,MAAIA,KAAK,YAAYU,SAArB,EAA+B;AAC7B,QAAIJ,YAAY,CAACN,KAAD,EAAQb,QAAR,CAAhB,EAAmC;AACjC,aAAOwB,yBAAP;AACD,KAFD,MAEO,IAAIL,YAAY,CAACN,KAAD,EAAQd,KAAR,CAAhB,EAAgC;AACrC,aAAO0B,gBAAP;AACD;AACF;;AACD,SAAOb,aAAa,CAACC,KAAD,CAApB;AACD,CATD;;AAWA,MAAMa,OAAO,GAAG,gBAAqC;AAAA,MAA5B;AAAEb,IAAAA,KAAF;AAASP,IAAAA,MAAT;AAAiBqB,IAAAA;AAAjB,GAA4B;;AACnD,QAAMC,SAAS,GAAGN,WAAW,CAACT,KAAD,CAA7B;;AACAR,EAAAA,cAAc,CAACC,MAAD,EAASsB,SAAT,CAAd;;AAEA,MAAI,OAAOD,QAAP,KAAoB,UAAxB,EAAoC;AAClCA,IAAAA,QAAQ,CAACrB,MAAD,CAAR;AACD;AACF,CAPD;;eASeoB,O","sourcesContent":["import {\r\n  ERR_10,\r\n  ERR_TOO_MANY_REQUEST,\r\n  ERR_NETWORK\r\n} from '../../constants/Msg';\r\n\r\nconst FETCH = 'fetch'\r\n, CODE_429 = '429'\r\n, ERROR = 'ERROR';\r\n\r\nconst _assign = Object.assign;\r\n\r\nconst _addErrDescrTo = (option, msg) => {\r\n  const { caption, descr } = msg;\r\n  _assign(option, {\r\n    alertCaption: caption,\r\n    alertDescr: descr\r\n  })\r\n}\r\n\r\nconst _crDfErrDescr = (error)  => {\r\n  const { errCaption, message='' } = error || {}\r\n  , caption = errCaption || ERROR;\r\n  return message.indexOf(ERR_10.token) !== -1\r\n    ? ERR_10\r\n    : { caption, descr: message };\r\n};\r\n\r\nconst _isMsgByCode = (err, code) => err\r\n .message.indexOf(code) !== -1;\r\n\r\nconst _crErrDescr = (error) => {\r\n  if (error instanceof TypeError){\r\n    if (_isMsgByCode(error, CODE_429)) {\r\n      return ERR_TOO_MANY_REQUEST;\r\n    } else if (_isMsgByCode(error, FETCH)) {\r\n      return ERR_NETWORK;\r\n    }\r\n  }\r\n  return _crDfErrDescr(error);\r\n};\r\n\r\nconst onCatch = function({ error, option, onFailed }){\r\n  const _errDescr = _crErrDescr(error);\r\n  _addErrDescrTo(option, _errDescr)\r\n\r\n  if (typeof onFailed === 'function') {\r\n    onFailed(option)\r\n  }\r\n};\r\n\r\nexport default onCatch\r\n"],"file":"onCatch.js"}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/logic/onCatch.js"
+ ],
+ "file": "../../../src/flux/logic/onCatch.js",
+ "names": [
+  "_Msg",
+  "require",
+  "FETCH",
+  "CODE_429",
+  "ERROR",
+  "_assign",
+  "Object",
+  "assign",
+  "_addErrDescrTo",
+  "option",
+  "msg",
+  "caption",
+  "descr",
+  "alertCaption",
+  "alertDescr",
+  "_crDfErrDescr",
+  "error",
+  "errCaption",
+  "message",
+  "indexOf",
+  "ERR_10",
+  "token",
+  "_isMsgByCode",
+  "err",
+  "code",
+  "_crErrDescr",
+  "TypeError",
+  "ERR_TOO_MANY_REQUEST",
+  "ERR_NETWORK",
+  "onCatch",
+  "_ref",
+  "onFailed",
+  "_errDescr",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,IAAA,GAAAC,OAAA;AAMA,MAAMC,KAAK,GAAG,OAAO;EACnBC,QAAQ,GAAG,KAAK;EAChBC,KAAK,GAAG,OAAO;AAEjB,MAAMC,OAAO,GAAGC,MAAM,CAACC,MAAM;AAE7B,MAAMC,cAAc,GAAGA,CAACC,MAAM,EAAEC,GAAG,KAAK;EACtC,MAAM;IAAEC,OAAO;IAAEC;EAAM,CAAC,GAAGF,GAAG;EAC9BL,OAAO,CAACI,MAAM,EAAE;IACdI,YAAY,EAAEF,OAAO;IACrBG,UAAU,EAAEF;EACd,CAAC,CAAC;AACJ,CAAC;AAED,MAAMG,aAAa,GAAIC,KAAK,IAAM;EAChC,MAAM;MAAEC,UAAU;MAAEC,OAAO,GAAC;IAAG,CAAC,GAAGF,KAAK,IAAI,CAAC,CAAC;IAC5CL,OAAO,GAAGM,UAAU,IAAIb,KAAK;EAC/B,OAAOc,OAAO,CAACC,OAAO,CAACC,WAAM,CAACC,KAAK,CAAC,KAAK,CAAC,CAAC,GACvCD,WAAM,GACN;IAAET,OAAO;IAAEC,KAAK,EAAEM;EAAQ,CAAC;AACjC,CAAC;AAED,MAAMI,YAAY,GAAGA,CAACC,GAAG,EAAEC,IAAI,KAAKD,GAAG,CACrCL,OAAO,CAACC,OAAO,CAACK,IAAI,CAAC,KAAK,CAAC,CAAC;AAE9B,MAAMC,WAAW,GAAIT,KAAK,IAAK;EAC7B,IAAIA,KAAK,YAAYU,SAAS,EAAC;IAC7B,IAAIJ,YAAY,CAACN,KAAK,EAAEb,QAAQ,CAAC,EAAE;MACjC,OAAOwB,yBAAoB;IAC7B,CAAC,MAAM,IAAIL,YAAY,CAACN,KAAK,EAAEd,KAAK,CAAC,EAAE;MACrC,OAAO0B,gBAAW;IACpB;EACF;EACA,OAAOb,aAAa,CAACC,KAAK,CAAC;AAC7B,CAAC;AAED,MAAMa,OAAO,GAAGC,IAAA,IAIV;EAAA,IAJW;IACfd,KAAK;IACLP,MAAM;IACNsB;EACF,CAAC,GAAAD,IAAA;EACC,MAAME,SAAS,GAAGP,WAAW,CAACT,KAAK,CAAC;EACpCR,cAAc,CAACC,MAAM,EAAEuB,SAAS,CAAC;EAEjC,IAAI,OAAOD,QAAQ,KAAK,UAAU,EAAE;IAClCA,QAAQ,CAACtB,MAAM,CAAC;EAClB;AACF,CAAC;AAAC,IAAAwB,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaN,OAAO"
+}

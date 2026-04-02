@@ -36,7 +36,7 @@ const mfi = (data, period) => {
       nNotFullPoint += 1;
     }
     if (i < nPeriod) {
-      if (i != 0) {
+      if (i !== 0) {
         if (bTp.gt(dataMfi[i - 1].tp)) {
           bPositiveFlow = bPositiveFlow.plus(bRmf);
           isNegative = false;

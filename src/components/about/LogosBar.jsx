@@ -1,5 +1,3 @@
-
-
 import ItemStack from '../zhn/ItemStack';
 import { EVENODD_PROPS } from '../zhn/svg/Svg';
 

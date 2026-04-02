@@ -11,7 +11,7 @@ const _crMvOption = (btTitle, data, dColumn) => ({
   data,
   dColumn
 });
-const addToConfig = (config, json, option, data) => {
+const addToConfig = (config, _json, _option, data) => {
   const {
     dVolume,
     dColumn,

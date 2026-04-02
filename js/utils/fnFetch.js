@@ -43,7 +43,7 @@ const _promiseAll = _ref => {
     _limitRemaining = headers && _isFn(headers.get) && _isFn(getLimitRemaiming) ? getLimitRemaiming(headers) : void 0;
   return Promise.all([Promise.resolve(_limitRemaining), response[propName](), Promise.resolve(status)]);
 };
-const _fFetch = propName => function (_ref2) {
+const _fFetch = propName => _ref2 => {
   let {
     uri,
     option = {},
@@ -124,7 +124,7 @@ const _fFetch = propName => function (_ref2) {
 };
 const fetchJson = exports.fetchJson = _fFetch('json');
 const fetchTxt = exports.fetchTxt = _fFetch('text');
-const fetchJsonHm = (url, onCatch) => fetch(url).then(res => {
+const fetchJsonHm = url => fetch(url).then(res => {
   if (!res.ok) {
     throw new Error(`Network response error: ${res.status}`);
   }

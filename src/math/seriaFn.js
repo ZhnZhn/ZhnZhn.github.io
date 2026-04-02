@@ -97,7 +97,7 @@ export const normalize = (
   }
 
   const _d = [];
-  for (let p of d){
+  for (const p of d){
     _d.push([
       getX(p),
       parseFloat(
@@ -132,7 +132,7 @@ export const filterTrimZero = (data) => {
 export const hasZeroOrLessValue = data => {
   const _getY = fGetY(data);
   if (!_getY) { return false; }
-  for (let point of data) {
+  for (const point of data) {
     if (_getY(point) <= 0) {
       return true;
     }

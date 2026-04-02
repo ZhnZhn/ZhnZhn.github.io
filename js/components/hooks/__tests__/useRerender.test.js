@@ -28,6 +28,7 @@ describe('useForceUpdate', () => {
       renderSpy();
       return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
         "data-testid": "bt",
+        type: "button",
         onClick: _rerender,
         children: "Rerender"
       });

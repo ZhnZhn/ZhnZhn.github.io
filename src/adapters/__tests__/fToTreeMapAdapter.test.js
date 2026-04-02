@@ -2,7 +2,7 @@ import {
   crRoundedSubTotal
 } from "../fToTreeMapAdapter";
 
-describe("crRoundedSubTotal", ()=>{
+describe("crRoundedSubTotal", ()=>{  
   const fn = crRoundedSubTotal;
   test("should return array with two values", ()=>{
     //LUX-2022 the EI Primary energy consumption in EJ
@@ -20,6 +20,5 @@ describe("crRoundedSubTotal", ()=>{
     //WLD-2022 the EI Primary energy consumption in EJ
     expect(fn(494.0520245, 109.98362934, 604, 0)).toEqual([494, 110])
     expect(fn(81.78807947019868, 18.211920529801326, 100)).toEqual([82, 18])
-
   })
 })

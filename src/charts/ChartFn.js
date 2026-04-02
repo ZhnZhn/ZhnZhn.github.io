@@ -24,7 +24,7 @@ import {
   formatAllNumber
 } from '../utils/numberFormatFn';
 
-import { fSecondYAxis } from './Chart';
+import fSecondYAxis from './fSecondYAxis';
 
 const _assign = Object.assign
 
@@ -297,5 +297,5 @@ export const setYToPoints = (
   y
 ) => {
   if (y == null) { return; }
-  data.forEach(point => point.y = y)
+  data.forEach(point => { point.y = y; })
 }

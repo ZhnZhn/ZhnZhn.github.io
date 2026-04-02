@@ -50,7 +50,7 @@ export const safeLoopOfArray = (
   onItem
 ) => {
   if (_isArr(items)) {
-    for (let item of items) {
+    for (const item of items) {
       onItem(item)
     }
     return !0;

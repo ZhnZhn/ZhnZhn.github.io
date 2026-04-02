@@ -8,7 +8,7 @@ const _crWebsiteLink = fCrItemLinkByUrl(
 
 //Caution: The results depend on available reported data, and the level of details may vary.
 
-const _crDescr = json => DESCR_EMPTY;
+const _crDescr = _json => DESCR_EMPTY;
 
 export const toDescr = (
   json,

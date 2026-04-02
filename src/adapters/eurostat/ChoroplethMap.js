@@ -198,7 +198,7 @@ const _crRowEl = (
   , el = _crEl('p', '',
      `opacity: 0.7; background: ${color}; padding: 5px 6px; cursor: pointer;`
    )
-  el.addEventListener('click', function(event){
+  el.addEventListener('click', (_evt) => {
     wg.updateCluster(cluster, color, from, to)
   })
   el.innerHTML = `<span>${domSanitize(from)}&ndash;${domSanitize(to)}<span>
@@ -319,14 +319,14 @@ const _crGeoJson = (geoJson) => {
   return _geoJson;
 }
 
-let hmUrlGeoJson = {};
+const hmUrlGeoJson = {};
 const _getGeoJsonAsync = (url) => {
   const geoJson = hmUrlGeoJson[url];
   return geoJson
    ? resolvePromise(_crGeoJson(geoJson))
    : fetch(url)
-     .then(response => response.json())
-     .then(geoJson => hmUrlGeoJson[url] = geoJson);
+      .then(response => response.json())
+      .then(geoJson => hmUrlGeoJson[url] = geoJson);
 };
 
 

@@ -40,7 +40,11 @@ const _crErrDescr = (error) => {
   return _crDfErrDescr(error);
 };
 
-const onCatch = function({ error, option, onFailed }){
+const onCatch = ({
+  error,
+  option,
+  onFailed
+}) => {
   const _errDescr = _crErrDescr(error);
   _addErrDescrTo(option, _errDescr)
 

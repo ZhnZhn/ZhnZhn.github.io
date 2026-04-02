@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/stores/getDialogConf.js"
+ ],
+ "file": "../../../src/flux/stores/getDialogConf.js",
+ "names": [
+  "_browserLogic",
+  "require",
+  "getDialogConf",
+  "conf",
+  "chartType",
+  "dialogConf",
+  "_browserId",
+  "split",
+  "getSourceConfig",
+  "exports"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,aAAA,GAAAC,OAAA;AAEO,MAAMC,aAAa,GAAGA,CAC3BC,IAAI,EACJC,SAAS,KACN;EACH;EACA,IAAID,IAAI,IAAIA,IAAI,CAACE,UAAU,EAAE;IAC3B,OAAOF,IAAI;EACb;EACA,MAAMG,UAAU,GAAGF,SAAS,CAACG,KAAK,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;EAC1C,OAAO,IAAAC,6BAAe,EAACF,UAAU,EAAEF,SAAS,CAAC;AAC/C,CAAC;AAAAK,OAAA,CAAAP,aAAA,GAAAA,aAAA"
+}

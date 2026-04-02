@@ -9,7 +9,7 @@ var _seriaFn = require("../math/seriaFn");
 var _seriaHelperFn = require("../math/seriaHelperFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _numberFormatFn = require("../utils/numberFormatFn");
-var _Chart = require("./Chart");
+var _fSecondYAxis = _interopRequireDefault(require("./fSecondYAxis"));
 const _assign = Object.assign,
   C1_SECOND_Y_AXIS = '#f45b5b',
   C2_SECOND_Y_AXIS = '#f7a35c',
@@ -40,7 +40,7 @@ const _addSeries = _ref => {
   let _color;
   if (hasSecondYAxis) {
     _color = _crYAxisColor(chart);
-    chart.addAxis((0, _Chart.fSecondYAxis)(label, _color));
+    chart.addAxis((0, _fSecondYAxis.default)(label, _color));
     series.yAxis = label;
     series.color = _color;
   }
@@ -212,7 +212,9 @@ const setYToPoints = (data, y) => {
   if (y == null) {
     return;
   }
-  data.forEach(point => point.y = y);
+  data.forEach(point => {
+    point.y = y;
+  });
 };
 exports.setYToPoints = setYToPoints;
 //# sourceMappingURL=ChartFn.js.map

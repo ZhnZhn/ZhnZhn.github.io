@@ -8,7 +8,7 @@ import { initChartTheme } from './charts/initChartTheme';
 const _isHighchartsWarning = str => typeof str === 'string'
  && str.indexOf('Highcharts warning') !== -1;
 
-let consoleWarn = (console || {}).warn;
+const consoleWarn = (console || {}).warn;
 
 const _clearHighchartsWarning = () => {
   if (consoleWarn) {
@@ -21,7 +21,7 @@ const _clearHighchartsWarning = () => {
   }
 };
 
-const _initRaven = function(){
+const _initRaven = () => {
   /* eslint-disable no-undef */
   if (process.env.NODE_ENV === 'production'){
   /* eslint-enable no-undef */

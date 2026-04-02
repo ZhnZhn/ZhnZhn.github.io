@@ -16,12 +16,18 @@ import {
 import {
   stockAth
 } from './tp/tpStock';
+/*
 import {
   sparkStackedArea,
   sparkTreeMap
 } from './tp/tpSpark';
+*/
 import { treeMapValue } from './tp/tpTreeMap';
 import { donutValue } from './tp/tpDonut';
+
+import _fFormatter from './crTooltipFormatter';
+
+/*
 import { addHideHandler } from './tp/tpFn';
 
 import { crTpId } from './ChartFn';
@@ -72,6 +78,7 @@ const _fFormatter = (option) => function(){
      point
    });
 };
+*/
 
 export const tooltipValueDmy = _fFormatter({...splineValueDmy})
 export const tooltipValueTdmyIf = _fFormatter({...splineValueTdmyIf})
@@ -86,7 +93,7 @@ export const tooltipAth = _fFormatter({...stockAth})
 
 export const tooltipDonut = _fFormatter({...donutValue})
 
-export const tooltipSparkStackedArea = _fFormatter({...sparkStackedArea})
-export const tooltipSparkTreeMap = _fFormatter({...sparkTreeMap})
+//export const tooltipSparkStackedArea = _fFormatter({...sparkStackedArea})
+//export const tooltipSparkTreeMap = _fFormatter({...sparkTreeMap})
 
 export const tooltipTreeMap = _fFormatter({...treeMapValue})

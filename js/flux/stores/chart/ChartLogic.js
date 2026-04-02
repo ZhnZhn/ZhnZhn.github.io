@@ -105,7 +105,7 @@ const _confById = id => c => _getConfigId(c) === id;
 const _getConfigKey = c => c.zhConfig.key;
 const isChartExistImpl = (slice, chartType, key) => {
   const configs = (0, _getSubSliceOf.getSubSliceOf)(slice, chartType)[1];
-  for (let config of configs) {
+  for (const config of configs) {
     if (_getConfigKey(config) === key) {
       return true;
     }

@@ -74,7 +74,6 @@ const _renderRows = props => {
         }, _key);
       }));
     return /*#__PURE__*/(0, _jsxRuntime.jsx)("tr", {
-      role: "row",
       children: _elTds
     }, _rId);
   });

@@ -46,7 +46,7 @@ const MenuItems = _ref2 => {
     onToggle
   } = _ref2;
   /*eslint-disable no-unused-vars*/
-  const [rank, ...restHeader] = headers
+  const [_rank, ...restHeader] = headers
     /*eslint-enable no-unused-vars*/,
     _colorBlack = (0, _Style.getColorBlack)();
   return (0, _uiApi.safeMap)(restHeader, (h, index) => (0, _uiApi.isArr)(h.items) ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MenuPart, {

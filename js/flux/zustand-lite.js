@@ -12,7 +12,9 @@ const _createStoreImpl = createState => {
     if (!_objectIs(nextState, state)) {
       const previousState = state;
       state = (replace != null ? replace : typeof nextState !== "object" || nextState === null) ? nextState : _assign({}, state, nextState);
-      listeners.forEach(listener => listener(state, previousState));
+      listeners.forEach(listener => {
+        listener(state, previousState);
+      });
     }
   };
   const getState = () => state;

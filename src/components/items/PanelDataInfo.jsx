@@ -53,7 +53,7 @@ const InfoPartWithStyle = ({
 
 const _renderNdlLink = (linkId) => {
   if (!linkId) return null;
-  const Comp = RouterNativeLink['NDL'];
+  const Comp = RouterNativeLink.NDL;
   return (<Comp linkId={linkId} />);
 };
 

@@ -158,7 +158,7 @@ const InputSlider = ({
     }
   }
   , _calcPositionFromEvent = (evt) => {
-    const _trackOffset = _getRefValue(_refTrack).getBoundingClientRect()['left']
+    const _trackOffset = _getRefValue(_refTrack).getBoundingClientRect().left
     return _isNumber(_trackOffset)
       ? getClientX(evt) - _trackOffset
       : NaN;

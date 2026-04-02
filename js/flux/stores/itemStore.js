@@ -8,7 +8,7 @@ var _LogicFn = require("../logic/LogicFn");
 var _LoadImpl = require("../logic/LoadImpl");
 var _ChartLogic = require("./chart/ChartLogic");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
-var _dialogLogic = require("./dialogLogic");
+var _getDialogConf = require("./getDialogConf");
 var _browserLogic = require("./browserLogic");
 var _settingStore = require("../stores/settingStore");
 var _loadingStore = require("./loadingStore");
@@ -110,7 +110,7 @@ const _loadItemCompleted = (option, config) => {
   if (isChartExist(CHARTS, chartType, key)) {
     return;
   }
-  const _dialogConf = dialogConf || (0, _dialogLogic.getDialogConf)(void 0, chartType),
+  const _dialogConf = dialogConf || (0, _getDialogConf.getDialogConf)(void 0, chartType),
     {
       chartSlice,
       Comp
@@ -171,7 +171,7 @@ const loadItemByQuery = option => {
 exports.loadItemByQuery = loadItemByQuery;
 const showItemsContainer = (chartType, browserType, dialogConfOr) => {
   (0, _browserLogic.setMenuItemOpen)(chartType, browserType);
-  const dialogConf = (0, _dialogLogic.getDialogConf)(dialogConfOr, chartType);
+  const dialogConf = (0, _getDialogConf.getDialogConf)(dialogConfOr, chartType);
   const {
     chartSlice,
     Comp

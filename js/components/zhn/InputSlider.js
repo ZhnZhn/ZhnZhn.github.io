@@ -148,7 +148,7 @@ const InputSlider = _ref => {
       }
     },
     _calcPositionFromEvent = evt => {
-      const _trackOffset = _getRefValue(_refTrack).getBoundingClientRect()['left'];
+      const _trackOffset = _getRefValue(_refTrack).getBoundingClientRect().left;
       return _isNumber(_trackOffset) ? (0, _uiApi.getClientX)(evt) - _trackOffset : NaN;
     },
     _setValueFromPosition = evt => {

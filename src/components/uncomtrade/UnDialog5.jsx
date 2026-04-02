@@ -150,7 +150,7 @@ const UnDialog5 = memoIsShow((
 
    /*eslint-disable no-unused-vars*/
    , [
-     setFreq,
+     _setFreq,
      getFreq
    ] = useProperty(DF_FREQ, DF_FREQ)
    /*eslint-enable no-unused-vars*/
@@ -268,7 +268,7 @@ const UnDialog5 = memoIsShow((
           placeholder={FREQUENCY_PLACEHOLDER}
           propCaption="c"
           options={FREQUENCY_OPTIONS}
-          //onSelect={setFreq}
+          //onSelect={_setFreq}
         />
       </ShowHide>
       <RowChartDate

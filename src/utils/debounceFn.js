@@ -12,8 +12,8 @@ const debounceFn = (
       fn(...args)
       timeId = null
     }, period)
-        
-    debounced.cancel = function() {
+
+    debounced.cancel = () => {
       clearTimeout(timeId)
     }
   }

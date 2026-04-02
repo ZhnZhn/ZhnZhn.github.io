@@ -62,4 +62,4 @@ export const findCategoryIndex = (
   option
 ) => crItemId(option)
   .split(".")
-  .findIndex(token => token === "")
+  .indexOf("")
