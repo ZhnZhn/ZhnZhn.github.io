@@ -72,11 +72,6 @@
     "babel-jest": "^30.3.0",
     "babel-loader": "^10.1.1",
     "clean-css": "^5.3.3",
-    "eslint": "^9.39.4",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-testing-library": "^7.16.2",
     "html-webpack-plugin": "^5.6.6",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0",
@@ -87,12 +82,6 @@
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.3"
-  },
-  "overrides": {
-    "js-yaml": "~4.1.1",
-    "glob": "~11.1.0",
-    "serialize-javascript": "~7.0.3",
-    "brace-expansion": "~5.0.5"
   },
   "jest": {
     "testEnvironment": "jsdom",
@@ -146,5 +135,5 @@
       "<rootDir>/js/flux/logic/",
       "<rootDir>/js/flux/stores/"
     ]
-  }
+  }  
 }
