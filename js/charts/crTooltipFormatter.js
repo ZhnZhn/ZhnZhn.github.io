@@ -2,6 +2,8 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _dateFormatFn = require("../utils/dateFormatFn");
+var _numberFormatFn = require("../utils/numberFormatFn");
 var _tpFn = require("./tp/tpFn");
 var _ChartFn = require("./ChartFn");
 const _addCloseHandler = (id, point) => {
@@ -11,7 +13,7 @@ const _fFormatter = option => function () {
   const {
       fnTemplate,
       onAfterRender = _addCloseHandler,
-      fnDateFormat = toWmdy,
+      fnDateFormat = _dateFormatFn.toWmdy,
       isWithColor,
       isWithValueText,
       isWithValue
@@ -27,9 +29,7 @@ const _fFormatter = option => function () {
     date = fnDateFormat(point.x),
     color = isWithColor ? point.color || series.color : void 0,
     valueText = isWithValueText ? zhValueText || name : 'Value',
-    value = isWithValue
-    //? toNumberFormat(point.y)
-    ? formatNumber(point.y) : null,
+    value = isWithValue ? (0, _numberFormatFn.formatNumber)(point.y) : null,
     id = (0, _ChartFn.crTpId)();
   onAfterRender(id, point);
   return fnTemplate({

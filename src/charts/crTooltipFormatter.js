@@ -1,3 +1,6 @@
+import { toWmdy } from '../utils/dateFormatFn';
+import { formatNumber } from '../utils/numberFormatFn';
+
 import { addHideHandler } from './tp/tpFn';
 
 import { crTpId } from './ChartFn';
@@ -32,7 +35,6 @@ const _fFormatter = (option) => function(){
         ? zhValueText || name
         : 'Value'
    , value = isWithValue
-        //? toNumberFormat(point.y)
         ? formatNumber(point.y)
         : null
    , id = crTpId();
