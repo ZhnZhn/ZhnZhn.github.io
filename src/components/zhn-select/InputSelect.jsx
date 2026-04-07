@@ -66,6 +66,7 @@ const FN_NOOP = () => {}
    isInput: !0
 } : void 0;
 
+const DF_REG_INPUT = /[A-Za-z0-9()^ ]/;
 const InputSelect = ({
   labelId,
   propCaption=DF_PROP_NAME_CAPTION,
@@ -74,7 +75,7 @@ const InputSelect = ({
   optionName="",
   isWithInput=!1,
   maxInput=10,
-  regInput=/[A-Za-z0-9()^ ]/,
+  regInput=DF_REG_INPUT,
 
   style,
   width,
