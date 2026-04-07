@@ -3,10 +3,10 @@ const N = 6
 , FN_TRUE = () => true;
 
 // convenience functions
-const getterSetter = function(
+const getterSetter = (
   initialValue,
   validator
-) {
+) => {
   let value = initialValue;
   const _fnIsValid = validator || FN_TRUE;
   return (newValue) => {
