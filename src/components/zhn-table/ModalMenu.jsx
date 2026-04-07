@@ -3,10 +3,8 @@ import {
   safeMap
 } from "../uiApi";
 
-import {
-  CL_OPEN_CLOSE_BLACK,
-  getColorBlack
-} from "../styleFn";
+import { getColorBlack } from "../styles/paletteFn";
+import { CL_OPEN_CLOSE_BLACK } from "../styleFn";
 
 import OpenClose from "../zhn/OpenClose";
 import InputSwitch from "../zhn/InputSwitch";

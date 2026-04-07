@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
-var _styleFn = require("../../components/styleFn");
+var _paletteFn = require("../../components/styles/paletteFn");
 var _isTypeFn = require("../../utils/isTypeFn");
 var _pipe = _interopRequireDefault(require("../../utils/pipe"));
 var _crRouter = require("../../utils/crRouter");
@@ -23,7 +23,7 @@ const TWO_YEARS_DAYS = 501,
   BBANDS_M = 'Real Middle Band',
   BBANDS_L = 'Real Lower Band',
   _crColorBlackStyle = {
-    color: (0, _styleFn.getColorBlack)()
+    color: (0, _paletteFn.getColorBlack)()
   },
   S_RED = {
     color: '#f44336'

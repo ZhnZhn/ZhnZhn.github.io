@@ -1,7 +1,5 @@
-import {
-  getColorBlack,
-  crAbsoluteTopLeftStyle
-} from '../styleFn';
+import { getColorBlack } from '../styles/paletteFn';
+import { crAbsoluteTopLeftStyle } from '../styleFn';
 
 export const TOKEN_NAN = '―'
 export const CL_LINK = "native-link"

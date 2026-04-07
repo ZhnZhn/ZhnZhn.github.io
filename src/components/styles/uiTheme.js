@@ -1,8 +1,3 @@
-export {
-  UI_THEME_OPTIONS,
-  getColorBlack
-} from './paletteFn';
-
 import { setChartTheme } from '../../charts/ChartUiTheme';
 import {
   DF_THEME_ID,

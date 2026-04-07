@@ -1,4 +1,4 @@
-import { getColorBlack } from '../components/styleFn';
+import { getColorBlack } from '../components/styles/paletteFn';
 
 import {
   fTitle,
@@ -7,17 +7,10 @@ import {
   fCreditsRightBottom
 } from './Chart';
 
-import {
-  //sparkStackedArea,
-  sparkTreeMap
-} from './tp/tpSpark';
-
+import { sparkTreeMap } from './tp/tpSpark';
 import _fFormatter from './crTooltipFormatter';
-//import { tooltipSparkTreeMap } from './Tooltip';
-
 
 const tooltipSparkTreeMap = _fFormatter({...sparkTreeMap})
-
 
 export const CONFIG_TREE_MAP = {
   //data : data,

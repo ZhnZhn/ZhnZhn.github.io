@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.fYAxisOpposite = exports.fXAxisOpposite = exports.fTooltip = exports.fTitle = exports.fSubtitle = exports.fSeriaMarker = exports.fPlotOptionsSeries = exports.fPlotOptionsColumn = exports.fPlotOptionsArea = exports.fPlotLine = exports.fNavigation = exports.fLegend = exports.fEventsMouseOver = exports.fCrosshair = exports.fCreditsRightBottom = exports.crType = exports.crCategoryDataLabels = exports.crAreaConfig = exports.STACKED_HEIGHT = exports.SPACING_TOP = exports.SPACING_BOTTOM = exports.SEMIDONUT_TITLE_Y = exports.SEMIDONUT_SUBTITLE_Y = exports.MARGIN_RIGHT = exports.LEGEND_ROW_HEIGHT = exports.CHART_HEIGHT = void 0;
-var _styleFn = require("../components/styleFn");
+var _paletteFn = require("../components/styles/paletteFn");
 var _isTypeFn = require("../utils/isTypeFn");
 var _domFn = require("../utils/domFn");
 var _objFn = require("../utils/objFn");
@@ -144,7 +144,7 @@ const crAreaConfig = function (_temp) {
 exports.crAreaConfig = crAreaConfig;
 const crCategoryDataLabels = isEnabled => ({
   enabled: isEnabled,
-  color: (0, _styleFn.getColorBlack)(),
+  color: (0, _paletteFn.getColorBlack)(),
   crop: false,
   overflow: 'allow',
   style: {

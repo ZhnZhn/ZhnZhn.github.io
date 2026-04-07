@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _paletteFn = require("../styles/paletteFn");
 var _styleFn = require("../styleFn");
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
@@ -13,7 +14,7 @@ const S_INPUT_SWITCH = {
     padding: '6px 0'
   },
   _crHrStyle = () => ({
-    borderColor: (0, _styleFn.getColorBlack)(),
+    borderColor: (0, _paletteFn.getColorBlack)(),
     marginTop: 2,
     marginBottom: 2
   }),
@@ -47,7 +48,7 @@ const MenuItems = _ref2 => {
   /*eslint-disable no-unused-vars*/
   const [_rank, ...restHeader] = headers
     /*eslint-enable no-unused-vars*/,
-    _colorBlack = (0, _styleFn.getColorBlack)();
+    _colorBlack = (0, _paletteFn.getColorBlack)();
   return (0, _uiApi.safeMap)(restHeader, (h, index) => (0, _uiApi.isArr)(h.items) ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MenuPart, {
     item: h,
     color: _colorBlack,

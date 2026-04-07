@@ -1,8 +1,6 @@
 import { isArr } from './uiApi';
 import { HAS_WIDE_SCREEN } from './has';
 
-export { getColorBlack } from './styles/uiTheme';
-
 export const getScreenCase = (
   wideScreenCase,
   narrowScreenCase

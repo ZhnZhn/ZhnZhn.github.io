@@ -7,10 +7,8 @@ import useRerender from '../hooks/useRerender';
 
 import useSettingsMenuMore from './useSettingsMenuMore';
 
-import {
-  UI_THEME_OPTIONS,
-  setUiTheme
-} from '../styles/uiTheme';
+import { UI_THEME_OPTIONS } from '../styles/paletteFn';
+import { setUiTheme } from '../styles/uiTheme';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import TabPane from '../zhn-tab/TabPane';

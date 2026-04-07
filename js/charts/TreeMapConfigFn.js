@@ -3,12 +3,10 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.crTreeMapSeria = exports.crTreeMapConfig = exports.CONFIG_TREE_MAP = void 0;
-var _styleFn = require("../components/styleFn");
+var _paletteFn = require("../components/styles/paletteFn");
 var _Chart = require("./Chart");
 var _tpSpark = require("./tp/tpSpark");
 var _crTooltipFormatter = _interopRequireDefault(require("./crTooltipFormatter"));
-//import { tooltipSparkTreeMap } from './Tooltip';
-
 const tooltipSparkTreeMap = (0, _crTooltipFormatter.default)({
   ..._tpSpark.sparkTreeMap
 });
@@ -24,7 +22,7 @@ const CONFIG_TREE_MAP = exports.CONFIG_TREE_MAP = {
     style: {
       fontSize: '15px',
       fontWeight: 'bold',
-      color: (0, _styleFn.getColorBlack)(),
+      color: (0, _paletteFn.getColorBlack)(),
       textShadow: 'none'
     }
   },

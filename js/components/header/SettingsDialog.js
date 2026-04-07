@@ -9,6 +9,7 @@ var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useFocus = require("../hooks/useFocus");
 var _useRerender = _interopRequireDefault(require("../hooks/useRerender"));
 var _useSettingsMenuMore = _interopRequireDefault(require("./useSettingsMenuMore"));
+var _paletteFn = require("../styles/paletteFn");
 var _uiTheme = require("../styles/uiTheme");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
 var _TabPane = _interopRequireDefault(require("../zhn-tab/TabPane"));
@@ -74,7 +75,7 @@ const SettingsDialog = (0, _memoIsShow.default)(_ref => {
         title: "Options",
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_PaneOptions.default, {
           titleStyle: S_TITLE_OPTION,
-          uiThemeOptions: _uiTheme.UI_THEME_OPTIONS,
+          uiThemeOptions: _paletteFn.UI_THEME_OPTIONS,
           onChangeTheme: _setUiTheme
         })
       })]

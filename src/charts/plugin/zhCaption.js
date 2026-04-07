@@ -1,8 +1,10 @@
 import {
   S_INLINE,
-  S_NONE,
-  getColorBlack
+  S_NONE
 } from '../../components/styleFn';
+import {
+  getColorBlack
+} from '../../components/styles/paletteFn';
 
 const _crTextStyle = () => ({
   color: getColorBlack(),

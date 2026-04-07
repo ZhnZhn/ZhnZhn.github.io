@@ -1,11 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.setUiTheme = exports.getColorBlack = exports.UI_THEME_OPTIONS = void 0;
-var _paletteFn = require("./paletteFn");
-exports.UI_THEME_OPTIONS = _paletteFn.UI_THEME_OPTIONS;
-exports.getColorBlack = _paletteFn.getColorBlack;
+exports.setUiTheme = void 0;
 var _ChartUiTheme = require("../../charts/ChartUiTheme");
+var _paletteFn = require("./paletteFn");
 let _uiThemeId;
 const _setUiThemeImpl = uiThemeId => {
   _uiThemeId = (0, _paletteFn.crUiThemeId)(uiThemeId);

@@ -1,4 +1,4 @@
-import { getColorBlack } from '../components/styleFn';
+import { getColorBlack } from '../components/styles/paletteFn';
 
 import {
   isObj,

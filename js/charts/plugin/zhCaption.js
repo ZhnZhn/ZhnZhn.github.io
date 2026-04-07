@@ -3,8 +3,9 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _styleFn = require("../../components/styleFn");
+var _paletteFn = require("../../components/styles/paletteFn");
 const _crTextStyle = () => ({
-    color: (0, _styleFn.getColorBlack)(),
+    color: (0, _paletteFn.getColorBlack)(),
     'font-size': '16px',
     'font-weight': 800
   }),

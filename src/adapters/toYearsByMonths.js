@@ -18,7 +18,7 @@ import {
 
 import {
   getColorBlack
-} from '../components/styleFn';
+} from '../components/styles/paletteFn';
 
 import {
   NEGATIVE_INFINITY,

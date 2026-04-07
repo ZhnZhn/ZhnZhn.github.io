@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.crSvgMoreStyle = exports.crNaNStyle = exports.TOKEN_NAN = exports.S_WRAPPER_DIV = exports.S_UP = exports.S_TH_UP = exports.S_TH_MORE_SPAN = exports.S_TH_DOWN = exports.S_THEAD = exports.S_TH = exports.S_TD = exports.S_TABLE = exports.S_MENU_MORE = exports.S_DOWN = exports.S_BT_SVG_MORE = exports.CL_LINK = exports.CL_GRID = void 0;
+var _paletteFn = require("../styles/paletteFn");
 var _styleFn = require("../styleFn");
 const TOKEN_NAN = exports.TOKEN_NAN = '―';
 const CL_LINK = exports.CL_LINK = "native-link";
@@ -44,12 +45,12 @@ const S_BT_SVG_MORE = exports.S_BT_SVG_MORE = {
   marginRight: 4
 };
 const crSvgMoreStyle = () => ({
-  fill: (0, _styleFn.getColorBlack)(),
-  stroke: (0, _styleFn.getColorBlack)()
+  fill: (0, _paletteFn.getColorBlack)(),
+  stroke: (0, _paletteFn.getColorBlack)()
 });
 exports.crSvgMoreStyle = crSvgMoreStyle;
 const crNaNStyle = () => ({
-  color: (0, _styleFn.getColorBlack)(),
+  color: (0, _paletteFn.getColorBlack)(),
   fontWeight: 'bold'
 });
 exports.crNaNStyle = crNaNStyle;
