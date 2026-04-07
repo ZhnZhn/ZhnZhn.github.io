@@ -98,7 +98,7 @@ const EmberApi = {
   },
   checkResponse(json) {
     if (!(0, _isTypeFn.isArr)(json) && !(0, _isTypeFn.isArr)((json || {}).data)) {
-      throw (0, _fnAdapter.crError)();
+      throw (0, _AdapterFn.crError)();
     }
   }
 };

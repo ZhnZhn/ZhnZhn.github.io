@@ -1,8 +1,3 @@
-export {
-  getDaysFromYmd,
-  crError
-} from '../AdapterFn';
-
 import {
   ymdhmsToUTC,
   crZhConfig

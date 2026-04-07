@@ -1,9 +1,3 @@
-export {
-  valueMoving,
-  crValueMoving
-} from "../AdapterFn";
-
-
 import {
   isArr,
   isNumber

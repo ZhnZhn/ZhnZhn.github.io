@@ -2,9 +2,9 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _AvFn = require("../av/AvFn");
 var _crAdapterType = require("../crAdapterType1");
-var _fnAdapter = require("./fnAdapter");
-const _crData = (0, _fnAdapter.fCrData)('reportedEPS', 'fiscalDateEnding', 'round');
+const _crData = (0, _AvFn.fCrData)('reportedEPS', 'fiscalDateEnding', 'round');
 const crData = (json, option) => {
   const {
       dfPeriod

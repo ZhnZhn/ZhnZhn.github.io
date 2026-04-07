@@ -5,7 +5,9 @@ import { useToggle } from '../hooks/useToggle';
 import useBrowserShow from '../hooks/useBrowserShow';
 
 import {
-  saveWatchList,
+  saveWatchList
+} from '../../flux/watch-list/watchListStore';
+import {
   showDialogEditGroups,
   showDialogEditLists
 } from './Handlers';

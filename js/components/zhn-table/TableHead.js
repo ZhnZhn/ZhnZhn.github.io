@@ -6,6 +6,7 @@ exports.default = void 0;
 var _arrFn = require("../../utils/arrFn");
 var _fUseKey = require("../hooks/fUseKey");
 var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
+var _styleFn = require("../styleFn");
 var _tableFn = require("./tableFn");
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -92,7 +93,7 @@ const TableHead = props => {
     }
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("thead", {
-    className: _Style.CL_BLACK,
+    className: _styleFn.CL_BLACK,
     style: _Style.S_THEAD,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("tr", {
       children: _renderHeader(props, _hThKeyEnter)

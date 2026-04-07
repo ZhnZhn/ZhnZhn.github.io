@@ -7,6 +7,7 @@ var _uiApi = require("../uiApi");
 var _styleFn = require("../styleFn");
 var _useToggle = require("../hooks/useToggle");
 var _useBrowserShow = _interopRequireDefault(require("../hooks/useBrowserShow"));
+var _watchListStore = require("../../flux/watch-list/watchListStore");
 var _Handlers = require("./Handlers");
 var _Browser = _interopRequireDefault(require("../zhn/Browser"));
 var _BrowserCaption = _interopRequireDefault(require("../zhn/BrowserCaption"));
@@ -37,7 +38,7 @@ const WatchBrowser = props => {
     {
       groups
     } = watchList || {},
-    [isModeEdit, _toolbarButtons] = useToolbarButtons(_Handlers.saveWatchList);
+    [isModeEdit, _toolbarButtons] = useToolbarButtons(_watchListStore.saveWatchList);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Browser.default, {
     isShow: isShow,
     onKeyDown: hKeyDown,

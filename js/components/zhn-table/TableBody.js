@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _arrFn = require("../../utils/arrFn");
 var _uiApi = require("../uiApi");
+var _styleFn = require("../styleFn");
 var _tableFn = require("./tableFn");
 var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -79,7 +80,7 @@ const _renderRows = props => {
   });
 };
 const TableBody = props => /*#__PURE__*/(0, _jsxRuntime.jsx)("tbody", {
-  className: _Style.CL_BLACK,
+  className: _styleFn.CL_BLACK,
   children: _renderRows(props)
 });
 var _default = exports.default = TableBody;

@@ -1,4 +1,7 @@
 import {
+  getYmdhmUTC
+} from "../AdapterFn";
+import {
   crRankProps,
   crStyleCenter,
   crNameProps,
@@ -7,8 +10,7 @@ import {
   crTableConfig
 } from "../toTableFn";
 import {
-  crPageConfig,
-  getYmdhmUTC
+  crPageConfig
 } from "./fnAdapter";
 
 const PN_TRADE_VOLUME_24H_BTC = "trade_volume_24h_btc"

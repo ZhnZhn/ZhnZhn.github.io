@@ -1,10 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getYmdhmUTC = exports.crPageConfig = void 0;
-var _AdapterFn = require("../AdapterFn");
-exports.getYmdhmUTC = _AdapterFn.getYmdhmUTC;
+exports.crPageConfig = void 0;
 var _mathFn = require("../../math/mathFn");
+var _AdapterFn = require("../AdapterFn");
 const DF_PAGE = 1,
   DF_PER_PAGE = 10,
   DF_CURRENCY = 'USD';

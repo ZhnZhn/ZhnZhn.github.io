@@ -1,16 +1,10 @@
-export {
-  crDfItemKey,
-  valueMoving,
-  ymdhmsToUTC,
-  crError
-} from '../AdapterFn';
-export { fCrData } from '../av/AvFn';
-
 import {
   crItemConf,
   crValueConf
 } from '../crFn';
-import { stockSeriesLegend } from '../legendFn';
+import {
+  stockSeriesLegend
+} from '../legendFn';
 
 export const DF_FN_EOD = "EOD"
 

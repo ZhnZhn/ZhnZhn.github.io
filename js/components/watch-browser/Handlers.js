@@ -1,10 +1,9 @@
 "use strict";
 
 exports.__esModule = true;
-exports.showDialogWatchItem = exports.showDialogEditLists = exports.showDialogEditGroups = exports.saveWatchList = exports.removeWatchItem = void 0;
-var _watchListStore = require("../../flux/watch-list/watchListStore");
-exports.saveWatchList = _watchListStore.saveWatchList;
+exports.showDialogWatchItem = exports.showDialogEditLists = exports.showDialogEditGroups = exports.removeWatchItem = void 0;
 var _compStore = require("../../flux/stores/compStore");
+var _watchListStore = require("../../flux/watch-list/watchListStore");
 var _ModalDialogType = require("../../constants/ModalDialogType");
 const showDialogEditGroups = () => (0, _compStore.showModalDialog)(_ModalDialogType.MDT_EDIT_WATCH_GROUP);
 exports.showDialogEditGroups = showDialogEditGroups;

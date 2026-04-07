@@ -3,9 +3,9 @@ import { filterBoolean } from '../../utils/arrFn';
 import { isKeyEnterOrBlank } from '../hooks/fUseKey';
 import SvgMore from '../zhn/SvgMore';
 
+import { CL_BLACK } from '../styleFn';
 import { crAppearance } from './tableFn';
-import {
-  CL_BLACK,
+import {  
   S_THEAD,
   S_TH,
   S_BT_SVG_MORE,

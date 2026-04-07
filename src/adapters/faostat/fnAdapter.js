@@ -1,5 +1,3 @@
-export { toInfo } from './fnDescr';
-
 import {
   isArr,
   isObj,
@@ -25,7 +23,9 @@ import {
   ymdToUTC,
   addSeriesDataTypeTo
 } from '../AdapterFn';
-import { DATASET_EMPTY } from './fnDescr';
+import {
+  DATASET_EMPTY
+} from './fnDescr';
 
 const BLANK = ' '
 , MM_DD = '-12-31'

@@ -5,12 +5,13 @@ exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
 var _crAdapterType = require("../crAdapterType1");
 var _fnAdapter = require("./fnAdapter");
+var _fnDescr = require("./fnDescr");
 const trOption = (option, json) => {
   option.title = (0, _fnAdapter.crTitle)(json, option);
   option.subtitle = (0, _fnAdapter.crSubtitle)(json, option);
 };
 const addToConfig = (config, json, option) => {
-  config.info = (0, _fnAdapter.toInfo)(json, option.title, option.subtitle);
+  config.info = (0, _fnDescr.toInfo)(json, option.title, option.subtitle);
   config.zhConfig = {
     ...(0, _fnAdapter.crZhConfig)(option),
     ...config.zhConfig

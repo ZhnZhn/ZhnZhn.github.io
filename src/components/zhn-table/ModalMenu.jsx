@@ -4,14 +4,13 @@ import {
 } from "../uiApi";
 
 import {
-  CL_OPEN_CLOSE_BLACK
+  CL_OPEN_CLOSE_BLACK,
+  getColorBlack
 } from "../styleFn";
 
 import OpenClose from "../zhn/OpenClose";
 import InputSwitch from "../zhn/InputSwitch";
 import ModalPane from "../zhn-moleculs/ModalPane";
-
-import { getColorBlack } from "./Style";
 
 const S_INPUT_SWITCH = {
   padding: '6px 0'

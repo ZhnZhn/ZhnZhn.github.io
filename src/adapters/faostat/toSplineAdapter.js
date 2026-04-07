@@ -5,9 +5,11 @@ import {
   crSubtitle,
   crTitle,
   toDataPoints,
-  crZhConfig,
-  toInfo
+  crZhConfig
 } from './fnAdapter';
+import {
+  toInfo
+} from './fnDescr';
 
 const trOption = (option, json) => {
   option.title = crTitle(json, option)

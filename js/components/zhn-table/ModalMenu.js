@@ -8,13 +8,12 @@ var _styleFn = require("../styleFn");
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _InputSwitch = _interopRequireDefault(require("../zhn/InputSwitch"));
 var _ModalPane = _interopRequireDefault(require("../zhn-moleculs/ModalPane"));
-var _Style = require("./Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_INPUT_SWITCH = {
     padding: '6px 0'
   },
   _crHrStyle = () => ({
-    borderColor: (0, _Style.getColorBlack)(),
+    borderColor: (0, _styleFn.getColorBlack)(),
     marginTop: 2,
     marginBottom: 2
   }),
@@ -48,7 +47,7 @@ const MenuItems = _ref2 => {
   /*eslint-disable no-unused-vars*/
   const [_rank, ...restHeader] = headers
     /*eslint-enable no-unused-vars*/,
-    _colorBlack = (0, _Style.getColorBlack)();
+    _colorBlack = (0, _styleFn.getColorBlack)();
   return (0, _uiApi.safeMap)(restHeader, (h, index) => (0, _uiApi.isArr)(h.items) ? /*#__PURE__*/(0, _jsxRuntime.jsx)(MenuPart, {
     item: h,
     color: _colorBlack,

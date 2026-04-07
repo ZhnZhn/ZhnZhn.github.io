@@ -1,10 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.valueMoving = exports.getItemIndexTuple = exports.getData = exports.crZhConfig = exports.crValueMoving = void 0;
-var _AdapterFn = require("../AdapterFn");
-exports.valueMoving = _AdapterFn.valueMoving;
-exports.crValueMoving = _AdapterFn.crValueMoving;
+exports.getItemIndexTuple = exports.getData = exports.crZhConfig = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _CategoryFn = require("../CategoryFn");
 const _crItemCaption = _ref => {

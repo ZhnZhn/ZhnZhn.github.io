@@ -1,5 +1,5 @@
+import { fCrData } from '../av/AvFn';
 import { crAdapterType1 } from '../crAdapterType1';
-import { fCrData } from './fnAdapter';
 
 const crData = (
   json,

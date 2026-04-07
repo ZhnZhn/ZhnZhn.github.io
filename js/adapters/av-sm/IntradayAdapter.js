@@ -10,6 +10,7 @@ var _stockBuilderFn = require("../../charts/stockBuilderFn");
 var _configBuilderFn = require("../../charts/configBuilderFn");
 var _MarkerFn = require("../../charts/MarkerFn");
 var _mathFn = require("../../math/mathFn");
+var _AdapterFn = require("../AdapterFn");
 var _pointFn = require("../pointFn");
 var _IntradayFns = require("../IntradayFns");
 var _fnAdapter = require("./fnAdapter");
@@ -22,7 +23,7 @@ const _crSeriaOptions = _ref => {
   return {
     notFilterZero: !isFilterZero,
     isDividend: _isAdjusted,
-    toUTC: _fnAdapter.ymdhmsToUTC,
+    toUTC: _AdapterFn.ymdhmsToUTC,
     pnClose: _isAdjusted ? '5. adjusted close' : '4. close',
     pnVolume: _isAdjusted ? '6. volume' : '5. volume'
   };
@@ -137,8 +138,6 @@ const _crSeriaData = (json, option) => {
   };
 };
 const IntradayAdapter = {
-  //crKey: crDfItemKey,
-
   toConfig(json, option) {
     const {
         _itemKey,

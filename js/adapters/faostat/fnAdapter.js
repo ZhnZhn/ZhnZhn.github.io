@@ -1,14 +1,13 @@
 "use strict";
 
 exports.__esModule = true;
-exports.toInfo = exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.crZhConfig = exports.crTitle = exports.crSubtitle = exports.crCategoryTitle = void 0;
-var _fnDescr = require("./fnDescr");
-exports.toInfo = _fnDescr.toInfo;
+exports.toDataPoints = exports.isSeriesReq = exports.isQueryAllowed = exports.crZhConfig = exports.crTitle = exports.crSubtitle = exports.crCategoryTitle = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _arrFn = require("../../utils/arrFn");
 var _itemFn = require("../../utils/itemFn");
 var _strFn = require("../../utils/strFn");
 var _AdapterFn = require("../AdapterFn");
+var _fnDescr = require("./fnDescr");
 const BLANK = ' ',
   MM_DD = '-12-31',
   DF_TITLE = 'More about data on tab Info in Description',

@@ -1,8 +1,3 @@
-export {
-  crError,
-  ymdToUTC
-} from "../AdapterFn";
-
 import {
   isObj,
   isNumber

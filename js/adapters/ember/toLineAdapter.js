@@ -4,11 +4,12 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _AdapterFn = require("../AdapterFn");
 var _crAdapterType = require("../crAdapterType1");
 var _compareByFn = require("../compareByFn");
 var _crTsFromData = _interopRequireDefault(require("../crTsFromData"));
 var _fnAdapter = require("./fnAdapter");
-const _fCrDataPoint = getDate => (value, item) => [(0, _fnAdapter.ymdToUTC)(getDate(item)), value],
+const _fCrDataPoint = getDate => (value, item) => [(0, _AdapterFn.ymdToUTC)(getDate(item)), value],
   _crDataImpl = (items, getValue, getDate, isValue) => (0, _fnAdapter.crDataImpl)(items, getValue, _fCrDataPoint(getDate), isValue),
   _crTotalData = (json, metric, pnDate) => {
     const _hm = (0, _fnAdapter.reduceToHmBy)((hm, item) => {

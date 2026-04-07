@@ -1,10 +1,8 @@
 "use strict";
 
 exports.__esModule = true;
-exports.getDaysFromYmd = exports.crError = exports.crData = exports.crConfOption = void 0;
+exports.crData = exports.crConfOption = void 0;
 var _AdapterFn = require("../AdapterFn");
-exports.getDaysFromYmd = _AdapterFn.getDaysFromYmd;
-exports.crError = _AdapterFn.crError;
 var _crFn = require("../crFn");
 const _crZhConfig = (option, data) => {
   const {

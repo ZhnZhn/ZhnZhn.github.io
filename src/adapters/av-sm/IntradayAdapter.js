@@ -19,12 +19,10 @@ import {
   POSITIVE_INFINITY
 } from '../../math/mathFn';
 
+import { ymdhmsToUTC } from '../AdapterFn';
 import { crVolumePoint } from '../pointFn';
 import { crMarkerColor } from '../IntradayFns';
-import {
-  ymdhmsToUTC,
-  crIntradayConfigOption
-} from './fnAdapter';
+import { crIntradayConfigOption } from './fnAdapter';
 
 const _crSeriaOptions = ({
   isFilterZero,
@@ -167,7 +165,6 @@ const _crSeriaData = (
 }
 
 const IntradayAdapter = {
-  //crKey: crDfItemKey,
 
   toConfig(json, option){
     const {

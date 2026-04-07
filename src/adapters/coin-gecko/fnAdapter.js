@@ -1,5 +1,3 @@
-export { getYmdhmUTC } from '../AdapterFn';
-
 import { isInRange } from '../../math/mathFn';
 import { getValues } from '../AdapterFn';
 

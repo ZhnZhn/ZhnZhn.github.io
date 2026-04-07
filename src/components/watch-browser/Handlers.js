@@ -1,5 +1,3 @@
-export { saveWatchList } from '../../flux/watch-list/watchListStore';
-
 import {
   showModalDialog
 } from '../../flux/stores/compStore';

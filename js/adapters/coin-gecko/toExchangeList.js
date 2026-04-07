@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _AdapterFn = require("../AdapterFn");
 var _toTableFn = require("../toTableFn");
 var _fnAdapter = require("./fnAdapter");
 const PN_TRADE_VOLUME_24H_BTC = "trade_volume_24h_btc",
@@ -31,7 +32,7 @@ const toExchangeList = {
         title,
         headers: HEADERS,
         rows: _rows,
-        dataSource: `CoinGecko ${(0, _fnAdapter.getYmdhmUTC)()}`,
+        dataSource: `CoinGecko ${(0, _AdapterFn.getYmdhmUTC)()}`,
         fns: {
           valueToHref: (_id, v) => v
         }

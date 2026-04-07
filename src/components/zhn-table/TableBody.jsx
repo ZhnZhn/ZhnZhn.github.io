@@ -7,13 +7,16 @@ import {
   toHref
 } from '../uiApi';
 import {
+  CL_BLACK
+} from '../styleFn';
+
+import {
   crTdStyle,
   toFormatValue
 } from './tableFn';
 import {
   CL_LINK,
-  S_TD,
-  CL_BLACK
+  S_TD
 } from './Style'
 
 const _crLinkEl = (

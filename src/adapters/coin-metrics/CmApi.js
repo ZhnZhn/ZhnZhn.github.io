@@ -1,7 +1,7 @@
 import {
   getDaysFromYmd,
   crError
-} from './fnAdapter';
+} from '../AdapterFn';
 
 const URL = 'https://community-api.coinmetrics.io/v4';
 const _isArr = Array.isArray;

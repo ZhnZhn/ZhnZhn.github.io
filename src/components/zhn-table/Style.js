@@ -1,8 +1,3 @@
-export { 
-  CL_BLACK,
-  getColorBlack
-} from '../styleFn';
-
 import {
   getColorBlack,
   crAbsoluteTopLeftStyle
