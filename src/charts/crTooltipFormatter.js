@@ -12,6 +12,7 @@ const _addCloseHandler = (
   setTimeout(() => addHideHandler(id, point), 1);
 };
 
+// biome-ignore-start lint/complexity/noUselessThisAlias: minification and readibility
 const _fFormatter = (option) => function(){
    const {
       fnTemplate,
@@ -50,5 +51,6 @@ const _fFormatter = (option) => function(){
      point
    });
 };
+// biome-ignore-end lint/complexity/noUselessThisAlias: minification and readibility
 
 export default _fFormatter

@@ -9,6 +9,8 @@ var _ChartFn = require("./ChartFn");
 const _addCloseHandler = (id, point) => {
   setTimeout(() => (0, _tpFn.addHideHandler)(id, point), 1);
 };
+
+// biome-ignore-start lint/complexity/noUselessThisAlias: minification and readibility
 const _fFormatter = option => function () {
   const {
       fnTemplate,
@@ -41,5 +43,6 @@ const _fFormatter = option => function () {
     point
   });
 };
+// biome-ignore-end lint/complexity/noUselessThisAlias: minification and readibility
 var _default = exports.default = _fFormatter;
 //# sourceMappingURL=crTooltipFormatter.js.map

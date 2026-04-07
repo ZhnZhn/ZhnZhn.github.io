@@ -5,6 +5,7 @@ exports.default = void 0;
 var _domFn = require("../../utils/domFn");
 var _uiApi = require("../uiApi");
 var _jsxRuntime = require("react/jsx-runtime");
+// biome-ignore-start lint/security/noDangerouslySetInnerHtml: sanitized by domSanitize
 const DivHtml = (0, _uiApi.memo)(props => {
   const __html = (0, _domFn.domSanitize)(props.str);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_uiApi.IfTrue, {
@@ -18,6 +19,7 @@ const DivHtml = (0, _uiApi.memo)(props => {
     })
   });
 });
+// biome-ignore-end lint/security/noDangerouslySetInnerHtml: sanitized by domSanitize
 DivHtml.isHtml = str => Boolean((0, _domFn.domSanitize)(str));
 var _default = exports.default = DivHtml;
 //# sourceMappingURL=DivHtml.js.map
