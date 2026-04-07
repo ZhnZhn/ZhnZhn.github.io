@@ -14,11 +14,11 @@
 	},
 	"linter": {
 		"enabled": true,
-                "domains": {                  
+                "domains": {                                   
                   "react": "recommended"                 
                 },
 		"rules": {
-			"recommended": true,
+			"recommended": true,                                                                         
                         "correctness": {
                             "noUndeclaredVariables": "on"
                         },  
