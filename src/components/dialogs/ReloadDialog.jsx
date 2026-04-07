@@ -22,10 +22,12 @@ const ReloadDialog = ({
   data,
   onClose
 }) => {
+  // biome-ignore-star lint/suspicious/noDocumentCookie: simple case
   const _hReload = useCallback(() => {
     document.cookie="erc=1"
     window.location.reload(!0)
   }, [])
+  // biome-ignore-end lint/suspicious/noDocumentCookie: simple case
   , _commandButtons = useCommandButtons(() => [
     ["No", onClose],
     ["Yes, Reload", _hReload]

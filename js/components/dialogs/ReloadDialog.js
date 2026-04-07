@@ -28,10 +28,13 @@ const ReloadDialog = _ref => {
     data,
     onClose
   } = _ref;
+  // biome-ignore-star lint/suspicious/noDocumentCookie: simple case
   const _hReload = (0, _uiApi.useCallback)(() => {
       document.cookie = "erc=1";
       window.location.reload(!0);
-    }, []),
+    }, [])
+    // biome-ignore-end lint/suspicious/noDocumentCookie: simple case
+    ,
     _commandButtons = (0, _useCommandButtons.default)(() => [["No", onClose], ["Yes, Reload", _hReload]]),
     {
       buildDate = ''
