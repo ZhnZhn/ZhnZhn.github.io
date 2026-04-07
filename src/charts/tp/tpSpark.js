@@ -95,8 +95,8 @@ const _crSparkData = (point) => {
   };
 };
 
-const _onAfterRender = function(id, point){
-  setTimeout( function(){
+const _onAfterRender = (id, point) => {
+  setTimeout(() => {
      addHideHandler(id, point)
      const {
        sparkLinesData,

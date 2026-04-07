@@ -77,8 +77,8 @@ const _crSparkData = point => {
     pointIndex
   };
 };
-const _onAfterRender = function (id, point) {
-  setTimeout(function () {
+const _onAfterRender = (id, point) => {
+  setTimeout(() => {
     (0, _tpFn.addHideHandler)(id, point);
     const {
         sparkLinesData,
