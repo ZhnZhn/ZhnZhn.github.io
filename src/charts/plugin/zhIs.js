@@ -4,9 +4,7 @@ const HOUR_IN_MLS = 1000*60*60;
 
 const zhIs = {
   zhIsAnimation() {
-    return ((this.userOptions || {}).zhConfig || {}).withoutAnimation
-      ? false
-      : true
+    return !!this.userOptions?.zhConfig?.withoutAnimation;
   },
 
   zhIsDaily(seriaIndex=0) {
