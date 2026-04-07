@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../../src/components/zhn-m/__test__/FlatButton.snap.test.js"
+  "../../../../src/components/zhn-m/__tests__/FlatButton.snap.test.js"
  ],
- "file": "../../../../src/components/zhn-m/__test__/FlatButton.snap.test.js",
+ "file": "../../../../src/components/zhn-m/__tests__/FlatButton.snap.test.js",
  "names": [
   "_interopRequireDefault",
   "require",

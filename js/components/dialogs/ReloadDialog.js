@@ -28,7 +28,7 @@ const ReloadDialog = _ref => {
     data,
     onClose
   } = _ref;
-  // biome-ignore-star lint/suspicious/noDocumentCookie: simple case
+  // biome-ignore-start lint/suspicious/noDocumentCookie: simple case
   const _hReload = (0, _uiApi.useCallback)(() => {
       document.cookie = "erc=1";
       window.location.reload(!0);

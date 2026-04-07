@@ -19,15 +19,24 @@
                 },
 		"rules": {
 			"recommended": true,
+                        "correctness": {
+                            "noUndeclaredVariables": "on"
+                        },  
                         "style": {
                            "useTemplate": "off"
                         }
-		}
+		}                
 	},
-	"javascript": {
+        "overrides": [
+           {
+             "includes": ["**/__tests__/*.{js,jsx}"],
+             "javascript": { "globals": [ "jest" ] }
+           }
+        ], 
+	"javascript": { 
 		"formatter": {
 			"quoteStyle": "double"
-		}
+		}                
 	},
 	"assist": {
 		"enabled": true,

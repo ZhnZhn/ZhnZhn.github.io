@@ -56,7 +56,6 @@ describe('compStore', () => {
     expect(_contChb.browserType).toBe(BROWSER_TYPE);
     //spy.mockRestore()
   });
-
   test('should call setUnchecked and clear activeContChb onCloseChartContainer', () => {
     const _chartType = CHART_TYPE,
       _chb = _crChb('checkbox', _chartType),
