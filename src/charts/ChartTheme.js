@@ -149,7 +149,7 @@ export const ChartTheme = {
     events: {
       load: function(){
         this.zhTooltip = new Highcharts.Tooltip(this, this.options.tooltip);
-        this.credits.element.onclick = function() {
+        this.credits.element.onclick = () => {
            window.open(CREDITS_URL, '_blank');
         }
       }
@@ -186,7 +186,7 @@ export const ChartTheme = {
         }
       },
       xAxis: _crExportAxisProps(),
-      yAxis: _crExportAxisProps()        
+      yAxis: _crExportAxisProps()
     }
   },
   navigation: {

@@ -99,7 +99,7 @@ const ChartTheme = exports.ChartTheme = {
     events: {
       load: function () {
         this.zhTooltip = new _highcharts.default.Tooltip(this, this.options.tooltip);
-        this.credits.element.onclick = function () {
+        this.credits.element.onclick = () => {
           window.open(_conf.CREDITS_URL, '_blank');
         };
       }
