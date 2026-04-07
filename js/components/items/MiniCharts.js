@@ -3,11 +3,10 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _uiApi = require("../uiApi");
 var _ShowHide = _interopRequireDefault(require("../zhn/ShowHide"));
 var _HighchartWrapper = _interopRequireDefault(require("../zhn/HighchartWrapper"));
 var _jsxRuntime = require("react/jsx-runtime");
-const _isArr = Array.isArray,
-  _isNotEmptyArr = arr => _isArr(arr) && arr.length > 0;
 const MiniCharts = _ref => {
   let {
     withoutAnimation,
@@ -17,18 +16,16 @@ const MiniCharts = _ref => {
     onLoaded,
     onWillUnLoaded
   } = _ref;
-  return _isNotEmptyArr(configs) ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
-    children: configs.map(c => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
-      isShow: true,
-      withoutAnimation: withoutAnimation,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_HighchartWrapper.default, {
-        config: c.config,
-        absComp: absComp,
-        onLoaded: onLoaded,
-        onWillUnLoaded: onWillUnLoaded
-      })
-    }, c[idPropName]))
-  }) : null;
+  return (0, _uiApi.safeMap)(configs, item => /*#__PURE__*/(0, _jsxRuntime.jsx)(_ShowHide.default, {
+    isShow: true,
+    withoutAnimation: withoutAnimation,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_HighchartWrapper.default, {
+      config: item.config,
+      absComp: absComp,
+      onLoaded: onLoaded,
+      onWillUnLoaded: onWillUnLoaded
+    })
+  }, item[idPropName]));
 };
 
 /*
@@ -44,6 +41,5 @@ MiniCharts.propTypes = {
   onWillUnLoaded: PropTypes.func
 }
 */
-var _default = MiniCharts;
-exports.default = _default;
+var _default = exports.default = MiniCharts;
 //# sourceMappingURL=MiniCharts.js.map

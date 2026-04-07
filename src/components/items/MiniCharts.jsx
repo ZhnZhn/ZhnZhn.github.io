@@ -1,10 +1,7 @@
+import { safeMap } from '../uiApi';
+
 import ShowHide from '../zhn/ShowHide';
 import HighchartWrapper from '../zhn/HighchartWrapper';
-
-const _isArr = Array.isArray
-, _isNotEmptyArr = (
-  arr
-) => _isArr(arr) && arr.length > 0;
 
 const MiniCharts = ({
   withoutAnimation,
@@ -13,23 +10,21 @@ const MiniCharts = ({
   absComp,
   onLoaded,
   onWillUnLoaded
-}) => _isNotEmptyArr(configs) ? (<>
-      {configs.map(c => (
-        <ShowHide
-           key={c[idPropName]}
-           isShow={true}
-           withoutAnimation={withoutAnimation}
-        >
-           <HighchartWrapper
-              config={c.config}
-              absComp={absComp}
-              onLoaded={onLoaded}
-              onWillUnLoaded={onWillUnLoaded}
-           />
-         </ShowHide>
-       ))}
-    </>
-  ) : null;
+}) => safeMap(configs, item => (
+  <ShowHide
+    key={item[idPropName]}
+    isShow={true}
+    withoutAnimation={withoutAnimation}
+  >
+    <HighchartWrapper
+      config={item.config}
+      absComp={absComp}
+      onLoaded={onLoaded}
+      onWillUnLoaded={onWillUnLoaded}
+    />
+  </ShowHide>
+));
+
 
 /*
 MiniCharts.propTypes = {
