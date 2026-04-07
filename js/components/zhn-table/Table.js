@@ -43,7 +43,6 @@ const Table = _ref => {
       headers: headers,
       onToggle: toggleColumn
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("table", {
-      role: "grid",
       id: gridId,
       className: _tableCn,
       style: _Style.S_TABLE,

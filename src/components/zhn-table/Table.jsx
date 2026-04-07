@@ -44,8 +44,7 @@ const Table = ({
         headers={headers}
         onToggle={toggleColumn}
       />
-      <table
-        role="grid"
+      <table        
         id={gridId}
         className={_tableCn}
         style={S_TABLE}
