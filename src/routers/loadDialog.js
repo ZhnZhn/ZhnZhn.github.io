@@ -1,4 +1,5 @@
 import {
+  BT_STOCK_MARKETS,
   BT_NORWAY_STATISTICS,
   BT_SWEDEN_STAT,
   BT_UN_COMTRADE
@@ -163,6 +164,8 @@ const _router = crRouter({
 
   loadDialogs(browserType) {
     switch(browserType){
+      case BT_STOCK_MARKETS:
+         this._loadSM(); break;
       case BT_NORWAY_STATISTICS:
       case BT_SWEDEN_STAT:
          this._loadSD(); break;

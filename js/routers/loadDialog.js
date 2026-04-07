@@ -113,6 +113,9 @@ const _router = (0, _crRouter.crRouter)({
   },
   loadDialogs(browserType) {
     switch (browserType) {
+      case _BrowserType.BT_STOCK_MARKETS:
+        this._loadSM();
+        break;
       case _BrowserType.BT_NORWAY_STATISTICS:
       case _BrowserType.BT_SWEDEN_STAT:
         this._loadSD();
