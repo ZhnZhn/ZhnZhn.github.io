@@ -40,7 +40,7 @@ import { ModalSlider } from '../zhn-modal-slider/ModalSlider';
 import ProgressLoading from './ProgressLoading';
 import AppLabel from './AppLabel';
 import IconLogoErc from './IconLogoErc';
-import HotBar from './HotBar';
+import QuickMenu from './QuickMenu';
 import LimitRemainingLabel from './LimitRemainingLabel';
 import crBrowserModel from './BrowserModel';
 
@@ -102,7 +102,7 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
 
 , MODEL = crBrowserModel();
 
-const HeaderBar = ({
+const AppBar = ({
   showSettings
 }) => {
   const [
@@ -144,7 +144,7 @@ const HeaderBar = ({
           {...BT_WATCH_PROPS}
           onClick={showWatch}
        />
-       <HotBar
+       <QuickMenu
           useMsCloseDialog={useMsCloseDialog}
           onShowDialog={showDialog}
        />
@@ -173,4 +173,4 @@ const HeaderBar = ({
   );
 };
 
-export default HeaderBar
+export default AppBar

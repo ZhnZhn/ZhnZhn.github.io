@@ -21,7 +21,7 @@ import {
 
 import useHotKeysHandler from "./hotkeys/useHotKeysHandler";
 
-import HeaderBar from "./header/HeaderBar";
+import AppBar from "./header/AppBar";
 import BrowserContainer from "./browser-container/BrowserContainer";
 import About from "./about/About";
 import CompContainer from "./zhn-containers/CompContainer";
@@ -48,7 +48,7 @@ const AppErc = () => {
 
   return (
     <>
-      <HeaderBar showSettings={_showSettings} />
+      <AppBar showSettings={_showSettings} />
       <div className={CL_COMP_CONTAINER}>
         <BrowserContainer useMsInitBrowser={useMsInitBrowser} />
         <About />

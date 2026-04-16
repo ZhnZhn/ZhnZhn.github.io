@@ -11,14 +11,14 @@ var _ComponentActions = require("../flux/actions/ComponentActions");
 var _browserStore = require("../flux/stores/browserStore");
 var _itemStore = require("../flux/stores/itemStore");
 var _useHotKeysHandler = _interopRequireDefault(require("./hotkeys/useHotKeysHandler"));
-var _HeaderBar = _interopRequireDefault(require("./header/HeaderBar"));
+var _AppBar = _interopRequireDefault(require("./header/AppBar"));
 var _BrowserContainer = _interopRequireDefault(require("./browser-container/BrowserContainer"));
 var _About = _interopRequireDefault(require("./about/About"));
 var _CompContainer = _interopRequireDefault(require("./zhn-containers/CompContainer"));
 var _DialogContainer = _interopRequireDefault(require("./dialogs/DialogContainer"));
 var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 var _jsxRuntime = require("react/jsx-runtime");
-const BUILD_DATE = "07-04-2026",
+const BUILD_DATE = "14-04-2026",
   CL_COMP_CONTAINER = (0, _styleFn.crFlexRowCn)("app-container");
 const _showSettings = (0, _uiApi.bindTo)(_ComponentActions.showSettings, (0, _settingStore.exportSettingFn)());
 const AppErc = () => {
@@ -28,7 +28,7 @@ const AppErc = () => {
   }, []);
   (0, _useHotKeysHandler.default)();
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_HeaderBar.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_AppBar.default, {
       showSettings: _showSettings
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: CL_COMP_CONTAINER,

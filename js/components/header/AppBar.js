@@ -16,7 +16,7 @@ var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _ProgressLoading = _interopRequireDefault(require("./ProgressLoading"));
 var _AppLabel = _interopRequireDefault(require("./AppLabel"));
 var _IconLogoErc = _interopRequireDefault(require("./IconLogoErc"));
-var _HotBar = _interopRequireDefault(require("./HotBar"));
+var _QuickMenu = _interopRequireDefault(require("./QuickMenu"));
 var _LimitRemainingLabel = _interopRequireDefault(require("./LimitRemainingLabel"));
 var _BrowserModel = _interopRequireDefault(require("./BrowserModel"));
 var _jsxRuntime = require("react/jsx-runtime");
@@ -46,7 +46,7 @@ const LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
   BT_SETTINGS_PROPS = (0, _a11yFn.crBtAriaLabelProps)(_crTitleOpen("Settings")),
   BT_ABOUT_PROPS = (0, _a11yFn.crBtAriaLabelProps)(_crTitleOpen("About")),
   MODEL = (0, _BrowserModel.default)();
-const HeaderBar = _ref => {
+const AppBar = _ref => {
   let {
     showSettings
   } = _ref;
@@ -75,7 +75,7 @@ const HeaderBar = _ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_FlatButton.default, {
       ...BT_WATCH_PROPS,
       onClick: _browserStore.showWatch
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_HotBar.default, {
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_QuickMenu.default, {
       useMsCloseDialog: _compStore.useMsCloseDialog,
       onShowDialog: _compStore.showDialog
     }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -99,5 +99,5 @@ const HeaderBar = _ref => {
     })]
   });
 };
-var _default = exports.default = HeaderBar;
-//# sourceMappingURL=HeaderBar.js.map
+var _default = exports.default = AppBar;
+//# sourceMappingURL=AppBar.js.map

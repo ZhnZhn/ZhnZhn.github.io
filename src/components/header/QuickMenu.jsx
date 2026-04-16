@@ -1,21 +1,35 @@
 import {
+  isNotEmptyArr
+} from '../../utils/isTypeFn';
+
+import {
   bindTo,
   useCallback
 } from '../uiApi';
-
-import { crBtAriaLabelProps } from '../a11yFn';
-import { S_INLINE } from '../styleFn';
-
-import useStoreState from '../hooks/useStoreState';
 
 import {
   HAS_TOUCH_EVENTS,
   getWindowInnerWidth
 } from '../has';
+import {
+  HK_CLEAR_QUICK_MENU
+} from '../hotkeys/hotkeys';
+
+import {
+  crBtAriaLabelProps
+} from '../a11yFn';
+
+import useStoreState from '../hooks/useStoreState';
+
 import ItemStack from '../zhn/ItemStack';
 import FlatButton from '../zhn-m/FlatButton';
+import { FlatButtonDelete } from '../zhn-m/FlatButtonSvg';
 
 const CL_BT_HOT = "bt-hot"
+, S_QUICK_MENU = {
+  display: 'flex',
+  gap: 3
+};
 
 const _isIn = (arr, type) => {
   for(let i=0; i<arr.length; i++){
@@ -36,7 +50,7 @@ const _crBtProps = (
    return {
      hotKey: _hotKey || void 0,
      caption: _hotKey + caption.slice(0, 3),
-     ...crBtAriaLabelProps(`Open ${caption} Dialog`)     
+     ...crBtAriaLabelProps(`Open ${caption} dialog`)
    };
 };
 
@@ -81,9 +95,7 @@ const updateHotButtons = (
     })
 }}
 
-const BT_CLEAR_HOT_BAR_PROPS = crBtAriaLabelProps("Clear Hot Bar");
-
-const HotBar = ({
+const QuickMenu = ({
   useMsCloseDialog,
   onShowDialog
 }) => {
@@ -97,24 +109,22 @@ const HotBar = ({
   , _hClean = useCallback(() => setHotButtons([]), []);
   // setHotButtons
   /*eslint-enable react-hooks/exhaustive-deps */
-
-  return (
-    <div style={S_INLINE}>
+  return isNotEmptyArr(hotButtons) ? (
+    <div style={S_QUICK_MENU}>
       <ItemStack
-         items={hotButtons}
-         crItem={_crHotBtItem}
-         onShowDialog={onShowDialog}
+        items={hotButtons}
+        crItem={_crHotBtItem}
+        onShowDialog={onShowDialog}
       />
-      {hotButtons.length !== 0 && <FlatButton
-         key="BT_CLEAN"
-         {...BT_CLEAR_HOT_BAR_PROPS}
-         timeout={0}
-         className={CL_BT_HOT}
-         caption="CL"
-         onClick={_hClean}
-      />}
+      <FlatButtonDelete
+        key="BT_CLEAR"
+        hotKey={HK_CLEAR_QUICK_MENU}
+        className={CL_BT_HOT}
+        onClick={_hClean}
+        {...crBtAriaLabelProps('Clear quick menu')}
+      />
     </div>
-  );
+  ) : null;
 };
 
-export default HotBar
+export default QuickMenu
