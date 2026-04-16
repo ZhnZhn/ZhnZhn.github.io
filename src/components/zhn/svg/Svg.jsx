@@ -16,6 +16,7 @@ const _crWidthHeightViewBoxProps = (
   height,
   viewBox
 ) => ({
+  "aria-hidden": "true",
   xlmns: "http://www.w3.org/2000/svg",
   width,
   height,
@@ -33,7 +34,7 @@ export const Svg = ({
       `${w}px`,
       `${h}px`,
       `0 0 ${w} ${h}`
-    )}
+    )}    
     {...restProps}
   >
     {children}

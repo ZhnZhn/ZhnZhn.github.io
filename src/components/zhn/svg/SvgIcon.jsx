@@ -1,7 +1,7 @@
 import {
   FILL_NONE,
-  Svg,
-  STROKE_LINECAP_ROUND_PROPS
+  STROKE_LINECAP_ROUND_PROPS,
+  Svg
 } from './Svg';
 
 const SvgIcon = ({

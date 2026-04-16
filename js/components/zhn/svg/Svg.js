@@ -14,6 +14,7 @@ const STROKE_LINECAP_ROUND_PROPS = exports.STROKE_LINECAP_ROUND_PROPS = {
   strokeLinecap: "round"
 };
 const _crWidthHeightViewBoxProps = (width, height, viewBox) => ({
+  "aria-hidden": "true",
   xlmns: "http://www.w3.org/2000/svg",
   width,
   height,
