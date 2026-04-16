@@ -4,49 +4,22 @@ import {
   SvgToggleOn,
   SvgDelete
 } from '../zhn/svg/SvgIcon';
-import FlatButton from './FlatButton';
+import IconButton from './IconButton';
 
-const S_SVG_BT = {
-  verticalAlign: 'middle',
-  margin: '0 8px 3px 8px'
+const S_ICON_BT_SVG = {
+  verticalAlign: 'middle'
 };
 
-const _fFlatButtonSvg = (
+const _crButtonSvg = (
   SvgIcon,
   config
 ) => (props) => (
-  <FlatButton {...props} {...config}>
-    <SvgIcon style={S_SVG_BT} />
-  </FlatButton>
+  <IconButton {...props} {...config}>
+    <SvgIcon style={S_ICON_BT_SVG} />
+  </IconButton>
 );
 
-export const FlatButtonInfo = _fFlatButtonSvg(
-  SvgInfo,
-  {timeout: 0}
-)
-export const FlatButtonSettings = _fFlatButtonSvg(
-  SvgSettings
-)
-export const FlatButtonToggleOn = _fFlatButtonSvg(
-  SvgToggleOn,
-  {timeout: 0}
-)
-
-const S_BT = {
-  width: 40
-}
-, S_SVG_DELETE = {
-  transform: 'translate(0, 2px)'
-};
-
-export const FlatButtonDelete = (
-  props
-) => (
-  <FlatButton
-    style={S_BT}
-    timeout={0}
-    {...props}
-  >
-    <SvgDelete style={S_SVG_DELETE} />
-  </FlatButton>
-)
+export const FlatButtonInfo = _crButtonSvg(SvgInfo)
+export const FlatButtonSettings = _crButtonSvg(SvgSettings)
+export const FlatButtonToggleOn = _crButtonSvg(SvgToggleOn)
+export const FlatButtonDelete = _crButtonSvg(SvgDelete)
