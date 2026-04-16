@@ -9,18 +9,12 @@ import useThrottleClick from '../hooks/useThrottleClick';
 import useHotKey from '../hotkeys/useHotKey';
 
 import { BtCaption } from './BtCaption';
+import { crButtonTitle } from './buttonFn';
 
 const CL_ARROW = "arrow-down"
 , TOKEN_BT_FLAT = 'bt-flat'
 , CL_BT_FLAT = crBold16Cn(TOKEN_BT_FLAT)
 , CL_BT_FLAT_CAPTION = `${TOKEN_BT_FLAT}__caption`;
-
-const _crTitle = (
-  title,
-  hotKey
-) => hotKey
-  ? `${title || ''} [${hotKey.toLowerCase()}]`
-  : title;
 
 const FlatButton = (props) => {
   const _hClick = useThrottleClick(
@@ -44,7 +38,7 @@ const FlatButton = (props) => {
       ref={_refBt}
       type="button"
       aria-label={props.ariaLabel}
-      title={_crTitle(props.title, _hotKey)}
+      title={crButtonTitle(props.title, _hotKey)}
       className={crCn(CL_BT_FLAT, props.className)}
       style={props.style}
       onClick={_hClick}

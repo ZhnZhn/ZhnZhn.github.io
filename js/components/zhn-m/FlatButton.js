@@ -9,12 +9,12 @@ var _styleFn = require("../styleFn");
 var _useThrottleClick = _interopRequireDefault(require("../hooks/useThrottleClick"));
 var _useHotKey = _interopRequireDefault(require("../hotkeys/useHotKey"));
 var _BtCaption = require("./BtCaption");
+var _buttonFn = require("./buttonFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_ARROW = "arrow-down",
   TOKEN_BT_FLAT = 'bt-flat',
   CL_BT_FLAT = (0, _styleFn.crBold16Cn)(TOKEN_BT_FLAT),
   CL_BT_FLAT_CAPTION = `${TOKEN_BT_FLAT}__caption`;
-const _crTitle = (title, hotKey) => hotKey ? `${title || ''} [${hotKey.toLowerCase()}]` : title;
 const FlatButton = props => {
   const _hClick = (0, _useThrottleClick.default)(props.timeout ?? 3000, props.onClick),
     [_appHotKey, _refBt] = (0, _useHotKey.default)(props.hotKey, _hClick, props.refBt),
@@ -23,7 +23,7 @@ const FlatButton = props => {
     ref: _refBt,
     type: "button",
     "aria-label": props.ariaLabel,
-    title: _crTitle(props.title, _hotKey),
+    title: (0, _buttonFn.crButtonTitle)(props.title, _hotKey),
     className: (0, _styleFn.crCn)(CL_BT_FLAT, props.className),
     style: props.style,
     onClick: _hClick,
