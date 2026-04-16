@@ -1,7 +1,8 @@
 import {
   SvgInfo,
   SvgSettings,
-  SvgToggleOn
+  SvgToggleOn,
+  SvgDelete
 } from '../zhn/svg/SvgIcon';
 import FlatButton from './FlatButton';
 
@@ -29,4 +30,23 @@ export const FlatButtonSettings = _fFlatButtonSvg(
 export const FlatButtonToggleOn = _fFlatButtonSvg(
   SvgToggleOn,
   {timeout: 0}
+)
+
+const S_BT = {
+  width: 40
+}
+, S_SVG_DELETE = {
+  transform: 'translate(0, 2px)'
+};
+
+export const FlatButtonDelete = (
+  props
+) => (
+  <FlatButton
+    style={S_BT}
+    timeout={0}
+    {...props}
+  >
+    <SvgDelete style={S_SVG_DELETE} />
+  </FlatButton>
 )
