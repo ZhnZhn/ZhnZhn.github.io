@@ -15,12 +15,12 @@ const _crCaption = (hotKey, caption) => {
     _hotKey = caption.slice(_hotKeyIndex, _hotKeyIndex + 1),
     _afterToken = caption.slice(_hotKeyIndex + 1);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    children: [!!_beforeToken && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       children: _beforeToken
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       style: S_HOT_KEY,
       children: _hotKey
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    }), !!_afterToken && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       children: _afterToken
     })]
   });

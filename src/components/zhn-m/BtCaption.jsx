@@ -1,4 +1,6 @@
-const S_HOT_KEY = { textDecoration: 'underline' };
+const S_HOT_KEY = {
+  textDecoration: 'underline'
+};
 
 const _crCaption = (
   hotKey,
@@ -18,9 +20,9 @@ const _crCaption = (
   , _afterToken = caption.slice(_hotKeyIndex+1);
   return (
     <>
-     <span>{_beforeToken}</span>
+     {!!_beforeToken && <span>{_beforeToken}</span>}
      <span style={S_HOT_KEY}>{_hotKey}</span>
-     <span>{_afterToken}</span>
+     {!!_afterToken && <span>{_afterToken}</span>}
     </>
   );
 };
