@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.SvgToggleOn = exports.SvgSettings = exports.SvgInfo = void 0;
+exports.SvgToggleOn = exports.SvgSettings = exports.SvgInfo = exports.SvgDelete = void 0;
 var _Svg = require("./Svg");
 var _jsxRuntime = require("react/jsx-runtime");
 const SvgIcon = _ref => {
@@ -82,4 +82,20 @@ const SvgToggleOn = _ref4 => {
   });
 };
 exports.SvgToggleOn = SvgToggleOn;
+const SvgDelete = _ref5 => {
+  let {
+    style
+  } = _ref5;
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(SvgIcon, {
+    style: style,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+      d: "M10 5a2 2 0 0 0-1.3.5l-6.3 5.7a1 1 0 0 0 0 1.4l6.3 5.7A2 2 0 0 0 10 19h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+      d: "m12 9 6 6"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+      d: "m18 9-6 6"
+    })]
+  });
+};
+exports.SvgDelete = SvgDelete;
 //# sourceMappingURL=SvgIcon.js.map
