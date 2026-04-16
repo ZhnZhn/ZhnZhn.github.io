@@ -26,7 +26,7 @@ const useHotKey = (
   //hotKey, onKeyDown, refEl
   /*eslint-enable react-hooks/exhaustive-deps */
   return [
-    HAS_HOT_KEYS && hotKey ? hotKey : '',
+    HAS_HOT_KEYS && hotKey ? hotKey : void 0,
     refEl || ref
   ];
 }

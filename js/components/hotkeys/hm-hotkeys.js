@@ -5,7 +5,7 @@ exports.removeHotKey = exports.onHotKey = exports.clearHotKeys = exports.addHotK
 var _uiApi = require("../uiApi");
 var _has = require("../has");
 var _fUseKey = require("../hooks/fUseKey");
-const HAS_HOT_KEYS = exports.HAS_HOT_KEYS = !_has.HAS_TOUCH_EVENTS;
+const HAS_HOT_KEYS = exports.HAS_HOT_KEYS = _has.HAS_KEYBOARD_FOCUS;
 const HOT_KEY_EVENT = exports.HOT_KEY_EVENT = 'keydown';
 let hmHotKeys = Object.create(null);
 const addHotKey = (hotKey, onKeyDown, ref) => hmHotKeys && (hmHotKeys[hotKey] = [onKeyDown, ref]);

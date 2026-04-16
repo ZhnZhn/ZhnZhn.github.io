@@ -1,12 +1,12 @@
 import { focusRefElement } from '../uiApi'
-import { HAS_TOUCH_EVENTS } from '../has';
+import { HAS_KEYBOARD_FOCUS } from '../has';
 
 import {
   isHotKey,
   toUpperCase
 } from '../hooks/fUseKey';
 
-export const HAS_HOT_KEYS = !HAS_TOUCH_EVENTS
+export const HAS_HOT_KEYS = HAS_KEYBOARD_FOCUS
 export const HOT_KEY_EVENT = 'keydown'
 
 let hmHotKeys = Object.create(null);
