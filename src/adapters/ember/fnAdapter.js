@@ -16,6 +16,7 @@ export const isTsRoute = ({
 }) => dfId === "EU"
   || dfId === "EG"
   || dfId === "PV"
+  || dfId === "WS"
 
 export const isUsRoute = (
   option
