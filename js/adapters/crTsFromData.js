@@ -21,7 +21,7 @@ const crTsFromData = (json, _option) => {
   }
   const _fromYear = (0, _isTypeFn.parseIntBy10)(json.fromYear),
     _from = json.from,
-    _tsFromYear = (0, _isTypeFn.isNumber)(_fromYear) ? _fromYear : (0, _isTypeFn.isNumber)(_from) ? _from : !1;
+    _tsFromYear = (0, _isTypeFn.isNumber)(_fromYear) ? _fromYear : (0, _isTypeFn.isNumber)(_from) ? _from : (0, _isTypeFn.isStr)(_from) && _from.length === 4 ? (0, _isTypeFn.parseIntBy10)(_from) : !1;
   if ((0, _isTypeFn.isNumber)(_tsFromYear)) {
     return _crTsFromYearData(_tsFromYear, data);
   }

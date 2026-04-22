@@ -1,6 +1,7 @@
 import {
   isArr,
   isNumber,
+  isStr,
   parseIntBy10
 } from '../utils/isTypeFn';
 
@@ -46,6 +47,8 @@ const crTsFromData = (
       ? _fromYear
       : isNumber(_from)
       ? _from
+      : isStr(_from) && _from.length === 4
+      ? parseIntBy10(_from)
       : !1;
   if (isNumber(_tsFromYear)) {
     return _crTsFromYearData(_tsFromYear, data);
