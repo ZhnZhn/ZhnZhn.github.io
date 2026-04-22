@@ -161,7 +161,7 @@ const _crTimeSeriesTreeMapUrl = (
     throw crErrorByMessage(`TreeMap and Bar charts by Source for ${metricCaption} not available`)
   }
 
-  if (!isInRange(parseIntBy10(time), 2020, 2025)) {
+  if (!isInRange(parseIntBy10(time), 2020, 2026)) {
     const _typeOfChartToken = _isTreeMap
       ? 'TreeMap'
       : 'Bar by Source';

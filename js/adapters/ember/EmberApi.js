@@ -72,7 +72,7 @@ const _crTimeSeriesTreeMapUrl = (option, _isTreeMap) => {
   if (metricItem.isTm !== 1) {
     throw (0, _AdapterFn.crErrorByMessage)(`TreeMap and Bar charts by Source for ${metricCaption} not available`);
   }
-  if (!(0, _mathFn.isInRange)((0, _isTypeFn.parseIntBy10)(time), 2020, 2025)) {
+  if (!(0, _mathFn.isInRange)((0, _isTypeFn.parseIntBy10)(time), 2020, 2026)) {
     const _typeOfChartToken = _isTreeMap ? 'TreeMap' : 'Bar by Source';
     throw (0, _AdapterFn.crErrorByMessage)(`${_typeOfChartToken} only available for 2021-2024`);
   }
