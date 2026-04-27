@@ -12,6 +12,14 @@ const _addCloseHandler = (
   setTimeout(() => addHideHandler(id, point), 1);
 };
 
+const _formatValue = (
+  point,
+  value
+) => value != null
+  && (point?.series?.name || '').slice(0, 4) === 'ROC('
+  ? `${value}%`
+  : value;
+
 // biome-ignore-start lint/complexity/noUselessThisAlias: minification and readibility
 const _fFormatter = (option) => function(){
    const {
@@ -47,7 +55,7 @@ const _fFormatter = (option) => function(){
      date,
      color,
      valueText,
-     value,
+     value: _formatValue(point, value),
      point
    });
 };
