@@ -6,7 +6,8 @@ const _crAxis = (
   id, {
   color,
   min,
-  max
+  max,
+  labelsFormat
 }) => ({
     id,
     min,
@@ -19,6 +20,7 @@ const _crAxis = (
     title: { text: '' },
     gridLineWidth: 0,
     labels: {
+      format: labelsFormat,
       style: {
         color
       }
@@ -48,7 +50,7 @@ const _getToYAxisId = (
 //yIndex =  void 0 | 0 | number
 const zhAddSeriaToYAxis = function(
   options={},
-  seriaOptions
+  seriaOptions,
 ) {
   try {
     const {

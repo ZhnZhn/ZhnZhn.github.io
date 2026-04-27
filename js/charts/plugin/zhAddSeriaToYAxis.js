@@ -10,7 +10,8 @@ const _crAxis = (id, _ref) => {
   let {
     color,
     min,
-    max
+    max,
+    labelsFormat
   } = _ref;
   return {
     id,
@@ -26,6 +27,7 @@ const _crAxis = (id, _ref) => {
     },
     gridLineWidth: 0,
     labels: {
+      format: labelsFormat,
       style: {
         color
       }
@@ -65,6 +67,5 @@ const zhAddSeriaToYAxis = function (options, seriaOptions) {
     console.log(err.message);
   }
 };
-var _default = zhAddSeriaToYAxis;
-exports.default = _default;
+var _default = exports.default = zhAddSeriaToYAxis;
 //# sourceMappingURL=zhAddSeriaToYAxis.js.map
