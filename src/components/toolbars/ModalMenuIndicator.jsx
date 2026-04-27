@@ -51,6 +51,7 @@ const ModalMenuIndicatorView = ({
          caption="Growth Rate"
          configArr={FN_ROC}
          getChart={getChart}
+         isPercent={true}
       />
       <RowNorm
          caption={NORM_CAPTION_EL}

@@ -4,13 +4,18 @@ const fRowFn = Row => ({
   refEl,
   caption,
   configArr,
-  getChart
+  getChart,
+  isPercent
 }) => {
   const [
     isSeria,
     addSeria,
     removeSeria
-  ] = useAddSeriaBy(configArr, getChart);
+  ] = useAddSeriaBy(
+    configArr,
+    getChart,
+    isPercent
+  );
   return (
     <Row
       refEl={refEl}

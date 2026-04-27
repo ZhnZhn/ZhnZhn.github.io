@@ -10,9 +10,10 @@ const fRowFn = Row => _ref => {
     refEl,
     caption,
     configArr,
-    getChart
+    getChart,
+    isPercent
   } = _ref;
-  const [isSeria, addSeria, removeSeria] = (0, _useAddSeriaBy.default)(configArr, getChart);
+  const [isSeria, addSeria, removeSeria] = (0, _useAddSeriaBy.default)(configArr, getChart, isPercent);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(Row, {
     refEl: refEl,
     is: isSeria,

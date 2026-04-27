@@ -47,7 +47,8 @@ const ModalMenuIndicatorView = _ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowFnType.default, {
       caption: "Growth Rate",
       configArr: FN_ROC,
-      getChart: getChart
+      getChart: getChart,
+      isPercent: true
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RowNorm.default, {
       caption: NORM_CAPTION_EL,
       configArr: FN_NORM,
