@@ -6,7 +6,9 @@ import {
   getRefValue,
   setRefValue
 } from '../uiApi';
-import { useBool } from '../hooks/useBool';
+import {
+  useBool
+} from '../hooks/useBool';
 
 const _crName = (
   prefixStr,
@@ -27,9 +29,16 @@ const _getSeriaIndex = (chart, { s }) => {
     : 0;
 }
 
+const _crLabelsFormat = (
+  isFormatPercent
+) => isFormatPercent
+  ? '{value}%'
+  : void 0;
+
 const useAddSeriaBy = (
   confArr,
-  getChart
+  getChart,
+  isFormatPercent
 ) => {
   const _refSeria = useRef()
   , [
@@ -65,7 +74,8 @@ const useAddSeriaBy = (
           _chart.zhAddSeriaToYAxis({
             data: seriaData,
             color: seriaOptions.color || color,
-            name
+            name,
+            labelsFormat: _crLabelsFormat(isFormatPercent)
           }, seriaOptions))
       }
       showSeria()

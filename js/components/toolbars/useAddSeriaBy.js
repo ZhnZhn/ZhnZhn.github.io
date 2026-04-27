@@ -16,7 +16,8 @@ const _getSeriaIndex = (chart, _ref) => {
   const _index = (0, _uiApi.isNumber)(s) ? s - 1 : 0;
   return chart?.series.length > _index ? _index : 0;
 };
-const useAddSeriaBy = (confArr, getChart) => {
+const _crLabelsFormat = isFormatPercent => isFormatPercent ? '{value}%' : void 0;
+const useAddSeriaBy = (confArr, getChart, isFormatPercent) => {
   const _refSeria = (0, _uiApi.useRef)(),
     [isSeria, showSeria, hideSeria] = (0, _useBool.useBool)()
     /*eslint-disable react-hooks/exhaustive-deps */,
@@ -39,7 +40,8 @@ const useAddSeriaBy = (confArr, getChart) => {
           (0, _uiApi.setRefValue)(_refSeria, _chart.zhAddSeriaToYAxis({
             data: seriaData,
             color: seriaOptions.color || color,
-            name
+            name,
+            labelsFormat: _crLabelsFormat(isFormatPercent)
           }, seriaOptions));
         }
         showSeria();
