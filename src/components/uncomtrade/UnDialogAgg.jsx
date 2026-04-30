@@ -42,8 +42,8 @@ const [
 ] = crInputSelectDfProps(AGG_OPTIONS)
 , PERIOD_OPTIONS = (() => {
   const arr = [];
-  for (let i=0; i<23; i++) {
-    const _v = "" + (2023 - i);
+  for (let i=0; i<25; i++) {
+    const _v = "" + (2025 - i);
     arr.push({c: _v, v: _v})
   }
   return arr;
