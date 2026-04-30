@@ -34,10 +34,10 @@ const WtApi = {
       } else {
         option.title = dfT;
       }
-      const _ps = (option.time || '').replace("M", "") || 2023;
+      const _ps = (option.time || '').replace("M", "") || 2025;
       return `${_url}&pc=${_pc}&ps=${_ps}`;
     }
-    return `${_url}&r=${_r}&pc=${_pc}&ps=2005-2024`;
+    return `${_url}&r=${_r}&pc=${_pc}&ps=2005-2025`;
   },
   checkResponse: (0, _AdapterFn.fCheckResponse)(_fnAdapter.getDataset)
 };
