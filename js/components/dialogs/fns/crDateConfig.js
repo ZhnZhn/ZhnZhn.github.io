@@ -7,7 +7,9 @@ const YEAR_MAX = 25,
   BI_YEAR_MAX = 25,
   Q_YEAR_MAX = 12,
   M_YEAR_MAX = 6;
-const _getCurrentDate = () => new Date(),
+const _pad2 = n => n < 10 ? '0' + n : '' + n,
+  _mathFloor = Math.floor,
+  _getCurrentDate = () => new Date(),
   _getYear = date => date.getUTCFullYear(),
   _getCurrentYear = () => _getYear(_getCurrentDate()),
   _getMonth = date => date.getUTCMonth(),
@@ -44,7 +46,8 @@ const _addYearMonthsTo = (dateOptions, y, delimeter) => {
   for (let i = 0; i < 12; i++) {
     m = m - 1;
     if (m > -1) {
-      _m = m + 1 > 9 ? m + 1 : '0' + (m + 1);
+      //_m = (m+1>9) ? m+1 : '0'+(m+1);
+      _m = _pad2(m + 1);
       _caption = `${y}${delimeter}${_m}`;
     } else {
       m = 11;
@@ -58,7 +61,7 @@ const _addCurrentMonthIfTo = (dateOptions, currentDate, delimeter) => {
   const currentMonth = _getMonth(currentDate);
   currentDate.setDate(currentDate.getDate() + 1);
   const _m = _getMonth(currentDate),
-    _nextMonthOption = _m === currentMonth ? void 0 : _crDateOption(`${_getYear(currentDate)}${delimeter}${_m}`);
+    _nextMonthOption = _m === currentMonth ? void 0 : _crDateOption(`${_getYear(currentDate)}${delimeter}${_pad2(_m)}`);
   if (_nextMonthOption) {
     dateOptions.unshift(_nextMonthOption);
   }
@@ -79,7 +82,7 @@ const _crYearMonthConfig = function (loadId, mapDateDf) {
 };
 const _addYearQuartesTo = (dateOptions, y, delimeter) => {
   const m = _getCurrentMonth(),
-    _c = Math.floor((m + 1) / 3);
+    _c = _mathFloor((m + 1) / 3);
   let qNow = _c === 4 ? 3 : _c;
   for (let i = 0; i < 4; i++) {
     if (qNow < 1) {
