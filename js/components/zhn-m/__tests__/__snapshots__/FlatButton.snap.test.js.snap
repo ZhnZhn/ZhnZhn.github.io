@@ -4,7 +4,7 @@ exports[`FlatButton Snap should renders correctly 1`] = `
 <button
   className="bt-flat bold-16"
   onClick={[Function]}
-  title="Click to load"
+  title="Click to load [l]"
   type="button"
 >
   <span
@@ -19,6 +19,7 @@ exports[`FlatButton Snap should renders correctly without title 1`] = `
 <button
   className="bt-flat bold-16"
   onClick={[Function]}
+  title="[l]"
   type="button"
 >
   <span
