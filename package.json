@@ -84,6 +84,7 @@
     "webpack-dev-server": "^5.2.3"
   },
   "overrides": {
+    "glob": "~13.0.6",
     "uuid": "~14.0.0"
   },
   "jest": {
