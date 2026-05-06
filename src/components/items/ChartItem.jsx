@@ -1,6 +1,5 @@
 //import PropTypes from "prop-types";
 import {
-  useState,
   useMemo,
   useEffect,
   useImperativeHandle,
@@ -44,6 +43,27 @@ const CL_CHART_ITEM = 'chart-item'
 const _IS_ANIMATE_REFLOW = isWideWidth()
 , MINI_CONFIGS_ID_PN = "btTitle";
 
+const MAX_LENGTH_OF_ITEM_CAPTION = 15
+, _isItemCaptionOverflow = (
+  itemCaption
+) => itemCaption.length > MAX_LENGTH_OF_ITEM_CAPTION;
+
+const _crShortItemCaption = itemCaption => {
+  const _fromIndex = itemCaption.indexOf('(');
+  if (_fromIndex !== -1
+    && _isItemCaptionOverflow(itemCaption)
+    && itemCaption.indexOf(')') > MAX_LENGTH_OF_ITEM_CAPTION) {
+    return itemCaption
+      .slice(0, _fromIndex)
+      .trim();
+  }
+  return itemCaption;
+};
+
+const _crItemTitle = itemCaption => _isItemCaptionOverflow(itemCaption)
+  ? itemCaption
+  : void 0;
+
 export const ChartItem = memoEqual(({
   refEl,
   caption,
@@ -84,7 +104,16 @@ export const ChartItem = memoEqual(({
   , [isOpen, toggleOpen] = useToggle(true)
   , [isShowLegend, toggleLegend] = useToggle()
   , [isShowToolbar, toggleToolbar] = useToggle(true)
-  , [itemCaption] = useState(() => _itemCaption || caption || '')
+
+  /*eslint-disable react-hooks/exhaustive-deps */
+  , itemCaption = useMemo(() => _itemCaption || caption || '', [])
+  , [shortItemCaption, itemTitle] = useMemo(() => [
+    _crShortItemCaption(itemCaption),
+    _crItemTitle(itemCaption)
+  ], [])
+  // _itemCaption, caption, itemCaption
+  /*eslint-enable react-hooks/exhaustive-deps */
+
   , [isCaption, showCaption, hideCaption] = useCaption(getMainChart, toggleToolbar)
   , [onCheckItem, onUnCheckItem] = useSetCheckBox(getMainChart, chartType, onSetActive)
   , [loadMiniChart, unloadMiniChart] = useMiniHandles(getMainChart)
@@ -156,7 +185,8 @@ export const ChartItem = memoEqual(({
        { isCaption && <Header
           isOpen={isOpen}
           isAdminMode={isAdminMode}
-          itemCaption={itemCaption}
+          itemCaption={shortItemCaption}
+          itemTitle={itemTitle}
           itemValue={itemValue}
           itemTime={itemTime}
           valueMoving={valueMoving}

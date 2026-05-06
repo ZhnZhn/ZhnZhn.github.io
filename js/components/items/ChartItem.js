@@ -39,6 +39,16 @@ const CL_CHART_ITEM = 'chart-item',
   };
 const _IS_ANIMATE_REFLOW = (0, _has.isWideWidth)(),
   MINI_CONFIGS_ID_PN = "btTitle";
+const MAX_LENGTH_OF_ITEM_CAPTION = 15,
+  _isItemCaptionOverflow = itemCaption => itemCaption.length > MAX_LENGTH_OF_ITEM_CAPTION;
+const _crShortItemCaption = itemCaption => {
+  const _fromIndex = itemCaption.indexOf('(');
+  if (_fromIndex !== -1 && _isItemCaptionOverflow(itemCaption) && itemCaption.indexOf(')') > MAX_LENGTH_OF_ITEM_CAPTION) {
+    return itemCaption.slice(0, _fromIndex).trim();
+  }
+  return itemCaption;
+};
+const _crItemTitle = itemCaption => _isItemCaptionOverflow(itemCaption) ? itemCaption : void 0;
 const ChartItem = exports.ChartItem = (0, _memoEqual.default)(_ref => {
   let {
     refEl,
@@ -75,8 +85,13 @@ const ChartItem = exports.ChartItem = (0, _memoEqual.default)(_ref => {
     isShowInfo = !isShowChart,
     [isOpen, toggleOpen] = (0, _useToggle.useToggle)(true),
     [isShowLegend, toggleLegend] = (0, _useToggle.useToggle)(),
-    [isShowToolbar, toggleToolbar] = (0, _useToggle.useToggle)(true),
-    [itemCaption] = (0, _uiApi.useState)(() => _itemCaption || caption || ''),
+    [isShowToolbar, toggleToolbar] = (0, _useToggle.useToggle)(true)
+
+    /*eslint-disable react-hooks/exhaustive-deps */,
+    itemCaption = (0, _uiApi.useMemo)(() => _itemCaption || caption || '', []),
+    [shortItemCaption, itemTitle] = (0, _uiApi.useMemo)(() => [_crShortItemCaption(itemCaption), _crItemTitle(itemCaption)], [])
+    // _itemCaption, caption, itemCaption
+    /*eslint-enable react-hooks/exhaustive-deps */,
     [isCaption, showCaption, hideCaption] = (0, _useCaption.default)(getMainChart, toggleToolbar),
     [onCheckItem, onUnCheckItem] = (0, _useSetCheckBox.default)(getMainChart, chartType, onSetActive),
     [loadMiniChart, unloadMiniChart] = (0, _useMiniHandles.default)(getMainChart),
@@ -129,7 +144,8 @@ const ChartItem = exports.ChartItem = (0, _memoEqual.default)(_ref => {
     children: [isCaption && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Header.default, {
       isOpen: isOpen,
       isAdminMode: isAdminMode,
-      itemCaption: itemCaption,
+      itemCaption: shortItemCaption,
+      itemTitle: itemTitle,
       itemValue: itemValue,
       itemTime: itemTime,
       valueMoving: valueMoving,

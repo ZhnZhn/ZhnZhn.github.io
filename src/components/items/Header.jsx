@@ -84,6 +84,7 @@ const Header = ({
   onUnCheck,
 
   itemCaption,
+  itemTitle,
   itemValue,
   itemTime,
   onToggle,
@@ -104,10 +105,7 @@ const Header = ({
   , _captionStyle = crStyle2(
      S_CAPTION,
      !valueMoving && S_CAPTION_WIDTH
-  )
-  , _btTitle = itemCaption.length > 15
-      ? itemCaption
-      : void 0;
+  );
 
   return (
     <div className={CL_ITEM_HEADER}>
@@ -127,7 +125,7 @@ const Header = ({
          id={_captionId}
          className={CL_HEADER_CAPTION}
          style={_captionStyle}
-         title={_btTitle}
+         title={itemTitle}
          onClick={onToggle}
       >
          {itemCaption}

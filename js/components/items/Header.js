@@ -69,6 +69,7 @@ const Header = _ref2 => {
     onCheck,
     onUnCheck,
     itemCaption,
+    itemTitle,
     itemValue,
     itemTime,
     onToggle,
@@ -81,8 +82,7 @@ const Header = _ref2 => {
   } = _ref2;
   const _captionId = (0, _uiApi.useId)(),
     [isMore, _toggleMore] = (0, _useToggle.useToggle)(false),
-    _captionStyle = (0, _styleFn.crStyle2)(S_CAPTION, !valueMoving && S_CAPTION_WIDTH),
-    _btTitle = itemCaption.length > 15 ? itemCaption : void 0;
+    _captionStyle = (0, _styleFn.crStyle2)(S_CAPTION, !valueMoving && S_CAPTION_WIDTH);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_ITEM_HEADER,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(MenuMore, {
@@ -99,7 +99,7 @@ const Header = _ref2 => {
       id: _captionId,
       className: _Item.CL_HEADER_CAPTION,
       style: _captionStyle,
-      title: _btTitle,
+      title: itemTitle,
       onClick: onToggle,
       children: itemCaption
     }), valueMoving ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValueMovingBadge.default, {
