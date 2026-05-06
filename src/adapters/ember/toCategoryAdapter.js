@@ -1,97 +1,10 @@
-import { getObjectKeys } from '../../utils/isTypeFn';
-
-import { roundBy } from '../../math/mathFn';
-
-import { crCategoryPoint } from '../CategoryFn';
-import { sortDescCategory } from '../compareByFn';
 import crAdapterCategory from '../crAdapterCategory';
 import { crTsCategoryData } from '../toTsCategoryAdapter';
 
-import {
-  isTsRoute,
-  isTotalVariable,
-  isTotalData,
-  fGetCategory,
-  reduceToHmBy,
-  getSourceValue,
-  getMetricValue,
-  crDataImpl
-} from './fnAdapter';
-
-const FN_IDENTITY = value => value
-, _fCrDataPoint = (
-  transformValue,
-  getCategory
-) => (
-  value,
-  item
-) => crCategoryPoint(
-  transformValue(value),
-  getCategory(item)
-)
-, _crDataImpl = (
-  items,
-  getValue,
-  getCategory,
-  transformValue,
-  isValue
-) => crDataImpl(
-  items,
-  getValue,
-  _fCrDataPoint(transformValue, getCategory),
-  isValue
-)
-, _crTotalData = (
-  json,
-  getCategory,
-  pnMetric
-) => {
-  const hm = reduceToHmBy((_hm, item) => {
-    const c = getCategory(item)
-    if (c && isTotalVariable(item)) {
-      _hm[c] = (_hm[c] || 0) + item[pnMetric]
-    }
-    return _hm;
-  }, json);
-  return _crDataImpl(
-    getObjectKeys(hm),
-    itemKey => hm[itemKey],
-    FN_IDENTITY,
-    value => roundBy(value, 2)
-  );
-}
-, _crSourceData = (
-  json,
-  getCategory,
-  pnMetric
-) => _crDataImpl(
-  json,
-  item => item[pnMetric],
-  getCategory,
-  FN_IDENTITY,
-  item => !!getCategory(item)
-)
-, _crData = (
+const _crData = (
   json,
   options
-) => {
-  if (isTsRoute(options)) {
-    return crTsCategoryData(json, options);
-  }
-  const source = getSourceValue(options)
-  , pnMetric = getMetricValue(options)
-  , getCategory = fGetCategory(options)
-  , crCategoryData = isTotalData(source)
-      ? _crTotalData
-      : _crSourceData;
-  return sortDescCategory(
-    crCategoryData(
-      json,
-      getCategory,
-      pnMetric
-    )
-  );
-}
+) => crTsCategoryData(json, options)
 , toCategoryAdapter = crAdapterCategory(_crData);
 
 export default toCategoryAdapter
