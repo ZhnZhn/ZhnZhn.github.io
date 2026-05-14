@@ -64,6 +64,15 @@ input {
   font-family: inherit;
 }
 
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield; 
+}
+input[type="number"]:focus,
+input[type="number"]:hover {
+  -moz-appearance: auto; 
+}
+
 a { 
  color: #009ae5;
  font-weight: bold;

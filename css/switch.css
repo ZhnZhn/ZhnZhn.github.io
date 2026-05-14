@@ -26,7 +26,8 @@
   position: relative;
   display: inline-block;
   width: 34px;
-  height: 20px;  
+  flex: 0 0 34px;
+  height: 20px;   
   border-radius: 10px;
   cursor: pointer;
 }
@@ -36,6 +37,7 @@
   width: 15px;   
   height: 15px;
   border-radius: 50%;    
+  vertical-align: middle; 
   outline: 0;
   border: 0;
   cursor: pointer;
