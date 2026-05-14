@@ -24,7 +24,7 @@ const _crSwicthStyle = isChecked => {
     backgroundColor: _trackColor
   }, {
     backgroundColor: _thumbColor,
-    transform: `translate(${_thumbPosX}, 3px)`
+    transform: `translate(${_thumbPosX}, 0px)`
   }, {
     color: _labelColor
   }];
