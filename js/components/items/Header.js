@@ -34,11 +34,16 @@ const CL_ITEM_HEADER = (0, _styleFn.crItemCaptionCn)("item-header"),
     top: 2,
     margin: '0 6px 0 8px'
   },
+  S_VERTICAL_ALIGN_BOTTOM = {
+    verticalAlign: 'bottom'
+  },
   S_CAPTION = {
+    ...S_VERTICAL_ALIGN_BOTTOM,
     width: 125,
     padding: '4px 0 2px 4px'
   },
   S_CAPTION_WIDTH = {
+    ...S_VERTICAL_ALIGN_BOTTOM,
     width: void 0,
     maxWidth: 'calc(100% - 60px)'
   };
