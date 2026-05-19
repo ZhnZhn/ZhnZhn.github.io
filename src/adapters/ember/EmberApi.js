@@ -82,7 +82,7 @@ const EmberApi = {
   },
 
   checkResponse(json) {
-    if (!isArr((json || {}).data)) {
+    if (!isArr(json?.data)) {
       throw crError();
     }
   }

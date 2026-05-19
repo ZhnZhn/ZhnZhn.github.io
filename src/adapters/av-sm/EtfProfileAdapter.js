@@ -20,7 +20,7 @@ const NA = "n/a";
 const _getByProps = (
   json,
   propName
-) => (json || {})[propName] || NA;
+) => json?.[propName] || NA;
 
 const crItemCaption = ({
   itemCaption

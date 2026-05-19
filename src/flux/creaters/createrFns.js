@@ -1,4 +1,4 @@
-import {  
+import {
   isNotEmptyArr,
   parseIntBy10
 } from '../../utils/isTypeFn';
@@ -20,7 +20,7 @@ import {
 } from '../../math/mathFn';
 
 const _getCaption = item => toUpperCaseFirst(
-  item && item.sc || getCaption(item)
+  item?.sc || getCaption(item)
 );
 
 const _crItemCaption = (

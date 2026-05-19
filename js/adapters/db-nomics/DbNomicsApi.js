@@ -140,11 +140,9 @@ const DbNomicsApi = {
     return option.url = _crUrl(option);
   },
   checkResponse(json) {
-    const {
-      errors
-    } = json || {};
-    if ((0, _isTypeFn.isArr)(errors)) {
-      throw (0, _AdapterFn.crErrorByMessage)((errors[0] || {}).message);
+    const _errors = json?.errors;
+    if ((0, _isTypeFn.isArr)(_errors)) {
+      throw (0, _AdapterFn.crErrorByMessage)(_errors[0]?.message);
     }
     const docs = (0, _fnAdapter.getDocs)(json),
       _ts = (0, _isTypeFn.isArr)(docs) ? docs[0] : '';

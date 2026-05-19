@@ -7,7 +7,7 @@ const PasteToSeriaList = ({
   onReg,
   onUnReg
 }) => (series || [])
-  .filter(seria => seria && seria.visible)
+  .filter(seria => seria?.visible)
   .map((seria, index) => (
     <SeriaRow
       key={`${chartId}_${seria.name || ''}_${index}`}

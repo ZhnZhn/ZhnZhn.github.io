@@ -29,14 +29,14 @@ const _hmCrItemId = {
   _getCrItemId = (0, _crRouter.crGetRoute)(_hmCrItemId, _crItemId);
 const crItemId = option => _getCrItemId(option.dfFn)((0, _CategoryFn.isCategory)(option), option.items);
 exports.crItemId = crItemId;
-const getJsonData = json => (json || {}).data || {};
+const getJsonData = json => json?.data || {};
 exports.getJsonData = getJsonData;
 const getDataSeries = data => (0, _objFn.getByPropsFrom)(data, "dataSets", 0, "series") || {};
 exports.getDataSeries = getDataSeries;
 const getRefAreaIndex = dimensions => {
-  const _series = (dimensions || {}).series || [];
+  const _series = dimensions?.series || [];
   for (let i = 0; i < _series.length; i++) {
-    if ((_series[i] || {}).id === "REF_AREA") {
+    if (_series[i]?.id === "REF_AREA") {
       return i;
     }
   }

@@ -24,7 +24,7 @@ const _yearToUTC = (
 ) => Date.UTC(year, 11, 31);
 
 const convertToUTC = (str) => {
-  const _period = (str && str[5]);
+  const _period = str?.[5];
   if (_isDateByMonth(_period)) {
     return _crUtcFromYm(str, '-', 1);
   }

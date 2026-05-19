@@ -79,7 +79,7 @@ const CommandButtons = ({
 const FN_NOOP = () => {};
 const isExcludeElement = (
   evt
-) => ((getEventComposedPath(evt))[1] || {}).className === CL_TOGGLE_ARROW
+) => getEventComposedPath(evt)[1]?.className === CL_TOGGLE_ARROW
 
 const _applyHotKeyHandler = (evt, onFn) => {
   stopDefaultFor(evt)

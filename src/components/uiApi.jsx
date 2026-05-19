@@ -82,7 +82,7 @@ export const fOnClick = (
 
 export const getRefValue = (
   ref
-) => (ref || {}).current
+) => ref?.current
 
 export const setRefValue = (
   ref,
@@ -105,7 +105,7 @@ export const isRefElementContaintsEvtTarget = (
 
 export const getRefElementStyle = (
   ref
-) => (getRefValue(ref) || {}).style
+) => getRefValue(ref)?.style
 
 export const focusHtmlElement = (
   element
@@ -183,7 +183,7 @@ export const clearInputValue = ref => {
 
 const _getFirstTouches = (
   touches
-) => (touches && touches[0]) || {}
+) => touches?.[0] || {}
 , CLIENT_X = 'clientX'
 , CLIENT_Y = 'clientY'
 , _fGetTouch = (propName) => (
@@ -219,7 +219,7 @@ export const getComboboxElement = (
     let i = 0, _elInput;
     for (; i<_comboboxNodeList.length; i++){
       _elInput = _comboboxNodeList.item(i)
-      if (_elInput && _elInput.clientHeight) {
+      if (_elInput?.clientHeight) {
         return _elInput;
       }
     }

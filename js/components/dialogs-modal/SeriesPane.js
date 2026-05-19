@@ -34,7 +34,7 @@ const DF_FROM_CHART = {
   (0, _uiApi.useImperativeHandle)(refEl, () => ({
     getValues: () => {
       const [userMin, userMax] = (0, _SeriesPaneFn.getUserMinMax)(fromChart);
-      return (0, _uiApi.getRefValue)(_refSeries).map(refRow => (0, _uiApi.getInputValue)(refRow)).filter(config => config && config.isChecked).map(config => {
+      return (0, _uiApi.getRefValue)(_refSeries).map(refRow => (0, _uiApi.getInputValue)(refRow)).filter(config => config?.isChecked).map(config => {
         config.userMin = userMin;
         config.userMax = userMax;
         return config;

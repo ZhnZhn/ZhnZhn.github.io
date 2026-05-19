@@ -6,7 +6,7 @@ const _crConfig = (
   option
 ) => {
   const crConfig = RouterConfig
-    .getCrConfig((option||{}).seriaType);
+    .getCrConfig(option?.seriaType);
   return {
     config: crConfig(json, option)
   };

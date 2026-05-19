@@ -25,5 +25,5 @@ export const MsvApi = {
     return `${API_URL}/aggs/ticker/${item1}/range/1/day/${fromDate}/${TO_DATE}?adjusted=true&sort=asc&apiKey=${apiKey}`;
   },
 
-  checkResponse: fCheckResponse(json => (json || {}).results)
+  checkResponse: fCheckResponse(json => json?.results)
 }

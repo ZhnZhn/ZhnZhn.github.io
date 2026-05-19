@@ -9,7 +9,7 @@ var _crDimConfig = _interopRequireDefault(require("./crDimConfig"));
 var _loadJson = _interopRequireDefault(require("./loadJson"));
 const _isArr = Array.isArray;
 const _isEs = (dimension, source) => dimension && source === 'ESTAT';
-const _isSdn = item => item && item.id && item.text && !_isArr(item.valueTexts) && _isArr(item.values);
+const _isSdn = item => item?.id && item.text && !_isArr(item.valueTexts) && _isArr(item.values);
 const _crDimsConfig = json => {
   const dims = [],
     {
@@ -35,6 +35,5 @@ const _crDimsConfig = json => {
   return (0, _crDimConfig.default)(variables);
 };
 const loadDimsWithOptions = url => (0, _loadJson.default)(url).then(_crDimsConfig);
-var _default = loadDimsWithOptions;
-exports.default = _default;
+var _default = exports.default = loadDimsWithOptions;
 //# sourceMappingURL=loadDimsWithOptions.js.map

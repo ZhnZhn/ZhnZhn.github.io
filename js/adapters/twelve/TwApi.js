@@ -15,7 +15,7 @@ const TwApi = {
     option.itemCaption = symbol;
     return `${URL}/time_series?symbol=${symbol}&apikey=${apiKey}&interval=${interval}&outputsize=${outputsize}&${QUERY_TAIL}`;
   },
-  checkResponse: (0, _AdapterFn.fCheckResponse)(json => (json || {}).values, json => (json || {}).message)
+  checkResponse: (0, _AdapterFn.fCheckResponse)(json => json?.values, json => json?.message)
 };
 var _default = exports.default = TwApi;
 //# sourceMappingURL=TwApi.js.map

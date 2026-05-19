@@ -98,7 +98,7 @@ const SeriaRow = (props) => {
       return {
         isChecked: getRefValue(_refIsChecked),
         color: _color,
-        yIndex: (getYAxis() || {}).value,
+        yIndex: getYAxis()?.value,
         data,
         name
       };

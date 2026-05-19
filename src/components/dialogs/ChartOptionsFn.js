@@ -142,7 +142,7 @@ const _crTes = (
   const chartOptions = _crDF(captions, mapFrequency)
   , twoCaption = captions[1] || DIM_CAPTION;
   chartOptions.splice(7, 0, _crItem(
-    [_crCaptionBarBy(toPlural(twoCaption)), CHT_BAR_SET, twoCaption, void 0, (selectProps[1] || {}).id]
+    [_crCaptionBarBy(toPlural(twoCaption)), CHT_BAR_SET, twoCaption, void 0, selectProps[1]?.id]
   ))
   return chartOptions;
 };

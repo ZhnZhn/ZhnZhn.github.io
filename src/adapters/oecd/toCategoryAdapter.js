@@ -36,7 +36,7 @@ const crData = (
       const _categoryIndex = parseFloat(itemKey.split(":")[_refAreaIndex])
       , categoryValue = getByPropsFrom(series[itemKey], "observations", "0", 0)
       , categoryName = isNumber(_categoryIndex)
-          ? (dimensionValues[_categoryIndex] || {}).name
+          ? dimensionValues[_categoryIndex]?.name
           : null;
       if (isNumber(categoryValue) && isStr(categoryName)) {
         data.push(crCategoryPoint(

@@ -24,8 +24,8 @@ const TwApi = {
   },
 
   checkResponse: fCheckResponse(
-    json => (json || {}).values,
-    json => (json || {}).message
+    json => json?.values,
+    json => json?.message
   )
 };
 

@@ -16,7 +16,7 @@ _setUiThemeImpl(DF_THEME_ID)
 export const setUiTheme = (
   item
 ) => {
-  const _nextUiThemeId = (item || {}).v;
+  const _nextUiThemeId = item?.v;
   if (_uiThemeId !== _nextUiThemeId) {
     _setUiThemeImpl(_nextUiThemeId)
   }

@@ -9,8 +9,8 @@ const useSelectItem = () => {
   , _hSelect = useCallback(item => {
     setRefValue(
       ref,
-      (item || {}).caption
-    )    
+      item?.caption
+    )
   }, [])
   return [ref, _hSelect];
 };

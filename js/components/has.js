@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.isWideWidth = exports.initWidthStyle = exports.getWindowInnerWidth = exports.HAS_WIDE_SCREEN = exports.HAS_TOUCH_EVENTS = exports.HAS_KEYBOARD_FOCUS = void 0;
-const getWindowInnerWidth = () => window && window.innerWidth;
+const getWindowInnerWidth = () => window?.innerWidth;
 exports.getWindowInnerWidth = getWindowInnerWidth;
 const DF_WIDE_WIDTH = 700;
 const isWideWidth = function (wideWidth) {

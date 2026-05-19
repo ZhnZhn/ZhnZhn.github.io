@@ -49,7 +49,7 @@ const _crTdStyle = (
   } = h
   , v = r[pn]
   , _tdStyle = crTdStyle({ v, isR })
-  ,  tdStyle  = (r.style || {})[pn];
+  ,  tdStyle  = r.style?.[pn];
 
   return {
     ...style,

@@ -22,7 +22,7 @@ const useModalMenuIndicators = (config, onAddMfi, onRemoveMfi) => (0, _uiApi.use
       onAddMfi,
       onRemoveMfi
     };
-  return (0, _arrFn.filterBoolean)([!(config.zhConfig || {}).isWithoutSma ? [_fRowTaType.RowSma, 'sma', {
+  return (0, _arrFn.filterBoolean)([!config.zhConfig?.isWithoutSma ? [_fRowTaType.RowSma, 'sma', {
     ..._propsType1
   }] : '', _isMfi ? [_RowMfi.default, 'mfi', {
     ..._propsType2

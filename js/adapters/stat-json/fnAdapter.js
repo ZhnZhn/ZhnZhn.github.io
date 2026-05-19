@@ -79,7 +79,7 @@ const _crItemCaption = _ref4 => {
     items,
     dfId
   } = _ref4;
-  return `${dfId || 'id'}_${(items[0] || {}).caption || 'All Items'}`;
+  return `${dfId || 'id'}_${items[0]?.caption || 'All Items'}`;
 };
 const _crDataSource = _ref5 => {
   let {

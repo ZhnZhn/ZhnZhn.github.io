@@ -14,7 +14,7 @@ const DOMESTIC_EQUITIES = "domestic_equities";
 const FOREIGN_EQUITIES = "foreign_equities";
 const FOREIGN_EQUITIES_SHORT_FORM = "For. Eq.";
 const NA = "n/a";
-const _getByProps = (json, propName) => (json || {})[propName] || NA;
+const _getByProps = (json, propName) => json?.[propName] || NA;
 const crItemCaption = (_ref, json) => {
   let {
     itemCaption

@@ -139,6 +139,5 @@ export const fetchJsonHm = (
     if (!res.ok) {
       throw new Error(`Network response error: ${res.status}`)
     }
-    return res.json();
+    return res.json()?.hm;
   })
-  .then(json => (json || {}).hm)

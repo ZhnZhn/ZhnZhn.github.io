@@ -21,7 +21,7 @@ import {
 
 const _isMinMax = (
   config
-) => ((config.yAxis || {}).plotLines || []).length > 0;
+) => (config.yAxis?.plotLines || []).length > 0;
 
 const EPOCH_DMY = '01-01-1970';
 const _isZoom = (getChart) => {

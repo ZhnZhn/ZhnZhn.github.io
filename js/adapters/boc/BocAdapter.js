@@ -7,7 +7,7 @@ var _crAdapterType = require("../crAdapterType1");
 var _fnAdapter = require("./fnAdapter");
 const _fCrItemTuple = options => {
     const seriesId = (0, _fnAdapter.getSeriesId)(options);
-    return item => [(0, _AdapterFn.ymdToUTC)(item.d), parseFloat((item[seriesId] || {}).v)];
+    return item => [(0, _AdapterFn.ymdToUTC)(item.d), parseFloat(item[seriesId]?.v)];
   },
   crData = (0, _crAdapterType.fCrDataType1)(_fnAdapter.getObservationsData, _fCrItemTuple);
 const BocAdapter = (0, _crAdapterType.crAdapterType1)({

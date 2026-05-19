@@ -32,9 +32,7 @@ const LINE_TYPES = [
 
 export const isLineType = (
   config
-) => _isLineType(
-  ((config.series||[])[0]||{}).type
-)
+) => _isLineType(config.series?.[0]?.type)
 
 export const setSeriaDataTo = (
   config,

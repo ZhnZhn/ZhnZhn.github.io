@@ -13,7 +13,7 @@ const crData = (json, option) => {
     observations = (0, _objFn.getByPropsFrom)((0, _fnAdapter.getDataSeries)(data), (0, _fnAdapter.crObservationPropName)(option), "observations") || {},
     dates = (0, _objFn.getByPropsFrom)((0, _fnAdapter.getDataDimensions)(data), "observation", 0, "values") || [];
   return (0, _isTypeFn.getObjectKeys)(observations).reduce((_arr, valueKey) => {
-    const dateMls = (0, _AdapterFn.ymdToUTC)((dates[valueKey] || {}).id),
+    const dateMls = (0, _AdapterFn.ymdToUTC)(dates[valueKey]?.id),
       value = parseFloat(observations[valueKey]);
     if ((0, _isTypeFn.isNumber)(dateMls) && (0, _isTypeFn.isNumber)(value)) {
       _arr.push([dateMls, value]);

@@ -29,8 +29,7 @@ const QUARTER_HM = {
   q4: "12"
 };
 
-const _getTimeObj = dimensions => (dimensions || {})
-  .Time || {};
+const _getTimeObj = dimensions => dimensions?.Time || {};
 
 //Jan-20
 const _mmmYyToMls = str => {
@@ -46,7 +45,7 @@ const _yyyyQqToMls = str => {
   const [
     _yyyy,
     _q=''
-  ] = str && str.split('-') || []
+  ] = str?.split('-') || []
   , _mm = QUARTER_HM[_q.trim().toLowerCase()];
   return _yyyy && _mm
     ? ymdToUTC(`${_yyyy}-${_mm}`)
@@ -72,7 +71,7 @@ const _crDescr = ({
 }) => {
   const {
     href
-  } = (links || {}).dataset_metadata || {};
+  } = links?.dataset_metadata || {};
   return href ? _crItemLink(href) : '';
 }
 

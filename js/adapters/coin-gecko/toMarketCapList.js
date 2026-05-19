@@ -42,7 +42,7 @@ const _getTableHeaders = (0, _fGetLazyValue.fGetLazyValue)(() => {
   }, (0, _toTableFn.crCaptionItemsProps)("Price Change %", [_crPriceChangeItem("1h %", "1h_in_currency"), _crPriceChangeItem("24h %", "24h"), _crPriceChangeItem("7d %", "7d_in_currency"), _crPriceChangeItem("30d %", "30d_in_currency", true), _crPriceChangeItem("1y %", "1y_in_currency", true)]), (0, _toTableFn.crCaptionItemsProps)("Price", [_crNumberItem("High 24h", "high_24h", true), _crNumberItem("Price", "current_price"), _crNumberItem("Low 24h", "low_24h", true)]), (0, _toTableFn.crCaptionItemsProps)("ATH, ATL", [_crNumberItem("ATH", "ath", true), _crChangePercentageItem("ATH %", "ath"), _crUtcItem("ATH Date UTC", "ath_date"), _crNumberItem("ATL", "atl", true), _crChangePercentageItem("ATL %", "atl"), _crUtcItem("ATL Date UTC", "atl_date")]), (0, _toTableFn.crCaptionItemsProps)("Supply", [_crSupplyItem("Circulating"), _crSupplyItem("Total Supply"), _crSupplyItem("Max Supply")]), _crNumberItem("MarketCap", "market_cap"), _crUtcItem("Updated UTC", "last_updated")];
   return [headers, (0, _toTableFn.crTableFlatHeaders)(headers)];
 });
-const _crDataSource = rows => `CoinGecko ${(0, _AdapterFn.toTimeDate)((rows[0] || {}).last_updated)} UTC`;
+const _crDataSource = rows => `CoinGecko ${(0, _AdapterFn.toTimeDate)(rows[0]?.last_updated)} UTC`;
 const toMarketCapList = {
   crKey(option) {
     option.key = (0, _fnAdapter.crPageConfig)(option).join("_");

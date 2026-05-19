@@ -9,7 +9,7 @@ const _getData = (json) => {
     list,
     a,
     b
-  } = (json || {}).result || {};
+  } = json?.result || {};
   return isArr(list)
     ? list
     : isArr(a) && isArr(b)

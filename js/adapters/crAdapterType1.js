@@ -59,7 +59,7 @@ const crAdapterType1 = _ref2 => {
     crKey,
     toConfig(json, option) {
       const _data = crData(json, option),
-        data = (0, _isTypeFn.isArr)(_data) ? _data : (_data || {}).data,
+        data = (0, _isTypeFn.isArr)(_data) ? _data : _data?.data,
         confOption = (0, _AdapterFn.assign)(crConfOption(option, json, _data), addConfOption(option, json));
       trOption(option, json);
       return {

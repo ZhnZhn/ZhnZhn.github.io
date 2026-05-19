@@ -13,7 +13,7 @@ import {
   assign,
   crErrorByMessage
 } from '../AdapterFn';
-import {  
+import {
   getDocs
 } from './fnAdapter';
 
@@ -181,9 +181,9 @@ const DbNomicsApi = {
   },
 
   checkResponse(json){
-    const { errors } = json || {};
-    if (isArr(errors)) {
-      throw crErrorByMessage((errors[0] || {}).message);
+    const _errors = json?.errors; 
+    if (isArr(_errors)) {
+      throw crErrorByMessage(_errors[0]?.message);
     }
 
     const docs = getDocs(json)

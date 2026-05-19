@@ -49,7 +49,7 @@ const BeaApi = {
     if (ResError) {
       throw crError(
         ResError.APIErrorCode,
-        (ResError.ErrorDetail || {}).Description
+        ResError.ErrorDetail?.Description
           || ResError.APIErrorDescription
       );
     }

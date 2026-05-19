@@ -88,7 +88,7 @@ const _fPoint = pnValue => {
 };
 
 const _getRecentValueForSort = points => {
-   const len = points && points.length;
+   const len = points?.length;
    return len && len > 0
      ? points[len-1].forSort
      : void 0;

@@ -27,7 +27,7 @@ const _crTdStyle = (r, h) => {
       v,
       isR
     }),
-    tdStyle = (r.style || {})[pn];
+    tdStyle = r.style?.[pn];
   return {
     ...style,
     ..._tdStyle,

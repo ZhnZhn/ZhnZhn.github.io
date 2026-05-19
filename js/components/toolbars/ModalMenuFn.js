@@ -9,7 +9,7 @@ var _menuModelFn = require("../menuModelFn");
 var _ModalSlider = require("../zhn-modal-slider/ModalSlider");
 var _ModalMenu = require("./ModalMenu.Style");
 var _jsxRuntime = require("react/jsx-runtime");
-const _isMinMax = config => ((config.yAxis || {}).plotLines || []).length > 0;
+const _isMinMax = config => (config.yAxis?.plotLines || []).length > 0;
 const EPOCH_DMY = '01-01-1970';
 const _isZoom = getChart => {
   if (!(0, _uiApi.isFn)(getChart)) {

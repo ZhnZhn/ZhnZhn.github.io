@@ -5,7 +5,7 @@ const updateContainers = (
   msInit,
   setContainers
 ) => {
-  if (msInit && msInit.Comp) {
+  if (msInit?.Comp) {
     setContainers(arrComp => [msInit.Comp, ...arrComp])
   }
 };

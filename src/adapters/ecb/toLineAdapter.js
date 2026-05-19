@@ -30,7 +30,7 @@ const crData = (
   , _values = getObservationValues(json);
   return getObjectKeys(_observations)
     .reduce((data, prName) => {
-       const _dateMls = ymdToUTC((_values[prName] || {}).id)
+       const _dateMls = ymdToUTC(_values[prName]?.id)
        , _value = (_observations[prName] || [])[0];
        if (isNumber(_dateMls) && isNumber(_value)) {
          data.push([_dateMls, _value])

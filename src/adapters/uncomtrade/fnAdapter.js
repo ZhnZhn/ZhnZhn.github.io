@@ -35,7 +35,7 @@ export const isCategoryByPartnerCase = (
 
 export const getItemTradeValue = (
   item
-) => Math.round((item || {}).primaryValue || 0) || 0;
+) => Math.round(item?.primaryValue || 0) || 0;
 
 export const getItemCmdCode = (
   item
@@ -48,11 +48,11 @@ export const getItemCmdCode = (
 
 export const getItemCmdDescE = (
   item
-) => domSanitize((item || {}).cmdDescE)
+) => domSanitize(item?.cmdDescE)
 
 const _fGetItemNumberPropValueByName = (
   propName
-) => (item) => _sanitizeNumber((item || {})[propName]);
+) => (item) => _sanitizeNumber(item?.[propName]);
 
 const _getItemPartnerCode = _fGetItemNumberPropValueByName('partnerCode')
 const _getItemReporterCode = _fGetItemNumberPropValueByName('reporterCode')
@@ -79,7 +79,7 @@ export const getHmTradePartners = (
   }
 
   _hmTradePartner = tradePartners.reduce((hm, item) => {
-    if (item && item.v && item.v.length < 4 && item.c) {
+    if (item?.v && item.v.length < 4 && item.c) {
       hm[item.v] = domSanitize(item.c)
         .replace(`(${item.v})`, '')
         .trim()

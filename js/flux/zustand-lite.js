@@ -47,7 +47,7 @@ const subscribeWithSelector = fn => {
             optListener(currentSlice = nextSlice, previousSlice);
           }
         };
-        if (options != null && options.fireImmediately) {
+        if (options?.fireImmediately) {
           optListener(currentSlice, currentSlice);
         }
       }

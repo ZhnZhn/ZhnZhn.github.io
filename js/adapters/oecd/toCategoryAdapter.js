@@ -20,7 +20,7 @@ const crData = (json, option) => {
       _data = (0, _isTypeFn.getObjectKeys)(series).reduce((data, itemKey) => {
         const _categoryIndex = parseFloat(itemKey.split(":")[_refAreaIndex]),
           categoryValue = (0, _objFn.getByPropsFrom)(series[itemKey], "observations", "0", 0),
-          categoryName = (0, _isTypeFn.isNumber)(_categoryIndex) ? (dimensionValues[_categoryIndex] || {}).name : null;
+          categoryName = (0, _isTypeFn.isNumber)(_categoryIndex) ? dimensionValues[_categoryIndex]?.name : null;
         if ((0, _isTypeFn.isNumber)(categoryValue) && (0, _isTypeFn.isStr)(categoryName)) {
           data.push((0, _CategoryFn.crCategoryPoint)(_crValue(categoryValue), categoryName));
         }

@@ -49,14 +49,14 @@ const _renderTextTo = (
   propName
 ) => {
   const _el = chart[propName];
-  if (_el && _el.css) {
+  if (_el?.css) {
     _el.css({ display: 'inline' })
     return;
   }
-  const { text } = objText || {};
-  if (text) {
+  const _text = objText?.text;
+  if (_text) {
     chart[propName] = chart.renderer
-      .text(text, x, y)
+      .text(_text, x, y)
       .css(_crTextStyle())
       .add()
   }
@@ -66,7 +66,7 @@ const _hideEl = (
   propName
 ) => {
   const _el = chart[propName];
-  if (_el && _el.css) {
+  if (_el?.css) {
     _el.css({...S_NONE})
   }
 };

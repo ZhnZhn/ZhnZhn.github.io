@@ -49,7 +49,7 @@ const _fPoint = pnValue => {
   });
 };
 const _getRecentValueForSort = points => {
-  const len = points && points.length;
+  const len = points?.length;
   return len && len > 0 ? points[len - 1].forSort : void 0;
 };
 const toSeriaNames = (hm, compareBy) => (0, _compareByFn.sortDescByPnValue)((0, _isTypeFn.getObjectKeys)(hm).map(propName => ({

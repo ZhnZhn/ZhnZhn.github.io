@@ -38,7 +38,7 @@ const _addPercent = data => {
   }), _total];
 };
 const _crData = (json, option) => (0, _compareByFn.sortDescByPnValue)((0, _JsonStatFn.crData)((0, _CategoryFn.fCrTreeMapPoint)(option.time), json).filter(_fIsPoint(option.cTotal, _toHm(option.selectOptions[0]))));
-const _crSubtitle = (items, time) => `${((items || [])[1] || {}).caption || ''}: ${time}`;
+const _crSubtitle = (items, time) => `${(items || [])[1]?.caption || ''}: ${time}`;
 const _crConfig = (json, option) => {
   const {
       time

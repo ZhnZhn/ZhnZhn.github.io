@@ -6,10 +6,9 @@ var _uiApi = require("../../uiApi");
 const useSelectItem = () => {
   const ref = (0, _uiApi.useRef)(),
     _hSelect = (0, _uiApi.useCallback)(item => {
-      (0, _uiApi.setRefValue)(ref, (item || {}).caption);
+      (0, _uiApi.setRefValue)(ref, item?.caption);
     }, []);
   return [ref, _hSelect];
 };
-var _default = useSelectItem;
-exports.default = _default;
+var _default = exports.default = useSelectItem;
 //# sourceMappingURL=useSelectItem.js.map

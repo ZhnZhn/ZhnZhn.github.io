@@ -30,7 +30,7 @@ const _crDateOption = function (caption, value) {
     value
   };
 };
-const _getDfDate = (dateOptions, dfIndex) => typeof dfIndex === 'number' ? (dateOptions[dfIndex] || {}).value || '' : '';
+const _getDfDate = (dateOptions, dfIndex) => typeof dfIndex === 'number' ? dateOptions[dfIndex]?.value || '' : '';
 
 // [dateOptions, dateDefault]
 const _crDateConfig = function (dateOptions, mapDateDf) {

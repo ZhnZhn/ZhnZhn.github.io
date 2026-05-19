@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.crInitialPeriod = void 0;
 const _isArray = Array.isArray,
-  _getSeriaData = config => (((config || {}).series || [])[0] || {}).data;
+  _getSeriaData = config => (config?.series || [])[0]?.data;
 const crInitialPeriod = function (config, MONTH, YEAR, yearLength) {
   if (yearLength === void 0) {
     yearLength = 150;

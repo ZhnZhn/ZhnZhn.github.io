@@ -11,7 +11,7 @@ const _getData = json => {
     list,
     a,
     b
-  } = (json || {}).result || {};
+  } = json?.result || {};
   return (0, _isTypeFn.isArr)(list) ? list : (0, _isTypeFn.isArr)(a) && (0, _isTypeFn.isArr)(b) ? {
     asks: a,
     bids: b

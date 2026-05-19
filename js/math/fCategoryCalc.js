@@ -3,11 +3,9 @@
 exports.__esModule = true;
 exports.default = void 0;
 const _isArr = Array.isArray;
-
 const _crHm = data => {
   const hm = Object.create(null),
-        _cPropName = (data[0] || {}).c ? 'c' : 'category';
-
+    _cPropName = data[0]?.c ? 'c' : 'category';
   data.forEach(point => {
     if (!point.isNull) {
       hm[point[_cPropName]] = point;
@@ -15,17 +13,15 @@ const _crHm = data => {
   });
   return hm;
 };
-
-const fCategoryCalc = calc => (d1, d2, {
-  rc,
-  sc
-}) => {
+const fCategoryCalc = calc => (d1, d2, _ref) => {
+  let {
+    rc,
+    sc
+  } = _ref;
   if (!_isArr(d1) || !_isArr(d2)) {
     return [];
   }
-
   const _hmD2 = _crHm(d2);
-
   return d1.map(p1 => {
     const {
       category,
@@ -41,7 +37,5 @@ const fCategoryCalc = calc => (d1, d2, {
     };
   });
 };
-
-var _default = fCategoryCalc;
-exports.default = _default;
+var _default = exports.default = fCategoryCalc;
 //# sourceMappingURL=fCategoryCalc.js.map

@@ -12,7 +12,7 @@ const ABS_PROP = 'Abs';
 
 const _getValueMoving = (
   item
-)=> (item || {}).valueMoving || {};
+)=> item?.valueMoving || {};
 
 const _crBigForValue = (
   item,

@@ -208,7 +208,7 @@ export const crCategoryTitle = (
   title,
   json
 ) => {
-  const _unit = (json.data[0] || {}).Unit;
+  const _unit = json.data[0]?.Unit;
   return joinByComma(
     title,
     isStr(_unit)

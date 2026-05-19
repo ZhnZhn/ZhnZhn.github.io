@@ -1,29 +1,24 @@
 "use strict";
 
 exports.__esModule = true;
-exports["default"] = void 0;
-var _isArr = Array.isArray;
-var zhDetailCharts = {
-  zhGetDetailCharts: function zhGetDetailCharts() {
-    return (this.options || {}).zhDetailCharts;
+exports.default = void 0;
+const _isArr = Array.isArray;
+const zhDetailCharts = {
+  zhGetDetailCharts() {
+    return this.options?.zhDetailCharts;
   },
-  zhAddDetailChart: function zhAddDetailChart(detailChart) {
-    var _charts = this.zhGetDetailCharts();
-
+  zhAddDetailChart(detailChart) {
+    const _charts = this.zhGetDetailCharts();
     if (_isArr(_charts)) {
       _charts.push(detailChart);
     }
   },
-  zhRemoveDetailChart: function zhRemoveDetailChart(detailChart) {
-    var _charts = this.zhGetDetailCharts();
-
+  zhRemoveDetailChart(detailChart) {
+    const _charts = this.zhGetDetailCharts();
     if (_isArr(_charts)) {
-      this.options.zhDetailCharts = _charts.filter(function (chart) {
-        return chart !== detailChart;
-      });
+      this.options.zhDetailCharts = _charts.filter(chart => chart !== detailChart);
     }
   }
 };
-var _default = zhDetailCharts;
-exports["default"] = _default;
+var _default = exports.default = zhDetailCharts;
 //# sourceMappingURL=zhDetailCharts.js.map

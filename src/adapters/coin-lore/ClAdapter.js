@@ -90,7 +90,7 @@ _crTimePeriod = (tMin, tMax) => {
     : `${tdMin} ${tdMax}`;
 },
 _crTitle = (json, { items }, tMin, tMax) => {
-  const _title = (json["0"] || {}).name || items[0].c
+  const _title = json["0"]?.name || items[0].c
   , _period = _crTimePeriod(tMin, tMax);
   return `${_title} ${_period}`;
 };

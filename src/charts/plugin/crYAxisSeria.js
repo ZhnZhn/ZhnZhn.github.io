@@ -1,4 +1,4 @@
-import { crSeriaConfig} from '../ChartConfigFn';
+import { crSeriaConfig } from '../ChartConfigFn';
 
 const _isArr = Array.isArray
 const _assign = Object.assign
@@ -10,7 +10,7 @@ const _isCategoryChart = chartInst => {
   return _type === 'bar' || _type === 'column';
 }
 const _isCategoryData = data => _isArr(data)
- && data[0] && data[0].c;
+ && data[0]?.c;
 
 const _isCategoryCase = (
   chartInst,

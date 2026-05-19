@@ -11,7 +11,7 @@ const ItemOption = _ref => {
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: _CL.CL_ITEM_OPTION,
-    children: (item || {})[propCaption]
+    children: item?.[propCaption]
   });
 };
 var _default = exports.default = ItemOption;

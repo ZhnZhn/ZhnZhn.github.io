@@ -53,7 +53,7 @@ const SeriesPane = ({
        ] = getUserMinMax(fromChart);
        return getRefValue(_refSeries)
          .map(refRow => getInputValue(refRow))
-         .filter(config => config && config.isChecked)
+         .filter(config => config?.isChecked)
          .map(config => {
            config.userMin = userMin
            config.userMax = userMax

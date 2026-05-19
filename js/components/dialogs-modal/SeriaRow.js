@@ -72,7 +72,7 @@ const SeriaRow = props => {
       return {
         isChecked: (0, _uiApi.getRefValue)(_refIsChecked),
         color: _color,
-        yIndex: (getYAxis() || {}).value,
+        yIndex: getYAxis()?.value,
         data,
         name
       };

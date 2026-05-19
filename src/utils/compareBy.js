@@ -3,9 +3,9 @@ export const fCompareBy = (
 ) => (
   arrOrObjA,
   arrOrObjB
-) => ((arrOrObjA || {})[by] < (arrOrObjB || {})[by])
+) => arrOrObjA?.[by] < arrOrObjB?.[by]
   ? -1
-  : ((arrOrObjA || {})[by] === (arrOrObjB || {})[by])
+  : arrOrObjA?.[by] === arrOrObjB?.[by]
   ? 0
   : 1
 

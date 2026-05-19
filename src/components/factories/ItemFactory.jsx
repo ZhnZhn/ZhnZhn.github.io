@@ -126,5 +126,5 @@ const _getCrItem = crGetRoute({
 export const crItem = (
   itemOptions
 ) => _getCrItem(
-  (itemOptions.config || {}).zhCompType
+  itemOptions.config?.zhCompType
 )(itemOptions)

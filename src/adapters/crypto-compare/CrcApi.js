@@ -48,7 +48,7 @@ const CrcApi = {
   },
   checkResponse(json){
     if (!json || json.Response === 'Error') {
-      throw crError('', json && json.Message);
+      throw crError('', json?.Message);
     }
   }
 };

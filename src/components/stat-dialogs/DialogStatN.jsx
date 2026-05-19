@@ -55,8 +55,10 @@ const MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open 
   height: 72
 });
 
-const _crDfC = (props, dim) => props.dfC
-  || (dim || {}).value;
+const _crDfC = (
+  props,
+  dim
+) => props.dfC || dim?.value;
 
 const _crDfTitle = (props, dim) => {
   if (props.dfC || !dim) { return ""; }

@@ -3,7 +3,7 @@ const _isArr = Array.isArray;
 
 const zhDetailCharts = {
   zhGetDetailCharts() {
-    return (this.options || {}).zhDetailCharts;
+    return this.options?.zhDetailCharts;
   },
   zhAddDetailChart(detailChart) {
     const _charts = this.zhGetDetailCharts();

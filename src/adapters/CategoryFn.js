@@ -79,12 +79,12 @@ export const arrangeSeriaByCategories = (
 //chart?.xAxis?.[0]?.categories
 export const getCategories = (
   chart
-) => ((chart.xAxis || [])[0] || {}).categories;
+) => (chart.xAxis || [])[0]?.categories;
 
 export const isCategoryCase = (
   config,
   categories
-) => isArr((config.xAxis||{}).categories)
+) => isArr(config.xAxis?.categories)
   && isArr(categories);
 
 export const crCategories = (

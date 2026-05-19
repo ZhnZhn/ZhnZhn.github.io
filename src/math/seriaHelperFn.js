@@ -7,7 +7,7 @@ import { roundBy } from './mathFn';
 
 export const getPointDate = point => isArr(point)
   ? point[0]
-  : (point || {}).x
+  : point?.x
 
 const _getDfPointValue = (
   dfValue

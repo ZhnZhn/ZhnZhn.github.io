@@ -55,7 +55,7 @@ const _crDF = (captions, mapFrequency) => {
 const _crTes = (captions, mapFrequency, selectProps) => {
   const chartOptions = _crDF(captions, mapFrequency),
     twoCaption = captions[1] || DIM_CAPTION;
-  chartOptions.splice(7, 0, _crItem([_crCaptionBarBy((0, _strFn.toPlural)(twoCaption)), _ChartType.CHT_BAR_SET, twoCaption, void 0, (selectProps[1] || {}).id]));
+  chartOptions.splice(7, 0, _crItem([_crCaptionBarBy((0, _strFn.toPlural)(twoCaption)), _ChartType.CHT_BAR_SET, twoCaption, void 0, selectProps[1]?.id]));
   return chartOptions;
 };
 const _crT1 = () => _crItems([_crDfConfig(SPLINE_CONFIG), LINE_CONFIG, AREA_CONFIG]);

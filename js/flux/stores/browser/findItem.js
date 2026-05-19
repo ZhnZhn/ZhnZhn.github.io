@@ -36,6 +36,6 @@ const findItem = (menu, chartType) => {
   }
 };
 let _recentSetValue, _recentChartType, _recentMenu;
-const findItemSetValue = (menu, chartType) => menu === _recentMenu && chartType === _recentChartType ? _recentSetValue : (_recentMenu = menu, _recentChartType = chartType, _recentSetValue = ((findItem(menu, chartType) || {}).atomBadge || {}).setValue, _recentSetValue);
+const findItemSetValue = (menu, chartType) => menu === _recentMenu && chartType === _recentChartType ? _recentSetValue : (_recentMenu = menu, _recentChartType = chartType, _recentSetValue = findItem(menu, chartType)?.atomBadge?.setValue, _recentSetValue);
 var _default = exports.default = findItemSetValue;
 //# sourceMappingURL=findItem.js.map

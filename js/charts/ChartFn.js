@@ -153,7 +153,7 @@ const afterSetExtremesYAxis = function (event) {
 };
 exports.afterSetExtremesYAxis = afterSetExtremesYAxis;
 const crValueMoving = (chart, prev, dateTo) => {
-  const _id = (chart.userOptions.zhConfig || {}).id,
+  const _id = chart.userOptions.zhConfig?.id,
     points = chart.series[0].data,
     index = (0, _seriaFn.findDateIndex)(points, dateTo),
     valueTo = index === -1 ? void 0 : (0, _seriaHelperFn.getPointValue)(points[index]);

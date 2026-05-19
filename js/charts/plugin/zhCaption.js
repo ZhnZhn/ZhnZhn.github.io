@@ -35,22 +35,20 @@ const _crTextStyle = () => ({
   PN_SUBTITLE = 'zhElSubtitle';
 const _renderTextTo = (chart, objText, x, y, propName) => {
   const _el = chart[propName];
-  if (_el && _el.css) {
+  if (_el?.css) {
     _el.css({
       display: 'inline'
     });
     return;
   }
-  const {
-    text
-  } = objText || {};
-  if (text) {
-    chart[propName] = chart.renderer.text(text, x, y).css(_crTextStyle()).add();
+  const _text = objText?.text;
+  if (_text) {
+    chart[propName] = chart.renderer.text(_text, x, y).css(_crTextStyle()).add();
   }
 };
 const _hideEl = (chart, propName) => {
   const _el = chart[propName];
-  if (_el && _el.css) {
+  if (_el?.css) {
     _el.css({
       ..._styleFn.S_NONE
     });

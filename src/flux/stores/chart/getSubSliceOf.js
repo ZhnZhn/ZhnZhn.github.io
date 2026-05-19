@@ -5,10 +5,9 @@ export const getSubSliceOf = (
   chartTypeOfSubSlice
 ) => {
   const activeContChb = getActiveContCheckBox()
-  , chartSlice = slice[(activeContChb && activeContChb.chartType)
-    || chartTypeOfSubSlice];
+  , chartSlice = slice[activeContChb?.chartType || chartTypeOfSubSlice];
   return [
     chartSlice,
-    (chartSlice || {}).configs || []
+    chartSlice?.configs || []
   ];
 }

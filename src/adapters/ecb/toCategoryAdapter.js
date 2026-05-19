@@ -30,7 +30,7 @@ const crDate = (
        const _value = getByPropsFrom(_series[key],
          "observations", "0", 0
        )
-       , _categoryName = (_seriesValues[index] || {}).name;
+       , _categoryName = _seriesValues[index]?.name;
        if (_value !== null && isStr(_categoryName)) {
          data.push(crCategoryPoint(
            _value,

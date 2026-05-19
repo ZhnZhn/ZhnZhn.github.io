@@ -13,7 +13,7 @@ const _fCrItemTuple = options => {
   const seriesId = getSeriesId(options);
   return item => [
     ymdToUTC(item.d),
-    parseFloat((item[seriesId] || {}).v)
+    parseFloat(item[seriesId]?.v)
   ];
 }
 , crData = fCrDataType1(getObservationsData, _fCrItemTuple)

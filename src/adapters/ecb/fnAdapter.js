@@ -14,7 +14,7 @@ export const getSeries = (
 
 export const getSeriesObservertions = json => {
  const _series = getSeries(json);
- return (_series[getObjectKeys(_series)[0]] || {}).observations;
+ return _series[getObjectKeys(_series)[0]]?.observations;
 }
 
 export const getDimensions = (

@@ -78,7 +78,7 @@ const _crTimeDate = time => (0, _dateFormatFn.toTdSafe)(time * 1000).split(" ")
     let {
       items
     } = _ref2;
-    const _title = (json["0"] || {}).name || items[0].c,
+    const _title = json["0"]?.name || items[0].c,
       _period = _crTimePeriod(tMin, tMax);
     return `${_title} ${_period}`;
   };

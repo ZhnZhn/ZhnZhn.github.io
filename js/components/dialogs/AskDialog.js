@@ -58,7 +58,7 @@ const AskDialog = (0, _memoIsShow.default)(_ref => {
   const _refCaptcha = (0, _uiApi.useRef)(),
     _hLoad = (0, _uiApi.useCallback)(() => {
       const _captchaInst = (0, _uiApi.getRefValue)(_refCaptcha);
-      if (_captchaInst && _captchaInst.isOk()) {
+      if (_captchaInst?.isOk()) {
         const {
           options
         } = data;

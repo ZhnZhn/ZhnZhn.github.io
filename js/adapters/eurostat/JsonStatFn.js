@@ -13,7 +13,7 @@ const FN_TRUE = () => true,
   URL_ID_COUNTRY = './data/eurostat/id-country.json',
   _crHmIdCountry = () => (0, _fnFetch.fetchJsonHm)(URL_ID_COUNTRY),
   _getAsyncHmIdCountry = (0, _fGetLazyValue.fGetLazyValueAsync)(_crHmIdCountry),
-  _getCountryById = id => (_getAsyncHmIdCountry(true) || {})[id] || id;
+  _getCountryById = id => _getAsyncHmIdCountry(true)?.[id] || id;
 const _splitForConfig = function (arr, isAddToCategories) {
   if (isAddToCategories === void 0) {
     isAddToCategories = FN_TRUE;

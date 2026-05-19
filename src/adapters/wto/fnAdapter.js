@@ -1,2 +1,2 @@
 
-export const getDataset = json => (json || {}).Dataset
+export const getDataset = json => json?.Dataset

@@ -89,7 +89,7 @@ const DialogQuery = memoIsShow((
   , _refSeriaColor = useRef()
   , _hLoad = useEventCallback(() => {
      const _idInputInst = getRefValue(_refIdInput)
-     if (_idInputInst && _idInputInst.isValid()){
+     if (_idInputInst?.isValid()){
        const _value = _idInputInst.getValue();
        props.onLoad(props.loadFn(props, {
          // seriaColor, seriaWidth

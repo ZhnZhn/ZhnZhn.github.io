@@ -6,7 +6,7 @@ const API_URL = 'https://api.crypto.com/exchange/v1/public';
 const _getData = (json) => {
   const {
     data
-  } = (json || {}).result || {}
+  } = json?.result || {}
   , _ob = (data || [])[0]
   , { asks, bids } = _ob || {};
   return isArr(asks) && isArr(bids)

@@ -69,7 +69,7 @@ const GroupDeletePane = props => {
       }
     },
     _hSelectGroup = item => {
-      (0, _uiApi.setRefValue)(_refCaption, item && item.caption || null);
+      (0, _uiApi.setRefValue)(_refCaption, item?.caption || null);
     };
   useMsEdit(msEdit => {
     if (msEdit && !msEdit.messages) {

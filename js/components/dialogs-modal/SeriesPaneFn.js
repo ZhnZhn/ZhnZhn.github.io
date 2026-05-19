@@ -13,7 +13,7 @@ const getUserMinMax = fromChart => {
       dataMax,
       userMin,
       userMax
-    } = xAxis0 && xAxis0.getExtremes() || {};
+    } = xAxis0?.getExtremes() || {};
   return [userMin || dataMin, userMax || dataMax];
 };
 exports.getUserMinMax = getUserMinMax;

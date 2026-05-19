@@ -5,11 +5,12 @@
  ],
  "file": "../../../src/adapters/snb/fnAdapter.js",
  "names": [
+  "DATA_SNB_URL",
+  "exports",
   "getTimeSeriesValues",
   "json",
   "timeseries",
-  "values",
-  "exports"
+  "values"
  ],
- "mappings": ";;;;AAAO,MAAMA,mBAAmB,GAAGC,IAAI,IAAI,CAAC,CAAC,CAACA,IAAI,IAAI,CAAC,CAAC,EAAEC,UAAU,IAAI,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,EAAEC,MAAM;AAAAC,OAAA,CAAAJ,mBAAA,GAAAA,mBAAA"
+ "mappings": ";;;;AAAO,MAAMA,YAAY,GAAAC,OAAA,CAAAD,YAAA,GAAG,qBAAqB;AAC1C,MAAME,mBAAmB,GAAGC,IAAI,IAAIA,IAAI,EAAEC,UAAU,GAAG,CAAC,CAAC,EAAEC,MAAM;AAAAJ,OAAA,CAAAC,mBAAA,GAAAA,mBAAA"
 }

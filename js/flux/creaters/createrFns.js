@@ -7,7 +7,7 @@ var _arrFn = require("../../utils/arrFn");
 var _itemFn = require("../../utils/itemFn");
 var _strFn = require("../../utils/strFn");
 var _mathFn = require("../../math/mathFn");
-const _getCaption = item => (0, _strFn.toUpperCaseFirst)(item && item.sc || (0, _itemFn.getCaption)(item));
+const _getCaption = item => (0, _strFn.toUpperCaseFirst)(item?.sc || (0, _itemFn.getCaption)(item));
 const _crItemCaption = (items, titles) => {
   if (!(0, _isTypeFn.isNotEmptyArr)(titles)) {
     titles = [0];

@@ -13,7 +13,7 @@ const getSeries = json => (0, _objFn.getByPropsFrom)(json, "dataSets", 0, "serie
 exports.getSeries = getSeries;
 const getSeriesObservertions = json => {
   const _series = getSeries(json);
-  return (_series[(0, _isTypeFn.getObjectKeys)(_series)[0]] || {}).observations;
+  return _series[(0, _isTypeFn.getObjectKeys)(_series)[0]]?.observations;
 };
 exports.getSeriesObservertions = getSeriesObservertions;
 const getDimensions = json => (0, _objFn.getByPropsFrom)(json, "structure", "dimensions");

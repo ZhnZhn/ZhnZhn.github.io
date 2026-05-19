@@ -40,7 +40,7 @@ const _getDfDate = (
   dateOptions,
   dfIndex
 ) => typeof dfIndex === 'number'
-  ? (dateOptions[dfIndex] || {}).value || ''
+  ? dateOptions[dfIndex]?.value || ''
   : '';
 
 // [dateOptions, dateDefault]

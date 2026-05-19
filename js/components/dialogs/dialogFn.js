@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.getItemValue = exports.crMsgs = void 0;
 var _ChartOptionsFn = require("./ChartOptionsFn");
-const getItemValue = item => (item || {}).value;
+const getItemValue = item => item?.value;
 exports.getItemValue = getItemValue;
 const _geSelectPropsCaption = (selectProps, index) => selectProps[index].caption;
 const _isItemDf = () => true;

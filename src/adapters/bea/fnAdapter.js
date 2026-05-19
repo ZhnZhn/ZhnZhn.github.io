@@ -29,7 +29,7 @@ export const getFrequency = (
   ? "A"
   : "Q"
 
-const _getBeaapi = json => (json || {}).BEAAPI || {};
+const _getBeaapi = json => json?.BEAAPI || {};
 
 export const getResults = json => _getBeaapi(json).Results
 , getResError = json => _getBeaapi(json).Error

@@ -18,6 +18,6 @@ const MsvApi = exports.MsvApi = {
     option.itemCaption = item1;
     return `${API_URL}/aggs/ticker/${item1}/range/1/day/${fromDate}/${TO_DATE}?adjusted=true&sort=asc&apiKey=${apiKey}`;
   },
-  checkResponse: (0, _AdapterFn.fCheckResponse)(json => (json || {}).results)
+  checkResponse: (0, _AdapterFn.fCheckResponse)(json => json?.results)
 };
 //# sourceMappingURL=MsvApi.js.map

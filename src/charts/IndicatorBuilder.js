@@ -21,7 +21,7 @@ const _getD12 = chart => {
   const series = chart.series
   , s1 = series[0]
   , d1 = s1.data
-  , d2 = (series[1] || {}).data || [];
+  , d2 = series[1]?.data || [];
   return { d1, d2, sc: s1.color };
 }
 
@@ -64,7 +64,7 @@ const _addToChartSeria = (
 ) => {
   const seria = crSeriaConfig(option)
   , _seriaIns = chart.addSeries(seria, true, true);
-  return (_seriaIns || {}).color;
+  return _seriaIns?.color;
 };
 
 export const removeSeriaFrom = (
@@ -131,7 +131,7 @@ const _fAddTaTo = (
  };
  return data.length>0
    ? yaxisOptions
-     ? (chart.zhAddSeriaToYAxis({
+     ? chart.zhAddSeriaToYAxis({
           name: taName,
           data,
           ...yaxisOptions
@@ -141,7 +141,7 @@ const _fAddTaTo = (
           zhValueText: id,
           lineWidth: 2
         })
-      ) || {}).color
+      )?.color
      :_addToChartSeria(chart, seriaOption)
    : console.log('It seems, there are not enough data for ' + name);
 }
@@ -149,7 +149,7 @@ const _fAddTaTo = (
 export const addSmaTo = _fAddTaTo('SMA', sma)
 export const addRsiTo = _fAddTaTo('RSI', rsi, { min: 0, max: 100 })
 
-const _getZhPoints = chart => ((chart || {}).options || {}).zhPoints;
+const _getZhPoints = chart => chart?.options?.zhPoints;
 
 export const crMfiConfig = (
   chart,

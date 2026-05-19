@@ -5,7 +5,7 @@ exports.getDialogConf = void 0;
 var _browserLogic = require("./browserLogic");
 const getDialogConf = (conf, chartType) => {
   //DialogStatN
-  if (conf && conf.dialogConf) {
+  if (conf?.dialogConf) {
     return conf;
   }
   const _browserId = chartType.split('_')[0];

@@ -13,7 +13,7 @@ const crData = (json, _option) => {
   const _observations = (0, _fnAdapter.getSeriesObservertions)(json),
     _values = (0, _fnAdapter.getObservationValues)(json);
   return (0, _isTypeFn.getObjectKeys)(_observations).reduce((data, prName) => {
-    const _dateMls = (0, _AdapterFn.ymdToUTC)((_values[prName] || {}).id),
+    const _dateMls = (0, _AdapterFn.ymdToUTC)(_values[prName]?.id),
       _value = (_observations[prName] || [])[0];
     if ((0, _isTypeFn.isNumber)(_dateMls) && (0, _isTypeFn.isNumber)(_value)) {
       data.push([_dateMls, _value]);

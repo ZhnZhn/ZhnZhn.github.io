@@ -1,5 +1,4 @@
-export const getWindowInnerWidth = () => window
-  && window.innerWidth
+export const getWindowInnerWidth = () => window?.innerWidth
 
 const DF_WIDE_WIDTH = 700;
 export const isWideWidth = (

@@ -66,16 +66,16 @@ export const crItemId = (
 
 export const getJsonData = (
   json
-) => (json || {}).data || {}
+) => json?.data || {}
 
 export const getDataSeries = (
   data
 ) => getByPropsFrom(data, "dataSets", 0, "series") || {}
 
 export const getRefAreaIndex = dimensions => {
-  const _series = (dimensions || {}).series || [];
+  const _series = dimensions?.series || [];
   for (let i = 0; i<_series.length; i++) {
-    if ((_series[i] || {}).id === "REF_AREA") {
+    if (_series[i]?.id === "REF_AREA") {
       return i;
     }
   }

@@ -14,8 +14,8 @@ import ShowHide from '../../zhn/ShowHide';
 
 const DF_MSG_ON_NOT_SELECRED = item => `${item} is not selected`
 , FN_NOOP = () => {}
-, _getCaption = item => (item || {}).caption || ''
-, _getValue = item => (item || {}).value || ''
+, _getCaption = item => item?.caption || ''
+, _getValue = item => item?.value || ''
 , _crItem = (
   item1,
   item2
@@ -65,7 +65,7 @@ const SelectOneTwo = ({
     , _hSelectOne = useCallback(one => {
        setRefValue(_refOne, one)
        setRefValue(_refTwo, null)
-       setTwoOptions(one && one.columns || [])
+       setTwoOptions(one?.columns || [])
        onSelectOne(one)
     }, [])
     //onSelectOne

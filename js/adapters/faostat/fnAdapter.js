@@ -127,7 +127,7 @@ exports.crZhConfig = crZhConfig;
 const isSeriesReq = exports.isSeriesReq = _getSeriesPropName;
 const isQueryAllowed = exports.isQueryAllowed = _isListForList;
 const crCategoryTitle = (title, json) => {
-  const _unit = (json.data[0] || {}).Unit;
+  const _unit = json.data[0]?.Unit;
   return (0, _arrFn.joinByComma)(title, (0, _isTypeFn.isStr)(_unit) ? _unit.length > 2 ? _unit : _unit.toUpperCase() : '');
 };
 exports.crCategoryTitle = crCategoryTitle;

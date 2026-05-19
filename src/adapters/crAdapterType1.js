@@ -72,7 +72,7 @@ export const crAdapterType1 = ({
       const _data = crData(json, option)
       , data = isArr(_data)
          ? _data
-         : (_data || {}).data
+         : _data?.data
       , confOption = assign(
           crConfOption(option, json, _data),
           addConfOption(option, json)

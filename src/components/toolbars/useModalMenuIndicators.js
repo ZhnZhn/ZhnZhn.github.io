@@ -22,7 +22,7 @@ const useModalMenuIndicators = (
   , _propsType2 = { onAddMfi, onRemoveMfi };
 
   return filterBoolean([
-    !(config.zhConfig || {}).isWithoutSma ? [
+    !config.zhConfig?.isWithoutSma ? [
       RowSma, 'sma', {..._propsType1}
     ] : '',
     _isMfi ? [

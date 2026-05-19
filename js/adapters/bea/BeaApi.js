@@ -37,7 +37,7 @@ const BeaApi = {
   checkResponse(json) {
     const ResError = (0, _fnAdapter.getResError)(json);
     if (ResError) {
-      throw (0, _AdapterFn.crError)(ResError.APIErrorCode, (ResError.ErrorDetail || {}).Description || ResError.APIErrorDescription);
+      throw (0, _AdapterFn.crError)(ResError.APIErrorCode, ResError.ErrorDetail?.Description || ResError.APIErrorDescription);
     }
     const Results = (0, _fnAdapter.getResults)(json);
     if (!Results || Results.Error || !(0, _isTypeFn.isArr)((0, _fnAdapter.getResultsData)(Results))) {

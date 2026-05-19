@@ -22,7 +22,7 @@ const _crInfo = (
 ) => ({
   name: joinByColon(option.title, option.subtitle),
   description: response.description
-   || (response.data[0] || {})["series-description"]
+   || response.data[0]?.["series-description"]
    || ''
 });
 
@@ -43,7 +43,7 @@ const _toNumber = str => {
 
 export const getResponseData = (
   json
-) => ((json || {}).response || {}).data
+) => json?.response?.data
 
 export const crData = (
   json,

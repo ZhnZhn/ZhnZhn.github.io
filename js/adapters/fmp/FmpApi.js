@@ -11,7 +11,7 @@ const _crDataSource = _ref => {
     dataSource,
     dialogConf
   } = _ref;
-  return dataSource || (dialogConf || {}).contFullCaption || '';
+  return dataSource || dialogConf?.contFullCaption || '';
 };
 const _assignDf = option => {
   const {

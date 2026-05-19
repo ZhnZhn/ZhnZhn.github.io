@@ -113,7 +113,7 @@ const _getDialogType = (
   dfProps
 }) => dialogType
   || (isArr(selectProps) ? D_SELECT_N : void 0)
-  || (isArr(dims) || (dfProps || {}).dfId ? D_STAT_N : void 0);
+  || (isArr(dims) || dfProps?.dfId ? D_STAT_N : void 0);
 
 const _modifyDialogPropsByLoadId = (
   dialogProps,

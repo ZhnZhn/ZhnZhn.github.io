@@ -6,7 +6,7 @@ export const getUserMinMax = fromChart => {
   , {
     dataMin, dataMax,
     userMin, userMax
-  } = (xAxis0 && xAxis0.getExtremes()) || {};
+  } = xAxis0?.getExtremes() || {};
   return [
     userMin || dataMin,
     userMax || dataMax

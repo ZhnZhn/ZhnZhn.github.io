@@ -126,7 +126,7 @@ const InputSelect = ({
   } = state
 
   , _getItemCaption = useMemo(() => item => crValue(
-      (item || {})[propCaption]
+      item?.[propCaption]
     ), [propCaption])
 
   /*eslint-disable react-hooks/exhaustive-deps */

@@ -156,7 +156,7 @@ const useChartToolBar = (
   }
 
   let _btTabMini = null;
-  if (zhMiniConfigs && zhMiniConfigs.length) {
+  if (zhMiniConfigs?.length) {
     _btTabMini = (<ButtonTab
        style= {S_BT_MINI}
        caption="Mini"

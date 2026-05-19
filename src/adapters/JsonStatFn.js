@@ -54,7 +54,7 @@ export const _getDimensionCategory = (
   dimension,
   categoryPropName
 ) => categoryPropName
-  ? (dimension[categoryPropName] || {}).category || {}
+  ? dimension[categoryPropName]?.category || {}
   : {};
 
 const _getCategoryIndexLabel = (

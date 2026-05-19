@@ -13,5 +13,5 @@ const _calcRate = (p1, p2) => p2 && p2.y !== null && p2.y !== 0
  : 0;
 export const categoryRate = fCategoryCalc(_calcRate)
 
-const _calcRoc = (p1, p2) => roc((p2 || {}).y, p1.y);
+const _calcRoc = (p1, p2) => roc(p2?.y, p1.y);
 export const categoryRoc = fCategoryCalc(_calcRoc)

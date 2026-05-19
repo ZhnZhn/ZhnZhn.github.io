@@ -28,7 +28,7 @@ const QUARTER_HM = {
   q3: "09",
   q4: "12"
 };
-const _getTimeObj = dimensions => (dimensions || {}).Time || {};
+const _getTimeObj = dimensions => dimensions?.Time || {};
 
 //Jan-20
 const _mmmYyToMls = str => {
@@ -41,7 +41,7 @@ const _mmmYyToMls = str => {
 
 //2010-q1
 const _yyyyQqToMls = str => {
-  const [_yyyy, _q = ''] = str && str.split('-') || [],
+  const [_yyyy, _q = ''] = str?.split('-') || [],
     _mm = QUARTER_HM[_q.trim().toLowerCase()];
   return _yyyy && _mm ? (0, _AdapterFn.ymdToUTC)(`${_yyyy}-${_mm}`) : NaN;
 };
@@ -68,7 +68,7 @@ const _crDescr = _ref3 => {
   } = _ref3;
   const {
     href
-  } = (links || {}).dataset_metadata || {};
+  } = links?.dataset_metadata || {};
   return href ? _crItemLink(href) : '';
 };
 const _crInfo = (json, option) => ({

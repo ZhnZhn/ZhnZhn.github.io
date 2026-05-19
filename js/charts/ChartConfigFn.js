@@ -12,7 +12,7 @@ var _handleMouseOver = _interopRequireDefault(require("./handleMouseOver"));
 const _assign = Object.assign;
 const LINE_TYPES = ['spline', 'line', 'area'],
   _isLineType = chartType => LINE_TYPES.indexOf(chartType) !== -1;
-const isLineType = config => _isLineType(((config.series || [])[0] || {}).type);
+const isLineType = config => _isLineType(config.series?.[0]?.type);
 exports.isLineType = isLineType;
 const setSeriaDataTo = (config, data, index, name, options) => {
   config.series[index] = {

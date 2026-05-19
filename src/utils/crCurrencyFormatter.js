@@ -23,10 +23,10 @@ const _crCurrencyFormatter = ({
   }
 })
 
-const crCurrencyFormatter = (options) => {
-  return Intl && Intl.NumberFormat
-    ? _crCurrencyFormatter(options)
-    : { format: formatNumber };
-};
+const crCurrencyFormatter = (
+  options
+) => Intl?.NumberFormat
+  ? _crCurrencyFormatter(options)
+  : { format: formatNumber };
 
 export default crCurrencyFormatter

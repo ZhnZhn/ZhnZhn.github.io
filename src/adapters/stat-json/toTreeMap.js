@@ -76,7 +76,7 @@ const _crData = (
 const _crSubtitle = (
   items,
   time
-) => `${((items ||[])[1] || {}).caption || ''}: ${time}`;
+) => `${(items || [])[1]?.caption || ''}: ${time}`;
 
 const _crConfig = (
   json,

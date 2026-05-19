@@ -92,7 +92,7 @@ const GroupDeletePane = (props) => {
   , _hSelectGroup = item => {
      setRefValue(
        _refCaption,
-       (item && item.caption) || null
+       item?.caption || null
      )
   };
 

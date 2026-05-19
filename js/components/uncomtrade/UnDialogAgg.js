@@ -142,7 +142,7 @@ const UnDialogAgg = (0, _memoIsShow.default)(props => {
       if (_isItemValueZero(one) && (0, _itemFn.getValue)(three) === "AG2") {
         msgs.push("Query World by AG2 is too complex");
       }
-      if (((0, _itemFn.getValue)(tradeFlow) || {}).tfType === "t1" && (!_isItemValueZero(tradePartner) || (0, _itemFn.getValue)(chart) === "SPLINE")) {
+      if ((0, _itemFn.getValue)(tradeFlow)?.tfType === "t1" && (!_isItemValueZero(tradePartner) || (0, _itemFn.getValue)(chart) === "SPLINE")) {
         msgs.push("Query trade flow calculated values is only for category charts of trade partner World");
       }
       if (msgs.length === 0) {

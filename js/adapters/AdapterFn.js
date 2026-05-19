@@ -54,7 +54,7 @@ const crErrorByMessage = message => crError('', message);
 exports.crErrorByMessage = crErrorByMessage;
 const toTimeDate = strDateOr => (0, _isTypeFn.isStr)(strDateOr) && strDateOr ? `${strDateOr.slice(11, 19)} ${strDateOr.slice(8, 10)}-${strDateOr.slice(5, 7)}-${strDateOr.slice(0, 4)}` : "";
 exports.toTimeDate = toTimeDate;
-const _getDataDf = json => (json || {}).data;
+const _getDataDf = json => json?.data;
 const fCheckResponse = function (getData, getErrMsg) {
   if (getData === void 0) {
     getData = _getDataDf;
@@ -216,6 +216,6 @@ const addSeriesDataTypeTo = data => {
   return data;
 };
 exports.addSeriesDataTypeTo = addSeriesDataTypeTo;
-const isSeriesDataCase = data => (data || {})._type === SERIES_DATA_TYPE;
+const isSeriesDataCase = data => data?._type === SERIES_DATA_TYPE;
 exports.isSeriesDataCase = isSeriesDataCase;
 //# sourceMappingURL=AdapterFn.js.map

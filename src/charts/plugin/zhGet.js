@@ -2,16 +2,15 @@
 
 const zhGet = {
   zhGetId() {
-    return ((this.options || {}).zhConfig || {}).id;
+    return this.options?.zhConfig?.id;
   },
-  
+
   zhGetFromToDates({
     seriaIndex=0,
     format=a=>a
   }={}){
     try {
-      const pArr = this.series
-        && this.series[seriaIndex]?.points
+      const pArr = this.series?.[seriaIndex]?.points
         || []
       , length = pArr.length;
       return Array.isArray(pArr) && length > 0 ? {

@@ -128,7 +128,7 @@ const fetchJsonHm = url => fetch(url).then(res => {
   if (!res.ok) {
     throw new Error(`Network response error: ${res.status}`);
   }
-  return res.json();
-}).then(json => (json || {}).hm);
+  return res.json()?.hm;
+});
 exports.fetchJsonHm = fetchJsonHm;
 //# sourceMappingURL=fnFetch.js.map

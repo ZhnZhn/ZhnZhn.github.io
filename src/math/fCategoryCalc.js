@@ -2,7 +2,7 @@ const _isArr = Array.isArray;
 
 const _crHm = data => {
   const hm = Object.create(null)
-  , _cPropName = (data[0] || {}).c ? 'c' : 'category';
+  , _cPropName = data[0]?.c ? 'c' : 'category';
   data.forEach(point => {
     if (!point.isNull) {
       hm[point[_cPropName]] = point
@@ -14,7 +14,7 @@ const _crHm = data => {
 const fCategoryCalc = calc => (d1, d2, {rc, sc}) => {
   if (!_isArr(d1) || !_isArr(d2)) {
     return [];
-  }  
+  }
   const _hmD2 = _crHm(d2);
   return d1.map(p1 => {
     const {category, color, status} = p1;

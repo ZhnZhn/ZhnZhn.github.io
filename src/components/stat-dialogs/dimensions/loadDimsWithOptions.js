@@ -6,11 +6,13 @@ import loadJson from './loadJson';
 
 const _isArr = Array.isArray;
 
-const _isEs = (dimension, source) =>
-  dimension && source === 'ESTAT'
-  
-const _isSdn = item => item
-  && item.id && item.text
+const _isEs = (
+  dimension,
+  source
+) => dimension && source === 'ESTAT';
+
+const _isSdn = item => item?.id
+  && item.text
   && !_isArr(item.valueTexts)
   && _isArr(item.values);
 

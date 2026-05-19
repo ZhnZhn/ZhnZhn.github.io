@@ -27,9 +27,9 @@ const arrangeSeriaByCategories = (series, categories) => {
 
 //chart?.xAxis?.[0]?.categories
 exports.arrangeSeriaByCategories = arrangeSeriaByCategories;
-const getCategories = chart => ((chart.xAxis || [])[0] || {}).categories;
+const getCategories = chart => (chart.xAxis || [])[0]?.categories;
 exports.getCategories = getCategories;
-const isCategoryCase = (config, categories) => (0, _isTypeFn.isArr)((config.xAxis || {}).categories) && (0, _isTypeFn.isArr)(categories);
+const isCategoryCase = (config, categories) => (0, _isTypeFn.isArr)(config.xAxis?.categories) && (0, _isTypeFn.isArr)(categories);
 exports.isCategoryCase = isCategoryCase;
 const crCategories = data => data.map(item => (0, _domFn.domSanitize)(item.c));
 exports.crCategories = crCategories;

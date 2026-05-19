@@ -188,7 +188,7 @@ export const crValueMoving = (
   prev,
   dateTo
 ) => {
-  const _id = (chart.userOptions.zhConfig || {}).id
+  const _id = chart.userOptions.zhConfig?.id
   , points = chart.series[0].data
   , index = findDateIndex(points, dateTo)
   , valueTo = index === -1

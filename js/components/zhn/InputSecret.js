@@ -55,7 +55,7 @@ const InputSecret = _ref => {
   (0, _uiApi.useEffect)(() => {
     setTimeout(() => {
       const _input = _refInput.current;
-      if (_input && _input.hasAttribute('value')) {
+      if (_input?.hasAttribute('value')) {
         _input.removeAttribute('value');
       }
     });

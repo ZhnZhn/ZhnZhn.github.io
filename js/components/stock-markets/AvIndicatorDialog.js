@@ -81,7 +81,7 @@ const AvIndicatorDialog = (0, _memoIsShow.default)(_ref => {
       const period = (0, _uiApi.getInputValidValue)(_refPeriod) || DF_PERIOD,
         forDays = (0, _uiApi.getInputValidValue)(_refForDays) || DF_FOR_DAYS,
         ticket = (0, _uiApi.getInputValidValue)(_refTicket),
-        indicator = (getIndicator() || {}).value || DF_INDICATOR;
+        indicator = getIndicator()?.value || DF_INDICATOR;
       onLoad({
         loadId,
         indicator,

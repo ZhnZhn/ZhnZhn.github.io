@@ -20,7 +20,7 @@ const _isArrInclude = (
   value
 ) => arr.indexOf(value) !== -1;
 
-const _isQuery = (obj) => obj && obj.v
+const _isQuery = obj => obj?.v
  && _isArrInclude(ARR_C, obj.cT)
  || _isArrInclude(ARR_B, obj.bT)
 

@@ -21,10 +21,8 @@ const _crCurrencyFormatter = function (_temp) {
     }
   };
 };
-const crCurrencyFormatter = options => {
-  return Intl && Intl.NumberFormat ? _crCurrencyFormatter(options) : {
-    format: _numberFormatFn.formatNumber
-  };
+const crCurrencyFormatter = options => Intl?.NumberFormat ? _crCurrencyFormatter(options) : {
+  format: _numberFormatFn.formatNumber
 };
 var _default = exports.default = crCurrencyFormatter;
 //# sourceMappingURL=crCurrencyFormatter.js.map

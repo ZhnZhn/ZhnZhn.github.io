@@ -7,7 +7,7 @@ const API_URL = "https://api.eia.gov/v2"
 , DF_FREQ= 'monthly'
 , ID_FREQ = 'freq';
 
-const _isItemFreq = item => (item || {}).id === ID_FREQ;
+const _isItemFreq = item => item?.id === ID_FREQ;
 const _crFacets = (
   items
 ) => items
@@ -39,7 +39,7 @@ const EiaApi = {
       apiKey,
       time
     } = option
-    , _dfSet = (items[0] || {}).dfSet || dfSet
+    , _dfSet = items[0]?.dfSet || dfSet
     , _frequency = dfFreq || _getFrequencyOrDf(items)
     , _reqUrl = `${API_URL}/${dfRoute}/${_dfSet}/data?frequency=${_frequency}&data[0]=${dfData}&api_key=${apiKey}`;
 

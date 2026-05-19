@@ -12,7 +12,7 @@ const _setUiThemeImpl = uiThemeId => {
 };
 _setUiThemeImpl(_paletteFn.DF_THEME_ID);
 const setUiTheme = item => {
-  const _nextUiThemeId = (item || {}).v;
+  const _nextUiThemeId = item?.v;
   if (_uiThemeId !== _nextUiThemeId) {
     _setUiThemeImpl(_nextUiThemeId);
   }

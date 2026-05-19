@@ -23,7 +23,7 @@ const _crInfo = (_ref2, option) => {
   } = _ref2;
   return {
     name: (0, _arrFn.joinByColon)(option.title, option.subtitle),
-    description: response.description || (response.data[0] || {})["series-description"] || ''
+    description: response.description || response.data[0]?.["series-description"] || ''
   };
 };
 const crTitle = _ref3 => {
@@ -41,7 +41,7 @@ const _toNumber = str => {
   const _n = parseFloat(str);
   return (0, _isTypeFn.isNumber)(_n) ? _n : null;
 };
-const getResponseData = json => ((json || {}).response || {}).data;
+const getResponseData = json => json?.response?.data;
 exports.getResponseData = getResponseData;
 const crData = (json, _ref4) => {
   let {

@@ -15,7 +15,7 @@ export const throwErrOffline = () => {
 }
 
 export const logErrMsg = err => {
-  const errMsg = (err || {}).message || "";
+  const errMsg = err?.message || "";
   console.log(errMsg)
   if (errMsg === MSG_OFFLINE) {
     showAlertDialogBy(

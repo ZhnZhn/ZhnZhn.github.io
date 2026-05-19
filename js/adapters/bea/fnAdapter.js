@@ -11,7 +11,7 @@ const BEA_DATA_URL = exports.BEA_DATA_URL = "https://apps.bea.gov";
 const INDUSTRY_FACTSHEET_URL = `${BEA_DATA_URL}/industry/factsheet/factsheet.html`;
 const getFrequency = item => (0, _itemFn.getCaption)(item, "").indexOf("(A,Q)") === -1 ? "A" : "Q";
 exports.getFrequency = getFrequency;
-const _getBeaapi = json => (json || {}).BEAAPI || {};
+const _getBeaapi = json => json?.BEAAPI || {};
 const getResults = json => _getBeaapi(json).Results,
   getResError = json => _getBeaapi(json).Error,
   getResultsData = Results => (0, _objFn.getByPropsFrom)(Results, ...((0, _isTypeFn.isArr)(Results) ? [0, "Data"] : ["Data"]));

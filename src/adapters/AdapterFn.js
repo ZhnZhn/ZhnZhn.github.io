@@ -74,7 +74,7 @@ export const toTimeDate = (
   ? `${strDateOr.slice(11, 19)} ${strDateOr.slice(8, 10)}-${strDateOr.slice(5, 7)}-${strDateOr.slice(0, 4)}`
   : "";
 
-const _getDataDf = json => (json || {}).data
+const _getDataDf = json => json?.data
 export const fCheckResponse = (
   getData=_getDataDf,
   getErrMsg=FN_NOOP
@@ -326,4 +326,4 @@ export const addSeriesDataTypeTo = (
 }
 export const isSeriesDataCase = (
   data
-) => (data || {})._type === SERIES_DATA_TYPE
+) => data?._type === SERIES_DATA_TYPE

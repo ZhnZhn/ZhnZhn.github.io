@@ -73,7 +73,7 @@ const _addSeriesFromHmTo = _ref2 => {
     }
   });
 };
-const _compareByPeriod = (a, b) => (a || {}).period - (b || {}).period;
+const _compareByPeriod = (a, b) => a?.period - b?.period;
 const _crHmNames = (hmData, hmTradePartners) => {
   return (0, _isTypeFn.getObjectKeys)(hmData).reduce((_hm, tpKey) => {
     _hm[hmTradePartners[tpKey] || tpKey] = hmData[tpKey];

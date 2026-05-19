@@ -13,7 +13,7 @@ const _crUtcFromYm = (str, delimeter, monthMultiplyBy) => {
 const _isDateByMonth = period => (0, _isTypeFn.isNumber)((0, _isTypeFn.parseIntBy10)(period));
 const _yearToUTC = year => Date.UTC(year, 11, 31);
 const convertToUTC = str => {
-  const _period = str && str[5];
+  const _period = str?.[5];
   if (_isDateByMonth(_period)) {
     return _crUtcFromYm(str, '-', 1);
   }

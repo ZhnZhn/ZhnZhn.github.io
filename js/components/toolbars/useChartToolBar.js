@@ -138,7 +138,7 @@ const useChartToolBar = (hasError, _crModalMenuLeftStyle, config, getChart, onCl
     });
   }
   let _btTabMini = null;
-  if (zhMiniConfigs && zhMiniConfigs.length) {
+  if (zhMiniConfigs?.length) {
     _btTabMini = /*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
       style: S_BT_MINI,
       caption: "Mini",

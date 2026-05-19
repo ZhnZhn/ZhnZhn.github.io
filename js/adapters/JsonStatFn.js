@@ -24,7 +24,7 @@ const _getIdSizeTuple = json => {
   return [dimension.id || [], dimension.size || []];
 };
 exports._getIdSizeTuple = _getIdSizeTuple;
-const _getDimensionCategory = (dimension, categoryPropName) => categoryPropName ? (dimension[categoryPropName] || {}).category || {} : {};
+const _getDimensionCategory = (dimension, categoryPropName) => categoryPropName ? dimension[categoryPropName]?.category || {} : {};
 exports._getDimensionCategory = _getDimensionCategory;
 const _getCategoryIndexLabel = (id, size, dimension) => {
   const categoryIndex = size.findIndex(v => v !== 1),

@@ -189,7 +189,7 @@ const UnDialogAgg = memoIsShow((
     if (_isItemValueZero(one) && getValue(three) === "AG2") {
       msgs.push("Query World by AG2 is too complex")
     }
-    if ((getValue(tradeFlow) || {}).tfType === "t1"
+    if (getValue(tradeFlow)?.tfType === "t1"
         && (!_isItemValueZero(tradePartner) || getValue(chart) === "SPLINE")) {
       msgs.push("Query trade flow calculated values is only for category charts of trade partner World")
     }

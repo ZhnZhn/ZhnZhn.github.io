@@ -4,7 +4,7 @@ exports.__esModule = true;
 exports.mergeToChartPoints = exports.getZeroIndexFromEnd = exports.getZeroCountFromStart = exports.getPointValue = exports.getPointDate = exports.fGetY = exports.crPointGetter = exports.crDataArrays = void 0;
 var _isTypeFn = require("../utils/isTypeFn");
 var _mathFn = require("./mathFn");
-const getPointDate = point => (0, _isTypeFn.isArr)(point) ? point[0] : (point || {}).x;
+const getPointDate = point => (0, _isTypeFn.isArr)(point) ? point[0] : point?.x;
 exports.getPointDate = getPointDate;
 const _getDfPointValue = dfValue => (0, _isTypeFn.isNumber)(dfValue) ? dfValue : '0.0';
 const getPointValue = (point, dfValue) => (0, _isTypeFn.isArr)(point) ? (0, _isTypeFn.isNumber)(point[1]) ? point[1] : _getDfPointValue(dfValue) : point && (0, _isTypeFn.isNumber)(point.y) ? point.y : _getDfPointValue(dfValue);

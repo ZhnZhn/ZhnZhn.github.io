@@ -31,7 +31,7 @@ const crData = (
     ) || [];
    return getObjectKeys(observations)
     .reduce((_arr, valueKey) => {
-       const dateMls = ymdToUTC((dates[valueKey] || {}).id)
+       const dateMls = ymdToUTC(dates[valueKey]?.id)
        , value = parseFloat(observations[valueKey]);
        if (isNumber(dateMls) && isNumber(value)) {
          _arr.push([dateMls, value])

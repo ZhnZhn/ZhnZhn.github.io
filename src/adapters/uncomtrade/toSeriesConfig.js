@@ -116,7 +116,7 @@ const _addSeriesFromHmTo = ({
 const _compareByPeriod = (
   a,
   b
-) => (a || {}).period - (b || {}).period
+) => a?.period - b?.period
 
 const _crHmNames = (
   hmData,

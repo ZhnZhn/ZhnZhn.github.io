@@ -5,7 +5,7 @@ const ItemOption = ({
   propCaption
 }) => (
   <div className={CL_ITEM_OPTION}>
-    {(item || {})[propCaption]}
+    {item?.[propCaption]}
   </div>
 );
 

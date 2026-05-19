@@ -1,8 +1,6 @@
 import { isCategoryItem } from './ChartOptionsFn';
 
-export const getItemValue = (
-  item
-) => (item || {}).value
+export const getItemValue = item => item?.value
 
 const _geSelectPropsCaption = (
   selectProps,

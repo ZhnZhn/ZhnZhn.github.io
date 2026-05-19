@@ -87,6 +87,6 @@ const _getCrItem = (0, _crRouter.crGetRoute)({
 }, _crAreaChart);
 
 /* { config, index, chartType, props, store } */
-const crItem = itemOptions => _getCrItem((itemOptions.config || {}).zhCompType)(itemOptions);
+const crItem = itemOptions => _getCrItem(itemOptions.config?.zhCompType)(itemOptions);
 exports.crItem = crItem;
 //# sourceMappingURL=ItemFactory.js.map

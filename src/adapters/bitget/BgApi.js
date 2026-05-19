@@ -18,7 +18,7 @@ const _crObUrl = (
   limit
 ) => `${API_URL}/orderbook?${_crPairLimitQueryToken(pair, limit)}&type=step0`;
 
-const _getData = (json) => (json || {}).data;
+const _getData = json => json?.data;
 
 const BgApi = crRouteDfObApi(
   _crDfUrl,

@@ -35,7 +35,7 @@ const _getMapFrequency = dims => {
   for(let i=0; i<dims.length; i++){
     const _item = dims[i] || {};
     if (_item.v === "freq") {
-      return ((_item.options || [])[0] || {}).value;
+      return (_item.options || [])[0]?.value;
     }
   }
 };

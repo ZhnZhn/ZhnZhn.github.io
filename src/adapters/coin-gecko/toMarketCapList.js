@@ -117,7 +117,7 @@ const _getTableHeaders = fGetLazyValue(() => {
 
 const _crDataSource = (
   rows
-) => `CoinGecko ${toTimeDate((rows[0] || {}).last_updated)} UTC`;
+) => `CoinGecko ${toTimeDate(rows[0]?.last_updated)} UTC`;
 
 const toMarketCapList = {
   crKey(option){

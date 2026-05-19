@@ -38,7 +38,7 @@ const OBS_PERIOD_OVERALL_ = 'OBS_PERIOD_OVERALL_'
 
 const _getAnnotationTitle = (
   annotationItem
-) => (annotationItem || {}).title || "";
+) => annotationItem?.title || "";
 
 const _getObsOverallPeriods = (
   extension
@@ -51,7 +51,7 @@ const _getObsOverallPeriods = (
 
   if (isArr(annotation)) {
     for(_annotationItem of annotation) {
-      _annotationType = (_annotationItem || {}).type
+      _annotationType = _annotationItem?.type
       if (_annotationType === OLDEST_DATE) {
         _fromDate = _getAnnotationTitle(_annotationItem)
       } else if (_annotationType === LATEST_DATE) {

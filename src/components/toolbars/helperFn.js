@@ -2,7 +2,7 @@
 const _isArray = Array.isArray
 , _getSeriaData = (
   config
-) => (((config || {}).series || [])[0] || {}).data;
+) => (config?.series || [])[0]?.data;
 
 export const crInitialPeriod = (
   config,

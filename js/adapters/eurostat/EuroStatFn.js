@@ -24,7 +24,7 @@ const _crDescr = (updated, extension) => {
 const OBS_PERIOD_OVERALL_ = 'OBS_PERIOD_OVERALL_',
   OLDEST_DATE = `${OBS_PERIOD_OVERALL_}OLDEST`,
   LATEST_DATE = `${OBS_PERIOD_OVERALL_}LATEST`;
-const _getAnnotationTitle = annotationItem => (annotationItem || {}).title || "";
+const _getAnnotationTitle = annotationItem => annotationItem?.title || "";
 const _getObsOverallPeriods = extension => {
   const {
     annotation
@@ -35,7 +35,7 @@ const _getObsOverallPeriods = extension => {
     _annotationType;
   if ((0, _isTypeFn.isArr)(annotation)) {
     for (_annotationItem of annotation) {
-      _annotationType = (_annotationItem || {}).type;
+      _annotationType = _annotationItem?.type;
       if (_annotationType === OLDEST_DATE) {
         _fromDate = _getAnnotationTitle(_annotationItem);
       } else if (_annotationType === LATEST_DATE) {

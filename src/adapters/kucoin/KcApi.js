@@ -1,9 +1,7 @@
 import { crRouteDfObApi } from '../ApiFn';
 
 const API_URL = "https://api.kucoin.com/api/v1/market";
-const _getData = (
-  json
-) => (json || {}).data;
+const _getData = json => json?.data;
 
 const _crDfUrl = (
   pair,

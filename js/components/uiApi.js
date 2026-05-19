@@ -54,7 +54,7 @@ const fOnClick = (onClick, onClose, isClose) => (0, _isTypeFn.isFn)(onClick) ? i
   onClose();
 } : onClick : void 0;
 exports.fOnClick = fOnClick;
-const getRefValue = ref => (ref || {}).current;
+const getRefValue = ref => ref?.current;
 exports.getRefValue = getRefValue;
 const setRefValue = (ref, value) => {
   if (ref) {
@@ -67,7 +67,7 @@ const isRefElementContaintsEvtTarget = (ref, evt) => {
   return _el && (0, _isTypeFn.isFn)(_el.contains) && _el.contains(evt.target);
 };
 exports.isRefElementContaintsEvtTarget = isRefElementContaintsEvtTarget;
-const getRefElementStyle = ref => (getRefValue(ref) || {}).style;
+const getRefElementStyle = ref => getRefValue(ref)?.style;
 exports.getRefElementStyle = getRefElementStyle;
 const focusHtmlElement = element => {
   if (element && (0, _isTypeFn.isFn)(element.focus)) {
@@ -112,7 +112,7 @@ const clearInputValue = ref => {
   }
 };
 exports.clearInputValue = clearInputValue;
-const _getFirstTouches = touches => touches && touches[0] || {},
+const _getFirstTouches = touches => touches?.[0] || {},
   CLIENT_X = 'clientX',
   CLIENT_Y = 'clientY',
   _fGetTouch = propName => touches => _getFirstTouches(touches)[propName],
@@ -134,7 +134,7 @@ const getComboboxElement = refRoot => {
       _elInput;
     for (; i < _comboboxNodeList.length; i++) {
       _elInput = _comboboxNodeList.item(i);
-      if (_elInput && _elInput.clientHeight) {
+      if (_elInput?.clientHeight) {
         return _elInput;
       }
     }

@@ -47,7 +47,7 @@ const findItemSetValue = (
  : (
      _recentMenu = menu,
      _recentChartType = chartType,
-     _recentSetValue = ((findItem(menu, chartType) || {}).atomBadge || {}).setValue,
+     _recentSetValue = findItem(menu, chartType)?.atomBadge?.setValue,
      _recentSetValue
   );
 

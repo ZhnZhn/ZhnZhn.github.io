@@ -20,7 +20,7 @@ const _crDataSource = ({
   dataSource,
   dialogConf
 }) => dataSource
- || (dialogConf || {}).contFullCaption || '';
+ || dialogConf?.contFullCaption || '';
 
 const _assignDf = option => {
   const { dfT, items=[] } = option

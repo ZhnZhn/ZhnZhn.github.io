@@ -59,7 +59,7 @@ const InputSelect = _ref => {
       initialOptions,
       nAll
     } = state,
-    _getItemCaption = (0, _uiApi.useMemo)(() => item => (0, _InputSelectFn.crValue)((item || {})[propCaption]), [propCaption])
+    _getItemCaption = (0, _uiApi.useMemo)(() => item => (0, _InputSelectFn.crValue)(item?.[propCaption]), [propCaption])
 
     /*eslint-disable react-hooks/exhaustive-deps */,
     [_getCurrentComp, _decorateCurrentComp, _setSelectedItemIndex, _selectItem] = (0, _uiApi.useMemo)(() => [() => {

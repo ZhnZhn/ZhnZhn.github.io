@@ -115,7 +115,7 @@ const _crDescr = (
 const _crItemCaption = ({
   items,
   dfId
-}) => `${dfId || 'id'}_${(items[0] || {}).caption || 'All Items'}`;
+}) => `${dfId || 'id'}_${items[0]?.caption || 'All Items'}`;
 
 const _crDataSource = ({
   dataSource,

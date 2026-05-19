@@ -53,7 +53,7 @@ const AskDialog = memoIsShow(({
   const _refCaptcha = useRef()
   , _hLoad = useCallback(() => {
       const _captchaInst = getRefValue(_refCaptcha);
-      if (_captchaInst && _captchaInst.isOk()){
+      if (_captchaInst?.isOk()){
         const { options } = data;
         loadFromQuery(options)
         onClose()

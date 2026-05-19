@@ -17,7 +17,7 @@ const isAggregateByHs = option => option.two === 'AG2';
 exports.isAggregateByHs = isAggregateByHs;
 const isCategoryByPartnerCase = option => (0, _CategoryFn.isCategory)(option) || option.seriaType === _ChartType.CHT_DOT_SET;
 exports.isCategoryByPartnerCase = isCategoryByPartnerCase;
-const getItemTradeValue = item => Math.round((item || {}).primaryValue || 0) || 0;
+const getItemTradeValue = item => Math.round(item?.primaryValue || 0) || 0;
 exports.getItemTradeValue = getItemTradeValue;
 const getItemCmdCode = item => {
   const {
@@ -26,9 +26,9 @@ const getItemCmdCode = item => {
   return (cmdCode || '').length < 4 ? cmdCode : (0, _domFn.domSanitize)(cmdCode);
 };
 exports.getItemCmdCode = getItemCmdCode;
-const getItemCmdDescE = item => (0, _domFn.domSanitize)((item || {}).cmdDescE);
+const getItemCmdDescE = item => (0, _domFn.domSanitize)(item?.cmdDescE);
 exports.getItemCmdDescE = getItemCmdDescE;
-const _fGetItemNumberPropValueByName = propName => item => _sanitizeNumber((item || {})[propName]);
+const _fGetItemNumberPropValueByName = propName => item => _sanitizeNumber(item?.[propName]);
 const _getItemPartnerCode = _fGetItemNumberPropValueByName('partnerCode');
 const _getItemReporterCode = _fGetItemNumberPropValueByName('reporterCode');
 const getItemPeriod = exports.getItemPeriod = _fGetItemNumberPropValueByName('period');
@@ -42,7 +42,7 @@ const getHmTradePartners = tradePartners => {
     return crEmptyHmObject();
   }
   _hmTradePartner = tradePartners.reduce((hm, item) => {
-    if (item && item.v && item.v.length < 4 && item.c) {
+    if (item?.v && item.v.length < 4 && item.c) {
       hm[item.v] = (0, _domFn.domSanitize)(item.c).replace(`(${item.v})`, '').trim();
     }
     return hm;
