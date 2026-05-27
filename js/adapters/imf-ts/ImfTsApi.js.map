@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/imf-ts/ImfTsApi.js"
+ ],
+ "file": "../../../src/adapters/imf-ts/ImfTsApi.js",
+ "names": [
+  "_AdapterFn",
+  "require",
+  "DATA_URL",
+  "_crLineUrl",
+  "option",
+  "getValues",
+  "ImfTsApi",
+  "getRequestUrl",
+  "checkResponse",
+  "fCheckResponse",
+  "_default",
+  "exports",
+  "default"
+ ],
+ "mappings": ";;;;AAAA,IAAAA,UAAA,GAAAC,OAAA;AAKA,MAAMC,QAAQ,GAAG,iCAAiC;AAElD,MAAMC,UAAU,GACdC,MAAM,IACH,GAAGF,QAAQ,IAAI,IAAAG,oBAAS,EAACD,MAAM,CAAC,CAAC,CAAC,CAAC,OAAO;AAE/C,MAAME,QAAQ,GAAG;EACfC,aAAaA,CAACH,MAAM,EAAC;IACnB,OAAOD,UAAU,CAACC,MAAM,CAAC;EAC3B,CAAC;EACDI,aAAa,EAAE,IAAAC,yBAAc,EAAC;AAChC,CAAC;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAC,OAAA,GAEaN,QAAQ"
+}

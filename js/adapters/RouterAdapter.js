@@ -33,6 +33,7 @@ var _Oecd = _interopRequireDefault(require("./oecd/Oecd"));
 var _Ei = _interopRequireDefault(require("./ei/Ei"));
 var _Ember = _interopRequireDefault(require("./ember/Ember"));
 var _En = _interopRequireDefault(require("./environment/En"));
+var _ImfTs = _interopRequireDefault(require("./imf-ts/ImfTs"));
 var _Irena = _interopRequireDefault(require("./irena/Irena"));
 var _AvBlockchain = _interopRequireDefault(require("./av-blockchain/AvBlockchain"));
 var _AvEconomics = _interopRequireDefault(require("./av-economics/AvEconomics"));
@@ -66,6 +67,7 @@ const RouterAdapter = {
   [_LoadType.LT_EMB]: _Ember.default,
   [_LoadType.LT_IRE]: _Irena.default,
   [_LoadType.LT_EN]: _En.default,
+  [_LoadType.LT_IMF_TS]: _ImfTs.default,
   [_LoadType.LT_FAO]: _FaoStat.default,
   [_LoadType.LT_WB]: _WorldBank.default,
   [_LoadType.LT_WT]: _Wt.default,

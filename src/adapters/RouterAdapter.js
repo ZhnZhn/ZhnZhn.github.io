@@ -10,6 +10,7 @@ import {
   LT_EMB,
   LT_IRE,
   LT_EN,
+  LT_IMF_TS,
   LT_FMP,
   LT_TW,
   LT_MSV,
@@ -87,6 +88,7 @@ import Oecd from './oecd/Oecd';
 import Ei from './ei/Ei'
 import Ember from './ember/Ember'
 import En from './environment/En'
+import ImfTs from './imf-ts/ImfTs'
 import Irena from './irena/Irena'
 
 import AvBlockchain from './av-blockchain/AvBlockchain'
@@ -125,6 +127,8 @@ const RouterAdapter = {
   [LT_EMB]: Ember,
   [LT_IRE]: Irena,
   [LT_EN]: En,
+
+  [LT_IMF_TS]: ImfTs,
 
   [LT_FAO]: FaoStat,
   [LT_WB]: WorldBank,

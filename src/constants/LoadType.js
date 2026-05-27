@@ -16,6 +16,8 @@ export const LT_EMB = "EMB"
 export const LT_IRE = "IRE"
 export const LT_EN = "EN"
 
+export const LT_IMF_TS = "IMF_TS"
+
 export const LT_EU_STAT = "EU_STAT"
 export const LT_FS = "FS"
 export const LT_UKS = "UKS"
