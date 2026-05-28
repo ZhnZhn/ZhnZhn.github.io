@@ -4,10 +4,10 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _ImfTsApi = _interopRequireDefault(require("./ImfTsApi"));
-var _ImfTsAdapter = _interopRequireDefault(require("./ImfTsAdapter"));
+var _toTsLineAdapter = _interopRequireDefault(require("../toTsLineAdapter"));
 const ImfTs = {
   api: _ImfTsApi.default,
-  adapter: _ImfTsAdapter.default
+  adapter: _toTsLineAdapter.default
 };
 var _default = exports.default = ImfTs;
 //# sourceMappingURL=ImfTs.js.map

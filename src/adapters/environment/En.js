@@ -1,5 +1,5 @@
 import api from './EnApi';
-import adapter from './EnAdapter';
+import adapter from '../toTsLineAdapter';
 
 const En = {
   api,

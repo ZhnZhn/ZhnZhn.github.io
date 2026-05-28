@@ -1,5 +1,5 @@
 import api from './ImfTsApi';
-import adapter from './ImfTsAdapter';
+import adapter from '../toTsLineAdapter';
 
 const ImfTs = {
   api,
