@@ -30,6 +30,7 @@ import { CL_VM_BADGE_BT } from './Item.Style';
 
 const S_ROOT = {
   position: 'relative',
+  top: 2,
   display: 'inline-block',
   marginLeft: 10
 },

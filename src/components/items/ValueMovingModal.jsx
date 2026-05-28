@@ -28,7 +28,7 @@ import {
 import DivCompareTo from './DivCompareTo';
 
 const S_MODAL_POPUP = {
-  ...crAbsoluteTopLeftStyle(30, 0),
+  ...crAbsoluteTopLeftStyle(32, 0),
   zIndex: 20,
   padding: '5px 10px 10px 10px'
 }

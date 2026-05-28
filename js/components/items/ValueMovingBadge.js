@@ -16,6 +16,7 @@ var _Item = require("./Item.Style");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_ROOT = {
     position: 'relative',
+    top: 2,
     display: 'inline-block',
     marginLeft: 10
   },
