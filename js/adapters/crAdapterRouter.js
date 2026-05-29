@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.fGetRouteTreeMap = exports.fGetRouteCategory = exports.fGetRouteBarTreeMap = exports.crAdapterRouterDfOb = exports.crAdapterRouter = void 0;
+exports.fGetRouteTreeMap = exports.fGetRouteCategory = exports.fGetRouteBarTreeMap = exports.crAdapterRouterDfOb = exports.crAdapterRouter = exports.crAdapterGetRoute = void 0;
 var _isTypeFn = require("../utils/isTypeFn");
 var _CategoryFn = require("./CategoryFn");
 var _crAdapterOrderBook = require("./crAdapterOrderBook");
@@ -44,6 +44,10 @@ const crAdapterRouter = _ref => {
   return _adapter;
 };
 exports.crAdapterRouter = crAdapterRouter;
+const crAdapterGetRoute = getRoute => crAdapterRouter({
+  getRoute
+});
+exports.crAdapterGetRoute = crAdapterGetRoute;
 const _toOrderBookDf = (0, _crAdapterOrderBook.crAdapterOrderBook)();
 const crAdapterRouterDfOb = (toKline, toOrderBook) => crAdapterRouter({
   rAdapter: {

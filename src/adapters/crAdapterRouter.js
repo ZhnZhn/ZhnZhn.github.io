@@ -109,6 +109,12 @@ export const crAdapterRouter = ({
    return _adapter;
 }
 
+export const crAdapterGetRoute = (
+  getRoute
+) => crAdapterRouter({
+  getRoute
+})
+
 const _toOrderBookDf = crAdapterOrderBook();
 export const crAdapterRouterDfOb = (
   toKline,
