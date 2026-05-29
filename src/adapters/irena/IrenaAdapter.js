@@ -1,20 +1,14 @@
-import { crAdapterType1 } from '../crAdapterType1';
-import crTsFromData from '../crTsFromData';
-import { toTsCategoryAdapter } from '../toTsCategoryAdapter';
-
 import {
-  fGetRouteCategory,
-  crAdapterRouter
+  crAdapterGetRoute,
+  fGetRouteCategory
 } from '../crAdapterRouter';
 
-const toLineAdapter = crAdapterType1({
-  crData: crTsFromData
-})
-, IrenaAdapter = crAdapterRouter({
-  getRoute: fGetRouteCategory(
-    toTsCategoryAdapter,
-    toLineAdapter
-  )
-});
+import { toTsCategoryAdapter } from '../toTsCategoryAdapter';
+import { toTsLineAdapter } from '../toTsLineAdapter';
+
+const IrenaAdapter = crAdapterGetRoute(fGetRouteCategory(
+  toTsCategoryAdapter,
+  toTsLineAdapter
+))
 
 export default IrenaAdapter

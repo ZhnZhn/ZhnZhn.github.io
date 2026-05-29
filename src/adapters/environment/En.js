@@ -1,9 +1,9 @@
 import api from './EnApi';
-import adapter from '../toTsLineAdapter';
+import { toRouteTsLineAdapter } from '../toTsLineAdapter';
 
 const En = {
   api,
-  adapter
+  adapter: toRouteTsLineAdapter
 };
 
 export default En

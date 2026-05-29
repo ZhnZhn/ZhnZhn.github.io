@@ -1,9 +1,9 @@
 import api from './ImfTsApi';
-import adapter from '../toTsLineAdapter';
+import { toRouteTsLineAdapter } from '../toTsLineAdapter';
 
 const ImfTs = {
   api,
-  adapter
+  adapter: toRouteTsLineAdapter
 };
 
 export default ImfTs

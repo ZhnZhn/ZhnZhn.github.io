@@ -1,24 +1,18 @@
-import { crAdapterType1 } from '../crAdapterType1';
-import crTsFromData from '../crTsFromData';
-import { toTsCategoryAdapter } from '../toTsCategoryAdapter';
 import {
-  fGetRouteBarTreeMap,
-  crAdapterRouter
+  crAdapterGetRoute,
+  fGetRouteBarTreeMap
 } from '../crAdapterRouter';
 
-import { toTimeSeriesTreeMapAdapter } from '../fToTreeMapAdapter'
 import toBarTreeMapAdapter from '../toBarTreeMapAdapter';
+import { toTimeSeriesTreeMapAdapter } from '../fToTreeMapAdapter'
+import { toTsCategoryAdapter } from '../toTsCategoryAdapter';
+import { toTsLineAdapter } from '../toTsLineAdapter';
 
-const toLineAdapter = crAdapterType1({
-  crData: crTsFromData
-})
-, IeAdapter = crAdapterRouter({
-  getRoute: fGetRouteBarTreeMap(
-    toBarTreeMapAdapter,
-    toTimeSeriesTreeMapAdapter,
-    toTsCategoryAdapter,
-    toLineAdapter
-  )
-});
+const IeAdapter = crAdapterGetRoute(fGetRouteBarTreeMap(
+  toBarTreeMapAdapter,
+  toTimeSeriesTreeMapAdapter,
+  toTsCategoryAdapter,
+  toTsLineAdapter
+))
 
 export default IeAdapter
