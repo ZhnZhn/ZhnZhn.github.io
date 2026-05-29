@@ -11,8 +11,6 @@ const toLineAdapter = (0, _crAdapterType.crAdapterType1)({
     crData: _fnAdapter.crData,
     crConfOption: _fnAdapter.crConfOption
   }),
-  adapter = (0, _crAdapterRouter.crAdapterRouter)({
-    getRoute: (0, _crAdapterRouter.fGetRouteCategory)(_toCategoryAdapter.default, toLineAdapter)
-  });
+  adapter = (0, _crAdapterRouter.crAdapterGetRoute)((0, _crAdapterRouter.fGetRouteCategory)(_toCategoryAdapter.default, toLineAdapter));
 var _default = exports.default = adapter;
 //# sourceMappingURL=adapter.js.map

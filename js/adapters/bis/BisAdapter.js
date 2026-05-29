@@ -6,8 +6,6 @@ exports.default = void 0;
 var _crAdapterRouter = require("../crAdapterRouter");
 var _toCategoryAdapter = _interopRequireDefault(require("./toCategoryAdapter"));
 var _toLineAdapter = _interopRequireDefault(require("./toLineAdapter"));
-const BisAdapter = (0, _crAdapterRouter.crAdapterRouter)({
-  getRoute: (0, _crAdapterRouter.fGetRouteCategory)(_toCategoryAdapter.default, _toLineAdapter.default)
-});
+const BisAdapter = (0, _crAdapterRouter.crAdapterGetRoute)((0, _crAdapterRouter.fGetRouteCategory)(_toCategoryAdapter.default, _toLineAdapter.default));
 var _default = exports.default = BisAdapter;
 //# sourceMappingURL=BisAdapter.js.map

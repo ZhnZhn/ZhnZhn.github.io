@@ -1,16 +1,14 @@
 import {
-  fGetRouteCategory,
-  crAdapterRouter
+  crAdapterGetRoute,
+  fGetRouteCategory
 } from '../crAdapterRouter';
 
 import toCategoryAdapter from './toCategoryAdapter';
 import toLineAdapter from './toLineAdapter';
 
-const BisAdapter = crAdapterRouter({
-  getRoute: fGetRouteCategory(
-    toCategoryAdapter,
-    toLineAdapter
-  )
-});
+const BisAdapter = crAdapterGetRoute(fGetRouteCategory(
+  toCategoryAdapter,
+  toLineAdapter
+));
 
 export default BisAdapter

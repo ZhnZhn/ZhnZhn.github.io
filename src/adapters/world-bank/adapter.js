@@ -1,6 +1,6 @@
 import {
-  fGetRouteCategory,
-  crAdapterRouter
+  crAdapterGetRoute,
+  fGetRouteCategory
 } from '../crAdapterRouter';
 
 import { crAdapterType1 } from '../crAdapterType1';
@@ -15,11 +15,9 @@ const toLineAdapter = crAdapterType1({
    crData,
    crConfOption
 })
-, adapter = crAdapterRouter({
-  getRoute: fGetRouteCategory(
-    toCategoryAdapter,
-    toLineAdapter
-  )
-});
+, adapter = crAdapterGetRoute(fGetRouteCategory(
+   toCategoryAdapter,
+   toLineAdapter
+));
 
 export default adapter

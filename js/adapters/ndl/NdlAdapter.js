@@ -12,13 +12,11 @@ var _toCategoryAdapter = require("./toCategoryAdapter");
 const _getAdapterRoute = (0, _crRouter.crGetRoute)({
   [_ChartType.CHT_AREA_YEARLY]: _toYearlyAdapter.toYearlyAdapter
 }, _toLineAdapter.toLineAdapter);
-const NdlAdapter = (0, _crAdapterRouter.crAdapterRouter)({
-  getRoute: _ref => {
-    let {
-      seriaType
-    } = _ref;
-    return (0, _CategoryFn.isCategory)(seriaType) ? _toCategoryAdapter.toCategoryAdapter : _getAdapterRoute(seriaType);
-  }
+const NdlAdapter = (0, _crAdapterRouter.crAdapterGetRoute)(_ref => {
+  let {
+    seriaType
+  } = _ref;
+  return (0, _CategoryFn.isCategory)(seriaType) ? _toCategoryAdapter.toCategoryAdapter : _getAdapterRoute(seriaType);
 });
 var _default = exports.default = NdlAdapter;
 //# sourceMappingURL=NdlAdapter.js.map
