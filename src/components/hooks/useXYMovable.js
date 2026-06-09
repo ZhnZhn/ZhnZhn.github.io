@@ -72,8 +72,8 @@ const _getComposedPath = (
 
 const _isExcludeElement = (
   element
-) => element.tagName === 'BUTTON'
-  || element.dataset.scrollable
+) => element.tagName === 'BUTTON' 
+  || element?.dataset.scrollable
 
 const _isInitEvent = (
   evt,

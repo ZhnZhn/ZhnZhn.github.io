@@ -28,7 +28,7 @@ const _crMoveDoneLeftValue = (value, maxValue) => value > 0 ? value > maxValue ?
 const START_EVENT_GAP = 22;
 const _isValueInGapRange = (from, to, value) => value - from > START_EVENT_GAP && to - value > START_EVENT_GAP;
 const _getComposedPath = evt => (0, _isTypeFn.isFn)(evt.composedPath) ? evt.composedPath() : void 0;
-const _isExcludeElement = element => element.tagName === 'BUTTON' || element.dataset.scrollable;
+const _isExcludeElement = element => element.tagName === 'BUTTON' || element?.dataset.scrollable;
 const _isInitEvent = (evt, initialEvtClientX, initialEvtClientY, element) => {
   const _composedPath = _getComposedPath(evt);
   if ((0, _isTypeFn.isArr)(_composedPath)) {
