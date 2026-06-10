@@ -65,7 +65,7 @@
     "@rspack/cli": "^2.0.6",
     "@rspack/core": "^2.0.6",
     "@rspack/dev-server": "^2.0.3",
-    "@rspack/plugin-react-refresh": "^2.0.0",
+    "@rspack/plugin-react-refresh": "^2.0.2",
     "@swc/helpers": "^0.5.23",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
