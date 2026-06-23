@@ -17,8 +17,9 @@ export const POSITIVE_INFINITY = Number.POSITIVE_INFINITY
 const MAX_TO_ROUND = 1000000;
 const FN_ECHO = value => value;
 
+const _reBlanks = /\s/g;
 const _formatedToBig = (v=0, dfR) => {
-  const _b = Big(v.toString().replace(/\s/g,''));
+  const _b = Big(v.toString().replace(_reBlanks,''));
   return isNumber(dfR)
     ? _b.round(dfR)
     : _b;

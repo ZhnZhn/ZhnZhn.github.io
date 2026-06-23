@@ -10,11 +10,12 @@ const NEGATIVE_INFINITY = exports.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
 const POSITIVE_INFINITY = exports.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
 const MAX_TO_ROUND = 1000000;
 const FN_ECHO = value => value;
+const _reBlanks = /\s/g;
 const _formatedToBig = function (v, dfR) {
   if (v === void 0) {
     v = 0;
   }
-  const _b = (0, _big.default)(v.toString().replace(/\s/g, ''));
+  const _b = (0, _big.default)(v.toString().replace(_reBlanks, ''));
   return (0, _isTypeFn.isNumber)(dfR) ? _b.round(dfR) : _b;
 };
 const _toBig = bValueOr => {

@@ -21,6 +21,10 @@ describe('roundBy', () => {
     expect(fn(1.005, 2)).toBe(1.01);
     expect(fn('1.004', 2)).toBe(1);
     expect(fn('1.005', 2)).toBe(1.01);
+    expect(fn(2.674, 2)).toBe(2.67);
+    expect(fn(2.675, 2)).toBe(2.68);
+    expect(fn('2.674', 2)).toBe(2.67);
+    expect(fn('2.675', 2)).toBe(2.68);
     expect(fn(0)).toBe(0);
     expect(fn(0, 2)).toBe(0);
   });
