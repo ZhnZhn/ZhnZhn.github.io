@@ -1,8 +1,8 @@
 "use strict";
 
-var _fToTreeMapAdapter = require("../fToTreeMapAdapter");
+var _crRoundedSubTotal = require("../crRoundedSubTotal");
 describe("crRoundedSubTotal", () => {
-  const fn = _fToTreeMapAdapter.crRoundedSubTotal;
+  const fn = _crRoundedSubTotal.crRoundedSubTotal;
   test("should return array with two values", () => {
     //LUX-2022 the EI Primary energy consumption in EJ
     expect(fn(0.125398411, 0.015262846, 0.14, 2)).toEqual([0.125, 0.015]);
@@ -21,4 +21,4 @@ describe("crRoundedSubTotal", () => {
     expect(fn(81.78807947019868, 18.211920529801326, 100)).toEqual([82, 18]);
   });
 });
-//# sourceMappingURL=fToTreeMapAdapter.test.js.map
+//# sourceMappingURL=crRoundedSubTotal.test.js.map

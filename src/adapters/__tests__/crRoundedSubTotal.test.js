@@ -1,8 +1,8 @@
 import {
   crRoundedSubTotal
-} from "../fToTreeMapAdapter";
+} from "../crRoundedSubTotal";
 
-describe("crRoundedSubTotal", ()=>{  
+describe("crRoundedSubTotal", ()=>{
   const fn = crRoundedSubTotal;
   test("should return array with two values", ()=>{
     //LUX-2022 the EI Primary energy consumption in EJ

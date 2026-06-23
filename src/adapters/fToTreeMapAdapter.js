@@ -13,6 +13,10 @@ import {
   toConfig
 } from '../charts/configBuilderFn';
 
+import {
+  crItemRt,
+  crRoundedSubTotal
+} from './crRoundedSubTotal';
 import { getCrPointName } from './TreeMapFn';
 
 const COLOR_FOSSIL_FUEL = "#658fb9"
@@ -58,21 +62,10 @@ const _crTotalConfig = (
   ];
 };
 
-const _crItemRt = (
-  value,
-  rt
-) => value >= 10
-  ? rt
-  : value >= 0.01
-      ? 2
-      : value >= 0.0001
-          ? 4
-          : 6;
-
 const _crValue = (
   value,
   totalRt
-) => roundBy(value, _crItemRt(value, totalRt));
+) => roundBy(value, crItemRt(value, totalRt));
 
 const _initPercentLevelFor = option => {
   option._ps60 = 0
@@ -154,43 +147,6 @@ const _crTotalToken = (
   value,
   perc
 ) => `${title} ${formatNumber(value, true)} (${perc}%)`
-
-const _crSubTotalRt = (
-  value,
-  rt
-) => isNumber(rt)
-  ? _crItemRt(value, rt)
-  : 0;
-
-const _crSubValue = v => isNumber(v) ? v : 0;
-const _isZeroValueCase = (
-  v,
-  sum
-) => sum === 0 && v !== 0;
-export const crRoundedSubTotal = (
-  v1,
-  v2,
-  total,
-  totalRt
-) => {
-  const _v1 = _crSubValue(v1)
-  , _v2 = _crSubValue(v2)
-  , _rt1 = _crSubTotalRt(_v1, totalRt)
-  , _rt2 = _crSubTotalRt(_v2, totalRt)
-  , _sum1 = roundBy(_v1, _rt1)
-  , _sum2 = roundBy(_v2, _rt2);
-  return _sum1 + _sum2 > total
-    || _isZeroValueCase(_v1, _sum1)
-    || _isZeroValueCase(_v2, _sum2)
-    ? [
-      roundBy(_v1, _rt1 + 1),
-      roundBy(_v2, _rt2 + 1)
-    ]
-    : [
-    _sum1,
-    _sum2
-    ];
-};
 
 const _crCaption = (
   data,

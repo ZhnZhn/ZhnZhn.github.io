@@ -1,11 +1,11 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/adapters/__tests__/fToTreeMapAdapter.test.js"
+  "../../../src/adapters/__tests__/crRoundedSubTotal.test.js"
  ],
- "file": "../../../src/adapters/__tests__/fToTreeMapAdapter.test.js",
+ "file": "../../../src/adapters/__tests__/crRoundedSubTotal.test.js",
  "names": [
-  "_fToTreeMapAdapter",
+  "_crRoundedSubTotal",
   "require",
   "describe",
   "fn",
