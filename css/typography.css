@@ -6,20 +6,12 @@
   background-color: #0c7abf;
 }
 
-.descr-datasource h1 {
-  color: var(--c-bl);
-  font-size: 18px;
-  font-weight: normal;
-}
 .descr-datasource p {
   color: grey;
   font-size: 16px;
   font-weight: bold;
   line-height: 1.4;
   white-space: pre-line;
-}
-.descr-datasource span {
-  color: var(--c-bl);
 }
 
 

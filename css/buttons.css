@@ -84,7 +84,7 @@
 [data-loader='circle-failed'] {
   width: 2.5em;
   height: 2.5em;
-  border: 3px solid '#f44336';
+  border: 3px solid #f44336;
   border-top-color: transparent;
   border-radius: 100%;
 }
