@@ -1,41 +1,51 @@
 import {
+  isObj,
+  isIncludeToken
+} from '../../utils/isTypeFn';
+
+import {
   useState,
   useEffect
 } from '../uiApi';
 import useHasNotEqual from '../hooks/useHasNotEqual';
 import memoIsShow from '../hoc/memoIsShow';
 
-import { fetchTxt } from '../../utils/fnFetch';
+import { fetchJson } from '../../utils/fnFetch';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import DivHtml from '../zhn/DivHtml';
 import {
   SpinnerLoading,
   LoadFailedMsg
 } from '../zhn/Spinner';
+import AboutView from './AboutView';
 
-const EMPTY_DESCR = '<p class="descr__part">Description empty</p>'
-, INITIAL_DESCR = ''
+const EMPTY_DESCR = { descr: 'Description empty' }
+, INITIAL_DESCR = {}
 , S_DIALOG = {
   top: 54,
   left: 20,
   width: 'auto',
   maxWidth: '89%',
   marginLeft: 0
-}
-, S_DIV = { padding: 16 };
+};
 
 const _crState = (
   isLoading,
   isLoadFailed,
   errMsg,
-  descrHtml
+  aboutJson
 ) => ({
   isLoading,
   isLoadFailed,
   errMsg,
-  descrHtml
+  aboutJson
 })
+
+const _getAboutJson = (
+  aboutJson
+) => isObj(aboutJson)
+  ? aboutJson
+  : EMPTY_DESCR;
 
 const DescriptionDialog = memoIsShow((props) => {
   const {
@@ -48,7 +58,7 @@ const DescriptionDialog = memoIsShow((props) => {
       isLoading,
       isLoadFailed,
       errMsg,
-      descrHtml },
+      aboutJson },
       setState
   ] = useState(() => _crState(
     !1,
@@ -60,7 +70,7 @@ const DescriptionDialog = memoIsShow((props) => {
   , [_isNextDescrUrl, isDescrUrlCurrentValue] = useHasNotEqual(descrUrl)
   , _isLoadDescr = isShow && descrUrl
       && (_isNextDescrUrl || !isLoading
-        && (descrHtml === INITIAL_DESCR || _isNextProps && isLoadFailed)
+        && (aboutJson === INITIAL_DESCR || _isNextProps && isLoadFailed)
   );
 
   useEffect(() => {
@@ -69,15 +79,18 @@ const DescriptionDialog = memoIsShow((props) => {
           ...prevState,
           isLoading: !0
         }))
-        fetchTxt({
-          uri: descrUrl,
-          onFetch: ({ json }={}) => isDescrUrlCurrentValue(descrUrl) && setState(
-            _crState(!1, !1, '', json || EMPTY_DESCR)
-          ),
-          onCatch: ({ error }={}) => isDescrUrlCurrentValue(descrUrl) && setState(
-            _crState(!1, !0, error.message, EMPTY_DESCR)
-          )
-        })
+
+        if (isIncludeToken(descrUrl, 'data')) {
+          fetchJson({
+            uri: descrUrl.replace('.html', '.json'),
+            onFetch: ({ json }={}) => isDescrUrlCurrentValue(descrUrl) && setState(
+              _crState(!1, !1, '', json || EMPTY_DESCR)
+            ),
+            onCatch: ({ error }={}) => isDescrUrlCurrentValue(descrUrl) && setState(
+              _crState(!1, !0, error.message, EMPTY_DESCR)
+            )
+          })
+        }
      }
   }, [_isLoadDescr, descrUrl, isDescrUrlCurrentValue])
 
@@ -89,10 +102,10 @@ const DescriptionDialog = memoIsShow((props) => {
       onClose={onClose}
     >
       {isLoading
-         ? <SpinnerLoading />
-         : isLoadFailed
-             ? <LoadFailedMsg errMsg={errMsg} />
-             : <DivHtml style={S_DIV} str={descrHtml} />
+        ? <SpinnerLoading />
+        : isLoadFailed
+           ? <LoadFailedMsg errMsg={errMsg} />
+           : <AboutView aboutJson={_getAboutJson(aboutJson)} />
       }
     </ModalDialog>
   );

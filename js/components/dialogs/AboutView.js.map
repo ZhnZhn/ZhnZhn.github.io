@@ -1,0 +1,33 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/AboutView.js"
+ ],
+ "file": "../../../src/components/dialogs/AboutView.js",
+ "names": [
+  "_Link",
+  "_interopRequireDefault",
+  "require",
+  "_jsxRuntime",
+  "CL_DESCR_DATASOURCE",
+  "S_DIV",
+  "padding",
+  "S_DESCR",
+  "marginTop",
+  "AboutView",
+  "_ref",
+  "aboutJson",
+  "jsxs",
+  "className",
+  "style",
+  "children",
+  "jsx",
+  "default",
+  "href",
+  "provider",
+  "descr",
+  "_default",
+  "exports"
+ ],
+ "mappings": ";;;;;AAAA,IAAAA,KAAA,GAAAC,sBAAA,CAAAC,OAAA;AAA+B,IAAAC,WAAA,GAAAD,OAAA;AAE/B,MAAME,mBAAmB,GAAG,kBAAkB;EAC5CC,KAAK,GAAG;IAAEC,OAAO,EAAE;EAAG,CAAC;EACvBC,OAAO,GAAG;IAAEC,SAAS,EAAE;EAAG,CAAC;AAE7B,MAAMC,SAAS,GAAGC,IAAA;EAAA,IAAC;IACjBC;EACF,CAAC,GAAAD,IAAA;EAAA,oBACC,IAAAP,WAAA,CAAAS,IAAA;IAAKC,SAAS,EAAET,mBAAoB;IAACU,KAAK,EAAET,KAAM;IAAAU,QAAA,gBAChD,IAAAZ,WAAA,CAAAa,GAAA,EAAChB,KAAA,CAAAiB,OAAI;MAACC,IAAI,EAAEP,SAAS,CAACO,IAAK;MAAAH,QAAA,EAAEJ,SAAS,CAACQ;IAAQ,CAAO,CAAC,eACvD,IAAAhB,WAAA,CAAAa,GAAA;MAAGF,KAAK,EAAEP,OAAQ;MAAAQ,QAAA,EAAEJ,SAAS,CAACS;IAAK,CAAI,CAAC;EAAA,CACrC,CAAC;AAAA,CACP;AAAC,IAAAC,QAAA,GAAAC,OAAA,CAAAL,OAAA,GAEaR,SAAS"
+}
