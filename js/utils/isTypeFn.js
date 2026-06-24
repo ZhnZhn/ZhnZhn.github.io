@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.parseIntBy10 = exports.isUndef = exports.isTypeNumber = exports.isStrOrNumber = exports.isStrNotBlank = exports.isStr = exports.isPositiveNumber = exports.isObj = exports.isNumberNaN = exports.isNumberFinite = exports.isNumber = exports.isNotEmptyArr = exports.isInt = exports.isFn = exports.isEmpty = exports.isBool = exports.isArr = exports.hasOwnPropertySafe = exports.getObjectKeys = void 0;
+exports.parseIntBy10 = exports.isUndef = exports.isTypeNumber = exports.isStrOrNumber = exports.isStrNotBlank = exports.isStr = exports.isPositiveNumber = exports.isObj = exports.isNumberNaN = exports.isNumberFinite = exports.isNumber = exports.isNotEmptyArr = exports.isInt = exports.isIncludeToken = exports.isFn = exports.isEmpty = exports.isBool = exports.isArr = exports.hasOwnPropertySafe = exports.getObjectKeys = void 0;
 const _fIsTypeof = strType => v => typeof v === strType;
 const isTypeNumber = exports.isTypeNumber = _fIsTypeof("number");
 const isNumber = v => isTypeNumber(v) && v - v === 0;
@@ -17,6 +17,8 @@ const isUndef = exports.isUndef = _fIsTypeof("undefined");
 const isFn = exports.isFn = _fIsTypeof("function");
 const isStrNotBlank = v => isStr(v) && !!v.trim();
 exports.isStrNotBlank = isStrNotBlank;
+const isIncludeToken = (str, token) => isStr(str) && str.indexOf(token) !== -1;
+exports.isIncludeToken = isIncludeToken;
 const isStrOrNumber = v => v !== "" && (isStr(v) || isNumber(v));
 exports.isStrOrNumber = isStrOrNumber;
 const isObj = v => typeof v === "object" && v !== null;

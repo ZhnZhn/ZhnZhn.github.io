@@ -14,6 +14,10 @@ export const isUndef = _fIsTypeof("undefined")
 export const isFn = _fIsTypeof("function")
 
 export const isStrNotBlank = v => isStr(v) && !!v.trim()
+export const isIncludeToken = (
+  str,
+  token
+) => isStr(str) && str.indexOf(token) !== -1
 
 export const isStrOrNumber = v => v !== ""
   && (isStr(v) || isNumber(v))
