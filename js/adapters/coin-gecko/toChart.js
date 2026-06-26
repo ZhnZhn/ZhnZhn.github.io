@@ -2,10 +2,9 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../../utils/arrFn");
 var _stockBuilderFn = require("../../charts/stockBuilderFn");
 var _crAdapterType = require("../crAdapterType1");
-var _crFn = require("../crFn");
-const _crDescription = (0, _crFn.fCrItemLinkByCaption)('Coin Gecko');
 const _crInfo = _ref => {
   let {
     title,
@@ -13,12 +12,12 @@ const _crInfo = _ref => {
   } = _ref;
   return {
     name: title,
-    description: _crDescription(_nativeUrl)
+    href: [_nativeUrl, 'Coin Gecko Chart']
   };
 };
 const _crMvOption = (btTitle, currency, data) => ({
   btTitle,
-  title: `${btTitle} ${currency}`,
+  title: (0, _arrFn.joinByBlank)(btTitle, currency),
   data
 });
 const crData = _ref2 => {

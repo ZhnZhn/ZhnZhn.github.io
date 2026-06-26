@@ -1,11 +1,10 @@
+import { joinByBlank } from '../../utils/arrFn';
 import { fAddMiniVolumes } from '../../charts/stockBuilderFn';
 import { crAdapterType1 } from '../crAdapterType1';
-import { fCrItemLinkByCaption } from '../crFn';
 
-const _crDescription = fCrItemLinkByCaption('Coin Gecko');
 const _crInfo = ({ title, _nativeUrl }) => ({
   name: title,
-  description: _crDescription(_nativeUrl)
+  href: [_nativeUrl, 'Coin Gecko Chart']
 });
 
 const _crMvOption = (
@@ -14,7 +13,7 @@ const _crMvOption = (
   data
 ) => ({
   btTitle,
-  title: `${btTitle} ${currency}`,
+  title: joinByBlank(btTitle, currency),
   data
 });
 
