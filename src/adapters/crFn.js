@@ -2,6 +2,8 @@ import { isArr } from '../utils/isTypeFn';
 import { bindTo } from '../utils/bindTo';
 import { crRouter } from '../utils/crRouter';
 
+import { toHref } from '../components/uiApi';
+
 import { crId as _crId } from '../math/mathFn';
 import {
   getPointDate,
@@ -19,7 +21,12 @@ const _crItemLink = (
   caption,
   itemUrl,
   className
-) => `${_crPTag(className)}<a href="${itemUrl}">${caption}</a></p>`
+) => {
+  const _href = toHref(itemUrl);
+  return _href
+    ? `${_crPTag(className)}<a target="_blank" rel="noopener" href="${_href}">${caption}</a></p>`
+    : '';
+}
 
 export const fCrItemLinkByCaption = (
   caption

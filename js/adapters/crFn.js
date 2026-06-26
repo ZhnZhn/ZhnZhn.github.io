@@ -5,6 +5,7 @@ exports.fCrItemLinkByUrl = exports.fCrItemLinkByCaption = exports.crValueConf = 
 var _isTypeFn = require("../utils/isTypeFn");
 var _bindTo = require("../utils/bindTo");
 var _crRouter = require("../utils/crRouter");
+var _uiApi = require("../components/uiApi");
 var _mathFn = require("../math/mathFn");
 var _seriaHelperFn = require("../math/seriaHelperFn");
 const _crPTag = className => className ? `<p class="${className}">` : '<p>';
@@ -12,7 +13,10 @@ const _crPTag = className => className ? `<p class="${className}">` : '<p>';
 // Ndl toScatter, Stat-Json
 const crId = () => (0, _mathFn.crId)().toUpperCase();
 exports.crId = crId;
-const _crItemLink = (caption, itemUrl, className) => `${_crPTag(className)}<a href="${itemUrl}">${caption}</a></p>`;
+const _crItemLink = (caption, itemUrl, className) => {
+  const _href = (0, _uiApi.toHref)(itemUrl);
+  return _href ? `${_crPTag(className)}<a target="_blank" rel="noopener" href="${_href}">${caption}</a></p>` : '';
+};
 const fCrItemLinkByCaption = caption => (0, _bindTo.bindTo)(_crItemLink, caption);
 exports.fCrItemLinkByCaption = fCrItemLinkByCaption;
 const fCrItemLinkByUrl = (caption, url) => (0, _bindTo.bindTo)(_crItemLink, caption, url);
