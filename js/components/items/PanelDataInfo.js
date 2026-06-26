@@ -3,10 +3,12 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _RouterNativeLink = _interopRequireDefault(require("../native-links/RouterNativeLink"));
 var _InfoPart = _interopRequireDefault(require("../zhn/InfoPart"));
 var _ButtonTab = _interopRequireDefault(require("../zhn/ButtonTab"));
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
+var _Link = _interopRequireDefault(require("../zhn/Link"));
 var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_DESCR = `info__descr ${_styleFn.CL_BLACK}`,
@@ -37,6 +39,9 @@ const CL_DESCR = `info__descr ${_styleFn.CL_BLACK}`,
   },
   S_DESCR_TEXT = {
     fontWeight: 'bold'
+  },
+  S_PB_8 = {
+    paddingBottom: 8
   };
 const InfoPartWithStyle = _ref => {
   let {
@@ -66,7 +71,7 @@ const _renderNativeLink = (linkFn, item) => {
     item: item
   }) : null;
 };
-const _isShortDescr = descr => descr && descr.length < 200;
+const _isShortDescr = descr => !descr || descr && descr.length < 200;
 const PanelDataInfo = _ref2 => {
   let {
     isShow,
@@ -80,7 +85,9 @@ const PanelDataInfo = _ref2 => {
       fromDate,
       frequency,
       linkId,
-      description
+      description,
+      href,
+      href2
     } = info || {},
     {
       item,
@@ -108,16 +115,26 @@ const PanelDataInfo = _ref2 => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoPartWithStyle, {
       c: "Frequency",
       t: frequency
-    }), _renderNdlLink(linkId), description && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OpenClose.default, {
+    }), _renderNdlLink(linkId), (description || (0, _isTypeFn.isArr)(href)) && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose.default, {
       isClose: !_isShortDescr(description),
       caption: "Description",
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_InfoPart.default, {
+      children: [(0, _isTypeFn.isArr)(href) && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
+          href: href[0],
+          children: href[1]
+        })
+      }), (0, _isTypeFn.isArr)(href2) && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
+          href: href2[0],
+          children: href2[1]
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InfoPart.default, {
         style: S_DESCR_INFO,
         isHtml: true,
         text: description,
         textCn: CL_DESCR,
         textStyle: S_DESCR_TEXT
-      })
+      })]
     }), _renderNativeLink(linkFn, item)]
   });
 };

@@ -1,8 +1,10 @@
+import { isArr } from '../../utils/isTypeFn';
 import RouterNativeLink from '../native-links/RouterNativeLink';
 
 import InfoPart from '../zhn/InfoPart';
 import ButtonTab from '../zhn/ButtonTab';
 import OpenClose from '../zhn/OpenClose';
+import Link from '../zhn/Link'
 
 import {
   CL_BLACK,
@@ -34,6 +36,9 @@ const CL_DESCR = `info__descr ${CL_BLACK}`
 }
 , S_DESCR_TEXT = {
   fontWeight: 'bold'
+}
+, S_PB_8 = {
+  paddingBottom: 8
 };
 
 const InfoPartWithStyle = ({
@@ -66,8 +71,8 @@ const _renderNativeLink = (linkFn, item) => {
     : null;
 };
 
-const _isShortDescr = descr => descr
- && descr.length<200;
+const _isShortDescr = descr => !descr
+ || (descr && descr.length<200);
 
 const PanelDataInfo = ({
   isShow,
@@ -81,7 +86,9 @@ const PanelDataInfo = ({
     fromDate,
     frequency,
     linkId,
-    description
+    description,
+    href,
+    href2
   } = info || {}
  , { item, linkFn } = zhInfo || {}
  , _style = isShow ? S_BLOCK : S_NONE;
@@ -98,10 +105,12 @@ const PanelDataInfo = ({
       <InfoPartWithStyle c="To Date" t={toDate} s={S_TO_DATE_INFO}/>
       <InfoPartWithStyle c="Frequency" t={frequency} />
       {_renderNdlLink(linkId)}
-      { description && <OpenClose
+      { (description || isArr(href)) && <OpenClose
            isClose={!_isShortDescr(description)}
            caption="Description"
           >
+            {isArr(href) && <p><Link href={href[0]}>{href[1]}</Link></p>}
+            {isArr(href2)&& <p><Link href={href2[0]}>{href2[1]}</Link></p>}
             <InfoPart
                style={S_DESCR_INFO}
                isHtml={true}
