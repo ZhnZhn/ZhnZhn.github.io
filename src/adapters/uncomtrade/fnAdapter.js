@@ -17,7 +17,7 @@ import {
 
 import { isCategory } from '../CategoryFn';
 
-import { toDescr } from './fnDescr';
+//import { toDescr } from './fnDescr';
 import { WORLD_CODE } from './conf';
 
 const _sanitizeNumber = (v) => isNumber(v)
@@ -194,7 +194,9 @@ export const crInfo = (
   frequency: option.period || (option.freq === 'M'
     ? 'Monthly'
     : 'Annual'),
-  description: toDescr(json, option)
+  descr: option.period ? option.subtitle : '',
+  href: ['https://comtradeplus.un.org/TradeFlow/', 'Website UN Comtrade Data']
+  //description: toDescr(json, option)
 });
 
 export const crZhConfig = (

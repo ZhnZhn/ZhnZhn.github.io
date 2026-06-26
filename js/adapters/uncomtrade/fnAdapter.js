@@ -8,8 +8,9 @@ var _domFn = require("../../utils/domFn");
 var _numberFormatFn = require("../../utils/numberFormatFn");
 var _ChartType = require("../../constants/ChartType");
 var _CategoryFn = require("../CategoryFn");
-var _fnDescr = require("./fnDescr");
 var _conf = require("./conf");
+//import { toDescr } from './fnDescr';
+
 const _sanitizeNumber = v => (0, _isTypeFn.isNumber)(v) ? '' + v : (0, _domFn.domSanitize)(v);
 const crEmptyHmObject = () => Object.create(null);
 exports.crEmptyHmObject = crEmptyHmObject;
@@ -108,7 +109,9 @@ const crChartId = _ref2 => {
 exports.crChartId = crChartId;
 const crInfo = (json, option) => ({
   frequency: option.period || (option.freq === 'M' ? 'Monthly' : 'Annual'),
-  description: (0, _fnDescr.toDescr)(json, option)
+  descr: option.period ? option.subtitle : '',
+  href: ['https://comtradeplus.un.org/TradeFlow/', 'Website UN Comtrade Data']
+  //description: toDescr(json, option)
 });
 exports.crInfo = crInfo;
 const crZhConfig = function (option, _temp) {
