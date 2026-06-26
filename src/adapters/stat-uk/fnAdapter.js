@@ -3,9 +3,6 @@ import { isNumber } from '../../utils/isTypeFn';
 
 import { ymdToUTC } from '../AdapterFn';
 import { compareByDate } from '../compareByFn';
-import { fCrItemLinkByCaption } from '../crFn';
-
-const _crItemLink = fCrItemLinkByCaption('ONS Dataset Metadata');
 
 const MONTH_HM = {
   Jan: '01',
@@ -66,23 +63,13 @@ const _crName = (
    subtitle
 }) => joinByColon(subtitle, title, unit_of_measure);
 
-const _crDescr = ({
-  links
-}) => {
-  const {
-    href
-  } = links?.dataset_metadata || {};
-  return href ? _crItemLink(href) : '';
-}
-
 const _crInfo = (
   json,
   option
 ) => ({
   name: _crName(json, option),
-  description: _crDescr(json)
+  href: [json?.links?.dataset_metadata?.href, 'ONS Dataset Metadata']
 })
-
 
 export const crData = (
   json

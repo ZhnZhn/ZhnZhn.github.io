@@ -6,8 +6,6 @@ var _arrFn = require("../../utils/arrFn");
 var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
 var _compareByFn = require("../compareByFn");
-var _crFn = require("../crFn");
-const _crItemLink = (0, _crFn.fCrItemLinkByCaption)('ONS Dataset Metadata');
 const MONTH_HM = {
   Jan: '01',
   Feb: '02',
@@ -62,18 +60,9 @@ const _crName = (_ref, _ref2) => {
   } = _ref2;
   return (0, _arrFn.joinByColon)(subtitle, title, unit_of_measure);
 };
-const _crDescr = _ref3 => {
-  let {
-    links
-  } = _ref3;
-  const {
-    href
-  } = links?.dataset_metadata || {};
-  return href ? _crItemLink(href) : '';
-};
 const _crInfo = (json, option) => ({
   name: _crName(json, option),
-  description: _crDescr(json)
+  href: [json?.links?.dataset_metadata?.href, 'ONS Dataset Metadata']
 });
 const crData = json => {
   const {
