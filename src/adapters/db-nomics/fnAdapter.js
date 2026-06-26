@@ -14,7 +14,7 @@ import {
   ymdToUTC,
 } from '../AdapterFn';
 import {
-  fCrItemLinkByCaption,
+  //fCrItemLinkByCaption,
   crItemConf
 } from '../crFn';
 
@@ -49,19 +49,22 @@ const _crId = ({
   seriaId
 }) =>  joinBy('/', dfProvider, dfCode, seriaId);
 
-const _crItemLink = fCrItemLinkByCaption('DBnomics Chart');
+//const _crItemLink = fCrItemLinkByCaption('DBnomics Chart');
 const _crUpdatedDate = json => {
   const _date = getIndexedAt(json).split('T')[0];
   return _date
-    ? `<p>Updated by DBnomics on ${_date}</p>`
+    ? `Updated by DBnomics on ${_date}`
+    //? `<p>Updated by DBnomics on ${_date}</p>`
     : '';
 };
+/*
 const _crDescr = (json, option) => {
   const _id = _crId(option);
   return`<p>SeriaId: ${_id}</p>
    ${_crUpdatedDate(json)}
    ${_crItemLink(CHART_URL+'/'+_id)}`;
 };
+*/
 
 const _crZhConfig = (option) => {
   const {
@@ -92,10 +95,16 @@ const _crZhConfig = (option) => {
 const _crInfo = (
   json,
   option
-) => ({
-  name: getSubtitle(json),
-  description: _crDescr(json, option)
-})
+) => {
+  const _id = _crId(option);
+  return {
+    name: getSubtitle(json),
+    descr: `SeriaId: ${_id}`,
+    descr2: _crUpdatedDate(json),
+    href: [CHART_URL+'/'+_id, 'DBnomics Chart']
+    //description: _crDescr(json, option)
+  };
+}
 
 const _isQuarter = str => isTokenInStr(str, "Q");
 

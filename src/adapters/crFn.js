@@ -28,9 +28,6 @@ const _crItemLink = (
     : '';
 }
 
-export const fCrItemLinkByCaption = (
-  caption
-) => bindTo(_crItemLink, caption)
 export const fCrItemLinkByUrl = (
   caption,
   url

@@ -42,6 +42,9 @@ const CL_DESCR = `info__descr ${_styleFn.CL_BLACK}`,
   },
   S_PB_8 = {
     paddingBottom: 8
+  },
+  S_DESCR = {
+    fontWeight: 'bold'
   };
 const InfoPartWithStyle = _ref => {
   let {
@@ -86,6 +89,8 @@ const PanelDataInfo = _ref2 => {
       frequency,
       linkId,
       description,
+      descr,
+      descr2,
       href,
       href2
     } = info || {},
@@ -118,7 +123,13 @@ const PanelDataInfo = _ref2 => {
     }), _renderNdlLink(linkId), (description || (0, _isTypeFn.isArr)(href)) && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose.default, {
       isClose: !_isShortDescr(description),
       caption: "Description",
-      children: [(0, _isTypeFn.isArr)(href) && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+      children: [!!descr && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        style: S_DESCR,
+        children: descr
+      }), !!descr2 && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        style: S_DESCR,
+        children: descr2
+      }), (0, _isTypeFn.isArr)(href) && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
           href: href[0],
           children: href[1]
