@@ -121,10 +121,7 @@ const _getFirstTouches = touches => touches?.[0] || {},
   _fGetEvt = (propName, getTouch) => evt => evt[propName] || getTouch(evt.targetTouches) || getTouch(evt.changedTouches) || 0;
 const getClientX = exports.getClientX = _fGetEvt(CLIENT_X, _getTouchClientX);
 const getClientY = exports.getClientY = _fGetEvt(CLIENT_Y, _getTouchClientY);
-const toHref = (href, isHttp) => {
-  const protocol = (href || '').split('://')[0];
-  return protocol === 'https' || isHttp && protocol === 'http' ? href : void 0;
-};
+const toHref = href => (0, _isTypeFn.isStr)(href) && href.slice(0, 8) === "https://" ? href : void 0;
 exports.toHref = toHref;
 const getComboboxElement = refRoot => {
   const _elRoot = getRefValue(refRoot);
