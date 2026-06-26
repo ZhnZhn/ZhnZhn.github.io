@@ -1,5 +1,4 @@
 import { isArr } from '../utils/isTypeFn';
-import { bindTo } from '../utils/bindTo';
 import { crRouter } from '../utils/crRouter';
 
 import { crId as _crId } from '../math/mathFn';

@@ -34,13 +34,7 @@ const CL_DESCR = `info__descr ${CL_BLACK}`
 , S_DESCR_INFO = {
   lineHeight: 1.6
 }
-, S_DESCR_TEXT = {
-  fontWeight: 'bold'
-}
-, S_PB_8 = {
-  paddingBottom: 8
-}
-, S_DESCR = {
+, S_FONT_WEIGHT_BOLD = {
   fontWeight: 'bold'
 };
 
@@ -114,8 +108,8 @@ const PanelDataInfo = ({
            isClose={!_isShortDescr(description)}
            caption="Description"
           >
-            {!!descr && <p style={S_DESCR}>{descr}</p>}
-            {!!descr2 && <p style={S_DESCR}>{descr2}</p>}
+            {!!descr && <p style={S_FONT_WEIGHT_BOLD}>{descr}</p>}
+            {!!descr2 && <p style={S_FONT_WEIGHT_BOLD}>{descr2}</p>}
             {isArr(href) && <p><Link href={href[0]}>{href[1]}</Link></p>}
             {isArr(href2)&& <p><Link href={href2[0]}>{href2[1]}</Link></p>}
             <InfoPart
@@ -123,7 +117,7 @@ const PanelDataInfo = ({
                isHtml={true}
                text={description}
                textCn={CL_DESCR}
-               textStyle={S_DESCR_TEXT}
+               textStyle={S_FONT_WEIGHT_BOLD}
             />
          </OpenClose>
       }

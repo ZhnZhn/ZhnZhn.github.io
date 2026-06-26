@@ -3,7 +3,6 @@
 exports.__esModule = true;
 exports.crValueConf = exports.crItemConf = exports.crId = void 0;
 var _isTypeFn = require("../utils/isTypeFn");
-var _bindTo = require("../utils/bindTo");
 var _crRouter = require("../utils/crRouter");
 var _mathFn = require("../math/mathFn");
 var _seriaHelperFn = require("../math/seriaHelperFn");

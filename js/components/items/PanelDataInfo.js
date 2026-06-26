@@ -37,13 +37,7 @@ const CL_DESCR = `info__descr ${_styleFn.CL_BLACK}`,
   S_DESCR_INFO = {
     lineHeight: 1.6
   },
-  S_DESCR_TEXT = {
-    fontWeight: 'bold'
-  },
-  S_PB_8 = {
-    paddingBottom: 8
-  },
-  S_DESCR = {
+  S_FONT_WEIGHT_BOLD = {
     fontWeight: 'bold'
   };
 const InfoPartWithStyle = _ref => {
@@ -124,10 +118,10 @@ const PanelDataInfo = _ref2 => {
       isClose: !_isShortDescr(description),
       caption: "Description",
       children: [!!descr && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-        style: S_DESCR,
+        style: S_FONT_WEIGHT_BOLD,
         children: descr
       }), !!descr2 && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-        style: S_DESCR,
+        style: S_FONT_WEIGHT_BOLD,
         children: descr2
       }), (0, _isTypeFn.isArr)(href) && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
@@ -144,7 +138,7 @@ const PanelDataInfo = _ref2 => {
         isHtml: true,
         text: description,
         textCn: CL_DESCR,
-        textStyle: S_DESCR_TEXT
+        textStyle: S_FONT_WEIGHT_BOLD
       })]
     }), _renderNativeLink(linkFn, item)]
   });
