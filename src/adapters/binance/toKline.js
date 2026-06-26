@@ -3,21 +3,12 @@ import {
   crShortItemCaption
 } from '../AdapterFn';
 
-import { fCrItemLinkByCaption } from '../crFn';
 import { fToKline } from '../fToKline';
-import { CL_PB_8 } from '../CL';
-
-const _crResearchLink = fCrItemLinkByCaption('Binance Research');
-const _crTradeLink = fCrItemLinkByCaption('Binance Trade Chart');
-
-const _crDescription = ({
-  _researchLink,
-  _tradeLink
-}) => _crResearchLink(_researchLink, CL_PB_8) + _crTradeLink(_tradeLink);
 
 const _crInfo = (option) => ({
   name: option.title,
-  description: _crDescription(option)
+  href: [option._researchLink, 'Binance Research'],
+  href2: [option._tradeLink, 'Binance Trade Chart']
 });
 
 /*

@@ -3,21 +3,11 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
-var _crFn = require("../crFn");
 var _fToKline = require("../fToKline");
-var _CL = require("../CL");
-const _crResearchLink = (0, _crFn.fCrItemLinkByCaption)('Binance Research');
-const _crTradeLink = (0, _crFn.fCrItemLinkByCaption)('Binance Trade Chart');
-const _crDescription = _ref => {
-  let {
-    _researchLink,
-    _tradeLink
-  } = _ref;
-  return _crResearchLink(_researchLink, _CL.CL_PB_8) + _crTradeLink(_tradeLink);
-};
 const _crInfo = option => ({
   name: option.title,
-  description: _crDescription(option)
+  href: [option._researchLink, 'Binance Research'],
+  href2: [option._tradeLink, 'Binance Trade Chart']
 });
 
 /*
