@@ -4,9 +4,7 @@ exports.__esModule = true;
 exports.getCoinId = exports.crData = exports.addConfOption = void 0;
 var _itemFn = require("../../utils/itemFn");
 var _AdapterFn = require("../AdapterFn");
-var _crFn = require("../crFn");
 const DF_ID = 'btc-bitcoin',
-  _crItemLink = (0, _crFn.fCrItemLinkByCaption)('Coinpaprika'),
   _getCoinId = _ref => {
     let {
       items = []
@@ -17,7 +15,7 @@ const COIN_URL = 'https://coinpaprika.com/coin',
   _crCoinUrl = option => `${COIN_URL}/${_getCoinId(option)}/`,
   _crInfo = option => ({
     name: option.title || '',
-    description: _crItemLink(_crCoinUrl(option))
+    href: [_crCoinUrl(option), 'Coinpaprika Chart']
   });
 const getCoinId = exports.getCoinId = _getCoinId;
 const crData = arr => {
