@@ -3,14 +3,9 @@ import {
   isIncludeToken
 } from '../../utils/isTypeFn';
 
-import {
-  useState,
-  useEffect
-} from '../uiApi';
 import useHasNotEqual from '../hooks/useHasNotEqual';
 import memoIsShow from '../hoc/memoIsShow';
-
-import { fetchJson } from '../../utils/fnFetch';
+import { useLoadJson } from './useLoadJson';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import {
@@ -29,18 +24,6 @@ const EMPTY_DESCR = { descr: 'Description empty' }
   marginLeft: 0
 };
 
-const _crState = (
-  isLoading,
-  isLoadFailed,
-  errMsg,
-  aboutJson
-) => ({
-  isLoading,
-  isLoadFailed,
-  errMsg,
-  aboutJson
-})
-
 const _getAboutJson = (
   aboutJson
 ) => isObj(aboutJson)
@@ -54,45 +37,24 @@ const DescriptionDialog = memoIsShow((props) => {
     onClose
   } = props
   , { descrUrl } = data || {}
-  , [{
-      isLoading,
-      isLoadFailed,
-      errMsg,
-      aboutJson },
-      setState
-  ] = useState(() => _crState(
-    !1,
-    !1,
-    '',
-    INITIAL_DESCR
-  ))
   , [_isNextProps] = useHasNotEqual(props)
-  , [_isNextDescrUrl, isDescrUrlCurrentValue] = useHasNotEqual(descrUrl)
-  , _isLoadDescr = isShow && descrUrl
-      && (_isNextDescrUrl || !isLoading
-        && (aboutJson === INITIAL_DESCR || _isNextProps && isLoadFailed)
+  , [_isNextDescrUrl] = useHasNotEqual(descrUrl)
+  /*eslint-disable no-use-before-define*/
+  , [
+    isLoading,
+    isLoadFailed,
+    errMsg,
+    aboutJson
+  ] = useLoadJson(
+    INITIAL_DESCR,
+    isShow && descrUrl
+      && (!_isNextProps || _isNextDescrUrl || isLoadFailed),
+    isIncludeToken(descrUrl, 'data')
+      ? descrUrl.replace('.html', '.json')
+      : void 0
   );
-
-  useEffect(() => {
-     if (_isLoadDescr) {
-        setState(prevState => ({
-          ...prevState,
-          isLoading: !0
-        }))
-
-        if (isIncludeToken(descrUrl, 'data')) {
-          fetchJson({
-            uri: descrUrl.replace('.html', '.json'),
-            onFetch: ({ json }={}) => isDescrUrlCurrentValue(descrUrl) && setState(
-              _crState(!1, !1, '', json || EMPTY_DESCR)
-            ),
-            onCatch: ({ error }={}) => isDescrUrlCurrentValue(descrUrl) && setState(
-              _crState(!1, !0, error.message, EMPTY_DESCR)
-            )
-          })
-        }
-     }
-  }, [_isLoadDescr, descrUrl, isDescrUrlCurrentValue])
+  //isLoadFailed
+  /*eslint-enable no-use-before-define*/
 
   return (
     <ModalDialog
