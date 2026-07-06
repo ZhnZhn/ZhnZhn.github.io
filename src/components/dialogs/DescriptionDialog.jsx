@@ -50,7 +50,7 @@ const DescriptionDialog = memoIsShow((props) => {
     isShow && descrUrl
       && (!_isNextProps || _isNextDescrUrl || isLoadFailed),
     isIncludeToken(descrUrl, 'data')
-      ? descrUrl.replace('.html', '.json')
+      ? descrUrl
       : void 0
   );
   //isLoadFailed

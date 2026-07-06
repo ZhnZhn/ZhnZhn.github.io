@@ -13,7 +13,6 @@ const CONF = {
     //isProxy: true
   }
 };
-
 const _assign = Object.assign;
 const _crDimUrl = _ref => {
   let {
@@ -51,7 +50,7 @@ const factoryClickItem = dfProps => () => {
     });
   _assign(_conf.dialogProps, {
     loadId: lT,
-    descrUrl: dU,
+    descr: dU,
     dataSource: dS,
     dfProps: {
       dimUrl: _dimUrl,

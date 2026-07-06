@@ -1,4 +1,7 @@
-import { isArr } from "../../utils/isTypeFn";
+import {
+  isArr,
+  isStr
+} from "../../utils/isTypeFn";
 import { bindTo } from "../../utils/bindTo";
 import {
   getFromDate,
@@ -92,14 +95,15 @@ const _onError = (
 
 const _crClickAbout = ({
   rootUri,
-  descr,
-  descrUrl
-}) => {
-  const _descrUrl = descr && rootUri
-    ? `${rootUri}${descr}.html`
-    : descrUrl;
-  return _descrUrl
-    ? bindTo(showDescription, { descrUrl: _descrUrl })
+  descr
+}) => {  
+  const _descrToken = isStr(descr) && descr.slice(0, 2) === "./"
+    ? descr
+    : isStr(descr) && rootUri
+    ? `${rootUri}${descr}`
+    : '';
+  return _descrToken
+    ? bindTo(showDescription, { descrUrl: `${_descrToken}.json` })
     : void 0;
 };
 

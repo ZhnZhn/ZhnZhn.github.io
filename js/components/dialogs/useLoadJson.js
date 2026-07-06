@@ -19,7 +19,7 @@ const useLoadJson = (initialJson, isLoadJson, jsonUrl) => {
       errMsg,
       json
     }, setState] = (0, _uiApi.useState)(() => _crState(!1, !1, '', initialJson)),
-    [_isNextJsonUrl] = (0, _useHasNotEqual.default)(jsonUrl);
+    isCurrentJsonUrl = (0, _useHasNotEqual.default)(jsonUrl)[1];
   (0, _uiApi.useEffect)(() => {
     if (isLoadJson && jsonUrl) {
       setState(prevState => ({
@@ -32,17 +32,17 @@ const useLoadJson = (initialJson, isLoadJson, jsonUrl) => {
           let {
             json
           } = _temp === void 0 ? {} : _temp;
-          return !_isNextJsonUrl && setState(_crState(!1, !1, '', json));
+          return isCurrentJsonUrl(jsonUrl) && setState(_crState(!1, !1, '', json));
         },
         onCatch: function (_temp2) {
           let {
             error
           } = _temp2 === void 0 ? {} : _temp2;
-          return !_isNextJsonUrl && setState(_crState(!1, !0, error.message));
+          return isCurrentJsonUrl(jsonUrl) && setState(_crState(!1, !0, error.message));
         }
       });
     }
-  }, [jsonUrl, _isNextJsonUrl]);
+  }, [isLoadJson, jsonUrl, isCurrentJsonUrl]);
   return [isLoading, isLoadFailed, errMsg, json];
 };
 exports.useLoadJson = useLoadJson;

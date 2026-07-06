@@ -55,12 +55,11 @@ const _onError = function (alertDescr, alertCaption) {
 const _crClickAbout = _ref2 => {
   let {
     rootUri,
-    descr,
-    descrUrl
+    descr
   } = _ref2;
-  const _descrUrl = descr && rootUri ? `${rootUri}${descr}.html` : descrUrl;
-  return _descrUrl ? (0, _bindTo.bindTo)(_ComponentActions.showDescription, {
-    descrUrl: _descrUrl
+  const _descrToken = (0, _isTypeFn.isStr)(descr) && descr.slice(0, 2) === "./" ? descr : (0, _isTypeFn.isStr)(descr) && rootUri ? `${rootUri}${descr}` : '';
+  return _descrToken ? (0, _bindTo.bindTo)(_ComponentActions.showDescription, {
+    descrUrl: `${_descrToken}.json`
   }) : void 0;
 };
 const D_SELECT_N = "DialogSelectN",

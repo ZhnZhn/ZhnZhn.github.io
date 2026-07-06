@@ -64,7 +64,7 @@ const BrowserConfig = {
       bT: _BrowserType.BT_NORWAY_STAT_ALL,
       lT: 'NST_2',
       sP: 'Stat. Norway',
-      dU: './data/statistics-norway/statistics-norway.html',
+      dU: './data/statistics-norway/statistics-norway',
       dS: 'Statistics Norway',
       rootUrl: 'https://data.ssb.no/api/v0/en/table'
     }
@@ -77,7 +77,7 @@ const BrowserConfig = {
       bT: _BrowserType.BT_SWEDEN_STAT_ALL,
       lT: 'SWS',
       sP: 'Stat. Sweden',
-      dU: './data/statistics-sweden/statistics-sweden.html',
+      dU: './data/statistics-sweden/statistics-sweden',
       dS: 'Statistics Sweden',
       rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
     }
@@ -90,7 +90,7 @@ const BrowserConfig = {
       bT: _BrowserType.BT_FINLAND_STAT_ALL,
       lT: 'SFL',
       sP: 'Stat. Finland',
-      dU: './data/statistics-finland/statistics-finland.html',
+      dU: './data/statistics-finland/statistics-finland',
       dS: 'Statistics Finland',
       noTime: true,
       rootUrl: 'https://statfin.stat.fi/PXWeb/api/v1/en/StatFin'
@@ -103,7 +103,7 @@ const BrowserConfig = {
       bT: _BrowserType.BT_DENMARK_STAT_ALL,
       lT: 'SDN',
       sP: 'Stat. Denmark',
-      dU: './data/statistics-denmark/statistics-denmark.html',
+      dU: './data/statistics-denmark/statistics-denmark',
       dS: 'Statistics Denmark',
       rootUrl: 'https://api.statbank.dk/v1/subjects',
       dfTi: '?lang=en&includeTables=true',
@@ -118,7 +118,7 @@ const BrowserConfig = {
       bT: _BrowserType.BT_IRELAND_STAT_ALL,
       lT: 'SIR',
       sP: 'CSO Ireland',
-      dU: './data/statistics-ireland/statistics-ireland.html',
+      dU: './data/statistics-ireland/statistics-ireland',
       dS: 'CSO Ireland',
       rootUrl: 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'
     }
@@ -134,7 +134,7 @@ const BrowserConfig = {
     contFullCaption: 'NYSE by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType: 'ItemWithCap',
-    descrUrl: './data/nyse-stocks/nyse-stocks.html'
+    descr: './data/nyse-stocks/nyse-stocks'
   },
   [_BrowserType.BT_NASDAQ_STOCKS]: {
     browserType: _BrowserType.BT_NASDAQ_STOCKS,
@@ -146,7 +146,7 @@ const BrowserConfig = {
     contFullCaption: 'NASDAQ by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType: 'ItemWithCap',
-    descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'
+    descr: './data/nasdaq-stocks/nasdaq-stocks'
   },
   [_BrowserType.BT_WATCH_LIST]: {
     browserType: _BrowserType.BT_WATCH_LIST,

@@ -37,9 +37,7 @@ export const useLoadJson = (
     '',
     initialJson
   ))
-  , [
-    _isNextJsonUrl
-  ] = useHasNotEqual(jsonUrl);
+  , isCurrentJsonUrl = useHasNotEqual(jsonUrl)[1];
 
   useEffect(() => {
      if (isLoadJson && jsonUrl) {
@@ -50,16 +48,16 @@ export const useLoadJson = (
 
         fetchJson({
           uri: jsonUrl,
-          onFetch: ({ json }={}) => !_isNextJsonUrl && setState(
+          onFetch: ({ json }={}) => isCurrentJsonUrl(jsonUrl) && setState(
             _crState(!1, !1, '', json)
           ),
-          onCatch: ({ error }={}) => !_isNextJsonUrl && setState(
+          onCatch: ({ error }={}) => isCurrentJsonUrl(jsonUrl) && setState(
             _crState(!1, !0, error.message)
           )
         })
       }
 
-  }, [isLoadJson, jsonUrl, _isNextJsonUrl])
+  }, [isLoadJson, jsonUrl, isCurrentJsonUrl])
 
   return [
     isLoading,

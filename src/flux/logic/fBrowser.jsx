@@ -55,7 +55,7 @@ const _crBrowserDynamic = (
     modalDialogType,
     itemOptionType,
     itemType,
-    descrUrl,
+    descr,
     dfProps
   } = option
   , ItemComp = getBrowserItemComp(itemType);
@@ -66,7 +66,7 @@ const _crBrowserDynamic = (
     dfProps={dfProps}
     browserType={browserType}
     caption={caption}
-    descrUrl={descrUrl}
+    descrUrl={`${descr}.json`}
     itemStyle={itemStyle}
     topicStyle={topicStyle}
     ItemOptionComp={getItemOptionComp(itemOptionType)}

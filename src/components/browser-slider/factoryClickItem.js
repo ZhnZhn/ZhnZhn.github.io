@@ -57,7 +57,7 @@ const factoryClickItem = (
      });
    _assign(_conf.dialogProps, {
      loadId: lT,
-     descrUrl: dU,
+     descr: dU,
      dataSource: dS,
      dfProps: {
        dimUrl: _dimUrl,

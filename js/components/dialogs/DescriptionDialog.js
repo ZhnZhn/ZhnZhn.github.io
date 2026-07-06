@@ -35,7 +35,7 @@ const DescriptionDialog = (0, _memoIsShow.default)(props => {
     [_isNextProps] = (0, _useHasNotEqual.default)(props),
     [_isNextDescrUrl] = (0, _useHasNotEqual.default)(descrUrl)
     /*eslint-disable no-use-before-define*/,
-    [isLoading, isLoadFailed, errMsg, aboutJson] = (0, _useLoadJson.useLoadJson)(INITIAL_DESCR, isShow && descrUrl && (!_isNextProps || _isNextDescrUrl || isLoadFailed), (0, _isTypeFn.isIncludeToken)(descrUrl, 'data') ? descrUrl.replace('.html', '.json') : void 0);
+    [isLoading, isLoadFailed, errMsg, aboutJson] = (0, _useLoadJson.useLoadJson)(INITIAL_DESCR, isShow && descrUrl && (!_isNextProps || _isNextDescrUrl || isLoadFailed), (0, _isTypeFn.isIncludeToken)(descrUrl, 'data') ? descrUrl : void 0);
   //isLoadFailed
   /*eslint-enable no-use-before-define*/
 
