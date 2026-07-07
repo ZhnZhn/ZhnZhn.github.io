@@ -26,7 +26,7 @@ const _crSourceMenuUrl = token => `./data/${token}/source-menu.json`,
   _crStatisticsDescrUrl = token => `./data/${token}/${token}`,
   _crStatisticsFullCaption = (countryName, fullCaptionPrefix) => {
     const caption = `Statistics ${countryName}`,
-      fullCaption = (0, _arrFn.joinByCollon)(fullCaptionPrefix, caption);
+      fullCaption = (0, _arrFn.joinByColon)(fullCaptionPrefix, caption);
     return [fullCaption, caption];
   },
   _crStatisticsBrowserItem = (_ref, browserType, loadType, rootUrl, dfPropsOptions) => {
@@ -78,13 +78,13 @@ const BrowserConfig = {
   [_BrowserType.BT_CENTRAL_BANKS]: _crBrowserItem(_BrowserType.BT_CENTRAL_BANKS, 'Central Banks', 'central-banks'),
   [_BrowserType.BT_CURRENCY]: _crBrowserItem(_BrowserType.BT_CURRENCY, 'Currencies', 'currency'),
   [_BrowserType.BT_OECD]: _crBrowserItem(_BrowserType.BT_OECD, 'OECD', 'oecd'),
-  [_BrowserType.BT_FRANCE_STATISTICS]: _crBrowserItem(_BrowserType.BT_FRANCE_STATISTICS, 'INSEE: Statistics France', 'statistics-france'),
-  [_BrowserType.BT_UK_STATISTICS]: _crBrowserItem(_BrowserType.BT_UK_STATISTICS, 'ONS: Statistics UK', 'statistics-uk'),
+  [_BrowserType.BT_FRANCE_STATISTICS]: _crBrowserItem(_BrowserType.BT_FRANCE_STATISTICS, _crStatisticsFullCaption('France', 'INSEE')[0], 'statistics-france'),
+  [_BrowserType.BT_UK_STATISTICS]: _crBrowserItem(_BrowserType.BT_UK_STATISTICS, _crStatisticsFullCaption('UK', 'ONS')[0], 'statistics-uk'),
   [_BrowserType.BT_NORWAY_STATISTICS]: _crBrowserItem(_BrowserType.BT_NORWAY_STATISTICS, 'Statistics Norway (A)', 'statistics-norway'),
   [_BrowserType.BT_NORWAY_STAT_ALL]: _crStatisticsBrowserItem(['Norway'], _BrowserType.BT_NORWAY_STAT_ALL, 'NST_2', 'https://data.ssb.no/api/v0/en/table'),
   [_BrowserType.BT_SWEDEN_STAT]: _crBrowserItem(_BrowserType.BT_SWEDEN_STAT, 'Statistics Sweden (A)', 'statistics-sweden'),
   [_BrowserType.BT_SWEDEN_STAT_ALL]: _crStatisticsBrowserItem(['Sweden'], _BrowserType.BT_SWEDEN_STAT_ALL, 'SWS', 'https://api.scb.se/OV0104/v1/doris/en/ssd'),
-  [_BrowserType.BT_SWISS_STAT]: _crBrowserItem(_BrowserType.BT_SWISS_STAT, 'FSO: Statistics Swiss', 'statistics-swiss'),
+  [_BrowserType.BT_SWISS_STAT]: _crBrowserItem(_BrowserType.BT_SWISS_STAT, _crStatisticsFullCaption('Swiss', 'FSO'), 'statistics-swiss'),
   [_BrowserType.BT_FINLAND_STAT_ALL]: _crStatisticsBrowserItem(['Finland'], _BrowserType.BT_FINLAND_STAT_ALL, 'SFL', 'https://statfin.stat.fi/PXWeb/api/v1/en/StatFin', {
     noTime: true
   }),

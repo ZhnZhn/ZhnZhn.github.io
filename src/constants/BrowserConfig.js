@@ -1,4 +1,4 @@
-import { joinByCollon } from '../utils/arrFn';
+import { joinByColon } from '../utils/arrFn';
 
 import {
   BT_STOCK_MARKETS,
@@ -75,7 +75,7 @@ const _crSourceMenuUrl = (
   fullCaptionPrefix
 ) => {
   const caption = `Statistics ${countryName}`
-  , fullCaption = joinByCollon(fullCaptionPrefix, caption);
+  , fullCaption = joinByColon(fullCaptionPrefix, caption);
   return [
     fullCaption,
     caption
@@ -215,12 +215,12 @@ const BrowserConfig = {
 
   [BT_FRANCE_STATISTICS]: _crBrowserItem(
     BT_FRANCE_STATISTICS,
-    'INSEE: Statistics France',
+    _crStatisticsFullCaption('France', 'INSEE')[0],
     'statistics-france'
   ),
   [BT_UK_STATISTICS]: _crBrowserItem(
     BT_UK_STATISTICS,
-    'ONS: Statistics UK',
+    _crStatisticsFullCaption('UK', 'ONS')[0],
     'statistics-uk'
   ),
   [BT_NORWAY_STATISTICS]: _crBrowserItem(
@@ -247,7 +247,7 @@ const BrowserConfig = {
   ),
   [BT_SWISS_STAT]: _crBrowserItem(
     BT_SWISS_STAT,
-    'FSO: Statistics Swiss',
+    _crStatisticsFullCaption('Swiss', 'FSO'),
     'statistics-swiss'
   ),
   [BT_FINLAND_STAT_ALL]: _crStatisticsBrowserItem(
