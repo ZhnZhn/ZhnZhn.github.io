@@ -1,3 +1,5 @@
+import { joinByCollon } from '../utils/arrFn';
+
 import {
   BT_STOCK_MARKETS,
   BT_EUROSTAT,
@@ -67,7 +69,46 @@ const _crSourceMenuUrl = (
 })
 , _crStatisticsDescrUrl = (
   token
-) => `./data/${token}/${token}`;
+) => `./data/${token}/${token}`
+, _crStatisticsFullCaption = (
+  countryName,
+  fullCaptionPrefix
+) => {
+  const caption = `Statistics ${countryName}`
+  , fullCaption = joinByCollon(fullCaptionPrefix, caption);
+  return [
+    fullCaption,
+    caption
+  ];
+}
+, _crStatisticsBrowserItem = (
+  [countryName, fullCaptionPrefix],
+  browserType,
+  loadType,
+  rootUrl,
+  dfPropsOptions
+) => {
+  const [
+    fullCaption,
+    caption
+  ] = _crStatisticsFullCaption(
+    countryName,
+    fullCaptionPrefix
+  );
+  return {
+    browserType,
+    caption: fullCaption,
+    dfProps: {
+      bT: browserType,
+      lT: loadType,
+      sP: `Stat. ${countryName}`,
+      dU: _crStatisticsDescrUrl(`statistics-${countryName.toLowerCase()}`),
+      dS: caption,
+      rootUrl,
+      ...dfPropsOptions
+    }
+  };
+};
 
 const BrowserConfig = {
   [BT_STOCK_MARKETS]: _crBrowserItem(
@@ -187,80 +228,52 @@ const BrowserConfig = {
     'Statistics Norway (A)',
     'statistics-norway'
   ),
-  [BT_NORWAY_STAT_ALL]: {
-    browserType: BT_NORWAY_STAT_ALL,
-    caption: 'Statistics Norway',
-    dfProps: {
-      bT: BT_NORWAY_STAT_ALL,
-      lT: 'NST_2',
-      sP: 'Stat. Norway',
-      dU: _crStatisticsDescrUrl('statistics-norway'),
-      dS: 'Statistics Norway',
-      rootUrl: 'https://data.ssb.no/api/v0/en/table'
-    }
-  },
+  [BT_NORWAY_STAT_ALL]: _crStatisticsBrowserItem(
+    ['Norway'],
+    BT_NORWAY_STAT_ALL,
+    'NST_2',
+    'https://data.ssb.no/api/v0/en/table'
+  ),
   [BT_SWEDEN_STAT]: _crBrowserItem(
     BT_SWEDEN_STAT,
     'Statistics Sweden (A)',
     'statistics-sweden'
   ),
-  [BT_SWEDEN_STAT_ALL]: {
-    browserType: BT_SWEDEN_STAT_ALL,
-    caption: 'Statistics Sweden',
-    dfProps: {
-      bT: BT_SWEDEN_STAT_ALL,
-      lT: 'SWS',
-      sP: 'Stat. Sweden',
-      dU: _crStatisticsDescrUrl('statistics-sweden'),
-      dS: 'Statistics Sweden',
-      rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
-    }
-  },
+  [BT_SWEDEN_STAT_ALL]: _crStatisticsBrowserItem(
+    ['Sweden'],
+    BT_SWEDEN_STAT_ALL,
+    'SWS',
+    'https://api.scb.se/OV0104/v1/doris/en/ssd'
+  ),
   [BT_SWISS_STAT]: _crBrowserItem(
     BT_SWISS_STAT,
     'FSO: Statistics Swiss',
     'statistics-swiss'
   ),
-  [BT_FINLAND_STAT_ALL]: {
-    browserType: BT_FINLAND_STAT_ALL,
-    caption: 'Statistics Finland',
-    dfProps: {
-      bT: BT_FINLAND_STAT_ALL,
-      lT: 'SFL',
-      sP: 'Stat. Finland',
-      dU: _crStatisticsDescrUrl('statistics-finland'),
-      dS: 'Statistics Finland',
-      noTime: true,
-      rootUrl: 'https://statfin.stat.fi/PXWeb/api/v1/en/StatFin'
-    }
-  },
-  [BT_DENMARK_STAT_ALL]: {
-    browserType: BT_DENMARK_STAT_ALL,
-    caption: 'Statistics Denmark',
-    dfProps: {
-      bT: BT_DENMARK_STAT_ALL,
-      lT: 'SDN',
-      sP: 'Stat. Denmark',
-      dU: _crStatisticsDescrUrl('statistics-denmark'),
-      dS: 'Statistics Denmark',
-      rootUrl: 'https://api.statbank.dk/v1/subjects',
+  [BT_FINLAND_STAT_ALL]: _crStatisticsBrowserItem(
+    ['Finland'],
+    BT_FINLAND_STAT_ALL,
+    'SFL',
+    'https://statfin.stat.fi/PXWeb/api/v1/en/StatFin',
+    { noTime: true }
+  ),
+  [BT_DENMARK_STAT_ALL]: _crStatisticsBrowserItem(
+    ['Denmark'],
+    BT_DENMARK_STAT_ALL,
+    'SDN',
+    'https://api.statbank.dk/v1/subjects',
+    {
       dfTi: '?lang=en&includeTables=true',
       rootDimUrl: 'https://api.statbank.dk/v1/tableinfo',
       dfDimQuery: '?lang=en'
     }
-  },
-  [BT_IRELAND_STAT_ALL]: {
-    browserType: BT_IRELAND_STAT_ALL,
-    caption: 'CSO: Statistics Ireland',
-    dfProps: {
-      bT: BT_IRELAND_STAT_ALL,
-      lT: 'SIR',
-      sP: 'CSO Ireland',
-      dU: _crStatisticsDescrUrl('statistics-ireland'),
-      dS: 'CSO Ireland',
-      rootUrl: 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'
-    }
-  },
+  ),
+  [BT_IRELAND_STAT_ALL]: _crStatisticsBrowserItem(
+    ['Ireland', 'CSO'],
+    BT_IRELAND_STAT_ALL,
+    'SIR',
+    'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'
+  ),
   [BT_US_ECONOMICS]: _crBrowserItem(
     BT_US_ECONOMICS,
     'U.S. Economics',

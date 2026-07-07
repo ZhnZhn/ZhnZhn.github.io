@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _arrFn = require("../utils/arrFn");
 var _BrowserType = require("./BrowserType");
 var _ModalDialogType = require("./ModalDialogType");
 const S_ITEM_MULTI_LINE = {
@@ -22,7 +23,29 @@ const _crSourceMenuUrl = token => `./data/${token}/source-menu.json`,
     itemStyle,
     topicStyle
   }),
-  _crStatisticsDescrUrl = token => `./data/${token}/${token}`;
+  _crStatisticsDescrUrl = token => `./data/${token}/${token}`,
+  _crStatisticsFullCaption = (countryName, fullCaptionPrefix) => {
+    const caption = `Statistics ${countryName}`,
+      fullCaption = (0, _arrFn.joinByCollon)(fullCaptionPrefix, caption);
+    return [fullCaption, caption];
+  },
+  _crStatisticsBrowserItem = (_ref, browserType, loadType, rootUrl, dfPropsOptions) => {
+    let [countryName, fullCaptionPrefix] = _ref;
+    const [fullCaption, caption] = _crStatisticsFullCaption(countryName, fullCaptionPrefix);
+    return {
+      browserType,
+      caption: fullCaption,
+      dfProps: {
+        bT: browserType,
+        lT: loadType,
+        sP: `Stat. ${countryName}`,
+        dU: _crStatisticsDescrUrl(`statistics-${countryName.toLowerCase()}`),
+        dS: caption,
+        rootUrl,
+        ...dfPropsOptions
+      }
+    };
+  };
 const BrowserConfig = {
   [_BrowserType.BT_STOCK_MARKETS]: _crBrowserItem(_BrowserType.BT_STOCK_MARKETS, 'Stock Markets', 'stock-markets'),
   [_BrowserType.BT_EUROSTAT]: _crBrowserItem(_BrowserType.BT_EUROSTAT, 'Eurostat Overview', 'eurostat'),
@@ -58,72 +81,19 @@ const BrowserConfig = {
   [_BrowserType.BT_FRANCE_STATISTICS]: _crBrowserItem(_BrowserType.BT_FRANCE_STATISTICS, 'INSEE: Statistics France', 'statistics-france'),
   [_BrowserType.BT_UK_STATISTICS]: _crBrowserItem(_BrowserType.BT_UK_STATISTICS, 'ONS: Statistics UK', 'statistics-uk'),
   [_BrowserType.BT_NORWAY_STATISTICS]: _crBrowserItem(_BrowserType.BT_NORWAY_STATISTICS, 'Statistics Norway (A)', 'statistics-norway'),
-  [_BrowserType.BT_NORWAY_STAT_ALL]: {
-    browserType: _BrowserType.BT_NORWAY_STAT_ALL,
-    caption: 'Statistics Norway',
-    dfProps: {
-      bT: _BrowserType.BT_NORWAY_STAT_ALL,
-      lT: 'NST_2',
-      sP: 'Stat. Norway',
-      dU: _crStatisticsDescrUrl('statistics-norway'),
-      dS: 'Statistics Norway',
-      rootUrl: 'https://data.ssb.no/api/v0/en/table'
-    }
-  },
+  [_BrowserType.BT_NORWAY_STAT_ALL]: _crStatisticsBrowserItem(['Norway'], _BrowserType.BT_NORWAY_STAT_ALL, 'NST_2', 'https://data.ssb.no/api/v0/en/table'),
   [_BrowserType.BT_SWEDEN_STAT]: _crBrowserItem(_BrowserType.BT_SWEDEN_STAT, 'Statistics Sweden (A)', 'statistics-sweden'),
-  [_BrowserType.BT_SWEDEN_STAT_ALL]: {
-    browserType: _BrowserType.BT_SWEDEN_STAT_ALL,
-    caption: 'Statistics Sweden',
-    dfProps: {
-      bT: _BrowserType.BT_SWEDEN_STAT_ALL,
-      lT: 'SWS',
-      sP: 'Stat. Sweden',
-      dU: _crStatisticsDescrUrl('statistics-sweden'),
-      dS: 'Statistics Sweden',
-      rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
-    }
-  },
+  [_BrowserType.BT_SWEDEN_STAT_ALL]: _crStatisticsBrowserItem(['Sweden'], _BrowserType.BT_SWEDEN_STAT_ALL, 'SWS', 'https://api.scb.se/OV0104/v1/doris/en/ssd'),
   [_BrowserType.BT_SWISS_STAT]: _crBrowserItem(_BrowserType.BT_SWISS_STAT, 'FSO: Statistics Swiss', 'statistics-swiss'),
-  [_BrowserType.BT_FINLAND_STAT_ALL]: {
-    browserType: _BrowserType.BT_FINLAND_STAT_ALL,
-    caption: 'Statistics Finland',
-    dfProps: {
-      bT: _BrowserType.BT_FINLAND_STAT_ALL,
-      lT: 'SFL',
-      sP: 'Stat. Finland',
-      dU: _crStatisticsDescrUrl('statistics-finland'),
-      dS: 'Statistics Finland',
-      noTime: true,
-      rootUrl: 'https://statfin.stat.fi/PXWeb/api/v1/en/StatFin'
-    }
-  },
-  [_BrowserType.BT_DENMARK_STAT_ALL]: {
-    browserType: _BrowserType.BT_DENMARK_STAT_ALL,
-    caption: 'Statistics Denmark',
-    dfProps: {
-      bT: _BrowserType.BT_DENMARK_STAT_ALL,
-      lT: 'SDN',
-      sP: 'Stat. Denmark',
-      dU: _crStatisticsDescrUrl('statistics-denmark'),
-      dS: 'Statistics Denmark',
-      rootUrl: 'https://api.statbank.dk/v1/subjects',
-      dfTi: '?lang=en&includeTables=true',
-      rootDimUrl: 'https://api.statbank.dk/v1/tableinfo',
-      dfDimQuery: '?lang=en'
-    }
-  },
-  [_BrowserType.BT_IRELAND_STAT_ALL]: {
-    browserType: _BrowserType.BT_IRELAND_STAT_ALL,
-    caption: 'CSO: Statistics Ireland',
-    dfProps: {
-      bT: _BrowserType.BT_IRELAND_STAT_ALL,
-      lT: 'SIR',
-      sP: 'CSO Ireland',
-      dU: _crStatisticsDescrUrl('statistics-ireland'),
-      dS: 'CSO Ireland',
-      rootUrl: 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'
-    }
-  },
+  [_BrowserType.BT_FINLAND_STAT_ALL]: _crStatisticsBrowserItem(['Finland'], _BrowserType.BT_FINLAND_STAT_ALL, 'SFL', 'https://statfin.stat.fi/PXWeb/api/v1/en/StatFin', {
+    noTime: true
+  }),
+  [_BrowserType.BT_DENMARK_STAT_ALL]: _crStatisticsBrowserItem(['Denmark'], _BrowserType.BT_DENMARK_STAT_ALL, 'SDN', 'https://api.statbank.dk/v1/subjects', {
+    dfTi: '?lang=en&includeTables=true',
+    rootDimUrl: 'https://api.statbank.dk/v1/tableinfo',
+    dfDimQuery: '?lang=en'
+  }),
+  [_BrowserType.BT_IRELAND_STAT_ALL]: _crStatisticsBrowserItem(['Ireland', 'CSO'], _BrowserType.BT_IRELAND_STAT_ALL, 'SIR', 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'),
   [_BrowserType.BT_US_ECONOMICS]: _crBrowserItem(_BrowserType.BT_US_ECONOMICS, 'U.S. Economics', 'us-economics'),
   [_BrowserType.BT_NYSE_STOCKS]: {
     browserType: _BrowserType.BT_NYSE_STOCKS,
