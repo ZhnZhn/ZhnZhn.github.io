@@ -64,7 +64,10 @@ const _crSourceMenuUrl = (
   sourceMenuUrl: _crSourceMenuUrl(token),
   itemStyle,
   topicStyle
-});
+})
+, _crStatisticsDescrUrl = (
+  token
+) => `./data/${token}/${token}`;
 
 const BrowserConfig = {
   [BT_STOCK_MARKETS]: _crBrowserItem(
@@ -191,7 +194,7 @@ const BrowserConfig = {
       bT: BT_NORWAY_STAT_ALL,
       lT: 'NST_2',
       sP: 'Stat. Norway',
-      dU: './data/statistics-norway/statistics-norway',
+      dU: _crStatisticsDescrUrl('statistics-norway'),
       dS: 'Statistics Norway',
       rootUrl: 'https://data.ssb.no/api/v0/en/table'
     }
@@ -208,7 +211,7 @@ const BrowserConfig = {
       bT: BT_SWEDEN_STAT_ALL,
       lT: 'SWS',
       sP: 'Stat. Sweden',
-      dU: './data/statistics-sweden/statistics-sweden',
+      dU: _crStatisticsDescrUrl('statistics-sweden'),
       dS: 'Statistics Sweden',
       rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
     }
@@ -225,7 +228,7 @@ const BrowserConfig = {
       bT: BT_FINLAND_STAT_ALL,
       lT: 'SFL',
       sP: 'Stat. Finland',
-      dU: './data/statistics-finland/statistics-finland',
+      dU: _crStatisticsDescrUrl('statistics-finland'),
       dS: 'Statistics Finland',
       noTime: true,
       rootUrl: 'https://statfin.stat.fi/PXWeb/api/v1/en/StatFin'
@@ -238,7 +241,7 @@ const BrowserConfig = {
       bT: BT_DENMARK_STAT_ALL,
       lT: 'SDN',
       sP: 'Stat. Denmark',
-      dU: './data/statistics-denmark/statistics-denmark',
+      dU: _crStatisticsDescrUrl('statistics-denmark'),
       dS: 'Statistics Denmark',
       rootUrl: 'https://api.statbank.dk/v1/subjects',
       dfTi: '?lang=en&includeTables=true',
@@ -253,7 +256,7 @@ const BrowserConfig = {
       bT: BT_IRELAND_STAT_ALL,
       lT: 'SIR',
       sP: 'CSO Ireland',
-      dU: './data/statistics-ireland/statistics-ireland',
+      dU: _crStatisticsDescrUrl('statistics-ireland'),
       dS: 'CSO Ireland',
       rootUrl: 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'
     }
