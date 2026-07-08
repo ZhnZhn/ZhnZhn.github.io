@@ -47,7 +47,8 @@ const _crSourceMenuUrl = token => `./data/${token}/source-menu.json`,
         ...dfPropsOptions
       }
     };
-  };
+  },
+  _crSourceMenuStatisticsBrowserItem = (browserType, countryName, fullCaptionPrefix) => _crBrowserItem(browserType, fullCaptionPrefix ? _crStatisticsFullCaption(countryName, fullCaptionPrefix)[0] : `Statistics ${countryName} (A)`, _crStatisticsToken(countryName));
 const BrowserConfig = {
   [_BrowserType.BT_STOCK_MARKETS]: _crBrowserItem(_BrowserType.BT_STOCK_MARKETS, 'Stock Markets', 'stock-markets'),
   [_BrowserType.BT_EUROSTAT]: _crBrowserItem(_BrowserType.BT_EUROSTAT, 'Eurostat Overview', 'eurostat'),
@@ -80,13 +81,13 @@ const BrowserConfig = {
   [_BrowserType.BT_CENTRAL_BANKS]: _crBrowserItem(_BrowserType.BT_CENTRAL_BANKS, 'Central Banks', 'central-banks'),
   [_BrowserType.BT_CURRENCY]: _crBrowserItem(_BrowserType.BT_CURRENCY, 'Currencies', 'currency'),
   [_BrowserType.BT_OECD]: _crBrowserItem(_BrowserType.BT_OECD, 'OECD', 'oecd'),
-  [_BrowserType.BT_FRANCE_STATISTICS]: _crBrowserItem(_BrowserType.BT_FRANCE_STATISTICS, _crStatisticsFullCaption('France', 'INSEE')[0], _crStatisticsToken('France')),
-  [_BrowserType.BT_UK_STATISTICS]: _crBrowserItem(_BrowserType.BT_UK_STATISTICS, _crStatisticsFullCaption('UK', 'ONS')[0], _crStatisticsToken('UK')),
-  [_BrowserType.BT_NORWAY_STATISTICS]: _crBrowserItem(_BrowserType.BT_NORWAY_STATISTICS, 'Statistics Norway (A)', _crStatisticsToken('Norway')),
+  [_BrowserType.BT_FRANCE_STATISTICS]: _crSourceMenuStatisticsBrowserItem(_BrowserType.BT_FRANCE_STATISTICS, 'France', 'INSEE'),
+  [_BrowserType.BT_UK_STATISTICS]: _crSourceMenuStatisticsBrowserItem(_BrowserType.BT_UK_STATISTICS, 'UK', 'ONS'),
+  [_BrowserType.BT_SWISS_STAT]: _crSourceMenuStatisticsBrowserItem(_BrowserType.BT_SWISS_STAT, 'Swiss', 'FSO'),
+  [_BrowserType.BT_NORWAY_STATISTICS]: _crSourceMenuStatisticsBrowserItem(_BrowserType.BT_NORWAY_STATISTICS, 'Norway'),
   [_BrowserType.BT_NORWAY_STAT_ALL]: _crStatisticsBrowserItem(['Norway'], _BrowserType.BT_NORWAY_STAT_ALL, _LoadType.LT_NST_2, 'https://data.ssb.no/api/v0/en/table'),
-  [_BrowserType.BT_SWEDEN_STAT]: _crBrowserItem(_BrowserType.BT_SWEDEN_STAT, 'Statistics Sweden (A)', _crStatisticsToken('Sweden')),
+  [_BrowserType.BT_SWEDEN_STAT]: _crSourceMenuStatisticsBrowserItem(_BrowserType.BT_SWEDEN_STAT, 'Sweden'),
   [_BrowserType.BT_SWEDEN_STAT_ALL]: _crStatisticsBrowserItem(['Sweden'], _BrowserType.BT_SWEDEN_STAT_ALL, _LoadType.LT_SWS, 'https://api.scb.se/OV0104/v1/doris/en/ssd'),
-  [_BrowserType.BT_SWISS_STAT]: _crBrowserItem(_BrowserType.BT_SWISS_STAT, _crStatisticsFullCaption('Swiss', 'FSO')[0], _crStatisticsToken('Swiss')),
   [_BrowserType.BT_FINLAND_STAT_ALL]: _crStatisticsBrowserItem(['Finland'], _BrowserType.BT_FINLAND_STAT_ALL, _LoadType.LT_SFL, 'https://statfin.stat.fi/PXWeb/api/v1/en/StatFin', {
     noTime: true
   }),

@@ -119,7 +119,18 @@ const _crSourceMenuUrl = (
       ...dfPropsOptions
     }
   };
-};
+}
+, _crSourceMenuStatisticsBrowserItem = (
+  browserType,
+  countryName,
+  fullCaptionPrefix
+) => _crBrowserItem(
+  browserType,
+  fullCaptionPrefix
+    ? _crStatisticsFullCaption(countryName, fullCaptionPrefix)[0]
+    : `Statistics ${countryName} (A)`,
+  _crStatisticsToken(countryName)
+);
 
 const BrowserConfig = {
   [BT_STOCK_MARKETS]: _crBrowserItem(
@@ -224,20 +235,25 @@ const BrowserConfig = {
     'oecd'
   ),
 
-  [BT_FRANCE_STATISTICS]: _crBrowserItem(
+  [BT_FRANCE_STATISTICS]: _crSourceMenuStatisticsBrowserItem(
     BT_FRANCE_STATISTICS,
-    _crStatisticsFullCaption('France', 'INSEE')[0],
-    _crStatisticsToken('France')
+    'France',
+    'INSEE'
   ),
-  [BT_UK_STATISTICS]: _crBrowserItem(
+  [BT_UK_STATISTICS]: _crSourceMenuStatisticsBrowserItem(
     BT_UK_STATISTICS,
-    _crStatisticsFullCaption('UK', 'ONS')[0],
-    _crStatisticsToken('UK')    
+    'UK',
+    'ONS'
   ),
-  [BT_NORWAY_STATISTICS]: _crBrowserItem(
+  [BT_SWISS_STAT]: _crSourceMenuStatisticsBrowserItem(
+    BT_SWISS_STAT,
+    'Swiss',
+    'FSO'
+  ),
+
+  [BT_NORWAY_STATISTICS]: _crSourceMenuStatisticsBrowserItem(
     BT_NORWAY_STATISTICS,
-    'Statistics Norway (A)',
-    _crStatisticsToken('Norway')
+    'Norway'
   ),
   [BT_NORWAY_STAT_ALL]: _crStatisticsBrowserItem(
     ['Norway'],
@@ -245,21 +261,15 @@ const BrowserConfig = {
     LT_NST_2,
     'https://data.ssb.no/api/v0/en/table'
   ),
-  [BT_SWEDEN_STAT]: _crBrowserItem(
+  [BT_SWEDEN_STAT]: _crSourceMenuStatisticsBrowserItem(
     BT_SWEDEN_STAT,
-    'Statistics Sweden (A)',
-    _crStatisticsToken('Sweden')
+    'Sweden'
   ),
   [BT_SWEDEN_STAT_ALL]: _crStatisticsBrowserItem(
     ['Sweden'],
     BT_SWEDEN_STAT_ALL,
     LT_SWS,
     'https://api.scb.se/OV0104/v1/doris/en/ssd'
-  ),
-  [BT_SWISS_STAT]: _crBrowserItem(
-    BT_SWISS_STAT,
-    _crStatisticsFullCaption('Swiss', 'FSO')[0],
-    _crStatisticsToken('Swiss')
   ),
   [BT_FINLAND_STAT_ALL]: _crStatisticsBrowserItem(
     ['Finland'],
