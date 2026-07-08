@@ -39,6 +39,13 @@ import {
 import {
   MDT_STOCKS_BY_SECTOR
 } from './ModalDialogType';
+import {
+  LT_NST_2,
+  LT_SWS,
+  LT_SFL,
+  LT_SDN,
+  LT_SIR
+} from './LoadType';
 
 const S_ITEM_MULTI_LINE = {
   maxWidth: 275,
@@ -67,6 +74,7 @@ const _crSourceMenuUrl = (
   itemStyle,
   topicStyle
 })
+
 , _crStatisticsDescrUrl = (
   token
 ) => `./data/${token}/${token}`
@@ -231,7 +239,7 @@ const BrowserConfig = {
   [BT_NORWAY_STAT_ALL]: _crStatisticsBrowserItem(
     ['Norway'],
     BT_NORWAY_STAT_ALL,
-    'NST_2',
+    LT_NST_2,
     'https://data.ssb.no/api/v0/en/table'
   ),
   [BT_SWEDEN_STAT]: _crBrowserItem(
@@ -242,7 +250,7 @@ const BrowserConfig = {
   [BT_SWEDEN_STAT_ALL]: _crStatisticsBrowserItem(
     ['Sweden'],
     BT_SWEDEN_STAT_ALL,
-    'SWS',
+    LT_SWS,
     'https://api.scb.se/OV0104/v1/doris/en/ssd'
   ),
   [BT_SWISS_STAT]: _crBrowserItem(
@@ -253,14 +261,14 @@ const BrowserConfig = {
   [BT_FINLAND_STAT_ALL]: _crStatisticsBrowserItem(
     ['Finland'],
     BT_FINLAND_STAT_ALL,
-    'SFL',
+    LT_SFL,
     'https://statfin.stat.fi/PXWeb/api/v1/en/StatFin',
     { noTime: true }
   ),
   [BT_DENMARK_STAT_ALL]: _crStatisticsBrowserItem(
     ['Denmark'],
     BT_DENMARK_STAT_ALL,
-    'SDN',
+    LT_SDN,
     'https://api.statbank.dk/v1/subjects',
     {
       dfTi: '?lang=en&includeTables=true',
@@ -271,7 +279,7 @@ const BrowserConfig = {
   [BT_IRELAND_STAT_ALL]: _crStatisticsBrowserItem(
     ['Ireland', 'CSO'],
     BT_IRELAND_STAT_ALL,
-    'SIR',
+    LT_SIR,
     'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'
   ),
   [BT_US_ECONOMICS]: _crBrowserItem(

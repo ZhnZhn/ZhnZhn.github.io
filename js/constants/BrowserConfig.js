@@ -5,6 +5,7 @@ exports.default = void 0;
 var _arrFn = require("../utils/arrFn");
 var _BrowserType = require("./BrowserType");
 var _ModalDialogType = require("./ModalDialogType");
+var _LoadType = require("./LoadType");
 const S_ITEM_MULTI_LINE = {
     maxWidth: 275,
     lineHeight: 1.3,
@@ -81,19 +82,19 @@ const BrowserConfig = {
   [_BrowserType.BT_FRANCE_STATISTICS]: _crBrowserItem(_BrowserType.BT_FRANCE_STATISTICS, _crStatisticsFullCaption('France', 'INSEE')[0], 'statistics-france'),
   [_BrowserType.BT_UK_STATISTICS]: _crBrowserItem(_BrowserType.BT_UK_STATISTICS, _crStatisticsFullCaption('UK', 'ONS')[0], 'statistics-uk'),
   [_BrowserType.BT_NORWAY_STATISTICS]: _crBrowserItem(_BrowserType.BT_NORWAY_STATISTICS, 'Statistics Norway (A)', 'statistics-norway'),
-  [_BrowserType.BT_NORWAY_STAT_ALL]: _crStatisticsBrowserItem(['Norway'], _BrowserType.BT_NORWAY_STAT_ALL, 'NST_2', 'https://data.ssb.no/api/v0/en/table'),
+  [_BrowserType.BT_NORWAY_STAT_ALL]: _crStatisticsBrowserItem(['Norway'], _BrowserType.BT_NORWAY_STAT_ALL, _LoadType.LT_NST_2, 'https://data.ssb.no/api/v0/en/table'),
   [_BrowserType.BT_SWEDEN_STAT]: _crBrowserItem(_BrowserType.BT_SWEDEN_STAT, 'Statistics Sweden (A)', 'statistics-sweden'),
-  [_BrowserType.BT_SWEDEN_STAT_ALL]: _crStatisticsBrowserItem(['Sweden'], _BrowserType.BT_SWEDEN_STAT_ALL, 'SWS', 'https://api.scb.se/OV0104/v1/doris/en/ssd'),
+  [_BrowserType.BT_SWEDEN_STAT_ALL]: _crStatisticsBrowserItem(['Sweden'], _BrowserType.BT_SWEDEN_STAT_ALL, _LoadType.LT_SWS, 'https://api.scb.se/OV0104/v1/doris/en/ssd'),
   [_BrowserType.BT_SWISS_STAT]: _crBrowserItem(_BrowserType.BT_SWISS_STAT, _crStatisticsFullCaption('Swiss', 'FSO'), 'statistics-swiss'),
-  [_BrowserType.BT_FINLAND_STAT_ALL]: _crStatisticsBrowserItem(['Finland'], _BrowserType.BT_FINLAND_STAT_ALL, 'SFL', 'https://statfin.stat.fi/PXWeb/api/v1/en/StatFin', {
+  [_BrowserType.BT_FINLAND_STAT_ALL]: _crStatisticsBrowserItem(['Finland'], _BrowserType.BT_FINLAND_STAT_ALL, _LoadType.LT_SFL, 'https://statfin.stat.fi/PXWeb/api/v1/en/StatFin', {
     noTime: true
   }),
-  [_BrowserType.BT_DENMARK_STAT_ALL]: _crStatisticsBrowserItem(['Denmark'], _BrowserType.BT_DENMARK_STAT_ALL, 'SDN', 'https://api.statbank.dk/v1/subjects', {
+  [_BrowserType.BT_DENMARK_STAT_ALL]: _crStatisticsBrowserItem(['Denmark'], _BrowserType.BT_DENMARK_STAT_ALL, _LoadType.LT_SDN, 'https://api.statbank.dk/v1/subjects', {
     dfTi: '?lang=en&includeTables=true',
     rootDimUrl: 'https://api.statbank.dk/v1/tableinfo',
     dfDimQuery: '?lang=en'
   }),
-  [_BrowserType.BT_IRELAND_STAT_ALL]: _crStatisticsBrowserItem(['Ireland', 'CSO'], _BrowserType.BT_IRELAND_STAT_ALL, 'SIR', 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'),
+  [_BrowserType.BT_IRELAND_STAT_ALL]: _crStatisticsBrowserItem(['Ireland', 'CSO'], _BrowserType.BT_IRELAND_STAT_ALL, _LoadType.LT_SIR, 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'),
   [_BrowserType.BT_US_ECONOMICS]: _crBrowserItem(_BrowserType.BT_US_ECONOMICS, 'U.S. Economics', 'us-economics'),
   [_BrowserType.BT_NYSE_STOCKS]: {
     browserType: _BrowserType.BT_NYSE_STOCKS,
