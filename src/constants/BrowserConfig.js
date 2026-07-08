@@ -58,9 +58,13 @@ const S_ITEM_MULTI_LINE = {
   whiteSpace: 'unset'
 }
 
-const _crSourceMenuUrl = (
+const _crDescrUrl = (
+  token
+) => `./data/${token}/${token}`
+, _crSourceMenuUrl = (
   token
 ) => `./data/${token}/source-menu.json`
+
 , _crBrowserItem = (
   browserType,
   caption,
@@ -78,9 +82,6 @@ const _crSourceMenuUrl = (
 , _crStatisticsToken = (
   countryName
 ) => `statistics-${countryName.toLowerCase()}`
-, _crStatisticsDescrUrl = (
-  token
-) => `./data/${token}/${token}`
 , _crStatisticsFullCaption = (
   countryName,
   fullCaptionPrefix
@@ -113,7 +114,7 @@ const _crSourceMenuUrl = (
       bT: browserType,
       lT: loadType,
       sP: `Stat. ${countryName}`,
-      dU: _crStatisticsDescrUrl(_crStatisticsToken(countryName)),
+      dU: _crDescrUrl(_crStatisticsToken(countryName)),
       dS: caption,
       rootUrl,
       ...dfPropsOptions
@@ -130,7 +131,27 @@ const _crSourceMenuUrl = (
     ? _crStatisticsFullCaption(countryName, fullCaptionPrefix)[0]
     : `Statistics ${countryName} (A)`,
   _crStatisticsToken(countryName)
-);
+)
+
+, _crStockMarketBrowserItem = (
+  browserType,
+  exchangeName
+) => {
+  const caption = `${exchangeName} by Sectors`
+  , exchangeToken = `${exchangeName.toLowerCase()}-stocks`
+  return {
+    browserType,
+    caption,
+    sourceMenuUrl: _crSourceMenuUrl(exchangeToken),
+    withoutItemCounter: true,
+    modalDialogType: MDT_STOCKS_BY_SECTOR,
+    chartContainerType: `${browserType}_${BT_STOCKS_BY_SECTORS}`,
+    contFullCaption: caption,
+    itemOptionType: 'ItemTopicOption',
+    itemType: 'ItemWithCap',
+    descr: _crDescrUrl(exchangeToken)
+  };
+};
 
 const BrowserConfig = {
   [BT_STOCK_MARKETS]: _crBrowserItem(
@@ -300,31 +321,14 @@ const BrowserConfig = {
     'U.S. Economics',
     'us-economics'
   ),
-  [BT_NYSE_STOCKS]: {
-    browserType: BT_NYSE_STOCKS,
-    caption: 'NYSE by Sectors',
-    sourceMenuUrl: './data/nyse-stocks/source-menu.json',
-    withoutItemCounter: true,
-    modalDialogType: MDT_STOCKS_BY_SECTOR,
-    chartContainerType: BT_NYSE_STOCKS + '_' + BT_STOCKS_BY_SECTORS,
-    contFullCaption: 'NYSE by Sectors',
-    itemOptionType: 'ItemTopicOption',
-    itemType: 'ItemWithCap',
-    descr: './data/nyse-stocks/nyse-stocks'
-  },
-  [BT_NASDAQ_STOCKS]: {
-    browserType: BT_NASDAQ_STOCKS,
-    caption: 'NASDAQ by Sectors',
-    sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
-    withoutItemCounter: true,
-    modalDialogType: MDT_STOCKS_BY_SECTOR,
-    chartContainerType: BT_NASDAQ_STOCKS + '_' + BT_STOCKS_BY_SECTORS,
-    contFullCaption: 'NASDAQ by Sectors',
-    itemOptionType: 'ItemTopicOption',
-    itemType: 'ItemWithCap',
-    descr: './data/nasdaq-stocks/nasdaq-stocks'
-  },
-
+  [BT_NYSE_STOCKS]: _crStockMarketBrowserItem(
+    BT_NYSE_STOCKS,
+    'NYSE'
+  ),
+  [BT_NASDAQ_STOCKS]: _crStockMarketBrowserItem(
+    BT_NASDAQ_STOCKS,
+    'NASDAQ'
+  ),
   [BT_WATCH_LIST]: {
     browserType: BT_WATCH_LIST,
     withoutItemCounter: true

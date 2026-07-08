@@ -16,7 +16,8 @@ const S_ITEM_MULTI_LINE = {
     ...S_ITEM_MULTI_LINE,
     whiteSpace: 'unset'
   };
-const _crSourceMenuUrl = token => `./data/${token}/source-menu.json`,
+const _crDescrUrl = token => `./data/${token}/${token}`,
+  _crSourceMenuUrl = token => `./data/${token}/source-menu.json`,
   _crBrowserItem = (browserType, caption, token, itemStyle, topicStyle) => ({
     browserType,
     caption,
@@ -25,7 +26,6 @@ const _crSourceMenuUrl = token => `./data/${token}/source-menu.json`,
     topicStyle
   }),
   _crStatisticsToken = countryName => `statistics-${countryName.toLowerCase()}`,
-  _crStatisticsDescrUrl = token => `./data/${token}/${token}`,
   _crStatisticsFullCaption = (countryName, fullCaptionPrefix) => {
     const caption = `Statistics ${countryName}`,
       fullCaption = (0, _arrFn.joinByColon)(fullCaptionPrefix, caption);
@@ -41,14 +41,30 @@ const _crSourceMenuUrl = token => `./data/${token}/source-menu.json`,
         bT: browserType,
         lT: loadType,
         sP: `Stat. ${countryName}`,
-        dU: _crStatisticsDescrUrl(_crStatisticsToken(countryName)),
+        dU: _crDescrUrl(_crStatisticsToken(countryName)),
         dS: caption,
         rootUrl,
         ...dfPropsOptions
       }
     };
   },
-  _crSourceMenuStatisticsBrowserItem = (browserType, countryName, fullCaptionPrefix) => _crBrowserItem(browserType, fullCaptionPrefix ? _crStatisticsFullCaption(countryName, fullCaptionPrefix)[0] : `Statistics ${countryName} (A)`, _crStatisticsToken(countryName));
+  _crSourceMenuStatisticsBrowserItem = (browserType, countryName, fullCaptionPrefix) => _crBrowserItem(browserType, fullCaptionPrefix ? _crStatisticsFullCaption(countryName, fullCaptionPrefix)[0] : `Statistics ${countryName} (A)`, _crStatisticsToken(countryName)),
+  _crStockMarketBrowserItem = (browserType, exchangeName) => {
+    const caption = `${exchangeName} by Sectors`,
+      exchangeToken = `${exchangeName.toLowerCase()}-stocks`;
+    return {
+      browserType,
+      caption,
+      sourceMenuUrl: _crSourceMenuUrl(exchangeToken),
+      withoutItemCounter: true,
+      modalDialogType: _ModalDialogType.MDT_STOCKS_BY_SECTOR,
+      chartContainerType: `${browserType}_${_BrowserType.BT_STOCKS_BY_SECTORS}`,
+      contFullCaption: caption,
+      itemOptionType: 'ItemTopicOption',
+      itemType: 'ItemWithCap',
+      descr: _crDescrUrl(exchangeToken)
+    };
+  };
 const BrowserConfig = {
   [_BrowserType.BT_STOCK_MARKETS]: _crBrowserItem(_BrowserType.BT_STOCK_MARKETS, 'Stock Markets', 'stock-markets'),
   [_BrowserType.BT_EUROSTAT]: _crBrowserItem(_BrowserType.BT_EUROSTAT, 'Eurostat Overview', 'eurostat'),
@@ -98,30 +114,8 @@ const BrowserConfig = {
   }),
   [_BrowserType.BT_IRELAND_STAT_ALL]: _crStatisticsBrowserItem(['Ireland', 'CSO'], _BrowserType.BT_IRELAND_STAT_ALL, _LoadType.LT_SIR, 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'),
   [_BrowserType.BT_US_ECONOMICS]: _crBrowserItem(_BrowserType.BT_US_ECONOMICS, 'U.S. Economics', 'us-economics'),
-  [_BrowserType.BT_NYSE_STOCKS]: {
-    browserType: _BrowserType.BT_NYSE_STOCKS,
-    caption: 'NYSE by Sectors',
-    sourceMenuUrl: './data/nyse-stocks/source-menu.json',
-    withoutItemCounter: true,
-    modalDialogType: _ModalDialogType.MDT_STOCKS_BY_SECTOR,
-    chartContainerType: _BrowserType.BT_NYSE_STOCKS + '_' + _BrowserType.BT_STOCKS_BY_SECTORS,
-    contFullCaption: 'NYSE by Sectors',
-    itemOptionType: 'ItemTopicOption',
-    itemType: 'ItemWithCap',
-    descr: './data/nyse-stocks/nyse-stocks'
-  },
-  [_BrowserType.BT_NASDAQ_STOCKS]: {
-    browserType: _BrowserType.BT_NASDAQ_STOCKS,
-    caption: 'NASDAQ by Sectors',
-    sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
-    withoutItemCounter: true,
-    modalDialogType: _ModalDialogType.MDT_STOCKS_BY_SECTOR,
-    chartContainerType: _BrowserType.BT_NASDAQ_STOCKS + '_' + _BrowserType.BT_STOCKS_BY_SECTORS,
-    contFullCaption: 'NASDAQ by Sectors',
-    itemOptionType: 'ItemTopicOption',
-    itemType: 'ItemWithCap',
-    descr: './data/nasdaq-stocks/nasdaq-stocks'
-  },
+  [_BrowserType.BT_NYSE_STOCKS]: _crStockMarketBrowserItem(_BrowserType.BT_NYSE_STOCKS, 'NYSE'),
+  [_BrowserType.BT_NASDAQ_STOCKS]: _crStockMarketBrowserItem(_BrowserType.BT_NASDAQ_STOCKS, 'NASDAQ'),
   [_BrowserType.BT_WATCH_LIST]: {
     browserType: _BrowserType.BT_WATCH_LIST,
     withoutItemCounter: true
