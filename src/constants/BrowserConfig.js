@@ -75,6 +75,9 @@ const _crSourceMenuUrl = (
   topicStyle
 })
 
+, _crStatisticsToken = (
+  countryName
+) => `statistics-${countryName.toLowerCase()}`
 , _crStatisticsDescrUrl = (
   token
 ) => `./data/${token}/${token}`
@@ -110,7 +113,7 @@ const _crSourceMenuUrl = (
       bT: browserType,
       lT: loadType,
       sP: `Stat. ${countryName}`,
-      dU: _crStatisticsDescrUrl(`statistics-${countryName.toLowerCase()}`),
+      dU: _crStatisticsDescrUrl(_crStatisticsToken(countryName)),
       dS: caption,
       rootUrl,
       ...dfPropsOptions
@@ -224,17 +227,17 @@ const BrowserConfig = {
   [BT_FRANCE_STATISTICS]: _crBrowserItem(
     BT_FRANCE_STATISTICS,
     _crStatisticsFullCaption('France', 'INSEE')[0],
-    'statistics-france'
+    _crStatisticsToken('France')
   ),
   [BT_UK_STATISTICS]: _crBrowserItem(
     BT_UK_STATISTICS,
     _crStatisticsFullCaption('UK', 'ONS')[0],
-    'statistics-uk'
+    _crStatisticsToken('UK')    
   ),
   [BT_NORWAY_STATISTICS]: _crBrowserItem(
     BT_NORWAY_STATISTICS,
     'Statistics Norway (A)',
-    'statistics-norway'
+    _crStatisticsToken('Norway')
   ),
   [BT_NORWAY_STAT_ALL]: _crStatisticsBrowserItem(
     ['Norway'],
@@ -245,7 +248,7 @@ const BrowserConfig = {
   [BT_SWEDEN_STAT]: _crBrowserItem(
     BT_SWEDEN_STAT,
     'Statistics Sweden (A)',
-    'statistics-sweden'
+    _crStatisticsToken('Sweden')
   ),
   [BT_SWEDEN_STAT_ALL]: _crStatisticsBrowserItem(
     ['Sweden'],
@@ -255,8 +258,8 @@ const BrowserConfig = {
   ),
   [BT_SWISS_STAT]: _crBrowserItem(
     BT_SWISS_STAT,
-    _crStatisticsFullCaption('Swiss', 'FSO'),
-    'statistics-swiss'
+    _crStatisticsFullCaption('Swiss', 'FSO')[0],
+    _crStatisticsToken('Swiss')
   ),
   [BT_FINLAND_STAT_ALL]: _crStatisticsBrowserItem(
     ['Finland'],
