@@ -4,7 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
-var _useHasNotEqual = _interopRequireDefault(require("../hooks/useHasNotEqual"));
 var _memoIsShow = _interopRequireDefault(require("../hoc/memoIsShow"));
 var _useLoadJson = require("./useLoadJson");
 var _ModalDialog = _interopRequireDefault(require("../zhn-moleculs/ModalDialog"));
@@ -32,13 +31,7 @@ const DescriptionDialog = (0, _memoIsShow.default)(props => {
     {
       descrUrl
     } = data || {},
-    [_isNextProps] = (0, _useHasNotEqual.default)(props),
-    [_isNextDescrUrl] = (0, _useHasNotEqual.default)(descrUrl)
-    /*eslint-disable no-use-before-define*/,
-    [isLoading, isLoadFailed, errMsg, aboutJson] = (0, _useLoadJson.useLoadJson)(INITIAL_DESCR, isShow && descrUrl && (!_isNextProps || _isNextDescrUrl || isLoadFailed), (0, _isTypeFn.isIncludeToken)(descrUrl, 'data') ? descrUrl : void 0);
-  //isLoadFailed
-  /*eslint-enable no-use-before-define*/
-
+    [isLoading, isLoadFailed, errMsg, aboutJson] = (0, _useLoadJson.useLoadJson)(INITIAL_DESCR, isShow, (0, _isTypeFn.isIncludeToken)(descrUrl, 'data') ? descrUrl : void 0);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ModalDialog.default, {
     caption: "About Data Source",
     isShow: isShow,

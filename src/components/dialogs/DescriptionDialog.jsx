@@ -3,7 +3,6 @@ import {
   isIncludeToken
 } from '../../utils/isTypeFn';
 
-import useHasNotEqual from '../hooks/useHasNotEqual';
 import memoIsShow from '../hoc/memoIsShow';
 import { useLoadJson } from './useLoadJson';
 
@@ -37,9 +36,6 @@ const DescriptionDialog = memoIsShow((props) => {
     onClose
   } = props
   , { descrUrl } = data || {}
-  , [_isNextProps] = useHasNotEqual(props)
-  , [_isNextDescrUrl] = useHasNotEqual(descrUrl)
-  /*eslint-disable no-use-before-define*/
   , [
     isLoading,
     isLoadFailed,
@@ -47,14 +43,11 @@ const DescriptionDialog = memoIsShow((props) => {
     aboutJson
   ] = useLoadJson(
     INITIAL_DESCR,
-    isShow && descrUrl
-      && (!_isNextProps || _isNextDescrUrl || isLoadFailed),
+    isShow,
     isIncludeToken(descrUrl, 'data')
       ? descrUrl
       : void 0
   );
-  //isLoadFailed
-  /*eslint-enable no-use-before-define*/
 
   return (
     <ModalDialog
