@@ -56,7 +56,7 @@ const S_ITEM_MULTI_LINE = {
 , S_ITEM_MULTI_LINE_WHITE_SPACE = {
   ...S_ITEM_MULTI_LINE,
   whiteSpace: 'unset'
-}
+};
 
 const _crDescrUrl = (
   token
@@ -68,16 +68,19 @@ const _crDescrUrl = (
 , _crBrowserItem = (
   browserType,
   caption,
-  token,
-  itemStyle,
-  topicStyle
+  token
 ) => ({
   browserType,
   caption,
-  sourceMenuUrl: _crSourceMenuUrl(token),
-  itemStyle,
-  topicStyle
+  sourceMenuUrl: _crSourceMenuUrl(token)
 })
+, _addStyleToBrowserItem = (
+  browserItem
+) => {
+  browserItem.itemStyle = {...S_ITEM_MULTI_LINE}
+  browserItem.topicStyle = {...S_ITEM_MULTI_LINE_WHITE_SPACE}
+  return browserItem;
+}
 
 , _crStatisticsToken = (
   countryName
@@ -178,27 +181,21 @@ const BrowserConfig = {
     'EU Comext',
     'comext'
   ),
-  [BT_SDG]: _crBrowserItem(
+  [BT_SDG]: _addStyleToBrowserItem(_crBrowserItem(
     BT_SDG,
     'EU SDG',
-    'eu-sdg',
-    {...S_ITEM_MULTI_LINE},
-    {...S_ITEM_MULTI_LINE_WHITE_SPACE}
-  ),
-  [BT_MIP]: _crBrowserItem(
+    'eu-sdg'
+  )),
+  [BT_MIP]: _addStyleToBrowserItem(_crBrowserItem(
     BT_MIP,
     'EU MIP',
-    'eu-mip',
-    {...S_ITEM_MULTI_LINE},
-    {...S_ITEM_MULTI_LINE_WHITE_SPACE}
-  ),
-  [BT_CEI]: _crBrowserItem(
+    'eu-mip'
+  )),
+  [BT_CEI]: _addStyleToBrowserItem(_crBrowserItem(
     BT_CEI,
     'Circular economy indicators',
-    'eu-cei',
-    {...S_ITEM_MULTI_LINE},
-    {...S_ITEM_MULTI_LINE_WHITE_SPACE}
-  ),
+    'eu-cei'
+  )),
   [BT_UN_COMTRADE]: _crBrowserItem(
     BT_UN_COMTRADE,
     'UN Comtrade',

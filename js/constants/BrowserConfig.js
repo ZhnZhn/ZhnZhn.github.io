@@ -18,13 +18,20 @@ const S_ITEM_MULTI_LINE = {
   };
 const _crDescrUrl = token => `./data/${token}/${token}`,
   _crSourceMenuUrl = token => `./data/${token}/source-menu.json`,
-  _crBrowserItem = (browserType, caption, token, itemStyle, topicStyle) => ({
+  _crBrowserItem = (browserType, caption, token) => ({
     browserType,
     caption,
-    sourceMenuUrl: _crSourceMenuUrl(token),
-    itemStyle,
-    topicStyle
+    sourceMenuUrl: _crSourceMenuUrl(token)
   }),
+  _addStyleToBrowserItem = browserItem => {
+    browserItem.itemStyle = {
+      ...S_ITEM_MULTI_LINE
+    };
+    browserItem.topicStyle = {
+      ...S_ITEM_MULTI_LINE_WHITE_SPACE
+    };
+    return browserItem;
+  },
   _crStatisticsToken = countryName => `statistics-${countryName.toLowerCase()}`,
   _crStatisticsFullCaption = (countryName, fullCaptionPrefix) => {
     const caption = `Statistics ${countryName}`,
@@ -70,21 +77,9 @@ const BrowserConfig = {
   [_BrowserType.BT_FGR]: _crBrowserItem(_BrowserType.BT_FGR, 'EU FIGARO', 'figaro'),
   [_BrowserType.BT_PE]: _crBrowserItem(_BrowserType.BT_PE, 'Euro Indicators / PEEIs', 'peeis'),
   [_BrowserType.BT_COMEXT]: _crBrowserItem(_BrowserType.BT_COMEXT, 'EU Comext', 'comext'),
-  [_BrowserType.BT_SDG]: _crBrowserItem(_BrowserType.BT_SDG, 'EU SDG', 'eu-sdg', {
-    ...S_ITEM_MULTI_LINE
-  }, {
-    ...S_ITEM_MULTI_LINE_WHITE_SPACE
-  }),
-  [_BrowserType.BT_MIP]: _crBrowserItem(_BrowserType.BT_MIP, 'EU MIP', 'eu-mip', {
-    ...S_ITEM_MULTI_LINE
-  }, {
-    ...S_ITEM_MULTI_LINE_WHITE_SPACE
-  }),
-  [_BrowserType.BT_CEI]: _crBrowserItem(_BrowserType.BT_CEI, 'Circular economy indicators', 'eu-cei', {
-    ...S_ITEM_MULTI_LINE
-  }, {
-    ...S_ITEM_MULTI_LINE_WHITE_SPACE
-  }),
+  [_BrowserType.BT_SDG]: _addStyleToBrowserItem(_crBrowserItem(_BrowserType.BT_SDG, 'EU SDG', 'eu-sdg')),
+  [_BrowserType.BT_MIP]: _addStyleToBrowserItem(_crBrowserItem(_BrowserType.BT_MIP, 'EU MIP', 'eu-mip')),
+  [_BrowserType.BT_CEI]: _addStyleToBrowserItem(_crBrowserItem(_BrowserType.BT_CEI, 'Circular economy indicators', 'eu-cei')),
   [_BrowserType.BT_UN_COMTRADE]: _crBrowserItem(_BrowserType.BT_UN_COMTRADE, 'UN Comtrade', 'uncomtrade'),
   [_BrowserType.BT_FAOSTAT]: _crBrowserItem(_BrowserType.BT_FAOSTAT, 'FAOSTAT', 'faostat'),
   [_BrowserType.BT_WORLD_BANK]: _crBrowserItem(_BrowserType.BT_WORLD_BANK, 'World Bank', 'world-bank'),
