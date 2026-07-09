@@ -19,8 +19,8 @@ const _crCaption = (
   dialogConf,
   browserType
 ) => {
-  let _caption = dialogConf.contFullCaption
-    || BrowserConfig[browserType].contFullCaption;
+  let _caption = dialogConf.contFullCaption    
+    || BrowserConfig[browserType].caption;
   if (_caption) {
     return _caption;
   }

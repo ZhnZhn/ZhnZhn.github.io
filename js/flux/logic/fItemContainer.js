@@ -14,7 +14,7 @@ var _compStore = require("../stores/compStore");
 var _itemStore = require("../stores/itemStore");
 var _jsxRuntime = require("react/jsx-runtime");
 const _crCaption = (dialogConf, browserType) => {
-  let _caption = dialogConf.contFullCaption || _BrowserConfig.default[browserType].contFullCaption;
+  let _caption = dialogConf.contFullCaption || _BrowserConfig.default[browserType].caption;
   if (_caption) {
     return _caption;
   }

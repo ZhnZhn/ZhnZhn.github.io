@@ -59,7 +59,6 @@ const _crDescrUrl = token => `./data/${token}/${token}`,
       withoutItemCounter: true,
       modalDialogType: _ModalDialogType.MDT_STOCKS_BY_SECTOR,
       chartContainerType: `${browserType}_${_BrowserType.BT_STOCKS_BY_SECTORS}`,
-      contFullCaption: caption,
       itemOptionType: 'ItemTopicOption',
       itemType: 'ItemWithCap',
       descr: _crDescrUrl(exchangeToken)
