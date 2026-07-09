@@ -65,6 +65,12 @@ const _crDescrUrl = (
   token
 ) => `./data/${token}/source-menu.json`
 
+, _crSourceMenuToken = (
+  caption
+) => caption
+  .toLowerCase()
+  .replaceAll(".", "")
+  .replace(" ", "-")
 , _crBrowserItem = (
   browserType,
   caption,
@@ -72,7 +78,7 @@ const _crDescrUrl = (
 ) => ({
   browserType,
   caption,
-  sourceMenuUrl: _crSourceMenuUrl(token)
+  sourceMenuUrl: _crSourceMenuUrl(token || _crSourceMenuToken(caption))
 })
 , _addStyleToBrowserItem = (
   browserItem
@@ -158,8 +164,7 @@ const _crDescrUrl = (
 const BrowserConfig = {
   [BT_STOCK_MARKETS]: _crBrowserItem(
     BT_STOCK_MARKETS,
-    'Stock Markets',
-    'stock-markets'
+    'Stock Markets'
   ),
   [BT_EUROSTAT]: _crBrowserItem(
     BT_EUROSTAT,
@@ -183,13 +188,11 @@ const BrowserConfig = {
   ),
   [BT_SDG]: _addStyleToBrowserItem(_crBrowserItem(
     BT_SDG,
-    'EU SDG',
-    'eu-sdg'
+    'EU SDG'
   )),
   [BT_MIP]: _addStyleToBrowserItem(_crBrowserItem(
     BT_MIP,
-    'EU MIP',
-    'eu-mip'
+    'EU MIP'
   )),
   [BT_CEI]: _addStyleToBrowserItem(_crBrowserItem(
     BT_CEI,
@@ -203,53 +206,43 @@ const BrowserConfig = {
   ),
   [BT_FAOSTAT]: _crBrowserItem(
     BT_FAOSTAT,
-    'FAOSTAT',
-    'faostat'
+    'FAOSTAT'
   ),
   [BT_WORLD_BANK]: _crBrowserItem(
     BT_WORLD_BANK,
-    'World Bank',
-    'world-bank'
+    'World Bank'
   ),
   [BT_WTO]: _crBrowserItem(
     BT_WTO,
-    'WTO',
-    'wto'
+    'WTO'
   ),
   [BT_DB_NOMICS]: _crBrowserItem(
     BT_DB_NOMICS,
-    'DBnomics',
-    'db-nomics'
+    'DBnomics'
   ),
   [BT_ENERGY]: _crBrowserItem(
     BT_ENERGY,
-    'Energy',
-    'energy'
+    'Energy'
   ),
   [BT_BLOCKCHAIN]: _crBrowserItem(
     BT_BLOCKCHAIN,
-    'Blockchains',
-    'blockchain'
+    'Blockchains'
   ),
   [BT_COMMODITIES]: _crBrowserItem(
     BT_COMMODITIES,
-    'Commodities',
-    'commodities'
+    'Commodities'
   ),
   [BT_CENTRAL_BANKS]: _crBrowserItem(
     BT_CENTRAL_BANKS,
-    'Central Banks',
-    'central-banks'
+    'Central Banks'
   ),
   [BT_CURRENCY]: _crBrowserItem(
     BT_CURRENCY,
-    'Currencies',
-    'currency'
+    'Currencies'
   ),
   [BT_OECD]: _crBrowserItem(
     BT_OECD,
-    'OECD',
-    'oecd'
+    'OECD'
   ),
 
   [BT_FRANCE_STATISTICS]: _crSourceMenuStatisticsBrowserItem(
@@ -314,8 +307,7 @@ const BrowserConfig = {
   ),
   [BT_US_ECONOMICS]: _crBrowserItem(
     BT_US_ECONOMICS,
-    'U.S. Economics',
-    'us-economics'
+    'U.S. Economics'
   ),
   [BT_NYSE_STOCKS]: _crStockMarketBrowserItem(
     BT_NYSE_STOCKS,

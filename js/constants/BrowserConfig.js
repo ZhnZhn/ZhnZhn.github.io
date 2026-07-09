@@ -18,10 +18,11 @@ const S_ITEM_MULTI_LINE = {
   };
 const _crDescrUrl = token => `./data/${token}/${token}`,
   _crSourceMenuUrl = token => `./data/${token}/source-menu.json`,
+  _crSourceMenuToken = caption => caption.toLowerCase().replaceAll(".", "").replace(" ", "-"),
   _crBrowserItem = (browserType, caption, token) => ({
     browserType,
     caption,
-    sourceMenuUrl: _crSourceMenuUrl(token)
+    sourceMenuUrl: _crSourceMenuUrl(token || _crSourceMenuToken(caption))
   }),
   _addStyleToBrowserItem = browserItem => {
     browserItem.itemStyle = {
@@ -72,25 +73,25 @@ const _crDescrUrl = token => `./data/${token}/${token}`,
     };
   };
 const BrowserConfig = {
-  [_BrowserType.BT_STOCK_MARKETS]: _crBrowserItem(_BrowserType.BT_STOCK_MARKETS, 'Stock Markets', 'stock-markets'),
+  [_BrowserType.BT_STOCK_MARKETS]: _crBrowserItem(_BrowserType.BT_STOCK_MARKETS, 'Stock Markets'),
   [_BrowserType.BT_EUROSTAT]: _crBrowserItem(_BrowserType.BT_EUROSTAT, 'Eurostat Overview', 'eurostat'),
   [_BrowserType.BT_FGR]: _crBrowserItem(_BrowserType.BT_FGR, 'EU FIGARO', 'figaro'),
   [_BrowserType.BT_PE]: _crBrowserItem(_BrowserType.BT_PE, 'Euro Indicators / PEEIs', 'peeis'),
   [_BrowserType.BT_COMEXT]: _crBrowserItem(_BrowserType.BT_COMEXT, 'EU Comext', 'comext'),
-  [_BrowserType.BT_SDG]: _addStyleToBrowserItem(_crBrowserItem(_BrowserType.BT_SDG, 'EU SDG', 'eu-sdg')),
-  [_BrowserType.BT_MIP]: _addStyleToBrowserItem(_crBrowserItem(_BrowserType.BT_MIP, 'EU MIP', 'eu-mip')),
+  [_BrowserType.BT_SDG]: _addStyleToBrowserItem(_crBrowserItem(_BrowserType.BT_SDG, 'EU SDG')),
+  [_BrowserType.BT_MIP]: _addStyleToBrowserItem(_crBrowserItem(_BrowserType.BT_MIP, 'EU MIP')),
   [_BrowserType.BT_CEI]: _addStyleToBrowserItem(_crBrowserItem(_BrowserType.BT_CEI, 'Circular economy indicators', 'eu-cei')),
   [_BrowserType.BT_UN_COMTRADE]: _crBrowserItem(_BrowserType.BT_UN_COMTRADE, 'UN Comtrade', 'uncomtrade'),
-  [_BrowserType.BT_FAOSTAT]: _crBrowserItem(_BrowserType.BT_FAOSTAT, 'FAOSTAT', 'faostat'),
-  [_BrowserType.BT_WORLD_BANK]: _crBrowserItem(_BrowserType.BT_WORLD_BANK, 'World Bank', 'world-bank'),
-  [_BrowserType.BT_WTO]: _crBrowserItem(_BrowserType.BT_WTO, 'WTO', 'wto'),
-  [_BrowserType.BT_DB_NOMICS]: _crBrowserItem(_BrowserType.BT_DB_NOMICS, 'DBnomics', 'db-nomics'),
-  [_BrowserType.BT_ENERGY]: _crBrowserItem(_BrowserType.BT_ENERGY, 'Energy', 'energy'),
-  [_BrowserType.BT_BLOCKCHAIN]: _crBrowserItem(_BrowserType.BT_BLOCKCHAIN, 'Blockchains', 'blockchain'),
-  [_BrowserType.BT_COMMODITIES]: _crBrowserItem(_BrowserType.BT_COMMODITIES, 'Commodities', 'commodities'),
-  [_BrowserType.BT_CENTRAL_BANKS]: _crBrowserItem(_BrowserType.BT_CENTRAL_BANKS, 'Central Banks', 'central-banks'),
-  [_BrowserType.BT_CURRENCY]: _crBrowserItem(_BrowserType.BT_CURRENCY, 'Currencies', 'currency'),
-  [_BrowserType.BT_OECD]: _crBrowserItem(_BrowserType.BT_OECD, 'OECD', 'oecd'),
+  [_BrowserType.BT_FAOSTAT]: _crBrowserItem(_BrowserType.BT_FAOSTAT, 'FAOSTAT'),
+  [_BrowserType.BT_WORLD_BANK]: _crBrowserItem(_BrowserType.BT_WORLD_BANK, 'World Bank'),
+  [_BrowserType.BT_WTO]: _crBrowserItem(_BrowserType.BT_WTO, 'WTO'),
+  [_BrowserType.BT_DB_NOMICS]: _crBrowserItem(_BrowserType.BT_DB_NOMICS, 'DBnomics'),
+  [_BrowserType.BT_ENERGY]: _crBrowserItem(_BrowserType.BT_ENERGY, 'Energy'),
+  [_BrowserType.BT_BLOCKCHAIN]: _crBrowserItem(_BrowserType.BT_BLOCKCHAIN, 'Blockchains'),
+  [_BrowserType.BT_COMMODITIES]: _crBrowserItem(_BrowserType.BT_COMMODITIES, 'Commodities'),
+  [_BrowserType.BT_CENTRAL_BANKS]: _crBrowserItem(_BrowserType.BT_CENTRAL_BANKS, 'Central Banks'),
+  [_BrowserType.BT_CURRENCY]: _crBrowserItem(_BrowserType.BT_CURRENCY, 'Currencies'),
+  [_BrowserType.BT_OECD]: _crBrowserItem(_BrowserType.BT_OECD, 'OECD'),
   [_BrowserType.BT_FRANCE_STATISTICS]: _crSourceMenuStatisticsBrowserItem(_BrowserType.BT_FRANCE_STATISTICS, 'France', 'INSEE'),
   [_BrowserType.BT_UK_STATISTICS]: _crSourceMenuStatisticsBrowserItem(_BrowserType.BT_UK_STATISTICS, 'UK', 'ONS'),
   [_BrowserType.BT_SWISS_STAT]: _crSourceMenuStatisticsBrowserItem(_BrowserType.BT_SWISS_STAT, 'Swiss', 'FSO'),
@@ -107,7 +108,7 @@ const BrowserConfig = {
     dfDimQuery: '?lang=en'
   }),
   [_BrowserType.BT_IRELAND_STAT_ALL]: _crStatisticsBrowserItem(['Ireland', 'CSO'], _BrowserType.BT_IRELAND_STAT_ALL, _LoadType.LT_SIR, 'https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.PxAPIv1/en'),
-  [_BrowserType.BT_US_ECONOMICS]: _crBrowserItem(_BrowserType.BT_US_ECONOMICS, 'U.S. Economics', 'us-economics'),
+  [_BrowserType.BT_US_ECONOMICS]: _crBrowserItem(_BrowserType.BT_US_ECONOMICS, 'U.S. Economics'),
   [_BrowserType.BT_NYSE_STOCKS]: _crStockMarketBrowserItem(_BrowserType.BT_NYSE_STOCKS, 'NYSE'),
   [_BrowserType.BT_NASDAQ_STOCKS]: _crStockMarketBrowserItem(_BrowserType.BT_NASDAQ_STOCKS, 'NASDAQ'),
   [_BrowserType.BT_WATCH_LIST]: {
