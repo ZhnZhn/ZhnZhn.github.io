@@ -53,6 +53,14 @@ const InfoPartWithStyle = ({
   />
 );
 
+const InfoDescr = ({ descr }) => descr
+  ? (<p style={S_FONT_WEIGHT_BOLD}>{descr}</p>)
+  : null;
+
+const InfoLink = ({ href }) => isArr(href)
+  ? (<p><Link href={href[0]}>{href[1]}</Link></p>)
+  : null;
+
 const _renderNdlLink = (linkId) => {
   if (!linkId) return null;
   const Comp = RouterNativeLink.NDL;
@@ -74,6 +82,11 @@ const _isShortDescr = descr => !descr
 const PanelDataInfo = (props) => {
   const _wasShown = useWasShown(props.isShow)
   , _info = props.info || {}
+
+  , _infoDescription = _info.description
+  , _infoDescr = _info.descr
+  , _infoHref = _info.href
+
   , _zhInfo = props.zhInfo || {}
   , _style = props.isShow
     ? S_BLOCK
@@ -91,18 +104,18 @@ const PanelDataInfo = (props) => {
       <InfoPartWithStyle c="To Date" t={_info.toDate} s={S_TO_DATE_INFO}/>
       <InfoPartWithStyle c="Frequency" t={_info.frequency} />
       {_renderNdlLink(_info.linkId)}
-      { (_info.description || isArr(_info.href)) && <OpenClose
-           isClose={!_isShortDescr(_info.description)}
+      { (_infoDescription || _infoDescr || isArr(_infoHref)) && <OpenClose
+           isClose={!_isShortDescr(_infoDescription || _infoDescr)}
            caption="Description"
           >
-            {!!_info.descr && <p style={S_FONT_WEIGHT_BOLD}>{_info.descr}</p>}
-            {!!_info.descr2 && <p style={S_FONT_WEIGHT_BOLD}>{_info.descr2}</p>}
-            {isArr(_info.href) && <p><Link href={_info.href[0]}>{_info.href[1]}</Link></p>}
-            {isArr(_info.href2)&& <p><Link href={_info.href2[0]}>{_info.href2[1]}</Link></p>}
+            <InfoDescr descr={_infoDescr} />
+            <InfoDescr descr={_info.descr2} />
+            <InfoLink href={_infoHref} />
+            <InfoLink href={_info.href2} />
             <InfoPart
                style={S_DESCR_INFO}
                isHtml={true}
-               text={_info.description}
+               text={_infoDescription}
                textCn={CL_DESCR}
                textStyle={S_FONT_WEIGHT_BOLD}
             />

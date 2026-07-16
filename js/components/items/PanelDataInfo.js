@@ -53,6 +53,26 @@ const InfoPartWithStyle = _ref => {
     text: t
   });
 };
+const InfoDescr = _ref2 => {
+  let {
+    descr
+  } = _ref2;
+  return descr ? /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+    style: _styleFn.S_FONT_WEIGHT_BOLD,
+    children: descr
+  }) : null;
+};
+const InfoLink = _ref3 => {
+  let {
+    href
+  } = _ref3;
+  return (0, _isTypeFn.isArr)(href) ? /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
+      href: href[0],
+      children: href[1]
+    })
+  }) : null;
+};
 const _renderNdlLink = linkId => {
   if (!linkId) return null;
   const Comp = _RouterNativeLink.default.NDL;
@@ -70,6 +90,9 @@ const _isShortDescr = descr => !descr || descr && descr.length < 200;
 const PanelDataInfo = props => {
   const _wasShown = (0, _useWasShown.default)(props.isShow),
     _info = props.info || {},
+    _infoDescription = _info.description,
+    _infoDescr = _info.descr,
+    _infoHref = _info.href,
     _zhInfo = props.zhInfo || {},
     _style = props.isShow ? _styleFn.S_BLOCK : _styleFn.S_NONE;
   return _wasShown ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -93,29 +116,21 @@ const PanelDataInfo = props => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoPartWithStyle, {
       c: "Frequency",
       t: _info.frequency
-    }), _renderNdlLink(_info.linkId), (_info.description || (0, _isTypeFn.isArr)(_info.href)) && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose.default, {
-      isClose: !_isShortDescr(_info.description),
+    }), _renderNdlLink(_info.linkId), (_infoDescription || _infoDescr || (0, _isTypeFn.isArr)(_infoHref)) && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose.default, {
+      isClose: !_isShortDescr(_infoDescription || _infoDescr),
       caption: "Description",
-      children: [!!_info.descr && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-        style: _styleFn.S_FONT_WEIGHT_BOLD,
-        children: _info.descr
-      }), !!_info.descr2 && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-        style: _styleFn.S_FONT_WEIGHT_BOLD,
-        children: _info.descr2
-      }), (0, _isTypeFn.isArr)(_info.href) && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-          href: _info.href[0],
-          children: _info.href[1]
-        })
-      }), (0, _isTypeFn.isArr)(_info.href2) && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-          href: _info.href2[0],
-          children: _info.href2[1]
-        })
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(InfoDescr, {
+        descr: _infoDescr
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoDescr, {
+        descr: _info.descr2
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoLink, {
+        href: _infoHref
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoLink, {
+        href: _info.href2
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InfoPart.default, {
         style: S_DESCR_INFO,
         isHtml: true,
-        text: _info.description,
+        text: _infoDescription,
         textCn: CL_DESCR,
         textStyle: _styleFn.S_FONT_WEIGHT_BOLD
       })]
