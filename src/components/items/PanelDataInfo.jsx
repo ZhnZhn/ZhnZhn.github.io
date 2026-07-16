@@ -9,7 +9,8 @@ import Link from '../zhn/Link'
 import {
   CL_BLACK,
   S_BLOCK,
-  S_NONE
+  S_NONE,
+  S_FONT_WEIGHT_BOLD
 } from '../styleFn';
 
 const CL_DESCR = `info__descr ${CL_BLACK}`
@@ -25,17 +26,14 @@ const CL_DESCR = `info__descr ${CL_BLACK}`
   paddingRight: 5,
   color: '#1b75bb',
   textAlign: 'right',
-  fontWeight: 'bold'
+  ...S_FONT_WEIGHT_BOLD
 }
 , S_TEXT = {
-  fontWeight: 'bold',
-  textTransform: 'capitalize'
+  textTransform: 'capitalize',
+  ...S_FONT_WEIGHT_BOLD
 }
 , S_DESCR_INFO = {
   lineHeight: 1.6
-}
-, S_FONT_WEIGHT_BOLD = {
-  fontWeight: 'bold'
 };
 
 const InfoPartWithStyle = ({

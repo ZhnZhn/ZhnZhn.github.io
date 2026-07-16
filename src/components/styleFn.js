@@ -86,7 +86,12 @@ export const S_FLEX = _crDisplayStyle("flex")
 
 export const crColorStyle = _fCrStyle("color")
 
-export const S_BORDER_RADIUS_2 = { borderRadius: 2 }
+export const S_FONT_WEIGHT_BOLD = {
+  fontWeight: 'bold'
+}
+export const S_BORDER_RADIUS_2 = {
+  borderRadius: 2
+}
 
 export const S_OPEN_CLOSE_LEVEL_2 = {
   marginLeft: 8,
