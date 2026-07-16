@@ -53,19 +53,29 @@ const InfoPartWithStyle = _ref => {
     text: t
   });
 };
-const InfoDescr = _ref2 => {
+const BoldParagraph = _ref2 => {
   let {
-    descr
+    text
   } = _ref2;
-  return descr ? /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+  return text ? /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
     style: _styleFn.S_FONT_WEIGHT_BOLD,
-    children: descr
+    children: text
   }) : null;
 };
-const InfoLink = _ref3 => {
+const InfoDescr = _ref3 => {
+  let {
+    descr
+  } = _ref3;
+  return !descr ? null : (0, _isTypeFn.isArr)(descr) ? descr.map(text => /*#__PURE__*/(0, _jsxRuntime.jsx)(BoldParagraph, {
+    text: text
+  }, text)) : /*#__PURE__*/(0, _jsxRuntime.jsx)(BoldParagraph, {
+    text: descr
+  });
+};
+const InfoLink = _ref4 => {
   let {
     href
-  } = _ref3;
+  } = _ref4;
   return (0, _isTypeFn.isArr)(href) ? /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
       href: href[0],
@@ -121,8 +131,6 @@ const PanelDataInfo = props => {
       caption: "Description",
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(InfoDescr, {
         descr: _infoDescr
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoDescr, {
-        descr: _info.descr2
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoLink, {
         href: _infoHref
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoLink, {

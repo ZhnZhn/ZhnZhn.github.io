@@ -53,9 +53,18 @@ const InfoPartWithStyle = ({
   />
 );
 
-const InfoDescr = ({ descr }) => descr
-  ? (<p style={S_FONT_WEIGHT_BOLD}>{descr}</p>)
+
+const BoldParagraph = ({
+  text
+}) => text
+  ? (<p style={S_FONT_WEIGHT_BOLD}>{text}</p>)
   : null;
+
+const InfoDescr = ({ descr }) => !descr
+  ? null
+  : isArr(descr)
+  ? descr.map(text => (<BoldParagraph key={text} text={text} />))
+  : (<BoldParagraph text={descr} />) 
 
 const InfoLink = ({ href }) => isArr(href)
   ? (<p><Link href={href[0]}>{href[1]}</Link></p>)
@@ -109,7 +118,6 @@ const PanelDataInfo = (props) => {
            caption="Description"
           >
             <InfoDescr descr={_infoDescr} />
-            <InfoDescr descr={_info.descr2} />
             <InfoLink href={_infoHref} />
             <InfoLink href={_info.href2} />
             <InfoPart

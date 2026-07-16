@@ -26,16 +26,9 @@ const _crId = _ref => {
   } = _ref;
   return (0, _arrFn.joinBy)('/', dfProvider, dfCode, seriaId);
 };
-const _crItemLink = (0, _crFn.fCrItemLinkByCaption)('DBnomics Chart');
 const _crUpdatedDate = json => {
   const _date = getIndexedAt(json).split('T')[0];
-  return _date ? `<p>Updated by DBnomics on ${_date}</p>` : '';
-};
-const _crDescr = (json, option) => {
-  const _id = _crId(option);
-  return `<p>SeriaId: ${_id}</p>
-   ${_crUpdatedDate(json)}
-   ${_crItemLink(CHART_URL + '/' + _id)}`;
+  return _date ? `Updated by DBnomics on ${_date}` : '';
 };
 const _crZhConfig = option => {
   const {
@@ -62,10 +55,14 @@ const _crZhConfig = option => {
     }
   };
 };
-const _crInfo = (json, option) => ({
-  name: getSubtitle(json),
-  description: _crDescr(json, option)
-});
+const _crInfo = (json, option) => {
+  const _id = _crId(option);
+  return {
+    name: getSubtitle(json),
+    descr: [(0, _arrFn.joinByColon)('SeriaId', _id), _crUpdatedDate(json)],
+    href: [`${CHART_URL}/${_id}`, 'DBnomics Chart']
+  };
+};
 const _isQuarter = str => (0, _strFn.isTokenInStr)(str, "Q");
 const _isAnnualQuarter = period => !_isQuarter(period[0]) && _isQuarter(period[1]);
 const _crPoint = (date, y) => [(0, _AdapterFn.ymdToUTC)(date), y];
