@@ -3,7 +3,8 @@ export {
   crErrorByMessage,
 } from '../AdapterFn';
 export {
-  crId
+  crId,
+  crStrLink
 } from '../crFn';
 
 import { joinByColon } from '../../utils/arrFn';
@@ -58,9 +59,13 @@ const _crSearchToken = (
 };
 
 const _crLink = (
-  [url, title],
+  [url, caption],
   token=''
-) => `<a class="native-link" href="${url}${token}">${title}</a>`;
+) => crStrLink(
+  `${url}${token}`,
+  caption,
+  "native-link"
+);
 
 const _crSflSearchToken = ({
   dfId
@@ -108,7 +113,7 @@ const _crDescr = (
   , _source = getDatasetSource(json);
 
   return dfId && _source
-    ? `TableId: ${dfId}<BR/>${_source}: ${_date}<BR/>${_elSearchLink}`
+    ? `TableId: ${dfId}<br/>${_source}: ${_date}<br/>${_elSearchLink}`
     : _elSearchLink;
 };
 

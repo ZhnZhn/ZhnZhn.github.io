@@ -1,5 +1,8 @@
 import { isArr } from '../utils/isTypeFn';
 import { crRouter } from '../utils/crRouter';
+import { joinByBlank } from '../utils/arrFn';
+
+import { toHref } from '../components/uiApi';
 
 import { crId as _crId } from '../math/mathFn';
 import {
@@ -9,6 +12,16 @@ import {
 
 // Ndl toScatter, Stat-Json
 export const crId = () => _crId().toUpperCase()
+export const crStrLink = (
+  url,
+  caption,
+  cn
+) => {
+  const _url = toHref(url);
+  return _url
+    ? `<a ${joinByBlank(cn ? `class="${cn}"` : '','target="_blank"')} rel="noopener" href="${_url}">${caption}</a>`
+    : '';
+};
 
 const ITEM_CONF_PROP_NAMES = [
  'url',

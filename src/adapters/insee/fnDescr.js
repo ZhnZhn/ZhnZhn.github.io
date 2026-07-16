@@ -4,6 +4,10 @@ import {
   CL_DARK_BLUE
 } from '../CL';
 
+import {
+  crStrLink
+} from '../crFn';
+
 const _crPropName = (
   title
 ) => title[0].toLowerCase() + title.slice(1);
@@ -41,7 +45,7 @@ export const crInfo = (
          ${_crSpan('UnitMult', seria)}
        </div>
        <div>
-         <a href="https://www.insee.fr/en/statistiques/serie/${seria.id}">INSEE Data Link</a>
+         ${crStrLink(`https://www.insee.fr/en/statistiques/serie/${seria.id}`, "INSEE Data Link")}
        </div>
        <br/>
     `, '')
