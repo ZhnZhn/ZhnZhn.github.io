@@ -5,6 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _RouterNativeLink = _interopRequireDefault(require("../native-links/RouterNativeLink"));
+var _useWasShown = _interopRequireDefault(require("../hooks/useWasShown"));
 var _InfoPart = _interopRequireDefault(require("../zhn/InfoPart"));
 var _ButtonTab = _interopRequireDefault(require("../zhn/ButtonTab"));
 var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
@@ -66,31 +67,12 @@ const _renderNativeLink = (linkFn, item) => {
   }) : null;
 };
 const _isShortDescr = descr => !descr || descr && descr.length < 200;
-const PanelDataInfo = _ref2 => {
-  let {
-    isShow,
-    info,
-    zhInfo,
-    onClickChart
-  } = _ref2;
-  const {
-      name,
-      toDate,
-      fromDate,
-      frequency,
-      linkId,
-      description,
-      descr,
-      descr2,
-      href,
-      href2
-    } = info || {},
-    {
-      item,
-      linkFn
-    } = zhInfo || {},
-    _style = isShow ? _styleFn.S_BLOCK : _styleFn.S_NONE;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+const PanelDataInfo = props => {
+  const _wasShown = (0, _useWasShown.default)(props.isShow),
+    _info = props.info || {},
+    _zhInfo = props.zhInfo || {},
+    _style = props.isShow ? _styleFn.S_BLOCK : _styleFn.S_NONE;
+  return _wasShown ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     style: {
       ...S_ROOT,
       ..._style
@@ -98,47 +80,47 @@ const PanelDataInfo = _ref2 => {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ButtonTab.default, {
       style: S_BT_CAPTION,
       caption: "Chart",
-      onClick: onClickChart
+      onClick: props.onClickChart
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoPartWithStyle, {
-      t: name
+      t: _info.name
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoPartWithStyle, {
       c: "From Date",
-      t: fromDate
+      t: _info.fromDate
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoPartWithStyle, {
       c: "To Date",
-      t: toDate,
+      t: _info.toDate,
       s: S_TO_DATE_INFO
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(InfoPartWithStyle, {
       c: "Frequency",
-      t: frequency
-    }), _renderNdlLink(linkId), (description || (0, _isTypeFn.isArr)(href)) && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose.default, {
-      isClose: !_isShortDescr(description),
+      t: _info.frequency
+    }), _renderNdlLink(_info.linkId), (_info.description || (0, _isTypeFn.isArr)(_info.href)) && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_OpenClose.default, {
+      isClose: !_isShortDescr(_info.description),
       caption: "Description",
-      children: [!!descr && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+      children: [!!_info.descr && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
         style: _styleFn.S_FONT_WEIGHT_BOLD,
-        children: descr
-      }), !!descr2 && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        children: _info.descr
+      }), !!_info.descr2 && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
         style: _styleFn.S_FONT_WEIGHT_BOLD,
-        children: descr2
-      }), (0, _isTypeFn.isArr)(href) && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        children: _info.descr2
+      }), (0, _isTypeFn.isArr)(_info.href) && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-          href: href[0],
-          children: href[1]
+          href: _info.href[0],
+          children: _info.href[1]
         })
-      }), (0, _isTypeFn.isArr)(href2) && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+      }), (0, _isTypeFn.isArr)(_info.href2) && /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Link.default, {
-          href: href2[0],
-          children: href2[1]
+          href: _info.href2[0],
+          children: _info.href2[1]
         })
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_InfoPart.default, {
         style: S_DESCR_INFO,
         isHtml: true,
-        text: description,
+        text: _info.description,
         textCn: CL_DESCR,
         textStyle: _styleFn.S_FONT_WEIGHT_BOLD
       })]
-    }), _renderNativeLink(linkFn, item)]
-  });
+    }), _renderNativeLink(_zhInfo.linkFn, _zhInfo.item)]
+  }) : null;
 };
 var _default = exports.default = PanelDataInfo;
 //# sourceMappingURL=PanelDataInfo.js.map

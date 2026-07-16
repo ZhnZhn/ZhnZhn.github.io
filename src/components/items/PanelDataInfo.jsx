@@ -1,6 +1,8 @@
 import { isArr } from '../../utils/isTypeFn';
 import RouterNativeLink from '../native-links/RouterNativeLink';
 
+import useWasShown from '../hooks/useWasShown';
+
 import InfoPart from '../zhn/InfoPart';
 import ButtonTab from '../zhn/ButtonTab';
 import OpenClose from '../zhn/OpenClose';
@@ -69,59 +71,46 @@ const _renderNativeLink = (linkFn, item) => {
 const _isShortDescr = descr => !descr
  || (descr && descr.length<200);
 
-const PanelDataInfo = ({
-  isShow,
-  info,
-  zhInfo,
-  onClickChart
-}) => {
-  const {
-    name,
-    toDate,
-    fromDate,
-    frequency,
-    linkId,
-    description,
-    descr,
-    descr2,
-    href,
-    href2
-  } = info || {}
- , { item, linkFn } = zhInfo || {}
- , _style = isShow ? S_BLOCK : S_NONE;
+const PanelDataInfo = (props) => {
+  const _wasShown = useWasShown(props.isShow)
+  , _info = props.info || {}
+  , _zhInfo = props.zhInfo || {}
+  , _style = props.isShow
+    ? S_BLOCK
+    : S_NONE;
 
-  return (
+  return _wasShown ? (
     <div style={{...S_ROOT, ..._style}}>
       <ButtonTab
         style={S_BT_CAPTION}
         caption="Chart"
-        onClick={onClickChart}
+        onClick={props.onClickChart}
       />
-      <InfoPartWithStyle t={name} />
-      <InfoPartWithStyle c="From Date" t={fromDate} />
-      <InfoPartWithStyle c="To Date" t={toDate} s={S_TO_DATE_INFO}/>
-      <InfoPartWithStyle c="Frequency" t={frequency} />
-      {_renderNdlLink(linkId)}
-      { (description || isArr(href)) && <OpenClose
-           isClose={!_isShortDescr(description)}
+      <InfoPartWithStyle t={_info.name} />
+      <InfoPartWithStyle c="From Date" t={_info.fromDate} />
+      <InfoPartWithStyle c="To Date" t={_info.toDate} s={S_TO_DATE_INFO}/>
+      <InfoPartWithStyle c="Frequency" t={_info.frequency} />
+      {_renderNdlLink(_info.linkId)}
+      { (_info.description || isArr(_info.href)) && <OpenClose
+           isClose={!_isShortDescr(_info.description)}
            caption="Description"
           >
-            {!!descr && <p style={S_FONT_WEIGHT_BOLD}>{descr}</p>}
-            {!!descr2 && <p style={S_FONT_WEIGHT_BOLD}>{descr2}</p>}
-            {isArr(href) && <p><Link href={href[0]}>{href[1]}</Link></p>}
-            {isArr(href2)&& <p><Link href={href2[0]}>{href2[1]}</Link></p>}
+            {!!_info.descr && <p style={S_FONT_WEIGHT_BOLD}>{_info.descr}</p>}
+            {!!_info.descr2 && <p style={S_FONT_WEIGHT_BOLD}>{_info.descr2}</p>}
+            {isArr(_info.href) && <p><Link href={_info.href[0]}>{_info.href[1]}</Link></p>}
+            {isArr(_info.href2)&& <p><Link href={_info.href2[0]}>{_info.href2[1]}</Link></p>}
             <InfoPart
                style={S_DESCR_INFO}
                isHtml={true}
-               text={description}
+               text={_info.description}
                textCn={CL_DESCR}
                textStyle={S_FONT_WEIGHT_BOLD}
             />
          </OpenClose>
       }
-      {_renderNativeLink(linkFn, item)}
+      {_renderNativeLink(_zhInfo.linkFn, _zhInfo.item)}
     </div>
-  );
+  ) : null;
 };
 
 export default PanelDataInfo
