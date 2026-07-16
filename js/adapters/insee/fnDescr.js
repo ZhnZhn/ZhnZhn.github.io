@@ -2,31 +2,16 @@
 
 exports.__esModule = true;
 exports.crInfo = void 0;
-var _CL = require("../CL");
-var _crFn = require("../crFn");
-const _crPropName = title => title[0].toLowerCase() + title.slice(1);
-const _crSpan = (title, seria, value) => `<span class="${_CL.CL_PR_8}">
-  <span class="${_CL.CL_DARK_BLUE}">${title}:&nbsp;</span>
-  <span>${value == null ? seria[_crPropName(title)] : value}</span>
-</span>`;
-const crInfo = (title, subtitle, seriesParams) => ({
-  name: subtitle ? title + ': ' + subtitle : title,
-  description: seriesParams.reduce((strDom, seria) => `${strDom}
-       <div class="${_CL.CL_BLACK}">${seria.title}</div>
-       <div>
-         ${_crSpan('IDBANK', seria, seria.id)}
-         ${_crSpan('Frequency', seria)}
-         ${_crSpan('UpdatedOn', seria)}
-       </div>
-       <div>
-         ${_crSpan('UnitMeasure', seria)}
-         ${_crSpan('UnitMult', seria)}
-       </div>
-       <div>
-         ${(0, _crFn.crStrLink)(`https://www.insee.fr/en/statistiques/serie/${seria.id}`, "INSEE Data Link")}
-       </div>
-       <br/>
-    `, '')
-});
+var _arrFn = require("../../utils/arrFn");
+const _crPairToken = (caption, value) => value ? `${caption}: ${value}` : '';
+const crInfo = (title, subtitle, seriesParams) => {
+  const _descr = seriesParams?.[0],
+    _seriesId = _descr?.id;
+  return {
+    name: (0, _arrFn.joinByColon)(title, subtitle),
+    descr: _descr ? [_descr.title, `${_crPairToken('IDBANK', _seriesId)} ${_crPairToken('Frequency', _descr.frequency)} ${_crPairToken('UpdatedOn', _descr.updatedOn)}`, `${_crPairToken('UnitMeasure', _descr.unitMeasure)} ${_crPairToken('UnitMult', _descr.unitMult)}`] : void 0,
+    href: _seriesId ? [`https://www.insee.fr/en/statistiques/serie/${_seriesId}`, "INSEE Data Link"] : void 0
+  };
+};
 exports.crInfo = crInfo;
 //# sourceMappingURL=fnDescr.js.map

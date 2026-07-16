@@ -1,52 +1,28 @@
-import {
-  CL_PR_8,
-  CL_BLACK,
-  CL_DARK_BLUE
-} from '../CL';
+import { joinByColon } from '../../utils/arrFn';
 
-import {
-  crStrLink
-} from '../crFn';
-
-const _crPropName = (
-  title
-) => title[0].toLowerCase() + title.slice(1);
-
-const _crSpan = (
-  title,
-  seria,
+const _crPairToken = (
+  caption,
   value
-) => `<span class="${CL_PR_8}">
-  <span class="${CL_DARK_BLUE}">${title}:&nbsp;</span>
-  <span>${value == null ? seria[_crPropName(title)] : value}</span>
-</span>`;
+) => value
+  ? `${caption}: ${value}`
+  : '';
 
 export const crInfo = (
   title,
   subtitle,
   seriesParams
-) => ({
-   name: subtitle
-     ? title + ': ' + subtitle
-     : title,
-   description: seriesParams
-     .reduce((
-       strDom,
-       seria
-     ) => `${strDom}
-       <div class="${CL_BLACK}">${seria.title}</div>
-       <div>
-         ${_crSpan('IDBANK', seria, seria.id)}
-         ${_crSpan('Frequency', seria)}
-         ${_crSpan('UpdatedOn', seria)}
-       </div>
-       <div>
-         ${_crSpan('UnitMeasure', seria)}
-         ${_crSpan('UnitMult', seria)}
-       </div>
-       <div>
-         ${crStrLink(`https://www.insee.fr/en/statistiques/serie/${seria.id}`, "INSEE Data Link")}
-       </div>
-       <br/>
-    `, '')
-})
+) => {
+  const _descr = seriesParams?.[0]
+  , _seriesId = _descr?.id;
+  return {
+   name: joinByColon(title, subtitle),
+   descr: _descr ? [
+     _descr.title,
+     `${_crPairToken('IDBANK', _seriesId)} ${_crPairToken('Frequency', _descr.frequency)} ${_crPairToken('UpdatedOn', _descr.updatedOn)}`,
+     `${_crPairToken('UnitMeasure', _descr.unitMeasure)} ${_crPairToken('UnitMult', _descr.unitMult)}`
+   ] : void 0,
+   href: _seriesId
+     ? [`https://www.insee.fr/en/statistiques/serie/${_seriesId}`, "INSEE Data Link"]
+     : void 0
+  };
+}

@@ -23,7 +23,7 @@ const _crInfo = (_ref2, option) => {
   } = _ref2;
   return {
     name: (0, _arrFn.joinByColon)(option.title, option.subtitle),
-    description: response.description || response.data[0]?.["series-description"] || ''
+    descr: response.description || response.data[0]?.["series-description"] || ''
   };
 };
 const crTitle = _ref3 => {

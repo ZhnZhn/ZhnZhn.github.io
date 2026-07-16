@@ -20,19 +20,13 @@ exports.getResError = getResError;
 exports.getResults = getResults;
 const _getResultsInfo = Results => (0, _isTypeFn.isArr)(Results) ? Results[0] : Results;
 const _crName = info => (0, _arrFn.joinByColon)(info.Statistic, (info.UTCProductionTime || "").replace("T", " "));
-const _crDescr = info => (info.Notes || []).map(note => {
-  const {
-    NoteRef = '',
-    NoteText = ''
-  } = note || {};
-  return `<p>${NoteRef}: ${NoteText}</p><br/>`;
-}).join('');
+const _crDescr = notes => (0, _isTypeFn.isArr)(notes) ? notes.map(note => (0, _isTypeFn.isObj)(note) ? (0, _arrFn.joinByColon)(note.NoteRef, note.NoteText) : '') : void 0;
 const _crInfo = Results => {
-  const _info = _getResultsInfo(Results) || {};
-  return {
+  const _info = _getResultsInfo(Results);
+  return (0, _isTypeFn.isObj)(_info) ? {
     name: _crName(_info),
-    description: _crDescr(_info)
-  };
+    descr: _crDescr(_info.Notes)
+  } : void 0;
 };
 const _crDfLinkCondig = (ValueName, industryItem) => ValueName === "Industry" && getFrequency(industryItem) === "Q" ? (0, _AdapterFn.crDfLink)(`BEA ${(0, _itemFn.getCaption)(industryItem)}`, `${INDUSTRY_FACTSHEET_URL}#${(0, _itemFn.getValue)(industryItem)}`) : void 0;
 const _crZhConfig = _ref => {

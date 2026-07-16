@@ -21,7 +21,7 @@ const _crInfo = (
   option
 ) => ({
   name: joinByColon(option.title, option.subtitle),
-  description: response.description
+  descr: response.description
    || response.data[0]?.["series-description"]
    || ''
 });

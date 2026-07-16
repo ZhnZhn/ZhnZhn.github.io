@@ -48,19 +48,18 @@ const _crName = info => joinByColon(
   (info.UTCProductionTime || "").replace("T", " ")
 );
 
-const _crDescr = info => (info.Notes || [])
-  .map(note => {
-    const { NoteRef='', NoteText='' } = note || {};
-    return `<p>${NoteRef}: ${NoteText}</p><br/>`;
-  }).join('');
-
+const _crDescr = notes => isArr(notes)
+  ? notes.map(note => isObj(note)
+     ? joinByColon(note.NoteRef, note.NoteText)
+     : ''
+  ) : void 0;
 
 const _crInfo = (Results) => {
-  const _info = _getResultsInfo(Results) || {};
-  return {
+  const _info = _getResultsInfo(Results);
+  return isObj(_info) ? {
     name: _crName(_info),
-    description: _crDescr(_info)
-  }
+    descr: _crDescr(_info.Notes)
+  } : void 0;
 };
 
 const _crDfLinkCondig = (
