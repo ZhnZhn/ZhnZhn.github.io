@@ -1,4 +1,7 @@
-import { isArr } from '../../utils/isTypeFn';
+import {
+  isArr,
+  isStr
+} from '../../utils/isTypeFn';
 import RouterNativeLink from '../native-links/RouterNativeLink';
 
 import useWasShown from '../hooks/useWasShown';
@@ -53,7 +56,6 @@ const InfoPartWithStyle = ({
   />
 );
 
-
 const BoldParagraph = ({
   text
 }) => text
@@ -64,7 +66,7 @@ const InfoDescr = ({ descr }) => !descr
   ? null
   : isArr(descr)
   ? descr.map(text => (<BoldParagraph key={text} text={text} />))
-  : (<BoldParagraph text={descr} />) 
+  : (<BoldParagraph text={descr} />)
 
 const InfoLink = ({ href }) => isArr(href)
   ? (<p><Link href={href[0]}>{href[1]}</Link></p>)
@@ -85,14 +87,24 @@ const _renderNativeLink = (linkFn, item) => {
     : null;
 };
 
-const _isShortDescr = descr => !descr
- || (descr && descr.length<200);
+const DESCR_SHORT_LENGTH = 200;
+const _isShortDescr = descr => {
+  const _length = isStr(descr)
+    ? descr.length
+    : isArr(descr)
+    ? descr.reduce((total, token) => {
+        return isStr(token)
+          ? total + token.length
+          : total;
+      }, 0)
+    : 0;
+  return _length < DESCR_SHORT_LENGTH;
+};
 
 const PanelDataInfo = (props) => {
   const _wasShown = useWasShown(props.isShow)
   , _info = props.info || {}
 
-  , _infoDescription = _info.description
   , _infoDescr = _info.descr
   , _infoHref = _info.href
 
@@ -113,20 +125,13 @@ const PanelDataInfo = (props) => {
       <InfoPartWithStyle c="To Date" t={_info.toDate} s={S_TO_DATE_INFO}/>
       <InfoPartWithStyle c="Frequency" t={_info.frequency} />
       {_renderNdlLink(_info.linkId)}
-      { (_infoDescription || _infoDescr || isArr(_infoHref)) && <OpenClose
-           isClose={!_isShortDescr(_infoDescription || _infoDescr)}
+      { (_infoDescr || isArr(_infoHref)) && <OpenClose
+           isClose={!_isShortDescr(_infoDescr)}
            caption="Description"
           >
             <InfoDescr descr={_infoDescr} />
             <InfoLink href={_infoHref} />
             <InfoLink href={_info.href2} />
-            <InfoPart
-               style={S_DESCR_INFO}
-               isHtml={true}
-               text={_infoDescription}
-               textCn={CL_DESCR}
-               textStyle={S_FONT_WEIGHT_BOLD}
-            />
          </OpenClose>
       }
       {_renderNativeLink(_zhInfo.linkFn, _zhInfo.item)}
