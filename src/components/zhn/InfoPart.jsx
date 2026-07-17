@@ -1,13 +1,10 @@
 import { IfTrue } from '../uiApi';
 import { S_INLINE } from '../styleFn';
 
-import DivHtml from './DivHtml';
-
 const InfoPart = ({
   style,
   caption,
   captionStyle,
-  isHtml,
   text,
   textCn,
   textStyle
@@ -19,14 +16,12 @@ const InfoPart = ({
           {caption+":"}
         </span>
       </IfTrue>
-      {isHtml ? <DivHtml
-         className={textCn}
-         style={{...textStyle, ...S_INLINE}}
-         str={text}
-       /> : <span
-         className={textCn}
-         style={textStyle}
-       >{text}</span>}      
+      <span
+        className={textCn}
+        style={textStyle}
+      >
+        {text}
+      </span>
     </div>
   </IfTrue>
 );
