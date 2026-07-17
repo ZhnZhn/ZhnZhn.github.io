@@ -19,6 +19,13 @@ import { crItemConf } from '../crFn';
 
 import convertToUTC from './convertToUTC';
 
+const RE_STRIP_HTML_TAGS = /<[^>]*>/g;
+const _removeHtmlTags = (
+  str
+) => str
+  .replace(RE_STRIP_HTML_TAGS, '')
+  .replaceAll('&nbsp;', ' ');
+
 const _crDescr = (
   updated,
   extension
@@ -36,7 +43,7 @@ const _crDescr = (
   return [
     _updated,
     _id,
-    joinByBlank(_d, _sub)    
+    _removeHtmlTags(joinByBlank(_d, _sub))
   ];
 };
 

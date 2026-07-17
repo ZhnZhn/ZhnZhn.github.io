@@ -10,6 +10,8 @@ var _JsonStatFn = require("../JsonStatFn");
 var _compareByFn = require("../compareByFn");
 var _crFn = require("../crFn");
 var _convertToUTC = _interopRequireDefault(require("./convertToUTC"));
+const RE_STRIP_HTML_TAGS = /<[^>]*>/g;
+const _removeHtmlTags = str => str.replace(RE_STRIP_HTML_TAGS, '').replaceAll('&nbsp;', ' ');
 const _crDescr = (updated, extension) => {
   const _updated = (0, _isTypeFn.isStr)(updated) ? `Updated: ${updated.replace('T', ' ')}` : '',
     _ext = extension || {},
@@ -20,7 +22,7 @@ const _crDescr = (updated, extension) => {
     _id = `Dataset: ${(id || '').toLowerCase()}`,
     _sub = subTitle ? `Metric: ${subTitle}` : '',
     _d = _ext.description || '';
-  return [_updated, _id, (0, _arrFn.joinByBlank)(_d, _sub)];
+  return [_updated, _id, _removeHtmlTags((0, _arrFn.joinByBlank)(_d, _sub))];
 };
 const OBS_PERIOD_OVERALL_ = 'OBS_PERIOD_OVERALL_',
   OLDEST_DATE = `${OBS_PERIOD_OVERALL_}OLDEST`,
