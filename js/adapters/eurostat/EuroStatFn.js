@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.toPointArr = exports.setInfoTo = exports.isNotGeoOrReporter = exports.crZhConfig = exports.crLinkConf = exports.crDatasetInfo = exports.crDataSource = exports.crData = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
+var _arrFn = require("../../utils/arrFn");
 var _seriaFn = require("../../math/seriaFn");
 var _JsonStatFn = require("../JsonStatFn");
 var _compareByFn = require("../compareByFn");
@@ -19,7 +20,7 @@ const _crDescr = (updated, extension) => {
     _id = `Dataset: ${(id || '').toLowerCase()}`,
     _sub = subTitle ? `Metric: ${subTitle}` : '',
     _d = _ext.description || '';
-  return `<p>${_updated}</p><p>${_id}</p><p>${_d} ${_sub}</p>`;
+  return [_updated, _id, (0, _arrFn.joinByBlank)(_d, _sub)];
 };
 const OBS_PERIOD_OVERALL_ = 'OBS_PERIOD_OVERALL_',
   OLDEST_DATE = `${OBS_PERIOD_OVERALL_}OLDEST`,
@@ -54,9 +55,9 @@ const crDatasetInfo = _ref => {
   const [fromDate, toDate] = _getObsOverallPeriods(extension);
   return {
     name: label,
-    description: _crDescr(updated, extension),
     fromDate,
-    toDate
+    toDate,
+    descr: _crDescr(updated, extension)
   };
 };
 exports.crDatasetInfo = crDatasetInfo;

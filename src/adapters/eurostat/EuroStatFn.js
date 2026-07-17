@@ -4,6 +4,10 @@ import {
 } from '../../utils/isTypeFn';
 
 import {
+  joinByBlank
+} from '../../utils/arrFn';
+
+import {
   findMinY,
   findMaxY,
   filterTrimZero
@@ -29,7 +33,11 @@ const _crDescr = (
       ? `Metric: ${subTitle}`
       : ''
   , _d = _ext.description || '';
-  return (`<p>${_updated}</p><p>${_id}</p><p>${_d} ${_sub}</p>`);
+  return [
+    _updated,
+    _id,
+    joinByBlank(_d, _sub)    
+  ];
 };
 
 const OBS_PERIOD_OVERALL_ = 'OBS_PERIOD_OVERALL_'
@@ -77,9 +85,9 @@ export const crDatasetInfo = ({
   ] = _getObsOverallPeriods(extension);
   return {
     name: label,
-    description: _crDescr(updated, extension),
     fromDate,
-    toDate
+    toDate,
+    descr: _crDescr(updated, extension)
   };
 }
 
