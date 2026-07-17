@@ -2,52 +2,28 @@
 
 exports.__esModule = true;
 exports.toInfo = exports.DATASET_EMPTY = void 0;
+var _isTypeFn = require("../../utils/isTypeFn");
 var _strFn = require("../../utils/strFn");
 const DATASET_EMPTY = exports.DATASET_EMPTY = "Dataset is empty";
-const _crBlackSpan = text => text ? `<span style='color:black;'>${text}</span>` : '';
-const _crWrSpan = text => text ? `<span style='display:inline-block;width:75px;text-align:right;'>${text}</span>` : '';
-const _crDescrRow = function (title, value, code) {
-  if (code === void 0) {
-    code = '';
-  }
+const _crDescrRow = (title, value, code) => {
   const _codeText = code ? ` (Code: ${code})` : '';
-  return value ? `<div>${_crWrSpan(title + ':')} ${_crBlackSpan(value)}${_codeText}</div>` : '';
+  return value ? `${title}: ${value}${_codeText}` : '';
 };
-const _toDescr = (item, title) => {
-  const _isList = title.indexOf('> (List)') !== -1,
-    {
-      Area = '',
-      Domain = '',
-      Item = '',
-      Element = '',
-      Unit
-    } = item,
-    _areaDescrRow = _isList ? '' : _crDescrRow('Area', Area, item['Area Code']),
-    _Unit = (0, _strFn.toUpperCaseFirst)(Unit);
-  return `<div>
-    ${_areaDescrRow}
-    ${_crDescrRow('Domain', Domain, item['Domain Code'])}
-    ${_crDescrRow('Item', Item, item['Item Code'])}
-    ${_crDescrRow('Element', Element, item['Element Code'])}
-    ${_crDescrRow('Unit', _Unit)}
-    <div>${item['Flag Description'] || DATASET_EMPTY}</div>
-  </div>`;
-};
+const _toDescr = (item, title) => [
+//_isList case
+title.indexOf('> (List)') !== -1 ? '' : _crDescrRow('Area', item.Area, item['Area Code']), _crDescrRow('Domain', item.Domain, item['Domain Code']), _crDescrRow('Item', item.Item, item['Item Code']), _crDescrRow('Element', item.Element, item['Element Code']), _crDescrRow('Unit', (0, _strFn.toUpperCaseFirst)(item.Unit)), item['Flag Description'] || DATASET_EMPTY];
+const _getItemYear = item => (0, _isTypeFn.isObj)(item) ? item.Year : '';
 const toInfo = (json, title, subtitle) => {
   const {
       data
     } = json,
-    _itemNewest = data[data.length - 1] || {},
-    _itemOldest = data[0] || {},
-    _dateNewest = _itemNewest.Year || '',
-    _dateOldest = _itemOldest.Year || '',
-    _descr = _toDescr(_itemNewest, title);
+    _itemNewest = data[data.length - 1];
   return {
-    description: _descr,
+    name: `${title}: ${subtitle}`,
     frequency: "Annual",
-    name: title + ': ' + subtitle,
-    toDate: _dateNewest,
-    fromDate: _dateOldest
+    toDate: _getItemYear(_itemNewest),
+    fromDate: _getItemYear(data[0]),
+    descr: (0, _isTypeFn.isObj)(_itemNewest) ? _toDescr(_itemNewest, title) : void 0
   };
 };
 exports.toInfo = toInfo;
