@@ -1,21 +1,15 @@
 "use strict";
 
 exports.__esModule = true;
-exports.crValueConf = exports.crStrLink = exports.crItemConf = exports.crId = void 0;
+exports.crValueConf = exports.crItemConf = exports.crId = void 0;
 var _isTypeFn = require("../utils/isTypeFn");
 var _crRouter = require("../utils/crRouter");
 var _arrFn = require("../utils/arrFn");
-var _uiApi = require("../components/uiApi");
 var _mathFn = require("../math/mathFn");
 var _seriaHelperFn = require("../math/seriaHelperFn");
 // Ndl toScatter, Stat-Json
 const crId = () => (0, _mathFn.crId)().toUpperCase();
 exports.crId = crId;
-const crStrLink = (url, caption, cn) => {
-  const _url = (0, _uiApi.toHref)(url);
-  return _url ? `<a ${(0, _arrFn.joinByBlank)(cn ? `class="${cn}"` : '', 'target="_blank"')} rel="noopener" href="${_url}">${caption}</a>` : '';
-};
-exports.crStrLink = crStrLink;
 const ITEM_CONF_PROP_NAMES = ['url', 'loadId', 'title', 'subtitle', 'itemCaption', 'seriaType', 'items'];
 const crItemConf = option => ITEM_CONF_PROP_NAMES.reduce((itemConf, pn) => {
   const _value = option[pn];

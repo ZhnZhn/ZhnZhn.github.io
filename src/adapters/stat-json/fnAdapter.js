@@ -3,8 +3,7 @@ export {
   crErrorByMessage,
 } from '../AdapterFn';
 export {
-  crId,
-  crStrLink
+  crId
 } from '../crFn';
 
 import { joinByColon } from '../../utils/arrFn';
@@ -61,11 +60,10 @@ const _crSearchToken = (
 const _crLink = (
   [url, caption],
   token=''
-) => crStrLink(
+) => [
   `${url}${token}`,
-  caption,
-  "native-link"
-);
+  caption
+];
 
 const _crSflSearchToken = ({
   dfId
@@ -109,12 +107,13 @@ const _crDescr = (
     .replace('T', ' ')
     .replace('Z', '')
   , { dfId } = option
-  , _elSearchLink = _crSearchLink(getDatasetLabel(json), option)
   , _source = getDatasetSource(json);
 
   return dfId && _source
-    ? `TableId: ${dfId}<br/>${_source}: ${_date}<br/>${_elSearchLink}`
-    : _elSearchLink;
+    ? [
+      `TableId: ${dfId}`,
+      `${_source}: ${_date}`
+    ] : void 0;
 };
 
 const _crItemCaption = ({
@@ -153,7 +152,8 @@ export const crInfo = (
   json
 ) => ({
   name: getDatasetLabel(json) || '',
-  description: _crDescr(option, json)
+  descr: _crDescr(option, json),
+  href: _crSearchLink(getDatasetLabel(json), option)
 })
 
 export const crZhConfig = (

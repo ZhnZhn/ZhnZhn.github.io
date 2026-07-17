@@ -1,13 +1,12 @@
 "use strict";
 
 exports.__esModule = true;
-exports.isYNumber = exports.crZhConfig = exports.crTitle = exports.crStrLink = exports.crInfo = exports.crErrorByMessage = exports.crConfOption = exports.crChartOption = void 0;
+exports.isYNumber = exports.crZhConfig = exports.crTitle = exports.crInfo = exports.crErrorByMessage = exports.crConfOption = exports.crChartOption = void 0;
 var _AdapterFn = require("../AdapterFn");
 exports.isYNumber = _AdapterFn.isYNumber;
 exports.crErrorByMessage = _AdapterFn.crErrorByMessage;
 var _crFn = require("../crFn");
 exports.crId = _crFn.crId;
-exports.crStrLink = _crFn.crStrLink;
 var _arrFn = require("../../utils/arrFn");
 var _JsonStatFn = require("../JsonStatFn");
 const _crTitle = country => `Statisctics ${country}: All Items`,
@@ -35,7 +34,7 @@ const _crLink = function (_ref2, token) {
   if (token === void 0) {
     token = '';
   }
-  return crStrLink(`${url}${token}`, caption, "native-link");
+  return [`${url}${token}`, caption];
 };
 const _crSflSearchToken = _ref3 => {
   let {
@@ -71,9 +70,8 @@ const _crDescr = (option, json) => {
     {
       dfId
     } = option,
-    _elSearchLink = _crSearchLink((0, _JsonStatFn.getDatasetLabel)(json), option),
     _source = (0, _JsonStatFn.getDatasetSource)(json);
-  return dfId && _source ? `TableId: ${dfId}<br/>${_source}: ${_date}<br/>${_elSearchLink}` : _elSearchLink;
+  return dfId && _source ? [`TableId: ${dfId}`, `${_source}: ${_date}`] : void 0;
 };
 const _crItemCaption = _ref4 => {
   let {
@@ -106,7 +104,8 @@ const crTitle = option => {
 exports.crTitle = crTitle;
 const crInfo = (option, json) => ({
   name: (0, _JsonStatFn.getDatasetLabel)(json) || '',
-  description: _crDescr(option, json)
+  descr: _crDescr(option, json),
+  href: _crSearchLink((0, _JsonStatFn.getDatasetLabel)(json), option)
 });
 exports.crInfo = crInfo;
 const crZhConfig = option => {
