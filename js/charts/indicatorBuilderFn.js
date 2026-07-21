@@ -16,7 +16,7 @@ const _crColumnSeria = option => _assign({
   tooltip: (0, _Chart.fTooltip)(_Tooltip.tooltipValueDmy)
 }, option);
 const crIndicatorTitle = text => ({
-  text: (0, _domFn.domSanitize)(text),
+  text: (0, _domFn.escapeStrHtml)(text),
   style: {
     color: _Color.COLOR_METRIC_TITLE,
     fontSize: '16px',

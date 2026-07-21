@@ -154,8 +154,8 @@ const _crRowEl = (color, from, to, cluster, wg) => {
   el.addEventListener('click', _evt => {
     wg.updateCluster(cluster, color, from, to);
   });
-  el.innerHTML = `<span>${(0, _domFn.domSanitize)(from)}&ndash;${(0, _domFn.domSanitize)(to)}<span>
-                  <span style="float: right; color: black; padding-left: 16px">${(0, _domFn.domSanitize)(_n)}</span>`;
+  el.innerHTML = `<span>${(0, _domFn.escapeStrHtml)(from)}&ndash;${(0, _domFn.escapeStrHtml)(to)}<span>
+                  <span style="float: right; color: black; padding-left: 16px">${_n}</span>`;
   return el;
 };
 const _crFooterEl = () => {

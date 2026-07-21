@@ -1,18 +1,19 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
-exports.isSupportOptions = exports.domSanitize = void 0;
-var _dompurify = _interopRequireDefault(require("dompurify"));
+exports.isSupportOptions = exports.escapeStrHtml = exports.escapeNumberOr = void 0;
 var _isTypeFn = require("./isTypeFn");
-//only HTML { USE_PROFILES: { html: true } }, not SVG and MathML
-const _sanitize = _dompurify.default.sanitize;
-const domSanitize = str => _sanitize(str, {
-  USE_PROFILES: {
-    html: true
-  }
-});
-exports.domSanitize = domSanitize;
+const _reEscapeHtml = /[<>&"]/g,
+  HP_ESCAPE_HTML = Object.create(null);
+HP_ESCAPE_HTML['<'] = '&lt;';
+HP_ESCAPE_HTML['>'] = '&gt;';
+HP_ESCAPE_HTML['&'] = '&amp;';
+HP_ESCAPE_HTML['"'] = '&quot;';
+Object.freeze(HP_ESCAPE_HTML);
+const escapeStrHtml = str => (0, _isTypeFn.isStr)(str) ? str.replace(_reEscapeHtml, ch => HP_ESCAPE_HTML[ch] || ch) : '';
+exports.escapeStrHtml = escapeStrHtml;
+const escapeNumberOr = v => (0, _isTypeFn.isNumber)(v) ? '' + v : escapeStrHtml(v);
+exports.escapeNumberOr = escapeNumberOr;
 let _isSupportOptions;
 const onceOptions = {
   get once() {

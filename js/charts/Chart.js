@@ -41,12 +41,12 @@ const FONT_STYLE = {
   });
 const _sanitizeOptionText = option => {
   if ((0, _isTypeFn.isObj)(option)) {
-    option.text = (0, _domFn.domSanitize)(option.text);
+    option.text = (0, _domFn.escapeStrHtml)(option.text);
   }
   return option;
 };
 const _crTitle = title => (0, _isTypeFn.isStr)(title) ? {
-    text: (0, _domFn.domSanitize)(title)
+    text: (0, _domFn.escapeStrHtml)(title)
   } : _sanitizeOptionText(title),
   _crCrosshair = function (is) {
     if (is === void 0) {

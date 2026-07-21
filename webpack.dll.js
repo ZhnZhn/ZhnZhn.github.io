@@ -11,8 +11,7 @@ module.exports = {
      lib: [            
             "react", "react-dom", "raven-js",                       
             "big.js",
-            "localforage",            
-            "dompurify",
+            "localforage",                        
             "highcharts",                         
             "highcharts/modules/exporting", "highcharts/modules/offline-exporting"                        
           ]

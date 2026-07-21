@@ -31,10 +31,10 @@ const getCategories = chart => (chart.xAxis || [])[0]?.categories;
 exports.getCategories = getCategories;
 const isCategoryCase = (config, categories) => (0, _isTypeFn.isArr)(config.xAxis?.categories) && (0, _isTypeFn.isArr)(categories);
 exports.isCategoryCase = isCategoryCase;
-const crCategories = data => data.map(item => (0, _domFn.domSanitize)(item.c));
+const crCategories = data => data.map(item => (0, _domFn.escapeStrHtml)(item.c));
 exports.crCategories = crCategories;
 const crCategoryPoint = (y, n) => {
-  const c = (0, _domFn.domSanitize)(n);
+  const c = (0, _domFn.escapeStrHtml)(n);
   return {
     y,
     name: c,
@@ -43,10 +43,10 @@ const crCategoryPoint = (y, n) => {
 };
 exports.crCategoryPoint = crCategoryPoint;
 const fCrTreeMapPoint = title => {
-  const _title = (0, _domFn.domSanitize)(title);
+  const _title = (0, _domFn.escapeStrHtml)(title);
   return (value, label) => ({
     value,
-    label: (0, _domFn.domSanitize)(label),
+    label: (0, _domFn.escapeStrHtml)(label),
     title: _title
   });
 };

@@ -1,19 +1,42 @@
-/**
- * @jest-environment jsdom
- */
 "use strict";
 
 var _domFn = require("../domFn");
-describe("domSanitize", () => {
-  const fn = _domFn.domSanitize;
-  test('should return empty string for void 0 && null inputs', () => {
+describe('escapeStrHtml', () => {
+  const fn = _domFn.escapeStrHtml;
+  test('should escape html string <>&"', () => {
+    expect(fn('<')).toBe('&lt;');
+    expect(fn('>')).toBe('&gt;');
+    expect(fn('&')).toBe('&amp;');
+    expect(fn('"')).toBe('&quot;');
+    expect(fn('<&">')).toBe('&lt;&amp;&quot;&gt;');
+  });
+  test('should return empty string in edge cases', () => {
     expect(fn()).toBe('');
     expect(fn(null)).toBe('');
+    expect(fn(true)).toBe('');
+    expect(fn(false)).toBe('');
+    expect(fn(0)).toBe('');
+    expect(fn(1)).toBe('');
   });
-  test('should sanitize dom string', () => {
-    // from dompurify test-cases
-    expect(fn('<img src=x onerror=alert("test")//>')).toBe('<img src="x">');
-    expect(fn('<div><a href="javascript:alert(document.title)"><img src="cid:123"/></a></div>')).toBe('<div><a><img src="cid:123"></a></div>');
+});
+describe('escapeNumberOr', () => {
+  const fn = _domFn.escapeNumberOr;
+  test('should escape number', () => {
+    expect(fn(0)).toBe('0');
+    expect(fn(1)).toBe('1');
+  });
+  test('should escape html string <>&"', () => {
+    expect(fn('<')).toBe('&lt;');
+    expect(fn('>')).toBe('&gt;');
+    expect(fn('&')).toBe('&amp;');
+    expect(fn('"')).toBe('&quot;');
+    expect(fn('<&">')).toBe('&lt;&amp;&quot;&gt;');
+  });
+  test('should return empty string in edge cases', () => {
+    expect(fn()).toBe('');
+    expect(fn(null)).toBe('');
+    expect(fn(true)).toBe('');
+    expect(fn(false)).toBe('');
   });
 });
 //# sourceMappingURL=domFn.test.js.map

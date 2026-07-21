@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 
-import { domSanitize } from '../../utils/domFn';
+import { escapeStrHtml } from '../../utils/domFn';
 import { merge } from '../../utils/objFn';
 
 import { resolvePromise } from '../../routers/asyncFn';
@@ -201,8 +201,8 @@ const _crRowEl = (
   el.addEventListener('click', (_evt) => {
     wg.updateCluster(cluster, color, from, to)
   })
-  el.innerHTML = `<span>${domSanitize(from)}&ndash;${domSanitize(to)}<span>
-                  <span style="float: right; color: black; padding-left: 16px">${domSanitize(_n)}</span>`
+  el.innerHTML = `<span>${escapeStrHtml(from)}&ndash;${escapeStrHtml(to)}<span>
+                  <span style="float: right; color: black; padding-left: 16px">${_n}</span>`
   return el;
 }
 const _crFooterEl = () => {

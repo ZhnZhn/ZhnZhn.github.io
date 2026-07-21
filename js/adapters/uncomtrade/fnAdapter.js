@@ -9,7 +9,6 @@ var _numberFormatFn = require("../../utils/numberFormatFn");
 var _ChartType = require("../../constants/ChartType");
 var _CategoryFn = require("../CategoryFn");
 var _conf = require("./conf");
-const _sanitizeNumber = v => (0, _isTypeFn.isNumber)(v) ? '' + v : (0, _domFn.domSanitize)(v);
 const crEmptyHmObject = () => Object.create(null);
 exports.crEmptyHmObject = crEmptyHmObject;
 const isAggregateByHs = option => option.two === 'AG2';
@@ -22,12 +21,12 @@ const getItemCmdCode = item => {
   const {
     cmdCode
   } = item || {};
-  return (cmdCode || '').length < 4 ? cmdCode : (0, _domFn.domSanitize)(cmdCode);
+  return (cmdCode || '').length < 4 ? cmdCode : (0, _domFn.escapeStrHtml)(cmdCode);
 };
 exports.getItemCmdCode = getItemCmdCode;
-const getItemCmdDescE = item => (0, _domFn.domSanitize)(item?.cmdDescE);
+const getItemCmdDescE = item => (0, _domFn.escapeStrHtml)(item?.cmdDescE);
 exports.getItemCmdDescE = getItemCmdDescE;
-const _fGetItemNumberPropValueByName = propName => item => _sanitizeNumber(item?.[propName]);
+const _fGetItemNumberPropValueByName = propName => item => (0, _domFn.escapeNumberOr)(item?.[propName]);
 const _getItemPartnerCode = _fGetItemNumberPropValueByName('partnerCode');
 const _getItemReporterCode = _fGetItemNumberPropValueByName('reporterCode');
 const getItemPeriod = exports.getItemPeriod = _fGetItemNumberPropValueByName('period');
@@ -42,7 +41,7 @@ const getHmTradePartners = tradePartners => {
   }
   _hmTradePartner = tradePartners.reduce((hm, item) => {
     if (item?.v && item.v.length < 4 && item.c) {
-      hm[item.v] = (0, _domFn.domSanitize)(item.c).replace(`(${item.v})`, '').trim();
+      hm[item.v] = (0, _domFn.escapeStrHtml)(item.c).replace(`(${item.v})`, '').trim();
     }
     return hm;
   }, crEmptyHmObject());

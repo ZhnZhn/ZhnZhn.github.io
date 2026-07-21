@@ -7,7 +7,7 @@ var _dateFn = require("../../utils/dateFn");
 const _toOptions = params => {
   const _options = Object.create(null);
   params.forEach((value, key) => {
-    _options[key] = (0, _domFn.domSanitize)(value);
+    _options[key] = (0, _domFn.escapeStrHtml)(value);
   });
   return _options;
 };

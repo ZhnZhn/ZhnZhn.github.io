@@ -5,7 +5,7 @@ import {
 } from '../constants/Color';
 
 import { isNumber } from '../utils/isTypeFn';
-import { domSanitize } from '../utils/domFn';
+import { escapeStrHtml } from '../utils/domFn';
 import { formatNumber } from '../utils/numberFormatFn';
 
 import { roundBy } from '../math/mathFn';
@@ -122,7 +122,7 @@ const _crValuePercentToken = (
   label,
   percent,
   value
-) => domSanitize(`${label}<br/><span class="${CL_TREE_MAP_PERCENT_BLACK}">${crToken(percent, value)}</span>`)
+) => `${escapeStrHtml(label)}<br/><span class="${CL_TREE_MAP_PERCENT_BLACK}">${escapeStrHtml(crToken(percent, value))}</span>`
 
 , _crValuePercentName = _fCrName(_crValuePercentToken)
 , _crPercentName = _fCrName(_crPercentToken)

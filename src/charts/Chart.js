@@ -4,7 +4,7 @@ import {
   isObj,
   isStr
 } from '../utils/isTypeFn';
-import { domSanitize } from '../utils/domFn';
+import { escapeStrHtml } from '../utils/domFn';
 import { merge } from '../utils/objFn';
 
 import {
@@ -58,13 +58,13 @@ const FONT_STYLE = {
 
 const _sanitizeOptionText = option => {
   if (isObj(option)) {
-    option.text = domSanitize(option.text)
+    option.text = escapeStrHtml(option.text)
   }
   return option;
 };
 
 const  _crTitle = title => isStr(title)
-  ? { text: domSanitize(title) }
+  ? { text: escapeStrHtml(title) }
   : _sanitizeOptionText(title)
 , _crCrosshair = (
   is=true

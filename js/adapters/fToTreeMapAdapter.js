@@ -70,9 +70,9 @@ const _crDataImpl = (data, option, totalRt, onePercent, percRt) => {
       value: _value,
       _value: value,
       _perc: _percent,
-      _label: (0, _domFn.domSanitize)(label),
-      title: (0, _domFn.domSanitize)(title),
-      label: (0, _domFn.domSanitize)(`${label} (${_percent}%)`),
+      _label: (0, _domFn.escapeStrHtml)(label),
+      title: (0, _domFn.escapeStrHtml)(title),
+      label: (0, _domFn.escapeStrHtml)(`${label} (${_percent}%)`),
       name: _level === 3 && _percent < 1 ? void 0 : _crPointName(label, _percent, _value)
     });
   });

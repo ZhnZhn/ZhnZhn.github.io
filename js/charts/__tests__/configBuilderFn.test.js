@@ -20,14 +20,18 @@ describe('fAddCaption', () => {
   // <7.2.2 || >=8.0.0 <8.1.1
   // https://snyk.io/vuln/SNYK-JS-HIGHCHARTS-571995
   // https://github.com/highcharts/highcharts/issues/13559
-  test('should sanitize title and subtitle', () => {
-    const title = "<a href='javascript:alert()'>title</a>",
-      titleSanitized = "<a>title</a>",
-      subtitle = "<a href='#\";alert();\"'>subtitle</a>",
-      subtitleSanitized = "<a href=\"#&quot;;alert();&quot;\">subtitle</a>",
+  test('should escape title and subtitle', () => {
+    const title = '<a href="javascript:alert()">title</a>'
+      //, titleSanitized = "<a>title</a>"
+      ,
+      titleEscaped = "&lt;a href=&quot;javascript:alert()&quot;&gt;title&lt;/a&gt;",
+      subtitle = "<a href='#\";alert();\"'>subtitle</a>"
+      //, subtitleSanitized = "<a href=\"#&quot;;alert();&quot;\">subtitle</a>"
+      ,
+      subtitleEscaped = "&lt;a href='#&quot;;alert();&quot;'&gt;subtitle&lt;/a&gt;",
       config = fn(title, subtitle)({});
-    expect(config.title.text).toBe(titleSanitized);
-    expect(config.subtitle.text).toBe(subtitleSanitized);
+    expect(config.title.text).toBe(titleEscaped);
+    expect(config.subtitle.text).toBe(subtitleEscaped);
   });
 });
 describe('fAdd', () => {

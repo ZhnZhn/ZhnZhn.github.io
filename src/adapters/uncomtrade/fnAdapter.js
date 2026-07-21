@@ -8,7 +8,10 @@ import {
   joinByBlank,
   joinByNbsp
 } from '../../utils/arrFn';
-import { domSanitize } from '../../utils/domFn';
+import {
+  escapeStrHtml,
+  escapeNumberOr
+} from '../../utils/domFn';
 import { formatNumber } from '../../utils/numberFormatFn';
 
 import {
@@ -18,12 +21,7 @@ import {
 import { isCategory } from '../CategoryFn';
 import { WORLD_CODE } from './conf';
 
-const _sanitizeNumber = (v) => isNumber(v)
-  ? ''+v
-  : domSanitize(v);
-
 export const crEmptyHmObject = () => Object.create(null)
-
 export const isAggregateByHs = option => option.two === 'AG2'
 
 export const isCategoryByPartnerCase = (
@@ -41,16 +39,16 @@ export const getItemCmdCode = (
   const {cmdCode} = item || {};
   return (cmdCode || '').length < 4
     ? cmdCode
-    : domSanitize(cmdCode);
+    : escapeStrHtml(cmdCode);
 }
 
 export const getItemCmdDescE = (
   item
-) => domSanitize(item?.cmdDescE)
+) => escapeStrHtml(item?.cmdDescE)
 
 const _fGetItemNumberPropValueByName = (
   propName
-) => (item) => _sanitizeNumber(item?.[propName]);
+) => (item) => escapeNumberOr(item?.[propName]);
 
 const _getItemPartnerCode = _fGetItemNumberPropValueByName('partnerCode')
 const _getItemReporterCode = _fGetItemNumberPropValueByName('reporterCode')
@@ -78,7 +76,7 @@ export const getHmTradePartners = (
 
   _hmTradePartner = tradePartners.reduce((hm, item) => {
     if (item?.v && item.v.length < 4 && item.c) {
-      hm[item.v] = domSanitize(item.c)
+      hm[item.v] = escapeStrHtml(item.c)
         .replace(`(${item.v})`, '')
         .trim()
     }

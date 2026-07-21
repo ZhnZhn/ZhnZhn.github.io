@@ -1,6 +1,6 @@
 import { isNumber } from '../utils/isTypeFn';
 import { joinByColon } from '../utils/arrFn';
-import { domSanitize } from '../utils/domFn';
+import { escapeStrHtml } from '../utils/domFn';
 import { formatNumber } from '../utils/numberFormatFn';
 import pipe from '../utils/pipe';
 
@@ -120,9 +120,9 @@ const _crDataImpl = (
       value: _value,
       _value: value,
       _perc: _percent,
-      _label: domSanitize(label),
-      title: domSanitize(title),
-      label: domSanitize(`${label} (${_percent}%)`),
+      _label: escapeStrHtml(label),
+      title: escapeStrHtml(title),
+      label: escapeStrHtml(`${label} (${_percent}%)`),
       name: _level === 3 && _percent < 1
         ? void 0
         : _crPointName(label, _percent, _value)

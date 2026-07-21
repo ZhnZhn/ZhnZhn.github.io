@@ -1,5 +1,5 @@
 import { isInArrStr } from '../utils/arrFn';
-import { domSanitize } from '../utils/domFn';
+import { escapeStrHtml } from '../utils/domFn';
 import {
   isArr,
   isObj
@@ -89,24 +89,24 @@ export const isCategoryCase = (
 
 export const crCategories = (
   data
-) => data.map(item => domSanitize(item.c));
+) => data.map(item => escapeStrHtml(item.c));
 
 export const crCategoryPoint = (
   y,
   n
 ) => {
-  const c = domSanitize(n);
+  const c = escapeStrHtml(n);
   return { y, name: c, c };
 }
 
 export const fCrTreeMapPoint = (title) => {
-  const _title = domSanitize(title);
+  const _title = escapeStrHtml(title);
   return (
     value,
     label
   ) => ({
     value,
-    label: domSanitize(label),
+    label: escapeStrHtml(label),
     title: _title
   });
 }

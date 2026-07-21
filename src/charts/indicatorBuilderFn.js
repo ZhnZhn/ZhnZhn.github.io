@@ -1,4 +1,4 @@
-import { domSanitize } from '../utils/domFn';
+import { escapeStrHtml } from '../utils/domFn';
 import pipe from '../utils/pipe';
 
 import {
@@ -23,7 +23,7 @@ const _crColumnSeria = option => _assign({
  }, option);
 
 export const crIndicatorTitle = (text) => ({
-  text: domSanitize(text),
+  text: escapeStrHtml(text),
   style: {
     color: COLOR_METRIC_TITLE,
     fontSize: '16px',

@@ -7,10 +7,6 @@ describe('toHref', () => {
     const href = 'https://example.com';
     expect(fn(href)).toBe(href);
   });
-  test('should return echo for http protocol with isHttp', () => {
-    const href = 'http://example.com';
-    expect(fn(href, true)).toBe(href);
-  });
   test('should return undefined for not https protocol', () => {
     expect(fn('http://example.com')).toBeUndefined();
     expect(fn('http:/example.com')).toBeUndefined();

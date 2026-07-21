@@ -1,13 +1,24 @@
-import DOMPurify from "dompurify";
-import { isBool } from "./isTypeFn";
+import {
+  isBool,
+  isNumber,
+  isStr
+} from "./isTypeFn";
 
-//only HTML { USE_PROFILES: { html: true } }, not SVG and MathML
-const _sanitize = DOMPurify.sanitize;
+const _reEscapeHtml = /[<>&"]/g
+, HP_ESCAPE_HTML = Object.create(null);
+HP_ESCAPE_HTML['<'] = '&lt;'
+HP_ESCAPE_HTML['>'] = '&gt;'
+HP_ESCAPE_HTML['&'] = '&amp;'
+HP_ESCAPE_HTML['"'] = '&quot;'
+Object.freeze(HP_ESCAPE_HTML)
 
-export const domSanitize = (
-  str
-) => _sanitize(str, {USE_PROFILES: { html: true }})
+export const escapeStrHtml = (str) => isStr(str)
+  ? str.replace(_reEscapeHtml, (ch) => HP_ESCAPE_HTML[ch] || ch)
+  : ''
 
+export const escapeNumberOr = (v) => isNumber(v)
+  ? ''+v
+  : escapeStrHtml(v)
 
 let _isSupportOptions;
 const onceOptions = {

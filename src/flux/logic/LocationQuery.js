@@ -1,10 +1,10 @@
-import { domSanitize } from '../../utils/domFn';
+import { escapeStrHtml } from '../../utils/domFn';
 import { getToDate } from '../../utils/dateFn';
 
 const _toOptions = params => {
   const _options = Object.create(null);
   params.forEach((value, key) => {
-    _options[key] = domSanitize(value)
+    _options[key] = escapeStrHtml(value)
   })
   return _options;
 };
