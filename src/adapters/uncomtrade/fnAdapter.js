@@ -1,6 +1,5 @@
 import {
   isArr,
-  isNumber,
   isPositiveNumber,
 } from '../../utils/isTypeFn';
 import {

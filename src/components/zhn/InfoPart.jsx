@@ -1,5 +1,4 @@
 import { IfTrue } from '../uiApi';
-import { S_INLINE } from '../styleFn';
 
 const InfoPart = ({
   style,

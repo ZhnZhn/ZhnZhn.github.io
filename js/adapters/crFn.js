@@ -4,7 +4,6 @@ exports.__esModule = true;
 exports.crValueConf = exports.crItemConf = exports.crId = void 0;
 var _isTypeFn = require("../utils/isTypeFn");
 var _crRouter = require("../utils/crRouter");
-var _arrFn = require("../utils/arrFn");
 var _mathFn = require("../math/mathFn");
 var _seriaHelperFn = require("../math/seriaHelperFn");
 // Ndl toScatter, Stat-Json

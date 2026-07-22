@@ -3,7 +3,6 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
-var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const InfoPart = _ref => {
   let {

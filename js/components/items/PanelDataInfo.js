@@ -12,8 +12,7 @@ var _OpenClose = _interopRequireDefault(require("../zhn/OpenClose"));
 var _Link = _interopRequireDefault(require("../zhn/Link"));
 var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
-const CL_DESCR = `info__descr ${_styleFn.CL_BLACK}`,
-  S_ROOT = {
+const S_ROOT = {
     position: 'relative',
     padding: '34px 20px 0 8px'
   },
@@ -34,9 +33,6 @@ const CL_DESCR = `info__descr ${_styleFn.CL_BLACK}`,
   S_TEXT = {
     textTransform: 'capitalize',
     ..._styleFn.S_FONT_WEIGHT_BOLD
-  },
-  S_DESCR_INFO = {
-    lineHeight: 1.6
   };
 const InfoPartWithStyle = _ref => {
   let {
