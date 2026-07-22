@@ -1,0 +1,13 @@
+# npm audit report
+
+fast-uri  3.0.0 - 3.1.3
+Severity: high
+fast-uri vulnerable to host confusion via failed IDN canonicalization - https://github.com/advisories/GHSA-4c8g-83qw-93j6
+fast-uri vulnerable to host confusion via literal backslash authority delimiter - https://github.com/advisories/GHSA-v2hh-gcrm-f6hx
+fix available via `npm audit fix`
+node_modules/fast-uri
+
+1 high severity vulnerability
+
+To address all issues, run:
+  npm audit fix
