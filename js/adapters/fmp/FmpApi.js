@@ -5,14 +5,12 @@ exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _itemFn = require("../../utils/itemFn");
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 const URI = 'https://financialmodelingprep.com/stable';
-const _crDataSource = _ref => {
-  let {
-    dataSource,
-    dialogConf
-  } = _ref;
-  return dataSource || dialogConf?.contFullCaption || '';
-};
+const _crDataSource = ({
+  dataSource,
+  dialogConf
+}) => dataSource || dialogConf?.contFullCaption || '';
 const _assignDf = option => {
   const {
       dfT,
@@ -69,23 +67,21 @@ const _rAssign = {
   historical: _assignHp,
   intraday: _assignCp
 };
-const FmpApi = {
-  getRequestUrl(option) {
+const getRequestUrl = option => {
     const _assignTo = _rAssign[option.dfPn] || _rAssign.DF;
     _assignTo(option);
     const {
         apiKey
       } = option,
       _delimeter = option._itemUrl.indexOf('?') === -1 ? '?' : '&';
-    option.apiKey = null;
     return `${option._itemUrl}${_delimeter}apikey=${apiKey}`;
   },
-  checkResponse(json, options) {
+  checkResponse = (json, options) => {
     if ((0, _isTypeFn.isArr)(json)) {
       return;
     }
     throw (0, _AdapterFn.crError)(options._symbol, (0, _isTypeFn.isStr)(json) ? json : '');
-  }
-};
+  },
+  FmpApi = (0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse);
 var _default = exports.default = FmpApi;
 //# sourceMappingURL=FmpApi.js.map

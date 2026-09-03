@@ -4,12 +4,12 @@ exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 var _CategoryFn = require("../CategoryFn");
 const URL = 'https://api.worldbank.org/v2',
   NATIVE_URL = 'https://data.worldbank.org/indicator',
   _crCountryIndicatorToken = (country, indicator) => `countries/${country}/indicators/${indicator}`;
-const api = {
-  getRequestUrl(option) {
+const getRequestUrl = option => {
     const [country, indicator] = (0, _AdapterFn.getValues)(option),
       _isCategory = (0, _CategoryFn.isCategory)(option),
       _locations = _isCategory ? "1W" : country;
@@ -21,11 +21,11 @@ const api = {
     });
     return _isCategory ? `${URL}/${_crCountryIndicatorToken("all", indicator)}?date=${option.time}&format=json&per_page=305` : `${URL}/${_crCountryIndicatorToken(country, indicator)}?date=1990:2023&format=json`;
   },
-  checkResponse(json) {
+  checkResponse = json => {
     if (!(0, _isTypeFn.isArr)(json)) {
       throw (0, _AdapterFn.crError)();
     }
-  }
-};
-var _default = exports.default = api;
+  },
+  WorlBankApi = (0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse);
+var _default = exports.default = WorlBankApi;
 //# sourceMappingURL=api.js.map

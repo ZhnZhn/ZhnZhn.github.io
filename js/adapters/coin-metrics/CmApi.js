@@ -3,12 +3,12 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 const URL = 'https://community-api.coinmetrics.io/v4';
 const _isArr = Array.isArray;
-const CmApi = {
-  getRequestUrl(option) {
+const getRequestUrl = option => {
     const {
-        items = [],
+        items,
         fromDate
       } = option,
       {
@@ -21,14 +21,14 @@ const CmApi = {
     option.metric = metric;
     return `${URL}/timeseries/asset-metrics/?assets=${assets.toLowerCase()}&metrics=${metric}&frequency=1d&page_size=${_pageSize}${_start}`;
   },
-  checkResponse(json) {
+  checkResponse = json => {
     const {
       data
     } = json || {};
     if (!_isArr(data)) {
       throw (0, _AdapterFn.crError)("Server Response");
     }
-  }
-};
+  },
+  CmApi = (0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse);
 var _default = exports.default = CmApi;
 //# sourceMappingURL=CmApi.js.map

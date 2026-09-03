@@ -4,25 +4,25 @@ exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 const API_URL = 'https://api.coinlore.net/api';
-const ClApi = {
-  getRequestUrl(option) {
+const getRequestUrl = option => {
     const {
-        items = []
+        items
       } = option,
       {
         v: id
       } = items[0];
     return `${API_URL}/exchange/?id=${id}`;
   },
-  checkResponse(json, _option) {
+  checkResponse = (json, _option) => {
     const {
       pairs
     } = json || {};
     if (!(0, _isTypeFn.isArr)(pairs)) {
       throw (0, _AdapterFn.crError)();
     }
-  }
-};
+  },
+  ClApi = (0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse);
 var _default = exports.default = ClApi;
 //# sourceMappingURL=ClApi.js.map

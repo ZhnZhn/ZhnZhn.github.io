@@ -12,7 +12,12 @@ import {
   crError,
   ymdToUTC
 } from '../AdapterFn';
-import { compareByDate } from '../compareByFn';
+import {
+  crProviderApi
+} from '../ApiFn';
+import {
+  compareByDate
+} from '../compareByFn';
 
 const API_URL = 'https://www.alphavantage.co/query';
 
@@ -22,14 +27,10 @@ const fGetRequestUrl = (
 ) => (
   option
 ) => {
-  const {
-    apiKey
-  } = option
-  , _crQuery = getCrQuery(option)
+  const _crQuery = getCrQuery(option)
   , _queryParam = _crQuery(option);
 
-  option.apiKey = void 0
-  return `${API_URL}?${_queryParam}&apikey=${apiKey}`;
+  return `${API_URL}?${_queryParam}&apikey=${option.apiKey}`;
 };
 
 const ERR_PROP = 'Error Message'
@@ -48,10 +49,12 @@ const checkResponse = (
   }
 };
 
-export const fAvApi = (getCrQuery) => ({
-  getRequestUrl: fGetRequestUrl(getCrQuery),
+export const fAvApi = (
+  getCrQuery
+) => crProviderApi(
+  fGetRequestUrl(getCrQuery),
   checkResponse
-})
+)
 
 export const fCrData = (
   paramNameY,

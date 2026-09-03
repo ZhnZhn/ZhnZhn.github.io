@@ -1,4 +1,4 @@
-import { fCheckResponse } from '../AdapterFn';
+import { crProviderApi } from '../ApiFn';
 import { isCategory } from '../CategoryFn';
 
 const DATA_URL = './data/irena';
@@ -27,13 +27,13 @@ const _crCategoryUrl = (
   return `${_crApiUrl(option)}/by-geo-${time}.json`;
 }
 
-const IrenaApi = {
-  getRequestUrl(option){
-    return isCategory(option)
-      ? _crCategoryUrl(option)
-      : _crLineUrl(option);
-  },
-  checkResponse: fCheckResponse()
-};
+const getRequestUrl = (
+  option
+) => isCategory(option)
+  ? _crCategoryUrl(option)
+  : _crLineUrl(option)
+, IrenaApi = crProviderApi(
+  getRequestUrl
+);
 
 export default IrenaApi

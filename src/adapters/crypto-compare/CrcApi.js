@@ -7,7 +7,9 @@ import {
   setItemCaptionTo,
   crError
 } from '../AdapterFn';
-
+import {
+  crProviderApi
+} from '../ApiFn';
 import {
   CRYPTOCOMPARE_COM
 } from './fnAdapter';
@@ -40,17 +42,19 @@ const _rUrl = {
   HD: _hdUrl
 };
 
-const CrcApi = {
-  getRequestUrl(option){
-    const { dfSubId } = option
-    , _crUrl = _rUrl[dfSubId] || _rUrl.DF;
-    return _crUrl(option);
-  },
-  checkResponse(json){
-    if (!json || json.Response === 'Error') {
-      throw crError('', json?.Message);
-    }
+const getRequestUrl = (option) => {
+  const { dfSubId } = option
+  , _crUrl = _rUrl[dfSubId] || _rUrl.DF;
+  return _crUrl(option);
+}
+, checkResponse = (json) => {
+  if (!json || json.Response === 'Error') {
+    throw crError('', json?.Message);
   }
-};
+}
+, CrcApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
 
 export default CrcApi

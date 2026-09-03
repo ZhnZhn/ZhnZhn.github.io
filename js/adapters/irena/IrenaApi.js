@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 var _CategoryFn = require("../CategoryFn");
 const DATA_URL = './data/irena';
 const _crApiUrl = option => {
@@ -26,11 +26,7 @@ const _crCategoryUrl = option => {
   } = option;
   return `${_crApiUrl(option)}/by-geo-${time}.json`;
 };
-const IrenaApi = {
-  getRequestUrl(option) {
-    return (0, _CategoryFn.isCategory)(option) ? _crCategoryUrl(option) : _crLineUrl(option);
-  },
-  checkResponse: (0, _AdapterFn.fCheckResponse)()
-};
+const getRequestUrl = option => (0, _CategoryFn.isCategory)(option) ? _crCategoryUrl(option) : _crLineUrl(option),
+  IrenaApi = (0, _ApiFn.crProviderApi)(getRequestUrl);
 var _default = exports.default = IrenaApi;
 //# sourceMappingURL=IrenaApi.js.map

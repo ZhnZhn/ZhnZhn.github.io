@@ -5,6 +5,7 @@ exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _crRouter = require("../../utils/crRouter");
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 const API_URL = 'https://api.bls.gov/publicAPI',
   TS_DATA = 'timeseries/data',
   NATIVE_URL = 'https://data.bls.gov/timeseries';
@@ -15,13 +16,10 @@ const _crSeriaIdRoutes = {
   },
   _crDfSeriaId = items => items[0].v,
   _getCrSeriaId = (0, _crRouter.crGetRoute)(_crSeriaIdRoutes, _crDfSeriaId);
-const _getSeriaId = _ref => {
-  let {
-    items = [],
-    dfCode
-  } = _ref;
-  return _getCrSeriaId(dfCode)(items);
-};
+const _getSeriaId = ({
+  items = [],
+  dfCode
+}) => _getCrSeriaId(dfCode)(items);
 const _addNativeLinkTo = (option, seriaId) => {
   (0, _AdapterFn.assign)(option, {
     linkItem: {
@@ -51,16 +49,12 @@ const _setCaptionTo = option => {
     ..._crCaption(option)
   });
 };
-const _crQueryKey = _ref2 => {
-  let {
-    apiKey
-  } = _ref2;
-  return apiKey ? `?registrationkey=${apiKey}` : '';
-};
-const _crQueryPeriod = (queryKey, _ref3) => {
-  let {
-    fromDate
-  } = _ref3;
+const _crQueryKey = ({
+  apiKey
+}) => apiKey ? `?registrationkey=${apiKey}` : '';
+const _crQueryPeriod = (queryKey, {
+  fromDate
+}) => {
   if (!queryKey) {
     return '';
   }
@@ -71,8 +65,7 @@ const _crQueryPeriod = (queryKey, _ref3) => {
   }
   return '';
 };
-const BlsApi = {
-  getRequestUrl(option) {
+const getRequestUrl = option => {
     const seriaId = _getSeriaId(option),
       _queryKey = _crQueryKey(option),
       _v = _queryKey ? 'v2' : 'v1',
@@ -81,7 +74,7 @@ const BlsApi = {
     _setCaptionTo(option);
     return `${API_URL}/${_v}/${TS_DATA}/${seriaId}${_queryKey}${_queryPeriod}`;
   },
-  checkResponse(json) {
+  checkResponse = json => {
     const {
         Results,
         message = []
@@ -94,7 +87,7 @@ const BlsApi = {
       return;
     }
     throw (0, _AdapterFn.crError)('', message[0]);
-  }
-};
+  },
+  BlsApi = (0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse);
 var _default = exports.default = BlsApi;
 //# sourceMappingURL=BlsApi.js.map

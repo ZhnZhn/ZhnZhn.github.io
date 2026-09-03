@@ -5,6 +5,7 @@ exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _crRouter = require("../../utils/crRouter");
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 const API_URL = "https://api.coincap.io/v2";
 const _setTitleTo = (option, title) => (0, _AdapterFn.assign)(option, {
   title
@@ -34,15 +35,12 @@ const getCrUrl = (0, _crRouter.crGetRoute)({
   EVL: _crExchangeListUrl,
   HMC: _crHistoricalMarketUrl
 });
-const CoinCapApi = {
-  getRequestUrl(option) {
-    return getCrUrl(option.dfSubId)(option);
-  },
-  checkResponse(json) {
+const getRequestUrl = option => getCrUrl(option.dfSubId)(option),
+  checkResponse = json => {
     if (!(0, _isTypeFn.isArr)(json?.data)) {
       throw (0, _AdapterFn.crError)();
     }
-  }
-};
+  },
+  CoinCapApi = (0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse);
 var _default = exports.default = CoinCapApi;
 //# sourceMappingURL=CoinCapApi.js.map

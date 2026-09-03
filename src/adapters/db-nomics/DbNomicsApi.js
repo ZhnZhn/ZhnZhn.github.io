@@ -14,6 +14,9 @@ import {
   crErrorByMessage
 } from '../AdapterFn';
 import {
+  crProviderApi
+} from '../ApiFn';
+import {
   getDocs
 } from './fnAdapter';
 
@@ -164,8 +167,41 @@ const _rFnUrl = {
   s123: _s123FnUrl,
   s231: _s231FnUrl,
   s3S12: _s3S12FnUrl
-};
+}
+, getRequestUrl = (
+  option
+) => {
+  if (option.url) {
+    return option.url;
+  }
 
+  const {
+    dfFnUrl
+  } = option
+  , _crUrl = (dfFnUrl && _rFnUrl[dfFnUrl])
+    || _rFnUrl.DF;
+  return (option.url = _crUrl(option));
+}
+, checkResponse = (json) => {
+  const _errors = json?.errors;
+  if (isArr(_errors)) {
+    throw crErrorByMessage(_errors[0]?.message);
+  }
+
+  const docs = getDocs(json)
+  , _ts = isArr(docs) ? docs[0] : '';
+  if (!_ts
+    || !isArr(_ts.period)
+    || !isArr(_ts.value)) {
+    throw crErrorByMessage();
+  }
+}
+, DbNomicsApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
+
+/*
 const DbNomicsApi = {
   getRequestUrl(option){
     if (option.url) {
@@ -181,7 +217,7 @@ const DbNomicsApi = {
   },
 
   checkResponse(json){
-    const _errors = json?.errors; 
+    const _errors = json?.errors;
     if (isArr(_errors)) {
       throw crErrorByMessage(_errors[0]?.message);
     }
@@ -195,5 +231,6 @@ const DbNomicsApi = {
     }
   }
 };
+*/
 
 export default DbNomicsApi

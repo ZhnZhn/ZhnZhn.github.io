@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 var _CategoryFn = require("../CategoryFn");
 var _fnAdapter = require("./fnAdapter");
 const API_URL = "https://api.eia.gov/v2",
@@ -20,8 +21,7 @@ const _getFrequencyOrDf = items => {
   const _freqItem = items.find(_isItemFreq);
   return _freqItem ? _freqItem.v : DF_FREQ;
 };
-const EiaApi = {
-  getRequestUrl(option) {
+const getRequestUrl = option => {
     const {
         dfRoute,
         dfSet,
@@ -39,7 +39,7 @@ const EiaApi = {
     }
     return `${_reqUrl}&${_crFacets(items)}&${QUERY_PARAMS}`;
   },
-  checkResponse: (0, _AdapterFn.fCheckResponse)(_fnAdapter.getResponseData)
-};
+  checkResponse = (0, _AdapterFn.fCheckResponse)(_fnAdapter.getResponseData),
+  EiaApi = (0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse);
 var _default = exports.default = EiaApi;
 //# sourceMappingURL=EiaApi.js.map

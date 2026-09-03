@@ -3,6 +3,7 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 var _fnAdapter = require("./fnAdapter");
 const URL = 'https://api.coinpaprika.com/v1';
 const _isArr = Array.isArray;
@@ -27,15 +28,14 @@ const _rApi = {
   TW: _crUrlTw,
   CI: _crUrlCi
 };
-const CpApi = {
-  getRequestUrl(option) {
+const getRequestUrl = option => {
     const {
         dfSubId
       } = option,
       _crUrl = _rApi[dfSubId] || _rApi.DF;
     return option._itemUrl = _crUrl(option);
   },
-  checkResponse(json, option) {
+  checkResponse = (json, option) => {
     const {
       dfSubId
     } = option;
@@ -43,7 +43,7 @@ const CpApi = {
       return json;
     }
     throw (0, _AdapterFn.crError)();
-  }
-};
+  },
+  CpApi = (0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse);
 var _default = exports.default = CpApi;
 //# sourceMappingURL=CpApi.js.map

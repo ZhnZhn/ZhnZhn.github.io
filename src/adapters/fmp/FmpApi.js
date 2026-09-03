@@ -13,6 +13,9 @@ import {
   crError,
   getFromDate
 } from '../AdapterFn';
+import {
+  crProviderApi
+} from '../ApiFn';
 
 const URI = 'https://financialmodelingprep.com/stable';
 
@@ -83,29 +86,29 @@ const _rAssign = {
   intraday: _assignCp
 };
 
-const FmpApi = {
-  getRequestUrl(option){
-    const _assignTo = _rAssign[option.dfPn]
-      || _rAssign.DF;
-    _assignTo(option)
+const getRequestUrl = (option) => {
+  const _assignTo = _rAssign[option.dfPn]
+    || _rAssign.DF;
+  _assignTo(option)
 
-    const { apiKey } = option
-    , _delimeter = option._itemUrl.indexOf('?') === -1
-         ? '?' : '&';
+  const { apiKey } = option
+  , _delimeter = option._itemUrl.indexOf('?') === -1
+       ? '?' : '&';
 
-    option.apiKey = null;
-    return `${option._itemUrl}${_delimeter}apikey=${apiKey}`;
-  },
-
-  checkResponse(json, options){
-    if (isArr(json)) {
-       return;
-    }
-    throw crError(
-      options._symbol,
-      isStr(json) ? json : ''
-    );
+  return `${option._itemUrl}${_delimeter}apikey=${apiKey}`;
+}
+, checkResponse = (json, options) => {
+  if (isArr(json)) {
+     return;
   }
-};
+  throw crError(
+    options._symbol,
+    isStr(json) ? json : ''
+  );
+}
+, FmpApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
 
 export default FmpApi

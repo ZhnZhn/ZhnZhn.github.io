@@ -1,7 +1,7 @@
 import { parseIntBy10 } from '../../utils/isTypeFn';
 import { isInRange } from '../../math/mathFn';
 
-import { fCheckResponse } from '../AdapterFn';
+import { crProviderApi } from '../ApiFn';
 import {
   isTreeMap,
   isBarTreeMap,
@@ -44,16 +44,14 @@ const _crTreeMapUrl = (
   return `${DATA_URL}/${dfTmToken}-tm/${geo}-${time}.json`;
 }
 
-const EiApi = {
-  getRequestUrl(option){
-    const _isTreeMap = isTreeMap(option);
-    return _isTreeMap || isBarTreeMap(option)
-      ? _crTreeMapUrl(option, _isTreeMap)
-      :  isCategory(option)
-          ? _crCategoryUrl(option)
-          : _crLineUrl(option);
-  },
-  checkResponse: fCheckResponse()
-};
+const getRequestUrl = (option) => {
+  const _isTreeMap = isTreeMap(option);
+  return _isTreeMap || isBarTreeMap(option)
+    ? _crTreeMapUrl(option, _isTreeMap)
+    :  isCategory(option)
+        ? _crCategoryUrl(option)
+        : _crLineUrl(option);
+}
+, EiApi = crProviderApi(getRequestUrl);
 
 export default EiApi

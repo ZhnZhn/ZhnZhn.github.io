@@ -4,19 +4,16 @@ exports.__esModule = true;
 exports.default = void 0;
 var _itemFn = require("../../utils/itemFn");
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 var _CategoryFn = require("../CategoryFn");
 var _fnAdapter = require("./fnAdapter");
 const API_URL = 'https://api.wto.org/timeseries/v1/data';
-const _crApiUrl = _ref => {
-  let {
-    proxy,
-    dfInd,
-    apiKey
-  } = _ref;
-  return `${proxy}${API_URL}?i=${dfInd}&p=000&subscription-key=${apiKey}`;
-};
-const WtApi = {
-  getRequestUrl(option) {
+const _crApiUrl = ({
+  proxy,
+  dfInd,
+  apiKey
+}) => `${proxy}${API_URL}?i=${dfInd}&p=000&subscription-key=${apiKey}`;
+const getRequestUrl = option => {
     const {
         items,
         dfPc,
@@ -39,7 +36,7 @@ const WtApi = {
     }
     return `${_url}&r=${_r}&pc=${_pc}&ps=2005-2025`;
   },
-  checkResponse: (0, _AdapterFn.fCheckResponse)(_fnAdapter.getDataset)
-};
+  checkResponse = (0, _AdapterFn.fCheckResponse)(_fnAdapter.getDataset),
+  WtApi = (0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse);
 var _default = exports.default = WtApi;
 //# sourceMappingURL=WtApi.js.map

@@ -2,7 +2,10 @@ import {
   crError,
   setItemCaptionTo,
   crShortItemCaption
-} from '../AdapterFn';
+} from '../AdapterFn'
+import {
+  crProviderApi
+} from '../ApiFn';
 
 import { getCoinId } from './fnAdapter';
 
@@ -33,19 +36,21 @@ const _rApi = {
   CI: _crUrlCi
 };
 
-const CpApi = {
-  getRequestUrl(option){
-    const { dfSubId } = option
-    , _crUrl = _rApi[dfSubId] || _rApi.DF;
-    return (option._itemUrl = _crUrl(option));
-  },
-  checkResponse(json, option){
-    const { dfSubId } = option;
-    if (_isArr(json) || (dfSubId === 'CI' && json)) {
-      return json;
-    }
-    throw crError();
-  }
+const getRequestUrl = (option) => {
+  const { dfSubId } = option
+  , _crUrl = _rApi[dfSubId] || _rApi.DF;
+  return (option._itemUrl = _crUrl(option));
 }
+, checkResponse = (json, option) => {
+  const { dfSubId } = option;
+  if (_isArr(json) || (dfSubId === 'CI' && json)) {
+    return json;
+  }
+  throw crError();
+}
+, CpApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
 
 export default CpApi

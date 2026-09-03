@@ -7,6 +7,9 @@ import {
   crError
 } from '../AdapterFn';
 import {
+  crProviderApi
+} from '../ApiFn';
+import {
   BEA_DATA_URL,
   getFrequency,
   getResError,
@@ -29,37 +32,37 @@ const _setCaptionTo = option => {
   })
 };
 
-const BeaApi = {
-  getRequestUrl(option){
-    const {
-      TableID,
-      DataSetName,
-      apiKey,
-      ValueName,
-      items=[],
-    } = option
-    , value = getValue(items[0])
-    , _Frequncy = getFrequency(items[0])
-    _setCaptionTo(option)
-    return `${API_URL}=${apiKey}&TableID=${TableID}&DataSetName=${DataSetName}&Frequency=${_Frequncy}&${ValueName}=${value}`;
-  },
-
-  checkResponse(json){
-    const ResError = getResError(json);
-    if (ResError) {
-      throw crError(
-        ResError.APIErrorCode,
-        ResError.ErrorDetail?.Description
-          || ResError.APIErrorDescription
-      );
-    }
-
-    const Results = getResults(json);
-    if ( !Results || Results.Error || !isArr(getResultsData(Results)) ) {
-      throw crError();
-    }
+const getRequestUrl = (option) => {
+  const {
+    TableID,
+    DataSetName,
+    apiKey,
+    ValueName,
+    items=[],
+  } = option
+  , value = getValue(items[0])
+  , _Frequncy = getFrequency(items[0]);
+  _setCaptionTo(option)
+  return `${API_URL}=${apiKey}&TableID=${TableID}&DataSetName=${DataSetName}&Frequency=${_Frequncy}&${ValueName}=${value}`;
+}
+, checkResponse = (json) => {
+  const ResError = getResError(json);
+  if (ResError) {
+    throw crError(
+      ResError.APIErrorCode,
+      ResError.ErrorDetail?.Description
+        || ResError.APIErrorDescription
+    );
   }
 
-};
+  const Results = getResults(json);
+  if ( !Results || Results.Error || !isArr(getResultsData(Results)) ) {
+    throw crError();
+  }
+}
+, BeaApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
 
 export default BeaApi

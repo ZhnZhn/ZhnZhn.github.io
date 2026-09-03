@@ -13,6 +13,9 @@ import {
   getCurrentYear,
   crError
 } from '../AdapterFn';
+import {
+  crProviderApi
+} from '../ApiFn';
 
 const API_URL = 'https://api.bls.gov/publicAPI'
 , TS_DATA = 'timeseries/data'
@@ -111,27 +114,27 @@ const _crQueryPeriod = (queryKey, {fromDate}) => {
   return '';
 };
 
-const BlsApi = {
-
-  getRequestUrl(option){
-    const seriaId = _getSeriaId(option)
-    , _queryKey = _crQueryKey(option)
-    , _v = _queryKey ? 'v2' : 'v1'
-    , _queryPeriod = _crQueryPeriod(_queryKey, option);
-    _addNativeLinkTo(option, seriaId)
-    _setCaptionTo(option)
-    return `${API_URL}/${_v}/${TS_DATA}/${seriaId}${_queryKey}${_queryPeriod}`;
-  },
-
-  checkResponse(json){
-    const { Results, message=[] } = json || {}
-    , { series } = Results || {}
-    , _s = (series || [])[0];
-    if (_s && isArr(_s.data)){
-      return;
-    }
-    throw crError('', message[0]);
+const getRequestUrl = (option) => {
+  const seriaId = _getSeriaId(option)
+  , _queryKey = _crQueryKey(option)
+  , _v = _queryKey ? 'v2' : 'v1'
+  , _queryPeriod = _crQueryPeriod(_queryKey, option);
+  _addNativeLinkTo(option, seriaId)
+  _setCaptionTo(option)
+  return `${API_URL}/${_v}/${TS_DATA}/${seriaId}${_queryKey}${_queryPeriod}`;
+}
+, checkResponse = (json) => {
+  const { Results, message=[] } = json || {}
+  , { series } = Results || {}
+  , _s = (series || [])[0];
+  if (_s && isArr(_s.data)){
+    return;
   }
-};
+  throw crError('', message[0]);
+}
+, BlsApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
 
 export default BlsApi

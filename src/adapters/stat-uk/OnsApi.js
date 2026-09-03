@@ -2,6 +2,7 @@ import { isArr } from '../../utils/isTypeFn';
 import { getValue } from '../../utils/itemFn';
 
 import { crError } from '../AdapterFn';
+import { crProviderApi } from '../ApiFn';
 
 const API_URL = 'https://api.beta.ons.gov.uk/v1/datasets/'
 , EDT = '/editions/time-series/versions/'
@@ -54,16 +55,17 @@ const _rCrUrl = {
   '5': _crGdpUrl
 };
 
-const OnsApi = {
-  getRequestUrl(option){
-    return _rCrUrl[option.dfV]?.(option);
-  },
-
-  checkResponse(json){
-    if (!(json && isArr(json.observations))) {
-      throw crError();
-    }
+const getRequestUrl = (
+  option
+) => _rCrUrl[option.dfV]?.(option)
+, checkResponse = (json) => {
+  if (!(json && isArr(json.observations))) {
+    throw crError();
   }
-};
+}
+, OnsApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
 
 export default OnsApi

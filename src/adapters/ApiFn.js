@@ -13,8 +13,21 @@ import { getValue } from '../utils/itemFn';
 
 import {
   FN_IDENTITY,
-  crError
+  crError,
+  fCheckResponse
 } from './AdapterFn';
+
+export const crProviderApi = (
+  getRequestUrl,
+  checkResponse = fCheckResponse()
+) => ({
+  getRequestUrl: option => {
+    const url = getRequestUrl(option);
+    option.apiKey = void 0;
+    return url;
+  },
+  checkResponse
+})
 
 const _isWithCORS = isInArrStr([
   LT_BN,
@@ -93,10 +106,10 @@ export const fGetRequestUrl = (
 const _crRouteApi = (
   rCrUrl,
   getData
-) => ({
-  getRequestUrl: fGetRequestUrl(rCrUrl),
-  checkResponse: _fCheckResponse(getData)
-})
+) => crProviderApi(
+  fGetRequestUrl(rCrUrl),
+  _fCheckResponse(getData)
+);
 
 export const crRouteDfObApi = (
   crDfUrl,

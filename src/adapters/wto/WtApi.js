@@ -4,6 +4,7 @@ import {
 } from '../../utils/itemFn';
 
 import { fCheckResponse } from '../AdapterFn';
+import { crProviderApi } from '../ApiFn';
 import { isCategory } from '../CategoryFn';
 
 import { getDataset } from './fnAdapter';
@@ -16,35 +17,36 @@ const _crApiUrl = ({
   apiKey
 }) => `${proxy}${API_URL}?i=${dfInd}&p=000&subscription-key=${apiKey}`;
 
-const WtApi = {
-  getRequestUrl(option){
-    const {
-      items,
-      dfPc,
-      dfT
-    } = option
-    , _r = getValue(items[0])
-    , _item1 = items[1]
-    , _pc = getValue(_item1) || dfPc || "TO"
-    , _url = _crApiUrl(option);
+const getRequestUrl = (option) => {
+  const {
+    items,
+    dfPc,
+    dfT
+  } = option
+  , _r = getValue(items[0])
+  , _item1 = items[1]
+  , _pc = getValue(_item1) || dfPc || "TO"
+  , _url = _crApiUrl(option);
 
-    if (isCategory(option)) {
-      const _caption1 = getCaption(_item1);
-      if (_caption1) {
-        option.title = _caption1
-        option.subtitle = dfT
-      } else {
-        option.title = dfT
-      }
-      const _ps = (option.time || '')
-        .replace("M", "") || 2025;
-      return `${_url}&pc=${_pc}&ps=${_ps}`;
+  if (isCategory(option)) {
+    const _caption1 = getCaption(_item1);
+    if (_caption1) {
+      option.title = _caption1
+      option.subtitle = dfT
+    } else {
+      option.title = dfT
     }
+    const _ps = (option.time || '')
+      .replace("M", "") || 2025;
+    return `${_url}&pc=${_pc}&ps=${_ps}`;
+  }
 
-    return `${_url}&r=${_r}&pc=${_pc}&ps=2005-2025`;
-  },
-
-  checkResponse: fCheckResponse(getDataset)
-};
+  return `${_url}&r=${_r}&pc=${_pc}&ps=2005-2025`;
+}
+, checkResponse = fCheckResponse(getDataset)
+, WtApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
 
 export default WtApi

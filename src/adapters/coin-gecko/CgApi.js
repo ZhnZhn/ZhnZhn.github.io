@@ -7,7 +7,12 @@ import {
   getDaysFromYmd,
   getValues
 } from '../AdapterFn';
-import { crPageConfig } from './fnAdapter';
+import {
+  crProviderApi
+} from '../ApiFn';
+import {
+  crPageConfig
+} from './fnAdapter';
 
 const API_URL = 'https://api.coingecko.com/api/v3'
 , COINS_API_URL = API_URL + "/coins"
@@ -92,24 +97,25 @@ const _rAssign = {
   EV: _assignEv
 };
 
-const CgApi = {
-  getRequestUrl(option){
-    (_rAssign[option.dfSubId] || _rAssign.DF)(option)
-    return option._itemUrl;
-  },
-
-  checkResponse(json, option){
-    const { dfSubId } = option;
-    if ( (dfSubId === 'MCL' || dfSubId === 'EL' || dfSubId === 'EV')
-        && isArr(json)
-        && json.length > 1) {
-      return json;
-    }
-    if (json && isArr(json.prices)) {
-      return json;
-    }
-    throw crError();
+const getRequestUrl = (option) => {
+  (_rAssign[option.dfSubId] || _rAssign.DF)(option)
+  return option._itemUrl;
+}
+, checkResponse = (json, option) => {
+  const { dfSubId } = option;
+  if ( (dfSubId === 'MCL' || dfSubId === 'EL' || dfSubId === 'EV')
+      && isArr(json)
+      && json.length > 1) {
+    return json;
   }
-};
+  if (json && isArr(json.prices)) {
+    return json;
+  }
+  throw crError();
+}
+, CgApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
 
 export default CgApi

@@ -1,4 +1,5 @@
 import { fCheckResponse } from '../AdapterFn';
+import { crProviderApi } from '../ApiFn';
 import {
   DATA_SNB_URL,
   getTimeSeriesValues
@@ -18,11 +19,15 @@ const _crDimSel = (
   .sort()
   .join(',');
 
-const SnbApi = {
-  getRequestUrl(options){
-    return `${options.proxy}${API_URL}/${options.dfId}/data/json/en?dimSel=${_crDimSel(options)}&fromDate=${options.fromDate}`;
-  },
-  checkResponse: fCheckResponse(getTimeSeriesValues)
-};
+const getRequestUrl = (
+  options
+) => `${options.proxy}${API_URL}/${options.dfId}/data/json/en?dimSel=${_crDimSel(options)}&fromDate=${options.fromDate}`
+, checkResponse = fCheckResponse(
+  getTimeSeriesValues
+)
+, SnbApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
 
 export default SnbApi

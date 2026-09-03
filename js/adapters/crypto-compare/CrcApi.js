@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _itemFn = require("../../utils/itemFn");
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 var _fnAdapter = require("./fnAdapter");
 const URL = `https://min-api.${_fnAdapter.CRYPTOCOMPARE_COM}`
   //, HD: 'data/histoday'
@@ -36,19 +37,18 @@ const _rUrl = {
   DF: _hdUrl,
   HD: _hdUrl
 };
-const CrcApi = {
-  getRequestUrl(option) {
+const getRequestUrl = option => {
     const {
         dfSubId
       } = option,
       _crUrl = _rUrl[dfSubId] || _rUrl.DF;
     return _crUrl(option);
   },
-  checkResponse(json) {
+  checkResponse = json => {
     if (!json || json.Response === 'Error') {
       throw (0, _AdapterFn.crError)('', json?.Message);
     }
-  }
-};
+  },
+  CrcApi = (0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse);
 var _default = exports.default = CrcApi;
 //# sourceMappingURL=CrcApi.js.map

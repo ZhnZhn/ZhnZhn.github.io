@@ -13,6 +13,9 @@ import {
   setItemCaptionTo,
   ymdToUTC
 } from "../AdapterFn";
+import {
+  crProviderApi
+} from "../ApiFn";
 
 const API_URL = "https://api.coincap.io/v2";
 
@@ -70,16 +73,17 @@ const getCrUrl = crGetRoute({
   HMC: _crHistoricalMarketUrl
 });
 
-const CoinCapApi = {
-  getRequestUrl(option){
-    return getCrUrl(option.dfSubId)(option);
-  },
-
-  checkResponse(json){
-    if (!isArr(json?.data)) {
-      throw crError();
-    }
+const getRequestUrl = (
+  option
+) => getCrUrl(option.dfSubId)(option)
+, checkResponse = (json) => {
+  if (!isArr(json?.data)) {
+    throw crError();
   }
-};
+}
+, CoinCapApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
 
 export default CoinCapApi

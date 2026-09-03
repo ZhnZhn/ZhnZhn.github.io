@@ -1,7 +1,5 @@
-import {
-  getValues,
-  fCheckResponse
-} from '../AdapterFn';
+import { getValues } from '../AdapterFn';
+import { crProviderApi } from '../ApiFn';
 
 const DATA_URL = './data/imf/weo-commodity';
 
@@ -17,11 +15,14 @@ const _crLineUrl = (
   dataUrl
 ) => `${dataUrl}/${getValues(option)[0]}.json`;
 
-const ImfTsApi = {
-  getRequestUrl(option){
-    return _crLineUrl(option, _crDataUrl(option.dfFn));
-  },
-  checkResponse: fCheckResponse()
-};
+const getRequestUrl = (
+  option
+) => _crLineUrl(
+  option, 
+  _crDataUrl(option.dfFn)
+)
+, ImfTsApi = crProviderApi(
+  getRequestUrl
+);
 
 export default ImfTsApi

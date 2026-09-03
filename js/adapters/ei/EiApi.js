@@ -5,7 +5,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _mathFn = require("../../math/mathFn");
-var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 var _CategoryFn = require("../CategoryFn");
 var _fCrLineCategoryUrl = _interopRequireDefault(require("../fCrLineCategoryUrl"));
 const DATA_URL = './data/ei';
@@ -29,12 +29,10 @@ const _crTreeMapUrl = (option, _isTreeMap) => {
   }
   return `${DATA_URL}/${dfTmToken}-tm/${geo}-${time}.json`;
 };
-const EiApi = {
-  getRequestUrl(option) {
+const getRequestUrl = option => {
     const _isTreeMap = (0, _CategoryFn.isTreeMap)(option);
     return _isTreeMap || (0, _CategoryFn.isBarTreeMap)(option) ? _crTreeMapUrl(option, _isTreeMap) : (0, _CategoryFn.isCategory)(option) ? _crCategoryUrl(option) : _crLineUrl(option);
   },
-  checkResponse: (0, _AdapterFn.fCheckResponse)()
-};
+  EiApi = (0, _ApiFn.crProviderApi)(getRequestUrl);
 var _default = exports.default = EiApi;
 //# sourceMappingURL=EiApi.js.map

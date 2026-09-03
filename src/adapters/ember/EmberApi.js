@@ -16,6 +16,9 @@ import {
   crErrorByMessage
 } from "../AdapterFn";
 import {
+  crProviderApi
+} from "../ApiFn";
+import {
   isTreeMap,
   isBarTreeMap,
   isCategory
@@ -68,24 +71,25 @@ const _crTimeSeriesTreeMapUrl = (
   return `${DATA_URL}/${metricValue}-tm/${geo}-${time}.json`;
 }
 
-const EmberApi = {
-  getRequestUrl(option) {
-    if (isTsRoute(option)) {
-      const _isTreeMap = isTreeMap(option);
-      return _isTreeMap || isBarTreeMap(option)
-        ? _crTimeSeriesTreeMapUrl(option, _isTreeMap)
-        : isCategory(option)
-        ? _crTimeSeriesCategoryUrl(option)
-        : _crTimeSeriesLineUrl(option);
-    }
-    throw crErrorByMessage('Api route does not exist');
-  },
-
-  checkResponse(json) {
-    if (!isArr(json?.data)) {
-      throw crError();
-    }
+const getRequestUrl = (option) => {
+  if (isTsRoute(option)) {
+    const _isTreeMap = isTreeMap(option);
+    return _isTreeMap || isBarTreeMap(option)
+      ? _crTimeSeriesTreeMapUrl(option, _isTreeMap)
+      : isCategory(option)
+      ? _crTimeSeriesCategoryUrl(option)
+      : _crTimeSeriesLineUrl(option);
+  }
+  throw crErrorByMessage('Api route does not exist');
+}
+, checkResponse = (json) => {
+  if (!isArr(json?.data)) {
+    throw crError();
   }
 }
+, EmberApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
 
 export default EmberApi

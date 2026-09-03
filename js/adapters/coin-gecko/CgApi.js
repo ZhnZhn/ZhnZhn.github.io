@@ -5,6 +5,7 @@ exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _itemFn = require("../../utils/itemFn");
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 var _fnAdapter = require("./fnAdapter");
 const API_URL = 'https://api.coingecko.com/api/v3',
   COINS_API_URL = API_URL + "/coins",
@@ -52,12 +53,11 @@ const _rAssign = {
   EL: _assignEl,
   EV: _assignEv
 };
-const CgApi = {
-  getRequestUrl(option) {
+const getRequestUrl = option => {
     (_rAssign[option.dfSubId] || _rAssign.DF)(option);
     return option._itemUrl;
   },
-  checkResponse(json, option) {
+  checkResponse = (json, option) => {
     const {
       dfSubId
     } = option;
@@ -68,7 +68,7 @@ const CgApi = {
       return json;
     }
     throw (0, _AdapterFn.crError)();
-  }
-};
+  },
+  CgApi = (0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse);
 var _default = exports.default = CgApi;
 //# sourceMappingURL=CgApi.js.map
