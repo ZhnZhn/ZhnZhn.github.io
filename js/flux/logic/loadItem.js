@@ -62,14 +62,14 @@ const _loadToChartComp = (objImpl, option, onCompleted, onFailed) => {
       api
     } = objImpl,
     {
-      getLimitRemaiming
+      getLimitRemaining
     } = api || {},
     optionFetch = _crOptionFetch(objImpl, option);
   fnFetch({
     uri: _crRequestUrl(api, option, onFailed),
     option,
     optionFetch,
-    getLimitRemaiming,
+    getLimitRemaining,
     onCheckResponse: api.checkResponse,
     onFetch: (0, _bindTo.bindTo)(_fetchToChartComp, objImpl),
     onCompleted: onCompleted,
@@ -87,14 +87,14 @@ const _loadToChart = (objImpl, option, onAdded, onFailed) => {
       api
     } = objImpl,
     {
-      getLimitRemaiming
+      getLimitRemaining
     } = api || {},
     optionFetch = _crOptionFetch(objImpl, option);
   fnFetch({
     uri: _crRequestUrl(api, option, onFailed),
     option,
     optionFetch,
-    getLimitRemaiming,
+    getLimitRemaining,
     onCheckResponse: api.checkResponse,
     onFetch: (0, _bindTo.bindTo)(_fetchToChart, objImpl),
     onCompleted: onAdded,

@@ -42,7 +42,7 @@
   "onCatch",
   "_loadToChartComp",
   "fnFetch",
-  "getLimitRemaiming",
+  "getLimitRemaining",
   "uri",
   "onCheckResponse",
   "checkResponse",

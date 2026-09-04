@@ -30,17 +30,17 @@ const _promiseAll = ({
   response,
   propName,
   status,
-  getLimitRemaiming
+  getLimitRemaining
 }) => {
   const headers = response.headers,
-    _limitRemaining = headers && _isFn(headers.get) && _isFn(getLimitRemaiming) ? getLimitRemaiming(headers) : void 0;
+    _limitRemaining = headers && _isFn(headers.get) && _isFn(getLimitRemaining) ? getLimitRemaining(headers) : void 0;
   return Promise.all([Promise.resolve(_limitRemaining), response[propName](), Promise.resolve(status)]);
 };
 const _fFetch = propName => ({
   uri,
   option = {},
   optionFetch,
-  getLimitRemaiming,
+  getLimitRemaining,
   onCheckResponse,
   onFetch,
   onCompleted,
@@ -69,7 +69,7 @@ const _fFetch = propName => ({
       return _promiseAll({
         response,
         propName,
-        getLimitRemaiming
+        getLimitRemaining
       });
     } else if (status === 400) {
       _throwIfNotStatus(resErrStatus, status, MSG_400);

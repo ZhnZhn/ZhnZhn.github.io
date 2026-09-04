@@ -8,6 +8,7 @@ var _arrFn = require("../../utils/arrFn");
 var _itemFn = require("../../utils/itemFn");
 var _crRouter = require("../../utils/crRouter");
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 var _CategoryFn = require("../CategoryFn");
 const NDL_DATA_SOURCE = "NDL",
   API_V3 = "https://data.nasdaq.com/api/v3",
@@ -62,12 +63,9 @@ const _checkDataset = datatable => {
         Oldest Date: ${oldest_available_date || ""}`);
   }
 };
-const NdlApi = {
-  getRequestUrl(option) {
-    return _crTableUrl(option);
-  },
-  getLimitRemaining: headers => headers.get(LIMIT_REMAINING),
-  checkResponse(json) {
+const getLimitRemaining = headers => headers.get(LIMIT_REMAINING),
+  getRequestUrl = option => _crTableUrl(option),
+  checkResponse = json => {
     const {
       quandl_error,
       datatable
@@ -79,7 +77,7 @@ const NdlApi = {
       throw (0, _AdapterFn.crError)();
     }
     _checkDataset(datatable);
-  }
-};
+  },
+  NdlApi = (0, _ApiFn.addGetLimitRemainingTo)((0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse), getLimitRemaining);
 var _default = exports.default = NdlApi;
 //# sourceMappingURL=NdlApi.js.map

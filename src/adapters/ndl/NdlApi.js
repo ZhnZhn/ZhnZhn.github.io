@@ -7,8 +7,16 @@ import {
 import { getValue } from "../../utils/itemFn";
 import { crGetRoute } from "../../utils/crRouter";
 
-import { crError } from "../AdapterFn";
-import { isCategory } from "../CategoryFn";
+import {
+  crError
+} from "../AdapterFn";
+import {
+  crProviderApi,
+  addGetLimitRemainingTo
+} from "../ApiFn";
+import {
+  isCategory
+} from "../CategoryFn";
 
 const NDL_DATA_SOURCE = "NDL"
 , API_V3 = "https://data.nasdaq.com/api/v3"
@@ -85,28 +93,30 @@ const _checkDataset = (
   }
 };
 
-const NdlApi = {
+const getLimitRemaining = (
+  headers
+) => headers.get(LIMIT_REMAINING)
+, getRequestUrl = (
+  option
+) => _crTableUrl(option)
+, checkResponse = (json) => {
+  const {
+    quandl_error,
+    datatable
+  } = json || {};
 
-  getRequestUrl(option) {
-    return _crTableUrl(option);
-  },
-
-  getLimitRemaining: headers => headers.get(LIMIT_REMAINING),
-
-  checkResponse(json) {
-    const {
-      quandl_error,
-      datatable
-    } = json || {};
-
-    if (quandl_error){
-      throw crError("", quandl_error.message);
-    }
-    if (!datatable) {
-      throw crError();
-    }
-    _checkDataset(datatable)
+  if (quandl_error){
+    throw crError("", quandl_error.message);
   }
-};
+  if (!datatable) {
+    throw crError();
+  }
+  _checkDataset(datatable)
+}
+
+, NdlApi = addGetLimitRemainingTo(crProviderApi(
+  getRequestUrl,
+  checkResponse
+), getLimitRemaining);
 
 export default NdlApi
