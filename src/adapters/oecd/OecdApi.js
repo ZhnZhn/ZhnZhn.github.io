@@ -5,9 +5,12 @@ import { crItemId } from './fnAdapter';
 
 const API_URL = "https://sdmx.oecd.org/public/rest/data";
 
-const getRequestUrl = (option) => {
+const _crCategoryQueryDate = (
+  time
+) => `startPeriod=${time}&endPeriod=${time}`
+, getRequestUrl = (option) => {
   const queryDate = isCategory(option)
-    ? `startPeriod=${time}&endPeriod=${option.time}`
+    ? _crCategoryQueryDate(option.time)
     : "startPeriod=2005";
   return `${API_URL}/${option.dfDs}/${crItemId(option)}?${queryDate}&format=jsondata`;
 }
