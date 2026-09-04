@@ -7,6 +7,9 @@ import {
   assign,
   crError
 } from '../AdapterFn';
+import {
+  crProviderApi
+} from '../ApiFn';
 
 import { WORLD_CODE } from './conf';
 import { isAggregateByHs } from './fnAdapter';
@@ -62,46 +65,47 @@ const _addPropsTo = (option) => {
   assign(option, { rg, measure })
 };
 
-const UnComtradeApi = {
-  getRequestUrl(option){
-    _checkReq(option)
-    _addPropsTo(option)
+const getRequestUrl = (option) => {
+  _checkReq(option)
+  _addPropsTo(option)
 
-    const {
-      one=WORLD_CODE,
-      rg
-    } = option;
+  const {
+    one=WORLD_CODE,
+    rg
+  } = option;
 
-    return _crCategoryByPartnerUrl(
-      option.proxy,
-      one,
-      option.two,
-      rg,
-      option.time
-    ) + _crAggregateOrWorldPatnerQuery(option, one);
-  },
-
-  checkResponse(json){
-    if (json && isArr(json.data)) {
-      return json;
-    }
-    const {
-      error,
-      message,
-      statusCode
-    } = json || {}
-    if (isStr(error)) {
-      throw crError('', error);
-    }
-    if (isStr(message)) {
-      throw crError('',
-        statusCode === 429
-          ? `${statusCode}: ${message.replace('in 1 seconds', 'in 1 minutes')}`
-          : message
-      );
-    }
-    throw crError();
-  }  
-};
+  return _crCategoryByPartnerUrl(
+    option.proxy,
+    one,
+    option.two,
+    rg,
+    option.time
+  ) + _crAggregateOrWorldPatnerQuery(option, one);
+}
+, checkResponse = (json) => {
+  if (json && isArr(json.data)) {
+    return json;
+  }
+  const {
+    error,
+    message,
+    statusCode
+  } = json || {}
+  if (isStr(error)) {
+    throw crError('', error);
+  }
+  if (isStr(message)) {
+    throw crError('',
+      statusCode === 429
+        ? `${statusCode}: ${message.replace('in 1 seconds', 'in 1 minutes')}`
+        : message
+    );
+  }
+  throw crError();
+}
+, UnComtradeApi = crProviderApi(
+  getRequestUrl,
+  checkResponse
+);
 
 export default UnComtradeApi

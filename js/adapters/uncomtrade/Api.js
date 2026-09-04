@@ -4,6 +4,7 @@ exports.__esModule = true;
 exports.default = void 0;
 var _isTypeFn = require("../../utils/isTypeFn");
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 var _conf = require("./conf");
 var _fnAdapter = require("./fnAdapter");
 const API_URL = 'https://comtradeapi.un.org/public/v1/preview/C',
@@ -37,8 +38,7 @@ const _addPropsTo = option => {
     measure
   });
 };
-const UnComtradeApi = {
-  getRequestUrl(option) {
+const getRequestUrl = option => {
     _checkReq(option);
     _addPropsTo(option);
     const {
@@ -47,7 +47,7 @@ const UnComtradeApi = {
     } = option;
     return _crCategoryByPartnerUrl(option.proxy, one, option.two, rg, option.time) + _crAggregateOrWorldPatnerQuery(option, one);
   },
-  checkResponse(json) {
+  checkResponse = json => {
     if (json && (0, _isTypeFn.isArr)(json.data)) {
       return json;
     }
@@ -63,7 +63,7 @@ const UnComtradeApi = {
       throw (0, _AdapterFn.crError)('', statusCode === 429 ? `${statusCode}: ${message.replace('in 1 seconds', 'in 1 minutes')}` : message);
     }
     throw (0, _AdapterFn.crError)();
-  }
-};
+  },
+  UnComtradeApi = (0, _ApiFn.crProviderApi)(getRequestUrl, checkResponse);
 var _default = exports.default = UnComtradeApi;
 //# sourceMappingURL=Api.js.map
