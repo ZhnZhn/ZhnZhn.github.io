@@ -35,14 +35,20 @@ export const checkResponseIsStr = (str) => {
   }
 }
 
-//IntrinioApi
-export const addCrOptionFetchTo = (
+const _fAddFnTo = (
+  propName
+) => (
   api,
-  crOptionFetch
+  fn
 ) => {
-  api.crOptionFetch = crOptionFetch
+  api[propName] = fn
   return api;
 }
+
+//NdlApi
+export const addGetLimitRemainingTo = _fAddFnTo("getLimitRemaining")
+//IntrinioApi
+export const addCrOptionFetchTo = _fAddFnTo("crOptionFetch")
 
 const _isWithCORS = isInArrStr([
   LT_BN,

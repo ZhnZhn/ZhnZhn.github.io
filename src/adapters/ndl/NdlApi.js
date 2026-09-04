@@ -91,7 +91,7 @@ const NdlApi = {
     return _crTableUrl(option);
   },
 
-  getLimitRemaiming: headers => headers.get(LIMIT_REMAINING),
+  getLimitRemaining: headers => headers.get(LIMIT_REMAINING),
 
   checkResponse(json) {
     const {

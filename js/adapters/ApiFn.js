@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.fGetRequestUrl = exports.fCrObUrl = exports.fCrDfUrl = exports.crRouteDfObApi = exports.crProviderApi = exports.checkResponseIsStr = exports.addCrOptionFetchTo = void 0;
+exports.fGetRequestUrl = exports.fCrObUrl = exports.fCrDfUrl = exports.crRouteDfObApi = exports.crProviderApi = exports.checkResponseIsStr = exports.addGetLimitRemainingTo = exports.addCrOptionFetchTo = void 0;
 var _LoadType = require("../constants/LoadType");
 var _isTypeFn = require("../utils/isTypeFn");
 var _arrFn = require("../utils/arrFn");
@@ -21,14 +21,16 @@ const checkResponseIsStr = str => {
     throw (0, _AdapterFn.crError)();
   }
 };
-
-//IntrinioApi
 exports.checkResponseIsStr = checkResponseIsStr;
-const addCrOptionFetchTo = (api, crOptionFetch) => {
-  api.crOptionFetch = crOptionFetch;
+const _fAddFnTo = propName => (api, fn) => {
+  api[propName] = fn;
   return api;
 };
-exports.addCrOptionFetchTo = addCrOptionFetchTo;
+
+//NdlApi
+const addGetLimitRemainingTo = exports.addGetLimitRemainingTo = _fAddFnTo("getLimitRemaining");
+//IntrinioApi
+const addCrOptionFetchTo = exports.addCrOptionFetchTo = _fAddFnTo("crOptionFetch");
 const _isWithCORS = (0, _arrFn.isInArrStr)([_LoadType.LT_BN, _LoadType.LT_BG, _LoadType.LT_BT, _LoadType.LT_CB]);
 const _crAllOriginsUrl = (url, {
   proxy,
