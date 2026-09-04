@@ -15,46 +15,38 @@ const HTTP_CODE_ERR_MSG = {
 };
 const _isFn = fn => typeof fn === 'function',
   _isArr = Array.isArray,
-  _assign = Object.assign,
-  FN_NOOP = () => {};
+  _assign = Object.assign;
 const _isInArrValue = (arr, value) => _isArr(arr) && arr.indexOf(value) !== -1;
-const _crErr = function (message, errCaption) {
-  if (errCaption === void 0) {
-    errCaption = REQ_ERR;
-  }
-  return {
-    errCaption,
-    message
-  };
-};
+const _crErr = (message, errCaption = REQ_ERR) => ({
+  errCaption,
+  message
+});
 const _throwIfNotStatus = (errStatus, status, msg) => {
   if (!_isInArrValue(errStatus, status)) {
     throw _crErr(msg);
   }
 };
-const _promiseAll = _ref => {
-  let {
-    response,
-    propName,
-    status,
-    getLimitRemaiming
-  } = _ref;
+const _promiseAll = ({
+  response,
+  propName,
+  status,
+  getLimitRemaiming
+}) => {
   const headers = response.headers,
     _limitRemaining = headers && _isFn(headers.get) && _isFn(getLimitRemaiming) ? getLimitRemaiming(headers) : void 0;
   return Promise.all([Promise.resolve(_limitRemaining), response[propName](), Promise.resolve(status)]);
 };
-const _fFetch = propName => _ref2 => {
-  let {
-    uri,
-    option = {},
-    optionFetch,
-    getLimitRemaiming,
-    onCheckResponse = FN_NOOP,
-    onFetch,
-    onCompleted,
-    onFailed,
-    onCatch
-  } = _ref2;
+const _fFetch = propName => ({
+  uri,
+  option = {},
+  optionFetch,
+  getLimitRemaiming,
+  onCheckResponse,
+  onFetch,
+  onCompleted,
+  onFailed,
+  onCatch
+}) => {
   if (!uri) {
     if (_isFn(onFailed)) {
       setTimeout(() => onFailed(_assign(option, {
@@ -101,9 +93,8 @@ const _fFetch = propName => _ref2 => {
     } else {
       return [void 0, {}, status];
     }
-  }).then(_ref3 => {
-    let [limitRemaining, json, status] = _ref3;
-    const _json = onCheckResponse(json, option, status);
+  }).then(([limitRemaining, json, status]) => {
+    const _json = _isFn(onCheckResponse) ? onCheckResponse(json, option, status) : void 0;
     option.limitRemaining = limitRemaining;
     onFetch({
       json: _json || json,

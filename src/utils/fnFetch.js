@@ -13,8 +13,7 @@ const HTTP_CODE_ERR_MSG = {
 
 const _isFn = fn => typeof fn === 'function'
 , _isArr = Array.isArray
-, _assign = Object.assign
-, FN_NOOP = () => {};
+, _assign = Object.assign;
 
 const _isInArrValue = (
   arr,
@@ -63,7 +62,7 @@ const _fFetch = (propName) => ({
    option={},
    optionFetch,
    getLimitRemaiming,
-   onCheckResponse=FN_NOOP,
+   onCheckResponse,
    onFetch,
    onCompleted,
    onFailed,
@@ -116,7 +115,9 @@ const _fFetch = (propName) => ({
       }
     })
     .then(([limitRemaining, json, status]) => {
-      const _json = onCheckResponse(json, option, status)
+      const _json = _isFn(onCheckResponse)
+        ? onCheckResponse(json, option, status)
+        : void 0;
       option.limitRemaining = limitRemaining;
       onFetch({ json: _json || json, option, onCompleted });
     })
