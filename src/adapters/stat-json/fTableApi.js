@@ -3,6 +3,11 @@ import {
   LT_SIR
 } from '../../constants/LoadType';
 
+import {
+  crProviderApi,
+  addCrOptionFetchTo
+} from '../ApiFn';
+
 import { crErrorByMessage } from './fnAdapter';
 
 import crDfQuery from './crDfQuery';
@@ -17,11 +22,26 @@ const _hmCrQuery = {
 
 const crUrlPathDf = option => '/'+option.dfId;
 
+const crOptionFetch = (option) => {
+  if (option.optionFetch) {
+    return option.optionFetch;
+  }
+  const _crQuery = _hmCrQuery[option.loadId]
+    || _hmCrQuery.DF;
+  return (option.optionFetch=_crQuery(option));
+}
+, checkResponse = (json) => {
+  const { error } = json || {};
+  if (error) {
+    throw crErrorByMessage(error);
+  }
+};
+
 const fTableApi = (
   rootUrl,
   crUrlPath=crUrlPathDf
-) => ({
-  getRequestUrl(option){
+) => addCrOptionFetchTo(crProviderApi(
+  (option) => {
     option.resErrStatus = [400]
     if (option.url) {
       return option.url;
@@ -30,22 +50,7 @@ const fTableApi = (
     const _dfId = crUrlPath(option);
     return (option.url = `${option.proxy || ''}${rootUrl}${_dfId}`);
   },
-
-  crOptionFetch(option){
-    if (option.optionFetch) {
-      return option.optionFetch;
-    }
-    const _crQuery = _hmCrQuery[option.loadId]
-      || _hmCrQuery.DF;
-    return (option.optionFetch=_crQuery(option));
-  },
-
-  checkResponse(json){
-    const { error } = json || {};
-    if (error) {
-      throw crErrorByMessage(error);
-    }
-  }
-});
+  checkResponse
+), crOptionFetch)
 
 export default fTableApi

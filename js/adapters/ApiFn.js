@@ -29,7 +29,7 @@ const _fAddFnTo = propName => (api, fn) => {
 
 //NdlApi
 const addGetLimitRemainingTo = exports.addGetLimitRemainingTo = _fAddFnTo("getLimitRemaining");
-//IntrinioApi
+//stat-json fTableApi, IntrinioApi
 const addCrOptionFetchTo = exports.addCrOptionFetchTo = _fAddFnTo("crOptionFetch");
 const _isWithCORS = (0, _arrFn.isInArrStr)([_LoadType.LT_BN, _LoadType.LT_BG, _LoadType.LT_BT, _LoadType.LT_CB]);
 const _crAllOriginsUrl = (url, {

@@ -47,7 +47,7 @@ const _fAddFnTo = (
 
 //NdlApi
 export const addGetLimitRemainingTo = _fAddFnTo("getLimitRemaining")
-//IntrinioApi
+//stat-json fTableApi, IntrinioApi
 export const addCrOptionFetchTo = _fAddFnTo("crOptionFetch")
 
 const _isWithCORS = isInArrStr([
