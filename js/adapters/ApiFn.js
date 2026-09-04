@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.fGetRequestUrl = exports.fCrObUrl = exports.fCrDfUrl = exports.crRouteDfObApi = exports.crProviderApi = void 0;
+exports.fGetRequestUrl = exports.fCrObUrl = exports.fCrDfUrl = exports.crRouteDfObApi = exports.crProviderApi = exports.checkResponseIsStr = void 0;
 var _LoadType = require("../constants/LoadType");
 var _isTypeFn = require("../utils/isTypeFn");
 var _arrFn = require("../utils/arrFn");
@@ -16,6 +16,12 @@ const crProviderApi = (getRequestUrl, checkResponse = (0, _AdapterFn.fCheckRespo
   checkResponse
 });
 exports.crProviderApi = crProviderApi;
+const checkResponseIsStr = str => {
+  if (!(0, _isTypeFn.isStr)(str)) {
+    throw (0, _AdapterFn.crError)();
+  }
+};
+exports.checkResponseIsStr = checkResponseIsStr;
 const _isWithCORS = (0, _arrFn.isInArrStr)([_LoadType.LT_BN, _LoadType.LT_BG, _LoadType.LT_BT, _LoadType.LT_CB]);
 const _crAllOriginsUrl = (url, {
   proxy,

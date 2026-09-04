@@ -1,16 +1,9 @@
-import {
-  isArr,
-  isStr
-} from '../../utils/isTypeFn';
-import {
-  getValue
-} from '../../utils/itemFn';
+import { isArr } from '../../utils/isTypeFn';
+import { getValue } from '../../utils/itemFn';
 
 import {
-  crError
-} from '../AdapterFn';
-import {
-  crProviderApi
+  crProviderApi,
+  checkResponseIsStr
 } from '../ApiFn';
 
 const DATA_URL = 'https://bdm.insee.fr/series/sdmx/data/SERIES_BDM';
@@ -28,14 +21,9 @@ const getRequestUrl = (option) => {
   }
   return `${_crUrl(option)}&endPeriod=${option.toDate}`;
 }
-, checkResponse = (str) => {
-  if (!isStr(str)) {
-    throw crError();
-  }
-}
 , InseeApi = crProviderApi(
   getRequestUrl,
-  checkResponse
+  checkResponseIsStr
 );
 
 export default InseeApi

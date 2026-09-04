@@ -29,6 +29,12 @@ export const crProviderApi = (
   checkResponse
 })
 
+export const checkResponseIsStr = (str) => {
+  if (!isStr(str)) {
+    throw crError();
+  }
+}
+
 const _isWithCORS = isInArrStr([
   LT_BN,
   LT_BG,
