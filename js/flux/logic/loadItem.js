@@ -164,15 +164,12 @@ const _loadItem = (objImpl, option, onCompleted, onAdded, onFailed) => {
   }
 };
 const fLoadItem = objImpl => {
-  const {
-    fnFetch = _fnFetch.fetchJson,
-    api,
-    adapter
-  } = objImpl;
-  objImpl.fnFetch = fnFetch;
+  if (!(0, _isTypeFn.isFn)(objImpl.fnFetch)) {
+    objImpl.fnFetch = _fnFetch.fetchJson;
+  }
   return {
     loadItem: (0, _bindTo.bindTo)(_loadItem, objImpl),
-    crKey: adapter.crKey
+    crKey: objImpl.adapter.crKey
   };
 };
 var _default = exports.default = fLoadItem;

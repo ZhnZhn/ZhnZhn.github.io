@@ -198,16 +198,13 @@ const _loadItem = (
   }
 };
 
-const fLoadItem = (objImpl) => {
-   const {
-     fnFetch=fetchJson,
-     api,
-     adapter
-   } = objImpl;
-   objImpl.fnFetch = fnFetch
+const fLoadItem = (objImpl) => {   
+   if (!isFn(objImpl.fnFetch)) {
+     objImpl.fnFetch = fetchJson
+   }
    return {
      loadItem: bindTo(_loadItem, objImpl),
-     crKey: adapter.crKey
+     crKey: objImpl.adapter.crKey
    };
 };
 
