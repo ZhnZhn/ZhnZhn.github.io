@@ -35,6 +35,15 @@ export const checkResponseIsStr = (str) => {
   }
 }
 
+//IntrinioApi
+export const addCrOptionFetchTo = (
+  api,
+  crOptionFetch
+) => {
+  api.crOptionFetch = crOptionFetch
+  return api;
+}
+
 const _isWithCORS = isInArrStr([
   LT_BN,
   LT_BG,
