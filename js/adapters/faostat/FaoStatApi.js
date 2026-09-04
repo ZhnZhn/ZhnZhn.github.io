@@ -7,6 +7,7 @@ var _itemFn = require("../../utils/itemFn");
 var _strFn = require("../../utils/strFn");
 var _CategoryFn = require("../CategoryFn");
 var _AdapterFn = require("../AdapterFn");
+var _ApiFn = require("../ApiFn");
 var _fnAdapter = require("./fnAdapter");
 var _getMemoizedYear = _interopRequireDefault(require("./getMemoizedYear"));
 const API_URL = 'https://faostatservices.fao.org/api/v1/en/data',
@@ -46,8 +47,7 @@ const _addPropsTo = option => {
     title
   });
 };
-const FaoStatApi = {
-  getRequestUrl(option) {
+const getRequestUrl = option => {
     _addPropsTo(option);
     _checkReq(option);
     const {
@@ -64,7 +64,6 @@ const FaoStatApi = {
       _apiQuery = _isCategory ? `area=${_area}&year=${option.time}&page_size=300` : `area=${_area}&year=${_year}&page_size=${_pageSize}`;
     return `${_apiUrl}&${_apiQuery}${QUERY_TAIL}`;
   },
-  checkResponse: (0, _AdapterFn.fCheckResponse)()
-};
+  FaoStatApi = (0, _ApiFn.crProviderApi)(getRequestUrl);
 var _default = exports.default = FaoStatApi;
 //# sourceMappingURL=FaoStatApi.js.map

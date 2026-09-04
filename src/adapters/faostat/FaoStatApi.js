@@ -7,9 +7,11 @@ import {
 } from '../CategoryFn';
 import {
   assign,
-  getValues,
-  fCheckResponse
+  getValues
 } from '../AdapterFn';
+import {
+  crProviderApi
+} from '../ApiFn';
 
 import {
   isSeriesReq,
@@ -63,40 +65,39 @@ const _addPropsTo = (option) => {
   })
 };
 
-const FaoStatApi = {
-  getRequestUrl(option){
-    _addPropsTo(option)
-    _checkReq(option)
-    const {
-      dfElement,
-      dfDomain='QC',
-      dfItemName='item'
-    } = option
-    , [
-      _one,
-      _two,
-      _three
-    ] = getValues(option)
-    , _element = _three || dfElement
-    , [
-      _year,
-      _pageSize
-    ] = _one === WORLD_LIST_ID
-        ? [getMemoizedYear(2004), 5000]
-        : [getMemoizedYear(1980), 100]
-    , _apiUrl = `${API_URL}/${dfDomain}?element=${_element}&${dfItemName}=${_two}`
-    , _isCategory = isCategory(option)
-    , _area = _isCategory
-        ? _getListId(_one)
-        : _one
-    , _apiQuery = _isCategory
-        ? `area=${_area}&year=${option.time}&page_size=300`
-        : `area=${_area}&year=${_year}&page_size=${_pageSize}`
+const getRequestUrl = (option) => {
+  _addPropsTo(option)
+  _checkReq(option)
+  const {
+    dfElement,
+    dfDomain='QC',
+    dfItemName='item'
+  } = option
+  , [
+    _one,
+    _two,
+    _three
+  ] = getValues(option)
+  , _element = _three || dfElement
+  , [
+    _year,
+    _pageSize
+  ] = _one === WORLD_LIST_ID
+      ? [getMemoizedYear(2004), 5000]
+      : [getMemoizedYear(1980), 100]
+  , _apiUrl = `${API_URL}/${dfDomain}?element=${_element}&${dfItemName}=${_two}`
+  , _isCategory = isCategory(option)
+  , _area = _isCategory
+      ? _getListId(_one)
+      : _one
+  , _apiQuery = _isCategory
+      ? `area=${_area}&year=${option.time}&page_size=300`
+      : `area=${_area}&year=${_year}&page_size=${_pageSize}`
 
-    return `${_apiUrl}&${_apiQuery}${QUERY_TAIL}`;
-  },
-
-  checkResponse: fCheckResponse()
-};
+  return `${_apiUrl}&${_apiQuery}${QUERY_TAIL}`;
+}
+, FaoStatApi = crProviderApi(
+  getRequestUrl
+);
 
 export default FaoStatApi
