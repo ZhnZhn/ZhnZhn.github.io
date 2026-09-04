@@ -206,8 +206,7 @@ const fLoadItem = (objImpl) => {
    } = objImpl;
    objImpl.fnFetch = fnFetch
    return {
-     loadItem: bindTo(_loadItem, objImpl),
-     addPropsTo: api.addPropsTo,
+     loadItem: bindTo(_loadItem, objImpl),     
      crKey: adapter.crKey
    };
 };

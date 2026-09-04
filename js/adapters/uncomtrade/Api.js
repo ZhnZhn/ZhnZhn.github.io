@@ -18,12 +18,32 @@ const _checkReq = option => {
 const _crReporterCodeQuery = reporterCode => reporterCode === _conf.WORLD_CODE ? '' : `&reporterCode=${reporterCode}&${PARTNER_2_CODE_WORLD_QUERY}`;
 const _crCategoryByPartnerUrl = (proxy, reporterCode, cmdCode, flowCode, time) => `${proxy}${API_URL}/A/HS/?motCode=0&customsCode=C00&cmdCode=${cmdCode}&flowCode=${flowCode}&period=${time}${_crReporterCodeQuery(reporterCode)}`;
 const _crAggregateOrWorldPatnerQuery = (option, one) => (0, _fnAdapter.isAggregateByHs)(option) || one === _conf.WORLD_CODE ? `&partnerCode=0&${PARTNER_2_CODE_WORLD_QUERY}` : '';
+const _addPropsTo = option => {
+  const {
+    one = _conf.WORLD_CODE,
+    v,
+    rg = DF_RG,
+    measure = DF_MEASURE
+  } = option;
+  if (!one) {
+    const arr = v.slice(3).split('_');
+    (0, _AdapterFn.assign)(option, {
+      one: arr[0],
+      two: arr[1]
+    });
+  }
+  (0, _AdapterFn.assign)(option, {
+    rg,
+    measure
+  });
+};
 const UnComtradeApi = {
   getRequestUrl(option) {
     _checkReq(option);
+    _addPropsTo(option);
     const {
       one = _conf.WORLD_CODE,
-      rg = DF_RG
+      rg
     } = option;
     return _crCategoryByPartnerUrl(option.proxy, one, option.two, rg, option.time) + _crAggregateOrWorldPatnerQuery(option, one);
   },
@@ -43,25 +63,6 @@ const UnComtradeApi = {
       throw (0, _AdapterFn.crError)('', statusCode === 429 ? `${statusCode}: ${message.replace('in 1 seconds', 'in 1 minutes')}` : message);
     }
     throw (0, _AdapterFn.crError)();
-  },
-  addPropsTo(option) {
-    const {
-      one = _conf.WORLD_CODE,
-      v,
-      rg = DF_RG,
-      measure = DF_MEASURE
-    } = option;
-    if (!one) {
-      const arr = v.slice(3).split('_');
-      (0, _AdapterFn.assign)(option, {
-        one: arr[0],
-        two: arr[1]
-      });
-    }
-    (0, _AdapterFn.assign)(option, {
-      rg,
-      measure
-    });
   }
 };
 var _default = exports.default = UnComtradeApi;

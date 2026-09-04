@@ -43,12 +43,33 @@ const _crAggregateOrWorldPatnerQuery = (
   ? `&partnerCode=0&${PARTNER_2_CODE_WORLD_QUERY}`
   : '';
 
+const _addPropsTo = (option) => {
+  const {
+    one=WORLD_CODE,
+    v,
+    rg=DF_RG,
+    measure=DF_MEASURE
+  } = option;
+
+  if (!one) {
+    const arr = v.slice(3).split('_')
+    assign(option, {
+      one: arr[0],
+      two: arr[1]
+    })
+  }
+
+  assign(option, { rg, measure })
+};
+
 const UnComtradeApi = {
   getRequestUrl(option){
     _checkReq(option)
+    _addPropsTo(option)
+
     const {
       one=WORLD_CODE,
-      rg=DF_RG,
+      rg
     } = option;
 
     return _crCategoryByPartnerUrl(
@@ -80,26 +101,7 @@ const UnComtradeApi = {
       );
     }
     throw crError();
-  },
-
-  addPropsTo(option){
-    const {
-      one=WORLD_CODE,
-      v,
-      rg=DF_RG,
-      measure=DF_MEASURE
-    } = option;
-
-    if (!one) {
-      const arr = v.slice(3).split('_')
-      assign(option, {
-        one: arr[0],
-        two: arr[1]
-      })
-    }
-
-    assign(option, { rg, measure })
-  }
+  }  
 };
 
 export default UnComtradeApi

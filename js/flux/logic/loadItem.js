@@ -16,18 +16,14 @@ const ALERT_CATEGORY_TO_SPLINE = {
   alertCaption: "Series Error",
   alertDescr: "Adding category seria to not category isn't allowed."
 };
-const _crOptionFetch = (_ref, option) => {
-  let {
-    optionFetch
-  } = _ref;
-  return (0, _isTypeFn.isFn)(optionFetch) ? optionFetch(option) : optionFetch;
-};
-const _fetchToChartComp = (objImpl, _ref2) => {
-  let {
-    json,
-    option,
-    onCompleted
-  } = _ref2;
+const _crOptionFetch = ({
+  optionFetch
+}, option) => (0, _isTypeFn.isFn)(optionFetch) ? optionFetch(option) : optionFetch;
+const _fetchToChartComp = (objImpl, {
+  json,
+  option,
+  onCompleted
+}) => {
   const {
       adapter
     } = objImpl,
@@ -81,13 +77,10 @@ const _loadToChartComp = (objImpl, option, onCompleted, onFailed) => {
     onFailed
   });
 };
-const _isNotAllowToAdd = (_ref3, option) => {
-  let {
-    toSeries,
-    isAdd
-  } = _ref3;
-  return !(0, _isTypeFn.isFn)(toSeries) || (0, _isTypeFn.isFn)(isAdd) && !isAdd(option);
-};
+const _isNotAllowToAdd = ({
+  toSeries,
+  isAdd
+}, option) => !(0, _isTypeFn.isFn)(toSeries) || (0, _isTypeFn.isFn)(isAdd) && !isAdd(option);
 const _loadToChart = (objImpl, option, onAdded, onFailed) => {
   const {
       fnFetch,
@@ -109,12 +102,11 @@ const _loadToChart = (objImpl, option, onAdded, onFailed) => {
     onFailed
   });
 };
-const _fetchToChart = (objImpl, _ref4) => {
-  let {
-    json,
-    option,
-    onCompleted
-  } = _ref4;
+const _fetchToChart = (objImpl, {
+  json,
+  option,
+  onCompleted
+}) => {
   const {
       adapter
     } = objImpl,
@@ -139,19 +131,15 @@ const _fetchToChart = (objImpl, _ref4) => {
   });
   onCompleted(option);
 };
-const _isAddCategoryToSpline = _ref5 => {
-  let {
-    seriaType
-  } = _ref5;
+const _isAddCategoryToSpline = ({
+  seriaType
+}) => {
   const chart = (0, _chartCheckBoxLogic.getActiveChart)();
   return seriaType && (0, _ChartOptionsFn.isCategoryItem)({
     value: seriaType
   }) && chart && (0, _isTypeFn.isArr)(chart.xAxis) && !(0, _isTypeFn.isArr)(chart.xAxis[0].categories);
 };
-const _runAsync = function (fn, mls) {
-  if (mls === void 0) {
-    mls = 500;
-  }
+const _runAsync = (fn, mls = 500) => {
   setTimeout(fn, mls);
 };
 const _loadItem = (objImpl, option, onCompleted, onAdded, onFailed) => {
@@ -184,7 +172,6 @@ const fLoadItem = objImpl => {
   objImpl.fnFetch = fnFetch;
   return {
     loadItem: (0, _bindTo.bindTo)(_loadItem, objImpl),
-    addPropsTo: api.addPropsTo,
     crKey: adapter.crKey
   };
 };

@@ -80,13 +80,7 @@ const _cancelLoad = (option, alertMsg) => {
     option.onCancel();
   }
 };
-const _isShouldEmit = function (confItem, option) {
-  if (confItem === void 0) {
-    confItem = {};
-  }
-  if (option === void 0) {
-    option = {};
-  }
+const _isShouldEmit = (confItem = {}, option = {}) => {
   const key = (0, _LogicFn.crKeyForConfig)(option),
     _isDoublingLoad = _isLoading && key === _idLoading,
     _isTs = (0, _chartCheckBoxLogic.isLoadToChart)();
@@ -125,10 +119,7 @@ const _loadItemCompleted = (option, config) => {
   (0, _loadingStore.setLoadingComplete)(limitRemaining);
   _setLoadingDone();
 };
-const _loadItemAdded = function (option) {
-  if (option === void 0) {
-    option = {};
-  }
+const _loadItemAdded = (option = {}) => {
   (0, _loadingStore.setLoadingComplete)();
   _setLoadingDone();
   (0, _ChartLogic.scanPostAdded)(option);
@@ -156,12 +147,6 @@ const loadItemByQuery = option => {
   option.proxy = (0, _settingStore.getProxy)(loadId);
   const impl = (0, _LoadImpl.getLoadImpl)(loadId);
   if (impl) {
-    const {
-      addPropsTo
-    } = impl;
-    if ((0, _storeApi.isFn)(addPropsTo)) {
-      addPropsTo(option);
-    }
     impl.loadItem(option, _loadItemCompleted, _FN_NOOP, _loadItemFailed);
   } else {
     option.alertDescr = ALERT_DESCR_BY_QUERY;

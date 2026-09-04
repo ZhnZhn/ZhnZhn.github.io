@@ -46,8 +46,26 @@ const _getListId = (
   ? geoId
   : WORLD_LIST_ID;
 
+const _addPropsTo = (option) => {
+  const {
+    qA,
+    qI,
+    qE,
+    qT=''
+  } = option
+  , title = _isTitle(qT)
+    ? qT
+    : '';
+  assign(option, {
+    items: [{v:qA},{v:qI},{v:qE}],
+    itemCaption: 'Item',
+    title
+  })
+};
+
 const FaoStatApi = {
   getRequestUrl(option){
+    _addPropsTo(option)
     _checkReq(option)
     const {
       dfElement,
@@ -78,22 +96,7 @@ const FaoStatApi = {
     return `${_apiUrl}&${_apiQuery}${QUERY_TAIL}`;
   },
 
-  checkResponse: fCheckResponse(),
-
-  addPropsTo(option){
-    const {
-      qA,
-      qI,
-      qE,
-      qT=''
-    } = option
-    , title = _isTitle(qT) ? qT : '';
-    assign(option, {
-      items: [{v:qA},{v:qI},{v:qE}],
-      itemCaption: 'Item',
-      title
-    })
-  }
+  checkResponse: fCheckResponse()
 };
 
 export default FaoStatApi

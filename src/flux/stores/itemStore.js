@@ -247,10 +247,6 @@ export const loadItemByQuery = (option) => {
 
   const impl = getLoadImpl(loadId);
   if (impl) {
-    const { addPropsTo } = impl;
-    if (isFn(addPropsTo)){
-      addPropsTo(option)
-    }
     impl.loadItem(
       option,
       _loadItemCompleted,

@@ -26,8 +26,29 @@ const _checkReq = option => {
   }
 };
 const _getListId = geoId => (0, _strFn.isTokenInStr)(geoId, '>') ? geoId : WORLD_LIST_ID;
+const _addPropsTo = option => {
+  const {
+      qA,
+      qI,
+      qE,
+      qT = ''
+    } = option,
+    title = _isTitle(qT) ? qT : '';
+  (0, _AdapterFn.assign)(option, {
+    items: [{
+      v: qA
+    }, {
+      v: qI
+    }, {
+      v: qE
+    }],
+    itemCaption: 'Item',
+    title
+  });
+};
 const FaoStatApi = {
   getRequestUrl(option) {
+    _addPropsTo(option);
     _checkReq(option);
     const {
         dfElement,
@@ -43,27 +64,7 @@ const FaoStatApi = {
       _apiQuery = _isCategory ? `area=${_area}&year=${option.time}&page_size=300` : `area=${_area}&year=${_year}&page_size=${_pageSize}`;
     return `${_apiUrl}&${_apiQuery}${QUERY_TAIL}`;
   },
-  checkResponse: (0, _AdapterFn.fCheckResponse)(),
-  addPropsTo(option) {
-    const {
-        qA,
-        qI,
-        qE,
-        qT = ''
-      } = option,
-      title = _isTitle(qT) ? qT : '';
-    (0, _AdapterFn.assign)(option, {
-      items: [{
-        v: qA
-      }, {
-        v: qI
-      }, {
-        v: qE
-      }],
-      itemCaption: 'Item',
-      title
-    });
-  }
+  checkResponse: (0, _AdapterFn.fCheckResponse)()
 };
 var _default = exports.default = FaoStatApi;
 //# sourceMappingURL=FaoStatApi.js.map
