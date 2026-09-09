@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: 'self'; frame-src 'none'; child-src 'none';">
+  <meta name="application-name" content="webapperc">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Web app ERC (Economic RESTful Client) designed to help get the most out of economic statistics, uses data from various sources and displays them as charts. These can then be exported into various formats.">
+  <meta name="summary" content="With web app ERC you can view economic & finance open data from web. Data providers: DBnomics, Eurostat, Nasdaq Data Link, UN Comtrade & more (49).">
+  <meta name="url" content="https://zhnzhn.github.io">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@webapperc">
+  <meta name="twitter:title" content="Web app ERC (Economic RESTful Client): @webapperc">
+  <meta name="twitter:url" content="https://zhnzhn.github.io">
+  <meta name="twitter:description" content="With web app ERC you can view economic & finance open data from web. Data providers: DBnomics, Eurostat, Nasdaq Data Link, UN Comtrade & more (49).">
+  <meta name="twitter:image" content="https://zhnzhn.github.io/screencast/erc-currency-example.png">
+  <meta name="twitter:image:alt" content="Web app ERC and example of chart with EUR/USD currency rate.">
+  <title>Web app ERC (Economic RESTful Client) v0.18.0</title>
+  <link rel="icon" href="/css/favicon.png" sizes="32x32" type="image/png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <base target="_blank">
+
+<style>
+[data-loader='circle'] {
+  width: 2.5em;
+  height: 2.5em;   
+  animation: circle infinite 1.25s linear;
+  border: 3px solid #2f7ed8;
+  border-top-color: transparent;
+  border-radius: 100%;
+}
+@keyframes circle { 
+ 100% {transform: rotate(360deg);}
+}
+.wrapper {
+  margin: 0 auto;
+  margin-top: 3em;
+  background-color: #4d4d4d;  
+  border-radius: 5px;  
+  z-index: 100;
+  width: 14em;
+  padding-top: 1em;
+  padding-bottom: 1.5em;
+  text-align: center;
+  transition: opacity 100ms ease-out;
+}
+.wrapper__loading {
+  margin: 0.5em auto;
+}
+.wrapper__descr {
+  margin-top: 1em;
+  font-family: "Roboto", "Arial", "Lato", sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+}
+.wrapper__msg {
+  color: gray;
+}
+.wrapper__app {
+  color: #80c040;
+  display: block;
+  padding-bottom: 0.5em;
+}
+</style>  
+  
+  <link as="image/svg+xml" href="css/sprite.svg">
+  <link rel="stylesheet" href="css/app-2b823eda05.min.css">    
+
+</head>
+<body>
+  <!--googleoff: snippet-->
+  <noscript>
+    <style type="text/css" nonce="st2">
+     #spinner {
+       display: none;
+     }
+    </style>
+  </noscript>
+  <div id="preloader" class="wrapper">
+    <div id="circle" data-loader="circle" class="wrapper__loading"></div>
+    <div class="wrapper__descr">
+      <span class="wrapper__app">
+        Web app ERC&nbsp;
+      </span>
+      <div id='msg' class="wrapper__msg">
+        Loading...
+      </div>
+    </div>
+  </div>
+  <!--googleon: snippet-->
+
+   <div id="app">
+   </div>
+
+   <noscript>
+      <div class="noscript__root">
+        <div class="noscript__header">
+           <h1 class="noscript__caption">Web app ERC (Economic RESTful Client)</h1>
+        </div>
+        <div class="noscript__msg">
+          <p>It seems JavaScript in your browser disabled or not supported.</p>
+          <br/>
+          <p>
+           Web app ERC designed to help get the most out of economic
+           statistics, uses data from various sources and displays
+           them as charts. These can then be exported into various formats.
+          </p>
+          <br/>
+          <p>To use <a class="noscript__link" href=".">web app ERC</a>, please, enable JavaScript in the browser and reload the page.</p>
+        </div>
+      </div>
+   </noscript>
+ <%
+ const isFileName = (fileName, token) => fileName.indexOf(token) !== -1; 
+ for (var index in htmlWebpackPlugin.files.js ) {
+    var fileName = htmlWebpackPlugin.files.js[index];
+    if ( isFileName(fileName, 'lib_') || isFileName(fileName, 'erc_')) { %>
+   <script src="<%=fileName %>" defer></script> 
+   <% }
+ } %>        
+</body>
+</html>
