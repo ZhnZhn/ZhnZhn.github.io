@@ -1,24 +1,24 @@
-'use strict'
+"use strict"
 
-const path = require('path')
-    , webpack = require('webpack')
-    , HtmlWebpackPlugin = require('html-webpack-plugin')
-    , postProcessing = require('./plugins/post-processing')
-    , HtmlProcessingWebpackPlugin = require('./plugins/html-processing-webpack-plugin')
-    , babelConfig = require('./babel.config')
-    , TerserPlugin = require('terser-webpack-plugin');
+const path = require("path")
+    , webpack = require("webpack")
+    , HtmlWebpackPlugin = require("html-webpack-plugin")
+    , postProcessing = require("./plugins/post-processing")
+    , HtmlProcessingWebpackPlugin = require("./plugins/html-processing-webpack-plugin")
+    , babelConfig = require("./babel.config")
+    , TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   mode: "production",
   cache: true,
   entry: {
-    erc: path.resolve('src', 'index.jsx')
+    erc: path.resolve("src", "index.jsx")
   },
   output: {
-      path: path.resolve('app'),
+      path: path.resolve("app"),
       filename: "[name]_[contenthash].js",
       chunkFilename: "[name]_[contenthash].js",
-      publicPath: 'app/'
+      publicPath: "app/"
   },
   module: {
     rules: [
@@ -26,7 +26,7 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
              cacheDirectory: true,
              ...babelConfig  
@@ -40,13 +40,13 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: ['local_modules','node_modules'],
-    extensions: ['.js', '.jsx']
+    modules: ["local_modules","node_modules"],
+    extensions: [".js", ".jsx"]
   },
   plugins : [    
     new webpack.DllReferencePlugin({
       context: __dirname,
-      manifest: require('./dll/lib-manifest.json')
+      manifest: require("./dll/lib-manifest.json")
     }), 
     /*
     new webpack.ids.DeterministicModuleIdsPlugin({
@@ -55,16 +55,16 @@ module.exports = {
     */   
     new HtmlWebpackPlugin({
         minify: false,
-        filename: path.resolve('index.html'),
-        template: path.resolve('template', 'index.ejs'),
+        filename: path.resolve("index.html"),
+        template: path.resolve("template", "index.ejs"),
         inject: false,
         postProcessing: postProcessing
     }),
     new HtmlProcessingWebpackPlugin()
   ],
   optimization: {    
-    moduleIds: 'deterministic',
-    runtimeChunk: 'single',
+    moduleIds: "deterministic",
+    runtimeChunk: "single",
     minimize: true,
     minimizer: [new TerserPlugin()]
   }
