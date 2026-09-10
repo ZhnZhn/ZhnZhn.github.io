@@ -116,7 +116,7 @@
  <%
  for (var index in htmlWebpackPlugin.files.js ) {
     var fileName = htmlWebpackPlugin.files.js[index];
-    if (fileName.indexOf('runtime_') !== -1){ %>
+    if (fileName.indexOf("runtime_") !== -1){ %>
       <script src="<%=fileName %>" defer></script>
     <% }
  } %>
@@ -124,7 +124,7 @@
  <%
  for (var index in htmlWebpackPlugin.files.js ) {
     var fileName = htmlWebpackPlugin.files.js[index];
-    if (fileName.indexOf('erc_') !== -1){ %>
+    if (fileName.indexOf("erc_") !== -1){ %>
       <script src="<%=fileName %>" defer></script>
     <% }
  } %>

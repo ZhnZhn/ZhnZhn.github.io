@@ -114,9 +114,11 @@
    </noscript>
  <%
  const isFileName = (fileName, token) => fileName.indexOf(token) !== -1; 
- for (var index in htmlWebpackPlugin.files.js ) {
-    var fileName = htmlWebpackPlugin.files.js[index];
-    if ( isFileName(fileName, 'lib_') || isFileName(fileName, 'erc_') || isFileName(fileName, 'runtime_')) { %>
+ for (let index in htmlWebpackPlugin.files.js ) {
+    let fileName = htmlWebpackPlugin.files.js[index];
+    if (isFileName(fileName, "runtime_")
+        || isFileName(fileName, "lib_") 
+        || isFileName(fileName, "erc_")) { %>
    <script src="<%=fileName %>" defer></script> 
    <% }
  } %>        
