@@ -19,7 +19,7 @@
     "build:dev:dll-jsx": "webpack --color --progress --config webpack.dev.dll-jsx.js",
     "build:dll": "webpack --color --progress --config webpack.dll.js",
     "build:dll-jsx": "webpack --color --progress --config webpack.dll-jsx.js",
-    "build:rspack:prod": "rspack build --config rspack.prod.js",   
+    "build:rspack:prod": "rspack build --config rspack.prod.js",
     "stats": "npm run stats:json && npm run stats:report",
     "stats:json": "webpack --config webpack.dll-jsx.js --profile --json > stats.json",
     "stats:report": "webpack-bundle-analyzer stats.json --no-open --mode static"
@@ -68,7 +68,7 @@
     "@rspack/plugin-react-refresh": "^2.0.2",
     "@swc/helpers": "^0.5.23",
     "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",
     "babel-jest": "^30.5.1",
