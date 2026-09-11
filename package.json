@@ -61,7 +61,7 @@
     "@babel/preset-env": "^7.29.7",
     "@babel/preset-react": "^7.29.7",
     "@biomejs/biome": "^2.5.12",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.6.3",
     "@rspack/cli": "^2.2.2",
     "@rspack/core": "^2.2.2",
     "@rspack/dev-server": "^2.2.1",
