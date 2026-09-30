@@ -81,15 +81,14 @@
     "react-refresh": "^0.18.0",
     "react-test-renderer": "^18.3.1",
     "terser-webpack-plugin": "^5.6.1",
-    "webpack": "^5.110.3",
+    "webpack": "^5.111.1",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^7.2.3"
   },
   "overrides": {
     "glob": "~13.0.6",
     "uuid": "~14.0.0",
-    "js-yaml": "~4.3.0",
-    "brace-expansion": "~5.0.7"
+    "js-yaml": "~4.3.0"
   },
   "jest": {
     "testEnvironment": "jsdom",
