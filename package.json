@@ -63,7 +63,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.3",
     "@rspack/cli": "^2.2.9",
     "@rspack/core": "^2.2.9",
-    "@rspack/dev-server": "^2.2.1",
+    "@rspack/dev-server": "^2.2.2",
     "@rspack/plugin-react-refresh": "^2.0.2",
     "@swc/helpers": "^0.5.23",
     "@testing-library/dom": "^10.4.2",
@@ -80,7 +80,7 @@
     "react-refresh": "^0.18.0",
     "react-test-renderer": "^18.3.1",
     "terser-webpack-plugin": "^5.6.1",
-    "webpack": "^5.112.0",
+    "webpack": "^5.112.2",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^7.2.3"
   },
