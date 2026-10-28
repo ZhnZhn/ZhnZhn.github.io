@@ -59,7 +59,7 @@
     "@babel/plugin-transform-runtime": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
     "@babel/preset-react": "^7.29.7",
-    "@biomejs/biome": "^2.5.15",
+    "@biomejs/biome": "^2.6.3",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.3",
     "@rspack/cli": "^2.2.9",
     "@rspack/core": "^2.2.9",
